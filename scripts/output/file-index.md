@@ -11,6 +11,58 @@
 ---
 
 
+## W1042 工具面根因修复与判据补覆盖批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1042 | 本批新增/修改 |
+| .github/workflows/README.md | W1042 | 本批新增/修改 |
+| AGENTS.md | W1042 | 计数链同步（坑表条数指针） |
+| CHANGELOG.md | W1042 | 本批新增/修改 |
+| CITATION.cff | W1042 | 本批新增/修改 |
+| HANDOVER.md | W1042 | 计数链同步（坑表条数指针） |
+| Makefile | W1042 | 本地 CI 编排（完成提示归位） |
+| README.md | W1042 | 本批新增/修改 |
+| STRUCTURE.md | W1042 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1042 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1042 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1042 | 台账（认领行与收官回填） |
+| docs/11-方案报告/审查与评审/跨行改写面逐处复核报告-2026-10-30.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-30.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/计划方案/执行前计划-W1042-工具面根因修复与判据补覆盖.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/INDEX.md | W1042 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1042 | 坑表（+4 条教训） |
+| pytest.ini | W1042 | 本批新增/修改 |
+| scripts/A_文本基础/章节切分.py | W1042 | 本批新增/修改 |
+| scripts/_w1042_make_spec.py | W1042 | 本批工具脚本 |
+| scripts/check_cross_line_rewrite.py | W1042 | 本批新增/修改 |
+| scripts/cross_line_baseline.json | W1042 | 本批新增/修改 |
+| scripts/index.md | W1042 | 本批新增/修改 |
+| scripts/ledger_backfill.py | W1042 | 台账回填工具（显式参数生效根因修复） |
+| scripts/output/README.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1042.txt | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1042_spec.json | W1042 | 本批 spec 与级联清单 |
+| scripts/output/file-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1042 | 本批新增/修改 |
+| site/data/search.html | W1042 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1042 | 本批新增/修改 |
+| site/dukou-engine.html | W1042 | 本批新增/修改 |
+| site/en/search.html | W1042 | 本批新增/修改 |
+| site/index.html | W1042 | 本批新增/修改 |
+| tests/unit/test_archive_segments.py | W1042 | 本批单测（判据覆盖） |
+| tests/unit/test_cross_line_rewrite.py | W1042 | 本批单测（判据覆盖） |
+| tests/unit/test_plan_template_read_disk.py | W1042 | 本批单测（判据覆盖） |
+
 ## W1041 批次号预约机制（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4617,39 +4669,4 @@ docs/11-方案报告/README.md
 | scripts/output/_w930_visible_leak.json | W930 | 可见工程批次号复算证据（796 页 6,827 处） |
 | scripts/output/_w930_plan_review.json | W930 | 第 48 门禁判据矩阵证据（双件全项符合） |
 | scripts/output/_w930_spec.json | W930 | 本批级联 spec |
-
-## W928 D-1 实跑批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/deploy/pg/postgresql.conf.base | W928 | 删除 server_encoding（initdb 固定参数·写进 conf 致 PG FATAL 拒绝启动）+ 增补实测口径注释 |
-| xiyouji-agent-web/deploy/pg/pg_hba.conf.base | W928 | 实跑核验（最小权限 + 兜底 reject 生效·scram 认证通过） |
-| xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh | W928 | 实跑核验幂等性（连跑两次·第二次全「已存在，跳过创建」） |
-| xiyouji-agent-web/deploy/pg/bin/backup.sh | W928 | 去 -z（目录格式不能压缩·PG 报错）+ 显式 -U（pg_basebackup 默认用当前 OS 用户）+ 跨平台 df 分盘判据（MINGW/MSYS 族） |
-| xiyouji-agent-web/deploy/pg/bin/restore-drill.sh | W928 | 重写恢复逻辑：铺满整个备份目录（base/ 与 global/ 是兄弟）+ 删 standby.signal + 接 WAL 归档做 PITR + 重写 postgresql.auto.conf + 业务库断言 + 源库行数一致比对 + 跨平台 restore_command 适配 |
-| xiyouji-agent-web/deploy/pg/bin/verify-baseline.py | W928 | 66 → 71 项（新增禁形态：server_encoding / `#` 注释 / `-D` 配 `-z`） |
-| xiyouji-agent-web/deploy/pg/bin/_mutation_test.py | W928 | 11 → 14 组变异（新增 M11/M12/M13 对应上述三个禁形态） |
-| xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql | W928 | `#` 注释全改 `--`（PG 的 SQL 只认 `--`·否则 psql 语法错误） |
-| xiyouji-agent-web/deploy/pg/README.md | W928 | §4 待实跑清单 → 实跑状态（已通过 6 项 / 真缺陷 4 条 / 仍待实跑 3 项 / 平台适配与两处跨平台判据坑） |
-| scripts/output/_w927_pg_runtime_evidence.txt | W928 | D-1 实跑机器证据（真实 PG 16.4·111 行原始输出） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W928 | §13.3 第 2 条（PG 未实跑）改判 + 新增 §13.5 实跑结果（6 项通过 + 4 个真缺陷 + 跨平台判据坑） |
-| docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md | W928 | 附录 A.3 改写为实跑结果（6 项通过 + 4 个真缺陷 + 两处跨平台坑 + 仍待实跑 3 项） |
-| docs/11-方案报告/README.md | W928 | §二 架构方案行补 W928 实跑摘要 + §六 T-20 报告行补实跑结果 |
-| docs/00-导读/W批次编号对账表.md | W928 | W928 认领行与收官回填 |
-| CHANGELOG.md | W928 | W928 段 |
-| HANDOVER.md | W928 | 级联头尾链与里程碑块 |
-| README.md | W928 | 当前批次版本行 |
-| STRUCTURE.md | W928 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W928 | 当前批次版本行 |
-| .github/workflows/README.md | W928 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W928 | 页脚批次链插入 W928 |
-| site/data/cross-time-danmaku.html | W928 | 页脚批次链插入 W928 |
-| site/data/tag-cloud.html | W928 | 页脚批次链插入 W928 |
-| site/dukou-engine.html | W928 | 页脚批次链插入 W928 |
-| AGENTS.md | W928 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W928 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W928 | version 同步为 W928 |
-| scripts/output/file-index.md | W928 | W928 段插入 |
-| scripts/output/_w928_spec.json | W928 | 本批级联 spec |
-| scripts/output/_cascade_files_W928.txt | W928 | 级联落盘清单 |
 

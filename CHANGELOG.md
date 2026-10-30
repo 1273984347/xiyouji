@@ -1,3 +1,19 @@
+### W1042（2026-10-30）：工具面根因修复与判据补覆盖批（台账回填显式参数 / Makefile 编排 / 第 48 门禁真实新增件 / 可疑改写面复核）
+
+
+
+> **来源**：用户 2026-10-30 连发五项指令（修工具缺陷 / 跨行扫描器接 make ci / 第 48 门禁补真实新增件用例 / 43 处可疑改写面人工复核 / 剩余 56 回继续扩量）⇒ 本批取第 1–4 项（工具面批 = W1042），第 5 项按独立批次推进。
+>
+> **批号来源**：`scripts/reserve_w.py` 占号得 W1042（铁律 17·并行会话已推进至 W1041）；preflight 交集检查 PASS；复盘触发器 T1/T2/T3 三条全中 ⇒ 本批同时认领**复盘批**角色（最终报告落 `docs/11-方案报告/工作复盘与优化分析报告/`）。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、Makefile、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/审查与评审/跨行改写面逐处复核报告-2026-10-30.md、docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-30.md、docs/11-方案报告/计划方案/执行前计划-W1042-工具面根因修复与判据补覆盖.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/INDEX.md、docs/agent/pitfalls.md、pytest.ini、scripts/A_文本基础/章节切分.py、scripts/_w1042_make_spec.py、scripts/check_cross_line_rewrite.py、scripts/cross_line_baseline.json、scripts/index.md、scripts/ledger_backfill.py、scripts/output/README.md、scripts/output/_cascade_files_W1042.txt、scripts/output/_w1042_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、tests/unit/test_archive_segments.py、tests/unit/test_cross_line_rewrite.py、tests/unit/test_plan_template_read_disk.py。
+
+**本批要点**：① **台账回填显式参数根因修复**——`ledger_backfill.py` 的 `--from-git` 分支把「取值优先级」与「是否产生变更」耦合在同一个 `is None` 判断里 ⇒ 显式 `--status`/`--hash` 被静默吞且不报错（帮助文案却写「显式可覆盖」）；同族缺陷 `--cascade` 只在 else 分支处理 ⇒ 改统一取值决策层（显式优先·显式缺失才用机器反填）；② **自测汇总数改由源码统计**（原硬编码「3 正例绿 + 4 负例红」⇒ 实为 12 条正例断言 + 5 条负例断言）；③ **第 48 门禁新增件分支补真实仓内文件用例**（原 tmp 仓根替身 ⇒ 真实路径/真实字节链路从未覆盖；改只替换 HEAD 判定开关）；④ **43 处可疑改写面逐处人工复核**；⑤ **坑表 +4 条**（124 → 128 条·六主题分项与 AGENTS/HANDOVER 计数链五处对账一致）；⑥ **`make ci` 接线核实**——跨行扫描器已由并行 W1014 接入 ci 链（Makefile `$(MAKE) cross-line`）⇒ 本批只做完成提示归属归位（`==> ci 完成` 原落在 cross-line 目标体内）。
+
+**验证**：`ledger_backfill --self-test` 退出码 0（12 条正例断言 + 5 条负例断言）· 显式 `--status` 覆盖生效负样本自证（显式文本入列且非自动反填文本）· `pytest tests/unit/test_plan_template_read_disk.py` **6 例全绿** · 第 48 门禁对本批执行前计划件实跑 **0 FAIL**（新增文件·全项符合）· 跨行扫描器 `--gate` 高危 **0 处** · 43 处可疑面逐处结论见复盘报告 · 全量门禁见收官提交。
+
+> - **状态**：已收官（工具面四修 + 复核 43 处 + 坑表 +4 条 + 计数链一致·待用户裁决真缺陷是否即刻修复）
+
 ### W1041（2026-10-30）：批次号预约机制（开批先占号·reserve_w.py + 铁律 17）
 
 > **来源**：用户 2026-10-30 令「做」——承接其问「并行会话之间没有批次号预约机制那怎么做？」。
@@ -763,7 +779,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1041），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1042），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1868,43 +1884,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **四件套**：文件见上（改名后新名）· 验证：渲染实测 17 组 + 静态复算 1 次 + 独立复算 1 次 + 第 48 门禁双件全项符合（计划件判 PLAN 符合 23 项、报告件判 REPORT 符合 13 项，模糊词零命中）· 状态：方案件已落库，施工待用户拍板 U1 至 U4 · 边界：线上部署态、A1 运行时、A2 留白、英文站 138 页逐页、reader 620 页逐页、N2 影响面共六项显式声明未验证。
 
 **诚实性边界**：本批只出报告与方案，不改 `site/` 与应用源码；级联器固定面会向三页页脚注入本批批次链行（共四行），该行为同时是 N3 所指污染源之一，已显式登记为 B2 的整改对象，不在本批静默处理。
-
-
-### W928（2026-10-25）：D-1 实跑批（真实 PostgreSQL 16.4·免安装二进制路径·抓出 4 个静态查不出的真缺陷）
-
-
-
-> **来源**：用户 2026-10-25 答「没有 Docker」⇒ 原定「起 Docker Desktop 实跑」路径作废 ⇒ 改用**PostgreSQL 官方 EDB 免安装二进制包（zip·338 MB·解压即用·不需要 Docker·不需要管理员·不进仓库）**，在 `%LOCALAPPDATA%\pg16` 起真实实例实测。
-
-> - **文件**：xiyouji-agent-web/deploy/pg/postgresql.conf.base、xiyouji-agent-web/deploy/pg/pg_hba.conf.base、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/backup.sh、xiyouji-agent-web/deploy/pg/bin/restore-drill.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql、xiyouji-agent-web/deploy/pg/README.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、scripts/output/_w927_pg_runtime_evidence.txt、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w928_spec.json、scripts/output/_cascade_files_W928.txt（逐件行见 file-index W928 段）。
-
-**实跑通过 6 项（原待实跑清单 9 项中）**：
-- **初始化幂等性**：`initdb-bootstrap.sh` 连跑两次——第一次建角色/库/权限，第二次全部「已存在，跳过创建」。
-- **真实备份**：`pg_basebackup` rc=0；空壳自检通过（`backup_label` + `postgresql.conf` + `base/` 均在位）；保留期轮转 + WAL 归档轮转正常。
-- **恢复演练行数一致（§9.4 核心主张）**：**真·PITR 演练**——PG 经 `restore_command` 从归档取回 `000000010000000000000019`；**逐表比对源库 == 恢复实例**：`sessions 6==6` · `messages 50==50` · `feedback 20==20` · `schema_migrations 1==1`。
-- **WAL 归档连续性**：段 `000000010000000000000001` → `00000001000000000000001B` 连续无缺口（27 段）。
-- **分盘校验（两次都验到）**：同盘场景（C: vs C:）被脚本**如实拦下**（`FATAL: 备份目录与 PGDATA 同盘`）；分盘场景（C: vs D:）通过。
-- **TLS 实握手**：`pg_stat_ssl.ssl = true` · **TLSv1.3** · cipher `TLS_AES_256_GCM_SHA384`。
-
-基线参数生效核验（实读 `pg_settings`）：`archive_mode=on` · `ssl=on` · `ssl_min_protocol_version=TLSv1.2` · `wal_level=replica` · `max_connections=200` · `client_encoding=UTF8` · `fsync=on` · `synchronous_commit=on` · `full_page_writes=on` · `log_min_duration_statement=1000` · `logging_collector=on` · `statement_timeout=30000`。
-
-**实跑抓出 4 个真缺陷（静态校验 66 项全绿也查不出 · 已全部修掉并固化为守卫）**：
-1. `server_encoding` 写进 `postgresql.conf` ⇒ PG **直接 FATAL 拒绝启动**（initdb 固定参数）⇒ 从基线删除，改由 `initdb -E UTF8` 确定。
-2. 迁移文件用 `#` 注释 ⇒ `psql` **语法错误**（PG 的 SQL 只认 `--`）⇒ 全部改 `--`。
-3. `pg_basebackup -D` 配 `-z` ⇒ 备份报错（`only tar mode backups can be compressed`）⇒ 去 `-z`。
-4. **恢复演练对备份目录结构的语义误解** ⇒ 演练实例起不来（`could not open file ".../global/pg_control"`）——`pg_basebackup -D` 的输出目录**本身就是 PGDATA 镜像**（`base/` 与 `global/`、`pg_wal/` 是**兄弟**），不是「base/ 里才是数据目录」⇒ 恢复时铺满整个备份目录 + 删 `standby.signal` + 接 WAL 归档做 PITR + 重写 `postgresql.auto.conf`。
-
-> **第 4 项连变异测试都测不出来**（它是语义误解，不是文本形态）⇒ **只有真跑能暴露**。这是「静态背书 ≠ 运行时可用」的第一份实证。
-> **状态**：**已收官**（W928 4dd57cee·git 反填·共 2 笔·W971 存量回填）
-
-**守卫升级**：静态校验器 **66 → 71 项**（新增 3 条禁形态：server_encoding / `#` 注释 / `-D` 配 `-z`）+ 反向验证 **11 → 14 组**（新增 M11/M12/M13）。
-
-**两处跨平台判据坑（已修）**：① **git-bash 的 `uname -s` 返回 `MINGW64_NT-…` 而不是 `Windows`** ⇒ 只写 `= "Windows"` 判等会误判为类 Unix ⇒ 把 POSIX 路径（`/c/Users/…`）写给 Windows 版 PG ⇒ 启动即 FATAL（`could not create lock file`）⇒ 判据须覆盖 `MINGW*`/`MSYS*`/`CYGWIN*`/`Windows*` 全族；② **PG 配置串里反斜杠是转义符** ⇒ Windows 路径要双写 `\\`，且 `cmd.exe` 的 `copy` 与 PG 的 `%p`（正斜杠）需薄包装批处理适配。
-
-**仍待实跑（3 项 · 不得当作已验证）**：迁移器端到端（D-2）· 容量实测（D-2）· 审计留存与销毁留证（D-3）。
-
-**机器证据**：`scripts/output/_w927_pg_runtime_evidence.txt`（111 行原始输出）。
-
-**未改**：xiyouji-agent-web 的 server/ 与 src/（应用代码一行未动）· site/ 任何页面 · 任何管控脚本。
 
 

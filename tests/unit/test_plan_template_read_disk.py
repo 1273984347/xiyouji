@@ -59,3 +59,38 @@ def test_bad_sample_actually_loses_criteria():
     assert cpt.R.fail_set(good) == set()
     assert cpt.R.fail_set(bad), "BAD 样本竟无不符合项"
     assert cpt.R.fail_set(bad) - cpt.R.fail_set(good), "BAD 与 GOOD 的不符合项集合相同"
+
+
+# ---------------------------------------------------------------------------
+# W1042 补覆盖：「新增件」分支用**真实仓内文件**走（不再整仓根替身）
+#
+# 病根：② 例把 ROOT 整个换成 tmp ⇒ 读盘字节来自 tmp 替身，**从未验证**
+# 「真实仓内路径 + 真实文件字节 + 真实 open()」这条新增件链路；而新增件分支的
+# 唯一开关是 `head_text()` 返回 None（路径不在 HEAD 提交树）。
+# ⇒ 修法：只替换这一个判定开关，**读盘仍走真实仓根与真实文件**。
+# ---------------------------------------------------------------------------
+
+
+def test_real_repo_file_on_new_branch(monkeypatch):
+    """⑤ 真实仓内计划件 + 新增件分支（仅替换 HEAD 判定）⇒ 合规 ⇒ PASS 且 is_new=True。"""
+    assert (REPO / REAL_REL).exists(), "真实计划件不在位：%s" % REAL_REL
+    monkeypatch.setattr(cpt, "head_text", lambda path: None)   # 该路径视作「未入库 ⇒ 新增件」
+    verdict, d = cpt.judge_file(REAL_REL)
+    assert d.get("is_new") is True, "未进入新增件分支：%s" % (d,)
+    assert verdict == "PASS", "真实计划件在新增件分支被判 FAIL：%s" % (d,)
+    assert not d.get("old_fail"), "新增件分支不应产生存量缺项：%s" % (d,)
+
+
+def test_new_branch_fails_on_real_missing_item(tmp_path, monkeypatch):
+    """⑥ 新增件分支读真实磁盘字节（绝对路径·仓根不变）+ 内容缺项 ⇒ 必红。
+
+    绝对路径 ⇒ `os.path.join(ROOT, 绝对路径)` 仍取绝对路径 ⇒ 读的是 tmp 里
+    真实写入的文件字节（不是 monkeypatch 出来的假读盘）。
+    """
+    p = tmp_path / "_w1042_bad.md"
+    p.write_text(cpt.BAD, encoding="utf-8")
+    monkeypatch.setattr(cpt, "head_text", lambda path: None)   # 视作新增件
+    verdict, d = cpt.judge_file(str(p))
+    assert d.get("is_new") is True, "未进入新增件分支：%s" % (d,)
+    assert verdict == "FAIL", "新增件缺项未被判红：%s" % (d,)
+    assert d.get("new_fail"), "新增件缺项未报不符合项：%s" % (d,)
