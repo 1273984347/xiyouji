@@ -283,6 +283,7 @@
 - [scripts/extract_strings.py](scripts/extract_strings.py)：穷举 viz 页 chrome 文本节点 + script CJK 字面量（英文站翻译前置·W447 转正）
 - [scripts/validate_en.py](scripts/validate_en.py)：校验 EN 页 chrome CJK 白名单 + script CJK=0（英文站翻译门禁·W447 转正）
 - [scripts/verify_delivery.py](scripts/verify_delivery.py)：交付校验总闸
+- [scripts/reserve_w.py](scripts/reserve_w.py)：批次号预约（开批先跑占号·防并行会话撞号·铁律 17·W1041 立）
 - [scripts/generate_csp.py](scripts/generate_csp.py)：全站 CSP 注入 + `--check` 零漂移
 - [scripts/lint_links.py](scripts/lint_links.py)：全站死链巡检
 - [archive/scripts/](archive/scripts/)：历史一次性脚本归档（45 个，W447 治理，保留 git 历史备查）
@@ -364,7 +365,7 @@ python detect_unwrapped_tables.py  # 表格溢出扫描
 ### 跨 session 接续流程
 
 1. **新 session 启动时**：先读本文件 + [README.md](README.md) + [docs/00-导读/项目说明.md](docs/00-导读/项目说明.md)，了解当前进度与待办
-2. **接续 W 编号**：以本文件「一、当前进度」段标注的现役 W 为准；新批编号按 [CHANGELOG.md](CHANGELOG.md) 顶部「W### 编号规则」取现役段 max+1。**本文件禁止内嵌具体 W 号**（W520「递增数字禁字面量」铁律——写死的批次号必然随项目演化漂移；本行即该规则的存量病例，W534 修复）
+2. **接续 W 编号（先占号！）**：**开批第一步必须先跑 `python scripts/reserve_w.py` 占号（铁律 17·W1041 立）——stdout 即本批 W 号，未占号不动手**；占号后取号口径照旧：以本文件「一、当前进度」段标注的现役 W 为准，新批编号按 [CHANGELOG.md](CHANGELOG.md) 顶部「W### 编号规则」取现役段 max+1（与 reserve_w 的 `candidate=max(台账,CHANGELOG顶段,已预约)+1` 一致）。**本文件禁止内嵌具体 W 号**（W520「递增数字禁字面量」铁律——写死的批次号必然随项目演化漂移；本行即该规则的存量病例，W534 修复）
 3. **文件管控**：先读 [docs/00-导读/文档规范.md](docs/00-导读/文档规范.md) §11 文件管控清单——11.1 必须同步的文件（核心 2 份硬门禁 + 辅助 4 份 + 里程碑旁文档）/ 11.2 禁止擅自修改的文件（历史段/密钥/门禁/归档/字体源）·跨 session 多 Agent 协作强制遵守
 4. **选择方向**：本文件"二、下一步方向候选清单"按优先级列出所有可推进方向
 5. **方法论参考**：本文件"三、方法论沉淀"列出所有可复利经验，新 session 应遵循
