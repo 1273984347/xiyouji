@@ -25,8 +25,8 @@ RULES = [
 ]
 
 def clean_tail(tail: str) -> str:
-    tail = re.sub(r'\s*integrity="[^"]*"', '', tail)
-    tail = re.sub(r'\s*crossorigin="[^"]*"', '', tail)
+    tail = re.sub(r'[ \t]*integrity="[^"\r\n]*"', '', tail)
+    tail = re.sub(r'[ \t]*crossorigin="[^"\r\n]*"', '', tail)
     return tail
 
 def process(relpath: str, prefix: str) -> int:

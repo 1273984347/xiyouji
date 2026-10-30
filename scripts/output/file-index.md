@@ -27,6 +27,7 @@
 | archive/docs/CHANGELOG-ARCHIVE.md | W1043 | 本批新增/修改 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1043 | 本批新增/修改 |
 | archive/docs/file-index-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/misc/_localize_cdn_libs.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
 | archive/scripts/batches/w10xx/README.md | W1043 | 本批新增/修改 |
 | archive/scripts/batches/w10xx/_w1042_make_spec.py | W1043 | 本批新增/修改 |
 | archive/scripts/batches/w10xx/_w1043_derive_prepare.py | W1043 | 本批工具脚本（归档批次区） |
@@ -38,9 +39,14 @@
 | archive/scripts/batches/w10xx/_w1043_pick.py | W1043 | 本批工具脚本（归档批次区） |
 | archive/scripts/batches/w10xx/_w1043_prepare.py | W1043 | 本批工具脚本（归档批次区） |
 | archive/scripts/batches/w10xx/_w1043_probe_pages.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_sheet.py | W1043 | 本批工具脚本（归档批次区） |
 | archive/scripts/batches/w10xx/_w1043_stage.py | W1043 | 本批工具脚本（归档批次区） |
 | archive/scripts/batches/w10xx/_w1043_verify.py | W1043 | 本批工具脚本（归档批次区） |
 | archive/scripts/batches/w10xx/index.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w4xx/_w478_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w4xx/_w490_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w4xx/_w491_en_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w9xx/_w974_cascade.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
 | assets/promo/plate-set/index.md | W1043 | 本批新增/修改 |
 | assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.png | W1043 | 新增母版（1200×1600） |
 | assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 新增母版（1200×1600） |
@@ -68,6 +74,7 @@
 | assets/promo/plate-set/plate-line-96-ch097-xiniu.webp | W1043 | 新增母版（1200×1600） |
 | assets/promo/plate-set/preview-contact-sheet.png | W1043 | 拼图预览（含本批 12 张） |
 | assets/promo/plate-set/preview-contact-sheet.webp | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1043-sheet.png | W1043 | 拼图预览（本批 12 张） |
 | assets/promo/plate-set/raw/README.md | W1043 | 本批新增/修改 |
 | assets/promo/plate-set/raw/index.md | W1043 | 本批新增/修改 |
 | assets/promo/plate-set/raw/round17/README.md | W1043 | 出图原件（12 份·含 1 张重出） |
@@ -92,6 +99,7 @@
 | docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1043 | 方案报告（执行前计划件） |
 | docs/INDEX.md | W1043 | 本批新增/修改 |
 | docs/agent/pitfalls.md | W1043 | 坑表（+1 条·判据脆性） |
+| scripts/_w1042_make_spec.py | W1043 | 本批改名·旧名（已由 archive/scripts/batches/w10xx/_w1042_make_spec.py 取代） |
 | scripts/check_cross_line_rewrite.py | W1043 | 本批新增/修改 |
 | scripts/cross_line_baseline.json | W1043 | 本批新增/修改 |
 | scripts/index.md | W1043 | 本批新增/修改 |
@@ -156,7 +164,6 @@
 | site/static/images/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
 | site/static/images/plate-line-95-ch085-diyongfuren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
 | site/static/images/plate-line-96-ch097-xiniu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
-| scripts/_w1042_make_spec.py | W1043 | 本批改名·旧名（已由 archive/scripts/batches/w10xx/_w1042_make_spec.py 取代） |
 
 ## W1042 工具面根因修复与判据补覆盖批（2026-10-30）
 
