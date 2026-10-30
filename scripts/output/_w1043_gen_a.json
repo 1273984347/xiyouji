@@ -1,0 +1,47 @@
+{
+ "code": 0,
+ "message": "ok",
+ "summary": "Batch processing completed: 10/10 succeeded",
+ "total_requested": 10,
+ "total_success": 10,
+ "total_failed": 0,
+ "success_items": [
+  {
+   "node_id": "458032108560813",
+   "file_name": "plate-line-85-ch053-ruyizhenxian.jpg"
+  },
+  {
+   "node_id": "458032774525891",
+   "file_name": "plate-line-86-ch033-chuikouxian.jpg"
+  },
+  {
+   "node_id": "458032793588100",
+   "file_name": "plate-line-87-ch094-taiyinxingjun.jpg"
+  },
+  {
+   "node_id": "458032755167436",
+   "file_name": "plate-line-88-ch073-duomuguai.jpg"
+  },
+  {
+   "node_id": "458032755167443",
+   "file_name": "plate-line-89-ch069-ziyangzhenren.jpg"
+  },
+  {
+   "node_id": "458032728564705",
+   "file_name": "plate-line-90-ch090-yijiukutianzun.png"
+  },
+  {
+   "node_id": "458033191866432",
+   "file_name": "plate-line-91-ch071-jiuling-shiba.png"
+  },
+  {
+   "node_id": "458033065590988",
+   "file_name": "plate-line-92-ch086-bihan-bishu.jpg"
+  },
+  {
+   "node_id": "458032265441392",
+   "file_name": "plate-line-94-ch029-bengpo-baboren.jpg"
+  }
+ ],
+ "failed_items": []
+}

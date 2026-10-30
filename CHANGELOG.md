@@ -1,3 +1,19 @@
+### W1043（2026-10-31）：回次 og:image 全覆盖批·第四轮（12 张线描立像/场面）
+
+
+
+> **来源**：用户 2026-10-30 五项连发指令之第 5 项「剩余 56 回继续扩量（每批 12 张·约 5 批）」⇒ 本批为第四轮（W1043）。
+>
+> **基线实读**（非引用旧批报告）：已落位专属 og-image **44 回** + 保留既有 card-* 专属 **2 回**（ch019/ch031）+ 通用 og 缺口 **54 回**；已出母版 **112 张 / 唯一 slug 111 个**（早期命名 `NN-slug` 与新批命名 `NN-chNNN-slug` 两种形态全扫）。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1042_make_spec.py、archive/scripts/batches/w10xx/_w1043_derive_prepare.py、archive/scripts/batches/w10xx/_w1043_derive_stage.py、archive/scripts/batches/w10xx/_w1043_derive_verify.py、archive/scripts/batches/w10xx/_w1043_download.py、archive/scripts/batches/w10xx/_w1043_make_spec.py、archive/scripts/batches/w10xx/_w1043_master.py、archive/scripts/batches/w10xx/_w1043_pick.py、archive/scripts/batches/w10xx/_w1043_prepare.py、archive/scripts/batches/w10xx/_w1043_probe_pages.py、archive/scripts/batches/w10xx/_w1043_stage.py、archive/scripts/batches/w10xx/_w1043_verify.py、archive/scripts/batches/w10xx/index.md、assets/promo/plate-set/index.md、assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.png、assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.webp、assets/promo/plate-set/plate-line-86-ch033-chuikouxian.png、assets/promo/plate-set/plate-line-86-ch033-chuikouxian.webp、assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.png、assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.webp、assets/promo/plate-set/plate-line-88-ch073-duomuguai.png、assets/promo/plate-set/plate-line-88-ch073-duomuguai.webp、assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.png、assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.webp、assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.png、assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.webp、assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.png、assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.webp、assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.png、assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.webp、assets/promo/plate-set/plate-line-93-ch095-yumian.png、assets/promo/plate-set/plate-line-93-ch095-yumian.webp、assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.png、assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.webp、assets/promo/plate-set/plate-line-95-ch085-diyongfuren.png、assets/promo/plate-set/plate-line-95-ch085-diyongfuren.webp、assets/promo/plate-set/plate-line-96-ch097-xiniu.png、assets/promo/plate-set/plate-line-96-ch097-xiniu.webp、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/raw/README.md、assets/promo/plate-set/raw/index.md、assets/promo/plate-set/raw/round17/README.md、assets/promo/plate-set/raw/round17/index.md、assets/promo/plate-set/raw/round17/plate-line-85-ch053-ruyizhenxian.jpg、assets/promo/plate-set/raw/round17/plate-line-86-ch033-chuikouxian.jpg、assets/promo/plate-set/raw/round17/plate-line-87-ch094-taiyinxingjun.jpg、assets/promo/plate-set/raw/round17/plate-line-88-ch073-duomuguai.jpg、assets/promo/plate-set/raw/round17/plate-line-89-ch069-ziyangzhenren.jpg、assets/promo/plate-set/raw/round17/plate-line-90-ch090-yijiukutianzun.png、assets/promo/plate-set/raw/round17/plate-line-91-ch071-jiuling-shiba.png、assets/promo/plate-set/raw/round17/plate-line-92-ch086-bihan-bishu.jpg、assets/promo/plate-set/raw/round17/plate-line-93-ch095-yumian.jpg、assets/promo/plate-set/raw/round17/plate-line-94-ch029-bengpo-baboren.jpg、assets/promo/plate-set/raw/round17/plate-line-95-ch085-diyongfuren.jpg、assets/promo/plate-set/raw/round17/plate-line-96-ch097-xiniu.jpg、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/INDEX.md、docs/agent/pitfalls.md、scripts/check_cross_line_rewrite.py、scripts/cross_line_baseline.json、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1043.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1043_batch.json、scripts/output/_w1043_batch_a.json、scripts/output/_w1043_batch_b.json、scripts/output/_w1043_batch_c.json、scripts/output/_w1043_gen_a.json、scripts/output/_w1043_gen_b.json、scripts/output/_w1043_gen_c.json、scripts/output/_w1043_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/reader/ch029.html、site/reader/ch033.html、site/reader/ch053.html、site/reader/ch069.html、site/reader/ch071.html、site/reader/ch073.html、site/reader/ch085.html、site/reader/ch086.html、site/reader/ch090.html、site/reader/ch094.html、site/reader/ch095.html、site/reader/ch097.html、site/static/images/README.md、site/static/images/index.md、site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp、site/static/images/og-plate-line-86-ch033-chuikouxian.webp、site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp、site/static/images/og-plate-line-88-ch073-duomuguai.webp、site/static/images/og-plate-line-89-ch069-ziyangzhenren.webp、site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp、site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp、site/static/images/og-plate-line-92-ch086-bihan-bishu.webp、site/static/images/og-plate-line-93-ch095-yumian.webp、site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp、site/static/images/og-plate-line-95-ch085-diyongfuren.webp、site/static/images/og-plate-line-96-ch097-xiniu.webp、site/static/images/plate-line-85-ch053-ruyizhenxian.webp、site/static/images/plate-line-86-ch033-chuikouxian.webp、site/static/images/plate-line-87-ch094-taiyinxingjun.webp、site/static/images/plate-line-88-ch073-duomuguai.webp、site/static/images/plate-line-89-ch069-ziyangzhenren.webp、site/static/images/plate-line-90-ch090-yijiukutianzun.webp、site/static/images/plate-line-91-ch071-jiuling-shiba.webp、site/static/images/plate-line-92-ch086-bihan-bishu.webp、site/static/images/plate-line-93-ch095-yumian.webp、site/static/images/plate-line-94-ch029-bengpo-baboren.webp、site/static/images/plate-line-95-ch085-diyongfuren.webp、site/static/images/plate-line-96-ch097-xiniu.webp。
+
+**本批要点**：① **缺口与 slug 全表实读**——通用 og 缺口 54 回、已出母版 112 张 / 唯一 slug 111 个（早期命名无 ch 段 ⇒ 只按新形态扫会漏 100 个）；② **母版段两变体**——立像段逐字复用 249 字符（6 张）、场面段仅改 3 处（6 张）；③ **12 个主体全部未出**（如意真仙/吹口仙/太阴星君/多目怪/紫阳真人/乙救苦天尊 + 九灵元圣与十八罗汉/辟寒与辟暑二王/玉面狐狸/奔波儿灞与灞波儿奔/地涌夫人/犀牛怪）；④ **1 张重出**——93 号原选 ch033 与 86 号吹口仙**同回** ⇒ 同页两题图不被落位脚本支持 ⇒ 改 ch095 玉面狐狸并重出（重出件须同时清旧结果文件条目，否则下载器幂等会复活旧件）；⑤ **1 回只换 og**——ch086 已有 W1001 批题图（毗蓝大菩萨）⇒ 题图不覆盖、只换专属 og；⑥ **坑表 +1 条**（E-46·判据脆性：暗色隐藏规则用整串字面量匹配 ⇒ 页面 CSS 多行排版时误判「缺规则」⇒ 改为容忍空白的正则）。⑦ **订正前批口径**——W1042 段所写「坑表 +4 条（124 → 128 条）」实为 **+8 条（124 → 132 条）**（该批一次落 E-38…E-45 八条；本批再加 E-46 ⇒ 现 133 条）；历史段不改写，故在此订正。
+
+**验证**：母版判据 **124 张 · FAIL 0** · 裁切验算 **124 张 · FAIL 0** · 落位验收 **0 FAIL**（11 回题图 + 1 回只换 og + 未覆盖页零回归）· 配图覆盖 **44 → 55 回** · 通用 og 缺口 **54 → 43 回** · 全量门禁见收官提交。
+
+> - **状态**：已收官（12 张落地·新增题图 11 回·母版族 112 → 124 张·既有 112 张母版与站点版零改动·待用户目视）
+
 ### W1042（2026-10-30）：工具面根因修复与判据补覆盖批（台账回填显式参数 / Makefile 编排 / 第 48 门禁真实新增件 / 可疑改写面复核）
 
 
@@ -779,7 +795,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1042），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1043），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1862,27 +1878,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：8/8 出图成功（批量 `generate_image` 零失败）·2400×1017 尺寸 8/8 实测一致 ·左侧留白区墨量 0.0000–0.0014（8/8 达标）·AI 伪文字人工放大复核 2 张（04/06）·成套一览拼图逐张目视复核全过
 > - **状态**：在途（素材已落盘并暂存·认领登记 W931·站点接入待用户决定）
 > **状态**：**已收官**（W931 08f1f927·git 反填·共 2 笔·W971 存量回填）
-
-
-### W930（2026-10-25）：界面布局复核与落地方案（信息层级四维复核 + 三条新发现 + 六批可施工方案）
-
-> **来源**：用户 2026-10-25 令「帮我优化现有界面布局：先帮我做好信息层级梳理、区块分布与留白、操作动线、不同屏幕适配都过一遍，每处调整讲清理由」；问卷答复 = 范围全站都做（静态站 + reader + agent-web）· 主攻信息层级（一屏信息量过载）· 先出审查报告与落地方案、用户过一遍再动代码。
-
-> - **文件**：docs/11-方案报告/计划方案/T21-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/计划方案/执行前计划-T21-界面布局复核与落地方案.md、docs/11-方案报告/README.md、dscripts/_w930_claim_row.py、scripts/_w930_rename_prefix.py、scripts/_w930_report_normalize.py、scripts/_w930_spec_build.py、scripts/_w930_layout_static.py、scripts/_w930_layout_diff.py、scripts/_w930_layout_attr.py、scripts/_w930_layout_detail.py、scripts/_w930_layout_residual.py、scripts/_w930_layout_probe.mjs、scripts/_w930_layout_probe_app.mjs、scripts/output/_w930_layout_static.json、scripts/output/_w930_layout_metrics.json、scripts/output/_w930_layout_metrics_app.json、scripts/output/_w930_layout_diff.json、scripts/output/_w930_layout_attr.json、scripts/output/_w930_visible_leak.json、scripts/output/_w930_plan_review.json、scripts/output/_w930_spec.json
-> **状态**：**已收官**（W930 378e158d·git 反填·共 1 笔·W971 存量回填）
-
-**定位：复核 + 补审，不是重做**——用户指令的四维与 W854《界面布局审计报告》（2026-10-21）几乎逐字相同，按 W926 §7.1 E-03「同一条指令重复下达时先查历史再动手」判为复核 + 补审：重跑 W854 探针（站点 11 组 + 应用 6 组，新旧 metrics JSON 逐项对拍）+ 补 W854 与 W926 均未覆盖的维度 + 出可施工落地方案。**W 号二次让号**（W928 归并行 D-1 实跑批、W929 归并行 Hero 素材图批，按「先落地者保留」）⇒ 本批取 W930，框架号 T21。
-
-**W854 十八条的四天后现状（重跑探针实测，非复述）**：已修 6（S1 首屏内容入口 / S2 字号倒挂 / S3 手机层级坍塌 / S4 首页九区块同级 / S7 四套容器并存 / S9 hub 非链接）· 部分修 4（S5 间距刻度 / S6 令牌消费 / S8 目录页动线 / S14 卡片列数与触达目标）· 仍存 7（S1 衍生 mega 数字未降级 / S10 可视化页顶栏仅五入口 / S11 断点体系 / S12 KPI 不收缩 / S13 长段 77.9 字每行 / A1 / A4 / A5 / A6）· 未判定 1（A2 应用侧留白，服务端未起不可测）。首页三任务区由 W865 与 T-08 批施工落地。
-
-**三条新发现（W854 与 W926 均未覆盖）**：① **N1** @1440 首页同标签混两档字号——「精选必看」「全卷索引」是 h3 但 24px，同区十张卡片 h3 为 20px，语义层级与视觉层级错位且仅在宽屏发作；② **N2** @375 首页 hero 山脉装饰图压正文文字（副标题被裁），静态几何审计与交互审计均不覆盖元素重叠；③ **N3** 可见工程批次号不只污染文本（796 页 6,827 处），同时是布局度量的基准污染源——W926 批次往四页页脚注入批次行使页高升 20 至 215 像素、元素数升 1 至 7，任何以页高或元素数为判据的布局审计都会被带偏。
-
-**v4 令牌落地进度差**：容器族已消费（0 页至 851 页）· 间距族已消费（330 页至 857 页）· **排版族与语义 gap 族仍为 0 消费**（`tokens.css` 已定义九个排版角色与六档语义 gap）⇒ 改版者改了令牌值却看不到任何变化。间距刻度命中：原口径 43.3% 降至 31.2% 是判据失真（令牌化改造不被硬编码像素正则计入），修正口径 86.2% 为真值，两套口径同时输出以便旧数字仍可复算。
-
-**六批可施工落地方案**（每批带理由与可机检验收判据，共约 8.5 人日）：B1 应用侧移动端可用性（@375 主区 115 像素至目标 320 像素以上）· B2 可见文本去工程化与页脚收口 · B3 排版与间距刻度消费化 · B4 可视化页自适应降级（KPI 与长行）· B5 首页宽屏层级与断点体系 · B6 目录页动线与触达目标。**本批不含任何界面代码改动**。
-
-**四件套**：文件见上（改名后新名）· 验证：渲染实测 17 组 + 静态复算 1 次 + 独立复算 1 次 + 第 48 门禁双件全项符合（计划件判 PLAN 符合 23 项、报告件判 REPORT 符合 13 项，模糊词零命中）· 状态：方案件已落库，施工待用户拍板 U1 至 U4 · 边界：线上部署态、A1 运行时、A2 留白、英文站 138 页逐页、reader 620 页逐页、N2 影响面共六项显式声明未验证。
-
-**诚实性边界**：本批只出报告与方案，不改 `site/` 与应用源码；级联器固定面会向三页页脚注入本批批次链行（共四行），该行为同时是 N3 所指污染源之一，已显式登记为 B2 的整改对象，不在本批静默处理。
 
 

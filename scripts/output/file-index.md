@@ -11,6 +11,153 @@
 ---
 
 
+## W1043 回次 og:image 全覆盖批·第四轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1043 | 本批新增/修改 |
+| .github/workflows/README.md | W1043 | 本批新增/修改 |
+| AGENTS.md | W1043 | 本批新增/修改 |
+| CHANGELOG.md | W1043 | 本批新增/修改 |
+| CITATION.cff | W1043 | 本批新增/修改 |
+| HANDOVER.md | W1043 | 本批新增/修改 |
+| README.md | W1043 | 本批新增/修改 |
+| STRUCTURE.md | W1043 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1042_make_spec.py | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1043_derive_prepare.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_derive_stage.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_derive_verify.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_download.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_make_spec.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_master.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_pick.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_prepare.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_probe_pages.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_stage.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_verify.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-86-ch033-chuikouxian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-86-ch033-chuikouxian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-88-ch073-duomuguai.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-88-ch073-duomuguai.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-93-ch095-yumian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-93-ch095-yumian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-95-ch085-diyongfuren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-95-ch085-diyongfuren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-96-ch097-xiniu.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-96-ch097-xiniu.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/raw/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round17/README.md | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/index.md | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-85-ch053-ruyizhenxian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-86-ch033-chuikouxian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-87-ch094-taiyinxingjun.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-88-ch073-duomuguai.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-89-ch069-ziyangzhenren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-90-ch090-yijiukutianzun.png | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-91-ch071-jiuling-shiba.png | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-92-ch086-bihan-bishu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-93-ch095-yumian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-94-ch029-bengpo-baboren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-95-ch085-diyongfuren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-96-ch097-xiniu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1043 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1043 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1043 | 方案报告（执行前计划件） |
+| docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1043 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1043 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1043 | 方案报告（执行前计划件） |
+| docs/INDEX.md | W1043 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1043 | 坑表（+1 条·判据脆性） |
+| scripts/check_cross_line_rewrite.py | W1043 | 本批新增/修改 |
+| scripts/cross_line_baseline.json | W1043 | 本批新增/修改 |
+| scripts/index.md | W1043 | 本批新增/修改 |
+| scripts/output/README.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1043.txt | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1043_batch.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_a.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_b.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_c.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_a.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_b.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_c.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_spec.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/file-index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1043 | 本批新增/修改 |
+| site/data/search.html | W1043 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1043 | 本批新增/修改 |
+| site/dukou-engine.html | W1043 | 本批新增/修改 |
+| site/en/search.html | W1043 | 本批新增/修改 |
+| site/index.html | W1043 | 本批新增/修改 |
+| site/reader/ch029.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch033.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch053.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch069.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch071.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch073.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch085.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch086.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch090.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch094.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch095.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch097.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/static/images/README.md | W1043 | 本批新增/修改 |
+| site/static/images/index.md | W1043 | 本批新增/修改 |
+| site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-86-ch033-chuikouxian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-88-ch073-duomuguai.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-89-ch069-ziyangzhenren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-92-ch086-bihan-bishu.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-93-ch095-yumian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-95-ch085-diyongfuren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-96-ch097-xiniu.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-86-ch033-chuikouxian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-87-ch094-taiyinxingjun.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-88-ch073-duomuguai.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-89-ch069-ziyangzhenren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-90-ch090-yijiukutianzun.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-91-ch071-jiuling-shiba.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-92-ch086-bihan-bishu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-93-ch095-yumian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-95-ch085-diyongfuren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-96-ch097-xiniu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| scripts/_w1042_make_spec.py | W1043 | 本批改名·旧名（已由 archive/scripts/batches/w10xx/_w1042_make_spec.py 取代） |
+
 ## W1042 工具面根因修复与判据补覆盖批（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4643,31 +4790,4 @@ docs/11-方案报告/README.md
 | scripts/_w931_hero_verify.py | W931 | 成套判据脚本（7 条 J1–J7 + 负样本可证伪自检） |
 | scripts/_w931_claim_row.py | W931 | 对账表认领行登记脚本（幂等·绝不覆盖他人认领） |
 | scripts/_w931_changelog_seg.py | W931 | CHANGELOG 段插入脚本（段序结构断言 + 让号后重定位） |
-
-## W930 界面布局复核与落地方案（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T21-任务计划执行与经验沉淀报告-2026-10-25.md | W930 | 四维复核结论（18 条现状表）+ 三条新发现 + 六批可施工落地方案 + 6 条未验证项 |
-| docs/11-方案报告/计划方案/执行前计划-T21-界面布局复核与落地方案.md | W930 | T-21 框架件·执行前计划（九表齐备：标识/目标/边界/ASM/ST/V/R/D/自包含） |
-| docs/11-方案报告/README.md | W930 | §六 计划方案 +1 行（篇数 24→25） |
-| docs/00-导读/W批次编号对账表.md | W930 | W930 认领行（二次让号依据 + touches 声明） |
-| scripts/_w930_layout_static.py | W930 | 静态复算（间距刻度 / 令牌消费 / 断点清点·原口径 + 修正口径两套输出） |
-| scripts/_w930_layout_diff.py | W930 | 新旧逐项对拍（缺失字段标 MISSING 不填 0） |
-| scripts/_w930_layout_attr.py | W930 | 增量归因（区分布局劣化与内容增量） |
-| scripts/_w930_layout_detail.py | W930 | 标题字号序列 + 应用侧几何对拍 |
-| scripts/_w930_layout_residual.py | W930 | 容器档位 / 长段字数每行 / 顶栏入口数 / 应用侧留白 |
-| scripts/_w930_layout_probe.mjs | W930 | 站点渲染探针 11 组（复用 W854 探针改落点 + 目录自建） |
-| scripts/_w930_layout_probe_app.mjs | W930 | 应用渲染探针 6 组（复用 W854 探针改落点） |
-| scripts/_w930_claim_row.py | W930 | 台账认领行登记脚本（幂等·不覆盖他人认领的号） |
-| scripts/_w930_rename_prefix.py | W930 | 产物前缀统一改名脚本（幂等 + 残留校验） |
-| scripts/_w930_report_normalize.py | W930 | 报告件归一为纯报告侧（去触发词 + 补报告侧 token） |
-| scripts/output/_w930_layout_static.json | W930 | 静态复算证据 |
-| scripts/output/_w930_layout_metrics.json | W930 | 站点渲染实测证据（11 组） |
-| scripts/output/_w930_layout_metrics_app.json | W930 | 应用渲染实测证据（6 组） |
-| scripts/output/_w930_layout_diff.json | W930 | 新旧对拍证据 |
-| scripts/output/_w930_layout_attr.json | W930 | 增量归因证据 |
-| scripts/output/_w930_visible_leak.json | W930 | 可见工程批次号复算证据（796 页 6,827 处） |
-| scripts/output/_w930_plan_review.json | W930 | 第 48 门禁判据矩阵证据（双件全项符合） |
-| scripts/output/_w930_spec.json | W930 | 本批级联 spec |
 
