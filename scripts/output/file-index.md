@@ -11,6 +11,42 @@
 ---
 
 
+## W1040 任务分级协议入库（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/任务分级协议.md | W1040 | 本批新增 |
+| docs/10-方法论沉淀/README.md | W1040 | 索引登记第 27 号 |
+| docs/11-方案报告/README.md | W1040 | §六 登记执行前计划行（T-39） |
+| docs/11-方案报告/计划方案/执行前计划-W1040-任务分级协议入库.md | W1040 | 本批新增（计划归档·W1033 T05 先例·框架号 T-39） |
+| docs/INDEX.md | W1040 | 索引重生成 |
+| docs/00-导读/W批次编号对账表.md | W1040 | 认领登记与收官回填 |
+| scripts/output/_w1040_spec.json | W1040 | 本批新增 |
+| scripts/output/_cascade_files_W1040.txt | W1040 | 级联清单 |
+| CHANGELOG.md | W1040 | 级联·现役段 |
+| README.md | W1040 | 级联 |
+| STRUCTURE.md | W1040 | 级联+stats 标记 sweep |
+| HANDOVER.md | W1040 | 级联 |
+| AGENTS.md | W1040 | 级联（agents_note 脚注轮换） |
+| CITATION.cff | W1040 | 级联（version/date 随批） |
+| docs/00-导读/项目说明.md | W1040 | 级联 |
+| .github/workflows/README.md | W1040 | 级联 |
+| site/index.html | W1040 | 级联 |
+| site/data/cross-time-danmaku.html | W1040 | 级联 |
+| site/data/tag-cloud.html | W1040 | 级联 |
+| site/dukou-engine.html | W1040 | 级联 |
+| site/data/search.html | W1040 | 搜索索引重建 |
+| site/en/search.html | W1040 | 搜索索引重建 |
+| scripts/output/file-index.md | W1040 | 级联 |
+| scripts/output/stats.json | W1040 | methodology_docs 25→26 |
+| archive/docs/AGENTS-ARCHIVE.md | W1040 | 回窗（脚注窗轮换时·未触发删行） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1040 | 回窗（段窗轮换·上轮同窗位已触发） |
+| archive/docs/file-index-ARCHIVE.md | W1040 | 回窗（段窗轮换·上轮同窗位已触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1040 | 回窗（台账行窗轮换·已触发：迁出 W980-W981） |
+| scripts/output/README.md | W1040 | 目录文档 refresh（scripts/output 新件触发时） |
+| scripts/output/index.md | W1040 | 目录文档 refresh（同上） |
+| scripts/output/tools-inventory.md | W1040 | 工具面 refresh（触发时） |
+
 ## W1039 用户级记忆五则入项目铁律（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4627,34 +4663,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W927 | W927 段插入 |
 | scripts/output/_w927_spec.json | W927 | 本批级联 spec |
 | scripts/output/_cascade_files_W927.txt | W927 | 级联落盘清单 |
-
-## W926 站点交互流程审查复核报告批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/审查与评审/站点交互流程审查复核报告-2026-10-25.md | W926 | 站点交互流程审查复核报告（857 页四维复核·10 条问题按访客影响排序·附前次 17 条闭环表与 9 项正面结论） |
-| scripts/_w926_ia_audit.py | W926 | 全量交互结构扫描器（跳转路径/按钮反馈/表单报错/空态异常四维·判据自纠三处） |
-| scripts/_w926_ia_extract.py | W926 | 可疑判定逐条落到「文件是否存在」的实证提取器 |
-| scripts/_w926_visible_leak.py | W926 | 访客可见文本的内部术语外泄扫描（剥离 script/style/注释后统计） |
-| scripts/_w926_fix_report.py | W926 | 报告修订脚本（依独立盲审 B1-B6 + N1-N8·26 处替换带命中数断言·防盲改） |
-| scripts/_w926_fix_report2.py | W926 | 报告第二轮整理（R-11/R-12 入清单·排序与小节化·剩余数字订正） |
-| scripts/_w926_verify_numbers.py | W926 | 报告数字机器对拍（20 项数字 + 4 项结构断言·报告文本 ↔ 证据 JSON 逐项比对） |
-| scripts/output/_w926_ia_audit.json | W926 | 全量扫描结构化证据 |
-| scripts/output/_w926_ia_evidence.json | W926 | 死链与缺失目标实证证据 |
-| scripts/output/_w926_visible_leak.json | W926 | 可见术语外泄明细 |
-| docs/00-导读/W批次编号对账表.md | W926 | W926 认领行与收官回填 |
-| docs/11-方案报告/README.md | W926 | §一 审查与评审分区登记（第 35 行·节头计数同步） |
-| CHANGELOG.md | W926 | W926 段 |
-| HANDOVER.md | W926 | 级联头尾链与里程碑块 |
-| README.md | W926 | 当前批次版本行 |
-| STRUCTURE.md | W926 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W926 | 当前批次版本行 |
-| site/index.html | W926 | 页脚批次链插入 W926 |
-| site/dukou-engine.html | W926 | 页脚批次链插入 W926 |
-| AGENTS.md | W926 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W926 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W926 | version 同步为 W926 |
-| scripts/output/file-index.md | W926 | W926 段插入 |
-| scripts/output/_w926_spec.json | W926 | 本批级联 spec |
-| scripts/output/_cascade_files_W926.txt | W926 | 级联落盘清单 |
 
