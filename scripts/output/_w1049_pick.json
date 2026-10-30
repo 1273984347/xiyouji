@@ -1,0 +1,77 @@
+{
+ "sel": [
+  {
+   "ch": "ch016",
+   "name": "金池长老",
+   "slug": "jinchi-zhanglao",
+   "num": 97
+  },
+  {
+   "ch": "ch039",
+   "name": "文殊菩萨",
+   "slug": "wenshu-pusa",
+   "num": 98
+  },
+  {
+   "ch": "ch046",
+   "name": "鹿力大仙",
+   "slug": "luli-daxian",
+   "num": 99
+  },
+  {
+   "ch": "ch050",
+   "name": "火德星君",
+   "slug": "huode-xingjun",
+   "num": 100
+  },
+  {
+   "ch": "ch055",
+   "name": "女儿国国王",
+   "slug": "nvguo-guowang",
+   "num": 101
+  },
+  {
+   "ch": "ch084",
+   "name": "灭法国王",
+   "slug": "miefo-guowang",
+   "num": 102
+  },
+  {
+   "ch": "ch005",
+   "name": "四大天王",
+   "slug": "sida-tianwang",
+   "num": 103
+  },
+  {
+   "ch": "ch018",
+   "name": "高太公",
+   "slug": "gao-taigong",
+   "num": 104
+  },
+  {
+   "ch": "ch032",
+   "name": "银角大王",
+   "slug": "yinjiao-dawang",
+   "num": 105
+  },
+  {
+   "ch": "ch056",
+   "name": "十代阎君",
+   "slug": "shidai-yanjun",
+   "num": 106
+  },
+  {
+   "ch": "ch067",
+   "name": "红鳞大蟒",
+   "slug": "honglin-damang",
+   "num": 107
+  },
+  {
+   "ch": "ch058",
+   "name": "谛听",
+   "slug": "diting",
+   "num": 108
+  }
+ ],
+ "target_total": 43
+}

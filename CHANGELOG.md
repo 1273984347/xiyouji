@@ -1,3 +1,21 @@
+### W1049（2026-10-31）：回次 og:image 全覆盖批·第五轮（12 张线描立像/场面）
+
+
+
+> **来源**：用户 2026-10-30「先做这两个再继续剩余 42 回扩量」＋ 2026-10-31「剩余 42 回 og 扩量开始」＋ 同日规模裁决「12 张一批·延续四轮节奏」⇒ 本批为第五轮（W1049）。
+>
+> **基线实读**（非引用旧批报告）：已落位专属 og-image **55 回** + 保留既有 card-* 专属 **2 回**（ch019/ch031）+ 通用 og 缺口 **43 回**；已出母版 **124 张 / 唯一 slug 124 个**。
+>
+> **口径订正**：用户表述「剩余 42 回」与实读 **43 回**差 1 回——根因是旧探针（`_w990_og_gap.py`）只查 `chapter-plate`/`chapter-scene` 未查 `chapter-banner`，把 ch019/ch031 两回误计为缺口；本批以实读 43 回为准（og 形态分布 55+43+2=100 与「无任何配图 43 = 通用 og-cover 43」交叉自洽）。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w10xx/_w1049_derive_prepare.py、archive/scripts/batches/w10xx/_w1049_derive_stage.py、archive/scripts/batches/w10xx/_w1049_derive_verify.py、archive/scripts/batches/w10xx/_w1049_download.py、archive/scripts/batches/w10xx/_w1049_make_spec.py、archive/scripts/batches/w10xx/_w1049_master.py、archive/scripts/batches/w10xx/_w1049_pick_verify.py、archive/scripts/batches/w10xx/_w1049_pitfalls.py、archive/scripts/batches/w10xx/_w1049_prepare.py、archive/scripts/batches/w10xx/_w1049_reissue.py、archive/scripts/batches/w10xx/_w1049_reissue_97.py、archive/scripts/batches/w10xx/_w1049_reissue_fetch.py、archive/scripts/batches/w10xx/_w1049_reissue_og.py、archive/scripts/batches/w10xx/_w1049_stage.py、archive/scripts/batches/w10xx/_w1049_verify.py、assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.png、assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.webp、assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.png、assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.webp、assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.png、assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.webp、assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.png、assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.webp、assets/promo/plate-set/plate-line-104-ch018-gao-taigong.png、assets/promo/plate-set/plate-line-104-ch018-gao-taigong.webp、assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.png、assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.webp、assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.png、assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.webp、assets/promo/plate-set/plate-line-107-ch067-honglin-damang.png、assets/promo/plate-set/plate-line-107-ch067-honglin-damang.webp、assets/promo/plate-set/plate-line-108-ch058-diting.png、assets/promo/plate-set/plate-line-108-ch058-diting.webp、assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.png、assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.webp、assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.png、assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.webp、assets/promo/plate-set/plate-line-99-ch046-luli-daxian.png、assets/promo/plate-set/plate-line-99-ch046-luli-daxian.webp、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/raw/round18/、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/计划方案/执行前计划-W1049-回次og-image全覆盖第五轮.md、docs/agent/gates.md、docs/agent/pitfalls.md、scripts/check_doc_sync.py、scripts/output/README.md、scripts/output/_cascade_files_W1050.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1049_batch.json、scripts/output/_w1049_gen_all.json、scripts/output/_w1049_gen_b1.json、scripts/output/_w1049_gen_b2.json、scripts/output/_w1049_gen_b3.json、scripts/output/_w1049_gen_b4.json、scripts/output/_w1049_gen_p1.json、scripts/output/_w1049_gen_p2.json、scripts/output/_w1049_gen_probe.json、scripts/output/_w1049_pick.json、scripts/output/_w1049_reissue.json、scripts/output/_w1049_reissue_107.json、scripts/output/_w1049_reissue_97.json、scripts/output/_w1050_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/verify_delivery.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、site/reader/ch005.html、site/reader/ch016.html、site/reader/ch018.html、site/reader/ch032.html、site/reader/ch039.html、site/reader/ch046.html、site/reader/ch050.html、site/reader/ch055.html、site/reader/ch056.html、site/reader/ch058.html、site/reader/ch067.html、site/reader/ch084.html、site/static/images/og-plate-line-100-ch050-huode-xingjun.webp、site/static/images/og-plate-line-101-ch055-nvguo-guowang.webp、site/static/images/og-plate-line-102-ch084-miefo-guowang.webp、site/static/images/og-plate-line-103-ch005-sida-tianwang.webp、site/static/images/og-plate-line-104-ch018-gao-taigong.webp、site/static/images/og-plate-line-105-ch032-yinjiao-dawang.webp、site/static/images/og-plate-line-106-ch056-shidai-yanjun.webp、site/static/images/og-plate-line-107-ch067-honglin-damang.webp、site/static/images/og-plate-line-108-ch058-diting.webp、site/static/images/og-plate-line-97-ch016-jinchi-zhanglao.webp、site/static/images/og-plate-line-98-ch039-wenshu-pusa.webp、site/static/images/og-plate-line-99-ch046-luli-daxian.webp、site/static/images/plate-line-100-ch050-huode-xingjun.webp、site/static/images/plate-line-101-ch055-nvguo-guowang.webp、site/static/images/plate-line-102-ch084-miefo-guowang.webp、site/static/images/plate-line-103-ch005-sida-tianwang.webp、site/static/images/plate-line-104-ch018-gao-taigong.webp、site/static/images/plate-line-105-ch032-yinjiao-dawang.webp、site/static/images/plate-line-106-ch056-shidai-yanjun.webp、site/static/images/plate-line-107-ch067-honglin-damang.webp、site/static/images/plate-line-108-ch058-diting.webp、site/static/images/plate-line-97-ch016-jinchi-zhanglao.webp、site/static/images/plate-line-98-ch039-wenshu-pusa.webp、site/static/images/plate-line-99-ch046-luli-daxian.webp。
+
+**本批要点**：① **缺口口径实读 + 交叉自洽**——通用 og 缺口 **43 回**（用户口径 42 回·差 1 回已定位到旧探针漏查 `chapter-banner`·两探针差集 = {019, 031}）；② **12 主体逐项实读证据**——每个主体在该回正文命中 2–16 次（金池长老 10 / 文殊菩萨 10 / 鹿力大仙 6 / 火德星君 5 / 女儿国国王 4 / 灭法国王 10 / 四大天王 7 / 高太公 9 / 银角大王 2 / 十代阎君 3 / 红鳞大蟒 3 / 谛听 16）；选材判据五项全绿 + **负样本自证 5/5 可证伪**（并修判据自身 key 形态 bug：`basename[2:5]` 与 `[:5]` 混用致目标集全体判空假红）；③ **母版段两变体**——立像段逐字复用 249 字符（6 张）、场面段仅改 3 处（6 张）；④ **3 张重出**——全目录机器判据首跑 3 张 FAIL（97 J4=0.0298 擦线 / 103 J3=0.1861 / 107 J3=0.2026）⇒ 目视取证确认 103/107 为真缺陷（铠甲鳞纹密排、山石渲染笔触）、97 为构图过疏 ⇒ 改 prompt 强化禁项后重出；**97 号二版因「稀疏/留白」措辞与母版段「占幅五成」打架反使 J4 更低（0.0258）⇒ 三版删掉留白措辞改为显式要求放大占幅 ⇒ J4=0.0375**；⑤ **og 幂等派生陷阱**——重出母版后重跑落位输出 12 张 og 全部「SKIP 已在位」⇒ 社交卡仍是旧图 ⇒ 新增 `_w1049_reissue_og.py` 按白名单清退后重新派生；⑥ **出图接口单批上限 10 张**（12 条直接被拒）⇒ 改 3–5 张/批（4/4 批全成）；⑦ **坑表 +3 条**（E-54 出图接口批次上限 / E-55 母版段约束不住密排纹理与渲染笔触 / E-56 og 派生幂等 SKIP 与「下载器复活旧件」同族）。
+
+**验证**：全目录机器判据 **136 张 · FAIL 0**（含 3 张重出后复验）· 落位验收 **0 FAIL**（12 回题图 + og:image + alt + 暗色规则 + 未覆盖页零回归）· 配图覆盖 **55 → 67 回** · 通用 og 缺口 **43 → 31 回** · 12 个 og 版 1200×630 且 39.6–141.9KB（实测 40566–145292 B·全部 ≤300KB）· 坑表 **140 → 143 条**（计数链四处一致）· 全量门禁见收官提交。
+
+> - **状态**：已收官（12 张落地·12 回新增题图·母版族 124 → 136 张·既有 124 张母版与站点版零改动·3 张重出后机器判据全绿·待用户目视）
+
 ### W1048（2026-10-31）：P2 治理与孤儿批收编（gates.md 计数订正·CLAUDE 速查补行·W1044 判据件与 minimax 清除·W1046 方案件入库）
 
 > **来源**：2026-10-31 只读基线诊断产出的 P2 治理微批（用户裁决「一笔收编」）——诊断实证 HEAD 三处文档漂移（AGENTS 铁律双写 / gates.md 计数旧值 / CLAUDE 速查漏登）与死会话（ROGSTRIX·已被用户关闭）孤儿暂存，本批一次收编收官。
@@ -836,7 +854,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1048），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1049），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1841,38 +1859,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：① 浏览器 `file://` 直开点「生成渡口档案」，`#out` 实测输出为「紧箍咒：正则项在收敛后归零。」，无批次号与源码行号；② 全量结构重扫 `A_paths.broken_links` 的 4 条残项全部为「目标目录含 index.html」的旧口径假死链（`site/en/index.html`、`site/reader/poetry/index.html` 均实证存在）⇒ **全仓真死链 1 → 0**；③ 可见文本重扫：LINE 四条溯源清零（全站计数 +9 来自并行批同期往页脚批次链注入的并发噪声·未单独归因）。
 > - **纪律**：本批仅改 **2 个 site/ 页面共 7 行**；0 处管控脚本与判据脚本改动；未顺手动 R-02 页脚与 R-03/R-04 分类 hub（属后续批）。
 > **状态**：**已收官**（W935 b130f7a1·git 反填·共 2 笔·W971 存量回填）
-
-
-### W934（2026-10-25）：D-2 应用迁移批第一子批（M12 存储层抽象 + PG 适配器 + 三表迁移器·真实数据迁移三重对账全一致）
-
-> **来源**：用户 2026-10-25 架构设计令（「整体分层、模块拆分与依赖、数据流与存储选型、扩展性与容灾、部署与监控都写到位，附几张架构图说明图」）经 O-1~O-4 裁决「接受·按 v2 档 2 施工」后，按方案 §8.2 施工序推进 **D-2 应用迁移批的第一子批（W934）**——把「M12 PG 存储层」这行模块说明变成**可运行、可切换、可回归**的代码层。
-
-> - **文件**：xiyouji-agent-web/server/storage/types.ts、xiyouji-agent-web/server/storage/sqlite.ts、xiyouji-agent-web/server/storage/postgres.ts、xiyouji-agent-web/server/storage/index.ts、xiyouji-agent-web/server/storage/storage.test.ts、xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/server/chat.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/shutdown.ts、xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、xiyouji-agent-web/deploy/pg/migrations/0002_app_tables.sql、xiyouji-agent-web/deploy/pg/bin/migrate-sqlite-to-pg.ts、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/README.md、docs/11-方案报告/计划方案/执行前计划-T23-D2应用迁移批.md、docs/11-方案报告/计划方案/T23-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/README.md、dscripts/output/_w934_d2a_migrate.json、scripts/output/_w934_d2a_residue_before.txt、scripts/output/_w934_d2a_grants.txt、scripts/output/_w934_spec.json、scripts/output/_cascade_files_W934.txt、CHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md。
-
-**M12 存储层抽象落地**：新增 `server/storage/` 四件——`types.ts`（`StorageBackend` 接口 + DTO + 语义约定）、`sqlite.ts`（现役实现**逐字搬迁** + `kind` + `healthCheck`）、`postgres.ts`（连接池 + 事务 + 参数化查询 + 健康探针 + schema 隔离）、`index.ts`（后端工厂 + 契约转发）。`server/db.ts` 由「SQLite 实现」降为**门面**（16 个现役导出名齐备）⇒ **三个调用点仅加 `await` 与 `async`·业务逻辑零改动**；默认后端**仍是 SQLite**（`AGENT_WEB_DB_BACKEND` 未设即 sqlite·取值非法则**启动失败**不静默回落）⇒ 现役行为与全部既有测试零影响。
-
-**接口为何是异步的**（规划期假设被实跑证伪）：PG 走网络协议，而 Node 生态**没有同步 PG 驱动**（`pg` 的 socket 只有异步接口）⇒ 同步接口下 PG 后端只能是内存镜像或自研阻塞协议栈（皆不可接受）⇒ 接口定为异步，SQLite 后端实现体仍是同步调用。这是「**抽象层形状由最贵的那个后端决定**」的实证。
-
-**真实数据迁移端到端（真·PG 16.4 实例）**：现役 `data/chat.db`（**70 会话 / 134 消息 / 4 反馈**）真实迁入 PG 16.4——迁移序列 v1 `0001_baseline` + v2 `0002_app_tables` 逐条记账（`checksum` 为**真实 sha256**）；**三重对账全一致**：逐表**行数相等** + **主键集合逐位相等** + **逐行内容摘要一致**，时间列 **278/278 逐字节相等**（sessions 140 + messages 134 + feedback 4）。迁移器**只读**打开源库（chat.db 是全仓唯一不可重建的数据）且**不借道应用写接口**（`createMessage` 会把会话 `updated_at` 刷成「现在」⇒ 破坏逐字节保真）。
-
-**双后端契约测试**：**同一套**断言跑 SQLite 与 PostgreSQL 两个后端，均全过（2/2）——抽象层「换后端不动业务」的证据不是「两边各测一遍」，而是「一套用例两个实现」。
-
-**实跑抓出 3 个真缺陷（静态层查不出 · 已全部固化为守卫）**：
-1. `ALTER DEFAULT PRIVILEGES` **缺 `FOR ROLE`** ⇒ 默认权限挂在执行者名下 ⇒ 由**应用账号**创建的表拿不到只读授权 ⇒ **静默失效**（不报错）。
-2. 引导脚本**先建表后授权** ⇒ 记账表落在授权之前 ⇒ 应用账号读它 `permission denied`。
-3. 记账表**所有权**不属于应用账号 ⇒ 迁移序列以应用账号执行时 `COMMENT ON TABLE` 报 **`must be owner of table schema_migrations`** ⇒ **迁移序列根本跑不起来**——这是**所有权**问题，没有任何「看起来不对」的形态 ⇒ 只有真跑能暴露。
-
-> 这 3 项与 W928 抓出的 4 项是**同一族**：**静态背书 ≠ 运行时可用**。W928 抓到的是「形态错」，W934 抓到的是「**权限与所有权错**」——后者每一行单独看都合法 ⇒ 更难被静态断言覆盖 ⇒ 所有权、运行时语义、跨版本行为一律留真跑项。
-> **状态**：**已收官**（W934 4b25833b·git 反填·共 1 笔·W971 存量回填）
-
-**守卫升级**：静态校验器 **71 → 95 项**（新增 C5 组：三表 schema 不变量 / 迁移器只读与参数化与三重对账 / 授权模型的 FOR ROLE·顺序·owner 三项）+ 反向验证 **14 → 23 组**（新增 M14~M22，逐条证明新判据可证伪）。
-
-**另自证出 3 处工具自身缺陷**（先红后绿）：① ESM 把**接口当值导出**（`export { DbFeedback }`）⇒ 运行时炸而 `tsc` 不报（未开 `isolatedModules`）⇒ 改 `export type`；② 计数型断言把**注释行**算进去 ⇒ 基线假红 ⇒ **掩盖了 M17/M20 的真实结论** ⇒ 计数只取非注释行 + 新增 `strip_ts_comments()`；③ 断言命中文档注释里的**示例代码** ⇒ 真代码改坏仍报绿（变异 rc=0）⇒ 断言改锚真实调用构造。
-
-**D-2 整体尚未完成（不得对外宣称「已切 PG」）**：双写对账期 → 切读 → 停写旧库属 **W935**；检索层接入（O-4）+ 客户端侧服务地址注入（契约 C-8）属 **W936**；容量实测属 **W937**；合规面属 **D-3**。
-
-**机器证据**：`scripts/output/_w934_d2a_migrate.json`（迁移对账）· `_w934_d2a_residue_before.txt`（清理前演练残留快照）· `_w934_d2a_grants.txt`（授权模型实查）。
-
-**未改**：site/ 任何页面的**内容**（仅级联页脚批次链为全批标准机制）· 任何管控脚本（verify_delivery.py / bump_version.py / batch_cascade.py / preflight_check.py 等）。
 
 

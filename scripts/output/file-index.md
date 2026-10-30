@@ -10,6 +10,151 @@
 
 ---
 
+## W1049 回次 og:image 全覆盖批·第五轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1049 | 本批新增/修改 |
+| AGENTS.md | W1049 | 本批新增/修改 |
+| CHANGELOG.md | W1049 | 本批新增/修改 |
+| HANDOVER.md | W1049 | 本批新增/修改 |
+| STRUCTURE.md | W1049 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1049 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1049_cascade_manifest.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_prepare.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_stage.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_download.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_fix_p2.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_gate_isolation.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_handover.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_isolate_w1050.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_make_spec.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_master.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_fileindex.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_w1050.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_w1050_faces.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_pick_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_pitfalls.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_prepare.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_readme_register.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_refresh_folders.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_97.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_fetch.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_og.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage_faces.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage_ledger.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_sync_staged.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-104-ch018-gao-taigong.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-104-ch018-gao-taigong.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-107-ch067-honglin-damang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-107-ch067-honglin-damang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-108-ch058-diting.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-108-ch058-diting.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-99-ch046-luli-daxian.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-99-ch046-luli-daxian.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1049 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1049 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/raw/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round18/README.md | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/index.md | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-100-ch050-huode-xingjun.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-101-ch055-nvguo-guowang.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-102-ch084-miefo-guowang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-103-ch005-sida-tianwang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-104-ch018-gao-taigong.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-105-ch032-yinjiao-dawang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-106-ch056-shidai-yanjun.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-107-ch067-honglin-damang.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-108-ch058-diting.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-97-ch016-jinchi-zhanglao.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-98-ch039-wenshu-pusa.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-99-ch046-luli-daxian.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1049 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1049 | 方案报告（索引/架构方案） |
+| docs/11-方案报告/计划方案/执行前计划-W1049-回次og-image全覆盖第五轮.md | W1049 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1049 | 方案报告（索引/架构方案） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1049 | 方案报告（索引/架构方案） |
+| docs/agent/pitfalls.md | W1049 | 坑表（+3 条·出图接口/密排纹理/og 幂等派生） |
+| scripts/output/_cascade_files_W1049.txt | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1049_batch.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_all.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b1.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b2.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b3.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b4.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_p1.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_p2.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_probe.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_pick.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue_107.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue_97.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_spec.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/file-index.md | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1049 | 登记面产物（索引/统计/工具清单） |
+| site/reader/ch005.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch016.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch018.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch032.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch039.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch046.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch050.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch055.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch056.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch058.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch067.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch084.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/static/images/README.md | W1049 | 本批新增/修改 |
+| site/static/images/index.md | W1049 | 本批新增/修改 |
+| site/static/images/og-plate-line-100-ch050-huode-xingjun.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-101-ch055-nvguo-guowang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-102-ch084-miefo-guowang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-103-ch005-sida-tianwang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-104-ch018-gao-taigong.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-106-ch056-shidai-yanjun.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-107-ch067-honglin-damang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-108-ch058-diting.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-98-ch039-wenshu-pusa.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-99-ch046-luli-daxian.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/plate-line-100-ch050-huode-xingjun.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-101-ch055-nvguo-guowang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-102-ch084-miefo-guowang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-103-ch005-sida-tianwang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-104-ch018-gao-taigong.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-106-ch056-shidai-yanjun.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-107-ch067-honglin-damang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-108-ch058-diting.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-98-ch039-wenshu-pusa.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-99-ch046-luli-daxian.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
 
 ## W1048 P2 治理与孤儿批收编（2026-10-31）
 
@@ -2555,7 +2700,6 @@
 | AGENTS.md | W999 | §6 铁律 14 修实例必修根（权威落点） |
 | CLAUDE.md | W999 | 速查第 12 行（指向 §6-14 与 pitfalls 流程组） |
 
-
 ## W998 对抗式审查修复批（2026-10-28）
 
 | 文件 | W | 说明 |
@@ -2667,14 +2811,12 @@
 | docs/agent/pitfalls.md | W993 | 行尾定形时代结束条目（CRLF 锚定作废） |
 | AGENTS.md | W993 | 坑位计数 88→89 两处同步 |
 
-
 ## W992 一次性件定向退役与提示位口径校准批（2026-10-27）
 
 | 文件 | W | 说明 |
 |---|---|---|
 | archive/scripts/batches/w9xx/ | W992 | 迁入 4 件（_w988 族·零引用） |
 | scripts/batch_cascade.py | W992 | [SCRIPTS] 提示位口径校准 |
-
 
 ## W991 级联运行锁与提交隔离批（2026-10-27）
 
@@ -3496,7 +3638,6 @@ docs/11-方案报告/README.md
 | tests/unit/test_doc_size_budget.py | W960 | 体积门禁单测 4 例（含现网防回退锚） |
 | tests/unit/test_archive_segments.py | W960 | 搬段工具单测 4 例（三种段形态解析与负样本） |
 | pytest.ini · 系统架构方案v2 | W960 | pytest_collected 标记归一 910（并行竞态三数字拼接修复） |
-
 
 ## W959 T10 V1.1 计数口径订正批（2026-10-26）
 
@@ -4826,51 +4967,4 @@ docs/11-方案报告/README.md
 | archive/docs/AGENTS-ARCHIVE.md | W935 | 脚注滚动迁入的最老条目 |
 | CITATION.cff | W935 | version 同步为 W935 |
 | scripts/output/file-index.md | W935 | W935 段插入 |
-
-## W934 D-2 应用迁移批第一子批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/storage/types.ts | W934 | 新增：M12 存储层接口 `StorageBackend` + DTO + 语义约定（两后端必须一致的 7 条） |
-| xiyouji-agent-web/server/storage/sqlite.ts | W934 | 新增：现役 SQLite 实现逐字搬迁 + `kind` + `healthCheck`（DDL / 3 版迁移 / 12 函数零语义改写） |
-| xiyouji-agent-web/server/storage/postgres.ts | W934 | 新增：PG 后端（连接池 + 事务 + 参数化查询 + 健康探针 + schema 隔离 + 时间列边界转换） |
-| xiyouji-agent-web/server/storage/index.ts | W934 | 新增：后端工厂（缺省 sqlite·非法值 fail-closed）+ StorageBackend 契约逐项转发 |
-| xiyouji-agent-web/server/storage/storage.test.ts | W934 | 新增：双后端契约测试（同一套断言跑 SQLite 与 PostgreSQL·PG 侧隔离在专用 schema） |
-| xiyouji-agent-web/server/db.ts | W934 | 由「SQLite 实现本体」降为**门面**（16 个现役导出名齐备·实现搬进 server/storage/） |
-| xiyouji-agent-web/server/routes.ts | W934 | 存储调用改 await（接口异步化·业务逻辑零改动）+ 就绪探针改走 healthCheck |
-| xiyouji-agent-web/server/chat.ts | W934 | 存储调用改 await + rebuildHistory 改异步 |
-| xiyouji-agent-web/server/index.ts | W934 | 启动日志按实际后端取值（不再写死 SQLite）+ PG 后端跳过文件级快照（走 pg_basebackup） |
-| xiyouji-agent-web/server/shutdown.ts | W934 | closeDatabase 契约放宽为 `void | Promise<void>` 并 await（PG 池关闭是 Promise） |
-| xiyouji-agent-web/package.json | W934 | 新增依赖 `pg@8.23.1` + `@types/pg`；test:server 纳入契约测试 |
-| xiyouji-agent-web/package-lock.json | W934 | 随 pg / @types/pg 锁定 |
-| xiyouji-agent-web/deploy/pg/migrations/0002_app_tables.sql | W934 | 新增：业务三表 schema（sessions / messages / feedback + 索引 + role CHECK + message_id 唯一维度 + 外键级联·时间列 TIMESTAMPTZ） |
-| xiyouji-agent-web/deploy/pg/bin/migrate-sqlite-to-pg.ts | W934 | 新增：SQLite→PG 迁移器（源库只读 + 参数化 + 迁移序列记账 + 行数/主键集合/逐行内容三重对账） |
-| xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh | W934 | 授权模型修三处：ALTER DEFAULT PRIVILEGES 补 FOR ROLE + 权限先于建表 + 记账表 owner 转给应用账号 |
-| xiyouji-agent-web/deploy/pg/bin/verify-baseline.py | W934 | 71 → 95 项（新增 C5 组）+ 新增 strip_ts_comments（断言不再命中文档注释里的示例代码） |
-| xiyouji-agent-web/deploy/pg/bin/_mutation_test.py | W934 | 14 → 23 组变异（M14~M22·逐条证明 C5 组新判据可证伪） |
-| xiyouji-agent-web/deploy/pg/README.md | W934 | §4.3 待实跑清单 3→2 项（迁移器端到端已收官）+ 新增 §4.5 W934 实跑结果与三处授权缺陷 |
-| docs/11-方案报告/计划方案/执行前计划-T23-D2应用迁移批.md | W934 | 新增：执行前计划（16 AC + 20 ASM + 22 ST + 13 V + 11 风险 + 11 决策 + 12 项自包含检查） |
-| docs/11-方案报告/计划方案/T23-任务计划执行与经验沉淀报告-2026-10-25.md | W934 | 新增：交付报告（执行记录 + 16 条 AC 验收 + 8 条经验沉淀 + 9 条偏差 + 7 项未验证项声明） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W934 | 新增 §13.6 W934 实跑结果（7 项实跑 + 3 个静默型真缺陷 + D-2 未完成声明） |
-| docs/11-方案报告/README.md | W934 | 登记表新增 T-23 两行（执行前计划 + 交付报告） |
-| docs/00-导读/W批次编号对账表.md | W934 | W934 认领行与收官回填 |
-| scripts/output/_w934_d2a_migrate.json | W934 | 迁移实跑机器证据（三重对账结果） |
-| scripts/output/_w934_d2a_residue_before.txt | W934 | 清理前演练残留快照（证明清理对象是 W928 演练产物而非应用数据） |
-| scripts/output/_w934_d2a_grants.txt | W934 | 授权模型实查（owner / acl / 只读账号写入被拒） |
-| scripts/output/_w934_spec.json | W934 | 本批级联 spec |
-| scripts/output/_cascade_files_W934.txt | W934 | 级联落盘清单 |
-| CHANGELOG.md | W934 | W934 段 |
-| HANDOVER.md | W934 | 级联头尾链与里程碑块 |
-| README.md | W934 | 当前批次版本行 |
-| STRUCTURE.md | W934 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W934 | 当前批次版本行 |
-| .github/workflows/README.md | W934 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W934 | 页脚批次链插入 W934 |
-| site/data/cross-time-danmaku.html | W934 | 页脚批次链插入 W934 |
-| site/data/tag-cloud.html | W934 | 页脚批次链插入 W934 |
-| site/dukou-engine.html | W934 | 页脚批次链插入 W934 |
-| AGENTS.md | W934 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W934 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W934 | version 同步为 W934 |
-| scripts/output/file-index.md | W934 | W934 段插入 |
 
