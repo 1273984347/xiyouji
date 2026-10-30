@@ -46,6 +46,7 @@
 | scripts/ledger_backfill.py | W1042 | 台账回填工具（显式参数生效根因修复） |
 | scripts/output/README.md | W1042 | 登记面产物（索引/统计/工具清单） |
 | scripts/output/_cascade_files_W1042.txt | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1042 | 登记面产物（索引/统计/工具清单） |
 | scripts/output/_w1042_spec.json | W1042 | 本批 spec 与级联清单 |
 | scripts/output/file-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
 | scripts/output/index.md | W1042 | 登记面产物（索引/统计/工具清单） |
