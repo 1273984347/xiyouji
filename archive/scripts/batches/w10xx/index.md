@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（79）
+## 文件（81）
 
 ### Python 脚本
 
@@ -87,7 +87,9 @@
 - `_w1043_sheet.py`
 - `_w1043_stage.py`
 - `_w1043_verify.py`
+- `_w1044_make_spec.py`
 - `_w1045_make_spec.py`
+- `_w1047_make_spec.py`
 
 ### 数据与配置
 

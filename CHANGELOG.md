@@ -1,3 +1,17 @@
+### W1047（2026-10-31）：图表判据剥标签根修（标签语法约束 + 剥离顺序修正）
+
+
+
+> **来源**：用户 2026-10-30 收尾时选定的取舍项——存量 `check_chart_data.py` 的剥标签正则（实测 2 处真吞 JS 正文；补 `\n\r` 会让多行合法标签剥不干净）⇒ 本批以**根因修法**落地。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1047_make_spec.py、archive/scripts/batches/w10xx/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/计划方案/执行前计划-W1047-图表判据剥标签根修.md、docs/INDEX.md、docs/agent/pitfalls.md、index.md、scripts/batch_cascade.py、scripts/check_chart_data.py、scripts/output/README.md、scripts/output/_cascade_files_W1047.txt、scripts/output/_w1047_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html。
+
+**本批要点**：① **两路逐处复核 167 处候选**——scripts 域 38 处（真缺陷 **0** · 假阳 18 · 只读 20）· archive 域 129 处（真缺陷 **13** · 假阳 106 · 只读 10）；② **真缺陷 13 处**同族同形态（close_cascade 家族「项目说明列表行」正则末尾 `[^·]*` 无尾锚点 ⇒ 替换时静默吞掉「当前版本」行之下的「当前阶段」「关键产出」两行·构造实验行数 5 → 2）⇒ **两处**排除符都补 `\n\r`（只补末尾一处时扫描器仍判可跨行）· 行为中性；③ **判据升级**——基线键由内容指纹升为**四输入**（文件|完整模式|完整替换串|行号）⇒ 堵死三类残余豁免（同文件新增同模式调用点 / 替换串语义变更 / 超长模式显示截断撞键）；跨行判定补 `\s` 盲区（`\s` 亦排除换行）· 自测 11 → 12 例；④ **存量陈旧清理**——槽数三处统一 **52**（gates.md 标题 / HANDOVER 指针 / scripts/README）· 基线失效项清理（50 → 44）· `docs/11-方案报告/README.md` 4 条登记行由末尾游离表迁回各分区表尾 + §五 15 → 16 / §六 51 → 54（按磁盘实算）；⑤ **og 切头 A+ 修复**——按用户裁决「缺陷修复与版式统一分开记账」：回退 **99** 张无缺陷存量的版式改写、保留 **13** 张（本批 12 张中 5 张真被切 + 存量同类 2 张）⇒ 保留张顶边留白 27–31px、**0 张被切**·落位验收仍 0 FAIL；⑥ **坑表 +5 条**（133 → 138）· 治理声明对账 0 FAIL。
+
+**验证**：逐处结论 167/167 · 真缺陷修复 13/13 · 扫描器自测 12/12 · 扫描器单测 9 passed · 跨行门禁 0 FAIL（基线外新增 0 处）· 治理声明对账 0 FAIL（坑表 138）· og 保留张顶边 27–31px（0 张被切）· 母版判据 124/0 · 裁切验算 124/0 · 落位验收 0 FAIL · 全量门禁见收官提交。
+
+> - **状态**：已收官（复核 167 处 + 真缺陷 13 处已修 + 判据升四输入 + 存量陈旧清理 + og A+ 修复 + 坑表 +5 条·待用户裁决 check_chart_data 剥标签取舍）
+
 ### W1045（2026-10-31）：改写面候选逐处复核 + 存量陈旧清理 + og 切头 A+ 修复
 
 
@@ -811,7 +825,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1045），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1047），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
