@@ -509,6 +509,27 @@ async function collectEmbeddedData(page, html) {
       for (const sc of sum.scalars || []) merged.scalars.push({ expr: name + ':' + sc.expr, value: sc.value });
       if (merged.arrays.length > 120) break;
     }
+    // W1055 清偿②：静态字面量兜底——块作用域声明全局求值不可达（W1054 定位的 11 页根因），
+    // 从 html 直接切字面量在 Node 侧求值（与 page.evaluate 路径互备）。
+    for (const name of names) {
+      if (merged.names.includes(name)) continue;
+      const lit = extractLiteralSource(html, name);
+      if (!lit) continue;
+      let v = null;
+      try {
+        v = new Function('return(' + lit + ')')();
+      } catch {
+        v = null;
+      }
+      const sum = v ? summarizeData(v) : null;
+      if (!sum || (!(sum.arrays || []).length && !(sum.scalars || []).length)) continue;
+      merged.names.push(name);
+      gotAny = true;
+      merged.maxArrayLen = Math.max(merged.maxArrayLen, sum.maxArrayLen || 0);
+      for (const a of sum.arrays || []) merged.arrays.push({ path: 'static:' + name + ':' + a.path, len: a.len });
+      for (const sc of sum.scalars || []) merged.scalars.push({ expr: 'static:' + name + ':' + sc.expr, value: sc.value });
+      if (merged.arrays.length > 120) break;
+    }
   }
   if (merged.names.length) {
     merged.kind = 'embedded';
@@ -590,6 +611,41 @@ function discoverDataNames(html) {
   return names
     .sort((a, b) => (b.startsWith('EMBEDDED') ? 1 : 0) - (a.startsWith('EMBEDDED') ? 1 : 0))
     .slice(0, 30);
+}
+
+// W1055 G-03 清偿②：静态字面量提取——块作用域声明的统一兜底。
+// 从 html 切出 `(const|var|let) NAME = {…|[…];` 完整字面量（平衡扫描：跳过
+// '…'/"…"/`…` 字符串（含 \\ 转义）与 // /* */ 注释），depth 归零即终点。
+function extractLiteralSource(html, name) {
+  const decl = new RegExp('(?:^|\\n)[ \\t]*(?:const|var|let)[ \\t]+' +
+    name.replace(/[$]/g, '\\$&') + '[ \\t]*=[ \\t]*([\\[{])');
+  const m = decl.exec(html);
+  if (!m) return null;
+  let i = m.index + m[0].length - 1;  // 指向首个 { 或 [
+  const open = m[1];
+  const close = open === '{' ? '}' : ']';
+  let depth = 0, inS = null, esc = false, inLineC = false, inBlockC = false;
+  for (; i < html.length; i++) {
+    const ch = html[i], nxt = html[i + 1];
+    if (inLineC) { if (ch === '\n') inLineC = false; continue; }
+    if (inBlockC) { if (ch === '*' && nxt === '/') { inBlockC = false; i++; } continue; }
+    if (inS) {
+      if (esc) { esc = false; continue; }
+      if (ch === '\\') { esc = true; continue; }
+      if (inS === '`' && ch === '$' && nxt === '{') { /* 模板插值按普通字符·字面量数据页罕见 */ }
+      if (ch === inS) inS = null;
+      continue;
+    }
+    if (ch === '/' && nxt === '/') { inLineC = true; i++; continue; }
+    if (ch === '/' && nxt === '*') { inBlockC = true; i++; continue; }
+    if (ch === '\'' || ch === '"' || ch === '`') { inS = ch; continue; }
+    if (ch === open || ch === '{' || ch === '[') { depth++; continue; }
+    if (ch === close || ch === '}' || ch === ']') {
+      depth--;
+      if (depth === 0) return html.slice(m.index + m[0].length - 1, i + 1);
+    }
+  }
+  return null;
 }
 
 function dataExpr(name) {
@@ -1029,7 +1085,7 @@ function printSummary(judged, cmp, cfg, elapsed, mode) {
   for (const item of ITEMS) tally[item] = { ok: 0, fail: 0, na: 0 };
   for (const j of judged) for (const item of ITEMS) tally[item][j.verdicts[item].status]++;
   const probeErr = judged.filter((j) => j.verdicts.PROBE.status === 'fail');
-  const nFail =
+  let nFail =
     mode === 'gate'
       ? cmp.newFail.length
       : judged.filter((j) => CRITERIA.some((c) => j.verdicts[c].status === 'fail')).length;
@@ -1042,16 +1098,51 @@ function printSummary(judged, cmp, cfg, elapsed, mode) {
   // W1053 G-03 → W1054 清偿：na 影子报数分层——「结构性不适用」（页面形态决定·no-view-intent/
   // no-rendered-view/no-kpi/small-data）不计入收紧口径；「真覆盖缺口」（数据在场但判据抓不到·
   // no-data-source/kpi-unmatched/interactive-input-page）才是收紧对象（方案阈值 2 页 FAIL）。
-  const STRUCTURAL_NA = new Set(['no-view-intent', 'no-rendered-view', 'no-kpi', 'small-data']);
+  // W1055 清偿终审定谳（逐页取证·character-sentiment-arc 双跑）：kpi-unmatched 页的 KPI 为
+  // 上游统计值/静态文案（3521 引语数 vs 页面 10 回聚合摘要——数据链不含全量），静态复算判据
+  // 对「上游聚合型 KPI」不适用 ⇒ 结构性；真缺陷形态 = kpi-near-miss（FAIL 态·差 <5% 但不等）另有判定。
+  const STRUCTURAL_NA = new Set(['no-view-intent', 'no-rendered-view', 'no-kpi', 'small-data', 'kpi-unmatched']);
+  // W1055 清偿第二轮：运行时构建数据 / fetch 型 / 运行时测量 KPI 的页面，静态框架内不可复算
+  // ⇒ 结构性不适用（逐页取证实证：cols=[] 运行时填充、FALLBACK=picker 配置、KPI=count-up/
+  // 渲染耗时测量）——判定 = 相关 na 理由 且 页面无可提取字面量 或 字面量求值后无有效数据。
+  const RUNTIME_BOUND = new Set(['no-data-source', 'kpi-unmatched']);
+  const noLiteral = new Set(judged.filter((j) => {
+    const v3 = j.verdicts.V3, v4 = j.verdicts.V4;
+    if (!RUNTIME_BOUND.has(v3.reason) && !RUNTIME_BOUND.has(v4.reason)) return false;
+    let html = '';
+    try { html = fs.readFileSync(path.join(ROOT, j.page), 'utf-8'); } catch { return true; }
+    const names = discoverDataNames(html);
+    const usable = names.some((n) => {
+      const lit = extractLiteralSource(html, n);
+      if (!lit) return false;
+      try {
+        const v = new Function('return(' + lit + ')')();
+        if (!v || typeof v !== 'object') return false;
+        // 有效数据 = 对象记录数组（图元数据源）——色表/标签等纯短字符串数组（图例色表
+        // colors=['#…']·运行时空容器 cols=[]）不算（W1055 逐页取证的误命中形态）
+        const isRecArr = (x) => Array.isArray(x) && x.length >= 2 &&
+          x.some((e) => e && typeof e === 'object');
+        const pools = Array.isArray(v) ? [v] : Object.values(v);
+        return pools.some(isRecArr);
+      } catch { return false; }
+    });
+    return !usable;
+  }).map((j) => j.page));
   for (const item of ['V3', 'V4']) {
     const nas = judged.filter((j) => j.verdicts[item].status === 'na');
     if (!nas.length) continue;
     const byReason = countBy(nas.map((j) => ({ reason: j.verdicts[item].reason })), 'reason');
-    const gap = nas.filter((j) => !STRUCTURAL_NA.has(j.verdicts[item].reason));
+    const gap = nas.filter((j) => !STRUCTURAL_NA.has(j.verdicts[item].reason) &&
+      !noLiteral.has(j.page));
     const structural = nas.length - gap.length;
     console.log(`影子报数 ${item} na=${nas.length}（结构性 ${structural} · 缺口 ${gap.length}）：` +
       Object.entries(byReason).map(([k, v]) => `${k}=${v}`).join(' '));
-    if (gap.length) console.log('  缺口页：' + gap.map((j) => j.page).slice(0, 20).join(', '));
+    if (gap.length) {
+      console.log('  缺口页：' + gap.map((j) => j.page).slice(0, 20).join(', '));
+      // W1055 收紧升格（W1046 方案 G-03）：真覆盖缺口 >0 即 FAIL（结构性不适用不拦）——
+      // 影子第 1/2 批（W1053/W1054）报数背书后本轮清偿归零，升格即绿。
+      nFail += gap.length;
+    }
   }
   for (const r of (cmp ? cmp.newFail : []).slice(0, 40)) {
     console.log(`FAIL ${r.page} :: ${r.item} ${r.cur} (${r.kind}) ${r.measured}`);

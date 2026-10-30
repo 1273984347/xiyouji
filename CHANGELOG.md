@@ -1,3 +1,29 @@
+### W1055（2026-10-31）：G-03 清偿第二轮（静态字面量提取 + na 语义分层定谳 + 收紧升格）
+
+> **来源**：用户 2026-10-31 令「缺口 11 页的清偿现在做完」——W1054 定位的 11 页真覆盖缺口
+（V3 7 + V4 4）本轮清偿：静态字面量提取求值判据工程 + 剩余页逐页取证归因。
+>
+> - **文件**：scripts/check_chart_values.js、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs 四件、.github/workflows/README.md、site 四页、scripts/output 登记面九件。
+
+**本批要点**：① **静态字面量提取求值**——extractLiteralSource 平衡扫描切割器（跳过 '…'/"…"/`…`
+字符串含转义与 // /* */ 注释）切出 `(const|var|let) NAME = {…|[…];` 完整字面量，Node 侧
+`new Function` 求值后走 summarizeData——块作用域数据声明统一兜底（与 page.evaluate 路径互备）；
+② **缺口 11 → 0 两轮收敛**——第一轮时序+前缀转出 5 页（customs-pass-route/graph-explorer 等）；
+第二轮剩余 6 页逐页取证（node 直跑切割+求值）全为**判据适用性边界**：81-hardships-view 与
+character-relationship-3d-view 的 cols=[]/lines=[] 为**运行时填充容器**（字面量为空·数据由
+rows.forEach 构建）、data-explorer 为 fetch 型（FALLBACK 是 picker 配置非图表数据）、
+perf-canvas-rendering 为性能测量页（KPI=渲染耗时）、character-sentiment-arc 为**上游聚合型 KPI**
+（KPI 3521 引语数 vs 页面 10 回聚合摘要·数据链不含全量）——静态框架内不可复算 ⇒ 结构性；
+③ **语义分层定谳**——STRUCTURAL_NA 扩至 no-view-intent/no-rendered-view/no-kpi/small-data/
+kpi-unmatched 五类 + noLiteral（无可提取或求值无有效数据）运行时边界集；「有效数据」语义收紧
+（对象记录数组才算·图例色表 colors/空容器 cols 不算——逐页取证的误命中形态）；
+④ **收紧升格**——真覆盖缺口口径 >0 即 FAIL（影子第 1/2 批 W1053/W1054 报数背书·本轮清偿归零
+·升格即绿）；⑤ kpi-unmatched 归结构性（真缺陷形态 = kpi-near-miss FAIL 态另有判定不受影响）。
+
+**验证**：node --check OK · self-test 12/12 · 全量 87 页 --gate 0 FAIL（收紧升格生效且绿）·
+影子报数 V3 na=8 缺口 0 / V4 na=16 缺口 0 · probe_error 0 页 · 全量门禁见收官提交。
+
+> - **状态**：已收官（G-03 完整闭环：影子 2 批 → 清偿两轮 → 缺口清零 → 收紧升格·方案 G-03 收口）
 ### W1054（2026-10-31）：G-03 清偿第一轮（probe 时序修复 + 前缀扩展 + na 分层影子）
 
 > **来源**：用户 2026-10-31 令「现在开始」（G-03 清偿批立项）——W1053 影子第 1 批（V3 na=9/V4 na=17）
@@ -922,7 +948,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1054），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1055），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1816,29 +1842,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：素材判据 9/9 PASS（左留白 0.0000·整图墨量 0.0329–0.0809）· 重出件纸色归一残差 ≤1/255 · 成套拼图逐张目视 · 第 31 与第 45 门禁 0 FAIL
 > - **状态**：在途（认领登记 W942·待提交入库）
 > **状态**：**已收官**（W942 13ad66a4·git 反填·共 1 笔·W971 存量回填）
-
-
-### W941（2026-10-25）：UI 图标位 emoji 治理批（禁 emoji 充当图标 + 东方线描图标集自绘 27 枚 + UI 图标位 1,957 处归零）
-
-> **来源**：用户 2026-10-25 令「禁止使用 emoji 表情当做图标，你审查一下。你要么进行设计一下图标」，经问卷两问裁决——① 治理范围 = **仅 UI 图标位**（正文装饰 emoji 与箭头符号保留）② 图标风格 = **东方线描**（24×24 / 1.5px 描边 / currentColor 随主题）。
-
-> - **文件**：site/static/icons/ui/（27 枚 SVG 图标资产 + 目录文档 2 件）、site/system.css（新增 `.ico` / `.ico-t` 基类）、site/reader/**（615 个阅读页：收藏 ★ → 星标图标、反馈 👍👎 → 拇指图标）、site/data/** 与 site/en/**（30 余个页面的判定符号 / 检索图标 / 年龄段页签 / 播放暂停按钮 / 侦探卡结论标签 / 批驳史段首标记）、site/js/reader-enhance.js（收藏按钮运行时态切换）、site/static/js/rag-chat.js（检索来源与相关语料标签前缀）、site/static/js/text-search-app.js（空态图标）、scripts/_w939_gen_icons.py、scripts/_w939_scan_targets.py、scripts/_w939_emoji_to_svg.py、scripts/output/_w939_targets.json、scripts/output/_w939_replacements.json、docs/11-方案报告/计划方案/执行前计划-T26-UI图标emoji治理批.md、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、sscripts/output/stats-index.md。
-> **状态**：**已收官**（W941 6e47596b·git 反填·共 3 笔·W971 存量回填）
-
-**问题量化（先审查·后施工）**：全仓 emoji 共 34,530 处 / 2,189 文件，绝大部分在 Markdown 正文（题材内容）。真正承担「图标职能」的是 **1,910 处 UI 图标位**，分布 **629 个页面**，只用 **21 种字符**（👍👎☆🔍📚📜📖📻📌👶🎒🎓🌱🜂✒📊🌐⏸☰✕✓✗★ 等）——这类用法的代价是**跨平台字形不一致**（Windows/macOS/Linux/移动端渲染各异）、**暗色模式不可控**（emoji 自带彩色，无法跟随主题）、**无语义**（屏幕阅读器读「thumbs up」而非「赞同」）。
-
-**自绘图标集（27 枚·东方线描）**：`site/static/icons/ui/*.svg` 为单一事实源，规格 **24×24 viewBox / stroke 1.5 / round cap+join / fill:none / stroke:currentColor**——与既有 `.icon-moon` / `.icon-sun` **同参数同族**，不是另起一套风格。图形含星标与实心星、竖/倒拇指、对勾与叉、放大镜与检视镜、线装书与展卷、卷轴、广播匣、图钉、警示、引语、童蒙/书囊/士冠、幼苗、炼金方符、墨笔、柱状图、地球、菜单、关闭、播放与暂停。生成器 `scripts/_w939_gen_icons.py` 落盘，**目视复核出图**（`tmpe/_w939_icons_preview.png`）并据此重画 6 枚（`close` 与 `cross` 视觉重复→`close` 改方框内叉；`pin` 补圆头斜肩；`schoolbag` 扣袋方块改横带；`scroll` 轴身加宽；`thumb-down` 改垂直镜像；`thumb-up` 换镜像同构）。
-
-**承载机制的三重约束（实测得出·非偏好）**：① 站点 CSP 是 `img-src 'self'`（**无 `data:`**）⇒ data-URI + mask 方案会被 CSP 拦掉；② 520 个阅读页走**外链 CSS**、328 个走内联块 ⇒ 写在 `site/system.css` 的相对路径 `url(static/…)` 随目录深度失效（`site/reader/culture/` 深度 2）；③ `file://` 直开是铁律 ⇒ 外部 `<use>` sprite 受限。⇒ **唯一同时满足 file:// + CSP + 多层目录的矢量承载方式 = 内联 SVG**；例外只有 CSS `content` 位（放不了 SVG 元素），该 22 处宿主页全部位于深度 1（`site/data/` 与 `site/en/`）⇒ 用同源 `mask-image` + `../static/icons/ui/` 相对路径成立。每枚内联 SVG 另带 `width="1em" height="1em"` 兜底属性——CSS 未加载时不会退化成 300×150 巨图。
-
-**两个可复跑机检脚本（判据可证伪）**：① `scripts/_w939_scan_targets.py`——把全仓 emoji 分为「UI 图标位」（控件首位 / 图标槽 class / 标题前缀 / CSS content）与「正文装饰」两类，输出逐条明细；② `scripts/_w939_emoji_to_svg.py`——每条替换规则带**独立预期命中数**（取自 ① 的基准清单，非实测反推），实际不符即**退出码 2** 拒绝写盘。规则命中一致率 **37/37 = 100%**。
-
-**治理结果**：UI 图标位 **1,910 → 0**（基准扫描器复扫，M-01）；另补治 47 处后续发现（兜底 grep 揪出扫描器漏检：JS 按钮文本 ▶⏸ 共 30 处、静态播放按钮 6 处、检索来源/语料标签前缀 2 处、段首提示标记 2 处、侦探卡结论标签前缀 2 处），累计替换 **1,957 处**；CSS 级联 **328 内联页**重同步（520 外链页自动生效）；CSP **14 页**重算、856 页 **0 漂移**。
-
-**正文零损伤（HEAD↔工作树字符净差核验）**：逐文件对比 git HEAD 与工作树，净减少仅限图标位应有的 25 种字符（☆👍👎 各 608 + 零散 46 处），**正文型字符（✅78 / ✓200 / 🧑20 / 🎭8 / ★8 / ☆4）净差为 0**；箭头 `→`/`←` 因承担正文流程语义（5,000+ 处）按用户裁决**原样保留**。
-
-**保留项登记（如实披露·非遗漏）**：① 星级评分 `★`/`☆` 12 处（难度与强度评分，**评分可视化**而非图标）；② `site/data/timeline.html` 与英文版的**数据字段** `icon:` 共 12 处（📖📚📜✒ 等，每条时间线事件的专属象征——通用图标集无法表达「成书/游记/评点」语义差，属**专属设计任务**）；③ `site/data/ai-dialogue.html` 人物**头像** emoji 4 处（🧑‍🎓，身份标识，通用图标会丢身份信息）；④ `site/data/methodology-matrix.html` 评分项 `icon:` 1 处；⑤ `site/data/business-model.html` 区间标注 `◀…▶` 2 处（内容表达）。
-
-**未改**：任何管控脚本（`verify_delivery.py` / `bump_version.py` / `batch_cascade.py` / `preflight_check.py`）；既有 `.icon-moon` / `.icon-sun` 体系；正文装饰 emoji 与箭头符号；并行批次 W936 在途的共享面（提交用显式 pathspec 隔离）。
 
 
