@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import json
 import os
 import re
 import subprocess
@@ -41,7 +42,7 @@ RE_SEG_HEAD = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（(20\d{
 RE_LEDGER_ROW = re.compile(r"^\|\s*W(\d{3,4})\s*\|")
 # 非批次行：让号留痕（占号无产出属合规登记）与已停止（零提交会话终止·W954 标注口径）
 NON_BATCH_MARKS = ("让号留痕", "已停止")
-THRESHOLDS = {"days": 3, "batches": 30, "commits": 80}
+THRESHOLDS = {"days": 3, "batches": 30, "commits": 80, "exemptions_stale_days": 30}
 
 # W1051 新增：目录面（复盘报告落盘目录）——独立于登记面的第二证据源
 REVIEW_DIR = os.path.join("docs", "11-方案报告", "工作复盘与优化分析报告")
@@ -154,8 +155,12 @@ def batches_since(ledger_text, last_w):
     return n
 
 
-def evaluate(today, last_date, batches, commits, thresholds=None):
-    """三判据评估 → 触发原因清单（空 = 未触发）——纯函数（today 由调用方注入·可测）。"""
+def evaluate(today, last_date, batches, commits, thresholds=None, exemptions_age=None):
+    """判据评估 → 触发原因清单（空 = 未触发）——纯函数（today 由调用方注入·可测）。
+
+    W1053 M-03 追加 T4：豁免簿 updated_at 距今 ≥30 天（30 天无清偿动作 ⇒ 建议开清偿批）
+    ——exemptions_age=None 时不评估（旧调用兼容）。"""
+    th = thresholds or THRESHOLDS
     th = thresholds or THRESHOLDS
     triggered = []
     try:
@@ -172,6 +177,9 @@ def evaluate(today, last_date, batches, commits, thresholds=None):
         triggered.append("T2 上篇复盘后批次 %d ≥ %d" % (batches, th["batches"]))
     if commits >= th["commits"]:
         triggered.append("T3 上篇复盘后提交 %d ≥ %d" % (commits, th["commits"]))
+    if exemptions_age is not None and exemptions_age >= th.get("exemptions_stale_days", 30):
+        triggered.append("T4 豁免簿 %d 天未减（updated_at 停更）≥ %d 天——建议开清偿批（豁免只增不减防线）"
+                         % (exemptions_age, th.get("exemptions_stale_days", 30)))
     return triggered
 
 
@@ -212,6 +220,15 @@ def collect(git):
     ledger_p = os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")
     ledger = open(ledger_p, encoding="utf-8").read() if os.path.exists(ledger_p) else ""
     info["batches"] = batches_since(ledger, review["w"])
+    # W1053 M-03：豁免簿停更天数（T4 取数）——读不到 = None 不评估（fail-open：T4 是建议性触发）
+    try:
+        with open(os.path.join(ROOT, "scripts", "output", "_w864_accent_exemptions.json"),
+                  encoding="utf-8") as f:
+            _ex = json.load(f)
+        info["exemptions_age"] = (datetime.date.today()
+                                  - datetime.date.fromisoformat(_ex["updated_at"])).days
+    except (OSError, ValueError, KeyError, TypeError):
+        info["exemptions_age"] = None
     try:
         d0 = datetime.date.fromisoformat(review["date"])
         info["days"] = (datetime.date.today() - d0).days
@@ -249,10 +266,11 @@ def render(info):
         parts.append("后续提交 %d" % info["commits"])
     lines.append("复盘触发器现状：%s（判据：≥%d 天 / ≥%d 批 / ≥%d 提交·三选一）"
                  % (" · ".join(parts) or "（取数失败）",
-                    THRESHOLDS["days"], THRESHOLDS["batches"], THRESHOLDS["commits"]))
+                    THRESHOLDS["days"], THRESHOLDS["batches"], THRESHOLDS["commits"]))  # T4 见触发行
     triggered = evaluate(datetime.date.today(), rv["date"],
                          info.get("batches") or 0,
-                         info.get("commits") or 0)
+                         info.get("commits") or 0,
+                         exemptions_age=info.get("exemptions_age"))
     if triggered:
         lines.append("⚠ 复盘触发：{} ——请认领复盘批（对账表登记·触发清单与周期栏带入报告）：{}".format(
             "；".join(triggered),
@@ -354,6 +372,14 @@ def _self_test() -> int:
         fails.append("负样本：2 天 5 批 10 提交必须不触发（空清单）")
     if evaluate(today, "", 0, 0)[0][:2] != "T1":
         fails.append("日期不可解析应按 T1 触发处理（fail-closed）")
+    # W1053 M-03：T4 豁免簿停更
+    if evaluate(today, "2026-10-29", 0, 0, exemptions_age=31) != [
+            "T4 豁免簿 31 天未减（updated_at 停更）≥ 30 天——建议开清偿批（豁免只增不减防线）"]:
+        fails.append("T4 应单独触发（31 天停更）")
+    if evaluate(today, "2026-10-29", 0, 0, exemptions_age=29) != []:
+        fails.append("T4 负样本：29 天停更必须不触发")
+    if evaluate(today, "2026-10-29", 0, 0, exemptions_age=None) != []:
+        fails.append("T4 负样本：None（取数失败）必须不评估")
 
     print()
     if fails:

@@ -106,7 +106,34 @@ META = {
     # W830：测试集收集数实体化——原 pytest.ini 头注「602 passed」字面量无任何对账，
     # W830 审查实证其漂移至 770（W808 测试三件套 + W816/W825 修复批新增）而无门禁兜底
     "pytest_collected": {"domain": "pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议）", "introduced_by": "W830"},
+    # W1053 M-02（W1046 方案）：豁免/白名单存量实体化——「豁免只增不减」的度量基础
+    "w864_entries": {"domain": "scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计", "introduced_by": "W1053"},
+    "icon_allowlist_entries": {"domain": "scripts/output/_w949_icon_field_allowlist.json 顶层数组长度", "introduced_by": "W1053"},
 }
+
+
+def _exemption_count(rel_path, list_key=None):
+    """豁免簿条目实算（W1053 M-02·W1046 方案）：豁免/白名单存量纳入 stats 对账。
+
+    fail-closed（W830 同语义）：文件缺失/解析失败 → RuntimeError——豁免簿是 tracked 件，
+    缺失即仓库状态异常，禁静默 0 掩盖。
+      · _w864_accent_exemptions.json：dict.batches[W#].exemptions 列表合计（实测 256）；
+      · _w949_icon_field_allowlist.json：顶层数组长度（实测 71）。
+    """
+    fp = os.path.join(ROOT, rel_path)
+    try:
+        with open(fp, encoding="utf-8") as f:
+            d = json.load(f)
+    except (OSError, ValueError) as exc:
+        raise RuntimeError("豁免簿读取失败 %s：%s" % (rel_path, exc)) from exc
+    if list_key:
+        try:
+            return sum(len(seg.get(list_key, [])) for seg in d["batches"].values())
+        except (AttributeError, TypeError) as exc:
+            raise RuntimeError("豁免簿形态漂移 %s（期望 batches[].%s 列表）：%s" % (rel_path, list_key, exc)) from exc
+    if not isinstance(d, list):
+        raise RuntimeError("豁免簿形态漂移 %s（期望顶层数组）" % rel_path)
+    return len(d)
 
 
 def _pytest_collected():
@@ -214,6 +241,10 @@ def build():
         "script_classes": len(classes),
         "report_docs": len(_in("docs/11-方案报告/", ".md")),
         "pytest_collected": _pytest_collected(),  # W830：fail-closed（ RuntimeError → main 转 FAIL）
+        # W1053 M-02（W1046 方案）：豁免/白名单存量实体化——「豁免只增不减」的度量基础，
+        # C5b 标记自动跟随（登记面引用 <!--stats:w864_entries--> 等即被对账）。
+        "w864_entries": _exemption_count("scripts/output/_w864_accent_exemptions.json", "exemptions"),
+        "icon_allowlist_entries": _exemption_count("scripts/output/_w949_icon_field_allowlist.json"),
     }
 
 

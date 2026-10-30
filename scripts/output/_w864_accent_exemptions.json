@@ -9,43 +9,57 @@
      "page": "data/81-hardships.html",
      "cls": "span.tag",
      "count": 90,
-     "reason": "数据语义色片：cause/ending/difficulty 三列分类编码（与图例同源·图表语义·非界面装饰）"
+     "reason": "数据语义色片：cause/ending/difficulty 三列分类编码（与图例同源·图表语义·非界面装饰）",
+     "owner": "W864",
+     "review_by": "未复核"
     },
     {
      "page": "data/relationships.html",
      "cls": "span.role-tag.primary",
      "count": 5,
-     "reason": "数据语义色片：势力阵营分类编码"
+     "reason": "数据语义色片：势力阵营分类编码",
+     "owner": "W864",
+     "review_by": "未复核"
     },
     {
      "page": "data/methodology-matrix.html",
      "cls": "span.quad-badge",
      "count": 6,
-     "reason": "数据语义徽章：象限分类编码"
+     "reason": "数据语义徽章：象限分类编码",
+     "owner": "W864",
+     "review_by": "未复核"
     },
     {
      "page": "data/methodology-matrix.html",
      "cls": "span.phase-badge",
      "count": 2,
-     "reason": "数据语义徽章：阶段分类编码"
+     "reason": "数据语义徽章：阶段分类编码",
+     "owner": "W864",
+     "review_by": "未复核"
     },
     {
      "page": "data/81-hardships-view.html",
      "cls": "button.vt-btn",
      "count": 2,
-     "reason": "选中态实底：组件卡③（pill-tab active 底 --accent）明定·交互语义"
+     "reason": "选中态实底：组件卡③（pill-tab active 底 --accent）明定·交互语义",
+     "owner": "W864",
+     "review_by": "未复核"
     },
     {
      "page": "data/hardship-heatmap.html",
      "cls": "button.stage-btn.active",
      "count": 1,
-     "reason": "选中态实底：组件卡③同款明定"
+     "reason": "选中态实底：组件卡③同款明定",
+     "owner": "W864",
+     "review_by": "未复核"
     },
     {
      "page": "data/hardship-difficulty-heatmap.html",
      "cls": "button.dim-btn.active / button.sort-btn.active",
      "count": 2,
-     "reason": "选中态实底：组件卡③同款明定"
+     "reason": "选中态实底：组件卡③同款明定",
+     "owner": "W864",
+     "review_by": "未复核"
     }
    ],
    "note": "裁决 2 的「豁免清单落 scripts/output/」机制首批。数据语义色片按白名单「图表语义·不属界面装饰」豁免；选中态实底由组件卡③/④ 明定 --accent 底。本批已收敛的 KPI 顶条（每页留首卡）与 .seal 徽章（转淡底）不在此列——已整改。"
@@ -57,25 +71,33 @@
      "page": "data/character-dynamic-network.html",
      "cls": "button.stage-btn.active",
      "count": 1,
-     "reason": "选中态实底：组件卡③明定 --accent 底"
+     "reason": "选中态实底：组件卡③明定 --accent 底",
+     "owner": "W866",
+     "review_by": "未复核"
     },
     {
      "page": "data/character-relationship-3d-view.html",
      "cls": "button.vt-btn / span.keytab.active",
      "count": 3,
-     "reason": "选中态实底：组件卡③同款明定"
+     "reason": "选中态实底：组件卡③同款明定",
+     "owner": "W866",
+     "review_by": "未复核"
     },
     {
      "page": "data/dialogue-sentiment.html",
      "cls": "div.stat-card.negative",
      "count": 1,
-     "reason": "数据语义：负向情绪指示条（数值编码·非装饰）"
+     "reason": "数据语义：负向情绪指示条（数值编码·非装饰）",
+     "owner": "W866",
+     "review_by": "未复核"
     },
     {
      "page": "data/ai-dialogue.html",
      "cls": "button（主行动）",
      "count": 1,
-     "reason": "主行动按钮实底：裁决 2「主行动区可带」"
+     "reason": "主行动按钮实底：裁决 2「主行动区可带」",
+     "owner": "W866",
+     "review_by": "未复核"
     }
    ],
    "note": "B3 人物主线批增补；ai-dialogue 的 4 个 step-num 徽章已整改（转淡底）不在此列。"
@@ -87,49 +109,65 @@
      "page": "data/monster-ecology-network.html",
      "cls": "button.tab-btn.active",
      "count": 1,
-     "reason": "选中态实底：组件卡③明定 --accent 底"
+     "reason": "选中态实底：组件卡③明定 --accent 底",
+     "owner": "W867",
+     "review_by": "未复核"
     },
     {
      "page": "data/monster-sociology.html",
      "cls": "div.signal-card.s-active",
      "count": 3,
-     "reason": "状态编码：signal-card 三态（s-active/s-passive/s-external）之一"
+     "reason": "状态编码：signal-card 三态（s-active/s-passive/s-external）之一",
+     "owner": "W867",
+     "review_by": "未复核"
     },
     {
      "page": "data/monster-victims-network.html",
      "cls": "div.victim-card",
      "count": 1,
-     "reason": "高亮标记卡（单例·语义高亮）"
+     "reason": "高亮标记卡（单例·语义高亮）",
+     "owner": "W867",
+     "review_by": "未复核"
     },
     {
      "page": "data/monster-victims-network.html",
      "cls": "div.swatch-bar",
      "count": 1,
-     "reason": "图例色块：数据语义"
+     "reason": "图例色块：数据语义",
+     "owner": "W867",
+     "review_by": "未复核"
     },
     {
      "page": "data/ecology.html",
      "cls": "span.damage-pill.damage-high",
      "count": 9,
-     "reason": "伤害等级编码（high/mid/low 三档之一）·数据语义"
+     "reason": "伤害等级编码（high/mid/low 三档之一）·数据语义",
+     "owner": "W867",
+     "review_by": "未复核"
     },
     {
      "page": "data/ecology.html",
      "cls": "div.compare-card.invasive",
      "count": 1,
-     "reason": "状态变体（invasive vs native）·数据语义"
+     "reason": "状态变体（invasive vs native）·数据语义",
+     "owner": "W867",
+     "review_by": "未复核"
     },
     {
      "page": "data/heaven-power-network.html",
      "cls": "div.role-card.r-king",
      "count": 1,
-     "reason": "角色编码（r-king 用 --chart-1 调色板）·数据语义"
+     "reason": "角色编码（r-king 用 --chart-1 调色板）·数据语义",
+     "owner": "W867",
+     "review_by": "未复核"
     },
     {
      "page": "data/underworld-power-network.html",
      "cls": "div.role-card.r-king",
      "count": 1,
-     "reason": "角色编码（同上）·数据语义"
+     "reason": "角色编码（同上）·数据语义",
+     "owner": "W867",
+     "review_by": "未复核"
     }
    ],
    "note": "B4 增补·判据：同一组件颜色随数据值变 = 数据语义（进册）；通用组件固定朱砂 = 装饰（收敛）。"
@@ -141,49 +179,65 @@
      "page": "data/guanyin-six-roles-network.html",
      "cls": "div.role-card",
      "count": 1,
-     "reason": "角色编码条（随角色值变）·数据语义"
+     "reason": "角色编码条（随角色值变）·数据语义",
+     "owner": "W868",
+     "review_by": "未复核"
     },
     {
      "page": "data/guanyin-six-roles-network.html",
      "cls": "div.swatch-bar",
      "count": 1,
-     "reason": "图例色块·数据语义"
+     "reason": "图例色块·数据语义",
+     "owner": "W868",
+     "review_by": "未复核"
     },
     {
      "page": "data/pilgrim-team-dynamic-network.html",
      "cls": "button.ctrl-btn.active",
      "count": 1,
-     "reason": "选中态实底（组件卡③同款）"
+     "reason": "选中态实底（组件卡③同款）",
+     "owner": "W868",
+     "review_by": "未复核"
     },
     {
      "page": "data/pilgrim-team-dynamic-network.html",
      "cls": "div.phase-card.active",
      "count": 1,
-     "reason": "阶段激活态编码·数据语义"
+     "reason": "阶段激活态编码·数据语义",
+     "owner": "W868",
+     "review_by": "未复核"
     },
     {
      "page": "data/pilgrim-team-psychology-arc.html",
      "cls": "div.progress-fill",
      "count": 1,
-     "reason": "进度指示填充（数值编码）"
+     "reason": "进度指示填充（数值编码）",
+     "owner": "W868",
+     "review_by": "未复核"
     },
     {
      "page": "data/journey-map-interactive.html",
      "cls": "button.btn",
      "count": 1,
-     "reason": "主行动按钮实底（裁决 2「主行动区可带」）"
+     "reason": "主行动按钮实底（裁决 2「主行动区可带」）",
+     "owner": "W868",
+     "review_by": "未复核"
     },
     {
      "page": "data/journey-spacetime.html",
      "cls": "div.progress-fill",
      "count": 1,
-     "reason": "进度指示填充（数值编码）"
+     "reason": "进度指示填充（数值编码）",
+     "owner": "W868",
+     "review_by": "未复核"
     },
     {
      "page": "data/cave-estate.html",
      "cls": "span.tag.king",
      "count": 19,
-     "reason": "妖王分类色片（分类编码·与 B2 的 .tag 同型）·数据语义"
+     "reason": "妖王分类色片（分类编码·与 B2 的 .tag 同型）·数据语义",
+     "owner": "W868",
+     "review_by": "未复核"
     }
    ],
    "note": "B5 增补。journey-geo-semiotics 的 mech-card 单条不超限未动（整改后该页计 1 处）。"
@@ -195,49 +249,65 @@
      "page": "data/narrative-experiment.html",
      "cls": "span.sc-chip",
      "count": 4,
-     "reason": "场景分类色片·数据语义"
+     "reason": "场景分类色片·数据语义",
+     "owner": "W869",
+     "review_by": "未复核"
     },
     {
      "page": "data/narrative-experiment.html",
      "cls": "div.sc-cat",
      "count": 1,
-     "reason": "场景类别条·数据语义"
+     "reason": "场景类别条·数据语义",
+     "owner": "W869",
+     "review_by": "未复核"
     },
     {
      "page": "data/narrative-experiment.html",
      "cls": "span.gh-tag",
      "count": 1,
-     "reason": "分类标签·数据语义"
+     "reason": "分类标签·数据语义",
+     "owner": "W869",
+     "review_by": "未复核"
     },
     {
      "page": "data/narrative-experiment.html",
      "cls": "span.hc-owner",
      "count": 2,
-     "reason": "持有者标记徽章·数据语义"
+     "reason": "持有者标记徽章·数据语义",
+     "owner": "W869",
+     "review_by": "未复核"
     },
     {
      "page": "data/deconstruction.html",
      "cls": "span.tag",
      "count": 5,
-     "reason": "分类色片·数据语义"
+     "reason": "分类色片·数据语义",
+     "owner": "W869",
+     "review_by": "未复核"
     },
     {
      "page": "data/music-structure.html",
      "cls": "span.tag",
      "count": 35,
-     "reason": "曲牌/结构分类色片·数据语义"
+     "reason": "曲牌/结构分类色片·数据语义",
+     "owner": "W869",
+     "review_by": "未复核"
     },
     {
      "page": "data/poetry-rhythm-analysis.html",
      "cls": "div.progress-fill",
      "count": 1,
-     "reason": "进度指示填充（数值编码）"
+     "reason": "进度指示填充（数值编码）",
+     "owner": "W869",
+     "review_by": "未复核"
     },
     {
      "page": "data/narrative-rhythm-curve.html",
      "cls": "button.btn",
      "count": 1,
-     "reason": "主行动按钮实底（裁决 2「主行动区可带」）"
+     "reason": "主行动按钮实底（裁决 2「主行动区可带」）",
+     "owner": "W869",
+     "review_by": "未复核"
     }
    ],
    "note": "B6 增补。narrative-experiment 的 12 张 narr-card 网格顶条按裁决 2 收敛（同色装饰网格=非编码，非豁免）；player-card/mv-card 单条不超限未动。"
@@ -249,49 +319,65 @@
      "page": "data/text-evolution.html",
      "cls": "div.evo-step.first",
      "count": 6,
-     "reason": "演化链条首步的位置编码（first=朱砂/last=accent-4/中段=淡纸）·数据语义"
+     "reason": "演化链条首步的位置编码（first=朱砂/last=accent-4/中段=淡纸）·数据语义",
+     "owner": "W870",
+     "review_by": "未复核"
     },
     {
      "page": "data/linguistics.html",
      "cls": "span（无类名色片）",
      "count": 5,
-     "reason": "图例/内联色卡·数据语义"
+     "reason": "图例/内联色卡·数据语义",
+     "owner": "W870",
+     "review_by": "未复核"
     },
     {
      "page": "data/linguistics.html",
      "cls": "div.mbti-card.m-entp",
      "count": 1,
-     "reason": "MBTI 类型编码卡·数据语义"
+     "reason": "MBTI 类型编码卡·数据语义",
+     "owner": "W870",
+     "review_by": "未复核"
     },
     {
      "page": "data/linguistics.html",
      "cls": "div.char-card.c-buddhist",
      "count": 3,
-     "reason": "教派分类卡（c-buddhist）·数据语义"
+     "reason": "教派分类卡（c-buddhist）·数据语义",
+     "owner": "W870",
+     "review_by": "未复核"
     },
     {
      "page": "data/counterfactual.html",
      "cls": "span.badge.validity-high",
      "count": 7,
-     "reason": "可信度等级编码（high/mid/low 三档）·数据语义"
+     "reason": "可信度等级编码（high/mid/low 三档）·数据语义",
+     "owner": "W870",
+     "review_by": "未复核"
     },
     {
      "page": "data/jurisprudence.html",
      "cls": "span.severity-pill.sev-high",
      "count": 8,
-     "reason": "刑罚等级编码（sev-high/mid/low）·数据语义"
+     "reason": "刑罚等级编码（sev-high/mid/low）·数据语义",
+     "owner": "W870",
+     "review_by": "未复核"
     },
     {
      "page": "data/jurisprudence.html",
      "cls": "div.artifact-card.c-low",
      "count": 2,
-     "reason": "器物等级分类卡（c-low）·数据语义"
+     "reason": "器物等级分类卡（c-low）·数据语义",
+     "owner": "W870",
+     "review_by": "未复核"
     },
     {
      "page": "data/karma-reincarnation.html",
      "cls": "div.char-card.c-chusheng",
      "count": 1,
-     "reason": "轮回道分类卡（c-chusheng 畜生道）·数据语义"
+     "reason": "轮回道分类卡（c-chusheng 畜生道）·数据语义",
+     "owner": "W870",
+     "review_by": "未复核"
     }
    ],
    "note": "B7 增补。century-dialogue 的 3 个 speech-bubble 条整改后计 3 处（恰在限额内）未豁免；inc-card 单条不超限未动。"
@@ -303,73 +389,97 @@
      "page": "data/cognitive-psychology.html",
      "cls": "div.char-card",
      "count": 1,
-     "reason": "人物分类卡·数据语义"
+     "reason": "人物分类卡·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/social-media.html",
      "cls": "div.platform-badge",
      "count": 1,
-     "reason": "平台分类徽章·数据语义"
+     "reason": "平台分类徽章·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/business-model.html",
      "cls": "div.monster-card",
      "count": 1,
-     "reason": "妖怪分类卡·数据语义"
+     "reason": "妖怪分类卡·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/game-webnovel.html",
      "cls": "div.cc-stat-fill",
      "count": 10,
-     "reason": "数值进度条填充（width% 编码）·数据语义"
+     "reason": "数值进度条填充（width% 编码）·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/mbti-evolution.html",
      "cls": "button.stage-btn.active",
      "count": 1,
-     "reason": "选中态实底（组件卡③同款）"
+     "reason": "选中态实底（组件卡③同款）",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/risk-project.html",
      "cls": "div.char-card.c-tang",
      "count": 1,
-     "reason": "人物分类卡（c-tang 唐系）·数据语义"
+     "reason": "人物分类卡（c-tang 唐系）·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/concept-device.html",
      "cls": "div.cipher-face.cipher-back",
      "count": 5,
-     "reason": "翻卡背面设计元素（flip 卡面皮肤·非网格装饰；正面用 accent-3）"
+     "reason": "翻卡背面设计元素（flip 卡面皮肤·非网格装饰；正面用 accent-3）",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/concept-device.html",
      "cls": "span.idev",
      "count": 5,
-     "reason": "内联器物标签·数据语义"
+     "reason": "内联器物标签·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/workplace.html",
      "cls": "span.alert-badge",
      "count": 7,
-     "reason": "告警等级徽章·数据语义"
+     "reason": "告警等级徽章·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/ethics-consumption.html",
      "cls": "div.ipo-outcome",
      "count": 5,
-     "reason": "IPO 结果条（结果编码）·数据语义"
+     "reason": "IPO 结果条（结果编码）·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/ethics-consumption.html",
      "cls": "span.veg-badge.veg-no",
      "count": 4,
-     "reason": "素食分类徽章·数据语义"
+     "reason": "素食分类徽章·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     },
     {
      "page": "data/criticism-history.html",
      "cls": "div.candidate-card.main",
      "count": 1,
-     "reason": "主候选高亮卡·数据语义"
+     "reason": "主候选高亮卡·数据语义",
+     "owner": "W871",
+     "review_by": "未复核"
     }
    ],
    "note": "B8 增补。cipher-back 判为翻卡背面皮肤（组件内部设计面）而非网格顶条——与 narr-card 的网格装饰区分；若后续评审不认此判据，按顶条收敛只需一条 .cipher-back ~ .cipher-back 规则。"
@@ -381,79 +491,105 @@
      "page": "data/aesthetics.html",
      "cls": "div.scene-bar（热力图行内）",
      "count": 4,
-     "reason": "热力图行内数据条·数据语义"
+     "reason": "热力图行内数据条·数据语义",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/visual-art.html",
      "cls": "div.sc-cat.cat-danger",
      "count": 5,
-     "reason": "场景类别条（cat-danger）·数据语义"
+     "reason": "场景类别条（cat-danger）·数据语义",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/cross-time-danmaku.html",
      "cls": "div.age-tab.active",
      "count": 1,
-     "reason": "选中态实底"
+     "reason": "选中态实底",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/cross-time-danmaku.html",
      "cls": "button",
      "count": 1,
-     "reason": "主行动按钮实底"
+     "reason": "主行动按钮实底",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/emotional-heatmap.html",
      "cls": "div.scholar-card",
      "count": 1,
-     "reason": "学者分类卡·数据语义"
+     "reason": "学者分类卡·数据语义",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/chart-design.html",
      "cls": "div.domino-card",
      "count": 4,
-     "reason": "多米诺连锁隐喻展示卡（展示序列·非列表网格）"
+     "reason": "多米诺连锁隐喻展示卡（展示序列·非列表网格）",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/chart-design.html",
      "cls": "div.domino-hardship",
      "count": 3,
-     "reason": "难数标记色片·数据语义"
+     "reason": "难数标记色片·数据语义",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/perf-canvas-rendering.html",
      "cls": "button",
      "count": 1,
-     "reason": "主行动按钮实底"
+     "reason": "主行动按钮实底",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/global-pattern.html",
      "cls": "span.p-country",
      "count": 1,
-     "reason": "国家分类色片·数据语义"
+     "reason": "国家分类色片·数据语义",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/four-dimensional-research-network.html",
      "cls": "span.badge.cinnabar",
      "count": 1,
-     "reason": "分类徽章·数据语义"
+     "reason": "分类徽章·数据语义",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/four-heavenly-kings-artifacts.html",
      "cls": "div.king-card",
      "count": 1,
-     "reason": "天王分类卡·数据语义"
+     "reason": "天王分类卡·数据语义",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/tag-cloud.html",
      "cls": "span.rc-size",
      "count": 5,
-     "reason": "字号图例色片（尺寸档位编码）·数据语义"
+     "reason": "字号图例色片（尺寸档位编码）·数据语义",
+     "owner": "W872",
+     "review_by": "未复核"
     },
     {
      "page": "data/tag-cloud.html",
      "cls": "button.tab-btn",
      "count": 1,
-     "reason": "选中态实底"
+     "reason": "选中态实底",
+     "owner": "W872",
+     "review_by": "未复核"
     }
    ],
    "note": "B9 增补。domino-card 判为连锁隐喻展示卡（展示序列）而非列表网格；tag-cloud 的 rc-size 是字号档位图例。"
@@ -465,37 +601,49 @@
      "page": "data/data-explorer.html",
      "cls": "button.vt-btn / span.keytab.active",
      "count": 3,
-     "reason": "选中态实底（组件卡③同款）"
+     "reason": "选中态实底（组件卡③同款）",
+     "owner": "W873",
+     "review_by": "未复核"
     },
     {
      "page": "data/search.html",
      "cls": "button.vt-btn",
      "count": 1,
-     "reason": "选中态实底"
+     "reason": "选中态实底",
+     "owner": "W873",
+     "review_by": "未复核"
     },
     {
      "page": "data/material-archaeology.html",
      "cls": "span.tag / span.tag.palace",
      "count": 3,
-     "reason": "材质/宫苑分类色片·数据语义"
+     "reason": "材质/宫苑分类色片·数据语义",
+     "owner": "W873",
+     "review_by": "未复核"
     },
     {
      "page": "data/ming-political-thought-comparison.html",
      "cls": "a.active",
      "count": 2,
-     "reason": "选中态实底"
+     "reason": "选中态实底",
+     "owner": "W873",
+     "review_by": "未复核"
     },
     {
      "page": "data/power-resources.html",
      "cls": "div.faction-card",
      "count": 1,
-     "reason": "阵营分类卡·数据语义"
+     "reason": "阵营分类卡·数据语义",
+     "owner": "W873",
+     "review_by": "未复核"
     },
     {
      "page": "data/magic-system.html",
      "cls": "span.rank-badge.rank-S+",
      "count": 5,
-     "reason": "法术等级徽章（rank-S+ 档）·数据语义"
+     "reason": "法术等级徽章（rank-S+ 档）·数据语义",
+     "owner": "W873",
+     "review_by": "未复核"
     }
    ],
    "note": "B10 增补。material-archaeology 的 8 张 artifact-card 网格顶条按裁决收敛（全同色装饰网格）；type-card 单条不超限未动。"
@@ -507,133 +655,177 @@
      "page": "data/ethics-consumption.html",
      "cls": "span.zero-tag",
      "count": 3,
-     "reason": "数据语义色片：零和结果分类编码（与图例同源·图表语义·非界面装饰）"
+     "reason": "数据语义色片：零和结果分类编码（与图例同源·图表语义·非界面装饰）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/ethics-consumption.html",
      "cls": "div.sev-badge.sev-extreme",
      "count": 1,
-     "reason": "数据语义色片：严重度最高档编码"
+     "reason": "数据语义色片：严重度最高档编码",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/game-webnovel.html",
      "cls": "div.cc-elem",
      "count": 1,
-     "reason": "数据语义色片：文化循环元素编码"
+     "reason": "数据语义色片：文化循环元素编码",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/game-webnovel.html",
      "cls": "span.elem-chip",
      "count": 1,
-     "reason": "数据语义色片：元素标签"
+     "reason": "数据语义色片：元素标签",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/game-webnovel.html",
      "cls": "div.nc-genre",
      "count": 1,
-     "reason": "数据语义色片：叙事品类编码"
+     "reason": "数据语义色片：叙事品类编码",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/linguistics.html",
      "cls": "div.inc-card",
      "count": 1,
-     "reason": "数据语义色片：inclusion 态卡片"
+     "reason": "数据语义色片：inclusion 态卡片",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/narrative-experiment.html",
      "cls": "span.sc-chip",
      "count": 1,
-     "reason": "数据语义色片：场景标签族实测增至 5（原登记 4）·补登增量 1"
+     "reason": "数据语义色片：场景标签族实测增至 5（原登记 4）·补登增量 1",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/narrative-experiment.html",
      "cls": "div.player-card",
      "count": 1,
-     "reason": "数据语义色片：玩家类型编码"
+     "reason": "数据语义色片：玩家类型编码",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/narrative-experiment.html",
      "cls": "div.narr-card",
      "count": 1,
-     "reason": "数据语义色片：叙事类型编码"
+     "reason": "数据语义色片：叙事类型编码",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/visual-art.html",
      "cls": "div.chant-card.amp-high",
      "count": 1,
-     "reason": "数据语义色片：高振幅唱诵卡"
+     "reason": "数据语义色片：高振幅唱诵卡",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/visual-art.html",
      "cls": "span.ch-amp-bar",
      "count": 1,
-     "reason": "数据语义色片：振幅条（DOM 数据条·图表语义）"
+     "reason": "数据语义色片：振幅条（DOM 数据条·图表语义）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/visual-art.html",
      "cls": "div.idea-card",
      "count": 1,
-     "reason": "数据语义色片：创意点卡片"
+     "reason": "数据语义色片：创意点卡片",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/visual-art.html",
      "cls": "div.id-form",
      "count": 1,
-     "reason": "数据语义色片：身份形态编码"
+     "reason": "数据语义色片：身份形态编码",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/ethics-consumption.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/game-webnovel.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/linguistics.html",
      "cls": "div.kpi-card",
      "count": 3,
-     "reason": "KPI 首卡顶条（3 行各 1 处·v4 §3.2 保留条款·与「整页仅首屏首卡可带」存在张力·W870 审计即实测 3·登记待后续收敛批裁决）"
+     "reason": "KPI 首卡顶条（3 行各 1 处·v4 §3.2 保留条款·与「整页仅首屏首卡可带」存在张力·W870 审计即实测 3·登记待后续收敛批裁决）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/narrative-experiment.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "data/visual-art.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "dashboard.html",
      "cls": "button.vt-btn",
      "count": 2,
-     "reason": "功能交互实底：数据导出按钮（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：数据导出按钮（v4 §5.2 组件规格设计态）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "dashboard.html",
      "cls": "button.filter-tab.active",
      "count": 1,
-     "reason": "功能交互实底：筛选选中态（v4 §5.2 pill-tab active 实底设计）"
+     "reason": "功能交互实底：筛选选中态（v4 §5.2 pill-tab active 实底设计）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "dashboard.html",
      "cls": "button.rag-fab",
      "count": 1,
-     "reason": "功能交互实底：问津悬浮钮（主行动区·v4 §3.2 主行动区条款）"
+     "reason": "功能交互实底：问津悬浮钮（主行动区·v4 §3.2 主行动区条款）",
+     "owner": "W883",
+     "review_by": "未复核"
     },
     {
      "page": "dashboard.html",
      "cls": "section.route-strip",
      "count": 1,
-     "reason": "区块标识横条（取经路线概要节标·v4 §3.2 横条形态）"
+     "reason": "区块标识横条（取经路线概要节标·v4 §3.2 横条形态）",
+     "owner": "W883",
+     "review_by": "未复核"
     }
    ]
   },
@@ -644,151 +836,201 @@
      "page": "en/81-hardships.html",
      "cls": "span.tag",
      "count": 91,
-     "reason": "数据语义色片：八十一难 cause/ending/difficulty 三列分类编码（与图例同源·图表语义·非界面装饰）"
+     "reason": "数据语义色片：八十一难 cause/ending/difficulty 三列分类编码（与图例同源·图表语义·非界面装饰）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/aesthetics.html",
      "cls": "div.scene-bar",
      "count": 4,
-     "reason": "数据语义色片：场景色条（热力图行内数据编码）"
+     "reason": "数据语义色片：场景色条（热力图行内数据编码）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/aesthetics.html",
      "cls": "div.stage-color-bar",
      "count": 2,
-     "reason": "数据语义色片：阶段色条"
+     "reason": "数据语义色片：阶段色条",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/aesthetics.html",
      "cls": "div.color-swatch",
      "count": 1,
-     "reason": "数据语义色片：色板样本"
+     "reason": "数据语义色片：色板样本",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/aesthetics.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/ai-dialogue.html",
      "cls": "span.step-num",
      "count": 4,
-     "reason": "数据语义色片：步骤编号编码"
+     "reason": "数据语义色片：步骤编号编码",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/ai-dialogue.html",
      "cls": "button",
      "count": 1,
-     "reason": "功能交互实底：对话操作按钮（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：对话操作按钮（v4 §5.2 组件规格设计态）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/cave-estate.html",
      "cls": "span.tag.king",
      "count": 19,
-     "reason": "数据语义色片：洞府等级分类编码"
+     "reason": "数据语义色片：洞府等级分类编码",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/cave-estate.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/chart-design.html",
      "cls": "div.domino-card",
      "count": 4,
-     "reason": "数据语义色片：多米诺图表卡（难数序列编码）"
+     "reason": "数据语义色片：多米诺图表卡（难数序列编码）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/chart-design.html",
      "cls": "div.domino-hardship",
      "count": 3,
-     "reason": "数据语义色片：难数编码段"
+     "reason": "数据语义色片：难数编码段",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/chart-design.html",
      "cls": "div.sundial-card.highlight-stress",
      "count": 1,
-     "reason": "数据语义色片：日晷卡强调态（数据高亮）"
+     "reason": "数据语义色片：日晷卡强调态（数据高亮）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/chart-design.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/concept-device.html",
      "cls": "div.cipher-face.cipher-back",
      "count": 5,
-     "reason": "数据语义色片：密码卡背面（翻卡数据面）"
+     "reason": "数据语义色片：密码卡背面（翻卡数据面）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/concept-device.html",
      "cls": "span.idev",
      "count": 5,
-     "reason": "数据语义色片：器物编码标签"
+     "reason": "数据语义色片：器物编码标签",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/concept-device.html",
      "cls": "button.era-btn.active",
      "count": 1,
-     "reason": "功能交互实底：年代筛选选中态（v4 §5.2 pill-tab 设计态）"
+     "reason": "功能交互实底：年代筛选选中态（v4 §5.2 pill-tab 设计态）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/concept-device.html",
      "cls": "button.danmaku-toggle",
      "count": 1,
-     "reason": "功能交互实底：弹幕开关（组件设计态）"
+     "reason": "功能交互实底：弹幕开关（组件设计态）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/counterfactual.html",
      "cls": "span.badge.validity-high",
      "count": 7,
-     "reason": "数据语义色片：反事实效度徽章（高有效档）"
+     "reason": "数据语义色片：反事实效度徽章（高有效档）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/counterfactual.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/deconstruction.html",
      "cls": "span.tag",
      "count": 5,
-     "reason": "数据语义色片：解构分类编码"
+     "reason": "数据语义色片：解构分类编码",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/deconstruction.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/ethics-consumption.html",
      "cls": "div.ipo-outcome",
      "count": 5,
-     "reason": "数据语义色片：投入产出结果编码"
+     "reason": "数据语义色片：投入产出结果编码",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/ethics-consumption.html",
      "cls": "span.veg-badge.veg-no",
      "count": 4,
-     "reason": "数据语义色片：素食判定徽章（否）"
+     "reason": "数据语义色片：素食判定徽章（否）",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/ethics-consumption.html",
      "cls": "span.zero-tag",
      "count": 3,
-     "reason": "数据语义色片：零和结果编码"
+     "reason": "数据语义色片：零和结果编码",
+     "owner": "W886",
+     "review_by": "未复核"
     },
     {
      "page": "en/ethics-consumption.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W886",
+     "review_by": "未复核"
     }
    ]
   },
@@ -799,811 +1041,1081 @@
      "page": "en/character-appearance.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/character-dynamic-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/character-dynamic-network.html",
      "cls": "button.stage-btn.active",
      "count": 1,
-     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/character-relationship-3d-view.html",
      "cls": "span.keytab.active",
      "count": 1,
-     "reason": "功能交互实底：keytab.active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：keytab.active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/character-relationship-3d-view.html",
      "cls": "button.vt-btn",
      "count": 2,
-     "reason": "功能交互实底：vt-btn（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：vt-btn（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/character-relationship-3d.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/character-semantic-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/character-sentiment-arc.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/ecology.html",
      "cls": "div.kpi-card",
      "count": 2,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/ecology.html",
      "cls": "span.damage-pill.damage-high",
      "count": 9,
-     "reason": "数据语义色片：damage-pill.damage-high 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：damage-pill.damage-high 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/ecology.html",
      "cls": "div.compare-card.invasive",
      "count": 1,
-     "reason": "数据语义色片：compare-card.invasive 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：compare-card.invasive 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/ecology.html",
      "cls": "div.stage-card.during",
      "count": 1,
-     "reason": "数据语义色片：stage-card.during 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：stage-card.during 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/four-dimensional-research-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/four-dimensional-research-network.html",
      "cls": "span.badge.cinnabar",
      "count": 1,
-     "reason": "数据语义色片：badge.cinnabar 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：badge.cinnabar 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/four-heavenly-kings-artifacts.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/four-heavenly-kings-artifacts.html",
      "cls": "div.king-card",
      "count": 1,
-     "reason": "数据语义色片：king-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：king-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/four-heavenly-kings-artifacts.html",
      "cls": "div.swatch-bar",
      "count": 1,
-     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/game-webnovel.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/game-webnovel.html",
      "cls": "div.cc-stat-fill",
      "count": 10,
-     "reason": "数据语义色片：cc-stat-fill 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：cc-stat-fill 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/game-webnovel.html",
      "cls": "div.cc-elem",
      "count": 1,
-     "reason": "数据语义色片：cc-elem 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：cc-elem 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/game-webnovel.html",
      "cls": "span.elem-chip",
      "count": 1,
-     "reason": "数据语义色片：elem-chip 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：elem-chip 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/game-webnovel.html",
      "cls": "div.nc-genre",
      "count": 1,
-     "reason": "数据语义色片：nc-genre 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：nc-genre 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/global-pattern.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/global-pattern.html",
      "cls": "span.p-country",
      "count": 1,
-     "reason": "数据语义色片：p-country 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：p-country 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/guanyin-six-roles-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/guanyin-six-roles-network.html",
      "cls": "div.role-card",
      "count": 1,
-     "reason": "数据语义色片：role-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：role-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/guanyin-six-roles-network.html",
      "cls": "div.swatch-bar",
      "count": 1,
-     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/guide.html",
      "cls": "a.primary",
      "count": 1,
-     "reason": "功能交互实底：primary（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：primary（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/hardship-difficulty-heatmap.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/hardship-difficulty-heatmap.html",
      "cls": "button.dim-btn.active",
      "count": 1,
-     "reason": "功能交互实底：dim-btn.active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：dim-btn.active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/hardship-heatmap.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/hardship-heatmap.html",
      "cls": "button.stage-btn.active",
      "count": 1,
-     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/heaven-power-network.html",
      "cls": "div.kpi-card",
      "count": 2,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/heaven-power-network.html",
      "cls": "div.role-card.r-king",
      "count": 1,
-     "reason": "数据语义色片：role-card.r-king 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：role-card.r-king 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/intertextuality-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/journey-geo-semiotics.html",
      "cls": "article.mech-card",
      "count": 1,
-     "reason": "数据语义色片：mech-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：mech-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/journey-map-interactive.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/journey-map-interactive.html",
      "cls": "button.btn",
      "count": 1,
-     "reason": "功能交互实底：btn（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：btn（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/journey-route.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/journey-spacetime.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/journey-spacetime.html",
      "cls": "div.progress-fill",
      "count": 1,
-     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/jurisprudence.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/jurisprudence.html",
      "cls": "span.severity-pill.sev-high",
      "count": 8,
-     "reason": "数据语义色片：severity-pill.sev-high 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：severity-pill.sev-high 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/jurisprudence.html",
      "cls": "div.artifact-card.c-low",
      "count": 2,
-     "reason": "数据语义色片：artifact-card.c-low 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：artifact-card.c-low 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/karma-reincarnation.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/karma-reincarnation.html",
      "cls": "div.char-card.c-chusheng",
      "count": 1,
-     "reason": "数据语义色片：char-card.c-chusheng 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：char-card.c-chusheng 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/language-style-radar.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/linguistics.html",
      "cls": "div.kpi-card",
      "count": 3,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/linguistics.html",
      "cls": "div.inc-card",
      "count": 1,
-     "reason": "数据语义色片：inc-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：inc-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/linguistics.html",
      "cls": "span",
      "count": 5,
-     "reason": "数据语义色片：span 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：span 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/linguistics.html",
      "cls": "div.mbti-card.m-entp",
      "count": 1,
-     "reason": "数据语义色片：mbti-card.m-entp 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：mbti-card.m-entp 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/linguistics.html",
      "cls": "div.char-card.c-buddhist",
      "count": 3,
-     "reason": "数据语义色片：char-card.c-buddhist 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：char-card.c-buddhist 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/magic-system.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/magic-system.html",
      "cls": "span.intensity-bar",
      "count": 1,
-     "reason": "数据语义色片：intensity-bar 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：intensity-bar 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/magic-system.html",
      "cls": "span.rank-badge.rank-S+",
      "count": 5,
-     "reason": "数据语义色片：rank-badge.rank-S+ 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：rank-badge.rank-S+ 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/material-archaeology.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/material-archaeology.html",
      "cls": "div.artifact-card",
      "count": 8,
-     "reason": "数据语义色片：artifact-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：artifact-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/material-archaeology.html",
      "cls": "div.type-card",
      "count": 1,
-     "reason": "数据语义色片：type-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：type-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/material-archaeology.html",
      "cls": "span.tag",
      "count": 1,
-     "reason": "数据语义色片：tag 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：tag 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/material-archaeology.html",
      "cls": "span.tag.palace",
      "count": 2,
-     "reason": "数据语义色片：tag.palace 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：tag.palace 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/mbti-evolution.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/mbti-evolution.html",
      "cls": "button.stage-btn.active",
      "count": 1,
-     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/methodology-matrix.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/methodology-matrix.html",
      "cls": "div.quadrant-card",
      "count": 1,
-     "reason": "数据语义色片：quadrant-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：quadrant-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/methodology-matrix.html",
      "cls": "span.quad-badge",
      "count": 6,
-     "reason": "数据语义色片：quad-badge 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：quad-badge 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/methodology-matrix.html",
      "cls": "span.phase-badge",
      "count": 2,
-     "reason": "数据语义色片：phase-badge 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：phase-badge 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/methodology-matrix.html",
      "cls": "div.phase-card",
      "count": 1,
-     "reason": "数据语义色片：phase-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：phase-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/ming-political-thought-comparison.html",
      "cls": "a.active",
      "count": 2,
-     "reason": "功能交互实底：active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/ming-political-thought-comparison.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-background.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-capability-radar.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-ecology-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-ecology-network.html",
      "cls": "button.tab-btn.active",
      "count": 1,
-     "reason": "功能交互实底：tab-btn.active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：tab-btn.active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-female-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-hierarchy-network.html",
      "cls": "div.kpi-card",
      "count": 2,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-sociology.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-sociology.html",
      "cls": "div.signal-card.s-active",
      "count": 3,
-     "reason": "数据语义色片：signal-card.s-active 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：signal-card.s-active 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-victims-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-victims-network.html",
      "cls": "div.victim-card",
      "count": 1,
-     "reason": "数据语义色片：victim-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：victim-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/monster-victims-network.html",
      "cls": "div.swatch-bar",
      "count": 1,
-     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/music-structure.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/music-structure.html",
      "cls": "div.mv-card",
      "count": 1,
-     "reason": "数据语义色片：mv-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：mv-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/music-structure.html",
      "cls": "span.sym-badge",
      "count": 1,
-     "reason": "数据语义色片：sym-badge 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：sym-badge 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/music-structure.html",
      "cls": "span.tag",
      "count": 35,
-     "reason": "数据语义色片：tag 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：tag 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-experiment.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-experiment.html",
      "cls": "div.player-card",
      "count": 1,
-     "reason": "数据语义色片：player-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：player-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-experiment.html",
      "cls": "span.hc-owner",
      "count": 2,
-     "reason": "数据语义色片：hc-owner 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：hc-owner 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-experiment.html",
      "cls": "span.gh-tag",
      "count": 1,
-     "reason": "数据语义色片：gh-tag 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：gh-tag 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-experiment.html",
      "cls": "div.narr-card",
      "count": 12,
-     "reason": "数据语义色片：narr-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：narr-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-experiment.html",
      "cls": "span.sc-chip",
      "count": 5,
-     "reason": "数据语义色片：sc-chip 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：sc-chip 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-experiment.html",
      "cls": "div.sc-cat",
      "count": 1,
-     "reason": "数据语义色片：sc-cat 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：sc-cat 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-rhythm-curve.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narrative-rhythm-curve.html",
      "cls": "button.btn",
      "count": 1,
-     "reason": "功能交互实底：btn（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：btn（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narratology-12d-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/narratology-16d-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/perf-canvas-rendering.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/perf-canvas-rendering.html",
      "cls": "button",
      "count": 1,
-     "reason": "数据语义色片：button 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：button 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/perf-canvas-rendering.html",
      "cls": "div.bar-seg.svg-seg",
      "count": 1,
-     "reason": "数据语义色片：bar-seg.svg-seg 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：bar-seg.svg-seg 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/philosophy.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/pilgrim-team-dynamic-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/pilgrim-team-dynamic-network.html",
      "cls": "button.ctrl-btn.active",
      "count": 1,
-     "reason": "功能交互实底：ctrl-btn.active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：ctrl-btn.active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/pilgrim-team-dynamic-network.html",
      "cls": "div.phase-card.active",
      "count": 1,
-     "reason": "功能交互实底：phase-card.active（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：phase-card.active（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/pilgrim-team-psychology-arc.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/pilgrim-team-psychology-arc.html",
      "cls": "div.progress-fill",
      "count": 1,
-     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/poetry-rhythm-analysis.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/poetry-rhythm-analysis.html",
      "cls": "div.progress-fill",
      "count": 1,
-     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/power-resources.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/power-resources.html",
      "cls": "div.faction-card",
      "count": 1,
-     "reason": "数据语义色片：faction-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：faction-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/relationships.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/relationships.html",
      "cls": "span.role-tag.primary",
      "count": 5,
-     "reason": "数据语义色片：role-tag.primary 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：role-tag.primary 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/risk-project.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/risk-project.html",
      "cls": "div.char-card.c-tang",
      "count": 1,
-     "reason": "数据语义色片：char-card.c-tang 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：char-card.c-tang 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/search.html",
      "cls": "button.vt-btn",
      "count": 1,
-     "reason": "功能交互实底：vt-btn（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：vt-btn（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/six-senses-narratology-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/social-media.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/social-media.html",
      "cls": "div.platform-badge",
      "count": 1,
-     "reason": "数据语义色片：platform-badge 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：platform-badge 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/tag-cloud.html",
      "cls": "button.tab-btn",
      "count": 1,
-     "reason": "功能交互实底：tab-btn（v4 §5.2 组件规格设计态）"
+     "reason": "功能交互实底：tab-btn（v4 §5.2 组件规格设计态）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/tag-cloud.html",
      "cls": "span.rc-size",
      "count": 5,
-     "reason": "数据语义色片：rc-size 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：rc-size 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/text-evolution.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/text-evolution.html",
      "cls": "div.evo-step.first",
      "count": 6,
-     "reason": "数据语义色片：evo-step.first 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：evo-step.first 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/text-evolution.html",
      "cls": "div.quote-card",
      "count": 1,
-     "reason": "数据语义色片：quote-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：quote-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/text-search.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/theological-intervention-network.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/timeline.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/underworld-power-network.html",
      "cls": "div.kpi-card",
      "count": 2,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/underworld-power-network.html",
      "cls": "div.role-card.r-king",
      "count": 1,
-     "reason": "数据语义色片：role-card.r-king 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：role-card.r-king 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/visual-art.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/visual-art.html",
      "cls": "div.chant-card.amp-high",
      "count": 1,
-     "reason": "数据语义色片：chant-card.amp-high 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：chant-card.amp-high 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/visual-art.html",
      "cls": "span.ch-amp-bar",
      "count": 1,
-     "reason": "数据语义色片：ch-amp-bar 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：ch-amp-bar 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/visual-art.html",
      "cls": "div.sc-cat.cat-danger",
      "count": 5,
-     "reason": "数据语义色片：sc-cat.cat-danger 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：sc-cat.cat-danger 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/visual-art.html",
      "cls": "div.idea-card",
      "count": 1,
-     "reason": "数据语义色片：idea-card 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：idea-card 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/visual-art.html",
      "cls": "div.id-form",
      "count": 1,
-     "reason": "数据语义色片：id-form 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：id-form 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/workplace.html",
      "cls": "div.kpi-card",
      "count": 1,
-     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/workplace.html",
      "cls": "span.alert-badge",
      "count": 7,
-     "reason": "数据语义色片：alert-badge 分类编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：alert-badge 分类编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     },
     {
      "page": "en/workplace.html",
      "cls": "div.bw-cat",
      "count": 1,
-     "reason": "数据语义色片：bw-cat 数据编码（图表语义·非界面装饰）"
+     "reason": "数据语义色片：bw-cat 数据编码（图表语义·非界面装饰）",
+     "owner": "W887",
+     "review_by": "未复核"
     }
    ]
   }
