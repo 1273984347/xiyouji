@@ -103,7 +103,7 @@ def migrate_page(path, dry, stats):
     for start, end, body in reversed(private_blocks(html)):
         nb = body
         # R-FOCUS
-        nb, n = re.subn(r"var\(--focus-ring[^)]*\)", "color-mix(in srgb, var(--accent) 15%, transparent)", nb)
+        nb, n = re.subn(r"var\(--focus-ring[^)\r\n]*\)", "color-mix(in srgb, var(--accent) 15%, transparent)", nb)
         counts["focus"] += n
         # R-SHADOW（带选择器上下文）
         def do_shadow(m):

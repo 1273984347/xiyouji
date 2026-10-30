@@ -15,7 +15,7 @@
 - `zoom-w953/`
 - `zoom-w974/`
 
-## 文件（256）
+## 文件（257）
 
 ### 样式与资源
 
@@ -274,6 +274,7 @@
 - `preview-site-sheet.webp`
 - `preview-w1013-sheet.png`
 - `preview-w1018-sheet.png`
+- `preview-w1043-sheet.png`
 - `preview-zoom-final.png`
 
 ---
