@@ -179,7 +179,7 @@ def collect_raws():
 
 
 def all_masters():
-    """全目录母版（拼图用·既有 100 + 本批 12）"""
+    """全目录母版（拼图用·既有 112 + 本批 12）"""
     out = []
     if not os.path.isdir(SET_DIR):
         return out
@@ -198,7 +198,7 @@ def main() -> int:
     if not raws:
         print("FAIL  %s 下无出图原件（本批原件目录）" % RAW_DIR)
         return 1
-    print("本批原件：%d 份（作用域限定 raw/round17·既有 100 张不重写）" % len(raws))
+    print("本批原件：%d 份（作用域限定 raw/round17·既有 112 张不重写）" % len(raws))
 
     for rp in raws:
         base = os.path.splitext(os.path.basename(rp))[0]

@@ -23,7 +23,7 @@
 
 1. **六文档同步**（核心 2 硬门禁：CHANGELOG.md + HANDOVER.md 必须含当前 v/W——期望版本由 verify_delivery 动态取自 CHANGELOG 现役版段，dukou-engine.html 页脚降级为新鲜度 WARN（W518 起）；辅助 4 仅 WARN：README / STRUCTURE / 项目说明 / file-index）
 2. **范围漂移检测**（html 最高 W ≤ 文档+归档最高 W）
-3. **A4 计数一致（EXPECT_A4 字面量「209 篇」）** + **A1-A6 真实计数（六板块顶层 .md 磁盘计数 == README「共 N 篇」声明，当前 N=615<!--stats:a1_a6_docs-->）**
+3. **A4 计数一致（EXPECT_A4 字面量「209 篇」）** + **A1-A6 真实计数（六板块顶层 .md 磁盘计数 == README「共 N 篇」声明，当前 N=616<!--stats:a1_a6_docs-->）**
 4. **学术研究轨显式引用**（105 篇）
 5. **A1 导航相邻性**（上一回=N-1·下一回=N+1）
 

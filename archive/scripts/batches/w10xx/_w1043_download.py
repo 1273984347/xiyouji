@@ -24,15 +24,13 @@ JPEG_MAGIC = b"\xff\xd8\xff"
 
 
 def _mcode_cmd():
-    """定位 mcode-tools 可执行（Windows 下是 .cmd 包装器·须绝对路径 + shell=True）。"""
+    """定位 mcode-tools 可执行（Windows 下是 .cmd 包装器·须绝对路径 + shell=True）。
+
+    W1044：删除 `~/.minimax/` 路径回退——铁律 16③ 禁用该目录任何内容；
+    工具不在 PATH 时 fail-closed（由调用处报错），不改从用户 profile 里找。
+    """
     import shutil
     p = shutil.which("mcode-tools")
-    if not p:
-        for cand in (r"C:\Users\12739\.minimax\bin\mcode-tools.cmd",
-                     r"C:\Program Files\Minimax\bin\mcode-tools.cmd"):
-            if os.path.exists(cand):
-                p = cand
-                break
     return [p] if p else ["mcode-tools"]
 
 

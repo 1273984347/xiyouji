@@ -555,6 +555,20 @@ def _check_c5_aggregate_stats(inp, issues, notes):
             for _mm in re.finditer(_pat, open(os.path.join(ROOT, _f), encoding="utf-8").read()):
                 if int(_mm.group(1)) != _sum_act:
                     issues.append("C5e: %s 声明 %d 条 ≠ 坑表实测 %d 条" % (_f, int(_mm.group(1)), _sum_act))
+        # W1044 补：AGENTS §4.3 六主题**分项**逐项对拍（原只核总数 ⇒ 分项长期陈旧而门禁看不见·
+        # W1043 审查实证：分项之和 123 ≠ 总数 133）。
+        _a = open(os.path.join(ROOT, "AGENTS.md"), encoding="utf-8").read()
+        _seg = re.search(r"CSS / 视觉渲染（(\d+)）·JS / CSP / 运行时（(\d+)）·git / 提交 / 并发（(\d+)）"
+                         r"·级联 / CHANGELOG（(\d+)）·数据 / 内容可信度（(\d+)）·流程 / 协作 / 取证（(\d+)）", _a)
+        if not _seg:
+            issues.append("C5e: AGENTS.md 六主题分项行不可解析（fail-closed）")
+        else:
+            _order = ["CSS / 视觉渲染", "JS / CSP / 运行时", "git / 提交 / 并发",
+                      "级联 / CHANGELOG", "数据 / 内容可信度", "流程 / 协作 / 取证"]
+            for _k, _num in zip(_order, _seg.groups(), strict=True):
+                if int(_num) != _declared.get(_k, -1):
+                    issues.append("C5e: AGENTS 分项「%s」声明 %s ≠ 坑表 %d 条（W1044 补分项对拍）"
+                                  % (_k, _num, _declared.get(_k, -1)))
     except OSError as _e:
         issues.append("C5e: 坑表分项对账不可读（%s）——fail-closed" % _e)
 
