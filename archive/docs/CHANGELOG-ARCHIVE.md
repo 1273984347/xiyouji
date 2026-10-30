@@ -13,6 +13,24 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W942（2026-10-25）：Hero 素材全量复审（14 张逐张放大目视 · 修正 2 处形制偏差）
+
+> **来源**：用户 2026-10-25 令「你再审查一遍有没有出现同样错误的」——W940 修正题材后仍要求全量复查。
+
+> - **文件**：assets/promo/hero-set/hero-line-04-tight-crown.png、assets/promo/hero-set/hero-line-04-tight-crown.webp、assets/promo/hero-set/hero-line-07-banana-fan.png、assets/promo/hero-set/hero-line-07-banana-fan.webp、assets/promo/hero-set/raw/hero-04c-tight-crown.jpg、assets/promo/hero-set/raw/hero-07c-banana-fan.jpg、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、site/static/images/hero-line-04-tight-crown.webp、site/static/images/hero-line-07-banana-fan.webp、Cdsscripts/_w942_cascade.py
+
+**复审方式**：9 张线描横幅 + 5 张浓墨题图共 **14 张逐张放大目视**——机器判据只管「画得好不好」（尺寸 / 留白 / 墨量 / 朱砂点 / 实心块 / 伪文字 / 裁切），**题材与形制必须人眼核**。
+
+**发现并修正 2 处形制偏差**：① **04 紧箍儿**原为「光滑金圈 + 云纹扣」，而原著紧箍儿是**带九个倒刺钩**的金圈——缺此关键特征会被读成玉镯 / 头环 ⇒ 重出补足九倒刺；② **07 芭蕉扇**原为**正圆团扇 + 直柄**，而铁扇公主的芭蕉扇是**叶形（长卵形）扇**（形制偏差）⇒ 重出为叶形扇 + 中脉细脉 + 短柄缠绳。
+
+**复审合格 12 张**：01 金箍棒（两端金箍带云纹）/ 02 行程图卷轴 / 03 经卷与篆香 / 05 莲花 / 06 九环锡杖（环环相扣 + 顶部宝珠）/ 08 玉净瓶（净瓶插杨柳）/ 09 筋斗云，以及内页 5 张浓墨题图（判官队列 / 紧箍与金刚杵 / 五行山两界山·铁链 / 东海龙宫水殿 / 六道轮回轮）。
+
+**判据扩容**：J8 题材关在自检表里细化到**形制级**——不只问「是什么」，还要问「形制对不对」（倒刺钩数 / 扇形 / 环数 / 瓶插什么枝）。
+
+> - **验证**：素材判据 9/9 PASS（左留白 0.0000·整图墨量 0.0329–0.0809）· 重出件纸色归一残差 ≤1/255 · 成套拼图逐张目视 · 第 31 与第 45 门禁 0 FAIL
+> - **状态**：在途（认领登记 W942·待提交入库）
+> **状态**：**已收官**（W942 13ad66a4·git 反填·共 1 笔·W971 存量回填）
+
 ### W941（2026-10-25）：UI 图标位 emoji 治理批（禁 emoji 充当图标 + 东方线描图标集自绘 27 枚 + UI 图标位 1,957 处归零）
 
 > **来源**：用户 2026-10-25 令「禁止使用 emoji 表情当做图标，你审查一下。你要么进行设计一下图标」，经问卷两问裁决——① 治理范围 = **仅 UI 图标位**（正文装饰 emoji 与箭头符号保留）② 图标风格 = **东方线描**（24×24 / 1.5px 描边 / currentColor 随主题）。

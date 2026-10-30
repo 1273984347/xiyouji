@@ -1,3 +1,27 @@
+### W1056（2026-10-31）：提交前三问自检流程契约（钩子注入 + 铁律 18 + CLAUDE 速查 + 坑表 146）
+
+> **来源**：用户 2026-10-31 令「从此以后每次提交前必须自动运行三问自检」——① 本批遇到的问题都
+解决/登记了吗？② 以后还会再犯吗（防复发判据落地）？③ 多 Agent 协作下其他 Agent 能否从项目内
+文件了解？写入私有记忆的内容须同步项目文件。落成三层载体：钩子注入（物理自动）+ 铁律 18
+（必载层）+ CLAUDE 速查（一分钟层）。
+>
+> - **文件**：AGENTS.md、CLAUDE.md、docs/agent/pitfalls.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、CITATION.cff、docs/00-导读/项目说明.md、docs/INDEX.md、index.md、archive/docs 四件、.github/workflows/README.md、site 四页、scripts/output 登记面九件。
+
+**本批要点**：① **钩子注入**——.git/hooks/pre-commit 在门禁绿后、exit 0 前强制打印三问（不阻断·
+每次提交必现于提交者视野·sh -n 语法验证）；② **铁律 18**——三问成文化入 §6 必载层（结论须落
+CHANGELOG 验证栏或台账备注·不通过不得提交·③ 问即铁律 16-⑥ 载体铁则的提交时机强化）；
+③ **CLAUDE.md** 速查第 14 行（50/60 行）；④ **坑表 +1**（「spec file_index_rows 宁多勿少——漏列
+级联件必被 51 槽反复拦」·W1048 两轮 + W1053 一轮三实证）→ 146·C5e 计数链四处同步。
+
+**提交前三问结论（本批自举·落验证栏）**：① 本批（及当日 W1048-W1055 全程）遇到的问题——并行撞号/
+文档漂移/孤儿批/META 漏注册/spec 漏列/内联转义——已全部解决或登记去向（sweep 覆盖面✓/reserve_w
+检测✓/坑表条目✓/缺口 11 页→0✓），无顺手跳过；② 防复发——C8 同段重复判据/G-07 占号检测/三问钩子
+/坑表 +2（spec 漏列·占号逃避）全部为机器判据或查表条目，同类错误有硬防线；③ 其他 Agent 可了解性
+——W1048-W1056 九批全部 CHANGELOG 段+台账行+坑表条目在仓，AI 私有记忆仅镜像且已按本批契约同步。
+
+**验证**：sh -n 钩子语法 OK · CLAUDE 50/60 行 · C5e 计数链 146 全链零红 · 全量门禁见收官提交。
+
+> - **状态**：已收官（三问契约三层载体落地·钩子本地件不入库属既定形态）
 ### W1055（2026-10-31）：G-03 清偿第二轮（静态字面量提取 + na 语义分层定谳 + 收紧升格）
 
 > **来源**：用户 2026-10-31 令「缺口 11 页的清偿现在做完」——W1054 定位的 11 页真覆盖缺口
@@ -948,7 +972,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1055），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1056），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1823,24 +1847,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：3 张重出件逐张放大目视（字母消失 / 伪文字消失 / 叶形正确）· 227 张全量拼图目视两轮（题材级 + 可疑项放大级）· 第 31 与第 45 门禁 0 FAIL
 > - **状态**：在途（认领登记 W943·待提交入库）
 > **状态**：**已收官**（W943 42f4560d·git 反填·共 1 笔·W971 存量回填）
-
-
-### W942（2026-10-25）：Hero 素材全量复审（14 张逐张放大目视 · 修正 2 处形制偏差）
-
-> **来源**：用户 2026-10-25 令「你再审查一遍有没有出现同样错误的」——W940 修正题材后仍要求全量复查。
-
-> - **文件**：assets/promo/hero-set/hero-line-04-tight-crown.png、assets/promo/hero-set/hero-line-04-tight-crown.webp、assets/promo/hero-set/hero-line-07-banana-fan.png、assets/promo/hero-set/hero-line-07-banana-fan.webp、assets/promo/hero-set/raw/hero-04c-tight-crown.jpg、assets/promo/hero-set/raw/hero-07c-banana-fan.jpg、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、site/static/images/hero-line-04-tight-crown.webp、site/static/images/hero-line-07-banana-fan.webp、Cdsscripts/_w942_cascade.py
-
-**复审方式**：9 张线描横幅 + 5 张浓墨题图共 **14 张逐张放大目视**——机器判据只管「画得好不好」（尺寸 / 留白 / 墨量 / 朱砂点 / 实心块 / 伪文字 / 裁切），**题材与形制必须人眼核**。
-
-**发现并修正 2 处形制偏差**：① **04 紧箍儿**原为「光滑金圈 + 云纹扣」，而原著紧箍儿是**带九个倒刺钩**的金圈——缺此关键特征会被读成玉镯 / 头环 ⇒ 重出补足九倒刺；② **07 芭蕉扇**原为**正圆团扇 + 直柄**，而铁扇公主的芭蕉扇是**叶形（长卵形）扇**（形制偏差）⇒ 重出为叶形扇 + 中脉细脉 + 短柄缠绳。
-
-**复审合格 12 张**：01 金箍棒（两端金箍带云纹）/ 02 行程图卷轴 / 03 经卷与篆香 / 05 莲花 / 06 九环锡杖（环环相扣 + 顶部宝珠）/ 08 玉净瓶（净瓶插杨柳）/ 09 筋斗云，以及内页 5 张浓墨题图（判官队列 / 紧箍与金刚杵 / 五行山两界山·铁链 / 东海龙宫水殿 / 六道轮回轮）。
-
-**判据扩容**：J8 题材关在自检表里细化到**形制级**——不只问「是什么」，还要问「形制对不对」（倒刺钩数 / 扇形 / 环数 / 瓶插什么枝）。
-
-> - **验证**：素材判据 9/9 PASS（左留白 0.0000·整图墨量 0.0329–0.0809）· 重出件纸色归一残差 ≤1/255 · 成套拼图逐张目视 · 第 31 与第 45 门禁 0 FAIL
-> - **状态**：在途（认领登记 W942·待提交入库）
-> **状态**：**已收官**（W942 13ad66a4·git 反填·共 1 笔·W971 存量回填）
 
 
