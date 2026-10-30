@@ -7,7 +7,7 @@
 > 本文件逐条列出 `assets/promo/plate-set/raw/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（17）
+## 子目录（18）
 
 - `round1/`
 - `round10/`
@@ -18,6 +18,7 @@
 - `round15/`
 - `round16/`
 - `round17/`
+- `round18/`
 - `round2/`
 - `round3/`
 - `round4/`

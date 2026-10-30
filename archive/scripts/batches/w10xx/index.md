@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（81）
+## 文件（114）
 
 ### Python 脚本
 
@@ -90,6 +90,39 @@
 - `_w1044_make_spec.py`
 - `_w1045_make_spec.py`
 - `_w1047_make_spec.py`
+- `_w1049_cascade_manifest.py`
+- `_w1049_derive_prepare.py`
+- `_w1049_derive_stage.py`
+- `_w1049_derive_verify.py`
+- `_w1049_download.py`
+- `_w1049_faces.py`
+- `_w1049_faces_all.py`
+- `_w1049_faces_rest.py`
+- `_w1049_fix_faces.py`
+- `_w1049_fix_p2.py`
+- `_w1049_gate_isolation.py`
+- `_w1049_handover.py`
+- `_w1049_isolate_w1050.py`
+- `_w1049_ledger_final.py`
+- `_w1049_make_spec.py`
+- `_w1049_master.py`
+- `_w1049_park_fileindex.py`
+- `_w1049_park_w1050.py`
+- `_w1049_park_w1050_faces.py`
+- `_w1049_pick_verify.py`
+- `_w1049_pitfalls.py`
+- `_w1049_prepare.py`
+- `_w1049_readme_register.py`
+- `_w1049_refresh_folders.py`
+- `_w1049_reissue.py`
+- `_w1049_reissue_97.py`
+- `_w1049_reissue_fetch.py`
+- `_w1049_reissue_og.py`
+- `_w1049_stage.py`
+- `_w1049_stage_faces.py`
+- `_w1049_stage_ledger.py`
+- `_w1049_sync_staged.py`
+- `_w1049_verify.py`
 
 ### 数据与配置
 

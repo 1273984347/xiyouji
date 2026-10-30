@@ -29,6 +29,9 @@ import sys
 
 LOCK_MARK = "cannot lock ref"
 
+# W1049 新增：是否以 `--no-verify` 跳过 pre-commit 钩子（见 main() 的参数说明）
+_NO_VERIFY = False
+
 # W821：§8 干扰日志的机器触发点提示（真触发才输出·用户裁决 2026-10-20）。
 # 背景同 preflight_check.py：两周干扰日志无机器防线 → 断档 4 天零登记，
 # 而该期间实际发生 ≥2 次强制触发事件。本提示在 **ref-lock 竞争真正发生** 时喊一声，
@@ -151,6 +154,8 @@ def commit(msg_args, pathspecs, max_retry=1, expect_spec=None):
         attempted += 1
         old = _head()
         cmd = ["git", "commit"] + list(msg_args)
+        if _NO_VERIFY:
+            cmd.append("--no-verify")
         if pathspecs:
             cmd += ["--"] + list(pathspecs)
         r = subprocess.run(cmd, capture_output=True, text=True)
@@ -223,9 +228,20 @@ def main():
     msg_args = []
     pathspecs = []
     expect_spec = None
+    global _NO_VERIFY
+    _NO_VERIFY = False
     i = 0
     while i < len(argv):
         a = argv[i]
+        if a == "--no-verify":
+            # W1049 新增：共享工作树内存在**未暂存的并行会话在途件**时，
+            # pre-commit 钩子跑的 `verify_delivery.py --scope full` 必红
+            # （读工作树 vs 比索引态 ⇒ 必然不一致·与本批改动无关）⇒
+            # 允许按钩子自己给出的提示路径跳过钩子，**但仍保留 ref-lock 竞争保护**。
+            # 用法：safe_commit.py -F <msg> --no-verify [--expect-spec <spec>]
+            _NO_VERIFY = True
+            i += 1
+            continue
         if a == "-F" and i + 1 < len(argv):
             msg_args = ["-F", argv[i + 1]]
             i += 2
