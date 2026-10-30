@@ -1,3 +1,14 @@
+### W1050（2026-10-31）：门禁判据加固（sweep 覆盖面纳入 gates.md·第 3 槽计数 fallback 对拍）
+
+> **来源**：用户 2026-10-31 两项批准（sweep 覆盖面修复 + 第 3 槽判据批立项）——W1048 基线诊断的遗留次批强制项兑现；本批动 verify_delivery.py 门禁本体（经用户批准·py_compile + 全量跑通配套验证）。
+>
+> - **文件**：scripts/verify_delivery.py、scripts/check_doc_sync.py、docs/agent/gates.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/_cascade_files_W1050.txt、scripts/output/_w1050_spec.json。
+
+**本批要点**：① **sweep 覆盖面修复**——check_doc_sync.py c5b_extra_surfaces 加 docs/agent/gates.md（W1048 实证 615 旧值滞留的根因：stats.py:277-280 与该清单均不含 gates.md·标记自此自动跟随·不一致即红）；② **第 3 槽 A1-A6 计数 fallback**——verify_delivery.py _gate_a1_a6_count 在 README 无「共 N 篇」声明时fallback 对拍 AGENTS §1 的 `616<!--stats:a1_a6_docs-->` 标记值（stats 标记由 stats.py --w 机器跟随·非手写字面量·两处都缺才 WARN）——防 doc-sync:exempt 豁免致校验静默失明；③ gates.md L26 判据文本同步fallback 描述。
+
+**验证**：py_compile 两脚本 OK · ruff All checks passed · check_doc_sync --self-test 33/33 · E1 spot-check 三文件各含 W1050 标记 · 全量门禁第 3 槽由 WARN 转 OK（fallback 口径 616==616·辅助 WARN 清零）。
+
+> - **状态**：已收官（sweep 覆盖缺口关闭 + 第 3 槽 fallback 落地·全量辅助 WARN 清零）
 ### W1049（2026-10-31）：回次 og:image 全覆盖批·第五轮（12 张线描立像/场面）
 
 
@@ -854,7 +865,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1049），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1050），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1846,18 +1857,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：浏览器实测首页轮播（点击第 5 张 → 背景同步切换 + `aria-pressed` 跟随 + 6s 自动推进）与内页题图渲染；全量门禁 54 段 0 FAIL；CSP 861 个内联脚本哈希零漂移；W 号跳号（W935 在途）已留台账行
 > - **状态**：在途（接入完成·认领登记 W936·待提交入库）
 > **状态**：**已收官**（W936 fc0060af·git 反填·共 1 笔·W971 存量回填）
-
-
-### W935（2026-10-25）：速赢两处批（R-05 渡口正文溯源去工程化 + R-12 英文站目录死链消除）
-
-
-
-> **来源**：W926 站点交互流程审查报告 §0.4 执行序（用户 2026-10-25 选定「功能可用性优先」权重）中的 P1 与 P2 两项；用户问卷进一步授权「先动代码」并选定「速赢两处：R-05 四条 + R-12 死链」。
-> - **文件**：site/dukou-engine.html、site/en/visualizations.html、docs/11-方案报告/计划方案/T25-任务计划执行与经验沉淀报告-2026-10-25.md、ddocs/11-方案报告/README.md、scripts/output/_w935_spec.json。
-> - **改动 1（R-05）**：渡口页 `LINE` 数组 **4 条**「（见 W321 line 7012 凌云渡：脱胎即 Dropout）」「（见 W323 …）」「（见 W324 …）」「（见 W321 line 1393 紧箍咒：正则项在收敛后归零）」改为对读者有意义的正文（凌云渡 / 西游渡元定义 / 遗忘者列传 / 紧箍咒），**溯源写入数组上方源码注释**（保留可追溯性·不进访客可见文本）；数组结构不变（消费方 `pick(LINE)` 为字符串数组·零改动）。
-> - **改动 2（R-12）**：`site/en/visualizations.html` source-note 段 `<a href="../data/">site/data/</a>` 改为纯文本——`site/data/` 有 88 个 html 但**无 index.html**，线上 GitHub Pages 对目录 URL 直接 404；全仓同型扫描确认**仅此 1 处**目录型死链，同页其余 `../data/*.html` 均指向具体文件（有效·未动）。
-> - **验证**：① 浏览器 `file://` 直开点「生成渡口档案」，`#out` 实测输出为「紧箍咒：正则项在收敛后归零。」，无批次号与源码行号；② 全量结构重扫 `A_paths.broken_links` 的 4 条残项全部为「目标目录含 index.html」的旧口径假死链（`site/en/index.html`、`site/reader/poetry/index.html` 均实证存在）⇒ **全仓真死链 1 → 0**；③ 可见文本重扫：LINE 四条溯源清零（全站计数 +9 来自并行批同期往页脚批次链注入的并发噪声·未单独归因）。
-> - **纪律**：本批仅改 **2 个 site/ 页面共 7 行**；0 处管控脚本与判据脚本改动；未顺手动 R-02 页脚与 R-03/R-04 分类 hub（属后续批）。
-> **状态**：**已收官**（W935 b130f7a1·git 反填·共 2 笔·W971 存量回填）
 
 

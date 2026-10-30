@@ -10,6 +10,42 @@
 
 ---
 
+## W1050 门禁判据加固（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W1050 | 本批新增/修改（第 3 槽 A1-A6 计数 fallback·用户批准动门禁本体·py_compile+全量跑通） |
+| scripts/check_doc_sync.py | W1050 | 本批新增/修改（c5b_extra_surfaces 加 gates.md·sweep 覆盖面修复） |
+| docs/agent/gates.md | W1050 | 本批新增/修改（L26 判据文本同步 fallback 描述） |
+| CHANGELOG.md | W1050 | 收官面（顶段 W1050） |
+| HANDOVER.md | W1050 | 收官面（最后更新/一、当前进度） |
+| README.md | W1050 | 级联面（版本行） |
+| STRUCTURE.md | W1050 | 级联面（版本行） |
+| AGENTS.md | W1050 | 级联面（脚注滚动） |
+| CITATION.cff | W1050 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1050 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1050 | 台账（W1050 行新增） |
+| docs/INDEX.md | W1050 | 登记面（docs 索引） |
+| index.md | W1050 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1050 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1050 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1050 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1050 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1050 | 级联面（里程碑行同步） |
+| site/index.html | W1050 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1050 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1050 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1050 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1050 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1050 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1050 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1050 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1050 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1050 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1050 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1050.txt | W1050 | 级联清单（本批产物） |
+| scripts/output/_w1050_spec.json | W1050 | 本批 spec |
+
 ## W1049 回次 og:image 全覆盖批·第五轮（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4945,26 +4981,4 @@ docs/11-方案报告/README.md
 | scripts/_w936_cascade.py | W936 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
 | CHANGELOG.md | W936 | W936 版段（四件套） |
 | docs/00-导读/W批次编号对账表.md | W936 | W936 认领行（W935 在途跳号依据） |
-
-## W935 速赢两处批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/dukou-engine.html | W935 | 渡口档案 LINE 数组 4 条工程引用去除（溯源移入源码注释） |
-| site/en/visualizations.html | W935 | source-note 段目录型死链改纯文本（site/data/ 无 index.html·线上 404） |
-| docs/11-方案报告/计划方案/T25-任务计划执行与经验沉淀报告-2026-10-25.md | W935 | 速赢两处批交付报告（32/32 判据符合） |
-| docs/00-导读/W批次编号对账表.md | W935 | W935 认领行与收官回填 |
-| docs/11-方案报告/README.md | W935 | 计划方案分区登记（第 27 行·T-25） |
-| scripts/output/_w935_spec.json | W935 | 本批级联 spec |
-| CHANGELOG.md | W935 | W935 段 |
-| HANDOVER.md | W935 | 级联头尾链与里程碑块 |
-| README.md | W935 | 当前批次版本行 |
-| STRUCTURE.md | W935 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W935 | 当前批次版本行 |
-| site/index.html | W935 | 页脚批次链插入 W935 |
-| site/dukou-engine.html | W935 | 页脚批次链插入 W935 |
-| AGENTS.md | W935 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W935 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W935 | version 同步为 W935 |
-| scripts/output/file-index.md | W935 | W935 段插入 |
 

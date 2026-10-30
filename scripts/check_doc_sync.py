@@ -161,6 +161,7 @@ def c5b_extra_surfaces():
     W901 实测该子目录 8 件带冻结 stats 标记·入面即假红·除外条款随递归化原样保留）。
     """
     paths = [os.path.join(ROOT, "pytest.ini"), os.path.join(ROOT, "site", "index.html")]  # W913：站点聚合数字失真面（B-W855-01·772 篇漂移实证）纳入标记对账
+    paths.append(os.path.join(ROOT, "docs", "agent", "gates.md"))  # W1050：gates.md 判据文本含 stats 标记（第 3 槽「当前 N=…」）——W1048 实证 615 旧值滞留（sweep 覆盖缺口·不修复则旧值漂移必重演）
     paths += sorted(
         p for p in glob.glob(
             os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)
