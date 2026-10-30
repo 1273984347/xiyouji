@@ -95,9 +95,9 @@ def clean_text(text: str) -> str:
     - 广告常见关键词所在的行
     """
     # 去图片标签
-    text = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", text)
+    text = re.sub(r"!\[[^\]\n\r]*\]\([^)\n\r]*\)", "", text)
     # 去 HTML 标签
-    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"<[^>\n\r]+>", "", text)
     # 去网址行
     text = re.sub(r"https?://\S+", "", text)
     # 合并多余空行

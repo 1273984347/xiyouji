@@ -90,6 +90,7 @@ ci: ## CI 本地预跑 = lint + test + audit + links + data-validate + docs-inde
 	$(MAKE) validate-en
 	$(MAKE) ledger
 	$(MAKE) cross-line
+	@echo "==> ci 完成"
 
 ledger: ## 共享面串行化机制自测（台账回填独占 + 收官回填体检 + 三判据可证伪性·W933）
 	@echo "==> ledger: 台账工具自测 + 三判据可证伪性验证"
@@ -102,7 +103,6 @@ cross-line: ## 跨行改写门禁（改写面正则不得跨行吞内容·W1014�
 	@echo "==> cross-line: 改写面正则跨行吞并扫描（高危必须 0 处）"
 	python scripts/check_cross_line_rewrite.py --gate
 	@echo "==> cross-line 完成"
-	@echo "==> ci 完成"
 
 release: ## 版本发布前体检（doc-sync + git 状态 + pytest + checklist）
 	@echo "==> release: 版本发布前体检"

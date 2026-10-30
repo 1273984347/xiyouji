@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（166）
+## 文件（168）
 
 ### Markdown 文档
 
@@ -63,6 +63,7 @@
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
 - `_gen_search_index.py`
+- `_w1042_make_spec.py`
 - `a11y_audit.py`
 - `accent_audit.py`
 - `acceptance_snapshot.py`
@@ -225,6 +226,7 @@
 ### 数据与配置
 
 - `content-consistency-baseline.txt`
+- `cross_line_baseline.json`
 - `drl_contracts.yaml`
 - `package-lock.json`
 - `package.json`
