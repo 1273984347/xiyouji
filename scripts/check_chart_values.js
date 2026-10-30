@@ -1029,6 +1029,16 @@ function printSummary(judged, cmp, cfg, elapsed, mode) {
       `可收紧 ${cmp ? cmp.tighten.length : '-'} · probe_error ${probeErr.length} 页 · ${elapsed.toFixed(1)}s · workers=${cfg.workers || ''}`
   );
   console.log('判据分布：' + ITEMS.map((i) => `${i} ok=${tally[i].ok}/fail=${tally[i].fail}/na=${tally[i].na}`).join(' · '));
+  // W1053 G-03（W1046 方案）：na 出口影子报数——不进 nFail 不拦提交（方案 R-03 影子先行·
+  // 收紧到「V3/V4 na>2 页 FAIL」待存量清偿批次）。按 reason 分组列 na 页，供清偿批定位。
+  for (const item of ['V3', 'V4']) {
+    const nas = judged.filter((j) => j.verdicts[item].status === 'na');
+    if (!nas.length) continue;
+    const byReason = countBy(nas.map((j) => ({ reason: j.verdicts[item].reason })), 'reason');
+    console.log(`影子报数 ${item} na=${nas.length}（方案阈值 2·收紧待清偿）：` +
+      Object.entries(byReason).map(([k, v]) => `${k}=${v}`).join(' '));
+    console.log('  na 页：' + nas.map((j) => j.page).slice(0, 20).join(', '));
+  }
   for (const r of (cmp ? cmp.newFail : []).slice(0, 40)) {
     console.log(`FAIL ${r.page} :: ${r.item} ${r.cur} (${r.kind}) ${r.measured}`);
   }

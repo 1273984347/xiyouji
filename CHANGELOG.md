@@ -1,3 +1,15 @@
+### W1053（2026-10-31）：W1046 方案实施收尾（判据 5 条 + 流程 2 条 + 制度 3 条 + 度量 3 条）
+
+> **来源**：用户 2026-10-31 令「W1046 方案现在做完」——W1052 已落 G-01 与方案钉订正，本批实施剩余 13 条（判据 5 / 流程 2 / 制度 3 / 度量 3），按方案分阶段约束交付：该升格的升格、该影子的影子、
+须用户裁定的存量以报数形式交付。
+>
+> - **文件**：scripts/check_inlined_css.py、scripts/check_chart_values.js、scripts/check_gsap_motion.py、scripts/check_frontmatter.py、scripts/check_governance_docs.py、scripts/check_glossary.py、scripts/check_corruption.py、scripts/ledger_close_check.py、scripts/check_review_trigger.py、scripts/stats.py、scripts/patch_ratio.py、docs/00-导读/文档规范.md、scripts/output/_w864_accent_exemptions.json、AGENTS.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、CITATION.cff、docs/00-导读/项目说明.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_cascade_files_W1053.txt、scripts/output/_w1053_spec.json。
+
+**本批要点**：① **G-02**——INLINED 判据加内容特征断言（tokens 12 词表/system 8 词表·2026-10-31 实测提取·真实块 12/12+8/8 全命中），塞 20KB 垃圾 CSS 必红（self-test 2/2·225 页零误伤）；② **G-03 影子**——第 43 槽 na 出口影子报数（不进 FAIL）：V3 na=9（no-data-source 7/small-data 1/no-rendered-view 1）·V4 na=17（no-kpi 13/no-data-source 3/kpi-unmatched 1）——收紧待清偿批；③ **G-04**——GSAP 扫描域从单文件扩至自有 js 10 件（排 .min 库·影子实测零违例故直接升格）+ J2 剥注释（防误伤向）+ J8 接线清单glob 派生（13 页·免手维护）+ J1 node 检查外移修粗检误报（self-test 11/11）；④ **G-05**——元信息块日期语义（≤当天+1·真实日期）与来源哈希形态（[0-9a-f]{7,40}）校验（存量实测 0 翻红·self-test 5/5）；⑤ **G-06 第一批**——文档族 governance/glossary/corruption 各补 3 例注入式 self-test；check_cascade_line_anchor.py 经核查已有等价自测（check() 即合成注入+负样本自证）不计欠账；⑥ **P-01/P-02**——ledger_close_check.py 加 C3：修复类顶段批 spec 必填五问（why_red/is_misjudge/data_truth/layer_changed/prevention）与回归锁（carrier+case·self-test 3/3）；⑦ **I-01/I-03**——文档规范 §11.2 加豁免分级审批条款（新增条目必须用户批准·只增不减为默认）与改动分级列（14 行三级标注）+ 铁律 16 之⑦；⑧ **I-02**——豁免簿 256 条加 owner/review_by 字段（owner=所属批·review_by=未复核·真实初始化）；**stale 影子报数=0 且方案「陈旧积压」前提被实测修正**——W864-W887 全部为 10-22/23 收官批（条目龄 ≤9 天），git 追溯与 CHANGELOG 双源印证（方案的豁免簿审计把 9 天新簿误当陈旧库存·「只增不减」方向性事实成立而「存量陈旧」不成立）；升 FAIL 通道留给真实陈旧出现时启用；⑨ **M-01**——patch_ratio.py 影子上线（首跑 W1050 比值 12.0 即实证字面 grep 分子的误报形态——文档叙述「豁免」字样计入分子·方案 D-04 预期）；⑩ **M-02**——stats 加 w864_entries=256 / icon_allowlist_entries=71 两键（fail-closed·C5b 跟随）；⑪ **M-03**——触发器 T4（豁免簿 30 天未减→清偿批建议·self-test 扩 2 例）。
+
+**验证**：ruff 全部 All checks passed · 各脚本 self-test 合计 2/2+5/5+11/11+3/3+3/3+3/3+3/3+3/3 全过 · node --check chart_values OK · G-04 实跑 10 件自有 js + 13 接入页全绿 · G-02 实跑 225 页特征全过 · M-02 --check 漂移两键按预期待收官刷新 · 全量门禁见收官提交。
+
+> - **状态**：已收官（W1046 方案 14 条全部落地：G-01/G-07 在 W1052·本批 13 条·G-03/I-02 按方案影子先行待存量清偿）
 ### W1052（2026-10-31）：补丁治理实施第一批（G-01 铁律双写根治+C8 判据·G-07 占号支撑检测）
 
 > **来源**：用户 2026-10-31 令「W1046 方案你自己 review 一遍，没问题就开工；AGENTS 铁律 14/15 双写；reserve_w.py 盲区；做完之后提交」——review 结论：方案通过（G-01 目标实证/41 槽确实无重复判据/分阶段合理），缺陷一处（计数钉 9 vs 11）顺手订正；reserve_w「盲区」经读码订正归因——ledger_max 实读工作树台账，真根因是并行会话未跑 reserve_w 直接写台账认领行（绕过铁律 17），加固方向由「改读文件」改为「占号面与认领面对拍」。
@@ -887,7 +899,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1052），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1053），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1822,26 +1834,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：判据脚本 9/9 PASS（尺寸 2400×1017 · 左留白 0.0000–0.0039 · 整图墨量 0.0211–0.0809 · 朱砂点 9/9 在场）· 成套拼图逐张目视 · 素材与站点两侧文件同步清理核验
 > - **状态**：在途（认领登记 W940·待提交入库）
 > **状态**：**已收官**（W940 95495824·git 反填·共 1 笔·W971 存量回填）
-
-
-### W938（2026-10-25）：首屏版式重做 + 图集逐张复核（左侧文字重排 · 切换器归位 · 9 张构图全部完整）
-
-> **来源**：用户 2026-10-25 反馈「你现在的这个设计不太好看，要么重新设计一下这个 100 回放在哪个位置比较好」+「我说的是首页右边的插图。并且现在首页左边文字的排版非常丑」。
-
-> - **文件**：site/index.html、site/static/images/hero-line-09-pilgrim-four.webp、assets/promo/hero-set/hero-line-09-pilgrim-four.png、assets/promo/hero-set/hero-line-09-pilgrim-four.webp、assets/promo/hero-set/raw/hero-09-pilgrim-four.jpg、assets/promo/hero-set/hero-line-07-banana-fan.png、assets/promo/hero-set/hero-line-07-banana-fan.webp、assets/promo/hero-set/raw/hero-07-banana-fan.jpg、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、scripts/_w931_hero_verify.py、Cdsscripts/_w938_cascade.py
-
-**左侧文字重排**：原布局七层平铺、字号跳跃、层级无引导 ⇒ 改为「眉题 → 标题组（中文 + 英文紧贴）→ 主张句（16px 浅灰 → 19px 墨色）→ 细线分隔 → 数据带（100 回 + 两行说明）→ 双轨标签 → CTA → 插画切换器（含「首屏插画」标签）」。插画切换器此前与 CTA 同排会撑破 620px 容器伸进插画区（实测金箍棒压住第 6–9 个圆点）⇒ 独立成行归位左侧文字列内。
-
-**首页 9 张插画逐张复核（按 1440×520 容器裁切实测·判据脚本 9/9 PASS）**：① **重出 07 芭蕉扇**——首版扇面顶边被裁成半截圆面，要求主体完整入画且上下各留 15% 冗余后重出；② **第 9 张换图**——原定 W932 持瓶菩萨立像为 16:9（2560×1440），在该容器下垂直溢出 290 px（源图顶部 41% 被裁）⇒ 首屏只剩人物下半身的「断头感」，改为同规格 `2400×1017`「取经四众西行」（挑担领路 + 山道 + 赭金山峦）作收尾重音。修正后 **9 张画幅与裁切损失（90 px）完全一致**，右半区墨量 0.056–0.208，构图全部完整可辨。
-
-**背景渲染 cover → contain（用户明令「要适配各种比例大小·要不然每个人看到的都是不一样」）**：cover 会按容器比例裁切，两组素材都被切出问题——线描 2.36:1（2400×1017）在真实容器 1006×645 下被放大 0.63 倍、左右各裁掉 407 源像素 ⇒ 主体右端被切（实测金箍棒右上端断头）；浓墨 16:9 在 1440×520 下垂直裁掉 290 px（源图顶部 41%）⇒ 首屏只剩人物下半身。改 `contain` 后：任何视口比例下图都完整显示、主体恒锚定容器右下角，容器富余处露 `#FAF7F0` 宣纸底（与图底色同色·无缝）⇒ 各人看到的构图一致。窄屏（@768 以下 masthead 转 column）另把插画移到容器顶部，首屏即可见。
-
-**纸色归一（消边界）**：contain 不裁切后，图块矩形边界暴露——9 张纸色基调与页面底色 `#FAF7F0` 差 1–9/255（经卷 +3/+4/+9 最高）。按亮度加权做加性平移（亮像素精确落到目标色·暗像素权重 0 不动·过渡平滑），归一后残差全部 ≤ 1/255 ⇒ 图块与页面底色无缝。
-
-**一条现场复现的工程陷阱**：改内联脚本后未重算 CSP 哈希 ⇒ 整个轮播脚本被浏览器拒执行（切换器整组停在 `hidden`）——重算后恢复（AGENTS §6-3「改内联脚本必跑 generate_csp.py」铁律的现场复现）。
-
-> - **验证**：浏览器实测首页渲染（左侧七层有节奏 + 右侧插画完整无遮挡 + 切换器归位不压图）+ 9 张裁切对照图逐张目视；判据脚本 9/9 PASS；CSS 结构平衡 / JS 语法 / token 覆盖 / 动效禁令 / CSP 零漂移 / 第 31 与第 45 门禁全绿
-> - **状态**：在途（认领登记 W938·待提交入库）
-> **状态**：**已收官**（W938 db5328b5·git 反填·共 2 笔·W971 存量回填）
 
 

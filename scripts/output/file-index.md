@@ -10,6 +10,52 @@
 
 ---
 
+## W1053 W1046 方案实施收尾（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_inlined_css.py | W1053 | 本批新增/修改（G-02 特征断言·self-test 2 例） |
+| scripts/check_chart_values.js | W1053 | 本批新增/修改（G-03 na 影子报数·不进 FAIL） |
+| scripts/check_gsap_motion.py | W1053 | 本批新增/修改（G-04 扫描域扩全+剥注释+J8 glob·self-test 11 例） |
+| scripts/check_frontmatter.py | W1053 | 本批新增/修改（G-05 日期语义+哈希形态·self-test 5 例） |
+| scripts/check_governance_docs.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/check_glossary.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/check_corruption.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/ledger_close_check.py | W1053 | 本批新增/修改（P-01/P-02 C3 五问+回归锁·3 例自测） |
+| scripts/check_review_trigger.py | W1053 | 本批新增/修改（M-03 T4 触发器·2 例自测） |
+| scripts/stats.py | W1053 | 本批新增/修改（M-02 w864_entries/icon_allowlist_entries 两键） |
+| scripts/patch_ratio.py | W1053 | 本批新增（M-01 补丁比影子脚本·不挂槽） |
+| docs/00-导读/文档规范.md | W1053 | 本批新增/修改（I-01 豁免分级审批条款 + I-03 改动分级列 14 行） |
+| scripts/output/_w864_accent_exemptions.json | W1053 | 本批新增/修改（I-02 owner/review_by 字段化 256 条） |
+| AGENTS.md | W1053 | 本批新增/修改（铁律 16 之⑦ + 级联脚注） |
+| CHANGELOG.md | W1053 | 收官面（顶段 W1053） |
+| HANDOVER.md | W1053 | 收官面（最后更新/进度/级联） |
+| README.md | W1053 | 级联面（版本行） |
+| STRUCTURE.md | W1053 | 级联面（版本行） |
+| CITATION.cff | W1053 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1053 | 级联面（当前版本行） |
+| docs/INDEX.md | W1053 | 登记面（docs 索引） |
+| index.md | W1053 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1053 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1053 | 级联面（里程碑行同步） |
+| site/index.html | W1053 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1053 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1053 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1053 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1053 | 登记面产物（stats 实体·含 M-02 两新键） |
+| scripts/output/stats-changelog.json | W1053 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1053 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1053 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1053 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1053 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1053 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1053.txt | W1053 | 级联清单（本批产物） |
+| scripts/output/_w1053_spec.json | W1053 | 本批 spec |
+| docs/00-导读/W批次编号对账表.md | W1053 | 台账（W1053 行新增） |
+
 ## W1052 补丁治理实施第一批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -5013,24 +5059,4 @@ docs/11-方案报告/README.md
 | scripts/_w940_cascade.py | W940 | 四面登记脚本（认领行 + CHANGELOG 段 + file-index 段 + 当前态指针） |
 | CHANGELOG.md | W940 | W940 版段（四件套） |
 | docs/00-导读/W批次编号对账表.md | W940 | W940 认领行 |
-
-## W938 首屏版式重做 + 图集逐张复核（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W938 | 左侧文字重排（眉题→标题组→主张句→细线→数据带→标签→CTA→切换器）+ 插画切换器归位左侧文字列内 + 第 9 张换图 |
-| site/static/images/hero-line-09-pilgrim-four.webp | W938 | 新增收尾图（取经四众西行·2400×1017·站点版） |
-| assets/promo/hero-set/hero-line-09-pilgrim-four.png | W938 | 收尾图母版（PNG） |
-| assets/promo/hero-set/hero-line-09-pilgrim-four.webp | W938 | 收尾图 WebP |
-| assets/promo/hero-set/raw/hero-09-pilgrim-four.jpg | W938 | 收尾图出图原件（重出基准） |
-| assets/promo/hero-set/hero-line-07-banana-fan.png | W938 | 芭蕉扇重出（首版扇面顶边被裁成半截圆面） |
-| assets/promo/hero-set/hero-line-07-banana-fan.webp | W938 | 芭蕉扇重出 WebP |
-| assets/promo/hero-set/raw/hero-07-banana-fan.jpg | W938 | 芭蕉扇重出原件（覆盖首版） |
-| assets/promo/hero-set/preview-contact-sheet.png | W938 | 9 张成套拼图刷新 |
-| assets/promo/hero-set/preview-contact-sheet.webp | W938 | 9 张成套拼图 WebP |
-| assets/promo/hero-set/README.md | W938 | 目录导读更新（8 张 → 9 张 + 第 9 张换图留证） |
-| scripts/_w931_hero_verify.py | W938 | 判据清单加第 9 张（9/9 PASS） |
-| scripts/_w938_cascade.py | W938 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
-| CHANGELOG.md | W938 | W938 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W938 | W938 认领行 |
 

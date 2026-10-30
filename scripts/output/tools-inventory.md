@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-31 05:28
+生成时间：2026-10-31 06:01
 
-共 **160** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 60 · 一次性（下划线前缀） 6）
+共 **161** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 61 · 一次性（下划线前缀） 6）
 
 ## 门禁与校验（72）
 
@@ -127,7 +127,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（60）
+## 工具（61）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -168,6 +168,7 @@
 | `obs_sample.py` | obs_sample.py — OBS-10/11/14 逐批采样件（W850 建·Q2 裁决的取数入口）。 |
 | `optimize-html-size.py` | W230 E3 · HTML 文件体积优化脚本 |
 | `package_analysis_sync.py` | package_analysis_sync.py — B-7：把 scripts/ A-H 类目分析脚本同步进 pip 包 analyses/ |
+| `patch_ratio.py` | patch_ratio.py — 补丁比影子度量（W1053 M-01·W1046 方案 M-01·不挂槽不拦提交）。 |
 | `perf_monitor.py` | W267 E6 性能监控深化·Core Web Vitals 持续监控 + RUM + 警报 + 趋势 + 预算 |
 | `perf_optimize.py` | perf_optimize.py - 全站性能优化脚本 |
 | `plan_template_review.py` | _w857_plan_template_review.py — 计划方案对《任务计划、执行与经验沉淀系统提示词》模板的符合性复核探针 |

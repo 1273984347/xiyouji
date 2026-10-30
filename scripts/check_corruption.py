@@ -75,5 +75,24 @@ def main():
     return 1 if errors else 0
 
 
+def _self_test():
+    """W1053 G-06：R1/R2 判据注入式三例（腐蚀命中/合法空串放行/插件引用形态）。"""
+    ok_all = True
+    hit = DOUBLE_QUOTE_RE.search('var s = ""X"";')
+    r1 = bool(hit)
+    print("%s  T1 双引号翻倍腐蚀命中（G-06）" % ("PASS" if r1 else "FAIL"))
+    ok_all &= r1
+    miss = not DOUBLE_QUOTE_RE.search('var s = ""；')
+    print("%s  T2 合法空串拼接放行（G-06）" % ("PASS" if miss else "FAIL"))
+    ok_all &= miss
+    use = D3_USE_RE["sankey"].search("d3.sankey(links)")
+    print("%s  T3 插件调用形态识别（G-06）" % ("PASS" if use else "FAIL"))
+    ok_all &= bool(use)
+    print("---- corruption self-test：%d/3 通过 ----" % (3 if ok_all else 0))
+    return 0 if ok_all else 1
+
+
 if __name__ == "__main__":
+    if "--self-test" in sys.argv:
+        sys.exit(_self_test())
     sys.exit(main())
