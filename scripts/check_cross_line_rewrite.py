@@ -18,6 +18,7 @@ r"""check_cross_line_rewrite.py — 同族扫描：改写面正则的「跨行�
 from __future__ import annotations
 
 import ast
+import hashlib
 import io
 import json
 import os
@@ -107,7 +108,17 @@ BASELINE_PATH = os.path.join(ROOT, "scripts", "cross_line_baseline.json")
 
 
 def _item_key(item):
-    return "%s:%d" % (item["file"], item["line"])
+    """基线键 = **内容指纹**（文件 + 模式 + 替换语义 ⇒ 内容哈希），**不含行号**。
+
+    W1043 对抗审查 P1-2 实测：原键为「文件:行」⇒ ① 该行**原地**被改成危险删除型
+    （行号不变）② 上方增删行导致行号位移 ⇒ 两种情形键都不变 ⇒ 新危险候选被**静默
+    豁免**（门禁仍 PASS）⇒ 恰是它要防的场景。
+    ⇒ 改用内容指纹：源码一改（模式/替换语义变）⇒ 键必变 ⇒ 门禁判红。
+    """
+    sig = hashlib.sha256(
+        ("%s|%s|%s" % (item["file"], item["pattern"], item["repl"])).encode("utf-8")
+    ).hexdigest()[:12]
+    return "%s#%s" % (item["file"], sig)
 
 
 def _load_baseline():
@@ -298,6 +309,15 @@ def main() -> int:
         print("  [YELL] %s:%d  re.%s  repl=%s  pattern=%r"
               % (it["file"], it["line"], it["func"], it["repl"], it["pattern"]))
     print("   共 %d 处" % len(mid))
+    # W1043 对抗审查 P1-3：mid 桶里 **re.sub/subn 是改写面**（会改写原文），而 repl=unknown
+    # （f-string / 变量替换）时**静态判不出是删还是留** ⇒ 危害面被静默放大。
+    # ⇒ 本批不把它推成高危（112 处未逐处人工复核·推高危会把未复核面直接豁免进基线），
+    #    但**必须可见**：单独计数并明示「人工复核队列」。
+    mid_rw = [it for it in mid if it["func"] in ("sub", "subn")]
+    if mid_rw:
+        unk = [it for it in mid_rw if it["repl"] == "unknown"]
+        print("   ⚠ 其中属**改写面**（re.sub/subn）的 %d 处（repl=unknown·静态判不出删留·"
+              "**人工复核队列**）：%d 处" % (len(mid_rw), len(unk)))
     print("\n== 只读面（search/findall/match·跨行只致 fail-closed 误报·不产生破坏）==")
     for it in low:
         print("  [RO ] %s:%d  re.%s  pattern=%r" % (it["file"], it["line"], it["func"], it["pattern"]))

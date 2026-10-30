@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（65）
+## 文件（77）
 
 ### Python 脚本
 
@@ -74,6 +74,18 @@
 - `_w1018_sheet.py`
 - `_w1018_stage.py`
 - `_w1018_verify.py`
+- `_w1042_make_spec.py`
+- `_w1043_derive_prepare.py`
+- `_w1043_derive_stage.py`
+- `_w1043_derive_verify.py`
+- `_w1043_download.py`
+- `_w1043_make_spec.py`
+- `_w1043_master.py`
+- `_w1043_pick.py`
+- `_w1043_prepare.py`
+- `_w1043_probe_pages.py`
+- `_w1043_stage.py`
+- `_w1043_verify.py`
 
 ### 数据与配置
 
