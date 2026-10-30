@@ -1,3 +1,26 @@
+### W1054（2026-10-31）：G-03 清偿第一轮（probe 时序修复 + 前缀扩展 + na 分层影子）
+
+> **来源**：用户 2026-10-31 令「现在开始」（G-03 清偿批立项）——W1053 影子第 1 批（V3 na=9/V4 na=17）
+落地后的清偿第一轮：修判据的采集稳定性与命名覆盖，不动页面数据（铁律 15：禁补数据迎合判据）。
+>
+> - **文件**：scripts/check_chart_values.js、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、CITATION.cff、AGENTS.md、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/_vermilion_solid_cache.json、scripts/index.md、scripts/output/_cascade_files_W1054.txt、scripts/output/_w1054_spec.json。
+
+**本批要点**：① **时序修复**——collectEmbeddedData 轮询重试（≤4 次·150ms 间隔）：并行 workers 下
+页面主脚本未执行完时 `typeof EMBEDDED_DATA` = undefined ⇒ 静默 continue ⇒ 假 no-data-source
+（单页跑同页 ok/small-data 实证·century-dialogue/tag-cloud 双跑差异坐实）；② **前缀扩展**——
+DATA_NAME_RE 加 nodes/edges/links/cols/lines 小写图形数据命名（逐页取证：81-hardships-view/
+character-relationship-3d-view/graph-explorer/perf-canvas-rendering 的数据声明全在此列）；
+③ **影子分层**——na 报数分「结构性不适用」（no-view-intent/no-rendered-view/no-kpi/small-data·
+页面形态决定·不计收紧口径）与「真覆盖缺口」（no-data-source/kpi-unmatched/interactive-input-page·
+数据在场但判据抓不到·收紧对象）；④ **清偿结果**——转出 4 页（century-dialogue→small-data 结构性/
+ai-dialogue 等→ok），缺口余量 **11 页（V3 7 + V4 4）**根因定位 = 数据声明在 `<script>` 块作用域
+（dataExpr 全局 typeof 求值不可达·重试无效）——清偿需「静态字面量提取求值」判据工程，**另批立项**；
+⑤ 收紧升 FAIL 暂缓（缺口 11 > 阈值 2·影子继续·升格待覆盖工程批）。
+
+**验证**：node --check OK · self-test 12/12 · 全量 --report 87 页 FAIL 0 · --gate 0 FAIL ·
+probe_error 0 页 · 影子分层报数结构性与缺口分离清晰。
+
+> - **状态**：已收官（时序/前缀/分层三项落地·缺口 11 页覆盖工程另批·收紧升格随之）
 ### W1053（2026-10-31）：W1046 方案实施收尾（判据 5 条 + 流程 2 条 + 制度 3 条 + 度量 3 条）
 
 > **来源**：用户 2026-10-31 令「W1046 方案现在做完」——W1052 已落 G-01 与方案钉订正，本批实施剩余 13 条（判据 5 / 流程 2 / 制度 3 / 度量 3），按方案分阶段约束交付：该升格的升格、该影子的影子、
@@ -899,7 +922,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1053），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1054），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1817,22 +1840,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **保留项登记（如实披露·非遗漏）**：① 星级评分 `★`/`☆` 12 处（难度与强度评分，**评分可视化**而非图标）；② `site/data/timeline.html` 与英文版的**数据字段** `icon:` 共 12 处（📖📚📜✒ 等，每条时间线事件的专属象征——通用图标集无法表达「成书/游记/评点」语义差，属**专属设计任务**）；③ `site/data/ai-dialogue.html` 人物**头像** emoji 4 处（🧑‍🎓，身份标识，通用图标会丢身份信息）；④ `site/data/methodology-matrix.html` 评分项 `icon:` 1 处；⑤ `site/data/business-model.html` 区间标注 `◀…▶` 2 处（内容表达）。
 
 **未改**：任何管控脚本（`verify_delivery.py` / `bump_version.py` / `batch_cascade.py` / `preflight_check.py`）；既有 `.icon-moon` / `.icon-sun` 体系；正文装饰 emoji 与箭头符号；并行批次 W936 在途的共享面（提交用显式 pathspec 隔离）。
-
-
-### W940（2026-10-25）：Hero 素材题材辨识度修正（09 换筋斗云 · 04 换紧箍儿 · 补题材关判据）
-
-> **来源**：用户 2026-10-25 质疑「你确定这个图片符合主题吗？符合西游记吗？」——指向第 9 张「取经四众」。
-
-> - **文件**：assets/promo/hero-set/hero-line-04-tight-crown.png、assets/promo/hero-set/hero-line-04-tight-crown.webp、assets/promo/hero-set/hero-line-09-somersault-cloud.png、assets/promo/hero-set/hero-line-09-somersault-cloud.webp、assets/promo/hero-set/raw/hero-04b-tight-crown.jpg、assets/promo/hero-set/raw/hero-05b-somersault-cloud.png、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、site/static/images/hero-line-04-tight-crown.webp、site/static/images/hero-line-09-somersault-cloud.webp、site/index.html、scripts/_w931_hero_verify.py、scripts/_w938_apply_home.py、Cdsscripts/_w940_cascade.py
-
-**问题定性**：第 9 张「取经四众」被画成「农夫挑担」——金箍棒 / 九齿钉耙 / 月牙铲 / 僧帽**一个都没有**，且四人组侵入文字安全区（左留白 0.0174、整图墨量 0.1250 超判据上限）⇒ 题材与版面双不合格。根因在**判据缺口**：原判据只查尺寸 / 留白 / 墨量 / 伪文字 / 裁切五项，**没有「题材辨识度」这一关**。
-
-**本批修正**：① **09 换「筋斗云」**（悟空专属符号·器物路线与 c2 同语言·左留白 0.0005·整图墨量 0.0431）—— 人物群像路线经「缩小右移」变体实测仍偏重、版面放不下 ⇒ 弃用；② **04 换「紧箍儿」**（「司南」属通用意象、非西游独占 ⇒ 换成第一回的独占物件：金圈 + 朱砂红绦）；③ **03 经卷保留**（「取经成果」贴题；候选「紫金钵」复核后视觉偏「饭碗」、与取经主线关联弱 ⇒ 不采用）；④ 旧文件（`hero-line-04-sinan-compass.*`、`hero-line-09-pilgrim-four.*`）在素材目录与站点两侧同步清理。
-
-**补判据 J8（题材辨识度·人工关）**：目录 README 新增逐张「靠哪个《西游记》具体元素认出」自检表——每张须能答出其独占标志物（金箍棒 / 紧箍儿 / 九环锡杖 / 芭蕉扇 / 玉净瓶 / 筋斗云 为**强**；行程图 / 经卷 / 莲花 为**语境型**，靠站点文案与上下文成立）。**重出任一张后须逐条自检该表**，这是本次漏检的补口。
-
-> - **验证**：判据脚本 9/9 PASS（尺寸 2400×1017 · 左留白 0.0000–0.0039 · 整图墨量 0.0211–0.0809 · 朱砂点 9/9 在场）· 成套拼图逐张目视 · 素材与站点两侧文件同步清理核验
-> - **状态**：在途（认领登记 W940·待提交入库）
-> **状态**：**已收官**（W940 95495824·git 反填·共 1 笔·W971 存量回填）
 
 

@@ -10,6 +10,42 @@
 
 ---
 
+## W1054 G-03 清偿第一轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_chart_values.js | W1054 | 本批新增/修改（G-03 清偿①时序重试②前缀扩展③影子分层） |
+| CHANGELOG.md | W1054 | 收官面（顶段 W1054） |
+| HANDOVER.md | W1054 | 收官面（最后更新/进度/级联） |
+| README.md | W1054 | 级联面（版本行） |
+| STRUCTURE.md | W1054 | 级联面（版本行） |
+| CITATION.cff | W1054 | 级联面（版本同步） |
+| AGENTS.md | W1054 | 级联面（脚注滚动） |
+| docs/00-导读/项目说明.md | W1054 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1054 | 台账（W1054 行新增） |
+| docs/INDEX.md | W1054 | 登记面（docs 索引） |
+| index.md | W1054 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1054 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1054 | 级联面（里程碑行同步） |
+| site/index.html | W1054 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1054 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1054 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1054 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1054 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1054 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1054 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1054 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1054 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1054 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1054 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1054.txt | W1054 | 级联清单（本批产物） |
+| scripts/output/_w1054_spec.json | W1054 | 本批 spec |
+| scripts/output/_vermilion_solid_cache.json | W1054 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/index.md | W1054 | 登记面（scripts 目录索引） |
+
 ## W1053 W1046 方案实施收尾（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -5036,27 +5072,4 @@ docs/11-方案报告/README.md
 | docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W941 | 新增：交付报告（T26） |
 | docs/11-方案报告/README.md | W941 | 新增：T-26 登记行 |
 | docs/00-导读/W批次编号对账表.md | W941 | W941 认领行与收官回填 |
-
-## W940 Hero 素材题材辨识度修正（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/hero-set/hero-line-04-tight-crown.png | W940 | 新增「紧箍儿」母版（西游独占物件·替代司南） |
-| assets/promo/hero-set/hero-line-04-tight-crown.webp | W940 | 同上 WebP |
-| assets/promo/hero-set/hero-line-09-somersault-cloud.png | W940 | 新增「筋斗云」母版（替代判不合格的取经四众） |
-| assets/promo/hero-set/hero-line-09-somersault-cloud.webp | W940 | 同上 WebP |
-| assets/promo/hero-set/raw/hero-04b-tight-crown.jpg | W940 | 紧箍儿出图原件（重出基准） |
-| assets/promo/hero-set/raw/hero-05b-somersault-cloud.png | W940 | 筋斗云出图原件 |
-| assets/promo/hero-set/hero-line-04-sinan-compass.png | W940 | 删除（司南·通用意象非西游独占） |
-| assets/promo/hero-set/hero-line-09-pilgrim-four.png | W940 | 删除（画成农夫挑担·无西游标志物） |
-| assets/promo/hero-set/preview-contact-sheet.png | W940 | 9 张成套拼图刷新 |
-| assets/promo/hero-set/README.md | W940 | 逐张清单更新 + 新增「题材辨识度自检表（J8 人工关）」 |
-| site/static/images/hero-line-04-tight-crown.webp | W940 | 站点版（新增） |
-| site/static/images/hero-line-09-somersault-cloud.webp | W940 | 站点版（新增） |
-| site/index.html | W940 | 图集引用换图（04→紧箍儿·09→筋斗云） |
-| scripts/_w931_hero_verify.py | W940 | 判据清单换名（04/09） |
-| scripts/_w938_apply_home.py | W940 | 幂等补丁同步（含 SLIDES/aria-label 换图） |
-| scripts/_w940_cascade.py | W940 | 四面登记脚本（认领行 + CHANGELOG 段 + file-index 段 + 当前态指针） |
-| CHANGELOG.md | W940 | W940 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W940 | W940 认领行 |
 
