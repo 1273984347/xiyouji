@@ -11,6 +11,47 @@
 ---
 
 
+## W1047 图表判据剥标签根修（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1045 | 本批新增/修改 |
+| .github/workflows/README.md | W1045 | 本批新增/修改 |
+| AGENTS.md | W1045 | 本批新增/修改 |
+| CHANGELOG.md | W1045 | 本批新增/修改 |
+| CITATION.cff | W1045 | 本批新增/修改 |
+| HANDOVER.md | W1045 | 本批新增/修改 |
+| README.md | W1045 | 本批新增/修改 |
+| STRUCTURE.md | W1045 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1047_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/index.md | W1045 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1045 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1045 | 台账（认领行与收官回填） |
+| docs/11-方案报告/计划方案/执行前计划-W1047-图表判据剥标签根修.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/INDEX.md | W1045 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| index.md | W1045 | 本批新增/修改 |
+| scripts/batch_cascade.py | W1045 | 级联工具（上一批成果·本批未改） |
+| scripts/check_chart_data.py | W1045 | 图表判据（剥标签按语法约束 + 注释优先剥离 + 2 例可证伪锁） |
+| scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1047.txt | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1047_spec.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/file-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1045 | 本批新增/修改 |
+| site/data/search.html | W1045 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1045 | 本批新增/修改 |
+| site/dukou-engine.html | W1045 | 本批新增/修改 |
+| site/en/search.html | W1045 | 本批新增/修改 |
+| site/index.html | W1045 | 本批新增/修改 |
+
 ## W1045 改写面候选逐处复核 + 存量陈旧清理 + og 切头 A+ 修复（2026-10-31）
 
 | 文件 | W | 说明 |

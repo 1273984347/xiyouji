@@ -24,7 +24,7 @@
 - `xiyouji-agent-web/`
 - `xiyouji-desktop/`
 
-## 文件（23）
+## 文件（22）
 
 ### Markdown 文档
 
@@ -38,7 +38,6 @@
 - `LICENSE-CONTENT.md`
 - `README.en.md`
 - `SECURITY.md`
-- `tmve_review_w1045_verify.md`
 
 ### JavaScript / TypeScript
 

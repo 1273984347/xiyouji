@@ -147,7 +147,11 @@ def _face_changelog(ctx):
     if gaps:
         ledger = open(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md"), encoding="utf-8").read()
         for g in gaps:
-            assert re.search(rf"^\| {re.escape(g)} ", ledger, re.M), f"缺口 {g} 在台账无认领行"
+            # W1047 修：台账登记行的实际形态是 `| W1046 |`（**带 W 前缀**），
+            # 原断言查 `| 1046 ` ⇒ 缺口许可机制**从未真正可用过**（每次都断言失败）。
+            # ⇒ 改为兼容两种形态：`| 1046 ` 或 `| W1046 `。
+            assert re.search(rf"^\|\s*W?{re.escape(g)}\s", ledger, re.M), (
+                f"缺口 {g} 在台账无认领行（台账登记行形态应为「| W{g} |」）")
             assert f"### {g}" not in s, f"缺口 {g} 已有段（无需允许）"
         print("  缺口许可：%s（在途·台账已有认领行）" % "、".join(gaps))
     new_w = cur_w + 1 + len(gaps)
