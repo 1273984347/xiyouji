@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -9057,3 +9057,64 @@
 | scripts/output/_w930_visible_leak.json | W930 | 可见工程批次号复算证据（796 页 6,827 处） |
 | scripts/output/_w930_plan_review.json | W930 | 第 48 门禁判据矩阵证据（双件全项符合） |
 | scripts/output/_w930_spec.json | W930 | 本批级联 spec |
+## W931 首页 Hero 横幅素材图成套批·线描版 8 张（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/promo/hero-set/hero-line-01-ruyi-staff.png | W931 | 成品母版 2400×1017·如意金箍棒（黑铁杆 + 赭金云纹端头）·左侧 46% 留白 |
+| assets/promo/hero-set/hero-line-02-journey-scroll.png | W931 | 成品母版 2400×1017·行程图卷轴（山路 / 路线 / 河曲） |
+| assets/promo/hero-set/hero-line-03-classic-scroll.png | W931 | 成品母版 2400×1017·经卷 + 篆香（竖行纹理非可读文字） |
+| assets/promo/hero-set/hero-line-04-sinan-compass.png | W931 | 成品母版 2400×1017·司南（铜盘回纹刻度 + 匙柄） |
+| assets/promo/hero-set/hero-line-05-lotus.png | W931 | 成品母版 2400×1017·莲花（层瓣线描 + 赭金叶脉） |
+| assets/promo/hero-set/hero-line-06-nine-ring-staff.png | W931 | 成品母版 2400×1017·九环锡杖（赭金环 + 白杆） |
+| assets/promo/hero-set/hero-line-07-banana-fan.png | W931 | 成品母版 2400×1017·芭蕉扇（线描叶脉 + 纸色透出·第二版·首版黑色实心块已废弃） |
+| assets/promo/hero-set/hero-line-08-jade-vase.png | W931 | 成品母版 2400×1017·玉净瓶（白瓷瓶 + 柳枝） |
+| assets/promo/hero-set/hero-line-01-ruyi-staff.webp | W931 | 站点用 WebP q90（8 张全套同规格） |
+| assets/promo/hero-set/hero-line-02-journey-scroll.webp | W931 | 站点用 WebP q90 |
+| assets/promo/hero-set/hero-line-03-classic-scroll.webp | W931 | 站点用 WebP q90 |
+| assets/promo/hero-set/hero-line-04-sinan-compass.webp | W931 | 站点用 WebP q90 |
+| assets/promo/hero-set/hero-line-05-lotus.webp | W931 | 站点用 WebP q90 |
+| assets/promo/hero-set/hero-line-06-nine-ring-staff.webp | W931 | 站点用 WebP q90 |
+| assets/promo/hero-set/hero-line-07-banana-fan.webp | W931 | 站点用 WebP q90 |
+| assets/promo/hero-set/hero-line-08-jade-vase.webp | W931 | 站点用 WebP q90 |
+| assets/promo/hero-set/preview-contact-sheet.png | W931 | 成套一览拼图 2×4（8 张缩略·一眼验一致性） |
+| assets/promo/hero-set/preview-contact-sheet.webp | W931 | 成套一览拼图 WebP |
+| assets/promo/hero-set/raw/hero-01-ruyi-staff.jpg | W931 | 出图原件 3168×1344（重出基准·模型不可复现） |
+| assets/promo/hero-set/raw/hero-02-journey-scroll.jpg | W931 | 出图原件 3168×1344 |
+| assets/promo/hero-set/raw/hero-03-classic-scroll.jpg | W931 | 出图原件 3168×1344 |
+| assets/promo/hero-set/raw/hero-04-sinan-compass.jpg | W931 | 出图原件 3168×1344 |
+| assets/promo/hero-set/raw/hero-05-lotus.jpg | W931 | 出图原件 3168×1344 |
+| assets/promo/hero-set/raw/hero-06-nine-ring-staff.jpg | W931 | 出图原件 3168×1344 |
+| assets/promo/hero-set/raw/hero-07-banana-fan.jpg | W931 | 出图原件 3168×1344（第二版） |
+| assets/promo/hero-set/raw/hero-08-jade-vase.jpg | W931 | 出图原件 3168×1344 |
+| assets/promo/hero-set/README.md | W931 | 目录导读（规格 / 接入方法 / 维护约定 / 已知取舍） |
+| assets/promo/hero-set/index.md | W931 | 目录文件索引（生成器产物） |
+| assets/promo/hero-set/raw/README.md | W931 | 出图原件目录导读（含废弃首版留证） |
+| assets/promo/hero-set/raw/index.md | W931 | 出图原件目录文件索引（生成器产物） |
+| assets/promo/index.md | W931 | 上级目录索引刷新（新增 hero-set 子目录登记） |
+| STRUCTURE.md | W931 | promo 段登记行（promo/hero-set/ 目录用途） |
+| docs/00-导读/W批次编号对账表.md | W931 | W931 认领行（取号依据 + touches 声明） |
+| CHANGELOG.md | W931 | W931 版段（四件套·来源 / 文件 / 验证 / 状态） |
+| scripts/_w931_hero_verify.py | W931 | 成套判据脚本（7 条 J1–J7 + 负样本可证伪自检） |
+| scripts/_w931_claim_row.py | W931 | 对账表认领行登记脚本（幂等·绝不覆盖他人认领） |
+| scripts/_w931_changelog_seg.py | W931 | CHANGELOG 段插入脚本（段序结构断言 + 让号后重定位） |
+## W932 站点 Hero 素材图成套批（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/hero-10-mingfu-panwang.webp | W932 | 新增：Hero 素材 04/06·冥府判官队列（宣判官+队列纵深+朱砂灯笼·净空带 364px·三轮版） |
+| site/static/images/hero-11-chiping-boshan.webp | W932 | 新增：Hero 素材 05/06·持瓶菩萨立像（背向剪影+赭金光环+朱砂飘带·净空带 379px·印面归一） |
+| site/static/images/hero-12-jingu-jingangchui.webp | W932 | 新增：Hero 素材 06/06·紧箍与金刚杵静物（黑墨双器+朱砂绳·净空带 557px·三轮版） |
+| site/static/images/hero-13-wujingshan-liangjie.webp | W932 | 新增：Hero 素材 07/06·五行山两界山（裂隙崖壁+锁链布幡+朱砂小旗·净空带 282px·印面归一） |
+| site/static/images/hero-14-donghai-longgong.webp | W932 | 新增：Hero 素材 08/06·东海龙宫水殿（墨龙盘殿+朱砂龙珠·净空带 363px·印面归一） |
+| site/static/images/hero-15-liudao-lunhui.webp | W932 | 新增：Hero 素材 09/06·六道轮回轮（三重枯笔环+六墨块+朱砂段·净空带 377px·印面归一） |
+| scripts/_w929_gen_args.py | W932 | 首轮生成参数（锚点复用 W893 + 浓墨剪影改造 + 六张主体描述） |
+| scripts/_w929_gen_args_v2.py | W932 | 二轮返工参数（钤印形态写死正方形） |
+| scripts/_w929_gen_args_v3.py | W932 | 三轮返工参数（钤印印面去字形化） |
+| scripts/_w929_process.py | W932 | 交付端处理（裁切精确 16:9 + 缩放 2560×1440 + 转 webp） |
+| scripts/_w929_seal_normalize.py | W932 | 交付端印面归一（自动定框 + 只重绘印面·主体零改动） |
+| scripts/_w929_verify.py | W932 | 五道判据量化复验（尺寸/净空带/主体墨量/朱砂/规则线） |
+| scripts/output/_w932_spec.json | W932 | 本批 spec 十字段 |
+| scripts/output/_cascade_files_W932.txt | W932 | 本批级联件清单 |
+| site/static/images/index.md | W932 | 目录索引刷新（文件 78 → 84·补入六件 Hero） |
+| docs/00-导读/W批次编号对账表.md | W932 | 认领行与收官回填 |

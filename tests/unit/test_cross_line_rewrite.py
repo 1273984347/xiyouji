@@ -83,3 +83,42 @@ def test_baseline_split_logic_is_not_vacuous():
     empty_base = set()
     new_all = [it for it in high if cclr._item_key(it) not in empty_base]
     assert len(new_all) == len(high), "清空基线后仍有候选被判为已在基线内 ⇒ 分流逻辑有洞"
+
+
+def _mk(file="scripts/x.py", line=10, pattern=r"<[^>]+>", repl=""):
+    """构造与 scan() 同形的 item（键计算四输入：文件 + 完整模式 + 完整替换串 + 行号）。"""
+    return {"file": file, "line": line, "pattern": pattern[:160], "pattern_full": pattern,
+            "repl": "fixed", "repl_full": repl, "cross": True, "anchor": False}
+
+
+def test_baseline_key_changes_on_any_input_change():
+    """键口径回归锁（W1045 对抗审查 P2-2）：四输入任一变化 ⇒ 键必变。
+
+    旧口径（纯内容指纹）漏拦过三类路径——本测试逐条钉死：
+      ① 同文件**新增同模式调用点**（行号变）⇒ 必须换键；
+      ② 替换串**语义变更**（`""` → `"REPLACED"`）⇒ 必须换键；
+      ③ 模式 **>160 字符**被截断后参与计算 ⇒ 不同模式必须换键。
+    """
+    base = _mk()
+    k0 = cclr._item_key(base)
+    # ① 行号变（新增调用点）
+    assert cclr._item_key(_mk(line=11)) != k0, "行号变必须换键（否则新增调用点被静默豁免）"
+    # ② 替换串语义变更
+    assert cclr._item_key(_mk(repl="REPLACED")) != k0, "替换串变必须换键（否则语义变更漏拦）"
+    # ③ 模式超长截断：显示截断到 160，但键用完整模式 ⇒ 不同模式必须换键
+    long_a = r"<" + r"a" * 200 + r">"
+    long_b = r"<" + r"b" * 200 + r">"
+    ka, kb = cclr._item_key(_mk(pattern=long_a)), cclr._item_key(_mk(pattern=long_b))
+    assert ka != kb, "超长模式不得因显示截断而撞键"
+    # ④ 完全相同 ⇒ 键相同（幂等：门禁不反复报同一条）
+    assert cclr._item_key(_mk()) == k0, "同输入必须同键（否则门禁每次跑都报同一项）"
+
+
+def test_baseline_note_matches_current_key_semantics():
+    """基线文件里的说明必须与现行键口径一致（对抗审查 P2-3：note 仍写旧口径「文件:行」）。"""
+    import json
+    import os
+    data = json.load(open(cclr.BASELINE_PATH, encoding="utf-8"))
+    note = data.get("note", "")
+    assert "文件:行" not in note, "基线 note 仍写旧键口径：%r" % note[:120]
+    assert "行号" in note and "完整模式" in note, "基线 note 未说明现行四输入口径：%r" % note[:160]

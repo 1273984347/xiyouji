@@ -22,8 +22,8 @@
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W894 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W904 |
 | methodology_docs | 26 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1040 |
-| pytest_collected | 1085 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1042 |
-| report_docs | 96 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 1043 |
+| pytest_collected | 1087 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1042 |
+| report_docs | 98 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 1045 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -35,6 +35,16 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### 1045（2026-10-31 02:10:44）
+- report_docs: 99 → 98
+
+### 1045（2026-10-31 01:59:56）
+- report_docs: 97 → 99
+
+### （未记 W）（2026-10-31 01:49:38）
+- pytest_collected: 1085 → 1087
+- report_docs: 96 → 97
 
 ### 1043（2026-10-31 00:40:34）
 - report_docs: 95 → 96

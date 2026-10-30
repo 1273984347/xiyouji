@@ -27,7 +27,7 @@
 | 治理文档体积窗与版本面契约总览 | `check_doc_size_budget.py` | C1-C7（C7=版本面契约·verify+开工双面把守）；`--report` 只报不判 |
 | 目录文档 / 工具清单 / docs 索引刷新 | `gen_folder_docs.py --refresh` | 刷新链连带 tools-inventory（W985）；docs 索引另跑 `docs_index.py` |
 | 改内联脚本 / 页脚后 | `generate_csp.py` + `_gen_search_index.py` | CSP 哈希失配会整脚本被拒；索引陈旧第 46 门禁拦 |
-| 全量门禁 / 测试 / lint | `verify_delivery.py` / `pytest` / `ruff` | 50 槽（pre-commit 自动跑）；本机侧 `py -3 -m pytest` |
+| 全量门禁 / 测试 / lint | `verify_delivery.py` / `pytest` / `ruff` | 52 槽（pre-commit 自动跑）；本机侧 `py -3 -m pytest` |
 
 ## 根级工具脚本
 

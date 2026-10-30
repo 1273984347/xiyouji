@@ -11,6 +11,85 @@
 ---
 
 
+## W1045 改写面候选逐处复核 + 存量陈旧清理 + og 切头 A+ 修复（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1045 | 本批新增/修改 |
+| .github/workflows/README.md | W1045 | 本批新增/修改 |
+| AGENTS.md | W1045 | 本批新增/修改 |
+| CHANGELOG.md | W1045 | 本批新增/修改 |
+| CITATION.cff | W1045 | 本批新增/修改 |
+| HANDOVER.md | W1045 | 本批新增/修改 |
+| README.md | W1045 | 本批新增/修改 |
+| STRUCTURE.md | W1045 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1042_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1045_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/index.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w6xx/_w661_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w662_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w663_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w666_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w667_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w668_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w669_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w670_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w671_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w676_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w679_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w684_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w691_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| docs/00-导读/W批次编号对账表.md | W1045 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1045 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/11-方案报告/审查与评审/改写面候选逐处复核与存量陈旧清理报告-W1045.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/11-方案报告/计划方案/执行前计划-W1045-改写面候选逐处复核与存量陈旧清理.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/INDEX.md | W1045 | 本批新增/修改 |
+| docs/agent/gates.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| index.md | W1045 | 本批新增/修改 |
+| scripts/README.md | W1045 | 本批新增/修改 |
+| scripts/batch_cascade.py | W1045 | 级联工具（CITATION.cff 面补行数断言） |
+| scripts/check_crop.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
+| scripts/check_cross_line_rewrite.py | W1045 | 跨行扫描器（基线键升四输入 + 跨行判定补 \s 盲区） |
+| scripts/cross_line_baseline.json | W1045 | 跨行判据基线（四输入键·失效项已清理） |
+| scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1045.txt | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1043_batch_a.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1045_spec.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/file-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/subject_band.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
+| site/data/cross-time-danmaku.html | W1045 | 本批新增/修改 |
+| site/data/search.html | W1045 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1045 | 本批新增/修改 |
+| site/dukou-engine.html | W1045 | 本批新增/修改 |
+| site/en/search.html | W1045 | 本批新增/修改 |
+| site/index.html | W1045 | 本批新增/修改 |
+| site/static/images/og-plate-line-59-ch089-huangshi.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-81-ch074-qingshi.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-88-ch073-duomuguai.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-92-ch086-bihan-bishu.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-93-ch095-yumian.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-95-ch085-diyongfuren.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-96-ch097-xiniu.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| tests/unit/test_cross_line_rewrite.py | W1045 | 键口径回归锁（4 条） |
+
 ## W1043 回次 og:image 全覆盖批·第四轮（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -93,10 +172,10 @@
 | assets/promo/plate-set/raw/round17/plate-line-96-ch097-xiniu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
 | docs/00-导读/W批次编号对账表.md | W1043 | 台账（认领行与收官回填） |
 | docs/00-导读/项目说明.md | W1043 | 台账（认领行与收官回填） |
-| docs/11-方案报告/README.md | W1043 | 方案报告（执行前计划件） |
+| docs/11-方案报告/README.md | W1043 | 方案报告（目录索引·W1044 订正说明列） |
 | docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1043 | 方案报告（执行前计划件） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1043 | 方案报告（执行前计划件） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1043 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1043 | 方案报告（架构方案·stats report_docs 标记级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1043 | 方案报告（架构方案·stats report_docs 标记级联） |
 | docs/INDEX.md | W1043 | 本批新增/修改 |
 | docs/agent/pitfalls.md | W1043 | 坑表（+1 条·判据脆性） |
 | scripts/_w1042_make_spec.py | W1043 | 本批改名·旧名（已由 archive/scripts/batches/w10xx/_w1042_make_spec.py 取代） |
@@ -4734,67 +4813,4 @@ docs/11-方案报告/README.md
 | archive/docs/AGENTS-ARCHIVE.md | W933 | 脚注滚动迁入的最老条目 |
 | CITATION.cff | W933 | version 同步为 W933 |
 | scripts/output/file-index.md | W933 | W933 段插入 |
-
-## W932 站点 Hero 素材图成套批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/hero-10-mingfu-panwang.webp | W932 | 新增：Hero 素材 04/06·冥府判官队列（宣判官+队列纵深+朱砂灯笼·净空带 364px·三轮版） |
-| site/static/images/hero-11-chiping-boshan.webp | W932 | 新增：Hero 素材 05/06·持瓶菩萨立像（背向剪影+赭金光环+朱砂飘带·净空带 379px·印面归一） |
-| site/static/images/hero-12-jingu-jingangchui.webp | W932 | 新增：Hero 素材 06/06·紧箍与金刚杵静物（黑墨双器+朱砂绳·净空带 557px·三轮版） |
-| site/static/images/hero-13-wujingshan-liangjie.webp | W932 | 新增：Hero 素材 07/06·五行山两界山（裂隙崖壁+锁链布幡+朱砂小旗·净空带 282px·印面归一） |
-| site/static/images/hero-14-donghai-longgong.webp | W932 | 新增：Hero 素材 08/06·东海龙宫水殿（墨龙盘殿+朱砂龙珠·净空带 363px·印面归一） |
-| site/static/images/hero-15-liudao-lunhui.webp | W932 | 新增：Hero 素材 09/06·六道轮回轮（三重枯笔环+六墨块+朱砂段·净空带 377px·印面归一） |
-| scripts/_w929_gen_args.py | W932 | 首轮生成参数（锚点复用 W893 + 浓墨剪影改造 + 六张主体描述） |
-| scripts/_w929_gen_args_v2.py | W932 | 二轮返工参数（钤印形态写死正方形） |
-| scripts/_w929_gen_args_v3.py | W932 | 三轮返工参数（钤印印面去字形化） |
-| scripts/_w929_process.py | W932 | 交付端处理（裁切精确 16:9 + 缩放 2560×1440 + 转 webp） |
-| scripts/_w929_seal_normalize.py | W932 | 交付端印面归一（自动定框 + 只重绘印面·主体零改动） |
-| scripts/_w929_verify.py | W932 | 五道判据量化复验（尺寸/净空带/主体墨量/朱砂/规则线） |
-| scripts/output/_w932_spec.json | W932 | 本批 spec 十字段 |
-| scripts/output/_cascade_files_W932.txt | W932 | 本批级联件清单 |
-| site/static/images/index.md | W932 | 目录索引刷新（文件 78 → 84·补入六件 Hero） |
-| docs/00-导读/W批次编号对账表.md | W932 | 认领行与收官回填 |
-
-## W931 首页 Hero 横幅素材图成套批·线描版 8 张（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/hero-set/hero-line-01-ruyi-staff.png | W931 | 成品母版 2400×1017·如意金箍棒（黑铁杆 + 赭金云纹端头）·左侧 46% 留白 |
-| assets/promo/hero-set/hero-line-02-journey-scroll.png | W931 | 成品母版 2400×1017·行程图卷轴（山路 / 路线 / 河曲） |
-| assets/promo/hero-set/hero-line-03-classic-scroll.png | W931 | 成品母版 2400×1017·经卷 + 篆香（竖行纹理非可读文字） |
-| assets/promo/hero-set/hero-line-04-sinan-compass.png | W931 | 成品母版 2400×1017·司南（铜盘回纹刻度 + 匙柄） |
-| assets/promo/hero-set/hero-line-05-lotus.png | W931 | 成品母版 2400×1017·莲花（层瓣线描 + 赭金叶脉） |
-| assets/promo/hero-set/hero-line-06-nine-ring-staff.png | W931 | 成品母版 2400×1017·九环锡杖（赭金环 + 白杆） |
-| assets/promo/hero-set/hero-line-07-banana-fan.png | W931 | 成品母版 2400×1017·芭蕉扇（线描叶脉 + 纸色透出·第二版·首版黑色实心块已废弃） |
-| assets/promo/hero-set/hero-line-08-jade-vase.png | W931 | 成品母版 2400×1017·玉净瓶（白瓷瓶 + 柳枝） |
-| assets/promo/hero-set/hero-line-01-ruyi-staff.webp | W931 | 站点用 WebP q90（8 张全套同规格） |
-| assets/promo/hero-set/hero-line-02-journey-scroll.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-03-classic-scroll.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-04-sinan-compass.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-05-lotus.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-06-nine-ring-staff.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-07-banana-fan.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-08-jade-vase.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/preview-contact-sheet.png | W931 | 成套一览拼图 2×4（8 张缩略·一眼验一致性） |
-| assets/promo/hero-set/preview-contact-sheet.webp | W931 | 成套一览拼图 WebP |
-| assets/promo/hero-set/raw/hero-01-ruyi-staff.jpg | W931 | 出图原件 3168×1344（重出基准·模型不可复现） |
-| assets/promo/hero-set/raw/hero-02-journey-scroll.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-03-classic-scroll.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-04-sinan-compass.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-05-lotus.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-06-nine-ring-staff.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-07-banana-fan.jpg | W931 | 出图原件 3168×1344（第二版） |
-| assets/promo/hero-set/raw/hero-08-jade-vase.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/README.md | W931 | 目录导读（规格 / 接入方法 / 维护约定 / 已知取舍） |
-| assets/promo/hero-set/index.md | W931 | 目录文件索引（生成器产物） |
-| assets/promo/hero-set/raw/README.md | W931 | 出图原件目录导读（含废弃首版留证） |
-| assets/promo/hero-set/raw/index.md | W931 | 出图原件目录文件索引（生成器产物） |
-| assets/promo/index.md | W931 | 上级目录索引刷新（新增 hero-set 子目录登记） |
-| STRUCTURE.md | W931 | promo 段登记行（promo/hero-set/ 目录用途） |
-| docs/00-导读/W批次编号对账表.md | W931 | W931 认领行（取号依据 + touches 声明） |
-| CHANGELOG.md | W931 | W931 版段（四件套·来源 / 文件 / 验证 / 状态） |
-| scripts/_w931_hero_verify.py | W931 | 成套判据脚本（7 条 J1–J7 + 负样本可证伪自检） |
-| scripts/_w931_claim_row.py | W931 | 对账表认领行登记脚本（幂等·绝不覆盖他人认领） |
-| scripts/_w931_changelog_seg.py | W931 | CHANGELOG 段插入脚本（段序结构断言 + 让号后重定位） |
 

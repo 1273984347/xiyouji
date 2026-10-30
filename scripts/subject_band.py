@@ -49,6 +49,29 @@ def body_mask(im: Image.Image, tol: int = 26) -> np.ndarray:
     return m & ~vermilion & ~light
 
 
+def ink_top(im: Image.Image, min_area: int = MIN_CLUSTER_AREA):
+    """**全墨**（含亮笔/赭金/朱砂）连通簇的最小顶——裁切上界的独立源（W1044 补）。
+
+    为什么需要独立源（W1043 实证）：`body_mask` 排除 luma ≥ 90 的亮笔与赭金，
+    而白描稿的冠顶/帽尖/耳尖常以淡笔或金线勾出 ⇒ 主体顶被系统性低估
+    （实测 85/90/91/95/96 五张 og 卡顶边切断笔画·"0 FAIL" 假绿）。
+    裁切若只用 `subject_band` 的 top，等于「用判据依据本身当裁切依据」——切坏了也测不出
+    ⇒ og/banner 的裁切上界改为 `min(subject_top, ink_top)`。
+    """
+    m = ink_mask(im)
+    if not m.any():
+        return None
+    labels, n = ndimage.label(m, structure=np.ones((3, 3), dtype=int))
+    if n == 0:
+        return None
+    sizes = ndimage.sum(m, labels, index=np.arange(1, n + 1))
+    big = np.where(sizes >= min_area)[0] + 1
+    ys_all = np.where(m)[0]
+    if big.size == 0:
+        return int(ys_all.min())
+    return int(min(np.where(labels == lb)[0].min() for lb in big))
+
+
 def subject_band(im: Image.Image, min_area: int = MIN_CLUSTER_AREA):
     """返回 (主体顶, 主体底, 主体像素数)：连通簇法（面积 ≥ min_area 的簇的极值）。
 
@@ -85,10 +108,16 @@ def crop_band(im: Image.Image, out_w: int, out_h: int, mode: str, head_pad: int 
         · 主体跨高 >  out_h ⇒ 取**头部带** [主体顶 − head_pad, +out_h]（保头部与胸腹）
 
     返回 (cropped_image, info)；info 含裁切线、主体顶/底、头顶余量·供验算脚本判红。
+
+    W1044 修正（W1043 实证）：裁切上界改用 `min(subject_band 顶, ink_top 顶)`——
+    `body_mask` 会漏掉淡笔/金线勾出的冠顶与耳尖 ⇒ 单用 subject_top 会切头，
+    且「用裁切依据自身做不变量」恒真、测不出切头（5 张 og 卡假绿实证）。
     """
-    top, bottom, _ = subject_band(im)
-    if top is None:
+    top_body, bottom, _ = subject_band(im)
+    if top_body is None:
         raise ValueError("画面无主体墨迹·不可裁切")
+    t_ink = ink_top(im)
+    top = top_body if t_ink is None else min(top_body, t_ink)
     w, h = im.size
     span = bottom - top
     if mode == "banner":
@@ -100,15 +129,14 @@ def crop_band(im: Image.Image, out_w: int, out_h: int, mode: str, head_pad: int 
     elif mode == "og":
         if span <= out_h:
             y0 = max(0, top - (out_h - span) // 2)
-            y1 = min(h, y0 + out_h)
-            if y1 - y0 < out_h:
-                y1 = min(h, y0 + out_h)
+            if y0 + out_h > h:              # W1044：源高不足时上移（原实现在此 no-op ⇒ 抛错）
+                y0 = max(0, h - out_h)
+            y1 = y0 + out_h
         else:
             y0 = max(0, top - head_pad)
-            y1 = min(h, y0 + out_h)
-            if y1 - y0 < out_h:
-                y1 = h
-                y0 = max(0, y1 - out_h)
+            if y0 + out_h > h:
+                y0 = max(0, h - out_h)
+            y1 = y0 + out_h
     else:
         raise ValueError("未知 mode: " + mode)
     if y1 - y0 != out_h:                   # 极端兜底：源高不足则补纸面
