@@ -10,6 +10,41 @@
 
 ---
 
+## W1056 提交前三问自检流程契约（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1056 | 本批新增/修改（铁律 18 + 分项 56 + 级联脚注） |
+| CLAUDE.md | W1056 | 本批新增/修改（速查第 14 行·50/60 行） |
+| docs/agent/pitfalls.md | W1056 | 本批新增/修改（+1 spec 漏列形态·146·流程组 56） |
+| HANDOVER.md | W1056 | 本批新增/修改（坑表计数链 146 + 级联面） |
+| docs/00-导读/W批次编号对账表.md | W1056 | 台账（W1056 行新增） |
+| CHANGELOG.md | W1056 | 收官面（顶段 W1056·验证栏含三问结论） |
+| README.md | W1056 | 级联面（版本行） |
+| STRUCTURE.md | W1056 | 级联面（版本行） |
+| CITATION.cff | W1056 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1056 | 级联面（当前版本行） |
+| docs/INDEX.md | W1056 | 登记面（docs 索引） |
+| index.md | W1056 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1056 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1056 | 级联面（里程碑行同步） |
+| site/index.html | W1056 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1056 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1056 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1056 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1056 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1056 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1056 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1056 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1056 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1056 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1056 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1056.txt | W1056 | 级联清单（本批产物） |
+| scripts/output/_w1056_spec.json | W1056 | 本批 spec |
+
 ## W1055 G-03 清偿第二轮（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4210,22 +4245,4 @@ docs/11-方案报告/README.md
 | scripts/_w943_cascade.py | W943 | 四面登记 + 当前态指针 |
 | CHANGELOG.md | W943 | W943 版段（四件套） |
 | docs/00-导读/W批次编号对账表.md | W943 | W943 认领行 |
-
-## W942 Hero 素材全量复审（14 张逐张放大目视·修正 2 处形制偏差）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/hero-set/hero-line-04-tight-crown.png | W942 | 重出「紧箍儿」母版（金圈内缘补足九个倒刺钩） |
-| assets/promo/hero-set/hero-line-04-tight-crown.webp | W942 | 同上 WebP |
-| assets/promo/hero-set/hero-line-07-banana-fan.png | W942 | 重出「芭蕉扇」母版（正圆团扇 → 叶形扇 + 中脉细脉 + 短柄缠绳） |
-| assets/promo/hero-set/hero-line-07-banana-fan.webp | W942 | 同上 WebP |
-| assets/promo/hero-set/raw/hero-04c-tight-crown.jpg | W942 | 紧箍儿重出原件 |
-| assets/promo/hero-set/raw/hero-07c-banana-fan.jpg | W942 | 芭蕉扇重出原件 |
-| assets/promo/hero-set/preview-contact-sheet.png | W942 | 9 张成套拼图刷新 |
-| assets/promo/hero-set/README.md | W942 | J8 自检表细化到形制级（倒刺钩数 / 扇形 / 环数 / 瓶插枝） |
-| site/static/images/hero-line-04-tight-crown.webp | W942 | 站点版重出（带九倒刺） |
-| site/static/images/hero-line-07-banana-fan.webp | W942 | 站点版重出（叶形扇） |
-| scripts/_w942_cascade.py | W942 | 四面登记 + 自检表更新 + 当前态指针 |
-| CHANGELOG.md | W942 | W942 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W942 | W942 认领行 |
 
