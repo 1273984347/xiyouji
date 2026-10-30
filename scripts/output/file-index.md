@@ -10,6 +10,50 @@
 
 ---
 
+## W1051 复盘触发器口径根修（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_review_trigger.py | W1051 | 本批新增/修改（上篇复盘识别三信号 + 目录面独立证据源·判定本体根修） |
+| tests/unit/test_review_trigger.py | W1051 | 本批新增/修改（单测 +7 例·契约同步 source 键·三负样本可证伪） |
+| docs/agent/pitfalls.md | W1051 | 本批新增/修改（E-57 识别口径绑死单一字面量 ⇒ 同族登记形态逃逸） |
+| AGENTS.md | W1051 | 级联面（脚注滚动 + 坑表计数链两处） |
+| HANDOVER.md | W1051 | 级联面（最后更新 / 一、当前进度 + 计数链两处） |
+| .agent/skills/puti-shouye/SKILL.md | W1051 | 计数链（坑表总条数两处·15 条硬判据不动） |
+| README.md | W1051 | 级联面（版本行） |
+| STRUCTURE.md | W1051 | 级联面（版本行） |
+| docs/00-导读/项目说明.md | W1051 | 级联面（当前版本行） |
+| CITATION.cff | W1051 | 级联面（版本同步） |
+| CHANGELOG.md | W1051 | 收官面（顶段 W1051 + W1042 段标题补点题标识） |
+| docs/00-导读/W批次编号对账表.md | W1051 | 台账（W1051 认领行新增 + 收官回填） |
+| docs/11-方案报告/计划方案/执行前计划-W1051-复盘触发器口径根修.md | W1051 | 方案报告（执行前计划件·五表 + 自包含检查 12 项） |
+| docs/11-方案报告/README.md | W1051 | 登记面（方案报告索引） |
+| docs/INDEX.md | W1051 | 登记面（docs 索引） |
+| index.md | W1051 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1051 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1051 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1051 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1051 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1051 | 级联面（里程碑行同步） |
+| site/index.html | W1051 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1051 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1051 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1051 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1051 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1051 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1051 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1051 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1051 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1051 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1051 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1051.txt | W1051 | 级联清单（本批产物） |
+| scripts/output/_w1051_spec.json | W1051 | 本批 spec |
+| pytest.ini | W1051 | 连带产物（stats 标记跟随·pytest_collected 1087 → 1094·本批新增 7 例） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1051 | 连带产物（stats 标记跟随·pytest_collected 1087 → 1094） |
+| site/data/search.html | W1051 | 连带产物（站内搜索索引刷新·条目数对齐 948） |
+| site/en/search.html | W1051 | 连带产物（站内搜索索引刷新·条目数对齐 948） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1051 | 连带产物（stats 标记面跟随·pytest_collected 1087 → 1094） |
+
 ## W1050 门禁判据加固（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4964,21 +5008,4 @@ docs/11-方案报告/README.md
 | site/reader/themes/取经路线地理专题.html | W937 | 题图落位修正：五行山与两界山（原在「取经地理学专题」——地理学理论页·题材不贴） |
 | site/reader/people/灵感大王外传.html | W937 | 题图落位修正：东海龙宫水殿（原在「四海龙王：下雨的人」——讲降雨职能·题材不贴） |
 | scripts/_w937_move_plates.py | W937 | 题图移动脚本（旧页移除 figure 与 chapter-plate CSS·不留死规则） |
-
-## W936 首屏图集接入 + 专题题图落位（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W936 | 首页 9 张图集轮播（JS 定时切换 + WCAG 2.2.2 暂停机制 + reduced-motion 降级）+ 右侧「100 回」数字区纸色渐变底 |
-| site/reader/people/地府体系深化专题.html | W936 | 题图：冥府判官队列浓墨剪影 |
-| site/reader/people/紧箍儿的内侧-器物传记.html | W936 | 题图：紧箍与金刚杵静物对置 |
-| site/reader/themes/取经地理学专题.html | W936 | 题图：五行山与两界山（浓墨山峦 + 锁链） |
-| site/reader/people/四海龙王外传.html | W936 | 题图：东海龙宫水殿 |
-| site/reader/themes/西游与死亡研究专题.html | W936 | 题图：六道轮回抽象水墨 |
-| site/static/images/hero-line-01~08.webp | W936 | W931 线描横幅接入站点（8 件·首页图集用） |
-| site/static/images/plate-*.webp | W936 | W932 浓墨 5 张题图副本（plate- 前缀·避开 hero- 序列语义） |
-| scripts/_w936_insert_plates.py | W936 | 题图插入脚本（chapter-plate 范式·行尾归一修正） |
-| scripts/_w936_cascade.py | W936 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
-| CHANGELOG.md | W936 | W936 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W936 | W936 认领行（W935 在途跳号依据） |
 
