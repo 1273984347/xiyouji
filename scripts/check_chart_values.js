@@ -486,19 +486,29 @@ async function probePage(browser, relPath, cfg) {
 async function collectEmbeddedData(page, html) {
   const names = discoverDataNames(html);
   const merged = { kind: 'none', name: '', names: [], maxArrayLen: 0, arrays: [], scalars: [] };
-  for (const name of names) {
-    let sum = null;
-    try {
-      sum = await page.evaluate(dataExpr(name));
-    } catch {
-      sum = null;
+  // W1054 G-03 清偿①：并行 workers 下页面主脚本可能尚未执行完（typeof 变量 = undefined），
+  // 原实现单次求值失败即静默 continue ⇒ 假 no-data-source（单页跑同页为 ok/small-data 实证）。
+  // 修复：轮询重试（至多 4 次 · 间隔 150ms）直至至少一个数据名求值成功或耗尽。
+  const maxAttempts = names.length ? 4 : 0;
+  let gotAny = false;
+  for (let attempt = 0; attempt <= maxAttempts && !gotAny; attempt++) {
+    if (attempt > 0) await page.waitForTimeout(150);
+    for (const name of names) {
+      if (merged.names.includes(name)) continue;
+      let sum = null;
+      try {
+        sum = await page.evaluate(dataExpr(name));
+      } catch {
+        sum = null;
+      }
+      if (!sum || (!(sum.arrays || []).length && !(sum.scalars || []).length)) continue;
+      merged.names.push(name);
+      gotAny = true;
+      merged.maxArrayLen = Math.max(merged.maxArrayLen, sum.maxArrayLen || 0);
+      for (const a of sum.arrays || []) merged.arrays.push({ path: name + ':' + a.path, len: a.len });
+      for (const sc of sum.scalars || []) merged.scalars.push({ expr: name + ':' + sc.expr, value: sc.value });
+      if (merged.arrays.length > 120) break;
     }
-    if (!sum || (!(sum.arrays || []).length && !(sum.scalars || []).length)) continue;
-    merged.names.push(name);
-    merged.maxArrayLen = Math.max(merged.maxArrayLen, sum.maxArrayLen || 0);
-    for (const a of sum.arrays || []) merged.arrays.push({ path: name + ':' + a.path, len: a.len });
-    for (const s of sum.scalars || []) merged.scalars.push({ expr: name + ':' + s.expr, value: s.value });
-    if (merged.arrays.length > 120) break;
   }
   if (merged.names.length) {
     merged.kind = 'embedded';
@@ -568,7 +578,7 @@ function summarizeData(v) {
 // ---------------- 内嵌数据变量发现 ----------------
 // 口径：顶层 `const/var/let <前缀名> = {` 或 `= [` 的声明；前缀表来自全站普查实测。
 const DATA_NAME_RE =
-  /(?:^|\n)[ \t]*(?:const|var|let)[ \t]+((?:EMBEDDED|MOCK|FALLBACK|DATA|SERIES|CHART|STATIONS|NODES|EDGES|LOCATIONS|EVENTS|TIMELINE)[A-Za-z0-9_$]*)[ \t]*=[ \t]*([\[{])/g;
+  /(?:^|\n)[ \t]*(?:const|var|let)[ \t]+((?:EMBEDDED|MOCK|FALLBACK|DATA|SERIES|CHART|STATIONS|NODES|EDGES|LOCATIONS|EVENTS|TIMELINE|nodes|edges|links|cols|lines)[A-Za-z0-9_$]*)[ \t]*=[ \t]*([\[{])/g;
 
 function discoverDataNames(html) {
   const names = [];
@@ -1029,15 +1039,19 @@ function printSummary(judged, cmp, cfg, elapsed, mode) {
       `可收紧 ${cmp ? cmp.tighten.length : '-'} · probe_error ${probeErr.length} 页 · ${elapsed.toFixed(1)}s · workers=${cfg.workers || ''}`
   );
   console.log('判据分布：' + ITEMS.map((i) => `${i} ok=${tally[i].ok}/fail=${tally[i].fail}/na=${tally[i].na}`).join(' · '));
-  // W1053 G-03（W1046 方案）：na 出口影子报数——不进 nFail 不拦提交（方案 R-03 影子先行·
-  // 收紧到「V3/V4 na>2 页 FAIL」待存量清偿批次）。按 reason 分组列 na 页，供清偿批定位。
+  // W1053 G-03 → W1054 清偿：na 影子报数分层——「结构性不适用」（页面形态决定·no-view-intent/
+  // no-rendered-view/no-kpi/small-data）不计入收紧口径；「真覆盖缺口」（数据在场但判据抓不到·
+  // no-data-source/kpi-unmatched/interactive-input-page）才是收紧对象（方案阈值 2 页 FAIL）。
+  const STRUCTURAL_NA = new Set(['no-view-intent', 'no-rendered-view', 'no-kpi', 'small-data']);
   for (const item of ['V3', 'V4']) {
     const nas = judged.filter((j) => j.verdicts[item].status === 'na');
     if (!nas.length) continue;
     const byReason = countBy(nas.map((j) => ({ reason: j.verdicts[item].reason })), 'reason');
-    console.log(`影子报数 ${item} na=${nas.length}（方案阈值 2·收紧待清偿）：` +
+    const gap = nas.filter((j) => !STRUCTURAL_NA.has(j.verdicts[item].reason));
+    const structural = nas.length - gap.length;
+    console.log(`影子报数 ${item} na=${nas.length}（结构性 ${structural} · 缺口 ${gap.length}）：` +
       Object.entries(byReason).map(([k, v]) => `${k}=${v}`).join(' '));
-    console.log('  na 页：' + nas.map((j) => j.page).slice(0, 20).join(', '));
+    if (gap.length) console.log('  缺口页：' + gap.map((j) => j.page).slice(0, 20).join(', '));
   }
   for (const r of (cmp ? cmp.newFail : []).slice(0, 40)) {
     console.log(`FAIL ${r.page} :: ${r.item} ${r.cur} (${r.kind}) ${r.measured}`);

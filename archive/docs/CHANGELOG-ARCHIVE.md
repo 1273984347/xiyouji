@@ -13,6 +13,22 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W940（2026-10-25）：Hero 素材题材辨识度修正（09 换筋斗云 · 04 换紧箍儿 · 补题材关判据）
+
+> **来源**：用户 2026-10-25 质疑「你确定这个图片符合主题吗？符合西游记吗？」——指向第 9 张「取经四众」。
+
+> - **文件**：assets/promo/hero-set/hero-line-04-tight-crown.png、assets/promo/hero-set/hero-line-04-tight-crown.webp、assets/promo/hero-set/hero-line-09-somersault-cloud.png、assets/promo/hero-set/hero-line-09-somersault-cloud.webp、assets/promo/hero-set/raw/hero-04b-tight-crown.jpg、assets/promo/hero-set/raw/hero-05b-somersault-cloud.png、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、site/static/images/hero-line-04-tight-crown.webp、site/static/images/hero-line-09-somersault-cloud.webp、site/index.html、scripts/_w931_hero_verify.py、scripts/_w938_apply_home.py、Cdsscripts/_w940_cascade.py
+
+**问题定性**：第 9 张「取经四众」被画成「农夫挑担」——金箍棒 / 九齿钉耙 / 月牙铲 / 僧帽**一个都没有**，且四人组侵入文字安全区（左留白 0.0174、整图墨量 0.1250 超判据上限）⇒ 题材与版面双不合格。根因在**判据缺口**：原判据只查尺寸 / 留白 / 墨量 / 伪文字 / 裁切五项，**没有「题材辨识度」这一关**。
+
+**本批修正**：① **09 换「筋斗云」**（悟空专属符号·器物路线与 c2 同语言·左留白 0.0005·整图墨量 0.0431）—— 人物群像路线经「缩小右移」变体实测仍偏重、版面放不下 ⇒ 弃用；② **04 换「紧箍儿」**（「司南」属通用意象、非西游独占 ⇒ 换成第一回的独占物件：金圈 + 朱砂红绦）；③ **03 经卷保留**（「取经成果」贴题；候选「紫金钵」复核后视觉偏「饭碗」、与取经主线关联弱 ⇒ 不采用）；④ 旧文件（`hero-line-04-sinan-compass.*`、`hero-line-09-pilgrim-four.*`）在素材目录与站点两侧同步清理。
+
+**补判据 J8（题材辨识度·人工关）**：目录 README 新增逐张「靠哪个《西游记》具体元素认出」自检表——每张须能答出其独占标志物（金箍棒 / 紧箍儿 / 九环锡杖 / 芭蕉扇 / 玉净瓶 / 筋斗云 为**强**；行程图 / 经卷 / 莲花 为**语境型**，靠站点文案与上下文成立）。**重出任一张后须逐条自检该表**，这是本次漏检的补口。
+
+> - **验证**：判据脚本 9/9 PASS（尺寸 2400×1017 · 左留白 0.0000–0.0039 · 整图墨量 0.0211–0.0809 · 朱砂点 9/9 在场）· 成套拼图逐张目视 · 素材与站点两侧文件同步清理核验
+> - **状态**：在途（认领登记 W940·待提交入库）
+> **状态**：**已收官**（W940 95495824·git 反填·共 1 笔·W971 存量回填）
+
 ### W938（2026-10-25）：首屏版式重做 + 图集逐张复核（左侧文字重排 · 切换器归位 · 9 张构图全部完整）
 
 > **来源**：用户 2026-10-25 反馈「你现在的这个设计不太好看，要么重新设计一下这个 100 回放在哪个位置比较好」+「我说的是首页右边的插图。并且现在首页左边文字的排版非常丑」。
