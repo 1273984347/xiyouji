@@ -924,7 +924,20 @@ def _gate_a1_a6_count(ctx):
             ctx.rep.fail("A1-A6 真实文件计数 %d 篇 != README 声明 %d 篇（计数漂移，需同步 README 声明）"
                          % (actual_total, declared))
     else:
-        ctx.rep.warn("README 未找到 '共 N 篇' 声明，跳过 A1-A6 计数校验")
+        # W1050：README 带 doc-sync:exempt 无「共 N 篇」声明 ⇒ fallback 对拍 AGENTS §1 的 stats 标记值
+        # （stats 标记由 stats.py --w sweep 机器自动跟随·非手写字面量），两处都缺才 WARN。
+        agents_txt = _read(os.path.join(ROOT, "AGENTS.md"))
+        m_mark = re.search(r"(\d+)\s*<!--stats:a1_a6_docs-->", agents_txt)
+        if m_mark:
+            declared = int(m_mark.group(1))
+            if actual_total == declared:
+                ctx.rep.ok("A1-A6 真实文件计数 %d 篇 == AGENTS §1 stats 标记 %d 篇（README 无声明走 fallback 口径·排除各板块 README.md）"
+                           % (actual_total, declared))
+            else:
+                ctx.rep.fail("A1-A6 真实文件计数 %d 篇 != AGENTS §1 stats 标记 %d 篇（计数漂移·README 无声明走 fallback 口径）"
+                             % (actual_total, declared))
+        else:
+            ctx.rep.warn("README 未找到 '共 N 篇' 声明且 AGENTS 无 a1_a6_docs 标记，跳过 A1-A6 计数校验")
 
 
 def _gate_academic_citations(ctx):
