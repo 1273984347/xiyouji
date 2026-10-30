@@ -1,3 +1,14 @@
+### W1052（2026-10-31）：补丁治理实施第一批（G-01 铁律双写根治+C8 判据·G-07 占号支撑检测）
+
+> **来源**：用户 2026-10-31 令「W1046 方案你自己 review 一遍，没问题就开工；AGENTS 铁律 14/15 双写；reserve_w.py 盲区；做完之后提交」——review 结论：方案通过（G-01 目标实证/41 槽确实无重复判据/分阶段合理），缺陷一处（计数钉 9 vs 11）顺手订正；reserve_w「盲区」经读码订正归因——ledger_max 实读工作树台账，真根因是并行会话未跑 reserve_w 直接写台账认领行（绕过铁律 17），加固方向由「改读文件」改为「占号面与认领面对拍」。
+>
+> - **文件**：AGENTS.md、scripts/check_doc_sync.py、scripts/reserve_w.py、docs/agent/pitfalls.md、HANDOVER.md、docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、CITATION.cff、docs/00-导读/项目说明.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/_cascade_files_W1052.txt、scripts/output/_w1052_spec.json。
+
+**本批要点**：① **G-01 文档面**——AGENTS.md 铁律 14/15 行内双写去重（seg1==seg2 程序验证·264→132/790→395 字符）+ 铁律 17 前空行删除接回连续列表；② **G-01 判据**——check_doc_sync.py 新增 C8 治理文档同段重复（治理权威面 AGENTS/HANDOVER/gates/pitfalls；strip 后整行全等 ≥60 字符、排除表格与代码围栏、**相邻窗口 ≤3 行**内 ≥2 次即红——「相邻」限定回归方案语义，放过跨章节合理引用·W1052 实证 HANDOVER 索引行跨 120 行重复属结构性冗余另案；T30 负样本/T31 防误伤正样本·35/35）；③ **G-07**——reserve_w.py 加 warn_unclaimed（reserve/list 时扫台账「在途」行对拍有效预约，无占号支撑当场 WARN·self_test 三例），上线即抓 W992 滞留行并经 ledger_backfill 回填；④ **方案钉订正**——W1046 方案 AC-04/V-05 批准项计数 9→11（附录 D 批准列逐条为准）；⑤ **坑表 +1**（占号面与认领面两套机制条目）→ 145·C5e 计数链四处同步。
+
+**验证**：py_compile×2 OK · ruff All checks passed（顺修 UP009/E702 存量微瑕）· doc-sync self-test 35/35 · reserve_w self-test 3/3 · C5e 计数链 145 全链零红 · C8 对现实治理文档零红 · 全量门禁见收官提交。
+
+> - **状态**：已收官（G-01 双写根治+防复发判据落地·G-07 占号支撑检测上线·方案钉订正·坑表 145）
 ### W1051（2026-10-31）：复盘触发器口径根修（上篇复盘识别升级为三信号 + 目录面双源·W1042 段标题自洽）
 
 > **来源**：用户 2026-10-31 裁决「都做」——针对「复盘触发器漏认 W1042 那篇真复盘 ⇒ 误报『该复盘』+ 可能诱发重复复盘」，给出两条修法（① 改触发器识别口径 ② 改 W1042 段标题补『工作复盘』标识），用户裁决两条并做。
@@ -876,7 +887,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1051），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1052），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1832,24 +1843,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：浏览器实测首页渲染（左侧七层有节奏 + 右侧插画完整无遮挡 + 切换器归位不压图）+ 9 张裁切对照图逐张目视；判据脚本 9/9 PASS；CSS 结构平衡 / JS 语法 / token 覆盖 / 动效禁令 / CSP 零漂移 / 第 31 与第 45 门禁全绿
 > - **状态**：在途（认领登记 W938·待提交入库）
 > **状态**：**已收官**（W938 db5328b5·git 反填·共 2 笔·W971 存量回填）
-
-
-### W937（2026-10-25）：首屏版式修正——「100 回」数据块移入左侧文字区
-
-> **来源**：用户 2026-10-25 反馈「你现在的这个设计不太好看，要么重新设计一下这个 100 回放在哪个位置比较好」（指 W936 批的右侧数字区纸色渐变遮罩方案）。
-
-> - **文件**：site/index.html、Cdsscripts/_w937_cascade.py
-
-**问题定性**：W936 用「右侧数字区加纸色渐变底」遮住插画主体与「100」的叠字——是**补救不是设计**。根因是 `.mega-num` 巨型数字（clamp 96–180px）与首屏插画主体争夺同一块右侧空间，遮罩只能盖住症状。
-
-**改法**：把「100 回」数据块**移出插画区**，并入左侧文字区做横排一行（数字降档至 clamp 44–64px，右侧配两行说明小字），首屏右侧整块留给插画主体。收益：① 删除纸色渐变遮罩，右侧画面完整；② 左侧文字区零干扰（线描 8 张实测左侧 46% 墨量 0.0000）；③ 移动端不再有巨型数字挤占首屏。
-
-**配套修正**：移动端媒体查询的 mega 尺寸规则改为作用域形式（`.masthead-facts .mega-num`）——否则压不过桌面尺寸导致移动端不变小；删除指向已不存在元素的 `.masthead-mega` 死规则（孤立选择器门禁）。
-
-**题图落位逐页复核与修正**（用户令「你重新每个插图都看看位置对不对」）：机器核查 5 页插图位置全部正确（article 内、紧随 h1、CSS 与 alt 齐备）；**但逐页比对 h1 与正文主题后发现两处题材不贴并已移走**——① 「取经地理学专题」是「地方感 / 第三空间 / 空间正义 / 全球地方感」的**地理学理论**页 ⇒ 五行山与两界山改落「取经路线地理专题」（该页路线表直接列出「两界山→诸国→灵山」·跨 92 回约 40 处地理节点）；② 「四海龙王：下雨的人」讲龙王的**降雨职能** ⇒ 东海龙宫水殿改落「灵感大王·外传：冰层下面的供桌」（通天河·冰层下的水下宫殿）。旧页的 figure 与 chapter-plate CSS 一并移除（不留死规则）。修正后 5 张逐页浏览器目视复核全部显示正常。
-
-> - **验证**：浏览器实测首页渲染（右侧插画完整无遮挡 · 左侧数据块与文字层级分明）；CSS 结构平衡 / JS 语法 / token 覆盖 / 动效禁令 / CSP 零漂移 / 第 31 与第 45 门禁全绿
-> - **状态**：在途（认领登记 W937·待提交入库）
-> **状态**：**已停止**（W937 零提交·git 事实标注·W971 存量回填）
 
 

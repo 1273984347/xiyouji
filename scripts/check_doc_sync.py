@@ -319,7 +319,48 @@ def evaluate(inp):
     _check_c5d_stats_recheck(inp, issues)
     _check_c6_version_desc_seps(inp, issues, notes)
     _check_c7_homepage_showcase(inp, issues, notes)
+    _check_c8_dup_long_lines(inp, issues, notes)
     return issues, notes
+
+
+# ---- C8 治理文档同段重复（W1052·W1046 方案 G-01 落地）----
+# 根因：W1048 诊断实证 AGENTS.md 铁律 14/15 整段双写（级联插入事故·必载层自带补丁痕迹），
+# 既有门禁无一能拦（41 槽 check_agents_layers.py 查结构不查同段重复）。
+# 窄判据防误报：仅扫治理权威面；strip 后整行全等、长度 ≥60（滤表格分隔行/短行/空行）、
+# 行首非「|」（表格内容行）、非代码围栏内行，**相邻窗口（≤3 行）内**出现 ≥2 次即 FAIL——
+# 「相邻」限定回归方案 G-01 语义：拦级联插入事故（整段贴两遍），放过跨章节合理引用
+# （W1052 实证 HANDOVER 索引行跨 120 行的重复属结构性冗余另案，不在本判据射程）。
+C8_MIN_LEN = 60
+C8_WINDOW = 3
+C8_FILES = (
+    "AGENTS.md", "HANDOVER.md",
+    os.path.join("docs", "agent", "gates.md"), os.path.join("docs", "agent", "pitfalls.md"),
+)
+
+
+def _check_c8_dup_long_lines(inp, issues, notes):
+    """C8：治理文档同段重复检测（W1052）。相邻窗口内 strip 后整行全等长行 ≥2 次即红。"""
+    texts = inp.get("c8_texts") or {}
+    for rel in C8_FILES:
+        text = texts.get(rel)
+        if not text:
+            continue
+        in_fence = False
+        last_ln = {}  # 行文本 -> 上次出现的行号
+        for no, raw in enumerate(text.splitlines(), 1):
+            ln = raw.strip()
+            if ln.startswith("```") or ln.startswith("~~~"):
+                in_fence = not in_fence
+                continue
+            if in_fence or not ln or ln.startswith("|") or len(ln) < C8_MIN_LEN:
+                continue
+            prev = last_ln.get(ln)
+            if prev is not None and no - prev <= C8_WINDOW:
+                issues.append(
+                    "C8: %s 同段重复（L%d 与 L%d 相隔 %d 行·%d 字符）：「%s…」——级联插入事故形态，保留一份"
+                    % (rel, prev, no, no - prev, len(ln), ln[:40])
+                )
+            last_ln[ln] = no
 
 
 def _check_c1_readme_head(inp, date, wnum, issues, notes):
@@ -673,6 +714,11 @@ def gather():
         "subjects": [],
         "shallow": os.path.exists(os.path.join(ROOT, ".git", "shallow")),
         # W889：GitHub 仓库主页展示位实况（.github/README.md 存在即抢占仓库主页）
+        # W1052：C8 治理文档同段重复扫描面（判据与读取源解耦·self-test 可注入）
+        "c8_texts": {
+            rel: rd(os.path.join(ROOT, rel)) if os.path.exists(os.path.join(ROOT, rel)) else ""
+            for rel in C8_FILES
+        },
         "showcase": {
             "root_readme": os.path.isfile(os.path.join(ROOT, "README.md")),
             "github_readme": os.path.isfile(os.path.join(ROOT, ".github", "README.md")),
@@ -750,7 +796,7 @@ def run_check():
     for nt in notes:
         print("NOTE  " + nt)
     print(
-        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账 / C5d stats 实算对账 / C5e 坑表分项）----"
+        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账 / C5d stats 实算对账 / C5e 坑表分项 / C8 同段重复）----"
         % (len(issues), len(notes))
     )
     return (1 if issues else 0), issues, notes
@@ -1003,6 +1049,21 @@ def run_self_test():
         lambda d: d.update(
             showcase={"root_readme": True, "github_readme": False, "docs_readme": True}),
         "C7",
+        expect_absent=True,
+    )
+    # W1052：C8 治理文档同段重复——铁律 14/15 双写事故形态（W1048 诊断实证）的防复发锁
+    case(
+        "T30 治理文档长行整行双写必红（C8·W1052）",
+        lambda d: d.update(c8_texts={
+            "AGENTS.md": "14. **修实例必修根（W998 固化）**：修复暴露同类风险时同批或次批根治禁止「值得排期与等点号」收尾且检查任务按委托字面范围执行且跨会话教训权威落坑表。\n"
+                         "14. **修实例必修根（W998 固化）**：修复暴露同类风险时同批或次批根治禁止「值得排期与等点号」收尾且检查任务按委托字面范围执行且跨会话教训权威落坑表。\n"}),
+        "C8",
+    )
+    case(
+        "T31 表格行/短行/代码围栏内重复放行（C8·W1052 防误伤）",
+        lambda d: d.update(c8_texts={
+            "AGENTS.md": "| A | B | C |\n| A | B | C |\n短行重复\n短行重复\n```\n围栏内长行重复一次不算重复长行重复一次不算\n围栏内长行重复一次不算重复长行重复一次不算\n```\n"}),
+        "C8",
         expect_absent=True,
     )
 
