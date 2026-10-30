@@ -228,4 +228,4 @@ tag-cloud、dukou-engine）、workflows README、CHANGELOG/file-index 体积窗�
 --refresh 重写的 output README/index/tools-inventory、机器缓存 _vermilion_solid_cache.json、
 chart-values-report.json——凡这些面被本批改动，spec 就必须声明（51 槽判「索引 ⊆ spec」·漏列即
 FAIL 并逐件点名）。⇒ 收官前先跑级联看 _cascade_files 清单与 porcelain，把每个 M 件核对进 spec
-再 add；「50 行 hint」：spec 多声明无副作用（只判索引多出，不判 spec 多出）。
+再 add。要点：spec 多声明无副作用（51 槽只判「索引含 spec 外」，不判「spec 含索引外」）——把可能被级联/刷新触碰的登记面全部声明进去即可。
