@@ -10,6 +10,41 @@
 
 ---
 
+## W1057 Backlog 对账批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| HANDOVER.md | W1057 | 本批新增/修改（四、待办压缩 12→1 形态锚 + 对账注记 + 级联面） |
+| CHANGELOG.md | W1057 | 收官面（顶段 W1057 对账记录） |
+| README.md | W1057 | 级联面（版本行） |
+| STRUCTURE.md | W1057 | 级联面（版本行） |
+| AGENTS.md | W1057 | 级联面（脚注滚动） |
+| CITATION.cff | W1057 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1057 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1057 | 台账（W1057 行·状态列含对账 token） |
+| docs/INDEX.md | W1057 | 登记面（docs 索引） |
+| index.md | W1057 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1057 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1057 | 级联面（里程碑行同步） |
+| site/index.html | W1057 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1057 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1057 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1057 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1057 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1057 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1057 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1057 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1057 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1057 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1057 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1057 | 登记面产物（第 43 槽报告·上批余波） |
+| scripts/output/_vermilion_solid_cache.json | W1057 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/output/_cascade_files_W1057.txt | W1057 | 级联清单（本批产物） |
+| scripts/output/_w1057_spec.json | W1057 | 本批 spec |
+
 ## W1056 提交前三问自检流程契约（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4234,15 +4269,4 @@ docs/11-方案报告/README.md
 | scripts/_w944_cascade.py | W944 | 四面登记 + 当前态指针 |
 | CHANGELOG.md | W944 | W944 版段（四件套） |
 | docs/00-导读/W批次编号对账表.md | W944 | W944 认领行 |
-
-## W943 全站图片审查（227 张逐类目视·修 3 处真缺陷）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/og-15-shijian-liejian.webp | W943 | 重出（线上分享图·去掉抽象墨块中 3 处「LI」字母残留） |
-| assets/design/ai-concepts/concept-03-scroll.png | W943 | 重出（去掉卷面潦草伪汉字·改空白纸面 + 抽象笔触） |
-| assets/design/ai-concepts/concept-06-bodhi-leaf.png | W943 | 重出（菩提叶形制：水滴 / 火苗形 → 心形叶 + 中脉分叉叶脉 + 叶柄 + 露珠） |
-| scripts/_w943_cascade.py | W943 | 四面登记 + 当前态指针 |
-| CHANGELOG.md | W943 | W943 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W943 | W943 认领行 |
 
