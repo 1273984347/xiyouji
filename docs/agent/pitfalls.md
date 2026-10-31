@@ -147,7 +147,7 @@
 - **自测样本必须覆盖「判据会失败」的最小形态——测过正确形态≠测过判据**（W976 实证）：archive_ledger_rows.py 的 A5 断言（迁出行物理序须升序）与其自身文档「台账行序穿插是常态（W968 实证 52 处）」直接矛盾，自测却连跑通过——合成样本 [910,905,912,908,911] 的迁出集 [905,908] **恰好物理升序**，测不出会崩的降序形态（真实台账 [915,914] 首跑即 AssertionError）。⇒ 写自测先问「这个判据**什么输入会失败**」，把最小失败形态造进样本（同族：W974「校验/自检代码必须自证」管「检查恒真」，本条管「自测样本挑不出错」）；且自测必须**走被测函数本体**——旧自测复算一遍切分逻辑再对答案，实现里的断言根本没被执行。
 - **判据把「字样」当「事件」、把「文件序」当「集合」⇒ 假绿与漏警**（W1003 实证·审查 B1/B2）：① **字样≠事件**——触发器用泛词「对抗式审查」判「有没有审查过」，而该词会出现在「修 W998 对抗式审查遗留问题」「对抗式审查常驻化批」这类**非派发行**里 ⇒ 计数被无关批次静默重置（实测构造：41 批未真派发仍判「未触发」）；② **同一函数混用两套取号**——`last_audit_batch()` 取**文件序末条**、`parse_ledger()` 取 **max**，而台账允许后补登记/让号（W931/W935 明确合法）⇒ 末尾追加低号行即把 gap 算歪（实测：真实 24 批报 28 批，提前 4 批假警）。⇒ 修法：事件用**专用 token**（「对抗审查已派发」）判定、序号一律 `max()`；**token 必须限定在状态列**——W1004 实证自伤：台账行只需描述「触发器改认 token『…』」就把自己判成一次派发（整行 grep 的必然结果）；位置判定后该行不再命中，自测补 T6b/`test_token_in_topic_cell_does_not_count` 钉住；自测必须带「泛词行不得重置」「低号补登记不得拉低 last」两条负样本（本批 T5/T6）。同族检查：任何 `in` 判「发生过」、任何 `[-1]` 判「最新」都属此族。**还有一个读取面**（W1008 补 I2）：判据读的**文件**也会滚动——台账行按 60 行窗迁进 `archive/docs/W批次编号对账表-ARCHIVE.md` 后，只读正本的判据会把「审查行已归档」读成「从未发生」（假警）。口径：凡「最近一次 X」类判据，读取面必须 = 正本 ∪ 归档；归档缺失不阻断（正本判据仍成立）。 **同一判据禁两处实现**（W1009 补）：spec 解析曾在 `safe_commit` 与第 51 槽各写一份，W1007 踩到一处取 `cells[0]`、一处取 `cells[1]` —— 改一处另一处还在错，且错误只在边界数据上现形。口径：判据的解析/取数部分收敛为**单一入口**（本例 `scripts/batch_spec.py`），两处只调用不重写。
 
-### 流程 / 协作 / 取证（56 条）
+### 流程 / 协作 / 取证（66 条）
 
 - **文档里的「操作步骤」绑定当时的工具环境，环境一换步骤即失效，而文档不会自己告诉你**（W1032 实证）：《取经编制表》§4 写的 `mavis mcp create` / `mavis agent create` / `mavis-doctor` 等，属 2026-10-20 的 `mavis` 环境；到 10-30 换环境后实测**连接器 0 个、用户级技能 2 个**，整节步骤照抄必踩空。更隐蔽的是：我一度把「需要 mavis 才能核」当成事实汇报，其实**现环境有 `list_installed_plugins` / `skill_management` 可直接查**——错在照抄旧文档的依赖假设，没先问「现在有什么工具」。⇒ 引用旧文档的操作步骤前，**先确认它依赖的工具在当前环境是否存在**；写「待某工具重核」这类结论前，先搜一遍当前可用的等效接口。
 
@@ -229,3 +229,13 @@ tag-cloud、dukou-engine）、workflows README、CHANGELOG/file-index 体积窗�
 chart-values-report.json——凡这些面被本批改动，spec 就必须声明（51 槽判「索引 ⊆ spec」·漏列即
 FAIL 并逐件点名）。⇒ 收官前先跑级联看 _cascade_files 清单与 porcelain，把每个 M 件核对进 spec
 再 add。要点：spec 多声明无副作用（51 槽只判「索引含 spec 外」，不判「spec 含索引外」）——把可能被级联/刷新触碰的登记面全部声明进去即可。
+- **Bash 工具工作目录跨调用持久**（多会话实证·E-58）：某条命令 `cd 子目录` 后，后续所有相对路径命令都落在子目录（报 No such file or directory / E902）⇒ 长批次开头 `cd /d/xiyouji` 归位或全程绝对路径；「找不到文件」先查 pwd。
+- **`python -c` 内容含反引号会被 bash 当命令替换实际执行**（W562 前会话实证·E-59）：skill 插入文本里的 `git push` 等命令示例被真实运行、输出注入目标文件 ⇒ 含反引号/复杂转义的文本一律 Write 落盘成文件执行，禁内联。
+- **git push 网络选择性污染**（多会话实证·E-60）：api.github.com 可通（gh 正常）而 github.com:443 超时，间歇分钟级自愈 ⇒ 重试循环（sleep 45×N）；`git push | tail -1` 的退出码是 tail 的，成败判断用 `rev-parse origin/<分支>` == 本地比较；`gh run list --commit <sha>` 本机无输出，用 limit 列表 grep 主题片段。
+- **judge 子代理并发限额浮动**（多会话实证·E-61）：一次全成、下次部分报 concurrency limit exceeded——被限组原样重试即可；**后台 run_in_background 的 judge 占同一限额可能整组秒拒**；卡死 sleep 60-120s 通常放行；关键终审宁可串行。
+- **npm 原生模块重装双坑**（W623 实证·E-62）：①TLS 证书链拦截使 prebuild-install 报 unable to verify ⇒ `NODE_OPTIONS=--use-system-ca`（走系统证书库·与 curl --ssl-no-revoke 同族根因）；②better-sqlite3 部分版本无 node v24 ABI 预编译包 ⇒ `npm ci` 必败且**清掉原本能用的 node_modules**——恢复：`npm ci --ignore-scripts` 先装 JS 依赖树，二进制另裁决；诊断 `npx prebuild-install --verbose`。
+- **`grep -c` 数的是行数不是次数**（S4 实证·E-63）：一行多命中只计 1（脚注误判 15 实为 20）⇒ 计数断言用 python re.findall 或 `grep -o | wc -l`；且 grep -c 计 0 时退出码 1 会断 `&&` 链；`**` 在 BRE 歧义——含 `*` 字面串用 `grep -F`。
+- **pytest 双坑**（S4 实证·E-64）：①测试类共享类属性跨用例污染（断言读到上一用例残留）⇒ 有状态协作对象一律 `__init__` 实例化；②tmp_path（C:）与仓库 ROOT（D:）跨盘 relpath 崩 ⇒ 给模块级 ROOT 打补丁的测试**先 patch 再调任何用 relpath 的函数**。
+- **前端探针三合一**（多会话实证·E-65）：①顶层 `const` 不挂 window（词法全局）——Playwright evaluate/跨脚本探测用 `typeof X !== "undefined"`，`window.X` 恒 undefined；②Playwright `screenshot({clip})` 的 x/y 是**视口坐标**非文档坐标——先 scrollIntoView 再 getBoundingClientRect 并 clamp；③`new AsyncFunction(code)()` 体内 `await import` 报 no dynamic import callback——复用脚本先剥 import 段改参数注入。
+- **Windows 杂项三合一**（多会话实证·E-66）：①建 junction 禁 `cmd //c mklink /J`（Git Bash 把 /J 做 MSYS 转换报路径语法错）——用 PowerShell `New-Item -ItemType Junction`；②winget 升级 Poppler 换版本目录后 Read 的 PDF 通道失效——把新版本 Library\bin 全套复制进 WinGet\Links（在 PATH·无需重启）；③PS 脚本传相对路径被 Word 解析到 system32——文件参数必须绝对路径。
+- **docx 交付必含 Word COM 渲染验收**（S4 实证·E-67）：XML 严格校验（ElementTree 全部件 parse）全合法也会因 OOXML **语义**违规被 Word 报「文件可能已经损坏」（实锤两例：脚注重复引用 1:1 违规/settings.xml footnotePr 插错 schema 位置）——结构校验不能替代渲染验收；页数/Footnotes.Count/InlineShapes.Count 用 COM 实测。
