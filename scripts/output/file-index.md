@@ -10,6 +10,62 @@
 
 ---
 
+## W1069 效率与防护打包批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_corruption.py | W1069 | 本批新增/修改（R3 BOM 扫描·tracked 文本面·ps1 例外·self-test 6 例） |
+| scripts/preflight_check.py | W1069 | 本批新增/修改（env-sync：ruff 实际版本 vs requirements 对拍·上线即抓真漂移 0.16.7≠0.16.9） |
+| docs/agent/pitfalls.md | W1069 | 本批新增/修改（+5 条 E-68~E-72·181·流程组 88·数据组对齐 19） |
+| docs/11-方案报告/计划方案/执行前计划-W1069-微批轻量通道设计.md | W1069 | 本批新增（微批轻量通道设计 V1.0·三档+准入判据·待批） |
+| CLAUDE.md | W1069 | 本批新增/修改（批次节奏行 15·52/60 行） |
+| CHANGELOG.md | W1069 | 收官面（顶段 W1069） |
+| HANDOVER.md | W1069 | 级联面（计数链 181/最后更新/进度） |
+| README.md | W1069 | 级联面（版本行） |
+| STRUCTURE.md | W1069 | 级联面（版本行） |
+| AGENTS.md | W1069 | 级联面（计数链 181/脚注滚动） |
+| CITATION.cff | W1069 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1069 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1069 | 台账（W1069 行新增） |
+| docs/INDEX.md | W1069 | 登记面（docs 索引） |
+| index.md | W1069 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1069 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1069 | 级联面（里程碑行同步） |
+| site/index.html | W1069 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1069 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1069 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1069 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1069 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1069 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1069 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1069 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1069 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1069 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1069 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1069 | 登记面产物（第 43 槽报告） |
+| scripts/output/_vermilion_solid_cache.json | W1069 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/output/_cascade_files_W1069.txt | W1069 | 级联清单（本批产物） |
+| scripts/output/_w1069_spec.json | W1069 | 本批 spec |
+
+## W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/CI提速与门禁健壮性方法论.md | W1068 | 本批新增（方法论深度篇·提速四步序 + 判据自证 + action ref 红线 + paths 过滤陷阱 + 收官自查清单） |
+| docs/10-方法论沉淀/README.md | W1068 | 本批修改（方法论索引登记第 28 行） |
+| docs/agent/pitfalls.md | W1068 | 本批修改（新增 E-83 schannel TLS 指纹 / E-84 paths 过滤不得缩小验证面·流程组 81→83·含对 W1066 批登记建议的自我纠正） |
+| .github/workflows/screenshot-review.yml | W1068 | 本批修改（paths 补 check_contract_smoke.js / check_screenshot_gates.js ⇒ 改了门禁脚本也会触发门禁） |
+| .github/workflows/workflow-lint.yml | W1068 | 本批修改（paths 收窄到 .github/workflows/** + 判据脚本·其覆盖面本就是工作流文件自身） |
+| AGENTS.md | W1068 | 本批修改（坑表条数计数链同步 + 级联脚注滚动） |
+| HANDOVER.md | W1068 | 本批修改（坑表条数计数链同步 + 级联同步面） |
+| .agent/skills/puti-shouye/SKILL.md | W1068 | 本批修改（坑表条数计数链同步） |
+| scripts/output/tools-inventory.md | W1068 | 本批修改（工具清单刷新·收录新增方法论篇） |
+| pytest.ini | W1068 | 本批修改（stats 实体标记跟随） |
+| CHANGELOG.md | W1068 | 本批修改（W1068 段·级联写入） |
+| docs/00-导读/W批次编号对账表.md | W1068 | 本批修改（W1068 台账行·手工登记） |
 ## W1067 CI action ref 根修批 + 记忆与项目沉淀同步批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4271,57 +4327,4 @@ docs/11-方案报告/README.md
 | site/data/search.html | W955 | 刷新：站内搜索索引（中文）重嵌入（含新计划件条目） |
 | site/en/search.html | W955 | 刷新：站内搜索索引（英文）重嵌入 |
 | site/**（2 页 meta CSP） | W955 | 重算：搜索页内联脚本变更后的 CSP 哈希同步（2 页 · 861 个内联脚本哈希） |
-
-## W954 第 43 篇工作复盘批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md | W954 | 新增：第 43 篇复盘（W795–W953 全区间·149 段 / 154 行 / 354 提交·八条核心发现·E-25~E-31 / FAM-40~42 / WF-08~09 / P-43-01~05） |
-| docs/11-方案报告/计划方案/执行前计划-T27-第43篇工作复盘批.md | W954 | 新增：T-27 执行前计划（9 条 AC / 9 步 ST / 7 项 V 指标 / 8 条决策 / 12 项自包含检查） |
-| docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md | W954 | 新增：T-27 执行与经验沉淀报告（9 步执行记录 / 验收表 / 6 条偏差 / 6 条经验 E-01~E-06） |
-| scripts/_w954_review_evidence.py | W954 | 新增：复盘取证脚本（CHANGELOG 现役面 + 归档面 + 对账表 + git 提交图四源合取 + 五类漂移分类 + 12 组主题分组） |
-| scripts/_w954_ledger_backfill.py | W954 | 新增：台账回写脚本（8 行状态订正 + 认领行追加·先断言后写·幂等可重跑） |
-| scripts/output/_w954_review_evidence.json | W954 | 新增：取证产物（区间事实与漂移分档的机器可读快照） |
-| docs/11-方案报告/README.md | W954 | 登记：§五 增第 43 篇行（序号 25）+ §六 增 T-27 两行（序号 31/32）+ 件数刷新 |
-| docs/00-导读/W批次编号对账表.md | W954 | 登记：W954 认领行 + 回写 7 批陈旧在途状态 + W937 标「已停止」并清零 touches |
-| HANDOVER.md | W954 | 同步：一、当前进度增 W954 条目 + 最后更新链前置 W954 |
-| CHANGELOG.md | W954 | 新增：W954 版段（四件套） |
-| scripts/output/file-index.md | W954 | 登记：W954 段（本段） |
-
-## W953 themes 库专题题图批（12 张）（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-01-zhenjia-meihouwang.webp | W953 | 新增·真假美猴王专题 |
-| site/static/images/plate-line-02-pantao-yuan.webp | W953 | 新增·蟠桃园-体制内的秘密 |
-| site/static/images/plate-line-03-danaotian-gong.webp | W953 | 新增·大闹天宫-英雄还是悲剧 |
-| site/static/images/plate-line-04-shuilandong.webp | W953 | 新增·水帘洞专题 |
-| site/static/images/plate-line-05-hunshi-sihou.webp | W953 | 新增·混世四猴专题 |
-| site/static/images/plate-line-06-bingqi-xiuyang.webp | W953 | 新增·兵器的自我修养专题 |
-| site/static/images/plate-line-07-ershiba-xingsu.webp | W953 | 新增·二十八星宿专题 |
-| site/static/images/plate-line-08-sizhi-gongcao.webp | W953 | 新增·四值功曹专题 |
-| site/static/images/plate-line-09-wufang-jiedi.webp | W953 | 新增·五方揭谛专题 |
-| site/static/images/plate-line-10-liuding-liujia.webp | W953 | 新增·六丁六甲专题 |
-| site/static/images/plate-line-11-jingubang-zhongliang.webp | W953 | 新增·金箍棒的重量专题 |
-| site/static/images/plate-line-12-qiwu-zhuanji.webp | W953 | 新增·器物传记学专题 |
-| site/reader/themes/真假美猴王专题.html | W953 | 接入题图（真假美猴王专题） |
-| site/reader/themes/蟠桃园-体制内的秘密.html | W953 | 接入题图（蟠桃园-体制内的秘密） |
-| site/reader/themes/大闹天宫-英雄还是悲剧.html | W953 | 接入题图（大闹天宫-英雄还是悲剧） |
-| site/reader/themes/水帘洞专题.html | W953 | 接入题图（水帘洞专题） |
-| site/reader/themes/混世四猴专题.html | W953 | 接入题图（混世四猴专题） |
-| site/reader/themes/兵器的自我修养专题.html | W953 | 接入题图（兵器的自我修养专题） |
-| site/reader/themes/二十八星宿专题.html | W953 | 接入题图（二十八星宿专题） |
-| site/reader/themes/四值功曹专题.html | W953 | 接入题图（四值功曹专题） |
-| site/reader/themes/五方揭谛专题.html | W953 | 接入题图（五方揭谛专题） |
-| site/reader/themes/六丁六甲专题.html | W953 | 接入题图（六丁六甲专题） |
-| site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html | W953 | 接入题图（金箍棒的重量专题） |
-| site/reader/themes/器物传记学专题.html | W953 | 接入题图（器物传记学专题） |
-| assets/promo/plate-set/ | W953 | 母版 + 站点版 + 拼图 + README（累计 40 张） |
-| scripts/_w953_make_prompts.py | W953 | 母版复用生成器（读上批 JSON 取母版·断言逐字一致） |
-| scripts/_w953_insert_plates.py | W953 | 12 页 chapter-plate 接入（幂等） |
-| scripts/_w953_cascade.py | W953 | 四面登记 + 当前态指针（共享面精确暂存·文件行自动生成） |
-| scripts/output/_w953_batch1~3.json | W953 | 出图参数 12 条 |
-| scripts/output/_cascade_files_W953.txt | W953 | 当批级联清单 |
-| CHANGELOG.md | W953 | W953 版段 |
-| docs/00-导读/W批次编号对账表.md | W953 | W953 认领行 |
 

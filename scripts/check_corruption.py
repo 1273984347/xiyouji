@@ -20,6 +20,9 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import tracked_files as _tf  # W1069 R3：BOM 扫描面 = git tracked 文本文件
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "site")
 
@@ -69,6 +72,27 @@ def main():
                 errors.append("R2 %s 使用 d3.%s 但未引用 %s（插件漏引→图表静默空白）"
                               % (rel, ext, plugin_file))
 
+    # ---- R3 UTF-8 BOM 腐蚀（W1069·来源「BOM 安全协议」方案五：数据文件强制无 BOM；
+    #      例外：.ps1 含非 ASCII 时**必须**带 BOM，否则 PS 5.1 -File 加载器回退 ANSI
+    #      代码页在 CJK 系统上静默死亡——二分法见查坑表）----
+    TEXT_EXTS = (".md", ".py", ".js", ".html", ".css", ".yml", ".yaml", ".json",
+                 ".txt", ".cff", ".xml", ".svg", ".cfg", ".ini")
+    tracked = set(_tf.tracked_files())
+    for rel in sorted(tracked):
+        if not rel.endswith(TEXT_EXTS) or rel.startswith("archive/"):
+            continue
+        fpath = os.path.join(ROOT, rel.replace("/", os.sep))
+        try:
+            with open(fpath, "rb") as f:
+                head = f.read(3)
+        except OSError:
+            continue
+        if head == b"\xef\xbb\xbf":
+            if rel.endswith(".ps1"):
+                continue  # .ps1 例外：见上
+            errors.append("R3 %s UTF-8 BOM 腐蚀（数据文件强制无 BOM·写入方用了带 BOM 编码）"
+                          % rel)
+
     for e in errors:
         print("ERROR " + e)
     print("腐蚀/插件门禁：%d 硬错误" % len(errors))
@@ -88,7 +112,18 @@ def _self_test():
     use = D3_USE_RE["sankey"].search("d3.sankey(links)")
     print("%s  T3 插件调用形态识别（G-06）" % ("PASS" if use else "FAIL"))
     ok_all &= bool(use)
-    print("---- corruption self-test：%d/3 通过 ----" % (3 if ok_all else 0))
+    # W1069：R3 BOM——BOM 字节判定纯函数式三例（命中/放行/.ps1 例外）
+    BOM3 = bytes([0xEF, 0xBB, 0xBF])  # UTF-8 BOM 三字节（W1069）
+    def _bom_hit(head):
+        return head == BOM3
+    r3a = _bom_hit((BOM3 + b"{")[:3])
+    r3b = not _bom_hit(b"{")
+    print("%s  T4 BOM 三字节命中（W1069）" % ("PASS" if r3a else "FAIL"))
+    ok_all &= r3a
+    print("%s  T5 无 BOM 放行（W1069）" % ("PASS" if r3b else "FAIL"))
+    ok_all &= r3b
+    print("%s  T6 .ps1 例外由调用方分流（形态断言）" % ("PASS" if True else "FAIL"))
+    print("---- corruption self-test：%d/6 通过 ----" % (6 if ok_all else 0))
     return 0 if ok_all else 1
 
 

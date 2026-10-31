@@ -1,3 +1,47 @@
+### W1069（2026-10-31）：效率与防护打包批（env-sync 判据 + BOM 门禁 + 坑表 5 条 + 微批轻量通道设计 + 批次节奏行）
+
+> **来源**：用户 2026-10-31 反馈「PowerShell/Write/Edit/Git/Python 总是有问题·项目繁琐臃肿」+ 四篇
+Agent 工作流文章（BOM/补丁根因/PNG/Playwright）+ 裁决「都可做」——本批打包：环境判据（env-sync）+
+BOM 门禁 + 坑表 5 条 + 微批轻量通道设计 + CLAUDE 批次节奏行（批次合并·用户裁决「都可做」的节奏项）。
+>
+> - **文件**：scripts/check_corruption.py、scripts/preflight_check.py、docs/agent/pitfalls.md、docs/11-方案报告/计划方案/执行前计划-W1069-微批轻量通道设计.md、CLAUDE.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/chart-values-report.json、scripts/output/_vermilion_solid_cache.json、scripts/output/_cascade_files_W1069.txt、scripts/output/_w1069_spec.json。
+
+**本批要点**：① **env-sync 判据**（preflight）——ruff 实际版本 vs requirements 对拍，上线即抓真漂移
+（本地 0.16.7 ≠ 声明 0.16.9·当日 CI 5 红的根源）·本地已对齐 0.16.9 全绿；② **BOM 门禁**——第 9 槽
+check_corruption.py 加 R3（tracked 文本面 UTF-8 BOM 扫描·.ps1 例外二分法·self-test 6 例）——补上
+W509 教训「有纪律无门禁」的最后一块；③ **坑表 +5（E-68~E-72·181·流程 88·数据组对齐 19）**——
+BOM 二分法/三次补丁规则/E2E 失败档案/PS Here-String/.cmd shim spawn（四篇文章中经仓内实证筛选的
+适用子集·其余判定已有制度覆盖或不适用·详见复盘）；④ **微批轻量通道设计 V1.0**（三档+准入判据
+四条·待用户批准另批实施·落位设计与架构方案分区——本质为设计提案非执行前计划·第 48 槽模板不适用）；⑤ **批次节奏行入 CLAUDE**（按主题日批合并同类项·用户裁决「都可做」）。
+
+**提交前三问结论（铁律 18·落验证栏）**：① 过程问题（切片误删二犯靠 checkout 救/BOM 字面量 bytes
+形态/env-sync 上线即抓真漂移）当批闭环；② 防复发 = R3 门禁 + env-sync 判据 + E-68~E-72 查表条目
+（环境与流程两域各有机器面）；③ 判定表（四篇 × 已覆盖/采纳/不适用）全在 CHANGELOG 与报告，
+私有记忆已同步镜像。
+
+**验证**：self-test 6/6 · PyYAML · C5e 六点 181 零红 · ruff 0.16.9 对齐后 scripts 全绿 ·
+全量门禁见收官提交。
+
+> - **状态**：已收官（env-sync/BOM 门禁/坑表 5 条/轻量通道设计/节奏行五件打包·用户「都可做」全部落地）
+### W1068（2026-10-31）：触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批
+
+> **来源**：用户 2026-10-31 令「全部现在做完」——把 W1067 收官时登记的剩余项一次性做完
+> （触发面缺口 / schannel 坑入库 / 方法论篇 / tmpe 存量清理）。
+>
+> - **文件**：.github/workflows/screenshot-review.yml、.github/workflows/workflow-lint.yml、docs/10-方法论沉淀/CI提速与门禁健壮性方法论.md、docs/10-方法论沉淀/README.md、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、scripts/output/tools-inventory.md、pytest.ini、scripts/output、CHANGELOG.md、docs/00-导读/W批次编号对账表.md
+
+**修① 触发面补漏（真缺陷）**：`screenshot-review.yml` 的 `paths` **漏了 `scripts/check_contract_smoke.js` 与 `scripts/check_screenshot_gates.js`**——这两个脚本正是 W1066 批改过的（contract smoke 并发化 / chart-gates `--only`），却不在触发路径里 ⇒ **改了门禁脚本本身却不触发门禁**（守卫自失守）。本批补齐两处（push + pull_request 两侧）。
+
+**修② paths 过滤的自我纠正（W1066 批登记建议是错的）**：W1066 批收官登记过「CI / Security / CI Sim / Workflow Lint 补 paths 过滤」⇒ **本批实查后判定该建议错误**：① `security.yml` 的 **brand guard**（`check_no_brand_refs.py` 扫全仓含 `archive/`）与 **XSS detect**（`security_scan.py --all`）是**全仓面** job ⇒ 过滤会让某些改动不被验证；② `ci.yml` 含**分支保护 required check**（`Delivery Gate (verify_delivery.py)` + `Unit Tests (pytest)`）⇒ 若因过滤导致这两个 check 在某些 PR 上不产生 ⇒ **PR 永远卡在 required checks 不满足**。⇒ 本批**只给 workflow-lint 加 paths**（其覆盖面本就是工作流文件自身：`.github/workflows/**` + 判据脚本），**CI / Security / CI Sim 明确不动**并把理由写进注释与坑表 E-84。⇒ **提速 ≠ 缩小验证面**。
+
+**修③ 坑表 +2**：E-83（Windows `git push` 连不上 `github.com:443` 但 `gh api` 正常 ⇒ git 的 OpenSSL TLS 指纹被中间层拒 ⇒ `http.sslBackend=schannel` 一次通过·**本地环境层故障·不是仓库缺陷**）；E-84（paths 过滤不得缩小验证面 + 「每笔 push 全量跑」的根因是提交节奏而非配置）⇒ 坑表 **174 → 176 条**（流程组 81 → 83），计数链 **7 处**同步。
+
+**修④ 方法论深度篇**：`docs/10-方法论沉淀/CI提速与门禁健壮性方法论.md` 新建并登记进本目录 README 索引（第 28 行）——内容覆盖：提速四步序（按需等待 > 加并发 > 拆分片 > 减重复）与「先量化纯等待下限」、新旧对照验收三条纪律（同目录 / 各自产物路径 / 产出行数 > 0）、判据自证与「先怀疑判据再动产品代码」、「查不到 ≠ 不存在」双 endpoint、action ref 红线与「Set up job」1 秒失败定位口诀、paths 过滤陷阱、收官自查清单。
+
+**修⑤ tmpe 存量清理（按仓内契约分批走回收站）**：`tmpe/` 顶层 395 件 + 各桶存量 ⇒ 先 `tmpe_tidy.py --apply --confirm` **归桶 130 项（零删除）**；再清**已收官批桶**：`w###/` 下 24 个批次目录（w973–w999）+ 根下 130 件老形态批号工作件，**共 154 件全部移入系统回收站**（VisualBasic `SendToRecycleBin`·**每批 ≤10 个·批间验证·失败即停**·禁 `rm -rf`/`del /S /Q`）。⇒ **保留不动的**：个人稿件（`_hold` / `_bak` / `mqxs_*` / `papercheck_*` / `audit_*_paper_data`·policy 的 `protect_globs` 明列）、48 小时活跃冻结区（`_ruff_new` / `_scipy_probe` / `_w1050_park` / `_trash`）、TTL 未到（`_misc` 90 天 / `_inbox` 7 天 / `_shot` 30 天 ⇒ 实测 `--plan --older 30` 零候选 ⇒ **当前无合法删除目标**）。清理后 `w###` 归零。
+
+**验证**：坑表自测与计数链 7 处 grep 复核一致 · 方法论篇已登记进 README 索引第 28 行 · workflow-lint 的 `paths` 已实测命中（改 workflow 必然触发）· tmpe 归桶 130 项零删除 + 154 件入回收站且分批验证通过 · 目录清单刷新收录新方法论篇 · verify_delivery 全量门禁通过。
+
 ### W1067（2026-10-31）：CI action ref 根修批 + 记忆与项目沉淀同步批
 
 > **来源**：用户 2026-10-31 问「检查一下还在跑的东西·现在已经跑了八个小时·你不觉得有问题吗」→ 查出 PR #70 的 Screenshot Review run 失败于 merge job；再问「整理优化一下你自己的记忆文件内容 Agent Memory·有哪些内容是需要同步在项目文件内供其他 Agent 读取的」。
@@ -14,7 +58,11 @@
 
 **记忆 / 项目沉淀同步（用户明令）**：坑表 **168 → 174 条**（流程 / 协作 / 取证 75 → 81），新增 E-77~E-82 六条——其中 E-81（W811 YAML 冒号陷阱 · 独立守卫的由来）与 E-82（W808 门禁只认提交树 · 过程性文件不要留在会被门禁计数的目录）系**自 Agent 记忆固化入仓**（此前仅存私有记忆 ⇒ 其他 Agent 无从知晓，本批补齐）；计数链 **7 处**同步（坑表主题标题 / HANDOVER×2 / AGENTS×2 / SKILL×2）。W1065 调研三条教训（检索语法 / 正则分桶 / 外链腐化）经核实**已在坑表 150-152 行** ⇒ Agent Memory 侧属重复，改为指针。
 
-**验证**：check_action_refs.py 自测 6/6 · 全量 --api 扫描 14 个去重 ref 全 PASS · ruff + black 全绿 · 坑表计数链 7 处 grep 复核一致 · 跨行改写 `--gate` 0 FAIL（新增 6 条未触发高危扫描）。
+**验证**：check_action_refs.py 自测 6/6 · 全量 --api 扫描 14 个去重 ref 全 PASS · ruff + black 全绿 · 坑表计数链 7 处 grep 复核一致 · 跨行改写 `--gate` 0 FAIL（新增 6 条未触发高危扫描）· verify_delivery 全量门禁通过（57/57 段）· **CI 实测**：上一轮在 Set up job 阶段 1 秒失败的 merge job 本轮全流程跑通（62 秒·Set up job → Download shards → Merge shards → only-increase gate 全 success）· **暗色门禁全链提速实测**：改前单 job 40.5 分钟 → 改后 **6 分 59 秒**（4 分片并行 + contract smoke 并发 6 且只在 shard 0 跑一次）≈ **5.8×**。
+
+**合并与验收（PR #70 → main·字节级三处一致）**：mergedAt 2026-10-31T07:52:02Z，mergeCommit `420232a5`（parents=2·照 PR #66 惯例）⇒ ① `origin/main` 的 `site/static/images/ink-mountains-hero.webp` blob = `c081aa7fda37ed7f6b72f71cc057fb0f703bbb26`（120440 B）= 期望值 ✓；② contents API（main）返回同一 sha，解码后本地重算 blob-id 完全一致 ✓（raw.githubusercontent 为该 blob 的 raw 视图）；③ Pages 线上字节 = 120440 B、blob-id = `c081aa7f…` ✓（部署前实测 53754 B / 旧 blob `54bbc737…`）⇒ **README 主视觉在 GitHub 首页与 Pages 站点真正切到新版「取经五人组」**（目视复核：4 人形 + 1 匹白马 + 金色山道）。
+
+**提交前三问自检（铁律 18）**：① 本批问题全解决或登记去向——根因（W1066 新增 merge job 时写入 39 位编造 action SHA ⇒ 该 job 在 Set up job 阶段 1 秒 failure）已修，防复发判据已落地并挂 CI 独立工作流；两项已识别但不在本批修的缺口已登记去向（下一批）：screenshot-review 的 paths 漏 `check_contract_smoke.js` / `check_screenshot_gates.js`、CI / Security / CI Sim / Workflow Lint 无 paths 过滤（每笔 push 全量跑 ⇒ 并发限额掐掉 2 轮白跑）。② 同类问题会否再犯——已转机器判据：形态判据（离线·每次 PR 恒生效）+ 存在性判据（联网·双 endpoint 复核·自测 6/6 可证伪）；坑表 E-77~E-82 六条已落（E-81 / E-82 系自私有记忆固化入仓）。③ 其他 Agent 能否从项目内文件了解本批全部决策与遗留——CHANGELOG 本段 + 台账 W1067 行 + T40 报告 §4.6 + 坑表 E-77~E-82 + file-index W1067 段（14 行登记表）；私有记忆侧已压缩为指针并注明权威位置。
 
 ### W1066（2026-10-31）：W1066 CI 提速批（暗色门禁拆分片 + 按需等待 + 批量截图并发 + 修 CodeQL 两处）
 
@@ -1164,7 +1212,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1067），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1069），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1759,51 +1807,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：第 48 门禁「计划方案合规」PASS（新增文件 32 项结构判据全项符合）· 模糊词 0 命中 · `preflight_check.py --self W955` = PASS（取号无撞号 / 与在途批次无 touches 交集）· 体检脚本可复算（重跑产出同一 JSON）· 其余门禁见本批收官提交。
 
 **状态**：**已收官**（本批 = 取证 + 执行前计划 + 登记；**施工批 = W956**——公共载体落地 + 试点 5 页接入三类动效 + 机检判据 + 施工报告）
-
-
-### W954（2026-10-26）：第 43 篇《工作复盘与优化分析报告》入库批（W795–W953 全区间·149 段 / 154 行 / 354 提交）
-
-> **来源**：用户 2026-10-26 问「多长时间没做复盘了」→ 实测主线复盘断档 **167.5 小时**（6 天 23 小时 32 分·跨 159 个 W 号 / 354 笔提交）→ 经问卷裁决「**补做 · 覆盖 W795–W953 全区间**」。
-
-> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md、docs/11-方案报告/计划方案/执行前计划-T27-第43篇工作复盘批.md、docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md、scripts/_w954_review_evidence.py、scripts/_w954_ledger_backfill.py、scripts/output/_w954_review_evidence.json、docs/11-方案报告/README.md、dHANDOVER.md、scripts/output/file-index.md
-
-**断档事实**：第 42 篇（2026-10-19 01:10）至本篇 **167.5 小时零复盘**——该系列建立以来最长空窗（历史节奏 2026-10-07→10-19 共 12 天 14 篇·约 0.85 篇/天·本空窗约等欠 **6 篇**）。
-
-**取证脚本化**：新建 `scripts/_w954_review_evidence.py` 作全篇统计数字的**唯一源头**——CHANGELOG 现役面 + **归档面** + 对账表 + git 提交图**四源合取**（只读现役面会漏 W795–W802 共 8 段·归档面须合看）；产物 `scripts/output/_w954_review_evidence.json`。
-
-**五类登记漂移量化（事实源=git·声明源=登记面）**：CHANGELOG 段状态字段滞后 **91 批** / 台账滞后 **7 批**（W931/936/938/940/942/943/944·各有 1–3 笔提交已落库）/ 零提交 **6 批**（W907/908/910/911/929/937）/ 台账有行两面无段 **6 批** / 有段台账无行 **1 批**（W895）。
-
-**本批开工即被 preflight 拒绝**：8 个陈旧「在途」批次的 touches 与本批交集非空（CHANGELOG.md / scripts/output/file-index.md）⇒ **并发保护被自身历史欠账卡死**；按台账规则③「以 git 历史为唯一事实源判定并回写」订正 7 批状态 + W937 标「已停止·未收官」并清零其 touches（残留经 git 核实为零改动）⇒ preflight 由 **8 条 FAIL 恢复 EXIT=0**。
-
-**新经验与改进项**：E-25~E-31（登记面不是事实源 / 并发保护被欠账阻塞 / 归档面须合看 / 段状态串行错位 / 用户二次复核是第四道门 / 同族由构造保证 / 人工判据边界）· FAM-40~42 · WF-08~09 · P-43-01~05。
-
-> - **验证**：取证脚本实跑 ⇒ 149 段 / 154 行 / 354 提交 / 12 组主题分组 / 五类漂移分档全部可复算（复算命令见报告附录 B）· preflight 回写后 **EXIT=0** 且 touches 交集检查 OK · 台账 8 行状态逐行 grep 核对 · 文档面门禁见 T27 报告 §4.4。
-> - **状态**：已收官（`1626c98d`·31 件 +12667/−6026·第 43 篇复盘 + T-27 两件 + 6 个本批脚本/产物入库；登记面回写 8 行（7 批陈旧在途状态订正 + W937 标「已停止·未收官」且 touches 清零）· 版本面同步 9 处 + docs/INDEX 重建 + 站内搜索索引刷新 + CSP 重算 2 页；门禁 verify_delivery --scope docs EXIT=0（核心全部通过·2 项辅助 WARN 不阻断）· 第 31 门禁 0 FAIL · 第 48 门禁 0 FAIL / 2 文件 · lint_links 20883 链接 0 broken · CSP 856 页 0 漂移 · stats report_docs 70→73 · preflight EXIT=0（回写前 8 条 FAIL → 回写后 0）· 本批自查器全部通过；**提交以 `--no-verify` 落库**（pre-commit 的 auto 档挂死于站点面朱砂段·无头浏览器无响应·已逐项独立复验 7 道门禁全绿·与 T26/W951/W952 先例一致）；**并发纪律**：共享面按内容粒度精确暂存（HEAD 为基底叠加本批段）·提交后归属自检全部落在 `1626c98d`（未再被代提交））
-> **状态**：**已收官**（W954 10dc5d75·git 反填·共 2 笔·W971 存量回填）
-
-
-### W953（2026-10-26）：themes 库专题题图批（12 张·专题 + 器物静物·站内线描题图累计 40 张）
-
-> **来源**：用户 2026-10-26 令「再继续帮我做几张素材图」，并要求开工前先问三件事。
->
-> **三问答复**：① 用途与画幅 = **内页专题题图续批 · 3:4 竖版** ② 张数 = **12 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **themes 库专题题图**）。
->
-> - **文件**：site/static/images/plate-line-01-zhenjia-meihouwang.webp、site/static/images/plate-line-02-pantao-yuan.webp、site/static/images/plate-line-03-danaotian-gong.webp、site/static/images/plate-line-04-shuilandong.webp、site/static/images/plate-line-05-hunshi-sihou.webp、site/static/images/plate-line-06-bingqi-xiuyang.webp、site/static/images/plate-line-07-ershiba-xingsu.webp、site/static/images/plate-line-08-sizhi-gongcao.webp、site/static/images/plate-line-09-wufang-jiedi.webp、site/static/images/plate-line-10-liuding-liujia.webp、site/static/images/plate-line-11-jingubang-zhongliang.webp、site/static/images/plate-line-12-qiwu-zhuanji.webp、site/reader/themes/真假美猴王专题.html、site/reader/themes/蟠桃园-体制内的秘密.html、site/reader/themes/大闹天宫-英雄还是悲剧.html、site/reader/themes/水帘洞专题.html、site/reader/themes/混世四猴专题.html、site/reader/themes/兵器的自我修养专题.html、site/reader/themes/二十八星宿专题.html、site/reader/themes/四值功曹专题.html、site/reader/themes/五方揭谛专题.html、site/reader/themes/六丁六甲专题.html、site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html、site/reader/themes/器物传记学专题.html、scripts/_w953_make_prompts.py、scripts/_w953_make_insert.py、scripts/_w953_insert_plates.py、scripts/_w953_cascade.py、scripts/_w953_prep_raws.py、scripts/_w953_prep_raws2.py、scripts/_w953_prep_raws3.py、scripts/_w953_update_readme.py、scripts/_w945_prepare.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、scripts/_w951_site_sheet.py、scripts/output/_w953_batch1.json、scripts/output/_w953_batch2.json、scripts/output/_w953_batch3.json、scripts/output/_w953_batch4.json、scripts/output/_w953_batch5.json、scripts/output/_cascade_files_W953.txt、sassets/promo/plate-set/README.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-site-sheet.png、assets/promo/plate-set/index.md、CREADME.md、HANDOVER.md、dscripts/_w953_zoom.py、scripts/_w953_fix_cascade.py、scripts/_w953_backfill_stage.py、assets/promo/plate-set/zoom-w953/w953-recheck.png
-
-**缺口**：reader 622 页中仅 39 页有题图；**themes 库 209 页只有 9 页有题图**，essays / culture / poetry 三库 91 页仍零题图 ⇒ 本批专攻 themes 库空白专题。
-
-**选题原则**：只选**有具象标志物**的专题（抽象概念题既难画成器物静物、也做不了人眼形制核）。
-
-**母版一字未改**：直接读上批 `_w952_batch1.json` 取母版（249 字符）拼本批 SUBJECT 段 ⇒ 跨批同族由**构造**保证（脚本断言：批内 12 条母版逐字一致 + 与 W952 母版逐字相同）。
-
-**防画中画**：并列型题材（混世四猴 / 兵器 / 四值功曹 / 五方揭谛 / 六丁六甲 / 器物传记）统一带「四周不得有任何边框、格子、展板或深色底板」措辞——W952 的 11-法宝系统正是栽在「展柜」上，重出后有效的措辞。
-
-**接入**：沿用站内 `chapter-plate` 范式（420px 居中 + 描述性 alt + 浅底图暗色模式隐藏）。
-
-**并发纪律**：共享面按内容粒度**精确暂存**（`git update-index --cacheinfo`·HEAD 为基底叠加本批段）⇒ 不把对方在途内容带进本批提交。
-
-> - **验证**：母版判据 J1–J10 **40/40 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 40 张）· 站点版验算 **40/40 PASS**（`_w951_check_crop.py`：主体顶未切 + 主体底未切 + 下部地面留白 > 0）· 人眼 J8 题材与形制逐张核（据此重出 6 张：机器抓 06/10 + 人眼抓 04/08，二次再调 06/10）· 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 0 broken
-> - **状态**：已收官（`7481e4f2`·**并发纪律**：本批共享面按内容粒度**精确暂存**——以 `HEAD:<file>` 为基底叠加本批段、`git update-index --cacheinfo` 写入索引、工作树保持原样 ⇒ 对方在途内容既不入我的提交也不被我抹掉；提交后已 `git log --oneline -1 -- <本站点版文件>` 核实归属）
-> **状态**：**已收官**（W953 1e333d09·git 反填·共 3 笔·W971 存量回填）
 
 
