@@ -10,6 +10,18 @@
 
 ---
 
+## W1065 《西游记》GitHub 生态全景调研批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md | W1065 | 本批新增（78 KB·四域生态全景·72 项实跑取证·含附录 A–D） |
+| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W1065 | 本批新增/修改（W358 存量调研承接·7 个失效链接修正见报告 §5.13.1） |
+| docs/11-方案报告/README.md | W1065 | 本批新增/修改（W1065 登记行） |
+| CHANGELOG.md | W1065 | 本批新增/修改（W1065 段 + 编号规则上限） |
+| HANDOVER.md | W1065 | 本批新增/修改（抬头更新链 + §一 概要块） |
+| docs/00-导读/W批次编号对账表.md | W1065 | 本批新增/修改（W1065 认领/收官行） |
+| scripts/output/file-index.md | W1065 | 本批新增/修改（本段） |
+
 ## W1063 并行会话滞后提交收口批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4322,70 +4334,4 @@ docs/11-方案报告/README.md
 | scripts/output/_cascade_files_W951.txt | W951 | 当批级联清单 |
 | CHANGELOG.md | W951 | W951 版段 |
 | docs/00-导读/W批次编号对账表.md | W951 | W951 认领行 |
-
-## W950 图标集打磨优化批（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步 + 唯一事实源刷新器）
-（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/icons/ui/（45 枚 SVG 资产重生成） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/_w939_gen_icons.py | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/_w946_gen_timeline_icons.py（生成器接入归一参数） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/_w950_normalize.py（新增·光学尺寸归一器） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/_w950_refresh_icon_paths.py（新增·图形同步刷新器） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/output/_w950_icon_normalize.json（新增·45 枚归一参数） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/output/_w946_timeline_icons.js | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/output/_cascade_files_W950.txt | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| xiyouji-agent-web/src/components/UiIcons.tsx（由资产重建） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| site/**（1967 处内联 SVG 图形同步 · 646 个文件） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| docs/00-导读/W批次编号对账表.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| CHANGELOG.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| HANDOVER.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| README.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| STRUCTURE.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| docs/00-导读/项目说明.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| CITATION.cff。 | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-
-## W949 图标治理换路径复核批（第二次追问「确定做完了吗」· 堵数据源回归漏洞 + 字段图标位判据入机检 + 登记剩余 71 条）
-（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| dataset/timeline.json（数据源 22 个 icon 字段 emoji → 图标名） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/_w949_fix_dataset.py | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/_w949_allowlist.py | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/check_icon_fields.py（字段图标位判据） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/check_emoji_icons.py（第 50 门禁挂入 A2 段） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/output/_w949_icon_field_allowlist.json | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| docs/00-导读/W批次编号对账表.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| CHANGELOG.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| HANDOVER.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| README.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| STRUCTURE.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| docs/00-导读/项目说明.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| CITATION.cff。 | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-
-## W948 内页专题题图续批（8 张线描人物题图·累计 16 张）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-01-jinjiao.webp | W948 | 新增·金角大王（紫金红葫芦 + 朱红封带） |
-| site/static/images/plate-line-02-niumowang.webp | W948 | 新增·牛魔王（牛首 + 混铁棍） |
-| site/static/images/plate-line-03-tieshanggongzhu.webp | W948 | 新增·铁扇公主（叶形芭蕉扇） |
-| site/static/images/plate-line-04-xiezi.webp | W948 | 新增·蝎子精（上翘蝎尾毒钩 + 倒马毒桩） |
-| site/static/images/plate-line-05-huangpaoguai.webp | W948 | 新增·黄袍怪（狼首 + 金钢琢） |
-| site/static/images/plate-line-06-zhenyuan.webp | W948 | 新增·镇元大仙（人参果 + 拂尘） |
-| site/static/images/plate-line-07-dapeng.webp | W948 | 新增·大鹏金翅雕（鹏翼 + 阴阳二气瓶） |
-| site/static/images/plate-line-08-taishanglaojun.webp | W948 | 新增·太上老君（太极图 + 拂尘） |
-| assets/promo/plate-set/ | W948 | 成品 16 张 + raw/round4 原件 + README 扩写 + 拼图 |
-| scripts/_w948_make_prompts.py | W948 | 母版逐字复用生成器（读上批 JSON 取母版） |
-| scripts/_w948_insert_plates.py | W948 | 8 页 chapter-plate 接入（幂等） |
-| scripts/_w948_cascade.py | W948 | 四面登记 + 当前态指针 |
-| scripts/_w945_plates_verify.py | W948 | 判据扩面：写死清单 → 目录扫描（16 张） |
-| scripts/output/_w948_batch1.json | W948 | 出图参数 01–04 |
-| scripts/output/_w948_batch2.json | W948 | 出图参数 05–08 |
-| CHANGELOG.md | W948 | W948 版段 |
-| docs/00-导读/W批次编号对账表.md | W948 | W948 认领行 |
 

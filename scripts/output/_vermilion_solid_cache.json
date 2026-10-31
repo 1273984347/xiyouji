@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "886f081043b918524e787bee866ac10e5a69d643",
+   "sha1": "39fdc6d6ae8900eb690c9789ba971a0be9429467",
    "counts": {
     "button.vt-btn": 1
    }
@@ -640,7 +640,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "b6b23305117ec202accea8a1d050660698a5eab9",
+   "sha1": "4f0f877ba49133af94fe5fa889c37f66b9511e8a",
    "counts": {
     "button": 1
    }
@@ -1399,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "a6f2361ab61492141ccf183c34f3f2a11d55b9d5",
+   "sha1": "2cdc33771119ac714c828898ba31992415629f18",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-10-31T03:10:46.526Z"
+ "generated_at": "2026-10-31T03:51:27.159Z"
 }
