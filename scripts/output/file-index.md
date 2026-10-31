@@ -10,6 +10,43 @@
 
 ---
 
+## W1059 第 46 篇工作复盘与优化分析报告入库批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-31.md | W1059 | 本批新增（第 46 篇复盘报告） |
+| docs/11-方案报告/README.md | W1059 | 本批新增/修改（分区表 #52 登记） |
+| CHANGELOG.md | W1059 | 收官面（顶段 W1059·标题含「工作复盘」三信号 A） |
+| HANDOVER.md | W1059 | 级联面（最后更新/进度/里程碑） |
+| README.md | W1059 | 级联面（版本行） |
+| STRUCTURE.md | W1059 | 级联面（版本行） |
+| AGENTS.md | W1059 | 级联面（脚注滚动） |
+| CITATION.cff | W1059 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1059 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1059 | 台账（W1059 认领行在案·收官回填另笔） |
+| docs/INDEX.md | W1059 | 登记面（docs 索引） |
+| index.md | W1059 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1059 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1059 | 级联面（里程碑行同步） |
+| site/index.html | W1059 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1059 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1059 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1059 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1059 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1059 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1059 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1059 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1059 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1059 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1059 | 登记面产物（output 说明） |
+| site/data/search.html | W1059 | 派生面（搜索索引刷新·README 新行） |
+| site/en/search.html | W1059 | 派生面（搜索索引刷新） |
+| scripts/output/_cascade_files_W1059.txt | W1059 | 级联清单（本批产物） |
+| scripts/output/_w1059_spec.json | W1059 | 本批 spec |
+
 ## W1058 SKILL.md 计数链漂移订正 + C5e 对账面扩 SKILL（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4271,23 +4308,4 @@ docs/11-方案报告/README.md
 | STRUCTURE.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
 | docs/00-导读/项目说明.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
 | scripts/output/file-index.md。 | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-
-## W945 内页专题题图成套（8 张 3:4 线描人物题图）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-01-wukong.webp | W945 | 新增·大圣悟空（金箍棒 + 凤翅紫金冠） |
-| site/static/images/plate-line-02-tangseng.webp | W945 | 新增·唐僧（五佛冠 + 念珠 + 九环锡杖） |
-| site/static/images/plate-line-03-bajie.webp | W945 | 新增·猪八戒（九齿钉耙 + 蒲扇耳） |
-| site/static/images/plate-line-04-shaseng.webp | W945 | 新增·沙僧（降妖宝杖 + 骷髅念珠） |
-| site/static/images/plate-line-05-guanyin.webp | W945 | 新增·观音（玉净瓶插杨柳 + 莲座） |
-| site/static/images/plate-line-06-erlangshen.webp | W945 | 新增·二郎神（三尖两刃刀 + 额间竖目） |
-| site/static/images/plate-line-07-baigujing.webp | W945 | 新增·白骨精（三变残影） |
-| site/static/images/plate-line-08-honghaier.webp | W945 | 新增·红孩儿（火尖枪 + 三昧真火） |
-| assets/promo/plate-set/ | W945 | 出图原件 + 逐张清单 + J8 自检表 + 拼图 |
-| scripts/_w945_plates_verify.py | W945 | J1–J7 机器判据 + J8 题材自检表 |
-| scripts/_w945_insert_plates.py | W945 | 8 页 chapter-plate 接入（幂等） |
-| scripts/_w945_cascade.py | W945 | 四面登记 + 当前态指针 |
-| CHANGELOG.md | W945 | W945 版段 |
-| docs/00-导读/W批次编号对账表.md | W945 | W945 认领行 |
 
