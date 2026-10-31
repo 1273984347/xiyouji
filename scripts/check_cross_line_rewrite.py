@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import ast
 import hashlib
-import io
 import json
 import os
 import re
@@ -138,7 +137,7 @@ def _load_baseline():
     if not os.path.exists(BASELINE_PATH):
         return set()
     try:
-        data = json.load(io.open(BASELINE_PATH, encoding="utf-8"))
+        data = json.load(open(BASELINE_PATH, encoding="utf-8"))
         return set(data.get("confirmed", []))
     except Exception:  # noqa: BLE001
         return set()
@@ -162,7 +161,7 @@ def _write_baseline(keys):
     }
     txt = json.dumps(payload, ensure_ascii=False, indent=1) + "\n"
     tmp = BASELINE_PATH + ".tmp"
-    with io.open(tmp, "wb") as fh:
+    with open(tmp, "wb") as fh:
         fh.write(txt.encode("utf-8"))
     os.replace(tmp, BASELINE_PATH)
 

@@ -1,3 +1,13 @@
+### W1063（2026-10-31）：并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化
+
+
+> **来源**：用户 2026-10-31 令「它已全面停手，等 W1062 落地后一笔滞后提交收掉并行会话的 24 件·你来做」——W1062 已落地（6558fa71），本批负责收口工作树残留件。
+>
+> - **文件**：scripts/check_cross_line_rewrite.py、scripts/ledger_backfill.py、scripts/security_scan.py、scripts/sec002_negative_probe.py、.github/workflows/security.yml、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、docs/agent/pitfalls.md、scripts/output。
+
+**本批要点**：① **残留 3 件收口**——实测工作树（索引外）仅剩 3 件：`check_cross_line_rewrite.py`与 `ledger_backfill.py` 为 ruff 清理（死变量 `n_pos`/`n_neg` 未用、循环变量 `l` 遮蔽内建）、`security_scan.py` 为 W1061 批的 SEC-002 判据精确化改动；W1050 隔离备份的 22 件（19 当前态面 + 3 段/行）**已全部入库**（台账 W1050 行 hash=ca9424db·file-index 段在位·核心 4 件与 HEAD 一致）⇒ 备份里的当前态面已被 W1051–W1062 后续批次覆盖，**直接恢复会回退内容**⇒ 不恢复。② **SEC-002 过宽前瞻根修**——W1061 用「值含任一 CJK 即放行」消除中文事件常量误报（`check_backlog_review.py` 的 `TOKEN="Backlog 对账已执行"` 被抓 high），但该前瞻**过宽**：实测负样本 **6/8**——「真密钥串里混中文」（如 `sk-abc123密码xyz789`）会被一并放行 ⇒ **真密钥漏检（安全缺口）**。本批改**白名单式收紧**：只放行含**空格 / CJK 标点 / 全角字符**的自然语言常量，单纯含汉字但无空格标点的值仍判 high（假阳性噪音 ≪ 漏检真密钥的安全缺口）。③ **负样本自证固化**为机器判据 `scripts/sec002_negative_probe.py`（9/9·含「真密钥混汉字」与「标识符风格混中文」两条边界）并挂 CI `Security` workflow 独立 job ⇒ 回退到过宽版即判红。
+
+**验证**：SEC-002 负样本自证 **9/9**（收紧版 9/9·过宽版 5/9 可证伪）· 全仓安全扫描**high=0**（误报消除·无新增漏检）· 全仓 1411 个代码文件实测：被放行实例仅 2 处且均为中文事件常量，**零个真密钥被漏检** · ruff 全绿 · 相关单测 155 passed / 3 skipped。
 ### W1062（2026-10-31）：README 换图未生效根修批（换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70）
 
 > **来源**：用户 2026-10-31 问「为什么我之前让你更换 README 的图片你还是没有更换」——实查定位：换图提交
@@ -1113,7 +1123,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1062），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1063），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

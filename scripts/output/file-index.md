@@ -10,6 +10,30 @@
 
 ---
 
+## W1063 并行会话滞后提交收口批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_cross_line_rewrite.py | W1063 | 并行会话在途件收口（ruff 清理·io.open → open） |
+| scripts/ledger_backfill.py | W1063 | 并行会话在途件收口（ruff 清理·死变量与变量名遮蔽） |
+| scripts/security_scan.py | W1063 | SEC-002 过宽前瞻根修（改白名单式收紧·防真密钥漏检） |
+| scripts/sec002_negative_probe.py | W1063 | 本批新增（SEC-002 负样本自证 9/9·含「真密钥混汉字」边界） |
+| .github/workflows/security.yml | W1063 | 本批新增/修改（SEC-002 负样本自证独立 job） |
+| docs/agent/pitfalls.md | W1063 | 本批新增/修改（E-71 误报放行须白名单式收紧 + E-72 收口在途件先三方比对·156→161） |
+| AGENTS.md | W1063 | 本批新增/修改（坑位计数 159→161 + 流程组分项 69→71） |
+| HANDOVER.md | W1063 | 本批新增/修改（头链首 + §一 + 坑表计数 159→161） |
+| README.md | W1063 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1063 | 本批新增/修改（W1063 段 + 编号规则 W001-W1063） |
+| CITATION.cff | W1063 | 本批新增/修改（version W1062→W1063） |
+| .github/workflows/README.md | W1063 | 本批新增/修改（头部版本 + 里程碑行 W450-W1063） |
+| docs/00-导读/W批次编号对账表.md | W1063 | 本批新增/修改（W1063 认领行 + 收官回填） |
+| .agent/skills/puti-shouye/SKILL.md | W1063 | 本批新增/修改（计数链 159→161 两点） |
+| scripts/output/_w1063_spec.json | W1063 | 本批新增（级联 spec） |
+| site/index.html | W1063 | 本批新增/修改（页脚链首） |
+| site/dukou-engine.html | W1063 | 本批新增/修改（页脚链首） |
+| site/data/tag-cloud.html | W1063 | 本批新增/修改（页脚链首） |
+| site/data/cross-time-danmaku.html | W1063 | 本批新增/修改（页脚链首） |
+
 ## W1062 README 换图未生效根修批（2026-10-31）
 
 | 文件 | W | 说明 |

@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（168）
+## 文件（169）
 
 ### Markdown 文档
 
@@ -189,6 +189,7 @@
 - `run_all.py`
 - `safe_commit.py`
 - `scan_targets.py`
+- `sec002_negative_probe.py`
 - `security_scan.py`
 - `site_audit.py`
 - `slice_screenshots.py`
