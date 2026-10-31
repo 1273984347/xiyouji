@@ -398,9 +398,12 @@ jobs:
           retention-days: 7
 
       # W583 契约冒烟：file:// EMBEDDED 路径（与暗色门禁的 http 路径互补）——P04 类契约错位拦截
+      # W1066：全站冒烟只需跑一次 ⇒ 只在 shard 0 跑（原实现每个分片各跑一遍 ⇒ 4 倍重复浪费·
+      #       实测它是整个 job 的墙钟大头：单次全站 857 页串行 ≈ 15–35 分钟）。
+      #       其余分片跳过（条件用 matrix.shard == 0）。
       - name: Contract smoke (file:// EMBEDDED path)
-        if: steps.scope.outputs.run != 'false'
-        run: node scripts/check_contract_smoke.js
+        if: steps.scope.outputs.run != 'false' && matrix.shard == 0
+        run: node scripts/check_contract_smoke.js --conc 6
 
       - name: Summarize dark gate
         if: always() && steps.scope.outputs.run != 'false'
