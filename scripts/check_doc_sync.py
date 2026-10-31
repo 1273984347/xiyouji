@@ -593,7 +593,11 @@ def _check_c5_aggregate_stats(inp, issues, notes):
                               % (_k, _v, _actual.get(_k, 0)))
         if _sum_decl != _sum_act:
             issues.append("C5e: 坑表分项声明之和 %d ≠ 实测条目之和 %d" % (_sum_decl, _sum_act))
-        for _f, _pat in (("AGENTS.md", r"(\d+) 条坑位"), ("HANDOVER.md", r"（(\d+) 条·六主题）")):
+        # W1058：对账面补 SKILL.md 两处（W1051 ASM-09 已画出的 6 点清单此前只扫 2 类载体——
+        # W1055/W1056 两次坑表 +1 均漏 SKILL 实证盲区；形态：L6「N 条·六主题」/ L65「N 条完整教训」）
+        for _f, _pat in (("AGENTS.md", r"(\d+) 条坑位"), ("HANDOVER.md", r"（(\d+) 条·六主题）"),
+                         (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条·六主题"),
+                         (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条完整教训")):
             for _mm in re.finditer(_pat, open(os.path.join(ROOT, _f), encoding="utf-8").read()):
                 if int(_mm.group(1)) != _sum_act:
                     issues.append("C5e: %s 声明 %d 条 ≠ 坑表实测 %d 条" % (_f, int(_mm.group(1)), _sum_act))
