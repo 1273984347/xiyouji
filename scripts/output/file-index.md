@@ -10,6 +10,24 @@
 
 ---
 
+## W1067 CI action ref 根修批 + 记忆与项目沉淀同步批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_action_refs.py | W1067 | 本批新增（action ref 完整性门禁·形态离线 + 存在性联网双 endpoint 复核·自测 6/6 可证伪） |
+| .github/workflows/screenshot-review.yml | W1067 | 本批修改（merge job 的 action ref 改用仓内已验证 v7 SHA·修 39 位编造 SHA 致 Set up job 阶段失败） |
+| .github/workflows/workflow-lint.yml | W1067 | 本批修改（挂 action ref 形态判据每次 PR 恒生效 + 存在性扫描周级/手动·不带 token） |
+| docs/agent/pitfalls.md | W1067 | 本批修改（新增 E-77~E-82 六条·流程组 75→81·含两条自私有记忆固化入仓） |
+| .agent/skills/puti-shouye/SKILL.md | W1067 | 本批修改（坑表条数计数链同步） |
+| AGENTS.md | W1067 | 本批修改（坑表条数计数链同步 + 级联脚注滚动） |
+| HANDOVER.md | W1067 | 本批修改（坑表条数计数链同步 + 级联同步面） |
+| docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md | W1067 | 本批修改（§4.6 后续批次 W1067 进展段·根因与修法如实记录） |
+| pytest.ini | W1067 | 本批修改（stats 实体标记跟随） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1067 | 本批修改（stats 实体标记跟随） |
+| scripts/index.md | W1067 | 本批修改（目录清单刷新·收录新增判据脚本） |
+| scripts/output/tools-inventory.md | W1067 | 本批修改（工具清单刷新·收录新增判据脚本） |
+| scripts/output/index.md | W1067 | 本批修改（目录清单刷新） |
+| scripts/output/README.md | W1067 | 本批修改（目录清单刷新） |
 ## W1066 CI 提速批（2026-10-31）
 
 | 文件 | W | 说明 |

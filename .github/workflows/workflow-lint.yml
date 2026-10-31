@@ -13,6 +13,9 @@ name: Workflow Lint
 on:
   push:
   pull_request:
+  schedule:
+    # W1067：每周一次「action ref 存在性」联网扫描（语义族：40-hex 但该仓库无此 commit）
+    - cron: '0 3 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -57,3 +60,16 @@ jobs:
                         "解决方式：给该值加引号（Windows 上用单引号避免转义）")
           print("共 %d 个工作流，失败 %d 个" % (len(files), bad))
           sys.exit(1 if bad else 0)
+
+      # W1067：action ref 完整性门禁·**形态判据**（离线·零外部依赖·每次 PR 恒生效）
+      #   拦截：tag/branch 引用、长度 ≠ 40 的十六进制串（本次真缺陷正是 39 位）。
+      #   存在性判据（联网）另置于每周/手动 step —— 外部 API 的可用性不得成为 PR 单点阻塞。
+      - name: Action refs 形态判据（40-hex 全长·离线）
+        run: python3 scripts/check_action_refs.py
+
+      # W1067：action ref **存在性**扫描（联网·判定不存在即阻断·无法判定降级 WARN）
+      #   仅在 schedule / workflow_dispatch 触发（PR 与 push 的形态判据已足够拦截本次缺陷）。
+      #   刻意不带 token：目标仓库均为 public，匿名读即可；匿名限流只会让本步降级为 WARN。
+      - name: Action refs 存在性扫描（联网·周级/手动）
+        if: github.event_name != 'pull_request' && github.event_name != 'push'
+        run: python3 scripts/check_action_refs.py --api --ci

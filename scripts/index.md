@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（169）
+## 文件（170）
 
 ### Markdown 文档
 
@@ -80,6 +80,7 @@
 - `bump_footer_version.py`
 - `bump_version.py`
 - `cascade_lock.py`
+- `check_action_refs.py`
 - `check_agents_layers.py`
 - `check_archive_health.py`
 - `check_audit_trigger.py`

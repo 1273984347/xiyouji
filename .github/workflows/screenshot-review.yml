@@ -424,7 +424,10 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Download shards
-        uses: actions/download-artifact@fa0a91b85d4f404e0e5e681d72fae6c4fb85d27 # v4
+        # W1067：原写 @fa0a91b8…（39 位·编造·该仓库无此 commit）⇒ job 在 set-up 阶段
+        #   直接失败（Checkout 都不跑），症状为「Set up job 1 秒 failure」极易误判为基础设施故障。
+        #   改用仓内已验证存在且符合 v7 约定的 SHA（release.yml 同款）⇒ 不新造 SHA。
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           path: shards
           pattern: dark-shard-*-${{ github.sha }}
