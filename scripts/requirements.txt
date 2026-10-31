@@ -17,7 +17,7 @@ pytest==9.1.1
 # 的缺陷照旧潜伏。登记后 J3 在 CI 恒生效。
 # 版本依据：6.0.2 已修全部 loader 类 CVE（CVE-2020-14343/1747/2019-20477
 # 均在 5.4 前修复）；本机 pip-audit -r 实测「No known vulnerabilities found」。
-PyYAML==6.0.2
+PyYAML==6.0.3
 # W1062：numpy / playwright 登记——CI pytest-unit job 此前只装本文件，而 3 个
 #   「已转正」的根级脚本在**模块级** import 这两个包：
 #     scripts/check_crop.py       → numpy
