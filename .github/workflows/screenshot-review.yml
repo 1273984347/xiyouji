@@ -45,6 +45,8 @@ on:
       - 'scripts/detect_unwrapped_tables.py'
       - 'scripts/_audit_render_states.js'
       - 'scripts/check_dark_state_gate.js'
+      - 'scripts/check_contract_smoke.js'
+      - 'scripts/check_screenshot_gates.js'
       - 'scripts/output/render-state-audit-baseline.jsonl'
       - '.github/workflows/screenshot-review.yml'
   pull_request:
@@ -56,6 +58,8 @@ on:
       - 'scripts/detect_unwrapped_tables.py'
       - 'scripts/_audit_render_states.js'
       - 'scripts/check_dark_state_gate.js'
+      - 'scripts/check_contract_smoke.js'
+      - 'scripts/check_screenshot_gates.js'
       - 'scripts/output/render-state-audit-baseline.jsonl'
       - '.github/workflows/screenshot-review.yml'
   schedule:
