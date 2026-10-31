@@ -76,8 +76,13 @@ def strip_invisible(html):
     #   原式 `<script[\s\S]*?</script>` 只匹配小写 ⇒ 大写标签会漏剥
     #   （CodeQL js/regex-injection 告警「does not match upper case <SCRIPT> tags」·
     #    该告警同时是真缺陷：漏剥的 <SCRIPT> 内容会被当正文参与判据 ⇒ 假结论）。
-    body = re.sub(r'<script\b[\s\S]*?</script\s*>', ' ', body, flags=re.IGNORECASE)
-    body = re.sub(r'<style\b[\s\S]*?</style\s*>', ' ', body, flags=re.IGNORECASE)
+    #   结束标签放宽到 `</script` + 任意空白 + 可选属性 + `>`（HTML 允许 </script bar>
+    #   与 </script\t\n bar> 这类带属性/畸形空白形态·CodeQL 要求正则能匹配该形态）
+    #   ⇒ 用 `</script[ \t\r\n]*[^>]*>`；开标签用 `<script[^>]*>` 容忍属性跨行与畸形属性。
+    body = re.sub(r'<script[^>]*>[\s\S]*?</script[ \t\r\n]*[^>]*>',
+                  ' ', body, flags=re.IGNORECASE)
+    body = re.sub(r'<style[^>]*>[\s\S]*?</style[ \t\r\n]*[^>]*>',
+                  ' ', body, flags=re.IGNORECASE)
     return RE_HTML_TAG.sub(' ', body)                       # ② 标签按语法约束
 
 
