@@ -10,6 +10,28 @@
 
 ---
 
+## W1073 D-1 首屏插画深色变体批（2026-11-01）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W1073 | 本批修改（D-1 深色机制：首帧 CSS 指向 -dark 变体 + 轮播 darkSrc + data-theme 监听） |
+| site/static/images/hero-line-01-ruyi-staff-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-02-journey-scroll-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-03-classic-scroll-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-04-tight-crown-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-05-lotus-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-06-nine-ring-staff-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-07-banana-fan-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-08-jade-vase-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-09-somersault-cloud-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| scripts/_w1073_dark_verify.py | W1073 | 本批新增（深色变体机器判据·J1-J9 + K1-K3） |
+| scripts/_w1073_paper_normalize.py | W1073 | 本批新增（纸底精确归一·重建 W938 口径） |
+| scripts/_w1073_derive.py | W1073 | 本批新增（程序化派生·09 专项） |
+| scripts/_w1073_fix_band.py | W1073 | 本批新增（底部亮带清除·09 专项） |
+| scripts/_w1073_probe.py | W1073 | 本批新增（D-1 验收探针·真实 Chromium） |
+| scripts/_w1073_baseline_shot.py | W1073 | 本批新增（浅色基线补拍） |
+| scripts/output/_w1073_spec.json | W1073 | 本批新增（批次 spec） |
+
 ## W1072 可复用 Skill 盘点与取经编制表角色优化批（2026-11-01）
 
 | 文件 | W | 说明 |
@@ -4291,16 +4313,4 @@ docs/11-方案报告/README.md
 | tests/unit/test_doc_size_budget.py | W960 | 体积门禁单测 4 例（含现网防回退锚） |
 | tests/unit/test_archive_segments.py | W960 | 搬段工具单测 4 例（三种段形态解析与负样本） |
 | pytest.ini · 系统架构方案v2 | W960 | pytest_collected 标记归一 910（并行竞态三数字拼接修复） |
-
-## W959 T10 V1.1 计数口径订正批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md | W959 | 修改：V1.1 计数口径订正（31 条四态 + 开放项双口径 + §18 口径说明 + 4 处商榷落实·结论未改） |
-| scripts/_w959_t10_v11.py | W959 | 新增：V1.1 订正脚本（行号 + 断言片段双重约束·字节级改写保行尾·31 条作业·倒序应用·幂等） |
-| docs/11-方案报告/README.md | W959 | 登记：§六 T-10 行版本标注更新为 V1.1（W959 计数口径订正批） |
-| docs/00-导读/W批次编号对账表.md | W959 | 登记：W959 认领行（让号留痕）+ 收官回填 |
-| HANDOVER.md | W959 | 同步：一、当前进度增 W959 条目 + 最后更新链前置 + 当前 HEAD |
-| CHANGELOG.md | W959 | 新增：W959 版段（四件套） |
-| scripts/output/file-index.md | W959 | 登记：W959 段（本段） |
 

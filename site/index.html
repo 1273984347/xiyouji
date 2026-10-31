@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24=' 'sha256-LY+Pq/ATRZQREEIn+OCkrNIO4v+EDFhhATTTjX0ZW+k=' 'sha256-2FdS84VvQT7jM1UYt8vH/VaglIl9udvQlTu4HwJwYhs='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24=' 'sha256-LY+Pq/ATRZQREEIn+OCkrNIO4v+EDFhhATTTjX0ZW+k=' 'sha256-ynaSLIR7acFCxsZWVdSjaDeRc2H1B9JHIcvfupAqYio='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC——先读 localStorage，无则跟随系统；dark 时在 body 渲染前挂 data-theme
@@ -48,6 +48,18 @@
             background-size: contain;
             background-position: right bottom;
             background-repeat: no-repeat;
+        }
+        /* W1073（D-1 深色 masthead）：深色下换用深色变体插画。
+           变体是构建期真实资产（assets/promo/hero-set 同母版深色重出 + 纸底精确归一至 --bg #221D16），
+           **非 CSS filter/invert 凑数**；深色下正文 --ink #F2EBDC 对该底色对比度 14.2:1（AA 门槛 4.5）。
+           规则须在 .masthead 块**之外**（CSS 不支持嵌套·嵌在块内会被当作 .masthead 的声明解析而失效——
+           W1073 首轮实测踩过：探针报「深色首帧仍指向浅色图」）。
+           变体文件缺失时回退浅色（fail-open·不写 404 引用）。
+           【分工说明·对抗复核 F6 观察项】本规则实际只承担「**JS 不可用时**的首帧兜底」——
+           轮播 JS 启动后会给 #heroGallery 写**内联** style.backgroundImage（内联样式优先级高于本规则）
+           ⇒ 正常态的深色换图由 JS 的 darkSrc + MutationObserver 承担·本规则不参与。 */
+        html[data-theme="dark"] .masthead {
+            background-image: url('static/images/hero-line-01-ruyi-staff-dark.webp');
         }
         /* W938：首屏插画图集（9 张 = W931 线描 8 张 + W938 取经四众收尾重音·全部 2400×1017）
            选型依据（实测 scripts/_w931_hero_fit.py + 容器适配对比）：左侧 46% 文字安全区墨量 0.0000（8/8 张）
@@ -718,7 +730,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">取经录</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · 并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化 · W1072 Skill 候选盘点与编制表角色优化方案落库 · W1071 交互修复第一批：搜索链接化与浮钮隐藏及计数归位 · W1070 交互审查第二轮复核与界面优化施工方案落库 · W1069 效率与防护打包批：环境判据与 BOM 门禁及坑表条目 · W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批 · W1067 CI action ref 根修批 + 记忆与项目沉淀同步批 · W1062 README 换图未生效根修批：换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70 · W1061 私有记忆同步批：工具禁令入必载层与环境坑入坑表 · W1060 CI 提效批：审计矩阵收敛与并发取消补齐 · W1059 复盘报告入库批十六批全景与协作主题沉淀 · W1058 计数链漂移订正与对账面扩容 · W1057 对账批：待办登记面逐条 git 实况核验与压缩归档 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · 并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化 · W1073 首页首屏插画深色变体与主题切换机制落地 · W1072 Skill 候选盘点与编制表角色优化方案落库 · W1071 交互修复第一批：搜索链接化与浮钮隐藏及计数归位 · W1070 交互审查第二轮复核与界面优化施工方案落库 · W1069 效率与防护打包批：环境判据与 BOM 门禁及坑表条目 · W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批 · W1067 CI action ref 根修批 + 记忆与项目沉淀同步批 · W1062 README 换图未生效根修批：换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70 · W1061 私有记忆同步批：工具禁令入必载层与环境坑入坑表 · W1060 CI 提效批：审计矩阵收敛与并发取消补齐 · W1059 复盘报告入库批十六批全景与协作主题沉淀 · W1058 计数链漂移订正与对账面扩容 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>
@@ -858,19 +870,25 @@
 //   · 暂停机制（WCAG 2.2.2 自动更新内容）：悬停 / 焦点在图集内 / 页面不可见 → 停；
 //   · reduced-motion → 不自动播放（仍可手动点选）；
 //   · fail-open：JS 不可用时保持首张静态图（dots 容器带 hidden·不渲染死控件）。
+// W1073（D-1）：加 darkSrc 深色变体。
+//   · 变体为构建期真实资产（母版同源深色重出 + 纸底精确归一至 --bg #221D16），
+//     非 CSS filter 凑数；深色下正文 --ink #F2EBDC 对该底色对比度 14.2:1（AA 门槛 4.5）。
+//   · 加载纪律：darkSrc 仅在**深色激活时**才被读取 → 浅色访客零新增请求。
+//   · 主题切换：监听 documentElement 的 data-theme 属性变化 → 重设当前片 src（瞬时替换·无动画），
+//     切回浅色时同样重设回浅色版；不引入新全局、不加无限循环动画。
 (function () {
   var el = document.getElementById('heroGallery');
   if (!el) return;
   var SLIDES = [
-    { src: 'static/images/hero-line-01-ruyi-staff.webp', label: '如意金箍棒' },
-    { src: 'static/images/hero-line-02-journey-scroll.webp', label: '行程图卷轴' },
-    { src: 'static/images/hero-line-03-classic-scroll.webp', label: '经卷与篆香' },
-    { src: 'static/images/hero-line-04-tight-crown.webp', label: '紧箍儿' },
-    { src: 'static/images/hero-line-05-lotus.webp', label: '莲花' },
-    { src: 'static/images/hero-line-06-nine-ring-staff.webp', label: '九环锡杖' },
-    { src: 'static/images/hero-line-07-banana-fan.webp', label: '芭蕉扇' },
-    { src: 'static/images/hero-line-08-jade-vase.webp', label: '玉净瓶' },
-    { src: 'static/images/hero-line-09-somersault-cloud.webp', label: '筋斗云' }
+    { src: 'static/images/hero-line-01-ruyi-staff.webp', darkSrc: 'static/images/hero-line-01-ruyi-staff-dark.webp', label: '如意金箍棒' },
+    { src: 'static/images/hero-line-02-journey-scroll.webp', darkSrc: 'static/images/hero-line-02-journey-scroll-dark.webp', label: '行程图卷轴' },
+    { src: 'static/images/hero-line-03-classic-scroll.webp', darkSrc: 'static/images/hero-line-03-classic-scroll-dark.webp', label: '经卷与篆香' },
+    { src: 'static/images/hero-line-04-tight-crown.webp', darkSrc: 'static/images/hero-line-04-tight-crown-dark.webp', label: '紧箍儿' },
+    { src: 'static/images/hero-line-05-lotus.webp', darkSrc: 'static/images/hero-line-05-lotus-dark.webp', label: '莲花' },
+    { src: 'static/images/hero-line-06-nine-ring-staff.webp', darkSrc: 'static/images/hero-line-06-nine-ring-staff-dark.webp', label: '九环锡杖' },
+    { src: 'static/images/hero-line-07-banana-fan.webp', darkSrc: 'static/images/hero-line-07-banana-fan-dark.webp', label: '芭蕉扇' },
+    { src: 'static/images/hero-line-08-jade-vase.webp', darkSrc: 'static/images/hero-line-08-jade-vase-dark.webp', label: '玉净瓶' },
+    { src: 'static/images/hero-line-09-somersault-cloud.webp', darkSrc: 'static/images/hero-line-09-somersault-cloud-dark.webp', label: '筋斗云' }
   ];
   var group = el.querySelector('.hero-dots');
   if (!group) return;
@@ -880,10 +898,22 @@
   var reduced = false;
   try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
   var idx = 0, timer = null, INTERVAL = 6000;
+  function isDark() {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
+  }
+  // 当前主题下应显示的图：深色用 darkSrc·浅色用 src；变体缺失时回退浅色（fail-open）。
+  function curSrc(s) {
+    if (!isDark()) return s.src;
+    return s.darkSrc || s.src;
+  }
   function apply(i) {
     idx = (i + SLIDES.length) % SLIDES.length;
-    el.style.backgroundImage = 'url("' + SLIDES[idx].src + '")';
+    el.style.backgroundImage = 'url("' + curSrc(SLIDES[idx]) + '")';
     dots.forEach(function (d, k) { d.setAttribute('aria-pressed', k === idx ? 'true' : 'false'); });
+  }
+  // 主题变化 → 重设当前片（瞬时替换·无过渡动画·无布局位移·reduced-motion 下同样静止）
+  function onThemeChange() {
+    apply(idx);
   }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
   function start() { stop(); if (reduced) return; timer = setInterval(function () { apply(idx + 1); }, INTERVAL); }
@@ -895,6 +925,13 @@
   el.addEventListener('focusin', stop);
   el.addEventListener('focusout', start);
   document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+  // 主题切换监听：MutationObserver 观察 html 的 data-theme 属性变化（仓内 theme-init.js 的落点）
+  if (typeof MutationObserver !== 'undefined') {
+    try {
+      new MutationObserver(onThemeChange).observe(document.documentElement,
+        { attributes: true, attributeFilter: ['data-theme'] });
+    } catch (_) {}
+  }
   apply(0);
   start();
 })();

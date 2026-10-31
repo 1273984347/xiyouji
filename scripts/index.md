@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（170）
+## 文件（172）
 
 ### Markdown 文档
 
@@ -63,6 +63,8 @@
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
 - `_gen_search_index.py`
+- `_w1073_dark_verify.py`
+- `_w1073_paper_normalize.py`
 - `a11y_audit.py`
 - `accent_audit.py`
 - `acceptance_snapshot.py`
