@@ -10,6 +10,31 @@
 
 ---
 
+## W1066 CI 提速批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_audit_render_states.js | W1066 | 本批新增/修改（按需等待 waitForStable/waitForChange + CONC 6 + --shard 分片 + --out 产物路径） |
+| scripts/batch_screenshots.js | W1066 | 本批新增/修改（多 context 并发 CONC 4·capture() 本已每页独立 context） |
+| scripts/check_screenshot_gates.js | W1066 | 本批新增/修改（--only 支持逗号分隔多值·定向时只跑变更页） |
+| scripts/check_dark_state_gate.js | W1066 | 本批新增/修改（--current 指定分片合并后的产物） |
+| scripts/check_chart_data.py | W1066 | 本批新增/修改（<script>/<style> 剥离改大小写不敏感·CodeQL 告警） |
+| scripts/check_chart_values.js | W1066 | 本批新增/修改（name 正则完整转义反斜杠·CodeQL 告警） |
+| .github/workflows/screenshot-review.yml | W1066 | 本批新增/修改（暗色门禁 4 分片并行 + 合并判定 job + chart-gates 定向） |
+| docs/agent/pitfalls.md | W1066 | 本批新增/修改（E-74~E-76 三条·162→165） |
+| AGENTS.md | W1066 | 本批新增/修改（坑位计数 162→165 + 流程组分项 72→75） |
+| HANDOVER.md | W1066 | 本批新增/修改（头链首 + §一 + 计数 162→165） |
+| README.md | W1066 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1066 | 本批新增/修改（W1066 段 + 编号规则 W001-W1066） |
+| CITATION.cff | W1066 | 本批新增/修改（version W1065→W1066） |
+| .github/workflows/README.md | W1066 | 本批新增/修改（头部版本 + 里程碑行 W450-W1066） |
+| docs/00-导读/W批次编号对账表.md | W1066 | 本批新增/修改（W1066 认领行 + 收官回填） |
+| .agent/skills/puti-shouye/SKILL.md | W1066 | 本批新增/修改（计数链 162→165 两点） |
+| docs/11-方案报告/README.md | W1066 | 本批新增/修改（移除已删文件的登记行） |
+| docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md | W1066 | 本批新增/修改（承接说明去死链·用户有意删除 W358 旧报告） |
+| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W1066 | 本批删除（用户 2026-10-31 有意删除·不再需要） |
+| scripts/output/_w1063_spec.json | W1066 | 本批新增/修改（级联 spec·55 件） |
+
 ## W1065 《西游记》GitHub 生态全景调研批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4281,57 +4306,4 @@ docs/11-方案报告/README.md
 | scripts/output/_cascade_files_W953.txt | W953 | 当批级联清单 |
 | CHANGELOG.md | W953 | W953 版段 |
 | docs/00-导读/W批次编号对账表.md | W953 | W953 认领行 |
-
-## W952 内页人物题图续批第二组（12 张·人物+主题混合）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-01-bailongma.webp | W952 | 新增·白龙马 |
-| site/static/images/plate-line-02-dujiao-shengwang.webp | W952 | 新增·独角兕大王 |
-| site/static/images/plate-line-03-linggan.webp | W952 | 新增·灵感大王 |
-| site/static/images/plate-line-04-huangfengguai.webp | W952 | 新增·黄风怪 |
-| site/static/images/plate-line-05-saitaisui.webp | W952 | 新增·赛太岁 |
-| site/static/images/plate-line-06-jiuLingyuansheng.webp | W952 | 新增·九灵元圣 |
-| site/static/images/plate-line-07-nezha.webp | W952 | 新增·哪吒 |
-| site/static/images/plate-line-08-angrixingguan.webp | W952 | 新增·昴日星官 |
-| site/static/images/plate-line-09-jingu-topic.webp | W952 | 新增·紧箍咒专题 |
-| site/static/images/plate-line-10-jindouyun-topic.webp | W952 | 新增·筋斗云专题 |
-| site/static/images/plate-line-11-fabao-topic.webp | W952 | 新增·法宝系统专题 |
-| site/static/images/plate-line-12-wuzi-jing-topic.webp | W952 | 新增·无字真经专题 |
-| site/reader/people/白龙马.html | W952 | 接入题图（白龙马） |
-| site/reader/people/独角兕大王.html | W952 | 接入题图（独角兕大王） |
-| site/reader/people/灵感大王.html | W952 | 接入题图（灵感大王） |
-| site/reader/people/黄风怪外传.html | W952 | 接入题图（黄风怪） |
-| site/reader/people/赛太岁.html | W952 | 接入题图（赛太岁） |
-| site/reader/people/九灵元圣-方向二深化.html | W952 | 接入题图（九灵元圣） |
-| site/reader/people/哪吒.html | W952 | 接入题图（哪吒） |
-| site/reader/people/昴日星官.html | W952 | 接入题图（昴日星官） |
-| site/reader/themes/紧箍咒专题.html | W952 | 接入题图（紧箍咒主题） |
-| site/reader/themes/筋斗云专题.html | W952 | 接入题图（筋斗云主题） |
-| site/reader/themes/法宝系统专题.html | W952 | 接入题图（法宝系统主题） |
-| site/reader/themes/无字真经专题.html | W952 | 接入题图（无字真经主题） |
-| assets/promo/plate-set/ | W952 | 母版 + 站点版 + 拼图 + README（累计 28 张） |
-| scripts/_w952_make_prompts.py | W952 | 母版复用生成器 + 两条断言（批内一致 / 风格段与上批一致） |
-| scripts/_w952_insert_plates.py | W952 | 12 页 chapter-plate 接入（幂等） |
-| scripts/_w952_cascade.py | W952 | 四面登记 + 当前态指针（共享面精确暂存） |
-| scripts/_w945_plates_verify.py | W952 | J2 顶部留白带口径 28% → 10%（新旧两批交集） |
-| scripts/output/_w952_batch1~3.json | W952 | 出图参数 12 条 |
-| CHANGELOG.md | W952 | W952 版段 |
-| docs/00-导读/W批次编号对账表.md | W952 | W952 认领行 |
-
-## W951 题图版式批（站点版裁掉上部留白·16 张）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-0[1-8]-*.webp | W951 | 16 张站点版重出（只裁上部留白·主体顶对齐 6 px·保留下部地面留白） |
-| assets/promo/plate-set/plate-line-*.png / *.webp | W951 | 完整母版 16 张（1200×1600·含上部留白·供卡片叠字用） |
-| assets/promo/plate-set/preview-site-sheet.png / .webp | W951 | 站点版拼图（16 张·页面实际呈现） |
-| assets/promo/plate-set/README.md | W951 | 资产分层说明 + 四版方案迭代记录 |
-| scripts/_w951_check_crop.py | W951 | 站点版验算判据（主体顶/底未切 + 地面留白 > 0） |
-| scripts/_w951_site_sheet.py | W951 | 站点版拼图生成器 |
-| scripts/_w945_prepare.py | W951 | 站点版生成逻辑改为「只裁上部留白·保留下部地面留白」 |
-| scripts/_w951_cascade.py | W951 | 四面登记 + 当前态指针（含共享面精确暂存） |
-| scripts/output/_cascade_files_W951.txt | W951 | 当批级联清单 |
-| CHANGELOG.md | W951 | W951 版段 |
-| docs/00-导读/W批次编号对账表.md | W951 | W951 认领行 |
 

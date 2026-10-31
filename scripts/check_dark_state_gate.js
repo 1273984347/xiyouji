@@ -12,7 +12,15 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const BASELINE = path.join(ROOT, 'scripts', 'output', 'render-state-audit-baseline.jsonl');
-const CURRENT = path.join(ROOT, 'scripts', 'output', 'render-state-audit.jsonl');
+// W1066：--current <path>（分片并行时各分片产物合并后的文件）
+const CURRENT = (() => {
+  const i = process.argv.indexOf('--current');
+  if (i > -1 && process.argv[i + 1]) {
+    const v = process.argv[i + 1];
+    return path.isAbsolute(v) ? v : path.join(ROOT, v);
+  }
+  return path.join(ROOT, 'scripts', 'output', 'render-state-audit.jsonl');
+})();
 const STATE = 'S2-desktop-dark';
 const TYPES = ['pageError', 'lowContrast', 'invisible'];
 

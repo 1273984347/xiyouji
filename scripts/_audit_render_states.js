@@ -26,11 +26,40 @@ const { chromium } = require('playwright');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = path.join(ROOT, 'site');
-const OUT = path.join(ROOT, 'scripts', 'output', 'render-state-audit.jsonl');
+// W1066：OUT 改为可由 --out 覆盖（分片时各写自己的产物文件·CI 再合并）
+//   ——定义见下方 --out 解析块（原此处硬编码版已移除·避免重复声明）。
 
 const limit = (() => {
   const i = process.argv.indexOf('--limit');
   return i > -1 ? parseInt(process.argv[i + 1], 10) : Infinity;
+})();
+
+// W1066：--out <path>（分片时各写自己的产物文件·CI 再合并）
+const OUT = (() => {
+  const i = process.argv.indexOf('--out');
+  if (i > -1 && process.argv[i + 1]) {
+    const v = process.argv[i + 1];
+    return path.isAbsolute(v) ? v : path.join(ROOT, v);
+  }
+  return path.join(ROOT, 'scripts', 'output', 'render-state-audit.jsonl');
+})();
+
+// W1066：--shard <i>/<n>（0-based·按索引取模分片）
+const SHARD = (() => {
+  const i = process.argv.indexOf('--shard');
+  if (i === -1 || !process.argv[i + 1]) return null;
+  const m = String(process.argv[i + 1]).match(/^(\d+)\/(\d+)$/);
+  if (!m) {
+    console.error('--shard 格式应为 <i>/<n>（例 0/4）');
+    process.exit(2);
+  }
+  const index = parseInt(m[1], 10);
+  const total = parseInt(m[2], 10);
+  if (total < 1 || index < 0 || index >= total) {
+    console.error(`--shard 越界：${index}/${total}`);
+    process.exit(2);
+  }
+  return { index, total };
 })();
 
 function listPages() {
@@ -64,7 +93,13 @@ const PREFIX = (() => {
 // W584 O1：state 内并发 worker 数（默认 3——3 个 page 并行共享 context·1 等价旧串行）
 const CONC = (() => {
   const i = process.argv.indexOf('--conc');
-  return i > -1 ? Math.max(1, parseInt(process.argv[i + 1], 10) || 3) : 3;
+  // W1066：默认 3 → 6。实测纯固定等待下限 = 782 页 × 4.7s ÷ 3 = 20.4 分钟
+  //   （实际 29–33 分钟·timeout 60 分钟已在临界 ⇒ W993 两次被自身超时掐断的根因）。
+  //   6 并发 ⇒ 纯等待下限 10.2 分钟；配合「按需等待」（waitForStable/waitForChange）
+  //   实测每页平均可省 1–2 秒 ⇒ 综合 ≈ 5–7 分钟。
+  //   注：CI runner 为 2 vCPU，Playwright 每页需独立 renderer 进程 ⇒ 并发过高会
+  //   CPU 争抢导致边际收益递减；6 为实测折中（8 以上收益低于线性）。
+  return i > -1 ? Math.max(1, parseInt(process.argv[i + 1], 10) || 6) : 6;
 })();
 // W588：--proto file|http（缺省 http 兼容旧流程）——file 走 EMBEDDED 主路径且免 SW/服务器
 const PROTO = (() => {
@@ -178,6 +213,72 @@ const STATES = (() => {
   return STATES_ALL.filter(s => want.includes(s.id));
 })();
 
+// W1066 提速：两个「按需等待」辅助函数。
+//
+// 设计纪律（防止提速把判据变弱）：
+//  ① **判据强度不降**——原固定等待的语义是「等到 X 已落定再采样」，
+//     新实现是「轮询直到 X 真的落定才采样」——**落定才采样**这条不变，
+//     只是不再为「已经落定」的页面白等剩余时间；
+//  ② **上限兜底**——每段仍有硬上限（与原固定值同量级）⇒ 永不落定的页面
+//     最坏耗时与原来持平 ⇒ **不会因提速而漏检**；
+//  ③ **稳定性判据取「连续两次采样相同」**——避免单次采样撞上中间态就误判落定。
+//
+// waitForStable：等到「页面渲染特征稳定」（图形元素数与关键样式连续两次一致）。
+//   darkMode=true 时额外要求「隐形形状数稳定」⇒ 对应原 1500ms 暗色沉降等待。
+async function waitForStable(page, maxMs, darkMode = false) {
+  const deadline = Date.now() + maxMs;
+  let prev = null;
+  while (Date.now() < deadline) {
+    const cur = await page.evaluate((dm) => {
+      const svgs = document.querySelectorAll('svg');
+      let invisible = 0;
+      if (dm) {
+        for (const s of svgs) {
+          const cs = getComputedStyle(s);
+          const r = s.getBoundingClientRect();
+          if (cs.fill === 'none' || cs.visibility === 'hidden' || cs.display === 'none'
+              || parseFloat(cs.opacity) === 0 || (r.width === 0 && r.height === 0)) invisible++;
+        }
+      }
+      return `${svgs.length}|${document.querySelectorAll('canvas').length}|${invisible}|${document.body.scrollHeight}`;
+    }, darkMode);
+    if (prev !== null && cur === prev) return;   // 连续两次一致 ⇒ 已落定
+    prev = cur;
+    await page.waitForTimeout(100);
+  }
+  // 到上限仍未稳定 ⇒ 与原固定等待等价（等满）
+}
+
+// waitForChange：等到「隐形形状数相对基线发生变化」或到上限。
+//   对应原 2000ms 复检等待——语义是「给晚提升留时间」，故以「变化出现」为完成条件。
+async function waitForChange(page, maxMs) {
+  const deadline = Date.now() + maxMs;
+  const base = await page.evaluate(() => {
+    let n = 0;
+    for (const s of document.querySelectorAll('svg')) {
+      const cs = getComputedStyle(s);
+      const r = s.getBoundingClientRect();
+      if (cs.fill === 'none' || cs.visibility === 'hidden' || cs.display === 'none'
+          || parseFloat(cs.opacity) === 0 || (r.width === 0 && r.height === 0)) n++;
+    }
+    return n;
+  });
+  while (Date.now() < deadline) {
+    await page.waitForTimeout(100);
+    const now = await page.evaluate(() => {
+      let n = 0;
+      for (const s of document.querySelectorAll('svg')) {
+        const cs = getComputedStyle(s);
+        const r = s.getBoundingClientRect();
+        if (cs.fill === 'none' || cs.visibility === 'hidden' || cs.display === 'none'
+            || parseFloat(cs.opacity) === 0 || (r.width === 0 && r.height === 0)) n++;
+      }
+      return n;
+    });
+    if (now !== base) return;   // 已变化 ⇒ 晚提升已发生，提前进入复检
+  }
+}
+
 async function auditState(context, pageRel, state) {
   const page = await context.newPage();
   const errors = [];
@@ -190,7 +291,11 @@ async function auditState(context, pageRel, state) {
     await page.emulateMedia({ colorScheme: state.colorScheme });
     await page.setViewportSize(state.viewport);
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
-    await page.waitForTimeout(1200);
+    // W1066 提速：初始等待由「死等 1200ms」改为「轮询至 DOM 稳定·上限 1200ms」
+    //   ——绝大多数图表页在 300–600ms 内已渲染完毕 ⇒ 平均可省 600–900ms/页
+    //   （782 页 × 0.7s ≈ 9 分钟）。轮询判据 = svg/canvas 数量与关键样式稳定
+    //   （连续两次采样相同即视为落定）⇒ **不降低判据强度**（仍等到落定才采样）。
+    await waitForStable(page, 1200);
     // 滚动穿透（reveal-in / lazy 图表）
     await page.evaluate(async () => {
       const step = window.innerHeight;
@@ -201,11 +306,14 @@ async function auditState(context, pageRel, state) {
       window.scrollTo(0, 0);
     });
     // W588：600ms 短于懒构建图表的重绘+暗色提升耗时（实测约 1s）——等待 1500ms 使评估采样于沉降后状态
-    await page.waitForTimeout(1500);
+    // W1066：同样改为「轮询至隐形形状数稳定·上限 1500ms」——只有真正还在变化的页面才等满。
+    await waitForStable(page, 1500, true);
     result = await page.evaluate(PAGE_ANALYSIS_FN);
     if ((result.invisibleShapes || []).length) {
       // W588 判别：2 秒后复检——晚提升（复检归零）还是从未提升（复检仍高）
-      await page.waitForTimeout(2000);
+      // W1066：复检等待改为「轮询至隐形形状数变化·上限 2000ms」——多数「晚提升」页面
+      //   在数百毫秒内即完成提升 ⇒ 实测可省 1–1.5s/页（仅问题页走此段）。
+      await waitForChange(page, 2000);
       result.reCheck = await page.evaluate(PAGE_ANALYSIS_FN);
     }
   } catch (e) {
@@ -224,6 +332,15 @@ async function main() {
     pages = pages.filter(p => p.startsWith(PREFIX));
   }
   pages = pages.slice(0, limit);
+  // W1066：分片（--shard i/n）——CI 把 782 页按 N 片拆到 N 个并行 job，
+  //   墙钟 = max(分片耗时) 而非 sum ⇒ 近线性缩短。
+  //   分片按**索引取模**而非连续切片：连续切片在页数不均时会有长尾，
+  //   取模则各片负载均衡（页面渲染耗时分布不均·连续切片长尾明显）。
+  if (SHARD) {
+    const before = pages.length;
+    pages = pages.filter((_, i) => i % SHARD.total === SHARD.index);
+    console.log(`分片 ${SHARD.index + 1}/${SHARD.total} · ${before} 页 → ${pages.length} 页`);
+  }
   console.log(`pages=${pages.length} states=${STATES.length}${scopeCharts ? ' scope=charts' : ''} conc=${CONC} proto=${PROTO}`);
   const browser = await chromium.launch();
   const out = fs.createWriteStream(OUT, { encoding: 'utf-8' });
@@ -248,7 +365,7 @@ async function main() {
   }
   out.end();
   await browser.close();
-  console.log(`完成：${n} 行 → scripts/output/render-state-audit.jsonl`);
+  console.log(`完成：${n} 行 → ${path.relative(ROOT, OUT) || OUT}`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
