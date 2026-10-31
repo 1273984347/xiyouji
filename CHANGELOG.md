@@ -1,3 +1,21 @@
+### W1071（2026-10-31）：交互修复第一批（用户三裁决落地：搜索结果全量链接化+双入口明示 / 问浮窗生产隐藏 / 首页计数对齐 stats·data-gsap 四页归位）
+
+> **来源**：用户就 W1070 施工方案三项待决策裁决——① 问浮窗 **A 生产隐藏**；② 深色 masthead **B 插画出深色变体**；③ 搜索**双入口明示**。本批=施工序列第 1 批（交互阻断与信任修复）①③ 落地 + N-03/N-06 修复；② 按出图批另排（本批登记裁决留痕）。
+>
+> **N-01 搜索结果链接化（P1→修复）**：从 `site/reader/index.html` 总目录提取 612 条 title→href 映射（3 个同名标题保留首个）以 `SITE_DOC_MAP` 内嵌进 `site/data/search.html`（EMBEDDED 契约·file:// 离线可用），`renderOffline` 行渲染后置把「标题」格包成站内链接（`../reader/…`），Drill 层「打开 →」同源站内化——实测 `q=孙悟空` 23/23 行全带链接、点击落站内页。映射与目录的双源漂移风险：构建脚本 `archive/scripts/batches/w1071/_w1071_search_docmap.py` 可重跑再生；后续若目录生成器扩容应接管此映射（登记为后续项）。
+>
+> **R-01 问浮窗（P0→修复·A 案）**：`site/static/js/rag-chat.js` 顶部加生产早退——仅 localhost/127.0.0.1/file:// 注入；线上不再渲染「问」浮钮/面板/向访客本机 8777 发健康检查（每次访问的 console 报错与失败请求随之消失）。本地调试态行为不变。
+>
+> **N-03 data-gsap 泄漏（P1→修复）**：4 页（guide / reader index / essays index / themes-hub）写在开标签 `>` 之后的属性移回标签内——可见的代码文本消失，且 `motion-gsap.js` 卡片进场动画首次真正激活（共享模块过第 50 槽动效契约；实测 7/7 卡片可见无回归）。
+>
+> **N-06 计数对齐（P1→修复·部分）**：首页概览区「615 篇·研究文档」→「616<!--stats:a1_a6_docs-->」、看板卡「86 PAGES」→「87<!--stats:visualization_pages-->」（加对账标记纳入 stats 校验面）；**订正**：reader/index「全部 615 条」经实数复核为页内自洽口径（目录实有 615 条目）——该项从 N-06 撤回。
+>
+> **决策③ 双入口明示**：首页搜索区 ask-note 追加「查原著原文逐字请用 全文检索」入口（`data/text-search.html`）。
+>
+> **验证**：lint_links site 域 14,989 链接 0 断链（新增 `../reader/…` 链接全验）；CSP 0 漂移；stats 26 键零差异；真机探针 8 项全过（搜索 23/23 链接 / file:// 调试态浮钮在·生产早退 / 泄漏 0 / 卡片 7/7）。
+>
+> **文件**：site/data/search.html · site/static/js/rag-chat.js · site/index.html · site/guide.html · site/reader/index.html · site/reader/essays/index.html · site/reader/themes-hub.html · archive/scripts/batches/w1071/_w1071_search_docmap.py
+
 ### W1070（2026-10-31）：站内交互审查第二轮复核 + 界面优化施工方案落库批（生产态复核 W926 十条复现·两条已修 + 新增十条发现 + 四维度取证 + 施工序列八批）
 
 > **来源**：用户令「帮我审一遍我网站的交互流程：页面跳转路径、按钮与状态反馈、表单填写与出错提示、空状态和异常分支是否合理，按影响用户的程度排序给改进建议」+ 续令「落库」+ 增令「帮我优化页面的界面和交互：页面布局与视觉层级、配色字体统一、按钮反馈与加载提示、深浅色模式适配都过一遍，按改动收益排序给方案」。
@@ -1228,7 +1246,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1070），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1071），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1778,23 +1796,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **结论与判断一字未改**——本批只改计数与口径声明。
 
 **状态**：**已收官**（V1.1 订正批；**让号**：W958 已被并行会话「归档分段批」占用 ⇒ 本批 W959）
-
-
-### W957（2026-10-26）：GSAP 动效体系引入批·施工批（公共动效载体 + 试点 5 页三类动效 + 机检）
-
-> **来源**：用户 2026-10-26 携 GSAP Skills 插件发起「滚动叙事 / 入场编排 / 微交互 / 现有动画体检」四类全都要 → 问卷裁定载体 = `site/` 静态站、交付 = 先出计划再施工 → W955 出计划 → 用户令「开工」→ W957 施工。
->
-> - **文件**：site/static/js/motion-gsap.js、site/static/js/gsap.min.js、site/static/js/ScrollTrigger.min.js、site/index.html、site/reader/ch007.html、site/reader/themes/西游与死亡研究专题.html、site/reader/people/黄风怪外传.html、site/reader/people/白骨精.html、scripts/_w956_pilot_pick.py、scripts/_w957_wire_pilot.py、scripts/_w957_motion_probe.py、scripts/check_gsap_motion.py、scripts/_w957_ledger_claim.py、docs/11-方案报告/计划方案/T28-任务计划执行与经验沉淀报告-2026-10-26.md
-> **状态**：**已收官**（W957 2102233d·git 反填·共 5 笔·W971 存量回填）
-
-**让号留痕**：W956 已被并行会话「登记面治理批」（`5b1d3e38`）占用并收官 ⇒ 本批按「先落地者保留」让号至 **W957**（preflight 取号 = max+1 = 957 · 无撞号 · touches 无交集）。
-
-**落地四件**：① **公共动效载体** `site/static/js/motion-gsap.js`（GSAP 3.12.5 两文件外链 vendored·72,214 + 43,380 = 115,594 B·**不内联**：内联方案 857 页约 99.1 MB）；② **试点页机选**——`_w956_pilot_pick.py` 按三条规则扫 **527** 候选 → 入选 5 页（首页 + 回目正文 + 专题 + 人物×2·覆盖四类页型），单页增量 **187 / 199 / 208 / 208 / 208 B**（合计 +1,010 B）；③ **三类动效**——入场编排（首页首屏 8 元素 Timeline）/ 滚动叙事（分节单元批量进场·**非视差**：DESIGN §5 禁止清单）/ 微交互（折叠块展开编排）；④ **写法机检**——独立脚本 `check_gsap_motion.py`（8 项判据 + 自测 8/8；**不改管控文件**，挂槽待用户批准）。
-
-**实测**：浏览器实跑 **30 组**（5 页 × 3 视口 × 2 动效偏好态）**0 FAIL**（RM 态载体执行数 = 0 · ScrollTrigger 实例 = 0 · 编排单元残留初始态 = 0）；pageerror = 0；CSP 856 页 0 漂移；禁词基线 0 命中。
-
-**三条自纠**：探针 RM 判据改用「载体自报执行数」（GSAP 全局时间轴恒含库自身 tween ⇒ 原口径恒红）；站内 RAG 请求环境类 error 归 NOTE；机检自测抓出自身两处盲区（时长表 / 缓动常量表形态）并补判据。
-
-**状态**：**已收官**（施工批完成；**推广批与门禁挂载待用户裁决**——Q-01 机检挂槽、Q-02 推广范围）
 
 
