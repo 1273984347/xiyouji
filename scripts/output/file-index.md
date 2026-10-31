@@ -10,6 +10,41 @@
 
 ---
 
+## W1058 SKILL.md 计数链漂移订正 + C5e 对账面扩 SKILL（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1058 | 级联面（脚注滚动） |
+| .agent/skills/puti-shouye/SKILL.md | W1058 | 本批新增/修改（计数 144→146 两处） |
+| scripts/check_doc_sync.py | W1058 | 本批新增/修改（C5e 对账面扩 SKILL.md 两形态） |
+| CHANGELOG.md | W1058 | 收官面（顶段 W1058） |
+| HANDOVER.md | W1058 | 级联面（最后更新/进度） |
+| README.md | W1058 | 级联面（版本行） |
+| STRUCTURE.md | W1058 | 级联面（版本行） |
+| CITATION.cff | W1058 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1058 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1058 | 台账（W1058 行新增） |
+| docs/INDEX.md | W1058 | 登记面（docs 索引） |
+| index.md | W1058 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1058 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1058 | 级联面（里程碑行同步） |
+| site/index.html | W1058 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1058 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1058 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1058 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1058 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1058 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1058 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1058 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1058 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1058 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1058 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1058.txt | W1058 | 级联清单（本批产物） |
+| scripts/output/_w1058_spec.json | W1058 | 本批 spec |
+
 ## W1057 Backlog 对账批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4255,18 +4290,4 @@ docs/11-方案报告/README.md
 | scripts/_w945_cascade.py | W945 | 四面登记 + 当前态指针 |
 | CHANGELOG.md | W945 | W945 版段 |
 | docs/00-导读/W批次编号对账表.md | W945 | W945 认领行 |
-
-## W944 章回插画新组（6 张按回目情节重出）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/chap-07.webp | W944 | 重出·第 007 回 八卦炉（三足丹炉 + 火焰） |
-| site/static/images/chap-14.webp | W944 | 重出·第 014 回 心猿归正（猴形剪影 + 金箍 + 勒绳） |
-| site/static/images/chap-15.webp | W944 | 重出·第 015 回 鹰愁涧（惊马扬蹄 + 缰绳 + 瀑布崖） |
-| site/static/images/chap-23.webp | W944 | 重出·第 023 回 四圣试禅心（打坐僧 + 孤灯 + 雾中两影·去黑框） |
-| site/static/images/chap-27.webp | W944 | 重出·第 027 回 尸魔三戏（三道人影渐次消散 + 月 + 茅屋） |
-| site/static/images/chap-30.webp | W944 | 重出·第 030 回 邪魔侵正法（蛇形妖影 + 洞口 + 螺旋墨风） |
-| scripts/_w944_cascade.py | W944 | 四面登记 + 当前态指针 |
-| CHANGELOG.md | W944 | W944 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W944 | W944 认领行 |
 
