@@ -13,6 +13,30 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W946（2026-10-25）：图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）
+
+> **来源**：用户 2026-10-25 令「禁止使用 emoji 表情当做图标，你审查一下。你要么进行设计一下图标」，经问卷两问裁决（范围=仅 UI 图标位 / 风格=东方线描）后分两批执行：W941（主体：1,910 处图标位归零 + 通用图标集 27 枚）→ **W946（本批：补齐 W941 的三处缺口）**。
+
+> - **文件**：site/system.css（`.ico` 基类补 fill/stroke/linecap/linejoin 描边参数）、site/static/icons/ui/tl-*.svg（16 枚时间线专属图标）、site/data/timeline.html、site/en/timeline.html（22 条事件数据字段 + 渲染改内联 SVG + TL_ICO 映射内联 + CSP 重算）、scripts/_w946_gen_timeline_icons.py、scripts/_w946_apply_timeline_icons.py、scripts/check_emoji_icons.py（第 50 门禁）、scripts/_w939_emoji_to_svg.py（svg_tag 模板补 SVG 属性）、scripts/output/_w946_timeline_icons.js、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、scripts/output/file-index.md。
+> **状态**：**已收官**（W946 88eacc8a·git 反填·共 3 笔·W971 存量回填）
+
+**缺口 ①（严重·视觉）：内联 SVG 丢了描边参数 ⇒ 图标渲染成黑块**。W941 批的静态判据全绿（图标位 0 残留、尺寸正确），但 **Playwright 实开 file:// 才发现**：内联 `<svg>` 片段只带了 class/width/height/viewBox，**漏了 `fill="none" stroke="currentColor"`** ⇒ 图形落回 SVG 默认样式（黑填充、无描边）⇒ 1,957 处图标全是黑块。**修法**：把描边参数写进 `.ico` 基类 CSS（CSS 优先级高于 presentation attribute，且 `.ico` 类选择器特异性高于站内 `svg` 元素规则）⇒ **零 HTML 改动、全站立即生效**；同时给替换器 `svg_tag()` 模板补上 SVG 属性（未来重跑产出更稳的 HTML）。实测复核：浅色模式 stroke=墨色 `rgb(35,32,26)`、暗色模式 stroke 自动变朱砂 `rgb(224,96,79)`（主题自适应确认）、尺寸 13–16px 跟随字号（非 300×150 巨图）。
+
+**缺口 ②：时间线的 15 种 emoji 承载 22 事件、且「📖」一符两义**（佛经西行 vs 连环画普及）⇒ **通用图标集表达不了「成书/游记/评点/戏曲/影剧/数字化」的语义差** ⇒ 另设计 **16 枚语义专属图标**（`tl-*` 前缀）：行脚僧（玄奘西行）、立轴（大唐西域记）、灵光（取经诗话）、脸谱（戏曲与影视）、百回刻本、太极（丹道评点）、整理校注本、评点笺注、新式标点、校注笔、数字库、连环画格、清代年画、胶片、显像管、手柄。**按事件语义而非按字符拆分** ⇒ 数据字段由 emoji 改为图标名（`icon: 'tl-pilgrim'`），渲染改 `.html(d => TL_ICO[d.icon] || '')`，映射表内联进页面（保持自包含）。两页 emoji 序列一致性作断言（22 == 22 且逐位相同）。目视复核重画 2 枚（`tl-pilgrim` 语义太弱 → 加持杖与日轮；`tl-punctuation` 读不出标点 → 改逗号+句号+引号三件套）。
+
+**缺口 ③：没有防回归的机检** ⇒ 新增 **第 50 门禁 `scripts/check_emoji_icons.py`**，两段判据：
+- **A 静态**：全仓 UI 图标位零 emoji 残留（判据与基准扫描器同源：控件首位 / 图标槽 class / 标题前缀 / CSS content）；
+- **B 实测**：浏览器实开 4 个代表页 × **2 套环境**（`file://` 与 `http://127.0.0.1`）——校验内联 SVG 的 computed `stroke≠none` 且 `fill=none`、尺寸跟随字号（非巨图）、CSS content 位的同源 mask 已加载、自建图标资产零加载失败。
+- **B 段的存在理由**：W941 批的静态判据全绿却漏掉「黑块」⇒ **静态判据无法覆盖「渲染正确」**，必须有浏览器实跑。
+
+**门禁在双环境下的判据设计（如实登记）**：`http://`（= 线上同源·真实用户环境）全部判据严格——CSS `content` 位的同源 mask 在此环境**全部加载成功**（实测 7/7）；`file://`（本地双击）下同源 mask 被 CORS 拦 ⇒ 该 22 处图标在本地不显示、线上正常 ⇒ 门禁在 file:// 下记 NOTE 不判红（与该环境既有的字体子集 CORS、fetch 不支持 file scheme 同级），在 http 下判红。**待修项已登记**：把这 22 处改为真实内联 SVG 元素（11 个选择器 × 中英两版）可彻底消除该降级，属独立批。
+
+**顺带修掉两个自查发现的真 bug**：① `TL_ICO` 映射曾被插到使用点之后（`TL_ICO is not defined`）⇒ 改为插入使用点所在 script 块开头；② 映射表的对象键含连字符（`tl-critical-edition`）未加引号 ⇒ JS 语法错误（`Unexpected token '-'`）⇒ 键一律加引号；③ 渲染从 `.text(d => d.icon)` 改写时**漏掉 D3 回调箭头**（`.html(TL_ICO[d.icon])`）⇒ `d is not defined` ⇒ 改回 `.html(d => TL_ICO[d.icon] || '')`。
+
+**验收**：第 50 门禁 **PASS**（静态 0 处残留 + 双环境实测 0 判红项）· timeline 22 事件 22 个内联 SVG 渲染正确（file:// 实测 `svgIco=22`、无 pageerror）· 内联 SVG 描边浅色=墨色/暗色=朱砂 · CSP 856 页 0 漂移。
+
+**未改**：正文装饰 emoji 与箭头符号（按裁决保留）；W941 已入库的 1,957 处 HTML 结构（仅修 CSS 与模板）；并行批次在途件（hero 素材批 / W945 题图批等）一律未纳入本提交。
+
 ### W945（2026-10-25）：内页专题题图成套（8 张 3:4 线描人物题图·622 页仅 11 页有题图的缺口）
 
 > **来源**：用户 2026-10-25 令「在继续帮我做几张素材图：用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」，并要求开工前先问三件事。

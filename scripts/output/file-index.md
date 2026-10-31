@@ -10,6 +10,43 @@
 
 ---
 
+## W1060 CI 提效批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W1060 | 本批新增/修改（A11y 矩阵 9→1·artifact 名去 matrix 引用） |
+| .github/workflows/dependency-review.yml | W1060 | 本批新增/修改（补 concurrency） |
+| .github/workflows/workflow-lint.yml | W1060 | 本批新增/修改（补 concurrency） |
+| .github/workflows/scorecard.yml | W1060 | 本批新增/修改（补 concurrency） |
+| CHANGELOG.md | W1060 | 收官面（顶段 W1060） |
+| HANDOVER.md | W1060 | 级联面（最后更新/进度） |
+| README.md | W1060 | 级联面（版本行） |
+| STRUCTURE.md | W1060 | 级联面（版本行） |
+| AGENTS.md | W1060 | 级联面（脚注滚动） |
+| CITATION.cff | W1060 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1060 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1060 | 台账（W1060 行新增） |
+| docs/INDEX.md | W1060 | 登记面（docs 索引） |
+| index.md | W1060 | 登记面（根索引） |
+| .github/workflows/README.md | W1060 | 级联面（里程碑行同步） |
+| archive/docs/AGENTS-ARCHIVE.md | W1060 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| site/index.html | W1060 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1060 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1060 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1060 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1060 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1060 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1060 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1060 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1060 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1060 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1060 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1060.txt | W1060 | 级联清单（本批产物） |
+| scripts/output/_w1060_spec.json | W1060 | 本批 spec |
+
 ## W1059 第 46 篇工作复盘与优化分析报告入库批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4285,27 +4322,4 @@ docs/11-方案报告/README.md
 | STRUCTURE.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
 | docs/00-导读/项目说明.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
 | CITATION.cff。 | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-
-## W946 图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）
-（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/system.css（`.ico` 基类补 fill/stroke/linecap/linejoin 描边参数） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| site/static/icons/ui/tl-*.svg（16 枚时间线专属图标） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| site/data/timeline.html | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| site/en/timeline.html（22 条事件数据字段 + 渲染改内联 SVG + TL_ICO 映射内联 + CSP 重算） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/_w946_gen_timeline_icons.py | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/_w946_apply_timeline_icons.py | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/check_emoji_icons.py（第 50 门禁） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/_w939_emoji_to_svg.py（svg_tag 模板补 SVG 属性） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/output/_w946_timeline_icons.js | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| docs/00-导读/W批次编号对账表.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| CHANGELOG.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| HANDOVER.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| README.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| STRUCTURE.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| docs/00-导读/项目说明.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/output/file-index.md。 | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
 
