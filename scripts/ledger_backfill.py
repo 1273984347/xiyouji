@@ -275,8 +275,6 @@ def cmd_append_claim(args, path: str) -> int:
 def _self_test() -> int:
     """自测：正例必绿 + 负例必红（负例红不了 ⇒ 判据无效，不算通过）。"""
     fails = []
-    n_pos = 0   # 正例计数（动态·禁硬编码——加用例后汇总必须自动跟上）
-    n_neg = 0   # 负例计数（同上）
     tmpdir = tempfile.mkdtemp(prefix="w931_backfill_")
     sample = (
         "# 台账样本\n\n"
@@ -341,7 +339,7 @@ def _self_test() -> int:
     _idx932 = wnum_commit_index(["abc1234 feat(w932): 主体提交", "def5678 chore(w932): 收官回填"])
 
     def _row932():
-        return next(l for l in read_ledger(path) if l.startswith("| W932 "))
+        return next(row for row in read_ledger(path) if row.startswith("| W932 "))
 
     # 正例 A：--from-git 纯自动 ⇒ status + hash 均反填
     rc = cmd_backfill(argparse.Namespace(w=932, hash=None, cascade=None, status=None,

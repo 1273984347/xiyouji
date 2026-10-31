@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-31 10:57
+生成时间：2026-10-31 11:18
 
-共 **161** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 61 · 一次性（下划线前缀） 6）
+共 **162** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 62 · 一次性（下划线前缀） 6）
 
 ## 门禁与校验（72）
 
@@ -127,7 +127,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（61）
+## 工具（62）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -182,6 +182,7 @@
 | `run_all.py` | run_all.py — 批量运行 A-AH 34 类分析脚本 |
 | `safe_commit.py` | safe_commit.py — 并行会话 ref-lock 竞争安全提交（W698·P2-2） |
 | `scan_targets.py` | W941 · UI 图标位 emoji 基准扫描器（机检判据·独立于替换逻辑） |
+| `sec002_negative_probe.py` | SEC-002 精确化判据的负样本自证（W1062 立·W1063 收紧修订）。 |
 | `security_scan.py` | W268 E8 安全深化·本地安全扫描工具 |
 | `site_audit.py` | site_audit.py — C 渠（朱砂文字落 --bg）+ 朱砂实底审计器（W876 重建件）。 |
 | `slice_screenshots.py` | Slice full-page screenshots into fixed-height chunks for pixel-level rev |
