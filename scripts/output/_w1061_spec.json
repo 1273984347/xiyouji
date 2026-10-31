@@ -42,6 +42,7 @@
   "| scripts/output/_vermilion_solid_cache.json | W1061 | 登记面产物（第 49 槽机器缓存自跟随） |",
   "| scripts/cross_line_baseline.json | W1061 | 登记面产物（跨行基线·扫描随批） |",
   "| scripts/output/_cascade_files_W1061.txt | W1061 | 级联清单（本批产物） |",
-  "| scripts/output/_w1061_spec.json | W1061 | 本批 spec |"
+  "| scripts/output/_w1061_spec.json | W1061 | 本批 spec |",
+  "| scripts/security_scan.py | W1061 | 本批新增/修改（SEC-002 判据精确化·值含 CJK 非密钥——W1051 中文 TOKEN 误报修复·high=0） |"
  ]
 }

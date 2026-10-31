@@ -10,6 +10,32 @@
 
 ---
 
+## W1062 README 换图未生效根修批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/requirements.txt | W1062 | 本批新增/修改（登记 numpy 2.4.4 + playwright 1.63.0·CI pytest 5 failed 清零） |
+| scripts/check_no_brand_refs.py | W1062 | 本批新增/修改（core.quotepath=false 根修 + 声明性豁免 + fail-closed + 自测 56/56） |
+| AGENTS.md | W1062 | 本批新增/修改（坑位计数 156→159 + 流程组分项 66→69 + 六主题目录） |
+| HANDOVER.md | W1062 | 本批新增/修改（头链首 + §一 当前进度 + 坑表计数 156→159） |
+| README.md | W1062 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1062 | 本批新增/修改（W1062 段 + 编号规则 W001-W1062） |
+| CITATION.cff | W1062 | 本批新增/修改（version W1061→W1062） |
+| .github/workflows/README.md | W1062 | 本批新增/修改（头部版本 + 里程碑行 W450-W1062） |
+| docs/agent/pitfalls.md | W1062 | 本批新增/修改（E-68~E-70 三条 + 流程组 66→69） |
+| .agent/skills/puti-shouye/SKILL.md | W1062 | 本批新增/修改（计数链 156→159 两点） |
+| docs/00-导读/W批次编号对账表.md | W1062 | 本批新增/修改（W1062 认领行 + 收官回填） |
+| docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md | W1062 | 本批新增（框架第 40 次执行报告） |
+| docs/11-方案报告/README.md | W1062 | 本批新增/修改（T40 登记行） |
+| docs/11-方案报告/审查与评审/工具脚本门禁体检与临时归档审计-2026-10-29.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| docs/11-方案报告/计划方案/T04-任务计划执行与经验沉淀报告-2026-10-21.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| scripts/output/_w1062_spec.json | W1062 | 本批新增（级联 spec） |
+| site/index.html | W1062 | 本批新增/修改（页脚链首） |
+| site/dukou-engine.html | W1062 | 本批新增/修改（页脚链首） |
+| site/data/tag-cloud.html | W1062 | 本批新增/修改（页脚链首） |
+| site/data/cross-time-danmaku.html | W1062 | 本批新增/修改（页脚链首） |
+
 ## W1061 私有记忆同步批（2026-10-31）
 
 | 文件 | W | 说明 |
