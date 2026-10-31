@@ -4,7 +4,7 @@ message: "如果本项目对您的研究或写作有帮助，请按以下格式�
 type: software
 authors:
   - name: 取经录项目
-version: "W1067" # 批次号形态（W711 方案 D·非 SemVer·CFF 1.2.0 free string·解析方按字符串处理）
+version: "W1068" # 批次号形态（W711 方案 D·非 SemVer·CFF 1.2.0 free string·解析方按字符串处理）
 date-released: "2026-10-31"
 license: MIT
 license-url: https://spdx.org/licenses/MIT.html

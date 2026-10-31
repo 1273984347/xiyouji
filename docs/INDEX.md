@@ -1,6 +1,6 @@
 # docs/ 文档索引
 
-> 自动生成 by `python scripts/docs_index.py` · 共 798 篇文档
+> 自动生成 by `python scripts/docs_index.py` · 共 799 篇文档
 
 ## 00 · 导读
 
@@ -689,6 +689,7 @@
 ## 10 · 方法论沉淀
 
 - [agent-web 技术栈大版本迁移评估](10-方法论沉淀/agent-web技术栈迁移评估.md)
+- [CI 提速与门禁健壮性方法论](10-方法论沉淀/CI提速与门禁健壮性方法论.md)
 - [dispatching-parallel-agents 四 subagent 并行模式](10-方法论沉淀/dispatching-parallel-agents四subagent并行模式.md)
 - [DRL 真循环](10-方法论沉淀/DRL真循环.md)
 - [E1 铁律](10-方法论沉淀/E1铁律.md)
