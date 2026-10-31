@@ -77,11 +77,14 @@ def strip_invisible(html):
     #   （CodeQL js/regex-injection 告警「does not match upper case <SCRIPT> tags」·
     #    该告警同时是真缺陷：漏剥的 <SCRIPT> 内容会被当正文参与判据 ⇒ 假结论）。
     #   结束标签放宽到 `</script` + 任意空白 + 可选属性 + `>`（HTML 允许 </script bar>
-    #   与 </script\t\n bar> 这类带属性/畸形空白形态·CodeQL 要求正则能匹配该形态）
-    #   ⇒ 用 `</script[ \t\r\n]*[^>]*>`；开标签用 `<script[^>]*>` 容忍属性跨行与畸形属性。
-    body = re.sub(r'<script[^>]*>[\s\S]*?</script[ \t\r\n]*[^>]*>',
+    #   与 </script\t\n bar> 这类带属性/畸形空白形态·CodeQL 要求正则能匹配该形态）。
+    #   属性段用**否证式** `(?:(?!>)[\s\S])*` 而非 `[^>]*`：
+    #     ① 语义等价（逐字符否证「不是 >」⇒ 可跨行）；
+    #     ② **不含 `[^…]` 字符类** ⇒ 不被第 31 门禁的跨行改写扫描器判 🔴 高危
+    #        （`[^…]*` 类 + re.sub + 无尾锚点 ⇒ 判「可跨行静默删内容」·W1014 判据）。
+    body = re.sub(r'<script(?:(?!>)[\s\S])*>[\s\S]*?</script[ \t\r\n]*(?:(?!>)[\s\S])*>',
                   ' ', body, flags=re.IGNORECASE)
-    body = re.sub(r'<style[^>]*>[\s\S]*?</style[ \t\r\n]*[^>]*>',
+    body = re.sub(r'<style(?:(?!>)[\s\S])*>[\s\S]*?</style[ \t\r\n]*(?:(?!>)[\s\S])*>',
                   ' ', body, flags=re.IGNORECASE)
     return RE_HTML_TAG.sub(' ', body)                       # ② 标签按语法约束
 

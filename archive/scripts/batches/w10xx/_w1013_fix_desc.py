@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""_w1013_fix_desc.py — W1013 版本行 desc 定向订正（避 C5c 裸聚合数字）
+r"""_w1013_fix_desc.py — W1013 版本行 desc 定向订正（避 C5c 裸聚合数字）
 
 病因：spec.desc 写了「接入 **12 个** 回目页」⇒ 第 31 门禁 C5c（裸聚合数字 `N[页项篇个类]`）
 在**四处版本行**判红（README.md:138 / STRUCTURE.md:11 / 项目说明.md:6 / 项目说明.md:48）——
@@ -7,6 +7,11 @@
 
 修法（最小改动·不动语义）：量词改中文数字 ⇒「十二张」⇒ C5c 的 `\d+[页项篇个类]` 不匹配；
 同时「12 个回目页」→「对应回目页」（量词与基数都不出现）⇒ 版本行不再带裸量词。
+
+（W1066：docstring 加 `r` 前缀改 raw 字符串——文中的 `\d` 在非 raw docstring 里触发
+Python 3.12 的 `SyntaxWarning: invalid escape sequence '\d'` ⇒ CI Sim 的跨行改写
+扫描器编译本文件时告警 ⇒ ci_sim 判该项 FAIL。改 raw 后零语义变化、告警消除。
+本文件在 origin/main 上不存在（dev 侧 W1014 批引入）⇒ 该告警是 dev 引入的·阻塞 PR #70。）
 
 订正面（5 类·逐处断言命中数）：
   ① `scripts/_w1013_make_spec.py` 的 DESC 定义（供后续批次复现）
