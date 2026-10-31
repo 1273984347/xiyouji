@@ -1,3 +1,29 @@
+### W1061（2026-10-31）：私有记忆同步批（CodeBuddy 铁令入必载层 + env-quirks 独有坑 10 条入坑表）
+
+> **来源**：用户令「整理记忆文件」并追问「哪些内容需要同步项目文件供其他 Agent 读取」——三问 ③
+自查实锤两项同步义务：① **CodeBuddy/WorkBuddy 永久禁令（用户 2026-10-07 两度重申）完全未入项目
+必载层**（AGENTS/CLAUDE/pitfalls/文档规范全部零命中·其他 Agent 无从知晓=最大违规）；② env-quirks
+记忆卡的独有环境坑约 15 条未入查坑表。本轮占号同步。
+>
+> - **文件**：AGENTS.md、CLAUDE.md、docs/agent/pitfalls.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、CHANGELOG.md、README.md、STRUCTURE.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs 四件、.github/workflows/README.md、site 四页、scripts/output 登记面十件。
+
+**本批要点**：① **铁律 19**——禁 CodeBuddy/WorkBuddy 入 §6 必载层（任何会话不得引入、恢复或仿建该
+品牌工具链·agent-web 裁决=保留换 OpenAI-compatible 引擎已收官）+ CLAUDE 速查第 14 行（三问顺延 15·
+51/60 行）；② **坑表 +10（E-58~E-67）**——env-quirks 独有环境坑入项目载体：Bash 工作目录跨调用持久 /
+反引号命令替换注入 / git push 网络选择性污染 / judge 并发限额 / npm 原生模块双坑 / grep -c 行数≠次数 /
+pytest 双坑 / 前端探针三合一 / Windows 杂项三合一 / docx COM 渲染验收——**坑表 146→156·流程组 56→66**；
+③ §4.3 加工作目录持久与 Edit-Read 前置两条高频；④ 计数链六点（AGENTS×2/HANDOVER×2/SKILL×2）
+全部同步 156——SKILL 为 W1058 扩面后首次被对账覆盖即命中本轮同步。
+
+**提交前三问结论（铁律 18·落验证栏）**：① 同步义务清单当批闭环（CodeBuddy 入必载层+10 条入坑表），
+其余记忆卡判定为无同步义务（会话状态史在 CHANGELOG/S4 轮次在本地仓/平台特有策略不入仓）；
+② 防复发 = C5e 六点对账（含 W1058 扩的 SKILL 两点）+ 铁律 19 必载层（下个会话开场即见）；
+③ 本批发现路径（记忆整理→三问 ③ 自查→grep 零命中实锤）全在本段，私有记忆已同步镜像。
+
+**验证**：C5e 六点全链 156 零红 · CLAUDE 51/60 行 · 负样本（SKILL 145 注入）此前已验对账面有效 ·
+全量门禁见收官提交。
+
+> - **状态**：已收官（三问 ③ 违规清零：永久铁令入必载层·环境坑入查表·私有记忆仅剩镜像与平台特有项）
 ### W1060（2026-10-31）：CI 提效批（A11y 矩阵 9→1 + 三 workflow 补 concurrency）
 
 > **来源**：用户 2026-10-31 令「怎么优化使得增加效率」——本日 17 批实证 PR checks 34 job
@@ -1057,7 +1083,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1060），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1061），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1816,26 +1842,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：机器判据 J1–J10 **16/16 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 16 张）+ 两个负样本自检判据可证伪（浓墨渲染型方图 ⇒ 抓 J1/J2/J3/J6；8 px 黑框样本 ⇒ 抓 J8 检出 16 处贯穿暗线）· **J10 在本批首轮实测有效**：精准抓出 2 张模型画出的「左右白边」图（背景差 12.96 / 12.09），其余 14 张 0.04–1.59 无误报 · 人眼 J8 题材与形制逐张核（拼图 + 主体包围盒放大 + 关键部位 3 倍高倍）· 顶部 28% 留白墨量 0.0000–0.0015 · 纸色归一残差 0.17–0.57/255 · 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 20846 链接 0 broken
 > - **状态**：已收官（`88fa5952`·**并发事实**：本批共享面被两个他方提交代提交——CHANGELOG 的 W948 段被 W949 批 `276eaa4b` 带入、台账的 W948 行被 agent-web 批 `29a182ff` 带入；本批不修改他方提交历史，只在本方行与本方段内登记该事实；台账 W948 行已按回填独占规则回填 hash + 状态 + touches）
 > **状态**：**已收官**（W948 62365964·git 反填·共 4 笔·W971 存量回填）
-
-
-### W947（2026-10-25）：图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）
-
-> **来源**：用户 2026-10-25 追问「你确定现在已经做完图标了吗」⇒ 全量复验（本批起因）。
-> 承接 W941（UI 图标位 emoji 归零 + 通用图标集 27 枚）与 W946（描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁）。
-
-> - **文件**：scripts/_w947_add_icons.py（通用图标集补 2 枚）、scripts/_w939_gen_icons.py（并入 note / link）、site/static/icons/ui/note.svg、site/static/icons/ui/link.svg、site/static/js/rag-chat.js（🔗 前缀 → 内联 SVG）、xiyouji-agent-web/src/components/UiIcons.tsx（新建·内联 SVG 图标组件）、xiyouji-agent-web/src/components/PermissionDialog.tsx（⚠️ 📝 → 组件）、xiyouji-agent-web/src/components/InlinePermissionCard.tsx（⚠️ → 组件）、scripts/check_emoji_icons.py（标题改号）、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
-> **状态**：**已收官**（W947 02ef09ee·git 反填·共 4 笔·W971 存量回填）
-
-**三路全量复验**：① 静态口径（基准扫描器·UI 图标位）**0 命中**；② 全仓兜底 grep 剩余 **559 处 / 58 种**，逐类判定为**内容语义**（✅156 正文结论标记 / ✓200 判定文本 / 人物头像 20 / 勋章奖牌 / ⚡12 / 国旗 / 图表符号）⇒ 按用户裁决保留；③ 渲染实测（8 页 × `file://` + `http://` 双环境 + **像素级取证**）。
-
-**补治两处此前遗漏的范围**：**agent-web React 组件**（PermissionDialog 的 ⚠️📝、InlinePermissionCard 的 ⚠️）与**共享 JS**（rag-chat.js 的 🔗）共 **4 处界面图标位**。该应用已有成熟 TDesign 图标体系，但 `@tdesign-icons-react` **依赖未安装** ⇒ 无法验证未用过的图标名 ⇒ 改为新建 `UiIcons.tsx`（内联 SVG·图形与静态站资产逐字同源·零新增依赖·颜色跟随 `currentColor`）；通用图标集补 **2 枚**（`note` 折角纸页 / `link` 双环链条）⇒ 27 → **29 枚**。
-
-**保留并登记**：useChat.ts 与 rag-chat.js 错误消息文本内的 ⚠️ 共 **7 处**——它们随消息流输出、可复制、会被读屏朗读 ⇒ 属**语义标记**而非界面图标位 ⇒ 按「仅 UI 图标位」裁决保留。
-
-**更正上批一处误判（像素级取证推翻）**：上批据控制台 CORS 报错推断「CSS `content` 位的 22 处图标在 `file://` 下不显示、线上正常」，本批像素取证（mask 宿主左上角 30×26 区域深色像素计数，file:// 与 http:// 同位比较：`data/concept-device.html` 17 vs 20、`data/game-webnovel.html` 18 vs 22）证明**两环境均真实绘制** ⇒ 该结论作废，「22 处改内联 SVG」从缺陷修复项**降级为可选优化**。教训：**报错文本 ≠ 渲染结果**，渲染正确性判据必须做像素级取证。
-
-**经验补充 3 条**：E-13「报错文本不等于渲染结果」· E-14「扫过某个目录不等于覆盖那个目录」（治理范围须按**产物类型**枚举：静态页 / 共享 JS / React 组件）· E-15「用户追问『做完了吗』是最有效的自查触发器」。
-
-**共享面纪律（采纳并行 W945 会话书面建议）**：本批提交用**显式 pathspec 只列自己批的文件**，不再用宽 pathspec——同仓有在途批次时宽 pathspec 会把他人在途件一并提交（W946 的 `ed09a65e` / `923afc4c` 即因此代提交了 W945 的题图资产与脚本，已由该会话收官并留痕）。
 
 

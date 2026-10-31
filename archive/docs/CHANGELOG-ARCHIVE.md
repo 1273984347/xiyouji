@@ -13,6 +13,26 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W947（2026-10-25）：图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）
+
+> **来源**：用户 2026-10-25 追问「你确定现在已经做完图标了吗」⇒ 全量复验（本批起因）。
+> 承接 W941（UI 图标位 emoji 归零 + 通用图标集 27 枚）与 W946（描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁）。
+
+> - **文件**：scripts/_w947_add_icons.py（通用图标集补 2 枚）、scripts/_w939_gen_icons.py（并入 note / link）、site/static/icons/ui/note.svg、site/static/icons/ui/link.svg、site/static/js/rag-chat.js（🔗 前缀 → 内联 SVG）、xiyouji-agent-web/src/components/UiIcons.tsx（新建·内联 SVG 图标组件）、xiyouji-agent-web/src/components/PermissionDialog.tsx（⚠️ 📝 → 组件）、xiyouji-agent-web/src/components/InlinePermissionCard.tsx（⚠️ → 组件）、scripts/check_emoji_icons.py（标题改号）、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
+> **状态**：**已收官**（W947 02ef09ee·git 反填·共 4 笔·W971 存量回填）
+
+**三路全量复验**：① 静态口径（基准扫描器·UI 图标位）**0 命中**；② 全仓兜底 grep 剩余 **559 处 / 58 种**，逐类判定为**内容语义**（✅156 正文结论标记 / ✓200 判定文本 / 人物头像 20 / 勋章奖牌 / ⚡12 / 国旗 / 图表符号）⇒ 按用户裁决保留；③ 渲染实测（8 页 × `file://` + `http://` 双环境 + **像素级取证**）。
+
+**补治两处此前遗漏的范围**：**agent-web React 组件**（PermissionDialog 的 ⚠️📝、InlinePermissionCard 的 ⚠️）与**共享 JS**（rag-chat.js 的 🔗）共 **4 处界面图标位**。该应用已有成熟 TDesign 图标体系，但 `@tdesign-icons-react` **依赖未安装** ⇒ 无法验证未用过的图标名 ⇒ 改为新建 `UiIcons.tsx`（内联 SVG·图形与静态站资产逐字同源·零新增依赖·颜色跟随 `currentColor`）；通用图标集补 **2 枚**（`note` 折角纸页 / `link` 双环链条）⇒ 27 → **29 枚**。
+
+**保留并登记**：useChat.ts 与 rag-chat.js 错误消息文本内的 ⚠️ 共 **7 处**——它们随消息流输出、可复制、会被读屏朗读 ⇒ 属**语义标记**而非界面图标位 ⇒ 按「仅 UI 图标位」裁决保留。
+
+**更正上批一处误判（像素级取证推翻）**：上批据控制台 CORS 报错推断「CSS `content` 位的 22 处图标在 `file://` 下不显示、线上正常」，本批像素取证（mask 宿主左上角 30×26 区域深色像素计数，file:// 与 http:// 同位比较：`data/concept-device.html` 17 vs 20、`data/game-webnovel.html` 18 vs 22）证明**两环境均真实绘制** ⇒ 该结论作废，「22 处改内联 SVG」从缺陷修复项**降级为可选优化**。教训：**报错文本 ≠ 渲染结果**，渲染正确性判据必须做像素级取证。
+
+**经验补充 3 条**：E-13「报错文本不等于渲染结果」· E-14「扫过某个目录不等于覆盖那个目录」（治理范围须按**产物类型**枚举：静态页 / 共享 JS / React 组件）· E-15「用户追问『做完了吗』是最有效的自查触发器」。
+
+**共享面纪律（采纳并行 W945 会话书面建议）**：本批提交用**显式 pathspec 只列自己批的文件**，不再用宽 pathspec——同仓有在途批次时宽 pathspec 会把他人在途件一并提交（W946 的 `ed09a65e` / `923afc4c` 即因此代提交了 W945 的题图资产与脚本，已由该会话收官并留痕）。
+
 ### W946（2026-10-25）：图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）
 
 > **来源**：用户 2026-10-25 令「禁止使用 emoji 表情当做图标，你审查一下。你要么进行设计一下图标」，经问卷两问裁决（范围=仅 UI 图标位 / 风格=东方线描）后分两批执行：W941（主体：1,910 处图标位归零 + 通用图标集 27 枚）→ **W946（本批：补齐 W941 的三处缺口）**。

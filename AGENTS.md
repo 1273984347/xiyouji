@@ -175,13 +175,13 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 140 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 
-> **📖 阅读契约（W709）**：索引型——146 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——156 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（27）·JS / CSP / 运行时（6）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（11）·流程 / 协作 / 取证（56）
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（27）·JS / CSP / 运行时（6）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（11）·流程 / 协作 / 取证（66）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -190,6 +190,8 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 - 提交门禁 hook（.git/hooks/pre-commit）与本清单同口径取解释器：首选 `py -3`，回退系统 Python 3.12 绝对路径，两者均须实测可运行（`-c "import sys"` 返回 0）才选用；**不按 PATH 上的 `python`/`python3` 形状挑选**（两 shell 解析不同·见上一条）·不依赖任何厂商托管运行时路径。
 - pre-commit 框架**已装**（实测 4.6.0·W1014 订正本条与磁盘现势的矛盾）但**禁 `install`**：`pre-commit install` 会覆盖手写 `.git/hooks/pre-commit`，破坏零依赖门禁。`.pre-commit-config.yaml` 仅为「误 install 后核心门禁不丢」的等价备份（W424），现役执行路径恒为手写钩子；W1014 已删其指向退役件 `sync_docs.py` 的坏 hook 段。
 - 本机取数与命令坑（W902 自 Agent 记忆固化·长期实测）：`curl` 必须 `--ssl-no-revoke`（本机代理链下否则大面积失败）；`/tmp` 对 Windows Python 不可见（Git Bash 的 /tmp 是 MSYS 虚拟路径·Python 侧须用 `tempfile` 或仓内 tmpe/）；`gh api` 查询含中文的 search 语句必须走 `-f` 参数（URL 参数形态中文被编码截断）；PMC 取 PDF 常挂 Cloudflare → 用 Europe PMC `fullTextXML` 端点兜底。
+- **Bash 工具工作目录跨调用持久（W596 两犯）**：某条命令 `cd 子目录` 后，后续所有相对路径命令都落在子目录——长批次开头 `cd /d/xiyouji` 归位或全程绝对路径；「找不到文件」先查 pwd。
+- **Edit 工具前置 Read**：Edit 前必须先用 Read 工具读过该文件（sed/grep 的 Bash 读取不算）——直接 Edit 报 "File has not been read yet"；批量编辑前先对每个目标文件发 Read。
 - `PyYAML==6.0.2` 已登记进 `scripts/requirements.txt`（W813）：工作流 YAML 可解析性守卫（test_ci_wiring.py J3）依赖它，依赖缺失即**判红**（禁静默跳过假绿）。
 
 ### 4.4 Web Agent（xiyouji-agent-web/ · 摘要层）
@@ -273,6 +275,7 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 16. **协作与环境约束（W1039 用户令六则 + I-01 增补⑦·违反即返工）**：① **不主动创建 automation**（定时任务/提醒）——用户 2026-10-13 令取消全部；需周期性事务时写进待办清单由其口令触发，或由用户自行在界面建；「开始优化/都做」**不等于**批准 automation，须单独一句明确同意。② **GPU 重负载须先获批并分批**——用户笔记本在持续 GPU 满载（嵌入/训练量级）下会保护性关机（Kernel-Power 41 实证 2 次，插电 99% 时仍断电）；重计算前先征得同意，小批 + 冷却间隔，禁连续挂满。③ **禁用 `~/.minimax/` 任何内容**（auth / 权限 / 渠道绑定 / config 属个人数据）——需判断某工具是否安装时，用项目面证据（import 测试 / 仓内文件 / 会话内工具清单）替代对 profile 目录的枚举。④ **给用户复制粘贴的命令与路径必须完整**，禁 `...` 缩写——用户会原样照抄（W1025 实证：钩子里的 python 路径被吃掉，导致提交被阻止）；多行命令给整块代码块，并标注「整行替换」还是「插入到第 N 行之后」。⑤ **涉及「选哪个 / 怎么做」的答复必须显式给推荐**——先给明确推荐与一句话理由，再给备选与代价；不以「看你定」结尾，也不只罗列选项让用户自己判断。⑥ **有复用价值的教训，项目内必须留载体**——只写进 AI 记忆＝未落地；判定：另一个会话、另一个 Agent、另一个接手者能否在项目内检索到它。⑦ **豁免/白名单/基线新增条目必须用户批准**（W1053 I-01·W1046 方案）——豁免只增不减为默认，纠正误判类可做但须 CHANGELOG 决策记录留痕；存量对账走 stats.json 两键与触发器 T4。
 17. **开批先预约号（W1041 立·reserve_w.py）**：并行会话共享同一工作树时，台账是「事后登记」——两会话各自从自己看到的台账 max 取号必撞（2026-10-30 实战撞 W1039，后由并行会话续占 W1040、本批顺延 W1041）。开批第一步必须跑 `python scripts/reserve_w.py` 占号，stdout 即本批 W 号；**未占号不动手**。candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1，写入 `tmpe/_w_reservations.json`（24h TTL 防占而不交，收官后 `release <W号>` 释放）。注意：仅同一工作树内有效；不同 clone 不共享该文件，仍靠 git log + 台账兜底。
 18. **提交前三问自检（W1056 立·用户令）**：每笔提交（含回填/扫尾小笔）前必须自答三问并把结论落到收官材料（CHANGELOG 验证栏或台账备注），不通过不得提交——钩子在门禁绿后强制弹出：① 本批过程中遇到的问题是否全部在本批内解决或登记去向（无「顺手跳过」）；② 同类问题是否会再次犯错——防复发机器判据/坑表条目是否已落地（无判据的教训＝未解决）；③ 本项目是多 Agent 协作，其他 Agent 能否从项目内文件（AGENTS/CHANGELOG/pitfalls/台账）了解本批全部决策与遗留——**凡写入私有记忆文件的教训必须同步落仓**（16-⑥ 载体铁则的提交时机强化）。
+19. **禁用 CodeBuddy/WorkBuddy（W1061 入必载层·用户 2026-10-07 两度重申·此前仅存私有记忆=三问 ③ 违规实例）**：项目一切 AI 功能不使用 CodeBuddy/WorkBuddy 及其任何残留；agent-web 的三选一裁决=保留但换引擎（OpenAI-compatible 自研·W680 收官/W681 事实收官）。任何会话不得引入、恢复或仿建该品牌工具链。
 
 ---
 
@@ -302,4 +305,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1055-W1055 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-31（W1056）提交前三问自检入契约：钩子注入铁律 18 速查同步，私有记忆教训须同步落仓；2026-10-31（W1057）Backlog 对账：12 条全核验零滞后，已完成条目压缩移出，当前无未决待办，登记面收敛；2026-10-31（W1058）计数链漂移订正：SKILL 两处对齐 146，对账面扩容堵盲区；2026-10-31（W1059）复盘报告入库批：十六批全景与多 Agent 协作五形态沉淀；2026-10-31（W1060）CI 提效：审计矩阵收敛为单 job，三 workflow 并发取消补齐。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1056-W1056 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-31（W1057）Backlog 对账：12 条全核验零滞后，已完成条目压缩移出，当前无未决待办，登记面收敛；2026-10-31（W1058）计数链漂移订正：SKILL 两处对齐 146，对账面扩容堵盲区；2026-10-31（W1059）复盘报告入库批：十六批全景与多 Agent 协作五形态沉淀；2026-10-31（W1060）CI 提效：审计矩阵收敛为单 job，三 workflow 并发取消补齐；2026-10-31（W1061）私有记忆同步批：工具禁令入必载层，环境坑十条入坑表，计数链同步。如与上述权威文档冲突，以权威文档为准。*

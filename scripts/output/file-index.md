@@ -10,6 +10,45 @@
 
 ---
 
+## W1061 私有记忆同步批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1061 | 本批新增/修改（铁律 19 + §4.3 两条 + 分项 66 + 级联脚注） |
+| CLAUDE.md | W1061 | 本批新增/修改（速查第 14 行禁 CodeBuddy·三问顺延 15·51/60 行） |
+| docs/agent/pitfalls.md | W1061 | 本批新增/修改（+10 条 E-58~E-67·156·流程组 66） |
+| HANDOVER.md | W1061 | 本批新增/修改（坑表计数链 156 + 级联面） |
+| .agent/skills/puti-shouye/SKILL.md | W1061 | 本批新增/修改（计数链 156） |
+| CHANGELOG.md | W1061 | 收官面（顶段 W1061·验证栏含三问结论） |
+| README.md | W1061 | 级联面（版本行） |
+| STRUCTURE.md | W1061 | 级联面（版本行） |
+| CITATION.cff | W1061 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1061 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1061 | 台账（W1061 行新增） |
+| docs/INDEX.md | W1061 | 登记面（docs 索引） |
+| index.md | W1061 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1061 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1061 | 级联面（里程碑行同步） |
+| site/index.html | W1061 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1061 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1061 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1061 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1061 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1061 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1061 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1061 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1061 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1061 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1061 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1061 | 登记面产物（第 43 槽报告） |
+| scripts/output/_vermilion_solid_cache.json | W1061 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/cross_line_baseline.json | W1061 | 登记面产物（跨行基线·扫描随批） |
+| scripts/output/_cascade_files_W1061.txt | W1061 | 级联清单（本批产物） |
+| scripts/output/_w1061_spec.json | W1061 | 本批 spec |
+
 ## W1060 CI 提效批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4299,27 +4338,4 @@ docs/11-方案报告/README.md
 | scripts/output/_w948_batch2.json | W948 | 出图参数 05–08 |
 | CHANGELOG.md | W948 | W948 版段 |
 | docs/00-导读/W批次编号对账表.md | W948 | W948 认领行 |
-
-## W947 图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）
-（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w947_add_icons.py（通用图标集补 2 枚） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| scripts/_w939_gen_icons.py（并入 note / link） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| site/static/icons/ui/note.svg | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| site/static/icons/ui/link.svg | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| site/static/js/rag-chat.js（🔗 前缀 → 内联 SVG） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| xiyouji-agent-web/src/components/UiIcons.tsx（新建·内联 SVG 图标组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| xiyouji-agent-web/src/components/PermissionDialog.tsx（⚠️ 📝 → 组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| xiyouji-agent-web/src/components/InlinePermissionCard.tsx（⚠️ → 组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| scripts/check_emoji_icons.py（标题改号） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| docs/00-导读/W批次编号对账表.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| CHANGELOG.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| HANDOVER.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| README.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| STRUCTURE.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| docs/00-导读/项目说明.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| CITATION.cff。 | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
 
