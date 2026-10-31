@@ -43,6 +43,7 @@
   "| scripts/output/_w1059_spec.json | W1059 | 本批 spec |",
   "| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1059 | 登记面产物（stats 标记 sweep 跟随） |",
   "| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1059 | 登记面产物（stats 标记 sweep 跟随） |",
-  "| scripts/output/_vermilion_solid_cache.json | W1059 | 登记面产物（第 49 槽机器缓存自跟随） |"
+  "| scripts/output/_vermilion_solid_cache.json | W1059 | 登记面产物（第 49 槽机器缓存自跟随） |",
+  "| scripts/cross_line_baseline.json | W1059 | 同号补账（跨行基线登记 2 处·人工复核无害·CI Sim 跨行槽 FAIL 修复前置） |"
  ]
 }

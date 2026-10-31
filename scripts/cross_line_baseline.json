@@ -1,5 +1,5 @@
 {
- "note": "已人工复核确认「跨行匹配但无害」的候选清单（键 = 文件#内容指纹）。危害性取决于替换结果是否真被消费（写回磁盘 / 返回给调用方并被后续使用 / 仅用于检查），静态判据到不了这一轴 ⇒ 以复核结论为准。键口径：sha256(完整模式|完整替换串|行号) 前 12 位——原地改写、替换串语义变更、同文件新增同模式调用点、模式超长截断 四类漏拦路径均换键；行号漂移亦换键 ⇒ 报「基线外新增」（宁可多报·安全侧）。W1045：键由 sha256(文件|模式|repl) 迁移为四输入口径。",
+ "note": "已人工复核确认「跨行匹配但无害」的候选清单（键 = 文件#内容指纹）。危害性取决于替换结果是否真被消费（写回磁盘 / 返回给调用方并被后续使用 / 仅用于检查），静态判据到不了这一轴 ⇒ 以复核结论为准。键口径：sha256(完整模式|完整替换串|行号) 前 12 位——原地改写、替换串语义变更、同文件新增同模式调用点、模式超长截断 四类漏拦路径均换键；行号漂移亦换键 ⇒ 报「基线外新增」（宁可多报·安全侧）。",
  "confirmed": [
   "archive/scripts/_build_chapter_metadata.py#e0e786be73be",
   "archive/scripts/attic/_w672_scan_head.py#24e58a7cfe8c",
@@ -47,14 +47,13 @@
   "scripts/_s4_cnprobe8.py#bfd597f510ca",
   "scripts/_s4_cnu2.py#85d650627378",
   "scripts/_s4_dhr_cite.py#f0e8c64ad059",
-  "scripts/check_chart_data.py#6507fe2a9003",
-  "scripts/check_doc_sync.py#c3c1f55a5da7",
+  "scripts/check_doc_sync.py#31aec673326c",
   "scripts/check_html_head_content.py#341661ac9807",
   "scripts/check_html_head_content.py#7805345a12fa",
   "scripts/check_html_head_content.py#ea3e25eda206",
   "scripts/check_kpi_card_base.py#0df90807841f",
   "scripts/inject_descriptions.py#b61da8219a08",
   "scripts/lint_links.py#e77639df2ca0",
-  "scripts/verify_delivery.py#75b4572a98e7"
+  "scripts/verify_delivery.py#40d510bd9a42"
  ]
 }
