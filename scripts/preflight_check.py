@@ -389,7 +389,23 @@ def step_env():
         try:
             r = run(cmd, timeout=30)
             if r.returncode == 0:
-                lines.append(f"{name}={r.stdout.strip().splitlines()[0]}")
+                ver_line = r.stdout.strip().splitlines()[0]
+                lines.append(f"{name}={ver_line}")
+                # W1069 env-sync（用户批「都可做」）：关键工具实际版本 vs requirements 声明对拍——
+                # 本日实证：本地 ruff 0.16.7 vs CI 0.17.3 的版本差令 5 处 lint 红只有 CI 能看见。
+                # 只对拍 ruff（其余工具无 ==锁定行）；不符 = WARN（提示对齐，不阻断动工）。
+                if name == "ruff":
+                    req_p = os.path.join(ROOT, "scripts", "requirements.txt")
+                    try:
+                        import re as _re
+                        _m = _re.search(r"(?m)^ruff==([\w.]+)", open(req_p, encoding="utf-8").read())
+                        _want = _m.group(1) if _m else None
+                        _got = ver_line.split()[-1] if ver_line else ""
+                        if _want and _got and _got != _want:
+                            lines.append(f"⚠ ruff 版本漂移：本地 {_got} ≠ requirements {_want}"
+                                         f"——pip install -r scripts/requirements.txt 对齐（CI 用声明版·版本差=lint 规则差）")
+                    except OSError:
+                        pass
             else:
                 ok = False
                 lines.append(f"{name}=不可用（rc={r.returncode}·复跑门禁前需修复）")
