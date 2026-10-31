@@ -1,3 +1,19 @@
+### W1070（2026-10-31）：站内交互审查第二轮复核 + 界面优化施工方案落库批（生产态复核 W926 十条复现·两条已修 + 新增十条发现 + 四维度取证 + 施工序列八批）
+
+> **来源**：用户令「帮我审一遍我网站的交互流程：页面跳转路径、按钮与状态反馈、表单填写与出错提示、空状态和异常分支是否合理，按影响用户的程度排序给改进建议」+ 续令「落库」+ 增令「帮我优化页面的界面和交互：页面布局与视觉层级、配色字体统一、按钮反馈与加载提示、深浅色模式适配都过一遍，按改动收益排序给方案」。
+>
+> **方法**：线上 GitHub Pages 生产态实跑（无头 Chromium Playwright 七探针：导航/表单边界/fetch 失败/深浅色/加载态/悬停/移动视口）+ browser-use 内置浏览器走查 + 静态字节级取证 + `lint_links.py` 全量复跑（**21130 链接 0 断链**）。
+>
+> **复核结论**：W926 十二条中**十条复现未修**（R-05/R-12 已由 W935 当日修复·本批确认；R-01 问浮窗仍必然离线——CSP 实为 `connect-src 'self' http://127.0.0.1:8777` 白名单·首轮「CSP 双重死亡」推测经对抗复核撤销；每次访问首页/看板仍向访客本机 8777 发注定失败的健康检查）。新增十条判据集未覆盖发现：**N-01 全站搜索 23 行结果 0 行内链接（P1·主路径断裂且隐藏 Drill 两步出口仍出站）**——首页「一站检索全站 616 篇」的承诺在最后一步断裂；N-02 `/datasets` 绝对路径两页恒 404（`dashboard.html:675`、`data/search.html:1300`）；N-03 `data-gsap` 属性文本泄漏 4 页（属性写在开标签 `>` 之后·原设动画从未生效）；N-04 全部 100 章回页「返回导读」指向 GitHub blob；N-05 阅读目录页 622 链接零出口（无页头页脚 h1）；N-06 首页计数自相矛盾（616 vs 615、86 vs 87·stats 真值 616/87）；N-07 叙事学 13D vs 16D；N-08 移动端 8px 横向溢出（根因待定位·100vw 假设经对抗复核推翻）；N-09 EN 页脚双链接。
+>
+> **判据自纠撤销四条 + 同批对抗复核七处吸收**：IAB 合成点击伪影（初判「全站交互死透」被真实 Chromium 4/4 对照推翻·教训入 Agent 记忆）；W854 S2/S3 快照过期订正（现值 40/40 与 24/20 不成立）；index-row 悬停首测伪影（专测确认生效）；轮播 pressed 竞态（非缺陷）；对抗复核（只读 subagent·应 preflight 触发器派发·对抗审查已派发）另证伪七处并全部吸收——CSP 白名单口径 / R-05·R-12 已由 W935 修复 / N-08 100vw 根因不成立 / 字体三数字口径 / reader 计数 / 施工方案章节引用 / N-01 绝对化措辞。
+>
+> **界面四维度取证（施工方案）**：深浅色 10 页 **0 白块**（唯一真缺陷 D-1：深色 masthead 文本翻转浅米色 rgb(242,235,220) 落浅米插画底 ≈1:1 对比）；悬停反馈 5/5 生效；加载态 EMBEDDED 秒开（500ms 已 310 个 SVG 元素·无需骨架屏）；字体裸栈 11 处（令牌化 64/75）；v4 三族令牌主要内容页 0 消费（S6 订正版）。
+>
+> **交付**：两份报告落库（审查与评审区 + 设计与架构方案区）+ README 双区登记 + 施工序列八批（按「阻断性 > 覆盖面×信任 > 一致性」排序·最短见效路径约 1 小时）+ 3 项待用户决策均附推荐。
+>
+> **文件**：docs/11-方案报告/审查与评审/站点交互流程审查第二轮复核报告-2026-10-31.md · docs/11-方案报告/设计与架构方案/界面与交互优化施工方案-2026-10-31.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md
+
 ### W1069（2026-10-31）：效率与防护打包批（env-sync 判据 + BOM 门禁 + 坑表 5 条 + 微批轻量通道设计 + 批次节奏行）
 
 > **来源**：用户 2026-10-31 反馈「PowerShell/Write/Edit/Git/Python 总是有问题·项目繁琐臃肿」+ 四篇
@@ -1212,7 +1228,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1069），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1070），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1780,32 +1796,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **三条自纠**：探针 RM 判据改用「载体自报执行数」（GSAP 全局时间轴恒含库自身 tween ⇒ 原口径恒红）；站内 RAG 请求环境类 error 归 NOTE；机检自测抓出自身两处盲区（时长表 / 缓动常量表形态）并补判据。
 
 **状态**：**已收官**（施工批完成；**推广批与门禁挂载待用户裁决**——Q-01 机检挂槽、Q-02 推广范围）
-
-
-### W956（2026-10-26）：登记面治理批（W954 复盘报告 P-43 五项落地）
-
-> **来源**：W954 第 43 篇《工作复盘与优化分析报告》§7.1/§8 登记的下一治理批（用户令「现在做完，然后进行推送」·P-43-01/02/03/05 本批全落地·P-43-04 载体为下一出图批、其建制面随 E-31 入坑表）。
-> **摘要**：① **preflight 在途判定加 git 条件**（P-43-01/WF-08-a）——「在途」参与 touches 拒绝须满足「台账标在途 AND git 无该 W 提交」；台账标在途但 git 已有提交 = **登记滞后**（告警不拒绝·消 W954 开工 8 条 FAIL 的历史欠账误阻）；git 识别只认提交 subject 的 type(w###): 批次标签形态，散文提及别批号不计（防引用性提及误降真在途防护）；git 读取失败退化纯登记面口径从严保护。② **ledger_backfill 新增 --from-git**——收官状态列由脚本从 git 反填（「已收官（首笔hash·git 反填·共 N 笔）」），不再人工手写。③ **复盘触发器**（P-43-02/WF-08-b）——新建 scripts/check_review_trigger.py：距上篇复盘 ≥3 天 / 后续台账批次 ≥30（排除让号留痕与已停止）/ 后续提交 ≥80 三判据任一触发即输出触发清单；preflight 提示位接线（只提示不拦截·故障降级 WARN 禁静默跳过）；触发器不持台账写面（检查器写共享面风险，W820 教训）。④ **段状态 W 号一致性断言**（P-43-05/WF-08-c）——batch_cascade 与 backfill_changelog 两个段状态写入点断言状态文本「认领登记 W###」== 本段号（E-28 段状态串行错位防线·W941 实例形态）；引用别批形态不锁。⑤ **空壳号清账**（P-43-03）——W884（有 4 笔提交而两面无段）以补位 spec 补立 CHANGELOG/file-index 段（Playwright 全谱审计·按 W863 先例标注补位）；W907/908/910/911/929 经三面取证定性为**合规让号留痕**（工作分别改号 W909/W912 落库·非登记空壳，订正 W954 报告的分类），W908/W910/W939 的遗留 spec 判定不立段；backfill_changelog 同批修 E-27（归档面合看·原实现把 67 个已归档段误报待补）并新增 --only 限域。⑥ **复盘经验上移**——E-25/26/27/28/31 五条入 docs/agent/pitfalls.md（级联 5→8·git 17→18·流程 8→9·总数 52→57）+ AGENTS §4.3 计数链追记；E-31 载体即 P-43-04 建制面（素材出图人工关前置为逐张自检表 + 图形同步器前置到每次出图批）。
-> **文件**：scripts/preflight_check.py · scripts/check_review_trigger.py · scripts/ledger_backfill.py · scripts/batch_cascade.py · scripts/backfill_changelog.py · scripts/output/_w884_spec.json · scripts/output/_w956_spec.json · tests/unit/test_preflight_check.py · tests/unit/test_review_trigger.py · tests/unit/test_batch_cascade_status_wnum.py · docs/agent/pitfalls.md · AGENTS.md · docs/00-导读/W批次编号对账表.md · CHANGELOG.md · scripts/output/file-index.md · HANDOVER.md · README.md · STRUCTURE.md · docs/00-导读/项目说明.md · .github/workflows/README.md · CITATION.cff · site/index.html · site/data/cross-time-danmaku.html · site/data/tag-cloud.html · site/dukou-engine.html · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json · scripts/output/stats-changelog.json · scripts/output/stats-index.md · scripts/check_db_schema.py · scripts/check_emoji_icons.py · tests/unit/test_check_data_copy_chain.py · tests/unit/test_check_db_schema.py · tests/unit/test_check_interaction_binding.py · tests/unit/test_check_page_admission.py
-⑦ **顺带修复（并行批遗留·本批开工实跑暴露）**——ruff 全仓清理 11 处（W949 门禁脚本与四个 W912/W917/W920 测试文件·机械修复不改语义）+ check_db_schema 门禁路径跟上 W934 存储层门面化（P1-P3 目标 db.ts→storage/sqlite.ts·自 W934 起全量 pytest 本地挂红的假红·不变量实测健在·自测 3/3·负样本保留）+ 第 42 门禁基线补登记 2 条（check_emoji_icons/check_icon_fields·W949 图标门禁族会话直跑类·四面无引用孤儿）
-> **验证**：三工具 --self-test 全过（触发器 12 断言 / ledger 反填 10 例 / 级联断言 4 例）+ 新增单测 18 例（preflight 5 · 触发器 9 · 段状态断言 4）全绿；pytest 全量通过（收集 880→899·stats 与 pytest.ini/架构方案 v2 标记三方同步）；verify_delivery 全量零 FAIL；preflight 带 touches 放行；backfill_changelog 补段断言全过（143→144 段降序完好）。
-> **状态**：**已收官**（W956 5b1d3e38·git 反填·共 2 笔·P-43-01·认领提交 d7bfc0ac + 主提交 5b1d3e38）
-
-### W955（2026-10-26）：GSAP 动效体系引入批第一子批（前置体检 + 执行前计划）
-
-> **来源**：用户 2026-10-26 携 GSAP Skills 插件发起 → 问卷裁定「**四类动效全都要**（滚动叙事 / 入场编排 / 微交互 / 现有动画体检）· 载体 = `site/` 静态站 · 交付 = **先出计划再施工**」。
-
-> - **文件**：docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md、scripts/_w955_motion_audit.py、scripts/output/_w955_motion_audit.json、scripts/_w955_ledger_claim.py、scripts/_w955_version_sync.py、ddocs/11-方案报告/README.md
-> **状态**：**已收官**（W955 4a73a3f4·git 反填·共 3 笔·W971 存量回填）
-
-**前置体检（`scripts/_w955_motion_audit.py` · 8 组事实 · 数字唯一源头）**：全站 **857** 页（reader/people 216 · reader/themes 210 · en 138 · reader 102 · data 88 · reader/essays 45 · reader/culture 35 · reader/poetry 14 · 根 9）；含 `@keyframes` **331** 页 / 1,337 处（页面私有 keyframes 仅 8 个）；含 `reveal-in` **333** 页（逐页内联复制·公共载体缺位）；含 `prefers-reduced-motion` 守卫 **334** 页；**动效禁止清单基线 0 命中**（回弹 / 360° 旋转 / 无限循环 / 视差）；`d3 .duration(N>600)` **0 页**。
-
-**体积与预算对账**：`site/system.css` **29,660 B**，超 DESIGN.md §4A.8 上限 25,497 B 达 **4,163 B**（既有欠账·本批分流登记不改）；`site/tokens.css` 23,039 B（余量 760 B）；GSAP 3.12.5 实测 `gsap.min.js` **72,214 B** + `ScrollTrigger.min.js` **43,380 B** = 115,594 B ⇒ 内联方案每页 115,594 B（857 页约 99.1 MB）、外链每页 119 B 标签 ⇒ 裁定外链 vendored。
-
-**三条裁定（D-01 / D-02 / D-03）**：① 引入形态 = 外链 vendored（同源·零外域依赖·CSP `script-src 'self'` 允许）；② 落点 = 公共动效载体 `site/static/js/motion-gsap.js` + 试点 5 页分级引入（W471 规划的 `motion.js` 至今未落地·公共层是既有缺口）；③ 滚动叙事 = 章节级一次性进场 + 阅读进度联动（**非视差**——DESIGN.md §5 禁止清单 + `check_motion_ban.py` 全文正则扫描含注释与变量名）。
-
-**验证**：第 48 门禁「计划方案合规」PASS（新增文件 32 项结构判据全项符合）· 模糊词 0 命中 · `preflight_check.py --self W955` = PASS（取号无撞号 / 与在途批次无 touches 交集）· 体检脚本可复算（重跑产出同一 JSON）· 其余门禁见本批收官提交。
-
-**状态**：**已收官**（本批 = 取证 + 执行前计划 + 登记；**施工批 = W956**——公共载体落地 + 试点 5 页接入三类动效 + 机检判据 + 施工报告）
 
 
