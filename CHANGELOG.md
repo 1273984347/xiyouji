@@ -1,3 +1,15 @@
+### W1065（2026-10-31）：《西游记》GitHub 生态全景调研批（51 组查询实跑 · 72 项核心清单 · 11 方向分类）
+
+> **来源**：用户 2026-10-31 令「你去 GitHub 上面搜索查找调研一下关于西游记相关的所有内容」。
+>
+> - **文件**：docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md、docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md、docs/11-方案报告/README.md、CHANGELOG.md、scripts/output。
+
+**本批要点**：① **检索覆盖 51 组查询实跑**（`gh search repos` r1 12 + r2 16 + r3 15 + r4 8，另有 Code Search 6 组 + HuggingFace API 2 组），去重后唯一仓库 **867** → 正则粗筛剔除噪声 **471** → 核心池 **396** → 逐项读 README 与根目录清单人工核定 **72 项 / 11 方向**（语料 8 · 知识库 Wiki 5 · 图谱 2 · NLP 6 · 角色 LLM 8 · RAG 2 · 可视化 5 · Skill 8 · 游戏 MUD 13 · 衍生 IP 14 · 本项目 1）。② **三条核心量化结论**——注意力 **67.1% 被《黑神话：悟空》单点吸走**（衍生 IP 1823 星 / 占全体 67.4%，其中黑神话子群 6 项独占 1815 星 = 衍生桶 99.6%），文本本体 44 项仅 18.5%；文本本体 **≥10 星仅 10/44、50–99 星档为 0**（双峰非单调）→ "已经有人做过了"不成立；**License 未声明 37/72 = 51.4%**，明确 MIT+Apache+GPL 仅 43.1%。③ **2026 年唯一全面活跃方向是 Skill 封装（8/8 更新）**，最高价值样本 `chitu-tang/xiyouji-interpret`（v2.2）——引语逐字核验 + 机械式引号扫描 + 双样例回归 90 分阈值 + 失败输出留存，其规程密度远超全部同赛道项目。④ **可复用资产 15 项**——CText→CSV→统计→PPT 全流水线（Apache-2.0）、RAG 参数集（分块 500/80 · BGE-small-zh-v1.5 · Top-4 · DeepSeek，MIT）、真相源分离 + Trust Guard + 版本建模架构（MIT）、100 回切分语料（101 文件 / 2,158,170 B / 均值 21,368 B）、135 回本 + 续书评点戏曲全套版本素材。⑤ **与本项目正面同赛道 2 家**（`wujinsen/moli-knowledge-base` ★3 已上线、`suhaihan/xiyouji-knowledge-base` ★1，功能清单高度重合）⇒ 功能对标无意义，差异化转向**版本对勘**（该细分方向本轮 72 项中数 = 0）与**检索层**；给出 5 条带量化验收判据的行动建议（引文核验外显 / 全文检索 + 人物地理法宝索引 / 版本异文对照 ≥20 处 / 离线可读作为卖点 / 不与黑神话生态争注意力）。⑥ **两处方法失误已修正并记录**——`西游记 in:name` 与 6 组中文多词查询全返 0（检索语法限制，非内容缺失，改走 `in:readme` + 角色名 + 拼音 + 繁体后命中恢复，**两个同赛道项目正是靠该路径找到**）；`gh search --json topics` 字段不存在 + search 侧 license 多为空对象（改走 `gh api repos/<r>` 补齐 55 项）。⑦ **承接 W358 存量技术选型调研（用户令「把这个文件添加进今天新的文件里面」）**——把《项目 GitHub 参考调研报告》（W358·2026-08-05）的选型层并入本报告 **§5.13（承接）+ §5.14（两轮合流结论）+ 附录 D（原样承接 + 时效状态）**，且**按当批实跑更新而非搬运快照**：实测其 20 个引用仓库中 **7 个路径已迁移或改名、原路径一律 HTTP 404**（`run-llama/LlamaIndex`→`run-llama/llama_index`、`Mintplex-Labs/AnythingLLM`→`Mintplex-Labs/anything-llm`、`lobehub/LobeChat`→`lobehub/lobe-chat`、`daizhige/daizhigev20`→`garychowcmu/daizhigev20`、`d3-sankey/d3-sankey`→`d3/d3-sankey`、`d3-hierarchy/d3-hierarchy`→`d3/d3-hierarchy`、`d3-force/d3-force`→`d3/d3-force`）⇒ 修正后权威链接表落 §5.13.1；**原"优先级第 1 位" `aarontbt/d3-knowledge-graph` 已跌至 ★0 且 2025-12 后停更**（第 2 位 `JY0284/zizhitongjian` 仍 ★426 且 2026-10 仍更新）；**技术层 + 应用层 10 项合计 660,579 星 vs 数字人文呈现层 4 项仅 3,984 星（165.8:1）⇒ 呈现层是真空位**。旧报告正文**保留为历史叙述不改写**（仅文末追加现役索引指针与时效警告），目录 README 编号 19 行同步标注"以编号 20 为准"。
+
+**验证**：全部统计数字由脚本对实采 JSON 实算产出（零手算）· 核心 72 项中 55 项补 `gh api` 取 README（base64 解码）+ `contents/` 根目录清单取证 · 语料规模实测 `gh api repos/alexamies/chinesenotes.com/contents/corpus/xiyouji` → 文件数 101 / 总量 2,158,170 B / 均值 21,368 B / 区间 15,694–28,891 B · 语料编码坑实证（`xiyouji001.txt` 读出 `�` 替换字符 ⇒ 须逐回解码回退）· 6 组复算命令随报告落盘（§9.2）· 跨平台维度以 HuggingFace Datasets API 实测补入 4 个 xiyou 数据集（最大 10K<n<100K · 下载量 ≤30）。
+
+> - **状态**：已收官（全景调研交付 + 索引登记 + 5 条行动建议；附 7 项未验证项显式声明于报告附录 C）
+
 ### W1063（2026-10-31）：并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化
 
 
@@ -1123,7 +1135,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1063），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1065），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1789,98 +1801,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：母版判据 J1–J10 **28/28 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 28 张）· 站点版验算 **28/28 PASS**（`_w951_check_crop.py`：主体顶未切 + 主体底未切 + 下部地面留白 > 0）· 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 20858 链接 0 broken · J10 口径修正后自证仍可抓白边（合规 0.315 / 白边样本 8.609 > 阈值 5.0）
 > - **状态**：在途（认领登记 W952·待提交入库）
 > **状态**：**已收官**（W952 49f2f558·git 反填·共 4 笔·W971 存量回填）
-
-
-### W951（2026-10-25）：题图版式批（站点版裁掉上部留白·16 张题图页面呈现紧凑化）
-
-> **来源**：用户 2026-10-25 在问卷中裁决「裁掉·页面更紧凑」——承接 W945/W948 两批共 16 张线描人物题图。
->
-> - **文件**：site/static/images/plate-line-0[1-8]-*.webp（16 张站点版重出）、assets/promo/plate-set/preview-site-sheet.png（站点版拼图）、assets/promo/plate-set/README.md、scripts/_w945_prepare.py、scripts/_w951_check_crop.py、scripts/_w951_site_sheet.py、scripts/_w951_cascade.py、scripts/output/_cascade_files_W951.txt、Cdscripts/output/file-index.md
-
-**问题**：出图规格要求「画面上方 28% 纯纸面留白（供叠字）」，而内页版式里页面标题 `<h1>` 本就在图的**外面上方**
-⇒ 标题与画面主体之间多出约 **190 px** 冗余空白（浏览器实跑 1280 视口量得），第一眼像「图缺了一块」。
-
-**方案迭代（三次才收敛·每版均经浏览器实跑 + 机器验算后才否决）**：
-
-| 版本 | 做法 | 实测结果 | 处置 |
-|---|---|---|---|
-| v1 | 页面 CSS：`.chapter-plate{overflow:hidden}` + `img{margin-top:-37.33%}` | 浏览器实跑**人物下半身丢失**（画面被截断） | 弃（CSS 整体回退，页面零改动） |
-| v2 | 资产层统一裁 28%（源图 448 px） | 机器验算**会削到 6 张的主体顶端**（观音主体顶 419 ⇒ 削 29 px；太上老君 417 ⇒ 削 31 px） | 弃 |
-| v3 | 主体对齐画布顶部 + **一并裁掉下部** | 浏览器实跑**人物悬空**——母版下部 62–141 px 是画师留的「地面留白」，裁掉即破坏「人物站在地上」的构图关系 | 弃 |
-| **v4（落地）** | **只裁上部留白**：逐张裁切线 = 该张主体顶 − 6 px，**保留下部地面留白** | 主体顶落在画布 6 px（标题紧贴主体）· 人物完整 · 人物不悬空 · 人物大小不变（不缩放） | ✅ |
-
-**新增判据** `scripts/_w951_check_crop.py`：验站点版宽 = 1200、**主体顶未被切**（墨迹 bbox 顶 ≥ 1 px）、**主体底未被切**（bbox 底 < 画布高）、**下部地面留白 > 0**（人物不悬空）⇒ **16/16 PASS**（主体顶 6–7 px·地面留白 62–141 px·站点版高 1056–1189）。
-
-**资产分层**：`assets/promo/plate-set/` 仍是**完整母版**（1200×1600·含上部留白·供卡片叠字 / 分享图裁切用）；
-`site/static/images/` 是**页面版**（已裁上部留白）。两者不再相同——这是本批引入的结构变化，已在目录 README 登记。
-
-**页面零改动**：16 个 reader 页的 HTML/CSS **一行未改**（v1 的 CSS 方案已整体 `git checkout` 回退），版式调整全在资产层完成 ⇒ 无 HTML 副作用、无 CSP 漂移。
-
-**并发纪律**：本批共享面**按内容粒度精确暂存**（`git update-index --cacheinfo`·以 `HEAD:<file>` 为基底叠加本批段）⇒ 对方会话 W950 起宣布的新纪律我方先行践行，不整份 add ⇒ 不会把对方在途的共享面内容带进我的提交。
-
-> - **验证**：站点版验算 16/16 PASS（`_w951_check_crop.py`）· 母版判据 J1–J10 16/16 PASS（`_w945_plates_verify.py`）· 浏览器实跑 `people/太上老君` 页：标题紧贴题图、人物完整、脚下地面留白保留
-> - **状态**：已收官（`d5c3a5d5`·**并发纪律**：本批共享面按内容粒度**精确暂存**——以 `HEAD:<file>` 为基底叠加本批段、`git update-index --cacheinfo` 写入索引、工作树保持原样 ⇒ 对方在途内容既不入我的提交也不被我抹掉（先行践行对方会话 W950 起宣布的新纪律）；提交后已 `git log --oneline -1 -- <本站点版文件>` 核实归属落在本批·**未再被代提交**）
-> **状态**：**已收官**（W951 6bd75e22·git 反填·共 2 笔·W971 存量回填）
-
-
-### W950（2026-10-25）：图标集打磨优化批（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步 + 唯一事实源刷新器）
-
-> **来源**：用户 2026-10-25 令「先把已经做好的图标进行打磨优化」⇒ 本批只打磨既有 45 枚（29 通用 + 16 时间线专属），不扩展新图标。
-
-> - **文件**：site/static/icons/ui/（45 枚 SVG 资产重生成）、scripts/_w939_gen_icons.py、scripts/_w946_gen_timeline_icons.py（生成器接入归一参数）、scripts/_w950_normalize.py（新增·光学尺寸归一器）、scripts/_w950_refresh_icon_paths.py（新增·图形同步刷新器）、scripts/output/_w950_icon_normalize.json（新增·45 枚归一参数）、scripts/output/_w946_timeline_icons.js、scripts/output/_cascade_files_W950.txt、xiyouji-agent-web/src/components/UiIcons.tsx（由资产重建）、site/**（1967 处内联 SVG 图形同步 · 646 个文件）、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
-> **状态**：**已收官**（W950 7908c96c·git 反填·共 6 笔·W971 存量回填）
-
-**打磨前的问题（量化 + 目视双证）**：① 视觉边长 **12.8~20.4（极差 7.6 · 比值 1.59×）**——逐枚渲染量「墨色外接框」得出，目测只觉「有点不齐」；② **9 枚中心偏移**（如 `tl-pilgrim` 中心 x=14.5 明显偏右）；③ **11 枚辨识度弱**（link / menu / quote / child / pin / tl-pilgrim / tl-punctuation / tl-critical-edition / tl-newyear-print / tl-brush-comment / tl-mask）；④ **与既有重复** 2 处（`tl-scroll` ≡ 通用 `scroll`；`tl-pencil` ≈ 通用 `pen`）。
-
-**重画 13 枚**（逐条记明改什么）：link（水平对置交叠双环）· menu（三横等长）· quote（加大并底部对齐）· child（加童蒙姿态：身+手+足）· pin（梯形钉头+顶帽+钉身）· tl-brush-comment（笔 + 三枚**独立**评点）· tl-critical-edition（两册并排 + 侧栏校注条）· tl-mask（戏曲脸谱：额饰+对称眉眼+口）· tl-newyear-print（竖幅挂轴 + 画中人物 + 边框）· tl-pencil（笔 + 下方三道批注线）· tl-pilgrim（侧身行脚僧：背经卷+持杖+日轮）· tl-punctuation（逗号+句号+一对引号横排居中）· tl-scroll（竖轴 + 展开卷面，与短轴头版区分）。
-
-**光学尺寸归一**（系统化那一半）：生成器接入归一参数环节——渲染量测每枚墨色外接框 ⇒ 统一缩放到目标视觉边长（20；细长形符号按 18，避免三角/双竖被撑得过重）⇒ 平移到 24 网格中心 (12,12)；参数落 `scripts/output/_w950_icon_normalize.json`（生成器读取 ⇒ 仍是单一事实源）。**视觉边长极差 7.6 → 2.2 · 最大/最小比 1.59× → 1.12× · 中心偏移 9 枚 → 0 枚**；实开页面内 timeline 的 22 枚图标**尺寸全同 25.6px**。
-
-**图形同步刷新器**（资产改了必须能同步到页面）：站点的内联 SVG 把 path **写死在 HTML 里** ⇒ 改了资产文件页面不会变 ⇒ 新增 `scripts/_w950_refresh_icon_paths.py`：A 通用集内联 SVG 按 path 的 **(d, transform, fill) 复合键**反查图标名 → 替换为新资产 path（含归一 transform）⇒ **1967 处 / 646 个文件**（复合键是必需的：单靠 `d` 有三组歧义 scroll/tl-scroll、star/star-solid、thumb-up/thumb-down）；B timeline 的 `TL_ICO` 映射块整段替换；C agent-web 的 `UiIcons.tsx` **由资产重建**（手抄 path 必然漂移）。幂等。
-
-**当场修掉的一处真缺陷**：改了内联脚本（`TL_ICO` 块）后未重算 CSP 哈希 ⇒ 浏览器报 `Executing inline script violates Content Security Policy 'sha256-j4fJLNv…'` ⇒ **整个内联脚本被拒执行** ⇒ 时间线事件卡渲染中断（实测 `svgIco=0` / `eventCards=0`）⇒ 补跑 `generate_csp.py` 后恢复（22 事件卡 / 22 图标 / CSP 856 页 0 漂移）。这是仓内铁律第 3 条的第二次现场复现。
-
-**经验 3 条**：E-19 矢量资产改动必须配「图形同步刷新器」（复合键反查·单靠 d 会因同形异义歧义）· E-20 视觉尺寸归一是图标集打磨最系统的一步（机器量测比目测可靠）· E-21 改内联脚本必须立刻跑 `generate_csp.py` 并 `--check`（哈希失配让整个脚本被拒执行·表现为「数据不渲染」而非报错）。
-
-**未改**：任何管控脚本逻辑；正文装饰 emoji 与箭头符号；并行会话 W948 批在途件（对方已完成收官·当前无在途共享面内容）。
-
-
-### W949（2026-10-25）：图标治理换路径复核批（第二次追问「确定做完了吗」· 堵数据源回归漏洞 + 字段图标位判据入机检 + 登记剩余 71 条）
-
-> **来源**：用户 2026-10-25 第二次追问「你确定现在已经做完图标了吗」⇒ 本批**刻意避开前三轮已用过的三条路径**，改查没查过的地方。
-
-> - **文件**：dataset/timeline.json（数据源 22 个 icon 字段 emoji → 图标名）、scripts/_w949_fix_dataset.py、scripts/_w949_allowlist.py、scripts/check_icon_fields.py（字段图标位判据）、scripts/check_emoji_icons.py（第 50 门禁挂入 A2 段）、scripts/output/_w949_icon_field_allowlist.json、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
-> **状态**：**已收官**（W949 a59a7499·git 反填·共 4 笔·W971 存量回填）
-
-**换路径复核**：① 扫描范围从「4 个目录」扩到**全仓 17 个顶层目录 · 全部文件类型**（前三轮从未覆盖 `scripts/` `docs/` `archive/` `dataset/` `tests/` `.github/`）；② 新增**字段图标位**判据（`avatar:` / `icon:` / `flag:` / `STAGE_EMOJI`）；③ 数据源与页面内嵌副本**逐位对拍**。
-
-**抓出的真遗漏**：① **`dataset/timeline.json` 仍含 22 个 emoji icon 字段** ⇒ ⚠️ **回归漏洞**：任何一次跑生成器都会把 emoji 灌回页面，治理结果不可复现（假收敛）；② `dataset/ai-dialogue.json` 6 处 `avatar`；③ `dataset/cross-time-danmaku.json` 4 处 `flag` + `site/en/json/rescue_roi.json` 4 处 `icon`；④ `ai-dialogue`（中英）12 处 `avatar:` 名人头像位；⑤ `narrative-experiment`（中英）18 处 `avatar:`/`icon:`；⑥ `methodology-matrix`（中英）9 处 `icon:`；⑦ `chart-design`（中英）10 处 `STAGE_EMOJI`；⑧ `cross-time-danmaku`（中英）8 处 `flag:` 国籍标识。
-
-**本批已做**：① **堵回归漏洞**——修 `dataset/timeline.json` 的 22 个 icon 字段，并与中英页面内嵌副本逐位对拍（22==22 且逐位相同）⇒ 该数据源剩余具象字符 **0**；② **把漏网变成机检可抓**——新增 `scripts/check_icon_fields.py` 与白名单 `scripts/output/_w949_icon_field_allowlist.json`（**由扫描器实测产出 + 程序附理由**，非手写字符：手写会与扫描器口径漂移，ZWJ 序列被拆 / VS16 丢失 / 国旗逐字排序三类漂移都真实发生过）⇒ 白名单外的新命中判红、白名单条目已消失判红（防腐化）、白名单清空即自然转绿（不设恒红豁免）⇒ 第 50 门禁新增 **A2 段**，现状命中 **71 条 / 13 个文件**、白名单外 0、待核销 0。
-
-**剩余 71 条已登记逐类治理方案**（下一批施工）：名人头像 26（需每人专属头像）· 剧本角色头像 8 · 指标卡图标 9 · 情景卡图标 9 · 螺旋阶段符号 10 · 国籍标识 12（⚠️ 国旗是复杂旗帜图案，线描图标集无法表达 ⇒ **待用户裁决**：改文字国名 / 两字母代码，还是自绘国旗图形）。
-
-**经验补充 3 条**：E-16 治理必须同时改「页面」与「数据源」（只改内嵌副本 ⇒ 不可复现 ⇒ 须逐位对拍）· E-17 机检白名单必须由扫描器产出、不可手写（规范化口径漂移）· E-18 「扫过某目录」与「覆盖该目录」是两件事（复核面要按**产物形态**枚举）。
-
-
-### W948（2026-10-25）：内页专题题图续批（8 张线描人物题图·与上批同族·累计 16 张）
-
-> **来源**：用户 2026-10-25 令「再继续帮我做几张素材图」，并要求开工前先问三件事。
->
-> **三问答复**：① 用途与画幅 = **内页专题题图续批 · 3:4 竖版** ② 张数 = **8 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **人物专题扩批**）。
->
-> - **文件**：site/static/images/plate-line-01-jinjiao.webp … plate-line-08-taishanglaojun.webp、assets/promo/plate-set/**、8 个 reader 人物页、Cdsscripts/_w948_*.py、scripts/output/_w948_batch*.json
-
-**承接 W945**：站内线描人物题图由 8 张扩到 **16 张**，规格与画幅完全一致（3:4 · 1200×1600 · 宣纸底 + 单色墨线 + 赭金细节 + 单处朱砂点睛 · 上部 28% 纯纸面留白 · 主体完整全身立像占高五成）。
-
-**母版逐字复用由构造保证**：`scripts/_w948_make_prompts.py` 读上批 `_w945_batch1.json`，取「主体：」之前的 252 字符风格母版直接拼本批 SUBJECT 段 ⇒ 母版不靠人手抄、不靠人眼核对；再由 `_w945_check_prompts.py` 的 `==` 断言二次确认。
-
-**题材**（取经路上的妖怪与神将组，每张一个独占标志物）：牛魔王（牛首 + 混铁棍）、铁扇公主（叶形芭蕉扇 + 短柄缠绳）、蝎子精（上翘蝎尾毒钩 + 倒马毒桩）、金角大王（紫金红葫芦 + 朱红封带）、黄袍怪（狼首 + 金钢琢）、镇元大仙（人形人参果 + 拂尘）、大鹏金翅雕（鹏翼 + 阴阳二气瓶）、太上老君（太极图 + 拂尘）。
-
-**判据扩面**：`_w945_plates_verify.py` 由写死的 8 张清单改为**扫目录取全部 `plate-line-*.png`** ⇒ 一套判据（J1–J9 + 负样本自检）一次覆盖 16 张。
-
-> - **验证**：机器判据 J1–J10 **16/16 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 16 张）+ 两个负样本自检判据可证伪（浓墨渲染型方图 ⇒ 抓 J1/J2/J3/J6；8 px 黑框样本 ⇒ 抓 J8 检出 16 处贯穿暗线）· **J10 在本批首轮实测有效**：精准抓出 2 张模型画出的「左右白边」图（背景差 12.96 / 12.09），其余 14 张 0.04–1.59 无误报 · 人眼 J8 题材与形制逐张核（拼图 + 主体包围盒放大 + 关键部位 3 倍高倍）· 顶部 28% 留白墨量 0.0000–0.0015 · 纸色归一残差 0.17–0.57/255 · 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 20846 链接 0 broken
-> - **状态**：已收官（`88fa5952`·**并发事实**：本批共享面被两个他方提交代提交——CHANGELOG 的 W948 段被 W949 批 `276eaa4b` 带入、台账的 W948 行被 agent-web 批 `29a182ff` 带入；本批不修改他方提交历史，只在本方行与本方段内登记该事实；台账 W948 行已按回填独占规则回填 hash + 状态 + touches）
-> **状态**：**已收官**（W948 62365964·git 反填·共 4 笔·W971 存量回填）
 
 

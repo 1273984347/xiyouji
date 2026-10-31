@@ -40,6 +40,21 @@
     "docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md",
     "pytest.ini",
     "scripts/output/stats-changelog.json",
-    "scripts/output/stats-index.md"
+    "scripts/output/stats-index.md",
+    "STRUCTURE.md",
+    "archive/docs/CHANGELOG-ARCHIVE.md",
+    "archive/docs/W批次编号对账表-ARCHIVE.md",
+    "archive/docs/file-index-ARCHIVE.md",
+    "docs/11-方案报告/README.md",
+    "docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md",
+    "docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md",
+    "docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md",
+    "docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md",
+    "docs/INDEX.md",
+    "scripts/output/_cascade_files_W1065.txt",
+    "scripts/requirements.txt",
+    "site/data/search.html",
+    "site/en/search.html",
+    "docs/00-导读/项目说明.md"
   ]
 }
