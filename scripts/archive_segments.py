@@ -67,13 +67,20 @@ def _wnum(m):
 
 
 def plan(src_text, re_seg, keep):
-    """计算切分点：保留前 keep 个段（最新），迁出其余（最老）。返回 (cut, moved_ws)。"""
+    """计算切分点：保留前 keep 个段（最新），迁出其余（最老）。返回 (cut, moved_ws)。
+
+    W1014 修「未超窗即断言失败」：原实现 `assert len(hits) > keep`——段数**恰等于** keep
+    （级联插入一段后正本正好 110 = 窗口 110）时抛 AssertionError，被 batch_cascade 的
+    `_refresh_window()` 判为「回窗 FAIL」⇒ 级联 exit 2，但体积判据实测三项全 ok（未超窗）。
+    即回窗把「无需回窗」误报成失败，徒令级联收尾返红。改：未超窗时返回 (None, [])（无迁出）。
+    """
     hits = [(_wnum(m), m.start()) for m in re_seg.finditer(src_text)]
     assert hits, "正本未找到任何段（结构异常）"
-    assert len(hits) > keep, "正本段数 %d ≤ keep %d——无段可迁" % (len(hits), keep)
     ws = [w for w, _ in hits]
     assert ws == sorted(ws, reverse=True), "正本段序非严格降序（先修复再归档）"
     assert len(set(ws)) == len(ws), "正本出现重复段号（先修复再归档）"
+    if len(hits) <= keep:
+        return None, []  # 未超窗 → 无段可迁（非失败）
     cut = hits[keep][1]
     moved_ws = [w for w, _ in hits[keep:]]
     return cut, moved_ws
@@ -98,6 +105,10 @@ def move(target, keep, apply, batch_tag):
     a, anl = bc.load(arc_rel)
 
     cut, moved_ws = plan(s, re_seg, keep)
+    if cut is None:
+        # W1014：未超窗 → 无段可迁（正常状态·非失败）——原实现断言失败致级联回窗误报 FAIL
+        print("[SKIP] %s 段数 %d ≤ keep %d——未超窗·无段可迁" % (src_rel, len(re_seg.findall(s)), keep))
+        return []
     moved_text = s[cut:]
     kept_text = s[:cut]
 

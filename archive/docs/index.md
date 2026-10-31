@@ -16,16 +16,18 @@
 - `w550-shot-review/`
 - `复盘报告/`
 
-## 文件（8）
+## 文件（10）
 
 ### Markdown 文档
 
 - `AGENTS-ARCHIVE.md`
+- `CHANGELOG-ARCHIVE-tier2-W400-W559.md`
 - `CHANGELOG-ARCHIVE-tier2.md`
 - `CHANGELOG-ARCHIVE.md`
 - `HANDOVER-ARCHIVE.md`
 - `STRUCTURE-ARCHIVE.md`
 - `W批次编号对账表-ARCHIVE.md`
+- `file-index-ARCHIVE-tier2.md`
 - `file-index-ARCHIVE.md`
 - `w-b-critique.md`
 

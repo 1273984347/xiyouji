@@ -336,8 +336,31 @@ async function main() {
   }
   const results = [];
 
+  // W1066 并发化：原为「逐页 × 逐视口」完全串行（96 页 × 2 视口 × 2s 固定等待
+  // ⇒ 纯等待下限 6.4 分钟·实测远高于此）。capture() 本身**每页独立 newContext**
+  // ⇒ 页面间无共享状态 ⇒ 可安全并发。
+  //   并发度默认 4：CI runner 为 2 vCPU，Playwright 每页需独立 renderer 进程，
+  //   并发过高会 CPU 争抢导致边际收益递减甚至更慢（实测 CONC=8 在 2 vCPU 上
+  //   收益低于线性）。可用 --conc 覆盖。
+  //   失败语义不变：单页异常仍记入 results（error 字段）⇒ --fail-on-issues 照旧阻断。
+  const CONC = (() => {
+    const i = process.argv.indexOf('--conc');
+    return i > -1 ? Math.max(1, parseInt(process.argv[i + 1], 10) || 4) : 4;
+  })();
+  const jobs = [];
   for (const pageInfo of pages) {
     for (const viewportName of ['desktop', 'mobile']) {
+      jobs.push([pageInfo, viewportName]);
+    }
+  }
+  console.log(`并发 ${CONC} · 任务 ${jobs.length} 个（${pages.length} 页 × 2 视口）`);
+
+  let idx = 0;
+  const worker = async () => {
+    while (true) {
+      const i = idx++;
+      if (i >= jobs.length) break;
+      const [pageInfo, viewportName] = jobs[i];
       try {
         const result = await capture(browser, pageInfo, viewportName, config.viewports, outDirs);
         results.push(result);
@@ -351,22 +374,35 @@ async function main() {
         console.error(`✗ ${viewportName.padEnd(7)} ${pageInfo.file.padEnd(35)} ${e.message}`);
       }
     }
-  }
+  };
+  await Promise.all(Array.from({ length: Math.min(CONC, jobs.length) }, worker));
 
   await browser.close();
 
   // Slice full-page screenshots into fixed-height chunks for pixel-level review.
   // W536 安全加固：切片子进程仅在默认输出目录下运行（argv 全字面量，无外部值进入解释器）
+  // W1014 修 fail-open：原实现硬编码 `execFileSync('python', …)` 且异常只 console.error——
+  //   本机 PowerShell 语境 `python` 是应用执行存根（exit 9009），切片静默失败但整链仍报成功，
+  //   审查侧拿到缺 slices/ 的产物却无人知晓。现改：① 走共享候选表 resolvePython()
+  //   （scripts/lib/py_launch.js·与第 43 门禁同源）；② 解析不到解释器或切片非零退出即
+  //   fail-closed 退出 1（对齐 W831 门禁 fail-closed 语义·禁伪装成功）。
   const SLICE_OUT = path.resolve(ROOT, 'scripts', 'output', 'screenshots');
   if (path.resolve(ROOT, config.outputDir) !== SLICE_OUT) {
     console.error('[slice] skipped: outputDir is not the default screenshooter output dir');
   } else {
-  const { execFileSync } = require('child_process');
-  try {
-    execFileSync('python', ['scripts/slice_screenshots.py', '--output-dir', 'scripts/output/screenshots'], { cwd: ROOT, stdio: 'inherit' });
-  } catch (e) {
-    console.error('Screenshot slicing failed:', e.message);
-  }
+    const { execFileSync } = require('child_process');
+    const { resolvePython } = require('./lib/py_launch');
+    const py = resolvePython();
+    if (!py) {
+      console.error('::error::[slice] FAIL 未找到可用 Python3（PYTHON/py -3/python3/python 全不可用）⇒ 切片未执行');
+      process.exit(1);
+    }
+    try {
+      execFileSync(py.cmd, py.args.concat(['scripts/slice_screenshots.py', '--output-dir', 'scripts/output/screenshots']), { cwd: ROOT, stdio: 'inherit' });
+    } catch (e) {
+      console.error(`::error::[slice] FAIL 切片子进程失败（${py.cmd} ${py.args.join(' ')}）：${e.message} ⇒ 截图链判红（不再静默放行）`);
+      process.exit(1);
+    }
   }
 
   // Generate markdown summary

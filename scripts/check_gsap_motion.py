@@ -27,7 +27,24 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CARRIER = ROOT / "site" / "static" / "js" / "motion-gsap.js"
+CARRIER = ROOT / "site" / "static" / "js" / "motion-gsap.js"  # 主载体（J8 接线判据仍指向它）
+
+# W1053 G-04（W1046 方案）：J1-J4/J7 扫描域从单文件扩至 site/static/js 全部自有 js
+# （排除 *.min.js 第三方库）——堵「越规动画写进另一个文件即整体逃逸」。
+# 影子实测（W1053）：10 个自有 js 以现行规则全扫零违例 ⇒ 直接升格，无历史清偿负担。
+# J5/J6（RM 双守卫 / fail-open）仍只对动效载体（含 gsap 引用）生效——非动效件无此义务。
+MIN_LIB_SUFFIX = ".min.js"
+
+
+def carriers():
+    js_dir = CARRIER.parent
+    return sorted(p for p in js_dir.glob("*.js") if not p.name.endswith(MIN_LIB_SUFFIX))
+
+
+def _strip_js_comments(text: str) -> str:
+    """J2 扫描前剥注释：块注释 /* */ 全剥；行注释仅剥「行首空白后的 //」（保 URL 的 //）。"""
+    text = re.sub(r"/\*.*?\*/", " ", text, flags=re.S)
+    return re.sub(r"(?m)^(\s*)//.*$", r"\1", text)
 
 # 允许接入动效的试点页（机检只覆盖本批接入面；推广批再扩清单）
 WIRED_PAGES = [
@@ -87,41 +104,51 @@ def _waivers(text: str):
     return ok, bad, lines
 
 
-def check_carrier() -> list[str]:
-    """返回问题清单（空 = 全过）。"""
-    issues: list[str] = []
-    if not CARRIER.exists():
-        return ["J1 载体缺失：site/static/js/motion-gsap.js"]
+def check_carrier_text(name: str, text: str, node_result=None) -> list[str]:
+    """单文件判定（纯函数·W1053 G-04 可测化）：J1-J7 对自有 js 全适用，J5/J6 仅动效载体。
 
-    text = _read(CARRIER)
+    node_result：调用方注入的 node --check 结果（None=node 不可用 ⇒ 粗检）——node 检查
+    需要真实文件路径，留在编排层（check_carrier_all），纯函数不再引用全局 CARRIER 路径。
+    """
+    issues: list[str] = []
+    is_motion_carrier = "gsap" in text  # 动效载体判据：引用了 gsap
     waived, bad_waive, waive_lines = _waivers(text)
     for rule in bad_waive:
         issues.append("J2 宪法级规则不可豁免：%s 请求 waive（豁免仅对 J3/J4/J7 开放）" % rule)
     for rule in sorted(waived - {"J3", "J4", "J7"}):
         issues.append("豁免规则号不存在的规则：%s（可豁免范围 J3 / J4 / J7）" % rule)
 
-    # J1 语法：node --check 优先（node 缺失则退化为括号/引号平衡粗检）
-    node = None
-    for cand in ("node", "node.exe"):
-        try:
-            r = subprocess.run([cand, "--check", str(CARRIER)], capture_output=True,
-                               text=True, timeout=60)
-            node = r
-            break
-        except (FileNotFoundError, OSError):
-            continue
-    if node is not None:
-        if node.returncode != 0:
-            issues.append("J1 载体 JS 语法错误：%s" % (node.stderr or node.stdout).strip()[:200])
+    # J1 语法：node --check 结果由调用方注入；None=node 不可用 ⇒ 粗检兜底
+    if not is_motion_carrier:
+        # 非动效件：只查语法（J1）与禁词（J2·全适用）——J3-J7 语义不适用
+        if node_result is None:
+            if text.count("{") != text.count("}"):
+                issues.append("J1 %s 花括号不平衡（node 不可用·粗检）" % name)
+            if text.count("(") != text.count(")"):
+                issues.append("J1 %s 圆括号不平衡（node 不可用·粗检）" % name)
+        elif node_result.returncode != 0:
+            issues.append("J1 %s JS 语法错误：%s"
+                          % (name, (node_result.stderr or node_result.stdout).strip()[:200]))
+        stripped = _strip_js_comments(text)
+        for pat, desc in BANNED_LITERALS:
+            hits = re.findall(pat, stripped, flags=re.I)
+            if hits:
+                issues.append("J2 %s 禁用字面量命中 %d 处：%s" % (name, len(hits), desc))
+        return issues
+
+    if node_result is not None:
+        if node_result.returncode != 0:
+            issues.append("J1 载体 JS 语法错误：%s" % (node_result.stderr or node_result.stdout).strip()[:200])
     else:
         if text.count("{") != text.count("}"):
             issues.append("J1 载体花括号不平衡（node 不可用·粗检）")
         if text.count("(") != text.count(")"):
             issues.append("J1 载体圆括号不平衡（node 不可用·粗检）")
 
-    # J2 禁用字面量
+    # J2 禁用字面量（W1053 G-04：扫描前剥注释——堵「写注释里再拼出来」与注释误伤）
+    stripped2 = _strip_js_comments(text)
     for pat, desc in BANNED_LITERALS:
-        hits = re.findall(pat, text, flags=re.I)
+        hits = re.findall(pat, stripped2, flags=re.I)
         if hits:
             issues.append("J2 禁用字面量命中 %d 处：%s" % (len(hits), desc))
 
@@ -170,9 +197,40 @@ def check_carrier() -> list[str]:
     return issues
 
 
+def wired_pages() -> list[str]:
+    """J8 接线清单 glob 派生（W1053 G-04）：扫全站 html 引用 motion-gsap.js 的页面，免手维护。"""
+    out = []
+    for p in (ROOT / "site").rglob("*.html"):
+        try:
+            if "motion-gsap.js" in p.read_text(encoding="utf-8", errors="ignore"):
+                out.append(p.relative_to(ROOT).as_posix())
+        except OSError:
+            continue
+    return sorted(out)
+
+
+def _node_check(p: Path):
+    """node --check 单文件（node 缺失返回 None ⇒ 粗检兜底）。"""
+    for cand in ("node", "node.exe"):
+        try:
+            return subprocess.run([cand, "--check", str(p)], capture_output=True,
+                                  text=True, timeout=60)
+        except (FileNotFoundError, OSError):
+            continue
+    return None
+
+
+def check_carrier_all() -> list[str]:
+    """W1053 G-04：对全部自有 js 跑判据（node --check 全件适用·非动效件也走真实语法门）。"""
+    issues: list[str] = []
+    for p in carriers():
+        issues.extend(check_carrier_text(p.name, _read(p), node_result=_node_check(p)))
+    return issues
+
+
 def check_wiring() -> list[str]:
     issues: list[str] = []
-    for rel in WIRED_PAGES:
+    for rel in wired_pages():
         p = ROOT / rel
         if not p.exists():
             issues.append("J8 试点页缺失：%s" % rel)
@@ -192,19 +250,20 @@ def check_wiring() -> list[str]:
 
 
 def run_gate() -> int:
-    issues = check_carrier() + check_wiring()
+    issues = check_carrier_all() + check_wiring()
     # 豁免不静默：逐条打印（规则号 + 原文行），供台账/评审复核
-    if CARRIER.exists():
-        _ok, _bad, waive_lines = _waivers(_read(CARRIER))
+    for p in carriers():
+        _ok, _bad, waive_lines = _waivers(_read(p))
         for ln in waive_lines:
-            print("  WAIVE %s：%s" % (CARRIER.name, ln))
+            print("  WAIVE %s：%s" % (p.name, ln))
     print("---- 第 50 门禁 GSAP 写法：%s" % ("FAIL" if issues else "PASS"))
     if issues:
         print("GSAP 动效写法门禁：%d 项 FAIL" % len(issues))
         for it in issues:
             print("  FAIL %s" % it)
         return 1
-    print("GSAP 动效写法门禁通过：载体 8 项判据 + %d 个接入页接线检查全绿" % len(WIRED_PAGES))
+    print("GSAP 动效写法门禁通过：自有 js %d 件全判据 + %d 个接入页（glob 派生）接线检查全绿"
+          % (len(carriers()), len(wired_pages())))
     return 0
 
 
@@ -240,34 +299,36 @@ BAD_CASES = [
 
 
 def self_test() -> int:
-    import tempfile
     fails = 0
     cases = 0
-    with tempfile.TemporaryDirectory() as td:
-        good = Path(td) / "good.js"
-        good.write_text(GOOD, encoding="utf-8")
-        global CARRIER
-        orig = CARRIER
-        CARRIER = good
-        try:
-            issues = check_carrier()
-            cases += 1
-            ok = not issues
-            print("  %s case1 正样本应全过%s" % ("PASS" if ok else "FAIL",
-                                            "" if ok else "：%s" % issues[:2]))
-            fails += 0 if ok else 1
-            for i, (name, text) in enumerate(BAD_CASES, start=2):
-                bad = Path(td) / ("bad%d.js" % i)
-                bad.write_text(text, encoding="utf-8")
-                CARRIER = bad
-                iss = check_carrier()
-                caught = bool(iss)
-                cases += 1
-                print("  %s case%d 负样本应被抓：%s%s" % ("PASS" if caught else "FAIL", i, name,
-                                                          "" if caught else "（未被抓住）"))
-                fails += 0 if caught else 1
-        finally:
-            CARRIER = orig
+    # W1053 G-04：改走纯函数 check_carrier_text（无需 monkeypatch 临时文件）
+    issues = check_carrier_text("good.js", GOOD)
+    cases += 1
+    ok = not issues
+    print("  %s case1 正样本应全过%s" % ("PASS" if ok else "FAIL",
+                                    "" if ok else "：%s" % issues[:2]))
+    fails += 0 if ok else 1
+    for i, (name, text) in enumerate(BAD_CASES, start=2):
+        iss = check_carrier_text("bad%d.js" % i, text)
+        caught = bool(iss)
+        cases += 1
+        print("  %s case%d 负样本应被抓：%s%s" % ("PASS" if caught else "FAIL", i, name,
+                                                  "" if caught else "（未被抓住）"))
+        fails += 0 if caught else 1
+    # G-04 新增：剥注释防线两向断言——注释内禁词不误伤 + 代码区禁词仍命中
+    cases += 1
+    ok_a = not any("J2" in it for it in check_carrier_text("hidden.js", "/* parallax 在注释 */\nvar x = 1;\n"))
+    print("  %s case8a 注释内禁词不误伤（剥注释防线）" % ("PASS" if ok_a else "FAIL"))
+    fails += 0 if ok_a else 1
+    cases += 1
+    ok_b = any("J2" in it for it in check_carrier_text("code.js", "var parallax = 1;\n"))
+    print("  %s case8b 代码区禁词仍命中" % ("PASS" if ok_b else "FAIL"))
+    fails += 0 if ok_b else 1
+    cases += 1
+    ok = not any(it.startswith(("J3", "J4", "J5", "J6", "J7"))
+                 for it in check_carrier_text("plain.js", "var util = 1;\n"))
+    print("  %s case9 非动效件只受 J1/J2 约束（J5/J6 不适用）" % ("PASS" if ok else "FAIL"))
+    fails += 0 if ok else 1
     print("self-test: %d/%d 通过" % (cases - fails, cases))
     return 1 if fails else 0
 

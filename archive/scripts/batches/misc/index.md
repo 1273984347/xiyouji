@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（149）
+## 文件（150）
 
 ### Markdown 文档
 
@@ -117,6 +117,7 @@
 - `_s7_footnote_trim_20261011.py`
 - `_slop_scan_demo.py`
 - `_sync_c_after_a_fix.py`
+- `_tmp_chap_sheet.py`
 - `_tmpe_blankscan.py`
 - `_tmpe_groups.py`
 - `_tmpe_sheets.py`

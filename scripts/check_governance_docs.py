@@ -51,7 +51,7 @@ def footer_freshness_issues(handoff_text, newest_wnum):
 def main():
     issues = []
 
-    prompt = read_rel("新Agent启动Prompt.md")
+    prompt = read_rel("docs/00-导读/新Agent启动Prompt.md")
     handoff = read_rel("HANDOVER.md")
     changelog = read_rel("CHANGELOG.md")
 
@@ -96,7 +96,7 @@ def main():
 
     # 6. §11.5 登记的 10 份治理文档均含维护契约
     gov_docs = [
-        "新Agent启动Prompt.md", "HANDOVER.md", "AGENTS.md", "STRUCTURE.md",
+        "docs/00-导读/新Agent启动Prompt.md", "HANDOVER.md", "AGENTS.md", "STRUCTURE.md",
         "CHANGELOG.md", "DESIGN.md", "README.md", "docs/00-导读/项目说明.md",
         "scripts/output/file-index.md", "docs/10-方法论沉淀/README.md",
     ]
@@ -117,5 +117,25 @@ def main():
     return 0
 
 
+def _self_test():
+    """W1053 G-06：footer_freshness_issues 注入式三例（链首一致绿/不一致红/无条目红）。"""
+    ok_all = True
+    good = "最后更新：2026-10-31（W1052 标题）·2026-10-30（W1051 旧）\n"
+    r = footer_freshness_issues(good, "1052")
+    print("%s  T1 链首一致放行（G-06）" % ("PASS" if not r else "FAIL"))
+    ok_all &= not r
+    bad = good.replace("（W1052 标题）", "（W1050 标题）")
+    r = footer_freshness_issues(bad, "1052")
+    print("%s  T2 链首滞后必红（G-06）" % ("PASS" if r else "FAIL"))
+    ok_all &= bool(r)
+    r = footer_freshness_issues("无更新行文本", "1052")
+    print("%s  T3 无条目必红（G-06）" % ("PASS" if r else "FAIL"))
+    ok_all &= bool(r)
+    print("---- governance-docs self-test：%d/3 通过 ----" % (3 if ok_all else 0))
+    return 0 if ok_all else 1
+
+
 if __name__ == "__main__":
+    if "--self-test" in sys.argv:
+        sys.exit(_self_test())
     sys.exit(main())

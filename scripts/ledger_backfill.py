@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import inspect
 import os
 import re
 import subprocess
@@ -138,7 +139,32 @@ def find_row(lines: list[str], wnum: int) -> int:
     return -1
 
 
-def cmd_backfill(args, path: str) -> int:
+def _resolve(explicit, auto):
+    """取值优先级：**显式值优先**，显式缺失才用机器反填值。
+
+    返回 (值, 是否产生变更)。
+
+    W1042 根因修法：原实现把「取值优先级」与「是否产生变更」耦合在同一个
+    `if args.X is None:` 判断里 —— 显式给了 --status/--hash 时，既不取自动值、
+    **也不记录 change** ⇒ 显式值被**静默吞掉**（帮助文案写「显式可覆盖」·
+    实测 W1015 回填时状态列没写上，只能绕走 else 分支）。同族缺陷：
+    `--cascade` 只在 else 分支处理 ⇒ `--from-git --cascade X` 也被吞。
+
+    本函数把两件事彻底分离：显式值有值 ⇒ 显式值生效并产生变更；
+    显式值缺失 ⇒ 用机器反填值（若有）并产生变更；两者皆无 ⇒ 不产生变更。
+    """
+    if explicit is not None:
+        return explicit, True
+    if auto is not None:
+        return auto, True
+    return None, False
+
+
+def cmd_backfill(args, path: str, commit_index=None) -> int:
+    """回填台账某行的 hash/级联hash/状态/touches 列。
+
+    commit_index：可注入的提交索引（自测用·默认 None ⇒ 现场跑 git log）。
+    """
     lines = read_ledger(path)
     idx = find_row(lines, args.w)
     if idx < 0:
@@ -169,30 +195,31 @@ def cmd_backfill(args, path: str) -> int:
         return 1
 
     changes = []
+    auto_status = auto_hash = auto_cascade = None
     if args.from_git:
         # P-43-01 后半：状态/hash 由 git 反填（机器事实源·人工不再手写「已收官（hash…）」）。
-        # 显式 --hash/--status 仍可覆盖（机器反填是默认值不是强制值）。
-        # 注意：此处变量名用 cidx——cmd_backfill 的 idx 是行下标（W956 首版曾被 dict 遮蔽·
-        # 干跑路径不落盘故未暴露，实跑在 lines[idx] 处 TypeError）
-        cidx = git_commit_index()
+        # 显式 --hash/--status/--cascade 仍可覆盖（机器反填是默认值不是强制值）——
+        # W1042 修：原先用 `if args.X is None:` 同时管「取自动值」与「记 change」，
+        # 显式值被静默吞掉；现改为「先算自动值·再按显式优先统一决议」。
+        cidx = commit_index if commit_index is not None else git_commit_index()
         auto_status = compose_git_status(args.w, cidx)
-        if auto_status is None:
+        if args.w in cidx:
+            auto_hash = cidx[args.w][1]
+        if auto_status is None and args.status is None:
             print("FAIL  W%03d 在 git 无批次标签提交（type(w###): 形态）——不能反填收官状态"
                   "（批次可能仍在途·先落库再回填）" % args.w)
             return 1
-        if args.status is None:
-            args.status = auto_status
-            changes.append(("status", loc["status"], args.status))
-        if args.hash is None:
-            args.hash = cidx[args.w][1]
-            changes.append(("hash", loc["hash"], args.hash))
-    else:
-        if args.hash is not None:
-            changes.append(("hash", loc["hash"], args.hash))
-        if args.cascade is not None:
-            changes.append(("cascade", loc["cascade"], args.cascade))
-        if args.status is not None:
-            changes.append(("status", loc["status"], args.status))
+        if auto_hash is None and args.hash is None:
+            print("FAIL  W%03d 在 git 无批次标签提交——不能反填 hash（先落库再回填）" % args.w)
+            return 1
+
+    # 统一决议：显式优先，其次机器反填（W1042 根因修法·三条列同一套语义）
+    for name, explicit, auto in (("status", args.status, auto_status),
+                                 ("hash", args.hash, auto_hash),
+                                 ("cascade", args.cascade, auto_cascade)):
+        val, changed = _resolve(explicit, auto)
+        if changed:
+            changes.append((name, loc[name], val))
     if args.touches is not None:
         changes.append(("touches", loc["touches"], args.touches))
     if not changes:
@@ -253,6 +280,7 @@ def _self_test() -> int:
         "# 台账样本\n\n"
         "| W930 | 布局批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | a.py · b.md |\n"
         "| W929 | 素材批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | c.py |\n"
+        "| W932 | 工具批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | e.py |\n"
     )
     path = os.path.join(tmpdir, "ledger.md")
     with open(path, "w", encoding="utf-8", newline="") as f:
@@ -305,22 +333,82 @@ def _self_test() -> int:
         fails.append("compose_git_status 无提交号必须返回 None（不可反填）")
     if wnum_commit_index(["chore: 提及 W940 教训但不带批次标签"]):
         fails.append("散文提及 W 号（无 type(w###): 标签）不得计入提交索引")
+    # W1042 根因修复回归锁：--from-git 分支**不得吞掉**显式 --status/--hash/--cascade
+    # （原实现把「取值优先级」与「是否产生变更」耦合在同一个 `is None` 判断里 ⇒ 显式值静默丢失；
+    #   同族缺陷：--cascade 只在 else 分支处理 ⇒ --from-git --cascade X 也被吞）
+    _idx932 = wnum_commit_index(["abc1234 feat(w932): 主体提交", "def5678 chore(w932): 收官回填"])
+
+    def _row932():
+        return next(row for row in read_ledger(path) if row.startswith("| W932 "))
+
+    # 正例 A：--from-git 纯自动 ⇒ status + hash 均反填
+    rc = cmd_backfill(argparse.Namespace(w=932, hash=None, cascade=None, status=None,
+                                        touches=None, expect=None, verify=None, dry_run=False,
+                                        from_git=True),
+                      path, _idx932)
+    if rc != 0:
+        fails.append("正例A --from-git 自动反填应成功")
+    else:
+        if "abc1234" not in _row932():
+            fails.append("正例A 自动反填 hash 应为首笔 abc1234")
+        if "共 2 笔" not in _row932():
+            fails.append("正例A 自动反填 status 应含「共 2 笔」")
+    # 正例 B：--from-git + 显式 --status ⇒ **显式值生效**（本批根因·原实现静默吞掉）
+    rc = cmd_backfill(argparse.Namespace(w=932, hash=None, cascade=None,
+                                        status="**已收官**（显式覆盖）", touches=None,
+                                        expect=None, verify=None, dry_run=False, from_git=True),
+                      path, _idx932)
+    if rc != 0:
+        fails.append("正例B --from-git + 显式 --status 应成功")
+    elif "显式覆盖" not in _row932():
+        fails.append("正例B 显式 --status 必须生效（原实现被静默吞）")
+    # 正例 C：--from-git + 显式 --hash ⇒ 显式 hash 生效，status 仍走自动
+    rc = cmd_backfill(argparse.Namespace(w=932, hash="zzz9999", cascade=None, status=None,
+                                        touches=None, expect=None, verify=None, dry_run=False,
+                                        from_git=True),
+                      path, _idx932)
+    if rc != 0:
+        fails.append("正例C --from-git + 显式 --hash 应成功")
+    elif "zzz9999" not in _row932():
+        fails.append("正例C 显式 --hash 必须生效")
+    # 正例 D：--from-git + 显式 --cascade ⇒ 级联列被回填（同族吞参修复）
+    rc = cmd_backfill(argparse.Namespace(w=932, hash=None, cascade="cas7777", status=None,
+                                        touches=None, expect=None, verify=None, dry_run=False,
+                                        from_git=True),
+                      path, _idx932)
+    if rc != 0:
+        fails.append("正例D --from-git + 显式 --cascade 应成功")
+    elif "cas7777" not in _row932():
+        fails.append("正例D 显式 --cascade 必须生效（原实现在 --from-git 下被吞）")
+    # 负例 4：--from-git 且该 W 无批次提交且未显式给 status ⇒ 必红（不可凭空反填收官状态）
+    rc = cmd_backfill(argparse.Namespace(w=929, hash=None, cascade=None, status=None,
+                                        touches=None, expect=None, verify=None, dry_run=False,
+                                        from_git=True),
+                      path, _idx932)
+    if rc == 0:
+        fails.append("负例4 无批次提交且无显式状态必须判红")
     # 正例 3：追加认领行（纯追加）
     rc = cmd_append_claim(argparse.Namespace(w=931, desc="机制批", session="主会话", touches="x.py"),
                            path)
     if rc != 0:
         fails.append("正例3 追加认领行应成功")
-    # 负例 4：重复认领同号 → 必须红
+    # 负例 5：重复认领同号 → 必须红
     rc = cmd_append_claim(argparse.Namespace(w=931, desc="重复", session="主会话", touches="x.py"),
                            path)
     if rc == 0:
-        fails.append("负例4 重复认领必须判红")
+        fails.append("负例5 重复认领必须判红")
 
     print()
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：3 正例绿 + 4 负例红 + git 反填纯函数 3 例（判据可证伪）")
+    # 用例数动态统计（禁硬编码——W1042：硬编码汇总数会在加用例后失同步，
+    # 「3 正例」实为 7 是典型形态）⇒ 从自身源码数「正例/负例」失败消息条数。
+    _src = inspect.getsource(_self_test)
+    _pos = len(re.findall(r'fails\.append\("正例', _src))
+    _neg = len(re.findall(r'fails\.append\("负例', _src))
+    print("自测通过：%d 条正例断言绿 + %d 条负例断言红 + git 反填纯函数 3 例（判据可证伪）"
+          % (_pos, _neg))
     return 0
 
 

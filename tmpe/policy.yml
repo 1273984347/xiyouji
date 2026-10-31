@@ -21,7 +21,7 @@
     }
   },
   "classify_rules": [
-    { "name": "w_batch", "match": "^w\\d{3}", "bucket": "w###", "note": "批次桶" },
+    { "name": "w_batch", "match": "^_?w\\d{3,4}", "bucket": "w###", "note": "批次桶（W1014：`_?` 含下划线形态 _wNNNN_ 批号工作件·原 ^w\\d{3} 认不出致批号件全落 _misc 且三位号漏四位号）" },
     { "name": "bak_generic", "match": "bak", "bucket": "_bak", "note": "备份代" },
     { "name": "profile", "match": "profile|_edge_cdp", "bucket": "_profile", "note": "工具 profile/cache" },
     { "name": "review_artifacts", "match": "review|_png|ocr|shot|pages|_edge", "bucket": "_shot", "note": "审查产物" },

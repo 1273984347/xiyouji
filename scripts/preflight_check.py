@@ -25,7 +25,6 @@ import argparse
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 import urllib.request
@@ -382,7 +381,9 @@ def step_env():
     lines = []
     ok = True
     lines.append(f"python（本脚本）={sys.version.split()[0]}")
-    launcher = "py" if shutil.which("py") else sys.executable
+    # W1014：统一 sys.executable——上方报的是本脚本解释器版本，pytest/ruff 必须用**同一**
+    # 解释器测才自洽（原 `py` if which 属「按 PATH 形状挑」·且可能与 sys.version 不同体·AGENTS §4.3）
+    launcher = sys.executable
     for name, cmd in (("pytest", [launcher, "-m", "pytest", "--version"]),
                       ("ruff", [launcher, "-m", "ruff", "--version"])):
         try:
@@ -632,6 +633,26 @@ def main():
             print("WARN  " + _f)
     except Exception as _exc2:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"WARN  数字断言对账器不可用（{_exc2}）——本回合跳过（禁静默）")
+
+    # 5.75) 对抗式审查触发器（W1000）：≥20 批未派发即提示（只提示不拦截·模板见 docs/agent/adversarial-audit-prompt.md）
+    try:
+        import check_audit_trigger as _cat
+
+        for _line in _cat.notice_lines():
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc3:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  对抗审查触发器不可用（{_exc3}）——本回合跳过（禁静默）")
+
+    # 5.8) Backlog 登记面对账触发器（W1021）：≥25 批未对账即提示（只提示不拦截）。
+    # 起因：W1019 连中两条「已做完仍挂待办」，W1020 全量对账实测滞后率 41%（12/29）。
+    # 判据与对抗审查触发器同族（token 认状态列 / 取 max 不取文件序 / 归档同扫）。
+    try:
+        import check_backlog_review as _cbr
+
+        for _line in _cbr.notice_lines():
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc4:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  Backlog 对账触发器不可用（{_exc4}）——本回合跳过（禁静默）")
 
     print("== 结论 ==")
     if problems:

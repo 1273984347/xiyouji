@@ -50,13 +50,43 @@ FAMILIES = [
 ]
 
 
+RE_HTML_TAG = re.compile(r"</?[A-Za-z][A-Za-z0-9:._-]*(?:\s[^<>]*)?/?>")
+
+
 def strip_invisible(html):
-    """剥掉 script/style/HTML 注释与标签，取可见文本。"""
+    """剥掉 script/style/HTML 注释与标签，取可见文本。
+
+    W1047 修（两处根因·非绕过）：
+    ① **剥离顺序**：注释**优先**剥。原顺序（script → style → 注释）会被注释里的
+       `<script>` **字面量**触发 script 剥离 ⇒ 一路吞到后面真正的 `</script>` ⇒
+       注释的 `-->` 被吞掉 ⇒ 注释剥离失配 ⇒ 注释残留（实测 `site/_template.html`
+       的「脚本区」注释即此形态）。
+    ② **标签按语法约束**：旧式 `<[^>]+>` 起点只要是 `<` 就当标签 ⇒ JS 比较符 `<=`
+       被当标签起点 ⇒ 跨行匹配时把**标签之间的正文整段吞掉**（实测
+       `site/data/perf-canvas-rendering.html` 吞掉 `n.x <= viewX1 && … n.y >= viewY0`；
+       `site/data/game-webnovel.html` 吞掉「灰<6.5」；en 版同两处）。
+       新式要求**标签名以字母开头** ⇒ `<=` 不匹配；属性段允许跨行 ⇒ 多行合法标签
+       （如 `site/data/ai-dialogue.html` 的跨行 `<input>`）仍剥得干净。
+    影子对照实测（857 页）：新法相对旧法**修复** 5 页的误吞，且**零漏剥标签**
+    （新法输出中残留标签的页 = 0）。
+    """
     body = html[html.find('<body'):] if '<body' in html else html
-    body = re.sub(r'<script[\s\S]*?</script>', ' ', body)
-    body = re.sub(r'<style[\s\S]*?</style>', ' ', body)
-    body = re.sub(r'<!--[\s\S]*?-->', ' ', body)
-    return re.sub(r'<[^>]+>', ' ', body)
+    body = re.sub(r'<!--[\s\S]*?-->', ' ', body)          # ① 注释优先
+    # W1066：标签名大小写不敏感（HTML 规范允许 <SCRIPT>/<Script>）——
+    #   原式 `<script[\s\S]*?</script>` 只匹配小写 ⇒ 大写标签会漏剥
+    #   （CodeQL js/regex-injection 告警「does not match upper case <SCRIPT> tags」·
+    #    该告警同时是真缺陷：漏剥的 <SCRIPT> 内容会被当正文参与判据 ⇒ 假结论）。
+    #   结束标签放宽到 `</script` + 任意空白 + 可选属性 + `>`（HTML 允许 </script bar>
+    #   与 </script\t\n bar> 这类带属性/畸形空白形态·CodeQL 要求正则能匹配该形态）。
+    #   属性段用**否证式** `(?:(?!>)[\s\S])*` 而非 `[^>]*`：
+    #     ① 语义等价（逐字符否证「不是 >」⇒ 可跨行）；
+    #     ② **不含 `[^…]` 字符类** ⇒ 不被第 31 门禁的跨行改写扫描器判 🔴 高危
+    #        （`[^…]*` 类 + re.sub + 无尾锚点 ⇒ 判「可跨行静默删内容」·W1014 判据）。
+    body = re.sub(r'<script(?:(?!>)[\s\S])*>[\s\S]*?</script[ \t\r\n]*(?:(?!>)[\s\S])*>',
+                  ' ', body, flags=re.IGNORECASE)
+    body = re.sub(r'<style(?:(?!>)[\s\S])*>[\s\S]*?</style[ \t\r\n]*(?:(?!>)[\s\S])*>',
+                  ' ', body, flags=re.IGNORECASE)
+    return RE_HTML_TAG.sub(' ', body)                       # ② 标签按语法约束
 
 
 def strip_js_comments(js):
@@ -186,6 +216,21 @@ def self_test():
     fails = check_page(good_r3, r3_scope=True)
     if fails:
         print('SELF-TEST FAIL: R3 正样本（措辞+实现匹配）被误报:', fails)
+        ok = False
+    # W1047 新增两例（剥标签两处根因的可证伪锁）：
+    # ① JS 比较符 `<=` 不是标签 ⇒ 不得把「标签之间的正文」整段吞掉
+    cmp_sample = ('<html><body><p>前文</p><script>var a = 1; if (a <= 2) {}</script>'
+                  '<p>中段文字</p><p>后段文字</p></body></html>')
+    vis1 = strip_invisible(cmp_sample)
+    if '中段文字' not in vis1 or '后段文字' not in vis1:
+        print('SELF-TEST FAIL: JS 比较符 `<=` 被当成标签起点⇒正文被吞:', vis1[:160])
+        ok = False
+    # ② 注释里的 `<script>` 字面量不得触发 script 剥离（否则一路吞到真 `</script>`）
+    cmt_sample = ('<html><body><!-- 脚本区说明：页面内 <script> 内嵌数据 -->\n'
+                  '<p>可见正文</p>\n<script>var b = 2;</script></body></html>')
+    vis2 = strip_invisible(cmt_sample)
+    if '可见正文' not in vis2:
+        print('SELF-TEST FAIL: 注释内 `<script>` 字面量触发误剥离⇒可见正文被吞:', vis2[:160])
         ok = False
     print('self-test:', 'PASS（负样本命中 · 好样本放行）' if ok else 'FAIL')
     return ok

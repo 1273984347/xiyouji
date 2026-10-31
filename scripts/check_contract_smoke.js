@@ -57,29 +57,45 @@ function selfTest() {
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const results = [];
-  for (const rel of pages) {
-    const errs = [];
-    const page = await ctx.newPage();
-    page.on('pageerror', e => errs.push(String(e.message).slice(0, 100)));
-    let shapes = 0;
-    try {
-      await page.goto('file:///' + path.join(SITE, rel).replace(/\\/g, '/'), { timeout: 30000 });
-      await page.waitForLoadState('load');
-      await page.waitForTimeout(600);
-      await page.evaluate(async () => {
-        const step = window.innerHeight;
-        for (let y = 0; y < document.body.scrollHeight; y += step) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 70)); }
-        window.scrollTo(0, 0);
-      });
-      await page.waitForTimeout(300);
-      shapes = await page.evaluate(() => document.querySelectorAll('svg rect, svg circle, svg path, svg polygon, svg ellipse, svg polyline, svg line').length);
-    } catch (e) {
-      errs.push('GOTO ' + String(e).slice(0, 80));
+  // W1066：并发化——原为逐页串行（每页 goto + 600ms + 滚动 ⇒ 全站 857 页约 15–35 分钟，
+  //   且在 CI 的每个暗色分片里各跑一遍 ⇒ 4 倍重复浪费·实测是整个 job 的墙钟大头）。
+  //   本脚本用**同一 context 的多 page 并行**（与 _audit_render_states.js 同款 worker 模式）：
+  //   每页独立 newPage ⇒ 页面间无共享状态 ⇒ 可安全并发；
+  //   失败语义不变（单页异常仍记入 results.errors ⇒ 判红）。
+  const CONC = (() => {
+    const i = process.argv.indexOf('--conc');
+    return i > -1 ? Math.max(1, parseInt(process.argv[i + 1], 10) || 6) : 6;
+  })();
+  let idx = 0;
+  const worker = async () => {
+    while (true) {
+      const i = idx++;
+      if (i >= pages.length) break;
+      const rel = pages[i];
+      const errs = [];
+      const page = await ctx.newPage();
+      page.on('pageerror', e => errs.push(String(e.message).slice(0, 100)));
+      let shapes = 0;
+      try {
+        await page.goto('file:///' + path.join(SITE, rel).replace(/\\/g, '/'), { timeout: 30000 });
+        await page.waitForLoadState('load');
+        await page.waitForTimeout(600);
+        await page.evaluate(async () => {
+          const step = window.innerHeight;
+          for (let y = 0; y < document.body.scrollHeight; y += step) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 70)); }
+          window.scrollTo(0, 0);
+        });
+        await page.waitForTimeout(300);
+        shapes = await page.evaluate(() => document.querySelectorAll('svg rect, svg circle, svg path, svg polygon, svg ellipse, svg polyline, svg line').length);
+      } catch (e) {
+        errs.push('GOTO ' + String(e).slice(0, 80));
+      }
+      await page.close();
+      results.push({ page: rel, shapes, errors: errs.length });
+      console.log(`  ${rel} shapes=${shapes} errors=${errs.length}`);
     }
-    await page.close();
-    results.push({ page: rel, shapes, errors: errs.length });
-    console.log(`  ${rel} shapes=${shapes} errors=${errs.length}`);
-  }
+  };
+  await Promise.all(Array.from({ length: Math.min(CONC, pages.length) }, worker));
   await browser.close();
 
   if (process.argv.includes('--update-baseline')) {

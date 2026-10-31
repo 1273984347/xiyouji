@@ -1,0 +1,16 @@
+{
+ "batch": "W1032",
+ "date": "2026-10-30",
+ "title": "W1032 编制表环境依赖纠错（mavis 假设撤回）",
+ "desc": "编制表环境依赖纠错：实测现环境连接器与技能清单，撤回旧环境 CLI 依赖并补环境差异声明与坑位",
+ "head_entry": "2026-10-30（W1032 环境依赖纠错）",
+ "head_sentence": "环境依赖纠错：实测现环境连接器为零，撤回旧环境命令行依赖并标注挂位方法论跨环境不变",
+ "changelog_body": "\n\n> **来源**：用户 2026-10-30 追问「为什么需要 mavis？」——这一问直接推翻了我上一批的结论。\n>\n> **我错在哪**：上一批说「连接器与 Agent 清单待有 `mavis` 环境时重核」。事实是 `mavis` 是 **2026-10-20 那套环境的 CLI**（T05 计划里写的 `mavis mcp create`），**现环境不需要它**——我把旧文档的依赖假设当成了现状汇报，没先问一句「现在有什么工具」。\n>\n> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、docs/agent/pitfalls.md、scripts/output/_w1032_spec.json、scripts/output/file-index.md、site/index.html\n\n**实测（现环境）**：`list_installed_plugins` → **No connectors installed（连接器 0 个）**；`skill_management list` → **用户级技能 2 个**（`dev-god` / `karpathy-guidelines`）。\n对照编制表记载的「16 个 App 工具 + 12 项技能」——这不是「数据过期」，是**环境换代**。\n\n**处置**：① 编制表 §4 加「环境差异声明」——表内 `mavis-doctor` / `superpowers:*` / `browser-use:*` / `code-review` / `diagram-design` / `deep-research` 等标注**属旧环境·现不可用**；「16 个 App 工具」标为旧环境快照。② **保留挂位方法论**：哪类能力该落哪个位（器具→器物官、检索→千里眼、验证→谛听）这条映射**跨环境不变**，变的只是具体工具名——照抄名字必踩空，按位找当下工具才有效。\n\n**坑表补第 123 条**（总 122→123·流程主题 34→35）：**文档里的操作步骤绑定当时的工具环境，环境一换步骤即失效，而文档不会自己告诉你**。⇒ 引用旧文档的步骤前，先确认它依赖的工具在当前环境是否存在；写「待某工具重核」这类结论前，先搜一遍当前可用的等效接口。\n\n**验证**：C5e 坑表分项对账（26/6/26/19/11/35 = 123）通过 · 全量门禁 57 段核心全绿。\n\n> - **状态**：已收官（环境差异声明入表·坑表第 123 条入库；`mavis` 依赖结论已撤回）",
+ "milestone_block": "- **W1032 编制表环境依赖纠错**：\n  - 追问「为什么需要 mavis」→ 实测现环境**连接器 0 个、用户级技能 2 个**，`mavis` 属旧环境不需要\n  - 编制表 §4 加环境差异声明：旧工具名标不可用，保留「能力类别→编制位」的挂位方法论\n  - 坑表第 123 条：文档操作步骤绑定当时工具环境，环境一换即失效且文档不自报",
+ "agents_note": "2026-10-30（W1032）环境依赖纠错：旧文档的操作步骤绑定旧工具，环境换了就失效且不自报。",
+ "file_index_rows": [
+  "| docs/00-导读/W批次编号对账表.md | W1032 | 本批新增/修改 |",
+  "| scripts/output/_vermilion_solid_cache.json | W1032 | 本批新增/修改 |",
+  "| scripts/output/_w1032_spec.json | W1032 | 本批新增/修改 |"
+ ]
+}

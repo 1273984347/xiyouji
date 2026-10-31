@@ -1,13 +1,13 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-10-27T23:19:08",
+  "_generated": "2026-10-31T15:16:46",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
     "generator": "scripts/stats.py",
     "introduced_by": "W505",
-    "last_changed_by": "W505",
-    "value": 615
+    "last_changed_by": "1011",
+    "value": 616
   },
   "a2_docs": {
     "domain": "docs/06-个人随笔/*.md（排除 README）",
@@ -34,8 +34,8 @@
     "domain": "docs/04-文化与历史背景/*.md（排除 README）",
     "generator": "scripts/stats.py",
     "introduced_by": "W904",
-    "last_changed_by": "W904",
-    "value": 34
+    "last_changed_by": "1011",
+    "value": 35
   },
   "a6_docs": {
     "domain": "docs/05-诗词歌赋/*.md（排除 README）",
@@ -62,8 +62,8 @@
     "domain": "scripts/verify_delivery.py「第 N 槽/门禁」max",
     "generator": "scripts/stats.py",
     "introduced_by": "W493",
-    "last_changed_by": "W961",
-    "value": 50
+    "last_changed_by": "1011",
+    "value": 52
   },
   "html_total": {
     "domain": "site/**/*.html（递归全站）",
@@ -71,6 +71,13 @@
     "introduced_by": "W459",
     "last_changed_by": "W459",
     "value": 857
+  },
+  "icon_allowlist_entries": {
+    "domain": "scripts/output/_w949_icon_field_allowlist.json 顶层数组长度",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W1053",
+    "last_changed_by": "W1053",
+    "value": 71
   },
   "inline_css_pages": {
     "domain": "site 全树含 INLINED 标记页",
@@ -90,22 +97,22 @@
     "domain": "docs/10-方法论沉淀/*.md（含索引 README）",
     "generator": "scripts/stats.py",
     "introduced_by": "W070",
-    "last_changed_by": "975",
-    "value": 25
+    "last_changed_by": "W1040",
+    "value": 26
   },
   "pytest_collected": {
     "domain": "pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议）",
     "generator": "scripts/stats.py",
     "introduced_by": "W830",
-    "last_changed_by": "990",
-    "value": 938
+    "last_changed_by": "W1067",
+    "value": 1097
   },
   "report_docs": {
     "domain": "docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化）",
     "generator": "scripts/stats.py",
     "introduced_by": "W737",
-    "last_changed_by": "988",
-    "value": 85
+    "last_changed_by": "1066",
+    "value": 104
   },
   "scan_files": {
     "domain": "html_total − _template.html − _shell.html（check_js_syntax/check_structure）",
@@ -169,5 +176,12 @@
     "introduced_by": "W459",
     "last_changed_by": "W459",
     "value": 87
+  },
+  "w864_entries": {
+    "domain": "scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W1053",
+    "last_changed_by": "W1053",
+    "value": 256
   }
 }

@@ -731,15 +731,6 @@ td.num, th.num {
 .empty-state p { font-size: 15px; }
 
 /* ===== 微交互工具类（W477 Phase E1 · DESIGN.md §4A.7 · 时长取 §5 契约档） ===== */
-/* 通用浮起：任意可点击卡片/条目 hover 升海拔（页面自定义结构复用，勿用于 .card/.kpi 已有实现） */
-.u-lift {
-    transition: transform var(--dur-base) var(--ease-out-quart),
-                box-shadow var(--dur-base) var(--ease-out-quart),
-                border-color var(--dur-base) var(--ease-out-quart);
-}
-.u-lift:hover { transform: translateY(-2px); box-shadow: var(--elev-2); }
-/* 按压反馈：按钮/标签类 active 微缩 */
-.u-press:active { transform: scale(0.98); }
 /* 滚动显现：fail-open——仅 JS 在 <html> 挂 .js-reveal 后启用（E5 接入）；无 JS 内容直接可见 */
 .js-reveal .reveal-in {
     opacity: 0;
@@ -748,14 +739,6 @@ td.num, th.num {
                 transform var(--dur-slow) var(--ease-out-quart);
 }
 .js-reveal .reveal-in.in-view { opacity: 1; transform: none; }
-/* 数字对齐 */
-.u-tabular { font-variant-numeric: tabular-nums; }
-/* 语义色文本（v3 令牌·低饱和雅集色相） */
-.text-ok { color: var(--ok); }
-.text-warn { color: var(--warn); }
-.text-danger { color: var(--danger); }
-.text-info { color: var(--info); }
-
 /* ===== 响应式 ===== */
 @media (max-width: 768px) {
     h1 { font-size: 28px; }
@@ -919,4 +902,23 @@ html[data-theme="dark"] .viz-illustration {
 
 .ico-t {
     margin-right: 0.32em;
+}
+
+/* 回目题图位（线描族·浅底宣纸图·暗色模式隐藏）
+   W983 / W1013 / W1016 三轮题图批均逐页写入内联副本 ⇒ 此处归并升为单一事实源
+   （BL-33 治本：避免 inline_css --force 按源重生成时整段回吞） */
+.chapter-plate {
+    margin: 28px auto 36px;
+    max-width: 420px;
+}
+
+.chapter-plate img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .chapter-plate {
+    display: none;
 }

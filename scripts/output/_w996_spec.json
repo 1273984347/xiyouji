@@ -1,0 +1,31 @@
+{
+ "batch": "W996",
+ "date": "2026-10-28",
+ "title": "W996 流程提示位批（C2 判据：漏跑级联回归锁·W995 形态）",
+ "desc": "流程提示位批：收官自检器反向查台账抓漏跑级联，豁免合规零段形态",
+ "head_entry": "2026-10-28（W996 流程提示位批）",
+ "head_sentence": "流程提示位批：收官自检反向查台账抓漏跑级联",
+ "changelog_body": "\n\n\n\n> **来源**：主人 2026-10-28 令「开始」（W995 收官报告登记的流程提示位候选）——W995 施工漏跑级联的事故回归锁。\n\n> - **文件**：scripts/ledger_close_check.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w996_spec.json、scripts/output/_cascade_files_W996.txt。\n\n**缺口（W995 事故的防线盲区）**：W995 施工漏跑级联时三道既有防线全部放行——C4 提交对账因「台账认领行即豁免」（D2）放行、ledger_close_check 旧判据反向不查（只查「有段→查台账」，无段则不进检查集）、无任何流程级提示。结果：工具/拆分全入库而十面落点从未写入，直至收官报告状态行锚点失败才暴露。\n\n**C2 判据（ledger_close_check 新增·反向迭代）**：台账中**已收官且 hash 落地**（有 commit）的行，必须在级联段源（CHANGELOG 现役+归档一级+tier2 容器/范围件）里有自己的段——缺失即 FAIL「漏跑 batch_cascade（W995 形态）」。豁免面=有意不立段的合规形态（让号/并号/已停止/空壳/作废/补录/追记，状态列标记识别）；hash 占位行不查（无 commit·归 preflight 在途态管）。**--allow-open 不豁免本判据**（漏级联是已收官批次的确定性缺陷·非在途伪阻塞）。self-test 扩 C2 三态（漏级联必红/让号并号豁免/无hash跳过）。\n\n**实树验证**：现役窗全绿（W995 修复后 hash=71a1add4 有段 ✓）·历史 59 行窗口零漏级联——既有收官纪律在 W995 前无前科，判据无存量误报。\n\n**验证**：--self-test 过（2 正例+4 负例+C2 三态）+ 实树 rc=0 + ruff 0 + 全量 verify 见状态行。\n\n> - **状态**：已收官（详见下方 hash——本批为单段流程批·级联即收官）\n",
+ "milestone_block": "- **W996 流程提示位批**（W995 事故回归锁）：\n  - ledger_close_check C2 判据：已收官+有 hash+无级联段=漏跑级联（反向迭代·豁免合规零段形态·--allow-open 不豁免）\n  - 实树 59 行窗口零存量误报·self-test 扩 C2 三态",
+ "agents_note": "2026-10-28（W996）给前一天的级联漏跑事故装回归锁：收官自检器反向查台账——凡是宣告收官且提交落了库的批次，必须在现役或归档里找得到自己的段落，找不到就是漏跑了级联。让号并号这类有意不立段的形态白名单豁免，在途批次不受影响。",
+ "file_index_rows": [
+  "| scripts/ledger_close_check.py | W996 | C2 判据：反向迭代台账——已收官+hash 落地+无级联段（现役+归档两面）=漏跑 batch_cascade；豁免让号/并号/已停止/空壳/作废/补录/追记；--allow-open 不豁免本判据；self-test 扩 C2 三态",
+  "| docs/00-导读/W批次编号对账表.md | W996 | W996 认领行与收官回填",
+  "| CHANGELOG.md | W996 | W996 段",
+  "| HANDOVER.md | W996 | 级联头尾链与里程碑块",
+  "| README.md | W996 | 当前批次版本行",
+  "| STRUCTURE.md | W996 | 当前批次版本行",
+  "| docs/00-导读/项目说明.md | W996 | 当前批次版本行",
+  "| .github/workflows/README.md | W996 | 工作流层版本面推进 W996",
+  "| site/index.html | W996 | 页脚批次链插入 W996",
+  "| site/data/cross-time-danmaku.html | W996 | 页脚批次链插入 W996",
+  "| site/data/tag-cloud.html | W996 | 页脚批次链插入 W996",
+  "| site/dukou-engine.html | W996 | 页脚批次链插入 W996",
+  "| AGENTS.md | W996 | 版本脚注条目",
+  "| archive/docs/AGENTS-ARCHIVE.md | W996 | 脚注滚动迁入的最老条目",
+  "| CITATION.cff | W996 | version 同步为 W996",
+  "| scripts/output/file-index.md | W996 | W996 段插入",
+  "| scripts/output/_w996_spec.json | W996 | 本批级联 spec",
+  "| scripts/output/_cascade_files_W996.txt | W996 | 级联落盘清单"
+ ]
+}

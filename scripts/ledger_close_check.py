@@ -39,6 +39,15 @@ from ledger_backfill import locate_cells  # noqa: E402  同目录复用列定位
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEDGER_REL = "docs/00-导读/W批次编号对账表.md"
 CHANGELOG_REL = "CHANGELOG.md"
+# 级联段源（W996 判据 C2）：现役 + 归档一级 + tier2 容器/范围件——「查历史 W 号 grep 可见」的全体
+CASCADE_SOURCES = (
+    CHANGELOG_REL,
+    os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md"),
+    os.path.join("archive", "docs", "CHANGELOG-ARCHIVE-tier2.md"),
+    os.path.join("archive", "docs", "CHANGELOG-ARCHIVE-tier2-W400-W559.md"),
+)
+# 合规零段形态（状态列含这些标记=有意不立段·豁免）
+RE_NO_SEG_EXEMPT = re.compile(r"让号|并号|已停止|空壳|作废|补录|追记")
 
 RE_SECTION_HEAD = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）)", re.M)
 RE_W_ROW = re.compile(r"^\|\s*W(\d{3,4})\s*\|")
@@ -110,6 +119,65 @@ def check(changelog: str, ledger: str, targets: list[int]) -> list[dict]:
     return results
 
 
+# ---- C3（W1053 P-01/P-02·W1046 方案）：修复类批 spec 五问 + 回归锁 ----
+FIX_INTERROGATION_KEYS = ("why_red", "is_misjudge", "data_truth", "layer_changed", "prevention")
+
+
+def is_fix_batch(w: int, subjects: list[str]) -> bool:
+    """修复类判定：该批任一提交主题以 fix(w<号> 开头。"""
+    return any(subj.lower().startswith("fix(w%d)" % w) for subj in subjects)
+
+
+def check_fix_interrogation(w: int, spec_path: str, subjects: list[str]) -> list[str]:
+    """C3：修复类顶段批的 spec 必填五问与回归锁（P-01/P-02·缺失即红）。"""
+    why = []
+    if not os.path.isfile(spec_path):
+        return ["[C3] 修复类批但 spec 不存在：%s（P-01）" % spec_path]
+    try:
+        with open(spec_path, encoding="utf-8") as f:
+            spec = json.load(f)
+    except (OSError, ValueError) as e:
+        return ["[C3] spec 解析失败：%s" % e]
+    fi = spec.get("fix_interrogation")
+    if not isinstance(fi, dict):
+        why.append("[C3] 修复类批缺 fix_interrogation 五问对象（P-01·判据为何红/是否误判/数据真错/改哪层/防复发载体）")
+    else:
+        for k in FIX_INTERROGATION_KEYS:
+            if not str(fi.get(k, "")).strip():
+                why.append("[C3] 五问缺 %s（P-01）" % k)
+    rl = spec.get("regression_lock")
+    if not isinstance(rl, dict) or not str(rl.get("carrier", "")).strip():
+        why.append("[C3] 缺回归锁载体 regression_lock.carrier（P-02·self-test case 或 tests/unit 文件）")
+    elif not str(rl.get("case", "")).strip():
+        why.append("[C3] 回归锁缺 case 标识（P-02）")
+    return why
+
+
+def check_cascade_segments(rows: dict[int, dict], seg_nums: set[int]) -> list[dict]:
+    """C2 判据（W996 建·W995 形态回归锁）：**反向迭代台账**——已收官且 hash 落地（有 commit）
+    的行，必须在级联段源（现役+归档两面）里有自己的段；没有 = 漏跑 batch_cascade（W995 实证：
+    工具/拆分全入库而十面落点从未写入，C4 因台账认领行豁免放行、本工具旧判据因「无段不查」放行，
+    双双漏过）。
+
+    豁免（RE_NO_SEG_EXEMPT）：让号/并号/已停止/空壳/作废/补录/追记——有意不立段的合规形态。
+    hash 占位行不查（无 commit 的记号行·归 preflight 在途态管）。
+    """
+    issues = []
+    for w, r in sorted(rows.items()):
+        if "error" in r:
+            continue
+        if not RE_DONE.match(re.sub(r"[\s*]+", "", r["status"])):
+            continue  # 未收官行=在途态·归 preflight 管
+        if RE_HASH_PLACEHOLDER.search(r["hash"].strip()):
+            continue  # 无 commit·跳过
+        if RE_NO_SEG_EXEMPT.search(r["status"]):
+            continue  # 合规零段形态
+        if w not in seg_nums:
+            issues.append({"w": w, "ok": False,
+                           "why": "已收官且 hash=%s 有 commit·但级联段源无自己的段——漏跑 batch_cascade（W995 形态）" % r["hash"][:20]})
+    return issues
+
+
 def _self_test() -> int:
     """自测：正例必绿 + 负例必红（负例红不了 ⇒ 判据无效）。"""
     fails = []
@@ -143,11 +211,49 @@ def _self_test() -> int:
     if active_w("### W101（2026-10-25）：新\n\n### W100（2026-10-25）：旧\n") != 101:
         fails.append("正例2 现役段取号应为 101")
 
+    # ---- C2 判据（W996·W995 形态回归锁）：已收官+有 commit+无级联段 → 红 ----
+    rows_c2 = ledger_rows(
+        "| W200 | 正常批 | def5678 | def5678 | **已收官**（def5678） | s | x |\n"
+        "| W201 | 漏级联批 | aaa1111 | aaa1111 | **已收官**（aaa1111） | s | x |\n"
+        "| W202 | 让号批 | — | — | **已收官**（让号留痕·取 W203） | s | — |\n"
+        "| W203 | 并号批 | bbb2222 | bbb2222 | **已闭环**（并号入 W200） | s | x |\n"
+    )
+    seg_nums_c2 = {200}  # 段源只有 W200（W201 漏跑·W202 让号豁免·W203 并号豁免）
+    issues = check_cascade_segments(rows_c2, seg_nums_c2)
+    if [i["w"] for i in issues] != [201]:
+        fails.append("C2 应只抓 W201（漏级联）：%s" % [i["w"] for i in issues])
+    # 段源补上 W201 后必须转绿
+    if check_cascade_segments(rows_c2, {200, 201}):
+        fails.append("C2 段源补齐后应全绿")
+    # 无 hash 行（让号占位）不查
+    rows_c2b = ledger_rows("| W205 | 记号行 | —（待回填） | — | 已收官（记号） | s | — |\n")
+    if check_cascade_segments(rows_c2b, set()):
+        fails.append("C2 无 hash 行应跳过")
+
     print()
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：2 正例绿 + 4 负例红（判据可证伪）")
+    # ---- C3（W1053 P-01/P-02）：修复类 spec 五问 + 回归锁 ----
+    import tempfile
+    with tempfile.TemporaryDirectory() as _td:
+        _spec = os.path.join(_td, "s.json")
+        _full = {"fix_interrogation": {"why_red": "x", "is_misjudge": "n", "data_truth": "y",
+                                       "layer_changed": "判据层", "prevention": "C8"},
+                 "regression_lock": {"carrier": "check_doc_sync.py --self-test T30", "case": "T30"}}
+        with open(_spec, "w", encoding="utf-8") as f:
+            json.dump(_full, f, ensure_ascii=False)
+        if check_fix_interrogation(9999, _spec, ["fix(w9999): x"]):
+            fails.append("C3 全字段 spec 应绿")
+        _thin = {"fix_interrogation": {"why_red": "x"}, "regression_lock": {"carrier": "a"}}
+        with open(_spec, "w", encoding="utf-8") as f:
+            json.dump(_thin, f)
+        _miss = check_fix_interrogation(9999, _spec, ["fix(w9999): x"])
+        if not _miss or len(_miss) < 2:
+            fails.append("C3 缺四问+缺 case 应两条红：%s" % _miss)
+        if check_fix_interrogation(9999, os.path.join(_td, "nope.json"), ["feat(w9999): x"]):
+            fails.append("C3 非修复类应跳过")
+    print("自测通过：2 正例绿 + 4 负例红 + C2 三态（漏级联/让号并号豁免/无hash跳过）+ C3 三例（全绿/缺项红/非修复跳过）")
     return 0
 
 
@@ -175,16 +281,48 @@ def main() -> int:
         return 1
     results = check(cl, lg, nums)
     bad = [r for r in results if not r["ok"]]
+    # C2 判据（W996）：反向迭代台账——已收官+有 commit 的行必须有级联段（现役+归档两面合看）
+    cascade_seg_nums = set()
+    for rel in CASCADE_SOURCES:
+        p = os.path.join(ROOT, rel)
+        if os.path.isfile(p):
+            cascade_seg_nums.update(section_w_nums(read_text(p)))
+    cascade_issues = check_cascade_segments(ledger_rows(lg), cascade_seg_nums)
+    for i in cascade_issues:
+        # 已收官批次的漏级联是确定性缺陷（非在途态）——--allow-open 也不豁免
+        bad.append({"w": i["w"], "ok": False, "why": i["why"], "cascade": True})
+    # C3（W1053 P-01/P-02）：顶段号修复类 ⇒ spec 五问 + 回归锁必填
+    c3_issues = []
+    if not args.allow_open and nums:
+        import subprocess as _sp
+        _r = _sp.run(["git", "-c", "core.quotePath=false", "log", "--format=%s", "-40"],
+                     cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
+        _subjects = (_r.stdout or "").splitlines()
+        for _w in nums:
+            if is_fix_batch(_w, _subjects):
+                c3_issues.extend(check_fix_interrogation(
+                    _w, os.path.join(ROOT, "scripts", "output", "_w%d_spec.json" % _w), _subjects))
+    for why in c3_issues:
+        bad.append({"w": nums[0] if nums else 0, "ok": False, "why": why, "c3": True})
     if args.json:
-        print(json.dumps({"checked": len(results), "bad": len(bad), "results": results},
+        print(json.dumps({"checked": len(results), "bad": len(bad),
+                          "cascade_issues": cascade_issues, "results": results},
                          ensure_ascii=False, indent=1))
     else:
         for r in results:
             print(("OK   " if r["ok"] else "FAIL ") + "W%03d  %s" % (
                 r["w"], ("hash=%s·状态=%s" % (r.get("hash", ""), r.get("status", ""))) if r["ok"]
                 else r["why"]))
-        print("---- 台账收官回填自检：%d 项检查·%d 项未收官 ----" % (len(results), len(bad)))
-    if bad and not args.allow_open:
+        for i in cascade_issues:
+            print("FAIL  W%03d  [C2] %s" % (i["w"], i["why"]))
+        for why in c3_issues:
+            print("FAIL  [C3] %s" % why)
+        print("---- 台账收官回填自检：%d 项检查·%d 项未收官·C2 漏级联 %d·C3 五问/回归锁 %d ----"
+              % (len(results), len([r for r in results if not r["ok"]]), len(cascade_issues),
+                 len(c3_issues)))
+    # --allow-open 只豁免「未收官」伪阻塞态（在途批次自检用）；
+    # C2 漏级联是已收官批次的确定性缺陷——连 --allow-open 也不豁免
+    if (bad and not args.allow_open) or cascade_issues:
         return 1
     return 0
 

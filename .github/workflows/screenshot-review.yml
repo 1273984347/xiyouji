@@ -149,6 +149,16 @@ jobs:
             if [ "$SCOPE" = "targeted" ]; then
               echo "only_pages=$ONLY" >> "$GITHUB_OUTPUT"
             fi
+            # W1066：定向时另输出「变更页文件名列表」（逗号分隔·供 chart-gates 的
+            #   --only 定向用）——原实现无论定向都跑全量 chart-gates（857+ 页），
+            #   是 Screenshot Review job 的主要耗时来源之一。
+            if [ "$SCOPE" = "targeted" ]; then
+              CHANGED_NAMES=$(printf '%s\n' "$CHANGED" \
+                | grep -E '^site/.*\.html$' \
+                | sed 's|.*/||' \
+                | sort -u | paste -sd, - || true)
+              echo "changed_names=$CHANGED_NAMES" >> "$GITHUB_OUTPUT"
+            fi
             echo "## 截图审查：$SCOPE" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "needed=false" >> "$GITHUB_OUTPUT"
@@ -238,8 +248,16 @@ jobs:
           command: |
             # W551：动态渲染门禁——W550 全站截图审查实证四类批量缺陷的机器绊线：
             # pageerror / d3.sankey 运行时缺失 / 桌面横向溢出 / reveal 未触发 / link-canvas 画布被遮挡。
-            # file:// 自包含，与 batch_screenshots 同口径；定向 scope 时仅跑变更相关页面（近似：全量 4 worker 约需数分钟，直接全量）。
-            node scripts/check_screenshot_gates.js --json scripts/output/chart-gates.json
+            # file:// 自包含，与 batch_screenshots 同口径。
+            # W1066 提速：定向 scope 时**只跑变更页**（--only 子串匹配·可重复传多个
+            #   逗号分隔文件名）——原实现无论定向都跑全量 857+ 页，是本 job 主要耗时来源。
+            #   全量 scope 行为不变（无 --only ⇒ 跑全站）。
+            if [ "${{ steps.scope.outputs.scope }}" = "targeted" ] && [ -n "${{ steps.scope.outputs.changed_names }}" ]; then
+              node scripts/check_screenshot_gates.js --json scripts/output/chart-gates.json \
+                --only "${{ steps.scope.outputs.changed_names }}"
+            else
+              node scripts/check_screenshot_gates.js --json scripts/output/chart-gates.json
+            fi
 
       - name: Run batch screenshots (Playwright + layout assertions, blocking)
         id: batch-screenshots
@@ -289,10 +307,24 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
   # W579 暗色态门禁（O2 常驻化）：S2 桌面深色 × 图表页审计 vs 基线，只增即 FAIL（独立并行 job）
+  #
+  # W1066 提速（本 job 是整个 workflow 的墙钟大头）：
+  #   改前：单 job 串行跑 782 页（CONC=3·每页固定等待 4.7s）⇒ 纯等待下限 20.4 分钟
+  #        ·实际 29–33 分钟·timeout 60 分钟已在临界 ⇒ W993「两次被自身超时掐断」根因。
+  #   改后：① 脚本侧「按需等待」（waitForStable/waitForChange）——落定即采样·不白等；
+  #        ② CONC 3 → 6；③ **拆 4 个分片 job 并行**（按索引取模·负载均衡）
+  #           ⇒ 墙钟 = max(分片) ≈ 1/4 + 并发收益 ⇒ 约 4–6 分钟。
+  #   判定语义不变：4 个分片产物合并后统一对基线「同页同类型缺陷数只增即 FAIL」。
   dark-state-gate:
-    name: Dark-state gate (S2 chart pages, only-increase blocks)
+    name: Dark-state gate shard ${{ matrix.shard }}/4 (S2 chart pages)
     runs-on: ubuntu-latest
     timeout-minutes: 60 # W993：页数涨至 782 后审计+契约烟测超 30 分钟被 job 超时掐断（两次实证·cancel 非 verdict）
+    strategy:
+      # W1066：4 分片并行（782 页 → 每片约 196 页）⇒ 墙钟 ≈ 单片耗时
+      #   （改前单 job 跑全部 782 页·实测 29–33 分钟）
+      fail-fast: false   # 任一片失败都要跑完并看全部结果（不掩盖其它片的缺陷）
+      matrix:
+        shard: [0, 1, 2, 3]
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -349,18 +381,29 @@ jobs:
           python3 -m http.server 8000 --directory site >/dev/null 2>&1 &
           for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:8000/index.html && break; sleep 1; done
 
-      - name: Audit S2 dark (chart pages)
+      - name: Audit S2 dark (chart pages, shard ${{ matrix.shard }}/4)
         if: steps.scope.outputs.run != 'false'
-        run: node scripts/_audit_render_states.js --states S2-desktop-dark --scope charts
+        run: |
+          node scripts/_audit_render_states.js --states S2-desktop-dark --scope charts --conc 6 \
+            --shard ${{ matrix.shard }}/4 \
+            --out scripts/output/render-state-audit.shard${{ matrix.shard }}.jsonl
 
-      - name: Dark-state only-increase gate
+      - name: Upload shard output
         if: steps.scope.outputs.run != 'false'
-        run: node scripts/check_dark_state_gate.js
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: dark-shard-${{ matrix.shard }}-${{ github.sha }}
+          path: scripts/output/render-state-audit.shard${{ matrix.shard }}.jsonl
+          if-no-files-found: ignore
+          retention-days: 7
 
       # W583 契约冒烟：file:// EMBEDDED 路径（与暗色门禁的 http 路径互补）——P04 类契约错位拦截
+      # W1066：全站冒烟只需跑一次 ⇒ 只在 shard 0 跑（原实现每个分片各跑一遍 ⇒ 4 倍重复浪费·
+      #       实测它是整个 job 的墙钟大头：单次全站 857 页串行 ≈ 15–35 分钟）。
+      #       其余分片跳过（条件用 matrix.shard == 0）。
       - name: Contract smoke (file:// EMBEDDED path)
-        if: steps.scope.outputs.run != 'false'
-        run: node scripts/check_contract_smoke.js
+        if: steps.scope.outputs.run != 'false' && matrix.shard == 0
+        run: node scripts/check_contract_smoke.js --conc 6
 
       - name: Summarize dark gate
         if: always() && steps.scope.outputs.run != 'false'
@@ -368,9 +411,50 @@ jobs:
           echo "## 暗色态门禁（W579）" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "S2-desktop-dark × 图表页 vs 基线（scripts/output/render-state-audit-baseline.jsonl），同页同类型缺陷数只增即 FAIL。" >> $GITHUB_STEP_SUMMARY
+          echo "W1066：审计拆 4 分片并行（按索引取模）·每片 --conc 6·按需等待（落定即采样）。" >> $GITHUB_STEP_SUMMARY
 
-      - name: Upload audit output on failure
-        if: failure() && steps.scope.outputs.run != 'false'
+  # W1066：合并 4 个分片产物 → 统一对基线判定（判定语义与改前完全一致）
+  dark-state-gate-merge:
+    name: Dark-state gate (merge shards + only-increase verdict)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: dark-state-gate
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Download shards
+        # W1067：原写 @fa0a91b8…（39 位·编造·该仓库无此 commit）⇒ job 在 set-up 阶段
+        #   直接失败（Checkout 都不跑），症状为「Set up job 1 秒 failure」极易误判为基础设施故障。
+        #   改用仓内已验证存在且符合 v7 约定的 SHA（release.yml 同款）⇒ 不新造 SHA。
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          path: shards
+          pattern: dark-shard-*-${{ github.sha }}
+          merge-multiple: true
+
+      - name: Merge shards
+        run: |
+          set -euo pipefail
+          OUT=scripts/output/render-state-audit.jsonl
+          : > "$OUT"
+          FOUND=0
+          for f in shards/render-state-audit.shard*.jsonl; do
+            [ -f "$f" ] || continue
+            cat "$f" >> "$OUT"
+            FOUND=$((FOUND+1))
+          done
+          echo "合并分片 $FOUND 个 · 行数 $(wc -l < "$OUT")"
+          if [ "$FOUND" -eq 0 ]; then
+            echo "::error::未找到任何分片产物 ⇒ 判据未执行"
+            exit 2
+          fi
+
+      - name: Dark-state only-increase gate
+        run: node scripts/check_dark_state_gate.js --current scripts/output/render-state-audit.jsonl
+
+      - name: Upload merged audit output on failure
+        if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: render-state-audit-${{ github.sha }}

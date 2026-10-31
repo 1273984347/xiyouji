@@ -1,4 +1,4 @@
-"""_w851_visual_regression_probe.py 探针逻辑测试（W851·设计迁移阶段 1 验收件）。
+"""visual_regression_probe.py 探针逻辑测试（W851·设计迁移阶段 1 验收件）。
 
 背景：W826 细化规格 §7 的 J2 要求「现役页面 computed style 快照零差异」作为令牌
 纯加法不破坏视觉的机器证明。本测试不触浏览器（采集面由 --self-test 的 T1-T4 负责），
@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
-import _w851_visual_regression_probe as probe  # noqa: E402
+import visual_regression_probe as probe  # noqa: E402
 
 
 def _snap(pages):

@@ -66,6 +66,12 @@ def precheck(spec):
                               % (field, sep))
     if not str(spec.get("title", "")).startswith(str(spec.get("batch", ""))):
         issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###·合并段场景必须显式领衔）")
+    # W1019 硬守卫：段正文必须以空行开场。病根：级联把标题行与 changelog_body 直接拼接，
+    # body 若无前导空行 ⇒ 新段标题行与「> **来源**」挤在同一行（与既有段形态不符·只能
+    # 段内定向订正，级联不可重跑 E-17）。W1018 spec 实测以 \n\n\n\n 开场，本批漏写即粘连。
+    if not str(spec.get("changelog_body", "")).startswith("\n\n"):
+        issues.append("spec.changelog_body 未以空行（\\n\\n）开场（级联会把段标题行与正文粘成同一行·"
+                      "W1019 实证·首元素前必须留空行）")
     if "**文件**：" not in str(spec.get("changelog_body", "")):
         issues.append("spec.changelog_body 缺「**文件**」行（四件套必填·W723 起第 31 门禁 C4-f 据其对账手工件入库·"
                       "路径须写 repo 相对路径·见 pitfalls git 类）")
@@ -79,6 +85,16 @@ def precheck(spec):
     if len(_note) > 120:
         issues.append("spec.agents_note 长 %d 字 > 120 上限（W964 定形·W989 收紧·脚注是索引不是摘要·"
                       "细节归 CHANGELOG）" % len(_note))
+    # W1016 硬守卫：desc / head_sentence 禁裸聚合数字（`N 项/篇/页/个/类`）。
+    # 病根：两字段逐字写入 README/STRUCTURE/项目说明的**版本抬头行**，而第 31 门禁 C5c
+    # 对抬头行也查裸聚合数字（`<!--doc-sync:exempt-->` 在行尾、不紧跟命中 ⇒ 后置豁免不命中）
+    # ⇒ 落盘后必然 C5c 判红，只能段内定向订正（级联不可重跑·E-17）。W1014 实测连撞 4 次
+    # （「15 项真缺陷」四处抬头行全红）。前置拦截成本≈0，故升硬守卫。
+    for field in ("desc", "head_sentence"):
+        _hit = re.findall(r"\d+\s*(?:项|篇|页|个|类)", str(spec.get(field, "")))
+        if _hit:
+            issues.append("spec.%s 含裸聚合数字 %s（会写入版本抬头行 ⇒ 第 31 门禁 C5c 必红·"
+                          "改无量词表达如「一批真缺陷」或加实体标记）" % (field, _hit))
     return issues
 
 
@@ -131,7 +147,11 @@ def _face_changelog(ctx):
     if gaps:
         ledger = open(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md"), encoding="utf-8").read()
         for g in gaps:
-            assert re.search(rf"^\| {re.escape(g)} ", ledger, re.M), f"缺口 {g} 在台账无认领行"
+            # W1047 修：台账登记行的实际形态是 `| W1046 |`（**带 W 前缀**），
+            # 原断言查 `| 1046 ` ⇒ 缺口许可机制**从未真正可用过**（每次都断言失败）。
+            # ⇒ 改为兼容两种形态：`| 1046 ` 或 `| W1046 `。
+            assert re.search(rf"^\|\s*W?{re.escape(g)}\s", ledger, re.M), (
+                f"缺口 {g} 在台账无认领行（台账登记行形态应为「| W{g} |」）")
             assert f"### {g}" not in s, f"缺口 {g} 已有段（无需允许）"
         print("  缺口许可：%s（在途·台账已有认领行）" % "、".join(gaps))
     new_w = cur_w + 1 + len(gaps)
@@ -157,30 +177,55 @@ def _face_changelog(ctx):
 
 
 def _face_three_docs(ctx):
-    """README / STRUCTURE / 项目说明 三文档批头版本行。"""
+    """README / STRUCTURE / 项目说明 三文档批头版本行。
+
+    W1005 行锚定化（根因修复·本批实证）：四个正则的 desc 匹配段原为 `[^·]*` / `[^—]*`。
+    Python 字符类 `[^X]` **匹配换行符** ⇒ 匹配区间可跨行；而 re.sub 替换的是**整个匹配区间**，
+    跨行匹配即等于静默删掉中间行的内容。
+
+    实证（W1005）：项目说明.md「当前版本」列表行的正则**无尾锚点** ⇒ 旧 desc 行内无「·」时
+    `[^·]*` 一路吞到下一处「·」之前，匹配区间 1143..1342 跨 1 行，re.sub 后该文件 103 行→102 行，
+    第 49 行「当前阶段」行首（87 页可视化 + Phase 7 逐回解读…）被静默删掉。
+
+    反直觉点（值得单独记住）：旧 desc **含**「·」时反而**安全**——`[^·]*` 止于行内；
+    而 desc **无**「·」（正是 C6 判据 W841 要求的形态）才触发跨行吞并。
+    ⇒ C6 与本面旧正则在列表行上互为镜像：一个把「·」清掉，另一个靠「·」才不越界。
+
+    修法（本批）：① 四个 desc 匹配段一律行锚定（`[^\\n\\r·]` / `[^\\n\\r—]` / `[^\\n\\r]`）；
+    ② 空白量一律 `[ \\t]`（`\\s` 亦匹配换行）；③ 每个改写面补「替换前后行数不变」断言
+    ——吞并一旦复发当场 FAIL，而非静默落盘；④ 列表行由 `[^·]*` 改 `[^\n\r]*`（整行替换）
+    ⇒ 顺带根治「旧 desc 尾部残留」（历史实证：旧 desc 含「·」时匹配止于「·」，其尾部残留行尾）。
+
+    只读面（`[^*]*` / `[^；]*` 等）跨行匹配只会导致断言 FAIL（fail-closed 误报），不产生破坏，
+    故本批不动——同族风险只锁定「改写面」。
+    """
     # ---------- README / STRUCTURE / 项目说明 ----------
     p = "README.md"
     s, nl = load(p)
-    out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：\s*(?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*·A1-A6",
-                 f"> **当前批次 {ctx.batch}（{ctx.date}）**：{ctx.desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头·W712 锚点兼容 desc 直连形态
+    out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r·]*·A1-A6",
+                 f"> **当前批次 {ctx.batch}（{ctx.date}）**：{ctx.desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头·W712 锚点兼容 desc 直连形态·W1005 行锚定化
     assert out != s, "README 版本行未变化"
+    assert out.count("\n") == s.count("\n"), "README 版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
     ctx.pend.append((p, out, nl))
 
     p = "STRUCTURE.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）— (?:v[\d.]+\s+)?(?:W\d+\s+)?[^—]*—\s*A1-A6",
-                 f"> 当前批次：{ctx.batch}（{ctx.date}）— {ctx.desc}—A1-A6", s, count=1)  # W712 锚点兼容 desc 直连
+    out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）—[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r—]*—[ \t]*A1-A6",
+                 f"> 当前批次：{ctx.batch}（{ctx.date}）— {ctx.desc}—A1-A6", s, count=1)  # W712 锚点兼容 desc 直连·W1005 行锚定化
     assert out != s, "STRUCTURE 版本行未变化"
+    assert out.count("\n") == s.count("\n"), "STRUCTURE 版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
     ctx.pend.append((p, out, nl))
 
     p = "docs/00-导读/项目说明.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：(?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*·详细变更见",
-                 f"> 当前批次 {ctx.batch}（{ctx.date}）：{ctx.desc}·详细变更见", s, count=1)  # W712 锚点兼容 desc 直连
+    out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r·]*·详细变更见",
+                 f"> 当前批次 {ctx.batch}（{ctx.date}）：{ctx.desc}·详细变更见", s, count=1)  # W712 锚点兼容 desc 直连·W1005 行锚定化
     assert out != s, "项目说明头部版本行未变化"
-    out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）— (?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*",
+    assert out.count("\n") == s.count("\n"), "项目说明头部版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
+    out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）—[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r]*",
                   rf"\g<1>{ctx.batch}（{ctx.date}）— {ctx.desc}", out, count=1)
     assert out2 != out, "项目说明「当前版本」列表行未变化（正则失配·fail-closed——W711 起 desc 直连形态实证·W713 补断言）"
+    assert out2.count("\n") == out.count("\n"), "项目说明「当前版本」列表行替换吞行（W1005 跨行吞并防线）"
     ctx.pend.append((p, out2, nl))
 
 
@@ -425,9 +470,13 @@ def _face_citation(ctx):
     # ---------- CITATION.cff（W628 起第 10 面：version/date-released 随批同步——第 27 门禁 R2 面） ----------
     p = "CITATION.cff"
     s, nl = load(p)
-    out = re.sub(r'(?m)^version:\s*"[^"]+"', f'version: "{ctx.batch}"', s, count=1)
-    out = re.sub(r'(?m)^date-released:\s*"[^"]+"', f'date-released: "{ctx.date}"', out, count=1)
+    # W1045 加固（子代理复核建议·零行为变化）：`\s*` 含换行 ⇒ 理论上可跨行匹配
+    # ⇒ 改为 `[ \t]*`（只匹配行内空白）并补「替换前后行数不变」断言——
+    # 本组 6 处里唯一无行数断言的面（其余 5 面 W1005 已行锚定化并带行数断言）。
+    out = re.sub(r'(?m)^version:[ \t]*"[^"]+"', f'version: "{ctx.batch}"', s, count=1)
+    out = re.sub(r'(?m)^date-released:[ \t]*"[^"]+"', f'date-released: "{ctx.date}"', out, count=1)
     assert out != s, "CITATION.cff 版本/日期行未变化"
+    assert out.count("\n") == s.count("\n"), "CITATION.cff 替换前后行数不一致（跨行匹配吞内容）"
     ctx.pend.append((p, out, nl))
 
 
@@ -513,6 +562,10 @@ def main():
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--allow-gap", default="",
                     help="允许的在途缺口 W 号（逗号分隔·须台账有认领行且 CHANGELOG 无段·W895 新增）")
+    ap.add_argument("--skip-changelog", action="store_true",
+                    help="跳过 CHANGELOG 面（段改由 backfill_changelog.py 按号序补·"
+                         "用于「并行批次占号未立段」的号段缺口；此时 --allow-gap 的号"
+                         "**不要求**台账有认领行·只要求 CHANGELOG 无该段）")
     args = ap.parse_args()
     spec = json.load(open(args.spec, encoding="utf-8"))
     pre_issues = precheck(spec)
@@ -528,7 +581,25 @@ def main():
         "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"
     )
     _assert_status_wnum(spec, ctx.batch)  # W956/P-43-05：段状态认领登记 W 号 == 本段号（E-28 防线）
-    _face_changelog(ctx)
+    if args.skip_changelog:
+        # 跳过 CHANGELOG 面（W1045 新增）：段由 `backfill_changelog.py --only <W号>` 按号序补
+        # （场景：并行批次占号未立段 ⇒ 号段出现缺口·正常级联的「段号必须 == 顶段+1」断言
+        #  无法通过）。此处仍需算出 new_w/new_rule 供其余 9 个「当前态」面使用。
+        _cs = open(os.path.join(ROOT, "CHANGELOG.md"), encoding="utf-8").read()
+        _cm = re.search(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", _cs, re.M)
+        assert _cm, "CHANGELOG 未找到现役段"
+        _cur_w = int(_cm.group(1) or _cm.group(2))
+        ctx.cl_src = _cs
+        ctx.new_w = _cur_w + 1 + len(ctx.allow_gap)
+        ctx.new_rule = "（W001-W%d）" % ctx.new_w
+        assert ctx.batch == "W" + str(ctx.new_w), (
+            "批次号应为 W%d（现役段 W%d + 在途缺口 %s）" % (ctx.new_w, _cur_w, ctx.allow_gap))
+        for _g in ctx.allow_gap:
+            assert "### " + _g not in _cs, "缺口 %s 已有段（无需允许）" % _g
+        print("[SKIP-CHANGELOG] 段由 backfill 补·new_w=W%d（在途缺口 %s）"
+              % (ctx.new_w, "、".join(ctx.allow_gap) or "无"))
+    else:
+        _face_changelog(ctx)
     _face_three_docs(ctx)
     _face_handover(ctx)
     _face_workflows(ctx)
@@ -553,12 +624,76 @@ def main():
     try:
         _apply_pend(ctx.pend, ctx.batch)
         selfcheck = _post_check(ctx.pend, ctx.batch)
+        window_ok = _refresh_window()
+        stats_ok = _refresh_stats(ctx.batch)
         _close_hints()
-        print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
+        print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；"
+              f"写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}；"
+              f"回窗 {'OK' if window_ok else 'FAIL'}；stats {'已刷新' if stats_ok else '刷新失败'}")
     finally:
-        cascade_lock.release()
+        cascade_lock.release(pid=os.getpid())  # W999 P2-1：pid 匹配才删·防 TTL 夺锁后误删他方新鲜锁
         print("[LOCK] 已释放")
+    if not window_ok:
+        print("[APPLY] 回窗失败——先修 archive_segments/archive_ledger_rows 再重跑"
+              "（否则下一批 preflight 体积窗口必红·开不了工）")
+        return 2
+    if not stats_ok:
+        print("[APPLY] stats 刷新失败——先修 stats.py 再重跑级联（否则 verify 第 31 槽 C5d 必红）")
+        return 2
     return 0
+
+
+# 体积窗口（文档规范 §8·W960 立窗）：CHANGELOG / file-index 各 110 段、台账 60 行。
+WIN_SEGMENTS = 110
+WIN_LEDGER = 60
+_WINDOW_RUNNER = lambda cmd: __import__("subprocess").run(  # noqa: E731 — 单测注入点
+    cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+
+
+def _refresh_window():
+    """W1010：级联收尾自动回窗（段滚动归档 + 台账行归档）。
+
+    为什么必须机器做：每批插入一段/一行，正本必然 +1 越过窗口，然后 **下一批开工前**
+    才被 preflight 判红拦下——W1008/W1009 两批都是「先超窗、再手工回窗」。人手记的那一步
+    迟早漏，且漏了表现为「下一个人开不了工」。级联是唯一知道「段已插入」的时点。
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    steps = [
+        ("segments", [sys.executable, os.path.join(here, "archive_segments.py"),
+                      "--target", "both", "--keep", str(WIN_SEGMENTS), "--apply"]),
+        ("ledger", [sys.executable, os.path.join(here, "archive_ledger_rows.py"),
+                    "--keep", str(WIN_LEDGER), "--apply"]),
+    ]
+    ok = True
+    for label, cmd in steps:
+        r = _WINDOW_RUNNER(cmd)
+        tail = [x for x in ((r.stdout or "") + (r.stderr or "")).splitlines() if x.strip()][-1:]
+        good = r.returncode == 0
+        ok = ok and good
+        print("[WINDOW] %-8s %s（%s）" % (label, "OK" if good else "FAIL", " / ".join(tail)))
+    return ok
+
+
+_STATS_RUNNER = lambda cmd: __import__("subprocess").run(  # noqa: E731 — 单测注入点
+    cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+
+
+def _refresh_stats(batch):
+    """W1009：级联收尾自动刷 stats（`stats.py --w <num>`）。
+
+    为什么要机器做：C5d（stats 与磁盘实算漂移）在 W1006/W1007/W1008 三批各假红一次，
+    每次都要人记得先跑 `stats.py --w ####`——「记得做」迟早漏，且漏了要到 verify 才暴露。
+    级联是唯一知道「本批号 + 已落盘」的时点，就在这儿刷。
+
+    失败不静默：打印 FAIL + 末两行输出，并让 main 返回非 0（会话能立刻看到）。
+    """
+    num = str(batch).lstrip("W")
+    r = _STATS_RUNNER([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "stats.py"),
+                       "--w", num])
+    tail = [x for x in ((r.stdout or "") + (r.stderr or "")).splitlines() if x.strip()][-2:]
+    ok = r.returncode == 0
+    print("[STATS] %s（%s）" % ("OK" if ok else "FAIL", " / ".join(tail)))
+    return ok
 
 
 def _close_hints():
@@ -654,6 +789,42 @@ def _close_hints():
         print(_msg)
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[SCRIPTS] 提示位不可用（{_exc}）")
+    # W995：归档健康提示位（check_archive_health T1-T4·独立尾部块——与 W992 校准块最小碰撞面）
+    try:
+        import check_archive_health as _cah
+
+        _cah.run(strict=False, prefix="[ARCHIVE] ")
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[ARCHIVE] 提示位不可用（{_exc}）")
+    # W1014 接线升格：3 支原「零代码调用者·靠人记得跑」报告型探针接入收尾浮出（用户裁决
+    # 「全部接线升格」）。不硬挂 verify 槽——它们恒返 0 且指标为「人工甄别后清」类
+    # （content_hygiene 标记密度嫌疑 / parser_anchor 盲区），硬判会制造常驻噪声或永绿假门禁
+    # （§11.2 门禁弱化根）。此处每批自动跑并浮出末行可行动数，替代「没人记得跑」。
+    try:
+        import subprocess as _sp2
+
+        for _tag, _probe in (("卫生", "check_content_hygiene.py"),
+                             ("双源", "check_dual_source_scan.py"),
+                             ("锚点", "check_parser_anchor_coverage.py")):
+            _pr = _sp2.run([sys.executable, os.path.join(ROOT, "scripts", _probe)],
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", cwd=ROOT, timeout=180)
+            _tail = next((ln for ln in reversed(_pr.stdout.splitlines()) if ln.strip()), "")
+            print(f"[HYGIENE] {_tag} {_probe} → {_tail.strip()[:80]}")
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[HYGIENE] 提示位不可用（{_exc}）")
+    # W995：tmpe 上次清理活动日期（.journal 最新落笔——清理节奏可见性，建制 13 天才首清的教训）
+    try:
+        import datetime as _dt
+
+        _jdir = os.path.join(_tt.TMPE, ".journal")
+        _journals = [os.path.join(_jdir, f) for f in os.listdir(_jdir)] if os.path.isdir(_jdir) else []
+        if _journals:
+            _last = max(os.path.getmtime(j) for j in _journals)
+            print("[TMPE] 上次清理活动 %s（%.0f 天前·journal %d 份）"
+                  % (_dt.date.fromtimestamp(_last), (time.time() - _last) / 86400, len(_journals)))
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[TMPE] 日期提示不可用（{_exc}）")
 
 
 if __name__ == "__main__":

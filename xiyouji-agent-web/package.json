@@ -20,7 +20,6 @@
     "smoke:engine": "node server/engine.smoke.mjs"
   },
   "dependencies": {
-    "@tdesign-react/aigc": "^0.1.0-alpha.1",
     "@tdesign-react/chat": "^1.1.0",
     "better-sqlite3": "^13.0.3",
     "dompurify": "^3.4.17",

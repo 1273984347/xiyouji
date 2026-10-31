@@ -259,3 +259,83 @@ def test_tool_candidates_no_execute(env):
     tt.scan_tool_candidates(policy, root=str(root.parent))
     after = {p.name for p in root.iterdir()}
     assert before == after
+
+
+# ---------- W1014 路由根修：下划线批号工作件（原 ^w 正则认不出 → 全落 _misc·半桶根因） ----------
+
+def test_route_underscore_batch_files(env):
+    """_wNNNN_* 散件判入 w### 桶并按批号归子目录；无下划线批号目录保持平铺。"""
+    root, policy = env
+    old = time.time() - 10 * 86400
+    for nm in ("_w1099_spec.json", "_w1099_resync.py", "_w960_vfull.log"):
+        f = root / nm
+        f.write_text("x", encoding="utf-8")
+        os.utime(f, (old, old))
+    rows = tt.scan(policy)
+    assert _row(rows, "_w1099_spec.json")["bucket"] == "w###"
+    assert _row(rows, "_w960_vfull.log")["bucket"] == "w###"
+    # 断言用 os.path.join 归一（resolve_dest 走 os.path.join·Windows 下混用分隔符属正常）
+    assert tt.resolve_dest(str(root), "_w1099_spec.json", "w###/", policy) == os.path.join(
+        str(root), "w###", "w1099", "_w1099_spec.json")
+    assert tt.resolve_dest(str(root), "_w960_vfull.log", "w###/", policy) == os.path.join(
+        str(root), "w###", "w960", "_w960_vfull.log")
+    # 行为契约：批号目录（本身即工作目录）仍平铺整体 MOVE
+    assert tt.resolve_dest(str(root), "w607_docxgen", "w###/", policy) == os.path.join(
+        str(root), "w###", "w607_docxgen")
+
+
+def test_apply_underscore_batch_into_subdir(env):
+    """apply 落地到 w###/wNNNN/ 且 undo 可逆。"""
+    root, policy = env
+    old = time.time() - 10 * 86400
+    f = root / "_w1099_x.py"
+    f.write_text("pass", encoding="utf-8")
+    os.utime(f, (old, old))
+    actions = tt.build_plan(tt.scan(policy))
+    jp = tt.apply_actions(actions, str(root), policy)
+    assert (root / "w###" / "w1099" / "_w1099_x.py").is_file()
+    assert not f.exists()
+    _restored, failed = tt.undo_journal(jp, str(root))
+    assert failed == 0
+    assert f.is_file()
+
+
+# ---------- W1014 锁健壮性 R1（过期抢占）/ R2（写锁降级） ----------
+
+def test_run_lock_stale_takeover(env, monkeypatch):
+    """pid 存活但锁超龄/不可解析 → 判陈旧接管；未超龄仍拦（原缺陷：只看存活不看年龄）。"""
+    root, _policy = env
+    monkeypatch.setattr(tt, "_pid_alive", lambda pid: True)
+    (root / ".locks").mkdir(exist_ok=True)
+    now = time.strftime("%Y-%m-%dT%H:%M:%S")
+    lockp = Path(tt.RUN_LOCK)
+    # 未超龄 + 存活 → 必拦
+    lockp.write_text(json.dumps({"pid": 987654, "ts": now}), encoding="utf-8")
+    with pytest.raises(SystemExit):
+        tt.RunLock(max_age_hours=24).acquire()
+    # 阈值 -1h → 任意非负锁龄判陈旧接管（写我 pid）
+    stale = tt.RunLock(max_age_hours=-1.0)
+    stale.acquire()
+    try:
+        assert json.loads(lockp.read_text(encoding="utf-8"))["pid"] == os.getpid()
+    finally:
+        stale.release()
+    # ts 不可解析同样按陈旧接管（不抛）
+    lockp.write_text(json.dumps({"pid": 987654, "ts": "not-a-time"}), encoding="utf-8")
+    bad = tt.RunLock(max_age_hours=24)
+    bad.acquire()
+    bad.release()
+
+
+def test_run_lock_degrade_when_unwritable(env):
+    """R2：锁路径被占成目录 → allow_degrade 只 WARN 不抛；fail-closed 档 SystemExit 硬停。"""
+    root, _policy = env
+    blocker = root / ".locks" / "dirblock"
+    blocker.mkdir(parents=True)  # 对目录 os.remove → PermissionError·对目录写 → 失败
+    lk = tt.RunLock(path=str(blocker), allow_degrade=True)
+    lk.acquire()  # 不抛
+    assert lk.acquired is False
+    lk.release()  # 不抛
+    strict = tt.RunLock(path=str(blocker), allow_degrade=False)
+    with pytest.raises(SystemExit):  # fail-closed：不可移除的陈旧/坏锁 → 硬停（防并行双写）
+        strict.acquire()

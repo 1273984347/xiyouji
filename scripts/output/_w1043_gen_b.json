@@ -1,0 +1,1 @@
+{"code":0,"message":"ok","summary":"Batch processing completed: 2/2 succeeded","total_requested":2,"total_success":2,"total_failed":0,"success_items":[{"node_id":"458033594581443","file_name":"plate-line-95-ch085-diyongfuren.jpg"},{"node_id":"458032919519849","file_name":"plate-line-96-ch097-xiniu.jpg"}],"failed_items":[]}

@@ -162,7 +162,7 @@ def decide_resume(args, count, sha):
         if os.path.exists(PARTS) and any(fn.startswith("part_") for fn in os.listdir(PARTS)):
             raise SystemExit(
                 "parts 目录存在但缺少 manifest（无法校验一致性）——如要重建：\n"
-                "py -3.12 scripts/rag/build_vectors.py --rebuild（旧 parts 备份保留）")
+                "python scripts/rag/build_vectors.py --rebuild（旧 parts 备份保留·本机 PowerShell 侧改 `py -3`·AGENTS §4.3）")
         os.makedirs(PARTS, exist_ok=True)
         _write_manifest(count, sha, args.slice, args.device)
         return

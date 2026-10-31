@@ -47,6 +47,7 @@ GATES = [
     ("索引健康(第17槽)", "{py} scripts/check_index_health.py"),
     ("目录新鲜度(第45槽)", "{py} scripts/check_folder_docs.py --gate"),
     ("计划方案合规(第48槽)", "{py} scripts/check_plan_template.py --gate"),
+    ("跨行改写(W1014建)", "{py} scripts/check_cross_line_rewrite.py --gate"),
     ("CSP 零漂移", "{py} scripts/generate_csp.py --check"),
     ("全仓链接", "{py} scripts/lint_links.py --dir ."),
     ("交互绑定(W908建)", "{py} scripts/check_interaction_binding.py --gate"),

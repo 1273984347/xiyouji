@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""W949 · 第 50 门禁：UI 图标位 emoji 残留 + 图标渲染正确性
+"""W949 · 报告型探针：UI 图标位 emoji 残留 + 图标渲染正确性
+
+声明订正（W1014·E1 铁律）：本件原自称「第 50 门禁」，但第 50 槽现役归 check_gsap_motion.py
+（W961 挂），本件从未挂 verify 槽（verify_delivery 内 emoji/icon/图标 零命中）。`--gate`
+接口在位可挂，然 B 段需浏览器实测（pre-commit 沙箱下 spawn 有 EPERM 风险·见第 43/49 槽
+missing_warn 先例），是否升格为硬门禁待用户裁决——现按实际形态登记为报告型探针。
 
 两段判据（缺一不可）：
   A 静态：全仓 UI 图标位不得残留 emoji 表情/图形字符
-     （判据与 scripts/_w939_scan_targets.py 同源·控件首位 / 图标槽 class / 标题前缀 / CSS content）
+     （判据与 scripts/scan_targets.py 同源·控件首位 / 图标槽 class / 标题前缀 / CSS content）
   B 实测：浏览器实开代表页，验证内联 SVG 图标**确为线描**（stroke≠none 且 fill=none）、
      尺寸跟随字号（1em 量级·非 300×150 巨图）、CSS content 位的同源 mask 图标已加载、
      且无 console 错误 / pageerror（含 CSP 拒执行）
@@ -169,7 +174,7 @@ def run_browser() -> tuple[list[str], dict]:
     node_script = ROOT / "scripts" / "node_modules" / "playwright"
     if not node_script.exists():
         return ["浏览器段跳过：未安装 playwright（scripts/node_modules/playwright 缺失）"], data
-    probe_js = ROOT / "scripts" / "_w946_icon_probe.js"
+    probe_js = ROOT / "scripts" / "icon_probe.js"
     probe_js.write_text(
         "const { chromium } = require('" + str(node_script).replace("\\", "/") + "');\n"
         "const path = require('path');\n"

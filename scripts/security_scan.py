@@ -96,7 +96,15 @@ RULES = [
     ("SEC-001", "硬编码 API Key 模式",
      r"(?i)(api[_-]?key|apikey)\s*[:=]\s*['\"][A-Za-z0-9]{16,}['\"]", "high", {".py", ".js", ".yml", ".yaml"}),
     ("SEC-002", "硬编码密钥/令牌",
-     r"(?i)(secret|token|password|passwd)\s*[:=]\s*['\"][^'\"]{8,}['\"]", "high", {".py", ".js", ".yml", ".yaml"}),
+     # W1062 判据精确化（替代 W1061 的过宽版）：
+     #   起因——check_backlog_review.py 的 TOKEN="Backlog 对账已执行"（中文事件常量）被
+     #   SEC-002 抓 high ⇒ 误报。W1061 用「值含任一 CJK 即放行」修掉，但实测该前瞻**过宽**：
+     #   「真密钥串里混中文」（如 sk-abc123密码xyz789）会被一并放行 ⇒ 安全缺口（负样本实测 6/8）。
+     #   本版改**白名单式收紧**：只放行**含空格 / CJK 标点 / 全角字符**的自然语言常量；
+     #   单纯含汉字但无空格标点的值**仍判 high**（假阳性噪音 ≪ 漏检真密钥的安全缺口）。
+     #   负样本自证见 scripts/sec002_negative_probe.py（9/9·含「真密钥混汉字」边界）。
+     r"(?i)(secret|token|password|passwd)\s*[:=]\s*['\"](?![^'\"]*(?:[ \t]|[，。、；：！？「」『』（）【】《》—…·]))[^'\"]{8,}['\"]",
+     "high", {".py", ".js", ".yml", ".yaml"}),
     ("SEC-003", "AWS Access Key ID 模式",
      r"AKIA[0-9A-Z]{16}", "high", {".py", ".js", ".yml", ".yaml", ".html"}),
     ("SEC-004", "私钥头部",
@@ -470,8 +478,10 @@ def run_pip_audit():
 
 def _find_pip_audit():
     """检测 pip-audit 可执行命令，返回 cmd 列表或 None。"""
-    # 优先尝试 py -m pip_audit（Windows 多版本 Python 兼容）
-    for cmd in (["py", "-m", "pip_audit"], ["python", "-m", "pip_audit"],
+    # W1014：sys.executable 置首——唯一对本进程解释器恒成立的候选
+    # （AGENTS §4.3「不按 PATH 上的 python/python3 形状挑选」·原 py/python 序为 Windows 中心）
+    for cmd in ([sys.executable, "-m", "pip_audit"],
+                ["py", "-m", "pip_audit"], ["python", "-m", "pip_audit"],
                 ["pip-audit"], ["pip_audit"]):
         try:
             proc = subprocess.run(

@@ -1,0 +1,16 @@
+{
+ "batch": "W1034",
+ "date": "2026-10-30",
+ "title": "W1034 授业官位补全（项目级避坑 skill）",
+ "desc": "补全授业官位：把十五类最高频判据固化为项目级速查 skill，并解决忽略规则与自动加载路径差异",
+ "head_entry": "2026-10-30（W1034 授业官位补全）",
+ "head_sentence": "授业官位补全：十五类最高频判据固化为项目级速查 skill，速查与详查分层不重复维护",
+ "changelog_body": "\n\n> **来源**：用户 2026-10-30 选定 A（做授业官），并指定位置「`D://xiyouji//.agent` 内新建 skills 目录」。这是 T05（W831 批）中 **ST-11 授业官**这一步在现环境的落地。\n>\n> - **文件**：.agent/skills/xiyouji-guard/SKILL.md、.github/workflows/README.md、.gitignore、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1034_spec.json、scripts/output/file-index.md、site/index.html\n\n**产物**：`.agent/skills/xiyouji-guard/SKILL.md`——**15 条最高频硬判据**，分四组：批次收官 4 条（先 add 再 refresh / refresh 后再同步 spec / git mv 两端 / changelog_body 前导空行）、判据与门禁 4 条（禁脆弱特征 / 先读原文与源码 / 禁豁免压绿 / token 在途不算事件）、历史与时效 4 条（历史段不改写 / 辨策略决定与已完成 / 步骤绑定旧环境 / 归档只解纵向）、人机协作 3 条（命令禁省略号 / 零引用不能按 .class 搜 / 改 md 连锁索引与 CSP）。每条一句话并指向 pitfalls 全表。\n\n**分层设计（为什么不是 123 条全塞进来）**：pitfalls 已 94 KB，全量做成 skill 会挤占上下文。skill 只放**速查**（15 条 + 查表命令 + 载体分工表），完整条目仍留 `docs/agent/pitfalls.md`——两者是「速查 → 详查」关系，不重复维护。\n\n**顺手解决的两个坑**：\n① **`.agent/` 原被 gitignore 整体忽略**（第 214 行），放进去的 skill 不进 git、别的 Agent 拿不到。改为 `.agent/*` + `!.agent/skills/` + `!.agent/skills/**` 放行——**父目录整体忽略时子路径 `!` 无效**，必须用 `dir/*` 形式才能例外。\n② **自动加载的路径差异（如实标注）**：系统自动加载只认 `.workbuddy/skills/`，本 skill 在 `.agent/skills/` 下**不会自动加载**。已在 `AGENTS.md` 加显式指针（「⚡ 速查 skill」一行），靠指针 + 主动查阅生效；要自动加载需另放一份到 `.workbuddy/skills/`，会形成双份维护，暂不做。\n\n**验证**：第 45 槽目录文档 0 FAIL（`.agent` 属隐藏目录不在在管扫描面）· 第 52 槽仓库布局 0 FAIL · 全量门禁 57 段核心全绿。\n\n> - **状态**：已收官（授业官位载体建成；ST-10 器物官按收益判断不做，ST-12 收官官现环境无接口）",
+ "milestone_block": "- **W1034 授业官位补全（项目级避坑 skill）**：\n  - `.agent/skills/xiyouji-guard/SKILL.md`：15 条最高频硬判据，四组分类，指向 pitfalls 全表\n  - 分层设计：skill 只放速查，完整 123 条留 pitfalls，不重复维护\n  - 顺带修 gitignore：`.agent/` → `.agent/*` + 放行 skills（父目录整体忽略时子路径 `!` 无效）\n  - 如实标注：该路径不会自动加载，靠 AGENTS 指针生效",
+ "agents_note": "2026-10-30（W1034）授业官位补全：15 条硬判据做成项目级 skill。速查在 skill，详查仍在坑表。",
+ "file_index_rows": [
+  "| docs/00-导读/W批次编号对账表.md | W1034 | 本批新增/修改 |",
+  "| scripts/output/_vermilion_solid_cache.json | W1034 | 本批新增/修改 |",
+  "| scripts/output/_w1034_spec.json | W1034 | 本批新增/修改 |"
+ ]
+}

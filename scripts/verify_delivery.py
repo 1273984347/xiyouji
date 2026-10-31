@@ -30,8 +30,8 @@ fail-closed 委派语义（W831·用户批准修 B1/B2·CLAUDE.md 第 10 条授�
 
 结构（W728 重构：原 905 行单体 main() 拆为五层·行为与输出逐字节不变）：
   模块级常量 → scope 分级工具 → 版本解析工具 → _Reporter/_GateContext（上报与执行态）
-  → 门禁参数表（_SimpleGate×18 / _StrictGate×16）→ 通用 runner×2 → 13 个段函数
-  → 收尾三函数 → main() 编排（52 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
+  → 门禁参数表（_SimpleGate×18 / _StrictGate×26·委托合计 44）→ 通用 runner×2 → 13 个段函数
+  → 收尾三函数 → main() 编排（57 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
 """
 
 import json
@@ -39,6 +39,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.request
 from typing import NamedTuple
 
@@ -107,13 +108,15 @@ EXPECTED_SECTION_NAMES = [
     "计划方案合规",
     "朱砂实底",
     "GSAP写法",
+    "仓库布局",
+    "提交范围",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
-# 11 个内联廉价段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区）恒跑不跳；跳过只作用于
-# 38 个 subprocess 委托段（50 段 - 12 内联/bespoke·W781 注册表派生与 EXPECTED 补齐第 45 槽段名后校数）：_scoped_run 统一短路，
+# 14 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14）恒跑不跳；跳过只作用于
+# 44 个 subprocess 委托段（57 段 - 13 内联/bespoke·W1014 实核：_SIMPLE×18+_STRICT×26 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -137,6 +140,8 @@ SCOPE_SITE_SECTIONS = {
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
     "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退", "GSAP写法",
+    "仓库布局",  # W1011：毫秒级、与 scope 无关
+    "提交范围",  # W1007：必须恒跑——代提可能发生在任何 scope 的提交里（docs 提交也能夹带）
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -214,7 +219,10 @@ EXPECT_A4 = "209 篇"  # 真实计数（W342 199→201 起步，W400 后实际 2
 ARCHIVE_DOCS = [
     os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md"),
     os.path.join("archive", "docs", "CHANGELOG-ARCHIVE-tier2.md"),
+    # W995：tier2 按 W 段拆分约定（主人授权）——范围命名件逐件登记（§11.2 tier2 须登记条款）
+    os.path.join("archive", "docs", "CHANGELOG-ARCHIVE-tier2-W400-W559.md"),
     os.path.join("archive", "docs", "file-index-ARCHIVE.md"),
+    os.path.join("archive", "docs", "file-index-ARCHIVE-tier2.md"),
     os.path.join("archive", "docs", "HANDOVER-ARCHIVE.md"),
 ]
 
@@ -282,6 +290,7 @@ class _Reporter:
     def __init__(self):
         self.fails = 0
         self.warns = 0
+        self.timings = {}   # W1037：段级耗时（--profile 输出）
 
     def fail(self, msg):
         self.fails += 1
@@ -353,7 +362,12 @@ class _GateContext:
         if self.scope != "full" and cur not in self.active_sections:
             self.rep.ok("跳过 [%s]（--scope %s 未覆盖）" % (cur, self.scope))
             return _SkipResult(cur, self.scope)
-        return self._real_run(cmd, *args, **kwargs)
+        # W1037：段级计时（同一段内多次 subprocess 累加）——供 --profile 出耗时排行
+        _t0 = time.perf_counter()
+        try:
+            return self._real_run(cmd, *args, **kwargs)
+        finally:
+            self.rep.timings[cur] = self.rep.timings.get(cur, 0.0) + (time.perf_counter() - _t0)
 
 
 # ---------------------------------------------------------------------------
@@ -392,7 +406,7 @@ class _SimpleGate(NamedTuple):
 
 
 class _StrictGate(NamedTuple):
-    """严格委托门禁参数行（15 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
+    """严格委托门禁参数行（_STRICT_GATES 共 26 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
 
     与简单段差异：① 执行异常直接 FAIL（不静默放过）；② 退出码 0 还须校验 stdout 含
     marker 汇总行（防 wrapper 假绿）；③ ok 详情取 stdout 指定行（ok_line=-1 末行/
@@ -638,6 +652,23 @@ _STRICT_GATES = [
                 fail_msg="GSAP 动效写法违例（时长 / 缓动白名单 / 禁旋转 / 禁循环 / 布局属性·详见脚本输出）",
                 marker_msg="GSAP 写法槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="GSAP 动效写法门禁通过（%s）", ok_line=-1),
+    # W1007：提交范围门禁挂第 51 槽——代提三次（W989/W1002/W1004）同一处方：一份提交混进另一批在途件。
+    # safe_commit --expect-spec 只在走它时生效（`git commit` 直提可绕），本槽把它挪进唯一硬门禁入口，
+    # 任何提交路径都绕不过。归属判定看索引 CHANGELOG 顶段（新增段=本批；否则 HEAD 现役段=回填）。
+    # W1011：仓库布局门禁挂第 52 槽——用户「整理分类」的长期形态：把「哪个目录装什么」变成判据，
+    # 否则一次性搬家三个月后又长出错位文件（本批在根目录逮到 _tmp_chap_sheet.py 与三个空壳目录）。
+    _StrictGate(section="仓库布局", script="check_repo_layout.py", args=("--gate",), timeout=120,
+                marker="---- 第 52 门禁 仓库布局：",
+                crash_msg="仓库布局槽执行异常（第 52 槽·crash 即拦）: %s",
+                fail_msg="仓库布局违规（根目录出现未声明文件 / 顶层出现未声明目录 / 白名单陈腐·见脚本输出）",
+                marker_msg="仓库布局槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="仓库布局门禁通过（%s）", ok_line=-1),
+    _StrictGate(section="提交范围", script="check_commit_scope.py", args=("--gate",), timeout=120,
+                marker="---- 第 51 门禁 提交范围：",
+                crash_msg="提交范围槽执行异常（第 51 槽·crash 即拦）: %s",
+                fail_msg="提交范围越界（索引含本批 spec 之外的文件＝代提风险·摘出他方在途件后重跑）",
+                marker_msg="提交范围槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="提交范围门禁通过（%s）", ok_line=-1),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
@@ -893,7 +924,20 @@ def _gate_a1_a6_count(ctx):
             ctx.rep.fail("A1-A6 真实文件计数 %d 篇 != README 声明 %d 篇（计数漂移，需同步 README 声明）"
                          % (actual_total, declared))
     else:
-        ctx.rep.warn("README 未找到 '共 N 篇' 声明，跳过 A1-A6 计数校验")
+        # W1050：README 带 doc-sync:exempt 无「共 N 篇」声明 ⇒ fallback 对拍 AGENTS §1 的 stats 标记值
+        # （stats 标记由 stats.py --w sweep 机器自动跟随·非手写字面量），两处都缺才 WARN。
+        agents_txt = _read(os.path.join(ROOT, "AGENTS.md"))
+        m_mark = re.search(r"(\d+)\s*<!--stats:a1_a6_docs-->", agents_txt)
+        if m_mark:
+            declared = int(m_mark.group(1))
+            if actual_total == declared:
+                ctx.rep.ok("A1-A6 真实文件计数 %d 篇 == AGENTS §1 stats 标记 %d 篇（README 无声明走 fallback 口径·排除各板块 README.md）"
+                           % (actual_total, declared))
+            else:
+                ctx.rep.fail("A1-A6 真实文件计数 %d 篇 != AGENTS §1 stats 标记 %d 篇（计数漂移·README 无声明走 fallback 口径）"
+                             % (actual_total, declared))
+        else:
+            ctx.rep.warn("README 未找到 '共 N 篇' 声明且 AGENTS 无 a1_a6_docs 标记，跳过 A1-A6 计数校验")
 
 
 def _gate_academic_citations(ctx):
@@ -1119,8 +1163,18 @@ def _check_section_lock(ctx):
                    % (len(ran_set), len(expected_sections), ctx.scope))
 
 
-def _print_summary(rep):
+def _print_summary(rep, profile=False):
     """汇总与退出码：核心 FAIL>0 → 1；仅辅助 WARN → 0。"""
+    if profile and getattr(rep, "timings", None):
+        tot = sum(rep.timings.values())
+        rows = sorted(rep.timings.items(), key=lambda kv: -kv[1])
+        print("\n==== 段耗时排行（--profile·合计 %.1fs）====" % tot)
+        for name, sec in rows[:12]:
+            pct = (sec / tot * 100) if tot else 0
+            print("  %-16s %7.2fs  %5.1f%%  %s" % (name, sec, pct, "#" * max(1, int(pct / 2))))
+        if len(rows) > 12:
+            rest = sum(v for _, v in rows[12:])
+            print("  %-16s %7.2fs  %5.1f%%  （其余 %d 段）" % ("…其余", rest, rest / tot * 100 if tot else 0, len(rows) - 12))
     print("\n==== 交付校验汇总 ====")
     if rep.fails == 0:
         print("核心全部通过 ✅" + ("（%d 项辅助 WARN，不阻断）" % rep.warns if rep.warns else ""))
@@ -1162,7 +1216,7 @@ def main():
     # —— 收尾 ----
     _probe_health(rep)
     _check_section_lock(ctx)
-    return _print_summary(rep)
+    return _print_summary(rep, profile=("--profile" in sys.argv))
 
 
 if __name__ == "__main__":

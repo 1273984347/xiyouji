@@ -486,19 +486,50 @@ async function probePage(browser, relPath, cfg) {
 async function collectEmbeddedData(page, html) {
   const names = discoverDataNames(html);
   const merged = { kind: 'none', name: '', names: [], maxArrayLen: 0, arrays: [], scalars: [] };
-  for (const name of names) {
-    let sum = null;
-    try {
-      sum = await page.evaluate(dataExpr(name));
-    } catch {
-      sum = null;
+  // W1054 G-03 清偿①：并行 workers 下页面主脚本可能尚未执行完（typeof 变量 = undefined），
+  // 原实现单次求值失败即静默 continue ⇒ 假 no-data-source（单页跑同页为 ok/small-data 实证）。
+  // 修复：轮询重试（至多 4 次 · 间隔 150ms）直至至少一个数据名求值成功或耗尽。
+  const maxAttempts = names.length ? 4 : 0;
+  let gotAny = false;
+  for (let attempt = 0; attempt <= maxAttempts && !gotAny; attempt++) {
+    if (attempt > 0) await page.waitForTimeout(150);
+    for (const name of names) {
+      if (merged.names.includes(name)) continue;
+      let sum = null;
+      try {
+        sum = await page.evaluate(dataExpr(name));
+      } catch {
+        sum = null;
+      }
+      if (!sum || (!(sum.arrays || []).length && !(sum.scalars || []).length)) continue;
+      merged.names.push(name);
+      gotAny = true;
+      merged.maxArrayLen = Math.max(merged.maxArrayLen, sum.maxArrayLen || 0);
+      for (const a of sum.arrays || []) merged.arrays.push({ path: name + ':' + a.path, len: a.len });
+      for (const sc of sum.scalars || []) merged.scalars.push({ expr: name + ':' + sc.expr, value: sc.value });
+      if (merged.arrays.length > 120) break;
     }
-    if (!sum || (!(sum.arrays || []).length && !(sum.scalars || []).length)) continue;
-    merged.names.push(name);
-    merged.maxArrayLen = Math.max(merged.maxArrayLen, sum.maxArrayLen || 0);
-    for (const a of sum.arrays || []) merged.arrays.push({ path: name + ':' + a.path, len: a.len });
-    for (const s of sum.scalars || []) merged.scalars.push({ expr: name + ':' + s.expr, value: s.value });
-    if (merged.arrays.length > 120) break;
+    // W1055 清偿②：静态字面量兜底——块作用域声明全局求值不可达（W1054 定位的 11 页根因），
+    // 从 html 直接切字面量在 Node 侧求值（与 page.evaluate 路径互备）。
+    for (const name of names) {
+      if (merged.names.includes(name)) continue;
+      const lit = extractLiteralSource(html, name);
+      if (!lit) continue;
+      let v = null;
+      try {
+        v = new Function('return(' + lit + ')')();
+      } catch {
+        v = null;
+      }
+      const sum = v ? summarizeData(v) : null;
+      if (!sum || (!(sum.arrays || []).length && !(sum.scalars || []).length)) continue;
+      merged.names.push(name);
+      gotAny = true;
+      merged.maxArrayLen = Math.max(merged.maxArrayLen, sum.maxArrayLen || 0);
+      for (const a of sum.arrays || []) merged.arrays.push({ path: 'static:' + name + ':' + a.path, len: a.len });
+      for (const sc of sum.scalars || []) merged.scalars.push({ expr: 'static:' + name + ':' + sc.expr, value: sc.value });
+      if (merged.arrays.length > 120) break;
+    }
   }
   if (merged.names.length) {
     merged.kind = 'embedded';
@@ -568,7 +599,7 @@ function summarizeData(v) {
 // ---------------- 内嵌数据变量发现 ----------------
 // 口径：顶层 `const/var/let <前缀名> = {` 或 `= [` 的声明；前缀表来自全站普查实测。
 const DATA_NAME_RE =
-  /(?:^|\n)[ \t]*(?:const|var|let)[ \t]+((?:EMBEDDED|MOCK|FALLBACK|DATA|SERIES|CHART|STATIONS|NODES|EDGES|LOCATIONS|EVENTS|TIMELINE)[A-Za-z0-9_$]*)[ \t]*=[ \t]*([\[{])/g;
+  /(?:^|\n)[ \t]*(?:const|var|let)[ \t]+((?:EMBEDDED|MOCK|FALLBACK|DATA|SERIES|CHART|STATIONS|NODES|EDGES|LOCATIONS|EVENTS|TIMELINE|nodes|edges|links|cols|lines)[A-Za-z0-9_$]*)[ \t]*=[ \t]*([\[{])/g;
 
 function discoverDataNames(html) {
   const names = [];
@@ -580,6 +611,45 @@ function discoverDataNames(html) {
   return names
     .sort((a, b) => (b.startsWith('EMBEDDED') ? 1 : 0) - (a.startsWith('EMBEDDED') ? 1 : 0))
     .slice(0, 30);
+}
+
+// W1055 G-03 清偿②：静态字面量提取——块作用域声明的统一兜底。
+// 从 html 切出 `(const|var|let) NAME = {…|[…];` 完整字面量（平衡扫描：跳过
+// '…'/"…"/`…` 字符串（含 \\ 转义）与 // /* */ 注释），depth 归零即终点。
+function extractLiteralSource(html, name) {
+  const decl = new RegExp('(?:^|\\n)[ \\t]*(?:const|var|let)[ \\t]+' +
+    // W1066：完整转义 name（含反斜杠本身）——原式只转义 `$`
+    //   （`name.replace(/[$]/g, '\\$&')`）⇒ name 内若含 `\`，正则里会被当作
+    //   转义序列起点 ⇒ 匹配语义错（CodeQL「does not escape backslash characters
+    //   in the input」告警·同时是真缺陷）。标准做法：先转义反斜杠再转义 $。
+    name.replace(/\\/g, '\\\\').replace(/[$]/g, '\\$&') + '[ \\t]*=[ \\t]*([\\[{])');
+  const m = decl.exec(html);
+  if (!m) return null;
+  let i = m.index + m[0].length - 1;  // 指向首个 { 或 [
+  const open = m[1];
+  const close = open === '{' ? '}' : ']';
+  let depth = 0, inS = null, esc = false, inLineC = false, inBlockC = false;
+  for (; i < html.length; i++) {
+    const ch = html[i], nxt = html[i + 1];
+    if (inLineC) { if (ch === '\n') inLineC = false; continue; }
+    if (inBlockC) { if (ch === '*' && nxt === '/') { inBlockC = false; i++; } continue; }
+    if (inS) {
+      if (esc) { esc = false; continue; }
+      if (ch === '\\') { esc = true; continue; }
+      if (inS === '`' && ch === '$' && nxt === '{') { /* 模板插值按普通字符·字面量数据页罕见 */ }
+      if (ch === inS) inS = null;
+      continue;
+    }
+    if (ch === '/' && nxt === '/') { inLineC = true; i++; continue; }
+    if (ch === '/' && nxt === '*') { inBlockC = true; i++; continue; }
+    if (ch === '\'' || ch === '"' || ch === '`') { inS = ch; continue; }
+    if (ch === open || ch === '{' || ch === '[') { depth++; continue; }
+    if (ch === close || ch === '}' || ch === ']') {
+      depth--;
+      if (depth === 0) return html.slice(m.index + m[0].length - 1, i + 1);
+    }
+  }
+  return null;
 }
 
 function dataExpr(name) {
@@ -884,23 +954,9 @@ function baselineLines(judged, snapshot, census) {
 }
 
 // ---------------- 第 28 门禁口径复用（V5） ----------------
-function resolvePython() {
-  const cands = [];
-  if (process.env.PYTHON) cands.push([process.env.PYTHON, []]);
-  cands.push(['py', ['-3']], ['python3', []], ['python', []]);
-  for (const [cmd, args] of cands) {
-    try {
-      const o = execFileSync(cmd, args.concat(['-c', 'import sys;print(sys.version_info[0])']), {
-        stdio: 'pipe',
-        timeout: 15000,
-      })
-        .toString()
-        .trim();
-      if (o.startsWith('3')) return { cmd, args };
-    } catch {}
-  }
-  return null;
-}
+// W1014：resolvePython 提取到 scripts/lib/py_launch.js（同一判据禁两处实现·与
+// batch_screenshots.js 共用候选表）；此处只调用不重写。
+const { resolvePython } = require('./lib/py_launch');
 
 function loadCitability() {
   const py = resolvePython();
@@ -1033,7 +1089,7 @@ function printSummary(judged, cmp, cfg, elapsed, mode) {
   for (const item of ITEMS) tally[item] = { ok: 0, fail: 0, na: 0 };
   for (const j of judged) for (const item of ITEMS) tally[item][j.verdicts[item].status]++;
   const probeErr = judged.filter((j) => j.verdicts.PROBE.status === 'fail');
-  const nFail =
+  let nFail =
     mode === 'gate'
       ? cmp.newFail.length
       : judged.filter((j) => CRITERIA.some((c) => j.verdicts[c].status === 'fail')).length;
@@ -1043,6 +1099,55 @@ function printSummary(judged, cmp, cfg, elapsed, mode) {
       `可收紧 ${cmp ? cmp.tighten.length : '-'} · probe_error ${probeErr.length} 页 · ${elapsed.toFixed(1)}s · workers=${cfg.workers || ''}`
   );
   console.log('判据分布：' + ITEMS.map((i) => `${i} ok=${tally[i].ok}/fail=${tally[i].fail}/na=${tally[i].na}`).join(' · '));
+  // W1053 G-03 → W1054 清偿：na 影子报数分层——「结构性不适用」（页面形态决定·no-view-intent/
+  // no-rendered-view/no-kpi/small-data）不计入收紧口径；「真覆盖缺口」（数据在场但判据抓不到·
+  // no-data-source/kpi-unmatched/interactive-input-page）才是收紧对象（方案阈值 2 页 FAIL）。
+  // W1055 清偿终审定谳（逐页取证·character-sentiment-arc 双跑）：kpi-unmatched 页的 KPI 为
+  // 上游统计值/静态文案（3521 引语数 vs 页面 10 回聚合摘要——数据链不含全量），静态复算判据
+  // 对「上游聚合型 KPI」不适用 ⇒ 结构性；真缺陷形态 = kpi-near-miss（FAIL 态·差 <5% 但不等）另有判定。
+  const STRUCTURAL_NA = new Set(['no-view-intent', 'no-rendered-view', 'no-kpi', 'small-data', 'kpi-unmatched']);
+  // W1055 清偿第二轮：运行时构建数据 / fetch 型 / 运行时测量 KPI 的页面，静态框架内不可复算
+  // ⇒ 结构性不适用（逐页取证实证：cols=[] 运行时填充、FALLBACK=picker 配置、KPI=count-up/
+  // 渲染耗时测量）——判定 = 相关 na 理由 且 页面无可提取字面量 或 字面量求值后无有效数据。
+  const RUNTIME_BOUND = new Set(['no-data-source', 'kpi-unmatched']);
+  const noLiteral = new Set(judged.filter((j) => {
+    const v3 = j.verdicts.V3, v4 = j.verdicts.V4;
+    if (!RUNTIME_BOUND.has(v3.reason) && !RUNTIME_BOUND.has(v4.reason)) return false;
+    let html = '';
+    try { html = fs.readFileSync(path.join(ROOT, j.page), 'utf-8'); } catch { return true; }
+    const names = discoverDataNames(html);
+    const usable = names.some((n) => {
+      const lit = extractLiteralSource(html, n);
+      if (!lit) return false;
+      try {
+        const v = new Function('return(' + lit + ')')();
+        if (!v || typeof v !== 'object') return false;
+        // 有效数据 = 对象记录数组（图元数据源）——色表/标签等纯短字符串数组（图例色表
+        // colors=['#…']·运行时空容器 cols=[]）不算（W1055 逐页取证的误命中形态）
+        const isRecArr = (x) => Array.isArray(x) && x.length >= 2 &&
+          x.some((e) => e && typeof e === 'object');
+        const pools = Array.isArray(v) ? [v] : Object.values(v);
+        return pools.some(isRecArr);
+      } catch { return false; }
+    });
+    return !usable;
+  }).map((j) => j.page));
+  for (const item of ['V3', 'V4']) {
+    const nas = judged.filter((j) => j.verdicts[item].status === 'na');
+    if (!nas.length) continue;
+    const byReason = countBy(nas.map((j) => ({ reason: j.verdicts[item].reason })), 'reason');
+    const gap = nas.filter((j) => !STRUCTURAL_NA.has(j.verdicts[item].reason) &&
+      !noLiteral.has(j.page));
+    const structural = nas.length - gap.length;
+    console.log(`影子报数 ${item} na=${nas.length}（结构性 ${structural} · 缺口 ${gap.length}）：` +
+      Object.entries(byReason).map(([k, v]) => `${k}=${v}`).join(' '));
+    if (gap.length) {
+      console.log('  缺口页：' + gap.map((j) => j.page).slice(0, 20).join(', '));
+      // W1055 收紧升格（W1046 方案 G-03）：真覆盖缺口 >0 即 FAIL（结构性不适用不拦）——
+      // 影子第 1/2 批（W1053/W1054）报数背书后本轮清偿归零，升格即绿。
+      nFail += gap.length;
+    }
+  }
   for (const r of (cmp ? cmp.newFail : []).slice(0, 40)) {
     console.log(`FAIL ${r.page} :: ${r.item} ${r.cur} (${r.kind}) ${r.measured}`);
   }

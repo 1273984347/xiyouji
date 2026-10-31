@@ -4,12 +4,3361 @@
 > W### 编号规则见 CHANGELOG.md 顶部。
 > 创建于 2026-07-22（v0.8 双索引改造）
 >
-> **历史归档**：W031-W087（v2.0.4-v2.0.60）site/data/ 部分已迁移至 [file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)；W422 再归档 W393-W416 段；W511 归档 W417-W448 段 + W449-W463 损坏区尾部清理。；W736 归档 W449-W699 段（与 CHANGELOG 现役边界统一至 W700）。本文件仅保留 W700+ 现役索引。
+> **历史归档**：W031-W087（v2.0.4-v2.0.60）site/data/ 部分已迁移至 [file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)；W422 再归档 W393-W416 段；W511 归档 W417-W448 段 + W449-W463 损坏区尾部清理。W736 归档 W449-W699 段（与 CHANGELOG 现役边界统一至 W700）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进）。
 >
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。
 
 ---
 
+## W1067 CI action ref 根修批 + 记忆与项目沉淀同步批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_action_refs.py | W1067 | 本批新增（action ref 完整性门禁·形态离线 + 存在性联网双 endpoint 复核·自测 6/6 可证伪） |
+| .github/workflows/screenshot-review.yml | W1067 | 本批修改（merge job 的 action ref 改用仓内已验证 v7 SHA·修 39 位编造 SHA 致 Set up job 阶段失败） |
+| .github/workflows/workflow-lint.yml | W1067 | 本批修改（挂 action ref 形态判据每次 PR 恒生效 + 存在性扫描周级/手动·不带 token） |
+| docs/agent/pitfalls.md | W1067 | 本批修改（新增 E-77~E-82 六条·流程组 75→81·含两条自私有记忆固化入仓） |
+| .agent/skills/puti-shouye/SKILL.md | W1067 | 本批修改（坑表条数计数链同步） |
+| AGENTS.md | W1067 | 本批修改（坑表条数计数链同步 + 级联脚注滚动） |
+| HANDOVER.md | W1067 | 本批修改（坑表条数计数链同步 + 级联同步面） |
+| docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md | W1067 | 本批修改（§4.6 后续批次 W1067 进展段·根因与修法如实记录） |
+| pytest.ini | W1067 | 本批修改（stats 实体标记跟随） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1067 | 本批修改（stats 实体标记跟随） |
+| scripts/index.md | W1067 | 本批修改（目录清单刷新·收录新增判据脚本） |
+| scripts/output/tools-inventory.md | W1067 | 本批修改（工具清单刷新·收录新增判据脚本） |
+| scripts/output/index.md | W1067 | 本批修改（目录清单刷新） |
+| scripts/output/README.md | W1067 | 本批修改（目录清单刷新） |
+## W1066 CI 提速批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_audit_render_states.js | W1066 | 本批新增/修改（按需等待 waitForStable/waitForChange + CONC 6 + --shard 分片 + --out 产物路径） |
+| scripts/batch_screenshots.js | W1066 | 本批新增/修改（多 context 并发 CONC 4·capture() 本已每页独立 context） |
+| scripts/check_screenshot_gates.js | W1066 | 本批新增/修改（--only 支持逗号分隔多值·定向时只跑变更页） |
+| scripts/check_dark_state_gate.js | W1066 | 本批新增/修改（--current 指定分片合并后的产物） |
+| scripts/check_chart_data.py | W1066 | 本批新增/修改（<script>/<style> 剥离改大小写不敏感·CodeQL 告警） |
+| scripts/check_chart_values.js | W1066 | 本批新增/修改（name 正则完整转义反斜杠·CodeQL 告警） |
+| .github/workflows/screenshot-review.yml | W1066 | 本批新增/修改（暗色门禁 4 分片并行 + 合并判定 job + chart-gates 定向） |
+| docs/agent/pitfalls.md | W1066 | 本批新增/修改（E-74~E-76 三条·162→165） |
+| AGENTS.md | W1066 | 本批新增/修改（坑位计数 162→165 + 流程组分项 72→75） |
+| HANDOVER.md | W1066 | 本批新增/修改（头链首 + §一 + 计数 162→165） |
+| README.md | W1066 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1066 | 本批新增/修改（W1066 段 + 编号规则 W001-W1066） |
+| CITATION.cff | W1066 | 本批新增/修改（version W1065→W1066） |
+| .github/workflows/README.md | W1066 | 本批新增/修改（头部版本 + 里程碑行 W450-W1066） |
+| docs/00-导读/W批次编号对账表.md | W1066 | 本批新增/修改（W1066 认领行 + 收官回填） |
+| .agent/skills/puti-shouye/SKILL.md | W1066 | 本批新增/修改（计数链 162→165 两点） |
+| docs/11-方案报告/README.md | W1066 | 本批新增/修改（移除已删文件的登记行） |
+| docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md | W1066 | 本批新增/修改（承接说明去死链·用户有意删除 W358 旧报告） |
+| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W1066 | 本批删除（用户 2026-10-31 有意删除·不再需要） |
+| scripts/output/_w1063_spec.json | W1066 | 本批新增/修改（级联 spec·55 件） |
+
+## W1065 《西游记》GitHub 生态全景调研批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md | W1065 | 本批新增（78 KB·四域生态全景·72 项实跑取证·含附录 A–D） |
+| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W1065 | 本批新增/修改（W358 存量调研承接·7 个失效链接修正见报告 §5.13.1） |
+| docs/11-方案报告/README.md | W1065 | 本批新增/修改（W1065 登记行） |
+| CHANGELOG.md | W1065 | 本批新增/修改（W1065 段 + 编号规则上限） |
+| HANDOVER.md | W1065 | 本批新增/修改（抬头更新链 + §一 概要块） |
+| docs/00-导读/W批次编号对账表.md | W1065 | 本批新增/修改（W1065 认领/收官行） |
+| scripts/output/file-index.md | W1065 | 本批新增/修改（本段） |
+
+## W1063 并行会话滞后提交收口批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_cross_line_rewrite.py | W1063 | 并行会话在途件收口（ruff 清理·io.open → open） |
+| scripts/ledger_backfill.py | W1063 | 并行会话在途件收口（ruff 清理·死变量与变量名遮蔽） |
+| scripts/security_scan.py | W1063 | SEC-002 过宽前瞻根修（改白名单式收紧·防真密钥漏检） |
+| scripts/sec002_negative_probe.py | W1063 | 本批新增（SEC-002 负样本自证 9/9·含「真密钥混汉字」边界） |
+| .github/workflows/security.yml | W1063 | 本批新增/修改（SEC-002 负样本自证独立 job） |
+| docs/agent/pitfalls.md | W1063 | 本批新增/修改（E-71 误报放行须白名单式收紧 + E-72 收口在途件先三方比对·156→161） |
+| AGENTS.md | W1063 | 本批新增/修改（坑位计数 159→161 + 流程组分项 69→71） |
+| HANDOVER.md | W1063 | 本批新增/修改（头链首 + §一 + 坑表计数 159→161） |
+| README.md | W1063 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1063 | 本批新增/修改（W1063 段 + 编号规则 W001-W1063） |
+| CITATION.cff | W1063 | 本批新增/修改（version W1062→W1063） |
+| .github/workflows/README.md | W1063 | 本批新增/修改（头部版本 + 里程碑行 W450-W1063） |
+| docs/00-导读/W批次编号对账表.md | W1063 | 本批新增/修改（W1063 认领行 + 收官回填） |
+| .agent/skills/puti-shouye/SKILL.md | W1063 | 本批新增/修改（计数链 159→161 两点） |
+| scripts/output/_w1063_spec.json | W1063 | 本批新增（级联 spec） |
+| site/index.html | W1063 | 本批新增/修改（页脚链首） |
+| site/dukou-engine.html | W1063 | 本批新增/修改（页脚链首） |
+| site/data/tag-cloud.html | W1063 | 本批新增/修改（页脚链首） |
+| site/data/cross-time-danmaku.html | W1063 | 本批新增/修改（页脚链首） |
+
+## W1062 README 换图未生效根修批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/requirements.txt | W1062 | 本批新增/修改（登记 numpy 2.4.4 + playwright 1.63.0·CI pytest 5 failed 清零） |
+| scripts/check_no_brand_refs.py | W1062 | 本批新增/修改（core.quotepath=false 根修 + 声明性豁免 + fail-closed + 自测 56/56） |
+| AGENTS.md | W1062 | 本批新增/修改（坑位计数 156→159 + 流程组分项 66→69 + 六主题目录） |
+| HANDOVER.md | W1062 | 本批新增/修改（头链首 + §一 当前进度 + 坑表计数 156→159） |
+| README.md | W1062 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1062 | 本批新增/修改（W1062 段 + 编号规则 W001-W1062） |
+| CITATION.cff | W1062 | 本批新增/修改（version W1061→W1062） |
+| .github/workflows/README.md | W1062 | 本批新增/修改（头部版本 + 里程碑行 W450-W1062） |
+| docs/agent/pitfalls.md | W1062 | 本批新增/修改（E-68~E-70 三条 + 流程组 66→69） |
+| .agent/skills/puti-shouye/SKILL.md | W1062 | 本批新增/修改（计数链 156→159 两点） |
+| docs/00-导读/W批次编号对账表.md | W1062 | 本批新增/修改（W1062 认领行 + 收官回填） |
+| docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md | W1062 | 本批新增（框架第 40 次执行报告） |
+| docs/11-方案报告/README.md | W1062 | 本批新增/修改（T40 登记行） |
+| docs/11-方案报告/审查与评审/工具脚本门禁体检与临时归档审计-2026-10-29.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| docs/11-方案报告/计划方案/T04-任务计划执行与经验沉淀报告-2026-10-21.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| scripts/output/_w1062_spec.json | W1062 | 本批新增（级联 spec） |
+| site/index.html | W1062 | 本批新增/修改（页脚链首） |
+| site/dukou-engine.html | W1062 | 本批新增/修改（页脚链首） |
+| site/data/tag-cloud.html | W1062 | 本批新增/修改（页脚链首） |
+| site/data/cross-time-danmaku.html | W1062 | 本批新增/修改（页脚链首） |
+
+## W1061 私有记忆同步批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1061 | 本批新增/修改（铁律 19 + §4.3 两条 + 分项 66 + 级联脚注） |
+| CLAUDE.md | W1061 | 本批新增/修改（速查第 14 行禁 CodeBuddy·三问顺延 15·51/60 行） |
+| docs/agent/pitfalls.md | W1061 | 本批新增/修改（+10 条 E-58~E-67·156·流程组 66） |
+| HANDOVER.md | W1061 | 本批新增/修改（坑表计数链 156 + 级联面） |
+| .agent/skills/puti-shouye/SKILL.md | W1061 | 本批新增/修改（计数链 156） |
+| CHANGELOG.md | W1061 | 收官面（顶段 W1061·验证栏含三问结论） |
+| README.md | W1061 | 级联面（版本行） |
+| STRUCTURE.md | W1061 | 级联面（版本行） |
+| CITATION.cff | W1061 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1061 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1061 | 台账（W1061 行新增） |
+| docs/INDEX.md | W1061 | 登记面（docs 索引） |
+| index.md | W1061 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1061 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1061 | 级联面（里程碑行同步） |
+| site/index.html | W1061 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1061 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1061 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1061 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1061 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1061 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1061 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1061 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1061 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1061 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1061 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1061 | 登记面产物（第 43 槽报告） |
+| scripts/output/_vermilion_solid_cache.json | W1061 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/cross_line_baseline.json | W1061 | 登记面产物（跨行基线·扫描随批） |
+| scripts/output/_cascade_files_W1061.txt | W1061 | 级联清单（本批产物） |
+| scripts/output/_w1061_spec.json | W1061 | 本批 spec |
+
+## W1060 CI 提效批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W1060 | 本批新增/修改（A11y 矩阵 9→1·artifact 名去 matrix 引用） |
+| .github/workflows/dependency-review.yml | W1060 | 本批新增/修改（补 concurrency） |
+| .github/workflows/workflow-lint.yml | W1060 | 本批新增/修改（补 concurrency） |
+| .github/workflows/scorecard.yml | W1060 | 本批新增/修改（补 concurrency） |
+| CHANGELOG.md | W1060 | 收官面（顶段 W1060） |
+| HANDOVER.md | W1060 | 级联面（最后更新/进度） |
+| README.md | W1060 | 级联面（版本行） |
+| STRUCTURE.md | W1060 | 级联面（版本行） |
+| AGENTS.md | W1060 | 级联面（脚注滚动） |
+| CITATION.cff | W1060 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1060 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1060 | 台账（W1060 行新增） |
+| docs/INDEX.md | W1060 | 登记面（docs 索引） |
+| index.md | W1060 | 登记面（根索引） |
+| .github/workflows/README.md | W1060 | 级联面（里程碑行同步） |
+| archive/docs/AGENTS-ARCHIVE.md | W1060 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| site/index.html | W1060 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1060 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1060 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1060 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1060 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1060 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1060 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1060 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1060 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1060 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1060 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1060.txt | W1060 | 级联清单（本批产物） |
+| scripts/output/_w1060_spec.json | W1060 | 本批 spec |
+
+## W1059 第 46 篇工作复盘与优化分析报告入库批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-31.md | W1059 | 本批新增（第 46 篇复盘报告） |
+| docs/11-方案报告/README.md | W1059 | 本批新增/修改（分区表 #52 登记） |
+| CHANGELOG.md | W1059 | 收官面（顶段 W1059·标题含「工作复盘」三信号 A） |
+| HANDOVER.md | W1059 | 级联面（最后更新/进度/里程碑） |
+| README.md | W1059 | 级联面（版本行） |
+| STRUCTURE.md | W1059 | 级联面（版本行） |
+| AGENTS.md | W1059 | 级联面（脚注滚动） |
+| CITATION.cff | W1059 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1059 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1059 | 台账（W1059 认领行在案·收官回填另笔） |
+| docs/INDEX.md | W1059 | 登记面（docs 索引） |
+| index.md | W1059 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1059 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1059 | 级联面（里程碑行同步） |
+| site/index.html | W1059 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1059 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1059 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1059 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1059 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1059 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1059 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1059 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1059 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1059 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1059 | 登记面产物（output 说明） |
+| site/data/search.html | W1059 | 派生面（搜索索引刷新·README 新行） |
+| site/en/search.html | W1059 | 派生面（搜索索引刷新） |
+| scripts/output/_cascade_files_W1059.txt | W1059 | 级联清单（本批产物） |
+| scripts/output/_w1059_spec.json | W1059 | 本批 spec |
+
+## W1058 SKILL.md 计数链漂移订正 + C5e 对账面扩 SKILL（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1058 | 级联面（脚注滚动） |
+| .agent/skills/puti-shouye/SKILL.md | W1058 | 本批新增/修改（计数 144→146 两处） |
+| scripts/check_doc_sync.py | W1058 | 本批新增/修改（C5e 对账面扩 SKILL.md 两形态） |
+| CHANGELOG.md | W1058 | 收官面（顶段 W1058） |
+| HANDOVER.md | W1058 | 级联面（最后更新/进度） |
+| README.md | W1058 | 级联面（版本行） |
+| STRUCTURE.md | W1058 | 级联面（版本行） |
+| CITATION.cff | W1058 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1058 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1058 | 台账（W1058 行新增） |
+| docs/INDEX.md | W1058 | 登记面（docs 索引） |
+| index.md | W1058 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1058 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1058 | 级联面（里程碑行同步） |
+| site/index.html | W1058 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1058 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1058 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1058 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1058 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1058 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1058 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1058 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1058 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1058 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1058 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1058.txt | W1058 | 级联清单（本批产物） |
+| scripts/output/_w1058_spec.json | W1058 | 本批 spec |
+
+## W1057 Backlog 对账批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| HANDOVER.md | W1057 | 本批新增/修改（四、待办压缩 12→1 形态锚 + 对账注记 + 级联面） |
+| CHANGELOG.md | W1057 | 收官面（顶段 W1057 对账记录） |
+| README.md | W1057 | 级联面（版本行） |
+| STRUCTURE.md | W1057 | 级联面（版本行） |
+| AGENTS.md | W1057 | 级联面（脚注滚动） |
+| CITATION.cff | W1057 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1057 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1057 | 台账（W1057 行·状态列含对账 token） |
+| docs/INDEX.md | W1057 | 登记面（docs 索引） |
+| index.md | W1057 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1057 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1057 | 级联面（里程碑行同步） |
+| site/index.html | W1057 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1057 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1057 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1057 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1057 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1057 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1057 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1057 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1057 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1057 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1057 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1057 | 登记面产物（第 43 槽报告·上批余波） |
+| scripts/output/_vermilion_solid_cache.json | W1057 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/output/_cascade_files_W1057.txt | W1057 | 级联清单（本批产物） |
+| scripts/output/_w1057_spec.json | W1057 | 本批 spec |
+
+## W1056 提交前三问自检流程契约（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1056 | 本批新增/修改（铁律 18 + 分项 56 + 级联脚注） |
+| CLAUDE.md | W1056 | 本批新增/修改（速查第 14 行·50/60 行） |
+| docs/agent/pitfalls.md | W1056 | 本批新增/修改（+1 spec 漏列形态·146·流程组 56） |
+| HANDOVER.md | W1056 | 本批新增/修改（坑表计数链 146 + 级联面） |
+| docs/00-导读/W批次编号对账表.md | W1056 | 台账（W1056 行新增） |
+| CHANGELOG.md | W1056 | 收官面（顶段 W1056·验证栏含三问结论） |
+| README.md | W1056 | 级联面（版本行） |
+| STRUCTURE.md | W1056 | 级联面（版本行） |
+| CITATION.cff | W1056 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1056 | 级联面（当前版本行） |
+| docs/INDEX.md | W1056 | 登记面（docs 索引） |
+| index.md | W1056 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1056 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1056 | 级联面（里程碑行同步） |
+| site/index.html | W1056 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1056 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1056 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1056 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1056 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1056 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1056 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1056 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1056 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1056 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1056 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1056.txt | W1056 | 级联清单（本批产物） |
+| scripts/output/_w1056_spec.json | W1056 | 本批 spec |
+
+## W1055 G-03 清偿第二轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_chart_values.js | W1055 | 本批新增/修改（G-03 清偿①时序重试②前缀扩展③影子分层） |
+| CHANGELOG.md | W1055 | 收官面（顶段 W1055） |
+| HANDOVER.md | W1055 | 收官面（最后更新/进度/级联） |
+| README.md | W1055 | 级联面（版本行） |
+| STRUCTURE.md | W1055 | 级联面（版本行） |
+| CITATION.cff | W1055 | 级联面（版本同步） |
+| AGENTS.md | W1055 | 级联面（脚注滚动） |
+| docs/00-导读/项目说明.md | W1055 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1055 | 台账（W1055 行新增） |
+| docs/INDEX.md | W1055 | 登记面（docs 索引） |
+| index.md | W1055 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1055 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1055 | 级联面（里程碑行同步） |
+| site/index.html | W1055 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1055 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1055 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1055 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1055 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1055 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1055 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1055 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1055 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1055 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1055 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1055.txt | W1055 | 级联清单（本批产物） |
+| scripts/output/_w1055_spec.json | W1055 | 本批 spec |
+| scripts/output/_vermilion_solid_cache.json | W1055 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/index.md | W1055 | 登记面（scripts 目录索引） |
+
+## W1054 G-03 清偿第一轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_chart_values.js | W1054 | 本批新增/修改（G-03 清偿①时序重试②前缀扩展③影子分层） |
+| CHANGELOG.md | W1054 | 收官面（顶段 W1054） |
+| HANDOVER.md | W1054 | 收官面（最后更新/进度/级联） |
+| README.md | W1054 | 级联面（版本行） |
+| STRUCTURE.md | W1054 | 级联面（版本行） |
+| CITATION.cff | W1054 | 级联面（版本同步） |
+| AGENTS.md | W1054 | 级联面（脚注滚动） |
+| docs/00-导读/项目说明.md | W1054 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1054 | 台账（W1054 行新增） |
+| docs/INDEX.md | W1054 | 登记面（docs 索引） |
+| index.md | W1054 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1054 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1054 | 级联面（里程碑行同步） |
+| site/index.html | W1054 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1054 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1054 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1054 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1054 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1054 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1054 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1054 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1054 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1054 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1054 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1054.txt | W1054 | 级联清单（本批产物） |
+| scripts/output/_w1054_spec.json | W1054 | 本批 spec |
+| scripts/output/_vermilion_solid_cache.json | W1054 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/index.md | W1054 | 登记面（scripts 目录索引） |
+
+## W1053 W1046 方案实施收尾（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_inlined_css.py | W1053 | 本批新增/修改（G-02 特征断言·self-test 2 例） |
+| scripts/check_chart_values.js | W1053 | 本批新增/修改（G-03 na 影子报数·不进 FAIL） |
+| scripts/check_gsap_motion.py | W1053 | 本批新增/修改（G-04 扫描域扩全+剥注释+J8 glob·self-test 11 例） |
+| scripts/check_frontmatter.py | W1053 | 本批新增/修改（G-05 日期语义+哈希形态·self-test 5 例） |
+| scripts/check_governance_docs.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/check_glossary.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/check_corruption.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/ledger_close_check.py | W1053 | 本批新增/修改（P-01/P-02 C3 五问+回归锁·3 例自测） |
+| scripts/check_review_trigger.py | W1053 | 本批新增/修改（M-03 T4 触发器·2 例自测） |
+| scripts/stats.py | W1053 | 本批新增/修改（M-02 w864_entries/icon_allowlist_entries 两键） |
+| scripts/patch_ratio.py | W1053 | 本批新增（M-01 补丁比影子脚本·不挂槽） |
+| docs/00-导读/文档规范.md | W1053 | 本批新增/修改（I-01 豁免分级审批条款 + I-03 改动分级列 14 行） |
+| scripts/output/_w864_accent_exemptions.json | W1053 | 本批新增/修改（I-02 owner/review_by 字段化 256 条） |
+| AGENTS.md | W1053 | 本批新增/修改（铁律 16 之⑦ + 级联脚注） |
+| CHANGELOG.md | W1053 | 收官面（顶段 W1053） |
+| HANDOVER.md | W1053 | 收官面（最后更新/进度/级联） |
+| README.md | W1053 | 级联面（版本行） |
+| STRUCTURE.md | W1053 | 级联面（版本行） |
+| CITATION.cff | W1053 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1053 | 级联面（当前版本行） |
+| docs/INDEX.md | W1053 | 登记面（docs 索引） |
+| index.md | W1053 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1053 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1053 | 级联面（里程碑行同步） |
+| site/index.html | W1053 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1053 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1053 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1053 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1053 | 登记面产物（stats 实体·含 M-02 两新键） |
+| scripts/output/stats-changelog.json | W1053 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1053 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1053 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1053 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1053 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1053 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1053.txt | W1053 | 级联清单（本批产物） |
+| scripts/output/_w1053_spec.json | W1053 | 本批 spec |
+| docs/00-导读/W批次编号对账表.md | W1053 | 台账（W1053 行新增） |
+
+## W1052 补丁治理实施第一批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1052 | 本批新增/修改（G-01 双写去重 + 分项 55 + 级联脚注） |
+| scripts/check_doc_sync.py | W1052 | 本批新增/修改（C8 同段重复判据 + T30/T31 自测 + 覆盖面先前已收 gates.md） |
+| scripts/reserve_w.py | W1052 | 本批新增/修改（G-07 占号支撑检测 + self_test 三例 + UP009/E702 微修） |
+| docs/agent/pitfalls.md | W1052 | 本批新增/修改（+1 条占号逃避形态·145·流程组 55） |
+| HANDOVER.md | W1052 | 本批新增/修改（坑表计数链 145 + 级联面） |
+| docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md | W1052 | 本批新增/修改（方案钉订正：批准项计数 9→11） |
+| docs/00-导读/W批次编号对账表.md | W1052 | 台账（W992 滞留状态回填 + W1052 行新增） |
+| CHANGELOG.md | W1052 | 收官面（顶段 W1052） |
+| README.md | W1052 | 级联面（版本行） |
+| STRUCTURE.md | W1052 | 级联面（版本行） |
+| CITATION.cff | W1052 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1052 | 级联面（当前版本行） |
+| docs/INDEX.md | W1052 | 登记面（docs 索引） |
+| index.md | W1052 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1052 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1052 | 级联面（里程碑行同步） |
+| site/index.html | W1052 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1052 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1052 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1052 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1052 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1052 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1052 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1052 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1052 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1052 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1052 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1052.txt | W1052 | 级联清单（本批产物） |
+| scripts/output/_w1052_spec.json | W1052 | 本批 spec |
+
+## W1051 复盘触发器口径根修（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_review_trigger.py | W1051 | 本批新增/修改（上篇复盘识别三信号 + 目录面独立证据源·判定本体根修） |
+| tests/unit/test_review_trigger.py | W1051 | 本批新增/修改（单测 +7 例·契约同步 source 键·三负样本可证伪） |
+| docs/agent/pitfalls.md | W1051 | 本批新增/修改（E-57 识别口径绑死单一字面量 ⇒ 同族登记形态逃逸） |
+| AGENTS.md | W1051 | 级联面（脚注滚动 + 坑表计数链两处） |
+| HANDOVER.md | W1051 | 级联面（最后更新 / 一、当前进度 + 计数链两处） |
+| .agent/skills/puti-shouye/SKILL.md | W1051 | 计数链（坑表总条数两处·15 条硬判据不动） |
+| README.md | W1051 | 级联面（版本行） |
+| STRUCTURE.md | W1051 | 级联面（版本行） |
+| docs/00-导读/项目说明.md | W1051 | 级联面（当前版本行） |
+| CITATION.cff | W1051 | 级联面（版本同步） |
+| CHANGELOG.md | W1051 | 收官面（顶段 W1051 + W1042 段标题补点题标识） |
+| docs/00-导读/W批次编号对账表.md | W1051 | 台账（W1051 认领行新增 + 收官回填） |
+| docs/11-方案报告/计划方案/执行前计划-W1051-复盘触发器口径根修.md | W1051 | 方案报告（执行前计划件·五表 + 自包含检查 12 项） |
+| docs/11-方案报告/README.md | W1051 | 登记面（方案报告索引） |
+| docs/INDEX.md | W1051 | 登记面（docs 索引） |
+| index.md | W1051 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1051 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1051 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1051 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1051 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1051 | 级联面（里程碑行同步） |
+| site/index.html | W1051 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1051 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1051 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1051 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1051 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1051 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1051 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1051 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1051 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1051 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1051 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1051.txt | W1051 | 级联清单（本批产物） |
+| scripts/output/_w1051_spec.json | W1051 | 本批 spec |
+| pytest.ini | W1051 | 连带产物（stats 标记跟随·pytest_collected 1087 → 1094·本批新增 7 例） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1051 | 连带产物（stats 标记跟随·pytest_collected 1087 → 1094） |
+| site/data/search.html | W1051 | 连带产物（站内搜索索引刷新·条目数对齐 948） |
+| site/en/search.html | W1051 | 连带产物（站内搜索索引刷新·条目数对齐 948） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1051 | 连带产物（stats 标记面跟随·pytest_collected 1087 → 1094） |
+
+## W1050 门禁判据加固（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W1050 | 本批新增/修改（第 3 槽 A1-A6 计数 fallback·用户批准动门禁本体·py_compile+全量跑通） |
+| scripts/check_doc_sync.py | W1050 | 本批新增/修改（c5b_extra_surfaces 加 gates.md·sweep 覆盖面修复） |
+| docs/agent/gates.md | W1050 | 本批新增/修改（L26 判据文本同步 fallback 描述） |
+| CHANGELOG.md | W1050 | 收官面（顶段 W1050） |
+| HANDOVER.md | W1050 | 收官面（最后更新/一、当前进度） |
+| README.md | W1050 | 级联面（版本行） |
+| STRUCTURE.md | W1050 | 级联面（版本行） |
+| AGENTS.md | W1050 | 级联面（脚注滚动） |
+| CITATION.cff | W1050 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1050 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1050 | 台账（W1050 行新增） |
+| docs/INDEX.md | W1050 | 登记面（docs 索引） |
+| index.md | W1050 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1050 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1050 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1050 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1050 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1050 | 级联面（里程碑行同步） |
+| site/index.html | W1050 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1050 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1050 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1050 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1050 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1050 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1050 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1050 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1050 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1050 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1050 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1050.txt | W1050 | 级联清单（本批产物） |
+| scripts/output/_w1050_spec.json | W1050 | 本批 spec |
+
+## W1049 回次 og:image 全覆盖批·第五轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1049 | 本批新增/修改 |
+| AGENTS.md | W1049 | 本批新增/修改 |
+| CHANGELOG.md | W1049 | 本批新增/修改 |
+| HANDOVER.md | W1049 | 本批新增/修改 |
+| STRUCTURE.md | W1049 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1049 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1049_cascade_manifest.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_prepare.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_stage.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_download.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_fix_p2.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_gate_isolation.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_handover.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_isolate_w1050.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_make_spec.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_master.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_fileindex.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_w1050.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_w1050_faces.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_pick_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_pitfalls.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_prepare.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_readme_register.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_refresh_folders.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_97.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_fetch.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_og.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage_faces.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage_ledger.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_sync_staged.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-104-ch018-gao-taigong.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-104-ch018-gao-taigong.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-107-ch067-honglin-damang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-107-ch067-honglin-damang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-108-ch058-diting.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-108-ch058-diting.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-99-ch046-luli-daxian.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-99-ch046-luli-daxian.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1049 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1049 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/raw/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round18/README.md | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/index.md | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-100-ch050-huode-xingjun.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-101-ch055-nvguo-guowang.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-102-ch084-miefo-guowang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-103-ch005-sida-tianwang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-104-ch018-gao-taigong.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-105-ch032-yinjiao-dawang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-106-ch056-shidai-yanjun.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-107-ch067-honglin-damang.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-108-ch058-diting.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-97-ch016-jinchi-zhanglao.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-98-ch039-wenshu-pusa.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-99-ch046-luli-daxian.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1049 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1049 | 方案报告（索引/架构方案） |
+| docs/11-方案报告/计划方案/执行前计划-W1049-回次og-image全覆盖第五轮.md | W1049 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1049 | 方案报告（索引/架构方案） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1049 | 方案报告（索引/架构方案） |
+| docs/agent/pitfalls.md | W1049 | 坑表（+3 条·出图接口/密排纹理/og 幂等派生） |
+| scripts/output/_cascade_files_W1049.txt | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1049_batch.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_all.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b1.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b2.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b3.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b4.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_p1.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_p2.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_probe.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_pick.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue_107.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue_97.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_spec.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/file-index.md | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1049 | 登记面产物（索引/统计/工具清单） |
+| site/reader/ch005.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch016.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch018.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch032.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch039.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch046.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch050.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch055.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch056.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch058.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch067.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch084.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/static/images/README.md | W1049 | 本批新增/修改 |
+| site/static/images/index.md | W1049 | 本批新增/修改 |
+| site/static/images/og-plate-line-100-ch050-huode-xingjun.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-101-ch055-nvguo-guowang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-102-ch084-miefo-guowang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-103-ch005-sida-tianwang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-104-ch018-gao-taigong.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-106-ch056-shidai-yanjun.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-107-ch067-honglin-damang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-108-ch058-diting.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-98-ch039-wenshu-pusa.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-99-ch046-luli-daxian.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/plate-line-100-ch050-huode-xingjun.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-101-ch055-nvguo-guowang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-102-ch084-miefo-guowang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-103-ch005-sida-tianwang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-104-ch018-gao-taigong.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-106-ch056-shidai-yanjun.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-107-ch067-honglin-damang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-108-ch058-diting.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-98-ch039-wenshu-pusa.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-99-ch046-luli-daxian.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+
+## W1048 P2 治理与孤儿批收编（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CLAUDE.md | W1048 | 本批新增/修改（P2·补铁律 15/16/17 速查行·49/60 行） |
+| docs/agent/gates.md | W1048 | 本批新增/修改（P2·计数旧值 615→616·四源印证） |
+| scripts/check_doc_sync.py | W1048 | W1044 收编（C5e 坑表六主题分项逐项对拍·fail-closed） |
+| scripts/check_plan_template.py | W1048 | W1044 收编（计划目录卫生判据·拦无 .md 扩展名/0 字节坏件） |
+| pytest.ini | W1048 | W1044 收编（pytest_collected 1085→1087 标记跟随） |
+| scripts/output/_vermilion_solid_cache.json | W1048 | 登记面产物（第 49 槽机器缓存自跟随） |
+| archive/scripts/batches/w10xx/_w1013_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1018_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_make_spec.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_master.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_pick.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_prepare.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_verify.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1044_make_spec.py | W1048 | W1044 收编（本批 spec 生成器归档） |
+| docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1048 | W1043 收官口径订正（slug 111→112·随本批入库） |
+| docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md | W1048 | W1046 收编（方案件入库·只出方案不实施·待用户审批） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1048 | 登记面产物（stats 标记自动跟随·W1047 收官余波随本批入库） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1048 | 登记面产物（stats 标记自动跟随·W1047 收官余波随本批入库） |
+| CHANGELOG.md | W1048 | 收官面（顶段 W1048·含 W1047 段订正注） |
+| HANDOVER.md | W1048 | 收官面（最后更新/一、当前进度/四、待办正式登记） |
+| README.md | W1048 | 级联面（版本行） |
+| STRUCTURE.md | W1048 | 级联面（版本行） |
+| AGENTS.md | W1048 | 级联面（脚注滚动） |
+| CITATION.cff | W1048 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1048 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1048 | 台账（W1044 行补·W1046 行回填·W1048 行新增） |
+| docs/INDEX.md | W1048 | 登记面（docs 索引） |
+| index.md | W1048 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1048 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1048 | 级联归档滚动 |
+| scripts/output/stats.json | W1048 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1048 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1048 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1048 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1048 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1048 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1048 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1048.txt | W1048 | 级联清单（本批产物） |
+| scripts/output/_w1048_spec.json | W1048 | 本批 spec |
+
+## W1047 图表判据剥标签根修（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1045 | 本批新增/修改 |
+| .github/workflows/README.md | W1045 | 本批新增/修改 |
+| AGENTS.md | W1045 | 本批新增/修改 |
+| CHANGELOG.md | W1045 | 本批新增/修改 |
+| CITATION.cff | W1045 | 本批新增/修改 |
+| HANDOVER.md | W1045 | 本批新增/修改 |
+| README.md | W1045 | 本批新增/修改 |
+| STRUCTURE.md | W1045 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1047_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/index.md | W1045 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1045 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1045 | 台账（认领行与收官回填） |
+| docs/11-方案报告/计划方案/执行前计划-W1047-图表判据剥标签根修.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/INDEX.md | W1045 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| index.md | W1045 | 本批新增/修改 |
+| scripts/batch_cascade.py | W1045 | 级联工具（上一批成果·本批未改） |
+| scripts/check_chart_data.py | W1045 | 图表判据（剥标签按语法约束 + 注释优先剥离 + 2 例可证伪锁） |
+| scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1047.txt | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1047_spec.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/file-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1045 | 本批新增/修改 |
+| site/data/search.html | W1045 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1045 | 本批新增/修改 |
+| site/dukou-engine.html | W1045 | 本批新增/修改 |
+| site/en/search.html | W1045 | 本批新增/修改 |
+| site/index.html | W1045 | 本批新增/修改 |
+
+## W1045 改写面候选逐处复核 + 存量陈旧清理 + og 切头 A+ 修复（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1045 | 本批新增/修改 |
+| .github/workflows/README.md | W1045 | 本批新增/修改 |
+| AGENTS.md | W1045 | 本批新增/修改 |
+| CHANGELOG.md | W1045 | 本批新增/修改 |
+| CITATION.cff | W1045 | 本批新增/修改 |
+| HANDOVER.md | W1045 | 本批新增/修改 |
+| README.md | W1045 | 本批新增/修改 |
+| STRUCTURE.md | W1045 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1042_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1045_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/index.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w6xx/_w661_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w662_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w663_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w666_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w667_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w668_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w669_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w670_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w671_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w676_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w679_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w684_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w691_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| docs/00-导读/W批次编号对账表.md | W1045 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1045 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/11-方案报告/审查与评审/改写面候选逐处复核与存量陈旧清理报告-W1045.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/11-方案报告/计划方案/执行前计划-W1045-改写面候选逐处复核与存量陈旧清理.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/INDEX.md | W1045 | 本批新增/修改 |
+| docs/agent/gates.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| index.md | W1045 | 本批新增/修改 |
+| scripts/README.md | W1045 | 本批新增/修改 |
+| scripts/batch_cascade.py | W1045 | 级联工具（CITATION.cff 面补行数断言） |
+| scripts/check_crop.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
+| scripts/check_cross_line_rewrite.py | W1045 | 跨行扫描器（基线键升四输入 + 跨行判定补 \s 盲区） |
+| scripts/cross_line_baseline.json | W1045 | 跨行判据基线（四输入键·失效项已清理） |
+| scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1045.txt | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1043_batch_a.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1045_spec.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/file-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/subject_band.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
+| site/data/cross-time-danmaku.html | W1045 | 本批新增/修改 |
+| site/data/search.html | W1045 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1045 | 本批新增/修改 |
+| site/dukou-engine.html | W1045 | 本批新增/修改 |
+| site/en/search.html | W1045 | 本批新增/修改 |
+| site/index.html | W1045 | 本批新增/修改 |
+| site/static/images/og-plate-line-59-ch089-huangshi.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-81-ch074-qingshi.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-88-ch073-duomuguai.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-92-ch086-bihan-bishu.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-93-ch095-yumian.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-95-ch085-diyongfuren.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-96-ch097-xiniu.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| tests/unit/test_cross_line_rewrite.py | W1045 | 键口径回归锁（4 条） |
+
+## W1043 回次 og:image 全覆盖批·第四轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1043 | 本批新增/修改 |
+| .github/workflows/README.md | W1043 | 本批新增/修改 |
+| AGENTS.md | W1043 | 本批新增/修改 |
+| CHANGELOG.md | W1043 | 本批新增/修改 |
+| CITATION.cff | W1043 | 本批新增/修改 |
+| HANDOVER.md | W1043 | 本批新增/修改 |
+| README.md | W1043 | 本批新增/修改 |
+| STRUCTURE.md | W1043 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/misc/_localize_cdn_libs.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w10xx/README.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1042_make_spec.py | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1043_derive_prepare.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_derive_stage.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_derive_verify.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_download.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_make_spec.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_master.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_pick.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_prepare.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_probe_pages.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_sheet.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_stage.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_verify.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/index.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w4xx/_w478_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w4xx/_w490_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w4xx/_w491_en_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w9xx/_w974_cascade.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| assets/promo/plate-set/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-86-ch033-chuikouxian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-86-ch033-chuikouxian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-88-ch073-duomuguai.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-88-ch073-duomuguai.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-93-ch095-yumian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-93-ch095-yumian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-95-ch085-diyongfuren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-95-ch085-diyongfuren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-96-ch097-xiniu.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-96-ch097-xiniu.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1043-sheet.png | W1043 | 拼图预览（本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/raw/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round17/README.md | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/index.md | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-85-ch053-ruyizhenxian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-86-ch033-chuikouxian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-87-ch094-taiyinxingjun.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-88-ch073-duomuguai.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-89-ch069-ziyangzhenren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-90-ch090-yijiukutianzun.png | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-91-ch071-jiuling-shiba.png | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-92-ch086-bihan-bishu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-93-ch095-yumian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-94-ch029-bengpo-baboren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-95-ch085-diyongfuren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-96-ch097-xiniu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1043 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1043 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1043 | 方案报告（目录索引·W1044 订正说明列） |
+| docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1043 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1043 | 方案报告（架构方案·stats report_docs 标记级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1043 | 方案报告（架构方案·stats report_docs 标记级联） |
+| docs/INDEX.md | W1043 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1043 | 坑表（+1 条·判据脆性） |
+| scripts/_w1042_make_spec.py | W1043 | 本批改名·旧名（已由 archive/scripts/batches/w10xx/_w1042_make_spec.py 取代） |
+| scripts/check_cross_line_rewrite.py | W1043 | 本批新增/修改 |
+| scripts/cross_line_baseline.json | W1043 | 本批新增/修改 |
+| scripts/index.md | W1043 | 本批新增/修改 |
+| scripts/output/README.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1043.txt | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1043_batch.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_a.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_b.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_c.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_a.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_b.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_c.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_spec.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/file-index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1043 | 本批新增/修改 |
+| site/data/search.html | W1043 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1043 | 本批新增/修改 |
+| site/dukou-engine.html | W1043 | 本批新增/修改 |
+| site/en/search.html | W1043 | 本批新增/修改 |
+| site/index.html | W1043 | 本批新增/修改 |
+| site/reader/ch029.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch033.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch053.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch069.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch071.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch073.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch085.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch086.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch090.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch094.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch095.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch097.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/static/images/README.md | W1043 | 本批新增/修改 |
+| site/static/images/index.md | W1043 | 本批新增/修改 |
+| site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-86-ch033-chuikouxian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-88-ch073-duomuguai.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-89-ch069-ziyangzhenren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-92-ch086-bihan-bishu.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-93-ch095-yumian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-95-ch085-diyongfuren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-96-ch097-xiniu.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-86-ch033-chuikouxian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-87-ch094-taiyinxingjun.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-88-ch073-duomuguai.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-89-ch069-ziyangzhenren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-90-ch090-yijiukutianzun.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-91-ch071-jiuling-shiba.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-92-ch086-bihan-bishu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-93-ch095-yumian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-95-ch085-diyongfuren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-96-ch097-xiniu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+
+## W1042 工具面根因修复与判据补覆盖批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1042 | 本批新增/修改 |
+| .github/workflows/README.md | W1042 | 本批新增/修改 |
+| AGENTS.md | W1042 | 计数链同步（坑表条数指针） |
+| CHANGELOG.md | W1042 | 本批新增/修改 |
+| CITATION.cff | W1042 | 本批新增/修改 |
+| HANDOVER.md | W1042 | 计数链同步（坑表条数指针） |
+| Makefile | W1042 | 本地 CI 编排（完成提示归位） |
+| README.md | W1042 | 本批新增/修改 |
+| STRUCTURE.md | W1042 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1042 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1042 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1042 | 台账（认领行与收官回填） |
+| docs/11-方案报告/审查与评审/跨行改写面逐处复核报告-2026-10-30.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-30.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/计划方案/执行前计划-W1042-工具面根因修复与判据补覆盖.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/INDEX.md | W1042 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1042 | 坑表（+4 条教训） |
+| pytest.ini | W1042 | 本批新增/修改 |
+| scripts/A_文本基础/章节切分.py | W1042 | 本批新增/修改 |
+| scripts/_w1042_make_spec.py | W1042 | 本批工具脚本 |
+| scripts/check_cross_line_rewrite.py | W1042 | 本批新增/修改 |
+| scripts/cross_line_baseline.json | W1042 | 本批新增/修改 |
+| scripts/index.md | W1042 | 本批新增/修改 |
+| scripts/ledger_backfill.py | W1042 | 台账回填工具（显式参数生效根因修复） |
+| scripts/output/README.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1042.txt | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1042_spec.json | W1042 | 本批 spec 与级联清单 |
+| scripts/output/file-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1042 | 本批新增/修改 |
+| site/data/search.html | W1042 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1042 | 本批新增/修改 |
+| site/dukou-engine.html | W1042 | 本批新增/修改 |
+| site/en/search.html | W1042 | 本批新增/修改 |
+| site/index.html | W1042 | 本批新增/修改 |
+| tests/unit/test_archive_segments.py | W1042 | 本批单测（判据覆盖） |
+| tests/unit/test_cross_line_rewrite.py | W1042 | 本批单测（判据覆盖） |
+| tests/unit/test_plan_template_read_disk.py | W1042 | 本批单测（判据覆盖） |
+
+## W1041 批次号预约机制（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1041 | 本批新增/修改 |
+| AGENTS.md | W1041 | 本批新增/修改 |
+| CHANGELOG.md | W1041 | 本批新增/修改 |
+| CITATION.cff | W1041 | 本批新增/修改 |
+| HANDOVER.md | W1041 | 本批新增/修改 |
+| README.md | W1041 | 本批新增/修改 |
+| STRUCTURE.md | W1041 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1041 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1041 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1041 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1041 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1041 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1041 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1041 | 本批新增/修改 |
+| scripts/output/_w1041_spec.json | W1041 | 本批新增/修改 |
+| scripts/output/file-index.md | W1041 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1041 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1041 | 本批新增/修改 |
+| scripts/output/tools-inventory.md | W1041 | 本批新增/修改 |
+| scripts/reserve_w.py | W1041 | 本批新增/修改 |
+| site/index.html | W1041 | 本批新增/修改 |
+
+## W1040 任务分级协议入库（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/任务分级协议.md | W1040 | 本批新增 |
+| docs/10-方法论沉淀/README.md | W1040 | 索引登记第 27 号 |
+| docs/11-方案报告/README.md | W1040 | §六 登记执行前计划行（T-39） |
+| docs/11-方案报告/计划方案/执行前计划-W1040-任务分级协议入库.md | W1040 | 本批新增（计划归档·W1033 T05 先例·框架号 T-39） |
+| docs/INDEX.md | W1040 | 索引重生成 |
+| docs/00-导读/W批次编号对账表.md | W1040 | 认领登记与收官回填 |
+| scripts/output/_w1040_spec.json | W1040 | 本批新增 |
+| scripts/output/_cascade_files_W1040.txt | W1040 | 级联清单 |
+| CHANGELOG.md | W1040 | 级联·现役段 |
+| README.md | W1040 | 级联 |
+| STRUCTURE.md | W1040 | 级联+stats 标记 sweep |
+| HANDOVER.md | W1040 | 级联 |
+| AGENTS.md | W1040 | 级联（agents_note 脚注轮换） |
+| CITATION.cff | W1040 | 级联（version/date 随批） |
+| docs/00-导读/项目说明.md | W1040 | 级联 |
+| .github/workflows/README.md | W1040 | 级联 |
+| site/index.html | W1040 | 级联 |
+| site/data/cross-time-danmaku.html | W1040 | 级联 |
+| site/data/tag-cloud.html | W1040 | 级联 |
+| site/dukou-engine.html | W1040 | 级联 |
+| site/data/search.html | W1040 | 搜索索引重建 |
+| site/en/search.html | W1040 | 搜索索引重建 |
+| scripts/output/file-index.md | W1040 | 级联 |
+| scripts/output/stats.json | W1040 | methodology_docs 25→26 |
+| archive/docs/AGENTS-ARCHIVE.md | W1040 | 回窗（脚注窗轮换时·未触发删行） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1040 | 回窗（段窗轮换·上轮同窗位已触发） |
+| archive/docs/file-index-ARCHIVE.md | W1040 | 回窗（段窗轮换·上轮同窗位已触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1040 | 回窗（台账行窗轮换·已触发：迁出 W980-W981） |
+| scripts/output/README.md | W1040 | 目录文档 refresh（scripts/output 新件触发时） |
+| scripts/output/index.md | W1040 | 目录文档 refresh（同上） |
+| scripts/output/tools-inventory.md | W1040 | 工具面 refresh（触发时） |
+
+## W1039 用户级记忆五则入项目铁律（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1039 | 本批新增/修改 |
+| AGENTS.md | W1039 | 本批新增/修改 |
+| CHANGELOG.md | W1039 | 本批新增/修改 |
+| CITATION.cff | W1039 | 本批新增/修改 |
+| HANDOVER.md | W1039 | 本批新增/修改 |
+| README.md | W1039 | 本批新增/修改 |
+| STRUCTURE.md | W1039 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1039 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1039 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1039 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1039 | 本批新增/修改 |
+| scripts/output/_w1039_spec.json | W1039 | 本批新增/修改 |
+| scripts/output/file-index.md | W1039 | 本批新增/修改 |
+| site/index.html | W1039 | 本批新增/修改 |
+
+## W1038 a11y 性能优化（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1038 | 本批新增/修改 |
+| AGENTS.md | W1038 | 本批新增/修改 |
+| CHANGELOG.md | W1038 | 本批新增/修改 |
+| CITATION.cff | W1038 | 本批新增/修改 |
+| HANDOVER.md | W1038 | 本批新增/修改 |
+| README.md | W1038 | 本批新增/修改 |
+| STRUCTURE.md | W1038 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1038 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1038 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1038 | 本批新增/修改 |
+| scripts/a11y_audit.py | W1038 | 本批新增/修改 |
+| scripts/output/_w1038_spec.json | W1038 | 本批新增/修改 |
+| scripts/output/file-index.md | W1038 | 本批新增/修改 |
+| site/index.html | W1038 | 本批新增/修改 |
+
+## W1037 门禁耗时剖析（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1037 | 本批新增/修改 |
+| AGENTS.md | W1037 | 本批新增/修改 |
+| CHANGELOG.md | W1037 | 本批新增/修改 |
+| CITATION.cff | W1037 | 本批新增/修改 |
+| HANDOVER.md | W1037 | 本批新增/修改 |
+| README.md | W1037 | 本批新增/修改 |
+| STRUCTURE.md | W1037 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1037 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1037 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1037 | 本批新增/修改 |
+| scripts/output/_w1037_spec.json | W1037 | 本批新增/修改 |
+| scripts/output/file-index.md | W1037 | 本批新增/修改 |
+| scripts/verify_delivery.py | W1037 | 本批新增/修改 |
+| site/index.html | W1037 | 本批新增/修改 |
+
+## W1036 授业官 skill 按编制定名（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1036 | 本批新增/修改 |
+| .agent/skills/xiyouji-guard/SKILL.md | W1036 | 本批新增/修改 |
+| .github/workflows/README.md | W1036 | 本批新增/修改 |
+| AGENTS.md | W1036 | 本批新增/修改 |
+| CHANGELOG.md | W1036 | 本批新增/修改 |
+| CITATION.cff | W1036 | 本批新增/修改 |
+| HANDOVER.md | W1036 | 本批新增/修改 |
+| README.md | W1036 | 本批新增/修改 |
+| STRUCTURE.md | W1036 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1036 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1036 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1036 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1036 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1036 | 本批新增/修改 |
+| scripts/output/_w1036_spec.json | W1036 | 本批新增/修改 |
+| scripts/output/file-index.md | W1036 | 本批新增/修改 |
+| site/index.html | W1036 | 本批新增/修改 |
+
+## W1035 三份职责书（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1035 | 本批新增/修改 |
+| AGENTS.md | W1035 | 本批新增/修改 |
+| CHANGELOG.md | W1035 | 本批新增/修改 |
+| CITATION.cff | W1035 | 本批新增/修改 |
+| HANDOVER.md | W1035 | 本批新增/修改 |
+| README.md | W1035 | 本批新增/修改 |
+| STRUCTURE.md | W1035 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1035 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1035 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1035 | 本批新增/修改 |
+| docs/agent/README.md | W1035 | 本批新增/修改 |
+| docs/agent/closeout-agent-prompt.md | W1035 | 本批新增/修改 |
+| docs/agent/index.md | W1035 | 本批新增/修改 |
+| docs/agent/reconcile-agent-prompt.md | W1035 | 本批新增/修改 |
+| docs/agent/text-audit-agent-prompt.md | W1035 | 本批新增/修改 |
+| scripts/output/_w1035_spec.json | W1035 | 本批新增/修改 |
+| scripts/output/file-index.md | W1035 | 本批新增/修改 |
+| scripts/output/tools-inventory.md | W1035 | 本批新增/修改 |
+| site/index.html | W1035 | 本批新增/修改 |
+
+## W1034 授业官位补全（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/xiyouji-guard/SKILL.md | W1034 | 本批新增/修改 |
+| .github/workflows/README.md | W1034 | 本批新增/修改 |
+| .gitignore | W1034 | 本批新增/修改 |
+| AGENTS.md | W1034 | 本批新增/修改 |
+| CHANGELOG.md | W1034 | 本批新增/修改 |
+| CITATION.cff | W1034 | 本批新增/修改 |
+| HANDOVER.md | W1034 | 本批新增/修改 |
+| README.md | W1034 | 本批新增/修改 |
+| STRUCTURE.md | W1034 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1034 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1034 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1034 | 本批新增/修改 |
+| scripts/output/_w1034_spec.json | W1034 | 本批新增/修改 |
+| scripts/output/file-index.md | W1034 | 本批新增/修改 |
+| site/index.html | W1034 | 本批新增/修改 |
+
+## W1033 T05 计划状态校正（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1033 | 本批新增/修改 |
+| AGENTS.md | W1033 | 本批新增/修改 |
+| CHANGELOG.md | W1033 | 本批新增/修改 |
+| CITATION.cff | W1033 | 本批新增/修改 |
+| HANDOVER.md | W1033 | 本批新增/修改 |
+| README.md | W1033 | 本批新增/修改 |
+| STRUCTURE.md | W1033 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1033 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1033 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1033 | 本批新增/修改 |
+| docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md | W1033 | 本批新增/修改 |
+| scripts/output/_w1033_spec.json | W1033 | 本批新增/修改 |
+| scripts/output/file-index.md | W1033 | 本批新增/修改 |
+| site/index.html | W1033 | 本批新增/修改 |
+
+## W1032 编制表环境依赖纠错（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1032 | 本批新增/修改 |
+| AGENTS.md | W1032 | 本批新增/修改 |
+| CHANGELOG.md | W1032 | 本批新增/修改 |
+| CITATION.cff | W1032 | 本批新增/修改 |
+| HANDOVER.md | W1032 | 本批新增/修改 |
+| README.md | W1032 | 本批新增/修改 |
+| STRUCTURE.md | W1032 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1032 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1032 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1032 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1032 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1032 | 本批新增/修改 |
+| scripts/output/_w1032_spec.json | W1032 | 本批新增/修改 |
+| scripts/output/file-index.md | W1032 | 本批新增/修改 |
+| site/index.html | W1032 | 本批新增/修改 |
+
+## W1031 取经编制表数据重核（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1031 | 本批新增/修改 |
+| AGENTS.md | W1031 | 本批新增/修改 |
+| CHANGELOG.md | W1031 | 本批新增/修改 |
+| CITATION.cff | W1031 | 本批新增/修改 |
+| HANDOVER.md | W1031 | 本批新增/修改 |
+| README.md | W1031 | 本批新增/修改 |
+| STRUCTURE.md | W1031 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1031 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1031 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1031 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1031 | 本批新增/修改 |
+| scripts/output/_w1031_spec.json | W1031 | 本批新增/修改 |
+| scripts/output/file-index.md | W1031 | 本批新增/修改 |
+| site/index.html | W1031 | 本批新增/修改 |
+
+## W1030 方案报告抽查 + 归档覆盖口径入规范（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1030 | 本批新增/修改 |
+| AGENTS.md | W1030 | 本批新增/修改 |
+| CHANGELOG.md | W1030 | 本批新增/修改 |
+| CITATION.cff | W1030 | 本批新增/修改 |
+| HANDOVER.md | W1030 | 本批新增/修改 |
+| README.md | W1030 | 本批新增/修改 |
+| STRUCTURE.md | W1030 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1030 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1030 | 本批新增/修改 |
+| docs/00-导读/文档规范.md | W1030 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1030 | 本批新增/修改 |
+| scripts/output/_w1030_spec.json | W1030 | 本批新增/修改 |
+| scripts/output/file-index.md | W1030 | 本批新增/修改 |
+| site/index.html | W1030 | 本批新增/修改 |
+
+## W1029 方案报告归档判断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1029 | 本批新增/修改 |
+| AGENTS.md | W1029 | 本批新增/修改 |
+| CHANGELOG.md | W1029 | 本批新增/修改 |
+| CITATION.cff | W1029 | 本批新增/修改 |
+| HANDOVER.md | W1029 | 本批新增/修改 |
+| README.md | W1029 | 本批新增/修改 |
+| STRUCTURE.md | W1029 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1029 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1029 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1029 | 本批新增/修改 |
+| docs/11-方案报告/README.md | W1029 | 本批新增/修改 |
+| scripts/output/_w1029_spec.json | W1029 | 本批新增/修改 |
+| scripts/output/file-index.md | W1029 | 本批新增/修改 |
+| site/index.html | W1029 | 本批新增/修改 |
+
+## W1028 归档系统与临时文件系统诊断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1028 | 本批新增/修改 |
+| AGENTS.md | W1028 | 本批新增/修改 |
+| CHANGELOG.md | W1028 | 本批新增/修改 |
+| CITATION.cff | W1028 | 本批新增/修改 |
+| HANDOVER.md | W1028 | 本批新增/修改 |
+| README.md | W1028 | 本批新增/修改 |
+| STRUCTURE.md | W1028 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1028 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1028 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1028 | 本批新增/修改 |
+| docs/agent/batch-closeout-checklist.md | W1028 | 本批新增/修改 |
+| scripts/output/_w1028_spec.json | W1028 | 本批新增/修改 |
+| scripts/output/file-index.md | W1028 | 本批新增/修改 |
+| site/index.html | W1028 | 本批新增/修改 |
+
+## W1027 治理文档文字审查 A 档（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1027 | 本批新增/修改 |
+| AGENTS.md | W1027 | 本批新增/修改 |
+| CHANGELOG.md | W1027 | 本批新增/修改 |
+| CITATION.cff | W1027 | 本批新增/修改 |
+| HANDOVER.md | W1027 | 本批新增/修改 |
+| README.md | W1027 | 本批新增/修改 |
+| STRUCTURE.md | W1027 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1027 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1027 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1027 | 本批新增/修改 |
+| scripts/output/_w1027_spec.json | W1027 | 本批新增/修改 |
+| scripts/output/file-index.md | W1027 | 本批新增/修改 |
+| site/index.html | W1027 | 本批新增/修改 |
+
+## W1026 HANDOVER 已完成内容归档 + 归档机制诊断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1026 | 本批新增/修改 |
+| AGENTS.md | W1026 | 本批新增/修改 |
+| CHANGELOG.md | W1026 | 本批新增/修改 |
+| CITATION.cff | W1026 | 本批新增/修改 |
+| HANDOVER.md | W1026 | 本批新增/修改 |
+| README.md | W1026 | 本批新增/修改 |
+| STRUCTURE.md | W1026 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1026 | 本批新增/修改 |
+| archive/docs/HANDOVER-ARCHIVE.md | W1026 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1026 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1026 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1026 | 本批新增/修改 |
+| scripts/output/_w1026_spec.json | W1026 | 本批新增/修改 |
+| scripts/output/file-index.md | W1026 | 本批新增/修改 |
+| site/index.html | W1026 | 本批新增/修改 |
+
+## W1025 坑表计数升机器判据（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1025 | 本批新增/修改 |
+| AGENTS.md | W1025 | 本批新增/修改 |
+| CHANGELOG.md | W1025 | 本批新增/修改 |
+| CITATION.cff | W1025 | 本批新增/修改 |
+| HANDOVER.md | W1025 | 本批新增/修改 |
+| README.md | W1025 | 本批新增/修改 |
+| STRUCTURE.md | W1025 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1025 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1025 | 本批新增/修改 |
+| scripts/check_doc_sync.py | W1025 | 本批新增/修改 |
+| scripts/output/_w1025_spec.json | W1025 | 本批新增/修改 |
+| scripts/output/file-index.md | W1025 | 本批新增/修改 |
+| site/index.html | W1025 | 本批新增/修改 |
+
+## W1024 本次任务教训固化对账（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1024 | 本批新增/修改 |
+| AGENTS.md | W1024 | 本批新增/修改 |
+| CHANGELOG.md | W1024 | 本批新增/修改 |
+| CITATION.cff | W1024 | 本批新增/修改 |
+| HANDOVER.md | W1024 | 本批新增/修改 |
+| README.md | W1024 | 本批新增/修改 |
+| STRUCTURE.md | W1024 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1024 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1024 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1024 | 本批新增/修改 |
+| docs/agent/batch-closeout-checklist.md | W1024 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1024 | 本批新增/修改 |
+| scripts/output/_w1024_spec.json | W1024 | 本批新增/修改 |
+| scripts/output/file-index.md | W1024 | 本批新增/修改 |
+| site/index.html | W1024 | 本批新增/修改 |
+
+## W1023 提示词库派发骨架补齐（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1023 | 本批新增/修改 |
+| AGENTS.md | W1023 | 本批新增/修改 |
+| CHANGELOG.md | W1023 | 本批新增/修改 |
+| CITATION.cff | W1023 | 本批新增/修改 |
+| HANDOVER.md | W1023 | 本批新增/修改 |
+| README.md | W1023 | 本批新增/修改 |
+| STRUCTURE.md | W1023 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1023 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1023 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/03-工作复盘提示词.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/05-项目审查任务书.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/09-导师提问流程.md | W1023 | 本批新增/修改 |
+| scripts/output/_w1023_spec.json | W1023 | 本批新增/修改 |
+| scripts/output/file-index.md | W1023 | 本批新增/修改 |
+| site/index.html | W1023 | 本批新增/修改 |
+
+## W1022 对抗式审查批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1022 | 本批新增/修改 |
+| AGENTS.md | W1022 | 本批新增/修改 |
+| CHANGELOG.md | W1022 | 本批新增/修改 |
+| CITATION.cff | W1022 | 本批新增/修改 |
+| HANDOVER.md | W1022 | 本批新增/修改 |
+| README.md | W1022 | 本批新增/修改 |
+| STRUCTURE.md | W1022 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1022 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1022 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1022 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1022 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1022 | 本批新增/修改 |
+| pytest.ini | W1022 | 本批新增/修改 |
+| scripts/check_audit_trigger.py | W1022 | 本批新增/修改 |
+| scripts/check_backlog_review.py | W1022 | 本批新增/修改 |
+| scripts/check_motion_ban.py | W1022 | 本批新增/修改 |
+| scripts/check_token_coverage.py | W1022 | 本批新增/修改 |
+| scripts/inline_css.py | W1022 | 本批新增/修改 |
+| scripts/output/_w1022_spec.json | W1022 | 本批新增/修改 |
+| scripts/output/file-index.md | W1022 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1022 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1022 | 本批新增/修改 |
+| scripts/output/stats.json | W1022 | 本批新增/修改 |
+| site/_template.html | W1022 | 本批新增/修改 |
+| site/data/81-hardships-view.html | W1022 | 本批新增/修改 |
+| site/data/81-hardships.html | W1022 | 本批新增/修改 |
+| site/data/_shell.html | W1022 | 本批新增/修改 |
+| site/data/aesthetics.html | W1022 | 本批新增/修改 |
+| site/data/ai-dialogue.html | W1022 | 本批新增/修改 |
+| site/data/business-model.html | W1022 | 本批新增/修改 |
+| site/data/cave-estate.html | W1022 | 本批新增/修改 |
+| site/data/century-dialogue.html | W1022 | 本批新增/修改 |
+| site/data/chapter-stats.html | W1022 | 本批新增/修改 |
+| site/data/chapter-structure-graph.html | W1022 | 本批新增/修改 |
+| site/data/character-appearance.html | W1022 | 本批新增/修改 |
+| site/data/character-dynamic-network.html | W1022 | 本批新增/修改 |
+| site/data/character-presence-timeline.html | W1022 | 本批新增/修改 |
+| site/data/character-relationship-3d-view.html | W1022 | 本批新增/修改 |
+| site/data/character-relationship-3d.html | W1022 | 本批新增/修改 |
+| site/data/character-semantic-network.html | W1022 | 本批新增/修改 |
+| site/data/character-sentiment-arc.html | W1022 | 本批新增/修改 |
+| site/data/chart-design.html | W1022 | 本批新增/修改 |
+| site/data/cognitive-psychology.html | W1022 | 本批新增/修改 |
+| site/data/concept-device.html | W1022 | 本批新增/修改 |
+| site/data/counterfactual.html | W1022 | 本批新增/修改 |
+| site/data/criticism-history.html | W1022 | 本批新增/修改 |
+| site/data/cross-time-danmaku.html | W1022 | 本批新增/修改 |
+| site/data/cultural-misreading.html | W1022 | 本批新增/修改 |
+| site/data/customs-pass-route.html | W1022 | 本批新增/修改 |
+| site/data/data-explorer.html | W1022 | 本批新增/修改 |
+| site/data/deconstruction.html | W1022 | 本批新增/修改 |
+| site/data/dialogue-sentiment.html | W1022 | 本批新增/修改 |
+| site/data/ecology.html | W1022 | 本批新增/修改 |
+| site/data/emotional-heatmap.html | W1022 | 本批新增/修改 |
+| site/data/ethics-consumption.html | W1022 | 本批新增/修改 |
+| site/data/famous-time-travel.html | W1022 | 本批新增/修改 |
+| site/data/four-dimensional-research-network.html | W1022 | 本批新增/修改 |
+| site/data/four-heavenly-kings-artifacts.html | W1022 | 本批新增/修改 |
+| site/data/game-webnovel.html | W1022 | 本批新增/修改 |
+| site/data/global-pattern.html | W1022 | 本批新增/修改 |
+| site/data/graph-explorer.html | W1022 | 本批新增/修改 |
+| site/data/guanyin-six-roles-network.html | W1022 | 本批新增/修改 |
+| site/data/hardship-difficulty-heatmap.html | W1022 | 本批新增/修改 |
+| site/data/hardship-heatmap.html | W1022 | 本批新增/修改 |
+| site/data/heaven-power-network.html | W1022 | 本批新增/修改 |
+| site/data/intertextuality-network.html | W1022 | 本批新增/修改 |
+| site/data/journey-geo-3d.html | W1022 | 本批新增/修改 |
+| site/data/journey-geo-semiotics.html | W1022 | 本批新增/修改 |
+| site/data/journey-map-interactive.html | W1022 | 本批新增/修改 |
+| site/data/journey-route.html | W1022 | 本批新增/修改 |
+| site/data/journey-spacetime.html | W1022 | 本批新增/修改 |
+| site/data/jurisprudence.html | W1022 | 本批新增/修改 |
+| site/data/karma-reincarnation.html | W1022 | 本批新增/修改 |
+| site/data/language-style-radar.html | W1022 | 本批新增/修改 |
+| site/data/linguistics.html | W1022 | 本批新增/修改 |
+| site/data/magic-system.html | W1022 | 本批新增/修改 |
+| site/data/material-archaeology.html | W1022 | 本批新增/修改 |
+| site/data/mbti-evolution.html | W1022 | 本批新增/修改 |
+| site/data/methodology-matrix.html | W1022 | 本批新增/修改 |
+| site/data/ming-political-thought-comparison.html | W1022 | 本批新增/修改 |
+| site/data/monster-background.html | W1022 | 本批新增/修改 |
+| site/data/monster-capability-radar.html | W1022 | 本批新增/修改 |
+| site/data/monster-ecology-network.html | W1022 | 本批新增/修改 |
+| site/data/monster-female-network.html | W1022 | 本批新增/修改 |
+| site/data/monster-hierarchy-network.html | W1022 | 本批新增/修改 |
+| site/data/monster-sociology.html | W1022 | 本批新增/修改 |
+| site/data/monster-victims-network.html | W1022 | 本批新增/修改 |
+| site/data/music-structure.html | W1022 | 本批新增/修改 |
+| site/data/narrative-experiment.html | W1022 | 本批新增/修改 |
+| site/data/narrative-rhythm-curve.html | W1022 | 本批新增/修改 |
+| site/data/narratology-12d-network.html | W1022 | 本批新增/修改 |
+| site/data/narratology-16d-network.html | W1022 | 本批新增/修改 |
+| site/data/perf-canvas-rendering.html | W1022 | 本批新增/修改 |
+| site/data/philosophy.html | W1022 | 本批新增/修改 |
+| site/data/pilgrim-team-dynamic-network.html | W1022 | 本批新增/修改 |
+| site/data/pilgrim-team-psychology-arc.html | W1022 | 本批新增/修改 |
+| site/data/poetry-rhythm-analysis.html | W1022 | 本批新增/修改 |
+| site/data/power-resources.html | W1022 | 本批新增/修改 |
+| site/data/relationships.html | W1022 | 本批新增/修改 |
+| site/data/risk-project.html | W1022 | 本批新增/修改 |
+| site/data/search.html | W1022 | 本批新增/修改 |
+| site/data/six-senses-narratology-network.html | W1022 | 本批新增/修改 |
+| site/data/social-media.html | W1022 | 本批新增/修改 |
+| site/data/story-timeline.html | W1022 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1022 | 本批新增/修改 |
+| site/data/text-evolution.html | W1022 | 本批新增/修改 |
+| site/data/text-search.html | W1022 | 本批新增/修改 |
+| site/data/theological-intervention-network.html | W1022 | 本批新增/修改 |
+| site/data/timeline.html | W1022 | 本批新增/修改 |
+| site/data/underworld-power-network.html | W1022 | 本批新增/修改 |
+| site/data/visual-art.html | W1022 | 本批新增/修改 |
+| site/data/workplace.html | W1022 | 本批新增/修改 |
+| site/dukou-engine.html | W1022 | 本批新增/修改 |
+| site/en/81-hardships-view.html | W1022 | 本批新增/修改 |
+| site/en/81-hardships.html | W1022 | 本批新增/修改 |
+| site/en/academic-papers.html | W1022 | 本批新增/修改 |
+| site/en/aesthetics.html | W1022 | 本批新增/修改 |
+| site/en/ai-dialogue.html | W1022 | 本批新增/修改 |
+| site/en/bestiary.html | W1022 | 本批新增/修改 |
+| site/en/business-model.html | W1022 | 本批新增/修改 |
+| site/en/cave-estate.html | W1022 | 本批新增/修改 |
+| site/en/century-dialogue.html | W1022 | 本批新增/修改 |
+| site/en/chapter-stats.html | W1022 | 本批新增/修改 |
+| site/en/chapter-structure-graph.html | W1022 | 本批新增/修改 |
+| site/en/chapters-map.html | W1022 | 本批新增/修改 |
+| site/en/character-appearance.html | W1022 | 本批新增/修改 |
+| site/en/character-bailongma.html | W1022 | 本批新增/修改 |
+| site/en/character-bajie.html | W1022 | 本批新增/修改 |
+| site/en/character-dynamic-network.html | W1022 | 本批新增/修改 |
+| site/en/character-presence-timeline.html | W1022 | 本批新增/修改 |
+| site/en/character-relationship-3d-view.html | W1022 | 本批新增/修改 |
+| site/en/character-relationship-3d.html | W1022 | 本批新增/修改 |
+| site/en/character-semantic-network.html | W1022 | 本批新增/修改 |
+| site/en/character-sentiment-arc.html | W1022 | 本批新增/修改 |
+| site/en/character-shaseng.html | W1022 | 本批新增/修改 |
+| site/en/character-tangseng.html | W1022 | 本批新增/修改 |
+| site/en/character-wukong.html | W1022 | 本批新增/修改 |
+| site/en/characters.html | W1022 | 本批新增/修改 |
+| site/en/chart-design.html | W1022 | 本批新增/修改 |
+| site/en/cognitive-psychology.html | W1022 | 本批新增/修改 |
+| site/en/concept-device.html | W1022 | 本批新增/修改 |
+| site/en/counterfactual.html | W1022 | 本批新增/修改 |
+| site/en/criticism-history.html | W1022 | 本批新增/修改 |
+| site/en/cross-time-danmaku.html | W1022 | 本批新增/修改 |
+| site/en/cultural-misreading.html | W1022 | 本批新增/修改 |
+| site/en/customs-pass-route.html | W1022 | 本批新增/修改 |
+| site/en/dashboard.html | W1022 | 本批新增/修改 |
+| site/en/data-explorer.html | W1022 | 本批新增/修改 |
+| site/en/deconstruction.html | W1022 | 本批新增/修改 |
+| site/en/dialogue-sentiment.html | W1022 | 本批新增/修改 |
+| site/en/dukou-engine.html | W1022 | 本批新增/修改 |
+| site/en/ecology.html | W1022 | 本批新增/修改 |
+| site/en/emotional-heatmap.html | W1022 | 本批新增/修改 |
+| site/en/essay-ai-era.html | W1022 | 本批新增/修改 |
+| site/en/essay-buddhist-chan.html | W1022 | 本批新增/修改 |
+| site/en/essay-chapter-couplets.html | W1022 | 本批新增/修改 |
+| site/en/essay-character-fu.html | W1022 | 本批新增/修改 |
+| site/en/essay-cipai-linjiangxian.html | W1022 | 本批新增/修改 |
+| site/en/essay-cipai-mantingfang.html | W1022 | 本批新增/修改 |
+| site/en/essay-cipai-shuidiaogetou.html | W1022 | 本批新增/修改 |
+| site/en/essay-cipai-xijiangyue.html | W1022 | 本批新增/修改 |
+| site/en/essay-composition-origins.html | W1022 | 本批新增/修改 |
+| site/en/essay-divine-bureaucracy.html | W1022 | 本批新增/修改 |
+| site/en/essay-folk-belief.html | W1022 | 本批新增/修改 |
+| site/en/essay-historical-xuanzang.html | W1022 | 本批新增/修改 |
+| site/en/essay-information-cocoon.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-economy.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-examination.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-garrison.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-intellectual-history.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-judiciary.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-literary-thought.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-maritime-ban.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-metaphor.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-military.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-politics.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-religion.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-social-customs.html | W1022 | 本批新增/修改 |
+| site/en/essay-modern-management.html | W1022 | 本批新增/修改 |
+| site/en/essay-original-poetry.html | W1022 | 本批新增/修改 |
+| site/en/essay-poetry-imagery.html | W1022 | 本批新增/修改 |
+| site/en/essay-poetry-opening.html | W1022 | 本批新增/修改 |
+| site/en/essay-quanzhen-daoism.html | W1022 | 本批新增/修改 |
+| site/en/essay-rhythm-analysis.html | W1022 | 本批新增/修改 |
+| site/en/essay-scenery-poems.html | W1022 | 本批新增/修改 |
+| site/en/essay-thematic-poetry.html | W1022 | 本批新增/修改 |
+| site/en/essay-three-teachings.html | W1022 | 本批新增/修改 |
+| site/en/essay-version-evolution.html | W1022 | 本批新增/修改 |
+| site/en/essay-zen-koan-vs-neidan.html | W1022 | 本批新增/修改 |
+| site/en/ethics-consumption.html | W1022 | 本批新增/修改 |
+| site/en/famous-time-travel.html | W1022 | 本批新增/修改 |
+| site/en/four-dimensional-research-network.html | W1022 | 本批新增/修改 |
+| site/en/four-heavenly-kings-artifacts.html | W1022 | 本批新增/修改 |
+| site/en/game-webnovel.html | W1022 | 本批新增/修改 |
+| site/en/global-pattern.html | W1022 | 本批新增/修改 |
+| site/en/graph-explorer.html | W1022 | 本批新增/修改 |
+| site/en/guanyin-six-roles-network.html | W1022 | 本批新增/修改 |
+| site/en/guide.html | W1022 | 本批新增/修改 |
+| site/en/hardship-difficulty-heatmap.html | W1022 | 本批新增/修改 |
+| site/en/hardship-heatmap.html | W1022 | 本批新增/修改 |
+| site/en/heaven-power-network.html | W1022 | 本批新增/修改 |
+| site/en/index.html | W1022 | 本批新增/修改 |
+| site/en/intertextuality-network.html | W1022 | 本批新增/修改 |
+| site/en/journey-geo-semiotics.html | W1022 | 本批新增/修改 |
+| site/en/journey-map-interactive.html | W1022 | 本批新增/修改 |
+| site/en/journey-route.html | W1022 | 本批新增/修改 |
+| site/en/journey-spacetime.html | W1022 | 本批新增/修改 |
+| site/en/jurisprudence.html | W1022 | 本批新增/修改 |
+| site/en/karma-reincarnation.html | W1022 | 本批新增/修改 |
+| site/en/language-style-radar.html | W1022 | 本批新增/修改 |
+| site/en/linguistics.html | W1022 | 本批新增/修改 |
+| site/en/magic-system.html | W1022 | 本批新增/修改 |
+| site/en/material-archaeology.html | W1022 | 本批新增/修改 |
+| site/en/mbti-evolution.html | W1022 | 本批新增/修改 |
+| site/en/methodology-matrix.html | W1022 | 本批新增/修改 |
+| site/en/methodology.html | W1022 | 本批新增/修改 |
+| site/en/ming-political-thought-comparison.html | W1022 | 本批新增/修改 |
+| site/en/monster-background.html | W1022 | 本批新增/修改 |
+| site/en/monster-capability-radar.html | W1022 | 本批新增/修改 |
+| site/en/monster-ecology-network.html | W1022 | 本批新增/修改 |
+| site/en/monster-female-network.html | W1022 | 本批新增/修改 |
+| site/en/monster-hierarchy-network.html | W1022 | 本批新增/修改 |
+| site/en/monster-sociology.html | W1022 | 本批新增/修改 |
+| site/en/monster-victims-network.html | W1022 | 本批新增/修改 |
+| site/en/music-structure.html | W1022 | 本批新增/修改 |
+| site/en/narrative-experiment.html | W1022 | 本批新增/修改 |
+| site/en/narrative-rhythm-curve.html | W1022 | 本批新增/修改 |
+| site/en/narratology-12d-network.html | W1022 | 本批新增/修改 |
+| site/en/narratology-16d-network.html | W1022 | 本批新增/修改 |
+| site/en/perf-canvas-rendering.html | W1022 | 本批新增/修改 |
+| site/en/philosophy.html | W1022 | 本批新增/修改 |
+| site/en/pilgrim-team-dynamic-network.html | W1022 | 本批新增/修改 |
+| site/en/pilgrim-team-psychology-arc.html | W1022 | 本批新增/修改 |
+| site/en/poetry-rhythm-analysis.html | W1022 | 本批新增/修改 |
+| site/en/power-resources.html | W1022 | 本批新增/修改 |
+| site/en/relationships.html | W1022 | 本批新增/修改 |
+| site/en/risk-project.html | W1022 | 本批新增/修改 |
+| site/en/search.html | W1022 | 本批新增/修改 |
+| site/en/site-map.html | W1022 | 本批新增/修改 |
+| site/en/six-senses-narratology-network.html | W1022 | 本批新增/修改 |
+| site/en/social-media.html | W1022 | 本批新增/修改 |
+| site/en/tag-cloud.html | W1022 | 本批新增/修改 |
+| site/en/text-evolution.html | W1022 | 本批新增/修改 |
+| site/en/text-search.html | W1022 | 本批新增/修改 |
+| site/en/theological-intervention-network.html | W1022 | 本批新增/修改 |
+| site/en/timeline.html | W1022 | 本批新增/修改 |
+| site/en/tribulations.html | W1022 | 本批新增/修改 |
+| site/en/underworld-power-network.html | W1022 | 本批新增/修改 |
+| site/en/visual-art.html | W1022 | 本批新增/修改 |
+| site/en/visualizations.html | W1022 | 本批新增/修改 |
+| site/en/workplace.html | W1022 | 本批新增/修改 |
+| site/index.html | W1022 | 本批新增/修改 |
+| site/reader/ch001.html | W1022 | 本批新增/修改 |
+| site/reader/ch002.html | W1022 | 本批新增/修改 |
+| site/reader/ch003.html | W1022 | 本批新增/修改 |
+| site/reader/ch004.html | W1022 | 本批新增/修改 |
+| site/reader/ch005.html | W1022 | 本批新增/修改 |
+| site/reader/ch006.html | W1022 | 本批新增/修改 |
+| site/reader/ch007.html | W1022 | 本批新增/修改 |
+| site/reader/ch008.html | W1022 | 本批新增/修改 |
+| site/reader/ch009.html | W1022 | 本批新增/修改 |
+| site/reader/ch010.html | W1022 | 本批新增/修改 |
+| site/reader/ch011.html | W1022 | 本批新增/修改 |
+| site/reader/ch012.html | W1022 | 本批新增/修改 |
+| site/reader/ch013.html | W1022 | 本批新增/修改 |
+| site/reader/ch014.html | W1022 | 本批新增/修改 |
+| site/reader/ch015.html | W1022 | 本批新增/修改 |
+| site/reader/ch016.html | W1022 | 本批新增/修改 |
+| site/reader/ch017.html | W1022 | 本批新增/修改 |
+| site/reader/ch018.html | W1022 | 本批新增/修改 |
+| site/reader/ch019.html | W1022 | 本批新增/修改 |
+| site/reader/ch020.html | W1022 | 本批新增/修改 |
+| site/reader/ch021.html | W1022 | 本批新增/修改 |
+| site/reader/ch022.html | W1022 | 本批新增/修改 |
+| site/reader/ch023.html | W1022 | 本批新增/修改 |
+| site/reader/ch024.html | W1022 | 本批新增/修改 |
+| site/reader/ch025.html | W1022 | 本批新增/修改 |
+| site/reader/ch026.html | W1022 | 本批新增/修改 |
+| site/reader/ch027.html | W1022 | 本批新增/修改 |
+| site/reader/ch028.html | W1022 | 本批新增/修改 |
+| site/reader/ch029.html | W1022 | 本批新增/修改 |
+| site/reader/ch030.html | W1022 | 本批新增/修改 |
+| site/reader/ch031.html | W1022 | 本批新增/修改 |
+| site/reader/ch032.html | W1022 | 本批新增/修改 |
+| site/reader/ch033.html | W1022 | 本批新增/修改 |
+| site/reader/ch034.html | W1022 | 本批新增/修改 |
+| site/reader/ch035.html | W1022 | 本批新增/修改 |
+| site/reader/ch036.html | W1022 | 本批新增/修改 |
+| site/reader/ch037.html | W1022 | 本批新增/修改 |
+| site/reader/ch038.html | W1022 | 本批新增/修改 |
+| site/reader/ch039.html | W1022 | 本批新增/修改 |
+| site/reader/ch040.html | W1022 | 本批新增/修改 |
+| site/reader/ch041.html | W1022 | 本批新增/修改 |
+| site/reader/ch042.html | W1022 | 本批新增/修改 |
+| site/reader/ch043.html | W1022 | 本批新增/修改 |
+| site/reader/ch044.html | W1022 | 本批新增/修改 |
+| site/reader/ch045.html | W1022 | 本批新增/修改 |
+| site/reader/ch046.html | W1022 | 本批新增/修改 |
+| site/reader/ch047.html | W1022 | 本批新增/修改 |
+| site/reader/ch048.html | W1022 | 本批新增/修改 |
+| site/reader/ch049.html | W1022 | 本批新增/修改 |
+| site/reader/ch050.html | W1022 | 本批新增/修改 |
+| site/reader/ch051.html | W1022 | 本批新增/修改 |
+| site/reader/ch052.html | W1022 | 本批新增/修改 |
+| site/reader/ch053.html | W1022 | 本批新增/修改 |
+| site/reader/ch054.html | W1022 | 本批新增/修改 |
+| site/reader/ch055.html | W1022 | 本批新增/修改 |
+| site/reader/ch056.html | W1022 | 本批新增/修改 |
+| site/reader/ch057.html | W1022 | 本批新增/修改 |
+| site/reader/ch058.html | W1022 | 本批新增/修改 |
+| site/reader/ch059.html | W1022 | 本批新增/修改 |
+| site/reader/ch060.html | W1022 | 本批新增/修改 |
+| site/reader/ch061.html | W1022 | 本批新增/修改 |
+| site/reader/ch062.html | W1022 | 本批新增/修改 |
+| site/reader/ch063.html | W1022 | 本批新增/修改 |
+| site/reader/ch064.html | W1022 | 本批新增/修改 |
+| site/reader/ch065.html | W1022 | 本批新增/修改 |
+| site/reader/ch066.html | W1022 | 本批新增/修改 |
+| site/reader/ch067.html | W1022 | 本批新增/修改 |
+| site/reader/ch068.html | W1022 | 本批新增/修改 |
+| site/reader/ch069.html | W1022 | 本批新增/修改 |
+| site/reader/ch070.html | W1022 | 本批新增/修改 |
+| site/reader/ch071.html | W1022 | 本批新增/修改 |
+| site/reader/ch072.html | W1022 | 本批新增/修改 |
+| site/reader/ch073.html | W1022 | 本批新增/修改 |
+| site/reader/ch074.html | W1022 | 本批新增/修改 |
+| site/reader/ch075.html | W1022 | 本批新增/修改 |
+| site/reader/ch076.html | W1022 | 本批新增/修改 |
+| site/reader/ch077.html | W1022 | 本批新增/修改 |
+| site/reader/ch078.html | W1022 | 本批新增/修改 |
+| site/reader/ch079.html | W1022 | 本批新增/修改 |
+| site/reader/ch080.html | W1022 | 本批新增/修改 |
+| site/reader/ch081.html | W1022 | 本批新增/修改 |
+| site/reader/ch082.html | W1022 | 本批新增/修改 |
+| site/reader/ch083.html | W1022 | 本批新增/修改 |
+| site/reader/ch084.html | W1022 | 本批新增/修改 |
+| site/reader/ch085.html | W1022 | 本批新增/修改 |
+| site/reader/ch086.html | W1022 | 本批新增/修改 |
+| site/reader/ch087.html | W1022 | 本批新增/修改 |
+| site/reader/ch088.html | W1022 | 本批新增/修改 |
+| site/reader/ch089.html | W1022 | 本批新增/修改 |
+| site/reader/ch090.html | W1022 | 本批新增/修改 |
+| site/reader/ch091.html | W1022 | 本批新增/修改 |
+| site/reader/ch092.html | W1022 | 本批新增/修改 |
+| site/reader/ch093.html | W1022 | 本批新增/修改 |
+| site/reader/ch094.html | W1022 | 本批新增/修改 |
+| site/reader/ch095.html | W1022 | 本批新增/修改 |
+| site/reader/ch096.html | W1022 | 本批新增/修改 |
+| site/reader/ch097.html | W1022 | 本批新增/修改 |
+| site/reader/ch098.html | W1022 | 本批新增/修改 |
+| site/reader/ch099.html | W1022 | 本批新增/修改 |
+| site/reader/ch100.html | W1022 | 本批新增/修改 |
+| site/reader/index.html | W1022 | 本批新增/修改 |
+| site/reader/themes-hub.html | W1022 | 本批新增/修改 |
+| tests/unit/test_style_block_judgement.py | W1022 | 本批新增/修改 |
+
+## W1021 Backlog 对账触发器常驻化（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1021 | 本批新增/修改 |
+| AGENTS.md | W1021 | 本批新增/修改 |
+| CHANGELOG.md | W1021 | 本批新增/修改 |
+| CITATION.cff | W1021 | 本批新增/修改 |
+| HANDOVER.md | W1021 | 本批新增/修改 |
+| README.md | W1021 | 本批新增/修改 |
+| STRUCTURE.md | W1021 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1021 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1021 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1021 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1021 | 本批新增/修改 |
+| pytest.ini | W1021 | 本批新增/修改 |
+| scripts/check_backlog_review.py | W1021 | 本批新增/修改 |
+| scripts/output/_w1021_spec.json | W1021 | 本批新增/修改 |
+| scripts/output/file-index.md | W1021 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1021 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1021 | 本批新增/修改 |
+| scripts/output/stats.json | W1021 | 本批新增/修改 |
+| scripts/preflight_check.py | W1021 | 本批新增/修改 |
+| site/index.html | W1021 | 本批新增/修改 |
+| tests/unit/test_backlog_review.py | W1021 | 本批新增/修改 |
+
+## W1020 Backlog 登记面对账批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1020 | 本批新增/修改 |
+| AGENTS.md | W1020 | 本批新增/修改 |
+| CHANGELOG.md | W1020 | 本批新增/修改 |
+| CITATION.cff | W1020 | 本批新增/修改 |
+| HANDOVER.md | W1020 | 本批新增/修改 |
+| README.md | W1020 | 本批新增/修改 |
+| STRUCTURE.md | W1020 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1020 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1020 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1020 | 本批新增/修改 |
+| docs/00-导读/统计口径说明.md | W1020 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1020 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1020 | 本批新增/修改 |
+| scripts/README.md | W1020 | 本批新增/修改 |
+| scripts/output/_w1020_spec.json | W1020 | 本批新增/修改 |
+| scripts/output/file-index.md | W1020 | 本批新增/修改 |
+| site/index.html | W1020 | 本批新增/修改 |
+
+## W1019 BL-33/BL-29 收官批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1019 | 本批新增/修改 |
+| AGENTS.md | W1019 | 本批新增/修改 |
+| CHANGELOG.md | W1019 | 本批新增/修改 |
+| CITATION.cff | W1019 | 本批新增/修改 |
+| DESIGN.md | W1019 | 本批新增/修改 |
+| HANDOVER.md | W1019 | 本批新增/修改 |
+| README.md | W1019 | 本批新增/修改 |
+| STRUCTURE.md | W1019 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1019 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1019 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1019 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1019 | 本批新增/修改 |
+| pytest.ini | W1019 | 本批新增/修改 |
+| scripts/inline_css.py | W1019 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1019 | 本批新增/修改 |
+| scripts/output/file-index.md | W1019 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1019 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1019 | 本批新增/修改 |
+| scripts/output/stats.json | W1019 | 本批新增/修改 |
+| site/_template.html | W1019 | 本批新增/修改 |
+| site/data/81-hardships-view.html | W1019 | 本批新增/修改 |
+| site/data/81-hardships.html | W1019 | 本批新增/修改 |
+| site/data/_shell.html | W1019 | 本批新增/修改 |
+| site/data/aesthetics.html | W1019 | 本批新增/修改 |
+| site/data/ai-dialogue.html | W1019 | 本批新增/修改 |
+| site/data/business-model.html | W1019 | 本批新增/修改 |
+| site/data/cave-estate.html | W1019 | 本批新增/修改 |
+| site/data/century-dialogue.html | W1019 | 本批新增/修改 |
+| site/data/chapter-stats.html | W1019 | 本批新增/修改 |
+| site/data/chapter-structure-graph.html | W1019 | 本批新增/修改 |
+| site/data/character-appearance.html | W1019 | 本批新增/修改 |
+| site/data/character-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/data/character-presence-timeline.html | W1019 | 本批新增/修改 |
+| site/data/character-relationship-3d-view.html | W1019 | 本批新增/修改 |
+| site/data/character-relationship-3d.html | W1019 | 本批新增/修改 |
+| site/data/character-semantic-network.html | W1019 | 本批新增/修改 |
+| site/data/character-sentiment-arc.html | W1019 | 本批新增/修改 |
+| site/data/chart-design.html | W1019 | 本批新增/修改 |
+| site/data/cognitive-psychology.html | W1019 | 本批新增/修改 |
+| site/data/concept-device.html | W1019 | 本批新增/修改 |
+| site/data/counterfactual.html | W1019 | 本批新增/修改 |
+| site/data/criticism-history.html | W1019 | 本批新增/修改 |
+| site/data/cross-time-danmaku.html | W1019 | 本批新增/修改 |
+| site/data/cultural-misreading.html | W1019 | 本批新增/修改 |
+| site/data/customs-pass-route.html | W1019 | 本批新增/修改 |
+| site/data/data-explorer.html | W1019 | 本批新增/修改 |
+| site/data/deconstruction.html | W1019 | 本批新增/修改 |
+| site/data/dialogue-sentiment.html | W1019 | 本批新增/修改 |
+| site/data/ecology.html | W1019 | 本批新增/修改 |
+| site/data/emotional-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/ethics-consumption.html | W1019 | 本批新增/修改 |
+| site/data/famous-time-travel.html | W1019 | 本批新增/修改 |
+| site/data/four-dimensional-research-network.html | W1019 | 本批新增/修改 |
+| site/data/four-heavenly-kings-artifacts.html | W1019 | 本批新增/修改 |
+| site/data/game-webnovel.html | W1019 | 本批新增/修改 |
+| site/data/global-pattern.html | W1019 | 本批新增/修改 |
+| site/data/graph-explorer.html | W1019 | 本批新增/修改 |
+| site/data/guanyin-six-roles-network.html | W1019 | 本批新增/修改 |
+| site/data/hardship-difficulty-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/hardship-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/heaven-power-network.html | W1019 | 本批新增/修改 |
+| site/data/intertextuality-network.html | W1019 | 本批新增/修改 |
+| site/data/journey-geo-3d.html | W1019 | 本批新增/修改 |
+| site/data/journey-geo-semiotics.html | W1019 | 本批新增/修改 |
+| site/data/journey-map-interactive.html | W1019 | 本批新增/修改 |
+| site/data/journey-route.html | W1019 | 本批新增/修改 |
+| site/data/journey-spacetime.html | W1019 | 本批新增/修改 |
+| site/data/jurisprudence.html | W1019 | 本批新增/修改 |
+| site/data/karma-reincarnation.html | W1019 | 本批新增/修改 |
+| site/data/language-style-radar.html | W1019 | 本批新增/修改 |
+| site/data/linguistics.html | W1019 | 本批新增/修改 |
+| site/data/magic-system.html | W1019 | 本批新增/修改 |
+| site/data/material-archaeology.html | W1019 | 本批新增/修改 |
+| site/data/mbti-evolution.html | W1019 | 本批新增/修改 |
+| site/data/methodology-matrix.html | W1019 | 本批新增/修改 |
+| site/data/ming-political-thought-comparison.html | W1019 | 本批新增/修改 |
+| site/data/monster-background.html | W1019 | 本批新增/修改 |
+| site/data/monster-capability-radar.html | W1019 | 本批新增/修改 |
+| site/data/monster-ecology-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-female-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-hierarchy-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-sociology.html | W1019 | 本批新增/修改 |
+| site/data/monster-victims-network.html | W1019 | 本批新增/修改 |
+| site/data/music-structure.html | W1019 | 本批新增/修改 |
+| site/data/narrative-experiment.html | W1019 | 本批新增/修改 |
+| site/data/narrative-rhythm-curve.html | W1019 | 本批新增/修改 |
+| site/data/narratology-12d-network.html | W1019 | 本批新增/修改 |
+| site/data/narratology-16d-network.html | W1019 | 本批新增/修改 |
+| site/data/perf-canvas-rendering.html | W1019 | 本批新增/修改 |
+| site/data/philosophy.html | W1019 | 本批新增/修改 |
+| site/data/pilgrim-team-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/data/pilgrim-team-psychology-arc.html | W1019 | 本批新增/修改 |
+| site/data/poetry-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/data/power-resources.html | W1019 | 本批新增/修改 |
+| site/data/relationships.html | W1019 | 本批新增/修改 |
+| site/data/risk-project.html | W1019 | 本批新增/修改 |
+| site/data/search.html | W1019 | 本批新增/修改 |
+| site/data/six-senses-narratology-network.html | W1019 | 本批新增/修改 |
+| site/data/social-media.html | W1019 | 本批新增/修改 |
+| site/data/story-timeline.html | W1019 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1019 | 本批新增/修改 |
+| site/data/text-evolution.html | W1019 | 本批新增/修改 |
+| site/data/text-search.html | W1019 | 本批新增/修改 |
+| site/data/theological-intervention-network.html | W1019 | 本批新增/修改 |
+| site/data/timeline.html | W1019 | 本批新增/修改 |
+| site/data/underworld-power-network.html | W1019 | 本批新增/修改 |
+| site/data/visual-art.html | W1019 | 本批新增/修改 |
+| site/data/workplace.html | W1019 | 本批新增/修改 |
+| site/dukou-engine.html | W1019 | 本批新增/修改 |
+| site/en/81-hardships-view.html | W1019 | 本批新增/修改 |
+| site/en/81-hardships.html | W1019 | 本批新增/修改 |
+| site/en/academic-papers.html | W1019 | 本批新增/修改 |
+| site/en/aesthetics.html | W1019 | 本批新增/修改 |
+| site/en/ai-dialogue.html | W1019 | 本批新增/修改 |
+| site/en/bestiary.html | W1019 | 本批新增/修改 |
+| site/en/business-model.html | W1019 | 本批新增/修改 |
+| site/en/cave-estate.html | W1019 | 本批新增/修改 |
+| site/en/century-dialogue.html | W1019 | 本批新增/修改 |
+| site/en/chapter-stats.html | W1019 | 本批新增/修改 |
+| site/en/chapter-structure-graph.html | W1019 | 本批新增/修改 |
+| site/en/chapters-map.html | W1019 | 本批新增/修改 |
+| site/en/character-appearance.html | W1019 | 本批新增/修改 |
+| site/en/character-bailongma.html | W1019 | 本批新增/修改 |
+| site/en/character-bajie.html | W1019 | 本批新增/修改 |
+| site/en/character-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/en/character-presence-timeline.html | W1019 | 本批新增/修改 |
+| site/en/character-relationship-3d-view.html | W1019 | 本批新增/修改 |
+| site/en/character-relationship-3d.html | W1019 | 本批新增/修改 |
+| site/en/character-semantic-network.html | W1019 | 本批新增/修改 |
+| site/en/character-sentiment-arc.html | W1019 | 本批新增/修改 |
+| site/en/character-shaseng.html | W1019 | 本批新增/修改 |
+| site/en/character-tangseng.html | W1019 | 本批新增/修改 |
+| site/en/character-wukong.html | W1019 | 本批新增/修改 |
+| site/en/characters.html | W1019 | 本批新增/修改 |
+| site/en/chart-design.html | W1019 | 本批新增/修改 |
+| site/en/cognitive-psychology.html | W1019 | 本批新增/修改 |
+| site/en/concept-device.html | W1019 | 本批新增/修改 |
+| site/en/counterfactual.html | W1019 | 本批新增/修改 |
+| site/en/criticism-history.html | W1019 | 本批新增/修改 |
+| site/en/cross-time-danmaku.html | W1019 | 本批新增/修改 |
+| site/en/cultural-misreading.html | W1019 | 本批新增/修改 |
+| site/en/customs-pass-route.html | W1019 | 本批新增/修改 |
+| site/en/dashboard.html | W1019 | 本批新增/修改 |
+| site/en/data-explorer.html | W1019 | 本批新增/修改 |
+| site/en/deconstruction.html | W1019 | 本批新增/修改 |
+| site/en/dialogue-sentiment.html | W1019 | 本批新增/修改 |
+| site/en/dukou-engine.html | W1019 | 本批新增/修改 |
+| site/en/ecology.html | W1019 | 本批新增/修改 |
+| site/en/emotional-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/essay-ai-era.html | W1019 | 本批新增/修改 |
+| site/en/essay-buddhist-chan.html | W1019 | 本批新增/修改 |
+| site/en/essay-chapter-couplets.html | W1019 | 本批新增/修改 |
+| site/en/essay-character-fu.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-linjiangxian.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-mantingfang.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-shuidiaogetou.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-xijiangyue.html | W1019 | 本批新增/修改 |
+| site/en/essay-composition-origins.html | W1019 | 本批新增/修改 |
+| site/en/essay-divine-bureaucracy.html | W1019 | 本批新增/修改 |
+| site/en/essay-folk-belief.html | W1019 | 本批新增/修改 |
+| site/en/essay-historical-xuanzang.html | W1019 | 本批新增/修改 |
+| site/en/essay-information-cocoon.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-economy.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-examination.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-garrison.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-intellectual-history.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-judiciary.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-literary-thought.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-maritime-ban.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-metaphor.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-military.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-politics.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-religion.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-social-customs.html | W1019 | 本批新增/修改 |
+| site/en/essay-modern-management.html | W1019 | 本批新增/修改 |
+| site/en/essay-original-poetry.html | W1019 | 本批新增/修改 |
+| site/en/essay-poetry-imagery.html | W1019 | 本批新增/修改 |
+| site/en/essay-poetry-opening.html | W1019 | 本批新增/修改 |
+| site/en/essay-quanzhen-daoism.html | W1019 | 本批新增/修改 |
+| site/en/essay-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/en/essay-scenery-poems.html | W1019 | 本批新增/修改 |
+| site/en/essay-thematic-poetry.html | W1019 | 本批新增/修改 |
+| site/en/essay-three-teachings.html | W1019 | 本批新增/修改 |
+| site/en/essay-version-evolution.html | W1019 | 本批新增/修改 |
+| site/en/essay-zen-koan-vs-neidan.html | W1019 | 本批新增/修改 |
+| site/en/ethics-consumption.html | W1019 | 本批新增/修改 |
+| site/en/famous-time-travel.html | W1019 | 本批新增/修改 |
+| site/en/four-dimensional-research-network.html | W1019 | 本批新增/修改 |
+| site/en/four-heavenly-kings-artifacts.html | W1019 | 本批新增/修改 |
+| site/en/game-webnovel.html | W1019 | 本批新增/修改 |
+| site/en/global-pattern.html | W1019 | 本批新增/修改 |
+| site/en/graph-explorer.html | W1019 | 本批新增/修改 |
+| site/en/guanyin-six-roles-network.html | W1019 | 本批新增/修改 |
+| site/en/guide.html | W1019 | 本批新增/修改 |
+| site/en/hardship-difficulty-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/hardship-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/heaven-power-network.html | W1019 | 本批新增/修改 |
+| site/en/index.html | W1019 | 本批新增/修改 |
+| site/en/intertextuality-network.html | W1019 | 本批新增/修改 |
+| site/en/journey-geo-semiotics.html | W1019 | 本批新增/修改 |
+| site/en/journey-map-interactive.html | W1019 | 本批新增/修改 |
+| site/en/journey-route.html | W1019 | 本批新增/修改 |
+| site/en/journey-spacetime.html | W1019 | 本批新增/修改 |
+| site/en/jurisprudence.html | W1019 | 本批新增/修改 |
+| site/en/karma-reincarnation.html | W1019 | 本批新增/修改 |
+| site/en/language-style-radar.html | W1019 | 本批新增/修改 |
+| site/en/linguistics.html | W1019 | 本批新增/修改 |
+| site/en/magic-system.html | W1019 | 本批新增/修改 |
+| site/en/material-archaeology.html | W1019 | 本批新增/修改 |
+| site/en/mbti-evolution.html | W1019 | 本批新增/修改 |
+| site/en/methodology-matrix.html | W1019 | 本批新增/修改 |
+| site/en/methodology.html | W1019 | 本批新增/修改 |
+| site/en/ming-political-thought-comparison.html | W1019 | 本批新增/修改 |
+| site/en/monster-background.html | W1019 | 本批新增/修改 |
+| site/en/monster-capability-radar.html | W1019 | 本批新增/修改 |
+| site/en/monster-ecology-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-female-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-hierarchy-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-sociology.html | W1019 | 本批新增/修改 |
+| site/en/monster-victims-network.html | W1019 | 本批新增/修改 |
+| site/en/music-structure.html | W1019 | 本批新增/修改 |
+| site/en/narrative-experiment.html | W1019 | 本批新增/修改 |
+| site/en/narrative-rhythm-curve.html | W1019 | 本批新增/修改 |
+| site/en/narratology-12d-network.html | W1019 | 本批新增/修改 |
+| site/en/narratology-16d-network.html | W1019 | 本批新增/修改 |
+| site/en/perf-canvas-rendering.html | W1019 | 本批新增/修改 |
+| site/en/philosophy.html | W1019 | 本批新增/修改 |
+| site/en/pilgrim-team-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/en/pilgrim-team-psychology-arc.html | W1019 | 本批新增/修改 |
+| site/en/poetry-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/en/power-resources.html | W1019 | 本批新增/修改 |
+| site/en/relationships.html | W1019 | 本批新增/修改 |
+| site/en/risk-project.html | W1019 | 本批新增/修改 |
+| site/en/search.html | W1019 | 本批新增/修改 |
+| site/en/site-map.html | W1019 | 本批新增/修改 |
+| site/en/six-senses-narratology-network.html | W1019 | 本批新增/修改 |
+| site/en/social-media.html | W1019 | 本批新增/修改 |
+| site/en/tag-cloud.html | W1019 | 本批新增/修改 |
+| site/en/text-evolution.html | W1019 | 本批新增/修改 |
+| site/en/text-search.html | W1019 | 本批新增/修改 |
+| site/en/theological-intervention-network.html | W1019 | 本批新增/修改 |
+| site/en/timeline.html | W1019 | 本批新增/修改 |
+| site/en/tribulations.html | W1019 | 本批新增/修改 |
+| site/en/underworld-power-network.html | W1019 | 本批新增/修改 |
+| site/en/visual-art.html | W1019 | 本批新增/修改 |
+| site/en/visualizations.html | W1019 | 本批新增/修改 |
+| site/en/workplace.html | W1019 | 本批新增/修改 |
+| site/index.html | W1019 | 本批新增/修改 |
+| site/reader/ch001.html | W1019 | 本批新增/修改 |
+| site/reader/ch002.html | W1019 | 本批新增/修改 |
+| site/reader/ch003.html | W1019 | 本批新增/修改 |
+| site/reader/ch004.html | W1019 | 本批新增/修改 |
+| site/reader/ch005.html | W1019 | 本批新增/修改 |
+| site/reader/ch006.html | W1019 | 本批新增/修改 |
+| site/reader/ch007.html | W1019 | 本批新增/修改 |
+| site/reader/ch008.html | W1019 | 本批新增/修改 |
+| site/reader/ch009.html | W1019 | 本批新增/修改 |
+| site/reader/ch010.html | W1019 | 本批新增/修改 |
+| site/reader/ch011.html | W1019 | 本批新增/修改 |
+| site/reader/ch012.html | W1019 | 本批新增/修改 |
+| site/reader/ch013.html | W1019 | 本批新增/修改 |
+| site/reader/ch014.html | W1019 | 本批新增/修改 |
+| site/reader/ch015.html | W1019 | 本批新增/修改 |
+| site/reader/ch016.html | W1019 | 本批新增/修改 |
+| site/reader/ch017.html | W1019 | 本批新增/修改 |
+| site/reader/ch018.html | W1019 | 本批新增/修改 |
+| site/reader/ch019.html | W1019 | 本批新增/修改 |
+| site/reader/ch020.html | W1019 | 本批新增/修改 |
+| site/reader/ch021.html | W1019 | 本批新增/修改 |
+| site/reader/ch022.html | W1019 | 本批新增/修改 |
+| site/reader/ch023.html | W1019 | 本批新增/修改 |
+| site/reader/ch024.html | W1019 | 本批新增/修改 |
+| site/reader/ch025.html | W1019 | 本批新增/修改 |
+| site/reader/ch026.html | W1019 | 本批新增/修改 |
+| site/reader/ch027.html | W1019 | 本批新增/修改 |
+| site/reader/ch028.html | W1019 | 本批新增/修改 |
+| site/reader/ch029.html | W1019 | 本批新增/修改 |
+| site/reader/ch030.html | W1019 | 本批新增/修改 |
+| site/reader/ch031.html | W1019 | 本批新增/修改 |
+| site/reader/ch032.html | W1019 | 本批新增/修改 |
+| site/reader/ch033.html | W1019 | 本批新增/修改 |
+| site/reader/ch034.html | W1019 | 本批新增/修改 |
+| site/reader/ch035.html | W1019 | 本批新增/修改 |
+| site/reader/ch036.html | W1019 | 本批新增/修改 |
+| site/reader/ch037.html | W1019 | 本批新增/修改 |
+| site/reader/ch038.html | W1019 | 本批新增/修改 |
+| site/reader/ch039.html | W1019 | 本批新增/修改 |
+| site/reader/ch040.html | W1019 | 本批新增/修改 |
+| site/reader/ch041.html | W1019 | 本批新增/修改 |
+| site/reader/ch042.html | W1019 | 本批新增/修改 |
+| site/reader/ch043.html | W1019 | 本批新增/修改 |
+| site/reader/ch044.html | W1019 | 本批新增/修改 |
+| site/reader/ch045.html | W1019 | 本批新增/修改 |
+| site/reader/ch046.html | W1019 | 本批新增/修改 |
+| site/reader/ch047.html | W1019 | 本批新增/修改 |
+| site/reader/ch048.html | W1019 | 本批新增/修改 |
+| site/reader/ch049.html | W1019 | 本批新增/修改 |
+| site/reader/ch050.html | W1019 | 本批新增/修改 |
+| site/reader/ch051.html | W1019 | 本批新增/修改 |
+| site/reader/ch052.html | W1019 | 本批新增/修改 |
+| site/reader/ch053.html | W1019 | 本批新增/修改 |
+| site/reader/ch054.html | W1019 | 本批新增/修改 |
+| site/reader/ch055.html | W1019 | 本批新增/修改 |
+| site/reader/ch056.html | W1019 | 本批新增/修改 |
+| site/reader/ch057.html | W1019 | 本批新增/修改 |
+| site/reader/ch058.html | W1019 | 本批新增/修改 |
+| site/reader/ch059.html | W1019 | 本批新增/修改 |
+| site/reader/ch060.html | W1019 | 本批新增/修改 |
+| site/reader/ch061.html | W1019 | 本批新增/修改 |
+| site/reader/ch062.html | W1019 | 本批新增/修改 |
+| site/reader/ch063.html | W1019 | 本批新增/修改 |
+| site/reader/ch064.html | W1019 | 本批新增/修改 |
+| site/reader/ch065.html | W1019 | 本批新增/修改 |
+| site/reader/ch066.html | W1019 | 本批新增/修改 |
+| site/reader/ch067.html | W1019 | 本批新增/修改 |
+| site/reader/ch068.html | W1019 | 本批新增/修改 |
+| site/reader/ch069.html | W1019 | 本批新增/修改 |
+| site/reader/ch070.html | W1019 | 本批新增/修改 |
+| site/reader/ch071.html | W1019 | 本批新增/修改 |
+| site/reader/ch072.html | W1019 | 本批新增/修改 |
+| site/reader/ch073.html | W1019 | 本批新增/修改 |
+| site/reader/ch074.html | W1019 | 本批新增/修改 |
+| site/reader/ch075.html | W1019 | 本批新增/修改 |
+| site/reader/ch076.html | W1019 | 本批新增/修改 |
+| site/reader/ch077.html | W1019 | 本批新增/修改 |
+| site/reader/ch078.html | W1019 | 本批新增/修改 |
+| site/reader/ch079.html | W1019 | 本批新增/修改 |
+| site/reader/ch080.html | W1019 | 本批新增/修改 |
+| site/reader/ch081.html | W1019 | 本批新增/修改 |
+| site/reader/ch082.html | W1019 | 本批新增/修改 |
+| site/reader/ch083.html | W1019 | 本批新增/修改 |
+| site/reader/ch084.html | W1019 | 本批新增/修改 |
+| site/reader/ch085.html | W1019 | 本批新增/修改 |
+| site/reader/ch086.html | W1019 | 本批新增/修改 |
+| site/reader/ch087.html | W1019 | 本批新增/修改 |
+| site/reader/ch088.html | W1019 | 本批新增/修改 |
+| site/reader/ch089.html | W1019 | 本批新增/修改 |
+| site/reader/ch090.html | W1019 | 本批新增/修改 |
+| site/reader/ch091.html | W1019 | 本批新增/修改 |
+| site/reader/ch092.html | W1019 | 本批新增/修改 |
+| site/reader/ch093.html | W1019 | 本批新增/修改 |
+| site/reader/ch094.html | W1019 | 本批新增/修改 |
+| site/reader/ch095.html | W1019 | 本批新增/修改 |
+| site/reader/ch096.html | W1019 | 本批新增/修改 |
+| site/reader/ch097.html | W1019 | 本批新增/修改 |
+| site/reader/ch098.html | W1019 | 本批新增/修改 |
+| site/reader/ch099.html | W1019 | 本批新增/修改 |
+| site/reader/ch100.html | W1019 | 本批新增/修改 |
+| site/reader/index.html | W1019 | 本批新增/修改 |
+| site/reader/themes-hub.html | W1019 | 本批新增/修改 |
+| site/system.css | W1019 | 本批新增/修改 |
+| tests/unit/test_inline_css_resync.py | W1019 | 本批新增/修改 |
+| tests/unit/test_rag_server_clamp.py | W1019 | 本批新增/修改 |
+
+## W1018 回次 og:image 全覆盖批·第三轮（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1018 | 本批新增/修改 |
+| AGENTS.md | W1018 | 本批新增/修改 |
+| CHANGELOG.md | W1018 | 本批新增/修改 |
+| CITATION.cff | W1018 | 本批新增/修改 |
+| HANDOVER.md | W1018 | 本批新增/修改 |
+| README.md | W1018 | 本批新增/修改 |
+| STRUCTURE.md | W1018 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1018 | 本批新增/修改 |
+| assets/promo/plate-set/index.md | W1018 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-73-ch020-huxianfeng.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-73-ch020-huxianfeng.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-74-ch024-qingfeng.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-74-ch024-qingfeng.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-75-ch034-bashanhu.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-75-ch034-bashanhu.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-76-ch043-tuolong.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-76-ch043-tuolong.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-77-ch044-yangli.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-77-ch044-yangli.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-78-ch049-laoyuan.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-78-ch049-laoyuan.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-79-ch051-qingniu.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-79-ch051-qingniu.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-80-ch064-xingxian.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-80-ch064-xingxian.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-81-ch074-qingshi.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-81-ch074-qingshi.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-82-ch091-bidun.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-82-ch091-bidun.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-84-ch008-jinding.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-84-ch008-jinding.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1018-sheet.png | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/index.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/README.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/index.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/plate-line-73-ch020-huxianfeng.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-74-ch024-qingfeng.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-75-ch034-bashanhu.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-76-ch043-tuolong.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-77-ch044-yangli.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-78-ch049-laoyuan.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-79-ch051-qingniu.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-80-ch064-xingxian.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-81-ch074-qingshi.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-82-ch091-bidun.png | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-83-ch096-kouyuanwai.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-84-ch008-jinding.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/00-导读/项目说明.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/README.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/T38-任务计划执行与经验沉淀报告-2026-10-29.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/INDEX.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/agent/pitfalls.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| scripts/_w1018_closeout_faces.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_prepare.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_stage.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_verify.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_download.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_index_order.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_names_order.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_refs.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_round16.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_make_spec.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_master.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_pick2.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_prepare.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_probe_covered.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_retry.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_sheet.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_stage.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_verify.py | W1018 | 本批工具/产物 |
+| scripts/index.md | W1018 | 本批工具/产物 |
+| scripts/output/README.md | W1018 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1018.txt | W1018 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch_a.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch_b.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_manifest.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_retry.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1018_spec.json | W1018 | 本批工具/产物 |
+| scripts/output/file-index.md | W1018 | 本批工具/产物 |
+| scripts/output/index.md | W1018 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1018 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1018 | 本批工具/产物 |
+| scripts/output/stats.json | W1018 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1018 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1018 | 本批新增/修改 |
+| site/data/search.html | W1018 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1018 | 本批新增/修改 |
+| site/dukou-engine.html | W1018 | 本批新增/修改 |
+| site/en/search.html | W1018 | 本批新增/修改 |
+| site/index.html | W1018 | 本批新增/修改 |
+| site/reader/ch008.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch020.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch024.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch034.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch043.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch044.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch049.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch051.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch064.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch074.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch091.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch096.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/README.md | W1018 | 本批新增/修改 |
+| site/static/images/index.md | W1018 | 本批新增/修改 |
+| site/static/images/og-plate-line-73-ch020-huxianfeng.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-74-ch024-qingfeng.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-75-ch034-bashanhu.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-76-ch043-tuolong.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-77-ch044-yangli.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-78-ch049-laoyuan.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-79-ch051-qingniu.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-80-ch064-xingxian.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-81-ch074-qingshi.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-82-ch091-bidun.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-83-ch096-kouyuanwai.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-84-ch008-jinding.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-73-ch020-huxianfeng.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-74-ch024-qingfeng.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-75-ch034-bashanhu.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-76-ch043-tuolong.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-77-ch044-yangli.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-78-ch049-laoyuan.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-79-ch051-qingniu.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-80-ch064-xingxian.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-81-ch074-qingshi.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-82-ch091-bidun.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-83-ch096-kouyuanwai.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-84-ch008-jinding.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| assets/promo/plate-set/preview-w1016-sheet.png | W1018 | 本批改名·旧名（已由 assets/promo/plate-set/preview-w1018-sheet.png 取代） |
+| scripts/_w1016_derive_prepare.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_derive_prepare.py 取代） |
+| scripts/_w1016_derive_stage.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_derive_stage.py 取代） |
+| scripts/_w1016_download.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_download.py 取代） |
+| scripts/_w1016_fix_round16.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_fix_round16.py 取代） |
+| scripts/_w1016_master.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_master.py 取代） |
+| scripts/_w1016_pick2.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_pick2.py 取代） |
+| scripts/_w1016_prepare.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_prepare.py 取代） |
+| scripts/_w1016_retry.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_retry.py 取代） |
+| scripts/_w1016_sheet.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_sheet.py 取代） |
+| scripts/_w1016_stage.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_stage.py 取代） |
+
+## W1017 产物目录归位 + 临时区清理批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W1017 | 产物目录归位 / 临时区清理 |
+| STRUCTURE.md | W1017 | 产物目录归位 / 临时区清理 |
+| archive/README.md | W1017 | 产物目录归位 / 临时区清理 |
+| docs/00-导读/W批次编号对账表.md | W1017 | 产物目录归位 / 临时区清理 |
+
+## W1016 教训固化批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1016 | 教训固化 |
+| docs/00-导读/W批次编号对账表.md | W1016 | 教训固化 |
+| docs/00-导读/新Agent启动Prompt.md | W1016 | 教训固化 |
+| docs/agent/pitfalls.md | W1016 | 教训固化 |
+| scripts/batch_cascade.py | W1016 | 教训固化 |
+| scripts/check_doc_sync.py | W1016 | 教训固化 |
+| tests/unit/test_cascade_precheck.py | W1016 | 教训固化 |
+| tests/unit/test_status_z_parse.py | W1016 | 教训固化 |
+
+## W1015 工具链稳健性补强①（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_cross_line_rewrite.py | W1015 | 跨行改写扫描器（改写面高危 0 处·自带 4 例负样本自证） |
+| scripts/check_plan_template.py | W1015 | 第 48 门禁读盘路径补覆盖（self_test 第 ⑧ 例） |
+| scripts/ci_sim.py | W1015 | CI 侧预演接线（新增第 8 项跨行扫描） |
+| tests/unit/test_cross_line_rewrite.py | W1015 | 扫描器单测 5 例 |
+| tests/unit/test_plan_template_read_disk.py | W1015 | 读盘路径单测 4 例 |
+| docs/00-导读/W批次编号对账表.md | W1015 | 台账认领行（精确暂存·未代提他方在途件） |
+
+## W1014 工具链体检整改批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W1014 | 工具链体检整改 |
+| .pre-commit-config.yaml | W1014 | 工具链体检整改 |
+| AGENTS.md | W1014 | 工具链体检整改 |
+| Makefile | W1014 | 工具链体检整改 |
+| archive/README.md | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_align_files.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_derive_prepare.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_download.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_fix_desc.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_inventory.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_make_spec.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_master.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_prepare.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_read.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_retry.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_retry2.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_roster_check.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_sheet.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_shot.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_stage.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_verify.py | W1014 | 工具链体检整改 |
+| docs/00-/345/257/274/350/257/273/W/346/211/271/346/254/241/347/274/226/345/217/267/345/257/271/350/264/246/350/241/250.md | W1014 | 工具链体检整改 |
+| docs/11-/346/226/271/346/241/210/346/212/245/345/221/212//345/256/241/346/237/245/344/270/216/350/257/204/345/256/241//345/267/245/345/205/267/350/204/232/346/234/254/351/227/250/347/246/201/344/275/223/346/243/200/344/270/216/344/270/264/346/227/266/345/275/222/346/241/243/345/256/241/350/256/241-2026-10-29.md | W1014 | 工具链体检整改 |
+| docs/11-/346/226/271/346/241/210/346/212/245/345/221/212/README.md | W1014 | 工具链体检整改 |
+| scripts/A_/346/226/207/346/234/254/345/237/272/347/241/200//347/253/240/350/212/202/345/210/207/345/210/206.py | W1014 | 工具链体检整改 |
+| scripts/batch_cascade.py | W1014 | 工具链体检整改 |
+| scripts/batch_screenshots.js | W1014 | 工具链体检整改 |
+| scripts/check_archive_health.py | W1014 | 工具链体检整改 |
+| scripts/check_audit_trigger.py | W1014 | 工具链体检整改 |
+| scripts/check_chart_values.js | W1014 | 工具链体检整改 |
+| scripts/check_commit_scope.py | W1014 | 工具链体检整改 |
+| scripts/check_doc_size_budget.py | W1014 | 工具链体检整改 |
+| scripts/check_doc_sync.py | W1014 | 工具链体检整改 |
+| scripts/check_emoji_icons.py | W1014 | 工具链体检整改 |
+| scripts/check_plan_template.py | W1014 | 工具链体检整改 |
+| scripts/check_script_coverage.py | W1014 | 工具链体检整改 |
+| scripts/file_protocol_probe.py | W1014 | 工具链体检整改 |
+| scripts/judge_gate.py | W1014 | 工具链体检整改 |
+| scripts/lib/py_launch.js | W1014 | 工具链体检整改 |
+| scripts/output/script-coverage-baseline.txt | W1014 | 工具链体检整改 |
+| scripts/preflight_check.py | W1014 | 工具链体检整改 |
+| scripts/rag/build_vectors.py | W1014 | 工具链体检整改 |
+| scripts/refresh_icon_paths.py | W1014 | 工具链体检整改 |
+| scripts/scan_targets.py | W1014 | 工具链体检整改 |
+| scripts/security_scan.py | W1014 | 工具链体检整改 |
+| scripts/site_audit.py | W1014 | 工具链体检整改 |
+| scripts/subject_band.py | W1014 | 工具链体检整改 |
+| scripts/tmpe_tidy.py | W1014 | 工具链体检整改 |
+| scripts/verify_delivery.py | W1014 | 工具链体检整改 |
+| tests/unit/test_cascade_line_anchor.py | W1014 | 工具链体检整改 |
+| tests/unit/test_doc_size_budget.py | W1014 | 工具链体检整改 |
+| tests/unit/test_milestone_block_regex.py | W1014 | 工具链体检整改 |
+| tests/unit/test_tmpe_tidy.py | W1014 | 工具链体检整改 |
+| tmpe/policy.yml | W1014 | 工具链体检整改 |
+
+## W1013 回次 og:image 全覆盖批·第二轮（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1013 | 本批新增/修改 |
+| HANDOVER.md | W1013 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-61-ch002-puti.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-61-ch002-puti.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-62-ch012-jinchanzi.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-62-ch012-jinchanzi.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-63-ch013-taibaixingxing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-63-ch013-taibaixingxing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-64-ch021-lingji.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-64-ch021-lingji.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-65-ch038-wujiguowang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-65-ch038-wujiguowang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-66-ch045-huli.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-66-ch045-huli.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-67-ch078-zhizhujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-67-ch078-zhizhujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-68-ch082-bailujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-68-ch082-bailujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-69-ch083-laoshujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-69-ch083-laoshujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-70-ch086-bichandawang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-70-ch086-bichandawang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-71-ch087-yuhuawang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-71-ch087-yuhuawang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-72-ch092-dizang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-72-ch092-dizang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1013-sheet.png | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/round15/plate-line-61-ch002-puti.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-62-ch012-jinchanzi.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-63-ch013-taibaixingxing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-64-ch021-lingji.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-65-ch038-wujiguowang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-66-ch045-huli.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-67-ch078-zhizhujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-68-ch082-bailujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-69-ch083-laoshujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-70-ch086-bichandawang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-71-ch087-yuhuawang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-72-ch092-dizang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| docs/11-方案报告/README.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/T37-任务计划执行与经验沉淀报告-2026-10-29.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/执行前计划-T32-回次ogimage全覆盖第二轮.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/agent/pitfalls.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| scripts/_w1013_derive_prepare.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_download.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_inventory.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_make_spec.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_master.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_prepare.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_read.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_retry.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_retry2.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_roster_check.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_sheet.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_shot.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_stage.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_verify.py | W1013 | 本批工具/产物 |
+| scripts/check_js_syntax.py | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch_a.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch_b.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_inventory.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_manifest.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_read.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_retry.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_retry2.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_spec.json | W1013 | 本批工具/产物 |
+| site/reader/ch002.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch012.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch013.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch021.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch038.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch045.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch078.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch082.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch083.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch086.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch087.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch092.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/og-plate-line-61-ch002-puti.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-62-ch012-jinchanzi.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-63-ch013-taibaixingxing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-64-ch021-lingji.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-65-ch038-wujiguowang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-66-ch045-huli.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-67-ch078-zhizhujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-68-ch082-bailujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-69-ch083-laoshujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-70-ch086-bichandawang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-71-ch087-yuhuawang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-72-ch092-dizang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-61-ch002-puti.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-62-ch012-jinchanzi.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-63-ch013-taibaixingxing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-64-ch021-lingji.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-65-ch038-wujiguowang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-66-ch045-huli.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-67-ch078-zhizhujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-68-ch082-bailujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-69-ch083-laoshujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-70-ch086-bichandawang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-71-ch087-yuhuawang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-72-ch092-dizang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+
+## W1012 产物目录瘦身 + 在途收口批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1012 | 产物瘦身 / 在途收口 |
+| AGENTS.md | W1012 | 产物瘦身 / 在途收口 |
+| CHANGELOG.md | W1012 | 产物瘦身 / 在途收口 |
+| CITATION.cff | W1012 | 产物瘦身 / 在途收口 |
+| HANDOVER.md | W1012 | 产物瘦身 / 在途收口 |
+| README.md | W1012 | 产物瘦身 / 在途收口 |
+| STRUCTURE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/README.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/AGENTS-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/file-index-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/README.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/_w851_visual_snapshot_after.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/_w851_visual_snapshot_before.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/_w876_baseline_after.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/_w876_baseline_before.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/index.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/00-导读/W批次编号对账表.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/00-导读/项目说明.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1012 | 产物瘦身 / 在途收口 |
+| pytest.ini | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/README.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_cascade_files_W1012.txt | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_vermilion_solid_cache.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_w1012_spec.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/file-index.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/index.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/stats.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/tools-inventory.md | W1012 | 产物瘦身 / 在途收口 |
+| site/data/cross-time-danmaku.html | W1012 | 产物瘦身 / 在途收口 |
+| site/data/tag-cloud.html | W1012 | 产物瘦身 / 在途收口 |
+| site/dukou-engine.html | W1012 | 产物瘦身 / 在途收口 |
+| site/index.html | W1012 | 产物瘦身 / 在途收口 |
+
+## W1011 仓库整理分类批（2026-10-29）
+
+|---|---|---|
+
+| 文件 | W | 说明 |
+| AGENTS.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| STRUCTURE.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| archive/scripts/batches/misc/_tmp_chap_sheet.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/W批次编号对账表.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/协议边界速查.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/文档规范.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/新Agent启动Prompt.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/04-文化与历史背景/西游记大事年表.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/10-方法论沉淀/例-佛法AI框架原始对话.txt | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/INDEX.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/agent/gates.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/A_文本基础/章节切分.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_gov_doc_claims.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_governance_docs.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_repo_layout.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_w_range_literal.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/output/_vermilion_solid_cache.json | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/output/tools-inventory.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/verify_delivery.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch001.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch003.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch009.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch011.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch022.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch028.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch047.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch063.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch066.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch079.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch089.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch093.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| tests/unit/test_repo_layout.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+
+## W1010 级联自动回窗批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1010 | 级联自动回窗 |
+| CHANGELOG.md | W1010 | 级联自动回窗 |
+| CITATION.cff | W1010 | 级联自动回窗 |
+| HANDOVER.md | W1010 | 级联自动回窗 |
+| README.md | W1010 | 级联自动回窗 |
+| STRUCTURE.md | W1010 | 级联自动回窗 |
+| .github/workflows/README.md | W1010 | 级联自动回窗 |
+| docs/00-导读/项目说明.md | W1010 | 级联自动回窗 |
+| docs/00-导读/W批次编号对账表.md | W1010 | 级联自动回窗 |
+| scripts/batch_cascade.py | W1010 | 级联自动回窗 |
+| tests/unit/test_batch_spec.py | W1010 | 级联自动回窗 |
+| archive/docs/AGENTS-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/FILE-INDEX-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1010 | 级联自动回窗 |
+| scripts/output/file-index.md | W1010 | 级联自动回窗 |
+| scripts/output/tools-inventory.md | W1010 | 级联自动回窗 |
+| scripts/output/_w1010_spec.json | W1010 | 级联自动回窗 |
+| scripts/output/_cascade_files_W1010.txt | W1010 | 级联自动回窗 |
+| scripts/output/_vermilion_solid_cache.json | W1010 | 级联自动回窗 |
+
+## W1009 流程收口批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| CHANGELOG.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| CITATION.cff | W1009 | 流程收口（stats 自动 + spec 单点） |
+| HANDOVER.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| README.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| STRUCTURE.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| .github/workflows/README.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/00-导读/项目说明.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/00-导读/W批次编号对账表.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/agent/pitfalls.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/batch_spec.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/batch_cascade.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/safe_commit.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/check_commit_scope.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| tests/unit/test_batch_spec.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| archive/docs/AGENTS-ARCHIVE.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/file-index.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/tools-inventory.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/_w1009_spec.json | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/_cascade_files_W1009.txt | W1009 | 流程收口（stats 自动 + spec 单点） |
+
+## W1008 回窗 + 触发器归档盲区批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1008 | 回窗 / 归档盲区修复 |
+| CHANGELOG.md | W1008 | 回窗 / 归档盲区修复 |
+| CITATION.cff | W1008 | 回窗 / 归档盲区修复 |
+| HANDOVER.md | W1008 | 回窗 / 归档盲区修复 |
+| README.md | W1008 | 回窗 / 归档盲区修复 |
+| STRUCTURE.md | W1008 | 回窗 / 归档盲区修复 |
+| .github/workflows/README.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/00-导读/项目说明.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/00-导读/W批次编号对账表.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/agent/pitfalls.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/check_audit_trigger.py | W1008 | 回窗 / 归档盲区修复 |
+| tests/unit/test_audit_trigger.py | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/AGENTS-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/FILE-INDEX-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/file-index.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/tools-inventory.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/_w1008_spec.json | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/_cascade_files_W1008.txt | W1008 | 回窗 / 归档盲区修复 |
+
+## W1007 提交范围门禁批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1007 | 提交范围门禁（第 51 槽） |
+| CHANGELOG.md | W1007 | 提交范围门禁（第 51 槽） |
+| CITATION.cff | W1007 | 提交范围门禁（第 51 槽） |
+| HANDOVER.md | W1007 | 提交范围门禁（第 51 槽） |
+| README.md | W1007 | 提交范围门禁（第 51 槽） |
+| STRUCTURE.md | W1007 | 提交范围门禁（第 51 槽） |
+| .github/workflows/README.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/项目说明.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/W批次编号对账表.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/文档规范.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/agent/gates.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/agent/pitfalls.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/check_commit_scope.py | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/verify_delivery.py | W1007 | 提交范围门禁（第 51 槽） |
+| tests/unit/test_commit_scope.py | W1007 | 提交范围门禁（第 51 槽） |
+| archive/docs/AGENTS-ARCHIVE.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/file-index.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/tools-inventory.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/_w1007_spec.json | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/_cascade_files_W1007.txt | W1007 | 提交范围门禁（第 51 槽） |
+
+## W1006 防代提硬拦批（safe_commit --expect-spec）（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| AGENTS.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| CHANGELOG.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| CITATION.cff | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| HANDOVER.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| STRUCTURE.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/docs/AGENTS-ARCHIVE.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_fix_c6.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_fix_head_sentence.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_fix_tail_sep.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_handover_line.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_heroes.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_patch_changelog_files.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_asset_sizes.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_cascade_line.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_changelog_files.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_faces.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_head.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_readme.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_render_flyer.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_serve.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_spec.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_sync_faces.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/00-导读/W批次编号对账表.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/00-导读/项目说明.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/agent/pitfalls.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/check_script_coverage.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/_cascade_files_W1006.txt | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/_vermilion_solid_cache.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/_w1006_spec.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/file-index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/stats-changelog.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/stats-index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/stats.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/tools-inventory.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/safe_commit.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| site/data/cross-time-danmaku.html | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| site/data/tag-cloud.html | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| site/dukou-engine.html | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| site/index.html | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| tests/unit/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| tests/unit/index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| tests/unit/test_safe_commit_expect_spec.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+
+## W1005 hero 水墨图人数修正（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| "archive/docs/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250-ARCHIVE.md" | W1005 | 本批改动 |
+| "docs/00-\345\257\274\350\257\273/\351\241\271\347\233\256\350\257\264\346\230\216.md" | W1005 | 本批改动 |
+| "docs/11-\346\226\271\346\241\210\346\212\245\345\221\212/\350\256\276\350\256\241\344\270\216\346\236\266\346\236\204\346\226\271\346\241\210/\347\263\273\347\273\237\346\236\266\346\236\204\346\226\271\346\241\210v2-\347\233\256\346\240\207\346\200\201\344\270\216\350\220\275\345\234\260\350\267\257\347\272\277-2026-10-25.md" | W1005 | 本批改动 |
+| DESIGN.md | W1005 | 本批改动 |
+| archive/README.md | W1005 | 本批改动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1005 | 本批改动 |
+| archive/docs/file-index-ARCHIVE.md | W1005 | 本批改动 |
+| archive/scripts/batches/w9xx/README.md | W1005 | 本批改动 |
+| archive/scripts/batches/w9xx/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg | W1005 | 本批改动 |
+| assets/promo/output/xiyouji-flyer-a4-en-front.png | W1005 | flyer A4 正面 PNG 重渲染（静态快照同步新图） |
+| assets/promo/output/xiyouji-flyer-a4-front.png | W1005 | flyer A4 正面 PNG 重渲染（静态快照同步新图） |
+| docs/agent/adversarial-audit-prompt.md | W1005 | 登记面 |
+| docs/agent/gates.md | W1005 | 登记面 |
+| docs/agent/pitfalls.md | W1005 | 登记面 |
+| pytest.ini | W1005 | 本批改动 |
+| scripts/_w1005_fix_c6.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_fix_head_sentence.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_handover_line.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_heroes.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_faces.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_head.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_readme.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_render_flyer.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_serve.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_spec.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_sync_faces.py | W1005 | 本批工具/产物 |
+| scripts/accent_audit.py | W1005 | 本批工具/产物 |
+| scripts/check_audit_trigger.py | W1005 | 本批工具/产物 |
+| scripts/check_crop.py | W1005 | 本批工具/产物 |
+| scripts/check_emoji_icons.py | W1005 | 本批工具/产物 |
+| scripts/check_page_admission.py | W1005 | 本批工具/产物 |
+| scripts/check_script_coverage.py | W1005 | 本批工具/产物 |
+| scripts/check_vermilion_solid.js | W1005 | 本批工具/产物 |
+| scripts/file_protocol_probe.py | W1005 | 本批工具/产物 |
+| scripts/icon_probe.js | W1005 | 本批工具/产物 |
+| scripts/index.md | W1005 | 本批工具/产物 |
+| scripts/j1_name_audit.py | W1005 | 本批工具/产物 |
+| scripts/output/README.md | W1005 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1004_spec.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_batch.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_heroes.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_map.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_spec.json | W1005 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1005 | 本批工具/产物 |
+| scripts/refresh_icon_paths.py | W1005 | 本批工具/产物 |
+| scripts/scan_targets.py | W1005 | 本批工具/产物 |
+| scripts/site_audit.py | W1005 | 本批工具/产物 |
+| scripts/subject_band.py | W1005 | 本批工具/产物 |
+| scripts/visual_regression_probe.py | W1005 | 本批工具/产物 |
+| site/static/images/hero-01-xihai-yunhai.webp | W1005 | 原地替换（人数修正·4 人形 + 1 匹白马） |
+| site/static/images/ink-mountains-hero.webp | W1005 | 原地替换（人数修正·4 人形 + 1 匹白马） |
+| tests/unit/README.md | W1005 | 本批改动 |
+| tests/unit/index.md | W1005 | 本批改动 |
+| tests/unit/test_audit_trigger.py | W1005 | 本批改动 |
+| tests/unit/test_script_hygiene.py | W1005 | 本批改动 |
+| tests/unit/test_w851_j1_name_audit.py | W1005 | 本批改动 |
+| tests/unit/test_w851_visual_regression_probe.py | W1005 | 本批改动 |
+
+## W1004 转正清零 + 审查触发器判据修正批（B1 字样≠事件 / B2 max / B4 台账归位）（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| AGENTS.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| CHANGELOG.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| CITATION.cff | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| DESIGN.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| HANDOVER.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| STRUCTURE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/AGENTS-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/file-index-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/scripts/batches/w9xx/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/scripts/batches/w9xx/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/00-导读/W批次编号对账表.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/00-导读/项目说明.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/adversarial-audit-prompt.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/gates.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/pitfalls.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/AD_认知心理/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/accent_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_audit_trigger.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_crop.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_emoji_icons.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_page_admission.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_script_coverage.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_vermilion_solid.js | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/file_protocol_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/icon_probe.js | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/j1_name_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_cascade_files_W1003.txt | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_vermilion_solid_cache.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_w1003_spec.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_w1004_spec.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/file-index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats-changelog.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats-index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/refresh_icon_paths.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/scan_targets.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/site_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/subject_band.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/visual_regression_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_audit_trigger.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_script_hygiene.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_w851_j1_name_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_w851_visual_regression_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+
+## W1003 agent-web chat 集成验证与死重清退批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/package.json | W1003 | 移除零引用死重依赖 @tdesign-react/aigc（W401 带入） |
+| xiyouji-agent-web/package-lock.json | W1003 | 随 aigc 清退同步重锁 |
+| xiyouji-agent-web/e2e/chat.e2e.mjs | W1003 | 前端端口 4232→4600（迁出 WinNAT 保留段 4138-4237·EACCES 假故障修根） |
+
+## W1002 脚本三档归位批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1002 | §3 目录注释改写 + §4.3 坑位计数同步（95 条·git 节 23） |
+| Makefile | W1002 | ledger 目标改 `scripts/ledger_mutation_test.py` |
+| archive/README.md | W1002 | 归档结构补 w8xx/w9xx/w10xx 桶 + 归档台账追加 W1002 组行 |
+| archive/scripts/batches/w10xx/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_clean_locks.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_final.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_finish_faces.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_fix_index.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_fix_rule_anchor.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_probe_faces.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_restore_changelog_head.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_stage.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w954_review_evidence.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w978_review_evidence.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_derive.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_download.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_insert_plates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_precheck_pages.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_retry.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_serve.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_zoom.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_derive.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_download.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_insert_plates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_precheck_pages.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_retry.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_serve.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_zoom.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w986_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w986_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_family_scan.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_insert_scenes.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_card_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_docs.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_cascade.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_eol.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_gates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_insert.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_inventory.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_make_assets.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_match.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_pitfalls.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_plan.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_precheck.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_subject.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_verify.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_map.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_master.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_og_gap.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_pick.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_read.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_roster.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_split.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_closeout.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_crop_recheck.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_derive_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_diag.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_fix_t35.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_fix_wnum.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_insert.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_ledger_fill.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_probe.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_probe_h1.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_rebuild_missing_og.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo2.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo_map.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_register.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_renumber.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_sync_counts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_verify.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| assets/promo/plate-set/README.md | W1002 | 验算脚本改转正名 + 逐批 prep 路径死链修正 |
+| docs/00-导读/文档规范.md | W1002 | §5 归档新增「脚本三档归位（W1002 定式）」条款 |
+| docs/11-方案报告/README.md | W1002 | 判据表路径改转正名 `plan_template_review.py` |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md | W1002 | 取证脚本链接改归档路径（lint_links 活链校正） |
+| docs/agent/pitfalls.md | W1002 | 坑表：「`_` 前缀=一次性」口径改写为「脚本三档归位」（94→95 条）+ E-05/E-19 转正名 |
+| scripts/check_crop.py | W1002 | 转正：去 `_` 前缀（跨批裁切判据）+ 仓根硬编码改 `dirname(dirname(__file__))` |
+| scripts/check_plan_template.py | W1002 | import 与 docstring 改转正名 |
+| scripts/check_script_coverage.py | W1002 | 第 42 门禁新增 C4（历史批滞留必红 + 转正候选棘轮 8 件）+ 自测 6→9 例 |
+| scripts/ledger_mutation_test.py | W1002 | 转正：去 `_` 前缀（Makefile ledger 目标调用·W933 建） |
+| scripts/output/tools-inventory.md | W1002 | 重生成（152 件） |
+| scripts/plan_template_review.py | W1002 | 转正：去 `_` 前缀（第 48 门禁判据表·W857 建） |
+| scripts/plates_verify.py | W1002 | 转正：去 `_` 前缀（跨批素材判据 J1–J10·W945 建） |
+| tests/unit/test_script_hygiene.py | W1002 | C4 判据纯函数 + 转正件加载性 + 门禁自测端到端（5 例） |
+| .github/workflows/README.md | W1002 | 本批新增/修改 |
+| CHANGELOG.md | W1002 | 本批新增/修改 |
+| CITATION.cff | W1002 | 本批新增/修改 |
+| HANDOVER.md | W1002 | 本批新增/修改 |
+| README.md | W1002 | 本批新增/修改 |
+| STRUCTURE.md | W1002 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/file-index-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/scripts/batches/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/w9xx/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/w9xx/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| docs/00-导读/W批次编号对账表.md | W1002 | 台账认领行 + 行归档回窗（W942-W943 迁出） |
+| docs/00-导读/项目说明.md | W1002 | 本批新增/修改 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md | W1002 | 取证脚本链接改归档路径（lint_links 活链校正） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1002 | 本批新增/修改 |
+| pytest.ini | W1002 | 本批新增/修改 |
+| scripts/index.md | W1002 | 目录索引重生成（scripts/ 根减 84 件） |
+| scripts/output/_cascade_files_W1002.txt | W1002 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1002 | 本批新增/修改 |
+| scripts/output/_w1002_spec.json | W1002 | 本批级联 spec |
+| scripts/output/file-index.md | W1002 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1002 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1002 | 本批新增/修改 |
+| scripts/output/stats.json | W1002 | C5d 实算对账刷新（--w W1002） |
+| site/data/cross-time-danmaku.html | W1002 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1002 | 本批新增/修改 |
+| site/dukou-engine.html | W1002 | 本批新增/修改 |
+| site/index.html | W1002 | 本批新增/修改 |
+| scripts/output/README.md | W1002 | 本批新增/修改 |
+| scripts/output/index.md | W1002 | 本批新增/修改 |
+| tests/unit/README.md | W1002 | 本批新增/修改 |
+| tests/unit/index.md | W1002 | 本批新增/修改 |
+
+## W1001 回次 og:image 全覆盖批·第一轮试点（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1001 | 本批新增/修改 |
+| AGENTS.md | W1001 | 本批新增/修改 |
+| CHANGELOG.md | W1001 | 本批新增/修改 |
+| CITATION.cff | W1001 | 本批新增/修改 |
+| HANDOVER.md | W1001 | 本批新增/修改 |
+| README.md | W1001 | 本批新增/修改 |
+| STRUCTURE.md | W1001 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1001 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-49-ch001-xianshi.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-49-ch001-xianshi.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-50-ch003-aoguang.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-50-ch003-aoguang.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-51-ch009-yuanshoucheng.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-51-ch009-yuanshoucheng.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-52-ch011-xiaoyu.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-52-ch011-xiaoyu.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-53-ch022-liushahe.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-53-ch022-liushahe.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-54-ch028-qunyao.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-54-ch028-qunyao.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-55-ch047-tongtianhe.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-55-ch047-tongtianhe.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-56-ch063-jiutou.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-56-ch063-jiutou.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-57-ch066-mile.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-57-ch066-mile.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-58-ch079-nanpo.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-58-ch079-nanpo.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-59-ch089-huangshi.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-59-ch089-huangshi.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-60-ch093-geigu.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-60-ch093-geigu.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1001 | 本批新增/修改 |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1001 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round14/README.md | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/index.md | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-49-ch001-xianshi.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-50-ch003-aoguang.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-51-ch009-yuanshoucheng.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-52-ch011-xiaoyu.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-53-ch022-liushahe.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-54-ch028-qunyao.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-55-ch047-tongtianhe.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-56-ch063-jiutou.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-57-ch066-mile.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-58-ch079-nanpo.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-59-ch089-huangshi.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-60-ch093-geigu.jpg | W1001 | 出图原件（12 张·含重出） |
+| docs/00-导读/W批次编号对账表.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/00-导读/项目说明.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/11-方案报告/README.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/11-方案报告/计划方案/T35-任务计划执行与经验沉淀报告-2026-10-28.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/agent/pitfalls.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| scripts/_w1001_stage.py | W1001 | 本批工具/产物 |
+| scripts/_w951_check_crop.py | W1001 | 本批工具/产物 |
+| scripts/_w990_map.py | W1001 | 本批工具/产物 |
+| scripts/_w990_master.py | W1001 | 本批工具/产物 |
+| scripts/_w990_og_gap.py | W1001 | 本批工具/产物 |
+| scripts/_w990_read.py | W1001 | 本批工具/产物 |
+| scripts/_w990_roster.py | W1001 | 本批工具/产物 |
+| scripts/_w990_split.py | W1001 | 本批工具/产物 |
+| scripts/_w999_closeout.py | W1001 | 本批工具/产物 |
+| scripts/_w999_derive_prepare.py | W1001 | 本批工具/产物 |
+| scripts/_w999_insert.py | W1001 | 本批工具/产物 |
+| scripts/_w999_make_spec.py | W1001 | 本批工具/产物 |
+| scripts/_w999_prepare.py | W1001 | 本批工具/产物 |
+| scripts/_w999_rebuild_missing_og.py | W1001 | 本批工具/产物 |
+| scripts/_w999_redo.py | W1001 | 本批工具/产物 |
+| scripts/_w999_redo2.py | W1001 | 本批工具/产物 |
+| scripts/_w999_sheet.py | W1001 | 本批工具/产物 |
+| scripts/_w999_verify.py | W1001 | 本批工具/产物 |
+| scripts/output/_w1001_spec.json | W1001 | 本批工具/产物 |
+| scripts/output/file-index.md | W1001 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1001 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1001 | 本批新增/修改 |
+| site/dukou-engine.html | W1001 | 本批新增/修改 |
+| site/index.html | W1001 | 本批新增/修改 |
+| site/reader/ch001.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch003.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch009.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch011.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch022.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch028.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch047.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch063.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch066.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch079.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch089.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch093.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/og-plate-line-40-ch023-sichan.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-41-ch027-bailong.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-42-ch030-sancha.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-43-luoshanv.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-44-kuimulang.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-45-zhaoan-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-46-fushi-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-47-jingwu-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-48-xuanzang-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-49-ch001-xianshi.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-50-ch003-aoguang.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-51-ch009-yuanshoucheng.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-52-ch011-xiaoyu.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-53-ch022-liushahe.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-54-ch028-qunyao.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-55-ch047-tongtianhe.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-56-ch063-jiutou.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-57-ch066-mile.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-58-ch079-nanpo.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-59-ch089-huangshi.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-60-ch093-geigu.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-49-ch001-xianshi.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-50-ch003-aoguang.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-51-ch009-yuanshoucheng.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-52-ch011-xiaoyu.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-53-ch022-liushahe.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-54-ch028-qunyao.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-55-ch047-tongtianhe.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-56-ch063-jiutou.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-57-ch066-mile.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-58-ch079-nanpo.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-59-ch089-huangshi.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-60-ch093-geigu.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+
+## W1000 对抗式审查常驻化批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_audit_trigger.py | W1000 | 新建对抗式审查触发器（台账即事实源·四态自测） |
+| docs/agent/adversarial-audit-prompt.md | W1000 | 派发 prompt 模板（W998 实战沉淀·收尾义务四条） |
+| scripts/preflight_check.py | W1000 | 触发器提示位接线 |
+
+## W999 必守纪律晋升批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W999 | §6 铁律 14 修实例必修根（权威落点） |
+| CLAUDE.md | W999 | 速查第 12 行（指向 §6-14 与 pitfalls 流程组） |
+
+## W998 对抗式审查修复批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_size_budget.py | W998 | C4 移出 HANDOVER 门控（死门控+fline NameError 修复） |
+| scripts/cascade_lock.py | W998 | 创建中短重试防双持 + CLI --pid |
+| scripts/batch_cascade.py | W998 | finally release 传 pid + [SCRIPTS] 口径随 W992 |
+| docs/agent/pitfalls.md | W997 | 子节标题计数校准（级联 9·流程 20） |
+
+## W997 协作纪律入库批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W997 | 流程组新增「修实例必修根+检查按字面范围」（89→90） |
+| AGENTS.md | W997 | §4.3 计数两处同步（90 条·流程 20） |
+| scripts/archive_ledger_rows.py | W997 | A4 收紧为真在途判据（已停止行不误伤） |
+
+## W996 流程提示位批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/ledger_close_check.py | W996 | C2 判据：反向迭代台账——已收官+hash 落地+无级联段（现役+归档两面）=漏跑 batch_cascade；豁免让号/并号/已停止/空壳/作废/补录/追记；--allow-open 不豁免本判据；self-test 扩 C2 三态
+| docs/00-导读/W批次编号对账表.md | W996 | W996 认领行与收官回填
+| CHANGELOG.md | W996 | W996 段
+| HANDOVER.md | W996 | 级联头尾链与里程碑块
+| README.md | W996 | 当前批次版本行
+| STRUCTURE.md | W996 | 当前批次版本行
+| docs/00-导读/项目说明.md | W996 | 当前批次版本行
+| .github/workflows/README.md | W996 | 工作流层版本面推进 W996
+| site/index.html | W996 | 页脚批次链插入 W996
+| site/data/cross-time-danmaku.html | W996 | 页脚批次链插入 W996
+| site/data/tag-cloud.html | W996 | 页脚批次链插入 W996
+| site/dukou-engine.html | W996 | 页脚批次链插入 W996
+| AGENTS.md | W996 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W996 | 脚注滚动迁入的最老条目
+| CITATION.cff | W996 | version 同步为 W996
+| scripts/output/file-index.md | W996 | W996 段插入
+| scripts/output/_w996_spec.json | W996 | 本批级联 spec
+| scripts/output/_cascade_files_W996.txt | W996 | 级联落盘清单
+
+## W995 tier2 按W段拆分批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/CHANGELOG-ARCHIVE-tier2.md | W995 | 拆分：1044KB→746KB（W001-W399·210 段留存·范围件 W400-W559 抽出）
+| archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md | W995 | 新建范围件（W400-W559·144 段 299KB·范围命名约定首件）
+| scripts/archive_tier2.py | W995 | 追加逻辑升级：容量判断（容器+迁出 >1MB → 自动开范围命名新件·合规头部生成）+ LIMIT 常量
+| scripts/check_archive_health.py | W995 | T1b 升格：tier2 破线从登记观察升为 problem（拆分约定后可执行）+ glob 扩范围件 + run(prefix) 参数
+| scripts/batch_cascade.py | W995 | 收官提示位扩展（W994 延后件·W992 校准提交后落）：[ARCHIVE] 健康行 + [TMPE] 上次清理活动日期（独立尾部块）
+| scripts/verify_delivery.py | W995 | ARCHIVE_DOCS 登记 +2（file-index-ARCHIVE-tier2.md·CHANGELOG-ARCHIVE-tier2-W400-W559.md·§11.2 tier2 须登记条款）
+| archive/README.md | W995 | 台账 2 行（范围件/file-index-tier2）+ 结构树补范围件
+| docs/00-导读/W批次编号对账表.md | W995 | W995 认领行与收官回填
+| CHANGELOG.md | W995 | W995 段
+| HANDOVER.md | W995 | 级联头尾链与里程碑块
+| README.md | W995 | 当前批次版本行
+| STRUCTURE.md | W995 | 当前批次版本行
+| docs/00-导读/项目说明.md | W995 | 当前批次版本行
+| .github/workflows/README.md | W995 | 工作流层版本面推进 W995
+| site/index.html | W995 | 页脚批次链插入 W995
+| site/data/cross-time-danmaku.html | W995 | 页脚批次链插入 W995
+| site/data/tag-cloud.html | W995 | 页脚批次链插入 W995
+| site/dukou-engine.html | W995 | 页脚批次链插入 W995
+| AGENTS.md | W995 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W995 | 脚注滚动迁入的最老条目
+| CITATION.cff | W995 | version 同步为 W995
+| scripts/output/file-index.md | W995 | W995 段插入
+| scripts/output/_w995_spec.json | W995 | 本批级联 spec（补建）
+| scripts/output/_cascade_files_W995.txt | W995 | 级联落盘清单
+
+## W994 归档系统打磨批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_archive_health.py | W994 | 新建：归档区健康探针（T1 tier-2 判距/T2 台账组行计数对账/T3 冷存储警告在位/T4 汇总·报告型 --strict 门禁候选·--self-test）
+| scripts/archive_tier2.py | W994 | 新建：二级归档常驻工具（键序前缀切分·守恒五道·§11.2 1MB 线执行器·--self-test）
+| tests/unit/test_archive_health.py | W994 | 单测 5 例（T1 三态/T2 语义含 batches 门面件排除/切分前缀/混层键 0）
+| archive/docs/CHANGELOG-ARCHIVE.md | W994 | tier-2 实跑回线：1198KB→900KB（迁出 144 段 W400-W559 至 tier2·指针行入头部链）
+| archive/docs/CHANGELOG-ARCHIVE-tier2.md | W994 | 承接 144 段（W400-W559·298KB）
+| archive/docs/file-index-ARCHIVE.md | W994 | tier-2 实跑回线：1070KB→816KB（迁出 10 目录节至 tier2·指针行入头部链）
+| archive/docs/file-index-ARCHIVE-tier2.md | W994 | 新建（§11.2 二级归档层·首批 10 节 254KB）
+| archive/README.md | W994 | 存量组行补登记 3 条（顶层 47 件/w4xx 11 件/w5xx 149 件·此前仅结构树目录级提及·探针 T2 对账基线）
+| archive/scripts/batches/README.md | W994 | 冷存储警告补入（W836 ROOT 上溯失效·禁直接运行·T3 判据标的）
+| scripts/README.md | W994 | 场景速查 +2 行（二级归档/健康体检路由）
+| docs/00-导读/W批次编号对账表.md | W994 | W994 认领行与收官回填
+| CHANGELOG.md | W994 | W994 段
+| HANDOVER.md | W994 | 级联头尾链与里程碑块
+| README.md | W994 | 当前批次版本行
+| STRUCTURE.md | W994 | 当前批次版本行
+| docs/00-导读/项目说明.md | W994 | 当前批次版本行
+| .github/workflows/README.md | W994 | 工作流层版本面推进 W994
+| site/index.html | W994 | 页脚批次链插入 W994
+| site/data/cross-time-danmaku.html | W994 | 页脚批次链插入 W994
+| site/data/tag-cloud.html | W994 | 页脚批次链插入 W994
+| site/dukou-engine.html | W994 | 页脚批次链插入 W994
+| AGENTS.md | W994 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W994 | 脚注滚动迁入的最老条目
+| CITATION.cff | W994 | version 同步为 W994
+| scripts/output/file-index.md | W994 | W994 段插入
+| scripts/output/_w994_spec.json | W994 | 本批级联 spec
+| scripts/output/_cascade_files_W994.txt | W994 | 级联落盘清单
+| scripts/gen_folder_docs.py | W994 | 冷存储警告模板级注入（archive/scripts/batches README·防 refresh 覆写） |
 
 ## W993 全仓行尾定形批（2026-10-27）
 
@@ -20,14 +3369,12 @@
 | docs/agent/pitfalls.md | W993 | 行尾定形时代结束条目（CRLF 锚定作废） |
 | AGENTS.md | W993 | 坑位计数 88→89 两处同步 |
 
-
 ## W992 一次性件定向退役与提示位口径校准批（2026-10-27）
 
 | 文件 | W | 说明 |
 |---|---|---|
 | archive/scripts/batches/w9xx/ | W992 | 迁入 4 件（_w988 族·零引用） |
 | scripts/batch_cascade.py | W992 | [SCRIPTS] 提示位口径校准 |
-
 
 ## W991 级联运行锁与提交隔离批（2026-10-27）
 
@@ -850,7 +4197,6 @@ docs/11-方案报告/README.md
 | tests/unit/test_archive_segments.py | W960 | 搬段工具单测 4 例（三种段形态解析与负样本） |
 | pytest.ini · 系统架构方案v2 | W960 | pytest_collected 标记归一 910（并行竞态三数字拼接修复） |
 
-
 ## W959 T10 V1.1 计数口径订正批（2026-10-26）
 
 | 文件 | W | 说明 |
@@ -978,2529 +4324,4 @@ docs/11-方案报告/README.md
 | scripts/output/_cascade_files_W953.txt | W953 | 当批级联清单 |
 | CHANGELOG.md | W953 | W953 版段 |
 | docs/00-导读/W批次编号对账表.md | W953 | W953 认领行 |
-
-## W952 内页人物题图续批第二组（12 张·人物+主题混合）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-01-bailongma.webp | W952 | 新增·白龙马 |
-| site/static/images/plate-line-02-dujiao-shengwang.webp | W952 | 新增·独角兕大王 |
-| site/static/images/plate-line-03-linggan.webp | W952 | 新增·灵感大王 |
-| site/static/images/plate-line-04-huangfengguai.webp | W952 | 新增·黄风怪 |
-| site/static/images/plate-line-05-saitaisui.webp | W952 | 新增·赛太岁 |
-| site/static/images/plate-line-06-jiuLingyuansheng.webp | W952 | 新增·九灵元圣 |
-| site/static/images/plate-line-07-nezha.webp | W952 | 新增·哪吒 |
-| site/static/images/plate-line-08-angrixingguan.webp | W952 | 新增·昴日星官 |
-| site/static/images/plate-line-09-jingu-topic.webp | W952 | 新增·紧箍咒专题 |
-| site/static/images/plate-line-10-jindouyun-topic.webp | W952 | 新增·筋斗云专题 |
-| site/static/images/plate-line-11-fabao-topic.webp | W952 | 新增·法宝系统专题 |
-| site/static/images/plate-line-12-wuzi-jing-topic.webp | W952 | 新增·无字真经专题 |
-| site/reader/people/白龙马.html | W952 | 接入题图（白龙马） |
-| site/reader/people/独角兕大王.html | W952 | 接入题图（独角兕大王） |
-| site/reader/people/灵感大王.html | W952 | 接入题图（灵感大王） |
-| site/reader/people/黄风怪外传.html | W952 | 接入题图（黄风怪） |
-| site/reader/people/赛太岁.html | W952 | 接入题图（赛太岁） |
-| site/reader/people/九灵元圣-方向二深化.html | W952 | 接入题图（九灵元圣） |
-| site/reader/people/哪吒.html | W952 | 接入题图（哪吒） |
-| site/reader/people/昴日星官.html | W952 | 接入题图（昴日星官） |
-| site/reader/themes/紧箍咒专题.html | W952 | 接入题图（紧箍咒主题） |
-| site/reader/themes/筋斗云专题.html | W952 | 接入题图（筋斗云主题） |
-| site/reader/themes/法宝系统专题.html | W952 | 接入题图（法宝系统主题） |
-| site/reader/themes/无字真经专题.html | W952 | 接入题图（无字真经主题） |
-| assets/promo/plate-set/ | W952 | 母版 + 站点版 + 拼图 + README（累计 28 张） |
-| scripts/_w952_make_prompts.py | W952 | 母版复用生成器 + 两条断言（批内一致 / 风格段与上批一致） |
-| scripts/_w952_insert_plates.py | W952 | 12 页 chapter-plate 接入（幂等） |
-| scripts/_w952_cascade.py | W952 | 四面登记 + 当前态指针（共享面精确暂存） |
-| scripts/_w945_plates_verify.py | W952 | J2 顶部留白带口径 28% → 10%（新旧两批交集） |
-| scripts/output/_w952_batch1~3.json | W952 | 出图参数 12 条 |
-| CHANGELOG.md | W952 | W952 版段 |
-| docs/00-导读/W批次编号对账表.md | W952 | W952 认领行 |
-
-## W951 题图版式批（站点版裁掉上部留白·16 张）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-0[1-8]-*.webp | W951 | 16 张站点版重出（只裁上部留白·主体顶对齐 6 px·保留下部地面留白） |
-| assets/promo/plate-set/plate-line-*.png / *.webp | W951 | 完整母版 16 张（1200×1600·含上部留白·供卡片叠字用） |
-| assets/promo/plate-set/preview-site-sheet.png / .webp | W951 | 站点版拼图（16 张·页面实际呈现） |
-| assets/promo/plate-set/README.md | W951 | 资产分层说明 + 四版方案迭代记录 |
-| scripts/_w951_check_crop.py | W951 | 站点版验算判据（主体顶/底未切 + 地面留白 > 0） |
-| scripts/_w951_site_sheet.py | W951 | 站点版拼图生成器 |
-| scripts/_w945_prepare.py | W951 | 站点版生成逻辑改为「只裁上部留白·保留下部地面留白」 |
-| scripts/_w951_cascade.py | W951 | 四面登记 + 当前态指针（含共享面精确暂存） |
-| scripts/output/_cascade_files_W951.txt | W951 | 当批级联清单 |
-| CHANGELOG.md | W951 | W951 版段 |
-| docs/00-导读/W批次编号对账表.md | W951 | W951 认领行 |
-
-## W950 图标集打磨优化批（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步 + 唯一事实源刷新器）
-（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/icons/ui/（45 枚 SVG 资产重生成） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/_w939_gen_icons.py | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/_w946_gen_timeline_icons.py（生成器接入归一参数） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/_w950_normalize.py（新增·光学尺寸归一器） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/_w950_refresh_icon_paths.py（新增·图形同步刷新器） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/output/_w950_icon_normalize.json（新增·45 枚归一参数） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/output/_w946_timeline_icons.js | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| scripts/output/_cascade_files_W950.txt | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| xiyouji-agent-web/src/components/UiIcons.tsx（由资产重建） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| site/**（1967 处内联 SVG 图形同步 · 646 个文件） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| docs/00-导读/W批次编号对账表.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| CHANGELOG.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| HANDOVER.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| README.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| STRUCTURE.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| docs/00-导读/项目说明.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-| CITATION.cff。 | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
-
-## W949 图标治理换路径复核批（第二次追问「确定做完了吗」· 堵数据源回归漏洞 + 字段图标位判据入机检 + 登记剩余 71 条）
-（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| dataset/timeline.json（数据源 22 个 icon 字段 emoji → 图标名） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/_w949_fix_dataset.py | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/_w949_allowlist.py | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/check_icon_fields.py（字段图标位判据） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/check_emoji_icons.py（第 50 门禁挂入 A2 段） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| scripts/output/_w949_icon_field_allowlist.json | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| docs/00-导读/W批次编号对账表.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| CHANGELOG.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| HANDOVER.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| README.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| STRUCTURE.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| docs/00-导读/项目说明.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-| CITATION.cff。 | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
-
-## W948 内页专题题图续批（8 张线描人物题图·累计 16 张）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-01-jinjiao.webp | W948 | 新增·金角大王（紫金红葫芦 + 朱红封带） |
-| site/static/images/plate-line-02-niumowang.webp | W948 | 新增·牛魔王（牛首 + 混铁棍） |
-| site/static/images/plate-line-03-tieshanggongzhu.webp | W948 | 新增·铁扇公主（叶形芭蕉扇） |
-| site/static/images/plate-line-04-xiezi.webp | W948 | 新增·蝎子精（上翘蝎尾毒钩 + 倒马毒桩） |
-| site/static/images/plate-line-05-huangpaoguai.webp | W948 | 新增·黄袍怪（狼首 + 金钢琢） |
-| site/static/images/plate-line-06-zhenyuan.webp | W948 | 新增·镇元大仙（人参果 + 拂尘） |
-| site/static/images/plate-line-07-dapeng.webp | W948 | 新增·大鹏金翅雕（鹏翼 + 阴阳二气瓶） |
-| site/static/images/plate-line-08-taishanglaojun.webp | W948 | 新增·太上老君（太极图 + 拂尘） |
-| assets/promo/plate-set/ | W948 | 成品 16 张 + raw/round4 原件 + README 扩写 + 拼图 |
-| scripts/_w948_make_prompts.py | W948 | 母版逐字复用生成器（读上批 JSON 取母版） |
-| scripts/_w948_insert_plates.py | W948 | 8 页 chapter-plate 接入（幂等） |
-| scripts/_w948_cascade.py | W948 | 四面登记 + 当前态指针 |
-| scripts/_w945_plates_verify.py | W948 | 判据扩面：写死清单 → 目录扫描（16 张） |
-| scripts/output/_w948_batch1.json | W948 | 出图参数 01–04 |
-| scripts/output/_w948_batch2.json | W948 | 出图参数 05–08 |
-| CHANGELOG.md | W948 | W948 版段 |
-| docs/00-导读/W批次编号对账表.md | W948 | W948 认领行 |
-
-## W947 图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）
-（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w947_add_icons.py（通用图标集补 2 枚） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| scripts/_w939_gen_icons.py（并入 note / link） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| site/static/icons/ui/note.svg | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| site/static/icons/ui/link.svg | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| site/static/js/rag-chat.js（🔗 前缀 → 内联 SVG） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| xiyouji-agent-web/src/components/UiIcons.tsx（新建·内联 SVG 图标组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| xiyouji-agent-web/src/components/PermissionDialog.tsx（⚠️ 📝 → 组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| xiyouji-agent-web/src/components/InlinePermissionCard.tsx（⚠️ → 组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| scripts/check_emoji_icons.py（标题改号） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| docs/00-导读/W批次编号对账表.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| CHANGELOG.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| HANDOVER.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| README.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| STRUCTURE.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| docs/00-导读/项目说明.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-| CITATION.cff。 | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
-
-## W946 图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）
-（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/system.css（`.ico` 基类补 fill/stroke/linecap/linejoin 描边参数） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| site/static/icons/ui/tl-*.svg（16 枚时间线专属图标） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| site/data/timeline.html | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| site/en/timeline.html（22 条事件数据字段 + 渲染改内联 SVG + TL_ICO 映射内联 + CSP 重算） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/_w946_gen_timeline_icons.py | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/_w946_apply_timeline_icons.py | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/check_emoji_icons.py（第 50 门禁） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/_w939_emoji_to_svg.py（svg_tag 模板补 SVG 属性） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/output/_w946_timeline_icons.js | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| docs/00-导读/W批次编号对账表.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| CHANGELOG.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| HANDOVER.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| README.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| STRUCTURE.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| docs/00-导读/项目说明.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-| scripts/output/file-index.md。 | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
-
-## W945 内页专题题图成套（8 张 3:4 线描人物题图）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-01-wukong.webp | W945 | 新增·大圣悟空（金箍棒 + 凤翅紫金冠） |
-| site/static/images/plate-line-02-tangseng.webp | W945 | 新增·唐僧（五佛冠 + 念珠 + 九环锡杖） |
-| site/static/images/plate-line-03-bajie.webp | W945 | 新增·猪八戒（九齿钉耙 + 蒲扇耳） |
-| site/static/images/plate-line-04-shaseng.webp | W945 | 新增·沙僧（降妖宝杖 + 骷髅念珠） |
-| site/static/images/plate-line-05-guanyin.webp | W945 | 新增·观音（玉净瓶插杨柳 + 莲座） |
-| site/static/images/plate-line-06-erlangshen.webp | W945 | 新增·二郎神（三尖两刃刀 + 额间竖目） |
-| site/static/images/plate-line-07-baigujing.webp | W945 | 新增·白骨精（三变残影） |
-| site/static/images/plate-line-08-honghaier.webp | W945 | 新增·红孩儿（火尖枪 + 三昧真火） |
-| assets/promo/plate-set/ | W945 | 出图原件 + 逐张清单 + J8 自检表 + 拼图 |
-| scripts/_w945_plates_verify.py | W945 | J1–J7 机器判据 + J8 题材自检表 |
-| scripts/_w945_insert_plates.py | W945 | 8 页 chapter-plate 接入（幂等） |
-| scripts/_w945_cascade.py | W945 | 四面登记 + 当前态指针 |
-| CHANGELOG.md | W945 | W945 版段 |
-| docs/00-导读/W批次编号对账表.md | W945 | W945 认领行 |
-
-## W944 章回插画新组（6 张按回目情节重出）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/chap-07.webp | W944 | 重出·第 007 回 八卦炉（三足丹炉 + 火焰） |
-| site/static/images/chap-14.webp | W944 | 重出·第 014 回 心猿归正（猴形剪影 + 金箍 + 勒绳） |
-| site/static/images/chap-15.webp | W944 | 重出·第 015 回 鹰愁涧（惊马扬蹄 + 缰绳 + 瀑布崖） |
-| site/static/images/chap-23.webp | W944 | 重出·第 023 回 四圣试禅心（打坐僧 + 孤灯 + 雾中两影·去黑框） |
-| site/static/images/chap-27.webp | W944 | 重出·第 027 回 尸魔三戏（三道人影渐次消散 + 月 + 茅屋） |
-| site/static/images/chap-30.webp | W944 | 重出·第 030 回 邪魔侵正法（蛇形妖影 + 洞口 + 螺旋墨风） |
-| scripts/_w944_cascade.py | W944 | 四面登记 + 当前态指针 |
-| CHANGELOG.md | W944 | W944 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W944 | W944 认领行 |
-
-## W943 全站图片审查（227 张逐类目视·修 3 处真缺陷）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/og-15-shijian-liejian.webp | W943 | 重出（线上分享图·去掉抽象墨块中 3 处「LI」字母残留） |
-| assets/design/ai-concepts/concept-03-scroll.png | W943 | 重出（去掉卷面潦草伪汉字·改空白纸面 + 抽象笔触） |
-| assets/design/ai-concepts/concept-06-bodhi-leaf.png | W943 | 重出（菩提叶形制：水滴 / 火苗形 → 心形叶 + 中脉分叉叶脉 + 叶柄 + 露珠） |
-| scripts/_w943_cascade.py | W943 | 四面登记 + 当前态指针 |
-| CHANGELOG.md | W943 | W943 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W943 | W943 认领行 |
-
-## W942 Hero 素材全量复审（14 张逐张放大目视·修正 2 处形制偏差）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/hero-set/hero-line-04-tight-crown.png | W942 | 重出「紧箍儿」母版（金圈内缘补足九个倒刺钩） |
-| assets/promo/hero-set/hero-line-04-tight-crown.webp | W942 | 同上 WebP |
-| assets/promo/hero-set/hero-line-07-banana-fan.png | W942 | 重出「芭蕉扇」母版（正圆团扇 → 叶形扇 + 中脉细脉 + 短柄缠绳） |
-| assets/promo/hero-set/hero-line-07-banana-fan.webp | W942 | 同上 WebP |
-| assets/promo/hero-set/raw/hero-04c-tight-crown.jpg | W942 | 紧箍儿重出原件 |
-| assets/promo/hero-set/raw/hero-07c-banana-fan.jpg | W942 | 芭蕉扇重出原件 |
-| assets/promo/hero-set/preview-contact-sheet.png | W942 | 9 张成套拼图刷新 |
-| assets/promo/hero-set/README.md | W942 | J8 自检表细化到形制级（倒刺钩数 / 扇形 / 环数 / 瓶插枝） |
-| site/static/images/hero-line-04-tight-crown.webp | W942 | 站点版重出（带九倒刺） |
-| site/static/images/hero-line-07-banana-fan.webp | W942 | 站点版重出（叶形扇） |
-| scripts/_w942_cascade.py | W942 | 四面登记 + 自检表更新 + 当前态指针 |
-| CHANGELOG.md | W942 | W942 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W942 | W942 认领行 |
-
-## W941 UI 图标位 emoji 治理批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/81-hardships-view.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/81-hardships.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/_shell.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/aesthetics.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/ai-dialogue.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/business-model.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/cave-estate.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/century-dialogue.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/chapter-stats.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/chapter-structure-graph.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/character-appearance.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/character-dynamic-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/character-presence-timeline.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/character-relationship-3d-view.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/character-relationship-3d.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/character-semantic-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/character-sentiment-arc.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/chart-design.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/cognitive-psychology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/concept-device.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/counterfactual.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/criticism-history.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/cross-time-danmaku.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/cultural-misreading.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/customs-pass-route.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/data-explorer.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/deconstruction.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/dialogue-sentiment.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/ecology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/emotional-heatmap.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/ethics-consumption.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/famous-time-travel.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/four-dimensional-research-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/four-heavenly-kings-artifacts.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/game-webnovel.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/global-pattern.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/graph-explorer.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/guanyin-six-roles-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/hardship-difficulty-heatmap.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/hardship-heatmap.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/heaven-power-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/intertextuality-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/journey-geo-3d.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/journey-geo-semiotics.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/journey-map-interactive.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/journey-route.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/journey-spacetime.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/jurisprudence.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/karma-reincarnation.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/language-style-radar.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/linguistics.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/magic-system.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/material-archaeology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/mbti-evolution.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/methodology-matrix.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/ming-political-thought-comparison.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/monster-background.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/monster-capability-radar.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/monster-ecology-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/monster-female-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/monster-hierarchy-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/monster-sociology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/monster-victims-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/music-structure.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/narrative-experiment.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/narrative-rhythm-curve.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/narratology-12d-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/narratology-16d-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/perf-canvas-rendering.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/philosophy.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/pilgrim-team-dynamic-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/pilgrim-team-psychology-arc.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/poetry-rhythm-analysis.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/power-resources.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/relationships.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/risk-project.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/search.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/six-senses-narratology-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/social-media.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/story-timeline.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/tag-cloud.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/text-evolution.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/text-search.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/theological-intervention-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/timeline.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/underworld-power-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/visual-art.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/data/workplace.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/81-hardships-view.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/81-hardships.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/academic-papers.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/aesthetics.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/ai-dialogue.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/bestiary.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/business-model.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/cave-estate.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/century-dialogue.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/chapter-stats.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/chapter-structure-graph.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/chapters-map.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-appearance.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-bailongma.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-bajie.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-dynamic-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-presence-timeline.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-relationship-3d-view.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-relationship-3d.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-semantic-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-sentiment-arc.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-shaseng.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-tangseng.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/character-wukong.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/characters.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/chart-design.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/cognitive-psychology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/concept-device.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/counterfactual.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/criticism-history.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/cross-time-danmaku.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/cultural-misreading.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/customs-pass-route.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/dashboard.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/data-explorer.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/deconstruction.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/dialogue-sentiment.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/dukou-engine.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/ecology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/emotional-heatmap.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ai-era.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-buddhist-chan.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-chapter-couplets.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-character-fu.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-cipai-linjiangxian.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-cipai-mantingfang.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-cipai-shuidiaogetou.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-cipai-xijiangyue.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-composition-origins.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-divine-bureaucracy.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-folk-belief.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-historical-xuanzang.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-information-cocoon.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-economy.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-examination.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-garrison.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-intellectual-history.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-judiciary.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-literary-thought.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-maritime-ban.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-metaphor.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-military.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-politics.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-religion.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-ming-social-customs.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-modern-management.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-original-poetry.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-poetry-imagery.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-poetry-opening.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-quanzhen-daoism.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-rhythm-analysis.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-scenery-poems.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-thematic-poetry.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-three-teachings.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-version-evolution.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/essay-zen-koan-vs-neidan.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/ethics-consumption.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/famous-time-travel.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/four-dimensional-research-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/four-heavenly-kings-artifacts.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/game-webnovel.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/global-pattern.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/graph-explorer.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/guanyin-six-roles-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/guide.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/hardship-difficulty-heatmap.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/hardship-heatmap.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/heaven-power-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/index.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/intertextuality-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/journey-geo-semiotics.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/journey-map-interactive.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/journey-route.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/journey-spacetime.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/jurisprudence.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/karma-reincarnation.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/language-style-radar.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/linguistics.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/magic-system.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/material-archaeology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/mbti-evolution.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/methodology-matrix.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/methodology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/ming-political-thought-comparison.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/monster-background.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/monster-capability-radar.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/monster-ecology-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/monster-female-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/monster-hierarchy-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/monster-sociology.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/monster-victims-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/music-structure.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/narrative-experiment.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/narrative-rhythm-curve.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/narratology-12d-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/narratology-16d-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/perf-canvas-rendering.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/philosophy.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/pilgrim-team-dynamic-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/pilgrim-team-psychology-arc.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/poetry-rhythm-analysis.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/power-resources.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/relationships.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/risk-project.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/search.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/site-map.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/six-senses-narratology-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/social-media.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/tag-cloud.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/text-evolution.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/text-search.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/theological-intervention-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/timeline.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/tribulations.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/underworld-power-network.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/visual-art.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/visualizations.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/en/workplace.html | W941 | UI 图标位 emoji → 内联 SVG 图标（W941） |
-| site/js/reader-enhance.js | W941 | 收藏按钮运行时态切换：文字 ★/☆ → DOM 克隆图标（W941） |
-| site/reader/ch001.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch002.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch003.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch004.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch005.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch006.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch007.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch008.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch009.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch010.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch011.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch012.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch013.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch014.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch015.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch016.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch017.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch018.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch019.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch020.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch021.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch022.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch023.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch024.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch025.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch026.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch027.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch028.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch029.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch030.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch031.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch032.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch033.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch034.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch035.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch036.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch037.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch038.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch039.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch040.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch041.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch042.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch043.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch044.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch045.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch046.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch047.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch048.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch049.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch050.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch051.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch052.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch053.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch054.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch055.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch056.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch057.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch058.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch059.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch060.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch061.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch062.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch063.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch064.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch065.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch066.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch067.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch068.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch069.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch070.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch071.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch072.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch073.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch074.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch075.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch076.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch077.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch078.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch079.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch080.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch081.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch082.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch083.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch084.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch085.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch086.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch087.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch088.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch089.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch090.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch091.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch092.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch093.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch094.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch095.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch096.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch097.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch098.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch099.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/ch100.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/三教合一明代思想史深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/佛道思想.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/历史玄奘与小说玄奘专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/成书背景.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代军事制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代医学养生制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代卫所制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代司法制度深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代婚姻家庭制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代宗教制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代宗教政策对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代宫廷与宦官制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代市井百态对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代思想史对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代政治制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代文学体裁与西游对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代文学思想对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代服饰舆服制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代海禁政策对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代盐法开中制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代社会风俗对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代神祇官僚体系对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代科举制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代经济制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代隐喻.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/明代驿递交通制度对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/版本演变.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/版本演变补遗-平话层.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/西游与佛教禅宗专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/西游与明代商业经济专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/西游与明代民间宗教专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/西游与民间信仰专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/西游与禅宗公案专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/culture/西游与道教全真派专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/现代视角解读.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与AI时代.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与人类学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与代理悖论.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与传播学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与伦理学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与体育学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与信息茧房.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与化学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与医学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与博弈论.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与地理学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与天文学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与媒介史.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与宗教学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与平台经济.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与建筑学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与心理学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与性别政治.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与情绪劳动.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与教育学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与数学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与明代嘉靖镜像.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与服饰学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与比较文学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与民俗学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与法理政治.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与流亡者.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与演化论.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与物理学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与现代组织管理.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与生态学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与社会学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与神话学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与符号学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与经济学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与美学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与翻译学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与考古学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与认知科学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与语言学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与音乐学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与项目管理.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/essays/西游与饮食学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/index.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/万圣公主外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/严嵩与牛魔王对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/乌巢禅师外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/乌鸡国国王-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/九头虫.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/九头驸马外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/九灵元圣-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/二十八宿外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/二郎神-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/二郎神.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/二郎神外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/二郎神深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/人物分类增补专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/人物谱系表.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/六耳猕猴-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/六耳猕猴.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/六耳猕猴深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/刘伯钦外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/南极仙翁外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/卵二姐外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/取经五众关系网络深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/取经团队动力学深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/变的哲学-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/哪吒.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/哪吒外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/哪吒深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/唐僧-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/唐僧.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/唐僧深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/四值功曹五方揭谛六丁六甲外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/四大天王合集专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/国师王菩萨.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/土地公-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/多目怪-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/大鹏金翅雕.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/大鹏金翅雕外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/天庭体系深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/太上老君-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/太上老君.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/太上老君外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/太上老君深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/太宗李世民外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/太白金星-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/太白金星.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/奎木狼-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/奎木狼不负前情外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/奎木狼外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/女儿国国王-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/女儿国国王.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/女儿国国王深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/如意真仙外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/如来.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/如来佛祖-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/如来佛祖-方向二深化B.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/妖怪群体组织形态深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/妖怪谱系深度分析.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/嫦娥外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/孙悟空-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/孙悟空.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/孙悟空外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/孙悟空深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/宝象国国王后外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/宝象国国王外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/小妖外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/张居正与玉帝权术对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/弥勒佛外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/悟空-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/托塔李天王外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/扫塔人外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/接引佛祖外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/推云童子外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/敖广外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/文殊与普贤外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/日值功曹外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/明代历史原型对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/昴日星官.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/昴日星官外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/有来有去外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/李贽与悟空对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/杏仙外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/次要人物关系网络深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/殷温娇外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/沙僧-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/沙僧.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/沙僧外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/沙僧深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/泥鳅外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/泾河龙王外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/海瑞与悟空直谏对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/火焰山土地外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/灵吉菩萨.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/灵感大王-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/灵感大王.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/燃灯古佛外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/牛魔王-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/牛魔王-方向二深化B.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/牛魔王.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/牛魔王深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/独角兕大王.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/狮驼岭三魔-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/猪八戒-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/猪八戒.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/猪八戒深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玄奘-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玄奘外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玉兔精-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玉兔精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玉兔精深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玉帝.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玉帝深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玉皇大帝-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玉皇大帝外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/玉面狐狸深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/王母娘娘.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/王母娘娘深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/王阳明与唐僧心学对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白象精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白骨精-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白骨精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白骨精外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白骨精深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白鹿精-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白龙马-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白龙马-方向二深化B.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白龙马.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白龙马外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/白龙马深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/百眼魔君.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/百眼魔君外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/百花羞-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/百花羞外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/紫金铃外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/红孩儿-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/红孩儿.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/红孩儿外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/红孩儿深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/红蟒精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/给孤独长者外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/罗刹女外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/老鼋外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/老鼠精-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/老鼠精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/老鼠精深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/芭蕉扇外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/荆棘岭外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/菩提祖师-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/菩提祖师.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/菩提祖师外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/菩提祖师深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/虎先锋外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/虾兵外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/虾兵外传B.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/蜘蛛精-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/蜘蛛精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/蜘蛛精七姐妹合集专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/蜘蛛精七姐妹深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/蜘蛛精外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/蝎子精-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/蝎子精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/蝎子精深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/袁守诚外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/被借来的道具-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/观音.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/观音外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/观音菩萨-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/观音菩萨深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/规矩的多重面孔-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/赛太岁-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/赛太岁.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/车迟国三国师-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/车迟国三国师外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/辟寒辟暑辟尘-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/边缘神祇深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/迦叶外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/通臂猿猴外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金刚琢外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金圣宫娘娘-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金圣宫娘娘外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金圣宫娘娘深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金池长老外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金箍棒-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金蝉子外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金角大王.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金角银角-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金角银角外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/金角银角深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/铁扇公主-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/铁扇公主.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/铁扇公主深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/铜台府外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/银角大王.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/镇元大仙-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/镇元大仙.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/阿傩迦叶外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/陈关保外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/青牛精-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/青狮精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/驼罗庄外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/高翠兰-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/高翠兰外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/高翠兰深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/鱼篮观音外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黄眉老佛外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黄袍怪-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黄袍怪.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黄袍怪外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黄风怪-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黄风怪外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黎山老母外传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黑熊精-方向二深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/people/黑熊精.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/主题诗词创作.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/原著人物赋诗词赏析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/原著景物诗分类赏析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/原著景物诗赏析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/原著诗词赏析.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/回目对联分析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/开篇诗专题深化.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/西游与临江仙词牌赏析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/西游与水调歌头词牌赏析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/西游与满庭芳词牌赏析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/西游与西江月词牌赏析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/西游诗词意象谱系专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/poetry/西游诗词韵律分析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes-hub.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/不可靠叙述专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/二十八星宿专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/二郎神与悟空-自由观碰撞.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/互文性叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/五方揭谛专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/五次蜕变专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/人参果-人与欲望的关系.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/佛学AI西游三维语义映射表.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/修辞叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/倒果为因专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/元叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/全世界重写西游记.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/全球重写专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/八十一难专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/八十一难结构学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/八十一难风险管理学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/六丁六甲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/兵器的自我修养专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/创伤叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/动物研究专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/历史叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/反抗与束缚的永恒循环专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经人类学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经传播学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经伦理学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经历史学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经叙事经济学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经团队-凭什么走到西天.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经团队决策论专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经团队动力学.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经团队心理学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经团队组织学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经团队身体地理学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经地理批评专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经声音政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经媒介考古学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经密码学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经情感结构专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经拓扑学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经教育学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经数字人文专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经气候学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经生态学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经社会学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经神话政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经空间生产专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经符号学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经网络叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经网络叙事学深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经美学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经考古学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经路径地理符号学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/取经路线社会学研究专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/名字的政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/后人类主义专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/后殖民叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/听觉叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/味觉叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/唐僧-凡躯圣心.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/嗅觉叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/器物传记学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/四值功曹专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/增补一三十九位神祇总序与编制表专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/增补七很多很多劫之后专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/增补三土地公与山神专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/增补二全员集结专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/增补五老亥的日常生活专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/增补八值日功曹的最后一笔专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/增补六波罗僧揭谛的前身暗示专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/增补四值月功曹的花册与节气专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/大闹天宫-英雄还是悲剧.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/大闹天宫专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/女性主义叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/妖怪伦理学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/妖怪生态学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/妖怪经济学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/妖怪身份政治专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/妖魔谱系政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/小妖生命史专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/底层叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/开篇诗-被跳过的总纲.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/开篇诗专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/情感叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/招安对比重写专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/招安的两种结局专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/接受美学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/文化记忆专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/无字真经-灵山的玩笑.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/无字真经专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/时间叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/时间哲学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/时间的政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/明代司法制度镜像专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/暗数据遗忘者列传.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/权力五联对照专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/根器专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/比较文学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/水帘洞-瀑布门的世界.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/水帘洞专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/沙僧-沉默者的智慧.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/法宝政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/法宝系统专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/混世四猴专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/物质生态学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/猪八戒-不愿承认的自己.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/猴王到行者-五次蜕变.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/生态批评专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/白龙马-沉默龙的真相.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/真假美猴王-二心之战.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/真假美猴王专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/神学干预机制专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/神话学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/空间叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/空间政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/筋斗云与高铁-速度焦虑.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/筋斗云专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/紧箍儿咒-四百年回响.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/紧箍咒专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/缘起即算法-章节体.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/缘起即算法专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/翻译学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/芭蕉扇-终极灭火器的关系.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/蟠桃园-体制内的秘密.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与信息论专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与全球神话比较专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与后结构主义专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与复杂性科学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与媒介理论专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与媒介生态学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与存在主义专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与弗洛伊德精神分析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与拉康精神分析专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与政治思想史专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与游戏学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与社会理论延伸专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与符号学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与系统论专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与经济学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与经济学派深化专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与荣格分析心理学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与解构主义专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与解释学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与认知科学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游与记忆技术专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游体检-你走到第几回了.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游体检专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游四维研究专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡元定义.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第一讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第三十讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十一讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十七讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十三讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十九讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十二讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十五讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十八讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十六讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十四讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二十讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第二讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第十七讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第十九讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第十五讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第十八讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游渡第十六讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学第一讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学第七讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学第三讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学第二讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学第五讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学第六讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学第四讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学终讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游职场学附篇专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游记原著与黑神话悟空长生体系对比总结专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第一讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第七讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第三讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第九讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第二讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第五讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第八讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第六讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第十一讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第十二讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第十讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局第四讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/西游败局终讲专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/视觉叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/触觉叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/认知叙事学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/记忆之场专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/记忆伦理专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/身体政治学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/长生之后神仙为什么死了专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/长生之道专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/长生之道的代价专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/长生之道的政治经济学专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/长生之道的权力谱系专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/长生之道终章专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/集体记忆专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/须菩提祖师-消失的师父.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/reader/themes/黑神话拒绝金箍专题.html | W941 | 阅读页：收藏 ★/反馈 👍👎 → 内联 SVG 图标（W941） |
-| site/static/js/rag-chat.js | W941 | 检索来源/相关语料标签前缀 emoji → 内联 SVG（W941） |
-| site/static/js/text-search-app.js | W941 | 空态图标 emoji → 内联 SVG（W941） |
-| site/static/icons/ui/alchemy.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/book-open.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/book.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/cap.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/chart.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/check.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/child.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/close.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/cross.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/globe.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/inspect.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/menu.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/pause.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/pen.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/pin.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/play.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/quote.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/radio.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/schoolbag.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/scroll.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/search.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/sprout.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/star-solid.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/star.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/thumb-down.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/thumb-up.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| site/static/icons/ui/warn.svg | W941 | 新增：东方线描图标资产（24×24 / stroke 1.5 / currentColor） |
-| scripts/_w939_gen_icons.py | W941 | 新增：图标集生成器（27 枚·单一事实源） |
-| scripts/_w939_scan_targets.py | W941 | 新增：UI 图标位基准扫描器（机检判据·可复跑） |
-| scripts/_w939_emoji_to_svg.py | W941 | 新增：emoji → 内联 SVG 批量替换器（每规则带独立预期命中数） |
-| scripts/output/_w939_targets.json | W941 | 新增：基准扫描器输出（治理后复扫：UI 图标位 = 0） |
-| scripts/output/_w939_replacements.json | W941 | 新增：37 条规则逐条命中统计 |
-| docs/11-方案报告/计划方案/执行前计划-T26-UI图标emoji治理批.md | W941 | 新增：执行前计划（T26） |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W941 | 新增：交付报告（T26） |
-| docs/11-方案报告/README.md | W941 | 新增：T-26 登记行 |
-| docs/00-导读/W批次编号对账表.md | W941 | W941 认领行与收官回填 |
-
-## W940 Hero 素材题材辨识度修正（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/hero-set/hero-line-04-tight-crown.png | W940 | 新增「紧箍儿」母版（西游独占物件·替代司南） |
-| assets/promo/hero-set/hero-line-04-tight-crown.webp | W940 | 同上 WebP |
-| assets/promo/hero-set/hero-line-09-somersault-cloud.png | W940 | 新增「筋斗云」母版（替代判不合格的取经四众） |
-| assets/promo/hero-set/hero-line-09-somersault-cloud.webp | W940 | 同上 WebP |
-| assets/promo/hero-set/raw/hero-04b-tight-crown.jpg | W940 | 紧箍儿出图原件（重出基准） |
-| assets/promo/hero-set/raw/hero-05b-somersault-cloud.png | W940 | 筋斗云出图原件 |
-| assets/promo/hero-set/hero-line-04-sinan-compass.png | W940 | 删除（司南·通用意象非西游独占） |
-| assets/promo/hero-set/hero-line-09-pilgrim-four.png | W940 | 删除（画成农夫挑担·无西游标志物） |
-| assets/promo/hero-set/preview-contact-sheet.png | W940 | 9 张成套拼图刷新 |
-| assets/promo/hero-set/README.md | W940 | 逐张清单更新 + 新增「题材辨识度自检表（J8 人工关）」 |
-| site/static/images/hero-line-04-tight-crown.webp | W940 | 站点版（新增） |
-| site/static/images/hero-line-09-somersault-cloud.webp | W940 | 站点版（新增） |
-| site/index.html | W940 | 图集引用换图（04→紧箍儿·09→筋斗云） |
-| scripts/_w931_hero_verify.py | W940 | 判据清单换名（04/09） |
-| scripts/_w938_apply_home.py | W940 | 幂等补丁同步（含 SLIDES/aria-label 换图） |
-| scripts/_w940_cascade.py | W940 | 四面登记脚本（认领行 + CHANGELOG 段 + file-index 段 + 当前态指针） |
-| CHANGELOG.md | W940 | W940 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W940 | W940 认领行 |
-
-## W938 首屏版式重做 + 图集逐张复核（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W938 | 左侧文字重排（眉题→标题组→主张句→细线→数据带→标签→CTA→切换器）+ 插画切换器归位左侧文字列内 + 第 9 张换图 |
-| site/static/images/hero-line-09-pilgrim-four.webp | W938 | 新增收尾图（取经四众西行·2400×1017·站点版） |
-| assets/promo/hero-set/hero-line-09-pilgrim-four.png | W938 | 收尾图母版（PNG） |
-| assets/promo/hero-set/hero-line-09-pilgrim-four.webp | W938 | 收尾图 WebP |
-| assets/promo/hero-set/raw/hero-09-pilgrim-four.jpg | W938 | 收尾图出图原件（重出基准） |
-| assets/promo/hero-set/hero-line-07-banana-fan.png | W938 | 芭蕉扇重出（首版扇面顶边被裁成半截圆面） |
-| assets/promo/hero-set/hero-line-07-banana-fan.webp | W938 | 芭蕉扇重出 WebP |
-| assets/promo/hero-set/raw/hero-07-banana-fan.jpg | W938 | 芭蕉扇重出原件（覆盖首版） |
-| assets/promo/hero-set/preview-contact-sheet.png | W938 | 9 张成套拼图刷新 |
-| assets/promo/hero-set/preview-contact-sheet.webp | W938 | 9 张成套拼图 WebP |
-| assets/promo/hero-set/README.md | W938 | 目录导读更新（8 张 → 9 张 + 第 9 张换图留证） |
-| scripts/_w931_hero_verify.py | W938 | 判据清单加第 9 张（9/9 PASS） |
-| scripts/_w938_cascade.py | W938 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
-| CHANGELOG.md | W938 | W938 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W938 | W938 认领行 |
-
-## W937 首屏版式修正——「100 回」数据块移入左侧文字区（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W937 | 「100 回」数据块由右侧巨型块移入左侧文字区做横排一行（数字降档 clamp 44–64px）·删纸色渐变遮罩 · 移动端 mega 尺寸规则改作用域形式 · 删 `.masthead-mega` 死规则 |
-| CHANGELOG.md | W937 | W937 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W937 | W937 认领行 |
-| scripts/_w937_cascade.py | W937 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
-| site/reader/themes/取经路线地理专题.html | W937 | 题图落位修正：五行山与两界山（原在「取经地理学专题」——地理学理论页·题材不贴） |
-| site/reader/people/灵感大王外传.html | W937 | 题图落位修正：东海龙宫水殿（原在「四海龙王：下雨的人」——讲降雨职能·题材不贴） |
-| scripts/_w937_move_plates.py | W937 | 题图移动脚本（旧页移除 figure 与 chapter-plate CSS·不留死规则） |
-
-## W936 首屏图集接入 + 专题题图落位（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W936 | 首页 9 张图集轮播（JS 定时切换 + WCAG 2.2.2 暂停机制 + reduced-motion 降级）+ 右侧「100 回」数字区纸色渐变底 |
-| site/reader/people/地府体系深化专题.html | W936 | 题图：冥府判官队列浓墨剪影 |
-| site/reader/people/紧箍儿的内侧-器物传记.html | W936 | 题图：紧箍与金刚杵静物对置 |
-| site/reader/themes/取经地理学专题.html | W936 | 题图：五行山与两界山（浓墨山峦 + 锁链） |
-| site/reader/people/四海龙王外传.html | W936 | 题图：东海龙宫水殿 |
-| site/reader/themes/西游与死亡研究专题.html | W936 | 题图：六道轮回抽象水墨 |
-| site/static/images/hero-line-01~08.webp | W936 | W931 线描横幅接入站点（8 件·首页图集用） |
-| site/static/images/plate-*.webp | W936 | W932 浓墨 5 张题图副本（plate- 前缀·避开 hero- 序列语义） |
-| scripts/_w936_insert_plates.py | W936 | 题图插入脚本（chapter-plate 范式·行尾归一修正） |
-| scripts/_w936_cascade.py | W936 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
-| CHANGELOG.md | W936 | W936 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W936 | W936 认领行（W935 在途跳号依据） |
-
-## W935 速赢两处批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/dukou-engine.html | W935 | 渡口档案 LINE 数组 4 条工程引用去除（溯源移入源码注释） |
-| site/en/visualizations.html | W935 | source-note 段目录型死链改纯文本（site/data/ 无 index.html·线上 404） |
-| docs/11-方案报告/计划方案/T25-任务计划执行与经验沉淀报告-2026-10-25.md | W935 | 速赢两处批交付报告（32/32 判据符合） |
-| docs/00-导读/W批次编号对账表.md | W935 | W935 认领行与收官回填 |
-| docs/11-方案报告/README.md | W935 | 计划方案分区登记（第 27 行·T-25） |
-| scripts/output/_w935_spec.json | W935 | 本批级联 spec |
-| CHANGELOG.md | W935 | W935 段 |
-| HANDOVER.md | W935 | 级联头尾链与里程碑块 |
-| README.md | W935 | 当前批次版本行 |
-| STRUCTURE.md | W935 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W935 | 当前批次版本行 |
-| site/index.html | W935 | 页脚批次链插入 W935 |
-| site/dukou-engine.html | W935 | 页脚批次链插入 W935 |
-| AGENTS.md | W935 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W935 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W935 | version 同步为 W935 |
-| scripts/output/file-index.md | W935 | W935 段插入 |
-
-## W934 D-2 应用迁移批第一子批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/storage/types.ts | W934 | 新增：M12 存储层接口 `StorageBackend` + DTO + 语义约定（两后端必须一致的 7 条） |
-| xiyouji-agent-web/server/storage/sqlite.ts | W934 | 新增：现役 SQLite 实现逐字搬迁 + `kind` + `healthCheck`（DDL / 3 版迁移 / 12 函数零语义改写） |
-| xiyouji-agent-web/server/storage/postgres.ts | W934 | 新增：PG 后端（连接池 + 事务 + 参数化查询 + 健康探针 + schema 隔离 + 时间列边界转换） |
-| xiyouji-agent-web/server/storage/index.ts | W934 | 新增：后端工厂（缺省 sqlite·非法值 fail-closed）+ StorageBackend 契约逐项转发 |
-| xiyouji-agent-web/server/storage/storage.test.ts | W934 | 新增：双后端契约测试（同一套断言跑 SQLite 与 PostgreSQL·PG 侧隔离在专用 schema） |
-| xiyouji-agent-web/server/db.ts | W934 | 由「SQLite 实现本体」降为**门面**（16 个现役导出名齐备·实现搬进 server/storage/） |
-| xiyouji-agent-web/server/routes.ts | W934 | 存储调用改 await（接口异步化·业务逻辑零改动）+ 就绪探针改走 healthCheck |
-| xiyouji-agent-web/server/chat.ts | W934 | 存储调用改 await + rebuildHistory 改异步 |
-| xiyouji-agent-web/server/index.ts | W934 | 启动日志按实际后端取值（不再写死 SQLite）+ PG 后端跳过文件级快照（走 pg_basebackup） |
-| xiyouji-agent-web/server/shutdown.ts | W934 | closeDatabase 契约放宽为 `void | Promise<void>` 并 await（PG 池关闭是 Promise） |
-| xiyouji-agent-web/package.json | W934 | 新增依赖 `pg@8.23.1` + `@types/pg`；test:server 纳入契约测试 |
-| xiyouji-agent-web/package-lock.json | W934 | 随 pg / @types/pg 锁定 |
-| xiyouji-agent-web/deploy/pg/migrations/0002_app_tables.sql | W934 | 新增：业务三表 schema（sessions / messages / feedback + 索引 + role CHECK + message_id 唯一维度 + 外键级联·时间列 TIMESTAMPTZ） |
-| xiyouji-agent-web/deploy/pg/bin/migrate-sqlite-to-pg.ts | W934 | 新增：SQLite→PG 迁移器（源库只读 + 参数化 + 迁移序列记账 + 行数/主键集合/逐行内容三重对账） |
-| xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh | W934 | 授权模型修三处：ALTER DEFAULT PRIVILEGES 补 FOR ROLE + 权限先于建表 + 记账表 owner 转给应用账号 |
-| xiyouji-agent-web/deploy/pg/bin/verify-baseline.py | W934 | 71 → 95 项（新增 C5 组）+ 新增 strip_ts_comments（断言不再命中文档注释里的示例代码） |
-| xiyouji-agent-web/deploy/pg/bin/_mutation_test.py | W934 | 14 → 23 组变异（M14~M22·逐条证明 C5 组新判据可证伪） |
-| xiyouji-agent-web/deploy/pg/README.md | W934 | §4.3 待实跑清单 3→2 项（迁移器端到端已收官）+ 新增 §4.5 W934 实跑结果与三处授权缺陷 |
-| docs/11-方案报告/计划方案/执行前计划-T23-D2应用迁移批.md | W934 | 新增：执行前计划（16 AC + 20 ASM + 22 ST + 13 V + 11 风险 + 11 决策 + 12 项自包含检查） |
-| docs/11-方案报告/计划方案/T23-任务计划执行与经验沉淀报告-2026-10-25.md | W934 | 新增：交付报告（执行记录 + 16 条 AC 验收 + 8 条经验沉淀 + 9 条偏差 + 7 项未验证项声明） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W934 | 新增 §13.6 W934 实跑结果（7 项实跑 + 3 个静默型真缺陷 + D-2 未完成声明） |
-| docs/11-方案报告/README.md | W934 | 登记表新增 T-23 两行（执行前计划 + 交付报告） |
-| docs/00-导读/W批次编号对账表.md | W934 | W934 认领行与收官回填 |
-| scripts/output/_w934_d2a_migrate.json | W934 | 迁移实跑机器证据（三重对账结果） |
-| scripts/output/_w934_d2a_residue_before.txt | W934 | 清理前演练残留快照（证明清理对象是 W928 演练产物而非应用数据） |
-| scripts/output/_w934_d2a_grants.txt | W934 | 授权模型实查（owner / acl / 只读账号写入被拒） |
-| scripts/output/_w934_spec.json | W934 | 本批级联 spec |
-| scripts/output/_cascade_files_W934.txt | W934 | 级联落盘清单 |
-| CHANGELOG.md | W934 | W934 段 |
-| HANDOVER.md | W934 | 级联头尾链与里程碑块 |
-| README.md | W934 | 当前批次版本行 |
-| STRUCTURE.md | W934 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W934 | 当前批次版本行 |
-| .github/workflows/README.md | W934 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W934 | 页脚批次链插入 W934 |
-| site/data/cross-time-danmaku.html | W934 | 页脚批次链插入 W934 |
-| site/data/tag-cloud.html | W934 | 页脚批次链插入 W934 |
-| site/dukou-engine.html | W934 | 页脚批次链插入 W934 |
-| AGENTS.md | W934 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W934 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W934 | version 同步为 W934 |
-| scripts/output/file-index.md | W934 | W934 段插入 |
-
-## W933 共享面串行化机制批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md | W933 | 共享面串行化机制交付报告（计划/执行/验收/复盘/经验沉淀·32/32 判据符合） |
-| docs/00-导读/文档规范.md | W933 | §11.0 共享面并发纪律（认领即占号 / 回填独占 / 收官回填三件套） |
-| scripts/preflight_check.py | W933 | 判据 A 撞号检测（台账同号多行）+ B′ 台账脏行提示 + D 反引号剥离 + E 登记类共享面排除 |
-| scripts/ledger_backfill.py | W933 | 判据 B 独占回填工具（--expect 基线指纹 / --verify 提交前复核 / --append-claim 纯追加认领） |
-| scripts/ledger_close_check.py | W933 | 判据 C 收官回填体检（现役段 W 号须 hash 非占位 + 状态以已收官开头·不挂 verify_delivery 阻塞段） |
-| scripts/_w933_mutation_test.py | W933 | 四判据可证伪性验证（4 组突变 + 4 组对照） |
-| Makefile | W933 | 新增 ledger 目标并接进 ci（第 42 门禁四面引用口径） |
-| scripts/output/_w933_spec.json | W933 | 本批级联 spec |
-| docs/00-导读/W批次编号对账表.md | W933 | W933 认领行与收官回填 |
-| docs/11-方案报告/README.md | W933 | 计划方案分区登记（第 26 行·T-22） |
-| CHANGELOG.md | W933 | W933 段 |
-| HANDOVER.md | W933 | 级联头尾链与里程碑块 |
-| README.md | W933 | 当前批次版本行 |
-| STRUCTURE.md | W933 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W933 | 当前批次版本行 |
-| site/index.html | W933 | 页脚批次链插入 W933 |
-| site/dukou-engine.html | W933 | 页脚批次链插入 W933 |
-| AGENTS.md | W933 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W933 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W933 | version 同步为 W933 |
-| scripts/output/file-index.md | W933 | W933 段插入 |
-
-## W932 站点 Hero 素材图成套批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/hero-10-mingfu-panwang.webp | W932 | 新增：Hero 素材 04/06·冥府判官队列（宣判官+队列纵深+朱砂灯笼·净空带 364px·三轮版） |
-| site/static/images/hero-11-chiping-boshan.webp | W932 | 新增：Hero 素材 05/06·持瓶菩萨立像（背向剪影+赭金光环+朱砂飘带·净空带 379px·印面归一） |
-| site/static/images/hero-12-jingu-jingangchui.webp | W932 | 新增：Hero 素材 06/06·紧箍与金刚杵静物（黑墨双器+朱砂绳·净空带 557px·三轮版） |
-| site/static/images/hero-13-wujingshan-liangjie.webp | W932 | 新增：Hero 素材 07/06·五行山两界山（裂隙崖壁+锁链布幡+朱砂小旗·净空带 282px·印面归一） |
-| site/static/images/hero-14-donghai-longgong.webp | W932 | 新增：Hero 素材 08/06·东海龙宫水殿（墨龙盘殿+朱砂龙珠·净空带 363px·印面归一） |
-| site/static/images/hero-15-liudao-lunhui.webp | W932 | 新增：Hero 素材 09/06·六道轮回轮（三重枯笔环+六墨块+朱砂段·净空带 377px·印面归一） |
-| scripts/_w929_gen_args.py | W932 | 首轮生成参数（锚点复用 W893 + 浓墨剪影改造 + 六张主体描述） |
-| scripts/_w929_gen_args_v2.py | W932 | 二轮返工参数（钤印形态写死正方形） |
-| scripts/_w929_gen_args_v3.py | W932 | 三轮返工参数（钤印印面去字形化） |
-| scripts/_w929_process.py | W932 | 交付端处理（裁切精确 16:9 + 缩放 2560×1440 + 转 webp） |
-| scripts/_w929_seal_normalize.py | W932 | 交付端印面归一（自动定框 + 只重绘印面·主体零改动） |
-| scripts/_w929_verify.py | W932 | 五道判据量化复验（尺寸/净空带/主体墨量/朱砂/规则线） |
-| scripts/output/_w932_spec.json | W932 | 本批 spec 十字段 |
-| scripts/output/_cascade_files_W932.txt | W932 | 本批级联件清单 |
-| site/static/images/index.md | W932 | 目录索引刷新（文件 78 → 84·补入六件 Hero） |
-| docs/00-导读/W批次编号对账表.md | W932 | 认领行与收官回填 |
-
-## W931 首页 Hero 横幅素材图成套批·线描版 8 张（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/hero-set/hero-line-01-ruyi-staff.png | W931 | 成品母版 2400×1017·如意金箍棒（黑铁杆 + 赭金云纹端头）·左侧 46% 留白 |
-| assets/promo/hero-set/hero-line-02-journey-scroll.png | W931 | 成品母版 2400×1017·行程图卷轴（山路 / 路线 / 河曲） |
-| assets/promo/hero-set/hero-line-03-classic-scroll.png | W931 | 成品母版 2400×1017·经卷 + 篆香（竖行纹理非可读文字） |
-| assets/promo/hero-set/hero-line-04-sinan-compass.png | W931 | 成品母版 2400×1017·司南（铜盘回纹刻度 + 匙柄） |
-| assets/promo/hero-set/hero-line-05-lotus.png | W931 | 成品母版 2400×1017·莲花（层瓣线描 + 赭金叶脉） |
-| assets/promo/hero-set/hero-line-06-nine-ring-staff.png | W931 | 成品母版 2400×1017·九环锡杖（赭金环 + 白杆） |
-| assets/promo/hero-set/hero-line-07-banana-fan.png | W931 | 成品母版 2400×1017·芭蕉扇（线描叶脉 + 纸色透出·第二版·首版黑色实心块已废弃） |
-| assets/promo/hero-set/hero-line-08-jade-vase.png | W931 | 成品母版 2400×1017·玉净瓶（白瓷瓶 + 柳枝） |
-| assets/promo/hero-set/hero-line-01-ruyi-staff.webp | W931 | 站点用 WebP q90（8 张全套同规格） |
-| assets/promo/hero-set/hero-line-02-journey-scroll.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-03-classic-scroll.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-04-sinan-compass.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-05-lotus.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-06-nine-ring-staff.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-07-banana-fan.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/hero-line-08-jade-vase.webp | W931 | 站点用 WebP q90 |
-| assets/promo/hero-set/preview-contact-sheet.png | W931 | 成套一览拼图 2×4（8 张缩略·一眼验一致性） |
-| assets/promo/hero-set/preview-contact-sheet.webp | W931 | 成套一览拼图 WebP |
-| assets/promo/hero-set/raw/hero-01-ruyi-staff.jpg | W931 | 出图原件 3168×1344（重出基准·模型不可复现） |
-| assets/promo/hero-set/raw/hero-02-journey-scroll.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-03-classic-scroll.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-04-sinan-compass.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-05-lotus.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-06-nine-ring-staff.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/raw/hero-07-banana-fan.jpg | W931 | 出图原件 3168×1344（第二版） |
-| assets/promo/hero-set/raw/hero-08-jade-vase.jpg | W931 | 出图原件 3168×1344 |
-| assets/promo/hero-set/README.md | W931 | 目录导读（规格 / 接入方法 / 维护约定 / 已知取舍） |
-| assets/promo/hero-set/index.md | W931 | 目录文件索引（生成器产物） |
-| assets/promo/hero-set/raw/README.md | W931 | 出图原件目录导读（含废弃首版留证） |
-| assets/promo/hero-set/raw/index.md | W931 | 出图原件目录文件索引（生成器产物） |
-| assets/promo/index.md | W931 | 上级目录索引刷新（新增 hero-set 子目录登记） |
-| STRUCTURE.md | W931 | promo 段登记行（promo/hero-set/ 目录用途） |
-| docs/00-导读/W批次编号对账表.md | W931 | W931 认领行（取号依据 + touches 声明） |
-| CHANGELOG.md | W931 | W931 版段（四件套·来源 / 文件 / 验证 / 状态） |
-| scripts/_w931_hero_verify.py | W931 | 成套判据脚本（7 条 J1–J7 + 负样本可证伪自检） |
-| scripts/_w931_claim_row.py | W931 | 对账表认领行登记脚本（幂等·绝不覆盖他人认领） |
-| scripts/_w931_changelog_seg.py | W931 | CHANGELOG 段插入脚本（段序结构断言 + 让号后重定位） |
-
-## W930 界面布局复核与落地方案（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T21-任务计划执行与经验沉淀报告-2026-10-25.md | W930 | 四维复核结论（18 条现状表）+ 三条新发现 + 六批可施工落地方案 + 6 条未验证项 |
-| docs/11-方案报告/计划方案/执行前计划-T21-界面布局复核与落地方案.md | W930 | T-21 框架件·执行前计划（九表齐备：标识/目标/边界/ASM/ST/V/R/D/自包含） |
-| docs/11-方案报告/README.md | W930 | §六 计划方案 +1 行（篇数 24→25） |
-| docs/00-导读/W批次编号对账表.md | W930 | W930 认领行（二次让号依据 + touches 声明） |
-| scripts/_w930_layout_static.py | W930 | 静态复算（间距刻度 / 令牌消费 / 断点清点·原口径 + 修正口径两套输出） |
-| scripts/_w930_layout_diff.py | W930 | 新旧逐项对拍（缺失字段标 MISSING 不填 0） |
-| scripts/_w930_layout_attr.py | W930 | 增量归因（区分布局劣化与内容增量） |
-| scripts/_w930_layout_detail.py | W930 | 标题字号序列 + 应用侧几何对拍 |
-| scripts/_w930_layout_residual.py | W930 | 容器档位 / 长段字数每行 / 顶栏入口数 / 应用侧留白 |
-| scripts/_w930_layout_probe.mjs | W930 | 站点渲染探针 11 组（复用 W854 探针改落点 + 目录自建） |
-| scripts/_w930_layout_probe_app.mjs | W930 | 应用渲染探针 6 组（复用 W854 探针改落点） |
-| scripts/_w930_claim_row.py | W930 | 台账认领行登记脚本（幂等·不覆盖他人认领的号） |
-| scripts/_w930_rename_prefix.py | W930 | 产物前缀统一改名脚本（幂等 + 残留校验） |
-| scripts/_w930_report_normalize.py | W930 | 报告件归一为纯报告侧（去触发词 + 补报告侧 token） |
-| scripts/output/_w930_layout_static.json | W930 | 静态复算证据 |
-| scripts/output/_w930_layout_metrics.json | W930 | 站点渲染实测证据（11 组） |
-| scripts/output/_w930_layout_metrics_app.json | W930 | 应用渲染实测证据（6 组） |
-| scripts/output/_w930_layout_diff.json | W930 | 新旧对拍证据 |
-| scripts/output/_w930_layout_attr.json | W930 | 增量归因证据 |
-| scripts/output/_w930_visible_leak.json | W930 | 可见工程批次号复算证据（796 页 6,827 处） |
-| scripts/output/_w930_plan_review.json | W930 | 第 48 门禁判据矩阵证据（双件全项符合） |
-| scripts/output/_w930_spec.json | W930 | 本批级联 spec |
-
-## W928 D-1 实跑批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/deploy/pg/postgresql.conf.base | W928 | 删除 server_encoding（initdb 固定参数·写进 conf 致 PG FATAL 拒绝启动）+ 增补实测口径注释 |
-| xiyouji-agent-web/deploy/pg/pg_hba.conf.base | W928 | 实跑核验（最小权限 + 兜底 reject 生效·scram 认证通过） |
-| xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh | W928 | 实跑核验幂等性（连跑两次·第二次全「已存在，跳过创建」） |
-| xiyouji-agent-web/deploy/pg/bin/backup.sh | W928 | 去 -z（目录格式不能压缩·PG 报错）+ 显式 -U（pg_basebackup 默认用当前 OS 用户）+ 跨平台 df 分盘判据（MINGW/MSYS 族） |
-| xiyouji-agent-web/deploy/pg/bin/restore-drill.sh | W928 | 重写恢复逻辑：铺满整个备份目录（base/ 与 global/ 是兄弟）+ 删 standby.signal + 接 WAL 归档做 PITR + 重写 postgresql.auto.conf + 业务库断言 + 源库行数一致比对 + 跨平台 restore_command 适配 |
-| xiyouji-agent-web/deploy/pg/bin/verify-baseline.py | W928 | 66 → 71 项（新增禁形态：server_encoding / `#` 注释 / `-D` 配 `-z`） |
-| xiyouji-agent-web/deploy/pg/bin/_mutation_test.py | W928 | 11 → 14 组变异（新增 M11/M12/M13 对应上述三个禁形态） |
-| xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql | W928 | `#` 注释全改 `--`（PG 的 SQL 只认 `--`·否则 psql 语法错误） |
-| xiyouji-agent-web/deploy/pg/README.md | W928 | §4 待实跑清单 → 实跑状态（已通过 6 项 / 真缺陷 4 条 / 仍待实跑 3 项 / 平台适配与两处跨平台判据坑） |
-| scripts/output/_w927_pg_runtime_evidence.txt | W928 | D-1 实跑机器证据（真实 PG 16.4·111 行原始输出） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W928 | §13.3 第 2 条（PG 未实跑）改判 + 新增 §13.5 实跑结果（6 项通过 + 4 个真缺陷 + 跨平台判据坑） |
-| docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md | W928 | 附录 A.3 改写为实跑结果（6 项通过 + 4 个真缺陷 + 两处跨平台坑 + 仍待实跑 3 项） |
-| docs/11-方案报告/README.md | W928 | §二 架构方案行补 W928 实跑摘要 + §六 T-20 报告行补实跑结果 |
-| docs/00-导读/W批次编号对账表.md | W928 | W928 认领行与收官回填 |
-| CHANGELOG.md | W928 | W928 段 |
-| HANDOVER.md | W928 | 级联头尾链与里程碑块 |
-| README.md | W928 | 当前批次版本行 |
-| STRUCTURE.md | W928 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W928 | 当前批次版本行 |
-| .github/workflows/README.md | W928 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W928 | 页脚批次链插入 W928 |
-| site/data/cross-time-danmaku.html | W928 | 页脚批次链插入 W928 |
-| site/data/tag-cloud.html | W928 | 页脚批次链插入 W928 |
-| site/dukou-engine.html | W928 | 页脚批次链插入 W928 |
-| AGENTS.md | W928 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W928 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W928 | version 同步为 W928 |
-| scripts/output/file-index.md | W928 | W928 段插入 |
-| scripts/output/_w928_spec.json | W928 | 本批级联 spec |
-| scripts/output/_cascade_files_W928.txt | W928 | 级联落盘清单 |
-
-## W927 架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/deploy/pg/README.md | W927 | D-1 施工件说明（口径对照 + 目标机执行顺序 + 机器背书 + 9 项待实跑清单 + 边界声明） |
-| xiyouji-agent-web/deploy/pg/postgresql.conf.base | W927 | PG 16 配置基线（WAL 归档 / TLS / 内存 / 日志 / 编码 / 自动清理·禁 listen_addresses='*'） |
-| xiyouji-agent-web/deploy/pg/pg_hba.conf.base | W927 | 认证基线（最小权限 + 兜底 reject + 禁 trust + 禁明文口令） |
-| xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh | W927 | 幂等初始化（角色/库/权限/迁移记账表·PG 版本门槛 + 只读角色最小权限） |
-| xiyouji-agent-web/deploy/pg/bin/backup.sh | W927 | 每日全量备份（pg_basebackup）+ 保留期轮转（7 份 / WAL 14 天）+ 空壳自检 + 备份归档分盘校验 |
-| xiyouji-agent-web/deploy/pg/bin/restore-drill.sh | W927 | 恢复演练（独立端口临时实例 + 表/列/行数断言 + trap 清理） |
-| xiyouji-agent-web/deploy/pg/bin/verify-baseline.py | W927 | 静态校验器（C1 配置 / C2 认证 / C3 脚本 / C4 迁移·66 项不变量·本批实跑 66/66） |
-| xiyouji-agent-web/deploy/pg/bin/_mutation_test.py | W927 | 反向验证（11 组变异改坏必红 + 基线未变异必绿·本批实跑 11/11 可证伪） |
-| xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql | W927 | 迁移序列骨架（schema_migrations 记账 + audit_archive 带 data_class CHECK L1–L4·单事务包裹） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W927 | 裁决落档（O-1~O-4 + 六处连带更新）+ 交叉对账 §13.4 + 新增 §10.6 配置面缺口 + 契约 C-8 + 禁止依赖形态 #8 |
-| docs/11-方案报告/计划方案/执行前计划-T20-裁决落档与D1施工件.md | W927 | T-20 框架件·执行前计划（12 AC + 15 ASM + 18 ST + 12 V + 8 风险 + 7 决策 + 14 自检） |
-| docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md | W927 | T-20 框架件·执行报告（18 步执行记录 + 12 条验收 + 7 条可行性自评 + 7 条经验 + 5 条偏差 + PG 未验证声明） |
-| docs/11-方案报告/README.md | W927 | §六 计划方案 +2 行（篇数 22→24）· §二 架构方案行更新为「W925 建 / W927 裁决落档 + 施工件 + 对账」 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W927 | report_docs 实体标记随 stats.json 刷新（60→62·C5b 对账） |
-| STRUCTURE.md | W927 | report_docs 标记刷新 + 六子目录篇数同步（计划方案 22→24） |
-| scripts/output/_w927_pg_baseline.json | W927 | 静态校验证据（total=66 / passed=66 / failed=0） |
-| docs/00-导读/W批次编号对账表.md | W927 | W927 认领行与收官回填 |
-| CHANGELOG.md | W927 | W927 段 |
-| HANDOVER.md | W927 | 级联头尾链与里程碑块 |
-| README.md | W927 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W927 | 当前批次版本行 |
-| .github/workflows/README.md | W927 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W927 | 页脚批次链插入 W927 |
-| site/data/cross-time-danmaku.html | W927 | 页脚批次链插入 W927 |
-| site/data/tag-cloud.html | W927 | 页脚批次链插入 W927 |
-| site/dukou-engine.html | W927 | 页脚批次链插入 W927 |
-| AGENTS.md | W927 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W927 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W927 | version 同步为 W927 |
-| scripts/output/file-index.md | W927 | W927 段插入 |
-| scripts/output/_w927_spec.json | W927 | 本批级联 spec |
-| scripts/output/_cascade_files_W927.txt | W927 | 级联落盘清单 |
-
-## W926 站点交互流程审查复核报告批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/审查与评审/站点交互流程审查复核报告-2026-10-25.md | W926 | 站点交互流程审查复核报告（857 页四维复核·10 条问题按访客影响排序·附前次 17 条闭环表与 9 项正面结论） |
-| scripts/_w926_ia_audit.py | W926 | 全量交互结构扫描器（跳转路径/按钮反馈/表单报错/空态异常四维·判据自纠三处） |
-| scripts/_w926_ia_extract.py | W926 | 可疑判定逐条落到「文件是否存在」的实证提取器 |
-| scripts/_w926_visible_leak.py | W926 | 访客可见文本的内部术语外泄扫描（剥离 script/style/注释后统计） |
-| scripts/_w926_fix_report.py | W926 | 报告修订脚本（依独立盲审 B1-B6 + N1-N8·26 处替换带命中数断言·防盲改） |
-| scripts/_w926_fix_report2.py | W926 | 报告第二轮整理（R-11/R-12 入清单·排序与小节化·剩余数字订正） |
-| scripts/_w926_verify_numbers.py | W926 | 报告数字机器对拍（20 项数字 + 4 项结构断言·报告文本 ↔ 证据 JSON 逐项比对） |
-| scripts/output/_w926_ia_audit.json | W926 | 全量扫描结构化证据 |
-| scripts/output/_w926_ia_evidence.json | W926 | 死链与缺失目标实证证据 |
-| scripts/output/_w926_visible_leak.json | W926 | 可见术语外泄明细 |
-| docs/00-导读/W批次编号对账表.md | W926 | W926 认领行与收官回填 |
-| docs/11-方案报告/README.md | W926 | §一 审查与评审分区登记（第 35 行·节头计数同步） |
-| CHANGELOG.md | W926 | W926 段 |
-| HANDOVER.md | W926 | 级联头尾链与里程碑块 |
-| README.md | W926 | 当前批次版本行 |
-| STRUCTURE.md | W926 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W926 | 当前批次版本行 |
-| site/index.html | W926 | 页脚批次链插入 W926 |
-| site/dukou-engine.html | W926 | 页脚批次链插入 W926 |
-| AGENTS.md | W926 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W926 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W926 | version 同步为 W926 |
-| scripts/output/file-index.md | W926 | W926 段插入 |
-| scripts/output/_w926_spec.json | W926 | 本批级联 spec |
-| scripts/output/_cascade_files_W926.txt | W926 | 级联落盘清单 |
-
-## W925 系统架构方案 v2（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W925 | 架构方案 v2 正文（八维 + 存储裁定修订 + 等保合规横切面 + 6 处 Mermaid 源码为图件事实源） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图-2026-10-25.html | W925 | 零外域架构图可视化页（手写内联 SVG·file:// 直开·6 图） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图/（6 张 PNG） | W925 | 架构图 PNG 导出产物（Playwright 实测渲染·外域请求数 = 0） |
-| docs/11-方案报告/计划方案/执行前计划-T19-系统架构方案v2.md | W925 | T-19 框架件·执行前计划（11 AC + 20 ASM + 15 ST + 12 V + 8 风险 + 8 决策 + 14 自检） |
-| docs/11-方案报告/计划方案/T19-任务计划执行与经验沉淀报告-2026-10-25.md | W925 | T-19 框架件·执行报告（15 步执行记录 + 18 条验收 + 10 条经验 + 6 条偏差 + 6 条未验证项） |
-| docs/11-方案报告/README.md | W925 | §二 设计与架构方案 +1 行（篇数 5→6）· §六 计划方案 +2 行（篇数 20→22） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W925 | report_docs 实体标记随 stats.json 刷新（56→59·C5b 对账） |
-| scripts/_render_arch_png.mjs | W925 | 架构图 PNG 导出脚本（Playwright ESM·零外域请求断言 + --check 模式） |
-| docs/INDEX.md | W925 | 文档索引重建（750 篇·13 板块） |
-| scripts/index.md | W925 | 脚本索引刷新 |
-| STRUCTURE.md | W925 | report_docs 标记刷新 + 六子目录篇数同步（设计与架构方案 5→6·计划方案 20→22） |
-| scripts/output/stats.json | W925 | report_docs 56→59 |
-| docs/00-导读/W批次编号对账表.md | W925 | W925 认领行与收官回填 |
-| CHANGELOG.md | W925 | W925 段 |
-| HANDOVER.md | W925 | 级联头尾链与里程碑块 |
-| README.md | W925 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W925 | 当前批次版本行 |
-| .github/workflows/README.md | W925 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W925 | 页脚批次链插入 W925 |
-| site/data/cross-time-danmaku.html | W925 | 页脚批次链插入 W925 |
-| site/data/tag-cloud.html | W925 | 页脚批次链插入 W925 |
-| site/dukou-engine.html | W925 | 页脚批次链插入 W925 |
-| AGENTS.md | W925 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W925 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W925 | version 同步为 W925 |
-| scripts/output/file-index.md | W925 | W925 段插入 |
-| scripts/output/_w925_spec.json | W925 | 本批级联 spec |
-| scripts/output/_cascade_files_W925.txt | W925 | 级联落盘清单 |
-
-## W924 Q2 裁决落地批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_perf_shadow.py | W924 | Q2 裁决落地：第 47 槽 C2 OBS-10 双层判红（硬 500KB FAIL·软 200KB WARN 观察清单·全站扫描）·汇总行升格口径·自测 5→9 例（OBS-10 双层正负样本） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W924 | §12.2 Q2 行裁决回填（三指标分治）+ §11.5 OBS-10/11/14 三行状态更新 |
-| scripts/output/obs_samples.json | W924 | 现势补采（16→17 批·静态口径） |
-| docs/00-导读/W批次编号对账表.md | W924 | W924 认领行与收官回填 |
-| CHANGELOG.md | W924 | W924 段 |
-| HANDOVER.md | W924 | 级联头尾链与里程碑块 |
-| README.md | W924 | 当前批次版本行 |
-| STRUCTURE.md | W924 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W924 | 当前批次版本行 |
-| .github/workflows/README.md | W924 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W924 | 页脚批次链插入 W924 |
-| site/data/cross-time-danmaku.html | W924 | 页脚批次链插入 W924 |
-| site/data/tag-cloud.html | W924 | 页脚批次链插入 W924 |
-| site/dukou-engine.html | W924 | 页脚批次链插入 W924 |
-| AGENTS.md | W924 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W924 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W924 | version 同步为 W924 |
-| scripts/output/file-index.md | W924 | W924 段插入 |
-| scripts/output/_w924_spec.json | W924 | 本批级联 spec |
-| scripts/output/_cascade_files_W924.txt | W924 | 级联落盘清单 |
-
-## W923 review 修复批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/00-导读/W批次编号对账表.md | W923 | review 修复：W907 让号行状态前缀消幻影在途 + W910/W911 补让号登记行（跳号须登记字典规则） |
-| CHANGELOG.md | W923 | W923 段 |
-| HANDOVER.md | W923 | 级联头尾链与里程碑块 |
-| README.md | W923 | 当前批次版本行 |
-| STRUCTURE.md | W923 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W923 | 当前批次版本行 |
-| .github/workflows/README.md | W923 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W923 | 页脚批次链插入 W923 |
-| site/data/cross-time-danmaku.html | W923 | 页脚批次链插入 W923 |
-| site/data/tag-cloud.html | W923 | 页脚批次链插入 W923 |
-| site/dukou-engine.html | W923 | 页脚批次链插入 W923 |
-| AGENTS.md | W923 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W923 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W923 | version 同步为 W923 |
-| scripts/output/file-index.md | W923 | W923 段插入 |
-| scripts/output/_w923_spec.json | W923 | 本批级联 spec |
-| scripts/output/_cascade_files_W923.txt | W923 | 级联落盘清单 |
-
-## W922 E 裁决落地批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/js/rag-chat.js | W922 | 裁决①浮窗文案：生成式问答指向桌面版渡口问津（本地检索预期说对）
-| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W922 | 裁决⑧干扰日志窗口收官归档（15 行封档·机器触发点常驻·新事件改登对账表）
-| scripts/preflight_check.py | W922 | 触发点提示常量随窗口收官更新
-| scripts/check_seo_head.py | W922 | 裁决⑨og:image 判据白名单化（现役+12 张主题图·管控件经用户裁决批准）
-| site/index.html 等 12 页 | W922 | og:image 主题接线（og-01..12 按页分配·855 页 SEO 门禁全过）
-| docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md | W922 | 裁决⑫项全部登记（四件落地+八项结论）
-| docs/00-导读/W批次编号对账表.md | W922 | W922 认领行与收官回填 |
-| CHANGELOG.md | W922 | W922 段 |
-| HANDOVER.md | W922 | 级联头尾链与里程碑块 |
-| README.md | W922 | 当前批次版本行 |
-| STRUCTURE.md | W922 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W922 | 当前批次版本行 |
-| .github/workflows/README.md | W922 | 工作流层区间与里程碑尾标记 |
-| site/data/cross-time-danmaku.html | W922 | 页脚批次链插入 W922 |
-| site/data/tag-cloud.html | W922 | 页脚批次链插入 W922 |
-| site/dukou-engine.html | W922 | 页脚批次链插入 W922 |
-| AGENTS.md | W922 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W922 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W922 | version 同步为 W922 |
-| scripts/output/file-index.md | W922 | W922 段插入 |
-| scripts/output/_w922_spec.json | W922 | 本批级联 spec |
-| scripts/output/_cascade_files_W922.txt | W922 | 级联落盘清单 |
-
-## W921 CHANGELOG 主动瘦身批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CHANGELOG.md | W921 | B-W855-05 主动瘦身：W700-W802 共 102 段迁一级归档（679KB→363KB·低于 503KB 基线）·段守恒 693 断言过
-| archive/docs/CHANGELOG-ARCHIVE.md | W921 | 承接 102 段迁入（978KB·未触 1MB tier2 阈·滚动分支零启用）·头部归档注记
-| docs/00-导读/W批次编号对账表.md | W921 | W921 认领行与收官回填 |
-| HANDOVER.md | W921 | 级联头尾链与里程碑块 |
-| README.md | W921 | 当前批次版本行 |
-| STRUCTURE.md | W921 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W921 | 当前批次版本行 |
-| .github/workflows/README.md | W921 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W921 | 页脚批次链插入 W921 |
-| site/data/cross-time-danmaku.html | W921 | 页脚批次链插入 W921 |
-| site/data/tag-cloud.html | W921 | 页脚批次链插入 W921 |
-| site/dukou-engine.html | W921 | 页脚批次链插入 W921 |
-| AGENTS.md | W921 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W921 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W921 | version 同步为 W921 |
-| scripts/output/file-index.md | W921 | W921 段插入 |
-| scripts/output/_w921_spec.json | W921 | 本批级联 spec |
-| scripts/output/_cascade_files_W921.txt | W921 | 级联落盘清单 |
-
-## W920 副本链值级对账门禁批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_data_copy_chain.py | W920 | 新增：数据副本链值级对账门禁（JSON 深度相等·基线冻结防增量·CI 态 NOTE 登记·self-test 5/5）——B-W855-04 清偿
-| scripts/output/data-copy-chain-baseline.json | W920 | 存量漂移基线（24 件登记态·方向定性另批）
-| tests/unit/test_check_data_copy_chain.py | W920 | 新增：门禁专项单测 2 例
-| scripts/ci_sim.py | W920 | GATES 清单 +副本链对账（第 11 项）
-| docs/00-导读/W批次编号对账表.md | W920 | W920 认领行与收官回填 |
-| CHANGELOG.md | W920 | W920 段 |
-| HANDOVER.md | W920 | 级联头尾链与里程碑块 |
-| README.md | W920 | 当前批次版本行 |
-| STRUCTURE.md | W920 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W920 | 当前批次版本行 |
-| .github/workflows/README.md | W920 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W920 | 页脚批次链插入 W920 |
-| site/data/cross-time-danmaku.html | W920 | 页脚批次链插入 W920 |
-| site/data/tag-cloud.html | W920 | 页脚批次链插入 W920 |
-| site/dukou-engine.html | W920 | 页脚批次链插入 W920 |
-| AGENTS.md | W920 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W920 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W920 | version 同步为 W920 |
-| scripts/output/file-index.md | W920 | W920 段插入 |
-| scripts/output/_w920_spec.json | W920 | 本批级联 spec |
-| scripts/output/_cascade_files_W920.txt | W920 | 级联落盘清单 |
-
-## W919 DB 三包批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/db.ts | W919 | B-DB-04 迁移框架（MIGRATIONS v1-v3 单调记账·删 try/catch 手写探测迁移）+ B-DB-02 四查询索引 + v3 feedback 表重建（旧库补外键/单维唯一索引/CHECK·含索引重建修复）+ listSessionsWithMessageCount 单 SQL 版
-| xiyouji-agent-web/server/routes.ts | W919 | B-DB-02 N+1 改写（子查询·limit 默认 50 上限 200）+ B-DB-03 JSON.parse 脏数据降级 null
-| xiyouji-agent-web/server/api.integration.test.ts | W919 | 反馈集成测试对齐外键时代（先落真实 session/message 底数·断言与清理同步）
-| docs/agent/agent-web.md | W919 | schema 变更规范固化（改表定义对旧库无效·一律走 MIGRATIONS·禁探测式迁移）
-| docs/00-导读/W批次编号对账表.md | W919 | W919 认领行与收官回填 |
-| CHANGELOG.md | W919 | W919 段 |
-| HANDOVER.md | W919 | 级联头尾链与里程碑块 |
-| README.md | W919 | 当前批次版本行 |
-| STRUCTURE.md | W919 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W919 | 当前批次版本行 |
-| .github/workflows/README.md | W919 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W919 | 页脚批次链插入 W919 |
-| site/data/cross-time-danmaku.html | W919 | 页脚批次链插入 W919 |
-| site/data/tag-cloud.html | W919 | 页脚批次链插入 W919 |
-| site/dukou-engine.html | W919 | 页脚批次链插入 W919 |
-| AGENTS.md | W919 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W919 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W919 | version 同步为 W919 |
-| scripts/output/file-index.md | W919 | W919 段插入 |
-| scripts/output/_w919_spec.json | W919 | 本批级联 spec |
-| scripts/output/_cascade_files_W919.txt | W919 | 级联落盘清单 |
-
-## W918 检索降级批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/chat.ts | W918 | B-ARCH-01 检索降级：LLM 上游不可达（5xx/429/ECONNREFUSED 族）时 SSE 返回降级说明+done 而非裸 5xx（已送达的 tool_result 检索引用仍有效·W821「降级可用」语义落地）
-| docs/00-导读/W批次编号对账表.md | W918 | W918 认领行与收官回填 |
-| CHANGELOG.md | W918 | W918 段 |
-| HANDOVER.md | W918 | 级联头尾链与里程碑块 |
-| README.md | W918 | 当前批次版本行 |
-| STRUCTURE.md | W918 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W918 | 当前批次版本行 |
-| .github/workflows/README.md | W918 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W918 | 页脚批次链插入 W918 |
-| site/data/cross-time-danmaku.html | W918 | 页脚批次链插入 W918 |
-| site/data/tag-cloud.html | W918 | 页脚批次链插入 W918 |
-| site/dukou-engine.html | W918 | 页脚批次链插入 W918 |
-| AGENTS.md | W918 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W918 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W918 | version 同步为 W918 |
-| scripts/output/file-index.md | W918 | W918 段插入 |
-| scripts/output/_w918_spec.json | W918 | 本批级联 spec |
-| scripts/output/_cascade_files_W918.txt | W918 | 级联落盘清单 |
-
-## W917 DB 正确性包一（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/db.ts | W917 | B-DB-01 四 P0 之三：pragma foreign_keys=ON（级联生效）/ clearAllData 补 feedback / 反馈唯一索引 (message_id,verdict)→(message_id) 单维 + upsert 改判 / INSERT OR IGNORE→ON CONFLICT 覆盖
-| xiyouji-agent-web/server/chat.ts | W917 | B-DB-01 P0 之四：会话主键服务端生成 uuidv4()（客户端可控 id 是串档路径·真值经响应返回）
-| scripts/check_db_schema.py | W917 | 新增：DB schema 门禁（四不变量静态锁定·self-test 3/3）——B-DB-05 清偿
-| tests/unit/test_check_db_schema.py | W917 | 新增：门禁专项单测 2 例
-| scripts/ci_sim.py | W917 | GATES 清单 +DB schema（第 10 项）
-| docs/00-导读/W批次编号对账表.md | W917 | W917 认领行与收官回填 |
-| CHANGELOG.md | W917 | W917 段 |
-| HANDOVER.md | W917 | 级联头尾链与里程碑块 |
-| README.md | W917 | 当前批次版本行 |
-| STRUCTURE.md | W917 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W917 | 当前批次版本行 |
-| .github/workflows/README.md | W917 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W917 | 页脚批次链插入 W917 |
-| site/data/cross-time-danmaku.html | W917 | 页脚批次链插入 W917 |
-| site/data/tag-cloud.html | W917 | 页脚批次链插入 W917 |
-| site/dukou-engine.html | W917 | 页脚批次链插入 W917 |
-| AGENTS.md | W917 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W917 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W917 | version 同步为 W917 |
-| scripts/output/file-index.md | W917 | W917 段插入 |
-| scripts/output/_w917_spec.json | W917 | 本批级联 spec |
-| scripts/output/_cascade_files_W917.txt | W917 | 级联落盘清单 |
-
-## W916 波二第三件批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_page_admission.py | W916 | 新增：新建页准入门禁（静态版·禁 type=module + 零外域 script src·857 页 0 FAIL·self-test 3/3）——C-W818-01 清偿
-| tests/unit/test_check_page_admission.py | W916 | 新增：门禁专项单测 2 例
-| scripts/ci_sim.py | W916 | GATES 清单 +页准入（第 9 项·每 PR 实跑）
-| docs/00-导读/W批次编号对账表.md | W916 | W916 认领行与收官回填 |
-| CHANGELOG.md | W916 | W916 段 |
-| HANDOVER.md | W916 | 级联头尾链与里程碑块 |
-| README.md | W916 | 当前批次版本行 |
-| STRUCTURE.md | W916 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W916 | 当前批次版本行 |
-| .github/workflows/README.md | W916 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W916 | 页脚批次链插入 W916 |
-| site/data/cross-time-danmaku.html | W916 | 页脚批次链插入 W916 |
-| site/data/tag-cloud.html | W916 | 页脚批次链插入 W916 |
-| site/dukou-engine.html | W916 | 页脚批次链插入 W916 |
-| AGENTS.md | W916 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W916 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W916 | version 同步为 W916 |
-| scripts/output/file-index.md | W916 | W916 段插入 |
-| scripts/output/_w916_spec.json | W916 | 本批级联 spec |
-| scripts/output/_cascade_files_W916.txt | W916 | 级联落盘清单 |
-
-## W915 波二余件一·二批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/agent/gates.md | W915 | 第 43 槽去时点快照数字（缺口三数/耗时/770→指向报告与基线文件·时点快照不入判据文档）——A-T02-01 清偿
-| site/404.html | W915 | v4 间距令牌迁移（:root 页内副本 + 24/48/40 等值替换 var(--space-6/9/8)·非刻度值按 W891 等值纪律保留）——C-B02 清偿
-| docs/00-导读/W批次编号对账表.md | W915 | W915 认领行与收官回填 |
-| CHANGELOG.md | W915 | W915 段 |
-| HANDOVER.md | W915 | 级联头尾链与里程碑块 |
-| README.md | W915 | 当前批次版本行 |
-| STRUCTURE.md | W915 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W915 | 当前批次版本行 |
-| .github/workflows/README.md | W915 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W915 | 页脚批次链插入 W915 |
-| site/data/cross-time-danmaku.html | W915 | 页脚批次链插入 W915 |
-| site/data/tag-cloud.html | W915 | 页脚批次链插入 W915 |
-| site/dukou-engine.html | W915 | 页脚批次链插入 W915 |
-| AGENTS.md | W915 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W915 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W915 | version 同步为 W915 |
-| scripts/output/file-index.md | W915 | W915 段插入 |
-| scripts/output/_w914_spec.json | W915 | 本批级联 spec |
-| scripts/output/_cascade_files_W915.txt | W915 | 级联落盘清单 |
-
-## W914 英文版 README（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| README.en.md | W914 | 英文版 README（完整对照版·零版本号·站内链接指向 /en/·同款配图） |
-| README.md | W914 | 顶部加语言切换行 + 目录树补 README.en.md 一行 |
-| docs/00-导读/W批次编号对账表.md | W914 | W914 认领行与收官回填 |
-| scripts/output/_w914_spec.json | W914 | 本批级联 spec（10 面改写参数） |
-| scripts/output/_cascade_files_W914.txt | W914 | 级联落盘清单 |
-| scripts/output/_vermilion_solid_cache.json | W914 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |
-| CHANGELOG.md | W914 | W914 段 |
-| HANDOVER.md | W914 | 头尾链与里程碑块 |
-| STRUCTURE.md | W914 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W914 | 当前批次版本行 |
-| .github/workflows/README.md | W914 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W914 | 页脚批次链插入 W914 |
-| site/data/cross-time-danmaku.html | W914 | 页脚批次链插入 W914 |
-| site/data/tag-cloud.html | W914 | 页脚批次链插入 W914 |
-| site/dukou-engine.html | W914 | 页脚批次链插入 W914 |
-| AGENTS.md | W914 | 版本脚注条目 |
-| CITATION.cff | W914 | version 同步为 W914 |
-| scripts/output/file-index.md | W914 | W914 段插入 |
-
-## W913 波二小项四件批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W913 | 头状态行订正：施工未动工→已收官（W827 入口 + W845-847 阅读页·原文备档）——D-W830-02 清偿
-| .github/workflows/ci.yml | W913 | E2E 依赖钉版：playwright 无约束安装→钉 1.63.0 对齐 scripts/package-lock.json（T10 实证真漂移面）——D-W792-02 清偿
-| site/index.html | W913 | 站点聚合数字失真修正：「全站 772 篇」→「615<!--stats:a1_a6_docs--> 篇（A1-A6）」——B-W855-01 数字半边
-| scripts/check_doc_sync.py | W913 | C5b 扩展面纳入 site/index.html（站点聚合数字从此有标记对账防线·防回退半边）——B-W855-01 防线半边
-| docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md | W913 | C 档波二状态更新（四项完成/关闭·余五项在列）
-| docs/00-导读/W批次编号对账表.md | W913 | W913 认领行与收官回填
-| CHANGELOG.md | W913 | W913 段
-| HANDOVER.md | W913 | 级联头尾链与里程碑块
-| README.md | W913 | 当前批次版本行
-| STRUCTURE.md | W913 | 当前批次版本行
-| docs/00-导读/项目说明.md | W913 | 当前批次版本行
-| .github/workflows/README.md | W913 | 工作流层区间与里程碑尾标记
-| site/index.html（页脚批次链） | W913 | 页脚批次链插入 W913
-| site/data/cross-time-danmaku.html | W913 | 页脚批次链插入 W913
-| site/data/tag-cloud.html | W913 | 页脚批次链插入 W913
-| site/dukou-engine.html | W913 | 页脚批次链插入 W913
-| AGENTS.md | W913 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W913 | 脚注滚动迁入的最老条目
-| CITATION.cff | W913 | version 同步为 W913
-| scripts/output/file-index.md | W913 | W913 段插入
-| scripts/output/_w913_spec.json | W913 | 本批级联 spec
-| scripts/output/_cascade_files_W913.txt | W913 | 级联落盘清单
-
-## W912 未落地任务首波清偿（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/dukou-engine.html | W912 | 渡口页主脚本考古回灌（W333 原装 10.4KB 自 git 历史提取·W333 后某批剥离致交互全失效的根修）+ 补 themeToggle 绑定（历史原装即缺）+ CSP 重算
-| site/index.html | W912 | 抽屉桌面 display:none 副作用修复（close 仅移动端置 none）+ ask-chip 键盘可达（tabindex+Enter/Space 委托）
-| site/curated.html | W912 | 同款抽屉修复
-| site/dashboard.html | W912 | 同款抽屉修复
-| site/guide.html | W912 | 同款抽屉修复
-| site/sw.js | W912 | 预缓存死链清理（mobile-index.html 两处）
-| site/data/text-search.html | W912 | 注入失败可见错误条（role=alert·非仅 console.warn）
-| site/data/cross-time-danmaku.html | W912 | 假 LIVE 文案改真实口径（LIVE 弹幕→弹幕回放·aria 同步）
-| site/404.html | W912 | 补夜读防 FOUC theme-init（与全站 W488 同款）
-| scripts/check_interaction_binding.py | W912 | 新增：交互绑定门禁（注册控件对账 P1 + 泛化 NOTE P2·fail-closed·self-test 3/3）·接 ci_sim 第 8 项（每 PR 实跑·挂 verify 槽另批）
-| tests/unit/test_check_interaction_binding.py | W912 | 新增：门禁专项单测 3 例（self-test 绿/注册表锚点防漂/HEAD 实跑）
-| tests/unit/test_preflight_touches.py | W912 | +2 例：嵌套括号长尾收官格识别 / 碎行下右起定位（19/19）
-| scripts/preflight_check.py | W912 | _STATUS_CELL_RE 放宽为前缀匹配（原单层括号紧匹配拒识长尾收官格→回退固定下标被碎行击穿·W912 认领拦截实测根修）
-| scripts/ci_sim.py | W912 | GATES 清单 +交互绑定（第 8 项）
-| docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md | W912 | 新增：未落地任务全量盘点（T-09 基线×现势复核·A–E 五档含价值筛选 D2 冻结档）+ 本批计划（32 判据全项）
-| pytest.ini | W912 | pytest_collected 861→867
-| scripts/output/stats.json | W912 | --w W912 刷新
-| docs/00-导读/W批次编号对账表.md | W912 | W912 认领行（两度让号并行批）与收官回填
-| CHANGELOG.md | W912 | W912 段
-| HANDOVER.md | W912 | 级联头尾链与里程碑块
-| README.md | W912 | 当前批次版本行（同日并行在途首屏改动正交·按清单携带）
-| STRUCTURE.md | W912 | 当前批次版本行
-| docs/00-导读/项目说明.md | W912 | 当前批次版本行
-| .github/workflows/README.md | W912 | 工作流层区间与里程碑尾标记
-| site/index.html（页脚批次链） | W912 | 页脚批次链插入 W912
-| site/data/cross-time-danmaku.html（页脚批次链） | W912 | 页脚批次链插入 W912
-| site/data/tag-cloud.html | W912 | 页脚批次链插入 W912
-| site/dukou-engine.html（页脚批次链） | W912 | 页脚批次链插入 W912
-| AGENTS.md | W912 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W912 | 脚注滚动迁入的最老条目
-| CITATION.cff | W912 | version 同步为 W912
-| scripts/output/file-index.md | W912 | W912 段插入
-| scripts/output/_w912_spec.json | W912 | 本批级联 spec
-| scripts/output/_cascade_files_W912.txt | W912 | 级联落盘清单
-
-## W909 README 专业化改版（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| README.md | W909 | README 专业化改版（单一 H1 + 两个 H2 分区 + 顶部主视觉 banner + 可视化样例小节 + 宣传单页预览图 + 徽章并行 + 文案修正） |
-| docs/00-导读/W批次编号对账表.md | W909 | W909 认领行与收官回填 + 顺带修三处表格结构损坏（W892 粘连段 · W764/W906 未转义管道符） |
-| scripts/output/_w909_spec.json | W909 | 本批级联 spec（10 面改写参数） |
-| scripts/output/_cascade_files_W909.txt | W909 | 级联落盘清单 |
-| scripts/output/_vermilion_solid_cache.json | W909 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |
-| CHANGELOG.md | W909 | W909 段 |
-| HANDOVER.md | W909 | 头尾链与里程碑块 |
-| STRUCTURE.md | W909 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W909 | 当前批次版本行 |
-| .github/workflows/README.md | W909 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W909 | 页脚批次链插入 W909 |
-| site/data/cross-time-danmaku.html | W909 | 页脚批次链插入 W909 |
-| site/data/tag-cloud.html | W909 | 页脚批次链插入 W909 |
-| site/dukou-engine.html | W909 | 页脚批次链插入 W909 |
-| AGENTS.md | W909 | 版本脚注条目 |
-| CITATION.cff | W909 | version 同步为 W909 |
-| scripts/output/file-index.md | W909 | W909 段插入 |
-| site/data/search.html | W909 | 站内搜索索引内嵌刷新（zh） |
-| site/en/search.html | W909 | 站内搜索索引内嵌刷新（en） |
-
-## W906 C4-f 三态化（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_doc_sync.py | W906 | C4-f 三态化（管控件·用户批准）：declared 文件残留为「他方批次登记行纯追加」（零删改+全 | WNNN 形态）降 NOTE 放行·在位编辑仍红；新增 _foreign_append_only 探测（git diff 逐 dirty 文件）+ RE_BATCH_REGISTRY_ROW + self-test T32/T33（33/33） |
-| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W906 | 新增 F5 节（C4-f 并行误拦实录与修复）+ 遗留盘点表两行更新（F1 已修/W906 落地） |
-| docs/00-导读/W批次编号对账表.md | W906 | W906 认领行与收官回填 |
-| CHANGELOG.md | W906 | W906 段 |
-| HANDOVER.md | W906 | 级联头尾链与里程碑块 |
-| README.md | W906 | 当前批次版本行 |
-| STRUCTURE.md | W906 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W906 | 当前批次版本行 |
-| .github/workflows/README.md | W906 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W906 | 页脚批次链插入 W906 |
-| site/data/cross-time-danmaku.html | W906 | 页脚批次链插入 W906 |
-| site/data/tag-cloud.html | W906 | 页脚批次链插入 W906 |
-| site/dukou-engine.html | W906 | 页脚批次链插入 W906 |
-| AGENTS.md | W906 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W906 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W906 | version 同步为 W906 |
-| scripts/output/file-index.md | W906 | W906 段插入 |
-| scripts/output/_w906_spec.json | W906 | 本批级联 spec |
-| scripts/output/_cascade_files_W906.txt | W906 | 级联落盘清单 |
-
-## W905 两项存量红项清理（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/character-semantic-network.html | W905 | 暗色态补色规则（rgb(163, 1, 38) → #ce7e88·修 W674 色阶变更遗留的 invisible 缺陷） |
-| site/en/character-semantic-network.html | W905 | 暗色态补色规则（同上·英文版同步） |
-| xiyouji-agent-web/package.json | W905 | 依赖升级（dompurify ^3.4.17）+ overrides 抬版（markdown-it ^14.3.3 / zod ^4.6.7 / vite ^8.3.5） |
-| xiyouji-agent-web/package-lock.json | W905 | 锁文件同步（4 包版本推进·lock 变更最小化） |
-| scripts/output/_vermilion_solid_cache.json | W905 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |
-| scripts/output/_w905_spec.json | W905 | 本批级联 spec（10 面改写参数） |
-| scripts/output/_cascade_files_W905.txt | W905 | 级联落盘清单 |
-| docs/00-导读/W批次编号对账表.md | W905 | 认领行与收官回填 |
-| CHANGELOG.md | W905 | W905 段 |
-| HANDOVER.md | W905 | 头尾链与里程碑块 |
-| README.md | W905 | 当前批次版本行 |
-| STRUCTURE.md | W905 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W905 | 当前批次版本行 |
-| .github/workflows/README.md | W905 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W905 | 页脚批次链插入 W905 |
-| site/data/cross-time-danmaku.html | W905 | 页脚批次链插入 W905 |
-| site/data/tag-cloud.html | W905 | 页脚批次链插入 W905 |
-| site/dukou-engine.html | W905 | 页脚批次链插入 W905 |
-| AGENTS.md | W905 | 版本脚注条目 |
-| CITATION.cff | W905 | version 同步为 W905 |
-| scripts/output/file-index.md | W905 | W905 段插入 |
-
-## W904 C5c 裸聚合收敛（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/stats.py | W904 | 增 7 板块键（a2/a3/a5/a6/learn/cognition/spirit·口径对齐 a4_docs 顶层排 README）——C5c 收敛的键位供给
-| scripts/check_doc_sync.py | W904 | C5c 由 NOTE 转 FAIL（W703 终态）+ 新增命中后置精确豁免（只豁免该命中·同行标记对账照跑）+ 整行豁免收紧为行首形态（原「行内含即整行跳」会吞后置豁免行的标记对账·T30 负样本实证）+ RE_BARE_AGG 词边界（S1 项目/A2 个人类编号假阳性修复）+ self-test 增 T27-T31（31/31）
-| README.md | W904 | C5c 三分治：34 类实体化 / 44 篇实体化 / 常量豁免×2 / 「18 个板块」陈旧数改写为描述式
-| STRUCTURE.md | W904 | C5c 三分治 32 处：A3/A5/learn/cognition/spirit/A2/A4/site_en 实体化（**A5「已建 4 篇」陈旧值纠正为实数 34**）/ 六子目录构成与时点史实后置豁免 / 「321 篇」陈旧索引数改写去数
-| AGENTS.md | W904 | C5c 三分治 6 处：a2/site_data/site_en 实体化 / 133 维度与 §11 十项常量豁免 / EXPECT_A4 判据字面量转述豁免
-| docs/00-导读/项目说明.md | W904 | C5c 三分治 20 处：A2/A3/A5/A6/可视化实体化 / S1-S3 时点史实与功能常量豁免
-| CONTRIBUTING.md | W904 | §12 自检十项与 fallback 三项常量豁免×3
-| docs/00-导读/统计口径说明.md | W904 | 615/87 实体化 / W505 历史事件计数豁免×2
-| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W904 | F4 状态订正为已收口 + 遗留盘点表更新
-| docs/11-方案报告/README.md（登记行 34） | W904 | F4 状态订正为已由 W904 收口
-| scripts/output/stats.json | W904 | 新 7 键落盘（--w W904 刷新）
-| docs/00-导读/W批次编号对账表.md | W904 | W904 认领行与收官回填 |
-| CHANGELOG.md | W904 | W904 段 |
-| HANDOVER.md | W904 | 级联头尾链与里程碑块 |
-| README.md（版本行） | W904 | 当前批次版本行 |
-| STRUCTURE.md（版本行） | W904 | 当前批次版本行 |
-| docs/00-导读/项目说明.md（版本行） | W904 | 当前批次版本行 |
-| .github/workflows/README.md | W904 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W904 | 页脚批次链插入 W904 |
-| site/data/cross-time-danmaku.html | W904 | 页脚批次链插入 W904 |
-| site/data/tag-cloud.html | W904 | 页脚批次链插入 W904 |
-| site/dukou-engine.html | W904 | 页脚批次链插入 W904 |
-| AGENTS.md（版本脚注） | W904 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W904 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W904 | version 同步为 W904 |
-| scripts/output/file-index.md | W904 | W904 段插入 |
-| scripts/output/_w904_spec.json | W904 | 本批级联 spec |
-| scripts/output/_cascade_files_W904.txt | W904 | 级联落盘清单 |
-
-## W903 审查发现修复（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/preflight_check.py | W903 | F1 修复（管控件·用户批准）：_split_touches 注记归一（全角括号内不切且整段丢弃·扫描式 tokenizer）+ touches_conflict 对称目录前缀匹配（X/** 与 X/ 形态）——通配/带注记声明不再恒不命中假绿 |
-| scripts/verify_delivery.py | W903 | F2 修复（管控件·用户批准）：第 45 门禁 fail_msg 补「先 git add 本批新件再 refresh」顺序（生成器按 Git 索引收集·W896 口径·W900/W901 连踩） |
-| tests/unit/test_preflight_touches.py | W903 | 新增语义归一族单测 6 例（先红后绿：旧码下 5 例红实证·新码 17/17 绿） |
-| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W903 | 状态行 F1/F2「待批」订正为已落地 |
-| docs/11-方案报告/README.md | W903 | 登记行 34 的 F1/F2 状态订正为已由 W903 修复 |
-| docs/00-导读/W批次编号对账表.md | W903 | W903 认领行与收官回填 |
-| CHANGELOG.md | W903 | W903 段 |
-| HANDOVER.md | W903 | 级联头尾链与里程碑块 |
-| README.md | W903 | 当前批次版本行 |
-| STRUCTURE.md | W903 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W903 | 当前批次版本行 |
-| .github/workflows/README.md | W903 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W903 | 页脚批次链插入 W903 |
-| site/data/cross-time-danmaku.html | W903 | 页脚批次链插入 W903 |
-| site/data/tag-cloud.html | W903 | 页脚批次链插入 W903 |
-| site/dukou-engine.html | W903 | 页脚批次链插入 W903 |
-| AGENTS.md | W903 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W903 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W903 | version 同步为 W903 |
-| scripts/output/file-index.md | W903 | W903 段插入 |
-| scripts/output/_w903_spec.json | W903 | 本批级联 spec |
-| scripts/output/_cascade_files_W903.txt | W903 | 级联落盘清单 |
-
-## W902 机制脚本门禁全量审查与记忆固化入仓（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W902 | 新增：机制层全量审查（三层面·四发现·记忆固化迁移清单·遗留盘点） |
-| docs/11-方案报告/README.md | W902 | 审查报告登记行 34 + 维护契约 ① 补「唯一落盘位」常设指令句 |
-| docs/agent/pitfalls.md | W902 | 记忆固化 +3 条（canvas 边层 / CSP 写路径盲区 / 暗色审计 http 前置假 0）+ 三节计数 9→10·5→6·5→6 |
-| AGENTS.md | W902 | 六主题计数同步（49→52）+ §4.3 本机环境事实补 4 条（curl --ssl-no-revoke / /tmp 不可见 / Europe PMC 兜底 / gh api -f） |
-| docs/00-导读/文档规范.md | W902 | §11.1 管控表新增「常设指令」行：方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/ |
-| CLAUDE.md | W902 | 速查层新增「报告落位」条目（46 行·预算 60 内） |
-| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W902 | §8 干扰日志补 2 行延迟登记（W825/W893 覆盖事件·考古补·如实标注） |
-| docs/00-导读/W批次编号对账表.md | W902 | W902 认领行与收官回填 |
-| CHANGELOG.md | W902 | W902 段 |
-| HANDOVER.md | W902 | 级联头尾链与里程碑块 |
-| README.md | W902 | 当前批次版本行 |
-| STRUCTURE.md | W902 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W902 | 当前批次版本行 |
-| .github/workflows/README.md | W902 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W902 | 页脚批次链插入 W902 |
-| site/data/cross-time-danmaku.html | W902 | 页脚批次链插入 W902 |
-| site/data/tag-cloud.html | W902 | 页脚批次链插入 W902 |
-| site/dukou-engine.html | W902 | 页脚批次链插入 W902 |
-| AGENTS.md（版本脚注） | W902 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W902 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W902 | version 同步为 W902 |
-| scripts/output/file-index.md | W902 | W902 段插入 |
-| scripts/output/_w902_spec.json | W902 | 本批级联 spec |
-| scripts/output/_cascade_files_W902.txt | W902 | 级联落盘清单 |
-
-## W901 C5b 对账面恢复 + W900 披露项清偿（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_doc_sync.py | W901 | C5b 扩展面 glob 根层改递归（管控件·用户 2026-10-24 批准；计划方案/ 时点快照豁免原样保留——实测该子目录 8 件带冻结 stats 标记·入面即假红） |
-| docs/11-方案报告/README.md | W901 | T-16/T-17 两件补登计划方案表（W893/W896 遗留登记缺口）+ 节头计数订正 + C5b 提示行更新为已恢复口径 + 登记缺口披露行撤除 |
-| CHANGELOG.md | W901 | W757 段 1 条审计报告链接随批准改指新址（仅地址不改叙事）+ W901 段 |
-| docs/00-导读/W批次编号对账表.md | W901 | W901 认领行与收官回填 |
-| HANDOVER.md | W901 | 级联头尾链与里程碑块 |
-| README.md | W901 | 当前批次版本行 |
-| STRUCTURE.md | W901 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W901 | 当前批次版本行 |
-| .github/workflows/README.md | W901 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W901 | 页脚批次链插入 W901 |
-| site/data/cross-time-danmaku.html | W901 | 页脚批次链插入 W901 |
-| site/data/tag-cloud.html | W901 | 页脚批次链插入 W901 |
-| site/dukou-engine.html | W901 | 页脚批次链插入 W901 |
-| AGENTS.md | W901 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W901 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W901 | version 同步为 W901 |
-| scripts/output/file-index.md | W901 | W901 段插入 |
-| scripts/output/_w901_spec.json | W901 | 本批级联 spec |
-| scripts/output/_cascade_files_W901.txt | W901 | 级联落盘清单 |
-
-## W900 11-方案报告目录分类重组（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/审查与评审/对抗性审查报告-2026-10-14.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/全量对抗审查报告-2026-10-16.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/外部评审回应与逐项核查报告-2026-10-17.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/外部评审回应与逐项核查报告-2026-10-18.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/计划方案三性审查报告-2026-10-20.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/架构评审报告-2026-10-21.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/界面布局审计报告-2026-10-21.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/数据库表设计审查报告-2026-10-20.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/难簿序与dataset对拍报告-2026-10-11.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/界面视觉重设计方向-v4-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/界面视觉重设计细化规格-v4-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/v4-design-language-preview.html | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/静态站前端框架化选型对比-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.html | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/治理与核查/W761工具链可维护性重构报告-2026-10-16.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/治理与核查/多Agent干扰治理评估与实施记录-2026-10-14.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/治理与核查/全仓待办计划方案状态核查报告-2026-10-18.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W900 | 根层迁入分类子目录「调研与数据复盘」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/调研与数据复盘/读者数据复盘.md | W900 | 根层迁入分类子目录「调研与数据复盘」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-pages-2026-09-30.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-top-2026-09-30.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-top-2026-10-02.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-topref-2026-10-02.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/uv-curve-2026-09.svg | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/README.md | W900 | 唯一索引分区重构（目录树 + 33 行总表机械分五区编号不重排 + 计划方案游离行合并 + T-16/T-17 登记缺口披露 + C5b 覆盖提示） |
-| docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md | W900 | 2 条入链随迁修正（多 Agent 干扰治理评估全文新址） |
-| docs/INDEX.md | W900 | 再生成（20 行路径随迁） |
-| site/data/search.html | W900 | 站内搜索索引再生成（zh 848 条）+ CSP 哈希重算 |
-| site/en/search.html | W900 | 站内搜索索引再生成（en 890 条）+ CSP 哈希重算 |
-| HANDOVER.md | W900 | 零段「复盘存档」陈旧路径（W757 改名前旧址）订正 + 级联头尾链与里程碑块 |
-| STRUCTURE.md | W900 | §11 构成散文行按分区实况改写（54 总数不变）+ 版本行 |
-| docs/00-导读/W批次编号对账表.md | W900 | W900 认领行与收官回填 |
-| CHANGELOG.md | W900 | W900 段 |
-| README.md | W900 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W900 | 当前批次版本行 |
-| .github/workflows/README.md | W900 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W900 | 页脚批次链插入 W900 |
-| site/data/cross-time-danmaku.html | W900 | 页脚批次链插入 W900 |
-| site/data/tag-cloud.html | W900 | 页脚批次链插入 W900 |
-| site/dukou-engine.html | W900 | 页脚批次链插入 W900 |
-| AGENTS.md | W900 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W900 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W900 | version 同步为 W900 |
-| scripts/output/file-index.md | W900 | W900 段插入 |
-| scripts/output/_w900_spec.json | W900 | 本批级联 spec |
-| scripts/output/_cascade_files_W900.txt | W900 | 级联落盘清单 |
-| site/static/icons/ui/note.svg | W947 | 新增：便签与文档图标（折角纸页·替 📝） |
-| site/static/icons/ui/link.svg | W947 | 新增：双环链条图标（替 🔗） |
-| xiyouji-agent-web/src/components/UiIcons.tsx | W947 | 新增：agent-web 内联 SVG 图标组件（WarnIcon / NoteIcon / LinkIcon·与静态站资产同源） |
-| xiyouji-agent-web/src/components/PermissionDialog.tsx | W947 | ⚠️📝 纯图标位 → 内联 SVG 组件（W947） |
-| xiyouji-agent-web/src/components/InlinePermissionCard.tsx | W947 | ⚠️ 图标位 → 内联 SVG 组件（W947） |
-| scripts/_w947_add_icons.py | W947 | 新增：通用图标集补 2 枚（note / link） |
-| dataset/timeline.json | W949 | 数据源：22 个 icon 字段 emoji → 语义专属图标名（与中英页面逐位对拍·堵回归漏洞） |
-| scripts/_w949_fix_dataset.py | W949 | 新增：数据源 icon 字段治理器（含与页面副本逐位对拍） |
-| scripts/_w949_allowlist.py | W949 | 新增：字段图标位白名单重建器（扫描器实测产出 + 程序附理由） |
-| scripts/check_icon_fields.py | W949 | 新增：字段图标位判据（avatar/icon/flag/stage·与白名单逐条比对） |
-| scripts/check_emoji_icons.py | W949 | 第 50 门禁新增 A2 段（挂入字段图标位判据） |
-| scripts/output/_w949_icon_field_allowlist.json | W949 | 新增：字段图标位白名单（71 条·扫描器实测产出） |
-| scripts/_w950_normalize.py | W950 | 新增：图标光学尺寸归一器（量墨色外接框 → 统一边长 + 居中） |
-| scripts/_w950_refresh_icon_paths.py | W950 | 新增：图标图形同步刷新器（资产 → 内联 SVG·复合键反查） |
-| scripts/output/_w950_icon_normalize.json | W950 | 新增：45 枚图标的光学尺寸归一参数 |
-| scripts/output/_cascade_files_W950.txt | W950 | 新增：本批级联清单 |
-
-## W899 合并后收尾修正（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/output/README.md | W899 | output 目录导读计数订正为实况 6 件 |
-| scripts/output/_vermilion_solid_cache.json | W899 | 增量缓存重建（3 页 sha1 对齐当前页面字节） |
-| scripts/output/_w899_spec.json | W899 | 本批级联 spec（10 面改写参数） |
-| scripts/output/_cascade_files_W899.txt | W899 | 级联落盘清单 |
-| docs/00-导读/W批次编号对账表.md | W899 | 认领行与收官回填 |
-| CHANGELOG.md | W899 | W899 段 |
-| HANDOVER.md | W899 | 头尾链与里程碑块 |
-| README.md | W899 | 当前批次版本行 |
-| STRUCTURE.md | W899 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W899 | 当前批次版本行 |
-| .github/workflows/README.md | W899 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W899 | 页脚批次链插入 W899 |
-| site/data/cross-time-danmaku.html | W899 | 页脚批次链插入 W899 |
-| site/data/tag-cloud.html | W899 | 页脚批次链插入 W899 |
-| site/dukou-engine.html | W899 | 页脚批次链插入 W899 |
-| AGENTS.md | W899 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W899 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W899 | version 同步为 W899 |
-| scripts/output/file-index.md | W899 | W899 段插入 |
-
-## W898 宣传物料投放接线与派生（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/xiyouji-flyer-a4-en.html | W898 | 英文版单页（同一栅格·EN 版专属排版微调·两页 0px 溢出） |
-| assets/promo/output/xiyouji-flyer-a4-en.pdf | W898 | 英文版双面 PDF（2 页 A4） |
-| assets/promo/output/xiyouji-flyer-a4-en-front.png | W898 | 英文版正面 PNG（1240×1754） |
-| assets/promo/output/xiyouji-flyer-a4-en-back.png | W898 | 英文版背面 PNG（1240×1754） |
-| assets/promo/README.md | W898 | 目录导读补英文版与投放接线说明 |
-| scripts/_w892_export_flyer.mjs | W898 | 导出脚本加 `--en` 档（英文版 PDF + PNG） |
-| README.md | W898 | 新增「📄 宣传单页（A4 双面）」物料小节 |
-| site/index.html | W898 | 「看数据与工具」区新增宣传单页入口（指向仓库物料目录） |
-| docs/00-导读/文档规范.md | W898 | §11.2 受管资产表新增 assets/promo/ 一行 |
-| docs/00-导读/W批次编号对账表.md | W898 | 认领行与收官回填 |
-| CHANGELOG.md | W898 | W898 段 |
-| scripts/output/file-index.md | W898 | 同批段回写 |
-
-## W897 协作防护修复（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/preflight_check.py | W897 | touches 分隔符根修（`_split_touches` 兼容五种分隔符·台账与命令行同源） |
-| tests/unit/test_preflight_touches.py | W897 | 新增单测 11 例（多分隔符 / 台账列解析 / 占位符归一 / 交集判定） |
-| .github/workflows/ci-sim.yml | W897 | CI 侧预演 workflow（PR + push dev·干净检出跑 7 项关键门禁） |
-| .github/workflows/README.md | W897 | 里程碑行上限随现役号同步 |
-| scripts/output/stats.json | W897 | pytest_collected 随新增单测刷新 |
-| pytest.ini | W897 | pytest_collected 标记同步 |
-| docs/00-导读/W批次编号对账表.md | W897 | 认领行与收官回填 |
-| CHANGELOG.md | W897 | W897 段 |
-| scripts/output/file-index.md | W897 | 同批段回写 |
-
-## W896 门禁实算口径改造（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/tracked_files.py | W896 | 目标提交树口径单一事实源（tracked_files / tracked_in_dir / tracked_subdirs / is_tracked） |
-| scripts/ci_sim.py | W896 | CI 侧预演工具（worktree 干净检出 + 关键门禁 + 自动清理·只读零风险） |
-| scripts/check_folder_docs.py | W896 | 第 45 槽实算改索引口径 + 三态判据 + 计数自洽 + 口径开关 |
-| scripts/gen_folder_docs.py | W896 | 生成器同步改索引口径 + 磁盘口径平行实现（自测与降级用） |
-| scripts/stats.py | W896 | 全部 glob 计数改索引口径（目标提交树实算） |
-| scripts/docs_index.py | W896 | scan_docs 默认 tracked_only（写盘与门禁比对共用同一函数） |
-| scripts/output/stats.json | W896 | report_docs 53→54·pytest_collected 835→836·inline_css_pages 归实况 330 |
-| scripts/output/stats-changelog.json | W896 | W896 变更史登记 |
-| scripts/output/stats-index.md | W896 | 反向索引同步 |
-| scripts/index.md | W896 | 目录清单同步（新增两脚本） |
-| docs/INDEX.md | W896 | 文档索引重建（745 篇·索引口径） |
-| docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md | W896 | 框架第十七次执行（口径改造 + AC 表 + 3 条经验） |
-| docs/00-导读/W批次编号对账表.md | W896 | 认领行与收官回填 |
-| CHANGELOG.md | W896 | W896 段 |
-| scripts/output/file-index.md | W896 | 同批段回写 |
-
-## W895 BL-33 收敛批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/system.css | W895 | BL-33 收敛：page-wrap 令牌 / seal 淡底 / kpi-row 规则升全局 |
-| scripts/inline_css.py | W895 | 护栏：--force 只重同步已内联页·外链转内联须 --inline-links |
-| site/data/（88）site/en/（138）site/reader/（102） | W895 | 内联块按源重生成（集合差零差异） |
-| scripts/_w895_bl33_inventory.py | W895 | 新增：内联块与事实源差异盘点 |
-| scripts/_w895_regen_preview.py | W895 | 新增：重生成预演（sync 前证明反冲风险） |
-| scripts/_w895_verify_blocks.py | W895 | 新增：重生成后集合差校验（226/226 零差异） |
-| scripts/output/_w864_accent_exemptions.json | W895 | 按新实测保守核查（余 256 条） |
-| docs/00-导读/W批次编号对账表.md | W895 | 认领行与收官回填 |
-| CHANGELOG.md | W895 | W895 段 |
-| scripts/output/file-index.md | W895 | 同批段回写 |
-
-## W893 四画幅素材图成套批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/hero-07-liudao-lingyun.webp | W893 | 新增：Hero 素材 07/09·六盘山岭云海（山脊云海+七人单行+朱砂小旗·净空带 473px） |
-| site/static/images/hero-08-yunhai-chengqiao.webp | W893 | 新增：Hero 素材 08/09·云海石拱桥（云海+石桥+白马与僧影+朱砂彩带·净空带 451px） |
-| site/static/images/hero-09-shijue-wangluo.webp | W893 | 新增：Hero 素材 09/09·石觉网罗（根须网+朱砂节点+赭金连接弧·净空带 485px） |
-| site/static/images/card-25-santiebaigujing.webp | W893 | 新增：卡片封面 25/27·三打白骨精（石窟+骷髅剪影+朱砂布条·净空带 378px） |
-| site/static/images/card-26-wukong-jingu.webp | W893 | 新增：卡片封面 26/27·悟空金箍棒（背身持棒+虎纹围裙+朱砂绦·净空带 392px） |
-| site/static/images/card-27-rejiao-fenxi.webp | W893 | 新增：卡片封面 27/27·热力分析（情感点阵+朱砂色带+赭金散点·净空带 404px） |
-| site/static/images/post-07-gu-shan-yingxue.webp | W893 | 新增：竖版长图 07/09·孤山映雪（古峰+崖松+朱砂塔灯·净空带 456px） |
-| site/static/images/post-08-tangseng-chanshi.webp | W893 | 新增：竖版长图 08/09·唐僧禅释（背身持锡杖+背光晕+朱砂念珠·净空带 534px） |
-| site/static/images/post-09-bajiaoshan-zhaoyun.webp | W893 | 新增：竖版长图 09/09·八戒造云（背身扛耙+朱砂领结·净空带 487px） |
-| site/static/images/og-13-changgui-shanmen.webp | W893 | 新增：分享图 13/15·残破山门（断门+荒草薄雾+朱砂经幡·净空带 169px） |
-| site/static/images/og-14-shaseng-denggao.webp | W893 | 新增：分享图 14/15·沙僧登高（石矶+苍鹭展翅+朱砂浮标·净空带 253px） |
-| site/static/images/og-15-shijian-liejian.webp | W893 | 新增：分享图 15/15·时间刻痕（刻痕序列+朱砂刻度+赭金标记·净空带 264px） |
-| scripts/_w893_gen_args.py | W893 | 十二张生成参数（锚点沿用 W882 改写版·四画幅各三张·拉丁方主题） |
-| scripts/_w893_finalize.py | W893 | 定稿脚本（覆盖缩放 + 保主体/保净空带裁切 + WebP 落盘） |
-| scripts/_w893_verify.py | W893 | 五道量化验收脚本（尺寸/净空带/主体墨量/朱砂/规则线） |
-| scripts/output/_w893_spec.json | W893 | 本批 spec 十字段（CHANGELOG 版段递延·待顶段推进后补写） |
-| docs/11-方案报告/计划方案/T16-任务计划执行与经验沉淀报告-2026-10-23.md | W893 | 新增：T-16 框架报告（四画幅素材图成套批） |
-| docs/00-导读/W批次编号对账表.md | W893 | 认领行与收官回填 |
-
-## W892 宣传单页批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/xiyouji-flyer-a4.html | W892 | 宣传单页唯一真源（A4 双面·12 栏栅格·10 枚内联 SVG·零外域） |
-| assets/promo/hero-main-visual.png | W892 | 本批新生成专属主视觉（宣纸浓墨山影 + 朱砂钤记·色归一化到 #FAF7F0） |
-| assets/promo/output/xiyouji-flyer-a4.pdf | W892 | 双面 PDF（2 页 A4·子集嵌入思源宋体） |
-| assets/promo/output/xiyouji-flyer-a4-front.png | W892 | 正面 PNG（1240×1754·150dpi） |
-| assets/promo/output/xiyouji-flyer-a4-back.png | W892 | 背面 PNG（1240×1754·150dpi） |
-| assets/promo/README.md | W892 | 目录导读（真源说明 + 复算命令 + 数字口径警示） |
-| scripts/_w892_export_flyer.mjs | W892 | 三件套导出（内置静态服务器 + 字体/外域/溢出三探针） |
-| scripts/_w892_probe.mjs | W892 | 版式判据探针（末块底边 vs 内容底边·两页须 0px 溢出） |
-| docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md | W892 | 框架第十五次执行（规划五表 + AC 验收 + 5 条经验） |
-| docs/11-方案报告/README.md | W892 | §二 补登记 T-15（篇数 17→18） |
-| STRUCTURE.md | W892 | assets 段新增 promo/ 登记 + report_docs 标记同步 |
-| docs/00-导读/W批次编号对账表.md | W892 | 认领行与收官回填 |
-| CHANGELOG.md | W892 | W892 段 |
-| scripts/output/file-index.md | W892 | 同批段回写 |
-
-## W891 en 收尾批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/（138 页） | W891 | A 渠 15 处容器归并 + nav-back 49 页文字态 + 间距令牌化 3,353 处 |
-| scripts/_w891_en_survey.py | W891 | en 收尾前置盘点（容器值/断点/nav-back 变体/间距量） |
-| scripts/_w891_en_migrate.py | W891 | A 渠 + nav-back 迁移驱动（INLINED 跳过·@media 占位保护） |
-| scripts/output/_w864_accent_exemptions.json | W891 | W887 分册 −46 条 nav-back（随批递减·全簿 256） |
-| docs/00-导读/W批次编号对账表.md | W891 | 认领行与收官回填 |
-| CHANGELOG.md | W891 | W891 段 |
-| scripts/output/file-index.md | W891 | 同批段回写 |
-
-## W890 CI 阻塞项清偿批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| `tests/unit/test_vermilion_solid.py` | W890 | scope 断言改判为新契约（zh 审计面 ∪ en 全量·W887 扩范围后） |
-| `scripts/_w851_j1_name_audit.py` | W890 | DEFER_HOLD_CHECKS 收敛为 1 条（删 W876 已改值的两项·原值未动契约对已落地项不适用） |
-| `scripts/tmpe_tidy.py` | W890 | 新增 `_pid_alive()` 跨平台存活探针（Windows 用 OpenProcess+GetExitCodeProcess·非终止式）+ RunLock 默认参数改运行时解析 |
-| `scripts/check_no_brand_refs.py` | W890 | ruff 四项清零（UP009 删 encoding 声明 / UP015 删冗余 mode / F841 删死变量 args / B007 循环变量改名） |
-| `scripts/check_plan_template.py` | W890 | ruff 两项清零（UP009 删 encoding 声明 / E741 歧义变量名改名） |
-| `scripts/requirements.txt` | W890 | Pillow 12.3.0→13.0.0（清 25 个 CVE·含 GHSA-78g4-xqwv-q3g8） |
-| `docs/11-方案报告/计划方案/T14-任务计划执行与经验沉淀报告-2026-10-23.md` | W890 | 本批框架交付物（取证 / 修复 / 验收 / 复盘） |
-| `docs/00-导读/W批次编号对账表.md` | W890 | W890 认领行 + 收官回填 |
-| `docs/11-方案报告/README.md` | W890 | 计划方案目录索引登记 |
-| `scripts/output/_w890_spec.json` | W890 | 本批级联 spec（10 键） |
-| `scripts/output/_cascade_files_W890.txt` | W890 | 本批级联落盘清单 |
-
-## W889 展示面复位批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| `.github/README.md` → `.github/README-internal.md` | W889 | 目录导读改名让位——原名会抢占 GitHub 仓库主页展示位（优先级 `.github/` > 根目录 > `docs/`）·转人工维护件（去生成来源标记） |
-| `.github/index.md` | W889 | 目录清单刷新（文件 2→3 项·导读指针自适应指向 README-internal.md） |
-| `scripts/gen_folder_docs.py` | W889 | 新增「主页展示位保护」常量与判定（精确单文件排除·不排整个 .github 树）+ index.md 导读指针自适应 |
-| `scripts/check_folder_docs.py` | W889 | 第 45 门禁 C1 豁免与生成器同源（共用 gen.showcase_guarded） |
-| `scripts/check_doc_sync.py` | W889 | 第 31 门禁新增 C7 断言（根 README 在位时 .github/README.md 必须不存在·self-test 增至 26 例） |
-| `README.md` | W889 | 首屏整体重排 + 30 秒上手速览块 + 抬头四行降噪入开发者专区 |
-| `docs/11-方案报告/计划方案/T13-任务计划执行与经验沉淀报告-2026-10-23.md` | W889 | 本批框架交付物（计划 / 决策 / 验收 / 复盘） |
-| `docs/00-导读/W批次编号对账表.md` | W889 | W889 认领行登记（touches 12 项） |
-| `docs/11-方案报告/README.md` | W889 | 计划方案目录索引登记 |
-| `scripts/output/stats.json` | W889 | stats 实算刷新 |
-| `scripts/output/_w889_spec.json` | W889 | 本批级联 spec（10 键） |
-
-## W888 剩余素材接线批·两路（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/（83 页） | W888 | 路 A：viz 4 张浅底图接中文数据页卷末位（插入锚点在 `</main>` 之前·不触碰图表容器与正文） |
-| site/reader/（6 页：ch007/014/015/023/027/030） | W888 | 路 B：chap 1:1 百回母版接对应回目页页头（回目 H1 之后·配图位非封面位） |
-| site/system.css | W888 | `.viz-illustration` / `.chapter-plate` 规则源（与各页内联副本双写·file:// 下 CSP 拦外链样式表） |
-| scripts/build_reader.py | W888 | 生成器条件化（STYLE 常量 + CHAPTER_PLATES 映射 + `_render_one_page` 条件化插入） |
-| scripts/_w888_wire.py | W888 | 路 A 接线脚本（母题映射 + 内联副本补规则 + 暗色模式隐藏） |
-| scripts/_w888_chapter_plate.py | W888 | 路 B 母版接线脚本 |
-| scripts/_w888_index_revert.py | W888 | 索引回退脚本 |
-| scripts/output/_w888_spec.json | W888 | 本批级联 spec |
-| docs/11-方案报告/计划方案/T12-任务计划执行与经验沉淀报告-2026-10-23.md | W888 | 本批框架交付物（消费位侦察先行 + 四类不做留证） |
-| docs/11-方案报告/README.md | W888 | 计划方案目录索引登记 |
-
-## W887 en 迁移批 2·收口批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/（110 页） | W887 | C 渠 126 条规则 + seal 淡底 110 页 + KPI 顶条规则 57 页 |
-| scripts/_w886_en_migrate.py | W887 | 批 6 合并定义（批 2-5 合一） |
-| scripts/output/_w886_en_audit_b6.json | W887 | 批 6 前置审计子集（C 809·实底 508） |
-| scripts/output/_w886_en_audit_b6_after.json | W887 | 批 6 迁移后审计（C 213·实底 313） |
-| scripts/output/_w887_needed.json | W887 | 待登记豁免清单（181 条·生成输入） |
-| scripts/output/_w864_accent_exemptions.json | W887 | W887 分册 181 条（语义 64/功能 61/首卡 56·全簿 302） |
-| scripts/check_vermilion_solid.js | W887 | scopePages 并入 en（范围 96→234 页） |
-| scripts/output/_vermilion_solid_cache.json | W887 | 缓存重建（234 页） |
-| docs/00-导读/W批次编号对账表.md | W887 | 认领行与收官回填 |
-| CHANGELOG.md | W887 | W887 段 |
-| scripts/output/file-index.md | W887 | 同批段回写 |
-
-## W886 en 迁移批 1·入口与结构 28 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w886_en_audit.py | W886 | 新增：en 四渠现状审计（C/实底 浏览器实测 + 令牌旧值/容器字面量静态） |
-| scripts/_w886_en_migrate.py | W886 | 新增：en B 渠机械化驱动（seal→淡底 + KPI 顶条按行规则 + 批审计子集导出） |
-| scripts/output/_w886_en_audit.json | W886 | en 全量审计（C 1,084/62 页·实底 767/135 页） |
-| scripts/output/_w886_en_audit_b1.json | W886 | 批 1 前置审计子集（C 275·实底 259） |
-| scripts/output/_w886_en_audit_b1_after.json | W886 | 批 1 迁移后审计（C 38·实底 205） |
-| site/en/（28 页） | W886 | C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条规则 16 页 |
-| scripts/output/_w864_accent_exemptions.json | W886 | W886 分册 25 条（四类口径·全簿 121 条） |
-| docs/00-导读/W批次编号对账表.md | W886 | 认领行与收官回填 + W885 段状态翻转 |
-| CHANGELOG.md | W886 | W886 段 + W885 段回补 |
-| scripts/output/file-index.md | W886 | 同批两段回写 |
-
-## W885 素材接线批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/*.html（87 页） | W885 | 改：`.hero` 暗带接入深底直显版装饰插画 img + 内联副本补 .hero-ornament 规则（按页名映射四类母题） |
-| site/en/*.html（126 页） | W885 | 改：同 site/data（英文侧同款装饰插画与规则） |
-| site/system.css | W885 | 改：追加 .hero-ornament 规则（源·下次 inline_css 重跑继承） |
-| site/index.html | W885 | 改：浅色 .masthead 铺 hero-01 山河云海横幅（文字落在图底部留白带） |
-| site/static/images/viz-dark-01-network.webp | W885 | 新增：深底直显版装饰插画 01/04·根须网（640×640·深底映射为 alpha 渐变） |
-| site/static/images/viz-dark-02-heatmap.webp | W885 | 新增：深底直显版装饰插画 02/04·疏密墨点阵（640×640·默认母题） |
-| site/static/images/viz-dark-03-radar.webp | W885 | 新增：深底直显版装饰插画 03/04·放射线（640×640） |
-| site/static/images/viz-dark-04-timeline.webp | W885 | 新增：深底直显版装饰插画 04/04·纵向刻痕序列（640×640） |
-| scripts/_w885_wire.py | W885 | 新增：接线批处理脚本（system.css 规则 + 213 页装饰 img + 内联副本补规则 + 首页底图·幂等） |
-| scripts/_w885_viz_alpha.py | W885 | 新增：深底插画 alpha 化脚本（按亮度把深底映射为透明渐变·消除方框） |
-| scripts/_w885_index_revert.py | W885 | 新增：搜索索引他方在途条目回退器（逐条比对·源文件未入库者按 HEAD 版回退） |
-| scripts/output/_w885_spec.json | W885 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W885 | 认领行与收官回填 |
-
-
-## W884 Playwright 历史问题全谱审计（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md | W884 | Playwright 历史问题全谱审计报告（T-10·25 项 8 族·已修复 22 仍开放 3） |
-| docs/00-导读/W批次编号对账表.md | W884 | 认领行 + 收官回填 + 提交号补全 |
-| scripts/output/stats.json | W884 | report_docs 计数 46→47（连带 stats-changelog/stats-index/STRUCTURE 标记同步） |
-| docs/INDEX.md | W884 | 重建（737→738 篇·13 板块） |
-| site/data/search.html · site/en/search.html | W884 | 站内搜索索引刷新（+T-10 条目） |
-
-
-## W883 阶段 5 机检门禁批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_vermilion_solid.js | W883 | 新增：第 49 门禁朱砂实底限额（浏览器实测+豁免登记簿+增量缓存+自检 14 例） |
-| tests/unit/test_vermilion_solid.py | W883 | 新增：第 49 门禁单测（自检/纯逻辑/接线/范围 11 例） |
-| scripts/verify_delivery.py | W883 | 第 49 槽 StrictGate 接线（段名+scope+gate 定义） |
-| scripts/output/_w864_accent_exemptions.json | W883 | W883 分册 24 条（四类存量裁决·全簿 96 条） |
-| scripts/output/_vermilion_solid_cache.json | W883 | 新增：增量缓存（96 页 sha1+分类计数·随批入库） |
-| scripts/output/_vermilion_solid_report.json | W883 | 新增：门禁报告（每页实测/豁免/非豁免/状态） |
-| site/dashboard.html | W883 | .seal 徽章实底→淡底（v4 §3.2·与 W864 批 .seal 转换同模式） |
-| scripts/_w876_site_audit.py | W883 | fill 口径校正（≥3px/盒面积 → ≥2px/条带面积） |
-| scripts/output/_w876_site_audit_head.json | W883 | 校正复跑（HEAD 快照·fill 457/89 与原审计一致） |
-| scripts/output/_w876_site_audit_final.json | W883 | 校正复跑（终态·457/89） |
-| AGENTS.md | W883 | §4.2 48→49 槽 + 第 49 槽条目 + 组号范围 |
-| docs/agent/gates.md | W883 | 49 槽标题/速查表/第 49 槽完整定义 |
-| README.md STRUCTURE.md docs/00-导读/项目说明.md | W883 | 版本行与门禁计数（48→49） |
-| pytest.ini | W883 | collected 计数 823→834（+11 例） |
-| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W883 | gate_count 48→49 |
-| scripts/output/stats.json | W883 | 刷新（gate_count 49·2 键） |
-| site/data/search.html | W883 | 搜索索引刷新（gates.md 标题变更·CSP 重算） |
-| docs/00-导读/W批次编号对账表.md | W883 | 认领行与收官回填 + W877-W882 六行段状态翻转 + W877 豁免划销 |
-| CHANGELOG.md | W883 | W883 段 + W877-W882 六段按号序回补（174→180 段） |
-| scripts/output/file-index.md | W883 | 同批七段回写（174→180） |
-
-## W882 缺口第 4–6 项合并批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/post-01-wukong.webp | W882 | 新增：竖版海报 01/06·悟空（3:4 1200×1600·背身持棒·净空带 438px） |
-| site/static/images/post-02-tangseng.webp | W882 | 新增：竖版海报 02/06·唐僧（3:4·僧影锡杖背光·净空带 514px） |
-| site/static/images/post-03-bajie.webp | W882 | 新增：竖版海报 03/06·八戒（3:4·长耳钉耙虎纹裙·净空带 438px） |
-| site/static/images/post-04-shaseng.webp | W882 | 新增：竖版海报 04/06·沙僧（3:4·卷发深须宝杖·净空带 437px） |
-| site/static/images/post-05-bailongma.webp | W882 | 新增：竖版海报 05/06·白龙马（3:4·白马回首·朱砂鞍鞯·净空带 503px） |
-| site/static/images/post-06-changlu.webp | W882 | 新增：竖版海报 06/06·西行长路（3:4·远山长路·朱砂小旗·净空带 545px） |
-| site/static/images/chap-07.webp | W882 | 新增：百回母版 01/06·回 07 八卦炉（同一母版·丹炉火光·净空带 423px） |
-| site/static/images/chap-14.webp | W882 | 新增：百回母版 02/06·回 14 心猿归正（同一母版·断树猿影·净空带 376px） |
-| site/static/images/chap-15.webp | W882 | 新增：百回母版 03/06·回 15 蛇盘山（同一母版·蛇形长脊·净空带 384px） |
-| site/static/images/chap-23.webp | W882 | 新增：百回母版 04/06·回 23 试禅心（同一母版·寺门菩提·净空带 450px） |
-| site/static/images/chap-27.webp | W882 | 新增：百回母版 05/06·回 27 三打白骨精（同一母版·月下破寺白影·净空带 364px） |
-| site/static/images/chap-30.webp | W882 | 新增：百回母版 06/06·回 30 宝象国（同一母版·宫室屋脊白马·净空带 427px） |
-| site/static/images/viz-01-network.webp | W882 | 新增：可视化插画 01/04·网络图页（根须网·朱砂结点·640×640） |
-| site/static/images/viz-02-heatmap.webp | W882 | 新增：可视化插画 02/04·热力图页（疏密墨点阵·640×640） |
-| site/static/images/viz-03-radar.webp | W882 | 新增：可视化插画 03/04·雷达图页（放射线·朱砂端点·640×640） |
-| site/static/images/viz-04-timeline.webp | W882 | 新增：可视化插画 04/04·时间线页（纵向刻痕序列·640×640） |
-| scripts/output/_w882_spec.json | W882 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W882 | 认领行与收官回填 |
-
-
-## W881 人物补位素材批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/card-13-bajie-yuexia.webp | W881 | 新增：人物方图 13/24·八戒月下负囊（背身·长耳·赭金虎纹裙·净空带 349px） |
-| site/static/images/card-14-bajie-choupa.webp | W881 | 新增：人物方图 14/24·八戒持耙守关（九齿钉耙·朱砂缨·净空带 400px） |
-| site/static/images/card-15-bajie-zuoxie.webp | W881 | 新增：人物方图 15/24·八戒坐歇担前（杖横膝·朱砂结·净空带 395px·横贯硬线已程序化修复） |
-| site/static/images/card-16-bajie-yunzhong.webp | W881 | 新增：人物方图 16/24·八戒雨中奔行（斗笠遮面·湿笔雨丝·净空带 344px） |
-| site/static/images/card-17-bajie-denggao.webp | W881 | 新增：人物方图 17/24·八戒登高远眺（崖边背身·云海·朱砂小旗·净空带 249px） |
-| site/static/images/card-18-bajie-daodan.webp | W881 | 新增：人物方图 18/24·八戒挑担赶路（侧身·担挑双囊·净空带 401px） |
-| site/static/images/card-19-shaseng-dujiang.webp | W881 | 新增：人物方图 19/24·沙僧负杖渡江（卷发深须·降妖宝杖·朱砂佛珠·净空带 400px） |
-| site/static/images/card-20-shaseng-zhenshui.webp | W881 | 新增：人物方图 20/24·沙僧宝杖镇水（杖立水中·涟漪·净空带 301px） |
-| site/static/images/card-21-shaseng-shouye.webp | W881 | 新增：人物方图 21/24·沙僧守夜（石上独坐·孤灯光晕·净空带 407px） |
-| site/static/images/card-22-shaseng-fuzhong.webp | W881 | 新增：人物方图 22/24·沙僧负重前行（负囊登阶·雨中·净空带 300px） |
-| site/static/images/card-23-shixiong-bingli.webp | W881 | 新增：人物方图 23/24·师徒山径并肩（八戒在前挑担·沙僧持杖在后·朱砂小旗·净空带 341px） |
-| site/static/images/card-24-shixiong-shanmen.webp | W881 | 新增：人物方图 24/24·师徒山门前对峙（八戒持耙在前·沙僧持杖在后·朱砂门印·净空带 310px） |
-| site/static/images/og-03-bailongma.webp | W881 | 修：白龙马 OG 图的横贯硬线伪影（提示词字面化产物）·程序化渐变回填修复 |
-| site/static/img/og-cover-ink-en.jpg | W881 | 修：英文站 og:image 的横贯硬线伪影（该图即英文站每次分享的封面）·程序化渐变回填修复 |
-| site/static/img/og-cover-ink-en.png | W881 | 修：英文站 og:image 无损母版的横贯硬线伪影·程序化渐变回填修复 |
-| scripts/_w881_rule_line_scan.py | W881 | 新增：横贯硬线伪影检测器（按行暗像素占比 ≥65% 且邻行骤降判定·可复算） |
-| scripts/_w881_fix_rule_line.py | W881 | 新增：横贯硬线定点修复器（规则行块＋向下并入洗边暗行→逐列垂直渐变回填） |
-| scripts/output/_w881_spec.json | W881 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W881 | 认领行与收官回填 |
-
-
-## W880 分语言 og:image 接线批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w880_og_image_split.py | W880 | 新增：一次性批处理脚本·全站 855 页 og:image 分语言改指新 URL（页内旧 URL 全出现处一并替换·含内联 JSON-LD·行尾原样保留） |
-| scripts/check_seo_head.py | W880 | 改（管控件·用户已批准）：R1 逐页期望值改分语言（og_image_for(rel)·en/ 前缀为英文站）+ R4 改校两张现役分享图（旧排版卡保留存在性与体积校） |
-| scripts/inject_seo_head.py | W880 | 改：全站 SEO 注入器按 is_en 分流 og:image（生成端同步·防下次再注入回退） |
-| scripts/build_reader.py | W880 | 改：reader 生成器（仅产出中文页）og:image 取中文站分享图（生成端同步·防下次重建回退） |
-| scripts/gen_og_cover.py | W880 | 改：文档字符串注明其产出（排版卡）已降级为旧版留档·现行分享图为两张水墨图·切勿再手改生成物 |
-| site/static/img/og-cover.png | W880 | 改：恢复为 gen_og_cover.py 的生成物版本（49,490 B·可复现）——W879 的手工水墨图被移至非生成物的新文件 |
-| site/（855 页） | W880 | 改：og:image 一行分语言改指新 URL（中文 717 页 → og-cover-ink-zh.jpg·英文 138 页 → og-cover-ink-en.jpg）·含内联 JSON-LD 的 image 字段 |
-| scripts/output/_w880_spec.json | W880 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W880 | 认领行与收官回填 |
-
-
-## W879 暗底/夜读适配水墨素材批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/ink-mountains-hero.webp | W879 | 改：现役 848 页共用的暗色诗段底图·原地替换为「浅底浓墨」显影版（合成后亮度跨度 0.0080→0.0789·×9.9） |
-| site/static/images/ink-mountains-path.webp | W879 | 新增：暗底适配底图 02/04·长路入山（浓墨林影+朱砂灯点·显影跨度 0.0768·×9.6） |
-| site/static/images/ink-mountains-pine.webp | W879 | 新增：暗底适配底图 03/04·松崖孤塔（浓墨崖松+朱砂崖印·显影跨度 0.0718·×9.0） |
-| site/static/images/ink-mountains-night.webp | W879 | 新增：暗底适配底图 04/04·深底浅墨直显版（夜读模式专用·自身对比度 0.5205） |
-| site/static/img/og-cover.png | W879 | 改：全站 855 页共用的 og 分享图·原地替换为水墨图（取 og-09 山口关隘·PNG-8 256 色 143.0KB·门禁 R4 上限 300KB·URL 不变故 R1 全绿） |
-| site/static/img/og-cover-ink-zh.jpg | W879 | 新增：分语言版分享图（中文·取 og-09 山口关隘·JPG 129.6KB·微信与 Facebook 不吃 webp 故出 JPG·备而未接线） |
-| site/static/img/og-cover-ink-en.jpg | W879 | 新增：分语言版分享图（英文·取 og-03 白龙马·JPG 53.1KB·备而未接线） |
-| site/static/img/og-cover-ink-zh.png | W879 | 新增：分语言版分享图无损母版（中文·PNG 497.2KB） |
-| site/static/img/og-cover-ink-en.png | W879 | 新增：分语言版分享图无损母版（英文·PNG 162.7KB） |
-| scripts/output/stats.json | W879 | 改：inline_css_pages 850→330（更正 W878 刷入的并行重生成中途瞬时值·磁盘实算零差异） |
-| scripts/output/stats-changelog.json | W879 | 改：随 stats 刷新的变更史追加一条 |
-| scripts/output/stats-index.md | W879 | 改：随 stats 刷新的反向索引重渲染 |
-| CHANGELOG.md | W879 | 改：顶部「全站页数口径」块与键值枚举的 inline_css_pages 标记 850→330 |
-| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W879 | 改：§113「内联 CSS 覆盖页」表行标记 850→330 |
-| scripts/output/_w879_spec.json | W879 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W879 | 认领行与收官回填 |
-
-
-## W878 OG 分享缩略图素材成套批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/og-01-kongkong.webp | W878 | 新增：OG 分享图 01/12·悟空（猴相背影+金箍棒+红绦·净空带 222px·二版） |
-| site/static/images/og-02-tangseng.webp | W878 | 新增：OG 分享图 02/12·唐僧（僧影+锡杖+背光晕·净空带 185px） |
-| site/static/images/og-03-bailongma.webp | W878 | 新增：OG 分享图 03/12·白龙马（白马回首·鬃如云·朱砂鞍鞯·净空带 294px） |
-| site/static/images/og-04-jingubang.webp | W878 | 新增：OG 分享图 04/12·金箍棒（棒身金环+朱砂缠绳·净空带 163px） |
-| site/static/images/og-05-bajiaoshan.webp | W878 | 新增：OG 分享图 05/12·芭蕉扇（半展大叶·朱砂扇柄结·净空带 198px） |
-| site/static/images/og-06-jingping.webp | W878 | 新增：OG 分享图 06/12·净瓶（白玉瓶+柳枝+朱砂丝绦·净空带 204px·二版） |
-| site/static/images/og-07-qujingchuanshan.webp | W878 | 新增：OG 分享图 07/12·曲径穿山（远峰层叠+朱砂小旗·净空带 187px·二版） |
-| site/static/images/og-08-hequshiqiao.webp | W878 | 新增：OG 分享图 08/12·河曲石桥（石桥+舟+朱砂小灯·净空带 182px·二版） |
-| site/static/images/og-09-shankouguanai.webp | W878 | 新增：OG 分享图 09/12·山口关隘（断崖石阶+孤塔+朱砂崖印·净空带 222px·二版） |
-| site/static/images/og-10-canjuan.webp | W878 | 新增：OG 分享图 10/12·半展残卷（空卷+轴头+朱砂签条·净空带 222px·二版） |
-| site/static/images/og-11-gudeng.webp | W878 | 新增：OG 分享图 11/12·孤灯（铜台灯+灯焰光晕+浓墨夜色·净空带 195px） |
-| site/static/images/og-12-tongjing.webp | W878 | 新增：OG 分享图 12/12·铜镜（古镜+淡影+朱砂小印·净空带 252px） |
-| scripts/output/_w878_spec.json | W878 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W878 | 认领行与收官回填 |
-
-
-## W877 计划方案未落地项核查批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T09-任务计划执行与经验沉淀报告-2026-10-22.md | W877 | 计划方案未落地项核查 + 模板符合性复核报告（217 项核销 · 32 判据矩阵） |
-| docs/11-方案报告/README.md | W877 | §二 登记 T-09（计数 10→12 篇 + 编号列订正 1–12）+ 新增 §四 交付物模板规范（强制） |
-| docs/INDEX.md | W877 | 文档索引重建（736 → 737 篇） |
-| scripts/output/_w877_spec.json | W877 | 本批 spec 十字段（供补段批按号序回写 W875–W877） |
-| scripts/output/_w877_template_matrix.json | W877 | 11 份计划件 × 32 项判据符合性矩阵 |
-| scripts/output/colorblind-baseline.txt | W877 | 色盲安全存量基线重冻（17417 → 17430 对·代做 W876 阶段 5 机检门禁） |
-| scripts/output/stats.json | W877 | report_docs 45→46 刷新（stats.py --w W877） |
-| scripts/output/stats-changelog.json | W877 | 同批 stats 变更史刷新 |
-| scripts/output/stats-index.md | W877 | 同批 stats 索引刷新 |
-| site/data/search.html | W877 | 站内搜索索引重生成（新增 T-09 条目·zh 840 / en 882） |
-| site/en/search.html | W877 | 英文站搜索索引重生成 + CSP 哈希重算（2 页·856 页零漂移） |
-| STRUCTURE.md | W877 | report_docs 标记 45→46 同步 |
-| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W877 | report_docs 标记 45→46 同步（连带面） |
-| docs/00-导读/W批次编号对账表.md | W877 | W877 认领行 + 递延版段豁免 bullet + W858/W860/W865 三行收官回填 |
-
-
-## W876 对比度专项批·C 渠与值切换（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W876 | --chart-3 #C9A063→#B38F58 · 暗色 --accent #E0604F→#E46250 |
-| site/data/（63 页） | W876 | C 渠规则级换色 173 条 color 规则（--accent→--accent-text） |
-| site/en/ site/reader/（326 页） | W876 | INLINED 副本两处令牌值靶向同步（不走 regenerate·保迁移成果） |
-| site/dukou-engine.html | W876 | 根级 INLINED 页两处令牌值靶向修复（inline_css 根级 skip 绕过） |
-| scripts/_w876_c_text_swap.py | W876 | C 渠规则级换色器（类名+标签双模式·--audit 指定审计） |
-| scripts/_w876_value_check.py | W876 | 值切换计算样式锚点校验（搜索式断言·重建版·四组锚点） |
-| scripts/_w876_site_audit.py | W876 | 新增：C 渠+朱砂实底审计器（原审计器未入库·按产物校准复现 1087/457） |
-| scripts/_w876_diff_audit.py | W876 | 新增：静态 diff 分类审计（三类之外与 HEAD 逐字节一致·负向查视） |
-| scripts/_w876_baseline_probe.py | W876 | 新增：24 页前后计算样式对拍（只现三类预期变迁） |
-| scripts/_w876_backfill_w875.py | W876 | 新增：W875 单段补数驱动（补段工具无筛选·防误补 W877-W881） |
-| scripts/output/_w876_site_audit.json | W876 | 前置审计（1,087 处落 bg·64 页） |
-| scripts/output/_w876_site_audit_final.json | W876 | 终态审计（253 处·27 页·复评清单 6 页） |
-| scripts/output/_w876_site_audit_head.json | W876 | HEAD 快照校准审计（精确复现 1,087/64·验证快照=审计输入态） |
-| scripts/output/_w876_baseline_before.json | W876 | 24 页 before 计算样式快照（HEAD 树·双主题） |
-| scripts/output/_w876_baseline_after.json | W876 | 24 页 after 计算样式快照（重建树·双主题） |
-| scripts/output/_w876_baseline_diff.json | W876 | 对拍分类结果（2,195 处差异零未预期·T1-T4 四类） |
-| scripts/output/_w876_c_swap_report.json | W876 | 换色报告（63 页·173 规则·复评清单） |
-| scripts/output/_w876_spec.json | W876 | 本批 spec 十字段 |
-| docs/00-导读/design.md | W876 | 设计文档令牌表（两处值切换同步） |
-| scripts/output/design-tokens.json | W876 | 令牌导出版（两处值切换同步） |
-| scripts/index.md | W876 | 脚本册（+4 个 _w876 脚本） |
-| scripts/output/index.md | W876 | 产物册（+4 个 _w876 JSON） |
-| scripts/output/README.md | W876 | 产物目录说明（计数同步） |
-| docs/00-导读/W批次编号对账表.md | W876 | 认领行与收官回填 + BL-33 登记 |
 
