@@ -13,6 +13,25 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W963（2026-10-26）：GSAP 动效差异化推广批（入口层 8 页 + cards 模式 + sections 单元收窄）
+
+> **来源**：用户 2026-10-26 裁决「按页型差异化推广」（滚动叙事 / 入场编排 / 微交互 / 现有动画体检四类全都要·载体 = site/ 静态站·先出计划再施工）。
+>
+> - **文件**：site/static/js/motion-gsap.js、site/reader/index.html、site/reader/themes-hub.html、site/reader/themes/index.html、site/reader/people/index.html、site/reader/essays/index.html、site/reader/culture/index.html、site/reader/poetry/index.html、site/guide.html、scripts/_w962_wire_entry.py、scripts/_w957_motion_probe.py
+> **状态**：**已收官**（W963 2b53ad2a·git 反填·共 2 笔·W971 存量回填）
+
+**推广口径（差异化·不一刀切）**：**入口层 8 页**接线 cards 模式——7 个 reader 体裁 hub 页（编排单元 = `.reader-idx a` 索引条目）+ site/guide.html（`.path-card`）；单页增量 **215–238 B**（合计 +1,863 B）。**内容层** reader 622 页正文 / data 88 页 / en 138 页**暂不铺 sections**；index.html 已有 intro 不动；dashboard / dukou-engine / 404 / rum-viewer / visit-viewer 不动（重交互或工具页，动效收益低且干扰风险高）。
+
+**载体增改**：① 新增 **cards 模式**（容器内匹配 `data-gsap-target`（缺省 `.card`）的元素按序进场·stagger 自适应使序列总时长封顶 ≈1.2 s）；② **sections 模式单元收窄为 h2**——初版含 details 折叠块，但折叠块默认折叠、进场时不可见 ⇒ 属**无效动效**，折叠块的展开编排移交 fold 模式（职责分离）。
+
+**本批不做项（透明留痕）**：site/curated.html——其 2 个 `.curated-grid` 分属 3 个 `.section.reveal-in` 区块，属性提到共同父会与既有 reveal-in 进场机制交叠、逐个 grid 加属性则单页增量 269 B 超 250 B 上限 ⇒ 留专项批处理。
+
+**验收入口复用**：`_w957_motion_probe.py` 加 `--pages` 参数（默认清单不变）⇒ 新接入页按 8 页 × 3 视口 × 2 动效偏好态 = 48 组实跑验证（判据沿用 W957 口径：pageerror = 0 · 编排单元残留初始态 = 0 · RM 态载体执行数 = 0）。
+
+**让号留痕**：W962 已被并行会话「归档分段批」占用 ⇒ 本批 **W963**。
+
+**状态**：**已收官**（差异化推广·入口层落地；**内容层推广与 curated 专项待用户裁决范围**）
+
 ### W961（2026-10-26）：GSAP 写法机检挂 verify_delivery 第 50 槽 + F9 裸 ease 假阳性订正批
 
 > **来源**：用户 2026-10-26 批准「把 GSAP 写法机检挂成 verify_delivery 常驻槽」（改管控文件）·同批自查抓出体检判据假阳性。

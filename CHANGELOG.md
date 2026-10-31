@@ -1,3 +1,13 @@
+### W1075（2026-10-31）：合并前红灯修复微批（PR #72 checks 三红同根：跳转页链接补 ../ + 跨行基线更新）
+
+> **来源**：用户问「全部都合并了是吗」→ 核查发现 PR #72（dev→main）checks 三红——同根两处：① W1074 跳转页（themes/index.html）可见链接漏 `../` 前缀（全仓链接 1 broken）；② W1071 归档脚本 `_w1071_search_docmap.py` 的 `re.sub(r'<[^>]+>','',txt)` 为跨行门禁基线外新增候选（pytest 2 failed 同根）——人工复核无害（输入为单条锚内文本·无跨行实际暴露）→ 按门禁规程 `--update-baseline`（确认清单 54→55）。
+>
+> **流程教训**：W1071/W1074 收官漏跑 pytest——CI-sim 与 pytest 必须本地预演（收官清单第 7 步之外的隐性缺口，登记待另批把 pytest 并入本地收官链）。
+>
+> **验证**：lint_links 全仓 21,047 链接 0 broken；跨行门禁绿；pytest 1094 passed 本地复绿。
+>
+> **文件**：site/reader/themes/index.html · scripts/cross_line_baseline.json
+
 ### W1074（2026-10-31）：交互修复第二+三批（动线与可达 + 生产净面：N-02 N-03已清 N-04 N-05 N-06已清 N-07 N-08 N-09 R-03 R-04 R-07 R-08 R-11）
 
 > **来源**：用户令「剩下的这三个你直接自己做完」——施工序列第 2 批（动线与可达）+ 第 3 批（生产净面）合并实施；D-1 已由 W1073 收官。
@@ -1322,7 +1332,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1074），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1075），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1805,24 +1815,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：scripts/batch_cascade.py · scripts/check_doc_size_budget.py · tests/unit/test_doc_size_budget.py · AGENTS.md · archive/docs/AGENTS-ARCHIVE.md · HANDOVER.md · CHANGELOG.md · scripts/output/file-index.md
 > **验证**：体积门禁自测 + 单测 5 例全绿（含脚注 4KB 负样本）；单测全量 657 passed；清理守恒断言全过（75=5+70·迁出逐条入档）；窗口归一断言全过（15→5·指针 W956）；脚注定形断言由本 spec 自身过检（127 字）。
 > **状态**：**已收官**（W964 6a34c21d 主提交 + 21e9e223 级联落盘·git 反填·共 4 笔含认领与回填）
-
-### W963（2026-10-26）：GSAP 动效差异化推广批（入口层 8 页 + cards 模式 + sections 单元收窄）
-
-> **来源**：用户 2026-10-26 裁决「按页型差异化推广」（滚动叙事 / 入场编排 / 微交互 / 现有动画体检四类全都要·载体 = site/ 静态站·先出计划再施工）。
->
-> - **文件**：site/static/js/motion-gsap.js、site/reader/index.html、site/reader/themes-hub.html、site/reader/themes/index.html、site/reader/people/index.html、site/reader/essays/index.html、site/reader/culture/index.html、site/reader/poetry/index.html、site/guide.html、scripts/_w962_wire_entry.py、scripts/_w957_motion_probe.py
-> **状态**：**已收官**（W963 2b53ad2a·git 反填·共 2 笔·W971 存量回填）
-
-**推广口径（差异化·不一刀切）**：**入口层 8 页**接线 cards 模式——7 个 reader 体裁 hub 页（编排单元 = `.reader-idx a` 索引条目）+ site/guide.html（`.path-card`）；单页增量 **215–238 B**（合计 +1,863 B）。**内容层** reader 622 页正文 / data 88 页 / en 138 页**暂不铺 sections**；index.html 已有 intro 不动；dashboard / dukou-engine / 404 / rum-viewer / visit-viewer 不动（重交互或工具页，动效收益低且干扰风险高）。
-
-**载体增改**：① 新增 **cards 模式**（容器内匹配 `data-gsap-target`（缺省 `.card`）的元素按序进场·stagger 自适应使序列总时长封顶 ≈1.2 s）；② **sections 模式单元收窄为 h2**——初版含 details 折叠块，但折叠块默认折叠、进场时不可见 ⇒ 属**无效动效**，折叠块的展开编排移交 fold 模式（职责分离）。
-
-**本批不做项（透明留痕）**：site/curated.html——其 2 个 `.curated-grid` 分属 3 个 `.section.reveal-in` 区块，属性提到共同父会与既有 reveal-in 进场机制交叠、逐个 grid 加属性则单页增量 269 B 超 250 B 上限 ⇒ 留专项批处理。
-
-**验收入口复用**：`_w957_motion_probe.py` 加 `--pages` 参数（默认清单不变）⇒ 新接入页按 8 页 × 3 视口 × 2 动效偏好态 = 48 组实跑验证（判据沿用 W957 口径：pageerror = 0 · 编排单元残留初始态 = 0 · RM 态载体执行数 = 0）。
-
-**让号留痕**：W962 已被并行会话「归档分段批」占用 ⇒ 本批 **W963**。
-
-**状态**：**已收官**（差异化推广·入口层落地；**内容层推广与 curated 专项待用户裁决范围**）
-
 

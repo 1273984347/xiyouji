@@ -10,6 +10,15 @@
 
 ---
 
+## W1075 合并前红灯修复微批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W1075 | 本批修改（W1075 认领行） |
+| scripts/cross_line_baseline.json | W1075 | 本批修改（跨行基线确认清单 54→55·人工复核无害） |
+| scripts/output/tools-inventory.md | W1075 | 级联生成（stats 快照与索引） |
+| site/reader/themes/index.html | W1075 | 本批修改（跳转页可见链接补 ../） |
+
 ## W1074 交互修复第二+三批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4380,24 +4389,4 @@ docs/11-方案报告/README.md
 | AGENTS.md | W964 | 版本脚注 85.7→3.3 KB（75 真条目拆分·留 5 定形）·文件 110.1→27.2 KB |
 | archive/docs/AGENTS-ARCHIVE.md | W964 | 迁入 70 条（W807-W928·新 fenced 块） |
 | HANDOVER.md | W964 | 里程碑窗口 15→5 归一（6 失明块现形）·指针 W956 |
-
-## W963 GSAP 动效差异化推广批（入口层 8 页 + cards 模式）（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/js/motion-gsap.js | W963 | 修改：新增 cards 模式（data-gsap-target 可配置 + stagger 自适应）+ sections 单元收窄为 h2 |
-| site/reader/index.html | W963 | 修改：入口层接线（cards 模式·目标 .reader-idx a·增量 229 B） |
-| site/reader/themes-hub.html | W963 | 修改：入口层接线（增量 229 B） |
-| site/reader/themes/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/reader/people/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/reader/essays/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/reader/culture/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/reader/poetry/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/guide.html | W963 | 修改：入口层接线（cards 模式·目标 .path-card·增量 215 B） |
-| scripts/_w962_wire_entry.py | W963 | 新增：入口层接线器（字节级·断言命中数·幂等·单页增量上限 250 B） |
-| scripts/_w957_motion_probe.py | W963 | 修改：加 --pages 参数（默认清单不变）以便按新接入面实跑 |
-| docs/00-导读/W批次编号对账表.md | W963 | 登记：W963 认领行（让号留痕）+ 收官回填 |
-| HANDOVER.md | W963 | 同步：一、当前进度增 W963 条目 + 最后更新链前置 + 当前 HEAD |
-| CHANGELOG.md | W963 | 新增：W963 版段（四件套） |
-| scripts/output/file-index.md | W963 | 登记：W963 段（本段） |
 
