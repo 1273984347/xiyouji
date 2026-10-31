@@ -10,6 +10,18 @@
 
 ---
 
+## W1070 站内交互审查第二轮复核 + 界面优化施工方案落库批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/审查与评审/站点交互流程审查第二轮复核报告-2026-10-31.md | W1070 | 本批新增（生产态第二轮复核·W926 十二条闭环表 + 新增十条 + 判据自纠四条 + 复算命令附录） |
+| docs/11-方案报告/设计与架构方案/界面与交互优化施工方案-2026-10-31.md | W1070 | 本批新增（四维度取证 + 现势基线 + 施工序列八批按收益排序 + 3 项待用户决策） |
+| docs/11-方案报告/README.md | W1070 | 本批修改（§一登记第 51 行 + §二登记第 33 行 + 两个分区计数更新） |
+| docs/00-导读/W批次编号对账表.md | W1070 | 本批修改（追加 W1070 认领行·在途） |
+| CHANGELOG.md | W1070 | 级联生成（本批顶段） |
+| HANDOVER.md | W1070 | 级联生成（现役三元组与进度） |
+| scripts/output | W1070 | 级联生成（搜索索引 / file-index / stats 快照） |
+
 ## W1069 效率与防护打包批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4290,41 +4302,4 @@ docs/11-方案报告/README.md
 | HANDOVER.md | W957 | 同步：一、当前进度增 W957 条目 + 最后更新链前置 + 当前 HEAD |
 | CHANGELOG.md | W957 | 新增：W957 版段（四件套） |
 | scripts/output/file-index.md | W957 | 登记：W957 段（本段） |
-
-## W956 登记面治理批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/preflight_check.py | W956 | 在途判定加 git 条件（登记滞后告警不拒绝·P-43-01）+ 复盘触发器提示位接线 |
-| scripts/check_review_trigger.py | W956 | 新建复盘触发器（天数/批次/提交三判据任一触发即提示·preflight 接线·不持台账写面） |
-| scripts/ledger_backfill.py | W956 | --from-git 收官状态 git 反填（P-43-01 后半·显式值可覆盖） |
-| scripts/batch_cascade.py | W956 | 段状态认领登记 W 号一致性断言（E-28/P-43-05 防线） |
-| scripts/backfill_changelog.py | W956 | 归档面合看修复（E-27·原实现 67 归档段误报待补）+ --only 限域 + 同款段状态断言 |
-| scripts/check_db_schema.py | W956 | 门禁路径跟上 W934 存储层门面化（P1-P3 db.ts→storage/sqlite.ts·假红修复） |
-| scripts/check_emoji_icons.py | W956 | ruff 机械清理（死赋值移除·UP009/I001/F841） |
-| scripts/output/_w884_spec.json | W956 | W884 补位 spec（Playwright 全谱审计·按 W863 先例标补位） |
-| tests/unit/test_preflight_check.py | W956 | 提交索引与在途二分单测 5 例 |
-| tests/unit/test_review_trigger.py | W956 | 复盘触发器单测 9 例（含负样本） |
-| tests/unit/test_batch_cascade_status_wnum.py | W956 | 段状态断言单测 4 例（含 E-28 实形态负样本） |
-| docs/agent/pitfalls.md | W956 | 复盘经验五条上移（级联 5→8·git 17→18·流程 8→9·总数 52→57） |
-| AGENTS.md | W956 | §4.3 坑位计数链追记（总数 52→57） |
-
-## W955 GSAP 动效体系引入批第一子批（前置体检 + 执行前计划）（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md | W955 | 新增：T-28 执行前计划（3 目标 + 12 条 AC + 16 条 ASM + 14 步 ST + 9 指标 + 8 风险 + 9 决策 + 12 项自包含检查） |
-| scripts/_w955_motion_audit.py | W955 | 新增：动效体检取证脚本（8 组事实·数字唯一源头·禁词基线复用 check_motion_ban 正则） |
-| scripts/output/_w955_motion_audit.json | W955 | 新增：体检基线快照（页面分布 / 动效存量 / RM 覆盖 / 体积预算 / GSAP 体量测算） |
-| scripts/_w955_ledger_claim.py | W955 | 新增：台账认领行追加器（只追加不改历史行 / 幂等 / 混行尾 fail-closed） |
-| scripts/_w955_version_sync.py | W955 | 新增：版本面同步脚本（9 处替换 + 5 处插入·断言命中数·倒序锚点） |
-| docs/00-导读/W批次编号对账表.md | W955 | 登记：W955 认领行（认领即占号·单独提交） |
-| docs/11-方案报告/README.md | W955 | 登记：§六 增 T-28 执行前计划行（序号 33）+ 件数刷新 |
-| HANDOVER.md | W955 | 同步：一、当前进度增 W955 条目 + 最后更新链前置 W955 |
-| CHANGELOG.md | W955 | 新增：W955 版段（四件套） |
-| scripts/output/file-index.md | W955 | 登记：W955 段（本段） |
-| docs/INDEX.md | W955 | 重建：新增 T-28 执行前计划后重生成（765 篇文档 · 13 板块） |
-| site/data/search.html | W955 | 刷新：站内搜索索引（中文）重嵌入（含新计划件条目） |
-| site/en/search.html | W955 | 刷新：站内搜索索引（英文）重嵌入 |
-| site/**（2 页 meta CSP） | W955 | 重算：搜索页内联脚本变更后的 CSP 哈希同步（2 页 · 861 个内联脚本哈希） |
 
