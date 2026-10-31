@@ -1,3 +1,33 @@
+### W1062（2026-10-31）：README 换图未生效根修批（换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70）
+
+> **来源**：用户 2026-10-31 问「为什么我之前让你更换 README 的图片你还是没有更换」——实查定位：换图提交
+> `09146cf1`（W1005「七人」改「取经五人组」）**只存在于 `origin/dev`**；`main` 是 GitHub 仓库首页渲染源
+> 也是 Pages 部署源（`pages.yml: branches: [main]`），且 main 落后 dev **151 笔** ⇒ 线上 README 与 GitHub
+> 首页仍是 10-22 的旧「七人」图。用户在 10-29 05:02 曾问过「README 里面用的图片更新了吗？」，当时
+> 已答"已更新"——**那句答的是 dev 分支的状态，未核 main**，属"声明≠落地"的分支面漏判。
+>
+> - **文件**：scripts/requirements.txt、scripts/check_no_brand_refs.py、CHANGELOG.md、docs/agent/pitfalls.md、docs/11-方案报告/审查与评审/工具脚本门禁体检与临时归档审计-2026-10-29.md、docs/11-方案报告/计划方案/T04-任务计划执行与经验沉淀报告-2026-10-21.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、docs/00-导读/W批次编号对账表.md、scripts/output。
+
+**本批要点**：① **PR #70 的两道红卡**——`pytest-unit` 因 `requirements.txt` 未登记 numpy/playwright 而
+5 failed（3 个已转正根级脚本 `check_crop.py`/`subject_band.py`/`accent_audit.py` 在**模块级** import 它们·
+与 W758 markdown / W813 PyYAML 同型「本地有装而未登记 ⇒ CI 恒红」）；`Security` 因品牌守卫判红。② **品牌守卫
+自身漏检（根因级新发现）**——`tracked_files()` 用 `git ls-files` 取扫描面，未关 `core.quotepath` 时中文路径
+被转义成八进制并加引号 ⇒ 守卫把转义串当真实路径 ⇒ `open()` 抛 OSError ⇒ 被 `except OSError: continue`
+**静默跳过** ⇒ 实测 1812 个中文路径文件从未被扫过（真实扫描面 3356/5197）。这解释了"main 上守卫绿但
+`git grep` 确有命中"的矛盾。根修 = `core.quotepath=false` + 读取失败改为 fail-closed（不再静默跳过）。
+③ **声明性豁免机制**——AGENTS 铁律 19 / CLAUDE 速查 14 行的正文**必须**点名被禁品牌（否则禁令无指向），
+与守卫「明文 0 命中」构成**结构性冲突**（W1061 把铁律 19 入必载层后 Security 恒红 ⇒ PR 永不可合）。
+解法不是删禁令也不是整体放行文件：豁免**行级**绑定到显式登记的声明标记（`_DECLARE_MARKERS`），同文件内
+未含标记的行仍判红 ⇒ 行级豁免 ≠ 文件级放行。④ **清 7 处真违规**——历史段/活文档里引用第三方 Agent 运行态
+目录路径（某第三方 Agent 工具链的 skills/ 与 memory/ 运行态目录）改为中性指代「第三方 Agent 运行态目录」，语义不丢（用户已授权改
+CHANGELOG 历史段）。
+
+**验证**：守卫自测 56/56（含 12 条负样本：各标记不得导致全局放行 + 行级豁免≠文件级放行）· 守卫全仓
+零命中且真实扫描面 5158 文件（修复前 3356）· pip-audit 全量 `No known vulnerabilities found` ·
+CI 原 5 个 failed 用例本地复跑全过 · 全量 pytest **1092 passed / 3 skipped / 0 failed** · 全量门禁见收官提交。
+
+> - **状态**：已收官（换图未生效的根因定位 + 两道红卡清偿 + 守卫漏检根修 + 声明性豁免 + 7 处真违规清零）
+
 ### W1061（2026-10-31）：私有记忆同步批（CodeBuddy 铁令入必载层 + env-quirks 独有坑 10 条入坑表）
 
 > **来源**：用户令「整理记忆文件」并追问「哪些内容需要同步项目文件供其他 Agent 读取」——三问 ③
@@ -492,7 +522,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 **顺手解决的两个坑**：
 ① **`.agent/` 原被 gitignore 整体忽略**（第 214 行），放进去的 skill 不进 git、别的 Agent 拿不到。改为 `.agent/*` + `!.agent/skills/` + `!.agent/skills/**` 放行——**父目录整体忽略时子路径 `!` 无效**，必须用 `dir/*` 形式才能例外。
-② **自动加载的路径差异（如实标注）**：系统自动加载只认 `.workbuddy/skills/`，本 skill 在 `.agent/skills/` 下**不会自动加载**。已在 `AGENTS.md` 加显式指针（「⚡ 速查 skill」一行），靠指针 + 主动查阅生效；要自动加载需另放一份到 `.workbuddy/skills/`，会形成双份维护，暂不做。
+② **自动加载的路径差异（如实标注）**：系统自动加载只认第三方 Agent 运行态目录（skills/），本 skill 在 `.agent/skills/` 下**不会自动加载**。已在 `AGENTS.md` 加显式指针（「⚡ 速查 skill」一行），靠指针 + 主动查阅生效；要自动加载需另放一份到该目录，会形成双份维护，暂不做。
 
 **验证**：第 45 槽目录文档 0 FAIL（`.agent` 属隐藏目录不在在管扫描面）· 第 52 槽仓库布局 0 FAIL · 全量门禁 57 段核心全绿。
 
@@ -544,7 +574,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 |---|---|---|
 | 太上老君·器物官 | MCP 服务器 0 个 | 载体 `mcp-server/xiyouji_mcp.py` **在**（29.5 KB）；是否已挂载未核 |
 | 沙悟净·收官官 | 无专职 Agent | 未核（依赖 `mavis agent list`） |
-| 菩提祖师·授业官 | 本地技能目录**空** | 目录 **存在且非空**（`~/.workbuddy/skills`）——与记载相反 |
+| 菩提祖师·授业官 | 本地技能目录**空** | 目录 **存在且非空**（第三方 Agent 运行态目录·skills/）——与记载相反 |
 
 **本批处置**：头部加「数据时效」「修订触发」两行（重核日期 + 60 天到期 + 生态变动即重核）；
 §3 补一句辨析——**「空缺」指未挂载，不是未写代码**（三处的载体今天都在，缺的是挂载那一层）；
@@ -1022,7 +1052,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ### W1004（2026-10-29）：转正清零 + 审查触发器判据修正批（B1 字样≠事件 / B2 max / B4 台账归位）
 
-> **来源**：用户 2026-10-29 三令收口——①「8 件转正清零」②「B1/B2/B4 开始做」③「只写进你自己的记忆文件和工作日志没用，这个项目是多 Agent 共同协作的项目，还是会再次出现同样错误」。第三令是本批的纲：教训的**权威载体是仓内坑表**，私有记忆只作镜像（铁律 14 / CLAUDE 第 12 条早已写明，W1002 却把审查结论只写进 `.workbuddy/memory/`）⇒ 本批把结论与判据一起落进仓。
+> **来源**：用户 2026-10-29 三令收口——①「8 件转正清零」②「B1/B2/B4 开始做」③「只写进你自己的记忆文件和工作日志没用，这个项目是多 Agent 共同协作的项目，还是会再次出现同样错误」。第三令是本批的纲：教训的**权威载体是仓内坑表**，私有记忆只作镜像（铁律 14 / CLAUDE 第 12 条早已写明，W1002 却把审查结论只写进第三方 Agent 运行态目录（memory/））⇒ 本批把结论与判据一起落进仓。
 >
 > - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、DESIGN.md、HANDOVER.md、README.md、STRUCTURE.md、archive/README.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、assets/promo/hero-set/raw/index.md、assets/promo/hero-set/raw/round-w1005/README.md、assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg、assets/promo/hero-set/raw/round-w1005/index.md、assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/agent/adversarial-audit-prompt.md、docs/agent/gates.md、docs/agent/pitfalls.md、pytest.ini、scripts/AD_认知心理/index.md、scripts/_w1005_heroes.py、scripts/_w1005_serve.py、scripts/accent_audit.py、scripts/check_audit_trigger.py、scripts/check_crop.py、scripts/check_emoji_icons.py、scripts/check_page_admission.py、scripts/check_script_coverage.py、scripts/check_vermilion_solid.js、scripts/file_protocol_probe.py、scripts/icon_probe.js、scripts/index.md、scripts/j1_name_audit.py、scripts/output/_cascade_files_W1003.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1003_spec.json、scripts/output/_w1004_spec.json、scripts/output/_w1005_batch.json、scripts/output/_w1005_heroes.json、scripts/output/_w1005_map.json、scripts/output/_w1005_serve.err、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/refresh_icon_paths.py、scripts/scan_targets.py、scripts/site_audit.py、scripts/subject_band.py、scripts/visual_regression_probe.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/test_audit_trigger.py、tests/unit/test_script_hygiene.py、tests/unit/test_w851_j1_name_audit.py、tests/unit/test_w851_visual_regression_probe.py、xiyouji-agent-web/e2e/chat.e2e.mjs、xiyouji-agent-web/package-lock.json、xiyouji-agent-web/package.json。
 >
@@ -1083,7 +1113,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1061），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1062），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
