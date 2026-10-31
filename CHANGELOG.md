@@ -14,7 +14,11 @@
 
 **记忆 / 项目沉淀同步（用户明令）**：坑表 **168 → 174 条**（流程 / 协作 / 取证 75 → 81），新增 E-77~E-82 六条——其中 E-81（W811 YAML 冒号陷阱 · 独立守卫的由来）与 E-82（W808 门禁只认提交树 · 过程性文件不要留在会被门禁计数的目录）系**自 Agent 记忆固化入仓**（此前仅存私有记忆 ⇒ 其他 Agent 无从知晓，本批补齐）；计数链 **7 处**同步（坑表主题标题 / HANDOVER×2 / AGENTS×2 / SKILL×2）。W1065 调研三条教训（检索语法 / 正则分桶 / 外链腐化）经核实**已在坑表 150-152 行** ⇒ Agent Memory 侧属重复，改为指针。
 
-**验证**：check_action_refs.py 自测 6/6 · 全量 --api 扫描 14 个去重 ref 全 PASS · ruff + black 全绿 · 坑表计数链 7 处 grep 复核一致 · 跨行改写 `--gate` 0 FAIL（新增 6 条未触发高危扫描）。
+**验证**：check_action_refs.py 自测 6/6 · 全量 --api 扫描 14 个去重 ref 全 PASS · ruff + black 全绿 · 坑表计数链 7 处 grep 复核一致 · 跨行改写 `--gate` 0 FAIL（新增 6 条未触发高危扫描）· verify_delivery 全量门禁通过（57/57 段）· **CI 实测**：上一轮在 Set up job 阶段 1 秒失败的 merge job 本轮全流程跑通（62 秒·Set up job → Download shards → Merge shards → only-increase gate 全 success）· **暗色门禁全链提速实测**：改前单 job 40.5 分钟 → 改后 **6 分 59 秒**（4 分片并行 + contract smoke 并发 6 且只在 shard 0 跑一次）≈ **5.8×**。
+
+**合并与验收（PR #70 → main·字节级三处一致）**：mergedAt 2026-10-31T07:52:02Z，mergeCommit `420232a5`（parents=2·照 PR #66 惯例）⇒ ① `origin/main` 的 `site/static/images/ink-mountains-hero.webp` blob = `c081aa7fda37ed7f6b72f71cc057fb0f703bbb26`（120440 B）= 期望值 ✓；② contents API（main）返回同一 sha，解码后本地重算 blob-id 完全一致 ✓（raw.githubusercontent 为该 blob 的 raw 视图）；③ Pages 线上字节 = 120440 B、blob-id = `c081aa7f…` ✓（部署前实测 53754 B / 旧 blob `54bbc737…`）⇒ **README 主视觉在 GitHub 首页与 Pages 站点真正切到新版「取经五人组」**（目视复核：4 人形 + 1 匹白马 + 金色山道）。
+
+**提交前三问自检（铁律 18）**：① 本批问题全解决或登记去向——根因（W1066 新增 merge job 时写入 39 位编造 action SHA ⇒ 该 job 在 Set up job 阶段 1 秒 failure）已修，防复发判据已落地并挂 CI 独立工作流；两项已识别但不在本批修的缺口已登记去向（下一批）：screenshot-review 的 paths 漏 `check_contract_smoke.js` / `check_screenshot_gates.js`、CI / Security / CI Sim / Workflow Lint 无 paths 过滤（每笔 push 全量跑 ⇒ 并发限额掐掉 2 轮白跑）。② 同类问题会否再犯——已转机器判据：形态判据（离线·每次 PR 恒生效）+ 存在性判据（联网·双 endpoint 复核·自测 6/6 可证伪）；坑表 E-77~E-82 六条已落（E-81 / E-82 系自私有记忆固化入仓）。③ 其他 Agent 能否从项目内文件了解本批全部决策与遗留——CHANGELOG 本段 + 台账 W1067 行 + T40 报告 §4.6 + 坑表 E-77~E-82 + file-index W1067 段（14 行登记表）；私有记忆侧已压缩为指针并注明权威位置。
 
 ### W1066（2026-10-31）：W1066 CI 提速批（暗色门禁拆分片 + 按需等待 + 批量截图并发 + 修 CodeQL 两处）
 
