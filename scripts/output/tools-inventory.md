@@ -4,7 +4,7 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-31 11:43
+生成时间：2026-10-31 13:02
 
 共 **162** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 62 · 一次性（下划线前缀） 6）
 
@@ -199,7 +199,7 @@
 | 脚本 | 用途 |
 |:---|:---|
 | `__init__.py` | 《详解西游记》分析脚本包（W424 S1 打包：regular package）。 |
-| `_audit_render_states.js` | W579：--scope charts = 全站含 <svg 的页面（中英合计，机判口径单一来源；约 163 页） |
+| `_audit_render_states.js` | W1066：OUT 改为可由 --out 覆盖（分片时各写自己的产物文件·CI 再合并） |
 | `_check_json_copies.py` | _check_json_copies.py — W563/A-3：site/data/json/ 部署副本 ↔ scripts/output/d |
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |

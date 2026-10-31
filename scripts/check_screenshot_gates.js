@@ -11,6 +11,7 @@
  * 用法：
  *   node scripts/check_screenshot_gates.js                 # 全量（234 页 × 1 视口 desktop）
  *   node scripts/check_screenshot_gates.js --only <substr> # 定向（路径含 substr 的页面）
+ *   node scripts/check_screenshot_gates.js --only a,b,c    # 定向（多值·逗号分隔·任一命中即取）
  *   node scripts/check_screenshot_gates.js --json out.json # 输出机器可读报告
  * 任一页面命中任一类 → exit 1（阻断）。
  *
@@ -159,6 +160,13 @@ function parseArgs(argv) {
     if (argv[i] === '--only') cfg.only = argv[++i];
     else if (argv[i] === '--json') cfg.jsonPath = argv[++i];
   }
+  // W1066：--only 支持逗号分隔的多值（任一子串命中即取该页）——
+  //   CI 定向 scope 一次要筛多个变更页，单值只能筛一个。
+  //   向后兼容：单值时行为与原先完全一致。
+  if (typeof cfg.only === 'string') {
+    cfg.only = cfg.only.split(',').map(s => s.trim()).filter(Boolean);
+    if (cfg.only.length === 0) cfg.only = null;
+  }
   return cfg;
 }
 
@@ -166,7 +174,10 @@ async function main() {
   const cfg = parseArgs(process.argv.slice(2));
   const allPages = listHtmlFilesRecursive(SITE_DIR);
   const lists = buildStaticPageLists(allPages);
-  const pages = cfg.only ? allPages.filter((p) => p.includes(cfg.only)) : allPages;
+  const onlyList = Array.isArray(cfg.only) ? cfg.only : (cfg.only ? [cfg.only] : null);
+  const pages = onlyList
+    ? allPages.filter(p => onlyList.some(s => p.includes(s)))
+    : allPages;
 
   console.log(
     `[chart-gates] ${pages.length}/${allPages.length} 页 · ` +

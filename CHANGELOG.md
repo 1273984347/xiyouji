@@ -1,3 +1,14 @@
+### W1066（2026-10-31）：W1066 CI 提速批（暗色门禁拆分片 + 按需等待 + 批量截图并发 + 修 CodeQL 两处）
+
+> **来源**：用户 2026-10-31 问「怎么增加这两个 job 的工作效率」——实测量化后授权「连脚本层一起改（最大提速档）」。
+>
+> - **文件**：scripts/_audit_render_states.js、scripts/batch_screenshots.js、scripts/check_screenshot_gates.js、scripts/check_dark_state_gate.js、scripts/check_chart_data.py、scripts/check_chart_values.js、.github/workflows/screenshot-review.yml、CHANGELOG.md、docs/agent/pitfalls.md、docs/00-导读/W批次编号对账表.md、scripts/output。
+
+**实测根因（先量化再动手）**：Dark-state gate 的**纯固定等待下限 = 782 页 × 4.7 s ÷ CONC 3 = 20.4 分钟**（实际 29–33 分钟·timeout 60 分钟已在临界）⇒ 这正是 W993「两次被自身超时掐断」（cancel 非 verdict）的根因；Screenshot Review 侧 96 页完全串行（每页独立 context 但逐页 await）+ chart-gates 无论定向都跑全量 857+ 页。
+
+**本批要点**：① **暗色门禁拆 4 分片并行**（按**索引取模**而非连续切片⇒ 负载均衡无长尾·墙钟 = max(分片)）+ 分片产物**合并后统一判定**（判定语义与改前完全一致）+ 合并 job 对「未找到任何分片」fail-closed（退出码 2·不得当零命中）；② **按需等待**（waitForStable / waitForChange）替代固定 1200+1500+2000 ms——**落定才采样 ⇒ 判据强度不降**（上限兜底保证永不落定时与原来持平）；③ CONC 3 → 6；④ **batch_screenshots.js 多 context 并发**（CONC 4·capture() 本已每页独立 context⇒ 天然可并发·失败语义不变）；⑤ **chart-gates 定向时只跑变更页**（原无论定向都全量）+ `--only` 支持逗号分隔多值（向后兼容）；⑥ **顺带修 CodeQL 2 处告警**——`check_chart_data.py` 的 `<script>`/`<style>` 剥离改为**大小写不敏感**（大写 `<SCRIPT>` 原会漏剥⇒ 判据假结论）、`check_chart_values.js` 的 name 正则**完整转义反斜杠**（name 含 `\` 时原正则语义错⇒ 漏匹配）——两处均经对照实测确认为真缺陷（非本批引入·因 PR 改动量大被判为本 PR 新增）。
+
+**验证**：暗色审计**新旧对照 5 页逐页判据字段完全一致**（invisibleShapes / lowContrastText / errors / fatal / isDarkBg 全部相同⇒ 提速未削弱判据）· CodeQL 两处修复均以负样本实测（新转义命中含 `\` 的 name、旧转义不命中）· check_chart_data 自测 PASS · 全量 pytest 1093 passed / 3 skipped / 0 failed · 全量门禁 57 段核心全部通过。
 ### W1065（2026-10-31）：《西游记》GitHub 生态全景调研批（51 组查询实跑 · 72 项核心清单 · 11 方向分类）
 
 > **来源**：用户 2026-10-31 令「你去 GitHub 上面搜索查找调研一下关于西游记相关的所有内容」。
@@ -1135,7 +1146,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1065），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1066），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1776,30 +1787,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **验证**：母版判据 J1–J10 **40/40 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 40 张）· 站点版验算 **40/40 PASS**（`_w951_check_crop.py`：主体顶未切 + 主体底未切 + 下部地面留白 > 0）· 人眼 J8 题材与形制逐张核（据此重出 6 张：机器抓 06/10 + 人眼抓 04/08，二次再调 06/10）· 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 0 broken
 > - **状态**：已收官（`7481e4f2`·**并发纪律**：本批共享面按内容粒度**精确暂存**——以 `HEAD:<file>` 为基底叠加本批段、`git update-index --cacheinfo` 写入索引、工作树保持原样 ⇒ 对方在途内容既不入我的提交也不被我抹掉；提交后已 `git log --oneline -1 -- <本站点版文件>` 核实归属）
 > **状态**：**已收官**（W953 1e333d09·git 反填·共 3 笔·W971 存量回填）
-
-
-### W952（2026-10-25）：内页人物题图续批第二组（12 张·人物 + 主题混合·站内线描题图累计 28 张）
-
-> **来源**：用户 2026-10-25 令「再继续帮我做几张素材图」，并要求开工前先问三件事。
->
-> **三问答复**：① 用途与画幅 = **内页人物题图续批 · 3:4 竖版** ② 张数 = **12 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **人物 + 主题混合**）。
->
-> - **文件**：site/static/images/plate-line-01-bailongma.webp、site/static/images/plate-line-02-dujiao-shengwang.webp、site/static/images/plate-line-03-linggan.webp、site/static/images/plate-line-04-huangfengguai.webp、site/static/images/plate-line-05-saitaisui.webp、site/static/images/plate-line-06-jiuLingyuansheng.webp、site/static/images/plate-line-07-nezha.webp、site/static/images/plate-line-08-angrixingguan.webp、site/static/images/plate-line-09-jingu-topic.webp、site/static/images/plate-line-10-jindouyun-topic.webp、site/static/images/plate-line-11-fabao-topic.webp、site/static/images/plate-line-12-wuzi-jing-topic.webp、assets/promo/plate-set/README.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-site-sheet.png、site/reader/people/白龙马.html、site/reader/people/独角兕大王.html、site/reader/people/灵感大王.html、site/reader/people/黄风怪外传.html、site/reader/people/赛太岁.html、site/reader/people/九灵元圣-方向二深化.html、site/reader/people/哪吒.html、site/reader/people/昴日星官.html、site/reader/themes/紧箍咒专题.html、site/reader/themes/筋斗云专题.html、site/reader/themes/法宝系统专题.html、site/reader/themes/无字真经专题.html、scripts/_w952_make_prompts.py、scripts/_w952_insert_plates.py、scripts/_w952_cascade.py、scripts/_w952_fix_c6.py、scripts/_w952_fix_j10.py、scripts/_w952_make_edge_sample.py、scripts/_w952_update_readme.py、scripts/_w952_zoom.py、scripts/_w945_prepare.py、scripts/_w945_plates_verify.py、scripts/_w945_detail_sheet.py、scripts/output/_w952_batch1.json、scripts/output/_w952_batch2.json、scripts/output/_w952_batch3.json、scripts/output/_w952_batch4.json、scripts/output/_w952_batch5.json、scripts/output/_cascade_files_W952.txt、sCREADME.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md
-
-**缺口**：reader 共 622 页，本批之前仅 **27 页**有题图（缺口 595 页）；本批 12 张接入 12 个页面 ⇒ 累计 **39 页**有题图。
-
-**题材（人物 8 + 主题 4·每张一个独占标志物）**：白龙马（白衣龙君 + 三叉戟 + 龙影）、独角兕大王（青牛独角 + 方头钢叉）、灵感大王（鱼尾龙袍 + 玉钵）、黄风怪（黄鼠狼身 + 叶形芭蕉扇 + 风纹）、赛太岁（金毛犼 + 紫金铃）、九灵元圣（九头狮）、哪吒（乾坤圈 + 火尖枪 + 混天绫 + 风火轮）、昴日星官（公鸡形貌 + 长鞭）｜紧箍咒（金箍九倒刺 + 朱砂红绦）、筋斗云（祥云涡卷 + 悟空端坐）、法宝系统（五件法宝弧形列阵）、无字真经（空白经卷 + 淡赭金横纹）。
-
-**风格同族由构造保证**：母版的**风格段 211 字符**从上批母版程序化复用（`scripts/_w952_make_prompts.py` 读上批 JSON 取母版），**只替换构图句**——由「上部 28% 留白供叠字」改为「主体上方只留约一成呼吸空间·不设专用标题区」（因用户上批已裁决页面上裁掉留白，本批直接按无标题区构图）。脚本自带两条断言：批内 12 条母版逐字一致 + 风格段与上批母版逐字一致。
-
-**判据口径调整**：J2「顶部留白带」由 28% 放宽为 **10%**（上批留 28% / 本批留一成 ⇒ 取交集·顶部 10% 必为纯纸面），其余 J1/J3–J10 不变；站点版验算（主体顶未切 + 主体底未切 + 下部地面留白 > 0）同步覆盖本批。
-
-**接入**：沿用站内 `chapter-plate` 范式（420px 居中 + 描述性 alt + 浅底图暗色模式隐藏）。
-
-**并发纪律**：共享面按内容粒度**精确暂存**（`git update-index --cacheinfo`·HEAD 为基底叠加本批段）⇒ 不把对方在途内容带进本批提交。
-
-> - **验证**：母版判据 J1–J10 **28/28 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 28 张）· 站点版验算 **28/28 PASS**（`_w951_check_crop.py`：主体顶未切 + 主体底未切 + 下部地面留白 > 0）· 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 20858 链接 0 broken · J10 口径修正后自证仍可抓白边（合规 0.315 / 白边样本 8.609 > 阈值 5.0）
-> - **状态**：在途（认领登记 W952·待提交入库）
-> **状态**：**已收官**（W952 49f2f558·git 反填·共 4 笔·W971 存量回填）
 
 

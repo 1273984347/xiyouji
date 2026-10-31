@@ -49,12 +49,20 @@
     "docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md",
     "docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md",
     "docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md",
-    "docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md",
     "docs/INDEX.md",
     "scripts/output/_cascade_files_W1065.txt",
     "scripts/requirements.txt",
     "site/data/search.html",
     "site/en/search.html",
-    "docs/00-导读/项目说明.md"
+    "docs/00-导读/项目说明.md",
+    ".github/workflows/screenshot-review.yml",
+    "scripts/_audit_render_states.js",
+    "scripts/batch_screenshots.js",
+    "scripts/check_chart_data.py",
+    "scripts/check_chart_values.js",
+    "scripts/check_dark_state_gate.js",
+    "scripts/check_screenshot_gates.js",
+    "scripts/output/render-state-audit.jsonl",
+    "docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md"
   ]
 }

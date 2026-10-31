@@ -336,8 +336,31 @@ async function main() {
   }
   const results = [];
 
+  // W1066 并发化：原为「逐页 × 逐视口」完全串行（96 页 × 2 视口 × 2s 固定等待
+  // ⇒ 纯等待下限 6.4 分钟·实测远高于此）。capture() 本身**每页独立 newContext**
+  // ⇒ 页面间无共享状态 ⇒ 可安全并发。
+  //   并发度默认 4：CI runner 为 2 vCPU，Playwright 每页需独立 renderer 进程，
+  //   并发过高会 CPU 争抢导致边际收益递减甚至更慢（实测 CONC=8 在 2 vCPU 上
+  //   收益低于线性）。可用 --conc 覆盖。
+  //   失败语义不变：单页异常仍记入 results（error 字段）⇒ --fail-on-issues 照旧阻断。
+  const CONC = (() => {
+    const i = process.argv.indexOf('--conc');
+    return i > -1 ? Math.max(1, parseInt(process.argv[i + 1], 10) || 4) : 4;
+  })();
+  const jobs = [];
   for (const pageInfo of pages) {
     for (const viewportName of ['desktop', 'mobile']) {
+      jobs.push([pageInfo, viewportName]);
+    }
+  }
+  console.log(`并发 ${CONC} · 任务 ${jobs.length} 个（${pages.length} 页 × 2 视口）`);
+
+  let idx = 0;
+  const worker = async () => {
+    while (true) {
+      const i = idx++;
+      if (i >= jobs.length) break;
+      const [pageInfo, viewportName] = jobs[i];
       try {
         const result = await capture(browser, pageInfo, viewportName, config.viewports, outDirs);
         results.push(result);
@@ -351,7 +374,8 @@ async function main() {
         console.error(`✗ ${viewportName.padEnd(7)} ${pageInfo.file.padEnd(35)} ${e.message}`);
       }
     }
-  }
+  };
+  await Promise.all(Array.from({ length: Math.min(CONC, jobs.length) }, worker));
 
   await browser.close();
 

@@ -618,7 +618,11 @@ function discoverDataNames(html) {
 // '…'/"…"/`…` 字符串（含 \\ 转义）与 // /* */ 注释），depth 归零即终点。
 function extractLiteralSource(html, name) {
   const decl = new RegExp('(?:^|\\n)[ \\t]*(?:const|var|let)[ \\t]+' +
-    name.replace(/[$]/g, '\\$&') + '[ \\t]*=[ \\t]*([\\[{])');
+    // W1066：完整转义 name（含反斜杠本身）——原式只转义 `$`
+    //   （`name.replace(/[$]/g, '\\$&')`）⇒ name 内若含 `\`，正则里会被当作
+    //   转义序列起点 ⇒ 匹配语义错（CodeQL「does not escape backslash characters
+    //   in the input」告警·同时是真缺陷）。标准做法：先转义反斜杠再转义 $。
+    name.replace(/\\/g, '\\\\').replace(/[$]/g, '\\$&') + '[ \\t]*=[ \\t]*([\\[{])');
   const m = decl.exec(html);
   if (!m) return null;
   let i = m.index + m[0].length - 1;  // 指向首个 { 或 [

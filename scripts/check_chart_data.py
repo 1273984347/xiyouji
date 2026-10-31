@@ -72,8 +72,12 @@ def strip_invisible(html):
     """
     body = html[html.find('<body'):] if '<body' in html else html
     body = re.sub(r'<!--[\s\S]*?-->', ' ', body)          # ① 注释优先
-    body = re.sub(r'<script[\s\S]*?</script>', ' ', body)
-    body = re.sub(r'<style[\s\S]*?</style>', ' ', body)
+    # W1066：标签名大小写不敏感（HTML 规范允许 <SCRIPT>/<Script>）——
+    #   原式 `<script[\s\S]*?</script>` 只匹配小写 ⇒ 大写标签会漏剥
+    #   （CodeQL js/regex-injection 告警「does not match upper case <SCRIPT> tags」·
+    #    该告警同时是真缺陷：漏剥的 <SCRIPT> 内容会被当正文参与判据 ⇒ 假结论）。
+    body = re.sub(r'<script\b[\s\S]*?</script\s*>', ' ', body, flags=re.IGNORECASE)
+    body = re.sub(r'<style\b[\s\S]*?</style\s*>', ' ', body, flags=re.IGNORECASE)
     return RE_HTML_TAG.sub(' ', body)                       # ② 标签按语法约束
 
 
