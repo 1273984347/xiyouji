@@ -1,3 +1,21 @@
+### W1067（2026-10-31）：CI action ref 根修批 + 记忆与项目沉淀同步批
+
+> **来源**：用户 2026-10-31 问「检查一下还在跑的东西·现在已经跑了八个小时·你不觉得有问题吗」→ 查出 PR #70 的 Screenshot Review run 失败于 merge job；再问「整理优化一下你自己的记忆文件内容 Agent Memory·有哪些内容是需要同步在项目文件内供其他 Agent 读取的」。
+>
+> - **文件**：.github/workflows/screenshot-review.yml、.github/workflows/workflow-lint.yml、scripts/check_action_refs.py、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/output、CHANGELOG.md、docs/00-导读/W批次编号对账表.md
+
+**根因（annotation 级实证，非推测）**：PR #70 的 `Dark-state gate (merge shards + only-increase verdict)` job 在 **Set up job 阶段 1 秒内 failure**（Checkout 都没跑），GitHub annotation 原文为 `Unable to resolve action actions/download-artifact@fa0a91b8…`，unable to find version ⇒ **W1066 批新增 merge job 时写入了一个 39 位（少 1 字符）的编造 SHA**，该仓库无此 commit。⇒ 该症状极易误判为基础设施故障 / runner 限额 / 并发排队（本轮实查了 runner 分配、API 限流、并发排队、僵尸 run 四条路径均无果，最后靠 annotation 定位）。
+
+**修法与根修**：① **不新造 SHA**——改用仓内 `release.yml` 已验证存在的 `actions/download-artifact@37930b1c…`（v7.0.0），并在 merge job 步骤注释里写明「Set up job 阶段失败 ⇒ 先查 action ref 能否解析」这条定位口诀；② **新增机器判据 `scripts/check_action_refs.py`**（转正·去 `_` 前缀去批号）——两道判据：**① 形态**（离线·零外部依赖·每次 PR 恒生效·拦截 tag/branch 引用与长度 ≠ 40 的十六进制串）**② 存在性**（联网·双 endpoint 复核·404 与 422 均算「不存在」·限流/网络一律判「无法判定」⇒ fail-closed 不得改代码）；③ **挂进 `workflow-lint.yml` 独立工作流**——形态判据每次 PR 恒生效，存在性扫描只在 schedule / workflow_dispatch 跑且**刻意不带 token**（外部 API 的可用性不得成为 PR 单点阻塞，但「判定为不存在」仍阻断）。
+
+**判据自证（6/6 可证伪）**：N1 39 位 hex / N2 tag 引用 / N4 7 位短 SHA / N5 40 位低熵 ghost SHA 四条负样本必红 + N3 40 位合法格式 / N6 仓内真实 ref 两条正样本必绿；自测夹具**不硬编码任何 SHA**（gitleaks 按熵值筛）⇒ 正样本运行时从仓内文件抽取。
+
+**同族风险全量扫查（18 个去重 ref）**：判定为「不存在」的**只有 1 处**（本批引入的那 39 位）；`github/codeql-action/*@1190a975…` 四处**真实存在**（双 endpoint 连续 4 轮 200 实证）——中途曾因判据自身两处缺陷（把子目录 action 当仓库名 + 把非 0 退出码一律当「不存在」）误判它们为编造 ⇒ 落实「**先怀疑判据再动产品代码**」。
+
+**记忆 / 项目沉淀同步（用户明令）**：坑表 **168 → 174 条**（流程 / 协作 / 取证 75 → 81），新增 E-77~E-82 六条——其中 E-81（W811 YAML 冒号陷阱 · 独立守卫的由来）与 E-82（W808 门禁只认提交树 · 过程性文件不要留在会被门禁计数的目录）系**自 Agent 记忆固化入仓**（此前仅存私有记忆 ⇒ 其他 Agent 无从知晓，本批补齐）；计数链 **7 处**同步（坑表主题标题 / HANDOVER×2 / AGENTS×2 / SKILL×2）。W1065 调研三条教训（检索语法 / 正则分桶 / 外链腐化）经核实**已在坑表 150-152 行** ⇒ Agent Memory 侧属重复，改为指针。
+
+**验证**：check_action_refs.py 自测 6/6 · 全量 --api 扫描 14 个去重 ref 全 PASS · ruff + black 全绿 · 坑表计数链 7 处 grep 复核一致 · 跨行改写 `--gate` 0 FAIL（新增 6 条未触发高危扫描）。
+
 ### W1066（2026-10-31）：W1066 CI 提速批（暗色门禁拆分片 + 按需等待 + 批量截图并发 + 修 CodeQL 两处）
 
 > **来源**：用户 2026-10-31 问「怎么增加这两个 job 的工作效率」——实测量化后授权「连脚本层一起改（最大提速档）」。
@@ -1146,7 +1164,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1066），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1067），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
