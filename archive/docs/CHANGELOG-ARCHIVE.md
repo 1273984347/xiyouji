@@ -13,6 +13,31 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W961（2026-10-26）：GSAP 写法机检挂 verify_delivery 第 50 槽 + F9 裸 ease 假阳性订正批
+
+> **来源**：用户 2026-10-26 批准「把 GSAP 写法机检挂成 verify_delivery 常驻槽」（改管控文件）·同批自查抓出体检判据假阳性。
+>
+> - **文件**：scripts/verify_delivery.py、scripts/check_gsap_motion.py、scripts/_w955_motion_audit.py、scripts/_w960_pilot_shots.py、AGENTS.md、scripts/output/_w955_motion_audit.json、docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md、docs/11-方案报告/计划方案/T28-任务计划执行与经验沉淀报告-2026-10-26.md、docs/00-导读/W批次编号对账表.md
+> **状态**：**已收官**（W961 2e1ca79a·git 反填·共 3 笔·W971 存量回填）
+
+**① 挂槽（用户批准）**：`check_gsap_motion.py` 升为**第 50 门禁「GSAP 写法」**（verify_delivery 只改两处：EXPECTED_SECTION_NAMES + _STRICT_GATES·marker 由注册表派生）。**理由**：`site/static/js/` 下自有 JS 原不在任何静态门禁扫描域内（check_motion_ban 只扫 HTML + 两份 CSS·check_js_syntax 只扫 855 个 HTML 内联脚本）⇒ 载体写坏时**全站 54 段门禁全绿**。显式豁免机制：文件内写 `gsap-motion: waive J3 J4` 可豁免写法类规则，**J2 宪法级禁词不可豁免**，豁免逐条打印不静默。连带同步 AGENTS.md §4.2 第 50 条 + gate_count 49→50 + pytest_collected 900→902。
+
+**② F9 假阳性订正**：`_w955_motion_audit.py` 裸 ease 正则无负向前查 ⇒ 命中的是数据字段名（`avg_ease` / `most_ease`）与令牌定义 ⇒ 原结论「**2 页 4 处裸 ease 违规**」**作废**；判据修好后复扫得**存量**裸 ease 49 处 / 25 页（形如 `transition: color 0.15s ease;`），按 DESIGN §5.2「禁**新增**」口径**存量不计入欠账**；连带订正 7 处表述（结论与判断未动），既有欠账由 2 条收敛为 **1 条**。
+
+**③ 试点实跑截图**：新增 `scripts/_w960_pilot_shots.py`（5 试点页 × 2 视口终态截图 + 首页入场序列分解帧）；实测 10 组全部 gsap=True、编排单元终态 opacity 最小值 = 1。
+
+**让号留痕**：W956 / W958 / W960 均被并行会话占用 ⇒ 本批让号至 **W961**。
+
+**状态**：**已收官**（挂槽 + 订正 + 截图工具；**差异化推广批待开工**——按页型差异化：入口层上 intro/fold，内容层 reader 正文暂不铺 sections）
+
+### W960（2026-10-26）：治理文档体积归档批（§8 窗口制机器化 + 常驻搬段工具 + 实跑归档）
+
+> **来源**：用户审问「我们不是有归档系统吗为什么没有进行归档」——取证结论为归档系统有条文有容器无触发器（§8 三次全人工批：W417/W511/W921），用户裁决「走」立项；本批认领于顶段 W957 之前（W958/W960 两轮让号留痕后以 W960 成型），低于现役顶段故走 backfill_changelog 补段路径（当前态版本行正确指向最高号·不回拉）。
+> **摘要**：① **check_doc_size_budget.py 新门禁**——CHANGELOG 与 file-index 正本各 110 段窗口（W921 先例沉淀为正式口径），段数为判据、KB/行数为报告值，超窗即红接 preflight 开工判据，修法唯一指向常驻工具；自测含窗口边界与缺件 fail-closed。② **archive_segments.py 常驻搬段工具**——W921 三道守恒断言沉淀为五道（A1 段数守恒 / A2 迁出块逐字节出现于归档 / A3 留存前缀与编号规则与顶段逐字节不动 / A4 双侧降序 / A5 归档 newest-at-top 序），CHANGELOG 归档插顶、file-index 归档尾追并记头部归档时间链。③ **本批实跑归档**——CHANGELOG 147→109 段（484.9→332.6 KB·迁出 38 段 W803-W842 入 CHANGELOG-ARCHIVE 顶部）、file-index 249→109 段（435.0→291.4 KB·迁出 140 段 W700-W842 入 FILE-INDEX-ARCHIVE 尾部），合计减重约 296 KB。④ **文档规范 §8 重标**——窗口制替代 50KB/500 行旧线（旧线按 W921 后实态废止），消除「条文 50KB vs 现实 480KB」的两制打架。⑤ **batch_cascade 落盘后体积提示位**——每批收官报一次四文件体积态。⑥ 顺带：pytest 收集数标记被并行会话竞态写成三数字拼接（910910902）归一回 910（磁盘实算对拍）。
+> **文件**：scripts/check_doc_size_budget.py · scripts/archive_segments.py · scripts/preflight_check.py · scripts/batch_cascade.py · docs/00-导读/文档规范.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md · CHANGELOG.md · scripts/output/file-index.md · tests/unit/test_doc_size_budget.py · tests/unit/test_archive_segments.py · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json
+> **验证**：两新工具 --self-test 全过（窗口边界 / 缺件 fail-closed / 三种段形态解析）+ 新增单测 8 例全绿；归档五道断言实跑全过（38 段与 140 段守恒·逐字节内容对拍·留存前缀逐字节不变）；pytest 全量 910 收集全绿（收集 899→910·标记三方同步）；体积门禁现网 0 FAIL（109/110 双绿）。
+> **状态**：**已收官**（W960 a6fed505 主提交 + d9d3765d 段补立·git 反填·共 2 笔·P-43-01）
+
 ### W959（2026-10-26）：T10《Playwright 历史问题全谱审计报告》V1.1 计数口径订正批
 
 > **来源**：用户 2026-10-26 审查意见——「方法论质量是 A 级，但作为审计件有一处**必须先修的硬伤**：核心计数不自洽（审计件的第一价值是可复验，数字对不上就不可复验）」。

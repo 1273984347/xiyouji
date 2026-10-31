@@ -65,7 +65,9 @@
            选型依据（实测 scripts/_w931_hero_fit.py + 容器适配对比）：左侧 46% 文字安全区墨量 0.0000（8/8 张）
            ·与首页左对齐标题区零冲突；2400×1017（2.36:1）在 1440×520 容器下垂直溢出仅 90px
            （16:9 素材溢出 290px·主体被裁没）；dots 为装饰性切换器·JS 不可用时整组隐藏 */
-        .hero-dots { display: flex; gap: 8px; margin-top: var(--space-5); }
+        /* W1074（N-08 根修②）：375 视口下 9 圆点×26px+8 间距=298px 不换行，加前置标签 61px
+   总计 359px > 父内容宽 327px——正是首页 8px 横向溢出的真源头（W1074 实测定位）。 */
+        .hero-dots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--space-5); }
         .hero-dots[hidden] { display: none; }
         .hero-dots button {
             width: 26px; height: 26px; padding: 0; cursor: pointer;
@@ -79,7 +81,11 @@
         .hero-dots button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
         /* W938：首屏左侧文字重排 —— 原布局七层平铺、字号跳跃、层级无引导；
            改为「眉题 → 标题组（中文 + 英文紧贴）→ 主张句（放大提色）→ 细线 → 数据带 → 标签 → CTA → 插画切换器」结构。 */
-        .masthead-copy { max-width: 620px; }
+        /* W1074（N-08 根修）：min-width:0 —— .masthead 为 flex 容器，本元素作为 flex 项默认
+   min-width:auto，其内 .masthead-facts 的 .mega-row（flex-shrink:0）把 min-content 撑到
+   359.28px，超出父内容宽 327px（375−24×2）⇒ 375 视口横向溢出 8px。允许收缩后由
+   .masthead-facts 的 flex-wrap 承接窄屏换行。 */
+        .masthead-copy { max-width: 620px; min-width: 0; }
         .masthead-copy .kicker { font-size: 11px; letter-spacing: .16em; margin-bottom: 14px; }
         /* W862 B1 裁决 1：kicker 落 --bg → --accent-text（落点审计 _w862_accent_text_audit.json） */
         .kicker { color: var(--accent-text); }
@@ -95,7 +101,7 @@
         .masthead-copy .meta-line { font-size: 13px; color: var(--accent-3); }
         /* W938：「100 回」数据块并入左侧文字区做横排一行（右侧整块留给插画） */
         .masthead-facts {
-            display: flex; align-items: flex-start; gap: 18px;
+            display: flex; flex-wrap: wrap; align-items: flex-start; gap: 18px;
             border-top: 1px solid var(--line); padding-top: 20px; margin: 26px 0 22px;
         }
         .masthead-facts .mega-row { display: flex; align-items: baseline; gap: 4px; flex-shrink: 0; }
@@ -111,7 +117,7 @@
         .masthead-cta > a { font-size: 15px; font-weight: 600; color: var(--accent-2); }
         .masthead-cta > a:hover { text-decoration: underline; }
         /* W938：插画切换器归位左侧文字列内（与 CTA 同排会撑破 620px 容器伸进插画区·被金箍棒压住） */
-        .hero-dots-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+        .hero-dots-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 16px; }
         .hero-dots-label { font-size: 11px; color: var(--ink-faint); letter-spacing: .12em; white-space: nowrap; flex-shrink: 0; }
 
         .ink-mountains { display: block; width: 100%; height: 100px; }
@@ -545,10 +551,10 @@
                         <button type="submit">站内搜索</button>
                     </form>
                     <div class="ask-chips" role="list">
-                        <span class="ask-chip" tabindex="0" role="button" role="listitem" data-q="孙悟空">孙悟空</span>
-                        <span class="ask-chip" tabindex="0" role="button" role="listitem" data-q="八十一难">八十一难</span>
-                        <span class="ask-chip" tabindex="0" role="button" role="listitem" data-q="紧箍咒">紧箍咒</span>
-                        <span class="ask-chip" tabindex="0" role="button" role="listitem" data-q="大闹天宫">大闹天宫</span>
+                        <span class="ask-chip" tabindex="0" role="button" data-q="孙悟空">孙悟空</span>
+                        <span class="ask-chip" tabindex="0" role="button" data-q="八十一难">八十一难</span>
+                        <span class="ask-chip" tabindex="0" role="button" data-q="紧箍咒">紧箍咒</span>
+                        <span class="ask-chip" tabindex="0" role="button" data-q="大闹天宫">大闹天宫</span>
                     </div>
                     <p class="ask-note">离线可搜（全站索引内置）· 查原著原文逐字请用 <a href="data/text-search.html">全文检索</a> · 想写「被忽略者」档案？试试 <a href="dukou-engine.html">西游·渡口写作引擎</a></p>
                 </div>
@@ -581,9 +587,9 @@
                         <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/narratology-16d-network.html">
-                        <p class="card-kicker">N · NARRATOLOGY 13D</p>
-                        <h3>叙事学十三维</h3>
-                        <p>全书叙事机制的十三维网络。</p>
+                        <p class="card-kicker">N · NARRATOLOGY 16D</p>
+                        <h3>叙事学十六维</h3>
+                        <p>全书叙事机制的十六维网络。</p>
                         <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/criticism-history.html">
@@ -730,7 +736,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">取经录</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · 并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化 · W1073 首页首屏插画深色变体与主题切换机制落地 · W1072 Skill 候选盘点与编制表角色优化方案落库 · W1071 交互修复第一批：搜索链接化与浮钮隐藏及计数归位 · W1070 交互审查第二轮复核与界面优化施工方案落库 · W1069 效率与防护打包批：环境判据与 BOM 门禁及坑表条目 · W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批 · W1067 CI action ref 根修批 + 记忆与项目沉淀同步批 · W1062 README 换图未生效根修批：换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70 · W1061 私有记忆同步批：工具禁令入必载层与环境坑入坑表 · W1060 CI 提效批：审计矩阵收敛与并发取消补齐 · W1059 复盘报告入库批十六批全景与协作主题沉淀 · W1058 计数链漂移订正与对账面扩容 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · 并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化 · W1074 交互修复二三批合并：动线可达与生产净面 · W1073 首页首屏插画深色变体与主题切换机制落地 · W1072 Skill 候选盘点与编制表角色优化方案落库 · W1071 交互修复第一批：搜索链接化与浮钮隐藏及计数归位 · W1070 交互审查第二轮复核与界面优化施工方案落库 · W1069 效率与防护打包批：环境判据与 BOM 门禁及坑表条目 · W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批 · W1067 CI action ref 根修批 + 记忆与项目沉淀同步批 · W1062 README 换图未生效根修批：换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70 · W1061 私有记忆同步批：工具禁令入必载层与环境坑入坑表 · W1060 CI 提效批：审计矩阵收敛与并发取消补齐 · W1059 复盘报告入库批十六批全景与协作主题沉淀 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>
@@ -738,7 +744,6 @@
             <a href="dashboard.html">数据看板</a>
             <a href="en/">English</a>
         
-            <a href="en/index.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
             <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
     <script src="static/js/rag-chat.js"></script>

@@ -11,13 +11,15 @@
 
 - （无）
 
-## 文件（4）
+## 文件（6）
 
 ### Python 脚本
 
 - `_w1073_baseline_shot.py`
+- `_w1073_dark_verify.py`
 - `_w1073_derive.py`
 - `_w1073_fix_band.py`
+- `_w1073_paper_normalize.py`
 - `_w1073_probe.py`
 
 ---

@@ -10,6 +10,126 @@
 
 ---
 
+## W1074 交互修复第二+三批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w1074_batches23.py | W1074 | 级联生成（六文档同步面） |
+| scripts/index.md | W1074 | 级联生成（六文档同步面） |
+| scripts/output/_vermilion_solid_cache.json | W1074 | 级联生成（stats 快照与索引） |
+| scripts/output/tools-inventory.md | W1074 | 级联生成（stats 快照与索引） |
+| site/404.html | W1074 | 本批修改（R-08 返回上一页·含单段内联脚本） |
+| site/dashboard.html | W1074 | 本批修改（N-02 fetch 移除 + drill 文案） |
+| site/data/chapter-structure-graph.html | W1074 | 本批修改（R-03 两个 vis 页入口） |
+| site/data/cross-time-danmaku.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/graph-explorer.html | W1074 | 本批修改（R-11 aria-label ×2） |
+| site/data/journey-map-interactive.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/narrative-rhythm-curve.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/search.html | W1074 | 本批修改（N-02 /datasets 在线分支移除 + 文案读者化） |
+| site/index.html | W1074 | 本批修改（N-08 根修 CSS / N-07 16D / N-09 EN 去重 / R-07 双 role / 级联页脚行） |
+| site/reader/ch001.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch002.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch003.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch004.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch005.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch006.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch007.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch008.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch009.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch010.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch011.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch012.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch013.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch014.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch015.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch016.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch017.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch018.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch019.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch020.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch021.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch022.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch023.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch024.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch025.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch026.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch027.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch028.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch029.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch030.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch031.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch032.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch033.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch034.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch035.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch036.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch037.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch038.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch039.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch040.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch041.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch042.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch043.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch044.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch045.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch046.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch047.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch048.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch049.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch050.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch051.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch052.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch053.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch054.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch055.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch056.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch057.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch058.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch059.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch060.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch061.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch062.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch063.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch064.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch065.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch066.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch067.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch068.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch069.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch070.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch071.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch072.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch073.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch074.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch075.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch076.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch077.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch078.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch079.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch080.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch081.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch082.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch083.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch084.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch085.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch086.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch087.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch088.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch089.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch090.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch091.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch092.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch093.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch094.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch095.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch096.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch097.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch098.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch099.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch100.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/index.html | W1074 | 本批修改（N-05 壳+h1+R-03 hub 行） |
+| site/reader/themes/index.html | W1074 | 本批修改（R-04 归一跳转 stub + SEO og 块） |
+
 ## W1073 D-1 首屏插画深色变体批（2026-11-01）
 
 | 文件 | W | 说明 |
@@ -4280,37 +4400,4 @@ docs/11-方案报告/README.md
 | HANDOVER.md | W963 | 同步：一、当前进度增 W963 条目 + 最后更新链前置 + 当前 HEAD |
 | CHANGELOG.md | W963 | 新增：W963 版段（四件套） |
 | scripts/output/file-index.md | W963 | 登记：W963 段（本段） |
-
-## W961 GSAP 写法机检挂槽批 + F9 假阳性订正批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/verify_delivery.py | W961 | 修改：挂第 50 门禁「GSAP 写法」（EXPECTED_SECTION_NAMES + _STRICT_GATES 两处·marker 自动派生）+ _SCOPE_CORE 恒跑 |
-| scripts/check_gsap_motion.py | W961 | 修改：加汇总行 marker + 显式豁免机制（J3/J4/J7 可豁免·J2 不可豁免·逐条打印） |
-| scripts/_w955_motion_audit.py | W961 | 修改：裸 ease 判据加负向前查（修假阳性：原命中数据字段名 `avg_ease` / `most_ease` 与令牌定义） |
-| scripts/output/_w955_motion_audit.json | W961 | 刷新：F9 复扫产物（存量裸 ease 49 处 / 25 页·按「禁新增」口径不计欠账） |
-| scripts/_w960_pilot_shots.py | W961 | 新增：试点页实跑截图工具（终态截图 + 入场序列分解帧 + 编排单元可见性 JSON） |
-| AGENTS.md | W961 | 修改：§4.2 门禁清单补第 50 条「GSAP 动效写法槽」 |
-| docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md | W961 | 修改：订正 4 处「裸 ease 欠账」表述（假阳性作废·存量不计欠账） |
-| docs/11-方案报告/计划方案/T28-任务计划执行与经验沉淀报告-2026-10-26.md | W961 | 修改：订正 2 处同款表述 |
-| docs/00-导读/W批次编号对账表.md | W961 | 登记：W961 认领行（让号留痕）+ W955 行订正 1 处 |
-| README.md · pytest.ini · 系统架构方案 ×2 | W961 | 修改：统计标记同步（gate_count 49→50·pytest_collected 900→902） |
-| HANDOVER.md | W961 | 同步：一、当前进度增 W961 条目 + 最后更新链前置 + 当前 HEAD |
-| CHANGELOG.md | W961 | 新增：W961 版段（四件套） |
-| scripts/output/file-index.md | W961 | 登记：W961 段（本段） |
-
-## W960 治理文档体积归档批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_doc_size_budget.py | W960 | 新建体积窗口门禁（CHANGELOG/file-index 各 110 段窗·超窗 preflight 判红·KB 行数为报告值） |
-| scripts/archive_segments.py | W960 | 新建常驻搬段工具（W921 守恒断言沉淀为五道·changelog 插顶与 file-index 尾追双模式） |
-| scripts/preflight_check.py | W960 | 体积窗口硬判据接线（超窗拦截开工·故障降级 WARN 禁静默） |
-| scripts/batch_cascade.py | W960 | 落盘后体积提示位（每批收官报四文件体积态） |
-| docs/00-导读/文档规范.md | W960 | §8 重标：窗口制替代 50KB/500 行旧线（两制打架消除） |
-| archive/docs/CHANGELOG-ARCHIVE.md | W960 | 迁入 38 段（W803-W842·插顶） |
-| archive/docs/file-index-ARCHIVE.md | W960 | 迁入 140 段（W700-W842·尾追+归档时间链） |
-| tests/unit/test_doc_size_budget.py | W960 | 体积门禁单测 4 例（含现网防回退锚） |
-| tests/unit/test_archive_segments.py | W960 | 搬段工具单测 4 例（三种段形态解析与负样本） |
-| pytest.ini · 系统架构方案v2 | W960 | pytest_collected 标记归一 910（并行竞态三数字拼接修复） |
 

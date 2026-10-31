@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-RsQ5dGbDNtLimkU9kQqGctotANkqyZIasfxse/tFkD4='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-TS4guFwmTQ81phP+0kFpFhpiinh+O50Y8qN5oSvog8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>详解西游记 · 全站搜索</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/search.html">
@@ -1276,13 +1276,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </div></div>
 <header class="top">
   <h1>详解西游记 · 全站搜索</h1>
-  <p>W338 数据 API 接入 · 在线跨 42 数据集递归检索（/search）· 离线 file:// 降级到内置数据集索引</p>
+  <p>全站目录检索 · 一站查研究文档与站内页面（离线可用）</p>
 </header>
 <div id="banner" class="banner">正在连接数据 API…</div>
 <div class="searchbar">
   <input id="q" type="search" placeholder="搜索关键词，如：火焰山 / 孙悟空 / 如来" aria-label="搜索">
   <button class="vt-btn" id="go">搜索</button>
-  <span class="hint">在线命中「数据集 + 片段」；离线仅按数据集名称/标题过滤。</span>
+  
 </div>
 <div id="results"></div>
 <script src="../static/js/vis-tools.js"></script>
@@ -1297,13 +1297,10 @@ function setBanner(html, offline){var b=document.getElementById("banner");b.inne
 function apiFetch(path){return fetch(path,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});}
 
 function probe(){
-  apiFetch("/datasets").then(function(list){
-    API_OK=true;
-    setBanner("已连接数据 API · 共 "+list.length+" 个数据集 · 输入关键词跨集检索。",false);
-  }).catch(function(){
-    API_OK=false;
-    setBanner("当前为离线目录检索：覆盖全部研究文档与站点页面（标题 / 分类 / 摘要匹配，取前 50 条）。",true);
-  });
+  /* W1074（N-02 根修）：/datasets 数据 API 在纯静态部署与 /xiyouji/ 子路径下不存在，
+     原 probe 每次加载必发一个注定 404 的请求——在线分支移除，恒走离线目录检索。 */
+  API_OK=false;
+  setBanner("当前为离线目录检索：覆盖全部研究文档与站点页面（标题 / 分类 / 摘要匹配，取前 50 条）。",true);
 }
 
 // P2-5 修复：drill 数据拼串转义（数据集名/路径/片段来自检索数据）

@@ -1,3 +1,15 @@
+### W1074（2026-10-31）：交互修复第二+三批（动线与可达 + 生产净面：N-02 N-03已清 N-04 N-05 N-06已清 N-07 N-08 N-09 R-03 R-04 R-07 R-08 R-11）
+
+> **来源**：用户令「剩下的这三个你直接自己做完」——施工序列第 2 批（动线与可达）+ 第 3 批（生产净面）合并实施；D-1 已由 W1073 收官。
+>
+> **第 2 批·动线与可达**：① **N-04** 100 个章回页「返回导读」出站 GitHub → `../guide.html`（×100 全量替换）。② **N-05** 阅读器目录页（622 链接）补站内壳——页头（品牌+主导航 5 链接）+ `h1`（站内阅读·全目录）+ 页脚 + skip-link，消灭 622 链接零出口死胡同。③ **R-03** 目录页补三 hub 真实入口（人物/主题/文化）+ 章回结构图谱页补两个孤儿可视化页入口（customs-pass-route / story-timeline·原全站零静态入链）。④ **R-04** 双 hub 归一——`reader/themes/index.html`（209 链旧目录）转为指向 `themes-hub.html`（211 链现役）的 noindex 跳转页（meta refresh + og 块过第 33 槽）。⑤ **N-07** 首页叙事学卡 13D→16D（kicker/标题/描述三处·对齐页内 h1「十六维叙事学关系图谱」）。⑥ **N-09** 首页页脚「English」双链接去重。⑦ **N-08 根修**——8px 横向溢出真根因=`.hero-dots` 固定 298px（9×26+8×8）+ 前置标签 61px = 359 > 327 可用宽（实证定位：mega-row/copy 均为受害者而非成因；两轮外科实验+三视口二分），修 `.hero-dots`/`.hero-dots-row` 可换行 + `.masthead-copy{min-width:0}` + `.masthead-facts` 可换行——实测 375 视口 scrollWidth 375=视口宽（原 383）、1440 无变化。
+>
+> **第 3 批·生产净面**：① **N-02 根修**——`/datasets` 数据 API 在纯静态部署与 /xiyouji/ 子路径下不存在：search.html 的 probe（每次加载必发 404 请求）在线分支移除恒走离线目录检索；dashboard.html 的同名 doomed fetch 移除直用内置 DATAHUB_INDEX；W338 横幅与「在线命中…」两处开发者文案改读者语言（实测搜索加载 /datasets 请求数 0）。② **R-07** 首页 4 个快捷词双 role 去重。③ **R-08** 404 页补「返回上一页」（单段内联脚本·CSP 哈希跟随；W572「零 JS」注释同步订正）。④ **R-11** 5 个无标签控件补 aria-label（弹幕留言/图谱选择/节点搜索/两个滑块）——EN 同名控件经实测不存在，W926「中英各 5」口径订正为「中文 5」。
+>
+> **验证**：探针 11 项全过（搜索 23/23 链接+无 /datasets 请求 / 目录壳+hub 行 / ch001 站内导读 / themes 跳转 / 404 backBtn / 双 role 0 / 16D / EN 去重 / aria / vis 入口 / 溢出清零）；lint_links 0 断链；CSP 0 漂移；stats 零差异；动态链接 0 死链；全量 verify 绿。
+>
+> **文件**：site/index.html · site/data/search.html · site/dashboard.html · site/404.html · site/reader/index.html · site/reader/themes/index.html · site/reader/ch001-100.html（×100） · site/data/chapter-structure-graph.html · site/data/graph-explorer.html · site/data/cross-time-danmaku.html · site/data/journey-map-interactive.html · site/data/narrative-rhythm-curve.html
+
 ### W1073（2026-11-01）：D-1 首屏插画深色变体批（用户 2026-10-31 裁决 B 案＝插画出深色变体·出图路线经实测修正）
 
 > **来源**：用户 2026-10-31 裁决《界面与交互优化施工方案》D-1 项——深色 masthead 采用 **B 案＝插画出深色变体**（不做浅底墨字方案）。本批 = 出图 + 切换机制 + 验收全链。
@@ -1310,7 +1322,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1073），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1074），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1813,30 +1825,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 **状态**：**已收官**（差异化推广·入口层落地；**内容层推广与 curated 专项待用户裁决范围**）
 
-
-### W961（2026-10-26）：GSAP 写法机检挂 verify_delivery 第 50 槽 + F9 裸 ease 假阳性订正批
-
-> **来源**：用户 2026-10-26 批准「把 GSAP 写法机检挂成 verify_delivery 常驻槽」（改管控文件）·同批自查抓出体检判据假阳性。
->
-> - **文件**：scripts/verify_delivery.py、scripts/check_gsap_motion.py、scripts/_w955_motion_audit.py、scripts/_w960_pilot_shots.py、AGENTS.md、scripts/output/_w955_motion_audit.json、docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md、docs/11-方案报告/计划方案/T28-任务计划执行与经验沉淀报告-2026-10-26.md、docs/00-导读/W批次编号对账表.md
-> **状态**：**已收官**（W961 2e1ca79a·git 反填·共 3 笔·W971 存量回填）
-
-**① 挂槽（用户批准）**：`check_gsap_motion.py` 升为**第 50 门禁「GSAP 写法」**（verify_delivery 只改两处：EXPECTED_SECTION_NAMES + _STRICT_GATES·marker 由注册表派生）。**理由**：`site/static/js/` 下自有 JS 原不在任何静态门禁扫描域内（check_motion_ban 只扫 HTML + 两份 CSS·check_js_syntax 只扫 855 个 HTML 内联脚本）⇒ 载体写坏时**全站 54 段门禁全绿**。显式豁免机制：文件内写 `gsap-motion: waive J3 J4` 可豁免写法类规则，**J2 宪法级禁词不可豁免**，豁免逐条打印不静默。连带同步 AGENTS.md §4.2 第 50 条 + gate_count 49→50 + pytest_collected 900→902。
-
-**② F9 假阳性订正**：`_w955_motion_audit.py` 裸 ease 正则无负向前查 ⇒ 命中的是数据字段名（`avg_ease` / `most_ease`）与令牌定义 ⇒ 原结论「**2 页 4 处裸 ease 违规**」**作废**；判据修好后复扫得**存量**裸 ease 49 处 / 25 页（形如 `transition: color 0.15s ease;`），按 DESIGN §5.2「禁**新增**」口径**存量不计入欠账**；连带订正 7 处表述（结论与判断未动），既有欠账由 2 条收敛为 **1 条**。
-
-**③ 试点实跑截图**：新增 `scripts/_w960_pilot_shots.py`（5 试点页 × 2 视口终态截图 + 首页入场序列分解帧）；实测 10 组全部 gsap=True、编排单元终态 opacity 最小值 = 1。
-
-**让号留痕**：W956 / W958 / W960 均被并行会话占用 ⇒ 本批让号至 **W961**。
-
-**状态**：**已收官**（挂槽 + 订正 + 截图工具；**差异化推广批待开工**——按页型差异化：入口层上 intro/fold，内容层 reader 正文暂不铺 sections）
-
-
-### W960（2026-10-26）：治理文档体积归档批（§8 窗口制机器化 + 常驻搬段工具 + 实跑归档）
-
-> **来源**：用户审问「我们不是有归档系统吗为什么没有进行归档」——取证结论为归档系统有条文有容器无触发器（§8 三次全人工批：W417/W511/W921），用户裁决「走」立项；本批认领于顶段 W957 之前（W958/W960 两轮让号留痕后以 W960 成型），低于现役顶段故走 backfill_changelog 补段路径（当前态版本行正确指向最高号·不回拉）。
-> **摘要**：① **check_doc_size_budget.py 新门禁**——CHANGELOG 与 file-index 正本各 110 段窗口（W921 先例沉淀为正式口径），段数为判据、KB/行数为报告值，超窗即红接 preflight 开工判据，修法唯一指向常驻工具；自测含窗口边界与缺件 fail-closed。② **archive_segments.py 常驻搬段工具**——W921 三道守恒断言沉淀为五道（A1 段数守恒 / A2 迁出块逐字节出现于归档 / A3 留存前缀与编号规则与顶段逐字节不动 / A4 双侧降序 / A5 归档 newest-at-top 序），CHANGELOG 归档插顶、file-index 归档尾追并记头部归档时间链。③ **本批实跑归档**——CHANGELOG 147→109 段（484.9→332.6 KB·迁出 38 段 W803-W842 入 CHANGELOG-ARCHIVE 顶部）、file-index 249→109 段（435.0→291.4 KB·迁出 140 段 W700-W842 入 FILE-INDEX-ARCHIVE 尾部），合计减重约 296 KB。④ **文档规范 §8 重标**——窗口制替代 50KB/500 行旧线（旧线按 W921 后实态废止），消除「条文 50KB vs 现实 480KB」的两制打架。⑤ **batch_cascade 落盘后体积提示位**——每批收官报一次四文件体积态。⑥ 顺带：pytest 收集数标记被并行会话竞态写成三数字拼接（910910902）归一回 910（磁盘实算对拍）。
-> **文件**：scripts/check_doc_size_budget.py · scripts/archive_segments.py · scripts/preflight_check.py · scripts/batch_cascade.py · docs/00-导读/文档规范.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md · CHANGELOG.md · scripts/output/file-index.md · tests/unit/test_doc_size_budget.py · tests/unit/test_archive_segments.py · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json
-> **验证**：两新工具 --self-test 全过（窗口边界 / 缺件 fail-closed / 三种段形态解析）+ 新增单测 8 例全绿；归档五道断言实跑全过（38 段与 140 段守恒·逐字节内容对拍·留存前缀逐字节不变）；pytest 全量 910 收集全绿（收集 899→910·标记三方同步）；体积门禁现网 0 FAIL（109/110 双绿）。
-> **状态**：**已收官**（W960 a6fed505 主提交 + d9d3765d 段补立·git 反填·共 2 笔·P-43-01）
 
