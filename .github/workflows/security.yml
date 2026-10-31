@@ -156,6 +156,21 @@ jobs:
               raise SystemExit(1)
           print(f"[E8 XSS] high 级别问题数：{high}，通过")
           PY
+  # W1062：SEC-002 精确化判据的负样本自证（防回退到「含 CJK 即放行」的过宽前瞻）
+  sec002-negative-self-test:
+    name: SEC-002 negative self-test (真密钥不漏检)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+
+      - name: 负样本自证（9 例·含「真密钥串里混汉字」边界）
+        run: python scripts/sec002_negative_probe.py
+
   # E8-5 品牌字面量零命中守卫（W836）
   brand-refs:
     name: Brand refs check (品牌字面量零命中)

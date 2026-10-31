@@ -84,7 +84,7 @@ def main():
     out = re.sub(r"> 当前版本 v[\d.]+（[^）]*）：W\d+ [^·]*·详细变更见",
                  "> 当前版本 %s（%s）：%s %s ·详细变更见" % (ver, date, BATCH, desc), s, count=1)
     assert out != s, "项目说明头部版本行未变化"
-    out2 = re.sub(r"(\*\*当前版本\*\*：)v[\d.]+（[^）]*）— W\d+ [^·]*",
+    out2 = re.sub(r"(\*\*当前版本\*\*：)v[\d.]+（[^）\n\r]*）— W\d+ [^\n\r·]*",
                   lambda mm: mm.group(1) + "%s（%s）— %s %s" % (ver, date, BATCH, desc), out, count=1)
     pend.append((p, out2))
 

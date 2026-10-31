@@ -49,9 +49,19 @@ def test_plan_rejects_non_descending(tmp_path):
 
 
 def test_plan_rejects_keep_ge_total(tmp_path):
+    """W1042 契约更新（并行 W1014 机制修法的单测同步）：段数恰等于 keep ⇒ **不是失败**。
+
+    病根：W1014（61ea60b5）把 `plan()` 的「段数 == keep ⇒ 断言失败」改成「未超窗 ⇒ 返回
+    (None, [])」（未超窗本就是正常状态，断言失败会让级联回窗误报 FAIL），但**配套单测
+    仍守旧契约** ⇒ W1014 收官后该用例长期红 ⇒ 全量 pytest 与 CI 阻塞。
+    ⇒ 本批把用例改为断言新契约（无迁移 = 正常态），并补 keep > total 的同族形态。
+    """
     src_p, _ = _make_tree(tmp_path, n_src=3)
-    with pytest.raises(AssertionError, match="无段可迁"):
-        ars.plan(src_p.read_text(encoding="utf-8"), ars.RE_CL_SEG, 3)
+    cut, moved_ws = ars.plan(src_p.read_text(encoding="utf-8"), ars.RE_CL_SEG, 3)
+    assert cut is None and moved_ws == [], "未超窗时应返回无迁移（cut=None·moved=[]）"
+    # 同族形态：keep 大于总段数 ⇒ 同样是无迁移（不得抛异常）
+    cut2, moved2 = ars.plan(src_p.read_text(encoding="utf-8"), ars.RE_CL_SEG, 9)
+    assert cut2 is None and moved2 == [], "keep > 总段数时应返回无迁移"
 
 
 def test_wnum_handles_all_three_forms():

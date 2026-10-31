@@ -163,7 +163,7 @@ function selectPagesToScan(scopeRels, cache, sha1Of) {
 /**
  * 页面内测量（真函数 + evaluate 传参·Node 版 playwright 对字符串表达式不自动调用·
  * W883 首跑实证「hits is not iterable」）：朱砂实底元素 → [{tag, cls, kind, area}]。
- * 口径同 _w864_accent_audit.py 与豁免登记簿 criterion。
+ * 口径同 accent_audit.py 与豁免登记簿 criterion。
  */
 function measureInPage(cfg) {
   const { accent, areaMin, borderMin } = cfg;

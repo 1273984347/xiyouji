@@ -81,9 +81,20 @@ def move(keep, apply, src_p=None, arc_p=None):
     led_before = pf.parse_ledger("\n".join(lines))
     assert led["max_w"] == led_before["max_w"] == max(kept_ws), "max W 异常"
     assert pf.duplicate_wnums(led["rows"]) == [], "正本同号多行"
-    inflight_before = [r["w"] for r in led_before["rows"] if pf.is_inflight(r["status"]) and r["touches"]]
-    inflight_after = [r["w"] for r in led["rows"] if pf.is_inflight(r["status"]) and r["touches"]]
-    assert inflight_before == inflight_after, "在途行集合变化"
+    # 只比「真在途」（有 touches 且状态非收官/停止）——已停止/让号行的 touches 是占位
+    def _real_inflight(led):
+        return [r["w"] for r in led["rows"]
+                if pf.is_inflight(r["status"])
+                and not re.search(r"已停止|让号留痕", r["status"])
+                and r["touches"]]
+    inflight_before = _real_inflight(led_before)
+    inflight_after = _real_inflight(led)
+    # A4 放宽（W997 实证）：并行会话会在扫描与落盘之间追加认领行（读-写窗口），
+    # 在途集合只许增不许减——减少才是真回归（已收官行被误迁）。
+    if inflight_before != inflight_after:
+        lost = [w for w in inflight_before if w not in inflight_after]
+        assert not lost, "在途行丢失：%s" % lost
+        print("  注：在途集合较扫描时新增（并行追加）·容忍")
     # A5 归档内迁出块 = 注记行 + 迁出行按**源文件相对顺序**逐字节一致。
     # 按号切分、不要求号升序——台账行序穿插是常态（W968 实证 52 处）；旧断言
     # moved_ws == sorted(moved_ws) 与此矛盾，迁出段物理序降序时必崩（W976 修）。

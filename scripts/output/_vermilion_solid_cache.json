@@ -2,24 +2,24 @@
  "version": 1,
  "pages": {
   "data/81-hardships-view.html": {
-   "sha1": "3354d555ca641fc77663c423b4cf33fad16ad61e",
+   "sha1": "8a391e18d2b09f80734aad8a52a76bcf50d19562",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
    }
   },
   "data/81-hardships.html": {
-   "sha1": "67afc16755ec37b23c4786ab681987938da77327",
+   "sha1": "3eadaf0eda0e26bff76f4a0b1dbb2d8a73986994",
    "counts": {
     "span.tag": 90
    }
   },
   "data/_shell.html": {
-   "sha1": "5cca954c3ebc273fd5187ba6c73383b388dd8d29",
+   "sha1": "d009db29755ca7aca1a417321b613c9c14b7dc1c",
    "counts": {}
   },
   "data/aesthetics.html": {
-   "sha1": "d383fe038714a7f477fc5f1933efcef5bf2e0a3d",
+   "sha1": "637721d1cc1728584e3c8cde9e68d504d769048f",
    "counts": {
     "div.kpi-card": 1,
     "div.color-swatch": 1,
@@ -27,13 +27,13 @@
    }
   },
   "data/ai-dialogue.html": {
-   "sha1": "89122b3356cc5633d1a215eaa14b9634a7b84eef",
+   "sha1": "670a3c5dfc263ab1da142688f0a424ff9e3d7fff",
    "counts": {
     "button": 1
    }
   },
   "data/business-model.html": {
-   "sha1": "8a2d91d9861b7df493b226ab8cd932ed5b85112a",
+   "sha1": "2f8f08f631be92ea5ed41003afbc95b9758fcd6b",
    "counts": {
     "div.kpi-card": 1,
     "div.monster-card": 1,
@@ -41,74 +41,74 @@
    }
   },
   "data/cave-estate.html": {
-   "sha1": "98c5f66976fcca5b25fad2c4d3c4118f15d58384",
+   "sha1": "5b014a88ee5fcd2aca34e557953083eeafe379aa",
    "counts": {
     "div.kpi-card": 1,
     "span.tag.king": 19
    }
   },
   "data/century-dialogue.html": {
-   "sha1": "d5d23f7ecf5d1e28b6eb00d4a9d8f2cb96d237cd",
+   "sha1": "670a5f775cbaad42305da15035de7dcd54f338b2",
    "counts": {
     "div.speech-bubble": 3
    }
   },
   "data/chapter-stats.html": {
-   "sha1": "9caf45e1175a397a36c7f922ac3bbba9f82a7761",
+   "sha1": "513ce33865fad0bf0d0600e174d371d1afb20570",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/chapter-structure-graph.html": {
-   "sha1": "50a1fa0fa6a6b660d8a71203eaf2fa5bca83b4e3",
+   "sha1": "7e4948316d305253adcb2537ecb5e088c8d245ab",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/character-appearance.html": {
-   "sha1": "455b4d3344351d0cf66ae36e455fb129bd8c1f44",
+   "sha1": "96280ef9c1c10605b6564ca2c6fe497c5418aa01",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/character-dynamic-network.html": {
-   "sha1": "b1e6fb8d4fe6324fa6bcdee3b0c3a27039a383b6",
+   "sha1": "f7738f8ff8a3a40dbbe99e200cf3ba0ee74b697b",
    "counts": {
     "div.kpi-card": 1,
     "button.stage-btn.active": 1
    }
   },
   "data/character-presence-timeline.html": {
-   "sha1": "72d2e48cce0d435dd86fcd0400d79a74a1d03f55",
+   "sha1": "1129e6cc014a0936aa0deaca7f88909a29f27b47",
    "counts": {}
   },
   "data/character-relationship-3d-view.html": {
-   "sha1": "180b4061517c61fac500c22ebf7bfee999fc2da5",
+   "sha1": "e2120d838445fd29836155c9a05b8a7618dbee13",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
    }
   },
   "data/character-relationship-3d.html": {
-   "sha1": "d5593b307d2ca3b73005bc9757505ec39d20777a",
+   "sha1": "42fdb50541837b5e593c28259cc7650c72311471",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/character-semantic-network.html": {
-   "sha1": "7b01ed8255177c2df29803ebf1287425163a3662",
+   "sha1": "527a65e62539664387fb78d765fc9551d1c9a248",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/character-sentiment-arc.html": {
-   "sha1": "212fff8a26729c5304084194cee3390576423bf4",
+   "sha1": "8d4c6d6d5d1a663007b45d0e546e812d7378f621",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/chart-design.html": {
-   "sha1": "3a5552dfadd5afd5158157e444c871cc79f0e3fa",
+   "sha1": "57a6679fb65564307cf02f221ea290834e850a33",
    "counts": {
     "div.kpi-card": 1,
     "div.domino-card": 4,
@@ -117,14 +117,14 @@
    }
   },
   "data/cognitive-psychology.html": {
-   "sha1": "59bf3330cb252d6a558c50bd22d148289398804a",
+   "sha1": "514934164304251caa79dd1d3545553ad35ac2b4",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card": 1
    }
   },
   "data/concept-device.html": {
-   "sha1": "5f0aa9ab801d923e37aef870aaf9ac988a6f40ac",
+   "sha1": "a5674e3830959ca4cdba6c199ee4f84885357970",
    "counts": {
     "button.era-btn.active": 1,
     "div.cipher-face.cipher-back": 5,
@@ -134,14 +134,14 @@
    }
   },
   "data/counterfactual.html": {
-   "sha1": "f1c1a39155bfac08421875b4bf5d625576f82864",
+   "sha1": "e33bd9ddecb87eb168b377905be29d6f50878d8e",
    "counts": {
     "div.kpi-card": 1,
     "span.badge.validity-high": 7
    }
   },
   "data/criticism-history.html": {
-   "sha1": "38dfd838d718e36a9c1c240911f8c7ab6ed3a05e",
+   "sha1": "f737dd2d257705a2aef3a88df3e6b7621515bd78",
    "counts": {
     "div.kpi-card": 1,
     "div.candidate-card.main": 1,
@@ -149,47 +149,47 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "ce88a4a4a99f05e0a338d67ac617a749e8096de0",
+   "sha1": "a1dacdff35a824c71b761ac76e72275447a2ada1",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
    }
   },
   "data/cultural-misreading.html": {
-   "sha1": "2fa0f3bdd46de396f3b9d5a7e2c154c22556d457",
+   "sha1": "6772c62a2086f77a19c7806d5cbd6117df950a79",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/customs-pass-route.html": {
-   "sha1": "8b63ac8d63cbf1da9e5efc5ba2dbd96d6930272b",
+   "sha1": "b065059626763ac5a857154f74f46923e1e290af",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/data-explorer.html": {
-   "sha1": "81d7418bcecc0626d2c8b4a7f36c0cbc9dcd600b",
+   "sha1": "91237e947c1c87a903a6389005a842e6b6d05aa6",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
    }
   },
   "data/deconstruction.html": {
-   "sha1": "29e32d031f7468d2f6e252dc9881dfb776a10fbe",
+   "sha1": "dde02e6e06c8c3eeb43523eabdcefe6c91ea451c",
    "counts": {
     "div.kpi-card": 1,
     "span.tag": 5
    }
   },
   "data/dialogue-sentiment.html": {
-   "sha1": "aa9eea2d53c912e6262703ee2628ae85a7a54295",
+   "sha1": "e5dbb93d7ec93ce7ed9009e74e886a570a4e3c4b",
    "counts": {
     "div.kpi-card": 1,
     "div.stat-card.negative": 1
    }
   },
   "data/ecology.html": {
-   "sha1": "b334fbcca859d18d6ad7098eec121d8253d69b9b",
+   "sha1": "55844c4890f74b592e4e0f8620d73d5ff70e7f55",
    "counts": {
     "div.kpi-card": 2,
     "span.damage-pill.damage-high": 9,
@@ -198,14 +198,14 @@
    }
   },
   "data/emotional-heatmap.html": {
-   "sha1": "865baa9d7b3aaf1ab2c7840bcde39a17656fe64e",
+   "sha1": "f1829419bf3afade76b1ca808448a3ea1b064a08",
    "counts": {
     "div.kpi-card": 1,
     "div.scholar-card": 1
    }
   },
   "data/ethics-consumption.html": {
-   "sha1": "d9ac5cc312a5ab8fed8f55b5ea5084a5aba8f3ae",
+   "sha1": "6701e41b2dc1c700318c1db28da71feb70b1a2a0",
    "counts": {
     "div.kpi-card": 1,
     "div.sev-badge.sev-extreme": 1,
@@ -215,18 +215,18 @@
    }
   },
   "data/famous-time-travel.html": {
-   "sha1": "e5ebe2d7cad7afeb7a3b203149a81e40396ed60f",
+   "sha1": "17c1a8796b7fe2096b9a600276fb1aef741e95c7",
    "counts": {}
   },
   "data/four-dimensional-research-network.html": {
-   "sha1": "c98ac75f13ca171bd0fab0f303c261737d69375d",
+   "sha1": "9e4f57e64d5306def2b752d9c9915da6fbdfdbeb",
    "counts": {
     "div.kpi-card": 1,
     "span.badge.cinnabar": 1
    }
   },
   "data/four-heavenly-kings-artifacts.html": {
-   "sha1": "f4576b7c6e9bf2dfdc5b0ceff1c37c7df0c8b45f",
+   "sha1": "b542617a10bcd517cc13887a610c7b121550eb5c",
    "counts": {
     "div.kpi-card": 1,
     "div.king-card": 1,
@@ -234,7 +234,7 @@
    }
   },
   "data/game-webnovel.html": {
-   "sha1": "e0690aa4b0c8650a751df542f57726950f292b3e",
+   "sha1": "d14f54355e82ff39da3ea1ca8697fce43740581b",
    "counts": {
     "div.kpi-card": 1,
     "div.cc-stat-fill": 10,
@@ -244,18 +244,18 @@
    }
   },
   "data/global-pattern.html": {
-   "sha1": "369c1fa791e89a1cc4140c089ec5596fedbb4495",
+   "sha1": "a7064f0cd3ec0d6d60e6114db172c044272ea8c9",
    "counts": {
     "div.kpi-card": 1,
     "span.p-country": 1
    }
   },
   "data/graph-explorer.html": {
-   "sha1": "40dc309efc1aa44f93f825634cfd842ebceb0f6b",
+   "sha1": "9085c3e74e0af38b2176e82597cd39eab6a0ae78",
    "counts": {}
   },
   "data/guanyin-six-roles-network.html": {
-   "sha1": "5a257fbfb6ef6ee68c7f87d0e99a74ad2bdfbac5",
+   "sha1": "854b0f34de628db61ac4a0166a95bb3c87e05d13",
    "counts": {
     "div.kpi-card": 1,
     "div.role-card": 1,
@@ -263,7 +263,7 @@
    }
   },
   "data/hardship-difficulty-heatmap.html": {
-   "sha1": "30cd4dc9cdb506b59cb94d6f724fa2c9ec60a5bf",
+   "sha1": "b89766740cf8949ffdadb25f5e3ed767c6a88940",
    "counts": {
     "div.kpi-card": 1,
     "button.dim-btn.active": 1,
@@ -271,57 +271,57 @@
    }
   },
   "data/hardship-heatmap.html": {
-   "sha1": "9edab9fc228f872f1c95ce9ce4796f8d1a074413",
+   "sha1": "56c61451a4c4def47f1bc22a252f88bd917a4135",
    "counts": {
     "div.kpi-card": 1,
     "button.stage-btn.active": 1
    }
   },
   "data/heaven-power-network.html": {
-   "sha1": "e58cda226c737868c269ca50145744b32829eb02",
+   "sha1": "9f39676a7e3f37fb7d857d043b37c95787a076c3",
    "counts": {
     "div.kpi-card": 2,
     "div.role-card.r-king": 1
    }
   },
   "data/intertextuality-network.html": {
-   "sha1": "f2d8b1939bff3aa7a49094600219e2d7d3f75233",
+   "sha1": "9974fb8960f2d069d1561b322be45d0b34e39920",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/journey-geo-3d.html": {
-   "sha1": "7ba950441402eca4f02348b1c35de06cb4d56c5d",
+   "sha1": "520183fb31eaaf7f6347dabcf9d8c6083de4880e",
    "counts": {}
   },
   "data/journey-geo-semiotics.html": {
-   "sha1": "b0bbff74dd3fe1858c02c19773f2cac458b0132d",
+   "sha1": "d4c7b337c5308d7f0a389ba8851ceee73996f575",
    "counts": {
     "article.mech-card": 1
    }
   },
   "data/journey-map-interactive.html": {
-   "sha1": "b102795f32134b677d23626cf69ba30efc861dd2",
+   "sha1": "3df14be0753efe47631a1677330b0a5d48316c41",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
    }
   },
   "data/journey-route.html": {
-   "sha1": "68ecba5bf029ac04efed13c661bbb8f44fe1ee79",
+   "sha1": "ea022fecf6f56c7f820886441a344d5634246bac",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/journey-spacetime.html": {
-   "sha1": "c7397b980b553c95590f5a927cf48d9af78aa7ea",
+   "sha1": "fde4e58690d4c66a3dfae4253db6383265d7146b",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
    }
   },
   "data/jurisprudence.html": {
-   "sha1": "a95b81e3e73afe3d3623e5577fdaf75dfe99bb0c",
+   "sha1": "e6c5ca12eabe83a2e932403e77d113bc938933d3",
    "counts": {
     "div.kpi-card": 1,
     "span.severity-pill.sev-high": 8,
@@ -329,20 +329,20 @@
    }
   },
   "data/karma-reincarnation.html": {
-   "sha1": "fcc212ef8b1856ab3300dd2f86d647f9a893301d",
+   "sha1": "74dc53ad1d416d5d15e44aafcec7da6e4eb2d283",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card.c-chusheng": 1
    }
   },
   "data/language-style-radar.html": {
-   "sha1": "848fe4000350feefaaa13a5d70ac7cb7ed1b46b7",
+   "sha1": "1a336b1dd5f1728acddfb3305f348286e7c7a375",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/linguistics.html": {
-   "sha1": "853cf6cc7201edda50aa1b0530261dfb5d90714e",
+   "sha1": "9c4d338e9d6f11a2ea49f937feeb941bbb282cfb",
    "counts": {
     "div.kpi-card": 3,
     "div.inc-card": 1,
@@ -352,7 +352,7 @@
    }
   },
   "data/magic-system.html": {
-   "sha1": "348f54ca06c4e6a60364cf90f50d18e28847a722",
+   "sha1": "caf96216000d01a98b314da0ce2dd5d5faec2252",
    "counts": {
     "div.kpi-card": 1,
     "span.intensity-bar": 1,
@@ -360,7 +360,7 @@
    }
   },
   "data/material-archaeology.html": {
-   "sha1": "255d39cafa4c992335728be63aaf17f10ca18a90",
+   "sha1": "ea5e6c977f658ec105ba01c3353c5789b8ffc759",
    "counts": {
     "div.kpi-card": 1,
     "div.artifact-card": 1,
@@ -370,14 +370,14 @@
    }
   },
   "data/mbti-evolution.html": {
-   "sha1": "212ecd98ea4ba83d763aee200827d93c36deb90f",
+   "sha1": "0a7c528c40e15f8b20300f9c1a4b06e68920af8b",
    "counts": {
     "div.kpi-card": 1,
     "button.stage-btn.active": 1
    }
   },
   "data/methodology-matrix.html": {
-   "sha1": "2350cdea011705d5e4a65e0219cbba6d40e9b5aa",
+   "sha1": "ec0c5e10c813b9711f8c1bc87c315d4e5ddb8e3a",
    "counts": {
     "div.kpi-card": 1,
     "div.quadrant-card": 1,
@@ -387,52 +387,52 @@
    }
   },
   "data/ming-political-thought-comparison.html": {
-   "sha1": "cee96a97ca876ad8da8de9acf66889386be501c6",
+   "sha1": "8b328ed51ff2e88bc4296342c09be5d0eaaf0ba9",
    "counts": {
     "a.active": 2,
     "div.kpi-card": 1
    }
   },
   "data/monster-background.html": {
-   "sha1": "d5aa1c204aeb1103798beb27003544472d7fd621",
+   "sha1": "50b715ba32f16484f10e71623efcd3319c6c826b",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/monster-capability-radar.html": {
-   "sha1": "b642e1bef55554065d80aea264da133edcdd1a74",
+   "sha1": "d0c5c393224a0a39c5482e7e6ea2506f46792c82",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/monster-ecology-network.html": {
-   "sha1": "4912611b5a8ee6ef814bc4582d21f5e03cab38cd",
+   "sha1": "8b75964292d23fe96549e58040bb1b3c11869110",
    "counts": {
     "div.kpi-card": 1,
     "button.tab-btn.active": 1
    }
   },
   "data/monster-female-network.html": {
-   "sha1": "b674e3f01cf8e40ddd3b4c54ff3ff44f2aa73afe",
+   "sha1": "be15276b09a7d4efd0041b09c606e9fe38cdf0ac",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/monster-hierarchy-network.html": {
-   "sha1": "27a1b3d6edc15041a5a623539d7f0487a685d5e2",
+   "sha1": "dc066d7267b92d8714ab2bca1f509ea7e5de7935",
    "counts": {
     "div.kpi-card": 2
    }
   },
   "data/monster-sociology.html": {
-   "sha1": "62e891c450f9f5f7be050154b407619491ef890b",
+   "sha1": "b853b15ec3c0396ba59947ed9aeb844bcfd3bcb8",
    "counts": {
     "div.kpi-card": 1,
     "div.signal-card.s-active": 3
    }
   },
   "data/monster-victims-network.html": {
-   "sha1": "0d38acf2891b4fa5a0ca1b836478a85031154ae1",
+   "sha1": "384b2ee9b010f4c6b1f46f94f76dec6af925bd3a",
    "counts": {
     "div.kpi-card": 1,
     "div.victim-card": 1,
@@ -440,7 +440,7 @@
    }
   },
   "data/music-structure.html": {
-   "sha1": "99f886556e95e0d51e11c469ea47a70e8bbd43c6",
+   "sha1": "71b58fc263e4246d71b6d0dbcc146c6131122b71",
    "counts": {
     "div.kpi-card": 1,
     "div.mv-card": 1,
@@ -449,7 +449,7 @@
    }
   },
   "data/narrative-experiment.html": {
-   "sha1": "dce5c7ed2d7ce96993a0e6877457237cfad21989",
+   "sha1": "f5e773caf5be8b14467dae2b54c5b48aa0bdfed9",
    "counts": {
     "div.kpi-card": 1,
     "div.player-card": 1,
@@ -461,26 +461,26 @@
    }
   },
   "data/narrative-rhythm-curve.html": {
-   "sha1": "7a02daa312a87b7bb3fbf931d78453345e0a2f6a",
+   "sha1": "2cc8d48e4acf4fc139271fd92f12f3c8d97899fa",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
    }
   },
   "data/narratology-12d-network.html": {
-   "sha1": "dcf8fcc5dc104c05ea2fb350289fe2f8613e0d3c",
+   "sha1": "4bdc7186386dca172a849d66a057cf6dba37f278",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/narratology-16d-network.html": {
-   "sha1": "518dca808b8eb76d08ad25daca30a643a4771f34",
+   "sha1": "b1bcc1ed9c86dea11d5464d40c8ce37eaa36d331",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/perf-canvas-rendering.html": {
-   "sha1": "e41e0282763542758d145d9999b82a7869c48dc4",
+   "sha1": "626ecc6f1bcfe047aa1c885b60609b507190023a",
    "counts": {
     "div.kpi-card": 1,
     "button": 1,
@@ -488,13 +488,13 @@
    }
   },
   "data/philosophy.html": {
-   "sha1": "a7c0d00f1f7711d82f26f10ac19b3094c94fa3e2",
+   "sha1": "2196945270eab15f96e3ebf8d37d6353ea2df7e9",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/pilgrim-team-dynamic-network.html": {
-   "sha1": "9fafe68057406bb45399436eee1a86d155773bae",
+   "sha1": "2829f17c7115c133a9fac0bfdd14e63dc2820d65",
    "counts": {
     "div.kpi-card": 1,
     "button.ctrl-btn.active": 1,
@@ -502,74 +502,74 @@
    }
   },
   "data/pilgrim-team-psychology-arc.html": {
-   "sha1": "b77f5a49715b3622b17a41f102642559cf1bd45c",
+   "sha1": "4b0773ccb1625dea5ed8c705885641daa996986c",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
    }
   },
   "data/poetry-rhythm-analysis.html": {
-   "sha1": "319a7c40c931c01ee3ad5d8decec5d583adcda73",
+   "sha1": "e60a100799c538163054f677c459e20c755d7e2d",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
    }
   },
   "data/power-resources.html": {
-   "sha1": "c186f478d8a78dfccbb1e06c4375b71605ce6438",
+   "sha1": "42a86b81c71672366dc7f18011aa84bd2ea3477c",
    "counts": {
     "div.kpi-card": 1,
     "div.faction-card": 1
    }
   },
   "data/relationships.html": {
-   "sha1": "3a6f6c7c7a7a6829bb2e85698e40a0787c5edaed",
+   "sha1": "80f584d3a67ca19f4c88846dd7d9896ea96d5030",
    "counts": {
     "div.kpi-card": 1,
     "span.role-tag.primary": 5
    }
   },
   "data/risk-project.html": {
-   "sha1": "f7e2ab96128e02c1a214b72f7c103da752dc440a",
+   "sha1": "c7846b8bb409201eafd7d5353820df0c5e9219d9",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card.c-tang": 1
    }
   },
   "data/search.html": {
-   "sha1": "7e0fd72b4edb68f8d83e55ad03a41873e669861b",
+   "sha1": "6316b418c0483906813b494169f8e576c6512461",
    "counts": {
     "button.vt-btn": 1
    }
   },
   "data/six-senses-narratology-network.html": {
-   "sha1": "802055fc3169a80bc98c63ffe8bb62d36a7f9a4f",
+   "sha1": "10fa16a64c81b6d9151a7d1448869ae9ff166505",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/social-media.html": {
-   "sha1": "80d19ab5c19650a353e08835c32ba71762cd76fc",
+   "sha1": "eed45096e3f47eb1b726b95072bd524bcfc67510",
    "counts": {
     "div.kpi-card": 1,
     "div.platform-badge": 1
    }
   },
   "data/story-timeline.html": {
-   "sha1": "4b75661f55d0930302c3b31bd15db8aff1d2588c",
+   "sha1": "b5699acf17388e983238fd17c01f0a57695fc151",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "e3678a86dc2f79e575ea5682304ad7f5d2d93607",
+   "sha1": "4d395a0c9e4c1e0d079743d2e343b147fb105fa6",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
    }
   },
   "data/text-evolution.html": {
-   "sha1": "60b2acf265151d9c8404aeabc3d702af76fdd19b",
+   "sha1": "42135cf436ed406a08e2b5d3f34c445eb0f24966",
    "counts": {
     "div.kpi-card": 1,
     "div.evo-step.first": 6,
@@ -577,32 +577,32 @@
    }
   },
   "data/text-search.html": {
-   "sha1": "463922a75fb5d5797d8049805a31317ff9d3af26",
+   "sha1": "b6c00fabd443ae0a6ea94822dfc02f8aa3dd27de",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/theological-intervention-network.html": {
-   "sha1": "beea1bf659cce8f7b374a8a6de7aadf55e1efb80",
+   "sha1": "602e21e2c92f017c58d9bdb4479faaf1c1f5f141",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/timeline.html": {
-   "sha1": "d15a2129c0fdbe42946bdfa9c9d37e6c819c14fd",
+   "sha1": "7db625e501003d3d2ff6069018488188b92a1ffe",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/underworld-power-network.html": {
-   "sha1": "00e4dffa75d26850cb844bbfb322065e5e5981c2",
+   "sha1": "31b731505f4b70016da7ec05a76384711de98555",
    "counts": {
     "div.kpi-card": 2,
     "div.role-card.r-king": 1
    }
   },
   "data/visual-art.html": {
-   "sha1": "6722c87eb54324e5187d72eb150ebffe22088fa8",
+   "sha1": "b2574940f7348c105b28a39f2aafdb5cb357c5be",
    "counts": {
     "div.kpi-card": 1,
     "div.chant-card.amp-high": 1,
@@ -613,7 +613,7 @@
    }
   },
   "data/workplace.html": {
-   "sha1": "dbba758d7cd59cdc62b79af72a0bae08b8724fc3",
+   "sha1": "190553a60017a857b9fd08491ec3cce9bafcd892",
    "counts": {
     "div.kpi-card": 1,
     "span.alert-badge": 7,
@@ -640,7 +640,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "dde73f13f5d36ca0112ba56a002fc378d45f05a1",
+   "sha1": "af2b4280e8e318dfad208f517e18f8a6494b8c5c",
    "counts": {
     "button": 1
    }
@@ -652,7 +652,7 @@
    }
   },
   "index.html": {
-   "sha1": "9defb97be5f3341e632c63a36bdfdd0a6177c941",
+   "sha1": "05316e85a6563cb92e5d231ca261c0a7dc6dcb6e",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -667,24 +667,24 @@
    "counts": {}
   },
   "en/81-hardships-view.html": {
-   "sha1": "2ac69fd08f84c745fe798cb2d5e10d4a31054b5f",
+   "sha1": "96e65792380617a2926bf2d704cfa6b8f8f0ca79",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
    }
   },
   "en/81-hardships.html": {
-   "sha1": "7b0524674e64297bbdb24e6045174f6d3d92098e",
+   "sha1": "a9740aadf41876d0a2a173f3eaace641643b8db6",
    "counts": {
     "span.tag": 91
    }
   },
   "en/academic-papers.html": {
-   "sha1": "d5c8a8b635baf1572d85330f203ceff470b05d9f",
+   "sha1": "90f971f5d77b5342501e2626bd840aee0d756d21",
    "counts": {}
   },
   "en/aesthetics.html": {
-   "sha1": "53a332216bfc1084ca4f5070ef82dcd52abb0532",
+   "sha1": "902ebbd985b08cdfbee5c26fa4916f5a6a2ed475",
    "counts": {
     "div.kpi-card": 1,
     "div.color-swatch": 1,
@@ -693,18 +693,18 @@
    }
   },
   "en/ai-dialogue.html": {
-   "sha1": "06143b389b435842d3247b00a74f97ff4fa5e945",
+   "sha1": "7348207c182351ee33b364e11f79763d2a2e49bf",
    "counts": {
     "button": 1,
     "span.step-num": 4
    }
   },
   "en/bestiary.html": {
-   "sha1": "872088ee3299d41b11f551ad28c569f6baa4f571",
+   "sha1": "f63dc0aeb3240498294e5b6029e7db2952f43a50",
    "counts": {}
   },
   "en/business-model.html": {
-   "sha1": "14f628c3c619508bb2a3c4c6b5bfacb1ca03b7cf",
+   "sha1": "9f484a5860c50dd3a5872d6f28a1b6fe5059e6d0",
    "counts": {
     "div.kpi-card": 1,
     "div.monster-card": 1,
@@ -712,102 +712,102 @@
    }
   },
   "en/cave-estate.html": {
-   "sha1": "49318e35429f4afe6d141412fa037aafc76a325e",
+   "sha1": "60736e014ca1f374abeb0caf25cdd6bc44e0cf3d",
    "counts": {
     "div.kpi-card": 1,
     "span.tag.king": 19
    }
   },
   "en/century-dialogue.html": {
-   "sha1": "27877f1fd9be7b5f2b7e7955e3bd2fffe1dcb541",
+   "sha1": "ccfbca4d2fa2ff674e95de6401116530d923d8e6",
    "counts": {
     "div.speech-bubble": 3
    }
   },
   "en/chapter-stats.html": {
-   "sha1": "4bcdcdbbb1baa6f4b54b09cc90b78ef79a8affed",
+   "sha1": "895fdb71aca4548f3dcf75175ef811bb35617e75",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/chapter-structure-graph.html": {
-   "sha1": "345322f0a1acc0751d86ee04c307a9ff36c150c4",
+   "sha1": "09cf59a2f198ceae424d29a1d504c35c10cf8e1b",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/chapters-map.html": {
-   "sha1": "c6affbdbeb59f6f9e34c4d6f37f7b35b5a628673",
+   "sha1": "6de4f67deafd76e7091bbaa48fac679b58f42e75",
    "counts": {}
   },
   "en/character-appearance.html": {
-   "sha1": "f46938293719f75ddce41a94927918e0ce3987d1",
+   "sha1": "321eb24b2675aa7be8f1ac10243d99b8a6a36ab3",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/character-bailongma.html": {
-   "sha1": "2643ae0c63c7d3b8c41822ee2d84ca9b24f59216",
+   "sha1": "d31b8fd0f1f28e131b3989119d66ac505fd33168",
    "counts": {}
   },
   "en/character-bajie.html": {
-   "sha1": "2500a89b1c82c9a2e8efb08403defeec687f81e4",
+   "sha1": "02248a0960c79a1cc5daaa94aa295ffc151b24ea",
    "counts": {}
   },
   "en/character-dynamic-network.html": {
-   "sha1": "b81ace3f1574ac460f1a45ab371ee6c01e93446a",
+   "sha1": "9849aded188e874214e9d2c0cda4b55aaf089115",
    "counts": {
     "div.kpi-card": 1,
     "button.stage-btn.active": 1
    }
   },
   "en/character-presence-timeline.html": {
-   "sha1": "ea068ce77c56e672566054b98d6cbffacda3a60f",
+   "sha1": "ee1feeca85f90329a43b59126bd0be4614e2bca7",
    "counts": {}
   },
   "en/character-relationship-3d-view.html": {
-   "sha1": "26e2435da88524adfba401cf509e2d733fd23601",
+   "sha1": "90e47c8ebdc05efe0eef0e20ee06026f0e4a4e02",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
    }
   },
   "en/character-relationship-3d.html": {
-   "sha1": "3e470d47eabe22bddc3d3d020a85d798b1dc2b64",
+   "sha1": "47a984f757dbdd44db1e9a73bce071315ff34d87",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/character-semantic-network.html": {
-   "sha1": "4c9297b44091c0f44db9985c2e49a6bb945cb31f",
+   "sha1": "2a85d30fa5163694ef6c7133ada69d1f7c2e5849",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/character-sentiment-arc.html": {
-   "sha1": "3e28b383e80b679a22734a764b596df5e71875f2",
+   "sha1": "1ad8668956ee3ef90c2b6e8a2c059bf5233be456",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/character-shaseng.html": {
-   "sha1": "8e5e1eaae3d0e6440933e21c6e304b69bc302029",
+   "sha1": "def2ce256dfad95b6684d09c6761f40915e0dc14",
    "counts": {}
   },
   "en/character-tangseng.html": {
-   "sha1": "a46332ac8a8f5d995f805c7f5c7375a905d79ec0",
+   "sha1": "00001b046ade61414e1ddd3e53c9cbe21589431a",
    "counts": {}
   },
   "en/character-wukong.html": {
-   "sha1": "4344776936d8afce88b8d48ab8f120ee3f211cad",
+   "sha1": "718f30532596d40a73ef525d73f96e783384cdec",
    "counts": {}
   },
   "en/characters.html": {
-   "sha1": "2c1318b52dee598f1921a7c9505f56abba6097ea",
+   "sha1": "7bc01a9ad6481aecfeec40d32d99f149acd3d36c",
    "counts": {}
   },
   "en/chart-design.html": {
-   "sha1": "78efc5dd9e9c2774b6c0650ed29b1c5251c4d95b",
+   "sha1": "eda457619d1ffca4247f6d476a41d5554ff68417",
    "counts": {
     "div.kpi-card": 1,
     "div.domino-card": 4,
@@ -816,14 +816,14 @@
    }
   },
   "en/cognitive-psychology.html": {
-   "sha1": "cdc331a410667e5f73dbecc2b4fb765cced11dd1",
+   "sha1": "498a19ed135d9e617c50bfdc1657fd5c7479457c",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card": 1
    }
   },
   "en/concept-device.html": {
-   "sha1": "34999cd2d0a90b17686b583c5857bf3225889341",
+   "sha1": "07f7d535286550cff193eb54760c0b97638906a1",
    "counts": {
     "button.era-btn.active": 1,
     "div.cipher-face.cipher-back": 5,
@@ -833,14 +833,14 @@
    }
   },
   "en/counterfactual.html": {
-   "sha1": "3fdd9b2c4860c8b2a9763036d4c95f5974f236db",
+   "sha1": "52d9a1370b3711ebd39b4ac512f13ab2417217aa",
    "counts": {
     "div.kpi-card": 1,
     "span.badge.validity-high": 7
    }
   },
   "en/criticism-history.html": {
-   "sha1": "34abf5a87918e8309e82a81e670fb98c8d985f30",
+   "sha1": "75bc5fb27212dd6bb0a930303211429e06398830",
    "counts": {
     "div.kpi-card": 1,
     "div.candidate-card.main": 1,
@@ -848,57 +848,57 @@
    }
   },
   "en/cross-time-danmaku.html": {
-   "sha1": "3d84cd51b2040c30c1f6b277f2c4a7185e92bb0d",
+   "sha1": "6153ca1d72fe21d0f77b2dfdf4fc4b3e85d99ada",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
    }
   },
   "en/cultural-misreading.html": {
-   "sha1": "26808756428fe4d763e1107b862c82a251b44aa1",
+   "sha1": "5b18d4e95c8f2c44efd69b1ec49f19a17d21b3a2",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/customs-pass-route.html": {
-   "sha1": "e4ffed040d2c39b98ede311b970e324a447bf1f2",
+   "sha1": "ae6c384a8aca1fb67093d18bcdea2c3ca8f63cb6",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/dashboard.html": {
-   "sha1": "65da3c57676f5af1f984c25040a86aad31f33f13",
+   "sha1": "228426af900ef421fabb0e5468dad0e248e45877",
    "counts": {}
   },
   "en/data-explorer.html": {
-   "sha1": "2c6693c023d4c7e6e8cf9c9d435fb24246890b68",
+   "sha1": "3bd6c19cbcd1be4c583b138a6cd15d93f4c2b036",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
    }
   },
   "en/deconstruction.html": {
-   "sha1": "5fd32e4fd97d16e8e779b1a5bbc1e2ca9abdf27e",
+   "sha1": "2810c7c3683b24208b89a20b8c220830bf09512d",
    "counts": {
     "div.kpi-card": 1,
     "span.tag": 5
    }
   },
   "en/dialogue-sentiment.html": {
-   "sha1": "e47b638895b2d8062fddda4b9773d88f18a6ab1f",
+   "sha1": "77037951fea94df4e939ff9a06cd908d89f3a62c",
    "counts": {
     "div.kpi-card": 1,
     "div.stat-card.negative": 1
    }
   },
   "en/dukou-engine.html": {
-   "sha1": "2026927b52007a25bd90de047ea3c8f982e9213a",
+   "sha1": "3489937d1abf4eafea80f2236270c30094ec4bb3",
    "counts": {
     "button": 1
    }
   },
   "en/ecology.html": {
-   "sha1": "9c00eab99000a06fb85faeafb0ca412365bb20de",
+   "sha1": "d3186e16739577a27ddbfc3b272913a6ca550f3b",
    "counts": {
     "div.kpi-card": 2,
     "span.damage-pill.damage-high": 9,
@@ -907,158 +907,158 @@
    }
   },
   "en/emotional-heatmap.html": {
-   "sha1": "9632d6f3a69030b3114aba73cdb85c1e907373b9",
+   "sha1": "6a3f692460006082581ee25369d3a188f895a050",
    "counts": {
     "div.kpi-card": 1,
     "div.scholar-card": 1
    }
   },
   "en/essay-ai-era.html": {
-   "sha1": "c6ab4b7852c42b13bc78f9a19e5cb0cc743a1de7",
+   "sha1": "4e19e21326db180d5290937558d10e774785f4e5",
    "counts": {}
   },
   "en/essay-buddhist-chan.html": {
-   "sha1": "24e43b846f1e9987acb08b169bee9abcead41975",
+   "sha1": "a1fc224964971b2bde71cca6b13aa31ec71a61c4",
    "counts": {}
   },
   "en/essay-chapter-couplets.html": {
-   "sha1": "ef4e86e7f2dcf14db068ebc2b15bc94bee1be056",
+   "sha1": "3b8a162feeceb02d674b6d7cd91bad2830da598f",
    "counts": {}
   },
   "en/essay-character-fu.html": {
-   "sha1": "389a1e7f296912fb44a77ca099d1f791cb34a0fd",
+   "sha1": "303d0ad9551aa0032b6d5c64b2efcd06036b1ade",
    "counts": {}
   },
   "en/essay-cipai-linjiangxian.html": {
-   "sha1": "4b7e2b0cfc5ba6b207302ba7f5deaceb00656602",
+   "sha1": "8709c9b70a85b6e2ceff346d88e8d1408334ce91",
    "counts": {}
   },
   "en/essay-cipai-mantingfang.html": {
-   "sha1": "95ecf9a0d7dea0a47b5cdf386568cb432458695b",
+   "sha1": "3ccb639642b4ca05d8947a222064c74fbcaf4a00",
    "counts": {}
   },
   "en/essay-cipai-shuidiaogetou.html": {
-   "sha1": "83abdef1d516fa2010430049e36acc57d55b4f67",
+   "sha1": "cba4e7c6c9c0f36ca324c69c34ccc8b82ba70f9a",
    "counts": {}
   },
   "en/essay-cipai-xijiangyue.html": {
-   "sha1": "9fc9b7f2f9277048490392ccfd1a5085654e4a7c",
+   "sha1": "386ba88a178b62fb06cfc26dea23dd817810a5b7",
    "counts": {}
   },
   "en/essay-composition-origins.html": {
-   "sha1": "ba67b320c103563f879f5eb2fe453b1e2c1054bf",
+   "sha1": "861fe0a4870f2834916ad78615b4e317c7de5ece",
    "counts": {}
   },
   "en/essay-divine-bureaucracy.html": {
-   "sha1": "716ee3c2a97e21d18a2e84a3b87d9820f4e34779",
+   "sha1": "7048a708ad3d7d34642a18ed2eac6c3c32de4dca",
    "counts": {}
   },
   "en/essay-folk-belief.html": {
-   "sha1": "2e0aaf1061255091d63024122c0061c40704994b",
+   "sha1": "db22802cb71b7059e2b23194fa82705b1b5c1779",
    "counts": {}
   },
   "en/essay-historical-xuanzang.html": {
-   "sha1": "b7185501bdba037ad441c49cb279e111fced447f",
+   "sha1": "5504766caaf9f1967a592473631eb8ad4f73c16f",
    "counts": {}
   },
   "en/essay-information-cocoon.html": {
-   "sha1": "ca16818b0394db1b94709a9e93ff56023d37abf0",
+   "sha1": "d0c89c4db313c08205c7cd4ca42055f83c0d026d",
    "counts": {}
   },
   "en/essay-ming-economy.html": {
-   "sha1": "2a701aac7f0c6d37ed57d5f5d841388d87fac78c",
+   "sha1": "087ea9d5f6769e03e6fb301a526e73eecaa79d10",
    "counts": {}
   },
   "en/essay-ming-examination.html": {
-   "sha1": "f23457611c5bcd333c96d627fbbcada1b125ab28",
+   "sha1": "f6f2845d7ad95810f2199338fde10dc2165f261a",
    "counts": {}
   },
   "en/essay-ming-garrison.html": {
-   "sha1": "67d683af5adee019c2c4a7a176f71222ce78ce1f",
+   "sha1": "c6c6af984135f63616f4ae37d8460871700c4bbe",
    "counts": {}
   },
   "en/essay-ming-intellectual-history.html": {
-   "sha1": "2105cbf59e92e3a4a6baca48be3725b49ff1ffa4",
+   "sha1": "860b6e65377478d65961a5a930c2cc950c81f072",
    "counts": {}
   },
   "en/essay-ming-judiciary.html": {
-   "sha1": "3d66fbf7355f2a7176a872c0b8d44fd4e202a68e",
+   "sha1": "2276a5dc5395b9e9be935895e37e8570ffd7eae7",
    "counts": {}
   },
   "en/essay-ming-literary-thought.html": {
-   "sha1": "b4837182565c3df560b4dd43aa585999c87e6db3",
+   "sha1": "82a1f4aa2ba37fd884be14775dec7159a7db9c8c",
    "counts": {}
   },
   "en/essay-ming-maritime-ban.html": {
-   "sha1": "5d3d6ed8a14f7ff17541b58de51dfc4819cc33e4",
+   "sha1": "04166f9de24d06acefc8da0e182ba86fbc244f77",
    "counts": {}
   },
   "en/essay-ming-metaphor.html": {
-   "sha1": "ffb50391378a1b5bc253b7a5888d0d9a82a72b12",
+   "sha1": "b2340e3dc6cb8cd59ceed3086b3a7dbb7f16dc0f",
    "counts": {}
   },
   "en/essay-ming-military.html": {
-   "sha1": "c72c0a410aa807d64b8766d20a3eded55d42f5f6",
+   "sha1": "f9fc376a07cb1593559ec4e8e2a6c78bf173dc31",
    "counts": {}
   },
   "en/essay-ming-politics.html": {
-   "sha1": "2cc894ed50ed1964107dc80efe9800fdadcd831a",
+   "sha1": "b678d75d3752c81fc3fc7672647cb830e3b17919",
    "counts": {}
   },
   "en/essay-ming-religion.html": {
-   "sha1": "10d3dd7d4cae76cb276881f31c4f251790656186",
+   "sha1": "aab6c95119cc419a4db7403dcaf3950b52aae058",
    "counts": {}
   },
   "en/essay-ming-social-customs.html": {
-   "sha1": "01db2910eebd898eb7c7affaf6345b45f7c45704",
+   "sha1": "aa62d5e8cd517990ed7ea37c72634c0e00f0344e",
    "counts": {}
   },
   "en/essay-modern-management.html": {
-   "sha1": "6901e73850ac4d1f0807ba44abd63d5467134f0d",
+   "sha1": "aa848091512ae167d327380096d1572460e1c8d9",
    "counts": {}
   },
   "en/essay-original-poetry.html": {
-   "sha1": "e30c8dd2901556f29cbcbe7aa2db2cff531a7cab",
+   "sha1": "106286cb5033ad9a45b57b5fec8462ffbefa881f",
    "counts": {}
   },
   "en/essay-poetry-imagery.html": {
-   "sha1": "c4a4c17cf9ab95e0fb1592388d7d8520cef9ed85",
+   "sha1": "30755eacfb9c87ab935e7e183deb33aace16da3c",
    "counts": {}
   },
   "en/essay-poetry-opening.html": {
-   "sha1": "98763f88dbe62f2910c45532de808213116f6f3f",
+   "sha1": "5bcbd1d3d1bbfdd8f509bb62a96225562377c81c",
    "counts": {}
   },
   "en/essay-quanzhen-daoism.html": {
-   "sha1": "9a1a9f9d8416374c9e2f694105e2ebc0b5b2f70d",
+   "sha1": "578007f514ce121126ed908d87d2a2c3c8b30769",
    "counts": {}
   },
   "en/essay-rhythm-analysis.html": {
-   "sha1": "93e3a4206db1f6e6b78448ad685bf26457fd1729",
+   "sha1": "65c3d230361ccdbfb883a7a11c5bebc54c571779",
    "counts": {}
   },
   "en/essay-scenery-poems.html": {
-   "sha1": "a13c6d0ea738c918dcb71f100d81b92eebaf7ece",
+   "sha1": "f9b3a85b9eb55cd7b3b6e469b7580e824ea76c97",
    "counts": {}
   },
   "en/essay-thematic-poetry.html": {
-   "sha1": "0c8dafd4c5cb073133147c3898a9e5ee2c6de932",
+   "sha1": "ac539f6acf9c01ddcd7f3bfbffc68fc4864ddb48",
    "counts": {}
   },
   "en/essay-three-teachings.html": {
-   "sha1": "c4946be4e046d0ca25600eea0c4c5dd76f90699f",
+   "sha1": "209431a67a5256fa482adf686dd84fb317a8f005",
    "counts": {}
   },
   "en/essay-version-evolution.html": {
-   "sha1": "c03be651aafbcea0647cd85a13a990b3121f244b",
+   "sha1": "445492be77ac9483bf0d11e1b3d9068995a2bbcf",
    "counts": {}
   },
   "en/essay-zen-koan-vs-neidan.html": {
-   "sha1": "4c46f5d229c355d91fc0904421f9a321a503bc3e",
+   "sha1": "ed0433f423636cdbbf630f97bb0c23ea2fdc4f33",
    "counts": {}
   },
   "en/ethics-consumption.html": {
-   "sha1": "a8d25225382b2803c59523d3c4047a495e55e836",
+   "sha1": "dd46275a98e6c87db6b563e9f97f020205234589",
    "counts": {
     "div.kpi-card": 1,
     "div.sev-badge.sev-extreme": 1,
@@ -1068,18 +1068,18 @@
    }
   },
   "en/famous-time-travel.html": {
-   "sha1": "026aaa0d31c015ee274b7e78e64d7e8f0019b9af",
+   "sha1": "6d598b9ebd63925f2c30c94d65308cc2844f7ac9",
    "counts": {}
   },
   "en/four-dimensional-research-network.html": {
-   "sha1": "784bcb04df499da81d27aed324302d360e336d19",
+   "sha1": "b76fb89ddbb83518f58106d0fe139f66cf9a6a64",
    "counts": {
     "div.kpi-card": 1,
     "span.badge.cinnabar": 1
    }
   },
   "en/four-heavenly-kings-artifacts.html": {
-   "sha1": "75c657e62934593ae478225e26c7f9336e1011b9",
+   "sha1": "967db389ef39c94844997dbe3b4789f6d75193d0",
    "counts": {
     "div.kpi-card": 1,
     "div.king-card": 1,
@@ -1087,7 +1087,7 @@
    }
   },
   "en/game-webnovel.html": {
-   "sha1": "6a2ef40259c58cc037a34615a9a3b629392cf4b3",
+   "sha1": "2e734b12bf06e4cd5ac01c465c52239a421e2d3f",
    "counts": {
     "div.kpi-card": 1,
     "div.cc-stat-fill": 10,
@@ -1097,18 +1097,18 @@
    }
   },
   "en/global-pattern.html": {
-   "sha1": "4507f0dab496e2e85414f7e2742cf6090e19b73e",
+   "sha1": "025b56e15a86b87a0993b3918b07e2d355662124",
    "counts": {
     "div.kpi-card": 1,
     "span.p-country": 1
    }
   },
   "en/graph-explorer.html": {
-   "sha1": "6752e89d19a399044a9cc67bd21fe80190d6f3cb",
+   "sha1": "736df90d22e5b987178b20059ae73501432378d9",
    "counts": {}
   },
   "en/guanyin-six-roles-network.html": {
-   "sha1": "86788f9881796f9ca62df140fa4d94aee580364d",
+   "sha1": "086e8d16055253a1df18a0cd5cafe5b99c127758",
    "counts": {
     "div.kpi-card": 1,
     "div.role-card": 1,
@@ -1116,70 +1116,70 @@
    }
   },
   "en/guide.html": {
-   "sha1": "e056fb6a0d67772fc6bbe9cf8ca614d9f86524f5",
+   "sha1": "ee2e62cc1f15da68ee5cbadd08e55fd722a66059",
    "counts": {
     "a.primary": 1
    }
   },
   "en/hardship-difficulty-heatmap.html": {
-   "sha1": "9d697c4c38820f487a8a50c15ceacf7f7a7f8b68",
+   "sha1": "70d956724a02b862d60ddfa32639a07735248b36",
    "counts": {
     "div.kpi-card": 1,
     "button.dim-btn.active": 1
    }
   },
   "en/hardship-heatmap.html": {
-   "sha1": "0fd1a8d8c7bd35a0bb492600d6d860339ceeb701",
+   "sha1": "5c265097c0de071b8d3e0fa7c92d2ff2160b1201",
    "counts": {
     "div.kpi-card": 1,
     "button.stage-btn.active": 1
    }
   },
   "en/heaven-power-network.html": {
-   "sha1": "ec48831191475a0c858437ce61842d35c69474d2",
+   "sha1": "072744ae6052863e185069e0c4ac5c5721c2a81d",
    "counts": {
     "div.kpi-card": 2,
     "div.role-card.r-king": 1
    }
   },
   "en/index.html": {
-   "sha1": "a7d5aa1503b5ce71ee78137deefd2b6731a9ad45",
+   "sha1": "a4afe6c18a1e18dd09d62a3a6aa112c147eb5163",
    "counts": {}
   },
   "en/intertextuality-network.html": {
-   "sha1": "7e5cbaab7fa82ea1ea2ee4f04ade0e6d9a662de2",
+   "sha1": "f2110a685e9017e3b94829023abf1d091bc0f0ec",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/journey-geo-semiotics.html": {
-   "sha1": "b4cd54d514bf4f1df28d669d6afa292557de67c2",
+   "sha1": "78589618bb19e064e62f8bd94c83281baa1bb4c1",
    "counts": {
     "article.mech-card": 1
    }
   },
   "en/journey-map-interactive.html": {
-   "sha1": "88bfa686262b6d3241c829712eaf07517df04508",
+   "sha1": "38811641e39a97fc9245c56945bc48a5f1bca004",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
    }
   },
   "en/journey-route.html": {
-   "sha1": "b8c6370cdcac040b84b2ce472edf4210494f7f9f",
+   "sha1": "f15235d0e118f3cfa6762466bd82bb76dbc1e76b",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/journey-spacetime.html": {
-   "sha1": "5c09a10621bd1518de612f98d981353080ac3da8",
+   "sha1": "3935af112b8b7e32eaf013ee6f94cdb296a15b1f",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
    }
   },
   "en/jurisprudence.html": {
-   "sha1": "adc78f76dcffa2fb2922a5765090ddb63cf2aa66",
+   "sha1": "3a902fc851b6186703a321ece2d16f0a7192f0b9",
    "counts": {
     "div.kpi-card": 1,
     "span.severity-pill.sev-high": 8,
@@ -1187,20 +1187,20 @@
    }
   },
   "en/karma-reincarnation.html": {
-   "sha1": "c02cd7524e2772caf66089c8d5a1f97cb43f71dd",
+   "sha1": "847dff8c3869b47c9a109d2119c378e20c0dd446",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card.c-chusheng": 1
    }
   },
   "en/language-style-radar.html": {
-   "sha1": "1c7272907d53cef4ae99e73c60ce8b3580d3b91d",
+   "sha1": "0f55a84c866c3c368d2efe83561dd9a0f5814358",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/linguistics.html": {
-   "sha1": "c4f4fd62f3cd668c5a4f7fd442442c70f2b7535a",
+   "sha1": "0ac017211e42d524b395cc39a22d258f96cb292d",
    "counts": {
     "div.kpi-card": 3,
     "div.inc-card": 1,
@@ -1210,7 +1210,7 @@
    }
   },
   "en/magic-system.html": {
-   "sha1": "731b026d83992b4faee711874457d6808c4f5b34",
+   "sha1": "96c0a9a94b4c5ee543f7e0e79d3452b6aa5b20a6",
    "counts": {
     "div.kpi-card": 1,
     "span.intensity-bar": 1,
@@ -1218,7 +1218,7 @@
    }
   },
   "en/material-archaeology.html": {
-   "sha1": "b5596165d38ec5250db3c9f1b65d17b594beb2e7",
+   "sha1": "9cdc2073a6701842df80eb7e2ebb7e03803d1cc5",
    "counts": {
     "div.kpi-card": 1,
     "div.artifact-card": 8,
@@ -1228,14 +1228,14 @@
    }
   },
   "en/mbti-evolution.html": {
-   "sha1": "de3bbb0d25d3b60c4af972a6d78942f06a6d0efa",
+   "sha1": "c8b007e0702b9ee112c50e793bd7241f26732a20",
    "counts": {
     "div.kpi-card": 1,
     "button.stage-btn.active": 1
    }
   },
   "en/methodology-matrix.html": {
-   "sha1": "c5b4dacaafc7f3f7d84d331456e33d1b17255cca",
+   "sha1": "ef4ca6eea0a7349f24245624d3ec04356664e924",
    "counts": {
     "div.kpi-card": 1,
     "div.quadrant-card": 1,
@@ -1245,56 +1245,56 @@
    }
   },
   "en/methodology.html": {
-   "sha1": "dc7fa849c426e6482ca9bd46184d617fab48d473",
+   "sha1": "a060e287e121740d68a12c82973900a7a0081521",
    "counts": {}
   },
   "en/ming-political-thought-comparison.html": {
-   "sha1": "18e4278b0e605cde3b485a74e48f3b1547ad7b57",
+   "sha1": "48eca5051112eb462c2b23e0790d326d78b0e0ce",
    "counts": {
     "a.active": 2,
     "div.kpi-card": 1
    }
   },
   "en/monster-background.html": {
-   "sha1": "7418e1af73ed953baf2f8b72af1ca6f0dd746bf4",
+   "sha1": "958f138e38cb0248d41bd6ead817a074d7f04a0c",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/monster-capability-radar.html": {
-   "sha1": "b5c1cc1dd313e38c56d2528e09722f9a9571f3a6",
+   "sha1": "49ef85e04c31632e70fb891960e26246a19cd575",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/monster-ecology-network.html": {
-   "sha1": "41d15c9233f021ef2def5e3fd808a528bfdd0c4e",
+   "sha1": "8af81928fd1078f7fec7d8a966504f35327bc0f3",
    "counts": {
     "div.kpi-card": 1,
     "button.tab-btn.active": 1
    }
   },
   "en/monster-female-network.html": {
-   "sha1": "9a486e803bd887cc71bb62df5e831577fcb2f563",
+   "sha1": "64318a972b3954316e1c409bf07eaa4888297f4b",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/monster-hierarchy-network.html": {
-   "sha1": "3ce5cd5de7ac822c84726248198cb681c463f9e3",
+   "sha1": "0a321791090e32819879d31b108bd0e9b099b114",
    "counts": {
     "div.kpi-card": 2
    }
   },
   "en/monster-sociology.html": {
-   "sha1": "4488e514a3c8a4b15e8590ec7bb1d4b4380371f6",
+   "sha1": "70c4f1a7b214a0848af82ed0edf8dd8c38f27bdd",
    "counts": {
     "div.kpi-card": 1,
     "div.signal-card.s-active": 3
    }
   },
   "en/monster-victims-network.html": {
-   "sha1": "e60302488db1992a7a48b35b3b7df971d8df3cc1",
+   "sha1": "019f82f971415afdabb6dd5c5287486b7bd72039",
    "counts": {
     "div.kpi-card": 1,
     "div.victim-card": 1,
@@ -1302,7 +1302,7 @@
    }
   },
   "en/music-structure.html": {
-   "sha1": "088ba3c7b72c5223246c5bcb2f7a6e33e6051b5e",
+   "sha1": "fc6a46535d5e189908e3575f3c82c9c9bb77fccd",
    "counts": {
     "div.kpi-card": 1,
     "div.mv-card": 1,
@@ -1311,7 +1311,7 @@
    }
   },
   "en/narrative-experiment.html": {
-   "sha1": "2317fd57a0819cffab3409770c7630e64ed1ab18",
+   "sha1": "eafa0f664af6adf7b0a9124935e049144837f286",
    "counts": {
     "div.kpi-card": 1,
     "div.player-card": 1,
@@ -1323,26 +1323,26 @@
    }
   },
   "en/narrative-rhythm-curve.html": {
-   "sha1": "67bd2deb3b55d79b47c30a867e9357407efd984e",
+   "sha1": "c153db52d461908bb09f03132c2bb31fd895e272",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
    }
   },
   "en/narratology-12d-network.html": {
-   "sha1": "c80636b40fd3b5955a3557100ac2f9288ae7ff1e",
+   "sha1": "074e65fcc32d3c72558ad90ba7cf67bc7eeeec25",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/narratology-16d-network.html": {
-   "sha1": "a824c77c2eddc03ebc448071a42ab599da6332bd",
+   "sha1": "90758a8a54ebe84ceff6be0f5e4dbd180fe71a7f",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/perf-canvas-rendering.html": {
-   "sha1": "217b57e51b510dce50e7370c712bc0891e4d5776",
+   "sha1": "2ba97996097cc217430da2b1ecabac09bcf97610",
    "counts": {
     "div.kpi-card": 1,
     "button": 1,
@@ -1350,13 +1350,13 @@
    }
   },
   "en/philosophy.html": {
-   "sha1": "77419239c69f0ff5403fec9b50a761e1bcbb2e60",
+   "sha1": "a764de79f9e2c3ca27d682b8e2924b0d8659bec7",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/pilgrim-team-dynamic-network.html": {
-   "sha1": "a22f7ddd53cd900df54062948ad1d7415488d802",
+   "sha1": "c2dee9dc0e7ff4f80c90c397ef48d68324f43cc3",
    "counts": {
     "div.kpi-card": 1,
     "button.ctrl-btn.active": 1,
@@ -1364,72 +1364,72 @@
    }
   },
   "en/pilgrim-team-psychology-arc.html": {
-   "sha1": "94162046479fec90ddb1a7feeef55c7380d1d7e4",
+   "sha1": "cad219483490074c9c2179bbd736845a1775ab23",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
    }
   },
   "en/poetry-rhythm-analysis.html": {
-   "sha1": "8faecebdd4eade06c4d0d48615e13d61be345c3d",
+   "sha1": "dd0366ed0747beed56daf13e69e5dcb0b5419e75",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
    }
   },
   "en/power-resources.html": {
-   "sha1": "3446cd0f186306fd5aef92aad6dd31ec5fcb6484",
+   "sha1": "006b3f645f08d1d552535c93d866870215c5e5df",
    "counts": {
     "div.kpi-card": 1,
     "div.faction-card": 1
    }
   },
   "en/relationships.html": {
-   "sha1": "eceebec415465017ce8b6353e7b851c7f2509f1a",
+   "sha1": "103abd7f85cc85187e15566b61fa2f0525205d0a",
    "counts": {
     "div.kpi-card": 1,
     "span.role-tag.primary": 5
    }
   },
   "en/risk-project.html": {
-   "sha1": "59f4c4704b9f173718851fd300a2573f1464f11e",
+   "sha1": "4873e2046dc9f5a8f27e13981c5760592fefb565",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card.c-tang": 1
    }
   },
   "en/search.html": {
-   "sha1": "40e7867c17e890f1073d32d4def72f4328d0971e",
+   "sha1": "d1b8f0b67eca09256a6e48fae63787dbc37fa293",
    "counts": {
     "button.vt-btn": 1
    }
   },
   "en/site-map.html": {
-   "sha1": "f838cfce6c8736069df0a7b27a79a1c6486c51e3",
+   "sha1": "251cf100254e4f71dd053248a01ea3b93877be8a",
    "counts": {}
   },
   "en/six-senses-narratology-network.html": {
-   "sha1": "a69b653ef04ba76f668ab4fad474d4322ee8e294",
+   "sha1": "93e417bba75f17907cd3a8f7cc7cfb6131969111",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/social-media.html": {
-   "sha1": "813b9acdca571b630d4cd7835110fa64c65be563",
+   "sha1": "d5ed2ad1a84618bc793473aca37ba770827b9a1b",
    "counts": {
     "div.kpi-card": 1,
     "div.platform-badge": 1
    }
   },
   "en/tag-cloud.html": {
-   "sha1": "b6151ed4dc8d353dc8c4ce16904e8dc37f7e2fc5",
+   "sha1": "915c329092d629ae3f7e5a167d12a85f3ac5a0f4",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
    }
   },
   "en/text-evolution.html": {
-   "sha1": "12f1f4ba4ffa93cc3a3689a8546b3d86dea9eb47",
+   "sha1": "fd5fc6120ae2782787d77935750b12e3fabe9c03",
    "counts": {
     "div.kpi-card": 1,
     "div.evo-step.first": 6,
@@ -1437,36 +1437,36 @@
    }
   },
   "en/text-search.html": {
-   "sha1": "dc1b1974f513cb0fc61b8ef55a115bd6e5ac8eee",
+   "sha1": "7aa723fe9593cb2a0e18569b0f1e6c43a8073717",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/theological-intervention-network.html": {
-   "sha1": "4600cf228aa565c0a3ec308d6ec3d3091a6deefa",
+   "sha1": "767c8bc6dbceea808f37a1bfd3d71672640435c4",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/timeline.html": {
-   "sha1": "f3e4334e39d5b08c6b0d0ce5835d0fa1fd1f0734",
+   "sha1": "c327ba75e8c4986005da18b7661e4199a7ae3d93",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/tribulations.html": {
-   "sha1": "82a45de0940e6428209c9bc2903a1ae184335c12",
+   "sha1": "ef4bdff0b473836b7bf5a7cf56b9082fd8eda0d5",
    "counts": {}
   },
   "en/underworld-power-network.html": {
-   "sha1": "fc17e31da1c9fef177dd244eee82736859377e8e",
+   "sha1": "9ff899fb1d7daeb9176d9dd6d3ff1564ef709c77",
    "counts": {
     "div.kpi-card": 2,
     "div.role-card.r-king": 1
    }
   },
   "en/visual-art.html": {
-   "sha1": "4be6b2e61604f0cad84d6e3c5211b4dd873a3812",
+   "sha1": "13866727fa617d8bb4c7911b95b84c67d4bc9c13",
    "counts": {
     "div.kpi-card": 1,
     "div.chant-card.amp-high": 1,
@@ -1477,11 +1477,11 @@
    }
   },
   "en/visualizations.html": {
-   "sha1": "baae8d0a29c1dd9879399e8e72e3d0d520d20fc3",
+   "sha1": "a75e2c3b859998a2701e253a79209d56faea4896",
    "counts": {}
   },
   "en/workplace.html": {
-   "sha1": "1ded6eb4cc5fb1a380573542e558e59576c47b1b",
+   "sha1": "d3dbbebbbce70e5092eed590818c1f045e845c10",
    "counts": {
     "div.kpi-card": 1,
     "span.alert-badge": 7,
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-10-27T15:38:08.922Z"
+ "generated_at": "2026-10-31T07:22:26.326Z"
 }

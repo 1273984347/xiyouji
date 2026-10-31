@@ -8,7 +8,7 @@
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
 
-> 当前批次：W993（2026-10-27）— 全仓行尾定形批（gitattributes 落地与工作树重写）—A1-A6
+> 当前批次：W1067（2026-10-31）— CI action ref 根修批 + 记忆与项目沉淀同步批—A1-A6
 
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
@@ -42,13 +42,10 @@
 
 | `scripts/` | Python 文本分析脚本与输出（按 34<!--stats:script_classes--> 类组织，A-AH） |
 
-| `timeline/` | 时间线专题文档 |
 
 | `assets/` | 图片、地图、字体等静态资源 |
 
-| `references/` | 参考文献索引 |
 
-| `tools/` | 辅助工具脚本（章节切分等） |
 
 | `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·自研 OpenAI-compatible 引擎（server/engine/·全主流大模型端点·W680）·`PROJECT_CWD`=仓库根（自动解析）直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·引擎三键 `LLM_API_BASE`/`LLM_API_KEY`/`LLM_MODEL` 配于服务端 .env（与 scripts/rag 检索式生成并行·详见其 README） |
 
@@ -178,7 +175,7 @@
 
 ### 04-文化与历史背景/
 
-成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 34<!--stats:a5_docs--> 篇（成书背景/版本演变/佛道思想/明代隐喻等·七段式模板·沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
+成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 35<!--stats:a5_docs--> 篇（成书背景/版本演变/佛道思想/明代隐喻等·七段式模板·沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
 
 
 
@@ -236,7 +233,7 @@
 
 ### 10-方法论沉淀/（v2.0.43 W070 新增·S1 方向）
 
-项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 25<!--stats:methodology_docs--> 篇（目录实数·含索引 README；统一结构：问题背景 + 方法论/判据 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引。W754 口径整改 + W755 扩建后本目录只收方法论深度篇，报告类入 docs/11-报告复盘/）。奠基 6 篇<!--doc-sync:exempt-->：
+项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 26<!--stats:methodology_docs--> 篇（目录实数·含索引 README；统一结构：问题背景 + 方法论/判据 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引。W754 口径整改 + W755 扩建后本目录只收方法论深度篇，报告类入 docs/11-报告复盘/）。奠基 6 篇<!--doc-sync:exempt-->：
 
 
 
@@ -256,7 +253,7 @@
 
 ### 11-方案报告/（W737 新增·W758 改名并子目录化）
 
-报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 85<!--stats:report_docs--> 篇 .md（W900 分区后六子目录：审查与评审 11 篇<!--doc-sync:exempt--> · 设计与架构方案 6 篇<!--doc-sync:exempt-->（另附 HTML 预览页 3 件） · 治理与核查 3 篇<!--doc-sync:exempt--> · 调研与数据复盘 2 篇<!--doc-sync:exempt-->（另附读者数据截图 5 件） · 工作复盘与优化分析报告 14 篇<!--doc-sync:exempt--> · 计划方案 36 篇<!--doc-sync:exempt--> · 加索引 README；根层仅留索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
+报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 104<!--stats:report_docs--> 篇 .md（W900 分区后六子目录：审查与评审 11 篇<!--doc-sync:exempt--> · 设计与架构方案 6 篇<!--doc-sync:exempt-->（另附 HTML 预览页 3 件） · 治理与核查 3 篇<!--doc-sync:exempt--> · 调研与数据复盘 2 篇<!--doc-sync:exempt-->（另附读者数据截图 5 件） · 工作复盘与优化分析报告 14 篇<!--doc-sync:exempt--> · 计划方案 36 篇<!--doc-sync:exempt--> · 加索引 README；根层仅留索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
 
 
 
@@ -494,6 +491,8 @@
 
 | **输出** | `output/figures/`、`output/data/` | 静态图（PNG/SVG）、数据（JSON/CSV）·data/ 系 gitignored 本地产物（.gitignore:59·每次 `make analyze` 重新生成·不入 tracked 基准·W716 注）·data_validate.py 校验完整性 |
 
+| **输出目录边界（W1017 立）** | `output/` 只放**活产物**（file-index / stats / tools-inventory / 各门禁缓存 / data/ 可视化源） | 历史批次一次性件（级联清单 `_cascade_files_W*.txt`、批次规格 `_w*_spec.json`、审图 PNG、一次性脚本与 `.err` 运行日志）**一律不入 output**——按批号归 `archive/scripts/batches/<段>/`（W1012 立原则·W1017 完成全量归位 366 件，跟踪件 689→323）。例外与理由：`_w*_spec.json` 保留在 output（`backfill_changelog.py` 全量 glob 用于补段·搬走即断能力）；门禁缓存 `_vermilion_solid_cache.json`/`_w864_accent_exemptions.json` 保留（活门禁读） |
+
 | **DRL 产物** | `output/drl-r1-findings.md`、`output/audit-baseline.md`、`output/v08-data-check.md`、`output/v08-embedded-data.js`、`output/drl-screenshot-review.md` | v0.7 baseline 审查 + v0.8 DRL R1→R4 收敛记录 + B1 数据检查 + EMBEDDED_DATA 统一命名 + W010.2 截图审查 DRL 收敛记录 |
 
 | **截图审查工具** | `batch_screenshots.js`、`slice_screenshots.py`、`detect_unwrapped_tables.py`、`package.json` | Playwright 批量全页截图 + Pillow 800px 切片 + 静态/运行时表格溢出双轨检查 + Node 依赖声明 |
@@ -505,18 +504,6 @@
 | **工程化工具**（v2.2.16 新增） | `run_all.py`、`new_page.py`、`release.py`、`drl_spotcheck.py`、`data_validate.py`、`docs_index.py`、`sync_docs.py --fix` | 批量调度 34<!--stats:script_classes--> 类分析脚本 + 页面脚手架 + 版本发布体检 + DRL spot-check + JSON 结构校验（131 文件）+ 文档索引生成（`docs/INDEX.md` 全量条目）+ 6 文件文档一致性自动修复 |
 
 | **目录索引生成**（W779 新增） | `gen_folder_docs.py` | 为在管目录补齐 `index.md`（逐文件清单·机器可读）+ `README.md`（目录导读·人读）；幂等（已存在跳过·大小写不敏感判重防覆写 `INDEX.md`）·自动排除 gitignored 路径、治理树（10-方法论沉淀/11-方案报告/docs 01-06 顶层）与构建产物；`--dry-run`/`--force` |
-
-
-
-## timeline/ 时间线专题
-
-
-
-- `西游记大事年表.md`：故事内时间线（已建）
-
-- `取经路线图.md`：地理路线（待建）
-
-- `人物时间线.md`：主要人物的时间脉络（待建）
 
 
 
@@ -533,30 +520,6 @@
 - `promo/`：对外宣传单页物料（A4 竖版双面·HTML 唯一真源 + 双面 PDF + 正反 PNG·W892）
 
 - `promo/hero-set/`：首页 Hero 横幅素材（线描版 8 张成套·2400×1017·左侧 46% 留白供文字叠加·与 c2 概念图同源）
-
-
-
-## references/ 参考文献
-
-
-
-- `学术文献.md`：学术论文与专著
-
-- `网络资源.md`：网络资源链接
-
-- `影视改编参考.md`：影视作品参考
-
-
-
-## tools/ 辅助工具
-
-
-
-| 脚本 | 用途 |
-
-|---|---|
-
-| `章节切分.py` | 将全文按"第N回 标题"切分为 100 个<!--doc-sync:exempt--> 分回文件，支持中文数字与阿拉伯数字，可清理杂质 |
 
 
 

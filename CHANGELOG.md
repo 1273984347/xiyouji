@@ -1,3 +1,1161 @@
+### W1067（2026-10-31）：CI action ref 根修批 + 记忆与项目沉淀同步批
+
+> **来源**：用户 2026-10-31 问「检查一下还在跑的东西·现在已经跑了八个小时·你不觉得有问题吗」→ 查出 PR #70 的 Screenshot Review run 失败于 merge job；再问「整理优化一下你自己的记忆文件内容 Agent Memory·有哪些内容是需要同步在项目文件内供其他 Agent 读取的」。
+>
+> - **文件**：.github/workflows/screenshot-review.yml、.github/workflows/workflow-lint.yml、scripts/check_action_refs.py、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/output、CHANGELOG.md、docs/00-导读/W批次编号对账表.md
+
+**根因（annotation 级实证，非推测）**：PR #70 的 `Dark-state gate (merge shards + only-increase verdict)` job 在 **Set up job 阶段 1 秒内 failure**（Checkout 都没跑），GitHub annotation 原文为 `Unable to resolve action actions/download-artifact@fa0a91b8…`，unable to find version ⇒ **W1066 批新增 merge job 时写入了一个 39 位（少 1 字符）的编造 SHA**，该仓库无此 commit。⇒ 该症状极易误判为基础设施故障 / runner 限额 / 并发排队（本轮实查了 runner 分配、API 限流、并发排队、僵尸 run 四条路径均无果，最后靠 annotation 定位）。
+
+**修法与根修**：① **不新造 SHA**——改用仓内 `release.yml` 已验证存在的 `actions/download-artifact@37930b1c…`（v7.0.0），并在 merge job 步骤注释里写明「Set up job 阶段失败 ⇒ 先查 action ref 能否解析」这条定位口诀；② **新增机器判据 `scripts/check_action_refs.py`**（转正·去 `_` 前缀去批号）——两道判据：**① 形态**（离线·零外部依赖·每次 PR 恒生效·拦截 tag/branch 引用与长度 ≠ 40 的十六进制串）**② 存在性**（联网·双 endpoint 复核·404 与 422 均算「不存在」·限流/网络一律判「无法判定」⇒ fail-closed 不得改代码）；③ **挂进 `workflow-lint.yml` 独立工作流**——形态判据每次 PR 恒生效，存在性扫描只在 schedule / workflow_dispatch 跑且**刻意不带 token**（外部 API 的可用性不得成为 PR 单点阻塞，但「判定为不存在」仍阻断）。
+
+**判据自证（6/6 可证伪）**：N1 39 位 hex / N2 tag 引用 / N4 7 位短 SHA / N5 40 位低熵 ghost SHA 四条负样本必红 + N3 40 位合法格式 / N6 仓内真实 ref 两条正样本必绿；自测夹具**不硬编码任何 SHA**（gitleaks 按熵值筛）⇒ 正样本运行时从仓内文件抽取。
+
+**同族风险全量扫查（18 个去重 ref）**：判定为「不存在」的**只有 1 处**（本批引入的那 39 位）；`github/codeql-action/*@1190a975…` 四处**真实存在**（双 endpoint 连续 4 轮 200 实证）——中途曾因判据自身两处缺陷（把子目录 action 当仓库名 + 把非 0 退出码一律当「不存在」）误判它们为编造 ⇒ 落实「**先怀疑判据再动产品代码**」。
+
+**记忆 / 项目沉淀同步（用户明令）**：坑表 **168 → 174 条**（流程 / 协作 / 取证 75 → 81），新增 E-77~E-82 六条——其中 E-81（W811 YAML 冒号陷阱 · 独立守卫的由来）与 E-82（W808 门禁只认提交树 · 过程性文件不要留在会被门禁计数的目录）系**自 Agent 记忆固化入仓**（此前仅存私有记忆 ⇒ 其他 Agent 无从知晓，本批补齐）；计数链 **7 处**同步（坑表主题标题 / HANDOVER×2 / AGENTS×2 / SKILL×2）。W1065 调研三条教训（检索语法 / 正则分桶 / 外链腐化）经核实**已在坑表 150-152 行** ⇒ Agent Memory 侧属重复，改为指针。
+
+**验证**：check_action_refs.py 自测 6/6 · 全量 --api 扫描 14 个去重 ref 全 PASS · ruff + black 全绿 · 坑表计数链 7 处 grep 复核一致 · 跨行改写 `--gate` 0 FAIL（新增 6 条未触发高危扫描）。
+
+### W1066（2026-10-31）：W1066 CI 提速批（暗色门禁拆分片 + 按需等待 + 批量截图并发 + 修 CodeQL 两处）
+
+> **来源**：用户 2026-10-31 问「怎么增加这两个 job 的工作效率」——实测量化后授权「连脚本层一起改（最大提速档）」。
+>
+> - **文件**：scripts/_audit_render_states.js、scripts/batch_screenshots.js、scripts/check_screenshot_gates.js、scripts/check_dark_state_gate.js、scripts/check_chart_data.py、scripts/check_chart_values.js、.github/workflows/screenshot-review.yml、CHANGELOG.md、docs/agent/pitfalls.md、docs/00-导读/W批次编号对账表.md、scripts/output。
+
+**实测根因（先量化再动手）**：Dark-state gate 的**纯固定等待下限 = 782 页 × 4.7 s ÷ CONC 3 = 20.4 分钟**（实际 29–33 分钟·timeout 60 分钟已在临界）⇒ 这正是 W993「两次被自身超时掐断」（cancel 非 verdict）的根因；Screenshot Review 侧 96 页完全串行（每页独立 context 但逐页 await）+ chart-gates 无论定向都跑全量 857+ 页。
+
+**本批要点**：① **暗色门禁拆 4 分片并行**（按**索引取模**而非连续切片⇒ 负载均衡无长尾·墙钟 = max(分片)）+ 分片产物**合并后统一判定**（判定语义与改前完全一致）+ 合并 job 对「未找到任何分片」fail-closed（退出码 2·不得当零命中）；② **按需等待**（waitForStable / waitForChange）替代固定 1200+1500+2000 ms——**落定才采样 ⇒ 判据强度不降**（上限兜底保证永不落定时与原来持平）；③ CONC 3 → 6；④ **batch_screenshots.js 多 context 并发**（CONC 4·capture() 本已每页独立 context⇒ 天然可并发·失败语义不变）；⑤ **chart-gates 定向时只跑变更页**（原无论定向都全量）+ `--only` 支持逗号分隔多值（向后兼容）；⑥ **顺带修 CodeQL 2 处告警**——`check_chart_data.py` 的 `<script>`/`<style>` 剥离改为**大小写不敏感**（大写 `<SCRIPT>` 原会漏剥⇒ 判据假结论）、`check_chart_values.js` 的 name 正则**完整转义反斜杠**（name 含 `\` 时原正则语义错⇒ 漏匹配）——两处均经对照实测确认为真缺陷（非本批引入·因 PR 改动量大被判为本 PR 新增）。
+
+**验证**：暗色审计**新旧对照 5 页逐页判据字段完全一致**（invisibleShapes / lowContrastText / errors / fatal / isDarkBg 全部相同⇒ 提速未削弱判据）· CodeQL 两处修复均以负样本实测（新转义命中含 `\` 的 name、旧转义不命中）· check_chart_data 自测 PASS · 全量 pytest 1093 passed / 3 skipped / 0 failed · 全量门禁 57 段核心全部通过。
+### W1065（2026-10-31）：《西游记》GitHub 生态全景调研批（51 组查询实跑 · 72 项核心清单 · 11 方向分类）
+
+> **来源**：用户 2026-10-31 令「你去 GitHub 上面搜索查找调研一下关于西游记相关的所有内容」。
+>
+> - **文件**：docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md、docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md、docs/11-方案报告/README.md、CHANGELOG.md、scripts/output。
+
+**本批要点**：① **检索覆盖 51 组查询实跑**（`gh search repos` r1 12 + r2 16 + r3 15 + r4 8，另有 Code Search 6 组 + HuggingFace API 2 组），去重后唯一仓库 **867** → 正则粗筛剔除噪声 **471** → 核心池 **396** → 逐项读 README 与根目录清单人工核定 **72 项 / 11 方向**（语料 8 · 知识库 Wiki 5 · 图谱 2 · NLP 6 · 角色 LLM 8 · RAG 2 · 可视化 5 · Skill 8 · 游戏 MUD 13 · 衍生 IP 14 · 本项目 1）。② **三条核心量化结论**——注意力 **67.1% 被《黑神话：悟空》单点吸走**（衍生 IP 1823 星 / 占全体 67.4%，其中黑神话子群 6 项独占 1815 星 = 衍生桶 99.6%），文本本体 44 项仅 18.5%；文本本体 **≥10 星仅 10/44、50–99 星档为 0**（双峰非单调）→ "已经有人做过了"不成立；**License 未声明 37/72 = 51.4%**，明确 MIT+Apache+GPL 仅 43.1%。③ **2026 年唯一全面活跃方向是 Skill 封装（8/8 更新）**，最高价值样本 `chitu-tang/xiyouji-interpret`（v2.2）——引语逐字核验 + 机械式引号扫描 + 双样例回归 90 分阈值 + 失败输出留存，其规程密度远超全部同赛道项目。④ **可复用资产 15 项**——CText→CSV→统计→PPT 全流水线（Apache-2.0）、RAG 参数集（分块 500/80 · BGE-small-zh-v1.5 · Top-4 · DeepSeek，MIT）、真相源分离 + Trust Guard + 版本建模架构（MIT）、100 回切分语料（101 文件 / 2,158,170 B / 均值 21,368 B）、135 回本 + 续书评点戏曲全套版本素材。⑤ **与本项目正面同赛道 2 家**（`wujinsen/moli-knowledge-base` ★3 已上线、`suhaihan/xiyouji-knowledge-base` ★1，功能清单高度重合）⇒ 功能对标无意义，差异化转向**版本对勘**（该细分方向本轮 72 项中数 = 0）与**检索层**；给出 5 条带量化验收判据的行动建议（引文核验外显 / 全文检索 + 人物地理法宝索引 / 版本异文对照 ≥20 处 / 离线可读作为卖点 / 不与黑神话生态争注意力）。⑥ **两处方法失误已修正并记录**——`西游记 in:name` 与 6 组中文多词查询全返 0（检索语法限制，非内容缺失，改走 `in:readme` + 角色名 + 拼音 + 繁体后命中恢复，**两个同赛道项目正是靠该路径找到**）；`gh search --json topics` 字段不存在 + search 侧 license 多为空对象（改走 `gh api repos/<r>` 补齐 55 项）。⑦ **承接 W358 存量技术选型调研（用户令「把这个文件添加进今天新的文件里面」）**——把《项目 GitHub 参考调研报告》（W358·2026-08-05）的选型层并入本报告 **§5.13（承接）+ §5.14（两轮合流结论）+ 附录 D（原样承接 + 时效状态）**，且**按当批实跑更新而非搬运快照**：实测其 20 个引用仓库中 **7 个路径已迁移或改名、原路径一律 HTTP 404**（`run-llama/LlamaIndex`→`run-llama/llama_index`、`Mintplex-Labs/AnythingLLM`→`Mintplex-Labs/anything-llm`、`lobehub/LobeChat`→`lobehub/lobe-chat`、`daizhige/daizhigev20`→`garychowcmu/daizhigev20`、`d3-sankey/d3-sankey`→`d3/d3-sankey`、`d3-hierarchy/d3-hierarchy`→`d3/d3-hierarchy`、`d3-force/d3-force`→`d3/d3-force`）⇒ 修正后权威链接表落 §5.13.1；**原"优先级第 1 位" `aarontbt/d3-knowledge-graph` 已跌至 ★0 且 2025-12 后停更**（第 2 位 `JY0284/zizhitongjian` 仍 ★426 且 2026-10 仍更新）；**技术层 + 应用层 10 项合计 660,579 星 vs 数字人文呈现层 4 项仅 3,984 星（165.8:1）⇒ 呈现层是真空位**。旧报告正文**保留为历史叙述不改写**（仅文末追加现役索引指针与时效警告），目录 README 编号 19 行同步标注"以编号 20 为准"。
+
+**验证**：全部统计数字由脚本对实采 JSON 实算产出（零手算）· 核心 72 项中 55 项补 `gh api` 取 README（base64 解码）+ `contents/` 根目录清单取证 · 语料规模实测 `gh api repos/alexamies/chinesenotes.com/contents/corpus/xiyouji` → 文件数 101 / 总量 2,158,170 B / 均值 21,368 B / 区间 15,694–28,891 B · 语料编码坑实证（`xiyouji001.txt` 读出 `�` 替换字符 ⇒ 须逐回解码回退）· 6 组复算命令随报告落盘（§9.2）· 跨平台维度以 HuggingFace Datasets API 实测补入 4 个 xiyou 数据集（最大 10K<n<100K · 下载量 ≤30）。
+
+> - **状态**：已收官（全景调研交付 + 索引登记 + 5 条行动建议；附 7 项未验证项显式声明于报告附录 C）
+
+### W1063（2026-10-31）：并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化
+
+
+> **来源**：用户 2026-10-31 令「它已全面停手，等 W1062 落地后一笔滞后提交收掉并行会话的 24 件·你来做」——W1062 已落地（6558fa71），本批负责收口工作树残留件。
+>
+> - **文件**：scripts/check_cross_line_rewrite.py、scripts/ledger_backfill.py、scripts/security_scan.py、scripts/sec002_negative_probe.py、.github/workflows/security.yml、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、docs/agent/pitfalls.md、scripts/output。
+
+**本批要点**：① **残留 3 件收口**——实测工作树（索引外）仅剩 3 件：`check_cross_line_rewrite.py`与 `ledger_backfill.py` 为 ruff 清理（死变量 `n_pos`/`n_neg` 未用、循环变量 `l` 遮蔽内建）、`security_scan.py` 为 W1061 批的 SEC-002 判据精确化改动；W1050 隔离备份的 22 件（19 当前态面 + 3 段/行）**已全部入库**（台账 W1050 行 hash=ca9424db·file-index 段在位·核心 4 件与 HEAD 一致）⇒ 备份里的当前态面已被 W1051–W1062 后续批次覆盖，**直接恢复会回退内容**⇒ 不恢复。② **SEC-002 过宽前瞻根修**——W1061 用「值含任一 CJK 即放行」消除中文事件常量误报（`check_backlog_review.py` 的 `TOKEN="Backlog 对账已执行"` 被抓 high），但该前瞻**过宽**：实测负样本 **6/8**——「真密钥串里混中文」（如 `sk-abc123密码xyz789`）会被一并放行 ⇒ **真密钥漏检（安全缺口）**。本批改**白名单式收紧**：只放行含**空格 / CJK 标点 / 全角字符**的自然语言常量，单纯含汉字但无空格标点的值仍判 high（假阳性噪音 ≪ 漏检真密钥的安全缺口）。③ **负样本自证固化**为机器判据 `scripts/sec002_negative_probe.py`（9/9·含「真密钥混汉字」与「标识符风格混中文」两条边界）并挂 CI `Security` workflow 独立 job ⇒ 回退到过宽版即判红。
+
+**验证**：SEC-002 负样本自证 **9/9**（收紧版 9/9·过宽版 5/9 可证伪）· 全仓安全扫描**high=0**（误报消除·无新增漏检）· 全仓 1411 个代码文件实测：被放行实例仅 2 处且均为中文事件常量，**零个真密钥被漏检** · ruff 全绿 · 相关单测 155 passed / 3 skipped。
+### W1062（2026-10-31）：README 换图未生效根修批（换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70）
+
+> **来源**：用户 2026-10-31 问「为什么我之前让你更换 README 的图片你还是没有更换」——实查定位：换图提交
+> `09146cf1`（W1005「七人」改「取经五人组」）**只存在于 `origin/dev`**；`main` 是 GitHub 仓库首页渲染源
+> 也是 Pages 部署源（`pages.yml: branches: [main]`），且 main 落后 dev **151 笔** ⇒ 线上 README 与 GitHub
+> 首页仍是 10-22 的旧「七人」图。用户在 10-29 05:02 曾问过「README 里面用的图片更新了吗？」，当时
+> 已答"已更新"——**那句答的是 dev 分支的状态，未核 main**，属"声明≠落地"的分支面漏判。
+>
+> - **文件**：scripts/requirements.txt、scripts/check_no_brand_refs.py、CHANGELOG.md、docs/agent/pitfalls.md、docs/11-方案报告/审查与评审/工具脚本门禁体检与临时归档审计-2026-10-29.md、docs/11-方案报告/计划方案/T04-任务计划执行与经验沉淀报告-2026-10-21.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、docs/00-导读/W批次编号对账表.md、scripts/output。
+
+**本批要点**：① **PR #70 的两道红卡**——`pytest-unit` 因 `requirements.txt` 未登记 numpy/playwright 而
+5 failed（3 个已转正根级脚本 `check_crop.py`/`subject_band.py`/`accent_audit.py` 在**模块级** import 它们·
+与 W758 markdown / W813 PyYAML 同型「本地有装而未登记 ⇒ CI 恒红」）；`Security` 因品牌守卫判红。② **品牌守卫
+自身漏检（根因级新发现）**——`tracked_files()` 用 `git ls-files` 取扫描面，未关 `core.quotepath` 时中文路径
+被转义成八进制并加引号 ⇒ 守卫把转义串当真实路径 ⇒ `open()` 抛 OSError ⇒ 被 `except OSError: continue`
+**静默跳过** ⇒ 实测 1812 个中文路径文件从未被扫过（真实扫描面 3356/5197）。这解释了"main 上守卫绿但
+`git grep` 确有命中"的矛盾。根修 = `core.quotepath=false` + 读取失败改为 fail-closed（不再静默跳过）。
+③ **声明性豁免机制**——AGENTS 铁律 19 / CLAUDE 速查 14 行的正文**必须**点名被禁品牌（否则禁令无指向），
+与守卫「明文 0 命中」构成**结构性冲突**（W1061 把铁律 19 入必载层后 Security 恒红 ⇒ PR 永不可合）。
+解法不是删禁令也不是整体放行文件：豁免**行级**绑定到显式登记的声明标记（`_DECLARE_MARKERS`），同文件内
+未含标记的行仍判红 ⇒ 行级豁免 ≠ 文件级放行。④ **清 7 处真违规**——历史段/活文档里引用第三方 Agent 运行态
+目录路径（某第三方 Agent 工具链的 skills/ 与 memory/ 运行态目录）改为中性指代「第三方 Agent 运行态目录」，语义不丢（用户已授权改
+CHANGELOG 历史段）。
+
+**验证**：守卫自测 56/56（含 12 条负样本：各标记不得导致全局放行 + 行级豁免≠文件级放行）· 守卫全仓
+零命中且真实扫描面 5158 文件（修复前 3356）· pip-audit 全量 `No known vulnerabilities found` ·
+CI 原 5 个 failed 用例本地复跑全过 · 全量 pytest **1092 passed / 3 skipped / 0 failed** · 全量门禁见收官提交。
+
+> - **状态**：已收官（换图未生效的根因定位 + 两道红卡清偿 + 守卫漏检根修 + 声明性豁免 + 7 处真违规清零）
+
+### W1061（2026-10-31）：私有记忆同步批（CodeBuddy 铁令入必载层 + env-quirks 独有坑 10 条入坑表）
+
+> **来源**：用户令「整理记忆文件」并追问「哪些内容需要同步项目文件供其他 Agent 读取」——三问 ③
+自查实锤两项同步义务：① **CodeBuddy/WorkBuddy 永久禁令（用户 2026-10-07 两度重申）完全未入项目
+必载层**（AGENTS/CLAUDE/pitfalls/文档规范全部零命中·其他 Agent 无从知晓=最大违规）；② env-quirks
+记忆卡的独有环境坑约 15 条未入查坑表。本轮占号同步。
+>
+> - **文件**：AGENTS.md、CLAUDE.md、docs/agent/pitfalls.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、CHANGELOG.md、README.md、STRUCTURE.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs 四件、.github/workflows/README.md、site 四页、scripts/output 登记面十件。
+
+**本批要点**：① **铁律 19**——禁 CodeBuddy/WorkBuddy 入 §6 必载层（任何会话不得引入、恢复或仿建该
+品牌工具链·agent-web 裁决=保留换 OpenAI-compatible 引擎已收官）+ CLAUDE 速查第 14 行（三问顺延 15·
+51/60 行）；② **坑表 +10（E-58~E-67）**——env-quirks 独有环境坑入项目载体：Bash 工作目录跨调用持久 /
+反引号命令替换注入 / git push 网络选择性污染 / judge 并发限额 / npm 原生模块双坑 / grep -c 行数≠次数 /
+pytest 双坑 / 前端探针三合一 / Windows 杂项三合一 / docx COM 渲染验收——**坑表 146→156·流程组 56→66**；
+③ §4.3 加工作目录持久与 Edit-Read 前置两条高频；④ 计数链六点（AGENTS×2/HANDOVER×2/SKILL×2）
+全部同步 156——SKILL 为 W1058 扩面后首次被对账覆盖即命中本轮同步。
+
+**提交前三问结论（铁律 18·落验证栏）**：① 同步义务清单当批闭环（CodeBuddy 入必载层+10 条入坑表），
+其余记忆卡判定为无同步义务（会话状态史在 CHANGELOG/S4 轮次在本地仓/平台特有策略不入仓）；
+② 防复发 = C5e 六点对账（含 W1058 扩的 SKILL 两点）+ 铁律 19 必载层（下个会话开场即见）；
+③ 本批发现路径（记忆整理→三问 ③ 自查→grep 零命中实锤）全在本段，私有记忆已同步镜像。
+
+**验证**：C5e 六点全链 156 零红 · CLAUDE 51/60 行 · 负样本（SKILL 145 注入）此前已验对账面有效 ·
+全量门禁见收官提交。
+
+> - **状态**：已收官（三问 ③ 违规清零：永久铁令入必载层·环境坑入查表·私有记忆仅剩镜像与平台特有项）
+### W1060（2026-10-31）：CI 提效批（A11y 矩阵 9→1 + 三 workflow 补 concurrency）
+
+> **来源**：用户 2026-10-31 令「怎么优化使得增加效率」——本日 17 批实证 PR checks 34 job
+（A11y 独占 9 = 3 OS × 3 Python 矩阵）且 3 workflow 缺 concurrency 连发排队；用户批准 P0-1 + P1。
+>
+> - **文件**：.github/workflows/ci.yml、.github/workflows/dependency-review.yml、.github/workflows/workflow-lint.yml、.github/workflows/scorecard.yml、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、.github/workflows/README.md、archive/docs 四件、site 四页、scripts/output 登记面九件。
+
+**本批要点**：① **A11y 矩阵 9→1**（ubuntu × py3.12·与主矩阵一致）——A11y 审计是 Playwright 页面渲染
+检查，瓶颈在浏览器版本而非 OS/Python，跨平台矩阵对纯前端审计为伪需求（用户批准测试策略变更）；
+② **三 workflow 补 concurrency**（cancel-in-progress）——dependency-review / workflow-lint / scorecard
+连发 push 时取消旧 run；③ PR checks 34 → 26 job·等待时长约省 40%（md-only PR 的 A11y 过滤为候选
+扩展 P0-2·观察后再议）；④ artifact 名去 matrix 引用（a11y-report 统一）。
+
+**验证**：PyYAML 四文件解析 OK · workflow-lint CI 过 · 全量门禁见收官提交。
+
+**提交前三问结论（铁律 18·落验证栏）**：① 矩阵收敛的覆盖削减风险当批留痕（A11y 单 ubuntu 起点可回扩）；
+② 防复发 = 用户批准留痕于本段 + ci.yml 注释含理由与回扩路径；③ 提效数据（34→26 job）与本段，
+私有记忆已同步镜像。
+
+> - **状态**：已收官（CI 提效两项落地·PR #70 的旧配置 checks 不受影响·新配置自下一 PR 生效）
+### W1059（2026-10-31）：第 46 篇工作复盘与优化分析报告入库批（W1043-W1058 十六批全程·多 Agent 协作主题）
+
+> **来源**：check_review_trigger T3 触发（上篇复盘 W1042·2026-10-30 后提交 80 ≥ 80 阈值·W1051 口径根修后**首次真触发**）·用户令「开工这个」。
+>
+> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-31.md、docs/11-方案报告/README.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、site/data/search.html、site/en/search.html、scripts/output/_cascade_files_W1059.txt、scripts/output/_w1059_spec.json。
+
+**本批要点**：① **复盘批角色**（T3 单触发·16 批 80+ 提交区间 W1043-W1058·含并行会话 W1049/W1051）——报告落
+docs/11-方案报告/工作复盘与优化分析报告/（README 分区表 #52 登记）；② **三主题沉淀**——基线诊断驱动治理
+（4 FAIL 根因零误判）/ **多 Agent 协作五形态**（撞号让号停战收编触发器根修·全部机器化或入坑表）/
+ W1046 方案 14 条与 G-03 缺口 11→0 清零升格的闭环范式；③ **六条经验**（诊断分级前置 / 共树三铁线 /
+ 收编检查单 / 门禁绿≠声明面被扫 / 影子先行闭环 / 纪律契约化）；④ 当前无未决待办——og 第六轮等点名。
+
+**验证**：16 批台账行与 CHANGELOG 段逐批对读 · hash 抽验 · 触发器实跑（本批入库后上篇应识别为 W1059）·
+全量门禁见收官提交。
+
+**提交前三问结论（铁律 18·落验证栏）**：① 本批问题（报告体量与框架取舍——16 批全景用主题式而非
+单批 ST/V 全框架；手搓 CHANGELOG 顶段踩坑表 W955/961/963 形态即时回滚改走级联正道）当批定谳并留理由；
+② 防复发——批次全景表使 16 批收官 hash 可一表复算，手搓教训已有坑表在案（本次为执行疏忽非判据缺口）；
+③ 对账结论全部在报告与本段，私有记忆已同步镜像。
+
+> - **状态**：已收官（第 46 篇复盘入库·README #52·触发器下次识别上篇 = W1059）
+### W1058（2026-10-31）：SKILL.md 计数链漂移订正 + C5e 对账面扩 SKILL（W1051 ASM-09 盲区补上）
+
+> **来源**：用户 2026-10-31 问「W1051 计划文件里有你要补充的吗」——复盘该计划时 ASM-09
+（计数链六点清单·含 SKILL.md×2）与本批实施对照，实锤 SKILL.md 两处声明停在 144（实数 146·
+W1055/W1056 两次 +1 均漏）——根因 = C5e 对账面只扫 AGENTS/HANDOVER 两类载体，SKILL 是盲区。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、scripts/check_doc_sync.py、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs 四件、.github/workflows/README.md、site 四页、scripts/output 登记面九件。
+
+**本批要点**：① SKILL.md 两处 144→146（数据订正）；② **根因修复**——C5e 对账面补 SKILL.md
+两形态（「N 条·六主题」/「N 条完整教训」）——W1051 ASM-09 画出的六点清单此前只被门禁扫两类，
+本轮把盲区纳入机器对账；③ 负样本可证伪：145 注入 → C5e 精确红 → 还原绿（判据实测）；
+④ W1051 计划唯一「待确认事项」（Backlog 对账）已由 W1057 完成——该计划至此无遗留。
+
+**提交前三问结论（铁律 18·落验证栏）**：① 本批问题（盲区发现→订正→判据扩展→负样本验证）
+当批闭环；② 防复发 = C5e 机器对账扩面（下批坑表 +1 时 SKILL 漏改即红）；③ 对账盲区发现路径
+（W1051 ASM-09 复盘）与修法全在本段，AI 私有记忆已同步镜像。
+
+**验证**：ruff All checks passed · C5e 六点全链零红 · 负样本注入精确红 · 全量门禁见收官提交。
+
+> - **状态**：已收官（SKILL 漂移订正 + 对账盲区堵上·W1051 计划无遗留）
+### W1057（2026-10-31）：Backlog 对账批（W1021 触发器响应·12 条全核验 0 滞后·登记面收敛）
+
+> **来源**：W1021 Backlog 对账触发器（距 W1020 已 31 批 ≥ 25 阈值）·用户令「做」——对账动作按
+触发器定义 = 逐条拿 git 与测试实况核 HANDOVER Backlog（非条目自述），完成后状态列登记 token。
+>
+> - **文件**：HANDOVER.md、CHANGELOG.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs 四件、.github/workflows/README.md、site 四页、scripts/output 登记面九件。
+
+**本批要点**：① **逐条核验 12/12**——HANDOVER「四、待办」全部 [x] 条目拿 git 实况直证：W285
+（cc6feae8）/ W286 系（748bbb3f·f01e84e4·548b6135）/ W287（7b286620）/ W358（947eaa0d 关联记录）/
+ W402（8cfc7842）/ W445（4da20ab6）/ W536（a460b889）/ W626（c3f1c0e4）/ W1048（c4605517）——
+**0 滞后**（对照 W1020 对账实测 41% 滞后率·登记面收敛的直接证据）；② **压缩移出**——12 条已完成
+条目移出「四、待办」（详情在各批 CHANGELOG 段与台账/归档行可查）·保留最近一条（W1048 P2 治理·
+已升级注记 W1052-W1055 后续落地）作形态锚 + 对账注记块；③ **现状声明**——当前无未决待办
+（本会话全部遗留——sweep 覆盖面/第 3 槽判据/W1046 实施/AGENTS 双写——已随 W1050-W1055 全闭环）；
+④ 新待办维护口径 = 铁律 18 三问（每提交）+ W1021 触发器（每 ≥25 批对账）双层。
+
+**验证**：核验记录 12/12（git hash 在案可复算）· 全量门禁见收官提交。
+
+**提交前三问结论（铁律 18·落验证栏）**：① 本批问题（核验中发现的早期批 grep 形态差异——大写
+W285 无括号形态需宽匹配）当批解决，核验方法留痕；② 同类不会再犯——对账记录含可复算 hash 清单，
+下次对账（W1021 触发器 ≥25 批）有本批范式可循；③ 其他 Agent 可了解——对账结论、压缩去向、
+hash 证据全部在本段与 HANDOVER 注记，AI 私有记忆已同步镜像。
+
+> - **状态**：已收官（Backlog 对账 12/12 零滞后·登记面收敛·压缩移出·当前无未决待办）
+### W1056（2026-10-31）：提交前三问自检流程契约（钩子注入 + 铁律 18 + CLAUDE 速查 + 坑表 146）
+
+> **来源**：用户 2026-10-31 令「从此以后每次提交前必须自动运行三问自检」——① 本批遇到的问题都
+解决/登记了吗？② 以后还会再犯吗（防复发判据落地）？③ 多 Agent 协作下其他 Agent 能否从项目内
+文件了解？写入私有记忆的内容须同步项目文件。落成三层载体：钩子注入（物理自动）+ 铁律 18
+（必载层）+ CLAUDE 速查（一分钟层）。
+>
+> - **文件**：AGENTS.md、CLAUDE.md、docs/agent/pitfalls.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、CITATION.cff、docs/00-导读/项目说明.md、docs/INDEX.md、index.md、archive/docs 四件、.github/workflows/README.md、site 四页、scripts/output 登记面九件。
+
+**本批要点**：① **钩子注入**——.git/hooks/pre-commit 在门禁绿后、exit 0 前强制打印三问（不阻断·
+每次提交必现于提交者视野·sh -n 语法验证）；② **铁律 18**——三问成文化入 §6 必载层（结论须落
+CHANGELOG 验证栏或台账备注·不通过不得提交·③ 问即铁律 16-⑥ 载体铁则的提交时机强化）；
+③ **CLAUDE.md** 速查第 14 行（50/60 行）；④ **坑表 +1**（「spec file_index_rows 宁多勿少——漏列
+级联件必被 51 槽反复拦」·W1048 两轮 + W1053 一轮三实证）→ 146·C5e 计数链四处同步。
+
+**提交前三问结论（本批自举·落验证栏）**：① 本批（及当日 W1048-W1055 全程）遇到的问题——并行撞号/
+文档漂移/孤儿批/META 漏注册/spec 漏列/内联转义——已全部解决或登记去向（sweep 覆盖面✓/reserve_w
+检测✓/坑表条目✓/缺口 11 页→0✓），无顺手跳过；② 防复发——C8 同段重复判据/G-07 占号检测/三问钩子
+/坑表 +2（spec 漏列·占号逃避）全部为机器判据或查表条目，同类错误有硬防线；③ 其他 Agent 可了解性
+——W1048-W1056 九批全部 CHANGELOG 段+台账行+坑表条目在仓，AI 私有记忆仅镜像且已按本批契约同步。
+
+**验证**：sh -n 钩子语法 OK · CLAUDE 50/60 行 · C5e 计数链 146 全链零红 · 全量门禁见收官提交。
+
+> - **状态**：已收官（三问契约三层载体落地·钩子本地件不入库属既定形态）
+### W1055（2026-10-31）：G-03 清偿第二轮（静态字面量提取 + na 语义分层定谳 + 收紧升格）
+
+> **来源**：用户 2026-10-31 令「缺口 11 页的清偿现在做完」——W1054 定位的 11 页真覆盖缺口
+（V3 7 + V4 4）本轮清偿：静态字面量提取求值判据工程 + 剩余页逐页取证归因。
+>
+> - **文件**：scripts/check_chart_values.js、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs 四件、.github/workflows/README.md、site 四页、scripts/output 登记面九件。
+
+**本批要点**：① **静态字面量提取求值**——extractLiteralSource 平衡扫描切割器（跳过 '…'/"…"/`…`
+字符串含转义与 // /* */ 注释）切出 `(const|var|let) NAME = {…|[…];` 完整字面量，Node 侧
+`new Function` 求值后走 summarizeData——块作用域数据声明统一兜底（与 page.evaluate 路径互备）；
+② **缺口 11 → 0 两轮收敛**——第一轮时序+前缀转出 5 页（customs-pass-route/graph-explorer 等）；
+第二轮剩余 6 页逐页取证（node 直跑切割+求值）全为**判据适用性边界**：81-hardships-view 与
+character-relationship-3d-view 的 cols=[]/lines=[] 为**运行时填充容器**（字面量为空·数据由
+rows.forEach 构建）、data-explorer 为 fetch 型（FALLBACK 是 picker 配置非图表数据）、
+perf-canvas-rendering 为性能测量页（KPI=渲染耗时）、character-sentiment-arc 为**上游聚合型 KPI**
+（KPI 3521 引语数 vs 页面 10 回聚合摘要·数据链不含全量）——静态框架内不可复算 ⇒ 结构性；
+③ **语义分层定谳**——STRUCTURAL_NA 扩至 no-view-intent/no-rendered-view/no-kpi/small-data/
+kpi-unmatched 五类 + noLiteral（无可提取或求值无有效数据）运行时边界集；「有效数据」语义收紧
+（对象记录数组才算·图例色表 colors/空容器 cols 不算——逐页取证的误命中形态）；
+④ **收紧升格**——真覆盖缺口口径 >0 即 FAIL（影子第 1/2 批 W1053/W1054 报数背书·本轮清偿归零
+·升格即绿）；⑤ kpi-unmatched 归结构性（真缺陷形态 = kpi-near-miss FAIL 态另有判定不受影响）。
+
+**验证**：node --check OK · self-test 12/12 · 全量 87 页 --gate 0 FAIL（收紧升格生效且绿）·
+影子报数 V3 na=8 缺口 0 / V4 na=16 缺口 0 · probe_error 0 页 · 全量门禁见收官提交。
+
+> - **状态**：已收官（G-03 完整闭环：影子 2 批 → 清偿两轮 → 缺口清零 → 收紧升格·方案 G-03 收口）
+### W1054（2026-10-31）：G-03 清偿第一轮（probe 时序修复 + 前缀扩展 + na 分层影子）
+
+> **来源**：用户 2026-10-31 令「现在开始」（G-03 清偿批立项）——W1053 影子第 1 批（V3 na=9/V4 na=17）
+落地后的清偿第一轮：修判据的采集稳定性与命名覆盖，不动页面数据（铁律 15：禁补数据迎合判据）。
+>
+> - **文件**：scripts/check_chart_values.js、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、CITATION.cff、AGENTS.md、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/_vermilion_solid_cache.json、scripts/index.md、scripts/output/_cascade_files_W1054.txt、scripts/output/_w1054_spec.json。
+
+**本批要点**：① **时序修复**——collectEmbeddedData 轮询重试（≤4 次·150ms 间隔）：并行 workers 下
+页面主脚本未执行完时 `typeof EMBEDDED_DATA` = undefined ⇒ 静默 continue ⇒ 假 no-data-source
+（单页跑同页 ok/small-data 实证·century-dialogue/tag-cloud 双跑差异坐实）；② **前缀扩展**——
+DATA_NAME_RE 加 nodes/edges/links/cols/lines 小写图形数据命名（逐页取证：81-hardships-view/
+character-relationship-3d-view/graph-explorer/perf-canvas-rendering 的数据声明全在此列）；
+③ **影子分层**——na 报数分「结构性不适用」（no-view-intent/no-rendered-view/no-kpi/small-data·
+页面形态决定·不计收紧口径）与「真覆盖缺口」（no-data-source/kpi-unmatched/interactive-input-page·
+数据在场但判据抓不到·收紧对象）；④ **清偿结果**——转出 4 页（century-dialogue→small-data 结构性/
+ai-dialogue 等→ok），缺口余量 **11 页（V3 7 + V4 4）**根因定位 = 数据声明在 `<script>` 块作用域
+（dataExpr 全局 typeof 求值不可达·重试无效）——清偿需「静态字面量提取求值」判据工程，**另批立项**；
+⑤ 收紧升 FAIL 暂缓（缺口 11 > 阈值 2·影子继续·升格待覆盖工程批）。
+
+**验证**：node --check OK · self-test 12/12 · 全量 --report 87 页 FAIL 0 · --gate 0 FAIL ·
+probe_error 0 页 · 影子分层报数结构性与缺口分离清晰。
+
+> - **状态**：已收官（时序/前缀/分层三项落地·缺口 11 页覆盖工程另批·收紧升格随之）
+### W1053（2026-10-31）：W1046 方案实施收尾（判据 5 条 + 流程 2 条 + 制度 3 条 + 度量 3 条）
+
+> **来源**：用户 2026-10-31 令「W1046 方案现在做完」——W1052 已落 G-01 与方案钉订正，本批实施剩余 13 条（判据 5 / 流程 2 / 制度 3 / 度量 3），按方案分阶段约束交付：该升格的升格、该影子的影子、
+须用户裁定的存量以报数形式交付。
+>
+> - **文件**：scripts/check_inlined_css.py、scripts/check_chart_values.js、scripts/check_gsap_motion.py、scripts/check_frontmatter.py、scripts/check_governance_docs.py、scripts/check_glossary.py、scripts/check_corruption.py、scripts/ledger_close_check.py、scripts/check_review_trigger.py、scripts/stats.py、scripts/patch_ratio.py、docs/00-导读/文档规范.md、scripts/output/_w864_accent_exemptions.json、AGENTS.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、CITATION.cff、docs/00-导读/项目说明.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_cascade_files_W1053.txt、scripts/output/_w1053_spec.json。
+
+**本批要点**：① **G-02**——INLINED 判据加内容特征断言（tokens 12 词表/system 8 词表·2026-10-31 实测提取·真实块 12/12+8/8 全命中），塞 20KB 垃圾 CSS 必红（self-test 2/2·225 页零误伤）；② **G-03 影子**——第 43 槽 na 出口影子报数（不进 FAIL）：V3 na=9（no-data-source 7/small-data 1/no-rendered-view 1）·V4 na=17（no-kpi 13/no-data-source 3/kpi-unmatched 1）——收紧待清偿批；③ **G-04**——GSAP 扫描域从单文件扩至自有 js 10 件（排 .min 库·影子实测零违例故直接升格）+ J2 剥注释（防误伤向）+ J8 接线清单glob 派生（13 页·免手维护）+ J1 node 检查外移修粗检误报（self-test 11/11）；④ **G-05**——元信息块日期语义（≤当天+1·真实日期）与来源哈希形态（[0-9a-f]{7,40}）校验（存量实测 0 翻红·self-test 5/5）；⑤ **G-06 第一批**——文档族 governance/glossary/corruption 各补 3 例注入式 self-test；check_cascade_line_anchor.py 经核查已有等价自测（check() 即合成注入+负样本自证）不计欠账；⑥ **P-01/P-02**——ledger_close_check.py 加 C3：修复类顶段批 spec 必填五问（why_red/is_misjudge/data_truth/layer_changed/prevention）与回归锁（carrier+case·self-test 3/3）；⑦ **I-01/I-03**——文档规范 §11.2 加豁免分级审批条款（新增条目必须用户批准·只增不减为默认）与改动分级列（14 行三级标注）+ 铁律 16 之⑦；⑧ **I-02**——豁免簿 256 条加 owner/review_by 字段（owner=所属批·review_by=未复核·真实初始化）；**stale 影子报数=0 且方案「陈旧积压」前提被实测修正**——W864-W887 全部为 10-22/23 收官批（条目龄 ≤9 天），git 追溯与 CHANGELOG 双源印证（方案的豁免簿审计把 9 天新簿误当陈旧库存·「只增不减」方向性事实成立而「存量陈旧」不成立）；升 FAIL 通道留给真实陈旧出现时启用；⑨ **M-01**——patch_ratio.py 影子上线（首跑 W1050 比值 12.0 即实证字面 grep 分子的误报形态——文档叙述「豁免」字样计入分子·方案 D-04 预期）；⑩ **M-02**——stats 加 w864_entries=256 / icon_allowlist_entries=71 两键（fail-closed·C5b 跟随）；⑪ **M-03**——触发器 T4（豁免簿 30 天未减→清偿批建议·self-test 扩 2 例）。
+
+**验证**：ruff 全部 All checks passed · 各脚本 self-test 合计 2/2+5/5+11/11+3/3+3/3+3/3+3/3+3/3 全过 · node --check chart_values OK · G-04 实跑 10 件自有 js + 13 接入页全绿 · G-02 实跑 225 页特征全过 · M-02 --check 漂移两键按预期待收官刷新 · 全量门禁见收官提交。
+
+> - **状态**：已收官（W1046 方案 14 条全部落地：G-01/G-07 在 W1052·本批 13 条·G-03/I-02 按方案影子先行待存量清偿）
+### W1052（2026-10-31）：补丁治理实施第一批（G-01 铁律双写根治+C8 判据·G-07 占号支撑检测）
+
+> **来源**：用户 2026-10-31 令「W1046 方案你自己 review 一遍，没问题就开工；AGENTS 铁律 14/15 双写；reserve_w.py 盲区；做完之后提交」——review 结论：方案通过（G-01 目标实证/41 槽确实无重复判据/分阶段合理），缺陷一处（计数钉 9 vs 11）顺手订正；reserve_w「盲区」经读码订正归因——ledger_max 实读工作树台账，真根因是并行会话未跑 reserve_w 直接写台账认领行（绕过铁律 17），加固方向由「改读文件」改为「占号面与认领面对拍」。
+>
+> - **文件**：AGENTS.md、scripts/check_doc_sync.py、scripts/reserve_w.py、docs/agent/pitfalls.md、HANDOVER.md、docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、CITATION.cff、docs/00-导读/项目说明.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/_cascade_files_W1052.txt、scripts/output/_w1052_spec.json。
+
+**本批要点**：① **G-01 文档面**——AGENTS.md 铁律 14/15 行内双写去重（seg1==seg2 程序验证·264→132/790→395 字符）+ 铁律 17 前空行删除接回连续列表；② **G-01 判据**——check_doc_sync.py 新增 C8 治理文档同段重复（治理权威面 AGENTS/HANDOVER/gates/pitfalls；strip 后整行全等 ≥60 字符、排除表格与代码围栏、**相邻窗口 ≤3 行**内 ≥2 次即红——「相邻」限定回归方案语义，放过跨章节合理引用·W1052 实证 HANDOVER 索引行跨 120 行重复属结构性冗余另案；T30 负样本/T31 防误伤正样本·35/35）；③ **G-07**——reserve_w.py 加 warn_unclaimed（reserve/list 时扫台账「在途」行对拍有效预约，无占号支撑当场 WARN·self_test 三例），上线即抓 W992 滞留行并经 ledger_backfill 回填；④ **方案钉订正**——W1046 方案 AC-04/V-05 批准项计数 9→11（附录 D 批准列逐条为准）；⑤ **坑表 +1**（占号面与认领面两套机制条目）→ 145·C5e 计数链四处同步。
+
+**验证**：py_compile×2 OK · ruff All checks passed（顺修 UP009/E702 存量微瑕）· doc-sync self-test 35/35 · reserve_w self-test 3/3 · C5e 计数链 145 全链零红 · C8 对现实治理文档零红 · 全量门禁见收官提交。
+
+> - **状态**：已收官（G-01 双写根治+防复发判据落地·G-07 占号支撑检测上线·方案钉订正·坑表 145）
+### W1051（2026-10-31）：复盘触发器口径根修（上篇复盘识别升级为三信号 + 目录面双源·W1042 段标题自洽）
+
+> **来源**：用户 2026-10-31 裁决「都做」——针对「复盘触发器漏认 W1042 那篇真复盘 ⇒ 误报『该复盘』+ 可能诱发重复复盘」，给出两条修法（① 改触发器识别口径 ② 改 W1042 段标题补『工作复盘』标识），用户裁决两条并做。
+>
+> - **文件**：scripts/check_review_trigger.py、tests/unit/test_review_trigger.py、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/计划方案/执行前计划-W1051-复盘触发器口径根修.md、docs/11-方案报告/README.md、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、site/data/search.html、site/en/search.html。
+
+**本批要点**：① **判定本体根修**——check_review_trigger.py 判「上篇复盘」的口径从**单一字面量**（段标题须含「工作复盘」四字）升级为**三信号**（标题点题 / 标题含「复盘批」/ 段正文认领「复盘批」角色·带否定词前瞻）+ 新增**目录面独立证据源**（复盘报告落盘目录的最新报告文件·日期 + 首部 W 号·与登记面取较新者·两面不一致出提示行）⇒ 根除 W1042 形态漏认；② **登记层自洽**——W1042 段标题补「第 45 篇《工作复盘与优化分析报告》入库批」标识（经用户批准改历史段标题·只改这一处不动其它历史段）；③ **判据自证**——单测 +7 例 + 脚本自测同组断言（否定语境「不认领复盘批角色」/ 仅散文提及「工作复盘」/ 目录缺失 三条负样本必须不命中）；④ **坑表 E-57**（识别口径绑死单一字面量 ⇒ 同族登记形态逃逸）+ 计数链五处同步（143 → 144）。
+
+**验证**：修前实跑复现误报（上篇 = 第 44 篇 W978·2026-10-27 · 距今 4 天 · 后续批次 60 · 后续提交 198 · T1/T2/T3 三条全中）· 修后实跑上篇 = 第 45 篇 W1042·2026-10-30 · 距今 1 天 · 后续批次 8 · 后续提交 62 · **未触发** · pytest 16 passed · 脚本自测全过 · preflight PASS（touches 交集 0 冲突）· 全量门禁见收官提交。
+
+> - **状态**：已收官（复盘触发器口径根修 + W1042 段标题自洽·三信号 + 目录面双源·修前误报三条全中 → 修后未触发·pytest 16 passed·坑表 E-57 + 计数链五处一致·方案报告索引补登 3 件）
+### W1050（2026-10-31）：门禁判据加固（sweep 覆盖面纳入 gates.md·第 3 槽计数 fallback 对拍）
+
+> **来源**：用户 2026-10-31 两项批准（sweep 覆盖面修复 + 第 3 槽判据批立项）——W1048 基线诊断的遗留次批强制项兑现；本批动 verify_delivery.py 门禁本体（经用户批准·py_compile + 全量跑通配套验证）。
+>
+> - **文件**：scripts/verify_delivery.py、scripts/check_doc_sync.py、docs/agent/gates.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/_cascade_files_W1050.txt、scripts/output/_w1050_spec.json。
+
+**本批要点**：① **sweep 覆盖面修复**——check_doc_sync.py c5b_extra_surfaces 加 docs/agent/gates.md（W1048 实证 615 旧值滞留的根因：stats.py:277-280 与该清单均不含 gates.md·标记自此自动跟随·不一致即红）；② **第 3 槽 A1-A6 计数 fallback**——verify_delivery.py _gate_a1_a6_count 在 README 无「共 N 篇」声明时fallback 对拍 AGENTS §1 的 `616<!--stats:a1_a6_docs-->` 标记值（stats 标记由 stats.py --w 机器跟随·非手写字面量·两处都缺才 WARN）——防 doc-sync:exempt 豁免致校验静默失明；③ gates.md L26 判据文本同步fallback 描述。
+
+**验证**：py_compile 两脚本 OK · ruff All checks passed · check_doc_sync --self-test 33/33 · E1 spot-check 三文件各含 W1050 标记 · 全量门禁第 3 槽由 WARN 转 OK（fallback 口径 616==616·辅助 WARN 清零）。
+
+> - **状态**：已收官（sweep 覆盖缺口关闭 + 第 3 槽 fallback 落地·全量辅助 WARN 清零）
+### W1049（2026-10-31）：回次 og:image 全覆盖批·第五轮（12 张线描立像/场面）
+
+
+
+> **来源**：用户 2026-10-30「先做这两个再继续剩余 42 回扩量」＋ 2026-10-31「剩余 42 回 og 扩量开始」＋ 同日规模裁决「12 张一批·延续四轮节奏」⇒ 本批为第五轮（W1049）。
+>
+> **基线实读**（非引用旧批报告）：已落位专属 og-image **55 回** + 保留既有 card-* 专属 **2 回**（ch019/ch031）+ 通用 og 缺口 **43 回**；已出母版 **124 张 / 唯一 slug 124 个**。
+>
+> **口径订正**：用户表述「剩余 42 回」与实读 **43 回**差 1 回——根因是旧探针（`_w990_og_gap.py`）只查 `chapter-plate`/`chapter-scene` 未查 `chapter-banner`，把 ch019/ch031 两回误计为缺口；本批以实读 43 回为准（og 形态分布 55+43+2=100 与「无任何配图 43 = 通用 og-cover 43」交叉自洽）。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w10xx/_w1049_derive_prepare.py、archive/scripts/batches/w10xx/_w1049_derive_stage.py、archive/scripts/batches/w10xx/_w1049_derive_verify.py、archive/scripts/batches/w10xx/_w1049_download.py、archive/scripts/batches/w10xx/_w1049_make_spec.py、archive/scripts/batches/w10xx/_w1049_master.py、archive/scripts/batches/w10xx/_w1049_pick_verify.py、archive/scripts/batches/w10xx/_w1049_pitfalls.py、archive/scripts/batches/w10xx/_w1049_prepare.py、archive/scripts/batches/w10xx/_w1049_reissue.py、archive/scripts/batches/w10xx/_w1049_reissue_97.py、archive/scripts/batches/w10xx/_w1049_reissue_fetch.py、archive/scripts/batches/w10xx/_w1049_reissue_og.py、archive/scripts/batches/w10xx/_w1049_stage.py、archive/scripts/batches/w10xx/_w1049_verify.py、assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.png、assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.webp、assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.png、assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.webp、assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.png、assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.webp、assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.png、assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.webp、assets/promo/plate-set/plate-line-104-ch018-gao-taigong.png、assets/promo/plate-set/plate-line-104-ch018-gao-taigong.webp、assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.png、assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.webp、assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.png、assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.webp、assets/promo/plate-set/plate-line-107-ch067-honglin-damang.png、assets/promo/plate-set/plate-line-107-ch067-honglin-damang.webp、assets/promo/plate-set/plate-line-108-ch058-diting.png、assets/promo/plate-set/plate-line-108-ch058-diting.webp、assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.png、assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.webp、assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.png、assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.webp、assets/promo/plate-set/plate-line-99-ch046-luli-daxian.png、assets/promo/plate-set/plate-line-99-ch046-luli-daxian.webp、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/raw/round18/、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/计划方案/执行前计划-W1049-回次og-image全覆盖第五轮.md、docs/agent/gates.md、docs/agent/pitfalls.md、scripts/check_doc_sync.py、scripts/output/README.md、scripts/output/_cascade_files_W1050.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1049_batch.json、scripts/output/_w1049_gen_all.json、scripts/output/_w1049_gen_b1.json、scripts/output/_w1049_gen_b2.json、scripts/output/_w1049_gen_b3.json、scripts/output/_w1049_gen_b4.json、scripts/output/_w1049_gen_p1.json、scripts/output/_w1049_gen_p2.json、scripts/output/_w1049_gen_probe.json、scripts/output/_w1049_pick.json、scripts/output/_w1049_reissue.json、scripts/output/_w1049_reissue_107.json、scripts/output/_w1049_reissue_97.json、scripts/output/_w1050_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/verify_delivery.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、site/reader/ch005.html、site/reader/ch016.html、site/reader/ch018.html、site/reader/ch032.html、site/reader/ch039.html、site/reader/ch046.html、site/reader/ch050.html、site/reader/ch055.html、site/reader/ch056.html、site/reader/ch058.html、site/reader/ch067.html、site/reader/ch084.html、site/static/images/og-plate-line-100-ch050-huode-xingjun.webp、site/static/images/og-plate-line-101-ch055-nvguo-guowang.webp、site/static/images/og-plate-line-102-ch084-miefo-guowang.webp、site/static/images/og-plate-line-103-ch005-sida-tianwang.webp、site/static/images/og-plate-line-104-ch018-gao-taigong.webp、site/static/images/og-plate-line-105-ch032-yinjiao-dawang.webp、site/static/images/og-plate-line-106-ch056-shidai-yanjun.webp、site/static/images/og-plate-line-107-ch067-honglin-damang.webp、site/static/images/og-plate-line-108-ch058-diting.webp、site/static/images/og-plate-line-97-ch016-jinchi-zhanglao.webp、site/static/images/og-plate-line-98-ch039-wenshu-pusa.webp、site/static/images/og-plate-line-99-ch046-luli-daxian.webp、site/static/images/plate-line-100-ch050-huode-xingjun.webp、site/static/images/plate-line-101-ch055-nvguo-guowang.webp、site/static/images/plate-line-102-ch084-miefo-guowang.webp、site/static/images/plate-line-103-ch005-sida-tianwang.webp、site/static/images/plate-line-104-ch018-gao-taigong.webp、site/static/images/plate-line-105-ch032-yinjiao-dawang.webp、site/static/images/plate-line-106-ch056-shidai-yanjun.webp、site/static/images/plate-line-107-ch067-honglin-damang.webp、site/static/images/plate-line-108-ch058-diting.webp、site/static/images/plate-line-97-ch016-jinchi-zhanglao.webp、site/static/images/plate-line-98-ch039-wenshu-pusa.webp、site/static/images/plate-line-99-ch046-luli-daxian.webp。
+
+**本批要点**：① **缺口口径实读 + 交叉自洽**——通用 og 缺口 **43 回**（用户口径 42 回·差 1 回已定位到旧探针漏查 `chapter-banner`·两探针差集 = {019, 031}）；② **12 主体逐项实读证据**——每个主体在该回正文命中 2–16 次（金池长老 10 / 文殊菩萨 10 / 鹿力大仙 6 / 火德星君 5 / 女儿国国王 4 / 灭法国王 10 / 四大天王 7 / 高太公 9 / 银角大王 2 / 十代阎君 3 / 红鳞大蟒 3 / 谛听 16）；选材判据五项全绿 + **负样本自证 5/5 可证伪**（并修判据自身 key 形态 bug：`basename[2:5]` 与 `[:5]` 混用致目标集全体判空假红）；③ **母版段两变体**——立像段逐字复用 249 字符（6 张）、场面段仅改 3 处（6 张）；④ **3 张重出**——全目录机器判据首跑 3 张 FAIL（97 J4=0.0298 擦线 / 103 J3=0.1861 / 107 J3=0.2026）⇒ 目视取证确认 103/107 为真缺陷（铠甲鳞纹密排、山石渲染笔触）、97 为构图过疏 ⇒ 改 prompt 强化禁项后重出；**97 号二版因「稀疏/留白」措辞与母版段「占幅五成」打架反使 J4 更低（0.0258）⇒ 三版删掉留白措辞改为显式要求放大占幅 ⇒ J4=0.0375**；⑤ **og 幂等派生陷阱**——重出母版后重跑落位输出 12 张 og 全部「SKIP 已在位」⇒ 社交卡仍是旧图 ⇒ 新增 `_w1049_reissue_og.py` 按白名单清退后重新派生；⑥ **出图接口单批上限 10 张**（12 条直接被拒）⇒ 改 3–5 张/批（4/4 批全成）；⑦ **坑表 +3 条**（E-54 出图接口批次上限 / E-55 母版段约束不住密排纹理与渲染笔触 / E-56 og 派生幂等 SKIP 与「下载器复活旧件」同族）。
+
+**验证**：全目录机器判据 **136 张 · FAIL 0**（含 3 张重出后复验）· 落位验收 **0 FAIL**（12 回题图 + og:image + alt + 暗色规则 + 未覆盖页零回归）· 配图覆盖 **55 → 67 回** · 通用 og 缺口 **43 → 31 回** · 12 个 og 版 1200×630 且 39.6–141.9KB（实测 40566–145292 B·全部 ≤300KB）· 坑表 **140 → 143 条**（计数链四处一致）· 全量门禁见收官提交。
+
+> - **状态**：已收官（12 张落地·12 回新增题图·母版族 124 → 136 张·既有 124 张母版与站点版零改动·3 张重出后机器判据全绿·待用户目视）
+
+### W1048（2026-10-31）：P2 治理与孤儿批收编（gates.md 计数订正·CLAUDE 速查补行·W1044 判据件与 minimax 清除·W1046 方案件入库）
+
+> **来源**：2026-10-31 只读基线诊断产出的 P2 治理微批（用户裁决「一笔收编」）——诊断实证 HEAD 三处文档漂移（AGENTS 铁律双写 / gates.md 计数旧值 / CLAUDE 速查漏登）与死会话（ROGSTRIX·已被用户关闭）孤儿暂存，本批一次收编收官。
+>
+> - **文件**：CLAUDE.md、docs/agent/gates.md、scripts/check_doc_sync.py、scripts/check_plan_template.py、pytest.ini、scripts/output/_vermilion_solid_cache.json、archive/scripts/batches/w10xx/_w1013_download.py、archive/scripts/batches/w10xx/_w1018_download.py、archive/scripts/batches/w10xx/_w1043_download.py、archive/scripts/batches/w10xx/_w1043_make_spec.py、archive/scripts/batches/w10xx/_w1043_master.py、archive/scripts/batches/w10xx/_w1043_pick.py、archive/scripts/batches/w10xx/_w1043_prepare.py、archive/scripts/batches/w10xx/_w1043_verify.py、archive/scripts/batches/w10xx/_w1044_make_spec.py、docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md、docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/_cascade_files_W1048.txt、scripts/output/_w1048_spec.json。
+
+**本批要点**：① **P2 治理**——`docs/agent/gates.md:26` 计数旧值 615→616（四源印证·根因 = sweep_markers 覆盖面不含 gates.md·stats.py:277-280 文件清单实证·覆盖面修复登记次批强制项）+ CLAUDE.md 补第 13 条速查（铁律 15/16/17·49/60 行·C2 锚点三对全写）；② **收编 W1044 孤儿**（原会话终止后无主·自测 33/33 与 9/9 全绿）——check_doc_sync.py 补坑表六主题**分项**逐项对拍（原只核总数·分项陈旧门禁不可见·fail-closed）、check_plan_template.py 补计划目录卫生判据（拦无 .md 扩展名/0 字节坏件）、pytest.ini pytest_collected 1085→1087 标记跟随、archive 7 批脚本清除 `~/.minimax` 硬编码回退改 fail-closed（执行铁律 16③）；③ **收编 W1046 方案件入库**——《补丁治理与门禁判据加固改造方案》39KB（只出方案不实施·**待用户审批**）；④ **W1047 段订正**——已提交 W1047 段的「本批要点/验证/状态」三栏误为 W1045 段内容之复制（生成侧事故），该批实际内容以其「来源」行与 check_chart_data.py diff 为准（剥标签两处根因修复 + 2 例可证伪锁 + 857 页影子对照修复 5 页误吞零漏剥）；历史段不改写，在此订正。
+
+**验证**：check_doc_sync --self-test 33/33 · check_plan_template --self-test 9/9 · stats --check 零差异（24 键）· 收编前全量门禁第 31/32/46/52 槽绿（4 FAIL→1 FAIL·余项为 W1044 在途索引占用随本批清空）· 全量门禁见收官提交。
+
+> - **状态**：已收官（P2 治理落地 + 孤儿批收编 + W1047 段订正·W1046 方案待用户审批）
+### W1047（2026-10-31）：图表判据剥标签根修（标签语法约束 + 剥离顺序修正）
+
+
+
+> **来源**：用户 2026-10-30 收尾时选定的取舍项——存量 `check_chart_data.py` 的剥标签正则（实测 2 处真吞 JS 正文；补 `\n\r` 会让多行合法标签剥不干净）⇒ 本批以**根因修法**落地。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1047_make_spec.py、archive/scripts/batches/w10xx/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/计划方案/执行前计划-W1047-图表判据剥标签根修.md、docs/INDEX.md、docs/agent/pitfalls.md、index.md、scripts/batch_cascade.py、scripts/check_chart_data.py、scripts/output/README.md、scripts/output/_cascade_files_W1047.txt、scripts/output/_w1047_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html。
+
+**本批要点**：① **两路逐处复核 167 处候选**——scripts 域 38 处（真缺陷 **0** · 假阳 18 · 只读 20）· archive 域 129 处（真缺陷 **13** · 假阳 106 · 只读 10）；② **真缺陷 13 处**同族同形态（close_cascade 家族「项目说明列表行」正则末尾 `[^·]*` 无尾锚点 ⇒ 替换时静默吞掉「当前版本」行之下的「当前阶段」「关键产出」两行·构造实验行数 5 → 2）⇒ **两处**排除符都补 `\n\r`（只补末尾一处时扫描器仍判可跨行）· 行为中性；③ **判据升级**——基线键由内容指纹升为**四输入**（文件|完整模式|完整替换串|行号）⇒ 堵死三类残余豁免（同文件新增同模式调用点 / 替换串语义变更 / 超长模式显示截断撞键）；跨行判定补 `\s` 盲区（`\s` 亦排除换行）· 自测 11 → 12 例；④ **存量陈旧清理**——槽数三处统一 **52**（gates.md 标题 / HANDOVER 指针 / scripts/README）· 基线失效项清理（50 → 44）· `docs/11-方案报告/README.md` 4 条登记行由末尾游离表迁回各分区表尾 + §五 15 → 16 / §六 51 → 54（按磁盘实算）；⑤ **og 切头 A+ 修复**——按用户裁决「缺陷修复与版式统一分开记账」：回退 **99** 张无缺陷存量的版式改写、保留 **13** 张（本批 12 张中 5 张真被切 + 存量同类 2 张）⇒ 保留张顶边留白 27–31px、**0 张被切**·落位验收仍 0 FAIL；⑥ **坑表 +5 条**（133 → 138）· 治理声明对账 0 FAIL。
+
+**验证**：逐处结论 167/167 · 真缺陷修复 13/13 · 扫描器自测 12/12 · 扫描器单测 9 passed · 跨行门禁 0 FAIL（基线外新增 0 处）· 治理声明对账 0 FAIL（坑表 138）· og 保留张顶边 27–31px（0 张被切）· 母版判据 124/0 · 裁切验算 124/0 · 落位验收 0 FAIL · 全量门禁见收官提交。
+
+> - **状态**：已收官（复核 167 处 + 真缺陷 13 处已修 + 判据升四输入 + 存量陈旧清理 + og A+ 修复 + 坑表 +5 条·待用户裁决 check_chart_data 剥标签取舍）
+
+### W1045（2026-10-31）：改写面候选逐处复核 + 存量陈旧清理 + og 切头 A+ 修复
+
+
+
+> **来源**：用户 2026-10-30「先做这两个再继续剩余 42 回扩量」——① mid 桶 112 处 + archive 域 97 处 YELL 候选逐处复核 ② 存量陈旧（`gates.md`「50 槽」实为 52 + 跨行基线失效项清理）；同日用户裁决 og 社交卡切头修复范围取 **A+**（只修真被切者·不做存量版式统一）。
+>
+> **基线实读**：候选清单实扫 167 处（scripts 域 38 = RED 23 + YELL 15；archive 域 129 = RED 32 + YELL 97）· 逐处结论 167 条（真缺陷 13 · 假阳 124 · 只读 30）· 坑表 133 → 138 条 · 槽位实算 gates.md 正文 1–52 无缺号 · og 顶边墨迹逐张实算 124 张。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1042_make_spec.py、archive/scripts/batches/w10xx/_w1045_make_spec.py、archive/scripts/batches/w10xx/index.md、archive/scripts/batches/w6xx/_w661_close_cascade.py、archive/scripts/batches/w6xx/_w662_close_cascade.py、archive/scripts/batches/w6xx/_w663_close_cascade.py、archive/scripts/batches/w6xx/_w666_close_cascade.py、archive/scripts/batches/w6xx/_w667_close_cascade.py、archive/scripts/batches/w6xx/_w668_close_cascade.py、archive/scripts/batches/w6xx/_w669_close_cascade.py、archive/scripts/batches/w6xx/_w670_close_cascade.py、archive/scripts/batches/w6xx/_w671_close_cascade.py、archive/scripts/batches/w6xx/_w676_close_cascade.py、archive/scripts/batches/w6xx/_w679_close_cascade.py、archive/scripts/batches/w6xx/_w684_close_cascade.py、archive/scripts/batches/w6xx/_w691_close_cascade.py、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/README.md、docs/11-方案报告/审查与评审/改写面候选逐处复核与存量陈旧清理报告-W1045.md、docs/11-方案报告/计划方案/执行前计划-W1045-改写面候选逐处复核与存量陈旧清理.md、docs/INDEX.md、docs/agent/gates.md、docs/agent/pitfalls.md、index.md、scripts/README.md、scripts/batch_cascade.py、scripts/check_crop.py、scripts/check_cross_line_rewrite.py、scripts/cross_line_baseline.json、scripts/output/README.md、scripts/output/_cascade_files_W1045.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1043_batch_a.json、scripts/output/_w1045_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/subject_band.py、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/static/images/og-plate-line-59-ch089-huangshi.webp、site/static/images/og-plate-line-81-ch074-qingshi.webp、site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp、site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp、site/static/images/og-plate-line-88-ch073-duomuguai.webp、site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp、site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp、site/static/images/og-plate-line-92-ch086-bihan-bishu.webp、site/static/images/og-plate-line-93-ch095-yumian.webp、site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp、site/static/images/og-plate-line-95-ch085-diyongfuren.webp、site/static/images/og-plate-line-96-ch097-xiniu.webp、tests/unit/test_cross_line_rewrite.py。
+
+**本批要点**：① **两路逐处复核 167 处候选**——scripts 域 38 处（真缺陷 **0** · 假阳 18 · 只读 20）· archive 域 129 处（真缺陷 **13** · 假阳 106 · 只读 10）；② **真缺陷 13 处**同族同形态（close_cascade 家族「项目说明列表行」正则末尾 `[^·]*` 无尾锚点 ⇒ 替换时静默吞掉「当前版本」行之下的「当前阶段」「关键产出」两行·构造实验行数 5 → 2）⇒ **两处**排除符都补 `\n\r`（只补末尾一处时扫描器仍判可跨行）· 行为中性；③ **判据升级**——基线键由内容指纹升为**四输入**（文件|完整模式|完整替换串|行号）⇒ 堵死三类残余豁免（同文件新增同模式调用点 / 替换串语义变更 / 超长模式显示截断撞键）；跨行判定补 `\s` 盲区（`\s` 亦排除换行）· 自测 11 → 12 例；④ **存量陈旧清理**——槽数三处统一 **52**（gates.md 标题 / HANDOVER 指针 / scripts/README）· 基线失效项清理（50 → 44）· `docs/11-方案报告/README.md` 4 条登记行由末尾游离表迁回各分区表尾 + §五 15 → 16 / §六 51 → 54（按磁盘实算）；⑤ **og 切头 A+ 修复**——按用户裁决「缺陷修复与版式统一分开记账」：回退 **99** 张无缺陷存量的版式改写、保留 **13** 张（本批 12 张中 5 张真被切 + 存量同类 2 张）⇒ 保留张顶边留白 27–31px、**0 张被切**·落位验收仍 0 FAIL；⑥ **坑表 +5 条**（133 → 138）· 治理声明对账 0 FAIL。
+
+**验证**：逐处结论 167/167 · 真缺陷修复 13/13 · 扫描器自测 12/12 · 扫描器单测 9 passed · 跨行门禁 0 FAIL（基线外新增 0 处）· 治理声明对账 0 FAIL（坑表 138）· og 保留张顶边 27–31px（0 张被切）· 母版判据 124/0 · 裁切验算 124/0 · 落位验收 0 FAIL · 全量门禁见收官提交。
+
+> - **状态**：已收官（复核 167 处 + 真缺陷 13 处已修 + 判据升四输入 + 存量陈旧清理 + og A+ 修复 + 坑表 +5 条·待用户裁决 check_chart_data 剥标签取舍）
+
+### W1043（2026-10-31）：回次 og:image 全覆盖批·第四轮（12 张线描立像/场面）
+
+
+
+> **来源**：用户 2026-10-30 五项连发指令之第 5 项「剩余 56 回继续扩量（每批 12 张·约 5 批）」⇒ 本批为第四轮（W1043）。
+>
+> **基线实读**（非引用旧批报告）：已落位专属 og-image **44 回** + 保留既有 card-* 专属 **2 回**（ch019/ch031）+ 通用 og 缺口 **54 回**；已出母版 **112 张 / 唯一 slug 111 个**（早期命名 `NN-slug` 与新批命名 `NN-chNNN-slug` 两种形态全扫）。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/misc/_localize_cdn_libs.py、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1042_make_spec.py、archive/scripts/batches/w10xx/_w1043_derive_prepare.py、archive/scripts/batches/w10xx/_w1043_derive_stage.py、archive/scripts/batches/w10xx/_w1043_derive_verify.py、archive/scripts/batches/w10xx/_w1043_download.py、archive/scripts/batches/w10xx/_w1043_make_spec.py、archive/scripts/batches/w10xx/_w1043_master.py、archive/scripts/batches/w10xx/_w1043_pick.py、archive/scripts/batches/w10xx/_w1043_prepare.py、archive/scripts/batches/w10xx/_w1043_probe_pages.py、archive/scripts/batches/w10xx/_w1043_sheet.py、archive/scripts/batches/w10xx/_w1043_stage.py、archive/scripts/batches/w10xx/_w1043_verify.py、archive/scripts/batches/w10xx/index.md、archive/scripts/batches/w4xx/_w478_migrate.py、archive/scripts/batches/w4xx/_w490_migrate.py、archive/scripts/batches/w4xx/_w491_en_migrate.py、archive/scripts/batches/w9xx/_w974_cascade.py、assets/promo/plate-set/index.md、assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.png、assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.webp、assets/promo/plate-set/plate-line-86-ch033-chuikouxian.png、assets/promo/plate-set/plate-line-86-ch033-chuikouxian.webp、assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.png、assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.webp、assets/promo/plate-set/plate-line-88-ch073-duomuguai.png、assets/promo/plate-set/plate-line-88-ch073-duomuguai.webp、assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.png、assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.webp、assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.png、assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.webp、assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.png、assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.webp、assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.png、assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.webp、assets/promo/plate-set/plate-line-93-ch095-yumian.png、assets/promo/plate-set/plate-line-93-ch095-yumian.webp、assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.png、assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.webp、assets/promo/plate-set/plate-line-95-ch085-diyongfuren.png、assets/promo/plate-set/plate-line-95-ch085-diyongfuren.webp、assets/promo/plate-set/plate-line-96-ch097-xiniu.png、assets/promo/plate-set/plate-line-96-ch097-xiniu.webp、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/preview-w1043-sheet.png、assets/promo/plate-set/raw/README.md、assets/promo/plate-set/raw/index.md、assets/promo/plate-set/raw/round17/README.md、assets/promo/plate-set/raw/round17/index.md、assets/promo/plate-set/raw/round17/plate-line-85-ch053-ruyizhenxian.jpg、assets/promo/plate-set/raw/round17/plate-line-86-ch033-chuikouxian.jpg、assets/promo/plate-set/raw/round17/plate-line-87-ch094-taiyinxingjun.jpg、assets/promo/plate-set/raw/round17/plate-line-88-ch073-duomuguai.jpg、assets/promo/plate-set/raw/round17/plate-line-89-ch069-ziyangzhenren.jpg、assets/promo/plate-set/raw/round17/plate-line-90-ch090-yijiukutianzun.png、assets/promo/plate-set/raw/round17/plate-line-91-ch071-jiuling-shiba.png、assets/promo/plate-set/raw/round17/plate-line-92-ch086-bihan-bishu.jpg、assets/promo/plate-set/raw/round17/plate-line-93-ch095-yumian.jpg、assets/promo/plate-set/raw/round17/plate-line-94-ch029-bengpo-baboren.jpg、assets/promo/plate-set/raw/round17/plate-line-95-ch085-diyongfuren.jpg、assets/promo/plate-set/raw/round17/plate-line-96-ch097-xiniu.jpg、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/INDEX.md、docs/agent/pitfalls.md、scripts/check_cross_line_rewrite.py、scripts/cross_line_baseline.json、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1043.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1043_batch.json、scripts/output/_w1043_batch_a.json、scripts/output/_w1043_batch_b.json、scripts/output/_w1043_batch_c.json、scripts/output/_w1043_gen_a.json、scripts/output/_w1043_gen_b.json、scripts/output/_w1043_gen_c.json、scripts/output/_w1043_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/reader/ch029.html、site/reader/ch033.html、site/reader/ch053.html、site/reader/ch069.html、site/reader/ch071.html、site/reader/ch073.html、site/reader/ch085.html、site/reader/ch086.html、site/reader/ch090.html、site/reader/ch094.html、site/reader/ch095.html、site/reader/ch097.html、site/static/images/README.md、site/static/images/index.md、site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp、site/static/images/og-plate-line-86-ch033-chuikouxian.webp、site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp、site/static/images/og-plate-line-88-ch073-duomuguai.webp、site/static/images/og-plate-line-89-ch069-ziyangzhenren.webp、site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp、site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp、site/static/images/og-plate-line-92-ch086-bihan-bishu.webp、site/static/images/og-plate-line-93-ch095-yumian.webp、site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp、site/static/images/og-plate-line-95-ch085-diyongfuren.webp、site/static/images/og-plate-line-96-ch097-xiniu.webp、site/static/images/plate-line-85-ch053-ruyizhenxian.webp、site/static/images/plate-line-86-ch033-chuikouxian.webp、site/static/images/plate-line-87-ch094-taiyinxingjun.webp、site/static/images/plate-line-88-ch073-duomuguai.webp、site/static/images/plate-line-89-ch069-ziyangzhenren.webp、site/static/images/plate-line-90-ch090-yijiukutianzun.webp、site/static/images/plate-line-91-ch071-jiuling-shiba.webp、site/static/images/plate-line-92-ch086-bihan-bishu.webp、site/static/images/plate-line-93-ch095-yumian.webp、site/static/images/plate-line-94-ch029-bengpo-baboren.webp、site/static/images/plate-line-95-ch085-diyongfuren.webp、site/static/images/plate-line-96-ch097-xiniu.webp。
+
+**本批要点**：① **缺口与 slug 全表实读**——通用 og 缺口 54 回、已出母版 112 张 / 唯一 slug 111 个（早期命名无 ch 段 ⇒ 只按新形态扫会漏 100 个）；② **母版段两变体**——立像段逐字复用 249 字符（6 张）、场面段仅改 3 处（6 张）；③ **12 个主体全部未出**（如意真仙/吹口仙/太阴星君/多目怪/紫阳真人/乙救苦天尊 + 九灵元圣与十八罗汉/辟寒与辟暑二王/玉面狐狸/奔波儿灞与灞波儿奔/地涌夫人/犀牛怪）；④ **1 张重出**——93 号原选 ch033 与 86 号吹口仙**同回** ⇒ 同页两题图不被落位脚本支持 ⇒ 改 ch095 玉面狐狸并重出（重出件须同时清旧结果文件条目，否则下载器幂等会复活旧件）；⑤ **1 回只换 og**——ch086 已有 W1001 批题图（毗蓝大菩萨）⇒ 题图不覆盖、只换专属 og；⑥ **坑表 +1 条**（E-46·判据脆性：暗色隐藏规则用整串字面量匹配 ⇒ 页面 CSS 多行排版时误判「缺规则」⇒ 改为容忍空白的正则）。⑦ **订正前批口径**——W1042 段所写「坑表 +4 条（124 → 128 条）」实为 **+8 条（124 → 132 条）**（该批一次落 E-38…E-45 八条；本批再加 E-46 ⇒ 现 133 条）；历史段不改写，故在此订正。
+
+**验证**：母版判据 **124 张 · FAIL 0** · 裁切验算 **124 张 · FAIL 0** · 落位验收 **0 FAIL**（11 回题图 + 1 回只换 og + 未覆盖页零回归）· 配图覆盖 **44 → 55 回** · 通用 og 缺口 **54 → 43 回** · 全量门禁见收官提交。
+
+> - **状态**：已收官（12 张落地·新增题图 11 回·母版族 112 → 124 张·既有 112 张母版与站点版零改动·待用户目视）
+
+### W1042（2026-10-30）：第 45 篇《工作复盘与优化分析报告》入库批·工具面根因修复与判据补覆盖（台账回填显式参数 / Makefile 编排 / 第 48 门禁真实新增件 / 可疑改写面复核）
+
+
+
+> **来源**：用户 2026-10-30 连发五项指令（修工具缺陷 / 跨行扫描器接 make ci / 第 48 门禁补真实新增件用例 / 43 处可疑改写面人工复核 / 剩余 56 回继续扩量）⇒ 本批取第 1–4 项（工具面批 = W1042），第 5 项按独立批次推进。
+>
+> **批号来源**：`scripts/reserve_w.py` 占号得 W1042（铁律 17·并行会话已推进至 W1041）；preflight 交集检查 PASS；复盘触发器 T1/T2/T3 三条全中 ⇒ 本批同时认领**复盘批**角色（最终报告落 `docs/11-方案报告/工作复盘与优化分析报告/`）。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、Makefile、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/审查与评审/跨行改写面逐处复核报告-2026-10-30.md、docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-30.md、docs/11-方案报告/计划方案/执行前计划-W1042-工具面根因修复与判据补覆盖.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/INDEX.md、docs/agent/pitfalls.md、pytest.ini、scripts/A_文本基础/章节切分.py、scripts/_w1042_make_spec.py、scripts/check_cross_line_rewrite.py、scripts/cross_line_baseline.json、scripts/index.md、scripts/ledger_backfill.py、scripts/output/README.md、scripts/output/_cascade_files_W1042.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1042_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、tests/unit/test_archive_segments.py、tests/unit/test_cross_line_rewrite.py、tests/unit/test_plan_template_read_disk.py。
+
+**本批要点**：① **台账回填显式参数根因修复**——`ledger_backfill.py` 的 `--from-git` 分支把「取值优先级」与「是否产生变更」耦合在同一个 `is None` 判断里 ⇒ 显式 `--status`/`--hash` 被静默吞且不报错（帮助文案却写「显式可覆盖」）；同族缺陷 `--cascade` 只在 else 分支处理 ⇒ 改统一取值决策层（显式优先·显式缺失才用机器反填）；② **自测汇总数改由源码统计**（原硬编码「3 正例绿 + 4 负例红」⇒ 实为 12 条正例断言 + 5 条负例断言）；③ **第 48 门禁新增件分支补真实仓内文件用例**（原 tmp 仓根替身 ⇒ 真实路径/真实字节链路从未覆盖；改只替换 HEAD 判定开关）；④ **43 处可疑改写面逐处人工复核**；⑤ **坑表 +4 条**（124 → 128 条·六主题分项与 AGENTS/HANDOVER 计数链五处对账一致）；⑥ **`make ci` 接线核实**——跨行扫描器已由并行 W1014 接入 ci 链（Makefile `$(MAKE) cross-line`）⇒ 本批只做完成提示归属归位（`==> ci 完成` 原落在 cross-line 目标体内）。
+
+**验证**：`ledger_backfill --self-test` 退出码 0（12 条正例断言 + 5 条负例断言）· 显式 `--status` 覆盖生效负样本自证（显式文本入列且非自动反填文本）· `pytest tests/unit/test_plan_template_read_disk.py` **6 例全绿** · 第 48 门禁对本批执行前计划件实跑 **0 FAIL**（新增文件·全项符合）· 跨行扫描器 `--gate` 高危 **0 处** · 43 处可疑面逐处结论见复盘报告 · 全量门禁见收官提交。
+
+> - **状态**：已收官（工具面四修 + 复核 43 处 + 坑表 +4 条 + 计数链一致·待用户裁决真缺陷是否即刻修复）
+
+### W1041（2026-10-30）：批次号预约机制（开批先占号·reserve_w.py + 铁律 17）
+
+> **来源**：用户 2026-10-30 令「做」——承接其问「并行会话之间没有批次号预约机制那怎么做？」。
+>
+> **背景**：今天的 W1039 撞号实战暴露——台账是「事后登记」，两个并行会话各自从自己看到的台账 max 取号，同时动手必撞（本批即撞 W1039，对方续占 W1040，本批顺延 W1041）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/agent/pitfalls.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1041_spec.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/tools-inventory.md、scripts/reserve_w.py、site/index.html
+
+**根因**：批次号缺乏预约环节。台账认领是事后登记，无法在动手前可见地占号，多会话必然撞。
+
+**交付**：
+
+① **`scripts/reserve_w.py`（开批占号助手）**：三模式——`reserve`（占号，stdout 仅打印 W 号）、`list`（列有效预约）、`release <W号>`（收官释放）。
+candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 `tmpe/_w_reservations.json`（已被 .gitignore，同一工作树内多会话共享），**24h TTL 防占而不交**，写文件用「临时文件 + os.replace」保证原子性。
+② **铁律 17「开批先预约号」**（AGENTS.md）：开批第一步必须跑 `python scripts/reserve_w.py` 占号，**未占号不动手**。
+③ **坑表加 W1039/W1040 撞号案例**（docs/agent/pitfalls.md）：记录根因与修法，使下个会话检索得到。
+
+**边界（重要）**：此机制仅同一工作树内的并行会话有效；两会话在**不同 clone** 时 reservation 文件不共享，仍须退回 git log + 台账兜底。本项目并行基本在同一工作树，覆盖主场景。
+
+**验证**：脚本自测——占号得 `W1041`、列表单 W 无重复前缀、字节编译通过（`py_compile` OK）；门禁全绿（核心 0 FAIL）。
+
+> - **状态**：已收官（预约机制入库·铁律 17 立·撞号案例入坑表）
+### W1040（2026-10-30）：任务分级协议入库（跨项目协作协议移植·重放）
+
+> **来源**：用户 2026-10-30 提供《任务计划、执行与经验沉淀系统提示词》全文并裁决「装」入两项目治理文件；Anthropic 锚定侧已同日入库（wiki/task-protocol.md·74a13cf），本仓侧按 W507 映射以深度篇入 docs/10-方法论沉淀/。前稿四度撞号（W1035/W1036/W1038 被并行消费·W1039 被按裁决 A 收回），材料经全链验证后以 W1040 重放。
+>
+> - **文件**：docs/10-方法论沉淀/任务分级协议.md、docs/10-方法论沉淀/README.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/执行前计划-W1040-任务分级协议入库.md、docs/INDEX.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w1040_spec.json、scripts/output/_cascade_files_W1040.txt、CHANGELOG.md、README.md、STRUCTURE.md、HANDOVER.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/search.html、site/en/search.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/file-index.md、scripts/output/stats.json
+
+**处置**：① 新增《任务分级协议》：战役/任务/微三级分流，战役级走九要素执行前计划六阶段全流程，任务级走五行最小计划，微任务免表格；② 固化统一编号（G/AC/ASM/ST/D/R/V/E/P/A/WF/SC/PRE）与模糊词替换表；③ 最小计划模板与经验沉淀卡体例随文；④ 与 W1033「历史文件改状态不改内容」判据、E1 spot-check 铁律互相引用成网；⑤ 执行前计划按 W1033 T05 先例归档 docs/11-方案报告/计划方案/（框架号 T-39）。
+
+**为什么不直接改 AGENTS.md §6**：其维护契约要求规则就地并入且版本脚注对齐 HEAD，改动风险高；本协议先以深度篇入库，升格留用户后续裁决。
+
+**验证**：preflight 认领后 dry-run 断言全过再 --apply（spec 先终稿·级联不可重跑）；搜索索引与 CSP 重建；stats --check 24 键零差异（methodology_docs 25→26）；docs_index 重生成；pytest 冒烟无本批新增红灯；safe_commit --expect-spec 过第 51 槽。
+
+> - **状态**：已收官（协议入库·索引登记·级联落盘）
+### W1039（2026-10-30）：用户级记忆五则入项目铁律（15/16 条）
+
+> **来源**：用户 2026-10-30 两道令——「禁止补丁加补丁，修复必须从根因开始修复；这个内容加进项目内」
+> + 「再次检查用户级记忆文件里面的内容有哪些项目内也得有」。
+>
+> **背景**：这些原则此前**只在用户级记忆**（跨会话 AI 记忆文件），项目内无载体——换会话、换 Agent、
+> 换接手者就检索不到。逐条对照 7 条后，项目内**缺 5 条**。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/output/_w1039_spec.json、scripts/output/file-index.md、site/index.html
+
+**铁律 15「禁止补丁加补丁，修复必须从根因」**：此前项目内只有 W1019 的具体案例、无通用判据。本条给出
+① 定义（修法只让报错消失、未消除结构性原因＝补丁）② **四种典型形态**（为迎合脆弱判据补数据 / 调用处加特例分支 /
+用豁免压红灯 / 修完不追问「为什么被触发」）③ 正确顺序（先问机制为何被触发 → 修判据或机制 → 再改数据）
+④ **必须转成机器判据**而非写文档等人记。
+
+**铁律 16「协作与环境约束·六则」**：补 5 条用户级记忆 + 1 条元规则——
+① 不主动创建 automation（2026-10-13 令，10-17 已复发）② GPU 重负载须先获批并分批（Kernel-Power 41 实证 2 次）
+③ 禁用 `~/.minimax/` 内容（取证改用项目面证据）④ 给用户的命令禁 `...` 缩写（W1025 实证）
+⑤ 涉及取舍必须显式给推荐 ⑥ 有复用价值的教训，项目内必须留载体。
+
+**并发说明**：开工时台账已被并行会话占用 W1039（任务分级协议），且其 CHANGELOG 段引用了**尚未创建**的
+执行前计划文件（C4-f 报出）。按用户裁决 A：退回其半成品（CHANGELOG 段与 8 面级联均未入库），
+其 `任务分级协议.md` 正文保留在工作树等待该会话续做；本批占用 W1039。
+
+**验证**：全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（两条用户令入项目铁律 15/16；并行会话半成品未销毁、留在工作树）
+### W1038（2026-10-30）：a11y 性能优化（去冗余 lower·收益 5.7%）
+
+> **来源**：用户 2026-10-30 令「做」——承接 W1037 测出的单段瓶颈（a11y对比 73.33s / 52.8%）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/a11y_audit.py、scripts/output/_w1038_spec.json、scripts/output/file-index.md、site/index.html
+
+**profile 定位**：`parse_starttag` 被调 **579 万次**、`str.lower` **4863 万次**（tottime 7.3s）。
+病根在 `A11yElement.__init__`——对每个元素全量执行 `tag.lower()` 与 `{k.lower(): v for ...}`。
+
+**改法（实证后动手）**：先验证 CPython 行为——`<DIV CLASS="A">` 经 `html.parser` 解析即得 `tag='div'`、`attrs=[('class','A')]`，**属性键与标签名在进入 handle_starttag 前已被小写化**。⇒ 6 处 `lower()` 纯冗余，去掉。
+
+**语义等价验证（关键）**：改前改后各跑一次，`findings` **13023 条逐条比对，0 处差异**；字节数同为 4,212,724（sha 差异仅来自 `generated_at` 时间戳，非内容）。
+
+**收益：73.9s → 69.7s，仅 5.7%。**
+
+**这个数字说明什么（重要）**：瓶颈**不在冗余 lower**，而在**标准库 `HTMLParser` 的纯 Python 状态机本身**——profile 里 `goahead` cumtime 149s、`parse_starttag` 69s，都是解析器内部开销。去掉 4863 万次 lower 只省 4 秒，说明该方向已挖到底。
+
+**再要大幅提速的唯一路径**：换解析器（`lxml.html` 或 `selectolax`，通常快 10–50 倍）。代价是**引入第三方依赖**，而本项目目前零硬依赖（`policy.yml` 用 JSON 兼容语法、yaml 兜底即是此风格）。**这个取舍应由用户决定，不在本批擅自动手。**
+
+**验证**：findings 逐条一致 · 全量门禁 57 段核心全绿（a11y 段 E2-2 P0/P1=0 未变）。
+
+> - **状态**：已收官（冗余 lower 清除·语义等价已证）；**收益低于预期，已如实标注**；换解析器待裁决
+### W1037（2026-10-30）：门禁耗时剖析（--profile·实测推翻旧假设）
+
+> **来源**：用户 2026-10-30 令「都做」（A 加剖析 / B 段级缓存 / C 站点段并行）。先做 A——**没有耗时数据，B 和 C 都是瞎打**。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1037_spec.json、scripts/output/file-index.md、scripts/verify_delivery.py、site/index.html
+
+**改动**：`verify_delivery.py` 加 `--profile`——`_scoped_run` 里段级计时（同段内多次 subprocess 累加），
+`_print_summary` 结束时输出 TOP12 耗时排行（含百分比与条形），`--profile` 开关控制不影响默认输出。
+
+**实测结果（full 档·2026-10-30）**：
+
+```
+合计 138.9s（2 分 19 秒）
+  a11y对比      73.33s  52.8%
+  可视化数据     21.46s  15.4%
+  色盲安全        5.51s   4.0%
+  动效禁令        5.09s   3.7%
+  内嵌残留        4.05s   2.9%
+  …其余 34 段    12.51s   9.0%
+```
+
+**这个数据推翻了两个此前的判断**：
+
+① **「pre-commit 要跑 13 分钟」是错的** —— 实测 2 分 19 秒。此前那个印象可能来自系统负载高的某次，
+或某个已修掉的慢段；**我基于错误前提设计了整轮优化方案**。
+② **「35 个站点段都慢」是错的** —— 两段吃掉 68%（a11y 一段占一半），其余 49 段合计 29 秒。
+
+**因此 B / C 的结论**：
+- **C（站点段并行）收益有限**：瓶颈是单段 73s，并行后最慢段仍是 73s，天花板就在那。
+- **B（段级缓存）也对不上**：a11y 依赖 CSS/页面改动，而这类改动恰恰是最常见的，缓存常失效。
+- **真正的解是优化 a11y 那一段本身**：73s 扫 235 页 ≈ 每页 0.31s——若有重复解析/重复计算，
+在段内优化比搭缓存架构简单十倍。这条留作下一批（需先读 `a11y_audit.py` 找重复工作）。
+
+**验证**：`--scope docs --profile` 与 full 两档均实测跑通、核心全通过；默认输出未变（不加 `--profile` 无排行）。
+
+> - **状态**：A 已收官（剖析能力入库·数据已推翻旧假设）；B/C **按数据判断不做**，改指向 a11y 段内优化
+### W1036（2026-10-30）：授业官 skill 按编制定名（puti-shouye）
+
+> **来源**：用户 2026-10-30 令「`.agent/skills/xiyouji-guard` 这个也要按照编制来定角色」。
+>
+> **定位**：《取经编制表》§2 丙组 · **菩提祖师 · 授业官**（回目锚点 1）——「教完本事，不留姓名，不受香火；留下的是本事，不是人设」。编制表对本位的挂载写的正是「固化为 Skill（`skill-creator`）」、状态「当前位空」。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1036_spec.json、scripts/output/file-index.md、site/index.html
+
+**改名理由**：`xiyouji-guard` → **`puti-shouye`**（菩提授业）。不叫 guard 是因为：**守卫是挡在门外，授业是把本事交到你手上**。本 skill 不拦人，只在你动手前提醒一遍——该记得的都在这儿，要细节去查坑表。
+
+**改了四处**：① SKILL.md 顶部加**编制位出处**（回目锚点 + 那句评语 + 编制表对本位的约束「技能内容仍以 `pitfalls.md` 为唯一权威源，避免双源漂移」）；② 加「这个名字的意思」段；③ 编制表 §3.1 第 3 行由「位空」改为「**已补（W1034 建 / W1036 定名）**」，并**保留原判据「模型改文件前不会主动加载」仍成立**——该路径确实不自动加载，靠 AGENTS 指针；④ AGENTS 指针路径同步。
+
+**过程记录（安全边界）**：改写既有 SKILL.md 被安全策略拒，理由「建立 Agent 技能可执行配置内容」——与改 pre-commit 钩子同类。由用户删除旧件后**新建**放行。这条边界合理：skill 是会被自动加载的可执行配置，不该由 AI 随口改写。
+
+**验证**：`.agent/skills/` 下现仅 `puti-shouye`；AGENTS 指针指向新路径；编制表三位空缺状态已全部结清。
+
+> - **状态**：已收官（授业官位完成定名与出处标注；器物官按收益不做、收官官与对账官已由 W1035 职责书承接）
+### W1035（2026-10-30）：三份职责书（收官官 / 对账官 / 文字取证官）
+
+> **来源**：用户 2026-10-30 令「三项一起」，并追问「不是按西游记里面的人物角色设定来吗」——三份模板全部按《取经编制表》的人物位命名与叙述。
+>
+> **共同设计**：现环境没有「自建 Agent」接口，但 `Agent` 工具可派发内置角色 ⇒ 把常驻角色**降级为可派发的职责书**。这比建常驻更干净：不占资源、边界清晰、用完即弃。代价是需要有人记得派，故登记在目录索引与 AGENTS 指针里。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/README.md、docs/agent/closeout-agent-prompt.md、docs/agent/index.md、docs/agent/reconcile-agent-prompt.md、docs/agent/text-audit-agent-prompt.md、scripts/output/_w1035_spec.json、scripts/output/file-index.md、scripts/output/tools-inventory.md、site/index.html
+
+**三份职责书（按人物位）**：
+
+| 位 | 文件 | 职责 | 关键约束 |
+|---|---|---|---|
+| **沙悟净 · 收官官** | `closeout-agent-prompt.md` | 把批次收干净：跑全量门禁 / 核指针面 / 核计数 / 核台账 / 核体积窗 | **只做验与补，不碰内容**（不施工·不 commit） |
+| **谛听 · 只验证** | `reconcile-agent-prompt.md` | 核对登记面 vs 实况（Backlog / 台账 / 文档声明） | **不采信自述**·五判定·每条必带证据·附滞后率 |
+| **千里眼 · 取证官** | `text-audit-agent-prompt.md` | 文字只读诊断（过期/重复/冗长/废话） | **先按体裁筛规则**·核心产出是「可压/不可压」分类 |
+
+**为什么是这三处**：编制表里它们都是「有明确职责但无专属载体」的位——沙悟净卡在「无专职 Agent」、谛听直接标着**「当前位空」**、千里眼挂了 `explore` 但缺成文的取证纪律。
+
+**谛听位是这次额外发现的**：T05 只记了三处空缺（器物官/授业官/收官官），但编制表 §2 里谛听位的状态写的是「**当前位空**（MCP 未接）」——第四处空缺，本批补上。器物官（MCP 注册）经成本判断不做：其 5 个工具对应的脚本本就能跑，接 MCP 只是换调用方式。
+
+**每份都写了「不该做什么」**：收官官不施工、对账官不修条目、取证官不改一个字。审查与施工分离这条铁律，在这三处各落实一次。
+
+**验证**：新增 3 md 后搜索索引与 CSP 已重建 · 目录索引 405 件已刷新 · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（三处「有职责无载体」的位补齐；器物官按收益不做，已在 W1032 说明）
+### W1034（2026-10-30）：授业官位补全（项目级避坑 skill）
+
+> **来源**：用户 2026-10-30 选定 A（做授业官），并指定位置「`D://xiyouji//.agent` 内新建 skills 目录」。这是 T05（W831 批）中 **ST-11 授业官**这一步在现环境的落地。
+>
+> - **文件**：.agent/skills/xiyouji-guard/SKILL.md、.github/workflows/README.md、.gitignore、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1034_spec.json、scripts/output/file-index.md、site/index.html
+
+**产物**：`.agent/skills/xiyouji-guard/SKILL.md`——**15 条最高频硬判据**，分四组：批次收官 4 条（先 add 再 refresh / refresh 后再同步 spec / git mv 两端 / changelog_body 前导空行）、判据与门禁 4 条（禁脆弱特征 / 先读原文与源码 / 禁豁免压绿 / token 在途不算事件）、历史与时效 4 条（历史段不改写 / 辨策略决定与已完成 / 步骤绑定旧环境 / 归档只解纵向）、人机协作 3 条（命令禁省略号 / 零引用不能按 .class 搜 / 改 md 连锁索引与 CSP）。每条一句话并指向 pitfalls 全表。
+
+**分层设计（为什么不是 123 条全塞进来）**：pitfalls 已 94 KB，全量做成 skill 会挤占上下文。skill 只放**速查**（15 条 + 查表命令 + 载体分工表），完整条目仍留 `docs/agent/pitfalls.md`——两者是「速查 → 详查」关系，不重复维护。
+
+**顺手解决的两个坑**：
+① **`.agent/` 原被 gitignore 整体忽略**（第 214 行），放进去的 skill 不进 git、别的 Agent 拿不到。改为 `.agent/*` + `!.agent/skills/` + `!.agent/skills/**` 放行——**父目录整体忽略时子路径 `!` 无效**，必须用 `dir/*` 形式才能例外。
+② **自动加载的路径差异（如实标注）**：系统自动加载只认第三方 Agent 运行态目录（skills/），本 skill 在 `.agent/skills/` 下**不会自动加载**。已在 `AGENTS.md` 加显式指针（「⚡ 速查 skill」一行），靠指针 + 主动查阅生效；要自动加载需另放一份到该目录，会形成双份维护，暂不做。
+
+**验证**：第 45 槽目录文档 0 FAIL（`.agent` 属隐藏目录不在在管扫描面）· 第 52 槽仓库布局 0 FAIL · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（授业官位载体建成；ST-10 器物官按收益判断不做，ST-12 收官官现环境无接口）
+### W1033（2026-10-30）：T05 计划状态校正（历史正文不改·只改时效标注）
+
+> **来源**：用户 2026-10-30 追问「那你为什么不改计划呢」——上一批我改了编制表（产物），却没动 T05（计划）。
+>
+> **为什么不当场改正文**：T05 是 W831 批的**执行前计划**，按项目规矩**历史段不改写**（改了就无法追溯「当初怎么打算、为什么这么排」）。这是克制，不是遗漏。
+>
+> **但有一处必须改，而且我漏了**：T05 第 11 行状态写「**执行中**（施工进行中·非已收官）」，而台账里 **W831 早已归档收官**——两处打架，属「登记面 vs 实况」同族背离。读者按状态行判断会以为整批在途。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md、scripts/output/_w1033_spec.json、scripts/output/file-index.md、site/index.html
+
+**处置**：① 状态行校正为「**仓内已收官 · 仓外三项未执行**」——ST-01~09 随 W831 归档，ST-10~ST-12（仓外动作）从未执行；② 5.5 表前加**失效声明**：ST-10~12 的 `pip install fastmcp` / `mavis mcp create` / `mavis agent create` 绑定旧环境，**不可照抄**，续做须按现环境重写步骤（指向《取经编制表》§4 环境差异声明）；③ **步骤正文一字未改**——保留「当时怎么打算的」原始记录。
+
+**这条的通用判据**：历史文件该改的是**状态与时效标注**，不是**内容与步骤**。把失效的步骤改写成「现在能用的样子」，历史就变成了假的——后人会以为当年就是这么做的。
+
+**验证**：全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（T05 状态与台账对齐·失效步骤已标注·正文保持原样）
+### W1032（2026-10-30）：编制表环境依赖纠错（mavis 假设撤回）
+
+> **来源**：用户 2026-10-30 追问「为什么需要 mavis？」——这一问直接推翻了我上一批的结论。
+>
+> **我错在哪**：上一批说「连接器与 Agent 清单待有 `mavis` 环境时重核」。事实是 `mavis` 是 **2026-10-20 那套环境的 CLI**（T05 计划里写的 `mavis mcp create`），**现环境不需要它**——我把旧文档的依赖假设当成了现状汇报，没先问一句「现在有什么工具」。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、docs/agent/pitfalls.md、scripts/output/_w1032_spec.json、scripts/output/file-index.md、site/index.html
+
+**实测（现环境）**：`list_installed_plugins` → **No connectors installed（连接器 0 个）**；`skill_management list` → **用户级技能 2 个**（`dev-god` / `karpathy-guidelines`）。
+对照编制表记载的「16 个 App 工具 + 12 项技能」——这不是「数据过期」，是**环境换代**。
+
+**处置**：① 编制表 §4 加「环境差异声明」——表内 `mavis-doctor` / `superpowers:*` / `browser-use:*` / `code-review` / `diagram-design` / `deep-research` 等标注**属旧环境·现不可用**；「16 个 App 工具」标为旧环境快照。② **保留挂位方法论**：哪类能力该落哪个位（器具→器物官、检索→千里眼、验证→谛听）这条映射**跨环境不变**，变的只是具体工具名——照抄名字必踩空，按位找当下工具才有效。
+
+**坑表补第 123 条**（总 122→123·流程主题 34→35）：**文档里的操作步骤绑定当时的工具环境，环境一换步骤即失效，而文档不会自己告诉你**。⇒ 引用旧文档的步骤前，先确认它依赖的工具在当前环境是否存在；写「待某工具重核」这类结论前，先搜一遍当前可用的等效接口。
+
+**验证**：C5e 坑表分项对账（26/6/26/19/11/35 = 123）通过 · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（环境差异声明入表·坑表第 123 条入库；`mavis` 依赖结论已撤回）
+### W1031（2026-10-30）：取经编制表数据重核（时效与修订触发入表）
+
+> **来源**：用户 2026-10-30 引用 `执行前计划-T05-取经编制表落库与编制位补全.md` 令「重新设计优化」，选定 A 方案（更新数据 + 精简结构 + 加修订触发）。T05 是 W831 批的执行前计划，W831 已归档收官，但产物《取经编制表》作为**活文档**其数据停在 10-20。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、scripts/output/_w1031_spec.json、scripts/output/file-index.md、site/index.html
+
+**核实结果（10-30 现状 vs 10-20 记载）**：
+
+| 编制位 | 10-20 记载 | 10-30 实测 |
+|---|---|---|
+| 太上老君·器物官 | MCP 服务器 0 个 | 载体 `mcp-server/xiyouji_mcp.py` **在**（29.5 KB）；是否已挂载未核 |
+| 沙悟净·收官官 | 无专职 Agent | 未核（依赖 `mavis agent list`） |
+| 菩提祖师·授业官 | 本地技能目录**空** | 目录 **存在且非空**（第三方 Agent 运行态目录·skills/）——与记载相反 |
+
+**本批处置**：头部加「数据时效」「修订触发」两行（重核日期 + 60 天到期 + 生态变动即重核）；
+§3 补一句辨析——**「空缺」指未挂载，不是未写代码**（三处的载体今天都在，缺的是挂载那一层）；
+§4.1 标题与首段明确标「数据已过期」并给重核命令，防止再被当现状引用。
+
+**结构未砍（判断说明）**：§2 编制卡占 16.7 KB（37%），核对后确认它**不是重复叙述**——总表只给六列，
+卡片讲的是「怎么用 / 不能做」（孙悟空不做顺手改、猪八戒不能边审边改），这是本文档的核心价值。
+按 slop-clean 硬边界「信息守恒」，删它就是砍内容。**本批做的是准确性，不是瘦身**（44.9 → 46.2 KB）。
+
+**验证**：全量门禁 57 段核心全绿 · 编制表 HTML 母件未动（md 为其事实源）。
+
+> - **状态**：已收官（数据时效与修订触发入表；连接器/Agent 清单待有 `mavis` 环境时重核）
+### W1030（2026-10-30）：方案报告抽查 + 归档覆盖口径入规范
+
+> **来源**：用户 2026-10-30 两问——「抽查验证（34 件方案报告）」「归档机制和临时文件机制为什么不是全覆盖整个项目」。
+>
+> **抽查结论**：三个分区各抽 1 件，全部证据型——`审查与评审/全量对抗审查报告`（带审查基准五可标准 + HEAD `5725389d` + 证据脚本一键复跑）、`工作复盘报告`（带生成时间/周期/模型/来源）、`设计与架构`（md + 配套 html 预览与 png 架构图）。
+非 md 共 **14 件全为配套件**（架构图 6 png / 设计预览 2 html / 数据截图），每件都有对应 md 母件。
+⇒ 34 件方案报告**无 AI 腔、无过期件**，「证据型」判断成立。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/文档规范.md、docs/00-导读/项目说明.md、scripts/output/_w1030_spec.json、scripts/output/file-index.md、site/index.html
+
+**机制口径（本批核心·已写入 `文档规范.md` §8）**：**归档只解「纵向增长」，不解「横向堆积」**。
+
+| 形态 | 特征 | 机制 | 项目覆盖 |
+|---|---|---|---|
+| **纵向** | 单文件无限追加（一个文件里越积越多的段/行） | 必然撞体积窗（45KB / 110 段 / 60 行）→ **窗口 + 滚动迁出** | 六类治理文档**全部覆盖** |
+| **横向** | 独立文件堆积（每件大小恒定） | 不会撞窗 → 需要的是**生命周期状态**（在役/已沉淀/可弃），不是归档器 | 以「README 分区口径 + 索引登记」承担，未建状态列 |
+
+**所以不是遗漏，是两类问题被混为一谈。** `docs/` 正文 2800 篇与方案报告 85 件属横向——给它们配归档器＝用错工具：W1029 已实测，14 件过期计划仅 404 KB，迁走要改 115 处引用，收益是全仓 **0.85%** 的整洁度。**问「为什么不给 X 建归档」之前，先问 X 是纵向还是横向。**
+
+**验证**：全量门禁 57 段核心全绿 · docs 链接 0 broken · 体积窗 0 FAIL。
+
+> - **状态**：已收官（抽查验证通过·机制判据入规范，以后同类问题不必再解释）
+### W1029（2026-10-30）：方案报告归档判断（裁决不迁 + 留口径）
+
+> **来源**：用户 2026-10-30 令「B 档合并 Q2」——方案报告逐件判「已完成且已沉淀」的同时清文字，一遍读两件事。
+>
+> **结论先行：B 档的归档判断做完了，但裁决是「不迁」。**
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/README.md、scripts/output/_w1029_spec.json、scripts/output/file-index.md、site/index.html
+
+**核对结果（`docs/11-方案报告/` 85 件）**：`计划方案/` 51 件 = **34 件报告**（`T0N-…经验沉淀报告`·执行后沉淀·在役）
++ **17 件执行前计划**（`执行前计划-T0N`·施工前对齐件）。17 件中 **14 件有对应报告**（T01/T03/T04/T19/T20/T21/T23/T26/T27/T28/T29/T30/T31/T32），
+说明执行已完成；**3 件无对应报告**（T02/T05/T18）分别被 4/4/2 个文档引用 ⇒ **保留**（未确认执行完毕）。
+
+**为什么裁决不迁（成本核算）**：① 14 件合计 **404 KB**，占该目录 22%、全仓 **0.85%**——不是臃肿问题；
+② 迁走需改写 **115 处引用**（29 个文件·跨 17 个 T 号），任一处错即成死链，属高风险低收益；
+③ 计划件本身是「当初为什么这么改」的审计依据，与对应报告成套对拍才有价值——迁走反而削弱可追溯性。
+
+**实际落法**：在 `docs/11-方案报告/README.md` 的分区表给「计划方案」加一句口径——
+「**两件成套保留·不迁归档**：`执行前计划-T0N` 是施工前对齐件，对应 `T0N-报告` 存在即表示该计划已执行完毕；
+全目录 51 件仅 1.8 MB，迁走需改 115 处引用、任一处错即成死链——收益不抵风险，保留便于对拍」。
+以后有人再问「这些过期计划为什么不归档」，答案在目录自己的 README 里，不在会话里。
+
+**B 档的文字清理**：按 A 档同样的口径抽查（`计划方案/` 属证据型：每件都有编号、日期、验收人、执行结果），
+未发现 AI 腔与可删废话；真正的目标/原则式表述集中在报告开头的「头五要素」表格，那是框架要求的结构化字段，不是灌水。
+
+**验证**：全量门禁 57 段核心全绿 · docs 全量链接 0 broken（未迁即无死链）。
+
+> - **状态**：已收官（归档判断完成·裁决不迁并留口径；文字清理同口径抽查未发现可删项）
+### W1028（2026-10-30）：归档系统与临时文件系统诊断
+
+> **来源**：用户 2026-10-30 令「做归档系统和临时文件系统的问题」。
+>
+> **诊断结论（两套系统都是「制度齐备、缺定期执行」）**：
+> ① `tmpe/` 有 policy.yml 六条分类规则 + `tmpe_tidy.py` 的 plan/apply/confirm/undo/from-plan 全套；
+> ② `archive/README.md` 有归档台账（34 条路径引用，31 条真实路径**全部存在**，另 3 条为通配写法非缺失）。
+> **两套系统的问题都不是设计缺陷，是没人按期跑。**
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/batch-closeout-checklist.md、scripts/output/_w1028_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批处置**：① 跑 `tmpe_tidy.py --apply --confirm`——**归桶 29 件 / 零删除**（顶层散件 186 → 157；
+余 140 件在**冻结期内**不迁，属设计防并行会话误动，过期自然归桶）；journal 已留，`--undo` 可悔。
+② 收官 checklist 新增「临时区」一项：**每 10 批或 `tmpe/` 超 150MB 跑一次归桶**，并明确
+**`_trash/` 清空不在自动范围**（个人文件安全铁律：列清单 → 主人确认 → 回收站）。
+
+**未处置（待用户确认）**：`tmpe/_trash/w993-clean` **81 MB / 709 件**——W993 批清理时的回收件
+（2026-09-27 至 10-27），已进回收站但从未清空。**清空=二次删除，需单独确认**；本次只诊断不动手。
+
+**验证**：tmpe 顶层散件 186→157（-29）· 归档台账 31/31 真实路径存在 · 全量门禁 57 段核心全绿。
+
+> - **状态**：诊断与机制补强已收官；`_trash` 清空待用户一句话
+### W1027（2026-10-30）：治理文档文字审查 A 档（结论：零可删）
+
+> **来源**：用户 2026-10-30 令「按这个走」——A 档治理文档文字审查现在做，B 档与方案报告归档合并，C 档放弃专项清理。
+>
+> **口径**：`D:/open-source/slop-scan`（只诊断·每条例须引原文）+ `slop-clean`（只删不加·四条硬边界·必附改动清单）。
+> **规则按体裁筛过**：原表针对散文/论文（AI 腔、升华结尾、学术防御性写作），而本批是工程文档；
+> 其中「被动语态」「弱化限定」「解释性铺垫」属必要成分（硬边界 4），不列入清理项。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1027_spec.json、scripts/output/file-index.md、site/index.html
+
+**扫描结果（6 件 · 138 KB）**：
+
+| 判据 | 结果 |
+|---|---|
+| TIER-1 AI 腔特征词（综上所述/赋能/抓手/深耕/保驾护航/值得注意的是/让我们一起/不仅…更…等 20 词） | **0 命中** |
+| 过期表述（「当前/目前」后接陈旧数据） | **0 处** |
+| 元叙述（本节/以下将/如上所述） | 14 处「本节」——全为导航语（「本节说明…」），必要保留 |
+| 超长句（正文 >150 字，已排除表格行与代码） | 54 处，**逐条核后 0 处可删** |
+| 文件内重复句 | 3 组——HANDOVER「项目根目录」与「与其他文档关系」两处列同名链接（用途不同：查位置 vs 查关系），属有意重复 |
+
+**为什么零可删**：54 处超长句逐条核过，全部是**清单 / 批次记录 / 规则条文**——
+如「88 个可视化页面（含 graph-explorer·A-AH 34 类 + Q+ 双联 + …）」、「W422 全量治理已处置：perf.yml 补 push 触发·…·…」、
+「框架类交付物必须落进仓内目录并登记索引（W858）：凡…必须…」。每项都是独立事实，压短必丢信息；
+这属于 slop-clean 硬边界 1「信息守恒」与硬边界 4「必要限定保留」的管辖范围，删了就是错。
+
+**结论**：A 档**无可删内容**——这批文档是「证据型工程文档」（批次号 + 命令 + 实测数字），天然不含 AI 腔。
+**对 B 档的启示**：真正的废话风险在**计划类文档**（`docs/11-方案报告/计划方案/` 51 件）——「执行前计划」含大量
+目标/原则/预期收益式表述，那才是 slop-clean 的战场；`审查与评审/`、`工作复盘/` 属证据型，预计同样少见。
+
+**验证**：全量门禁 57 段核心全绿 · 体积窗 0 FAIL · 台账 60 行达窗口上限（下批先归档）。
+
+> - **状态**：A 档收官（零改动·结论入库）；B 档待与方案报告归档合并执行；C 档按裁决放弃专项清理
+### W1026（2026-10-30）：HANDOVER 已完成内容归档 + 归档机制诊断
+
+> **来源**：用户 2026-10-30 三问——「为什么文件内已做完的内容还存在交接文档内 / 已完成的方案报告为何没移入归档 / 对整个项目所有文件的文字内容审查去除过期重复冗长废话」。
+>
+> **诊断（回答前两问）**：不是没做归档，是**归档机制覆盖不全**。六类治理文档各有归档容器（CHANGELOG / HANDOVER / STRUCTURE / AGENTS / 台账 / file-index），但：① HANDOVER 内只有**里程碑块**有滚动窗口（保留最近 6 个），而「二、下一步方向候选清单」是**累积型区段、无任何归档机制**——已完成叙述随批只增不减；② `docs/11-方案报告/` 85 件报告**从来没有归档机制**（README 只有索引，无状态列、无迁出动作）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/HANDOVER-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1026_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批处置（Q1）**：重构 HANDOVER「二」段——把已完成叙述全文迁 `archive/docs/HANDOVER-ARCHIVE.md`（W402 战略转型 3 条删除线已完成项、A2 系列收束、A3/A4/A5 各方向「已完成 WXXX-WXXX」批次史、E1-E8、S 卡裁决、优先级建议），现役只留 **13 条未完成项**；并**补回一条仍在生效的策略约束**（停止模板化扩容·A3 冻结 215 篇·A4 W342 放宽为「非批量补篇」）——删归档时若不辨认「策略决定 vs 已完成叙述」，会把活约束一起埋掉。**HANDOVER 43.5 → 29.9 KB（-32%），387 行**。
+
+**Q2 诊断（未处置·需另批）**：`docs/11-方案报告/` 85 件（审查与评审 13 / 工作复盘 15 / 治理与核查 3 / 计划方案 51 / 设计与架构 10 / 调研与数据 3）。「已完成且已沉淀」的判据须逐件读（是否有结论、是否已被后续批次引用），不能按文件名批量判断——51 件「计划方案」里既有执行前计划（已过期）也有任务执行报告（已成沉淀），混在一起。拟建 `archive/docs/方案报告-ARCHIVE/` + README 加「状态」列（在役 / 已沉淀），逐件判后迁出。
+
+**Q3 规模（未处置·需分档）**：全仓 **2940 个 md / 47.6 MB**（不含 node_modules/archive/desktop）。按 `D:/open-source/slop-scan`（只诊断）与 `slop-clean`（只删不加·四条硬边界）口径，一轮清完不现实。拟分三档：A 治理与导读（HANDOVER/AGENTS/README/项目说明/文档规范，约 6 件）→ B 方案报告 85 件 → C docs 正文与 site 文案（其余约 2800 件，随批次自然更新，不专项清）。
+
+**验证**：体积窗 0 FAIL（HANDOVER 29.6KB）· 文档口径体检除「HANDOVER 未提交残留」外 0 FAIL（提交后消）· A4 stats 标记「209 篇」随行保留（未破坏 C5 对账）· 归档容器 344KB（追加式·不改写）。
+
+> - **状态**：Q1 已收官；Q2/Q3 已给判据与分档，待用户定范围后另批执行
+### W1025（2026-10-30）：坑表计数升机器判据（C5e）+ 新 Agent 入口
+
+> **来源**：用户 2026-10-30 令「做」——落实 W1024 结项时提的两条建议：① HANDOVER 顶部加「新 Agent 必读三件套」；② 坑表分项计数升机器判据（W1024 实证：AGENTS 分项停在 `25/25/15/10/28=109` 长期无人核，而总数声明已到 118；我手算 121、实算 122）。
+>
+> **落点选择**：不新增门禁槽位（那要改 gates.md 的 57 槽声明，连锁成本高于收益），而是并入第 31 槽 C5 系列——「分项之和 vs 总数」本就是 C5「聚合数字对账」的业务范围。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/项目说明.md、scripts/check_doc_sync.py、scripts/output/_w1025_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批要点**：① **新增 C5e**（`check_doc_sync.py`）：坑表六主题标题声明数、各段 `- **` 实测条目数、AGENTS 总数、AGENTS 分项行、HANDOVER 两处总数——**五处交叉对账**，任一处不等即 FAIL。② **判据可证伪验证**：把 AGENTS 的 122 临时改成 123 → 立刻报 `C5e: AGENTS.md 声明 123 条 ≠ 坑表实测 122 条`，复原后归零（不是死门控）。③ **HANDOVER 顶部加必读三件套**：本文件 + pitfalls（**只读前 10 条也强于不读**）+ gates，并给出实证——W1019–W1024 六批踩的坑有 11 条属坑表已写过的形态。
+
+**验证**：`check_doc_sync --self-test` **33/33 通过**（含既有 C1–C7 全部用例·未破坏原判据）· 负样本 123 → FAIL、复原 → 0 FAIL · HANDOVER 42.6KB ≤45 · 体积窗 0 FAIL · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（坑表计数自此五处交叉对账，不再靠人核；新 Agent 入口已在 HANDOVER 顶部写明）
+### W1024（2026-10-30）：本次任务教训固化对账（补 4 条坑 + 计数订正）
+
+> **来源**：用户 2026-10-30 三问——「这次任务中遇到过的问题都在任务中解决了吗 / 以后还会再次犯错吗 / 其他 Agent 在后续工作中能够了解吗」。这是教训固化审计，不是功能批。
+>
+> **做法**：把 W1019–W1023 踩过的 19 类问题逐条对账两个维度——**是否已机器化**（有门禁/守卫/自测能自动拦住）、**是否入坑表**（其他 Agent 检索得到）。查出 4 条真缺口（已修代码但没写教训，或压根没写），本批补齐。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/batch-closeout-checklist.md、docs/agent/pitfalls.md、scripts/output/_w1024_spec.json、scripts/output/file-index.md、site/index.html
+
+**补的 4 条坑（均为「代码修了但教训未落载体」）**：① **「零引用」判定不能按 `.class` 搜**——HTML 写的是 `class="btn"`（不带点），W1019 初版 grep `\.btn` 判出 78 个「零引用」类，实则全在用（含 `.btn`/`.badge`/`.kpi-grid`），差点整批删除；② **`git mv` 删除侧旧路径也要进 spec**——`file_index_rows` 只写新路径会让第 51 槽判「代提他方件」；③ **护栏要覆盖默认路径不只 `--force`**——`inline_css` 裸跑会一次内联 526 个外链页，正是护栏想防的事；④ **改/加 md 连锁触发搜索索引与 CSP**——W1022/W1023 连踩两次（改 md → 索引条目不符 → 重算 CSP → 又红一次），已把「改 md → 重建索引 → 重算 CSP → 跑门禁」固定进收官 checklist。
+
+**顺带查出的计数腐坏**：AGENTS 的六主题分项行停在 `25/25/15/10/28=109` 的旧值上长期无人核（实测应为 `26/6/26/19/11/34`），而我手算总数得 121、实算为 **122** ⇒ 已订正四处，并在 checklist 加「改坑表必须实算分项」（这条属于**机器查不出、只能靠 checklist** 的类别，如实标注）。
+
+**验证**：坑表 118→122 条（CSS 26 / JS 6 / git 26 / 级联 19 / 数据 11 / 流程 34，分项之各与总数均与实测一致）· AGENTS/HANDOVER 四处计数同步 · 收官 checklist 补 2 个 checkbox · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（19 类问题对账完毕：15 类已机器化 + 4 类本轮补入载体；剩余不可机器化项列入 checklist）
+### W1023（2026-10-30）：提示词库派发骨架补齐（3 项）
+
+> **来源**：用户 2026-10-30 令「补完」——接续 W1022 结项时登记的余 3 项提示词模板。
+>
+> **做法**：按 W1022 立下的「就地并入·不另立补充篇」原则，把骨架补进各自文件末尾，
+> 不新增平行文件（避免第二事实源）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/12-提示词库/03-工作复盘提示词.md、docs/12-提示词库/05-项目审查任务书.md、docs/12-提示词库/09-导师提问流程.md、scripts/output/_w1023_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批要点**：① **05 项目审查任务书**补「派发骨架」——把七类审查（R-1~R-7）划成 6 个派发单元，标明并行性（U5 设计**不可并行**·审美判断无法机械汇总；U6 已完成工作**必须收尾**，是前序单元的汇总裁决），并给出通用 prompt 骨架（范围 / 证据要求 / 分级 / 输出四段）；同时厘清与对抗审查的分工——本任务书是**全面体检**（面越宽越好），对抗审查是**声明对拍**（判据是实况），混做两头不讨好。② **03 工作复盘**补「单批复盘最小 prompt」——完整版 441 行是给里程碑/季度复盘的；单批若整份丢给 subagent，篇幅会被耗在填满 10 个章节上，真正要的「差异 / 坑 / 可复用」被稀释 ⇒ 裁到必答六项（声称 / 实际 / 差异 / 新形态坑 / 可复用落点 / 下批建议），并明确禁止复述 CHANGELOG 与写评价性套话。③ **09 导师提问**补「场景化提问清单」——按五类场景（新功能 / 修 bug / 重构 / 设计 / 内容）给出可直接照问的序列，每场景 ≤7 问，并附两条通用追问（「能给一个具体例子吗」「什么情况下这个做法会失效」）。
+
+**验证**：全量门禁 57 段核心全绿 · 三份文件章节序正确（03 的「7. 派发骨架」置于「6. 最终交付物」之后）· code fence 内的 `##` 结构标记未被结构化检查误判。
+
+> - **状态**：已收官（W1022 登记的余 3 项提示词模板全部补齐，暂无遗留）
+### W1022（2026-10-30）：对抗式审查批（A–G 全项·P1×3 + P2×5 当批修）
+
+> **来源**：preflight 报「距上次对抗审查（W998）已 23 批 ≥ 20」+ 用户 2026-10-30 令「可以做」；按 `docs/agent/adversarial-audit-prompt.md` 模板派发 subagent 做 A–G 全项**只读**审查（审查与修复分离），被审对象为 W1019（CSS 治本 + 净重口径 + 门禁判据改稳定契约）、W1020（Backlog 对账）、W1021（第四哨）。
+>
+> **判定**：三批核心声明基本属实（330 页零漂移、双门禁改判据后全绿、24 例全过、体积达标），但抓出 **P1×3 + P2×5 + P3×5**，其中一条是**假绿级 fail-open**。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/check_audit_trigger.py、scripts/check_backlog_review.py、scripts/check_motion_ban.py、scripts/check_token_coverage.py、scripts/inline_css.py、scripts/output/_w1022_spec.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、site/_template.html、site/data/81-hardships-view.html、site/data/81-hardships.html、site/data/_shell.html、site/data/aesthetics.html、site/data/ai-dialogue.html、site/data/business-model.html、site/data/cave-estate.html、site/data/century-dialogue.html、site/data/chapter-stats.html、site/data/chapter-structure-graph.html、site/data/character-appearance.html、site/data/character-dynamic-network.html、site/data/character-presence-timeline.html、site/data/character-relationship-3d-view.html、site/data/character-relationship-3d.html、site/data/character-semantic-network.html、site/data/character-sentiment-arc.html、site/data/chart-design.html、site/data/cognitive-psychology.html、site/data/concept-device.html、site/data/counterfactual.html、site/data/criticism-history.html、site/data/cross-time-danmaku.html、site/data/cultural-misreading.html、site/data/customs-pass-route.html、site/data/data-explorer.html、site/data/deconstruction.html、site/data/dialogue-sentiment.html、site/data/ecology.html、site/data/emotional-heatmap.html、site/data/ethics-consumption.html、site/data/famous-time-travel.html、site/data/four-dimensional-research-network.html、site/data/four-heavenly-kings-artifacts.html、site/data/game-webnovel.html、site/data/global-pattern.html、site/data/graph-explorer.html、site/data/guanyin-six-roles-network.html、site/data/hardship-difficulty-heatmap.html、site/data/hardship-heatmap.html、site/data/heaven-power-network.html、site/data/intertextuality-network.html、site/data/journey-geo-3d.html、site/data/journey-geo-semiotics.html、site/data/journey-map-interactive.html、site/data/journey-route.html、site/data/journey-spacetime.html、site/data/jurisprudence.html、site/data/karma-reincarnation.html、site/data/language-style-radar.html、site/data/linguistics.html、site/data/magic-system.html、site/data/material-archaeology.html、site/data/mbti-evolution.html、site/data/methodology-matrix.html、site/data/ming-political-thought-comparison.html、site/data/monster-background.html、site/data/monster-capability-radar.html、site/data/monster-ecology-network.html、site/data/monster-female-network.html、site/data/monster-hierarchy-network.html、site/data/monster-sociology.html、site/data/monster-victims-network.html、site/data/music-structure.html、site/data/narrative-experiment.html、site/data/narrative-rhythm-curve.html、site/data/narratology-12d-network.html、site/data/narratology-16d-network.html、site/data/perf-canvas-rendering.html、site/data/philosophy.html、site/data/pilgrim-team-dynamic-network.html、site/data/pilgrim-team-psychology-arc.html、site/data/poetry-rhythm-analysis.html、site/data/power-resources.html、site/data/relationships.html、site/data/risk-project.html、site/data/search.html、site/data/six-senses-narratology-network.html、site/data/social-media.html、site/data/story-timeline.html、site/data/tag-cloud.html、site/data/text-evolution.html、site/data/text-search.html、site/data/theological-intervention-network.html、site/data/timeline.html、site/data/underworld-power-network.html、site/data/visual-art.html、site/data/workplace.html、site/dukou-engine.html、site/en/81-hardships-view.html、site/en/81-hardships.html、site/en/academic-papers.html、site/en/aesthetics.html、site/en/ai-dialogue.html、site/en/bestiary.html、site/en/business-model.html、site/en/cave-estate.html、site/en/century-dialogue.html、site/en/chapter-stats.html、site/en/chapter-structure-graph.html、site/en/chapters-map.html、site/en/character-appearance.html、site/en/character-bailongma.html、site/en/character-bajie.html、site/en/character-dynamic-network.html、site/en/character-presence-timeline.html、site/en/character-relationship-3d-view.html、site/en/character-relationship-3d.html、site/en/character-semantic-network.html、site/en/character-sentiment-arc.html、site/en/character-shaseng.html、site/en/character-tangseng.html、site/en/character-wukong.html、site/en/characters.html、site/en/chart-design.html、site/en/cognitive-psychology.html、site/en/concept-device.html、site/en/counterfactual.html、site/en/criticism-history.html、site/en/cross-time-danmaku.html、site/en/cultural-misreading.html、site/en/customs-pass-route.html、site/en/dashboard.html、site/en/data-explorer.html、site/en/deconstruction.html、site/en/dialogue-sentiment.html、site/en/dukou-engine.html、site/en/ecology.html、site/en/emotional-heatmap.html、site/en/essay-ai-era.html、site/en/essay-buddhist-chan.html、site/en/essay-chapter-couplets.html、site/en/essay-character-fu.html、site/en/essay-cipai-linjiangxian.html、site/en/essay-cipai-mantingfang.html、site/en/essay-cipai-shuidiaogetou.html、site/en/essay-cipai-xijiangyue.html、site/en/essay-composition-origins.html、site/en/essay-divine-bureaucracy.html、site/en/essay-folk-belief.html、site/en/essay-historical-xuanzang.html、site/en/essay-information-cocoon.html、site/en/essay-ming-economy.html、site/en/essay-ming-examination.html、site/en/essay-ming-garrison.html、site/en/essay-ming-intellectual-history.html、site/en/essay-ming-judiciary.html、site/en/essay-ming-literary-thought.html、site/en/essay-ming-maritime-ban.html、site/en/essay-ming-metaphor.html、site/en/essay-ming-military.html、site/en/essay-ming-politics.html、site/en/essay-ming-religion.html、site/en/essay-ming-social-customs.html、site/en/essay-modern-management.html、site/en/essay-original-poetry.html、site/en/essay-poetry-imagery.html、site/en/essay-poetry-opening.html、site/en/essay-quanzhen-daoism.html、site/en/essay-rhythm-analysis.html、site/en/essay-scenery-poems.html、site/en/essay-thematic-poetry.html、site/en/essay-three-teachings.html、site/en/essay-version-evolution.html、site/en/essay-zen-koan-vs-neidan.html、site/en/ethics-consumption.html、site/en/famous-time-travel.html、site/en/four-dimensional-research-network.html、site/en/four-heavenly-kings-artifacts.html、site/en/game-webnovel.html、site/en/global-pattern.html、site/en/graph-explorer.html、site/en/guanyin-six-roles-network.html、site/en/guide.html、site/en/hardship-difficulty-heatmap.html、site/en/hardship-heatmap.html、site/en/heaven-power-network.html、site/en/index.html、site/en/intertextuality-network.html、site/en/journey-geo-semiotics.html、site/en/journey-map-interactive.html、site/en/journey-route.html、site/en/journey-spacetime.html、site/en/jurisprudence.html、site/en/karma-reincarnation.html、site/en/language-style-radar.html、site/en/linguistics.html、site/en/magic-system.html、site/en/material-archaeology.html、site/en/mbti-evolution.html、site/en/methodology-matrix.html、site/en/methodology.html、site/en/ming-political-thought-comparison.html、site/en/monster-background.html、site/en/monster-capability-radar.html、site/en/monster-ecology-network.html、site/en/monster-female-network.html、site/en/monster-hierarchy-network.html、site/en/monster-sociology.html、site/en/monster-victims-network.html、site/en/music-structure.html、site/en/narrative-experiment.html、site/en/narrative-rhythm-curve.html、site/en/narratology-12d-network.html、site/en/narratology-16d-network.html、site/en/perf-canvas-rendering.html、site/en/philosophy.html、site/en/pilgrim-team-dynamic-network.html、site/en/pilgrim-team-psychology-arc.html、site/en/poetry-rhythm-analysis.html、site/en/power-resources.html、site/en/relationships.html、site/en/risk-project.html、site/en/search.html、site/en/site-map.html、site/en/six-senses-narratology-network.html、site/en/social-media.html、site/en/tag-cloud.html、site/en/text-evolution.html、site/en/text-search.html、site/en/theological-intervention-network.html、site/en/timeline.html、site/en/tribulations.html、site/en/underworld-power-network.html、site/en/visual-art.html、site/en/visualizations.html、site/en/workplace.html、site/index.html、site/reader/ch001.html、site/reader/ch002.html、site/reader/ch003.html、site/reader/ch004.html、site/reader/ch005.html、site/reader/ch006.html、site/reader/ch007.html、site/reader/ch008.html、site/reader/ch009.html、site/reader/ch010.html、site/reader/ch011.html、site/reader/ch012.html、site/reader/ch013.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch016.html、site/reader/ch017.html、site/reader/ch018.html、site/reader/ch019.html、site/reader/ch020.html、site/reader/ch021.html、site/reader/ch022.html、site/reader/ch023.html、site/reader/ch024.html、site/reader/ch025.html、site/reader/ch026.html、site/reader/ch027.html、site/reader/ch028.html、site/reader/ch029.html、site/reader/ch030.html、site/reader/ch031.html、site/reader/ch032.html、site/reader/ch033.html、site/reader/ch034.html、site/reader/ch035.html、site/reader/ch036.html、site/reader/ch037.html、site/reader/ch038.html、site/reader/ch039.html、site/reader/ch040.html、site/reader/ch041.html、site/reader/ch042.html、site/reader/ch043.html、site/reader/ch044.html、site/reader/ch045.html、site/reader/ch046.html、site/reader/ch047.html、site/reader/ch048.html、site/reader/ch049.html、site/reader/ch050.html、site/reader/ch051.html、site/reader/ch052.html、site/reader/ch053.html、site/reader/ch054.html、site/reader/ch055.html、site/reader/ch056.html、site/reader/ch057.html、site/reader/ch058.html、site/reader/ch059.html、site/reader/ch060.html、site/reader/ch061.html、site/reader/ch062.html、site/reader/ch063.html、site/reader/ch064.html、site/reader/ch065.html、site/reader/ch066.html、site/reader/ch067.html、site/reader/ch068.html、site/reader/ch069.html、site/reader/ch070.html、site/reader/ch071.html、site/reader/ch072.html、site/reader/ch073.html、site/reader/ch074.html、site/reader/ch075.html、site/reader/ch076.html、site/reader/ch077.html、site/reader/ch078.html、site/reader/ch079.html、site/reader/ch080.html、site/reader/ch081.html、site/reader/ch082.html、site/reader/ch083.html、site/reader/ch084.html、site/reader/ch085.html、site/reader/ch086.html、site/reader/ch087.html、site/reader/ch088.html、site/reader/ch089.html、site/reader/ch090.html、site/reader/ch091.html、site/reader/ch092.html、site/reader/ch093.html、site/reader/ch094.html、site/reader/ch095.html、site/reader/ch096.html、site/reader/ch097.html、site/reader/ch098.html、site/reader/ch099.html、site/reader/ch100.html、site/reader/index.html、site/reader/themes-hub.html、tests/unit/test_style_block_judgement.py
+
+**P1 修复（当批）**：① **台账超窗**（正本 61 段 > 窗口 60·在途行必致门禁红）⇒ 跑 `archive_ledger_rows` 归档，正本回落 59 段；② **治本判据零回归锁**——W1019 把副本识别从「注释文本」改成「标记配对」，但全库 `grep iter_private_style_blocks|strip_comments` 在 tests/ **命中 0**，判据被改回即 228 页静默误判复发 ⇒ 新增 `tests/unit/test_style_block_judgement.py` 3 例（带标记块排除 / 剥注释后仍识别 / 带属性 style 不误配）；③ **审计触发器 fail-open**——`check_audit_trigger` 只认 token 字样，而认领行派发时就写「在途（…已派发）」，等于**写一行在途登记即可永久压制该哨**（实测把「已 23 批」压回 0）⇒ 在途状态不计事件（两触发器同改）。
+
+**P2 修复（同批·均同源）**：① `inline_css` 护栏只覆盖 `--force` 分支 ⇒ **裸跑会一次内联 526 个外链页**，改为默认路径同护栏（实测裸跑现为 0 操作）；② 文本模式写盘使 **330 页工作树全 CRLF**，与 `.gitattributes text=auto eol=lf` 背离（`i/lf w/crlf`·二进制口径每页多 1558 B）⇒ `newline=""` 写盘，现 `i/lf w/lf`；③ HANDOVER 对账分布自相矛盾（写「5 未动 / 1 未过时」，实测 6/8/3）⇒ 订正；④ `check_motion_ban` 用精确 `<style>` 字面量枚举块，168 个带属性页的私有块既不进集合也不被摘除 ⇒ 统一到 `STYLE_BLOCK_RE`；⑤ `check_backlog_review` 纯子串匹配会被反义串「已执行（未完成）」骗过 ⇒ 加否定词窗口。
+
+**P3 处置**：`inline_css --force` 非幂等（每轮 +4B 缩进）⇒ 剥离正则补前导 `[ \t]*`，现两次 `--force` md5 相同；`check_token_coverage` docstring 仍写已废掉的旧判据 ⇒ 同口径订正；余 3 项（历史 spec 单换行、「51,504」起点不可复核、BL-8/BL-9 以注记闭环无 artifact）**登记留痕**，见下节。
+
+**声明与实况不符项（模板要求单列）**：
+
+| # | 声明 | 实测 |
+|---|---|---|
+| 1 | W1020「5 未动 / 1 未过时」 | 6 未动 / 8 部分 / 3 留档（`grep -c` 实算） |
+| 2 | `inline_css --force` 幂等 | 每轮 +4 B 缩进（非幂等·已修） |
+| 3 | 「330 页逐字节一致」 | 仅在文本读法下成立；工作树原为 CRLF（已修为 LF） |
+| 4 | `check_token_coverage` docstring「块内含 tokens.css — 注释特征」 | 实现已于 W1019 改为标记配对（已订正） |
+| 5 | W1019「单页内联块 51,504 B」 | 起点不可复核（实测改前三类页均 51,801、根级 48,982）；39,323 B 吻合 |
+
+**留痕（不改）**：① 5 个历史 spec（`_w736/_w737/_w760/_w761/_w831`）以单换行开场，precheck 新守卫会拒——属「复现历史批才触发」，非现役缺陷；② 「51,504」起点数字不复核，本段以实测口径为准；③ BL-8/BL-9 的关闭依据是「性质/时点口径注记」（`counterfactual_summary.json` 与 `domino_causality.json` 的 `nature_note` / `timing_note`），属**设计选择**而非验证——比另四条的硬证据弱，已如实登记。
+
+**模板补齐（用户 2026-10-30 追问「为什么不派多 subagent / 还有哪些可做模板 / 模板要不要按实际情况改」）**：① 新增 `docs/agent/parallel-evidence-template.md`——「判断串行、取证并行」，含切分判据、派发骨架、汇总者三条义务（不转述 / 抽样复核 / 矛盾不外推）与成本参考；把「为什么对抗审查只派一个」写成判据：拆开则 B 项（`i/lf w/crlf`）与 D 项（`open(...,"w")`）无法串成 eol 契约背离那条 P2。② 新增 `docs/agent/gate-triage-template.md`——门禁红灯五步法（读原文 → 单跑 → 读判据源码 → 分类 → 选修法）+ 四条红线（禁豁免压绿 / 禁迎合脆弱判据补产物 / 禁判据未执行判绿 / 禁只看汇总）+ 六类高发误判对照表。③ 新增 `docs/agent/batch-closeout-checklist.md`——9 步收官清单，每步注明「跳过会红哪个槽」，把本次连续四批踩的坑（前导空行 / 先 add 再 refresh / 删除侧路径 / 脚本归位 / 回窗）固化成顺序。④ `adversarial-audit-prompt.md` 补三条收尾义务（**给历史事件补 token** / **在途不计事件** / **回写模板**）+ 新增「模板自身的维护」节（校准戳 / 检查项可追溯 / 数字必须现测 / 不另立补充篇），头部标「上次校准：W1022」。余 3 项登记下批：05 项目审查任务书的可粘贴派发骨架、03 工作复盘的派发模板、09 导师提问的提问清单（04 任务执行的「批次开工」职责已由本批 checklist 吸收）。
+
+**验证**：审查 A–G 全项实跑（独立重算 330 页零漂移·含 depth 前缀规则）· 三触发器 `--self-test` 全过 · 新增 3 例回归锁 + 既有 24 例全过（计 1080）· 裸跑 0 操作 / 两次 `--force` md5 相同 / `i/lf w/lf` · 台账 59 段 · `stats.py --check` 24 键零差异 · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（P1×3 + P2×5 + P3×2 当批修，P3×3 留痕；报告原文未入库，证据行号已摘入本段）
+### W1021（2026-10-30）：Backlog 对账触发器常驻化（preflight 批数告警）
+
+> **来源**：用户 2026-10-30 令「做」——采纳 W1020 结项建议中的 **preflight 批数计数告警**方案（另一候选「CHANGELOG 季度提醒」判为不主用：BL-21 写了 2027-01 季度点仍无人跟进，实证写进文档的提醒会被忘）。
+>
+> **连带登记**：W1020 台账行的状态列补事件 token「Backlog 对账已执行」——否则本器首跑即判「从未对账」假警（fail-closed 的必然副作用）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/check_backlog_review.py、scripts/output/_w1021_spec.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/preflight_check.py、site/index.html、tests/unit/test_backlog_review.py
+
+**本批要点**：① **新增第四哨** `scripts/check_backlog_review.py`——台账状态列含 token「Backlog 对账已执行」的最大 W 号距当前 max ≥ **25 批**即提示（只提示不拦截，exit 恒 0）。② **三条铁则沿用对抗审查触发器**（同一病同一防法）：token 只认**状态列**（防主题列提及 token 的行把自己判成一次对账·W1004 同族自伤）、取 **max 不取文件序**（防末尾低号补登记行把 last 拉低）、**正本与归档同扫**（防对账行被行窗归档后退化成「从未对账」假警）。③ **只做批数阈值不做天数阈值**：台账日期只存在于认领会话列且位置不固定（主题含裸竖线会整体右移·见 parse_ledger W825），另引 CHANGELOG 段解析面收益不抵复杂度；且项目节拍本就是 W### 批次——W691 一批闭环 5 条 BL 却零回写，说明滞后由「改动发生」驱动而非日历。
+④ **接线** preflight 5.8 项（与 5.75 对抗审查并列）；内置八态自测 + `tests/unit/test_backlog_review.py` 7 例。
+
+**验证**：八态自测通过（阈值两侧/不可判定/非台账行豁免/泛词不重置/取 max/主题列不算/同批/归档同扫）·pytest 7 例全过 · preflight 实跑输出「距上次（W1020）0 批 < 25 未触发」·计数 1069→1077 两处同步 · `stats.py --check` 24 键零差异。
+
+> - **状态**：已收官（Backlog 对账自此每 25 批被机器点名一次）
+### W1020（2026-10-30）：Backlog 登记面对账批（逐条核 git 与测试实况）
+
+> **来源**：用户 2026-10-30 令「开一个 Backlog 对账批；不只要写入长期记忆也要写入项目内；开始」。起因是 W1019 连续命中两条「已做完却仍挂待办」的 Backlog（BL-29、BL-33）。
+>
+> **连带登记**：对账中另发现登记面残留三处（`scripts/README.md` 幽灵条目、`统计口径说明.md` 仍写 BL-19 未决、数据集两份副本不同步），同批修掉。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/统计口径说明.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/README.md、scripts/output/_w1020_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批要点**：① **全量对账**——29 条 Backlog 逐条拿 git 与测试实况核，不采信条目自述。② **关闭并移出 12 条**（滞后率 41%）：BL-8/BL-9 以性质与时点口径注记闭环、BL-11 稀柿衕用字全站统一且有门禁反写防线、BL-14/BL-15 章节与阶段口径已注记一致、BL-18 第 9/10/11 回归属语缺口已闭合、BL-19 两真源分歧已被`check_citations.py` 语料保真判据消解、BL-21/BL-25 已执行、BL-29 测试与 CI 早已落地、BL-31 脚本已退休、BL-33 治本已收官。③ **订正保留 17 条**：5 条未动、8 条部分完成、3 条留档、1 条未过时，每条按实测数字改写现状（如 BL-1 实测 EMBEDDED 52 页对 EMBEDDED_DATA 92 页、登记「26 vs 41」失真）。④ **体积窗顺带解掉**：HANDOVER 由 45.3KB 回落至 42.5KB（上限 45KB）——已完成条目**整条移出**而非加标记，否则只进不出必然复发。
+
+**验证**：`preflight_check` 体积窗口 C6 由 FAIL 转通过 · 坑表计数 115→117 条四处同步 · `stats.py --check` 24 键零差异 · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（对账结论与证据入 CHANGELOG 本段与坑表；Backlog 建议按季度或大版本段周期性对账）
+### W1019（2026-10-30）：BL-33/BL-29 收官批（CSS 单一事实源治本 + 内联净重口径）
+
+> **来源**：用户 2026-10-30 令「做 BL-33 治本」+「BL-29 这个也做了」+「C + 收官」。
+>
+> **连带登记**：BL-29 主体经实跑核实已于 W791 完成（`server/security.test.ts` 22 例全绿 + `ci.yml:429` 接线）⇒ 本批只补其残余缺口（Python 侧参数钳制长期零测试）；BL-33 经核实 W895 已做过一轮收敛，本批补完治本部分。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、DESIGN.md、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/inline_css.py、scripts/output/_vermilion_solid_cache.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、site/_template.html、site/data/81-hardships-view.html、site/data/81-hardships.html、site/data/_shell.html、site/data/aesthetics.html、site/data/ai-dialogue.html、site/data/business-model.html、site/data/cave-estate.html、site/data/century-dialogue.html、site/data/chapter-stats.html、site/data/chapter-structure-graph.html、site/data/character-appearance.html、site/data/character-dynamic-network.html、site/data/character-presence-timeline.html、site/data/character-relationship-3d-view.html、site/data/character-relationship-3d.html、site/data/character-semantic-network.html、site/data/character-sentiment-arc.html、site/data/chart-design.html、site/data/cognitive-psychology.html、site/data/concept-device.html、site/data/counterfactual.html、site/data/criticism-history.html、site/data/cross-time-danmaku.html、site/data/cultural-misreading.html、site/data/customs-pass-route.html、site/data/data-explorer.html、site/data/deconstruction.html、site/data/dialogue-sentiment.html、site/data/ecology.html、site/data/emotional-heatmap.html、site/data/ethics-consumption.html、site/data/famous-time-travel.html、site/data/four-dimensional-research-network.html、site/data/four-heavenly-kings-artifacts.html、site/data/game-webnovel.html、site/data/global-pattern.html、site/data/graph-explorer.html、site/data/guanyin-six-roles-network.html、site/data/hardship-difficulty-heatmap.html、site/data/hardship-heatmap.html、site/data/heaven-power-network.html、site/data/intertextuality-network.html、site/data/journey-geo-3d.html、site/data/journey-geo-semiotics.html、site/data/journey-map-interactive.html、site/data/journey-route.html、site/data/journey-spacetime.html、site/data/jurisprudence.html、site/data/karma-reincarnation.html、site/data/language-style-radar.html、site/data/linguistics.html、site/data/magic-system.html、site/data/material-archaeology.html、site/data/mbti-evolution.html、site/data/methodology-matrix.html、site/data/ming-political-thought-comparison.html、site/data/monster-background.html、site/data/monster-capability-radar.html、site/data/monster-ecology-network.html、site/data/monster-female-network.html、site/data/monster-hierarchy-network.html、site/data/monster-sociology.html、site/data/monster-victims-network.html、site/data/music-structure.html、site/data/narrative-experiment.html、site/data/narrative-rhythm-curve.html、site/data/narratology-12d-network.html、site/data/narratology-16d-network.html、site/data/perf-canvas-rendering.html、site/data/philosophy.html、site/data/pilgrim-team-dynamic-network.html、site/data/pilgrim-team-psychology-arc.html、site/data/poetry-rhythm-analysis.html、site/data/power-resources.html、site/data/relationships.html、site/data/risk-project.html、site/data/search.html、site/data/six-senses-narratology-network.html、site/data/social-media.html、site/data/story-timeline.html、site/data/tag-cloud.html、site/data/text-evolution.html、site/data/text-search.html、site/data/theological-intervention-network.html、site/data/timeline.html、site/data/underworld-power-network.html、site/data/visual-art.html、site/data/workplace.html、site/dukou-engine.html、site/en/81-hardships-view.html、site/en/81-hardships.html、site/en/academic-papers.html、site/en/aesthetics.html、site/en/ai-dialogue.html、site/en/bestiary.html、site/en/business-model.html、site/en/cave-estate.html、site/en/century-dialogue.html、site/en/chapter-stats.html、site/en/chapter-structure-graph.html、site/en/chapters-map.html、site/en/character-appearance.html、site/en/character-bailongma.html、site/en/character-bajie.html、site/en/character-dynamic-network.html、site/en/character-presence-timeline.html、site/en/character-relationship-3d-view.html、site/en/character-relationship-3d.html、site/en/character-semantic-network.html、site/en/character-sentiment-arc.html、site/en/character-shaseng.html、site/en/character-tangseng.html、site/en/character-wukong.html、site/en/characters.html、site/en/chart-design.html、site/en/cognitive-psychology.html、site/en/concept-device.html、site/en/counterfactual.html、site/en/criticism-history.html、site/en/cross-time-danmaku.html、site/en/cultural-misreading.html、site/en/customs-pass-route.html、site/en/dashboard.html、site/en/data-explorer.html、site/en/deconstruction.html、site/en/dialogue-sentiment.html、site/en/dukou-engine.html、site/en/ecology.html、site/en/emotional-heatmap.html、site/en/essay-ai-era.html、site/en/essay-buddhist-chan.html、site/en/essay-chapter-couplets.html、site/en/essay-character-fu.html、site/en/essay-cipai-linjiangxian.html、site/en/essay-cipai-mantingfang.html、site/en/essay-cipai-shuidiaogetou.html、site/en/essay-cipai-xijiangyue.html、site/en/essay-composition-origins.html、site/en/essay-divine-bureaucracy.html、site/en/essay-folk-belief.html、site/en/essay-historical-xuanzang.html、site/en/essay-information-cocoon.html、site/en/essay-ming-economy.html、site/en/essay-ming-examination.html、site/en/essay-ming-garrison.html、site/en/essay-ming-intellectual-history.html、site/en/essay-ming-judiciary.html、site/en/essay-ming-literary-thought.html、site/en/essay-ming-maritime-ban.html、site/en/essay-ming-metaphor.html、site/en/essay-ming-military.html、site/en/essay-ming-politics.html、site/en/essay-ming-religion.html、site/en/essay-ming-social-customs.html、site/en/essay-modern-management.html、site/en/essay-original-poetry.html、site/en/essay-poetry-imagery.html、site/en/essay-poetry-opening.html、site/en/essay-quanzhen-daoism.html、site/en/essay-rhythm-analysis.html、site/en/essay-scenery-poems.html、site/en/essay-thematic-poetry.html、site/en/essay-three-teachings.html、site/en/essay-version-evolution.html、site/en/essay-zen-koan-vs-neidan.html、site/en/ethics-consumption.html、site/en/famous-time-travel.html、site/en/four-dimensional-research-network.html、site/en/four-heavenly-kings-artifacts.html、site/en/game-webnovel.html、site/en/global-pattern.html、site/en/graph-explorer.html、site/en/guanyin-six-roles-network.html、site/en/guide.html、site/en/hardship-difficulty-heatmap.html、site/en/hardship-heatmap.html、site/en/heaven-power-network.html、site/en/index.html、site/en/intertextuality-network.html、site/en/journey-geo-semiotics.html、site/en/journey-map-interactive.html、site/en/journey-route.html、site/en/journey-spacetime.html、site/en/jurisprudence.html、site/en/karma-reincarnation.html、site/en/language-style-radar.html、site/en/linguistics.html、site/en/magic-system.html、site/en/material-archaeology.html、site/en/mbti-evolution.html、site/en/methodology-matrix.html、site/en/methodology.html、site/en/ming-political-thought-comparison.html、site/en/monster-background.html、site/en/monster-capability-radar.html、site/en/monster-ecology-network.html、site/en/monster-female-network.html、site/en/monster-hierarchy-network.html、site/en/monster-sociology.html、site/en/monster-victims-network.html、site/en/music-structure.html、site/en/narrative-experiment.html、site/en/narrative-rhythm-curve.html、site/en/narratology-12d-network.html、site/en/narratology-16d-network.html、site/en/perf-canvas-rendering.html、site/en/philosophy.html、site/en/pilgrim-team-dynamic-network.html、site/en/pilgrim-team-psychology-arc.html、site/en/poetry-rhythm-analysis.html、site/en/power-resources.html、site/en/relationships.html、site/en/risk-project.html、site/en/search.html、site/en/site-map.html、site/en/six-senses-narratology-network.html、site/en/social-media.html、site/en/tag-cloud.html、site/en/text-evolution.html、site/en/text-search.html、site/en/theological-intervention-network.html、site/en/timeline.html、site/en/tribulations.html、site/en/underworld-power-network.html、site/en/visual-art.html、site/en/visualizations.html、site/en/workplace.html、site/index.html、site/reader/ch001.html、site/reader/ch002.html、site/reader/ch003.html、site/reader/ch004.html、site/reader/ch005.html、site/reader/ch006.html、site/reader/ch007.html、site/reader/ch008.html、site/reader/ch009.html、site/reader/ch010.html、site/reader/ch011.html、site/reader/ch012.html、site/reader/ch013.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch016.html、site/reader/ch017.html、site/reader/ch018.html、site/reader/ch019.html、site/reader/ch020.html、site/reader/ch021.html、site/reader/ch022.html、site/reader/ch023.html、site/reader/ch024.html、site/reader/ch025.html、site/reader/ch026.html、site/reader/ch027.html、site/reader/ch028.html、site/reader/ch029.html、site/reader/ch030.html、site/reader/ch031.html、site/reader/ch032.html、site/reader/ch033.html、site/reader/ch034.html、site/reader/ch035.html、site/reader/ch036.html、site/reader/ch037.html、site/reader/ch038.html、site/reader/ch039.html、site/reader/ch040.html、site/reader/ch041.html、site/reader/ch042.html、site/reader/ch043.html、site/reader/ch044.html、site/reader/ch045.html、site/reader/ch046.html、site/reader/ch047.html、site/reader/ch048.html、site/reader/ch049.html、site/reader/ch050.html、site/reader/ch051.html、site/reader/ch052.html、site/reader/ch053.html、site/reader/ch054.html、site/reader/ch055.html、site/reader/ch056.html、site/reader/ch057.html、site/reader/ch058.html、site/reader/ch059.html、site/reader/ch060.html、site/reader/ch061.html、site/reader/ch062.html、site/reader/ch063.html、site/reader/ch064.html、site/reader/ch065.html、site/reader/ch066.html、site/reader/ch067.html、site/reader/ch068.html、site/reader/ch069.html、site/reader/ch070.html、site/reader/ch071.html、site/reader/ch072.html、site/reader/ch073.html、site/reader/ch074.html、site/reader/ch075.html、site/reader/ch076.html、site/reader/ch077.html、site/reader/ch078.html、site/reader/ch079.html、site/reader/ch080.html、site/reader/ch081.html、site/reader/ch082.html、site/reader/ch083.html、site/reader/ch084.html、site/reader/ch085.html、site/reader/ch086.html、site/reader/ch087.html、site/reader/ch088.html、site/reader/ch089.html、site/reader/ch090.html、site/reader/ch091.html、site/reader/ch092.html、site/reader/ch093.html、site/reader/ch094.html、site/reader/ch095.html、site/reader/ch096.html、site/reader/ch097.html、site/reader/ch098.html、site/reader/ch099.html、site/reader/ch100.html、site/reader/index.html、site/reader/themes-hub.html、site/system.css、tests/unit/test_inline_css_resync.py、tests/unit/test_rag_server_clamp.py
+
+**本批要点**：① **漂移全量实测**——330 个内联页与源逐字节比对，300 一致 / 30 漂移，三类归集：A 题图规则 26 页（W983/W1013/W1016 三轮逐页写入·源缺失）、B timeline 2 页（源有页缺）、C 根级 2 页（源有页缺 74 至 79 行且残留旧值）。② **根因是脚本早退**——`inline_css.py` 的 `depth==0` 无条件早退（W875 加）把根级已内联页的重同步一并堵死，W876 只能手工靶向修 ⇒ 早退撤除，改由「无外链且未内联」判据接管，外链页仍受 W895 `--inline-links` 护栏保护。③ **题图规则写回源**——`.chapter-plate` 三规则归并进 `system.css`，26 页不再只活在副本里。④ **体积改走净重口径**——源文件保留注释供追溯，`inline_css.py` 只在传播为内联副本时剥离块注释，单页内联块 51,504 降至 39,323 B（负 23.7%）；另砍零引用微交互工具类 787 B。
+
+**验证**：内联块与源（净重口径）**330/330 一致 · 漂移 0**（原 30）· 根级两页补齐 brand-mark/kpi-row/hero-ornament/ico/chapter-plate · 旧值残留扫描 **0** · 新增回归锁 **17 例全过**（inline_css 重同步 3 + rag 参数钳制 14）· 第 15 槽单页内联块 39,323 B 远高于下限 20,000 B · CSS 类门禁（第 11/34/35/36/49 槽）**0 违例** · `stats.py --check` 24 键零差异。
+
+> - **状态**：已收官（BL-33 治本 + 净重口径 + BL-29 残余缺口；BL-29/BL-33 登记面已核实并待关闭）
+### W1018（2026-10-29）：回次 og:image 全覆盖批·第三轮（12 张线描立像/场面）
+
+
+
+> **来源**：用户 2026-10-29 令「同族扫描 + 第 48 门禁补覆盖 做完再继续剩余 68 回扩量」⇒ 沿用 W1001/W1013 批已过目的口径（线描立像族·母版段两变体·按题材定主体·12 张一批）。
+>
+> **连带登记**：本笔同时落 **W1015 工具链稳健性补强①** 的登记面——① 跨行改写扫描器（`scripts/check_cross_line_rewrite.py`：改写面正则「`[^X]*` 无尾锚点 ⇒ 匹配段可跨行 ⇒ `re.sub` 整段替换 = 静默删行」；全仓 scripts/ 全树实扫 **高危 0 处**，另 43 处可疑 + 184 处只读面；判据自带 4 例负样本自证；接线 `ci_sim.py` 第 8 项）② 第 48 门禁补覆盖（`judge_file()` 的**读盘路径**此前零覆盖 ⇒ W1005 批 `R.io` 类 AttributeError 潜伏到首个新增件才引爆；现补 self_test 第⑧例 + 4 例 pytest）。W1015 提交 = `7771c9d3`（让号·台账行精确暂存·未代提并行批在途件）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、assets/promo/plate-set/index.md、assets/promo/plate-set/plate-line-73-ch020-huxianfeng.png、assets/promo/plate-set/plate-line-73-ch020-huxianfeng.webp、assets/promo/plate-set/plate-line-74-ch024-qingfeng.png、assets/promo/plate-set/plate-line-74-ch024-qingfeng.webp、assets/promo/plate-set/plate-line-75-ch034-bashanhu.png、assets/promo/plate-set/plate-line-75-ch034-bashanhu.webp、assets/promo/plate-set/plate-line-76-ch043-tuolong.png、assets/promo/plate-set/plate-line-76-ch043-tuolong.webp、assets/promo/plate-set/plate-line-77-ch044-yangli.png、assets/promo/plate-set/plate-line-77-ch044-yangli.webp、assets/promo/plate-set/plate-line-78-ch049-laoyuan.png、assets/promo/plate-set/plate-line-78-ch049-laoyuan.webp、assets/promo/plate-set/plate-line-79-ch051-qingniu.png、assets/promo/plate-set/plate-line-79-ch051-qingniu.webp、assets/promo/plate-set/plate-line-80-ch064-xingxian.png、assets/promo/plate-set/plate-line-80-ch064-xingxian.webp、assets/promo/plate-set/plate-line-81-ch074-qingshi.png、assets/promo/plate-set/plate-line-81-ch074-qingshi.webp、assets/promo/plate-set/plate-line-82-ch091-bidun.png、assets/promo/plate-set/plate-line-82-ch091-bidun.webp、assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.png、assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.webp、assets/promo/plate-set/plate-line-84-ch008-jinding.png、assets/promo/plate-set/plate-line-84-ch008-jinding.webp、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/preview-w1018-sheet.png、assets/promo/plate-set/raw/README.md、assets/promo/plate-set/raw/index.md、assets/promo/plate-set/raw/round16/README.md、assets/promo/plate-set/raw/round16/index.md、assets/promo/plate-set/raw/round16/plate-line-73-ch020-huxianfeng.jpg、assets/promo/plate-set/raw/round16/plate-line-74-ch024-qingfeng.jpg、assets/promo/plate-set/raw/round16/plate-line-75-ch034-bashanhu.jpg、assets/promo/plate-set/raw/round16/plate-line-76-ch043-tuolong.jpg、assets/promo/plate-set/raw/round16/plate-line-77-ch044-yangli.jpg、assets/promo/plate-set/raw/round16/plate-line-78-ch049-laoyuan.jpg、assets/promo/plate-set/raw/round16/plate-line-79-ch051-qingniu.jpg、assets/promo/plate-set/raw/round16/plate-line-80-ch064-xingxian.jpg、assets/promo/plate-set/raw/round16/plate-line-81-ch074-qingshi.jpg、assets/promo/plate-set/raw/round16/plate-line-82-ch091-bidun.png、assets/promo/plate-set/raw/round16/plate-line-83-ch096-kouyuanwai.jpg、assets/promo/plate-set/raw/round16/plate-line-84-ch008-jinding.jpg、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T38-任务计划执行与经验沉淀报告-2026-10-29.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/INDEX.md、docs/agent/pitfalls.md、scripts/_w1018_closeout_faces.py、scripts/_w1018_derive_prepare.py、scripts/_w1018_derive_stage.py、scripts/_w1018_derive_verify.py、scripts/_w1018_download.py、scripts/_w1018_fix_index_order.py、scripts/_w1018_fix_names_order.py、scripts/_w1018_fix_refs.py、scripts/_w1018_fix_round16.py、scripts/_w1018_make_spec.py、scripts/_w1018_master.py、scripts/_w1018_pick2.py、scripts/_w1018_prepare.py、scripts/_w1018_probe_covered.py、scripts/_w1018_retry.py、scripts/_w1018_sheet.py、scripts/_w1018_stage.py、scripts/_w1018_verify.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1018.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1016_batch.json、scripts/output/_w1016_batch_a.json、scripts/output/_w1016_batch_b.json、scripts/output/_w1016_manifest.json、scripts/output/_w1016_retry.json、scripts/output/_w1018_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/reader/ch008.html、site/reader/ch020.html、site/reader/ch024.html、site/reader/ch034.html、site/reader/ch043.html、site/reader/ch044.html、site/reader/ch049.html、site/reader/ch051.html、site/reader/ch064.html、site/reader/ch074.html、site/reader/ch091.html、site/reader/ch096.html、site/static/images/README.md、site/static/images/index.md、site/static/images/og-plate-line-73-ch020-huxianfeng.webp、site/static/images/og-plate-line-74-ch024-qingfeng.webp、site/static/images/og-plate-line-75-ch034-bashanhu.webp、site/static/images/og-plate-line-76-ch043-tuolong.webp、site/static/images/og-plate-line-77-ch044-yangli.webp、site/static/images/og-plate-line-78-ch049-laoyuan.webp、site/static/images/og-plate-line-79-ch051-qingniu.webp、site/static/images/og-plate-line-80-ch064-xingxian.webp、site/static/images/og-plate-line-81-ch074-qingshi.webp、site/static/images/og-plate-line-82-ch091-bidun.webp、site/static/images/og-plate-line-83-ch096-kouyuanwai.webp、site/static/images/og-plate-line-84-ch008-jinding.webp、site/static/images/plate-line-73-ch020-huxianfeng.webp、site/static/images/plate-line-74-ch024-qingfeng.webp、site/static/images/plate-line-75-ch034-bashanhu.webp、site/static/images/plate-line-76-ch043-tuolong.webp、site/static/images/plate-line-77-ch044-yangli.webp、site/static/images/plate-line-78-ch049-laoyuan.webp、site/static/images/plate-line-79-ch051-qingniu.webp、site/static/images/plate-line-80-ch064-xingxian.webp、site/static/images/plate-line-81-ch074-qingshi.webp、site/static/images/plate-line-82-ch091-bidun.webp、site/static/images/plate-line-83-ch096-kouyuanwai.webp、site/static/images/plate-line-84-ch008-jinding.webp。
+
+**本批要点**：① **缺口全量角色谱扫描**——缺口 68 回逐回统计角色出现次数并打上下文片段；② **已出主体全表避重**——plate-set 实为 **88→100 个母版 / 100 个唯一 slug**（编号 1–12 被四个批次族复用 ⇒ 编号 max≠主体数）⇒ 12 个主体与已出全表**零冲突**；③ **母版段两变体**——立像段**逐字复用 249 字符**（6 张），场面段**仅改 3 处**（6 张）；④ **3 张重出**——① 画面出现桌案器物（违反母版段「不画器物细节」）② 主体过小过淡（下部墨 0.0217 < 0.03）③ 左右大面积黑边 + 主体触顶触底（3×3 窗口暗占比 0.761 / 判据值 200.08）；⑤ **落位 12 页** ⇒ 回目覆盖 **32 → 44 回**、缺口 **68 → 56 回**；⑥ **未覆盖页零回归**——缺口 56 页中 54 页仍为通用 og-cover-ink-zh.jpg、2 页保留既有 card-* 专属图。
+
+**验证**：母版判据 J1–J10 **112 张 · FAIL 0**（重出后）· 裁切验算 **112 张 · FAIL 0**（重出后）· 落位验收 **0 FAIL**（12 页题图 + og + alt + 暗色隐藏 + 未覆盖页零回归）· 跨行改写扫描器 **高危 0 处** · 第 48 门禁自测 **9/9** · 全量门禁见收官提交。
+
+> - **状态**：已收官（12 张落地·母版族 100 → 112 张·既有 100 张母版与站点版零改动·其余 56 个无配图回目页的 og:image 未误改·坑表 +2 条·待用户目视）
+
+### W1017（2026-10-29）：产物目录归位 + 临时区清理批
+
+> **来源**：用户 2026-10-29 回复「A+B」（承接上一轮三问后的取证提议）：A＝产物目录瘦身、B＝`tmpe` 深度清理（并明确授权删除 `_trash` 超期件与 `node_modules`）。
+>
+> - **文件**：CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/README.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/file-index.md、scripts/output/README.md、scripts/output/index.md、scripts/output/stats.json、scripts/output/tools-inventory.md（另 366 件历史产物按批号迁 `archive/scripts/batches/w7xx|w8xx|w9xx|w10xx/`，逐项见 file-index W1017 段与归档台账）
+>
+**要点**：
+① **四面对照扫描定去留**（不凭体积拍脑袋）：对 `scripts/output` 全部 689 件受跟踪件，逐件在四面对照面——活代码 `scripts/`（非 archive）、`tests/`、`.github/`+`mcp-server/`、现役 `docs/` 与根治理文档——做 basename 全仓检索（排除 archive 与 tmpe 这两个冷存储面）。结果：**366 件零引用**（w7xx 139 / w8xx 146 / w9xx 75 / w10xx 6；含 208 json + 147 txt + 4 py + 3 png 4.6MB + 3 err + 1 css）→ `git mv` 入 `archive/scripts/batches/<段>/`；**323 件有引用一律保留**。
+② **两处「看着像垃圾但不能搬」**：`_w*_spec.json` 248 件被 `backfill_changelog.py` 全量 glob 用于给未立段批次补 CHANGELOG 段——搬走等于断掉补段能力（W1015 正是缺段的在途批），故**全部保留**；门禁缓存 `_vermilion_solid_cache.json`（第 49 槽按页 hash 增量）与 `_w864_accent_exemptions.json`（朱砂豁免表）被活门禁读，亦保留。
+③ **产物目录边界立规**：`STRUCTURE.md` 新增「输出目录边界」行——output 只放活产物；历史一次性件按批号入档（W1012 立原则，本批完成全量归位）。
+④ **tmpe 授权清理（本次唯一删除动作）**：严格走契约——先列清单落 `tmpe/_reports/purge-<时间戳>.txt`，再经 PowerShell `Microsoft.VisualBasic.FileIO.FileSystem` 的 `SendToRecycleBin` **移入回收站**（禁 `rm -rf`/`del /S /Q`）。清 `_trash` 超 7 天非保护件 64 件 + `w607_docxgen/node_modules` = 53.4MB。
+⑤ **个人稿保护实证生效**：`protect_globs`（匿名稿/装饰投稿版/投稿/mqxs_anon/mqxs_submission/hallmark/papercheck/audit_.*_paper_data）之外，本批另按「匿名/投稿/适配版」保守补强——**36 件个人投稿稿 19.1MB 全部保留未删**（含 `设计方向-南艺适配版（匿名）.docx` 系列），与契约 §3「个人文件安全铁律」一致。
+⑥ 效果：`scripts/output` 跟踪件 **689→323**；`tmpe` 总量 **173.4→112.2MB**（`_trash` 122.4→78MB）；归档区 tracked 1166→1532 件。
+
+**验证**：四处引用扫描输出可复核（`tmpe/_w1017_move.tsv` 366 行·归位后自检 0 失败）· `check_archive_health` 0 项待办（段级双向对账绿）· 归档台账追加 5 行（含段级计数声明：w7xx 240 / w8xx 192 / w9xx 302 / w10xx 46 内容件，元数据 README+index 不计）· 全量 verify 核心全过。
+
+> - **状态**：已收官（产物目录回归活产物单一职责 + 临时区授权清理）
+
+### W1016（2026-10-29）：教训固化批
+
+> **来源**：用户 2026-10-29 三问「这次任务中遇到的问题都解决了吗·以后还会再犯错吗·多 Agent 项目其他 Agent 后续能了解到吗」——直指 W1014 的**载体缺口**：缺陷代码修了，但教训未落 `docs/agent/pitfalls.md` ⇒ 违反 §6-14「跨会话教训权威落坑表与本节，私有记忆仅作镜像」。故本批不新增功能，只做**教训固化**。
+>
+> - **文件**：AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/项目说明.md、docs/00-导读/新Agent启动Prompt.md、docs/00-导读/W批次编号对账表.md、docs/agent/pitfalls.md、scripts/batch_cascade.py、scripts/check_doc_sync.py、scripts/output/file-index.md、tests/unit/test_cascade_precheck.py、tests/unit/test_status_z_parse.py
+>
+**要点**：
+① **先核后补（不重复登记）**：逐条 grep 验证 W1014 实踩的 12 类问题哪些已在坑表——`E-17`「级联不能重跑 + 段内定向订正」**已覆盖**（W1014 正是照它做的），`W523`「git 输出路径要加 `core.quotePath=false`」**只覆盖 git diff** ⇒ 缺 `status --porcelain` 半边。据此补 **7 条真缺口**（102→109 条）。
+② **git 组 +2**：`E-37` `status --porcelain` 不受 `quotePath=false` 影响（中文路径仍八进制转义）+ `-z` 的 rename 两条记录次条无 `XY` 前缀 + dirty 须只收 Y 位非空；`E-38` 并行会话撞号（对方新件 docstring 自称我方批号）与生成器产物连带改的归属判断法。
+③ **级联组 +2**：`E-39` spec 四字段硬性形态与「desc 写进版本抬头行」的连带后果（W1014 连撞 4 次）；`E-40` 回窗工具把「未超窗」误报成失败（正常态被断言当异常）。
+④ **流程组 +3**：`E-41` 沙箱三类假缺陷识别法（EPERM/存根 python/锁权限，判据＝完全权限下复跑是否仍红）；`E-42` 报告登记编号取全局 max 且分区篇数须等于行数；`E-43` 「死门控」——配置项或分支位置让判据永不可达（W999 同族泛化）。
+⑤ **可机检者升硬守卫**：`batch_cascade.precheck` 新增拒 spec `desc`/`head_sentence` 裸聚合数字（原只能落盘后被第 31 门禁 C5c 抓、而级联不可重跑 ⇒ 只能手工订正）——本批实测该守卫当场拦下自己的 spec 草稿。
+⑥ **补缺失自测**：`check_doc_sync._parse_status_z` 抽为纯函数 + `tests/unit/test_status_z_parse.py` 5 例（W1014 修此 bug 却没加测试）；`tests/unit/test_cascade_precheck.py` 13 例锁 precheck 全规则。
+⑦ **顺带根治常驻红**：`check_gov_doc_claims` N5「`新Agent启动Prompt` a1_a6=615 ≠ stats 616」自 W1011 起常驻报红（W1011 使 A5 34→35、总数 615→616 未随改）⇒ 订正该文档两处 + AGENTS §1 分项 A5 34→35（原分项合计 615 与总数标记 616 自相矛盾）⇒ 数字断言对账 **0 FAIL**。
+
+**验证**：`check_gov_doc_claims` N1-N5 全一致（0 FAIL）· N4 坑位数 109 == pitfalls 实数 · ruff 全仓 0 债 · 新增 18 例单测全过 · precheck 自测含裸数字正/负样本 · 全量 verify 核心全过。
+
+> - **状态**：已收官（教训落载体 + 可机检者升硬守卫）
+
+### W1015（2026-10-29）：工具链稳健性补强①（跨行改写扫描器 + 第 48 门禁读盘路径覆盖）
+
+> **来源**：用户 2026-10-29 令「同族扫描 + 第 48 门禁补覆盖 做完再继续剩余 68 回扩量」。
+>
+> - **文件**：scripts/check_cross_line_rewrite.py、scripts/check_plan_template.py、scripts/ci_sim.py、tests/unit/test_cross_line_rewrite.py、tests/unit/test_plan_template_read_disk.py、docs/00-导读/W批次编号对账表.md。
+>
+> **本批要点**：① **跨行改写扫描器**（新增）——病根：「`[^X]*` 无尾锚点 ⇒ 匹配段可跨行 ⇒ `re.sub` 整段替换 = 静默删行」（W1005 实证）。全仓 scripts/ 全树实扫 ⇒ **改写面高危 0 处**（另 43 处可疑 + 184 处只读面）；判据自带 **4 例负样本自证**（含「排除符含 `\n` ⇒ 必不报」）；接线 `ci_sim.py` 第 8 项（避门禁本体·§11.2 禁擅改）。② **第 48 门禁读盘路径补覆盖**——`judge_file()` 的读盘面此前**零覆盖**（自测 ①~⑤ 全走纯函数 `R.judge`）⇒ W1005 批在首个新增计划方案件进仓时崩在 `AttributeError: module 'plan_template_review' has no attribute 'io'` ⇒ 潜伏到真实新增件才引爆；现补 self_test ⑧ 例 + 4 例 pytest。
+>
+> **验证**：扫描器 `--self-test` 4/4 · `--gate` 0 FAIL（高危 0 处）· 第 48 门禁 `--self-test` 9/9 · pytest 9 passed。
+>
+> - **状态**：已收官（让号留痕：并行 W1014「工具链体检整改批」先落地 ⇒ 本会话让号 **W1015**；台账行用 `update-index --cacheinfo` 精确暂存·未代提他方在途件）
+
+### W1014（2026-10-29）：工具链体检整改批
+
+> **来源**：用户 2026-10-29 令「检查项目所有的工具、脚本、探针、门禁有没有问题是否需要优化；临时文件系统和归档系统现在是否需要修改优化；对所有文件目录进行整理分类；该进归档系统的进归档系统，该进临时文件系统的进临时文件系统」→ 三决策（全修含门禁本体 / 待 W1013 收官开本批 / 全部接线升格）。
+>
+> - **文件**：.github/workflows/ci.yml、.pre-commit-config.yaml、AGENTS.md、Makefile、archive/README.md、archive/scripts/batches/w10xx/_w1013_align_files.py、archive/scripts/batches/w10xx/_w1013_derive_prepare.py、archive/scripts/batches/w10xx/_w1013_download.py、archive/scripts/batches/w10xx/_w1013_fix_desc.py、archive/scripts/batches/w10xx/_w1013_inventory.py、archive/scripts/batches/w10xx/_w1013_make_spec.py、archive/scripts/batches/w10xx/_w1013_master.py、archive/scripts/batches/w10xx/_w1013_prepare.py、archive/scripts/batches/w10xx/_w1013_read.py、archive/scripts/batches/w10xx/_w1013_retry.py、archive/scripts/batches/w10xx/_w1013_retry2.py、archive/scripts/batches/w10xx/_w1013_roster_check.py、archive/scripts/batches/w10xx/_w1013_sheet.py、archive/scripts/batches/w10xx/_w1013_shot.py、archive/scripts/batches/w10xx/_w1013_stage.py、archive/scripts/batches/w10xx/_w1013_verify.py、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/审查与评审/工具脚本门禁体检与临时归档审计-2026-10-29.md、docs/11-方案报告/README.md、scripts/A_文本基础/章节切分.py、scripts/batch_cascade.py、scripts/batch_screenshots.js、scripts/check_archive_health.py、scripts/check_audit_trigger.py、scripts/check_chart_values.js、scripts/check_commit_scope.py、scripts/check_doc_size_budget.py、scripts/check_doc_sync.py、scripts/check_emoji_icons.py、scripts/check_plan_template.py、scripts/check_script_coverage.py、scripts/file_protocol_probe.py、scripts/judge_gate.py、scripts/lib/py_launch.js、scripts/output/script-coverage-baseline.txt、scripts/preflight_check.py、scripts/rag/build_vectors.py、scripts/refresh_icon_paths.py、scripts/scan_targets.py、scripts/security_scan.py、scripts/site_audit.py、scripts/subject_band.py、scripts/tmpe_tidy.py、scripts/verify_delivery.py、tests/unit/test_cascade_line_anchor.py、tests/unit/test_doc_size_budget.py、tests/unit/test_milestone_block_regex.py、tests/unit/test_tmpe_tidy.py、tmpe/policy.yml
+>
+**要点**：
+① **门禁本体 4 处根修**（用户批准）：`check_doc_sync` self-test T4 去磁盘依赖（负样本号 W777 被 W921 归档迁移撞成已登记 ⇒ C4 可证伪性失效·归档文本改经 inp 注入·33/33 过）；`verify_delivery` 注释 5 处陈旧数字订正为实数（57 段/委托 44/内联 13/恒跑 14·行为不变）；`check_archive_health` 的 `BATCHES_SEG` 死常量上岗为段全集权威源（新增双向对账·W1006 批 16 件漏登记的假绿根因）；第 42 基线陈旧行清 + C2 加「已挂槽仍豁免」反向查（12/12 过）。
+② **AGENTS 脚注 C4 口径缺陷根修**：写入侧量 note 本体 ≤120、判据侧连固定尾句家具一起量 ⇒ 97–120 字注记「级联绿/门禁红」（W1013 首踩 117 字被算 141·阻塞开工）⇒ 判据抽纯函数并剥家具·4 新单测证明未弱化门禁。
+③ **tmpe 临时系统根修**：批号路由正则认不出下划线形态 ⇒ 批号工作件永远进不了 w### 桶（全落 _misc）⇒ 改读 policy.yml 单一权威源 + 按批号归子目录；`_misc` 超额告警死代码修（exclude 使其永不触发）；锁 R1-R4（过期抢占/写锁降级/O_EXCL 原子/释放兜底·23/23 测）；归位执行 93 + 285 件按批号归位（journal 可回溯·零删除·避让在途与个人稿）。
+④ **其余真缺陷**：batch_screenshots 硬编码 python + 静默 fail-open → 抽 `lib/py_launch.js` 共享候选表并fail-closed；`make help` 恒 NameError 修（+ledger 补 .PHONY）；ruff 13 项存量债清零（dev→main 即 CI 红）；judge_gate 输入源 GoatCounter 已退役 ⇒ 语义订正为人工复算器（不伪造接不通的自动源）；check_emoji_icons 自称门禁未挂槽 ⇒ 订正为报告型探针；3 支孤儿探针接线升格为级联收尾浮出。
+⑤ **归档系统**：结构健康·无新硬错位（_s4/_s5 160 件为学术轨活跃线·不归档）；台账补 4 组登记 + 3 项孤儿件补登（templates/对账表-ARCHIVE/w-b-critique）+ 结构树补 templates；W1013 已收官的 16 件按三档归位②代收入档。
+
+**验证**：ruff 全仓 0 债 · 5 支门禁自测全绿（33/33·12/12·4/4·4/4·12/12）· 新增单测 23+12 全过 · 第 43 槽自检 12/12 · 归档健康 0 待办 · 目录文档/搜索索引/布局/提交范围 0 FAIL · 报告落 docs/11-方案报告/审查与评审/（编号 48 登记）。
+
+> - **状态**：已收官（工具链体检整改 + 临时系统路由根修 + 归档台账回写）
+
+### W1013（2026-10-29）：回次 og:image 全覆盖批·第二轮（12 张线描立像/场面）
+
+
+
+> **来源**：用户 2026-10-29 目视确认 W1005 两张 hero 图「合格」后令「继续扩」⇒ 沿用 W1001 批已过目的口径（线描立像族·母版段两变体·按题材定主体·战斗回场面其余立像·12 张一批）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、assets/promo/plate-set/index.md、assets/promo/plate-set/plate-line-61-ch002-puti.png、assets/promo/plate-set/plate-line-61-ch002-puti.webp、assets/promo/plate-set/plate-line-62-ch012-jinchanzi.png、assets/promo/plate-set/plate-line-62-ch012-jinchanzi.webp、assets/promo/plate-set/plate-line-63-ch013-taibaixingxing.png、assets/promo/plate-set/plate-line-63-ch013-taibaixingxing.webp、assets/promo/plate-set/plate-line-64-ch021-lingji.png、assets/promo/plate-set/plate-line-64-ch021-lingji.webp、assets/promo/plate-set/plate-line-65-ch038-wujiguowang.png、assets/promo/plate-set/plate-line-65-ch038-wujiguowang.webp、assets/promo/plate-set/plate-line-66-ch045-huli.png、assets/promo/plate-set/plate-line-66-ch045-huli.webp、assets/promo/plate-set/plate-line-67-ch078-zhizhujing.png、assets/promo/plate-set/plate-line-67-ch078-zhizhujing.webp、assets/promo/plate-set/plate-line-68-ch082-bailujing.png、assets/promo/plate-set/plate-line-68-ch082-bailujing.webp、assets/promo/plate-set/plate-line-69-ch083-laoshujing.png、assets/promo/plate-set/plate-line-69-ch083-laoshujing.webp、assets/promo/plate-set/plate-line-70-ch086-bichandawang.png、assets/promo/plate-set/plate-line-70-ch086-bichandawang.webp、assets/promo/plate-set/plate-line-71-ch087-yuhuawang.png、assets/promo/plate-set/plate-line-71-ch087-yuhuawang.webp、assets/promo/plate-set/plate-line-72-ch092-dizang.png、assets/promo/plate-set/plate-line-72-ch092-dizang.webp、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/preview-w1013-sheet.png、assets/promo/plate-set/raw/README.md、assets/promo/plate-set/raw/index.md、assets/promo/plate-set/raw/round15/README.md、assets/promo/plate-set/raw/round15/index.md、assets/promo/plate-set/raw/round15/plate-line-61-ch002-puti.jpg、assets/promo/plate-set/raw/round15/plate-line-62-ch012-jinchanzi.jpg、assets/promo/plate-set/raw/round15/plate-line-63-ch013-taibaixingxing.jpg、assets/promo/plate-set/raw/round15/plate-line-64-ch021-lingji.jpg、assets/promo/plate-set/raw/round15/plate-line-65-ch038-wujiguowang.jpg、assets/promo/plate-set/raw/round15/plate-line-66-ch045-huli.jpg、assets/promo/plate-set/raw/round15/plate-line-67-ch078-zhizhujing.jpg、assets/promo/plate-set/raw/round15/plate-line-68-ch082-bailujing.jpg、assets/promo/plate-set/raw/round15/plate-line-69-ch083-laoshujing.jpg、assets/promo/plate-set/raw/round15/plate-line-70-ch086-bichandawang.jpg、assets/promo/plate-set/raw/round15/plate-line-71-ch087-yuhuawang.jpg、assets/promo/plate-set/raw/round15/plate-line-72-ch092-dizang.jpg、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T37-任务计划执行与经验沉淀报告-2026-10-29.md、docs/11-方案报告/计划方案/执行前计划-T32-回次ogimage全覆盖第二轮.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/INDEX.md、docs/agent/pitfalls.md、scripts/_w1013_align_files.py、scripts/_w1013_derive_prepare.py、scripts/_w1013_download.py、scripts/_w1013_fix_desc.py、scripts/_w1013_inventory.py、scripts/_w1013_make_spec.py、scripts/_w1013_master.py、scripts/_w1013_prepare.py、scripts/_w1013_read.py、scripts/_w1013_retry.py、scripts/_w1013_retry2.py、scripts/_w1013_roster_check.py、scripts/_w1013_sheet.py、scripts/_w1013_shot.py、scripts/_w1013_stage.py、scripts/_w1013_verify.py、scripts/check_js_syntax.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1013.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1013_batch.json、scripts/output/_w1013_batch_a.json、scripts/output/_w1013_batch_b.json、scripts/output/_w1013_inventory.json、scripts/output/_w1013_manifest.json、scripts/output/_w1013_read.json、scripts/output/_w1013_retry.json、scripts/output/_w1013_retry2.json、scripts/output/_w1013_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/reader/ch002.html、site/reader/ch012.html、site/reader/ch013.html、site/reader/ch021.html、site/reader/ch038.html、site/reader/ch045.html、site/reader/ch078.html、site/reader/ch082.html、site/reader/ch083.html、site/reader/ch086.html、site/reader/ch087.html、site/reader/ch092.html、site/static/images/README.md、site/static/images/index.md、site/static/images/og-plate-line-61-ch002-puti.webp、site/static/images/og-plate-line-62-ch012-jinchanzi.webp、site/static/images/og-plate-line-63-ch013-taibaixingxing.webp、site/static/images/og-plate-line-64-ch021-lingji.webp、site/static/images/og-plate-line-65-ch038-wujiguowang.webp、site/static/images/og-plate-line-66-ch045-huli.webp、site/static/images/og-plate-line-67-ch078-zhizhujing.webp、site/static/images/og-plate-line-68-ch082-bailujing.webp、site/static/images/og-plate-line-69-ch083-laoshujing.webp、site/static/images/og-plate-line-70-ch086-bichandawang.webp、site/static/images/og-plate-line-71-ch087-yuhuawang.webp、site/static/images/og-plate-line-72-ch092-dizang.webp、site/static/images/plate-line-61-ch002-puti.webp、site/static/images/plate-line-62-ch012-jinchanzi.webp、site/static/images/plate-line-63-ch013-taibaixingxing.webp、site/static/images/plate-line-64-ch021-lingji.webp、site/static/images/plate-line-65-ch038-wujiguowang.webp、site/static/images/plate-line-66-ch045-huli.webp、site/static/images/plate-line-67-ch078-zhizhujing.webp、site/static/images/plate-line-68-ch082-bailujing.webp、site/static/images/plate-line-69-ch083-laoshujing.webp、site/static/images/plate-line-70-ch086-bichandawang.webp、site/static/images/plate-line-71-ch087-yuhuawang.webp、site/static/images/plate-line-72-ch092-dizang.webp。
+
+
+**本批要点**：① **缺口实读 80 回**（100 回中已有配图 20 回）· ② **已出主体全表核对**——plate-set 实为 **88 个母版 / 88 个唯一 slug**（编号 1–12 被四个批次族复用 ⇒ 编号 max 60 不等于主体数）⇒ 12 个候选主体与全表**零冲突**；③ **母版段两变体**——立像段**逐字复用 249 字符**（7 张），场面段**仅改 3 处**（5 张）；④ **5 张重出**（两轮）——朱砂被画成大块火焰 / 竖椭圆、钢鞭末端多出弯钩、主体底被画布切掉、杖头金龙悬空脱手（其中 4 张**机器判据全 PASS**·只靠人眼硬关）；⑤ **12 页接入**（题图位 + 专属 1200×630 og:image）⇒ 回目页覆盖 **20 → 32 回**、缺口 **80 → 68 回**；⑥ **未覆盖页零回归**——缺口 68 页中 66 页仍为通用 og-cover-ink-zh.jpg、2 页保留既有 card-* 专属图。
+
+**验证**：母版判据 J1–J10 **100/100 FAIL 0** · 裁切验算 **100/100 FAIL 0** · 负样本自证命中（J1 尺寸）· 落位验收 **0 FAIL**（含「未覆盖页 68 个零回归」）· 幂等复跑 **24/24 SKIP** · 浏览器实跑 **0 FAIL**（题图 HTTP 200 + naturalWidth > 0 + 位置在 h1 之后 + 暗色隐藏生效）· 第 48 门禁 **0 FAIL**（新增文件·全项符合）· 全量门禁 **55 段全绿**。
+
+> - **状态**：已收官（12 张落地·母版族 88 → 100 张·既有 88 张母版与站点版零改动·其余 68 个无配图回目页的 og:image 未误改·坑表 +2 条·用户目视确认合格 2026-10-29）
+
+### W1012（2026-10-29）：产物目录瘦身 + 在途收口批
+
+> **来源**：用户 2026-10-29 令「做」——承接分类报告两荐条：产物目录里的 33MB 一次性基线归档、并行会话收尾件代收（用户确认「都做完了」）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/README.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w8xx/README.md、archive/scripts/batches/w8xx/_w851_visual_snapshot_after.json、archive/scripts/batches/w8xx/_w851_visual_snapshot_before.json、archive/scripts/batches/w8xx/_w876_baseline_after.json、archive/scripts/batches/w8xx/_w876_baseline_before.json、archive/scripts/batches/w8xx/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/output/README.md、scripts/output/_cascade_files_W1012.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1012_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html。
+>
+**要点**：
+① **产物目录瘦身**：`scripts/output/` 是「活产物」目录（file-index/stats/tools-inventory/spec），却躺着 W851/W876 的一次性基线快照 4 件 ≈33MB——全仓 grep 仅被各自**归档 spec** 提及，活代码与测试零消费 ⇒ 迁 `archive/scripts/batches/w8xx/`。这是分类报告里唯一的硬错位。
+② **并行会话收尾件代收**（用户确认其工作「都做完了」但未提交）：`pytest.ini` pytest 计数 979→1016（stats 标记）、两份系统架构方案 md、`tools-inventory.md` 时间戳刷新。
+③ 分类总览报告落 `tmpe/`（8743 文件盘点·七类职责·目录内错位清单），不入库（tmpe 为临时区）。
+
+**验证**：`check_repo_layout`（第 52 槽）0 FAIL · `check_doc_size_budget` 0 FAIL · full `lint_links` 0 broken · 全量 pytest 1013 passed · 全量 verify 核心全过。
+
+> - **状态**：已收官（产物目录回归「活产物」单一职责）
+
+### W1011（2026-10-29）：仓库整理分类批（五项归位 + 第 52 槽布局门禁）
+
+> **来源**：用户 2026-10-29「对项目的所有文件进行整理分类」→ 我给出盘点与三档方案 → 用户「全都做」。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/misc/README.md、archive/scripts/batches/misc/_tmp_chap_sheet.py、archive/scripts/batches/misc/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/index.md、docs/00-导读/协议边界速查.md、docs/00-导读/文档规范.md、docs/00-导读/新Agent启动Prompt.md、docs/00-导读/统计口径说明.md、docs/00-导读/项目说明.md、docs/04-文化与历史背景/西游记大事年表.md、docs/10-方法论沉淀/例-佛法AI框架原始对话.txt、docs/INDEX.md、docs/agent/gates.md、index.md、scripts/A_文本基础/README.md、scripts/A_文本基础/index.md、scripts/A_文本基础/章节切分.py、scripts/check_gov_doc_claims.py、scripts/check_governance_docs.py、scripts/check_repo_layout.py、scripts/check_w_range_literal.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1011.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1011_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/verify_delivery.py、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/reader/ch001.html、site/reader/ch003.html、site/reader/ch009.html、site/reader/ch011.html、site/reader/ch022.html、site/reader/ch028.html、site/reader/ch047.html、site/reader/ch063.html、site/reader/ch066.html、site/reader/ch079.html、site/reader/ch089.html、site/reader/ch093.html、tests/unit/README.md、tests/unit/index.md、tests/unit/test_repo_layout.py。
+>
+**要点**：
+① **盘点**：8743 文件 / 2.8 GB，24 个顶层目录。七类职责（治理/内容/站点/素材/代码/归档/临时）本已成立，真错位只有 5 个——大搬家收益是「看起来整齐」，代价是 5567 条链接与全部生成器路径，故不做。
+② **五项归位**：根目录 `_tmp_chap_sheet.py` → `archive/scripts/batches/misc/`；`tools/章节切分.py` → `scripts/A_文本基础/`；`references/例-佛法AI框架原始对话.txt` → `docs/10-方法论沉淀/`；`timeline/西游记大事年表.md` → `docs/04-文化与历史背景/`（+ 补元信息块 v2）；`新Agent启动Prompt.md` → `docs/00-导读/`（相对链接改 `../../`）。空壳目录 `tools/` `references/` `timeline/` 整体删除。
+③ **三判据改路径**：`check_gov_doc_claims`（N5）/`check_governance_docs`/`check_w_range_literal` 里的 Prompt 路径；《协议边界速查》A5 板块 34 → 35 篇。
+④ **第 52 槽布局门禁** `check_repo_layout.py`：L1 根目录只放治理与配置（白名单+去向提示）、L2 顶层目录须已声明角色、L3 白名单不得陈腐；按 **git 视角**判定（ignore 的本地件不算）；毫秒级登记 `_SCOPE_CORE` 恒跑；自测 5 例 + `--report`。
+⑤ **连带修 12 处断链**：`site/reader/ch001|003|009|011|022|028|047|063|066|079|089|093.html` 的 plate-line 图片写成`../../static/images/`（从 site/reader 出发应为 `../static/`）——W1001 起就断，`--scope auto` 只跑 docs 轨所以一直没暴露；本批 full lint 14943 链接扫出 12 broken，已全部修正。
+⑥ 数值级联：槽 51→52（AGENTS 三处措辞 + §4.2 第 52 条）、段 56→57（文档规范）。
+
+**验证**：`check_repo_layout --self-test` 5/5 · 单测 7 passed · full `lint_links` 14943 链接 **0 broken** · `check_gov_doc_claims` N1-N5 0 FAIL · `check_frontmatter` 通过（年表已补元信息块）· `docs_index` 重建 780 篇 · 第 52 槽实跑「全部在声明内」· 全量 verify 核心全过。
+
+> - **状态**：已收官（布局从「一次性搬家」变成「可执行判据」）
+
+### W1010（2026-10-29）：级联自动回窗批
+
+> **来源**：W1009 收官后自查发现同一病根第三次——级联插入段/行必然把正本顶过窗口，然后**下一批开工前**才被 preflight 判红；W1008 就是专门为此手工回窗的一批。人手记的这一步必须交给机器。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/batch_cascade.py、scripts/output/README.md、scripts/output/_cascade_files_W1010.txt、scripts/output/_w1010_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/test_batch_spec.py。
+>
+**要点**：
+① `batch_cascade` 收尾链改为 **落盘 → 回窗 → stats**：`_refresh_window()` 调 `archive_segments --target both --keep 110` + `archive_ledger_rows --keep 60`；任一步失败打印 `[WINDOW] FAIL` 并 `return 2`（不静默、不留「下一批开不了工」的半成品）。
+② 窗口常量 `WIN_SEGMENTS=110` / `WIN_LEDGER=60` 提为模块常量，与文档规范 §8 同源；单测钉住（改窗必须同步改测试）。
+③ 单测 2 例：两步都成功才 True；任一步失败即 False 且打印 FAIL（runner 注入，不真跑归档）。
+④ 口径线索：这是「动作靠人记」的第三例（前两例：C5d 手跑 stats、回窗手跑归档）——**凡每日必做且会漏的步骤，都要落在级联收尾里**，而不是写在文档让人记住。
+
+**验证**：本批级联即 live 证据——`[WINDOW] segments OK` / `[WINDOW] ledger OK` / `[STATS] OK` 全由级联打出；`pytest tests/unit/test_batch_spec.py` 9 passed · 第 51 槽自判 · 体积窗口 0 FAIL · 全量 verify 核心全过。
+
+> - **状态**：已收官（回窗从「手工维护批」变成级联内置步骤）
+
+### W1009（2026-10-29）：流程收口批（级联自动刷 stats + spec 解析单一入口）
+
+> **来源**：用户 2026-10-29 令「做」——W1008 报告荐条 1（stats 刷新接进级联）+ 荐条 2（两处 spec 解析合并）。两条都指向同一类问题：**同一动作靠人记、同一判据两处写**。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/batch_cascade.py、scripts/batch_spec.py、scripts/check_commit_scope.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1009.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1009_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/safe_commit.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/README.md、tests/unit/index.md、tests/unit/test_batch_spec.py。
+>
+**要点**：
+① **级联收尾自动刷 stats**：C5d（stats 与磁盘实算漂移）在 W1006/W1007/W1008 三批各假红一次，每次都要人记得先跑 `stats.py --w ####`。改为 `batch_cascade` 落盘后自跑；runner 可注入（单测可桩），失败打印 `[STATS] FAIL` + 末两行并让级联 `return 2`——不静默、不半成品。
+② **spec 解析收敛单一入口** `scripts/batch_spec.py`：`safe_commit._spec_paths` 与 `check_commit_scope.spec_paths_for` 曾各写一份，W1007 踩到一处 `cells[0]`、一处 `cells[1]` ⇒ 收敛为一份实现，两处只调用。顺带补上「markdown 分隔行 `|---|---|` 必须跳过」——这条是新单测第一跑就抓出来的。
+③ **测试** 7 例：首格即路径 / 表头与分隔行跳过 / 去重与路径归一 / 空 spec / 读文件 / 「两处必须给同一答案」/ stats runner OK 与 FAIL 两态。
+④ **口径入仓**：pitfalls 补「同一判据禁两处实现」（解析/取数部分收敛单一入口，两处只调用不重写）。
+⑤ **本批即 live 验证**：本批级联走的就是新收尾——`[STATS] OK` 由级联自己打出，不再是手跑。
+
+**验证**：`pytest tests/unit/test_batch_spec.py` 7 passed · 三组相关单测 22 passed · 级联输出含 `[STATS] OK` · 第 51 槽自判（归属 W1009·索引 ⊆ spec）· 第 31/42/45 槽 0 FAIL · 全量 verify 核心全过。
+
+> - **状态**：已收官（stats 刷新与 spec 解析都从「人记」变「机器做·单点维护」）
+
+### W1008（2026-10-29）：回窗 + 触发器归档盲区批
+
+> **来源**：用户 2026-10-29 一句「然后呢」——W1005→W1007 三批连发后仓库进不了开工态：preflight 体积窗口 3 项红（CHANGELOG/file-index 112 段 > 110·台账 61 行 > 60）。先回窗，再把早先审查列的 I2 补掉。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/check_audit_trigger.py、scripts/output/README.md、scripts/output/_cascade_files_W1008.txt、scripts/output/_w1008_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/test_audit_trigger.py、tests/unit/test_check_script_coverage.py、tests/unit/test_script_hygiene.py。
+>
+**要点**：
+① **回窗**：`archive_segments.py --target both`（CHANGELOG / file-index 各迁出 3 段 W887-W889 至 archive）+ `archive_ledger_rows.py`（迁 2 行 W947-W948）⇒ 体积窗口 0 FAIL，恢复可开工。
+② **I2 归档盲区**（审查项遗留）：触发器只读正本台账，而台账行按 60 行窗滚动——审查行一旦被迁进 `archive/docs/W批次编号对账表-ARCHIVE.md`，判据就会把「已审查」读成「从未审查」（假警）。修法：判据读取面改成**正本 ∪ 归档**取 token max；归档缺失不阻断（正本判据仍成立）。
+③ **测试**：触发器 `--self-test` 7 → 8 态（T8 归档 token 计入）；单测加 `test_archive_ledger_token_counts`（现 10 例）。
+④ **口径入仓**：pitfalls「判据把字样当事件」条补「读取面＝正本 ∪ 归档」——判据读的**源**会滚动，这和判据读的**面**（字样/位置）是两件事。
+⑤ **全量回归抓到两处自过期测试**：`test_script_hygiene.py` 把门禁自测例数写死 `9/9`，W1006 加 T10 后变 10/10 ⇒ 假红。改为「满/缺对比」不写死例数——同型两处（`test_script_hygiene` 的 `9/9`、`test_check_script_coverage` 的 `6/6`）。**测试自己过期属假红族**，与「判据读空当无段」同一处方：断言不写死会随判据演进的计数。
+
+**验证**：`check_doc_size_budget` 0 FAIL · `check_audit_trigger --self-test` 8/8 · `pytest tests/unit/test_audit_trigger.py` 10 passed · 全量 pytest 回归通过 · 第 51 槽自判（归属 W1008·索引 ⊆ spec）· 全量 verify 核心全过。
+
+> - **状态**：已收官（回窗恢复开工态 + 触发器归档盲区补齐）
+
+### W1007（2026-10-29）：提交范围门禁批（第 51 槽·索引 ⊆ 本批 spec）
+
+> **来源**：用户 2026-10-29 令「现在做」——W1006 收官时明写「硬拦只在走 `safe_commit` 时生效，`git commit` 直提绕得过；要彻底封死，得搬进 `verify_delivery.py`（加槽＝50→51 级联）」。本批就是那条级联。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/文档规范.md、docs/00-导读/项目说明.md、docs/agent/gates.md、docs/agent/pitfalls.md、scripts/check_commit_scope.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1007.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1007_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/verify_delivery.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/README.md、tests/unit/index.md、tests/unit/test_commit_scope.py。
+>
+**要点**：
+① **判据**（`check_commit_scope.py`）：归属批次取**索引态** `CHANGELOG.md` 顶段 W 号（与 HEAD 顶段不同＝本提交正在新增该段），否则取 HEAD 现役段（回填/补账类）；该批 `scripts/output/_w####_spec.json` 的 `file_index_rows` 即「应动全集」；索引态路径集（`diff --cached` + `diff.renames=false`·rename 两侧都在）多出即 **FAIL**，列前 10 项 + 改法。
+② **恒跑**：挂第 51 槽并登记 `_SCOPE_CORE`——`--scope docs` / `site` 的提交同样判（代提不分轨），堵死 W1006 遗留的「`git commit` 绕过 safe_commit」缺口。
+③ **不伪造红**：索引无暂存件 → NOTE 放行（非提交动作）；spec 缺失 → WARN 放行（判据不可执行）。
+④ **数值级联**：AGENTS §4.2 第 51 条 + 三处「50 槽→51 槽」、gates.md 第 51 条、文档规范「现役 55→56 段」、`EXPECTED_SECTION_NAMES` 与 `_SCOPE_CORE` 同步、verify 注释计数（56 段 / 39 委托段）。
+⑤ **测试**：`--self-test` 6 例 + `--report` 模式；`tests/unit/test_commit_scope.py` 8 例（含端点契约：汇总行必为末行）。
+
+**验证**：`check_commit_scope --self-test` 6/6 · 单测 8 passed · 本文提交由第 51 槽自判（归属 W1007·索引 ⊆ spec）· N2 56 段 / N3 51 槽一致 · 全量 verify 核心全过。
+
+> - **状态**：已收官（代提防线从「工具」升级为「门禁」·任何提交路径都绕不过）
+
+### W1006（2026-10-29）：防代提硬拦批（safe_commit --expect-spec）
+
+> **来源**：用户 2026-10-29 令「做」——承接 W1004 报告末句「要不要把 `--expect-spec` 硬拦也做了？那是唯一能真正止住第三次、第四次的改法」。当日已发生三次代提（W989 级联十四面 / W1002 审查 B3 / W1004 被 W1005 全量提交带走），纪律层已写「并行在场禁 `git add -A`」却仍复发 ⇒ 本轮把它变成硬拦。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1005_fix_c6.py、archive/scripts/batches/w10xx/_w1005_fix_head_sentence.py、archive/scripts/batches/w10xx/_w1005_fix_tail_sep.py、archive/scripts/batches/w10xx/_w1005_handover_line.py、archive/scripts/batches/w10xx/_w1005_heroes.py、archive/scripts/batches/w10xx/_w1005_patch_changelog_files.py、archive/scripts/batches/w10xx/_w1005_probe_asset_sizes.py、archive/scripts/batches/w10xx/_w1005_probe_cascade_line.py、archive/scripts/batches/w10xx/_w1005_probe_changelog_files.py、archive/scripts/batches/w10xx/_w1005_probe_faces.py、archive/scripts/batches/w10xx/_w1005_probe_head.py、archive/scripts/batches/w10xx/_w1005_probe_readme.py、archive/scripts/batches/w10xx/_w1005_render_flyer.py、archive/scripts/batches/w10xx/_w1005_serve.py、archive/scripts/batches/w10xx/_w1005_spec.py、archive/scripts/batches/w10xx/_w1005_sync_faces.py、archive/scripts/batches/w10xx/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/check_script_coverage.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1006.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1006_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/safe_commit.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/README.md、tests/unit/index.md、tests/unit/test_safe_commit_expect_spec.py。
+>
+**要点**：
+① `safe_commit.py` 新增 `--expect-spec <本批 spec>`：提交前取**索引态路径集**（`diff --cached` + `diff.renames=false` 取全集），与本批 spec 的 `file_index_rows` 求差；**出现 spec 之外的文件即拒绝**（列前 10 项 + 改法：`git restore --staged <路径>` 或补进 spec）；spec 为空 **fail-closed**；索引里缺 spec 声明的件只出 NOTE（可能已入库/无需改）。给 `--expect-spec` 时可省 pathspec。
+② 自测 4 → 8 例：子集放行 / 多出必拒 / 空 spec 拒 / 空索引只提示。
+③ 新增 `tests/unit/test_safe_commit_expect_spec.py` 7 例，含**临时仓端到端**：拦住 extra（提交数不变）与放行 subset（提交落地）——不是纯函数自证，是真跑 git。
+④ 口径入仓：pitfalls「并行会话工作树」条补硬拦段落（点明三次代提同一处方）；AGENTS §4.3 最高频铁则加「批次收官提交一律 `--expect-spec`」。
+⑤ 本批自身即 dogfood：收官提交用 `--expect-spec scripts/output/_w1006_spec.json`。
+
+**验证**：`safe_commit.py --self-test` 8/8 · `pytest tests/unit/test_safe_commit_expect_spec.py` 7 passed · 本批提交由 `--expect-spec` 校验通过（索引 ⊆ spec）· 全量 verify 核心全过。
+
+> - **状态**：已收官（代提从「纪律」升级为「提交前硬拦」；残留：他方在途件仍需各自登记）
+
+### W1005（2026-10-29）：hero 水墨图人数修正（取经五人组·4 人形 + 1 匹白马）· 两张原地替换 + flyer A4 快照重渲染
+
+
+
+> **来源**：用户 2026-10-29 指出 `site/static/images/ink-mountains-hero.webp`「内容不符合西游记·为什么有七个人」→ 问卷裁定人物口径＝取经五人组（4 人形 + 1 匹白马）、范围＝两张一并修。
+>
+> **根因**：W852 批 hero-set 01/06 档案即明写「山脊云海+**七人单行**」⇒ 人数错误源自 W852 批，W879 批原地替换该图时沿用了同一错误 ⇒ 两张同族图都是错的。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、DESIGN.md、HANDOVER.md、README.md、STRUCTURE.md、archive/README.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、assets/promo/hero-set/raw/index.md、assets/promo/hero-set/raw/round-w1005/README.md、assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg、assets/promo/hero-set/raw/round-w1005/index.md、assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/adversarial-audit-prompt.md、docs/agent/gates.md、docs/agent/pitfalls.md、scripts/AD_认知心理/index.md、scripts/accent_audit.py、scripts/check_audit_trigger.py、scripts/check_crop.py、scripts/check_emoji_icons.py、scripts/check_page_admission.py、scripts/check_script_coverage.py、scripts/check_vermilion_solid.js、scripts/file_protocol_probe.py、scripts/icon_probe.js、scripts/index.md、scripts/j1_name_audit.py、scripts/output/_cascade_files_W1003.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1003_spec.json、scripts/output/_w1004_spec.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/refresh_icon_paths.py、scripts/scan_targets.py、scripts/site_audit.py、scripts/subject_band.py、scripts/visual_regression_probe.py、tests/unit/test_audit_trigger.py、tests/unit/test_script_hygiene.py、tests/unit/test_w851_j1_name_audit.py、tests/unit/test_w851_visual_regression_probe.py。
+
+**本批要点**：① **两张原地替换**（同文件名同尺寸 ⇒ 848 个 .hero 页面零页面改动）——`ink-mountains-hero.webp`（1792×1024·深底 soft-light 合成底图）与 `hero-01-xihai-yunhai.webp`（2560×1440·宣传单页配图）均改为 **4 人形 + 1 匹白马**（唐僧·悟空·八戒·沙僧 + 白龙马）；② **README 三张图同步**——主视觉 banner 引用同一路径故自动更新；`assets/images/index-preview.png` 因首页不使用 .hero 不受影响；**flyer A4 正面 PNG 是静态渲染快照不会自动更新 ⇒ 本批用 Playwright 重渲染**（中英各一·1240×1756 单页 clip）；③ **队伍落位须避开下边缘**——.hero 用 `background-position: center 70%`，首版队伍贴画面下缘 ⇒ 合成后被裁出只剩孤马，prompt 追加「队伍位于山脊中部（垂直 45%–60%）·裁切后仍须完整可见」；④ **显影度**（soft-light 叠 #221D16 后亮度跨度）= 0.2192（W879 批门槛 ≥0.07）；⑤ **人数只能人眼硬关**——「深墨小簇计数」判据不可用（山水皴笔碎点被计入：67/20），人眼核对两张均 4 人形 + 1 匹白马；⑥ **代并行 W1004 结清 5 处版本面欠账**（CHANGELOG 编号规则 / workflows README 头部 / HANDOVER 当前 HEAD 句 / HANDOVER §一 链首 / 项目说明版本行 desc 的「·」）⇒ 消解门禁 5 处红。
+
+**验证**：母版判据与裁切验算沿用 W1001 批口径（88/88 PASS）· 显影度 0.2192 · 单件 117.6 / 83.6 KB · 人眼核对 2/2（4 人形 + 1 匹白马）· 浏览器实跑（data 页 .hero 深底合成·队伍剪影完整可见）· flyer PNG 重渲染后尺寸 1240×1756 与原产物一致 · 全量门禁 55/55 段全绿。
+
+> - **状态**：已收官（两张原地替换 + flyer 快照重渲染 + 版本面欠账代清偿；坑表 +3 条（E-32/E-33/E-34）与 T36 终稿报告已同批补齐·台账状态在本笔回填·用户目视确认合格 2026-10-29）
+
+### W1004（2026-10-29）：转正清零 + 审查触发器判据修正批（B1 字样≠事件 / B2 max / B4 台账归位）
+
+> **来源**：用户 2026-10-29 三令收口——①「8 件转正清零」②「B1/B2/B4 开始做」③「只写进你自己的记忆文件和工作日志没用，这个项目是多 Agent 共同协作的项目，还是会再次出现同样错误」。第三令是本批的纲：教训的**权威载体是仓内坑表**，私有记忆只作镜像（铁律 14 / CLAUDE 第 12 条早已写明，W1002 却把审查结论只写进第三方 Agent 运行态目录（memory/））⇒ 本批把结论与判据一起落进仓。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、DESIGN.md、HANDOVER.md、README.md、STRUCTURE.md、archive/README.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、assets/promo/hero-set/raw/index.md、assets/promo/hero-set/raw/round-w1005/README.md、assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg、assets/promo/hero-set/raw/round-w1005/index.md、assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/agent/adversarial-audit-prompt.md、docs/agent/gates.md、docs/agent/pitfalls.md、pytest.ini、scripts/AD_认知心理/index.md、scripts/_w1005_heroes.py、scripts/_w1005_serve.py、scripts/accent_audit.py、scripts/check_audit_trigger.py、scripts/check_crop.py、scripts/check_emoji_icons.py、scripts/check_page_admission.py、scripts/check_script_coverage.py、scripts/check_vermilion_solid.js、scripts/file_protocol_probe.py、scripts/icon_probe.js、scripts/index.md、scripts/j1_name_audit.py、scripts/output/_cascade_files_W1003.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1003_spec.json、scripts/output/_w1004_spec.json、scripts/output/_w1005_batch.json、scripts/output/_w1005_heroes.json、scripts/output/_w1005_map.json、scripts/output/_w1005_serve.err、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/refresh_icon_paths.py、scripts/scan_targets.py、scripts/site_audit.py、scripts/subject_band.py、scripts/visual_regression_probe.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/test_audit_trigger.py、tests/unit/test_script_hygiene.py、tests/unit/test_w851_j1_name_audit.py、tests/unit/test_w851_visual_regression_probe.py、xiyouji-agent-web/e2e/chat.e2e.mjs、xiyouji-agent-web/package-lock.json、xiyouji-agent-web/package.json。
+>
+**要点**：
+① **8 件转正清零**——W977「硬保留」名单最后 8 件去 `_wNNN_` 前缀：`file_protocol_probe.py` / `j1_name_audit.py` / `visual_regression_probe.py` / `accent_audit.py` / `site_audit.py` / `scan_targets.py` / `icon_probe.js` / `refresh_icon_paths.py`；引用方（第 50 门禁 JS 探针路径、两份单测 import、DESIGN/gates/pitfalls）同步改名。第 42 门禁 C4 配额 **8 → 0**（棘轮到底）。
+② **B1 字样 ≠ 事件**——触发器改认专用 token `对抗审查已派发`；含泛词「对抗式审查」但无 token 的行只出 「疑似未打标」NOTE、**不重置计数**（旧实现被「修审查遗留问题」这类行静默重置，实测 41 批漏警）；**收口时又实证一次自伤**——本批台账行只是「描述」这个 token，就被整行 grep 判成一次派发 ⇒ 改为**位置判定：token 只在状态列认**，自测加 T6b 与 `test_token_in_topic_cell_does_not_count` 钉住。
+③ **B2 max 而非文件序**——`last_audit_batch()` 改为取含 token 行的最大 W 号（旧实现取文件末条，后补登记/让号下把 gap 算歪：真实 24 批报 28 批）。
+④ **B4 台账 W998 行归位**——原行是 W998 首次认领的「必守纪律晋升批」内容（该批实际以 W999 落库），与 CHANGELOG §W998「对抗式审查修复批」冲突 ⇒ 以 CHANGELOG 为准改写、状态回填已收官、并写入事件 token（触发器基线上移到 W998）。
+⑤ **补幽灵测试文件**——台账 W1000 行 touches 曾声明 `tests/unit/test_audit_trigger.py` 但从未创建；本批补齐 8 例（阈值 20/21、空台账 fail-closed、散文豁免、B1/B2 回归、同批不触发、CLI 自测）。
+⑥ **口径入库（本批纲）**——pitfalls +2 条：『判据把字样当事件/文件序当集合』『教训必须落仓内载体·私有记忆只是镜像』（95 → 97 条·数据 9→10 / 流程 22→23）；派发模板改为「登记行必须写 token」。
+
+**验证**：`check_audit_trigger.py --self-test` 七态 7/7 · `pytest tests/unit/test_audit_trigger.py` 8 passed · `pytest tests/unit/test_script_hygiene.py` 7 passed · 第 42 门禁 0 FAIL（C4 无 NOTE·配额 0）· `check_gov_doc_claims` N3/N4 一致（50 槽 / 97 条）· 触发器实跑「距上次（W998）5 批·未触发」· 全量 verify 核心全过。
+
+> - **状态**：已收官（8 件转正清零 · B1/B2/B4 修复 · 教训与判据同批入仓）；**入库方式＝代提**——本批已暂存的 75 件被并行 W1005 会话的全量提交 `09146cf1` 带走（与 W1002 审查 B3 同型：共享工作树 + 他方全量 `git add`），登记面与台账状态由本笔回填补齐
+
+### W1003（2026-10-29）：agent-web chat 集成验证与死重清退批（用户令「做」·审计轮建议前提过时转验证）
+> **来源**：组件库盘点审计轮收尾建议「在 agent-web 装 @tdesign-react/chat 起对话页原型接 SSE」→ 用户令「做」→ 动工前磁盘重验发现**前提过时**：该包 W401 已入库、W808 起实战在用（ChatSender 输入区 + ChatMarkdown 渲染 + 自研 SSE 八事件客户端），「起原型」转为「验证在役集成 + 清退死重」。
+> **摘要**：① **验证三链全绿**——build（tsc -b + vite·1.4s）·test:client 51/51（含 useChat 流式 4 例）·三层 E2E 11/11（真实浏览器 + 构建产物 + 后端 + SQLite·唯一替身 mock LLM；流式渲染/会话落库/反馈落库/控制台零错误全过）。② **死重清退**——@tdesign-react/aigc@0.1.0-alpha.15（W401 随源码首批带入）src/e2e/evals/CI/docs 全零引用、npm 树仅根挂点，npm uninstall 同步 package.json + lock。③ **e2e 端口修根**——FRONTEND_PORT 4232→4600：4232 落 Windows WinNAT 保留段 4138-4237（netsh excludedportrange 实测 3732-4537 连片），vite preview listen EACCES——W975「端口占用是假故障」保留段形态复发实证，此前本机三层 E2E 因此从未能启动；迁出后 11/11 全过。
+> **文件**：xiyouji-agent-web/package.json · xiyouji-agent-web/package-lock.json · xiyouji-agent-web/e2e/chat.e2e.mjs · scripts/output/_w1003_spec.json
+### W1002（2026-10-29）：脚本三档归位批（81 件归档 + 4 件转正 + 第 42 门禁 C4 哨兵）
+
+> **来源**：用户 2026-10-29 三问收口——「一次性脚本的储存方式难道不是应该放在临时文件系统里面吗？」→ 三档提案（探索→临时区 / 批次可重放→归档桶 / 引用或跨批→转正）经用户令「全部做完」落地。本批把 W977 人工清扫一次的做法变成**常驻判据**：W977 归档 287 件后，W983–W1001 又堆回 81 件，证明「靠人记得归档」不成立。
+>
+> - **文件**：AGENTS.md、Makefile、archive/README.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1001_clean_locks.py、archive/scripts/batches/w10xx/_w1001_final.py、archive/scripts/batches/w10xx/_w1001_finish_faces.py、archive/scripts/batches/w10xx/_w1001_fix_index.py、archive/scripts/batches/w10xx/_w1001_fix_rule_anchor.py、archive/scripts/batches/w10xx/_w1001_probe_faces.py、archive/scripts/batches/w10xx/_w1001_restore_changelog_head.py、archive/scripts/batches/w10xx/_w1001_stage.py、archive/scripts/batches/w10xx/index.md、archive/scripts/batches/w9xx/_w954_review_evidence.py、archive/scripts/batches/w9xx/_w978_review_evidence.py、archive/scripts/batches/w9xx/_w983_derive.py、archive/scripts/batches/w9xx/_w983_download.py、archive/scripts/batches/w9xx/_w983_insert_plates.py、archive/scripts/batches/w9xx/_w983_make_prompts.py、archive/scripts/batches/w9xx/_w983_make_spec.py、archive/scripts/batches/w9xx/_w983_precheck_pages.py、archive/scripts/batches/w9xx/_w983_prepare.py、archive/scripts/batches/w9xx/_w983_retry.py、archive/scripts/batches/w9xx/_w983_serve.py、archive/scripts/batches/w9xx/_w983_sheet.py、archive/scripts/batches/w9xx/_w983_zoom.py、archive/scripts/batches/w9xx/_w984_derive.py、archive/scripts/batches/w9xx/_w984_download.py、archive/scripts/batches/w9xx/_w984_insert_plates.py、archive/scripts/batches/w9xx/_w984_make_prompts.py、archive/scripts/batches/w9xx/_w984_make_spec.py、archive/scripts/batches/w9xx/_w984_precheck_pages.py、archive/scripts/batches/w9xx/_w984_prepare.py、archive/scripts/batches/w9xx/_w984_retry.py、archive/scripts/batches/w9xx/_w984_serve.py、archive/scripts/batches/w9xx/_w984_sheet.py、archive/scripts/batches/w9xx/_w984_zoom.py、archive/scripts/batches/w9xx/_w986_make_prompts.py、archive/scripts/batches/w9xx/_w986_make_spec.py、archive/scripts/batches/w9xx/_w987_family_scan.py、archive/scripts/batches/w9xx/_w987_insert_scenes.py、archive/scripts/batches/w9xx/_w987_make_spec.py、archive/scripts/batches/w9xx/_w988_card_sheet.py、archive/scripts/batches/w9xx/_w988_docs.py、archive/scripts/batches/w9xx/_w988_fix_cascade.py、archive/scripts/batches/w9xx/_w988_fix_eol.py、archive/scripts/batches/w9xx/_w988_fix_gates.py、archive/scripts/batches/w9xx/_w988_insert.py、archive/scripts/batches/w9xx/_w988_inventory.py、archive/scripts/batches/w9xx/_w988_make_assets.py、archive/scripts/batches/w9xx/_w988_make_spec.py、archive/scripts/batches/w9xx/_w988_match.py、archive/scripts/batches/w9xx/_w988_pitfalls.py、archive/scripts/batches/w9xx/_w988_plan.py、archive/scripts/batches/w9xx/_w988_precheck.py、archive/scripts/batches/w9xx/_w988_sheet.py、archive/scripts/batches/w9xx/_w988_subject.py、archive/scripts/batches/w9xx/_w988_verify.py、archive/scripts/batches/w9xx/_w990_map.py、archive/scripts/batches/w9xx/_w990_master.py、archive/scripts/batches/w9xx/_w990_og_gap.py、archive/scripts/batches/w9xx/_w990_pick.py、archive/scripts/batches/w9xx/_w990_read.py、archive/scripts/batches/w9xx/_w990_roster.py、archive/scripts/batches/w9xx/_w990_split.py、archive/scripts/batches/w9xx/_w999_closeout.py、archive/scripts/batches/w9xx/_w999_crop_recheck.py、archive/scripts/batches/w9xx/_w999_derive_prepare.py、archive/scripts/batches/w9xx/_w999_diag.py、archive/scripts/batches/w9xx/_w999_fix_t35.py、archive/scripts/batches/w9xx/_w999_fix_wnum.py、archive/scripts/batches/w9xx/_w999_insert.py、archive/scripts/batches/w9xx/_w999_ledger_fill.py、archive/scripts/batches/w9xx/_w999_make_spec.py、archive/scripts/batches/w9xx/_w999_prepare.py、archive/scripts/batches/w9xx/_w999_probe.py、archive/scripts/batches/w9xx/_w999_probe_h1.py、archive/scripts/batches/w9xx/_w999_rebuild_missing_og.py、archive/scripts/batches/w9xx/_w999_redo.py、archive/scripts/batches/w9xx/_w999_redo2.py、archive/scripts/batches/w9xx/_w999_redo_map.py、archive/scripts/batches/w9xx/_w999_register.py、archive/scripts/batches/w9xx/_w999_renumber.py、archive/scripts/batches/w9xx/_w999_sheet.py、archive/scripts/batches/w9xx/_w999_sync_counts.py、archive/scripts/batches/w9xx/_w999_verify.py、assets/promo/plate-set/README.md、docs/00-导读/文档规范.md、docs/11-方案报告/README.md、docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md、docs/agent/pitfalls.md、scripts/check_crop.py、scripts/check_plan_template.py、scripts/check_script_coverage.py、scripts/ledger_mutation_test.py、scripts/output/tools-inventory.md、scripts/plan_template_review.py、scripts/plates_verify.py、tests/unit/test_script_hygiene.py、.github/workflows/README.md、CCITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/README.md、archive/scripts/batches/index.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、ddocs/00-导读/项目说明.md、docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/index.md、scripts/output/_cascade_files_W1002.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1002_spec.json、sscripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、scripts/output/README.md、scripts/output/index.md、tests/unit/README.md、tests/unit/index.md。
+>
+**要点**：
+① **存量归位 81 件**——按 W977 方法（活引用面 = 门禁/测试/CI/Makefile/治理文档，历史记录面不计）分级后 `git mv` 入 `archive/scripts/batches/w9xx|w10xx/`；`w10xx` 为新桶（四位号首批一次性件）。
+② **转正 4 件**——被门禁/Makefile 引用或跨批复用的判据脚本去 `_` 前缀：`plan_template_review.py`（第 48 门禁判据表）、`ledger_mutation_test.py`（Makefile ledger）、`plates_verify.py` / `check_crop.py`（跨批素材与裁切判据）。后者正是 pitfalls E-05 的反面：**跨批判据归档会算错 ROOT**，故只能转正、不能归档——`check_crop.py` 顺带修掉写死的 `D:/xiyouji` 仓根。
+③ **机器哨兵 C4**——第 42 门禁新增判据：历史批（W < 台账 max）`_w####_*.py|js` 仍在 `scripts/` 根 = FAIL；被四面/治理面引用的判为「转正候选」，配额 **8 件**（现役实测 8 件·棘轮只降不升，超配额即红）；台账不可读时跳过并 WARN（禁静默）。自测 6 → 9 例（T7 滞留必红 / T8 当前批放行 / T9 超配额必红）。
+④ **口径成文**——pitfalls「`_` 前缀=一次性」条目改写为三档（94→95 条·git 节 22→23）；文档规范 §5 增「脚本三档归位」条款；AGENTS §3 目录注释与计数同步；archive/README 结构补 w10xx 桶 + 台账组行。
+⑤ **连带修正**——`assets/promo/plate-set/README.md` 三处死链（指向已归档的逐批 prep）、复盘报告的取证脚本链接改归档路径（lint_links 活链）、`docs/11-方案报告/README.md` 判据表路径。
+
+**验证**：第 42 门禁 0 FAIL（C4 NOTE 列 8 件转正候选）· 自测 9/9 通过 · `pytest tests/unit/test_script_hygiene.py` 5 passed · 转正件 import 冒烟通过（含 `check_crop.py` 转义错误被单测当场抓出并修）· `gen_folder_docs.py` 生成 w10xx 桶目录文档 · `gen_tools_inventory.py` 重生成 152 件 · `scripts/` 根 `_w*` 件 99 → 8（余 8 件为转正候选·已入棘轮）。
+
+> - **状态**：已收官（81 件归档 + 4 件转正 + C4 判据常驻·`scripts/` 根一次性件清零待下一批清偿 8 件转正欠账）
+
+### W1001（2026-10-28）：回次 og:image 全覆盖批·第一轮试点（12 张线描立像/场面）
+
+
+
+> **来源**：用户 2026-10-27 选区指定下一批建议（100 回全覆盖 og:image）→ 2026-10-28 令「开始」→ 问卷裁定三处口径（线描立像族·沿用 plate-set 母版段 / 按题材定主体·战斗回场面·其余立像 / 先出 12 张试点）。
+>
+> **让号留痕**：拟用 W990，但 preflight 实测台账 max=W998 ⇒ W990–W998 已被并行批次占用（**先落地者保留**）⇒ 让号 **W1001**。
+>
+> - **文件**：site/reader/ch001.html、site/reader/ch003.html、site/reader/ch009.html、site/reader/ch011.html、site/reader/ch022.html、site/reader/ch028.html、site/reader/ch047.html、site/reader/ch063.html、site/reader/ch066.html、site/reader/ch079.html、site/reader/ch089.html、site/reader/ch093.html、assets/promo/plate-set/plate-line-49-ch001-xianshi.png、assets/promo/plate-set/plate-line-49-ch001-xianshi.webp、assets/promo/plate-set/plate-line-50-ch003-aoguang.png、assets/promo/plate-set/plate-line-50-ch003-aoguang.webp、assets/promo/plate-set/plate-line-51-ch009-yuanshoucheng.png、assets/promo/plate-set/plate-line-51-ch009-yuanshoucheng.webp、assets/promo/plate-set/plate-line-52-ch011-xiaoyu.png、assets/promo/plate-set/plate-line-52-ch011-xiaoyu.webp、assets/promo/plate-set/plate-line-53-ch022-liushahe.png、assets/promo/plate-set/plate-line-53-ch022-liushahe.webp、assets/promo/plate-set/plate-line-54-ch028-qunyao.png、assets/promo/plate-set/plate-line-54-ch028-qunyao.webp、assets/promo/plate-set/plate-line-55-ch047-tongtianhe.png、assets/promo/plate-set/plate-line-55-ch047-tongtianhe.webp、assets/promo/plate-set/plate-line-56-ch063-jiutou.png、assets/promo/plate-set/plate-line-56-ch063-jiutou.webp、assets/promo/plate-set/plate-line-57-ch066-mile.png、assets/promo/plate-set/plate-line-57-ch066-mile.webp、assets/promo/plate-set/plate-line-58-ch079-nanpo.png、assets/promo/plate-set/plate-line-58-ch079-nanpo.webp、assets/promo/plate-set/plate-line-59-ch089-huangshi.png、assets/promo/plate-set/plate-line-59-ch089-huangshi.webp、assets/promo/plate-set/plate-line-60-ch093-geigu.png、assets/promo/plate-set/plate-line-60-ch093-geigu.webp、site/static/images/plate-line-49-ch001-xianshi.webp、site/static/images/og-plate-line-49-ch001-xianshi.webp、site/static/images/plate-line-50-ch003-aoguang.webp、site/static/images/og-plate-line-50-ch003-aoguang.webp、site/static/images/plate-line-51-ch009-yuanshoucheng.webp、site/static/images/og-plate-line-51-ch009-yuanshoucheng.webp、site/static/images/plate-line-52-ch011-xiaoyu.webp、site/static/images/og-plate-line-52-ch011-xiaoyu.webp、site/static/images/plate-line-53-ch022-liushahe.webp、site/static/images/og-plate-line-53-ch022-liushahe.webp、site/static/images/plate-line-54-ch028-qunyao.webp、site/static/images/og-plate-line-54-ch028-qunyao.webp、site/static/images/plate-line-55-ch047-tongtianhe.webp、site/static/images/og-plate-line-55-ch047-tongtianhe.webp、site/static/images/plate-line-56-ch063-jiutou.webp、site/static/images/og-plate-line-56-ch063-jiutou.webp、site/static/images/plate-line-57-ch066-mile.webp、site/static/images/og-plate-line-57-ch066-mile.webp、site/static/images/plate-line-58-ch079-nanpo.webp、site/static/images/og-plate-line-58-ch079-nanpo.webp、site/static/images/plate-line-59-ch089-huangshi.webp、site/static/images/og-plate-line-59-ch089-huangshi.webp、site/static/images/plate-line-60-ch093-geigu.webp、site/static/images/og-plate-line-60-ch093-geigu.webp、site/static/images/og-plate-line-40-ch023-sichan.webp、site/static/images/og-plate-line-41-ch027-bailong.webp、site/static/images/og-plate-line-42-ch030-sancha.webp、site/static/images/og-plate-line-43-luoshanv.webp、site/static/images/og-plate-line-44-kuimulang.webp、site/static/images/og-plate-line-45-zhaoan-topic.webp、site/static/images/og-plate-line-46-fushi-topic.webp、site/static/images/og-plate-line-47-jingwu-topic.webp、site/static/images/og-plate-line-48-xuanzang-topic.webp、assets/promo/plate-set/raw/round14/README.md、assets/promo/plate-set/raw/round14/index.md、assets/promo/plate-set/raw/round14/plate-line-49-ch001-xianshi.jpg、assets/promo/plate-set/raw/round14/plate-line-50-ch003-aoguang.jpg、assets/promo/plate-set/raw/round14/plate-line-51-ch009-yuanshoucheng.jpg、assets/promo/plate-set/raw/round14/plate-line-52-ch011-xiaoyu.jpg、assets/promo/plate-set/raw/round14/plate-line-53-ch022-liushahe.jpg、assets/promo/plate-set/raw/round14/plate-line-54-ch028-qunyao.jpg、assets/promo/plate-set/raw/round14/plate-line-55-ch047-tongtianhe.jpg、assets/promo/plate-set/raw/round14/plate-line-56-ch063-jiutou.jpg、assets/promo/plate-set/raw/round14/plate-line-57-ch066-mile.jpg、assets/promo/plate-set/raw/round14/plate-line-58-ch079-nanpo.jpg、assets/promo/plate-set/raw/round14/plate-line-59-ch089-huangshi.jpg、assets/promo/plate-set/raw/round14/plate-line-60-ch093-geigu.jpg、scripts/_w990_og_gap.py、scripts/_w990_roster.py、scripts/_w990_read.py、scripts/_w990_master.py、scripts/_w990_map.py、scripts/_w990_split.py、scripts/_w951_check_crop.py、scripts/_w999_derive_prepare.py、scripts/_w999_insert.py、scripts/_w999_make_spec.py、scripts/_w999_prepare.py、scripts/_w999_rebuild_missing_og.py、scripts/_w999_redo.py、scripts/_w999_redo2.py、scripts/_w999_sheet.py、scripts/_w999_verify.py、scripts/_w999_closeout.py、docs/11-方案报告/计划方案/T35-任务计划执行与经验沉淀报告-2026-10-28.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、dAGENTS.md、HANDOVER.md、CREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、sassets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp。
+
+**本批要点**：① **缺口实读修正**——100 个回目页中**仅 8 回有配图**，真实缺口 **80 回**（初查 92 系盘点正则过严所致·已按宽松匹配复核）；② **母版段派两个变体**——立像段**逐字复用 249 字符**，场面段**仅改 3 处**（环境暗示 / 主体体例 / 点睛主语）⇒ 同族一致由构造保证（母版段原含「无背景场景」，与场面型直接冲突）；③ **12 张试点**（6 立像 + 6 场面）主体**全部避开 plate-set 已出的 34 个角色**（敖广/袁守诚/萧瑀/弥勒/南极仙翁/给孤独长者 + 流沙河对峙/群妖聚义/通天河护童/龙宫夺珠/钉钯宴）；④ **12 处接入**（题图位 + 专属 1200×630 og:image）⇒ 回目页覆盖 8 → 20 回；⑤ **5 张重出**（1 张判据红 + 4 张人眼抓）· ⑥ **裁切判据改口径**——全图墨迹 bbox 会把朱砂/赭金装饰算成主体 ⇒ 假红（ch089 报「主体顶被切」但主体完整）⇒ 改用连通簇（**阈值与三条不变量一字未改**）。
+
+**验证**：母版判据 J1–J10 **88/88 PASS** · 裁切验算 **88/88 PASS**（新口径）· 负样本自证 3/3 各自命中 · 接入验收判据 V1–V6 **全 PASS**（含「未覆盖页 78 个零回归」）· 幂等复跑 12/12 SKIP · 12 处 + 12 母版 + 12 og 全 HTTP 200 · 浏览器实跑渲染正常（ch001 仙石 / ch022 流沙河对峙）· 第 48 门禁 0 FAIL · 全量门禁 55/55 段全绿。
+
+> - **状态**：已收官（**本批主体内容由并行 W1000 提交 `5870ec32` 代提入库**——该提交为全量提交且时点晚于本批 `git add -A`；本笔为登记面补齐。12 张试点落地·母版族 76 → 88 张·既有 76 张母版与站点版零改动·其余 78 个无配图回目页的 og:image 仍为通用图·未误改）
+
 # 更新日志
 
 
@@ -6,17 +1164,102 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W993），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1067），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
-> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W710 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
+> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W1000 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
 >
-> **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件仅保留 W700+ 段（W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
+> **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+### W1000（2026-10-28）：对抗式审查常驻化批（四位号首批·用户令「立项」）
+
+> **来源**：用户令「立项」——W998 subagent 对抗式审查一次抓出 P1×2/P2×4，证明「写哨兵的人也需要被哨兵盯」，按建议常驻化。
+> **摘要**：① **check_audit_trigger.py 触发器**——台账最新含「对抗式审查」认领行距 max(W) ≥20 批即提示派发（preflight 接线·只提示不拦截）；找不到登记行按「从未审查」直接触发（fail-closed 宁假警不漏警）；自测四态（触发/未触发/从未/散文豁免）。② **模板落盘 docs/agent/adversarial-audit-prompt.md**——W998 实战 prompt 沉淀（范围声明+A-G 必查清单+P0-P3 输出分级+派发会话收尾义务+成本参考），任何会话可持之派发。③ **四位号 W1000 全链实战验证**——parse_ledger max=1000、ledger_backfill find_row、认领行四位解析、级联断言「批次号应为 W1000」字符串比对、W969 迁移 {3,4} 正则全部经受实战。④ 顺带：搜索索引随批刷新（并行 T-35 新文档）+ CSP 两页重算 + 台账回窗。
+> **文件**：scripts/check_audit_trigger.py · scripts/preflight_check.py · docs/agent/adversarial-audit-prompt.md · scripts/output/script-coverage-baseline.txt · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · site/data/search.html · site/en/search.html
+> **验证**：触发器 --self-test 四态 + 现网未触发（距 W1000 基线 0 批）+ 四位号四组件实战验证 + pytest 全量 943 passed + ruff 清零 + CSP 零漂移 + 体积四窗全绿。
+> **状态**：**已收官**（W1000 git 反填·触发器与模板落地·四位号实战全过）
+### W999（2026-10-28）：必守纪律晋升批（惰性层→必载层·用户问责「pitfalls 优先级低导致惰性读取」）
+
+> **来源**：用户问责「pitfalls.md 优先级太低导致惰性读取」——三层取证：CLAUDE 必载层无此纪律、AGENTS 铁律 13 条无此条、唯一落点是按需查表的 pitfalls（检索触发器在写教训场景设计上不响）。
+> **摘要**：① **AGENTS §6 铁律 14**「修实例必修根」（同族风险同批或次批根治禁等排期 + 检查按委托字面范围 + 跨会话教训权威落坑表与本节·私有记忆仅镜像）——权威落点。② **CLAUDE.md 速查第 12 行**一行版+指针（必载层每会话在场·行数 49/60·第 32 门禁四查过）。③ 脚注同名条目改指向铁律 14（滚动层只留索引）。按 CLAUDE 契约流程：权威先落 §6 再登记速查行。
+> **文件**：AGENTS.md · CLAUDE.md
+> **验证**：铁律 14 在 §6、CLAUDE 第 12 条指向 AGENTS §6-14、第 32 门禁 0 FAIL、verify docs rc=0。
+> **状态**：**已收官**（W999 git 反填·纪律晋升三层落地）
+### W998（2026-10-28）：对抗式审查修复批（subagent P1×2/P2×4/P3 清偿）
+
+> **来源**：用户令「派发一个 subagent 严格审查一遍整个」——subagent 对抗式审查（迁移守恒/门禁实跑/代码缺陷/三层一致/同族残留全查）报 P1×2/P2×4/P3×6。
+> **摘要**：① **P1-1 C4 死门控**——脚注逐条判据误嵌 HANDOVER>45KB 分支内（HANDOVER 瘦身后 C4 永不执行·且 fline 跨迭代引用可 NameError·subagent 纯内存 monkeypatch 实证复现）；移回 AGENTS 分支独立执行。② **P1-2 锁竞态双持**——O_EXCL 创建与 write 之间空文件窗口，他方 _read 得 None 误判损坏并夺锁=互斥静默击穿；改「创建中」短重试（10×0.1s）后仍不可解析才判损坏夺锁。③ **P2-1 release 无 pid 校验**——batch_cascade finally 传 pid（防 TTL 夺锁后误删他方新鲜锁）+ CLI --pid。④ **P2-2**——三份 spec json 工作树 CRLF 回归归 LF。⑤ **P2-3**——pitfalls 子节标题计数滞后（级联 8→9·流程 19→20·AGENTS 侧早已同步的自相矛盾）。⑥ **P2-4**——CHANGELOG/file-index 头部「仅保留 W700+」过期窗界声明改窗口制措辞 + 叠标点。⑦ **P3-3**——W997 台账回填口径统一（feat 主锚）。
+> **文件**：scripts/check_doc_size_budget.py · scripts/cascade_lock.py · scripts/batch_cascade.py · scripts/archive_ledger_rows.py · docs/agent/pitfalls.md · CHANGELOG.md · scripts/output/file-index.md · scripts/output/_w992_spec.json · scripts/output/_w993_spec.json · scripts/output/_w997_spec.json · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
+> **验证**：C4 负样本（AGENTS 长条目+HANDOVER 瘦→C4 必红·修复后语义）+ 锁五态自测 + 守卫三态 + pytest 全量 942 passed + ruff 清零 + 数字断言/体积窗全绿。
+> **状态**：**已收官**（W998 git 反填·C4 死门控与锁竞态根治·含对抗式审查全程）
+### W997（2026-10-27）：协作纪律入库批（修实例必修根·用户问责「为什么只写你自己的记忆文件」）
+
+> **来源**：用户双重问责——「修实例必修根」（CRLF 六次地鼠/W967 查圈打折/tmpe 积压三案实证）+「为什么只写你自己的记忆文件」（把跨会话教训只落私有记忆·W516 载体铁则二犯）。
+> **摘要**：① **pitfalls 流程组新增「修实例必修根 + 检查按字面范围」**——三类同病实证（疏通偏差/爆半径恐惧/范围打折·各带批次锚）+ 处置规则（同族风险同批或次批根治禁「等排期」收尾·真需决策仅限外发动作·根治成本用既有机制消化）+ 载体纪律并案（权威落本文件·私有记忆仅镜像）。② **archive_ledger_rows A4 判据收紧**——在途集合比对只计「真在途」（有 touches 且非已停止/让号留痕·W937 已停止行误伤实证）；只禁减少不禁并行追加（读-写窗口容忍）。③ 台账回窗 63→59。
+> **文件**：docs/agent/pitfalls.md · AGENTS.md · scripts/archive_ledger_rows.py · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
+> **验证**：pitfalls 计数 89→90（流程 19→20·AGENTS 两处同步）+ 数字断言 N4 一致 + 体积四窗全绿 + pytest 全量 935+ passed + ruff 清零。
+> **状态**：**已收官**（W997 git 反填·纪律落坑表与 A4 收紧）
+### W996（2026-10-28）：流程提示位批（C2 判据：漏跑级联回归锁·W995 形态）
+
+
+
+> **来源**：主人 2026-10-28 令「开始」（W995 收官报告登记的流程提示位候选）——W995 施工漏跑级联的事故回归锁。
+
+> - **文件**：scripts/ledger_close_check.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w996_spec.json、scripts/output/_cascade_files_W996.txt。
+
+**缺口（W995 事故的防线盲区）**：W995 施工漏跑级联时三道既有防线全部放行——C4 提交对账因「台账认领行即豁免」（D2）放行、ledger_close_check 旧判据反向不查（只查「有段→查台账」，无段则不进检查集）、无任何流程级提示。结果：工具/拆分全入库而十面落点从未写入，直至收官报告状态行锚点失败才暴露。
+
+**C2 判据（ledger_close_check 新增·反向迭代）**：台账中**已收官且 hash 落地**（有 commit）的行，必须在级联段源（CHANGELOG 现役+归档一级+tier2 容器/范围件）里有自己的段——缺失即 FAIL「漏跑 batch_cascade（W995 形态）」。豁免面=有意不立段的合规形态（让号/并号/已停止/空壳/作废/补录/追记，状态列标记识别）；hash 占位行不查（无 commit·归 preflight 在途态管）。**--allow-open 不豁免本判据**（漏级联是已收官批次的确定性缺陷·非在途伪阻塞）。self-test 扩 C2 三态（漏级联必红/让号并号豁免/无hash跳过）。
+
+**实树验证**：现役窗全绿（W995 修复后 hash=71a1add4 有段 ✓）·历史 59 行窗口零漏级联——既有收官纪律在 W995 前无前科，判据无存量误报。
+
+**验证**：--self-test 过（2 正例+4 负例+C2 三态）+ 实树 rc=0 + ruff 0 + 全量 verify 见状态行。
+
+> - **状态**：已收官（`80d2b9c6`·verify 全量 rc=0 + self-test 含 C2 三态 + 实树 59 行窗口零存量误报——单段流程批·级联即收官）
+
+### W995（2026-10-28）：tier2 按W段拆分批（政策落地·archive_tier2 自持闭环·提示位扩展）
+
+
+
+> **来源**：主人 2026-10-28 授权「按 W 段拆分文件」（tier2 容器 1044KB 破 1MB 的政策裁决）+ W994 延后的提示位扩展（W992 校准提交 27281553 落地后错峰补上）。
+
+> - **文件**：archive/docs/CHANGELOG-ARCHIVE-tier2.md、archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md、scripts/archive_tier2.py、scripts/check_archive_health.py、scripts/batch_cascade.py、scripts/verify_delivery.py、archive/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w995_spec.json、scripts/output/_cascade_files_W995.txt。
+
+**tier2 按 W 段拆分（政策落地）**：CHANGELOG-ARCHIVE-tier2.md 1044KB→**746KB**（W001-W399·210 段留存）+ 新建范围件 **CHANGELOG-ARCHIVE-tier2-W400-W559.md**（299KB·144 段·范围命名约定首件）——拆分脚本守恒三道+号域断言（留存全 <400·迁出全 ≥400）零落盘前置。**约定定形**：tier2 容器范围命名 `*-tier2-W<lo>-W<hi>.md`·单件 ≤1MB。
+
+**archive_tier2 追加逻辑升级（自持闭环）**：追加前容量判断——容器现体积+本次迁出 >1MB → 自动开范围命名新件（合规头部生成），tier-2 递增不再破线；LIMIT 常量化。
+
+**探针 T1b 升格**：tier2 破线从「登记观察」升为 problem（strict 判红——拆分约定落地后已可执行）+ glob 扩至范围命名件 + run(prefix) 参数（供级联提示位复用）。
+
+**提示位扩展（W994 延后件）**：batch_cascade 收官提示位独立尾部块新增——[ARCHIVE] 归档健康行（探针 T1-T4·prefix 复用）+ [TMPE] 上次清理活动日期（.journal 最新落笔·清理节奏可见性）。verify_delivery ARCHIVE_DOCS 登记 +2（§11.2「tier2 须登记」条款）；archive/README 台账 2 行 + 结构树。
+
+**验证**：拆分守恒断言 + archive_tier2/check_archive_health --self-test 双过 + 单测 5/5 + 探针 strict rc=0（三件 tier2 全 ≤1MB）+ 提示位直测（[ARCHIVE] 前缀行与清理日期行在位）+ 全量 verify rc=0 见状态行。
+
+> - **状态**：已收官（`71a1add4`·verify 全量 rc=0 + 单测 5/5 + 自测双过·tier2 三件全 ≤1MB·提示位四件齐）
+
+### W994（2026-10-28）：归档系统打磨批（tier-2 规则机器化：探针+常驻工具+双件实跑回线）
+
+
+
+> **来源**：用户 2026-10-28 令「继续打磨归档系统和临时文件系统」——体检定位到 §11.2 tier-2 条款自 W513 后掉档（CHANGELOG-ARCHIVE 1198KB / file-index-ARCHIVE 1070KB 双破 1MB 线零反应·W824「无机器触发点必掉档」又一活体），按「探测→修法→防复发」闭环处置。
+
+> - **文件**：scripts/check_archive_health.py、scripts/archive_tier2.py、tests/unit/test_archive_health.py、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE-tier2.md、archive/docs/file-index-ARCHIVE.md、archive/docs/file-index-ARCHIVE-tier2.md、archive/README.md、archive/scripts/batches/README.md、scripts/README.md、scripts/gen_folder_docs.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w994_spec.json、scripts/output/_cascade_files_W994.txt。
+
+**健康探针（check_archive_health.py·报告型）**：把 §11.2 三条纯文字条款机器化——T1 一级归档件 1MB 判距（≥800KB 预警·破线 ⚠+修法指引）；T2 归档 scripts 台账对账（**组行计数对账语义**：顶层存量组行 N vs 磁盘实数+段目录组行覆盖+子目录提及——W735 存量 200+ 件从未逐件登记是既定形态，逐件检查会误报风暴，首跑 200 件误报后改为计数对账语义并补登记 3 条组行：顶层 47/w4xx 11/w5xx 149）；T3 batches/README 冷存储警告在位（W836：归档件 ROOT 上溯失效·误跑会错——本批补入警告文本）；T4 归档区汇总体积。`--strict` 为门禁候选。
+
+**二级归档工具（archive_tier2.py·常驻）**：键序前缀切分（changelog=段标题 W 号；file-index=顶层节·两代混层目录节无 W 号取 0 排最老）+ 全文字节目标（§11.2 管文件体积）+ **守恒五道断言零落盘前置**（A1 段数/A2 逐字节在 tier2/A3 头部只追加/A4 键序前缀/A5 字节守恒）。**实跑双件回线**：CHANGELOG-ARCHIVE 1198→900KB（迁出 144 段 W400-W559）·file-index-ARCHIVE 1070→816KB（迁出 10 目录节·**新建 file-index-ARCHIVE-tier2.md**）。施工中守恒断言三度 fail-closed 拦截：字节/字符混计（A5 两端异单位）、切枝循环按键序遍历致位置倒序静默保留新版段（A5 当场活捉·真损坏级）、A5 符号写反——全部修复后落盘，W681 补录尾段原位未动。
+
+**其余**：batches/README 冷存储警告（生成模板级注入——手工写入会被 --refresh 覆写·W994 实证后改模板位） + scripts/README 场景速查 +2 行（二级归档/健康体检路由）+ 单测 5 例。
+
+**边界与延后**：batch_cascade 收官提示位扩展（[ARCHIVE] 行+[TMPE] 上次清理日期）**延后**——W992（提示位口径校准·他方在途）认领了 batch_cascade.py，按工作树吸收纪律（坑表 88 条）不在其认领面落编辑；W992 收官后任一批可补。
+
+**验证**：探针 --self-test + 单测 5/5 + 双件 dry-run→apply 守恒五道全过 + 探针复跑 T1 回线（900/816KB）·T2 对账一致·T3 在位 · W681 补录尾段原位核验 · ruff 0 · 全量 verify 见状态行。
+
+> - **状态**：已收官（`aacb6fe3`·verify 全量 rc=0 + 探针/工具自测过 + 单测 5/5·双件回线 900/816KB·T2 对账一致·T3 在位）
 
 ### W993（2026-10-27）：全仓行尾定形批（CRLF 时代终结·用户问责「为什么不解决」）
 
@@ -47,7 +1290,7 @@
 
 > **来源**：用户 2026-10-27 问「其他 Agent 下次还会出现类似问题吗」——评估发现两个可修缺口后令「做」。
 
-> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、scripts/output/file-index.md、scripts/output/_w990_spec.json、scripts/output/_cascade_files_W990.txt。
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、dCREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、sscripts/output/_w990_spec.json、scripts/output/_cascade_files_W990.txt。
 
 **缺口一（撞错检索路走不通）**：查坑表「Python 字符串层转义」行补报错原文 literal——`truncated \xXX escape` / `unicodeescape` / `invalid escape sequence`——Agent 撞错后 grep 原文即命中本行（此前只有中文描述·按原文检索会漏）。
 
@@ -70,7 +1313,7 @@
 
 > **来源**：用户 2026-10-27 选区指定两项（① card-* 27 张按题材逐张定投放位置（人物卡→角色页顶部横幅 / 场景卡→主题页）② 分回次 og:image（现全站共用一张通用图，需另裁 1200×630 版））→ 问卷裁定两处执行口径（横幅＝另裁 1200×500 宽幅·人物半身特写；og:image＝只做有配图的页·纯裁切）。
 >
-> - **文件**：site/reader/ch004.html、site/reader/ch007.html、site/reader/ch010.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch019.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、site/reader/ch031.html、site/reader/culture/历史玄奘与小说玄奘专题.html、site/reader/culture/明代科举制度对照专题.html、site/reader/culture/西游与佛教禅宗专题.html、site/reader/essays/西游与服饰学.html、site/reader/essays/西游与民俗学.html、site/reader/people/九灵元圣-方向二深化.html、site/reader/people/二郎神.html、site/reader/people/取经团队动力学深化专题.html、site/reader/people/哪吒.html、site/reader/people/地府体系深化专题.html、site/reader/people/大鹏金翅雕.html、site/reader/people/太上老君.html、site/reader/people/奎木狼外传.html、site/reader/people/女儿国国王.html、site/reader/people/如来.html、site/reader/people/嫦娥外传.html、site/reader/people/孙悟空.html、site/reader/people/托塔李天王外传.html、site/reader/people/昴日星官.html、site/reader/people/沙僧-方向二深化.html、site/reader/people/沙僧.html、site/reader/people/沙僧外传.html、site/reader/people/火焰山土地外传.html、site/reader/people/灵感大王.html、site/reader/people/灵感大王外传.html、site/reader/people/牛魔王.html、site/reader/people/独角兕大王.html、site/reader/people/狮驼岭三魔-方向二深化.html、site/reader/people/猪八戒-方向二深化.html、site/reader/people/猪八戒.html、site/reader/people/猪八戒深化专题.html、site/reader/people/玉兔精.html、site/reader/people/玉帝.html、site/reader/people/白骨精.html、site/reader/people/白骨精外传.html、site/reader/people/白鹿精-方向二深化.html、site/reader/people/白龙马.html、site/reader/people/百眼魔君.html、site/reader/people/紧箍儿的内侧-器物传记.html、site/reader/people/红孩儿.html、site/reader/people/罗刹女外传.html、site/reader/people/老鼋外传.html、site/reader/people/老鼠精.html、site/reader/people/蜘蛛精.html、site/reader/people/蝎子精.html、site/reader/people/观音.html、site/reader/people/赛太岁.html、site/reader/people/车迟国三国师外传.html、site/reader/people/金角大王.html、site/reader/people/金角银角深化专题.html、site/reader/people/铁扇公主.html、site/reader/people/银角大王.html、site/reader/people/镇元大仙.html、site/reader/people/黄眉老佛外传.html、site/reader/people/黄袍怪.html、site/reader/people/黄风怪外传.html、site/reader/people/黑熊精.html、site/reader/poetry/原著景物诗分类赏析专题.html、site/reader/poetry/原著景物诗赏析专题.html、site/reader/poetry/西游诗词意象谱系专题.html、site/reader/themes/二十八星宿专题.html、site/reader/themes/五方揭谛专题.html、site/reader/themes/佛学AI西游三维语义映射表.html、site/reader/themes/六丁六甲专题.html、site/reader/themes/兵器的自我修养专题.html、site/reader/themes/取经团队-凭什么走到西天.html、site/reader/themes/取经密码学专题.html、site/reader/themes/取经教育学专题.html、site/reader/themes/取经路径地理符号学专题.html、site/reader/themes/取经路线地理专题.html、site/reader/themes/唐僧-凡躯圣心.html、site/reader/themes/器物传记学专题.html、site/reader/themes/四值功曹专题.html、site/reader/themes/大闹天宫-英雄还是悲剧.html、site/reader/themes/小妖生命史专题.html、site/reader/themes/招安的两种结局专题.html、site/reader/themes/无字真经专题.html、site/reader/themes/水帘洞-瀑布门的世界.html、site/reader/themes/水帘洞专题.html、site/reader/themes/沙僧-沉默者的智慧.html、site/reader/themes/法宝系统专题.html、site/reader/themes/混世四猴专题.html、site/reader/themes/猪八戒-不愿承认的自己.html、site/reader/themes/猴王到行者-五次蜕变.html、site/reader/themes/真假美猴王专题.html、site/reader/themes/神学干预机制专题.html、site/reader/themes/空间叙事学专题.html、site/reader/themes/筋斗云专题.html、site/reader/themes/紧箍咒专题.html、site/reader/themes/蟠桃园-体制内的秘密.html、site/reader/themes/西游与死亡研究专题.html、site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html、scripts/_w988_plan.py、scripts/_w988_subject.py、scripts/_w988_inventory.py、scripts/_w988_match.py、scripts/_w988_precheck.py、scripts/_w988_make_assets.py、scripts/_w988_insert.py、scripts/_w988_fix_eol.py、scripts/_w988_verify.py、scripts/_w988_sheet.py、scripts/_w988_card_sheet.py、scripts/_w988_pitfalls.py、scripts/_w988_docs.py、scripts/_w988_make_spec.py、scripts/_w988_fix_cascade.py、scripts/_w988_fix_gates.py、scripts/check_seo_head.py、scripts/output/_w988_spec.json、scripts/output/_w988_precheck.json、scripts/output/_w988_assets.json、scripts/output/_w988_inventory.json、scripts/output/_w988_match.json、scripts/output/_w988_card_map.json、scripts/output/_w988_card_sheet.png、scripts/output/_w988_sheet-banner.png、scripts/output/_w988_sheet-og.png、scripts/output/_cascade_files_W988.txt、docs/11-方案报告/计划方案/T34-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、docs/00-导读/W批次编号对账表.md、AGENTS.md、HANDOVER.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。。
+> - **文件**：site/reader/ch004.html、site/reader/ch007.html、site/reader/ch010.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch019.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、site/reader/ch031.html、site/reader/culture/历史玄奘与小说玄奘专题.html、site/reader/culture/明代科举制度对照专题.html、site/reader/culture/西游与佛教禅宗专题.html、site/reader/essays/西游与服饰学.html、site/reader/essays/西游与民俗学.html、site/reader/people/九灵元圣-方向二深化.html、site/reader/people/二郎神.html、site/reader/people/取经团队动力学深化专题.html、site/reader/people/哪吒.html、site/reader/people/地府体系深化专题.html、site/reader/people/大鹏金翅雕.html、site/reader/people/太上老君.html、site/reader/people/奎木狼外传.html、site/reader/people/女儿国国王.html、site/reader/people/如来.html、site/reader/people/嫦娥外传.html、site/reader/people/孙悟空.html、site/reader/people/托塔李天王外传.html、site/reader/people/昴日星官.html、site/reader/people/沙僧-方向二深化.html、site/reader/people/沙僧.html、site/reader/people/沙僧外传.html、site/reader/people/火焰山土地外传.html、site/reader/people/灵感大王.html、site/reader/people/灵感大王外传.html、site/reader/people/牛魔王.html、site/reader/people/独角兕大王.html、site/reader/people/狮驼岭三魔-方向二深化.html、site/reader/people/猪八戒-方向二深化.html、site/reader/people/猪八戒.html、site/reader/people/猪八戒深化专题.html、site/reader/people/玉兔精.html、site/reader/people/玉帝.html、site/reader/people/白骨精.html、site/reader/people/白骨精外传.html、site/reader/people/白鹿精-方向二深化.html、site/reader/people/白龙马.html、site/reader/people/百眼魔君.html、site/reader/people/紧箍儿的内侧-器物传记.html、site/reader/people/红孩儿.html、site/reader/people/罗刹女外传.html、site/reader/people/老鼋外传.html、site/reader/people/老鼠精.html、site/reader/people/蜘蛛精.html、site/reader/people/蝎子精.html、site/reader/people/观音.html、site/reader/people/赛太岁.html、site/reader/people/车迟国三国师外传.html、site/reader/people/金角大王.html、site/reader/people/金角银角深化专题.html、site/reader/people/铁扇公主.html、site/reader/people/银角大王.html、site/reader/people/镇元大仙.html、site/reader/people/黄眉老佛外传.html、site/reader/people/黄袍怪.html、site/reader/people/黄风怪外传.html、site/reader/people/黑熊精.html、site/reader/poetry/原著景物诗分类赏析专题.html、site/reader/poetry/原著景物诗赏析专题.html、site/reader/poetry/西游诗词意象谱系专题.html、site/reader/themes/二十八星宿专题.html、site/reader/themes/五方揭谛专题.html、site/reader/themes/佛学AI西游三维语义映射表.html、site/reader/themes/六丁六甲专题.html、site/reader/themes/兵器的自我修养专题.html、site/reader/themes/取经团队-凭什么走到西天.html、site/reader/themes/取经密码学专题.html、site/reader/themes/取经教育学专题.html、site/reader/themes/取经路径地理符号学专题.html、site/reader/themes/取经路线地理专题.html、site/reader/themes/唐僧-凡躯圣心.html、site/reader/themes/器物传记学专题.html、site/reader/themes/四值功曹专题.html、site/reader/themes/大闹天宫-英雄还是悲剧.html、site/reader/themes/小妖生命史专题.html、site/reader/themes/招安的两种结局专题.html、site/reader/themes/无字真经专题.html、site/reader/themes/水帘洞-瀑布门的世界.html、site/reader/themes/水帘洞专题.html、site/reader/themes/沙僧-沉默者的智慧.html、site/reader/themes/法宝系统专题.html、site/reader/themes/混世四猴专题.html、site/reader/themes/猪八戒-不愿承认的自己.html、site/reader/themes/猴王到行者-五次蜕变.html、site/reader/themes/真假美猴王专题.html、site/reader/themes/神学干预机制专题.html、site/reader/themes/空间叙事学专题.html、site/reader/themes/筋斗云专题.html、site/reader/themes/紧箍咒专题.html、site/reader/themes/蟠桃园-体制内的秘密.html、site/reader/themes/西游与死亡研究专题.html、site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html、scripts/_w988_plan.py、scripts/_w988_subject.py、scripts/_w988_inventory.py、scripts/_w988_match.py、scripts/_w988_precheck.py、scripts/_w988_make_assets.py、scripts/_w988_insert.py、scripts/_w988_fix_eol.py、scripts/_w988_verify.py、scripts/_w988_sheet.py、scripts/_w988_card_sheet.py、scripts/_w988_pitfalls.py、scripts/_w988_docs.py、scripts/_w988_make_spec.py、scripts/_w988_fix_cascade.py、scripts/_w988_fix_gates.py、scripts/check_seo_head.py、scripts/output/_w988_spec.json、scripts/output/_w988_precheck.json、scripts/output/_w988_assets.json、scripts/output/_w988_inventory.json、scripts/output/_w988_match.json、scripts/output/_w988_card_map.json、scripts/output/_w988_card_sheet.png、scripts/output/_w988_sheet-banner.png、scripts/output/_w988_sheet-og.png、scripts/output/_cascade_files_W988.txt、docs/11-方案报告/计划方案/T34-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、dAGENTS.md、HANDOVER.md、CREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。。
 
 **本批要点**：① **27 张 `card-*` 逐张定投放位置并接入**（用户选区指定的第一项）——**13 张人物卡 → 角色页/回目页顶部 `.chapter-banner` 横幅**（1:1 源另裁 1200×500 宽幅·人物半身特写·新立第三套类名·限宽 720px·暗色隐藏·横幅在题图之上形成「通栏横幅 + 420px 竖题图」宽窄分层），**14 张场景卡 → 主题页 `.chapter-scene` 场景位**（1:1 原图不裁·限宽 520px·插在正文首个章节标题前；「方向二深化」页用 `<h3>`、白骨精外传页无章节标题 ⇒ 插入点三情形兜底）⇒ **27 张全部有归属，闲置归零**；② **分回次 og:image**——**102 页**由「全站共用一张通用图」改为**该页首屏第一张配图**的 1200×630 专属裁切版（81 个既有题图页 + 11 个横幅页 + 10 个场景页；问卷裁定「只做有配图的页·纯裁切」⇒ **不新出图**），共享通用图的页面从 705 降到 603；③ **主体检测排除朱砂与赭金**——水墨卡族每张带朱红印章，整幅墨迹 bbox 会把印章算成主体 ⇒ 改用「面积 ≥ 200 px² 的连通簇 + 排除朱砂（r−g ≥ 35）与赭金（luma ≥ 90）」，27 张主体带全部正确；④ **三处踩坑当场修**——写盘行尾二次替换污染 102 页（CRLF→CRCRLF·字节级还原）；「按主体顶裁」在主体位于画面下部时切掉人物（1 张加特例带）；验收判据自身两处缺陷（CSS 计数未行首锚定 + 负样本形态不匹配 ⇒ 检查恒真）⇒ **坑表 +6 条（80 → 86）** + 方法论篇新增 §2.9「既有资产投放」。
 
@@ -84,7 +1327,7 @@
 
 > **来源**：用户 2026-10-27 20:50 问「浓墨渲染图可以用在哪里？」→ 20:53 令「开工」（采纳建议顺序：① 归族登记 ② 启用为回目页场景插图）。
 >
-> - **文件**：site/reader/ch007.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、assets/promo/README.md、docs/11-方案报告/计划方案/T33-任务计划执行与经验沉淀报告-2026-10-27.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md、scripts/_w987_family_scan.py、scripts/_w987_insert_scenes.py、scripts/output/_w987_family_scan.json、scripts/output/_w987_spec.json、scripts/output/_cascade_files_W987.txt。
+> - **文件**：site/reader/ch007.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、assets/promo/README.md、docs/11-方案报告/计划方案/T33-任务计划执行与经验沉淀报告-2026-10-27.md、ddocs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、sscripts/_w987_family_scan.py、scripts/_w987_insert_scenes.py、scripts/output/_w987_family_scan.json、scripts/output/_w987_spec.json、scripts/output/_cascade_files_W987.txt。
 
 **本批要点**：① **实读发现**——站内 `card-*` 27 张 + `chap-*` 6 张 = **33 张 1:1（1200×1200）水墨意境插画全部 0 引用**（同族两套命名：按回目 / 按角色场景 ⇒ 极易被误当题图用，W984 批即踩过），**闲置规模比用户感知大 5.5 倍**；② **归族登记**——`assets/promo/README.md` 新增「水墨意境卡族」节：成员表 + **规范边界表**（画幅 1:1 / 画风水墨晕染 / **可带印章** / **不得填进 `.chapter-plate`** / 暗色模式同样隐藏 / alt 描述画面）+ 引用状态 + 投放位置建议 + 维护约定；③ **启用 6 张**——6 个回目页（ch007 / ch014 / ch015 / ch023 / ch027 / ch030）新增 `.chapter-scene` 场景图：**首屏仍留题图**（角色立像），场景图下沉到**正文首个 `<h2>` 之前**（限宽 520px·题图 420px）⇒ 同回形成「角色立像 + 水墨意境」双层节奏；④ **其余 27 张 `card-*` 本批不启用**（题材各异·投放位置需逐张判断·另批），登记待定。
 
@@ -100,7 +1343,7 @@
 >
 > **让号留痕**：取号时 **W985 已被并行会话占用**（工具文档三件批·在途未提交·占 CHANGELOG / AGENTS / HANDOVER / 台账等共享面）⇒ 按「先落地者保留」让号 **W986**；共享面待 W985 收官后补登记。
 >
-> - **文件**：docs/11-方案报告/计划方案/T32-任务计划执行与经验沉淀报告-2026-10-27.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、AGENTS.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md、scripts/output/_w986_spec.json、scripts/output/_cascade_files_W986.txt。（**资产面已由 `9841c05d` 落地**：6 张母版 png/webp 同名覆盖 + 6 份原件 + 6 个站点版 webp + 全目录拼图 + 6 页 alt 文本更新 + `assets/promo/plate-set/README.md` 口径更新）
+> - **文件**：docs/11-方案报告/计划方案/T32-任务计划执行与经验沉淀报告-2026-10-27.md、ddocs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、AGENTS.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、sscripts/output/_w986_spec.json、scripts/output/_cascade_files_W986.txt。（**资产面已由 `9841c05d` 落地**：6 张母版 png/webp 同名覆盖 + 6 份原件 + 6 个站点版 webp + 全目录拼图 + 6 页 alt 文本更新 + `assets/promo/plate-set/README.md` 口径更新）
 
 **本批要点**：① **根因**——同角色 + 同画幅 + 同母版段 + 同构图范式的第二张图 ⇒ 观感必然重复，而 **J1–J10 全绿、缩略拼图也看不出**（坑表 E-05）⇒ 只有用户目视能判定；② **处置**——6 张**同名 stem 覆盖**（`plate-line-37..42`），主体全换此前未画过的角色（巨灵神 / 六贼头目 / 惠岸行者木叉 / 黎山老母 / 巡河夜叉 / 御马监丞），角色·体型·道具·姿态各异 ⇒ **页面图源路径不变、只换 alt 文本**；③ **6 个浓墨渲染版文件原样保留**（用户 2026-10-27 08:25 明令）⇒ 页面只用线描版，浓墨版作可回退存量；④ 登记面补齐时遇 **W985 在途** ⇒ 共享面等其收官后写；且实测**部分提交（pathspec）在共享面有在途批次时必被 C4-f 判红**（临时索引缺在途批次的收官内容）⇒ 改全量提交并声明代提（W932 先例）⇒ 坑表 +2 条（75 → 77）。
 
@@ -114,7 +1357,7 @@
 
 > **来源**：用户 2026-10-27 问「新增一个 TOOLS.md 工具使用文档怎么样」——评估结论：根级新手写文档层会被六处既有面重叠且无新鲜度门禁看守（W824 定律必掉档·文档规范 §11 新增当前态声明须纳管），**需求真实、落点改既有机器看守面**；用户裁决「1+2+3」全做。
 
-> - **文件**：scripts/README.md、scripts/gen_tools_inventory.py、scripts/output/tools-inventory.md、scripts/gen_folder_docs.py、tests/unit/test_tools_inventory.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w985_spec.json、scripts/output/_cascade_files_W985.txt。
+> - **文件**：scripts/README.md、scripts/gen_tools_inventory.py、scripts/output/tools-inventory.md、scripts/gen_folder_docs.py、tests/unit/test_tools_inventory.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w985_spec.json、scripts/output/_cascade_files_W985.txt。
 
 **①场景路由表**：scripts/README.md 头部新增「场景速查（要做什么→用哪个）」15 行路由——批次生命周期全链（认领/preflight/级联/回窗/修剪/复盘触发/数据链判定/统计刷新）逐场景给出工具与典型调用，这是体检暴露的真实缺口（路由知识散落各处、新 Agent 最难发现）。
 
@@ -136,11 +1379,11 @@
 >
 > **三裁**（开工问卷答复）：① 呈现方式 = **页面改用线描版，浓墨版留仓内存档** ② 题材范围 = **四库全选**（people / themes / essays·poetry·culture / 九十九回回目页）③ 规模 = **12 张一批**（其中 6 张为回目页线描重出）。
 >
-> - **文件**：assets/promo/plate-set/plate-line-37-ch007-bagua-lu.png、assets/promo/plate-set/plate-line-37-ch007-bagua-lu.webp、site/static/images/plate-line-37-ch007-bagua-lu.webp、assets/promo/plate-set/plate-line-38-ch014-liubei.png、assets/promo/plate-set/plate-line-38-ch014-liubei.webp、site/static/images/plate-line-38-ch014-liubei.webp、assets/promo/plate-set/plate-line-39-ch015-yingchou.png、assets/promo/plate-set/plate-line-39-ch015-yingchou.webp、site/static/images/plate-line-39-ch015-yingchou.webp、assets/promo/plate-set/plate-line-40-ch023-sichan.png、assets/promo/plate-set/plate-line-40-ch023-sichan.webp、site/static/images/plate-line-40-ch023-sichan.webp、assets/promo/plate-set/plate-line-41-ch027-bailong.png、assets/promo/plate-set/plate-line-41-ch027-bailong.webp、site/static/images/plate-line-41-ch027-bailong.webp、assets/promo/plate-set/plate-line-42-ch030-sancha.png、assets/promo/plate-set/plate-line-42-ch030-sancha.webp、site/static/images/plate-line-42-ch030-sancha.webp、assets/promo/plate-set/plate-line-43-luoshanv.png、assets/promo/plate-set/plate-line-43-luoshanv.webp、site/static/images/plate-line-43-luoshanv.webp、assets/promo/plate-set/plate-line-44-kuimulang.png、assets/promo/plate-set/plate-line-44-kuimulang.webp、site/static/images/plate-line-44-kuimulang.webp、assets/promo/plate-set/plate-line-45-zhaoan-topic.png、assets/promo/plate-set/plate-line-45-zhaoan-topic.webp、site/static/images/plate-line-45-zhaoan-topic.webp、assets/promo/plate-set/plate-line-46-fushi-topic.png、assets/promo/plate-set/plate-line-46-fushi-topic.webp、site/static/images/plate-line-46-fushi-topic.webp、assets/promo/plate-set/plate-line-47-jingwu-topic.png、assets/promo/plate-set/plate-line-47-jingwu-topic.webp、site/static/images/plate-line-47-jingwu-topic.webp、assets/promo/plate-set/plate-line-48-xuanzang-topic.png、assets/promo/plate-set/plate-line-48-xuanzang-topic.webp、site/static/images/plate-line-48-xuanzang-topic.webp、assets/promo/plate-set/raw/round13/plate-line-37-ch007-bagua-lu.jpg、assets/promo/plate-set/raw/round13/plate-line-38-ch014-liubei.jpg、assets/promo/plate-set/raw/round13/plate-line-39-ch015-yingchou.jpg、assets/promo/plate-set/raw/round13/plate-line-40-ch023-sichan.jpg、assets/promo/plate-set/raw/round13/plate-line-41-ch027-bailong.jpg、assets/promo/plate-set/raw/round13/plate-line-42-ch030-sancha.jpg、assets/promo/plate-set/raw/round13/plate-line-43-luoshanv.jpg、assets/promo/plate-set/raw/round13/plate-line-44-kuimulang.jpg、assets/promo/plate-set/raw/round13/plate-line-45-zhaoan-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-46-fushi-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-47-jingwu-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-48-xuanzang-topic.jpg、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/README.md、site/reader/ch007.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、site/reader/people/罗刹女外传.html、site/reader/people/奎木狼外传.html、site/reader/themes/招安的两种结局专题.html、site/reader/essays/西游与服饰学.html、site/reader/poetry/原著景物诗分类赏析专题.html、site/reader/culture/历史玄奘与小说玄奘专题.html、scripts/_w984_make_prompts.py、scripts/_w984_precheck_pages.py、scripts/_w984_derive.py、scripts/_w984_prepare.py、scripts/_w984_download.py、scripts/_w984_insert_plates.py、scripts/_w984_retry.py、scripts/_w984_sheet.py、scripts/_w984_zoom.py、scripts/_w984_serve.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、docs/11-方案报告/计划方案/执行前计划-T31-内页题图成套批第五组.md、docs/11-方案报告/计划方案/T31-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、docs/00-导读/W批次编号对账表.md、scripts/_w984_make_spec.py、site/data/search.html、site/en/search.html、scripts/output/_w984_batch1.json、scripts/output/_w984_batch2.json、scripts/output/_w984_batch3.json、scripts/output/_w984_gen.json、scripts/output/_w984_precheck.json、scripts/output/_w984_sheet.png、scripts/output/_w984_zoom.png、scripts/output/_w984_spec.json、scripts/output/_cascade_files_W984.txt、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。
+> - **文件**：assets/promo/plate-set/plate-line-37-ch007-bagua-lu.png、assets/promo/plate-set/plate-line-37-ch007-bagua-lu.webp、site/static/images/plate-line-37-ch007-bagua-lu.webp、assets/promo/plate-set/plate-line-38-ch014-liubei.png、assets/promo/plate-set/plate-line-38-ch014-liubei.webp、site/static/images/plate-line-38-ch014-liubei.webp、assets/promo/plate-set/plate-line-39-ch015-yingchou.png、assets/promo/plate-set/plate-line-39-ch015-yingchou.webp、site/static/images/plate-line-39-ch015-yingchou.webp、assets/promo/plate-set/plate-line-40-ch023-sichan.png、assets/promo/plate-set/plate-line-40-ch023-sichan.webp、site/static/images/plate-line-40-ch023-sichan.webp、assets/promo/plate-set/plate-line-41-ch027-bailong.png、assets/promo/plate-set/plate-line-41-ch027-bailong.webp、site/static/images/plate-line-41-ch027-bailong.webp、assets/promo/plate-set/plate-line-42-ch030-sancha.png、assets/promo/plate-set/plate-line-42-ch030-sancha.webp、site/static/images/plate-line-42-ch030-sancha.webp、assets/promo/plate-set/plate-line-43-luoshanv.png、assets/promo/plate-set/plate-line-43-luoshanv.webp、site/static/images/plate-line-43-luoshanv.webp、assets/promo/plate-set/plate-line-44-kuimulang.png、assets/promo/plate-set/plate-line-44-kuimulang.webp、site/static/images/plate-line-44-kuimulang.webp、assets/promo/plate-set/plate-line-45-zhaoan-topic.png、assets/promo/plate-set/plate-line-45-zhaoan-topic.webp、site/static/images/plate-line-45-zhaoan-topic.webp、assets/promo/plate-set/plate-line-46-fushi-topic.png、assets/promo/plate-set/plate-line-46-fushi-topic.webp、site/static/images/plate-line-46-fushi-topic.webp、assets/promo/plate-set/plate-line-47-jingwu-topic.png、assets/promo/plate-set/plate-line-47-jingwu-topic.webp、site/static/images/plate-line-47-jingwu-topic.webp、assets/promo/plate-set/plate-line-48-xuanzang-topic.png、assets/promo/plate-set/plate-line-48-xuanzang-topic.webp、site/static/images/plate-line-48-xuanzang-topic.webp、assets/promo/plate-set/raw/round13/plate-line-37-ch007-bagua-lu.jpg、assets/promo/plate-set/raw/round13/plate-line-38-ch014-liubei.jpg、assets/promo/plate-set/raw/round13/plate-line-39-ch015-yingchou.jpg、assets/promo/plate-set/raw/round13/plate-line-40-ch023-sichan.jpg、assets/promo/plate-set/raw/round13/plate-line-41-ch027-bailong.jpg、assets/promo/plate-set/raw/round13/plate-line-42-ch030-sancha.jpg、assets/promo/plate-set/raw/round13/plate-line-43-luoshanv.jpg、assets/promo/plate-set/raw/round13/plate-line-44-kuimulang.jpg、assets/promo/plate-set/raw/round13/plate-line-45-zhaoan-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-46-fushi-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-47-jingwu-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-48-xuanzang-topic.jpg、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/README.md、site/reader/ch007.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、site/reader/people/罗刹女外传.html、site/reader/people/奎木狼外传.html、site/reader/themes/招安的两种结局专题.html、site/reader/essays/西游与服饰学.html、site/reader/poetry/原著景物诗分类赏析专题.html、site/reader/culture/历史玄奘与小说玄奘专题.html、scripts/_w984_make_prompts.py、scripts/_w984_precheck_pages.py、scripts/_w984_derive.py、scripts/_w984_prepare.py、scripts/_w984_download.py、scripts/_w984_insert_plates.py、scripts/_w984_retry.py、scripts/_w984_sheet.py、scripts/_w984_zoom.py、scripts/_w984_serve.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、docs/11-方案报告/计划方案/执行前计划-T31-内页题图成套批第五组.md、docs/11-方案报告/计划方案/T31-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、dscripts/_w984_make_spec.py、site/data/search.html、site/en/search.html、scripts/output/_w984_batch1.json、scripts/output/_w984_batch2.json、scripts/output/_w984_batch3.json、scripts/output/_w984_gen.json、scripts/output/_w984_precheck.json、scripts/output/_w984_sheet.png、scripts/output/_w984_zoom.png、scripts/output/_w984_spec.json、scripts/output/_cascade_files_W984.txt、CHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。
 
 **本批要点**：① **首次引入「替换既有题图源」动作**——回目页 6 张（ch007 / ch014 / ch015 / ch023 / ch027 / ch030）改用同一套宣纸线描立像，**原浓墨渲染版 `chap-07/14/15/23/27/30.webp` 保留不删**（用户 2026-10-27 08:25 裁定「这六张我认为还可以」）并登记为存量归档；另 6 张为四库扩量（people 2 罗刹女 / 奎木狼 + themes 1 招安的两种结局 + essays·poetry·culture 各 1 西游与服饰学 / 原著景物诗分类赏析 / 历史玄奘与小说玄奘）⇒ 站内线描题图累计 **64 → 76 张**、reader 有题图页 **75 → 81 页**；② **替换页同步移除 `aria-hidden` 并写真实 alt**（存量浓墨图是装饰语义 ⇒ 换图源必换可访问性语义）；③ **落位页先验按动作分支建模**（INSERT 6 + REPLACE 6·三个拒绝分支各配一个负样本·3/3 自证通过）；④ **3 张重出**（#38 古树两处朱砂 / #40 贯穿竖线 + 顶天立地⇒裁切验算判红 / #43 葫芦整体实心红⇒J6 只查暗块逃逸）⇒ 坑表 **+4 条（70 → 74）** + 方法论篇新增 §2.8「判据按接入动作分支建模」；⑤ **本地验收服务加 `Cache-Control: no-store`** 根治「改了页面却看不到变化」的缓存误判。
 
-**验证**：母版判据 J1–J10 **76/76 FAIL 0** · 站点版裁切验算 **76/76 FAIL 0**（主体顶余量 5–7 px·下部地面留白 44–134 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.6/255 · 落位页先验 12/12（INSERT 6 + REPLACE 6·三负样本自证通过）· 接入幂等复跑 12/12 SKIP · 12/12 页面探针 HTTP 200 + 含本批图名 + 含真实 alt + 无残留 aria-hidden · 浏览器实跑 2 页渲染正常（替换型 / 新增型）· **6 个浓墨版文件逐个核验仍在**（用户明令保留）· 计划方案合规门禁 0 FAIL · 全量门禁 55/55 段全绿（核心全部通过）。
+**验证**：母版判据 J1–J10 **76/76 FAIL 0** · 站点版裁切验算 **76/76 FAIL 0**（主体顶余量 5–7 px·下部地面留白 44–134 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.6/255 · 落位页先验 12/12（INSERT 6 + REPLACE 6·三负样本自证通过）· 接入幂等复跑 12/12 SKIP · 12/12 处面探针 HTTP 200 + 含本批图名 + 含真实 alt + 无残留 aria-hidden · 浏览器实跑 2 页渲染正常（替换型 / 新增型）· **6 个浓墨版文件逐个核验仍在**（用户明令保留）· 计划方案合规门禁 0 FAIL · 全量门禁 55/55 段全绿（核心全部通过）。
 
 > - **状态**：已收官（`d97d6754`·verify 全量 55/55 段全绿·母版判据 76/76 FAIL 0·裁切验算 76/76 FAIL 0·6 个浓墨版原文件保留未删·reader 有题图页 75 → 81）· **用户观感反馈（2026-10-27 12:26）：回目页 6 张线描重出版「一般算不上好看」⇒ ASM-06 否证**（同角色同范式第二张图观感重复·机器判据与拼图趋势均查不出）· 待裁决回退浓墨版或换主体重出
 
@@ -152,7 +1395,7 @@
 >
 > **四问答复**：① 用途与画幅 = **内页专题题图 · 3:4 竖版 1200×1600（沿用 plate-set 母版）** ② 张数 = **12 张** ③ 参考风格 = **沿用 plate-set 宣纸线描（母版段 249 字符逐字复用）** ④ 题材范围 = **people + themes + essays·poetry·culture + 九十九回回目页（四库混合）**。
 >
-> - **文件**：assets/promo/plate-set/plate-line-25-rulai.png、assets/promo/plate-set/plate-line-25-rulai.webp、site/static/images/plate-line-25-rulai.webp、assets/promo/plate-set/plate-line-26-yudi.png、assets/promo/plate-set/plate-line-26-yudi.webp、site/static/images/plate-line-26-yudi.webp、assets/promo/plate-set/plate-line-27-baiyan-mojun.png、assets/promo/plate-set/plate-line-27-baiyan-mojun.webp、site/static/images/plate-line-27-baiyan-mojun.webp、assets/promo/plate-set/plate-line-28-change.png、assets/promo/plate-set/plate-line-28-change.webp、site/static/images/plate-line-28-change.webp、assets/promo/plate-set/plate-line-29-shenxue-ganyu-topic.png、assets/promo/plate-set/plate-line-29-shenxue-ganyu-topic.webp、site/static/images/plate-line-29-shenxue-ganyu-topic.webp、assets/promo/plate-set/plate-line-30-lujing-ditu-topic.png、assets/promo/plate-set/plate-line-30-lujing-ditu-topic.webp、site/static/images/plate-line-30-lujing-ditu-topic.webp、assets/promo/plate-set/plate-line-31-mima-pan-topic.png、assets/promo/plate-set/plate-line-31-mima-pan-topic.webp、site/static/images/plate-line-31-mima-pan-topic.webp、assets/promo/plate-set/plate-line-32-minsu-taofu-topic.png、assets/promo/plate-set/plate-line-32-minsu-taofu-topic.webp、site/static/images/plate-line-32-minsu-taofu-topic.webp、assets/promo/plate-set/plate-line-33-yixiang-puxi-topic.png、assets/promo/plate-set/plate-line-33-yixiang-puxi-topic.webp、site/static/images/plate-line-33-yixiang-puxi-topic.webp、assets/promo/plate-set/plate-line-34-keju-zhidu-topic.png、assets/promo/plate-set/plate-line-34-keju-zhidu-topic.webp、site/static/images/plate-line-34-keju-zhidu-topic.webp、assets/promo/plate-set/plate-line-35-ch010-weizheng.png、assets/promo/plate-set/plate-line-35-ch010-weizheng.webp、site/static/images/plate-line-35-ch010-weizheng.webp、assets/promo/plate-set/plate-line-36-ch004-bimawen.png、assets/promo/plate-set/plate-line-36-ch004-bimawen.webp、site/static/images/plate-line-36-ch004-bimawen.webp、assets/promo/plate-set/raw/round12/plate-line-25-rulai.jpg、assets/promo/plate-set/raw/round12/plate-line-26-yudi.jpg、assets/promo/plate-set/raw/round12/plate-line-27-baiyan-mojun.jpg、assets/promo/plate-set/raw/round12/plate-line-28-change.jpg、assets/promo/plate-set/raw/round12/plate-line-29-shenxue-ganyu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-30-lujing-ditu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-31-mima-pan-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-32-minsu-taofu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-33-yixiang-puxi-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-34-keju-zhidu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-35-ch010-weizheng.jpg、assets/promo/plate-set/raw/round12/plate-line-36-ch004-bimawen.jpg、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/README.md、site/reader/people/如来.html、site/reader/people/玉帝.html、site/reader/people/百眼魔君.html、site/reader/people/嫦娥外传.html、site/reader/themes/神学干预机制专题.html、site/reader/themes/取经路径地理符号学专题.html、site/reader/themes/取经密码学专题.html、site/reader/essays/西游与民俗学.html、site/reader/poetry/西游诗词意象谱系专题.html、site/reader/culture/明代科举制度对照专题.html、site/reader/ch010.html、site/reader/ch004.html、scripts/_w983_make_prompts.py、scripts/_w983_precheck_pages.py、scripts/_w983_derive.py、scripts/_w983_prepare.py、scripts/_w983_download.py、scripts/_w983_insert_plates.py、scripts/_w983_retry.py、scripts/_w983_sheet.py、scripts/_w983_zoom.py、scripts/_w983_serve.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、docs/11-方案报告/计划方案/执行前计划-T30-内页题图成套批第四组.md、docs/11-方案报告/计划方案/T30-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、docs/00-导读/W批次编号对账表.md、site/data/search.html、site/en/search.html、scripts/output/_w983_batch1.json、scripts/output/_w983_batch2.json、scripts/output/_w983_batch3.json、scripts/output/_w983_gen.json、scripts/output/_w983_precheck.json、scripts/_w983_make_spec.py、scripts/output/_w983_sheet.png、scripts/output/_w983_zoom.png、scripts/output/_w983_spec.json、scripts/output/_cascade_files_W983.txt、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。
+> - **文件**：assets/promo/plate-set/plate-line-25-rulai.png、assets/promo/plate-set/plate-line-25-rulai.webp、site/static/images/plate-line-25-rulai.webp、assets/promo/plate-set/plate-line-26-yudi.png、assets/promo/plate-set/plate-line-26-yudi.webp、site/static/images/plate-line-26-yudi.webp、assets/promo/plate-set/plate-line-27-baiyan-mojun.png、assets/promo/plate-set/plate-line-27-baiyan-mojun.webp、site/static/images/plate-line-27-baiyan-mojun.webp、assets/promo/plate-set/plate-line-28-change.png、assets/promo/plate-set/plate-line-28-change.webp、site/static/images/plate-line-28-change.webp、assets/promo/plate-set/plate-line-29-shenxue-ganyu-topic.png、assets/promo/plate-set/plate-line-29-shenxue-ganyu-topic.webp、site/static/images/plate-line-29-shenxue-ganyu-topic.webp、assets/promo/plate-set/plate-line-30-lujing-ditu-topic.png、assets/promo/plate-set/plate-line-30-lujing-ditu-topic.webp、site/static/images/plate-line-30-lujing-ditu-topic.webp、assets/promo/plate-set/plate-line-31-mima-pan-topic.png、assets/promo/plate-set/plate-line-31-mima-pan-topic.webp、site/static/images/plate-line-31-mima-pan-topic.webp、assets/promo/plate-set/plate-line-32-minsu-taofu-topic.png、assets/promo/plate-set/plate-line-32-minsu-taofu-topic.webp、site/static/images/plate-line-32-minsu-taofu-topic.webp、assets/promo/plate-set/plate-line-33-yixiang-puxi-topic.png、assets/promo/plate-set/plate-line-33-yixiang-puxi-topic.webp、site/static/images/plate-line-33-yixiang-puxi-topic.webp、assets/promo/plate-set/plate-line-34-keju-zhidu-topic.png、assets/promo/plate-set/plate-line-34-keju-zhidu-topic.webp、site/static/images/plate-line-34-keju-zhidu-topic.webp、assets/promo/plate-set/plate-line-35-ch010-weizheng.png、assets/promo/plate-set/plate-line-35-ch010-weizheng.webp、site/static/images/plate-line-35-ch010-weizheng.webp、assets/promo/plate-set/plate-line-36-ch004-bimawen.png、assets/promo/plate-set/plate-line-36-ch004-bimawen.webp、site/static/images/plate-line-36-ch004-bimawen.webp、assets/promo/plate-set/raw/round12/plate-line-25-rulai.jpg、assets/promo/plate-set/raw/round12/plate-line-26-yudi.jpg、assets/promo/plate-set/raw/round12/plate-line-27-baiyan-mojun.jpg、assets/promo/plate-set/raw/round12/plate-line-28-change.jpg、assets/promo/plate-set/raw/round12/plate-line-29-shenxue-ganyu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-30-lujing-ditu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-31-mima-pan-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-32-minsu-taofu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-33-yixiang-puxi-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-34-keju-zhidu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-35-ch010-weizheng.jpg、assets/promo/plate-set/raw/round12/plate-line-36-ch004-bimawen.jpg、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/README.md、site/reader/people/如来.html、site/reader/people/玉帝.html、site/reader/people/百眼魔君.html、site/reader/people/嫦娥外传.html、site/reader/themes/神学干预机制专题.html、site/reader/themes/取经路径地理符号学专题.html、site/reader/themes/取经密码学专题.html、site/reader/essays/西游与民俗学.html、site/reader/poetry/西游诗词意象谱系专题.html、site/reader/culture/明代科举制度对照专题.html、site/reader/ch010.html、site/reader/ch004.html、scripts/_w983_make_prompts.py、scripts/_w983_precheck_pages.py、scripts/_w983_derive.py、scripts/_w983_prepare.py、scripts/_w983_download.py、scripts/_w983_insert_plates.py、scripts/_w983_retry.py、scripts/_w983_sheet.py、scripts/_w983_zoom.py、scripts/_w983_serve.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、docs/11-方案报告/计划方案/执行前计划-T30-内页题图成套批第四组.md、docs/11-方案报告/计划方案/T30-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、dsite/data/search.html、site/en/search.html、scripts/output/_w983_batch1.json、scripts/output/_w983_batch2.json、scripts/output/_w983_batch3.json、scripts/output/_w983_gen.json、scripts/output/_w983_precheck.json、scripts/_w983_make_spec.py、scripts/output/_w983_sheet.png、scripts/output/_w983_zoom.png、scripts/output/_w983_spec.json、scripts/output/_cascade_files_W983.txt、CHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。
 
 **本批要点**：① **四库首次混合覆盖**——12 张 = people 4（如来 / 玉帝 / 百眼魔君 / 嫦娥）+ themes 3（神学干预机制 / 取经路径地理符号学 / 取经密码学）+ essays·poetry·culture 3（西游与民俗学 / 西游诗词意象谱系 / 明代科举制度对照）+ 回目页 2（第 010 回 魏征斩龙 / 第 004 回 官封弼马）⇒ reader 有题图页 **63 → 75**，站内线描题图累计 **52 → 64 张**；② **母版段逐字复用 249 字符**（读 `scripts/output/_w953_batch1.json`）⇒ 跨批风格同族由构造保证；③ **3 张因人眼关重出**（#26 玄色帝服整片平涂 / #27 黄袍平涂 + 千眼过密 / #36 官印印面刻字）——**机器判据 J1–J10 全绿仍漏**（J6 只统计暗像素 ⇒ 彩色平涂与器物刻字完全逃逸）⇒ 坑表 +6 条（64 → 70）+ 方法论篇新增 §2.7「判据覆盖面的边界」；④ **开工前先收官在途 W982**（preflight 交集命中 AGENTS.md / CHANGELOG.md）⇒ 共享面让出后 W983 才动土。
 
@@ -166,7 +1409,7 @@
 
 > **来源**：用户 2026-10-27 令「做」（第 44 篇复盘移交的最后一件·W956 立项候选）。
 
-> - **文件**：scripts/check_doc_size_budget.py、scripts/preflight_check.py、tests/unit/test_doc_size_budget.py、HANDOVER.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w982_spec.json、scripts/output/_cascade_files_W982.txt。
+> - **文件**：scripts/check_doc_size_budget.py、scripts/preflight_check.py、tests/unit/test_doc_size_budget.py、HANDOVER.md、dCREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w982_spec.json、scripts/output/_cascade_files_W982.txt。
 
 **三层方案落地（评审口径 ②最薄优先）**：② **C7 版本面契约**（check_doc_size_budget.collect 新增·挂 verify 体积窗口槽 + preflight 开工判据双面）——三文档版本行锚尾（README ·A1-A6 / STRUCTURE —A1-A6 / 项目说明 ·详细变更见）+ HANDOVER 当前 HEAD 句形态 + 更新链条目 ≤3 + 概要块 >6 判红；实现中两处修正（尾链行「创建于 2026-07-25」同 line 误计→只数最后更新：之后·单测断言空格差）。③ **preflight 手搓前置劝导**——工作树含级联面未提交改动即 NOTE 提示走 batch_cascade（只提示不拦截 W822·quotePath=false 二次取数防中文转义漏配·实弹验证注入/还原）。① **文件锁缓建裁决**：级联临时索引写与并行台账认领互斥未解，②③实证不足再启。
 
@@ -180,7 +1423,7 @@
 
 > **来源**：用户 2026-10-27 纠偏「GoatCounter API 可以用啊」——实测证实，W806「账号失效」判断过时；数据链恢复触发 judge_gate 正式重判。
 
-> - **文件**：scripts/judge_gate.py、docs/11-方案报告/调研与数据复盘/读者数据复盘.md、docs/00-导读/访问统计方案.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w981_spec.json、scripts/output/_cascade_files_W981.txt。
+> - **文件**：scripts/judge_gate.py、docs/11-方案报告/调研与数据复盘/读者数据复盘.md、docs/00-导读/访问统计方案.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w981_spec.json、scripts/output/_cascade_files_W981.txt。
 
 **数据链恢复实证（三 API 直探）**：`/api/v0/me` 200（用户 82739·站点 98962·**open_at 2026-10-01**——账号 9 月末暂停、10-01 重启，暂停期即 W806 所记 404 窗口；token 全程在位未被重建）·`/api/v0/stats/total` 200（10 月累计 111 访问）·子域 1273984347 无鉴权 303（站点存活实证）。原「404=账号失效」结论过时。
 
@@ -200,7 +1443,7 @@
 
 > **来源**：用户 2026-10-27 令「做」（P-44-05 stats 三方同步机器化）+ 两项事实纠偏（agent-web 的 LLM 实测早已完成；GoatCounter API 可用——与仓内 W806 退役记录冲突，取证中）。
 
-> - **文件**：scripts/stats.py、tests/unit/test_stats_sync.py、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w980_spec.json、scripts/output/_cascade_files_W980.txt。
+> - **文件**：scripts/stats.py、tests/unit/test_stats_sync.py、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、archive/docs/W批次编号对账表-ARCHIVE.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w980_spec.json、scripts/output/_cascade_files_W980.txt。
 
 **P-44-05（stats 标记自动跟随）**：stats.py 新增 `sweep_markers()`——`--w` 落盘后自动把 C5b 对账面上的 `N<!--stats:KEY-->` 前置数字刷成本批实算值。**面 = check_doc_sync 权威面**（C5_DOC_NAMES 六文件 + CHANGELOG 口径块 + c5b_extra_surfaces：pytest.ini/site/index.html/11-方案报告递归排除计划方案）——面漂移即门禁与跟随同源漂移，不自造第二份清单。**两条防线内嵌**：① CHANGELOG 只扫首个「### W」段之前的口径块（历史段含字面标记叙述 W913 段实证·整文件扫必污染）；② 标记正则与 RE_STATS_MARK 同源（`[a-z_0-9]+` 含数字键——首版 `[a-z_]+` 被 a1_a6_docs 当场打回）。**首跑自证**：本批新增 4 例单测 → pytest_collected 925→929 → pytest.ini 与架构方案 v2 双标记自动跟随——P-44-05 立项时的手工杂务（W976/W978 两轮手工刷）自此消失。单测 4 例（失配更新/相等不动/历史段防污染/计划方案目录排除回归锁）。
 
@@ -218,7 +1461,7 @@
 
 > **来源**：用户 2026-10-27 引用第 44 篇复盘移交清单（P-44-01~04）令即办（下一自由号）。
 
-> - **文件**：scripts/batch_cascade.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w979_spec.json、scripts/output/_cascade_files_W979.txt。
+> - **文件**：scripts/batch_cascade.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w979_spec.json、scripts/output/_cascade_files_W979.txt。
 
 **P-44-01（回窗提示化）**：batch_cascade 收官提示位抽为 `_close_hints()` 集合函数（全部维持 W822「只输出不拦截」语义·fail-open 留痕），[SIZE] 块在 evaluate 有 FAIL 时输出「超窗——按 FAIL 行内指引跑对应归档工具回窗（段式/台账行分治）」提示行——级联每批插入一段、回窗自此从「异常」变「每批常态动作提示」。
 
@@ -240,11 +1483,11 @@
 
 > **来源**：复盘触发器 T3 首次触发（W956 建·check_review_trigger 实跑：上篇复盘后提交 92 ≥ 80·距今 1.19 天）——「触发清单与周期栏带入报告」闭环首件产物；用户 2026-10-27 引用体检收官报告附带登记项令即办（W977 退役批 + 本篇复盘批连续执行）。
 
-> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md、scripts/_w978_review_evidence.py、scripts/output/_w978_review_evidence.json、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w978_spec.json、scripts/output/_cascade_files_W978.txt。
+> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md、scripts/_w978_review_evidence.py、scripts/output/_w978_review_evidence.json、docs/11-方案报告/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w978_spec.json、scripts/output/_cascade_files_W978.txt。
 
 **区间与体量**：第 43 篇收官（W954·2026-10-26）至 W977 收官后——**28.7 小时 · W955–W977 共 21 段（两面合看）· 对账表 23 行 · 提交 92 笔**（docs 36 / chore 23 / feat 18 / fix 15·10-26: 74 / 10-27: 18）。合规零提交 2（W958 让号留痕 / W962 并号闭环·经状态列核实）。
 
-**核心发现（四条）**：① 上篇 P-43 五项改进当期闭环 **5/5**（P-43-01/02/05 由 W956 机器化：preflight lagged 二分 / check_review_trigger 触发器 / _assert_status_wnum 段状态防线；P-43-03 由 W971 完成 102 段回填；P-43-04 由 W974 落地判据自证）——「复盘→改进→机器化」首次走通一整圈；② **体积窗口制建置 17 批后首次实战咬合**：W960 建窗 → W968 拆分 → W970 台账行归档工具 → W976 三窗齐超窗实拦且修剪回路三缺陷（A5 断言/修路指引/自撞）当场暴露当场修复 → 段式回窗成每批固定节奏；③ **沉淀通道机器化切换完成**：W975 坑表 57→63 → W976 64 条 + [TMPE] 收官提示位 → W977 一次性件 454 候选分级退役（286 入档/16 现役硬保留/152 S4 本地件不入仓）+ tmpe 工具晋升机制定性（历史零达标·沉淀主通道=坑表/方法论篇）；④ **tmpe 清理闭环 13 天首次走通**（主人「全清」31 项约 860MB 回收站·保护面 0 命中·分批验证留痕）。
+**核心发现（四条）**：① 上篇 P-43 五项改进当期闭环 **5/5**（P-43-01/02/05 由 W956 机器化：preflight lagged 二分 / check_review_trigger 触发器 / _assert_status_wnum 段状态防线；P-43-03 由 W971 完成 102 段回填；P-43-04 由 W974 落地判据自证）——「复盘→改进→机器化」首次走通一整圈；② **体积窗口制建置 17 批后首次实战咬合**：W960 建窗 → W968 拆分 → W970 台账行归档工具 → W976 三窗齐超窗实拦且修剪回路三缺陷（A5 断言/修路指引/自撞）当场暴露当场修复 → 段式回窗成每批固定节奏；③ **沉淀通道机器化切换完成**：W975 坑表 57→63 → W976 64 条 + [TMPE] 收官提示位 → W977 一次性件 454 候选分级退役（286 入档/16 现役硬保留j S4 本地件不入仓）+ tmpe 工具晋升机制定性（历史零达标·沉淀主通道=坑表/方法论篇）；④ **tmpe 清理闭环 13 天首次走通**（主人「全清」31 项约 860MB 回收站·保护面 0 命中·分批验证留痕）。
 
 **改进项 P-44-01~04**：段式回窗并入级联收官自动提示 / tmpe `_shot`+`_inbox` 7 天 TTL 清理管线化（269MB+253MB 超龄）/ scripts 顶层 `_` 件计数提示位 / W1000 存量段 36 批随批顺带。风险面与可行性自评见报告 §10。
 
@@ -258,7 +1501,7 @@
 
 > **来源**：用户 2026-10-27 引用体检收官报告「scripts/ 一次性件已积 384 个，archive/scripts/ 有 51 件退役先例，可择机批量清」令即办（实盘盘点为 454 件顶层 `_` 件·含 W977 当日新增计入口径）。
 
-> - **文件**：archive/README.md、scripts/index.md、scripts/output/index.md、archive/scripts/batches/README.md、archive/scripts/batches/index.md、archive/scripts/batches/misc/README.md、archive/scripts/batches/misc/index.md、archive/scripts/batches/w6xx/README.md、archive/scripts/batches/w6xx/index.md、archive/scripts/batches/w7xx/README.md、archive/scripts/batches/w7xx/index.md、archive/scripts/batches/w8xx/README.md、archive/scripts/batches/w8xx/index.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w977_spec.json、scripts/output/_cascade_files_W977.txt + **286 件 git mv 改名（scripts/_* → archive/scripts/batches/{misc,w6xx,w7xx,w8xx,w9xx}/·逐件不入本行·组行见 archive/README.md 台账）**。
+> - **文件**：archive/README.md、scripts/index.md、scripts/output/index.md、archive/scripts/batches/README.md、archive/scripts/batches/index.md、archive/scripts/batches/misc/README.md、archive/scripts/batches/misc/index.md、archive/scripts/batches/w6xx/README.md、archive/scripts/batches/w6xx/index.md、archive/scripts/batches/w7xx/README.md、archive/scripts/batches/w7xx/index.md、archive/scripts/batches/w8xx/README.md、archive/scripts/batches/w8xx/index.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w977_spec.json、scripts/output/_cascade_files_W977.txt + **286 件 git mv 改名（scripts/_* → archive/scripts/batches/{misc,w6xx,w7xx,w8xx,w9xx}/·逐件不入本行·组行见 archive/README.md 台账）**。
 
 **方法（同契约·规模适配）**：archive_file.py 为「单件/小批」设计（逐件全仓 grep 在 439 件规模下不可行），按 archive/README.md「大批量批处理手动登记」条款走同契约实现——① 语料级引用剔除（tmpe/_w977_scan.py·活引用面=门禁/工具/测试/治理文档/CI/Makefile 一次载入逐 stem 匹配）；② 批量 git mv（失败即停·幂等续跑）；③ 组行台账登记（5 组）。**引用分级结果：454 候选 → 16 件现役硬保留**（`__init__.py`、`_cite_probe.py`[坑表+CLAUDE+check_claude_md 三面引用]、`_check_pipeline_consistency.py`[铁律 13]、`_gen_search_index.py`[第 46 门禁+单测]、`_w851_j1_name_audit.py`/`_w851_visual_regression_probe.py`[单测 import]、`_w857_plan_template_review.py`[第 48 门禁]、`_w864_accent_audit.py`/`_w876_site_audit.py`[朱砂门禁族]、`_w818_file_protocol_probe.py`[check_page_admission]、`_w933_mutation_test.py`[Makefile]、`_w939_scan_targets.py`/`_w946_icon_probe.js`[check_emoji_icons]、`_w950_refresh_icon_paths.py`[坑表]、`_audit_render_states.js`[暗色门禁+CI]·`_w954_review_evidence.py`[复盘取证锚点+lint_links 实锤活链接]）**+ 287 件退役入库**（misc 60 + w6xx 2 + w7xx 31 + w8xx 42 + w9xx 151·1 件 _w954_review_evidence 复盘取证锚点复位留用）**+ 152 件 S4 本地件原地不动**（.gitignore:159 `scripts/_s4_*` 双盲纪律·从未入仓）。
 
@@ -274,7 +1517,7 @@
 
 > **来源**：用户 2026-10-27 令「检查一下项目所有的工具、脚本、探针、门禁，有没有问题是否需要优化；临时文件系统和归档系统现在是否能够正常运转」并批准处置清单开工。
 
-> - **文件**：scripts/archive_ledger_rows.py、scripts/check_doc_size_budget.py、scripts/preflight_check.py、scripts/batch_cascade.py、tests/unit/test_doc_size_budget.py、tests/unit/test_preflight_touches.py、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、scripts/output/file-index.md、scripts/output/_w976_spec.json、scripts/output/_cascade_files_W976.txt、scripts/output/_vermilion_solid_cache.json（逐件行见 file-index W976 段）。
+> - **文件**：scripts/archive_ledger_rows.py、scripts/check_doc_size_budget.py、scripts/preflight_check.py、scripts/batch_cascade.py、tests/unit/test_doc_size_budget.py、tests/unit/test_preflight_touches.py、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、darchive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、sscripts/output/_w976_spec.json、scripts/output/_cascade_files_W976.txt、scripts/output/_vermilion_solid_cache.json（逐件行见 file-index W976 段）。
 
 **体检结论（修复前）**：门禁与探针基本面健康（verify 50 槽全绿、pytest 919/923、ruff 0、engine.smoke 12/12、anchor 探针 0 盲区），但三窗齐超窗（CHANGELOG 111/110、file-index 111/110、台账 61/60——C 族挂 preflight 开工判据不在 verify，W976 开工即被拦）+ 工具链三缺陷：① 台账修剪器 archive_ledger_rows.py 的 A5 断言（迁出行物理序须升序）与自身文档「行序穿插是常态（W968 实证 52 处）」矛盾，真实台账（待迁出 {914,915} 物理序 [915,914]）首跑即 AssertionError，且自测样本恰好构造升序穿插测不出该形态——台账修剪回路断链；② C3 超窗修法指引统一指向段式 archive_segments.py，而该工具不管台账——修路指引死路；③ preflight_check 拒绝循环不排本批自身，认领后复跑必然自撞 FAIL（docstring 与 NOTE 均声称已排除）。
 
@@ -294,7 +1537,7 @@
 >
 > **问题定性**：W974 批的 9 条经验只写进 Agent 私有 Memory ⇒ **仓内其他 Agent 读不到** ⇒ 正是坑表既有条目「共享机制必须写入仓库内文件（git tracked）」的**复发实证**（该条目本批已补注复发）。
 
-> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、docs/10-方法论沉淀/README.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、scripts/_w975_sink_experience.py、scripts/_w975_cascade.py、scripts/_w975_tweak.py、scripts/output/_cascade_files_W975.txt、scripts/output/file-index.md、CHANGELOG.md、README.md、docs/00-导读/W批次编号对账表.md
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、docs/10-方法论沉淀/README.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、scripts/_w975_sink_experience.py、scripts/_w975_cascade.py、scripts/_w975_tweak.py、scripts/output/_cascade_files_W975.txt、sCREADME.md、docs/00-导读/W批次编号对账表.md
 
 **入仓面（四处载体）**：① 坑表 `docs/agent/pitfalls.md` **6 条新条目**（CSS/视觉渲染 +2「器物形状类别 > 数量计数」「落位页先验」· git/提交/并发 +1「写既有文件须临时文件 + 原子替换」· 数据/内容可信度 +2「bbox 顶 ≠ 主体顶」「校验/自检代码必须自证」· 流程/协作/取证 +1「端口占用是假故障」）+ 4 处节标题条数 + 共享机制条目补 W974 复发注；② **深度篇**《素材批处理与判据自证方法论.md》（`docs/10-方法论沉淀/` 编号 26·含问题背景/方法论/复现案例/修复策略/关联文档五段）；③ `AGENTS.md` §4.3 主题视图与计数声明；④ `HANDOVER.md` 两处指针。
 
@@ -311,7 +1554,7 @@
 >
 > **四问答复**：① 用途与画幅 = **内页题图 · 3:4 竖版 1200×1600（沿用 plate-set 母版）** ② 张数 = **12 张** ③ 参考风格 = **沿用站内线描墨稿风（母版逐字复用）** ④ 题材范围 = **人物 + 主题混合（各占一半）**。
 
-> - **文件**：site/static/images/plate-line-13-jinjiaodawang.webp、site/static/images/plate-line-14-yinjiaodawang.webp、site/static/images/plate-line-15-huangmeidawang.webp、site/static/images/plate-line-16-heixiongjing.webp、site/static/images/plate-line-17-tuota-lijing.webp、site/static/images/plate-line-18-yutujing.webp、site/static/images/plate-line-19-nvziguo-topic.webp、site/static/images/plate-line-20-chelingguo-topic.webp、site/static/images/plate-line-21-shituoling-topic.webp、site/static/images/plate-line-22-tonghehe-topic.webp、site/static/images/plate-line-23-pansidong-topic.webp、site/static/images/plate-line-24-wudidong-topic.webp、assets/promo/plate-set/plate-line-13-jinjiaodawang.png、assets/promo/plate-set/plate-line-14-yinjiaodawang.png、assets/promo/plate-set/plate-line-15-huangmeidawang.png、assets/promo/plate-set/plate-line-16-heixiongjing.png、assets/promo/plate-set/plate-line-17-tuota-lijing.png、assets/promo/plate-set/plate-line-18-yutujing.png、assets/promo/plate-set/plate-line-19-nvziguo-topic.png、assets/promo/plate-set/plate-line-20-chelingguo-topic.png、assets/promo/plate-set/plate-line-21-shituoling-topic.png、assets/promo/plate-set/plate-line-22-tonghehe-topic.png、assets/promo/plate-set/plate-line-23-pansidong-topic.png、assets/promo/plate-set/plate-line-24-wudidong-topic.png、assets/promo/plate-set/plate-line-13-jinjiaodawang.webp、assets/promo/plate-set/plate-line-14-yinjiaodawang.webp、assets/promo/plate-set/plate-line-15-huangmeidawang.webp、assets/promo/plate-set/plate-line-16-heixiongjing.webp、assets/promo/plate-set/plate-line-17-tuota-lijing.webp、assets/promo/plate-set/plate-line-18-yutujing.webp、assets/promo/plate-set/plate-line-19-nvziguo-topic.webp、assets/promo/plate-set/plate-line-20-chelingguo-topic.webp、assets/promo/plate-set/plate-line-21-shituoling-topic.webp、assets/promo/plate-set/plate-line-22-tonghehe-topic.webp、assets/promo/plate-set/plate-line-23-pansidong-topic.webp、assets/promo/plate-set/plate-line-24-wudidong-topic.webp、site/reader/people/金角银角深化专题.html、site/reader/people/银角大王.html、site/reader/people/黄眉老佛外传.html、site/reader/people/黑熊精.html、site/reader/people/托塔李天王外传.html、site/reader/people/玉兔精.html、site/reader/people/女儿国国王.html、site/reader/people/车迟国三国师外传.html、site/reader/people/狮驼岭三魔-方向二深化.html、site/reader/people/老鼋外传.html、site/reader/people/蜘蛛精.html、site/reader/people/老鼠精.html、scripts/_w974_claim_row.py、scripts/_w974_make_prompts.py、scripts/_w974_make_retry.py、scripts/_w974_merge_retry.py、scripts/_w974_download.py、scripts/_w974_prepare.py、scripts/_w974_zoom.py、scripts/_w974_sheet_full.py、scripts/_w974_insert_plates.py、scripts/_w974_stats.py、scripts/_w974_update_readme.py、scripts/_w974_probe_top.py、scripts/_w974_probe_top2.py、scripts/_w974_probe_clusters.py、scripts/_w974_probe_subjtop.py、scripts/_w974_negative_sample.py、scripts/_w974_cascade.py、scripts/_w974_backfill_stage.py、scripts/_w974_final_check.py、scripts/_w974_register_report.py、scripts/_w974_sync_stats_marks.py、scripts/_w974_sync_version_faces.py、scripts/output/_w974_batch1.json、scripts/output/_w974_batch2.json、scripts/output/_w974_batch3.json、scripts/output/_w974_batch34.json、scripts/output/_w974_retry15.json、scripts/output/_w974_stats.json、scripts/output/_w974_negative_sample.png、scripts/output/_w974_probe_top_zoom.png、scripts/output/_w974_urls_a.json、scripts/output/_w974_urls_b.json、scripts/output/_w974_urls_c.json、docs/11-方案报告/计划方案/执行前计划-T29-内页题图成套批第三组.md、docs/11-方案报告/计划方案/T29-任务计划执行与经验沉淀报告-2026-10-27.md、assets/promo/plate-set/README.md、assets/promo/plate-set/index.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、scripts/output/_cascade_files_W974.txt、scripts/output/file-index.md、CHANGELOG.md、README.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、assets/promo/plate-set/raw/round11/README.md、assets/promo/plate-set/raw/round11/index.md、assets/promo/plate-set/raw/round11/plate-line-13-jinjiaodawang.jpg、assets/promo/plate-set/raw/round11/plate-line-14-yinjiaodawang.jpg、assets/promo/plate-set/raw/round11/plate-line-15-huangmeidawang.jpg、assets/promo/plate-set/raw/round11/plate-line-16-heixiongjing.jpg、assets/promo/plate-set/raw/round11/plate-line-17-tuota-lijing.jpg、assets/promo/plate-set/raw/round11/plate-line-18-yutujing.jpg、assets/promo/plate-set/raw/round11/plate-line-19-nvziguo-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-20-chelingguo-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-21-shituoling-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-22-tonghehe-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-23-pansidong-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-24-wudidong-topic.jpg、assets/promo/plate-set/zoom-w974/README.md、assets/promo/plate-set/zoom-w974/detail-01.png、assets/promo/plate-set/zoom-w974/detail-02.png、assets/promo/plate-set/zoom-w974/detail-03.png、assets/promo/plate-set/zoom-w974/detail-04.png、assets/promo/plate-set/zoom-w974/detail-05.png、assets/promo/plate-set/zoom-w974/detail-06.png、assets/promo/plate-set/zoom-w974/detail-07.png、assets/promo/plate-set/zoom-w974/detail-08.png、assets/promo/plate-set/zoom-w974/detail-09.png、assets/promo/plate-set/zoom-w974/detail-10.png、assets/promo/plate-set/zoom-w974/detail-11.png、assets/promo/plate-set/zoom-w974/detail-12.png、assets/promo/plate-set/zoom-w974/detail-sheet-g1.png、assets/promo/plate-set/zoom-w974/detail-sheet-g2.png、assets/promo/plate-set/zoom-w974/detail-sheet-g3.png、assets/promo/plate-set/zoom-w974/full-01.png、assets/promo/plate-set/zoom-w974/full-02.png、assets/promo/plate-set/zoom-w974/full-03.png、assets/promo/plate-set/zoom-w974/full-04.png、assets/promo/plate-set/zoom-w974/full-05.png、assets/promo/plate-set/zoom-w974/full-06.png、assets/promo/plate-set/zoom-w974/full-07.png、assets/promo/plate-set/zoom-w974/full-08.png、assets/promo/plate-set/zoom-w974/full-09.png、assets/promo/plate-set/zoom-w974/full-10.png、assets/promo/plate-set/zoom-w974/full-11.png、assets/promo/plate-set/zoom-w974/full-12.png、assets/promo/plate-set/zoom-w974/full-sheet-01-02-03-04.png、assets/promo/plate-set/zoom-w974/full-sheet-03.png、assets/promo/plate-set/zoom-w974/full-sheet-05-06-07-08-09.png、assets/promo/plate-set/zoom-w974/index.md
+> - **文件**：site/static/images/plate-line-13-jinjiaodawang.webp、site/static/images/plate-line-14-yinjiaodawang.webp、site/static/images/plate-line-15-huangmeidawang.webp、site/static/images/plate-line-16-heixiongjing.webp、site/static/images/plate-line-17-tuota-lijing.webp、site/static/images/plate-line-18-yutujing.webp、site/static/images/plate-line-19-nvziguo-topic.webp、site/static/images/plate-line-20-chelingguo-topic.webp、site/static/images/plate-line-21-shituoling-topic.webp、site/static/images/plate-line-22-tonghehe-topic.webp、site/static/images/plate-line-23-pansidong-topic.webp、site/static/images/plate-line-24-wudidong-topic.webp、assets/promo/plate-set/plate-line-13-jinjiaodawang.png、assets/promo/plate-set/plate-line-14-yinjiaodawang.png、assets/promo/plate-set/plate-line-15-huangmeidawang.png、assets/promo/plate-set/plate-line-16-heixiongjing.png、assets/promo/plate-set/plate-line-17-tuota-lijing.png、assets/promo/plate-set/plate-line-18-yutujing.png、assets/promo/plate-set/plate-line-19-nvziguo-topic.png、assets/promo/plate-set/plate-line-20-chelingguo-topic.png、assets/promo/plate-set/plate-line-21-shituoling-topic.png、assets/promo/plate-set/plate-line-22-tonghehe-topic.png、assets/promo/plate-set/plate-line-23-pansidong-topic.png、assets/promo/plate-set/plate-line-24-wudidong-topic.png、assets/promo/plate-set/plate-line-13-jinjiaodawang.webp、assets/promo/plate-set/plate-line-14-yinjiaodawang.webp、assets/promo/plate-set/plate-line-15-huangmeidawang.webp、assets/promo/plate-set/plate-line-16-heixiongjing.webp、assets/promo/plate-set/plate-line-17-tuota-lijing.webp、assets/promo/plate-set/plate-line-18-yutujing.webp、assets/promo/plate-set/plate-line-19-nvziguo-topic.webp、assets/promo/plate-set/plate-line-20-chelingguo-topic.webp、assets/promo/plate-set/plate-line-21-shituoling-topic.webp、assets/promo/plate-set/plate-line-22-tonghehe-topic.webp、assets/promo/plate-set/plate-line-23-pansidong-topic.webp、assets/promo/plate-set/plate-line-24-wudidong-topic.webp、site/reader/people/金角银角深化专题.html、site/reader/people/银角大王.html、site/reader/people/黄眉老佛外传.html、site/reader/people/黑熊精.html、site/reader/people/托塔李天王外传.html、site/reader/people/玉兔精.html、site/reader/people/女儿国国王.html、site/reader/people/车迟国三国师外传.html、site/reader/people/狮驼岭三魔-方向二深化.html、site/reader/people/老鼋外传.html、site/reader/people/蜘蛛精.html、site/reader/people/老鼠精.html、scripts/_w974_claim_row.py、scripts/_w974_make_prompts.py、scripts/_w974_make_retry.py、scripts/_w974_merge_retry.py、scripts/_w974_download.py、scripts/_w974_prepare.py、scripts/_w974_zoom.py、scripts/_w974_sheet_full.py、scripts/_w974_insert_plates.py、scripts/_w974_stats.py、scripts/_w974_update_readme.py、scripts/_w974_probe_top.py、scripts/_w974_probe_top2.py、scripts/_w974_probe_clusters.py、scripts/_w974_probe_subjtop.py、scripts/_w974_negative_sample.py、scripts/_w974_cascade.py、scripts/_w974_backfill_stage.py、scripts/_w974_final_check.py、scripts/_w974_register_report.py、scripts/_w974_sync_stats_marks.py、scripts/_w974_sync_version_faces.py、scripts/output/_w974_batch1.json、scripts/output/_w974_batch2.json、scripts/output/_w974_batch3.json、scripts/output/_w974_batch34.json、scripts/output/_w974_retry15.json、scripts/output/_w974_stats.json、scripts/output/_w974_negative_sample.png、scripts/output/_w974_probe_top_zoom.png、scripts/output/_w974_urls_a.json、scripts/output/_w974_urls_b.json、scripts/output/_w974_urls_c.json、docs/11-方案报告/计划方案/执行前计划-T29-内页题图成套批第三组.md、docs/11-方案报告/计划方案/T29-任务计划执行与经验沉淀报告-2026-10-27.md、assets/promo/plate-set/README.md、assets/promo/plate-set/index.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、scripts/output/_cascade_files_W974.txt、sCREADME.md、HANDOVER.md、ddocs/11-方案报告/README.md、assets/promo/plate-set/raw/round11/README.md、assets/promo/plate-set/raw/round11/index.md、assets/promo/plate-set/raw/round11/plate-line-13-jinjiaodawang.jpg、assets/promo/plate-set/raw/round11/plate-line-14-yinjiaodawang.jpg、assets/promo/plate-set/raw/round11/plate-line-15-huangmeidawang.jpg、assets/promo/plate-set/raw/round11/plate-line-16-heixiongjing.jpg、assets/promo/plate-set/raw/round11/plate-line-17-tuota-lijing.jpg、assets/promo/plate-set/raw/round11/plate-line-18-yutujing.jpg、assets/promo/plate-set/raw/round11/plate-line-19-nvziguo-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-20-chelingguo-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-21-shituoling-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-22-tonghehe-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-23-pansidong-topic.jpg、assets/promo/plate-set/raw/round11/plate-line-24-wudidong-topic.jpg、assets/promo/plate-set/zoom-w974/README.md、assets/promo/plate-set/zoom-w974/detail-01.png、assets/promo/plate-set/zoom-w974/detail-02.png、assets/promo/plate-set/zoom-w974/detail-03.png、assets/promo/plate-set/zoom-w974/detail-04.png、assets/promo/plate-set/zoom-w974/detail-05.png、assets/promo/plate-set/zoom-w974/detail-06.png、assets/promo/plate-set/zoom-w974/detail-07.png、assets/promo/plate-set/zoom-w974/detail-08.png、assets/promo/plate-set/zoom-w974/detail-09.png、assets/promo/plate-set/zoom-w974/detail-10.png、assets/promo/plate-set/zoom-w974/detail-11.png、assets/promo/plate-set/zoom-w974/detail-12.png、assets/promo/plate-set/zoom-w974/detail-sheet-g1.png、assets/promo/plate-set/zoom-w974/detail-sheet-g2.png、assets/promo/plate-set/zoom-w974/detail-sheet-g3.png、assets/promo/plate-set/zoom-w974/full-01.png、assets/promo/plate-set/zoom-w974/full-02.png、assets/promo/plate-set/zoom-w974/full-03.png、assets/promo/plate-set/zoom-w974/full-04.png、assets/promo/plate-set/zoom-w974/full-05.png、assets/promo/plate-set/zoom-w974/full-06.png、assets/promo/plate-set/zoom-w974/full-07.png、assets/promo/plate-set/zoom-w974/full-08.png、assets/promo/plate-set/zoom-w974/full-09.png、assets/promo/plate-set/zoom-w974/full-10.png、assets/promo/plate-set/zoom-w974/full-11.png、assets/promo/plate-set/zoom-w974/full-12.png、assets/promo/plate-set/zoom-w974/full-sheet-01-02-03-04.png、assets/promo/plate-set/zoom-w974/full-sheet-03.png、assets/promo/plate-set/zoom-w974/full-sheet-05-06-07-08-09.png、assets/promo/plate-set/zoom-w974/index.md
 
 **母版逐字复用**：直接读 W953 的 `_w953_batch1.json` 取母版（**249 字符**）拼本批 SUBJECT 段 ⇒ 跨三批（W952 / W953 / W974）风格同族由**构造**保证；脚本断言「批内 12 条母版逐字一致」+「与 W953 母版逐字相同」+「stem 与既有母版零冲突（含负样本自证）」。
 
@@ -504,7 +1747,7 @@
 
 > **来源**：用户 2026-10-26 携 GSAP Skills 插件发起 → 问卷裁定「**四类动效全都要**（滚动叙事 / 入场编排 / 微交互 / 现有动画体检）· 载体 = `site/` 静态站 · 交付 = **先出计划再施工**」。
 
-> - **文件**：docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md、scripts/_w955_motion_audit.py、scripts/output/_w955_motion_audit.json、scripts/_w955_ledger_claim.py、scripts/_w955_version_sync.py、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md
+> - **文件**：docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md、scripts/_w955_motion_audit.py、scripts/output/_w955_motion_audit.json、scripts/_w955_ledger_claim.py、scripts/_w955_version_sync.py、ddocs/11-方案报告/README.md
 > **状态**：**已收官**（W955 4a73a3f4·git 反填·共 3 笔·W971 存量回填）
 
 **前置体检（`scripts/_w955_motion_audit.py` · 8 组事实 · 数字唯一源头）**：全站 **857** 页（reader/people 216 · reader/themes 210 · en 138 · reader 102 · data 88 · reader/essays 45 · reader/culture 35 · reader/poetry 14 · 根 9）；含 `@keyframes` **331** 页 / 1,337 处（页面私有 keyframes 仅 8 个）；含 `reveal-in` **333** 页（逐页内联复制·公共载体缺位）；含 `prefers-reduced-motion` 守卫 **334** 页；**动效禁止清单基线 0 命中**（回弹 / 360° 旋转 / 无限循环 / 视差）；`d3 .duration(N>600)` **0 页**。
@@ -522,7 +1765,7 @@
 
 > **来源**：用户 2026-10-26 问「多长时间没做复盘了」→ 实测主线复盘断档 **167.5 小时**（6 天 23 小时 32 分·跨 159 个 W 号 / 354 笔提交）→ 经问卷裁决「**补做 · 覆盖 W795–W953 全区间**」。
 
-> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md、docs/11-方案报告/计划方案/执行前计划-T27-第43篇工作复盘批.md、docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md、scripts/_w954_review_evidence.py、scripts/_w954_ledger_backfill.py、scripts/output/_w954_review_evidence.json、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、scripts/output/file-index.md
+> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md、docs/11-方案报告/计划方案/执行前计划-T27-第43篇工作复盘批.md、docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md、scripts/_w954_review_evidence.py、scripts/_w954_ledger_backfill.py、scripts/output/_w954_review_evidence.json、docs/11-方案报告/README.md、dHANDOVER.md、scripts/output/file-index.md
 
 **断档事实**：第 42 篇（2026-10-19 01:10）至本篇 **167.5 小时零复盘**——该系列建立以来最长空窗（历史节奏 2026-10-07→10-19 共 12 天 14 篇·约 0.85 篇/天·本空窗约等欠 **6 篇**）。
 
@@ -545,7 +1788,7 @@
 >
 > **三问答复**：① 用途与画幅 = **内页专题题图续批 · 3:4 竖版** ② 张数 = **12 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **themes 库专题题图**）。
 >
-> - **文件**：site/static/images/plate-line-01-zhenjia-meihouwang.webp、site/static/images/plate-line-02-pantao-yuan.webp、site/static/images/plate-line-03-danaotian-gong.webp、site/static/images/plate-line-04-shuilandong.webp、site/static/images/plate-line-05-hunshi-sihou.webp、site/static/images/plate-line-06-bingqi-xiuyang.webp、site/static/images/plate-line-07-ershiba-xingsu.webp、site/static/images/plate-line-08-sizhi-gongcao.webp、site/static/images/plate-line-09-wufang-jiedi.webp、site/static/images/plate-line-10-liuding-liujia.webp、site/static/images/plate-line-11-jingubang-zhongliang.webp、site/static/images/plate-line-12-qiwu-zhuanji.webp、site/reader/themes/真假美猴王专题.html、site/reader/themes/蟠桃园-体制内的秘密.html、site/reader/themes/大闹天宫-英雄还是悲剧.html、site/reader/themes/水帘洞专题.html、site/reader/themes/混世四猴专题.html、site/reader/themes/兵器的自我修养专题.html、site/reader/themes/二十八星宿专题.html、site/reader/themes/四值功曹专题.html、site/reader/themes/五方揭谛专题.html、site/reader/themes/六丁六甲专题.html、site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html、site/reader/themes/器物传记学专题.html、scripts/_w953_make_prompts.py、scripts/_w953_make_insert.py、scripts/_w953_insert_plates.py、scripts/_w953_cascade.py、scripts/_w953_prep_raws.py、scripts/_w953_prep_raws2.py、scripts/_w953_prep_raws3.py、scripts/_w953_update_readme.py、scripts/_w945_prepare.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、scripts/_w951_site_sheet.py、scripts/output/_w953_batch1.json、scripts/output/_w953_batch2.json、scripts/output/_w953_batch3.json、scripts/output/_w953_batch4.json、scripts/output/_w953_batch5.json、scripts/output/_cascade_files_W953.txt、scripts/output/file-index.md、assets/promo/plate-set/README.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-site-sheet.png、assets/promo/plate-set/index.md、CHANGELOG.md、README.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、scripts/_w953_zoom.py、scripts/_w953_fix_cascade.py、scripts/_w953_backfill_stage.py、assets/promo/plate-set/zoom-w953/w953-recheck.png
+> - **文件**：site/static/images/plate-line-01-zhenjia-meihouwang.webp、site/static/images/plate-line-02-pantao-yuan.webp、site/static/images/plate-line-03-danaotian-gong.webp、site/static/images/plate-line-04-shuilandong.webp、site/static/images/plate-line-05-hunshi-sihou.webp、site/static/images/plate-line-06-bingqi-xiuyang.webp、site/static/images/plate-line-07-ershiba-xingsu.webp、site/static/images/plate-line-08-sizhi-gongcao.webp、site/static/images/plate-line-09-wufang-jiedi.webp、site/static/images/plate-line-10-liuding-liujia.webp、site/static/images/plate-line-11-jingubang-zhongliang.webp、site/static/images/plate-line-12-qiwu-zhuanji.webp、site/reader/themes/真假美猴王专题.html、site/reader/themes/蟠桃园-体制内的秘密.html、site/reader/themes/大闹天宫-英雄还是悲剧.html、site/reader/themes/水帘洞专题.html、site/reader/themes/混世四猴专题.html、site/reader/themes/兵器的自我修养专题.html、site/reader/themes/二十八星宿专题.html、site/reader/themes/四值功曹专题.html、site/reader/themes/五方揭谛专题.html、site/reader/themes/六丁六甲专题.html、site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html、site/reader/themes/器物传记学专题.html、scripts/_w953_make_prompts.py、scripts/_w953_make_insert.py、scripts/_w953_insert_plates.py、scripts/_w953_cascade.py、scripts/_w953_prep_raws.py、scripts/_w953_prep_raws2.py、scripts/_w953_prep_raws3.py、scripts/_w953_update_readme.py、scripts/_w945_prepare.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、scripts/_w951_site_sheet.py、scripts/output/_w953_batch1.json、scripts/output/_w953_batch2.json、scripts/output/_w953_batch3.json、scripts/output/_w953_batch4.json、scripts/output/_w953_batch5.json、scripts/output/_cascade_files_W953.txt、sassets/promo/plate-set/README.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-site-sheet.png、assets/promo/plate-set/index.md、CREADME.md、HANDOVER.md、dscripts/_w953_zoom.py、scripts/_w953_fix_cascade.py、scripts/_w953_backfill_stage.py、assets/promo/plate-set/zoom-w953/w953-recheck.png
 
 **缺口**：reader 622 页中仅 39 页有题图；**themes 库 209 页只有 9 页有题图**，essays / culture / poetry 三库 91 页仍零题图 ⇒ 本批专攻 themes 库空白专题。
 
@@ -563,1253 +1806,4 @@
 > - **状态**：已收官（`7481e4f2`·**并发纪律**：本批共享面按内容粒度**精确暂存**——以 `HEAD:<file>` 为基底叠加本批段、`git update-index --cacheinfo` 写入索引、工作树保持原样 ⇒ 对方在途内容既不入我的提交也不被我抹掉；提交后已 `git log --oneline -1 -- <本站点版文件>` 核实归属）
 > **状态**：**已收官**（W953 1e333d09·git 反填·共 3 笔·W971 存量回填）
 
-
-### W952（2026-10-25）：内页人物题图续批第二组（12 张·人物 + 主题混合·站内线描题图累计 28 张）
-
-> **来源**：用户 2026-10-25 令「再继续帮我做几张素材图」，并要求开工前先问三件事。
->
-> **三问答复**：① 用途与画幅 = **内页人物题图续批 · 3:4 竖版** ② 张数 = **12 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **人物 + 主题混合**）。
->
-> - **文件**：site/static/images/plate-line-01-bailongma.webp、site/static/images/plate-line-02-dujiao-shengwang.webp、site/static/images/plate-line-03-linggan.webp、site/static/images/plate-line-04-huangfengguai.webp、site/static/images/plate-line-05-saitaisui.webp、site/static/images/plate-line-06-jiuLingyuansheng.webp、site/static/images/plate-line-07-nezha.webp、site/static/images/plate-line-08-angrixingguan.webp、site/static/images/plate-line-09-jingu-topic.webp、site/static/images/plate-line-10-jindouyun-topic.webp、site/static/images/plate-line-11-fabao-topic.webp、site/static/images/plate-line-12-wuzi-jing-topic.webp、assets/promo/plate-set/README.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-site-sheet.png、site/reader/people/白龙马.html、site/reader/people/独角兕大王.html、site/reader/people/灵感大王.html、site/reader/people/黄风怪外传.html、site/reader/people/赛太岁.html、site/reader/people/九灵元圣-方向二深化.html、site/reader/people/哪吒.html、site/reader/people/昴日星官.html、site/reader/themes/紧箍咒专题.html、site/reader/themes/筋斗云专题.html、site/reader/themes/法宝系统专题.html、site/reader/themes/无字真经专题.html、scripts/_w952_make_prompts.py、scripts/_w952_insert_plates.py、scripts/_w952_cascade.py、scripts/_w952_fix_c6.py、scripts/_w952_fix_j10.py、scripts/_w952_make_edge_sample.py、scripts/_w952_update_readme.py、scripts/_w952_zoom.py、scripts/_w945_prepare.py、scripts/_w945_plates_verify.py、scripts/_w945_detail_sheet.py、scripts/output/_w952_batch1.json、scripts/output/_w952_batch2.json、scripts/output/_w952_batch3.json、scripts/output/_w952_batch4.json、scripts/output/_w952_batch5.json、scripts/output/_cascade_files_W952.txt、scripts/output/file-index.md、CHANGELOG.md、README.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md
-
-**缺口**：reader 共 622 页，本批之前仅 **27 页**有题图（缺口 595 页）；本批 12 张接入 12 个页面 ⇒ 累计 **39 页**有题图。
-
-**题材（人物 8 + 主题 4·每张一个独占标志物）**：白龙马（白衣龙君 + 三叉戟 + 龙影）、独角兕大王（青牛独角 + 方头钢叉）、灵感大王（鱼尾龙袍 + 玉钵）、黄风怪（黄鼠狼身 + 叶形芭蕉扇 + 风纹）、赛太岁（金毛犼 + 紫金铃）、九灵元圣（九头狮）、哪吒（乾坤圈 + 火尖枪 + 混天绫 + 风火轮）、昴日星官（公鸡形貌 + 长鞭）｜紧箍咒（金箍九倒刺 + 朱砂红绦）、筋斗云（祥云涡卷 + 悟空端坐）、法宝系统（五件法宝弧形列阵）、无字真经（空白经卷 + 淡赭金横纹）。
-
-**风格同族由构造保证**：母版的**风格段 211 字符**从上批母版程序化复用（`scripts/_w952_make_prompts.py` 读上批 JSON 取母版），**只替换构图句**——由「上部 28% 留白供叠字」改为「主体上方只留约一成呼吸空间·不设专用标题区」（因用户上批已裁决页面上裁掉留白，本批直接按无标题区构图）。脚本自带两条断言：批内 12 条母版逐字一致 + 风格段与上批母版逐字一致。
-
-**判据口径调整**：J2「顶部留白带」由 28% 放宽为 **10%**（上批留 28% / 本批留一成 ⇒ 取交集·顶部 10% 必为纯纸面），其余 J1/J3–J10 不变；站点版验算（主体顶未切 + 主体底未切 + 下部地面留白 > 0）同步覆盖本批。
-
-**接入**：沿用站内 `chapter-plate` 范式（420px 居中 + 描述性 alt + 浅底图暗色模式隐藏）。
-
-**并发纪律**：共享面按内容粒度**精确暂存**（`git update-index --cacheinfo`·HEAD 为基底叠加本批段）⇒ 不把对方在途内容带进本批提交。
-
-> - **验证**：母版判据 J1–J10 **28/28 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 28 张）· 站点版验算 **28/28 PASS**（`_w951_check_crop.py`：主体顶未切 + 主体底未切 + 下部地面留白 > 0）· 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 20858 链接 0 broken · J10 口径修正后自证仍可抓白边（合规 0.315 / 白边样本 8.609 > 阈值 5.0）
-> - **状态**：在途（认领登记 W952·待提交入库）
-> **状态**：**已收官**（W952 49f2f558·git 反填·共 4 笔·W971 存量回填）
-
-
-### W951（2026-10-25）：题图版式批（站点版裁掉上部留白·16 张题图页面呈现紧凑化）
-
-> **来源**：用户 2026-10-25 在问卷中裁决「裁掉·页面更紧凑」——承接 W945/W948 两批共 16 张线描人物题图。
->
-> - **文件**：site/static/images/plate-line-0[1-8]-*.webp（16 张站点版重出）、assets/promo/plate-set/preview-site-sheet.png（站点版拼图）、assets/promo/plate-set/README.md、scripts/_w945_prepare.py、scripts/_w951_check_crop.py、scripts/_w951_site_sheet.py、scripts/_w951_cascade.py、scripts/output/_cascade_files_W951.txt、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md
-
-**问题**：出图规格要求「画面上方 28% 纯纸面留白（供叠字）」，而内页版式里页面标题 `<h1>` 本就在图的**外面上方**
-⇒ 标题与画面主体之间多出约 **190 px** 冗余空白（浏览器实跑 1280 视口量得），第一眼像「图缺了一块」。
-
-**方案迭代（三次才收敛·每版均经浏览器实跑 + 机器验算后才否决）**：
-
-| 版本 | 做法 | 实测结果 | 处置 |
-|---|---|---|---|
-| v1 | 页面 CSS：`.chapter-plate{overflow:hidden}` + `img{margin-top:-37.33%}` | 浏览器实跑**人物下半身丢失**（画面被截断） | 弃（CSS 整体回退，页面零改动） |
-| v2 | 资产层统一裁 28%（源图 448 px） | 机器验算**会削到 6 张的主体顶端**（观音主体顶 419 ⇒ 削 29 px；太上老君 417 ⇒ 削 31 px） | 弃 |
-| v3 | 主体对齐画布顶部 + **一并裁掉下部** | 浏览器实跑**人物悬空**——母版下部 62–141 px 是画师留的「地面留白」，裁掉即破坏「人物站在地上」的构图关系 | 弃 |
-| **v4（落地）** | **只裁上部留白**：逐张裁切线 = 该张主体顶 − 6 px，**保留下部地面留白** | 主体顶落在画布 6 px（标题紧贴主体）· 人物完整 · 人物不悬空 · 人物大小不变（不缩放） | ✅ |
-
-**新增判据** `scripts/_w951_check_crop.py`：验站点版宽 = 1200、**主体顶未被切**（墨迹 bbox 顶 ≥ 1 px）、**主体底未被切**（bbox 底 < 画布高）、**下部地面留白 > 0**（人物不悬空）⇒ **16/16 PASS**（主体顶 6–7 px·地面留白 62–141 px·站点版高 1056–1189）。
-
-**资产分层**：`assets/promo/plate-set/` 仍是**完整母版**（1200×1600·含上部留白·供卡片叠字 / 分享图裁切用）；
-`site/static/images/` 是**页面版**（已裁上部留白）。两者不再相同——这是本批引入的结构变化，已在目录 README 登记。
-
-**页面零改动**：16 个 reader 页的 HTML/CSS **一行未改**（v1 的 CSS 方案已整体 `git checkout` 回退），版式调整全在资产层完成 ⇒ 无 HTML 副作用、无 CSP 漂移。
-
-**并发纪律**：本批共享面**按内容粒度精确暂存**（`git update-index --cacheinfo`·以 `HEAD:<file>` 为基底叠加本批段）⇒ 对方会话 W950 起宣布的新纪律我方先行践行，不整份 add ⇒ 不会把对方在途的共享面内容带进我的提交。
-
-> - **验证**：站点版验算 16/16 PASS（`_w951_check_crop.py`）· 母版判据 J1–J10 16/16 PASS（`_w945_plates_verify.py`）· 浏览器实跑 `people/太上老君` 页：标题紧贴题图、人物完整、脚下地面留白保留
-> - **状态**：已收官（`d5c3a5d5`·**并发纪律**：本批共享面按内容粒度**精确暂存**——以 `HEAD:<file>` 为基底叠加本批段、`git update-index --cacheinfo` 写入索引、工作树保持原样 ⇒ 对方在途内容既不入我的提交也不被我抹掉（先行践行对方会话 W950 起宣布的新纪律）；提交后已 `git log --oneline -1 -- <本站点版文件>` 核实归属落在本批·**未再被代提交**）
-> **状态**：**已收官**（W951 6bd75e22·git 反填·共 2 笔·W971 存量回填）
-
-
-### W950（2026-10-25）：图标集打磨优化批（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步 + 唯一事实源刷新器）
-
-> **来源**：用户 2026-10-25 令「先把已经做好的图标进行打磨优化」⇒ 本批只打磨既有 45 枚（29 通用 + 16 时间线专属），不扩展新图标。
-
-> - **文件**：site/static/icons/ui/（45 枚 SVG 资产重生成）、scripts/_w939_gen_icons.py、scripts/_w946_gen_timeline_icons.py（生成器接入归一参数）、scripts/_w950_normalize.py（新增·光学尺寸归一器）、scripts/_w950_refresh_icon_paths.py（新增·图形同步刷新器）、scripts/output/_w950_icon_normalize.json（新增·45 枚归一参数）、scripts/output/_w946_timeline_icons.js、scripts/output/_cascade_files_W950.txt、xiyouji-agent-web/src/components/UiIcons.tsx（由资产重建）、site/**（1967 处内联 SVG 图形同步 · 646 个文件）、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
-> **状态**：**已收官**（W950 7908c96c·git 反填·共 6 笔·W971 存量回填）
-
-**打磨前的问题（量化 + 目视双证）**：① 视觉边长 **12.8~20.4（极差 7.6 · 比值 1.59×）**——逐枚渲染量「墨色外接框」得出，目测只觉「有点不齐」；② **9 枚中心偏移**（如 `tl-pilgrim` 中心 x=14.5 明显偏右）；③ **11 枚辨识度弱**（link / menu / quote / child / pin / tl-pilgrim / tl-punctuation / tl-critical-edition / tl-newyear-print / tl-brush-comment / tl-mask）；④ **与既有重复** 2 处（`tl-scroll` ≡ 通用 `scroll`；`tl-pencil` ≈ 通用 `pen`）。
-
-**重画 13 枚**（逐条记明改什么）：link（水平对置交叠双环）· menu（三横等长）· quote（加大并底部对齐）· child（加童蒙姿态：身+手+足）· pin（梯形钉头+顶帽+钉身）· tl-brush-comment（笔 + 三枚**独立**评点）· tl-critical-edition（两册并排 + 侧栏校注条）· tl-mask（戏曲脸谱：额饰+对称眉眼+口）· tl-newyear-print（竖幅挂轴 + 画中人物 + 边框）· tl-pencil（笔 + 下方三道批注线）· tl-pilgrim（侧身行脚僧：背经卷+持杖+日轮）· tl-punctuation（逗号+句号+一对引号横排居中）· tl-scroll（竖轴 + 展开卷面，与短轴头版区分）。
-
-**光学尺寸归一**（系统化那一半）：生成器接入归一参数环节——渲染量测每枚墨色外接框 ⇒ 统一缩放到目标视觉边长（20；细长形符号按 18，避免三角/双竖被撑得过重）⇒ 平移到 24 网格中心 (12,12)；参数落 `scripts/output/_w950_icon_normalize.json`（生成器读取 ⇒ 仍是单一事实源）。**视觉边长极差 7.6 → 2.2 · 最大/最小比 1.59× → 1.12× · 中心偏移 9 枚 → 0 枚**；实开页面内 timeline 的 22 枚图标**尺寸全同 25.6px**。
-
-**图形同步刷新器**（资产改了必须能同步到页面）：站点的内联 SVG 把 path **写死在 HTML 里** ⇒ 改了资产文件页面不会变 ⇒ 新增 `scripts/_w950_refresh_icon_paths.py`：A 通用集内联 SVG 按 path 的 **(d, transform, fill) 复合键**反查图标名 → 替换为新资产 path（含归一 transform）⇒ **1967 处 / 646 个文件**（复合键是必需的：单靠 `d` 有三组歧义 scroll/tl-scroll、star/star-solid、thumb-up/thumb-down）；B timeline 的 `TL_ICO` 映射块整段替换；C agent-web 的 `UiIcons.tsx` **由资产重建**（手抄 path 必然漂移）。幂等。
-
-**当场修掉的一处真缺陷**：改了内联脚本（`TL_ICO` 块）后未重算 CSP 哈希 ⇒ 浏览器报 `Executing inline script violates Content Security Policy 'sha256-j4fJLNv…'` ⇒ **整个内联脚本被拒执行** ⇒ 时间线事件卡渲染中断（实测 `svgIco=0` / `eventCards=0`）⇒ 补跑 `generate_csp.py` 后恢复（22 事件卡 / 22 图标 / CSP 856 页 0 漂移）。这是仓内铁律第 3 条的第二次现场复现。
-
-**经验 3 条**：E-19 矢量资产改动必须配「图形同步刷新器」（复合键反查·单靠 d 会因同形异义歧义）· E-20 视觉尺寸归一是图标集打磨最系统的一步（机器量测比目测可靠）· E-21 改内联脚本必须立刻跑 `generate_csp.py` 并 `--check`（哈希失配让整个脚本被拒执行·表现为「数据不渲染」而非报错）。
-
-**未改**：任何管控脚本逻辑；正文装饰 emoji 与箭头符号；并行会话 W948 批在途件（对方已完成收官·当前无在途共享面内容）。
-
-
-### W949（2026-10-25）：图标治理换路径复核批（第二次追问「确定做完了吗」· 堵数据源回归漏洞 + 字段图标位判据入机检 + 登记剩余 71 条）
-
-> **来源**：用户 2026-10-25 第二次追问「你确定现在已经做完图标了吗」⇒ 本批**刻意避开前三轮已用过的三条路径**，改查没查过的地方。
-
-> - **文件**：dataset/timeline.json（数据源 22 个 icon 字段 emoji → 图标名）、scripts/_w949_fix_dataset.py、scripts/_w949_allowlist.py、scripts/check_icon_fields.py（字段图标位判据）、scripts/check_emoji_icons.py（第 50 门禁挂入 A2 段）、scripts/output/_w949_icon_field_allowlist.json、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
-> **状态**：**已收官**（W949 a59a7499·git 反填·共 4 笔·W971 存量回填）
-
-**换路径复核**：① 扫描范围从「4 个目录」扩到**全仓 17 个顶层目录 · 全部文件类型**（前三轮从未覆盖 `scripts/` `docs/` `archive/` `dataset/` `tests/` `.github/`）；② 新增**字段图标位**判据（`avatar:` / `icon:` / `flag:` / `STAGE_EMOJI`）；③ 数据源与页面内嵌副本**逐位对拍**。
-
-**抓出的真遗漏**：① **`dataset/timeline.json` 仍含 22 个 emoji icon 字段** ⇒ ⚠️ **回归漏洞**：任何一次跑生成器都会把 emoji 灌回页面，治理结果不可复现（假收敛）；② `dataset/ai-dialogue.json` 6 处 `avatar`；③ `dataset/cross-time-danmaku.json` 4 处 `flag` + `site/en/json/rescue_roi.json` 4 处 `icon`；④ `ai-dialogue`（中英）12 处 `avatar:` 名人头像位；⑤ `narrative-experiment`（中英）18 处 `avatar:`/`icon:`；⑥ `methodology-matrix`（中英）9 处 `icon:`；⑦ `chart-design`（中英）10 处 `STAGE_EMOJI`；⑧ `cross-time-danmaku`（中英）8 处 `flag:` 国籍标识。
-
-**本批已做**：① **堵回归漏洞**——修 `dataset/timeline.json` 的 22 个 icon 字段，并与中英页面内嵌副本逐位对拍（22==22 且逐位相同）⇒ 该数据源剩余具象字符 **0**；② **把漏网变成机检可抓**——新增 `scripts/check_icon_fields.py` 与白名单 `scripts/output/_w949_icon_field_allowlist.json`（**由扫描器实测产出 + 程序附理由**，非手写字符：手写会与扫描器口径漂移，ZWJ 序列被拆 / VS16 丢失 / 国旗逐字排序三类漂移都真实发生过）⇒ 白名单外的新命中判红、白名单条目已消失判红（防腐化）、白名单清空即自然转绿（不设恒红豁免）⇒ 第 50 门禁新增 **A2 段**，现状命中 **71 条 / 13 个文件**、白名单外 0、待核销 0。
-
-**剩余 71 条已登记逐类治理方案**（下一批施工）：名人头像 26（需每人专属头像）· 剧本角色头像 8 · 指标卡图标 9 · 情景卡图标 9 · 螺旋阶段符号 10 · 国籍标识 12（⚠️ 国旗是复杂旗帜图案，线描图标集无法表达 ⇒ **待用户裁决**：改文字国名 / 两字母代码，还是自绘国旗图形）。
-
-**经验补充 3 条**：E-16 治理必须同时改「页面」与「数据源」（只改内嵌副本 ⇒ 不可复现 ⇒ 须逐位对拍）· E-17 机检白名单必须由扫描器产出、不可手写（规范化口径漂移）· E-18 「扫过某目录」与「覆盖该目录」是两件事（复核面要按**产物形态**枚举）。
-
-
-### W948（2026-10-25）：内页专题题图续批（8 张线描人物题图·与上批同族·累计 16 张）
-
-> **来源**：用户 2026-10-25 令「再继续帮我做几张素材图」，并要求开工前先问三件事。
->
-> **三问答复**：① 用途与画幅 = **内页专题题图续批 · 3:4 竖版** ② 张数 = **8 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **人物专题扩批**）。
->
-> - **文件**：site/static/images/plate-line-01-jinjiao.webp … plate-line-08-taishanglaojun.webp、assets/promo/plate-set/**、8 个 reader 人物页、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w948_*.py、scripts/output/_w948_batch*.json
-
-**承接 W945**：站内线描人物题图由 8 张扩到 **16 张**，规格与画幅完全一致（3:4 · 1200×1600 · 宣纸底 + 单色墨线 + 赭金细节 + 单处朱砂点睛 · 上部 28% 纯纸面留白 · 主体完整全身立像占高五成）。
-
-**母版逐字复用由构造保证**：`scripts/_w948_make_prompts.py` 读上批 `_w945_batch1.json`，取「主体：」之前的 252 字符风格母版直接拼本批 SUBJECT 段 ⇒ 母版不靠人手抄、不靠人眼核对；再由 `_w945_check_prompts.py` 的 `==` 断言二次确认。
-
-**题材**（取经路上的妖怪与神将组，每张一个独占标志物）：牛魔王（牛首 + 混铁棍）、铁扇公主（叶形芭蕉扇 + 短柄缠绳）、蝎子精（上翘蝎尾毒钩 + 倒马毒桩）、金角大王（紫金红葫芦 + 朱红封带）、黄袍怪（狼首 + 金钢琢）、镇元大仙（人形人参果 + 拂尘）、大鹏金翅雕（鹏翼 + 阴阳二气瓶）、太上老君（太极图 + 拂尘）。
-
-**判据扩面**：`_w945_plates_verify.py` 由写死的 8 张清单改为**扫目录取全部 `plate-line-*.png`** ⇒ 一套判据（J1–J9 + 负样本自检）一次覆盖 16 张。
-
-> - **验证**：机器判据 J1–J10 **16/16 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 16 张）+ 两个负样本自检判据可证伪（浓墨渲染型方图 ⇒ 抓 J1/J2/J3/J6；8 px 黑框样本 ⇒ 抓 J8 检出 16 处贯穿暗线）· **J10 在本批首轮实测有效**：精准抓出 2 张模型画出的「左右白边」图（背景差 12.96 / 12.09），其余 14 张 0.04–1.59 无误报 · 人眼 J8 题材与形制逐张核（拼图 + 主体包围盒放大 + 关键部位 3 倍高倍）· 顶部 28% 留白墨量 0.0000–0.0015 · 纸色归一残差 0.17–0.57/255 · 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 20846 链接 0 broken
-> - **状态**：已收官（`88fa5952`·**并发事实**：本批共享面被两个他方提交代提交——CHANGELOG 的 W948 段被 W949 批 `276eaa4b` 带入、台账的 W948 行被 agent-web 批 `29a182ff` 带入；本批不修改他方提交历史，只在本方行与本方段内登记该事实；台账 W948 行已按回填独占规则回填 hash + 状态 + touches）
-> **状态**：**已收官**（W948 62365964·git 反填·共 4 笔·W971 存量回填）
-
-
-### W947（2026-10-25）：图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）
-
-> **来源**：用户 2026-10-25 追问「你确定现在已经做完图标了吗」⇒ 全量复验（本批起因）。
-> 承接 W941（UI 图标位 emoji 归零 + 通用图标集 27 枚）与 W946（描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁）。
-
-> - **文件**：scripts/_w947_add_icons.py（通用图标集补 2 枚）、scripts/_w939_gen_icons.py（并入 note / link）、site/static/icons/ui/note.svg、site/static/icons/ui/link.svg、site/static/js/rag-chat.js（🔗 前缀 → 内联 SVG）、xiyouji-agent-web/src/components/UiIcons.tsx（新建·内联 SVG 图标组件）、xiyouji-agent-web/src/components/PermissionDialog.tsx（⚠️ 📝 → 组件）、xiyouji-agent-web/src/components/InlinePermissionCard.tsx（⚠️ → 组件）、scripts/check_emoji_icons.py（标题改号）、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
-> **状态**：**已收官**（W947 02ef09ee·git 反填·共 4 笔·W971 存量回填）
-
-**三路全量复验**：① 静态口径（基准扫描器·UI 图标位）**0 命中**；② 全仓兜底 grep 剩余 **559 处 / 58 种**，逐类判定为**内容语义**（✅156 正文结论标记 / ✓200 判定文本 / 人物头像 20 / 勋章奖牌 / ⚡12 / 国旗 / 图表符号）⇒ 按用户裁决保留；③ 渲染实测（8 页 × `file://` + `http://` 双环境 + **像素级取证**）。
-
-**补治两处此前遗漏的范围**：**agent-web React 组件**（PermissionDialog 的 ⚠️📝、InlinePermissionCard 的 ⚠️）与**共享 JS**（rag-chat.js 的 🔗）共 **4 处界面图标位**。该应用已有成熟 TDesign 图标体系，但 `@tdesign-icons-react` **依赖未安装** ⇒ 无法验证未用过的图标名 ⇒ 改为新建 `UiIcons.tsx`（内联 SVG·图形与静态站资产逐字同源·零新增依赖·颜色跟随 `currentColor`）；通用图标集补 **2 枚**（`note` 折角纸页 / `link` 双环链条）⇒ 27 → **29 枚**。
-
-**保留并登记**：useChat.ts 与 rag-chat.js 错误消息文本内的 ⚠️ 共 **7 处**——它们随消息流输出、可复制、会被读屏朗读 ⇒ 属**语义标记**而非界面图标位 ⇒ 按「仅 UI 图标位」裁决保留。
-
-**更正上批一处误判（像素级取证推翻）**：上批据控制台 CORS 报错推断「CSS `content` 位的 22 处图标在 `file://` 下不显示、线上正常」，本批像素取证（mask 宿主左上角 30×26 区域深色像素计数，file:// 与 http:// 同位比较：`data/concept-device.html` 17 vs 20、`data/game-webnovel.html` 18 vs 22）证明**两环境均真实绘制** ⇒ 该结论作废，「22 处改内联 SVG」从缺陷修复项**降级为可选优化**。教训：**报错文本 ≠ 渲染结果**，渲染正确性判据必须做像素级取证。
-
-**经验补充 3 条**：E-13「报错文本不等于渲染结果」· E-14「扫过某个目录不等于覆盖那个目录」（治理范围须按**产物类型**枚举：静态页 / 共享 JS / React 组件）· E-15「用户追问『做完了吗』是最有效的自查触发器」。
-
-**共享面纪律（采纳并行 W945 会话书面建议）**：本批提交用**显式 pathspec 只列自己批的文件**，不再用宽 pathspec——同仓有在途批次时宽 pathspec 会把他人在途件一并提交（W946 的 `ed09a65e` / `923afc4c` 即因此代提交了 W945 的题图资产与脚本，已由该会话收官并留痕）。
-
-
-### W946（2026-10-25）：图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）
-
-> **来源**：用户 2026-10-25 令「禁止使用 emoji 表情当做图标，你审查一下。你要么进行设计一下图标」，经问卷两问裁决（范围=仅 UI 图标位 / 风格=东方线描）后分两批执行：W941（主体：1,910 处图标位归零 + 通用图标集 27 枚）→ **W946（本批：补齐 W941 的三处缺口）**。
-
-> - **文件**：site/system.css（`.ico` 基类补 fill/stroke/linecap/linejoin 描边参数）、site/static/icons/ui/tl-*.svg（16 枚时间线专属图标）、site/data/timeline.html、site/en/timeline.html（22 条事件数据字段 + 渲染改内联 SVG + TL_ICO 映射内联 + CSP 重算）、scripts/_w946_gen_timeline_icons.py、scripts/_w946_apply_timeline_icons.py、scripts/check_emoji_icons.py（第 50 门禁）、scripts/_w939_emoji_to_svg.py（svg_tag 模板补 SVG 属性）、scripts/output/_w946_timeline_icons.js、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、scripts/output/file-index.md。
-> **状态**：**已收官**（W946 88eacc8a·git 反填·共 3 笔·W971 存量回填）
-
-**缺口 ①（严重·视觉）：内联 SVG 丢了描边参数 ⇒ 图标渲染成黑块**。W941 批的静态判据全绿（图标位 0 残留、尺寸正确），但 **Playwright 实开 file:// 才发现**：内联 `<svg>` 片段只带了 class/width/height/viewBox，**漏了 `fill="none" stroke="currentColor"`** ⇒ 图形落回 SVG 默认样式（黑填充、无描边）⇒ 1,957 处图标全是黑块。**修法**：把描边参数写进 `.ico` 基类 CSS（CSS 优先级高于 presentation attribute，且 `.ico` 类选择器特异性高于站内 `svg` 元素规则）⇒ **零 HTML 改动、全站立即生效**；同时给替换器 `svg_tag()` 模板补上 SVG 属性（未来重跑产出更稳的 HTML）。实测复核：浅色模式 stroke=墨色 `rgb(35,32,26)`、暗色模式 stroke 自动变朱砂 `rgb(224,96,79)`（主题自适应确认）、尺寸 13–16px 跟随字号（非 300×150 巨图）。
-
-**缺口 ②：时间线的 15 种 emoji 承载 22 事件、且「📖」一符两义**（佛经西行 vs 连环画普及）⇒ **通用图标集表达不了「成书/游记/评点/戏曲/影剧/数字化」的语义差** ⇒ 另设计 **16 枚语义专属图标**（`tl-*` 前缀）：行脚僧（玄奘西行）、立轴（大唐西域记）、灵光（取经诗话）、脸谱（戏曲与影视）、百回刻本、太极（丹道评点）、整理校注本、评点笺注、新式标点、校注笔、数字库、连环画格、清代年画、胶片、显像管、手柄。**按事件语义而非按字符拆分** ⇒ 数据字段由 emoji 改为图标名（`icon: 'tl-pilgrim'`），渲染改 `.html(d => TL_ICO[d.icon] || '')`，映射表内联进页面（保持自包含）。两页 emoji 序列一致性作断言（22 == 22 且逐位相同）。目视复核重画 2 枚（`tl-pilgrim` 语义太弱 → 加持杖与日轮；`tl-punctuation` 读不出标点 → 改逗号+句号+引号三件套）。
-
-**缺口 ③：没有防回归的机检** ⇒ 新增 **第 50 门禁 `scripts/check_emoji_icons.py`**，两段判据：
-- **A 静态**：全仓 UI 图标位零 emoji 残留（判据与基准扫描器同源：控件首位 / 图标槽 class / 标题前缀 / CSS content）；
-- **B 实测**：浏览器实开 4 个代表页 × **2 套环境**（`file://` 与 `http://127.0.0.1`）——校验内联 SVG 的 computed `stroke≠none` 且 `fill=none`、尺寸跟随字号（非巨图）、CSS content 位的同源 mask 已加载、自建图标资产零加载失败。
-- **B 段的存在理由**：W941 批的静态判据全绿却漏掉「黑块」⇒ **静态判据无法覆盖「渲染正确」**，必须有浏览器实跑。
-
-**门禁在双环境下的判据设计（如实登记）**：`http://`（= 线上同源·真实用户环境）全部判据严格——CSS `content` 位的同源 mask 在此环境**全部加载成功**（实测 7/7）；`file://`（本地双击）下同源 mask 被 CORS 拦 ⇒ 该 22 处图标在本地不显示、线上正常 ⇒ 门禁在 file:// 下记 NOTE 不判红（与该环境既有的字体子集 CORS、fetch 不支持 file scheme 同级），在 http 下判红。**待修项已登记**：把这 22 处改为真实内联 SVG 元素（11 个选择器 × 中英两版）可彻底消除该降级，属独立批。
-
-**顺带修掉两个自查发现的真 bug**：① `TL_ICO` 映射曾被插到使用点之后（`TL_ICO is not defined`）⇒ 改为插入使用点所在 script 块开头；② 映射表的对象键含连字符（`tl-critical-edition`）未加引号 ⇒ JS 语法错误（`Unexpected token '-'`）⇒ 键一律加引号；③ 渲染从 `.text(d => d.icon)` 改写时**漏掉 D3 回调箭头**（`.html(TL_ICO[d.icon])`）⇒ `d is not defined` ⇒ 改回 `.html(d => TL_ICO[d.icon] || '')`。
-
-**验收**：第 50 门禁 **PASS**（静态 0 处残留 + 双环境实测 0 判红项）· timeline 22 事件 22 个内联 SVG 渲染正确（file:// 实测 `svgIco=22`、无 pageerror）· 内联 SVG 描边浅色=墨色/暗色=朱砂 · CSP 856 页 0 漂移。
-
-**未改**：正文装饰 emoji 与箭头符号（按裁决保留）；W941 已入库的 1,957 处 HTML 结构（仅修 CSS 与模板）；并行批次在途件（hero 素材批 / W945 题图批等）一律未纳入本提交。
-
-
-### W945（2026-10-25）：内页专题题图成套（8 张 3:4 线描人物题图·622 页仅 11 页有题图的缺口）
-
-> **来源**：用户 2026-10-25 令「在继续帮我做几张素材图：用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」，并要求开工前先问三件事。
->
-> **三问答复**：① 用途与画幅 = **内页专题题图 · 3:4 竖版** ② 张数 = **8 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **人物专题**）。
->
-> - **文件**：site/static/images/plate-line-01~08-*.webp、assets/promo/plate-set/**、8 个 reader 专题页、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w945_cascade.py、scripts/_w945_plates_verify.py、scripts/_w945_insert_plates.py
-
-**缺口**：站内 `site/reader/` 共 **622 页**，其中**仅 11 页**有题图（6 个回目页 + 5 个专题页）——people / themes / essays / poetry / culture 五库绝大部分页面无题图。
-
-**产出**：8 张**线描墨稿风人物题图**，3:4 竖版（`1200×1600`），沿用站内线描语言（宣纸底 `#FAF7F0` + 单色墨线 + 赭金 `#8A6D3B` 细节 + 单处朱砂 `#C8463A` 点睛），**上部 28% 保持纯纸面留白**供标题叠字，主体居中偏下：
-
-| # | 主体 | 独占标志物（形制级） | 接入页 |
-|---|---|---|---|
-| 01 | 大圣悟空 | 如意金箍棒（两端金箍 + 云纹）+ 凤翅紫金冠 | themes/猴王到行者-五次蜕变 |
-| 02 | 唐僧 | 五佛冠 + 念珠 + 九环锡杖 | themes/唐僧-凡躯圣心 |
-| 03 | 猪八戒 | 九齿钉耙 + 蒲扇耳 | people/猪八戒 |
-| 04 | 沙僧 | 降妖宝杖（月牙刃）+ 骷髅念珠 | themes/沙僧-沉默者的智慧 |
-| 05 | 观音菩萨 | 玉净瓶插杨柳枝 + 莲花座 | people/观音 |
-| 06 | 二郎神 | 三尖两刃刀 + 额间竖目 | people/二郎神 |
-| 07 | 白骨精 | 三变残影（村姑 / 老妇 / 老翁） | people/白骨精 |
-| 08 | 红孩儿 | 火尖枪 + 三昧真火 | people/红孩儿 |
-
-**接入范式**：沿用站内 `chapter-plate`（`max-width: 420px` 居中 + 描述性 alt + 浅底图暗色模式隐藏）。
-
-**判据**：J1–J7 机器关（尺寸 / 顶部留白 / 墨量 / 朱砂点 / 实心块 / 伪文字 / 裁切）+ **J8 人工关**（独占标志物 + 形制级细节）——题材与形制机器判据查不出，只能人眼核。
-
-> - **验证**：机器判据 J1–J9 **8/8 PASS**（`scripts/_w945_plates_verify.py`）+ 两个负样本自检判据可证伪（浓墨渲染型方图 ⇒ 抓 J1/J2/J3/J6；8 px 黑框样本 ⇒ 抓 J8 检出 16 处贯穿暗线）· 人眼 J8 题材与形制逐张核（拼图 + 主体包围盒放大 + 关键部位 3 倍高倍）· 顶部 28% 留白墨量 0.0000–0.0015 · 纸色归一残差 0.20–1.00/255 · 第 31 与第 45 门禁 0 FAIL · CSP 856 页 0 漂移 · lint_links 20838 链接 0 broken
-> - **状态**：已收官（`83f31387`·**并发事实**：本批资产、8 页接入与共享面段被并行 W946 批代提交 `ed09a65e` / `923afc4c`——其提交信息称「未改并行会话 W945 批在途件」，与其实际 pathspec 范围不符；台账 W945 行已按回填独占规则回填 hash + 状态 + touches）
-> **状态**：**已收官**（W945 7f05e47f·git 反填·共 3 笔·W971 存量回填）
-
-
-### W944（2026-10-25）：章回插画新组（6 张按回目情节重出·打破「挑担人赶路」同构）
-
-> **来源**：用户 2026-10-25 认可 W943 记录的弱项「章回 6 张「挑担人赶路」重复度极高，若要丰富可另出一组」并答「可以」。
-
-> - **文件**：site/static/images/chap-07.webp、site/static/images/chap-14.webp、site/static/images/chap-15.webp、site/static/images/chap-23.webp、site/static/images/chap-27.webp、site/static/images/chap-30.webp、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w944_cascade.py
-
-**问题**：站内 6 张章回插画（chap-07 / 14 / 15 / 23 / 27 / 30）原为**同一构图**（挑担僧人赶路）仅换山水，与所在回目无对应关系。
-
-**改法**：按各自回目情节另出一组 6 张（水墨浓墨剪影风：宣纸底 + 浓墨剪影 + 淡赭金远山 + 单个朱砂方印，正方 1200×1200）——第 007 回 八卦炉（三足丹炉 + 火焰）、第 014 回 心猿归正（猴形剪影 + 金箍 + 勒绳）、第 015 回 鹰愁涧（惊马扬蹄 + 缰绳 + 瀑布崖）、第 023 回 四圣试禅心（打坐僧 + 孤灯 + 雾中两道人影）、第 027 回 尸魔三戏（三道人影渐次消散 + 月 + 茅屋）、第 030 回 邪魔侵正法（蛇形妖影 + 洞口 + 螺旋墨风）——**每张现与回目情节对应**。
-
-**一处模型伪影已修**：第 023 回新图自带一圈黑边框（模型给禅心图套了相框）⇒ 按四边近黑像素带自动检测裁除（每边 66 px）后重存。
-
-> - **验证**：6 张逐张放大目视（构图与回目情节对应 + 无黑框 + 无伪文字）+ 旧版 6 张备份于 %TEMP%/bak_chap-*.webp 可回退 · 第 31 与第 45 门禁 0 FAIL
-> - **状态**：在途（认领登记 W944·待提交入库）
-> **状态**：**已收官**（W944 6d042d08·git 反填·共 1 笔·W971 存量回填）
-
-
-### W943（2026-10-25）：全站图片审查（227 张逐类目视 · 修 3 处真缺陷）
-
-> **来源**：用户 2026-10-25 令「不要只审查这几个图片，审查全部」——W940 修题材、W942 修形制之后的第三次加严。
-
-> - **文件**：site/static/images/og-15-shijian-liejian.webp、assets/design/ai-concepts/concept-03-scroll.png、assets/design/ai-concepts/concept-06-bodhi-leaf.png、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w943_cascade.py
-
-**审查范围**：全仓 **227 张**（>400×200 的位图）逐类拼图目视——卡片图 27 / 章回插画 6 / hero 24（15 渲染 + 9 线描）/ 分享图 15 / 设计概念稿 18 / 杂项 12（封面 / 单页正反面 / 站点截图 / 主视觉 / 淡墨远山），另含本批线描 9 张与内页浓墨题图 5 张。
-
-**查出 3 处真缺陷并已重出修复**：① **`site/static/images/og-15-shijian-liejian.webp`（线上分享图）**——抽象墨块序列中夹 3 处「LI」字母残留（模型伪文字）⇒ 重出去字母版；② **`assets/design/ai-concepts/concept-03-scroll.png`**——卷面有潦草伪汉字（写「孙悟空 / 取经路线」样字）⇒ 重出为空白纸面 + 抽象笔触；③ **`assets/design/ai-concepts/concept-06-bodhi-leaf.png`**——文件名「菩提叶」但画成水滴 / 火苗形（形制不符）⇒ 重出为心形叶 + 中脉分叉叶脉 + 叶柄 + 露珠。
-
-**其余全部题材对题**：卡片 27 张（场景人物）、章回 6 张（取经路途）、hero 24 张（法器场景）、og 15 张（器物特写）、概念稿 18 张（法器线描）、杂项 12 张（版面产物）。
-
-**一条方法论结论**：机器阈值对渲染型素材**无效**——按线描图设的「纸色偏离 / 墨量」阈值在水墨渲染图上必然误报（实测 30+ 张假阳）⇒ **题材关与形制关只能人眼核**，已并入 J8（机器判据只管「画得好不好」，管不了「画的是什么 / 形制对不对」）。
-
-**两处弱项（不构成错图·记录备查）**：`concept-05-headband-ring` 是纯黑墨圈（紧箍意象弱；线上正确版本为 W942 的金圈 + 九倒刺）、章回 6 张「挑担人赶路」高度同质。
-
-> - **验证**：3 张重出件逐张放大目视（字母消失 / 伪文字消失 / 叶形正确）· 227 张全量拼图目视两轮（题材级 + 可疑项放大级）· 第 31 与第 45 门禁 0 FAIL
-> - **状态**：在途（认领登记 W943·待提交入库）
-> **状态**：**已收官**（W943 42f4560d·git 反填·共 1 笔·W971 存量回填）
-
-
-### W942（2026-10-25）：Hero 素材全量复审（14 张逐张放大目视 · 修正 2 处形制偏差）
-
-> **来源**：用户 2026-10-25 令「你再审查一遍有没有出现同样错误的」——W940 修正题材后仍要求全量复查。
-
-> - **文件**：assets/promo/hero-set/hero-line-04-tight-crown.png、assets/promo/hero-set/hero-line-04-tight-crown.webp、assets/promo/hero-set/hero-line-07-banana-fan.png、assets/promo/hero-set/hero-line-07-banana-fan.webp、assets/promo/hero-set/raw/hero-04c-tight-crown.jpg、assets/promo/hero-set/raw/hero-07c-banana-fan.jpg、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、site/static/images/hero-line-04-tight-crown.webp、site/static/images/hero-line-07-banana-fan.webp、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w942_cascade.py
-
-**复审方式**：9 张线描横幅 + 5 张浓墨题图共 **14 张逐张放大目视**——机器判据只管「画得好不好」（尺寸 / 留白 / 墨量 / 朱砂点 / 实心块 / 伪文字 / 裁切），**题材与形制必须人眼核**。
-
-**发现并修正 2 处形制偏差**：① **04 紧箍儿**原为「光滑金圈 + 云纹扣」，而原著紧箍儿是**带九个倒刺钩**的金圈——缺此关键特征会被读成玉镯 / 头环 ⇒ 重出补足九倒刺；② **07 芭蕉扇**原为**正圆团扇 + 直柄**，而铁扇公主的芭蕉扇是**叶形（长卵形）扇**（形制偏差）⇒ 重出为叶形扇 + 中脉细脉 + 短柄缠绳。
-
-**复审合格 12 张**：01 金箍棒（两端金箍带云纹）/ 02 行程图卷轴 / 03 经卷与篆香 / 05 莲花 / 06 九环锡杖（环环相扣 + 顶部宝珠）/ 08 玉净瓶（净瓶插杨柳）/ 09 筋斗云，以及内页 5 张浓墨题图（判官队列 / 紧箍与金刚杵 / 五行山两界山·铁链 / 东海龙宫水殿 / 六道轮回轮）。
-
-**判据扩容**：J8 题材关在自检表里细化到**形制级**——不只问「是什么」，还要问「形制对不对」（倒刺钩数 / 扇形 / 环数 / 瓶插什么枝）。
-
-> - **验证**：素材判据 9/9 PASS（左留白 0.0000·整图墨量 0.0329–0.0809）· 重出件纸色归一残差 ≤1/255 · 成套拼图逐张目视 · 第 31 与第 45 门禁 0 FAIL
-> - **状态**：在途（认领登记 W942·待提交入库）
-> **状态**：**已收官**（W942 13ad66a4·git 反填·共 1 笔·W971 存量回填）
-
-
-### W941（2026-10-25）：UI 图标位 emoji 治理批（禁 emoji 充当图标 + 东方线描图标集自绘 27 枚 + UI 图标位 1,957 处归零）
-
-> **来源**：用户 2026-10-25 令「禁止使用 emoji 表情当做图标，你审查一下。你要么进行设计一下图标」，经问卷两问裁决——① 治理范围 = **仅 UI 图标位**（正文装饰 emoji 与箭头符号保留）② 图标风格 = **东方线描**（24×24 / 1.5px 描边 / currentColor 随主题）。
-
-> - **文件**：site/static/icons/ui/（27 枚 SVG 图标资产 + 目录文档 2 件）、site/system.css（新增 `.ico` / `.ico-t` 基类）、site/reader/**（615 个阅读页：收藏 ★ → 星标图标、反馈 👍👎 → 拇指图标）、site/data/** 与 site/en/**（30 余个页面的判定符号 / 检索图标 / 年龄段页签 / 播放暂停按钮 / 侦探卡结论标签 / 批驳史段首标记）、site/js/reader-enhance.js（收藏按钮运行时态切换）、site/static/js/rag-chat.js（检索来源与相关语料标签前缀）、site/static/js/text-search-app.js（空态图标）、scripts/_w939_gen_icons.py、scripts/_w939_scan_targets.py、scripts/_w939_emoji_to_svg.py、scripts/output/_w939_targets.json、scripts/output/_w939_replacements.json、docs/11-方案报告/计划方案/执行前计划-T26-UI图标emoji治理批.md、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、scripts/output/file-index.md、scripts/output/stats-index.md。
-> **状态**：**已收官**（W941 6e47596b·git 反填·共 3 笔·W971 存量回填）
-
-**问题量化（先审查·后施工）**：全仓 emoji 共 34,530 处 / 2,189 文件，绝大部分在 Markdown 正文（题材内容）。真正承担「图标职能」的是 **1,910 处 UI 图标位**，分布 **629 个页面**，只用 **21 种字符**（👍👎☆🔍📚📜📖📻📌👶🎒🎓🌱🜂✒📊🌐⏸☰✕✓✗★ 等）——这类用法的代价是**跨平台字形不一致**（Windows/macOS/Linux/移动端渲染各异）、**暗色模式不可控**（emoji 自带彩色，无法跟随主题）、**无语义**（屏幕阅读器读「thumbs up」而非「赞同」）。
-
-**自绘图标集（27 枚·东方线描）**：`site/static/icons/ui/*.svg` 为单一事实源，规格 **24×24 viewBox / stroke 1.5 / round cap+join / fill:none / stroke:currentColor**——与既有 `.icon-moon` / `.icon-sun` **同参数同族**，不是另起一套风格。图形含星标与实心星、竖/倒拇指、对勾与叉、放大镜与检视镜、线装书与展卷、卷轴、广播匣、图钉、警示、引语、童蒙/书囊/士冠、幼苗、炼金方符、墨笔、柱状图、地球、菜单、关闭、播放与暂停。生成器 `scripts/_w939_gen_icons.py` 落盘，**目视复核出图**（`tmpe/_w939_icons_preview.png`）并据此重画 6 枚（`close` 与 `cross` 视觉重复→`close` 改方框内叉；`pin` 补圆头斜肩；`schoolbag` 扣袋方块改横带；`scroll` 轴身加宽；`thumb-down` 改垂直镜像；`thumb-up` 换镜像同构）。
-
-**承载机制的三重约束（实测得出·非偏好）**：① 站点 CSP 是 `img-src 'self'`（**无 `data:`**）⇒ data-URI + mask 方案会被 CSP 拦掉；② 520 个阅读页走**外链 CSS**、328 个走内联块 ⇒ 写在 `site/system.css` 的相对路径 `url(static/…)` 随目录深度失效（`site/reader/culture/` 深度 2）；③ `file://` 直开是铁律 ⇒ 外部 `<use>` sprite 受限。⇒ **唯一同时满足 file:// + CSP + 多层目录的矢量承载方式 = 内联 SVG**；例外只有 CSS `content` 位（放不了 SVG 元素），该 22 处宿主页全部位于深度 1（`site/data/` 与 `site/en/`）⇒ 用同源 `mask-image` + `../static/icons/ui/` 相对路径成立。每枚内联 SVG 另带 `width="1em" height="1em"` 兜底属性——CSS 未加载时不会退化成 300×150 巨图。
-
-**两个可复跑机检脚本（判据可证伪）**：① `scripts/_w939_scan_targets.py`——把全仓 emoji 分为「UI 图标位」（控件首位 / 图标槽 class / 标题前缀 / CSS content）与「正文装饰」两类，输出逐条明细；② `scripts/_w939_emoji_to_svg.py`——每条替换规则带**独立预期命中数**（取自 ① 的基准清单，非实测反推），实际不符即**退出码 2** 拒绝写盘。规则命中一致率 **37/37 = 100%**。
-
-**治理结果**：UI 图标位 **1,910 → 0**（基准扫描器复扫，M-01）；另补治 47 处后续发现（兜底 grep 揪出扫描器漏检：JS 按钮文本 ▶⏸ 共 30 处、静态播放按钮 6 处、检索来源/语料标签前缀 2 处、段首提示标记 2 处、侦探卡结论标签前缀 2 处），累计替换 **1,957 处**；CSS 级联 **328 内联页**重同步（520 外链页自动生效）；CSP **14 页**重算、856 页 **0 漂移**。
-
-**正文零损伤（HEAD↔工作树字符净差核验）**：逐文件对比 git HEAD 与工作树，净减少仅限图标位应有的 25 种字符（☆👍👎 各 608 + 零散 46 处），**正文型字符（✅78 / ✓200 / 🧑20 / 🎭8 / ★8 / ☆4）净差为 0**；箭头 `→`/`←` 因承担正文流程语义（5,000+ 处）按用户裁决**原样保留**。
-
-**保留项登记（如实披露·非遗漏）**：① 星级评分 `★`/`☆` 12 处（难度与强度评分，**评分可视化**而非图标）；② `site/data/timeline.html` 与英文版的**数据字段** `icon:` 共 12 处（📖📚📜✒ 等，每条时间线事件的专属象征——通用图标集无法表达「成书/游记/评点」语义差，属**专属设计任务**）；③ `site/data/ai-dialogue.html` 人物**头像** emoji 4 处（🧑‍🎓，身份标识，通用图标会丢身份信息）；④ `site/data/methodology-matrix.html` 评分项 `icon:` 1 处；⑤ `site/data/business-model.html` 区间标注 `◀…▶` 2 处（内容表达）。
-
-**未改**：任何管控脚本（`verify_delivery.py` / `bump_version.py` / `batch_cascade.py` / `preflight_check.py`）；既有 `.icon-moon` / `.icon-sun` 体系；正文装饰 emoji 与箭头符号；并行批次 W936 在途的共享面（提交用显式 pathspec 隔离）。
-
-
-### W940（2026-10-25）：Hero 素材题材辨识度修正（09 换筋斗云 · 04 换紧箍儿 · 补题材关判据）
-
-> **来源**：用户 2026-10-25 质疑「你确定这个图片符合主题吗？符合西游记吗？」——指向第 9 张「取经四众」。
-
-> - **文件**：assets/promo/hero-set/hero-line-04-tight-crown.png、assets/promo/hero-set/hero-line-04-tight-crown.webp、assets/promo/hero-set/hero-line-09-somersault-cloud.png、assets/promo/hero-set/hero-line-09-somersault-cloud.webp、assets/promo/hero-set/raw/hero-04b-tight-crown.jpg、assets/promo/hero-set/raw/hero-05b-somersault-cloud.png、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、site/static/images/hero-line-04-tight-crown.webp、site/static/images/hero-line-09-somersault-cloud.webp、site/index.html、scripts/_w931_hero_verify.py、scripts/_w938_apply_home.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w940_cascade.py
-
-**问题定性**：第 9 张「取经四众」被画成「农夫挑担」——金箍棒 / 九齿钉耙 / 月牙铲 / 僧帽**一个都没有**，且四人组侵入文字安全区（左留白 0.0174、整图墨量 0.1250 超判据上限）⇒ 题材与版面双不合格。根因在**判据缺口**：原判据只查尺寸 / 留白 / 墨量 / 伪文字 / 裁切五项，**没有「题材辨识度」这一关**。
-
-**本批修正**：① **09 换「筋斗云」**（悟空专属符号·器物路线与 c2 同语言·左留白 0.0005·整图墨量 0.0431）—— 人物群像路线经「缩小右移」变体实测仍偏重、版面放不下 ⇒ 弃用；② **04 换「紧箍儿」**（「司南」属通用意象、非西游独占 ⇒ 换成第一回的独占物件：金圈 + 朱砂红绦）；③ **03 经卷保留**（「取经成果」贴题；候选「紫金钵」复核后视觉偏「饭碗」、与取经主线关联弱 ⇒ 不采用）；④ 旧文件（`hero-line-04-sinan-compass.*`、`hero-line-09-pilgrim-four.*`）在素材目录与站点两侧同步清理。
-
-**补判据 J8（题材辨识度·人工关）**：目录 README 新增逐张「靠哪个《西游记》具体元素认出」自检表——每张须能答出其独占标志物（金箍棒 / 紧箍儿 / 九环锡杖 / 芭蕉扇 / 玉净瓶 / 筋斗云 为**强**；行程图 / 经卷 / 莲花 为**语境型**，靠站点文案与上下文成立）。**重出任一张后须逐条自检该表**，这是本次漏检的补口。
-
-> - **验证**：判据脚本 9/9 PASS（尺寸 2400×1017 · 左留白 0.0000–0.0039 · 整图墨量 0.0211–0.0809 · 朱砂点 9/9 在场）· 成套拼图逐张目视 · 素材与站点两侧文件同步清理核验
-> - **状态**：在途（认领登记 W940·待提交入库）
-> **状态**：**已收官**（W940 95495824·git 反填·共 1 笔·W971 存量回填）
-
-
-### W938（2026-10-25）：首屏版式重做 + 图集逐张复核（左侧文字重排 · 切换器归位 · 9 张构图全部完整）
-
-> **来源**：用户 2026-10-25 反馈「你现在的这个设计不太好看，要么重新设计一下这个 100 回放在哪个位置比较好」+「我说的是首页右边的插图。并且现在首页左边文字的排版非常丑」。
-
-> - **文件**：site/index.html、site/static/images/hero-line-09-pilgrim-four.webp、assets/promo/hero-set/hero-line-09-pilgrim-four.png、assets/promo/hero-set/hero-line-09-pilgrim-four.webp、assets/promo/hero-set/raw/hero-09-pilgrim-four.jpg、assets/promo/hero-set/hero-line-07-banana-fan.png、assets/promo/hero-set/hero-line-07-banana-fan.webp、assets/promo/hero-set/raw/hero-07-banana-fan.jpg、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、scripts/_w931_hero_verify.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w938_cascade.py
-
-**左侧文字重排**：原布局七层平铺、字号跳跃、层级无引导 ⇒ 改为「眉题 → 标题组（中文 + 英文紧贴）→ 主张句（16px 浅灰 → 19px 墨色）→ 细线分隔 → 数据带（100 回 + 两行说明）→ 双轨标签 → CTA → 插画切换器（含「首屏插画」标签）」。插画切换器此前与 CTA 同排会撑破 620px 容器伸进插画区（实测金箍棒压住第 6–9 个圆点）⇒ 独立成行归位左侧文字列内。
-
-**首页 9 张插画逐张复核（按 1440×520 容器裁切实测·判据脚本 9/9 PASS）**：① **重出 07 芭蕉扇**——首版扇面顶边被裁成半截圆面，要求主体完整入画且上下各留 15% 冗余后重出；② **第 9 张换图**——原定 W932 持瓶菩萨立像为 16:9（2560×1440），在该容器下垂直溢出 290 px（源图顶部 41% 被裁）⇒ 首屏只剩人物下半身的「断头感」，改为同规格 `2400×1017`「取经四众西行」（挑担领路 + 山道 + 赭金山峦）作收尾重音。修正后 **9 张画幅与裁切损失（90 px）完全一致**，右半区墨量 0.056–0.208，构图全部完整可辨。
-
-**背景渲染 cover → contain（用户明令「要适配各种比例大小·要不然每个人看到的都是不一样」）**：cover 会按容器比例裁切，两组素材都被切出问题——线描 2.36:1（2400×1017）在真实容器 1006×645 下被放大 0.63 倍、左右各裁掉 407 源像素 ⇒ 主体右端被切（实测金箍棒右上端断头）；浓墨 16:9 在 1440×520 下垂直裁掉 290 px（源图顶部 41%）⇒ 首屏只剩人物下半身。改 `contain` 后：任何视口比例下图都完整显示、主体恒锚定容器右下角，容器富余处露 `#FAF7F0` 宣纸底（与图底色同色·无缝）⇒ 各人看到的构图一致。窄屏（@768 以下 masthead 转 column）另把插画移到容器顶部，首屏即可见。
-
-**纸色归一（消边界）**：contain 不裁切后，图块矩形边界暴露——9 张纸色基调与页面底色 `#FAF7F0` 差 1–9/255（经卷 +3/+4/+9 最高）。按亮度加权做加性平移（亮像素精确落到目标色·暗像素权重 0 不动·过渡平滑），归一后残差全部 ≤ 1/255 ⇒ 图块与页面底色无缝。
-
-**一条现场复现的工程陷阱**：改内联脚本后未重算 CSP 哈希 ⇒ 整个轮播脚本被浏览器拒执行（切换器整组停在 `hidden`）——重算后恢复（AGENTS §6-3「改内联脚本必跑 generate_csp.py」铁律的现场复现）。
-
-> - **验证**：浏览器实测首页渲染（左侧七层有节奏 + 右侧插画完整无遮挡 + 切换器归位不压图）+ 9 张裁切对照图逐张目视；判据脚本 9/9 PASS；CSS 结构平衡 / JS 语法 / token 覆盖 / 动效禁令 / CSP 零漂移 / 第 31 与第 45 门禁全绿
-> - **状态**：在途（认领登记 W938·待提交入库）
-> **状态**：**已收官**（W938 db5328b5·git 反填·共 2 笔·W971 存量回填）
-
-
-### W937（2026-10-25）：首屏版式修正——「100 回」数据块移入左侧文字区
-
-> **来源**：用户 2026-10-25 反馈「你现在的这个设计不太好看，要么重新设计一下这个 100 回放在哪个位置比较好」（指 W936 批的右侧数字区纸色渐变遮罩方案）。
-
-> - **文件**：site/index.html、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w937_cascade.py
-
-**问题定性**：W936 用「右侧数字区加纸色渐变底」遮住插画主体与「100」的叠字——是**补救不是设计**。根因是 `.mega-num` 巨型数字（clamp 96–180px）与首屏插画主体争夺同一块右侧空间，遮罩只能盖住症状。
-
-**改法**：把「100 回」数据块**移出插画区**，并入左侧文字区做横排一行（数字降档至 clamp 44–64px，右侧配两行说明小字），首屏右侧整块留给插画主体。收益：① 删除纸色渐变遮罩，右侧画面完整；② 左侧文字区零干扰（线描 8 张实测左侧 46% 墨量 0.0000）；③ 移动端不再有巨型数字挤占首屏。
-
-**配套修正**：移动端媒体查询的 mega 尺寸规则改为作用域形式（`.masthead-facts .mega-num`）——否则压不过桌面尺寸导致移动端不变小；删除指向已不存在元素的 `.masthead-mega` 死规则（孤立选择器门禁）。
-
-**题图落位逐页复核与修正**（用户令「你重新每个插图都看看位置对不对」）：机器核查 5 页插图位置全部正确（article 内、紧随 h1、CSS 与 alt 齐备）；**但逐页比对 h1 与正文主题后发现两处题材不贴并已移走**——① 「取经地理学专题」是「地方感 / 第三空间 / 空间正义 / 全球地方感」的**地理学理论**页 ⇒ 五行山与两界山改落「取经路线地理专题」（该页路线表直接列出「两界山→诸国→灵山」·跨 92 回约 40 处地理节点）；② 「四海龙王：下雨的人」讲龙王的**降雨职能** ⇒ 东海龙宫水殿改落「灵感大王·外传：冰层下面的供桌」（通天河·冰层下的水下宫殿）。旧页的 figure 与 chapter-plate CSS 一并移除（不留死规则）。修正后 5 张逐页浏览器目视复核全部显示正常。
-
-> - **验证**：浏览器实测首页渲染（右侧插画完整无遮挡 · 左侧数据块与文字层级分明）；CSS 结构平衡 / JS 语法 / token 覆盖 / 动效禁令 / CSP 零漂移 / 第 31 与第 45 门禁全绿
-> - **状态**：在途（认领登记 W937·待提交入库）
-> **状态**：**已停止**（W937 零提交·git 事实标注·W971 存量回填）
-
-
-### W936（2026-10-25）：首屏图集接入 + 专题题图落位（线描 9 张轮播 · 浓墨 5 张题图）
-
-> **来源**：用户 2026-10-25 令「帮我做几张素材图」——素材本体已由 W931 交付（8 张线描 Hero 横幅）；本批做**接入层**：把 W931 线描 8 张接成首页 9 张图集轮播（末位为 W932 持瓶菩萨作收尾重音），并把 W932 浓墨 5 张按站内 `chapter-plate` 范式插入 5 个专题页。
-
-> - **文件**：site/index.html、site/reader/people/地府体系深化专题.html、site/reader/people/紧箍儿的内侧-器物传记.html、site/reader/themes/取经地理学专题.html、site/reader/people/四海龙王外传.html、site/reader/themes/西游与死亡研究专题.html、site/static/images/hero-line-01~08.webp、site/static/images/plate-mingfu-panwang.webp、plate-jingu-jingangchui.webp、plate-wujingshan-liangjie.webp、plate-donghai-longgong.webp、plate-liudao-lunhui.webp、scripts/_w936_insert_plates.py、scripts/_w936_cascade.py
-
-**两套素材分层用（容器实测，非主观）**：首页 masthead 为 1440×520 容器、左侧 46% 是 640px 宽标题区——W931 线描该区墨量 **0.0000**（8/8 张，裁切后仍 100% 纯纸色），W932 浓墨均值 **0.1772**（最高 0.4825 · 五行山）⇒ 浓墨压字；纵横比上 2.36:1 垂直溢出 90px 而 16:9 为 290px（16:9 素材主体会被裁没）⇒ **首页 = 线描 9 张，内页无字视觉 = 浓墨 5 张**。
-
-**轮播实现约束**：D4 动效禁令禁 CSS 无限循环动画 ⇒ 改 JS 定时切换（6s）；WCAG 2.2.2 暂停机制（悬停 / 焦点在图集内 / 页面不可见均停）；`prefers-reduced-motion` 下不自动播放（仍可手动点选）；9 个切换按钮静态写入 HTML（`aria-label` + `aria-pressed`），JS 不可用时整组 `hidden`，不留死控件。右侧「100 回」数字区加纸色渐变底——浏览器实测九环锡杖竖杆直穿「100」，渐变使主体进入数字区时自然隐去。
-
-**内页题图**：沿用章回页 `chapter-plate` 范式（420px 居中题图 + 浅底宣纸图在暗色模式隐藏，避免贴深底成亮斑），题图带描述性 `alt`（区别于章回装饰图的空 alt）。
-
-> - **验证**：浏览器实测首页轮播（点击第 5 张 → 背景同步切换 + `aria-pressed` 跟随 + 6s 自动推进）与内页题图渲染；全量门禁 54 段 0 FAIL；CSP 861 个内联脚本哈希零漂移；W 号跳号（W935 在途）已留台账行
-> - **状态**：在途（接入完成·认领登记 W936·待提交入库）
-> **状态**：**已收官**（W936 fc0060af·git 反填·共 1 笔·W971 存量回填）
-
-
-### W935（2026-10-25）：速赢两处批（R-05 渡口正文溯源去工程化 + R-12 英文站目录死链消除）
-
-
-
-> **来源**：W926 站点交互流程审查报告 §0.4 执行序（用户 2026-10-25 选定「功能可用性优先」权重）中的 P1 与 P2 两项；用户问卷进一步授权「先动代码」并选定「速赢两处：R-05 四条 + R-12 死链」。
-> - **文件**：site/dukou-engine.html、site/en/visualizations.html、docs/11-方案报告/计划方案/T25-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、scripts/output/_w935_spec.json。
-> - **改动 1（R-05）**：渡口页 `LINE` 数组 **4 条**「（见 W321 line 7012 凌云渡：脱胎即 Dropout）」「（见 W323 …）」「（见 W324 …）」「（见 W321 line 1393 紧箍咒：正则项在收敛后归零）」改为对读者有意义的正文（凌云渡 / 西游渡元定义 / 遗忘者列传 / 紧箍咒），**溯源写入数组上方源码注释**（保留可追溯性·不进访客可见文本）；数组结构不变（消费方 `pick(LINE)` 为字符串数组·零改动）。
-> - **改动 2（R-12）**：`site/en/visualizations.html` source-note 段 `<a href="../data/">site/data/</a>` 改为纯文本——`site/data/` 有 88 个 html 但**无 index.html**，线上 GitHub Pages 对目录 URL 直接 404；全仓同型扫描确认**仅此 1 处**目录型死链，同页其余 `../data/*.html` 均指向具体文件（有效·未动）。
-> - **验证**：① 浏览器 `file://` 直开点「生成渡口档案」，`#out` 实测输出为「紧箍咒：正则项在收敛后归零。」，无批次号与源码行号；② 全量结构重扫 `A_paths.broken_links` 的 4 条残项全部为「目标目录含 index.html」的旧口径假死链（`site/en/index.html`、`site/reader/poetry/index.html` 均实证存在）⇒ **全仓真死链 1 → 0**；③ 可见文本重扫：LINE 四条溯源清零（全站计数 +9 来自并行批同期往页脚批次链注入的并发噪声·未单独归因）。
-> - **纪律**：本批仅改 **2 个 site/ 页面共 7 行**；0 处管控脚本与判据脚本改动；未顺手动 R-02 页脚与 R-03/R-04 分类 hub（属后续批）。
-> **状态**：**已收官**（W935 b130f7a1·git 反填·共 2 笔·W971 存量回填）
-
-
-### W934（2026-10-25）：D-2 应用迁移批第一子批（M12 存储层抽象 + PG 适配器 + 三表迁移器·真实数据迁移三重对账全一致）
-
-> **来源**：用户 2026-10-25 架构设计令（「整体分层、模块拆分与依赖、数据流与存储选型、扩展性与容灾、部署与监控都写到位，附几张架构图说明图」）经 O-1~O-4 裁决「接受·按 v2 档 2 施工」后，按方案 §8.2 施工序推进 **D-2 应用迁移批的第一子批（W934）**——把「M12 PG 存储层」这行模块说明变成**可运行、可切换、可回归**的代码层。
-
-> - **文件**：xiyouji-agent-web/server/storage/types.ts、xiyouji-agent-web/server/storage/sqlite.ts、xiyouji-agent-web/server/storage/postgres.ts、xiyouji-agent-web/server/storage/index.ts、xiyouji-agent-web/server/storage/storage.test.ts、xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/server/chat.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/shutdown.ts、xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、xiyouji-agent-web/deploy/pg/migrations/0002_app_tables.sql、xiyouji-agent-web/deploy/pg/bin/migrate-sqlite-to-pg.ts、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/README.md、docs/11-方案报告/计划方案/执行前计划-T23-D2应用迁移批.md、docs/11-方案报告/计划方案/T23-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w934_d2a_migrate.json、scripts/output/_w934_d2a_residue_before.txt、scripts/output/_w934_d2a_grants.txt、scripts/output/_w934_spec.json、scripts/output/_cascade_files_W934.txt、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md。
-
-**M12 存储层抽象落地**：新增 `server/storage/` 四件——`types.ts`（`StorageBackend` 接口 + DTO + 语义约定）、`sqlite.ts`（现役实现**逐字搬迁** + `kind` + `healthCheck`）、`postgres.ts`（连接池 + 事务 + 参数化查询 + 健康探针 + schema 隔离）、`index.ts`（后端工厂 + 契约转发）。`server/db.ts` 由「SQLite 实现」降为**门面**（16 个现役导出名齐备）⇒ **三个调用点仅加 `await` 与 `async`·业务逻辑零改动**；默认后端**仍是 SQLite**（`AGENT_WEB_DB_BACKEND` 未设即 sqlite·取值非法则**启动失败**不静默回落）⇒ 现役行为与全部既有测试零影响。
-
-**接口为何是异步的**（规划期假设被实跑证伪）：PG 走网络协议，而 Node 生态**没有同步 PG 驱动**（`pg` 的 socket 只有异步接口）⇒ 同步接口下 PG 后端只能是内存镜像或自研阻塞协议栈（皆不可接受）⇒ 接口定为异步，SQLite 后端实现体仍是同步调用。这是「**抽象层形状由最贵的那个后端决定**」的实证。
-
-**真实数据迁移端到端（真·PG 16.4 实例）**：现役 `data/chat.db`（**70 会话 / 134 消息 / 4 反馈**）真实迁入 PG 16.4——迁移序列 v1 `0001_baseline` + v2 `0002_app_tables` 逐条记账（`checksum` 为**真实 sha256**）；**三重对账全一致**：逐表**行数相等** + **主键集合逐位相等** + **逐行内容摘要一致**，时间列 **278/278 逐字节相等**（sessions 140 + messages 134 + feedback 4）。迁移器**只读**打开源库（chat.db 是全仓唯一不可重建的数据）且**不借道应用写接口**（`createMessage` 会把会话 `updated_at` 刷成「现在」⇒ 破坏逐字节保真）。
-
-**双后端契约测试**：**同一套**断言跑 SQLite 与 PostgreSQL 两个后端，均全过（2/2）——抽象层「换后端不动业务」的证据不是「两边各测一遍」，而是「一套用例两个实现」。
-
-**实跑抓出 3 个真缺陷（静态层查不出 · 已全部固化为守卫）**：
-1. `ALTER DEFAULT PRIVILEGES` **缺 `FOR ROLE`** ⇒ 默认权限挂在执行者名下 ⇒ 由**应用账号**创建的表拿不到只读授权 ⇒ **静默失效**（不报错）。
-2. 引导脚本**先建表后授权** ⇒ 记账表落在授权之前 ⇒ 应用账号读它 `permission denied`。
-3. 记账表**所有权**不属于应用账号 ⇒ 迁移序列以应用账号执行时 `COMMENT ON TABLE` 报 **`must be owner of table schema_migrations`** ⇒ **迁移序列根本跑不起来**——这是**所有权**问题，没有任何「看起来不对」的形态 ⇒ 只有真跑能暴露。
-
-> 这 3 项与 W928 抓出的 4 项是**同一族**：**静态背书 ≠ 运行时可用**。W928 抓到的是「形态错」，W934 抓到的是「**权限与所有权错**」——后者每一行单独看都合法 ⇒ 更难被静态断言覆盖 ⇒ 所有权、运行时语义、跨版本行为一律留真跑项。
-> **状态**：**已收官**（W934 4b25833b·git 反填·共 1 笔·W971 存量回填）
-
-**守卫升级**：静态校验器 **71 → 95 项**（新增 C5 组：三表 schema 不变量 / 迁移器只读与参数化与三重对账 / 授权模型的 FOR ROLE·顺序·owner 三项）+ 反向验证 **14 → 23 组**（新增 M14~M22，逐条证明新判据可证伪）。
-
-**另自证出 3 处工具自身缺陷**（先红后绿）：① ESM 把**接口当值导出**（`export { DbFeedback }`）⇒ 运行时炸而 `tsc` 不报（未开 `isolatedModules`）⇒ 改 `export type`；② 计数型断言把**注释行**算进去 ⇒ 基线假红 ⇒ **掩盖了 M17/M20 的真实结论** ⇒ 计数只取非注释行 + 新增 `strip_ts_comments()`；③ 断言命中文档注释里的**示例代码** ⇒ 真代码改坏仍报绿（变异 rc=0）⇒ 断言改锚真实调用构造。
-
-**D-2 整体尚未完成（不得对外宣称「已切 PG」）**：双写对账期 → 切读 → 停写旧库属 **W935**；检索层接入（O-4）+ 客户端侧服务地址注入（契约 C-8）属 **W936**；容量实测属 **W937**；合规面属 **D-3**。
-
-**机器证据**：`scripts/output/_w934_d2a_migrate.json`（迁移对账）· `_w934_d2a_residue_before.txt`（清理前演练残留快照）· `_w934_d2a_grants.txt`（授权模型实查）。
-
-**未改**：site/ 任何页面的**内容**（仅级联页脚批次链为全批标准机制）· 任何管控脚本（verify_delivery.py / bump_version.py / batch_cascade.py / preflight_check.py 等）。
-
-
-### W933（2026-10-25）：共享面串行化机制批（规则三条 + 五个机检判据·把台账与 CHANGELOG 的写顺序从自律变成机制）
-
-
-
-> **来源**：W926 站点交互流程审查批收官复盘时，我方主动指出「号段已分开，但台账与 CHANGELOG 的写顺序仍是串行资源——目前靠各方『先登记认领行、后立段』的自律维持，没有机制保证」，并请用户裁决；用户 2026-10-25 答「按你推荐」并选定：**落地上限＝层 1 + 层 2**（规则三条 + 3 个机检判据）、**开工时点＝立即开工并由我方取号**。
-> - **文件**：docs/00-导读/文档规范.md（§11.0 规则三条）、scripts/preflight_check.py（判据 A/B′/D/E）、scripts/ledger_backfill.py（判据 B）、scripts/ledger_close_check.py（判据 C）、scripts/_w933_mutation_test.py（四判据可证伪性）、scripts/output/_w933_spec.json、docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md。
-> - **产出**：① **层 1 规则三条**（写入 docs/00-导读/文档规范.md §11.0）——**认领即占号**（登记认领行并单独提交后再施工，登记后复跑 preflight 做乐观并发校验）、**回填独占**（回填既有行必须走行指纹校验，禁整文件 git add 台账）、**收官回填三件套**（hash 列非占位 + 状态列以「已收官/已闭环」开头 + touches 列为终值，缺一即视为在途）；② **层 2 五个机检判据**——**A 撞号检测**（台账同一 W 号出现多行 = 撞号，机器可检；插队仅出 NOTE 因后补登记合法）、**B 回填独占**（scripts/ledger_backfill.py：--expect 基线指纹不符即拒写、--verify 提交前复核、--append-claim 纯追加认领）、**C 收官回填体检**（scripts/ledger_close_check.py：现役段 W 号须 hash 非占位且状态以「已收官/已闭环」开头；**不挂 verify_delivery 阻塞段**，避免把伪阻塞从 preflight 挪到门禁）、**D 反引号剥离**（_split_touches 具反引号感知）、**E 登记类共享面排除**（台账与方案报告 README 天然并发，不计入并行写拒绝）；③ **Makefile 新增 ledger 目标并接进 ci**（第 42 门禁四面引用口径）；④ **可证伪性证明**：三工具自测 5 正例 + 8 负例 + 四判据突变 4/4 按预期。
-> - **本批自证出并当场修复的两处机制缺陷**：**D 假绿**——架构会话（W934 批）实测报出「_split_touches 不剥反引号，而台账 touches 列的路径带反引号 ⇒ 与命令行传入的无反引号路径字面不等 ⇒ touches_conflict 恒返空 ⇒『PREFLIGHT PASS·无交集』在真实撞面时假绿」；**E 恒红**——修复 D 后本批立即实跑，发现交集拒绝把「台账认领行」与「方案报告 README 登记行」当普通共享面 ⇒ 每个批次都要写这两面 ⇒ 交集在准入阶段恒红 ⇒ 纪律被架空 ⇒ 改为登记类共享面排除出拒绝，并发保障改由「纯追加 + 精确暂存（update-index --cacheinfo）+ 回填行指纹」承担。**判据 A 的初版语义亦被本批自身实战证伪**（把「并发插队」当「撞号」会误伤合法的后补登记 ⇒ 修订为「同号多行 = 撞号」+ 插队仅 NOTE，见 T22 报告 E-06）。
-> - **交付**：docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md（框架第二十二次执行·32/32 判据符合·模糊词 0·含 §2 号段协调实录与 §4 可行性自评与 §5 六条经验）。
-> - **纪律**：本批 0 处 site/ 与应用代码改动；未改 verify_delivery.py 等禁擅改管控文件（判据改走 Makefile 编排面）；不代改他方台账行与 CHANGELOG 历史段。
-> - **状态**：已落地（本地）。
-> **状态**：**已收官**（W933 a6306896·git 反填·共 3 笔·W971 存量回填）
-
-
-### W932（2026-10-25）：站点 Hero 素材图成套批（六张 16:9 浓墨剪影·锚点复用成熟段·底部净空带供叠字）
-
-> **来源**：用户 2026-10-25 令「帮我做几张素材图」并要求「用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」，且明令「开始前先问我：素材用在哪里、需要几张、有没有参考风格」；本会话按问卷答复（用途=站点 Hero 横幅 16:9 · 数量=6 张 · 参考=沿用 `assets/promo/hero-main-visual.png` 主视觉「宣纸底浓墨剪影+朱砂钤记」· 主题=人物叙事/法器符号/世界观场景/学术概念四类全覆盖）执行。
-> - **文件**：site/static/images/hero-10-mingfu-panwang.webp、hero-11-chiping-boshan.webp、hero-12-jingu-jingangchui.webp、hero-13-wujingshan-liangjie.webp、hero-14-donghai-longgong.webp、hero-15-liudao-lunhui.webp、site/static/images/index.md、scripts/_w929_gen_args.py、scripts/_w929_gen_args_v2.py、scripts/_w929_gen_args_v3.py、scripts/_w929_process.py、scripts/_w929_seal_normalize.py、scripts/_w929_verify.py、scripts/output/_w932_spec.json、scripts/output/_cascade_files_W932.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md。
-> - **锚点纪律**：art direction 段（宣纸 #FAF7F0 / 玄墨 #221D16 / 淡墨 #6B6455 / 单一朱砂 #C8463A / 赭金 #E9B885 五色锁死）与「松散枯笔湿染」笔触句、16:9 构图句（主体止于上 2/3 + 下三分之一完全空白宣纸）——**逐字复用 W893**，本批只改两处并逐条留痕：① 笔触段由「淡彩湿染」加强为「浓墨剪影为主、淡墨为辅」对齐主视觉观感；② 禁项清单移除 seal stamp，改写为「唯一允许的印记 = 右上角极小朱砂方印（抽象笔画·不可辨识字符）」——用户点名的参考风格含「朱砂钤记」。
-> - **六张主题分配**：人物叙事 2（冥府判官队列 / 持瓶菩萨立像）+ 法器符号 1（紧箍与金刚杵静物）+ 世界观场景 2（五行山两界山 / 东海龙宫水殿）+ 学术概念 1（六道轮回轮抽象水墨）· 编号接续既有 hero-01 至 hero-09 · 题材全部避开既有 9 张 hero 与 27 张 card 撞车。
-> - **量化验收**（脚本量测·非目视断言）：成品 2560×1440 = 精确 16:9（源 2752×1536 实为 1.7917 → 裁宽 21px 居中 → LANCZOS 缩放）；底部净空带 282 至 557 px（19.6% 至 40.8%）；上 72% 主体墨量 11.92% 至 77.82%；严格朱砂 0.11% 至 1.52%（上限 8%）；主底色 5 值同落 #FAF2E7 / #FAF5EC / #FAF6EA / #FBF5EB / #FCF6ED 暖白族；规则线扫描 0 命中；单件 64.2 至 346.9 KB。
-> - **三轮返工（逐轮病因不同）**：v1 量化全绿但**目视**抳出钤印形态漂移（hero-10 竖长条印 / hero-12 椭圆印 / 其余四方）→ v2 把形态写死为正方形后**印面被画成清晰篆字形**（伪汉字观感·撞零文字纪律）→ v3 把印面限定为纯朱砂色块+不规则留白后 hero-10 / hero-12 达成，另四张改走**交付端印面归一**（`scripts/_w929_seal_normalize.py`：只重绘右上角那枚小印的印面·主体与留白分毫不动）⇒ 五张印面归一为同一程序质感、零可读文字；**一处如实保留差异**：hero-10 的模型原版印是「朱红块 + 带白斑」两段结构（自动扩张会框成 225×174 巨块·实测涂坏画面）⇒ 保留模型原印，其斑驳浓艳质感与其余五张略异，网页 Hero 显示尺度（约 30 px）下不可辨。
-> - **两处工具自身缺陷（先红后绿）**：① 窄朱砂阈值（R-B>45）在朱文印（红字白底）上只框到印的一角（hero-15 实测偏到右下角）→ 改数据驱动定框（宽松阈值取初始 bbox + 向四边迭代扩张吸附朱砂分布边界）；② 宽松阈值定得太松时**赭金 #E9B885（R-B=100）被误判为朱砂**（W853 已记过的赭金误判坑）致扩张跑飞涂到画幅边缘 → 收紧为 R-B>40 且 G<130 并限制最大外扩量。
-> - **无文字纪律**：六张均无文字、无落款、无水印，钤印印面为抽象笔画/颜料斑驳，无任何可辨识字符。
-> - **接入提示（本地裁切实测·非推断）**：按现网 `.hero` 的 `background-size: cover` + `background-position: center bottom` 做本地裁切模拟（容器 1440×520）——**本批六张主体清晰落在可见区、下方约四成是空白叠字带**；同参数下现有 `hero-01-xihai-yunhai.webp` 的主体反而几乎被裁没（只剩山脊一条）⇒ 本批可直接作首屏 cover 背景接入。若后续容器更矮或改 `center top`，需重新裁切复核。改动仅涉 `site/index.html` 一行样式，本批**未擅自改**（站点接入交由用户决定）。
-> - **范围纪律**：只新增 `site/static/images/` 下六个素材文件 + 本批脚本与 spec，不改任何页面（站点接入交由用户决定）、不改门禁件、不推送远端。
-> **状态**：**已停止**（W932 零提交·git 事实标注·W971 存量回填）
-
-### W931（2026-10-25）：首页 Hero 横幅素材图成套批（线描版 8 张 · 2400×1017 · 左半留白供叠字）
-
-> **来源**：用户 2026-10-25 令「帮我做几张素材图：用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」+ 明文要求「开始前先问我：素材用在哪里、需要几张、有没有参考风格」；问卷答复 = 首页 Hero 横幅 **2400×1017** · **8 张** · 沿用 `assets/design/ai-concepts/` 的 c2 线描概念图 + 现有色板。
-
-> - **文件**：assets/promo/hero-set/hero-line-01~08.{png,webp}、assets/promo/hero-set/preview-contact-sheet.{png,webp}、assets/promo/hero-set/raw/hero-0X-*.jpg、assets/promo/hero-set/README.md、assets/promo/hero-set/index.md、assets/promo/hero-set/raw/README.md、assets/promo/hero-set/raw/index.md、assets/promo/index.md、STRUCTURE.md
-
-**规格与机器判据**：8 张共用同一条逐字风格母版（宣纸 `#FAF7F0` · 墨 `#23201A` · 赭金 `#8A6D3B` · 单点朱砂 `#C8463A` + 纯墨线无实心填充 + 禁文字禁印章禁水印 + 左侧 46% 纯留白）⇒ 成套一致性由「同母版」保证。画幅 `2400×1017`（`21:9` 出图后按 `2400/1017` 精确裁切·不拉伸）；**左侧 46% 文字安全区墨量实测 0.0000–0.0014（8/8 达标）**·主体墨量落右半区（整图 2.11%–8.11%）。
-
-**一处返工留证**：07 芭蕉扇首版扇面被画成**黑色实心块**（主体墨量 26.2%·与其余 7 张 3%~8% 断层）⇒ 判破套并重出，复测 7.72% 回到套内；**AI 伪文字人工放大 2× 复核**（04 司南盘面字符状符号验明为回纹刻纹非乱码·06 九环锡杖同验）——机器判据抓不到伪文字，只能放大看。
-
-**落位与接入**：新目录 `assets/promo/hero-set/`（8×PNG 母版 + 8×WebP 站点版 + 成套一览拼图 + 8 张出图原件 `raw/` + README/index ×2）·站点 Pages 只发布 `site/`，接入前须复制到 `site/static/images/`，方法写在该目录 README（背景图 + `background-position: right center` 保住「主体在右·文字在左」版面约定）·**未改 `site/index.html`**。与并行 **W932** 素材批（渲染型浓墨剪影 `hero-10~15` · 2560×1440 · 落 `site/static/images/`）路径零重叠，两套视觉语言并存、接入由用户决定。
-
-> - **验证**：8/8 出图成功（批量 `generate_image` 零失败）·2400×1017 尺寸 8/8 实测一致 ·左侧留白区墨量 0.0000–0.0014（8/8 达标）·AI 伪文字人工放大复核 2 张（04/06）·成套一览拼图逐张目视复核全过
-> - **状态**：在途（素材已落盘并暂存·认领登记 W931·站点接入待用户决定）
-> **状态**：**已收官**（W931 08f1f927·git 反填·共 2 笔·W971 存量回填）
-
-
-### W930（2026-10-25）：界面布局复核与落地方案（信息层级四维复核 + 三条新发现 + 六批可施工方案）
-
-> **来源**：用户 2026-10-25 令「帮我优化现有界面布局：先帮我做好信息层级梳理、区块分布与留白、操作动线、不同屏幕适配都过一遍，每处调整讲清理由」；问卷答复 = 范围全站都做（静态站 + reader + agent-web）· 主攻信息层级（一屏信息量过载）· 先出审查报告与落地方案、用户过一遍再动代码。
-
-> - **文件**：docs/11-方案报告/计划方案/T21-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/计划方案/执行前计划-T21-界面布局复核与落地方案.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、scripts/_w930_claim_row.py、scripts/_w930_rename_prefix.py、scripts/_w930_report_normalize.py、scripts/_w930_spec_build.py、scripts/_w930_layout_static.py、scripts/_w930_layout_diff.py、scripts/_w930_layout_attr.py、scripts/_w930_layout_detail.py、scripts/_w930_layout_residual.py、scripts/_w930_layout_probe.mjs、scripts/_w930_layout_probe_app.mjs、scripts/output/_w930_layout_static.json、scripts/output/_w930_layout_metrics.json、scripts/output/_w930_layout_metrics_app.json、scripts/output/_w930_layout_diff.json、scripts/output/_w930_layout_attr.json、scripts/output/_w930_visible_leak.json、scripts/output/_w930_plan_review.json、scripts/output/_w930_spec.json
-> **状态**：**已收官**（W930 378e158d·git 反填·共 1 笔·W971 存量回填）
-
-**定位：复核 + 补审，不是重做**——用户指令的四维与 W854《界面布局审计报告》（2026-10-21）几乎逐字相同，按 W926 §7.1 E-03「同一条指令重复下达时先查历史再动手」判为复核 + 补审：重跑 W854 探针（站点 11 组 + 应用 6 组，新旧 metrics JSON 逐项对拍）+ 补 W854 与 W926 均未覆盖的维度 + 出可施工落地方案。**W 号二次让号**（W928 归并行 D-1 实跑批、W929 归并行 Hero 素材图批，按「先落地者保留」）⇒ 本批取 W930，框架号 T21。
-
-**W854 十八条的四天后现状（重跑探针实测，非复述）**：已修 6（S1 首屏内容入口 / S2 字号倒挂 / S3 手机层级坍塌 / S4 首页九区块同级 / S7 四套容器并存 / S9 hub 非链接）· 部分修 4（S5 间距刻度 / S6 令牌消费 / S8 目录页动线 / S14 卡片列数与触达目标）· 仍存 7（S1 衍生 mega 数字未降级 / S10 可视化页顶栏仅五入口 / S11 断点体系 / S12 KPI 不收缩 / S13 长段 77.9 字每行 / A1 / A4 / A5 / A6）· 未判定 1（A2 应用侧留白，服务端未起不可测）。首页三任务区由 W865 与 T-08 批施工落地。
-
-**三条新发现（W854 与 W926 均未覆盖）**：① **N1** @1440 首页同标签混两档字号——「精选必看」「全卷索引」是 h3 但 24px，同区十张卡片 h3 为 20px，语义层级与视觉层级错位且仅在宽屏发作；② **N2** @375 首页 hero 山脉装饰图压正文文字（副标题被裁），静态几何审计与交互审计均不覆盖元素重叠；③ **N3** 可见工程批次号不只污染文本（796 页 6,827 处），同时是布局度量的基准污染源——W926 批次往四页页脚注入批次行使页高升 20 至 215 像素、元素数升 1 至 7，任何以页高或元素数为判据的布局审计都会被带偏。
-
-**v4 令牌落地进度差**：容器族已消费（0 页至 851 页）· 间距族已消费（330 页至 857 页）· **排版族与语义 gap 族仍为 0 消费**（`tokens.css` 已定义九个排版角色与六档语义 gap）⇒ 改版者改了令牌值却看不到任何变化。间距刻度命中：原口径 43.3% 降至 31.2% 是判据失真（令牌化改造不被硬编码像素正则计入），修正口径 86.2% 为真值，两套口径同时输出以便旧数字仍可复算。
-
-**六批可施工落地方案**（每批带理由与可机检验收判据，共约 8.5 人日）：B1 应用侧移动端可用性（@375 主区 115 像素至目标 320 像素以上）· B2 可见文本去工程化与页脚收口 · B3 排版与间距刻度消费化 · B4 可视化页自适应降级（KPI 与长行）· B5 首页宽屏层级与断点体系 · B6 目录页动线与触达目标。**本批不含任何界面代码改动**。
-
-**四件套**：文件见上（改名后新名）· 验证：渲染实测 17 组 + 静态复算 1 次 + 独立复算 1 次 + 第 48 门禁双件全项符合（计划件判 PLAN 符合 23 项、报告件判 REPORT 符合 13 项，模糊词零命中）· 状态：方案件已落库，施工待用户拍板 U1 至 U4 · 边界：线上部署态、A1 运行时、A2 留白、英文站 138 页逐页、reader 620 页逐页、N2 影响面共六项显式声明未验证。
-
-**诚实性边界**：本批只出报告与方案，不改 `site/` 与应用源码；级联器固定面会向三页页脚注入本批批次链行（共四行），该行为同时是 N3 所指污染源之一，已显式登记为 B2 的整改对象，不在本批静默处理。
-
-
-### W928（2026-10-25）：D-1 实跑批（真实 PostgreSQL 16.4·免安装二进制路径·抓出 4 个静态查不出的真缺陷）
-
-
-
-> **来源**：用户 2026-10-25 答「没有 Docker」⇒ 原定「起 Docker Desktop 实跑」路径作废 ⇒ 改用**PostgreSQL 官方 EDB 免安装二进制包（zip·338 MB·解压即用·不需要 Docker·不需要管理员·不进仓库）**，在 `%LOCALAPPDATA%\pg16` 起真实实例实测。
-
-> - **文件**：xiyouji-agent-web/deploy/pg/postgresql.conf.base、xiyouji-agent-web/deploy/pg/pg_hba.conf.base、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/backup.sh、xiyouji-agent-web/deploy/pg/bin/restore-drill.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql、xiyouji-agent-web/deploy/pg/README.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、scripts/output/_w927_pg_runtime_evidence.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w928_spec.json、scripts/output/_cascade_files_W928.txt（逐件行见 file-index W928 段）。
-
-**实跑通过 6 项（原待实跑清单 9 项中）**：
-- **初始化幂等性**：`initdb-bootstrap.sh` 连跑两次——第一次建角色/库/权限，第二次全部「已存在，跳过创建」。
-- **真实备份**：`pg_basebackup` rc=0；空壳自检通过（`backup_label` + `postgresql.conf` + `base/` 均在位）；保留期轮转 + WAL 归档轮转正常。
-- **恢复演练行数一致（§9.4 核心主张）**：**真·PITR 演练**——PG 经 `restore_command` 从归档取回 `000000010000000000000019`；**逐表比对源库 == 恢复实例**：`sessions 6==6` · `messages 50==50` · `feedback 20==20` · `schema_migrations 1==1`。
-- **WAL 归档连续性**：段 `000000010000000000000001` → `00000001000000000000001B` 连续无缺口（27 段）。
-- **分盘校验（两次都验到）**：同盘场景（C: vs C:）被脚本**如实拦下**（`FATAL: 备份目录与 PGDATA 同盘`）；分盘场景（C: vs D:）通过。
-- **TLS 实握手**：`pg_stat_ssl.ssl = true` · **TLSv1.3** · cipher `TLS_AES_256_GCM_SHA384`。
-
-基线参数生效核验（实读 `pg_settings`）：`archive_mode=on` · `ssl=on` · `ssl_min_protocol_version=TLSv1.2` · `wal_level=replica` · `max_connections=200` · `client_encoding=UTF8` · `fsync=on` · `synchronous_commit=on` · `full_page_writes=on` · `log_min_duration_statement=1000` · `logging_collector=on` · `statement_timeout=30000`。
-
-**实跑抓出 4 个真缺陷（静态校验 66 项全绿也查不出 · 已全部修掉并固化为守卫）**：
-1. `server_encoding` 写进 `postgresql.conf` ⇒ PG **直接 FATAL 拒绝启动**（initdb 固定参数）⇒ 从基线删除，改由 `initdb -E UTF8` 确定。
-2. 迁移文件用 `#` 注释 ⇒ `psql` **语法错误**（PG 的 SQL 只认 `--`）⇒ 全部改 `--`。
-3. `pg_basebackup -D` 配 `-z` ⇒ 备份报错（`only tar mode backups can be compressed`）⇒ 去 `-z`。
-4. **恢复演练对备份目录结构的语义误解** ⇒ 演练实例起不来（`could not open file ".../global/pg_control"`）——`pg_basebackup -D` 的输出目录**本身就是 PGDATA 镜像**（`base/` 与 `global/`、`pg_wal/` 是**兄弟**），不是「base/ 里才是数据目录」⇒ 恢复时铺满整个备份目录 + 删 `standby.signal` + 接 WAL 归档做 PITR + 重写 `postgresql.auto.conf`。
-
-> **第 4 项连变异测试都测不出来**（它是语义误解，不是文本形态）⇒ **只有真跑能暴露**。这是「静态背书 ≠ 运行时可用」的第一份实证。
-> **状态**：**已收官**（W928 4dd57cee·git 反填·共 2 笔·W971 存量回填）
-
-**守卫升级**：静态校验器 **66 → 71 项**（新增 3 条禁形态：server_encoding / `#` 注释 / `-D` 配 `-z`）+ 反向验证 **11 → 14 组**（新增 M11/M12/M13）。
-
-**两处跨平台判据坑（已修）**：① **git-bash 的 `uname -s` 返回 `MINGW64_NT-…` 而不是 `Windows`** ⇒ 只写 `= "Windows"` 判等会误判为类 Unix ⇒ 把 POSIX 路径（`/c/Users/…`）写给 Windows 版 PG ⇒ 启动即 FATAL（`could not create lock file`）⇒ 判据须覆盖 `MINGW*`/`MSYS*`/`CYGWIN*`/`Windows*` 全族；② **PG 配置串里反斜杠是转义符** ⇒ Windows 路径要双写 `\\`，且 `cmd.exe` 的 `copy` 与 PG 的 `%p`（正斜杠）需薄包装批处理适配。
-
-**仍待实跑（3 项 · 不得当作已验证）**：迁移器端到端（D-2）· 容量实测（D-2）· 审计留存与销毁留证（D-3）。
-
-**机器证据**：`scripts/output/_w927_pg_runtime_evidence.txt`（111 行原始输出）。
-
-**未改**：xiyouji-agent-web 的 server/ 与 src/（应用代码一行未动）· site/ 任何页面 · 任何管控脚本。
-
-
-### W927（2026-10-25）：架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账
-
-
-
-> **来源**：用户 2026-10-25 问「然后呢」后经三项裁决（O-1 接受「修订 W821 存储裁定」按 v2 档 2 施工 / D-1 先立离线施工件 / O-2·O-3·O-4 三项全按建议定稿）。
-
-> - **文件**：xiyouji-agent-web/deploy/pg/README.md、xiyouji-agent-web/deploy/pg/postgresql.conf.base、xiyouji-agent-web/deploy/pg/pg_hba.conf.base、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/backup.sh、xiyouji-agent-web/deploy/pg/bin/restore-drill.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/计划方案/执行前计划-T20-裁决落档与D1施工件.md、docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、STRUCTURE.md、scripts/output/_w927_pg_baseline.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w927_spec.json、scripts/output/_cascade_files_W927.txt（逐件行见 file-index W927 段）。
-> **状态**：**已收官**（W927 51f4c2ca·git 反填·共 2 笔·W971 存量回填）
-
-**三项裁决落档（O-1 ~ O-4）**：
-- **O-1 接受**「修订 W821 存储裁定」⇒ §7.1 S4 改判「已采纳」· §8.2 档 2 由「触发式演进」改「**已启动**」· 施工拆 D-1/D-2/D-3 三批（先备份后迁移、先有审计载体后打标，顺序不可颠倒）。
-- **O-2** 审计留存期取「≥ 180 天」通用口径，**最终以本单位定级备案与测评方案为准**（D-3 批按备案方案复核后可收紧）。
-- **O-3** 私有化推理端点允许内网端点或公网 API；若选公网 API **必须显式登记「与「禁外域依赖」硬约束冲突」**这一例外。
-- **O-4** 检索层接入 `scripts/rag/`，纳入档 2 范围（施工排 **D-2**，不排 D-1）。
-
-**D-1 离线施工件（PG 16 自建单机）**：新增 `xiyouji-agent-web/deploy/pg/`——服务端配置基线（WAL 归档 / TLS / 内存 / 日志 / 编码，禁 `listen_addresses='*'`）、认证基线（最小权限 + 兜底 reject，禁 trust）、幂等初始化（建角色/库/权限/迁移记账表）、每日 `pg_basebackup` 备份（保留 7 份 + WAL 14 天 + 空壳备份自检 + 备份/归档**分盘校验**）、恢复演练（独立端口临时实例 + 表数/列数/行数断言 + trap 清理）、迁移序列骨架（`schema_migrations` 记账 + `audit_archive` 带 `data_class` CHECK L1–L4）。**机器背书**：静态校验器 **66/66 通过** + **反向验证 11/11 变异可证伪** + 三脚本 `bash -n` 3/3（证据 `scripts/output/_w927_pg_baseline.json`）。
-
-**诚实性边界（显式声明）**：**PG 运行时完全未验证**（本机无 `psql`/`pg_ctl`，Docker daemon 未启动）⇒ 待实跑清单 **9 项**逐条写明验收判据与计划批次（初始化幂等性 / 真实备份 / **恢复演练行数一致** / WAL 归档连续性 / 分盘拦截 / TLS 实握手 / 迁移器端到端 / 容量实测 / 审计留存与销毁留证）。静态背书只覆盖「配置与脚本的静态不变量 + Shell 语法 + 断言自身可证伪性」，**不构成运行时证据**。
-
-**与 W926 交互审查的交叉对账（净发现 v2 自身一处设计遗漏）**：
-- **R-01（P0）**「问」浮窗硬编码 `http://127.0.0.1:8777`（线上实抓一致）⇒ 静态产物内嵌了**部署期事实**，私有化部署的拓扑被构建期锁死 ⇒ **新增 §10.6「客户端侧服务地址配置面」+ 契约 C-8 + 禁止依赖形态 #8**（禁在 L2 静态产物里硬编码 L3 地址；`127.0.0.1` 只允许开发者本机专用构建且须显式标记）。
-- **R-02/R-05** 批次号裸露 6,827 处 ⇒ 属「产物反向成为事实源」，**本批级联亦贡献其中 4 处**（结构性来源）⇒ 登记为 §10.3 已知对外副作用，实际改动由 W926 B2 批承担，不重复施工。
-- **R-06** 「检索真实语料」按钮实为**异源降级**（模板引擎生成文）⇒ 与 §9.2 F1 假设的同源降级（只检索）语义不同 ⇒ §9.2 补注两种降级形态须区分，列为 D-3 批前置确认项。
-- **R-03/R-04** hub 不可达与双 hub 并存 ⇒ 产物层 URL 唯一性问题，归 W926 B3 批，v2 侧仅登记。
-
-**两处工具自证（过程要点）**：静态校验器首跑 **7 FAIL 全是工具自身缺陷**（行尾注释未剥 + bash 探针被 WSL 坏转发器劫持）；反向验证首跑 **9/11**，两条断言因只匹配裸词（`pg_basebackup` / `backup_label` 在注释与元数据行先命中）而恒真 ⇒ 断言改为锚定代码构造 + 补禁形态后 11/11。
-
-**验证**：静态校验 66/66 · 反向验证 11/11 · `bash -n` 3/3 · 方案计数自洽（mermaid 6 / 契约 C- 8 / AC- 21 / §13.1~13.4 连续）· check_plan_template 2/2 全项符合 · verify_delivery 全量核心 0 FAIL。
-
-**未改**：xiyouji-agent-web 的 server/ 与 src/（应用代码一行未动）· site/ 任何页面 · 任何管控脚本。
-
-
-### W926（2026-10-25）：站点交互流程审查复核报告批（857 页全量复核 + 当前状态排序建议·只审查不改代码）
-
-
-
-> **来源**：用户 2026-10-25 令「帮我审一遍我网站的交互流程：页面跳转路径、按钮与状态反馈、表单填写与出错提示、空状态和异常分支是否合理，按影响用户的程度排序给改进建议」；问卷答复 = **静态站全量 200+ 页** + **只出排序建议报告（不动代码）** + 业务背景未填（按通用影响面排序加权）。
-> - **文件**：docs/11-方案报告/审查与评审/站点交互流程审查复核报告-2026-10-25.md、scripts/_w926_ia_audit.py、scripts/_w926_ia_extract.py、scripts/_w926_visible_leak.py、scripts/output/_w926_ia_audit.json、scripts/output/_w926_ia_evidence.json、scripts/output/_w926_visible_leak.json、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md。
-> - **产出**：全量 857 页（2,847 控件）四维复核 + 浏览器实跑 5 条关键路径——**12 条问题按访客影响排序**（2 P0 / 4 P1 / 3 P2 / 3 P3）：P0 两条为「问」浮窗对访客 100% 不可用（实测复现，要求访客本机跑 Python 服务）与 93% 页面可见正文裸露工程批次号 6,823 处；P1 四条为分类 hub 不可达 6 页（其中 2 页互链成环）、专题 hub 双份并存、渡口生成文混入内部工单引用、英文站可视化链接指向无 index 的目录（线上 404）；P2 三条为「检索真实语料」按钮承诺与实际不符、快捷词重复 role 属性、404 页出口过窄；P3 三条为两个内部工具页无索引、17 处 JSON 下载链接形态脆弱、10 个表单控件无标签关联。附前次审查 17 条逐条闭环状态表 + 9 项不必整改的正面结论 + 3 批建议路线。
-> - **判据自纠四条 + 独立盲审一轮**：首轮判出的「问题」里有四条是判据错不是站点错——① 链接存在性只比 *.html ⇒ 22 条假死链（实为非 HTML 资源；修正后暴露 1 条真生产死链 → R-12）；② 表单提交只认 input[submit] ⇒ 3 个假报（首页用 button[submit]，检索页是实时搜索）；③ 「catch 里没写 DOM」⇒ 116/118 假红（实为 EMBEDDED 静默回退，file:// 铁律的正确落地；该首轮数字本身不可复算，已在报告显式声明）；④ 属性表用 dict 构造让重复属性后者覆盖前者 ⇒ 首页 4 个快捷词被漏计（HTML 规范取第一个）。**教训：以某种语法形态实现判据必假红，且判据的首轮数值本身也须可复算。** 另经独立盲审代理复算：核心聚合值逐位一致（857 / 796 / 6,823 / 814 / 2,847 / 118 / 17 / 11），并抓出 6 项阻断 + 8 项非阻断（已在报告逐条修订，含「真实死链=0」误判、引用页数口径、入链分布、10 条真 a11y 缺陷被误判为误报等）。
-> - **与前次审查的边界**：本次是 2026-10-21 同指令批次的**复核 + 补审**，不是重做——前次 3 条 P0 已修 2 条、8 条 P1/P2/P3 已修 5 条，补审维度为「可见文本内部术语外泄」「访客可执行性」「分类 hub 可达性」（前两次审查均未覆盖）。
-> - **纪律**：只审查不改代码——本批 0 处 site/ 页面改动，仅新增 3 个只读探针脚本与 3 份 JSON 证据。
-> **状态**：**已收官**（W926 9f3ab8a6·git 反填·共 6 笔·W971 存量回填）
-
-
-### W925（2026-10-25）：系统架构方案 v2（目标态与落地路线·分层·模块·数据流·存储·扩展·容灾·部署·监控）
-
-
-
-> **来源**：用户 2026-10-25 令「帮我设计一套系统架构方案：整体分层、模块拆分与依赖、数据流与存储选型、扩展性与容灾、部署与监控都写到位，附几张架构图说明图」+ 四项确认（场景=内容/文档平台型·单机到 10 台·月活十万级·读多写少；技术栈=TypeScript/Node.js 全栈 + PostgreSQL；硬约束=私有化/离线禁外域依赖 + 成本敏感少用托管服务 + 合规等保审计日志与数据分级；交付形态=HTML + Mermaid + PNG 三件套）。
-
-> - **文件**：docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图-2026-10-25.html、docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图/（6 张 PNG）、docs/11-方案报告/计划方案/执行前计划-T19-系统架构方案v2.md、docs/11-方案报告/计划方案/T19-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、scripts/_render_arch_png.mjs、docs/INDEX.md、scripts/index.md、STRUCTURE.md、scripts/output/stats.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w925_spec.json、scripts/output/_cascade_files_W925.txt（逐件行见 file-index W925 段）。
-> **状态**：**已收官**（W925 ce459934·git 反填·共 2 笔·W971 存量回填）
-
-**对 W821 的修订裁定（三条根本裁定保持，存储裁定修订）**：
-- **保持**：依赖单向向下、产物不得反向成为事实源、内容真源永不因规模迁出 Git——三条与规模无关，保留成本低。
-- **修订**：W821 §7.1 S5 裁定「不采纳 Postgres」，其理由原文为「当前 DAU 百级、站点零服务端」——**该前提被规模改写**；且 W821 自载升级触发条件（DAU > 5,000 或并发写会话 > 50 或需要多用户鉴权与租户隔离）**按新规模已命中** ⇒ 档 2 由「触发式演进」提前为「既定选型」。
-- **新增**：合规横切面（数据分级 L1–L4 + 三类审计留痕 + 加密口径 + 留存期 ≥ 180 天 + 8 行合规缺口清单）——W821 全文无对应内容。
-- **让步**：若要求严格遵守 W821 原裁定，则该修订应撤回（列为开放项 O-1，待用户裁决）。
-
-**八维成文**：L0–L4 五层 + 治理/合规双横切面（7 行分层表 + 6 条层间铁律）· 6 组 21 模块 + 6×6 依赖矩阵 + 7 条禁止依赖形态 + 7 条契约 · 四条主链路（内容生产/交付发布/问答交互/合规审计）+ 读路径占比契约（静态直出 ≥ 95%）· 9 个存储候选逐项裁定（含量化触发条件）+ 7 阶段会话生命周期 + SQLite→PG 迁移映射 · 四档演进（档 2 本批启动，拆 D-1/D-2/D-3 三批）+ 10 条容量阈值 · 10 个故障域降级矩阵（RTO/RPO/恢复/演练齐全）+ 7 对象备份表 · 五条交付通道 + 私有化 10 台拓扑 + 5 步发布流水线 + 5 情形回滚 · 5 层观测面 + 18 条指标 + 6 条 SLO + 6 频率巡检。
-
-**架构图三形态（单向派生 · 派生铁律 3 条）**：Mermaid 源码为**事实源**（正文 6 处）→ 零外域 HTML 可视化页（手写内联 SVG·全仓实测无本地 mermaid 副本）→ PNG 6 张（Playwright 实测渲染）。导出脚本内建「file:// 加载期间 http(s) 请求数 = 0」断言，实测 0。
-
-**验证**：Mermaid 围栏计数 = 6 · PNG 6/6 导出成功（各 > 1 KB）· 零外域请求 = 0 · 存储候选 9 行 · 降级矩阵 10 行 · 指标 18 条 · 分级 4 级 · 合规缺口 8 行 · check_plan_template 2/2 全项符合 · verify_delivery 全量核心 0 FAIL。
-
-**执行中最大发现**：逐图语义核对——6 图中 3 张在代码审读阶段判「通过」，经读图发现语义错误（PG 直连浏览器 / 箭头落进空隙 / 连线穿组）⇒ 修正 3 处（E-01~E-03 经验沉淀）。
-
-**未验证项（6 条 · 显式声明）**：DAU/MAU 与 QPS 为行业经验区间推算（非本站实测）；**PG 性能与备份流程未实跑**（本机无 psql/pg_ctl）；等保条款按通用口径书写未核对本单位备案方案；HTML 图未做多浏览器交叉核对；10 台拓扑未压测；W821「≈ 1 批工作量」估计未复核。
-
-
-### W924（2026-10-24）：Q2 裁决落地批（OBS-10 升双层判红 + OBS-11 归并 LHCI + OBS-14 挂解冻条件）
-
-
-
-> **来源**：用户 2026-10-24 对 Q2 三指标分治建议裁决「好」——W850 建的采样机制（15 批样本）兑现为门槛。
-
-> - **文件**：scripts/check_perf_shadow.py、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、scripts/output/obs_samples.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w924_spec.json、scripts/output/_cascade_files_W924.txt（逐件行见 file-index W924 段）。
-> **状态**：**已收官**（W924 f58cd86f·git 反填·共 2 笔·W971 存量回填）
-
-**Q2 裁决落地（三指标分治）**：
-- **OBS-10 页体积升双层制**：第 47 槽（W849 影子槽·设计即预留「满 10 批后裁决」）新增 C2 全站扫描——硬上限 500KB/页判红（现役最大约 405KB·留 21% 余量·今天升今天绿·只拦新增劣化）+ 软预算 200KB 维持 WARN 观察清单（现役 10 页·构成 en 内联双份 ×4 / reader 全文页 ×4 / dialogue-sentiment ×2·根治随 BL-33 CSS 物化改革）；自测 5→9 例（双层正负样本）；实跑零红。
-- **OBS-11 归并既有 LHCI**：perf.yml 每 push 已硬拦 LCP（含 3D 分档）——1.5s SLO 定为记录值·执法由 LHCI 承担·原「攒满 10 批」动作取消（更强防线在岗）。
-- **OBS-14 挂解冻条件**：UV≥30 或 agent-web 真实使用后重议——/api/metrics 滚动窗口零访客=零数据·2s SLO 维持告警级。
-- 数据支撑：15 批样本（W850-W875）静态口径稳定（max 403-413KB·超限 9-10 页·零恶化）+ 本批现势补采；§12.2 Q2 行与 §11.5 三行状态回填系统架构方案。
-
-**验证**：check_perf_shadow 自测 9/9·实跑 C2 零红（10 页观察清单）·verify 全量核心全绿。
-
-
-### W923（2026-10-24）：review 修复批（PR #63 复审两处低危登记缺陷）
-
-
-
-> **来源**：用户 2026-10-24 令「review 一遍」——PR #63（W900-W922）合并后独立复审发现两处低危登记缺陷，本批修复。
-
-> - **文件**：docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w923_spec.json、scripts/output/_cascade_files_W923.txt（逐件行见 file-index W923 段）。
-> **状态**：**已收官**（W923 1503c9c4·git 反填·共 2 笔·W971 存量回填）
-
-**复审结论（十一项实抽全过 + 两处低危发现）**：渡口绑定/交互门禁/og 十二页图实体/C5c 零/迁移段可寻性（W750-W802 全在 ARCHIVE）/e2e 诊断零残留/降级正则写入正确/真实会话库迁移健康（user_version=3·外键与 CHECK 在位·零孤儿行·70 会话 134 消息 4 反馈数据完整）/listSessions SQL 形态实测（messageCount 键在·总数 70 对上）/W914 spec 恢复一致/CI 34/34。
-
-**两处发现修复**：① W907 让号登记行状态列无「已收官」前缀 → preflight 永真幻影在途（W825 修复过的同族·让号行状态须无害化）——补前缀后在途清单归零；② W910/W911 号在连环让号中跳过且无登记行（违反「跳号须登记」字典规则）——补两行让号登记行。
-
-
-### W922（2026-10-24）：E 裁决落地批（12 项闭环：浮窗文案+日志收官+og 白名单接线+NOTE 盘点+八项登记）
-
-
-
-> **来源**：用户 2026-10-24 对 T-18 E 档 12 项裁决「全部按建议」——W922 落地批（四件工程 + 八项登记）。
-
-> - **文件**：site/static/js/rag-chat.js、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、scripts/preflight_check.py、scripts/check_seo_head.py、site/index.html、site/reader/index.html、site/curated.html、site/data/ 十页（og 接线）、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w922_spec.json、scripts/output/_cascade_files_W922.txt（逐件行见 file-index W922 段）。
-> **状态**：**已收官**（W922 a8b974a6·git 反填·共 4 笔·W971 存量回填）
-
-**四件工程落地**：① 浮窗文案订正（生成式问答指向桌面版渡口问津）；② 干扰日志窗口收官归档（15 行封档·机器触发点常驻·preflight 提示常量同步）；③ og:image 判据白名单化（现役两图 + W893 十二张主题图·管控件经裁决批准）并按主题接线 12 页（index/reader 总目/curated + 九个 data 页）；④ NOTE 毕业盘点复核——C5c 已毕业（W904）、余 C7 与色盲 WARN 均为合法常驻说明，**无待毕业项**。
-
-**八项登记性裁决**落 T-18 E 档：Phase-1 选 ONNX（随批执行）/ agent-web 三项与 PD 套件随 D2 冻结（UV≥30 复议）/ 仓外编制位缓 / BL 维持登记 / S2·S4 待用户定时点 / 计划补齐维持冻结 / Q2 等满 10 批。
-
-**验证**：check_seo_head 855 页全过（含 12 页新图白名单）·交互门禁 0 FAIL·preflight 单测 19/19·ruff 过。
-
-
-### W921（2026-10-24）：CHANGELOG 主动瘦身批（B-W855-05 清偿·102 段迁一级归档·D1 全清）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债第三件（B-W855-05 治理文档瘦身）。
-
-> - **文件**：CHANGELOG.md、archive/docs/CHANGELOG-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w921_spec.json、scripts/output/_cascade_files_W921.txt（逐件行见 file-index W921 段）。
-> **状态**：**已收官**（W921 072000af·git 反填·共 2 笔·W971 存量回填）
-
-**B-W855-05 CHANGELOG 主动瘦身**：679KB（201 段现役·W711 审计时已超基线 11%+ 后继续涨至超基线 35%）——按文档规范 §5 归档规则执行 W736 同款一级迁移：**W700-W802 共 102 段迁 archive/docs/CHANGELOG-ARCHIVE.md**（迁后 CHANGELOG 363KB·低于 503KB 基线达标；ARCHIVE 978KB 未触 1MB tier2 阈·滚动分支零启用）。迁移脚本全断言（三文件段 W 号并集守恒 693 / 全局无重号 / 迁后倒序）·任一不符零落盘——首版 tier2 滚动分支缺陷即被守恒断言当场拦下（零落盘）后收缩窗口绕开。段内容零改动（纯位置迁移·历史段禁改纪律保持）。
-
-**验证**：第 17 门禁索引健康全过（段完整性/倒序/编号上限）·第 31 门禁 C4 仅批内在途残留。
-
-
-### W920（2026-10-24）：副本链值级对账门禁批（B-W855-04 清偿·基线冻结 24 件存量）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债第二件（B-W855-04 副本链值级对账门禁）。
-
-> - **文件**：scripts/check_data_copy_chain.py、scripts/output/data-copy-chain-baseline.json、tests/unit/test_check_data_copy_chain.py、scripts/ci_sim.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w920_spec.json、scripts/output/_cascade_files_W920.txt（逐件行见 file-index W920 段）。
-> **状态**：**已收官**（W920 a85018d7·git 反填·共 2 笔·W971 存量回填）
-
-**B-W855-04 副本链值级对账门禁建置**：实测漂移定性——47 个入库副本中 24 个与生成器产物**值级真漂移**（非格式差异·三年无防线）。方向未定（入库副本为页面消费的生效真源·生成器产物 gitignored 本地）——翻旧账需逐个比对消费方（另批定性），本门禁按第 43 槽基线冻结模式**先防增量**：JSON 深度相等对账·存量 24 件入基线登记·基线外新漂移判红·恢复一致 NOTE 除名·源目录缺（CI 态）NOTE 放行（W716 json_count 键移除同因登记）。self-test 5/5（首版 T4 例自身逻辑错被复跑抓出修正——负样本测试再立功）·接 ci_sim 第 11 项。
-
-**验证**：self-test 5/5·主判据 0 FAIL（24 件全在基线内）·专项单测 2 例·第 42 门禁覆盖 0 FAIL·ruff All checks passed。
-
-
-### W919（2026-10-24）：DB 三包批（B-DB-04 迁移框架 + B-DB-02 索引查询 + B-DB-03 约束降级）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债首项（B-DB-02/03/04 三包·承接 W917 包一）。
-
-> - **文件**：xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/server/api.integration.test.ts、docs/agent/agent-web.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w919_spec.json、scripts/output/_cascade_files_W919.txt（逐件行见 file-index W919 段）。
-> **状态**：**已收官**（W919 4f5e2157·git 反填·共 2 笔·W971 存量回填）
-
-**B-DB-04 迁移框架**：`MIGRATIONS[]` version 单调 + 事务执行 + user_version 记账（v1 吸收原 try/catch 手写探测迁移——W823 判定的静默吞错反模式退役；v2 包二四索引；v3 feedback 表重建——存量库补外键引用/message_id 单维唯一索引/created_at CHECK·重建期外键 OFF 后复位）。「改表定义对已有库无效」规范固化进 docs/agent/agent-web.md。实现期一真缺陷被集成测试当场抓出：v3 DROP TABLE 连带删索引、迁移漏重建致 ON CONFLICT 无约束可撞——补建后转绿。
-
-**B-DB-02 索引与查询**：sessions(updated_at)/messages(session,created)/feedback 两索引落位；会话列表 N+1 改写为单 SQL 子查询（limit 默认 50·上限 200·keyset 前端取页留应用批——当前会话量无截断·披露）。
-
-**B-DB-03 约束降级**：tool_calls JSON.parse 脏数据降级 null（原裸 parse 单行脏数据让整会话不可读）。
-
-**测试对齐**：反馈集成测试从虚构 ID 时代（无外键约束的写法）改为先落真实 session/message 底数——外键正确拒绝虚构引用正是 W917 修复本体的回归证明。
-
-**验证**：tsc 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂。
-
-
-### W918（2026-10-24）：检索降级批（B-ARCH-01 清偿·波二九件全清）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 C 档波二第四件（B-ARCH-01·波二至此九件全清）。
-
-> - **文件**：xiyouji-agent-web/server/chat.ts、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w918_spec.json、scripts/output/_cascade_files_W918.txt（逐件行见 file-index W918 段）。
-> **状态**：**已收官**（W918 73c95f49·git 反填·共 2 笔·W971 存量回填）
-
-**B-ARCH-01 检索降级落地**：chat 路由 catch 分流——LLM 上游不可达（`LLM API 5xx/429`·ECONNREFUSED/ETIMEDOUT/ENOTFOUND/EAI_AGAIN·fetch failed）时，SSE 以降级说明 text + done 收尾（声明模式切换·本轮已送达的 tool_result 检索引用仍有效·不重复推送防半截重放），仅其余异常维持 W829 固定文案路径。W821 架构方案「容灾主战场是降级可用」在问答链路的落点闭合。
-
-**验证**：tsc --noEmit 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂（5 文件）。
-
-
-### W917（2026-10-24）：DB 正确性包一（B-DB-01 四 P0 落地 + B-DB-05 schema 门禁建置）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 C 档第五件（B-DB-01+05·agent-web SQLite 数据正确性包一 + schema 门禁）。
-
-> - **文件**：xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/chat.ts、scripts/check_db_schema.py、tests/unit/test_check_db_schema.py、scripts/ci_sim.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w917_spec.json、scripts/output/_cascade_files_W917.txt（逐件行见 file-index W917 段）。
-> **状态**：**已收官**（W917 a63e5a21·git 反填·共 2 笔·W971 存量回填）
-
-**B-DB-01 数据正确性四 P0 落地**（W823 审查定性「随数据量增长不可逆」的高危面）：
-- **外键强制**：`pragma('foreign_keys = ON')`——DDL 里的 FOREIGN KEY 声明自建库起从未生效（级联删除空转）；
-- **清库补 feedback**：clearAllData 三表按依赖序全清（此前反馈表跨「清空全部」存活）；
-- **反馈唯一索引单维**：`(message_id, verdict)`→`(message_id)`——原维度允许同一消息赞踩两条矛盾记录并存；写路径同步 INSERT OR IGNORE→ON CONFLICT(message_id) DO UPDATE（改判为覆盖而非并存）；
-- **会话主键服务端生成**：`id: sessionId || uuidv4()`→`id: uuidv4()`——客户端可控主键是 W823 实测「旧会话正文泄漏进新建同名会话」串档路径，真值经响应 session_id 返回前端。
-
-**B-DB-05 schema 门禁建置**：`check_db_schema.py` 静态锁定四不变量（摘任一必红·self-test 3/3 + 专项单测 2 例）·接 ci_sim 第 10 项每 PR 实跑。
-
-**验证**：agent-web `tsc --noEmit` 零错·test:server 97 passed（skip 1）·test:integration 19 passed（skip 1）零挂·ruff All checks passed·第 42 门禁覆盖 0 FAIL。
-
-
-### W916（2026-10-24）：波二第三件批（新建页准入门禁建置·C-W818-01 清偿）
-
-
-
-> **来源**：用户 2026-10-24 令「按顺序全部都做了」——T-18 C 档波二第三件。
-
-> - **文件**：scripts/check_page_admission.py、tests/unit/test_check_page_admission.py、scripts/ci_sim.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w916_spec.json、scripts/output/_cascade_files_W916.txt（逐件行见 file-index W916 段）。
-> **状态**：**已收官**（W916 ed3b55ec·git 反填·共 2 笔·W971 存量回填）
-
-**C-W818-01 准入门禁建置（静态版）**：file:// 两铁律（禁 type=module·零外域 script src）此前只有 W818 取证探针无常驻防线——新建 `check_page_admission.py`（857 页静态扫描·秒级·fail-closed·self-test 3/3 + 专项单测 2 例），接 ci_sim 第 9 项每 PR 实跑；浏览器级三判据仍归探针（取证件定位不变）。现状实测 857 页 0 FAIL（零 module·零外域——纪律现状即达标，本批给现状上锁）。
-
-**波二余项状态**：第三件完成；第四件（B-ARCH-01 检索降级）与第五件（B-DB-01+05 数据正确性包）为 agent-web 中大型工程，连同 D1 大项排续批（保质优先于赶量）。
-
-**验证**：self-test 3/3·857 页 0 FAIL·第 42 门禁覆盖 0 FAIL·pytest 单测 2 例过。
-
-
-### W915（2026-10-24）：波二余件一·二批（gates.md 时点快照收敛 + 404 页令牌补迁移）
-
-
-
-> **来源**：用户 2026-10-24 令「按顺序全部都做了」——T-18 C 档波二余项顺序执行（本批第 1-2 件）。
-
-> - **文件**：docs/agent/gates.md、site/404.html、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w914_spec.json、scripts/output/_cascade_files_W915.txt（逐件行见 file-index W915 段）。
-> **状态**：**已收官**（W915 ec6cf06a·git 反填·共 2 笔·W971 存量回填）
-
-**A-T02-01 gates.md 判据收敛**：第 43 槽描述内嵌的 W753 时点快照数字（缺口 V3/V4/V2 三数·首跑耗时·另一处 770 计数）全部剥离，改为指向 chart-values-report.json 与基线文件——判据文档只留判据与阈值（p00=0.82 阈值语义保留），时点值归报告与产物文件，杜绝「判据文档养快照数字必漂移」。
-
-**C-B02 404 页补迁移**：B1 唯一漏页——:root 补 v4 间距令牌页内副本（--space-6/8/9·与 tokens.css 同值·404 为自含小页不参与 inline_css 分发），24px/48px 40px 两处等值替换；非刻度值（9px/18px/16px 等）按 W891 等值替换纪律保留字面量。
-
-**验证**：check_js_syntax 855 文件过·check_structure 1412 块平衡过·var(--space- 命中 0→3。
-
-
-### W914（2026-10-24）：英文版 README（完整对照版 + 双向语言互链）
-
-
-
-> **来源**：用户 2026-10-24 令「增加一个英文版的 README」（本批原拟 W911·并行会话本地连立 W912/W913·为免与在途号段冲突，改取下一号 W914）。
-
-> - **文件**：README.en.md、README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w914_spec.json、scripts/output/_cascade_files_W914.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/file-index.md、CHANGELOG.md、HANDOVER.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff。
-
-> - **交付形态**：完整对照版（非精简摘要）——与中文 README 逐段对应，标题沿用英文站官方名「Journey to the West · Annotated」。
-
-> - **三条设计决策**：① **零版本号**——英文版不写「当前批次 W###」行（该字段由级联单写），改指 CHANGELOG 顶段 ⇒ 英文版不必随批次逐次维护、不会漂移；② **语言边界如实标注**——站内英文版是完整版（`/en/`），但 `docs/` 长文仍为中文，英文版开头直接写明；③ **站内链接指向英文站**——在线体验与宣传单页预览均指向 `/en/` 与 `-en` 资产。
-
-> - **配图**：沿用中文版同款（复用仓内已有资产·零外域依赖）——顶部水墨山景 banner + 「📊 Visualization Samples」浅色四张（关系网络/热力图/雷达图/时间线）+ 暗色两张 + 宣传单页英文版正面预览；alt 全英文描述。
-
-> - **双向互链**：中文 README 顶部加 `[English](README.en.md) | 简体中文` 语言切换行，目录树补 `README.en.md` 一行；英文版顶部反向互链。
-
-> - **验证**：全仓链接校验 20814 条 0 broken（英文版新增 51 条链接全有效）·英文版本地渲染逐屏核对（标题/语言切换/banner/四枚徽章/可视化样例组/单页预览/开发者区折叠块）全部正常 ·英文版内数字沿用 `<!--stats:*-->` 实体化标记（与中文版同键）⇒ 数据变更时同源。
-
-> - **状态**：已收官（英文版 README 入库·双链互通）。
-> **状态**：**已收官**（W914 64cfb290·git 反填·共 2 笔·W971 存量回填）
-
-### W913（2026-10-24）：波二小项四件批（T04 头订正 + bump 测试关闭 + E2E 钉版 + 站点数字失真修正与对账面扩展）
-
-
-
-> **来源**：用户 2026-10-24 问「全都做完了吗」——按「今天做掉」总令续清 T-18 C 档波二可执行小项（四件批）。
-
-> - **文件**：docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、.github/workflows/ci.yml、site/index.html、scripts/check_doc_sync.py、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w913_spec.json、scripts/output/_cascade_files_W913.txt（逐件行见 file-index W913 段）。
-> **状态**：**已收官**（W913 e164819d·git 反填·共 2 笔·W971 存量回填）
-
-**四件清偿**：① **D-W830-02** T-04 计划头「施工未动工」陈旧状态订正为已收官（W827+W845-847·原文备档行内）；② **D-W757-02** bump_version 专项测试——**登记关闭**：工具已随 W711 方案 D 停用（本批实读 --help 实证 STOP 提示），测试需求随工具退役失效；③ **D-W792-02** ci.yml E2E 依赖钉版：`npm install playwright`（无约束·绕过 lockfile）→ 钉 1.63.0 对齐 scripts/package-lock.json（T-10 实证的真漂移面）；④ **B-W855-01** 站点聚合数字失真：site/index.html「全站 772 篇」订正为「615<!--stats:a1_a6_docs--> 篇（A1-A6）」+ **C5b 扩展面纳入 site/index.html**——站点聚合数字从此有标记对账防线（数字+防线两半边齐）。
-
-**验证**：check_doc_sync self-test 33/33·新扩展面实跑零红（615 标记对账生效）·lint_links site 14785 链接 0 broken·pytest 全量·ruff 过。
-
-
-### W912（2026-10-24）：未落地任务首波清偿（T-18 全量盘点 + 站内交互债整包：渡口脚本考古回灌 + 抽屉修复 + 交互门禁建置）
-
-
-
-> **来源**：用户 2026-10-24 令「docs/11-方案报告 把这个文件里面所有没做的任务全部列出来按照模板排一下今天做掉」——T-18 计划件（全量盘点）+ 本批为首波施工。
-
-> - **文件**：site/dukou-engine.html、site/index.html、site/curated.html、site/dashboard.html、site/guide.html、site/sw.js、site/data/text-search.html、site/data/cross-time-danmaku.html、site/404.html、scripts/check_interaction_binding.py、tests/unit/test_check_interaction_binding.py、tests/unit/test_preflight_touches.py、scripts/preflight_check.py、scripts/ci_sim.py、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、pytest.ini、scripts/output/stats.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/tag-cloud.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w912_spec.json、scripts/output/_cascade_files_W912.txt（逐件行见 file-index W912 段）。
-> **状态**：**已收官**（W912 f33d185a·git 反填·共 2 笔·W971 存量回填）
-
-**① T-18 全量盘点件**（落 计划方案/·32 判据全项过）：以 T-09 四簇 217 项为基线 × 10-24 机器复核——8 项已被 W876–W906 核销（A 档留档）；余项分 **B 今日（本批）/ C 近日波二（站点数字门禁·gates 判据收敛·bump 测试·404 补迁移·DB 包一等九项）/ D1 真债大项（按依赖排）/ D2 零受众冻结（显式不排期·解冻条件=judge_gate 重判 UV≥30——把「报告承诺」重排为「价值驱动」的结构性优化）/ E 待用户裁决十二项集中清单**。
-
-**② 渡口页根修（W858 P0·线上交互全失效）**：考古发现主脚本在 W333 后某批被整段剥离（历史各版均有 5 处绑定·当前页零监听）——**自 git 历史（9a1c0306·W333）提取原装 10.4KB 主脚本回灌**（优于重写：本地 RAG 8777 + 零依赖 SVG 力导向 + 渡口知识库全对版），另补 themeToggle 绑定（历史原装即缺·与全站 xy-theme 键一致）；CSP 重算 860 哈希零漂移。
-
-**③ 四根页抽屉桌面误隐修复**：close() 的 350ms 延迟置 none 改为仅移动端（≤768）生效、桌面清内联回 CSS 默认——resize/ESC 不再永久隐藏桌面导航（index/curated/dashboard/guide 四页）。
-
-**④ 小项五连**：sw.js 预缓存死链（mobile-index 两处）清理；text-search 注入失败加可见错误条（role=alert）；假 LIVE 文案改真实口径（「LIVE 弹幕」→「弹幕回放」·aria 同步）；ask-chip 键盘可达（tabindex+Enter/Space 委托）；404 页补夜读防 FOUC。P-06 弹幕表单复核不成立（无 HTML 级禁用）、P-11 FAB 已消失（零元素）、P-09 归并 B-W855-01——定性留档 T-18 件。
-
-**⑤ 交互绑定门禁建置**（A-T07-05）：`check_interaction_binding.py`——注册控件对账 P1（页面脚本区须有控件引用·缺一即红）+ 泛化 NOTE P2（起步策略·W904 C5c 同款治理路径）+ fail-closed + self-test 3/3 + 专项单测 3 例（注册表锚点防漂）；**接 ci_sim 第 8 项**（每 PR 干净检出实跑·挂 verify 槽位涉五处对账另批处理——D-06 披露）。
-
-**⑥ preflight 状态列定位根修**：`_STATUS_CELL_RE` 由单层括号紧匹配放宽为前缀匹配——原形态拒识「已收官（hash·自测 33/33（嵌套）·…）」长尾格→回退固定下标→被含转义竖线碎行击穿（本批认领被误拦一次的实测根因·W825 修法 ① 的残余缺口）；单测 +2 锁定（19/19）。
-
-**协作事件**：本批原拟之号两度被同日并行会话先落地占用（README 专业化批与其后续批·页脚署名在 HEAD 为证），按「先落地者保留」连续让号（T-06 让号同款·T-18 D-04 留档）。
-
-**验证**：交互门禁 self-test 3/3 + 主判据 0 FAIL（渡口全控件达标）·pytest 全量 867 collected 864 passed 3 skipped·preflight 单测 19/19·ruff All checks passed·CSP 860 哈希零漂移·verify 全量核心全绿·第 48 门禁 32 判据过（新增件全项）。
-
-
-### W909（2026-10-24）：README 专业化改版（结构层级 + 配图 + 头部与文案修正）
-
-
-
-> **来源**：用户 2026-10-24 令（本批原拟 W907·并行会话先落地认领 W907 ⇒ 让号；让至 W908 后双方仍同号 ⇒ 再让一次·本批最终取 W909）「把 README 优化一下看起来专业一点·顺便你看看有哪些图片是可以添加进的」。
-
-> - **文件**：README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w909_spec.json、scripts/output/_cascade_files_W909.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/file-index.md、CHANGELOG.md、HANDOVER.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/data/search.html、site/en/search.html、AGENTS.md、CITATION.cff。
-
-> - **结构层级**：单一 H1 + 两个 H2 分区（普通读者 / 开发者维护者），其下子标题统一降 H3——GitHub 仓库首页此前三个 H1 并列，锚点与大纲都不专业；仓内无 README 锚点引用（已 grep 全仓确认）⇒ 降级零影响。
-
-> - **配图（本次核心）**：顶部加主视觉 banner（`site/static/images/ink-mountains-hero.webp`·水墨山景·轻量）；新增「📊 可视化样例」小节（浅色四张 `viz-*.webp` + 暗色两张 `viz-dark-*.webp`·并排居中·宽度受控）；宣传单页小节补正面预览图（`assets/promo/output/xiyouji-flyer-a4-front.png`）。选图原则：只用仓内已有资产·零外域依赖·控制体积（新增图片合计约 1.4 MB 以内）·alt 全中文描述。
-
-> - **头部与文案**：三枚徽章并为一行 + 补一枚 CI 门禁徽章；项目定位收尾表述去内部叫法（「新功能三页面」→「工具页」）；删末尾指向旧批次的陈旧收尾行（与顶部现役批次行矛盾·且 README 禁写批次细节）；「AI 生成说明」孤立 bullet 归并回列表。
-
-> - **顺带修台账两处结构损坏**：W892 行尾重复粘连的 W893 整段（W896 批同类残留·本批补清）+ W764 与 W906 描述列内未转义管道符导致的列错位（仅加转义符·不改文字语义）——全表未转义管道符体检复检为零异常。
-
-> - **增行预算说明**：README 常规增行预算为 0（文档规范 §1 表）——本批属用户明示授权的一次性结构优化·净增 14 行·后续批次仍守 0 行预算。
-
-> - **验证**：全仓链接校验 20763 条 0 broken（含新增图片路径）·C5c 裸聚合数字判红面零新增（新增文字与 alt 均避「数字+量词」形态）·搜索索引与 CSP 内联脚本哈希已同批刷新（zh 272743 B / en 292765 B·856 页零漂移）·`verify_delivery.py --scope auto` 核心全部通过（54 段自洽锁绿）·pre-commit 钩子同判据通过。
-
-> - **状态**：已收官（README 门面改版完成·台账结构归位·门禁全绿）。
-> **状态**：**已收官**（W909 e8697fcd·git 反填·共 3 笔·W971 存量回填）
-
-### W906（2026-10-24）：C4-f 三态化（并行批次登记行纯追加残留放行·多 Agent 误拦根修）
-
-
-
-> **来源**：用户 2026-10-24 对「C4-f 三态化（多 Agent 并行误拦根修）」建议裁决「可以」——W904 收官提交被并行 W905 会话的台账认领行（未暂存）拦停一次的实录驱动。
-
-> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w906_spec.json、scripts/output/_cascade_files_W906.txt（逐件行见 file-index W906 段）。
-> **状态**：**已收官**（W906 831b5436·git 反填·共 2 笔·W971 存量回填）
-
-**C4-f 三态化（并行在途与漏 add 分流）**：declared 文件的工作树残留，原二态判「漏 add」必红；现若该文件未暂存 diff 为**纯追加**（零删改行 + 新增行全部 `| WNNN ` 批次登记行形态）→ 降 NOTE 放行（他方在途·以 HEAD 为准不重做）——与 W896「未跟踪在途件容忍」同族收口。**在位编辑（如状态列收官回填）含删改行照旧必红**，判据无弱化。实现：`_foreign_append_only()` 在 build_inputs 逐 dirty 文件 `git diff` 判形（git 探测不可用则该文件不计入·保守回退原 FAIL·fail-closed 方向）；self-test 增 T32（纯追加放行）/T33（非追加仍红）双向锁，33/33；主判据实跑在本批未暂存认领行在场时出 NOTE 零红——修复目标当场实证。
-
-**审查报告增 F5 节**：C4-f 并行误拦的实录（含 package.json 混入暂存的处置）、根因（二态盲区）、修复与配套操作纪律（按清单 add / 他方件只移暂存不动磁盘 / 他方认领行随批携带标注归属）；遗留盘点表 F1 行订正为已修、新增本项已落地行。
-
-**验证**：self-test 33/33·主判据 C4-f 三态 NOTE 实证·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
-
-
-### W905（2026-10-24）：两项存量红项清理（暗色门禁补色 + npm 依赖漏洞清偿）
-
-
-
-> **来源**：用户 2026-10-24 令「清」——清 CI 上两项非 required 的存量红项（npm audit 依赖漏洞 / Dark-state gate 暗色门禁）。
-
-> - **文件**：site/data/character-semantic-network.html、site/en/character-semantic-network.html、xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、scripts/output/_vermilion_solid_cache.json、scripts/output/_w905_spec.json、scripts/output/_cascade_files_W905.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
-
-> - **暗色门禁根修（补色规则而非改判据）**：红项仅 2 条——中英两版 `character-semantic-network.html` 的热力图各有 1 个 `invisible` 形状（`rgb(163, 1, 38)`·亮度 0.0795 < 0.16）。取证链：页面暗色态用**枚举式**提亮清单（`html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }` 等 16 条）覆盖深色填充，而 **W674（88431cee）修正热力图色阶二次归一化**（`d3.scaleSequential(d => d3.interpolateYlOrRd(d / maxWeight)).domain([0, maxWeight])` → `d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight])`）后色阶满映射，新增中间值 `rgb(163, 1, 38)` 不在枚举清单内 ⇒ 漏网变暗。**修法**：两页各补 1 条同族提亮规则（`rgb(163, 1, 38)` → `#ce7e88`·亮度 0.2982），与既有 16 条同构，不改判据、不改基线、不改色阶语义。
-
-> - **npm 依赖漏洞清偿（4 包）**：`dompurify` 3.4.16→3.4.17（critical·SAFE_FOR_TEMPLATES 绕过 / IN_PLACE 分离子树 / XHTML SMIL 三则公告）、`markdown-it` 14.3.2→14.3.3（high·两次二次时间 DoS·经 cherry-markdown 传递引入·用 `overrides` 抬版）、`body-parser` 2.3.0→2.4.0（high·压缩体尾字节 DoS·经 express 传递）、`vite` 8.3.1→8.3.5（high·dev 侧 6 则公告·launch-editor 命令注入与 fs.allow 绕过）；另加 `overrides` 强制 `zod` 4.6.7（`@tdesign-react/chat` 声明 zod ^3.24.2·漏洞范围 `zod <4.6.6` 覆盖全部 v3 且 v3 已 EOL 无修复版·而顶层 zod 4.6.7 才是运行时校验实际所用·override 后编译与测试均无回归）。
-
-> - **验收**：暗色门禁判据权威脚本复验——164 页全量 S2-desktop-dark 审计（`node scripts/_audit_render_states.js --states S2-desktop-dark --scope charts` + `node scripts/check_dark_state_gate.js`）→「OK 同页同类型缺陷数零新增，暗色门禁通过」（修前同一命令判红 2 项）；`npm audit --omit=dev --audit-level=high` → `found 0 vulnerabilities`（CI 口径·exit 0），全量口径（含 dev）亦 0；`npm run build`（tsc -b && vite build）exit 0；`npm run test:all` exit 0（集成 19 passed / 1 skipped·Windows 无 SIGTERM 语义属 CI 实跑项；客户端 5 文件 51 tests passed）。
-
-> - **状态**：已收官（两项存量红项均已消除·判据与基线未改·依赖升级零回归）。
-> **状态**：**已收官**（W905 8c18b31f·git 反填·共 2 笔·W971 存量回填）
-
-### W904（2026-10-24）：C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免）
-
-
-
-> **来源**：用户 2026-10-24 引用 W902 审查报告 F4 遗留项「C5c 裸聚合 74 处收敛债」令处理——W703 建槽时「起步策略·收敛后转 FAIL」设计终态的执行批。
-
-> - **文件**：scripts/stats.py、scripts/check_doc_sync.py、README.md、STRUCTURE.md、AGENTS.md、docs/00-导读/项目说明.md、CONTRIBUTING.md、docs/00-导读/统计口径说明.md、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、scripts/output/stats.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w904_spec.json、scripts/output/_cascade_files_W904.txt（逐件行见 file-index W904 段）。
-> **状态**：**已收官**（W904 69ae9e89·git 反填·共 2 笔·W971 存量回填）
-
-**① stats.py 增 7 板块键**：a2/a3/a5/a6/learn/cognition/spirit（口径对齐 a4_docs——板块顶层 .md 排 README·Git 索引实算），首刷值 44/215/34/13/4/3/4。
-
-**② check_doc_sync 判据四升级（管控件·F4 处理令）**：
-- **C5c 由 NOTE 转 FAIL**（W703 终态·防回退）；
-- **命中后置精确豁免**：裸命中后紧跟 `<!--doc-sync:exempt-->` 只豁免该命中，同行句式/标记对账照跑（供「既有 stats 标记又含常量」的混排行）；
-- **整行豁免收紧为行首形态**——原「行内含即整行跳过」会吞掉后置豁免行上的标记对账（T30 负样本实证·现存零使用零迁移）；
-- **RE_BARE_AGG 词边界** `(?<![A-Za-z])`——「S1 项目」「A2 个人随笔」「S3 项目」类编号假阳性不计（实测 3 处）。
-- self-test 增 T27-T31 五例（先红后绿·含假阳性防回归）·31/31。
-
-**③ 存量 74 处三分治清零（C5c 实测 74 → 0）**：实体化 24 处（13 个键位）/ 后置豁免 44 处（常量·历史时点·功能描述）/ 改写去漂移数 2 处。**两处陈旧值随批纠正**：STRUCTURE「A5 已建 4 篇」实数 34（无对账期漂移的实锤案例）；「docs/INDEX 321 篇」陈旧计数改写为不带数表述。README「docs 18 个板块」同改描述式。
-
-**④ F4 状态收口**：审查报告状态行/遗留盘点表/README 登记行 34 同步订正。
-
-**验证**：check_doc_sync self-test 31/31·主判据 C5c 0 处·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
-
-
-### W903（2026-10-24）：审查发现修复（preflight touches 语义归一 + 门禁 45 提示语补序）
-
-
-
-> **来源**：用户 2026-10-24 对机制审查报告（W902）F1/F2 两项管控件修复裁决「批准」。
-
-> - **文件**：scripts/preflight_check.py、scripts/verify_delivery.py、tests/unit/test_preflight_touches.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w903_spec.json、scripts/output/_cascade_files_W903.txt（逐件行见 file-index W903 段）。
-> **状态**：**已收官**（W903 941fe414·git 反填·共 2 笔·W971 存量回填）
-
-**F1 preflight touches 语义归一（假绿闭口）**：`_split_touches` 改扫描式 tokenizer——**全角括号内不切分且注记整段丢弃**（注记内常含中点·先切后剥必碎·本批实现首版即踩此坑由负样本测试暴露后改扫描式）；`touches_conflict` 由字面集合交集扩为**对称目录前缀匹配**（`X/**` 与 `X/` 归一到 `X`·对方任一元素等于 `X` 或以 `X/` 开头即命中·双向·前缀锚定整段防兄弟路径误报）——W900 认领行的通配+注记形态与并行批具体文件声明从此能真撞真报。**先红后绿**：新增单测 6 例（注记剥离 / 通配 vs 文件内 / 斜杠目录形态 / 双向 / 兄弟路径不误报 / W900 行原文回放）旧码下 5 例红实证、新码 17/17 绿；实现期两个真 bug（注记内中点切碎、`/**` 剥位少一）均被自己的负样本当场抓出——「建置即红检测法」再次闭环。安全性前提入档：仓内路径零全角括号（git ls-files 实证）。
-
-**F2 第 45 门禁提示语补序**：verify_delivery gate-45 fail_msg 由「重跑 refresh 刷新」扩为「**先 git add 本批新件再重跑 refresh**（生成器按 Git 索引收集·W896 口径·W900/W901 连踩）」——一行文案闭掉连续两批踩中的操作顺序坑。
-
-**随批订正**：审查报告状态行与 README 登记行 34 的 F1/F2「待批」改「已由 W903 修复」。
-
-**验证**：单测 17/17（先红后绿留证）·pytest 全量 858 passed 3 skipped·ruff scripts/+tests/ All checks passed·verify 全量 54 段核心全绿。
-
-
-### W902（2026-10-24）：机制脚本门禁全量审查与记忆固化入仓（四发现 + pitfalls/AGENTS/文档规范增补）
-
-
-
-> **来源**：用户 2026-10-24 两令——「顺便再审查一遍之前所有批次的机制、脚本、门禁有没有问题」+「本项目是多 Agent 协作，写入 Agent 私有记忆文件作用有限，写入项目文件才真实可靠·盘点记忆文件需入仓内容」。
-
-> - **文件**：docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md（新增）、docs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、docs/00-导读/文档规范.md、CLAUDE.md、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w902_spec.json、scripts/output/_cascade_files_W902.txt（逐件行见 file-index W902 段）。
-> **状态**：**已收官**（W902 82bb8ff7·git 反填·共 2 笔·W971 存量回填）
-
-**① 机制层全量审查（报告落 审查与评审/·登记行 34）**：三层审查——机器面（26 个带自测门禁 `--self-test` 全绿·verify 54 段·pytest 852 passed·`ci_sim.py` 干净检出 7/7 PASS 含全仓 20761 链接 0 broken·CSP 856 页零漂移）+ 代码面（preflight/batch_cascade/check_folder_docs/check_doc_sync 语义审计）+ 流程面（干扰日志考古对拍）。**四发现**：
-
-- **F1【中高·假绿族】preflight touches 交集为字面字符串比对**——`docs/11-方案报告/**（注记）` 这类通配/带注记声明与对方具体文件声明**字面不等恒不命中**（W900 认领行实证）·W897 修分隔符后同族的语义面残余·两起真实撞面（W825/W893）均未被机器拦下；修法（剥注记 + `X/**` 前缀展开 + 双向对称 + 负样本单测）**待批**（管控件）。
-- **F2【低】第 45 门禁 FAIL 提示语缺「先 git add 再 refresh」顺序**——W896 生成器按 Git 索引收集·refresh 先于 add 必漏新件·W900/W901 连踩；一行文案修法**待批**（管控件）。
-- **F3【流程·本批闭合】§8 干扰日志窗口内两起覆盖事件漏登**（W825 解析层修复被并行提交覆盖·W893 台账认领行被替换）——事件路径不经过 W822 两触发点·与断档同源；本批补 2 行延迟登记（如实标注·机制不擅改）。
-- **F4【在账】C5c 裸聚合 74 处 NOTE 未推进**（W703 起步策略·列入遗留盘点）。
-
-**② 记忆固化入仓（用户指令执行·报告 §3 全清单）**：文档规范 §11.1 立**常设指令行**「方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/」+ 11-方案报告 README 维护契约与 CLAUDE.md 速查层同源指针；AGENTS §4.3 本机环境事实补 4 条（curl `--ssl-no-revoke`·`/tmp` 对 Windows Python 不可见·PMC→Europe PMC 兜底·`gh api` 中文 `-f`）；pitfalls.md 补 3 条（力导向 canvas 边层·CSP 写路径 `--check` 盲区·暗色审计 http 前置假 0）·三节计数同步（CSS 9→10·JS 5→6·数据 5→6·总数 49→52·AGENTS 六主题句同批订正）。逐条盘点 22 项记忆：8 项入仓 / 11 项仓内已覆盖（grep 实证）/ 3 类刻意不入（S4 双盲·他仓·宿主层）；保真度 22 犯模板与图表判定三教训列「建议后续批」。
-
-**验证**：verify 全量 54 段核心全绿（含第 32 门禁 CLAUDE.md 速查层 46 行过）·lint_links docs 5481 链接 0 broken·pytest 852 passed 3 skipped·ruff scripts/ 口径过·ci_sim 7/7 PASS。
-
-
-### W901（2026-10-24）：C5b 对账面恢复 + W900 披露项清偿（递归 glob / W757 链接新址 / T-16·T-17 补登）
-
-
-
-> **来源**：用户 2026-10-24 对 W900 批披露项裁决「批准；改。落库」——三件披露项/遗留项随批清偿；管控件改动（check_doc_sync.py）经用户明示批准。
-
-> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/README.md、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w901_spec.json、scripts/output/_cascade_files_W901.txt（逐件行见 file-index W901 段）。
-> **状态**：**已收官**（W901 25b27066·git 反填·共 2 笔·W971 存量回填）
-
-**① C5b 对账面恢复（管控件·已批）**：`check_doc_sync.py` 的 `c5b_extra_surfaces()` 第二面由「`docs/11-方案报告/*.md` 根层非递归 glob」改为「`**/*.md` 递归收集、`计划方案/` 子目录除外」——W900 目录分区把带 stats 实体标记的《系统架构方案》《取经编制表》移入子目录后根层 glob 失明（W900 段披露的对账面缩水），本批经用户批准恢复覆盖；**计划方案豁免条款原样保留并补实证**：该子目录实测 8 件计划档带冻结 stats 标记（时点快照纪律·同 CHANGELOG 历史段），入面对账即假红，docstring 与文件头描述同步更新。
-
-**② W757 段链接改指新址（历史段改动·经用户明示批准）**：CHANGELOG W757 段内 1 条工程基础设施审计报告链接由旧址改指 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`——仅地址订正，叙事零改动；该链接为 CHANGELOG 全文唯一指向本目录的真实链接，改后无断链（lint 复验 5480 链接 0 broken）。
-
-**③ T-16/T-17 补登**：README 计划方案表补第 19/20 行（摘要据两件自述与 W893/W896 台账行提炼），节头「表格登记 18 行」订正为 20 件全登记，W900 的登记缺口披露行撤除、按补登记惯例（W858/W884 同式）在节首注记区留 W901 补登记注记；README §二 C5b 提示行由「待批」更新为「W901 恢复」口径。
-
-**验证**：check_doc_sync 实跑 C5b 递归新面零 FAIL（系统架构方案/取经编制表恢复对账·README 内占位标记串不受影响）；ruff（CI 口径 `ruff check scripts/`）All checks passed；pytest 全量 852 passed 3 skipped；lint_links --dir docs 5480 链接 0 broken。
-
-
-### W900（2026-10-24）：11-方案报告目录分类重组（根层归四区 + 索引重构 + 链接与派生面全量同步）
-
-
-
-> **来源**：用户 2026-10-24 令「docs/11-方案报告 重新给文件夹整理分类下，现在看着太乱了」——该目录根层此前 20 文件平铺（审查/方案/调研/治理混置），本批为目录分类重组。
-
-> - **文件**：docs/11-方案报告/审查与评审/（10 件迁入）、docs/11-方案报告/设计与架构方案/（7 件迁入）、docs/11-方案报告/治理与核查/（3 件迁入）、docs/11-方案报告/调研与数据复盘/（2 件 + 读者数据截图 5 件迁入）、docs/11-方案报告/README.md、docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md、docs/INDEX.md、site/data/search.html、site/en/search.html、HANDOVER.md、STRUCTURE.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w900_spec.json、scripts/output/_cascade_files_W900.txt（逐件行见 file-index W900 段）。
-> **状态**：**已收官**（W900 568ca457·git 反填·共 2 笔·W971 存量回填）
-
-**根层分类重组（22 文件 + 截图 5 件归入 4 个新子目录）**：
-
-- `审查与评审/`（10 篇）：对抗性审查、全量对抗审查、工程基础设施薄弱点审计、外部评审回应（17/18 两篇）、计划方案三性审查、架构评审、界面布局审计、数据库表设计审查、难簿序与 dataset 对拍
-- `设计与架构方案/`（7 件·含 2 件 HTML 预览页）：界面视觉重设计方向与细化规格（v4）、v4 预览页、系统架构方案、静态站前端框架化选型对比、取经编制表（md + html）
-- `治理与核查/`（3 篇）：W761 工具链可维护性重构报告、多 Agent 干扰治理评估与实施记录、全仓待办计划方案状态核查
-- `调研与数据复盘/`（2 篇 + 读者数据截图 5 件）：项目 GitHub 参考调研报告、读者数据复盘
-- 既有 `工作复盘与优化分析报告/`（13 篇）与 `计划方案/`（20 件）不动；**根层仅留 README**（report_docs 递归口径计数 54 不变）
-
-**索引与链接全量同步**：
-
-- **README 唯一索引分区重构**：目录树 + 原「现役报告」33 行总表按链接目标机械分为五区（编号沿用入库时间序不重排）+ 计划方案节 5 条游离单行表（14-18 行）合并回主表 + T-16/T-17 两件已入库未及登记行的缺口披露
-- **40 对带期望次数断言的精确子串替换**（all-or-nothing）：目录内互链与上溯链（`../../CHANGELOG.md` 等加深一层）、方法论沉淀入链 ×2、工作复盘 2026-10-19 入链 ×2；修复后 `lint_links --dir docs` 实测 **5478 链接 0 broken**
-- **派生面再生成**：`docs/INDEX.md`（20 行路径随迁·第 17 门禁字节级对拍）+ 站内搜索索引两页（zh 848 / en 890 条·第 46 槽对拍通过）+ 两页 CSP 哈希重算（856 页零漂移）
-
-**两处随动影响披露（均未随批擅改·留待裁决）**：
-
-- **C5b 根层对账面缩水**：系统架构方案与取经编制表两篇含 `<!--stats:*-->` 实体标记，移出根层后 `check_doc_sync.py` 的 `docs/11-方案报告/*.md` 非递归 glob 不再覆盖二者——门禁不判红但防线缩水；该脚本属管控件，glob 扩为递归的一行改动待用户批准（README §二已留提示行）
-- **CHANGELOG W757 段 1 条链接旧址**：历史段内工程基础设施审计报告链接因移动指向旧址，按「历史段禁改」未就地改写，新址为 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`；另全站约 850 页 CSS 来源注释（v4 令牌出处标注）中的旧路径为注释性文本非链接，按 W757「历史性叙述不改写」先例保留
-
-**顺手修正**：HANDOVER 零段「复盘存档」反引号路径仍指向 W757 改名前的 `docs/11-报告复盘/`（陈旧纯文本·非链接）订正为新址；STRUCTURE.md 目录构成散文行按分区后实况改写（54 总数与 stats 标记不变）。
-
-
-### W899（2026-10-23）：合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）
-
-
-
-> **来源**：用户 2026-10-23 批准「B 推送 dev 并开 PR 合 main」，主会话在合并落地核对中自查发现两处入库件与实况不符，本批为合并后收尾修正。
-
-> - **文件**：assets/promo/output/README.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w899_spec.json、scripts/output/_cascade_files_W899.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md。
-
-> - **执行**：① **output 目录计数口径订正**——`assets/promo/output/README.md` 的「生成时点含 N 个直属文件」由 3 订正为 6（W898 落地英文版 3 件产物时只刷新了 `index.md` 清单，README 散文计数行未同步 ⇒ main 上出现「声明 3 实况 6」的自相矛盾）；② **朱砂门禁增量缓存重建**——W898 级联改写四页脚后未重扫第 49 槽，缓存中 3 页 sha1 与当前页面字节不一致（缓存不自愈 ⇒ 每轮 CI 白扫这 3 页），本批按 `scripts/check_vermilion_solid.js` 的 `sha1File` 同口径重建并全量对账；③ **级联面随批同步**——按仓库规约走 `scripts/batch_cascade.py` 立 W899 段（CHANGELOG 与 README 与 STRUCTURE 与项目说明与 HANDOVER 与 AGENTS 与 workflows README 与四页脚与 file-index 与 CITATION.cff 共 10 面）。
-
-> - **验证**：缓存全量对账 234 条 → 命中 234 · 陈旧 0 · 幽灵 0（对账脚本 `tmpe/_w899_cache_audit.py`·口径与门禁 `sha1File` 一致）；单测 27 passed（`tests/unit/test_vermilion_solid.py` 11 例 + `tests/unit/test_folder_docs_gate.py` 16 例）；CI 侧预演 `scripts/ci_sim.py` 7/7 PASS；PR #56 required checks 全绿后已合 main（merge commit 21f04ee8·main 上中英双份物料与投放接线逐条核对落地）。
-
-> - **状态**：已收官（合并后收尾修正·两处入库件与实况对齐）。
-> **状态**：**已收官**（W899 68f1a7bf·git 反填·共 2 笔·W971 存量回填）
-
-### W898（2026-10-23）：宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 社媒分享图指引 + 规范受管资产登记）
-
-> **来源**：用户 2026-10-23 批准「D 宣传单页投放接线（README 物料说明 / 站内入口 / 英文版 / 社媒长图）」。
-> - **文件**：assets/promo/xiyouji-flyer-a4-en.html、assets/promo/output/xiyouji-flyer-a4-en.pdf、assets/promo/output/xiyouji-flyer-a4-en-front.png、assets/promo/output/xiyouji-flyer-a4-en-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、README.md、site/index.html、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md。
-> - **README 物料小节**：新增「📄 宣传单页（A4 双面 · 可打印可转发）」——中英双份的 PDF 打印稿 / 分享图 / 可编辑源三列表 + 重出命令 + 社媒分享图指引（站内已有 15 张 1200×630 分享图 `og-*.webp` 可直接取用）。
-> - **站内入口**：`site/index.html` 的「看数据与工具」区新增一行指向**仓库**物料目录的链接——Pages 只发布 `site/` 目录，站内不可用相对路径，故走 GitHub 仓 URL；纯 HTML 改动不动内联脚本 ⇒ CSP 哈希零漂移。
-> - **英文版单页**：新增 `xiyouji-flyer-a4-en.html` + 双面 PDF + 正反 PNG；导出脚本加 `--en` 档（同一脚本同一栅格，仅换文案）。英文词长、字面比中文长约 30%，中文版字号在英文版必溢出 ⇒ 单独一段 EN 版排版微调（四轮收紧：页眉 tagline 改可换行限宽、卖点卡与资产卡字号行高逐档收紧、内容地图与联系区行距压缩）⇒ **两页 0px 溢出**；并做三处本地化修正：纯图形 logo 替中文字标、KPI 去中文单位（615 essays / 87 visualisations / 133 dimensions / 34 analysis scripts）、两张配图 alt 全译。
-> - **规范受管资产登记**：`docs/00-导读/文档规范.md` §11.2 受管文件清单新增 `assets/promo/` 一行（禁止删除/重命名·删除后 README 与站内入口变死链）。
-> - **验收**：中文版与英文版**两页均 0px 溢出**（探针：末子元素底边 − 内容底边）·导出零外域请求 ·思源宋体真加载 ·PDF 实测 2 页 A4（中文版 6.27 MB / 英文版 4.69 MB）·PNG 1240×1754（150dpi）·CSP 856 页 0 漂移 ·全仓链接 20759 个 0 broken ·CSS 结构平衡通过。
-> - **CI 收尾修正（推送后 CI 实证）**：① `ci-sim.yml` 首跑红——CI 环境**未装 pytest**，而 `stats.py` 的 `pytest_collected` 键是 fail-closed 实测（无 pytest 即判红）⇒ 连带第 31 门禁 C5d 假红⇒ workflow 补装 pytest；② **ruff 24 项**（含本批引入的 5 项 + 存量 19 项）⇒ 机械清理至 **0 error**（`stats.py` 删未用 import/变量并把 `tracked_files` 导入移到文件头、三个脚本同款、`tracked_files.py` 补 `stacklevel`、tests/ 存量 19 项同步清理·零行为变更）；③ **第 45 门禁既有单测 7 项失败**（`tests/unit/test_folder_docs_gate.py`）——根因是门禁新口径只认 git 索引，而测试用的**合成树在仓库外**⇒ 补「**仓库外目录回退磁盘口径**」（真实仓库根判定·合成树/临时目录走磁盘口径）⇒ 16 项全过；④ 进一步把**在管目录集**也改索引口径（`gen.tracked_dirs()`）——并行批**在途的新目录**（全部文件未跟踪）不进集 ⇒ 不再被判「C1 缺 README.md」；已入库目录缺文档仍判红。⑤ **全量 pytest 11 项失败**（`test_docs_index.py` / `unit/test_docs_index.py`）——与 ③ 同根因：`docs_index.scan_docs` 默认走索引口径，而其单测同样用**仓库外合成树** ⇒ 补同款「仓库外 ⇒ 磁盘扫描」回退 ⇒ 30/30 过；⑥ **品牌字面量门禁命中 3 处**——某**会话运行态目录**（每会话重建·本不该入库）此前被误 `add` 进仓 ⇒ `git rm --cached` 移出索引 + `.gitignore` 补排除规则（**该字面量本身受禁·故规则用通配符写、注释亦不点名**）⇒ 品牌门禁 **0 命中**。
-**复验**：造 1 个未跟踪文件 + 1 个未跟踪目录时第 45 门禁 **0 FAIL**（核心目标达成）·self-test 7/7 ·ruff **0 error** ·16 项单测全过。
-> - **踩坑记录**：EN 版第一轮溢出 270px/266px（英文长句叠行）⇒ 修法不是继续压字号而是先修**宽度根因**（页眉 tagline 的 `white-space: nowrap` 使整列溢出 82px）；第二轮仍高 57/131px ⇒ 再逐档收紧到零溢出。教训：**先分「宽度溢出」与「高度溢出」两类**，宽度问题不修则高度怎么压都不对。
-> **状态**：**已收官**（W898 b2334ad8·git 反填·共 6 笔·W971 存量回填）
-
-### W897（2026-10-23）：协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）
-
-> **来源**：用户 2026-10-23 批准「A 修 preflight 的 touches 分隔符 bug」+「C 把 ci_sim.py 接进 CI workflow」。
-> - **文件**：scripts/preflight_check.py、tests/unit/test_preflight_touches.py、.github/workflows/ci-sim.yml、.github/workflows/README.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、pytest.ini、docs/00-导读/W批次编号对账表.md。
-> - **病根（实测）**：`preflight_check.py` 的台账 touches 列解析与命令行 `--touches` 解析**都只按逗号切分**，而台账自 W739 起实际用「·」分隔 ⇒ 整串被当成一项 ⇒ **交集检查恒空假绿** ⇒ W896 批实测的「PREFLIGHT PASS·无交集」是**无效结论**，那两次撞面实为人工核对发现而非机器拦住。
-> - **修法**：新增 `_split_touches()` 统一切分，兼容 `,` `，` `、` `·` `•` 五种分隔符（**不含空白**——仓内文件名不含空格，避免把文件名切碎）；台账列解析与命令行解析**同源**走该函数。
-> - **配套单测**：新增 `tests/unit/test_preflight_touches.py`（11 例）锁定多分隔符切分 / 台账列解析 / 占位符归一 / 交集真能报出且不误报。
-> - **ci_sim 接进 CI**：新增 `.github/workflows/ci-sim.yml`（PR 与 push dev 触发·干净检出跑 `scripts/ci_sim.py` 的 7 项关键门禁·纯 Python 不需浏览器与 node_modules·fetch-depth 0 取全量历史）⇒ 「本地红 vs CI 绿」从人工推理变成机器结论。
-> - **验收**：修复后 preflight 的 NOTE 行能把本批 touches 正确切成 5 项（修复前整串当 1 项）·单测 11 例全过 ·第 42 门禁根级脚本覆盖 0 FAIL（两个新脚本各有测试面引用）。
-> **状态**：**已停止**（W897 零提交·git 事实标注·W971 存量回填）
-
-### W896（2026-10-23）：门禁实算口径改造（磁盘扫描 → Git 索引·目标提交树）+ ci_sim 预演工具
-
-> **来源**：用户 2026-10-23「批准」——指认 T-15 §十 提出的两条根修方案（① 门禁实算按目标提交树 ② 新增 `scripts/ci_sim.py`）。本批为该根修的施工批（**原拟 W894·因并行 W895 先落地·按「先落地者保留」让号为 W896**）。
-> - **文件**：scripts/tracked_files.py（新增·口径单一事实源）、scripts/ci_sim.py（新增·CI 侧预演）、scripts/check_folder_docs.py（第 45 槽）、scripts/gen_folder_docs.py（生成器）、scripts/stats.py、scripts/docs_index.py、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/index.md、docs/INDEX.md、docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md、docs/00-导读/W批次编号对账表.md。
-> - **核心判断**：**提交门禁的实算对象应是「将要提交的内容」，不是「物理工作树现状」**——Git 索引（`git ls-files`）= 已跟踪 + 已暂存新增 = 将要入库的内容；并行批的未落库件（未跟踪）因此不再污染判据 ⇒ 本地不再「他方在途红」、pre-commit 不必被绕过、CI 与本地口径一致。
-> - **三处实算同步改造**：① 第 45 门禁（目录清单对拍）② `stats.py`（全部 glob 计数）③ `docs_index.py`（文档索引扫描·`tracked_only` 默认开启·写盘与门禁比对共用同一函数⇒逐字节一致）。**生成器 `gen_folder_docs.py` 同步改口径**——否则刷新出的清单会列未跟踪文件 ⇒ 提交后 CI 侧判「幽灵预引」红 ⇒ 改造不彻底。
-> - **三态判据**（不是一律红/一律绿）：索引有清单无 ⇒ 红（已入库漏登记·真问题）；清单有索引无**且磁盘也无** ⇒ 红（幽灵预引·CI 侧必红）；清单有索引无**但磁盘有** ⇒ 容忍（未跟踪在途件）；清单计数与条目数不符 ⇒ 红（截断）。另保留「清单计数自洽」判据与 `_USE_TRACKED` 口径开关（self-test 走磁盘口径·合成树不在索引内）。
-> - **`scripts/ci_sim.py`（新增）**：CI 侧预演一条命令（worktree 干净检出 + 7 项关键门禁 + 自动清理·只读零风险）·`--ref`/`--full`/`--keep` 三档；把「本地红 vs CI 红」从人工推理变成可执行判据。
-> - **验收**：造 1 个未跟踪文件后第 45 门禁仍 **0 FAIL**（旧口径此处红「盘上多 1 项」）·第 45 门禁 self-test **7/7** 全过 ·实跑 0 FAIL / 188 目录 ·索引口径与磁盘口径对拍 site html **857 = 857**（含内联标记 330 = 330）·索引健康门禁 PASS（docs/INDEX.md 产物级一致 745 篇）·CSP 856 页 0 漂移 ·全仓链接 0 broken ·门禁 54 段编排未动（段数不变）。
-> - **踩坑记录**：① 生成器改口径后 self-test 的合成树不在索引内 ⇒ 必须保留磁盘口径平行实现（`list_files_disk`/`render(disk=True)`），否则自测「全绿但毫无意义」；② `inline_css_pages` 的 850→330 曾被误判为「并行批在途漂移」——实为 **stats.json 陈旧**（CI-HEAD 实况本就是 330·文档侧早已写 330）⇒ 按「以 CI-HEAD 实况为准」修正；③ 写 `scripts/output/` 下文件遇 `OSError: [Errno 22]`（并行会话占用）⇒ 写盘带重试。
-> **状态**：**已收官**（W896 93108fad·git 反填·共 10 笔·W971 存量回填）
-
-### W895（2026-10-23）：BL-33 收敛批（system.css 单一事实源 + inline_css 护栏 + 330 内联页按源重生成）
-
-> **来源**：用户令「继续」（W891 收官报告的唯一剩余欠账 BL-33）。
-> - **文件**：site/system.css、scripts/inline_css.py、site/data/（88）、site/en/（138）、site/reader/（102 个已内联页）、site/dukou-engine.html、site/_template.html、scripts/_w895_bl33_inventory.py、scripts/_w895_regen_preview.py、scripts/_w895_verify_blocks.py、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
-> - **根因（BL-33·双向漂移实证）**：system.css 自 W856 起停更，W864-W891 各迁移批把组件改动（`.seal` 淡底、KPI 顶条按行规则、`.page-wrap` 容器令牌）只写进**页内联副本**——于是单一事实源落后于页面，而页面又缺 system.css 后加的块（W856 品牌标、W885 页头插画、W888 卷末插画）。任何 `inline_css --force` 通扫都会把迁移成果反向冲掉（W875 已实证一次）。
-> - **处置三步**：① **system.css 补齐三处**（`.page-wrap` 1320px→`var(--container-wide)`、`.seal` 实底→`--accent-tint` 底 + `--accent` 字、KPI 顶条按行规则升为全局）；② **inline_css.py 护栏**——`--force` 只重同步**已内联页**，外链页转内联须显式 `--inline-links`（W875/W895 两次实证通扫会把 520 个外链 reader 页全部转内联·66.7 万行抖动）；③ **按源重生成 330 个内联页**（88 data + 138 en + 102 reader 双容器页 + 2 根页）。重生成前先跑 `_w895_regen_preview.py` 预演（证明未 sync 时重生成会反冲三处迁移成果）、重生成后用 `_w895_verify_blocks.py` 集合差校验。
-> - **验收**：内联块集合差 **226/226 data+en 零差异（0 缺 0 多）**·reader 102 页 +4,386/−408 行（同源增量）·520 外链 reader 页**零触碰**·CSP 856 页 0 漂移·第 49 槽门禁 **234 页 0 FAIL**·a11y data/en 双目录无 P0·豁免簿按新实测保守核查（4 条复合/批注键对不上者保留·余 256 条）。
-> - **踩坑记录**：首跑 `--force` 未加护栏前把 622 个 reader 页全部内联（66.7 万行）——按 W875 先例整目录 `git checkout HEAD -- site/reader` 恢复后，再在护栏下精确重跑（102 个本就 INLINED 的双容器页补上同源增量，520 个外链页保持原形态）。
-> **状态**：**已收官**（W895 03d60c61·git 反填·共 2 笔·W971 存量回填）
-
-### W893（2026-10-23）：四画幅素材图成套批（十二张·16:9/1:1/3:4/1200×630 各三张·拉丁方主题·沿用 W882 改写锚点）
-
-
-> **来源**：用户第四回令「再帮我做几张素材图」，开工前同样先问三事；本会话按用户选择（数量=12 张、参考=无参考由本会话按项目气质定一版、主题=数据可视化插画/通用意象/回目场景/主要人物四类全要、画幅=每种都要按平均分每种三张、范围=只出图交付到 site/static/images/ 不接线）执行。
-> - **文件**：site/static/images/ 下十二个素材文件、scripts/_w893_gen_args.py、scripts/_w893_finalize.py、scripts/_w893_verify.py、scripts/output/_w893_spec.json、scripts/output/_cascade_files_W893.txt、docs/11-方案报告/计划方案/T16-任务计划执行与经验沉淀报告-2026-10-23.md、docs/00-导读/W批次编号对账表.md。
-> - **取号与认领**：台账 max(W#)=W892 → 本批取 W893（表头 max+1 规则）；`preflight_check.py --touches` 跑通；**W892 段已由并行批立段·顶段推进 ⇒ 本批 W893 正常立段**（原按 W852/W853/W878 先例预备的「版段递延」解除）。
-> - **开工前的反问与应答**：用户第一次问卷反问「我现在都有哪些素材是可以用的、都可以用在哪」→ 先做**磁盘实算 + 引用实算**双口径盘点：站内 71 件素材（images 66 + img 5），**已接线仅 8 组覆盖 856 处引用、闲置 50 件 0 引用**；两个真实缺口＝① 102 个 reader 回目页中 96 页无专属封面（chap 仅 6 页有）② 全站 855 页 og:image 共用 static/img/ 的 2 张图（images/og-01~12 实为 0 引用孤儿）。用户据此拍板「每种都要、按平均分每种三张」。
-> - **四画幅各三张 + 四主题各三张（拉丁方）**：16:9 Hero ×3 + 1:1 卡片 ×3 + 3:4 竖版 ×3 + 1200×630 分享图 ×3 = 12 张；每画幅内三张主题互不相同、每主题跨 3 画幅出现（脚本自检 `{'16:9': 3, '1:1': 3, '3:4': 3, '630': 3}`）。
-> - **锚点沿用 W882 改写版（非 W852 原版）**：art direction 段（宣纸 #FAF7F0 纸底 / 玄墨 #221D16 墨线 / 淡墨 #6B6455 / 单一朱砂 #C8463A 强调 / 赭金 #E9B885 点彩）、松散枯笔湿染笔触句、禁项清单逐字复用；**构图句取 W882 的纯否定式改写版**（删掉「clear horizontal composition boundary」类正面几何描述词，改为「主体坐于上方三分之二 + 下三分之一为空白宣纸」+ 禁项补 ruled line/horizon line/border/frame）——依 W881 实证「正面描述会被字面执行、否定式禁项不会」。**锚点原文在 tmpe/_misc/（不在 scripts/output/）**。
-> - **四画幅并存仍成套**：画幅差异全部在交付端机械处理（源图按生成器支持比例出图 → 覆盖缩放到目标 → 按「顶部深墨是否溢出画幅上沿」分流裁顶/裁底），提示词锚点四批完全同源，不靠事后调色凑一致。
-> - **量化验收**（脚本量测·非目视断言·12/12 PASS）：尺寸精确（2560×1440 / 1200×1200 / 1200×1600 / 1200×630）·底部净空带 **169 至 534 px**（26.8% 至 41.9%）·上 72% 主体墨量 **15.32% 至 62.44%**·严格朱砂 **0.00% 至 2.32%**（暖色总量口径单列 0.16% 至 6.60%）·**规则线扫描 0 命中**（W881 判据）·主底色 11 值全落暖白同族·单件 26.5 至 277.1 KB。目视复核：**零文字、零水印、零落款、零印章**。
-> - **交付端两个自造 bug 被自己的探针抓出**：① 缩放方向错（按「缩放到宽度」得 2560×1428·高度不足 12px ⇒ 底部补出纸色边带）→ 改覆盖缩放 `max(tw/w, th/h)`；② `over_y == 0` 被误判为高度不足（1:1 档 2048×2048 恰好命中目标）→ 拆分为 `< 0` 才补纸、`== 0` 直接裁到目标宽。
-> - **无文字纪律**：十二张均无文字、落款、印章与水印；每张至多一处朱砂点强调。
-> - **范围纪律**：只新增 site/static/images/ 下十二个素材文件 + 三个脚本 + 一份 spec + 报告与索引面；**不接线任何页面、不改门禁件、不推送远端**（级联仅触及页脚版本行·各 1 行·仓内标准行为）。
-> - **共享面与归属声明**：① docs/11-方案报告/README.md 的 T-16 登记行（§二 表格行 19 + §二 抬头补登记段）已被并行 W892 批的提交 76945671 带走——内容完整无损·不重做不回退·以 HEAD 版为准；② 并行提交对台账的改动是 **+3/-1（替换而非追加）** ⇒ 本批 W893 认领行被覆盖消失 ⇒ 按 git 实证补回（第 31 门禁 C4 判红 → 转绿）；③ W854/W857 状态列由「已交付」订正为「已收官」（git log --grep 实证两批已落库·台账陈滞致假在途锁死共享面）；④ **交底一处门禁判据缺陷**——`preflight_check.py:111` 的 touches 解析只按英文逗号切分，而台账实际用中文间隔号「·」分隔 ⇒ 在途批次 touches 整串被当成一个集合元素 ⇒ **交集检查恒为空、恒判「无冲突」（假绿）**；该文件属管控件，依 CLAUDE.md 第 10 条**未擅改**，已留痕待批。
-> **状态**：**已收官**（W893 a06e27b6·git 反填·共 2 笔·W971 存量回填）
-
-### W892（2026-10-23）：宣传单页批（A4 双面·HTML 源 + PDF + PNG 三件套）
-
-> **来源**：用户令「帮我做一套宣传单页：卖点提炼与信息层级、版式栅格、配图与图标、联系方式区块都规划好，正反面内容分工清晰」+ 四问拍板（投放场景 / 成品形态 / 配图来源 / 联系方式区块）。
-> - **文件**：assets/promo/xiyouji-flyer-a4.html、assets/promo/hero-main-visual.png、assets/promo/output/xiyouji-flyer-a4.pdf、assets/promo/output/xiyouji-flyer-a4-front.png、assets/promo/output/xiyouji-flyer-a4-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、scripts/_w892_probe.mjs、docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md、docs/11-方案报告/README.md、STRUCTURE.md、docs/00-导读/W批次编号对账表.md。
-> - **正反分工**：正面走大众读者路径（品牌 → 主视觉 → 一句话主张 → 4 个 KPI → 3 条卖点 → CTA），背面走学术与机构路径（四条硬资产：可引用 / 可核验 / 可复现 / 可复核 → 内容地图 → 联系与引用格式 → 透明与许可小字块）——双轨在同一套两页内以分层实现，不另出第二套印刷品。
-> - **版式栅格**：A4 竖版 210×297mm，页边 14mm，统一 12 栏基准，栏距 4mm，槽宽 11.5mm，正反两页共用同一套栅格；色板取站令牌（宣纸底 #FAF7F0 / 墨 #23201A / 朱砂 #C8463A），朱砂只作单点强调。
-> - **配图与图标**：复用站内 logo 与两张横向墨山图；本批新生成 1 张专属主视觉（宣纸底浓墨山影 + 朱砂钤记，色归一化到页面底色后零色差）；10 枚图标全部手写内联 SVG，零外域依赖。二维码按用户问卷未圈选故不做。
-> - **验收**：两页版面溢出均 0px（探针判据：末子元素底边减内容底边）；导出过程外域请求 0 个；思源宋体真加载（document.fonts.check 断言）；PDF 实测 2 页 A4（MediaBox 594.96×841.92 pt，含子集嵌入 STSong）；PNG 1240×1754（150dpi）；主视觉朱砂占比 0.153%；单页数字与链接 8/8 条与仓库实况相符。
-> - **踩坑记录**：三条实测教训已沉淀为 T-15 §九 经验（CSS Grid 的 1fr 轨道下限是 min-content，长 URL 会把邻栏挤成 40px 窄条；flex 子项默认收缩会把固定高主视觉压扁到 118px；判溢出不能用子块高度合计或 scrollHeight，二者分别漏算 margin 与混算 padding，真实溢出 39px 与 42px）。
-> **状态**：**已收官**（W892 8137c8fd·git 反填·共 7 笔·W971 存量回填）
-
-### W891（2026-10-23）：en 收尾批（A 渠容器归并 11 页 + nav-back 样式统一 49 页 + 间距令牌化 3,353 处）
-
-> **来源**：用户令「继续」（引 W887 收官报告的欠账清单）。W891 = en 的 A/D 两道渠道 + nav-back 样式统一三笔欠账一次清。
-> - **文件**：site/en/（138 页）、scripts/_w891_en_survey.py、scripts/_w891_en_migrate.py、scripts/output/_w864_accent_exemptions.json（W887 分册 −46 条）、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
-> - **A 渠（v4 §3.3 裁决 3）**：`max-width: 1024px / 1280px`（容器用法）→ `var(--container-content)`（1120）——**11 页 15 处**；@media 断点先占位保护后还原（768/640/480 等断点与小固定宽一律不动）；`1320px` 字面量在 INLINED 块内（页级 0 处）→ 归 BL-33 的 system.css 同步处理（不在此批动内联块·防再造漂移）。
-> - **nav-back 样式统一**：49 页同款 `.nav-back`（实底 `var(--accent)` + 白字 `--paper-warm`）→ 透明底 + `var(--accent-text)` 朱砂字（落 bg 4.5:1·白名单「朱砂文字（字色）」内）+ hover `--rebel` 实底 → `--accent-tint` 淡底；padding/圆角保留（可点击形状不变）。**W887 分册 46 条 nav-back 豁免随批递减移除**（全簿 302→256 条）。
-> - **D 渠间距令牌化**：复用 `_w862_tokenize_spacing.py`（值保留·跳过 INLINED 块·只认 padding/margin 家族）——138 页 **3,353 处**刻度内等值 → `var(--space-N)`（预盘点 3,149 + 内联 style 属性）。
-> - **验收**：CSP 856 页 0 漂移（3,272 处值等替换·差值即 token 写法长度）· nav-back 计算样式实测（transparent / rgb(199,70,58) / padding 8px 16px）· 门禁 234 页 0 FAIL（nav-back 实底消失后无新超限）· en a11y 无回归。
-> - **踩坑记录**：Git Bash heredoc 会把 Python 正则的 `\s`/`\d` 反向转义成 `/s`/`/d`（MSYS 路径转换）——本次两次「0 命中」假象即此坑；凡含正则的多行 Python 一律用 Write 工具落文件，不走 heredoc（W514 铁则的复发实证）。
-> **状态**：**已收官**（W891 4042f448·git 反填·共 2 笔·W971 存量回填）
-
-### W890（2026-10-23）：CI 阻塞项清偿批（过期断言同步 / ruff 清零 / 跨平台探针 / 依赖漏洞）
-
-> **来源**：承接 W889 展示面复位批合 main 时的 CI 实证——`Unit Tests (pytest)` 2 failed（required check·阻塞合并）、`Code Quality (ruff + black)` 6 errors、`pip audit` 25 漏洞。三类红项**均非 W889 引入**，而是 W836/W860/W876/W887 四批的成果未同步判据/测试留下的欠账。
-> - **文件**：tests/unit/test_vermilion_solid.py、scripts/_w851_j1_name_audit.py、scripts/tmpe_tidy.py、scripts/check_no_brand_refs.py、scripts/check_plan_template.py、scripts/requirements.txt、README.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T14-任务计划执行与经验沉淀报告-2026-10-23.md、scripts/output/_w890_spec.json、scripts/output/_cascade_files_W890.txt、scripts/output/_w851_j1_name_audit.json、CHANGELOG.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、.github/workflows/README.md、scripts/output/file-index.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html。
-> - **过期断言同步①（required check 阻塞项）**：`test_scope_matches_audit_surface` 断言「门禁范围 == zh 审计面 96 页」，而 W887 已**有意**把第 49 槽 `scopePages` 并入 `site/en` 138 页（en 侧豁免由 W886/W887 分册承接）→ 按新契约改判为「范围 == zh 审计面 ∪ en 全量」，并保留「zh 审计面必须被完整覆盖」这条原前提。
-> - **过期断言同步②（required check 阻塞项）**：`DEFER_HOLD_CHECKS` 的「浅色 --chart-3 未改值 #C9A063」与「暗色 --accent 未改值 #E0604F」两条，被 W876 的值切换（浅色 chart-3 → #B38F58、暗色 accent → #E46250）**有意**打破——「原值未动」契约对已落地项不再适用 → 收敛为仅剩尚未改值的「浅色 --accent-soft 未改值 #E9B885」（实测 tokens.css 仍为该值）。
-> - **跨平台存活探针修复**：`scripts/tmpe_tidy.py` 的 `os.kill(pid, 0)` 在 Windows 上等价 TerminateProcess（**会杀掉调用方自己**）→ pytest 跑到 `test_tmpe_tidy` 的 RunLock 复验时读到锁里的当前 pytest pid 即自杀，表现为「静默退出·零输出·exit 1」的本地红/CI 绿分歧族（CI 跑 ubuntu-latest 走 POSIX 分支）。修法=新增 `_pid_alive()`：POSIX 用 `os.kill(pid,0)`+ProcessLookupError/PermissionError 分支；Windows 用 OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION)+GetExitCodeProcess 的**非终止式**存在性查询。
-> - **测试隔离缺陷修复**：`RunLock.__init__(self, path=RUN_LOCK)` 的默认参数在**类定义时**求值 → `monkeypatch.setattr(tt, "RUN_LOCK", ...)` 对已绑定默认值无效 → 测试构造 `RunLock()` 落到**真**锁路径（读写仓库真实 tmpe/.locks/）→ 改为 `path=None` 运行时解析，monkeypatch 恢复生效。
-> - **ruff 六项清零**：`check_no_brand_refs.py` UP009（删 encoding 声明）/UP015（删冗余 mode）/F841（删未使用的死变量 `args`）/B007（未用循环变量 `pat` → `_pat`）+ `check_plan_template.py` UP009/E741（歧义变量名 `l` → `ln`）→ `ruff check scripts/` 从 6 errors 归零（全仓口径·非增量）。
-> - **依赖漏洞清零**：`pip-audit -r scripts/requirements.txt --strict` 实测 25 个 CVE 全为 Pillow 12.3.0（fix 13.0.0·含 GHSA-78g4-xqwv-q3g8）→ Pillow 升 13.0.0（与 W412 当年 11.3.0→12.3.0 同型复发·上游新版本→旧版本出现新 CVE）。
-> - **验证**：pytest 全量 **831 passed / 3 skipped**（含 test_vermilion_solid 与 test_w851_j1_name_audit 与 test_tmpe_tidy 三处原红面）+ Pillow 13.0.0 下 `test_slice_screenshots` 12 例切片面全绿 + 第 33 门禁 head 内容链路读图正常 + `ruff check scripts/` All checks passed + pip-audit 0 漏洞 + 全量交付门禁 54 段核心全部通过。
-> - **状态**：本批已收官。
-> **状态**：**已收官**（W890 654a289c·git 反填·共 1 笔·W971 存量回填）
-
-### W889（2026-10-23）：展示面复位批（GitHub 主页载体 / 首屏 / 时间三层）
-
-> **来源**：用户 2026-10-23 三轮问答拍板——「那我的展示面怎么做呢」→ ① `.github/README.md` 改名 `README-internal.md` ② 推 dev 走 PR 合 main ③ 根 README 首屏整体重排 + 增补「30 秒上手」速览块。
-> - **根因**：GitHub 仓库主页 README 查找优先级为 `.github/` > 根目录 > `docs/`（抓线上渲染 HTML 实证：主页渲染的是 .github 目录导读而非项目门面）；而 `scripts/gen_folder_docs.py` 的排除规则「排除全部点开头顶层目录」唯独给 `.github` 开了例外（W779 批生成所致）→ 真实门面根 README 从未上主页。展示层另有时间错位：Pages 部署源为 main 分支 site/ 目录，而 main 停在 W794、展示落后开发 94 个批次。
-> - **文件**：.github/README.md（改名 .github/README-internal.md）、.github/index.md、scripts/gen_folder_docs.py、scripts/check_folder_docs.py、scripts/check_doc_sync.py、README.md、docs/11-方案报告/计划方案/T13-任务计划执行与经验沉淀报告-2026-10-23.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、scripts/output/stats.json、scripts/output/_w889_spec.json。
-> - **载体复位**：目录导读改名让位 + 生成器「主页展示位保护」精确单文件排除（只排该文件不排整个 .github 树·保住 workflows 索引刷新与级联面）+ 门禁 45 同源豁免（共用 gen.showcase_guarded）+ 第 31 门禁新增 C7 断言（根 README 在位时 .github/README.md 必须不存在·self-test 26/26）。
-> - **首屏重排**：抬头四行（阅读契约 / 当前批次 / 版本号说明 / 维护契约）降噪入开发者专区（版本行整行原样搬运·C1 门禁与 C6 形态检查与级联锚点三处实测仍命中）；首屏新序 = 30 秒上手 → 项目定位 → 在线体验 → 桌面版下载 → 目录导航。
-> - **元数据**：topics 10 个（digital-humanities / chinese-classics / visualization / data-visualization / d3js / threejs / nlp / static-site / javascript / python）+ description 改读者向 + contactLinks 重排（REST PATCH 的 contact_links 字段被 GitHub 忽略·响应 null 且值不变·留证待 UI 补）。
-> - **验证**：gen_folder_docs --refresh 后 .github/README.md 仍不存在且 .github/index.md 已刷新（342 件重写零漂移·仅 1 件 diff）；门禁 45 目录文档新鲜度 0 FAIL / 186 目录；第 31 门禁 self-test 26/26；全量交付门禁 0 FAIL；抓线上主页 HTML 复核展示位已让位。
-> - **状态**：本批已收官。
-> **状态**：**已收官**（W889 5b156543·git 反填·共 1 笔·W971 存量回填）
-
-### W888（2026-10-23）：剩余素材接线批·两路（viz 卷末插画 85 页 + 百回母版 6 个回目页）
-
-> **来源**：用户令「继续」（承接 W885 接线批后的 63 件未接线素材）。侦察先行再定范围——全站 `<img>` 213 处全属 W885 页头装饰插画、其余页面零配图；`aspect-ratio` 全站 0 命中、3:4 竖版容器 0 个、卡片网格 9 类全无图位、8 个根页首屏全是浅色纯文字带——71 件素材里能直接接的只有 10 件，故本批只接两路，其余四类逐条留证不做。
-> - **文件**：site/data/（83 页）、site/reader/（6 页）、site/system.css、scripts/build_reader.py、scripts/_w888_wire.py、scripts/_w888_chapter_plate.py、scripts/_w888_index_revert.py、scripts/output/_w888_spec.json、docs/11-方案报告/计划方案/T12-任务计划执行与经验沉淀报告-2026-10-23.md、docs/11-方案报告/README.md。
-> - **路 A**：viz 4 张（浅底 640×640）接中文数据页卷末位（85 页·其中 2 页随并行 W887 批 66641736 入库）；插入锚点在 `</main>` 之前、最后一个 section 之后（古籍卷末题跋位·不触碰图表容器与正文）；规则源与内联副本双写（file:// 下 CSP `style-src self` 拦外链样式表·页面样式实际只认内联副本）；暗色模式隐藏（浅底宣纸图贴暗底会成亮斑）。
-> - **路 B**：chap 6 张（1:1 百回母版）接对应回目页页头（ch007/014/015/023/027/030·插在回目 H1 之后·配图位非封面位）；改生成器 `scripts/build_reader.py` 条件化 + 精准注入 6 页——不跑全量重生成（实测 reader 622 页全量重生成漂移 132,812 行·且其处理范围含 site/en 138 页与在途批写面冲突）。
-> - **验证**：目标 6 页母版 markup 与规则段与生成器输出逐字节一致（剥离 INLINED CSS 块与 CSP meta 后残留仅 4 行 inline_css 空行留痕·非目标页残留差异集合与目标页同构）；第 48 槽 32/32 判据符合；模糊词 0 命中；门禁 54 段核心 0 FAIL；CSP 856 页 0 漂移；浏览器实拍两页通过。
-> - **本批三处自造 bug 被自身探针抓出并全部修复**：注入代码的「字符串内换行」误写真换行（`py_compile` 当场拦下·未落到任何页面）；生成器输出的图片相对路径少一层 `../`（逐字节对拍抓出·注入是对的、生成器是错的）；注入端与生成器端 CSS 规则注释措辞不一致（同批抓出·会在全量重生成时造成一次无意义漂移）。另踩行尾不匹配——`scripts/build_reader.py` 是 CRLF 而 `site/` 产物全 LF，脚本改为按目标文件字节判定行尾并自适应构造锚点。
-> - **状态**：已收官（提交 3f04aaa3·内容批 97 文件 +2619/−5）。
-> **状态**：**已收官**（W888 76d3adba·git 反填·共 2 笔·W971 存量回填）
-
-
-### W887（2026-10-23）：en 迁移批 2·收口批（110 页合并四批·第 49 槽范围扩至全 en 138 页）
-
-> **来源**：用户令「合成一批做完，别拖」。W887 = ④ 剩余四批（core 28-56 · core 余 20 + character 12 · myth 14 · essay 36）合并为一批一次做完。
-> - **文件**：site/en/（110 页）、scripts/_w886_en_migrate.py（批 6 合并定义）、scripts/output/_w886_en_audit_b6.json、scripts/output/_w886_en_audit_b6_after.json、scripts/output/_w887_needed.json、scripts/output/_w864_accent_exemptions.json（W887 分册 181 条·全簿 302）、scripts/check_vermilion_solid.js（scope 扩 en）、scripts/output/_vermilion_solid_cache.json、scripts/output/_vermilion_solid_report.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
-> - **迁移**：C 渠规则级换色 **126 条规则 / 48 页**（复用换色器 + 批审计子集）；`.seal` 实底→淡底 **110 页**；KPI 顶条按行收敛规则 **+57 页**（同排首卡保顶条）。
-> - **四类口径豁免 181 条**（W887 分册·全簿 302）：数据语义色片 64 / 功能交互实底 61（含 en 专有 `a.nav-back` 返回导航 ×46·zh 页无此组件·样式统一候选另批）/ KPI 首卡顶条 56。
-> - **第 49 槽范围收口**：`scopePages` 并入 site/en/*.html → 门禁范围 96→**234 页**（全 en 138 + zh 96）；en 豁免由 W886/W887 两分册承接；缓存随批重建（增量恢复秒级）。
-> - **验收**：W887 110 页实底 **508→313（−195）**·C 渠 **809→213（−596）**；en 138 页迁移后合计实底 518（原 767）·C 渠残留 251（原 1,084·与 zh 253 同族·JS 内联样式类）；**全 en 138 页非豁免全部 ≤3**（第 49 槽 judgePage 同款判据逐页实算）+ 门禁全量 234 页 0 FAIL + 自检 14/14。
-> - **A 渠欠账（如实记账）**：en 页容器字面量 164 处（1320px/1536px/1024px）与 D 渠间距令牌化未在本批范围（属 v4 §6 四渠道迁移的 A/D 两道·另批）。
-> **状态**：**已收官**（W887 14366f23·git 反填·共 2 笔·W971 存量回填）
-
-### W886（2026-10-22）：en 迁移批 1·入口与结构 28 页（C 渠换色 + 实底机械收敛 + 四类豁免·④ 首批）
-
-> **来源**：用户令「继续」。④ en 138 页迁移首批（5 批拆分：core 76 / character 12 / myth 14 / essay 36·按字母序确定性切批）。
-> - **文件**：site/en/ 28 页、scripts/_w886_en_audit.py、scripts/_w886_en_migrate.py、scripts/output/_w886_en_audit.json、scripts/output/_w886_en_audit_b1.json、scripts/output/_w886_en_audit_b1_after.json、scripts/output/_w864_accent_exemptions.json（W886 分册 25 条）、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
-> - **en 全量现状审计（先量后切）**：138 页四渠测量——C 渠落 bg 朱砂文字 **1,084 处 / 62 页**（与 zh 数据页 1,087 处同量级）；朱砂实底 **767 处 / 135 页**（zh 同口径 457 处 / 89 页·en 从未进迁移面）；令牌旧值 **0 页**（W876 的 326 页同步已顺带覆盖 en 138 页）；容器字面量 164 处（A 渠道属另一笔迁移欠账·本批不动并如实记账）。
-> - **批 1（28 页·core 前 28）**：C 渠规则级换色 **49 条规则 / 14 页**（--accent→--accent-text·复用 W876 换色器与批内审计子集）；B 渠机械化两步——`.seal` 实底→淡底 **28 页**（v4 §3.2 徽章条款·background→--accent-tint、白字→--accent）与 KPI 顶条按行收敛规则 **+16 页**（同排首卡保顶条·口径同 zh 页 W870 逐字规则·插页尾 style 保级联序）；余量按四类口径登记 **W886 分册 25 条豁免**（数据语义色片 15 条 / 首卡顶条 5 条 / 功能交互 5 条·全簿累计 121 条）。
-> - **验收**：实底 259→205（−54）·C 渠 275→38（−237·残留为 JS 内联样式元素·与 zh 的 253 同族）；28 页非豁免全部 ≤3（第 49 槽 judgePage 同款判据实算）；CSP 856 页 0 漂移。
-> - **注**：第 49 槽门禁范围本批不扩 en（未迁移的 110 页会红）——第 5 批收口时统一扩至全 en 并按批递减豁免。
-> - **段链**：W885 递延段由本批补段回写（顶段 W885）；W884 为无 spec 空洞（并行批未落 spec·如实记账）。
-> **状态**：**已收官**（W886 36dd0ccd·git 反填·共 2 笔·W971 存量回填）
-
-### W885（2026-10-22）：素材接线批（213 页页头装饰插画 + 首页水墨底图 + 4 张深底直显版插画·源与内联副本双写）
-
-> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，在第 1–6 项素材做完、并列出「接线到页面」这一项后，用户于 2026-10-22 22:50「继续」、23:24 催办，本批执行第 6 项：把已入库的水墨素材真正接到站面上。
-> - **文件**：site/data/*.html（87）、site/en/*.html（126）共 213 页、site/system.css、site/index.html、site/static/images/viz-dark-01-network.webp、site/static/images/viz-dark-02-heatmap.webp、site/static/images/viz-dark-03-radar.webp、site/static/images/viz-dark-04-timeline.webp、site/static/images/README.md、site/static/images/index.md、scripts/_w885_wire.py、scripts/_w885_viz_alpha.py、scripts/_w885_index_revert.py、scripts/output/_w885_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **接了什么**：① **213 页**（site/data 87 + site/en 126）在 `.hero` 暗色带内挂一张**深底直显版**装饰插画，按页名映射四类母题（network/relationships/social-media→根须网、heatmap→墨点阵、radar→放射线、timeline→刻痕序列，其余默认墨点阵）；② **首页 site/index.html** 的浅色 `.masthead` 铺 hero-01 山河云海横幅（文字正落在图底部特意留出的空白带上）；③ 另出 **4 张深底直显版** viz 插画（640×640·viz-dark-01..04）供暗带使用——浅底宣纸图贴在暗色带上会成一块亮斑，故暗带必须用深底版。
-> - **两条实测结论（据实记账·都不是猜的）**：① **file:// 下 CSP 的 `style-src 'self'` 会拦掉外链样式表**，页面样式实际全部来自每页的内联副本（inline_css.py 从 site/system.css 注入的那份·每页约 55 KB）⇒ 新规则必须**源与内联副本双写**：源（site/system.css）保证下次 inline_css 重跑时仍被继承，内联副本保证当前即生效。首轮只改源 ⇒ 规则在页面上完全不生效，浏览器实拍见装饰图撑成 990 px 方块盖住整页（截图存证）。② 深底方图贴在暖褐 hero 上有色差、可见方框 ⇒ 按亮度把深底映射为 alpha 渐变（近底色→透明、笔触→不透明），插画变成**悬浮的米白笔触层**，无方框且不依赖具体底色。
-> - **验收（浏览器实拍·两页）**：数据页确认装饰插画为 240 px 角饰、落在右下不压标题不压文字，W879 的 soft-light 山形底图在暗带上显影为剪影；首页确认水墨底图铺满首屏、kicker 与「取经录」与英文副题全部落在图的留白带上完全可读、「100 回」与山脊相映。**搜索索引**按「他方在途条目按 HEAD 版回退」处理：重跑 `_gen_search_index.py` 后逐条比对，差异仅他方在途的 docs/agent/gates.md 一条 → 已回退，两个索引文件恢复 HEAD 版（我方改动不改变任何页面条目）；**CSP 重算 0 页更新**（未触及内联脚本·零漂移）。
-> - **范围纪律**：只动 213 页的一条装饰 img + 各自内联副本的一条规则 + 首页三条背景 + system.css 一条规则 + 4 张新图 + 3 个脚本，不改任何页面结构、正文与门禁判据，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874（W851 已落段），W875–W884 段待补且 W883 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W885 dcfc348a·git 反填·共 3 笔·W971 存量回填）
-
-### W884（2026-10-22）：Playwright 历史问题全谱审计（T-10 落盘）
-
-> **来源**：用户令对全仓 Playwright 引用做历史问题全谱审计（T-10 任务）。
-> **摘要**：全仓 256 处 Playwright 引用逐项取证 → 25 项 / 8 族问题全谱（环境依赖 7 · file:// 协议 4 · 断言可信度 6 · 触屏模拟 5 · 产物资源 3 · 门禁成本 1 · 平台分歧 2 · 依赖浮版 3），每项带「文件:行号」或批次号锚点并标状态三态（已修复 22 / 仍开放 3）。核心实证三处对评审初判的修正：① package-lock.json 已入库并钉死 playwright 1.63.0 ⇒「浮版解析漂移」初判不成立；② 真漂移面是 ci.yml 的 npm install playwright（无版本约束·绕过 lockfile）⇒ 同一 CI run 并存两个 Playwright；③ 截图审查已有三档 scope ⇒ 真实缺口是「映射停在目录级」而非「没有影响面概念」。另新发现 pages-smoke job 安装 Playwright 与 chromium 但从不调用浏览器（全 job 零浏览器调用）。
-> **文件**：docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md · scripts/output/stats.json · scripts/output/stats-changelog.json · scripts/output/stats-index.md · STRUCTURE.md · docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md · docs/INDEX.md · site/data/search.html · site/en/search.html
-> **验证**：第 48 门禁 0 FAIL（新增文件全项符合·32/32 判据）·lint_links 5466 链接 0 broken·check_index_health 通过·generate_csp --check 856 页 0 漂移。
-> **状态**：**已收官**（W884 e5b262e7 内容批 + 92175003 收官回填 + 5266741c 报告正文回填实测值 + 1af88bb3 台账提交号补全·台账行早已收官；本段系 W956/P-43-03 按台账「有行无段」欠账以补位 spec 补立——**补位 spec**·非原会话叙事·正文以提交信息与报告原文为准）
-
-### W883（2026-10-22）：阶段 5 机检门禁批（朱砂实底常驻门禁第 49 槽 + 四类存量豁免裁决 + W877-W882 六段回补）
-
-> **来源**：用户令「继续」。W883 = v4 规格 §3.2「机检口径（阶段 5 门禁落地）」的兑现——W826 裁决 2（朱砂实底每页 ≤3 处）自 W864 起只有一次性收敛、无常驻防线。
-> - **文件**：scripts/check_vermilion_solid.js、tests/unit/test_vermilion_solid.py、scripts/verify_delivery.py、AGENTS.md、docs/agent/gates.md、scripts/output/_w864_accent_exemptions.json（W883 分册 24 条）、scripts/output/_vermilion_solid_cache.json、scripts/output/_vermilion_solid_report.json、site/dashboard.html（seal 淡底）、scripts/_w876_site_audit.py、scripts/output/_w876_site_audit_head.json、scripts/output/_w876_site_audit_final.json、scripts/output/stats.json、site/data/search.html（搜索索引刷新）、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、pytest.ini、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/index.md、scripts/output/index.md、scripts/output/README.md、CHANGELOG.md、scripts/output/file-index.md。
-> - **门禁本体（第 49 槽·StrictGate）**：浏览器计算样式实测（浅色·file:// 直开）——元素自身 background-color == --accent 且盒面积 >400px²，或 border-top-color == --accent 且 border-top-width ≥2px 且**条带面积**（宽×边框宽）>400px²；**每页非豁免计数 >3 → FAIL**。豁免读 `_w864_accent_exemptions.json`，跨批次分册按 (page, tag.class) 求和扣减；**复合键族合计**（如「span.tag / span.tag.palace」）按实测量贪婪分配、**批注键**（如「span（无类名色片）」）剥批注匹配、**缺 reason 直接抛错**（防无据豁免）。**增量缓存**：按页内容 sha1 只重扫变页（hash 先于探针计算·防并行改动竞态·损坏自动回退全量·--full 强制全量）——96 页全量约 4.5 分钟，增量秒级，浏览器门禁的全站成本由此可控。fail-closed：探针异常该页即 FAIL；playwright 缺失 exit 2 不出 marker。
-> - **建置即绿的实证路径**：首跑 7 页 FAIL → 复合键/批注键匹配修复救回 material-archaeology → 6 页存量超限 → 四类例外口径裁决（24 条入 W883 分册）+ dashboard `.seal` 按 v4 §3.2「徽章实底改为朱砂字 + 8% 淡底」修复（页面级规则·与 W864 批系统性 .seal 转换同模式）→ **0 FAIL**。
-> - **四类存量口径（④ en 迁移直接复用）**：① **数据语义色片**（零和/严重度/文化元素/场景标签等编码·图表语义非装饰·W864 起登记的同一族）；② **KPI 首卡顶条**（v4「卡片顶条保留（1 处/卡）」条款·linguistics 3 行各 1 处的「整页仅首屏首卡可带」张力已在豁免 reason 里如实注明·待后续收敛批裁决）；③ **功能交互实底**（导出按钮/筛选选中态/问津悬浮钮·v4 §5.2 组件规格设计态）；④ **区块标识横条**（route-strip 节标）。第 ⑤ 类**徽章实底不予放宽**——按 v4 修复而非豁免。
-> - **W876 审计器口径校正**：`_w876_site_audit.py` fill 判据由「≥3px / 盒面积」校正为「≥2px / 条带面积」（与 `_w864_accent_audit.py` 及豁免登记簿 criterion 逐字对齐）——HEAD 快照复跑 **457 处 / 89 页**，与原审计分毫不差（此前差 9 处 2px 顶条即此口径差）；终态复跑 457/89（实底零变动）。
-> - **W877-W882 六段回补**：按 W874 补段批先例，六段 spec 按号序一次回写（CHANGELOG 174→180 段·规则行 W001-W882），对账表六行段状态翻「W883 补段批回写」、W877 豁免条目划销。
-> - **验收**：门禁自检 14/14 · pytest tests/unit/test_vermilion_solid.py 11 passed · 门禁实跑 96 页 0 FAIL · verify 54 段自洽锁全绿 · CSP 856 页 0 漂移。**判词：PASS**。
-> **状态**：**已收官**（W883 e750a047·git 反填·共 2 笔·W971 存量回填）
-
-### W882（2026-10-22）：缺口第 4–6 项合并批（竖版海报 3:4 六张 + 百回体系化封面六张 + 可视化页插画四张·构图句改写）
-
-> **来源**：用户就缺口清单令「继续」并就本批三问已定：第 4–6 项三项全做·**16 张**·沿用前三批宣纸水墨锚点·构图句改写。
-> - **文件**：site/static/images/post-01 至 post-06（竖版）、chap-07/14/15/23/27/30（百回母版）、viz-01 至 viz-04（可视化插画），scripts/output/_w882_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **三组构成**：① **竖版海报 3:4 六张**（1200×1600）——悟空/唐僧/八戒/沙僧/白龙马五人物竖像 + 西行长路一景；② **百回体系化封面六张**（1:1 1200×1200）——**同一母版**：旅人背影立于中轴偏下、层叠远山、通宽淡天、淡墨坡地贯通左右，仅换主体符号（回 07 丹炉火 / 回 14 断树猿影 / 回 15 蛇形长脊 / 回 23 寺门菩提 / 回 27 月下破寺白影 / 回 30 宫室屋脊白马），用以验证「可参数化母版」能否批量铺一百回；③ **可视化页插画四张**（1:1 640×640）——网络/热力/雷达/时间线四页型的墨意母题（根须网 / 疏密墨点阵 / 放射线 / 纵向刻痕序列）。
-> - **构图句改写（本批的核心修复·承上一批伪影根因）**：删掉正面的「clear horizontal composition boundary」类**正面几何描述词**，改为纯否定式表述（"the subject sits in the upper two thirds … the lower third is completely empty warm rice-paper"），并在禁项补 "ruled line, horizon line, border, frame"。**只查证：正面描述会被字面执行、否定式禁项不会**（上批 "no border" 从未画出边框）。**效果可复算**：本批 16 张生成后全库 67 件素材的规则线扫描 **0 命中**（上批为 3 件 5.9%）。
-> - **量化验收**（脚本量测·非目视断言）：竖版组净空带 437 至 545 px（27.3% 至 34.1%）·主体墨量 15.6% 至 46.9%·严格朱砂 0.01% 至 0.07%·单件 45.8 至 103.6 KB；百回组净空带 364 至 450 px（30.3% 至 37.5%）·主体墨量 30.7% 至 49.6%·严格朱砂 0.02% 至 0.10%·单件 39.2 至 54.2 KB；插画组净空带 157 至 269 px（24.5% 至 42.0%）·主体墨量 16.0% 至 52.0%·严格朱砂 0.04% 至 0.27%·单件 10.7 至 42.0 KB；主底色 14 值全落 #F4EBDF 至 #FCF8F0 暖白同族；零文字、零水印、零落款、零印章。
-> - **竖版裁切纪律**：源图 1792×2400（比例 0.7467）与 3:4（0.7500）差 0.4%，**纵向只裁 11px**（0.46%）——主体不被切优先于比例精确，形象变 ≤0.01%。
-> - **锚点其余部分逐字复用**（art direction 段、松散枯笔湿染笔触句、配色五色）⇒ 五批累计 59 张跨批严格成套。
-> - **范围纪律**：只新增 site/static/images/ 下十六个素材文件，不改任何页面与门禁件，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874（W851 已落段），W875–W881 段待补且 W876 在途 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W882 25bfa5d1·git 反填·共 2 笔·W971 存量回填）
-
-### W881（2026-10-22）：人物补位素材批（十二张 1:1 方图·八戒 6 + 沙僧 4 + 师徒同框 2·沿用前三批宣纸水墨锚点）
-
-> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，并就本项三问已定：先做人物补位·**12 张**·1:1 方图·沿用前三批宣纸水墨锚点·题材取「混合题材＋聚焦单一题材＋同题材多角度」三种取向全要。
-> - **文件**：site/static/images/card-13 至 card-24 共 12 件、site/static/images/og-03-bailongma.webp、site/static/img/og-cover-ink-en.jpg、site/static/img/og-cover-ink-en.png、scripts/_w881_rule_line_scan.py、scripts/_w881_fix_rule_line.py、scripts/output/_w881_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **十二张怎么铺**：**八戒 6 张**（月下负囊/持耙守关/坐歇担前/雨中奔行/登高远眺/挑担赶路）、**沙僧 4 张**（负杖渡江/宝杖镇水/守夜/负重前行）、**师徒同框 2 张**（山径并肩/山门前对峙）——一次覆盖三种题材取向：混合题材试调性、单一主体做透（八戒与沙僧各自成组）、同主体多角度（每人多个景别与情境）。
-> - **锚点逐字复用 W852/W853**：art direction 段（宣纸 #FAF7F0 纸底 / 玄墨 #221D16 墨线 / 淡墨 #6B6455 / 单一朱砂 #C8463A 强调 / 赭金 #E9B885 点彩）、松散枯笔湿染笔触句、禁项清单、1:1 方幅构图规则一字不改，仅换主体描述 ⇒ 四批累计 43 张素材图跨批严格成套。
-> - **人物识别锚点**：八戒＝长耳宽口＋九齿钉耙＋赭金虎纹裙；沙僧＝卷发深须＋降妖宝杖＋玄色衣袍。**面部不做卡通化**（禁大眼与笑脸，多取背身与侧身），每张仍只留一处朱砂点（红绦/红结/红缨/红珠/红幡/灯芯）。
-> - **量化验收**（脚本量测·非目视断言）：成品 1200×1200 精确 1:1（源 2048×2048 等比缩放·不裁切）；底部净空带 249 至 407 px（20.8% 至 33.9%）；上 66% 主体墨量 28.9% 至 76.6%；严格朱砂 0.01% 至 0.10%（暖色总量 0.47% 至 4.81% 单列）；主底色 10 值全落 #F4E6D3 至 #FBF6EC 暖白同族；单件 50.0 至 137.3 KB；零文字、零水印、零落款。
-> - **顺带修掉一处提示词字面化伪影（跨批）**：art direction 构图句里的 "ending at a clear horizontal composition boundary" 被模型**字面执行**——在画面上画出贯穿全幅的 1 至 2 px 规则线（与「无边框/无框架」禁项自相矛盾）。自写扫描器 `scripts/_w881_rule_line_scan.py`（判据：某行暗像素占比 ≥65% 且邻行骤降）扫全库 51 件素材，命中 3 件 5.9%：**og-03-bailongma.webp** 与由它导出的 **og-cover-ink-en.jpg/.png**（后者是英文站现行 og:image ⇒ 每次英文分享都带这条线）、以及本批的 **card-15-bajie-zuoxie.webp**。修法 `scripts/_w881_fix_rule_line.py`：定位规则行块并向下并入紧邻的洗边暗行，再逐列用「块上/块下两行颜色」做垂直渐变回填 ⇒ 硬线化为自然淡墨过渡，画面其余部分零改动；复扫 51 件 **0 命中**，且两图已无任何行亮度突降 >18 的硬边。**后续批次的构图句须改写**（把「clear horizontal composition boundary」换成不含「boundary/rule/line」字样的表述，并在禁项补 "no ruled line, no horizon rule"）——本批为保持与前三批锚点同源而未改写，故以程序化修复收口。
-> - **范围纪律**：只新增 12 件素材图 + 两个检测/修复脚本 + 修复 3 件历史资产，不改任何页面与门禁件，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874，W875–W880 段待补且 W876 在途 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W881 bbbb070e·git 反填·共 3 笔·W971 存量回填）
-
-### W880（2026-10-22）：分语言 og:image 接线批（855 页改指新 URL·中文 og-09 山口关隘 / 英文 og-03 白龙马·生成端与判据端同步）
-
-> **来源**：用户就 W879 批报告的遗留项「分语言 og:image 接线（改 855 页引用 + 门禁常量）」回「批准」——即 CLAUDE.md 第 10 条要求的「管控件改动须经用户批准」已获授权。
-> - **文件**：scripts/_w880_og_image_split.py、scripts/check_seo_head.py、scripts/inject_seo_head.py、scripts/build_reader.py、scripts/gen_og_cover.py、site/（855 页的 og:image 一行）、site/static/img/og-cover.png、scripts/output/_w880_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **做了什么**：全站 **855 页**的 og:image 改指**新 URL**——中文 717 页 → `static/img/og-cover-ink-zh.jpg`（取 og-09 山口关隘），英文 138 页（en/ 前缀）→ `static/img/og-cover-ink-en.jpg`（取 og-03 白龙马）。页内旧 URL 的**全部出现处**一并替换（含内联 JSON-LD 的 image 字段，避免同页两处指向不同图），行尾原样保留。
-> - **顺带清掉 W879 的两个遗留**：① **缓存**——URL 变更后社交平台按 URL 缓存的旧卡即刻失效，「新图滞后于平台缓存过期」不再是问题；② **生成物被手改**——`site/static/img/og-cover.png` 是 `scripts/gen_og_cover.py` 的生成物，W879 的原地替换会被下一次生成冲掉（生成副本被重生成抹除），本批把它**恢复为生成物版本**（可复现，49,490 B），现行分享图移到两个**非生成物**新文件上，生成物与手工资产就此分离；`gen_og_cover.py` 的文档字符串同步注明其产出已降级为旧版留档。
-> - **判据端同步（管控件·用户已批准）**：`scripts/check_seo_head.py` 的 R1 逐页期望值由单一 URL 改为**分语言**（新增 `og_image_for(rel)`·en/ 前缀为英文站），R4 由校一张 og-cover 改为**校两张现役图**（存在 + 尺寸 1200×630 + 体积 ≤300KB·旧排版卡保留存在性与体积校）。判据语义未放宽——仍是「每页必须有正确的 og:image」，只是期望值按语言分流。
-> - **生成端同步（避免下次重建被抹）**：`scripts/build_reader.py`（reader 生成器仅产出中文页 → 取中文图）与 `scripts/inject_seo_head.py`（全站 SEO 注入器 → 按 is_en 分流）——改写产物必须同步改生成器，否则下一次重建/再注入即回退。一次性脚本 `scripts/_w880_og_image_split.py` 的产出与生成器一致 ⇒ 后续重建不回退。
-> - **验收**：SEO head 门禁实跑通过（855 页 · 配对 89 · sitemap 集合一致 · JSON-LD 内联有效）；三个脚本 `py_compile` 通过；全量门禁 53 段核心全部通过。
-> - **范围纪律**：只动 855 页的 og:image 一行 + 四个脚本 + 一个一次性脚本 + 恢复旧 og-cover，不改任何页面结构、正文、样式与门禁判据语义，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874，W875–W879 段待补且 W876 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W880 2446f94e·git 反填·共 2 笔·W971 存量回填）
-
-### W879（2026-10-22）：暗底/夜读适配水墨素材批（四张 1792×1024·浅底浓墨显影版三张 + 深底浅墨直显一张 + 全站分享图换水墨）
-
-> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，并就第 1+2 项四问已定：分段交付·**新生成深底水墨图**·**4 张 1792×1024**（多一张夜读模式专用）·**允许改中英文两站 meta og:image**。
-> - **文件**：site/static/images/ink-mountains-hero.webp、site/static/images/ink-mountains-path.webp、site/static/images/ink-mountains-pine.webp、site/static/images/ink-mountains-night.webp、site/static/img/og-cover.png、site/static/img/og-cover-ink-zh.jpg、site/static/img/og-cover-ink-zh.png、site/static/img/og-cover-ink-en.jpg、site/static/img/og-cover-ink-en.png、scripts/output/_w879_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **根因实测（先质疑判据再动手·不是「图不够好看」）**：`.hero` 在 reader 与 data 页是同一套合成（`background: var(--dark)` #221D16 + `background-image: ink-mountains-hero.webp` + `background-blend-mode: soft-light`），**848 个页面共用一张**。按 soft-light 数学（背板 b=0.115<0.5 时 result=b−(1−2b)·b·(1−s)）：**源越暗越显影、源越亮越隐形**。现有那张「浅底淡墨」（纸 s≈0.93、山 s≈0.85）合成后亮度跨度仅 **0.0080** ⇒ 肉眼几乎不可见——这才是「叠完看不见」的机制性根因。
-> - **据此修正做法**：诗段底图必须是「**浅/亮底 + 浓墨山影**」（源 p05 落到 0.081–0.160、p50 仍 0.96 的大面积浅纸），深墨区才会在合成后显影为剪影；用户所选「深底浅墨」款则留给**夜读模式直显**场景（不做合成），保留为第 4 张。
-> - **显影度验收（合成模拟·可复算）**：把成品按 soft-light 叠到 #221D16 后量输出亮度跨度——基线 0.0080 → 新三张 **0.0718 / 0.0768 / 0.0789（×9.0 / ×9.6 / ×9.9）**；深底直显版自身对比度 0.5205。
-> - **交付形态**：第 1 张**原地替换** `ink-mountains-hero.webp`（同文件名同尺寸 1792×1024）⇒ **848 页零页面改动即同时改善**，旧图存于 git 历史；其余三张新增待后续接线。
-> - **第 2 项 og 分享图（按仓内契约调整了做法·据实记账）**：原计划是「中英文两站各改一行 meta og:image 指向自己的水墨图」，实测被第 33/SEO head 门禁否掉——`scripts/check_seo_head.py` 的 `OG_IMAGE = BASE + "static/img/og-cover.png"` 是硬编码常量，R1 逐页要求 head 里含**完全相同**的 og:image 绝对 URL（全站 855 页一条 URL），R4 另要求该文件 ≤300KB。改 URL 即红，且改门禁常量属管控件（CLAUDE.md 第 10 条须用户批准）⇒ **本批改为共享资产原地替换**：`site/static/img/og-cover.png` 换成水墨图（取 og-09 山口关隘，PNG-8 256 色 143.0 KB，目视无色带、朱砂印准确），**全站 855 页一次性换水墨分享图，URL 不变故 R1/R4 全绿**。分语言版（中文 og-09/英文 og-03 的 JPG 与 PNG）**已备好但未接线**——按页分语言需改 855 页引用（含 reader 生成器）且动门禁常量，须用户批准后另批。**遗留说明**：URL 不变，社交平台按 URL 缓存 og:image，新图生效可能滞后于平台缓存过期。
-> - **一处自我更正（据实记账）**：W878 批里我按磁盘实算刷新的 `inline_css_pages` 当时读到 850，那是并行会话重跑 `inline_css.py --force` 的中途瞬时值；该重生成落定后全站含 INLINED 标记页数 HEAD 与工作树一致为 328/330（与 W875 批自述「约 225 至 330 页」吻合），**850 才是异常值**。本批一并更正：stats.json 刷新为 330（磁盘实算零差异），两处实体标记同步回 330（CHANGELOG 顶部「全站页数口径」块及其键值枚举、架构方案 §113「内联 CSS 覆盖页」表行），变更史如实留痕（W878 记 330→850、W879 记 850→330）。
-> - **范围纪律**：只动 4 张底图 + 4 个分语言 OG 文件 + 1 个共享 og-cover + 目录索引刷新件 + 口径标记更正，不改任何页面结构、样式、生成器与门禁件，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874，W875–W878 段待补且 W876 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W879 40a0ef23·git 反填·共 2 笔·W971 存量回填）
-
-### W878（2026-10-22）：OG 分享缩略图素材成套批（十二张 1200×630 水墨淡彩·沿用 W852/W853 提示词锚点·底部净空带供叠字）
-
-> **来源**：用户第三回令「再帮我做几张素材图」，开工前同样先问三事；本会话按用户选择（用途=OG 分享缩略图、画幅=1200×630、数量=12 张、参考=沿用前两批宣纸水墨、主题=人物单像/法宝器物/地理行路/回目与章节四类全覆盖）执行。
-> - **文件**：scripts/output/_w878_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **三批累计**：W852 六张 16:9 Hero + W853 十二张 1:1 卡片封面 + W878 十二张 1200×630 分享图 = 仓内 30 张水墨素材图。
-> - **锚点复用口径**：art direction 段（宣纸 #FAF7F0 纸底、玄墨 #221D16 墨线、淡墨 #6B6455、单一朱砂 #C8463A 强调、赭金 #E9B885 点彩）、松散枯笔湿染笔触句、禁项清单**逐字复用**前两批；本批连构图规则里的「16:9 宽幅」也照抄不改——**画幅差异全部在交付端机械处理**（源图按 16:9 生成 → 纵向裁 91px → 缩到 1200×630），使三批的提示词锚点完全同源。
-> - **裁切规则本批细化**（源 2752×1536 实为 1.7917，目标 1200×630 为 1.9048，须纵向裁 91px）：可裁顶的两种情形——① 顶部 96 行深墨占比 < 0.05%（几乎全空）② 顶部深墨本就溢出画幅上沿（裁了看不出断口，如山口的断崖与孤灯的浓墨）；其余（主体顶端悬在画幅内·悟空的棒尖、白马的耳、芭蕉叶尖）一律裁底，保底部净空带。**主体不被切**是这条规则的第一原则。
-> - **量化验收**（脚本量测·非目视断言）：成品 1200×630 = 精确 1.9048；底部净空带 163 至 294 px（25.9% 至 46.7%）；上 66% 主体墨量 6.4% 至 69.5%；严格朱砂 0.01% 至 0.34%（暖色总量 0.08% 至 4.49% 单列参考）；主底色 11 值全落 #F5ECDD 至 #FAF5EC 暖白同族；单件 15.4 至 66.2 KB。
-> - **一轮返工**（净空带偏窄）：首轮六张（01 悟空/06 净瓶/07 曲径/08 石桥/09 山口/10 残卷）净空带仅 130 至 153 px（20.6% 至 24.3%），低于前两批 24.9% 的下限 → 把边界加严为「元素止于 60% 高度、下方 40% 完全空白」重做二版，六张净空带全部升到 182 px 以上，逐张采用二版。
-> - **四主题各三张**：人物单像（悟空/唐僧/白龙马）、法宝器物（金箍棒/芭蕉扇/净瓶）、地理行路（曲径穿山/河曲石桥/山口关隘）、回目与章节（半展残卷/孤灯/铜镜）。每张只留一处朱砂点（金箍棒的红绳、孤灯的灯焰、铜镜旁的朱砂小印等），延续前两批的「单点强调」纪律。
-> - **无文字纪律**：十二张均无文字、落款、印章与水印。
-> - **CHANGELOG 版段递延**：现役顶段 W874，W875 至 W877 段待补且 W876 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> - **范围纪律**：只新增 site/static/images/ 下十二个素材文件，不改任何页面与门禁件，不推送远端。
-> **状态**：**已收官**（W878 35da6b0e·git 反填·共 2 笔·W971 存量回填）
-
-### W877（2026-10-22）：计划方案未落地项核查批（92 项未做核销 + 模板符合性矩阵 + README 模板规范）
-
-> **来源**：用户 2026-10-22 19:37 令「你审查一下还有哪些计划方案还没做」+「再检查一下是否符合提示词模板」（`docs/12-提示词库/04-任务执行提示词.md` 与 `03-工作复盘提示词.md`）。
-> - **文件**：docs/11-方案报告/计划方案/T09-任务计划执行与经验沉淀报告-2026-10-22.md、docs/11-方案报告/README.md、docs/INDEX.md、scripts/output/_w877_spec.json、scripts/output/_w877_template_matrix.json、docs/00-导读/W批次编号对账表.md。
-> - **做法**：读 `docs/11-方案报告/` 全 39 件（11 计划方案件 + 28 报告件），抽出计划项与未落地声明逐条到仓库取证核销——判定只认仓库实证不认文档自述，状态四档（未做 / 部分做 / 已做未收口 / 已做）+ 证据强度标注；四簇并行只读取证，217 项逐项带可复算命令。
-> - **模板复核**：用仓内自探针 `scripts/_w857_plan_template_review.py`（32 项结构判据）实跑 11 份计划件，出结构缺项 4 份（7 处）+ 模糊词 9 处（分布 7 件）+ 配对并集覆盖（T-01 4/10、T-03 8/10、T-04 4/10）；本件为 BOTH 型，自身 32 判据全符合且模糊词 0 处，第 48 槽新增件全项判 PASS。
-> - **头条发现**：在途 W876 批的 `inline_css.py --force` 重同步把 W862–W875 共 11 批设计迁移的「容器令牌化」与「朱砂实底收敛」抹掉——含 `var(--container-wide)` 的 site/data 页 HEAD 87 → 工作区 0，硬编码 `max-width: 1320px` 1 → 88 个文件，含 kpi 收敛规则页 86 → 0；根因是这两项规则写进了页内 INLINED 生成副本而非 `site/system.css` 单一事实源。
-> - **顺带落规则**：`docs/11-方案报告/README.md` 新增 §四「交付物模板规范（强制）」，把《任务计划执行与经验沉淀》与《工作复盘与优化分析》两份提示词模板与本目录两类交付物绑定（必备结构 + 编号体系 + 机器判定 + 6 条执行口径），并给维护契约加第 ⑤ 条。
-> - **同批代做收官回填**：台账 W858 / W860 / W865 三行状态列写「已交付」而非「已收官」，`preflight_check.py` 判假在途并拦截 `docs/11-方案报告/README.md` 与 `docs/INDEX.md` 两个共享面；本批代翻转三行状态列并回填 commit hash（0f2508ec / 5ce4c66c+3fa28e5c+42b3d245 / 1dd17a7c），行内与提交信息逐条声明归属。
-> - **取号与版段**：取号 W877（台账 max+1；W876 行内「阶段 5 机检门禁另挂 W877」为行文软认领，按先落地者保留由本批取号，W876 线程后续批须改号 W878+）；CHANGELOG 顶段停在 W874 而 W875/W876 在递延链上，`batch_cascade` 断言「批次号应为 W875」不成立，故本批按 W852–W873 先例登记递延豁免，spec 落库待补段批按号序回写 W875–W877 三段及双索引。
-> - **判词**：未做 92 · 部分做 43 · 已做未收口 12 · 已做 72 · 其他 11（未验证 / 持续管理 / 冻结 / 盲点）；带可复算命令的结论 217/217；本件过第 48 槽（0 FAIL）、第 31 门禁 doc-sync、第 45 门禁目录新鲜度、第 29 门禁链接、docs 索引 737 篇。
-> **状态**：**已收官**（W877 f38e4888·git 反填·共 1 笔·W971 存量回填）
-
-### W876（2026-10-22）：对比度专项批·C 渠与值切换（朱砂文字全站落地 + chart-3/暗色 accent 改值 + inline_css 回吞事故修复）
-
-> **来源**：用户令「③④继续」。W876 = W864 起累积 defer 的对比度欠账总清：C 渠（朱砂文字落 --bg）+ 两处令牌改值。
-> - **文件**：site/tokens.css、site/data/（63 页规则级换色）、site/en/ 与 site/reader/（326 页 INLINED 副本令牌值靶向同步）、site/dukou-engine.html（根级 INLINED 页靶向修复）、docs/00-导读/design.md、scripts/output/design-tokens.json、scripts/_w876_c_text_swap.py、scripts/_w876_value_check.py、scripts/_w876_site_audit.py、scripts/_w876_diff_audit.py、scripts/_w876_baseline_probe.py、scripts/_w876_backfill_w875.py、scripts/output/_w876_*.json（8 件）、scripts/index.md、scripts/output/index.md、scripts/output/README.md、docs/00-导读/W批次编号对账表.md。
-> - **C 渠（规则级单遍全量）**：96 页（88 data + 8 根）审计——落 --bg 的朱砂文字 **1,087 处 / 64 页**（重建审计器在 HEAD 快照上精确复现该数·口径：textContent 非空 + 有效背景 = --bg）；单遍换色 **173 条 color 规则 / 63 页**（--accent→--accent-text·#C8463A→#C7463A·4.50:1）；终态 **253 处 / 27 页（降 77%）**——残余 6 页 96 处为 JS 内联样式 strong（复评清单·需逐实例改数据路径·另批处理）。
-> - **值切换（两处）**：--chart-3 #C9A063→#B38F58（2.42→3.01:1·42 消费页 + role-card 等非 SVG 消费点）；暗色 --accent #E0604F→#E46250（4.35→4.50:1）。326 页 INLINED 副本 + dukou-engine 靶向 + tokens.css 本体；外链页天然吃新值。
-> - **inline_css 回吞事故（本批最大发现·已修复）**：收尾验证实证——inline_css.py --force 的 regenerate 会把 W864-W875 迁进页面内联块的规则整段冲掉（system.css 自 W856 起未随迁移更新：.page-wrap 容器令牌化回退 1320px 字面量、.seal 淡底回退实底；朱砂实底审计 457→710 即现形）。本批中途一次全量 --force 已污染 328 页暂存区（且越界新内联 525 个 reader 子目录页）。**修复**：328 页全部自 HEAD 重建（保迁移成果）→ 重放换色 → 靶向替换两处令牌值（不走 regenerate）；静态 diff 分类审计证明 829 处增删全归三类、三类之外与 HEAD 逐字节一致。根因登记 BL-33（system.css 与页面内联块漂移·后续迁移批二选一：写回 system.css 或禁全量 --force）。
-> - **顺带抓出并回退**：换色器正则 color 子串匹配误伤 6 处 border-color（违反「只动 color·border 归 B 渠」与 v4「交互边界一律 --accent」）——已精确回退，diff 审计器加负向查视防复发。
-> - **验收（四轨全绿）**：① 静态 diff 分类审计 PASS（328 文件·829 处增删全归三类·三类之外与 HEAD 逐字节一致）；② C 渠审计 1,087→253（HEAD 快照校准精确复现 + 终态实测一致）；③ 值切换计算样式锚点校验 PASS（chart-3 + dukou 令牌 + 暗色 accent + 残余反向证据四组）；④ CSP 856 页 0 漂移 + 24 页双主题基准对拍全量无截断 PASS（2,195 处差异零未预期：T1 C 渠 407·T2 chart-3 2·T3 暗色 accent 1,781·T4 暗色 color-mix 派生 5——currentColor 传播与混色派生两机理均已实证）。**判词：PASS**。
-> **状态**：**已收官**（W876 4a3d2f3f·git 反填·共 2 笔·W971 存量回填）
 

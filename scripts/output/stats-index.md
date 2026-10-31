@@ -9,21 +9,22 @@
 |---|---|---|---|---|
 > **字段语义（W716 注）**：`introduced_by`=口径首次**正式化**批次（非历史首次出现批次）；`last_changed_by`=stats.py **检出**值变更的最近批次（建账前变更不记，如 site/reader 621→622 系主题枢纽页批次新增、早于建账）；`generator` 恒为 `scripts/stats.py` 故省略列。
 
-| a1_a6_docs | 615 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | W505 |
+| a1_a6_docs | 616 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | 1011 |
 | a2_docs | 44 | docs/06-个人随笔/*.md（排除 README） | W904 | W904 |
 | a3_docs | 215 | docs/02-人物深度分析/*.md（排除 README） | W904 | W904 |
 | a4_docs | 209 | docs/03-主题与情节专题/*.md（排除 README） | W722 | W722 |
-| a5_docs | 34 | docs/04-文化与历史背景/*.md（排除 README） | W904 | W904 |
+| a5_docs | 35 | docs/04-文化与历史背景/*.md（排除 README） | W904 | 1011 |
 | a6_docs | 13 | docs/05-诗词歌赋/*.md（排除 README） | W904 | W904 |
 | cognition_docs | 3 | docs/08-提升认知/*.md（排除 README） | W904 | W904 |
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
-| gate_count | 50 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W961 |
+| gate_count | 52 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | 1011 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
+| icon_allowlist_entries | 71 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1053 |
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W894 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W904 |
-| methodology_docs | 25 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | 975 |
-| pytest_collected | 938 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 990 |
-| report_docs | 85 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 988 |
+| methodology_docs | 26 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1040 |
+| pytest_collected | 1097 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1067 |
+| report_docs | 104 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 1066 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -33,8 +34,151 @@
 | site_root_html | 9 | site/*.html | W459 | W459 |
 | spirit_docs | 4 | docs/09-精神塑造/*.md（排除 README） | W904 | W904 |
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
+| w864_entries | 256 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1053 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1067（2026-10-31 15:00:16）
+- pytest_collected: 1096 → 1097
+
+### 1066（2026-10-31 12:57:38）
+- report_docs: 105 → 104
+
+### W1065（2026-10-31 11:34:35）
+- report_docs: 104 → 105
+
+### 1063（2026-10-31 11:23:23）
+- pytest_collected: 1095 → 1096
+
+### 1062（2026-10-31 10:51:22）
+- report_docs: 103 → 104
+
+### W1059（2026-10-31 08:32:16）
+- report_docs: 102 → 103
+
+### W1053（2026-10-31 05:57:39）
+- icon_allowlist_entries: None → 71
+- pytest_collected: 1094 → 1095
+- w864_entries: None → 256
+
+### （未记 W）（2026-10-31 05:57:22）
+- icon_allowlist_entries: None → 71
+- pytest_collected: 1094 → 1095
+- w864_entries: None → 256
+
+### 1053（2026-10-31 05:57:13）
+- icon_allowlist_entries: None → 71
+- pytest_collected: 1094 → 1095
+- w864_entries: None → 256
+
+### W1051（2026-10-31 04:59:56）
+- report_docs: 101 → 102
+
+### 1051（2026-10-31 04:53:29）
+- pytest_collected: 1087 → 1094
+
+### W1049（2026-10-31 04:11:07）
+- report_docs: 100 → 101
+
+### 1047（2026-10-31 02:26:45）
+- report_docs: 98 → 100
+
+### 1045（2026-10-31 02:10:44）
+- report_docs: 99 → 98
+
+### 1045（2026-10-31 01:59:56）
+- report_docs: 97 → 99
+
+### （未记 W）（2026-10-31 01:49:38）
+- pytest_collected: 1085 → 1087
+- report_docs: 96 → 97
+
+### 1043（2026-10-31 00:40:34）
+- report_docs: 95 → 96
+
+### 1042（2026-10-30 23:55:32）
+- pytest_collected: 1083 → 1085
+
+### 1042（2026-10-30 23:51:16）
+- pytest_collected: 1081 → 1083
+- report_docs: 92 → 95
+
+### 1041（2026-10-30 08:18:04）
+- pytest_collected: 1080 → 1081
+
+### W1022（2026-10-30 03:27:35）
+- pytest_collected: 1077 → 1080
+
+### W1021（2026-10-30 02:50:30）
+- pytest_collected: 1069 → 1077
+
+### W1019（2026-10-30 00:59:24）
+- pytest_collected: 1055 → 1069
+
+### W1019（2026-10-30 00:45:34）
+- pytest_collected: 1052 → 1055
+
+### 1018（2026-10-29 23:28:31）
+- report_docs: 90 → 91
+
+### 1016（2026-10-29 13:04:45）
+- pytest_collected: 1034 → 1052
+
+### 1014（2026-10-29 12:35:43）
+- report_docs: 89 → 90
+
+### 1014（2026-10-29 12:17:41）
+- pytest_collected: 1016 → 1034
+
+### 1013（2026-10-29 10:07:15）
+- report_docs: 87 → 89
+
+### 1011（2026-10-29 07:44:29）
+- a1_a6_docs: 615 → 616
+- a5_docs: 34 → 35
+- gate_count: 51 → 52
+- pytest_collected: 1008 → 1016
+
+### 1010（2026-10-29 07:13:46）
+- pytest_collected: 1006 → 1008
+
+### 1009（2026-10-29 07:04:19）
+- pytest_collected: 998 → 1006
+
+### 1008（2026-10-29 06:51:48）
+- pytest_collected: 997 → 998
+
+### 1007（2026-10-29 06:41:03）
+- pytest_collected: 996 → 997
+
+### 1007（2026-10-29 06:37:31）
+- gate_count: 50 → 51
+- pytest_collected: 987 → 996
+
+### 1006（2026-10-29 06:15:47）
+- pytest_collected: 980 → 987
+
+### 1004（2026-10-29 06:01:30）
+- pytest_collected: 979 → 980
+
+### 1005（2026-10-29 05:27:39）
+- pytest_collected: 973 → 979
+- report_docs: 86 → 87
+
+### 1003（2026-10-29 04:37:11）
+- pytest_collected: 955 → 973
+
+### W1002（2026-10-29 03:49:31）
+- pytest_collected: 946 → 955
+
+### 1001（2026-10-29 00:49:49）
+- report_docs: 85 → 86
+
+### W1000（2026-10-29 00:07:10）
+- pytest_collected: 945 → 946
+
+### 994（2026-10-28 05:19:36）
+- pytest_collected: 938 → 945
 
 ### 990（2026-10-27 22:38:06）
 - pytest_collected: 937 → 938

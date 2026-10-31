@@ -42,9 +42,11 @@ worktree_rehearse.py  # ②worktree 预演
 # 佐证：check_emoji_icons.py 自带正负样本运行形态；check_icon_fields.py 同族；登记类别=②会话直接执行类
 check_emoji_icons.py  # ②批收尾会话直跑门禁（UI 图标位 emoji 残留·W941-W950 族·W956 补登记）
 check_icon_fields.py  # ②批收尾会话直跑门禁（图标资产字段完整性·W949 族·W956 补登记）
-check_gsap_motion.py  # ②批收尾会话直跑门禁（GSAP 动效写法机检·W957 批·W958 补登记）
 check_parser_anchor_coverage.py  # ②批收尾会话直跑扫描（解析器锚点覆盖面·W964 双虫探针常驻化·W965 建）
 check_gov_doc_claims.py  # ②批收尾会话直跑对账（治理文档数字断言·preflight 提示位接线·W967 建）
 archive_ledger_rows.py  # ②批收尾会话直跑归档（台账行号序切分·C5 窗口修法·W970 建）
 check_content_hygiene.py  # ②批收尾会话直跑扫描（全仓内容卫生·角色分类·W973 建）
 cascade_lock.py  # ②批收尾会话直跑工具（级联运行锁·--acquire/--release/--status·W991 建）
+check_audit_trigger.py  # ②批收尾会话直跑触发器（对抗式审查 ≥20 批点名·W1000 建）
+reserve_w.py  # ②开批占号助手（reserve/list/release 三模式·W1041 建）
+patch_ratio.py  # ②影子度量（补丁比报数·M-01 不挂槽·W1046 D-04 裁决观察数批再议·W1053 建）

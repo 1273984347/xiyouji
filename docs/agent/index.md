@@ -11,13 +11,20 @@
 
 - （无）
 
-## 文件（3）
+## 文件（10）
 
 ### Markdown 文档
 
+- `adversarial-audit-prompt.md`
 - `agent-web.md`
+- `batch-closeout-checklist.md`
+- `closeout-agent-prompt.md`
+- `gate-triage-template.md`
 - `gates.md`
+- `parallel-evidence-template.md`
 - `pitfalls.md`
+- `reconcile-agent-prompt.md`
+- `text-audit-agent-prompt.md`
 
 ---
 

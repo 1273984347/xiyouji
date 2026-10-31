@@ -11,12 +11,13 @@
 
 - （无）
 
-## 文件（2）
+## 文件（3）
 
 ### Python 脚本
 
 - `chapter_stats.py`
 - `word_frequency.py`
+- `章节切分.py`
 
 ---
 

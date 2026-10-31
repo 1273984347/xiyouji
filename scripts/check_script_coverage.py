@@ -26,6 +26,11 @@ CI workflow ∪ Makefile 四面引用），结论 **46/101 无任何引用**—�
   （防「脚本已删却仍挂豁免」的僵尸条目）。
 - C3 **判据面非空**：根级脚本数 ≥ 50 · 覆盖集 ≥ 15 · 豁免集 ≥ 10（解析面塌陷 fail-closed，
   防「正则失效导致全量误红/全量豁免」的空真）。
+- C4 **一次性脚本归位**（W1002 建·「脚本三档归位」的机器哨兵）：历史批（W 号 < 台账 max）的
+  `_w####_*.py|js` 仍在 `scripts/` 根 = FAIL（应随批收官移入 `archive/scripts/batches/wNNN/`）。
+  被四面引用的历史 `_` 件判为「转正候选」，允许 ≤ `MAX_RETAINED_UNDERSCORE` 件（棘轮·只降不升；
+  W1003 起为 0——W977 的「硬保留 16 件」已全部转正或归档，不再有合法滞留）。超配额 = FAIL。
+  台账不可读时 C4 跳过并打印 WARN（禁静默）。
 
 ## 豁免登记（scripts/output/script-coverage-baseline.txt）
 
@@ -61,6 +66,11 @@ MAKEFILE = os.path.join(ROOT, "Makefile")
 MIN_SCRIPTS = 50
 MIN_COVERED = 15
 MIN_BASELINE = 10
+# C4 棘轮：被四面引用的历史批 `_` 件「转正候选」上限（只降不升）
+# W1002 建时实测 8 件 → W1003 全部转正清零，配额随之收到 0（任何历史批 `_` 件留在根即红）
+MAX_RETAINED_UNDERSCORE = 0
+LEDGER = os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")
+DONE_PREFIXES = ("已收官", "已闭环")
 
 
 def rd(p):
@@ -149,6 +159,108 @@ def baseline_set(raw, scripts):
     return declared, stale
 
 
+def list_underscore_scripts():
+    """根级 `_w####_` 一次性/批次脚本（C4 判据面·与 list_scripts 的排除口径互补）。"""
+    out = []
+    for name in sorted(os.listdir(SCRIPTS)):
+        p = os.path.join(SCRIPTS, name)
+        if not os.path.isfile(p) or os.path.splitext(name)[1] not in {".py", ".js"}:
+            continue
+        if re.match(r"^_w\d{3,4}_", name):
+            out.append(name)
+    return out
+
+
+def ledger_max_w(path=None):
+    """台账 max(W)——取号权威=表内 max（与 preflight.parse_ledger 同口径）。不可读 → None。"""
+    p = path or LEDGER
+    try:
+        text = rd(p)
+    except OSError:
+        return None
+    ws = [int(m) for m in re.findall(r"^\|\s*W(\d{3,4})\s*\|", text, re.M)]
+    return max(ws) if ws else None
+
+
+def inflight_wnums(path=None):
+    """台账里**未收官**（在途）批号的集合——在途批的脚本留在根是合法的，C4 不判。
+
+    为什么需要（W1006 实证）：后批一旦认领（max 前移），前批「还没收官」的脚本
+    立即变成「历史批滞留」→ C4 误红，把合法在途当违规。判据必须以**状态列**为准，
+    而不是只比 W 号大小。
+    """
+    p = path or LEDGER
+    try:
+        text = rd(p)
+    except OSError:
+        return set()
+    out = set()
+    for ln in text.split("\n"):
+        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", ln)
+        if not m:
+            continue
+        cells = [re.sub(r"[\s*]+", "", c) for c in ln.strip().strip("|").split("|")]
+        status = next((c for c in reversed(cells) if c.startswith(DONE_PREFIXES)), "")
+        if not status.startswith(DONE_PREFIXES):
+            out.add(int(m.group(1)))
+    return out
+
+
+def stray_batch_scripts(names, max_w, covered, inflight=frozenset()):
+    """C4 分流：历史批（W < max_w）滞留件 → (必归档, 转正候选)。
+
+    max_w 为 None（台账不可读）时返回空——判据不可执行不伪造红（由调用方打 WARN 留痕）。
+    """
+    if max_w is None:
+        return [], []
+    must_archive, promote = [], []
+    for n in names:
+        m = re.match(r"^_w(\d{3,4})_", n)
+        if not m:
+            continue
+        w = int(m.group(1))
+        if w >= max_w or w in inflight:
+            continue
+        (promote if n in covered else must_archive).append((n, w))
+    return must_archive, promote
+
+
+def c4_corpus():
+    """C4 专用引用面：四面 ∪ 全部非 `_` 脚本 ∪ 治理文档（AGENTS/CLAUDE/docs/agent）。
+
+    与 C1 的四面口径**故意不同**：C1 问「有没有测试/门禁/CI/Make 入口」，C4 问「是不是
+    跨批/被治理面引用的活件」。被其它门禁脚本调用的 `_` 件（如 `check_page_admission.py`
+    → `_w818_file_protocol_probe.py`）四面口径看不见，但确实是活件 ⇒ 判「转正候选」而非「死件归档」。
+    """
+    parts = [reference_corpus()]
+    for name in sorted(os.listdir(SCRIPTS)):
+        p = os.path.join(SCRIPTS, name)
+        if os.path.isfile(p) and not name.startswith("_") and name.endswith((".py", ".js")):
+            parts.append(rd(p))
+    for p in [os.path.join(ROOT, "AGENTS.md"), os.path.join(ROOT, "CLAUDE.md")]:
+        if os.path.exists(p):
+            parts.append(rd(p))
+    agent_dir = os.path.join(ROOT, "docs", "agent")
+    if os.path.isdir(agent_dir):
+        for f in sorted(os.listdir(agent_dir)):
+            if f.endswith(".md"):
+                parts.append(rd(os.path.join(agent_dir, f)))
+    return "\n".join(parts)
+
+
+def gate_mounted_set():
+    """verify_delivery.py 里以 `script="xxx"` 字面挂载的脚本名集合（C2 反向查用）。
+
+    fail-safe：读不到门禁本体返回空集（反向查不触发·绝不误伤）。仅认门禁硬挂载，
+    不含 Makefile / preflight / 单测覆盖者——那些仍属「人跑轨」，留豁免合法。
+    """
+    try:
+        text = rd(GATE_FILE)
+    except OSError:
+        return frozenset()
+    return frozenset(re.findall(r'script="([^"]+)"', text))
+
+
 def evaluate(inp):
     """纯函数判据（gather 注入实测 / self-test 注入构造），返回 issues 列表。"""
     issues = []
@@ -177,13 +289,39 @@ def evaluate(inp):
         issues.append("C2: 豁免清单重复行 %s" % d)
     for s in stale:
         issues.append("C2: 豁免清单陈腐行 %s（scripts/ 下无此文件·删行或改回原名）" % s)
+    # C2 反向查（W1014 接线升格）：已挂 verify 门禁槽的脚本不得仍留豁免——
+    # 豁免表语义=「四面无引用·只能靠人记得跑」（文件头自述），挂槽即每次提交真跑，
+    # 继续豁免会让登记面腐化（实证：check_gsap_motion.py W961 已挂第 50 槽，基线仍写
+    # 「未挂 verify 槽」，原 C2 只拦「脚本已删」拦不住这类漂移）。仅取 verify 挂载集，
+    # 不取整个覆盖集（Makefile/preflight 覆盖者仍属人跑轨，留豁免合法）。
+    mounted = inp.get("gate_mounted", frozenset())
+    for m in sorted(set(declared) & set(mounted)):
+        issues.append("C2: 豁免清单与门禁挂载冲突 %s（已挂 verify 槽却仍豁免·删该行）" % m)
+
+    # C4 一次性脚本归位（W1002）：历史批 `_w####_` 件不得滞留 scripts/ 根
+    under = inp.get("underscore", [])
+    if under:
+        covered_under = covered_set(under, inp.get("c4_corpus_text") or corpus)
+        must_archive, promote = stray_batch_scripts(under, inp.get("max_w"), covered_under,
+                                                    inp.get("inflight", frozenset()))
+        for n, w in must_archive:
+            issues.append("C4: 历史批脚本滞留 scripts/ 根 %s（W%d < 台账 max W%s）——"
+                          "按「脚本三档归位」移入 archive/scripts/batches/w%dxx/（无四面引用 ⇒ 非跨批判据）"
+                          % (n, w, inp.get("max_w"), w // 100))
+        if len(promote) > MAX_RETAINED_UNDERSCORE:
+            issues.append("C4: 转正候选 %d 件 > 上限 %d（棘轮只降不升）——%s"
+                          % (len(promote), MAX_RETAINED_UNDERSCORE,
+                             ", ".join(sorted(n for n, _w in promote))))
     return issues
 
 
 def gather():
     scripts = list_scripts()
     raw = rd(BASELINE) if os.path.exists(BASELINE) else ""
-    return {"scripts": scripts, "corpus_text": reference_corpus(), "baseline_raw": raw}
+    return {"scripts": scripts, "corpus_text": reference_corpus(), "baseline_raw": raw,
+            "underscore": list_underscore_scripts(), "max_w": ledger_max_w(),
+            "inflight": inflight_wnums(), "gate_mounted": gate_mounted_set(),
+            "c4_corpus_text": c4_corpus()}
 
 
 def run_check():
@@ -191,6 +329,16 @@ def run_check():
     issues = evaluate(inp)
     for it in issues:
         print("FAIL  " + it)
+    if inp.get("max_w") is None:
+        print("WARN  C4 跳过：台账不可读（%s）——归位判据本回合不可执行" % os.path.relpath(LEDGER, ROOT))
+    elif inp.get("underscore"):
+        covered_under = covered_set(inp["underscore"], inp.get("c4_corpus_text") or inp["corpus_text"])
+        _must, promote = stray_batch_scripts(inp["underscore"], inp["max_w"], covered_under,
+                                             inp.get("inflight", frozenset()))
+        if promote:
+            print("NOTE  C4 转正候选（%d/%d）：%s——被四面引用，建议去 `_` 前缀转正"
+                  % (len(promote), MAX_RETAINED_UNDERSCORE,
+                     ", ".join(sorted(n for n, _w in promote))))
     print("---- 第 42 门禁 根级脚本覆盖：%d FAIL ----" % len(issues))
     return 1 if issues else 0
 
@@ -234,6 +382,21 @@ def run_self_test():
     cases.append(("T5 有引用脚本放行（好样本）", dict(clean, baseline_raw=dummy_declared), None))
     cases.append(("T6 带行内注释的登记行必须被正确解析（W751 自伤回归）",
                   dict(clean, baseline_raw="\n".join(["fill00.py  # ②会话直接执行"] + ["fill%02d.py" % i for i in range(1, MIN_BASELINE)])), None))
+    # C4 一次性脚本归位（W1002）：历史批滞留 / 转正候选配额 / 当前批放行
+    cases.append(("T7 历史批 `_` 件无引用滞留必红（C4）",
+                  dict(clean, underscore=["_w0901_diag.py"], max_w=1002), "C4"))
+    cases.append(("T8 当前批 `_` 件放行（C4 好样本）",
+                  dict(clean, underscore=["_w1001_diag.py"], max_w=1001), None))
+    nine = ["_w0901_p%d.py" % i for i in range(MAX_RETAINED_UNDERSCORE + 1)]
+    cases.append(("T10 在途批脚本放行（C4 不误红合法在途）",
+                  dict(clean, underscore=["_w1005_diag.py"], max_w=1006, inflight={1005}), None))
+    cases.append(("T9 转正候选超配额必红（C4 棘轮）",
+                  dict(clean, underscore=nine, max_w=1002, corpus_text=dummy_corpus + "\n" + "\n".join(nine)), "C4"))
+    # C2 反向查（W1014）：已挂 verify 槽却仍豁免必红；仅 Makefile/引用覆盖者留豁免不误伤
+    cases.append(("T11 已挂门禁槽却仍豁免必红（C2 反向查）",
+                  dict(clean, gate_mounted={"fill00.py"}), "C2"))
+    cases.append(("T12 覆盖但非门禁挂载者留豁免放行（C2 不误伤）",
+                  dict(clean, gate_mounted={"alpha.py"}), None))
 
     fails = 0
     for name, inp, expect in cases:
@@ -290,6 +453,7 @@ CATEGORY_OF = {
     # 后续批次新增脚本（未覆盖时在此登记并注明类别；同批必须给出上面的四类理由）
     "check_chart_values.js": "④浏览器渲染断言（需真实 Chromium·由 pytest 逻辑层与 verify 第 43 槽覆盖）",
     "backfill_changelog.py": "②应急补段（版段递延链断裂时人工触发·非常规流程·W842 建）",
+    "reserve_w.py": "②开批占号助手（reserve/list/release 三模式·W1041 建）",
 }
 
 

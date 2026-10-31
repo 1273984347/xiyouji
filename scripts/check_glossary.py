@@ -235,5 +235,30 @@ def main():
     return 0
 
 
+def _self_test():
+    """W1053 G-06：scan_doc/build_variant_map 注入式三例（同形词命中/变体归一/无关文本放行）。"""
+    md = {"groups": [{"name": VARIANT_GROUP, "type": "variant",
+                      "entries": [{"variants": ["美猴王", "齐天大圣"], "canonical": "孙悟空"}]}]}
+    try:
+        vmap, compounds = build_variant_map(md), mask_terms(md)
+    except Exception as e:  # noqa: BLE001 —— 形态漂移时负样本无法构造，如实报红
+        print("FAIL  T0 build_variant_map 形态漂移：%s" % e)
+        return 1
+    hits_same = scan_doc("本文讲美猴王的故事。", vmap, compounds)
+    hits_var = scan_doc("本文讲齐天大圣的故事。", vmap, compounds)
+    hits_none = scan_doc("本文讲高老庄的庄稼。", vmap, compounds)
+    ok1 = bool(hits_same)
+    print("%s  T1 声明术语命中（G-06）" % ("PASS" if ok1 else "FAIL"))
+    ok2 = bool(hits_var)
+    print("%s  T2 别名变体归一命中（G-06）" % ("PASS" if ok2 else "FAIL"))
+    ok3 = not hits_none
+    print("%s  T3 无关文本放行（G-06）" % ("PASS" if ok3 else "FAIL"))
+    ok = ok1 and ok2 and ok3
+    print("---- glossary self-test：%d/3 通过 ----" % (3 if ok else 0))
+    return 0 if ok else 1
+
+
 if __name__ == "__main__":
+    if "--self-test" in sys.argv:
+        sys.exit(_self_test())
     sys.exit(main())

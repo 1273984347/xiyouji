@@ -18,6 +18,29 @@ pytest==9.1.1
 # 版本依据：6.0.2 已修全部 loader 类 CVE（CVE-2020-14343/1747/2019-20477
 # 均在 5.4 前修复）；本机 pip-audit -r 实测「No known vulnerabilities found」。
 PyYAML==6.0.2
+# W1062：numpy / playwright 登记——CI pytest-unit job 此前只装本文件，而 3 个
+#   「已转正」的根级脚本在**模块级** import 这两个包：
+#     scripts/check_crop.py       → numpy
+#     scripts/subject_band.py     → numpy
+#     scripts/accent_audit.py     → playwright
+#   ⇒ CI 单测 test_script_hygiene.py::test_promoted_scripts_importable 与
+#     test_tool_scripts_cli.py::test_root_script_is_importable 恒报
+#     ModuleNotFoundError ⇒ PR #70 被卡（pytest 5 failed）。
+#   与 W758（markdown）/ W813（PyYAML）同型：「本地有装而未登记 ⇒ CI 恒红」。
+#   版本依据：与本机实测一致（numpy 2.4.4 / playwright 1.63.0·后者与
+#   scripts/package-lock.json 的 npm playwright 1.63.0 钉版对齐·W913 口径）；
+#   pip-audit 实跑该组合 → "No known vulnerabilities found"。
+numpy==2.4.4
+playwright==1.63.0
+# W1063：scipy 登记——scripts/subject_band.py（W1004 从归档桶转正的共用纯函数）在
+#   **模块级** import scipy。CI pytest-unit 只装本文件 ⇒ 该件 import 失败 ⇒
+#   test_script_hygiene.py::test_w1003_promoted_scripts_importable 与
+#   test_tool_scripts_cli.py::test_root_script_is_importable[subject_band.py] 恒红。
+#   教训同 W758（markdown）/ W813（PyYAML）/ W1062（numpy+playwright）同族：
+#   「本地已装 ⇒ 本地绿；未登记 ⇒ CI 恒红」——**本地全绿不能证明 CI 会绿**，
+#   依赖面必须用 AST 扫模块级 import 求差（不靠人肉记忆）。
+#   版本依据：本机实测 1.17.1（PyPI 有 py3.12 wheel）；pip-audit 实跑该组合 0 漏洞。
+scipy==1.17.1
 # W776：fonttools/brotli 移除——全仓（含 archive/）零 import（W564 字体子集化一次性
 # 工具的遗留·子集化脚本已归档），CI/pip-audit 无需扫描；字体重子集化时按
 # scripts/font-subset-guide.md §3.1 按需安装（pyftsubset 回退路径）。

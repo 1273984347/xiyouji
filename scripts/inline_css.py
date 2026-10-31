@@ -8,13 +8,15 @@ inline_css.py — 将数据页的外部 ../tokens.css + ../system.css <link> 标
   sw.js / tokens.css 等非 <link> 字符串引用不会被误伤。
 - 单一事实源仍是 site/tokens.css + site/system.css；CSS 有改动时重跑本脚本
   （或加 --force）即可把所有页面重新同步，不会 85× 手工维护。
+- 内联副本剥离块注释（strip_comments）：源文件带注释供维护与 W 号追溯，传播到每页时
+  去掉注释字节——DESIGN.md §4A.8 的预算针对「每页内联体积」，注释对渲染零贡献。
 - 不内联 D3 CDN（<script src="https://d3js.org/...">），那是项目唯一 sanctioned 外部依赖。
 - 幂等：已内联（带 INLINED CSS 标记）的页面默认跳过；--force 重新同步。
 
 用法：
-    python scripts/inline_css.py                 # 内联所有未处理的页面
-    python scripts/inline_css.py --force         # 强制重新同步**已内联页**（不再顺带把外链页转内联）
-    python scripts/inline_css.py --force --inline-links  # 显式把外链页也转为内联（大动作·W895 护栏）
+    python scripts/inline_css.py                 # 无操作（已内联页 skip-inlined、外链页 skip-external）
+    python scripts/inline_css.py --force         # 重同步已内联页（传播 CSS 改动用这个·外链页仍不动）
+    python scripts/inline_css.py --inline-links  # 显式把外链页也转为内联（大动作·W895 护栏）
     python scripts/inline_css.py --dry           # 仅统计，不写文件
 """
 import os
@@ -39,6 +41,24 @@ def safe(css):
     return css.replace("</style", "<\\/style")
 
 
+# 块注释（非嵌套·CSS 无嵌套注释语法）
+_CSS_COMMENT_RE = re.compile(r"/\*.*?\*/", re.S)
+
+
+def strip_comments(css):
+    """内联副本剥离块注释（源 site/*.css 不动，注释仍在源文件里供维护与追溯）。
+
+    依据 DESIGN.md §4A.8：体积预算的实质是「每页内联体积」（每 +1KB = 全站 +225KB），
+    而注释对渲染零贡献 ⇒ 只在传播环节剥离，既真正压住每页字节，又不损失源的可读性
+    与 W 号追溯。实测：源 28.4KB 中注释约 5.6KB，330 个内联页合计省约 1.85MB。
+
+    注意：副本的**识别**不依赖注释内容——门禁按 `<!-- INLINED CSS … -->` 标记与紧随
+    `<style>` 的配对判定副本（见 `utils/gate_common.iter_private_style_blocks`）。若哪天
+    有人改成靠块内注释文本识别，剥注释会让它静默失效（W1019 实证·228 页误判）。
+    """
+    return re.sub(r"\n{3,}", "\n\n", _CSS_COMMENT_RE.sub("", css)).strip()
+
+
 def process(path, force, dry, inline_links=False):
     with open(path, encoding="utf-8") as f:
         html = f.read()
@@ -46,8 +66,6 @@ def process(path, force, dry, inline_links=False):
     # W875：深度感知——reader 子目录页用 ../../ 前缀（原固定 ../ 永远同步不到）
     _rel = os.path.relpath(path, SITE_DIR)
     _depth = _rel.count(os.sep)
-    if _depth == 0:
-        return "skip-no-link"   # 根级页面用 tokens.css（无前缀），无需处理
     _prefix = "../" * _depth
     link_tokens = '<link rel="stylesheet" href="%stokens.css">' % _prefix
     link_system = '<link rel="stylesheet" href="%ssystem.css">' % _prefix
@@ -56,24 +74,31 @@ def process(path, force, dry, inline_links=False):
     has_system_link = link_system in html
     already = MARKER in html
 
+    # BL-33 附伤：原「depth==0 无条件早退」把根级**已内联**页（dukou-engine /
+    # _template）的重同步路径一并堵死（W876 只能手工靶向修）⇒ 早退撤除，改由本判据
+    # 接管：已内联页（含根级）一律放行 --force 重同步；外链页仍受 W895 护栏保护。
     if not (has_tokens_link or has_system_link) and not already:
         return "skip-no-link"   # 根级页面用 tokens.css（无 ../ 且无标记），无需处理
     if already and not force:
         return "skip-inlined"
-    # W895 护栏（BL-33）：--force 只重同步已内联页；外链页转内联会把整站样式的
-    # 维护形态从「外链」换成「内联」（W875/W895 两次实证 66 万行格式抖动），
-    # 必须显式加 --inline-links 才做，避免通扫误伤 520+ 外链 reader 页。
-    if force and not already and not inline_links:
+    # W895 护栏（BL-33）：外链页转内联会把整站样式的维护形态从「外链」换成「内联」
+    # （W875/W895 两次实证 66 万行格式抖动），必须显式加 --inline-links 才做。
+    # W1022 修：原判据只在 `force` 分支生效 ⇒ **裸跑无参**（照 docstring「内联所有未处理
+    # 页面」）会一次把 526 个外链页全转内联（审查 P2-1 实测 inlined 526）——护栏必须
+    # 覆盖默认路径，否则防的是 `--force` 而漏的是更常见的裸命令。
+    if not already and not inline_links:
         return "skip-external"
     if already and force:
-        # 移除旧内联块（从标记注释到对应 </style>）
-        html = re.sub(r"<!-- %s.*?-->\s*<style>.*?</style>\s*" % re.escape(MARKER),
+        # 移除旧内联块（从标记注释到对应 </style>）。
+        # W1022 修：前导 `[ \t]*` 必须一并吃掉——否则插入点的行首缩进每轮留一份，
+        # 与新一轮写入的 4 空格叠加，重同步**不幂等**（审查 P3 实测每轮 +4B）。
+        html = re.sub(r"[ \t]*<!-- %s.*?-->\s*<style>.*?</style>\s*" % re.escape(MARKER),
                       "", html, flags=re.S)
 
     with open(TOKENS, encoding="utf-8") as f:
-        tokens = safe(f.read().strip())
+        tokens = strip_comments(safe(f.read().strip()))
     with open(SYSTEM, encoding="utf-8") as f:
-        system = safe(f.read().strip())
+        system = strip_comments(safe(f.read().strip()))
 
     inlined = (
         '    <!-- %s (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->\n'
@@ -99,7 +124,11 @@ def process(path, force, dry, inline_links=False):
         html = html.replace("</head>", inlined + "</head>", 1)
 
     if not dry:
-        with _w536_guard_open(path, "w", encoding="utf-8") as f:
+        # W1022 修（审查 P2-2）：默认文本模式写盘在 Windows 上会把每个 `\n` 落成 `\r\n`
+        # ⇒ 330 个内联页工作树全成 CRLF，与 .gitattributes `text=auto eol=lf` 契约背离
+        # （`git ls-files --eol` 显示 i/lf w/crlf），「逐字节一致」只在 universal-newline
+        # 读法下成立、二进制口径每页多 1558 B。newline="" 保证按内存原样（LF）写出。
+        with _w536_guard_open(path, "w", encoding="utf-8", newline="") as f:
             f.write(html)
     return "inlined" if not already else "re-synced"
 

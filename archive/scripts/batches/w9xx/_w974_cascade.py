@@ -220,7 +220,7 @@ def t_handover(t):
     t = "\n".join(out)
     t = re.sub(r"> 最后更新：\d{4}-\d{2}-\d{2}[^\n]*", HANDOVER_LINE, t, count=1)
     # 「当前 HEAD = W###（…）」治理契约字段（W711 形态·须与 CHANGELOG 最新段一致）
-    t = re.sub(r"当前 HEAD = (?:v[\d.]+\s+)?W\d+（[^）]*）",
+    t = re.sub(r"当前 HEAD = (?:v[\d.]+\s+)?W\d+（[^）\n\r]*）",
                "当前 HEAD = W974（内页题图成套批·第三组）", t, count=1)
     t = re.sub(r"每次完成新 W### 后更新。最后更新：[^\n]*",
                "每次完成新 W### 后更新。最后更新：2026-10-27（W974 内页题图成套批·第三组）", t, count=1)

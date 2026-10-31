@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（155）
+## 文件（302）
 
 ### Python 脚本
 
@@ -121,6 +121,7 @@
 - `_w954_fileindex_backfill.py`
 - `_w954_ledger_backfill.py`
 - `_w954_register_surfaces.py`
+- `_w954_review_evidence.py`
 - `_w954_selfcheck.py`
 - `_w954_version_sync.py`
 - `_w955_ledger_claim.py`
@@ -164,15 +165,170 @@
 - `_w975_cascade.py`
 - `_w975_sink_experience.py`
 - `_w975_tweak.py`
+- `_w978_review_evidence.py`
+- `_w983_derive.py`
+- `_w983_download.py`
+- `_w983_insert_plates.py`
+- `_w983_make_prompts.py`
+- `_w983_make_spec.py`
+- `_w983_precheck_pages.py`
+- `_w983_prepare.py`
+- `_w983_retry.py`
+- `_w983_serve.py`
+- `_w983_sheet.py`
+- `_w983_zoom.py`
+- `_w984_derive.py`
+- `_w984_download.py`
+- `_w984_insert_plates.py`
+- `_w984_make_prompts.py`
+- `_w984_make_spec.py`
+- `_w984_precheck_pages.py`
+- `_w984_prepare.py`
+- `_w984_retry.py`
+- `_w984_serve.py`
+- `_w984_sheet.py`
+- `_w984_zoom.py`
+- `_w986_make_prompts.py`
+- `_w986_make_spec.py`
+- `_w987_family_scan.py`
+- `_w987_insert_scenes.py`
+- `_w987_make_spec.py`
+- `_w988_card_sheet.py`
 - `_w988_close.py`
+- `_w988_docs.py`
+- `_w988_fix_cascade.py`
+- `_w988_fix_eol.py`
+- `_w988_fix_gates.py`
+- `_w988_insert.py`
+- `_w988_inventory.py`
+- `_w988_make_assets.py`
+- `_w988_make_spec.py`
+- `_w988_match.py`
+- `_w988_pitfalls.py`
 - `_w988_pitfalls2.py`
+- `_w988_plan.py`
+- `_w988_precheck.py`
 - `_w988_record_adoption.py`
+- `_w988_sheet.py`
 - `_w988_sync_87.py`
+- `_w988_verify.py`
+- `_w990_map.py`
+- `_w990_master.py`
+- `_w990_og_gap.py`
+- `_w990_pick.py`
+- `_w990_read.py`
+- `_w990_roster.py`
+- `_w990_split.py`
+- `_w999_closeout.py`
+- `_w999_crop_recheck.py`
+- `_w999_derive_prepare.py`
+- `_w999_diag.py`
+- `_w999_fix_t35.py`
+- `_w999_fix_wnum.py`
+- `_w999_insert.py`
+- `_w999_ledger_fill.py`
+- `_w999_make_spec.py`
+- `_w999_prepare.py`
+- `_w999_probe.py`
+- `_w999_probe_h1.py`
+- `_w999_rebuild_missing_og.py`
+- `_w999_redo.py`
+- `_w999_redo2.py`
+- `_w999_redo_map.py`
+- `_w999_register.py`
+- `_w999_renumber.py`
+- `_w999_sheet.py`
+- `_w999_sync_counts.py`
+- `_w999_verify.py`
 
 ### JavaScript / TypeScript
 
 - `_w930_layout_probe.mjs`
 - `_w930_layout_probe_app.mjs`
+
+### 数据与配置
+
+- `_cascade_files_W926.txt`
+- `_cascade_files_W930.txt`
+- `_cascade_files_W933.txt`
+- `_cascade_files_W935.txt`
+- `_cascade_files_W939.txt`
+- `_cascade_files_W945.txt`
+- `_cascade_files_W948.txt`
+- `_cascade_files_W954.txt`
+- `_cascade_files_W955.txt`
+- `_cascade_files_W956.txt`
+- `_cascade_files_W957.txt`
+- `_cascade_files_W960.txt`
+- `_cascade_files_W964.txt`
+- `_cascade_files_W965.txt`
+- `_cascade_files_W966.txt`
+- `_cascade_files_W967.txt`
+- `_cascade_files_W968.txt`
+- `_cascade_files_W969.txt`
+- `_cascade_files_W970.txt`
+- `_cascade_files_W971.txt`
+- `_cascade_files_W972.txt`
+- `_cascade_files_W973.txt`
+- `_cascade_files_W989.txt`
+- `_cascade_files_W991.txt`
+- `_cascade_files_W993.txt`
+- `_cascade_files_W997.txt`
+- `_cascade_files_W998.txt`
+- `_w908_spec.json`
+- `_w910_spec.json`
+- `_w915_spec.json`
+- `_w926_spec.json`
+- `_w939_spec.json`
+- `_w945_round1_batch1.json`
+- `_w945_round1_batch2.json`
+- `_w946_spec.json`
+- `_w960_spec.json`
+- `_w963_motion_probe.json`
+- `_w964_spec.json`
+- `_w965_spec.json`
+- `_w966_spec.json`
+- `_w967_spec.json`
+- `_w968_spec.json`
+- `_w969_spec.json`
+- `_w970_spec.json`
+- `_w971_spec.json`
+- `_w972_spec.json`
+- `_w973_spec.json`
+- `_w983_retry27.json`
+- `_w983_retry27_map.json`
+- `_w983_retry_26-yudi.json`
+- `_w983_retry_26-yudi_map.json`
+- `_w983_retry_36-ch004-bimawen.json`
+- `_w983_retry_36-ch004-bimawen_map.json`
+- `_w984_retry_38-ch014-liubei.json`
+- `_w984_retry_40-ch023-sichan.json`
+- `_w984_retry_43-luoshanv.json`
+- `_w984_retry_map.json`
+- `_w989_spec.json`
+- `_w991_spec.json`
+- `_w998_spec.json`
+- `_w999_batch_a.json`
+- `_w999_batch_b.json`
+- `_w999_batch_c.json`
+- `_w999_download_map.json`
+- `_w999_redo.json`
+- `_w999_redo2.json`
+- `_w999_redo2_map.json`
+- `_w999_redo_map.json`
+- `_w999_spec.json`
+
+### 样式与资源
+
+- `_w986_chap_sheet.png`
+- `_w986_family_sheet.png`
+- `_w999_sheet.png`
+
+### 其他
+
+- `_w987_serve.err`
+- `_w988_serve.err`
+- `_w999_serve.err`
 
 ---
 

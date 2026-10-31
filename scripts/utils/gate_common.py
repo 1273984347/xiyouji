@@ -61,6 +61,13 @@ ROOT = os.path.dirname(SCRIPTS_DIR)
 
 #: `<style …>…</style>` 提取口径（与各门禁历史内联正则逐字一致）
 STYLE_BLOCK_RE = re.compile(r"<style[^>]*>(.*?)</style>", re.S | re.I)
+# INLINED 副本：由 inline_css.py 写入的标记注释与紧随其后的 <style> 配对。
+# 这是识别「共享 CSS 副本」的**稳定契约**——判据不得依赖块内注释文本（如 "tokens.css —"）：
+# 那类文本会被任何「剥离 CSS 注释」的动作静默抹掉（W1019 实证：剥注释后 228 页副本被
+# 误判为页面私有块，token 覆盖率与动效门禁同时误报）。
+INLINED_STYLE_RE = re.compile(
+    r"<!--\s*INLINED CSS.*?-->\s*<style[^>]*>(.*?)</style>", re.S | re.I
+)
 
 
 # ---------------------------------------------------------------------------
@@ -135,6 +142,20 @@ def iter_style_blocks(src: str) -> list[tuple[str, int]]:
     return [
         (m.group(1), src[: m.start(1)].count("\n") + 1)
         for m in STYLE_BLOCK_RE.finditer(src)
+    ]
+
+
+def iter_private_style_blocks(src: str) -> list[tuple[str, int]]:
+    """页面**私有** `<style>` 块（跳过 INLINED tokens/system 副本），返回同 `iter_style_blocks`。
+
+    判据取 `inline_css.py` 写入的 `<!-- INLINED CSS … -->` 标记与紧随 `<style>` 的配对，
+    而非块内注释文本——后者会被「剥离 CSS 注释」静默破坏（见 INLINED_STYLE_RE 注释）。
+    """
+    inlined = {m.start(1) for m in INLINED_STYLE_RE.finditer(src)}
+    return [
+        (m.group(1), src[: m.start(1)].count("\n") + 1)
+        for m in STYLE_BLOCK_RE.finditer(src)
+        if m.start(1) not in inlined
     ]
 
 
@@ -237,10 +258,12 @@ def cli_main(run_check: Callable[[], int], run_self_test: Callable[[], int]) -> 
 __all__ = [
     "ROOT",
     "SCRIPTS_DIR",
+    "INLINED_STYLE_RE",
     "STYLE_BLOCK_RE",
     "UTILS_DIR",
     "SelfTestTally",
     "cli_main",
+    "iter_private_style_blocks",
     "iter_style_blocks",
     "read_text",
     "read_text_strict",

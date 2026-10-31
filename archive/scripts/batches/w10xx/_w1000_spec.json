@@ -1,0 +1,16 @@
+{
+  "batch": "W1000",
+  "date": "2026-10-28",
+  "title": "W1000 对抗式审查常驻化批（四位号首批·用户令「立项」）",
+  "desc": "对抗式审查常驻化批（触发器与模板落盘及四位号实战）",
+  "head_entry": "2026-10-28（W1000 对抗式审查常驻化批）",
+  "head_sentence": "对抗式审查触发器与模板落地",
+  "changelog_body": "\n\n> **来源**：用户令「立项」——W998 subagent 对抗式审查一次抓出 P1×2/P2×4，证明「写哨兵的人也需要被哨兵盯」，按建议常驻化。\n> **摘要**：① **check_audit_trigger.py 触发器**——台账最新含「对抗式审查」认领行距 max(W) ≥20 批即提示派发（preflight 接线·只提示不拦截）；找不到登记行按「从未审查」直接触发（fail-closed 宁假警不漏警）；自测四态（触发/未触发/从未/散文豁免）。② **模板落盘 docs/agent/adversarial-audit-prompt.md**——W998 实战 prompt 沉淀（范围声明+A-G 必查清单+P0-P3 输出分级+派发会话收尾义务+成本参考），任何会话可持之派发。③ **四位号 W1000 全链实战验证**——parse_ledger max=1000、ledger_backfill find_row、认领行四位解析、级联断言「批次号应为 W1000」字符串比对、W969 迁移 {3,4} 正则全部经受实战。④ 顺带：搜索索引随批刷新（并行 T-35 新文档）+ CSP 两页重算 + 台账回窗。\n> **文件**：scripts/check_audit_trigger.py · scripts/preflight_check.py · docs/agent/adversarial-audit-prompt.md · scripts/output/script-coverage-baseline.txt · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · site/data/search.html · site/en/search.html\n> **验证**：触发器 --self-test 四态 + 现网未触发（距 W1000 基线 0 批）+ 四位号四组件实战验证 + pytest 全量 943 passed + ruff 清零 + CSP 零漂移 + 体积四窗全绿。\n> **状态**：在途（认领登记 W1000·待提交入库）",
+  "milestone_block": "- **W1000 对抗式审查常驻化批**：check_audit_trigger 触发器（≥20 批点名·preflight 接线·fail-closed）+ 派发模板落盘 docs/agent/adversarial-audit-prompt.md + 四位号 W1000 全链实战验证（W969 迁移经受考验）",
+  "agents_note": "2026-10-28（W1000）对抗式审查常驻化批：触发器 ≥20 批点名 + 派发模板落盘 + 四位号全链实战验证",
+  "file_index_rows": [
+    "| scripts/check_audit_trigger.py | W1000 | 新建对抗式审查触发器（台账即事实源·四态自测） |",
+    "| docs/agent/adversarial-audit-prompt.md | W1000 | 派发 prompt 模板（W998 实战沉淀·收尾义务四条） |",
+    "| scripts/preflight_check.py | W1000 | 触发器提示位接线 |"
+  ]
+}

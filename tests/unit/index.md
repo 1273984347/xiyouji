@@ -11,13 +11,19 @@
 
 - （无）
 
-## 文件（45）
+## 文件（61）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
+- `test_archive_health.py`
 - `test_archive_segments.py`
+- `test_audit_trigger.py`
+- `test_backlog_review.py`
 - `test_batch_cascade_status_wnum.py`
+- `test_batch_spec.py`
+- `test_cascade_line_anchor.py`
+- `test_cascade_precheck.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`
 - `test_check_interaction_binding.py`
@@ -28,12 +34,15 @@
 - `test_check_search_index_fresh.py`
 - `test_ci_sim.py`
 - `test_ci_wiring.py`
+- `test_commit_scope.py`
+- `test_cross_line_rewrite.py`
 - `test_d3_data_processors.py`
 - `test_doc_size_budget.py`
 - `test_docs_index.py`
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
 - `test_four_digit_wnum.py`
+- `test_inline_css_resync.py`
 - `test_lint_links_refactor.py`
 - `test_milestone_block_regex.py`
 - `test_new_page.py`
@@ -41,15 +50,22 @@
 - `test_page_router.py`
 - `test_path_guard.py`
 - `test_perf_optimize.py`
+- `test_plan_template_read_disk.py`
 - `test_preflight_check.py`
 - `test_preflight_touches.py`
 - `test_rag_enhance.py`
 - `test_rag_fusion.py`
+- `test_rag_server_clamp.py`
 - `test_release_prep.py`
+- `test_repo_layout.py`
 - `test_review_trigger.py`
+- `test_safe_commit_expect_spec.py`
+- `test_script_hygiene.py`
 - `test_security_scan.py`
 - `test_slice_screenshots.py`
 - `test_stats_sync.py`
+- `test_status_z_parse.py`
+- `test_style_block_judgement.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
 - `test_tools_inventory.py`

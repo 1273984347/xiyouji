@@ -4,6 +4,7 @@
 6 个块（W955/W913/W912/W903/W901/W860）永不旋转——窗口冻结与脚注失明同族。
 运行：py -m pytest tests/unit/test_milestone_block_regex.py -v
 """
+import re  # W1014: stdlib 上移顶部（原在 sys.path 注入后·触发 E402·与注入无依赖）
 import sys
 from pathlib import Path
 
@@ -11,9 +12,7 @@ SCRIPTS_DIR = Path(__file__).resolve().parent.parent.parent / "scripts"
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
-import re
-
-import batch_cascade as bc  # noqa: E402
+import batch_cascade as bc  # noqa: E402  # 须在 sys.path 注入后（依赖上一段）
 
 RE = re.compile(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：")
 

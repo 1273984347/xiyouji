@@ -518,6 +518,13 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 - Phase E 预算：system ≤ +6KB（18.9→≤24.9KB）；每批以 `wc -c` 复核并写入批次记录。
 - **tokens 预算（W851 上调 +2KB → +3KB）**：现役基线 20,799 B（W476 纸感层后实测）→ 上限 **23,799 B**。Phase E 原「tokens ≤ +2KB（5.7→≤7.7KB）」为 v3 前口径，W476 增层后未同步，已废止；v4 令牌增量（W851 落地 +2,240 B）按新预算验收（J4）。
 - 超预算时砍微交互工具类，不砍色彩/海拔令牌；perf-budget html 分项 50KB 逐批复核。
+- **口径（双轨·以净重判达标）**：源文件（`site/tokens.css` / `site/system.css`）保留完整注释与 W 号
+  追溯，计**毛重**；`inline_css.py` 在传播为每页内联副本时剥离块注释（`strip_comments`），页内实际
+  字节计**净重**。本预算的约束对象是「每页内联体积」（见上条 +225KB/KB），注释对渲染零贡献，
+  故**达标判据以净重为准**——源文件可继续用注释承载设计决策，不为压数字牺牲可追溯性。
+- **现役实测**：system 毛重 28,441 B / 净重 23,052 B（≤24.9KB 上限·达标）；tokens 毛重 23,039 B /
+  净重 16,245 B（≤23,799 B 上限·达标）。单页内联块由 51,504 B 降至 39,323 B（-23.7%），
+  `check_inlined_css.py` 下限 20,000 B 仍有 96% 余量。
 
 ### 4C. v4 设计迁移（W826 起·阶段 1 令牌纯加法）
 
@@ -525,9 +532,9 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 **阶段 1（W851·令牌落地·纯加法）**：v4 令牌增量落进 `site/tokens.css`，现役页面视觉零变化。
 
-- **只落零消费新名**：34 个新名 / 35 处定义（间距刻度 13 + 语义 gap 6 + 容器三档 3 + 栅格 2 + 排版角色 9 + `--accent-text` 浅暗各 1）。J1 机检（`scripts/_w851_j1_name_audit.py`）：与现役名（tokens.css / system.css / 全页面内联）交集 0、页面内联抢先定义 0、全站 `var()` 引用 0。
+- **只落零消费新名**：34 个新名 / 35 处定义（间距刻度 13 + 语义 gap 6 + 容器三档 3 + 栅格 2 + 排版角色 9 + `--accent-text` 浅暗各 1）。J1 机检（`scripts/j1_name_audit.py`）：与现役名（tokens.css / system.css / 全页面内联）交集 0、页面内联抢先定义 0、全站 `var()` 引用 0。
 - **撞名项显式 defer**：`--chart-1..6` 重述（`--chart-3` 改值命中 42 消费页）、`--accent-soft` 重述（332 消费页·同值空转）、暗色 `--accent` 改值、暗色 `--chart-3/5` 新增——按 J1「同名即语义改变 → 破坏纯加法」拆出，随迁移批逐页 proof 后再落。
-- **视觉零变化证明（J2）**：`scripts/_w851_visual_regression_probe.py` 对 23 页（J2 采样 21 + 预支引用页 2）浅暗双主题、15s 地板等待 + DOM 静默收敛后采集 computed style 前后对拍，差异 0。
+- **视觉零变化证明（J2）**：`scripts/visual_regression_probe.py` 对 23 页（J2 采样 21 + 预支引用页 2）浅暗双主题、15s 地板等待 + DOM 静默收敛后采集 computed style 前后对拍，差异 0。
 - **预支引用处置**：`journey-geo-semiotics` 中英两页曾以 `var(--space-N, 回退值)` 预支 v4 名（回退值与终稿刻度不一致·落地即改渲染）——W851 冻结为当前字面值（渲染零变化），令牌 adoption 随该页迁移批执行。
 - **体积（J4）**：tokens.css 20,799 → 23,039 B（+2,240 B·§4A.8 预算同批上调为 +3KB）。
 - **传播与 CSP（J3）**：落地后 `inline_css.py --force` 同步内联副本；CSP 只哈希内联 `<script>`（style-src 为 unsafe-inline），CSS 增量零漂移。

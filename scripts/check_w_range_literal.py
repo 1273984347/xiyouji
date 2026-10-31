@@ -11,7 +11,7 @@
      叙述，不在本门禁范围。
   R2 CITATION.cff 的 version 必须与 CHANGELOG 现役版本一致（外部引用面）。
 
-现役叙述面 = README / STRUCTURE / CONTRIBUTING / 新Agent启动Prompt /
+现役叙述面 = README / STRUCTURE / CONTRIBUTING / docs/00-导读/新Agent启动Prompt /
 docs/00-导读（非归档）/ docs/10-方法论沉淀/README / .github/workflows/README /
 xiyouji-agent-web/README。CHANGELOG/file-index/HANDOVER/AGENTS/归档/S*/site 为
 历史段或级联自维护面，豁免。
@@ -29,7 +29,7 @@ CHANGELOG = os.path.join(ROOT, "CHANGELOG.md")
 CFF = os.path.join(ROOT, "CITATION.cff")
 
 FILES = [
-    "README.md", "STRUCTURE.md", "CONTRIBUTING.md", "新Agent启动Prompt.md",
+    "README.md", "STRUCTURE.md", "CONTRIBUTING.md", "docs/00-导读/新Agent启动Prompt.md",
     "docs/00-导读/文档规范.md", "docs/00-导读/项目说明.md", "docs/00-导读/统计口径说明.md",
     "docs/10-方法论沉淀/README.md", ".github/workflows/README.md", "xiyouji-agent-web/README.md",
 ]

@@ -19,6 +19,10 @@
 9. **commit 规范**：多行信息 Write 临时文件 + `git commit -F`，禁 heredoc；并行会话提交走 `python scripts/safe_commit.py -F <file> <pathspec...>`（ref-lock 竞争自动重试）；`type(scope): 描述` → AGENTS.md §4.3 / docs/00-导读/文档规范.md §6
 10. **禁擅改**：CHANGELOG 历史段、归档、verify_delivery.py、bump_version.py 等管控文件，改动须经用户批准 → docs/00-导读/文档规范.md §11.2
 11. **框架报告必落盘**：按《任务计划、执行与经验沉淀》框架产出的交付物必须落 `docs/11-方案报告/计划方案/` 并在同目录 README §二 登记，禁只在会话里答复 → docs/00-导读/文档规范.md §4.9
+12. **修实例必修根**：同族风险同批或次批根治禁「等排期」；教训权威落坑表（私有记忆仅镜像） → AGENTS.md §6-14 / docs/agent/pitfalls.md 流程组
+13. **禁补丁加补丁**：修复必须从根因，教训须转机器判据；协作环境六则与「开批先占号（reserve_w.py 未占号不动手）」同级用户令 → AGENTS.md §6-15 / AGENTS.md §6-16 / AGENTS.md §6-17
+14. **禁 CodeBuddy/WorkBuddy**：项目一切 AI 功能不使用该品牌工具链（agent-web=OpenAI-compatible 自研）→ AGENTS.md §6-19
+15. **提交前三问**：本批问题全解决或登记去向？防复发判据/坑表落地？其他 Agent 能否从项目文件了解？私有记忆须同步落仓 → AGENTS.md §6-18
 
 ## 常用命令（可直接复制）
 

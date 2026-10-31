@@ -14,7 +14,8 @@ archive/
 ├── README.md                    ← 本文件（总索引 + 台账）
 ├── docs/                        ← 文档类（.md/.txt 等）
 │   ├── CHANGELOG-ARCHIVE.md         CHANGELOG 历史段（一级归档）
-│   ├── CHANGELOG-ARCHIVE-tier2.md   超 1MB 二级归档
+│   ├── CHANGELOG-ARCHIVE-tier2.md
+│   ├── CHANGELOG-ARCHIVE-tier2-W400-W559.md   范围件（W400-W559·W995 拆分定形）   超 1MB 二级归档
 │   ├── HANDOVER-ARCHIVE.md          交接文档滚动淘汰的历史里程碑块
 │   ├── file-index-ARCHIVE.md        文件索引历史段
 │   ├── AGENTS-ARCHIVE.md            AGENTS.md 脚注沿革
@@ -23,14 +24,15 @@ archive/
 │   ├── specs/                       早期设计稿（8 件·W735 迁入）
 │   ├── _dev/                        开发草稿区（10 件·W735 迁入·含来源子目录）
 │   ├── w550-shot-review/            W550 截图审查产物（11 件·来源成组）
+│   ├── templates/                   历史模板归馆（3 件·W797·采用率 0%·W1014 补声明）
 │   └── 复盘报告/                    工作复盘报告（9 件·滚动归档）
 └── scripts/                     ← 脚本类（.py/.js/.json/.txt 等）
     ├── （45 件）                    历史一次性脚本（早期迁移）
     ├── audit/                       早期 W051-W102 验证脚本（10 件·含自身 README）
     ├── attic/                       原 scripts/_attic 整迁（32 件·自含 README）
-    ├── batches/                     批次一次性产物（540 件·W735 迁入·按 W 段分桶）
-    │   ├── w4xx/ w5xx/ w6xx/ w7xx/  各 W 段：spec / 级联清单 / 一次性脚本 / 中间产物
-    │   └── misc/                    无 W 号件（早期 fix/audit/diag 等 90 件）
+    ├── batches/                     批次一次性产物（W735 迁入起·按 W 段分桶）
+    │   ├── w4xx/ w5xx/ w6xx/ w7xx/ w8xx/ w9xx/ w10xx/   各 W 段：spec / 级联清单 / 一次性脚本 / 中间产物
+    │   └── misc/                    无 W 号件（早期 fix/audit/diag 89 + W977 批量 +60 + W1011 归位 +1 = 内容 150·计数见台账组行）
     └── review-pass3/                W557 三轮全站审查产物（105 件·含 prompts/）
 ```
 
@@ -50,6 +52,8 @@ archive/
 | `archive/docs/file-index-ARCHIVE.md` | file-index.md 历史段（W031-W699 区间） | W511 · W422 · W736 滚动 | 滚动 | 索引反向滚动 |
 | `archive/docs/AGENTS-ARCHIVE.md` | AGENTS.md 脚注沿革（W458-W700 起） | 滚动（W709 起） | 滚动 | AGENTS 分层滚动淘汰 |
 | `archive/docs/STRUCTURE-ARCHIVE.md` | STRUCTURE.md 历史详细清单 | 历史滚动 | 滚动 | 结构文档瘦身 |
+| `archive/scripts/batches/w9xx/`（71 件·W1002 入 72·W1004 转正迁出 `_w988_subject.py`） | `scripts/_w9xx_*.py` 一次性/诊断脚本 | W1002 | 2026-10-29 | 批次收官归档（三档归位定式·第 42 门禁 C4 起判） |
+| `archive/scripts/batches/w10xx/`（8 件·新桶） | `scripts/_w10xx_*.py` 一次性/诊断脚本（四位号首批） | W1002 | 2026-10-29 | 批次收官归档（同上·新段桶建立） |
 | `docs/w550-shot-review/`（11 件） | W550 五轮截图审查会话产物 | W550 后整组归档 | 滚动 | 批次完结·来源成组 |
 | `docs/复盘报告/`（9 件） | docs/10-方法论沉淀 复盘报告（5 件 09-05~09-16 滚动 + 4 件 10-01~10-06 W735 迁入） | 滚动 · W735 | 滚动 | 时点性报告·间隔归档 |
 | `scripts/`（45 件） | 原 scripts/archive 整体迁入 | W734 迁入 | 2026-10-13 | 历史一次性脚本存档 |
@@ -68,7 +72,7 @@ archive/
 | `archive/scripts/batches/misc/`（+60 件） | scripts/ 顶层 `_` 一次性件（引用剔除后本组 60 件） | W977 | 2026-10-27 | 一次性/诊断件批量退役（体检登记项·语料级引用剔除后 287 件入库·15 件现役硬保留·152 件 S4 本地件不入仓） |
 | `archive/scripts/batches/w6xx/`（+2 件） | scripts/ 顶层 `_` 一次性件（引用剔除后本组 2 件） | W977 | 2026-10-27 | 一次性/诊断件批量退役（体检登记项·语料级引用剔除后 287 件入库·15 件现役硬保留·152 件 S4 本地件不入仓） |
 | `archive/scripts/batches/w7xx/`（+31 件） | scripts/ 顶层 `_` 一次性件（引用剔除后本组 31 件） | W977 | 2026-10-27 | 一次性/诊断件批量退役（体检登记项·语料级引用剔除后 287 件入库·15 件现役硬保留·152 件 S4 本地件不入仓） |
-| `archive/scripts/batches/w8xx/`（+42 件） | scripts/ 顶层 `_` 一次性件（引用剔除后本组 42 件） | W977 | 2026-10-27 | 一次性/诊断件批量退役（体检登记项·语料级引用剔除后 287 件入库·15 件现役硬保留·152 件 S4 本地件不入仓） |
+| `archive/scripts/batches/w8xx/`（+42 件·W1012 再入 4 件大基线 JSON ≈33MB） | scripts/ 顶层 `_` 一次性件（引用剔除后本组 42 件） | W977 | 2026-10-27 | 一次性/诊断件批量退役（体检登记项·语料级引用剔除后 287 件入库·15 件现役硬保留·152 件 S4 本地件不入仓） |
 | `archive/scripts/batches/w9xx/`（+151 件） | scripts/ 顶层 `_` 一次性件（引用剔除后本组 151 件·含 1 件 _w954_review_evidence 复盘取证锚点复位） | W977 | 2026-10-27 | 一次性/诊断件批量退役（体检登记项·语料级引用剔除后 287 件入库·15 件现役硬保留·152 件 S4 本地件不入仓） |
 
 ---
@@ -76,6 +80,35 @@ archive/
 | `archive/scripts/batches/w9xx/_w988_pitfalls2.py` | `scripts/_w988_pitfalls2.py` | W992 | 2026-10-27 | W988 并行批遗留一次性件·零引用·W992 定向退役 |
 | `archive/scripts/batches/w9xx/_w988_record_adoption.py` | `scripts/_w988_record_adoption.py` | W992 | 2026-10-27 | W988 并行批遗留一次性件·零引用·W992 定向退役 |
 | `archive/scripts/batches/w9xx/_w988_sync_87.py` | `scripts/_w988_sync_87.py` | W992 | 2026-10-27 | W988 并行批遗留一次性件·零引用·W992 定向退役 |
+
+---
+| `archive/scripts/`（顶层存量 +47 件） | scripts/ 顶层工具与一次性件（W735 大归档直接落顶层·非批次段·含 w286 禁重跑族与目录 README/index） | W735·W994 补登记 | 2026-10-28 | 存量组行补登记（W994 归档健康探针 T2 对账基线·此前仅结构树目录级提及） |
+| `archive/scripts/batches/w4xx/`（+11 件） | scripts/ 顶层 `_` 一次性件（W400 段·W735 迁入） | W735·W994 补登记 | 2026-10-28 | 存量组行补登记（W994 归档健康探针 T2 对账基线·此前仅结构树目录级提及） |
+| `archive/scripts/batches/w5xx/`（+149 件） | scripts/ 顶层 `_` 一次性件（W500 段·W735 迁入） | W735·W994 补登记 | 2026-10-28 | 存量组行补登记（W994 归档健康探针 T2 对账基线·此前仅结构树目录级提及） |
+
+---
+| `archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md` | CHANGELOG-ARCHIVE-tier2.md 拆分范围件（W400-W559·144 段·W994 迁入） | W994 迁入 · W995 拆分定形 | 2026-10-28 | tier-2 容器 1044KB 破 1MB·按 W 段拆分（主人授权） |
+| `archive/docs/file-index-ARCHIVE-tier2.md` | file-index-ARCHIVE.md 二级归档（目录节 W031-W048 时代·10 节） | W994 建 | 2026-10-28 | tier-2 容器 1070KB 破 1MB 首建 |
+
+---
+| `archive/scripts/batches/w10xx/_w1005_*.py`（16 件·补登记） | `scripts/_w1005_*.py` 一次性/诊断脚本 | W1006（提交 cf1f1946） | 2026-10-29 | 批次收官归档·**W1014 补登记**（W1006 入库时未追加台账组行·正是 `check_archive_health` T2 只验「段是否被提及」不核段级计数的漏检面·该行已随 W1014 上岗双向对账） |
+| `archive/scripts/batches/w10xx/_w1013_*.py`（16 件·代收） | `scripts/_w1013_*.py` og-image 第二轮工作件（inventory/master/read/roster_check/derive_prepare/download/prepare/retry/retry2/sheet/stage/verify/make_spec/align_files/fix_desc 等） | W1013 主体在 2feba57c | 2026-10-29 | 脚本三档归位②·**W1014 代收**（W1013 已收官·登记 W1014 后台账 max 前移使这 16 件降为「历史批滞留」·第 42 门禁 C4 哨兵判红即本行为所补·与 W1012 并行收尾件代收先例同型） |
+| `archive/scripts/batches/w10xx/`（累计 40 件 = w1001×8 + w1005×16 + w1013×16） | 同上三位号首批桶 | W1002 建 · W1006/W1014 增 | 2026-10-29 | 段级计数补正声明（原组行「8 件」为 W1002 建桶时口径·后续批次增量随上两行登记·不再回填历史行） |
+
+---
+| `archive/docs/templates/`（3 件：article-template / handoff-checklist / validation-checklist） | `docs/_templates/` 未被采用的历史模板 | W797（提交 32f37255） | 2026-10-26 | 历史模板归馆（采用率 0%）·**W1014 补登记**（该批只写 STRUCTURE.md 叙述未追加本台账行·结构树亦缺该目录） |
+| `archive/docs/W批次编号对账表-ARCHIVE.md` | 对账表正本行窗滚动淘汰的历史行（W908 前） | W968（提交 08a92a7f） | 2026-10-26 | 台账窗口制拆分新容器（正本 446.6→150.3KB）·**W1014 补登记**（此前仅 `archive/docs/index.md` 生成物列出·台账无行；亦为 `check_archive_health` T1 监控对象） |
+| `archive/docs/w-b-critique.md` | W735 大归档期 docs 侧评论草稿 | W735（提交 1fd372b4） | 2026-10-13 | 批次完结归档·**W1014 补登记**（W735 组行按目录登记·此单件未入目录） |
+
+---
+| `archive/scripts/batches/w7xx/`（+139 件·W1017 归档） | `scripts/output/` 历史级联清单/批次规格/一次性脚本与审图件（W701-W799 段·四处零引用扫描确认） | W1017 | 2026-10-29 | 产物目录回归「活产物单一职责」（续 W1012）：`scripts/output` 跟踪件 689→323，历史件按批号入段 |
+| `archive/scripts/batches/w8xx/`（+146 件·W1017 归档） | `scripts/output/` 历史件（W800-W899 段·同上扫描口径） | W1017 | 2026-10-29 | 同上；本段含 `_w851_tokens_prelanding.css`、`_w876_*` 等一次性产物 |
+| `archive/scripts/batches/w9xx/`（+75 件·W1017 归档） | `scripts/output/` 历史件（W900-W999 段·同上扫描口径） | W1017 | 2026-10-29 | 同上；本段含 3 张审图 PNG（`_w999_sheet` 3.18MB / `_w986_chap_sheet` / `_w986_family_sheet`）与 `_w9xx_serve.err` 运行日志 |
+| `archive/scripts/batches/w10xx/`（+6 件·W1017 归档） | `scripts/output/` 历史件（W1000-W1015 段·同上扫描口径） | W1017 | 2026-10-29 | 同上；**保留** W1010+ 的 `_cascade_files_W*.txt` 与全部 `_w*_spec.json`（前者被 CHANGELOG 文件行引用、后者被 `backfill_changelog.py` 全量 glob） |
+| `archive/scripts/batches/w7xx|w8xx|w9xx|w10xx/`（合计 +366 件·W1017） | `scripts/output/` 历史产物 | W1017 | 2026-10-29 | 段级计数声明：归档后 w7xx 240 内容件 / w8xx 192 / w9xx 302 / w10xx 46（元数据 README.md+index.md 各 +2 不计入 N 件） |
+
+---
+| rchive/scripts/batches/w10xx/_w1016_pick.py（1 件·代收） | scripts/_w1016_pick.py（缺口 68 回角色谱选材一次性件） | W1017 代收 | 2026-10-29 | 并行会话遗留（随 7771c9d3 入库·自称 W1016 而本会话已占该号）；登记 W1017 后其降为历史批滞留，第 42 门禁 C4 判「被四面引用的转正候选超配额」即此件——按 W1013 代收先例入档，其产出 scripts/output/_w1016_pick.json 保留原处（对方数据不丢） |
 
 ---
 

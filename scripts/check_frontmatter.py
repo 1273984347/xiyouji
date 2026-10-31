@@ -12,6 +12,7 @@
 口径见 docs/00-导读/文档规范.md §4.6。
 """
 import argparse
+import datetime
 import os
 import re
 import sys
@@ -44,6 +45,11 @@ def check_file(path):
         v = m.group(1).strip()
         if not (v == "人工撰写" or "@" in v):
             errs.append("生成来源格式非法（应为 skill短名@commit 或 人工撰写）: %r" % v)
+        elif "@" in v:
+            # W1053 G-05：@ 后须为 git 短哈希形态 [0-9a-f]{7,40}
+            _h = v.rsplit("@", 1)[1].strip("）)>」")
+            if not re.fullmatch(r"[0-9a-f]{7,40}", _h):
+                errs.append("生成来源哈希形态非法（期望 [0-9a-f]{7,40}）: %r" % _h)
 
     m = re.search(r"^> 生成模型：([^\r\n]+)", c, re.M)
     if not m:
@@ -56,6 +62,16 @@ def check_file(path):
         errs.append("缺 '> 生成日期：' 行")
     elif not re.fullmatch(r"\d{4}-\d{2}-\d{2}", m.group(1).strip()):
         errs.append("生成日期非 YYYY-MM-DD: %r" % m.group(1).strip())
+    else:
+        # W1053 G-05（W1046 方案）：语义校验——日期可解析且 ≤ 当天+1（防手滑未来日期）
+        try:
+            _dt = datetime.date.fromisoformat(m.group(1).strip())
+            if _dt > datetime.date.today() + datetime.timedelta(days=1):
+                errs.append("生成日期在未来（>%s）: %s" % (
+                    (datetime.date.today() + datetime.timedelta(days=1)).isoformat(),
+                    m.group(1).strip()))
+        except ValueError:
+            errs.append("生成日期非真实日期: %r" % m.group(1).strip())
 
     m = re.search(r"^> 核验状态：([^\r\n]+)", c, re.M)
     if not m:
@@ -108,5 +124,44 @@ def main():
     return 0
 
 
+def _self_test():
+    """G-05 四负例一正例（--file 判定纯函数级注入）。"""
+    today = datetime.date.today().isoformat()
+    future = (datetime.date.today() + datetime.timedelta(days=3)).isoformat()
+    cases = [
+        ("合法件放行",
+         "> 生成来源：skill@abcdef1234567\n> 生成模型：GLM\n> 生成日期：%s\n> 核验状态：未核验\n" % today,
+         0),
+        ("未来日期必红",
+         "> 生成来源：skill@abcdef1234567\n> 生成模型：GLM\n> 生成日期：%s\n> 核验状态：未核验\n" % future,
+         1),
+        ("非真实日期必红",
+         "> 生成来源：skill@abcdef1234567\n> 生成模型：GLM\n> 生成日期：2026-02-30\n> 核验状态：未核验\n",
+         1),
+        ("来源哈希形态非法必红",
+         "> 生成来源：skill@NOTAHASH\n> 生成模型：GLM\n> 生成日期：%s\n> 核验状态：未核验\n" % today,
+         1),
+        ("来源哈希过短必红",
+         "> 生成来源：skill@abc\n> 生成模型：GLM\n> 生成日期：%s\n> 核验状态：未核验\n" % today,
+         1),
+    ]
+    fails = 0
+    for name, text, expect in cases:
+        import tempfile
+        d = tempfile.mkdtemp(prefix="g05_")
+        fp = os.path.join(d, "t.md")
+        with open(fp, "w", encoding="utf-8") as fh:
+            fh.write(text)
+        errs = check_file(fp)
+        ok = (len(errs) == expect)
+        print("%s  %s（%s）" % ("PASS" if ok else "FAIL", name, "; ".join(errs)[:60] or "clean"))
+        if not ok:
+            fails += 1
+    print("---- frontmatter self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
+    return 1 if fails else 0
+
+
 if __name__ == "__main__":
+    if "--self-test" in sys.argv:
+        sys.exit(_self_test())
     sys.exit(main())

@@ -53,12 +53,22 @@ def check_file(html_file: Path, errors: list, verbose: bool = False) -> int:
         return 0
 
     text = html_file.read_text(encoding="utf-8")
-    scripts = SCRIPT_RE.findall(text)
     checked = 0
 
-    for i, script in enumerate(scripts):
-        # Replace HTML entities that would break JS syntax check
-        script = script.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
+    for i, match in enumerate(SCRIPT_RE.finditer(text)):
+        # W591 parity（对齐 check_js_syntax.js:40-45）：非 JS 数据块
+        # （application/ld+json、application/json、importmap 等）不是可执行脚本，
+        # 不参与语法编译——把 <script type> 数据块当 JS 编译必误报（老逻辑病灶）。
+        open_tag = match.group(0)[: match.group(0).index(">") + 1]
+        tm = re.search('\\btype\\s*=\\s*"([^"]*)"', open_tag, re.I) or re.search(
+            "\\btype\\s*=\\s*'([^']*)'", open_tag, re.I
+        )
+        stype = tm.group(1).strip().lower() if tm else ""
+        if stype and stype not in ("text/javascript", "application/javascript", "module"):
+            continue
+        script = match.group(1).replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
+        if not script.strip():
+            continue
         tmp = tempfile.NamedTemporaryFile(
             mode="w", suffix=".js", delete=False, encoding="utf-8"
         )
@@ -73,7 +83,8 @@ def check_file(html_file: Path, errors: list, verbose: bool = False) -> int:
                 errors="replace",
             )
             if result.returncode == 0:
-                print(f"[OK]   {html_file.name} script {i + 1}")
+                if verbose:
+                    print(f"[OK]   {html_file.name} script {i + 1}")
             else:
                 err = result.stderr.strip() or result.stdout.strip()
                 print(f"[FAIL] {html_file.name} script {i + 1}")
@@ -81,9 +92,6 @@ def check_file(html_file: Path, errors: list, verbose: bool = False) -> int:
                     print(f"       {err}")
                 errors.append((html_file.name, i + 1, err))
             checked += 1
-            if verbose and result.returncode == 0 and not err:
-                # nothing extra to print on success
-                pass
         finally:
             os.unlink(tmp.name)
     return checked

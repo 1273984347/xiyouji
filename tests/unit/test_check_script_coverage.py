@@ -61,9 +61,12 @@ def test_g1_live_tree_passes_gate():
 
 
 def test_g2_self_test_all_pass():
+    """自测全过即可——**不写死例数**（W1008：原断言 "6/6"，判据加到 10 例后假红）。"""
+    import re
     r = _run("--self-test")
     assert r.returncode == 0, r.stdout[-800:]
-    assert "self-test：6/6 通过" in r.stdout
+    m = re.search(r"(\d+)/(\d+) 通过", r.stdout)
+    assert m and m.group(1) == m.group(2), r.stdout[-300:]
 
 
 def test_g3_list_reports_counts():

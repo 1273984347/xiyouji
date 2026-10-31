@@ -1,0 +1,22 @@
+[
+ {
+  "key": "ink-mountains-hero",
+  "size": [
+   1792,
+   1024
+  ],
+  "kb": 117.6,
+  "softlight_span": 0.2192,
+  "dark_small_clusters": 67
+ },
+ {
+  "key": "hero-01-xihai-yunhai",
+  "size": [
+   2560,
+   1440
+  ],
+  "kb": 83.6,
+  "softlight_span": 0.2189,
+  "dark_small_clusters": 20
+ }
+]

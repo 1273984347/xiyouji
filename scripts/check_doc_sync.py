@@ -78,6 +78,13 @@ RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判�
 RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
 RE_FILE_LIST_LINE = re.compile(r"^> - \*\*文件\*\*：(.+)$", re.M)  # W723 C4-f：四件套「文件」行
 RE_BATCH_REGISTRY_ROW = re.compile(r"^\| W\d{3,4} ")  # W906 C4-f 三态：他方批次登记行形态
+# W1014：git status 的合法状态位组合（X=索引态·Y=工作树态）——用于 -z 模式下严格判别
+# 「带状态位的脏件记录」与「rename/copy 的 old path 记录（无状态位前缀）」。
+_GIT_STATUS_CODES = frozenset(
+    c1 + c2
+    for c1 in (" ", "M", "A", "D", "R", "C", "U", "?", "!")
+    for c2 in (" ", "M", "A", "D", "R", "C", "U", "?", "!")
+)
 RE_FILE_TOKEN = re.compile(
     r"^(?:CHANGELOG|README|STRUCTURE|AGENTS|CLAUDE|CONTRIBUTING|CITATION)\.cff?$"
     r"|.+\.(?:py|js|mjs|cjs|ts|tsx|jsx|md|json|jsonl|cff|txt|html|css|xml|yml|yaml|toml|ini|cfg|sh|ps1|csv|svg|example)$"
@@ -154,6 +161,7 @@ def c5b_extra_surfaces():
     W901 实测该子目录 8 件带冻结 stats 标记·入面即假红·除外条款随递归化原样保留）。
     """
     paths = [os.path.join(ROOT, "pytest.ini"), os.path.join(ROOT, "site", "index.html")]  # W913：站点聚合数字失真面（B-W855-01·772 篇漂移实证）纳入标记对账
+    paths.append(os.path.join(ROOT, "docs", "agent", "gates.md"))  # W1050：gates.md 判据文本含 stats 标记（第 3 槽「当前 N=…」）——W1048 实证 615 旧值滞留（sweep 覆盖缺口·不修复则旧值漂移必重演）
     paths += sorted(
         p for p in glob.glob(
             os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)
@@ -311,7 +319,48 @@ def evaluate(inp):
     _check_c5d_stats_recheck(inp, issues)
     _check_c6_version_desc_seps(inp, issues, notes)
     _check_c7_homepage_showcase(inp, issues, notes)
+    _check_c8_dup_long_lines(inp, issues, notes)
     return issues, notes
+
+
+# ---- C8 治理文档同段重复（W1052·W1046 方案 G-01 落地）----
+# 根因：W1048 诊断实证 AGENTS.md 铁律 14/15 整段双写（级联插入事故·必载层自带补丁痕迹），
+# 既有门禁无一能拦（41 槽 check_agents_layers.py 查结构不查同段重复）。
+# 窄判据防误报：仅扫治理权威面；strip 后整行全等、长度 ≥60（滤表格分隔行/短行/空行）、
+# 行首非「|」（表格内容行）、非代码围栏内行，**相邻窗口（≤3 行）内**出现 ≥2 次即 FAIL——
+# 「相邻」限定回归方案 G-01 语义：拦级联插入事故（整段贴两遍），放过跨章节合理引用
+# （W1052 实证 HANDOVER 索引行跨 120 行的重复属结构性冗余另案，不在本判据射程）。
+C8_MIN_LEN = 60
+C8_WINDOW = 3
+C8_FILES = (
+    "AGENTS.md", "HANDOVER.md",
+    os.path.join("docs", "agent", "gates.md"), os.path.join("docs", "agent", "pitfalls.md"),
+)
+
+
+def _check_c8_dup_long_lines(inp, issues, notes):
+    """C8：治理文档同段重复检测（W1052）。相邻窗口内 strip 后整行全等长行 ≥2 次即红。"""
+    texts = inp.get("c8_texts") or {}
+    for rel in C8_FILES:
+        text = texts.get(rel)
+        if not text:
+            continue
+        in_fence = False
+        last_ln = {}  # 行文本 -> 上次出现的行号
+        for no, raw in enumerate(text.splitlines(), 1):
+            ln = raw.strip()
+            if ln.startswith("```") or ln.startswith("~~~"):
+                in_fence = not in_fence
+                continue
+            if in_fence or not ln or ln.startswith("|") or len(ln) < C8_MIN_LEN:
+                continue
+            prev = last_ln.get(ln)
+            if prev is not None and no - prev <= C8_WINDOW:
+                issues.append(
+                    "C8: %s 同段重复（L%d 与 L%d 相隔 %d 行·%d 字符）：「%s…」——级联插入事故形态，保留一份"
+                    % (rel, prev, no, no - prev, len(ln), ln[:40])
+                )
+            last_ln[ln] = no
 
 
 def _check_c1_readme_head(inp, date, wnum, issues, notes):
@@ -360,9 +409,12 @@ def _check_c4_commit_ledger(inp, issues, notes):
         notes.append("C4: 浅克隆环境（.git/shallow），提交对账跳过（pre-commit 本地为主执行点）")
         return
     reg = changelog_section_ws(inp["changelog"])
-    for p in ARCHIVE_CHANGELOGS:
-        if os.path.exists(p):
-            reg |= changelog_section_ws(open(p, encoding="utf-8").read())
+    # W1014 hermetic 修：归档登记文本经 inp 注入（真实轨 gather 读盘·自测轨注入空文本）。
+    # 原实现在此处 open(ARCHIVE_CHANGELOGS) 直读磁盘，使「未登记 W 必红」负样本一旦被
+    # CHANGELOG 瘦身批迁进归档（W777 由 4ab32ad1/W921 迁入）即从「未登记」变「已登记」，
+    # T4 自测被内容迁移悄悄蚀坏、C4 可证伪性失效——判据的读取源不该与被测输入耦合。
+    for text in inp.get("archive_changelogs_text", []):
+        reg |= changelog_section_ws(text)
     reg |= table_registered_ws(inp["table"])
     for s in inp["subjects"]:
         s2 = re.sub(r"W\d{3,4}\s*[-–—]\s*W\d{3,4}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
@@ -515,6 +567,57 @@ def _check_c5_aggregate_stats(inp, issues, notes):
                 _check_stats_marker(m, "%s:%d" % (rel, i), stats, issues)
 
 
+
+    # C5e 坑表分项计数三向一致（W1025·W1024 实证）
+    # 病根：坑表各主题标题写「（N 条）」、AGENTS 有总数与分项行、HANDOVER 有两处总数——
+    # 四处全靠手改。实证 AGENTS 分项停在 25/25/15/10/28=109 长期无人核（总数声明已到 118），
+    # 而 W1024 手算 118+4=121、实算为 122。此类「分项之和 vs 总数」偏差机器可查，不该靠人核。
+    try:
+        _pf = os.path.join(ROOT, "docs", "agent", "pitfalls.md")
+        _t = open(_pf, encoding="utf-8").read()
+        _declared, _actual = {}, {}
+        for _seg in re.split(r"(?m)^### ", _t)[1:]:
+            _head, _, _rest = _seg.partition("\n")
+            _m = re.search(r"^(.*?)（(\d+) 条）", _head)
+            if not _m:
+                continue
+            _name = _m.group(1).strip()
+            _body = re.split(r"(?m)^## ", _rest)[0]
+            _declared[_name] = int(_m.group(2))
+            _actual[_name] = len([_l for _l in _body.split("\n") if _l.startswith("- **")])
+        _sum_decl = sum(_declared.values())
+        _sum_act = sum(_actual.values())
+        for _k, _v in _declared.items():
+            if _v != _actual.get(_k, 0):
+                issues.append("C5e: 坑表主题「%s」声明 %d 条 ≠ 实测 %d 条（改完坑表须实算分项·W1024 实证）"
+                              % (_k, _v, _actual.get(_k, 0)))
+        if _sum_decl != _sum_act:
+            issues.append("C5e: 坑表分项声明之和 %d ≠ 实测条目之和 %d" % (_sum_decl, _sum_act))
+        # W1058：对账面补 SKILL.md 两处（W1051 ASM-09 已画出的 6 点清单此前只扫 2 类载体——
+        # W1055/W1056 两次坑表 +1 均漏 SKILL 实证盲区；形态：L6「N 条·六主题」/ L65「N 条完整教训」）
+        for _f, _pat in (("AGENTS.md", r"(\d+) 条坑位"), ("HANDOVER.md", r"（(\d+) 条·六主题）"),
+                         (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条·六主题"),
+                         (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条完整教训")):
+            for _mm in re.finditer(_pat, open(os.path.join(ROOT, _f), encoding="utf-8").read()):
+                if int(_mm.group(1)) != _sum_act:
+                    issues.append("C5e: %s 声明 %d 条 ≠ 坑表实测 %d 条" % (_f, int(_mm.group(1)), _sum_act))
+        # W1044 补：AGENTS §4.3 六主题**分项**逐项对拍（原只核总数 ⇒ 分项长期陈旧而门禁看不见·
+        # W1043 审查实证：分项之和 123 ≠ 总数 133）。
+        _a = open(os.path.join(ROOT, "AGENTS.md"), encoding="utf-8").read()
+        _seg = re.search(r"CSS / 视觉渲染（(\d+)）·JS / CSP / 运行时（(\d+)）·git / 提交 / 并发（(\d+)）"
+                         r"·级联 / CHANGELOG（(\d+)）·数据 / 内容可信度（(\d+)）·流程 / 协作 / 取证（(\d+)）", _a)
+        if not _seg:
+            issues.append("C5e: AGENTS.md 六主题分项行不可解析（fail-closed）")
+        else:
+            _order = ["CSS / 视觉渲染", "JS / CSP / 运行时", "git / 提交 / 并发",
+                      "级联 / CHANGELOG", "数据 / 内容可信度", "流程 / 协作 / 取证"]
+            for _k, _num in zip(_order, _seg.groups(), strict=True):
+                if int(_num) != _declared.get(_k, -1):
+                    issues.append("C5e: AGENTS 分项「%s」声明 %s ≠ 坑表 %d 条（W1044 补分项对拍）"
+                                  % (_k, _num, _declared.get(_k, -1)))
+    except OSError as _e:
+        issues.append("C5e: 坑表分项对账不可读（%s）——fail-closed" % _e)
+
 def _check_c5d_stats_recheck(inp, issues):
     """C5d：stats.py --check（stats.json vs 磁盘实算）零差异背书（W718）。W730 提取。"""
     if not inp.get("stats_check_ok", False):
@@ -530,6 +633,43 @@ def _load_stats():
             return json.load(f)
     except (OSError, ValueError):
         return None
+
+
+def _parse_status_z(raw):
+    """纯函数：解析 `git status --porcelain -z` 原始串 → 工作树脏件路径列表（W1016 抽出供测）。
+
+    -z 格式：记录以 NUL 分隔；正常件为 `XY<space>path`；rename/copy 为**两条**记录
+    （首条带 `XY ` 状态位 = new path，次条**无状态位前缀** = old path）。
+    只收 **Y 位非空**（工作树态有改动）者——dirty 语义是「工作树有未暂存改动」，已暂存件
+    （`M `·Y 位为空）不算（原实现用 `ln[1] != " "` 表达，-z 版须等价保留）。
+    """
+    recs = [x for x in (raw or "").split("\0") if x.strip()]
+    out = []
+    for rec in recs:
+        # 判据须用「前两字符是合法状态码」而非「rec[1] != 空格」——后者会把 old path 的
+        # 首两字符（sc/ma/do…）误判为状态位 ⇒ 收进 "ipts/_w1013_*.py" 这类截断路径（实测）。
+        if len(rec) > 3 and rec[:2] in _GIT_STATUS_CODES and rec[1] != " ":
+            out.append(rec[3:])
+    return out
+
+
+def _git_status_z():
+    """`git status --porcelain -z` 的**未转义原路径**记录列表（W1014 中文路径修）。
+
+    为什么另起一个函数：`_git_output_lines` 按**行**拆分（splitlines），而 -z 模式是
+    **NUL** 分隔——共用函数会把整串当一行。且 porcelain 对非 ASCII 路径即便加
+    `core.quotePath=false` 仍输出带引号的八进制转义（实测 "docs/00-\\345\\257…"），
+    非 -z 模式无法还原真路径 ⇒ 中文路径件被 C4-f 误判「漏 add」。
+    """
+    try:
+        r = subprocess.run(["git", "-c", "core.quotePath=false", "status", "--porcelain", "-z"],
+                           cwd=ROOT, capture_output=True, text=True,
+                           encoding="utf-8", errors="ignore", timeout=30)
+    except Exception:  # noqa: BLE001
+        return None
+    if r.returncode != 0:
+        return None
+    return _parse_status_z(r.stdout)
 
 
 def _git_output_lines(args, strip=True, timeout=30):
@@ -563,6 +703,10 @@ def gather():
         "contributing": rd(os.path.join(ROOT, "CONTRIBUTING.md")),
         "koujing": rd(os.path.join(ROOT, "docs", "00-导读", "统计口径说明.md")),
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
+        # W1014：归档登记文本在此读盘注入（判据与读取源解耦·见 _check_c4_commit_ledger）
+        "archive_changelogs_text": [
+            rd(p) for p in ARCHIVE_CHANGELOGS if os.path.exists(p)
+        ],
         "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
         # W830：C5b 扩展面（pytest.ini + 11-方案报告根层·只跑标记对账·见 c5b_extra_surfaces）
@@ -574,6 +718,11 @@ def gather():
         "subjects": [],
         "shallow": os.path.exists(os.path.join(ROOT, ".git", "shallow")),
         # W889：GitHub 仓库主页展示位实况（.github/README.md 存在即抢占仓库主页）
+        # W1052：C8 治理文档同段重复扫描面（判据与读取源解耦·self-test 可注入）
+        "c8_texts": {
+            rel: rd(os.path.join(ROOT, rel)) if os.path.exists(os.path.join(ROOT, rel)) else ""
+            for rel in C8_FILES
+        },
         "showcase": {
             "root_readme": os.path.isfile(os.path.join(ROOT, "README.md")),
             "github_readme": os.path.isfile(os.path.join(ROOT, ".github", "README.md")),
@@ -613,7 +762,14 @@ def gather():
         for ln in raw_status:
             if len(ln) > 3 and (ln[1] != " " or ln[:2] == "??"):
                 _dirty.append(ln[3:].strip().strip('"'))
-    inputs["dirty"] = _dirty
+    # W1014 修中文路径乱码（C4-f 误判「未入提交树/漏 add」）：porcelain 对**非 ASCII** 路径
+    # 输出带引号 + 八进制转义（"docs/00-\345\257…"）⇒ 上面 strip('"') 后仍是转义串，路径永
+    # 匹配不上 ⇒ 中文路径件被误判漏 add。改用 -z 模式取未转义原路径（见 _git_status_z）。
+    _dz = _git_status_z()
+    if _dz is not None:
+        inputs["dirty"] = _dz
+    else:
+        inputs["dirty"] = _dirty
     # W906 C4-f 三态：dirty 文件中未暂存 diff 为「他方批次登记行纯追加」者单列——
     # 并行会话在台账落认领行属他方在途（W904 收官提交被此形态拦停的实录），非本方漏 add
     inputs["foreign_append_only"] = _foreign_append_only(_dirty)
@@ -644,7 +800,7 @@ def run_check():
     for nt in notes:
         print("NOTE  " + nt)
     print(
-        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账 / C5d stats 实算对账）----"
+        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账 / C5d stats 实算对账 / C5e 坑表分项 / C8 同段重复）----"
         % (len(issues), len(notes))
     )
     return (1 if issues else 0), issues, notes
@@ -658,6 +814,7 @@ def run_self_test():
         "jiaojie": "- **W999 自测链首**：\n",
         "agents": "### 4.2 交付门禁\n\n30. **甲门**\n31. **乙门**\n\n### 4.3 其他\n",
         "verify_src": "# ---- 第 30 槽 ----\n# ---- 第 31 槽 ----\n",
+        "archive_changelogs_text": [],  # W1014：自测注入空归档文本（hermetic·不读磁盘）
         "subjects": ["feat(w999): 自测提交"],
         "table": "| W999 | x | y | z | s | c |\n- **W659 / W660**：递延登记\n",
         "structure": "",
@@ -896,6 +1053,21 @@ def run_self_test():
         lambda d: d.update(
             showcase={"root_readme": True, "github_readme": False, "docs_readme": True}),
         "C7",
+        expect_absent=True,
+    )
+    # W1052：C8 治理文档同段重复——铁律 14/15 双写事故形态（W1048 诊断实证）的防复发锁
+    case(
+        "T30 治理文档长行整行双写必红（C8·W1052）",
+        lambda d: d.update(c8_texts={
+            "AGENTS.md": "14. **修实例必修根（W998 固化）**：修复暴露同类风险时同批或次批根治禁止「值得排期与等点号」收尾且检查任务按委托字面范围执行且跨会话教训权威落坑表。\n"
+                         "14. **修实例必修根（W998 固化）**：修复暴露同类风险时同批或次批根治禁止「值得排期与等点号」收尾且检查任务按委托字面范围执行且跨会话教训权威落坑表。\n"}),
+        "C8",
+    )
+    case(
+        "T31 表格行/短行/代码围栏内重复放行（C8·W1052 防误伤）",
+        lambda d: d.update(c8_texts={
+            "AGENTS.md": "| A | B | C |\n| A | B | C |\n短行重复\n短行重复\n```\n围栏内长行重复一次不算重复长行重复一次不算\n围栏内长行重复一次不算重复长行重复一次不算\n```\n"}),
+        "C8",
         expect_absent=True,
     )
 
