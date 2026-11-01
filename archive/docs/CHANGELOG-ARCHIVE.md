@@ -13,6 +13,14 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W968（2026-10-26）：台账对账表窗口制拆分批（用户令「拆分一下文件储存大小太大」）
+
+> **来源**：用户令「台账拆分一下，文件储存大小太大」——446.6KB/315 行（行均 1.3KB·最大 5KB）。
+> **摘要**：① **号序切分**（非位置切分——行序实测 52 处穿插，W940/W942 等行插在文件前部）——正本留 W≥908 共 60 行（活跃区 W908-W968），其余 256 行（W648-W907）整行迁 archive/docs/W批次编号对账表-ARCHIVE.md 新容器（追加式+迁档注记），正本 446.6→150.3 KB（-296KB）。② **守恒断言五道**——行数守恒（315=60+256）/迁出行逐条字节入档/正本非行内容逐字节不动（表头规则、现势停用块、ASCII 纪律段）/parse_ledger 语义不变（max W、撞号检测、在途行集合三者前后一致）/号区间不交叠（迁出最大 < 留存最小）。③ **ASCII 纪律段补迁档注记**（号占用留痕以正本+归档合看为准）。④ **体积门禁 C5 台账 60 行窗硬判据**（与 CHANGELOG/file-index 同族——超窗即红·修法指向后续台账归档工具化）；本批认领行 +1 后恰 60 满窗。⑤ **M5 探针合看归档**（正本+归档 316/316 全覆盖）。⑥ **消费方核验**——preflight/ledger_backfill/check_doc_sync C4（近 15 提交 ⊆ 窗口）/check_review_trigger/agent_start/batch_cascade 全部只吃近期行·无需改动；ledger_close_check 注册集合语义在归档头注声明合看。⑦ CHANGELOG/file-index 随批回窗（111→109）。
+> **文件**：docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · scripts/check_doc_size_budget.py · scripts/check_parser_anchor_coverage.py · tests/unit/test_doc_size_budget.py · CHANGELOG.md · scripts/output/file-index.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md
+> **验证**：迁移守恒断言五道全过 + parse_ledger 前后对拍（max=W967 不变·在途集合不变）+ 体积门禁三窗全绿（109/110·109/110·60/60）+ M5 316/316 + pytest 全量 914 passed + ruff 清零。
+> **状态**：**已收官**（W968 git 反填·含认领与拆分与级联与回填）
+
 ### W967（2026-10-26）：治理文档数字断言全面对账批（举一反三·用户令）
 
 > **来源**：用户令「举一反三，再全面检查一下本项目内其他全部文件内容有没有类似问题」——W966 摘要层三缺陷（过期数字/自相矛盾/叙事入摘要）的跨文档普查。
