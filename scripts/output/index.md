@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（457）
+## 文件（458）
 
 ### Markdown 文档
 
@@ -271,6 +271,7 @@
 - `_w1076_j2_dashboard_only.json`
 - `_w1076_j2_diff_report.json`
 - `_w1076_spec.json`
+- `_w1077_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
