@@ -10,6 +10,29 @@
 
 ---
 
+## W1082 图表色工程批·档 1′ 试点（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1082 | 治理文档 |
+| AGENTS.md | W1082 | 治理文档 |
+| CHANGELOG.md | W1082 | 治理文档 |
+| HANDOVER.md | W1082 | 治理文档 |
+| README.md | W1082 | 治理文档 |
+| STRUCTURE.md | W1082 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1082 | 治理文档 |
+| docs/00-导读/项目说明.md | W1082 | 治理文档 |
+| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1082 | 治理文档 |
+| docs/agent/pitfalls.md | W1082 | 治理文档 |
+| scripts/output/README.md | W1082 | 本批工具/产物 |
+| scripts/output/_w1082_j2_after.json | W1082 | 本批工具/产物 |
+| scripts/output/_w1082_j2_diff.json | W1082 | 本批工具/产物 |
+| scripts/output/_w1082_spec.json | W1082 | 本批工具/产物 |
+| scripts/output/file-index.md | W1082 | 本批工具/产物 |
+| scripts/output/index.md | W1082 | 本批工具/产物 |
+| scripts/output/stats.json | W1082 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1082 | 本批工具/产物 |
+
 ## W1081 图表色工程批·档 1′ 因果复核与试点口径定案（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4551,13 +4574,4 @@ docs/11-方案报告/README.md
 | scripts/archive_ledger_rows.py | W970 | 新建台账行归档工具（号序切分·守恒五道·C5 修法） |
 | docs/00-导读/W批次编号对账表.md | W970 | 首跑回窗 61→59（W908/W909 迁档） |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W970 | 迁入 2 行 + 迁入注记 |
-
-## W969 W1000 号位迁移批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/*.py（22 文件） | W969 | 三位号正则 69 处迁 3-4 位兼容（W1000 错读拆除） |
-| tests/unit/test_four_digit_wnum.py | W969 | 四位号解析单测 4 例（防错读负样本） |
-| tests/unit/test_release_prep.py | W969 | 四位号设计反转测试（提取交注册表核验） |
-| docs/00-导读/W批次编号对账表.md | W969 | D2 豁免登记 W1000 + ASCII 纪律升位注记 |
 

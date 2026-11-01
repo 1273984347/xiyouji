@@ -1,0 +1,1729 @@
+{
+ "page": "en/global-pattern.html",
+ "before_counts": {
+  "light": 532,
+  "dark": 533
+ },
+ "after_counts": {
+  "light": 108,
+  "dark": 109
+ },
+ "light_diffs": [
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "kind": "元素数",
+   "before": 532,
+   "after": 108
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 48,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "pilgrim-card"
+   ],
+   "after": [
+    "section",
+    "section"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 49,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-name"
+   ],
+   "after": [
+    "h2",
+    "section-title"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 50,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-work"
+   ],
+   "after": [
+    "div",
+    "section-sub"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 51,
+   "kind": "元素身份",
+   "before": [
+    "span",
+    "p-country"
+   ],
+   "after": [
+    "div",
+    "table-wrap"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 52,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "table",
+    "journey-table"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 53,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "thead",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 54,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "tr",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 55,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 56,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 57,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 58,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 59,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 60,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 61,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "tbody",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 62,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "section",
+    "section"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 63,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "h2",
+    "section-title"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 64,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "section-sub"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 65,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "div",
+    "chart-row"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 66,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-symbol"
+   ],
+   "after": [
+    "div",
+    "chart-block"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 67,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "h3",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 68,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "pilgrim-card"
+   ],
+   "after": [
+    "svg",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 69,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-name"
+   ],
+   "after": [
+    "div",
+    "legend"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 70,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-work"
+   ],
+   "after": [
+    "div",
+    "chart-block"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 71,
+   "kind": "元素身份",
+   "before": [
+    "span",
+    "p-country"
+   ],
+   "after": [
+    "h3",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 72,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "svg",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 73,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "section",
+    "section"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 74,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "h2",
+    "section-title"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 75,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "div",
+    "section-sub"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 76,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "table-wrap"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 77,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "table",
+    "dest-table"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 78,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "thead",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 79,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "tr",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 80,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 81,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 82,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 83,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 84,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 85,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "tbody",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 86,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-symbol"
+   ],
+   "after": [
+    "section",
+    "section"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 87,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "h2",
+    "section-title"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 88,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "pilgrim-card"
+   ],
+   "after": [
+    "div",
+    "insight-box"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 89,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-name"
+   ],
+   "after": [
+    "ul",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 90,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-work"
+   ],
+   "after": [
+    "footer",
+    "site-footer"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 91,
+   "kind": "元素身份",
+   "before": [
+    "span",
+    "p-country"
+   ],
+   "after": [
+    "div",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 92,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "footer-brand"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 93,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "div",
+    "footer-meta"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 94,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 95,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "nav",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 96,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 97,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 98,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 99,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 100,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 101,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 102,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "chart-tooltip"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 103,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "div",
+    "sr-only"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 104,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "sr-only"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 105,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "button",
+    "xy-fab-theme"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 106,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-symbol"
+   ],
+   "after": [
+    "svg",
+    "ic-moon"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "light",
+   "index": 107,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "path",
+    ""
+   ]
+  }
+ ],
+ "dark_diffs": [
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "kind": "元素数",
+   "before": 533,
+   "after": 109
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 48,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "pilgrim-card"
+   ],
+   "after": [
+    "section",
+    "section"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 49,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-name"
+   ],
+   "after": [
+    "h2",
+    "section-title"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 50,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-work"
+   ],
+   "after": [
+    "div",
+    "section-sub"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 51,
+   "kind": "元素身份",
+   "before": [
+    "span",
+    "p-country"
+   ],
+   "after": [
+    "div",
+    "table-wrap"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 52,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "table",
+    "journey-table"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 53,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "thead",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 54,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "tr",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 55,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 56,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 57,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 58,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 59,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 60,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 61,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "tbody",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 62,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "section",
+    "section"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 63,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "h2",
+    "section-title"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 64,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "section-sub"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 65,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "div",
+    "chart-row"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 66,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-symbol"
+   ],
+   "after": [
+    "div",
+    "chart-block"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 67,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "h3",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 68,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "pilgrim-card"
+   ],
+   "after": [
+    "svg",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 69,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-name"
+   ],
+   "after": [
+    "div",
+    "legend"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 70,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-work"
+   ],
+   "after": [
+    "div",
+    "chart-block"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 71,
+   "kind": "元素身份",
+   "before": [
+    "span",
+    "p-country"
+   ],
+   "after": [
+    "h3",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 72,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "svg",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 73,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "section",
+    "section"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 74,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "h2",
+    "section-title"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 75,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "div",
+    "section-sub"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 76,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "table-wrap"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 77,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "table",
+    "dest-table"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 78,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "thead",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 79,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "tr",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 80,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 81,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 82,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 83,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 84,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "th",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 85,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "tbody",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 86,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-symbol"
+   ],
+   "after": [
+    "section",
+    "section"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 87,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "h2",
+    "section-title"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 88,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "pilgrim-card"
+   ],
+   "after": [
+    "div",
+    "insight-box"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 89,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-name"
+   ],
+   "after": [
+    "ul",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 90,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-work"
+   ],
+   "after": [
+    "footer",
+    "site-footer"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 91,
+   "kind": "元素身份",
+   "before": [
+    "span",
+    "p-country"
+   ],
+   "after": [
+    "div",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 92,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "footer-brand"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 93,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "div",
+    "footer-meta"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 94,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 95,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "nav",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 96,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 97,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 98,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 99,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 100,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 101,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "a",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 102,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "chart-tooltip"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 103,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "div",
+    "sr-only"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 104,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-row"
+   ],
+   "after": [
+    "div",
+    "sr-only"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 105,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "button",
+    "xy-fab-theme"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 106,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "p-symbol"
+   ],
+   "after": [
+    "svg",
+    "ic-sun"
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 107,
+   "kind": "元素身份",
+   "before": [
+    "b",
+    ""
+   ],
+   "after": [
+    "circle",
+    ""
+   ]
+  },
+  {
+   "page": "en/global-pattern.html",
+   "theme": "dark",
+   "index": 108,
+   "kind": "元素身份",
+   "before": [
+    "div",
+    "pilgrim-card"
+   ],
+   "after": [
+    "path",
+    ""
+   ]
+  }
+ ],
+ "judge": {
+  "integrity": false,
+  "light_zero": false,
+  "dark_token": true,
+  "residual_zero": true
+ }
+}
