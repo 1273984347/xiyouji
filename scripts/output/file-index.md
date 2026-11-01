@@ -10,6 +10,252 @@
 
 ---
 
+## W1075 合并前红灯修复微批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W1075 | 本批修改（W1075 认领行） |
+| scripts/cross_line_baseline.json | W1075 | 本批修改（跨行基线确认清单 54→55·人工复核无害） |
+| scripts/output/tools-inventory.md | W1075 | 级联生成（stats 快照与索引） |
+| site/reader/themes/index.html | W1075 | 本批修改（跳转页可见链接补 ../） |
+
+## W1074 交互修复第二+三批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w1074_batches23.py | W1074 | 级联生成（六文档同步面） |
+| scripts/index.md | W1074 | 级联生成（六文档同步面） |
+| scripts/output/_vermilion_solid_cache.json | W1074 | 级联生成（stats 快照与索引） |
+| scripts/output/tools-inventory.md | W1074 | 级联生成（stats 快照与索引） |
+| site/404.html | W1074 | 本批修改（R-08 返回上一页·含单段内联脚本） |
+| site/dashboard.html | W1074 | 本批修改（N-02 fetch 移除 + drill 文案） |
+| site/data/chapter-structure-graph.html | W1074 | 本批修改（R-03 两个 vis 页入口） |
+| site/data/cross-time-danmaku.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/graph-explorer.html | W1074 | 本批修改（R-11 aria-label ×2） |
+| site/data/journey-map-interactive.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/narrative-rhythm-curve.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/search.html | W1074 | 本批修改（N-02 /datasets 在线分支移除 + 文案读者化） |
+| site/index.html | W1074 | 本批修改（N-08 根修 CSS / N-07 16D / N-09 EN 去重 / R-07 双 role / 级联页脚行） |
+| site/reader/ch001.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch002.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch003.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch004.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch005.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch006.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch007.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch008.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch009.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch010.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch011.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch012.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch013.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch014.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch015.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch016.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch017.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch018.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch019.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch020.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch021.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch022.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch023.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch024.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch025.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch026.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch027.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch028.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch029.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch030.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch031.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch032.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch033.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch034.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch035.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch036.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch037.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch038.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch039.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch040.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch041.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch042.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch043.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch044.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch045.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch046.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch047.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch048.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch049.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch050.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch051.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch052.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch053.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch054.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch055.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch056.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch057.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch058.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch059.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch060.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch061.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch062.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch063.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch064.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch065.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch066.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch067.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch068.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch069.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch070.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch071.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch072.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch073.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch074.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch075.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch076.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch077.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch078.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch079.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch080.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch081.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch082.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch083.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch084.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch085.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch086.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch087.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch088.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch089.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch090.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch091.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch092.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch093.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch094.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch095.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch096.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch097.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch098.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch099.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch100.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/index.html | W1074 | 本批修改（N-05 壳+h1+R-03 hub 行） |
+| site/reader/themes/index.html | W1074 | 本批修改（R-04 归一跳转 stub + SEO og 块） |
+
+## W1073 D-1 首屏插画深色变体批（2026-11-01）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W1073 | 本批修改（D-1 深色机制：首帧 CSS 指向 -dark 变体 + 轮播 darkSrc + data-theme 监听） |
+| site/static/images/hero-line-01-ruyi-staff-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-02-journey-scroll-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-03-classic-scroll-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-04-tight-crown-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-05-lotus-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-06-nine-ring-staff-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-07-banana-fan-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-08-jade-vase-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-09-somersault-cloud-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| scripts/_w1073_dark_verify.py | W1073 | 本批新增（深色变体机器判据·J1-J9 + K1-K3） |
+| scripts/_w1073_paper_normalize.py | W1073 | 本批新增（纸底精确归一·重建 W938 口径） |
+| scripts/_w1073_derive.py | W1073 | 本批新增（程序化派生·09 专项） |
+| scripts/_w1073_fix_band.py | W1073 | 本批新增（底部亮带清除·09 专项） |
+| scripts/_w1073_probe.py | W1073 | 本批新增（D-1 验收探针·真实 Chromium） |
+| scripts/_w1073_baseline_shot.py | W1073 | 本批新增（浅色基线补拍） |
+| scripts/output/_w1073_spec.json | W1073 | 本批新增（批次 spec） |
+
+## W1072 可复用 Skill 盘点与取经编制表角色优化批（2026-11-01）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/T41-任务计划执行与经验沉淀报告-2026-11-01.md | W1072 | 本批新增（Skill 盘点与编制表角色优化报告） |
+| docs/11-方案报告/README.md | W1072 | 本批修改（§六 计划方案分区登记第 59 行） |
+| docs/00-导读/W批次编号对账表.md | W1072 | 本批修改（W1072 认领行） |
+| HANDOVER.md | W1072 | 本批修改（当前进度 + 最后更新行） |
+| scripts/output/_w1072_spec.json | W1072 | 本批新增（批次 spec） |
+
+## W1071 交互修复第一批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/search.html | W1071 | 本批修改（SITE_DOC_MAP 612 条内嵌 + renderOffline 行链接化 + Drill 站内化） |
+| site/static/js/rag-chat.js | W1071 | 本批修改（生产环境早退·A 案） |
+| site/index.html | W1071 | 本批修改（616/87 加 stats 标记 + 双入口 ask-note） |
+| site/guide.html | W1071 | 本批修改（data-gsap 属性移入开标签） |
+| site/reader/index.html | W1071 | 本批修改（data-gsap 属性移入开标签） |
+| site/reader/essays/index.html | W1071 | 本批修改（data-gsap 属性移入开标签） |
+| site/reader/themes-hub.html | W1071 | 本批修改（data-gsap 属性移入开标签） |
+| archive/scripts/batches/w1071/_w1071_search_docmap.py | W1071 | 本批新增（映射构建一次性脚本·批内归档） |
+| CHANGELOG.md | W1071 | 级联生成（本批顶段） |
+| HANDOVER.md | W1071 | 级联生成（现役三元组与进度） |
+| docs/00-导读/W批次编号对账表.md | W1071 | 本批修改（追加 W1071 认领行） |
+| scripts/output | W1071 | 级联生成（stats 快照与 file-index） |
+
+## W1070 站内交互审查第二轮复核 + 界面优化施工方案落库批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/审查与评审/站点交互流程审查第二轮复核报告-2026-10-31.md | W1070 | 本批新增（生产态第二轮复核·W926 十二条闭环表 + 新增十条 + 判据自纠四条 + 复算命令附录） |
+| docs/11-方案报告/设计与架构方案/界面与交互优化施工方案-2026-10-31.md | W1070 | 本批新增（四维度取证 + 现势基线 + 施工序列八批按收益排序 + 3 项待用户决策） |
+| docs/11-方案报告/README.md | W1070 | 本批修改（§一登记第 51 行 + §二登记第 33 行 + 两个分区计数更新） |
+| docs/00-导读/W批次编号对账表.md | W1070 | 本批修改（追加 W1070 认领行·在途） |
+| CHANGELOG.md | W1070 | 级联生成（本批顶段） |
+| HANDOVER.md | W1070 | 级联生成（现役三元组与进度） |
+| scripts/output | W1070 | 级联生成（搜索索引 / file-index / stats 快照） |
+
+## W1069 效率与防护打包批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_corruption.py | W1069 | 本批新增/修改（R3 BOM 扫描·tracked 文本面·ps1 例外·self-test 6 例） |
+| scripts/preflight_check.py | W1069 | 本批新增/修改（env-sync：ruff 实际版本 vs requirements 对拍·上线即抓真漂移 0.16.7≠0.16.9） |
+| docs/agent/pitfalls.md | W1069 | 本批新增/修改（+5 条 E-68~E-72·181·流程组 88·数据组对齐 19） |
+| docs/11-方案报告/计划方案/执行前计划-W1069-微批轻量通道设计.md | W1069 | 本批新增（微批轻量通道设计 V1.0·三档+准入判据·待批） |
+| CLAUDE.md | W1069 | 本批新增/修改（批次节奏行 15·52/60 行） |
+| CHANGELOG.md | W1069 | 收官面（顶段 W1069） |
+| HANDOVER.md | W1069 | 级联面（计数链 181/最后更新/进度） |
+| README.md | W1069 | 级联面（版本行） |
+| STRUCTURE.md | W1069 | 级联面（版本行） |
+| AGENTS.md | W1069 | 级联面（计数链 181/脚注滚动） |
+| CITATION.cff | W1069 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1069 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1069 | 台账（W1069 行新增） |
+| docs/INDEX.md | W1069 | 登记面（docs 索引） |
+| index.md | W1069 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1069 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1069 | 级联面（里程碑行同步） |
+| site/index.html | W1069 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1069 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1069 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1069 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1069 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1069 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1069 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1069 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1069 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1069 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1069 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1069 | 登记面产物（第 43 槽报告） |
+| scripts/output/_vermilion_solid_cache.json | W1069 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/output/_cascade_files_W1069.txt | W1069 | 级联清单（本批产物） |
+| scripts/output/_w1069_spec.json | W1069 | 本批 spec |
+
+## W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/CI提速与门禁健壮性方法论.md | W1068 | 本批新增（方法论深度篇·提速四步序 + 判据自证 + action ref 红线 + paths 过滤陷阱 + 收官自查清单） |
+| docs/10-方法论沉淀/README.md | W1068 | 本批修改（方法论索引登记第 28 行） |
+| docs/agent/pitfalls.md | W1068 | 本批修改（新增 E-83 schannel TLS 指纹 / E-84 paths 过滤不得缩小验证面·流程组 81→83·含对 W1066 批登记建议的自我纠正） |
+| .github/workflows/screenshot-review.yml | W1068 | 本批修改（paths 补 check_contract_smoke.js / check_screenshot_gates.js ⇒ 改了门禁脚本也会触发门禁） |
+| .github/workflows/workflow-lint.yml | W1068 | 本批修改（paths 收窄到 .github/workflows/** + 判据脚本·其覆盖面本就是工作流文件自身） |
+| AGENTS.md | W1068 | 本批修改（坑表条数计数链同步 + 级联脚注滚动） |
+| HANDOVER.md | W1068 | 本批修改（坑表条数计数链同步 + 级联同步面） |
+| .agent/skills/puti-shouye/SKILL.md | W1068 | 本批修改（坑表条数计数链同步） |
+| scripts/output/tools-inventory.md | W1068 | 本批修改（工具清单刷新·收录新增方法论篇） |
+| pytest.ini | W1068 | 本批修改（stats 实体标记跟随） |
+| CHANGELOG.md | W1068 | 本批修改（W1068 段·级联写入） |
+| docs/00-导读/W批次编号对账表.md | W1068 | 本批修改（W1068 台账行·手工登记） |
 ## W1067 CI action ref 根修批 + 记忆与项目沉淀同步批（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4143,185 +4389,4 @@ docs/11-方案报告/README.md
 | AGENTS.md | W964 | 版本脚注 85.7→3.3 KB（75 真条目拆分·留 5 定形）·文件 110.1→27.2 KB |
 | archive/docs/AGENTS-ARCHIVE.md | W964 | 迁入 70 条（W807-W928·新 fenced 块） |
 | HANDOVER.md | W964 | 里程碑窗口 15→5 归一（6 失明块现形）·指针 W956 |
-
-## W963 GSAP 动效差异化推广批（入口层 8 页 + cards 模式）（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/js/motion-gsap.js | W963 | 修改：新增 cards 模式（data-gsap-target 可配置 + stagger 自适应）+ sections 单元收窄为 h2 |
-| site/reader/index.html | W963 | 修改：入口层接线（cards 模式·目标 .reader-idx a·增量 229 B） |
-| site/reader/themes-hub.html | W963 | 修改：入口层接线（增量 229 B） |
-| site/reader/themes/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/reader/people/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/reader/essays/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/reader/culture/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/reader/poetry/index.html | W963 | 修改：入口层接线（增量 238 B） |
-| site/guide.html | W963 | 修改：入口层接线（cards 模式·目标 .path-card·增量 215 B） |
-| scripts/_w962_wire_entry.py | W963 | 新增：入口层接线器（字节级·断言命中数·幂等·单页增量上限 250 B） |
-| scripts/_w957_motion_probe.py | W963 | 修改：加 --pages 参数（默认清单不变）以便按新接入面实跑 |
-| docs/00-导读/W批次编号对账表.md | W963 | 登记：W963 认领行（让号留痕）+ 收官回填 |
-| HANDOVER.md | W963 | 同步：一、当前进度增 W963 条目 + 最后更新链前置 + 当前 HEAD |
-| CHANGELOG.md | W963 | 新增：W963 版段（四件套） |
-| scripts/output/file-index.md | W963 | 登记：W963 段（本段） |
-
-## W961 GSAP 写法机检挂槽批 + F9 假阳性订正批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/verify_delivery.py | W961 | 修改：挂第 50 门禁「GSAP 写法」（EXPECTED_SECTION_NAMES + _STRICT_GATES 两处·marker 自动派生）+ _SCOPE_CORE 恒跑 |
-| scripts/check_gsap_motion.py | W961 | 修改：加汇总行 marker + 显式豁免机制（J3/J4/J7 可豁免·J2 不可豁免·逐条打印） |
-| scripts/_w955_motion_audit.py | W961 | 修改：裸 ease 判据加负向前查（修假阳性：原命中数据字段名 `avg_ease` / `most_ease` 与令牌定义） |
-| scripts/output/_w955_motion_audit.json | W961 | 刷新：F9 复扫产物（存量裸 ease 49 处 / 25 页·按「禁新增」口径不计欠账） |
-| scripts/_w960_pilot_shots.py | W961 | 新增：试点页实跑截图工具（终态截图 + 入场序列分解帧 + 编排单元可见性 JSON） |
-| AGENTS.md | W961 | 修改：§4.2 门禁清单补第 50 条「GSAP 动效写法槽」 |
-| docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md | W961 | 修改：订正 4 处「裸 ease 欠账」表述（假阳性作废·存量不计欠账） |
-| docs/11-方案报告/计划方案/T28-任务计划执行与经验沉淀报告-2026-10-26.md | W961 | 修改：订正 2 处同款表述 |
-| docs/00-导读/W批次编号对账表.md | W961 | 登记：W961 认领行（让号留痕）+ W955 行订正 1 处 |
-| README.md · pytest.ini · 系统架构方案 ×2 | W961 | 修改：统计标记同步（gate_count 49→50·pytest_collected 900→902） |
-| HANDOVER.md | W961 | 同步：一、当前进度增 W961 条目 + 最后更新链前置 + 当前 HEAD |
-| CHANGELOG.md | W961 | 新增：W961 版段（四件套） |
-| scripts/output/file-index.md | W961 | 登记：W961 段（本段） |
-
-## W960 治理文档体积归档批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_doc_size_budget.py | W960 | 新建体积窗口门禁（CHANGELOG/file-index 各 110 段窗·超窗 preflight 判红·KB 行数为报告值） |
-| scripts/archive_segments.py | W960 | 新建常驻搬段工具（W921 守恒断言沉淀为五道·changelog 插顶与 file-index 尾追双模式） |
-| scripts/preflight_check.py | W960 | 体积窗口硬判据接线（超窗拦截开工·故障降级 WARN 禁静默） |
-| scripts/batch_cascade.py | W960 | 落盘后体积提示位（每批收官报四文件体积态） |
-| docs/00-导读/文档规范.md | W960 | §8 重标：窗口制替代 50KB/500 行旧线（两制打架消除） |
-| archive/docs/CHANGELOG-ARCHIVE.md | W960 | 迁入 38 段（W803-W842·插顶） |
-| archive/docs/file-index-ARCHIVE.md | W960 | 迁入 140 段（W700-W842·尾追+归档时间链） |
-| tests/unit/test_doc_size_budget.py | W960 | 体积门禁单测 4 例（含现网防回退锚） |
-| tests/unit/test_archive_segments.py | W960 | 搬段工具单测 4 例（三种段形态解析与负样本） |
-| pytest.ini · 系统架构方案v2 | W960 | pytest_collected 标记归一 910（并行竞态三数字拼接修复） |
-
-## W959 T10 V1.1 计数口径订正批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md | W959 | 修改：V1.1 计数口径订正（31 条四态 + 开放项双口径 + §18 口径说明 + 4 处商榷落实·结论未改） |
-| scripts/_w959_t10_v11.py | W959 | 新增：V1.1 订正脚本（行号 + 断言片段双重约束·字节级改写保行尾·31 条作业·倒序应用·幂等） |
-| docs/11-方案报告/README.md | W959 | 登记：§六 T-10 行版本标注更新为 V1.1（W959 计数口径订正批） |
-| docs/00-导读/W批次编号对账表.md | W959 | 登记：W959 认领行（让号留痕）+ 收官回填 |
-| HANDOVER.md | W959 | 同步：一、当前进度增 W959 条目 + 最后更新链前置 + 当前 HEAD |
-| CHANGELOG.md | W959 | 新增：W959 版段（四件套） |
-| scripts/output/file-index.md | W959 | 登记：W959 段（本段） |
-
-## W957 GSAP 动效体系引入批·施工批（公共动效载体 + 试点 5 页三类动效 + 机检）（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/js/motion-gsap.js | W957 | 新增：公共动效载体（RM 双守卫 + fail-open + 三模式 intro/sections/fold + 排除 reveal-in） |
-| site/static/js/gsap.min.js | W957 | 新增：GSAP 3.12.5 外链 vendored（72,214 B·不内联） |
-| site/static/js/ScrollTrigger.min.js | W957 | 新增：ScrollTrigger 3.12.5 外链 vendored（43,380 B） |
-| site/index.html | W957 | 修改：试点接入（data-gsap=intro + 三脚本外链·增量 187 B） |
-| site/reader/ch007.html | W957 | 修改：试点接入（data-gsap=sections + 三脚本外链·增量 199 B） |
-| site/reader/themes/西游与死亡研究专题.html | W957 | 修改：试点接入（增量 208 B） |
-| site/reader/people/黄风怪外传.html | W957 | 修改：试点接入（增量 208 B） |
-| site/reader/people/白骨精.html | W957 | 修改：试点接入（增量 208 B） |
-| scripts/_w956_pilot_pick.py | W957 | 新增：试点页机选探针（3 条规则 · 527 候选 · 可复算） |
-| scripts/_w957_wire_pilot.py | W957 | 新增：试点页接入器（字节级改写保行尾 · 断言命中数 · 幂等） |
-| scripts/_w957_motion_probe.py | W957 | 新增：浏览器实跑探针（30 组 · RM 判据 + 环境类分离） |
-| scripts/check_gsap_motion.py | W957 | 新增：GSAP 写法机检（8 项判据 + 自测 8/8·独立脚本不改管控件） |
-| scripts/_w957_ledger_claim.py | W957 | 新增：台账认领行追加器（只追加不改历史行 / 幂等 / 混行尾 fail-closed） |
-| scripts/output/_w956_pilot_pick.json | W957 | 新增：试点机选产物（5 页清单 + 527 候选特征量） |
-| scripts/output/_w957_motion_probe.json | W957 | 新增：实跑产物（30 组采集 + 判定 PASS） |
-| docs/11-方案报告/计划方案/T28-任务计划执行与经验沉淀报告-2026-10-26.md | W957 | 新增：T-28 施工报告（执行记录 / 12 条 AC 验收 / 8 条经验 E-01~E-08 / 5 条偏差留档） |
-| docs/11-方案报告/README.md | W957 | 登记：§六 增 T-28 报告行（序号 34）+ 件数刷新 |
-| docs/00-导读/W批次编号对账表.md | W957 | 登记：W957 认领行（让号留痕）+ 收官回填 |
-| HANDOVER.md | W957 | 同步：一、当前进度增 W957 条目 + 最后更新链前置 + 当前 HEAD |
-| CHANGELOG.md | W957 | 新增：W957 版段（四件套） |
-| scripts/output/file-index.md | W957 | 登记：W957 段（本段） |
-
-## W956 登记面治理批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/preflight_check.py | W956 | 在途判定加 git 条件（登记滞后告警不拒绝·P-43-01）+ 复盘触发器提示位接线 |
-| scripts/check_review_trigger.py | W956 | 新建复盘触发器（天数/批次/提交三判据任一触发即提示·preflight 接线·不持台账写面） |
-| scripts/ledger_backfill.py | W956 | --from-git 收官状态 git 反填（P-43-01 后半·显式值可覆盖） |
-| scripts/batch_cascade.py | W956 | 段状态认领登记 W 号一致性断言（E-28/P-43-05 防线） |
-| scripts/backfill_changelog.py | W956 | 归档面合看修复（E-27·原实现 67 归档段误报待补）+ --only 限域 + 同款段状态断言 |
-| scripts/check_db_schema.py | W956 | 门禁路径跟上 W934 存储层门面化（P1-P3 db.ts→storage/sqlite.ts·假红修复） |
-| scripts/check_emoji_icons.py | W956 | ruff 机械清理（死赋值移除·UP009/I001/F841） |
-| scripts/output/_w884_spec.json | W956 | W884 补位 spec（Playwright 全谱审计·按 W863 先例标补位） |
-| tests/unit/test_preflight_check.py | W956 | 提交索引与在途二分单测 5 例 |
-| tests/unit/test_review_trigger.py | W956 | 复盘触发器单测 9 例（含负样本） |
-| tests/unit/test_batch_cascade_status_wnum.py | W956 | 段状态断言单测 4 例（含 E-28 实形态负样本） |
-| docs/agent/pitfalls.md | W956 | 复盘经验五条上移（级联 5→8·git 17→18·流程 8→9·总数 52→57） |
-| AGENTS.md | W956 | §4.3 坑位计数链追记（总数 52→57） |
-
-## W955 GSAP 动效体系引入批第一子批（前置体检 + 执行前计划）（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/执行前计划-T28-GSAP动效体系引入批.md | W955 | 新增：T-28 执行前计划（3 目标 + 12 条 AC + 16 条 ASM + 14 步 ST + 9 指标 + 8 风险 + 9 决策 + 12 项自包含检查） |
-| scripts/_w955_motion_audit.py | W955 | 新增：动效体检取证脚本（8 组事实·数字唯一源头·禁词基线复用 check_motion_ban 正则） |
-| scripts/output/_w955_motion_audit.json | W955 | 新增：体检基线快照（页面分布 / 动效存量 / RM 覆盖 / 体积预算 / GSAP 体量测算） |
-| scripts/_w955_ledger_claim.py | W955 | 新增：台账认领行追加器（只追加不改历史行 / 幂等 / 混行尾 fail-closed） |
-| scripts/_w955_version_sync.py | W955 | 新增：版本面同步脚本（9 处替换 + 5 处插入·断言命中数·倒序锚点） |
-| docs/00-导读/W批次编号对账表.md | W955 | 登记：W955 认领行（认领即占号·单独提交） |
-| docs/11-方案报告/README.md | W955 | 登记：§六 增 T-28 执行前计划行（序号 33）+ 件数刷新 |
-| HANDOVER.md | W955 | 同步：一、当前进度增 W955 条目 + 最后更新链前置 W955 |
-| CHANGELOG.md | W955 | 新增：W955 版段（四件套） |
-| scripts/output/file-index.md | W955 | 登记：W955 段（本段） |
-| docs/INDEX.md | W955 | 重建：新增 T-28 执行前计划后重生成（765 篇文档 · 13 板块） |
-| site/data/search.html | W955 | 刷新：站内搜索索引（中文）重嵌入（含新计划件条目） |
-| site/en/search.html | W955 | 刷新：站内搜索索引（英文）重嵌入 |
-| site/**（2 页 meta CSP） | W955 | 重算：搜索页内联脚本变更后的 CSP 哈希同步（2 页 · 861 个内联脚本哈希） |
-
-## W954 第 43 篇工作复盘批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md | W954 | 新增：第 43 篇复盘（W795–W953 全区间·149 段 / 154 行 / 354 提交·八条核心发现·E-25~E-31 / FAM-40~42 / WF-08~09 / P-43-01~05） |
-| docs/11-方案报告/计划方案/执行前计划-T27-第43篇工作复盘批.md | W954 | 新增：T-27 执行前计划（9 条 AC / 9 步 ST / 7 项 V 指标 / 8 条决策 / 12 项自包含检查） |
-| docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md | W954 | 新增：T-27 执行与经验沉淀报告（9 步执行记录 / 验收表 / 6 条偏差 / 6 条经验 E-01~E-06） |
-| scripts/_w954_review_evidence.py | W954 | 新增：复盘取证脚本（CHANGELOG 现役面 + 归档面 + 对账表 + git 提交图四源合取 + 五类漂移分类 + 12 组主题分组） |
-| scripts/_w954_ledger_backfill.py | W954 | 新增：台账回写脚本（8 行状态订正 + 认领行追加·先断言后写·幂等可重跑） |
-| scripts/output/_w954_review_evidence.json | W954 | 新增：取证产物（区间事实与漂移分档的机器可读快照） |
-| docs/11-方案报告/README.md | W954 | 登记：§五 增第 43 篇行（序号 25）+ §六 增 T-27 两行（序号 31/32）+ 件数刷新 |
-| docs/00-导读/W批次编号对账表.md | W954 | 登记：W954 认领行 + 回写 7 批陈旧在途状态 + W937 标「已停止」并清零 touches |
-| HANDOVER.md | W954 | 同步：一、当前进度增 W954 条目 + 最后更新链前置 W954 |
-| CHANGELOG.md | W954 | 新增：W954 版段（四件套） |
-| scripts/output/file-index.md | W954 | 登记：W954 段（本段） |
-
-## W953 themes 库专题题图批（12 张）（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-01-zhenjia-meihouwang.webp | W953 | 新增·真假美猴王专题 |
-| site/static/images/plate-line-02-pantao-yuan.webp | W953 | 新增·蟠桃园-体制内的秘密 |
-| site/static/images/plate-line-03-danaotian-gong.webp | W953 | 新增·大闹天宫-英雄还是悲剧 |
-| site/static/images/plate-line-04-shuilandong.webp | W953 | 新增·水帘洞专题 |
-| site/static/images/plate-line-05-hunshi-sihou.webp | W953 | 新增·混世四猴专题 |
-| site/static/images/plate-line-06-bingqi-xiuyang.webp | W953 | 新增·兵器的自我修养专题 |
-| site/static/images/plate-line-07-ershiba-xingsu.webp | W953 | 新增·二十八星宿专题 |
-| site/static/images/plate-line-08-sizhi-gongcao.webp | W953 | 新增·四值功曹专题 |
-| site/static/images/plate-line-09-wufang-jiedi.webp | W953 | 新增·五方揭谛专题 |
-| site/static/images/plate-line-10-liuding-liujia.webp | W953 | 新增·六丁六甲专题 |
-| site/static/images/plate-line-11-jingubang-zhongliang.webp | W953 | 新增·金箍棒的重量专题 |
-| site/static/images/plate-line-12-qiwu-zhuanji.webp | W953 | 新增·器物传记学专题 |
-| site/reader/themes/真假美猴王专题.html | W953 | 接入题图（真假美猴王专题） |
-| site/reader/themes/蟠桃园-体制内的秘密.html | W953 | 接入题图（蟠桃园-体制内的秘密） |
-| site/reader/themes/大闹天宫-英雄还是悲剧.html | W953 | 接入题图（大闹天宫-英雄还是悲剧） |
-| site/reader/themes/水帘洞专题.html | W953 | 接入题图（水帘洞专题） |
-| site/reader/themes/混世四猴专题.html | W953 | 接入题图（混世四猴专题） |
-| site/reader/themes/兵器的自我修养专题.html | W953 | 接入题图（兵器的自我修养专题） |
-| site/reader/themes/二十八星宿专题.html | W953 | 接入题图（二十八星宿专题） |
-| site/reader/themes/四值功曹专题.html | W953 | 接入题图（四值功曹专题） |
-| site/reader/themes/五方揭谛专题.html | W953 | 接入题图（五方揭谛专题） |
-| site/reader/themes/六丁六甲专题.html | W953 | 接入题图（六丁六甲专题） |
-| site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html | W953 | 接入题图（金箍棒的重量专题） |
-| site/reader/themes/器物传记学专题.html | W953 | 接入题图（器物传记学专题） |
-| assets/promo/plate-set/ | W953 | 母版 + 站点版 + 拼图 + README（累计 40 张） |
-| scripts/_w953_make_prompts.py | W953 | 母版复用生成器（读上批 JSON 取母版·断言逐字一致） |
-| scripts/_w953_insert_plates.py | W953 | 12 页 chapter-plate 接入（幂等） |
-| scripts/_w953_cascade.py | W953 | 四面登记 + 当前态指针（共享面精确暂存·文件行自动生成） |
-| scripts/output/_w953_batch1~3.json | W953 | 出图参数 12 条 |
-| scripts/output/_cascade_files_W953.txt | W953 | 当批级联清单 |
-| CHANGELOG.md | W953 | W953 版段 |
-| docs/00-导读/W批次编号对账表.md | W953 | W953 认领行 |
 

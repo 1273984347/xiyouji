@@ -12,7 +12,19 @@ name: Workflow Lint
 
 on:
   push:
+    # W1068：本工作流只关心「工作流文件自身的可解析性」与「action ref 完整性」
+    #   ⇒ 触发面收窄到这两类改动（改 workflow 必然命中 ⇒ 守卫不失效）。
+    #   ⚠ 姊妹 workflow（ci/security/ci-sim）**刻意不加 paths**——它们各有扫全仓的 job
+    #   （brand guard / XSS --all / ci_sim 全量门禁）且含分支保护 required check
+    #   ⇒ 加过滤会缩小验证面 ⇒ 违反「判据强度不可降」。详见坑表 E-84。
+    paths:
+      - '.github/workflows/**'
+      - 'scripts/check_action_refs.py'
   pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/**'
+      - 'scripts/check_action_refs.py'
   schedule:
     # W1067：每周一次「action ref 存在性」联网扫描（语义族：40-hex 但该仓库无此 commit）
     - cron: '0 3 * * 1'

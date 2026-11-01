@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-v1JmEW7gO5gLIS4w/YA0kjLqLY67iu3QvAlXRrF6Vwk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-v1JmEW7gO5gLIS4w/YA0kjLqLY67iu3QvAlXRrF6Vwk=' 'sha256-L7ZPLANwDJ+JlQGSa8mou3UrcPMc7UuLWAjRA/d5GNI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 <title>404 · 此页不在航线上 — 详解西游记</title>
@@ -19,7 +19,7 @@
 <!--
   W572 D-2 自定义 404 页（GitHub Pages 站点根 404.html 约定）
   自包含：内联样式（tokens 字面值 --paper-warm #F1EBDD / --ink #23201A / --ink-soft #6B6455 / --accent #C8463A），
-  零 JS、零外域、零图片；入口四链接（首页/数据看板/标签云/全文检索）。
+  零外域、零图片；入口四链接（首页/数据看板/标签云/全文检索）+ 返回上一页（W1074 R-08·单段内联脚本随 CSP 哈希管理）。
 -->
 <style>
   :root { --space-6: 24px; --space-8: 40px; --space-9: 48px; }  /* W914 C-B02：v4 间距令牌页内副本（与 site/tokens.css 同值·404 为自含小页不参与 inline_css 分发） */
@@ -93,10 +93,12 @@ else if(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)')
       <a href="dashboard.html">数据看板</a>
       <a href="data/tag-cloud.html">标签云</a>
       <a href="data/text-search.html">全文检索</a>
+  <button id="backBtn" type="button" style="margin-left:12px;background:none;border:1px solid #23201A;color:#23201A;padding:6px 14px;border-radius:4px;cursor:pointer;font:inherit">返回上一页</button>
     </nav>
     <p class="foot">详解西游记 · 一源多形数字人文可视化解读</p>
   </main>
 
 <div style="padding:16px 8px;text-align:center"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></div>
+<script>document.getElementById("backBtn").addEventListener("click",function(){history.back();});</script>
 </body>
 </html>
