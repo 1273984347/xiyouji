@@ -10,6 +10,56 @@
 
 ---
 
+## W1084 图表色工程批·塌缩真因定位（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1084 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1084 | 治理文档 |
+| AGENTS.md | W1084 | 治理文档 |
+| CHANGELOG.md | W1084 | 治理文档 |
+| CITATION.cff | W1084 | 治理文档 |
+| HANDOVER.md | W1084 | 治理文档 |
+| README.md | W1084 | 治理文档 |
+| STRUCTURE.md | W1084 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1084 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1084 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1084 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1084 | 治理文档 |
+| pytest.ini | W1084 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1084 | 治理文档 |
+| docs/00-导读/项目说明.md | W1084 | 治理文档 |
+| docs/INDEX.md | W1084 | 治理文档 |
+| docs/11-方案报告/README.md | W1084 | 治理文档 |
+| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1084 | 治理文档 |
+| docs/11-方案报告/计划方案/T45-任务计划执行与经验沉淀报告-2026-11-02.md | W1084 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1084 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1084 | 治理文档 |
+| docs/agent/pitfalls.md | W1084 | 治理文档 |
+| scripts/chart_render_probe.py | W1084 | 本批工具/产物 |
+| tests/unit/test_chart_render_probe.py | W1084 | 本批工具/产物 |
+| tests/unit/index.md | W1084 | 本批工具/产物 |
+| tests/unit/README.md | W1084 | 本批工具/产物 |
+| scripts/index.md | W1084 | 本批工具/产物 |
+| scripts/output/README.md | W1084 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1084.txt | W1084 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1084 | 本批工具/产物 |
+| scripts/output/_w1084_probe.json | W1084 | 本批工具/产物 |
+| scripts/output/_w1084_probe_diag.json | W1084 | 本批工具/产物 |
+| scripts/output/_w1084_spec.json | W1084 | 本批工具/产物 |
+| scripts/output/file-index.md | W1084 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1084 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1084 | 本批工具/产物 |
+| scripts/output/index.md | W1084 | 本批工具/产物 |
+| scripts/output/stats.json | W1084 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1084 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1084 | 页面 |
+| site/data/search.html | W1084 | 页面 |
+| site/data/tag-cloud.html | W1084 | 页面 |
+| site/dukou-engine.html | W1084 | 页面 |
+| site/en/search.html | W1084 | 页面 |
+| site/index.html | W1084 | 页面 |
+
 ## W1083 图表色工程批·结论链自审（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4578,11 +4628,4 @@ docs/11-方案报告/README.md
 |---|---|---|
 | scripts/_w955_motion_audit.py · scripts/check_interaction_binding.py | W972 | 内联脚本块正则宽容空白变体 |
 | scripts/check_data_drift.js | W972 | 转义先反斜杠后引号（顺序正确性） |
-
-## W971 存量段状态回填批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CHANGELOG.md | W971 | 102 段补状态行（99 已收官+1 补号+2 保留） |
-| scripts/_w929_stats_sync.py | W971 | 品牌字面量残留清偿（PR #66 品牌检查红项） |
 
