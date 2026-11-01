@@ -44,12 +44,12 @@
 
         .paths-grid {
             display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 20px; margin-top: var(--space-3);
+            gap: var(--space-5); margin-top: var(--space-3);
         }
         .path-card {
             background: var(--paper); border: 1px solid var(--line);
             border-radius: var(--radius-lg); padding: var(--space-6) 26px;
-            display: flex; flex-direction: column; gap: 12px;
+            display: flex; flex-direction: column; gap: var(--space-4);
             box-shadow: var(--elev-1);
             transition: border-color var(--dur-base) var(--ease-out-quart),
                         box-shadow var(--dur-base) var(--ease-out-quart),
@@ -67,7 +67,7 @@
         .path-card .pc-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
         .path-card ul { list-style: none; margin: var(--space-2) 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
         .path-card ul li a {
-            display: flex; align-items: center; gap: 8px;
+            display: flex; align-items: center; gap: var(--space-3);
             font-size: 14px; color: var(--accent-2); text-decoration: none;
             padding: 5px 0; border-bottom: 1px dashed var(--line);
         }

@@ -436,15 +436,15 @@ h4 { font-size: 18px; font-weight: 500; }
 .section-head {
     margin-bottom: clamp(28px, 4vw, 48px);
 }
-.section-head .kicker { margin-bottom: 12px; }
-.section-head h2 { margin-bottom: 8px; }
+.section-head .kicker { margin-bottom: var(--space-4); }
+.section-head h2 { margin-bottom: var(--space-3); }
 .section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
 
 .topnav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px clamp(24px, 6vw, 96px);
+    padding: var(--space-5) clamp(24px, 6vw, 96px);
     border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
@@ -456,7 +456,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--space-4);
 }
 .seal {
     width: 40px;
@@ -518,7 +518,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .topnav nav a:hover { color: var(--accent); }
 .topnav nav a.active { color: var(--ink); font-weight: 500; }
 @media (max-width: 768px) {
-    .topnav { padding: 16px 20px; }
+    .topnav { padding: 16px var(--space-5); }
     .topnav nav { gap: 16px; }
     .topnav nav a { font-size: 13px; }
     .wordmark { font-size: 16px; }
@@ -562,7 +562,7 @@ h4 { font-size: 18px; font-weight: 500; }
 }
 
 .hero .breadcrumb {
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
     font-size: 12px;
     color: rgba(242, 235, 220, 0.45);
 }
@@ -588,7 +588,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    gap: var(--space-5);
 }
 .card .card-kicker {
     font-size: 11px;
@@ -597,7 +597,7 @@ h4 { font-size: 18px; font-weight: 500; }
     letter-spacing: 0.08em;
     margin-bottom: 10px;
 }
-.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card h3 { font-size: 20px; margin-bottom: var(--space-3); }
 .card p { font-size: 14px; color: var(--ink-soft); }
 .card .card-meta {
     margin-top: 16px;
@@ -616,7 +616,7 @@ h4 { font-size: 18px; font-weight: 500; }
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     box-shadow: var(--elev-1);
-    padding: 20px;
+    padding: var(--space-5);
     transition: border-color var(--dur-base) var(--ease-out-quart),
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
@@ -636,12 +636,12 @@ h4 { font-size: 18px; font-weight: 500; }
     font-variant-numeric: tabular-nums;
 }
 .kpi .kpi-label {
-    margin-top: 8px;
+    margin-top: var(--space-3);
     font-size: 13px;
     color: var(--ink-soft);
 }
 .kpi .kpi-desc {
-    margin-top: 4px;
+    margin-top: var(--space-2);
     font-size: 11px;
     color: var(--ink-faint);
 }
@@ -653,7 +653,7 @@ h4 { font-size: 18px; font-weight: 500; }
     border-top: 3px solid var(--accent);
     border-radius: var(--radius-md);
     box-shadow: var(--elev-1);
-    padding: 20px;
+    padding: var(--space-5);
     transition: border-color var(--dur-base) var(--ease-out-quart),
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
@@ -667,9 +667,9 @@ h4 { font-size: 18px; font-weight: 500; }
     box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
                 var(--elev-2);
 }
-.kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.kpi-card .label, .kpi-card .kpi-label { margin-top: var(--space-3); font-size: 13px; color: var(--ink-soft); }
 .kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
-.kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
+.kpi-card .desc, .kpi-card .kpi-desc { margin-top: var(--space-2); font-size: 11px; color: var(--ink-faint); }
 
 .chart-block {
     background: var(--paper);
@@ -677,7 +677,7 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: var(--radius-md);
     box-shadow: var(--elev-1);
     padding: clamp(20px, 3vw, 32px);
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
 }
 .chart-block h3 {
     font-size: 18px;
@@ -686,7 +686,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .chart-block .chart-sub {
     font-size: 13px;
     color: var(--ink-soft);
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
 }
 .chart-block svg { width: 100%; height: auto; }
 
@@ -730,12 +730,12 @@ th {
     letter-spacing: 0.04em;
     color: var(--ink-soft);
     text-align: left;
-    padding: 12px 16px;
+    padding: var(--space-4) 16px;
     border-bottom: 1px solid var(--line);
     white-space: nowrap;
 }
 td {
-    padding: 12px 16px;
+    padding: var(--space-4) 16px;
     border-bottom: 1px solid var(--line);
     color: var(--ink);
 }
@@ -801,7 +801,7 @@ td.num, th.num {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    padding: 8px 12px;
+    padding: var(--space-3) var(--space-4);
     max-width: 280px;
     font-family: var(--font-sans);
     font-size: 12px;
@@ -865,10 +865,10 @@ td.num, th.num {
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-3);
     font-size: 14px;
     font-weight: 500;
-    padding: 10px 20px;
+    padding: 10px var(--space-5);
     border-radius: var(--radius-md);
     border: 1px solid var(--line);
     background: var(--paper);
@@ -896,11 +896,11 @@ td.num, th.num {
 
 .site-footer {
     border-top: 1px solid var(--line);
-    padding: 40px clamp(24px, 6vw, 96px);
+    padding: var(--space-8) clamp(24px, 6vw, 96px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
+    gap: var(--space-6);
     flex-wrap: wrap;
 }
 .site-footer .footer-brand {
@@ -915,7 +915,7 @@ td.num, th.num {
 }
 .site-footer nav {
     display: flex;
-    gap: 20px;
+    gap: var(--space-5);
 }
 .site-footer nav a {
     font-size: 13px;
@@ -933,7 +933,7 @@ td.num, th.num {
     width: 40px;
     height: 2px;
     background: var(--accent);
-    margin: 0 auto 24px;
+    margin: 0 auto var(--space-6);
 }
 .dark-band blockquote {
     font-family: var(--font-serif);
@@ -942,7 +942,7 @@ td.num, th.num {
     line-height: 1.9;
 }
 .dark-band .attr {
-    margin-top: 20px;
+    margin-top: var(--space-5);
     font-size: 12px;
     color: rgba(242, 235, 220, 0.5);
     letter-spacing: 0.08em;
@@ -952,9 +952,9 @@ td.num, th.num {
 .index-row {
     display: grid;
     grid-template-columns: 32px 220px 1fr auto;
-    gap: 20px;
+    gap: var(--space-5);
     align-items: center;
-    padding: 20px 0;
+    padding: var(--space-5) 0;
     border-bottom: 1px solid var(--line);
     transition: background 0.15s;
 }
@@ -980,7 +980,7 @@ td.num, th.num {
 @media (max-width: 768px) {
     .index-row {
         grid-template-columns: 1fr auto;
-        gap: 8px;
+        gap: var(--space-3);
     }
     .index-row .no { display: none; }
     .index-row .desc { grid-column: 1 / -1; }
@@ -988,9 +988,9 @@ td.num, th.num {
 
 .filter-tabs {
     display: flex;
-    gap: 8px;
+    gap: var(--space-3);
     flex-wrap: wrap;
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
 }
 .filter-tab {
     font-size: 13px;
@@ -1022,7 +1022,7 @@ td.num, th.num {
 .search-box input {
     width: 100%;
     font-size: 14px;
-    padding: 10px 16px 10px 40px;
+    padding: 10px 16px 10px var(--space-8);
     border: 1px solid var(--line);
     border-radius: var(--radius-pill);
     background: var(--paper);
@@ -1047,7 +1047,7 @@ td.num, th.num {
 
 .empty-state {
     text-align: center;
-    padding: 64px 24px;
+    padding: var(--space-10) var(--space-6);
     color: var(--ink-faint);
 }
 .empty-state .empty-icon {
@@ -1157,7 +1157,7 @@ td.num, th.num {
     .chart-block,
     .chart-wrap,
     .chart-container {
-        padding: 12px;
+        padding: var(--space-4);
     }
     .chart-tooltip {
         max-width: 220px;
@@ -1365,7 +1365,7 @@ html[data-theme="dark"] .chapter-plate {
     <div id="graphBox"></div>
   </div>
 </main>
-<footer>佛法=AI · 缘起即算法 · CI 提速批：暗色门禁拆分片 + 按需等待 + 批量截图并发 + 修 CodeQL 两处 · W1075 合并前红灯修复：跳转链接与跨行基线（跳转链接与跨行基线修复） · W1074 交互修复二三批合并：动线可达与生产净面（动线可达与生产净面修复） · W1073 首页首屏插画深色变体与主题切换机制落地（首屏插画深色变体与主题切换机制落地） · W1072 Skill 候选盘点与编制表角色优化方案落库（Skill 候选盘点与编制表角色优化） · W1071 交互修复第一批：搜索链接化与浮钮隐藏及计数归位（三裁决落地与搜索链接化修复） · W1070 交互审查第二轮复核与界面优化施工方案落库（生产态交互复核与界面施工方案交付） · W1069 效率与防护打包批：环境判据与 BOM 门禁及坑表条目（环境判据与 BOM 门禁及坑表条目落地） · W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批（触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批） · W1067 CI action ref 根修批 + 记忆与项目沉淀同步批（CI action ref 根修批 + 记忆与项目沉淀同步批） · W1065 《西游记》GitHub 生态全景调研批：全网检索实跑与存量调研承接（西游记 GitHub 生态全景调研与存量承接） · 并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化 · W1062 README 换图未生效根修批：换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70 · …更早批次详见 CHANGELOG.md<script>
+<footer>佛法=AI · 缘起即算法 · CI 提速批：暗色门禁拆分片 + 按需等待 + 批量截图并发 + 修 CodeQL 两处 · W1076 v4 视觉体系迁移首站落地：根页与入口八页开始消费 v4 令牌：间距字面量令牌化（零视觉差异）、dashboard 三件第二套实现回收、首页 stat/chip/card 组件化、页脚长文收敛、容器归并（v4 视觉体系迁移首站落地：根页与入口八页开始消费 v4 令牌，间距字面量与组件第二套实现同步收敛） · W1075 合并前红灯修复：跳转链接与跨行基线（跳转链接与跨行基线修复） · W1074 交互修复二三批合并：动线可达与生产净面（动线可达与生产净面修复） · W1073 首页首屏插画深色变体与主题切换机制落地（首屏插画深色变体与主题切换机制落地） · W1072 Skill 候选盘点与编制表角色优化方案落库（Skill 候选盘点与编制表角色优化） · W1071 交互修复第一批：搜索链接化与浮钮隐藏及计数归位（三裁决落地与搜索链接化修复） · W1070 交互审查第二轮复核与界面优化施工方案落库（生产态交互复核与界面施工方案交付） · W1069 效率与防护打包批：环境判据与 BOM 门禁及坑表条目（环境判据与 BOM 门禁及坑表条目落地） · W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批（触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批） · W1067 CI action ref 根修批 + 记忆与项目沉淀同步批（CI action ref 根修批 + 记忆与项目沉淀同步批） · W1065 《西游记》GitHub 生态全景调研批：全网检索实跑与存量调研承接（西游记 GitHub 生态全景调研与存量承接） · 并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化 · …更早批次详见 CHANGELOG.md<script>
 
 // ---- 渡口知识库（抽取自项目西游渡·翻面方法论）----
 const SENSORY = [

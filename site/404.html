@@ -22,7 +22,7 @@
   零外域、零图片；入口四链接（首页/数据看板/标签云/全文检索）+ 返回上一页（W1074 R-08·单段内联脚本随 CSP 哈希管理）。
 -->
 <style>
-  :root { --space-6: 24px; --space-8: 40px; --space-9: 48px; }  /* W914 C-B02：v4 间距令牌页内副本（与 site/tokens.css 同值·404 为自含小页不参与 inline_css 分发） */
+  :root { --space-3: 8px; --space-4: 12px; --space-6: 24px; --space-8: 40px; --space-9: 48px; }  /* W914 C-B02：v4 间距令牌页内副本（与 site/tokens.css 同值·404 为自含小页不参与 inline_css 分发） */
   /* e-track-exempt: chart-data-colors 9 处 —— W572 D-2 自包含 404 页（无 tokens.css 链接，字面值为 tokens.css 三色直译，有意设计） */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -54,14 +54,14 @@
   h1 {
     font-size: 22px;
     font-weight: 600;
-    margin: 16px 0 8px;
+    margin: 16px 0 var(--space-3);
   }
   p { font-size: 14px; color: #6B6455; line-height: 1.8; }
   .entries {
     margin-top: 28px;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: var(--space-4);
     justify-content: center;
   }
   .entries a {
@@ -74,7 +74,7 @@
     font-size: 14px;
   }
   .entries a:hover { background: #C8463A; color: #FFFFFF; }
-  .foot { margin-top: 24px; font-size: 12px; color: #6B6455; }
+  .foot { margin-top: var(--space-6); font-size: 12px; color: #6B6455; }
 </style>
 <script>
 // 夜读防 FOUC（与全站 W488 同款）
