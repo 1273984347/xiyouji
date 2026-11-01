@@ -49,7 +49,6 @@ ROOT_FILES = {
 
 # 顶层目录角色（与 STRUCTURE.md「目录职责」表一一对应）
 TOP_DIRS = {
-    "agent-guardrails": "AI 编码 agent 约束层（人工维护件·并行会话在建·W1076 批随布局门禁登记）",
     "archive": "退役件与历史批次",
     "assets": "设计母版与素材",
     "dataset": "结构化数据（从站点提取）",

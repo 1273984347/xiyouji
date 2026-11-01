@@ -36,8 +36,6 @@
 
 | `docs/` | Markdown 文档主体（00 导读 · 01-10 内容板块 · S2-S4 分享与学术轨 · archive/superpowers/_dev/_templates 支撑） |
 
-| `agent-guardrails/` | AI 编码 agent 约束层（人工维护件：合并补丁块 + 自检清单 + 只扫本次改动的 lint 脚本·W1076 批随布局门禁声明登记·并行会话在建） |
-
 | `source/` | 原著文本与外部引用 |
 
 | `site/` | 可浏览的 HTML 静态站点（D3.js 驱动） |
