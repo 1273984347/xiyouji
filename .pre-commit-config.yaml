@@ -60,11 +60,11 @@ repos:
 
       - id: agent-guardrails
         name: agent-guardrails（暂存区 .py 结构检查·W1077）
-        entry: bash scripts/guardrails/check_changed.sh --strict-api
-        language: system
+        entry: python scripts/guardrails/precommit_entry.py
+        language: python
         files: \.py$
         exclude: ^(tmpe/|.*/_[^/]*\.py$)
         pass_filenames: true
         always_run: false
-        # 与手写钩子同源（scripts/install_hooks.sh）；check_changed.sh 以 git write-tree 做同索引去重，
-        # 两条路径同时存在也只跑一遍；pre-commit install 覆盖手写钩子后本 hook 仍提供 guardrails 检查。
+        # 与手写钩子同源（scripts/install_hooks.sh）；entry 用 Python 入口显式定位 bash，
+        # 规避 Windows PATH 上的 WSL 中继；check_changed.sh 以 git write-tree 做同索引去重。

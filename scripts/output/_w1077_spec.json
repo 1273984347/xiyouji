@@ -36,6 +36,7 @@
     "| scripts/guardrails/api_diff.py | W1077 | 本批工具（迁移） |",
     "| scripts/guardrails/check_nested_comprehension.py | W1077 | 本批工具（迁移） |",
     "| scripts/guardrails/ruff-structure.toml | W1077 | 本批工具（迁移） |",
+    "| scripts/guardrails/precommit_entry.py | W1077 | pre-commit 本地 hook 入口（跨平台 bash 定位） |",
     "| scripts/guardrails/index.md | W1077 | 目录索引（生成物） |",
     "| scripts/guardrails/README.md | W1077 | 目录索引（生成物） |",
     "| docs/agent-guardrails/README.md | W1077 | 人工维护文档（迁移） |",
