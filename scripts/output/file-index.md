@@ -10,6 +10,73 @@
 
 ---
 
+## W1076 v4 视觉体系迁移首站：根页与入口八页消费 v4 令牌（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+| .agent/skills/puti-shouye/SKILL.md | W1076 | 治理文档 |
+| .github/workflows/README.md | W1076 | 治理文档 |
+| AGENTS.md | W1076 | 治理文档 |
+| CHANGELOG.md | W1076 | 治理文档 |
+| CITATION.cff | W1076 | 治理文档 |
+| HANDOVER.md | W1076 | 治理文档 |
+| README.md | W1076 | 治理文档 |
+| STRUCTURE.md | W1076 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1076 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1076 | 本批工具/产物 |
+| archive/scripts/batches/README.md | W1076 | 本批工具/产物 |
+| archive/scripts/batches/index.md | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/README.md | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_cjk_value_marks.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_j2_diff_report.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_j2_splice_dashboard.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_make_spec.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_space_tokens.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/index.md | W1076 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1076 | 治理文档 |
+| docs/00-导读/项目说明.md | W1076 | 治理文档 |
+| docs/11-方案报告/README.md | W1076 | 治理文档 |
+| docs/11-方案报告/计划方案/T42-任务计划执行与经验沉淀报告-2026-11-02.md | W1076 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1076 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1076 | 治理文档 |
+| docs/INDEX.md | W1076 | 治理文档 |
+| docs/agent/pitfalls.md | W1076 | 治理文档 |
+| scripts/_w1076_cjk_value_marks.py | W1076 | 本批工具/产物 |
+| scripts/_w1076_make_spec.py | W1076 | 本批工具/产物 |
+| scripts/_w1076_space_tokens.py | W1076 | 本批工具/产物 |
+| scripts/check_repo_layout.py | W1076 | 本批工具/产物 |
+| scripts/output/README.md | W1076 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1076.txt | W1076 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1076 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_report.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_after | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_after_root3.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_before | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_before_root3.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_dashboard_only.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_diff_report.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_spec.json | W1076 | 本批工具/产物 |
+| scripts/output/file-index.md | W1076 | 本批工具/产物 |
+| scripts/output/index.md | W1076 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1076 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1076 | 本批工具/产物 |
+| scripts/output/stats.json | W1076 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1076 | 本批工具/产物 |
+| scripts/visual_regression_probe.py | W1076 | 本批工具/产物 |
+| site/404.html | W1076 | 页面（v4 令牌消费） |
+| site/curated.html | W1076 | 页面（v4 令牌消费） |
+| site/dashboard.html | W1076 | 页面（v4 令牌消费） |
+| site/data/cross-time-danmaku.html | W1076 | 页面（v4 令牌消费） |
+| site/data/search.html | W1076 | 页面（v4 令牌消费） |
+| site/data/tag-cloud.html | W1076 | 页面（v4 令牌消费） |
+| site/dukou-engine.html | W1076 | 页面（v4 令牌消费） |
+| site/en/search.html | W1076 | 页面（v4 令牌消费） |
+| site/guide.html | W1076 | 页面（v4 令牌消费） |
+| site/index.html | W1076 | 页面（v4 令牌消费） |
+| site/rum-viewer.html | W1076 | 页面（v4 令牌消费） |
+| site/system.css | W1076 | 页面（v4 令牌消费） |
+
 ## W1075 合并前红灯修复微批（2026-10-31）
 
 | 文件 | W | 说明 |

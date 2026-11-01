@@ -717,6 +717,25 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+/* ===== chip（W826 卡片 ⑫ 新增 · 首页 .ask-chip 自建实现升为共享类） =====
+   W1076 手术 4：首页私样式已收敛至此（首页同时链接 system.css ⇒ 首页视觉零差异）。
+   传播登记：本类尚未同步进 ~250 页 INLINED 副本——共享层传播须与组件层批的
+   .filter-tab / .search-box 收敛同批一次做完（零散传播会造成源-副本失同步）。 */
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 /* ===== 空状态 ===== */
 .empty-state {
     text-align: center;
