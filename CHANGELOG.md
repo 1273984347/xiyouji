@@ -1,3 +1,51 @@
+### W1078（2026-11-02）：全站硬编码颜色盘点（B2 落地面）
+
+
+> **来源**：用户 2026-11-02 指令「完成 B2 全站硬编码颜色盘点，输出逐页清单、令牌映射和不可替换项」；承接 W1076（B1）收官时留下的程序重排口。
+>
+> **占号留痕**：`reserve_w.py` 占 **W1078**（W1077 已由并行会话落地并合并·`agent-guardrails/` 已迁进 `scripts/guardrails/` + `docs/agent-guardrails/` ⇒ 顶层目录清空）。
+>
+> - **文件**：archive/scripts/batches/w1078/_w1078_color_inventory.py · archive/scripts/batches/w1078/_w1078_make_spec.py · scripts/output/_w1078_color_inventory.json · scripts/output/_w1078_color_inventory.md · docs/11-方案报告/计划方案/T43-任务计划执行与经验沉淀报告-2026-11-02.md
+
+**本批要点**：
+
+① **扫描面全量**：site/ 下 **857** 个 HTML 页（根页 9 + data 88 + en 138 + reader 622），零抽样；硬编码 6 位 hex 合计 **77,580** 处，按七类归集（定义面 / 共享副本消费 / 页内私有消费 / 内联样式消费 / SVG 表现属性 / JS 字面量 / 标记文本）。
+
+② **可逐页消费的量极小**：页内私有 CSS **401** 处 + 内联样式 **665** 处 = **1,066** 处（占 1.4%）；JS 字面量 **5,041** 处（`var()` 在 SVG/Canvas 属性位不生效 ⇒ 需工程化读令牌喂图表）；共享副本消费 **57,090** 处（属共享层 ⇒ 改它级联全部内联页）；定义面 **15,166** 处（令牌定义本身·非消费面）；标记文本 312 处；**SVG 表现属性 0 处**（站点未在表现属性里写 hex ⇒ 省掉一类改造）。
+
+③ **B2 十页专项**（W826 §6「结构与回目」）：页内私有 **13** 处 + 内联样式 **38** 处 = 51 处可消费；JS 字面量 **183** 处；容器**全部已是 `var(--container-wide)`** ⇒ 无容器归并对象；`--chart-3` / `--chart-5` 的硬编码消费面为**空** ⇒ defer 登记簿「暗色 chart 新增」**不触发**；十页无 `#B38F58` 硬编码 ⇒ 「`--chart-3` 改值」亦不触发。
+
+④ **关键判据（拆开共享副本与页内私有）**：不拆则 B2 会被误判成「每页 55–60 处可换」⇒ 直接把逐页批误导成共享层改造（越裁决 5「每批 ≤10 页灰度」）；拆开后真实形状是「页内 19 处 + 共享副本 550 处」（十页口径）⇒ **B2 若照搬 B1 口径就会变成改共享层**。
+
+⑤ **程序重排建议（用实数支撑·重排属用户裁决项）**：建议「组件层批（共享层一次令牌化 + 一次 INLINED 传播 ⇒ 零视觉差异、覆盖 857 页）→ 图表色工程批（JS 侧令牌化·需设计）→ 逐页批只做真正的页内私有项」；并建议 J2 采集成本重新计价（B1 实测 24 页单拍约 40 分钟 ⇒ 逐批一次采集成本已高于其产出）。
+
+**验证**：盘点工具纯标准库、幂等、零页面改动（`git diff` 无 `site/**` 变更）· 扫描覆盖率 857/857 · 令牌表自 `site/tokens.css` 实解析（浅色 84 名 / 暗色 47 名）· 产物两件（md 约 40 KB 含逐页清单/映射总表/不可替换项/B2 专项/消费面；json 约 1.5 MB 机器版）· 全量门禁与 pytest 结果见 T43 报告 §3。
+
+### W1077（2026-11-02）：agent-guardrails 迁移批（脚本进 scripts/guardrails/·文档进 docs/agent-guardrails/·顶层目录删除）
+
+> **来源**：用户 2026-11-02 拍板方案 C 变体（只读调研 A/B/C 三方案后选定）：脚本进 `scripts/guardrails/` 子目录、文档进 `docs/` 非编号目录、fixture 进 `tests/fixtures/`、删除顶层 `agent-guardrails/`；**不动 `TOP_DIRS`**——顶层目录消失后第 52 槽自然转绿。
+>
+> **文件**：scripts/guardrails/check_changed.ps1 · scripts/guardrails/check_changed.sh · scripts/guardrails/once_call.py · scripts/guardrails/api_diff.py · scripts/guardrails/check_nested_comprehension.py · scripts/guardrails/ruff-structure.toml · scripts/guardrails/index.md · scripts/guardrails/README.md · scripts/index.md · docs/agent-guardrails/README.md · docs/agent-guardrails/merge-patch.md · docs/agent-guardrails/self-check.md · docs/agent-guardrails/index.md · docs/index.md · tests/fixtures/_sample.py · tests/fixtures/index.md · tests/fixtures/README.md · tests/index.md · CHANGELOG.md · HANDOVER.md · STRUCTURE.md · scripts/output/file-index.md · docs/00-导读/W批次编号对账表.md · CLAUDE.md · AGENTS.md · .git/hooks/pre-commit（不入库）
+
+**本批要点**：
+
+① **目录归位（C 变体）**——5 脚本 + `ruff-structure.toml` 迁 `scripts/guardrails/`；3 份文档（README / merge-patch / self-check）迁 `docs/agent-guardrails/`（非编号目录，`docs_index.py` 只收数字前缀目录 ⇒ 不进 `docs/INDEX.md`，不触发第 17 槽逐字节比对）；`_sample.py` 迁 `tests/fixtures/`（`pytest.ini` 的 `python_files = test_*.py` 已验不会误收）；顶层 `agent-guardrails/` 删除。
+
+② **9 处硬路径改写**——`check_changed.ps1` 4 处（cfg + 3 个子脚本）+ `check_changed.sh` 5 处（cfg + 3 个子脚本 + api_diff 的 strict 分支）全部指向 `scripts/guardrails/`；仓库根仍用 `git rev-parse --show-toplevel`；文档内路径引用（README / merge-patch / self-check + 钩子/CI 片段）同步改写。
+
+③ **清单刷新**——`scripts/index.md` 子目录 40→41；`tests/index.md` 2→3；`docs/index.md` 新增 `agent-guardrails/`；新建 `scripts/guardrails/` 与 `tests/fixtures/` 两件套；`docs/agent-guardrails/index.md` 由 `gen_folder_docs.py` 产出（README 为人工维护件，不带生成标记）。
+
+④ **门禁口径确认**——第 52 槽因顶层目录消失自然转绿（未改 `check_repo_layout.py` / `TOP_DIRS`）；第 42 槽只扫 `scripts/` **顶层**文件，`scripts/guardrails/` 子目录不进 C1 扫描；第 45 槽清单与实盘一致。
+
+⑤ **补丁并入与钩子挂载（A/B）**——根 `CLAUDE.md` 规则 17 + 常用命令 2 行、`AGENTS.md` §6-20 按 `merge-patch.md` 落位（52→55 行·≤60）；`.git/hooks/pre-commit` 在 gitleaks + verify_delivery 之后追加**暂存区 .py** 检查（`--strict-api` = 宽档阈值 + api_diff 阻断·once_call 仅提示），实测 3.6s / 3 文件；违规 6>4 可阻断、纯文档路径 exit 0。另新增 `scripts/install_hooks.sh`（幂等安装·标记块替换·LF 归一）+ `.ps1` 薄封装，并在 `.pre-commit-config.yaml` 增 `agent-guardrails` 本地 hook（`pre-commit install` 覆盖手写钩子后检查不消失；两条路径用 `git write-tree` 同索引去重，实测第二次 `[SKIP]`）。
+
+**验证**：
+- `py -3 scripts/check_repo_layout.py` → 0 FAIL
+- `py -3 scripts/check_script_coverage.py` → 根级脚本 157 / 四面引用 119 / 豁免 42 / 无引用无豁免 0
+- `py -3 scripts/verify_delivery.py --scope auto` → **核心全部通过 ✅（0 FAIL / 0 WARN·57 段）**
+- `check_changed -Paths tests/fixtures/_sample.py` → 结构档 2 条（嵌套 6>4、复杂度 17>15）+ 嵌套推导式 1 条 + once_call 提示全部命中；`-Paths` 指向非 .py → `[SKIP]` 退出码 0
+- **收口补记**：六处版本面同步（workflows README 头部+里程碑 / CHANGELOG 编号规则 / HANDOVER HEAD+末链 / CITATION）+ README 与项目说明当前批次行 + dukou 页脚 → 站内搜索索引重建（`docs=823`·`_gen_search_index.py`）+ CSP 重算（2 页）+ 坑表 E-73（198 条·五处计数链同步）
+
 ### W1076（2026-11-02）：v4 视觉体系迁移首站：根页与入口八页消费 v4 令牌
 
 
@@ -1365,7 +1413,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1076），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1078），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1832,20 +1880,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：AGENTS.md · CHANGELOG.md · scripts/output/file-index.md
 > **验证**：check_doc_sync 0 FAIL；verify --scope docs rc=0；八组编辑锚点全部唯一命中。
 > **状态**：**已收官**（W966 git 反填）（git 反填·含认领与级联与回填）
-
-### W965（2026-10-26）：脚注重生成与探针沉淀批（三令：沉淀/排期/重新生成）
-
-> **来源**：用户三令「可以沉淀；可以作为独立议题排期；重新生成内容」——对 W964 review 收尾三件事的逐令落地。
-> **摘要**：① **留存五条脚注重写**——去掉两条截断残迹（「…（W964 定形截断…）」句中省略号形态）与两条中文日期头，五条全部重写为「阿拉伯日期（W###）」头+完整成句 ≤300 字（W932/W934 从各自 CHANGELOG 段事实重写），脚注 2.4→1.9 KB。② **体积门禁 C4 逐条定形判据**——脚注每条 >300 字或条目头不可解析即红（比 C3 聚合 4KB 更细：五条各 290 字可绕过 C3 但逃不过 C4）。③ **扫描探针常驻化**——W964 挖出双虫的「解析器锚点 vs 原始形态全集」对拍法沉淀为 scripts/check_parser_anchor_coverage.py（七机制：脚注条目/里程碑块/头尾链/CHANGELOG 段/file-index 段/台账行/实体标记；报告型·基线 ② 类登记）；建置即抓自身假阴性一次——M3 探针假定「（W963）」紧闭形态而真实尾链是「（W963 描述）」，修后 4/4 全过。④ **HANDOVER 候选清单立「手搓绕过级联治理」独立议题**——实证三起（W955 版本面锚点破坏、W961/W963 连环手搓、里程碑只插不旋），候选三层方案（级联文件锁/版本行契约门禁/手搓前置劝导）附评审口径（②最薄优先）。⑤ 顺带：ruff 清零 2 处（含 verify_delivery 缺文件尾换行的 W292）。
-> **文件**：AGENTS.md · HANDOVER.md · scripts/check_doc_size_budget.py · scripts/check_parser_anchor_coverage.py · scripts/check_gsap_motion.py · scripts/verify_delivery.py · scripts/output/script-coverage-baseline.txt · tests/unit/test_doc_size_budget.py · CHANGELOG.md · scripts/output/file-index.md · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
-> **验证**：探针 --self-test 过（盲区可报出+干净可放行）+ 现网七机制全绿（5/5·5/5·4/4·242⊆600·562/562·313/313·10/10）+ 体积门禁 C4 负样本单测 + pytest 全量 916 收集全绿（915→916 标记三方同步）+ ruff 全仓清零。
-> **状态**：**已收官**（W965 597fc061 主提交 + 9e80fe6f 级联落盘·git 反填）
-
-### W964（2026-10-26）：AGENTS 版本脚注治理批（滚动器双形态 + 条目定形 + 存量清理 + 同族扫描）
-
-> **来源**：用户审问「AGENTS.md 文件下面的内容都是什么东西？没用的内容为什么这么多」——取证为版本脚注 85.7KB 冻结，用户裁决「开始」并令全仓同族扫描。
-> **摘要**：① **滚动器双日期形态修复**——切分器原仅认阿拉伯日期，52 条「二〇二六年十月二十日（W###）」中文数字条目对其不可见，黏成 14.7KB 与 67.1KB 两条巨段，切分器恒报 5 条致「保留最近 5 条」滚动永不触发（5 不大于 5）；切分正则扩为双形态。② **条目定形契约（precheck 强制）**——agents_note 必须以「阿拉伯日期（W###）」条目头开场且 ≤300 字（脚注是索引不是摘要·细节归 CHANGELOG）；中文数字日期字形实证为 U+3007 体系、修复时另暴露字符类漏「十」的连带缺陷一并修正。③ **存量一次性清理**——拆出 75 条真实条目（W807-W960），按号留最新 5 条（W930/932/934/956/960）并定形截断（截断前逐条断言 CHANGELOG 有段），其余 70 条（W807-W928）整段迁 AGENTS-ARCHIVE 新 fenced 块；正本脚注 85.7→3.3 KB，AGENTS.md 110.1→27.2 KB（-75%）。④ **体积门禁 C3 硬判据**——AGENTS 版本脚注 >4KB 即红（负样本回归锁）。⑤ **里程碑旋转器括注块形态修复（同族扫描实证）**——块正则「加粗闭合后紧跟冒号」对「**W955 …**（计划批）：」形态失明，6 块（W955/W913/W912/W903/W901/W860）永不旋转；放宽为允许 ≤30 字括注后 6 块现形，窗口 15 块归一为 5（丢弃块逐个断言 CHANGELOG 有段）。⑥ **全仓同族扫描结论**——台账 312/312、stats 标记 23/23、脚注 5/5、CHANGELOG/file-index/页脚 token 全过（扫描式误报 3 项已甄别）；**前瞻登记：19 个脚本 65 处 W\d{3} 三位号正则，W1000 仅余 36 批，需独立批次迁移为 W\d{3,4}**。
-> **文件**：scripts/batch_cascade.py · scripts/check_doc_size_budget.py · tests/unit/test_doc_size_budget.py · AGENTS.md · archive/docs/AGENTS-ARCHIVE.md · HANDOVER.md · CHANGELOG.md · scripts/output/file-index.md
-> **验证**：体积门禁自测 + 单测 5 例全绿（含脚注 4KB 负样本）；单测全量 657 passed；清理守恒断言全过（75=5+70·迁出逐条入档）；窗口归一断言全过（15→5·指针 W956）；脚注定形断言由本 spec 自身过检（127 字）。
-> **状态**：**已收官**（W964 6a34c21d 主提交 + 21e9e223 级联落盘·git 反填·共 4 笔含认领与回填）
 

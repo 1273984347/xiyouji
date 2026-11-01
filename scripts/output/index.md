@@ -12,12 +12,13 @@
 - `data/`
 - `figures/`
 
-## 文件（457）
+## 文件（462）
 
 ### Markdown 文档
 
 - `_a02_matrix_body.md`
 - `_s23_full_matrix.md`
+- `_w1078_color_inventory.md`
 - `file-index.md`
 - `rag_eval_report.md`
 - `stats-index.md`
@@ -98,6 +99,7 @@
 - `_cascade_files_W1074.txt`
 - `_cascade_files_W1075.txt`
 - `_cascade_files_W1076.txt`
+- `_cascade_files_W1078.txt`
 - `_cascade_files_W751.txt`
 - `_cascade_files_W761.txt`
 - `_cascade_files_W816.txt`
@@ -271,6 +273,9 @@
 - `_w1076_j2_dashboard_only.json`
 - `_w1076_j2_diff_report.json`
 - `_w1076_spec.json`
+- `_w1077_spec.json`
+- `_w1078_color_inventory.json`
+- `_w1078_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
