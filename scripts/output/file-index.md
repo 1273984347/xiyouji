@@ -10,6 +10,35 @@
 
 ---
 
+## W1080 图表色工程批·档 1 假设证伪与回退（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1080 | 治理文档 |
+| CHANGELOG.md | W1080 | 治理文档 |
+| HANDOVER.md | W1080 | 治理文档 |
+| README.md | W1080 | 治理文档 |
+| STRUCTURE.md | W1080 | 治理文档 |
+| archive/scripts/batches/w1079/index.md | W1080 | 本批工具/产物 |
+| archive/scripts/batches/w1080/_w1080_make_spec.py | W1080 | 本批工具/产物 |
+| archive/scripts/batches/w1080/_w1080_revert_style_tokenize.py | W1080 | 本批工具/产物 |
+| archive/scripts/batches/w1080/_w1080_style_tokenize.py | W1080 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1080 | 治理文档 |
+| docs/00-导读/项目说明.md | W1080 | 治理文档 |
+| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1080 | 治理文档 |
+| scripts/_w1080_make_spec.py | W1080 | 本批工具/产物 |
+| scripts/_w1080_style_tokenize.py | W1080 | 本批工具/产物 |
+| scripts/index.md | W1080 | 本批工具/产物 |
+| scripts/output/README.md | W1080 | 本批工具/产物 |
+| scripts/output/_w1080_j2_after | W1080 | 本批工具/产物 |
+| scripts/output/_w1080_j2_before | W1080 | 本批工具/产物 |
+| scripts/output/_w1080_j2_diff.json | W1080 | 本批工具/产物 |
+| scripts/output/_w1080_spec.json | W1080 | 本批工具/产物 |
+| scripts/output/file-index.md | W1080 | 本批工具/产物 |
+| scripts/output/index.md | W1080 | 本批工具/产物 |
+| scripts/output/stats.json | W1080 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1080 | 本批工具/产物 |
+
 ## W1079 图表色工程批·形态取证与三档方案（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4519,15 +4548,4 @@ docs/11-方案报告/README.md
 | archive/docs/W批次编号对账表-ARCHIVE.md | W968 | 新容器：迁入 256 行（W648-W907·号占用留痕合看为准） |
 | scripts/check_doc_size_budget.py | W968 | C5 台账 60 行窗硬判据（ledger 计数形态） |
 | scripts/check_parser_anchor_coverage.py | W968 | M5 台账探针合看归档（316/316） |
-
-## W967 治理文档数字断言全面对账批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/00-导读/协议边界速查.md | W967 | 六板块字母与篇数纠偏（系统性错位一格）+ S1 残迹订正 |
-| docs/00-导读/文档规范.md | W967 | 「全量」段数 45→55（随挂槽演进措辞） |
-| docs/agent/gates.md | W967 | 根级脚本数冻结快照改活口径 |
-| CLAUDE.md | W967 | 接手导航「通读」矛盾改按需读节 |
-| scripts/check_gov_doc_claims.py | W967 | 新建数字断言对账器（五组断言·preflight 提示位接线·报告型） |
-| scripts/ledger_backfill.py | W967 | 写路径行尾归一（append 裸 LF 边界病根）+ E741 |
 
