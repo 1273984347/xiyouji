@@ -13,6 +13,14 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W967（2026-10-26）：治理文档数字断言全面对账批（举一反三·用户令）
+
+> **来源**：用户令「举一反三，再全面检查一下本项目内其他全部文件内容有没有类似问题」——W966 摘要层三缺陷（过期数字/自相矛盾/叙事入摘要）的跨文档普查。
+> **摘要**：① **真漂移四处纠偏**——文档规范「全量=verify full 45 段」→全部执行段现役 55 段随挂槽演进；协议边界速查六板块字母系统性错位一格（02-人物标 A2/44 篇实为 A3/215 篇等五处）另 S1 残迹（目录已改名 S3）；gates.md 根级脚本「现 118 个」冻结快照改活口径；CLAUDE.md 接手导航「AGENTS.md 通读」与索引型契约矛盾改按需读节。② **探针沉淀常驻**——scripts/check_gov_doc_claims.py（N1 速查六板块字母与篇数对 docs 磁盘实算[剔除生成件口径]/N2 文档规范全量段数对 verify EXPECTED_SECTION_NAMES 实数/N3 槽数对 gates 编号条目/N4 坑位数对 pitfalls 逐节计数/N5 新Agent启动Prompt 三键对 stats.json；报告型+preflight 提示位接线 WARN 不拦截+基线 ② 登记）；自测含 W967 实证错位形态必红样本；建置即纠自身口径假漂移一次（磁盘计数误含目录生成件·剔除后与官方数恰合）。③ 现网七断言全一致（速查 100/215/209/34/13/44·55 段·50 槽·57 条·615/87/88）。
+> **文件**：docs/00-导读/协议边界速查.md · docs/00-导读/文档规范.md · docs/agent/gates.md · CLAUDE.md · scripts/check_gov_doc_claims.py · scripts/preflight_check.py · scripts/ledger_backfill.py · scripts/check_gsap_motion.py · scripts/verify_delivery.py · scripts/output/script-coverage-baseline.txt · CHANGELOG.md · scripts/output/file-index.md · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
+> **验证**：对账器 --self-test 过（实证错位形态必红）+ 现网七断言全一致 + preflight 提示位接线实测输出 + pytest 全量 914 passed（917 收集·标记三方同步）+ ruff 全仓清零（含 ledger E741 与 gsap F401 顺带）。
+> **状态**：**已收官**（W967 git 反填·含认领与级联与回填）
+
 ### W966（2026-10-26）：AGENTS 摘要层纠偏与去冗批（用户令「内容别说废话和没用的东西」）
 
 > **来源**：用户通读 AGENTS.md 后令「内容别说废话和没用的东西」。
