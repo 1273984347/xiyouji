@@ -1,3 +1,22 @@
+### W1081（2026-11-02）：图表色工程批·档 1′ 因果复核与试点口径定案
+
+
+> **来源**：承接 W1080 的档 1 证伪（用户 2026-11-02「继续」令）。
+>
+> - **文件**：docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md · scripts/output/_w1081_rev_a.json · scripts/output/_w1081_rev_b.json · scripts/output/_w1081_spec.json
+
+**本批要点**：
+
+① **因果复核（防「证伪」本身是假阳性）**——回退态**同态连拍两拍** = light **532** / dark **533**（两拍逐值一致）且与改动前基线**逐值相同**；`var()` 版稳定在 light **108** / dark **109** ⇒ 差异由改动造成，**不是采集抖动** ⇒ W1080 的证伪结论**成立**。
+
+② **机理定位**——元素数下降 = 元素从「可见」变「不可见」（探针可见性判据 = display / visibility / 零尺寸）⇒ `var(--chart-1)` 串进入 **SVG 文本量测与避让**路径（D3 量文本宽度取到 0）⇒ 避让算法把文本整批隐藏 ⇒ **图表看起来空了一半**（不是颜色变了，是元素没了）⇒ 这解释了为何「只比颜色属性」的判据全绿。
+
+③ **试点口径定案**——试点页 `site/en/global-pattern.html`（2 处：行 1894 `.style("stroke","#c8463a")` / 行 1903 `.style("fill","#c8463a")`，均在 `renderTimeline` 的「公元元年参考线」与「1 CE」标签）⇒ 改法 = 渲染时 `tok('chart-1')` **求值实际色值**再喂（**禁止 `var()` 串**）⇒ 判据四件：**渲染完整性**（两拍元素数与改动前逐值相同 light 532 / dark 533）· 浅色零差异 · 暗色色值来源为令牌 · 残留扫描 = 0。
+
+④ **本批零页面改动**（只读复核 + 方案定案）· 复核证据件 `_w1081_rev_a/b.json` 入仓可复算 · 试点施工另起批。
+
+**验证**：T44 报告结构合规（第 48 门禁判据器自测 0 不符合）· 复核证据三组可对拍（改动前基线 / 改动后 / 回退态两拍）· 全量门禁与 pytest 结果见台账与提交说明。
+
 ### W1080（2026-11-02）：图表色工程批·档 1 假设证伪与回退
 
 
@@ -1457,7 +1476,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1080），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1081），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1900,12 +1919,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：scripts/batch_cascade.py 等 22 脚本 · tests/unit/test_four_digit_wnum.py · tests/unit/test_release_prep.py · docs/00-导读/W批次编号对账表.md
 > **验证**：迁移后残留三位号 0（非 _ 脚本）+ ruff 清零 + 六解析器 --self-test 全过 + pytest 全量 919 passed（917→919 收集·标记三方同步）+ C4 经 D2 豁免放行实测。
 > **状态**：**已收官**（W969 6a34c21d 前认领 13ef9678 + 迁移主体 93e98e6b·git 反填）
-
-### W968（2026-10-26）：台账对账表窗口制拆分批（用户令「拆分一下文件储存大小太大」）
-
-> **来源**：用户令「台账拆分一下，文件储存大小太大」——446.6KB/315 行（行均 1.3KB·最大 5KB）。
-> **摘要**：① **号序切分**（非位置切分——行序实测 52 处穿插，W940/W942 等行插在文件前部）——正本留 W≥908 共 60 行（活跃区 W908-W968），其余 256 行（W648-W907）整行迁 archive/docs/W批次编号对账表-ARCHIVE.md 新容器（追加式+迁档注记），正本 446.6→150.3 KB（-296KB）。② **守恒断言五道**——行数守恒（315=60+256）/迁出行逐条字节入档/正本非行内容逐字节不动（表头规则、现势停用块、ASCII 纪律段）/parse_ledger 语义不变（max W、撞号检测、在途行集合三者前后一致）/号区间不交叠（迁出最大 < 留存最小）。③ **ASCII 纪律段补迁档注记**（号占用留痕以正本+归档合看为准）。④ **体积门禁 C5 台账 60 行窗硬判据**（与 CHANGELOG/file-index 同族——超窗即红·修法指向后续台账归档工具化）；本批认领行 +1 后恰 60 满窗。⑤ **M5 探针合看归档**（正本+归档 316/316 全覆盖）。⑥ **消费方核验**——preflight/ledger_backfill/check_doc_sync C4（近 15 提交 ⊆ 窗口）/check_review_trigger/agent_start/batch_cascade 全部只吃近期行·无需改动；ledger_close_check 注册集合语义在归档头注声明合看。⑦ CHANGELOG/file-index 随批回窗（111→109）。
-> **文件**：docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · scripts/check_doc_size_budget.py · scripts/check_parser_anchor_coverage.py · tests/unit/test_doc_size_budget.py · CHANGELOG.md · scripts/output/file-index.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md
-> **验证**：迁移守恒断言五道全过 + parse_ledger 前后对拍（max=W967 不变·在途集合不变）+ 体积门禁三窗全绿（109/110·109/110·60/60）+ M5 316/316 + pytest 全量 914 passed + ruff 清零。
-> **状态**：**已收官**（W968 git 反填·含认领与拆分与级联与回填）
 
