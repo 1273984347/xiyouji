@@ -26,7 +26,19 @@ import json
 import os
 import re
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def _repo_root():
+    """向上找仓库根（带 .git 的目录）——脚本归档到 archive/scripts/batches/w1076/ 后仍可用。"""
+    cur = os.path.dirname(os.path.abspath(__file__))
+    while True:
+        if os.path.isdir(os.path.join(cur, ".git")):
+            return cur
+        parent = os.path.dirname(cur)
+        if parent == cur:
+            raise SystemExit("未找到仓库根（.git）")
+        cur = parent
+
+
+ROOT = _repo_root()
 SITE = os.path.join(ROOT, "site")
 PAGES = ["index", "guide", "curated", "dashboard", "dukou-engine",
          "rum-viewer", "visit-viewer", "404"]
@@ -113,6 +125,8 @@ def process(path):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true",
+                    help="只报告不落盘（默认即为干跑·须 --apply 才写盘）")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--report", default="")
     ns = ap.parse_args()

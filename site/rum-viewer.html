@@ -40,7 +40,7 @@
             min-width: 150px;
         }
         /* W1076 defer 落地（任务书 §8「暗色 --accent #E46250·页面硬编码暗色 accent 的随批替换」）：
-           硬编码 #C8463A → var(--accent)（浅色同值·暗色随 W876 改值对齐 = 有意变化·逐项列举）。
+           硬编码 #C8463A → var(--accent)（本页未接夜读开关 ⇒ --accent 恒为浅色值 #C8463A ⇒ 实测零可见差异·同值空转）。
            注：本页 .stat 的字号/字色与卡片 ⑧（30px mono ink-1）不一致，属组件层批待办·本批不动。 */
         .stat .num { font-size: 24px; font-weight: 700; color: var(--accent); }
         .stat .lbl { font-size: 13px; color: var(--ink-soft, #6b6b6b); }

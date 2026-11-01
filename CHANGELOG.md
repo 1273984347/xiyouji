@@ -5,7 +5,7 @@
 >
 > **让号留痕**：W1076 已由前一 session 占号并在台账写入在途认领行 ⇒ 本 session 续作同一批，不另占号、不撞号。
 >
-> - **文件**：site/index.html · site/guide.html · site/curated.html · site/dashboard.html · site/dukou-engine.html · site/rum-viewer.html · site/404.html · site/system.css · site/data/cross-time-danmaku.html · site/data/tag-cloud.html · archive/scripts/batches/w1076/_w1076_space_tokens.py · archive/scripts/batches/w1076/_w1076_cjk_value_marks.py · archive/scripts/batches/w1076/_w1076_make_spec.py · archive/scripts/batches/w1076/_w1076_j2_diff_report.py · scripts/output/_w1076_spec.json · scripts/output/_w1076_j2_before · scripts/output/_w1076_j2_before_root3.json · scripts/output/_w1076_j2_after · scripts/output/_w1076_j2_after_root3.json · scripts/output/_w1076_j2_diff_report.json · scripts/output/_cascade_files_W1076.txt · docs/11-方案报告/计划方案/T42-任务计划执行与经验沉淀报告-2026-11-02.md
+> - **文件**：site/index.html · site/guide.html · site/curated.html · site/dashboard.html · site/dukou-engine.html · site/rum-viewer.html · site/404.html · site/system.css · site/data/cross-time-danmaku.html · site/data/tag-cloud.html · archive/scripts/batches/w1076/_w1076_space_tokens.py · archive/scripts/batches/w1076/_w1076_cjk_value_marks.py · archive/scripts/batches/w1076/_w1076_make_spec.py · archive/scripts/batches/w1076/_w1076_j2_diff_report.py · scripts/output/_w1076_spec.json · scripts/output/_w1076_j2_before · scripts/output/_w1076_j2_before_root3.json · scripts/output/_w1076_j2_after · scripts/output/_w1076_j2_after_root3.json · scripts/output/_w1076_j2_diff_report.json · scripts/output/_cascade_files_W1076.txt · site/data/search.html · site/en/search.html · docs/11-方案报告/计划方案/T42-任务计划执行与经验沉淀报告-2026-11-02.md
 
 **本批要点**：
 
@@ -24,6 +24,8 @@
 ⑦ **证明面补强**——J2 探针默认采样 21 页**不覆盖** dukou-engine / rum-viewer / visit-viewer（本批改动量最大的 55 处正在 dukou-engine）⇒ 动工前补拍 3 页基线（209 元素），把 B1 的 8 页全部纳入零差异证明面。
 
 ⑧ **两处门禁冲突在本批收口**——① 第 49 槽朱砂实底限额：共享实现的朱砂顶条落到 dashboard 8 张 KPI 卡（>3 处·裁决 2 硬拦）⇒ 保留 1px 发丝线顶边（**裁决 2 优先于卡片 ② 的顶线默认态**）；② 第 52 槽仓库布局：并行会话新建顶层目录 `agent-guardrails/` 未声明角色 ⇒ 按门禁自带修法补声明（TOP_DIRS + STRUCTURE.md），其件不进本批。
+
+⑩ **独立对抗复核已过（只读审计）**——8 项工程声明的代码事实逐条实读属实（无「改了个数没改对」/「删规则无人接管」/「类名残留引用」三类缺陷）；探针未被削弱（`_diff_snapshots` 逐字未动·独立复算 2098 条逐条一致）；查出的阻断项（L3 陈腐）已由第三笔修掉；报告数字与口径更正（index 计数 148→162、8 条索引配对假阳性、J2 三处盲区披露、级联规模订正为 330 页、rum-viewer 注释口径）已并入本批。
 
 ⑨ **CI 红灯根修（PR #73）**——首轮「Delivery Gate」红在第 52 槽（L3 白名单陈腐）：本批曾为他方**未跟踪**的顶层目录 `agent-guardrails/` 做仓内声明 ⇒ 清洁检出无该目录 ⇒ 声明陈腐 ⇒ 回退声明（仓内不声明未入库目录·他方件未暂存/未删/未改）·清洁检出语义复跑 0 FAIL·提交态由 CI 判绿。
 

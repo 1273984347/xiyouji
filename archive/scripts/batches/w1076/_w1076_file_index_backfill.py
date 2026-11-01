@@ -35,5 +35,8 @@ if not m:
 body = m.group(2).rstrip("\n")
 new_body = ("\n" + "\n".join(rows) + "\n") if body.strip() == "" else body
 new = text[:m.start(2)] + new_body + text[m.end(2):]
-IDX.write_text(new, encoding="utf-8", newline="")
-print("file-index W1076 段已回填 %d 行登记（原体为空壳）" % len(rows))
+if "--apply" in sys.argv:
+    IDX.write_text(new, encoding="utf-8", newline="")
+    print("file-index W1076 段已回填 %d 行登记（原体为空壳·已写盘）" % len(rows))
+else:
+    print("file-index W1076 段将回填 %d 行登记（dry-run·须 --apply 才写盘）" % len(rows))
