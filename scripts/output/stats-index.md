@@ -23,8 +23,8 @@
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W894 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W904 |
 | methodology_docs | 27 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | 1068 |
-| pytest_collected | 1107 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1084 |
-| report_docs | 113 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1084 |
+| pytest_collected | 1107 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1086 |
+| report_docs | 114 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 1086 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -37,6 +37,15 @@
 | w864_entries | 256 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1053 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1086（2026-11-02 07:15:36）
+- pytest_collected: 1106 → 1107
+
+### W1086（2026-11-02 07:01:30）
+- pytest_collected: 1107 → 1106
+
+### 1086（2026-11-02 06:58:16）
+- report_docs: 113 → 114
 
 ### W1084（2026-11-02 06:30:38）
 - pytest_collected: 1098 → 1107

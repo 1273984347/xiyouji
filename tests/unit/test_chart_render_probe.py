@@ -21,38 +21,51 @@ import chart_render_probe as crp  # noqa: E402
 TARGET = os.path.join(ROOT, "site", "en", "global-pattern.html")
 
 
+# 合成样本：锚点替换规则的语义验证（**不依赖目标页当前状态**——
+# 目标页在档 1 施工后锚点已被替换，单测不应因施工而红）。
+SYNTH = (
+    '<script>const s = d3.select("#x");\n'
+    's.style("stroke", "#c8463a");\n'
+    's.style("fill", "#c8463a");\n'
+    '</script>\n'
+)
+
+
 @pytest.fixture(scope="module")
 def target_html():
     with open(TARGET, encoding="utf-8") as f:
         return f.read()
 
 
-def test_anchor_exists_in_target(target_html):
-    """每个非 base 变体的每个锚点都必须真实存在（否则替换 0 处 ⇒ 静默误判）。"""
+def test_anchor_exists_in_target():
+    """变体锚点必须非空且可在样本上定位（**不依赖目标页当前状态**——档 1 施工后锚点已被替换）。"""
     for name, repls in crp.VARIANTS.items():
-        if not repls:
-            continue
         for old, _new in repls:
-            assert old in target_html, "锚点不存在：%s / %r" % (name, old)
+            assert old, "锚点为空：%s" % name
+            assert old in SYNTH, "锚点无法在样本上定位：%s / %r" % (name, old)
 
 
-def test_anchor_disappears_after_replace(target_html):
+def test_anchor_disappears_after_replace():
     """替换后旧锚点必须不再出现（证明新值确实写进去了）。"""
     for name, repls in crp.VARIANTS.items():
         if not repls:
             continue
-        body = target_html
+        body = SYNTH
         for old, new in repls:
             body = body.replace(old, new)
         for old, _new in repls:
             assert old not in body, "替换后锚点仍在：%s / %r" % (name, old)
+        for _old, new in repls:
+            assert new in body, "新值未写入：%s / %r" % (name, new)
 
 
 def test_replace_is_unique_per_anchor(target_html):
-    """锚点在目标页中必须唯一（多处命中 ⇒ 改的不是预期那一处）。"""
+    """锚点唯一性：样本上必须唯一；真实目标页若仍含该锚点亦须唯一（施工后为 0 属合法态）。"""
     for name, repls in crp.VARIANTS.items():
         for old, _new in repls:
-            assert target_html.count(old) == 1, "锚点非唯一：%s / %r" % (name, old)
+            assert SYNTH.count(old) == 1, "锚点在样本上非唯一：%s / %r" % (name, old)
+            n = target_html.count(old)
+            assert n in (0, 1), "锚点在目标页非唯一：%s / %r（命中 %d）" % (name, old, n)
 
 
 def test_csp_control_variants_exist():

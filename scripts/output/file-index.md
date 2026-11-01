@@ -10,6 +10,60 @@
 
 ---
 
+## W1086 图表色工程批·档 1 试点施工（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1086 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1086 | 治理文档 |
+| AGENTS.md | W1086 | 治理文档 |
+| CHANGELOG.md | W1086 | 治理文档 |
+| CITATION.cff | W1086 | 治理文档 |
+| HANDOVER.md | W1086 | 治理文档 |
+| README.md | W1086 | 治理文档 |
+| STRUCTURE.md | W1086 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1086 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1086 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1086 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1086 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1086 | 治理文档 |
+| docs/00-导读/项目说明.md | W1086 | 治理文档 |
+| docs/11-方案报告/README.md | W1086 | 治理文档 |
+| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1086 | 治理文档 |
+| docs/11-方案报告/计划方案/T45-任务计划执行与经验沉淀报告-2026-11-02.md | W1086 | 治理文档 |
+| docs/11-方案报告/计划方案/T46-任务计划执行与经验沉淀报告-2026-11-02.md | W1086 | 治理文档 |
+| docs/agent/pitfalls.md | W1086 | 治理文档 |
+| scripts/chart_render_probe.py | W1086 | 本批工具/产物 |
+| scripts/output/README.md | W1086 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1086.txt | W1086 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1086 | 本批工具/产物 |
+| scripts/output/_w1086_j2_after | W1086 | 本批工具/产物 |
+| scripts/output/_w1086_j2_before_1page.json | W1086 | 本批工具/产物 |
+| scripts/output/_w1086_probe.json | W1086 | 本批工具/产物 |
+| scripts/output/_w1086_spec.json | W1086 | 本批工具/产物 |
+| scripts/output/file-index.md | W1086 | 本批工具/产物 |
+| scripts/output/index.md | W1086 | 本批工具/产物 |
+| scripts/output/stats.json | W1086 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1086 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1086 | 页面 |
+| site/data/search.html | W1086 | 页面 |
+| site/data/tag-cloud.html | W1086 | 页面 |
+| site/dukou-engine.html | W1086 | 页面 |
+| site/en/global-pattern.html | W1086 | 页面 |
+| site/en/search.html | W1086 | 页面 |
+| site/index.html | W1086 | 页面 |
+| tests/unit/README.md | W1086 | 本批工具/产物 |
+| tests/unit/index.md | W1086 | 本批工具/产物 |
+| tests/unit/test_chart_render_probe.py | W1086 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/界面与交互优化施工方案-2026-10-31.md | W1086 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1086 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1086 | 治理文档 |
+| docs/INDEX.md | W1086 | 治理文档 |
+| docs/agent/batch-closeout-checklist.md | W1086 | 治理文档 |
+| scripts/output/stats-changelog.json | W1086 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1086 | 本批工具/产物 |
+| pytest.ini | W1086 | 治理文档 |
+
 ## W1084 图表色工程批·塌缩真因定位（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4621,11 +4675,4 @@ docs/11-方案报告/README.md
 | HANDOVER.md | W973 | 五区清理：87.2→40.6KB（历史迁档+指针化） |
 | archive/docs/HANDOVER-ARCHIVE.md | W973 | 迁入五区历史（零阻塞+候选+方法论+雷区+待办） |
 | scripts/check_doc_size_budget.py | W973 | C6 HANDOVER 45KB 硬判据 |
-
-## W972 CodeQL 三高危修复批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w955_motion_audit.py · scripts/check_interaction_binding.py | W972 | 内联脚本块正则宽容空白变体 |
-| scripts/check_data_drift.js | W972 | 转义先反斜杠后引号（顺序正确性） |
 
