@@ -32,11 +32,25 @@ W827 是另一批·P0-01 阅读入口打通）。
 - **零依赖**：stdlib + playwright；playwright 缺失 = 明确报错退出 1，**不静默跳过**
   （与 obs_sample 拒收启发式估算同族纪律——没有证据不许说「通过」）。
 
+## 采样顺序依赖（W1076 B1 实证·2026-11-02）
+
+**页面内容若来自 localStorage（遥测队列 / 访问日志 / 阅读进度等），本探针的采样顺序会污染结果。**
+实证：`site/rum-viewer.html`（读 `localStorage.rum_queue`）与 `site/visit-viewer.html`
+（读访问日志）在「前序 21 页导航 → 再采该页」时元素数从 45/33 跳到 189/129，
+而「同页序重拍」后两拍一致（209 = 209）⇒ 那批差异是**采集面污染**，不是产品变化。
+
+处置口径：
+- 前后两拍**必须同页序同前序**（含 `--pages` 顺序）才可比；
+- 含 localStorage 依赖页的批次，可用 `--isolate`（每页独立 context，隔离存储），
+  但**两侧都须用同一模式**（隔离 ↔ 隔离）——一侧隔离一侧不隔离仍不可比；
+- 报告差异时须先核「元素数是否跳变」，跳变即先查采集条件而非改产品。
+
 ## 用法
 
     py -3 scripts/visual_regression_probe.py capture --out before.json
     py -3 scripts/visual_regression_probe.py capture --out after.json --theme dark
     py -3 scripts/visual_regression_probe.py diff before.json after.json
+    py -3 scripts/visual_regression_probe.py capture --out x.json --isolate   # 每页独立 context
     py -3 scripts/visual_regression_probe.py --self-test
 
 退出码：capture 0（异常 1）· diff 0=零差异 / 1=有差异或对拍面不齐 · self-test 全过 0。
@@ -140,10 +154,15 @@ def _capture_one(page, path, floor_ms=0, quiet_ms=400):
     return page.evaluate(_CAPTURE_JS)
 
 
-def capture(paths, themes=("light", "dark"), floor_ms=15000, quiet_ms=400):
+def capture(paths, themes=("light", "dark"), floor_ms=15000, quiet_ms=400,
+            isolate=False):
     """采集快照。paths: [(rel, abspath)]。返回快照 dict。
 
     缺页/浏览器不可用即抛（调用方转 SystemExit）——宁缺勿假。
+
+    isolate=True（V-isolate·W1076 B1 补）：**每页独立 context**，隔离 localStorage
+    ⇒ 读本地存储的页面（rum-viewer / visit-viewer 一类）不受前序页面导航污染。
+    口径：前后两拍必须同模式（隔离 ↔ 隔离），一侧隔离一侧不隔离仍不可比。
     """
     try:
         from playwright.sync_api import sync_playwright  # noqa: WPS433
@@ -158,7 +177,8 @@ def capture(paths, themes=("light", "dark"), floor_ms=15000, quiet_ms=400):
         "themes": list(themes),
         "pages": {},
         "meta": {"page_count": len(paths), "floor_ms": floor_ms,
-                 "quiet_ms": quiet_ms, "quiesce_cap_ms": _QUIESCE_CAP_MS},
+                 "quiet_ms": quiet_ms, "quiesce_cap_ms": _QUIESCE_CAP_MS,
+                 "isolate": bool(isolate)},
     }
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True)
@@ -168,6 +188,12 @@ def capture(paths, themes=("light", "dark"), floor_ms=15000, quiet_ms=400):
                 ctx = browser.new_context(reduced_motion="reduce", color_scheme=scheme)
                 page = ctx.new_page()
                 for rel, abspath in paths:
+                    if isolate:
+                        # 每页独立 context：localStorage 隔离（见 docstring「采样顺序依赖」）
+                        ctx.close()
+                        ctx = browser.new_context(reduced_motion="reduce",
+                                                  color_scheme=scheme)
+                        page = ctx.new_page()
                     els = _capture_one(page, abspath, floor_ms=floor_ms,
                                        quiet_ms=quiet_ms)
                     snap["pages"].setdefault(rel, {})[theme] = els
@@ -326,6 +352,8 @@ def main(argv):
                    help="DOM 静默窗 ms（默认 400·总帽 15s）")
     c.add_argument("--floor", type=int, default=15000,
                    help="采集前固定地板等待 ms（覆盖 chart-audit 修复波·最远 14s·默认 15000）")
+    c.add_argument("--isolate", action="store_true",
+                   help="每页独立 context（隔离 localStorage·读本地存储的页面需前后两拍同用此模式）")
 
     d = sub.add_parser("diff", help="对拍前后快照")
     d.add_argument("before")
@@ -336,7 +364,7 @@ def main(argv):
         rels = [r.strip() for r in ns.pages.split(",") if r.strip()] or list(PROBE_PAGES)
         themes = ("light", "dark") if ns.theme == "both" else (ns.theme,)
         snap = capture(_resolve_pages(rels), themes=themes, floor_ms=ns.floor,
-                       quiet_ms=ns.wait)
+                       quiet_ms=ns.wait, isolate=ns.isolate)
         os.makedirs(os.path.dirname(os.path.abspath(ns.out)), exist_ok=True)
         with open(ns.out, "w", encoding="utf-8", newline="\n") as f:
             json.dump(snap, f, ensure_ascii=False, separators=(",", ":"))

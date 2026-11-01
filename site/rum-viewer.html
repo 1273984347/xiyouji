@@ -31,7 +31,7 @@
         .hero { margin-bottom: 28px; }
         .hero h1 { font-size: 26px; font-weight: 700; color: var(--dark, #3a2820); }
         .hero .sub { color: var(--ink-soft, #6b6b6b); margin-top: 6px; font-size: 14px; }
-        .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: var(--space-5); }
+        .stat-row { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-5); }
         .stat {
             background: var(--card, #fffdf8);
             border: 1px solid var(--line, #e8e0d2);
@@ -39,7 +39,10 @@
             padding: 14px var(--space-5);
             min-width: 150px;
         }
-        .stat .num { font-size: 24px; font-weight: 700; color: #C8463A; }
+        /* W1076 defer 落地（任务书 §8「暗色 --accent #E46250·页面硬编码暗色 accent 的随批替换」）：
+           硬编码 #C8463A → var(--accent)（本页未接夜读开关 ⇒ --accent 恒为浅色值 #C8463A ⇒ 实测零可见差异·同值空转）。
+           注：本页 .stat 的字号/字色与卡片 ⑧（30px mono ink-1）不一致，属组件层批待办·本批不动。 */
+        .stat .num { font-size: 24px; font-weight: 700; color: var(--accent); }
         .stat .lbl { font-size: 13px; color: var(--ink-soft, #6b6b6b); }
         table { width: 100%; border-collapse: collapse; background: var(--card, #fffdf8); border: 1px solid var(--line, #e8e0d2); border-radius: 10px; overflow: hidden; }
         th, td { padding: 10px 14px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--line, #e8e0d2); }
