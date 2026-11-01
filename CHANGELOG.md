@@ -1,3 +1,28 @@
+### W1086（2026-11-02）：图表色工程批·档 1 试点施工（令牌直喂与 CSP 同步）
+
+
+> **来源**：用户 2026-11-02「现在做完」后的程序续作⇒ 本批是 W1084 真因定位后的档 1 施工。
+>
+> - **文件**：docs/11-方案报告/计划方案/T46-任务计划执行与经验沉淀报告-2026-11-02.md · site/en/global-pattern.html · scripts/output/_w1086_probe.json · scripts/output/_w1086_j2_after
+
+**本批要点**：
+
+① **施工 + CSP 同步（本批的关键动作）**——`site/en/global-pattern.html` 行 1894/1903 两处 `.style()` 硬编码色 → `var(--chart-1)`，**随后立即 `generate_csp.py` 重算哈希**（1 页更新）与 `--check`（856 页零漂移）——这一步正是 W1080/W1082 两次试点的失败点（改了内联脚本不重算哈希 ⇒ 整段脚本被拒绝执行⇒ 页面塌缩到只剩静态 HTML）。
+
+② **渲染完整性逐值相同**（无塌缩、无中断）——元素总数 **586** · 可见元素 **532**（light）/**533**（dark）· 卡片区元素 **8**、可见 **8** · CSP 违规 **0** ⇒ 与改动前逐值相同。
+
+③ **令牌跟随已证（用计算样式读数，非内联值）**——暗色 `#timeline` 的计算 `stroke` 集合**多出 `rgb(224,96,79)`**（暗色令牌 #e0604f），`fill` 也由 `rgb(200,70,58)` 变为 `rgb(224,96,79)` ⇒ **1 CE 线与 text 均跟随令牌**（暗色里仍存在的 `rgb(200,70,58)` 是按国家着色的节点（`COUNTRY_COLORS` 常量表，本批未动））。
+
+④ **判据覆盖边界披露（J2 不含 SVG 颜色属性）**——J2 报「零差异」（1065 元素逐属性对拍），但其 28 项属性集**不含 `stroke`/`fill`** ⇒ 不能作为颜色证据⇒ **E-82**。
+
+⑤ **一处预判被实测推翻（当场订正）**——动工前预判「行 1903 的 text fill 被该页暗色 `svg text { fill: var(--ink) !important }` 顶掉」被计算样式证伪（实测暗色为 `rgb(224,96,79)` 而非 `var(--ink)` 的 `rgb(35,32,26)`）⇒ 那条规则**未生效**（该页暗色由 `prefers-color-scheme` 触发、不设 `data-theme` 属性 ⇒ 选择器不匹配）⇒ 结论与文档已同批订正。
+
+⑥ **批号口径订正（W1085 → W1086）**——`reserve_w.py` 的 `ledger_max()` 以**全文正则**匹配台账 `W\d+` ⇒ 文档里预写的「下一批 = W1085」被计入 ⇒ 实际号 **W1086** ⇒ **E-83**（台账描述里不得预写未来批号）。
+
+⑦ **残留扫描**——该页 `#c8463a` 仅剩常量表 1 处（行 1734）、`renderTimeline` 内 **0** 处。
+
+**验证**：六条判据逐条验通（见 T46 §3.1）· 探针证据件 `scripts/output/_w1086_probe.json` · J2 快照 `_w1086_j2_after` · 全量门禁与 pytest 结果见台账与提交说明。
+
 ### W1084（2026-11-02）：图表色工程批·塌缩真因定位（CSP 哈希失配闭环）
 
 
@@ -1537,7 +1562,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1084），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1086），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1951,10 +1976,3 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：HANDOVER.md · archive/docs/HANDOVER-ARCHIVE.md · scripts/check_doc_size_budget.py
 > **验证**：锚定段序断言过（此前 find 诊断被散文提及误报）+ C6 现网 40.6/45 绿 + check_doc_sync 0 FAIL。
 > **状态**：在途（认领登记 W973·待提交入库）
-### W972（2026-10-26）：CodeQL 三高危修复批（PR #66 检查红项清偿）
-
-> **来源**：PR #66 的 CodeQL 检查报 1 high——本 PR 引入的三个审计工具自身有三处可绕过/可出错形态。
-> **摘要**：① **py/bad-tag-filter ×2**——W955 动效审计与 W912 交互绑定门禁的内联脚本块正则「</script>」不匹配「</script >」等空白变体（混淆标签可绕过审计）；放宽为「</script\s*>」。② **js/incomplete-sanitization ×1**——数据漂移工具的引号转义未先转反斜杠（内容含 \ 时生成错误转义序列）；改为先转 \ 再转引号（顺序正确性）。③ 三工具功能自测全过（含 JS 工具真实数据跑通）。
-> **文件**：scripts/_w955_motion_audit.py · scripts/check_interaction_binding.py · scripts/check_data_drift.js
-> **验证**：node --check + JS 工具真实数据自测跑通（副本对账 47 项）+ py 工具 0 FAIL + pytest 全量 919 passed + ruff 清零。
-> **状态**：**已收官**（W972 git 反填·CodeQL 三高危清偿）
