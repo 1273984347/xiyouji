@@ -1,3 +1,22 @@
+### W1082（2026-11-02）：图表色工程批·档 1′ 试点（失败回退与口径修正）
+
+
+> **来源**：承接 W1081 的档 1′ 试点口径（用户 2026-11-02「现在做完」令）。
+>
+> - **文件**：docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md · scripts/output/_w1082_j2_after.json · scripts/output/_w1082_j2_diff.json · scripts/output/_w1082_spec.json
+
+**本批要点**：
+
+① **试点失败 ⇒ 改动已回退（site/ 零残留）**——把试点页 2 处硬编码色改成**求值后的实际色值**（`window.chartTokens.get('chart-1')` + 新增共享 helper `site/static/js/chart-tokens.js`）后，元素数仍由 light **532** / dark **533** 塌缩到 **108 / 109**，与 `var()` 版**同一症状** ⇒ **症状与「颜色值形态」无关** ⇒ 两版唯一共同点是「改了 `renderTimeline` 里那两行」⇒ 最可能 = helper 未成功加载（`window.chartTokens` 未定义 ⇒ ReferenceError ⇒ 渲染中断）或该页结构化渲染对这两行敏感。
+
+② **试点口径修正**——① 换试点页（选无量测/避让修复器波次的页·如 `en/hardship-heatmap.html` / `en/karma-reincarnation.html`）；② 试点先验 **helper 可用性**（页内断言 `typeof window.chartTokens==='function'`）；③ 判据增第 5 件 = helper 可用性断言 + **渲染完整性**（元素数与基线逐值相同）。
+
+③ **E-17 进坑表 + 计数链五处同步**（`docs/agent/pitfalls.md` + AGENTS 总数/分项 + HANDOVER 两处 + skill 两处）——「证伪本身也要复核」与「var() 直喂图表 API 的边界」两条同族教训首次进坑表。
+
+④ **本批零页面改动残留**（site/ 回到 HEAD·helper 已删）· 试点证据件入仓可复算。
+
+**验证**：J2 前后对拍（试点页单页·浅暗双主题）· 残留扫描 = 0 · 计划方案结构合规（第 48 门禁判据器自测 0 不符合）· 全量门禁与 pytest 结果见台账与提交说明。
+
 ### W1081（2026-11-02）：图表色工程批·档 1′ 因果复核与试点口径定案
 
 
@@ -1476,7 +1495,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1081），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1082），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1911,12 +1930,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：scripts/archive_ledger_rows.py · scripts/output/script-coverage-baseline.txt · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
 > **验证**：--self-test 过（穿插形态号序切分正确）+ 首跑守恒断言全过 + C5 现网 59/60 绿 + pytest 全量 919 passed + ruff 清零。
 > **状态**：**已收官**（W970 93e98e6b 工具落库·首跑回窗 61→59·git 反填）
-
-### W969（2026-10-26）：W1000 号位迁移批（三位号正则定时炸弹拆除）
-
-> **来源**：W964 全仓扫描登记的前瞻风险（19 脚本 65 处 W\d{3}·W1000 将被错读为 W100）——用户按建议序令「走」。
-> **摘要**：① **迁移 69 处/22 文件**——七种字面变体（W\d{3}、W(\d{3}、w\d{3}、[wW] 字符类分支、双反斜杠形态）统一升 W\d{3,4}；含 _ 前缀一次性脚本（Windows 路径分隔符使过滤器漏判·uniform 迁移反而零残留）。② **C4 门禁当场活捉炸弹**——本批认领提交主题提及 W1000，迁移后的 check_doc_sync 正确读出 W1000 并按批次对账报「无版段」，正解走仓内现成 D2 递延豁免登记（台账 bullet·不占号）；旧正则会错读成 W100 且静默错账。③ 台账 ASCII 纪律补四位号升位注记。④ 新增 test_four_digit_wnum.py 4 例（parse_ledger 四位行/在途/负样本防错读/提交索引）；release_prep 旧测试「四位号一律忽略」是三位号时代设计·随迁移反转为「四位号必提取交注册表核验」。
-> **文件**：scripts/batch_cascade.py 等 22 脚本 · tests/unit/test_four_digit_wnum.py · tests/unit/test_release_prep.py · docs/00-导读/W批次编号对账表.md
-> **验证**：迁移后残留三位号 0（非 _ 脚本）+ ruff 清零 + 六解析器 --self-test 全过 + pytest 全量 919 passed（917→919 收集·标记三方同步）+ C4 经 D2 豁免放行实测。
-> **状态**：**已收官**（W969 6a34c21d 前认领 13ef9678 + 迁移主体 93e98e6b·git 反填）
 
