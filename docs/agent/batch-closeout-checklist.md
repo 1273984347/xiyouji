@@ -43,6 +43,9 @@
 - [ ] `python scripts/stats.py --w W####` 刷新，再 `--check` 求 24 键零差异
 
 ## 7. 全量门禁（约 13 分钟·务必后台跑）
+- [ ] **pytest 本地必跑（W1088 增补）**：`python -m pytest tests -q`——全量 verify 57 段
+      不含 pytest，本地 verify 绿≠CI 绿；漏跑=CI「Unit Tests」红来回
+      （W1071/W1074/W1075 三批实证·各挨一次 CI 红才补跑）
 - [ ] `python scripts/verify_delivery.py`（前台 15 分钟会超时被杀，且杀掉不留完整日志）
 - [ ] 只接受「核心全部通过 ✅」；任何 FAIL 按 `gate-triage-template.md` 五步法定位
 

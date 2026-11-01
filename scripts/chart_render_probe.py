@@ -153,6 +153,17 @@ PROBE_JS = r"""
       });
       return Array.from(new Set(vals)).join(' | ');
     })();
+    // 计算样式读数（J2 属性集**不含** SVG stroke/fill ⇒ 「零差异」测不出令牌跟随）
+    const computed = (sel, prop) => {
+      const vals = [];
+      document.querySelectorAll(sel).forEach((n) => {
+        const v = getComputedStyle(n).getPropertyValue(prop);
+        if (v) vals.push(v.trim());
+      });
+      return Array.from(new Set(vals)).sort().join(' | ');
+    };
+    const strokeComputed = computed('#timeline line', 'stroke');
+    const fillComputed = computed('#timeline text', 'fill');
     return {
       t: Date.now() - P.t0,
       total: all.length,
@@ -167,7 +178,9 @@ PROBE_JS = r"""
       journeyRows: document.querySelectorAll('#journey-table tbody tr').length,
       treemapPaths: document.querySelectorAll('#chart-country path').length,
       bodyH: Math.round(document.body.getBoundingClientRect().height),
-      tlStyles: tlStyles
+      tlStyles: tlStyles,
+      strokeComputed: strokeComputed,
+      fillComputed: fillComputed
     };
   };
   const tick = () => {

@@ -13,6 +13,14 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W972（2026-10-26）：CodeQL 三高危修复批（PR #66 检查红项清偿）
+
+> **来源**：PR #66 的 CodeQL 检查报 1 high——本 PR 引入的三个审计工具自身有三处可绕过/可出错形态。
+> **摘要**：① **py/bad-tag-filter ×2**——W955 动效审计与 W912 交互绑定门禁的内联脚本块正则「</script>」不匹配「</script >」等空白变体（混淆标签可绕过审计）；放宽为「</script\s*>」。② **js/incomplete-sanitization ×1**——数据漂移工具的引号转义未先转反斜杠（内容含 \ 时生成错误转义序列）；改为先转 \ 再转引号（顺序正确性）。③ 三工具功能自测全过（含 JS 工具真实数据跑通）。
+> **文件**：scripts/_w955_motion_audit.py · scripts/check_interaction_binding.py · scripts/check_data_drift.js
+> **验证**：node --check + JS 工具真实数据自测跑通（副本对账 47 项）+ py 工具 0 FAIL + pytest 全量 919 passed + ruff 清零。
+> **状态**：**已收官**（W972 git 反填·CodeQL 三高危清偿）
+
 ### W971（2026-10-26）：存量段状态回填批（建议序④·用户令「现在就可以做完」）
 
 > **来源**：建议序④（用户令「现在就可以做完」）——W954 量化的「91 批状态滞后」现存量形态已变为「缺字段」而非「字段陈旧」（W921 归档与并行手搓段的双重演化）。
