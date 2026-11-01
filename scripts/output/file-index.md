@@ -10,6 +10,27 @@
 
 ---
 
+## W1081 图表色工程批·档 1′ 因果复核与试点口径定案（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1081 | 治理文档 |
+| CHANGELOG.md | W1081 | 治理文档 |
+| HANDOVER.md | W1081 | 治理文档 |
+| README.md | W1081 | 治理文档 |
+| STRUCTURE.md | W1081 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1081 | 治理文档 |
+| docs/00-导读/项目说明.md | W1081 | 治理文档 |
+| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1081 | 治理文档 |
+| scripts/output/README.md | W1081 | 本批工具/产物 |
+| scripts/output/_w1081_rev_a.json | W1081 | 本批工具/产物 |
+| scripts/output/_w1081_rev_b.json | W1081 | 本批工具/产物 |
+| scripts/output/_w1081_spec.json | W1081 | 本批工具/产物 |
+| scripts/output/file-index.md | W1081 | 本批工具/产物 |
+| scripts/output/index.md | W1081 | 本批工具/产物 |
+| scripts/output/stats.json | W1081 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1081 | 本批工具/产物 |
+
 ## W1080 图表色工程批·档 1 假设证伪与回退（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4539,13 +4560,4 @@ docs/11-方案报告/README.md
 | tests/unit/test_four_digit_wnum.py | W969 | 四位号解析单测 4 例（防错读负样本） |
 | tests/unit/test_release_prep.py | W969 | 四位号设计反转测试（提取交注册表核验） |
 | docs/00-导读/W批次编号对账表.md | W969 | D2 豁免登记 W1000 + ASCII 纪律升位注记 |
-
-## W968 台账对账表窗口制拆分批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/00-导读/W批次编号对账表.md | W968 | 窗口制拆分：446.6→150.3KB（留 60 行 W908-W968·ASCII 段迁档注记） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W968 | 新容器：迁入 256 行（W648-W907·号占用留痕合看为准） |
-| scripts/check_doc_size_budget.py | W968 | C5 台账 60 行窗硬判据（ledger 计数形态） |
-| scripts/check_parser_anchor_coverage.py | W968 | M5 台账探针合看归档（316/316） |
 
