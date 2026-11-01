@@ -10,6 +10,25 @@
 
 ---
 
+## W1083 图表色工程批·结论链自审（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1083 | 治理文档 |
+| CHANGELOG.md | W1083 | 治理文档 |
+| HANDOVER.md | W1083 | 治理文档 |
+| README.md | W1083 | 治理文档 |
+| STRUCTURE.md | W1083 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1083 | 治理文档 |
+| docs/00-导读/项目说明.md | W1083 | 治理文档 |
+| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1083 | 治理文档 |
+| scripts/output/README.md | W1083 | 本批工具/产物 |
+| scripts/output/_w1083_spec.json | W1083 | 本批工具/产物 |
+| scripts/output/file-index.md | W1083 | 本批工具/产物 |
+| scripts/output/index.md | W1083 | 本批工具/产物 |
+| scripts/output/stats.json | W1083 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1083 | 本批工具/产物 |
+
 ## W1082 图表色工程批·档 1′ 试点（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4566,12 +4585,4 @@ docs/11-方案报告/README.md
 |---|---|---|
 | CHANGELOG.md | W971 | 102 段补状态行（99 已收官+1 补号+2 保留） |
 | scripts/_w929_stats_sync.py | W971 | 品牌字面量残留清偿（PR #66 品牌检查红项） |
-
-## W970 台账归档行工具批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/archive_ledger_rows.py | W970 | 新建台账行归档工具（号序切分·守恒五道·C5 修法） |
-| docs/00-导读/W批次编号对账表.md | W970 | 首跑回窗 61→59（W908/W909 迁档） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W970 | 迁入 2 行 + 迁入注记 |
 
