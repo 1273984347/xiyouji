@@ -323,6 +323,10 @@
 
 
 
+### agent-guardrails/（AI Agent 约束层·W1077 新增）
+
+规则补丁 + 改动集 Python 结构检查：`merge-patch.md`（根 `CLAUDE.md` / `AGENTS.md` / `pyproject.toml` 的可合并片段与插入位置）、`self-check.md`（5 条只问事实的自检）、`README.md`（阈值决策表与收紧路线）；可执行件在 `scripts/guardrails/`，样例 fixture 在 `tests/fixtures/_sample.py`。目录名不带数字前缀 ⇒ 不进 `docs/INDEX.md`（`docs_index.py` 只收数字前缀目录）。
+
 ## source/ 子目录
 
 
@@ -502,6 +506,8 @@
 | **反向索引** | `output/file-index.md` | 文件→W 条目反向索引（400+ 行，45 HTML + 34<!--stats:script_classes--> 类 scripts + docs + 根目录 + Top 5 多次改动文件），与 CHANGELOG.md 双向链接 |
 
 | **工程化工具**（v2.2.16 新增） | `run_all.py`、`new_page.py`、`release.py`、`drl_spotcheck.py`、`data_validate.py`、`docs_index.py`、`sync_docs.py --fix` | 批量调度 34<!--stats:script_classes--> 类分析脚本 + 页面脚手架 + 版本发布体检 + DRL spot-check + JSON 结构校验（131 文件）+ 文档索引生成（`docs/INDEX.md` 全量条目）+ 6 文件文档一致性自动修复 |
+
+| **Agent 约束层**（W1077 新增） | `guardrails/` | AI 编码 agent 的改动集检查：`check_changed.ps1/.sh`（入口）+ `once_call.py` / `api_diff.py` / `check_nested_comprehension.py`（子检查）+ `ruff-structure.toml`（结构档阈值）；只扫改动文件，不改变 CI 全仓口径 |
 
 | **目录索引生成**（W779 新增） | `gen_folder_docs.py` | 为在管目录补齐 `index.md`（逐文件清单·机器可读）+ `README.md`（目录导读·人读）；幂等（已存在跳过·大小写不敏感判重防覆写 `INDEX.md`）·自动排除 gitignored 路径、治理树（10-方法论沉淀/11-方案报告/docs 01-06 顶层）与构建产物；`--dry-run`/`--force` |
 

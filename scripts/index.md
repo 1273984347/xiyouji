@@ -7,7 +7,7 @@
 > 本文件逐条列出 `scripts/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（40）
+## 子目录（41）
 
 - `AA_叙事实验/`
 - `AB_视觉艺术/`
@@ -45,12 +45,13 @@
 - `Z_图表设计/`
 - `api/`
 - `audit/`
+- `guardrails/`
 - `lib/`
 - `output/`
 - `rag/`
 - `utils/`
 
-## 文件（170）
+## 文件（172）
 
 ### Markdown 文档
 
@@ -233,6 +234,11 @@
 - `package-lock.json`
 - `package.json`
 - `requirements.txt`
+
+### 其他
+
+- `install_hooks.ps1`
+- `install_hooks.sh`
 
 ---
 

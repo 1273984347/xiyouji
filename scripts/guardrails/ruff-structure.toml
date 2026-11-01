@@ -1,0 +1,41 @@
+# scripts/guardrails/ruff-structure.toml —— 只放「结构约束」规则
+#
+# 定位：本文件不接管仓库的风格/语法检查。E/F/W/I/UP/B 仍由根 pyproject.toml 负责，
+# check_changed 会分别跑两档：① 根配置（与 CI 同源）② 本文件（结构约束）。
+#
+# 为什么拆两档（0.16.9 实测）：
+#   PLR1702（too-many-nested-blocks）只存在于 preview；一旦开 preview = true，
+#   ruff 会连带启用既有规则的 preview 行为——实测同一份代码 E231 从 0 涨到 30 条
+#   （scripts/spot_check_nlp.py），全仓 E231/E302/E305/E241 共多出约 70 条。
+#   若把 E 系列也放进本文件，本地门禁就会与 CI（跑根配置、未开 preview）结论不一致。
+#   故本文件只 select 四条结构规则，preview 的副作用被限制在这四条上。
+#
+# 为什么用 ruff 而不是 pylint 做嵌套深度：
+#   ruff 0.16.9 已内置 PLR1702，配置键 lint.pylint.max-nested-blocks 实测可用；
+#   本机 pylint 未安装（`pylint --version` 未识别），为一条规则再装一套工具不划算。
+#
+# 阈值按实测基线定（2026-11-02 全仓 `ruff check`，见 docs/agent-guardrails/README.md 阈值依据）：
+#   max-nested-blocks=4 → 40 条 / 23 个文件；降到 3 → 145 条 / 53 个文件
+#   max-complexity=15   → 29 条；18 → 14 条；12 → 61 条
+#   max-branches=16     → 19 条；20 → 10 条
+#   max-statements=80   → 3 条；60 → 11 条
+
+target-version = "py311"
+line-length = 120
+
+# PLR1702 只在 preview 里提供，关掉即静默失效（见文件头说明）。
+preview = true
+
+# 与根 pyproject.toml 的 extend-exclude 对齐，避免同一文件两档结论不同。
+exclude = ["archive", "**/_*.py", "**/node_modules", "**/.git"]
+
+[lint]
+select = ["C90", "PLR0912", "PLR0915", "PLR1702"]
+
+[lint.mccabe]
+max-complexity = 15
+
+[lint.pylint]
+max-nested-blocks = 4
+max-branches = 16
+max-statements = 80

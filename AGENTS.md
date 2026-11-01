@@ -173,15 +173,15 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 197 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
+> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 198 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 
-> **📖 阅读契约（W709）**：索引型——197 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——198 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（37）·JS / CSP / 运行时（8）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（14）·流程 / 协作 / 取证（92）
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（37）·JS / CSP / 运行时（8）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（14）·流程 / 协作 / 取证（93）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -276,6 +276,8 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 17. **开批先预约号（W1041 立·reserve_w.py）**：并行会话共享同一工作树时，台账是「事后登记」——两会话各自从自己看到的台账 max 取号必撞（2026-10-30 实战撞 W1039，后由并行会话续占 W1040、本批顺延 W1041）。开批第一步必须跑 `python scripts/reserve_w.py` 占号，stdout 即本批 W 号；**未占号不动手**。candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1，写入 `tmpe/_w_reservations.json`（24h TTL 防占而不交，收官后 `release <W号>` 释放）。注意：仅同一工作树内有效；不同 clone 不共享该文件，仍靠 git log + 台账兜底。
 18. **提交前三问自检（W1056 立·用户令）**：每笔提交（含回填/扫尾小笔）前必须自答三问并把结论落到收官材料（CHANGELOG 验证栏或台账备注），不通过不得提交——钩子在门禁绿后强制弹出：① 本批过程中遇到的问题是否全部在本批内解决或登记去向（无「顺手跳过」）；② 同类问题是否会再次犯错——防复发机器判据/坑表条目是否已落地（无判据的教训＝未解决）；③ 本项目是多 Agent 协作，其他 Agent 能否从项目内文件（AGENTS/CHANGELOG/pitfalls/台账）了解本批全部决策与遗留——**凡写入私有记忆文件的教训必须同步落仓**（16-⑥ 载体铁则的提交时机强化）。
 19. **禁用 CodeBuddy/WorkBuddy（W1061 入必载层·用户 2026-10-07 两度重申·此前仅存私有记忆=三问 ③ 违规实例）**：项目一切 AI 功能不使用 CodeBuddy/WorkBuddy 及其任何残留；agent-web 的三选一裁决=保留但换引擎（OpenAI-compatible 自研·W680 收官/W681 事实收官）。任何会话不得引入、恢复或仿建该品牌工具链。
+
+20. **Python 改动结构检查（W1077 立·用户令）**：改动 .py 后必须跑 `pwsh -File scripts/guardrails/check_changed.ps1`（ruff 风格档/结构档/嵌套推导式，退出码 0 才过；`api_diff.py` 报破坏性变化须在提交说明写明）；阈值与收紧路线见 docs/agent-guardrails/README.md；新增阈值/豁免须按 16-⑦ 报批。
 
 ---
 

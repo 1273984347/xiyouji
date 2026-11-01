@@ -1,3 +1,28 @@
+### W1077（2026-11-02）：agent-guardrails 迁移批（脚本进 scripts/guardrails/·文档进 docs/agent-guardrails/·顶层目录删除）
+
+> **来源**：用户 2026-11-02 拍板方案 C 变体（只读调研 A/B/C 三方案后选定）：脚本进 `scripts/guardrails/` 子目录、文档进 `docs/` 非编号目录、fixture 进 `tests/fixtures/`、删除顶层 `agent-guardrails/`；**不动 `TOP_DIRS`**——顶层目录消失后第 52 槽自然转绿。
+>
+> **文件**：scripts/guardrails/check_changed.ps1 · scripts/guardrails/check_changed.sh · scripts/guardrails/once_call.py · scripts/guardrails/api_diff.py · scripts/guardrails/check_nested_comprehension.py · scripts/guardrails/ruff-structure.toml · scripts/guardrails/index.md · scripts/guardrails/README.md · scripts/index.md · docs/agent-guardrails/README.md · docs/agent-guardrails/merge-patch.md · docs/agent-guardrails/self-check.md · docs/agent-guardrails/index.md · docs/index.md · tests/fixtures/_sample.py · tests/fixtures/index.md · tests/fixtures/README.md · tests/index.md · CHANGELOG.md · HANDOVER.md · STRUCTURE.md · scripts/output/file-index.md · docs/00-导读/W批次编号对账表.md · CLAUDE.md · AGENTS.md · .git/hooks/pre-commit（不入库）
+
+**本批要点**：
+
+① **目录归位（C 变体）**——5 脚本 + `ruff-structure.toml` 迁 `scripts/guardrails/`；3 份文档（README / merge-patch / self-check）迁 `docs/agent-guardrails/`（非编号目录，`docs_index.py` 只收数字前缀目录 ⇒ 不进 `docs/INDEX.md`，不触发第 17 槽逐字节比对）；`_sample.py` 迁 `tests/fixtures/`（`pytest.ini` 的 `python_files = test_*.py` 已验不会误收）；顶层 `agent-guardrails/` 删除。
+
+② **9 处硬路径改写**——`check_changed.ps1` 4 处（cfg + 3 个子脚本）+ `check_changed.sh` 5 处（cfg + 3 个子脚本 + api_diff 的 strict 分支）全部指向 `scripts/guardrails/`；仓库根仍用 `git rev-parse --show-toplevel`；文档内路径引用（README / merge-patch / self-check + 钩子/CI 片段）同步改写。
+
+③ **清单刷新**——`scripts/index.md` 子目录 40→41；`tests/index.md` 2→3；`docs/index.md` 新增 `agent-guardrails/`；新建 `scripts/guardrails/` 与 `tests/fixtures/` 两件套；`docs/agent-guardrails/index.md` 由 `gen_folder_docs.py` 产出（README 为人工维护件，不带生成标记）。
+
+④ **门禁口径确认**——第 52 槽因顶层目录消失自然转绿（未改 `check_repo_layout.py` / `TOP_DIRS`）；第 42 槽只扫 `scripts/` **顶层**文件，`scripts/guardrails/` 子目录不进 C1 扫描；第 45 槽清单与实盘一致。
+
+⑤ **补丁并入与钩子挂载（A/B）**——根 `CLAUDE.md` 规则 17 + 常用命令 2 行、`AGENTS.md` §6-20 按 `merge-patch.md` 落位（52→55 行·≤60）；`.git/hooks/pre-commit` 在 gitleaks + verify_delivery 之后追加**暂存区 .py** 检查（`--strict-api` = 宽档阈值 + api_diff 阻断·once_call 仅提示），实测 3.6s / 3 文件；违规 6>4 可阻断、纯文档路径 exit 0。另新增 `scripts/install_hooks.sh`（幂等安装·标记块替换·LF 归一）+ `.ps1` 薄封装，并在 `.pre-commit-config.yaml` 增 `agent-guardrails` 本地 hook（`pre-commit install` 覆盖手写钩子后检查不消失；两条路径用 `git write-tree` 同索引去重，实测第二次 `[SKIP]`）。
+
+**验证**：
+- `py -3 scripts/check_repo_layout.py` → 0 FAIL
+- `py -3 scripts/check_script_coverage.py` → 根级脚本 157 / 四面引用 119 / 豁免 42 / 无引用无豁免 0
+- `py -3 scripts/verify_delivery.py --scope auto` → **核心全部通过 ✅（0 FAIL / 0 WARN·57 段）**
+- `check_changed -Paths tests/fixtures/_sample.py` → 结构档 2 条（嵌套 6>4、复杂度 17>15）+ 嵌套推导式 1 条 + once_call 提示全部命中；`-Paths` 指向非 .py → `[SKIP]` 退出码 0
+- **收口补记**：六处版本面同步（workflows README 头部+里程碑 / CHANGELOG 编号规则 / HANDOVER HEAD+末链 / CITATION）+ README 与项目说明当前批次行 + dukou 页脚 → 站内搜索索引重建（`docs=823`·`_gen_search_index.py`）+ CSP 重算（2 页）+ 坑表 E-73（198 条·五处计数链同步）
+
 ### W1076（2026-11-02）：v4 视觉体系迁移首站：根页与入口八页消费 v4 令牌
 
 
@@ -1365,7 +1390,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1076），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1077），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

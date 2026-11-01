@@ -135,7 +135,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W1076（2026-11-02）**：v4 视觉体系迁移首站落地：根页与入口八页开始消费 v4 令牌：间距字面量令牌化（零视觉差异）、dashboard 三件第二套实现回收、首页 stat/chip/card 组件化、页脚长文收敛、容器归并·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
+> **当前批次 W1077（2026-11-02）**：agent-guardrails 迁移落地：脚本进 scripts/guardrails/、文档进 docs/agent-guardrails/、fixture 进 tests/fixtures/、顶层目录删除·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >

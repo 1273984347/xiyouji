@@ -10,6 +10,51 @@
 
 ---
 
+## W1077 agent-guardrails 迁移：脚本进 scripts/guardrails/·文档进 docs/agent-guardrails/（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+| CHANGELOG.md | W1077 | 治理文档 |
+| CLAUDE.md | W1077 | 治理文档（规则 17 + 常用命令 2 行） |
+| AGENTS.md | W1077 | 治理文档（§6-20） |
+| HANDOVER.md | W1077 | 治理文档 |
+| STRUCTURE.md | W1077 | 治理文档 |
+| docs/index.md | W1077 | 目录索引（生成物） |
+| docs/agent-guardrails/README.md | W1077 | 人工维护文档（迁移） |
+| docs/agent-guardrails/merge-patch.md | W1077 | 人工维护文档（迁移） |
+| docs/agent-guardrails/self-check.md | W1077 | 人工维护文档（迁移） |
+| docs/agent-guardrails/index.md | W1077 | 目录索引（生成物） |
+| scripts/index.md | W1077 | 目录索引（生成物） |
+| scripts/guardrails/index.md | W1077 | 目录索引（生成物） |
+| scripts/guardrails/README.md | W1077 | 目录索引（生成物） |
+| scripts/guardrails/check_changed.ps1 | W1077 | 本批工具（迁移） |
+| scripts/guardrails/check_changed.sh | W1077 | 本批工具（迁移） |
+| scripts/guardrails/once_call.py | W1077 | 本批工具（迁移） |
+| scripts/guardrails/api_diff.py | W1077 | 本批工具（迁移） |
+| scripts/guardrails/check_nested_comprehension.py | W1077 | 本批工具（迁移） |
+| scripts/guardrails/ruff-structure.toml | W1077 | 本批工具（迁移） |
+| scripts/install_hooks.sh | W1077 | 幂等安装脚本 |
+| scripts/install_hooks.ps1 | W1077 | 安装脚本薄封装 |
+| .pre-commit-config.yaml | W1077 | 框架本地 hook（防 install 丢失） |
+| tests/index.md | W1077 | 目录索引（生成物） |
+| tests/fixtures/_sample.py | W1077 | 测试 fixture（迁移） |
+| tests/fixtures/index.md | W1077 | 目录索引（生成物） |
+| tests/fixtures/README.md | W1077 | 目录索引（生成物） |
+| .github/workflows/README.md | W1077 | 旁文档版本面（头部 + 里程碑） |
+| README.md | W1077 | 治理文档（当前批次行） |
+| docs/00-导读/项目说明.md | W1077 | 治理文档（当前批次 + 当前版本两处） |
+| CITATION.cff | W1077 | 外部引用面版本 |
+| docs/agent/pitfalls.md | W1077 | 坑表（E-73） |
+| site/dukou-engine.html | W1077 | 页脚批次链（手工工件） |
+| site/data/search.html | W1077 | 站内搜索索引重建（自动产物） |
+| site/en/search.html | W1077 | 站内搜索索引重建（自动产物） |
+| scripts/output/file-index.md | W1077 | 本文件 |
+| scripts/output/index.md | W1077 | 目录索引（生成物） |
+| scripts/output/_w1077_spec.json | W1077 | 本批规格 |
+| scripts/output/_vermilion_solid_cache.json | W1077 | 第 49 槽增量缓存（自动产物） |
+| docs/00-导读/W批次编号对账表.md | W1077 | 批次台账 |
+
 ## W1076 v4 视觉体系迁移首站：根页与入口八页消费 v4 令牌（2026-11-02）
 
 | 文件 | W | 说明 |
