@@ -102,15 +102,20 @@ def staged_set():
 
 
 def main():
+    _apply = '--apply' in sys.argv
+
     spec_path = OUT
     spec = json.load(open(spec_path, encoding="utf-8")) if os.path.exists(spec_path) else {}
     paths = set(CURATED) | staged_set()
     rows = ["| %s | %s | %s |" % (p, BATCH, _cat(p)) for p in sorted(paths)]
     spec["file_index_rows"] = rows
-    with open(spec_path, "w", encoding="utf-8", newline="\n") as fh:
-        json.dump(spec, fh, ensure_ascii=False, indent=1)
-        fh.write("\n")
-    print("spec file_index_rows：%d 行 → %s" % (len(rows), spec_path))
+    if _apply:
+        with open(spec_path, "w", encoding="utf-8", newline="\n") as fh:
+            json.dump(spec, fh, ensure_ascii=False, indent=1)
+            fh.write("\n")
+        print("spec file_index_rows：%d 行 → %s（已写盘）" % (len(rows), spec_path))
+    else:
+        print("spec file_index_rows：%d 行 → %s（dry-run·须 --apply 才写盘）" % (len(rows), spec_path))
     for r in rows:
         print("  " + r)
     return 0

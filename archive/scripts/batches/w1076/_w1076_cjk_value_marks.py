@@ -13,7 +13,19 @@ import re
 import os
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def _repo_root():
+    """向上找仓库根（带 .git 的目录）——脚本归档到 archive/scripts/batches/w1076/ 后仍可用。"""
+    cur = os.path.dirname(os.path.abspath(__file__))
+    while True:
+        if os.path.isdir(os.path.join(cur, ".git")):
+            return cur
+        parent = os.path.dirname(cur)
+        if parent == cur:
+            raise SystemExit("未找到仓库根（.git）")
+        cur = parent
+
+
+ROOT = _repo_root()
 TARGET = os.path.join(ROOT, "site", "dashboard.html")
 CJK = re.compile(r"[\u4e00-\u9fff]")
 VAL_RE = re.compile(r'<div class="value">([^<]*)</div>')
