@@ -10,6 +10,35 @@
 
 ---
 
+## W1078 全站硬编码颜色盘点（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1078 | 治理文档 |
+| CHANGELOG.md | W1078 | 治理文档 |
+| HANDOVER.md | W1078 | 治理文档 |
+| README.md | W1078 | 治理文档 |
+| STRUCTURE.md | W1078 | 治理文档 |
+| archive/scripts/batches/w1078/_w1078_color_inventory.py | W1078 | 本批工具/产物 |
+| archive/scripts/batches/w1078/_w1078_make_spec.py | W1078 | 本批工具/产物 |
+| cripts/output/_w851_j1_name_audit.json | W1078 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1078 | 治理文档 |
+| docs/00-导读/项目说明.md | W1078 | 治理文档 |
+| docs/11-方案报告/README.md | W1078 | 治理文档 |
+| docs/11-方案报告/计划方案/T43-任务计划执行与经验沉淀报告-2026-11-02.md | W1078 | 治理文档 |
+| docs/INDEX.md | W1078 | 治理文档 |
+| ocs/11-方案报告/README.md | W1078 | 治理文档 |
+| scripts/_w1078_color_inventory.py | W1078 | 本批工具/产物 |
+| scripts/_w1078_make_spec.py | W1078 | 本批工具/产物 |
+| scripts/output/README.md | W1078 | 本批工具/产物 |
+| scripts/output/_w1078_color_inventory.json | W1078 | 本批工具/产物 |
+| scripts/output/_w1078_color_inventory.md | W1078 | 本批工具/产物 |
+| scripts/output/_w1078_spec.json | W1078 | 本批工具/产物 |
+| scripts/output/file-index.md | W1078 | 本批工具/产物 |
+| scripts/output/index.md | W1078 | 本批工具/产物 |
+| scripts/output/stats.json | W1078 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1078 | 本批工具/产物 |
+
 ## W1077 agent-guardrails 迁移：脚本进 scripts/guardrails/·文档进 docs/agent-guardrails/（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4481,25 +4510,4 @@ docs/11-方案报告/README.md
 | 文件 | W | 说明 |
 |---|---|---|
 | AGENTS.md | W966 | 摘要层纠偏与去冗（过期数字四处·矛盾消除·条目收敛·26.6→23.9KB） |
-
-## W965 脚注重生成与探针沉淀批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W965 | 留存五条脚注重写（全阿拉伯日期头·无截断残迹·≤300 字） |
-| scripts/check_parser_anchor_coverage.py | W965 | 新建解析器锚点覆盖面扫描（七机制·报告型·基线 ② 登记·W964 双虫探针常驻化） |
-| scripts/check_doc_size_budget.py | W965 | C4 脚注逐条定形判据（>300 字或头不可解析即红） |
-| HANDOVER.md | W965 | 候选清单立「手搓绕过级联治理」议题（三起实证·三层候选方案） |
-| tests/unit/test_doc_size_budget.py | W965 | C4 负样本单测 |
-
-## W964 AGENTS 版本脚注治理批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/batch_cascade.py | W964 | 滚动切分器双日期形态 + precheck agents_note 定形断言 + 里程碑块正则括注放宽 |
-| scripts/check_doc_size_budget.py | W960 | 体积门禁 C3：AGENTS 脚注 >4KB 硬判据（W964 加） |
-| tests/unit/test_doc_size_budget.py | W964 | 脚注 4KB 负样本回归锁 |
-| AGENTS.md | W964 | 版本脚注 85.7→3.3 KB（75 真条目拆分·留 5 定形）·文件 110.1→27.2 KB |
-| archive/docs/AGENTS-ARCHIVE.md | W964 | 迁入 70 条（W807-W928·新 fenced 块） |
-| HANDOVER.md | W964 | 里程碑窗口 15→5 归一（6 失明块现形）·指针 W956 |
 
