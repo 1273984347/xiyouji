@@ -10,6 +10,32 @@
 
 ---
 
+## W1079 图表色工程批·形态取证与三档方案（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1079 | 治理文档 |
+| CHANGELOG.md | W1079 | 治理文档 |
+| HANDOVER.md | W1079 | 治理文档 |
+| README.md | W1079 | 治理文档 |
+| STRUCTURE.md | W1079 | 治理文档 |
+| archive/scripts/batches/w1080/_w1079_js_color_shapes.py | W1079 | 本批工具/产物 |
+| archive/scripts/batches/w1080/_w1079_make_spec.py | W1079 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1079 | 治理文档 |
+| docs/00-导读/项目说明.md | W1079 | 治理文档 |
+| docs/11-方案报告/README.md | W1079 | 治理文档 |
+| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1079 | 治理文档 |
+| docs/INDEX.md | W1079 | 治理文档 |
+| ocs/11-方案报告/README.md | W1079 | 治理文档 |
+| scripts/_w1079_js_color_shapes.py | W1079 | 本批工具/产物 |
+| scripts/_w1079_make_spec.py | W1079 | 本批工具/产物 |
+| scripts/output/README.md | W1079 | 本批工具/产物 |
+| scripts/output/_w1079_spec.json | W1079 | 本批工具/产物 |
+| scripts/output/file-index.md | W1079 | 本批工具/产物 |
+| scripts/output/index.md | W1079 | 本批工具/产物 |
+| scripts/output/stats.json | W1079 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1079 | 本批工具/产物 |
+
 ## W1078 全站硬编码颜色盘点（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4504,10 +4530,4 @@ docs/11-方案报告/README.md
 | CLAUDE.md | W967 | 接手导航「通读」矛盾改按需读节 |
 | scripts/check_gov_doc_claims.py | W967 | 新建数字断言对账器（五组断言·preflight 提示位接线·报告型） |
 | scripts/ledger_backfill.py | W967 | 写路径行尾归一（append 裸 LF 边界病根）+ E741 |
-
-## W966 AGENTS 摘要层纠偏与去冗批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W966 | 摘要层纠偏与去冗（过期数字四处·矛盾消除·条目收敛·26.6→23.9KB） |
 
