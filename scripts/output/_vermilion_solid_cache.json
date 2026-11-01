@@ -60,7 +60,7 @@
    }
   },
   "data/chapter-structure-graph.html": {
-   "sha1": "7e4948316d305253adcb2537ecb5e088c8d245ab",
+   "sha1": "89e0b234b71bd679adca29e3de9e89725d47e544",
    "counts": {
     "div.kpi-card": 1
    }
@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "a1dacdff35a824c71b761ac76e72275447a2ada1",
+   "sha1": "98f32d2b3859adcb4d2064edaa153c59e674a5c8",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -251,7 +251,7 @@
    }
   },
   "data/graph-explorer.html": {
-   "sha1": "9085c3e74e0af38b2176e82597cd39eab6a0ae78",
+   "sha1": "47fb53a408db72ecd17ce4c2fccf962f7269cafa",
    "counts": {}
   },
   "data/guanyin-six-roles-network.html": {
@@ -301,7 +301,7 @@
    }
   },
   "data/journey-map-interactive.html": {
-   "sha1": "3df14be0753efe47631a1677330b0a5d48316c41",
+   "sha1": "9a78f088a1f35d484f6748198bcbd619d07c2000",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
@@ -461,7 +461,7 @@
    }
   },
   "data/narrative-rhythm-curve.html": {
-   "sha1": "2cc8d48e4acf4fc139271fd92f12f3c8d97899fa",
+   "sha1": "c40c43189208c4109b22d55df44d9be4bac1e2c6",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "6316b418c0483906813b494169f8e576c6512461",
+   "sha1": "697335231f1442e8d027fa57412a3145a483a173",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "4d395a0c9e4c1e0d079743d2e343b147fb105fa6",
+   "sha1": "60f4ba046bb9c8a448c1fd8f0bd05a875bd7e3f2",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -621,7 +621,7 @@
    }
   },
   "404.html": {
-   "sha1": "f32f34d163fa54fab08af7f925ab72f51e775033",
+   "sha1": "1d50e518212862dd6eaac8c5f0c6a4bfde348447",
    "counts": {}
   },
   "curated.html": {
@@ -631,7 +631,7 @@
    }
   },
   "dashboard.html": {
-   "sha1": "d569887cedd29bd628c0ac65fb35b0e250c916c3",
+   "sha1": "eda06368684bd68dc4fa88177f31c6ce90ca8e09",
    "counts": {
     "section.route-strip": 1,
     "button.vt-btn": 2,
@@ -640,19 +640,19 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "af2b4280e8e318dfad208f517e18f8a6494b8c5c",
+   "sha1": "86921d2d9f0a819c678af2e3d31b239df08004a1",
    "counts": {
     "button": 1
    }
   },
   "guide.html": {
-   "sha1": "1012e47884acc2bb83a949adb789dd75ab03fbe7",
+   "sha1": "bc3e17f64a1e778c919748049a57ae6fc15cb406",
    "counts": {
     "a.primary": 1
    }
   },
   "index.html": {
-   "sha1": "05316e85a6563cb92e5d231ca261c0a7dc6dcb6e",
+   "sha1": "5cd0bfbcfbe3e127f7c7783d88f943d43534c5af",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1399,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "d1b8f0b67eca09256a6e48fae63787dbc37fa293",
+   "sha1": "091aaa3ca6f1cb9b4d727c16f2427502394f6f7c",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-10-31T07:22:26.326Z"
+ "generated_at": "2026-10-31T22:54:54.929Z"
 }
