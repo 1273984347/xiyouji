@@ -1,3 +1,36 @@
+### W1076（2026-11-02）：v4 视觉体系迁移首站：根页与入口八页消费 v4 令牌
+
+
+> **来源**：用户 2026-11-02 派发《v4 视觉体系迁移全程序（W1076 已开工 · B1 → B11）》任务书（B1 详细任务书 + B2–B11 编排 + defer 登记簿 + 已知坑八条 + 不完成定义五条）；承接前一 session 已拍的 J2 基线与台账在途认领行。
+>
+> **让号留痕**：W1076 已由前一 session 占号并在台账写入在途认领行 ⇒ 本 session 续作同一批，不另占号、不撞号。
+>
+> - **文件**：site/index.html · site/guide.html · site/curated.html · site/dashboard.html · site/dukou-engine.html · site/rum-viewer.html · site/404.html · site/system.css · site/data/cross-time-danmaku.html · site/data/tag-cloud.html · archive/scripts/batches/w1076/_w1076_space_tokens.py · archive/scripts/batches/w1076/_w1076_cjk_value_marks.py · archive/scripts/batches/w1076/_w1076_make_spec.py · archive/scripts/batches/w1076/_w1076_j2_diff_report.py · scripts/output/_w1076_spec.json · scripts/output/_w1076_j2_before · scripts/output/_w1076_j2_before_root3.json · scripts/output/_w1076_j2_after · scripts/output/_w1076_j2_after_root3.json · scripts/output/_w1076_j2_diff_report.json · scripts/output/_cascade_files_W1076.txt · site/data/search.html · site/en/search.html · docs/11-方案报告/计划方案/T42-任务计划执行与经验沉淀报告-2026-11-02.md
+
+**本批要点**：
+
+① **间距字面量令牌化（手术 7·零视觉差异）**——8 根页刻度内字面量候选 82 处 = **实际替换 63 处 + 19 处落在 calc()/clamp() 内按手术 8 排除**；逐页分项与任务书完全吻合（index 14 / dukou-engine 55 / dashboard 6 / guide 3 / 404 3 / rum-viewer 1 / curated 0 / visit-viewer 0）。令牌值 == 原字面量 ⇒ 计算样式零变化；404 为自含小页（不链接 tokens.css）⇒ 补 :root --space-3/--space-4（同值纯加法）。脚本幂等（复跑 0 替换）。
+
+② **dashboard 三件第二套实现回收（手术 1）**——kpi-card 的盒模型/交互态/值与描述排版交 system.css 共享实现统辖（朱砂顶线与行内收敛细线随之生效），内距改 var(--space-5)；**中文值 11 处加 .value--cjk 标记**走 --font-sans 600 26px（卡片 ② 禁改项「禁 .value 套等宽渲染中文」）；filter-tab 下划线式私有实现删除，改用共享 pill 实现（active 实底 --accent）；search-box 边框底色交共享实现、圆角 20px → var(--radius-pill)（卡片 ④ pill），本页特有形态（240px 宽 + SVG 图标 + 清除钮 + 结果面板）保留。
+
+③ **容器归并（手术 2）**——**实测订正任务书与台账各一处前提**：dashboard 的 .container 本已是 var(--container-wide)（1320px），8 根页 **0 处 1536px / 0 处 1024px 容器**；本页唯一 1024px 宽度声明是 .section-sub 的文本测量上限 ⇒ 归并 var(--container-content)（1120px·+96px）；台账「1536→1320 降档」表述同批订正（已是 1320）。
+
+④ **首页组件化（手术 3/4/5）**——.stat 子类 .num→.n、.lbl→.l（DOM + CSS + JS 选择器同步），.l 13px→12px（卡片 ⑧）；.ask-chip 私样式收敛、共享类升入 site/system.css（卡片 ⑫ chip 新增）；.card 内距改 var(--space-6)（卡片 ⑨；h3 20px / 边 --line / 圆角 --radius-md / 阴影 --elev-1 共享已达标）。curated.html **无 .card 组件**（只有结构不同的 .curated-card）⇒ 登记待裁。
+
+⑤ **页脚长文收敛（手术 6）**——首页页脚 CHANGELOG 长文倾倒入限高渐隐容器，「完整更新日志」链接留在限高区外（链接可达性不因收敛丢失）。
+
+⑥ **defer 改值项落地（任务书登记簿）**——硬编码 accent → var(--accent) 两处（dashboard noscript + rum-viewer 统计值）；`--chart-3` 改值与「暗色 --chart-3/--chart-5 新增」在本批**不触发**（8 根页无图表令牌消费面）；404 的字面色属仓内明写的自含页豁免（e-track-exempt）⇒ 不动。
+
+⑦ **证明面补强**——J2 探针默认采样 21 页**不覆盖** dukou-engine / rum-viewer / visit-viewer（本批改动量最大的 55 处正在 dukou-engine）⇒ 动工前补拍 3 页基线（209 元素），把 B1 的 8 页全部纳入零差异证明面。
+
+⑧ **两处门禁冲突在本批收口**——① 第 49 槽朱砂实底限额：共享实现的朱砂顶条落到 dashboard 8 张 KPI 卡（>3 处·裁决 2 硬拦）⇒ 保留 1px 发丝线顶边（**裁决 2 优先于卡片 ② 的顶线默认态**）；② 第 52 槽仓库布局：并行会话新建顶层目录 `agent-guardrails/` 未声明角色 ⇒ 按门禁自带修法补声明（TOP_DIRS + STRUCTURE.md），其件不进本批。
+
+⑩ **独立对抗复核已过（只读审计）**——8 项工程声明的代码事实逐条实读属实（无「改了个数没改对」/「删规则无人接管」/「类名残留引用」三类缺陷）；探针未被削弱（`_diff_snapshots` 逐字未动·独立复算 2098 条逐条一致）；查出的阻断项（L3 陈腐）已由第三笔修掉；报告数字与口径更正（index 计数 148→162、8 条索引配对假阳性、J2 三处盲区披露、级联规模订正为 330 页、rum-viewer 注释口径）已并入本批。
+
+⑨ **CI 红灯根修（PR #73）**——首轮「Delivery Gate」红在第 52 槽（L3 白名单陈腐）：本批曾为他方**未跟踪**的顶层目录 `agent-guardrails/` 做仓内声明 ⇒ 清洁检出无该目录 ⇒ 声明陈腐 ⇒ 回退声明（仓内不声明未入库目录·他方件未暂存/未删/未改）·清洁检出语义复跑 0 FAIL·提交态由 CI 判绿。
+
+**验证**：J2 双面对拍（标准面 21 页 + 补拍面 3 页）差异**逐项列举并写明规格出处**见 T42 报告 §2 与附录 A，**未列举差异 = 0**（标准面 2098 条全部可归因：dashboard 1932 + index 162 + hardship-heatmap 4（基线冻结在图表修复波中间态·该页本批零改动）；补拍面 0 条）；结构平衡 855 文件 1412 style 块通过；全站内联脚本语法 855 文件通过；system.css 净重 23.0KB（预算 ≤24.9KB）；tokens.css 23039B（≤23799B）；pytest 1094 passed · 3 skipped；全量门禁结果见 T42 报告 §3。
+
 ### W1075（2026-10-31）：合并前红灯修复微批（PR #72 checks 三红同根：跳转页链接补 ../ + 跨行基线更新）
 
 > **来源**：用户问「全部都合并了是吗」→ 核查发现 PR #72（dev→main）checks 三红——同根两处：① W1074 跳转页（themes/index.html）可见链接漏 `../` 前缀（全仓链接 1 broken）；② W1071 归档脚本 `_w1071_search_docmap.py` 的 `re.sub(r'<[^>]+>','',txt)` 为跨行门禁基线外新增候选（pytest 2 failed 同根）——人工复核无害（输入为单条锚内文本·无跨行实际暴露）→ 按门禁规程 `--update-baseline`（确认清单 54→55）。
@@ -1332,7 +1365,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1075），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1076），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

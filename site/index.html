@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24=' 'sha256-LY+Pq/ATRZQREEIn+OCkrNIO4v+EDFhhATTTjX0ZW+k=' 'sha256-ynaSLIR7acFCxsZWVdSjaDeRc2H1B9JHIcvfupAqYio='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-SfJTyqjxcuauG14FI8NE3xmGf8OVtpXOMlQlm6v5+Y8=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24=' 'sha256-LY+Pq/ATRZQREEIn+OCkrNIO4v+EDFhhATTTjX0ZW+k=' 'sha256-ynaSLIR7acFCxsZWVdSjaDeRc2H1B9JHIcvfupAqYio='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC——先读 localStorage，无则跟随系统；dark 时在 body 渲染前挂 data-theme
@@ -37,7 +37,7 @@
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-            gap: 48px;
+            gap: var(--space-9);
             padding: clamp(56px, 9vw, var(--space-12)) clamp(var(--space-6), 6vw, var(--space-12)) clamp(36px, 5vw, 56px);
             background-image: url('static/images/hero-line-01-ruyi-staff.webp');
             /* W938：改 contain —— 用户要求「适配各种比例大小·每个人看到的都一样」。
@@ -67,7 +67,7 @@
            （16:9 素材溢出 290px·主体被裁没）；dots 为装饰性切换器·JS 不可用时整组隐藏 */
         /* W1074（N-08 根修②）：375 视口下 9 圆点×26px+8 间距=298px 不换行，加前置标签 61px
    总计 359px > 父内容宽 327px——正是首页 8px 横向溢出的真源头（W1074 实测定位）。 */
-        .hero-dots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--space-5); }
+        .hero-dots { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
         .hero-dots[hidden] { display: none; }
         .hero-dots button {
             width: 26px; height: 26px; padding: 0; cursor: pointer;
@@ -89,7 +89,7 @@
         .masthead-copy .kicker { font-size: 11px; letter-spacing: .16em; margin-bottom: 14px; }
         /* W862 B1 裁决 1：kicker 落 --bg → --accent-text（落点审计 _w862_accent_text_audit.json） */
         .kicker { color: var(--accent-text); }
-        .masthead-copy h1 { font-size: clamp(54px, 5.6vw, 78px); line-height: 1.04; margin-bottom: 12px; }
+        .masthead-copy h1 { font-size: clamp(54px, 5.6vw, 78px); line-height: 1.04; margin-bottom: var(--space-4); }
         .masthead-copy .eng {
             font-size: 11px; color: var(--ink-faint);
             letter-spacing: .14em; margin-bottom: 30px;
@@ -102,45 +102,51 @@
         /* W938：「100 回」数据块并入左侧文字区做横排一行（右侧整块留给插画） */
         .masthead-facts {
             display: flex; flex-wrap: wrap; align-items: flex-start; gap: 18px;
-            border-top: 1px solid var(--line); padding-top: 20px; margin: 26px 0 22px;
+            border-top: 1px solid var(--line); padding-top: var(--space-5); margin: 26px 0 22px;
         }
-        .masthead-facts .mega-row { display: flex; align-items: baseline; gap: 4px; flex-shrink: 0; }
+        .masthead-facts .mega-row { display: flex; align-items: baseline; gap: var(--space-2); flex-shrink: 0; }
         .masthead-facts .mega-num {
             font-family: var(--font-serif); font-weight: 900;
             font-size: clamp(44px, 5.4vw, 60px); line-height: .92;
             color: var(--ink); letter-spacing: -.02em;
         }
         .masthead-facts .mega-unit { font-family: var(--font-serif); font-weight: 500; font-size: clamp(20px, 2.2vw, 24px); }
-        .masthead-facts .mega-label { margin-top: 2px; font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+        .masthead-facts .mega-label { margin-top: var(--space-1); font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
         .masthead-facts .mega-sub { margin-top: 3px; font-size: 10px; color: var(--ink-faint); letter-spacing: .1em; }
-        .masthead-cta { margin-top: 20px; }
+        .masthead-cta { margin-top: var(--space-5); }
         .masthead-cta > a { font-size: 15px; font-weight: 600; color: var(--accent-2); }
         .masthead-cta > a:hover { text-decoration: underline; }
         /* W938：插画切换器归位左侧文字列内（与 CTA 同排会撑破 620px 容器伸进插画区·被金箍棒压住） */
-        .hero-dots-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 16px; }
+        .hero-dots-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-top: 16px; }
         .hero-dots-label { font-size: 11px; color: var(--ink-faint); letter-spacing: .12em; white-space: nowrap; flex-shrink: 0; }
 
         .ink-mountains { display: block; width: 100%; height: 100px; }
 
         /* W865 D1：stats 收进「看数据与工具」区（原为首页顶层独立块） */
         .stats {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8);
             padding: var(--space-5) 0;
             border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
             margin-bottom: var(--space-6);
         }
-        .stat .num {
+        /* W1076 手术 3：stat 组件化（W826 卡片 ⑧）——.num→.n · .lbl→.l ·
+           .l 12px（ink-2 角色 = --ink-soft·令牌表无 --ink-2）· .stats 上下边框已 = --line（ink-4 角色） */
+        .stat .n {
             font-family: var(--font-mono); font-weight: 500; font-size: 30px;
             color: var(--ink); font-variant-numeric: tabular-nums;
         }
-        .stat .lbl { margin-top: 6px; font-size: 13px; color: var(--ink-soft); }
+        .stat .l { margin-top: 6px; font-size: 12px; color: var(--ink-soft); }
 
         .tools-grid {
-            display: grid; grid-template-columns: 2fr 1fr; gap: 20px;
+            display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-5);
         }
-        .tools-side { display: flex; flex-direction: column; gap: 20px; }
+        .tools-side { display: flex; flex-direction: column; gap: var(--space-5); }
         .tools-side .card { flex: 1; }
         .tools-side .card h3 { font-size: 20px; }
+        /* W1076 手术 5：卡片 ⑨ 内距改 v4 间距令牌——本页 .card 消费 var(--space-6)（24px）；
+           h3 20px / 边 --line / 圆角 --radius-md / 阴影 --elev-1 共享实现已达标·
+           共享实现的 clamp(20px,3vw,28px) 收敛属组件层批（须连 250 页 INLINED 副本同批传播） */
+        .card { padding: var(--space-6); }
 
         @media (max-width: 768px) {
             .masthead { flex-direction: column; align-items: flex-start; gap: 28px; }
@@ -148,12 +154,12 @@
                W938：全部改作用域形式（全局 .mega-* 规则已移除·孤立选择器门禁） */
             .masthead-facts .mega-num { font-size: clamp(38px, 11vw, 52px); line-height: 1; }
             .masthead-facts .mega-unit { font-size: clamp(18px, 5vw, 22px); }
-            .masthead-facts .mega-label { margin-top: 2px; }
+            .masthead-facts .mega-label { margin-top: var(--space-1); }
             .masthead-cta { flex-wrap: wrap; gap: 14px; }
             /* W938：窄屏 masthead 变 column 布局（文字在上）⇒ 插画移到容器顶部，首屏即可见
                （contain 下按宽贴合·375px 视口图高约 159px·完整不裁切） */
             .masthead { background-position: right top; }
-            .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .stats { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
             .tools-grid { grid-template-columns: 1fr; }
         }
 
@@ -179,7 +185,7 @@
             font-size: clamp(18px, 2.2vw, 22px); color: var(--ink);
         }
         .ask-hero .ask-sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 18px; }
-        .ask-form { display: flex; gap: 12px; max-width: 640px; }
+        .ask-form { display: flex; gap: var(--space-4); max-width: 640px; }
         .ask-form input {
             flex: 1; font-family: var(--font-serif); font-size: 16px;
             padding: var(--space-4) 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
@@ -203,15 +209,8 @@
         .ask-form button:hover { background: var(--accent-deep); box-shadow: var(--elev-2); }
         .ask-form button:active { transform: scale(0.98); box-shadow: none; }
         .ask-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; max-width: 768px; }
-        .ask-chip {
-            font-size: 13px; color: var(--accent-2); cursor: pointer;
-            border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 10px 16px;
-            background: var(--bg); user-select: none;
-            transition: border-color var(--dur-fast) var(--ease-out-quart),
-                        background var(--dur-fast) var(--ease-out-quart);
-        }
-        .ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
-        .ask-chip:active { transform: scale(0.97); }
+        /* W1076 手术 4：ask-chip 组件化（W826 卡片 ⑫）——本页私样式已收敛，
+           共享实现落 site/system.css 的 .ask-chip（同值迁移·首页视觉零差异） */
         .ask-note { margin-top: 14px; font-size: 12px; color: var(--ink-faint); }
         .ask-note code { background: var(--paper-warm); padding: 1px 6px; border-radius: var(--radius-sm); }
         /* W865 D1：任务区内的段级小标题（h3·与卡片标题同级但有分隔线） */
@@ -255,6 +254,16 @@
         .theme-toggle .icon-sun { display: none; }
         html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
         html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+        /* W1076 手术 6：页脚 CHANGELOG 长文倾倒收敛（W826 卡片 #23）——限高 + 渐隐遮罩，
+           「完整更新日志」链接留在限高区外（链接可达性不因收敛而丢失） */
+        .footer-changelog {
+            display: block;
+            max-height: 3.2em;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+        }
     </style>
     <script type="application/ld+json">
 {
@@ -702,10 +711,10 @@
                     </p>
                 </div>
         <div class="stats" aria-label="项目数据概览">
-            <div class="stat"><div class="num">100</div><div class="lbl">回 · 逐回解读</div></div>
-            <div class="stat"><div class="num">616<!--stats:a1_a6_docs--></div><div class="lbl">篇 · 研究文档</div></div>
-            <div class="stat"><div class="num">87</div><div class="lbl">个 · 可视化页面</div></div>
-            <div class="stat"><div class="num">55</div><div class="lbl">条 · 学术引用</div></div>
+            <div class="stat"><div class="n">100</div><div class="l">回 · 逐回解读</div></div>
+            <div class="stat"><div class="n">616<!--stats:a1_a6_docs--></div><div class="l">篇 · 研究文档</div></div>
+            <div class="stat"><div class="n">87</div><div class="l">个 · 可视化页面</div></div>
+            <div class="stat"><div class="n">55</div><div class="l">条 · 学术引用</div></div>
         </div>
 
                 <div class="tools-grid">
@@ -736,7 +745,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">取经录</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · 并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化 · W1075 合并前红灯修复：跳转链接与跨行基线 · W1074 交互修复二三批合并：动线可达与生产净面 · W1073 首页首屏插画深色变体与主题切换机制落地 · W1072 Skill 候选盘点与编制表角色优化方案落库 · W1071 交互修复第一批：搜索链接化与浮钮隐藏及计数归位 · W1070 交互审查第二轮复核与界面优化施工方案落库 · W1069 效率与防护打包批：环境判据与 BOM 门禁及坑表条目 · W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批 · W1067 CI action ref 根修批 + 记忆与项目沉淀同步批 · W1062 README 换图未生效根修批：换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70 · W1061 私有记忆同步批：工具禁令入必载层与环境坑入坑表 · W1060 CI 提效批：审计矩阵收敛与并发取消补齐 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · <span class="footer-changelog">并行会话滞后提交收口批：残留 3 件收口 + SEC-002 过宽前瞻根修 + 负样本自证固化 · W1076 v4 视觉体系迁移首站落地：根页与入口八页开始消费 v4 令牌：间距字面量令牌化（零视觉差异）、dashboard 三件第二套实现回收、首页 stat/chip/card 组件化、页脚长文收敛、容器归并 · W1075 合并前红灯修复：跳转链接与跨行基线 · W1074 交互修复二三批合并：动线可达与生产净面 · W1073 首页首屏插画深色变体与主题切换机制落地 · W1072 Skill 候选盘点与编制表角色优化方案落库 · W1071 交互修复第一批：搜索链接化与浮钮隐藏及计数归位 · W1070 交互审查第二轮复核与界面优化施工方案落库 · W1069 效率与防护打包批：环境判据与 BOM 门禁及坑表条目 · W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批 · W1067 CI action ref 根修批 + 记忆与项目沉淀同步批 · W1062 README 换图未生效根修批：换图提交只在 dev 未进 main + 两道 CI 红卡住 PR #70 · W1061 私有记忆同步批：工具禁令入必载层与环境坑入坑表 · …更早批次详见 CHANGELOG.md</span><a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>
@@ -778,7 +787,7 @@
       // fail-open：HTML 内已是终值；reduced-motion / IO 不可用 / 异常时保持终值不动
       (function () {
         var els = Array.prototype.filter.call(
-          document.querySelectorAll('.stats .num'),
+          document.querySelectorAll('.stats .n'),
           function (el) { return /^\d+$/.test((el.textContent || '').trim()); }
         );
         if (!els.length) return;
