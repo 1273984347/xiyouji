@@ -1,3 +1,22 @@
+### W1079（2026-11-02）：图表色工程批·形态取证与三档方案
+
+
+> **来源**：承接 W1078 盘点与 W1079 实测订正后的程序建议「图表色工程批」；用户 2026-11-02「然后呢」续作。
+>
+> - **文件**：archive/scripts/batches/w1079/_w1079_js_color_shapes.py · docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md
+
+**本批要点**：
+
+① **形态取证（全站 script 块·12 个 defer 色值·互斥归类）**——同一批硬编码颜色落在**三个不同层**，解法完全不同：**D3 `.style('fill'/'stroke')` 28 处**（style 属性解析 `var()` ⇒ **可直接换令牌·暗色自动跟随**）；**D3 `.attr('fill'/'stroke')` 97 处**（SVG 表现属性**不解析** `var()` ⇒ 需改写且**优先级会变**：style 属性 > 表现属性 ⇒ 会顶掉 CSS 类色）；**echarts/配置字段 348 处 + 通用 CSS 属性值 354 处**（图表库自己解析颜色串 ⇒ 不吃 CSS 变量）；**JS 常量表 1,537 处**（如 dashboard 的 `LORS`）。页分布最高：`data/relationships.html` 44 · `en/relationships.html` 44 · `en/jurisprudence.html` 36。
+
+② **三档推进方案（各自可独立成批）**——档 1 = 28 处 `.style()` 形态（零成本·试点页须覆盖 ≥3 个图表库·暗色 computed style 对拍 + 残留扫描 + 令牌同值断言）；档 2 = 97 处 `.attr()` 形态（改写 + 优先级逐处核）；档 3 = echarts 与常量表读令牌喂图表 ⇒ `site/tokens.css` 暗色块 **111 行 SVG 旧色→替代色映射表**方可整表删除（**必须与「JS 不再写死色」同批**，否则暗色图表失色）。
+
+③ **计数口径订正（E-15）**——共享副本里那 57,090 处 hex 实为 **111 个定义**的 514 次复制 ⇒ 盘点与排期必须区分「**定义点**」与「**出现处**」；W1078 的归口结论不变（仍属共享层），但改动面评估从「几万处」降到「百行级」。
+
+④ **本批零页面改动**——取证批与施工批分开（档 1 施工另起一批，W1079 号已占），使「方案是否有数据支撑」可由 `git diff` 直接核验。
+
+**验证**：形态统计工具纯标准库·可复算（互斥归类合计 2,364 + 裸字面量 1,537）·令牌映射取自 `site/tokens.css` 实解析 · 111 行映射表实读定位 · 计划方案结构合规（第 48 门禁判据器自测 0 不符合）· 全量门禁与 pytest 结果见 T44 报告 §3.4。
+
 ### W1078（2026-11-02）：全站硬编码颜色盘点（B2 落地面）
 
 
@@ -1415,7 +1434,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1078），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1079），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1874,12 +1893,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：docs/00-导读/协议边界速查.md · docs/00-导读/文档规范.md · docs/agent/gates.md · CLAUDE.md · scripts/check_gov_doc_claims.py · scripts/preflight_check.py · scripts/ledger_backfill.py · scripts/check_gsap_motion.py · scripts/verify_delivery.py · scripts/output/script-coverage-baseline.txt · CHANGELOG.md · scripts/output/file-index.md · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
 > **验证**：对账器 --self-test 过（实证错位形态必红）+ 现网七断言全一致 + preflight 提示位接线实测输出 + pytest 全量 914 passed（917 收集·标记三方同步）+ ruff 全仓清零（含 ledger E741 与 gsap F401 顺带）。
 > **状态**：**已收官**（W967 git 反填·含认领与级联与回填）
-
-### W966（2026-10-26）：AGENTS 摘要层纠偏与去冗批（用户令「内容别说废话和没用的东西」）
-
-> **来源**：用户通读 AGENTS.md 后令「内容别说废话和没用的东西」。
-> **摘要**：① **过期数字纠偏四处**——阅读契约「全 46 条门禁」→50 槽、§4.2 引言与摘要标记 49 槽→50、分组表 27-49→27-50、坑位 49 条→57 条（W961 挂第 50 槽与 W956/W964 上移坑位时均未同步的欠账一并清偿）。② **自相矛盾消除**——文件头「动手前请通读」与阅读契约「不要线性通读」冲突，改为按 §7 路径按需读节。③ **超长条目收敛**——第 50 槽条目压缩至兄弟条目一行形态（全量定义在 gates.md 第 50 条未动）、PyYAML 环境事实压缩为一句、Python 启动器叙事去内嵌实测故事（保留三语境结论）、坑位计数链压缩为现役计数（增量沿革在各条目自注与 CHANGELOG）。④ **维护契约补第 ⑤ 条摘要层纪律**——条目一行一事，叙事与验证细节归 L2，过期数字随批纠偏（防复发）。AGENTS.md 26.6→23.9 KB。
-> **文件**：AGENTS.md · CHANGELOG.md · scripts/output/file-index.md
-> **验证**：check_doc_sync 0 FAIL；verify --scope docs rc=0；八组编辑锚点全部唯一命中。
-> **状态**：**已收官**（W966 git 反填）（git 反填·含认领与级联与回填）
 
