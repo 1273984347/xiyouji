@@ -8,7 +8,7 @@
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
 
-> 当前批次：W1076（2026-11-02）— v4 视觉体系迁移首站落地：根页与入口八页开始消费 v4 令牌：间距字面量令牌化（零视觉差异）、dashboard 三件第二套实现回收、首页 stat/chip/card 组件化、页脚长文收敛、容器归并—A1-A6
+> 当前批次：W1078（2026-11-02）— v4 迁移的 B2 落地面：全站硬编码颜色分类盘点，按所在面归集并给出令牌映射与不可替换项—A1-A6
 
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
@@ -253,7 +253,7 @@
 
 ### 11-方案报告/（W737 新增·W758 改名并子目录化）
 
-报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 110<!--stats:report_docs--> 篇 .md（W900 分区后六子目录：审查与评审 11 篇<!--doc-sync:exempt--> · 设计与架构方案 6 篇<!--doc-sync:exempt-->（另附 HTML 预览页 3 件） · 治理与核查 3 篇<!--doc-sync:exempt--> · 调研与数据复盘 2 篇<!--doc-sync:exempt-->（另附读者数据截图 5 件） · 工作复盘与优化分析报告 14 篇<!--doc-sync:exempt--> · 计划方案 36 篇<!--doc-sync:exempt--> · 加索引 README；根层仅留索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
+报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 111<!--stats:report_docs--> 篇 .md（W900 分区后六子目录：审查与评审 11 篇<!--doc-sync:exempt--> · 设计与架构方案 6 篇<!--doc-sync:exempt-->（另附 HTML 预览页 3 件） · 治理与核查 3 篇<!--doc-sync:exempt--> · 调研与数据复盘 2 篇<!--doc-sync:exempt-->（另附读者数据截图 5 件） · 工作复盘与优化分析报告 14 篇<!--doc-sync:exempt--> · 计划方案 36 篇<!--doc-sync:exempt--> · 加索引 README；根层仅留索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
 
 
 
@@ -322,6 +322,10 @@
 > 历史模板（article-template/handoff-checklist/validation-checklist）已于 W797 归馆 `archive/docs/templates/`（采用率 0%·馆藏说明含退休依据）；现行交付自检与结构约定见 `docs/00-导读/文档规范.md` §12。
 
 
+
+### agent-guardrails/（AI Agent 约束层·W1077 新增）
+
+规则补丁 + 改动集 Python 结构检查：`merge-patch.md`（根 `CLAUDE.md` / `AGENTS.md` / `pyproject.toml` 的可合并片段与插入位置）、`self-check.md`（5 条只问事实的自检）、`README.md`（阈值决策表与收紧路线）；可执行件在 `scripts/guardrails/`，样例 fixture 在 `tests/fixtures/_sample.py`。目录名不带数字前缀 ⇒ 不进 `docs/INDEX.md`（`docs_index.py` 只收数字前缀目录）。
 
 ## source/ 子目录
 
@@ -502,6 +506,8 @@
 | **反向索引** | `output/file-index.md` | 文件→W 条目反向索引（400+ 行，45 HTML + 34<!--stats:script_classes--> 类 scripts + docs + 根目录 + Top 5 多次改动文件），与 CHANGELOG.md 双向链接 |
 
 | **工程化工具**（v2.2.16 新增） | `run_all.py`、`new_page.py`、`release.py`、`drl_spotcheck.py`、`data_validate.py`、`docs_index.py`、`sync_docs.py --fix` | 批量调度 34<!--stats:script_classes--> 类分析脚本 + 页面脚手架 + 版本发布体检 + DRL spot-check + JSON 结构校验（131 文件）+ 文档索引生成（`docs/INDEX.md` 全量条目）+ 6 文件文档一致性自动修复 |
+
+| **Agent 约束层**（W1077 新增） | `guardrails/` | AI 编码 agent 的改动集检查：`check_changed.ps1/.sh`（入口）+ `once_call.py` / `api_diff.py` / `check_nested_comprehension.py`（子检查）+ `ruff-structure.toml`（结构档阈值）；只扫改动文件，不改变 CI 全仓口径 |
 
 | **目录索引生成**（W779 新增） | `gen_folder_docs.py` | 为在管目录补齐 `index.md`（逐文件清单·机器可读）+ `README.md`（目录导读·人读）；幂等（已存在跳过·大小写不敏感判重防覆写 `INDEX.md`）·自动排除 gitignored 路径、治理树（10-方法论沉淀/11-方案报告/docs 01-06 顶层）与构建产物；`--dry-run`/`--force` |
 

@@ -57,3 +57,14 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [pre-commit]  # W1014: 原 [commit] 为废弃 stage 名（validate-config 告警·migrate-config 同款）
+
+      - id: agent-guardrails
+        name: agent-guardrails（暂存区 .py 结构检查·W1077）
+        entry: python scripts/guardrails/precommit_entry.py
+        language: python
+        files: \.py$
+        exclude: ^(tmpe/|.*/_[^/]*\.py$)
+        pass_filenames: true
+        always_run: false
+        # 与手写钩子同源（scripts/install_hooks.sh）；entry 用 Python 入口显式定位 bash，
+        # 规避 Windows PATH 上的 WSL 中继；check_changed.sh 以 git write-tree 做同索引去重。
