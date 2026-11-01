@@ -1,3 +1,26 @@
+### W1080（2026-11-02）：图表色工程批·档 1 假设证伪与回退
+
+
+> **来源**：承接 W1079 的三档方案（档 1 = style 属性层零成本档）；用户 2026-11-02「开工」令。
+>
+> - **文件**：archive/scripts/batches/w1080/_w1080_style_tokenize.py · scripts/output/_w1080_j2_before · scripts/output/_w1080_j2_after · scripts/output/_w1080_spec.json
+
+**本批要点（结论：档 1 假设被证伪 ⇒ 改动全部回退）**：
+
+⓪ **档 1 前提假设 ASM-03 被实测证伪**——把 CSS 变量**直喂 D3 `.style('fill'|'stroke', …)`** 会让图表页中断渲染：`en/global-pattern.html` 暗色元素数由 **533 稳定掉到 109**（`after→重拍` 同态差异 **0** ⇒ 不是采集抖动；回退后复拍 **1065 = 533+532** ⇒ 回到改动前）。根因：`var(--chart-1)` 字符串被代码回读或参与后续颜色计算时解析失败。⇒ **24 处改动全部回退（零残留）**；档 1 重新定义为「**读令牌喂图表**」（`getComputedStyle` 求值 + 页面级 token helper·覆盖 `.style()` 与 `.attr()` 两形态），与档 3 同法 ⇒ 档 1/2 合并为一批。
+
+**本批要点（工具与证据面）**：
+
+① **改动面 24 处 / 14 个 EN 页**——把 D3 `.style('fill'|'stroke', '#hex')`（**style 属性层**：解析 CSS 变量 ⇒ 可换令牌且暗色自动跟随）的硬编码图表色换成 v4 图表令牌：`#C8463A → var(--chart-1)` · `#3A6B8C → var(--chart-2)` · `#6B8E5A → var(--chart-4)`。**只换与 `--chart-N` 浅色值同值者** ⇒ 浅色渲染零差异；暗色随令牌对齐（#C8463A→#E0604F / #3A6B8C→#7FA8C9 / #6B8E5A→#9DB98A）= **有意变化·逐项列举**。
+
+② **4 处不动并登记**——`#E9B885`（`--accent-soft`）等属 **UI 语义色**（非图表系列色）⇒ 换成 `--accent-*` 会造成语义错配，不做；表现属性层（`.attr('fill'…)` 97 处）与图表库 API（echarts 配置 348 处）分别属档 2 / 档 3。
+
+③ **判据**——① J2 双面（14 页 × 浅暗）对拍：**浅色面差异 = 0**、暗色面差异逐项等于令牌切换 ② 残留扫描：该形态的硬编码 chart 色 = 0 ③ 令牌同值断言：每个替换的 `--chart-N` 浅色值 == 原 hex ④ 幂等：复跑 0 替换。
+
+④ **共享暗色映射表不动**——`tokens.css` 暗色块 111 行 SVG 旧色→替代色映射表的删除前提是「JS 不再写死旧色」，档 3 完成前不删（D-05 同批约束）。
+
+**验证**：见 T44 报告承接与本段说明；J2 双面差异清单与门禁结果见台账与提交说明。
+
 ### W1079（2026-11-02）：图表色工程批·形态取证与三档方案
 
 
@@ -1434,7 +1457,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1079），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1080），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1885,12 +1908,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · scripts/check_doc_size_budget.py · scripts/check_parser_anchor_coverage.py · tests/unit/test_doc_size_budget.py · CHANGELOG.md · scripts/output/file-index.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md
 > **验证**：迁移守恒断言五道全过 + parse_ledger 前后对拍（max=W967 不变·在途集合不变）+ 体积门禁三窗全绿（109/110·109/110·60/60）+ M5 316/316 + pytest 全量 914 passed + ruff 清零。
 > **状态**：**已收官**（W968 git 反填·含认领与拆分与级联与回填）
-
-### W967（2026-10-26）：治理文档数字断言全面对账批（举一反三·用户令）
-
-> **来源**：用户令「举一反三，再全面检查一下本项目内其他全部文件内容有没有类似问题」——W966 摘要层三缺陷（过期数字/自相矛盾/叙事入摘要）的跨文档普查。
-> **摘要**：① **真漂移四处纠偏**——文档规范「全量=verify full 45 段」→全部执行段现役 55 段随挂槽演进；协议边界速查六板块字母系统性错位一格（02-人物标 A2/44 篇实为 A3/215 篇等五处）另 S1 残迹（目录已改名 S3）；gates.md 根级脚本「现 118 个」冻结快照改活口径；CLAUDE.md 接手导航「AGENTS.md 通读」与索引型契约矛盾改按需读节。② **探针沉淀常驻**——scripts/check_gov_doc_claims.py（N1 速查六板块字母与篇数对 docs 磁盘实算[剔除生成件口径]/N2 文档规范全量段数对 verify EXPECTED_SECTION_NAMES 实数/N3 槽数对 gates 编号条目/N4 坑位数对 pitfalls 逐节计数/N5 新Agent启动Prompt 三键对 stats.json；报告型+preflight 提示位接线 WARN 不拦截+基线 ② 登记）；自测含 W967 实证错位形态必红样本；建置即纠自身口径假漂移一次（磁盘计数误含目录生成件·剔除后与官方数恰合）。③ 现网七断言全一致（速查 100/215/209/34/13/44·55 段·50 槽·57 条·615/87/88）。
-> **文件**：docs/00-导读/协议边界速查.md · docs/00-导读/文档规范.md · docs/agent/gates.md · CLAUDE.md · scripts/check_gov_doc_claims.py · scripts/preflight_check.py · scripts/ledger_backfill.py · scripts/check_gsap_motion.py · scripts/verify_delivery.py · scripts/output/script-coverage-baseline.txt · CHANGELOG.md · scripts/output/file-index.md · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
-> **验证**：对账器 --self-test 过（实证错位形态必红）+ 现网七断言全一致 + preflight 提示位接线实测输出 + pytest 全量 914 passed（917 收集·标记三方同步）+ ruff 全仓清零（含 ledger E741 与 gsap F401 顺带）。
-> **状态**：**已收官**（W967 git 反填·含认领与级联与回填）
 
