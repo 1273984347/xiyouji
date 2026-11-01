@@ -5,19 +5,20 @@
 > 文件角色：逐文件索引（机器可读·与 README.md 分工：本文件列清单、README 讲用途约定）
 
 > 本文件逐条列出 `scripts/guardrails/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
-> 全仓目录用途见根目录 `STRUCTURE.md`。
+> 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
 ## 子目录（0）
 
 - （无）
 
-## 文件（6）
+## 文件（7）
 
 ### Python 脚本
 
 - `api_diff.py`
 - `check_nested_comprehension.py`
 - `once_call.py`
+- `precommit_entry.py`
 
 ### 数据与配置
 

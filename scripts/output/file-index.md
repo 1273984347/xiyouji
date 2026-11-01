@@ -34,6 +34,7 @@
 | scripts/guardrails/api_diff.py | W1077 | 本批工具（迁移） |
 | scripts/guardrails/check_nested_comprehension.py | W1077 | 本批工具（迁移） |
 | scripts/guardrails/ruff-structure.toml | W1077 | 本批工具（迁移） |
+| scripts/guardrails/precommit_entry.py | W1077 | pre-commit 本地 hook 入口 |
 | scripts/install_hooks.sh | W1077 | 幂等安装脚本 |
 | scripts/install_hooks.ps1 | W1077 | 安装脚本薄封装 |
 | .pre-commit-config.yaml | W1077 | 框架本地 hook（防 install 丢失） |
