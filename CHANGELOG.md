@@ -1,3 +1,22 @@
+### W1097（2026-11-02）：图表色工程批·档 2 扩展批 1（表现属性直喂与补偿失配量化）
+
+
+> **来源**：用户 2026-11-02「继续下一批」。
+>
+> - **文件**：docs/11-方案报告/计划方案/T52-任务计划执行与经验沉淀报告-2026-11-02.md · scripts/visual_regression_probe.py · site/en/business-model.html
+
+**本批要点**：
+
+① **施工**：10 页 66 处 `.attr(fill/stroke, "#调色板色")` → **保留 `.attr`** 直写 `var(--chart-N)`。**依据**：表现属性位的 `var()` 能解析且随令牌变（实测）⇒ 不需改写为 `.style`（改写会抬升优先级 → 顶掉 CSS 类色）。
+
+② **工具层**：J2 属性集 31→32（加 `filter`）· SCHEMA 4→5。加 filter 的原因：暗色亮度补偿（`svg path[fill^="#"] { filter: brightness(...) }`）是**按 content attribute 字面值匹配**的规则⇒ 换成 `var(--chart-N)` 后不再命中 ⇒ 补偿消失是真实视觉变化 ⇒ 不含 filter 就测不到。
+
+③ **双态对拍**：差异 prop **{fill: 12, filter: 7, stroke: 1}**：fill = 暗色令牌跟随（`rgb(200,70,58)` → `rgb(224,96,79)`）；**filter 由 `brightness(1.12) saturate(1.05)` 变 `none`**⇒ 暗色亮度补偿失配。元素数：9 页一致，`en/jurisprudence.html` 明暗各差 1 已实测归因为**跨时段采集抖动**（回退未改动态连采两次均与改动后一致）⇒ 非本批引入。调色板色残留 **0** · CSP 856 页零漂移。
+
+④ **E-86**：表现属性位的 `var()` 能解析且随令牌变（推翻旧结论）；补偿失配是真实视觉变化而不含 filter 的视觉回归集测不到；元素数跨时段采集有 ±1 抖动 ⇒ 差 1 先同态连采归因再定性。坑表 208 → **209**，计数链五处同步。
+
+**验证**：十二组双态读数入库（J2 快照因体量未入库而留工作树）· 全量门禁与 pytest 结果见台账与提交说明。
+
 ### W1096（2026-11-02）：INDEX 大小写统一 + design 审查 + 归档清偿（三合一治理批）
 
 > **来源**：用户 2026-11-02 三项指令（统一 INDEX/index 大小写 / 审查所有 design 文件 / 归档系统文件内容归档）⇒ 本批为三合一治理批。
@@ -1647,7 +1666,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1096），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1097），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1977,20 +1996,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：取证脚本 `_w978_review_evidence.py` 单源产出全部统计（附录 A 可复算）· check_review_trigger 实跑 T3 面板值入报告 · 21 段标题一手核对 · verify 全量 rc=0 + pytest 全绿 + ruff 0 见状态行。
 
 > - **状态**：已收官（`ec53ba95`·verify 全量 rc=0 + pytest 全绿 + ruff 0 + lint_links 0 broken·区间 21 段/92 提交·T3 面板 1.19 天/23 批/92 笔）
-
-### W977（2026-10-27）：一次性件批量退役批（454 候选·286 入档·16 现役硬保留·152 S4 本地件不入仓）
-
-
-
-> **来源**：用户 2026-10-27 引用体检收官报告「scripts/ 一次性件已积 384 个，archive/scripts/ 有 51 件退役先例，可择机批量清」令即办（实盘盘点为 454 件顶层 `_` 件·含 W977 当日新增计入口径）。
-
-> - **文件**：archive/README.md、scripts/index.md、scripts/output/index.md、archive/scripts/batches/README.md、archive/scripts/batches/index.md、archive/scripts/batches/misc/README.md、archive/scripts/batches/misc/index.md、archive/scripts/batches/w6xx/README.md、archive/scripts/batches/w6xx/index.md、archive/scripts/batches/w7xx/README.md、archive/scripts/batches/w7xx/index.md、archive/scripts/batches/w8xx/README.md、archive/scripts/batches/w8xx/index.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w977_spec.json、scripts/output/_cascade_files_W977.txt + **286 件 git mv 改名（scripts/_* → archive/scripts/batches/{misc,w6xx,w7xx,w8xx,w9xx}/·逐件不入本行·组行见 archive/README.md 台账）**。
-
-**方法（同契约·规模适配）**：archive_file.py 为「单件/小批」设计（逐件全仓 grep 在 439 件规模下不可行），按 archive/README.md「大批量批处理手动登记」条款走同契约实现——① 语料级引用剔除（tmpe/_w977_scan.py·活引用面=门禁/工具/测试/治理文档/CI/Makefile 一次载入逐 stem 匹配）；② 批量 git mv（失败即停·幂等续跑）；③ 组行台账登记（5 组）。**引用分级结果：454 候选 → 16 件现役硬保留**（`__init__.py`、`_cite_probe.py`[坑表+CLAUDE+check_claude_md 三面引用]、`_check_pipeline_consistency.py`[铁律 13]、`_gen_search_index.py`[第 46 门禁+单测]、`_w851_j1_name_audit.py`/`_w851_visual_regression_probe.py`[单测 import]、`_w857_plan_template_review.py`[第 48 门禁]、`_w864_accent_audit.py`/`_w876_site_audit.py`[朱砂门禁族]、`_w818_file_protocol_probe.py`[check_page_admission]、`_w933_mutation_test.py`[Makefile]、`_w939_scan_targets.py`/`_w946_icon_probe.js`[check_emoji_icons]、`_w950_refresh_icon_paths.py`[坑表]、`_audit_render_states.js`[暗色门禁+CI]·`_w954_review_evidence.py`[复盘取证锚点+lint_links 实锤活链接]）**+ 287 件退役入库**（misc 60 + w6xx 2 + w7xx 31 + w8xx 42 + w9xx 151·1 件 _w954_review_evidence 复盘取证锚点复位留用）**+ 152 件 S4 本地件原地不动**（.gitignore:159 `scripts/_s4_*` 双盲纪律·从未入仓）。
-
-**防复发裁决两件**：① `_check_json_copies.py` 目标冲突暴露其正是 **W842 从 archive 恢复的现役字节级自检工具**（W735 误归档→回灌盲区根因）——追加硬保留，杜绝二次误归档；② 归档件冷存储语义（W836 实证 ROOT 上溯失效）——本批入档件均为一次性使命终结件，无现役调用面。
-
-**验证**：迁移后 `git status` scripts/ 零未跟踪（152 件为 gitignore 屏蔽态）；gen_folder_docs --refresh 后 scripts/index.md 与 output/index.md 零僵尸行（output/ 自有 _w7xx 件与 spec 属在位实件）；ruff 豁免面核实（pyproject `**/_*.py` + `archive/` W400 前例）；全量 verify + pytest + ruff 见验证行。
-
-> - **状态**：已收官（9eaa41e3·verify 全量 rc=0 + pytest 922 过/3 跳 + ruff 0 + lint_links 5545 链接 0 broken）
 

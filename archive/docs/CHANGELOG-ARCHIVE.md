@@ -16,6 +16,22 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W977（2026-10-27）：一次性件批量退役批（454 候选·286 入档·16 现役硬保留·152 S4 本地件不入仓）
+
+
+
+> **来源**：用户 2026-10-27 引用体检收官报告「scripts/ 一次性件已积 384 个，archive/scripts/ 有 51 件退役先例，可择机批量清」令即办（实盘盘点为 454 件顶层 `_` 件·含 W977 当日新增计入口径）。
+
+> - **文件**：archive/README.md、scripts/index.md、scripts/output/index.md、archive/scripts/batches/README.md、archive/scripts/batches/index.md、archive/scripts/batches/misc/README.md、archive/scripts/batches/misc/index.md、archive/scripts/batches/w6xx/README.md、archive/scripts/batches/w6xx/index.md、archive/scripts/batches/w7xx/README.md、archive/scripts/batches/w7xx/index.md、archive/scripts/batches/w8xx/README.md、archive/scripts/batches/w8xx/index.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w977_spec.json、scripts/output/_cascade_files_W977.txt + **286 件 git mv 改名（scripts/_* → archive/scripts/batches/{misc,w6xx,w7xx,w8xx,w9xx}/·逐件不入本行·组行见 archive/README.md 台账）**。
+
+**方法（同契约·规模适配）**：archive_file.py 为「单件/小批」设计（逐件全仓 grep 在 439 件规模下不可行），按 archive/README.md「大批量批处理手动登记」条款走同契约实现——① 语料级引用剔除（tmpe/_w977_scan.py·活引用面=门禁/工具/测试/治理文档/CI/Makefile 一次载入逐 stem 匹配）；② 批量 git mv（失败即停·幂等续跑）；③ 组行台账登记（5 组）。**引用分级结果：454 候选 → 16 件现役硬保留**（`__init__.py`、`_cite_probe.py`[坑表+CLAUDE+check_claude_md 三面引用]、`_check_pipeline_consistency.py`[铁律 13]、`_gen_search_index.py`[第 46 门禁+单测]、`_w851_j1_name_audit.py`/`_w851_visual_regression_probe.py`[单测 import]、`_w857_plan_template_review.py`[第 48 门禁]、`_w864_accent_audit.py`/`_w876_site_audit.py`[朱砂门禁族]、`_w818_file_protocol_probe.py`[check_page_admission]、`_w933_mutation_test.py`[Makefile]、`_w939_scan_targets.py`/`_w946_icon_probe.js`[check_emoji_icons]、`_w950_refresh_icon_paths.py`[坑表]、`_audit_render_states.js`[暗色门禁+CI]·`_w954_review_evidence.py`[复盘取证锚点+lint_links 实锤活链接]）**+ 287 件退役入库**（misc 60 + w6xx 2 + w7xx 31 + w8xx 42 + w9xx 151·1 件 _w954_review_evidence 复盘取证锚点复位留用）**+ 152 件 S4 本地件原地不动**（.gitignore:159 `scripts/_s4_*` 双盲纪律·从未入仓）。
+
+**防复发裁决两件**：① `_check_json_copies.py` 目标冲突暴露其正是 **W842 从 archive 恢复的现役字节级自检工具**（W735 误归档→回灌盲区根因）——追加硬保留，杜绝二次误归档；② 归档件冷存储语义（W836 实证 ROOT 上溯失效）——本批入档件均为一次性使命终结件，无现役调用面。
+
+**验证**：迁移后 `git status` scripts/ 零未跟踪（152 件为 gitignore 屏蔽态）；gen_folder_docs --refresh 后 scripts/index.md 与 output/index.md 零僵尸行（output/ 自有 _w7xx 件与 spec 属在位实件）；ruff 豁免面核实（pyproject `**/_*.py` + `archive/` W400 前例）；全量 verify + pytest + ruff 见验证行。
+
+> - **状态**：已收官（9eaa41e3·verify 全量 rc=0 + pytest 922 过/3 跳 + ruff 0 + lint_links 5545 链接 0 broken）
+
 ### W976（2026-10-27）：工具链体检修复批（台账修剪器 A5 + C3 修路指引 + preflight 自撞 + 三窗回窗 + 坑表沉淀）
 
 
