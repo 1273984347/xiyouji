@@ -1,0 +1,6396 @@
+{
+ "layers_total": {
+  "L5 裸 hex 字面量": 2623,
+  "L1 D3 .attr/.style(fill|stroke)": 994,
+  "L4 通用 CSS 属性值": 32,
+  "L3 Canvas fillStyle/strokeStyle": 13,
+  "L2 echarts 配置色": 1154
+ },
+ "layers_pages": {
+  "L5 裸 hex 字面量": {
+   "dashboard.html": 9,
+   "dukou-engine.html": 7,
+   "_template.html": 12,
+   "data/81-hardships-view.html": 6,
+   "data/81-hardships.html": 9,
+   "data/aesthetics.html": 22,
+   "data/business-model.html": 10,
+   "data/cave-estate.html": 8,
+   "data/chapter-stats.html": 4,
+   "data/chapter-structure-graph.html": 18,
+   "data/character-appearance.html": 4,
+   "data/character-presence-timeline.html": 3,
+   "data/character-relationship-3d-view.html": 6,
+   "data/character-semantic-network.html": 32,
+   "data/chart-design.html": 24,
+   "data/cognitive-psychology.html": 8,
+   "data/concept-device.html": 5,
+   "data/counterfactual.html": 9,
+   "data/criticism-history.html": 10,
+   "data/cultural-misreading.html": 8,
+   "data/data-explorer.html": 6,
+   "data/deconstruction.html": 18,
+   "data/dialogue-sentiment.html": 10,
+   "data/ecology.html": 9,
+   "data/ethics-consumption.html": 8,
+   "data/four-dimensional-research-network.html": 6,
+   "data/four-heavenly-kings-artifacts.html": 11,
+   "data/game-webnovel.html": 31,
+   "data/global-pattern.html": 8,
+   "data/graph-explorer.html": 46,
+   "data/guanyin-six-roles-network.html": 11,
+   "data/hardship-difficulty-heatmap.html": 15,
+   "data/hardship-heatmap.html": 9,
+   "data/heaven-power-network.html": 54,
+   "data/intertextuality-network.html": 27,
+   "data/journey-geo-semiotics.html": 5,
+   "data/journey-map-interactive.html": 8,
+   "data/journey-route.html": 17,
+   "data/jurisprudence.html": 33,
+   "data/karma-reincarnation.html": 46,
+   "data/linguistics.html": 13,
+   "data/magic-system.html": 12,
+   "data/material-archaeology.html": 38,
+   "data/methodology-matrix.html": 7,
+   "data/ming-political-thought-comparison.html": 26,
+   "data/monster-background.html": 4,
+   "data/monster-capability-radar.html": 26,
+   "data/monster-ecology-network.html": 17,
+   "data/monster-female-network.html": 36,
+   "data/monster-hierarchy-network.html": 47,
+   "data/monster-sociology.html": 26,
+   "data/monster-victims-network.html": 24,
+   "data/music-structure.html": 23,
+   "data/narrative-experiment.html": 7,
+   "data/narrative-rhythm-curve.html": 7,
+   "data/narratology-12d-network.html": 31,
+   "data/narratology-16d-network.html": 38,
+   "data/perf-canvas-rendering.html": 5,
+   "data/philosophy.html": 25,
+   "data/pilgrim-team-dynamic-network.html": 10,
+   "data/pilgrim-team-psychology-arc.html": 10,
+   "data/poetry-rhythm-analysis.html": 17,
+   "data/power-resources.html": 16,
+   "data/relationships.html": 63,
+   "data/risk-project.html": 18,
+   "data/six-senses-narratology-network.html": 13,
+   "data/social-media.html": 35,
+   "data/story-timeline.html": 5,
+   "data/text-evolution.html": 18,
+   "data/theological-intervention-network.html": 25,
+   "data/underworld-power-network.html": 51,
+   "data/visual-art.html": 21,
+   "data/workplace.html": 18,
+   "en/81-hardships-view.html": 6,
+   "en/81-hardships.html": 9,
+   "en/aesthetics.html": 22,
+   "en/business-model.html": 10,
+   "en/cave-estate.html": 8,
+   "en/chapter-stats.html": 4,
+   "en/chapter-structure-graph.html": 18,
+   "en/character-appearance.html": 5,
+   "en/character-presence-timeline.html": 3,
+   "en/character-relationship-3d-view.html": 6,
+   "en/character-semantic-network.html": 32,
+   "en/chart-design.html": 24,
+   "en/cognitive-psychology.html": 8,
+   "en/concept-device.html": 5,
+   "en/counterfactual.html": 9,
+   "en/criticism-history.html": 10,
+   "en/cultural-misreading.html": 8,
+   "en/data-explorer.html": 6,
+   "en/deconstruction.html": 18,
+   "en/dialogue-sentiment.html": 10,
+   "en/dukou-engine.html": 7,
+   "en/ecology.html": 9,
+   "en/ethics-consumption.html": 8,
+   "en/four-dimensional-research-network.html": 6,
+   "en/four-heavenly-kings-artifacts.html": 11,
+   "en/game-webnovel.html": 31,
+   "en/global-pattern.html": 8,
+   "en/graph-explorer.html": 46,
+   "en/guanyin-six-roles-network.html": 11,
+   "en/hardship-difficulty-heatmap.html": 15,
+   "en/hardship-heatmap.html": 9,
+   "en/heaven-power-network.html": 54,
+   "en/intertextuality-network.html": 27,
+   "en/journey-geo-semiotics.html": 5,
+   "en/journey-map-interactive.html": 8,
+   "en/journey-route.html": 17,
+   "en/jurisprudence.html": 33,
+   "en/karma-reincarnation.html": 46,
+   "en/linguistics.html": 13,
+   "en/magic-system.html": 12,
+   "en/material-archaeology.html": 38,
+   "en/methodology-matrix.html": 7,
+   "en/ming-political-thought-comparison.html": 26,
+   "en/monster-background.html": 4,
+   "en/monster-capability-radar.html": 26,
+   "en/monster-ecology-network.html": 17,
+   "en/monster-female-network.html": 36,
+   "en/monster-hierarchy-network.html": 47,
+   "en/monster-sociology.html": 26,
+   "en/monster-victims-network.html": 24,
+   "en/music-structure.html": 23,
+   "en/narrative-experiment.html": 7,
+   "en/narrative-rhythm-curve.html": 7,
+   "en/narratology-12d-network.html": 31,
+   "en/narratology-16d-network.html": 38,
+   "en/perf-canvas-rendering.html": 5,
+   "en/philosophy.html": 25,
+   "en/pilgrim-team-dynamic-network.html": 10,
+   "en/pilgrim-team-psychology-arc.html": 10,
+   "en/poetry-rhythm-analysis.html": 17,
+   "en/power-resources.html": 16,
+   "en/relationships.html": 63,
+   "en/risk-project.html": 18,
+   "en/six-senses-narratology-network.html": 13,
+   "en/social-media.html": 35,
+   "en/text-evolution.html": 18,
+   "en/theological-intervention-network.html": 25,
+   "en/underworld-power-network.html": 51,
+   "en/visual-art.html": 21,
+   "en/workplace.html": 18
+  },
+  "L1 D3 .attr/.style(fill|stroke)": {
+   "dashboard.html": 1,
+   "data/aesthetics.html": 1,
+   "data/business-model.html": 4,
+   "data/cave-estate.html": 3,
+   "data/chapter-structure-graph.html": 7,
+   "data/character-appearance.html": 2,
+   "data/character-semantic-network.html": 1,
+   "data/character-sentiment-arc.html": 2,
+   "data/cognitive-psychology.html": 5,
+   "data/concept-device.html": 4,
+   "data/counterfactual.html": 1,
+   "data/criticism-history.html": 4,
+   "data/cultural-misreading.html": 2,
+   "data/deconstruction.html": 2,
+   "data/dialogue-sentiment.html": 3,
+   "data/ecology.html": 7,
+   "data/ethics-consumption.html": 1,
+   "data/four-dimensional-research-network.html": 16,
+   "data/four-heavenly-kings-artifacts.html": 8,
+   "data/global-pattern.html": 1,
+   "data/guanyin-six-roles-network.html": 13,
+   "data/hardship-difficulty-heatmap.html": 1,
+   "data/heaven-power-network.html": 16,
+   "data/intertextuality-network.html": 26,
+   "data/journey-map-interactive.html": 9,
+   "data/journey-spacetime.html": 1,
+   "data/karma-reincarnation.html": 2,
+   "data/language-style-radar.html": 7,
+   "data/linguistics.html": 6,
+   "data/ming-political-thought-comparison.html": 5,
+   "data/monster-background.html": 3,
+   "data/monster-capability-radar.html": 1,
+   "data/monster-ecology-network.html": 2,
+   "data/monster-female-network.html": 19,
+   "data/monster-hierarchy-network.html": 21,
+   "data/monster-sociology.html": 4,
+   "data/monster-victims-network.html": 10,
+   "data/music-structure.html": 4,
+   "data/narrative-rhythm-curve.html": 7,
+   "data/narratology-12d-network.html": 20,
+   "data/narratology-16d-network.html": 21,
+   "data/perf-canvas-rendering.html": 1,
+   "data/philosophy.html": 2,
+   "data/pilgrim-team-dynamic-network.html": 3,
+   "data/pilgrim-team-psychology-arc.html": 4,
+   "data/poetry-rhythm-analysis.html": 1,
+   "data/power-resources.html": 4,
+   "data/relationships.html": 4,
+   "data/risk-project.html": 6,
+   "data/six-senses-narratology-network.html": 20,
+   "data/social-media.html": 1,
+   "data/text-evolution.html": 1,
+   "data/theological-intervention-network.html": 11,
+   "data/underworld-power-network.html": 16,
+   "data/visual-art.html": 11,
+   "data/workplace.html": 1,
+   "en/81-hardships.html": 2,
+   "en/aesthetics.html": 1,
+   "en/business-model.html": 10,
+   "en/cave-estate.html": 16,
+   "en/chapter-structure-graph.html": 7,
+   "en/character-appearance.html": 5,
+   "en/character-dynamic-network.html": 1,
+   "en/character-semantic-network.html": 1,
+   "en/character-sentiment-arc.html": 2,
+   "en/cognitive-psychology.html": 13,
+   "en/concept-device.html": 8,
+   "en/counterfactual.html": 7,
+   "en/criticism-history.html": 5,
+   "en/cultural-misreading.html": 2,
+   "en/deconstruction.html": 5,
+   "en/dialogue-sentiment.html": 10,
+   "en/ecology.html": 7,
+   "en/ethics-consumption.html": 1,
+   "en/four-dimensional-research-network.html": 25,
+   "en/four-heavenly-kings-artifacts.html": 10,
+   "en/global-pattern.html": 6,
+   "en/guanyin-six-roles-network.html": 16,
+   "en/hardship-difficulty-heatmap.html": 8,
+   "en/hardship-heatmap.html": 10,
+   "en/heaven-power-network.html": 16,
+   "en/intertextuality-network.html": 26,
+   "en/journey-map-interactive.html": 11,
+   "en/journey-spacetime.html": 6,
+   "en/jurisprudence.html": 7,
+   "en/karma-reincarnation.html": 12,
+   "en/language-style-radar.html": 7,
+   "en/linguistics.html": 19,
+   "en/magic-system.html": 4,
+   "en/ming-political-thought-comparison.html": 18,
+   "en/monster-background.html": 11,
+   "en/monster-capability-radar.html": 17,
+   "en/monster-ecology-network.html": 10,
+   "en/monster-female-network.html": 19,
+   "en/monster-hierarchy-network.html": 21,
+   "en/monster-sociology.html": 14,
+   "en/monster-victims-network.html": 13,
+   "en/music-structure.html": 12,
+   "en/narrative-rhythm-curve.html": 7,
+   "en/narratology-12d-network.html": 20,
+   "en/narratology-16d-network.html": 21,
+   "en/perf-canvas-rendering.html": 1,
+   "en/philosophy.html": 7,
+   "en/pilgrim-team-dynamic-network.html": 5,
+   "en/pilgrim-team-psychology-arc.html": 20,
+   "en/poetry-rhythm-analysis.html": 20,
+   "en/power-resources.html": 10,
+   "en/relationships.html": 12,
+   "en/risk-project.html": 16,
+   "en/six-senses-narratology-network.html": 20,
+   "en/social-media.html": 1,
+   "en/text-evolution.html": 9,
+   "en/theological-intervention-network.html": 17,
+   "en/underworld-power-network.html": 16,
+   "en/visual-art.html": 11,
+   "en/workplace.html": 1
+  },
+  "L4 通用 CSS 属性值": {
+   "dukou-engine.html": 3,
+   "data/81-hardships-view.html": 2,
+   "data/character-relationship-3d-view.html": 2,
+   "data/data-explorer.html": 2,
+   "data/graph-explorer.html": 2,
+   "data/jurisprudence.html": 2,
+   "data/narrative-experiment.html": 1,
+   "data/relationships.html": 2,
+   "en/81-hardships-view.html": 2,
+   "en/character-relationship-3d-view.html": 2,
+   "en/data-explorer.html": 2,
+   "en/dukou-engine.html": 3,
+   "en/graph-explorer.html": 2,
+   "en/jurisprudence.html": 2,
+   "en/narrative-experiment.html": 1,
+   "en/relationships.html": 2
+  },
+  "L3 Canvas fillStyle/strokeStyle": {
+   "data/81-hardships-view.html": 1,
+   "data/character-relationship-3d-view.html": 1,
+   "data/character-relationship-3d.html": 1,
+   "data/data-explorer.html": 1,
+   "data/graph-explorer.html": 1,
+   "data/journey-geo-3d.html": 1,
+   "data/perf-canvas-rendering.html": 1,
+   "en/81-hardships-view.html": 1,
+   "en/character-relationship-3d-view.html": 1,
+   "en/character-relationship-3d.html": 1,
+   "en/data-explorer.html": 1,
+   "en/graph-explorer.html": 1,
+   "en/perf-canvas-rendering.html": 1
+  },
+  "L2 echarts 配置色": {
+   "data/aesthetics.html": 7,
+   "data/character-appearance.html": 15,
+   "data/character-dynamic-network.html": 10,
+   "data/character-semantic-network.html": 18,
+   "data/character-sentiment-arc.html": 15,
+   "data/chart-design.html": 3,
+   "data/concept-device.html": 17,
+   "data/criticism-history.html": 6,
+   "data/deconstruction.html": 4,
+   "data/emotional-heatmap.html": 8,
+   "data/four-dimensional-research-network.html": 34,
+   "data/four-heavenly-kings-artifacts.html": 4,
+   "data/game-webnovel.html": 4,
+   "data/guanyin-six-roles-network.html": 13,
+   "data/heaven-power-network.html": 14,
+   "data/intertextuality-network.html": 37,
+   "data/journey-geo-semiotics.html": 5,
+   "data/journey-spacetime.html": 5,
+   "data/jurisprudence.html": 8,
+   "data/language-style-radar.html": 14,
+   "data/magic-system.html": 1,
+   "data/mbti-evolution.html": 9,
+   "data/methodology-matrix.html": 4,
+   "data/ming-political-thought-comparison.html": 7,
+   "data/monster-background.html": 11,
+   "data/monster-capability-radar.html": 5,
+   "data/monster-female-network.html": 40,
+   "data/monster-hierarchy-network.html": 13,
+   "data/monster-victims-network.html": 9,
+   "data/narrative-experiment.html": 45,
+   "data/narratology-12d-network.html": 49,
+   "data/narratology-16d-network.html": 69,
+   "data/philosophy.html": 5,
+   "data/pilgrim-team-dynamic-network.html": 5,
+   "data/pilgrim-team-psychology-arc.html": 6,
+   "data/risk-project.html": 3,
+   "data/six-senses-narratology-network.html": 19,
+   "data/social-media.html": 2,
+   "data/tag-cloud.html": 6,
+   "data/theological-intervention-network.html": 3,
+   "data/timeline.html": 11,
+   "data/underworld-power-network.html": 14,
+   "en/aesthetics.html": 7,
+   "en/character-appearance.html": 15,
+   "en/character-dynamic-network.html": 10,
+   "en/character-semantic-network.html": 18,
+   "en/character-sentiment-arc.html": 15,
+   "en/chart-design.html": 3,
+   "en/concept-device.html": 17,
+   "en/criticism-history.html": 6,
+   "en/deconstruction.html": 4,
+   "en/emotional-heatmap.html": 8,
+   "en/four-dimensional-research-network.html": 34,
+   "en/four-heavenly-kings-artifacts.html": 4,
+   "en/game-webnovel.html": 4,
+   "en/guanyin-six-roles-network.html": 13,
+   "en/heaven-power-network.html": 14,
+   "en/intertextuality-network.html": 37,
+   "en/journey-geo-semiotics.html": 5,
+   "en/journey-spacetime.html": 5,
+   "en/jurisprudence.html": 8,
+   "en/language-style-radar.html": 14,
+   "en/magic-system.html": 1,
+   "en/mbti-evolution.html": 9,
+   "en/methodology-matrix.html": 4,
+   "en/ming-political-thought-comparison.html": 7,
+   "en/monster-background.html": 11,
+   "en/monster-capability-radar.html": 5,
+   "en/monster-female-network.html": 40,
+   "en/monster-hierarchy-network.html": 13,
+   "en/monster-victims-network.html": 9,
+   "en/narrative-experiment.html": 45,
+   "en/narratology-12d-network.html": 49,
+   "en/narratology-16d-network.html": 69,
+   "en/philosophy.html": 5,
+   "en/pilgrim-team-dynamic-network.html": 5,
+   "en/pilgrim-team-psychology-arc.html": 6,
+   "en/risk-project.html": 3,
+   "en/six-senses-narratology-network.html": 19,
+   "en/social-media.html": 2,
+   "en/tag-cloud.html": 6,
+   "en/theological-intervention-network.html": 3,
+   "en/timeline.html": 11,
+   "en/underworld-power-network.html": 14
+  }
+ },
+ "bare_hex_split": {
+  "调色板色": 1412,
+  "页面自有 hex": 3404
+ },
+ "layer_split": {
+  "L5 裸 hex 字面量|调色板色": 1058,
+  "L5 裸 hex 字面量|页面自有 hex": 1565,
+  "L1 D3 .attr/.style(fill|stroke)|页面自有 hex": 994,
+  "L4 通用 CSS 属性值|页面自有 hex": 26,
+  "L3 Canvas fillStyle/strokeStyle|页面自有 hex": 13,
+  "L2 echarts 配置色|调色板色": 348,
+  "L2 echarts 配置色|页面自有 hex": 806,
+  "L4 通用 CSS 属性值|调色板色": 6
+ },
+ "per_page_split": {
+  "dashboard.html": {
+   "调色板色": 8,
+   "页面自有 hex": 2
+  },
+  "dukou-engine.html": {
+   "调色板色": 3,
+   "页面自有 hex": 7
+  },
+  "_template.html": {
+   "调色板色": 10,
+   "页面自有 hex": 2
+  },
+  "data/81-hardships-view.html": {
+   "页面自有 hex": 6,
+   "调色板色": 3
+  },
+  "data/81-hardships.html": {
+   "调色板色": 8,
+   "页面自有 hex": 1
+  },
+  "data/aesthetics.html": {
+   "调色板色": 10,
+   "页面自有 hex": 20
+  },
+  "data/business-model.html": {
+   "调色板色": 10,
+   "页面自有 hex": 4
+  },
+  "data/cave-estate.html": {
+   "页面自有 hex": 7,
+   "调色板色": 4
+  },
+  "data/chapter-stats.html": {
+   "调色板色": 4
+  },
+  "data/chapter-structure-graph.html": {
+   "页面自有 hex": 21,
+   "调色板色": 4
+  },
+  "data/character-appearance.html": {
+   "页面自有 hex": 16,
+   "调色板色": 5
+  },
+  "data/character-dynamic-network.html": {
+   "调色板色": 6,
+   "页面自有 hex": 4
+  },
+  "data/character-presence-timeline.html": {
+   "调色板色": 2,
+   "页面自有 hex": 1
+  },
+  "data/character-relationship-3d-view.html": {
+   "页面自有 hex": 6,
+   "调色板色": 3
+  },
+  "data/character-relationship-3d.html": {
+   "页面自有 hex": 1
+  },
+  "data/character-semantic-network.html": {
+   "页面自有 hex": 27,
+   "调色板色": 24
+  },
+  "data/character-sentiment-arc.html": {
+   "调色板色": 8,
+   "页面自有 hex": 9
+  },
+  "data/chart-design.html": {
+   "调色板色": 19,
+   "页面自有 hex": 8
+  },
+  "data/cognitive-psychology.html": {
+   "调色板色": 7,
+   "页面自有 hex": 6
+  },
+  "data/concept-device.html": {
+   "页面自有 hex": 18,
+   "调色板色": 8
+  },
+  "data/counterfactual.html": {
+   "调色板色": 6,
+   "页面自有 hex": 4
+  },
+  "data/criticism-history.html": {
+   "页面自有 hex": 14,
+   "调色板色": 6
+  },
+  "data/cultural-misreading.html": {
+   "页面自有 hex": 6,
+   "调色板色": 4
+  },
+  "data/data-explorer.html": {
+   "页面自有 hex": 6,
+   "调色板色": 3
+  },
+  "data/deconstruction.html": {
+   "页面自有 hex": 19,
+   "调色板色": 5
+  },
+  "data/dialogue-sentiment.html": {
+   "页面自有 hex": 9,
+   "调色板色": 4
+  },
+  "data/ecology.html": {
+   "页面自有 hex": 10,
+   "调色板色": 6
+  },
+  "data/emotional-heatmap.html": {
+   "调色板色": 3,
+   "页面自有 hex": 5
+  },
+  "data/ethics-consumption.html": {
+   "调色板色": 4,
+   "页面自有 hex": 5
+  },
+  "data/four-dimensional-research-network.html": {
+   "页面自有 hex": 49,
+   "调色板色": 7
+  },
+  "data/four-heavenly-kings-artifacts.html": {
+   "页面自有 hex": 17,
+   "调色板色": 6
+  },
+  "data/game-webnovel.html": {
+   "调色板色": 16,
+   "页面自有 hex": 19
+  },
+  "data/global-pattern.html": {
+   "页面自有 hex": 6,
+   "调色板色": 3
+  },
+  "data/graph-explorer.html": {
+   "调色板色": 6,
+   "页面自有 hex": 43
+  },
+  "data/guanyin-six-roles-network.html": {
+   "页面自有 hex": 30,
+   "调色板色": 7
+  },
+  "data/hardship-difficulty-heatmap.html": {
+   "页面自有 hex": 10,
+   "调色板色": 6
+  },
+  "data/hardship-heatmap.html": {
+   "调色板色": 5,
+   "页面自有 hex": 4
+  },
+  "data/heaven-power-network.html": {
+   "页面自有 hex": 64,
+   "调色板色": 20
+  },
+  "data/intertextuality-network.html": {
+   "页面自有 hex": 90
+  },
+  "data/journey-geo-3d.html": {
+   "页面自有 hex": 1
+  },
+  "data/journey-geo-semiotics.html": {
+   "页面自有 hex": 4,
+   "调色板色": 6
+  },
+  "data/journey-map-interactive.html": {
+   "调色板色": 4,
+   "页面自有 hex": 13
+  },
+  "data/journey-route.html": {
+   "调色板色": 10,
+   "页面自有 hex": 7
+  },
+  "data/journey-spacetime.html": {
+   "页面自有 hex": 2,
+   "调色板色": 4
+  },
+  "data/jurisprudence.html": {
+   "调色板色": 26,
+   "页面自有 hex": 17
+  },
+  "data/karma-reincarnation.html": {
+   "调色板色": 23,
+   "页面自有 hex": 25
+  },
+  "data/language-style-radar.html": {
+   "页面自有 hex": 15,
+   "调色板色": 6
+  },
+  "data/linguistics.html": {
+   "页面自有 hex": 8,
+   "调色板色": 11
+  },
+  "data/magic-system.html": {
+   "页面自有 hex": 5,
+   "调色板色": 8
+  },
+  "data/material-archaeology.html": {
+   "调色板色": 21,
+   "页面自有 hex": 17
+  },
+  "data/mbti-evolution.html": {
+   "调色板色": 6,
+   "页面自有 hex": 3
+  },
+  "data/methodology-matrix.html": {
+   "调色板色": 6,
+   "页面自有 hex": 5
+  },
+  "data/ming-political-thought-comparison.html": {
+   "页面自有 hex": 19,
+   "调色板色": 19
+  },
+  "data/monster-background.html": {
+   "页面自有 hex": 9,
+   "调色板色": 9
+  },
+  "data/monster-capability-radar.html": {
+   "页面自有 hex": 19,
+   "调色板色": 13
+  },
+  "data/monster-ecology-network.html": {
+   "页面自有 hex": 9,
+   "调色板色": 10
+  },
+  "data/monster-female-network.html": {
+   "页面自有 hex": 95
+  },
+  "data/monster-hierarchy-network.html": {
+   "页面自有 hex": 81
+  },
+  "data/monster-sociology.html": {
+   "页面自有 hex": 17,
+   "调色板色": 13
+  },
+  "data/monster-victims-network.html": {
+   "页面自有 hex": 31,
+   "调色板色": 12
+  },
+  "data/music-structure.html": {
+   "页面自有 hex": 16,
+   "调色板色": 11
+  },
+  "data/narrative-experiment.html": {
+   "页面自有 hex": 22,
+   "调色板色": 31
+  },
+  "data/narrative-rhythm-curve.html": {
+   "页面自有 hex": 14
+  },
+  "data/narratology-12d-network.html": {
+   "页面自有 hex": 100
+  },
+  "data/narratology-16d-network.html": {
+   "页面自有 hex": 121,
+   "调色板色": 7
+  },
+  "data/perf-canvas-rendering.html": {
+   "页面自有 hex": 5,
+   "调色板色": 2
+  },
+  "data/philosophy.html": {
+   "页面自有 hex": 18,
+   "调色板色": 14
+  },
+  "data/pilgrim-team-dynamic-network.html": {
+   "调色板色": 8,
+   "页面自有 hex": 10
+  },
+  "data/pilgrim-team-psychology-arc.html": {
+   "页面自有 hex": 12,
+   "调色板色": 8
+  },
+  "data/poetry-rhythm-analysis.html": {
+   "调色板色": 11,
+   "页面自有 hex": 7
+  },
+  "data/power-resources.html": {
+   "页面自有 hex": 11,
+   "调色板色": 9
+  },
+  "data/relationships.html": {
+   "调色板色": 43,
+   "页面自有 hex": 26
+  },
+  "data/risk-project.html": {
+   "页面自有 hex": 12,
+   "调色板色": 15
+  },
+  "data/six-senses-narratology-network.html": {
+   "页面自有 hex": 52
+  },
+  "data/social-media.html": {
+   "调色板色": 19,
+   "页面自有 hex": 19
+  },
+  "data/story-timeline.html": {
+   "调色板色": 4,
+   "页面自有 hex": 1
+  },
+  "data/tag-cloud.html": {
+   "调色板色": 3,
+   "页面自有 hex": 3
+  },
+  "data/text-evolution.html": {
+   "调色板色": 12,
+   "页面自有 hex": 7
+  },
+  "data/theological-intervention-network.html": {
+   "页面自有 hex": 39
+  },
+  "data/timeline.html": {
+   "调色板色": 5,
+   "页面自有 hex": 6
+  },
+  "data/underworld-power-network.html": {
+   "页面自有 hex": 58,
+   "调色板色": 23
+  },
+  "data/visual-art.html": {
+   "调色板色": 11,
+   "页面自有 hex": 21
+  },
+  "data/workplace.html": {
+   "页面自有 hex": 8,
+   "调色板色": 11
+  },
+  "en/81-hardships-view.html": {
+   "页面自有 hex": 6,
+   "调色板色": 3
+  },
+  "en/81-hardships.html": {
+   "调色板色": 8,
+   "页面自有 hex": 3
+  },
+  "en/aesthetics.html": {
+   "页面自有 hex": 20,
+   "调色板色": 10
+  },
+  "en/business-model.html": {
+   "调色板色": 10,
+   "页面自有 hex": 10
+  },
+  "en/cave-estate.html": {
+   "页面自有 hex": 20,
+   "调色板色": 4
+  },
+  "en/chapter-stats.html": {
+   "调色板色": 4
+  },
+  "en/chapter-structure-graph.html": {
+   "页面自有 hex": 21,
+   "调色板色": 4
+  },
+  "en/character-appearance.html": {
+   "页面自有 hex": 20,
+   "调色板色": 5
+  },
+  "en/character-dynamic-network.html": {
+   "页面自有 hex": 5,
+   "调色板色": 6
+  },
+  "en/character-presence-timeline.html": {
+   "调色板色": 2,
+   "页面自有 hex": 1
+  },
+  "en/character-relationship-3d-view.html": {
+   "页面自有 hex": 6,
+   "调色板色": 3
+  },
+  "en/character-relationship-3d.html": {
+   "页面自有 hex": 1
+  },
+  "en/character-semantic-network.html": {
+   "页面自有 hex": 27,
+   "调色板色": 24
+  },
+  "en/character-sentiment-arc.html": {
+   "调色板色": 8,
+   "页面自有 hex": 9
+  },
+  "en/chart-design.html": {
+   "页面自有 hex": 8,
+   "调色板色": 19
+  },
+  "en/cognitive-psychology.html": {
+   "调色板色": 7,
+   "页面自有 hex": 14
+  },
+  "en/concept-device.html": {
+   "页面自有 hex": 22,
+   "调色板色": 8
+  },
+  "en/counterfactual.html": {
+   "调色板色": 6,
+   "页面自有 hex": 10
+  },
+  "en/criticism-history.html": {
+   "页面自有 hex": 15,
+   "调色板色": 6
+  },
+  "en/cultural-misreading.html": {
+   "调色板色": 4,
+   "页面自有 hex": 6
+  },
+  "en/data-explorer.html": {
+   "页面自有 hex": 6,
+   "调色板色": 3
+  },
+  "en/deconstruction.html": {
+   "页面自有 hex": 22,
+   "调色板色": 5
+  },
+  "en/dialogue-sentiment.html": {
+   "页面自有 hex": 16,
+   "调色板色": 4
+  },
+  "en/dukou-engine.html": {
+   "调色板色": 3,
+   "页面自有 hex": 7
+  },
+  "en/ecology.html": {
+   "页面自有 hex": 10,
+   "调色板色": 6
+  },
+  "en/emotional-heatmap.html": {
+   "页面自有 hex": 5,
+   "调色板色": 3
+  },
+  "en/ethics-consumption.html": {
+   "调色板色": 4,
+   "页面自有 hex": 5
+  },
+  "en/four-dimensional-research-network.html": {
+   "页面自有 hex": 58,
+   "调色板色": 7
+  },
+  "en/four-heavenly-kings-artifacts.html": {
+   "页面自有 hex": 19,
+   "调色板色": 6
+  },
+  "en/game-webnovel.html": {
+   "调色板色": 16,
+   "页面自有 hex": 19
+  },
+  "en/global-pattern.html": {
+   "页面自有 hex": 11,
+   "调色板色": 3
+  },
+  "en/graph-explorer.html": {
+   "调色板色": 6,
+   "页面自有 hex": 43
+  },
+  "en/guanyin-six-roles-network.html": {
+   "页面自有 hex": 33,
+   "调色板色": 7
+  },
+  "en/hardship-difficulty-heatmap.html": {
+   "页面自有 hex": 17,
+   "调色板色": 6
+  },
+  "en/hardship-heatmap.html": {
+   "调色板色": 5,
+   "页面自有 hex": 14
+  },
+  "en/heaven-power-network.html": {
+   "页面自有 hex": 64,
+   "调色板色": 20
+  },
+  "en/intertextuality-network.html": {
+   "页面自有 hex": 90
+  },
+  "en/journey-geo-semiotics.html": {
+   "页面自有 hex": 4,
+   "调色板色": 6
+  },
+  "en/journey-map-interactive.html": {
+   "调色板色": 4,
+   "页面自有 hex": 15
+  },
+  "en/journey-route.html": {
+   "页面自有 hex": 7,
+   "调色板色": 10
+  },
+  "en/journey-spacetime.html": {
+   "页面自有 hex": 7,
+   "调色板色": 4
+  },
+  "en/jurisprudence.html": {
+   "页面自有 hex": 24,
+   "调色板色": 26
+  },
+  "en/karma-reincarnation.html": {
+   "页面自有 hex": 35,
+   "调色板色": 23
+  },
+  "en/language-style-radar.html": {
+   "页面自有 hex": 15,
+   "调色板色": 6
+  },
+  "en/linguistics.html": {
+   "调色板色": 11,
+   "页面自有 hex": 21
+  },
+  "en/magic-system.html": {
+   "页面自有 hex": 9,
+   "调色板色": 8
+  },
+  "en/material-archaeology.html": {
+   "调色板色": 21,
+   "页面自有 hex": 17
+  },
+  "en/mbti-evolution.html": {
+   "调色板色": 6,
+   "页面自有 hex": 3
+  },
+  "en/methodology-matrix.html": {
+   "调色板色": 6,
+   "页面自有 hex": 5
+  },
+  "en/ming-political-thought-comparison.html": {
+   "页面自有 hex": 32,
+   "调色板色": 19
+  },
+  "en/monster-background.html": {
+   "页面自有 hex": 17,
+   "调色板色": 9
+  },
+  "en/monster-capability-radar.html": {
+   "页面自有 hex": 35,
+   "调色板色": 13
+  },
+  "en/monster-ecology-network.html": {
+   "页面自有 hex": 17,
+   "调色板色": 10
+  },
+  "en/monster-female-network.html": {
+   "页面自有 hex": 95
+  },
+  "en/monster-hierarchy-network.html": {
+   "页面自有 hex": 81
+  },
+  "en/monster-sociology.html": {
+   "调色板色": 13,
+   "页面自有 hex": 27
+  },
+  "en/monster-victims-network.html": {
+   "页面自有 hex": 34,
+   "调色板色": 12
+  },
+  "en/music-structure.html": {
+   "页面自有 hex": 24,
+   "调色板色": 11
+  },
+  "en/narrative-experiment.html": {
+   "页面自有 hex": 22,
+   "调色板色": 31
+  },
+  "en/narrative-rhythm-curve.html": {
+   "页面自有 hex": 14
+  },
+  "en/narratology-12d-network.html": {
+   "页面自有 hex": 100
+  },
+  "en/narratology-16d-network.html": {
+   "页面自有 hex": 121,
+   "调色板色": 7
+  },
+  "en/perf-canvas-rendering.html": {
+   "页面自有 hex": 5,
+   "调色板色": 2
+  },
+  "en/philosophy.html": {
+   "调色板色": 14,
+   "页面自有 hex": 23
+  },
+  "en/pilgrim-team-dynamic-network.html": {
+   "页面自有 hex": 12,
+   "调色板色": 8
+  },
+  "en/pilgrim-team-psychology-arc.html": {
+   "页面自有 hex": 28,
+   "调色板色": 8
+  },
+  "en/poetry-rhythm-analysis.html": {
+   "页面自有 hex": 26,
+   "调色板色": 11
+  },
+  "en/power-resources.html": {
+   "调色板色": 9,
+   "页面自有 hex": 17
+  },
+  "en/relationships.html": {
+   "页面自有 hex": 34,
+   "调色板色": 43
+  },
+  "en/risk-project.html": {
+   "调色板色": 15,
+   "页面自有 hex": 22
+  },
+  "en/six-senses-narratology-network.html": {
+   "页面自有 hex": 52
+  },
+  "en/social-media.html": {
+   "页面自有 hex": 19,
+   "调色板色": 19
+  },
+  "en/tag-cloud.html": {
+   "页面自有 hex": 3,
+   "调色板色": 3
+  },
+  "en/text-evolution.html": {
+   "页面自有 hex": 15,
+   "调色板色": 12
+  },
+  "en/theological-intervention-network.html": {
+   "页面自有 hex": 45
+  },
+  "en/timeline.html": {
+   "页面自有 hex": 6,
+   "调色板色": 5
+  },
+  "en/underworld-power-network.html": {
+   "页面自有 hex": 58,
+   "调色板色": 23
+  },
+  "en/visual-art.html": {
+   "调色板色": 11,
+   "页面自有 hex": 21
+  },
+  "en/workplace.html": {
+   "页面自有 hex": 8,
+   "调色板色": 11
+  }
+ },
+ "comp_total": {
+  "C1 前缀型 [fill^=\"#\"]": 990,
+  "C2 字面值型 [fill=\"#..\" i]": 20130,
+  "C3 其它按属性匹配的补偿选择器": 37620
+ },
+ "comp_pages_top": {
+  "dukou-engine.html": 178,
+  "_template.html": 178,
+  "data/81-hardships-view.html": 178,
+  "data/81-hardships.html": 178,
+  "data/aesthetics.html": 178,
+  "data/ai-dialogue.html": 178,
+  "data/business-model.html": 178,
+  "data/cave-estate.html": 178,
+  "data/century-dialogue.html": 178,
+  "data/chapter-stats.html": 178,
+  "data/chapter-structure-graph.html": 178,
+  "data/character-appearance.html": 178,
+  "data/character-dynamic-network.html": 178,
+  "data/character-presence-timeline.html": 178,
+  "data/character-relationship-3d-view.html": 178,
+  "data/character-relationship-3d.html": 178,
+  "data/character-semantic-network.html": 178,
+  "data/character-sentiment-arc.html": 178,
+  "data/chart-design.html": 178,
+  "data/cognitive-psychology.html": 178,
+  "data/concept-device.html": 178,
+  "data/counterfactual.html": 178,
+  "data/criticism-history.html": 178,
+  "data/cross-time-danmaku.html": 178,
+  "data/cultural-misreading.html": 178,
+  "data/customs-pass-route.html": 178,
+  "data/data-explorer.html": 178,
+  "data/deconstruction.html": 178,
+  "data/dialogue-sentiment.html": 178,
+  "data/ecology.html": 178
+ },
+ "comp_page_count": 330,
+ "comp_detail": {
+  "dukou-engine.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "_template.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/81-hardships-view.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/81-hardships.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/aesthetics.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/ai-dialogue.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/business-model.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/cave-estate.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/century-dialogue.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/chapter-stats.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/chapter-structure-graph.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/character-appearance.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/character-dynamic-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/character-presence-timeline.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/character-relationship-3d-view.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/character-relationship-3d.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/character-semantic-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/character-sentiment-arc.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/chart-design.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/cognitive-psychology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/concept-device.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/counterfactual.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/criticism-history.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/cross-time-danmaku.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/cultural-misreading.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/customs-pass-route.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/data-explorer.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/deconstruction.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/dialogue-sentiment.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/ecology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/emotional-heatmap.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/ethics-consumption.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/famous-time-travel.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/four-dimensional-research-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/four-heavenly-kings-artifacts.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/game-webnovel.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/global-pattern.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/graph-explorer.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/guanyin-six-roles-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/hardship-difficulty-heatmap.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/hardship-heatmap.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/heaven-power-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/intertextuality-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/journey-geo-3d.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/journey-geo-semiotics.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/journey-map-interactive.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/journey-route.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/journey-spacetime.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/jurisprudence.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/karma-reincarnation.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/language-style-radar.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/linguistics.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/magic-system.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/material-archaeology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/mbti-evolution.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/methodology-matrix.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/ming-political-thought-comparison.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/monster-background.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/monster-capability-radar.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/monster-ecology-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/monster-female-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/monster-hierarchy-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/monster-sociology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/monster-victims-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/music-structure.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/narrative-experiment.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/narrative-rhythm-curve.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/narratology-12d-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/narratology-16d-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/perf-canvas-rendering.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/philosophy.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/pilgrim-team-dynamic-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/pilgrim-team-psychology-arc.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/poetry-rhythm-analysis.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/power-resources.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/relationships.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/risk-project.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/search.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/six-senses-narratology-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/social-media.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/story-timeline.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/tag-cloud.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/text-evolution.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/text-search.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/theological-intervention-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/timeline.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/underworld-power-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/visual-art.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/workplace.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "data/_shell.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/81-hardships-view.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/81-hardships.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/academic-papers.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/aesthetics.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/ai-dialogue.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/bestiary.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/business-model.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/cave-estate.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/century-dialogue.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/chapter-stats.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/chapter-structure-graph.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/chapters-map.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-appearance.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-bailongma.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-bajie.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-dynamic-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-presence-timeline.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-relationship-3d-view.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-relationship-3d.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-semantic-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-sentiment-arc.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-shaseng.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-tangseng.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/character-wukong.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/characters.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/chart-design.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/cognitive-psychology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/concept-device.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/counterfactual.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/criticism-history.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/cross-time-danmaku.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/cultural-misreading.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/customs-pass-route.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/dashboard.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/data-explorer.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/deconstruction.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/dialogue-sentiment.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/dukou-engine.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/ecology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/emotional-heatmap.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ai-era.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-buddhist-chan.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-chapter-couplets.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-character-fu.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-cipai-linjiangxian.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-cipai-mantingfang.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-cipai-shuidiaogetou.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-cipai-xijiangyue.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-composition-origins.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-divine-bureaucracy.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-folk-belief.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-historical-xuanzang.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-information-cocoon.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-economy.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-examination.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-garrison.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-intellectual-history.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-judiciary.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-literary-thought.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-maritime-ban.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-metaphor.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-military.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-politics.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-religion.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-ming-social-customs.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-modern-management.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-original-poetry.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-poetry-imagery.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-poetry-opening.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-quanzhen-daoism.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-rhythm-analysis.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-scenery-poems.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-thematic-poetry.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-three-teachings.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-version-evolution.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/essay-zen-koan-vs-neidan.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/ethics-consumption.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/famous-time-travel.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/four-dimensional-research-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/four-heavenly-kings-artifacts.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/game-webnovel.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/global-pattern.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/graph-explorer.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/guanyin-six-roles-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/guide.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/hardship-difficulty-heatmap.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/hardship-heatmap.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/heaven-power-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/index.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/intertextuality-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/journey-geo-semiotics.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/journey-map-interactive.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/journey-route.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/journey-spacetime.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/jurisprudence.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/karma-reincarnation.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/language-style-radar.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/linguistics.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/magic-system.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/material-archaeology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/mbti-evolution.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/methodology-matrix.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/methodology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/ming-political-thought-comparison.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/monster-background.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/monster-capability-radar.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/monster-ecology-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/monster-female-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/monster-hierarchy-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/monster-sociology.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/monster-victims-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/music-structure.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/narrative-experiment.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/narrative-rhythm-curve.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/narratology-12d-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/narratology-16d-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/perf-canvas-rendering.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/philosophy.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/pilgrim-team-dynamic-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/pilgrim-team-psychology-arc.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/poetry-rhythm-analysis.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/power-resources.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/relationships.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/risk-project.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/search.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/site-map.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/six-senses-narratology-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/social-media.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/tag-cloud.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/text-evolution.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/text-search.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/theological-intervention-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/timeline.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/tribulations.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/underworld-power-network.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/visual-art.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/visualizations.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "en/workplace.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch001.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch002.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch003.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch004.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch005.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch006.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch007.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch008.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch009.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch010.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch011.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch012.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch013.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch014.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch015.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch016.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch017.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch018.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch019.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch020.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch021.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch022.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch023.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch024.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch025.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch026.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch027.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch028.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch029.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch030.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch031.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch032.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch033.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch034.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch035.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch036.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch037.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch038.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch039.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch040.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch041.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch042.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch043.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch044.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch045.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch046.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch047.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch048.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch049.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch050.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch051.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch052.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch053.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch054.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch055.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch056.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch057.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch058.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch059.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch060.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch061.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch062.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch063.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch064.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch065.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch066.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch067.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch068.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch069.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch070.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch071.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch072.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch073.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch074.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch075.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch076.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch077.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch078.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch079.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch080.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch081.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch082.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch083.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch084.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch085.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch086.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch087.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch088.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch089.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch090.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch091.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch092.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch093.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch094.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch095.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch096.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch097.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch098.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch099.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/ch100.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/index.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ],
+  "reader/themes-hub.html": [
+   [
+    "C1 前缀型 [fill^=\"#\"]",
+    3
+   ],
+   [
+    "C2 字面值型 [fill=\"#..\" i]",
+    61
+   ],
+   [
+    "C3 其它按属性匹配的补偿选择器",
+    114
+   ]
+  ]
+ },
+ "per_page_layers": {
+  "dashboard.html": {
+   "L5 裸 hex 字面量": 9,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "dukou-engine.html": {
+   "L5 裸 hex 字面量": 7,
+   "L4 通用 CSS 属性值": 3
+  },
+  "_template.html": {
+   "L5 裸 hex 字面量": 12
+  },
+  "data/81-hardships-view.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1,
+   "L4 通用 CSS 属性值": 2,
+   "L5 裸 hex 字面量": 6
+  },
+  "data/81-hardships.html": {
+   "L5 裸 hex 字面量": 9
+  },
+  "data/aesthetics.html": {
+   "L2 echarts 配置色": 7,
+   "L5 裸 hex 字面量": 22,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/business-model.html": {
+   "L5 裸 hex 字面量": 10,
+   "L1 D3 .attr/.style(fill|stroke)": 4
+  },
+  "data/cave-estate.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 3
+  },
+  "data/chapter-stats.html": {
+   "L5 裸 hex 字面量": 4
+  },
+  "data/chapter-structure-graph.html": {
+   "L5 裸 hex 字面量": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "data/character-appearance.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 2,
+   "L2 echarts 配置色": 15,
+   "L5 裸 hex 字面量": 4
+  },
+  "data/character-dynamic-network.html": {
+   "L2 echarts 配置色": 10
+  },
+  "data/character-presence-timeline.html": {
+   "L5 裸 hex 字面量": 3
+  },
+  "data/character-relationship-3d-view.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1,
+   "L4 通用 CSS 属性值": 2,
+   "L5 裸 hex 字面量": 6
+  },
+  "data/character-relationship-3d.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1
+  },
+  "data/character-semantic-network.html": {
+   "L5 裸 hex 字面量": 32,
+   "L2 echarts 配置色": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/character-sentiment-arc.html": {
+   "L2 echarts 配置色": 15,
+   "L1 D3 .attr/.style(fill|stroke)": 2
+  },
+  "data/chart-design.html": {
+   "L5 裸 hex 字面量": 24,
+   "L2 echarts 配置色": 3
+  },
+  "data/cognitive-psychology.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 5
+  },
+  "data/concept-device.html": {
+   "L5 裸 hex 字面量": 5,
+   "L2 echarts 配置色": 17,
+   "L1 D3 .attr/.style(fill|stroke)": 4
+  },
+  "data/counterfactual.html": {
+   "L5 裸 hex 字面量": 9,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/criticism-history.html": {
+   "L2 echarts 配置色": 6,
+   "L5 裸 hex 字面量": 10,
+   "L1 D3 .attr/.style(fill|stroke)": 4
+  },
+  "data/cultural-misreading.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 2,
+   "L5 裸 hex 字面量": 8
+  },
+  "data/data-explorer.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1,
+   "L5 裸 hex 字面量": 6,
+   "L4 通用 CSS 属性值": 2
+  },
+  "data/deconstruction.html": {
+   "L5 裸 hex 字面量": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 2,
+   "L2 echarts 配置色": 4
+  },
+  "data/dialogue-sentiment.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 3,
+   "L5 裸 hex 字面量": 10
+  },
+  "data/ecology.html": {
+   "L5 裸 hex 字面量": 9,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "data/emotional-heatmap.html": {
+   "L2 echarts 配置色": 8
+  },
+  "data/ethics-consumption.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/four-dimensional-research-network.html": {
+   "L2 echarts 配置色": 34,
+   "L5 裸 hex 字面量": 6,
+   "L1 D3 .attr/.style(fill|stroke)": 16
+  },
+  "data/four-heavenly-kings-artifacts.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 8,
+   "L5 裸 hex 字面量": 11,
+   "L2 echarts 配置色": 4
+  },
+  "data/game-webnovel.html": {
+   "L2 echarts 配置色": 4,
+   "L5 裸 hex 字面量": 31
+  },
+  "data/global-pattern.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/graph-explorer.html": {
+   "L5 裸 hex 字面量": 46,
+   "L3 Canvas fillStyle/strokeStyle": 1,
+   "L4 通用 CSS 属性值": 2
+  },
+  "data/guanyin-six-roles-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 13,
+   "L2 echarts 配置色": 13,
+   "L5 裸 hex 字面量": 11
+  },
+  "data/hardship-difficulty-heatmap.html": {
+   "L5 裸 hex 字面量": 15,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/hardship-heatmap.html": {
+   "L5 裸 hex 字面量": 9
+  },
+  "data/heaven-power-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 16,
+   "L2 echarts 配置色": 14,
+   "L5 裸 hex 字面量": 54
+  },
+  "data/intertextuality-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 26,
+   "L2 echarts 配置色": 37,
+   "L5 裸 hex 字面量": 27
+  },
+  "data/journey-geo-3d.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1
+  },
+  "data/journey-geo-semiotics.html": {
+   "L5 裸 hex 字面量": 5,
+   "L2 echarts 配置色": 5
+  },
+  "data/journey-map-interactive.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 9
+  },
+  "data/journey-route.html": {
+   "L5 裸 hex 字面量": 17
+  },
+  "data/journey-spacetime.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 1,
+   "L2 echarts 配置色": 5
+  },
+  "data/jurisprudence.html": {
+   "L5 裸 hex 字面量": 33,
+   "L2 echarts 配置色": 8,
+   "L4 通用 CSS 属性值": 2
+  },
+  "data/karma-reincarnation.html": {
+   "L5 裸 hex 字面量": 46,
+   "L1 D3 .attr/.style(fill|stroke)": 2
+  },
+  "data/language-style-radar.html": {
+   "L2 echarts 配置色": 14,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "data/linguistics.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 6,
+   "L5 裸 hex 字面量": 13
+  },
+  "data/magic-system.html": {
+   "L5 裸 hex 字面量": 12,
+   "L2 echarts 配置色": 1
+  },
+  "data/material-archaeology.html": {
+   "L5 裸 hex 字面量": 38
+  },
+  "data/mbti-evolution.html": {
+   "L2 echarts 配置色": 9
+  },
+  "data/methodology-matrix.html": {
+   "L5 裸 hex 字面量": 7,
+   "L2 echarts 配置色": 4
+  },
+  "data/ming-political-thought-comparison.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 5,
+   "L2 echarts 配置色": 7,
+   "L5 裸 hex 字面量": 26
+  },
+  "data/monster-background.html": {
+   "L2 echarts 配置色": 11,
+   "L5 裸 hex 字面量": 4,
+   "L1 D3 .attr/.style(fill|stroke)": 3
+  },
+  "data/monster-capability-radar.html": {
+   "L5 裸 hex 字面量": 26,
+   "L1 D3 .attr/.style(fill|stroke)": 1,
+   "L2 echarts 配置色": 5
+  },
+  "data/monster-ecology-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 2,
+   "L5 裸 hex 字面量": 17
+  },
+  "data/monster-female-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 19,
+   "L2 echarts 配置色": 40,
+   "L5 裸 hex 字面量": 36
+  },
+  "data/monster-hierarchy-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 21,
+   "L5 裸 hex 字面量": 47,
+   "L2 echarts 配置色": 13
+  },
+  "data/monster-sociology.html": {
+   "L5 裸 hex 字面量": 26,
+   "L1 D3 .attr/.style(fill|stroke)": 4
+  },
+  "data/monster-victims-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 10,
+   "L2 echarts 配置色": 9,
+   "L5 裸 hex 字面量": 24
+  },
+  "data/music-structure.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 4,
+   "L5 裸 hex 字面量": 23
+  },
+  "data/narrative-experiment.html": {
+   "L2 echarts 配置色": 45,
+   "L5 裸 hex 字面量": 7,
+   "L4 通用 CSS 属性值": 1
+  },
+  "data/narrative-rhythm-curve.html": {
+   "L5 裸 hex 字面量": 7,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "data/narratology-12d-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 20,
+   "L2 echarts 配置色": 49,
+   "L5 裸 hex 字面量": 31
+  },
+  "data/narratology-16d-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 21,
+   "L2 echarts 配置色": 69,
+   "L5 裸 hex 字面量": 38
+  },
+  "data/perf-canvas-rendering.html": {
+   "L5 裸 hex 字面量": 5,
+   "L1 D3 .attr/.style(fill|stroke)": 1,
+   "L3 Canvas fillStyle/strokeStyle": 1
+  },
+  "data/philosophy.html": {
+   "L5 裸 hex 字面量": 25,
+   "L2 echarts 配置色": 5,
+   "L1 D3 .attr/.style(fill|stroke)": 2
+  },
+  "data/pilgrim-team-dynamic-network.html": {
+   "L2 echarts 配置色": 5,
+   "L5 裸 hex 字面量": 10,
+   "L1 D3 .attr/.style(fill|stroke)": 3
+  },
+  "data/pilgrim-team-psychology-arc.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 4,
+   "L2 echarts 配置色": 6,
+   "L5 裸 hex 字面量": 10
+  },
+  "data/poetry-rhythm-analysis.html": {
+   "L5 裸 hex 字面量": 17,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/power-resources.html": {
+   "L5 裸 hex 字面量": 16,
+   "L1 D3 .attr/.style(fill|stroke)": 4
+  },
+  "data/relationships.html": {
+   "L5 裸 hex 字面量": 63,
+   "L1 D3 .attr/.style(fill|stroke)": 4,
+   "L4 通用 CSS 属性值": 2
+  },
+  "data/risk-project.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 6,
+   "L5 裸 hex 字面量": 18,
+   "L2 echarts 配置色": 3
+  },
+  "data/six-senses-narratology-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 20,
+   "L2 echarts 配置色": 19,
+   "L5 裸 hex 字面量": 13
+  },
+  "data/social-media.html": {
+   "L5 裸 hex 字面量": 35,
+   "L2 echarts 配置色": 2,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/story-timeline.html": {
+   "L5 裸 hex 字面量": 5
+  },
+  "data/tag-cloud.html": {
+   "L2 echarts 配置色": 6
+  },
+  "data/text-evolution.html": {
+   "L5 裸 hex 字面量": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "data/theological-intervention-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 11,
+   "L5 裸 hex 字面量": 25,
+   "L2 echarts 配置色": 3
+  },
+  "data/timeline.html": {
+   "L2 echarts 配置色": 11
+  },
+  "data/underworld-power-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 16,
+   "L2 echarts 配置色": 14,
+   "L5 裸 hex 字面量": 51
+  },
+  "data/visual-art.html": {
+   "L5 裸 hex 字面量": 21,
+   "L1 D3 .attr/.style(fill|stroke)": 11
+  },
+  "data/workplace.html": {
+   "L5 裸 hex 字面量": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "en/81-hardships-view.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1,
+   "L4 通用 CSS 属性值": 2,
+   "L5 裸 hex 字面量": 6
+  },
+  "en/81-hardships.html": {
+   "L5 裸 hex 字面量": 9,
+   "L1 D3 .attr/.style(fill|stroke)": 2
+  },
+  "en/aesthetics.html": {
+   "L5 裸 hex 字面量": 22,
+   "L2 echarts 配置色": 7,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "en/business-model.html": {
+   "L5 裸 hex 字面量": 10,
+   "L1 D3 .attr/.style(fill|stroke)": 10
+  },
+  "en/cave-estate.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 16
+  },
+  "en/chapter-stats.html": {
+   "L5 裸 hex 字面量": 4
+  },
+  "en/chapter-structure-graph.html": {
+   "L5 裸 hex 字面量": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "en/character-appearance.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 5,
+   "L2 echarts 配置色": 15,
+   "L5 裸 hex 字面量": 5
+  },
+  "en/character-dynamic-network.html": {
+   "L2 echarts 配置色": 10,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "en/character-presence-timeline.html": {
+   "L5 裸 hex 字面量": 3
+  },
+  "en/character-relationship-3d-view.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1,
+   "L4 通用 CSS 属性值": 2,
+   "L5 裸 hex 字面量": 6
+  },
+  "en/character-relationship-3d.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1
+  },
+  "en/character-semantic-network.html": {
+   "L5 裸 hex 字面量": 32,
+   "L2 echarts 配置色": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "en/character-sentiment-arc.html": {
+   "L2 echarts 配置色": 15,
+   "L1 D3 .attr/.style(fill|stroke)": 2
+  },
+  "en/chart-design.html": {
+   "L5 裸 hex 字面量": 24,
+   "L2 echarts 配置色": 3
+  },
+  "en/cognitive-psychology.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 13
+  },
+  "en/concept-device.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 8,
+   "L5 裸 hex 字面量": 5,
+   "L2 echarts 配置色": 17
+  },
+  "en/counterfactual.html": {
+   "L5 裸 hex 字面量": 9,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "en/criticism-history.html": {
+   "L2 echarts 配置色": 6,
+   "L5 裸 hex 字面量": 10,
+   "L1 D3 .attr/.style(fill|stroke)": 5
+  },
+  "en/cultural-misreading.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 2
+  },
+  "en/data-explorer.html": {
+   "L3 Canvas fillStyle/strokeStyle": 1,
+   "L5 裸 hex 字面量": 6,
+   "L4 通用 CSS 属性值": 2
+  },
+  "en/deconstruction.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 5,
+   "L5 裸 hex 字面量": 18,
+   "L2 echarts 配置色": 4
+  },
+  "en/dialogue-sentiment.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 10,
+   "L5 裸 hex 字面量": 10
+  },
+  "en/dukou-engine.html": {
+   "L5 裸 hex 字面量": 7,
+   "L4 通用 CSS 属性值": 3
+  },
+  "en/ecology.html": {
+   "L5 裸 hex 字面量": 9,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "en/emotional-heatmap.html": {
+   "L2 echarts 配置色": 8
+  },
+  "en/ethics-consumption.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "en/four-dimensional-research-network.html": {
+   "L2 echarts 配置色": 34,
+   "L5 裸 hex 字面量": 6,
+   "L1 D3 .attr/.style(fill|stroke)": 25
+  },
+  "en/four-heavenly-kings-artifacts.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 10,
+   "L2 echarts 配置色": 4,
+   "L5 裸 hex 字面量": 11
+  },
+  "en/game-webnovel.html": {
+   "L2 echarts 配置色": 4,
+   "L5 裸 hex 字面量": 31
+  },
+  "en/global-pattern.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 6
+  },
+  "en/graph-explorer.html": {
+   "L5 裸 hex 字面量": 46,
+   "L3 Canvas fillStyle/strokeStyle": 1,
+   "L4 通用 CSS 属性值": 2
+  },
+  "en/guanyin-six-roles-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 16,
+   "L2 echarts 配置色": 13,
+   "L5 裸 hex 字面量": 11
+  },
+  "en/hardship-difficulty-heatmap.html": {
+   "L5 裸 hex 字面量": 15,
+   "L1 D3 .attr/.style(fill|stroke)": 8
+  },
+  "en/hardship-heatmap.html": {
+   "L5 裸 hex 字面量": 9,
+   "L1 D3 .attr/.style(fill|stroke)": 10
+  },
+  "en/heaven-power-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 16,
+   "L2 echarts 配置色": 14,
+   "L5 裸 hex 字面量": 54
+  },
+  "en/intertextuality-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 26,
+   "L2 echarts 配置色": 37,
+   "L5 裸 hex 字面量": 27
+  },
+  "en/journey-geo-semiotics.html": {
+   "L5 裸 hex 字面量": 5,
+   "L2 echarts 配置色": 5
+  },
+  "en/journey-map-interactive.html": {
+   "L5 裸 hex 字面量": 8,
+   "L1 D3 .attr/.style(fill|stroke)": 11
+  },
+  "en/journey-route.html": {
+   "L5 裸 hex 字面量": 17
+  },
+  "en/journey-spacetime.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 6,
+   "L2 echarts 配置色": 5
+  },
+  "en/jurisprudence.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 7,
+   "L5 裸 hex 字面量": 33,
+   "L2 echarts 配置色": 8,
+   "L4 通用 CSS 属性值": 2
+  },
+  "en/karma-reincarnation.html": {
+   "L5 裸 hex 字面量": 46,
+   "L1 D3 .attr/.style(fill|stroke)": 12
+  },
+  "en/language-style-radar.html": {
+   "L2 echarts 配置色": 14,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "en/linguistics.html": {
+   "L5 裸 hex 字面量": 13,
+   "L1 D3 .attr/.style(fill|stroke)": 19
+  },
+  "en/magic-system.html": {
+   "L5 裸 hex 字面量": 12,
+   "L2 echarts 配置色": 1,
+   "L1 D3 .attr/.style(fill|stroke)": 4
+  },
+  "en/material-archaeology.html": {
+   "L5 裸 hex 字面量": 38
+  },
+  "en/mbti-evolution.html": {
+   "L2 echarts 配置色": 9
+  },
+  "en/methodology-matrix.html": {
+   "L2 echarts 配置色": 4,
+   "L5 裸 hex 字面量": 7
+  },
+  "en/ming-political-thought-comparison.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 18,
+   "L2 echarts 配置色": 7,
+   "L5 裸 hex 字面量": 26
+  },
+  "en/monster-background.html": {
+   "L2 echarts 配置色": 11,
+   "L5 裸 hex 字面量": 4,
+   "L1 D3 .attr/.style(fill|stroke)": 11
+  },
+  "en/monster-capability-radar.html": {
+   "L5 裸 hex 字面量": 26,
+   "L1 D3 .attr/.style(fill|stroke)": 17,
+   "L2 echarts 配置色": 5
+  },
+  "en/monster-ecology-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 10,
+   "L5 裸 hex 字面量": 17
+  },
+  "en/monster-female-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 19,
+   "L2 echarts 配置色": 40,
+   "L5 裸 hex 字面量": 36
+  },
+  "en/monster-hierarchy-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 21,
+   "L2 echarts 配置色": 13,
+   "L5 裸 hex 字面量": 47
+  },
+  "en/monster-sociology.html": {
+   "L5 裸 hex 字面量": 26,
+   "L1 D3 .attr/.style(fill|stroke)": 14
+  },
+  "en/monster-victims-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 13,
+   "L5 裸 hex 字面量": 24,
+   "L2 echarts 配置色": 9
+  },
+  "en/music-structure.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 12,
+   "L5 裸 hex 字面量": 23
+  },
+  "en/narrative-experiment.html": {
+   "L2 echarts 配置色": 45,
+   "L5 裸 hex 字面量": 7,
+   "L4 通用 CSS 属性值": 1
+  },
+  "en/narrative-rhythm-curve.html": {
+   "L5 裸 hex 字面量": 7,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "en/narratology-12d-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 20,
+   "L2 echarts 配置色": 49,
+   "L5 裸 hex 字面量": 31
+  },
+  "en/narratology-16d-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 21,
+   "L2 echarts 配置色": 69,
+   "L5 裸 hex 字面量": 38
+  },
+  "en/perf-canvas-rendering.html": {
+   "L5 裸 hex 字面量": 5,
+   "L1 D3 .attr/.style(fill|stroke)": 1,
+   "L3 Canvas fillStyle/strokeStyle": 1
+  },
+  "en/philosophy.html": {
+   "L5 裸 hex 字面量": 25,
+   "L2 echarts 配置色": 5,
+   "L1 D3 .attr/.style(fill|stroke)": 7
+  },
+  "en/pilgrim-team-dynamic-network.html": {
+   "L5 裸 hex 字面量": 10,
+   "L1 D3 .attr/.style(fill|stroke)": 5,
+   "L2 echarts 配置色": 5
+  },
+  "en/pilgrim-team-psychology-arc.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 20,
+   "L2 echarts 配置色": 6,
+   "L5 裸 hex 字面量": 10
+  },
+  "en/poetry-rhythm-analysis.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 20,
+   "L5 裸 hex 字面量": 17
+  },
+  "en/power-resources.html": {
+   "L5 裸 hex 字面量": 16,
+   "L1 D3 .attr/.style(fill|stroke)": 10
+  },
+  "en/relationships.html": {
+   "L5 裸 hex 字面量": 63,
+   "L1 D3 .attr/.style(fill|stroke)": 12,
+   "L4 通用 CSS 属性值": 2
+  },
+  "en/risk-project.html": {
+   "L5 裸 hex 字面量": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 16,
+   "L2 echarts 配置色": 3
+  },
+  "en/six-senses-narratology-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 20,
+   "L2 echarts 配置色": 19,
+   "L5 裸 hex 字面量": 13
+  },
+  "en/social-media.html": {
+   "L5 裸 hex 字面量": 35,
+   "L2 echarts 配置色": 2,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  },
+  "en/tag-cloud.html": {
+   "L2 echarts 配置色": 6
+  },
+  "en/text-evolution.html": {
+   "L5 裸 hex 字面量": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 9
+  },
+  "en/theological-intervention-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 17,
+   "L5 裸 hex 字面量": 25,
+   "L2 echarts 配置色": 3
+  },
+  "en/timeline.html": {
+   "L2 echarts 配置色": 11
+  },
+  "en/underworld-power-network.html": {
+   "L1 D3 .attr/.style(fill|stroke)": 16,
+   "L2 echarts 配置色": 14,
+   "L5 裸 hex 字面量": 51
+  },
+  "en/visual-art.html": {
+   "L5 裸 hex 字面量": 21,
+   "L1 D3 .attr/.style(fill|stroke)": 11
+  },
+  "en/workplace.html": {
+   "L5 裸 hex 字面量": 18,
+   "L1 D3 .attr/.style(fill|stroke)": 1
+  }
+ }
+}

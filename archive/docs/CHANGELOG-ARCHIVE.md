@@ -16,6 +16,24 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W980（2026-10-27）：stats 标记同步机器化批（P-44-05 + W681 事实收官订正 + GoatCounter 取证中）
+
+
+
+> **来源**：用户 2026-10-27 令「做」（P-44-05 stats 三方同步机器化）+ 两项事实纠偏（agent-web 的 LLM 实测早已完成；GoatCounter API 可用——与仓内 W806 退役记录冲突，取证中）。
+
+> - **文件**：scripts/stats.py、tests/unit/test_stats_sync.py、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、archive/docs/W批次编号对账表-ARCHIVE.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w980_spec.json、scripts/output/_cascade_files_W980.txt。
+
+**P-44-05（stats 标记自动跟随）**：stats.py 新增 `sweep_markers()`——`--w` 落盘后自动把 C5b 对账面上的 `N<!--stats:KEY-->` 前置数字刷成本批实算值。**面 = check_doc_sync 权威面**（C5_DOC_NAMES 六文件 + CHANGELOG 口径块 + c5b_extra_surfaces：pytest.ini/site/index.html/11-方案报告递归排除计划方案）——面漂移即门禁与跟随同源漂移，不自造第二份清单。**两条防线内嵌**：① CHANGELOG 只扫首个「### W」段之前的口径块（历史段含字面标记叙述 W913 段实证·整文件扫必污染）；② 标记正则与 RE_STATS_MARK 同源（`[a-z_0-9]+` 含数字键——首版 `[a-z_]+` 被 a1_a6_docs 当场打回）。**首跑自证**：本批新增 4 例单测 → pytest_collected 925→929 → pytest.ini 与架构方案 v2 双标记自动跟随——P-44-05 立项时的手工杂务（W976/W978 两轮手工刷）自此消失。单测 4 例（失配更新/相等不动/历史段防污染/计划方案目录排除回归锁）。
+
+**W681 事实收官订正**：用户确认 agent-web 的 LLM 真端点实测早已完成——归档台账 W681 行定格「进行中（待三键）」属登记滞后（W971 回填只覆盖 W850-W963），按追加合规落订正注（原行未动）：进行中→**已闭环**（W680 主批落地 + engine.smoke 12/12·附记 agent-web 当前无 .env 本体=历史测试后未留档）。`Fetch_gate_stats` 同理见下条。
+
+**GoatCounter 数据链（取证中·待用户一信息）**：仓内 W806 裁决（2026-10-20）记载站点代码 `1273984347` 已失效并整体退役；用户 2026-10-27 口述「API 可以用」——最可能为账号/站点已重建（新站点代码不在仓内任何记录）。token 在位（51 字符），待用户提供现用站点地址后 `--site` 重探 + `judge_gate` 正式重判（W626 冻结的机器解冻条件：30 日 UV≥30）。本批不动 W806 退役记录。
+
+**验证**：单测 4/4 · ruff 0 · stats.py --w 实跑 sweep 跟随 2 处 + C5b 0 FAIL · check_doc_sync 0 FAIL · 全量 verify + pytest 见状态行。
+
+> - **状态**：已收官（`6d3fba13`·verify 全量 rc=0 + 单测 4/4 + C5b 0 FAIL·sweep 首跑跟随 2 处）
+
 ### W979（2026-10-27）：收官提示位扩展批（P-44-01/02/03 落地 + P-44-04 活面零残留裁定免迁）
 
 

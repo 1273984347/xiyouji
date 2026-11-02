@@ -1,0 +1,835 @@
+{
+ "per_page": {
+  "dashboard.html": {
+   "L5 裸hex": 8
+  },
+  "dukou-engine.html": {
+   "L5 裸hex": 3
+  },
+  "_template.html": {
+   "L5 裸hex": 10
+  },
+  "data/81-hardships-view.html": {
+   "L5 裸hex": 3
+  },
+  "data/81-hardships.html": {
+   "L5 裸hex": 8
+  },
+  "data/aesthetics.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 7
+  },
+  "data/business-model.html": {
+   "L5 裸hex": 10
+  },
+  "data/cave-estate.html": {
+   "L5 裸hex": 4
+  },
+  "data/chapter-stats.html": {
+   "L5 裸hex": 4
+  },
+  "data/chapter-structure-graph.html": {
+   "L5 裸hex": 4
+  },
+  "data/character-appearance.html": {
+   "L2 echarts": 4,
+   "L5 裸hex": 1
+  },
+  "data/character-dynamic-network.html": {
+   "L2 echarts": 6
+  },
+  "data/character-presence-timeline.html": {
+   "L5 裸hex": 2
+  },
+  "data/character-relationship-3d-view.html": {
+   "L5 裸hex": 3
+  },
+  "data/character-semantic-network.html": {
+   "L2 echarts": 10,
+   "L5 裸hex": 14
+  },
+  "data/character-sentiment-arc.html": {
+   "L2 echarts": 8
+  },
+  "data/chart-design.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 16
+  },
+  "data/cognitive-psychology.html": {
+   "L5 裸hex": 7
+  },
+  "data/concept-device.html": {
+   "L2 echarts": 6,
+   "L5 裸hex": 2
+  },
+  "data/counterfactual.html": {
+   "L5 裸hex": 6
+  },
+  "data/criticism-history.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 3
+  },
+  "data/cultural-misreading.html": {
+   "L5 裸hex": 4
+  },
+  "data/data-explorer.html": {
+   "L5 裸hex": 3
+  },
+  "data/deconstruction.html": {
+   "L5 裸hex": 5
+  },
+  "data/dialogue-sentiment.html": {
+   "L5 裸hex": 4
+  },
+  "data/ecology.html": {
+   "L5 裸hex": 6
+  },
+  "data/emotional-heatmap.html": {
+   "L2 echarts": 3
+  },
+  "data/ethics-consumption.html": {
+   "L5 裸hex": 4
+  },
+  "data/four-dimensional-research-network.html": {
+   "L2 echarts": 6,
+   "L5 裸hex": 1
+  },
+  "data/four-heavenly-kings-artifacts.html": {
+   "L2 echarts": 2,
+   "L5 裸hex": 4
+  },
+  "data/game-webnovel.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 13
+  },
+  "data/global-pattern.html": {
+   "L5 裸hex": 3
+  },
+  "data/graph-explorer.html": {
+   "L5 裸hex": 6
+  },
+  "data/guanyin-six-roles-network.html": {
+   "L2 echarts": 5,
+   "L5 裸hex": 2
+  },
+  "data/hardship-difficulty-heatmap.html": {
+   "L5 裸hex": 6
+  },
+  "data/hardship-heatmap.html": {
+   "L5 裸hex": 5
+  },
+  "data/heaven-power-network.html": {
+   "L2 echarts": 4,
+   "L5 裸hex": 16
+  },
+  "data/journey-geo-semiotics.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 3
+  },
+  "data/journey-map-interactive.html": {
+   "L5 裸hex": 4
+  },
+  "data/journey-route.html": {
+   "L5 裸hex": 10
+  },
+  "data/journey-spacetime.html": {
+   "L2 echarts": 4
+  },
+  "data/jurisprudence.html": {
+   "L2 echarts": 6,
+   "L4 CSS属性值": 2,
+   "L5 裸hex": 18
+  },
+  "data/karma-reincarnation.html": {
+   "L5 裸hex": 23
+  },
+  "data/language-style-radar.html": {
+   "L2 echarts": 6
+  },
+  "data/linguistics.html": {
+   "L5 裸hex": 11
+  },
+  "data/magic-system.html": {
+   "L2 echarts": 1,
+   "L5 裸hex": 7
+  },
+  "data/material-archaeology.html": {
+   "L5 裸hex": 21
+  },
+  "data/mbti-evolution.html": {
+   "L2 echarts": 6
+  },
+  "data/methodology-matrix.html": {
+   "L2 echarts": 2,
+   "L5 裸hex": 4
+  },
+  "data/ming-political-thought-comparison.html": {
+   "L2 echarts": 5,
+   "L5 裸hex": 14
+  },
+  "data/monster-background.html": {
+   "L2 echarts": 7,
+   "L5 裸hex": 2
+  },
+  "data/monster-capability-radar.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 10
+  },
+  "data/monster-ecology-network.html": {
+   "L5 裸hex": 10
+  },
+  "data/monster-sociology.html": {
+   "L5 裸hex": 13
+  },
+  "data/monster-victims-network.html": {
+   "L2 echarts": 4,
+   "L5 裸hex": 8
+  },
+  "data/music-structure.html": {
+   "L5 裸hex": 11
+  },
+  "data/narrative-experiment.html": {
+   "L2 echarts": 28,
+   "L5 裸hex": 3
+  },
+  "data/narratology-16d-network.html": {
+   "L2 echarts": 5,
+   "L5 裸hex": 2
+  },
+  "data/perf-canvas-rendering.html": {
+   "L5 裸hex": 2
+  },
+  "data/philosophy.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 11
+  },
+  "data/pilgrim-team-dynamic-network.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 5
+  },
+  "data/pilgrim-team-psychology-arc.html": {
+   "L2 echarts": 4,
+   "L5 裸hex": 4
+  },
+  "data/poetry-rhythm-analysis.html": {
+   "L5 裸hex": 11
+  },
+  "data/power-resources.html": {
+   "L5 裸hex": 9
+  },
+  "data/relationships.html": {
+   "L4 CSS属性值": 1,
+   "L5 裸hex": 42
+  },
+  "data/risk-project.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 12
+  },
+  "data/social-media.html": {
+   "L2 echarts": 2,
+   "L5 裸hex": 17
+  },
+  "data/story-timeline.html": {
+   "L5 裸hex": 4
+  },
+  "data/tag-cloud.html": {
+   "L2 echarts": 3
+  },
+  "data/text-evolution.html": {
+   "L5 裸hex": 12
+  },
+  "data/timeline.html": {
+   "L2 echarts": 5
+  },
+  "data/underworld-power-network.html": {
+   "L2 echarts": 5,
+   "L5 裸hex": 18
+  },
+  "data/visual-art.html": {
+   "L5 裸hex": 11
+  },
+  "data/workplace.html": {
+   "L5 裸hex": 11
+  },
+  "en/81-hardships-view.html": {
+   "L5 裸hex": 3
+  },
+  "en/81-hardships.html": {
+   "L5 裸hex": 8
+  },
+  "en/aesthetics.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 7
+  },
+  "en/business-model.html": {
+   "L5 裸hex": 10
+  },
+  "en/cave-estate.html": {
+   "L5 裸hex": 4
+  },
+  "en/chapter-stats.html": {
+   "L5 裸hex": 4
+  },
+  "en/chapter-structure-graph.html": {
+   "L5 裸hex": 4
+  },
+  "en/character-appearance.html": {
+   "L2 echarts": 4,
+   "L5 裸hex": 1
+  },
+  "en/character-dynamic-network.html": {
+   "L2 echarts": 6
+  },
+  "en/character-presence-timeline.html": {
+   "L5 裸hex": 2
+  },
+  "en/character-relationship-3d-view.html": {
+   "L5 裸hex": 3
+  },
+  "en/character-semantic-network.html": {
+   "L2 echarts": 10,
+   "L5 裸hex": 14
+  },
+  "en/character-sentiment-arc.html": {
+   "L2 echarts": 8
+  },
+  "en/chart-design.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 16
+  },
+  "en/cognitive-psychology.html": {
+   "L5 裸hex": 7
+  },
+  "en/concept-device.html": {
+   "L2 echarts": 6,
+   "L5 裸hex": 2
+  },
+  "en/counterfactual.html": {
+   "L5 裸hex": 6
+  },
+  "en/criticism-history.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 3
+  },
+  "en/cultural-misreading.html": {
+   "L5 裸hex": 4
+  },
+  "en/data-explorer.html": {
+   "L5 裸hex": 3
+  },
+  "en/deconstruction.html": {
+   "L5 裸hex": 5
+  },
+  "en/dialogue-sentiment.html": {
+   "L5 裸hex": 4
+  },
+  "en/dukou-engine.html": {
+   "L5 裸hex": 3
+  },
+  "en/ecology.html": {
+   "L5 裸hex": 6
+  },
+  "en/emotional-heatmap.html": {
+   "L2 echarts": 3
+  },
+  "en/ethics-consumption.html": {
+   "L5 裸hex": 4
+  },
+  "en/four-dimensional-research-network.html": {
+   "L2 echarts": 6,
+   "L5 裸hex": 1
+  },
+  "en/four-heavenly-kings-artifacts.html": {
+   "L2 echarts": 2,
+   "L5 裸hex": 4
+  },
+  "en/game-webnovel.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 13
+  },
+  "en/global-pattern.html": {
+   "L5 裸hex": 3
+  },
+  "en/graph-explorer.html": {
+   "L5 裸hex": 6
+  },
+  "en/guanyin-six-roles-network.html": {
+   "L2 echarts": 5,
+   "L5 裸hex": 2
+  },
+  "en/hardship-difficulty-heatmap.html": {
+   "L5 裸hex": 6
+  },
+  "en/hardship-heatmap.html": {
+   "L5 裸hex": 5
+  },
+  "en/heaven-power-network.html": {
+   "L2 echarts": 4,
+   "L5 裸hex": 16
+  },
+  "en/journey-geo-semiotics.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 3
+  },
+  "en/journey-map-interactive.html": {
+   "L5 裸hex": 4
+  },
+  "en/journey-route.html": {
+   "L5 裸hex": 10
+  },
+  "en/journey-spacetime.html": {
+   "L2 echarts": 4
+  },
+  "en/jurisprudence.html": {
+   "L2 echarts": 6,
+   "L4 CSS属性值": 2,
+   "L5 裸hex": 18
+  },
+  "en/karma-reincarnation.html": {
+   "L5 裸hex": 23
+  },
+  "en/language-style-radar.html": {
+   "L2 echarts": 6
+  },
+  "en/linguistics.html": {
+   "L5 裸hex": 11
+  },
+  "en/magic-system.html": {
+   "L2 echarts": 1,
+   "L5 裸hex": 7
+  },
+  "en/material-archaeology.html": {
+   "L5 裸hex": 21
+  },
+  "en/mbti-evolution.html": {
+   "L2 echarts": 6
+  },
+  "en/methodology-matrix.html": {
+   "L2 echarts": 2,
+   "L5 裸hex": 4
+  },
+  "en/ming-political-thought-comparison.html": {
+   "L2 echarts": 5,
+   "L5 裸hex": 14
+  },
+  "en/monster-background.html": {
+   "L2 echarts": 7,
+   "L5 裸hex": 2
+  },
+  "en/monster-capability-radar.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 10
+  },
+  "en/monster-ecology-network.html": {
+   "L5 裸hex": 10
+  },
+  "en/monster-sociology.html": {
+   "L5 裸hex": 13
+  },
+  "en/monster-victims-network.html": {
+   "L2 echarts": 4,
+   "L5 裸hex": 8
+  },
+  "en/music-structure.html": {
+   "L5 裸hex": 11
+  },
+  "en/narrative-experiment.html": {
+   "L2 echarts": 28,
+   "L5 裸hex": 3
+  },
+  "en/narratology-16d-network.html": {
+   "L2 echarts": 5,
+   "L5 裸hex": 2
+  },
+  "en/perf-canvas-rendering.html": {
+   "L5 裸hex": 2
+  },
+  "en/philosophy.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 11
+  },
+  "en/pilgrim-team-dynamic-network.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 5
+  },
+  "en/pilgrim-team-psychology-arc.html": {
+   "L2 echarts": 4,
+   "L5 裸hex": 4
+  },
+  "en/poetry-rhythm-analysis.html": {
+   "L5 裸hex": 11
+  },
+  "en/power-resources.html": {
+   "L5 裸hex": 9
+  },
+  "en/relationships.html": {
+   "L4 CSS属性值": 1,
+   "L5 裸hex": 42
+  },
+  "en/risk-project.html": {
+   "L2 echarts": 3,
+   "L5 裸hex": 12
+  },
+  "en/social-media.html": {
+   "L2 echarts": 2,
+   "L5 裸hex": 17
+  },
+  "en/tag-cloud.html": {
+   "L2 echarts": 3
+  },
+  "en/text-evolution.html": {
+   "L5 裸hex": 12
+  },
+  "en/timeline.html": {
+   "L2 echarts": 5
+  },
+  "en/underworld-power-network.html": {
+   "L2 echarts": 5,
+   "L5 裸hex": 18
+  },
+  "en/visual-art.html": {
+   "L5 裸hex": 11
+  },
+  "en/workplace.html": {
+   "L5 裸hex": 11
+  }
+ },
+ "total": 1412,
+ "page_count": 145,
+ "comp_kind": {
+  "C1前缀型": 990,
+  "C2字面值型": 20130
+ },
+ "comp_pages": {
+  "dukou-engine.html": 64,
+  "_template.html": 64,
+  "data/81-hardships-view.html": 64,
+  "data/81-hardships.html": 64,
+  "data/aesthetics.html": 64,
+  "data/ai-dialogue.html": 64,
+  "data/business-model.html": 64,
+  "data/cave-estate.html": 64,
+  "data/century-dialogue.html": 64,
+  "data/chapter-stats.html": 64,
+  "data/chapter-structure-graph.html": 64,
+  "data/character-appearance.html": 64,
+  "data/character-dynamic-network.html": 64,
+  "data/character-presence-timeline.html": 64,
+  "data/character-relationship-3d-view.html": 64,
+  "data/character-relationship-3d.html": 64,
+  "data/character-semantic-network.html": 64,
+  "data/character-sentiment-arc.html": 64,
+  "data/chart-design.html": 64,
+  "data/cognitive-psychology.html": 64,
+  "data/concept-device.html": 64,
+  "data/counterfactual.html": 64,
+  "data/criticism-history.html": 64,
+  "data/cross-time-danmaku.html": 64,
+  "data/cultural-misreading.html": 64,
+  "data/customs-pass-route.html": 64,
+  "data/data-explorer.html": 64,
+  "data/deconstruction.html": 64,
+  "data/dialogue-sentiment.html": 64,
+  "data/ecology.html": 64,
+  "data/emotional-heatmap.html": 64,
+  "data/ethics-consumption.html": 64,
+  "data/famous-time-travel.html": 64,
+  "data/four-dimensional-research-network.html": 64,
+  "data/four-heavenly-kings-artifacts.html": 64,
+  "data/game-webnovel.html": 64,
+  "data/global-pattern.html": 64,
+  "data/graph-explorer.html": 64,
+  "data/guanyin-six-roles-network.html": 64,
+  "data/hardship-difficulty-heatmap.html": 64,
+  "data/hardship-heatmap.html": 64,
+  "data/heaven-power-network.html": 64,
+  "data/intertextuality-network.html": 64,
+  "data/journey-geo-3d.html": 64,
+  "data/journey-geo-semiotics.html": 64,
+  "data/journey-map-interactive.html": 64,
+  "data/journey-route.html": 64,
+  "data/journey-spacetime.html": 64,
+  "data/jurisprudence.html": 64,
+  "data/karma-reincarnation.html": 64,
+  "data/language-style-radar.html": 64,
+  "data/linguistics.html": 64,
+  "data/magic-system.html": 64,
+  "data/material-archaeology.html": 64,
+  "data/mbti-evolution.html": 64,
+  "data/methodology-matrix.html": 64,
+  "data/ming-political-thought-comparison.html": 64,
+  "data/monster-background.html": 64,
+  "data/monster-capability-radar.html": 64,
+  "data/monster-ecology-network.html": 64,
+  "data/monster-female-network.html": 64,
+  "data/monster-hierarchy-network.html": 64,
+  "data/monster-sociology.html": 64,
+  "data/monster-victims-network.html": 64,
+  "data/music-structure.html": 64,
+  "data/narrative-experiment.html": 64,
+  "data/narrative-rhythm-curve.html": 64,
+  "data/narratology-12d-network.html": 64,
+  "data/narratology-16d-network.html": 64,
+  "data/perf-canvas-rendering.html": 64,
+  "data/philosophy.html": 64,
+  "data/pilgrim-team-dynamic-network.html": 64,
+  "data/pilgrim-team-psychology-arc.html": 64,
+  "data/poetry-rhythm-analysis.html": 64,
+  "data/power-resources.html": 64,
+  "data/relationships.html": 64,
+  "data/risk-project.html": 64,
+  "data/search.html": 64,
+  "data/six-senses-narratology-network.html": 64,
+  "data/social-media.html": 64,
+  "data/story-timeline.html": 64,
+  "data/tag-cloud.html": 64,
+  "data/text-evolution.html": 64,
+  "data/text-search.html": 64,
+  "data/theological-intervention-network.html": 64,
+  "data/timeline.html": 64,
+  "data/underworld-power-network.html": 64,
+  "data/visual-art.html": 64,
+  "data/workplace.html": 64,
+  "data/_shell.html": 64,
+  "en/81-hardships-view.html": 64,
+  "en/81-hardships.html": 64,
+  "en/academic-papers.html": 64,
+  "en/aesthetics.html": 64,
+  "en/ai-dialogue.html": 64,
+  "en/bestiary.html": 64,
+  "en/business-model.html": 64,
+  "en/cave-estate.html": 64,
+  "en/century-dialogue.html": 64,
+  "en/chapter-stats.html": 64,
+  "en/chapter-structure-graph.html": 64,
+  "en/chapters-map.html": 64,
+  "en/character-appearance.html": 64,
+  "en/character-bailongma.html": 64,
+  "en/character-bajie.html": 64,
+  "en/character-dynamic-network.html": 64,
+  "en/character-presence-timeline.html": 64,
+  "en/character-relationship-3d-view.html": 64,
+  "en/character-relationship-3d.html": 64,
+  "en/character-semantic-network.html": 64,
+  "en/character-sentiment-arc.html": 64,
+  "en/character-shaseng.html": 64,
+  "en/character-tangseng.html": 64,
+  "en/character-wukong.html": 64,
+  "en/characters.html": 64,
+  "en/chart-design.html": 64,
+  "en/cognitive-psychology.html": 64,
+  "en/concept-device.html": 64,
+  "en/counterfactual.html": 64,
+  "en/criticism-history.html": 64,
+  "en/cross-time-danmaku.html": 64,
+  "en/cultural-misreading.html": 64,
+  "en/customs-pass-route.html": 64,
+  "en/dashboard.html": 64,
+  "en/data-explorer.html": 64,
+  "en/deconstruction.html": 64,
+  "en/dialogue-sentiment.html": 64,
+  "en/dukou-engine.html": 64,
+  "en/ecology.html": 64,
+  "en/emotional-heatmap.html": 64,
+  "en/essay-ai-era.html": 64,
+  "en/essay-buddhist-chan.html": 64,
+  "en/essay-chapter-couplets.html": 64,
+  "en/essay-character-fu.html": 64,
+  "en/essay-cipai-linjiangxian.html": 64,
+  "en/essay-cipai-mantingfang.html": 64,
+  "en/essay-cipai-shuidiaogetou.html": 64,
+  "en/essay-cipai-xijiangyue.html": 64,
+  "en/essay-composition-origins.html": 64,
+  "en/essay-divine-bureaucracy.html": 64,
+  "en/essay-folk-belief.html": 64,
+  "en/essay-historical-xuanzang.html": 64,
+  "en/essay-information-cocoon.html": 64,
+  "en/essay-ming-economy.html": 64,
+  "en/essay-ming-examination.html": 64,
+  "en/essay-ming-garrison.html": 64,
+  "en/essay-ming-intellectual-history.html": 64,
+  "en/essay-ming-judiciary.html": 64,
+  "en/essay-ming-literary-thought.html": 64,
+  "en/essay-ming-maritime-ban.html": 64,
+  "en/essay-ming-metaphor.html": 64,
+  "en/essay-ming-military.html": 64,
+  "en/essay-ming-politics.html": 64,
+  "en/essay-ming-religion.html": 64,
+  "en/essay-ming-social-customs.html": 64,
+  "en/essay-modern-management.html": 64,
+  "en/essay-original-poetry.html": 64,
+  "en/essay-poetry-imagery.html": 64,
+  "en/essay-poetry-opening.html": 64,
+  "en/essay-quanzhen-daoism.html": 64,
+  "en/essay-rhythm-analysis.html": 64,
+  "en/essay-scenery-poems.html": 64,
+  "en/essay-thematic-poetry.html": 64,
+  "en/essay-three-teachings.html": 64,
+  "en/essay-version-evolution.html": 64,
+  "en/essay-zen-koan-vs-neidan.html": 64,
+  "en/ethics-consumption.html": 64,
+  "en/famous-time-travel.html": 64,
+  "en/four-dimensional-research-network.html": 64,
+  "en/four-heavenly-kings-artifacts.html": 64,
+  "en/game-webnovel.html": 64,
+  "en/global-pattern.html": 64,
+  "en/graph-explorer.html": 64,
+  "en/guanyin-six-roles-network.html": 64,
+  "en/guide.html": 64,
+  "en/hardship-difficulty-heatmap.html": 64,
+  "en/hardship-heatmap.html": 64,
+  "en/heaven-power-network.html": 64,
+  "en/index.html": 64,
+  "en/intertextuality-network.html": 64,
+  "en/journey-geo-semiotics.html": 64,
+  "en/journey-map-interactive.html": 64,
+  "en/journey-route.html": 64,
+  "en/journey-spacetime.html": 64,
+  "en/jurisprudence.html": 64,
+  "en/karma-reincarnation.html": 64,
+  "en/language-style-radar.html": 64,
+  "en/linguistics.html": 64,
+  "en/magic-system.html": 64,
+  "en/material-archaeology.html": 64,
+  "en/mbti-evolution.html": 64,
+  "en/methodology-matrix.html": 64,
+  "en/methodology.html": 64,
+  "en/ming-political-thought-comparison.html": 64,
+  "en/monster-background.html": 64,
+  "en/monster-capability-radar.html": 64,
+  "en/monster-ecology-network.html": 64,
+  "en/monster-female-network.html": 64,
+  "en/monster-hierarchy-network.html": 64,
+  "en/monster-sociology.html": 64,
+  "en/monster-victims-network.html": 64,
+  "en/music-structure.html": 64,
+  "en/narrative-experiment.html": 64,
+  "en/narrative-rhythm-curve.html": 64,
+  "en/narratology-12d-network.html": 64,
+  "en/narratology-16d-network.html": 64,
+  "en/perf-canvas-rendering.html": 64,
+  "en/philosophy.html": 64,
+  "en/pilgrim-team-dynamic-network.html": 64,
+  "en/pilgrim-team-psychology-arc.html": 64,
+  "en/poetry-rhythm-analysis.html": 64,
+  "en/power-resources.html": 64,
+  "en/relationships.html": 64,
+  "en/risk-project.html": 64,
+  "en/search.html": 64,
+  "en/site-map.html": 64,
+  "en/six-senses-narratology-network.html": 64,
+  "en/social-media.html": 64,
+  "en/tag-cloud.html": 64,
+  "en/text-evolution.html": 64,
+  "en/text-search.html": 64,
+  "en/theological-intervention-network.html": 64,
+  "en/timeline.html": 64,
+  "en/tribulations.html": 64,
+  "en/underworld-power-network.html": 64,
+  "en/visual-art.html": 64,
+  "en/visualizations.html": 64,
+  "en/workplace.html": 64,
+  "reader/ch001.html": 64,
+  "reader/ch002.html": 64,
+  "reader/ch003.html": 64,
+  "reader/ch004.html": 64,
+  "reader/ch005.html": 64,
+  "reader/ch006.html": 64,
+  "reader/ch007.html": 64,
+  "reader/ch008.html": 64,
+  "reader/ch009.html": 64,
+  "reader/ch010.html": 64,
+  "reader/ch011.html": 64,
+  "reader/ch012.html": 64,
+  "reader/ch013.html": 64,
+  "reader/ch014.html": 64,
+  "reader/ch015.html": 64,
+  "reader/ch016.html": 64,
+  "reader/ch017.html": 64,
+  "reader/ch018.html": 64,
+  "reader/ch019.html": 64,
+  "reader/ch020.html": 64,
+  "reader/ch021.html": 64,
+  "reader/ch022.html": 64,
+  "reader/ch023.html": 64,
+  "reader/ch024.html": 64,
+  "reader/ch025.html": 64,
+  "reader/ch026.html": 64,
+  "reader/ch027.html": 64,
+  "reader/ch028.html": 64,
+  "reader/ch029.html": 64,
+  "reader/ch030.html": 64,
+  "reader/ch031.html": 64,
+  "reader/ch032.html": 64,
+  "reader/ch033.html": 64,
+  "reader/ch034.html": 64,
+  "reader/ch035.html": 64,
+  "reader/ch036.html": 64,
+  "reader/ch037.html": 64,
+  "reader/ch038.html": 64,
+  "reader/ch039.html": 64,
+  "reader/ch040.html": 64,
+  "reader/ch041.html": 64,
+  "reader/ch042.html": 64,
+  "reader/ch043.html": 64,
+  "reader/ch044.html": 64,
+  "reader/ch045.html": 64,
+  "reader/ch046.html": 64,
+  "reader/ch047.html": 64,
+  "reader/ch048.html": 64,
+  "reader/ch049.html": 64,
+  "reader/ch050.html": 64,
+  "reader/ch051.html": 64,
+  "reader/ch052.html": 64,
+  "reader/ch053.html": 64,
+  "reader/ch054.html": 64,
+  "reader/ch055.html": 64,
+  "reader/ch056.html": 64,
+  "reader/ch057.html": 64,
+  "reader/ch058.html": 64,
+  "reader/ch059.html": 64,
+  "reader/ch060.html": 64,
+  "reader/ch061.html": 64,
+  "reader/ch062.html": 64,
+  "reader/ch063.html": 64,
+  "reader/ch064.html": 64,
+  "reader/ch065.html": 64,
+  "reader/ch066.html": 64,
+  "reader/ch067.html": 64,
+  "reader/ch068.html": 64,
+  "reader/ch069.html": 64,
+  "reader/ch070.html": 64,
+  "reader/ch071.html": 64,
+  "reader/ch072.html": 64,
+  "reader/ch073.html": 64,
+  "reader/ch074.html": 64,
+  "reader/ch075.html": 64,
+  "reader/ch076.html": 64,
+  "reader/ch077.html": 64,
+  "reader/ch078.html": 64,
+  "reader/ch079.html": 64,
+  "reader/ch080.html": 64,
+  "reader/ch081.html": 64,
+  "reader/ch082.html": 64,
+  "reader/ch083.html": 64,
+  "reader/ch084.html": 64,
+  "reader/ch085.html": 64,
+  "reader/ch086.html": 64,
+  "reader/ch087.html": 64,
+  "reader/ch088.html": 64,
+  "reader/ch089.html": 64,
+  "reader/ch090.html": 64,
+  "reader/ch091.html": 64,
+  "reader/ch092.html": 64,
+  "reader/ch093.html": 64,
+  "reader/ch094.html": 64,
+  "reader/ch095.html": 64,
+  "reader/ch096.html": 64,
+  "reader/ch097.html": 64,
+  "reader/ch098.html": 64,
+  "reader/ch099.html": 64,
+  "reader/ch100.html": 64,
+  "reader/index.html": 64,
+  "reader/themes-hub.html": 64
+ }
+}
