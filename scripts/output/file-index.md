@@ -57,6 +57,9 @@
 | site/dukou-engine.html | W1094 | 页面 |
 | site/index.html | W1094 | 页面 |
 | scripts/output/_vermilion_solid_cache.json | W1094 | 本批工具/产物 |
+| tmp_ledger_head.md | W1094 | 治理文档 |
+| tmp_readme_head.md | W1094 | 治理文档 |
+| tmp_t50_head.md | W1094 | 治理文档 |
 
 ## W1090 J2 视觉回归探针扩展（2026-11-02）
 
