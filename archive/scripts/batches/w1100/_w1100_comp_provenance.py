@@ -24,7 +24,7 @@ def main():
             rel = str(p.relative_to(SITE)).replace("\\", "/")
             txt = p.read_text(encoding="utf-8", errors="ignore")
             styles = "\n".join(m.group(1) for m in
-                               re.finditer(r"<style\b[^>]*>(.*?)</style>", txt, re.S | re.I))
+                               re.finditer(r"<[Ss][Tt][Yy][Ll][Ee]\b[^>]*>(.*?)</[Ss][Tt][Yy][Ll][Ee]\s*>", txt, re.S | re.I))
             rules = []
             for m in RX.finditer(styles):
                 sel = " ".join(m.group(1).split())
