@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-03 02:48
+生成时间：2026-11-03 04:11
 
-共 **166** 件（门禁与校验 74 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 64 · 一次性（下划线前缀） 6）
+共 **167** 件（门禁与校验 75 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 64 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（74）
+## 门禁与校验（75）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -68,6 +68,7 @@
 | `check_page_admission.py` | check_page_admission.py — 新建页准入门禁（W916 建置·C-W818-01 清偿·静态版）。 |
 | `check_parser_anchor_coverage.py` | check_parser_anchor_coverage.py — 解析器锚点覆盖面扫描（W965 沉淀·W964 双虫探针常驻化）。 |
 | `check_perf_shadow.py` | check_perf_shadow.py — 性能影子槽判据件（W849 建立·verify_delivery 第 47 门禁）。 |
+| `check_pitfall_id_unique.py` | check_pitfall_id_unique.py —— 坑表编号唯一性判据（W1106 建）。 |
 | `check_plan_template.py` | check_plan_template.py — 第 48 门禁：计划方案模板符合性（增量口径·W860） |
 | `check_repo_layout.py` | check_repo_layout.py — 第 52 门禁：仓库布局（W1011 挂槽·用户 2026-10-29「全都做」） |
 | `check_screenshot_gates.js` | check_screenshot_gates.js — 图表/渲染动态门禁（W551 新建，挂 screenshot-review workfl |

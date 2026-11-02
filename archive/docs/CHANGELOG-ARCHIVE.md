@@ -16,6 +16,42 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W985（2026-10-27）：工具文档三件批（场景路由表 + 指针化修数 + 机器清单 171 件挂刷新链）
+
+
+
+> **来源**：用户 2026-10-27 问「新增一个 TOOLS.md 工具使用文档怎么样」——评估结论：根级新手写文档层会被六处既有面重叠且无新鲜度门禁看守（W824 定律必掉档·文档规范 §11 新增当前态声明须纳管），**需求真实、落点改既有机器看守面**；用户裁决「1+2+3」全做。
+
+> - **文件**：scripts/README.md、scripts/gen_tools_inventory.py、scripts/output/tools-inventory.md、scripts/gen_folder_docs.py、tests/unit/test_tools_inventory.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w985_spec.json、scripts/output/_cascade_files_W985.txt。
+
+**①场景路由表**：scripts/README.md 头部新增「场景速查（要做什么→用哪个）」15 行路由——批次生命周期全链（认领/preflight/级联/回窗/修剪/复盘触发/数据链判定/统计刷新）逐场景给出工具与典型调用，这是体检暴露的真实缺口（路由知识散落各处、新 Agent 最难发现）。
+
+**②登记与指针化**：归档计数「45 个」→历次治理指针（W446·W735·W977+台账指针——W977 后实数已 337+，手写字面量即腐）；docs_index「321 篇」同类指针化；头部补全量清单指针与「禁手改」声明。新工具不逐行复制进手写表——路由表管发现、机器清单管全量，双层面分工（指针化纪律）。
+
+**③机器清单**：新建 `gen_tools_inventory.py`——git 跟踪态顶层工具逐件（171 件·七类分节：门禁与校验 64/批次与登记 10/统计与对账 3/生成与索引 5/运维与临时区 1/工具 46/一次性 42），用途=docstring 首行（ast 解析·Node 取首注释），精确名覆盖+前缀规则分类；`--check` 对账模式（表格主体漂移 exit 1·时间戳不入判定）；挂进 `gen_folder_docs.py --refresh` 刷新链（每批目录文档刷新时连带再生成·失败留痕不阻断）。单测 5 例（分类优先级/用途提取/分节渲染/漂移判据/实盘行数回归锁==tracked 计数）。
+
+**开工波折（并行竞速实录）**：认领 W984 时发现已被题图第五组占用且收官；改认领 W985 压竞态提交时被钩子拦——C4-f 五项假红（他方会话对 W984 段文件行内文件的观感反馈微调未提交，W837 载 exactly 此场景），按 **W932 代提先例**把其成型的落仓内容（ASM-06 否证结案+pitfalls 新条目+计数链）连同本批认领行一并代提（1bb282af）解自举死锁。
+
+**验证**：gen_tools_inventory --self-test 过 + --check 零差异 + 单测 5/5 + ruff 0 + lint_links scripts 面 0 broken + pytest 全量见状态行。
+
+> - **状态**：已收官（`4f62bf68`·verify 全量 rc=0 + 单测 934 过 + ruff 0 + lint_links scripts 面 0 broken·清单 171 件）
+
+### W984（2026-10-27）：内页题图成套批·第五组（12 张·回目页线描重出 6 + 四库扩量 6·站内线描题图累计 76 张）
+
+
+
+> **来源**：用户 2026-10-27 08:27 令「但是你可以进行单独重出，这六张浓墨渲染图可以保留；继续扩量」。
+>
+> **三裁**（开工问卷答复）：① 呈现方式 = **页面改用线描版，浓墨版留仓内存档** ② 题材范围 = **四库全选**（people / themes / essays·poetry·culture / 九十九回回目页）③ 规模 = **12 张一批**（其中 6 张为回目页线描重出）。
+>
+> - **文件**：assets/promo/plate-set/plate-line-37-ch007-bagua-lu.png、assets/promo/plate-set/plate-line-37-ch007-bagua-lu.webp、site/static/images/plate-line-37-ch007-bagua-lu.webp、assets/promo/plate-set/plate-line-38-ch014-liubei.png、assets/promo/plate-set/plate-line-38-ch014-liubei.webp、site/static/images/plate-line-38-ch014-liubei.webp、assets/promo/plate-set/plate-line-39-ch015-yingchou.png、assets/promo/plate-set/plate-line-39-ch015-yingchou.webp、site/static/images/plate-line-39-ch015-yingchou.webp、assets/promo/plate-set/plate-line-40-ch023-sichan.png、assets/promo/plate-set/plate-line-40-ch023-sichan.webp、site/static/images/plate-line-40-ch023-sichan.webp、assets/promo/plate-set/plate-line-41-ch027-bailong.png、assets/promo/plate-set/plate-line-41-ch027-bailong.webp、site/static/images/plate-line-41-ch027-bailong.webp、assets/promo/plate-set/plate-line-42-ch030-sancha.png、assets/promo/plate-set/plate-line-42-ch030-sancha.webp、site/static/images/plate-line-42-ch030-sancha.webp、assets/promo/plate-set/plate-line-43-luoshanv.png、assets/promo/plate-set/plate-line-43-luoshanv.webp、site/static/images/plate-line-43-luoshanv.webp、assets/promo/plate-set/plate-line-44-kuimulang.png、assets/promo/plate-set/plate-line-44-kuimulang.webp、site/static/images/plate-line-44-kuimulang.webp、assets/promo/plate-set/plate-line-45-zhaoan-topic.png、assets/promo/plate-set/plate-line-45-zhaoan-topic.webp、site/static/images/plate-line-45-zhaoan-topic.webp、assets/promo/plate-set/plate-line-46-fushi-topic.png、assets/promo/plate-set/plate-line-46-fushi-topic.webp、site/static/images/plate-line-46-fushi-topic.webp、assets/promo/plate-set/plate-line-47-jingwu-topic.png、assets/promo/plate-set/plate-line-47-jingwu-topic.webp、site/static/images/plate-line-47-jingwu-topic.webp、assets/promo/plate-set/plate-line-48-xuanzang-topic.png、assets/promo/plate-set/plate-line-48-xuanzang-topic.webp、site/static/images/plate-line-48-xuanzang-topic.webp、assets/promo/plate-set/raw/round13/plate-line-37-ch007-bagua-lu.jpg、assets/promo/plate-set/raw/round13/plate-line-38-ch014-liubei.jpg、assets/promo/plate-set/raw/round13/plate-line-39-ch015-yingchou.jpg、assets/promo/plate-set/raw/round13/plate-line-40-ch023-sichan.jpg、assets/promo/plate-set/raw/round13/plate-line-41-ch027-bailong.jpg、assets/promo/plate-set/raw/round13/plate-line-42-ch030-sancha.jpg、assets/promo/plate-set/raw/round13/plate-line-43-luoshanv.jpg、assets/promo/plate-set/raw/round13/plate-line-44-kuimulang.jpg、assets/promo/plate-set/raw/round13/plate-line-45-zhaoan-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-46-fushi-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-47-jingwu-topic.jpg、assets/promo/plate-set/raw/round13/plate-line-48-xuanzang-topic.jpg、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/README.md、site/reader/ch007.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、site/reader/people/罗刹女外传.html、site/reader/people/奎木狼外传.html、site/reader/themes/招安的两种结局专题.html、site/reader/essays/西游与服饰学.html、site/reader/poetry/原著景物诗分类赏析专题.html、site/reader/culture/历史玄奘与小说玄奘专题.html、scripts/_w984_make_prompts.py、scripts/_w984_precheck_pages.py、scripts/_w984_derive.py、scripts/_w984_prepare.py、scripts/_w984_download.py、scripts/_w984_insert_plates.py、scripts/_w984_retry.py、scripts/_w984_sheet.py、scripts/_w984_zoom.py、scripts/_w984_serve.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、docs/11-方案报告/计划方案/执行前计划-T31-内页题图成套批第五组.md、docs/11-方案报告/计划方案/T31-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、dscripts/_w984_make_spec.py、site/data/search.html、site/en/search.html、scripts/output/_w984_batch1.json、scripts/output/_w984_batch2.json、scripts/output/_w984_batch3.json、scripts/output/_w984_gen.json、scripts/output/_w984_precheck.json、scripts/output/_w984_sheet.png、scripts/output/_w984_zoom.png、scripts/output/_w984_spec.json、scripts/output/_cascade_files_W984.txt、CHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。
+
+**本批要点**：① **首次引入「替换既有题图源」动作**——回目页 6 张（ch007 / ch014 / ch015 / ch023 / ch027 / ch030）改用同一套宣纸线描立像，**原浓墨渲染版 `chap-07/14/15/23/27/30.webp` 保留不删**（用户 2026-10-27 08:25 裁定「这六张我认为还可以」）并登记为存量归档；另 6 张为四库扩量（people 2 罗刹女 / 奎木狼 + themes 1 招安的两种结局 + essays·poetry·culture 各 1 西游与服饰学 / 原著景物诗分类赏析 / 历史玄奘与小说玄奘）⇒ 站内线描题图累计 **64 → 76 张**、reader 有题图页 **75 → 81 页**；② **替换页同步移除 `aria-hidden` 并写真实 alt**（存量浓墨图是装饰语义 ⇒ 换图源必换可访问性语义）；③ **落位页先验按动作分支建模**（INSERT 6 + REPLACE 6·三个拒绝分支各配一个负样本·3/3 自证通过）；④ **3 张重出**（#38 古树两处朱砂 / #40 贯穿竖线 + 顶天立地⇒裁切验算判红 / #43 葫芦整体实心红⇒J6 只查暗块逃逸）⇒ 坑表 **+4 条（70 → 74）** + 方法论篇新增 §2.8「判据按接入动作分支建模」；⑤ **本地验收服务加 `Cache-Control: no-store`** 根治「改了页面却看不到变化」的缓存误判。
+
+**验证**：母版判据 J1–J10 **76/76 FAIL 0** · 站点版裁切验算 **76/76 FAIL 0**（主体顶余量 5–7 px·下部地面留白 44–134 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.6/255 · 落位页先验 12/12（INSERT 6 + REPLACE 6·三负样本自证通过）· 接入幂等复跑 12/12 SKIP · 12/12 处面探针 HTTP 200 + 含本批图名 + 含真实 alt + 无残留 aria-hidden · 浏览器实跑 2 页渲染正常（替换型 / 新增型）· **6 个浓墨版文件逐个核验仍在**（用户明令保留）· 计划方案合规门禁 0 FAIL · 全量门禁 55/55 段全绿（核心全部通过）。
+
+> - **状态**：已收官（`d97d6754`·verify 全量 55/55 段全绿·母版判据 76/76 FAIL 0·裁切验算 76/76 FAIL 0·6 个浓墨版原文件保留未删·reader 有题图页 75 → 81）· **用户观感反馈（2026-10-27 12:26）：回目页 6 张线描重出版「一般算不上好看」⇒ ASM-06 否证**（同角色同范式第二张图观感重复·机器判据与拼图趋势均查不出）· 待裁决回退浓墨版或换主体重出
+
 ### W983（2026-10-27）：内页题图成套批·第四组（12 张·四库混合覆盖·站内线描题图累计 64 张）
 
 

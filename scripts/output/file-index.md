@@ -1,3 +1,128 @@
+## W1107 坑表编号唯一性体检与机器判据建置 + 档 3 前置（2026-11-03）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1107 | 本批改动 |
+| AGENTS.md | W1107 | 本批改动 |
+| HANDOVER.md | W1107 | 本批改动 |
+| docs/00-导读/W批次编号对账表.md | W1107 | 本批改动 |
+| docs/agent/pitfalls.md | W1107 | 本批改动 |
+| scripts/check_pitfall_id_unique.py | W1107 | 本批改动 |
+| tests/unit/test_w1106_pitfall_id_unique.py | W1107 | 本批改动 |
+| docs/11-方案报告/计划方案/T58-任务计划执行与经验沉淀报告-2026-11-03.md | W1107 | 本批改动 |
+| docs/11-方案报告/计划方案/T59-任务计划执行与经验沉淀报告-2026-11-03.md | W1107 | 本批改动 |
+| scripts/output/_w1106_spec.json | W1107 | 本批工具/产物 |
+| scripts/output/_w1107_spec.json | W1107 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1106.txt | W1107 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1107.txt | W1107 | 本批工具/产物 |
+| scripts/output/file-index.md | W1107 | 本批工具/产物 |
+| scripts/output/stats.json | W1107 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1107 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1107 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1107 | 本批工具/产物 |
+| scripts/output/README.md | W1107 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1107 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1107 | 本批工具/产物 |
+| docs/INDEX.md | W1107 | 本批工具/产物 |
+| tests/unit/INDEX.md | W1107 | 本批工具/产物 |
+| tests/unit/README.md | W1107 | 本批工具/产物 |
+| pytest.ini | W1107 | 本批工具/产物 |
+| CHANGELOG.md | W1107 | 本批工具/产物 |
+| README.md | W1107 | 本批工具/产物 |
+| STRUCTURE.md | W1107 | 本批工具/产物 |
+| CITATION.cff | W1107 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1107 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1107 | 本批工具/产物 |
+| .github/workflows/README.md | W1107 | 本批工具/产物 |
+| site/tokens.css | W1107 | 本批工具/产物 |
+| site/index.html | W1107 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1107 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1107 | 本批工具/产物 |
+| site/dukou-engine.html | W1107 | 本批工具/产物 |
+
+## W1106 图表色工程批·档 3 前置批（2026-11-03）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/business-model.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/cave-estate.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/character-appearance.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/cognitive-psychology.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/concept-device.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/customs-pass-route.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/deconstruction.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/four-dimensional-research-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/game-webnovel.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/global-pattern.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/hardship-difficulty-heatmap.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/hardship-heatmap.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/heaven-power-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/journey-map-interactive.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/journey-spacetime.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/jurisprudence.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/karma-reincarnation.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/ming-political-thought-comparison.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/monster-background.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/monster-capability-radar.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/monster-ecology-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/monster-hierarchy-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/monster-sociology.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/music-structure.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/narrative-experiment.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/philosophy.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/pilgrim-team-psychology-arc.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/poetry-rhythm-analysis.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/power-resources.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/risk-project.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/underworld-power-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/data/visual-art.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/customs-pass-route.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/four-dimensional-research-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/game-webnovel.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/heaven-power-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/monster-ecology-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/monster-hierarchy-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/music-structure.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/narrative-experiment.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/underworld-power-network.html | W1106 | 页面（暗色令牌受益面） |
+| site/en/visual-art.html | W1106 | 页面（暗色令牌受益面） |
+| site/tokens.css | W1106 | 本批工具/产物 |
+| site/index.html | W1106 | 治理文档 |
+| site/data/cross-time-danmaku.html | W1106 | 治理文档 |
+| site/data/tag-cloud.html | W1106 | 治理文档 |
+| site/dukou-engine.html | W1106 | 治理文档 |
+| AGENTS.md | W1106 | 治理文档 |
+| HANDOVER.md | W1106 | 治理文档 |
+| CHANGELOG.md | W1106 | 治理文档 |
+| README.md | W1106 | 治理文档 |
+| STRUCTURE.md | W1106 | 治理文档 |
+| CITATION.cff | W1106 | 治理文档 |
+| docs/agent/pitfalls.md | W1106 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1106 | 治理文档 |
+| docs/00-导读/项目说明.md | W1106 | 治理文档 |
+| docs/11-方案报告/README.md | W1106 | 治理文档 |
+| docs/11-方案报告/计划方案/T58-任务计划执行与经验沉淀报告-2026-11-03.md | W1106 | 治理文档 |
+| docs/INDEX.md | W1106 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1106 | 治理文档 |
+| .github/workflows/README.md | W1106 | 治理文档 |
+| scripts/output/_w1106_spec.json | W1106 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1106.txt | W1106 | 本批工具/产物 |
+| scripts/output/file-index.md | W1106 | 本批工具/产物 |
+| scripts/output/stats.json | W1106 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1106 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1106 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1106 | 本批工具/产物 |
+| scripts/output/README.md | W1106 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1106 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1106 | 本批工具/产物 |
+| pytest.ini | W1106 | 治理文档 |
+| tests/unit/INDEX.md | W1106 | 治理文档 |
+| tests/unit/README.md | W1106 | 治理文档 |
+| docs/11-方案报告/计划方案/T59-任务计划执行与经验沉淀报告-2026-11-03.md | W1106 | 本批工具/产物 |
+| scripts/check_pitfall_id_unique.py | W1106 | 本批工具/产物 |
+| tests/unit/test_w1106_pitfall_id_unique.py | W1106 | 本批工具/产物 |
+| scripts/output/_w1107_spec.json | W1106 | 本批工具/产物 |
+
 ## W1105 遗留清偿批（归档健康根修 + 第 31 门禁两盲区 + design 审查收口 + 站点守卫与 tooltip 对齐）（2026-11-02）
 | 文件 | W | 说明 |
 |---|---|---|
@@ -5308,98 +5433,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W986 | W986 段插入 |
 | scripts/output/_w986_spec.json | W986 | 本批级联 spec |
 | scripts/output/_cascade_files_W986.txt | W986 | 级联落盘清单 |
-
-## W985 工具文档三件批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/README.md | W985 | 场景速查路由表（15 场景→工具）+ 归档计数指针化（45 个→历次治理台账指针）+ 全量清单指针 + docs_index 321 篇字面量指针化
-| scripts/gen_tools_inventory.py | W985 | 新建：顶层工具清单机器生成器（tracked 顶层逐件·docstring 提取·分类规则·--check 对账·--self-test）
-| scripts/output/tools-inventory.md | W985 | 机器生成清单首版（171 件·七类分节·禁手改·随刷新链更新）
-| scripts/gen_folder_docs.py | W985 | --refresh 刷新链挂载工具清单再生成（失败留痕不阻断）
-| tests/unit/test_tools_inventory.py | W985 | 单测 5 例（分类优先级/用途提取/分节渲染/check 漂移判据/实盘行数回归锁）
-| docs/00-导读/W批次编号对账表.md | W985 | W985 认领行与收官回填
-| CHANGELOG.md | W985 | W985 段
-| HANDOVER.md | W985 | 级联头尾链与里程碑块
-| README.md | W985 | 当前批次版本行
-| STRUCTURE.md | W985 | 当前批次版本行
-| docs/00-导读/项目说明.md | W985 | 当前批次版本行
-| .github/workflows/README.md | W985 | 工作流层版本面推进 W985
-| site/index.html | W985 | 页脚批次链插入 W985
-| site/data/cross-time-danmaku.html | W985 | 页脚批次链插入 W985
-| site/data/tag-cloud.html | W985 | 页脚批次链插入 W985
-| site/dukou-engine.html | W985 | 页脚批次链插入 W985
-| AGENTS.md | W985 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W985 | 脚注滚动迁入的最老条目
-| CITATION.cff | W985 | version 同步为 W985
-| scripts/output/file-index.md | W985 | W985 段插入
-| scripts/output/_w985_spec.json | W985 | 本批级联 spec
-| scripts/output/_cascade_files_W985.txt | W985 | 级联落盘清单
-
-## W984 内页题图成套批·第四组（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-37-ch007-bagua-lu.webp | W984 | 新增·站点版（37-ch007-bagua-lu） |
-| site/static/images/plate-line-38-ch014-liubei.webp | W984 | 新增·站点版（38-ch014-liubei） |
-| site/static/images/plate-line-39-ch015-yingchou.webp | W984 | 新增·站点版（39-ch015-yingchou） |
-| site/static/images/plate-line-40-ch023-sichan.webp | W984 | 新增·站点版（40-ch023-sichan） |
-| site/static/images/plate-line-41-ch027-bailong.webp | W984 | 新增·站点版（41-ch027-bailong） |
-| site/static/images/plate-line-42-ch030-sancha.webp | W984 | 新增·站点版（42-ch030-sancha） |
-| site/static/images/plate-line-43-luoshanv.webp | W984 | 新增·站点版（43-luoshanv） |
-| site/static/images/plate-line-44-kuimulang.webp | W984 | 新增·站点版（44-kuimulang） |
-| site/static/images/plate-line-45-zhaoan-topic.webp | W984 | 新增·站点版（45-zhaoan-topic） |
-| site/static/images/plate-line-46-fushi-topic.webp | W984 | 新增·站点版（46-fushi-topic） |
-| site/static/images/plate-line-47-jingwu-topic.webp | W984 | 新增·站点版（47-jingwu-topic） |
-| site/static/images/plate-line-48-xuanzang-topic.webp | W984 | 新增·站点版（48-xuanzang-topic） |
-| site/reader/ch007.html | W984 | 接入题图（第 007 回 八卦炉与五行山（替换浓墨版·原图保留）） |
-| site/reader/ch014.html | W984 | 接入题图（第 014 回 六贼剪径（替换浓墨版·原图保留）） |
-| site/reader/ch015.html | W984 | 接入题图（第 015 回 鹰愁涧意马收缰（替换浓墨版·原图保留）） |
-| site/reader/ch023.html | W984 | 接入题图（第 023 回 四圣试禅心（替换浓墨版·原图保留）） |
-| site/reader/ch027.html | W984 | 接入题图（第 027 回 白龙归水（替换浓墨版·原图保留）） |
-| site/reader/ch030.html | W984 | 接入题图（第 030 回 邪魔侵正法（替换浓墨版·原图保留）） |
-| site/reader/people/罗刹女外传.html | W984 | 接入题图（罗刹女） |
-| site/reader/people/奎木狼外传.html | W984 | 接入题图（奎木狼） |
-| site/reader/themes/招安的两种结局专题.html | W984 | 接入题图（招安的两种结局） |
-| site/reader/essays/西游与服饰学.html | W984 | 接入题图（西游与服饰学） |
-| site/reader/poetry/原著景物诗分类赏析专题.html | W984 | 接入题图（原著景物诗分类赏析） |
-| site/reader/culture/历史玄奘与小说玄奘专题.html | W984 | 接入题图（历史玄奘与小说玄奘） |
-| assets/promo/plate-set/plate-line-25~36-*.png/.webp | W984 | 新增 12 张母版（1200×1600·线描墨稿·含 3 张重出生效件） |
-| assets/promo/plate-set/raw/round13/ | W984 | 出图原件 12 份（含 #26/#27/#36 三张重出生效件） |
-| assets/promo/plate-set/preview-contact-sheet.png/.webp | W984 | 全目录 64 张缩略拼图（刷新） |
-| assets/promo/plate-set/README.md | W984 | 口径更新（52→64 张·第六组清单·本批已知取舍） |
-| scripts/_w984_make_prompts.py | W984 | 母版复用生成器（249 字符母版逐字复用·四条断言·stem 冲突负样本自证） |
-| scripts/_w984_precheck_pages.py | W984 | 落位页先验（存在 + 无题图 + 结构锚点·负样本自证） |
-| scripts/_w984_derive.py | W984 | 施工脚本程序化派生器（替换表 + 残留硬编码断言） |
-| scripts/_w984_prepare.py | W984 | 成品派生（裁 3:4 → 缩放 → 纸色归一 → 母版/站点版 → 拼图·作用域限 raw/round13） |
-| scripts/_w984_download.py | W984 | 出图原件下载（node_id → 短链 → 落盘·按 node_id↔文件名映射） |
-| scripts/_w984_insert_plates.py | W984 | 12 页 chapter-plate 接入（幂等） |
-| scripts/_w984_retry.py | W984 | 单张重出修正器（行内短锚点替换 + 重建 batch + 断言修正点入 prompt） |
-| scripts/_w984_sheet.py | W984 | 本批 12 张核对拼图生成器 |
-| scripts/_w984_zoom.py | W984 | 关键部位放大核对图生成器 |
-| scripts/_w984_serve.py | W984 | 本地验收静态服务（补 webp/js/css MIME） |
-| scripts/_w945_plates_verify.py | W984 | 素材成套判据 J1–J10（自归档恢复为现役·判据逻辑逐字未改） |
-| scripts/_w951_check_crop.py | W984 | 站点版裁切验算（自归档恢复为现役·判据逻辑逐字未改） |
-| docs/11-方案报告/计划方案/执行前计划-T31-内页题图成套批第五组.md | W984 | 执行前计划件（框架号 T-31） |
-| docs/11-方案报告/计划方案/T31-任务计划执行与经验沉淀报告-2026-10-27.md | W984 | 终稿报告件（执行记录/验收/复盘/经验沉淀） |
-| docs/11-方案报告/README.md | W984 | §六 计划方案登记（+2 行·件数十 37→39） |
-| docs/agent/pitfalls.md | W984 | 坑表 +6 条（64→70·视觉渲染 12→15 / 流程 10→13） |
-| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W984 | 新增 §2.7 判据覆盖面的边界 + 4 条复现案例 |
-| docs/00-导读/W批次编号对账表.md | W984 | W984 认领行 + W982 行 git 反填 |
-| site/data/search.html | W984 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
-| site/en/search.html | W984 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
-| CHANGELOG.md | W984 | W984 段 |
-| docs/00-导读/W批次编号对账表.md | W984 | W984 认领行 |
-| README.md | W984 | 当前批次版本行 |
-| STRUCTURE.md | W984 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W984 | 当前批次版本行 |
-| .github/workflows/README.md | W984 | 工作流层版本面推进 W984 |
-| site/index.html | W984 | 页脚批次链插入 W984 |
-| site/data/cross-time-danmaku.html | W984 | 页脚批次链插入 W984 |
-| site/data/tag-cloud.html | W984 | 页脚批次链插入 W984 |
-| site/dukou-engine.html | W984 | 页脚批次链插入 W984 |
-| AGENTS.md | W984 | 版本脚注条目 + 坑位条数声明 64→70 |
-| archive/docs/AGENTS-ARCHIVE.md | W984 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W984 | version 同步为 W984 |
-| scripts/output/file-index.md | W984 | W984 段插入 |
 
