@@ -1,3 +1,23 @@
+### W1104（2026-11-02）：开局事实摘要 stats 新鲜度告警（P-3 L1·四类显式告警）
+
+> **来源**：用户 2026-11-02「请开批实施 P-3（L1）：为 agent_start.py 增加 stats.json 缺失/损坏告警及陈旧检测，并补对应单测」。
+>
+> - **文件**：scripts/agent_start.py · tests/unit/test_w1104_agent_start_freshness.py · docs/11-方案报告/计划方案/T56-任务计划执行与经验沉淀报告-2026-11-02.md
+
+**本批要点**（工具层·零页面改动）：
+
+① scripts/agent_start.py 新增 load_stats_with_warnings(stats_path, changelog_path) => 返回 (stats, warnings)，覆盖**四类**异常：缺失 / 不可读或损坏 / 空对象或非对象 / 陈旧；gather() 接入并输出 stats_warnings（--json 同步），render() 输出「⚠ stats 状态告警」行。
+
+② **消除静默降级**：原 except (OSError, ValueError): pass 让 stats.json 缺失或损坏时静默变空字典、陈旧时照单全收 => Agent 会基于过期事实决策；现改为显式告警（**告警不阻断**·工具层告警与门禁阻断分层）。
+
+③ **陈旧判据**：生成件 mtime 早于 CHANGELOG.md mtime（+2 秒容差）；口径一致性待异源复算（并行会话 C10）落地后接入。
+
+④ 新增 5 例单测（缺失 / 损坏 / 空对象 / 陈旧 / 正常不告警）全绿；顺带清掉 W1100 的 CI 死锁（提交标题误含他方批次号触发 C4 + 台账体积窗口）。
+
+⑤ **E-91**（生成件当事实源 = 静默降级）+ 计数链五处同步。
+
+**验证**：5 passed · 正常态零告警 · 门禁 0 FAIL · **site/ 页面改动 0 件**。
+
 ### W1100（2026-11-02）：图表色工程批·档 3 落层分类盘点（只读批·1412 处口径与工程次序）
 
 > **来源**：用户 2026-11-02「都做开工」（ΔL\* 阈值判据 + 补偿机制按令牌匹配 + 档 3 铺开）⇒ 本批为三者的**前置依据批**。
@@ -1732,7 +1752,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1100），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1104），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1984,24 +2004,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：C7 单测 2 例（良构零 FAIL/三破坏 FAIL 锁）+ 既有 50 例全过 · 实盘 C7 零 FAIL · 劝导实弹注入/还原 · ruff 0 · 全量 verify + pytest 见状态行。
 
 > - **状态**：已收官（`c99377b8`·verify 全量 55/55 段全绿·pytest 677 passed/3 skipped·退出码 0·preflight 手搓劝导实弹 OK）
-
-### W981（2026-10-27）：数据链恢复重判批（账号重启实证·重判中间态·judge_gate 路径修复·三处登记面订正）
-
-
-
-> **来源**：用户 2026-10-27 纠偏「GoatCounter API 可以用啊」——实测证实，W806「账号失效」判断过时；数据链恢复触发 judge_gate 正式重判。
-
-> - **文件**：scripts/judge_gate.py、docs/11-方案报告/调研与数据复盘/读者数据复盘.md、docs/00-导读/访问统计方案.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w981_spec.json、scripts/output/_cascade_files_W981.txt。
-
-**数据链恢复实证（三 API 直探）**：`/api/v0/me` 200（用户 82739·站点 98962·**open_at 2026-10-01**——账号 9 月末暂停、10-01 重启，暂停期即 W806 所记 404 窗口；token 全程在位未被重建）·`/api/v0/stats/total` 200（10 月累计 111 访问）·子域 1273984347 无鉴权 303（站点存活实证）。原「404=账号失效」结论过时。
-
-**重判（judge_gate 正式跑）**：输入 7 日 UV=5 · 30 日 UV=78 → **中间态**（阈值：分发=7 日 ≥100 或 30 日 ≥200 · 归档=30 日 <30）——归档线已脱离、分发线未达，**W793 二选一维持**（内容扩容仍须用户点名或重判继续分发）。
-
-**同批修复**：judge_gate `--report` 路径随目录分区失效（文件 W737 时代迁 11-方案报告，脚本仍指 10-方法论沉淀 → 追加静默跳过）——修正后判定记录首次真正落盘至读者数据复盘.md 末尾。
-
-**三处登记面订正**：① 读者数据复盘.md——W806 声明后追加订正注（原文保留）；② 访问统计方案.md——恢复注记（API 侧恢复·beacon 链退役裁决与 check_no_goatcounter 守卫不变·后端 10 月数据来源口径待核：页面 beacon 已全部移除）；③ HANDOVER 零段冻结表述——「数据链中断」改为重判现势（中间态·二选一维持）。
-
-**验证**：judge_gate 两次实跑（输出判定 + --report 落盘）·子域存活 303 实证 · 全量 verify + pytest 见状态行。
-
-> - **状态**：已收官（`63573221`·verify 全量 rc=0·重判中间态 78/30 日·判定记录已落盘）
 
