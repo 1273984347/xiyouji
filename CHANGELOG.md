@@ -1,3 +1,23 @@
+### W1104（2026-11-02）：开局事实摘要 stats 新鲜度告警（P-3 L1·四类显式告警）
+
+> **来源**：用户 2026-11-02「请开批实施 P-3（L1）：为 agent_start.py 增加 stats.json 缺失/损坏告警及陈旧检测，并补对应单测」。
+>
+> - **文件**：scripts/agent_start.py · tests/unit/test_w1104_agent_start_freshness.py · docs/11-方案报告/计划方案/T56-任务计划执行与经验沉淀报告-2026-11-02.md
+
+**本批要点**（工具层·零页面改动）：
+
+① scripts/agent_start.py 新增 load_stats_with_warnings(stats_path, changelog_path) => 返回 (stats, warnings)，覆盖**四类**异常：缺失 / 不可读或损坏 / 空对象或非对象 / 陈旧；gather() 接入并输出 stats_warnings（--json 同步），render() 输出「⚠ stats 状态告警」行。
+
+② **消除静默降级**：原 except (OSError, ValueError): pass 让 stats.json 缺失或损坏时静默变空字典、陈旧时照单全收 => Agent 会基于过期事实决策；现改为显式告警（**告警不阻断**·工具层告警与门禁阻断分层）。
+
+③ **陈旧判据**：生成件 mtime 早于 CHANGELOG.md mtime（+2 秒容差）；口径一致性待异源复算（并行会话 C10）落地后接入。
+
+④ 新增 5 例单测（缺失 / 损坏 / 空对象 / 陈旧 / 正常不告警）全绿；顺带清掉 W1100 的 CI 死锁（提交标题误含他方批次号触发 C4 + 台账体积窗口）。
+
+⑤ **E-91**（生成件当事实源 = 静默降级）+ 计数链五处同步。
+
+**验证**：5 passed · 正常态零告警 · 门禁 0 FAIL · **site/ 页面改动 0 件**。
+
 ### W1103（2026-11-02）：图表色工程批·ΔL* 阈值机器判据（工具层·阈值实测校准）
 
 > **来源**：用户 2026-11-02「都做开工」（ΔL\* 阈值判据 + 补偿机制按令牌匹配 + 档 3 铺开）之第 1 项 · 承接上一批定案的工程次序。
@@ -18,6 +38,7 @@
 
 **验证**：工具自检全过 · 单测 29 passed · 全量 pytest 全绿 · 门禁 0 FAIL · **页面内容改动 0 件（级联另改 4 页页脚版本抬头行 + pytest.ini 统计标记 1 处）**（git diff 核验）。
 
+**合并收口**（PR #97 合并上游后）：合并冲突 30 文件 / 53 块，逐块按「实算 + 号序」判读解决，未批量取侧；CHANGELOG 正本段序 = W1104 → W1103 → W1100（降序）；计数链实算 = 216（CSS 46 / JS 9 / git 26 / 级联 20 / 数据 14 / 流程 101），AGENTS.md / HANDOVER.md / SKILL.md 六处同步；台账 W1103 取本会话「已收官」行并删除上游同号「占号登记·未开工」占位行（同号两行不可并存）；方案报告登记号 T-56 = 74、本会话 T-57 让号改 75；页脚批次链手工合成（链头 W1104 + 次位 W1103）——未跑 batch_cascade，其页脚为纯前插，会把 W1103 插到 W1104 之前造成号序颠倒；CHANGELOG 正本回窗迁出 1 段（W982）留 110 段，file-index 同步回窗。合并后读数：ruff check scripts/ 全绿 · CSP --check 零漂移（856 页 / 862 内联哈希）· 第 31 门禁 0 FAIL · 全量 pytest 1142 passed / 4 skipped · 全量门禁 57 段实跑 0 FAIL。
 ### W1100（2026-11-02）：图表色工程批·档 3 落层分类盘点（只读批·1412 处口径与工程次序）
 
 > **来源**：用户 2026-11-02「都做开工」（ΔL\* 阈值判据 + 补偿机制按令牌匹配 + 档 3 铺开）⇒ 本批为三者的**前置依据批**。
@@ -1752,7 +1773,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1103），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1104），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1990,18 +2011,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：母版判据 J1–J10 **64/64 FAIL 0** · 站点版裁切验算 **64/64 FAIL 0**（主体顶余量 6 px·下部地面留白 51–153 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.5/255 · 落位页先验 12/12 存在且无题图（含负样本自证）· 接入幂等复跑 12/12 SKIP · 浏览器实跑 3 类路径前缀各 1 页渲染正常 · 计划方案合规门禁 0 FAIL · 全量门禁与 pytest 见状态行 · 用户 2026-10-27 08:21 反馈确认跨学科题图语义（读成「该学科主题」）⇒ ASM-06 成立 · 用户 2026-10-27 08:25 反馈确认回目页存量 6 张浓墨渲染题图与本批线描立像并存可接受 ⇒ ASM-07 结案（维持现状不统一重出）· 本批两项待确认事项均已结案。
 
 > - **状态**：已收官（`43ca4e3c`·verify 全量 55/55 段全绿·母版判据 64/64 FAIL 0·裁切验算 64/64 FAIL 0·负样本自证可证伪·reader 有题图页 63 → 75）
-
-### W982（2026-10-27）：手搓绕过级联治理批（三层方案②③落地·①缓建裁决）
-
-
-
-> **来源**：用户 2026-10-27 令「做」（第 44 篇复盘移交的最后一件·W956 立项候选）。
-
-> - **文件**：scripts/check_doc_size_budget.py、scripts/preflight_check.py、tests/unit/test_doc_size_budget.py、HANDOVER.md、dCREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w982_spec.json、scripts/output/_cascade_files_W982.txt。
-
-**三层方案落地（评审口径 ②最薄优先）**：② **C7 版本面契约**（check_doc_size_budget.collect 新增·挂 verify 体积窗口槽 + preflight 开工判据双面）——三文档版本行锚尾（README ·A1-A6 / STRUCTURE —A1-A6 / 项目说明 ·详细变更见）+ HANDOVER 当前 HEAD 句形态 + 更新链条目 ≤3 + 概要块 >6 判红；实现中两处修正（尾链行「创建于 2026-07-25」同 line 误计→只数最后更新：之后·单测断言空格差）。③ **preflight 手搓前置劝导**——工作树含级联面未提交改动即 NOTE 提示走 batch_cascade（只提示不拦截 W822·quotePath=false 二次取数防中文转义漏配·实弹验证注入/还原）。① **文件锁缓建裁决**：级联临时索引写与并行台账认领互斥未解，②③实证不足再启。
-
-**验证**：C7 单测 2 例（良构零 FAIL/三破坏 FAIL 锁）+ 既有 50 例全过 · 实盘 C7 零 FAIL · 劝导实弹注入/还原 · ruff 0 · 全量 verify + pytest 见状态行。
-
-> - **状态**：已收官（`c99377b8`·verify 全量 55/55 段全绿·pytest 677 passed/3 skipped·退出码 0·preflight 手搓劝导实弹 OK）
 

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（63）
+## 文件（64）
 
 ### Python 脚本
 
@@ -76,6 +76,7 @@
 - `test_vermilion_solid.py`
 - `test_visualization_data.py`
 - `test_w1103_color_delta_guard.py`
+- `test_w1104_agent_start_freshness.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 
