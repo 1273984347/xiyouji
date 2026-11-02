@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""gen_folder_docs.py — 为全仓目录补齐 index.md / README.md（W779 批·用户令「检查所有文件夹，添加 index.md REMADE.md STRUCTURE.md」）。
+"""gen_folder_docs.py — 为全仓目录补齐 INDEX.md / README.md（W779 批·用户令「检查所有文件夹，添加 index.md REMADE.md STRUCTURE.md」·W1096 目录清单统一为 INDEX.md）。
 
 ## 背景与范围（动工前实测 2026-10-18）
 
@@ -577,7 +577,7 @@ def render(abs_dir: str, kind: str, disk: bool = False) -> str:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="为在管目录补齐 index.md / README.md")
+    ap = argparse.ArgumentParser(description="为在管目录补齐 INDEX.md / README.md")
     ap.add_argument("--dry-run", action="store_true", help="只报告将写哪些文件，不落盘")
     ap.add_argument("--force", action="store_true", help="已存在的文件也按生成内容重写（含人工维护件·慎用）")
     ap.add_argument("--refresh", action="store_true",

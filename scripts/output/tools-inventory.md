@@ -4,7 +4,7 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-02 10:40
+生成时间：2026-11-02 10:49
 
 共 **164** 件（门禁与校验 73 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 63 · 一次性（下划线前缀） 6）
 
@@ -115,7 +115,7 @@
 
 | 脚本 | 用途 |
 |:---|:---|
-| `gen_folder_docs.py` | gen_folder_docs.py — 为全仓目录补齐 index.md / README.md（W779 批·用户令「检查所有文件夹，添加  |
+| `gen_folder_docs.py` | gen_folder_docs.py — 为全仓目录补齐 INDEX.md / README.md（W779 批·用户令「检查所有文件夹，添加  |
 | `gen_og_cover.py` | gen_og_cover.py — 生成社交分享封面 site/static/img/og-cover.png（W591 SEO 清零）。 |
 | `gen_rss.py` | gen_rss.py — 生成 site/rss.xml（B-1·W644）。 |
 | `gen_sitemap.py` | gen_sitemap.py — site/sitemap.xml 生成器（W591 SEO 清零）。 |

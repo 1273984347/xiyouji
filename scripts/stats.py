@@ -210,7 +210,7 @@ def build():
     a4 = len([p for p in _in("docs/03-主题与情节专题/", ".md", direct=True)
               if not os.path.basename(p).startswith("README")])
     methodology = len(_in("docs/10-方法论沉淀/", ".md", direct=True))
-    _sec = lambda d: len([p for p in _in(d, ".md", direct=True) if os.path.basename(p) not in ("README.md", "index.md")])  # noqa: E731  # W904 分板块键同口径
+    _sec = lambda d: len([p for p in _in(d, ".md", direct=True) if os.path.basename(p).lower() not in ("readme.md", "index.md")])  # noqa: E731  # W904 分板块键同口径
     a2_docs, a3_docs, a5_docs, a6_docs = _sec("docs/06-个人随笔/"), _sec("docs/02-人物深度分析/"), _sec("docs/04-文化与历史背景/"), _sec("docs/05-诗词歌赋/")
     learn_docs, cognition_docs, spirit_docs = _sec("docs/07-学以致用/"), _sec("docs/08-提升认知/"), _sec("docs/09-精神塑造/")
     classes = sorted({p.split("/")[1] for p in tracked

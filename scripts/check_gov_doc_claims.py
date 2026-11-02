@@ -39,7 +39,7 @@ def _read(rel):
 def _disk_board_counts():
     """docs/0N-*/ 顶层 .md 计数 → {1:100, ...}（子目录不计——口径同 stats a1_a6_docs）。"""
     out = {}
-    skip = {"README.md", "index.md"}  # 生成件不入板块计数（口径同 stats a1_a6_docs）
+    skip = {"README.md", "index.md", "INDEX.md"}  # 生成件不入板块计数（口径同 stats a1_a6_docs）
     for d, _, _ in BOARD_MAP:
         pat = os.path.join(ROOT, "docs", "0%d-*" % d, "*.md")
         out[d] = len([f for f in glob.glob(pat) if os.path.basename(f) not in skip])
