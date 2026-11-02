@@ -66,7 +66,9 @@ from datetime import datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "site")
 
-SCHEMA = 3
+# W1090：属性集变更 ⇒ 快照结构变更 ⇒ 版本升 4（旧 3 的快照与新快照不可比·
+# diff 入口按 schema 显式拦·fail-closed 不静默混比）
+SCHEMA = 4
 
 # J2 采样面（21 页·缺一即 FAIL——采样面萎缩等于证明面萎缩）
 PROBE_PAGES = (
@@ -96,6 +98,11 @@ PROPS = (
     "border-left-width", "border-left-style", "border-left-color",
     "border-top-left-radius", "border-top-right-radius",
     "border-bottom-left-radius", "border-bottom-right-radius",
+    # SVG 颜色属性（W1090 纳入）：原属性集不含 stroke/fill ⇒ 图表颜色变化
+    # 在 J2「零差异」报告里根本测不出（E-82）⇒ 纳入后 J2 才具备颜色证据力。
+    # 非 SVG 元素这两个属性返回空串 ⇒ 不影响既有对拍；SVG 元素返回计算值
+    # （fill 默认 rgb(0, 0, 0)·stroke 默认 none）。
+    "stroke", "fill",
 )
 
 _CAPTURE_JS = """
@@ -219,9 +226,19 @@ def _resolve_pages(rel_list):
 
 
 def _diff_snapshots(before, after, max_report=20):
-    """对拍两个快照。返回 (diffs, notes)。diffs 非空即 J2 不过。"""
+    """对拍两个快照。返回 (diffs, notes)。diffs 非空即 J2 不过。
+
+    W1090：schema 不同 ⇒ **直接判不可比**（属性集变更后旧快照缺字段·
+    静默混比会漏比或错位 ⇒ fail-closed）；属性对拍按**记录自身长度**自适应
+    （不再依赖全局 len(PROPS)·防未来再加属性时越界）。
+    """
     diffs = []
     notes = []
+    sb, sa = before.get("schema"), after.get("schema")
+    if sb != sa:
+        notes.append("快照版本不同（before schema=%s·after schema=%s）⇒ 不可比·"
+                     "请用同一版本重采基线" % (sb, sa))
+        return diffs, notes
     bp, ap = before.get("pages", {}), after.get("pages", {})
     if set(bp) != set(ap):
         only_b = sorted(set(bp) - set(ap))
@@ -242,7 +259,7 @@ def _diff_snapshots(before, after, max_report=20):
                     diffs.append({"page": rel, "theme": theme, "index": i,
                                   "kind": "元素身份", "before": rb[:2], "after": ra[:2]})
                 else:
-                    for pi in range(2, len(PROPS) + 2):
+                    for pi in range(2, min(len(rb), len(ra))):
                         if rb[pi] != ra[pi]:
                             diffs.append({"page": rel, "theme": theme, "index": i,
                                           "kind": "属性",
@@ -379,6 +396,11 @@ def main(argv):
     diffs, notes = _diff_snapshots(before, after)
     for nt in notes:
         print("NOTE %s" % nt)
+    # W1090：版本不同 ⇒ **不可比** ⇒ 不能落到下面的「零差异/PASS」分支
+    # （实测：仅打 NOTE 而退出码仍 0 ⇒ 汇总行照样输出「J2 PASS」⇒ 假绿）
+    if any("不可比" in nt for nt in notes):
+        print("J2 FAIL：快照版本不同 ⇒ 不可比——不可据此判通过（请用同一版本重采基线）")
+        return 1
     if diffs:
         print("---- J2 视觉回归：%d 处差异（前 %d 条）----" % (len(diffs), len(diffs)))
         for x in diffs:
