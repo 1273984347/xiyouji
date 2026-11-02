@@ -10,6 +10,61 @@
 
 ---
 
+## W1100 图表色工程批·档 3 落层分类盘点（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/visual_regression_probe.py | W1100 | 本批工具/产物 |
+| tests/unit/test_w851_visual_regression_probe.py | W1100 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1100 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_report.json | W1100 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_chart_color_inventory.py | W1100 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_layer3_pages.py | W1100 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_comp_provenance.py | W1100 | 本批工具/产物 |
+| scripts/output/_w1100_inventory.json | W1100 | 本批工具/产物 |
+| scripts/output/_w1100_layer3_pages.json | W1100 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T55-任务计划执行与经验沉淀报告-2026-11-02.md | W1100 | 治理文档 |
+| archive/scripts/batches/w1100/_w1100_refresh_chain.py | W1100 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_comp_source.py | W1100 | 本批工具/产物 |
+| archive/scripts/batches/w1100/README.md | W1100 | 本批工具/产物 |
+| archive/scripts/batches/w1100/INDEX.md | W1100 | 本批工具/产物 |
+| archive/scripts/batches/README.md | W1100 | 本批工具/产物 |
+| archive/scripts/batches/INDEX.md | W1100 | 本批工具/产物 |
+| scripts/output/_w1100_spec.json | W1100 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1100 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1100 | 治理文档 |
+| docs/agent/pitfalls.md | W1100 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1100 | 治理文档 |
+| .github/workflows/README.md | W1100 | 治理文档 |
+| AGENTS.md | W1100 | 治理文档 |
+| CHANGELOG.md | W1100 | 治理文档 |
+| CITATION.cff | W1100 | 治理文档 |
+| HANDOVER.md | W1100 | 治理文档 |
+| README.md | W1100 | 治理文档 |
+| STRUCTURE.md | W1100 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1100 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1100 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1100 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1100 | 治理文档 |
+| docs/00-导读/项目说明.md | W1100 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1100 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1100 | 治理文档 |
+| docs/INDEX.md | W1100 | 治理文档 |
+| scripts/output/INDEX.md | W1100 | 本批工具/产物 |
+| scripts/output/README.md | W1100 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1100.txt | W1100 | 本批工具/产物 |
+| scripts/output/file-index.md | W1100 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1100 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1100 | 本批工具/产物 |
+| scripts/output/stats.json | W1100 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1100 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1100 | 页面 |
+| site/data/search.html | W1100 | 页面 |
+| site/data/tag-cloud.html | W1100 | 页面 |
+| site/dukou-engine.html | W1100 | 页面 |
+| site/en/search.html | W1100 | 页面 |
+| site/index.html | W1100 | 页面 |
+
 ## W1099 图表色工程批·档 2 扩展批 3（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -5244,34 +5299,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W981 | W981 段插入
 | scripts/output/_w981_spec.json | W981 | 本批级联 spec
 | scripts/output/_cascade_files_W981.txt | W981 | 级联落盘清单
-
-## W980 stats 标记同步机器化批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/stats.py | W980 | P-44-05：sweep_markers() 标记自动跟随（面=check_doc_sync 权威面·CHANGELOG 口径块截断防历史污染·正则与 RE_STATS_MARK 同源含数字键）
-| tests/unit/test_stats_sync.py | W980 | 新增单测 4 例（失配更新/相等不动/历史段防污染/扩展面计划方案目录排除回归锁）
-| pytest.ini | W980 | pytest_collected 925→929（sweep 自动跟随·非手工）
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W980 | pytest_collected 925→929（sweep 自动跟随）
-| scripts/output/stats.json | W980 | 实算刷新（pytest_collected 929）
-| scripts/output/stats-changelog.json | W980 | 变更史 W980 条目
-| scripts/output/stats-index.md | W980 | 反向索引重渲染
-| archive/docs/W批次编号对账表-ARCHIVE.md | W980 | W681 追加订正注（进行中→已闭环·事实收官·追加合规原行未动）
-| docs/00-导读/W批次编号对账表.md | W980 | W980 认领行与收官回填
-| CHANGELOG.md | W980 | W980 段
-| HANDOVER.md | W980 | 级联头尾链与里程碑块
-| README.md | W980 | 当前批次版本行
-| STRUCTURE.md | W980 | 当前批次版本行
-| docs/00-导读/项目说明.md | W980 | 当前批次版本行
-| .github/workflows/README.md | W980 | 工作流层版本面推进 W980
-| site/index.html | W980 | 页脚批次链插入 W980
-| site/data/cross-time-danmaku.html | W980 | 页脚批次链插入 W980
-| site/data/tag-cloud.html | W980 | 页脚批次链插入 W980
-| site/dukou-engine.html | W980 | 页脚批次链插入 W980
-| AGENTS.md | W980 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W980 | 脚注滚动迁入的最老条目
-| CITATION.cff | W980 | version 同步为 W980
-| scripts/output/file-index.md | W980 | W980 段插入
-| scripts/output/_w980_spec.json | W980 | 本批级联 spec
-| scripts/output/_cascade_files_W980.txt | W980 | 级联落盘清单
 
