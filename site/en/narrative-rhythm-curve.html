@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-HA1xglwuVqBcYnwATlbOlZuu4/Hr+767WvK8wdfs+/c=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-rl9NGGKPfAa56Cdaj7AnTbf49Va6OFgNxEkg+YRh/z0=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VZZBT1Hs/ZC16QdHV8PH31Y8mCP+SZbmgrdTSS87y80=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-rl9NGGKPfAa56Cdaj7AnTbf49Va6OFgNxEkg+YRh/z0=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Narrative Rhythm Curve · 详解西游记</title>
@@ -1546,14 +1546,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             tpG.append("line")
                 .attr("x1", px).attr("y1", py)
                 .attr("x2", px).attr("y2", innerH)
-                .attr("stroke", "#c8463a")
+                .attr("stroke", "var(--chart-1)")
                 .attr("stroke-width", 1)
                 .attr("stroke-dasharray", "3,3")
                 .attr("opacity", 0.5);
             tpG.append("circle")
                 .attr("cx", px).attr("cy", py)
                 .attr("r", 7)
-                .attr("fill", "#c8463a")
+                .attr("fill", "var(--chart-1)")
                 .attr("stroke", "#fff")
                 .attr("stroke-width", 2)
                 .on("mouseover", function(event) {
@@ -1567,13 +1567,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // 当前回游标
         g.append("line")
             .attr("id", "cursor-line")
-            .attr("stroke", "#c8463a")
+            .attr("stroke", "var(--chart-1)")
             .attr("stroke-width", 2)
             .attr("y1", 0).attr("y2", innerH);
         g.append("circle")
             .attr("id", "cursor-dot")
             .attr("r", 6)
-            .attr("fill", "#c8463a")
+            .attr("fill", "var(--chart-1)")
             .attr("stroke", "#fff")
             .attr("stroke-width", 2);
 

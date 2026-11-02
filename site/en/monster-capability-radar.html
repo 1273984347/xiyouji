@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-wu5io4xu9DdQRvpqTgLgnbL5Znh5QTv0dN52ItDscIU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Iby5y70Hov9gQwXlSvuyWbmd5jmwZp0sF2/jYIDWGYM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Capability Radar · Annotated Journey to the West</title>
@@ -1639,7 +1639,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             svg.append("polygon")
                 .attr("points", pts.map(p => p.join(",")).join(" "))
                 .attr("fill", "none")
-                .attr("stroke", "#e9b885")
+                .attr("stroke", "var(--accent-soft)")
                 .attr("stroke-width", 0.6)
                 .attr("stroke-dasharray", i === levels ? "none" : "2,3")
                 .attr("opacity", 0.5);
@@ -1852,9 +1852,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         });
 
         // 图例
-        g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#c8463a");
+        g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "var(--chart-1)");
         g.append("text").attr("x", innerW - 120).attr("y", 11).style("font-size", "0.82rem").style("fill", "#23201A").text("Highest Score");
-        g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#3a6b8c");
+        g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "var(--chart-2)");
         g.append("text").attr("x", innerW - 50).attr("y", 11).style("font-size", "0.82rem").style("fill", "#23201A").text("Average Score");
     }
 
@@ -1900,7 +1900,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         g.append("line")
             .attr("x1", 0).attr("x2", innerW)
             .attr("y1", y(avgEnding)).attr("y2", y(avgEnding))
-            .attr("stroke", "#c8463a")
+            .attr("stroke", "var(--chart-1)")
             .attr("stroke-dasharray", "5,4")
             .attr("stroke-width", 1.5)
             .attr("opacity", 0.6);

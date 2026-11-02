@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "5a0664d1811c047031af7c837528695e08ffba45",
+   "sha1": "24cad61c81fdf5f1bdfe6ecf792310290eaf0946",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "45b144c60cef6fd8cb45879ea739b79ee6782c9d",
+   "sha1": "418a0c2f19926e267df61d2f83d6ae83e17c4ee3",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "2dad88cfef971415152bfd1cd6ac6683052b8bc2",
+   "sha1": "f9f7fb71822e2c9ee75e4c57bb3e77b033b9acca",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -640,7 +640,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "8bf36c82469fc628f178773cbc42247729dfa485",
+   "sha1": "d02246c48d433b9ae4b63887a1d9ee832a629f5c",
    "counts": {
     "button": 1
    }
@@ -652,7 +652,7 @@
    }
   },
   "index.html": {
-   "sha1": "b8d0918281bd45516dc3119665b4460ad6036ccf",
+   "sha1": "822342032bdf1c6c5639ece3459550cbd51ba0e4",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -741,7 +741,7 @@
    "counts": {}
   },
   "en/character-appearance.html": {
-   "sha1": "321eb24b2675aa7be8f1ac10243d99b8a6a36ab3",
+   "sha1": "763264de59c0d47e000d2900f24bf021f5a5b362",
    "counts": {
     "div.kpi-card": 1
    }
@@ -1122,7 +1122,7 @@
    }
   },
   "en/hardship-difficulty-heatmap.html": {
-   "sha1": "8305eaaee2edc99370d9f34f30ec4d628c6380c9",
+   "sha1": "3f552a9fc38c1d3d7c1c966eaff80c01a26b58f7",
    "counts": {
     "div.kpi-card": 1,
     "button.dim-btn.active": 1
@@ -1172,7 +1172,7 @@
    }
   },
   "en/journey-spacetime.html": {
-   "sha1": "532935415ec87812ba2e6616d65f5b6ca0450fc7",
+   "sha1": "478719f31f37615ccf4fee3e96d99f7fb54da9b0",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
@@ -1262,7 +1262,7 @@
    }
   },
   "en/monster-capability-radar.html": {
-   "sha1": "2e8e81835b447627ecffc36395e3e9f7d27f42ba",
+   "sha1": "85c2752594ec87d7e697ec4052e613245be19082",
    "counts": {
     "div.kpi-card": 1
    }
@@ -1287,14 +1287,14 @@
    }
   },
   "en/monster-sociology.html": {
-   "sha1": "60aeb0b4d8dbe1a5c65638cfd44add19e76cd72a",
+   "sha1": "48fb717a488a3efffa6d9696beace8184aad9c9b",
    "counts": {
     "div.kpi-card": 1,
     "div.signal-card.s-active": 3
    }
   },
   "en/monster-victims-network.html": {
-   "sha1": "019f82f971415afdabb6dd5c5287486b7bd72039",
+   "sha1": "8b3f43f5577a0ebce0b7bdfe089bc4a74005452e",
    "counts": {
     "div.kpi-card": 1,
     "div.victim-card": 1,
@@ -1311,7 +1311,7 @@
    }
   },
   "en/narrative-experiment.html": {
-   "sha1": "eafa0f664af6adf7b0a9124935e049144837f286",
+   "sha1": "906c6d60471b3192edb591f1dd95961cd3121e5e",
    "counts": {
     "div.kpi-card": 1,
     "div.player-card": 1,
@@ -1323,7 +1323,7 @@
    }
   },
   "en/narrative-rhythm-curve.html": {
-   "sha1": "c153db52d461908bb09f03132c2bb31fd895e272",
+   "sha1": "3a247a12e8f58a239df69518128d403f58451339",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
@@ -1371,14 +1371,14 @@
    }
   },
   "en/poetry-rhythm-analysis.html": {
-   "sha1": "ed55be898d99fc422d4f8ad19366235d47f7dab6",
+   "sha1": "34525f5807721d21acb3955927938c3775b87d6b",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
    }
   },
   "en/power-resources.html": {
-   "sha1": "006b3f645f08d1d552535c93d866870215c5e5df",
+   "sha1": "0c15cdb75986552c6e803003510863ae9441cad4",
    "counts": {
     "div.kpi-card": 1,
     "div.faction-card": 1
@@ -1399,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "f8dd5ff7e6e079660346d6f1aa4dc072ce47ebef",
+   "sha1": "32b4c62392cdc896ef5bf5f2eb7b59041a018138",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-11-02T03:25:00.079Z"
+ "generated_at": "2026-11-02T04:27:44.122Z"
 }
