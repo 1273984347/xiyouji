@@ -1,3 +1,32 @@
+## W1109 坑表编号重号收敛（2026-11-03）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1109 | governance-or-doc |
+| AGENTS.md | W1109 | governance-or-doc |
+| CHANGELOG.md | W1109 | governance-or-doc |
+| CITATION.cff | W1109 | governance-or-doc |
+| HANDOVER.md | W1109 | governance-or-doc |
+| README.md | W1109 | governance-or-doc |
+| STRUCTURE.md | W1109 | governance-or-doc |
+| archive/docs/AGENTS-ARCHIVE.md | W1109 | governance-or-doc |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1109 | governance-or-doc |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1109 | governance-or-doc |
+| archive/docs/file-index-ARCHIVE.md | W1109 | governance-or-doc |
+| docs/00-导读/W批次编号对账表.md | W1109 | governance-or-doc |
+| docs/00-导读/项目说明.md | W1109 | governance-or-doc |
+| docs/agent/pitfalls.md | W1109 | governance-or-doc |
+| scripts/output/_vermilion_solid_cache.json | W1109 | tool |
+| scripts/output/_vermilion_solid_report.json | W1109 | tool |
+| scripts/output/file-index.md | W1109 | tool |
+| scripts/output/stats.json | W1109 | tool |
+| site/data/cross-time-danmaku.html | W1109 | governance-or-doc |
+| site/data/tag-cloud.html | W1109 | governance-or-doc |
+| site/dukou-engine.html | W1109 | governance-or-doc |
+| site/index.html | W1109 | governance-or-doc |
+| scripts/output/_cascade_files_W1109.txt | W1109 | tool |
+| scripts/output/_w1109_spec.json | W1109 | tool |
+
 ## W1108 图表色工程批·档 3 原型验证批（2026-11-03）
 
 | 文件 | W | 说明 |
@@ -5404,39 +5433,4 @@
 | scripts/output/_w988_sheet-banner.png | W988 | 本批工具/产物 |
 | scripts/output/_w988_sheet-og.png | W988 | 本批工具/产物 |
 | scripts/output/_cascade_files_W988.txt | W988 | 本批工具/产物 |
-
-## W987 水墨意境卡族启用批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/reader/ch007.html | W987 | 新增场景图（`.chapter-scene`·第 007 回八卦炉意境图） |
-| site/reader/ch014.html | W987 | 新增场景图（第 014 回猴形剪影意境图） |
-| site/reader/ch015.html | W987 | 新增场景图（第 015 回白马崖意境图） |
-| site/reader/ch023.html | W987 | 新增场景图（第 023 回静坐烛影意境图） |
-| site/reader/ch027.html | W987 | 新增场景图（第 027 回三背影茅屋意境图） |
-| site/reader/ch030.html | W987 | 新增场景图（第 030 回黑虎洞穴意境图） |
-| assets/promo/README.md | W987 | 新增「水墨意境卡族」节（成员 33 张·规范边界表·投放位置建议·维护约定） |
-| docs/11-方案报告/计划方案/T33-任务计划执行与经验沉淀报告-2026-10-27.md | W987 | 终稿报告件（计划 + 执行合一） |
-| docs/00-导读/W批次编号对账表.md | W987 | W987 认领行 + 收官状态 |
-| docs/11-方案报告/README.md | W987 | §六 计划方案登记 +1 行（序号 40·T-33）· 件数 42 → 43 |
-| docs/agent/pitfalls.md | W987 | 坑表 +3 条（77 → 80：资产族归族登记 / 类名隔开规范 / 同页两图首屏留主资产） |
-| AGENTS.md | W987 | 坑位条数声明 77 → 80 |
-| HANDOVER.md | W987 | 坑位条数指针 77 → 80 |
-| CHANGELOG.md | W987 | W987 段 |
-| README.md | W987 | 当前批次版本行 |
-| STRUCTURE.md | W987 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W987 | 当前批次版本行 |
-| .github/workflows/README.md | W987 | 工作流层版本面推进 W987 |
-| site/index.html | W987 | 页脚批次链插入 W987 |
-| site/data/cross-time-danmaku.html | W987 | 页脚批次链插入 W987 |
-| site/data/tag-cloud.html | W987 | 页脚批次链插入 W987 |
-| site/dukou-engine.html | W987 | 页脚批次链插入 W987 |
-| archive/docs/AGENTS-ARCHIVE.md | W987 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W987 | version 同步为 W987 |
-| scripts/output/file-index.md | W987 | W987 段插入 |
-| scripts/_w987_family_scan.py | W987 | 族盘点 + 插入点实测（成员/尺寸/引用/行号） |
-| scripts/_w987_insert_scenes.py | W987 | 6 页场景图接入（`.chapter-scene`·幂等） |
-| scripts/output/_w987_family_scan.json | W987 | 族盘点报告 |
-| scripts/output/_w987_spec.json | W987 | 本批级联 spec |
-| scripts/output/_cascade_files_W987.txt | W987 | 级联落盘清单 |
 

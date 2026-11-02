@@ -16,6 +16,20 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W987（2026-10-27）：水墨意境卡族启用批（33 张 1:1 水墨插画·6 张上回目页场景位）
+
+
+
+> **来源**：用户 2026-10-27 20:50 问「浓墨渲染图可以用在哪里？」→ 20:53 令「开工」（采纳建议顺序：① 归族登记 ② 启用为回目页场景插图）。
+>
+> - **文件**：site/reader/ch007.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、assets/promo/README.md、docs/11-方案报告/计划方案/T33-任务计划执行与经验沉淀报告-2026-10-27.md、ddocs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、sscripts/_w987_family_scan.py、scripts/_w987_insert_scenes.py、scripts/output/_w987_family_scan.json、scripts/output/_w987_spec.json、scripts/output/_cascade_files_W987.txt。
+
+**本批要点**：① **实读发现**——站内 `card-*` 27 张 + `chap-*` 6 张 = **33 张 1:1（1200×1200）水墨意境插画全部 0 引用**（同族两套命名：按回目 / 按角色场景 ⇒ 极易被误当题图用，W984 批即踩过），**闲置规模比用户感知大 5.5 倍**；② **归族登记**——`assets/promo/README.md` 新增「水墨意境卡族」节：成员表 + **规范边界表**（画幅 1:1 / 画风水墨晕染 / **可带印章** / **不得填进 `.chapter-plate`** / 暗色模式同样隐藏 / alt 描述画面）+ 引用状态 + 投放位置建议 + 维护约定；③ **启用 6 张**——6 个回目页（ch007 / ch014 / ch015 / ch023 / ch027 / ch030）新增 `.chapter-scene` 场景图：**首屏仍留题图**（角色立像），场景图下沉到**正文首个 `<h2>` 之前**（限宽 520px·题图 420px）⇒ 同回形成「角色立像 + 水墨意境」双层节奏；④ **其余 27 张 `card-*` 本批不启用**（题材各异·投放位置需逐张判断·另批），登记待定。
+
+**验证**：族成员实读 33 张（全部 1200×1200·引用 0）· 6 页接入成功且幂等复跑 6/6 SKIP · 同页题图 1 + 场景图 1 且类名不混 6/6 · `.chapter-scene` 样式与**暗色模式隐藏规则**齐备 6/6 · alt 均真实描述画面 6/6 · 6 个场景图 URL HTTP 200 `image/webp` · 浏览器实跑渲染正常（ch007：首屏题图 → 元信息 → 正文入口场景图 → 原文回目·两图分隔清晰）· 第 48 门禁 0 FAIL · 全量门禁 55/55 段全绿。
+
+> - **状态**：已收官（内容批与登记面同批落地·母版族 76 张与 6 个浓墨版源文件均未改动）
+
 ### W986（2026-10-27）：回目页 6 张线描版换主体重出批（用户观感反馈回炉·同名 stem 覆盖）
 
 
