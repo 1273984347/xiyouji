@@ -10,6 +10,55 @@
 
 ---
 
+## W1094 图表色工程批·档 1 尾批（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/hardship-difficulty-heatmap.html | W1094 | 页面 |
+| site/en/hardship-heatmap.html | W1094 | 页面 |
+| site/en/journey-spacetime.html | W1094 | 页面 |
+| site/en/magic-system.html | W1094 | 页面 |
+| site/en/monster-sociology.html | W1094 | 页面 |
+| site/en/philosophy.html | W1094 | 页面 |
+| site/en/pilgrim-team-psychology-arc.html | W1094 | 页面 |
+| docs/11-方案报告/计划方案/T49-任务计划执行与经验沉淀报告-2026-11-02.md | W1094 | 治理文档 |
+| docs/11-方案报告/README.md | W1094 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1094 | 治理文档 |
+| scripts/output/_w1094_spec.json | W1094 | 本批工具/产物 |
+| STRUCTURE.md | W1094 | 治理文档 |
+| docs/11-方案报告/计划方案/T47-任务计划执行与经验沉淀报告-2026-11-02.md | W1094 | 治理文档 |
+| docs/11-方案报告/计划方案/T48-任务计划执行与经验沉淀报告-2026-11-02.md | W1094 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1094 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1094 | 治理文档 |
+| docs/INDEX.md | W1094 | 治理文档 |
+| scripts/output/README.md | W1094 | 本批工具/产物 |
+| scripts/output/_w1091_spec.json | W1094 | 本批工具/产物 |
+| scripts/output/index.md | W1094 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1094 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1094 | 本批工具/产物 |
+| scripts/output/stats.json | W1094 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1094 | 本批工具/产物 |
+| site/data/search.html | W1094 | 页面 |
+| site/en/search.html | W1094 | 页面 |
+| .github/workflows/README.md | W1094 | 治理文档 |
+| AGENTS.md | W1094 | 治理文档 |
+| CHANGELOG.md | W1094 | 治理文档 |
+| CITATION.cff | W1094 | 治理文档 |
+| HANDOVER.md | W1094 | 治理文档 |
+| README.md | W1094 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1094 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1094 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1094 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1094 | 治理文档 |
+| docs/00-导读/项目说明.md | W1094 | 治理文档 |
+| scripts/output/_cascade_files_W1094.txt | W1094 | 本批工具/产物 |
+| scripts/output/file-index.md | W1094 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1094 | 页面 |
+| site/data/tag-cloud.html | W1094 | 页面 |
+| site/dukou-engine.html | W1094 | 页面 |
+| site/index.html | W1094 | 页面 |
+| scripts/output/_vermilion_solid_cache.json | W1094 | 本批工具/产物 |
+
 ## W1090 J2 视觉回归探针扩展（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4724,20 +4773,4 @@ docs/11-方案报告/README.md
 | scripts/output/_w976_spec.json | W976 | 本批级联 spec
 | scripts/output/_cascade_files_W976.txt | W976 | 级联落盘清单
 | scripts/output/_vermilion_solid_cache.json | W976 | 朱砂门禁缓存补随批入库（W975 末笔搜索刷新后再生成·上批漏提）
-
-## W975 跨 Agent 经验沉淀入仓批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/agent/pitfalls.md | W975 | 坑表 +6 条（57→63·四节标题条数同步·共享机制条目补 W974 复发注） |
-| AGENTS.md | W975 | §4.3 主题视图 + 坑位条数声明 57→63（门禁 N4 口径） |
-| HANDOVER.md | W975 | 「三、方法论沉淀」与「雷区权威」两处指针 57→63 |
-| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W975 | 新增深度篇（编号 26·五段结构） |
-| docs/10-方法论沉淀/README.md | W975 | 目录索引登记编号 26 |
-| scripts/_w975_sink_experience.py | W975 | 入仓同步器（坑表/AGENTS/HANDOVER/深篇登记/台账认领行） |
-| scripts/_w975_tweak.py | W975 | 通用「字面替换 + 精确暂存」工具（基底取索引版） |
-| scripts/_w975_cascade.py | W975 | 四面登记 + 当前态指针 |
-| scripts/output/_cascade_files_W975.txt | W975 | 当批级联清单 |
-| CHANGELOG.md | W975 | W975 版段 |
-| docs/00-导读/W批次编号对账表.md | W975 | W975 认领行 |
 
