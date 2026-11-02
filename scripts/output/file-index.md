@@ -1,3 +1,44 @@
+## W1108 图表色工程批·档 3 原型验证批（2026-11-03）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1108 | 本批工具/产物 |
+| .github/workflows/README.md | W1108 | 本批工具/产物 |
+| AGENTS.md | W1108 | 本批工具/产物 |
+| CHANGELOG.md | W1108 | 本批工具/产物 |
+| CITATION.cff | W1108 | 本批工具/产物 |
+| HANDOVER.md | W1108 | 本批工具/产物 |
+| README.md | W1108 | 本批工具/产物 |
+| STRUCTURE.md | W1108 | 本批工具/产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1108 | 本批工具/产物 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1108 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1108 | 本批工具/产物 |
+| archive/docs/file-index-ARCHIVE.md | W1108 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1108 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1108 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1108 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T60-任务计划执行与经验沉淀报告-2026-11-03.md | W1108 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1108 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1108 | 本批工具/产物 |
+| docs/INDEX.md | W1108 | 本批工具/产物 |
+| docs/agent/pitfalls.md | W1108 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1108 | 本批工具/产物 |
+| scripts/output/README.md | W1108 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1108.txt | W1108 | 本批工具/产物 |
+| scripts/output/_w1108_spec.json | W1108 | 本批工具/产物 |
+| scripts/output/file-index.md | W1108 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1108 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1108 | 本批工具/产物 |
+| scripts/output/stats.json | W1108 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1108 | 本批工具/产物 |
+| site/data/chart-design.html | W1108 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1108 | 本批工具/产物 |
+| site/data/search.html | W1108 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1108 | 本批工具/产物 |
+| site/dukou-engine.html | W1108 | 本批工具/产物 |
+| site/en/chart-design.html | W1108 | 本批工具/产物 |
+| site/en/search.html | W1108 | 本批工具/产物 |
+| site/index.html | W1108 | 本批工具/产物 |
 ## W1107 坑表编号唯一性体检与机器判据建置 + 档 3 前置（2026-11-03）
 
 | 文件 | W | 说明 |
@@ -5398,39 +5439,4 @@
 | scripts/output/_w987_family_scan.json | W987 | 族盘点报告 |
 | scripts/output/_w987_spec.json | W987 | 本批级联 spec |
 | scripts/output/_cascade_files_W987.txt | W987 | 级联落盘清单 |
-
-## W986 回目页 6 张线描版换主体重出批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-docs/11-方案报告/计划方案/T32-任务计划执行与经验沉淀报告-2026-10-27.md
-docs/00-导读/W批次编号对账表.md
-docs/agent/pitfalls.md
-docs/10-方法论沉淀/素材批处理与判据自证方法论.md
-docs/11-方案报告/README.md
-| assets/promo/plate-set/plate-line-37..42.png/.webp | W986 | 同名覆盖重出：巨灵神 / 六贼头目 / 惠岸行者木叉 / 黎山老母 / 巡河夜叉 / 御马监丞（已由 9841c05d 落地） |
-| assets/promo/plate-set/raw/round13/plate-line-37..42.jpg | W986 | 出图原件 6 份（已由 9841c05d 落地） |
-| site/static/images/plate-line-37..42.webp | W986 | 站点版 6 个（已由 9841c05d 落地） |
-| site/reader/{ch007,ch014,ch015,ch023,ch027,ch030}.html | W986 | 6 页题图 alt 文本更新为新主体（img src 不变·已由 9841c05d 落地） |
-| assets/promo/plate-set/README.md | W986 | 第七组清单改新主体 + 存量归档节补演进（已由 9841c05d 落地） |
-| scripts/_w986_make_prompts.py | W986 | 换主体出图参数生成器（母版段逐字复用 + 同名覆盖前提断言） |
-| scripts/output/_w986_batch1.json | W986 | 本批出图参数（6 条） |
-| scripts/output/_w986_gen.json | W986 | node_id ↔ 文件名映射 |
-| scripts/output/_w986_sheet.png | W986 | 本批 6 张复核拼图 |
-| CHANGELOG.md | W986 | W986 段 |
-| HANDOVER.md | W986 | 坑位条数指针 75 → 77 |
-| README.md | W986 | 当前批次版本行 |
-| STRUCTURE.md | W986 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W986 | 当前批次版本行 |
-| .github/workflows/README.md | W986 | 工作流层版本面推进 W986 |
-| site/index.html | W986 | 页脚批次链插入 W986 |
-| site/data/cross-time-danmaku.html | W986 | 页脚批次链插入 W986 |
-| site/data/tag-cloud.html | W986 | 页脚批次链插入 W986 |
-| site/dukou-engine.html | W986 | 页脚批次链插入 W986 |
-| AGENTS.md | W986 | 坑位条数声明 75 → 77 |
-| archive/docs/AGENTS-ARCHIVE.md | W986 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W986 | version 同步为 W986 |
-| scripts/output/file-index.md | W986 | W986 段插入 |
-| scripts/output/_w986_spec.json | W986 | 本批级联 spec |
-| scripts/output/_cascade_files_W986.txt | W986 | 级联落盘清单 |
 
