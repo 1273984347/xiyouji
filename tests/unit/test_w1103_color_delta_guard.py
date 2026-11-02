@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """color_delta_guard.py 判据逻辑测试（W1103·ΔL* 阈值机器判据）。
 
 锁死判据的**纯逻辑口径**（不触浏览器·零真实仓库数据依赖）：
@@ -24,8 +23,8 @@ sys.path.insert(0, str(SCRIPTS))
 
 import color_delta_guard as guard  # noqa: E402
 
-
 # ---------- 色度学锚点（CIE 标准参考值·与实现无关） ----------
+
 
 def test_lab_anchors_are_standard_values():
     """#000000/#ffffff/#808080 的 L* 是 CIE 标准常数——实现算错公式必被抓住。"""
@@ -44,8 +43,7 @@ def test_lab_is_gray_achromatic():
 def test_delta_l_is_absolute_and_symmetric():
     """ΔL* 取绝对值且对称。"""
     assert guard.delta_l("#c8463a", "#c8463a") == pytest.approx(0.0, abs=1e-9)
-    assert guard.delta_l("#3a6b8c", "#7d99a9") == pytest.approx(
-        guard.delta_l("#7d99a9", "#3a6b8c"), abs=1e-9)
+    assert guard.delta_l("#3a6b8c", "#7d99a9") == pytest.approx(guard.delta_l("#7d99a9", "#3a6b8c"), abs=1e-9)
 
 
 def test_delta_l_known_pair():
@@ -61,17 +59,26 @@ def test_delta_e76_zero_for_identical_colors():
 
 # ---------- 阈值分档（实测校准值 6 / 12） ----------
 
+
 def test_default_thresholds_are_calibrated_values():
     """默认阈值必须是实测校准出的 6.0 / 12.0（改值须同步改依据）。"""
     assert guard.DEFAULT_OK == 6.0
     assert guard.DEFAULT_WARN == 12.0
 
 
-@pytest.mark.parametrize("delta,expected", [
-    (0.0, "OK"), (5.6, "OK"), (6.0, "OK"),
-    (6.01, "WARN"), (11.9, "WARN"), (12.0, "WARN"),
-    (12.01, "BLOCK"), (24.2, "BLOCK"),
-])
+@pytest.mark.parametrize(
+    "delta,expected",
+    [
+        (0.0, "OK"),
+        (5.6, "OK"),
+        (6.0, "OK"),
+        (6.01, "WARN"),
+        (11.9, "WARN"),
+        (12.0, "WARN"),
+        (12.01, "BLOCK"),
+        (24.2, "BLOCK"),
+    ],
+)
 def test_grade_boundaries(delta, expected):
     """分档边界包含关系固定：OK≤6 · WARN(6,12] · BLOCK>12。"""
     assert guard.grade(delta) == expected
@@ -85,6 +92,7 @@ def test_grade_thresholds_are_configurable():
 
 
 # ---------- brightness 等效 ----------
+
 
 def test_brightness_hex_known_value():
     """brightness(1.12) 等效色（与浏览器 sRGB 值域乘算口径一致）。"""
@@ -103,6 +111,7 @@ def test_brightness_identity_k():
 
 
 # ---------- 解析器 ----------
+
 
 def test_parse_tokens_dark_override():
     """暗色块覆盖浅色令牌；块外令牌不覆盖。"""
@@ -124,9 +133,11 @@ def test_parse_tokens_handles_nested_braces():
 
 def test_parse_literal_comp_variants():
     """字面值型补偿：大小写 i 标记 / important / 多选择器前缀都要命中。"""
-    css = ('html[data-theme="dark"] svg [fill="#3a6b8c" i] { fill: #7d99a9; }\n'
-           'html[data-theme="dark"] svg [fill="#8c2a2a" i] { fill: #be8880 !important; }\n'
-           'html[data-theme="dark"] svg path [fill="#2c5f7c" i] { fill: #7f99a4; }')
+    css = (
+        'html[data-theme="dark"] svg [fill="#3a6b8c" i] { fill: #7d99a9; }\n'
+        'html[data-theme="dark"] svg [fill="#8c2a2a" i] { fill: #be8880 !important; }\n'
+        'html[data-theme="dark"] svg path [fill="#2c5f7c" i] { fill: #7f99a4; }'
+    )
     comp = guard.parse_literal_comp(css)
     assert ("#3a6b8c", "#7d99a9") in comp
     assert ("#8c2a2a", "#be8880") in comp
@@ -152,11 +163,10 @@ def test_parse_prefix_comp_empty_when_absent():
 
 # ---------- 色对评估 ----------
 
+
 def test_eval_pairs_counts_and_flags_block():
     """BLOCK 必须被计数（同色对不得误报 BLOCK）。"""
-    pairs = [("同色", "#c8463a", "#c8463a"),
-             ("中差", "#c8463a", "#e0604f"),
-             ("强补偿", "#3a6b8c", "#7d99a9")]
+    pairs = [("同色", "#c8463a", "#c8463a"), ("中差", "#c8463a", "#e0604f"), ("强补偿", "#3a6b8c", "#7d99a9")]
     rows, summary = guard.eval_pairs(pairs)
     assert summary["total"] == 3
     assert summary["ok"] == 1
@@ -175,6 +185,7 @@ def test_eval_pairs_returns_numeric_readings():
 
 
 # ---------- 输入校验 ----------
+
 
 def test_hex_to_rgb_rejects_invalid():
     """非法 hex 必须抛 ValueError（不得静默返回黑）。"""

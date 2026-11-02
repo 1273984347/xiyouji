@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """color_delta_guard.py — ΔL* 阈值机器判据（补偿失配可接受幅度·W1103）
 
 ## 为什么需要它
@@ -40,7 +39,6 @@ W1097–W1099 把页内硬编码图表色换成 CSS 令牌后，暗色下出现�
 """
 
 import argparse
-import io
 import json
 import os
 import re
@@ -52,14 +50,33 @@ DEFAULT_OK = 6.0
 DEFAULT_WARN = 12.0
 
 # 12 色调色板（W1100 盘点口径·含浅色值与暗色值两种形态）
-HEX12 = ["C8463A", "E46250", "3A6B8C", "6B8E5A", "B38F58", "D8CFBC",
-         "8A6D3B", "E9B885", "7FA8C9", "E0604F", "C9A96B", "9DB98A"]
+HEX12 = [
+    "C8463A",
+    "E46250",
+    "3A6B8C",
+    "6B8E5A",
+    "B38F58",
+    "D8CFBC",
+    "8A6D3B",
+    "E9B885",
+    "7FA8C9",
+    "E0604F",
+    "C9A96B",
+    "9DB98A",
+]
 # 调色板色 → 目标令牌（浅色值与暗色值共用同一令牌）
 PALETTE_TOKEN = {
-    "#c8463a": "--chart-1", "#e46250": "--chart-1", "#e0604f": "--chart-1",
-    "#3a6b8c": "--chart-2", "#7fa8c9": "--chart-2",
-    "#b38f58": "--chart-3", "#6b8e5a": "--chart-4", "#9db98a": "--chart-4",
-    "#d8cfbc": "--chart-5", "#8a6d3b": "--chart-6", "#c9a96b": "--chart-6",
+    "#c8463a": "--chart-1",
+    "#e46250": "--chart-1",
+    "#e0604f": "--chart-1",
+    "#3a6b8c": "--chart-2",
+    "#7fa8c9": "--chart-2",
+    "#b38f58": "--chart-3",
+    "#6b8e5a": "--chart-4",
+    "#9db98a": "--chart-4",
+    "#d8cfbc": "--chart-5",
+    "#8a6d3b": "--chart-6",
+    "#c9a96b": "--chart-6",
     "#e9b885": "--accent-soft",
 }
 
@@ -79,7 +96,7 @@ def hex_to_rgb(value):
         h = "".join(c * 2 for c in h)
     if len(h) != 6 or not re.fullmatch(r"[0-9a-fA-F]{6}", h):
         raise ValueError("非法 hex 色值：%r" % (value,))
-    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+    return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))
 
 
 def _linearize(c8):
@@ -130,8 +147,7 @@ def grade(delta, ok=DEFAULT_OK, warn=DEFAULT_WARN):
 
 
 RE_TOKEN = re.compile(r"(--[a-z0-9-]+)\s*:\s*(#[0-9a-fA-F]{3,8})\s*;", re.I)
-RE_LITERAL_COMP = re.compile(
-    r'\[fill="(#[0-9a-fA-F]{3,8})"\s*i\][^{]*\{[^}]*?fill:\s*(#[0-9a-fA-F]{3,8})', re.I)
+RE_LITERAL_COMP = re.compile(r'\[fill="(#[0-9a-fA-F]{3,8})"\s*i\][^{]*\{[^}]*?fill:\s*(#[0-9a-fA-F]{3,8})', re.I)
 RE_PREFIX_COMP = re.compile(r'\[fill\^="#"\][^{]*\{[^}]*?filter:\s*brightness\(([\d.]+)\)', re.I)
 
 
@@ -154,8 +170,8 @@ def parse_tokens(css_text):
             elif css_text[i] == "}":
                 depth -= 1
             i += 1
-        dark = dict(RE_TOKEN.findall(css_text[start:i - 1]))
-        head = css_text[:m.start()]
+        dark = dict(RE_TOKEN.findall(css_text[start : i - 1]))
+        head = css_text[: m.start()]
     light = dict(RE_TOKEN.findall(head))
     return light, dark
 
@@ -179,7 +195,7 @@ def parse_prefix_comp(text):
 
 def load_pairs(path):
     """读色对清单 JSON：{"pairs":[{"label":..,"before":"#hex","after":"#hex"}]}"""
-    with io.open(path, encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     items = data["pairs"] if isinstance(data, dict) else data
     return [(it.get("label", ""), it["before"], it["after"]) for it in items]
@@ -193,11 +209,24 @@ def eval_pairs(pairs, ok=DEFAULT_OK, warn=DEFAULT_WARN):
         d = delta_l(before, after)
         g = grade(d, ok, warn)
         counts[g] += 1
-        rows.append({"label": label, "before": before, "after": after,
-                     "delta_l": round(d, 2), "delta_e76": round(delta_e76(before, after), 2),
-                     "grade": g})
-    summary = {"total": len(rows), "ok": counts["OK"], "warn": counts["WARN"],
-               "block": counts["BLOCK"], "ok_threshold": ok, "warn_threshold": warn}
+        rows.append(
+            {
+                "label": label,
+                "before": before,
+                "after": after,
+                "delta_l": round(d, 2),
+                "delta_e76": round(delta_e76(before, after), 2),
+                "grade": g,
+            }
+        )
+    summary = {
+        "total": len(rows),
+        "ok": counts["OK"],
+        "warn": counts["WARN"],
+        "block": counts["BLOCK"],
+        "ok_threshold": ok,
+        "warn_threshold": warn,
+    }
     return rows, summary
 
 
@@ -214,11 +243,21 @@ def cmd_pairs(args):
     """pairs 子命令：对色对清单求 ΔL* 并分档。"""
     rows, summary = eval_pairs(load_pairs(args.pairs), args.ok, args.warn)
     for r in rows:
-        print("[%s] ΔL*=%6.2f  ΔE76=%6.2f  %s -> %s  %s" % (
-            r["grade"], r["delta_l"], r["delta_e76"], r["before"], r["after"], r["label"]))
-    print("汇总：%d 对（OK %d / WARN %d / BLOCK %d）·阈值 OK≤%.1f WARN≤%.1f" % (
-        summary["total"], summary["ok"], summary["warn"], summary["block"],
-        summary["ok_threshold"], summary["warn_threshold"]))
+        print(
+            "[%s] ΔL*=%6.2f  ΔE76=%6.2f  %s -> %s  %s"
+            % (r["grade"], r["delta_l"], r["delta_e76"], r["before"], r["after"], r["label"])
+        )
+    print(
+        "汇总：%d 对（OK %d / WARN %d / BLOCK %d）·阈值 OK≤%.1f WARN≤%.1f"
+        % (
+            summary["total"],
+            summary["ok"],
+            summary["warn"],
+            summary["block"],
+            summary["ok_threshold"],
+            summary["warn_threshold"],
+        )
+    )
     return 1 if summary["block"] else 0
 
 
@@ -237,7 +276,7 @@ def collect_comp(site_dir):
     entries = 0
     prefix_k = []
     for p in _iter_site_files(site_dir):
-        text = io.open(p, encoding="utf-8", errors="replace").read()
+        text = open(p, encoding="utf-8", errors="replace").read()
         found = parse_literal_comp(text)
         if found:
             pages += 1
@@ -258,23 +297,25 @@ def cmd_scan_comp(args):
     weak = sorted(delta_l(s, brightness_hex(s, k)) for k in ks for s in pairs)
     print("字面值型补偿：%d 文件 / %d 条 / 唯一原色 %d 个" % (pages, entries, len(pairs)))
     if strong:
-        print("  强补偿等效 ΔL*：min=%.1f p25=%.1f p50=%.1f p75=%.1f max=%.1f" % (
-            strong[0], _percentile(strong, 25), _percentile(strong, 50),
-            _percentile(strong, 75), strong[-1]))
+        print(
+            "  强补偿等效 ΔL*：min=%.1f p25=%.1f p50=%.1f p75=%.1f max=%.1f"
+            % (strong[0], _percentile(strong, 25), _percentile(strong, 50), _percentile(strong, 75), strong[-1])
+        )
     if weak:
-        print("  弱补偿 brightness 系数：%s · 等效 ΔL*：min=%.1f p50=%.1f max=%.1f" % (
-            ",".join("%.2f" % k for k in ks), weak[0], _percentile(weak, 50), weak[-1]))
+        print(
+            "  弱补偿 brightness 系数：%s · 等效 ΔL*：min=%.1f p50=%.1f max=%.1f"
+            % (",".join("%.2f" % k for k in ks), weak[0], _percentile(weak, 50), weak[-1])
+        )
     print("  判据阈值（可配）：OK≤%.1f · WARN≤%.1f · BLOCK>%.1f" % (args.ok, args.warn, args.warn))
     return 0
 
 
 def cmd_scan_tokens(args):
     """scan-tokens 子命令：令牌暗色覆盖体检（暗色无覆盖 = 档 3 的硬前置缺口）。"""
-    css = io.open(args.tokens, encoding="utf-8").read()
+    css = open(args.tokens, encoding="utf-8").read()
     light, dark = parse_tokens(css)
     missing = [(n, v) for n, v in sorted(light.items()) if n not in dark]
-    print("浅色令牌 %d 个 · 暗色覆盖 %d 个 · 暗色无覆盖 %d 个" % (
-        len(light), len(dark), len(missing)))
+    print("浅色令牌 %d 个 · 暗色覆盖 %d 个 · 暗色无覆盖 %d 个" % (len(light), len(dark), len(missing)))
     for name, val in missing:
         tag = "图表色·须补" if name.startswith("--chart") or name == "--accent-soft" else "其它"
         print("  [暗色无覆盖] %-16s = %-8s（暗色沿用浅色值）· %s" % (name, val, tag))
@@ -283,13 +324,12 @@ def cmd_scan_tokens(args):
 
 def cmd_scan_palette(args):
     """scan-palette 子命令：调色板 12 色双态体检（替换前实际色 → 令牌色）。"""
-    css = io.open(args.tokens, encoding="utf-8").read()
+    css = open(args.tokens, encoding="utf-8").read()
     light, dark = parse_tokens(css)
     pairs, _pages, _entries, prefix_k = collect_comp(args.site)
     ks = prefix_k or [1.12]
     rows = []
-    tally = {"dark": {"OK": 0, "WARN": 0, "BLOCK": 0, "NO_DARK": 0},
-             "light": {"OK": 0, "WARN": 0, "BLOCK": 0}}
+    tally = {"dark": {"OK": 0, "WARN": 0, "BLOCK": 0, "NO_DARK": 0}, "light": {"OK": 0, "WARN": 0, "BLOCK": 0}}
     for h in HEX12:
         x = "#" + h.lower()
         token = PALETTE_TOKEN.get(x)
@@ -307,18 +347,21 @@ def cmd_scan_palette(args):
         g_light = grade(d_light, args.ok, args.warn) if d_light is not None else "NO_LIGHT"
         tally["dark"][g_dark] += 1
         tally["light"][g_light] += 1
-        rows.append((x, token, comp_note, dark_before, dark_after, d_dark, g_dark,
-                     light_before, light_after, d_light, g_light))
+        rows.append(
+            (x, token, comp_note, dark_before, dark_after, d_dark, g_dark, light_before, light_after, d_light, g_light)
+        )
     print("调色板 %d 色双态体检（阈值 OK≤%.1f · WARN≤%.1f）" % (len(rows), args.ok, args.warn))
-    print("  %-9s %-13s %-13s %-9s -> %-9s %6s %-8s | %-9s -> %-9s %6s %-8s" % (
-        "原色", "令牌", "补偿形态", "暗色前", "暗色后", "ΔL*", "暗档",
-        "浅色前", "浅色后", "ΔL*", "浅档"))
+    print(
+        "  %-9s %-13s %-13s %-9s -> %-9s %6s %-8s | %-9s -> %-9s %6s %-8s"
+        % ("原色", "令牌", "补偿形态", "暗色前", "暗色后", "ΔL*", "暗档", "浅色前", "浅色后", "ΔL*", "浅档")
+    )
     for r in rows:
         dd = "n/a" if r[5] is None else "%.1f" % r[5]
         dl = "n/a" if r[9] is None else "%.1f" % r[9]
-        print("  %-9s %-13s %-13s %-9s -> %-9s %6s %-8s | %-9s -> %-9s %6s %-8s" % (
-            r[0], r[1], r[2], r[3], r[4] or "(无覆盖)", dd, r[6],
-            r[7], r[8] or "(无)", dl, r[10]))
+        print(
+            "  %-9s %-13s %-13s %-9s -> %-9s %6s %-8s | %-9s -> %-9s %6s %-8s"
+            % (r[0], r[1], r[2], r[3], r[4] or "(无覆盖)", dd, r[6], r[7], r[8] or "(无)", dl, r[10])
+        )
     print("汇总：暗色档 %s" % tally["dark"])
     print("      浅色档 %s" % tally["light"])
     return 0
@@ -353,10 +396,8 @@ def self_test():
 def main(argv=None):
     """命令行入口。"""
     ap = argparse.ArgumentParser(description="ΔL* 阈值机器判据")
-    ap.add_argument("--ok", type=float, default=DEFAULT_OK,
-                    help="OK 档上限（默认 %.1f）" % DEFAULT_OK)
-    ap.add_argument("--warn", type=float, default=DEFAULT_WARN,
-                    help="WARN 档上限（默认 %.1f）" % DEFAULT_WARN)
+    ap.add_argument("--ok", type=float, default=DEFAULT_OK, help="OK 档上限（默认 %.1f）" % DEFAULT_OK)
+    ap.add_argument("--warn", type=float, default=DEFAULT_WARN, help="WARN 档上限（默认 %.1f）" % DEFAULT_WARN)
     ap.add_argument("--self-test", action="store_true")
     sub = ap.add_subparsers(dest="cmd")
     p_pairs = sub.add_parser("pairs", help="对色对清单求 ΔL* 并分档")
