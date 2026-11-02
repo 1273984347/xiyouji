@@ -118,4 +118,6 @@ def test_defer_hold_regexes_against_real_tokens():
     for label, pat in audit.DEFER_HOLD_CHECKS:
         assert __import__("re").search(pat, css), label
     dark = audit._dark_block_names(css)
-    assert "--chart-3" not in dark and "--chart-5" not in dark
+    # W1106 已兑现 W826 登记的 defer 项「暗色 --chart-3/5 新增」⇒ 断言由「不在暗色块」改为「在暗色块且取补偿等效值」
+    assert "--chart-3" in dark and "--chart-5" in dark
+    assert "--chart-3: #C8A063" in css and "--chart-5: #F2E8D3" in css

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """check_pitfall_id_unique.py —— 坑表编号唯一性判据（W1106 建）。
 
 背景：坑表条目的 E-NN 编号是「按编号检索教训」的唯一键，但第 31 门禁只统计**条数**、
@@ -12,7 +11,7 @@
 
 用法：python scripts/check_pitfall_id_unique.py [--base HEAD] [--self-test]
 """
-import io
+
 import os
 import re
 import subprocess
@@ -33,7 +32,7 @@ def _entries(lines):
         m = RX_ENTRY.match(line)
         if not m:
             continue
-        title = line[4:line.find("（W")]
+        title = line[4 : line.find("（W")]
         out.append((i, m.group(1), m.group(2), title))
     return out
 
@@ -41,9 +40,9 @@ def _entries(lines):
 def _added_lines(base):
     """取本次改动新增的行（git diff base..工作树·+ 行）。"""
     try:
-        r = subprocess.run(["git", "diff", "%s" % base], cwd=ROOT,
-                           capture_output=True, text=True, encoding="utf-8",
-                           errors="replace")
+        r = subprocess.run(
+            ["git", "diff", "%s" % base], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace"
+        )
     except OSError:
         return []
     out = []
@@ -60,7 +59,7 @@ def audit(base="HEAD", lines=None, added=None):
     added：**本次改动新增的行**（默认取 git diff base 的 + 行）⇒ 显式传入便于自测/单测
     """
     if lines is None:
-        with io.open(PITFALLS, encoding="utf-8") as f:
+        with open(PITFALLS, encoding="utf-8") as f:
             lines = f.read().splitlines()
     existing = {}
     for _ln, w, eid, title in _entries(lines):
@@ -75,7 +74,7 @@ def audit(base="HEAD", lines=None, added=None):
     dup_existing = {k: v for k, v in existing.items() if len(v) > 1}
     # 新增条目若与「除自己以外」的既有条目同号 ⇒ 撞号
     new_dups = []
-    for w, eid, line in added_ids:
+    for w, eid, _line in added_ids:
         others = [x for x in existing.get(eid, []) if x[0] != w]
         if others:
             new_dups.append((eid, w, others))
@@ -92,11 +91,15 @@ def main():
     print("坑表编号唯一性判据：新增条目 %d 条" % len(added))
     if new_dups:
         for eid, w, others in new_dups:
-            print("FAIL  新增条目 %s 撞既有编号 %s（既有：%s）"
-                  % (w, eid, "；".join("%s %s" % (a, b[:40]) for a, b in others)))
+            print(
+                "FAIL  新增条目 %s 撞既有编号 %s（既有：%s）"
+                % (w, eid, "；".join("%s %s" % (a, b[:40]) for a, b in others))
+            )
     if stock:
-        print("NOTE  存量同号编号 %d 个（已知·待收敛批统一改号·不阻塞本次）: %s"
-              % (len(stock), "、".join(sorted(stock, key=lambda x: int(x.split('-')[1])))))
+        print(
+            "NOTE  存量同号编号 %d 个（已知·待收敛批统一改号·不阻塞本次）: %s"
+            % (len(stock), "、".join(sorted(stock, key=lambda x: int(x.split("-")[1]))))
+        )
     if new_dups:
         print("---- 坑表编号唯一性：%d FAIL ----" % len(new_dups))
         return 1
