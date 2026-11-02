@@ -31,7 +31,7 @@ PyYAML==6.0.2
 #   scripts/package-lock.json 的 npm playwright 1.63.0 钉版对齐·W913 口径）；
 #   pip-audit 实跑该组合 → "No known vulnerabilities found"。
 numpy==2.4.4
-playwright==1.63.0
+playwright==1.64.1
 # W1063：scipy 登记——scripts/subject_band.py（W1004 从归档桶转正的共用纯函数）在
 #   **模块级** import scipy。CI pytest-unit 只装本文件 ⇒ 该件 import 失败 ⇒
 #   test_script_hygiene.py::test_w1003_promoted_scripts_importable 与
