@@ -129,3 +129,51 @@ def test_floor_and_quiesce_constants():
     assert probe._QUIESCE_CAP_MS >= 15000
     assert "setTimeout(finish" in probe._QUIESCE_JS
     assert probe._QUIESCE_JS.count("MutationObserver") == 1
+
+
+def _identity_diff(before_els, after_els):
+    diffs, _ = probe._diff_snapshots(
+        _snap({"p.html": {"light": before_els}}),
+        _snap({"p.html": {"light": after_els}}))
+    hit = [d for d in diffs if d.get("kind") == "元素身份差集"]
+    assert len(hit) == 1, diffs
+    return hit[0]
+
+
+def test_identity_diffset_same_identity_count_drop_is_jitter():
+    """W1097：同身份元素**数量减少** ⇒ 判「抖动·漏采一个副本」。
+
+    锁住两件事：① 判据用多重集（Counter）而非集合——3 个同身份 → 2 个同身份在
+    set 口径下差集为空会被误判为「无差异」；② 判定文案必须区分抖动与真实增删。
+    """
+    d = _identity_diff([_el("div", "a"), _el("div", "a"), _el("div", "a")],
+                       [_el("div", "a"), _el("div", "a")])
+    assert "数量减少" in d["判定"]
+    assert d["仅after有"] == []
+    assert d["仅before有"] == [("div", "a")]
+
+
+def test_identity_diffset_same_identity_count_grow_is_jitter():
+    """W1097：同身份元素数量**增加** ⇒ 判「抖动·多采一个副本」。"""
+    d = _identity_diff([_el("div", "a")],
+                       [_el("div", "a"), _el("div", "a")])
+    assert "数量增加" in d["判定"]
+    assert d["仅before有"] == []
+    assert d["仅after有"] == [("div", "a")]
+
+
+def test_identity_diffset_identity_set_change_is_real_add_remove():
+    """W1097：身份集变化 ⇒ 判「真实增删」（两侧差集皆非空）。"""
+    d = _identity_diff([_el("div", "a"), _el("span", "b")],
+                       [_el("div", "a"), _el("path", "c"), _el("path", "d")])
+    assert "真实增删" in d["判定"]
+    assert d["仅before有"] == [("span", "b")]
+    assert d["仅after有"] == [("path", "c"), ("path", "d")]
+
+
+def test_identity_diffset_not_emitted_when_counts_equal():
+    """元素数相等 ⇒ 不产出身份差集条目（该判据只服务于计数差异的定性）。"""
+    diffs, _ = probe._diff_snapshots(
+        _snap({"p.html": {"light": [_el("div", "a"), _el("span", "b")]}}),
+        _snap({"p.html": {"light": [_el("span", "b"), _el("div", "a")]}}))
+    assert not [d for d in diffs if d.get("kind") == "元素身份差集"]
