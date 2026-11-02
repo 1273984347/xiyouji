@@ -186,7 +186,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -338,6 +340,7 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
 /* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
 /* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
 /* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+/* W1106 增量：上列 defer 四项中的「暗色 --chart-3/5 新增」已落地（取值 = 站内补偿机制等效呈现值 #C8A063 / #F2E8D3）；其余三项仍 defer */
 :root {
     /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
     --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（65）
+## 文件（66）
 
 ### Python 脚本
 
@@ -78,6 +78,7 @@
 - `test_visualization_data.py`
 - `test_w1103_color_delta_guard.py`
 - `test_w1104_agent_start_freshness.py`
+- `test_w1106_pitfall_id_unique.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 
