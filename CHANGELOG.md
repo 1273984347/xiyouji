@@ -1,3 +1,25 @@
+### W1099（2026-11-02）：图表色工程批·档 2 扩展批 3（档 2 收尾·四页四处）
+
+> **来源**：用户 2026-11-02「继续下一批」·承接 W1098 档 2 扩展批 2。
+>
+> - **文件**：docs/11-方案报告/计划方案/T54-任务计划执行与经验沉淀报告-2026-11-02.md · site/en/philosophy.html · site/en/social-media.html
+
+**本批要点**：
+
+① **范围**：档 2 剩余 **4 处 / 4 页**（同口径复算）⇒ 本批全部施工 ⇒ **档 2 全站归零**（31 → 4 → 0）。
+
+② **施工**：.attr(fill/stroke, "#调色板色") → **保留 .attr** 直写 var(--chart-N)（#3a6b8c→--chart-2 · #e9b885→--accent-soft · #c8463a→--chart-1）· 逐处命中数断言 = 1 · 改后重算 CSP 哈希（4 页更新）⇒ 856 页零漂移 · **全站调色板色残留 0**。
+
+③ **施工前静态勘查**：逐页读补偿规则与令牌定义 ⇒ 预判「仅 en/philosophy 的 rect 命中 svg rect[fill^="#"] ⇒ filter 补偿失配；另 3 处不命中按字面值匹配的补偿规则」⇒ **实测与预判 4/4 吻合**。
+
+④ **稳定值对拍**：同态连采多拍（施工前 {5072, 5078, 5078}、施工后 {5078, 5073} ⇒ 稳定值 5078）⇒ 以稳定值对拍得差异 **4 处且全部为预期**（stroke 2 处 + fill 1 处令牌跟随；filter 1 处由 brightness(1.12) saturate(1.05) 变 none = 补偿失配）· 元素数零差异。
+
+⑤ **零尺寸元素补测**：en/social-media 的图标 path（0x0）不在 J2 采集面 ⇒ Playwright 实测 computed fill 浅色 rgb(200,70,58) / 暗色 rgb(224,96,79) ⇒ **令牌跟随成立**。
+
+⑥ **E-89**：同一页面同一状态的两拍采集元素数可以不一致（实测 ±5~6，根因为暗色热力图数值标签异步渲染）⇒ **元素数比较必须取稳定值，不能用单拍**；另注：受控回退对照的还原一律用版本控制权威口径（git checkout HEAD --）而非手工备份。坑表 211 → **212**，计数链五处同步。
+
+**验证**：稳定值对拍 4 处差异逐条判读 · 全站调色板色残留 0 · python scripts/generate_csp.py --check 856 页零漂移 · 全量门禁与 pytest 结果见台账与提交说明。
+
 ### W1098（2026-11-02）：图表色工程批·档 2 扩展批 2（表现属性直喂与补偿失配落回类色实测）
 
 > **来源**：用户 2026-11-02「继续下一批」·承接 W1097 档 2 扩展批 1。
@@ -1690,7 +1712,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1098），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1099），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1980,26 +2002,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：单测 4/4 · ruff 0 · stats.py --w 实跑 sweep 跟随 2 处 + C5b 0 FAIL · check_doc_sync 0 FAIL · 全量 verify + pytest 见状态行。
 
 > - **状态**：已收官（`6d3fba13`·verify 全量 rc=0 + 单测 4/4 + C5b 0 FAIL·sweep 首跑跟随 2 处）
-
-### W979（2026-10-27）：收官提示位扩展批（P-44-01/02/03 落地 + P-44-04 活面零残留裁定免迁）
-
-
-
-> **来源**：用户 2026-10-27 引用第 44 篇复盘移交清单（P-44-01~04）令即办（下一自由号）。
-
-> - **文件**：scripts/batch_cascade.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w979_spec.json、scripts/output/_cascade_files_W979.txt。
-
-**P-44-01（回窗提示化）**：batch_cascade 收官提示位抽为 `_close_hints()` 集合函数（全部维持 W822「只输出不拦截」语义·fail-open 留痕），[SIZE] 块在 evaluate 有 FAIL 时输出「超窗——按 FAIL 行内指引跑对应归档工具回窗（段式/台账行分治）」提示行——级联每批插入一段、回窗自此从「异常」变「每批常态动作提示」。
-
-**P-44-02（TTL 报数）**：[TMPE] 块新增 `_shot`/`_inbox` 超龄报数（按 policy.yml ttl_days=7·首跑实测 _shot 3828 件 251MB + _inbox 163 件 215MB 均超龄且已过 48h 冻结窗）——到期列清单经主人确认走回收站；`_misc`（TTL 90d）零超龄。
-
-**P-44-03（防再积）**：新增 [SCRIPTS] 行——顶层 `_` 件跟踪态计数（git ls-files 过滤顶层·首跑 18 个，盘上 169 含 gitignore 本地件），超阈值 20 提示语料级退役扫描（W977 先例）。
-
-**P-44-04（三位号残留裁定：免迁）**：宽口径复扫活面（scripts/*.py|js|mjs + tests/unit 全部正则形态 `W\d{3}`/`w\d{3}`/`W[0-9]{3}`）**零残留**——W969 的 69 处升位已覆盖全部活面；余量均在历史冻结段（CHANGELOG 归档/台账行·禁改）与冷存储入档件（无前向兼容需求）⇒ **登记结案，W1000 兼容无需再迁**。
-
-**P-44-02 待主人确认项**：`_shot` 3828 件 251MB + `_inbox` 163 件 215MB 超龄删除候选（回收站通道·确认后执行）。
-
-**验证**：`_close_hints()` 直测输出三段齐全 + ruff 过 + 级联单测 5 过；[SIZE] 超窗提示在本批级联后实况自证（CHANGELOG 111/110 → 提示行出现 → archive_segments 回窗 110）。
-
-> - **状态**：已收官（`fb96ea05`·verify 全量 rc=0 + 级联单测 5 过 + ruff 0·超窗提示首跑自证）
 
