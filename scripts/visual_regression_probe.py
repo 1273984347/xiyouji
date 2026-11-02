@@ -66,9 +66,9 @@ from datetime import datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "site")
 
-# W1090：属性集变更 ⇒ 快照结构变更 ⇒ 版本升 4（旧 3 的快照与新快照不可比·
-# diff 入口按 schema 显式拦·fail-closed 不静默混比）
-SCHEMA = 4
+# W1097：属性集变更（加 filter）⇒ 快照结构变更 ⇒ 版本升 5（旧 4 的快照与新快照
+# 不可比·diff 入口按 schema 显式拦·fail-closed 不静默混比）
+SCHEMA = 5
 
 # J2 采样面（21 页·缺一即 FAIL——采样面萎缩等于证明面萎缩）
 PROBE_PAGES = (
@@ -103,6 +103,10 @@ PROPS = (
     # 非 SVG 元素这两个属性返回空串 ⇒ 不影响既有对拍；SVG 元素返回计算值
     # （fill 默认 rgb(0, 0, 0)·stroke 默认 none）。
     "stroke", "fill",
+    # W1097 纳入 filter：暗色亮度补偿（`svg path[fill^="#"] { filter: brightness(...) }`）
+    # 是**按 content attribute 值匹配**的规则 ⇒ 把硬编码色换成 var(--chart-N) 后
+    # 该规则不再命中 ⇒ 补偿消失是真实视觉变化 ⇒ 采集面必须含 filter 才测得到。
+    "filter",
 )
 
 _CAPTURE_JS = """

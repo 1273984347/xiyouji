@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5l/Q7ocMBYxgylRp8PdyKfGB7UI0e/Wn8U5VV1ZxpKA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-7V7wL23ion1Q3Ek3QpuMIJo0X2ZyUy1pDGEM+RRk2dA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Underworld Power Network · Annotated Journey to the West</title>
@@ -2060,7 +2060,7 @@ const link = svg.append('g').selectAll('line')
     .attr('stroke-width', 2)
     .attr('tabindex', 0)
     .on('mouseover', function(e, d) {
-      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      d3.select(this).attr('stroke', 'var(--chart-1)').attr('stroke-width', 3);
       tooltip.transition().duration(200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.id + '</strong>');
@@ -2151,7 +2151,7 @@ function renderSankey(sankeyData) {
     return;
   }
   if (typeof d3.sankey === 'undefined') {
-    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#c8463a')
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', 'var(--chart-1)')
       .text('d3-sankey failed to load; please check your network');
     return;
   }
@@ -2224,7 +2224,7 @@ function renderSankey(sankeyData) {
     .attr('stroke', '#fff')
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
-      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      d3.select(this).attr('stroke', 'var(--chart-1)').attr('stroke-width', 2);
       tooltip.transition().duration(200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
@@ -2254,12 +2254,12 @@ function renderSankey(sankeyData) {
   svg.append('text')
     .attr('x', margin.left + 4).attr('y', 18)
     .attr('font-size', '13px').attr('font-weight', '700')
-    .attr('fill', '#c8463a').text('Underworld-system roles');
+    .attr('fill', 'var(--chart-1)').text('Underworld-system roles');
   svg.append('text')
     .attr('x', width - margin.right - 4).attr('y', 18)
     .attr('text-anchor', 'end')
     .attr('font-size', '13px').attr('font-weight', '700')
-    .attr('fill', '#3a6b8c').text('Linked three-realm systems');
+    .attr('fill', 'var(--chart-2)').text('Linked three-realm systems');
 
   // Legend
   const legend = d3.select('#sankey-legend');

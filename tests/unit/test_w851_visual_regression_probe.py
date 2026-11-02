@@ -117,9 +117,11 @@ def test_props_fixed_order():
     assert probe.PROPS[0] == "color"
     assert "font-size" in probe.PROPS
     # W1090：纳入 SVG 颜色属性（stroke/fill）⇒ 属性集 29 → 31
+    # W1097：再纳入 filter（暗色亮度补偿变化须测得到）⇒ 31 → 32
     assert "stroke" in probe.PROPS
     assert "fill" in probe.PROPS
-    assert len(probe.PROPS) == 31
+    assert "filter" in probe.PROPS
+    assert len(probe.PROPS) == 32
 
 
 def test_floor_and_quiesce_constants():

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cYWEyH+6CYpixf62n423mUl4321Czyb0BB3occgTHSY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cPg87v2/p9/krx9/DBkxsRV7MhGmlYcSUqYbKJgRyfQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Jurisprudence · Annotated Journey to the West</title>
@@ -2312,10 +2312,10 @@ function renderTreemap(opts){
             g.append('line')
                 .attr('x1', x(maxCase.crime_severity)).attr('y1', y(maxCase.sentence_severity))
                 .attr('x2', x(maxCase.crime_severity) - 80).attr('y2', y(maxCase.sentence_severity) - 50)
-                .attr('stroke', '#c8463a').attr('stroke-width', 1);
+                .attr('stroke', 'var(--chart-1)').attr('stroke-width', 1);
             g.append('text')
                 .attr('x', x(maxCase.crime_severity) - 80).attr('y', y(maxCase.sentence_severity) - 55)
-                .attr('fill', '#c8463a').attr('font-size', '11px').attr('font-weight', 600)
+                .attr('fill', 'var(--chart-1)').attr('font-size', '11px').attr('font-weight', 600)
                 .attr('text-anchor', 'end')
                 .text('Max disparity: Golden-Winged Great Peng (10→0)');
         }
@@ -2393,7 +2393,7 @@ function renderTreemap(opts){
         groups.append('rect')
             .attr('x', x1('sentence')).attr('y', d => y(d.sentence_severity))
             .attr('width', x1.bandwidth()).attr('height', d => h - y(d.sentence_severity))
-            .attr('fill', '#c8463a').attr('fill-opacity', 0.85)
+            .attr('fill', 'var(--chart-1)').attr('fill-opacity', 0.85)
             .style('cursor', 'pointer')
             .on('mouseover', (event, d) => {
                 tooltip.show(`<strong>${d.case_name}</strong><br>Sentence severity: ${d.sentence_severity} / 10<br>Sentence: ${d.actual_sentence}<br>Disparity score: ${d.disparity_score}`, event);
@@ -2413,7 +2413,7 @@ function renderTreemap(opts){
         const legend = g.append('g').attr('transform', `translate(${w - 200}, 0)`);
         legend.append('rect').attr('width', 12).attr('height', 12).attr('fill', '#C9A063');
         legend.append('text').attr('x', 18).attr('y', 10).attr('font-size', '11px').text('Crime severity');
-        legend.append('rect').attr('width', 12).attr('height', 12).attr('fill', '#c8463a').attr('y', 18);
+        legend.append('rect').attr('width', 12).attr('height', 12).attr('fill', 'var(--chart-1)').attr('y', 18);
         legend.append('text').attr('x', 18).attr('y', 28).attr('font-size', '11px').text('Sentence severity');
     }
 
@@ -2670,14 +2670,14 @@ function renderTreemap(opts){
         if (wukong) {
             g.append('text')
                 .attr('x', x(wukong.n) + 4).attr('y', y(wukong.severity) - 18)
-                .attr('fill', '#c8463a').attr('font-size', '11px').attr('font-weight', 600)
+                .attr('fill', 'var(--chart-1)').attr('font-size', '11px').attr('font-weight', 600)
                 .text('Wukong wreaked havoc in the underworld');
         }
         const fish = incidents.find(i => i.perpetrator.indexOf('Goldfish Spirit') >= 0);
         if (fish) {
             g.append('text')
                 .attr('x', x(fish.n) + 4).attr('y', y(fish.severity) - 18)
-                .attr('fill', '#3a6b8c').attr('font-size', '11px').attr('font-weight', 600)
+                .attr('fill', 'var(--chart-2)').attr('font-size', '11px').attr('font-weight', 600)
                 .text('Goldfish Spirit (data-integrity failure)');
         }
 
@@ -2739,7 +2739,7 @@ function renderTreemap(opts){
 
         // 中心文字
         g.append('text').attr('text-anchor', 'middle').attr('y', -8)
-            .attr('font-size', '24px').attr('font-weight', 600).attr('fill', '#c8463a')
+            .attr('font-size', '24px').attr('font-weight', 600).attr('fill', 'var(--chart-1)')
             .text('37.5%');
         g.append('text').attr('text-anchor', 'middle').attr('y', 14)
             .attr('font-size', '11px').attr('fill', '#6B6455')
@@ -2747,10 +2747,10 @@ function renderTreemap(opts){
 
         // 标注
         g.append('text').attr('x', 0).attr('y', H/2 - 10).attr('text-anchor', 'middle')
-            .attr('font-size', '11px').attr('fill', '#6B8E5A').attr('font-weight', 600)
+            .attr('font-size', '11px').attr('fill', 'var(--chart-4)').attr('font-weight', 600)
             .text('Audited: 3 incidents · 37.5%');
         g.append('text').attr('x', 0).attr('y', H/2 + 6).attr('text-anchor', 'middle')
-            .attr('font-size', '11px').attr('fill', '#c8463a').attr('font-weight', 600)
+            .attr('font-size', '11px').attr('fill', 'var(--chart-1)').attr('font-weight', 600)
             .text('Not audited: 5 incidents · 62.5%');
     }
 
