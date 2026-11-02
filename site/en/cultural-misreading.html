@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-TYNptQD8wPYbirpDnT/dHX30JieZ82/3rj2QUqpsonY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-WHiWf2h5ovqnQQlit41gsRE2MVD2+X0hCUZRWIbRdxw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cultural Misreading Map · Annotated Journey to the West</title>
@@ -1537,31 +1537,6 @@ html[data-theme="dark"] .chapter-plate {
             font-size: 0.82rem;
             color: var(--accent-soft);
         }
-        .tooltip {
-            position: absolute;
-            pointer-events: none;
-            background: var(--dark);
-            color: var(--paper-warm);
-            padding: 10px 14px;
-            border-radius: var(--radius-md);
-            font-size: 0.82rem;
-            max-width: 375px;
-            box-shadow: var(--elev-3);
-            z-index: 100;
-            opacity: 0;
-            transition: opacity var(--dur-fast);
-            line-height: 1.5;
-        }
-        .tooltip strong {
-            color: var(--accent-soft);
-            display: block;
-            margin-bottom: var(--space-2);
-        }
-        .tooltip .tip-meta {
-            color: color-mix(in srgb, var(--dark-text) 70%, transparent);
-            font-size: 0.76rem;
-            margin-top: var(--space-2);
-        }
         
         
         
@@ -1725,9 +1700,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     
 <div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
-<div class="tooltip" id="tooltip"></div>
+<div class="chart-tooltip" id="tooltip"></div>
 
         <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
     <script>
 
 function renderTreemap(opts){
@@ -2032,7 +2011,7 @@ function renderTreemap(opts){
             .attr("ry", 3)
             .style("filter", "drop-shadow(0 1px 2px rgba(0,0,0,0.1))")
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 60)
             .attr("width",d => Math.max(0, x(d.cultural_gap_level)));
 
@@ -2044,7 +2023,7 @@ function renderTreemap(opts){
             .style("opacity", 0)
             .text(d => d.cultural_gap_level)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 60 + 600)
             .style("opacity", 1);
 

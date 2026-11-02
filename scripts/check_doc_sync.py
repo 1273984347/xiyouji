@@ -45,9 +45,15 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
-RE_CHANGELOG_TOP = re.compile(r"^###\s+(?:v(\d+\.\d+\.\d+)|W(\d+))（([^）]*)）：\s*(?:W(\d+))?", re.M)  # W711 双形态：历史 vX.Y.Z（date）：W### / 新段 W###（date）：标题
-RE_CHANGELOG_SECT = re.compile(r"^###\s+(?:v\d+\.\d+\.\d+（[^）]*）：\s*W(\d+)|W(\d+)（[^）]*）：)", re.M)  # wnum = g1(历史) or g2(新)
-RE_README_HEAD = re.compile(r"当前(?:版本\s*v\d+\.\d+\.\d+|批次\s*W(\d+))（([^）]+)）\*\*：\s*(?:W(\d+))?", re.M)  # wnum = g1(新·批次后) or g3(历史·冒号后)
+RE_CHANGELOG_TOP = re.compile(
+    r"^###\s+(?:v(\d+\.\d+\.\d+)|W(\d+))（([^）]*)）：\s*(?:W(\d+))?", re.M
+)  # W711 双形态：历史 vX.Y.Z（date）：W### / 新段 W###（date）：标题
+RE_CHANGELOG_SECT = re.compile(
+    r"^###\s+(?:v\d+\.\d+\.\d+（[^）]*）：\s*W(\d+)|W(\d+)（[^）]*）：)", re.M
+)  # wnum = g1(历史) or g2(新)
+RE_README_HEAD = re.compile(
+    r"当前(?:版本\s*v\d+\.\d+\.\d+|批次\s*W(\d+))（([^）]+)）\*\*：\s*(?:W(\d+))?", re.M
+)  # wnum = g1(新·批次后) or g3(历史·冒号后)
 RE_JIAOJIE_HEAD = re.compile(r"^-\s*\*\*(?:v\d+\.\d+\.\d+\s+)?W(\d+)", re.M)  # W711 双形态（ver 可选·wnum 捕获）
 RE_AGENTS_ITEM = re.compile(r"^(\d+)\.\s\*\*", re.M)
 RE_VERIFY_SLOT = re.compile(r"第\s*(\d+)\s*(?:槽|门禁)")
@@ -56,8 +62,11 @@ RE_TABLE_ROW_W = re.compile(r"^\|\s*W(\d{3,4})\s*\|", re.M)
 RE_TABLE_DEFER = re.compile(r"^-\s*\*\*((?:W\d{3,4})(?:\s*/\s*W\d{3,4})*)\*\*", re.M)
 RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判定]) —— 键值与 scripts/output/stats.json 对账
     (re.compile(r"HTML 共 (\d+) 页"), ("html_total",), None),
-    (re.compile(r"site/data (\d+) \+ site/en (\d+) \+ site 根 (\d+) \+ site/reader (\d+)"),
-     ("site_data_html", "site_en_html", "site_root_html", "site_reader_html"), None),
+    (
+        re.compile(r"site/data (\d+) \+ site/en (\d+) \+ site 根 (\d+) \+ site/reader (\d+)"),
+        ("site_data_html", "site_en_html", "site_root_html", "site_reader_html"),
+        None,
+    ),
     (re.compile(r"CSP 覆盖 (\d+) 页"), ("csp_covered",), None),
     (re.compile(r"(\d+) 页哈希 0 漂移"), ("csp_covered",), None),
     (re.compile(r"扫 (\d+) 文件"), ("scan_files",), None),
@@ -96,9 +105,20 @@ RE_FILE_TOKEN = re.compile(
 # 实证（负样本对照）：同一漏 add 形态，.py 被判红、.ts 只出 NOTE 静默放行。
 # 覆盖面判据：凡仓内实际存在且会被手工编辑的文本类文件，其后缀都须在列；
 # 二进制资产（.png/.woff2/.ttf 等）不列——「文件」行本就只登记手工编辑件。
-RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
-RE_BARE_AGG = re.compile(r"(?<![A-Za-z])\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（W704 起步·W904 起判红；W904 补词边界——「S1 项目/A2 个人随笔」类编号假阳性实证·字母后邻数字不计）
-C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md", "koujing": "统计口径说明.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）；W769 补统计口径说明（自称「唯一口径来源」却不在扫描域·W760 F-9 实证）
+RE_STATS_MARK = re.compile(
+    r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->"
+)  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
+RE_BARE_AGG = re.compile(
+    r"(?<![A-Za-z])\d+\s*(?:页|项|篇|个|类)"
+)  # C5c 裸聚合数字（W704 起步·W904 起判红；W904 补词边界——「S1 项目/A2 个人随笔」类编号假阳性实证·字母后邻数字不计）
+C5_DOC_NAMES = {
+    "readme": "README.md",
+    "structure": "STRUCTURE.md",
+    "agents": "AGENTS.md",
+    "xiangmu": "项目说明.md",
+    "contributing": "CONTRIBUTING.md",
+    "koujing": "统计口径说明.md",
+}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）；W769 补统计口径说明（自称「唯一口径来源」却不在扫描域·W760 F-9 实证）
 
 # C6 版本行 desc 分隔符体检（W841）——手工写段绕过 batch_cascade.precheck 的兜底。
 # 缺口实证：batch_cascade.precheck() 早已 fail-closed 禁 desc 含 · ； —，但那只覆盖「走 batch_cascade 的 spec」；
@@ -108,18 +128,11 @@ C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "A
 # 版本行是 desc 的唯一落点，扫它就把手工路径一并闭上——这是 precheck 之外必须有的第二道。
 # 形态： (输入键, 显示名, 版本行正则·捕获组 1 为 desc 起至行尾, 尾锚点元组)
 C6_SURFACES = (
-    ("readme", "README.md",
-     re.compile(r"^>\s*\*\*当前批次\s*W\d+（[^）]*）\*\*：(.+)$", re.M),
-     ("·A1-A6",)),
-    ("structure", "STRUCTURE.md",
-     re.compile(r"^>\s*当前批次：W\d+（[^）]*）—\s*(.+)$", re.M),
-     ("—A1-A6",)),
-    ("xiangmu", "项目说明.md",
-     re.compile(r"^>\s*当前批次\s*W\d+（[^）]*）：(.+)$", re.M),
-     ("·详细变更见",)),
+    ("readme", "README.md", re.compile(r"^>\s*\*\*当前批次\s*W\d+（[^）]*）\*\*：(.+)$", re.M), ("·A1-A6",)),
+    ("structure", "STRUCTURE.md", re.compile(r"^>\s*当前批次：W\d+（[^）]*）—\s*(.+)$", re.M), ("—A1-A6",)),
+    ("xiangmu", "项目说明.md", re.compile(r"^>\s*当前批次\s*W\d+（[^）]*）：(.+)$", re.M), ("·详细变更见",)),
 )
 C6_BANNED_SEPS = ("·", "；", "—")  # 与 batch_cascade.precheck 的 desc 黑名单同口径（双源一致性由本支兜底）
-
 
 
 def _foreign_append_only(paths):
@@ -160,14 +173,21 @@ def c5b_extra_surfaces():
     纪律·禁回溯改写），由计划自身的「聚合数字当批现测」条款在开工批复核（T04 AC-07 34/35 实例；
     W901 实测该子目录 8 件带冻结 stats 标记·入面即假红·除外条款随递归化原样保留）。
     """
-    paths = [os.path.join(ROOT, "pytest.ini"), os.path.join(ROOT, "site", "index.html")]  # W913：站点聚合数字失真面（B-W855-01·772 篇漂移实证）纳入标记对账
-    paths.append(os.path.join(ROOT, "docs", "agent", "gates.md"))  # W1050：gates.md 判据文本含 stats 标记（第 3 槽「当前 N=…」）——W1048 实证 615 旧值滞留（sweep 覆盖缺口·不修复则旧值漂移必重演）
+    paths = [
+        os.path.join(ROOT, "pytest.ini"),
+        os.path.join(ROOT, "site", "index.html"),
+    ]  # W913：站点聚合数字失真面（B-W855-01·772 篇漂移实证）纳入标记对账
+    paths.append(
+        os.path.join(ROOT, "docs", "agent", "gates.md")
+    )  # W1050：gates.md 判据文本含 stats 标记（第 3 槽「当前 N=…」）——W1048 实证 615 旧值滞留（sweep 覆盖缺口·不修复则旧值漂移必重演）
     paths += sorted(
-        p for p in glob.glob(
-            os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)
+        p
+        for p in glob.glob(os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)
         if os.sep + "计划方案" + os.sep not in p
     )
     return paths
+
+
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = [
     os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE.md"),
@@ -257,8 +277,10 @@ def _check_c6_version_desc_seps(inp, issues, notes):
             continue
         m = pat.search(text)
         if not m:
-            issues.append("C6: %s 版本行形态未识别（期望「当前批次 W###（日期）」抬头）——"
-                          "形态变更会使本支静默失效，须同步正则" % name)
+            issues.append(
+                "C6: %s 版本行形态未识别（期望「当前批次 W###（日期）」抬头）——"
+                "形态变更会使本支静默失效，须同步正则" % name
+            )
             continue
         raw = m.group(1)
         cut = len(raw)
@@ -269,9 +291,10 @@ def _check_c6_version_desc_seps(inp, issues, notes):
         desc = raw[:cut]
         hit = [s for s in C6_BANNED_SEPS if s in desc]
         if hit:
-            issues.append("C6: %s 版本行 desc 含分隔符「%s」——写入后会使下一批级联锚点正则失配"
-                          "（W826 实证：三处全断·任何批都无法落段）。改用「、」或空格分隔"
-                          % (name, "".join(hit)))
+            issues.append(
+                "C6: %s 版本行 desc 含分隔符「%s」——写入后会使下一批级联锚点正则失配"
+                "（W826 实证：三处全断·任何批都无法落段）。改用「、」或空格分隔" % (name, "".join(hit))
+            )
 
 
 def _check_c7_homepage_showcase(inp, issues, notes):
@@ -290,12 +313,16 @@ def _check_c7_homepage_showcase(inp, issues, notes):
     if not sc:
         return
     if sc.get("root_readme") and sc.get("github_readme"):
-        issues.append("C7: `.github/README.md` 存在且根 README.md 在位——GitHub 主页 README 优先级为"
-                      "`.github/` > 根目录 > `docs/`，该文件会抢占仓库主页展示位（真实门面永不上主页）。"
-                      "改名 `.github/README-internal.md` 或删除（社区解法·GitHub 讨论 #163997）")
+        issues.append(
+            "C7: `.github/README.md` 存在且根 README.md 在位——GitHub 主页 README 优先级为"
+            "`.github/` > 根目录 > `docs/`，该文件会抢占仓库主页展示位（真实门面永不上主页）。"
+            "改名 `.github/README-internal.md` 或删除（社区解法·GitHub 讨论 #163997）"
+        )
     if sc.get("docs_readme") and sc.get("root_readme"):
-        notes.append("C7: `docs/README.md` 处于优先级链第三位——根 README.md 在位时它不抢位；"
-                     "若根 README.md 被删则它上位，须同步处置")
+        notes.append(
+            "C7: `docs/README.md` 处于优先级链第三位——根 README.md 在位时它不抢位；"
+            "若根 README.md 被删则它上位，须同步处置"
+        )
 
 
 def evaluate(inp):
@@ -317,6 +344,8 @@ def evaluate(inp):
     _check_c4_commit_ledger(inp, issues, notes)
     _check_c5_aggregate_stats(inp, issues, notes)
     _check_c5d_stats_recheck(inp, issues)
+    _check_c9_conflict_marks(inp, issues)
+    _check_c10_stats_independent(inp, issues)
     _check_c6_version_desc_seps(inp, issues, notes)
     _check_c7_homepage_showcase(inp, issues, notes)
     _check_c8_dup_long_lines(inp, issues, notes)
@@ -333,8 +362,10 @@ def evaluate(inp):
 C8_MIN_LEN = 60
 C8_WINDOW = 3
 C8_FILES = (
-    "AGENTS.md", "HANDOVER.md",
-    os.path.join("docs", "agent", "gates.md"), os.path.join("docs", "agent", "pitfalls.md"),
+    "AGENTS.md",
+    "HANDOVER.md",
+    os.path.join("docs", "agent", "gates.md"),
+    os.path.join("docs", "agent", "pitfalls.md"),
 )
 
 
@@ -372,8 +403,7 @@ def _check_c1_readme_head(inp, date, wnum, issues, notes):
         notes.append("C1: README 抬头行带 doc-sync:exempt 豁免，跳过")
     elif (int(m1.group(1) or m1.group(3)), m1.group(2)) != (wnum, date):
         issues.append(
-            "C1: README 抬头（%s）W%s ≠ CHANGELOG 顶段（%s）W%s"
-            % (m1.group(2), m1.group(1) or m1.group(3), date, wnum)
+            "C1: README 抬头（%s）W%s ≠ CHANGELOG 顶段（%s）W%s" % (m1.group(2), m1.group(1) or m1.group(3), date, wnum)
         )
 
 
@@ -385,9 +415,7 @@ def _check_c2_jiaojie_head(inp, wnum, issues, notes):
     elif line_has_exempt(inp["jiaojie"], m2):
         notes.append("C2: 交接头链行带 doc-sync:exempt 豁免，跳过")
     elif int(m2.group(1)) != wnum:
-        issues.append(
-            "C2: 交接头链 W%s ≠ CHANGELOG 顶段 W%s" % (m2.group(1), wnum)
-        )
+        issues.append("C2: 交接头链 W%s ≠ CHANGELOG 顶段 W%s" % (m2.group(1), wnum))
 
 
 def _check_c3_agents_slots(inp, issues):
@@ -438,14 +466,15 @@ def _check_c4_commit_ledger(inp, issues, notes):
     if staged:
         mf = inp.get("cascade_manifest")
         if mf is None:
-            notes.append("C4-e: 当批级联清单不存在（手工级联批须自建 scripts/output/_cascade_files_*.txt·pitfalls git 类义务）")
+            notes.append(
+                "C4-e: 当批级联清单不存在（手工级联批须自建 scripts/output/_cascade_files_*.txt·pitfalls git 类义务）"
+            )
         else:
             _tree = set(staged) | set(inp.get("head_tree") or [])
             _missing = [ln for ln in mf if ln and ln not in _tree]
             if _missing:
                 issues.append(
-                    "C4-e: %d 个级联面未入提交树（漏 add·W649）：/%s"
-                    % (len(_missing), "、/".join(_missing[:5]))
+                    "C4-e: %d 个级联面未入提交树（漏 add·W649）：/%s" % (len(_missing), "、/".join(_missing[:5]))
                 )
     # C4-f 文件清单入库对账（W723·W537③ 八批旧账清偿·手工件漏 add 三犯根修）：
     # 现役段「文件」行的路径 token ⊆ HEAD 树 且 无工作树未提交残留——
@@ -467,7 +496,8 @@ def _check_c4_commit_ledger(inp, issues, notes):
                     if f in (inp.get("foreign_append_only") or set()):
                         notes.append(
                             "C4-f: 文件清单 %s 工作树残留为并行批次登记行纯追加"
-                            "（他方在途·非漏 add·W906 三态——以 HEAD 为准不重做）" % f)
+                            "（他方在途·非漏 add·W906 三态——以 HEAD 为准不重做）" % f
+                        )
                     else:
                         issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
 
@@ -548,7 +578,7 @@ def _check_c5_aggregate_stats(inp, issues, notes):
         for m in RE_BARE_AGG.finditer(ln):
             if m.start() in covered:
                 continue
-            if ln[m.end():].lstrip().startswith(EXEMPT_MARK):
+            if ln[m.end() :].lstrip().startswith(EXEMPT_MARK):
                 continue  # 后置精确豁免（W904）：只豁免本命中
             bare_hits.append("%s「%s」" % (where, m.group(0)))
     if bare_hits:
@@ -565,8 +595,6 @@ def _check_c5_aggregate_stats(inp, issues, notes):
                 continue
             for m in RE_STATS_MARK.finditer(ln):
                 _check_stats_marker(m, "%s:%d" % (rel, i), stats, issues)
-
-
 
     # C5e 坑表分项计数三向一致（W1025·W1024 实证）
     # 病根：坑表各主题标题写「（N 条）」、AGENTS 有总数与分项行、HANDOVER 有两处总数——
@@ -589,34 +617,51 @@ def _check_c5_aggregate_stats(inp, issues, notes):
         _sum_act = sum(_actual.values())
         for _k, _v in _declared.items():
             if _v != _actual.get(_k, 0):
-                issues.append("C5e: 坑表主题「%s」声明 %d 条 ≠ 实测 %d 条（改完坑表须实算分项·W1024 实证）"
-                              % (_k, _v, _actual.get(_k, 0)))
+                issues.append(
+                    "C5e: 坑表主题「%s」声明 %d 条 ≠ 实测 %d 条（改完坑表须实算分项·W1024 实证）"
+                    % (_k, _v, _actual.get(_k, 0))
+                )
         if _sum_decl != _sum_act:
             issues.append("C5e: 坑表分项声明之和 %d ≠ 实测条目之和 %d" % (_sum_decl, _sum_act))
         # W1058：对账面补 SKILL.md 两处（W1051 ASM-09 已画出的 6 点清单此前只扫 2 类载体——
         # W1055/W1056 两次坑表 +1 均漏 SKILL 实证盲区；形态：L6「N 条·六主题」/ L65「N 条完整教训」）
-        for _f, _pat in (("AGENTS.md", r"(\d+) 条坑位"), ("HANDOVER.md", r"（(\d+) 条·六主题）"),
-                         (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条·六主题"),
-                         (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条完整教训")):
+        for _f, _pat in (
+            ("AGENTS.md", r"(\d+) 条坑位"),
+            ("HANDOVER.md", r"（(\d+) 条·六主题）"),
+            (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条·六主题"),
+            (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条完整教训"),
+        ):
             for _mm in re.finditer(_pat, open(os.path.join(ROOT, _f), encoding="utf-8").read()):
                 if int(_mm.group(1)) != _sum_act:
                     issues.append("C5e: %s 声明 %d 条 ≠ 坑表实测 %d 条" % (_f, int(_mm.group(1)), _sum_act))
         # W1044 补：AGENTS §4.3 六主题**分项**逐项对拍（原只核总数 ⇒ 分项长期陈旧而门禁看不见·
         # W1043 审查实证：分项之和 123 ≠ 总数 133）。
         _a = open(os.path.join(ROOT, "AGENTS.md"), encoding="utf-8").read()
-        _seg = re.search(r"CSS / 视觉渲染（(\d+)）·JS / CSP / 运行时（(\d+)）·git / 提交 / 并发（(\d+)）"
-                         r"·级联 / CHANGELOG（(\d+)）·数据 / 内容可信度（(\d+)）·流程 / 协作 / 取证（(\d+)）", _a)
+        _seg = re.search(
+            r"CSS / 视觉渲染（(\d+)）·JS / CSP / 运行时（(\d+)）·git / 提交 / 并发（(\d+)）"
+            r"·级联 / CHANGELOG（(\d+)）·数据 / 内容可信度（(\d+)）·流程 / 协作 / 取证（(\d+)）",
+            _a,
+        )
         if not _seg:
             issues.append("C5e: AGENTS.md 六主题分项行不可解析（fail-closed）")
         else:
-            _order = ["CSS / 视觉渲染", "JS / CSP / 运行时", "git / 提交 / 并发",
-                      "级联 / CHANGELOG", "数据 / 内容可信度", "流程 / 协作 / 取证"]
+            _order = [
+                "CSS / 视觉渲染",
+                "JS / CSP / 运行时",
+                "git / 提交 / 并发",
+                "级联 / CHANGELOG",
+                "数据 / 内容可信度",
+                "流程 / 协作 / 取证",
+            ]
             for _k, _num in zip(_order, _seg.groups(), strict=True):
                 if int(_num) != _declared.get(_k, -1):
-                    issues.append("C5e: AGENTS 分项「%s」声明 %s ≠ 坑表 %d 条（W1044 补分项对拍）"
-                                  % (_k, _num, _declared.get(_k, -1)))
+                    issues.append(
+                        "C5e: AGENTS 分项「%s」声明 %s ≠ 坑表 %d 条（W1044 补分项对拍）"
+                        % (_k, _num, _declared.get(_k, -1))
+                    )
     except OSError as _e:
         issues.append("C5e: 坑表分项对账不可读（%s）——fail-closed" % _e)
+
 
 def _check_c5d_stats_recheck(inp, issues):
     """C5d：stats.py --check（stats.json vs 磁盘实算）零差异背书（W718）。W730 提取。"""
@@ -625,6 +670,76 @@ def _check_c5d_stats_recheck(inp, issues):
             "C5d: stats.json 与磁盘实算漂移（%s）——跑 python scripts/stats.py --w <批号> 刷新"
             % inp.get("stats_check_tail", "stats --check 未通过")
         )
+
+
+def _check_c9_conflict_marks(inp, issues):
+    """C9：治理面文档禁含 Git 冲突标记（W1105 立·独立盲审 H1 实证）。
+
+    W1096 实证：rebase 冲突用「取某一侧」批量解决生成物时**顺手把正文治理件也处理了**
+    ⇒ 三件套随提交入库（台账正本表格渲染断裂），而第 31 门禁 C2/C4 在含标记的台账上
+    **仍报 0 FAIL** ⇒ 该形态属门禁盲区。
+
+    判据 = 治理面文档（CHANGELOG / HANDOVER / 台账 / AGENTS / STRUCTURE / 方案报告 README）
+    全文不得出现行首冲突标记。扫描面刻意取「治理面」而非全仓（历史归档件里可能含示例文本）。
+    """
+    surfaces = {
+        "CHANGELOG.md": inp.get("changelog", ""),
+        "HANDOVER.md": inp.get("jiaojie", ""),
+        "docs/00-导读/W批次编号对账表.md": inp.get("table", ""),
+        "AGENTS.md": inp.get("agents", ""),
+        "STRUCTURE.md": inp.get("structure", ""),
+    }
+    pat = re.compile(r"^(<<<<<<< |=======\s*$|>>>>>>> )", re.M)
+    for name, text in surfaces.items():
+        if not text:
+            continue
+        hits = [i + 1 for i, ln in enumerate(text.split(chr(10))) if pat.match(ln)]
+        if hits:
+            issues.append("C9: %s 含 Git 冲突标记（L%d 等 %d 处）——治理面不得带标记入库" % (name, hits[0], len(hits)))
+
+
+def _check_c10_stats_independent(inp, issues):
+    """C10：stats 板块计数**异源复算**（W1105 立·独立盲审 H2 实证）。
+
+    W1096 实证：scripts/stats.py 的板块计数排除集写死小写 "index.md"（大小写敏感）
+    ⇒ 目录清单改名成 INDEX.md 后**不再被排除** ⇒ 07/08/09 三板块对外篇数**各虚增 1**；
+    而 C5d 用 stats.py --check（**同一实现**）实算 ⇒ 实算与存值**自洽 ⇒ 门禁不红**。
+    ⇒ 结论：「门禁绿」只证明「实现与自身一致」，不证明「实现对」。
+
+    本判据用**独立实现**复算板块内容篇数（自己遍历目录 + 自己定排除集·不调 stats.py 内部函数），
+    与 stats.json 对账 ⇒ 排除集写错时**必然漂移** ⇒ 口径漂移不再是静默缺陷。
+
+    排除集按**大小写不敏感**（README/index 皆为生成件·两种写法都排除）。
+    """
+    stats = inp.get("stats")
+    if not isinstance(stats, dict):
+        return
+    boards = (
+        ("06-个人随笔", "a2_docs"),
+        ("02-人物深度分析", "a3_docs"),
+        ("04-文化与历史背景", "a5_docs"),
+        ("05-诗词歌赋", "a6_docs"),
+        ("07-学以致用", "learn_docs"),
+        ("08-提升认知", "cognition_docs"),
+        ("09-精神塑造", "spirit_docs"),
+    )
+    for board, key in boards:
+        d = os.path.join(ROOT, "docs", board)
+        if not os.path.isdir(d):
+            continue
+        try:
+            names = [f for f in os.listdir(d) if f.endswith(".md")]
+        except OSError:
+            continue
+        content = [f for f in names if f.lower() not in ("readme.md", "index.md")]
+        ent = stats.get(key)
+        if not isinstance(ent, dict) or "value" not in ent:
+            continue
+        if int(ent["value"]) != len(content):
+            issues.append(
+                "C10: 板块 %s 内容篇数异源复算 %d ≠ stats.json %s=%d（排除集口径漂移或未刷新 stats）"
+                % (board, len(content), key, int(ent["value"]))
+            )
 
 
 def _load_stats():
@@ -662,9 +777,15 @@ def _git_status_z():
     非 -z 模式无法还原真路径 ⇒ 中文路径件被 C4-f 误判「漏 add」。
     """
     try:
-        r = subprocess.run(["git", "-c", "core.quotePath=false", "status", "--porcelain", "-z"],
-                           cwd=ROOT, capture_output=True, text=True,
-                           encoding="utf-8", errors="ignore", timeout=30)
+        r = subprocess.run(
+            ["git", "-c", "core.quotePath=false", "status", "--porcelain", "-z"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="ignore",
+            timeout=30,
+        )
     except Exception:  # noqa: BLE001
         return None
     if r.returncode != 0:
@@ -676,9 +797,15 @@ def _git_output_lines(args, strip=True, timeout=30):
     """运行 git 命令并返回 stdout 行列表（strip=True 逐行剥空/去空行；False 原样保留）；
     非零退出或异常返回 None（W730 提取：gather 内三处同构 subprocess 块合一）。"""
     try:
-        r = subprocess.run(["git", "-c", "core.quotePath=false"] + args,
-                           cwd=ROOT, capture_output=True, text=True,
-                           encoding="utf-8", errors="ignore", timeout=timeout)
+        r = subprocess.run(
+            ["git", "-c", "core.quotePath=false"] + args,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="ignore",
+            timeout=timeout,
+        )
     except Exception:  # noqa: BLE001
         return None
     if r.returncode != 0:
@@ -704,24 +831,19 @@ def gather():
         "koujing": rd(os.path.join(ROOT, "docs", "00-导读", "统计口径说明.md")),
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
         # W1014：归档登记文本在此读盘注入（判据与读取源解耦·见 _check_c4_commit_ledger）
-        "archive_changelogs_text": [
-            rd(p) for p in ARCHIVE_CHANGELOGS if os.path.exists(p)
-        ],
+        "archive_changelogs_text": [rd(p) for p in ARCHIVE_CHANGELOGS if os.path.exists(p)],
         "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
         # W830：C5b 扩展面（pytest.ini + 11-方案报告根层·只跑标记对账·见 c5b_extra_surfaces）
         "reports_extra": {
-            os.path.relpath(p, ROOT).replace(os.sep, "/"): rd(p)
-            for p in c5b_extra_surfaces()
-            if os.path.exists(p)
+            os.path.relpath(p, ROOT).replace(os.sep, "/"): rd(p) for p in c5b_extra_surfaces() if os.path.exists(p)
         },
         "subjects": [],
         "shallow": os.path.exists(os.path.join(ROOT, ".git", "shallow")),
         # W889：GitHub 仓库主页展示位实况（.github/README.md 存在即抢占仓库主页）
         # W1052：C8 治理文档同段重复扫描面（判据与读取源解耦·self-test 可注入）
         "c8_texts": {
-            rel: rd(os.path.join(ROOT, rel)) if os.path.exists(os.path.join(ROOT, rel)) else ""
-            for rel in C8_FILES
+            rel: rd(os.path.join(ROOT, rel)) if os.path.exists(os.path.join(ROOT, rel)) else "" for rel in C8_FILES
         },
         "showcase": {
             "root_readme": os.path.isfile(os.path.join(ROOT, "README.md")),
@@ -730,9 +852,7 @@ def gather():
         },
     }
     try:
-        r = subprocess.run(
-            ["git", "log", "--format=%s", "-15"], cwd=ROOT, capture_output=True, text=True, timeout=30
-        )
+        r = subprocess.run(["git", "log", "--format=%s", "-15"], cwd=ROOT, capture_output=True, text=True, timeout=30)
         if r.returncode != 0:
             inputs.setdefault("git_err", r.stderr.strip()[:120])
         else:
@@ -743,7 +863,12 @@ def gather():
         r = subprocess.run(  # W718 C5d：stats.py --check（stats.json vs 磁盘实算·实测 0.3s）
             # W830：timeout 60→180——stats --check 自 W830 起含 pytest --collect-only 实算（本机 0.3s·CI 留裕量）
             [sys.executable, os.path.join(HERE, "stats.py"), "--check"],
-            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=180,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="ignore",
+            timeout=180,
         )
         inputs["stats_check_ok"] = r.returncode == 0
         _tail = ((r.stdout or "") + (r.stderr or "")).strip().splitlines()
@@ -778,7 +903,8 @@ def gather():
         _mp = os.path.join(ROOT, "scripts", "output", "_cascade_files_W%03d.txt" % _top[1]) if _top else None
         inputs["cascade_manifest"] = (
             [ln.strip() for ln in open(_mp, encoding="utf-8").read().splitlines() if ln.strip()]
-            if _mp and os.path.exists(_mp) else None
+            if _mp and os.path.exists(_mp)
+            else None
         )
     except Exception:  # noqa: BLE001
         inputs["cascade_manifest"] = None
@@ -830,10 +956,21 @@ def run_self_test():
         "stats": {
             k: {"value": v}
             for k, v in {
-                "gate_count": 31, "html_total": 100, "a1_a6_docs": 50, "methodology_docs": 6,
-                "visualization_pages": 10, "csp_covered": 100, "scan_files": 100, "seo_scanned": 100,
-                "inline_css_pages": 10, "json_count": 9, "script_classes": 34,
-                "site_data_html": 10, "site_en_html": 10, "site_root_html": 10, "site_reader_html": 70,
+                "gate_count": 31,
+                "html_total": 100,
+                "a1_a6_docs": 50,
+                "methodology_docs": 6,
+                "visualization_pages": 10,
+                "csp_covered": 100,
+                "scan_files": 100,
+                "seo_scanned": 100,
+                "inline_css_pages": 10,
+                "json_count": 9,
+                "script_classes": 34,
+                "site_data_html": 10,
+                "site_en_html": 10,
+                "site_root_html": 10,
+                "site_reader_html": 70,
             }.items()
         },
         "shallow": False,
@@ -864,7 +1001,9 @@ def run_self_test():
     )
     case(
         "T6 行级豁免标记生效",
-        lambda d: d.update(readme="> **当前批次 W996（2026-10-05）**：自测抬头行 <!--doc-sync:exempt 历史时点事实-->\n"),
+        lambda d: d.update(
+            readme="> **当前批次 W996（2026-10-05）**：自测抬头行 <!--doc-sync:exempt 历史时点事实-->\n"
+        ),
         "C1",
         expect_absent=True,
     )
@@ -876,9 +1015,7 @@ def run_self_test():
     )
     case(
         "T9 聚合数字行级豁免放行（C5）",
-        lambda d: d.update(
-            readme=d["readme"] + "每次提交需通过 99 项自动化门禁 <!--doc-sync:exempt 自测豁免-->\n"
-        ),
+        lambda d: d.update(readme=d["readme"] + "每次提交需通过 99 项自动化门禁 <!--doc-sync:exempt 自测豁免-->\n"),
         "C5",
         expect_absent=True,
     )
@@ -914,26 +1051,34 @@ def run_self_test():
     )
     case(
         "T16 amend 补件场景不误报（C4-e 语义修正·W722 实证）",
-        lambda d: d.update(staged=["scripts/output/_cascade_files_W999.txt"], head_tree=["CHANGELOG.md", "README.md", "AGENTS.md"],
-                           cascade_manifest=["CHANGELOG.md", "README.md", "AGENTS.md", "scripts/output/_cascade_files_W999.txt"]),
+        lambda d: d.update(
+            staged=["scripts/output/_cascade_files_W999.txt"],
+            head_tree=["CHANGELOG.md", "README.md", "AGENTS.md"],
+            cascade_manifest=["CHANGELOG.md", "README.md", "AGENTS.md", "scripts/output/_cascade_files_W999.txt"],
+        ),
         "C4-e",
         expect_absent=True,
     )
     case(
         "T17 文件清单漏 add 必红（C4-f·W723）",
         lambda d: d.update(
-            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
-                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md、docs/b.md（注）\n"),
-            head_tree=["docs/a.md"], dirty=[],
+            changelog=d["changelog"].replace(
+                "### W999（2026-10-05）：自测顶段\n",
+                "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md、docs/b.md（注）\n",
+            ),
+            head_tree=["docs/a.md"],
+            dirty=[],
         ),
         "C4-f",
     )
     case(
         "T18 文件清单工作树残留必红（C4-f·W723）",
         lambda d: d.update(
-            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
-                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md\n"),
-            head_tree=["docs/a.md"], dirty=["docs/a.md"],
+            changelog=d["changelog"].replace(
+                "### W999（2026-10-05）：自测顶段\n", "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md\n"
+            ),
+            head_tree=["docs/a.md"],
+            dirty=["docs/a.md"],
         ),
         "C4-f",
     )
@@ -943,18 +1088,24 @@ def run_self_test():
     case(
         "T19 .ts 文件清单漏 add 必红（C4-f·W813 扩面）",
         lambda d: d.update(
-            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
-                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：xiyouji-agent-web/server/errors.ts\n"),
-            head_tree=[], dirty=[],
+            changelog=d["changelog"].replace(
+                "### W999（2026-10-05）：自测顶段\n",
+                "### W999（2026-10-05）：自测顶段\n\n> - **文件**：xiyouji-agent-web/server/errors.ts\n",
+            ),
+            head_tree=[],
+            dirty=[],
         ),
         "C4-f",
     )
     case(
         "T20 .ts/.tsx/.jsonl/.yaml 等扩展名均被识别为路径 token（W813 覆盖面回归锁）",
         lambda d: d.update(
-            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
-                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：a.ts、b.tsx、c.jsonl、d.yaml、e.toml、f.ini\n"),
-            head_tree=[], dirty=[],
+            changelog=d["changelog"].replace(
+                "### W999（2026-10-05）：自测顶段\n",
+                "### W999（2026-10-05）：自测顶段\n\n> - **文件**：a.ts、b.tsx、c.jsonl、d.yaml、e.toml、f.ini\n",
+            ),
+            head_tree=[],
+            dirty=[],
         ),
         "C4-f",
     )
@@ -1005,8 +1156,10 @@ def run_self_test():
     case(
         "T32 他方登记行纯追加残留放行（C4-f·W906 三态）",
         lambda d: d.update(
-            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
-                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/00-导读/W批次编号对账表.md\n"),
+            changelog=d["changelog"].replace(
+                "### W999（2026-10-05）：自测顶段\n",
+                "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/00-导读/W批次编号对账表.md\n",
+            ),
             head_tree=["docs/00-导读/W批次编号对账表.md"],
             dirty=["docs/00-导读/W批次编号对账表.md"],
             foreign_append_only={"docs/00-导读/W批次编号对账表.md"},
@@ -1017,9 +1170,12 @@ def run_self_test():
     case(
         "T33 残留非纯追加形态仍红（C4-f·W906 防误放——foreign 集不含即回退原语义）",
         lambda d: d.update(
-            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
-                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md\n"),
-            head_tree=["docs/a.md"], dirty=["docs/a.md"], foreign_append_only=set(),
+            changelog=d["changelog"].replace(
+                "### W999（2026-10-05）：自测顶段\n", "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md\n"
+            ),
+            head_tree=["docs/a.md"],
+            dirty=["docs/a.md"],
+            foreign_append_only=set(),
         ),
         "C4-f",
     )
@@ -1044,29 +1200,33 @@ def run_self_test():
     # W889：C7 主页展示位——`.github/README.md` 存在即抢占 GitHub 仓库主页
     case(
         "T25 主页展示位被抢必红（C7·W889）",
-        lambda d: d.update(
-            showcase={"root_readme": True, "github_readme": True, "docs_readme": False}),
+        lambda d: d.update(showcase={"root_readme": True, "github_readme": True, "docs_readme": False}),
         "C7",
     )
     case(
         "T26 主页展示位已改名则放行（C7·W889 防误伤）",
-        lambda d: d.update(
-            showcase={"root_readme": True, "github_readme": False, "docs_readme": True}),
+        lambda d: d.update(showcase={"root_readme": True, "github_readme": False, "docs_readme": True}),
         "C7",
         expect_absent=True,
     )
     # W1052：C8 治理文档同段重复——铁律 14/15 双写事故形态（W1048 诊断实证）的防复发锁
     case(
         "T30 治理文档长行整行双写必红（C8·W1052）",
-        lambda d: d.update(c8_texts={
-            "AGENTS.md": "14. **修实例必修根（W998 固化）**：修复暴露同类风险时同批或次批根治禁止「值得排期与等点号」收尾且检查任务按委托字面范围执行且跨会话教训权威落坑表。\n"
-                         "14. **修实例必修根（W998 固化）**：修复暴露同类风险时同批或次批根治禁止「值得排期与等点号」收尾且检查任务按委托字面范围执行且跨会话教训权威落坑表。\n"}),
+        lambda d: d.update(
+            c8_texts={
+                "AGENTS.md": "14. **修实例必修根（W998 固化）**：修复暴露同类风险时同批或次批根治禁止「值得排期与等点号」收尾且检查任务按委托字面范围执行且跨会话教训权威落坑表。\n"
+                "14. **修实例必修根（W998 固化）**：修复暴露同类风险时同批或次批根治禁止「值得排期与等点号」收尾且检查任务按委托字面范围执行且跨会话教训权威落坑表。\n"
+            }
+        ),
         "C8",
     )
     case(
         "T31 表格行/短行/代码围栏内重复放行（C8·W1052 防误伤）",
-        lambda d: d.update(c8_texts={
-            "AGENTS.md": "| A | B | C |\n| A | B | C |\n短行重复\n短行重复\n```\n围栏内长行重复一次不算重复长行重复一次不算\n围栏内长行重复一次不算重复长行重复一次不算\n```\n"}),
+        lambda d: d.update(
+            c8_texts={
+                "AGENTS.md": "| A | B | C |\n| A | B | C |\n短行重复\n短行重复\n```\n围栏内长行重复一次不算重复长行重复一次不算\n围栏内长行重复一次不算重复长行重复一次不算\n```\n"
+            }
+        ),
         "C8",
         expect_absent=True,
     )

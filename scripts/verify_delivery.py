@@ -31,7 +31,7 @@ fail-closed 委派语义（W831·用户批准修 B1/B2·CLAUDE.md 第 10 条授�
 结构（W728 重构：原 905 行单体 main() 拆为五层·行为与输出逐字节不变）：
   模块级常量 → scope 分级工具 → 版本解析工具 → _Reporter/_GateContext（上报与执行态）
   → 门禁参数表（_SimpleGate×18 / _StrictGate×26·委托合计 44）→ 通用 runner×2 → 13 个段函数
-  → 收尾三函数 → main() 编排（57 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
+  → 收尾三函数 → main() 编排（58 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
 """
 
 import json
@@ -110,36 +110,86 @@ EXPECTED_SECTION_NAMES = [
     "GSAP写法",
     "仓库布局",
     "提交范围",
+    "图表中英对拍",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
 # 14 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14）恒跑不跳；跳过只作用于
-# 44 个 subprocess 委托段（57 段 - 13 内联/bespoke·W1014 实核：_SIMPLE×18+_STRICT×26 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
+# 45 个 subprocess 委托段（58 段 - 13 内联/bespoke·W1105 实核：_SIMPLE×18+_STRICT×27 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
     r"^(docs/.+\.md|(CHANGELOG|HANDOVER|README|STRUCTURE|CLAUDE)\.md|"
     r"scripts/output/file-index(-archive)?\.md|CITATION\.cff|"
-    r"\.github/workflows/README\.md|AGENTS\.md|dataset/glossary\.json)$")
-_SITE_FILES_RE = re.compile(
-    r"^(site/.+\.(html|css|js|xml)|dataset/.+\.json|scripts/output/data/.+\.json)$")
+    r"\.github/workflows/README\.md|AGENTS\.md|dataset/glossary\.json)$"
+)
+_SITE_FILES_RE = re.compile(r"^(site/.+\.(html|css|js|xml)|dataset/.+\.json|scripts/output/data/.+\.json)$")
 SCOPE_DOCS_SECTIONS = {
-    "docs链接", "治理契约", "索引健康", "元信息块", "术语一致", "引文核验",
-    "W区间字面量", "文档口径", "CLAUDE速查", "搜索索引", "计划方案合规",
+    "docs链接",
+    "治理契约",
+    "索引健康",
+    "元信息块",
+    "术语一致",
+    "引文核验",
+    "W区间字面量",
+    "文档口径",
+    "CLAUDE速查",
+    "搜索索引",
+    "计划方案合规",
 }
 SCOPE_SITE_SECTIONS = {
-    "双源漂移", "CSP漂移", "腐蚀插件", "内联语法", "CSS平衡", "token覆盖",
-    "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
-    "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
+    "双源漂移",
+    "CSP漂移",
+    "腐蚀插件",
+    "内联语法",
+    "CSS平衡",
+    "token覆盖",
+    "动效禁令",
+    "a11y对比",
+    "INLINED完整",
+    "动态链接",
+    "图表自洽",
+    "数据一致",
+    "SEOhead",
+    "可引用性",
+    "设计令牌对账",
+    "色盲安全",
+    "降级声明",
+    "head内容",
     "朱砂实底",
-    "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源", "可视化数据", "英文站",
-    "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层", "搜索索引", "性能影子",
+    "CSS变量引用",
+    "声明分隔",
+    "孤立选择",
+    "kpi基类",
+    "内嵌残留",
+    "时间线双源",
+    "chapter双源",
+    "可视化数据",
+    "英文站",
+    "文档口径",
+    "W区间字面量",
+    "索引健康",
+    "治理契约",
+    "AGENTS分层",
+    "搜索索引",
+    "性能影子",
+    "图表中英对拍",  # W1105：chart-design 中英两版数值 + 强制契约标记齐平（读页面 ⇒ site 轨）
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
-    "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
-    "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退", "GSAP写法",
+    "期望版本",
+    "dukou页脚",
+    "六文档同步",
+    "旁文档同步",
+    "范围漂移",
+    "A4计数",
+    "A1-A6计数",
+    "学术引用",
+    "A1导航",
+    "sitemap覆盖",
+    "内嵌回退",
+    "GSAP写法",
     "仓库布局",  # W1011：毫秒级、与 scope 无关
     "提交范围",  # W1007：必须恒跑——代提可能发生在任何 scope 的提交里（docs 提交也能夹带）
 }
@@ -164,22 +214,26 @@ def _git_changed_files():
     files = set()
     for args in (["diff", "--cached", "--name-only"], ["diff", "--name-only"]):
         try:
-            r = subprocess.run(["git", "-c", "core.quotePath=false"] + args,
-                               cwd=ROOT, capture_output=True, text=True, timeout=30)
+            r = subprocess.run(
+                ["git", "-c", "core.quotePath=false"] + args, cwd=ROOT, capture_output=True, text=True, timeout=30
+            )
         except Exception:
             return None
         if r.returncode != 0:
             return None
         files |= {ln.strip().replace("\\", "/") for ln in r.stdout.splitlines() if ln.strip()}
     try:
-        r = subprocess.run(["git", "-c", "core.quotePath=false",
-                            "ls-files", "--others", "--exclude-standard"],
-                           cwd=ROOT, capture_output=True, text=True, timeout=30)
+        r = subprocess.run(
+            ["git", "-c", "core.quotePath=false", "ls-files", "--others", "--exclude-standard"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
         if r.returncode == 0:
             for ln in r.stdout.splitlines():
                 ln = ln.strip().replace("\\", "/")
-                if ln and not ln.startswith("tmpe/") and (
-                        _DOC_FILES_RE.match(ln) or _SITE_FILES_RE.match(ln)):
+                if ln and not ln.startswith("tmpe/") and (_DOC_FILES_RE.match(ln) or _SITE_FILES_RE.match(ln)):
                     return None
     except Exception:
         return None
@@ -196,6 +250,7 @@ def _classify_scope(files):
         return "site"
     return "docs"
 
+
 CORE_DOCS = [
     "CHANGELOG.md",
     "HANDOVER.md",
@@ -210,8 +265,7 @@ DOCS = CORE_DOCS + AUX_DOCS
 HTML = os.path.join(ROOT, "site", "dukou-engine.html")
 
 # 四份含 A4 计数语义的文档（W413 修正：交接文档恢复入库，恢复 4 份检查）
-A4_DOCS = ["README.md", "STRUCTURE.md",
-           os.path.join("docs", "00-导读", "项目说明.md"), "HANDOVER.md"]
+A4_DOCS = ["README.md", "STRUCTURE.md", os.path.join("docs", "00-导读", "项目说明.md"), "HANDOVER.md"]
 EXPECT_A4 = "209 篇"  # 真实计数（W342 199→201 起步，W400 后实际 209）
 
 # 归档文件（W417 新增）：归档后旧 W### 仍纳入范围漂移可追溯扫描，避免误报
@@ -229,11 +283,13 @@ ARCHIVE_DOCS = [
 # A1-A6 内容板块真实文件计数 vs README 声明（W417 新增，防计数声明失真）
 # 目录单一事实源在 doc_areas.AREA_DIRS（W728 与 sync_docs 共享·防双份手工表漂移）；
 # 展示标签属呈现层留本文件。计数口径 = count_content_md（排除各板块 README.md）。
-A_AREAS = list(zip(
-    ("A1 逐回解读", "A2 个人随笔", "A3 人物分析", "A4 主题专题", "A5 文化背景", "A6 诗词歌赋"),
-    AREA_DIRS,
-    strict=True,  # 标签数与目录数必须一致（6=6·长度失配即口径装配错误）
-))
+A_AREAS = list(
+    zip(
+        ("A1 逐回解读", "A2 个人随笔", "A3 人物分析", "A4 主题专题", "A5 文化背景", "A6 诗词歌赋"),
+        AREA_DIRS,
+        strict=True,  # 标签数与目录数必须一致（6=6·长度失配即口径装配错误）
+    )
+)
 
 
 def _read(p):
@@ -271,7 +327,7 @@ def parse_footer_version(text, anchor=None):
         m0 = re.search(anchor, text)
         if not m0:
             return (None, None)
-        text = text[m0.start():]
+        text = text[m0.start() :]
     m = re.search(r"(?:v(\d+\.\d+\.\d+)\s+)?W(\d+)", text)
     return (m.group(1), m.group(2)) if m else (None, None)
 
@@ -279,6 +335,7 @@ def parse_footer_version(text, anchor=None):
 # ---------------------------------------------------------------------------
 # 上报与执行态（W728 重构：原 main() 内闭包/局部态提取为类）
 # ---------------------------------------------------------------------------
+
 
 class _Reporter:
     """门禁三级上报器：FAIL/WARN/OK 打印与计数。
@@ -290,7 +347,7 @@ class _Reporter:
     def __init__(self):
         self.fails = 0
         self.warns = 0
-        self.timings = {}   # W1037：段级耗时（--profile 输出）
+        self.timings = {}  # W1037：段级耗时（--profile 输出）
 
     def fail(self, msg):
         self.fails += 1
@@ -339,16 +396,17 @@ class _GateContext:
         if self.scope == "full":
             self.active_sections = set(EXPECTED_SECTION_NAMES)
         else:
-            self.active_sections = _SCOPE_CORE | (
-                SCOPE_DOCS_SECTIONS if self.scope == "docs" else SCOPE_SITE_SECTIONS)
-        print("---- verify_delivery --scope %s（生效段 %d/%d）----"
-              % (self.scope, len(self.active_sections), len(EXPECTED_SECTION_NAMES)))
+            self.active_sections = _SCOPE_CORE | (SCOPE_DOCS_SECTIONS if self.scope == "docs" else SCOPE_SITE_SECTIONS)
+        print(
+            "---- verify_delivery --scope %s（生效段 %d/%d）----"
+            % (self.scope, len(self.active_sections), len(EXPECTED_SECTION_NAMES))
+        )
         self.sections_ran = []
         # 跨段共享量（原 main() 局部变量·段间数据流经此传递）
-        self.ver = None       # 现役版本 X.Y.Z|None（期望版本段解析·六文档/页脚/旁文档段消费）
-        self.wnum = None      # 现役 W###（同上）
-        self.max_w_html = 0   # dukou-engine.html 全文最高 W###（范围漂移段消费）
-        self.doc_all = ""     # 六文档全文拼接（范围漂移段消费）
+        self.ver = None  # 现役版本 X.Y.Z|None（期望版本段解析·六文档/页脚/旁文档段消费）
+        self.wnum = None  # 现役 W###（同上）
+        self.max_w_html = 0  # dukou-engine.html 全文最高 W###（范围漂移段消费）
+        self.doc_all = ""  # 六文档全文拼接（范围漂移段消费）
         self._real_run = subprocess.run
         subprocess.run = self._scoped_run
 
@@ -374,6 +432,7 @@ class _GateContext:
 # subprocess 委托门禁参数表（W728 重构：35 个同构段的差异收编于表·同构收编于 runner）
 # ---------------------------------------------------------------------------
 
+
 class _SimpleGate(NamedTuple):
     """简单委托门禁参数行（18 段·crash→WARN 不阻断）。
 
@@ -389,6 +448,7 @@ class _SimpleGate(NamedTuple):
       severity——fail=非零退出即 FAIL / warn=非零退出仅 WARN（治理契约·W499 起不阻断；
       注意：severity 只管「退出码口径」，子进程崩溃/超时任何段都 FAIL·W831 B1 根修）。
     """
+
     section: str
     script: str
     args: tuple = ()
@@ -412,6 +472,7 @@ class _StrictGate(NamedTuple):
     marker 汇总行（防 wrapper 假绿）；③ ok 详情取 stdout 指定行（ok_line=-1 末行/
     -2 次末行·4 个双源门禁取次末行）；④ AGENTS分层 fail 尾行口径特殊（stdout4）。
     """
+
     section: str
     script: str
     args: tuple = ()
@@ -423,252 +484,469 @@ class _StrictGate(NamedTuple):
     ok_msg: str = ""
     ok_line: int = -1
     fail_tail: str = "tail6"
-    runner: str = "py"  # W751：py=sys.executable（默认·既有 15 段行为不变）/ node=node（第 43 槽 check_chart_values.js）
+    runner: str = (
+        "py"  # W751：py=sys.executable（默认·既有 15 段行为不变）/ node=node（第 43 槽 check_chart_values.js）
+    )
 
 
 # a11y对比（第 20 段·bespoke）之前的 7 个简单委托段（执行序=EXPECTED_SECTION_NAMES 声明序）
 _SIMPLE_GATES_PRE_A11Y = [
-    _SimpleGate(section="双源漂移", script="check_data_drift.js", runner="node",
-                missing_warn="node 不可用，跳过数据漂移检查（W424 M2）",
-                ok_msg="数据漂移检查通过（%s）", fail_msg="数据漂移检查失败",
-                warn_msg="数据漂移检查执行异常（W424 M2）: %s"),
-    _SimpleGate(section="CSP漂移", script="generate_csp.py", args=("--check",), timeout=180,
-                ok_msg="CSP 校验通过（%s）", fail_msg="CSP 漂移",
-                fail_suffix="（改内联脚本后须重跑 python scripts/generate_csp.py）",
-                warn_msg="CSP 校验执行异常（W424）: %s"),
-    _SimpleGate(section="腐蚀插件", script="check_corruption.py",
-                ok_msg="腐蚀/插件引用门禁通过（%s）", fail_msg="腐蚀/插件引用门禁失败",
-                warn_msg="腐蚀/插件引用门禁执行异常（W424 复盘沉淀）: %s"),
-    _SimpleGate(section="内联语法", script="check_js_syntax.js", runner="node",
-                missing_warn="node 不可用，跳过内联脚本语法门禁（W457）",
-                ok_msg="内联脚本语法门禁通过（%s）", fail_msg="内联脚本语法错误",
-                warn_msg="内联脚本语法门禁执行异常（W457）: %s"),
-    _SimpleGate(section="CSS平衡", script="check_structure.py",
-                ok_msg="CSS 结构平衡通过（%s）", fail_msg="CSS 结构异常",
-                warn_msg="CSS 结构平衡门禁执行异常（W457）: %s"),
-    _SimpleGate(section="token覆盖", script="check_token_coverage.py", timeout=180,
-                ok_msg="token 覆盖率门禁通过（%s）", fail_msg="token 覆盖率违规",
-                warn_msg="token 覆盖率门禁执行异常（W493）: %s"),
-    _SimpleGate(section="动效禁令", script="check_motion_ban.py",
-                ok_msg="动效禁止清单门禁通过（%s）", fail_msg="动效禁止清单违规",
-                warn_msg="动效禁止清单门禁执行异常（W493）: %s"),
+    _SimpleGate(
+        section="双源漂移",
+        script="check_data_drift.js",
+        runner="node",
+        missing_warn="node 不可用，跳过数据漂移检查（W424 M2）",
+        ok_msg="数据漂移检查通过（%s）",
+        fail_msg="数据漂移检查失败",
+        warn_msg="数据漂移检查执行异常（W424 M2）: %s",
+    ),
+    _SimpleGate(
+        section="CSP漂移",
+        script="generate_csp.py",
+        args=("--check",),
+        timeout=180,
+        ok_msg="CSP 校验通过（%s）",
+        fail_msg="CSP 漂移",
+        fail_suffix="（改内联脚本后须重跑 python scripts/generate_csp.py）",
+        warn_msg="CSP 校验执行异常（W424）: %s",
+    ),
+    _SimpleGate(
+        section="腐蚀插件",
+        script="check_corruption.py",
+        ok_msg="腐蚀/插件引用门禁通过（%s）",
+        fail_msg="腐蚀/插件引用门禁失败",
+        warn_msg="腐蚀/插件引用门禁执行异常（W424 复盘沉淀）: %s",
+    ),
+    _SimpleGate(
+        section="内联语法",
+        script="check_js_syntax.js",
+        runner="node",
+        missing_warn="node 不可用，跳过内联脚本语法门禁（W457）",
+        ok_msg="内联脚本语法门禁通过（%s）",
+        fail_msg="内联脚本语法错误",
+        warn_msg="内联脚本语法门禁执行异常（W457）: %s",
+    ),
+    _SimpleGate(
+        section="CSS平衡",
+        script="check_structure.py",
+        ok_msg="CSS 结构平衡通过（%s）",
+        fail_msg="CSS 结构异常",
+        warn_msg="CSS 结构平衡门禁执行异常（W457）: %s",
+    ),
+    _SimpleGate(
+        section="token覆盖",
+        script="check_token_coverage.py",
+        timeout=180,
+        ok_msg="token 覆盖率门禁通过（%s）",
+        fail_msg="token 覆盖率违规",
+        warn_msg="token 覆盖率门禁执行异常（W493）: %s",
+    ),
+    _SimpleGate(
+        section="动效禁令",
+        script="check_motion_ban.py",
+        ok_msg="动效禁止清单门禁通过（%s）",
+        fail_msg="动效禁止清单违规",
+        warn_msg="动效禁止清单门禁执行异常（W493）: %s",
+    ),
 ]
 
 # a11y对比 之后的 11 个简单委托段
 _SIMPLE_GATES_POST_A11Y = [
-    _SimpleGate(section="INLINED完整", script="check_inlined_css.py",
-                ok_msg="INLINED CSS 门禁通过（%s）", fail_msg="INLINED CSS 块异常",
-                warn_msg="INLINED CSS 门禁执行异常（W495）: %s"),
-    _SimpleGate(section="动态链接", script="check_dynamic_links.py",
-                ok_msg="动态链接门禁通过（%s）", fail_msg="动态链接死链",
-                warn_msg="动态链接门禁执行异常（W459）: %s"),
+    _SimpleGate(
+        section="INLINED完整",
+        script="check_inlined_css.py",
+        ok_msg="INLINED CSS 门禁通过（%s）",
+        fail_msg="INLINED CSS 块异常",
+        warn_msg="INLINED CSS 门禁执行异常（W495）: %s",
+    ),
+    _SimpleGate(
+        section="动态链接",
+        script="check_dynamic_links.py",
+        ok_msg="动态链接门禁通过（%s）",
+        fail_msg="动态链接死链",
+        warn_msg="动态链接门禁执行异常（W459）: %s",
+    ),
     # 治理契约：W781 转正 FAIL 阻断（2026-08-18 WARN 起步策略两月监测期满·当前 0 告警零成本转正；
     # 尾行口径 4+2·fail 取前 4）
-    _SimpleGate(section="治理契约", script="check_governance_docs.py", timeout=60,
-                tail_out=4, fail_tail=4,
-                ok_msg="治理文档维护契约通过（%s）", fail_msg="治理文档维护契约违规",
-                warn_msg="治理文档维护契约门禁执行异常: %s"),
-    _SimpleGate(section="索引健康", script="check_index_health.py",
-                ok_msg="索引健康门禁通过（%s）", fail_msg="索引健康异常",
-                warn_msg="索引健康门禁执行异常（W500）: %s"),
-    _SimpleGate(section="元信息块", script="check_frontmatter.py",
-                ok_msg="元信息块 v2 门禁通过（%s）", fail_msg="元信息块 v2 缺字段/枚举非法",
-                warn_msg="元信息块 v2 门禁执行异常（W501）: %s"),
-    _SimpleGate(section="术语一致", script="check_glossary.py",
-                ok_msg="术语一致性门禁通过（%s）", fail_msg="术语一致性异常",
-                warn_msg="术语一致性门禁执行异常（W502）: %s"),
-    _SimpleGate(section="引文核验", script="check_citations.py", args=("--dir", "docs"),
-                ok_msg="原著引文核验通过（%s）", fail_msg="原著引文未命中/格式错误",
-                warn_msg="原著引文核验门禁执行异常（W503）: %s"),
+    _SimpleGate(
+        section="治理契约",
+        script="check_governance_docs.py",
+        timeout=60,
+        tail_out=4,
+        fail_tail=4,
+        ok_msg="治理文档维护契约通过（%s）",
+        fail_msg="治理文档维护契约违规",
+        warn_msg="治理文档维护契约门禁执行异常: %s",
+    ),
+    _SimpleGate(
+        section="索引健康",
+        script="check_index_health.py",
+        ok_msg="索引健康门禁通过（%s）",
+        fail_msg="索引健康异常",
+        warn_msg="索引健康门禁执行异常（W500）: %s",
+    ),
+    _SimpleGate(
+        section="元信息块",
+        script="check_frontmatter.py",
+        ok_msg="元信息块 v2 门禁通过（%s）",
+        fail_msg="元信息块 v2 缺字段/枚举非法",
+        warn_msg="元信息块 v2 门禁执行异常（W501）: %s",
+    ),
+    _SimpleGate(
+        section="术语一致",
+        script="check_glossary.py",
+        ok_msg="术语一致性门禁通过（%s）",
+        fail_msg="术语一致性异常",
+        warn_msg="术语一致性门禁执行异常（W502）: %s",
+    ),
+    _SimpleGate(
+        section="引文核验",
+        script="check_citations.py",
+        args=("--dir", "docs"),
+        ok_msg="原著引文核验通过（%s）",
+        fail_msg="原著引文未命中/格式错误",
+        warn_msg="原著引文核验门禁执行异常（W503）: %s",
+    ),
     # 图表自洽（W551：W550 全站截图审查实证三类批量图表缺陷——10 页桑基缺引用/4 组饼图措辞×树图
     # 实现错配——均为门禁盲区积累数月后人工清账，本门禁文本层拦同类复发；需真实渲染的遮挡/空带/
     # 溢出/桑基运行时由 check_screenshot_gates.js（screenshot-review workflow 动态步）覆盖）
-    _SimpleGate(section="图表自洽", script="check_chart_data.py",
-                ok_msg="图表静态自洽门禁通过（%s）", fail_msg="图表静态自洽异常",
-                warn_msg="图表静态自洽门禁执行异常（W551）: %s"),
-    _SimpleGate(section="数据一致", script="check_content_consistency.py", args=("--gate",),
-                timeout=180, tail_out=1,
-                ok_msg="数据内容一致性门禁通过（%s）", fail_msg="数据内容一致性异常",
-                warn_msg="数据内容一致性门禁执行异常（W555）: %s"),
-    _SimpleGate(section="W区间字面量", script="check_w_range_literal.py", timeout=60,
-                ok_msg="W 号区间字面量门禁通过（%s）", fail_msg="W 号区间字面量漂移",
-                warn_msg="W 号区间字面量门禁执行异常（W628）: %s"),
-    _SimpleGate(section="SEOhead", script="check_seo_head.py", tail_out=1,
-                ok_msg="SEO head 门禁通过（%s）", fail_msg="SEO head 异常",
-                warn_msg="SEO head 门禁执行异常（W630）: %s"),
+    _SimpleGate(
+        section="图表自洽",
+        script="check_chart_data.py",
+        ok_msg="图表静态自洽门禁通过（%s）",
+        fail_msg="图表静态自洽异常",
+        warn_msg="图表静态自洽门禁执行异常（W551）: %s",
+    ),
+    _SimpleGate(
+        section="数据一致",
+        script="check_content_consistency.py",
+        args=("--gate",),
+        timeout=180,
+        tail_out=1,
+        ok_msg="数据内容一致性门禁通过（%s）",
+        fail_msg="数据内容一致性异常",
+        warn_msg="数据内容一致性门禁执行异常（W555）: %s",
+    ),
+    _SimpleGate(
+        section="W区间字面量",
+        script="check_w_range_literal.py",
+        timeout=60,
+        ok_msg="W 号区间字面量门禁通过（%s）",
+        fail_msg="W 号区间字面量漂移",
+        warn_msg="W 号区间字面量门禁执行异常（W628）: %s",
+    ),
+    _SimpleGate(
+        section="SEOhead",
+        script="check_seo_head.py",
+        tail_out=1,
+        ok_msg="SEO head 门禁通过（%s）",
+        fail_msg="SEO head 异常",
+        warn_msg="SEO head 门禁执行异常（W630）: %s",
+    ),
 ]
 
-# 16 个严格委托段（第 28-47 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
+# 27 个严格委托段（第 28-53 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
 _STRICT_GATES = [
-    _StrictGate(section="可引用性", script="check_citability.py", args=("--gate",),
-                marker="---- 第 28 门禁：",
-                crash_msg="可视化可引用性门禁执行异常（第 28 门禁·crash 即拦不静默放过·W650 对齐 W631 防静默跳过）: %s",
-                fail_msg="可引用性基线外违规",
-                marker_msg="可引用性门禁输出缺汇总行（疑似未真正扫描·防静默跳过 W650）：%r",
-                ok_msg="可视化可引用性门禁通过（%s）"),
-    _StrictGate(section="设计令牌对账", script="check_design_doc_drift.py",
-                marker="---- 设计令牌对账：",
-                crash_msg="设计令牌对账门禁执行异常（PD-5·crash 即拦）: %s",
-                fail_msg="设计令牌对账漂移",
-                marker_msg="设计令牌对账输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="设计令牌文档对账通过（%s）"),
-    _StrictGate(section="色盲安全", script="check_chart_colorblind.py", args=("--gate",),
-                marker="---- 第 29 门禁 色盲安全：",
-                crash_msg="色盲安全门禁执行异常（第 29 槽·crash 即拦）: %s",
-                fail_msg="色盲安全基线外违规",
-                marker_msg="色盲安全门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="色盲安全门禁通过（%s）"),
-    _StrictGate(section="降级声明", script="check_chart_degrade.py",
-                marker="---- 第 30 门禁 降级声明：",
-                crash_msg="降级声明门禁执行异常（第 30 槽·crash 即拦）: %s",
-                fail_msg="降级声明缺失/非法",
-                marker_msg="降级声明门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="降级声明门禁通过（%s）"),
-    _StrictGate(section="文档口径", script="check_doc_sync.py",
-                marker="---- 第 31 门禁 文档口径体检：",
-                crash_msg="文档口径体检执行异常（第 31 槽·crash 即拦）: %s",
-                fail_msg="文档口径体检失配",
-                marker_msg="文档口径体检输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="文档口径体检通过（%s）"),
-    _StrictGate(section="CLAUDE速查", script="check_claude_md.py", timeout=60,
-                marker="---- 第 32 门禁 CLAUDE.md 速查层：",
-                crash_msg="CLAUDE.md 速查层门禁执行异常（第 32 槽·crash 即拦）: %s",
-                fail_msg="CLAUDE.md 速查层失配",
-                marker_msg="CLAUDE.md 速查层门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="CLAUDE.md 速查层门禁通过（%s）"),
-    _StrictGate(section="head内容", script="check_html_head_content.py",
-                marker="---- 第 33 门禁 head 内容：",
-                crash_msg="head 内容门禁执行异常（第 33 槽·crash 即拦）: %s",
-                fail_msg="head 内容违例",
-                marker_msg="head 内容门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="head 内容门禁通过（%s）"),
-    _StrictGate(section="CSS变量引用", script="check_css_var_refs.py",
-                marker="---- 第 34 门禁 CSS 变量引用：",
-                crash_msg="CSS 变量引用门禁执行异常（第 34 槽·crash 即拦）: %s",
-                fail_msg="CSS 变量引用违例",
-                marker_msg="CSS 变量引用门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="CSS 变量引用门禁通过（%s）"),
-    _StrictGate(section="声明分隔", script="check_css_decl_separators.py",
-                marker="---- 第 35 门禁 声明分隔：",
-                crash_msg="声明分隔门禁执行异常（第 35 槽·crash 即拦）: %s",
-                fail_msg="声明分隔违例",
-                marker_msg="声明分隔门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="声明分隔门禁通过（%s）"),
-    _StrictGate(section="孤立选择", script="check_css_orphan_selectors.py",
-                marker="---- 第 36 门禁 孤立选择器：",
-                crash_msg="孤立选择器门禁执行异常（第 36 槽·crash 即拦）: %s",
-                fail_msg="孤立选择器违例",
-                marker_msg="孤立选择器门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="孤立选择器门禁通过（%s）"),
-    _StrictGate(section="kpi基类", script="check_kpi_card_base.py",
-                marker="---- 第 37 门禁 kpi 基类：",
-                crash_msg="kpi 基类门禁执行异常（第 37 槽·crash 即拦）: %s",
-                fail_msg="kpi 基类违例",
-                marker_msg="kpi 基类门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="kpi 基类门禁通过（%s）"),
-    _StrictGate(section="内嵌残留", script="check_embedded_stale_markers.py", timeout=180,
-                marker="---- 第 38 门禁 页面内嵌残留标记：",
-                crash_msg="内嵌残留门禁执行异常（第 38 槽·crash 即拦）: %s",
-                fail_msg="内嵌残留标记命中",
-                marker_msg="内嵌残留门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="内嵌残留门禁通过（%s）", ok_line=-2),
-    _StrictGate(section="时间线双源", script="check_story_timeline_sync.py",
-                marker="---- 第 39 门禁 故事内时间线双源同步：",
-                crash_msg="时间线双源门禁执行异常（第 39 槽·crash 即拦）: %s",
-                fail_msg="时间线双源失配",
-                marker_msg="时间线双源门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="时间线双源门禁通过（%s）", ok_line=-2),
-    _StrictGate(section="chapter双源", script="check_chapter_stats_sync.py", timeout=300,
-                marker="---- 第 40 门禁 chapter_stats 双源同步：",
-                crash_msg="chapter双源门禁执行异常（第 40 槽·crash 即拦）: %s",
-                fail_msg="chapter双源漂移",
-                marker_msg="chapter双源门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="chapter双源门禁通过（%s）", ok_line=-2),
-    _StrictGate(section="AGENTS分层", script="check_agents_layers.py",
-                marker="---- 第 41 门禁 AGENTS 分层完整性：",
-                crash_msg="AGENTS 分层门禁执行异常（第 41 槽·crash 即拦）: %s",
-                fail_msg="AGENTS 分层失配",
-                marker_msg="AGENTS 分层门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="AGENTS 分层完整性通过（%s）", ok_line=-2, fail_tail="stdout4"),
-    _StrictGate(section="脚本覆盖", script="check_script_coverage.py",
-                marker="---- 第 42 门禁 根级脚本覆盖：",
-                crash_msg="脚本覆盖门禁执行异常（第 42 槽·crash 即拦）: %s",
-                fail_msg="根级脚本覆盖缺口",
-                marker_msg="脚本覆盖门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="根级脚本覆盖通过（%s）", ok_line=-2),
-    _StrictGate(section="可视化数据", script="check_chart_values.js", args=("--gate",), runner="node", timeout=300,
-                marker="---- 第 43 门禁 可视化数据断言：",
-                crash_msg="可视化数据断言门禁执行异常（第 43 槽·crash 即拦）: %s",
-                fail_msg="可视化数据断言缺口",
-                marker_msg="可视化数据断言门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="可视化数据断言通过（%s）", ok_line=-2),
-    _StrictGate(section="英文站", script="validate_en.py", args=("--all",), timeout=180,
-                marker="EN validate:",
-                crash_msg="英文站校验执行异常（第 44 槽·crash 即拦）: %s",
-                fail_msg="英文站 CJK 违规（script CJK=0 / chrome 白名单）",
-                marker_msg="英文站校验输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="英文站校验通过（%s）", ok_line=-1),
-    _StrictGate(section="目录文档", script="check_folder_docs.py", args=("--gate",), timeout=240,
-                marker="---- 第 45 门禁 目录文档新鲜度：",
-                crash_msg="目录文档新鲜度门禁执行异常（第 45 槽·crash 即拦）: %s",
-                fail_msg="目录文档新鲜度违规（生成清单与磁盘漂移·先 git add 本批新件再重跑 python scripts/gen_folder_docs.py --refresh——生成器按 Git 索引收集·refresh 先于 add 必漏新件（W896 口径·W900/W901 连踩）·人工维护件自动跳过）",
-                marker_msg="目录文档门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="目录文档新鲜度通过（%s）", ok_line=-1),
-    _StrictGate(section="搜索索引", script="check_search_index_fresh.py", args=("--gate",), timeout=300,
-                marker="---- 第 46 门禁 搜索索引新鲜度：",
-                crash_msg="搜索索引新鲜度门禁执行异常（第 46 槽·crash 即拦）: %s",
-                fail_msg="站内搜索索引陈旧（页面内嵌索引 ≠ 生成器实算·重跑 python scripts/_gen_search_index.py 刷新并重算 CSP 哈希）",
-                marker_msg="搜索索引门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="搜索索引新鲜度通过（%s）", ok_line=-1),
-    _StrictGate(section="性能影子", script="check_perf_shadow.py", args=("--gate",), timeout=120,
-                marker="---- 第 47 门禁 性能影子：",
-                crash_msg="性能影子槽执行异常（第 47 槽·crash 即拦）: %s",
-                fail_msg="性能影子槽采集面缺失（perf.yml collect.url 的页面不在了·先修断链再看数字）",
-                marker_msg="性能影子槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="性能影子槽通过（%s）", ok_line=-1),
-    _StrictGate(section="计划方案合规", script="check_plan_template.py", args=("--gate",), timeout=120,
-                marker="---- 第 48 门禁 计划方案合规：",
-                crash_msg="计划方案合规槽执行异常（第 48 槽·crash 即拦）: %s",
-                fail_msg="计划方案模板符合性不达标（新增/修改的计划方案文件引入了缺失判据·补齐后重跑）",
-                marker_msg="计划方案合规槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="计划方案合规槽通过（%s）", ok_line=-1),
+    _StrictGate(
+        section="可引用性",
+        script="check_citability.py",
+        args=("--gate",),
+        marker="---- 第 28 门禁：",
+        crash_msg="可视化可引用性门禁执行异常（第 28 门禁·crash 即拦不静默放过·W650 对齐 W631 防静默跳过）: %s",
+        fail_msg="可引用性基线外违规",
+        marker_msg="可引用性门禁输出缺汇总行（疑似未真正扫描·防静默跳过 W650）：%r",
+        ok_msg="可视化可引用性门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="设计令牌对账",
+        script="check_design_doc_drift.py",
+        marker="---- 设计令牌对账：",
+        crash_msg="设计令牌对账门禁执行异常（PD-5·crash 即拦）: %s",
+        fail_msg="设计令牌对账漂移",
+        marker_msg="设计令牌对账输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="设计令牌文档对账通过（%s）",
+    ),
+    _StrictGate(
+        section="色盲安全",
+        script="check_chart_colorblind.py",
+        args=("--gate",),
+        marker="---- 第 29 门禁 色盲安全：",
+        crash_msg="色盲安全门禁执行异常（第 29 槽·crash 即拦）: %s",
+        fail_msg="色盲安全基线外违规",
+        marker_msg="色盲安全门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="色盲安全门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="降级声明",
+        script="check_chart_degrade.py",
+        marker="---- 第 30 门禁 降级声明：",
+        crash_msg="降级声明门禁执行异常（第 30 槽·crash 即拦）: %s",
+        fail_msg="降级声明缺失/非法",
+        marker_msg="降级声明门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="降级声明门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="文档口径",
+        script="check_doc_sync.py",
+        marker="---- 第 31 门禁 文档口径体检：",
+        crash_msg="文档口径体检执行异常（第 31 槽·crash 即拦）: %s",
+        fail_msg="文档口径体检失配",
+        marker_msg="文档口径体检输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="文档口径体检通过（%s）",
+    ),
+    _StrictGate(
+        section="CLAUDE速查",
+        script="check_claude_md.py",
+        timeout=60,
+        marker="---- 第 32 门禁 CLAUDE.md 速查层：",
+        crash_msg="CLAUDE.md 速查层门禁执行异常（第 32 槽·crash 即拦）: %s",
+        fail_msg="CLAUDE.md 速查层失配",
+        marker_msg="CLAUDE.md 速查层门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="CLAUDE.md 速查层门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="head内容",
+        script="check_html_head_content.py",
+        marker="---- 第 33 门禁 head 内容：",
+        crash_msg="head 内容门禁执行异常（第 33 槽·crash 即拦）: %s",
+        fail_msg="head 内容违例",
+        marker_msg="head 内容门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="head 内容门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="CSS变量引用",
+        script="check_css_var_refs.py",
+        marker="---- 第 34 门禁 CSS 变量引用：",
+        crash_msg="CSS 变量引用门禁执行异常（第 34 槽·crash 即拦）: %s",
+        fail_msg="CSS 变量引用违例",
+        marker_msg="CSS 变量引用门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="CSS 变量引用门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="声明分隔",
+        script="check_css_decl_separators.py",
+        marker="---- 第 35 门禁 声明分隔：",
+        crash_msg="声明分隔门禁执行异常（第 35 槽·crash 即拦）: %s",
+        fail_msg="声明分隔违例",
+        marker_msg="声明分隔门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="声明分隔门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="孤立选择",
+        script="check_css_orphan_selectors.py",
+        marker="---- 第 36 门禁 孤立选择器：",
+        crash_msg="孤立选择器门禁执行异常（第 36 槽·crash 即拦）: %s",
+        fail_msg="孤立选择器违例",
+        marker_msg="孤立选择器门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="孤立选择器门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="kpi基类",
+        script="check_kpi_card_base.py",
+        marker="---- 第 37 门禁 kpi 基类：",
+        crash_msg="kpi 基类门禁执行异常（第 37 槽·crash 即拦）: %s",
+        fail_msg="kpi 基类违例",
+        marker_msg="kpi 基类门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="kpi 基类门禁通过（%s）",
+    ),
+    _StrictGate(
+        section="内嵌残留",
+        script="check_embedded_stale_markers.py",
+        timeout=180,
+        marker="---- 第 38 门禁 页面内嵌残留标记：",
+        crash_msg="内嵌残留门禁执行异常（第 38 槽·crash 即拦）: %s",
+        fail_msg="内嵌残留标记命中",
+        marker_msg="内嵌残留门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="内嵌残留门禁通过（%s）",
+        ok_line=-2,
+    ),
+    _StrictGate(
+        section="时间线双源",
+        script="check_story_timeline_sync.py",
+        marker="---- 第 39 门禁 故事内时间线双源同步：",
+        crash_msg="时间线双源门禁执行异常（第 39 槽·crash 即拦）: %s",
+        fail_msg="时间线双源失配",
+        marker_msg="时间线双源门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="时间线双源门禁通过（%s）",
+        ok_line=-2,
+    ),
+    _StrictGate(
+        section="chapter双源",
+        script="check_chapter_stats_sync.py",
+        timeout=300,
+        marker="---- 第 40 门禁 chapter_stats 双源同步：",
+        crash_msg="chapter双源门禁执行异常（第 40 槽·crash 即拦）: %s",
+        fail_msg="chapter双源漂移",
+        marker_msg="chapter双源门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="chapter双源门禁通过（%s）",
+        ok_line=-2,
+    ),
+    _StrictGate(
+        section="AGENTS分层",
+        script="check_agents_layers.py",
+        marker="---- 第 41 门禁 AGENTS 分层完整性：",
+        crash_msg="AGENTS 分层门禁执行异常（第 41 槽·crash 即拦）: %s",
+        fail_msg="AGENTS 分层失配",
+        marker_msg="AGENTS 分层门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="AGENTS 分层完整性通过（%s）",
+        ok_line=-2,
+        fail_tail="stdout4",
+    ),
+    _StrictGate(
+        section="脚本覆盖",
+        script="check_script_coverage.py",
+        marker="---- 第 42 门禁 根级脚本覆盖：",
+        crash_msg="脚本覆盖门禁执行异常（第 42 槽·crash 即拦）: %s",
+        fail_msg="根级脚本覆盖缺口",
+        marker_msg="脚本覆盖门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="根级脚本覆盖通过（%s）",
+        ok_line=-2,
+    ),
+    _StrictGate(
+        section="可视化数据",
+        script="check_chart_values.js",
+        args=("--gate",),
+        runner="node",
+        timeout=300,
+        marker="---- 第 43 门禁 可视化数据断言：",
+        crash_msg="可视化数据断言门禁执行异常（第 43 槽·crash 即拦）: %s",
+        fail_msg="可视化数据断言缺口",
+        marker_msg="可视化数据断言门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="可视化数据断言通过（%s）",
+        ok_line=-2,
+    ),
+    _StrictGate(
+        section="英文站",
+        script="validate_en.py",
+        args=("--all",),
+        timeout=180,
+        marker="EN validate:",
+        crash_msg="英文站校验执行异常（第 44 槽·crash 即拦）: %s",
+        fail_msg="英文站 CJK 违规（script CJK=0 / chrome 白名单）",
+        marker_msg="英文站校验输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="英文站校验通过（%s）",
+        ok_line=-1,
+    ),
+    _StrictGate(
+        section="目录文档",
+        script="check_folder_docs.py",
+        args=("--gate",),
+        timeout=240,
+        marker="---- 第 45 门禁 目录文档新鲜度：",
+        crash_msg="目录文档新鲜度门禁执行异常（第 45 槽·crash 即拦）: %s",
+        fail_msg="目录文档新鲜度违规（生成清单与磁盘漂移·先 git add 本批新件再重跑 python scripts/gen_folder_docs.py --refresh——生成器按 Git 索引收集·refresh 先于 add 必漏新件（W896 口径·W900/W901 连踩）·人工维护件自动跳过）",
+        marker_msg="目录文档门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="目录文档新鲜度通过（%s）",
+        ok_line=-1,
+    ),
+    _StrictGate(
+        section="搜索索引",
+        script="check_search_index_fresh.py",
+        args=("--gate",),
+        timeout=300,
+        marker="---- 第 46 门禁 搜索索引新鲜度：",
+        crash_msg="搜索索引新鲜度门禁执行异常（第 46 槽·crash 即拦）: %s",
+        fail_msg="站内搜索索引陈旧（页面内嵌索引 ≠ 生成器实算·重跑 python scripts/_gen_search_index.py 刷新并重算 CSP 哈希）",
+        marker_msg="搜索索引门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="搜索索引新鲜度通过（%s）",
+        ok_line=-1,
+    ),
+    _StrictGate(
+        section="性能影子",
+        script="check_perf_shadow.py",
+        args=("--gate",),
+        timeout=120,
+        marker="---- 第 47 门禁 性能影子：",
+        crash_msg="性能影子槽执行异常（第 47 槽·crash 即拦）: %s",
+        fail_msg="性能影子槽采集面缺失（perf.yml collect.url 的页面不在了·先修断链再看数字）",
+        marker_msg="性能影子槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="性能影子槽通过（%s）",
+        ok_line=-1,
+    ),
+    _StrictGate(
+        section="计划方案合规",
+        script="check_plan_template.py",
+        args=("--gate",),
+        timeout=120,
+        marker="---- 第 48 门禁 计划方案合规：",
+        crash_msg="计划方案合规槽执行异常（第 48 槽·crash 即拦）: %s",
+        fail_msg="计划方案模板符合性不达标（新增/修改的计划方案文件引入了缺失判据·补齐后重跑）",
+        marker_msg="计划方案合规槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="计划方案合规槽通过（%s）",
+        ok_line=-1,
+    ),
     # W899：timeout 600 → 1800——CI runner 上 856 页 browser 实测慢于本地（本地约 4.5 分钟·
     # CI 慢 2~3 倍）⇒ 600s 超时即被判「crash 即拦」红（W831 语义·非判据失败）。
     # 只放宽时限，不改判据与阈值。
-    _StrictGate(section="朱砂实底", script="check_vermilion_solid.js", runner="node",
-                args=("--gate",), timeout=1800,
-                marker="---- 第 49 门禁 朱砂实底：",
-                crash_msg="朱砂实底槽执行异常（第 49 槽·crash 即拦）: %s",
-                fail_msg="朱砂实底限额违规（有页面非豁免实底 >3 处·收敛或补登记豁免后重跑）",
-                marker_msg="朱砂实底槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="朱砂实底限额门禁通过（%s）", ok_line=-1),
+    _StrictGate(
+        section="朱砂实底",
+        script="check_vermilion_solid.js",
+        runner="node",
+        args=("--gate",),
+        timeout=1800,
+        marker="---- 第 49 门禁 朱砂实底：",
+        crash_msg="朱砂实底槽执行异常（第 49 槽·crash 即拦）: %s",
+        fail_msg="朱砂实底限额违规（有页面非豁免实底 >3 处·收敛或补登记豁免后重跑）",
+        marker_msg="朱砂实底槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="朱砂实底限额门禁通过（%s）",
+        ok_line=-1,
+    ),
     # W960（用户 2026-10-26 批准）：GSAP 动效写法门禁挂第 50 槽——
     # site/static/js/ 下的自有 JS 原不在任何静态门禁扫描域内（check_motion_ban 只扫 HTML + 两份 CSS；
     # check_js_syntax 只扫 HTML 内联脚本）⇒ 载体写坏（回弹缓动 / 超时长 / 大角度旋转 / 视差字面量）时
     # 全站门禁全绿。判据自带负样本自测（8/8），豁免只对写法类规则（J3/J4/J7）开放且逐条打印不静默。
-    _StrictGate(section="GSAP写法", script="check_gsap_motion.py", args=("--gate",), timeout=120,
-                marker="---- 第 50 门禁 GSAP 写法：",
-                crash_msg="GSAP 写法槽执行异常（第 50 槽·crash 即拦）: %s",
-                fail_msg="GSAP 动效写法违例（时长 / 缓动白名单 / 禁旋转 / 禁循环 / 布局属性·详见脚本输出）",
-                marker_msg="GSAP 写法槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="GSAP 动效写法门禁通过（%s）", ok_line=-1),
+    _StrictGate(
+        section="GSAP写法",
+        script="check_gsap_motion.py",
+        args=("--gate",),
+        timeout=120,
+        marker="---- 第 50 门禁 GSAP 写法：",
+        crash_msg="GSAP 写法槽执行异常（第 50 槽·crash 即拦）: %s",
+        fail_msg="GSAP 动效写法违例（时长 / 缓动白名单 / 禁旋转 / 禁循环 / 布局属性·详见脚本输出）",
+        marker_msg="GSAP 写法槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="GSAP 动效写法门禁通过（%s）",
+        ok_line=-1,
+    ),
     # W1007：提交范围门禁挂第 51 槽——代提三次（W989/W1002/W1004）同一处方：一份提交混进另一批在途件。
     # safe_commit --expect-spec 只在走它时生效（`git commit` 直提可绕），本槽把它挪进唯一硬门禁入口，
     # 任何提交路径都绕不过。归属判定看索引 CHANGELOG 顶段（新增段=本批；否则 HEAD 现役段=回填）。
     # W1011：仓库布局门禁挂第 52 槽——用户「整理分类」的长期形态：把「哪个目录装什么」变成判据，
     # 否则一次性搬家三个月后又长出错位文件（本批在根目录逮到 _tmp_chap_sheet.py 与三个空壳目录）。
-    _StrictGate(section="仓库布局", script="check_repo_layout.py", args=("--gate",), timeout=120,
-                marker="---- 第 52 门禁 仓库布局：",
-                crash_msg="仓库布局槽执行异常（第 52 槽·crash 即拦）: %s",
-                fail_msg="仓库布局违规（根目录出现未声明文件 / 顶层出现未声明目录 / 白名单陈腐·见脚本输出）",
-                marker_msg="仓库布局槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="仓库布局门禁通过（%s）", ok_line=-1),
-    _StrictGate(section="提交范围", script="check_commit_scope.py", args=("--gate",), timeout=120,
-                marker="---- 第 51 门禁 提交范围：",
-                crash_msg="提交范围槽执行异常（第 51 槽·crash 即拦）: %s",
-                fail_msg="提交范围越界（索引含本批 spec 之外的文件＝代提风险·摘出他方在途件后重跑）",
-                marker_msg="提交范围槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
-                ok_msg="提交范围门禁通过（%s）", ok_line=-1),
+    _StrictGate(
+        section="仓库布局",
+        script="check_repo_layout.py",
+        args=("--gate",),
+        timeout=120,
+        marker="---- 第 52 门禁 仓库布局：",
+        crash_msg="仓库布局槽执行异常（第 52 槽·crash 即拦）: %s",
+        fail_msg="仓库布局违规（根目录出现未声明文件 / 顶层出现未声明目录 / 白名单陈腐·见脚本输出）",
+        marker_msg="仓库布局槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="仓库布局门禁通过（%s）",
+        ok_line=-1,
+    ),
+    _StrictGate(
+        section="提交范围",
+        script="check_commit_scope.py",
+        args=("--gate",),
+        timeout=120,
+        marker="---- 第 51 门禁 提交范围：",
+        crash_msg="提交范围槽执行异常（第 51 槽·crash 即拦）: %s",
+        fail_msg="提交范围越界（索引含本批 spec 之外的文件＝代提风险·摘出他方在途件后重跑）",
+        marker_msg="提交范围槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+        ok_msg="提交范围门禁通过（%s）",
+        ok_line=-1,
+    ),
+    _StrictGate(
+        section="图表中英对拍",
+        script="check_chart_design_parity.py",
+        timeout=120,
+        marker="---- chart-design 中英对拍：",
+        crash_msg="图表中英对拍槽执行异常（第 53 槽·crash 即拦）: %s",
+        fail_msg="chart-design 中英数值漂移或强制契约标记缺一侧（W1105 新增第 53 槽）",
+        marker_msg="图表中英对拍槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="图表中英对拍门禁通过（%s）",
+        ok_line=-1,
+    ),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
@@ -689,22 +967,20 @@ def _assert_registry_consistent() -> None:
     「目录文档」于顺序表·旧自洽锁单向查缺抓不到多段）；③ 元组相对序 == EXPECTED 相对序
     （执行序漂移即红）；④ 不在任何 scope 子集的段必须登记 _FULL_ONLY_SECTIONS。
     """
-    gate_sections = [g.section for _l in (_SIMPLE_GATES_PRE_A11Y, _SIMPLE_GATES_POST_A11Y,
-                                          _STRICT_GATES) for g in _l]
+    gate_sections = [g.section for _l in (_SIMPLE_GATES_PRE_A11Y, _SIMPLE_GATES_POST_A11Y, _STRICT_GATES) for g in _l]
     dupes = sorted({s for s in gate_sections if gate_sections.count(s) > 1})
     assert not dupes, "门禁段名重复（挂槽漏改·R-1）： %r" % dupes
     expected_set = set(EXPECTED_SECTION_NAMES)
     missing = [s for s in gate_sections if s not in expected_set]
-    assert not missing, ("门禁元组段名未入 EXPECTED_SECTION_NAMES（挂槽漏改·R-1·W780 第 45 槽同型）： %r"
-                         % missing)
+    assert not missing, "门禁元组段名未入 EXPECTED_SECTION_NAMES（挂槽漏改·R-1·W780 第 45 槽同型）： %r" % missing
     order_in_expected = [n for n in EXPECTED_SECTION_NAMES if n in set(gate_sections)]
-    assert order_in_expected == gate_sections, (
-        "门禁执行序与 EXPECTED_SECTION_NAMES 相对序不一致（R-1）： %r vs %r"
-        % (gate_sections, order_in_expected))
+    assert order_in_expected == gate_sections, "门禁执行序与 EXPECTED_SECTION_NAMES 相对序不一致（R-1）： %r vs %r" % (
+        gate_sections,
+        order_in_expected,
+    )
     unscoped = set(gate_sections) - _SCOPE_CORE - SCOPE_DOCS_SECTIONS - SCOPE_SITE_SECTIONS
     unregistered = sorted(unscoped - _FULL_ONLY_SECTIONS)
-    assert not unregistered, ("门禁段不在任何 scope 子集且未登记 _FULL_ONLY_SECTIONS（R-1）： %r"
-                              % unregistered)
+    assert not unregistered, "门禁段不在任何 scope 子集且未登记 _FULL_ONLY_SECTIONS（R-1）： %r" % unregistered
 
 
 def _run_simple_gate(ctx, gate):
@@ -730,16 +1006,18 @@ def _run_simple_gate(ctx, gate):
     except Exception as e:
         ctx.rep.fail(gate.warn_msg % e)  # W831：crash/timeout → FAIL（原 WARN·假绿面根除）
         return
-    tail = r.stdout.splitlines()[-gate.tail_out:] + r.stderr.splitlines()[-gate.tail_err:]
+    tail = r.stdout.splitlines()[-gate.tail_out :] + r.stderr.splitlines()[-gate.tail_err :]
     first = tail[0] if tail else "无输出"
     if r.returncode == 0:
         ctx.rep.ok(gate.ok_msg % first)
     elif gate.severity == "warn":
-        ctx.rep.warn("%s（exit %d）：%s%s" % (gate.fail_msg, r.returncode,
-                                            " / ".join(tail[:gate.fail_tail]), gate.fail_suffix))
+        ctx.rep.warn(
+            "%s（exit %d）：%s%s" % (gate.fail_msg, r.returncode, " / ".join(tail[: gate.fail_tail]), gate.fail_suffix)
+        )
     else:
-        ctx.rep.fail("%s（exit %d）：%s%s" % (gate.fail_msg, r.returncode,
-                                            " / ".join(tail[:gate.fail_tail]), gate.fail_suffix))
+        ctx.rep.fail(
+            "%s（exit %d）：%s%s" % (gate.fail_msg, r.returncode, " / ".join(tail[: gate.fail_tail]), gate.fail_suffix)
+        )
 
 
 def _run_strict_gate(ctx, gate):
@@ -751,8 +1029,12 @@ def _run_strict_gate(ctx, gate):
     ctx.section(gate.section)
     exe = "node" if gate.runner == "node" else sys.executable
     try:
-        r = subprocess.run([exe, os.path.join(_HERE, gate.script)] + list(gate.args),
-                           capture_output=True, text=True, timeout=gate.timeout)
+        r = subprocess.run(
+            [exe, os.path.join(_HERE, gate.script)] + list(gate.args),
+            capture_output=True,
+            text=True,
+            timeout=gate.timeout,
+        )
     except Exception as e:
         ctx.rep.fail(gate.crash_msg % e)
         return
@@ -778,6 +1060,7 @@ def _run_strict_gate(ctx, gate):
 # 内联逻辑段函数（11 个非委托段 + 2 个 bespoke 委托段·W728 重构从 main() 提取）
 # ---------------------------------------------------------------------------
 
+
 def _gate_expected_version(ctx):
     """期望版本：动态取自 CHANGELOG 现役版段（W518；页脚为滞后型手工工件，降级为新鲜度检查）。"""
     ctx.section("期望版本")
@@ -785,8 +1068,7 @@ def _gate_expected_version(ctx):
     if ctx.wnum is None:
         ctx.rep.fail("CHANGELOG.md 未解析出现役版段（期望 ### W###（日期）：标题 或历史 ### vX.Y.Z（日期）：W###）")
     else:
-        ctx.rep.ok("期望批次动态取自 CHANGELOG 现役段 %sW%s"
-                   % (("v%s " % ctx.ver) if ctx.ver else "", ctx.wnum))
+        ctx.rep.ok("期望批次动态取自 CHANGELOG 现役段 %sW%s" % (("v%s " % ctx.ver) if ctx.ver else "", ctx.wnum))
 
 
 def _gate_dukou_footer(ctx):
@@ -803,12 +1085,12 @@ def _gate_dukou_footer(ctx):
     fver, fwnum = (m_f.group(1), m_f.group(2)) if m_f else (None, None)
     if fwnum:  # W711：fver 可 None（W-only 新条目）·批次键比对
         if ctx.wnum and int(fwnum) < int(ctx.wnum):
-            ctx.rep.warn("dukou-engine.html 页脚版本 %sW%s 落后于现役 W%s"
-                         "（页脚为手工工件，建议随批升版，不阻断）"
-                         % (("v%s " % fver) if fver else "", fwnum, ctx.wnum))
+            ctx.rep.warn(
+                "dukou-engine.html 页脚版本 %sW%s 落后于现役 W%s"
+                "（页脚为手工工件，建议随批升版，不阻断）" % (("v%s " % fver) if fver else "", fwnum, ctx.wnum)
+            )
         else:
-            ctx.rep.ok("dukou-engine.html footer 版本 %sW%s"
-                       % (("v%s " % fver) if fver else "", fwnum))
+            ctx.rep.ok("dukou-engine.html footer 版本 %sW%s" % (("v%s " % fver) if fver else "", fwnum))
     else:
         ctx.rep.fail("dukou-engine.html footer 未解析出 vX.Y.Z W###")
 
@@ -840,7 +1122,9 @@ def _gate_six_docs(ctx):
             if core:
                 ctx.rep.fail("%s 不含 W%s 里程碑 token（旧疾风险·核心阻断）" % (d, ctx.wnum))
             else:
-                ctx.rep.warn("%s 不含 W%s 里程碑 token（辅助文档，跑 scripts/bump_version.py 同步，不阻断）" % (d, ctx.wnum))
+                ctx.rep.warn(
+                    "%s 不含 W%s 里程碑 token（辅助文档，跑 scripts/bump_version.py 同步，不阻断）" % (d, ctx.wnum)
+                )
             continue
         ctx.rep.ok("%s 含 %sW%s" % (d, ("v%s / " % ctx.ver) if ctx.ver else "", ctx.wnum))
 
@@ -855,21 +1139,24 @@ def _gate_side_docs(ctx):
         wf_v, wf_w = parse_footer_version(wf, anchor=r"，(?:v[\d.]+\s+)?W\d+）的 GitHub")
         if wf_w:
             if ctx.wnum and int(wf_w) != int(ctx.wnum):
-                ctx.rep.fail(".github/workflows/README.md 头部版本 W%s != 现役 W%s"
-                             "（旁文档滞后，W499/W525 两次实证复发）" % (wf_w, ctx.wnum))
+                ctx.rep.fail(
+                    ".github/workflows/README.md 头部版本 W%s != 现役 W%s"
+                    "（旁文档滞后，W499/W525 两次实证复发）" % (wf_w, ctx.wnum)
+                )
             else:
-                ctx.rep.ok(".github/workflows/README.md 头部版本同步（%sW%s）"
-                           % (("v%s " % wf_v) if wf_v else "", wf_w))
+                ctx.rep.ok(
+                    ".github/workflows/README.md 头部版本同步（%sW%s）" % (("v%s " % wf_v) if wf_v else "", wf_w)
+                )
         else:
             ctx.rep.fail(".github/workflows/README.md 未解析出头部版本标记（W### 或历史 vX.Y.Z W###）")
         mw = re.search(r"W450-W(\d{3,4})", wf)
         if mw:
             if ctx.wnum and mw.group(1) != ctx.wnum:
-                ctx.rep.fail(".github/workflows/README.md 里程碑行上限 W%s != 现役 W%s（里程碑滞后）"
-                             % (mw.group(1), ctx.wnum))
+                ctx.rep.fail(
+                    ".github/workflows/README.md 里程碑行上限 W%s != 现役 W%s（里程碑滞后）" % (mw.group(1), ctx.wnum)
+                )
             else:
-                ctx.rep.ok(".github/workflows/README.md 里程碑行上限 W%s == 现役 W%s"
-                           % (mw.group(1), ctx.wnum))
+                ctx.rep.ok(".github/workflows/README.md 里程碑行上限 W%s == 现役 W%s" % (mw.group(1), ctx.wnum))
         else:
             ctx.rep.fail(".github/workflows/README.md 未找到 W450-W### 里程碑行")
 
@@ -882,8 +1169,10 @@ def _gate_scope_drift(ctx):
         doc_w += [int(x) for x in re.findall(r"W(\d{3,4})", _read(os.path.join(ROOT, a)))]
     max_w_doc = max(doc_w) if doc_w else 0
     if ctx.max_w_html > max_w_doc:
-        ctx.rep.fail("范围漂移：%s 引用到 W%d，但六文档+归档最高仅记到 W%d（疑似未记录的改动，需补记或回退）"
-                     % (os.path.basename(HTML), ctx.max_w_html, max_w_doc))
+        ctx.rep.fail(
+            "范围漂移：%s 引用到 W%d，但六文档+归档最高仅记到 W%d（疑似未记录的改动，需补记或回退）"
+            % (os.path.basename(HTML), ctx.max_w_html, max_w_doc)
+        )
     else:
         ctx.rep.ok("无范围漂移（html 最高 W%d ≤ 文档+归档最高 W%d）" % (ctx.max_w_html, max_w_doc))
 
@@ -918,11 +1207,14 @@ def _gate_a1_a6_count(ctx):
     if m_cnt:
         declared = int(m_cnt.group(1))
         if actual_total == declared:
-            ctx.rep.ok("A1-A6 真实文件计数 %d 篇 == README 声明 %d 篇（排除各板块 README.md）"
-                       % (actual_total, declared))
+            ctx.rep.ok(
+                "A1-A6 真实文件计数 %d 篇 == README 声明 %d 篇（排除各板块 README.md）" % (actual_total, declared)
+            )
         else:
-            ctx.rep.fail("A1-A6 真实文件计数 %d 篇 != README 声明 %d 篇（计数漂移，需同步 README 声明）"
-                         % (actual_total, declared))
+            ctx.rep.fail(
+                "A1-A6 真实文件计数 %d 篇 != README 声明 %d 篇（计数漂移，需同步 README 声明）"
+                % (actual_total, declared)
+            )
     else:
         # W1050：README 带 doc-sync:exempt 无「共 N 篇」声明 ⇒ fallback 对拍 AGENTS §1 的 stats 标记值
         # （stats 标记由 stats.py --w sweep 机器自动跟随·非手写字面量），两处都缺才 WARN。
@@ -931,11 +1223,15 @@ def _gate_a1_a6_count(ctx):
         if m_mark:
             declared = int(m_mark.group(1))
             if actual_total == declared:
-                ctx.rep.ok("A1-A6 真实文件计数 %d 篇 == AGENTS §1 stats 标记 %d 篇（README 无声明走 fallback 口径·排除各板块 README.md）"
-                           % (actual_total, declared))
+                ctx.rep.ok(
+                    "A1-A6 真实文件计数 %d 篇 == AGENTS §1 stats 标记 %d 篇（README 无声明走 fallback 口径·排除各板块 README.md）"
+                    % (actual_total, declared)
+                )
             else:
-                ctx.rep.fail("A1-A6 真实文件计数 %d 篇 != AGENTS §1 stats 标记 %d 篇（计数漂移·README 无声明走 fallback 口径）"
-                             % (actual_total, declared))
+                ctx.rep.fail(
+                    "A1-A6 真实文件计数 %d 篇 != AGENTS §1 stats 标记 %d 篇（计数漂移·README 无声明走 fallback 口径）"
+                    % (actual_total, declared)
+                )
         else:
             ctx.rep.warn("README 未找到 '共 N 篇' 声明且 AGENTS 无 a1_a6_docs 标记，跳过 A1-A6 计数校验")
 
@@ -959,8 +1255,10 @@ def _gate_academic_citations(ctx):
     if acad_total == 0:
         ctx.rep.warn("未发现 学术研究 轨文档，跳过显式引用门禁")
     elif acad_missing:
-        ctx.rep.fail("学术研究 轨文档 %d 篇缺显式引用（缺 '> 引用：' 学术论文索引 链接）：%s"
-                     % (len(acad_missing), ", ".join(acad_missing[:5])))
+        ctx.rep.fail(
+            "学术研究 轨文档 %d 篇缺显式引用（缺 '> 引用：' 学术论文索引 链接）：%s"
+            % (len(acad_missing), ", ".join(acad_missing[:5]))
+        )
     else:
         ctx.rep.ok("学术研究 轨文档 %d 篇均含显式引用（> 引用：学术论文索引 链接）" % acad_total)
 
@@ -986,14 +1284,12 @@ def _gate_a1_navigation(ctx):
             xm = re.search(r"\[下一回\]\(第(\d+)回", line)
             if num > 1:
                 if not pm or int(pm.group(1)) != num - 1:
-                    nav_fail.append("第%d回 上一回 -> %s（期望第%d回）"
-                                    % (num, pm.group(1) if pm else "无", num - 1))
+                    nav_fail.append("第%d回 上一回 -> %s（期望第%d回）" % (num, pm.group(1) if pm else "无", num - 1))
             elif pm:
                 nav_fail.append("第1回 不应有上一回链接")
             if num < 100:
                 if not xm or int(xm.group(1)) != num + 1:
-                    nav_fail.append("第%d回 下一回 -> %s（期望第%d回）"
-                                    % (num, xm.group(1) if xm else "无", num + 1))
+                    nav_fail.append("第%d回 下一回 -> %s（期望第%d回）" % (num, xm.group(1) if xm else "无", num + 1))
             elif xm:
                 nav_fail.append("第100回 不应有下一回链接")
     if nav_fail:
@@ -1008,18 +1304,19 @@ def _gate_docs_links(ctx):
     ctx.section("docs链接")
     try:
         r = subprocess.run(
-            [sys.executable, os.path.join(_HERE, "lint_links.py"),
-             "--dir", os.path.join(ROOT, "docs")],
-            capture_output=True, text=True, timeout=300)
+            [sys.executable, os.path.join(_HERE, "lint_links.py"), "--dir", os.path.join(ROOT, "docs")],
+            capture_output=True,
+            text=True,
+            timeout=300,
+        )
         if r.returncode == 0:
             ctx.rep.ok("docs 全量链接校验通过（lint_links 0 broken）")
         else:
             # W700 热修：tail 只捞 BROKEN/汇总行——原 stdout[-3:] 会混入 OK 行（CI 首跑实证）
-            tail = ([x for x in r.stdout.splitlines()
-                     if "[BROKEN]" in x or "校验完成" in x][-3:]
-                    + r.stderr.splitlines()[-3:])
-            ctx.rep.fail("docs 存在 broken 链接（lint_links exit %d）：%s"
-                         % (r.returncode, " / ".join(tail)))
+            tail = [x for x in r.stdout.splitlines() if "[BROKEN]" in x or "校验完成" in x][
+                -3:
+            ] + r.stderr.splitlines()[-3:]
+            ctx.rep.fail("docs 存在 broken 链接（lint_links exit %d）：%s" % (r.returncode, " / ".join(tail)))
     except Exception as e:
         ctx.rep.fail("docs 链接校验执行异常: %s" % e)
 
@@ -1042,7 +1339,7 @@ def _gate_sitemap(ctx):
         for m in re.finditer(r"<loc>([^<]+)</loc>", sm_txt):
             u = m.group(1).strip().rstrip("/")
             u = re.sub(r"^https?://[^/]+/", "", u)
-            u = u[len("xiyouji/"):] if u.startswith("xiyouji/") else u
+            u = u[len("xiyouji/") :] if u.startswith("xiyouji/") else u
             locs.add(u if u else "index.html")
         actual = set()
         for root, _dirs, fnames in os.walk(site_dir):
@@ -1054,8 +1351,10 @@ def _gate_sitemap(ctx):
         miss = sorted(expected - locs)
         extra = sorted(locs - expected)
         if miss or extra:
-            ctx.rep.fail("sitemap 与 site 不一致：缺 %d 页（%s）、多余 %d 页（%s）"
-                         % (len(miss), miss[:3], len(extra), extra[:3]))
+            ctx.rep.fail(
+                "sitemap 与 site 不一致：缺 %d 页（%s）、多余 %d 页（%s）"
+                % (len(miss), miss[:3], len(extra), extra[:3])
+            )
         else:
             ctx.rep.ok("sitemap 覆盖一致（%d 页，排除统计/预览页 %d 个）" % (len(locs), len(EXCLUDED_SM)))
     else:
@@ -1076,11 +1375,12 @@ def _gate_embedded_fallback(ctx):
                 if not EMB_RE.search(_read(os.path.join(data_dir, fn))):
                     no_emb.append(fn)
     if no_emb:
-        ctx.rep.fail("site/data 有 %d/%d 页缺内嵌回退模式（file:// 直开风险）：%s"
-                     % (len(no_emb), data_count, ", ".join(no_emb[:5])))
+        ctx.rep.fail(
+            "site/data 有 %d/%d 页缺内嵌回退模式（file:// 直开风险）：%s"
+            % (len(no_emb), data_count, ", ".join(no_emb[:5]))
+        )
     else:
-        ctx.rep.ok("site/data %d 页均含内嵌回退模式（EMBEDDED_DATA/EMBEDDED/FALLBACK/inline data）"
-                   % data_count)
+        ctx.rep.ok("site/data %d 页均含内嵌回退模式（EMBEDDED_DATA/EMBEDDED/FALLBACK/inline data）" % data_count)
 
 
 def _gate_a11y(ctx):
@@ -1097,7 +1397,10 @@ def _gate_a11y(ctx):
     try:
         r = subprocess.run(
             [sys.executable, a11y_py, "--dir", "site", "--format", "json", "--quiet"],
-            capture_output=True, text=True, timeout=300)
+            capture_output=True,
+            text=True,
+            timeout=300,
+        )
     except Exception as e:
         ctx.rep.fail("a11y 对比度门禁执行异常（判据不可执行·fail-closed·W831）: %s" % e)
         return
@@ -1107,8 +1410,7 @@ def _gate_a11y(ctx):
         # 跳过不是「判据不可执行」，直接返回，不重复上报。
         return
     if r.returncode != 0:
-        ctx.rep.fail("a11y_audit 失败（exit %d）：%s"
-                     % (r.returncode, (r.stderr or r.stdout).splitlines()[-1:]))
+        ctx.rep.fail("a11y_audit 失败（exit %d）：%s" % (r.returncode, (r.stderr or r.stdout).splitlines()[-1:]))
         return
     try:
         rep = json.loads(r.stdout)
@@ -1131,6 +1433,7 @@ def _gate_a11y(ctx):
 # 收尾（health 探活 / 段自洽锁 / 汇总退出码）
 # ---------------------------------------------------------------------------
 
+
 def _probe_health(rep):
     """可选 RAG /health 探活（仅告警，不阻断；WARN 直印不计入 warns 计数）。"""
     if "--health" in sys.argv:
@@ -1147,20 +1450,30 @@ def _check_section_lock(ctx):
 
     W698 scope 分级：非 full 档按生效子集断言，full 档仍断言全量 46 段。
     """
-    expected_sections = list(EXPECTED_SECTION_NAMES) if ctx.scope == "full" else \
-        [n for n in EXPECTED_SECTION_NAMES if n in ctx.active_sections]
+    expected_sections = (
+        list(EXPECTED_SECTION_NAMES)
+        if ctx.scope == "full"
+        else [n for n in EXPECTED_SECTION_NAMES if n in ctx.active_sections]
+    )
     ran_set = set(ctx.sections_ran)
     missing_sections = [n for n in expected_sections if n not in ran_set]
     # W781 R-1：补反向查（实跑多出声明外段=挂槽漏 EXPECTED·旧单向查放过了第 45 槽实证）
     extra_sections = [n for n in dict.fromkeys(ctx.sections_ran) if n not in set(EXPECTED_SECTION_NAMES)]
     if missing_sections or extra_sections:
-        ctx.rep.fail("门禁段实跑 %d ≠ 声明 %d：缺 %s 多 %s（VERIFY_SECTIONS 自洽锁·--scope %s）"
-                     % (len(ran_set), len(expected_sections),
-                        "、".join(missing_sections) or "无", "、".join(extra_sections) or "无",
-                        ctx.scope))
+        ctx.rep.fail(
+            "门禁段实跑 %d ≠ 声明 %d：缺 %s 多 %s（VERIFY_SECTIONS 自洽锁·--scope %s）"
+            % (
+                len(ran_set),
+                len(expected_sections),
+                "、".join(missing_sections) or "无",
+                "、".join(extra_sections) or "无",
+                ctx.scope,
+            )
+        )
     else:
-        ctx.rep.ok("门禁段自洽锁：实跑 %d 段 == 声明 %d 段（--scope %s）"
-                   % (len(ran_set), len(expected_sections), ctx.scope))
+        ctx.rep.ok(
+            "门禁段自洽锁：实跑 %d 段 == 声明 %d 段（--scope %s）" % (len(ran_set), len(expected_sections), ctx.scope)
+        )
 
 
 def _print_summary(rep, profile=False):
@@ -1174,7 +1487,10 @@ def _print_summary(rep, profile=False):
             print("  %-16s %7.2fs  %5.1f%%  %s" % (name, sec, pct, "#" * max(1, int(pct / 2))))
         if len(rows) > 12:
             rest = sum(v for _, v in rows[12:])
-            print("  %-16s %7.2fs  %5.1f%%  （其余 %d 段）" % ("…其余", rest, rest / tot * 100 if tot else 0, len(rows) - 12))
+            print(
+                "  %-16s %7.2fs  %5.1f%%  （其余 %d 段）"
+                % ("…其余", rest, rest / tot * 100 if tot else 0, len(rows) - 12)
+            )
     print("\n==== 交付校验汇总 ====")
     if rep.fails == 0:
         print("核心全部通过 ✅" + ("（%d 项辅助 WARN，不阻断）" % rep.warns if rep.warns else ""))

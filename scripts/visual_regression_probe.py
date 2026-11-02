@@ -76,34 +76,68 @@ PROBE_PAGES = (
     # 首页 1
     "index.html",
     # 根页 4
-    "guide.html", "dashboard.html", "curated.html", "404.html",
+    "guide.html",
+    "dashboard.html",
+    "curated.html",
+    "404.html",
     # data 8（含两张重 DOM 图表页·SVG 子元素在口径内）
-    "data/character-relationship-3d.html", "data/relationships.html",
-    "data/timeline.html", "data/text-search.html", "data/chapter-stats.html",
-    "data/tag-cloud.html", "data/cross-time-danmaku.html", "data/hardship-heatmap.html",
+    "data/character-relationship-3d.html",
+    "data/relationships.html",
+    "data/timeline.html",
+    "data/text-search.html",
+    "data/chapter-stats.html",
+    "data/tag-cloud.html",
+    "data/cross-time-danmaku.html",
+    "data/hardship-heatmap.html",
     # reader 4（跨卷 spread）
-    "reader/ch001.html", "reader/ch030.html", "reader/ch060.html", "reader/ch081.html",
+    "reader/ch001.html",
+    "reader/ch030.html",
+    "reader/ch060.html",
+    "reader/ch081.html",
     # en 4（与中文页同构·双主题在英文面同样证明）
-    "en/relationships.html", "en/timeline.html", "en/text-search.html",
+    "en/relationships.html",
+    "en/timeline.html",
+    "en/text-search.html",
     "en/character-relationship-3d.html",
 )
 
 # 计算样式采集属性（固定序·diff 按索引对拍）
 PROPS = (
-    "color", "background-color", "font-size", "font-family", "line-height",
-    "padding-top", "padding-right", "padding-bottom", "padding-left",
-    "margin-top", "margin-right", "margin-bottom", "margin-left",
-    "border-top-width", "border-top-style", "border-top-color",
-    "border-right-width", "border-right-style", "border-right-color",
-    "border-bottom-width", "border-bottom-style", "border-bottom-color",
-    "border-left-width", "border-left-style", "border-left-color",
-    "border-top-left-radius", "border-top-right-radius",
-    "border-bottom-left-radius", "border-bottom-right-radius",
+    "color",
+    "background-color",
+    "font-size",
+    "font-family",
+    "line-height",
+    "padding-top",
+    "padding-right",
+    "padding-bottom",
+    "padding-left",
+    "margin-top",
+    "margin-right",
+    "margin-bottom",
+    "margin-left",
+    "border-top-width",
+    "border-top-style",
+    "border-top-color",
+    "border-right-width",
+    "border-right-style",
+    "border-right-color",
+    "border-bottom-width",
+    "border-bottom-style",
+    "border-bottom-color",
+    "border-left-width",
+    "border-left-style",
+    "border-left-color",
+    "border-top-left-radius",
+    "border-top-right-radius",
+    "border-bottom-left-radius",
+    "border-bottom-right-radius",
     # SVG 颜色属性（W1090 纳入）：原属性集不含 stroke/fill ⇒ 图表颜色变化
     # 在 J2「零差异」报告里根本测不出（E-82）⇒ 纳入后 J2 才具备颜色证据力。
     # 非 SVG 元素这两个属性返回空串 ⇒ 不影响既有对拍；SVG 元素返回计算值
     # （fill 默认 rgb(0, 0, 0)·stroke 默认 none）。
-    "stroke", "fill",
+    "stroke",
+    "fill",
     # W1097 纳入 filter：暗色亮度补偿（`svg path[fill^="#"] { filter: brightness(...) }`）
     # 是**按 content attribute 值匹配**的规则 ⇒ 把硬编码色换成 var(--chart-N) 后
     # 该规则不再命中 ⇒ 补偿消失是真实视觉变化 ⇒ 采集面必须含 filter 才测得到。
@@ -133,7 +167,8 @@ _CAPTURE_JS = """
 # 总帽 QUIESCE_CAP_MS 防永动页（持续注入类）把采集挂死。
 _QUIESCE_CAP_MS = 15000
 
-_QUIESCE_JS = """
+_QUIESCE_JS = (
+    """
 (quietMs) => new Promise((resolve) => {
   const finish = () => { obs.disconnect(); resolve(); };
   let timer = setTimeout(finish, quietMs);
@@ -145,7 +180,9 @@ _QUIESCE_JS = """
               {subtree: true, childList: true, attributes: true, characterData: true});
   setTimeout(finish, %d);  // 总帽：永动页不至于把采集挂死
 })
-""" % _QUIESCE_CAP_MS
+"""
+    % _QUIESCE_CAP_MS
+)
 
 
 def _file_url(path):
@@ -166,8 +203,7 @@ def _capture_one(page, path, floor_ms=0, quiet_ms=400):
     return page.evaluate(_CAPTURE_JS)
 
 
-def capture(paths, themes=("light", "dark"), floor_ms=15000, quiet_ms=400,
-            isolate=False):
+def capture(paths, themes=("light", "dark"), floor_ms=15000, quiet_ms=400, isolate=False):
     """采集快照。paths: [(rel, abspath)]。返回快照 dict。
 
     缺页/浏览器不可用即抛（调用方转 SystemExit）——宁缺勿假。
@@ -179,18 +215,20 @@ def capture(paths, themes=("light", "dark"), floor_ms=15000, quiet_ms=400,
     try:
         from playwright.sync_api import sync_playwright  # noqa: WPS433
     except ImportError as e:
-        raise SystemExit(
-            "playwright 不可用（%s）——J2 探针拒绝在无浏览器环境下出具「通过」结论" % e
-        ) from None
+        raise SystemExit("playwright 不可用（%s）——J2 探针拒绝在无浏览器环境下出具「通过」结论" % e) from None
     snap = {
         "schema": SCHEMA,
         "captured_at": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
         "props": list(PROPS),
         "themes": list(themes),
         "pages": {},
-        "meta": {"page_count": len(paths), "floor_ms": floor_ms,
-                 "quiet_ms": quiet_ms, "quiesce_cap_ms": _QUIESCE_CAP_MS,
-                 "isolate": bool(isolate)},
+        "meta": {
+            "page_count": len(paths),
+            "floor_ms": floor_ms,
+            "quiet_ms": quiet_ms,
+            "quiesce_cap_ms": _QUIESCE_CAP_MS,
+            "isolate": bool(isolate),
+        },
     }
     # W1090：本函数的嵌套层级为既存结构（for → with → try → for → with），
     # 非本批引入；因文件被改动而被结构档整体扫出 ⇒ 显式豁免并在此说明。
@@ -205,11 +243,9 @@ def capture(paths, themes=("light", "dark"), floor_ms=15000, quiet_ms=400,
                     if isolate:
                         # 每页独立 context：localStorage 隔离（见 docstring「采样顺序依赖」）
                         ctx.close()
-                        ctx = browser.new_context(reduced_motion="reduce",
-                                                  color_scheme=scheme)
+                        ctx = browser.new_context(reduced_motion="reduce", color_scheme=scheme)
                         page = ctx.new_page()
-                    els = _capture_one(page, abspath, floor_ms=floor_ms,
-                                       quiet_ms=quiet_ms)
+                    els = _capture_one(page, abspath, floor_ms=floor_ms, quiet_ms=quiet_ms)
                     snap["pages"].setdefault(rel, {})[theme] = els
                 ctx.close()
         finally:
@@ -243,8 +279,7 @@ def _diff_snapshots(before, after, max_report=20):
     notes = []
     sb, sa = before.get("schema"), after.get("schema")
     if sb != sa:
-        notes.append("快照版本不同（before schema=%s·after schema=%s）⇒ 不可比·"
-                     "请用同一版本重采基线" % (sb, sa))
+        notes.append("快照版本不同（before schema=%s·after schema=%s）⇒ 不可比·请用同一版本重采基线" % (sb, sa))
         return diffs, notes
     bp, ap = before.get("pages", {}), after.get("pages", {})
     if set(bp) != set(ap):
@@ -258,8 +293,7 @@ def _diff_snapshots(before, after, max_report=20):
         for theme in sorted(set(bp[rel]) & set(ap[rel])):
             eb, ea = bp[rel][theme], ap[rel][theme]
             if len(eb) != len(ea):
-                diffs.append({"page": rel, "theme": theme, "kind": "元素数",
-                              "before": len(eb), "after": len(ea)})
+                diffs.append({"page": rel, "theme": theme, "kind": "元素数", "before": len(eb), "after": len(ea)})
                 # 不短路：计数差异曾把属性对拍整个掩盖（W851 实证）——
                 # 公共前缀仍按索引逐属性比，多退少补都显形
                 # W1097：元素数差异时输出**身份多重集差集** ⇒ 二分「采集抖动」与「真实增删」。
@@ -274,7 +308,7 @@ def _diff_snapshots(before, after, max_report=20):
                 # 零差异；而 10 页批量基线与单页复采相差 1 ⇒ 差在**采样面**，不在改动。
                 _idb = Counter((r[0], r[1]) for r in eb)
                 _ida = Counter((r[0], r[1]) for r in ea)
-                _db = _idb - _ida   # Counter 差集只保留正计数
+                _db = _idb - _ida  # Counter 差集只保留正计数
                 _da = _ida - _idb
                 if _db and _da:
                     _verdict = "真实增删（身份集变化）"
@@ -284,23 +318,56 @@ def _diff_snapshots(before, after, max_report=20):
                     _verdict = "同身份元素数量减少（抖动·漏采一个副本）"
                 else:
                     _verdict = "数量差异但身份多重集相同（不可达·防御分支）"
-                diffs.append({"page": rel, "theme": theme, "kind": "元素身份差集",
-                              "仅before有": sorted(_db.elements())[:5],
-                              "仅after有": sorted(_da.elements())[:5],
-                              "判定": _verdict})
+                diffs.append(
+                    {
+                        "page": rel,
+                        "theme": theme,
+                        "kind": "元素身份差集",
+                        "仅before有": sorted(_db.elements())[:5],
+                        "仅after有": sorted(_da.elements())[:5],
+                        "判定": _verdict,
+                    }
+                )
             for i, (rb, ra) in enumerate(zip(eb, ea, strict=False)):
                 if rb == ra:
                     continue
                 if rb[:2] != ra[:2]:
-                    diffs.append({"page": rel, "theme": theme, "index": i,
-                                  "kind": "元素身份", "before": rb[:2], "after": ra[:2]})
+                    # W1105：身份变化时**仍按索引配对补属性比拍**——
+                    # 原实现只记身份差异就跳过属性 ⇒ 类名改写（如 tooltip →
+                    # chart-tooltip）会把该元素的实质视觉变化（底色/边框/字体族/
+                    # 字号）整体掩盖在「元素身份」一条里 ⇒ J2 报告读起来像
+                    # 「仅改名、无视觉影响」⇒ 判读者漏掉真实视觉变更。
+                    # 身份不同但 index 相同 ⇒ 元素在文档序上对应 ⇒ 属性可按索引配对比。
+                    _pd = {}
+                    for pi in range(2, min(len(rb), len(ra))):
+                        if rb[pi] != ra[pi]:
+                            _pd[PROPS[pi - 2]] = [rb[pi], ra[pi]]
+                    diffs.append(
+                        {
+                            "page": rel,
+                            "theme": theme,
+                            "index": i,
+                            "kind": "元素身份" + ("+属性" if _pd else ""),
+                            "before": rb[:2],
+                            "after": ra[:2],
+                            "属性差异": _pd,
+                        }
+                    )
                 else:
                     for pi in range(2, min(len(rb), len(ra))):
                         if rb[pi] != ra[pi]:
-                            diffs.append({"page": rel, "theme": theme, "index": i,
-                                          "kind": "属性",
-                                          "element": rb[:2], "prop": PROPS[pi - 2],
-                                          "before": rb[pi], "after": ra[pi]})
+                            diffs.append(
+                                {
+                                    "page": rel,
+                                    "theme": theme,
+                                    "index": i,
+                                    "kind": "属性",
+                                    "element": rb[:2],
+                                    "prop": PROPS[pi - 2],
+                                    "before": rb[pi],
+                                    "after": ra[pi],
+                                }
+                            )
                 if len(diffs) >= max_report:
                     notes.append("差异已达 %d 条上限·截断（修完再复跑）" % max_report)
                     return diffs, notes
@@ -316,7 +383,8 @@ def _load(path):
 _LATE_MUTATION_SCRIPT = (
     "<script>setTimeout(function(){var d=document.createElement('div');"
     "d.className='late';d.style.cssText='width:10px;height:10px';"
-    "document.body.appendChild(d);},600);</script>")
+    "document.body.appendChild(d);},600);</script>"
+)
 
 
 def _self_test():
@@ -335,8 +403,8 @@ def _self_test():
                 "<!DOCTYPE html><html><head><meta charset='utf-8'><style>"
                 ":root{--probe-token:%s;}"
                 ".box{color:var(--probe-token);background-color:#ffffff;padding:8px;}"
-                "</style></head><body><div class='box'>探针</div>%s</body></html>"
-                % (token_value, late_script))
+                "</style></head><body><div class='box'>探针</div>%s</body></html>" % (token_value, late_script)
+            )
 
     try:
         from playwright.sync_api import sync_playwright  # noqa: WPS433
@@ -359,18 +427,20 @@ def _self_test():
 
         write_html("#445566")
         s3 = cap()
-        d, _n = _diff_snapshots(
-            {"pages": {"p": {"light": s1}}}, {"pages": {"p": {"light": s3}}})
-        hit = any(x.get("prop") == "color" and x.get("before") == "rgb(17, 34, 51)"
-                  and x.get("after") == "rgb(68, 85, 102)" for x in d)
+        d, _n = _diff_snapshots({"pages": {"p": {"light": s1}}}, {"pages": {"p": {"light": s3}}})
+        hit = any(
+            x.get("prop") == "color" and x.get("before") == "rgb(17, 34, 51)" and x.get("after") == "rgb(68, 85, 102)"
+            for x in d
+        )
         cases.append(("T2 注入令牌重定义 → 定位到 color 差异（防假绿）", hit))
 
         # T4：晚期 mutation（600ms 后追加可见元素）——静默收敛必须等在采集之前
         write_html("#112233", _LATE_MUTATION_SCRIPT)
         s4a, s4b = cap(), cap()
         has_late = any(r[0] == "div" and "late" in r[1] for r in s4a)
-        cases.append(("T4 晚期 mutation 两采一致且落入采样（收敛前置）",
-                      s4a == s4b and has_late and len(s4a) == len(s1) + 1))
+        cases.append(
+            ("T4 晚期 mutation 两采一致且落入采样（收敛前置）", s4a == s4b and has_late and len(s4a) == len(s1) + 1)
+        )
 
         ctx.close()
         browser.close()
@@ -401,12 +471,15 @@ def main(argv):
     c.add_argument("--out", required=True)
     c.add_argument("--theme", default="both", choices=["light", "dark", "both"])
     c.add_argument("--pages", default="", help="逗号分隔子集（默认 J2 全量 21 页）")
-    c.add_argument("--wait", type=int, default=400,
-                   help="DOM 静默窗 ms（默认 400·总帽 15s）")
-    c.add_argument("--floor", type=int, default=15000,
-                   help="采集前固定地板等待 ms（覆盖 chart-audit 修复波·最远 14s·默认 15000）")
-    c.add_argument("--isolate", action="store_true",
-                   help="每页独立 context（隔离 localStorage·读本地存储的页面需前后两拍同用此模式）")
+    c.add_argument("--wait", type=int, default=400, help="DOM 静默窗 ms（默认 400·总帽 15s）")
+    c.add_argument(
+        "--floor", type=int, default=15000, help="采集前固定地板等待 ms（覆盖 chart-audit 修复波·最远 14s·默认 15000）"
+    )
+    c.add_argument(
+        "--isolate",
+        action="store_true",
+        help="每页独立 context（隔离 localStorage·读本地存储的页面需前后两拍同用此模式）",
+    )
 
     d = sub.add_parser("diff", help="对拍前后快照")
     d.add_argument("before")
@@ -416,15 +489,13 @@ def main(argv):
     if ns.cmd == "capture":
         rels = [r.strip() for r in ns.pages.split(",") if r.strip()] or list(PROBE_PAGES)
         themes = ("light", "dark") if ns.theme == "both" else (ns.theme,)
-        snap = capture(_resolve_pages(rels), themes=themes, floor_ms=ns.floor,
-                       quiet_ms=ns.wait, isolate=ns.isolate)
+        snap = capture(_resolve_pages(rels), themes=themes, floor_ms=ns.floor, quiet_ms=ns.wait, isolate=ns.isolate)
         os.makedirs(os.path.dirname(os.path.abspath(ns.out)), exist_ok=True)
         with open(ns.out, "w", encoding="utf-8", newline="\n") as f:
             json.dump(snap, f, ensure_ascii=False, separators=(",", ":"))
             f.write("\n")
         n = sum(len(v[t]) for v in snap["pages"].values() for t in v)
-        print("已采集 %d 页 × %d 主题 · %d 元素 → %s"
-              % (len(snap["pages"]), len(themes), n, ns.out))
+        print("已采集 %d 页 × %d 主题 · %d 元素 → %s" % (len(snap["pages"]), len(themes), n, ns.out))
         return 0
 
     # diff
@@ -444,8 +515,10 @@ def main(argv):
         print("J2 FAIL：现役页面计算样式非零差异——「视觉零变化」不成立")
         return 1
     total = sum(len(v[t]) for v in before.get("pages", {}).values() for t in v)
-    print("---- J2 视觉回归：零差异（%d 页 × %s 主题 · %d 元素逐属性对拍）----"
-          % (len(before.get("pages", {})), "+".join(before.get("themes", [])), total))
+    print(
+        "---- J2 视觉回归：零差异（%d 页 × %s 主题 · %d 元素逐属性对拍）----"
+        % (len(before.get("pages", {})), "+".join(before.get("themes", [])), total)
+    )
     print("J2 PASS")
     return 0
 

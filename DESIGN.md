@@ -58,6 +58,17 @@
 
 ### 2.2 扩展 Token（v0.9.1 Name That UI 迁移新增）
 
+> **令牌归属说明（W1105 审计订正）**：本节所列 15 个扩展令牌**不在 `site/tokens.css`** 中——
+> 它们是**页面私有变量**（各仅在 1 个页面内联声明），因此**不受单一事实源约束**，
+> 令牌对账门禁（`check_design_doc_drift.py`）以「页面本地声明白名单」放行 ⇒
+> **本节不构成「已定义在公共令牌源」的承诺**。
+>
+> 现役消费面实测（site/ 全量 `var()` 引用）：`--badge-*` 8 个各 2 页 · `--cross-table-*` 2 个各 3 页 ·
+> `--focus-ring-clear` 2 页；**`--focus-ring-accent` 与 `--focus-ring-accent-soft` 在 site/ 页面零消费**
+> （仅本文件下方的示例代码段引用）⇒ 二者为**死令牌**，建议后续迁入 `tokens.css` 或连同示例一并移除。
+>
+> 消费面实测命令与逐项数字见 `docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md`。
+
 ```css
 :root {
     /* badge tokens */
@@ -514,7 +525,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 ### 4A.8 体积预算红线
 
-- tokens.css 与 system.css 内联进约 225 页（data+EN），**每 +1KB = 全站 +225KB**。
+- tokens.css 与 system.css 内联进现役 **330 页**（data 88 / EN 138 / reader 102 / 根页 2·实测按「<style> 内含 `--bg:` 且含 `Noto Serif SC`」判定·W1105 实测），**每 +1KB = 全站 +330KB**。
 - Phase E 预算：system ≤ +6KB（18.9→≤24.9KB）；每批以 `wc -c` 复核并写入批次记录。
 - **tokens 预算（W851 上调 +2KB → +3KB）**：现役基线 20,799 B（W476 纸感层后实测）→ 上限 **23,799 B**。Phase E 原「tokens ≤ +2KB（5.7→≤7.7KB）」为 v3 前口径，W476 增层后未同步，已废止；v4 令牌增量（W851 落地 +2,240 B）按新预算验收（J4）。
 - 超预算时砍微交互工具类，不砍色彩/海拔令牌；perf-budget html 分项 50KB 逐批复核。
@@ -522,7 +533,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   追溯，计**毛重**；`inline_css.py` 在传播为每页内联副本时剥离块注释（`strip_comments`），页内实际
   字节计**净重**。本预算的约束对象是「每页内联体积」（见上条 +225KB/KB），注释对渲染零贡献，
   故**达标判据以净重为准**——源文件可继续用注释承载设计决策，不为压数字牺牲可追溯性。
-- **现役实测**：system 毛重 28,441 B / 净重 23,052 B（≤24.9KB 上限·达标）；tokens 毛重 23,039 B /
+- **现役实测**：system 毛重 29,353 B / 净重 23,541 B（≤24.9KB 上限·达标·用项目自身 `inline_css.strip_comments` 口径复算·W1105 订正旧值 28,441/23,052）；tokens 毛重 23,039 B /
   净重 16,245 B（≤23,799 B 上限·达标）。单页内联块由 51,504 B 降至 39,323 B（-23.7%），
   `check_inlined_css.py` 下限 20,000 B 仍有 96% 余量。
 
@@ -532,7 +543,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 **阶段 1（W851·令牌落地·纯加法）**：v4 令牌增量落进 `site/tokens.css`，现役页面视觉零变化。
 
-- **只落零消费新名**：34 个新名 / 35 处定义（间距刻度 13 + 语义 gap 6 + 容器三档 3 + 栅格 2 + 排版角色 9 + `--accent-text` 浅暗各 1）。J1 机检（`scripts/j1_name_audit.py`）：与现役名（tokens.css / system.css / 全页面内联）交集 0、页面内联抢先定义 0、全站 `var()` 引用 0。
+- **落成时的状态（历史事实·保留）**：34 个新名 / 35 处定义（间距刻度 13 + 语义 gap 6 + 容器三档 3 + 栅格 2 + 排版角色 9 + `--accent-text` 浅暗各 1）。J1 机检（`scripts/j1_name_audit.py`）在**落成当批**验证：与现役名交集 0、页面内联抢先定义 0、全站 `var()` 引用 0。
 - **撞名项显式 defer**：`--chart-1..6` 重述（`--chart-3` 改值命中 42 消费页）、`--accent-soft` 重述（332 消费页·同值空转）、暗色 `--accent` 改值、暗色 `--chart-3/5` 新增——按 J1「同名即语义改变 → 破坏纯加法」拆出，随迁移批逐页 proof 后再落。
 - **视觉零变化证明（J2）**：`scripts/visual_regression_probe.py` 对 23 页（J2 采样 21 + 预支引用页 2）浅暗双主题、15s 地板等待 + DOM 静默收敛后采集 computed style 前后对拍，差异 0。
 - **预支引用处置**：`journey-geo-semiotics` 中英两页曾以 `var(--space-N, 回退值)` 预支 v4 名（回退值与终稿刻度不一致·落地即改渲染）——W851 冻结为当前字面值（渲染零变化），令牌 adoption 随该页迁移批执行。
@@ -541,6 +552,21 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 - **机器可读导出**：`docs/00-导读/design.md` 与 `scripts/output/design-tokens.json` 由 `export_design_tokens.py` 从 tokens.css 再生成（反篡改比对·落地同批同步）。
 
 **阶段 2+（迁移批·每批 ≤10 页·W826 §6）**：根页与入口 8 页（B1）先行，随后 reader 与 data 分批；每批前后各采一次 J2 快照，消费新令牌的页面同时承载 defer 的改值项。
+
+**现况口径（W1105 订正·「零消费」断言已失效）**：阶段 1 当批的「全站 `var()` 引用 0」是**落成时的历史事实**，
+此后迁移批已逐步消费 v4 令牌 ⇒ 现役实测（855 页全量·位置级剔除内联副本后统计）：
+
+| 令牌族 | 现役消费页数 | 状态 |
+|---|---:|---|
+| `--space-*`（间距刻度 13） | **854** / 855 | 已大面积落地 |
+| `--container-*`（容器三档 3） | **639** / 855 | 已落地 |
+| `--gap-*`（语义 gap 6） | **0** | **仍未启用** |
+| `--type-*`（排版角色 9） | **0** | **仍未启用** |
+| `--grid-*`（栅格 2） | **0** | **仍未启用** |
+
+⇒ **数值刻度族已启用、语义角色族完全未启用**（设计语言的核心恰在后者）⇒ 阶段 2+ 的迁移批
+应以**语义角色族（gap / type / grid）**为主目标，而非继续扩数值刻度消费面。
+（实测口径与命令见 `docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md` §二 C）
 
 ---
 

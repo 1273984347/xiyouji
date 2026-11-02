@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-03 01:06
+生成时间：2026-11-03 02:14
 
-共 **165** 件（门禁与校验 73 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 64 · 一次性（下划线前缀） 6）
+共 **166** 件（门禁与校验 74 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 64 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（73）
+## 门禁与校验（74）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -22,6 +22,7 @@
 | `check_chart_colorblind.py` | check_chart_colorblind.py — 第 29 门禁 · 图表配色色盲安全（PD-1a · W653） |
 | `check_chart_data.py` | check_chart_data.py — 图表静态自洽门禁（W551 挂载·verify_delivery 第 24 门禁）。 |
 | `check_chart_degrade.py` | check_chart_degrade.py — 第 30 门禁 · 窄屏降级声明（PD-1b · W654） |
+| `check_chart_design_parity.py` | check_chart_design_parity.py — chart-design 中英对拍检查（W1105·design 审查 P3-9） |
 | `check_chart_values.js` | 视图载体意图（静态签名·用于把「本来就没有图表的结构页」判 na 而非假红） |
 | `check_citability.py` | 第 28 门禁 · 可视化可引用性检查（check_citability.py） |
 | `check_citations.py` | 原著引文硬验证（W503 第 20 门禁·W737 扩展三检）：规范引文行 + 归属对白 + 语料保真。 |
