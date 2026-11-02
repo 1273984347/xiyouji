@@ -2,7 +2,7 @@
 
 > **来源**：用户 2026-11-02 三项指令（统一 INDEX/index 大小写 / 审查所有 design 文件 / 归档系统文件内容归档）⇒ 本批为三合一治理批。
 >
-> - **文件**：scripts/gen_folder_docs.py · scripts/check_folder_docs.py · scripts/check_repo_layout.py · scripts/docs_index.py · tests/unit/test_folder_docs_gate.py · scripts/output/_w1091_spec.json · docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md
+> - **文件**：scripts/gen_folder_docs.py · scripts/check_folder_docs.py · scripts/check_repo_layout.py · scripts/docs_index.py · tests/unit/test_folder_docs_gate.py · scripts/output/_w1096_spec.json · docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md
 
 **本批要点**：
 
