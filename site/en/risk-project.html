@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Fc1+4of9utzORHTOTIEp2aRcHp+p63zTVu3ZF5IsojY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-KlpCCy78M0Xnt4GiCjhfvg5Td7tCBBS5QW1ZI12+o7M=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Risk Assessment &amp; Project Management · Annotated Journey to the West</title>
@@ -2307,7 +2307,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         g.append('path')
             .datum(thresholdData)
             .attr('fill', 'none')
-            .attr('stroke', '#c8463a')
+            .attr('stroke', 'var(--chart-1)')
             .attr('stroke-width', 1.5)
             .attr('stroke-dasharray', '6,4')
             .attr('opacity', 0.7)
@@ -2330,13 +2330,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         g.append('text').attr('class', 'axis-label')
             .attr('x', w / 2).attr('y', h + 44)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#c8463a')
+            .attr('fill', 'var(--chart-1)')
             .text('probability (0-10)');
         g.append('text').attr('class', 'axis-label')
             .attr('transform', 'rotate(-90)')
             .attr('x', -h / 2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#c8463a')
+            .attr('fill', 'var(--chart-1)')
             .text('impact (0-10)');
 
         // 散点
@@ -2424,13 +2424,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('transform', 'rotate(-90)')
             .attr('x', -h / 2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#c8463a')
+            .attr('fill', 'var(--chart-1)')
             .text('count (tribulations)');
         g.append('text').attr('class', 'axis-label')
             .attr('transform', 'rotate(-90)')
             .attr('x', -h / 2).attr('y', w + 52)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#3a6b8c')
+            .attr('fill', 'var(--chart-2)')
             .text('avg_probability / avg_impact (%)');
 
         const colors = {
@@ -2642,7 +2642,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         g.append('line')
             .attr('x1', x(7)).attr('x2', x(7))
             .attr('y1', 0).attr('y2', h)
-            .attr('stroke', '#c8463a')
+            .attr('stroke', 'var(--chart-1)')
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4,4')
             .attr('opacity', 0.5);
