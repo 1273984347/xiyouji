@@ -32,7 +32,6 @@
 | docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1094 | 治理文档 |
 | docs/INDEX.md | W1094 | 治理文档 |
 | scripts/output/README.md | W1094 | 本批工具/产物 |
-| scripts/output/_w1091_spec.json | W1094 | 本批工具/产物 |
 | scripts/output/index.md | W1094 | 本批工具/产物 |
 | scripts/output/stats-changelog.json | W1094 | 本批工具/产物 |
 | scripts/output/stats-index.md | W1094 | 本批工具/产物 |
@@ -58,6 +57,8 @@
 | site/dukou-engine.html | W1094 | 页面 |
 | site/index.html | W1094 | 页面 |
 | scripts/output/_vermilion_solid_cache.json | W1094 | 本批工具/产物 |
+| scripts/output/_w1091_spec.json | W1094 | 本批工具/产物 |
+| scripts/output/_w1095_spec.json | W1094 | 本批工具/产物 |
 
 ## W1090 J2 视觉回归探针扩展（2026-11-02）
 
