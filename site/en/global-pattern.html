@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-BtNayKel0y29bVQ2AYq748SRD4GmmDxNEt3Qar316UE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-MjPRLuGmhfgpUfJHaSM1rNOaVAKmKbFDINMnk8g9eNM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Global Pilgrim Family · Annotated Journey to the West</title>
@@ -1646,6 +1646,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
 <div class="chart-tooltip" id="tooltip"></div>
 <script>
 
@@ -1944,7 +1948,7 @@ function renderTreemap(opts){
             .attr("stroke-width", 2)
             .style("opacity", 0)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 90)
             .style("opacity", 1);
 

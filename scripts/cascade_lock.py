@@ -22,6 +22,7 @@ safe_commit 只**读锁状态提示**，不阻塞提交（提交互斥已由 pat
   py -3 scripts/cascade_lock.py --status
   py -3 scripts/cascade_lock.py --self-test
 """
+
 from __future__ import annotations
 
 import argparse
@@ -31,7 +32,37 @@ import sys
 import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOCK = os.path.join(ROOT, ".git", "cascade.lock")
+
+
+def _git_dir():
+    """真实 git 目录（worktree 兼容·W1105 实证）。
+
+    主工作树里 `.git` 是**目录** ⇒ 锁落在 `ROOT/.git/cascade.lock`；
+    但 **git worktree 里 `.git` 是一个文件**（内容 `gitdir: <真实 gitdir>`）⇒
+    `os.open(ROOT/.git/cascade.lock)` 必然 ENOTDIR（`FileNotFoundError`）⇒
+    级联 --apply 在任何 worktree 里都无法取锁（W1105 实测：级联 10 面断言全通过、
+    落盘前取锁即崩）。正解 = 顺着 `.git` 文件的 `gitdir:` 指针解析**真实 gitdir**
+    （`<主仓>/.git/worktrees/<name>`·真实目录·可写）⇒ 锁语义不变（仍是跨进程互斥），
+    只是落点从「假目录」改为「真实 gitdir」。主工作树路径保持原样 ⇒ 零行为变更。
+    """
+    p = os.path.join(ROOT, ".git")
+    if os.path.isdir(p):
+        return p
+    try:
+        with open(p, encoding="utf-8") as fh:
+            for line in fh:
+                if line.startswith("gitdir:"):
+                    gd = line.split(":", 1)[1].strip()
+                    if not os.path.isabs(gd):
+                        gd = os.path.join(ROOT, gd)
+                    if os.path.isdir(gd):
+                        return gd
+    except OSError:
+        pass
+    return p
+
+
+LOCK = os.path.join(_git_dir(), "cascade.lock")
 TTL = 600.0  # 秒——级联实测量级 <2min，10 倍余量
 
 
@@ -105,6 +136,7 @@ def _read():
 def _self_test() -> int:
     """自测：原子创建 / 二次拒绝 / 释放后可再取 / 陈旧夺锁 / 损坏锁夺锁。"""
     import tempfile
+
     global LOCK
     fails = []
     old_lock = LOCK
@@ -170,8 +202,10 @@ def main() -> int:
         if ok:
             print("[LOCK] 已取得：批次 %s（pid %d）" % (args.batch, os.getpid()))
             return 0
-        print("[LOCK] 拒绝：现由 %s@%s 持有（%.0f 秒）——等级联完成或 --force"
-              % (info.get("holder"), info.get("batch"), time.time() - info.get("ts", 0)))
+        print(
+            "[LOCK] 拒绝：现由 %s@%s 持有（%.0f 秒）——等级联完成或 --force"
+            % (info.get("holder"), info.get("batch"), time.time() - info.get("ts", 0))
+        )
         return 1
     if args.release:
         ok = release(pid=args.pid)
@@ -179,8 +213,9 @@ def main() -> int:
         return 0
     held, info = status()
     if held:
-        print("[LOCK] 持有中：%s@%s（%.0f 秒）" % (info.get("holder"), info.get("batch"),
-                                                  time.time() - info.get("ts", 0)))
+        print(
+            "[LOCK] 持有中：%s@%s（%.0f 秒）" % (info.get("holder"), info.get("batch"), time.time() - info.get("ts", 0))
+        )
     else:
         print("[LOCK] 无活动锁")
     return 0

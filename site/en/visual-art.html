@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-04LEZ1BXgBx81NUrXnAMA3vor7JBJweMyeTh1tEoW2Q=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-qCm1h2QBNzkNg7e311AvZ34B03so0h5uZSjHoFRSYUI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Visual Art · The Material Form of the Heart Sutra & Scent Map · Annotated Journey to the West</title>
@@ -1982,6 +1982,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
+<script>
     // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
     const EMBEDDED = {
         heart_sutra_sculpture: {
@@ -2235,7 +2239,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         path.attr("stroke-dasharray", totalLen)
             .attr("stroke-dashoffset", totalLen)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .ease(d3.easeCubicOut)
             .attr("stroke-dashoffset", 0);
 
@@ -2259,7 +2263,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("filter", "url(#gold-glow)")
             .attr("d", d3.line().x(d => d._x).y(d => d._y).curve(d3.curveBasis))
             .style("opacity", 0)
-            .transition().delay(1500).duration(600)
+            .transition().delay(MOYUN_RM?0:1500).duration(MOYUN_RM?0:600)
             .style("opacity", 1);
 
         // 心形轮廓（金色）
@@ -2271,7 +2275,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke-width", 2.2)
             .attr("filter", "url(#gold-glow)")
             .style("opacity", 0)
-            .transition().delay(1800).duration(600)
+            .transition().delay(MOYUN_RM?0:1800).duration(MOYUN_RM?0:600)
             .style("opacity", 1);
 
         // 心形呼吸闪烁动画
@@ -2294,7 +2298,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-family", "'Noto Serif SC', serif")
             .style("opacity", 0)
             .text("Heart")
-            .transition().delay(2200).duration(400)
+            .transition().delay(MOYUN_RM?0:2200).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // 波点 + tooltip
@@ -2312,12 +2316,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke-width", 1.5)
             .style("cursor", "pointer")
             .style("filter", "drop-shadow(0 0 4px rgba(212,175,55,0.6))")
-            .transition().delay((d, i) => 200 + i * 150).duration(400)
+            .transition().delay((d, i) => 200 + i * 150).duration(MOYUN_RM?0:400)
             .attr("r", d => d.wave_amplitude >= 1.0 ? 7 : 5);
 
         g.selectAll(".wave-dot")
             .on("mouseover", function(e, d) {
-                d3.select(this).transition().duration(150).attr("r", 9);
+                d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 9);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">Chanting ${d.n} · ${d.chapter}</div>` +
                           `<div>${d.location} · ${d.context}</div>` +
@@ -2333,7 +2337,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                    .style("top", (e.clientY - rect.top - 10) + "px");
             })
             .on("mouseout", function(e, d) {
-                d3.select(this).transition().duration(150)
+                d3.select(this).transition().duration(MOYUN_RM?0:150)
                     .attr("r", d.wave_amplitude >= 1.0 ? 7 : 5);
                 tip.style("opacity", 0);
             });
@@ -2352,7 +2356,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => d.chapter.replace("Ch. ", ""))
-            .transition().delay((d, i) => 400 + i * 150).duration(400)
+            .transition().delay((d, i) => 400 + i * 150).duration(MOYUN_RM?0:400)
             .style("opacity", 0.9);
 
         g.selectAll(".wave-label-bottom")
@@ -2368,7 +2372,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-weight", "600")
             .style("opacity", 0)
             .text(d => d.location)
-            .transition().delay((d, i) => 500 + i * 150).duration(400)
+            .transition().delay((d, i) => 500 + i * 150).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // X 轴标题
@@ -2421,7 +2425,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text("↓ Deepest trough")
-                .transition().delay(1800).duration(400)
+                .transition().delay(MOYUN_RM?0:1800).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
         }
 
@@ -2436,7 +2440,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-style", "italic")
             .style("opacity", 0)
             .text("Return to zero · Buddhahood")
-            .transition().delay(2000).duration(400)
+            .transition().delay(MOYUN_RM?0:2000).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
     }
 
@@ -2591,7 +2595,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         path.attr("stroke-dasharray", totalLen + " 6")
             .attr("stroke-dashoffset", totalLen)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .ease(d3.easeCubicOut)
             .attr("stroke-dashoffset", 0)
             .on("end", function() {
@@ -2608,7 +2612,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-weight", "600")
             .style("opacity", 0)
             .text("Start · Chang'an")
-            .transition().delay(200).duration(400).style("opacity", 1);
+            .transition().delay(MOYUN_RM?0:200).duration(MOYUN_RM?0:400).style("opacity", 1);
 
         g.append("text")
             .attr("x", locations[locations.length - 1]._x)
@@ -2619,7 +2623,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-weight", "600")
             .style("opacity", 0)
             .text("End · Spirit Mountain")
-            .transition().delay(1400).duration(400).style("opacity", 1);
+            .transition().delay(MOYUN_RM?0:1400).duration(MOYUN_RM?0:400).style("opacity", 1);
 
         // 圆点（按 intensity 大小·按 category 颜色）
         const tip = d3.select("#scent-tip");
@@ -2636,12 +2640,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke-width", 2)
             .style("cursor", "pointer")
             .style("filter", "drop-shadow(0 1px 3px rgba(0,0,0,0.2))")
-            .transition().delay((d, i) => 300 + i * 100).duration(400)
+            .transition().delay((d, i) => 300 + i * 100).duration(MOYUN_RM?0:400)
             .attr("r", d => 4 + d.intensity * 1.6);
 
         g.selectAll(".scent-dot")
             .on("mouseover", function(e, d) {
-                d3.select(this).transition().duration(150)
+                d3.select(this).transition().duration(MOYUN_RM?0:150)
                     .attr("r", 4 + d.intensity * 1.6 + 3);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">No.${d.n} · ${d.location}</div>` +
@@ -2658,7 +2662,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                    .style("top", (e.clientY - rect.top - 10) + "px");
             })
             .on("mouseout", function(e, d) {
-                d3.select(this).transition().duration(150)
+                d3.select(this).transition().duration(MOYUN_RM?0:150)
                     .attr("r", 4 + d.intensity * 1.6);
                 tip.style("opacity", 0);
             });
@@ -2677,7 +2681,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", d => d._color)
             .style("opacity", 0)
             .text(d => d.location)
-            .transition().delay((d, i) => 400 + i * 100).duration(400)
+            .transition().delay((d, i) => 400 + i * 100).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // X 轴：地点序号
@@ -2694,7 +2698,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => "No." + d.n)
-            .transition().delay((d, i) => 500 + i * 100).duration(400)
+            .transition().delay((d, i) => 500 + i * 100).duration(MOYUN_RM?0:400)
             .style("opacity", 0.8);
 
         // 标题

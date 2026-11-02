@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rdsmlqsfgjs8O6C/ObXApXL5kqT8MsWd16Ac8mGgA7o=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-PimsHG0fmQnYZjcSkRbp+5UHWuupo539VdNWWPVuEIM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Philosophy and Mind · Annotated Journey to the West</title>
@@ -20,6 +20,10 @@
     <meta name="description" content="Introduction · Journey to the West as a Cultivation Allegory · One · Mind-Monkey Nature Curve · Two · Cultivation Allegory Map · Annotated Journey to the West">
     <meta property="og:description" content="Introduction · Journey to the West as a Cultivation Allegory · One · Mind-Monkey Nature Curve · Two · Cultivation Allegory Map · Annotated Journey to the West">
     <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
     <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
@@ -2605,7 +2609,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('stroke-width', 2)
             .style('cursor', 'pointer')
             .on('mouseover', function(e, d) {
-                d3.select(this).transition().duration(120).attr('d', arcHover);
+                d3.select(this).transition().duration(MOYUN_RM?0:120).attr('d', arcHover);
                 const pct = (d.data.count / total * 100).toFixed(1);
                 tooltip.show(
                     `<strong style="color:${colorOf(d.data.english_name)}">${d.data.category}</strong> · ${d.data.english_name}<br>` +
@@ -2615,7 +2619,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     `Representative hardships: ${d.data.representative_hardships.join(' · ')}`, e);
             })
             .on('mouseout', function() {
-                d3.select(this).transition().duration(120).attr('d', arcGen);
+                d3.select(this).transition().duration(MOYUN_RM?0:120).attr('d', arcGen);
                 tooltip.hide();
             });
 

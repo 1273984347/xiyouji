@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VSDq2vlnS/2rZgduJg0ym29HbfFOwTk7ZM0UuF+OZLE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-GKrKeRJl1Vlmv+Hhv6RuIXfqV6WFcEjcavRN8k64MwA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Game &amp; Web Novel · Character Card Power System · Annotated Journey to the West</title>
@@ -1962,6 +1962,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
+<script>
 
 function renderTreemap(opts){
   var tipId=opts.tipId||'tooltip';
@@ -2472,7 +2476,7 @@ function renderTreemap(opts){
                 track.append("div").attr("class", "cc-stat-fill")
                     .style("background", s.color)
                     .style("width", "0%")
-                    .transition().duration(600).ease(d3.easeCubicOut)
+                    .transition().duration(MOYUN_RM?0:600).ease(d3.easeCubicOut)
                     .style("width", (s.val / maxStat * 100) + "%");
                 row.append("div").attr("class", "cc-stat-val").text(s.val);
             });
@@ -2586,7 +2590,7 @@ function renderTreemap(opts){
                 .attr("class", "power-bar");
 
             bar.transition()
-                .delay(i * 80).duration(600)
+                .delay(i * 80).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(c.power)));
 
@@ -2600,7 +2604,7 @@ function renderTreemap(opts){
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(c.rarity + " " + c.power.toLocaleString())
-                .transition().delay(i * 80 + 600).duration(400).style("opacity", 1);
+                .transition().delay(i * 80 + 600).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             // Top 3 medal/number
             if (isTop3) {
@@ -2610,7 +2614,7 @@ function renderTreemap(opts){
                     .style("font-size", "0.95rem")
                     .style("opacity", 0)
                     .text(medal)
-                    .transition().delay(i * 80 + 700).duration(400).style("opacity", 1);
+                    .transition().delay(i * 80 + 700).duration(MOYUN_RM?0:400).style("opacity", 1);
             }
 
             bar.on("mouseover", function(e) {
@@ -2768,7 +2772,7 @@ function renderTreemap(opts){
             .attr("stroke", d => RARITY_COLORS[d.rarity])
             .attr("stroke-width", 2)
             .style("cursor", "pointer")
-            .transition().delay((d, i) => i * 80).duration(500)
+            .transition().delay((d, i) => i * 80).duration(MOYUN_RM?0:500)
             .attr("r", d => r(d.total));
 
         g.selectAll(".scatter-dot")
@@ -2805,7 +2809,7 @@ function renderTreemap(opts){
             .style("fill", "var(--ink)")
             .style("opacity", 0)
             .text(d => d.name.length > 5 ? d.name.slice(0, 5) + "…" : d.name)
-            .transition().delay((d, i) => i * 80 + 400).duration(400)
+            .transition().delay((d, i) => i * 80 + 400).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
     }
 
@@ -2930,7 +2934,7 @@ function renderTreemap(opts){
                 .style("cursor", "pointer");
 
             bar.transition()
-                .delay(i * 80).duration(600)
+                .delay(i * 80).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(nv.score)));
 
@@ -2944,7 +2948,7 @@ function renderTreemap(opts){
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(nv.genre + " " + nv.score.toFixed(1))
-                .transition().delay(i * 80 + 600).duration(400).style("opacity", 1);
+                .transition().delay(i * 80 + 600).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             // Right side: protagonist
             g.append("text")
@@ -2954,7 +2958,7 @@ function renderTreemap(opts){
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text(nv.protagonist)
-                .transition().delay(i * 80 + 700).duration(400).style("opacity", 1);
+                .transition().delay(i * 80 + 700).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             bar.on("mouseover", function(e) {
                 d3.select(this).attr("fill", d3.color(color).darker(0.6));

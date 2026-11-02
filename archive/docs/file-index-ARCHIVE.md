@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-02（W960 迁入 W981-W981） + 2026-11-03（W1103 迁入 W982-W982）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -9451,6 +9451,97 @@
 | scripts/output/file-index.md | W981 | W981 段插入
 | scripts/output/_w981_spec.json | W981 | 本批级联 spec
 | scripts/output/_cascade_files_W981.txt | W981 | 级联落盘清单
+## W982 手搓绕过级联治理批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_size_budget.py | W982 | C7 版本面契约（三层方案②）：三面锚尾/HEAD 句/链条≤3（排除创建于误计）/概要块>6 判红·挂 verify+开工双面
+| scripts/preflight_check.py | W982 | ③手搓前置劝导：级联面脏件 NOTE（quotePath=false 二次取数·实弹验证过）
+| tests/unit/test_doc_size_budget.py | W982 | C7 单测 2 例（良构零 FAIL/三破坏 FAIL 锁）
+| HANDOVER.md | W982 | 候选条目标记 W982 落地（①文件锁缓建裁决）+ 级联头尾链与里程碑块
+| docs/00-导读/W批次编号对账表.md | W982 | W982 认领行与收官回填
+| CHANGELOG.md | W982 | W982 段
+| README.md | W982 | 当前批次版本行
+| STRUCTURE.md | W982 | 当前批次版本行
+| docs/00-导读/项目说明.md | W982 | 当前批次版本行
+| .github/workflows/README.md | W982 | 工作流层版本面推进 W982
+| site/index.html | W982 | 页脚批次链插入 W982
+| site/data/cross-time-danmaku.html | W982 | 页脚批次链插入 W982
+| site/data/tag-cloud.html | W982 | 页脚批次链插入 W982
+| site/dukou-engine.html | W982 | 页脚批次链插入 W982
+| AGENTS.md | W982 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W982 | 脚注滚动迁入的最老条目
+| CITATION.cff | W982 | version 同步为 W982
+| scripts/output/file-index.md | W982 | W982 段插入
+| scripts/output/_w982_spec.json | W982 | 本批级联 spec
+| scripts/output/_cascade_files_W982.txt | W982 | 级联落盘清单
+## W983 内页题图成套批·第四组（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/plate-line-25-rulai.webp | W983 | 新增·站点版（25-rulai） |
+| site/static/images/plate-line-26-yudi.webp | W983 | 新增·站点版（26-yudi） |
+| site/static/images/plate-line-27-baiyan-mojun.webp | W983 | 新增·站点版（27-baiyan-mojun） |
+| site/static/images/plate-line-28-change.webp | W983 | 新增·站点版（28-change） |
+| site/static/images/plate-line-29-shenxue-ganyu-topic.webp | W983 | 新增·站点版（29-shenxue-ganyu-topic） |
+| site/static/images/plate-line-30-lujing-ditu-topic.webp | W983 | 新增·站点版（30-lujing-ditu-topic） |
+| site/static/images/plate-line-31-mima-pan-topic.webp | W983 | 新增·站点版（31-mima-pan-topic） |
+| site/static/images/plate-line-32-minsu-taofu-topic.webp | W983 | 新增·站点版（32-minsu-taofu-topic） |
+| site/static/images/plate-line-33-yixiang-puxi-topic.webp | W983 | 新增·站点版（33-yixiang-puxi-topic） |
+| site/static/images/plate-line-34-keju-zhidu-topic.webp | W983 | 新增·站点版（34-keju-zhidu-topic） |
+| site/static/images/plate-line-35-ch010-weizheng.webp | W983 | 新增·站点版（35-ch010-weizheng） |
+| site/static/images/plate-line-36-ch004-bimawen.webp | W983 | 新增·站点版（36-ch004-bimawen） |
+| site/reader/people/如来.html | W983 | 接入题图（如来（人物）） |
+| site/reader/people/玉帝.html | W983 | 接入题图（玉帝（人物）） |
+| site/reader/people/百眼魔君.html | W983 | 接入题图（百眼魔君（人物）） |
+| site/reader/people/嫦娥外传.html | W983 | 接入题图（嫦娥（人物）） |
+| site/reader/themes/神学干预机制专题.html | W983 | 接入题图（神学干预机制（主题）） |
+| site/reader/themes/取经路径地理符号学专题.html | W983 | 接入题图（取经路径地理符号学（主题）） |
+| site/reader/themes/取经密码学专题.html | W983 | 接入题图（取经密码学（主题）） |
+| site/reader/essays/西游与民俗学.html | W983 | 接入题图（西游与民俗学（跨学科）） |
+| site/reader/poetry/西游诗词意象谱系专题.html | W983 | 接入题图（西游诗词意象谱系（跨学科）） |
+| site/reader/culture/明代科举制度对照专题.html | W983 | 接入题图（明代科举制度对照（跨学科）） |
+| site/reader/ch010.html | W983 | 接入题图（第 010 回 魏征斩龙（回目页）） |
+| site/reader/ch004.html | W983 | 接入题图（第 004 回 官封弼马（回目页）） |
+| assets/promo/plate-set/plate-line-25~36-*.png/.webp | W983 | 新增 12 张母版（1200×1600·线描墨稿·含 3 张重出生效件） |
+| assets/promo/plate-set/raw/round12/ | W983 | 出图原件 12 份（含 #26/#27/#36 三张重出生效件） |
+| assets/promo/plate-set/preview-contact-sheet.png/.webp | W983 | 全目录 64 张缩略拼图（刷新） |
+| assets/promo/plate-set/README.md | W983 | 口径更新（52→64 张·第六组清单·本批已知取舍） |
+| scripts/_w983_make_spec.py | W983 | 级联 spec 生成器（文件清单从磁盘实算·不手抄） |
+| scripts/_w983_make_prompts.py | W983 | 母版复用生成器（249 字符母版逐字复用·四条断言·stem 冲突负样本自证） |
+| scripts/_w983_precheck_pages.py | W983 | 落位页先验（存在 + 无题图 + 结构锚点·负样本自证） |
+| scripts/_w983_derive.py | W983 | 施工脚本程序化派生器（替换表 + 残留硬编码断言） |
+| scripts/_w983_prepare.py | W983 | 成品派生（裁 3:4 → 缩放 → 纸色归一 → 母版/站点版 → 拼图·作用域限 raw/round12） |
+| scripts/_w983_download.py | W983 | 出图原件下载（node_id → 短链 → 落盘·按 node_id↔文件名映射） |
+| scripts/_w983_insert_plates.py | W983 | 12 页 chapter-plate 接入（幂等） |
+| scripts/_w983_retry.py | W983 | 单张重出修正器（行内短锚点替换 + 重建 batch + 断言修正点入 prompt） |
+| scripts/_w983_sheet.py | W983 | 本批 12 张核对拼图生成器 |
+| scripts/_w983_zoom.py | W983 | 关键部位放大核对图生成器 |
+| scripts/_w983_serve.py | W983 | 本地验收静态服务（补 webp/js/css MIME） |
+| scripts/_w945_plates_verify.py | W983 | 素材成套判据 J1–J10（自归档恢复为现役·判据逻辑逐字未改） |
+| scripts/_w951_check_crop.py | W983 | 站点版裁切验算（自归档恢复为现役·判据逻辑逐字未改） |
+| docs/11-方案报告/计划方案/执行前计划-T30-内页题图成套批第四组.md | W983 | 执行前计划件（框架号 T-30） |
+| docs/11-方案报告/计划方案/T30-任务计划执行与经验沉淀报告-2026-10-27.md | W983 | 终稿报告件（执行记录/验收/复盘/经验沉淀） |
+| docs/11-方案报告/README.md | W983 | §六 计划方案登记（+2 行·件数十 37→39） |
+| docs/agent/pitfalls.md | W983 | 坑表 +6 条（64→70·视觉渲染 12→15 / 流程 10→13） |
+| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W983 | 新增 §2.7 判据覆盖面的边界 + 4 条复现案例 |
+| docs/00-导读/W批次编号对账表.md | W983 | W983 认领行 + W982 行 git 反填 |
+| site/data/search.html | W983 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
+| site/en/search.html | W983 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
+| CHANGELOG.md | W983 | W983 段 |
+| docs/00-导读/W批次编号对账表.md | W983 | W983 认领行 |
+| README.md | W983 | 当前批次版本行 |
+| STRUCTURE.md | W983 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W983 | 当前批次版本行 |
+| .github/workflows/README.md | W983 | 工作流层版本面推进 W983 |
+| site/index.html | W983 | 页脚批次链插入 W983 |
+| site/data/cross-time-danmaku.html | W983 | 页脚批次链插入 W983 |
+| site/data/tag-cloud.html | W983 | 页脚批次链插入 W983 |
+| site/dukou-engine.html | W983 | 页脚批次链插入 W983 |
+| AGENTS.md | W983 | 版本脚注条目 + 坑位条数声明 64→70 |
+| archive/docs/AGENTS-ARCHIVE.md | W983 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W983 | version 同步为 W983 |
+| scripts/output/file-index.md | W983 | W983 段插入 |
 
 ## W982 手搓绕过级联治理批（2026-10-27）
 
@@ -9476,3 +9567,70 @@
 | scripts/output/file-index.md | W982 | W982 段插入
 | scripts/output/_w982_spec.json | W982 | 本批级联 spec
 | scripts/output/_cascade_files_W982.txt | W982 | 级联落盘清单
+## W983 内页题图成套批·第四组（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/plate-line-25-rulai.webp | W983 | 新增·站点版（25-rulai） |
+| site/static/images/plate-line-26-yudi.webp | W983 | 新增·站点版（26-yudi） |
+| site/static/images/plate-line-27-baiyan-mojun.webp | W983 | 新增·站点版（27-baiyan-mojun） |
+| site/static/images/plate-line-28-change.webp | W983 | 新增·站点版（28-change） |
+| site/static/images/plate-line-29-shenxue-ganyu-topic.webp | W983 | 新增·站点版（29-shenxue-ganyu-topic） |
+| site/static/images/plate-line-30-lujing-ditu-topic.webp | W983 | 新增·站点版（30-lujing-ditu-topic） |
+| site/static/images/plate-line-31-mima-pan-topic.webp | W983 | 新增·站点版（31-mima-pan-topic） |
+| site/static/images/plate-line-32-minsu-taofu-topic.webp | W983 | 新增·站点版（32-minsu-taofu-topic） |
+| site/static/images/plate-line-33-yixiang-puxi-topic.webp | W983 | 新增·站点版（33-yixiang-puxi-topic） |
+| site/static/images/plate-line-34-keju-zhidu-topic.webp | W983 | 新增·站点版（34-keju-zhidu-topic） |
+| site/static/images/plate-line-35-ch010-weizheng.webp | W983 | 新增·站点版（35-ch010-weizheng） |
+| site/static/images/plate-line-36-ch004-bimawen.webp | W983 | 新增·站点版（36-ch004-bimawen） |
+| site/reader/people/如来.html | W983 | 接入题图（如来（人物）） |
+| site/reader/people/玉帝.html | W983 | 接入题图（玉帝（人物）） |
+| site/reader/people/百眼魔君.html | W983 | 接入题图（百眼魔君（人物）） |
+| site/reader/people/嫦娥外传.html | W983 | 接入题图（嫦娥（人物）） |
+| site/reader/themes/神学干预机制专题.html | W983 | 接入题图（神学干预机制（主题）） |
+| site/reader/themes/取经路径地理符号学专题.html | W983 | 接入题图（取经路径地理符号学（主题）） |
+| site/reader/themes/取经密码学专题.html | W983 | 接入题图（取经密码学（主题）） |
+| site/reader/essays/西游与民俗学.html | W983 | 接入题图（西游与民俗学（跨学科）） |
+| site/reader/poetry/西游诗词意象谱系专题.html | W983 | 接入题图（西游诗词意象谱系（跨学科）） |
+| site/reader/culture/明代科举制度对照专题.html | W983 | 接入题图（明代科举制度对照（跨学科）） |
+| site/reader/ch010.html | W983 | 接入题图（第 010 回 魏征斩龙（回目页）） |
+| site/reader/ch004.html | W983 | 接入题图（第 004 回 官封弼马（回目页）） |
+| assets/promo/plate-set/plate-line-25~36-*.png/.webp | W983 | 新增 12 张母版（1200×1600·线描墨稿·含 3 张重出生效件） |
+| assets/promo/plate-set/raw/round12/ | W983 | 出图原件 12 份（含 #26/#27/#36 三张重出生效件） |
+| assets/promo/plate-set/preview-contact-sheet.png/.webp | W983 | 全目录 64 张缩略拼图（刷新） |
+| assets/promo/plate-set/README.md | W983 | 口径更新（52→64 张·第六组清单·本批已知取舍） |
+| scripts/_w983_make_spec.py | W983 | 级联 spec 生成器（文件清单从磁盘实算·不手抄） |
+| scripts/_w983_make_prompts.py | W983 | 母版复用生成器（249 字符母版逐字复用·四条断言·stem 冲突负样本自证） |
+| scripts/_w983_precheck_pages.py | W983 | 落位页先验（存在 + 无题图 + 结构锚点·负样本自证） |
+| scripts/_w983_derive.py | W983 | 施工脚本程序化派生器（替换表 + 残留硬编码断言） |
+| scripts/_w983_prepare.py | W983 | 成品派生（裁 3:4 → 缩放 → 纸色归一 → 母版/站点版 → 拼图·作用域限 raw/round12） |
+| scripts/_w983_download.py | W983 | 出图原件下载（node_id → 短链 → 落盘·按 node_id↔文件名映射） |
+| scripts/_w983_insert_plates.py | W983 | 12 页 chapter-plate 接入（幂等） |
+| scripts/_w983_retry.py | W983 | 单张重出修正器（行内短锚点替换 + 重建 batch + 断言修正点入 prompt） |
+| scripts/_w983_sheet.py | W983 | 本批 12 张核对拼图生成器 |
+| scripts/_w983_zoom.py | W983 | 关键部位放大核对图生成器 |
+| scripts/_w983_serve.py | W983 | 本地验收静态服务（补 webp/js/css MIME） |
+| scripts/_w945_plates_verify.py | W983 | 素材成套判据 J1–J10（自归档恢复为现役·判据逻辑逐字未改） |
+| scripts/_w951_check_crop.py | W983 | 站点版裁切验算（自归档恢复为现役·判据逻辑逐字未改） |
+| docs/11-方案报告/计划方案/执行前计划-T30-内页题图成套批第四组.md | W983 | 执行前计划件（框架号 T-30） |
+| docs/11-方案报告/计划方案/T30-任务计划执行与经验沉淀报告-2026-10-27.md | W983 | 终稿报告件（执行记录/验收/复盘/经验沉淀） |
+| docs/11-方案报告/README.md | W983 | §六 计划方案登记（+2 行·件数十 37→39） |
+| docs/agent/pitfalls.md | W983 | 坑表 +6 条（64→70·视觉渲染 12→15 / 流程 10→13） |
+| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W983 | 新增 §2.7 判据覆盖面的边界 + 4 条复现案例 |
+| docs/00-导读/W批次编号对账表.md | W983 | W983 认领行 + W982 行 git 反填 |
+| site/data/search.html | W983 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
+| site/en/search.html | W983 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
+| CHANGELOG.md | W983 | W983 段 |
+| docs/00-导读/W批次编号对账表.md | W983 | W983 认领行 |
+| README.md | W983 | 当前批次版本行 |
+| STRUCTURE.md | W983 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W983 | 当前批次版本行 |
+| .github/workflows/README.md | W983 | 工作流层版本面推进 W983 |
+| site/index.html | W983 | 页脚批次链插入 W983 |
+| site/data/cross-time-danmaku.html | W983 | 页脚批次链插入 W983 |
+| site/data/tag-cloud.html | W983 | 页脚批次链插入 W983 |
+| site/dukou-engine.html | W983 | 页脚批次链插入 W983 |
+| AGENTS.md | W983 | 版本脚注条目 + 坑位条数声明 64→70 |
+| archive/docs/AGENTS-ARCHIVE.md | W983 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W983 | version 同步为 W983 |
+| scripts/output/file-index.md | W983 | W983 段插入 |

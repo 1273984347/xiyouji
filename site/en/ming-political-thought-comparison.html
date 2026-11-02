@@ -1274,14 +1274,6 @@ html[data-theme="dark"] .chapter-plate {
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
         .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: var(--radius-sm) }
         .legend-row .lg-swatch.dot { border-radius: 50% }
-        .tooltip {
-            position: absolute; pointer-events: none; background: var(--dark);
-            color: var(--paper-warm); padding: 10px 14px; border-radius: var(--radius-md) ; font-size: 0.82rem;
-            opacity: 0; transition: opacity var(--dur-base); z-index: 10; max-width: 375px;
-        }
-        .tooltip .tip-title { font-weight: bold; color: var(--accent-soft); margin-bottom: 6px; font-size: 0.95rem; }
-        .tooltip .tip-row { color: var(--line); line-height: 1.5; }
-        .tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-faint); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--ink-soft); }
         .insight-box {
             background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
             padding: var(--space-4) 16px; margin-bottom: var(--space-4); border-radius: 0 var(--radius-md) var(--radius-md) 0 ; font-size: 0.92em;
@@ -1383,7 +1375,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="radar-title">Three-Comparison Radar Chart</title>
                     <desc id="radar-desc">Radar comparison of three comparison groups across mind-nature theory, art of governance, and remonstrance tradition.</desc>
                 </svg>
-                <div class="tooltip" id="radar-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="radar-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="radar-legend" aria-label="Radar chart legend"></div>
         </section>
@@ -1397,7 +1389,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="hm-title">Nine-Dimension Matrix Heatmap</title>
                     <desc id="hm-desc">A 9-cell matrix heatmap across 3 groups × 3 dimensions.</desc>
                 </svg>
-                <div class="tooltip" id="heat-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="heat-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="heat-legend" aria-label="Heatmap legend"></div>
         </section>
@@ -1411,7 +1403,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="tl-title">Ming Intellectual History Timeline</title>
                     <desc id="tl-desc">Timeline of key events in Ming intellectual history, 1472-1592.</desc>
                 </svg>
-                <div class="tooltip" id="timeline-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="timeline-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="timeline-legend" aria-label="Timeline legend"></div>
         </section>
@@ -1425,7 +1417,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="sk-title">Textual Citation Sankey Diagram</title>
                     <desc id="sk-desc">A Sankey diagram flowing from three source texts through three comparison groups to three comparison dimensions.</desc>
                 </svg>
-                <div class="tooltip" id="sankey-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="sankey-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="sankey-legend" aria-label="Sankey legend"></div>
         </section>
@@ -1439,7 +1431,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="pol-title">Three-Comparison Dimension Polar Chart</title>
                     <desc id="pol-desc">A petal chart of each group's own dimensions in polar coordinates.</desc>
                 </svg>
-                <div class="tooltip" id="polar-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="polar-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="polar-legend" aria-label="Polar chart legend"></div>
         </section>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-REfK19y7fJ8V9aLtXnjZAYp0CSjdaWhLgpqVp5An/sI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-oulOjJYX3v1TPodo76nFK9pENGGXRPDl1Q3UZ7rCI8Q=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Four Heavenly Kings Artifact Semiotic Atlas · Annotated Journey to the West</title>
@@ -1355,17 +1355,6 @@ table.matrix td.cell-artifact { font-weight: 600; }
 table.matrix td.cell-wound { color: var(--accent); }
 
 /* Tooltip */
-.tooltip {
-  position: absolute;
-  background: var(--dark);
-  color: var(--paper);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: 0.84em;
-  pointer-events: none;
-  z-index: 100;
-  max-width: 375px;
-}
 
 /* Insight */
 .insight-list { list-style: none; }
@@ -1552,6 +1541,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
+<script>
 // ============================================================
 // EMBEDDED DATA —— 四大天王器物符号数据
 // ============================================================
@@ -1688,9 +1681,9 @@ function renderOverview(kings) {
 }
 
 function showKingTooltip(event, d) {
-  let tip = d3.select('.tooltip');
+  let tip = d3.select('.chart-tooltip');
   if (tip.empty()) {
-    tip = d3.select('body').append('div').attr('class', 'tooltip');
+    tip = d3.select('body').append('div').attr('class', 'chart-tooltip');
   }
   tip.html('')
     .style('opacity', 0.95)
@@ -1704,7 +1697,7 @@ function showKingTooltip(event, d) {
   tip.append('div').text('Signature: ' + d.signature);
   tip.append('div').text('Silence: ' + d.silence);
   tip.append('div').text(d.desc);
-  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3000);
+  setTimeout(() => tip.transition().duration(MOYUN_RM?0:400).style('opacity', 0), 3000);
 }
 
 // ============================================================
@@ -1782,9 +1775,9 @@ function renderRadar(radarData) {
   }
 
   // tooltip
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // 每个天王一个多边形
   radarData.forEach(king => {
@@ -1804,7 +1797,7 @@ function renderRadar(radarData) {
       .style('cursor', 'pointer')
       .on('mouseover', function(e) {
         d3.select(this).attr('fill-opacity', 0.35);
-        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
         // 用 .text() 防 XSS
         tooltip.html('');
         tooltip.append('div').html('<strong>' + king.king + ' · ' + king.artifact + '</strong>');
@@ -1817,7 +1810,7 @@ function renderRadar(radarData) {
       })
       .on('mouseout', function() {
         d3.select(this).attr('fill-opacity', 0.18);
-        tooltip.transition().duration(400).style('opacity', 0);
+        tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
       });
 
     // 顶点圆
@@ -1918,9 +1911,9 @@ function renderChord(chordData) {
   const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
   // tooltip
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // 分组弧（每个天王一段）
   const groupArc = g.append('g')
@@ -1937,7 +1930,7 @@ function renderChord(chordData) {
     .attr('stroke-width', 2)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + kingNames[d.index] + '</strong>');
       tooltip.append('div').text('Self-comparison weight: ' + matrix[d.index][d.index]);
@@ -1947,7 +1940,7 @@ function renderChord(chordData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke-width', 2);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // 分组标签
@@ -1980,7 +1973,7 @@ function renderChord(chordData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('fill-opacity', 0.7);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       const src = kingNames[d.source.index];
       const tgt = kingNames[d.target.index];
       const rel = chordData.find(c =>
@@ -2000,7 +1993,7 @@ function renderChord(chordData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('fill-opacity', 0.45);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // 图例：关系类型
@@ -2060,9 +2053,9 @@ function renderTimeline(timelineData) {
   };
 
   // tooltip
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // 背景行
   kingNames.forEach(name => {
@@ -2136,7 +2129,7 @@ function renderTimeline(timelineData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('r', 14);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.king + '</strong>');
       tooltip.append('div').text('Wound: ' + d.wound);
@@ -2149,7 +2142,7 @@ function renderTimeline(timelineData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('r', 11);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // 伤痕序号

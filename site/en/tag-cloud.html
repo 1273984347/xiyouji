@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2dTaMWecKEGBXJnvSdRsQ0gsavSplNn+R4dqWeUk4zM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-KEIFYTgJgxKapEzr2EEwsGZf/vcjIWNkQKB60YUbzhM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Site-Wide Tag Cloud · Visualization Navigation Hub · Annotated Journey to the West</title>
@@ -1651,6 +1651,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <div id="tooltip" role="tooltip" aria-hidden="true"></div>
 
         <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
     <script>
     // ============================================================
     // EMBEDDED_DATA: metadata for all 79 HTML pages under site/data/
@@ -1810,7 +1814,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .data(data, d => d.file);
 
         tags.exit()
-            .transition().duration(200)
+            .transition().duration(MOYUN_RM?0:200)
             .style("opacity", 0)
             .remove();
 
@@ -1826,7 +1830,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         enter.merge(tags)
             .classed("active", d => d.file === state.selectedFile)
-            .transition().duration(300)
+            .transition().duration(MOYUN_RM?0:300)
             .style("opacity", 1)
             .style("font-size", d => fontSizeScale(d.size) + "px");
 

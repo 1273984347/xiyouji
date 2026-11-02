@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uwr7wwzc9aIXdMBEEP09Otn5WK54ojWCbNS4Q7XCTjw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-oBSBN1u0U26JEqVHiNlWjqcFthiz1ir30rRyRER1b94=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Methodology Matrix · Villain Evaluation &amp; Rescue ROI · Annotated Journey to the West</title>
@@ -1994,6 +1994,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
+<script>
     // ===== Embedded fallback data (used when fetch fails) =====
     const EMBEDDED = {
         villain_matrix: {
@@ -2437,7 +2441,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("cursor", "pointer")
             .transition()
             .delay((d, i) => 200 + i * 60)
-            .duration(500)
+            .duration(MOYUN_RM?0:500)
             .ease(d3.easeBackOut)
             .attr("r", 8);
 
@@ -2458,13 +2462,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .text(d => d.monster)
             .transition()
             .delay((d, i) => 500 + i * 60)
-            .duration(400)
+            .duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // rebind events (after animation)
         g.selectAll(".villain-dot")
             .on("mouseover", function(e, d) {
-                d3.select(this).transition().duration(150).attr("r", 12);
+                d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 12);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">${d.monster} · ${d.chapter}</div>` +
                           `<div class="tip-row">motivation x=${d.x_motivation} · resources y=${d.y_resource}</div>` +
@@ -2482,7 +2486,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                    .style("top", (e.clientY - rect.top - 10) + "px");
             })
             .on("mouseout", function() {
-                d3.select(this).transition().duration(150).attr("r", 8);
+                d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 8);
                 tip.style("opacity", 0);
             });
 
@@ -2728,7 +2732,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         path.attr("stroke-dasharray", totalLen)
             .attr("stroke-dashoffset", totalLen)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .ease(d3.easeCubicOut)
             .attr("stroke-dashoffset", 0);
 
@@ -2748,14 +2752,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("cursor", "pointer")
             .transition()
             .delay((d, i) => 200 + i * 100)
-            .duration(400)
+            .duration(MOYUN_RM?0:400)
             .ease(d3.easeBackOut)
             .attr("r", 7);
 
         // rebind events
         g.selectAll(".roi-dot")
             .on("mouseover", function(e, d) {
-                d3.select(this).transition().duration(150).attr("r", 11);
+                d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 11);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">${d.monster} · ${d.chapter}</div>` +
                           `<div style="color:#e9b885;font-size:0.78rem;">Rescuer: ${d.rescuer} · ${d.rescue_phase}</div>` +
@@ -2771,7 +2775,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                    .style("top", (e.clientY - rect.top - 10) + "px");
             })
             .on("mouseout", function() {
-                d3.select(this).transition().duration(150).attr("r", 7);
+                d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 7);
                 tip.style("opacity", 0);
             });
 
@@ -2786,7 +2790,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", "var(--accent-4)")
             .style("opacity", 0)
             .text("Max " + maxCase.roi_score.toFixed(2))
-            .transition().delay(1600).duration(400)
+            .transition().delay(MOYUN_RM?0:1600).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
         g.append("circle")
             .attr("cx", x(maxIdx + 1))
@@ -2796,7 +2800,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke", "var(--accent-4)")
             .attr("stroke-width", 2)
             .style("opacity", 0)
-            .transition().delay(1600).duration(400)
+            .transition().delay(MOYUN_RM?0:1600).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // label the min point
@@ -2810,7 +2814,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", "var(--accent)")
             .style("opacity", 0)
             .text("Min " + minCase.roi_score.toFixed(2))
-            .transition().delay(1800).duration(400)
+            .transition().delay(MOYUN_RM?0:1800).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
         g.append("circle")
             .attr("cx", x(minIdx + 1))
@@ -2820,7 +2824,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke", "var(--accent)")
             .attr("stroke-width", 2)
             .style("opacity", 0)
-            .transition().delay(1800).duration(400)
+            .transition().delay(MOYUN_RM?0:1800).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // legend

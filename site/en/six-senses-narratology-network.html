@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-c8RALCJm2tyV5XuOumUUE72r+ypA7Fttb6+y5zMHeFE=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-9uEOWlJR0DrbEFCVmaWK39wI4/NGaMM0XlWtaxQclTk=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-UIo1laBxpAaeQmRo/ejLdHTqHoJSDdigOG6kBR9n9g4=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-9uEOWlJR0DrbEFCVmaWK39wI4/NGaMM0XlWtaxQclTk=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Six-Senses Narratology Network · Annotated Journey to the West</title>
@@ -1320,17 +1320,6 @@ header.hero .meta {
 .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
 
 /* Tooltip */
-.tooltip {
-  position: absolute;
-  background: var(--dark);
-  color: var(--paper);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: 0.84em;
-  pointer-events: none;
-  z-index: 100;
-  max-width: 375px;
-}
 
 /* Empty state */
 .empty-state {
@@ -1582,6 +1571,10 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
 </div>
 
 <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
 <script src="../static/js/d3-sankey.min.js"></script>
 <script>
 // ============================================================
@@ -1817,9 +1810,9 @@ function renderOverview(senses) {
 }
 
 function showSenseTooltip(event, d) {
-  let tip = d3.select('.tooltip');
+  let tip = d3.select('.chart-tooltip');
   if (tip.empty()) {
-    tip = d3.select('body').append('div').attr('class', 'tooltip');
+    tip = d3.select('body').append('div').attr('class', 'chart-tooltip');
   }
   tip.html('')
     .style('opacity', 0.95)
@@ -1832,7 +1825,7 @@ function showSenseTooltip(event, d) {
   tip.append('div').text('Cases: ' + d.Cases);
   tip.append('div').text('Citations: ' + d.Citations);
   tip.append('div').text('Era: ' + d.Era);
-  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3000);
+  setTimeout(() => tip.transition().duration(MOYUN_RM?0:400).style('opacity', 0), 3000);
 }
 
 // ============================================================
@@ -1870,9 +1863,9 @@ function renderForce(networkData) {
     return d.color || '#8b4513';
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   const sim = d3.forceSimulation(nodes)
     .force('link', d3.forceLink(links).id(d => d.id)
@@ -1971,7 +1964,7 @@ const structLink = svg.append('g').selectAll('.struct-link')
     .attr('stroke-width', 2)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       if (d.type === 'theorist') {
         const parent = nodes.find(n => n.id === d.parent);
@@ -1996,7 +1989,7 @@ const structLink = svg.append('g').selectAll('.struct-link')
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   nodeG.append('text')
@@ -2115,9 +2108,9 @@ function renderRadar(radarData) {
       .text(lvl * 2);
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // One polygon per sense
   radarData.forEach(role => {
@@ -2139,7 +2132,7 @@ function renderRadar(radarData) {
       .style('cursor', 'pointer')
       .on('mouseover', function(e) {
         d3.select(this).attr('fill-opacity', 0.35);
-        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
         tooltip.html('');
         tooltip.append('div').html('<strong>' + role.sense + ' Narratology</strong>');
         dimensions.forEach(dim => {
@@ -2151,7 +2144,7 @@ function renderRadar(radarData) {
       })
       .on('mouseout', function() {
         d3.select(this).attr('fill-opacity', 0.12);
-        tooltip.transition().duration(400).style('opacity', 0);
+        tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
       });
 
     // Vertex circles
@@ -2237,9 +2230,9 @@ function renderSankey(sankeyLinkData) {
 
   const graph = sankeyGen({ nodes, links });
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // Links
   svg.append('g').selectAll('path')
@@ -2256,7 +2249,7 @@ function renderSankey(sankeyLinkData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke-opacity', 0.75);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
       tooltip.append('div').text('Flow weight: ' + d.value);
@@ -2266,7 +2259,7 @@ function renderSankey(sankeyLinkData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke-opacity', 0.4);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // Nodes
@@ -2288,7 +2281,7 @@ function renderSankey(sankeyLinkData) {
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
       const catLabel = ['Sense', 'Four-layer structure', 'Journey cases'][d.cat] || '';
@@ -2301,7 +2294,7 @@ function renderSankey(sankeyLinkData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // Node labels
@@ -2360,9 +2353,9 @@ function renderTimeline(timelineData) {
     .domain([yearMin - 50, yearMax + 50])
     .range([innerH, 0]);
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // Background grid
   g.append('g')
@@ -2407,7 +2400,7 @@ function renderTimeline(timelineData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('r', 15);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.Topic + ' · ' + d.Sense + ' Narratology</strong>');
       tooltip.append('div').text('Created: ' + d.Created);
@@ -2419,7 +2412,7 @@ function renderTimeline(timelineData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('r', 12);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // Topic labels (below X axis)

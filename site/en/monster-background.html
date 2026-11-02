@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-M0LRQHnFCmo5r+gExXhiwL1GPGOpAd+5OdCk//nW46U=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-PtQEzUwVPDDjZ/1d8n4K8wMZjF6t2Zv4FmL9HlQXbYg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Background Theory · Annotated Journey to the West</title>
@@ -1507,19 +1507,6 @@ html[data-theme="dark"] .chapter-plate {
             text-decoration: none;
         }
         footer a:hover { text-decoration: underline; }
-        .tooltip {
-            position: absolute;
-            background: var(--dark);
-            color: var(--paper-warm);
-            padding: 6px 10px;
-            border-radius: var(--radius-md);
-            font-size: 0.8rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity var(--dur-fast);
-            max-width: 375px;
-            z-index: 100;
-        }
         @media (max-width: 768px) {
             
             
@@ -1714,9 +1701,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         </nav>
     
 <div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
-<div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
+<div class="chart-tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
 
         <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
     <script>
     const EMBEDDED = {
         background: {
@@ -2049,7 +2040,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('fill-opacity', 0.8)
             .style('cursor', 'pointer')
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .attr('y', d => y(d.value))
             .attr('height', d => h - y(d.value));
 
