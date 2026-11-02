@@ -10,6 +10,75 @@
 
 ---
 
+## W1089 图表色工程批·档 1 扩展批 1（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/visual-art.html | W1089 | 页面 |
+| site/en/karma-reincarnation.html | W1089 | 页面 |
+| site/en/risk-project.html | W1089 | 页面 |
+| site/en/monster-capability-radar.html | W1089 | 页面 |
+| site/en/journey-map-interactive.html | W1089 | 页面 |
+| site/en/poetry-rhythm-analysis.html | W1089 | 页面 |
+| archive/scripts/batches/w1089/_w1089_chart_color_shapes.py | W1089 | 本批工具/产物 |
+| scripts/chart_render_probe.py | W1089 | 本批工具/产物 |
+| scripts/output/README.md | W1089 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1089.txt | W1089 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_shapes_after.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_shapes_before.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_spec.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_style_fill_stroke_after.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_style_fill_stroke_before.json | W1089 | 本批工具/产物 |
+| scripts/output/file-index.md | W1089 | 本批工具/产物 |
+| scripts/output/index.md | W1089 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1089 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1089 | 本批工具/产物 |
+| scripts/output/stats.json | W1089 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1089 | 本批工具/产物 |
+| .github/workflows/README.md | W1089 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1089 | 治理文档 |
+| AGENTS.md | W1089 | 治理文档 |
+| CHANGELOG.md | W1089 | 治理文档 |
+| CITATION.cff | W1089 | 治理文档 |
+| HANDOVER.md | W1089 | 治理文档 |
+| README.md | W1089 | 治理文档 |
+| STRUCTURE.md | W1089 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1089 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1089 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1089 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1089 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1089 | 治理文档 |
+| docs/00-导读/项目说明.md | W1089 | 治理文档 |
+| docs/11-方案报告/README.md | W1089 | 治理文档 |
+| docs/11-方案报告/计划方案/T47-任务计划执行与经验沉淀报告-2026-11-02.md | W1089 | 治理文档 |
+| docs/agent/pitfalls.md | W1089 | 治理文档 |
+| scripts/output/_w1089_probe_after_en__visual-art.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_before_en__visual-art.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_after_en__karma-reincarnation.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_before_en__karma-reincarnation.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_after_en__risk-project.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_before_en__risk-project.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_after_en__monster-capability-radar.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_before_en__monster-capability-radar.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_after_en__journey-map-interactive.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_before_en__journey-map-interactive.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_after_en__poetry-rhythm-analysis.html.json | W1089 | 本批工具/产物 |
+| scripts/output/_w1089_probe_before_en__poetry-rhythm-analysis.html.json | W1089 | 本批工具/产物 |
+| archive/scripts/batches/README.md | W1089 | 本批工具/产物 |
+| archive/scripts/batches/index.md | W1089 | 本批工具/产物 |
+| archive/scripts/batches/w1089/README.md | W1089 | 本批工具/产物 |
+| archive/scripts/batches/w1089/index.md | W1089 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1089 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1089 | 治理文档 |
+| docs/INDEX.md | W1089 | 治理文档 |
+| site/data/cross-time-danmaku.html | W1089 | 页面 |
+| site/data/search.html | W1089 | 页面 |
+| site/data/tag-cloud.html | W1089 | 页面 |
+| site/dukou-engine.html | W1089 | 页面 |
+| site/en/search.html | W1089 | 页面 |
+| site/index.html | W1089 | 页面 |
+
 ## W1086 图表色工程批·档 1 试点施工（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4667,12 +4736,4 @@ docs/11-方案报告/README.md
 | scripts/output/_cascade_files_W974.txt | W974 | 当批级联清单 |
 | CHANGELOG.md | W974 | W974 版段 |
 | docs/00-导读/W批次编号对账表.md | W974 | W974 认领行 |
-
-## W973 HANDOVER 五区清理批（2026-10-26）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| HANDOVER.md | W973 | 五区清理：87.2→40.6KB（历史迁档+指针化） |
-| archive/docs/HANDOVER-ARCHIVE.md | W973 | 迁入五区历史（零阻塞+候选+方法论+雷区+待办） |
-| scripts/check_doc_size_budget.py | W973 | C6 HANDOVER 45KB 硬判据 |
 
