@@ -49,7 +49,7 @@ def main():
             p = pathlib.Path(dirpath) / fn
             rel = str(p.relative_to(site)).replace("\\", "/")
             txt = p.read_text(encoding="utf-8", errors="ignore")
-            for m in re.finditer(r"<script\b[^>]*>(.*?)</script>", txt, re.S):
+            for m in re.finditer(r"<script\b[^>]*>(.*?)</script>", txt, re.S | re.I):
                 js = m.group(1)
                 spans = []
                 for name, rx in LAYERS:
@@ -63,7 +63,7 @@ def main():
                         if hexv[1:] in PAL:
                             per[rel][name] += 1
             styles = "\n".join(x.group(1) for x in
-                               re.finditer(r"<style\b[^>]*>(.*?)</style>", txt, re.S))
+                               re.finditer(r"<style\b[^>]*>(.*?)</style>", txt, re.S | re.I))
             for name, rx in COMP:
                 n = len(rx.findall(styles))
                 if n:
