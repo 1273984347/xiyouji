@@ -159,15 +159,22 @@ class TestScanDocs:
         assert all("/" in r for r in rels)
         assert all(r.startswith("01-全书逐回解读/") for r in rels)
 
-    def test_scan_skips_index_md(self, fake_docs: Path):
-        """INDEX.md 应被跳过。"""
+    def test_scan_keeps_subsection_index_md(self, fake_docs: Path):
+        """板块内的 INDEX.md 应被**收录**（W1096 语义反转：目录清单同名不同义）。
+
+        W1096：目录清单统一为 `INDEX.md`（与 docs/INDEX.md 同形），故 docs_index.py
+        的排除规则由「按大小写排除所有 INDEX.md」改为「**仅排除扫描根本身的索引本体**」
+        ⇒ 板块下的 `INDEX.md`（= gen_folder_docs 产的目录清单）必须仍进文档索引。
+        """
         sub01 = fake_docs / "01-全书逐回解读"
         (sub01 / "INDEX.md").write_text("# 索引\n", encoding="utf-8")
         result = scan_docs(fake_docs)
         entries = result["01 · 全书逐回解读"]
         titles = [t for t, _ in entries]
-        assert "索引" not in titles
-        assert len(entries) == 2  # 仍是原来的两篇
+        assert "索引" in titles
+        assert len(entries) == 3  # 原两篇 + 板块内的目录清单
+        rels = [r for _, r in entries]
+        assert "01-全书逐回解读/INDEX.md" in rels
 
     def test_scan_returns_empty_for_no_md(self, tmp_path: Path):
         """子目录无 md 文件时该 section 不应出现在结果中。"""
