@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（175）
+## 文件（176）
 
 ### Markdown 文档
 
@@ -133,6 +133,7 @@
 - `check_page_admission.py`
 - `check_parser_anchor_coverage.py`
 - `check_perf_shadow.py`
+- `check_pitfall_id_unique.py`
 - `check_plan_template.py`
 - `check_repo_layout.py`
 - `check_review_trigger.py`
