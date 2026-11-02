@@ -10,6 +10,52 @@
 
 ---
 
+## W1103 图表色工程批·ΔL* 阈值机器判据（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1103 | 治理文档 |
+| .github/workflows/README.md | W1103 | 治理文档 |
+| AGENTS.md | W1103 | 治理文档 |
+| CHANGELOG.md | W1103 | 治理文档 |
+| CITATION.cff | W1103 | 治理文档 |
+| HANDOVER.md | W1103 | 治理文档 |
+| README.md | W1103 | 治理文档 |
+| STRUCTURE.md | W1103 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1103 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1103 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1103 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1103 | 治理文档 |
+| docs/00-导读/项目说明.md | W1103 | 治理文档 |
+| docs/11-方案报告/README.md | W1103 | 治理文档 |
+| docs/11-方案报告/计划方案/T57-任务计划执行与经验沉淀报告-2026-11-02.md | W1103 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1103 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1103 | 治理文档 |
+| docs/INDEX.md | W1103 | 治理文档 |
+| docs/agent/pitfalls.md | W1103 | 治理文档 |
+| pytest.ini | W1103 | 治理文档 |
+| scripts/INDEX.md | W1103 | 本批工具/产物 |
+| scripts/color_delta_guard.py | W1103 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1103 | 本批工具/产物 |
+| scripts/output/README.md | W1103 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1103.txt | W1103 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1103 | 本批工具/产物 |
+| scripts/output/_w1103_spec.json | W1103 | 本批工具/产物 |
+| scripts/output/file-index.md | W1103 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1103 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1103 | 本批工具/产物 |
+| scripts/output/stats.json | W1103 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1103 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1103 | 页面 |
+| site/data/search.html | W1103 | 页面 |
+| site/data/tag-cloud.html | W1103 | 页面 |
+| site/dukou-engine.html | W1103 | 页面 |
+| site/en/search.html | W1103 | 页面 |
+| site/index.html | W1103 | 页面 |
+| tests/unit/INDEX.md | W1103 | 本批工具/产物 |
+| tests/unit/README.md | W1103 | 本批工具/产物 |
+| tests/unit/test_w1103_color_delta_guard.py | W1103 | 本批工具/产物 |
+
 ## W1100 图表色工程批·档 3 落层分类盘点（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -5274,29 +5320,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W982 | W982 段插入
 | scripts/output/_w982_spec.json | W982 | 本批级联 spec
 | scripts/output/_cascade_files_W982.txt | W982 | 级联落盘清单
-
-## W981 数据链恢复重判批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/judge_gate.py | W981 | --report 路径随目录分区修正（10-方法论沉淀→11-方案报告/调研与数据复盘·旧路径静默不落盘）
-| docs/11-方案报告/调研与数据复盘/读者数据复盘.md | W981 | W806 声明追加订正注（数据链实测恢复·账号 10-01 重启·重判中间态 78）+ 末尾判定记录（judge_gate --report 首次真正落盘）
-| docs/00-导读/访问统计方案.md | W981 | W981 恢复注记（API 侧恢复·beacon 链退役裁决不变·守卫维持）
-| docs/00-导读/W批次编号对账表.md | W981 | W981 认领行与收官回填
-| CHANGELOG.md | W981 | W981 段
-| HANDOVER.md | W981 | 零段冻结表述订正 + 级联头尾链与里程碑块
-| README.md | W981 | 当前批次版本行
-| STRUCTURE.md | W981 | 当前批次版本行
-| docs/00-导读/项目说明.md | W981 | 当前批次版本行
-| .github/workflows/README.md | W981 | 工作流层版本面推进 W981
-| site/index.html | W981 | 页脚批次链插入 W981
-| site/data/cross-time-danmaku.html | W981 | 页脚批次链插入 W981
-| site/data/tag-cloud.html | W981 | 页脚批次链插入 W981
-| site/dukou-engine.html | W981 | 页脚批次链插入 W981
-| AGENTS.md | W981 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W981 | 脚注滚动迁入的最老条目
-| CITATION.cff | W981 | version 同步为 W981
-| scripts/output/file-index.md | W981 | W981 段插入
-| scripts/output/_w981_spec.json | W981 | 本批级联 spec
-| scripts/output/_cascade_files_W981.txt | W981 | 级联落盘清单
 

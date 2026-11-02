@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（173）
+## 文件（174）
 
 ### Markdown 文档
 
@@ -144,6 +144,7 @@
 - `check_untracked.py`
 - `check_w_range_literal.py`
 - `ci_sim.py`
+- `color_delta_guard.py`
 - `data_validate.py`
 - `detect_unwrapped_tables.py`
 - `doc_areas.py`
