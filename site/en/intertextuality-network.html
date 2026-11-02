@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-s6sX9n4/InRQSXwW35eMEx/66251y8zrM1EA9/JPqKU=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-Z0B//sjerG+fzteuaNez6N3kcdmhU9f1BjcUAE1QJGw=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-fBKfQpEybuI7Mwgg554KtTC8086MiAUPLZfmGfo9Dl8=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-Z0B//sjerG+fzteuaNez6N3kcdmhU9f1BjcUAE1QJGw=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Intertextuality Network · Annotated Journey to the West</title>
@@ -1320,17 +1320,6 @@ header.hero .meta {
 .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
 
 /* Tooltip */
-.tooltip {
-  position: absolute;
-  background: var(--dark);
-  color: var(--paper);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: 0.84em;
-  pointer-events: none;
-  z-index: 100;
-  max-width: 375px;
-}
 
 /* Empty state */
 .empty-state {
@@ -1596,6 +1585,10 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
 </div>
 
 <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
 <script src="../static/js/d3-sankey.min.js"></script>
 <script>
 // ============================================================
@@ -1815,9 +1808,9 @@ function renderOverview(texts) {
 }
 
 function showTextTooltip(event, d) {
-  let tip = d3.select('.tooltip');
+  let tip = d3.select('.chart-tooltip');
   if (tip.empty()) {
-    tip = d3.select('body').append('div').attr('class', 'tooltip');
+    tip = d3.select('body').append('div').attr('class', 'chart-tooltip');
   }
   tip.html('')
     .style('opacity', 0.95)
@@ -1828,7 +1821,7 @@ function showTextTooltip(event, d) {
   tip.append('div').text('Era: ' + d.era);
   tip.append('div').text('Intertextual strength: ' + d.strength);
   tip.append('div').text('Description: ' + d.desc);
-  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3000);
+  setTimeout(() => tip.transition().duration(MOYUN_RM?0:400).style('opacity', 0), 3000);
 }
 
 function renderForce(networkData) {
@@ -1856,9 +1849,9 @@ function renderForce(networkData) {
     return d.color || '#8b4513';
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
     .force('link', d3.forceLink(links).id(d => d.id)
@@ -1940,7 +1933,7 @@ const relLink = svg.append('g').selectAll('.rel-link')
     .attr('stroke-width', 2)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       if (d.type === 'target') {
         tooltip.append('div').html('<strong>Journey to the West</strong>');
@@ -1974,7 +1967,7 @@ const relLink = svg.append('g').selectAll('.rel-link')
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // drag
@@ -2102,9 +2095,9 @@ function renderMatrix(matrixData) {
     .domain([0, 3])
     .interpolator(d3.interpolateRgb('#efe7d6', '#8b4513'));
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // cells
   const cells = g.selectAll('.matrix-cell')
@@ -2124,7 +2117,7 @@ function renderMatrix(matrixData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.text + ' × ' + d.type + '</strong>');
       tooltip.append('div').text('Intertextual strength: ' + d.value + ' / 3');
@@ -2136,7 +2129,7 @@ function renderMatrix(matrixData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // in-cell values
@@ -2299,9 +2292,9 @@ function renderRadar(radarData) {
       .text(lvl * 20);
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // one polygon per precursor text
   radarData.forEach(role => {
@@ -2322,7 +2315,7 @@ function renderRadar(radarData) {
       .style('cursor', 'pointer')
       .on('mouseover', function(e) {
         d3.select(this).attr('fill-opacity', 0.3);
-        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
         tooltip.html('');
         tooltip.append('div').html('<strong>《' + role.text + '》</strong>');
         dimensions.forEach(dim => {
@@ -2334,7 +2327,7 @@ function renderRadar(radarData) {
       })
       .on('mouseout', function() {
         d3.select(this).attr('fill-opacity', 0.1);
-        tooltip.transition().duration(400).style('opacity', 0);
+        tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
       });
 
     // vertex circles
@@ -2392,9 +2385,9 @@ function renderTimeline(timelineData) {
     .domain([0, 110])
     .range([innerH, 0]);
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // background grid
   g.append('g')
@@ -2425,7 +2418,7 @@ function renderTimeline(timelineData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>《' + d.text + '》</strong>');
       tooltip.append('div').text('Era: ' + d.era);
@@ -2438,7 +2431,7 @@ function renderTimeline(timelineData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // text labels (above nodes)
@@ -2587,9 +2580,9 @@ function renderSankey(sankeyLinkData) {
 
   const graph = sankeyGen({ nodes, links });
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    : d3.select('.chart-tooltip');
 
   // links
   svg.append('g').selectAll('path')
@@ -2607,7 +2600,7 @@ function renderSankey(sankeyLinkData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke-opacity', 0.75);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
       tooltip.append('div').text('Theory application weight: ' + d.value);
@@ -2617,7 +2610,7 @@ function renderSankey(sankeyLinkData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke-opacity', 0.4);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // nodes
@@ -2639,7 +2632,7 @@ function renderSankey(sankeyLinkData) {
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
       const catLabel = ['Theorist', 'Theory dimension', 'Journey to the West application'][d.cat] || '';
@@ -2652,7 +2645,7 @@ function renderSankey(sankeyLinkData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
 
   // node labels

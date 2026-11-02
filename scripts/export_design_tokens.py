@@ -16,6 +16,7 @@ Markdown：docs/00-导读/design.md（套件消费格式·D-4 裁决落位·由�
   python scripts/export_design_tokens.py                 # 导出 JSON + design.md
   python scripts/export_design_tokens.py --check-count   # AC-1：JSON 键数 == CSS 声明数
 """
+
 from __future__ import annotations
 
 import json
@@ -106,15 +107,17 @@ def parse_css(css_text: str, theme_default: str = "light") -> tuple[list[dict], 
                     warns.append(f"L{lineno}: 疑似残缺声明 {part[:40]!r}")
                 continue
             name, value = m.group(1), m.group(2).strip()
-            decls.append({
-                "name": name,
-                "value": value,
-                "desc": desc,
-                "theme": selector or theme_default,
-                "selector": selector or "(top)",
-                "section": section or "",
-                "line": lineno,
-            })
+            decls.append(
+                {
+                    "name": name,
+                    "value": value,
+                    "desc": desc,
+                    "theme": selector or theme_default,
+                    "selector": selector or "(top)",
+                    "section": section or "",
+                    "line": lineno,
+                }
+            )
     return decls, warns
 
 
@@ -161,7 +164,7 @@ def gen_markdown(decls: list[dict], counts: dict) -> str:
     groups: dict[str, dict[str, list[dict]]] = {}
     for d in decls:
         groups.setdefault(d["theme"], {}).setdefault(d["section"] or "（未分组）", []).append(d)
-    theme_titles = {"light": "Light 主题（:root）", "dark": "Dark 主题（html[data-theme=\"dark\"]·夜读模式）"}
+    theme_titles = {"light": "Light 主题（:root）", "dark": 'Dark 主题（html[data-theme="dark"]·夜读模式）'}
     for theme in [t for t in groups if t != "dark"] + [t for t in groups if t == "dark"]:
         out.append(f"## {theme_titles.get(theme, theme)}")
         out.append("")
@@ -178,8 +181,27 @@ def gen_markdown(decls: list[dict], counts: dict) -> str:
     return "\n".join(out) + "\n"
 
 
+def _sources_with_decls(decls):
+    """本次导出实际有声明的源文件列表（W1105：system.css 实测 0 声明·不虚标双源）。
+
+    解析 system.css 时其 `--x` 均为 var(--x) 引用而非声明 ⇒ 声明数为 0 ⇒ 不应列入 source。
+    返回形如 ["site/tokens.css"]；若将来 system.css 引入真声明则自动并列。
+    """
+    srcs = []
+    if any(d.get("source") == "site/tokens.css" for d in decls):
+        srcs.append("site/tokens.css")
+    if any(d.get("source") == "site/system.css" for d in decls):
+        srcs.append("site/system.css")
+    if not srcs:
+        srcs.append("site/tokens.css")
+    return srcs
+
+
 def main() -> int:
     check_count = "--check-count" in sys.argv
+    # W1105：--check 只读模式——审查/复算时不得写盘（原先只有 main() 一条路径
+    # 必然写盘 ⇒ 审查者直接跑会污染工作树；改为只读比对并以退出码报差异）
+    readonly = "--check" in sys.argv
     css = TOKENS_CSS.read_text(encoding="utf-8")
     sys_css = SYSTEM_CSS.read_text(encoding="utf-8") if SYSTEM_CSS.exists() else ""
     decls, warns = parse_css(css)
@@ -203,13 +225,48 @@ def main() -> int:
         "meta": {
             "generator": "scripts/export_design_tokens.py",
             "generated": date.today().isoformat(),
-            "source": ["site/tokens.css", "site/system.css"],
+            "source": _sources_with_decls(decls),
             "spec": "W3C Design Tokens 风格（DTCG 简化：$value/$type/$description + group/line 元数据）",
             "counts": counts,
             "warnings": warns,
         },
         "tokens": tokens,
     }
+    if readonly:
+        # 只读模式：逐字节比对磁盘产物与本次算得的产物，不写盘
+        md = gen_markdown(decls, counts)
+        exp_json = json.dumps(payload, ensure_ascii=False, indent=1)
+        diffs = []
+        for path, expected in ((OUT_JSON, exp_json), (OUT_MD, md)):
+            rel = path.relative_to(ROOT)
+            if not path.exists():
+                diffs.append(str(rel) + " 不存在")
+                continue
+            actual = path.read_text(encoding="utf-8")
+            if path == OUT_JSON:
+                # W1105 盲审必修：日期戳是**导出时点**而非内容 ⇒ 比对时排除
+                # `meta.generated`（否则隔天跑 --check 必红：内容零变化但日期变了
+                # ⇒ 本批明示交付的「只读对账」特性在次日即不可用）。
+                # 排除后仍按结构比对 ⇒ 内容真变化照样判红。
+                try:
+                    a = json.loads(actual)
+                    e = json.loads(expected)
+                    a.get("meta", {}).pop("generated", None)
+                    e.get("meta", {}).pop("generated", None)
+                    if a != e:
+                        diffs.append(str(rel) + " 内容与本次导出不一致（已排除 meta.generated 日期戳）")
+                except ValueError:
+                    if actual != expected:
+                        diffs.append(str(rel) + " 内容与本次导出不一致")
+            elif actual != expected:
+                diffs.append(str(rel) + " 内容与本次导出不一致")
+        for d in diffs:
+            print("FAIL  " + d)
+        if diffs:
+            print("---- 设计令牌导出 --check：%d 项差异（跑 export_design_tokens.py 无参刷新）----" % len(diffs))
+            return 1
+        print("---- 设计令牌导出 --check：0 差异（只读·未写盘）----")
+        return 0
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
     md = gen_markdown(decls, counts)
@@ -217,7 +274,9 @@ def main() -> int:
     OUT_MD.write_text(md, encoding="utf-8")
 
     print(f"导出完成：{OUT_JSON.relative_to(ROOT)}（{len(tokens)} 键）+ {OUT_MD.relative_to(ROOT)}")
-    print(f"  声明 {len(decls)} = light {themes.get('light', 0)} / dark {themes.get('dark', 0)} / 其他 {themes.get('system', 0) + sum(v for k, v in themes.items() if k not in ('light', 'dark', 'system'))} · 节 {len(sections)} · 警告 {len(warns)}")
+    print(
+        f"  声明 {len(decls)} = light {themes.get('light', 0)} / dark {themes.get('dark', 0)} / 其他 {themes.get('system', 0) + sum(v for k, v in themes.items() if k not in ('light', 'dark', 'system'))} · 节 {len(sections)} · 警告 {len(warns)}"
+    )
     for w in warns:
         print("  WARN", w)
 

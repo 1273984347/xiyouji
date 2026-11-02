@@ -1,3 +1,113 @@
+## W1105 遗留清偿批（归档健康根修 + 第 31 门禁两盲区 + design 审查收口 + 站点守卫与 tooltip 对齐）（2026-11-02）
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1105 | governance-or-doc |
+| AGENTS.md | W1105 | governance-or-doc |
+| CHANGELOG.md | W1105 | governance-or-doc |
+| DESIGN.md | W1105 | governance-or-doc |
+| HANDOVER.md | W1105 | governance-or-doc |
+| README.md | W1105 | governance-or-doc |
+| STRUCTURE.md | W1105 | governance-or-doc |
+| archive/README.md | W1105 | governance-or-doc |
+| archive/docs/AGENTS-ARCHIVE.md | W1105 | governance-or-doc |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1105 | governance-or-doc |
+| archive/docs/file-index-ARCHIVE.md | W1105 | governance-or-doc |
+| assets/design/ai-concepts/README.md | W1105 | governance-or-doc |
+| assets/design/tools/README.md | W1105 | governance-or-doc |
+| docs/00-导读/W批次编号对账表.md | W1105 | governance-or-doc |
+| docs/00-导读/项目说明.md | W1105 | governance-or-doc |
+| docs/11-方案报告/README.md | W1105 | report |
+| docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md | W1105 | report |
+| docs/11-方案报告/计划方案/T56-任务计划执行与经验沉淀报告-2026-11-02.md | W1105 | report |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1105 | report |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1105 | report |
+| docs/INDEX.md | W1105 | governance-or-doc |
+| docs/agent/gates.md | W1105 | governance-or-doc |
+| docs/agent/pitfalls.md | W1105 | governance-or-doc |
+| pytest.ini | W1105 | governance-or-doc |
+| scripts/INDEX.md | W1105 | script-or-artifact |
+| scripts/cascade_lock.py | W1105 | script-or-artifact |
+| scripts/check_archive_health.py | W1105 | script-or-artifact |
+| scripts/check_chart_design_parity.py | W1105 | script-or-artifact |
+| scripts/check_doc_sync.py | W1105 | script-or-artifact |
+| scripts/cross_line_baseline.json | W1105 | script-or-artifact |
+| scripts/export_design_tokens.py | W1105 | script-or-artifact |
+| scripts/output/INDEX.md | W1105 | script-or-artifact |
+| scripts/output/README.md | W1105 | script-or-artifact |
+| scripts/output/_cascade_files_W1105.txt | W1105 | script-or-artifact |
+| scripts/output/_vermilion_solid_cache.json | W1105 | script-or-artifact |
+| scripts/output/_w1102_spec.json | W1105 | script-or-artifact |
+| scripts/output/design-tokens.json | W1105 | script-or-artifact |
+| scripts/output/stats-changelog.json | W1105 | script-or-artifact |
+| scripts/output/stats-index.md | W1105 | script-or-artifact |
+| scripts/output/stats.json | W1105 | script-or-artifact |
+| scripts/output/tools-inventory.md | W1105 | script-or-artifact |
+| scripts/verify_delivery.py | W1105 | script-or-artifact |
+| scripts/visual_regression_probe.py | W1105 | script-or-artifact |
+| site/dashboard.html | W1105 | page-change |
+| site/data/81-hardships.html | W1105 | page-change |
+| site/data/chapter-stats.html | W1105 | page-change |
+| site/data/character-appearance.html | W1105 | page-change |
+| site/data/cross-time-danmaku.html | W1105 | page-change |
+| site/data/emotional-heatmap.html | W1105 | page-change |
+| site/data/search.html | W1105 | page-change |
+| site/data/tag-cloud.html | W1105 | page-change |
+| site/dukou-engine.html | W1105 | page-change |
+| site/en/aesthetics.html | W1105 | page-change |
+| site/en/business-model.html | W1105 | page-change |
+| site/en/cave-estate.html | W1105 | page-change |
+| site/en/chapter-stats.html | W1105 | page-change |
+| site/en/chapter-structure-graph.html | W1105 | page-change |
+| site/en/character-appearance.html | W1105 | page-change |
+| site/en/character-semantic-network.html | W1105 | page-change |
+| site/en/chart-design.html | W1105 | page-change |
+| site/en/counterfactual.html | W1105 | page-change |
+| site/en/cultural-misreading.html | W1105 | page-change |
+| site/en/deconstruction.html | W1105 | page-change |
+| site/en/dialogue-sentiment.html | W1105 | page-change |
+| site/en/ethics-consumption.html | W1105 | page-change |
+| site/en/four-heavenly-kings-artifacts.html | W1105 | page-change |
+| site/en/game-webnovel.html | W1105 | page-change |
+| site/en/global-pattern.html | W1105 | page-change |
+| site/en/guanyin-six-roles-network.html | W1105 | page-change |
+| site/en/hardship-heatmap.html | W1105 | page-change |
+| site/en/heaven-power-network.html | W1105 | page-change |
+| site/en/intertextuality-network.html | W1105 | page-change |
+| site/en/journey-geo-semiotics.html | W1105 | page-change |
+| site/en/journey-map-interactive.html | W1105 | page-change |
+| site/en/journey-route.html | W1105 | page-change |
+| site/en/jurisprudence.html | W1105 | page-change |
+| site/en/karma-reincarnation.html | W1105 | page-change |
+| site/en/language-style-radar.html | W1105 | page-change |
+| site/en/linguistics.html | W1105 | page-change |
+| site/en/magic-system.html | W1105 | page-change |
+| site/en/material-archaeology.html | W1105 | page-change |
+| site/en/methodology-matrix.html | W1105 | page-change |
+| site/en/ming-political-thought-comparison.html | W1105 | page-change |
+| site/en/monster-background.html | W1105 | page-change |
+| site/en/monster-female-network.html | W1105 | page-change |
+| site/en/monster-hierarchy-network.html | W1105 | page-change |
+| site/en/monster-sociology.html | W1105 | page-change |
+| site/en/monster-victims-network.html | W1105 | page-change |
+| site/en/narrative-experiment.html | W1105 | page-change |
+| site/en/narrative-rhythm-curve.html | W1105 | page-change |
+| site/en/narratology-12d-network.html | W1105 | page-change |
+| site/en/narratology-16d-network.html | W1105 | page-change |
+| site/en/philosophy.html | W1105 | page-change |
+| site/en/power-resources.html | W1105 | page-change |
+| site/en/search.html | W1105 | page-change |
+| site/en/six-senses-narratology-network.html | W1105 | page-change |
+| site/en/social-media.html | W1105 | page-change |
+| site/en/tag-cloud.html | W1105 | page-change |
+| site/en/text-evolution.html | W1105 | page-change |
+| site/en/underworld-power-network.html | W1105 | page-change |
+| site/en/visual-art.html | W1105 | page-change |
+| site/en/workplace.html | W1105 | page-change |
+| site/index.html | W1105 | page-change |
+| tests/unit/INDEX.md | W1105 | test |
+| tests/unit/README.md | W1105 | test |
+| tests/unit/test_check_chart_design_parity.py | W1105 | test |
+
 # xiyouji 文件反向索引
 
 > 与 [CHANGELOG.md](../../CHANGELOG.md) 配套：给定文件，查它被改过几次、每次对应哪个 W 条目。
@@ -128,45 +238,53 @@
 | scripts/output/_w1100_layer3_pages.json | W1100 | 本批工具/产物 |
 | docs/11-方案报告/计划方案/T55-任务计划执行与经验沉淀报告-2026-11-02.md | W1100 | 治理文档 |
 | archive/scripts/batches/w1100/_w1100_refresh_chain.py | W1100 | 本批工具/产物 |
-| archive/scripts/batches/w1100/_w1100_comp_source.py | W1100 | 本批工具/产物 |
-| archive/scripts/batches/w1100/README.md | W1100 | 本批工具/产物 |
-| archive/scripts/batches/w1100/INDEX.md | W1100 | 本批工具/产物 |
-| archive/scripts/batches/README.md | W1100 | 本批工具/产物 |
-| archive/scripts/batches/INDEX.md | W1100 | 本批工具/产物 |
-| scripts/output/_w1100_spec.json | W1100 | 本批工具/产物 |
-| docs/11-方案报告/README.md | W1100 | 治理文档 |
-| docs/00-导读/W批次编号对账表.md | W1100 | 治理文档 |
-| docs/agent/pitfalls.md | W1100 | 治理文档 |
-| .agent/skills/puti-shouye/SKILL.md | W1100 | 治理文档 |
-| .github/workflows/README.md | W1100 | 治理文档 |
-| AGENTS.md | W1100 | 治理文档 |
-| CHANGELOG.md | W1100 | 治理文档 |
-| CITATION.cff | W1100 | 治理文档 |
-| HANDOVER.md | W1100 | 治理文档 |
-| README.md | W1100 | 治理文档 |
-| STRUCTURE.md | W1100 | 治理文档 |
-| archive/docs/AGENTS-ARCHIVE.md | W1100 | 治理文档 |
-| archive/docs/CHANGELOG-ARCHIVE.md | W1100 | 治理文档 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1100 | 治理文档 |
-| archive/docs/file-index-ARCHIVE.md | W1100 | 治理文档 |
-| docs/00-导读/项目说明.md | W1100 | 治理文档 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1100 | 治理文档 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1100 | 治理文档 |
-| docs/INDEX.md | W1100 | 治理文档 |
-| scripts/output/INDEX.md | W1100 | 本批工具/产物 |
-| scripts/output/README.md | W1100 | 本批工具/产物 |
-| scripts/output/_cascade_files_W1100.txt | W1100 | 本批工具/产物 |
-| scripts/output/file-index.md | W1100 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1100 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1100 | 本批工具/产物 |
-| scripts/output/stats.json | W1100 | 本批工具/产物 |
-| scripts/output/tools-inventory.md | W1100 | 本批工具/产物 |
-| site/data/cross-time-danmaku.html | W1100 | 页面 |
-| site/data/search.html | W1100 | 页面 |
-| site/data/tag-cloud.html | W1100 | 页面 |
-| site/dukou-engine.html | W1100 | 页面 |
-| site/en/search.html | W1100 | 页面 |
-| site/index.html | W1100 | 页面 |
+|## W1099 图表色工程批·档 2 扩展批 3（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/visual_regression_probe.py | W1099 | 本批工具/产物 |
+| tests/unit/test_w851_visual_regression_probe.py | W1099 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1099 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_report.json | W1099 | 本批工具/产物 |
+| site/en/journey-map-interactive.html | W1099 | 页面 |
+| site/en/philosophy.html | W1099 | 页面 |
+| site/en/pilgrim-team-psychology-arc.html | W1099 | 页面 |
+| site/en/social-media.html | W1099 | 页面 |
+| docs/11-方案报告/计划方案/T54-任务计划执行与经验沉淀报告-2026-11-02.md | W1099 | 治理文档 |
+| scripts/output/_w1099_spec.json | W1099 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1099 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1099 | 治理文档 |
+| docs/agent/pitfalls.md | W1099 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1099 | 治理文档 |
+| .github/workflows/README.md | W1099 | 治理文档 |
+| AGENTS.md | W1099 | 治理文档 |
+| CHANGELOG.md | W1099 | 治理文档 |
+| CITATION.cff | W1099 | 治理文档 |
+| HANDOVER.md | W1099 | 治理文档 |
+| README.md | W1099 | 治理文档 |
+| STRUCTURE.md | W1099 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1099 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1099 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1099 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1099 | 治理文档 |
+| docs/00-导读/项目说明.md | W1099 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1099 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1099 | 治理文档 |
+| docs/INDEX.md | W1099 | 治理文档 |
+| scripts/output/INDEX.md | W1099 | 本批工具/产物 |
+| scripts/output/README.md | W1099 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1099.txt | W1099 | 本批工具/产物 |
+| scripts/output/file-index.md | W1099 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1099 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1099 | 本批工具/产物 |
+| scripts/output/stats.json | W1099 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1099 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1099 | 页面 |
+| site/data/search.html | W1099 | 页面 |
+| site/data/tag-cloud.html | W1099 | 页面 |
+| site/dukou-engine.html | W1099 | 页面 |
+| site/en/search.html | W1099 | 页面 |
+| site/index.html | W1099 | 页面 |
 
 ## W1099 图表色工程批·档 2 扩展批 3（2026-11-02）
 
@@ -5284,72 +5402,4 @@ docs/11-方案报告/README.md
 | archive/docs/AGENTS-ARCHIVE.md | W984 | 脚注滚动迁入的最老条目 |
 | CITATION.cff | W984 | version 同步为 W984 |
 | scripts/output/file-index.md | W984 | W984 段插入 |
-
-## W983 内页题图成套批·第四组（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-25-rulai.webp | W983 | 新增·站点版（25-rulai） |
-| site/static/images/plate-line-26-yudi.webp | W983 | 新增·站点版（26-yudi） |
-| site/static/images/plate-line-27-baiyan-mojun.webp | W983 | 新增·站点版（27-baiyan-mojun） |
-| site/static/images/plate-line-28-change.webp | W983 | 新增·站点版（28-change） |
-| site/static/images/plate-line-29-shenxue-ganyu-topic.webp | W983 | 新增·站点版（29-shenxue-ganyu-topic） |
-| site/static/images/plate-line-30-lujing-ditu-topic.webp | W983 | 新增·站点版（30-lujing-ditu-topic） |
-| site/static/images/plate-line-31-mima-pan-topic.webp | W983 | 新增·站点版（31-mima-pan-topic） |
-| site/static/images/plate-line-32-minsu-taofu-topic.webp | W983 | 新增·站点版（32-minsu-taofu-topic） |
-| site/static/images/plate-line-33-yixiang-puxi-topic.webp | W983 | 新增·站点版（33-yixiang-puxi-topic） |
-| site/static/images/plate-line-34-keju-zhidu-topic.webp | W983 | 新增·站点版（34-keju-zhidu-topic） |
-| site/static/images/plate-line-35-ch010-weizheng.webp | W983 | 新增·站点版（35-ch010-weizheng） |
-| site/static/images/plate-line-36-ch004-bimawen.webp | W983 | 新增·站点版（36-ch004-bimawen） |
-| site/reader/people/如来.html | W983 | 接入题图（如来（人物）） |
-| site/reader/people/玉帝.html | W983 | 接入题图（玉帝（人物）） |
-| site/reader/people/百眼魔君.html | W983 | 接入题图（百眼魔君（人物）） |
-| site/reader/people/嫦娥外传.html | W983 | 接入题图（嫦娥（人物）） |
-| site/reader/themes/神学干预机制专题.html | W983 | 接入题图（神学干预机制（主题）） |
-| site/reader/themes/取经路径地理符号学专题.html | W983 | 接入题图（取经路径地理符号学（主题）） |
-| site/reader/themes/取经密码学专题.html | W983 | 接入题图（取经密码学（主题）） |
-| site/reader/essays/西游与民俗学.html | W983 | 接入题图（西游与民俗学（跨学科）） |
-| site/reader/poetry/西游诗词意象谱系专题.html | W983 | 接入题图（西游诗词意象谱系（跨学科）） |
-| site/reader/culture/明代科举制度对照专题.html | W983 | 接入题图（明代科举制度对照（跨学科）） |
-| site/reader/ch010.html | W983 | 接入题图（第 010 回 魏征斩龙（回目页）） |
-| site/reader/ch004.html | W983 | 接入题图（第 004 回 官封弼马（回目页）） |
-| assets/promo/plate-set/plate-line-25~36-*.png/.webp | W983 | 新增 12 张母版（1200×1600·线描墨稿·含 3 张重出生效件） |
-| assets/promo/plate-set/raw/round12/ | W983 | 出图原件 12 份（含 #26/#27/#36 三张重出生效件） |
-| assets/promo/plate-set/preview-contact-sheet.png/.webp | W983 | 全目录 64 张缩略拼图（刷新） |
-| assets/promo/plate-set/README.md | W983 | 口径更新（52→64 张·第六组清单·本批已知取舍） |
-| scripts/_w983_make_spec.py | W983 | 级联 spec 生成器（文件清单从磁盘实算·不手抄） |
-| scripts/_w983_make_prompts.py | W983 | 母版复用生成器（249 字符母版逐字复用·四条断言·stem 冲突负样本自证） |
-| scripts/_w983_precheck_pages.py | W983 | 落位页先验（存在 + 无题图 + 结构锚点·负样本自证） |
-| scripts/_w983_derive.py | W983 | 施工脚本程序化派生器（替换表 + 残留硬编码断言） |
-| scripts/_w983_prepare.py | W983 | 成品派生（裁 3:4 → 缩放 → 纸色归一 → 母版/站点版 → 拼图·作用域限 raw/round12） |
-| scripts/_w983_download.py | W983 | 出图原件下载（node_id → 短链 → 落盘·按 node_id↔文件名映射） |
-| scripts/_w983_insert_plates.py | W983 | 12 页 chapter-plate 接入（幂等） |
-| scripts/_w983_retry.py | W983 | 单张重出修正器（行内短锚点替换 + 重建 batch + 断言修正点入 prompt） |
-| scripts/_w983_sheet.py | W983 | 本批 12 张核对拼图生成器 |
-| scripts/_w983_zoom.py | W983 | 关键部位放大核对图生成器 |
-| scripts/_w983_serve.py | W983 | 本地验收静态服务（补 webp/js/css MIME） |
-| scripts/_w945_plates_verify.py | W983 | 素材成套判据 J1–J10（自归档恢复为现役·判据逻辑逐字未改） |
-| scripts/_w951_check_crop.py | W983 | 站点版裁切验算（自归档恢复为现役·判据逻辑逐字未改） |
-| docs/11-方案报告/计划方案/执行前计划-T30-内页题图成套批第四组.md | W983 | 执行前计划件（框架号 T-30） |
-| docs/11-方案报告/计划方案/T30-任务计划执行与经验沉淀报告-2026-10-27.md | W983 | 终稿报告件（执行记录/验收/复盘/经验沉淀） |
-| docs/11-方案报告/README.md | W983 | §六 计划方案登记（+2 行·件数十 37→39） |
-| docs/agent/pitfalls.md | W983 | 坑表 +6 条（64→70·视觉渲染 12→15 / 流程 10→13） |
-| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W983 | 新增 §2.7 判据覆盖面的边界 + 4 条复现案例 |
-| docs/00-导读/W批次编号对账表.md | W983 | W983 认领行 + W982 行 git 反填 |
-| site/data/search.html | W983 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
-| site/en/search.html | W983 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
-| CHANGELOG.md | W983 | W983 段 |
-| docs/00-导读/W批次编号对账表.md | W983 | W983 认领行 |
-| README.md | W983 | 当前批次版本行 |
-| STRUCTURE.md | W983 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W983 | 当前批次版本行 |
-| .github/workflows/README.md | W983 | 工作流层版本面推进 W983 |
-| site/index.html | W983 | 页脚批次链插入 W983 |
-| site/data/cross-time-danmaku.html | W983 | 页脚批次链插入 W983 |
-| site/data/tag-cloud.html | W983 | 页脚批次链插入 W983 |
-| site/dukou-engine.html | W983 | 页脚批次链插入 W983 |
-| AGENTS.md | W983 | 版本脚注条目 + 坑位条数声明 64→70 |
-| archive/docs/AGENTS-ARCHIVE.md | W983 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W983 | version 同步为 W983 |
-| scripts/output/file-index.md | W983 | W983 段插入 |
 

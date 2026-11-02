@@ -42,8 +42,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-import gen_folder_docs as gen  # noqa: E402  单一事实源：在管目录集与清单算法全在此
-import tracked_files as tf  # noqa: E402  W894：目标提交树口径（git ls-files）
+import gen_folder_docs as gen  # noqa: E402  # 单一事实源：在管目录集与清单算法全在此
+import tracked_files as tf  # noqa: E402  # W894：目标提交树口径（git ls-files）
 
 MARKER = "---- 第 45 门禁 目录文档新鲜度："
 
@@ -65,6 +65,7 @@ _SUBSEC_RE = re.compile(r"^## 子目录（(\d+)）\s*$")
 _FILESEC_RE = re.compile(r"^## 文件（(\d+)）\s*$")
 _ITEM_DIR_RE = re.compile(r"^- `(.+)/`\s*$")
 _ITEM_FILE_RE = re.compile(r"^- `(.+?)`\s*$")
+
 
 # 大小写冲突豁免：目录内已有 INDEX.md 等变体时，生成器因 NTFS 覆写守卫（W779 判重·
 # gen.case_collides 全模式跳过）不管理该目录，门禁同口径豁免。判定在生成器模块
@@ -110,8 +111,7 @@ def parse_index(text: str) -> dict | None:
                 files.append(m.group(1))
     if title is None or sub_n is None or file_n is None:
         return None
-    return {"title": title, "sub_n": sub_n, "file_n": file_n,
-            "subdirs": subdirs, "files": files}
+    return {"title": title, "sub_n": sub_n, "file_n": file_n, "subdirs": subdirs, "files": files}
 
 
 def check_dir(abs_dir: str) -> list[str]:
@@ -143,43 +143,44 @@ def check_dir(abs_dir: str) -> list[str]:
     if _USE_TRACKED and gen._in_repo(abs_dir):
         # 子目录口径与生成器同源：EXCLUDE_SUBSTR / EXCLUDE_TOP 命中的目录不进清单
         # （例：tmpe 整目录被排除，但其 README.md 与 policy.yml 仍入库·W738 策略件）
-        want_sub = {n for n in tf.tracked_subdirs(rel)
-                    if not gen._is_excluded(os.path.join(abs_dir, n))}
+        want_sub = {n for n in tf.tracked_subdirs(rel) if not gen._is_excluded(os.path.join(abs_dir, n))}
         # 与生成器同源排除清单自身与占位件（SKIP_NAMES 是单一事实源）
         want_files = tf.tracked_in_dir(rel) - set(gen.SKIP_NAMES)
         doc_sub, doc_files = set(parsed["subdirs"]), set(parsed["files"])
         miss_sub = sorted(want_sub - doc_sub)
         miss_files = sorted(want_files - doc_files)
-        ghost_sub = sorted(n for n in doc_sub - want_sub
-                           if not os.path.isdir(os.path.join(abs_dir, n)))
-        ghost_files = sorted(n for n in doc_files - want_files
-                             if not os.path.isfile(os.path.join(abs_dir, n)))
+        ghost_sub = sorted(n for n in doc_sub - want_sub if not os.path.isdir(os.path.join(abs_dir, n)))
+        ghost_files = sorted(n for n in doc_files - want_files if not os.path.isfile(os.path.join(abs_dir, n)))
         if miss_sub or ghost_sub:
-            fails.append("C2 子目录清单漂移：%s（索引有清单无 %r·幽灵预引 %r）"
-                         % (label, miss_sub[:5], ghost_sub[:5]))
+            fails.append("C2 子目录清单漂移：%s（索引有清单无 %r·幽灵预引 %r）" % (label, miss_sub[:5], ghost_sub[:5]))
         if miss_files or ghost_files:
-            fails.append("C3 文件清单漂移：%s（索引有清单无 %r·幽灵预引 %r）"
-                         % (label, miss_files[:5], ghost_files[:5]))
+            fails.append(
+                "C3 文件清单漂移：%s（索引有清单无 %r·幽灵预引 %r）" % (label, miss_files[:5], ghost_files[:5])
+            )
         # 计数自洽（抓清单截断/自相矛盾；与口径无关）
         if parsed["sub_n"] != len(parsed["subdirs"]):
-            fails.append("C2 子目录计数自相矛盾：%s（计数 %d/条目 %d）"
-                         % (label, parsed["sub_n"], len(parsed["subdirs"])))
+            fails.append(
+                "C2 子目录计数自相矛盾：%s（计数 %d/条目 %d）" % (label, parsed["sub_n"], len(parsed["subdirs"]))
+            )
         if parsed["file_n"] != len(parsed["files"]):
-            fails.append("C3 文件计数自相矛盾：%s（计数 %d/条目 %d）"
-                         % (label, parsed["file_n"], len(parsed["files"])))
+            fails.append("C3 文件计数自相矛盾：%s（计数 %d/条目 %d）" % (label, parsed["file_n"], len(parsed["files"])))
     else:
         want_sub = gen.list_subdirs_disk(abs_dir)
         want_files = gen.list_files_disk(abs_dir)
         if parsed["sub_n"] != len(want_sub) or sorted(parsed["subdirs"]) != sorted(want_sub):
             miss = sorted(set(want_sub) - set(parsed["subdirs"]))[:5]
             extra = sorted(set(parsed["subdirs"]) - set(want_sub))[:5]
-            fails.append("C2 子目录清单漂移：%s（文档 %d 项/实算 %d 项·盘上多 %r·文档多 %r）"
-                         % (label, len(parsed["subdirs"]), len(want_sub), miss, extra))
+            fails.append(
+                "C2 子目录清单漂移：%s（文档 %d 项/实算 %d 项·盘上多 %r·文档多 %r）"
+                % (label, len(parsed["subdirs"]), len(want_sub), miss, extra)
+            )
         if parsed["file_n"] != len(want_files) or sorted(parsed["files"]) != sorted(want_files):
             miss = sorted(set(want_files) - set(parsed["files"]))[:5]
             extra = sorted(set(parsed["files"]) - set(want_files))[:5]
-            fails.append("C3 文件清单漂移：%s（文档 %d 项/实算 %d 项·盘上多 %r·文档多 %r）"
-                         % (label, len(parsed["files"]), len(want_files), miss, extra))
+            fails.append(
+                "C3 文件清单漂移：%s（文档 %d 项/实算 %d 项·盘上多 %r·文档多 %r）"
+                % (label, len(parsed["files"]), len(want_files), miss, extra)
+            )
     want_title = os.path.basename(abs_dir) if rel else "仓库根目录"
     if parsed["title"] != want_title:
         fails.append("C4 H1 标题漂移：%s（文档 %r/实际 %r）" % (label, parsed["title"], want_title))
@@ -199,8 +200,7 @@ def run_gate() -> int:
         all_fails.extend(check_dir(d))
     for f in all_fails:
         print("FAIL " + f)
-    print("%s%d FAIL / %d 目录（大小写冲突豁免 %d）----"
-          % (MARKER, len(all_fails), len(dirs), exempt))
+    print("%s%d FAIL / %d 目录（大小写冲突豁免 %d）----" % (MARKER, len(all_fails), len(dirs), exempt))
     return 1 if all_fails else 0
 
 
@@ -266,8 +266,7 @@ def self_test() -> int:
 
         ok = True
         for name, fails, expect in cases:
-            hit = (len(fails) == 0 if not expect
-                   else len(fails) > 0 and all(any(e in f for f in fails) for e in expect))
+            hit = len(fails) == 0 if not expect else len(fails) > 0 and all(any(e in f for f in fails) for e in expect)
             print(("PASS " if hit else "RED-MISS ") + name + ("" if hit else " → %r" % (fails,)))
             ok = ok and hit
         print("%sself-test 7 例（1 正 6 负）：%s ----" % (MARKER, "全过" if ok else "有红"))

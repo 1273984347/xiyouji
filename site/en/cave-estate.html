@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-YQF8hbt3xxbm+vNUfWACcHmXwjjwSpLGj4Ki+YQcCNY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-NvIwspO/eAXsMvnVF1c6YM4Y4Vwjq8LQMsF7Qi9t/jM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cave Estate Archive · Annotated Journey to the West</title>
@@ -1587,6 +1587,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
+<script>
     // ===== Embedded fallback data (used if fetch fails; contents from ../data/json/*.json) =====
     const EMBEDDED_DATA = {
         caves: [
@@ -1731,7 +1735,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("rx", 3)
             .style("opacity", 0.92)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 30)
             .attr("width",d => Math.max(0, Math.max(2, x(d.luxury))));
 
@@ -1812,7 +1816,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("d", arc)
             .style("opacity", 0)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 120)
             .style("opacity", 1);
 
@@ -1904,7 +1908,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("rx", 2)
             .style("opacity", 0.92)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 25)
             .attr("y", d => y(d.luxury))
             .attr("height", d => innerH - y(d.luxury));
@@ -2031,7 +2035,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("rx", 2)
             .style("opacity", 0.9)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 25)
             .attr("width",d => Math.max(0, d.minions_count === 0 ? 3 : Math.max(2, x(d.minions_count) - 1)));
 

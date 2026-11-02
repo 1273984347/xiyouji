@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Db41vVW8uKoxWiU8z4vpTMjL67nKN9sravQ/NRZLjA8=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-MT4tdsOTmlkqKOyAzaRwhG7XNe4sLOTqsTpfEnpeWNs=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Geosemiotics of the Pilgrimage Route · 详解西游记</title>
@@ -1310,28 +1310,6 @@ html[data-theme="dark"] .chapter-plate {
             cursor: grab;
         }
         .graph-wrap svg:active { cursor: grabbing; }
-        .tooltip {
-            position: absolute;
-            pointer-events: none;
-            background: var(--ink);
-            color: var(--paper-warm);
-            padding: 10px var(--space-4);
-            border-radius: var(--radius-sm);
-            font-size: 0.82rem;
-            box-shadow: var(--elev-3);
-            opacity: 0;
-            transition: opacity var(--dur-fast) ease;
-            max-width: 375px;
-            line-height: 1.6;
-            z-index: 10;
-        }
-        .tooltip strong { color: var(--accent-soft); }
-        .tooltip .tip-meta {
-            margin-top: var(--space-2);
-            font-size: 0.76rem;
-            color: color-mix(in srgb, var(--dark-text) 70%, transparent);
-            font-family: "JetBrains Mono", monospace;
-        }
         .legend {
             display: flex;
             flex-wrap: wrap;
@@ -1501,7 +1479,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="section-sub">Dots are geographic nodes, colored by type; lines represent route relations, with thickness and style distinguishing route semantics. Hover for details; click to expand the node detail panel.</div>
             <div class="graph-wrap" id="graphWrap">
                 <svg id="forceGraph" width="1120" height="560" role="img" aria-label="Force-directed graph of the pilgrimage-route geosemiotics"></svg>
-                <div class="tooltip" id="graphTip" role="tooltip"></div>
+                <div class="chart-tooltip" id="graphTip" role="tooltip"></div>
             </div>
             <div class="legend" id="graphLegend"></div>
             <div class="detail-panel" id="detailPanel" role="region" aria-live="polite">
@@ -1526,6 +1504,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
 <script>
     // ============== EMBEDDED_DATA（fallback 用） ==============
     const EMBEDDED_DATA = {
@@ -1722,7 +1704,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("fill", d => NODE_COLORS[d.type] || '#999')
             .attr("stroke", "#fff")
             .attr("stroke-width", 2.5)
-            .transition().duration(500).delay((d, i) => i * 80)
+            .transition().duration(MOYUN_RM?0:500).delay((d, i) => i * 80)
             .attr("r", radius);
 
         node.append("text")
@@ -1735,7 +1717,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-weight", 600)
             .style("pointer-events", "none")
             .style("opacity", 0)
-            .transition().duration(400).delay((d, i) => i * 80 + 200)
+            .transition().duration(MOYUN_RM?0:400).delay((d, i) => i * 80 + 200)
             .style("opacity", 1);
 
         // 力学模型

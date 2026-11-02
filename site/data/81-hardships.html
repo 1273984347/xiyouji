@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-mspZCaL3n8VOY+wsm/I4Fq1EkZHfg9PoBERWOC7oRUc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-FvtuTUrnGY0PlBLxTVcjsJrv5be7ct7ynjiQBslB1bc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难深度统计 · 详解西游记</title>
@@ -1486,6 +1486,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
         <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
     <script src="../static/js/d3-sankey.min.js"></script>
     <script>
 
@@ -1528,7 +1532,7 @@ function renderTreemap(opts){
     .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')'+(animate?' scale(0.92)':'');})
     .style('opacity',animate?0:1);
   if(animate){
-    cell.transition().duration(500)
+    cell.transition().duration(MOYUN_RM?0:500)
       .delay(function(d,i){return 200+Math.min(i*40,400);})
       .ease(d3.easeCubicOut)
       .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')';})
@@ -1811,7 +1815,7 @@ function renderTreemap(opts){
         if (animate) {
             svg.select("g").selectAll(".sankey-link")
                 .attr("opacity", 0)
-                .transition().duration(500).delay(200)
+                .transition().duration(MOYUN_RM?0:500).delay(MOYUN_RM?0:200)
                 .ease(d3.easeCubicOut)
                 .attr("opacity", 1);
         }
@@ -1825,7 +1829,7 @@ function renderTreemap(opts){
             .attr("class", "sankey-node")
             .attr("opacity", animate ? 0 : 1);
         if (animate) {
-            nodeG.transition().duration(500)
+            nodeG.transition().duration(MOYUN_RM?0:500)
                 .delay((d, i) => 200 + Math.min(i * 60, 400))
                 .ease(d3.easeCubicOut)
                 .attr("opacity", 1);

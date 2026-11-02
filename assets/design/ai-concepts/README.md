@@ -45,7 +45,7 @@
 ## 生成口径（可复算）
 
 - 提示词锁死：**无文字 / 单色墨 + 一处朱砂 / 宣纸底 / 无渐变 / 无 3D / 无卡通**；
-  提示词原文见 `../tools/concept_args.json` 与 `concept_args2.json`。
+  提示词原文见 `../tools/concept_args.json` 与 `../tools/concept_args2.json`。
 - 工具：`../tools/gen_concepts.py`（自动按 10 张分批调用 + 下载归一）。
 - 两次都出现**文字污染**（印面伪篆乱码、卷内混入汉字）→ 生成后必须专门查这一项，
   判废的两张即因此而来。
