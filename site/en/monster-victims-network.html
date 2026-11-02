@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n9jaJ7sH17dabr8nHGw4JcdhL4UVWCRXEw16lTBCVys=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nerXp8cKkk7l6AxGOiiM4LCCu96zZLu38x6uWsMpnNE=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster-Victim Network · Annotated Journey to the West</title>
@@ -1886,7 +1886,7 @@ const link = svg.append('g').selectAll('line')
     .attr('stroke', '#fff')
     .attr('stroke-width', 2)
     .on('mouseover', function(e, d) {
-      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      d3.select(this).attr('stroke', 'var(--chart-1)').attr('stroke-width', 3);
       tooltip.transition().duration(200).style('opacity', 0.95);
       tooltip.html('');
       const typeLabel = { victim: 'Victim', perpetrator: 'Perpetrator', bystander: 'Bystander', rescuer: 'Rescuer', chapter: 'Chapter' }[d.type] || d.type;
@@ -1959,7 +1959,7 @@ function renderSankey(sankeyData, victims) {
   }
 
   if (typeof d3.sankey === 'undefined') {
-    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#c8463a')
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', 'var(--chart-1)')
       .text('d3-sankey not loaded; please check your network');
     return;
   }
@@ -2036,7 +2036,7 @@ function renderSankey(sankeyData, victims) {
     .attr('stroke', '#fff')
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
-      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      d3.select(this).attr('stroke', 'var(--chart-1)').attr('stroke-width', 2);
       tooltip.transition().duration(200).style('opacity', 0.95);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');

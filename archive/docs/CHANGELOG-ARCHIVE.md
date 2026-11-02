@@ -16,6 +16,24 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W978（2026-10-27）：第 44 篇工作复盘批（触发器 T3 首触发·W955-W977 区间·P-44 四改进项登记）
+
+
+
+> **来源**：复盘触发器 T3 首次触发（W956 建·check_review_trigger 实跑：上篇复盘后提交 92 ≥ 80·距今 1.19 天）——「触发清单与周期栏带入报告」闭环首件产物；用户 2026-10-27 引用体检收官报告附带登记项令即办（W977 退役批 + 本篇复盘批连续执行）。
+
+> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md、scripts/_w978_review_evidence.py、scripts/output/_w978_review_evidence.json、docs/11-方案报告/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w978_spec.json、scripts/output/_cascade_files_W978.txt。
+
+**区间与体量**：第 43 篇收官（W954·2026-10-26）至 W977 收官后——**28.7 小时 · W955–W977 共 21 段（两面合看）· 对账表 23 行 · 提交 92 笔**（docs 36 / chore 23 / feat 18 / fix 15·10-26: 74 / 10-27: 18）。合规零提交 2（W958 让号留痕 / W962 并号闭环·经状态列核实）。
+
+**核心发现（四条）**：① 上篇 P-43 五项改进当期闭环 **5/5**（P-43-01/02/05 由 W956 机器化：preflight lagged 二分 / check_review_trigger 触发器 / _assert_status_wnum 段状态防线；P-43-03 由 W971 完成 102 段回填；P-43-04 由 W974 落地判据自证）——「复盘→改进→机器化」首次走通一整圈；② **体积窗口制建置 17 批后首次实战咬合**：W960 建窗 → W968 拆分 → W970 台账行归档工具 → W976 三窗齐超窗实拦且修剪回路三缺陷（A5 断言/修路指引/自撞）当场暴露当场修复 → 段式回窗成每批固定节奏；③ **沉淀通道机器化切换完成**：W975 坑表 57→63 → W976 64 条 + [TMPE] 收官提示位 → W977 一次性件 454 候选分级退役（286 入档/16 现役硬保留j S4 本地件不入仓）+ tmpe 工具晋升机制定性（历史零达标·沉淀主通道=坑表/方法论篇）；④ **tmpe 清理闭环 13 天首次走通**（主人「全清」31 项约 860MB 回收站·保护面 0 命中·分批验证留痕）。
+
+**改进项 P-44-01~04**：段式回窗并入级联收官自动提示 / tmpe `_shot`+`_inbox` 7 天 TTL 清理管线化（269MB+253MB 超龄）/ scripts 顶层 `_` 件计数提示位 / W1000 存量段 36 批随批顺带。风险面与可行性自评见报告 §10。
+
+**验证**：取证脚本 `_w978_review_evidence.py` 单源产出全部统计（附录 A 可复算）· check_review_trigger 实跑 T3 面板值入报告 · 21 段标题一手核对 · verify 全量 rc=0 + pytest 全绿 + ruff 0 见状态行。
+
+> - **状态**：已收官（`ec53ba95`·verify 全量 rc=0 + pytest 全绿 + ruff 0 + lint_links 0 broken·区间 21 段/92 提交·T3 面板 1.19 天/23 批/92 笔）
+
 ### W977（2026-10-27）：一次性件批量退役批（454 候选·286 入档·16 现役硬保留·152 S4 本地件不入仓）
 
 
