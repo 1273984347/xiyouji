@@ -99,7 +99,7 @@ def main():
             txt = p.read_text(encoding="utf-8", errors="ignore")
 
             # A. 脚本内颜色字面量
-            for m in re.finditer(r"<script\b[^>]*>(.*?)</script>", txt, re.S):
+            for m in re.finditer(r"<script\b[^>]*>(.*?)</script>", txt, re.S | re.I):
                 for name, hexv, ctx in classify(m.group(1)):
                     cat = "调色板色" if hexv[1:] in PAL else "页面自有 hex"
                     layer_totals[name] += 1
@@ -111,7 +111,7 @@ def main():
 
             # B. 样式内补偿规则
             styles = "\n".join(m.group(1) for m in
-                               re.finditer(r"<style\b[^>]*>(.*?)</style>", txt, re.S))
+                               re.finditer(r"<style\b[^>]*>(.*?)</style>", txt, re.S | re.I))
             if not styles.strip():
                 continue
             hits = []
