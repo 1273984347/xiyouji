@@ -1,0 +1,6957 @@
+{
+ "schema": "w1084-chart-render-probe/1",
+ "captured_at": "2026-11-02T08:13:07",
+ "page": "en/visual-art.html",
+ "floor_ms": 4000,
+ "variants": {
+  "light::base": {
+   "variant": "base",
+   "theme": "light",
+   "page": "en/visual-art.html",
+   "samples": [
+    {
+     "t": 133,
+     "total": 180,
+     "visible": 138,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 4016,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": ""
+    },
+    {
+     "t": 354,
+     "total": 792,
+     "visible": 724,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 403,
+     "total": 792,
+     "visible": 725,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 509,
+     "total": 792,
+     "visible": 726,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 603,
+     "total": 792,
+     "visible": 728,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 709,
+     "total": 792,
+     "visible": 730,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 804,
+     "total": 792,
+     "visible": 730,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 909,
+     "total": 792,
+     "visible": 730,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1006,
+     "total": 792,
+     "visible": 730,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1111,
+     "total": 792,
+     "visible": 730,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1207,
+     "total": 792,
+     "visible": 731,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1309,
+     "total": 792,
+     "visible": 733,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1409,
+     "total": 792,
+     "visible": 735,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1505,
+     "total": 792,
+     "visible": 736,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1610,
+     "total": 792,
+     "visible": 738,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1707,
+     "total": 792,
+     "visible": 740,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1809,
+     "total": 792,
+     "visible": 741,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1908,
+     "total": 792,
+     "visible": 742,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2010,
+     "total": 792,
+     "visible": 743,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2110,
+     "total": 792,
+     "visible": 743,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2203,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2309,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2403,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2508,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2607,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2708,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2809,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2904,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3011,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3103,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3213,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3306,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3418,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3512,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3606,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3716,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3810,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3906,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4015,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4107,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4216,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4308,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4417,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4512,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4603,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4713,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4805,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(233, 184, 133)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(200, 70, 58)|rgba(255, 255, 255, 0.88)"
+    }
+   ],
+   "errors": [
+    {
+     "t": 2,
+     "type": "sample",
+     "msg": "TypeError: Cannot read properties of null (reading 'getBoundingClientRect')"
+    }
+   ],
+   "d3errors": [],
+   "mutLog": [
+    {
+     "t": 118,
+     "target": "HEAD",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 118,
+     "target": "BODY",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#dataSource",
+     "added": 3,
+     "removed": 5
+    },
+    {
+     "t": 253,
+     "target": "#project-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "H3",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#project-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".english-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#project-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field.intro-block",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#artistic-statement",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".label",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#artistic-statement",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#wave-svg",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#wave-svg",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "defs",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#gold-glow",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#gold-glow",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "feMerge",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "feMerge",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "H3",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".english-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field.intro-block",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".intro-field.intro-block",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#scent-flow-svg",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 253,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    }
+   ],
+   "mutations": 3737,
+   "anchor_hits": 0,
+   "console": [],
+   "selfcheck": [
+    {
+     "bytes": 134564,
+     "declared_len": "134564"
+    }
+   ],
+   "browser_console": [
+    {
+     "level": "error",
+     "msg": "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+     "src": "browser"
+    }
+   ],
+   "csp_violations": 0
+  },
+  "dark::base": {
+   "variant": "base",
+   "theme": "dark",
+   "page": "en/visual-art.html",
+   "samples": [
+    {
+     "t": 307,
+     "total": 792,
+     "visible": 725,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 315,
+     "total": 792,
+     "visible": 725,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 409,
+     "total": 792,
+     "visible": 726,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 503,
+     "total": 792,
+     "visible": 727,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 612,
+     "total": 792,
+     "visible": 729,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 707,
+     "total": 792,
+     "visible": 731,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 812,
+     "total": 792,
+     "visible": 731,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 908,
+     "total": 792,
+     "visible": 731,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1012,
+     "total": 792,
+     "visible": 731,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1111,
+     "total": 792,
+     "visible": 731,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1204,
+     "total": 792,
+     "visible": 732,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1312,
+     "total": 792,
+     "visible": 734,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1407,
+     "total": 792,
+     "visible": 736,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1512,
+     "total": 792,
+     "visible": 737,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1610,
+     "total": 792,
+     "visible": 739,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1703,
+     "total": 792,
+     "visible": 741,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1812,
+     "total": 792,
+     "visible": 742,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 1906,
+     "total": 792,
+     "visible": 743,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2012,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2110,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2205,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2312,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2407,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2511,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2608,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2710,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2808,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 2903,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3013,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3105,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3215,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3308,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3415,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3511,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3602,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3710,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3803,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 3912,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4003,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4112,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4207,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4313,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4406,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4513,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4607,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4716,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    },
+    {
+     "t": 4809,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7318,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": "",
+     "tokenEls": "text|--accent-soft|rgb(232, 169, 159)|rgba(255, 255, 255, 0.88) ;; text|--chart-1|rgb(224, 96, 79)|rgba(255, 255, 255, 0.88)"
+    }
+   ],
+   "errors": [
+    {
+     "t": 2,
+     "type": "sample",
+     "msg": "TypeError: Cannot read properties of null (reading 'getBoundingClientRect')"
+    }
+   ],
+   "d3errors": [],
+   "mutLog": [
+    {
+     "t": 262,
+     "target": "HEAD",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 262,
+     "target": "BODY",
+     "added": 1,
+     "removed": 0
+    }
+   ],
+   "mutations": 1768,
+   "anchor_hits": 0,
+   "console": [],
+   "selfcheck": [
+    {
+     "bytes": 134564,
+     "declared_len": "134564"
+    }
+   ],
+   "browser_console": [
+    {
+     "level": "error",
+     "msg": "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+     "src": "browser"
+    }
+   ],
+   "csp_violations": 0
+  }
+ },
+ "compare": {}
+}
