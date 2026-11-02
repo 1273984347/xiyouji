@@ -1,6 +1,6 @@
 # .github 内部说明
 
-> **文件角色**：`.github/` 目录导读（人读·与 `INDEX.md` 分工：本文件讲用途约定、`index.md` 列清单）。
+> **文件角色**：`.github/` 目录导读（人读·与 `INDEX.md` 分工：本文件讲用途约定、`INDEX.md` 列清单）。
 > **为何叫 `README-internal.md`**：GitHub 查找仓库主页 README 的优先级是 `.github/` > 根目录 > `docs/`——
 > 本目录若存在 `README.md`，会**抢占仓库主页展示位**，使真正的项目门面（根目录 `README.md`）永远上不了主页
 > （W889 抓线上渲染 HTML 实证：主页显示的是本文件而非项目门面）。故本目录导读改用非标准名
