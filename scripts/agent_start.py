@@ -57,17 +57,56 @@ def _segments(changelog):
     return [d for _, d in segs]
 
 
+def load_stats_with_warnings(stats_path, changelog_path, stale_tolerance=2.0):
+    """读 stats.json 并返回 (stats, warnings)。
+
+    W1104（P-3 L1）：开局事实摘要原先把 stats.json 当**事实源**直读——读失败静默
+    pass（stats 变空字典且无任何提示）、陈旧也照单全收 ⇒ 属**静默降级**：Agent 拿到
+    过期或缺失的规模口径却以为是真的。本函数改为**三类显式告警**：
+
+      ① 缺失（FileNotFoundError）② 不可读/损坏（非合法 JSON）③ 内容为空或非对象
+      ④ 陈旧（mtime 早于事实源 CHANGELOG.md——链序：级联写 CHANGELOG → … → stats.py --w）
+
+    告警只提示不阻断（开局摘要不是门禁），但必须**显形**而非静默。
+    陈旧判据用 mtime 比较并留 stale_tolerance 容差（写盘粒度与链序执行间隔）。
+    """
+    warnings = []
+    stats = {}
+    try:
+        with open(stats_path, encoding="utf-8") as f:
+            stats = json.load(f)
+    except FileNotFoundError:
+        warnings.append("stats.json 缺失（%s）·规模口径不可用·"
+                        "请跑 py -3 scripts/stats.py --w <批号> 重建" % stats_path)
+        return stats, warnings
+    except (OSError, ValueError) as exc:
+        warnings.append("stats.json 不可读或损坏（%s：%s）·规模口径不可用·"
+                        "请跑 py -3 scripts/stats.py --w <批号> 重建"
+                        % (stats_path, exc))
+        return stats, warnings
+    if not isinstance(stats, dict) or not stats:
+        warnings.append("stats.json 为空或非对象（%s）·规模口径不可用·"
+                        "请跑 py -3 scripts/stats.py --w <批号> 重建" % stats_path)
+        return stats, warnings
+    try:
+        s_mtime = os.path.getmtime(stats_path)
+        c_mtime = os.path.getmtime(changelog_path)
+    except OSError:
+        return stats, warnings
+    if s_mtime + stale_tolerance < c_mtime:
+        warnings.append("stats.json 陈旧（早于 CHANGELOG.md 的最新改动）·"
+                        "规模口径可能过期·请跑 py -3 scripts/stats.py --w <批号> 刷新")
+    return stats, warnings
+
+
 def gather():
     changelog = read("CHANGELOG.md")
     segs = _segments(changelog)
     top = segs[0] if segs else None
     recent = segs[1:4]
-    stats = {}
-    try:
-        with open(os.path.join(HERE, "output", "stats.json"), encoding="utf-8") as f:
-            stats = json.load(f)
-    except (OSError, ValueError):
-        pass
+    stats, stats_warnings = load_stats_with_warnings(
+        os.path.join(HERE, "output", "stats.json"),
+        os.path.join(ROOT, "CHANGELOG.md"))
     ledger = read(os.path.join("docs", "00-导读", "W批次编号对账表.md"))
     m_now = RE_LEDGER_NOW.search(ledger)
     jiaojie = read("HANDOVER.md")
@@ -92,6 +131,7 @@ def gather():
         "head_desc": (top["desc"] if top else None),
         "recent_batches": recent,
         "stats": {k: (e.get("value") if isinstance(e, dict) else e) for k, e in stats.items() if not k.startswith("_")},
+        "stats_warnings": stats_warnings,
         "ledger_next_free": m_now.group(1) if m_now else None,
         "blockers": blockers,
         "claude_md": "CLAUDE.md 已由宿主自动加载（速查层·指针化）；必守规则入口=" + (rules[0] if rules else "CLAUDE.md"),
@@ -118,6 +158,8 @@ def render(d):
             "内容口径：A1-A6 %s 篇·方法论 %s 篇·scripts %s 类（全部实读 stats.json·勿用记忆值）"
             % (st.get("a1_a6_docs"), st.get("methodology_docs"), st.get("script_classes"))
         )
+    for w in d.get("stats_warnings") or []:
+        out.append("⚠ stats 状态告警：" + w)
     if d["blockers"]:
         out.append("当前阻塞（交接「零」段）：" + "；".join(d["blockers"]))
     out.append("开局三查：① git log --oneline -5 + gh run list 识别并行增量 ② 动手前 verify_delivery 全绿基线 ③ " + d["claude_md"])
