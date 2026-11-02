@@ -16,6 +16,28 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W979（2026-10-27）：收官提示位扩展批（P-44-01/02/03 落地 + P-44-04 活面零残留裁定免迁）
+
+
+
+> **来源**：用户 2026-10-27 引用第 44 篇复盘移交清单（P-44-01~04）令即办（下一自由号）。
+
+> - **文件**：scripts/batch_cascade.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w979_spec.json、scripts/output/_cascade_files_W979.txt。
+
+**P-44-01（回窗提示化）**：batch_cascade 收官提示位抽为 `_close_hints()` 集合函数（全部维持 W822「只输出不拦截」语义·fail-open 留痕），[SIZE] 块在 evaluate 有 FAIL 时输出「超窗——按 FAIL 行内指引跑对应归档工具回窗（段式/台账行分治）」提示行——级联每批插入一段、回窗自此从「异常」变「每批常态动作提示」。
+
+**P-44-02（TTL 报数）**：[TMPE] 块新增 `_shot`/`_inbox` 超龄报数（按 policy.yml ttl_days=7·首跑实测 _shot 3828 件 251MB + _inbox 163 件 215MB 均超龄且已过 48h 冻结窗）——到期列清单经主人确认走回收站；`_misc`（TTL 90d）零超龄。
+
+**P-44-03（防再积）**：新增 [SCRIPTS] 行——顶层 `_` 件跟踪态计数（git ls-files 过滤顶层·首跑 18 个，盘上 169 含 gitignore 本地件），超阈值 20 提示语料级退役扫描（W977 先例）。
+
+**P-44-04（三位号残留裁定：免迁）**：宽口径复扫活面（scripts/*.py|js|mjs + tests/unit 全部正则形态 `W\d{3}`/`w\d{3}`/`W[0-9]{3}`）**零残留**——W969 的 69 处升位已覆盖全部活面；余量均在历史冻结段（CHANGELOG 归档/台账行·禁改）与冷存储入档件（无前向兼容需求）⇒ **登记结案，W1000 兼容无需再迁**。
+
+**P-44-02 待主人确认项**：`_shot` 3828 件 251MB + `_inbox` 163 件 215MB 超龄删除候选（回收站通道·确认后执行）。
+
+**验证**：`_close_hints()` 直测输出三段齐全 + ruff 过 + 级联单测 5 过；[SIZE] 超窗提示在本批级联后实况自证（CHANGELOG 111/110 → 提示行出现 → archive_segments 回窗 110）。
+
+> - **状态**：已收官（`fb96ea05`·verify 全量 rc=0 + 级联单测 5 过 + ruff 0·超窗提示首跑自证）
+
 ### W978（2026-10-27）：第 44 篇工作复盘批（触发器 T3 首触发·W955-W977 区间·P-44 四改进项登记）
 
 

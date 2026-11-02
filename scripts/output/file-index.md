@@ -10,6 +10,54 @@
 
 ---
 
+## W1099 图表色工程批·档 2 扩展批 3（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/visual_regression_probe.py | W1099 | 本批工具/产物 |
+| tests/unit/test_w851_visual_regression_probe.py | W1099 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1099 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_report.json | W1099 | 本批工具/产物 |
+| site/en/journey-map-interactive.html | W1099 | 页面 |
+| site/en/philosophy.html | W1099 | 页面 |
+| site/en/pilgrim-team-psychology-arc.html | W1099 | 页面 |
+| site/en/social-media.html | W1099 | 页面 |
+| docs/11-方案报告/计划方案/T54-任务计划执行与经验沉淀报告-2026-11-02.md | W1099 | 治理文档 |
+| scripts/output/_w1099_spec.json | W1099 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1099 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1099 | 治理文档 |
+| docs/agent/pitfalls.md | W1099 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1099 | 治理文档 |
+| .github/workflows/README.md | W1099 | 治理文档 |
+| AGENTS.md | W1099 | 治理文档 |
+| CHANGELOG.md | W1099 | 治理文档 |
+| CITATION.cff | W1099 | 治理文档 |
+| HANDOVER.md | W1099 | 治理文档 |
+| README.md | W1099 | 治理文档 |
+| STRUCTURE.md | W1099 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1099 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1099 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1099 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1099 | 治理文档 |
+| docs/00-导读/项目说明.md | W1099 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1099 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1099 | 治理文档 |
+| docs/INDEX.md | W1099 | 治理文档 |
+| scripts/output/INDEX.md | W1099 | 本批工具/产物 |
+| scripts/output/README.md | W1099 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1099.txt | W1099 | 本批工具/产物 |
+| scripts/output/file-index.md | W1099 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1099 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1099 | 本批工具/产物 |
+| scripts/output/stats.json | W1099 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1099 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1099 | 页面 |
+| site/data/search.html | W1099 | 页面 |
+| site/data/tag-cloud.html | W1099 | 页面 |
+| site/dukou-engine.html | W1099 | 页面 |
+| site/en/search.html | W1099 | 页面 |
+| site/index.html | W1099 | 页面 |
+
 ## W1098 图表色工程批·档 2 扩展批 2（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -5226,27 +5274,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W980 | W980 段插入
 | scripts/output/_w980_spec.json | W980 | 本批级联 spec
 | scripts/output/_cascade_files_W980.txt | W980 | 级联落盘清单
-
-## W979 收官提示位扩展批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/batch_cascade.py | W979 | 收官提示位集合化 _close_hints()：[SIZE] 超窗回窗提示 + [TMPE] TTL 超龄报数 + [SCRIPTS] 顶层下划线件计数（P-44-01/02/03）
-| docs/00-导读/W批次编号对账表.md | W979 | W979 认领行与收官回填
-| CHANGELOG.md | W979 | W979 段
-| HANDOVER.md | W979 | 级联头尾链与里程碑块
-| README.md | W979 | 当前批次版本行
-| STRUCTURE.md | W979 | 当前批次版本行
-| docs/00-导读/项目说明.md | W979 | 当前批次版本行
-| .github/workflows/README.md | W979 | 工作流层版本面推进 W979
-| site/index.html | W979 | 页脚批次链插入 W979
-| site/data/cross-time-danmaku.html | W979 | 页脚批次链插入 W979
-| site/data/tag-cloud.html | W979 | 页脚批次链插入 W979
-| site/dukou-engine.html | W979 | 页脚批次链插入 W979
-| AGENTS.md | W979 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W979 | 脚注滚动迁入的最老条目
-| CITATION.cff | W979 | version 同步为 W979
-| scripts/output/file-index.md | W979 | W979 段插入
-| scripts/output/_w979_spec.json | W979 | 本批级联 spec
-| scripts/output/_cascade_files_W979.txt | W979 | 级联落盘清单
 
