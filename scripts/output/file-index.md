@@ -33,6 +33,7 @@
 | scripts/output/_w1097_spec.json | W1097 | 本批工具/产物 |
 | .agent/skills/puti-shouye/SKILL.md | W1097 | 治理文档 |
 | .github/workflows/README.md | W1097 | 治理文档 |
+| pytest.ini | W1097 | 本批修改（stats 实体标记跟随·pytest_collected 1108 → 1112·本批新增 4 例单测） |
 | AGENTS.md | W1097 | 治理文档 |
 | CHANGELOG.md | W1097 | 治理文档 |
 | CITATION.cff | W1097 | 治理文档 |
