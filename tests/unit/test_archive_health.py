@@ -44,7 +44,7 @@ def test_t2_coverage_semantics():
 
 
 def test_t2_batches_own_files_not_segments():
-    """batches/README.md 与 index.md 是 batches 的门面件——不得判为「段目录缺组行」。"""
+    """batches/README.md 与 INDEX.md 是 batches 的门面件——不得判为「段目录缺组行」。"""
     tracked = ["archive/scripts/batches/README.md", "archive/scripts/batches/index.md"]
     cov = cah.t2_coverage(tracked, "x")
     assert cov["segs_missing"] == []
