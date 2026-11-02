@@ -10,6 +10,60 @@
 
 ---
 
+## W1098 图表色工程批·档 2 扩展批 2（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/monster-capability-radar.html | W1098 | 页面 |
+| site/en/monster-sociology.html | W1098 | 页面 |
+| site/en/narrative-rhythm-curve.html | W1098 | 页面 |
+| site/en/power-resources.html | W1098 | 页面 |
+| site/en/monster-victims-network.html | W1098 | 页面 |
+| site/en/journey-spacetime.html | W1098 | 页面 |
+| site/en/narrative-experiment.html | W1098 | 页面 |
+| site/en/poetry-rhythm-analysis.html | W1098 | 页面 |
+| site/en/character-appearance.html | W1098 | 页面 |
+| site/en/hardship-difficulty-heatmap.html | W1098 | 页面 |
+| scripts/visual_regression_probe.py | W1098 | 本批工具/产物 |
+| tests/unit/test_w851_visual_regression_probe.py | W1098 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T53-任务计划执行与经验沉淀报告-2026-11-02.md | W1098 | 治理文档 |
+| scripts/output/_vermilion_solid_cache.json | W1098 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_report.json | W1098 | 本批工具/产物 |
+| scripts/output/_w1098_spec.json | W1098 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1098 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1098 | 治理文档 |
+| docs/agent/pitfalls.md | W1098 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1098 | 治理文档 |
+| .github/workflows/README.md | W1098 | 治理文档 |
+| AGENTS.md | W1098 | 治理文档 |
+| CHANGELOG.md | W1098 | 治理文档 |
+| CITATION.cff | W1098 | 治理文档 |
+| HANDOVER.md | W1098 | 治理文档 |
+| README.md | W1098 | 治理文档 |
+| STRUCTURE.md | W1098 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1098 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1098 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1098 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1098 | 治理文档 |
+| docs/00-导读/项目说明.md | W1098 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1098 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1098 | 治理文档 |
+| docs/INDEX.md | W1098 | 治理文档 |
+| scripts/output/INDEX.md | W1098 | 本批工具/产物 |
+| scripts/output/README.md | W1098 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1098.txt | W1098 | 本批工具/产物 |
+| scripts/output/file-index.md | W1098 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1098 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1098 | 本批工具/产物 |
+| scripts/output/stats.json | W1098 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1098 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1098 | 页面 |
+| site/data/search.html | W1098 | 页面 |
+| site/data/tag-cloud.html | W1098 | 页面 |
+| site/dukou-engine.html | W1098 | 页面 |
+| site/en/search.html | W1098 | 页面 |
+| site/index.html | W1098 | 页面 |
+
 ## W1097 图表色工程批·档 2 扩展批 1（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -5195,30 +5249,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W979 | W979 段插入
 | scripts/output/_w979_spec.json | W979 | 本批级联 spec
 | scripts/output/_cascade_files_W979.txt | W979 | 级联落盘清单
-
-## W978 第 44 篇工作复盘批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md | W978 | 第 44 篇工作复盘（W955-W977 区间·触发清单与周期栏带入）
-| scripts/_w978_review_evidence.py | W978 | 复盘取证脚本（全篇数字唯一源头·复算入口）
-| scripts/output/_w978_review_evidence.json | W978 | 取证产物（92 提交 / 21 段 / 23 行 / T3）
-| docs/11-方案报告/README.md | W978 | §五 登记行 26（第 44 篇）
-| docs/00-导读/W批次编号对账表.md | W978 | W978 认领行与收官回填
-| CHANGELOG.md | W978 | W978 段
-| HANDOVER.md | W978 | 级联头尾链与里程碑块
-| README.md | W978 | 当前批次版本行
-| STRUCTURE.md | W978 | 当前批次版本行
-| docs/00-导读/项目说明.md | W978 | 当前批次版本行
-| .github/workflows/README.md | W978 | 工作流层版本面推进 W978
-| site/index.html | W978 | 页脚批次链插入 W978
-| site/data/cross-time-danmaku.html | W978 | 页脚批次链插入 W978
-| site/data/tag-cloud.html | W978 | 页脚批次链插入 W978
-| site/dukou-engine.html | W978 | 页脚批次链插入 W978
-| AGENTS.md | W978 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W978 | 脚注滚动迁入的最老条目
-| CITATION.cff | W978 | version 同步为 W978
-| scripts/output/file-index.md | W978 | W978 段插入
-| scripts/output/_w978_spec.json | W978 | 本批级联 spec
-| scripts/output/_cascade_files_W978.txt | W978 | 级联落盘清单
 

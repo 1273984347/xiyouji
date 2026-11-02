@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pdhF9M4ta2l5WrKu2VHhKUjzc7mlNE/Iu0uS/NoB4xI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-iCKpmfR8XuRjP4Tokb3XO3CWDt/ZmaOG7xFgYeBF/AU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Poetry Rhythm Analysis Atlas · Annotated Journey to the West</title>
@@ -1852,7 +1852,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         g.append("rect")
             .attr("x", x(data[segIdx].chapter_range) - 4)
             .attr("y", 0).attr("width", x.bandwidth() + 8).attr("height", innerH)
-            .attr("fill", "#fff8e7").attr("stroke", "#e9b885").attr("stroke-dasharray", "3,3").attr("opacity", 0.7);
+            .attr("fill", "#fff8e7").attr("stroke", "var(--accent-soft)").attr("stroke-dasharray", "3,3").attr("opacity", 0.7);
 
         const tip = d3.select("#tl-tip");
         const wrapEl = wrap.parentElement;
@@ -2098,7 +2098,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             // 中位线
             g.append("line").attr("x1", cx - boxW / 2).attr("x2", cx + boxW / 2)
                 .attr("y1", y(d.median)).attr("y2", y(d.median))
-                .attr("stroke", "#c8463a").attr("stroke-width", 2.5)
+                .attr("stroke", "var(--chart-1)").attr("stroke-width", 2.5)
                 .style("opacity", 0)
                 .transition().duration(DUR).delay(i * 80 + 200).style("opacity", 1);
             // 中位数标签
