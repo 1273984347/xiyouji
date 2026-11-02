@@ -10,6 +10,63 @@
 
 ---
 
+## W1104 开局事实摘要 stats 新鲜度告警（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/visual_regression_probe.py | W1104 | 本批工具/产物 |
+| tests/unit/test_w851_visual_regression_probe.py | W1104 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1104 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_report.json | W1104 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_chart_color_inventory.py | W1104 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_layer3_pages.py | W1104 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_comp_provenance.py | W1104 | 本批工具/产物 |
+| scripts/output/_w1100_inventory.json | W1104 | 本批工具/产物 |
+| scripts/output/_w1100_layer3_pages.json | W1104 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_refresh_chain.py | W1104 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_comp_source.py | W1104 | 本批工具/产物 |
+| archive/scripts/batches/w1100/README.md | W1104 | 本批工具/产物 |
+| archive/scripts/batches/w1100/INDEX.md | W1104 | 本批工具/产物 |
+| archive/scripts/batches/README.md | W1104 | 本批工具/产物 |
+| archive/scripts/batches/INDEX.md | W1104 | 本批工具/产物 |
+| scripts/output/_w1104_spec.json | W1104 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1104 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1104 | 治理文档 |
+| docs/agent/pitfalls.md | W1104 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1104 | 治理文档 |
+| .github/workflows/README.md | W1104 | 治理文档 |
+| AGENTS.md | W1104 | 治理文档 |
+| CHANGELOG.md | W1104 | 治理文档 |
+| CITATION.cff | W1104 | 治理文档 |
+| HANDOVER.md | W1104 | 治理文档 |
+| README.md | W1104 | 治理文档 |
+| STRUCTURE.md | W1104 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1104 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1104 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1104 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1104 | 治理文档 |
+| docs/00-导读/项目说明.md | W1104 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1104 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1104 | 治理文档 |
+| docs/INDEX.md | W1104 | 治理文档 |
+| scripts/output/INDEX.md | W1104 | 本批工具/产物 |
+| scripts/output/README.md | W1104 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1104.txt | W1104 | 本批工具/产物 |
+| scripts/output/file-index.md | W1104 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1104 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1104 | 本批工具/产物 |
+| scripts/output/stats.json | W1104 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1104 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1104 | 页面 |
+| site/data/search.html | W1104 | 页面 |
+| site/data/tag-cloud.html | W1104 | 页面 |
+| site/dukou-engine.html | W1104 | 页面 |
+| site/en/search.html | W1104 | 页面 |
+| site/index.html | W1104 | 页面 |
+| scripts/agent_start.py | W1104 | 本批工具/产物 |
+| tests/unit/test_w1104_agent_start_freshness.py | W1104 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T56-任务计划执行与经验沉淀报告-2026-11-02.md | W1104 | 治理文档 |
+
 ## W1103 图表色工程批·ΔL* 阈值机器判据（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -5295,29 +5352,4 @@ docs/11-方案报告/README.md
 | archive/docs/AGENTS-ARCHIVE.md | W983 | 脚注滚动迁入的最老条目 |
 | CITATION.cff | W983 | version 同步为 W983 |
 | scripts/output/file-index.md | W983 | W983 段插入 |
-
-## W982 手搓绕过级联治理批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_doc_size_budget.py | W982 | C7 版本面契约（三层方案②）：三面锚尾/HEAD 句/链条≤3（排除创建于误计）/概要块>6 判红·挂 verify+开工双面
-| scripts/preflight_check.py | W982 | ③手搓前置劝导：级联面脏件 NOTE（quotePath=false 二次取数·实弹验证过）
-| tests/unit/test_doc_size_budget.py | W982 | C7 单测 2 例（良构零 FAIL/三破坏 FAIL 锁）
-| HANDOVER.md | W982 | 候选条目标记 W982 落地（①文件锁缓建裁决）+ 级联头尾链与里程碑块
-| docs/00-导读/W批次编号对账表.md | W982 | W982 认领行与收官回填
-| CHANGELOG.md | W982 | W982 段
-| README.md | W982 | 当前批次版本行
-| STRUCTURE.md | W982 | 当前批次版本行
-| docs/00-导读/项目说明.md | W982 | 当前批次版本行
-| .github/workflows/README.md | W982 | 工作流层版本面推进 W982
-| site/index.html | W982 | 页脚批次链插入 W982
-| site/data/cross-time-danmaku.html | W982 | 页脚批次链插入 W982
-| site/data/tag-cloud.html | W982 | 页脚批次链插入 W982
-| site/dukou-engine.html | W982 | 页脚批次链插入 W982
-| AGENTS.md | W982 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W982 | 脚注滚动迁入的最老条目
-| CITATION.cff | W982 | version 同步为 W982
-| scripts/output/file-index.md | W982 | W982 段插入
-| scripts/output/_w982_spec.json | W982 | 本批级联 spec
-| scripts/output/_cascade_files_W982.txt | W982 | 级联落盘清单
 
