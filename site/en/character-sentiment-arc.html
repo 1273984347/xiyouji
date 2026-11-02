@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-wostQYM3XbE5skkZOKPHLwQai0wH7mnFgeAoIcxmYxU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+eXiWL0wzrXQw9hq+DlifSsvaRJ/w39Qbm1o6/Mpb7s=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Sentiment Arc · 详解西游记</title>
@@ -1722,7 +1722,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             const wukongData = EMBEDDED.arc_overview.map(d => [d[0], d[1]]);
             const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
             g.append('path').datum(wukongData).attr('fill', 'none')
-                .attr('stroke', '#c8463a').attr('stroke-width', 3).attr('d', line);
+                .attr('stroke', 'var(--chart-1)').attr('stroke-width', 3).attr('d', line);
 
             // Turning points
             EMBEDDED.turning_points.forEach(tp => {
@@ -1732,7 +1732,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .attr('x1', tx).attr('x2', tx).attr('y1', ty).attr('y2', height + 30);
                 // Point
                 g.append('circle').attr('cx', tx).attr('cy', ty).attr('r', 7)
-                    .attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+                    .attr('fill', 'var(--chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
                     .style('cursor', 'pointer')
                     .on('mouseover', e => showTooltip(
                         `<strong style="color:#c8463a">Ch.${tp.chapter}</strong> · ${tp.event}<br>` +
@@ -1841,19 +1841,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             // U curve area
             const area = d3.area().x(d => x(d[0])).y0(y(0)).y1(d => y(d[1])).curve(d3.curveMonotoneX);
-            g.append('path').datum(EMBEDDED.u_curve).attr('fill', '#c8463a')
+            g.append('path').datum(EMBEDDED.u_curve).attr('fill', 'var(--chart-1)')
                 .attr('opacity', 0.18).attr('d', area);
 
             // U curve line
             const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
             g.append('path').datum(EMBEDDED.u_curve).attr('fill', 'none')
-                .attr('stroke', '#c8463a').attr('stroke-width', 3).attr('d', line);
+                .attr('stroke', 'var(--chart-1)').attr('stroke-width', 3).attr('d', line);
 
             // Points
             g.selectAll('.u-point').data(EMBEDDED.u_curve).enter()
                 .append('circle').attr('class', 'u-point')
                 .attr('cx', d => x(d[0])).attr('cy', d => y(d[1]))
-                .attr('r', 5).attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+                .attr('r', 5).attr('fill', 'var(--chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
                 .style('cursor', 'pointer')
                 .on('mouseover', (e, d) => showTooltip(
                     `<strong>Ch. ${d[0]-4}-${d[0]+5}</strong><br>Five-pilgrim mean: ${d[1].toFixed(3)}`, e))

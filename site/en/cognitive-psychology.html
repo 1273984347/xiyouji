@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1gK2vbrCgVylWNR7w106o8BbtlI1iY4S0e1Eh4pTdws=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-SjK05FosfI3AuBZqDvVAjuO7hE+58DqHTNWW+YUWGlM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cognitive Psychology · Annotated Journey to the West</title>
@@ -2203,12 +2203,12 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         // 信任度 line
         g.append('path').datum(phases)
             .attr('fill', 'none')
-            .attr('stroke', '#c8463a')
+            .attr('stroke', 'var(--chart-1)')
             .attr('stroke-width', 2.5)
             .attr('d', line1);
         g.append('path').datum(phases)
             .attr('fill', 'none')
-            .attr('stroke', '#3a6b8c')
+            .attr('stroke', 'var(--chart-2)')
             .attr('stroke-width', 2.5)
             .attr('d', line2);
 
@@ -2217,7 +2217,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             .data(phases).enter().append('circle')
             .attr('class', 'pt-trust')
             .attr('cx', d => x(d.phase)).attr('cy', d => y1(d.trust_wukong))
-            .attr('r', 6).attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+            .attr('r', 6).attr('fill', 'var(--chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
             .style('cursor', 'pointer')
             .on('mouseover', (e, d) => {
                 tooltip.show(
@@ -2234,7 +2234,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             .data(phases).enter().append('circle')
             .attr('class', 'pt-susp')
             .attr('cx', d => x(d.phase)).attr('cy', d => y2(d.suspicion_level))
-            .attr('r', 6).attr('fill', '#3a6b8c').attr('stroke', '#fff').attr('stroke-width', 2)
+            .attr('r', 6).attr('fill', 'var(--chart-2)').attr('stroke', '#fff').attr('stroke-width', 2)
             .style('cursor', 'pointer')
             .on('mouseover', (e, d) => {
                 tooltip.show(
@@ -2252,7 +2252,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         g.append('rect')
             .attr('x', bx - 30).attr('y', -10)
             .attr('width', 60).attr('height', h + 20)
-            .attr('fill', '#e9b885').attr('opacity', 0.18);
+            .attr('fill', 'var(--accent-soft)').attr('opacity', 0.18);
         g.append('text')
             .attr('x', bx).attr('y', -16)
             .attr('text-anchor', 'middle')
@@ -2573,7 +2573,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         g.append('path')
             .datum(phases)
             .attr('d', areaGen)
-            .attr('fill', '#e9b885')
+            .attr('fill', 'var(--accent-soft)')
             .attr('fill-opacity', 0.35);
 
         // axes
@@ -2592,7 +2592,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#c8463a')
+            .attr('fill', 'var(--chart-1)')
             .text('avg_intensity Average Intensity (0-10)');
         g.append('text').attr('class', 'axis-label')
             .attr('transform', 'rotate(-90)')
@@ -2605,7 +2605,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         const line = d3.line().x(d => x(d.key)).y(d => yI(d.intensity)).curve(d3.curveMonotoneX);
         g.append('path').datum(phases)
             .attr('fill', 'none')
-            .attr('stroke', '#c8463a')
+            .attr('stroke', 'var(--chart-1)')
             .attr('stroke-width', 3)
             .attr('d', line);
 
@@ -2614,7 +2614,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             .data(phases).enter().append('circle')
             .attr('class', 'pt-evo')
             .attr('cx', d => x(d.key)).attr('cy', d => yI(d.intensity))
-            .attr('r', 7).attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+            .attr('r', 7).attr('fill', 'var(--chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
             .style('cursor', 'pointer')
             .on('mouseover', (e, d) => {
                 const evoKey = d.key === 'Early' ? 'early_phase' : (d.key === 'Middle' ? 'middle_phase' : 'late_phase');
@@ -2634,7 +2634,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             .attr('x', d => x(d.key)).attr('y', d => yI(d.intensity) - 12)
             .attr('text-anchor', 'middle')
             .style('font-size', '11px').style('font-weight', '600')
-            .attr('fill', '#c8463a')
+            .attr('fill', 'var(--chart-1)')
             .text(d => 'Intensity ' + d.intensity);
 
         // 成功率标签

@@ -10,6 +10,59 @@
 
 ---
 
+## W1097 图表色工程批·档 2 扩展批 1（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/business-model.html | W1097 | 页面 |
+| site/en/cognitive-psychology.html | W1097 | 页面 |
+| site/en/jurisprudence.html | W1097 | 页面 |
+| site/en/concept-device.html | W1097 | 页面 |
+| site/en/guanyin-six-roles-network.html | W1097 | 页面 |
+| site/en/risk-project.html | W1097 | 页面 |
+| site/en/character-sentiment-arc.html | W1097 | 页面 |
+| site/en/heaven-power-network.html | W1097 | 页面 |
+| site/en/underworld-power-network.html | W1097 | 页面 |
+| site/en/karma-reincarnation.html | W1097 | 页面 |
+| scripts/visual_regression_probe.py | W1097 | 本批工具/产物 |
+| tests/unit/test_w851_visual_regression_probe.py | W1097 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T52-任务计划执行与经验沉淀报告-2026-11-02.md | W1097 | 治理文档 |
+| docs/11-方案报告/README.md | W1097 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1097 | 治理文档 |
+| docs/agent/pitfalls.md | W1097 | 治理文档 |
+| scripts/output/_w1097_spec.json | W1097 | 本批工具/产物 |
+| .agent/skills/puti-shouye/SKILL.md | W1097 | 治理文档 |
+| .github/workflows/README.md | W1097 | 治理文档 |
+| pytest.ini | W1097 | 本批修改（stats 实体标记跟随·pytest_collected 1108 → 1112·本批新增 4 例单测） |
+| AGENTS.md | W1097 | 治理文档 |
+| CHANGELOG.md | W1097 | 治理文档 |
+| CITATION.cff | W1097 | 治理文档 |
+| HANDOVER.md | W1097 | 治理文档 |
+| README.md | W1097 | 治理文档 |
+| STRUCTURE.md | W1097 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1097 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1097 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1097 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1097 | 治理文档 |
+| docs/00-导读/项目说明.md | W1097 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1097 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1097 | 治理文档 |
+| docs/INDEX.md | W1097 | 治理文档 |
+| scripts/output/INDEX.md | W1097 | 本批工具/产物 |
+| scripts/output/README.md | W1097 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1097.txt | W1097 | 本批工具/产物 |
+| scripts/output/file-index.md | W1097 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1097 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1097 | 本批工具/产物 |
+| scripts/output/stats.json | W1097 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1097 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1097 | 页面 |
+| site/data/search.html | W1097 | 页面 |
+| site/data/tag-cloud.html | W1097 | 页面 |
+| site/dukou-engine.html | W1097 | 页面 |
+| site/en/search.html | W1097 | 页面 |
+| site/index.html | W1097 | 页面 |
+
 ## W1096 INDEX 大小写统一 + design 审查 + 归档清偿（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -5168,41 +5221,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W978 | W978 段插入
 | scripts/output/_w978_spec.json | W978 | 本批级联 spec
 | scripts/output/_cascade_files_W978.txt | W978 | 级联落盘清单
-
-## W977 一次性件批量退役批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| archive/README.md | W977 | 归档台账组行 5 条（misc 60 + w6xx 2 + w7xx 31 + w8xx 42 + w9xx 152 = 287 件）
-| scripts/index.md | W977 | 目录文档刷新（顶层 _ 件 454 → 167：286 入档 + 152 S4 本地件 + 15 现役保留）
-| scripts/output/index.md | W977 | 目录文档刷新核对（output/ 自有 _w7xx 件与 spec 在位·零僵尸行）
-| archive/scripts/batches/README.md | W977 | 目录文档刷新（batches 总览）
-| archive/scripts/batches/index.md | W977 | 目录文档刷新（batches 索引）
-| archive/scripts/batches/misc/README.md | W977 | 目录文档刷新（misc 组）
-| archive/scripts/batches/misc/index.md | W977 | 目录文档刷新（misc 索引）
-| archive/scripts/batches/w6xx/README.md | W977 | 目录文档刷新
-| archive/scripts/batches/w6xx/index.md | W977 | 目录文档刷新
-| archive/scripts/batches/w7xx/README.md | W977 | 目录文档刷新
-| archive/scripts/batches/w7xx/index.md | W977 | 目录文档刷新
-| archive/scripts/batches/w8xx/README.md | W977 | 目录文档刷新（w8xx 新建组）
-| archive/scripts/batches/w8xx/index.md | W977 | 目录文档刷新（w8xx 新建组）
-| archive/scripts/batches/w9xx/README.md | W977 | 目录文档刷新（w9xx 本批最大组 +152）
-| archive/scripts/batches/w9xx/index.md | W977 | 目录文档刷新
-| docs/00-导读/W批次编号对账表.md | W977 | W977 认领行与收官回填
-| CHANGELOG.md | W977 | W977 段
-| HANDOVER.md | W977 | 级联头尾链与里程碑块
-| README.md | W977 | 当前批次版本行
-| STRUCTURE.md | W977 | 当前批次版本行
-| docs/00-导读/项目说明.md | W977 | 当前批次版本行
-| .github/workflows/README.md | W977 | 工作流层版本面推进 W977
-| site/index.html | W977 | 页脚批次链插入 W977
-| site/data/cross-time-danmaku.html | W977 | 页脚批次链插入 W977
-| site/data/tag-cloud.html | W977 | 页脚批次链插入 W977
-| site/dukou-engine.html | W977 | 页脚批次链插入 W977
-| AGENTS.md | W977 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W977 | 脚注滚动迁入的最老条目
-| CITATION.cff | W977 | version 同步为 W977
-| scripts/output/file-index.md | W977 | W977 段插入
-| scripts/output/_w977_spec.json | W977 | 本批级联 spec
-| scripts/output/_cascade_files_W977.txt | W977 | 级联落盘清单
 
