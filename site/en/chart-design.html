@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-RZDT7FX4+PgGc8EkXq6uiNqv6qPh1jeOWme8ZNbohv4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-rI7lqYtcR04BoKzy+DiFWrdYLMQB7YU5y1WqrCjFWDo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chart Design · Annotated Journey to the West</title>
@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Eighty-One Hardships Causal Domino Array · Spiral Mind-Cultivation Progress Bar · The Demon Twelve Double-Hours Sandtable · Annotated Journey to the West">
     <meta property="og:description" content="Eighty-One Hardships Causal Domino Array · Spiral Mind-Cultivation Progress Bar · The Demon Twelve Double-Hours Sandtable · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -76,20 +76,20 @@
     --ink-faint: #9A9280;     
 
     
-    --accent: #C8463A;        
+    --accent: var(--chart-1);        
     --accent-soft: #E9B885;   
-    --accent-2: #3A6B8C;      
-    --accent-3: #8A6D3B;      
-    --accent-4: #6B8E5A;      
+    --accent-2: var(--chart-2);      
+    --accent-3: var(--chart-6);      
+    --accent-4: var(--chart-4);      
     --rebel: #8C2A2A;         
 
     
-    --chart-1: #C8463A;       
-    --chart-2: #3A6B8C;       
+    --chart-1: var(--chart-1);       
+    --chart-2: var(--chart-2);       
     --chart-3: #B38F58;       
-    --chart-4: #6B8E5A;       
+    --chart-4: var(--chart-4);       
     --chart-5: #D8CFBC;       
-    --chart-6: #8A6D3B;       
+    --chart-6: var(--chart-6);       
 
     
     --line: #E5DFD0;          
@@ -209,7 +209,7 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg text,
 html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !important; }
 
   
-  html[data-theme="dark"] svg [fill="#3a6b8c" i] { fill: #7d99a9; }  
+  html[data-theme="dark"] svg [fill="var(--chart-2)" i] { fill: #7d99a9; }  
   html[data-theme="dark"] svg [fill="#6b3a8c" i] { fill: #a88bb0; }  
   html[data-theme="dark"] svg [fill="#8c3a6b" i] { fill: #b8879c; }  
   html[data-theme="dark"] svg [fill="#8c2a2a" i] { fill: #be8880; }  
@@ -2111,24 +2111,24 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // ============================================================
     // 5 domino chain theme colors
     const CHAIN_COLORS = {
-        "C1": "#c8463a",  // red · kasaya · tight-fillet spell
-        "C2": "#6B8E5A",  // green · Wuzhuang Temple · Daoist-Buddhist alliance
+        "C1": "var(--chart-1)",  // red · kasaya · tight-fillet spell
+        "C2": "var(--chart-4)",  // green · Wuzhuang Temple · Daoist-Buddhist alliance
         "C3": "#d97706",  // orange · Red Boy · Guanyin's expansion
-        "C4": "#8A6D3B",  // purple · Six-Eared Macaque · inner demon
-        "C5": "#3a6b8c"   // blue · Lion-Camel Ridge · Buddhist-Daoist contest
+        "C4": "var(--chart-6)",  // purple · Six-Eared Macaque · inner demon
+        "C5": "var(--chart-2)"   // blue · Lion-Camel Ridge · Buddhist-Daoist contest
     };
     // 5 spiral stage theme colors (echoing but distinct from the chain colors)
-    const STAGE_COLORS = ["#C9A063", "#c8463a", "#d97706", "#6B8E5A", "#3a6b8c"];
+    const STAGE_COLORS = ["#C9A063", "var(--chart-1)", "#d97706", "var(--chart-4)", "var(--chart-2)"];
     // Stage plot symbols
     const STAGE_EMOJI = ["⛰️", "💀", "👂", "🪭", "🪷"];
     // 6 demon theme colors
     const MONSTER_COLORS = {
-        "White Bone Spirit": "#c8463a",
-        "Green Ox Spirit": "#6B8E5A",
+        "White Bone Spirit": "var(--chart-1)",
+        "Green Ox Spirit": "var(--chart-4)",
         "Yellow-Robed Monster": "#d97706",
         "Red Boy": "#e9b885",
-        "Six-Eared Macaque": "#8A6D3B",
-        "Great Peng Golden-Winged Eagle": "#3a6b8c"
+        "Six-Eared Macaque": "var(--chart-6)",
+        "Great Peng Golden-Winged Eagle": "var(--chart-2)"
     };
     // W621：怪物名双形态兼容——部署 JSON 为中文名，页面色表键为英文名
     const MONSTER_KEY = d => ({ "White Bone Spirit": "White Bone Spirit", "Green Ox Spirit": "Green Ox Spirit", "Yellow-Robed Monster": "Yellow-Robed Monster", "Red Boy": "Red Boy", "Six-Eared Macaque": "Six-Eared Macaque", "Great Peng Golden-Winged Eagle": "Great Peng Golden-Winged Eagle" }[d.monster] || d.monster);
@@ -2142,13 +2142,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     const SACT_EN = { "Disguising as Wukong": "Disguising as Wukong", "Disguise Practice": "Disguise Practice", "Cultivation · Breathing": "Cultivation · Breathing", "Cultivating Samadhi True Fire": "Cultivating Samadhi True Fire", "Sleeping": "Sleeping", "—": "—", "Disguising as an Old Man · Killed by Wukong": "Disguising as an Old Man · Killed by Wukong", "Sleeping · Just Toss the Bracelet": "Sleeping · Just Toss the Bracelet", "Subdued by the Buddha": "Subdued by the Buddha", "Door Broken by Wukong · Battle": "Door Broken by Wukong · Battle", "Banquet · Eating People": "Banquet · Eating People", "Banquet · Eating Mortals": "Banquet · Eating Mortals", "Banquet · Eating Palace Maids": "Banquet · Eating Palace Maids", "Banquet · Eating Children": "Banquet · Eating Children", "Setting Up a Fake Pilgrimage Team": "Setting Up a Fake Pilgrimage Team", "Luring Tang Sanzang": "Luring Tang Sanzang", "Devising a Disguise Plan": "Devising a Disguise Plan", "Wounding Tang Sanzang · Stealing Luggage": "Wounding Tang Sanzang · Stealing Luggage", "Breakfast · Eating Mortal Children": "Breakfast · Eating Mortal Children", "Rising · Time with Baihuaxiu": "Rising · Time with Baihuaxiu", "Rising · Eating People": "Rising · Eating People", "Morning Tea": "Morning Tea", "Disguising as Wukong": "Disguising as Wukong", "Disguise Practice": "Disguise Practice", "Cultivation · Breathing": "Cultivation · Breathing", "Cultivating Samadhi True Fire": "Cultivating Samadhi True Fire", "Drinking Tea": "Drinking Tea", "Council · Consulting the Green Lion and White Elephant": "Council · Consulting the Green Lion and White Elephant", "Disguising as Wukong": "Disguising as Wukong", "Scouting Tang Sanzang's Movements": "Scouting Tang Sanzang's Movements", "Cultivation · Breathing": "Cultivation · Breathing", "Rising · Training": "Rising · Training", "Sleeping": "Sleeping", "Disguising as a Maiden": "Disguising as a Maiden", "Mountain Patrol": "Mountain Patrol", "Mountain Patrol · Scouting the Pilgrimage Team": "Mountain Patrol · Scouting the Pilgrimage Team", "Mountain Patrol · Scouting Tang Sanzang": "Mountain Patrol · Scouting Tang Sanzang", "Mountain Patrol (delegated to minor demons)": "Mountain Patrol (delegated to minor demons)", "Recruiting Troops · Taking Fake Minor Demons": "Recruiting Troops · Taking Fake Minor Demons", "—": "—", "Failing Again": "Failing Again", "Night Watch": "Night Watch", "Sleeping": "Sleeping", "Subdued by Guanyin": "Subdued by Guanyin", "Tea · Chess": "Tea · Chess", "Failure · Retreat": "Failure · Retreat", "Exposed by Diting · Fleeing": "Exposed by Diting · Fleeing", "Council": "Council", "Council · Consulting Minor Demons": "Council · Consulting Minor Demons", "Council · Planning to Capture Tang Sanzang": "Council · Planning to Capture Tang Sanzang", "Collecting Tribute from the Mortal World": "Collecting Tribute from the Mortal World", "Carrying Out the Capture Plan": "Carrying Out the Capture Plan", "Deploying Defenses · Setting Checkpoints": "Deploying Defenses · Setting Checkpoints", "Seeking the Buddha's Help · Exposed": "Seeking the Buddha's Help · Exposed", "Deployment · Setting Traps": "Deployment · Setting Traps", "Disguising Again": "Disguising Again", "Building a Fake Flower-Fruit Mountain": "Building a Fake Flower-Fruit Mountain", "Waiting for an Opportunity": "Waiting for an Opportunity", "Training Demon Soldiers": "Training Demon Soldiers", "Training Minor Demons": "Training Minor Demons", "Disguising as an Old Woman": "Disguising as an Old Woman", "Eating Tang Sanzang's Flesh (Failed)": "Eating Tang Sanzang's Flesh (Failed)", "Killed by Wukong": "Killed by Wukong", "Banquet · Eating People": "Banquet · Eating People", "Banquet · Eating Mortals": "Banquet · Eating Mortals", "Banquet · Eating Palace Maids": "Banquet · Eating Palace Maids" };
     // Activity type colors
     const ACTIVITY_COLORS = {
-        cultivate: "#8A6D3B",  // cultivation · purple
-        patrol: "#3a6b8c",     // patrol/recon · blue
-        feast: "#c8463a",      // banquet/eating · red
+        cultivate: "var(--chart-6)",  // cultivation · purple
+        patrol: "var(--chart-2)",     // patrol/recon · blue
+        feast: "var(--chart-1)",      // banquet/eating · red
         council: "#d97706",    // council · orange
         rest: "#6B6455",       // sleep/rest · gray
         battle: "#1a1410",     // battle/subdued · black
-        disguise: "#6B8E5A",   // disguise/flight · green
+        disguise: "var(--chart-4)",   // disguise/flight · green
         unknown: "#d9cdb8"     // unknown · light gray
     };
     const ACTIVITY_LABELS = {
@@ -2854,19 +2854,19 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             {
                 num: "01 · DOMINO",
                 title: "Dominoes · The Chart Is an Installation",
-                color: "#c8463a",
+                color: "var(--chart-1)",
                 desc: `<strong>${domino.design_innovation}</strong>. 5 chains and 16 dominoes, each domino's "cause" is the previous one's "effect"; on hover the domino tilts slightly and its shadow deepens, simulating physical linkage. Breaking chronological order and linking by butterfly effect, it reveals the pilgrimage project as a precisely designed <strong>"causal machine"</strong>.`
             },
             {
                 num: "02 · SPIRAL",
                 title: "Spiral Cultivation · ECG and Mandala",
-                color: "#8A6D3B",
+                color: "var(--chart-6)",
                 desc: `<strong>${spiral.design_innovation}</strong>. The Archimedean spiral r=a+bθ, with the center as departure and the outer ring as Buddhahood. Five stages are evenly spaced along the spiral, each stage point overlaid with the offset lines of Wukong (red) and Tang Sanzang (blue), turning the abstract concept of <strong>"the unsettled mind"</strong> into a quantifiable visual trajectory.`
             },
             {
                 num: "03 · SUNDIAL",
                 title: "Demon Sandtable · Reading Villains through Time Budgets",
-                color: "#6B8E5A",
+                color: "var(--chart-4)",
                 desc: `<strong>${monster.design_innovation}</strong>. Six circular sundials correspond to six demons; the twelve double-hours are equally divided with d3.pie + d3.arc, and activities are colored by seven categories. The White Bone Spirit is all reconnaissance and disguise (involution), while the Green Ox Spirit spends its time drinking tea and sleeping (ease) — <strong>using time budgets to reveal the survival-strategy differences between low-ranking and well-connected demons</strong>.`
             }
         ];
