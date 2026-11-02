@@ -1,0 +1,44 @@
+[
+ {
+  "page": "en/hardship-difficulty-heatmap.html",
+  "line": 1809,
+  "hit": ".style(\"fill\", \"#c8463a",
+  "ctx": ".style(\"font-weight\", \"600\") .style(\"fill\", \"#c8463a\") .st"
+ },
+ {
+  "page": "en/hardship-heatmap.html",
+  "line": 1835,
+  "hit": ".style(\"fill\", \"#c8463a",
+  "ctx": ".style(\"font-weight\", \"600\") .style(\"fill\", \"#c8463a\") .st"
+ },
+ {
+  "page": "en/journey-spacetime.html",
+  "line": 1671,
+  "hit": ".style(\"fill\", \"#c8463a",
+  "ctx": ".style(\"font-weight\", \"600\") .style(\"fill\", \"#c8463a\") .te"
+ },
+ {
+  "page": "en/magic-system.html",
+  "line": 2145,
+  "hit": ".style(\"fill\", \"#c8463a",
+  "ctx": "\", \"JetBrains Mono, monospace\") .style(\"fill\", \"#c8463a\") .st"
+ },
+ {
+  "page": "en/monster-sociology.html",
+  "line": 2656,
+  "hit": ".style('fill', '#c8463a",
+  "ctx": "- 4) .style('font-size', '10px').style('fill', '#c8463a') .te"
+ },
+ {
+  "page": "en/philosophy.html",
+  "line": 2634,
+  "hit": ".style('fill', '#c8463a",
+  "ctx": ".style('font-weight', '700') .style('fill', '#c8463a') .te"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "line": 1865,
+  "hit": ".style(\"fill\", \"#c8463a",
+  "ctx": "m\").style(\"font-weight\", \"600\") .style(\"fill\", \"#c8463a\") .te"
+ }
+]

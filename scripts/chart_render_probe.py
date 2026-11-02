@@ -164,6 +164,19 @@ PROBE_JS = r"""
     };
     const strokeComputed = computed('#timeline line', 'stroke');
     const fillComputed = computed('#timeline text', 'fill');
+    // 通用令牌读数：枚举全页内联样式里含 var(--chart- / var(--accent-soft) 的元素，
+    // 读其计算样式 ⇒ 证明「令牌直喂」是否真的落到渲染层（不依赖特定容器 id）。
+    const tokenEls = (function () {
+      const out = [];
+      const sel = '[style*="var(--chart-"],[style*="var(--accent-soft"]';
+      document.querySelectorAll(sel).forEach((n) => {
+        const m = (n.getAttribute('style') || '').match(/var\((--[a-z0-9-]+)\)/i);
+        const cs = getComputedStyle(n);
+        out.push(((n.tagName || '').toLowerCase()) + '|' + (m ? m[1] : '?')
+                 + '|' + cs.fill + '|' + cs.stroke);
+      });
+      return Array.from(new Set(out)).sort().join(' ;; ');
+    })();
     return {
       t: Date.now() - P.t0,
       total: all.length,
@@ -180,7 +193,8 @@ PROBE_JS = r"""
       bodyH: Math.round(document.body.getBoundingClientRect().height),
       tlStyles: tlStyles,
       strokeComputed: strokeComputed,
-      fillComputed: fillComputed
+      fillComputed: fillComputed,
+      tokenEls: tokenEls
     };
   };
   const tick = () => {
