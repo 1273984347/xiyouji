@@ -1,3 +1,23 @@
+### W1100（2026-11-02）：图表色工程批·档 3 落层分类盘点（只读批·1412 处口径与工程次序）
+
+> **来源**：用户 2026-11-02「都做开工」（ΔL\* 阈值判据 + 补偿机制按令牌匹配 + 档 3 铺开）⇒ 本批为三者的**前置依据批**。
+>
+> - **文件**：docs/11-方案报告/计划方案/T55-任务计划执行与经验沉淀报告-2026-11-02.md · archive/scripts/batches/w1100/_w1100_chart_color_inventory.py · archive/scripts/batches/w1100/_w1100_comp_provenance.py
+
+**本批要点**（只读盘点批·site/ 页面改动 **0** 件）：
+
+① **档 3 真实口径 = 1412 处 / 145 页**（互斥归类 + 层内分调色板色与自有 hex）：L2 echarts 配置色 **348**（84 页）· L3 Canvas **0** · L4 通用 CSS 属性值 **6**（16 页）· L5 裸 hex **1058**（143 页）；**校验项**：档 1/2 的调色板色 = **0** ⇒ 证实两档确已归零。
+
+② **另有 3404 处页面自有 hex**（非 12 色调色板）⇒ 属设计色板扩充议题，**不并入档 3**（混算会把 1412 处放大成 4816 处）。
+
+③ **补偿规则盘点**：前缀型 **990 条** + 字面值型 **20130 条** · 覆盖 **330 页** · **规则集合指纹仅 1 种**（每页 112 条完全一致 ⇒ 同源复制）· scripts/ 内**无生成器**（历史一次性粘贴）· tokens.css 另存 **114 处**共享副本 · 模板页 _template.html 含 114 条。
+
+④ **工程次序定案（本批核心产出）**：**W1101 ΔL\* 阈值机器判据**（工具层·独立可做）→ **档 3 原型验证批**（echarts 层先验「读令牌喂图表」·库自解析颜色串不吃 CSS 变量）→ **档 3 规模化**（145 页 ⇒ ≤10 页/批切 **15 批**·中英双胞胎页同批）→ **补偿收口排在档 3 之后**（补偿表含调色板色条目且当前对仍以字面值存在的调色板色生效，先删会让 1412 处暗色失去补偿而变暗 ⇒ 属真实视觉变化）→ 长期解法（让补偿对令牌元素生效）成本 330 页 + 新机制而收益低 ⇒ 建议以口径固化收口。
+
+⑤ **E-90**（盘点口径：互斥归类 + 色板分层 + 同源指纹溯源）+ 计数链五处（212 → **213**）。
+
+**验证**：三份归档盘点脚本可复算 · 门禁 0 FAIL · pytest 全绿 · **site/ 页面改动 0 件**（git diff 核验）。
+
 ### W1099（2026-11-02）：图表色工程批·档 2 扩展批 3（档 2 收尾·四页四处）
 
 > **来源**：用户 2026-11-02「继续下一批」·承接 W1098 档 2 扩展批 2。
@@ -1712,7 +1732,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1099），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1100），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1984,22 +2004,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：judge_gate 两次实跑（输出判定 + --report 落盘）·子域存活 303 实证 · 全量 verify + pytest 见状态行。
 
 > - **状态**：已收官（`63573221`·verify 全量 rc=0·重判中间态 78/30 日·判定记录已落盘）
-
-### W980（2026-10-27）：stats 标记同步机器化批（P-44-05 + W681 事实收官订正 + GoatCounter 取证中）
-
-
-
-> **来源**：用户 2026-10-27 令「做」（P-44-05 stats 三方同步机器化）+ 两项事实纠偏（agent-web 的 LLM 实测早已完成；GoatCounter API 可用——与仓内 W806 退役记录冲突，取证中）。
-
-> - **文件**：scripts/stats.py、tests/unit/test_stats_sync.py、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、archive/docs/W批次编号对账表-ARCHIVE.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w980_spec.json、scripts/output/_cascade_files_W980.txt。
-
-**P-44-05（stats 标记自动跟随）**：stats.py 新增 `sweep_markers()`——`--w` 落盘后自动把 C5b 对账面上的 `N<!--stats:KEY-->` 前置数字刷成本批实算值。**面 = check_doc_sync 权威面**（C5_DOC_NAMES 六文件 + CHANGELOG 口径块 + c5b_extra_surfaces：pytest.ini/site/index.html/11-方案报告递归排除计划方案）——面漂移即门禁与跟随同源漂移，不自造第二份清单。**两条防线内嵌**：① CHANGELOG 只扫首个「### W」段之前的口径块（历史段含字面标记叙述 W913 段实证·整文件扫必污染）；② 标记正则与 RE_STATS_MARK 同源（`[a-z_0-9]+` 含数字键——首版 `[a-z_]+` 被 a1_a6_docs 当场打回）。**首跑自证**：本批新增 4 例单测 → pytest_collected 925→929 → pytest.ini 与架构方案 v2 双标记自动跟随——P-44-05 立项时的手工杂务（W976/W978 两轮手工刷）自此消失。单测 4 例（失配更新/相等不动/历史段防污染/计划方案目录排除回归锁）。
-
-**W681 事实收官订正**：用户确认 agent-web 的 LLM 真端点实测早已完成——归档台账 W681 行定格「进行中（待三键）」属登记滞后（W971 回填只覆盖 W850-W963），按追加合规落订正注（原行未动）：进行中→**已闭环**（W680 主批落地 + engine.smoke 12/12·附记 agent-web 当前无 .env 本体=历史测试后未留档）。`Fetch_gate_stats` 同理见下条。
-
-**GoatCounter 数据链（取证中·待用户一信息）**：仓内 W806 裁决（2026-10-20）记载站点代码 `1273984347` 已失效并整体退役；用户 2026-10-27 口述「API 可以用」——最可能为账号/站点已重建（新站点代码不在仓内任何记录）。token 在位（51 字符），待用户提供现用站点地址后 `--site` 重探 + `judge_gate` 正式重判（W626 冻结的机器解冻条件：30 日 UV≥30）。本批不动 W806 退役记录。
-
-**验证**：单测 4/4 · ruff 0 · stats.py --w 实跑 sweep 跟随 2 处 + C5b 0 FAIL · check_doc_sync 0 FAIL · 全量 verify + pytest 见状态行。
-
-> - **状态**：已收官（`6d3fba13`·verify 全量 rc=0 + 单测 4/4 + C5b 0 FAIL·sweep 首跑跟随 2 处）
 
