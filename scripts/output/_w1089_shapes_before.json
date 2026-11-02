@@ -1,0 +1,36 @@
+{
+ "counts": {
+  "裸字面量": 1535,
+  "echarts color 数组/对象": 348,
+  "通用 CSS 属性值": 354,
+  "D3 .attr(fill/stroke)": 97,
+  "D3 .style(fill/stroke)": 26
+ },
+ "samples": {
+  "裸字面量": [
+   "dashboard.html :: LORS = { \"如来/观音安排\": \"#C8463A\",",
+   "dashboard.html :: \"#C8463A\", \"真正野怪\": \"#3A6B8C\",",
+   "dashboard.html :: C9A063\", \"人心自生的魔障\": \"#6B8E5A\" };"
+  ],
+  "echarts color 数组/对象": [
+   "data/aesthetics.html :: 果山·水帘洞·石猴出世\",scenes_count:4,color:\"#6B8E5A\",featur",
+   "data/aesthetics.html :: :\"女儿国·天竺·皇宫\",scenes_count:3,color:\"#c8463a\",featur",
+   "data/aesthetics.html :: 兜率宫·五庄观·菩提洞\",scenes_count:4,color:\"#3a6b8c\",featur"
+  ],
+  "通用 CSS 属性值": [
+   "data/aesthetics.html :: 果山·水帘洞·石猴出世\",scenes_count:4,color:\"#6B8E5A\",featur",
+   "data/aesthetics.html :: :\"女儿国·天竺·皇宫\",scenes_count:3,color:\"#c8463a\",featur",
+   "data/aesthetics.html :: 兜率宫·五庄观·菩提洞\",scenes_count:4,color:\"#3a6b8c\",featur"
+  ],
+  "D3 .attr(fill/stroke)": [
+   "en/business-model.html :: eight', h + 20) .attr('fill', '#e9b885').attr(",
+   "en/business-model.html :: 'fill', 'none') .attr('stroke', '#3a6b8c')",
+   "en/business-model.html :: )) .attr('r', 7).attr('fill', '#3a6b8c').attr("
+  ],
+  "D3 .style(fill/stroke)": [
+   "en/hardship-difficulty-heatmap.html :: weight\", \"600\") .style(\"fill\", \"#c8463a\")",
+   "en/hardship-heatmap.html :: weight\", \"600\") .style(\"fill\", \"#c8463a\")",
+   "en/journey-map-interactive.html :: -size\", \"11px\") .style(\"fill\", \"#6B8E5A\")"
+  ]
+ }
+}

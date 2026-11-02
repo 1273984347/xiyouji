@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "0acd8b78241c89aba3a641000c715b2b20b0301b",
+   "sha1": "1df2416382d6a57b56130d7afcfe8cce75d94c62",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "f7c8bf7caa6dff7a356219058c726aee9baf7571",
+   "sha1": "9a5c530383cd681250468415b29b530e1f8fca58",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "faf25b5b68153b8eee6946fe55f97134cba8815a",
+   "sha1": "85d065b71abc5b0dbfd0a40b3bf821976a424854",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -640,7 +640,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "632791614da5587de0a1bab0f4aa8bba39a78059",
+   "sha1": "21319e0db84fc86002e11ac295658900d190dac5",
    "counts": {
     "button": 1
    }
@@ -652,7 +652,7 @@
    }
   },
   "index.html": {
-   "sha1": "d32fc1fccfd5ec41041fdaf83e906e80a9c747cb",
+   "sha1": "5e71be281db1bb50e5677b3a75f76e64f7f55f5e",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1159,7 +1159,7 @@
    }
   },
   "en/journey-map-interactive.html": {
-   "sha1": "38811641e39a97fc9245c56945bc48a5f1bca004",
+   "sha1": "4747a9edb27e8a46e93bb1e28684e916ddeed416",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
@@ -1187,7 +1187,7 @@
    }
   },
   "en/karma-reincarnation.html": {
-   "sha1": "847dff8c3869b47c9a109d2119c378e20c0dd446",
+   "sha1": "aa75ca76ec0dab506ae2fa1089779697b2c964c0",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card.c-chusheng": 1
@@ -1262,7 +1262,7 @@
    }
   },
   "en/monster-capability-radar.html": {
-   "sha1": "49ef85e04c31632e70fb891960e26246a19cd575",
+   "sha1": "2e8e81835b447627ecffc36395e3e9f7d27f42ba",
    "counts": {
     "div.kpi-card": 1
    }
@@ -1371,7 +1371,7 @@
    }
   },
   "en/poetry-rhythm-analysis.html": {
-   "sha1": "dd0366ed0747beed56daf13e69e5dcb0b5419e75",
+   "sha1": "ed55be898d99fc422d4f8ad19366235d47f7dab6",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
@@ -1392,14 +1392,14 @@
    }
   },
   "en/risk-project.html": {
-   "sha1": "4873e2046dc9f5a8f27e13981c5760592fefb565",
+   "sha1": "417d66e2403ad8a23f7ed75469a1da59ea8db297",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card.c-tang": 1
    }
   },
   "en/search.html": {
-   "sha1": "1a2ee0d63888238e43f69e06718433f4921d16fa",
+   "sha1": "e7b17a9d3dcc1e7d8bf1e02b194e4dc25bc6ec46",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1466,7 +1466,7 @@
    }
   },
   "en/visual-art.html": {
-   "sha1": "13866727fa617d8bb4c7911b95b84c67d4bc9c13",
+   "sha1": "ea2d318bc8282c86768bbb8fbba01b87c58d1653",
    "counts": {
     "div.kpi-card": 1,
     "div.chant-card.amp-high": 1,
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-11-01T23:01:50.662Z"
+ "generated_at": "2026-11-02T00:21:54.734Z"
 }

@@ -1,0 +1,6863 @@
+{
+ "schema": "w1084-chart-render-probe/1",
+ "captured_at": "2026-11-02T08:03:36",
+ "page": "en/visual-art.html",
+ "floor_ms": 4000,
+ "variants": {
+  "light::base": {
+   "variant": "base",
+   "theme": "light",
+   "page": "en/visual-art.html",
+   "samples": [
+    {
+     "t": 151,
+     "total": 180,
+     "visible": 138,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 4066,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 558,
+     "total": 792,
+     "visible": 724,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 604,
+     "total": 792,
+     "visible": 727,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 703,
+     "total": 792,
+     "visible": 728,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 804,
+     "total": 792,
+     "visible": 728,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 904,
+     "total": 792,
+     "visible": 728,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1004,
+     "total": 792,
+     "visible": 728,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1104,
+     "total": 792,
+     "visible": 728,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1205,
+     "total": 792,
+     "visible": 730,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1304,
+     "total": 792,
+     "visible": 732,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1404,
+     "total": 792,
+     "visible": 733,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1504,
+     "total": 792,
+     "visible": 735,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1602,
+     "total": 792,
+     "visible": 737,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1703,
+     "total": 792,
+     "visible": 738,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1803,
+     "total": 792,
+     "visible": 740,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1903,
+     "total": 792,
+     "visible": 742,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2003,
+     "total": 792,
+     "visible": 742,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2103,
+     "total": 792,
+     "visible": 743,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2202,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2303,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2404,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2502,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2603,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2702,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2803,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2905,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3012,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3107,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3215,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3308,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3417,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3508,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3617,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3709,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3804,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3913,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4007,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4116,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4210,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4303,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4411,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4505,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4614,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4707,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4815,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4910,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 5004,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    }
+   ],
+   "errors": [
+    {
+     "t": 2,
+     "type": "sample",
+     "msg": "TypeError: Cannot read properties of null (reading 'getBoundingClientRect')"
+    }
+   ],
+   "d3errors": [],
+   "mutLog": [
+    {
+     "t": 146,
+     "target": "HEAD",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 146,
+     "target": "BODY",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#dataSource",
+     "added": 3,
+     "removed": 5
+    },
+    {
+     "t": 308,
+     "target": "#project-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "H3",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#project-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".english-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#project-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field.intro-block",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#artistic-statement",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".label",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#artistic-statement",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#spec-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".spec-item",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#wave-svg",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#wave-svg",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "defs",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#gold-glow",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#gold-glow",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "feMerge",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "feMerge",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-high",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-mid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#chant-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-chapter",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-context",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-amp",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-emotion",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chant-card.amp-low",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".ch-phrase",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "H3",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".english-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-intro",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".k",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".v",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field.intro-block",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-row",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".intro-field.intro-block",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 308,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#scent-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-head",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-cat.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-location",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-meta",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-profile",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-notes",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".chip",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-intensity",
+     "added": 5,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-mood",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-desc",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".scent-card.cat-desolate",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".sc-formula",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".note-row",
+     "added": 2,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#scent-flow-svg",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "g",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "text",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#idea-grid",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-n",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-name",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-form",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-concept",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".idea-card",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": ".id-innovation",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "#insights",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 309,
+     "target": "LI",
+     "added": 3,
+     "removed": 0
+    }
+   ],
+   "mutations": 3683,
+   "anchor_hits": 0,
+   "console": [],
+   "selfcheck": [
+    {
+     "bytes": 134513,
+     "declared_len": "134513"
+    }
+   ],
+   "browser_console": [
+    {
+     "level": "error",
+     "msg": "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+     "src": "browser"
+    }
+   ],
+   "csp_violations": 0
+  },
+  "dark::base": {
+   "variant": "base",
+   "theme": "dark",
+   "page": "en/visual-art.html",
+   "samples": [
+    {
+     "t": 234,
+     "total": 792,
+     "visible": 725,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7402,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 389,
+     "total": 792,
+     "visible": 725,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 407,
+     "total": 792,
+     "visible": 726,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 503,
+     "total": 792,
+     "visible": 727,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 606,
+     "total": 792,
+     "visible": 729,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 704,
+     "total": 792,
+     "visible": 731,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 805,
+     "total": 792,
+     "visible": 732,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 904,
+     "total": 792,
+     "visible": 732,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1006,
+     "total": 792,
+     "visible": 732,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1106,
+     "total": 792,
+     "visible": 732,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1206,
+     "total": 792,
+     "visible": 733,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1307,
+     "total": 792,
+     "visible": 734,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1407,
+     "total": 792,
+     "visible": 736,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1507,
+     "total": 792,
+     "visible": 738,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1603,
+     "total": 792,
+     "visible": 739,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1705,
+     "total": 792,
+     "visible": 741,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1804,
+     "total": 792,
+     "visible": 742,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 1906,
+     "total": 792,
+     "visible": 743,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2004,
+     "total": 792,
+     "visible": 744,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2107,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2206,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2305,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2405,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2503,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2604,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2703,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2812,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 2904,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3016,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3109,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3216,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3309,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3416,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3510,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3617,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3709,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3816,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 3909,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4004,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4113,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4207,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4302,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4411,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4504,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4612,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4704,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    },
+    {
+     "t": 4815,
+     "total": 792,
+     "visible": 745,
+     "cards": 0,
+     "cardsVis": 0,
+     "gridW": null,
+     "gridH": null,
+     "card0W": null,
+     "card0H": null,
+     "tlChildren": null,
+     "journeyRows": 0,
+     "treemapPaths": 0,
+     "bodyH": 7346,
+     "tlStyles": "",
+     "strokeComputed": "",
+     "fillComputed": ""
+    }
+   ],
+   "errors": [
+    {
+     "t": 1,
+     "type": "sample",
+     "msg": "TypeError: Cannot read properties of null (reading 'getBoundingClientRect')"
+    }
+   ],
+   "d3errors": [],
+   "mutLog": [
+    {
+     "t": 230,
+     "target": "HEAD",
+     "added": 1,
+     "removed": 0
+    },
+    {
+     "t": 230,
+     "target": "BODY",
+     "added": 1,
+     "removed": 0
+    }
+   ],
+   "mutations": 1749,
+   "anchor_hits": 0,
+   "console": [],
+   "selfcheck": [
+    {
+     "bytes": 134513,
+     "declared_len": "134513"
+    }
+   ],
+   "browser_console": [
+    {
+     "level": "error",
+     "msg": "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+     "src": "browser"
+    }
+   ],
+   "csp_violations": 0
+  }
+ },
+ "compare": {}
+}
