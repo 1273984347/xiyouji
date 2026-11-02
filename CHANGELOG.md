@@ -1,3 +1,25 @@
+### W1098（2026-11-02）：图表色工程批·档 2 扩展批 2（表现属性直喂与补偿失配落回类色实测）
+
+> **来源**：用户 2026-11-02「继续下一批」·承接 W1097 档 2 扩展批 1。
+>
+> - **文件**：docs/11-方案报告/计划方案/T53-任务计划执行与经验沉淀报告-2026-11-02.md · site/en/power-resources.html · scripts/visual_regression_probe.py
+
+**本批要点**：
+
+① **范围与口径**：档 2 剩余 **31 处 / 14 页**（按归档盘点脚本**同口径**复算：12 色调色板 + 只扫 `<script>` 块 + 正则不要求闭合括号）⇒ 依裁决 5「每批 ≤10 页灰度」切两批，**本批 10 页 27 处**（余 4 页 4 处待批三）。
+
+② **施工**：`.attr(fill/stroke, "#调色板色")` → **保留 `.attr`** 直写 `var(--chart-N)`（#c8463a→--chart-1 · #3a6b8c→--chart-2 · #6b8e5a→--chart-4 · #e9b885→--accent-soft）· 改后立即重算 CSP 哈希（10 页更新 · 856 页零漂移）· 批 2 十页内残留 **0**。
+
+③ **双态对拍**（J2 32 项属性集 · 十页 × 明暗 · **两拍同采样面同参数**）：差异 **93 条且全部为属性类**——`fill` 37 · `stroke` 36 · `filter` 20；其中 fill/stroke 的 after 值**全部为令牌暗色值**（令牌跟随成立），`filter` 由 `brightness(1.12) saturate(1.05)` 变 `none`（暗色亮度补偿失配）。**元素数零差异**：20 个页-主题组合逐项相同（两态各 14412 元素）⇒ 无塌缩、无多渲染。
+
+④ **例外 2 处的实测闭环**：2 处 `fill` 不是令牌值（`rgb(125,153,169)` → `rgb(242,235,220)`）⇒ 用**受控回退对照**（还原页 + **同步重算 CSP 哈希** + 同参数重读）定位：该页暗色补偿规则 `svg [fill="#3a6b8c" i]`（按 content attribute 字面值匹配 · 特异性 0,1,1）高于元素自身的 `.axis-label { fill: var(--ink) }`（0,1,0）⇒ 改前命中补偿规则（暗色 #7D99A9），改后失配 ⇒ **落回 CSS 类色** `var(--ink)`（#F2EBDC）⇒ 同组 4 个标签暗色色值由「2 个 #7D99A9 + 2 个 #F2EBDC 的不一致」**统一为 4 个 #F2EBDC** ⇒ 修复了原有不一致，**不是回归**。
+
+⑤ **档位复算**：档 2 全站剩余 31 → **4 处 / 4 页**。
+
+⑥ **E-88**：补偿失配有两种后果形态——`filter` 消失**与**computed fill 落回 CSS 类色（而非变成硬编码色）⇒ 判读必须逐元素读 computed 值，不能按直觉推断；补偿规则的**特异性优势只在字面值命中时存在** ⇒ 令牌化后元素可能落回设计系统自己的颜色。坑表 210 → **211**，计数链五处同步。
+
+**验证**：J2 双态快照 93 处差异清单逐条判读 · `python scripts/generate_csp.py --check` 856 页零漂移 · 全量门禁与 pytest 结果见台账与提交说明。
+
 ### W1097（2026-11-02）：图表色工程批·档 2 扩展批 1（表现属性直喂与补偿失配量化）
 
 
@@ -1668,7 +1690,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1097），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1098），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1980,22 +2002,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：`_close_hints()` 直测输出三段齐全 + ruff 过 + 级联单测 5 过；[SIZE] 超窗提示在本批级联后实况自证（CHANGELOG 111/110 → 提示行出现 → archive_segments 回窗 110）。
 
 > - **状态**：已收官（`fb96ea05`·verify 全量 rc=0 + 级联单测 5 过 + ruff 0·超窗提示首跑自证）
-
-### W978（2026-10-27）：第 44 篇工作复盘批（触发器 T3 首触发·W955-W977 区间·P-44 四改进项登记）
-
-
-
-> **来源**：复盘触发器 T3 首次触发（W956 建·check_review_trigger 实跑：上篇复盘后提交 92 ≥ 80·距今 1.19 天）——「触发清单与周期栏带入报告」闭环首件产物；用户 2026-10-27 引用体检收官报告附带登记项令即办（W977 退役批 + 本篇复盘批连续执行）。
-
-> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md、scripts/_w978_review_evidence.py、scripts/output/_w978_review_evidence.json、docs/11-方案报告/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w978_spec.json、scripts/output/_cascade_files_W978.txt。
-
-**区间与体量**：第 43 篇收官（W954·2026-10-26）至 W977 收官后——**28.7 小时 · W955–W977 共 21 段（两面合看）· 对账表 23 行 · 提交 92 笔**（docs 36 / chore 23 / feat 18 / fix 15·10-26: 74 / 10-27: 18）。合规零提交 2（W958 让号留痕 / W962 并号闭环·经状态列核实）。
-
-**核心发现（四条）**：① 上篇 P-43 五项改进当期闭环 **5/5**（P-43-01/02/05 由 W956 机器化：preflight lagged 二分 / check_review_trigger 触发器 / _assert_status_wnum 段状态防线；P-43-03 由 W971 完成 102 段回填；P-43-04 由 W974 落地判据自证）——「复盘→改进→机器化」首次走通一整圈；② **体积窗口制建置 17 批后首次实战咬合**：W960 建窗 → W968 拆分 → W970 台账行归档工具 → W976 三窗齐超窗实拦且修剪回路三缺陷（A5 断言/修路指引/自撞）当场暴露当场修复 → 段式回窗成每批固定节奏；③ **沉淀通道机器化切换完成**：W975 坑表 57→63 → W976 64 条 + [TMPE] 收官提示位 → W977 一次性件 454 候选分级退役（286 入档/16 现役硬保留j S4 本地件不入仓）+ tmpe 工具晋升机制定性（历史零达标·沉淀主通道=坑表/方法论篇）；④ **tmpe 清理闭环 13 天首次走通**（主人「全清」31 项约 860MB 回收站·保护面 0 命中·分批验证留痕）。
-
-**改进项 P-44-01~04**：段式回窗并入级联收官自动提示 / tmpe `_shot`+`_inbox` 7 天 TTL 清理管线化（269MB+253MB 超龄）/ scripts 顶层 `_` 件计数提示位 / W1000 存量段 36 批随批顺带。风险面与可行性自评见报告 §10。
-
-**验证**：取证脚本 `_w978_review_evidence.py` 单源产出全部统计（附录 A 可复算）· check_review_trigger 实跑 T3 面板值入报告 · 21 段标题一手核对 · verify 全量 rc=0 + pytest 全绿 + ruff 0 见状态行。
-
-> - **状态**：已收官（`ec53ba95`·verify 全量 rc=0 + pytest 全绿 + ruff 0 + lint_links 0 broken·区间 21 段/92 提交·T3 面板 1.19 天/23 批/92 笔）
 

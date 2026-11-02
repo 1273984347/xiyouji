@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2oZLfjhZJiqIBkXlHZ4GLpfcS/TeO2vI4tQPeiJMbEs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-XuMGOAIJ1zxhhpTHMX2BOTxs3kVjh/8em4eCMyupjo0=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lx8zNSBqazoU94m/W/iajalkovb3SXkXMQsP+Hl2JNI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-XuMGOAIJ1zxhhpTHMX2BOTxs3kVjh/8em4eCMyupjo0=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Sociology · Annotated Journey to the West</title>
@@ -2263,7 +2263,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             .attr('class', 'diff-bg')
             .attr('x', 0).attr('y', d => y(d.type))
             .attr('width', w).attr('height', y.bandwidth())
-            .attr('fill', '#e9b885')
+            .attr('fill', 'var(--accent-soft)')
             .attr('fill-opacity', d => d.detection_difficulty * 0.04)
             .attr('rx', 2);
 
@@ -2340,14 +2340,14 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             .style('font-size', '12px')
             .style('font-family', '"JetBrains Mono", "Consolas", monospace')
             .style('font-weight', '600')
-            .attr('fill', '#3a6b8c')
+            .attr('fill', 'var(--chart-2)')
             .text(d => 'success rate ' + (d.success_rate * 100).toFixed(0) + '%');
 
         g.append('text')
             .attr('x', w + 8).attr('y', -10)
             .style('font-size', '11px')
             .style('font-weight', '600')
-            .attr('fill', '#3a6b8c')
+            .attr('fill', 'var(--chart-2)')
             .text('success_rate');
     }
 
@@ -2647,7 +2647,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             .attr('cx', 0).attr('cy', 0)
             .attr('r', avgR)
             .attr('fill', 'none')
-            .attr('stroke', '#c8463a')
+            .attr('stroke', 'var(--chart-1)')
             .attr('stroke-dasharray', '6,4')
             .attr('stroke-width', 1.2);
         gridG.append('text')
