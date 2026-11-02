@@ -16,6 +16,20 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W982（2026-10-27）：手搓绕过级联治理批（三层方案②③落地·①缓建裁决）
+
+
+
+> **来源**：用户 2026-10-27 令「做」（第 44 篇复盘移交的最后一件·W956 立项候选）。
+
+> - **文件**：scripts/check_doc_size_budget.py、scripts/preflight_check.py、tests/unit/test_doc_size_budget.py、HANDOVER.md、dCREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w982_spec.json、scripts/output/_cascade_files_W982.txt。
+
+**三层方案落地（评审口径 ②最薄优先）**：② **C7 版本面契约**（check_doc_size_budget.collect 新增·挂 verify 体积窗口槽 + preflight 开工判据双面）——三文档版本行锚尾（README ·A1-A6 / STRUCTURE —A1-A6 / 项目说明 ·详细变更见）+ HANDOVER 当前 HEAD 句形态 + 更新链条目 ≤3 + 概要块 >6 判红；实现中两处修正（尾链行「创建于 2026-07-25」同 line 误计→只数最后更新：之后·单测断言空格差）。③ **preflight 手搓前置劝导**——工作树含级联面未提交改动即 NOTE 提示走 batch_cascade（只提示不拦截 W822·quotePath=false 二次取数防中文转义漏配·实弹验证注入/还原）。① **文件锁缓建裁决**：级联临时索引写与并行台账认领互斥未解，②③实证不足再启。
+
+**验证**：C7 单测 2 例（良构零 FAIL/三破坏 FAIL 锁）+ 既有 50 例全过 · 实盘 C7 零 FAIL · 劝导实弹注入/还原 · ruff 0 · 全量 verify + pytest 见状态行。
+
+> - **状态**：已收官（`c99377b8`·verify 全量 55/55 段全绿·pytest 677 passed/3 skipped·退出码 0·preflight 手搓劝导实弹 OK）
+
 ### W981（2026-10-27）：数据链恢复重判批（账号重启实证·重判中间态·judge_gate 路径修复·三处登记面订正）
 
 
