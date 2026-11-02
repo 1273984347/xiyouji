@@ -10,6 +10,53 @@
 
 ---
 
+## W1090 J2 视觉回归探针扩展（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/visual_regression_probe.py | W1090 | 本批工具/产物 |
+| tests/unit/test_w851_visual_regression_probe.py | W1090 | 本批工具/产物 |
+| scripts/output/README.md | W1090 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1090.txt | W1090 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1090 | 本批工具/产物 |
+| scripts/output/_w1090_spec.json | W1090 | 本批工具/产物 |
+| scripts/output/file-index.md | W1090 | 本批工具/产物 |
+| scripts/output/index.md | W1090 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1090 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1090 | 本批工具/产物 |
+| scripts/output/stats.json | W1090 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1090 | 本批工具/产物 |
+| .github/workflows/README.md | W1090 | 治理文档 |
+| .agent/skills/puti-shouye/SKILL.md | W1090 | 治理文档 |
+| AGENTS.md | W1090 | 治理文档 |
+| CHANGELOG.md | W1090 | 治理文档 |
+| CITATION.cff | W1090 | 治理文档 |
+| HANDOVER.md | W1090 | 治理文档 |
+| README.md | W1090 | 治理文档 |
+| STRUCTURE.md | W1090 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1090 | 治理文档 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1090 | 治理文档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1090 | 治理文档 |
+| archive/docs/file-index-ARCHIVE.md | W1090 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1090 | 治理文档 |
+| docs/00-导读/项目说明.md | W1090 | 治理文档 |
+| docs/11-方案报告/README.md | W1090 | 治理文档 |
+| docs/11-方案报告/计划方案/T48-任务计划执行与经验沉淀报告-2026-11-02.md | W1090 | 治理文档 |
+| docs/agent/pitfalls.md | W1090 | 治理文档 |
+| archive/scripts/batches/w1089/index.md | W1090 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1090 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1090 | 治理文档 |
+| docs/INDEX.md | W1090 | 治理文档 |
+| pytest.ini | W1090 | 治理文档 |
+| site/data/cross-time-danmaku.html | W1090 | 页面 |
+| site/data/search.html | W1090 | 页面 |
+| site/data/tag-cloud.html | W1090 | 页面 |
+| site/dukou-engine.html | W1090 | 页面 |
+| site/en/search.html | W1090 | 页面 |
+| site/index.html | W1090 | 页面 |
+| tests/unit/test_w851_visual_regression_probe.py | W1090 | 治理文档 |
+| scripts/output/design-tokens.json | W1090 | 本批工具/产物 |
+
 ## W1089 图表色工程批·档 1 扩展批 1（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -4693,47 +4740,4 @@ docs/11-方案报告/README.md
 | scripts/output/_cascade_files_W975.txt | W975 | 当批级联清单 |
 | CHANGELOG.md | W975 | W975 版段 |
 | docs/00-导读/W批次编号对账表.md | W975 | W975 认领行 |
-
-## W974 内页题图成套批·第三组（12 张）（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/plate-line-13-jinjiaodawang.webp | W974 | 新增·金角大王（人物） |
-| site/static/images/plate-line-14-yinjiaodawang.webp | W974 | 新增·银角大王（人物） |
-| site/static/images/plate-line-15-huangmeidawang.webp | W974 | 新增·黄眉大王（人物） |
-| site/static/images/plate-line-16-heixiongjing.webp | W974 | 新增·黑熊精（人物） |
-| site/static/images/plate-line-17-tuota-lijing.webp | W974 | 新增·托塔李靖（人物） |
-| site/static/images/plate-line-18-yutujing.webp | W974 | 新增·玉兔精（人物） |
-| site/static/images/plate-line-19-nvziguo-topic.webp | W974 | 新增·女儿国主题（主题） |
-| site/static/images/plate-line-20-chelingguo-topic.webp | W974 | 新增·车迟国斗法主题（主题） |
-| site/static/images/plate-line-21-shituoling-topic.webp | W974 | 新增·狮驼岭主题（主题） |
-| site/static/images/plate-line-22-tonghehe-topic.webp | W974 | 新增·通天河主题（主题） |
-| site/static/images/plate-line-23-pansidong-topic.webp | W974 | 新增·盘丝洞主题（主题） |
-| site/static/images/plate-line-24-wudidong-topic.webp | W974 | 新增·无底洞主题（主题） |
-| site/reader/people/金角银角深化专题.html | W974 | 接入题图（金角大王） |
-| site/reader/people/银角大王.html | W974 | 接入题图（银角大王） |
-| site/reader/people/黄眉老佛外传.html | W974 | 接入题图（黄眉大王） |
-| site/reader/people/黑熊精.html | W974 | 接入题图（黑熊精） |
-| site/reader/people/托塔李天王外传.html | W974 | 接入题图（托塔李靖） |
-| site/reader/people/玉兔精.html | W974 | 接入题图（玉兔精） |
-| site/reader/people/女儿国国王.html | W974 | 接入题图（女儿国主题） |
-| site/reader/people/车迟国三国师外传.html | W974 | 接入题图（车迟国斗法主题） |
-| site/reader/people/狮驼岭三魔-方向二深化.html | W974 | 接入题图（狮驼岭主题） |
-| site/reader/people/老鼋外传.html | W974 | 接入题图（通天河主题） |
-| site/reader/people/蜘蛛精.html | W974 | 接入题图（盘丝洞主题） |
-| site/reader/people/老鼠精.html | W974 | 接入题图（无底洞主题） |
-| assets/promo/plate-set/plate-line-13~24-*.png/.webp | W974 | 新增 12 张母版（1200×1600·线描墨稿） |
-| assets/promo/plate-set/raw/round11/ | W974 | 出图原件 12 份（含 15 号两次重出的生效件） |
-| assets/promo/plate-set/zoom-w974/ | W974 | 人眼放大复核图（12 张主体区全图 + 12 张局部放大 + 分组拼图） |
-| assets/promo/plate-set/README.md | W974 | 口径更新（40→52 张·第五组清单·抗噪口径·已知取舍） |
-| scripts/_w974_prepare.py | W974 | 本批专用成品处理（**主体顶抗噪口径**·只处理 raw/round11·不重写既有 40 张） |
-| scripts/_w974_make_prompts.py | W974 | 母版复用生成器（读 W953 JSON·三条断言 + 冲突检查负样本自证） |
-| scripts/_w974_insert_plates.py | W974 | 12 页 chapter-plate 接入（幂等） |
-| scripts/_w974_probe_subjtop.py | W974 | bbox 顶 vs 主体顶 全目录 52 张口径对比探针 |
-| scripts/_w974_negative_sample.py | W974 | 多维负样本合成器（J2/J3/J6/J8 四条可证伪） |
-| scripts/_w974_stats.py | W974 | 实测汇总（数字唯一源头·README 数字程序化回填） |
-| scripts/output/_w974_stats.json | W974 | 实测统计产物 |
-| scripts/output/_cascade_files_W974.txt | W974 | 当批级联清单 |
-| CHANGELOG.md | W974 | W974 版段 |
-| docs/00-导读/W批次编号对账表.md | W974 | W974 认领行 |
 
