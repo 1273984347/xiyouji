@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "78bfda3d5090666d144b01b978db2cb4346b2c4b",
+   "sha1": "75792c6f1a0e3de0116e31d4ce212898885c30ee",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "8adac8e7ba788d2b20d5d6a9643fec2774a0a531",
+   "sha1": "3c73609674b3024c6586f3cf301439129f49459b",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "409e3cf8e7a2094015adbe57970ebd7d52e9536d",
+   "sha1": "0bd78acfea552c7267e17e6462abb1a4233a973d",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -640,7 +640,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "4f53bbd8f40d987d80a550dae7f686bfc51fa315",
+   "sha1": "c07c79a51b90f92aea0c4f2d53854cc945396d51",
    "counts": {
     "button": 1
    }
@@ -652,7 +652,7 @@
    }
   },
   "index.html": {
-   "sha1": "29feddcab7b8b3469dea6960e25ef838d776b37c",
+   "sha1": "abbd83ddceb97fc75718cd5331f6f931fb476de3",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1122,14 +1122,14 @@
    }
   },
   "en/hardship-difficulty-heatmap.html": {
-   "sha1": "70d956724a02b862d60ddfa32639a07735248b36",
+   "sha1": "8305eaaee2edc99370d9f34f30ec4d628c6380c9",
    "counts": {
     "div.kpi-card": 1,
     "button.dim-btn.active": 1
    }
   },
   "en/hardship-heatmap.html": {
-   "sha1": "5c265097c0de071b8d3e0fa7c92d2ff2160b1201",
+   "sha1": "fb64b5f3950e3f2514aa9289e48b7f906107bb68",
    "counts": {
     "div.kpi-card": 1,
     "button.stage-btn.active": 1
@@ -1172,7 +1172,7 @@
    }
   },
   "en/journey-spacetime.html": {
-   "sha1": "3935af112b8b7e32eaf013ee6f94cdb296a15b1f",
+   "sha1": "532935415ec87812ba2e6616d65f5b6ca0450fc7",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
@@ -1210,7 +1210,7 @@
    }
   },
   "en/magic-system.html": {
-   "sha1": "96c0a9a94b4c5ee543f7e0e79d3452b6aa5b20a6",
+   "sha1": "7e5a613f4b4813ab9094ce4a4df06b9850ed716e",
    "counts": {
     "div.kpi-card": 1,
     "span.intensity-bar": 1,
@@ -1287,7 +1287,7 @@
    }
   },
   "en/monster-sociology.html": {
-   "sha1": "70c4f1a7b214a0848af82ed0edf8dd8c38f27bdd",
+   "sha1": "60aeb0b4d8dbe1a5c65638cfd44add19e76cd72a",
    "counts": {
     "div.kpi-card": 1,
     "div.signal-card.s-active": 3
@@ -1350,7 +1350,7 @@
    }
   },
   "en/philosophy.html": {
-   "sha1": "a764de79f9e2c3ca27d682b8e2924b0d8659bec7",
+   "sha1": "4f8305219c89ce35daf23bad222b90d2e6bf8107",
    "counts": {
     "div.kpi-card": 1
    }
@@ -1364,7 +1364,7 @@
    }
   },
   "en/pilgrim-team-psychology-arc.html": {
-   "sha1": "cad219483490074c9c2179bbd736845a1775ab23",
+   "sha1": "97e6882d980ecb874e05572ca7c5d2d8e1393e23",
    "counts": {
     "div.kpi-card": 1,
     "div.progress-fill": 1
@@ -1399,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "0ca4ac1b88f239a2b2b9e0b3e695acdea2c21365",
+   "sha1": "d66eb610fef9eee924d22fca9e6d1ce5a53bbbd3",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-11-02T01:07:35.598Z"
+ "generated_at": "2026-11-02T01:54:56.132Z"
 }
