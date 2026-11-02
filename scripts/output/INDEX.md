@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（528）
+## 文件（529）
 
 ### Markdown 文档
 
@@ -339,6 +339,7 @@
 - `_w1103_spec.json`
 - `_w1104_spec.json`
 - `_w1105_spec.json`
+- `_w1106_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
