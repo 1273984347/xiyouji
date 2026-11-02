@@ -21,7 +21,7 @@
 | `scripts/guardrails/check_nested_comprehension.py` | 嵌套推导式检查（ruff 0.16.9 无对应规则） | 人工 |
 | `tests/fixtures/_sample.py` | 故意违规样板，只用于验证检查确实会报 | 勿改 |
 
-> 本目录的 `index.md` 与 `scripts/guardrails/` 下的 `index.md` / `README.md` 由仓库 `scripts/gen_folder_docs.py` 自动生成，已刷新到与磁盘一致，不手改；本文件是人工维护件（无「生成来源」标记，`--refresh` 不覆写）。
+> 本目录的 `INDEX.md` 与 `scripts/guardrails/` 下的 `INDEX.md` / `README.md` 由仓库 `scripts/gen_folder_docs.py` 自动生成，已刷新到与磁盘一致，不手改；本文件是人工维护件（无「生成来源」标记，`--refresh` 不覆写）。
 
 ## 2. 怎么启用（按顺序做，全部是真实命令）
 

@@ -44,7 +44,7 @@ ROOT_FILES = {
     ".gitignore", ".gitattributes", ".git-blame-ignore-revs", ".pre-commit-config.yaml",
     ".env.example",
     # 生成物（gen_folder_docs）
-    "index.md",
+    "INDEX.md",
 }
 
 # 顶层目录角色（与 STRUCTURE.md「目录职责」表一一对应）
@@ -145,15 +145,15 @@ def run_report():
 
 def _self_test():
     """5 例：干净态 / 根文件多出 / 顶层目录多出 / 隐藏目录豁免 / 白名单陈腐可检出。"""
-    A_F = {"README.md", "index.md"}
+    A_F = {"README.md", "INDEX.md"}
     A_D = {"docs", "scripts", "site"}
     cases = [
         # 名称, 磁盘文件, 磁盘目录, 允许文件, 允许目录, 期望 extra_files, extra_dirs, missing
-        ("干净态放行", ["README.md", "index.md"], ["docs", "scripts", "site"], A_F, A_D, 0, 0, 0),
-        ("根目录多出临时脚本", ["README.md", "index.md", "_tmp_x.py"], ["docs", "scripts", "site"], A_F, A_D, 1, 0, 0),
-        ("顶层多出未声明目录", ["README.md", "index.md"], ["docs", "scripts", "site", "junk"], A_F, A_D, 0, 1, 0),
-        ("隐藏目录不计", ["README.md", "index.md"], ["docs", "scripts", "site", ".git", ".ruff_cache"], A_F, A_D, 0, 0, 0),
-        ("白名单陈腐可检出", ["README.md", "index.md"], ["docs", "scripts", "site"],
+        ("干净态放行", ["README.md", "INDEX.md"], ["docs", "scripts", "site"], A_F, A_D, 0, 0, 0),
+        ("根目录多出临时脚本", ["README.md", "INDEX.md", "_tmp_x.py"], ["docs", "scripts", "site"], A_F, A_D, 1, 0, 0),
+        ("顶层多出未声明目录", ["README.md", "INDEX.md"], ["docs", "scripts", "site", "junk"], A_F, A_D, 0, 1, 0),
+        ("隐藏目录不计", ["README.md", "INDEX.md"], ["docs", "scripts", "site", ".git", ".ruff_cache"], A_F, A_D, 0, 0, 0),
+        ("白名单陈腐可检出", ["README.md", "INDEX.md"], ["docs", "scripts", "site"],
          A_F | {"ghost.md"}, A_D | {"ghost"}, 0, 0, 2),
     ]
     fails = 0

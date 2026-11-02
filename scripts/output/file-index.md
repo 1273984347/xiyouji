@@ -749,7 +749,7 @@
 | docs/00-导读/项目说明.md | W1069 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1069 | 台账（W1069 行新增） |
 | docs/INDEX.md | W1069 | 登记面（docs 索引） |
-| index.md | W1069 | 登记面（根索引） |
+| INDEX.md | W1069 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1069 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
@@ -908,7 +908,7 @@
 | docs/00-导读/项目说明.md | W1061 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1061 | 台账（W1061 行新增） |
 | docs/INDEX.md | W1061 | 登记面（docs 索引） |
-| index.md | W1061 | 登记面（根索引） |
+| INDEX.md | W1061 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1061 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
@@ -948,7 +948,7 @@
 | docs/00-导读/项目说明.md | W1060 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1060 | 台账（W1060 行新增） |
 | docs/INDEX.md | W1060 | 登记面（docs 索引） |
-| index.md | W1060 | 登记面（根索引） |
+| INDEX.md | W1060 | 登记面（根索引） |
 | .github/workflows/README.md | W1060 | 级联面（里程碑行同步） |
 | archive/docs/AGENTS-ARCHIVE.md | W1060 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
@@ -983,7 +983,7 @@
 | docs/00-导读/项目说明.md | W1059 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1059 | 台账（W1059 认领行在案·收官回填另笔） |
 | docs/INDEX.md | W1059 | 登记面（docs 索引） |
-| index.md | W1059 | 登记面（根索引） |
+| INDEX.md | W1059 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1059 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
@@ -1020,7 +1020,7 @@
 | docs/00-导读/项目说明.md | W1058 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1058 | 台账（W1058 行新增） |
 | docs/INDEX.md | W1058 | 登记面（docs 索引） |
-| index.md | W1058 | 登记面（根索引） |
+| INDEX.md | W1058 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1058 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
@@ -1053,7 +1053,7 @@
 | docs/00-导读/项目说明.md | W1057 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1057 | 台账（W1057 行·状态列含对账 token） |
 | docs/INDEX.md | W1057 | 登记面（docs 索引） |
-| index.md | W1057 | 登记面（根索引） |
+| INDEX.md | W1057 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1057 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
@@ -1090,7 +1090,7 @@
 | CITATION.cff | W1056 | 级联面（版本同步） |
 | docs/00-导读/项目说明.md | W1056 | 级联面（当前版本行） |
 | docs/INDEX.md | W1056 | 登记面（docs 索引） |
-| index.md | W1056 | 登记面（根索引） |
+| INDEX.md | W1056 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1056 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
@@ -1124,7 +1124,7 @@
 | docs/00-导读/项目说明.md | W1055 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1055 | 台账（W1055 行新增） |
 | docs/INDEX.md | W1055 | 登记面（docs 索引） |
-| index.md | W1055 | 登记面（根索引） |
+| INDEX.md | W1055 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1055 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
@@ -1160,7 +1160,7 @@
 | docs/00-导读/项目说明.md | W1054 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1054 | 台账（W1054 行新增） |
 | docs/INDEX.md | W1054 | 登记面（docs 索引） |
-| index.md | W1054 | 登记面（根索引） |
+| INDEX.md | W1054 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1054 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
@@ -1207,7 +1207,7 @@
 | CITATION.cff | W1053 | 级联面（版本同步） |
 | docs/00-导读/项目说明.md | W1053 | 级联面（当前版本行） |
 | docs/INDEX.md | W1053 | 登记面（docs 索引） |
-| index.md | W1053 | 登记面（根索引） |
+| INDEX.md | W1053 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1053 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
@@ -1245,7 +1245,7 @@
 | CITATION.cff | W1052 | 级联面（版本同步） |
 | docs/00-导读/项目说明.md | W1052 | 级联面（当前版本行） |
 | docs/INDEX.md | W1052 | 登记面（docs 索引） |
-| index.md | W1052 | 登记面（根索引） |
+| INDEX.md | W1052 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1052 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
@@ -1284,7 +1284,7 @@
 | docs/11-方案报告/计划方案/执行前计划-W1051-复盘触发器口径根修.md | W1051 | 方案报告（执行前计划件·五表 + 自包含检查 12 项） |
 | docs/11-方案报告/README.md | W1051 | 登记面（方案报告索引） |
 | docs/INDEX.md | W1051 | 登记面（docs 索引） |
-| index.md | W1051 | 登记面（根索引） |
+| INDEX.md | W1051 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1051 | 级联归档滚动 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1051 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1051 | 级联归档滚动（体积窗若触发） |
@@ -1325,7 +1325,7 @@
 | docs/00-导读/项目说明.md | W1050 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1050 | 台账（W1050 行新增） |
 | docs/INDEX.md | W1050 | 登记面（docs 索引） |
-| index.md | W1050 | 登记面（根索引） |
+| INDEX.md | W1050 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1050 | 级联归档滚动 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1050 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1050 | 级联归档滚动（体积窗若触发） |
@@ -1523,7 +1523,7 @@
 | docs/00-导读/项目说明.md | W1048 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1048 | 台账（W1044 行补·W1046 行回填·W1048 行新增） |
 | docs/INDEX.md | W1048 | 登记面（docs 索引） |
-| index.md | W1048 | 登记面（根索引） |
+| INDEX.md | W1048 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1048 | 级联归档滚动 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1048 | 级联归档滚动 |
 | scripts/output/stats.json | W1048 | 登记面产物（stats 实体） |
@@ -1558,7 +1558,7 @@
 | docs/11-方案报告/计划方案/执行前计划-W1047-图表判据剥标签根修.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
 | docs/INDEX.md | W1045 | 本批新增/修改 |
 | docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
-| index.md | W1045 | 本批新增/修改 |
+| INDEX.md | W1045 | 本批新增/修改 |
 | scripts/batch_cascade.py | W1045 | 级联工具（上一批成果·本批未改） |
 | scripts/check_chart_data.py | W1045 | 图表判据（剥标签按语法约束 + 注释优先剥离 + 2 例可证伪锁） |
 | scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
@@ -1618,7 +1618,7 @@
 | docs/INDEX.md | W1045 | 本批新增/修改 |
 | docs/agent/gates.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
 | docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
-| index.md | W1045 | 本批新增/修改 |
+| INDEX.md | W1045 | 本批新增/修改 |
 | scripts/README.md | W1045 | 本批新增/修改 |
 | scripts/batch_cascade.py | W1045 | 级联工具（CITATION.cff 面补行数断言） |
 | scripts/check_crop.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
