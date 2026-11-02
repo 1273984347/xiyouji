@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（64）
+## 文件（65）
 
 ### Python 脚本
 
@@ -25,6 +25,7 @@
 - `test_cascade_line_anchor.py`
 - `test_cascade_precheck.py`
 - `test_chart_render_probe.py`
+- `test_check_chart_design_parity.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`
 - `test_check_interaction_binding.py`

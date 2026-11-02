@@ -15,6 +15,7 @@
   py -3 scripts/check_archive_health.py --strict   # 破线/缺标注 exit 1（门禁候选）
   py -3 scripts/check_archive_health.py --self-test
 """
+
 from __future__ import annotations
 
 import argparse
@@ -24,8 +25,8 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-LIMIT = 1024 * 1024          # §11.2 一级归档 1MB 线
-WARN = 800 * 1024            # 判距预警线（80%）
+LIMIT = 1024 * 1024  # §11.2 一级归档 1MB 线
+WARN = 800 * 1024  # 判距预警线（80%）
 T1_FILES = (
     "CHANGELOG-ARCHIVE.md",
     "file-index-ARCHIVE.md",
@@ -35,9 +36,36 @@ T1_FILES = (
     "W批次编号对账表-ARCHIVE.md",
 )
 COLD_MARKS = ("冷存储", "禁运行", "不可直接运行", "ROOT 上溯")
+
+
 # W1014 接线升格：原为死常量（定义即弃·且漏 w10xx）——现作段全集权威源，T2 用它与磁盘
 # batches/<段>/ 双向对账，「新桶未在 _STRICT 枚举 / 枚举了但磁盘无」即报，堵死桶漂移盲区。
-BATCHES_SEG = ("misc", "w4xx", "w5xx", "w6xx", "w7xx", "w8xx", "w9xx", "w10xx")
+# W1105 根修：段全集**从磁盘 tracked 自动派生**，不再维护手写常量。
+#
+# 原形态是硬编码枚举 ⇒ 每新建一个批次段目录（w1071/w1073/…/w1100）都必然滞后，
+# 表现为 T2「磁盘新桶未入 BATCHES_SEG 枚举」告警 ⇒ 该失败模式被逐个补枚举掩盖，
+# 每批都要记得改本常量（9 次滞后实证）。⇒ 改为派生：**磁盘有段即段全集**，
+# 于是「新建段目录」的必做动作只剩一处——archive/README.md 补组行（segs_missing 判据）。
+#
+# 保留 BATCHES_SEG 名字与调用面（自测/外部引用兼容），但它现在是**派生值**而非声明。
+def _disk_batches_segments():
+    """磁盘 tracked 的 batches/<段>/ 段全集（纯函数·供自测注入）。"""
+    import subprocess as _sp
+
+    out = _sp.run(
+        ["git", "-c", "core.quotepath=false", "ls-files"], capture_output=True, text=True, encoding="utf-8"
+    ).stdout
+    pre = "archive/scripts/batches/"
+    segs = set()
+    for p in out.splitlines():
+        if p.startswith(pre):
+            parts = p[len(pre) :].split("/")
+            if len(parts) >= 2 and parts[0]:
+                segs.add(parts[0])
+    return sorted(segs)
+
+
+BATCHES_SEG = tuple(_disk_batches_segments())
 
 
 def _kb(n: int) -> str:
@@ -71,7 +99,7 @@ def t2_coverage(tracked, readme_text, batches_seg=None):
     """
     top, subdirs, segs = [], set(), set()
     for rel in tracked:
-        rest = rel[len("archive/scripts/"):]
+        rest = rel[len("archive/scripts/") :]
         if rest.startswith("batches/"):
             parts = rest.split("/")
             if len(parts) >= 3 and parts[1]:
@@ -82,19 +110,24 @@ def t2_coverage(tracked, readme_text, batches_seg=None):
             top.append(rest)
     m = re.search(r"\|\s*`archive/scripts/`（顶层存量 \+(\d+) 件）", readme_text)
     top_row = int(m.group(1)) if m else None
-    subdirs_missing = sorted(d for d in subdirs if (d + "/") not in readme_text
-                             and ("archive/scripts/%s" % d) not in readme_text)
-    segs_missing = sorted(s for s in segs
-                          if ("batches/%s" % s) not in readme_text)
+    subdirs_missing = sorted(
+        d for d in subdirs if (d + "/") not in readme_text and ("archive/scripts/%s" % d) not in readme_text
+    )
+    segs_missing = sorted(s for s in segs if ("batches/%s" % s) not in readme_text)
     # ④ W1014 接线升格：BATCHES_SEG 由死常量上岗为「段全集权威源」——双向对账
     segs_unlisted = segs_stale = []
     if batches_seg is not None:
         declared = set(batches_seg)
         segs_unlisted = sorted(s for s in segs if s not in declared)
         segs_stale = sorted(s for s in declared if s not in segs)
-    return {"top_disk": len(top), "top_row": top_row,
-            "subdirs_missing": subdirs_missing, "segs_missing": segs_missing,
-            "segs_unlisted": segs_unlisted, "segs_stale": segs_stale}
+    return {
+        "top_disk": len(top),
+        "top_row": top_row,
+        "subdirs_missing": subdirs_missing,
+        "segs_missing": segs_missing,
+        "segs_unlisted": segs_unlisted,
+        "segs_stale": segs_stale,
+    }
 
 
 def t3_cold_warning(readme_text):
@@ -135,20 +168,28 @@ def run(strict=False, prefix=""):
             lines.append("T1b %-38s %8s" % (name, _kb(size)))
 
     # T2
-    tracked = sorted(r.replace(os.sep, "/") for r in tf.tracked_files()
-                     if r.replace(os.sep, "/").startswith("archive/scripts/"))
+    tracked = sorted(
+        r.replace(os.sep, "/") for r in tf.tracked_files() if r.replace(os.sep, "/").startswith("archive/scripts/")
+    )
     readme_p = os.path.join(arch, "README.md")
     readme = open(readme_p, encoding="utf-8", errors="replace").read() if os.path.exists(readme_p) else ""
     cov = t2_coverage(tracked, readme, batches_seg=BATCHES_SEG)
     if cov["top_row"] is None:
         problems.append("T2 顶层存量组行缺失")
-        lines.append("T2  ⚠ 顶层存量组行缺失（磁盘 %d 件）——修法=archive/README.md 台账补 `archive/scripts/`（顶层存量 +N 件）行" % cov["top_disk"])
+        lines.append(
+            "T2  ⚠ 顶层存量组行缺失（磁盘 %d 件）——修法=archive/README.md 台账补 `archive/scripts/`（顶层存量 +N 件）行"
+            % cov["top_disk"]
+        )
     elif cov["top_row"] != cov["top_disk"]:
         problems.append("T2 顶层计数漂移：台账 %d ≠ 磁盘 %d" % (cov["top_row"], cov["top_disk"]))
-        lines.append("T2  ⚠ 顶层计数漂移：台账 + %d 件 ≠ 磁盘 %d 件——修法=更新顶层组行计数" % (cov["top_row"], cov["top_disk"]))
+        lines.append(
+            "T2  ⚠ 顶层计数漂移：台账 + %d 件 ≠ 磁盘 %d 件——修法=更新顶层组行计数" % (cov["top_row"], cov["top_disk"])
+        )
     else:
-        lines.append("T2  顶层存量对账一致（%d 件）·子目录缺 %s·段目录缺 %s"
-                     % (cov["top_disk"], cov["subdirs_missing"] or "无", cov["segs_missing"] or "无"))
+        lines.append(
+            "T2  顶层存量对账一致（%d 件）·子目录缺 %s·段目录缺 %s"
+            % (cov["top_disk"], cov["subdirs_missing"] or "无", cov["segs_missing"] or "无")
+        )
     if cov["subdirs_missing"]:
         problems.append("T2 子目录未登记：%s" % cov["subdirs_missing"])
         lines.append("T2  ⚠ 子目录缺结构树/台账提及：%s" % "、".join(cov["subdirs_missing"]))
@@ -157,11 +198,11 @@ def run(strict=False, prefix=""):
         lines.append("T2  ⚠ 段目录缺组行：%s" % "、".join(cov["segs_missing"]))
     # W1014 接线升格：段全集双向对账（BATCHES_SEG 上岗·堵死新桶漂移与声明陈腐盲区）
     if cov["segs_unlisted"]:
-        problems.append("T2 磁盘新桶未入 BATCHES_SEG 枚举：%s" % cov["segs_unlisted"])
-        lines.append("T2  ⚠ 磁盘 batches 段未入 BATCHES_SEG：%s——修法=本行枚举补该段" % "、".join(cov["segs_unlisted"]))
+        problems.append("T2 段全集派生与磁盘不符：%s" % cov["segs_unlisted"])
+        lines.append("T2  ⚠ 段全集派生值与磁盘不一致：%s——修法=重跑本脚本刷新派生" % "、".join(cov["segs_unlisted"]))
     if cov["segs_stale"]:
-        problems.append("T2 BATCHES_SEG 声明了但磁盘无：%s" % cov["segs_stale"])
-        lines.append("T2  ⚠ BATCHES_SEG 陈腐（声明段磁盘不存在）：%s——修法=删枚举或补建" % "、".join(cov["segs_stale"]))
+        problems.append("T2 段全集派生含磁盘不存在的段：%s" % cov["segs_stale"])
+        lines.append("T2  ⚠ 段全集派生含磁盘不存在的段：%s——修法=重跑本脚本刷新派生" % "、".join(cov["segs_stale"]))
 
     # T3
     batches_readme = os.path.join(arch, "scripts", "batches", "README.md")
@@ -173,8 +214,11 @@ def run(strict=False, prefix=""):
         lines.append("T3  ⚠ batches/README.md 缺冷存储/禁运行警告（W836：归档件 ROOT 上溯失效·误跑会错）")
 
     # T4
-    total = sum(os.path.getsize(os.path.join(dp, f))
-                for dp, _dn, fs in os.walk(arch) for f in fs) if os.path.isdir(arch) else 0
+    total = (
+        sum(os.path.getsize(os.path.join(dp, f)) for dp, _dn, fs in os.walk(arch) for f in fs)
+        if os.path.isdir(arch)
+        else 0
+    )
     lines.append("T4  归档区合计 %s（tracked %d 件·archive/scripts 下）" % (_kb(total), len(tracked)))
 
     for ln in lines:
@@ -197,10 +241,16 @@ def _self_test() -> int:
     if (not rows["CHANGELOG-ARCHIVE.md"][1]) or (not rows["file-index-ARCHIVE.md"][2]) or rows["AGENTS-ARCHIVE.md"][1]:
         fails.append("T1 判定错")
     # t2_coverage：顶层计数对账/子目录/段目录
-    tracked = ["archive/scripts/_old_a.py", "archive/scripts/legacy.py",
-               "archive/scripts/attic/x.py", "archive/scripts/batches/w9xx/_b.py"]
-    readme = ("| `archive/scripts/`（顶层存量 +2 件） | … | W | d | r |\n"
-              "结构树提及 archive/scripts/attic 与 archive/scripts/batches/w9xx 组行")
+    tracked = [
+        "archive/scripts/_old_a.py",
+        "archive/scripts/legacy.py",
+        "archive/scripts/attic/x.py",
+        "archive/scripts/batches/w9xx/_b.py",
+    ]
+    readme = (
+        "| `archive/scripts/`（顶层存量 +2 件） | … | W | d | r |\n"
+        "结构树提及 archive/scripts/attic 与 archive/scripts/batches/w9xx 组行"
+    )
     cov = t2_coverage(tracked, readme)
     if cov["top_disk"] != 2 or cov["top_row"] != 2 or cov["subdirs_missing"] or cov["segs_missing"]:
         fails.append("T2 齐备态判定错：%s" % cov)

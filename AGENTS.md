@@ -103,9 +103,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=52 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=53 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 52 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 53 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -168,20 +168,21 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 50. **GSAP 动效写法槽**（check_gsap_motion.py·W961·site/static/js/ 自有 JS 动效判据——时长 ≤600ms/缓动白名单/禁大角度旋转与无限循环/只动 transform+opacity·J2 宪法级禁词不可豁免）
 51. **提交范围槽**（check_commit_scope.py·W1007·代提三次同一处方）——归属批次取索引态 CHANGELOG 顶段（新增段=本批，否则 HEAD 现役段=回填），该批 `scripts/output/_w####_spec.json` 的 `file_index_rows` 即应动全集；索引态路径集多出即 FAIL（＝一份提交夹带他方在途件）。恒跑（_SCOPE_CORE·docs/site 提交也判）；无暂存件 NOTE 放行、spec 缺失 WARN 放行（不伪造红）。
 52. **仓库布局槽**（check_repo_layout.py·W1011·「整理分类」的长期形态）——L1 根目录只放治理与配置（白名单 ROOT_FILES·出现未声明文件即 FAIL 并给去向）；L2 顶层目录必须已在 TOP_DIRS 与 STRUCTURE.md 声明角色；L3 声明了但磁盘不存在 ⇒ FAIL（防白名单陈腐）。判据按 **git 视角**（被 .gitignore 忽略的本地件不计）；毫秒级·登记 `_SCOPE_CORE` 恒跑。
+53. **图表中英对拍槽**（check_chart_design_parity.py·W1105）——chart-design 中英两版（site/data/chart-design.html 与 site/en/chart-design.html）逐键数值对拍：数值必须全等（非数值专名差异属本地化预期·只列不判红·单侧键即 FAIL）+ **强制契约标记中英齐平**（reduced-motion JS 守卫 `MOYUN_RM` / tooltip 统一类名 `chart-tooltip` / CSS 兜底 `prefers-reduced-motion`）——一侧缺标记即 FAIL（实证：EN 版缺 JS 守卫正是本槽抓出）。基础设施缺失（页面或 summary.json 不可读）按 fail-closed 退出码 2·不静默放过。
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 199 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
+> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 
-> **📖 阅读契约（W709）**：索引型——217 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——224 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（46）·JS / CSP / 运行时（9）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（14）·流程 / 协作 / 取证（102）
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（15）·流程 / 协作 / 取证（105）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -307,4 +308,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1096-W1096 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-02（W1097）档 2 扩展批 1：十页六十六处保留 .attr 直写令牌，扩展后的对拍工具量化出暗色亮度补偿失配（filter 从 brightness 变 none）与暗色令牌跟随，剩余三十一处待批二；2026-11-02（W1098）档 2 扩展批 2：十页二十七处保留 .attr 直写令牌，双态对拍差异全为属性类且元素数零差异，两处非令牌值经受控回退对照实测为补偿失配落回类色，档 2 剩余四处待批三；2026-11-02（W1099）档 2 扩展批 3：四页四处直喂令牌，档 2 归零；稳定值对拍四处差异全预期，零尺寸图标另测确认令牌跟随，异步渲染波动立为 E-89；2026-11-02（W1100）档 3 落层分类盘点（只读批）：档 3 真实范围 1412 处 / 145 页，另有 3404 处自有 hex 独立立项；补偿规则 330 页同源指纹 1 种，并定案三项后续工作的工程次序，坑表 E-90；2026-11-02（W1103）ΔL 阈值机器判据（工具层）：新增可配三档色差判据，阈值按站内补偿机制的经验分布实测校准，并给出档 3 的暗色令牌缺口与分类替换要求，坑表 E-91 与 E-95；2026-11-02（W1104）开局事实摘要 stats 新鲜度告警：读取生成件不再静默降级，缺失/损坏/空/陈旧四类各出告警，新增 5 例单测，坑表 E-91。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1096-W1096 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-02（W1097）档 2 扩展批 1：十页六十六处保留 .attr 直写令牌，扩展后的对拍工具量化出暗色亮度补偿失配（filter 从 brightness 变 none）与暗色令牌跟随，剩余三十一处待批二；2026-11-02（W1098）档 2 扩展批 2：十页二十七处保留 .attr 直写令牌，双态对拍差异全为属性类且元素数零差异，两处非令牌值经受控回退对照实测为补偿失配落回类色，档 2 剩余四处待批三；2026-11-02（W1099）档 2 扩展批 3：四页四处直喂令牌，档 2 归零；稳定值对拍四处差异全预期，零尺寸图标另测确认令牌跟随，异步渲染波动立为 E-89；2026-11-02（W1100）档 3 落层分类盘点（只读批）：档 3 真实范围 1412 处 / 145 页，另有 3404 处自有 hex 独立立项；补偿规则 330 页同源指纹 1 种，并定案三项后续工作的工程次序，坑表 E-90；2026-11-02（W1104）开局事实摘要 stats 新鲜度告警：读取生成件不再静默降级，缺失/损坏/空/陈旧四类各出告警，新增 5 例单测，坑表 E-91。如与上述权威文档冲突，以权威文档为准。*

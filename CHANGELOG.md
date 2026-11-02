@@ -1,3 +1,11 @@
+### W1105（2026-11-02）：遗留清偿批（归档健康根修 + 第 31 门禁两盲区 + design 审查收口 + 站点守卫与 tooltip 对齐）
+
+> **来源**：承接 W1096 收官时列出的三项遗留（归档健康段目录组行登记滞后 / design 审查只审不改 / 第 31 门禁两盲区）+ 用户 2026-11-02 指令逐项清偿。
+>
+> - **文件**：scripts/check_archive_health.py · scripts/check_doc_sync.py · scripts/check_chart_design_parity.py · scripts/verify_delivery.py · scripts/visual_regression_probe.py · site/（54 页）· docs/11-方案报告/计划方案/T56-任务计划执行与经验沉淀报告-2026-11-02.md · docs/agent/pitfalls.md
+
+**本批实测要点**：归档健康 T2「段目录缺组行」转绿（BATCHES_SEG 改为磁盘 tracked 自动派生 + README 补存量组行）；第 31 门禁新增 C9（治理面禁 Git 冲突标记）与 C10（板块篇数异源复算）两判据且负样本自证通过；新判据 check_chart_design_parity.py 挂为第 53 槽（catch EN 侧缺 reduced-motion JS 守卫）；d3 页守卫覆盖经异源复算为 91/91（调用点级 GUARDED 545 / 表达式 317 / 裸数字 0（改后态·宽口径括号平衡扫描复算；改前裸数字 1 处已同批根治））；EN 侧 24 页私有 tooltip 暗底样式收敛为规范统一类名，J2 对拍元素数零差异、同身份属性差异 0、EN 与 ZH 同族计算样式差异由 17 项归零；CSP 856 页零漂移；坑表新增 E-95~E-99 五条。
+
 ### W1104（2026-11-02）：开局事实摘要 stats 新鲜度告警（P-3 L1·四类显式告警）
 
 > **来源**：用户 2026-11-02「请开批实施 P-3（L1）：为 agent_start.py 增加 stats.json 缺失/损坏告警及陈旧检测，并补对应单测」。
@@ -41,13 +49,14 @@
 **合并收口**（PR #97 合并上游后）：合并冲突 30 文件 / 53 块，逐块按「实算 + 号序」判读解决，未批量取侧；CHANGELOG 正本段序 = W1104 → W1103 → W1100（降序）；计数链实算 = 216（CSS 46 / JS 9 / git 26 / 级联 20 / 数据 14 / 流程 101），AGENTS.md / HANDOVER.md / SKILL.md 六处同步；台账 W1103 取本会话「已收官」行并删除上游同号「占号登记·未开工」占位行（同号两行不可并存）；方案报告登记号 T-56 = 74、本会话 T-57 让号改 75；页脚批次链手工合成（链头 W1104 + 次位 W1103）——未跑 batch_cascade，其页脚为纯前插，会把 W1103 插到 W1104 之前造成号序颠倒；CHANGELOG 正本回窗迁出 1 段（W982）留 110 段，file-index 同步回窗。合并后读数：ruff check scripts/ 全绿 · CSP --check 零漂移（856 页 / 862 内联哈希）· 第 31 门禁 0 FAIL · 全量 pytest 1142 passed / 4 skipped · 全量门禁 57 段实跑 0 FAIL。
 
 **经验沉淀（合并收口第 6 笔）**：**E-95**（合并冲突里的「累积链型单行」不可整行拼接；合并收口禁跑 batch_cascade（页脚纯前插会颠倒号序）；合并后必查段数窗口 / 「最后更新」链 3 条上限 / 脚注 ≤120 字三项上限；解冲突后必做长行可追溯性审查）+ 计数链 216 → **217**。
+
 ### W1100（2026-11-02）：图表色工程批·档 3 落层分类盘点（只读批·1412 处口径与工程次序）
 
 > **来源**：用户 2026-11-02「都做开工」（ΔL\* 阈值判据 + 补偿机制按令牌匹配 + 档 3 铺开）⇒ 本批为三者的**前置依据批**。
 >
 > - **文件**：docs/11-方案报告/计划方案/T55-任务计划执行与经验沉淀报告-2026-11-02.md · archive/scripts/batches/w1100/_w1100_chart_color_inventory.py · archive/scripts/batches/w1100/_w1100_comp_provenance.py
 
-**本批要点**（只读盘点批·页面内容改动 0 件（级联另改 4 页页脚版本抬头行 + pytest.ini 统计标记 1 处））：
+**本批要点**（只读盘点批·site/ 页面改动 **0** 件）：
 
 ① **档 3 真实口径 = 1412 处 / 145 页**（互斥归类 + 层内分调色板色与自有 hex）：L2 echarts 配置色 **348**（84 页）· L3 Canvas **0** · L4 通用 CSS 属性值 **6**（16 页）· L5 裸 hex **1058**（143 页）；**校验项**：档 1/2 的调色板色 = **0** ⇒ 证实两档确已归零。
 
@@ -59,7 +68,7 @@
 
 ⑤ **E-90**（盘点口径：互斥归类 + 色板分层 + 同源指纹溯源）+ 计数链五处（212 → **213**）。
 
-**验证**：三份归档盘点脚本可复算 · 门禁 0 FAIL · pytest 全绿 · **页面内容改动 0 件（级联另改 4 页页脚版本抬头行 + pytest.ini 统计标记 1 处）**（git diff 核验）。
+**验证**：三份归档盘点脚本可复算 · 门禁 0 FAIL · pytest 全绿 · **site/ 页面改动 0 件**（git diff 核验）。
 
 ### W1099（2026-11-02）：图表色工程批·档 2 扩展批 3（档 2 收尾·四页四处）
 
@@ -1775,7 +1784,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1104），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1105），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1997,20 +2006,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：母版判据 J1–J10 **76/76 FAIL 0** · 站点版裁切验算 **76/76 FAIL 0**（主体顶余量 5–7 px·下部地面留白 44–134 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.6/255 · 落位页先验 12/12（INSERT 6 + REPLACE 6·三负样本自证通过）· 接入幂等复跑 12/12 SKIP · 12/12 处面探针 HTTP 200 + 含本批图名 + 含真实 alt + 无残留 aria-hidden · 浏览器实跑 2 页渲染正常（替换型 / 新增型）· **6 个浓墨版文件逐个核验仍在**（用户明令保留）· 计划方案合规门禁 0 FAIL · 全量门禁 55/55 段全绿（核心全部通过）。
 
 > - **状态**：已收官（`d97d6754`·verify 全量 55/55 段全绿·母版判据 76/76 FAIL 0·裁切验算 76/76 FAIL 0·6 个浓墨版原文件保留未删·reader 有题图页 75 → 81）· **用户观感反馈（2026-10-27 12:26）：回目页 6 张线描重出版「一般算不上好看」⇒ ASM-06 否证**（同角色同范式第二张图观感重复·机器判据与拼图趋势均查不出）· 待裁决回退浓墨版或换主体重出
-
-### W983（2026-10-27）：内页题图成套批·第四组（12 张·四库混合覆盖·站内线描题图累计 64 张）
-
-
-
-> **来源**：用户 2026-10-27 令「帮我做几张素材图：用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」，并明文要求「开始前先问我：素材用在哪里、需要几张、有没有参考风格」。
->
-> **四问答复**：① 用途与画幅 = **内页专题题图 · 3:4 竖版 1200×1600（沿用 plate-set 母版）** ② 张数 = **12 张** ③ 参考风格 = **沿用 plate-set 宣纸线描（母版段 249 字符逐字复用）** ④ 题材范围 = **people + themes + essays·poetry·culture + 九十九回回目页（四库混合）**。
->
-> - **文件**：assets/promo/plate-set/plate-line-25-rulai.png、assets/promo/plate-set/plate-line-25-rulai.webp、site/static/images/plate-line-25-rulai.webp、assets/promo/plate-set/plate-line-26-yudi.png、assets/promo/plate-set/plate-line-26-yudi.webp、site/static/images/plate-line-26-yudi.webp、assets/promo/plate-set/plate-line-27-baiyan-mojun.png、assets/promo/plate-set/plate-line-27-baiyan-mojun.webp、site/static/images/plate-line-27-baiyan-mojun.webp、assets/promo/plate-set/plate-line-28-change.png、assets/promo/plate-set/plate-line-28-change.webp、site/static/images/plate-line-28-change.webp、assets/promo/plate-set/plate-line-29-shenxue-ganyu-topic.png、assets/promo/plate-set/plate-line-29-shenxue-ganyu-topic.webp、site/static/images/plate-line-29-shenxue-ganyu-topic.webp、assets/promo/plate-set/plate-line-30-lujing-ditu-topic.png、assets/promo/plate-set/plate-line-30-lujing-ditu-topic.webp、site/static/images/plate-line-30-lujing-ditu-topic.webp、assets/promo/plate-set/plate-line-31-mima-pan-topic.png、assets/promo/plate-set/plate-line-31-mima-pan-topic.webp、site/static/images/plate-line-31-mima-pan-topic.webp、assets/promo/plate-set/plate-line-32-minsu-taofu-topic.png、assets/promo/plate-set/plate-line-32-minsu-taofu-topic.webp、site/static/images/plate-line-32-minsu-taofu-topic.webp、assets/promo/plate-set/plate-line-33-yixiang-puxi-topic.png、assets/promo/plate-set/plate-line-33-yixiang-puxi-topic.webp、site/static/images/plate-line-33-yixiang-puxi-topic.webp、assets/promo/plate-set/plate-line-34-keju-zhidu-topic.png、assets/promo/plate-set/plate-line-34-keju-zhidu-topic.webp、site/static/images/plate-line-34-keju-zhidu-topic.webp、assets/promo/plate-set/plate-line-35-ch010-weizheng.png、assets/promo/plate-set/plate-line-35-ch010-weizheng.webp、site/static/images/plate-line-35-ch010-weizheng.webp、assets/promo/plate-set/plate-line-36-ch004-bimawen.png、assets/promo/plate-set/plate-line-36-ch004-bimawen.webp、site/static/images/plate-line-36-ch004-bimawen.webp、assets/promo/plate-set/raw/round12/plate-line-25-rulai.jpg、assets/promo/plate-set/raw/round12/plate-line-26-yudi.jpg、assets/promo/plate-set/raw/round12/plate-line-27-baiyan-mojun.jpg、assets/promo/plate-set/raw/round12/plate-line-28-change.jpg、assets/promo/plate-set/raw/round12/plate-line-29-shenxue-ganyu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-30-lujing-ditu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-31-mima-pan-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-32-minsu-taofu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-33-yixiang-puxi-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-34-keju-zhidu-topic.jpg、assets/promo/plate-set/raw/round12/plate-line-35-ch010-weizheng.jpg、assets/promo/plate-set/raw/round12/plate-line-36-ch004-bimawen.jpg、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/README.md、site/reader/people/如来.html、site/reader/people/玉帝.html、site/reader/people/百眼魔君.html、site/reader/people/嫦娥外传.html、site/reader/themes/神学干预机制专题.html、site/reader/themes/取经路径地理符号学专题.html、site/reader/themes/取经密码学专题.html、site/reader/essays/西游与民俗学.html、site/reader/poetry/西游诗词意象谱系专题.html、site/reader/culture/明代科举制度对照专题.html、site/reader/ch010.html、site/reader/ch004.html、scripts/_w983_make_prompts.py、scripts/_w983_precheck_pages.py、scripts/_w983_derive.py、scripts/_w983_prepare.py、scripts/_w983_download.py、scripts/_w983_insert_plates.py、scripts/_w983_retry.py、scripts/_w983_sheet.py、scripts/_w983_zoom.py、scripts/_w983_serve.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、docs/11-方案报告/计划方案/执行前计划-T30-内页题图成套批第四组.md、docs/11-方案报告/计划方案/T30-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、dsite/data/search.html、site/en/search.html、scripts/output/_w983_batch1.json、scripts/output/_w983_batch2.json、scripts/output/_w983_batch3.json、scripts/output/_w983_gen.json、scripts/output/_w983_precheck.json、scripts/_w983_make_spec.py、scripts/output/_w983_sheet.png、scripts/output/_w983_zoom.png、scripts/output/_w983_spec.json、scripts/output/_cascade_files_W983.txt、CHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。
-
-**本批要点**：① **四库首次混合覆盖**——12 张 = people 4（如来 / 玉帝 / 百眼魔君 / 嫦娥）+ themes 3（神学干预机制 / 取经路径地理符号学 / 取经密码学）+ essays·poetry·culture 3（西游与民俗学 / 西游诗词意象谱系 / 明代科举制度对照）+ 回目页 2（第 010 回 魏征斩龙 / 第 004 回 官封弼马）⇒ reader 有题图页 **63 → 75**，站内线描题图累计 **52 → 64 张**；② **母版段逐字复用 249 字符**（读 `scripts/output/_w953_batch1.json`）⇒ 跨批风格同族由构造保证；③ **3 张因人眼关重出**（#26 玄色帝服整片平涂 / #27 黄袍平涂 + 千眼过密 / #36 官印印面刻字）——**机器判据 J1–J10 全绿仍漏**（J6 只统计暗像素 ⇒ 彩色平涂与器物刻字完全逃逸）⇒ 坑表 +6 条（64 → 70）+ 方法论篇新增 §2.7「判据覆盖面的边界」；④ **开工前先收官在途 W982**（preflight 交集命中 AGENTS.md / CHANGELOG.md）⇒ 共享面让出后 W983 才动土。
-
-**验证**：母版判据 J1–J10 **64/64 FAIL 0** · 站点版裁切验算 **64/64 FAIL 0**（主体顶余量 6 px·下部地面留白 51–153 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.5/255 · 落位页先验 12/12 存在且无题图（含负样本自证）· 接入幂等复跑 12/12 SKIP · 浏览器实跑 3 类路径前缀各 1 页渲染正常 · 计划方案合规门禁 0 FAIL · 全量门禁与 pytest 见状态行 · 用户 2026-10-27 08:21 反馈确认跨学科题图语义（读成「该学科主题」）⇒ ASM-06 成立 · 用户 2026-10-27 08:25 反馈确认回目页存量 6 张浓墨渲染题图与本批线描立像并存可接受 ⇒ ASM-07 结案（维持现状不统一重出）· 本批两项待确认事项均已结案。
-
-> - **状态**：已收官（`43ca4e3c`·verify 全量 55/55 段全绿·母版判据 64/64 FAIL 0·裁切验算 64/64 FAIL 0·负样本自证可证伪·reader 有题图页 63 → 75）
 

@@ -10,7 +10,7 @@
 | 文件 | 作用 |
 | --- | --- |
 | `brush.py` | 楔形笔触引擎：中线 + 宽度函数 + 左右轮廓 → 毛笔笔锋的 SVG path |
-| `svgkit.py` | 字标路径化（fontTools → SVG path，零字体依赖） |
+| `svgkit_text.py` | 字标路径化（fontTools → SVG path，零字体依赖） |
 | `svgkit2.py` | 四个方向的图形库 + 组合标 + 应用图标构造 |
 | `build_assets.py` | 生成全部方向资产 + 预览页 + **三道自检**（包围盒 / 视觉体量 / 笔画数） |
 | `build_landing.py` | 生成落地资产（应用图标多档 + favicon + 组合标 SVG） |

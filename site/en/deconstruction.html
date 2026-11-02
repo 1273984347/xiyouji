@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OY6maLTBjgPUzHJFE36aOHdb09tyVln4KQOZK51m8TU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-FCB75CasoWYetXcqR56YzI7zlxwiCbeZy5ZYJ2oMJ68=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Deconstruction and East Asian Re-creations · Annotated Journey to the West</title>
@@ -1711,6 +1711,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
+<script>
 
 function renderTreemap(opts){
   var tipId=opts.tipId||'tooltip';
@@ -2025,7 +2029,7 @@ function renderTreemap(opts){
             .attr("opacity", 0.88);
 
         points.transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 60)
             .attr("r", d => 9);
 
@@ -2071,7 +2075,7 @@ function renderTreemap(opts){
             })
             .style("opacity", 0)
             .transition()
-            .duration(500)
+            .duration(MOYUN_RM?0:500)
             .delay((d, i) => 600 + i * 40)
             .style("opacity", 1);
 
@@ -2216,7 +2220,7 @@ function renderTreemap(opts){
             .attr("fill", d => COUNTRY_COLORS[d.country] || "#999")
             .attr("opacity", 0.9)
             .transition()
-            .duration(500)
+            .duration(MOYUN_RM?0:500)
             .delay((d, i) => i * 60)
             .attr("r", 7);
 
@@ -2230,7 +2234,7 @@ function renderTreemap(opts){
             .style("opacity", 0)
             .text(d => d.year_num)
             .transition()
-            .duration(400)
+            .duration(MOYUN_RM?0:400)
             .delay((d, i) => 300 + i * 60)
             .style("opacity", 1);
 
@@ -2244,7 +2248,7 @@ function renderTreemap(opts){
                 return t.length > 10 ? t.slice(0, 9) + "…" : t;
             })
             .transition()
-            .duration(400)
+            .duration(MOYUN_RM?0:400)
             .delay((d, i) => 350 + i * 60)
             .style("opacity", 1);
 

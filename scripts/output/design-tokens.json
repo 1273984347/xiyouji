@@ -3,8 +3,7 @@
   "generator": "scripts/export_design_tokens.py",
   "generated": "2026-11-02",
   "source": [
-   "site/tokens.css",
-   "site/system.css"
+   "site/tokens.css"
   ],
   "spec": "W3C Design Tokens 风格（DTCG 简化：$value/$type/$description + group/line 元数据）",
   "counts": {

@@ -1248,7 +1248,6 @@ html[data-theme="dark"] .chapter-plate {
         .legend-item { display: flex; align-items: center; gap: 6px; }
         .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) ; display: inline-block; }
         .legend-swatch.line { height: 3px; width: 18px; }
-        .tooltip { position: absolute; background: rgba(26, 37, 48, 0.95); color: var(--paper-warm); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md) ; font-size: 0.82rem; pointer-events: none; opacity: 0; transition: opacity var(--dur-fast); line-height: 1.5; box-shadow: var(--elev-3); z-index: 10; }
         .controls { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
         .btn {
             background: var(--accent);
@@ -1402,7 +1401,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- FILE_INDEX: narrative-rhythm-curve.html | W236-V | 叙事节奏曲线（面积图+9转折点+热力图+动画） -->
     <!-- CHANGELOG: v2.2.42 W236 V 方向 叙事节奏曲线 -->
 
-    <div class="tooltip" id="tooltip"></div>
+    <div class="chart-tooltip" id="tooltip"></div>
 
         <script src="../static/js/d3.v7.min.js"></script>
     <script>

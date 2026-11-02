@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（174）
+## 文件（175）
 
 ### Markdown 文档
 
@@ -92,6 +92,7 @@
 - `check_chart_colorblind.py`
 - `check_chart_data.py`
 - `check_chart_degrade.py`
+- `check_chart_design_parity.py`
 - `check_citability.py`
 - `check_citations.py`
 - `check_claude_md.py`

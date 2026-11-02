@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ttoyYG20haiS0yIE1tDKpnuIbgwIhAe5c3ty4DZwIN8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-20nXfffp47AxUoZuzo0jxoX9yxcWETwjad+gNeq+ZoE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Magic System · Annotated Journey to the West</title>
@@ -1737,6 +1737,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W1105）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+</script>
 <script src="../static/js/d3-sankey.min.js"></script>
 <script>
     // ========== Embedded fallback data (used when fetch fails) ==========
@@ -2034,7 +2038,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("fill", d => d.color)
             .attr("rx", 3)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 120)
             .attr("width",d => Math.max(0, x(d.value)));
 
@@ -2050,7 +2054,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("opacity", 0)
             .text(d => `${d.value.toLocaleString()} ${d.unit}`)
             .transition()
-            .duration(400)
+            .duration(MOYUN_RM?0:400)
             .delay((d, i) => i * 120 + 600)
             .style("opacity", 1);
 
@@ -2128,7 +2132,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("fill", d => INTENSITY_COLORS(d.consumption_per_act))
             .attr("rx", 2)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 80)
             .attr("width",d => Math.max(0, x(d.consumption_per_act)));
 
@@ -2147,7 +2151,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("opacity", 0)
             .text(d => `${d.consumption_per_act} units · ${d.note}`)
             .transition()
-            .duration(300)
+            .duration(MOYUN_RM?0:300)
             .delay((d, i) => i * 80 + 500)
             .style("opacity", 1);
 
@@ -2297,7 +2301,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("d", arc)
             .style("opacity", 0)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 100)
             .style("opacity", 1);
 
