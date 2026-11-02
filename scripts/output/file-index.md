@@ -2,7 +2,43 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-
+| .agent/skills/puti-shouye/SKILL.md | W1108 | 本批工具/产物 |
+| .github/workflows/README.md | W1108 | 本批工具/产物 |
+| AGENTS.md | W1108 | 本批工具/产物 |
+| CHANGELOG.md | W1108 | 本批工具/产物 |
+| CITATION.cff | W1108 | 本批工具/产物 |
+| HANDOVER.md | W1108 | 本批工具/产物 |
+| README.md | W1108 | 本批工具/产物 |
+| STRUCTURE.md | W1108 | 本批工具/产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1108 | 本批工具/产物 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1108 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1108 | 本批工具/产物 |
+| archive/docs/file-index-ARCHIVE.md | W1108 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1108 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1108 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1108 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T60-任务计划执行与经验沉淀报告-2026-11-03.md | W1108 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1108 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1108 | 本批工具/产物 |
+| docs/INDEX.md | W1108 | 本批工具/产物 |
+| docs/agent/pitfalls.md | W1108 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1108 | 本批工具/产物 |
+| scripts/output/README.md | W1108 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1108.txt | W1108 | 本批工具/产物 |
+| scripts/output/_w1108_spec.json | W1108 | 本批工具/产物 |
+| scripts/output/file-index.md | W1108 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1108 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1108 | 本批工具/产物 |
+| scripts/output/stats.json | W1108 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1108 | 本批工具/产物 |
+| site/data/chart-design.html | W1108 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1108 | 本批工具/产物 |
+| site/data/search.html | W1108 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1108 | 本批工具/产物 |
+| site/dukou-engine.html | W1108 | 本批工具/产物 |
+| site/en/chart-design.html | W1108 | 本批工具/产物 |
+| site/en/search.html | W1108 | 本批工具/产物 |
+| site/index.html | W1108 | 本批工具/产物 |
 ## W1107 坑表编号唯一性体检与机器判据建置 + 档 3 前置（2026-11-03）
 
 | 文件 | W | 说明 |
