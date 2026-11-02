@@ -1,6 +1,6 @@
 # ai-concepts
 
-> 文件角色：目录导读（人读·与 index.md 分工：本文件讲用途约定、index.md 列清单）
+> 文件角色：目录导读（人读·与 INDEX.md 分工：本文件讲用途约定、INDEX.md 列清单）
 
 ## 这个目录装什么
 
@@ -53,4 +53,4 @@
 ## 维护约定
 
 新增概念稿时同步本表（母题 / 判定 / 说明），并重跑
-`python scripts/gen_folder_docs.py --refresh` 刷新 `index.md`。
+`python scripts/gen_folder_docs.py --refresh` 刷新 `INDEX.md`。

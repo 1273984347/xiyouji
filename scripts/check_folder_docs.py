@@ -75,7 +75,7 @@ def _case_collides(abs_dir: str) -> bool:
 
 
 def parse_index(text: str) -> dict | None:
-    """解析 index.md → {title, sub_n, file_n, subdirs, files}；结构不合模板返回 None。"""
+    """解析 INDEX.md → {title, sub_n, file_n, subdirs, files}；结构不合模板返回 None。"""
     title = None
     sub_n = file_n = None
     subdirs: list[str] = []
@@ -119,10 +119,16 @@ def check_dir(abs_dir: str) -> list[str]:
     rel = gen.rel_of(abs_dir)
     label = rel or "<root>"
     fails: list[str] = []
-    idx_path = os.path.join(abs_dir, "index.md")
+    idx_path = os.path.join(abs_dir, "INDEX.md")
     rdm_path = os.path.join(abs_dir, "README.md")
+    # W1091 语义豁免：该目录的 INDEX.md 属另一命名空间（docs/ 根 = docs_index.py 的
+    # 文档索引·同名不同义）⇒ 不要求目录清单、不校验其结构。判定单一事实源在生成器。
+    if rel in gen.INDEX_OWNED_ELSEWHERE:
+        if not os.path.isfile(rdm_path) and not gen.showcase_guarded(rel, "README.md"):
+            fails.append("C1 缺 README.md：%s" % label)
+        return fails
     if not os.path.isfile(idx_path):
-        fails.append("C1 缺 index.md：%s" % label)
+        fails.append("C1 缺 INDEX.md：%s" % label)
     if not os.path.isfile(rdm_path) and not gen.showcase_guarded(rel, "README.md"):
         # W889：.github/ 的目录导读改存 README-internal.md（避免抢占 GitHub 仓库主页展示位）
         # ——豁免判定与生成器共用 gen.showcase_guarded（单一事实源·两处口径同源）
@@ -132,7 +138,7 @@ def check_dir(abs_dir: str) -> list[str]:
     with open(idx_path, encoding="utf-8") as f:
         parsed = parse_index(f.read())
     if parsed is None:
-        fails.append("C2 index.md 结构不合生成器模板（疑手改/旧版/截断）：%s" % label)
+        fails.append("C2 INDEX.md 结构不合生成器模板（疑手改/旧版/截断）：%s" % label)
         return fails
     if _USE_TRACKED and gen._in_repo(abs_dir):
         # 子目录口径与生成器同源：EXCLUDE_SUBSTR / EXCLUDE_TOP 命中的目录不进清单
@@ -217,16 +223,16 @@ def self_test() -> int:
         for name in ("a.md", "b.py"):
             with open(os.path.join(d1, name), "w"):
                 pass
-        for kind in ("index.md", "README.md"):
+        for kind in ("INDEX.md", "README.md"):
             with open(os.path.join(d1, kind), "w", encoding="utf-8", newline="\n") as f:
                 f.write(gen.render(d1, kind, disk=True))
 
         def write_idx(content: str) -> None:
-            with open(os.path.join(d1, "index.md"), "w", encoding="utf-8", newline="\n") as f:
+            with open(os.path.join(d1, "INDEX.md"), "w", encoding="utf-8", newline="\n") as f:
                 f.write(content)
 
         def fresh_idx() -> str:
-            with open(os.path.join(d1, "index.md"), encoding="utf-8") as f:
+            with open(os.path.join(d1, "INDEX.md"), encoding="utf-8") as f:
                 return f.read()
 
         cases: list[tuple[str, list[str], list[str]]] = []
@@ -253,7 +259,7 @@ def self_test() -> int:
 
         write_idx(fresh_idx().replace("- `a.md`\n", ""))
         cases.append(("tampered-list-must-red", check_dir(d1), ["C3"]))
-        write_idx(gen.render(d1, "index.md", disk=True))
+        write_idx(gen.render(d1, "INDEX.md", disk=True))
 
         write_idx(fresh_idx().replace("# 文件索引 · alpha", "# 文件索引 · alpha-old"))
         cases.append(("title-drift-must-red", check_dir(d1), ["C4"]))

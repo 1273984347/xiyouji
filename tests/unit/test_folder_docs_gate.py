@@ -1,7 +1,11 @@
-"""check_folder_docs.py 跨平台新鲜度门禁测试（W780）。
+"""check_folder_docs.py 跨平台新鲜度门禁测试（W780·W1091 改名同步）。
 
-背景：gen_folder_docs.py@W779 的 index.md/README.md 是「生成时点快照」，目录内容
+背景：gen_folder_docs.py@W779 的 INDEX.md/README.md 是「生成时点快照」，目录内容
 增删后清单过期且无机器防线。第 45 槽（check_folder_docs.py）把该漂移面收进门禁。
+
+W1091：目录清单命名由 index.md 统一为 **INDEX.md**（大写）——本文件的合成树夹具
+同步改名；case_collides 语义随之反转（规范名=INDEX.md ⇒ 大写不再算冲突，
+只拦 index.md/Readme.md 等**非规范**变体）。
 
 跨平台纪律（pitfalls「latent 三问 + 双平台断言禁例」）：合成树断言全部基于名字符串
 （sorted(str)=码点序两平台一致）；零 os.name/盘符/大小写语义断言；临时目录注入，
@@ -41,7 +45,7 @@ def synth_tree(tmp_path, monkeypatch):
     d1.mkdir()
     (d1 / "a.md").write_text("", encoding="utf-8")
     (d1 / "b.py").write_text("", encoding="utf-8")
-    for kind in ("index.md", "README.md"):
+    for kind in ("INDEX.md", "README.md"):
         (d1 / kind).write_text(gen.render(str(d1), kind), encoding="utf-8", newline="\n")
     return d1
 
@@ -75,19 +79,19 @@ def test_missing_readme_detected(synth_tree):
 
 
 def test_missing_index_detected(synth_tree):
-    (synth_tree / "index.md").unlink()
+    (synth_tree / "INDEX.md").unlink()
     assert "C1" in _codes(cfd.check_dir(str(synth_tree)))
 
 
 def test_tampered_list_detected(synth_tree):
-    idx = synth_tree / "index.md"
+    idx = synth_tree / "INDEX.md"
     idx.write_text(idx.read_text(encoding="utf-8").replace("- `a.md`\n", ""),
                    encoding="utf-8", newline="\n")
     assert "C3" in _codes(cfd.check_dir(str(synth_tree)))
 
 
 def test_title_drift_detected(synth_tree):
-    idx = synth_tree / "index.md"
+    idx = synth_tree / "INDEX.md"
     idx.write_text(idx.read_text(encoding="utf-8").replace("# 文件索引 · alpha",
                                                            "# 文件索引 · alpha-old"),
                    encoding="utf-8", newline="\n")
@@ -95,13 +99,13 @@ def test_title_drift_detected(synth_tree):
 
 
 def test_mangled_template_detected(synth_tree):
-    (synth_tree / "index.md").write_text("# 手写清单\n\n随便写的\n", encoding="utf-8")
+    (synth_tree / "INDEX.md").write_text("# 手写清单\n\n随便写的\n", encoding="utf-8")
     fails = cfd.check_dir(str(synth_tree))
     assert fails and "结构不合生成器模板" in fails[0]
 
 
 def test_parse_index_roundtrip(synth_tree):
-    parsed = cfd.parse_index((synth_tree / "index.md").read_text(encoding="utf-8"))
+    parsed = cfd.parse_index((synth_tree / "INDEX.md").read_text(encoding="utf-8"))
     assert parsed is not None
     assert parsed["title"] == "alpha"
     assert parsed["sub_n"] == 0
@@ -129,7 +133,7 @@ def test_regen_restores_freshness(synth_tree):
     """漂移后重跑生成器 --force 单目录渲染即可恢复新鲜（修复路径存在性）。"""
     (synth_tree / "c.py").write_text("", encoding="utf-8")
     assert "C3" in _codes(cfd.check_dir(str(synth_tree)))
-    for kind in ("index.md", "README.md"):
+    for kind in ("INDEX.md", "README.md"):
         (synth_tree / kind).write_text(gen.render(str(synth_tree), kind),
                                        encoding="utf-8", newline="\n")
     # c.py 仍在磁盘 → 清单更新后反而新鲜
@@ -144,18 +148,28 @@ def _patch_gen_root(monkeypatch, tmp_path):
 
 
 def test_case_collides_detection(tmp_path):
-    """大小写变体目录必须可判定（两平台同构：listdir 真名小写比对·不依赖 fs 语义）。"""
-    gov = tmp_path / "gov"
-    gov.mkdir()
-    (gov / "INDEX.md").write_text("# 大写索引\n", encoding="utf-8")
-    assert gen.case_collides(str(gov)) is True
-    lower = tmp_path / "lower"
-    lower.mkdir()
-    (lower / "readme.md").write_text("# 小写变体\n", encoding="utf-8")
-    assert gen.case_collides(str(lower)) is True
+    """非规范大小写变体目录必须可判定（两平台同构：listdir 真名小写比对·不依赖 fs 语义）。
+
+    W1091 语义反转：规范名 = INDEX.md ⇒ **大写不再算冲突**（否则改名后每个目录都被
+    跳过 ⇒ 第 45 门禁失明）；只拦 index.md / readme.md 等遗留小写变体。
+    """
+    legacy_lower = tmp_path / "legacy_lower"
+    legacy_lower.mkdir()
+    (legacy_lower / "index.md").write_text("# 遗留小写\n", encoding="utf-8")
+    assert gen.case_collides(str(legacy_lower)) is True
+    readme_variant = tmp_path / "readme_variant"
+    readme_variant.mkdir()
+    (readme_variant / "readme.md").write_text("# 小写变体\n", encoding="utf-8")
+    assert gen.case_collides(str(readme_variant)) is True
     normal = tmp_path / "normal"
     normal.mkdir()
     assert gen.case_collides(str(normal)) is False
+    # 负样本锁：规范名 INDEX.md **不得**被判冲突（改名后 285 目录若全被跳过 ⇒ 门禁失明）
+    canonical = tmp_path / "canonical"
+    canonical.mkdir()
+    (canonical / "INDEX.md").write_text("# 规范索引\n", encoding="utf-8")
+    (canonical / "README.md").write_text("# 规范导读\n", encoding="utf-8")
+    assert gen.case_collides(str(canonical)) is False
 
 
 def test_refresh_repairs_stale_owned(tmp_path, monkeypatch):
@@ -164,7 +178,7 @@ def test_refresh_repairs_stale_owned(tmp_path, monkeypatch):
     d1 = tmp_path / "alpha"
     d1.mkdir()
     (d1 / "a.md").write_text("", encoding="utf-8")
-    for kind in ("index.md", "README.md"):
+    for kind in ("INDEX.md", "README.md"):
         (d1 / kind).write_text(gen.render(str(d1), kind), encoding="utf-8", newline="\n")
     (d1 / "new.py").write_text("", encoding="utf-8")  # 制造漂移
     assert "C3" in _codes(cfd.check_dir(str(d1)))

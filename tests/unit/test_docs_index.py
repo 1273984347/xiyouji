@@ -36,12 +36,16 @@ def test_scan_docs_entry_order_is_case_insensitive(tmp_path):
     sec = tmp_path / "00-导读"
     for name, title in (("Beta.md", "Beta 文档"), ("alpha.md", "alpha 文档"), ("Gamma.md", "Gamma 文档")):
         _write_md(sec / name, title)
-    _write_md(sec / "INDEX.md", "应被跳过的索引自身")
+    # W1096：板块内的 INDEX.md = 目录清单（同名不同义）⇒ **应被收录**，不再跳过。
+    # 小写键序断言只针对「收录后的条目相对序」⇒ INDEX.md 排在 Gamma.md 之后
+    # （"index.md" < "gamma.md" 不成立：小写键 "index.md" > "gamma.md" ⇒ 排其后）。
+    _write_md(sec / "INDEX.md", "板块内目录清单（应被收录）")
 
     scanned = docs_index.scan_docs(tmp_path)
     entries = scanned["00 · 导读"]
     rels = [rel for _title, rel in entries]
-    assert rels == ["00-导读/alpha.md", "00-导读/Beta.md", "00-导读/Gamma.md"], (
+    assert rels == ["00-导读/alpha.md", "00-导读/Beta.md", "00-导读/Gamma.md",
+                    "00-导读/INDEX.md"], (
         "条目序非小写键序（跨平台不稳定·W773 根修回退？）：%s" % rels)
 
 

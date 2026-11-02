@@ -119,7 +119,11 @@ def scan_docs(docs_dir: Path, include_dev: bool = False, tracked_only: bool = Tr
         else:
             mds = sorted(sub.rglob("*.md"), key=lambda p: str(p).lower())
         for md in mds:
-            if md.name == "INDEX.md":
+            # W1091：目录清单统一为 INDEX.md（与本文件同名形）——**按语义排除**，
+            # 不按大小写排除：docs/ 根的 INDEX.md 是「文档索引」本体（须排除），
+            # 而 docs/<板块>/INDEX.md 是「目录文件清单」（须收录·改名后仍在 docs 索引里）。
+            # 判据 = 该文件是否就是本次扫描根下的索引本体。
+            if md.name == "INDEX.md" and md.parent == docs_dir:
                 continue
             title = extract_title(md)
             rel = md.relative_to(docs_dir).as_posix()

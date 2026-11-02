@@ -10,6 +10,468 @@
 
 ---
 
+## W1096 INDEX 大小写统一 + design 审查 + 归档清偿（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| .github/ISSUE_TEMPLATE/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| .github/workflows/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/_dev/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/_dev/产品管理套件应用-2026-10-02/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/_dev/科技服务顾问-数字人文资助渠道-2026-10-02/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/plans/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/specs/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/templates/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/w550-shot-review/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/docs/复盘报告/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/attic/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/audit/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/misc/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w1071/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w1073/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w1074/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w1076/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w1078/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w1079/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w1080/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w1089/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w10xx/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w4xx/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w5xx/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w6xx/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w7xx/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w8xx/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/batches/w9xx/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/review-pass3/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| archive/scripts/review-pass3/prompts/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/design/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/design/ai-concepts/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/design/alternatives/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/design/logo/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/design/process/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/design/screenshots/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/design/tools/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/fonts/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/fonts/source/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/images/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/maps/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/hero-set/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/hero-set/raw/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/hero-set/raw/round-w1005/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/output/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round1/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round10/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round11/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round12/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round13/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round14/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round15/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round16/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round17/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round18/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round2/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round3/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round4/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round5/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round6/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round7/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round8/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/raw/round9/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/zoom-w948/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/zoom-w952/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/zoom-w953/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| assets/promo/plate-set/zoom-w974/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| dataset/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| dataset/entities/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/00-导读/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/07-学以致用/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/08-提升认知/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/09-精神塑造/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/12-提示词库/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/_templates/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/_templates/duipai/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/agent-guardrails/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/agent/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/superpowers/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| docs/superpowers/plans/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| hyperframes/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| hyperframes/compositions/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| hyperframes/compositions/d3-visualizations/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| hyperframes/output/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| mcp-server/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AA_叙事实验/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AB_视觉艺术/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AC_方法论矩阵/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AD_认知心理/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AE_生态学/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AF_法理经济/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AG_物质考古/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AH_语言学/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/B_人物/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/C_情节/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/D_关系/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/E_地理/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/G_哲学/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/H_风险与项目/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/I_妖怪社会学/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/J_权力与资源/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/K_命运与轮回/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/L_商业模型/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/M_洞府房产/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/N_法术阵法/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/O_美学时尚/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/P_音乐声效/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Q_源流演变/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/R_解构作品/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/S_全球模式/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/T_反事实推断/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/U_文化错位/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/V_打工人职场/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/W_社媒人设/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/X_游戏网文/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Y_伦理消费/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/AA_叙事实验/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/AB_视觉艺术/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/AC_方法论矩阵/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/AD_认知心理/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/AE_生态学/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/AF_法理经济/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/AG_物质考古/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/AH_语言学/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/A_文本基础/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/B_人物/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/C_情节/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/D_关系/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/E_地理/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/F_时间/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/G_哲学/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/H_风险与项目/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/I_妖怪社会学/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/J_权力与资源/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/K_命运与轮回/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/L_商业模型/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/M_洞府房产/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/N_法术阵法/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/O_美学时尚/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/P_音乐声效/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/Q_源流演变/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/R_解构作品/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/S_全球模式/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/T_反事实推断/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/U_文化错位/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/V_打工人职场/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/W_社媒人设/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/X_游戏网文/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/Y_伦理消费/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/Z_图表设计/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/api/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/audit/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/guardrails/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/lib/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/output/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/output/data/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/output/figures/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/rag/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/rag/eval/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| scripts/utils/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/chapters/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/characters/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/data/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/data/json/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/en/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/en/json/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/js/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/reader/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/reader/culture/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/reader/essays/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/reader/people/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/reader/poetry/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/reader/themes/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/static/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/static/css/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/static/fonts/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/static/icons/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/static/icons/ui/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/static/images/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/static/img/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/static/js/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| site/themes/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| source/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| source/原文/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| source/原文/shendu/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| source/原文/分回/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| source/引用与网络解读/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| tests/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| tests/e2e/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| tests/e2e/baseline/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| tests/fixtures/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| tests/unit/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/deploy/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/deploy/pg/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/deploy/pg/bin/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/deploy/pg/migrations/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/e2e/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/evals/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/server/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/server/engine/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/server/storage/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/src/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/src/components/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/src/components/toolCalls/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/src/hooks/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/src/pages/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/src/test/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-agent-web/src/utils/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-desktop/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-desktop/assets/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-desktop/scripts/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-desktop/src/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| xiyouji-desktop/tests/INDEX.md | W1096 | 目录清单改名（index.md → INDEX.md·全仓统一） |
+| .github/ISSUE_TEMPLATE/README.md | W1096 | 目录导读（引用文字同步） |
+| STRUCTURE.md | W1096 | 治理面 |
+| archive/docs/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/docs/_dev/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/docs/_dev/产品管理套件应用-2026-10-02/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/docs/_dev/科技服务顾问-数字人文资助渠道-2026-10-02/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/docs/plans/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/docs/specs/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/docs/w550-shot-review/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/docs/复盘报告/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/misc/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w1071/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w1073/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w1074/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w1076/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w1078/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w1079/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w1080/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w1089/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w10xx/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w4xx/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w5xx/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w6xx/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w7xx/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w8xx/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/batches/w9xx/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/review-pass3/README.md | W1096 | 目录导读（引用文字同步） |
+| archive/scripts/review-pass3/prompts/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/design/ai-concepts/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/design/alternatives/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/design/logo/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/design/process/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/design/screenshots/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/design/tools/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/fonts/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/fonts/source/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/images/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/maps/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/hero-set/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/output/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round1/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round10/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round11/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round12/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round13/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round14/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round15/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round16/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round17/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round18/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round2/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round3/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round4/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round5/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round6/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round7/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round8/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/raw/round9/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/zoom-w948/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/zoom-w952/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/zoom-w953/README.md | W1096 | 目录导读（引用文字同步） |
+| assets/promo/plate-set/zoom-w974/README.md | W1096 | 目录导读（引用文字同步） |
+| dataset/entities/README.md | W1096 | 目录导读（引用文字同步） |
+| docs/00-导读/协议边界速查.md | W1096 | 文档 |
+| docs/12-提示词库/README.md | W1096 | 目录导读（引用文字同步） |
+| docs/INDEX.md | W1096 | 文档 |
+| docs/README.md | W1096 | 目录导读（引用文字同步） |
+| docs/_templates/README.md | W1096 | 目录导读（引用文字同步） |
+| docs/agent-guardrails/README.md | W1096 | 目录导读（引用文字同步） |
+| docs/agent/README.md | W1096 | 目录导读（引用文字同步） |
+| docs/agent/gates.md | W1096 | 治理面 |
+| docs/superpowers/README.md | W1096 | 目录导读（引用文字同步） |
+| docs/superpowers/plans/README.md | W1096 | 目录导读（引用文字同步） |
+| hyperframes/compositions/README.md | W1096 | 目录导读（引用文字同步） |
+| hyperframes/compositions/d3-visualizations/README.md | W1096 | 目录导读（引用文字同步） |
+| hyperframes/output/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AA_叙事实验/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AB_视觉艺术/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AC_方法论矩阵/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AD_认知心理/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AE_生态学/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AF_法理经济/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AG_物质考古/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AH_语言学/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/B_人物/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/C_情节/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/D_关系/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/E_地理/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/G_哲学/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/H_风险与项目/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/I_妖怪社会学/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/J_权力与资源/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/K_命运与轮回/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/L_商业模型/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/M_洞府房产/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/N_法术阵法/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/O_美学时尚/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/P_音乐声效/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Q_源流演变/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/R_解构作品/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/S_全球模式/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/T_反事实推断/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/U_文化错位/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/V_打工人职场/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/W_社媒人设/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/X_游戏网文/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Y_伦理消费/README.md | W1096 | 目录导读（引用文字同步） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/README.md | W1096 | 目录导读（引用文字同步） |
+| scripts/AA_叙事实验/README.md | W1096 | 本批工具/产物 |
+| scripts/AB_视觉艺术/README.md | W1096 | 本批工具/产物 |
+| scripts/AC_方法论矩阵/README.md | W1096 | 本批工具/产物 |
+| scripts/AD_认知心理/README.md | W1096 | 本批工具/产物 |
+| scripts/AE_生态学/README.md | W1096 | 本批工具/产物 |
+| scripts/AF_法理经济/README.md | W1096 | 本批工具/产物 |
+| scripts/AG_物质考古/README.md | W1096 | 本批工具/产物 |
+| scripts/AH_语言学/README.md | W1096 | 本批工具/产物 |
+| scripts/A_文本基础/README.md | W1096 | 本批工具/产物 |
+| scripts/B_人物/README.md | W1096 | 本批工具/产物 |
+| scripts/C_情节/README.md | W1096 | 本批工具/产物 |
+| scripts/D_关系/README.md | W1096 | 本批工具/产物 |
+| scripts/E_地理/README.md | W1096 | 本批工具/产物 |
+| scripts/F_时间/README.md | W1096 | 本批工具/产物 |
+| scripts/G_哲学/README.md | W1096 | 本批工具/产物 |
+| scripts/H_风险与项目/README.md | W1096 | 本批工具/产物 |
+| scripts/I_妖怪社会学/README.md | W1096 | 本批工具/产物 |
+| scripts/J_权力与资源/README.md | W1096 | 本批工具/产物 |
+| scripts/K_命运与轮回/README.md | W1096 | 本批工具/产物 |
+| scripts/L_商业模型/README.md | W1096 | 本批工具/产物 |
+| scripts/M_洞府房产/README.md | W1096 | 本批工具/产物 |
+| scripts/N_法术阵法/README.md | W1096 | 本批工具/产物 |
+| scripts/O_美学时尚/README.md | W1096 | 本批工具/产物 |
+| scripts/P_音乐声效/README.md | W1096 | 本批工具/产物 |
+| scripts/Q_源流演变/README.md | W1096 | 本批工具/产物 |
+| scripts/R_解构作品/README.md | W1096 | 本批工具/产物 |
+| scripts/S_全球模式/README.md | W1096 | 本批工具/产物 |
+| scripts/T_反事实推断/README.md | W1096 | 本批工具/产物 |
+| scripts/U_文化错位/README.md | W1096 | 本批工具/产物 |
+| scripts/V_打工人职场/README.md | W1096 | 本批工具/产物 |
+| scripts/W_社媒人设/README.md | W1096 | 本批工具/产物 |
+| scripts/X_游戏网文/README.md | W1096 | 本批工具/产物 |
+| scripts/Y_伦理消费/README.md | W1096 | 本批工具/产物 |
+| scripts/Z_图表设计/README.md | W1096 | 本批工具/产物 |
+| scripts/api/README.md | W1096 | 本批工具/产物 |
+| scripts/audit/README.md | W1096 | 本批工具/产物 |
+| scripts/check_folder_docs.py | W1096 | 本批工具/产物 |
+| scripts/check_repo_layout.py | W1096 | 本批工具/产物 |
+| scripts/docs_index.py | W1096 | 本批工具/产物 |
+| scripts/gen_folder_docs.py | W1096 | 本批工具/产物 |
+| scripts/guardrails/README.md | W1096 | 本批工具/产物 |
+| scripts/lib/README.md | W1096 | 本批工具/产物 |
+| scripts/output/README.md | W1096 | 本批工具/产物 |
+| scripts/output/data/README.md | W1096 | 本批工具/产物 |
+| scripts/output/figures/README.md | W1096 | 本批工具/产物 |
+| scripts/output/file-index.md | W1096 | 治理面 |
+| scripts/output/stats-changelog.json | W1096 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1096 | 本批工具/产物 |
+| scripts/output/stats.json | W1096 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1096 | 本批工具/产物 |
+| scripts/rag/eval/README.md | W1096 | 本批工具/产物 |
+| scripts/utils/README.md | W1096 | 本批工具/产物 |
+| site/README.md | W1096 | 页面 |
+| site/chapters/README.md | W1096 | 页面 |
+| site/characters/README.md | W1096 | 页面 |
+| site/data/README.md | W1096 | 页面 |
+| site/data/json/README.md | W1096 | 页面 |
+| site/data/search.html | W1096 | 页面 |
+| site/en/json/README.md | W1096 | 页面 |
+| site/en/search.html | W1096 | 页面 |
+| site/js/README.md | W1096 | 页面 |
+| site/reader/README.md | W1096 | 页面 |
+| site/reader/culture/README.md | W1096 | 页面 |
+| site/reader/essays/README.md | W1096 | 页面 |
+| site/reader/people/README.md | W1096 | 页面 |
+| site/reader/poetry/README.md | W1096 | 页面 |
+| site/reader/themes/README.md | W1096 | 页面 |
+| site/static/README.md | W1096 | 页面 |
+| site/static/css/README.md | W1096 | 页面 |
+| site/static/fonts/README.md | W1096 | 页面 |
+| site/static/icons/README.md | W1096 | 页面 |
+| site/static/icons/ui/README.md | W1096 | 页面 |
+| site/static/images/README.md | W1096 | 页面 |
+| site/static/img/README.md | W1096 | 页面 |
+| site/static/js/README.md | W1096 | 页面 |
+| site/themes/README.md | W1096 | 页面 |
+| source/README.md | W1096 | 目录导读（引用文字同步） |
+| source/原文/README.md | W1096 | 目录导读（引用文字同步） |
+| source/原文/shendu/README.md | W1096 | 目录导读（引用文字同步） |
+| source/原文/分回/README.md | W1096 | 目录导读（引用文字同步） |
+| source/引用与网络解读/README.md | W1096 | 目录导读（引用文字同步） |
+| tests/README.md | W1096 | 目录导读（引用文字同步） |
+| tests/e2e/README.md | W1096 | 目录导读（引用文字同步） |
+| tests/e2e/baseline/README.md | W1096 | 目录导读（引用文字同步） |
+| tests/fixtures/README.md | W1096 | 目录导读（引用文字同步） |
+| tests/unit/README.md | W1096 | 目录导读（引用文字同步） |
+| tests/unit/test_folder_docs_gate.py | W1096 | 文档 |
+| xiyouji-agent-web/deploy/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/deploy/pg/bin/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/deploy/pg/migrations/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/e2e/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/evals/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/server/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/server/engine/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/server/storage/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/src/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/src/components/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/src/components/toolCalls/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/src/hooks/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/src/pages/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/src/test/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-agent-web/src/utils/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-desktop/assets/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-desktop/scripts/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-desktop/src/README.md | W1096 | 目录导读（引用文字同步） |
+| xiyouji-desktop/tests/README.md | W1096 | 目录导读（引用文字同步） |
+
 ## W1094 图表色工程批·档 1 尾批（2026-11-02）
 
 | 文件 | W | 说明 |
@@ -749,7 +1211,7 @@
 | docs/00-导读/项目说明.md | W1069 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1069 | 台账（W1069 行新增） |
 | docs/INDEX.md | W1069 | 登记面（docs 索引） |
-| index.md | W1069 | 登记面（根索引） |
+| INDEX.md | W1069 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1069 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
@@ -908,7 +1370,7 @@
 | docs/00-导读/项目说明.md | W1061 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1061 | 台账（W1061 行新增） |
 | docs/INDEX.md | W1061 | 登记面（docs 索引） |
-| index.md | W1061 | 登记面（根索引） |
+| INDEX.md | W1061 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1061 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
@@ -948,7 +1410,7 @@
 | docs/00-导读/项目说明.md | W1060 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1060 | 台账（W1060 行新增） |
 | docs/INDEX.md | W1060 | 登记面（docs 索引） |
-| index.md | W1060 | 登记面（根索引） |
+| INDEX.md | W1060 | 登记面（根索引） |
 | .github/workflows/README.md | W1060 | 级联面（里程碑行同步） |
 | archive/docs/AGENTS-ARCHIVE.md | W1060 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
@@ -983,7 +1445,7 @@
 | docs/00-导读/项目说明.md | W1059 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1059 | 台账（W1059 认领行在案·收官回填另笔） |
 | docs/INDEX.md | W1059 | 登记面（docs 索引） |
-| index.md | W1059 | 登记面（根索引） |
+| INDEX.md | W1059 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1059 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
@@ -1020,7 +1482,7 @@
 | docs/00-导读/项目说明.md | W1058 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1058 | 台账（W1058 行新增） |
 | docs/INDEX.md | W1058 | 登记面（docs 索引） |
-| index.md | W1058 | 登记面（根索引） |
+| INDEX.md | W1058 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1058 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
@@ -1053,7 +1515,7 @@
 | docs/00-导读/项目说明.md | W1057 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1057 | 台账（W1057 行·状态列含对账 token） |
 | docs/INDEX.md | W1057 | 登记面（docs 索引） |
-| index.md | W1057 | 登记面（根索引） |
+| INDEX.md | W1057 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1057 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
@@ -1090,7 +1552,7 @@
 | CITATION.cff | W1056 | 级联面（版本同步） |
 | docs/00-导读/项目说明.md | W1056 | 级联面（当前版本行） |
 | docs/INDEX.md | W1056 | 登记面（docs 索引） |
-| index.md | W1056 | 登记面（根索引） |
+| INDEX.md | W1056 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1056 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
@@ -1124,7 +1586,7 @@
 | docs/00-导读/项目说明.md | W1055 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1055 | 台账（W1055 行新增） |
 | docs/INDEX.md | W1055 | 登记面（docs 索引） |
-| index.md | W1055 | 登记面（根索引） |
+| INDEX.md | W1055 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1055 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
@@ -1160,7 +1622,7 @@
 | docs/00-导读/项目说明.md | W1054 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1054 | 台账（W1054 行新增） |
 | docs/INDEX.md | W1054 | 登记面（docs 索引） |
-| index.md | W1054 | 登记面（根索引） |
+| INDEX.md | W1054 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1054 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
@@ -1207,7 +1669,7 @@
 | CITATION.cff | W1053 | 级联面（版本同步） |
 | docs/00-导读/项目说明.md | W1053 | 级联面（当前版本行） |
 | docs/INDEX.md | W1053 | 登记面（docs 索引） |
-| index.md | W1053 | 登记面（根索引） |
+| INDEX.md | W1053 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1053 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
@@ -1245,7 +1707,7 @@
 | CITATION.cff | W1052 | 级联面（版本同步） |
 | docs/00-导读/项目说明.md | W1052 | 级联面（当前版本行） |
 | docs/INDEX.md | W1052 | 登记面（docs 索引） |
-| index.md | W1052 | 登记面（根索引） |
+| INDEX.md | W1052 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1052 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
 | archive/docs/file-index-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
@@ -1284,7 +1746,7 @@
 | docs/11-方案报告/计划方案/执行前计划-W1051-复盘触发器口径根修.md | W1051 | 方案报告（执行前计划件·五表 + 自包含检查 12 项） |
 | docs/11-方案报告/README.md | W1051 | 登记面（方案报告索引） |
 | docs/INDEX.md | W1051 | 登记面（docs 索引） |
-| index.md | W1051 | 登记面（根索引） |
+| INDEX.md | W1051 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1051 | 级联归档滚动 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1051 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1051 | 级联归档滚动（体积窗若触发） |
@@ -1325,7 +1787,7 @@
 | docs/00-导读/项目说明.md | W1050 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1050 | 台账（W1050 行新增） |
 | docs/INDEX.md | W1050 | 登记面（docs 索引） |
-| index.md | W1050 | 登记面（根索引） |
+| INDEX.md | W1050 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1050 | 级联归档滚动 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1050 | 级联归档滚动 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W1050 | 级联归档滚动（体积窗若触发） |
@@ -1523,7 +1985,7 @@
 | docs/00-导读/项目说明.md | W1048 | 级联面（当前版本行） |
 | docs/00-导读/W批次编号对账表.md | W1048 | 台账（W1044 行补·W1046 行回填·W1048 行新增） |
 | docs/INDEX.md | W1048 | 登记面（docs 索引） |
-| index.md | W1048 | 登记面（根索引） |
+| INDEX.md | W1048 | 登记面（根索引） |
 | archive/docs/AGENTS-ARCHIVE.md | W1048 | 级联归档滚动 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1048 | 级联归档滚动 |
 | scripts/output/stats.json | W1048 | 登记面产物（stats 实体） |
@@ -1558,7 +2020,7 @@
 | docs/11-方案报告/计划方案/执行前计划-W1047-图表判据剥标签根修.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
 | docs/INDEX.md | W1045 | 本批新增/修改 |
 | docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
-| index.md | W1045 | 本批新增/修改 |
+| INDEX.md | W1045 | 本批新增/修改 |
 | scripts/batch_cascade.py | W1045 | 级联工具（上一批成果·本批未改） |
 | scripts/check_chart_data.py | W1045 | 图表判据（剥标签按语法约束 + 注释优先剥离 + 2 例可证伪锁） |
 | scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
@@ -1618,7 +2080,7 @@
 | docs/INDEX.md | W1045 | 本批新增/修改 |
 | docs/agent/gates.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
 | docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
-| index.md | W1045 | 本批新增/修改 |
+| INDEX.md | W1045 | 本批新增/修改 |
 | scripts/README.md | W1045 | 本批新增/修改 |
 | scripts/batch_cascade.py | W1045 | 级联工具（CITATION.cff 面补行数断言） |
 | scripts/check_crop.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
@@ -4743,36 +5205,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W977 | W977 段插入
 | scripts/output/_w977_spec.json | W977 | 本批级联 spec
 | scripts/output/_cascade_files_W977.txt | W977 | 级联落盘清单
-
-## W976 工具链体检修复批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/archive_ledger_rows.py | W976 | A5 断言修复（归档块保持源相对顺序·不再要求号升序）+ move 参数化 + 自测重写走 move() 全链路（升序/降序穿插/无迁出三形态）
-| scripts/check_doc_size_budget.py | W976 | 修法指引按文件种类分治（台账指向 archive_ledger_rows·段式工具不管台账）+ 自测补台账案例
-| scripts/preflight_check.py | W976 | rejection_pairs 纯函数 + 主流程拒绝集排除本批自身（认领后复跑不再自撞）
-| scripts/batch_cascade.py | W976 | 收官 [TMPE] 提示位（批次桶计数 + 沉淀扫描指引·防只进不出复发）
-| tests/unit/test_doc_size_budget.py | W976 | 新增台账修法指引单测（C3 死路指引回归锁）
-| tests/unit/test_preflight_touches.py | W976 | 新增 self 排除单测（认领后自撞回归锁）
-| docs/agent/pitfalls.md | W976 | 数据/内容可信度 +1 条（自测样本必须覆盖判据会失败的最小形态·8→9 条）
-| AGENTS.md | W976 | 坑位数 63→64（阅读契约与主题视图两处·数据类 8→9）+ 版本脚注条目
-| HANDOVER.md | W976 | 坑位数指针 63→64 两处 + 级联头尾链与里程碑块
-| docs/00-导读/W批次编号对账表.md | W976 | W962 伪阻塞闭环回填 + W976 认领行 + 修剪迁出 W914-W916（61→59 回窗）
-| archive/docs/W批次编号对账表-ARCHIVE.md | W976 | 台账修剪迁入 W914-W916 三行（号序切分）
-| archive/docs/CHANGELOG-ARCHIVE.md | W976 | 段式归档迁入 W856-W857 两段
-| archive/docs/file-index-ARCHIVE.md | W976 | 段式归档迁入 W856-W857 两段
-| CHANGELOG.md | W976 | W976 段（现役 111→109 回窗后立新段）
-| README.md | W976 | 当前批次版本行
-| STRUCTURE.md | W976 | 当前批次版本行
-| docs/00-导读/项目说明.md | W976 | 当前批次版本行
-| .github/workflows/README.md | W976 | 工作流层版本面推进 W976
-| site/index.html | W976 | 页脚批次链插入 W976
-| site/data/cross-time-danmaku.html | W976 | 页脚批次链插入 W976
-| site/data/tag-cloud.html | W976 | 页脚批次链插入 W976
-| site/dukou-engine.html | W976 | 页脚批次链插入 W976
-| CITATION.cff | W976 | version 同步为 W976
-| scripts/output/file-index.md | W976 | W976 段插入
-| scripts/output/_w976_spec.json | W976 | 本批级联 spec
-| scripts/output/_cascade_files_W976.txt | W976 | 级联落盘清单
-| scripts/output/_vermilion_solid_cache.json | W976 | 朱砂门禁缓存补随批入库（W975 末笔搜索刷新后再生成·上批漏提）
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""gen_folder_docs.py — 为全仓目录补齐 index.md / README.md（W779 批·用户令「检查所有文件夹，添加 index.md REMADE.md STRUCTURE.md」）。
+"""gen_folder_docs.py — 为全仓目录补齐 INDEX.md / README.md（W779 批·用户令「检查所有文件夹，添加 index.md REMADE.md STRUCTURE.md」·W1096 目录清单统一为 INDEX.md）。
 
 ## 背景与范围（动工前实测 2026-10-18）
 
@@ -102,6 +102,9 @@ def showcase_guarded(rel_dir: str, kind: str) -> bool:
 EXCLUDE_SEGMENTS = {"build", "dist"}
 EXCLUDE_SUFFIX = (".egg-info",)
 # 建文档时跳过的文件名（自身/占位/.gitkeep）
+# W1091：目录清单统一为 **INDEX.md**（大写·与 docs/INDEX.md 同形）——「index.md」仍列在
+# 跳过集里，因 NTFS 大小写不敏感：小写残留件与 INDEX.md 是同一物理文件（E-73），
+# 两个名字都跳过 ⇒ 清单里既不重复列、也不把遗留小写件当普通文件计入。
 SKIP_NAMES = {".gitkeep", "index.md", "INDEX.md", "README.md", "STRUCTURE.md"}
 # 索引里列文件时的分类顺序（其余按扩展名归入「其他」）
 EXT_GROUPS: list[tuple[str, set[str]]] = [
@@ -388,6 +391,16 @@ def in_scope(abs_dir: str) -> bool:
     ))
 
 
+
+
+# W1091：**语义豁免**——某些目录的 INDEX.md 属「另一命名空间」，不是本生成器的目录清单。
+# docs/ 根的 INDEX.md 是 docs_index.py 的「文档索引」（811 篇文档·按板块），与本生成器的
+# 「目录文件清单」同名不同义 ⇒ 本生成器**不产**该目录的清单，门禁也**不校验**其清单结构。
+# 改名前该豁免是 case_collides 的**副作用**（docs/ 恰有 INDEX.md ⇒ 整目录被跳过），
+# 改名后副作用消失 ⇒ 门禁开始按清单模板校验文档索引 ⇒ 判红「结构不合生成器模板」。
+# 修法根因：把隐式副作用升级为**显式语义契约**（不依赖 fs 大小写语义·两平台同构）。
+INDEX_OWNED_ELSEWHERE = {"docs"}
+
 def case_collides(abs_dir: str) -> bool:
     """目录内已有 index/README 的大小写变体（如 INDEX.md/Readme.md）→ True。
 
@@ -402,7 +415,7 @@ def case_collides(abs_dir: str) -> bool:
     except OSError:
         return False
     return any(n.lower() in ("index.md", "readme.md")
-               and n not in ("index.md", "README.md") for n in names)
+               and n not in ("INDEX.md", "README.md") for n in names)
 
 
 def _guide_name(abs_dir: str) -> str | None:
@@ -490,7 +503,7 @@ def build_readme(abs_dir: str, disk: bool = False) -> str:
 
     lines = [f"# {title}", ""]
     lines.append(f"> 本文件说明 {here} 的用途、内容构成与维护约定。")
-    lines.append("> 逐文件索引见同目录 `index.md`；全仓目录树与命名规范见根目录 `STRUCTURE.md`。")
+    lines.append("> 逐文件索引见同目录 `INDEX.md`；全仓目录树与命名规范见根目录 `STRUCTURE.md`。")
     lines.append("")
 
     lines.append("## 这个目录装什么")
@@ -507,7 +520,7 @@ def build_readme(abs_dir: str, disk: bool = False) -> str:
 
     lines.append("## 维护约定")
     lines.append("")
-    lines.append("- 新增文件后同目录 `index.md` 不会自动更新；需要刷新时重跑 `python scripts/gen_folder_docs.py`。")
+    lines.append("- 新增文件后同目录 `INDEX.md` 不会自动更新；需要刷新时重跑 `python scripts/gen_folder_docs.py`。")
     lines.append("- 目录用途或命名约定变更时同步改根目录 `STRUCTURE.md`（单一事实源·本文件不放全仓结构叙述）。")
     lines.append("- 内容文档的写作格式与血缘元信息块按 `docs/00-导读/文档规范.md` 执行。")
     lines.append("")
@@ -525,7 +538,7 @@ def _describe(abs_dir: str, rel: str, subdirs: list[str], files: list[str], grou
         bits.append("生成时点无直属文件")
     if subdirs:
         bits.append("；下辖 %d 个子目录" % len(subdirs))
-    return "".join(bits) + "。详见同目录 `index.md` 的逐文件清单。"
+    return "".join(bits) + "。详见同目录 `INDEX.md` 的逐文件清单。"
 
 
 def render(abs_dir: str, kind: str, disk: bool = False) -> str:
@@ -533,7 +546,7 @@ def render(abs_dir: str, kind: str, disk: bool = False) -> str:
 
     `disk=True` 走**磁盘口径**清单（仅供 self-test 的合成树用——它不在 Git 索引内）。
     """
-    body = (build_index(abs_dir, disk=disk) if kind == "index.md"
+    body = (build_index(abs_dir, disk=disk) if kind == "INDEX.md"
             else build_readme(abs_dir, disk=disk))
     # W994：冷存储目录的禁运行警告**在生成模板级注入**——手工写入会被 --refresh 覆写（W994 实证：
     # batches/README.md 为生成物所有，警告落盘一轮即被刷没），模板级才可存活
@@ -544,8 +557,8 @@ def render(abs_dir: str, kind: str, disk: bool = False) -> str:
             "> 归档件内的路径假设（ROOT 上溯等）在归档位下全部失效（W836 实证）且不参与 ruff/测试维护；\n"
             "> 查历史实现用 `git show <归档提交>:<路径>`。健康对账见 `scripts/check_archive_health.py`。\n")
     role = ("逐文件索引（机器可读·与 README.md 分工：本文件列清单、README 讲用途约定）"
-            if kind == "index.md" else
-            "目录导读（人读·与 index.md 分工：本文件讲用途约定、index.md 列清单）")
+            if kind == "INDEX.md" else
+            "目录导读（人读·与 INDEX.md 分工：本文件讲用途约定、INDEX.md 列清单）")
     meta = (
         "> 生成来源：`scripts/gen_folder_docs.py`@W779\n"
         "> 生成日期：2026-10-18\n"
@@ -564,7 +577,7 @@ def render(abs_dir: str, kind: str, disk: bool = False) -> str:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="为在管目录补齐 index.md / README.md")
+    ap = argparse.ArgumentParser(description="为在管目录补齐 INDEX.md / README.md")
     ap.add_argument("--dry-run", action="store_true", help="只报告将写哪些文件，不落盘")
     ap.add_argument("--force", action="store_true", help="已存在的文件也按生成内容重写（含人工维护件·慎用）")
     ap.add_argument("--refresh", action="store_true",
@@ -596,6 +609,7 @@ def main() -> int:
     # 大小写冲突目录全模式跳过（INDEX.md 等变体在盘·NTFS 覆写守卫·见 case_collides）
     dirs = [d for d in dirs_all if not case_collides(d)]
     skipped_collision = len(dirs_all) - len(dirs)
+    skipped_semantic = 0
     written, skipped_exist, skipped_readme, skipped_hand, failed = [], [], [], [], []
     skipped_showcase = []
 
@@ -604,7 +618,13 @@ def main() -> int:
             continue
         rel_d = rel_of(d)
 
-        for kind in ("index.md", "README.md"):
+        if rel_d in INDEX_OWNED_ELSEWHERE:
+            # 该目录的 INDEX.md 归另一生成器所有 ⇒ 只管 README.md，INDEX.md 不碰
+            kinds = ("README.md",)
+            skipped_semantic += 1
+        else:
+            kinds = ("INDEX.md", "README.md")
+        for kind in kinds:
             if showcase_guarded(rel_d, kind):
                 skipped_showcase.append("%s/%s" % (rel_d, kind))
                 continue
@@ -649,7 +669,8 @@ def main() -> int:
                 continue
             written.append(rel_target)
 
-    print("在管目录数：%d（大小写冲突跳过 %d）" % (len(dirs), skipped_collision))
+    print("在管目录数：%d（大小写冲突跳过 %d·语义豁免 %d）"
+          % (len(dirs), skipped_collision, skipped_semantic))
     print("将写入/已写入文件数：%d（index.md %d · README.md %d）" % (
         len(written),
         sum(1 for w in written if w.lower().endswith("index.md")),
