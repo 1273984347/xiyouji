@@ -1,7 +1,7 @@
 {
  "meta": {
   "generator": "scripts/export_design_tokens.py",
-  "generated": "2026-10-22",
+  "generated": "2026-11-02",
   "source": [
    "site/tokens.css",
    "site/system.css"

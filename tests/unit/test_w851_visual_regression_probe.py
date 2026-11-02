@@ -45,6 +45,19 @@ def test_diff_zero_on_identical():
     assert notes == []
 
 
+def test_diff_schema_mismatch_is_not_comparable():
+    """schema 不同 ⇒ 判「不可比」（W1090：属性集变更后旧快照不得与新快照混比）。
+
+    回归点：原实现只把不可比打进 NOTE·退出码仍 0 ⇒ 汇总行照样输出
+    「J2 PASS」⇒ 假绿；本例锁住「notes 里必须出现不可比」。
+    """
+    before = {"schema": 3, "pages": {"p.html": {"light": [_el("div", "a")]}}}
+    after = _snap({"p.html": {"light": [_el("div", "a")]}})
+    diffs, notes = probe._diff_snapshots(before, after)
+    assert diffs == []
+    assert any("不可比" in n for n in notes)
+
+
 def test_diff_count_mismatch_does_not_mask_props():
     """计数不齐 → 计数差异照报，且公共前缀仍逐属性比（W851 实证修复点）。"""
     before = _snap({"p.html": {"light": [
@@ -103,7 +116,10 @@ def test_probe_pages_minimum_face():
 def test_props_fixed_order():
     assert probe.PROPS[0] == "color"
     assert "font-size" in probe.PROPS
-    assert len(probe.PROPS) == 29
+    # W1090：纳入 SVG 颜色属性（stroke/fill）⇒ 属性集 29 → 31
+    assert "stroke" in probe.PROPS
+    assert "fill" in probe.PROPS
+    assert len(probe.PROPS) == 31
 
 
 def test_floor_and_quiesce_constants():
