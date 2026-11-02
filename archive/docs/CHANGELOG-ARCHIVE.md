@@ -16,6 +16,26 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W976（2026-10-27）：工具链体检修复批（台账修剪器 A5 + C3 修路指引 + preflight 自撞 + 三窗回窗 + 坑表沉淀）
+
+
+
+> **来源**：用户 2026-10-27 令「检查一下项目所有的工具、脚本、探针、门禁，有没有问题是否需要优化；临时文件系统和归档系统现在是否能够正常运转」并批准处置清单开工。
+
+> - **文件**：scripts/archive_ledger_rows.py、scripts/check_doc_size_budget.py、scripts/preflight_check.py、scripts/batch_cascade.py、tests/unit/test_doc_size_budget.py、tests/unit/test_preflight_touches.py、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、darchive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、sscripts/output/_w976_spec.json、scripts/output/_cascade_files_W976.txt、scripts/output/_vermilion_solid_cache.json（逐件行见 file-index W976 段）。
+
+**体检结论（修复前）**：门禁与探针基本面健康（verify 50 槽全绿、pytest 919/923、ruff 0、engine.smoke 12/12、anchor 探针 0 盲区），但三窗齐超窗（CHANGELOG 111/110、file-index 111/110、台账 61/60——C 族挂 preflight 开工判据不在 verify，W976 开工即被拦）+ 工具链三缺陷：① 台账修剪器 archive_ledger_rows.py 的 A5 断言（迁出行物理序须升序）与自身文档「行序穿插是常态（W968 实证 52 处）」矛盾，真实台账（待迁出 {914,915} 物理序 [915,914]）首跑即 AssertionError，且自测样本恰好构造升序穿插测不出该形态——台账修剪回路断链；② C3 超窗修法指引统一指向段式 archive_segments.py，而该工具不管台账——修路指引死路；③ preflight_check 拒绝循环不排本批自身，认领后复跑必然自撞 FAIL（docstring 与 NOTE 均声称已排除）。
+
+**三缺陷修复**：① A5 改为「归档内迁出块 == 注记行 + 迁出行按源相对顺序逐字节一致」+ move() 参数化 + 自测重写为走 move() 全链路三形态（升序穿插/降序穿插/无迁出）；② evaluate() 修法指引按文件种类分治（台账指向 archive_ledger_rows.py --apply）+ 自测与单测各补台账案例；③ 新增 rejection_pairs 纯函数（排除 self_num）+ 主流程换用 + 单测锁行为。
+
+**回窗与台账治理**：archive_ledger_rows.py --apply 迁出 W914-W916 三行（61→59 回窗）+ archive_segments.py --apply 迁出 W856-W857 两段（CHANGELOG/file-index 111→109 回窗）；W962 孤儿认领核伪并闭环回填（无 commit、无 CHANGELOG 段，五大交付面随 W960 a6fed505 落地——ledger_close_check 诊断的「事实已收官、字段没回填」伪阻塞，其 touches 曾挡死本批两个文件）。
+
+**沉淀面**：坑表数据/内容可信度 +1 条「自测样本必须覆盖判据会失败的最小形态」（8→9 条·计数链同步 AGENTS/HANDOVER 共 4 处·N4 门禁 64=64）；batch_cascade 收官新增 [TMPE] 提示位（批次桶计数 + tmpe_tidy --tool-candidates 沉淀扫描指引——清理闭环自 W738 建制至本批只运转过一次，防「只进不出」复发）；tmpe 工具晋升机制实证结论：10-14/10-16 五次扫描 298 件最高 11/18 无一达晋升线 14（批次命名件复用频率维结构性 0 分），沉淀主通道是「教训入坑表/方法论篇」而非脚本搬迁。
+
+**验证**：archive_ledger_rows --self-test 三形态全过 + 真实台账 dry-run/apply 成功；check_doc_size_budget --self-test 过 + 实盘 0 FAIL（109/109/59）；pytest 单测 27 过（doc_size_budget 6 + preflight touches 20 + cascade 5 中相关）；ruff 全过；N4 坑位数 64=64；preflight 复跑 PASS 不再自撞。
+
+> - **状态**：已收官（`766c70ac`·verify 全量 rc=0 + pytest 922 过/3 跳 + ruff 0 + N4 64=64·三窗现势 110/110/59）
+
 ### W975（2026-10-27）：跨 Agent 经验沉淀入仓批（坑表 57 → 63 条 + 深度篇 1 篇 + 计数链同步）
 
 > **来源**：用户 2026-10-27 纠正「你不能只沉淀进你自己的 Memory 文件，本项目是多 Agent 协作的项目所以需要你同样沉淀进本项目内」。

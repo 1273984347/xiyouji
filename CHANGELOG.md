@@ -1,3 +1,23 @@
+### W1096（2026-11-02）：INDEX 大小写统一 + design 审查 + 归档清偿（三合一治理批）
+
+> **来源**：用户 2026-11-02 三项指令（统一 INDEX/index 大小写 / 审查所有 design 文件 / 归档系统文件内容归档）⇒ 本批为三合一治理批。
+>
+> - **文件**：scripts/gen_folder_docs.py · scripts/check_folder_docs.py · scripts/check_repo_layout.py · scripts/docs_index.py · tests/unit/test_folder_docs_gate.py · scripts/output/_w1091_spec.json · docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md
+
+**本批要点**：
+
+① **INDEX 大小写统一（232 件改名）**——全仓目录清单由 `index.md` 统一为 **`INDEX.md`**（与 `docs/INDEX.md` 同形）。Windows NTFS 大小写不敏感 ⇒ 物理改名走**两步法**（先 rename 到临时名再 rename 到目标名），且 `git mv` 只改索引不改物理名 ⇒ **必须「物理改名 + git mv 登记」两段都做**，否则提交时是「删旧增新」的零差异假 diff。改名后磁盘 index 家族计数 = INDEX.md **297**、小写 **0**。
+
+② **四判据同批改造（改名的真正成本所在）**——只改文件名会立刻造出四处假收敛，本批逐项根修：① `gen_folder_docs.py` 的 `case_collides()` **语义反转**：改名前规范名是小写 ⇒「大写变体=冲突」；改名后规范名是大写 ⇒ 若沿用旧判据则**每个目录都含 INDEX.md ⇒ 285 目录全被跳过 ⇒ 第 45 门禁瞬间失明**；现只拦「非规范形态」（`index.md`/`Readme.md` 等）。② `docs_index.py` 的排除规则**按语义而非大小写**：原 `md.name == "INDEX.md"` 排除规则会误伤改名后的 `docs/<板块>/INDEX.md`（目录清单）⇒ 改为「仅排除扫描根本身的索引本体」。③ `check_folder_docs.py` C1 判据改指 `INDEX.md` 并**新增语义豁免分支**。④ `check_repo_layout.py` 根文件白名单 `index.md` → `INDEX.md`。
+
+③ **语义豁免（副作用升级为契约）**——`docs/` 根的 `INDEX.md` 是 `docs_index.py` 的**文档索引**（811 篇·按板块），与目录清单**同名不同义**。改名前它靠 `case_collides` 的**副作用**被豁免（恰有 INDEX.md ⇒ 整目录跳过）；改名后副作用消失 ⇒ 门禁开始按清单模板校验文档索引 ⇒ 判红「结构不合生成器模板」。根修：新增显式契约 `INDEX_OWNED_ELSEWHERE = {"docs"}`（生成器与门禁共用·单一事实源）⇒ 不再依赖 fs 大小写语义，两平台同构。
+
+④ **引用面订正（分五类·禁一律替换）**——独立 `index.md` 引用实测 **1333 处 / 372 文件**，其中约 1300 处是生成器模板文字。订正按语义分类：**活导航指针**（人工维护 README 的「同目录 `index.md`」·44 文件）**必改**（不改即死指针）；**反向索引行**（`file-index.md` 的 `| index.md |` 行·16 处）**必改**（指向活文件路径）；**现役治理文档**（STRUCTURE / gates / 协议边界速查）**必改**（描述现状）；**CHANGELOG 与历史报告的叙述文字**（T11/T13/T15/T17·18 处）**禁改**（E2 历史事实不可改写）。
+
+⑤ **归档系统清偿（三份现役正本）**——开工前置核验实测台账 **61 段 > 窗口 60**（超窗·preflight 硬判据拦截）⇒ 跑 `archive_ledger_rows.py` 迁出 W1029-W1031 三行（正本 61 → **59 段**）；`archive_segments.py` 各迁出 1 段（CHANGELOG 与 file-index 均 110 → **109 段**）；两个容器破 1MB 线 ⇒ 跑 `archive_tier2.py` 二级归档（CHANGELOG-ARCHIVE 迁出 110 段 · file-index-ARCHIVE 迁出 1 段）⇒ 归档健康探针 T1 两项破线**转绿**。
+
+⑥ **验证**——第 45 门禁 **0 FAIL / 232 目录**、第 52 门禁 0 FAIL、第 31 门禁文档口径体检 0 FAIL、搜索索引新鲜度 0 FAIL、CSP **856 页 0 漂移**、全仓链接 **21061 条 0 broken**、`test_folder_docs_gate` + `test_repo_layout` **23 例全绿**（含新增「规范名 INDEX.md 不得被判冲突」负样本锁）。
+
 ### W1094（2026-11-02）：图表色工程批·档 1 尾批（七页七处与档位全量清零）
 
 
@@ -1627,7 +1647,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1094），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1096），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1973,24 +1993,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：迁移后 `git status` scripts/ 零未跟踪（152 件为 gitignore 屏蔽态）；gen_folder_docs --refresh 后 scripts/index.md 与 output/index.md 零僵尸行（output/ 自有 _w7xx 件与 spec 属在位实件）；ruff 豁免面核实（pyproject `**/_*.py` + `archive/` W400 前例）；全量 verify + pytest + ruff 见验证行。
 
 > - **状态**：已收官（9eaa41e3·verify 全量 rc=0 + pytest 922 过/3 跳 + ruff 0 + lint_links 5545 链接 0 broken）
-
-### W976（2026-10-27）：工具链体检修复批（台账修剪器 A5 + C3 修路指引 + preflight 自撞 + 三窗回窗 + 坑表沉淀）
-
-
-
-> **来源**：用户 2026-10-27 令「检查一下项目所有的工具、脚本、探针、门禁，有没有问题是否需要优化；临时文件系统和归档系统现在是否能够正常运转」并批准处置清单开工。
-
-> - **文件**：scripts/archive_ledger_rows.py、scripts/check_doc_size_budget.py、scripts/preflight_check.py、scripts/batch_cascade.py、tests/unit/test_doc_size_budget.py、tests/unit/test_preflight_touches.py、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、darchive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、sscripts/output/_w976_spec.json、scripts/output/_cascade_files_W976.txt、scripts/output/_vermilion_solid_cache.json（逐件行见 file-index W976 段）。
-
-**体检结论（修复前）**：门禁与探针基本面健康（verify 50 槽全绿、pytest 919/923、ruff 0、engine.smoke 12/12、anchor 探针 0 盲区），但三窗齐超窗（CHANGELOG 111/110、file-index 111/110、台账 61/60——C 族挂 preflight 开工判据不在 verify，W976 开工即被拦）+ 工具链三缺陷：① 台账修剪器 archive_ledger_rows.py 的 A5 断言（迁出行物理序须升序）与自身文档「行序穿插是常态（W968 实证 52 处）」矛盾，真实台账（待迁出 {914,915} 物理序 [915,914]）首跑即 AssertionError，且自测样本恰好构造升序穿插测不出该形态——台账修剪回路断链；② C3 超窗修法指引统一指向段式 archive_segments.py，而该工具不管台账——修路指引死路；③ preflight_check 拒绝循环不排本批自身，认领后复跑必然自撞 FAIL（docstring 与 NOTE 均声称已排除）。
-
-**三缺陷修复**：① A5 改为「归档内迁出块 == 注记行 + 迁出行按源相对顺序逐字节一致」+ move() 参数化 + 自测重写为走 move() 全链路三形态（升序穿插/降序穿插/无迁出）；② evaluate() 修法指引按文件种类分治（台账指向 archive_ledger_rows.py --apply）+ 自测与单测各补台账案例；③ 新增 rejection_pairs 纯函数（排除 self_num）+ 主流程换用 + 单测锁行为。
-
-**回窗与台账治理**：archive_ledger_rows.py --apply 迁出 W914-W916 三行（61→59 回窗）+ archive_segments.py --apply 迁出 W856-W857 两段（CHANGELOG/file-index 111→109 回窗）；W962 孤儿认领核伪并闭环回填（无 commit、无 CHANGELOG 段，五大交付面随 W960 a6fed505 落地——ledger_close_check 诊断的「事实已收官、字段没回填」伪阻塞，其 touches 曾挡死本批两个文件）。
-
-**沉淀面**：坑表数据/内容可信度 +1 条「自测样本必须覆盖判据会失败的最小形态」（8→9 条·计数链同步 AGENTS/HANDOVER 共 4 处·N4 门禁 64=64）；batch_cascade 收官新增 [TMPE] 提示位（批次桶计数 + tmpe_tidy --tool-candidates 沉淀扫描指引——清理闭环自 W738 建制至本批只运转过一次，防「只进不出」复发）；tmpe 工具晋升机制实证结论：10-14/10-16 五次扫描 298 件最高 11/18 无一达晋升线 14（批次命名件复用频率维结构性 0 分），沉淀主通道是「教训入坑表/方法论篇」而非脚本搬迁。
-
-**验证**：archive_ledger_rows --self-test 三形态全过 + 真实台账 dry-run/apply 成功；check_doc_size_budget --self-test 过 + 实盘 0 FAIL（109/109/59）；pytest 单测 27 过（doc_size_budget 6 + preflight touches 20 + cascade 5 中相关）；ruff 全过；N4 坑位数 64=64；preflight 复跑 PASS 不再自撞。
-
-> - **状态**：已收官（`766c70ac`·verify 全量 rc=0 + pytest 922 过/3 跳 + ruff 0 + N4 64=64·三窗现势 110/110/59）
 
