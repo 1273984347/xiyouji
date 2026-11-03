@@ -126,8 +126,13 @@ def test_closeout_steps_put_versions_between_stats_and_csp():
     order = bc.step_order()
     assert 'versions' in order
     assert order.index('versions') == order.index('stats') + 1
-    assert order.index('versions') == order.index('csp') - 1
+    # W1116：收官链在 versions 之后插入两道自检闸（文案数字对表 / 登记面一致性），
+    # 它们要读**版本面推进后的最终产物面** ⇒ versions 不再紧邻 csp，但仍在 stats 之后、csp 之前；
+    # csp/cspcheck 仍末两步（W1112 既有承诺不破）。
+    assert order.index('versions') < order.index('csp')
     assert order[-2:] == ['csp', 'cspcheck']
+    assert 'docnums' in order and 'regsurface' in order
+    assert order.index('versions') < order.index('docnums') < order.index('csp')
     assert order[0] == 'precheck'
 
 
