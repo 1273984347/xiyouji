@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pCIz3A/iHDmSArowsexiPT7VjTI8nQQ8qCrUoW1SbdU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4TTho0GlgTs2Hrbb1L3iLwCZO/MR2qPeD1B6Gywfd90=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物情感弧线可视化 · 详解西游记</title>
@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="壹 · 五众情感弧线总览 · 贰 · 关键转折点标注 · 叁 · 关系对情感对照 · 详解西游记">
     <meta property="og:description" content="壹 · 五众情感弧线总览 · 贰 · 关键转折点标注 · 叁 · 关系对情感对照 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1590,10 +1590,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 [95,  0.25,  0.18, -0.05,  0.18,  0.45]  // 91-100: 灵山+五圣成真
             ],
             characters: [
-                { id: 'wukong', name: '孙悟空', color: '#c8463a' },
-                { id: 'tangseng', name: '唐僧', color: '#3a6b8c' },
+                { id: 'wukong', name: '孙悟空', color: 'var(--chart-1)' },
+                { id: 'tangseng', name: '唐僧', color: 'var(--chart-2)' },
                 { id: 'bajie', name: '猪八戒', color: '#C9A063' },
-                { id: 'shaseng', name: '沙僧', color: '#6B8E5A' },
+                { id: 'shaseng', name: '沙僧', color: 'var(--chart-4)' },
                 { id: 'guanyin', name: '观音', color: '#8c6a8c' }
             ],
             // 6 个关键转折点（孙悟空）
@@ -1751,7 +1751,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .style('fill', 'var(--chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
                     .style('cursor', 'pointer')
                     .on('mouseover', e => showTooltip(
-                        `<strong style="color:#c8463a">第${tp.chapter}回</strong> · ${tp.event}<br>` +
+                        `<strong style="color:var(--chart-1)">第${tp.chapter}回</strong> · ${tp.event}<br>` +
                         `${tp.line}<br>情感值: ${tp.sentiment.toFixed(2)}<br><em>${tp.desc}</em>`, e))
                     .on('mouseout', hideTooltip);
                 // Label
@@ -1764,9 +1764,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             // Legend
             const legend = d3.select('#arc-annotated-legend');
             legend.append('span').attr('class', 'legend-item').html(
-                '<span class="legend-swatch" style="background:#c8463a"></span>孙悟空 avg_sentiment');
+                '<span class="legend-swatch" style="background:var(--chart-1)"></span>孙悟空 avg_sentiment');
             legend.append('span').attr('class', 'legend-item').html(
-                '<span class="legend-swatch" style="background:#c8463a;border-radius:50%;"></span>关键转折点');
+                '<span class="legend-swatch" style="background:var(--chart-1);border-radius:50%;"></span>关键转折点');
         })();
 
         // ===== Section 3: Pair Comparison =====
@@ -1792,9 +1792,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr('stroke', '#999').attr('stroke-dasharray', '4,4').attr('opacity', 0.6);
 
             const pairs = [
-                { idx: 1, name: '唐僧-孙悟空（主轴·88）', color: '#c8463a' },
+                { idx: 1, name: '唐僧-孙悟空（主轴·88）', color: 'var(--chart-1)' },
                 { idx: 2, name: '孙悟空-猪八戒（讥讽·82）', color: '#C9A063' },
-                { idx: 3, name: '唐僧-沙僧（稳定·77）', color: '#6B8E5A' }
+                { idx: 3, name: '唐僧-沙僧（稳定·77）', color: 'var(--chart-4)' }
             ];
             pairs.forEach(p => {
                 const line = d3.line().x(d => x(d[0])).y(d => y(d[p.idx])).curve(d3.curveMonotoneX);
@@ -1892,7 +1892,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             const legend = d3.select('#u-curve-legend');
             legend.append('span').attr('class', 'legend-item').html(
-                '<span class="legend-swatch" style="background:#c8463a"></span>五众 avg_sentiment 均值');
+                '<span class="legend-swatch" style="background:var(--chart-1)"></span>五众 avg_sentiment 均值');
             legend.append('span').attr('class', 'legend-item').html(
                 '<span class="legend-swatch" style="background:#fae5e0"></span>下行段');
             legend.append('span').attr('class', 'legend-item').html(
@@ -1938,10 +1938,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             // Polygons per character
             const radarChars = [
-                { id: 'wukong', name: '孙悟空', color: '#c8463a' },
-                { id: 'tangseng', name: '唐僧', color: '#3a6b8c' },
+                { id: 'wukong', name: '孙悟空', color: 'var(--chart-1)' },
+                { id: 'tangseng', name: '唐僧', color: 'var(--chart-2)' },
                 { id: 'bajie', name: '猪八戒', color: '#C9A063' },
-                { id: 'shaseng', name: '沙僧', color: '#6B8E5A' }
+                { id: 'shaseng', name: '沙僧', color: 'var(--chart-4)' }
             ];
             radarChars.forEach(c => {
                 const values = EMBEDDED.radar.values[c.id];

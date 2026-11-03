@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+eXiWL0wzrXQw9hq+DlifSsvaRJ/w39Qbm1o6/Mpb7s=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Wy0kjBzHV3evyf48tO00rOqPJQLgs688G5DQRRND1HE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Sentiment Arc · 详解西游记</title>
@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="I · Overview of the Five Pilgrims’ Sentiment Arcs · II · Key Turning Points · III · Relationship Sentiment Comparison · Annotated Journey to the West">
     <meta property="og:description" content="I · Overview of the Five Pilgrims’ Sentiment Arcs · II · Key Turning Points · III · Relationship Sentiment Comparison · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1574,10 +1574,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 [95,  0.25,  0.18, -0.05,  0.18,  0.45]  // 91-100: 灵山+五圣成真
             ],
             characters: [
-                { id: 'wukong', name: 'Sun Wukong', color: '#c8463a' },
-                { id: 'tangseng', name: 'Tripitaka', color: '#3a6b8c' },
+                { id: 'wukong', name: 'Sun Wukong', color: 'var(--chart-1)' },
+                { id: 'tangseng', name: 'Tripitaka', color: 'var(--chart-2)' },
                 { id: 'bajie', name: 'Zhu Bajie', color: '#C9A063' },
-                { id: 'shaseng', name: 'Sha Wujing', color: '#6B8E5A' },
+                { id: 'shaseng', name: 'Sha Wujing', color: 'var(--chart-4)' },
                 { id: 'guanyin', name: 'Guanyin', color: '#8c6a8c' }
             ],
             // 6 个关键转折点（Sun Wukong）
@@ -1735,7 +1735,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .attr('fill', 'var(--chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
                     .style('cursor', 'pointer')
                     .on('mouseover', e => showTooltip(
-                        `<strong style="color:#c8463a">Ch.${tp.chapter}</strong> · ${tp.event}<br>` +
+                        `<strong style="color:var(--chart-1)">Ch.${tp.chapter}</strong> · ${tp.event}<br>` +
                         `${tp.line}<br>Sentiment: ${tp.sentiment.toFixed(2)}<br><em>${tp.desc}</em>`, e))
                     .on('mouseout', hideTooltip);
                 // Label
@@ -1748,9 +1748,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             // Legend
             const legend = d3.select('#arc-annotated-legend');
             legend.append('span').attr('class', 'legend-item').html(
-                '<span class="legend-swatch" style="background:#c8463a"></span>Sun Wukong avg_sentiment');
+                '<span class="legend-swatch" style="background:var(--chart-1)"></span>Sun Wukong avg_sentiment');
             legend.append('span').attr('class', 'legend-item').html(
-                '<span class="legend-swatch" style="background:#c8463a;border-radius:50%;"></span>Key turning points');
+                '<span class="legend-swatch" style="background:var(--chart-1);border-radius:50%;"></span>Key turning points');
         })();
 
         // ===== Section 3: Pair Comparison =====
@@ -1776,9 +1776,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr('stroke', '#999').attr('stroke-dasharray', '4,4').attr('opacity', 0.6);
 
             const pairs = [
-                { idx: 1, name: 'Tripitaka–Sun Wukong (main axis · 88)', color: '#c8463a' },
+                { idx: 1, name: 'Tripitaka–Sun Wukong (main axis · 88)', color: 'var(--chart-1)' },
                 { idx: 2, name: 'Sun Wukong–Zhu Bajie (mockery · 82)', color: '#C9A063' },
-                { idx: 3, name: 'Tripitaka–Sha Wujing (stable · 77)', color: '#6B8E5A' }
+                { idx: 3, name: 'Tripitaka–Sha Wujing (stable · 77)', color: 'var(--chart-4)' }
             ];
             pairs.forEach(p => {
                 const line = d3.line().x(d => x(d[0])).y(d => y(d[p.idx])).curve(d3.curveMonotoneX);
@@ -1876,7 +1876,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             const legend = d3.select('#u-curve-legend');
             legend.append('span').attr('class', 'legend-item').html(
-                '<span class="legend-swatch" style="background:#c8463a"></span>Five-pilgrim avg_sentiment mean');
+                '<span class="legend-swatch" style="background:var(--chart-1)"></span>Five-pilgrim avg_sentiment mean');
             legend.append('span').attr('class', 'legend-item').html(
                 '<span class="legend-swatch" style="background:#fae5e0"></span>Decline');
             legend.append('span').attr('class', 'legend-item').html(
@@ -1922,10 +1922,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             // Polygons per character
             const radarChars = [
-                { id: 'wukong', name: 'Sun Wukong', color: '#c8463a' },
-                { id: 'tangseng', name: 'Tripitaka', color: '#3a6b8c' },
+                { id: 'wukong', name: 'Sun Wukong', color: 'var(--chart-1)' },
+                { id: 'tangseng', name: 'Tripitaka', color: 'var(--chart-2)' },
                 { id: 'bajie', name: 'Zhu Bajie', color: '#C9A063' },
-                { id: 'shaseng', name: 'Sha Wujing', color: '#6B8E5A' }
+                { id: 'shaseng', name: 'Sha Wujing', color: 'var(--chart-4)' }
             ];
             radarChars.forEach(c => {
                 const values = EMBEDDED.radar.values[c.id];

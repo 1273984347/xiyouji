@@ -12,11 +12,14 @@ HEX12 = ["C8463A", "E46250", "3A6B8C", "6B8E5A", "B38F58", "D8CFBC",
 PAL = set(h.lower() for h in HEX12)
 ANY = r"#[0-9a-fA-F]{6}"
 
+# W1113 实证·E-138：L4 原正则要求色值带引号 ⇒ HTML 内联 style 的**无引号形态**
+# （style= background:#c8463a）漏判 ⇒ 「残留归零」成为**假零**（实测真残留 18 处·图例/色块 10 处
+# + noscript/tooltip 8 处）⇒ 修法：引号改为**可选**·互斥归类优先序不变（L2 → L4 → L5·先命中者归层）。
 LAYERS = [
     ("L2 echarts", re.compile(
         r"(color|colors|palette|itemStyle|backgroundColor|borderColor)\s*:\s*\[?\s*['\"](" + ANY + r")", re.I)),
     ("L4 CSS属性值", re.compile(
-        r"(color|background|backgroundColor|borderColor|fill|stroke)\s*[:=]\s*['\"](" + ANY + r")", re.I)),
+        r"(color|background|backgroundColor|borderColor|fill|stroke)\s*[:=]\s*(?:['\"])?(" + ANY + r")", re.I)),
     ("L5 裸hex", re.compile(r"['\"](" + ANY + r")", re.I)),
 ]
 

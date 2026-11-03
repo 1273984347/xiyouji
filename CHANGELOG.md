@@ -1,3 +1,23 @@
+### W1113（2026-11-03）：图表色工程档 3 铺开第一批（3 对 6 页·chart 色常量令牌化）
+
+> **来源**：用户 2026-11-03 指令「那继续」（承接 W1110 档 3 施工前置批）。
+> - **文件**：site/data/character-sentiment-arc.html · site/en/character-sentiment-arc.html · site/data/concept-device.html · site/en/concept-device.html · site/data/monster-victims-network.html · site/en/monster-victims-network.html · docs/agent/pitfalls.md · docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md · scripts/output/_w1113_spec.json · scripts/output/_w1113_delta.json
+
+**本批要点**（档 3 铺开第一批·**6 页·60 行**）：
+
+① **范围**：3 对 6 页（character-sentiment-arc · concept-device · monster-victims-network，中英同批），施工面 = 图表色常量改读 `var(--chart-N)`；档 3 权威口径（`archive/scripts/batches/w1100/_w1100_layer3_pages.py`·互斥归类 L2/L4/L5）复算本批 6 页残留归零（**10 处 → 0 处**）。
+
+② **本批最大产出＝施工期越界动作的自我纠正（补偿机制）**：施工初稿曾按 W1108 先例把每页的字面值型补偿规则 LHS 由 `#xxx` 改写为 `var(--chart-N)`，并新增 `[fill^="var("]` 前缀规则。二者均**越界**：W1100 台账「工程次序定案」明确「**补偿收口排在档 3 之后**（补偿表含调色板色条目且当前仍生效，先删会让 1412 处暗色变暗）」，且站内补偿表是**每页 112 条同源指纹**（330 页），改 LHS 即破指纹。DOM 级取证（规则命中面对拍）实测该越界造成两类真实缺陷：① 新增前缀规则命中了**基线中早已是 `var()`** 的元素（它们在基线本就不吃亮度补偿）⇒ 凭空多出 22 处 filter；② 改写 LHS 后仍有字面值元素失配 ⇒ 9 处补偿值互换（其中 8 处为**暗色态变暗**回归）。**处置**：撤销两条越界改动，补偿机制原样保留（与 W1100 定案一致），6 页各 1 条前缀规则删除 + 1 条字面值规则还原。
+
+③ **补齐 10 处施工缺口**（权威口径复算所得）：arc 页 pairs 常量（对象字面量 `color:` 形式，被首版脚本的行首锚定正则排除）· concept-device 页渐变 `stop-color` 两处 · monster 页 `catColors` 数组字面量两处。
+
+④ **呈现色等效核档**（J2 双态对拍·**浅色零差异 + 元素零损失**）：暗色态 552 条差异（按属性 fill 226 / filter 212 / stroke 44 / background-color 46 / 其余 24），逐颜色属性按「computed 颜色叠加 CSS filter（brightness 后 saturate·drop-shadow 不改主体色）」实算呈现色后分档：**OK 166 / WARN 122 / BLOCK 52**，方向变亮 268 / 变暗 72，**改后取暗色令牌值 340/340**。BLOCK 52 条全部为「改前裸浅色 → 改后暗色令牌」的**令牌口径差**（`--chart-2` / `--chart-4` 暗色令牌值本身与其「浅色值×站内补偿等效值」的差），与站内既有口径对照读数一致（`--chart-2` dL 18.83 / `--chart-6` dL 17.34 BLOCK 是 W1103 已登记的既有口径差），**非本批引入的回归** ⇒ 登记为补偿收口批的去向，不在本批改补偿机制。
+
+⑤ **防线**：复用 W1110 新增四槽（第 54 坑表编号唯一 / 第 55 PowerShell 解析 / 第 56 CSP 增量漂移 / 第 57 CSS 变量自引用）· CSP 856 页零漂移（909 内联哈希）· 档 3 权威口径复算归零。
+
+**验证**：元素数 12 组零不一致（5512 元素·探针 SCHEMA 6 含 stop-color）· 浅色态 0 差异 · 档 3 残留 56 → 0（权威口径**修正引号盲区后**复算·真归零） · CSP 零漂移 · 第 56/57 槽 0 FAIL · 坑表本体 **234 → 241 条**（本批新增 **E-133 ~ E-139 七条**·E-130~E-132 为 W1110 既有条目）· 计数链同步。
+
+
 ### W1112（2026-11-03）：落段收官一键脚本（八步固定顺序·refresh 迭代收敛·csp 恒末位）
 
 
@@ -1901,7 +1921,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1112），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1113），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -2014,26 +2034,3 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：archive/scripts/batches/w9xx/ · archive/README.md · scripts/batch_cascade.py · scripts/output/tools-inventory.md · docs/00-导读/W批次编号对账表.md
 > **验证**：甄别四面对拍 + pytest 全量 935 passed + ruff 清零。
 > **状态**：**已收官**（W992 git 反填·4 件退役+口径校准）
-### W991（2026-10-27）：级联运行锁与提交隔离批（①层重启 + safe_commit 守卫·用户两问令）
-
-> **来源**：用户两问——「重启设计」（W982 缓建的级联文件锁①层）+「提交总是混入并行会话的暂存件怎么解决」（W989 认领提交 1fb1b14f 扫入他方暂存级联面实证）。
-> **摘要**：① **cascade_lock.py 级联运行锁**——.git/cascade.lock 原子创建（O_EXCL·批次/持有会话/时间戳），batch_cascade --apply 全程持有（finally 必释放），preflight 检测活动锁即 WARN（共享面正被级联写·此刻 verify/preflight 读数可能撞中态）；陈旧锁（≥600 秒）与损坏锁自动夺；与 W982 缓建理由对照：锁做**运行期互斥**而非索引锁，级联自身不重入。② **safe_commit 无 pathspec 守卫**——索引含暂存件而未指 pathspec 即拒绝并逐件列名（pathspec 形态走临时索引只取声明路径 worktree 态·他方暂存件天然隔离）；守卫纯函数三态负样本验证。③ 自测：锁五态（原子创建/拒绝/幂等释放/陈旧夺/损坏夺）。④ 建置实录：锁自测首版「重复释放应 False」是语义错（finally 安全要求幂等 True·改测试不改代码）。
-> **文件**：scripts/cascade_lock.py · scripts/batch_cascade.py · scripts/preflight_check.py · scripts/safe_commit.py · scripts/output/script-coverage-baseline.txt · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
-> **验证**：锁 --self-test 五态全过 + 守卫三态负样本 + pytest 全量 935 passed + ruff 清零 + 体积四窗全绿。
-> **状态**：**已收官**（W991 git 反填·锁五态自测+守卫三态）
-### W990（2026-10-27）：内联纪律收口批（查坑表补报错原文 + 工作树吸收条目·88 条）
-
-
-
-> **来源**：用户 2026-10-27 问「其他 Agent 下次还会出现类似问题吗」——评估发现两个可修缺口后令「做」。
-
-> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、dCREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、sscripts/output/_w990_spec.json、scripts/output/_cascade_files_W990.txt。
-
-**缺口一（撞错检索路走不通）**：查坑表「Python 字符串层转义」行补报错原文 literal——`truncated \xXX escape` / `unicodeescape` / `invalid escape sequence`——Agent 撞错后 grep 原文即命中本行（此前只有中文描述·按原文检索会漏）。
-
-**缺口二（更大的：静默丢工作）**：新增条目「并行会话在场的未提交工作树编辑会被吸收或覆盖——只有已提交状态是安全停车位」（git/提交/并发 21→22·总数 87→88·计数链四处同步 N4 88=88）。四连环实证：① 未提交编辑被对方重 add 吸收进暂存快照（W985 pitfalls 编辑被 W988 卷入·内联署名保住溯源）；② restore/清偿扫过即覆盖（同批险情：worktree diff 一度归零）；③ 纪律=并行在场禁 `git add -A`（按名单精确暂存）+ 跨批次内容立即提交或留字据——工作树不是停车位；④ 被他方在途件卡门禁（C4-f 假红）按 W932/W984 先例核成色后代提（W988「登记并行 W989 代提事实」双向留痕口径），成色不够则等。
-
-**验证**：N4 88=88 · E1 抽查（literal 与条目各在位）· 全量 verify + pytest 见状态行。
-
-> - **状态**：已收官（内容随 W991 批提交代提落库·`01decea2`·verify 全量 rc=0 + N4 88=88·查坑表报错原文与新条目在位）
-

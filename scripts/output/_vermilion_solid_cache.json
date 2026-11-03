@@ -102,7 +102,7 @@
    }
   },
   "data/character-sentiment-arc.html": {
-   "sha1": "8d4c6d6d5d1a663007b45d0e546e812d7378f621",
+   "sha1": "c9faa309b2669d542eb7ffd02e18863b859b2e09",
    "counts": {
     "div.kpi-card": 1
    }
@@ -124,7 +124,7 @@
    }
   },
   "data/concept-device.html": {
-   "sha1": "a5674e3830959ca4cdba6c199ee4f84885357970",
+   "sha1": "5bd652ca85d23f7b24f3a650e40317e29e549959",
    "counts": {
     "button.era-btn.active": 1,
     "div.cipher-face.cipher-back": 5,
@@ -432,7 +432,7 @@
    }
   },
   "data/monster-victims-network.html": {
-   "sha1": "384b2ee9b010f4c6b1f46f94f76dec6af925bd3a",
+   "sha1": "6d68223770866f909253568ed592302d2e47d4c4",
    "counts": {
     "div.kpi-card": 1,
     "div.victim-card": 1,
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "12341289af660650d5e0cc90e217ccdb24a539ea",
+   "sha1": "385d4e85caf1fa4074871a45a9d7c3dc6826b8f2",
    "counts": {
     "button.vt-btn": 1
    }
@@ -785,7 +785,7 @@
    }
   },
   "en/character-sentiment-arc.html": {
-   "sha1": "0239aa1563cc1df50387fb26edbc8ef7c6a49291",
+   "sha1": "801f1ce07423464b754d0fe792643254d72b2182",
    "counts": {
     "div.kpi-card": 1
    }
@@ -823,7 +823,7 @@
    }
   },
   "en/concept-device.html": {
-   "sha1": "c42800749303a8a885a95fb754584bb6c9095e36",
+   "sha1": "e76c19ab5551411410ab6bb7e1c99fec130c30db",
    "counts": {
     "button.era-btn.active": 1,
     "div.cipher-face.cipher-back": 5,
@@ -1294,7 +1294,7 @@
    }
   },
   "en/monster-victims-network.html": {
-   "sha1": "17cfe3a526e627c8d395f2de8c39da65c75bb09b",
+   "sha1": "b915d0c30ec5a8dd28cf5c17ba18329dcaa3be4e",
    "counts": {
     "div.kpi-card": 1,
     "div.victim-card": 1,
@@ -1399,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "327924a4e9b8704a4b38f4580589fbf704468465",
+   "sha1": "954082b44dad427be37656823c5edb17c356c07f",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-11-03T12:11:43.493Z"
+ "generated_at": "2026-11-03T13:21:37.769Z"
 }
