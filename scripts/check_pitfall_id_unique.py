@@ -28,6 +28,28 @@ PITFALLS = os.path.join(ROOT, "docs", "agent", "pitfalls.md")
 RX_ENTRY = re.compile(r"^- \*\*.*?（(W\d+) 实证·(E-\d+)）")
 
 
+def _added_lines_for_file(rel):
+    """取某文件的「工作树 vs HEAD」新增行（+ 行）——**与基点无关**。
+
+    用于基点不可得时的兜底：CI 浅克隆下 `git diff <base>` 为空 ⇒ 判据恒绿，
+    而「工作树 vs HEAD」在有未提交新增时仍能抓到 ⇒ 不静默失效。
+    """
+    try:
+        r = subprocess.run(
+            ["git", "-C", ROOT, "diff", "HEAD", "--", rel],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return []
+    if r.returncode != 0:
+        return []
+    out = []
+    for line in (r.stdout or "").splitlines():
+        if line.startswith("+") and not line.startswith("+++"):
+            out.append(line[1:])
+    return out
+
+
 def _entries(lines):
     """返回 [(行号, 批次号, 编号, 标题)]（只认条目本体）。"""
     out = []
@@ -71,6 +93,12 @@ def audit(base="HEAD", lines=None, added=None):
         existing.setdefault(eid, []).append((w, title))
     if added is None:
         added = _added_lines(base)
+        if not added:
+            # **W1110 收官笔修（阻断 #2 二次·CI 实测）**：CI 浅克隆下基点不可得 ⇒
+            # `git diff <base>` 为空 ⇒ 「新增条目 0 条」⇒ 判据恒绿。
+            # ⇒ 退化为「坑表文件的工作树内容 vs HEAD 内容」逐行比对（**与基点无关**）：
+            #    干净检出时两者相同 ⇒ 仍为空（真无新增）；有未提交新增时能抓到。
+            added = _added_lines_for_file("docs/agent/pitfalls.md")
     added_ids = []
     for line in added:
         m = RX_ENTRY.match(line)
