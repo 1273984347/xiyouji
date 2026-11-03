@@ -16,6 +16,26 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W994（2026-10-28）：归档系统打磨批（tier-2 规则机器化：探针+常驻工具+双件实跑回线）
+
+
+
+> **来源**：用户 2026-10-28 令「继续打磨归档系统和临时文件系统」——体检定位到 §11.2 tier-2 条款自 W513 后掉档（CHANGELOG-ARCHIVE 1198KB / file-index-ARCHIVE 1070KB 双破 1MB 线零反应·W824「无机器触发点必掉档」又一活体），按「探测→修法→防复发」闭环处置。
+
+> - **文件**：scripts/check_archive_health.py、scripts/archive_tier2.py、tests/unit/test_archive_health.py、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE-tier2.md、archive/docs/file-index-ARCHIVE.md、archive/docs/file-index-ARCHIVE-tier2.md、archive/README.md、archive/scripts/batches/README.md、scripts/README.md、scripts/gen_folder_docs.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w994_spec.json、scripts/output/_cascade_files_W994.txt。
+
+**健康探针（check_archive_health.py·报告型）**：把 §11.2 三条纯文字条款机器化——T1 一级归档件 1MB 判距（≥800KB 预警·破线 ⚠+修法指引）；T2 归档 scripts 台账对账（**组行计数对账语义**：顶层存量组行 N vs 磁盘实数+段目录组行覆盖+子目录提及——W735 存量 200+ 件从未逐件登记是既定形态，逐件检查会误报风暴，首跑 200 件误报后改为计数对账语义并补登记 3 条组行：顶层 47/w4xx 11/w5xx 149）；T3 batches/README 冷存储警告在位（W836：归档件 ROOT 上溯失效·误跑会错——本批补入警告文本）；T4 归档区汇总体积。`--strict` 为门禁候选。
+
+**二级归档工具（archive_tier2.py·常驻）**：键序前缀切分（changelog=段标题 W 号；file-index=顶层节·两代混层目录节无 W 号取 0 排最老）+ 全文字节目标（§11.2 管文件体积）+ **守恒五道断言零落盘前置**（A1 段数/A2 逐字节在 tier2/A3 头部只追加/A4 键序前缀/A5 字节守恒）。**实跑双件回线**：CHANGELOG-ARCHIVE 1198→900KB（迁出 144 段 W400-W559）·file-index-ARCHIVE 1070→816KB（迁出 10 目录节·**新建 file-index-ARCHIVE-tier2.md**）。施工中守恒断言三度 fail-closed 拦截：字节/字符混计（A5 两端异单位）、切枝循环按键序遍历致位置倒序静默保留新版段（A5 当场活捉·真损坏级）、A5 符号写反——全部修复后落盘，W681 补录尾段原位未动。
+
+**其余**：batches/README 冷存储警告（生成模板级注入——手工写入会被 --refresh 覆写·W994 实证后改模板位） + scripts/README 场景速查 +2 行（二级归档/健康体检路由）+ 单测 5 例。
+
+**边界与延后**：batch_cascade 收官提示位扩展（[ARCHIVE] 行+[TMPE] 上次清理日期）**延后**——W992（提示位口径校准·他方在途）认领了 batch_cascade.py，按工作树吸收纪律（坑表 88 条）不在其认领面落编辑；W992 收官后任一批可补。
+
+**验证**：探针 --self-test + 单测 5/5 + 双件 dry-run→apply 守恒五道全过 + 探针复跑 T1 回线（900/816KB）·T2 对账一致·T3 在位 · W681 补录尾段原位核验 · ruff 0 · 全量 verify 见状态行。
+
+> - **状态**：已收官（`aacb6fe3`·verify 全量 rc=0 + 探针/工具自测过 + 单测 5/5·双件回线 900/816KB·T2 对账一致·T3 在位）
+
 ### W993（2026-10-27）：全仓行尾定形批（CRLF 时代终结·用户问责「为什么不解决」）
 
 > **来源**：用户问责「CRLF 老问题你为什么不解决呢」——W971-W989 期间六次地鼠（裸 LF 注入/混行尾 fail-closed/CRLF 锚补丁）全部就地修未治系统，本批根治。
