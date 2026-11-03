@@ -28,6 +28,28 @@ PITFALLS = os.path.join(ROOT, "docs", "agent", "pitfalls.md")
 RX_ENTRY = re.compile(r"^- \*\*.*?（(W\d+) 实证·(E-\d+)）")
 
 
+def _added_lines_for_file(rel):
+    """取某文件的「工作树 vs HEAD」新增行（+ 行）——**与基点无关**。
+
+    用于基点不可得时的兜底：CI 浅克隆下 `git diff <base>` 为空 ⇒ 判据恒绿，
+    而「工作树 vs HEAD」在有未提交新增时仍能抓到 ⇒ 不静默失效。
+    """
+    try:
+        r = subprocess.run(
+            ["git", "-C", ROOT, "diff", "HEAD", "--", rel],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return []
+    if r.returncode != 0:
+        return []
+    out = []
+    for line in (r.stdout or "").splitlines():
+        if line.startswith("+") and not line.startswith("+++"):
+            out.append(line[1:])
+    return out
+
+
 def _entries(lines):
     """返回 [(行号, 批次号, 编号, 标题)]（只认条目本体）。"""
     out = []
@@ -43,10 +65,17 @@ def _entries(lines):
 
 
 def _added_lines(base):
-    """取本次改动新增的行（git diff base..工作树·+ 行）。"""
+    """取本次改动新增的行（git diff base..工作树·+ 行）——**限定坑表文件**。
+
+    **W1110 收官笔三修（跨会话回执知悉·对方在其同族判据上踩到同款）**：
+    原实现不带 pathspec ⇒ `git diff <base>` 返回**全仓**差异 ⇒ 其他文件的 `+ 行`
+    若恰好形如条目本体（`- **…（W#### 实证·E-NN）`）就会被误当「新增条目」⇒ 假红/失真。
+    ⇒ 加 `-- docs/agent/pitfalls.md` 限定。
+    """
     try:
         r = subprocess.run(
-            ["git", "diff", "%s" % base], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace"
+            ["git", "diff", "%s" % base, "--", "docs/agent/pitfalls.md"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace"
         )
     except OSError:
         return []
@@ -71,29 +100,67 @@ def audit(base="HEAD", lines=None, added=None):
         existing.setdefault(eid, []).append((w, title))
     if added is None:
         added = _added_lines(base)
+        if not added:
+            # **W1110 收官笔修（阻断 #2 二次·CI 实测）**：CI 浅克隆下基点不可得 ⇒
+            # `git diff <base>` 为空 ⇒ 「新增条目 0 条」⇒ 判据恒绿。
+            # ⇒ 退化为「坑表文件的工作树内容 vs HEAD 内容」逐行比对（**与基点无关**）：
+            #    干净检出时两者相同 ⇒ 仍为空（真无新增）；有未提交新增时能抓到。
+            added = _added_lines_for_file("docs/agent/pitfalls.md")
     added_ids = []
     for line in added:
         m = RX_ENTRY.match(line)
         if m:
             added_ids.append((m.group(1), m.group(2), line))
     dup_existing = {k: v for k, v in existing.items() if len(v) > 1}
-    # 新增条目若与「除自己以外」的既有条目同号 ⇒ 撞号
+    # 新增条目若与既有条目同号 ⇒ 撞号
+    # **W1110 收官笔修（阻断 #2）**：原实现带 `x[0] != w` 过滤（同批号豁免）⇒
+    # 「同批内两条同号」与「新条目批号与既有条目批号字面相同」两种形态**漏判**——
+    # 而后者恰是本槽的**立项原场景**（两批各占同一号·批号字面相同）。
+    # ⇒ 去掉该豁免：同号即撞。**但必须排除「自身」**——新增集合若整表传入（单测常见形态），
+    # 条目会与**自己**同号 ⇒ 不该判红。
+    # ⇒ 排除口径 = 既有条目与新增条目的「标题」完全相同 ⇒ 视为同一行（自身）·其余同号即撞。
     new_dups = []
-    for w, eid, _line in added_ids:
-        others = [x for x in existing.get(eid, []) if x[0] != w]
+    for w, eid, line in added_ids:
+        title = line[4 : line.find("（W")] if "（W" in line else line
+        others = [x for x in existing.get(eid, []) if x[1] != title]
         if others:
             new_dups.append((eid, w, others))
     return new_dups, dup_existing, added_ids
 
 
+def resolve_base():
+    """基点解析：优先**本批开叉点**（`git merge-base origin/main HEAD`）。
+
+    **W1110 收官笔修（阻断 #2）**：原实现默认 `HEAD` ⇒ 在提交后 / 干净检出（CI 形态）
+    `git diff HEAD` 为空 ⇒ 「新增条目 0 条」⇒ **判据在 CI 上恒绿**（静默失效）·
+    且与 gates.md / docstring 承诺的「取本批开叉点」不符（文档-实现失配）。
+    ⇒ 默认基点改为开叉点；开叉点不可得（CI 浅克隆）时回退 `origin/main`·再回退 `HEAD`。
+    """
+    import subprocess
+
+    def _g(*a):
+        r = subprocess.run(["git", "-C", ROOT] + list(a), capture_output=True,
+                           text=True, encoding="utf-8", errors="replace", timeout=60)
+        return r.stdout.strip() if r.returncode == 0 else ""
+
+    mb = _g("merge-base", "origin/main", "HEAD")
+    if mb:
+        return mb, "merge-base origin/main HEAD"
+    om = _g("rev-parse", "origin/main")
+    if om:
+        return om, "origin/main（无 merge-base：CI 浅克隆）"
+    return "HEAD", "HEAD（无 merge-base 且无 origin/main）"
+
+
 def main():
-    base = "HEAD"
+    base, base_desc = resolve_base()
     if "--base" in sys.argv:
         base = sys.argv[sys.argv.index("--base") + 1]
+        base_desc = "命令行指定 --base %s" % base
     if "--self-test" in sys.argv:
         return _self_test()
     new_dups, stock, added = audit(base)
-    print("坑表编号唯一性判据：基点 %s·新增条目 %d 条" % (base, len(added)))
+    print("坑表编号唯一性判据：基点 %s（%s）·新增条目 %d 条" % (base, base_desc, len(added)))
     if new_dups:
         for eid, w, others in new_dups:
             print(
