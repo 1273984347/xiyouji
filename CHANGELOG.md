@@ -3,9 +3,9 @@
 > **来源**：用户 2026-11-03 指令「那继续」（承接 W1110 档 3 施工前置批）。
 > - **文件**：site/data/character-sentiment-arc.html · site/en/character-sentiment-arc.html · site/data/concept-device.html · site/en/concept-device.html · site/data/monster-victims-network.html · site/en/monster-victims-network.html · docs/agent/pitfalls.md · docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md · scripts/output/_w1113_spec.json · scripts/output/_w1113_delta.json
 
-**本批要点**（档 3 铺开第一批·**6 页·60 行**）：
+**本批要点**（档 3 铺开第一批·**6 页·78 行**）：
 
-① **范围**：3 对 6 页（character-sentiment-arc · concept-device · monster-victims-network，中英同批），施工面 = 图表色常量改读 `var(--chart-N)`；档 3 权威口径（`archive/scripts/batches/w1100/_w1100_layer3_pages.py`·互斥归类 L2/L4/L5）复算本批 6 页残留归零（**10 处 → 0 处**）。
+① **范围**：3 对 6 页（character-sentiment-arc · concept-device · monster-victims-network，中英同批），施工面 = 图表色常量改读 `var(--chart-N)`；档 3 权威口径（`archive/scripts/batches/w1100/_w1100_layer3_pages.py`·互斥归类 L2/L4/L5）复算本批 6 页残留归零（**56 处 → 0 处**）。
 
 ② **本批最大产出＝施工期越界动作的自我纠正（补偿机制）**：施工初稿曾按 W1108 先例把每页的字面值型补偿规则 LHS 由 `#xxx` 改写为 `var(--chart-N)`，并新增 `[fill^="var("]` 前缀规则。二者均**越界**：W1100 台账「工程次序定案」明确「**补偿收口排在档 3 之后**（补偿表含调色板色条目且当前仍生效，先删会让 1412 处暗色变暗）」，且站内补偿表是**每页 112 条同源指纹**（330 页），改 LHS 即破指纹。DOM 级取证（规则命中面对拍）实测该越界造成两类真实缺陷：① 新增前缀规则命中了**基线中早已是 `var()`** 的元素（它们在基线本就不吃亮度补偿）⇒ 凭空多出 22 处 filter；② 改写 LHS 后仍有字面值元素失配 ⇒ 9 处补偿值互换（其中 8 处为**暗色态变暗**回归）。**处置**：撤销两条越界改动，补偿机制原样保留（与 W1100 定案一致），6 页各 1 条前缀规则删除 + 1 条字面值规则还原。
 
@@ -15,7 +15,9 @@
 
 ⑤ **防线**：复用 W1110 新增四槽（第 54 坑表编号唯一 / 第 55 PowerShell 解析 / 第 56 CSP 增量漂移 / 第 57 CSS 变量自引用）· CSP 856 页零漂移（909 内联哈希）· 档 3 权威口径复算归零。
 
-**验证**：元素数 12 组零不一致（5512 元素·探针 SCHEMA 6 含 stop-color）· 浅色态 0 差异 · 档 3 残留 56 → 0（权威口径**修正引号盲区后**复算·真归零） · CSP 零漂移 · 第 56/57 槽 0 FAIL · 坑表本体 **234 → 241 条**（本批新增 **E-133 ~ E-139 七条**·E-130~E-132 为 W1110 既有条目）· 计数链同步。
+**验证**：元素数 12 组零不一致（5512 元素·探针 SCHEMA 6 含 stop-color）· 浅色态 0 差异 · 档 3 残留 56 → 0（权威口径**修正引号盲区后**复算·真归零） · CSP 零漂移 · 第 56/57 槽 0 FAIL · 坑表本体 **234 → 242 条**（本批新增 **E-133 ~ E-140 八条**·E-130~E-132 为 W1110 既有条目）· 计数链同步。
+
+**收官订正**（2026-11-03·PR #117）：本段三处数字经复算订正为与仓内证据件逐字对齐——改动面 60 → **78 行**（`git diff --numstat` site 6 页实测 14+12+13 × 中英）· 残留起点 10 → **56 处**（W1100 基线盘点表逐页读数：arc 中英各 8 · device 中英各 8 · monster 中英各 12）· 坑表 241 → **242 条 / E-140**（条目实测 242·max E-140）。原值系收官前未复核的旧读数（其中「10 处」为首版脚本漏改的中间态·非权威口径读数）。核档读数（552 条差异 / OK 166·WARN 122·BLOCK 52 / 改后取暗色令牌值 340/340 / 元素数 5512）经 `scripts/output/_w1113_delta.json` 复算一致。
 
 
 ### W1112（2026-11-03）：落段收官一键脚本（八步固定顺序·refresh 迭代收敛·csp 恒末位）
