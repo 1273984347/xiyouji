@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（179）
+## 文件（180）
 
 ### Markdown 文档
 
@@ -76,6 +76,7 @@
 - `backfill_changelog.py`
 - `baseline_snapshot.py`
 - `batch_cascade.py`
+- `batch_closeout.py`
 - `batch_spec.py`
 - `build_reader.py`
 - `bump_footer_version.py`
