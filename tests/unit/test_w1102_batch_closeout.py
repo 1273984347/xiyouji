@@ -121,7 +121,7 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     monkeypatch.setattr(bc, 'precheck_ledger', lambda *a, **k: (True, []))
     monkeypatch.setattr(bc, 'selfref_precheck', lambda: (True, ['通过']))
 
-    rc = bc.main(['--batch', 'W9999', '--paths', 'a.py'])
+    rc = bc.main(['--batch', 'W9999', '--paths', 'README.md'])
     assert rc == 0
 
     def first(pred):

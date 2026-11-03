@@ -27,6 +27,7 @@ STEPS = [
     ('refresh',    'gen_folder_docs --refresh（迭代至收敛）'),
     ('index',      '搜索索引 + 文档索引'),
     ('stats',      'stats.py --w <批号>'),
+    ('versions',   '版本面推进（跨文件字面量·幂等·只引用 version_surface）'),
     ('csp',        'generate_csp（**必须最后**：前面步骤会改内联脚本）'),
     ('cspcheck',   'generate_csp --check（零漂移校验）'),
 ]
@@ -45,9 +46,10 @@ def step_order():
 
 def ledger_duplicate_rows(ledger_text):
     """返回台账正本里「同号多行」的号列表（回窗工具的中止条件）。"""
+    import archive_ledger_rows
     seen = {}
     for line in ledger_text.split('\n'):
-        if not line.startswith('| W'):
+        if not archive_ledger_rows.ROW_RE.match(line):
             continue
         parts = line.split('|')
         num = parts[1].strip() if len(parts) > 1 else ''
@@ -57,7 +59,15 @@ def ledger_duplicate_rows(ledger_text):
 
 
 def precheck_ledger(ledger_path, window=60):
-    """台账预检：返回 (ok, messages)。"""
+    """台账预检：返回 (ok, messages)。
+
+    **行数口径（W1114 根修 off-by-one）**：原实现用 startswith('| W') 逐行计数 ⇒ 台账**表头行**
+    （形如「| W 号 | 批次标题 | …」）同样以「| W」开头 ⇒ 被计入 ⇒ 读数恒比真实数据行多 1
+    ⇒ 窗口 60（= 数据行 ≤ 60·口径见 scripts/archive_ledger_rows.py 的 ROW_RE 与
+    check_doc_size_budget C5 硬判据）被误判为「61 行超窗」⇒ **收官链恒判超窗、实际不可用**
+    （W1112 批把该假阳记成正面案例·W1114 订正）。⇒ 现复用 archive_ledger_rows.ROW_RE 的
+    **数据行**口径（单一事实源·不另写正则），阈值语义明确为「数据行 ≤ window」。
+    """
     msgs = []
     if not os.path.isfile(ledger_path):
         return False, ['台账不存在：' + ledger_path]
@@ -65,9 +75,11 @@ def precheck_ledger(ledger_path, window=60):
     dups = ledger_duplicate_rows(text)
     if dups:
         msgs.append('台账正本同号多行（回窗工具会中止）：' + '、'.join(dups))
-    rows = sum(1 for line in text.split('\n') if line.startswith('| W'))
+    import archive_ledger_rows
+    rows = sum(1 for line in text.split('\n') if archive_ledger_rows.ROW_RE.match(line))
     if rows > window:
-        msgs.append('台账正本 %d 行超过窗口 %d => 须先 archive_ledger_rows.py --apply 腾窗' % (rows, window))
+        msgs.append('台账正本 %d **数据行**超过窗口 %d（数据行口径·表头不计·同 archive_ledger_rows.py）'
+                    '=> 须先 archive_ledger_rows.py --apply 腾窗' % (rows, window))
     return (not msgs), msgs
 
 
@@ -131,13 +143,50 @@ def collect_paths(spec_path, extra):
     return paths
 
 
+def _run_prechecks(ledger_path):
+    """前置体检：台账预检（行数窗口/同号多行）+ CSS 变量自引用体检。
+
+    两者任一不过即中止（fail-closed）——W1114 起独立成函数（main 加 versions 步后
+    复杂度超 ruff 结构档阈值 15）。
+    """
+    ok, msgs = precheck_ledger(ledger_path)
+    for m in msgs:
+        print('[precheck] ' + m)
+    if not ok:
+        print('[precheck] 预检未过 => 中止（先修上述项再跑）')
+        return False
+    ok2, msgs2 = selfref_precheck()
+    for m in msgs2:
+        print('[selfref] ' + m)
+    if not ok2:
+        print('[selfref] 自引用体检未过 => 中止（先修自引用再落段）')
+        return False
+    return True
+
+
 def _add_paths(paths):
-    """add 步：按显式 pathspec 暂存（禁 git add -A·防代提他方在途件）。"""
-    if paths:
-        run(['git', 'add', '--'] + paths)
-        print('[add] 已 add %d 件' % len(paths))
-    else:
+    """add 步：按显式 pathspec 暂存（禁 git add -A·防代提他方在途件）。
+
+    **W1114 根修（静默失效）**：原实现不检查 git add 的退出码 ⇒ 当 pathspec 里有
+    **尚不存在的路径**（如报告文件还没写）时，git add 报「pathspec did not match any
+    files」并**整体放弃**（不做部分暂存）⇒ 收官链打印「已 add N 件」而实际 0 件入库
+    ⇒ 末位产物漏进提交（C4-f 判「工作树未提交残留」判红）。⇒ 现：① 过滤尚不存在的路径
+    并如实报告跳过数；② 检查退出码·失败即中止（fail-closed）。
+    """
+    exist = [p for p in paths if os.path.exists(os.path.join(ROOT, p))]
+    missing = [p for p in paths if p not in exist]
+    if missing:
+        print('[add] 跳过 %d 个尚不存在的路径（尚未创建·如报告件未落盘）：%s'
+              % (len(missing), '、'.join(missing[:5])))
+    if not exist:
         print('[add] 无待 add 路径（spec.file_index_rows 为空？请用 --paths 显式指定）')
+        return True
+    rc, out = run(['git', 'add', '--'] + exist)
+    if rc != 0:
+        print('[add] git add 失败 => 中止：' + out.strip()[-400:])
+        return False
+    print('[add] 已 add %d 件' % len(exist))
+    return True
 
 
 def _run_index():
@@ -163,13 +212,54 @@ def _run_stats(batch):
     return True
 
 
-def _run_csp():
-    """csp 步：重算内联脚本哈希（恒在末位·前面步骤会改内联脚本）。"""
+def _run_versions(spec_path, batch):
+    """版本面推进步（W1114）+ **add 收尾**（把本链已改动的文件纳入暂存）。
+
+    * 版本面 = 跨文件字面量（README / STRUCTURE / 项目说明 / CITATION / workflows README /
+      交接文档）⇒ 幂等（已是目标态则零变化）⇒ 与「CHANGELOG 段插入」彻底解耦
+      ⇒ rebase / 回退 / 返工场景可单独重跑。
+    * **add 收尾**：add 步在链首（生成器按索引收集⇒须前置），但 refresh / index / stats /
+      versions 都会在其后改文件 ⇒ 末位产物会漏进提交（C4-f 判「工作树未提交残留」判红）
+      ⇒ 此处按 spec.file_index_rows 再 add 一次（显式 pathspec·禁 git add -A）。
+    """
+    import json
+    spec = {}
+    if spec_path and os.path.isfile(spec_path):
+        with open(spec_path, encoding='utf-8') as f:
+            spec = json.load(f)
+    desc = spec.get('desc') or ''
+    date = spec.get('date') or ''
+    head_sentence = spec.get('head_sentence') or desc
+    if not (batch and desc and date):
+        print('[versions] 缺 spec 的 batch/desc/date => 跳过版本面推进（幂等·不影响其余步）')
+        return True
+    import version_surface
+    results = version_surface.advance_all(batch, date, desc, head_sentence)
+    for rel, changed in results:
+        print('[versions] %s %s' % ('已推进' if changed else '已是目标态', rel))
+    if not _add_paths(collect_paths(spec_path, [])):
+        return False
+    print('[versions] 中段 add 完成（refresh/index/stats 的产物纳入暂存）')
+    return True
+
+
+def _run_csp(spec_path=None):
+    """csp 步：重算内联脚本哈希（写文件的最后一步）+ 暂存本步产物。
+
+    **W1114 修正**：csp 是**最后一个会改文件**的步骤 ⇒ 若只在 versions 步做「收尾 add」，
+    csp 改动的页面（内联脚本哈希变化 ⇒ CSP meta 变）会落在暂存之后 ⇒ 判「工作树未提交残留」
+    ⇒ 故收尾 add 落到**本步内**（重算后立即按 spec.file_index_rows 再 add 一次），
+    既让末位产物进暂存，又保持 csp/cspcheck 仍为最后两步（cspcheck 只读校验·不改文件）。
+    """
     rc, out = run([sys.executable, 'scripts/generate_csp.py'])
     print('[csp] 重算 -> %s' % ('OK' if rc == 0 else 'FAIL'))
     if rc != 0:
         print(out.strip()[-400:])
         return False
+    if spec_path:
+        if not _add_paths(collect_paths(spec_path, [])):
+            return False
+        print('[csp] 本步产物已暂存（末位产物纳入提交）')
     return True
 
 
@@ -201,22 +291,13 @@ def main(argv=None):
         import json
         batch = json.loads(open(a.spec, encoding='utf-8').read()).get('batch')
     led = os.path.join(ROOT, 'docs', '00-导读', 'W批次编号对账表.md')
-    ok, msgs = precheck_ledger(led)
-    for m in msgs:
-        print('[precheck] ' + m)
-    if not ok:
-        print('[precheck] 预检未过 => 中止（先修上述项再跑）')
-        return 1
-    ok2, msgs2 = selfref_precheck()
-    for m in msgs2:
-        print('[selfref] ' + m)
-    if not ok2:
-        print('[selfref] 自引用体检未过 => 中止（先修自引用再落段）')
+    if not _run_prechecks(led):
         return 1
     if a.dry_run:
         print('[dry-run] 预检通过，未落盘')
         return 0
-    _add_paths(collect_paths(a.spec, a.paths))
+    if not _add_paths(collect_paths(a.spec, a.paths)):
+        return 1
     good, logs = refresh_until_stable()
     for line in logs:
         print('[refresh] ' + line)
@@ -226,7 +307,9 @@ def main(argv=None):
         return 1
     if not _run_stats(batch):
         return 1
-    if not _run_csp():
+    if not _run_versions(a.spec, batch):
+        return 1
+    if not _run_csp(a.spec):
         return 1
     if not _run_cspcheck():
         return 1
