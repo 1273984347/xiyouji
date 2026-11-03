@@ -69,7 +69,8 @@ SITE = os.path.join(ROOT, "site")
 
 # W1097：属性集变更（加 filter）⇒ 快照结构变更 ⇒ 版本升 5（旧 4 的快照与新快照
 # 不可比·diff 入口按 schema 显式拦·fail-closed 不静默混比）
-SCHEMA = 5
+# W1113：属性集变更（加 stop-color·渐变停止色）⇒ 快照结构变更 ⇒ 版本升 6
+SCHEMA = 6
 
 # J2 采样面（21 页·缺一即 FAIL——采样面萎缩等于证明面萎缩）
 PROBE_PAGES = (
@@ -142,6 +143,13 @@ PROPS = (
     # 是**按 content attribute 值匹配**的规则 ⇒ 把硬编码色换成 var(--chart-N) 后
     # 该规则不再命中 ⇒ 补偿消失是真实视觉变化 ⇒ 采集面必须含 filter 才测得到。
     "filter",
+    # W1113 纳入 stop-color：SVG 渐变停止色用 `stop-color` 属性（**不是** fill）⇒
+    # 站内字面值型补偿表只覆盖 `svg [fill="#..."]` ⇒ `<stop>` 从来不吃补偿。
+    # 盲审实证（W1113 独立盲审 P0-1）：把渐变 stop 的色值令牌化后，暗色态呈现由
+    # 裸浅色值变为暗色令牌值（ΔL* 23.85）⇒ 而该属性**不在原属性集** ⇒ 该改动
+    # 从未被 J2 双态对拍测量 ⇒ 「呈现色等效核档」结论不成立于全改动面。
+    # 采集面必须含 stop-color 才测得到（同 W1090 加 stroke/fill 的机理）。
+    "stop-color",
 )
 
 _CAPTURE_JS = """

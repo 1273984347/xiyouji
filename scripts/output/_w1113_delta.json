@@ -51,15 +51,15 @@
   }
  },
  "elem_count_mismatch_groups": 0,
- "diff_total": 542,
+ "diff_total": 552,
  "diff_by_theme": {
-  "dark": 542
+  "dark": 552
  },
  "diff_by_prop": {
   "stroke": 44,
   "fill": 226,
   "filter": 212,
-  "background-color": 36,
+  "background-color": 46,
   "color": 4,
   "border-top-color": 8,
   "border-right-color": 4,
@@ -67,16 +67,16 @@
   "border-left-color": 4
  },
  "rendered_grade_summary": {
-  "WARN": 114,
+  "WARN": 122,
   "OK": 166,
-  "BLOCK": 50
+  "BLOCK": 52
  },
  "rendered_direction_summary": {
-  "变亮": 258,
+  "变亮": 268,
   "变暗": 72
  },
- "after_is_dark_token_count": 330,
- "color_change_total": 330,
+ "after_is_dark_token_count": 340,
+ "color_change_total": 340,
  "site_convention_check": [
   {
    "token": "--chart-1",
@@ -1110,6 +1110,60 @@
   {
    "page": "data/character-sentiment-arc.html",
    "theme": "dark",
+   "elem": 283,
+   "tag": "span",
+   "cls": "legend-swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(200, 70, 58)",
+     "after_raw": "rgb(224, 96, 79)",
+     "rendered_before": "#C8463A",
+     "rendered_after": "#E0604F",
+     "dL": 8.642,
+     "dE76": 8.919,
+     "grade": "WARN",
+     "L_before": 48.221,
+     "L_after": 56.863,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "data/character-sentiment-arc.html",
+   "theme": "dark",
+   "elem": 285,
+   "tag": "span",
+   "cls": "legend-swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(200, 70, 58)",
+     "after_raw": "rgb(224, 96, 79)",
+     "rendered_before": "#C8463A",
+     "rendered_after": "#E0604F",
+     "dL": 8.642,
+     "dE76": 8.919,
+     "grade": "WARN",
+     "L_before": 48.221,
+     "L_after": 56.863,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "data/character-sentiment-arc.html",
+   "theme": "dark",
    "elem": 349,
    "tag": "path",
    "cls": "",
@@ -1749,6 +1803,33 @@
      "grade": "BLOCK",
      "L_before": 55.287,
      "L_after": 72.028,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "data/character-sentiment-arc.html",
+   "theme": "dark",
+   "elem": 478,
+   "tag": "span",
+   "cls": "legend-swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(200, 70, 58)",
+     "after_raw": "rgb(224, 96, 79)",
+     "rendered_before": "#C8463A",
+     "rendered_after": "#E0604F",
+     "dL": 8.642,
+     "dE76": 8.919,
+     "grade": "WARN",
+     "L_before": 48.221,
+     "L_after": 56.863,
      "direction": "变亮",
      "after_is_dark_token": true,
      "before_is_light_token": true
@@ -3423,6 +3504,60 @@
   {
    "page": "en/character-sentiment-arc.html",
    "theme": "dark",
+   "elem": 270,
+   "tag": "span",
+   "cls": "legend-swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(200, 70, 58)",
+     "after_raw": "rgb(224, 96, 79)",
+     "rendered_before": "#C8463A",
+     "rendered_after": "#E0604F",
+     "dL": 8.642,
+     "dE76": 8.919,
+     "grade": "WARN",
+     "L_before": 48.221,
+     "L_after": 56.863,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "en/character-sentiment-arc.html",
+   "theme": "dark",
+   "elem": 272,
+   "tag": "span",
+   "cls": "legend-swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(200, 70, 58)",
+     "after_raw": "rgb(224, 96, 79)",
+     "rendered_before": "#C8463A",
+     "rendered_after": "#E0604F",
+     "dL": 8.642,
+     "dE76": 8.919,
+     "grade": "WARN",
+     "L_before": 48.221,
+     "L_after": 56.863,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "en/character-sentiment-arc.html",
+   "theme": "dark",
    "elem": 336,
    "tag": "path",
    "cls": "",
@@ -4062,6 +4197,33 @@
      "grade": "BLOCK",
      "L_before": 55.287,
      "L_after": 72.028,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "en/character-sentiment-arc.html",
+   "theme": "dark",
+   "elem": 465,
+   "tag": "span",
+   "cls": "legend-swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(200, 70, 58)",
+     "after_raw": "rgb(224, 96, 79)",
+     "rendered_before": "#C8463A",
+     "rendered_after": "#E0604F",
+     "dL": 8.642,
+     "dE76": 8.919,
+     "grade": "WARN",
+     "L_before": 48.221,
+     "L_after": 56.863,
      "direction": "变亮",
      "after_is_dark_token": true,
      "before_is_light_token": true
@@ -4872,6 +5034,60 @@
   {
    "page": "data/concept-device.html",
    "theme": "dark",
+   "elem": 191,
+   "tag": "span",
+   "cls": "swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(58, 107, 140)",
+     "after_raw": "rgb(127, 168, 201)",
+     "rendered_before": "#3A6B8C",
+     "rendered_after": "#7FA8C9",
+     "dL": 23.853,
+     "dE76": 23.938,
+     "grade": "BLOCK",
+     "L_before": 43.223,
+     "L_after": 67.076,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "data/concept-device.html",
+   "theme": "dark",
+   "elem": 195,
+   "tag": "span",
+   "cls": "swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(200, 70, 58)",
+     "after_raw": "rgb(224, 96, 79)",
+     "rendered_before": "#C8463A",
+     "rendered_after": "#E0604F",
+     "dL": 8.642,
+     "dE76": 8.919,
+     "grade": "WARN",
+     "L_before": 48.221,
+     "L_after": 56.863,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "data/concept-device.html",
+   "theme": "dark",
    "elem": 268,
    "tag": "div",
    "cls": "danmaku-item flying",
@@ -5148,6 +5364,60 @@
      "direction": "变暗",
      "after_is_dark_token": true,
      "before_is_light_token": false
+    }
+   ]
+  },
+  {
+   "page": "en/concept-device.html",
+   "theme": "dark",
+   "elem": 178,
+   "tag": "span",
+   "cls": "swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(58, 107, 140)",
+     "after_raw": "rgb(127, 168, 201)",
+     "rendered_before": "#3A6B8C",
+     "rendered_after": "#7FA8C9",
+     "dL": 23.853,
+     "dE76": 23.938,
+     "grade": "BLOCK",
+     "L_before": 43.223,
+     "L_after": 67.076,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
+    }
+   ]
+  },
+  {
+   "page": "en/concept-device.html",
+   "theme": "dark",
+   "elem": 182,
+   "tag": "span",
+   "cls": "swatch",
+   "filter_before": "none",
+   "filter_after": "none",
+   "filter_changed": false,
+   "color_changes": [
+    {
+     "prop": "background-color",
+     "before_raw": "rgb(200, 70, 58)",
+     "after_raw": "rgb(224, 96, 79)",
+     "rendered_before": "#C8463A",
+     "rendered_after": "#E0604F",
+     "dL": 8.642,
+     "dE76": 8.919,
+     "grade": "WARN",
+     "L_before": 48.221,
+     "L_after": 56.863,
+     "direction": "变亮",
+     "after_is_dark_token": true,
+     "before_is_light_token": true
     }
    ]
   },
