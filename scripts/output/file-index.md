@@ -1,3 +1,51 @@
+## W1114 落段收官链加版本面幂等推进步（2026-11-03）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/version_surface.py | W1114 | 本批工具/产物 |
+| scripts/batch_cascade.py | W1114 | 本批工具/产物 |
+| scripts/batch_closeout.py | W1114 | 本批工具/产物 |
+| tests/unit/test_w1114_version_surface.py | W1114 | 本批工具/产物 |
+| tests/unit/test_w1102_batch_closeout.py | W1114 | 本批工具/产物 |
+| scripts/output/_w1114_spec.json | W1114 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1114.txt | W1114 | 本批工具/产物 |
+| CHANGELOG.md | W1114 | 本批工具/产物 |
+| README.md | W1114 | 本批工具/产物 |
+| STRUCTURE.md | W1114 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1114 | 本批工具/产物 |
+| HANDOVER.md | W1114 | 本批工具/产物 |
+| AGENTS.md | W1114 | 本批工具/产物 |
+| CITATION.cff | W1114 | 本批工具/产物 |
+| .github/workflows/README.md | W1114 | 本批工具/产物 |
+| scripts/output/file-index.md | W1114 | 本批工具/产物 |
+| site/index.html | W1114 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1114 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1114 | 本批工具/产物 |
+| site/dukou-engine.html | W1114 | 本批工具/产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1114 | 本批工具/产物 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1114 | 本批工具/产物 |
+| archive/docs/file-index-ARCHIVE.md | W1114 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1114 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1114 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1114 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T65-任务计划执行与经验沉淀报告-2026-11-03.md | W1114 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1114 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1114 | 本批工具/产物 |
+| scripts/output/stats.json | W1114 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1114 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1114 | 本批工具/产物 |
+| scripts/output/README.md | W1114 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1114 | 本批工具/产物 |
+| site/data/search.html | W1114 | 本批工具/产物 |
+| site/en/search.html | W1114 | 本批工具/产物 |
+| docs/INDEX.md | W1114 | 本批工具/产物 |
+| scripts/INDEX.md | W1114 | 本批工具/产物 |
+| tests/unit/INDEX.md | W1114 | 本批工具/产物 |
+| tests/unit/README.md | W1114 | 本批工具/产物 |
+| pytest.ini | W1114 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1114 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1114 | 本批工具/产物 |
+
 ## W1113 图表色工程档 3 铺开第一批（2026-11-03）
 | 文件 | W | 说明 |
 |---|---|---|
@@ -5378,13 +5426,4 @@
 |---|---|---|
 | archive/scripts/batches/w9xx/ | W992 | 迁入 4 件（_w988 族·零引用） |
 | scripts/batch_cascade.py | W992 | [SCRIPTS] 提示位口径校准 |
-
-## W991 级联运行锁与提交隔离批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/cascade_lock.py | W991 | 新建级联运行锁（O_EXCL·陈旧夺·损坏夺·五态自测） |
-| scripts/batch_cascade.py | W991 | --apply 全程持锁（finally 必释放） |
-| scripts/preflight_check.py | W991 | 活动锁 WARN 接线（共享面中态警示） |
-| scripts/safe_commit.py | W991 | 无 pathspec+有暂存即拒（守卫纯函数三态） |
 
