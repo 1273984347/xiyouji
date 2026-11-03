@@ -47,31 +47,50 @@ SITE = os.path.join(ROOT, "site")
 
 #: `<style>` 块提取（与 utils.gate_common.STYLE_BLOCK_RE 同口径）
 STYLE_RE = re.compile(r"<style[^>]*>(.*?)</style>", re.S | re.I)
-#: 自引用定义：`--name: var(--name)` / `var(--name, fallback)`（允许空格与 fallback）
-RX_SELFREF = re.compile(
-    r"(--[A-Za-z0-9_-]+)\s*:\s*var\(\s*(--[A-Za-z0-9_-]+)\s*(?:,[^)]*)?\)",
-)
+#: 自引用定义：`--name: var(--name)` / `var(--name, fallback)`
+#: **W1110 收官笔修（盲审建议项 #3）**：原正则两处漏判 ——
+#:   ① 嵌套自引用 `--a: var(--b, var(--a))` ⇒ 原式只匹配到外层 var( 的 `--b` ⇒ 不判；
+#:   ② CSS 函数名**大小写不敏感** ⇒ `--a: VAR(--a)` 不判。
+#: ⇒ 改用「先取定义值·再在值里找是否引用了同名变量」的判定（不看 var( 的嵌套层数·不看函数名大小写）。
+RX_DECL = re.compile(r"(--[A-Za-z0-9_-]+)\s*:\s*([^;{}]+)", re.S)
+RX_VARREF = re.compile(r"var\s*\(\s*(--[A-Za-z0-9_-]+)", re.IGNORECASE)
 
 
 def iter_site_files():
-    """site 下所有 .html + tokens.css（排序·跨平台同序）。"""
+    """site 下所有 .html + **全部 .css**（排序·跨平台同序）。
+
+    **W1110 收官笔修（盲审建议项 #2）**：原实现只收 `.html` + `tokens.css`
+    ⇒ `site/system.css` 等**其他 .css 不在扫描域**（潜在盲区）。
+    ⇒ 扩到「site 下全部 `.css`」。
+    """
     out = []
     for root, dirs, files in os.walk(SITE):
         dirs.sort()
         for fn in sorted(files):
-            if fn.endswith(".html") or fn == "tokens.css":
+            if fn.endswith(".html") or fn.endswith(".css"):
                 out.append(os.path.join(root, fn))
     return sorted(out)
 
 
 def find_selfrefs(css_text):
-    """返回 [(定义名, 引用名, 行号)]——同名自引用。行号为 css_text 内 1 基。"""
+    """返回 [(定义名, 引用名, 行号)]——同名自引用。行号为 css_text 内 1 基。
+
+    判定口径（W1110 收官笔修）：**取每条声明的值**⇒ 若值里出现对**同名变量**的
+    `var(` 引用 ⇒ 自引用（不看 var( 的嵌套层数·不看 var 函数名大小写）。
+    ⇒ 覆盖 `--a: var(--a)` · `--a: var(--a, #fff)` · `--a: VAR(--a)` ·
+    `--a: var(--b, var(--a))` 四形态。
+    """
     out = []
-    for m in RX_SELFREF.finditer(css_text):
-        if m.group(1) != m.group(2):
+    for m in RX_DECL.finditer(css_text):
+        name = m.group(1)
+        value = m.group(2)
+        if not value.strip():
             continue
-        line = css_text[: m.start()].count("\n") + 1
-        out.append((m.group(1), m.group(2), line))
+        for ref in RX_VARREF.findall(value):
+            if ref == name:
+                line = css_text[: m.start()].count("\n") + 1
+                out.append((name, ref, line))
+                break
     return out
 
 
