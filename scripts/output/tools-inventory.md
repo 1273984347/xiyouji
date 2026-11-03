@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-04 05:02
+生成时间：2026-11-04 05:46
 
-共 **172** 件（门禁与校验 78 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 66 · 一次性（下划线前缀） 6）
+共 **174** 件（门禁与校验 80 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 66 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（78）
+## 门禁与校验（80）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -44,6 +44,7 @@
 | `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
 | `check_db_schema.py` | check_db_schema.py — DB schema 门禁（W917 建置·B-DB-05 清偿）。 |
 | `check_design_doc_drift.py` | check_design_doc_drift.py — 设计令牌文档对账门禁（PD-5 · W652） |
+| `check_doc_numbers.py` | check_doc_numbers.py — 文案数字与证据件键值逐字对表闸（W1116 建） |
 | `check_doc_size_budget.py` | check_doc_size_budget.py — 治理文档体积窗口门禁（W960 建 · 文档规范 §8 机器化）。 |
 | `check_doc_sync.py` | 文档口径体检 doc-sync（第 31 门禁 · W663）——代码/提交是真值源，文档当前态声明是派生物。 |
 | `check_dual_source_scan.py` | check_dual_source_scan.py — 双源对发现器（S-24·W699）。 |
@@ -73,6 +74,7 @@
 | `check_pitfall_id_unique.py` | check_pitfall_id_unique.py —— 坑表编号唯一性判据（W1106 建）。 |
 | `check_plan_template.py` | check_plan_template.py — 第 48 门禁：计划方案模板符合性（增量口径·W860） |
 | `check_powershell_parse.py` | check_powershell_parse.py — PowerShell 脚本可解析性判据（W1110 新增第 55 槽）。 |
+| `check_registration_surface.py` | check_registration_surface.py — 登记面一致性自检闸（W1116 建） |
 | `check_repo_layout.py` | check_repo_layout.py — 第 52 门禁：仓库布局（W1011 挂槽·用户 2026-10-29「全都做」） |
 | `check_screenshot_gates.js` | check_screenshot_gates.js — 图表/渲染动态门禁（W551 新建，挂 screenshot-review workfl |
 | `check_script_coverage.py` | check_script_coverage.py — 根级工具脚本覆盖门禁（第 42 槽 · W751 挂载） |

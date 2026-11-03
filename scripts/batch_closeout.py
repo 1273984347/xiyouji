@@ -28,7 +28,9 @@ STEPS = [
     ('index',      '搜索索引 + 文档索引'),
     ('stats',      'stats.py --w <批号>'),
     ('versions',   '版本面推进（跨文件字面量·幂等·只引用 version_surface）'),
-    ('csp',        'generate_csp（**必须最后**：前面步骤会改内联脚本）'),
+    ('docnums',    '文案数字 ↔ 证据件对表闸（清单驱动·读最终产物·W1116）'),
+    ('regsurface', '登记面一致性闸（六项·W1116）'),
+    ('csp',        'generate_csp（**csp/cspcheck 仍为末两步**：前面步骤会改内联脚本）'),
     ('cspcheck',   'generate_csp --check（零漂移校验）'),
 ]
 
@@ -263,6 +265,57 @@ def _run_csp(spec_path=None):
     return True
 
 
+def _run_docnums(spec_path):
+    """文案数字 ↔ 证据件对表闸（W1116·只引用不复制·判据在 scripts/check_doc_numbers.py）。
+
+    为什么在收官链里：W1113~W1115 实证「批收官后结论文案里的数字仍与证据件不一致」（25 处漂移·
+    其中 3 处阻断级），而**没有任何机器判据会抓这类漂移** ⇒ 本闸把「人工对表」变成机器断言：
+    每批在 spec 的 doc_numbers 段声明「哪处文案 ↔ 哪个证据键」，末位逐项断言。
+    未声明 ⇒ 跳过（不伪造红）；声明了但取不到真值/对不上 ⇒ 判红并给出 文件:行号 + 期望 + 实际。
+    """
+    import json
+    if not (spec_path and os.path.isfile(spec_path)):
+        print('[docnums] 无 spec ⇒ 跳过（判据不可执行·不伪造红）')
+        return True
+    with open(spec_path, encoding='utf-8') as f:
+        spec = json.load(f)
+    if not (spec.get('doc_numbers') or []):
+        print('[docnums] spec 无 doc_numbers 声明 ⇒ 跳过（未声明即不判）')
+        return True
+    script = os.path.join(ROOT, 'scripts', 'check_doc_numbers.py')
+    if not os.path.isfile(script):
+        print('[docnums] 判据缺失 => 中止（fail-closed·不得静默跳过）')
+        return False
+    rc, out = run([sys.executable, script, '--spec', spec_path])
+    print('[docnums] ' + ('OK' if rc == 0 else 'FAIL'))
+    if rc != 0:
+        print(out.strip()[-800:])
+        return False
+    return True
+
+
+def _run_regsurface(batch):
+    """登记面一致性闸（W1116·六项·判据在 scripts/check_registration_surface.py）。
+
+    六项：① 台账本批认领行存在 ② HANDOVER 最后更新链首 == CHANGELOG 现役段
+    ③ CHANGELOG 编号规则段上限 == 现役段 ④ HANDOVER 最后更新链条目 ≤3
+    ⑤ file-index 含本批段 ⑥ 台账正本数据行 ≤ 窗口（行口径复用 archive_ledger_rows.ROW_RE）。
+    """
+    script = os.path.join(ROOT, 'scripts', 'check_registration_surface.py')
+    if not os.path.isfile(script):
+        print('[regsurface] 判据缺失 => 中止（fail-closed·不得静默跳过）')
+        return False
+    if not batch:
+        print('[regsurface] 缺批号 ⇒ 跳过（不伪造红）')
+        return True
+    rc, out = run([sys.executable, script, '--batch', batch])
+    print('[regsurface] ' + ('OK' if rc == 0 else 'FAIL'))
+    if rc != 0:
+        print(out.strip()[-800:])
+        return False
+    return True
+
+
 def _run_cspcheck():
     """cspcheck 步：零漂移校验（恒为最后一步）。"""
     rc, out = run([sys.executable, 'scripts/generate_csp.py', '--check'])
@@ -308,6 +361,10 @@ def main(argv=None):
     if not _run_stats(batch):
         return 1
     if not _run_versions(a.spec, batch):
+        return 1
+    if not _run_docnums(a.spec):
+        return 1
+    if not _run_regsurface(batch):
         return 1
     if not _run_csp(a.spec):
         return 1
