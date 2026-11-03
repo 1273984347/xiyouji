@@ -77,23 +77,55 @@ def audit(base="HEAD", lines=None, added=None):
         if m:
             added_ids.append((m.group(1), m.group(2), line))
     dup_existing = {k: v for k, v in existing.items() if len(v) > 1}
-    # 新增条目若与「除自己以外」的既有条目同号 ⇒ 撞号
+    # 新增条目若与既有条目同号 ⇒ 撞号
+    # **W1110 收官笔修（阻断 #2）**：原实现带 `x[0] != w` 过滤（同批号豁免）⇒
+    # 「同批内两条同号」与「新条目批号与既有条目批号字面相同」两种形态**漏判**——
+    # 而后者恰是本槽的**立项原场景**（两批各占同一号·批号字面相同）。
+    # ⇒ 去掉该豁免：同号即撞。**但必须排除「自身」**——新增集合若整表传入（单测常见形态），
+    # 条目会与**自己**同号 ⇒ 不该判红。
+    # ⇒ 排除口径 = 既有条目与新增条目的「标题」完全相同 ⇒ 视为同一行（自身）·其余同号即撞。
     new_dups = []
-    for w, eid, _line in added_ids:
-        others = [x for x in existing.get(eid, []) if x[0] != w]
+    for w, eid, line in added_ids:
+        title = line[4 : line.find("（W")] if "（W" in line else line
+        others = [x for x in existing.get(eid, []) if x[1] != title]
         if others:
             new_dups.append((eid, w, others))
     return new_dups, dup_existing, added_ids
 
 
+def resolve_base():
+    """基点解析：优先**本批开叉点**（`git merge-base origin/main HEAD`）。
+
+    **W1110 收官笔修（阻断 #2）**：原实现默认 `HEAD` ⇒ 在提交后 / 干净检出（CI 形态）
+    `git diff HEAD` 为空 ⇒ 「新增条目 0 条」⇒ **判据在 CI 上恒绿**（静默失效）·
+    且与 gates.md / docstring 承诺的「取本批开叉点」不符（文档-实现失配）。
+    ⇒ 默认基点改为开叉点；开叉点不可得（CI 浅克隆）时回退 `origin/main`·再回退 `HEAD`。
+    """
+    import subprocess
+
+    def _g(*a):
+        r = subprocess.run(["git", "-C", ROOT] + list(a), capture_output=True,
+                           text=True, encoding="utf-8", errors="replace", timeout=60)
+        return r.stdout.strip() if r.returncode == 0 else ""
+
+    mb = _g("merge-base", "origin/main", "HEAD")
+    if mb:
+        return mb, "merge-base origin/main HEAD"
+    om = _g("rev-parse", "origin/main")
+    if om:
+        return om, "origin/main（无 merge-base：CI 浅克隆）"
+    return "HEAD", "HEAD（无 merge-base 且无 origin/main）"
+
+
 def main():
-    base = "HEAD"
+    base, base_desc = resolve_base()
     if "--base" in sys.argv:
         base = sys.argv[sys.argv.index("--base") + 1]
+        base_desc = "命令行指定 --base %s" % base
     if "--self-test" in sys.argv:
         return _self_test()
     new_dups, stock, added = audit(base)
-    print("坑表编号唯一性判据：基点 %s·新增条目 %d 条" % (base, len(added)))
+    print("坑表编号唯一性判据：基点 %s（%s）·新增条目 %d 条" % (base, base_desc, len(added)))
     if new_dups:
         for eid, w, others in new_dups:
             print(

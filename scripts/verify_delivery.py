@@ -961,8 +961,7 @@ _STRICT_GATES = [
     # （W1109 收敛 16 组真重号后本槽成为常驻防线）。
     _StrictGate(
         section="坑表编号唯一",
-        script="check_pitfall_id_unique.py",
-        args=("--base", "HEAD"),
+        script="check_pitfall_id_unique.py",  # 基点由脚本内解析（本批开叉点）·不写死 HEAD
         timeout=120,
         marker="---- 坑表编号唯一性：",
         crash_msg="坑表编号唯一性槽执行异常（第 54 槽·crash 即拦）: %s",
@@ -1574,7 +1573,7 @@ def main():
     _assert_registry_consistent()  # W781 R-1：注册表一致性启动期防线
     """交付门禁编排（W728 重构：905 行单体 → 表驱动编排）。
 
-    执行序 = 52 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
+    执行序 = 62 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
     新增/调整门禁段只改对应参数表项或段函数，main() 编排面保持稳定。
     """
     rep = _Reporter()

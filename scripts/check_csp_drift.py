@@ -94,30 +94,59 @@ def meta_hashes(html):
 
 
 def resolve_base():
-    """返回 (基点 ref, 说明)。优先 merge-base（开叉点），不可得回退 HEAD。"""
+    """返回 (基点 ref, 说明)。优先 merge-base（开叉点），不可得回退 origin/main。
+
+    **W1110 收官笔修（阻断 #1）**：原实现回退 `HEAD` ⇒ 在 CI 浅克隆（`fetch-depth: 1`）
+    下 `git merge-base origin/main HEAD` 无输出 ⇒ 回退 HEAD ⇒ `changed_pages(HEAD)` 在
+    干净检出实测为 `[]` ⇒ **该槽对任何页面都不判**（静默失效·与 gates.md 承诺相反）。
+    ⇒ 回退链改为 **merge-base → origin/main → HEAD**：
+      · `origin/main` 在浅克隆下**仍可用**（checkout 必带 origin 引用）⇒ 相对 origin/main 的
+        改动页可算 ⇒ 判据仍有检出能力；
+      · `HEAD` 仅作最后兜底（此时若改动页为空 ⇒ 明确记 NOTE 而非静默通过）。
+    """
     mb = _git("merge-base", "origin/main", "HEAD").strip()
     if mb:
         return mb, "merge-base origin/main HEAD"
+    om = _git("rev-parse", "origin/main").strip()
+    if om:
+        return om, "origin/main（无 merge-base：CI 浅克隆 fetch-depth 1）"
     head = _git("rev-parse", "HEAD").strip()
     if head:
-        return head, "HEAD（无 merge-base：CI 浅克隆或未设 origin/main）"
+        return head, "HEAD（无 merge-base 且无 origin/main）"
     return None, "无基点"
 
 
 def changed_pages(base):
-    """本批改动的 HTML 页（相对基点）——含工作树未提交改动。"""
+    """本批改动的 HTML 页（相对基点）——含工作树未提交改动。
+
+    **W1110 收官笔修（阻断 #1）**：基点退化为 `HEAD`（CI 浅克隆）时，
+    `git diff HEAD` 在干净检出 = 空 ⇒ 改动页为空 ⇒ 判据不判。
+    ⇒ 此处补一层：**基点为 HEAD 且结果为空时**，再按「相对 origin/main」取一次
+    （浅克隆下 origin/main 引用仍在 ⇒ 相对 main 的改动页可算）。
+    """
     out = set()
-    for args in (["diff", "--name-only", base],
-                 ["diff", "--name-only", "--cached", base],
-                 ["diff", "--name-only", base, "HEAD"]):
-        for ln in _git(*args).splitlines():
-            p = ln.strip().replace("\\", "/")
-            if p.endswith(".html") and p.startswith("site/"):
-                out.add(p)
+
+    def _collect(ref):
+        acc = set()
+        for args in (["diff", "--name-only", ref],
+                     ["diff", "--name-only", "--cached", ref],
+                     ["diff", "--name-only", ref, "HEAD"]):
+            for ln in _git(*args).splitlines():
+                q = ln.strip().replace("\\", "/")
+                if q.endswith(".html") and q.startswith("site/"):
+                    acc.add(q)
+        return acc
+
+    out |= _collect(base)
+    # 兜底：基点是 HEAD（提交后/干净检出）且无改动页 ⇒ 相对 origin/main 再取一次
+    if not out and base == _git("rev-parse", "HEAD").strip():
+        om = _git("rev-parse", "origin/main").strip()
+        if om:
+            out |= _collect(om)
     for ln in _git("ls-files", "--others", "--exclude-standard").splitlines():
-        p = ln.strip().replace("\\", "/")
-        if p.endswith(".html") and p.startswith("site/"):
-            out.add(p)
+        q = ln.strip().replace("\\", "/")
+        if q.endswith(".html") and q.startswith("site/"):
+            out.add(q)
     return sorted(out)
 
 

@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 52 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 57 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前按 §7 路径按需读节；更细的规则以文末「权威文档」为准。
 >
@@ -180,7 +180,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 
-> **📖 阅读契约（W709）**：索引型——231 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——233 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
@@ -188,7 +188,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **占号共享区纪律（W1110·E-128）**：`reserve_w.py` 的预约集写在**工作树内**的 `tmpe/_w_reservations.json`（已 gitignore）⇒ **共享范围 = 工作树·不是仓库** ⇒ 占号必须在**主仓工作树**执行，隔离 clone 只用于施工（在那里占号他方看不见 ⇒ 必撞号）；落段前复核「本批号仍在预约集内」——该复核只有在占号登记于共享区时才有意义。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（15）·流程 / 协作 / 取证（112）
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（15）·流程 / 协作 / 取证（114）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
