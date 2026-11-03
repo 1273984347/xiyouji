@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（180）
+## 文件（181）
 
 ### Markdown 文档
 
@@ -213,6 +213,7 @@
 - `validate_en.py`
 - `verify_chapters.py`
 - `verify_delivery.py`
+- `version_surface.py`
 - `visual_regression_probe.py`
 - `worktree_rehearse.py`
 

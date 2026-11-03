@@ -17,6 +17,7 @@
 用法：py -3 scripts/check_cascade_line_anchor.py [--json]
 退出码：0 = 全绿；1 = 有 FAIL。
 """
+import inspect
 import json
 import os
 import re
@@ -26,6 +27,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 import batch_cascade as bc  # noqa: E402
+
+# 替身提供的 ctx 字段集（W1114 契约锚）⇒ check() 断言被测面读取集 ⊆ 本集合。
+CTX_FIELDS = {"batch", "date", "desc", "head_sentence", "pend"}
 
 # 合成样本：desc 一律**无「·」**（C6 W841 要求的形态）⇒ 旧正则必跨行；
 # 且紧邻行含「·」⇒ 给旧正则一个可吞的终点。
@@ -55,10 +59,17 @@ OLD_LIST_LINE = re.compile(
 
 
 class _Ctx:
-    """batch_cascade._Ctx 的最小替身（只带 _face_three_docs 用到的字段）。"""
+    """batch_cascade._Ctx 的最小替身（只带 _face_three_docs 用到的字段）。
+
+    **W1114**：替身字段集由 CTX_FIELDS 声明，并由 check() 断言「被测面读取的 ctx 字段集
+    ⊆ 替身字段集」⇒ 级联面若新增对 ctx.X 的直读（如 W1114 把 head_sentence 提升为
+    ctx 字段），此处当场红 ⇒ 不再等到 CI 才以 AttributeError 暴露。
+    """
 
     def __init__(self, batch, date, desc):
         self.batch, self.date, self.desc = batch, date, desc
+        # 合成 head_sentence：**不得含「·」**（该判据要防的正是含「·」导致的跨行吞行）
+        self.head_sentence = "甲乙丙"
         self.pend = []
 
 
@@ -76,6 +87,16 @@ def _run():
 
 def check():
     issues, notes = [], []
+
+    # 契约字段集一致性（W1114）：被测面读取的 ctx 字段集 ⊆ 替身字段集
+    # ⇒ 级联面若新增对 ctx.X 的直读（如把 head_sentence 提升为 ctx 字段），
+    #    替身未同步 ⇒ 断言当场红（而非等 CI 以 AttributeError 暴露）。
+    _used = set(re.findall(r"ctx\.(\w+)", inspect.getsource(bc._face_three_docs)))
+    _missing = sorted(_used - CTX_FIELDS)
+    if _missing:
+        issues.append("契约漂移：被测面新增读取 ctx.%s，但判据替身未提供（请同步 CTX_FIELDS 与替身）"
+                      % "、".join(_missing))
+
     out = _run()
 
     # ① 行锚定不变量：三个面替换后行数不变
