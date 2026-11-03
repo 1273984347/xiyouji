@@ -18,6 +18,8 @@ import re
 import sys
 import time
 
+import version_surface  # W1114：版本面字面量的共享单一事实源（只引用不复制）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _root = os.path.realpath(ROOT)
 
@@ -124,6 +126,10 @@ class _Ctx:
         self.batch, self.date = spec["batch"], spec["date"]  # W711：ver 字段弃用（方案 D 批次键唯一·spec.version 仅存档）
         self.desc = spec["desc"]
         self.entry = spec["head_entry"]
+        # W1114：head_sentence 提升为 ctx 字段（不再让面函数直接摸 ctx.spec）——
+        # 判据 scripts/check_cascade_line_anchor.py 的 _Ctx 替身只带最小字段集，
+        # 面函数若新增对 ctx.spec 的直读 ⇒ 替身缺 spec ⇒ AttributeError ⇒ 判据整体失效。
+        self.head_sentence = spec.get("head_sentence", "")
         self.new_w = None     # CHANGELOG 面回填：现役段号 + 1
         self.new_rule = None  # CHANGELOG 面回填：编号规则段新形态
         self.pend = []        # (path, content, nl) 落盘队列
@@ -179,54 +185,18 @@ def _face_changelog(ctx):
 def _face_three_docs(ctx):
     """README / STRUCTURE / 项目说明 三文档批头版本行。
 
-    W1005 行锚定化（根因修复·本批实证）：四个正则的 desc 匹配段原为 `[^·]*` / `[^—]*`。
-    Python 字符类 `[^X]` **匹配换行符** ⇒ 匹配区间可跨行；而 re.sub 替换的是**整个匹配区间**，
-    跨行匹配即等于静默删掉中间行的内容。
-
-    实证（W1005）：项目说明.md「当前版本」列表行的正则**无尾锚点** ⇒ 旧 desc 行内无「·」时
-    `[^·]*` 一路吞到下一处「·」之前，匹配区间 1143..1342 跨 1 行，re.sub 后该文件 103 行→102 行，
-    第 49 行「当前阶段」行首（87 页可视化 + Phase 7 逐回解读…）被静默删掉。
-
-    反直觉点（值得单独记住）：旧 desc **含**「·」时反而**安全**——`[^·]*` 止于行内；
-    而 desc **无**「·」（正是 C6 判据 W841 要求的形态）才触发跨行吞并。
-    ⇒ C6 与本面旧正则在列表行上互为镜像：一个把「·」清掉，另一个靠「·」才不越界。
-
-    修法（本批）：① 四个 desc 匹配段一律行锚定（`[^\\n\\r·]` / `[^\\n\\r—]` / `[^\\n\\r]`）；
-    ② 空白量一律 `[ \\t]`（`\\s` 亦匹配换行）；③ 每个改写面补「替换前后行数不变」断言
-    ——吞并一旦复发当场 FAIL，而非静默落盘；④ 列表行由 `[^·]*` 改 `[^\n\r]*`（整行替换）
-    ⇒ 顺带根治「旧 desc 尾部残留」（历史实证：旧 desc 含「·」时匹配止于「·」，其尾部残留行尾）。
-
-    只读面（`[^*]*` / `[^；]*` 等）跨行匹配只会导致断言 FAIL（fail-closed 误报），不产生破坏，
-    故本批不动——同族风险只锁定「改写面」。
+    **W1114 改为调用共享模块 scripts/version_surface.py**（只引用不复制·避免两份实现漂移）：
+    版本面字面量推进由 version_surface 承担（幂等·已是目标态则零变化·锚点缺失 fail-closed）。
     """
     # ---------- README / STRUCTURE / 项目说明 ----------
-    p = "README.md"
-    s, nl = load(p)
-    out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r·]*·A1-A6",
-                 f"> **当前批次 {ctx.batch}（{ctx.date}）**：{ctx.desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头·W712 锚点兼容 desc 直连形态·W1005 行锚定化
-    assert out != s, "README 版本行未变化"
-    assert out.count("\n") == s.count("\n"), "README 版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
-    ctx.pend.append((p, out, nl))
-
-    p = "STRUCTURE.md"
-    s, nl = load(p)
-    out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）—[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r—]*—[ \t]*A1-A6",
-                 f"> 当前批次：{ctx.batch}（{ctx.date}）— {ctx.desc}—A1-A6", s, count=1)  # W712 锚点兼容 desc 直连·W1005 行锚定化
-    assert out != s, "STRUCTURE 版本行未变化"
-    assert out.count("\n") == s.count("\n"), "STRUCTURE 版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
-    ctx.pend.append((p, out, nl))
-
-    p = "docs/00-导读/项目说明.md"
-    s, nl = load(p)
-    out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r·]*·详细变更见",
-                 f"> 当前批次 {ctx.batch}（{ctx.date}）：{ctx.desc}·详细变更见", s, count=1)  # W712 锚点兼容 desc 直连·W1005 行锚定化
-    assert out != s, "项目说明头部版本行未变化"
-    assert out.count("\n") == s.count("\n"), "项目说明头部版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
-    out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）—[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r]*",
-                  rf"\g<1>{ctx.batch}（{ctx.date}）— {ctx.desc}", out, count=1)
-    assert out2 != out, "项目说明「当前版本」列表行未变化（正则失配·fail-closed——W711 起 desc 直连形态实证·W713 补断言）"
-    assert out2.count("\n") == out.count("\n"), "项目说明「当前版本」列表行替换吞行（W1005 跨行吞并防线）"
-    ctx.pend.append((p, out2, nl))
+    for rel in ("README.md", "STRUCTURE.md", "docs/00-导读/项目说明.md"):
+        # 用**本模块的 load** 读文件 + 把文本交给 version_surface 的纯函数 advance_text：
+        # 判据 check_cascade_line_anchor.py 才能 monkeypatch 本模块 load 注入合成样本
+        # （若版本面模块自己读盘，判据会读到磁盘真实文件 ⇒ 合成样本驱动失效）。
+        s, nl = load(rel)
+        out, _changed = version_surface.advance_text(
+            s, rel, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
+        ctx.pend.append((rel, out, nl))
 
 
 def _handover_rotate_oldest(s, ctx, nl, h1pos):
@@ -336,18 +306,16 @@ def _face_handover(ctx):
 
 
 def _face_workflows(ctx):
-    """workflows README 头部区间与里程碑尾标记。"""
+    """workflows README 头部区间与里程碑尾标记。
+
+    **W1114**：头部区间（两处「W450-W####」）改由共享模块 version_surface 推进（幂等）；
+    里程碑尾标记是**追加型**内容（每批加一条），仍由本面负责（不属版本面字面量）。
+    """
     # ---------- workflows README ----------
     p = ".github/workflows/README.md"
     s, nl = load(p)
-    BS = chr(92)
-    winpath = "`D:" + BS + "xiyouji`"  # W596：旧值为已不存在的双副本路径，曾每批续写进 workflows README
-    pat_wf = re.compile(r"→ W450-W\d+\*\* — 西游记解读项目（" + re.escape(winpath) + r"，(?:v[\d.]+\s+)?W\d+）的 GitHub Actions 工作流层。")  # W711 双形态（ver 可选）
-    repl_wf = f"→ W450-W{ctx.new_w}** — 西游记解读项目（{winpath}，{ctx.batch}）的 GitHub Actions 工作流层。"
-    out = pat_wf.sub(lambda m: repl_wf, s, count=1)
-    assert out != s, "workflows 头部未变化"
-    out = re.sub(r"> \*\*W450-W\d+\*\*：verify 门禁体系扩展",
-                 f"> **W450-W{ctx.new_w}**：verify 门禁体系扩展", out, count=1)
+    out, _changed = version_surface.advance_text(
+        s, p, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
     marker = "无 workflow 结构改动）。"
     assert out.count(marker) == 1, f"里程碑尾标记出现 {out.count(marker)} 次"
     out = out.replace(marker, f"无 workflow 结构改动）+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。", 1)
@@ -466,17 +434,15 @@ def _face_agents(ctx):
 
 
 def _face_citation(ctx):
-    """CITATION.cff 版本/日期同步（第 10 面）。"""
-    # ---------- CITATION.cff（W628 起第 10 面：version/date-released 随批同步——第 27 门禁 R2 面） ----------
+    """CITATION.cff 版本/日期同步（第 10 面）。
+
+    **W1114**：改由共享模块 version_surface 推进（幂等·单一事实源）。
+    """
     p = "CITATION.cff"
     s, nl = load(p)
-    # W1045 加固（子代理复核建议·零行为变化）：`\s*` 含换行 ⇒ 理论上可跨行匹配
-    # ⇒ 改为 `[ \t]*`（只匹配行内空白）并补「替换前后行数不变」断言——
-    # 本组 6 处里唯一无行数断言的面（其余 5 面 W1005 已行锚定化并带行数断言）。
-    out = re.sub(r'(?m)^version:[ \t]*"[^"]+"', f'version: "{ctx.batch}"', s, count=1)
-    out = re.sub(r'(?m)^date-released:[ \t]*"[^"]+"', f'date-released: "{ctx.date}"', out, count=1)
+    out, _changed = version_surface.advance_text(
+        s, p, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
     assert out != s, "CITATION.cff 版本/日期行未变化"
-    assert out.count("\n") == s.count("\n"), "CITATION.cff 替换前后行数不一致（跨行匹配吞内容）"
     ctx.pend.append((p, out, nl))
 
 
@@ -696,14 +662,8 @@ def _refresh_stats(batch):
     return ok
 
 
-def _close_hints():
-    """收官提示位集合（W960 建·W979 扩展·全部只输出不改判定与退出码——W822 语义）。
-
-    - [SIZE]    治理文档体积窗口（判据本体 check_doc_size_budget·开工面硬判据）
-                + 超窗提示行（P-44-01：级联每批插入一段·回窗是每批常态动作而非异常）
-    - [TMPE]    tmpe 批次桶计数 + _shot/_inbox TTL 超龄报数（P-44-02：删除须主人确认+回收站）
-    - [SCRIPTS] scripts 顶层 `_` 件跟踪态计数（P-44-03：>20 提示退役扫描·W977 先例）
-    """
+def _hint_size():
+    """[SIZE] 治理文档体积窗口提示位（判据本体 check_doc_size_budget）。"""
     try:
         import check_doc_size_budget as _dsb
 
@@ -716,8 +676,25 @@ def _close_hints():
                   "对应归档工具回窗（段式=archive_segments.py·台账行=archive_ledger_rows.py）" % len(_fails))
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[SIZE] 体积提示位不可用（{_exc}）")
-    # W976：tmpe 临时区处置提示位（每批收官报一次·防「只进不出」复发——清理闭环
-    # 自 W738 建制到 W976 只运转过一次，批次桶 699MB 堆积实证）。判据与工具本体在 tmpe_tidy。
+
+
+def _tmpe_stale_one(tmpe_dir, bucket, ttl):
+    """统计单个 tmpe 桶里超龄件数与体积（W1114 结构档拆分·抽函数降嵌套）。"""
+    _n = _mb = 0
+    for _dp, _dn, _fn in os.walk(os.path.join(tmpe_dir, bucket)):
+        for _f in _fn:
+            try:
+                _st = os.stat(os.path.join(_dp, _f))
+            except OSError:
+                continue
+            if time.time() - _st.st_mtime > ttl * 86400:
+                _n += 1
+                _mb += _st.st_size
+    return "%s 超龄 %d 件 %.0fMB(TTL%dd)" % (bucket, _n, _mb / 1048576, ttl)
+
+
+def _hint_tmpe_buckets():
+    """[TMPE] tmpe 批次桶计数 + _shot/_inbox TTL 超龄报数（W976 段）。"""
     try:
         import tmpe_tidy as _tt
 
@@ -730,23 +707,51 @@ def _close_hints():
             _ttl = _tt.load_policy().get("ttl_days", {}).get(_bucket)
             if not _ttl:
                 continue
-            _n = _mb = 0
-            for _dp, _dn, _fn in os.walk(os.path.join(_tt.TMPE, _bucket)):
-                for _f in _fn:
-                    try:
-                        _st = os.stat(os.path.join(_dp, _f))
-                    except OSError:
-                        continue
-                    if time.time() - _st.st_mtime > _ttl * 86400:
-                        _n += 1
-                        _mb += _st.st_size
-            _stale.append("%s 超龄 %d 件 %.0fMB(TTL%dd)" % (_bucket, _n, _mb / 1048576, _ttl))
+            _stale.append(_tmpe_stale_one(_tt.TMPE, _bucket, _ttl))
         if _stale:
             print("[TMPE] " + "·".join(_stale) + "——到期列清单经主人确认走回收站"
                   "（tmpe_tidy.py --plan --older N）")
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[TMPE] 提示位不可用（{_exc}）")
-    # P-44-03：scripts 顶层 `_` 件防再积（W977 先例 286 件入库·跟踪态阈值 20）
+
+
+def _zero_ref_candidates(tracked_out):
+    """统计 scripts 顶层下划线前缀件里「语料零引用」的退役候选数（W992 口径）。
+
+    返回 -1 表示统计不可用（异常留痕·不阻断）。
+    """
+    import subprocess as _sp
+
+    try:
+        _corpus = ["CHANGELOG.md"]
+        for _d in ("tests", "docs/agent", "docs/00-导读"):
+            _rr = _sp.run(["git", "-c", "core.quotePath=false", "ls-files", _d],
+                           capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", cwd=ROOT)
+            _corpus.extend(x for x in _rr.stdout.splitlines() if x.strip())
+        _texts = {}
+        for _c in _corpus:
+            try:
+                _texts[_c] = open(os.path.join(ROOT, _c.replace("/", os.sep)),
+                                  encoding="utf-8", errors="ignore").read()
+            except OSError:
+                pass
+        _cl_tail = _texts.get("CHANGELOG.md", "")[-200000:]
+        _zero_ref = 0
+        for _f in tracked_out.splitlines():
+            _name = _f.replace("scripts/", "", 1)
+            if not _name.startswith("_"):
+                continue
+            if _name in _cl_tail or any(_name in _tx for _tx in _texts.values()):
+                continue
+            _zero_ref += 1
+        return _zero_ref
+    except Exception:
+        return -1
+
+
+def _hint_scripts():
+    """[SCRIPTS] scripts 顶层下划线前缀件跟踪态计数 + 零引用退役候选（P-44-03·W992 口径）。"""
     try:
         import subprocess as _sp
 
@@ -755,51 +760,28 @@ def _close_hints():
         _tracked = len([x for x in _r.stdout.splitlines() if "/" not in x.replace("scripts/", "", 1)])
         _on_disk = len([f for f in os.listdir(os.path.join(ROOT, "scripts"))
                         if f.startswith("_") and os.path.isfile(os.path.join(ROOT, "scripts", f))])
-        # W992 口径校准：跟踪数含近批证据锚（CHANGELOG 110 段窗内被引用·合法驻留），
-        # 裸计数恒超 20 变常驻噪声——改报「零引用退役候选数」（可行动数）作阈值判据。
-        _zero_ref = 0
-        try:
-            _corpus = ["CHANGELOG.md"]
-            for _d in ("tests", "docs/agent", "docs/00-导读"):
-                _rr = _sp.run(["git", "-c", "core.quotePath=false", "ls-files", _d],
-                              capture_output=True, text=True,
-                              encoding="utf-8", errors="replace", cwd=ROOT)
-                _corpus.extend(x for x in _rr.stdout.splitlines() if x.strip())
-            _texts = {}
-            for _c in _corpus:
-                try:
-                    _texts[_c] = open(os.path.join(ROOT, _c.replace("/", os.sep)),
-                                      encoding="utf-8", errors="ignore").read()
-                except OSError:
-                    pass
-            _cl_tail = _texts.get("CHANGELOG.md", "")[-200000:]
-            for _f in _r.stdout.splitlines():
-                _name = _f.replace("scripts/", "", 1)
-                if not _name.startswith("_"):
-                    continue
-                if _name in _cl_tail or any(_name in _tx for _tx in _texts.values()):
-                    continue
-                _zero_ref += 1
-        except Exception:
-            _zero_ref = -1
-        _msg = "[SCRIPTS] 顶层 `_` 件跟踪态 %d 个（盘上 %d）·零引用退役候选 %s 个" % (
+        _zero_ref = _zero_ref_candidates(_r.stdout)
+        _msg = "[SCRIPTS] 顶层下划线件跟踪态 %d 个（盘上 %d）·零引用退役候选 %s 个" % (
             _tracked, _on_disk, _zero_ref)
         if _zero_ref > 20:
             _msg += "——超阈值 20：跑退役扫描（archive_file.py 语料级引用剔除·W977/W992 先例）"
         print(_msg)
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[SCRIPTS] 提示位不可用（{_exc}）")
-    # W995：归档健康提示位（check_archive_health T1-T4·独立尾部块——与 W992 校准块最小碰撞面）
+
+
+def _hint_archive():
+    """[ARCHIVE] 归档健康提示位（check_archive_health T1-T4·W995）。"""
     try:
         import check_archive_health as _cah
 
         _cah.run(strict=False, prefix="[ARCHIVE] ")
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[ARCHIVE] 提示位不可用（{_exc}）")
-    # W1014 接线升格：3 支原「零代码调用者·靠人记得跑」报告型探针接入收尾浮出（用户裁决
-    # 「全部接线升格」）。不硬挂 verify 槽——它们恒返 0 且指标为「人工甄别后清」类
-    # （content_hygiene 标记密度嫌疑 / parser_anchor 盲区），硬判会制造常驻噪声或永绿假门禁
-    # （§11.2 门禁弱化根）。此处每批自动跑并浮出末行可行动数，替代「没人记得跑」。
+
+
+def _hint_hygiene():
+    """[HYGIENE] 三支报告型探针接入收尾浮出（W1014 接线升格·不硬挂 verify 槽）。"""
     try:
         import subprocess as _sp2
 
@@ -813,9 +795,14 @@ def _close_hints():
             print(f"[HYGIENE] {_tag} {_probe} → {_tail.strip()[:80]}")
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[HYGIENE] 提示位不可用（{_exc}）")
-    # W995：tmpe 上次清理活动日期（.journal 最新落笔——清理节奏可见性，建制 13 天才首清的教训）
+
+
+def _hint_tmpe_journal():
+    """[TMPE] 上次清理活动日期（.journal 最新落笔·W995）。"""
     try:
         import datetime as _dt
+
+        import tmpe_tidy as _tt
 
         _jdir = os.path.join(_tt.TMPE, ".journal")
         _journals = [os.path.join(_jdir, f) for f in os.listdir(_jdir)] if os.path.isdir(_jdir) else []
@@ -826,6 +813,25 @@ def _close_hints():
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[TMPE] 日期提示不可用（{_exc}）")
 
+
+def _close_hints():
+    """收官提示位集合（W960 建·W979 扩展·全部只输出不改判定与退出码——W822 语义）。
+
+    - [SIZE]    治理文档体积窗口（判据本体 check_doc_size_budget·开工面硬判据）
+                + 超窗提示行（P-44-01：级联每批插入一段·回窗是每批常态动作而非异常）
+    - [TMPE]    tmpe 批次桶计数 + _shot/_inbox TTL 超龄报数（P-44-02：删除须主人确认+回收站）
+    - [SCRIPTS] scripts 顶层下划线件跟踪态计数（P-44-03：>20 提示退役扫描·W977 先例）
+
+    **W1114 拆分为多个子函数**：原实现单函数 82 语句 / 复杂度 26 / 分支 25 / 嵌套 5，
+    超 ruff 结构档阈值（≤80 语句 · ≤15 复杂度 · ≤16 分支 · ≤4 嵌套）⇒ 本批首次改动
+    该文件即被结构档拦下 ⇒ 按结构档判据做根因拆分（行为不变·仅函数边界）。
+    """
+    _hint_size()
+    _hint_tmpe_buckets()
+    _hint_scripts()
+    _hint_archive()
+    _hint_hygiene()
+    _hint_tmpe_journal()
 
 if __name__ == "__main__":
     sys.exit(main())
