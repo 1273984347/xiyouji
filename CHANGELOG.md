@@ -1,3 +1,24 @@
+### W1112（2026-11-03）：落段收官一键脚本（八步固定顺序·refresh 迭代收敛·csp 恒末位）
+
+
+> **来源**：W1109 批 CI 三次红项（第 45 槽 ×2 + CSP 漂移 ×1）的根因方案化。
+> - **文件**：.github/workflows/README.md · AGENTS.md · CHANGELOG.md · CITATION.cff · HANDOVER.md · README.md · STRUCTURE.md · archive/docs/AGENTS-ARCHIVE.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/W批次编号对账表-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md · docs/00-导读/W批次编号对账表.md · docs/00-导读/项目说明.md · docs/11-方案报告/README.md · docs/11-方案报告/计划方案/T63-任务计划执行与经验沉淀报告-2026-11-03.md · docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · docs/INDEX.md · pytest.ini · scripts/INDEX.md · scripts/batch_closeout.py · scripts/output/INDEX.md · scripts/output/README.md · scripts/output/_cascade_files_W1112.txt · scripts/output/_vermilion_solid_cache.json · scripts/output/_w1106_spec.json · scripts/output/_w1112_spec.json · scripts/output/file-index.md · scripts/output/stats-changelog.json · scripts/output/stats-index.md · scripts/output/stats.json · scripts/output/tools-inventory.md · site/data/cross-time-danmaku.html · site/data/search.html · site/data/tag-cloud.html · site/dukou-engine.html · site/en/search.html · site/index.html · tests/unit/INDEX.md · tests/unit/README.md · tests/unit/test_w1102_batch_closeout.py · tests/unit/test_w1112_judge_fix.py
+
+**本批要点**（工具层·**零页面内容逻辑改动**（级联页脚链 4 页 + 搜索页内嵌索引/CSP 哈希 2 页由生成器改写）·不新增条目 ⇒ 计数链条数不变）：
+
+① 新增 **scripts/batch_closeout.py**（落段收官一键脚本）八步固定顺序：precheck（台账同号多行/行数窗口预检·不通过即中止并给修复指引）=> selfref（CSS 变量自引用体检·**只引用**第 57 槽既有判据不复制实现）=> add（按 spec.rows 显式 pathspec·禁 git add -A）=> refresh（**迭代至索引快照不再变化**·实测第 2 轮才收敛）=> 搜索索引 + 文档索引 => stats => **csp（恒末位·因前面步骤会改内联脚本）** => csp --check（零漂移）。
+
+② **单测全绿**（batch_closeout **10 例** = 7 计划 + 3 收官笔行为锁·判据正向锁 3 例·合计 13 例） + **真实仓跑通取证**：precheck 当场拦下「台账正本 61 行超窗口 60」并给修复指引 · refresh 第 2 轮收敛 · CSP 856 页零漂移。
+
+③ 台账腾窗迁 3 行（W1050-W1052） + 登记 **W1111 空号·让号行**（先例 W1101/W1102）⇒ 段序连续无空洞。
+
+④ **诚实边界**：本批**不改任何门禁脚本与判据**（主会话 W1110 已根治·避免同文件对改）；chart-design 两页残留的补偿规则越界动作属我方 W1108 遗留，另立小批撤销。
+
+⑤ **收官笔（CI 三红修复）**：PR #113 首次 CI 判红三项（ruff 6 error / 站内搜索索引陈旧 / 判据测试调旧私有 API）⇒ 根因为「落段漏跑生成链」与「主会话 #110 已把私有 _resolve_base 改为公开 resolve_base()」；修法：逐处清裸 l（ruff check scripts/ 0 error）+ 跑本批收官脚本八步链（refresh 第 2 轮收敛 · CSP 856 页零漂移）+ 判据测试改写为正向回归锁 3 例。
+
+⑥ **归档迁移（体积窗口治理·由级联工具自动执行·非手工搬移）**：W989 段由 CHANGELOG 迁入 archive/docs/CHANGELOG-ARCHIVE.md（逐字比对零丢失）· AGENTS 的 W1106 脚注迁入 archive/docs/AGENTS-ARCHIVE.md · file-index 归档时间行同步。CHANGELOG 与 file-index 段数窗口各 110 段（满窗后由级联归档 1 段）。
+
+**验证**：门禁 62 段 0 FAIL · 单测 13 passed（batch_closeout 10 + 判据正向锁 3）· 全量 pytest 本地 1184 passed / 3 skipped（2 failed 为本地工地 scripts/_s4_* 污染·157 件·CI 检出树不含）· CSP 856 页零漂移 · 台账 60/60 窗口内。
 ### W1110（2026-11-03）：图表色工程档 3 施工前置批（门禁与接线四槽 + CSS 令牌自引用根修）
 
 > **来源**：用户 2026-11-03 指令「开 W1110（54 槽编号唯一性 + 55 槽 PowerShell 解析 + P-3 L2 接线 + CSP 零漂移门禁 + 24 处差异 ΔL* 双口径核档 + 占号纪律），一个 PR、CI 跑一次，且合并只看 required 两项」。
@@ -1880,7 +1901,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1110），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1112），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -2016,10 +2037,3 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 > - **状态**：已收官（内容随 W991 批提交代提落库·`01decea2`·verify 全量 rc=0 + N4 88=88·查坑表报错原文与新条目在位）
 
-### W989（2026-10-27）：脚注定形收紧批（C4 300→120·用户裁决「都做」之手搓治理收尾）
-
-> **来源**：用户问「为什么又出现这种问题」（AGENTS 脚注再现散文体·W984-W988 并行会话所写）——取证结论为门禁守的形全部健在（5 条/3.3KB/各 ≤300/阿拉伯头），进来的是「合形的散文」：「一行一事」只是维护契约散文条款无机器判据；用户裁决「都做」。
-> **摘要**：① **C4 收紧 300→120 字**——门禁与级联 precheck 双写点同步（现网五条 264/262/227 字散文在 120 线下全部不合格·重写后无法回头）；hand-tuning 余地收干。② **现网五条重写为索引体**（55-65 字·每条重写前断言 CHANGELOG 有段·全文零丢失）——W984-W988 素材线五批压缩为「批次+动作+要点」形态，脚注 3.3→1.1 KB。③ **手搓治理去重裁决**——开工实施 C8 版本行契约时发现 W982 批（并行会话）已落地三层方案②（check_doc_size_budget C7-1/2/3/4/5/6 六面版本契约 FAIL）+③（preflight 手搓劝导位）+①文件锁缓建裁决——本批 C8 与重复劝导位当场撤销去重，判据覆盖经负样本 6/6 验证的为 W982 版。④ **级联拼接缺陷修复**——agents_note 尾句号与 tail 首句号相拼出「。。」（a0e9ee07·本批前独立推送）。⑤ 台账回窗（61→59）。
-> **文件**：scripts/check_doc_size_budget.py · scripts/batch_cascade.py · scripts/preflight_check.py · scripts/archive_ledger_rows.py · AGENTS.md · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
-> **验证**：C4 负样本（>120 即红）+ 五条重写断言（CHANGELOG 有段+≤120）+ 去重后 ruff 清零 + pytest 全量 934 passed + 体积四窗全绿（109/109/59/60）。
-> **状态**：**已收官**（W989 git 反填·C4 收紧与五条索引化·含代提面）
