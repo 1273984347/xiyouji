@@ -16,6 +16,29 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W991（2026-10-27）：级联运行锁与提交隔离批（①层重启 + safe_commit 守卫·用户两问令）
+
+> **来源**：用户两问——「重启设计」（W982 缓建的级联文件锁①层）+「提交总是混入并行会话的暂存件怎么解决」（W989 认领提交 1fb1b14f 扫入他方暂存级联面实证）。
+> **摘要**：① **cascade_lock.py 级联运行锁**——.git/cascade.lock 原子创建（O_EXCL·批次/持有会话/时间戳），batch_cascade --apply 全程持有（finally 必释放），preflight 检测活动锁即 WARN（共享面正被级联写·此刻 verify/preflight 读数可能撞中态）；陈旧锁（≥600 秒）与损坏锁自动夺；与 W982 缓建理由对照：锁做**运行期互斥**而非索引锁，级联自身不重入。② **safe_commit 无 pathspec 守卫**——索引含暂存件而未指 pathspec 即拒绝并逐件列名（pathspec 形态走临时索引只取声明路径 worktree 态·他方暂存件天然隔离）；守卫纯函数三态负样本验证。③ 自测：锁五态（原子创建/拒绝/幂等释放/陈旧夺/损坏夺）。④ 建置实录：锁自测首版「重复释放应 False」是语义错（finally 安全要求幂等 True·改测试不改代码）。
+> **文件**：scripts/cascade_lock.py · scripts/batch_cascade.py · scripts/preflight_check.py · scripts/safe_commit.py · scripts/output/script-coverage-baseline.txt · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
+> **验证**：锁 --self-test 五态全过 + 守卫三态负样本 + pytest 全量 935 passed + ruff 清零 + 体积四窗全绿。
+> **状态**：**已收官**（W991 git 反填·锁五态自测+守卫三态）
+### W990（2026-10-27）：内联纪律收口批（查坑表补报错原文 + 工作树吸收条目·88 条）
+
+
+
+> **来源**：用户 2026-10-27 问「其他 Agent 下次还会出现类似问题吗」——评估发现两个可修缺口后令「做」。
+
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、dCREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、sscripts/output/_w990_spec.json、scripts/output/_cascade_files_W990.txt。
+
+**缺口一（撞错检索路走不通）**：查坑表「Python 字符串层转义」行补报错原文 literal——`truncated \xXX escape` / `unicodeescape` / `invalid escape sequence`——Agent 撞错后 grep 原文即命中本行（此前只有中文描述·按原文检索会漏）。
+
+**缺口二（更大的：静默丢工作）**：新增条目「并行会话在场的未提交工作树编辑会被吸收或覆盖——只有已提交状态是安全停车位」（git/提交/并发 21→22·总数 87→88·计数链四处同步 N4 88=88）。四连环实证：① 未提交编辑被对方重 add 吸收进暂存快照（W985 pitfalls 编辑被 W988 卷入·内联署名保住溯源）；② restore/清偿扫过即覆盖（同批险情：worktree diff 一度归零）；③ 纪律=并行在场禁 `git add -A`（按名单精确暂存）+ 跨批次内容立即提交或留字据——工作树不是停车位；④ 被他方在途件卡门禁（C4-f 假红）按 W932/W984 先例核成色后代提（W988「登记并行 W989 代提事实」双向留痕口径），成色不够则等。
+
+**验证**：N4 88=88 · E1 抽查（literal 与条目各在位）· 全量 verify + pytest 见状态行。
+
+> - **状态**：已收官（内容随 W991 批提交代提落库·`01decea2`·verify 全量 rc=0 + N4 88=88·查坑表报错原文与新条目在位）
+
 ### W989（2026-10-27）：脚注定形收紧批（C4 300→120·用户裁决「都做」之手搓治理收尾）
 
 > **来源**：用户问「为什么又出现这种问题」（AGENTS 脚注再现散文体·W984-W988 并行会话所写）——取证结论为门禁守的形全部健在（5 条/3.3KB/各 ≤300/阿拉伯头），进来的是「合形的散文」：「一行一事」只是维护契约散文条款无机器判据；用户裁决「都做」。

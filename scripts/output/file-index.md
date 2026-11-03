@@ -1,3 +1,55 @@
+## W1113 图表色工程档 3 铺开第一批（2026-11-03）
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/character-sentiment-arc.html | W1113 | 本批工具/产物 |
+| site/en/character-sentiment-arc.html | W1113 | 本批工具/产物 |
+| site/data/concept-device.html | W1113 | 本批工具/产物 |
+| site/en/concept-device.html | W1113 | 本批工具/产物 |
+| site/data/monster-victims-network.html | W1113 | 本批工具/产物 |
+| site/en/monster-victims-network.html | W1113 | 本批工具/产物 |
+| docs/agent/pitfalls.md | W1113 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md | W1113 | 本批工具/产物 |
+| scripts/output/_w1113_spec.json | W1113 | 本批工具/产物 |
+| scripts/output/_w1113_delta.json | W1113 | 本批工具/产物 |
+| STRUCTURE.md | W1113 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1113 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1113 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1113 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1113 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1113 | 本批工具/产物 |
+| scripts/output/stats.json | W1113 | 本批工具/产物 |
+| dataset/concept-device.json | W1113 | 本批工具/产物 |
+| dataset/monster-victims-network.json | W1113 | 本批工具/产物 |
+| docs/INDEX.md | W1113 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1113 | 本批工具/产物 |
+| scripts/output/README.md | W1113 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1113 | 本批工具/产物 |
+| site/data/search.html | W1113 | 本批工具/产物 |
+| site/en/search.html | W1113 | 本批工具/产物 |
+| .agent/skills/puti-shouye/SKILL.md | W1113 | 本批工具/产物 |
+| .github/workflows/README.md | W1113 | 本批工具/产物 |
+| AGENTS.md | W1113 | 本批工具/产物 |
+| CHANGELOG.md | W1113 | 本批工具/产物 |
+| CITATION.cff | W1113 | 本批工具/产物 |
+| HANDOVER.md | W1113 | 本批工具/产物 |
+| README.md | W1113 | 本批工具/产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1113 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1113 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1113 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1113 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1113.txt | W1113 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1113 | 本批工具/产物 |
+| scripts/output/file-index.md | W1113 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1113 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1113 | 本批工具/产物 |
+| site/dukou-engine.html | W1113 | 本批工具/产物 |
+| site/index.html | W1113 | 本批工具/产物 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1113 | 本批工具/产物 |
+| archive/docs/file-index-ARCHIVE.md | W1113 | 本批工具/产物 |
+| archive/scripts/batches/w1100/_w1100_layer3_pages.py | W1113 | 本批工具/产物 |
+| scripts/visual_regression_probe.py | W1113 | 本批工具/产物 |
+| tests/unit/test_w851_visual_regression_probe.py | W1113 | 本批工具/产物 |
+
 ## W1112 落段收官一键脚本（2026-11-03）
 | 文件 | W | 说明 |
 |---|---|---|
@@ -5335,26 +5387,4 @@
 | scripts/batch_cascade.py | W991 | --apply 全程持锁（finally 必释放） |
 | scripts/preflight_check.py | W991 | 活动锁 WARN 接线（共享面中态警示） |
 | scripts/safe_commit.py | W991 | 无 pathspec+有暂存即拒（守卫纯函数三态） |
-
-## W990 内联纪律收口批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/agent/pitfalls.md | W990 | 查坑表补报错原文 literal（truncated \xXX escape/unicodeescape/invalid escape sequence·撞错 grep 即中）+ 新增条目「并行会话在场的未提交工作树编辑会被吸收或覆盖」（git 节 21→22·总数 87→88）
-| AGENTS.md | W990 | 坑位数 87→88（阅读契约+主题视图·git 节 21→22·W990 校）+ 版本脚注条目
-| HANDOVER.md | W990 | 坑位数指针 87→88 两处 + 级联头尾链与里程碑块
-| docs/00-导读/W批次编号对账表.md | W990 | W990 认领行与收官回填
-| CHANGELOG.md | W990 | W990 段
-| README.md | W990 | 当前批次版本行
-| STRUCTURE.md | W990 | 当前批次版本行
-| docs/00-导读/项目说明.md | W990 | 当前批次版本行
-| .github/workflows/README.md | W990 | 工作流层版本面推进 W990
-| site/index.html | W990 | 页脚批次链插入 W990
-| site/data/cross-time-danmaku.html | W990 | 页脚批次链插入 W990
-| site/data/tag-cloud.html | W990 | 页脚批次链插入 W990
-| site/dukou-engine.html | W990 | 页脚批次链插入 W990
-| CITATION.cff | W990 | version 同步为 W990
-| scripts/output/file-index.md | W990 | W990 段插入
-| scripts/output/_w990_spec.json | W990 | 本批级联 spec
-| scripts/output/_cascade_files_W990.txt | W990 | 级联落盘清单
 

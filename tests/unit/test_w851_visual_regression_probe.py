@@ -121,7 +121,10 @@ def test_props_fixed_order():
     assert "stroke" in probe.PROPS
     assert "fill" in probe.PROPS
     assert "filter" in probe.PROPS
-    assert len(probe.PROPS) == 32
+    # W1113：再纳入 stop-color（SVG 渐变停止色·与 fill 是不同属性）⇒ 32 → 33
+    # 盲审 P0-1 实证：渐变 stop 令牌化后暗色态呈现变化而原属性集测不到
+    assert "stop-color" in probe.PROPS
+    assert len(probe.PROPS) == 33
 
 
 def test_floor_and_quiesce_constants():
