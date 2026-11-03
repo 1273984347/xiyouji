@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（181）
+## 文件（183）
 
 ### Markdown 文档
 
@@ -111,6 +111,7 @@
 - `check_data_copy_chain.py`
 - `check_db_schema.py`
 - `check_design_doc_drift.py`
+- `check_doc_numbers.py`
 - `check_doc_size_budget.py`
 - `check_doc_sync.py`
 - `check_dual_source_scan.py`
@@ -139,6 +140,7 @@
 - `check_pitfall_id_unique.py`
 - `check_plan_template.py`
 - `check_powershell_parse.py`
+- `check_registration_surface.py`
 - `check_repo_layout.py`
 - `check_review_trigger.py`
 - `check_script_coverage.py`
