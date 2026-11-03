@@ -55,6 +55,18 @@ BOARD_COUNT_SPEC = (
 BOARD_EXCLUDE = ("readme.md", "index.md")
 
 
+#: stats 键 → 板块中文名（供判据消息可读性；不改 BOARD_COUNT_SPEC 结构·避免影响既有消费方）
+BOARD_KEY_NAMES = {
+    "a2_docs": "06-个人随笔",
+    "a3_docs": "02-人物深度分析",
+    "a5_docs": "04-文化与历史背景",
+    "a6_docs": "05-诗词歌赋",
+    "learn_docs": "07-学以致用",
+    "cognition_docs": "08-提升认知",
+    "spirit_docs": "09-精神塑造",
+}
+
+
 def count_board_content(board_dir):
     """板块**顶层**内容 .md 篇数（排除 README.md / index.md·大小写不敏感）。
 
