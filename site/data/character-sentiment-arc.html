@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pCIz3A/iHDmSArowsexiPT7VjTI8nQQ8qCrUoW1SbdU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-YazwNAhzbo7KWy8VaTV6zsDILOQQ6XtKxN1CY4sLiVY=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物情感弧线可视化 · 详解西游记</title>
@@ -1590,10 +1590,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 [95,  0.25,  0.18, -0.05,  0.18,  0.45]  // 91-100: 灵山+五圣成真
             ],
             characters: [
-                { id: 'wukong', name: '孙悟空', color: '#c8463a' },
-                { id: 'tangseng', name: '唐僧', color: '#3a6b8c' },
+                { id: 'wukong', name: '孙悟空', color: 'var(--chart-1)' },
+                { id: 'tangseng', name: '唐僧', color: 'var(--chart-2)' },
                 { id: 'bajie', name: '猪八戒', color: '#C9A063' },
-                { id: 'shaseng', name: '沙僧', color: '#6B8E5A' },
+                { id: 'shaseng', name: '沙僧', color: 'var(--chart-4)' },
                 { id: 'guanyin', name: '观音', color: '#8c6a8c' }
             ],
             // 6 个关键转折点（孙悟空）
@@ -1792,9 +1792,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr('stroke', '#999').attr('stroke-dasharray', '4,4').attr('opacity', 0.6);
 
             const pairs = [
-                { idx: 1, name: '唐僧-孙悟空（主轴·88）', color: '#c8463a' },
+                { idx: 1, name: '唐僧-孙悟空（主轴·88）', color: 'var(--chart-1)' },
                 { idx: 2, name: '孙悟空-猪八戒（讥讽·82）', color: '#C9A063' },
-                { idx: 3, name: '唐僧-沙僧（稳定·77）', color: '#6B8E5A' }
+                { idx: 3, name: '唐僧-沙僧（稳定·77）', color: 'var(--chart-4)' }
             ];
             pairs.forEach(p => {
                 const line = d3.line().x(d => x(d[0])).y(d => y(d[p.idx])).curve(d3.curveMonotoneX);
@@ -1938,10 +1938,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             // Polygons per character
             const radarChars = [
-                { id: 'wukong', name: '孙悟空', color: '#c8463a' },
-                { id: 'tangseng', name: '唐僧', color: '#3a6b8c' },
+                { id: 'wukong', name: '孙悟空', color: 'var(--chart-1)' },
+                { id: 'tangseng', name: '唐僧', color: 'var(--chart-2)' },
                 { id: 'bajie', name: '猪八戒', color: '#C9A063' },
-                { id: 'shaseng', name: '沙僧', color: '#6B8E5A' }
+                { id: 'shaseng', name: '沙僧', color: 'var(--chart-4)' }
             ];
             radarChars.forEach(c => {
                 const values = EMBEDDED.radar.values[c.id];

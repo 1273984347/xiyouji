@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-3fXidNk9WX3y9Y3F7VnU4AE3i6dvLQlz3Rg2DyFtYhY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qzI1eR3kxmyEWAZKscdZkuebxOkxJtaNogsNwEWgCOc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪受害者关系图谱 · 详解西游记</title>
@@ -1549,7 +1549,7 @@ const EMBEDDED_DATA = {
     {
       name: "金角银角", type: "身份创伤", chapter: "第32-35回",
       perpetrator: "太上老君（借）", bystander: "观音", rescuer: "—",
-      fate: "被老君回收", color: "#c8463a", key: "jin",
+      fate: "被老君回收", color: "var(--chart-1)", key: "jin",
       tag: "被借来的苦难·童子下凡",
       wound: "画影图形备战的考官道具，化为水后被老君收回魂魄",
       desc: "观音向太上老君借三次，托化妖魔测试取经团队决心。借来的苦难，被借走的人。"
@@ -1565,7 +1565,7 @@ const EMBEDDED_DATA = {
     {
       name: "金圣宫娘娘", type: "性别创伤", chapter: "第70-71回",
       perpetrator: "赛太岁", bystander: "朱紫国王", rescuer: "紫阳真人",
-      fate: "穿棕衣回国", color: "#3a6b8c", key: "gong",
+      fate: "穿棕衣回国", color: "var(--chart-2)", key: "gong",
       tag: "穿棕衣的人·性别受害者",
       wound: "棕衣三年·触觉失忆·三丈距离的内化",
       desc: "紫阳真人赠棕衣保护贞洁，也剥夺她允许的权利。三年里不能摸自己的脸。倒刺掉了，触觉神经还没醒。"
@@ -1793,16 +1793,16 @@ function renderForce(networkData, victims) {
   // 类型颜色
   const typeColors = {
     victim: '#23201A',
-    perpetrator: '#c8463a',
+    perpetrator: 'var(--chart-1)',
     bystander: '#8a7a6a',
-    rescuer: '#3a6b8c',
+    rescuer: 'var(--chart-2)',
     chapter: '#d4c4a8'
   };
   // 关系边颜色
   const kindColors = {
-    perpetrate: '#c8463a',
+    perpetrate: 'var(--chart-1)',
     bystander: '#8a7a6a',
-    rescue: '#3a6b8c',
+    rescue: 'var(--chart-2)',
     chapter: '#d4c4a8'
   };
 
@@ -1948,9 +1948,9 @@ const link = svg.append('g').selectAll('line')
   legend.html('');
   const legendItems = [
     { label: '受害者（中心）', color: '#23201A' },
-    { label: '施害者', color: '#c8463a' },
+    { label: '施害者', color: 'var(--chart-1)' },
     { label: '旁观者', color: '#8a7a6a' },
-    { label: '救援者', color: '#3a6b8c' },
+    { label: '救援者', color: 'var(--chart-2)' },
     { label: '回目', color: '#d4c4a8' }
   ];
   legendItems.forEach(item => {
@@ -1983,7 +1983,7 @@ function renderSankey(sankeyData, victims) {
 
   const margin = { top: 20, right: 20, bottom: 20, left: 20 };
   // 颜色：按 cat 分层（0创伤类型/1受害者/2施害者/3旁观者）
-  const catColors = ['#8b7355', '#c8463a', '#3a6b8c', '#8a7a6a'];
+  const catColors = ['#8b7355', 'var(--chart-1)', 'var(--chart-2)', '#8a7a6a'];
   const victimColors = {};
   victims.forEach(v => { victimColors[v.name] = v.color; });
 
@@ -2257,8 +2257,8 @@ function renderTimeline(timelineData, victims) {
 
   // 阶段颜色
   const stageColors = {
-    trauma: '#c8463a',
-    rescue: '#3a6b8c',
+    trauma: 'var(--chart-1)',
+    rescue: 'var(--chart-2)',
     recycle: '#8b7355'
   };
 
