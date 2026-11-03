@@ -1,3 +1,33 @@
+## W1115 图表色工程批收官订正批（2026-11-03）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1115 | 本批工具/产物 |
+| CITATION.cff | W1115 | 本批工具/产物 |
+| CHANGELOG.md | W1115 | 本批工具/产物 |
+| HANDOVER.md | W1115 | 本批工具/产物 |
+| README.md | W1115 | 本批工具/产物 |
+| STRUCTURE.md | W1115 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1115 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1115 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1115 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1115 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1115 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1115 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md | W1115 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T66-任务计划执行与经验沉淀报告-2026-11-03.md | W1115 | 本批工具/产物 |
+| docs/INDEX.md | W1115 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1115 | 本批工具/产物 |
+| scripts/output/README.md | W1115 | 本批工具/产物 |
+| scripts/output/_w1115_spec.json | W1115 | 本批工具/产物 |
+| scripts/output/file-index.md | W1115 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1115 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1115 | 本批工具/产物 |
+| scripts/output/stats.json | W1115 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1115 | 本批工具/产物 |
+| site/data/search.html | W1115 | 本批工具/产物 |
+| site/en/search.html | W1115 | 本批工具/产物 |
+
 ## W1114 落段收官链加版本面幂等推进步（2026-11-03）
 
 | 文件 | W | 说明 |
@@ -5419,11 +5449,4 @@
 | .git-blame-ignore-revs | W993 | 登记定形提交 84cce358 |
 | docs/agent/pitfalls.md | W993 | 行尾定形时代结束条目（CRLF 锚定作废） |
 | AGENTS.md | W993 | 坑位计数 88→89 两处同步 |
-
-## W992 一次性件定向退役与提示位口径校准批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| archive/scripts/batches/w9xx/ | W992 | 迁入 4 件（_w988 族·零引用） |
-| scripts/batch_cascade.py | W992 | [SCRIPTS] 提示位口径校准 |
 
