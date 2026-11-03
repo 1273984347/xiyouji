@@ -40,6 +40,7 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
+import json
 import os
 import re
 import subprocess
@@ -93,6 +94,52 @@ def meta_hashes(html):
     return [t.strip("'\"") for t in re.findall(r"'sha256-[^']+'", m.group(1))]
 
 
+def spec_changed_pages():
+    """**本批应动面**（来自 spec 的 file_index_rows）——CI 浅克隆下 git 基点不可得时的权威来源。
+
+    **W1110 收官笔修（阻断 #1 二次·CI 实测）**：CI 的 `actions/checkout` 默认 `fetch-depth: 1`
+    ⇒ `git merge-base origin/main HEAD` **无输出** ⇒ 且 `origin/main` 引用**也不存在**
+    ⇒ 基点三级回退全落空 ⇒ 回退 `HEAD` ⇒ `git diff HEAD` 在干净检出为空 ⇒ 「改动页 0 个」
+    ⇒ **该槽在 CI 上对任何页都不判**（静默失效·本次 CI 实测确认）。
+    ⇒ 正解：**改动面不从 git 取，而从仓内 spec 取**——`scripts/output/_w<批号>_spec.json`
+    的 `file_index_rows` 就是「本批应动全集」（第 51 槽同源机制）⇒ **仓内件 ⇒ CI 浅克隆也可用**。
+    归属批号取法复用第 51 槽：索引态 CHANGELOG 顶段 W 号（≠ HEAD 顶段时用索引）·否则 HEAD 顶段。
+    """
+    def _top(text):
+        # **复用第 51 槽的顶段口径**（`^### W<号>`）——不另立一套正则（两套口径必分叉）。
+        m = re.search(r"(?m)^### W(\d{3,4})", text or "")
+        return int(m.group(1)) if m else None
+
+    def _show(rev, path):
+        r = subprocess.run(["git", "-C", ROOT, "show", rev + ":" + path],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
+        return r.stdout if r.returncode == 0 else ""
+
+    idx_text = _show(":", "CHANGELOG.md")
+    head_text = _show("HEAD", "CHANGELOG.md")
+    iw, hw = _top(idx_text), _top(head_text)
+    w = iw if (iw is not None and iw != hw) else hw
+    if w is None:
+        return [], "无法确定归属批号（CHANGELOG 顶段读不到）"
+    sp = os.path.join(ROOT, "scripts", "output", "_w%d_spec.json" % w)
+    if not os.path.exists(sp):
+        return [], "W%d 无 spec（%s）" % (w, os.path.relpath(sp, ROOT).replace(chr(92), "/"))
+    try:
+        with open(sp, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError) as exc:
+        return [], "spec 不可读：%s" % exc
+    pages = []
+    for row in data.get("file_index_rows") or []:
+        cells = row.split("|")
+        if len(cells) < 2:
+            continue
+        q = cells[1].strip().replace(chr(92), "/")
+        if q.endswith(".html") and q.startswith("site/"):
+            pages.append(q)
+    return sorted(set(pages)), "spec W%d 的应动面（%d 个 site 页）" % (w, len(set(pages)))
+
+
 def resolve_base():
     """返回 (基点 ref, 说明)。优先 merge-base（开叉点），不可得回退 origin/main。
 
@@ -138,6 +185,10 @@ def changed_pages(base):
         return acc
 
     out |= _collect(base)
+    # **W1110 收官笔修（阻断 #1 二次）**：git 基点在 CI 浅克隆下不可得 ⇒ 改动页为空
+    # ⇒ 叠加「spec 应动面」（仓内件 ⇒ 任何检出深度都可用）
+    spec_pages, _why = spec_changed_pages()
+    out |= set(spec_pages)
     # 兜底：基点是 HEAD（提交后/干净检出）且无改动页 ⇒ 相对 origin/main 再取一次
     if not out and base == _git("rev-parse", "HEAD").strip():
         om = _git("rev-parse", "origin/main").strip()
