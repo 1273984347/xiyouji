@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dm4R0tyzgLgj0RU27pPB6GyMhPoHFPDe9RPjxIa1EVw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-v4OjTwl3sCNGM2Ad99ItO8zKP1kaIo4uFwUKS9nsLmo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Concept Devices · Annotated Journey to the West</title>
@@ -2220,13 +2220,13 @@ const EMBEDDED_DATA = {
     },
     mobius: {
         front: [
-            { name: "Li Zhi", era: "Ming · 1590s", side: "Literariness", color: "#3a6b8c",
+            { name: "Li Zhi", era: "Ming · 1590s", side: "Literariness", color: "var(--chart-2)",
               thesis: "Read Journey to the West through the ‘theory of the childlike heart,’ praising its playful spirit and criticizing its stale passages, opening the Ming tradition of commentary — reading is a dialogue with the ancients: applaud what is wonderful, revile what is rotten." },
-            { name: "Lu Xun", era: "Republican Era · 1923", side: "Literariness", color: "#3a6b8c",
+            { name: "Lu Xun", era: "Republican Era · 1923", side: "Literariness", color: "var(--chart-2)",
               thesis: "Defined it as a ‘gods-and-demons novel’ — ‘gods and demons all have human feelings, spirits and monsters all understand the ways of the world’ — rescuing Journey to the West from far-fetched alchemical riddles back to its true literary nature." },
-            { name: "Hu Shi", era: "Republican Era · 1923", side: "Literariness", color: "#3a6b8c",
+            { name: "Hu Shi", era: "Republican Era · 1923", side: "Literariness", color: "var(--chart-2)",
               thesis: "A Textual Study of Journey to the West used positivist scholarship to establish Wu Cheng’en as the author and reset the paradigm of the field — treat the text as a novel first, then discuss the rest." },
-            { name: "Contemporary Narratology", era: "21st century", side: "Literariness", color: "#3a6b8c",
+            { name: "Contemporary Narratology", era: "21st century", side: "Literariness", color: "var(--chart-2)",
               thesis: "Using Genette’s narratology to analyze the shifts of omniscient perspective, the transfer of focalization, and the juxtaposition of multiple narrative voices — Journey to the West is a precocious metafiction." }
         ],
         back: [
@@ -2254,12 +2254,12 @@ const EMBEDDED_DATA = {
         source_text: "The monkey, living in the mountain, could walk, run, and leap; he ate grass and trees, drank from streams and springs, gathered mountain flowers, and sought tree fruits. He kept company with wolves and insects, flocked with tigers and leopards, befriended deer and roe, and was kin to gibbons and apes. At night he lodged beneath stone cliffs; by day he roamed among peaks and caves. Truly: in the mountains there is no calendar, and when the cold is gone one does not know the year.",
         source_meta: "Journey to the West, Chapter One · The Divine Root Conceives and the Source Springs Forth · The Mind’s Nature Is Cultivated and the Great Way Is Born",
         bullets: [
-            { text: "Brilliant!", color: "#c8463a", top: 8,  duration: 9,  delay: 0 },
+            { text: "Brilliant!", color: "var(--chart-1)", top: 8,  duration: 9,  delay: 0 },
             { text: "Utterly stale", color: "#8a8278", top: 30, duration: 11, delay: 1.5 },
             { text: "Loathsome", color: "#5a5048", top: 52, duration: 10, delay: 3 },
             { text: "What a fine old fellow", color: "#c9a14a", top: 18, duration: 12, delay: 4.5 },
             { text: "The spirit of play", color: "#8c5aa8", top: 40, duration: 10, delay: 6 },
-            { text: "Brilliant! Brilliant! Brilliant!", color: "#c8463a", top: 62, duration: 9,  delay: 7.5 }
+            { text: "Brilliant! Brilliant! Brilliant!", color: "var(--chart-1)", top: 62, duration: 9,  delay: 7.5 }
         ]
     },
     detective: {
@@ -2513,8 +2513,8 @@ function renderMobius() {
     const defs = svg.append("defs");
     const grad = defs.append("linearGradient").attr("id","mobiusGrad")
         .attr("x1","0%").attr("y1","0%").attr("x2","0%").attr("y2","100%");
-    grad.append("stop").attr("offset","0%").attr("stop-color","#3a6b8c").attr("stop-opacity",0.55);
-    grad.append("stop").attr("offset","50%").attr("stop-color","#e9b885").attr("stop-opacity",0.6);
+    grad.append("stop").attr("offset","0%").attr("stop-color","var(--chart-2)").attr("stop-opacity",0.55);
+    grad.append("stop").attr("offset","50%").attr("stop-color","var(--accent-soft)").attr("stop-opacity",0.6);
     grad.append("stop").attr("offset","100%").attr("stop-color","#C9A063").attr("stop-opacity",0.55);
 
     // 莫比乌斯环带：figure-8 带扭转

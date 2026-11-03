@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-PHY5K5/ZrHc/P+9iVx7WTQmnURObFN85FsmkT7gkQtM=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-aHGgx+7MVsiDQx5eMPDXvsya8bsdtpjgPpwL7CpltO4=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster-Victim Network · Annotated Journey to the West</title>
@@ -1530,7 +1530,7 @@ const EMBEDDED_DATA = {
     {
       name: "Gold & Silver Horn Kings", type: "Identity Trauma", chapter: "Ch. 32-35",
       perpetrator: "Taishang Laojun (lender)", bystander: "Guanyin", rescuer: "—",
-      fate: "Recycled by Laojun", color: "#c8463a", key: "jin",
+      fate: "Recycled by Laojun", color: "var(--chart-1)", key: "jin",
       tag: "Borrowed Suffering · Boys Descend to Earth",
       wound: "Examiner props preparing with portrait posters; after turning to water, their souls were reclaimed by Laojun",
       desc: "Guanyin borrowed them from Taishang Laojun three times, transforming them into demons to test the pilgrimage team's resolve. Borrowed suffering, borrowed people."
@@ -1546,7 +1546,7 @@ const EMBEDDED_DATA = {
     {
       name: "Golden Sage Lady", type: "Gender Trauma", chapter: "Ch. 70-71",
       perpetrator: "Sai Taisui", bystander: "King of Zhuzi", rescuer: "Immortal Ziyang",
-      fate: "Returned home wearing the brown robe", color: "#3a6b8c", key: "gong",
+      fate: "Returned home wearing the brown robe", color: "var(--chart-2)", key: "gong",
       tag: "The One in the Brown Robe · Gender Victim",
       wound: "Three years in the brown robe · Tactile amnesia · Internalizing a three-zhang distance",
       desc: "Immortal Ziyang gifted her the brown robe to protect her chastity, yet it also stripped away her right to consent. For three years she could not touch her own face. The barbs fell away, but the tactile nerves had not yet awakened."
@@ -1774,16 +1774,16 @@ function renderForce(networkData, victims) {
   // 类型颜色
   const typeColors = {
     victim: '#23201A',
-    perpetrator: '#c8463a',
+    perpetrator: 'var(--chart-1)',
     bystander: '#8a7a6a',
-    rescuer: '#3a6b8c',
+    rescuer: 'var(--chart-2)',
     chapter: '#d4c4a8'
   };
   // 关系边颜色
   const kindColors = {
-    perpetrate: '#c8463a',
+    perpetrate: 'var(--chart-1)',
     bystander: '#8a7a6a',
-    rescue: '#3a6b8c',
+    rescue: 'var(--chart-2)',
     chapter: '#d4c4a8'
   };
 
@@ -1928,9 +1928,9 @@ const link = svg.append('g').selectAll('line')
   legend.html('');
   const legendItems = [
     { label: 'Victim (center)', color: '#23201A' },
-    { label: 'Perpetrator', color: '#c8463a' },
+    { label: 'Perpetrator', color: 'var(--chart-1)' },
     { label: 'Bystander', color: '#8a7a6a' },
-    { label: 'Rescuer', color: '#3a6b8c' },
+    { label: 'Rescuer', color: 'var(--chart-2)' },
     { label: 'Chapter', color: '#d4c4a8' }
   ];
   legendItems.forEach(item => {
@@ -1963,7 +1963,7 @@ function renderSankey(sankeyData, victims) {
 
   const margin = { top: 20, right: 20, bottom: 20, left: 20 };
   // 颜色：按 cat 分层（0创伤类型/1受害者/2施害者/3旁观者）
-  const catColors = ['#8b7355', '#c8463a', '#3a6b8c', '#8a7a6a'];
+  const catColors = ['#8b7355', 'var(--chart-1)', 'var(--chart-2)', '#8a7a6a'];
   const victimColors = {};
   victims.forEach(v => { victimColors[v.name] = v.color; });
 
@@ -2237,8 +2237,8 @@ function renderTimeline(timelineData, victims) {
 
   // 阶段颜色
   const stageColors = {
-    trauma: '#c8463a',
-    rescue: '#3a6b8c',
+    trauma: 'var(--chart-1)',
+    rescue: 'var(--chart-2)',
     recycle: '#8b7355'
   };
 
