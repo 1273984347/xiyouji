@@ -10,6 +10,11 @@
   ③ 条目本体口径：行首「- **」且含「（W#### 实证·E-NN）」 ⇒ 正文里**引用**别的编号不算本体。
 
 用法：python scripts/check_pitfall_id_unique.py [--base HEAD] [--self-test]
+
+挂载（W1110）：作为**第 54 槽**接入 `scripts/verify_delivery.py`（`_STRICTGate`·crash 即拦 +
+汇总行防静默跳过）—— 本判据自 W1106 建置后一直是「工具就绪但未接线」，W1107 批已把它
+登记为「下一批接线」事项，本批兑现。门禁调用时以 `--base` 指向**本批开叉点**
+（`git merge-base origin/main HEAD`），使「新增条目」= 本批引入的条目，而非工作树任意改动。
 """
 
 import os
@@ -88,7 +93,7 @@ def main():
     if "--self-test" in sys.argv:
         return _self_test()
     new_dups, stock, added = audit(base)
-    print("坑表编号唯一性判据：新增条目 %d 条" % len(added))
+    print("坑表编号唯一性判据：基点 %s·新增条目 %d 条" % (base, len(added)))
     if new_dups:
         for eid, w, others in new_dups:
             print(

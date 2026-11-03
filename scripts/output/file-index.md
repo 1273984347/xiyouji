@@ -1,3 +1,43 @@
+## W1110 图表色工程档 3 施工前置批（2026-11-03）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W1110 | 本批工具/产物 |
+| scripts/check_powershell_parse.py | W1110 | 本批工具/产物 |
+| scripts/check_csp_drift.py | W1110 | 本批工具/产物 |
+| scripts/check_css_var_selfref.py | W1110 | 本批工具/产物 |
+| scripts/check_pitfall_id_unique.py | W1110 | 本批工具/产物 |
+| scripts/doc_areas.py | W1110 | 本批工具/产物 |
+| scripts/check_doc_sync.py | W1110 | 本批工具/产物 |
+| scripts/agent_start.py | W1110 | 本批工具/产物 |
+| site/data/chart-design.html | W1110 | 本批工具/产物 |
+| site/en/chart-design.html | W1110 | 本批工具/产物 |
+| scripts/guardrails/check_changed.ps1 | W1110 | 本批工具/产物 |
+| scripts/install_hooks.ps1 | W1110 | 本批工具/产物 |
+| xiyouji-agent-web/cleanup.ps1 | W1110 | 本批工具/产物 |
+| docs/agent/gates.md | W1110 | 本批工具/产物 |
+| docs/agent/pitfalls.md | W1110 | 本批工具/产物 |
+| AGENTS.md | W1110 | 本批工具/产物 |
+| HANDOVER.md | W1110 | 本批工具/产物 |
+| .agent/skills/puti-shouye/SKILL.md | W1110 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1110 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1110 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T62-任务计划执行与经验沉淀报告-2026-11-03.md | W1110 | 本批工具/产物 |
+| scripts/output/_w1110_spec.json | W1110 | 本批工具/产物 |
+| scripts/output/_w1110_w1108_delta.json | W1110 | 本批工具/产物 |
+| scripts/output/stats.json | W1110 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1110 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1110 | 本批工具/产物 |
+| scripts/output/file-index.md | W1110 | 本批工具/产物 |
+| CHANGELOG.md | W1110 | 本批工具/产物 |
+| README.md | W1110 | 本批工具/产物 |
+| README.en.md | W1110 | 本批工具/产物 |
+| STRUCTURE.md | W1110 | 本批工具/产物 |
+| CITATION.cff | W1110 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1110 | 本批工具/产物 |
+| .github/workflows/README.md | W1110 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1110.txt | W1110 | 本批工具/产物 |
+
 ## W1109 坑表编号重号收敛（2026-11-03）
 
 | 文件 | W | 说明 |
@@ -5279,158 +5319,4 @@
 | scripts/check_doc_size_budget.py · scripts/batch_cascade.py | W989 | C4 300→120 双写点收紧 |
 | AGENTS.md | W989 | 五条脚注重写为索引体（55-65 字）·头注 ≤120 |
 | scripts/archive_ledger_rows.py | W989 | 台账回窗 61→59 |
-
-## W988 水墨卡族投放批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/reader/ch004.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/ch007.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/ch010.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/ch014.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/ch015.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/ch019.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/ch023.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/ch027.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/ch030.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/ch031.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/culture/历史玄奘与小说玄奘专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/culture/明代科举制度对照专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/culture/西游与佛教禅宗专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/essays/西游与服饰学.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/essays/西游与民俗学.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/九灵元圣-方向二深化.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/二郎神.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/取经团队动力学深化专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/哪吒.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/地府体系深化专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/大鹏金翅雕.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/太上老君.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/奎木狼外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/女儿国国王.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/如来.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/嫦娥外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/孙悟空.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/托塔李天王外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/昴日星官.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/沙僧-方向二深化.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/沙僧.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/沙僧外传.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/火焰山土地外传.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/灵感大王.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/灵感大王外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/牛魔王.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/独角兕大王.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/狮驼岭三魔-方向二深化.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/猪八戒-方向二深化.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/猪八戒.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/猪八戒深化专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/玉兔精.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/玉帝.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/白骨精.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/白骨精外传.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/白鹿精-方向二深化.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/白龙马.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/百眼魔君.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/紧箍儿的内侧-器物传记.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/红孩儿.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/罗刹女外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/老鼋外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/老鼠精.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/蜘蛛精.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/people/蝎子精.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/观音.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/赛太岁.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/车迟国三国师外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/金角大王.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/金角银角深化专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/铁扇公主.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/银角大王.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/镇元大仙.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/黄眉老佛外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/黄袍怪.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/黄风怪外传.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/people/黑熊精.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/poetry/原著景物诗分类赏析专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/poetry/原著景物诗赏析专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/poetry/西游诗词意象谱系专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/二十八星宿专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/五方揭谛专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/佛学AI西游三维语义映射表.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/六丁六甲专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/兵器的自我修养专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/取经团队-凭什么走到西天.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/取经密码学专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/取经教育学专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/取经路径地理符号学专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/取经路线地理专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/唐僧-凡躯圣心.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/器物传记学专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/四值功曹专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/大闹天宫-英雄还是悲剧.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/小妖生命史专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/招安的两种结局专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/无字真经专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/水帘洞-瀑布门的世界.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/水帘洞专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/沙僧-沉默者的智慧.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/法宝系统专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/混世四猴专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/猪八戒-不愿承认的自己.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/猴王到行者-五次蜕变.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/真假美猴王专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/神学干预机制专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/空间叙事学专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
-| site/reader/themes/筋斗云专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/紧箍咒专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/蟠桃园-体制内的秘密.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/西游与死亡研究专题.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html | W988 | og:image 换专属 1200×630 裁切版 |
-| docs/11-方案报告/计划方案/T34-任务计划执行与经验沉淀报告-2026-10-27.md | W988 | 终稿报告件（计划 + 执行合一·含 27 张落位表） |
-| docs/11-方案报告/README.md | W988 | §六 计划方案补登记 3 行（序号 41/42/43·T-18 / T-21 / T-34）· 件数 43 → 44 |
-| docs/agent/pitfalls.md | W988 | 坑表 +7 条（80 → 87：行尾二次替换 / 设备像素当 CSS 像素 / 主体检测排除朱砂赭金 / 关键词法双重失效 / 主体顶裁前提 / 判据自身缺陷） |
-| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W988 | 新增 §2.9「既有资产投放：落位表先行 + 三族资产三套类名 + 派生裁切的主体检测」 |
-| docs/00-导读/W批次编号对账表.md | W988 | W988 认领行 + 收官状态 |
-| AGENTS.md | W988 | 坑位条数声明 80 → 87 |
-| HANDOVER.md | W988 | 坑位条数指针 80 → 87 |
-| CHANGELOG.md | W988 | W988 段 |
-| README.md | W988 | 当前批次版本行 |
-| STRUCTURE.md | W988 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W988 | 当前批次版本行 |
-| .github/workflows/README.md | W988 | 工作流层版本面推进 W988 |
-| site/index.html | W988 | 页脚批次链插入 W988 |
-| site/data/cross-time-danmaku.html | W988 | 页脚批次链插入 W988 |
-| site/data/tag-cloud.html | W988 | 页脚批次链插入 W988 |
-| site/dukou-engine.html | W988 | 页脚批次链插入 W988 |
-| archive/docs/AGENTS-ARCHIVE.md | W988 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W988 | version 同步为 W988 |
-| scripts/output/file-index.md | W988 | W988 段插入 |
-| scripts/check_seo_head.py | W988 | og:image 白名单改**目录派生式**（W988 依用户指令「分回次 og:image」授权改管控件·W922 先例） |
-| scripts/_w988_plan.py | W988 | 本批工具/产物 |
-| scripts/_w988_subject.py | W988 | 本批工具/产物 |
-| scripts/_w988_inventory.py | W988 | 本批工具/产物 |
-| scripts/_w988_match.py | W988 | 本批工具/产物 |
-| scripts/_w988_precheck.py | W988 | 本批工具/产物 |
-| scripts/_w988_make_assets.py | W988 | 本批工具/产物 |
-| scripts/_w988_insert.py | W988 | 本批工具/产物 |
-| scripts/_w988_fix_eol.py | W988 | 本批工具/产物 |
-| scripts/_w988_verify.py | W988 | 本批工具/产物 |
-| scripts/_w988_sheet.py | W988 | 本批工具/产物 |
-| scripts/_w988_card_sheet.py | W988 | 本批工具/产物 |
-| scripts/_w988_pitfalls.py | W988 | 本批工具/产物 |
-| scripts/_w988_docs.py | W988 | 本批工具/产物 |
-| scripts/_w988_make_spec.py | W988 | 本批工具/产物 |
-| scripts/_w988_fix_cascade.py | W988 | 本批工具/产物 |
-| scripts/_w988_fix_gates.py | W988 | 本批工具/产物 |
-| scripts/check_seo_head.py | W988 | 本批工具/产物 |
-| scripts/output/_w988_spec.json | W988 | 本批工具/产物 |
-| scripts/output/_w988_precheck.json | W988 | 本批工具/产物 |
-| scripts/output/_w988_assets.json | W988 | 本批工具/产物 |
-| scripts/output/_w988_inventory.json | W988 | 本批工具/产物 |
-| scripts/output/_w988_match.json | W988 | 本批工具/产物 |
-| scripts/output/_w988_card_map.json | W988 | 本批工具/产物 |
-| scripts/output/_w988_card_sheet.png | W988 | 本批工具/产物 |
-| scripts/output/_w988_sheet-banner.png | W988 | 本批工具/产物 |
-| scripts/output/_w988_sheet-og.png | W988 | 本批工具/产物 |
-| scripts/output/_cascade_files_W988.txt | W988 | 本批工具/产物 |
 
