@@ -15,6 +15,8 @@
 
 ⑤ **共享面连带同步**：改 STEPS 破坏并行会话 W1114 的顺序锁单测（断言 versions 与 csp 紧邻）⇒ 已同步该断言（放宽为 versions 在 stats 之后 · csp 之前 + 加两闸位置断言·比原断言更强）· 全量 pytest 复跑 0 failed。
 
+⑤b **跨批留痕（改的是哪一批的哪个断言 · 放宽理由 · 新的更强表述原文）**：本批改动了 **W1114 批落盘的 `tests/unit/test_w1114_version_surface.py::test_closeout_steps_put_versions_between_stats_and_csp`**（原断言「versions 紧邻 csp」）。**放宽理由**：本批两道闸必须读**版本面推进后的最终产物面**（versions 之后才成立）⇒ 原断言在新链序下必然不成立，故把「紧邻」放宽为「versions 在 stats 之后 · csp 之前」。**新的更强表述原文**：`assert order.index('versions') == order.index('stats') + 1` · `assert order.index('versions') < order.index('csp')` · `assert order[-2:] == ['csp', 'cspcheck']` · `assert 'docnums' in order and 'regsurface' in order` · `assert order.index('versions') < order.index('docnums') < order.index('csp')` ⇒ 替代表述**多断言了两闸的相对位置**（比原断言更强）。**对方 W1114 批已书面确认接受该放宽**（回执七十八），其 W1117 批报告将引用本表述以免两批文档各说一套。
+
 **验证**：门禁 62 段 0 FAIL · 单测 1217 passed / 4 skipped / 0 failed（新增 17 例含 10 个负样本）· ruff 双档全绿 · CSP 856 页 / 909 内联哈希 / 0 漂移 · 台账正本 58 数据行（窗口 60）· 坑表 242 条不变（不占 E-NN）· 本批自身过自己的两道闸。
 
 ### W1115（2026-11-03）：图表色工程批收官订正批（承接独立盲审 F1~F8 · 纯文档 · 零页面内容改动）
