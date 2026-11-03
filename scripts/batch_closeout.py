@@ -14,7 +14,6 @@
 退出码：0 全链完成且末位自检通过；1 失败（打印失败步骤与修复建议）。
 """
 import argparse
-import io
 import os
 import subprocess
 import sys
@@ -62,11 +61,11 @@ def precheck_ledger(ledger_path, window=60):
     msgs = []
     if not os.path.isfile(ledger_path):
         return False, ['台账不存在：' + ledger_path]
-    text = io.open(ledger_path, encoding='utf-8').read()
+    text = open(ledger_path, encoding='utf-8').read()
     dups = ledger_duplicate_rows(text)
     if dups:
         msgs.append('台账正本同号多行（回窗工具会中止）：' + '、'.join(dups))
-    rows = sum(1 for l in text.split('\n') if l.startswith('| W'))
+    rows = sum(1 for line in text.split('\n') if line.startswith('| W'))
     if rows > window:
         msgs.append('台账正本 %d 行超过窗口 %d => 须先 archive_ledger_rows.py --apply 腾窗' % (rows, window))
     return (not msgs), msgs
@@ -89,7 +88,11 @@ def refresh_until_stable(max_rounds=3):
 
 
 def snapshot_index():
-    """取索引快照（git 索引里的文件清单 + 工作树文件清单）。"""
+    """取索引快照：**仅 Git 索引**（git ls-files）·**不含未跟踪件**。
+
+    ⇒ 未跟踪文件不在快照内 ⇒ 收敛判定对未跟踪件不敏感；故 add 步必须先执行
+    （生成器按索引收集，未 add 的新件不会被纳入刷新范围）。
+    """
     rc, out = run(['git', '-c', 'core.quotepath=false', 'ls-files'])
     files = sorted(out.splitlines())
     return files
@@ -103,7 +106,9 @@ def selfref_precheck():
     """
     script = os.path.join(ROOT, 'scripts', 'check_css_var_selfref.py')
     if not os.path.isfile(script):
-        return True, ['未找到 scripts/check_css_var_selfref.py => 跳过自引用体检']
+        # fail-closed（W1112 收官笔·独立盲审 M3）：判据缺失 = 该步**静默失效**，
+        # 收官链照样绿 ⇒ 判据被删/改名时无任何红灯。⇒ 缺失即中止。
+        return False, ['未找到 scripts/check_css_var_selfref.py => 判据缺失，收官链中止（fail-closed·不得静默跳过）']
     rc, out = run([sys.executable, script, '--gate'])
     if rc == 0:
         return True, ['CSS 变量自引用体检：通过']
@@ -115,7 +120,7 @@ def collect_paths(spec_path, extra):
     paths = []
     if spec_path and os.path.isfile(spec_path):
         import json
-        sp = json.loads(io.open(spec_path, encoding='utf-8').read())
+        sp = json.loads(open(spec_path, encoding='utf-8').read())
         for row in sp.get('file_index_rows', []):
             p = row.strip().strip('|').split('|')[0].strip()
             if p:
@@ -124,6 +129,59 @@ def collect_paths(spec_path, extra):
         if p not in paths:
             paths.append(p)
     return paths
+
+
+def _add_paths(paths):
+    """add 步：按显式 pathspec 暂存（禁 git add -A·防代提他方在途件）。"""
+    if paths:
+        run(['git', 'add', '--'] + paths)
+        print('[add] 已 add %d 件' % len(paths))
+    else:
+        print('[add] 无待 add 路径（spec.file_index_rows 为空？请用 --paths 显式指定）')
+
+
+def _run_index():
+    """index 步：搜索索引 + 文档索引。"""
+    for cmd in ('_gen_search_index.py', 'docs_index.py'):
+        rc, out = run([sys.executable, 'scripts/' + cmd])
+        print('[index] %s -> %s' % (cmd, 'OK' if rc == 0 else 'FAIL'))
+        if rc != 0:
+            print(out.strip()[-400:])
+            return False
+    return True
+
+
+def _run_stats(batch):
+    """stats 步：实体化计数（缺批号则跳过）。"""
+    if not batch:
+        return True
+    rc, out = run([sys.executable, 'scripts/stats.py', '--w', batch])
+    print('[stats] --w %s -> %s' % (batch, 'OK' if rc == 0 else 'FAIL'))
+    if rc != 0:
+        print(out.strip()[-400:])
+        return False
+    return True
+
+
+def _run_csp():
+    """csp 步：重算内联脚本哈希（恒在末位·前面步骤会改内联脚本）。"""
+    rc, out = run([sys.executable, 'scripts/generate_csp.py'])
+    print('[csp] 重算 -> %s' % ('OK' if rc == 0 else 'FAIL'))
+    if rc != 0:
+        print(out.strip()[-400:])
+        return False
+    return True
+
+
+def _run_cspcheck():
+    """cspcheck 步：零漂移校验（恒为最后一步）。"""
+    rc, out = run([sys.executable, 'scripts/generate_csp.py', '--check'])
+    tail = [line for line in out.splitlines() if 'CSP' in line]
+    print('[cspcheck] ' + (tail[-1] if tail else 'OK'))
+    if rc != 0:
+        print(out.strip()[-400:])
+        return False
+    return True
 
 
 def main(argv=None):
@@ -141,12 +199,11 @@ def main(argv=None):
     batch = a.batch
     if not batch and a.spec and os.path.isfile(a.spec):
         import json
-        batch = json.loads(io.open(a.spec, encoding='utf-8').read()).get('batch')
+        batch = json.loads(open(a.spec, encoding='utf-8').read()).get('batch')
     led = os.path.join(ROOT, 'docs', '00-导读', 'W批次编号对账表.md')
     ok, msgs = precheck_ledger(led)
-    if msgs:
-        for m in msgs:
-            print('[precheck] ' + m)
+    for m in msgs:
+        print('[precheck] ' + m)
     if not ok:
         print('[precheck] 预检未过 => 中止（先修上述项再跑）')
         return 1
@@ -159,39 +216,19 @@ def main(argv=None):
     if a.dry_run:
         print('[dry-run] 预检通过，未落盘')
         return 0
-    paths = collect_paths(a.spec, a.paths)
-    if paths:
-        run(['git', 'add', '--'] + paths)
-        print('[add] 已 add %d 件' % len(paths))
-    else:
-        print('[add] 无待 add 路径（spec.rows 为空？请用 --paths 显式指定）')
+    _add_paths(collect_paths(a.spec, a.paths))
     good, logs = refresh_until_stable()
-    for l in logs:
-        print('[refresh] ' + l)
+    for line in logs:
+        print('[refresh] ' + line)
     if not good:
         return 1
-    for cmd in (['_gen_search_index.py'], ['docs_index.py']):
-        rc, out = run([sys.executable, 'scripts/' + cmd[0]])
-        print('[index] %s -> %s' % (cmd[0], 'OK' if rc == 0 else 'FAIL'))
-        if rc != 0:
-            print(out.strip()[-400:])
-            return 1
-    if batch:
-        rc, out = run([sys.executable, 'scripts/stats.py', '--w', batch])
-        print('[stats] --w %s -> %s' % (batch, 'OK' if rc == 0 else 'FAIL'))
-        if rc != 0:
-            print(out.strip()[-400:])
-            return 1
-    rc, out = run([sys.executable, 'scripts/generate_csp.py'])
-    print('[csp] 重算 -> %s' % ('OK' if rc == 0 else 'FAIL'))
-    if rc != 0:
-        print(out.strip()[-400:])
+    if not _run_index():
         return 1
-    rc, out = run([sys.executable, 'scripts/generate_csp.py', '--check'])
-    tail = [l for l in out.splitlines() if 'CSP' in l]
-    print('[cspcheck] ' + (tail[-1] if tail else 'OK'))
-    if rc != 0:
-        print(out.strip()[-400:])
+    if not _run_stats(batch):
+        return 1
+    if not _run_csp():
+        return 1
+    if not _run_cspcheck():
         return 1
     print('---- 收官链完成：顺序 ' + ' -> '.join(step_order()) + ' ----')
     return 0
