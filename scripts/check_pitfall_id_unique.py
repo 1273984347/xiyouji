@@ -65,10 +65,17 @@ def _entries(lines):
 
 
 def _added_lines(base):
-    """取本次改动新增的行（git diff base..工作树·+ 行）。"""
+    """取本次改动新增的行（git diff base..工作树·+ 行）——**限定坑表文件**。
+
+    **W1110 收官笔三修（跨会话回执知悉·对方在其同族判据上踩到同款）**：
+    原实现不带 pathspec ⇒ `git diff <base>` 返回**全仓**差异 ⇒ 其他文件的 `+ 行`
+    若恰好形如条目本体（`- **…（W#### 实证·E-NN）`）就会被误当「新增条目」⇒ 假红/失真。
+    ⇒ 加 `-- docs/agent/pitfalls.md` 限定。
+    """
     try:
         r = subprocess.run(
-            ["git", "diff", "%s" % base], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace"
+            ["git", "diff", "%s" % base, "--", "docs/agent/pitfalls.md"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace"
         )
     except OSError:
         return []
