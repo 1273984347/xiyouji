@@ -128,13 +128,14 @@ POINTS = [
 ]
 
 
-def advance_file(rel, batch, date, desc, head_sentence):
-    """把某个文件里的全部版本面字面量推进到目标态。
+def advance_text(text, rel, batch, date, desc, head_sentence):
+    """把**已读入的文本**里属于 rel 的版本面字面量推进到目标态（纯函数·不碰 IO）。
 
-    返回 (新文本, 是否变化)。供 batch_cascade.py 的版本面调用（只引用不复制·
-    避免两份实现漂移）；文件里没有版本面字面量时原样返回。
+    **W1114 修正（判据可驱动性）**：本函数**不读文件**——读文件由调用方（级联工具）用
+    自己的 load() 完成 ⇒ 判据 scripts/check_cascade_line_anchor.py 才能通过 monkeypatch
+    级联的 load() 注入**合成样本**（若本模块自己读盘，判据就会读到磁盘真实文件 ⇒
+    合成样本驱动机制失效 ⇒ 判据整体误判）。⇒ 返回 (新文本, 是否变化)。
     """
-    text = load(rel)
     out = text
     changed = False
     for target, fn in POINTS:
@@ -152,6 +153,11 @@ def advance_file(rel, batch, date, desc, head_sentence):
             out, c = fn(out, batch, date, desc)
         changed = changed or c
     return out, changed
+
+
+def advance_file(rel, batch, date, desc, head_sentence):
+    """读盘 + 推进某文件的全部版本面点（便捷包装；**级联工具请用 advance_text** 以保判据可驱动）。"""
+    return advance_text(load(rel), rel, batch, date, desc, head_sentence)
 
 
 def advance_all(batch, date, desc, head_sentence, check=False):

@@ -126,6 +126,10 @@ class _Ctx:
         self.batch, self.date = spec["batch"], spec["date"]  # W711：ver 字段弃用（方案 D 批次键唯一·spec.version 仅存档）
         self.desc = spec["desc"]
         self.entry = spec["head_entry"]
+        # W1114：head_sentence 提升为 ctx 字段（不再让面函数直接摸 ctx.spec）——
+        # 判据 scripts/check_cascade_line_anchor.py 的 _Ctx 替身只带最小字段集，
+        # 面函数若新增对 ctx.spec 的直读 ⇒ 替身缺 spec ⇒ AttributeError ⇒ 判据整体失效。
+        self.head_sentence = spec.get("head_sentence", "")
         self.new_w = None     # CHANGELOG 面回填：现役段号 + 1
         self.new_rule = None  # CHANGELOG 面回填：编号规则段新形态
         self.pend = []        # (path, content, nl) 落盘队列
@@ -186,9 +190,12 @@ def _face_three_docs(ctx):
     """
     # ---------- README / STRUCTURE / 项目说明 ----------
     for rel in ("README.md", "STRUCTURE.md", "docs/00-导读/项目说明.md"):
+        # 用**本模块的 load** 读文件 + 把文本交给 version_surface 的纯函数 advance_text：
+        # 判据 check_cascade_line_anchor.py 才能 monkeypatch 本模块 load 注入合成样本
+        # （若版本面模块自己读盘，判据会读到磁盘真实文件 ⇒ 合成样本驱动失效）。
         s, nl = load(rel)
-        out, _changed = version_surface.advance_file(
-            rel, ctx.batch, ctx.date, ctx.desc, ctx.spec["head_sentence"])
+        out, _changed = version_surface.advance_text(
+            s, rel, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
         ctx.pend.append((rel, out, nl))
 
 
@@ -307,8 +314,8 @@ def _face_workflows(ctx):
     # ---------- workflows README ----------
     p = ".github/workflows/README.md"
     s, nl = load(p)
-    out, _changed = version_surface.advance_file(
-        p, ctx.batch, ctx.date, ctx.desc, ctx.spec["head_sentence"])
+    out, _changed = version_surface.advance_text(
+        s, p, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
     marker = "无 workflow 结构改动）。"
     assert out.count(marker) == 1, f"里程碑尾标记出现 {out.count(marker)} 次"
     out = out.replace(marker, f"无 workflow 结构改动）+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。", 1)
@@ -433,8 +440,8 @@ def _face_citation(ctx):
     """
     p = "CITATION.cff"
     s, nl = load(p)
-    out, _changed = version_surface.advance_file(
-        p, ctx.batch, ctx.date, ctx.desc, ctx.spec["head_sentence"])
+    out, _changed = version_surface.advance_text(
+        s, p, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
     assert out != s, "CITATION.cff 版本/日期行未变化"
     ctx.pend.append((p, out, nl))
 
