@@ -1,3 +1,24 @@
+### W1116（2026-11-04）：收官链自检闸（文案数字对表 + 登记面一致性）
+
+> **来源**：跨批复盘（W1105~W1117）共识 P0-1 / P0-2 · 用户 2026-11-04 批准。
+> - **文件**：scripts/check_doc_numbers.py · scripts/check_registration_surface.py · scripts/batch_closeout.py · tests/unit/test_w1116_selfcheck_gates.py · tests/unit/test_w1114_version_surface.py · pytest.ini · docs/11-方案报告/计划方案/T67-任务计划执行与经验沉淀报告-2026-11-04.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md · scripts/output/_w1116_spec.json
+
+**本批要点**（工具层·**零页面内容改动**·**不新增门禁槽 ⇒ 门禁 62 段不变**·**不新增坑表条目 ⇒ 坑表 242 条不变**）：
+
+① **P0-1 文案数字 ↔ 证据件对表闸**（scripts/check_doc_numbers.py）：把「收官读数须与最终落盘产物对表」从人工核对变成机器断言 —— 每批在 spec 的 doc_numbers 段声明「哪处文案 ↔ 哪个证据键」，收官链末位逐项断言（source 支持 json 键 / git numstat 单 ref 与 A..B 双 ref / count 正则 / literal；pattern 用具名捕获组 v）；另加 **coverage 类**（对一组目标逐项断言「N 个文件全 X」这类枚举声明·采纳并行会话 W1117 建议）。
+
+② **P0-2 登记面一致性闸**（scripts/check_registration_surface.py）：六项 —— 台账本批认领行存在 · HANDOVER 最后更新链首 == CHANGELOG 现役段 · CHANGELOG 编号规则段上限 == 现役段 · HANDOVER 最后更新链条目 ≤3 · file-index 含本批段 · 台账正本数据行 ≤ 窗口（行口径**复用 scripts/archive_ledger_rows.py 的 ROW_RE**·唯一事实源·不另写正则）。
+
+③ **接入收官链末位**：STEPS 增 docnums + regsurface（versions 之后 · csp/cspcheck 之前 ⇒ **W1112 既有「csp 末两步」承诺不破**）；判据缺失即 fail-closed 中止；未声明 doc_numbers 的批次跳过（不伪造红·不阻塞在途批）。
+
+④ **闸自跑即抓出自身三处缺陷（价值实证）**：把新闸指向本批自身（spec 声明 → 闸实跑）⇒ 首跑红三条 —— ① count 源用行首锚点却未加 re.MULTILINE ⇒ **取到假零 0**（与 W1113「假零」同族）② pattern 写 **62 段** 而正文实为 **62 段 0 FAIL** ⇒ 尾部闭合不匹配且缺捕获组 ⇒ 报「未匹配到任何位置」③ 新增单测实为 **17 例**（非 14）⇒ 报告与 pytest 标记同步订正 ⇒ 复跑全绿（对表闸 4 项全一致）。
+
+⑤ **共享面连带同步**：改 STEPS 破坏并行会话 W1114 的顺序锁单测（断言 versions 与 csp 紧邻）⇒ 已同步该断言（放宽为 versions 在 stats 之后 · csp 之前 + 加两闸位置断言·比原断言更强）· 全量 pytest 复跑 0 failed。
+
+⑤b **跨批留痕（改的是哪一批的哪个断言 · 放宽理由 · 新的更强表述原文）**：本批改动了 **W1114 批落盘的 `tests/unit/test_w1114_version_surface.py::test_closeout_steps_put_versions_between_stats_and_csp`**（原断言「versions 紧邻 csp」）。**放宽理由**：本批两道闸必须读**版本面推进后的最终产物面**（versions 之后才成立）⇒ 原断言在新链序下必然不成立，故把「紧邻」放宽为「versions 在 stats 之后 · csp 之前」。**新的更强表述原文**：`assert order.index('versions') == order.index('stats') + 1` · `assert order.index('versions') < order.index('csp')` · `assert order[-2:] == ['csp', 'cspcheck']` · `assert 'docnums' in order and 'regsurface' in order` · `assert order.index('versions') < order.index('docnums') < order.index('csp')` ⇒ 替代表述**多断言了两闸的相对位置**（比原断言更强）。**对方 W1114 批已书面确认接受该放宽**（回执七十八），其 W1117 批报告将引用本表述以免两批文档各说一套。
+
+**验证**：门禁 62 段 0 FAIL · 单测 1217 passed / 4 skipped / 0 failed（新增 17 例含 10 个负样本）· ruff 双档全绿 · CSP 856 页 / 909 内联哈希 / 0 漂移 · 台账正本 58 数据行（窗口 60）· 坑表 242 条不变（不占 E-NN）· 本批自身过自己的两道闸。
+
 ### W1115（2026-11-03）：图表色工程批收官订正批（承接独立盲审 F1~F8 · 纯文档 · 零页面内容改动）
 
 > **来源**：并行会话对 W1113 的独立盲审最终报告（判 FAIL：订正数值全部正确，但报告内仍有 5 处同类旧数未订正 + 「同口径」措辞口径混用）。
@@ -1960,7 +1981,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1115），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1116），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -2057,12 +2078,3 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 > - **状态**：已收官（`aacb6fe3`·verify 全量 rc=0 + 探针/工具自测过 + 单测 5/5·双件回线 900/816KB·T2 对账一致·T3 在位）
 
-### W993（2026-10-27）：全仓行尾定形批（CRLF 时代终结·用户问责「为什么不解决」）
-
-> **来源**：用户问责「CRLF 老问题你为什么不解决呢」——W971-W989 期间六次地鼠（裸 LF 注入/混行尾 fail-closed/CRLF 锚补丁）全部就地修未治系统，本批根治。
-> **摘要**：① **.gitattributes 落地**——text=auto eol=lf + 21 类二进制显式排除；② **renormalize**——22 个 i/crlf 烤死 blob + 混行尾面归 LF（纯机械提交 84cce358·入 .git-blame-ignore-revs 防 blame 污染）；③ **工作树重写**——git 内容比对（CRLF 经 clean=LF≈索引）致 reset --hard 不生效，按标准配方删跟踪件重 checkout：4688 文件全 i/lf w/lf·零 CRLF·零 mixed·工作树零漂移；④ **语义收口**——pitfalls 新条目「行尾定形时代结束」（补丁串按 CRLF 锚定作废·一律 
-；旧条目留作历史）；AGENTS 坑位计数 88→89 两处同步；⑤ 自此工具以 
- 构建无分歧、混行尾防线（load fail-closed）保留作最后防线。
-> **文件**：.gitattributes · .git-blame-ignore-revs · docs/agent/pitfalls.md · AGENTS.md · CHANGELOG.md · scripts/output/file-index.md · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
-> **验证**：行尾普查 4688 全 i/lf w/lf（renormalize 前 22 i/crlf + 10 mixed 清零）+ pytest 全量 934 passed + verify docs rc=0 + 数字断言 N4 一致 + 体积四窗全绿。
-> **状态**：**已收官**（W993 git 反填·全仓行尾定形 4688 文件全 LF）

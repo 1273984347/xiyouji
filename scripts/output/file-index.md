@@ -1,3 +1,33 @@
+## W1116 收官链自检闸（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_numbers.py | W1116 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1116 | 本批工具/产物 |
+| .github/workflows/README.md | W1116 | 本批工具/产物 |
+| CITATION.cff | W1116 | 本批工具/产物 |
+| STRUCTURE.md | W1116 | 本批工具/产物 |
+| README.md | W1116 | 本批工具/产物 |
+| scripts/check_registration_surface.py | W1116 | 本批工具/产物 |
+| scripts/batch_closeout.py | W1116 | 本批工具/产物 |
+| tests/unit/test_w1116_selfcheck_gates.py | W1116 | 本批工具/产物 |
+| tests/unit/test_w1114_version_surface.py | W1116 | 本批工具/产物 |
+| pytest.ini | W1116 | 本批工具/产物 |
+| CHANGELOG.md | W1116 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1116 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1116 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T67-任务计划执行与经验沉淀报告-2026-11-04.md | W1116 | 本批工具/产物 |
+| scripts/output/_w1116_spec.json | W1116 | 本批工具/产物 |
+| docs/INDEX.md | W1116 | 本批工具/产物 |
+| scripts/output/stats.json | W1116 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1116 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1116 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1116 | 本批工具/产物 |
+| scripts/output/file-index.md | W1116 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1116 | 本批工具/产物 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1116 | 本批工具/产物 |
+| archive/docs/file-index-ARCHIVE.md | W1116 | 本批工具/产物 |
+
 ## W1115 图表色工程批收官订正批（2026-11-03）
 
 | 文件 | W | 说明 |
@@ -5440,13 +5470,4 @@
 | scripts/output/_w994_spec.json | W994 | 本批级联 spec
 | scripts/output/_cascade_files_W994.txt | W994 | 级联落盘清单
 | scripts/gen_folder_docs.py | W994 | 冷存储警告模板级注入（archive/scripts/batches README·防 refresh 覆写） |
-
-## W993 全仓行尾定形批（2026-10-27）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .gitattributes | W993 | text=auto eol=lf + 二进制显式排除 |
-| .git-blame-ignore-revs | W993 | 登记定形提交 84cce358 |
-| docs/agent/pitfalls.md | W993 | 行尾定形时代结束条目（CRLF 锚定作废） |
-| AGENTS.md | W993 | 坑位计数 88→89 两处同步 |
 
