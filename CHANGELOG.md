@@ -1,3 +1,20 @@
+### W1118（2026-11-04）：CI 成本治理与经验同步入仓
+
+**本批要点**（CI 成本治理 + 经验同步入仓·不新增门禁槽 ⇒ 门禁 62 段不变）：① **归因实测**：最近 60 个 run 的 run 级墙钟 418.1 分钟，我方 37 run / 330.7 分钟 = 79.1%，对方 23 run / 87.5 分钟 = 20.9%；PR 数 14:6。② **根修一**：暗色态门禁的跳过判定此前只挂 push 事件 ⇒ PR 事件下无任何跳过路径 ⇒ 每次命中 site/** 即跑全站约 163 页 × 4 分片，是本仓最大成本单点 ⇒ 判定扩展到 pull_request，且 schedule 与 workflow_dispatch 恒为全量。③ **根修二**：Lighthouse CI 只采集 5 个页面，未触及这 5 页即跳过采集。④ 搜索索引数据页 site/data/search.html 与 site/en/search.html 进非渲染面免审名单，其布局仍由主截图 job 的定向截图与每周定时全量审查覆盖。⑤ **经验同步入仓**：Agent Memory 内 W1114~W1118 的 13 条教训落坑表 E-141 ~ E-153，坑表 242 → 255 条。⑥ **节奏收紧**：一批一 PR 一 push，收官链产物必须在提交前生成完毕。
+
+**文件**：
+- .github/workflows/screenshot-review.yml：暗色态门禁跳过判定补 PR 事件 + 非渲染面免审名单 + merge job 跳过联动
+- .github/workflows/perf.yml：Lighthouse CI 采集页未变即跳过采集 + Checkout 加 fetch-depth 0
+- docs/agent/pitfalls.md：新增 E-141 ~ E-153 共 13 条跨项目通用教训
+- AGENTS.md：坑表总数与六主题分项声明同步 + 纪律增行
+- HANDOVER.md 与 .agent/skills/puti-shouye/SKILL.md：坑表条数指针同步
+- docs/00-导读/W批次编号对账表.md：W1118 认领登记行
+- docs/11-方案报告/计划方案/T69-任务计划执行与经验沉淀报告-2026-11-04.md：本批交付报告
+- docs/11-方案报告/README.md：第六节第 84 号登记
+
+**认领登记 W1118**（主仓共享区占号 session=mvs_1d2745db…·preflight touches 交集检查通过）。
+
+**验证**：门禁 62 段 0 FAIL · 坑表 255 条 0 重号 · 两个 workflow YAML 解析通过 · 台账正本数据行不超过窗口 60。
 ### W1116（2026-11-04）：收官链自检闸（文案数字对表 + 登记面一致性）
 
 > **来源**：跨批复盘（W1105~W1117）共识 P0-1 / P0-2 · 用户 2026-11-04 批准。
@@ -1981,7 +1998,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1116），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1118），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -2057,24 +2074,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：拆分守恒断言 + archive_tier2/check_archive_health --self-test 双过 + 单测 5/5 + 探针 strict rc=0（三件 tier2 全 ≤1MB）+ 提示位直测（[ARCHIVE] 前缀行与清理日期行在位）+ 全量 verify rc=0 见状态行。
 
 > - **状态**：已收官（`71a1add4`·verify 全量 rc=0 + 单测 5/5 + 自测双过·tier2 三件全 ≤1MB·提示位四件齐）
-
-### W994（2026-10-28）：归档系统打磨批（tier-2 规则机器化：探针+常驻工具+双件实跑回线）
-
-
-
-> **来源**：用户 2026-10-28 令「继续打磨归档系统和临时文件系统」——体检定位到 §11.2 tier-2 条款自 W513 后掉档（CHANGELOG-ARCHIVE 1198KB / file-index-ARCHIVE 1070KB 双破 1MB 线零反应·W824「无机器触发点必掉档」又一活体），按「探测→修法→防复发」闭环处置。
-
-> - **文件**：scripts/check_archive_health.py、scripts/archive_tier2.py、tests/unit/test_archive_health.py、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE-tier2.md、archive/docs/file-index-ARCHIVE.md、archive/docs/file-index-ARCHIVE-tier2.md、archive/README.md、archive/scripts/batches/README.md、scripts/README.md、scripts/gen_folder_docs.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w994_spec.json、scripts/output/_cascade_files_W994.txt。
-
-**健康探针（check_archive_health.py·报告型）**：把 §11.2 三条纯文字条款机器化——T1 一级归档件 1MB 判距（≥800KB 预警·破线 ⚠+修法指引）；T2 归档 scripts 台账对账（**组行计数对账语义**：顶层存量组行 N vs 磁盘实数+段目录组行覆盖+子目录提及——W735 存量 200+ 件从未逐件登记是既定形态，逐件检查会误报风暴，首跑 200 件误报后改为计数对账语义并补登记 3 条组行：顶层 47/w4xx 11/w5xx 149）；T3 batches/README 冷存储警告在位（W836：归档件 ROOT 上溯失效·误跑会错——本批补入警告文本）；T4 归档区汇总体积。`--strict` 为门禁候选。
-
-**二级归档工具（archive_tier2.py·常驻）**：键序前缀切分（changelog=段标题 W 号；file-index=顶层节·两代混层目录节无 W 号取 0 排最老）+ 全文字节目标（§11.2 管文件体积）+ **守恒五道断言零落盘前置**（A1 段数/A2 逐字节在 tier2/A3 头部只追加/A4 键序前缀/A5 字节守恒）。**实跑双件回线**：CHANGELOG-ARCHIVE 1198→900KB（迁出 144 段 W400-W559）·file-index-ARCHIVE 1070→816KB（迁出 10 目录节·**新建 file-index-ARCHIVE-tier2.md**）。施工中守恒断言三度 fail-closed 拦截：字节/字符混计（A5 两端异单位）、切枝循环按键序遍历致位置倒序静默保留新版段（A5 当场活捉·真损坏级）、A5 符号写反——全部修复后落盘，W681 补录尾段原位未动。
-
-**其余**：batches/README 冷存储警告（生成模板级注入——手工写入会被 --refresh 覆写·W994 实证后改模板位） + scripts/README 场景速查 +2 行（二级归档/健康体检路由）+ 单测 5 例。
-
-**边界与延后**：batch_cascade 收官提示位扩展（[ARCHIVE] 行+[TMPE] 上次清理日期）**延后**——W992（提示位口径校准·他方在途）认领了 batch_cascade.py，按工作树吸收纪律（坑表 88 条）不在其认领面落编辑；W992 收官后任一批可补。
-
-**验证**：探针 --self-test + 单测 5/5 + 双件 dry-run→apply 守恒五道全过 + 探针复跑 T1 回线（900/816KB）·T2 对账一致·T3 在位 · W681 补录尾段原位核验 · ruff 0 · 全量 verify 见状态行。
-
-> - **状态**：已收官（`aacb6fe3`·verify 全量 rc=0 + 探针/工具自测过 + 单测 5/5·双件回线 900/816KB·T2 对账一致·T3 在位）
 

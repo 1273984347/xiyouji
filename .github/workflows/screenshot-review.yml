@@ -336,23 +336,37 @@ jobs:
           fetch-depth: 0  # W580 热修复：浅克隆下 git diff $BEFORE $SHA 报 128（首跑实证）
 
       # 页脚版本号 bump / 数据副本 / 纯文档改动跳过（暗色门禁为内容面）
-      - name: Skip if footer-only push
+      # W1118 根修一：跳过判定此前只挂 push 事件 ⇒ PR 事件下没有任何跳过路径，
+      #   只要改动命中 site/** 就跑全站约 163 页 × 4 分片（实测单批 4 笔 push 的最大成本单点）
+      #   ⇒ 判定扩展到 pull_request 事件；② 搜索索引数据页（site/data/search.html 与
+      #   site/en/search.html）的内嵌索引数据变化属数据面、非渲染面（收官链每次新增文档都会改它）
+      #   ⇒ 进免审名单；判据强度不降：其布局仍由主截图 job 的定向截图覆盖 + 每周定时全量审查兜底。
+      - name: Skip if non-render-only change
         id: scope
-        if: github.event_name == 'push'
         shell: bash
         run: |
           set -euo pipefail
-          BEFORE="${{ github.event.before }}"
-          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            CHANGED=$(git -c core.quotePath=false diff --name-only HEAD~1 HEAD || true)
+          EVENT="${{ github.event_name }}"
+          # 定时 / 手动触发恒为全量（paths 过滤对 schedule 不生效 ⇒ 不能因“无改动”而免审）
+          if [ "$EVENT" = "schedule" ] || [ "$EVENT" = "workflow_dispatch" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$EVENT" = "pull_request" ]; then
+            CHANGED=$(git -c core.quotePath=false diff --name-only "${{ github.event.pull_request.base.sha }}...${{ github.sha }}" || true)
           else
-            CHANGED=$(git -c core.quotePath=false diff --name-only "$BEFORE" "${{ github.sha }}")
+            BEFORE="${{ github.event.before }}"
+            if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+              CHANGED=$(git -c core.quotePath=false diff --name-only HEAD~1 HEAD || true)
+            else
+              CHANGED=$(git -c core.quotePath=false diff --name-only "$BEFORE" "${{ github.sha }}")
+            fi
           fi
           SKIP=true
           while IFS= read -r f; do
             [ -z "$f" ] && continue
             case "$f" in
-              site/dukou-engine.html|site/index.html|site/data/cross-time-danmaku.html|site/data/tag-cloud.html|site/data/json/*) ;;
+              site/dukou-engine.html|site/index.html|site/data/cross-time-danmaku.html|site/data/tag-cloud.html|site/data/json/*|site/data/search.html|site/en/search.html) ;;
               *) SKIP=false ;;
             esac
           done <<< "$CHANGED"
@@ -423,6 +437,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: dark-state-gate
+    # W1118：上游暗色门禁整体 skip（本次改动非渲染面）时本 job 必须同 skip，
+    #   否则下载不到分片产物 ⇒ 「未找到任何分片产物 ⇒ 判据未执行」exit 2 判红。
+    if: needs.dark-state-gate.result != 'skipped'
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
