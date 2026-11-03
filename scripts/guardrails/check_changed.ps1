@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     agent-guardrails 改动面检查（Windows PowerShell 主力入口）。
 .DESCRIPTION

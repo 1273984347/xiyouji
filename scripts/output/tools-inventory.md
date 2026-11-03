@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-03 06:55
+生成时间：2026-11-03 07:51
 
-共 **167** 件（门禁与校验 75 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 64 · 一次性（下划线前缀） 6）
+共 **170** 件（门禁与校验 78 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 64 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（75）
+## 门禁与校验（78）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -34,9 +34,11 @@
 | `check_corruption.py` | check_corruption.py — 机械腐蚀与插件引用静态门禁（W424 复盘沉淀） |
 | `check_crop.py` | check_crop.py — 验站点版与 og 卡「裁切没有切坏主体」 |
 | `check_cross_line_rewrite.py` | check_cross_line_rewrite.py — 同族扫描：改写面正则的「跨行静默删内容」风险清单 |
+| `check_csp_drift.py` | check_csp_drift.py — 内联脚本 CSP 零漂移**增量**判据（W1110 新增第 56 槽）。 |
 | `check_css_decl_separators.py` | 声明分隔门禁（第 35 门禁 · W673/WP-2.6）——防 CSS 缺分号静默吞声明。 |
 | `check_css_orphan_selectors.py` | 孤立选择器门禁（第 36 门禁 · W673/WP-2.6）——防选择器残缀/裸标签残缺行。 |
 | `check_css_var_refs.py` | CSS 变量引用门禁（第 34 门禁 · W672/WP-1.4）——防 style 块引用未定义 CSS 变量。 |
+| `check_css_var_selfref.py` | check_css_var_selfref.py — CSS 变量**自引用**判据（W1110 新增·随第 54/55/56 槽同批建置）。 |
 | `check_dark_state_gate.js` | scripts/check_dark_state_gate.js — W579：暗色态门禁（O2 常驻化，挂 screenshot-review |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
 | `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
@@ -70,6 +72,7 @@
 | `check_perf_shadow.py` | check_perf_shadow.py — 性能影子槽判据件（W849 建立·verify_delivery 第 47 门禁）。 |
 | `check_pitfall_id_unique.py` | check_pitfall_id_unique.py —— 坑表编号唯一性判据（W1106 建）。 |
 | `check_plan_template.py` | check_plan_template.py — 第 48 门禁：计划方案模板符合性（增量口径·W860） |
+| `check_powershell_parse.py` | check_powershell_parse.py — PowerShell 脚本可解析性判据（W1110 新增第 55 槽）。 |
 | `check_repo_layout.py` | check_repo_layout.py — 第 52 门禁：仓库布局（W1011 挂槽·用户 2026-10-29「全都做」） |
 | `check_screenshot_gates.js` | check_screenshot_gates.js — 图表/渲染动态门禁（W551 新建，挂 screenshot-review workfl |
 | `check_script_coverage.py` | check_script_coverage.py — 根级工具脚本覆盖门禁（第 42 槽 · W751 挂载） |

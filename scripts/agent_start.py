@@ -57,6 +57,39 @@ def _segments(changelog):
     return [d for _, d in segs]
 
 
+def _stats_consistency_warnings(stats):
+    """stats.json 的**口径一致性**告警（P-3 L2·W1110 落地·复用 C10 同一复算式）。
+
+    W1104 批（P-3 L1）落地四类告警（缺失 / 损坏 / 空 / 陈旧）时，把「口径一致性」
+    挂账为「待异源复算（C10）落地后接入」⇒ 本函数是那次挂账的清偿：
+    用**与第 31 门禁 C10 完全同一复算式**（`doc_areas.board_count_mismatches`·
+    共享单一事实源）独立复算各板块内容篇数，与 stats.json 对账 ⇒ 不一致即告警。
+
+    为何要独立复算（同源自检的盲区）：C5d 用 `stats.py --check`（**同一实现**）实算 ⇒
+    实算与存值自洽 ⇒ 口径写错时**门禁不红**（W1096 实证：排除集写死小写 ⇒
+    07/08/09 三板块对外篇数各虚增 1 而全链无红灯）。故开局摘要必须用**独立复算**
+    才能发现口径漂移。
+
+    告警**不阻断**（工具层告警与门禁阻断分层·与 L1 同族纪律）。
+    """
+    warnings = []
+    try:
+        from doc_areas import board_count_mismatches
+    except ImportError:  # pragma: no cover — 直跑时 sys.path[0]=scripts/ 应可导入
+        warnings.append("stats 口径一致性未核验（复算模块不可导入·跳过）")
+        return warnings
+    try:
+        mismatches = board_count_mismatches(stats)
+    except Exception as exc:  # noqa: BLE001 — 告警层不因复算异常而崩开局摘要
+        warnings.append("stats 口径一致性未核验（复算异常：%s）" % exc)
+        return warnings
+    for key, computed, stored in mismatches:
+        warnings.append(
+            "stats.json 口径漂移：%s 实算 %d ≠ 存值 %d（排除集口径漂移或未刷新 stats）"
+            "·请跑 py -3 scripts/stats.py --w <批号> 刷新" % (key, computed, stored))
+    return warnings
+
+
 def load_stats_with_warnings(stats_path, changelog_path, stale_tolerance=2.0):
     """读 stats.json 并返回 (stats, warnings)。
 
@@ -96,6 +129,8 @@ def load_stats_with_warnings(stats_path, changelog_path, stale_tolerance=2.0):
     if s_mtime + stale_tolerance < c_mtime:
         warnings.append("stats.json 陈旧（早于 CHANGELOG.md 的最新改动）·"
                         "规模口径可能过期·请跑 py -3 scripts/stats.py --w <批号> 刷新")
+    # P-3 L2（W1110）：口径一致性（异源复算·复用 C10 同一复算式）——清偿 W1104 的挂账
+    warnings.extend(_stats_consistency_warnings(stats))
     return stats, warnings
 
 
