@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-03 08:56
+生成时间：2026-11-03 18:22
 
-共 **170** 件（门禁与校验 78 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 64 · 一次性（下划线前缀） 6）
+共 **171** 件（门禁与校验 78 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 65 · 一次性（下划线前缀） 6）
 
 ## 门禁与校验（78）
 
@@ -133,7 +133,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（64）
+## 工具（65）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -144,6 +144,7 @@
 | `agg_entities.py` | agg_entities.py — B-5 聚合器先行（W651 启动·读 100 回 chapter-meta 出 entities 两类） |
 | `backfill_changelog.py` | CHANGELOG / file-index 递延段补写器（W842）。 |
 | `baseline_snapshot.py` | baseline_snapshot.py — W464 Phase 3 观测基线快照生成器（入库脚本） |
+| `batch_closeout.py` | batch_closeout.py —— 落段收官一键脚本（工具层·不碰门禁脚本）。 |
 | `batch_screenshots.js` | Default top-level pages to screenshot beyond site/data/*.html. |
 | `batch_spec.py` | batch_spec.py — 级联 spec 的唯一解析入口（W1009·两处重复实现合并） |
 | `build_reader.py` | build_reader.py — 站内阅读器渲染器（W593 单板块 → W660 多板块映射驱动） |

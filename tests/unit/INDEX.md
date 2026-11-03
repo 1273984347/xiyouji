@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（67）
+## 文件（69）
 
 ### Python 脚本
 
@@ -76,10 +76,12 @@
 - `test_verify_registry.py`
 - `test_vermilion_solid.py`
 - `test_visualization_data.py`
+- `test_w1102_batch_closeout.py`
 - `test_w1103_color_delta_guard.py`
 - `test_w1104_agent_start_freshness.py`
 - `test_w1106_pitfall_id_unique.py`
 - `test_w1110_gate_slots.py`
+- `test_w1112_judge_fix.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 
