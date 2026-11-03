@@ -1,0 +1,40 @@
+{
+ "batch": "W1115",
+ "date": "2026-11-03",
+ "title": "W1115 图表色工程批收官订正批（承接独立盲审 F1~F8·纯文档）",
+ "desc": "承接并行会话对 W1113 的独立盲审最终报告：订正 T64 报告内 5 处同类旧数 + 附录 A 口径措辞与不可复现数字，补齐台账 W1113 行的 CHANGELOG 版段列与订正笔记录，台账腾窗迁 2 行、零人工页面内容改动，不新增坑表条目",
+ "head_entry": "2026-11-03（W1115 图表色工程批收官订正批：承接独立盲审 F1~F8 的报告内旧数与口径措辞订正 + 台账登记面补齐）",
+ "head_sentence": "图表色工程批收官订正批：T64 报告内 5 处同类旧数 + 附录 A 口径措辞订正 · 台账 W1113 行版段列与订正笔记录补齐 · 台账腾窗迁 2 行 · 零人工页面内容改动",
+ "milestone_block": "- **收官订正批**：承接独立盲审 F1~F8 的报告内旧数与口径措辞订正 + 台账登记面补齐（零人工页面内容改动·不新增坑表条目）",
+ "agents_note": "2026-11-03（W1115）图表色工程批收官订正批：T64 报告 AC/V/ST 表 5 处旧数 + 附录 A 口径措辞与不可复现数字订正 · 台账 W1113 行 CHANGELOG 版段列回填 + 订正笔记录补齐 · 台账腾窗迁 2 行（正本 59 数据行）。",
+ "file_index_rows": [
+  "| .github/workflows/README.md | W1115 | 本批工具/产物 |",
+  "| CITATION.cff | W1115 | 本批工具/产物 |",
+  "| CHANGELOG.md | W1115 | 本批工具/产物 |",
+  "| HANDOVER.md | W1115 | 本批工具/产物 |",
+  "| README.md | W1115 | 本批工具/产物 |",
+  "| STRUCTURE.md | W1115 | 本批工具/产物 |",
+  "| archive/docs/W批次编号对账表-ARCHIVE.md | W1115 | 本批工具/产物 |
+| archive/docs/file-index-ARCHIVE.md | W1115 | 本批工具/产物 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1115 | 本批工具/产物 |",
+  "| docs/00-导读/W批次编号对账表.md | W1115 | 本批工具/产物 |",
+  "| docs/00-导读/项目说明.md | W1115 | 本批工具/产物 |",
+  "| docs/11-方案报告/README.md | W1115 | 本批工具/产物 |",
+  "| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1115 | 本批工具/产物 |",
+  "| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1115 | 本批工具/产物 |",
+  "| docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md | W1115 | 本批工具/产物 |",
+  "| docs/11-方案报告/计划方案/T66-任务计划执行与经验沉淀报告-2026-11-03.md | W1115 | 本批工具/产物 |",
+  "| docs/INDEX.md | W1115 | 本批工具/产物 |",
+  "| scripts/output/INDEX.md | W1115 | 本批工具/产物 |",
+  "| scripts/output/README.md | W1115 | 本批工具/产物 |",
+  "| scripts/output/_w1115_spec.json | W1115 | 本批工具/产物 |",
+  "| scripts/output/file-index.md | W1115 | 本批工具/产物 |",
+  "| scripts/output/stats-changelog.json | W1115 | 本批工具/产物 |",
+  "| scripts/output/stats-index.md | W1115 | 本批工具/产物 |",
+  "| scripts/output/stats.json | W1115 | 本批工具/产物 |",
+  "| scripts/output/tools-inventory.md | W1115 | 本批工具/产物 |",
+  "| site/data/search.html | W1115 | 本批工具/产物 |",
+  "| site/en/search.html | W1115 | 本批工具/产物 |"
+ ],
+ "changelog_body": "承接独立盲审 F1~F8：T64 报告内 5 处旧数 + 附录 A 口径措辞订正；台账登记面补齐（版段列 + 订正笔）；台账腾窗迁 2 行；零人工页面内容改动；不新增坑表条目（242 条不变）。"
+}

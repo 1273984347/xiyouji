@@ -16,6 +16,14 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W992（2026-10-27）：一次性件定向退役与提示位口径校准批
+
+> **来源**：用户菜单②（退役扫描）——[SCRIPTS] 提示位持续报警裸跟踪数 67>20。
+> **摘要**：① **零引用甄别**——67 跟踪 _ 件全量对拍引用面（tests+常驻代码+活治理文档+CHANGELOG 证据锚窗）仅 4 件零引用（_w988_close/pitfalls2/record_adoption/sync_87·并行 W988 批遗留）；② 4 件 git mv 入 archive/scripts/batches/w9xx/（archive_file.py 流程·台账 4 行）；③ **[SCRIPTS] 口径校准**——裸跟踪数含近批证据锚（110 段窗内被引用·合法驻留）恒超 20 成常驻噪声，改报「零引用退役候选数」作阈值判据。
+> **文件**：archive/scripts/batches/w9xx/ · archive/README.md · scripts/batch_cascade.py · scripts/output/tools-inventory.md · docs/00-导读/W批次编号对账表.md
+> **验证**：甄别四面对拍 + pytest 全量 935 passed + ruff 清零。
+> **状态**：**已收官**（W992 git 反填·4 件退役+口径校准）
+
 ### W991（2026-10-27）：级联运行锁与提交隔离批（①层重启 + safe_commit 守卫·用户两问令）
 
 > **来源**：用户两问——「重启设计」（W982 缓建的级联文件锁①层）+「提交总是混入并行会话的暂存件怎么解决」（W989 认领提交 1fb1b14f 扫入他方暂存级联面实证）。

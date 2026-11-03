@@ -1,3 +1,20 @@
+### W1115（2026-11-03）：图表色工程批收官订正批（承接独立盲审 F1~F8 · 纯文档 · 零页面内容改动）
+
+> **来源**：并行会话对 W1113 的独立盲审最终报告（判 FAIL：订正数值全部正确，但报告内仍有 5 处同类旧数未订正 + 「同口径」措辞口径混用）。
+> - **文件**：docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md · docs/11-方案报告/计划方案/T66-任务计划执行与经验沉淀报告-2026-11-03.md · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · docs/11-方案报告/README.md · HANDOVER.md · README.md · STRUCTURE.md · CITATION.cff · .github/workflows/README.md · docs/00-导读/项目说明.md · scripts/output/_w1115_spec.json（版本面推进与索引生成物另见 spec 应动全集）
+
+**本批要点**（**零人工页面内容改动**（仅 site/data/search.html 与 site/en/search.html 的内嵌搜索索引由搜索索引生成器同步）·**不新增坑表条目 ⇒ 计数链条数不变**）：
+
+① **承接盲审 F1（口径混用·阻断·已由 #119 落地）**：盲审指出「56 → 0」前后两数非同一口径（56 = W1100 旧口径基线·引号必需；0 = 本批修正引号盲区后的新口径复算）⇒ 我方以权威脚本自身层正则逻辑独立复算确认成立：**旧口径基线 56 → 0** 与 **新口径基线 64 → 0** 两条都成立（两口径下当前态均为 0）⇒ 据此在 CHANGELOG / 台账 / HANDOVER / T64 / 坑表 E-138 共 10 处补口径注（该笔为 #119，已合并入 main）。
+
+② **承接盲审 F2~F8（本批）**：T64 报告内 5 处同类旧数未订正 —— AC-01 仍写「10 → 0」⇒ 56 → 0 · AC-02 仍写「542 条差异」⇒ 552 · V 表坑表条数 241 ⇒ 242 · ST 表「E-133~E-136」⇒ E-133~E-140 · §3.2「各页 18~24 行 + 坑表 7 条」⇒ 新增口径 12~14 行 + 8 条；另订正附录 A 的「2350 类读数」（不可复现 ⇒ 删具体数保留定性）与「同口径复算」措辞（⇒「分别标注口径」）⇒ **报告的验收表、V 表、ST 表与正文不再自相矛盾**。
+
+③ **台账登记面补齐**：用仓内 `scripts/ledger_backfill.py --w 1113 --cascade "W1113（2026-11-03）"` 回填 W1113 行的 CHANGELOG 版段列（—（待回填）→ W1113（2026-11-03）·行指纹 290ef506621f → 14275162d6b7）· 状态格补记后续订正 3 笔（#116/#117/#119）· 台账腾窗迁出 2 行（W1054-W1055·正本 58 数据行 ≤ 窗口 60）。
+
+④ **第 51 槽归属说明（本批为何新立批次号而非并入他批）**：提交范围门禁按**索引态 CHANGELOG 顶段**定归属批次 ⇒ 补订他批交付物时归属必落现役批（W1114）⇒ 他批 spec 不含该文件 ⇒ 判红 ⇒ 正解是**新增批次段**（归属随索引顶段切到本批）+ 本批 spec 登记应动全集 ⇒ 顺带暴露该门禁「补他批交付物」场景的固有局限（登记去向）。
+
+**验证**：门禁 62 段 0 FAIL · 单测 1198 passed / 4 skipped · CSP 856 页 / 909 哈希 / 0 漂移 · 台账正本 58 数据行（窗口 60）· 坑表 242 条不变（不占 E-NN）· 行指纹复核 `ledger_backfill.py --w 1113 --verify 14275162d6b7`。
+
 ### W1114（2026-11-03）：落段收官链加版本面幂等推进步（并根修收官脚本两处工具缺陷）
 
 
@@ -1943,7 +1960,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1114），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1115），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -2049,10 +2066,3 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：.gitattributes · .git-blame-ignore-revs · docs/agent/pitfalls.md · AGENTS.md · CHANGELOG.md · scripts/output/file-index.md · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
 > **验证**：行尾普查 4688 全 i/lf w/lf（renormalize 前 22 i/crlf + 10 mixed 清零）+ pytest 全量 934 passed + verify docs rc=0 + 数字断言 N4 一致 + 体积四窗全绿。
 > **状态**：**已收官**（W993 git 反填·全仓行尾定形 4688 文件全 LF）
-### W992（2026-10-27）：一次性件定向退役与提示位口径校准批
-
-> **来源**：用户菜单②（退役扫描）——[SCRIPTS] 提示位持续报警裸跟踪数 67>20。
-> **摘要**：① **零引用甄别**——67 跟踪 _ 件全量对拍引用面（tests+常驻代码+活治理文档+CHANGELOG 证据锚窗）仅 4 件零引用（_w988_close/pitfalls2/record_adoption/sync_87·并行 W988 批遗留）；② 4 件 git mv 入 archive/scripts/batches/w9xx/（archive_file.py 流程·台账 4 行）；③ **[SCRIPTS] 口径校准**——裸跟踪数含近批证据锚（110 段窗内被引用·合法驻留）恒超 20 成常驻噪声，改报「零引用退役候选数」作阈值判据。
-> **文件**：archive/scripts/batches/w9xx/ · archive/README.md · scripts/batch_cascade.py · scripts/output/tools-inventory.md · docs/00-导读/W批次编号对账表.md
-> **验证**：甄别四面对拍 + pytest 全量 935 passed + ruff 清零。
-> **状态**：**已收官**（W992 git 反填·4 件退役+口径校准）
