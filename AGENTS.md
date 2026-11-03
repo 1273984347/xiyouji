@@ -103,9 +103,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=53 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=57 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 53 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 57 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -141,7 +141,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 25. **数据内容一致性**
 26. **SEO head**
 
-**编号与质量防线类（27-50）**：
+**编号与质量防线类（27-57）**：
 27. **W 号区间字面量**
 28. **可视化可引用性**
 29. **色盲安全**
@@ -169,6 +169,10 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 51. **提交范围槽**（check_commit_scope.py·W1007·代提三次同一处方）——归属批次取索引态 CHANGELOG 顶段（新增段=本批，否则 HEAD 现役段=回填），该批 `scripts/output/_w####_spec.json` 的 `file_index_rows` 即应动全集；索引态路径集多出即 FAIL（＝一份提交夹带他方在途件）。恒跑（_SCOPE_CORE·docs/site 提交也判）；无暂存件 NOTE 放行、spec 缺失 WARN 放行（不伪造红）。
 52. **仓库布局槽**（check_repo_layout.py·W1011·「整理分类」的长期形态）——L1 根目录只放治理与配置（白名单 ROOT_FILES·出现未声明文件即 FAIL 并给去向）；L2 顶层目录必须已在 TOP_DIRS 与 STRUCTURE.md 声明角色；L3 声明了但磁盘不存在 ⇒ FAIL（防白名单陈腐）。判据按 **git 视角**（被 .gitignore 忽略的本地件不计）；毫秒级·登记 `_SCOPE_CORE` 恒跑。
 53. **图表中英对拍槽**（check_chart_design_parity.py·W1105）——chart-design 中英两版（site/data/chart-design.html 与 site/en/chart-design.html）逐键数值对拍：数值必须全等（非数值专名差异属本地化预期·只列不判红·单侧键即 FAIL）+ **强制契约标记中英齐平**（reduced-motion JS 守卫 `MOYUN_RM` / tooltip 统一类名 `chart-tooltip` / CSS 兜底 `prefers-reduced-motion`）——一侧缺标记即 FAIL（实证：EN 版缺 JS 守卫正是本槽抓出）。基础设施缺失（页面或 summary.json 不可读）按 fail-closed 退出码 2·不静默放过。
+54. **坑表编号唯一槽**（check_pitfall_id_unique.py·W1110）——坑表条目的 E-NN 编号是「按编号检索教训」的唯一键，但第 31 门禁只统计**条数**、不校验**编号唯一性** ⇒ 两批各占同一号时计数链五处全绿、CI 全绿，而检索静默取到错的那一条（W1109 收敛 16 组真重号后本槽成为常驻防线）。判据分层：**新增条目撞既有编号 ⇒ FAIL**（本批引入的）· 存量同号 ⇒ NOTE（不判红·避免存量拖死新批）· 条目本体口径（行首「- **」且含「（W#### 实证·E-NN）」⇒ 正文引用不算本体）。恒跑（任何提交都可能改坑表）。
+55. **PowerShell 解析槽**（check_powershell_parse.py·W1110）——仓内 `.ps1` 此前**零机器判据**：语法写坏只在运行时才报错 ⇒ pre-commit 守门链**静默失效**；且含非 ASCII 的 `.ps1` 缺 UTF-8 BOM 时 Windows PowerShell 5.1 的 `-File` 加载器回退 ANSI 代码页 ⇒ CJK 关键字**解析静默死亡**（E-68·而 pwsh 7 默认 UTF-8 ⇒ 本机跑得通 ≠ 5.1 跑得通）。两判据：C1 用官方 AST 解析器（`Parser::ParseFile`·只读不执行）逐文件解析，语法错误即 FAIL·解析器缺失按 fail-closed 退出码 2；C2 含非 ASCII 必须带 UTF-8 BOM（纯 ASCII 无 BOM 安全·不判红）。扫描域=tracked 的 `.ps1`（`archive/` 豁免）。
+56. **CSP 增量漂移槽**（check_csp_drift.py·W1110）——既有第 8 槽 `generate_csp.py --check` 是**全站**校验，不区分「谁改的」且无归因信息 ⇒ 存量漂移掩盖本批真问题、本批漂移被存量噪音淹没。增量口径：**交集判红**（本批改动页 ∩ CSP 漂移页 ≠ ∅ 即 FAIL）+ **merge-base 基点**逐段字节比对（只对本批碰过的内联段判漂移·CI 浅克隆无基点时退化为全段判·不漏判）+ **失败信息三要素**（漂移页 / 命中段标识 / 修复命令 `python scripts/generate_csp.py`）。
+57. **CSS 变量自引用槽**（check_css_var_selfref.py·W1110）——W1108 批把 chart-design 两页 INLINED 副本 `:root` 里的图表令牌定义改成「`--chart-1: var(--chart-1)`」**自引用** ⇒ 浏览器在 computed-value time 判为**无效值** ⇒ `getComputedStyle` 返回**空串** ⇒ 连带动使用它的 `--accent` 一并失效 ⇒ 图表主题色回落为黑/继承色（实测：改前 `--chart-1=#C8463A`·改后空串）。此类缺陷**全链无红灯**（CSP/结构/内联语法等门禁都不看 CSS 变量语义·页面照常渲染只是颜色不对）⇒ 机器判据缺位是根因。判据：扫 `site/**/*.html` 的全部 `<style>` 块 + `site/tokens.css`，任何 `--X: var(--X)` 同名自引用 ⇒ FAIL（带 fallback 的自引用仍判红·fallback 只在变量未定义时生效）。恒跑（毫秒级·与改动范围无关）。
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
@@ -176,13 +180,15 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 
-> **📖 阅读契约（W709）**：索引型——229 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——231 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（15）·流程 / 协作 / 取证（110）
+**占号共享区纪律（W1110·E-128）**：`reserve_w.py` 的预约集写在**工作树内**的 `tmpe/_w_reservations.json`（已 gitignore）⇒ **共享范围 = 工作树·不是仓库** ⇒ 占号必须在**主仓工作树**执行，隔离 clone 只用于施工（在那里占号他方看不见 ⇒ 必撞号）；落段前复核「本批号仍在预约集内」——该复核只有在占号登记于共享区时才有意义。
+
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（26）·级联 / CHANGELOG（20）·数据 / 内容可信度（15）·流程 / 协作 / 取证（112）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -308,4 +314,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1100-W1100 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-02（W1104）开局事实摘要 stats 新鲜度告警：读取生成件不再静默降级，缺失/损坏/空/陈旧四类各出告警，新增 5 例单测，坑表 E-91；2026-11-03（W1106）图表色工程批档 3 前置：补齐暗色图表令牌两处并对受影响页面做双态视觉取证，暗色取值按站内补偿机制等效呈现值定案，坑表 E-106 与 E-107；2026-11-03（W1107）坑表编号唯一性体检与机器判据建置（新增判据脚本 + 3 例单测），并合批档 3 前置：补齐暗色图表令牌两处（补偿等效值）并以 J2 双态取证证零差异；坑表 E-96~E-107；2026-11-03（W1108）图表色工程批档 3 原型验证：chart-design 中英两页读令牌喂图表，浅色零差异、暗色 24 处同向转换、元素零损失；改内联 JS 必重算 CSP 哈希，坑表 E-108 与 E-109；2026-11-03（W1109）坑表编号重号收敛：16 组跨批次真重号改号其余额条目（E-110~E-127），本体重号清零，引用按无歧义口径同步，条数不变。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1104-W1104 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-03（W1106）图表色工程批档 3 前置：补齐暗色图表令牌两处并对受影响页面做双态视觉取证，暗色取值按站内补偿机制等效呈现值定案，坑表 E-106 与 E-107；2026-11-03（W1107）坑表编号唯一性体检与机器判据建置（新增判据脚本 + 3 例单测），并合批档 3 前置：补齐暗色图表令牌两处（补偿等效值）并以 J2 双态取证证零差异；坑表 E-96~E-107；2026-11-03（W1108）图表色工程批档 3 原型验证：chart-design 中英两页读令牌喂图表，浅色零差异、暗色 24 处同向转换、元素零损失；改内联 JS 必重算 CSP 哈希，坑表 E-108 与 E-109；2026-11-03（W1109）坑表编号重号收敛：16 组跨批次真重号改号其余额条目（E-110~E-127），本体重号清零，引用按无歧义口径同步，条数不变；2026-11-03（W1110）档 3 施工前置批：门禁四槽接线（编号唯一 / PowerShell 解析 / CSP 增量漂移 / CSS 变量自引用）+ P-3 L2 口径告警 + 根修 W1108 的 CSS 变量自引用缺陷。如与上述权威文档冲突，以权威文档为准。*

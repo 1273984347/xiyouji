@@ -108,8 +108,13 @@
    }
   },
   "data/chart-design.html": {
-   "sha1": "4745ecc4f3d26cea80880b4a502974fc09059c2d",
-   "counts": {}
+   "sha1": "f6f6f4bdd01128c48da6a3009c478fb73e57090b",
+   "counts": {
+    "div.kpi-card": 1,
+    "div.domino-card": 4,
+    "div.domino-hardship": 3,
+    "div.sundial-card.highlight-stress": 1
+   }
   },
   "data/cognitive-psychology.html": {
    "sha1": "514934164304251caa79dd1d3545553ad35ac2b4",
@@ -144,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "13d9abd012fcb012350f359143162442ed9c3e7f",
+   "sha1": "d29e769de549cfea2506daa2e15f464194a2aa1e",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -532,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "3570602d64c703c4f420c0932fe345f0cb9e3345",
+   "sha1": "af91af40e2498b786385291994331d1d8afcc011",
    "counts": {
     "button.vt-btn": 1
    }
@@ -557,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "74ae6b69f874a6e64f3e50c6a06c11cc597aa211",
+   "sha1": "0ead2476b2d60849d4761148d74655ca36d8af07",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -635,7 +640,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "f221135265ae8919b6f1568e1143c31a79e3a9c2",
+   "sha1": "d61b63b97b10de8cac607c006329f7e410a4f55c",
    "counts": {
     "button": 1
    }
@@ -647,7 +652,7 @@
    }
   },
   "index.html": {
-   "sha1": "672e79207365ac1295aa3be5d927ead85700b1bd",
+   "sha1": "622e4b8b7504748278ee874d54cb180521109f9a",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -802,8 +807,13 @@
    "counts": {}
   },
   "en/chart-design.html": {
-   "sha1": "baeac46bb5119e0fd3d081a622fcde2d4d16abf9",
-   "counts": {}
+   "sha1": "efeed83d5067f794298a16ca000871c52b81ad3a",
+   "counts": {
+    "div.kpi-card": 1,
+    "div.domino-card": 4,
+    "div.domino-hardship": 3,
+    "div.sundial-card.highlight-stress": 1
+   }
   },
   "en/cognitive-psychology.html": {
    "sha1": "86cbea364cf77311c2ec45f7a09fbd2248728622",
@@ -1389,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "eeaf717a851073defad8f699dfa98323c08af700",
+   "sha1": "a89e1641de740546bc29e6917322ca02708e9516",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1479,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-11-02T22:59:04.703Z"
+ "generated_at": "2026-11-02T23:49:07.128Z"
 }

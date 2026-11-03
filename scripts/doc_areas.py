@@ -30,6 +30,77 @@ AREA_DIRS = (
 )
 
 
+# W1110（P-3 L2）：板块内容篇数的**异源复算**口径——单一事实源（C10 与 agent_start 共用）
+#
+# 背景：第 31 门禁 C10（W1105 立）用**独立实现**复算 7 个板块的内容篇数并与
+# `stats.json` 对账（排除集按大小写不敏感）；W1104 批的 `agent_start.py` 四类告警里
+# 留了「口径一致性待异源复算（C10）落地后接入」的挂账 ⇒ 本函数把 C10 的复算式
+# **抽成共享单一事实源**，让 C10 与开局摘要**同源复用**（避免两处实现漂移）。
+#
+# 排除集口径（与 stats.py 的 `_sec` 同口径）：README.md / index.md（大小写不敏感）
+# ——README 与 INDEX 皆为生成件，两种写法都排除。
+
+#: (板块目录相对路径, stats.json 键) ——顺序与 C10 判据一致
+BOARD_COUNT_SPEC = (
+    ("docs/06-个人随笔", "a2_docs"),
+    ("docs/02-人物深度分析", "a3_docs"),
+    ("docs/04-文化与历史背景", "a5_docs"),
+    ("docs/05-诗词歌赋", "a6_docs"),
+    ("docs/07-学以致用", "learn_docs"),
+    ("docs/08-提升认知", "cognition_docs"),
+    ("docs/09-精神塑造", "spirit_docs"),
+)
+
+#: 排除的生成件名（小写形态·比较时统一 lower()）
+BOARD_EXCLUDE = ("readme.md", "index.md")
+
+
+def count_board_content(board_dir):
+    """板块**顶层**内容 .md 篇数（排除 README.md / index.md·大小写不敏感）。
+
+    目录不存在返回 -1（与 count_content_md 的「缺失即 -1」口径一致）。
+    这是 C10 与 agent_start L2 告警**共用**的复算式——两处必须同口径，
+    否则同一份 stats.json 会在门禁与开局摘要给出不同结论。
+    """
+    p = os.path.join(ROOT, board_dir)
+    if not os.path.isdir(p):
+        return -1
+    return sum(1 for fn in os.listdir(p)
+               if fn.endswith(".md") and fn.lower() not in BOARD_EXCLUDE)
+
+
+def recount_boards():
+    """返回 {stats 键: 实算篇数}（仅含目录存在的板块）。"""
+    out = {}
+    for board_dir, key in BOARD_COUNT_SPEC:
+        n = count_board_content(board_dir)
+        if n >= 0:
+            out[key] = n
+    return out
+
+
+def board_count_mismatches(stats):
+    """返回 [(stats 键, 实算, 存值)] —— 异源复算与 stats.json 不一致的项。
+
+    stats 非 dict 或键缺 value 时跳过（不可比项不判）。
+    """
+    out = []
+    if not isinstance(stats, dict):
+        return out
+    real = recount_boards()
+    for key, computed in sorted(real.items()):
+        ent = stats.get(key)
+        if not isinstance(ent, dict) or "value" not in ent:
+            continue
+        try:
+            stored = int(ent["value"])
+        except (TypeError, ValueError):
+            continue
+        if stored != computed:
+            out.append((key, computed, stored))
+    return out
+
+
 def count_content_md(area_dir):
     """统计板块顶层 .md 文件数，排除 README.md（非正文）；目录缺失返回 -1。
 

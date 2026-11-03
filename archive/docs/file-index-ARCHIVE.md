@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -9794,3 +9794,156 @@ docs/11-方案报告/README.md
 | scripts/output/_w987_family_scan.json | W987 | 族盘点报告 |
 | scripts/output/_w987_spec.json | W987 | 本批级联 spec |
 | scripts/output/_cascade_files_W987.txt | W987 | 级联落盘清单 |
+## W988 水墨卡族投放批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/reader/ch004.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/ch007.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/ch010.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/ch014.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/ch015.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/ch019.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/ch023.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/ch027.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/ch030.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/ch031.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/culture/历史玄奘与小说玄奘专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/culture/明代科举制度对照专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/culture/西游与佛教禅宗专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/essays/西游与服饰学.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/essays/西游与民俗学.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/九灵元圣-方向二深化.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/二郎神.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/取经团队动力学深化专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/哪吒.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/地府体系深化专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/大鹏金翅雕.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/太上老君.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/奎木狼外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/女儿国国王.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/如来.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/嫦娥外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/孙悟空.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/托塔李天王外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/昴日星官.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/沙僧-方向二深化.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/沙僧.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/沙僧外传.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/火焰山土地外传.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/灵感大王.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/灵感大王外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/牛魔王.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/独角兕大王.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/狮驼岭三魔-方向二深化.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/猪八戒-方向二深化.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/猪八戒.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/猪八戒深化专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/玉兔精.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/玉帝.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/白骨精.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/白骨精外传.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/白鹿精-方向二深化.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/白龙马.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/百眼魔君.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/紧箍儿的内侧-器物传记.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/红孩儿.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/罗刹女外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/老鼋外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/老鼠精.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/蜘蛛精.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/people/蝎子精.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/观音.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/赛太岁.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/车迟国三国师外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/金角大王.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/金角银角深化专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/铁扇公主.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/银角大王.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/镇元大仙.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/黄眉老佛外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/黄袍怪.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/黄风怪外传.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/people/黑熊精.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/poetry/原著景物诗分类赏析专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/poetry/原著景物诗赏析专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/poetry/西游诗词意象谱系专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/二十八星宿专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/五方揭谛专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/佛学AI西游三维语义映射表.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/六丁六甲专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/兵器的自我修养专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/取经团队-凭什么走到西天.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/取经密码学专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/取经教育学专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/取经路径地理符号学专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/取经路线地理专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/唐僧-凡躯圣心.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/器物传记学专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/四值功曹专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/大闹天宫-英雄还是悲剧.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/小妖生命史专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/招安的两种结局专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/无字真经专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/水帘洞-瀑布门的世界.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/水帘洞专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/沙僧-沉默者的智慧.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/法宝系统专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/混世四猴专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/猪八戒-不愿承认的自己.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/猴王到行者-五次蜕变.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/真假美猴王专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/神学干预机制专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/空间叙事学专题.html | W988 | 接入落位（横幅/场景图）+ og:image 换专属图 |
+| site/reader/themes/筋斗云专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/紧箍咒专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/蟠桃园-体制内的秘密.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/西游与死亡研究专题.html | W988 | og:image 换专属 1200×630 裁切版 |
+| site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html | W988 | og:image 换专属 1200×630 裁切版 |
+| docs/11-方案报告/计划方案/T34-任务计划执行与经验沉淀报告-2026-10-27.md | W988 | 终稿报告件（计划 + 执行合一·含 27 张落位表） |
+| docs/11-方案报告/README.md | W988 | §六 计划方案补登记 3 行（序号 41/42/43·T-18 / T-21 / T-34）· 件数 43 → 44 |
+| docs/agent/pitfalls.md | W988 | 坑表 +7 条（80 → 87：行尾二次替换 / 设备像素当 CSS 像素 / 主体检测排除朱砂赭金 / 关键词法双重失效 / 主体顶裁前提 / 判据自身缺陷） |
+| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W988 | 新增 §2.9「既有资产投放：落位表先行 + 三族资产三套类名 + 派生裁切的主体检测」 |
+| docs/00-导读/W批次编号对账表.md | W988 | W988 认领行 + 收官状态 |
+| AGENTS.md | W988 | 坑位条数声明 80 → 87 |
+| HANDOVER.md | W988 | 坑位条数指针 80 → 87 |
+| CHANGELOG.md | W988 | W988 段 |
+| README.md | W988 | 当前批次版本行 |
+| STRUCTURE.md | W988 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W988 | 当前批次版本行 |
+| .github/workflows/README.md | W988 | 工作流层版本面推进 W988 |
+| site/index.html | W988 | 页脚批次链插入 W988 |
+| site/data/cross-time-danmaku.html | W988 | 页脚批次链插入 W988 |
+| site/data/tag-cloud.html | W988 | 页脚批次链插入 W988 |
+| site/dukou-engine.html | W988 | 页脚批次链插入 W988 |
+| archive/docs/AGENTS-ARCHIVE.md | W988 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W988 | version 同步为 W988 |
+| scripts/output/file-index.md | W988 | W988 段插入 |
+| scripts/check_seo_head.py | W988 | og:image 白名单改**目录派生式**（W988 依用户指令「分回次 og:image」授权改管控件·W922 先例） |
+| scripts/_w988_plan.py | W988 | 本批工具/产物 |
+| scripts/_w988_subject.py | W988 | 本批工具/产物 |
+| scripts/_w988_inventory.py | W988 | 本批工具/产物 |
+| scripts/_w988_match.py | W988 | 本批工具/产物 |
+| scripts/_w988_precheck.py | W988 | 本批工具/产物 |
+| scripts/_w988_make_assets.py | W988 | 本批工具/产物 |
+| scripts/_w988_insert.py | W988 | 本批工具/产物 |
+| scripts/_w988_fix_eol.py | W988 | 本批工具/产物 |
+| scripts/_w988_verify.py | W988 | 本批工具/产物 |
+| scripts/_w988_sheet.py | W988 | 本批工具/产物 |
+| scripts/_w988_card_sheet.py | W988 | 本批工具/产物 |
+| scripts/_w988_pitfalls.py | W988 | 本批工具/产物 |
+| scripts/_w988_docs.py | W988 | 本批工具/产物 |
+| scripts/_w988_make_spec.py | W988 | 本批工具/产物 |
+| scripts/_w988_fix_cascade.py | W988 | 本批工具/产物 |
+| scripts/_w988_fix_gates.py | W988 | 本批工具/产物 |
+| scripts/check_seo_head.py | W988 | 本批工具/产物 |
+| scripts/output/_w988_spec.json | W988 | 本批工具/产物 |
+| scripts/output/_w988_precheck.json | W988 | 本批工具/产物 |
+| scripts/output/_w988_assets.json | W988 | 本批工具/产物 |
+| scripts/output/_w988_inventory.json | W988 | 本批工具/产物 |
+| scripts/output/_w988_match.json | W988 | 本批工具/产物 |
+| scripts/output/_w988_card_map.json | W988 | 本批工具/产物 |
+| scripts/output/_w988_card_sheet.png | W988 | 本批工具/产物 |
+| scripts/output/_w988_sheet-banner.png | W988 | 本批工具/产物 |
+| scripts/output/_w988_sheet-og.png | W988 | 本批工具/产物 |
+| scripts/output/_cascade_files_W988.txt | W988 | 本批工具/产物 |

@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（176）
+## 文件（179）
 
 ### Markdown 文档
 
@@ -102,9 +102,11 @@
 - `check_corruption.py`
 - `check_crop.py`
 - `check_cross_line_rewrite.py`
+- `check_csp_drift.py`
 - `check_css_decl_separators.py`
 - `check_css_orphan_selectors.py`
 - `check_css_var_refs.py`
+- `check_css_var_selfref.py`
 - `check_data_copy_chain.py`
 - `check_db_schema.py`
 - `check_design_doc_drift.py`
@@ -135,6 +137,7 @@
 - `check_perf_shadow.py`
 - `check_pitfall_id_unique.py`
 - `check_plan_template.py`
+- `check_powershell_parse.py`
 - `check_repo_layout.py`
 - `check_review_trigger.py`
 - `check_script_coverage.py`

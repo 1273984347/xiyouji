@@ -254,20 +254,30 @@
    }
   },
   "data/chart-design.html": {
-   "measured": 0,
+   "measured": 9,
    "exempted": 7,
-   "nonExempt": 0,
+   "nonExempt": 2,
    "fail": false,
    "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
     "div.domino-card": {
-     "measured": 0,
+     "measured": 4,
      "exempted": 4,
      "nonExempt": 0
     },
     "div.domino-hardship": {
-     "measured": 0,
+     "measured": 3,
      "exempted": 3,
      "nonExempt": 0
+    },
+    "div.sundial-card.highlight-stress": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
     }
    }
   },
@@ -2035,28 +2045,28 @@
    "perCls": {}
   },
   "en/chart-design.html": {
-   "measured": 0,
+   "measured": 9,
    "exempted": 9,
    "nonExempt": 0,
    "fail": false,
    "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
     "div.domino-card": {
-     "measured": 0,
+     "measured": 4,
      "exempted": 4,
      "nonExempt": 0
     },
     "div.domino-hardship": {
-     "measured": 0,
+     "measured": 3,
      "exempted": 3,
      "nonExempt": 0
     },
     "div.sundial-card.highlight-stress": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
+     "measured": 1,
      "exempted": 1,
      "nonExempt": 0
     }
@@ -3702,9 +3712,7 @@
  },
  "fails": [],
  "notes": [
-  "data/chart-design.html 陈旧豁免（类已不在）：div.domino-card、div.domino-hardship",
-  "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）",
-  "en/chart-design.html 陈旧豁免（类已不在）：div.domino-card、div.domino-hardship、div.sundial-card.highlight-stress、div.kpi-card"
+  "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）"
  ],
- "generated_at": "2026-11-02T22:08:16.195Z"
+ "generated_at": "2026-11-02T23:49:07.132Z"
 }
