@@ -55,8 +55,44 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      # W1118 根修二：Lighthouse CI 只采集 5 个页面（dashboard / index / timeline /
+      #   character-relationship-3d / text-search）；本次改动未触及这 5 页 ⇒ 性能读数
+      #   不可能变化 ⇒ 跳过采集（每次推送省 ~3-6 分钟 runner 时间）。
+      #   定时与手动触发恒为全量（paths 过滤对 schedule 不生效）。
+      - name: Skip if collected pages untouched
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVENT="${{ github.event_name }}"
+          if [ "$EVENT" = "schedule" ] || [ "$EVENT" = "workflow_dispatch" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$EVENT" = "pull_request" ]; then
+            CHANGED=$(git -c core.quotePath=false diff --name-only "${{ github.event.pull_request.base.sha }}...${{ github.sha }}" || true)
+          else
+            BEFORE="${{ github.event.before }}"
+            if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+              CHANGED=$(git -c core.quotePath=false diff --name-only HEAD~1 HEAD || true)
+            else
+              CHANGED=$(git -c core.quotePath=false diff --name-only "$BEFORE" "${{ github.sha }}")
+            fi
+          fi
+          NEEDED=false
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              site/dashboard.html|site/index.html|site/data/timeline.html|site/data/character-relationship-3d.html|site/data/text-search.html) NEEDED=true ;;
+            esac
+          done <<< "$CHANGED"
+          echo "run=$([ "$NEEDED" = "true" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js 20
+        if: steps.scope.outputs.run != 'false'
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: '20'
@@ -64,15 +100,18 @@ jobs:
           cache-dependency-path: scripts/package-lock.json
 
       - name: Set up Python 3.12
+        if: steps.scope.outputs.run != 'false'
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
           python-version: '3.12'
           # W401 修复：本 job 不安装 pip 依赖（仅 npm lhci），移除 cache: pip 避免 Post 步骤缓存目录缺失报错（同 W400 a11y-audit 修复）
 
       - name: Install Lighthouse CI
+        if: steps.scope.outputs.run != 'false'
         run: npm install -g @lhci/cli@0.13.x
 
       - name: Start static server
+        if: steps.scope.outputs.run != 'false'
         run: |
           python -m http.server 8000 --directory site &
           echo $! > server.pid
@@ -80,6 +119,7 @@ jobs:
           curl -sSf http://localhost:8000/dashboard.html -o /dev/null
 
       - name: Create LHCI config
+        if: steps.scope.outputs.run != 'false'
         # W557：character-relationship-3d 为 Three.js 重页，CI runner + desktop 4x 降速下
         # TBT 贴 300ms 阈值边缘（本地 A/B 实测 HEAD 40ms / 基线 24-30ms 未节流，CI 节流后越线），
         # 该页独立预算 600ms；其余页面全局 300ms 不变。
@@ -135,6 +175,7 @@ jobs:
           EOF
 
       - name: Run Lighthouse CI autorun
+        if: steps.scope.outputs.run != 'false'
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
         with:
           max_attempts: 3
