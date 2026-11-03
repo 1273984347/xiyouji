@@ -42,6 +42,8 @@ import re
 import subprocess
 import sys
 
+from doc_areas import board_count_mismatches  # W1110（P-3 L2）：C10 复算式共享单一事实源
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
@@ -714,32 +716,13 @@ def _check_c10_stats_independent(inp, issues):
     stats = inp.get("stats")
     if not isinstance(stats, dict):
         return
-    boards = (
-        ("06-个人随笔", "a2_docs"),
-        ("02-人物深度分析", "a3_docs"),
-        ("04-文化与历史背景", "a5_docs"),
-        ("05-诗词歌赋", "a6_docs"),
-        ("07-学以致用", "learn_docs"),
-        ("08-提升认知", "cognition_docs"),
-        ("09-精神塑造", "spirit_docs"),
-    )
-    for board, key in boards:
-        d = os.path.join(ROOT, "docs", board)
-        if not os.path.isdir(d):
-            continue
-        try:
-            names = [f for f in os.listdir(d) if f.endswith(".md")]
-        except OSError:
-            continue
-        content = [f for f in names if f.lower() not in ("readme.md", "index.md")]
-        ent = stats.get(key)
-        if not isinstance(ent, dict) or "value" not in ent:
-            continue
-        if int(ent["value"]) != len(content):
-            issues.append(
-                "C10: 板块 %s 内容篇数异源复算 %d ≠ stats.json %s=%d（排除集口径漂移或未刷新 stats）"
-                % (board, len(content), key, int(ent["value"]))
-            )
+    # W1110（P-3 L2）：复算式抽到 doc_areas.board_count_mismatches（共享单一事实源）——
+    # 本判据与 agent_start 的 L2 告警**同源复用**，避免两处实现漂移（原内联实现在此）。
+    for key, computed, stored in board_count_mismatches(stats):
+        issues.append(
+            "C10: 板块 %s 内容篇数异源复算 %d ≠ stats.json %s=%d（排除集口径漂移或未刷新 stats）"
+            % (key, computed, key, stored)
+        )
 
 
 def _load_stats():

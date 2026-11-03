@@ -1,3 +1,26 @@
+### W1110（2026-11-03）：图表色工程档 3 施工前置批（门禁与接线四槽 + CSS 令牌自引用根修）
+
+> **来源**：用户 2026-11-03 指令「开 W1110（54 槽编号唯一性 + 55 槽 PowerShell 解析 + P-3 L2 接线 + CSP 零漂移门禁 + 24 处差异 ΔL* 双口径核档 + 占号纪律），一个 PR、CI 跑一次，且合并只看 required 两项」。
+> - **文件**：scripts/verify_delivery.py · scripts/check_powershell_parse.py · scripts/check_csp_drift.py · scripts/check_css_var_selfref.py · scripts/check_pitfall_id_unique.py · scripts/doc_areas.py · scripts/check_doc_sync.py · scripts/agent_start.py · site/data/chart-design.html · site/en/chart-design.html · scripts/guardrails/check_changed.ps1 · scripts/install_hooks.ps1 · xiyouji-agent-web/cleanup.ps1 · docs/agent/gates.md · docs/agent/pitfalls.md · AGENTS.md · HANDOVER.md · .agent/skills/puti-shouye/SKILL.md
+
+**本批要点**（门禁与接线批·**新槽四个**·工具面为主·页面改动 2 件）：
+
+① **第 54 槽「坑表编号唯一」**：W1106 建置的判据自此**兑现接线**（W1107 已登记为「下一批接线」）—— 坑表 E-NN 编号是「按编号检索教训」的唯一键，而第 31 门禁只统计条数不校验编号唯一性 ⇒ 两批各占同号时计数链五处全绿而检索静默取到错条目；本槽常驻后新增条目撞号**当场判红**。
+
+② **第 55 槽「PowerShell 解析」**：仓内 .ps1 此前**零机器判据**。C1 用官方 AST 解析器（只读不执行）逐文件解析⇒语法错误即 FAIL（解析器缺失按 fail-closed 退出码 2）；C2 含非 ASCII 必须带 UTF-8 BOM（PS 5.1 的 -File 加载器回退 ANSI 代码页 ⇒ CJK 关键字**解析静默死亡**·E-68）。本槽**当场抓出 3 个存量缺陷并同批根治**（scripts/guardrails/check_changed.ps1 · scripts/install_hooks.ps1 · xiyouji-agent-web/cleanup.ps1 均含非 ASCII 且无 BOM）—— 加 BOM 后 PS 5.1 解析实测通过。
+
+③ **P-3 L2 接线（复用 C10 同一复算式）**：W1104 批（P-3 L1）落地四类 stats 告警时挂账「口径一致性待异源复算（C10）落地后接入」⇒ 本批把 C10 的板块篇数复算式**抽到 scripts/doc_areas.py** 作共享单一事实源（C10 与 agent_start **同源复用**），agent_start 新增第 5 类告警（口径漂移）。正样本零告警、负样本（注入 a2_docs 漂移）实测命中。
+
+④ **第 56 槽「CSP 增量漂移」**：既有第 8 槽是全站校验，不区分「谁改的」且无归因信息 ⇒ 存量漂移掩盖本批真问题。本槽按**交集判红**（本批改动页 ∩ 漂移页 ≠ ∅）+ **merge-base 基点**逐段字节比对（只对本批碰过的内联段判）+ **失败信息三要素**（漂移页 / 命中段标识 / 修复命令）。端到端负样本实测：注入内联脚本不重算 CSP ⇒ 精准报出「第 3 段内联块（哈希 sha256-IYSkkgjHaoho）」；按提示重算后转绿。
+
+⑤ **双口径核档 ⇒ 抓出并根修 W1108 真实缺陷（本批最大产出）**：对 W1108 的 24 处差异逐项核 ΔL*+ΔE76 时，核档数据与「24 处差异全为同向转换」的既有结论**不一致** ⇒ 追根：W1108 批把 chart-design 两页 INLINED 副本 `:root` 里的图表令牌定义改成「`--chart-1: var(--chart-1)`」**自引用** ⇒ 浏览器在 computed-value time 判为**无效值** ⇒ `getComputedStyle` 返回**空串** ⇒ 连带动使用它的 `--accent` 一并失效 ⇒ 图表主题色回落为继承色。Playwright 受控对照实测：改前 `--chart-1=#C8463A`·主题色 `rgb(200,70,58)` ✔；改后空串·`rgb(35,32,26)` ✘。**根修**：两页副本的 4 条自引用恢复为站点令牌真值（各 4 行·真源 site/tokens.css 完好未动）。**新增第 57 槽「CSS 变量自引用」**把该类缺陷变成常驻机器判据（负样本注入实测判红）。
+
+⑥ **占号共享区纪律 + 落段前占用复核判据**写入 AGENTS §4.3 最高频铁则与坑表 E-128（预约集在工作树内 ⇒ 共享范围=工作树 ⇒ 隔离 clone 占号他方不可见必撞号）。
+
+⑦ **顺带收口 W1088 僵尸行**：该行「登记为在途」但内容早已随 W1086 提交落地（§3.1 迁移批效率协议四条 + 收官清单 step 7 均在 main）且自身无 `type(w1088)` 标签提交 ⇒ preflight 恒红拒绝所有碰 HANDOVER.md 的新批次；本批核实后按收官流程回填状态列（**内容零改动·只改登记面**）。
+
+**验证**：四槽自测 22 例全绿 · 第 41 门禁三方编号对账 0 FAIL（AGENTS/gates/verify 三方同为 57 槽）· CSP 856 页零漂移（909 哈希）· 计数链 229 → **231**（流程段 110 → 112）· 坑表本体 101 条 0 重号（现役最大 E-129）。
+
 ### W1109（2026-11-03）：坑表编号重号收敛（18 条改号与本体清零）
 
 > **来源**：W1107 体检批（随 PR #104 落段）登记的存量去向。
@@ -1857,7 +1880,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1109），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1110），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -2000,17 +2023,3 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > **文件**：scripts/check_doc_size_budget.py · scripts/batch_cascade.py · scripts/preflight_check.py · scripts/archive_ledger_rows.py · AGENTS.md · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
 > **验证**：C4 负样本（>120 即红）+ 五条重写断言（CHANGELOG 有段+≤120）+ 去重后 ruff 清零 + pytest 全量 934 passed + 体积四窗全绿（109/109/59/60）。
 > **状态**：**已收官**（W989 git 反填·C4 收紧与五条索引化·含代提面）
-### W988（2026-10-27）：水墨卡族投放批（27 张 card-* 逐张定投放位置 + 分回次 og:image 换专属图）
-
-
-
-> **来源**：用户 2026-10-27 选区指定两项（① card-* 27 张按题材逐张定投放位置（人物卡→角色页顶部横幅 / 场景卡→主题页）② 分回次 og:image（现全站共用一张通用图，需另裁 1200×630 版））→ 问卷裁定两处执行口径（横幅＝另裁 1200×500 宽幅·人物半身特写；og:image＝只做有配图的页·纯裁切）。
->
-> - **文件**：site/reader/ch004.html、site/reader/ch007.html、site/reader/ch010.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch019.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、site/reader/ch031.html、site/reader/culture/历史玄奘与小说玄奘专题.html、site/reader/culture/明代科举制度对照专题.html、site/reader/culture/西游与佛教禅宗专题.html、site/reader/essays/西游与服饰学.html、site/reader/essays/西游与民俗学.html、site/reader/people/九灵元圣-方向二深化.html、site/reader/people/二郎神.html、site/reader/people/取经团队动力学深化专题.html、site/reader/people/哪吒.html、site/reader/people/地府体系深化专题.html、site/reader/people/大鹏金翅雕.html、site/reader/people/太上老君.html、site/reader/people/奎木狼外传.html、site/reader/people/女儿国国王.html、site/reader/people/如来.html、site/reader/people/嫦娥外传.html、site/reader/people/孙悟空.html、site/reader/people/托塔李天王外传.html、site/reader/people/昴日星官.html、site/reader/people/沙僧-方向二深化.html、site/reader/people/沙僧.html、site/reader/people/沙僧外传.html、site/reader/people/火焰山土地外传.html、site/reader/people/灵感大王.html、site/reader/people/灵感大王外传.html、site/reader/people/牛魔王.html、site/reader/people/独角兕大王.html、site/reader/people/狮驼岭三魔-方向二深化.html、site/reader/people/猪八戒-方向二深化.html、site/reader/people/猪八戒.html、site/reader/people/猪八戒深化专题.html、site/reader/people/玉兔精.html、site/reader/people/玉帝.html、site/reader/people/白骨精.html、site/reader/people/白骨精外传.html、site/reader/people/白鹿精-方向二深化.html、site/reader/people/白龙马.html、site/reader/people/百眼魔君.html、site/reader/people/紧箍儿的内侧-器物传记.html、site/reader/people/红孩儿.html、site/reader/people/罗刹女外传.html、site/reader/people/老鼋外传.html、site/reader/people/老鼠精.html、site/reader/people/蜘蛛精.html、site/reader/people/蝎子精.html、site/reader/people/观音.html、site/reader/people/赛太岁.html、site/reader/people/车迟国三国师外传.html、site/reader/people/金角大王.html、site/reader/people/金角银角深化专题.html、site/reader/people/铁扇公主.html、site/reader/people/银角大王.html、site/reader/people/镇元大仙.html、site/reader/people/黄眉老佛外传.html、site/reader/people/黄袍怪.html、site/reader/people/黄风怪外传.html、site/reader/people/黑熊精.html、site/reader/poetry/原著景物诗分类赏析专题.html、site/reader/poetry/原著景物诗赏析专题.html、site/reader/poetry/西游诗词意象谱系专题.html、site/reader/themes/二十八星宿专题.html、site/reader/themes/五方揭谛专题.html、site/reader/themes/佛学AI西游三维语义映射表.html、site/reader/themes/六丁六甲专题.html、site/reader/themes/兵器的自我修养专题.html、site/reader/themes/取经团队-凭什么走到西天.html、site/reader/themes/取经密码学专题.html、site/reader/themes/取经教育学专题.html、site/reader/themes/取经路径地理符号学专题.html、site/reader/themes/取经路线地理专题.html、site/reader/themes/唐僧-凡躯圣心.html、site/reader/themes/器物传记学专题.html、site/reader/themes/四值功曹专题.html、site/reader/themes/大闹天宫-英雄还是悲剧.html、site/reader/themes/小妖生命史专题.html、site/reader/themes/招安的两种结局专题.html、site/reader/themes/无字真经专题.html、site/reader/themes/水帘洞-瀑布门的世界.html、site/reader/themes/水帘洞专题.html、site/reader/themes/沙僧-沉默者的智慧.html、site/reader/themes/法宝系统专题.html、site/reader/themes/混世四猴专题.html、site/reader/themes/猪八戒-不愿承认的自己.html、site/reader/themes/猴王到行者-五次蜕变.html、site/reader/themes/真假美猴王专题.html、site/reader/themes/神学干预机制专题.html、site/reader/themes/空间叙事学专题.html、site/reader/themes/筋斗云专题.html、site/reader/themes/紧箍咒专题.html、site/reader/themes/蟠桃园-体制内的秘密.html、site/reader/themes/西游与死亡研究专题.html、site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html、scripts/_w988_plan.py、scripts/_w988_subject.py、scripts/_w988_inventory.py、scripts/_w988_match.py、scripts/_w988_precheck.py、scripts/_w988_make_assets.py、scripts/_w988_insert.py、scripts/_w988_fix_eol.py、scripts/_w988_verify.py、scripts/_w988_sheet.py、scripts/_w988_card_sheet.py、scripts/_w988_pitfalls.py、scripts/_w988_docs.py、scripts/_w988_make_spec.py、scripts/_w988_fix_cascade.py、scripts/_w988_fix_gates.py、scripts/check_seo_head.py、scripts/output/_w988_spec.json、scripts/output/_w988_precheck.json、scripts/output/_w988_assets.json、scripts/output/_w988_inventory.json、scripts/output/_w988_match.json、scripts/output/_w988_card_map.json、scripts/output/_w988_card_sheet.png、scripts/output/_w988_sheet-banner.png、scripts/output/_w988_sheet-og.png、scripts/output/_cascade_files_W988.txt、docs/11-方案报告/计划方案/T34-任务计划执行与经验沉淀报告-2026-10-27.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、dAGENTS.md、HANDOVER.md、CREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md。。
-
-**本批要点**：① **27 张 `card-*` 逐张定投放位置并接入**（用户选区指定的第一项）——**13 张人物卡 → 角色页/回目页顶部 `.chapter-banner` 横幅**（1:1 源另裁 1200×500 宽幅·人物半身特写·新立第三套类名·限宽 720px·暗色隐藏·横幅在题图之上形成「通栏横幅 + 420px 竖题图」宽窄分层），**14 张场景卡 → 主题页 `.chapter-scene` 场景位**（1:1 原图不裁·限宽 520px·插在正文首个章节标题前；「方向二深化」页用 `<h3>`、白骨精外传页无章节标题 ⇒ 插入点三情形兜底）⇒ **27 张全部有归属，闲置归零**；② **分回次 og:image**——**102 页**由「全站共用一张通用图」改为**该页首屏第一张配图**的 1200×630 专属裁切版（81 个既有题图页 + 11 个横幅页 + 10 个场景页；问卷裁定「只做有配图的页·纯裁切」⇒ **不新出图**），共享通用图的页面从 705 降到 603；③ **主体检测排除朱砂与赭金**——水墨卡族每张带朱红印章，整幅墨迹 bbox 会把印章算成主体 ⇒ 改用「面积 ≥ 200 px² 的连通簇 + 排除朱砂（r−g ≥ 35）与赭金（luma ≥ 90）」，27 张主体带全部正确；④ **三处踩坑当场修**——写盘行尾二次替换污染 102 页（CRLF→CRCRLF·字节级还原）；「按主体顶裁」在主体位于画面下部时切掉人物（1 张加特例带）；验收判据自身两处缺陷（CSS 计数未行首锚定 + 负样本形态不匹配 ⇒ 检查恒真）⇒ **坑表 +6 条（80 → 86）** + 方法论篇新增 §2.9「既有资产投放」。
-
-**验证**：落位表自检 27 张唯一 + 27 个目标页唯一 + 横幅/场景目标页无交叉 · 接入前预检 27 源图 / 27 目标页 / 81 既有题图页 / 102 og 页 · 资产派生 115 张（13 张 1200×500 + 102 张 1200×630·合计 8.2 MB）· 接入 13 + 14 + 102 且**幂等复跑全 SKIP** · 验收判据 V1–V9 **9/9 PASS**（含 figure 数 / CSS 规则数 / 插入点 / 暗色隐藏 / og 指向 / 资产尺寸 / 源卡引用）· **负样本自证 4/4 各自命中**（缺 CSS / 多 figure / 图文件缺失 / og 尺寸写错）· 27 页 + 115 资产 URL 全 200（`image/webp`）· 浏览器实跑渲染正常（猪八戒页：标题 → 720px 水墨横幅 → 420px 线描题图 → 轨标 → 正文·两层宽窄分明无重叠）· 行尾零污染（CRCRLF 0 · `git diff --numstat` 332 增 / 103 删无行尾噪音）· 第 48 门禁 0 FAIL · 全量门禁 55/55 段全绿。
-
-> - **状态**：已收官（**本批主体内容由并行会话的 W989 提交 `1fb1b14f` 代提入库**——该提交为全量提交且时点晚于本批 `git add -A`，故本批 115 个资产 / 102 个页面 / T34 报告 / 坑表 / 13 个脚本一并随之入库；本批另有一笔收官补齐提交登记代提事实与 E-17 坑位·既有 81 页题图的图源与 alt 未改动·27 张 `card-*` 源图本身未改动·12 个已有专属 og 图的页面未改动）
-

@@ -30,8 +30,8 @@ fail-closed 委派语义（W831·用户批准修 B1/B2·CLAUDE.md 第 10 条授�
 
 结构（W728 重构：原 905 行单体 main() 拆为五层·行为与输出逐字节不变）：
   模块级常量 → scope 分级工具 → 版本解析工具 → _Reporter/_GateContext（上报与执行态）
-  → 门禁参数表（_SimpleGate×18 / _StrictGate×26·委托合计 44）→ 通用 runner×2 → 13 个段函数
-  → 收尾三函数 → main() 编排（58 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
+  → 门禁参数表（_SimpleGate×18 / _StrictGate×31·委托合计 49）→ 通用 runner×2 → 13 个段函数
+  → 收尾三函数 → main() 编排（62 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
 """
 
 import json
@@ -111,13 +111,17 @@ EXPECTED_SECTION_NAMES = [
     "仓库布局",
     "提交范围",
     "图表中英对拍",
+    "坑表编号唯一",
+    "PowerShell解析",
+    "CSP增量漂移",
+    "CSS变量自引用",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
 # 14 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14）恒跑不跳；跳过只作用于
-# 45 个 subprocess 委托段（58 段 - 13 内联/bespoke·W1105 实核：_SIMPLE×18+_STRICT×27 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
+# 49 个 subprocess 委托段（62 段 - 13 内联/bespoke·W1110 实核：_SIMPLE×18+_STRICT×31 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -176,6 +180,7 @@ SCOPE_SITE_SECTIONS = {
     "搜索索引",
     "性能影子",
     "图表中英对拍",  # W1105：chart-design 中英两版数值 + 强制契约标记齐平（读页面 ⇒ site 轨）
+    "CSP增量漂移",  # W1110：本批改动的内联脚本字节 vs CSP meta（读页面 ⇒ site 轨）
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本",
@@ -192,6 +197,9 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "GSAP写法",
     "仓库布局",  # W1011：毫秒级、与 scope 无关
     "提交范围",  # W1007：必须恒跑——代提可能发生在任何 scope 的提交里（docs 提交也能夹带）
+    "坑表编号唯一",  # W1110：恒跑——任何提交都可能改坑表（新增条目撞号须当场红）
+    "PowerShell解析",  # W1110：恒跑——.ps1 语法/编码面与改动范围无关（tracked 口径·毫秒级）
+    "CSS变量自引用",  # W1110：恒跑——CSS 变量语义与改动范围无关（扫 site/ 全树·毫秒级）
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -466,7 +474,7 @@ class _SimpleGate(NamedTuple):
 
 
 class _StrictGate(NamedTuple):
-    """严格委托门禁参数行（_STRICT_GATES 共 26 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
+    """严格委托门禁参数行（_STRICT_GATES 共 31 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
 
     与简单段差异：① 执行异常直接 FAIL（不静默放过）；② 退出码 0 还须校验 stdout 含
     marker 汇总行（防 wrapper 假绿）；③ ok 详情取 stdout 指定行（ok_line=-1 末行/
@@ -645,7 +653,7 @@ _SIMPLE_GATES_POST_A11Y = [
     ),
 ]
 
-# 27 个严格委托段（第 28-53 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
+# 31 个严格委托段（第 28-57 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
 _STRICT_GATES = [
     _StrictGate(
         section="可引用性",
@@ -945,6 +953,69 @@ _STRICT_GATES = [
         fail_msg="chart-design 中英数值漂移或强制契约标记缺一侧（W1105 新增第 53 槽）",
         marker_msg="图表中英对拍槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
         ok_msg="图表中英对拍门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1110：坑表编号唯一性判据挂第 54 槽——该工具自 W1106 建置后一直「就绪未接线」，
+    # W1107 批已登记为「下一批接线」事项，本批兑现。病根：第 31 门禁只统计**条数**、
+    # 不校验**编号唯一性** ⇒ 两批各占同一号时计数链五处全绿而检索静默取到错的那条
+    # （W1109 收敛 16 组真重号后本槽成为常驻防线）。
+    _StrictGate(
+        section="坑表编号唯一",
+        script="check_pitfall_id_unique.py",
+        args=("--base", "HEAD"),
+        timeout=120,
+        marker="---- 坑表编号唯一性：",
+        crash_msg="坑表编号唯一性槽执行异常（第 54 槽·crash 即拦）: %s",
+        fail_msg="坑表条目编号撞既有编号（新增条目撞号·按 E-NN 检索会取到错条目）",
+        marker_msg="坑表编号唯一性槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="坑表编号唯一性门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1110：PowerShell 脚本可解析性判据挂第 55 槽——仓内 .ps1 此前零机器判据：
+    # 语法写坏只在运行时报错 ⇒ pre-commit 守门链静默失效；且含非 ASCII 的 .ps1 缺 UTF-8 BOM
+    # 时 Windows PowerShell 5.1 的 -File 加载器回退 ANSI 代码页 ⇒ CJK 关键字解析静默死亡（E-68）。
+    _StrictGate(
+        section="PowerShell解析",
+        script="check_powershell_parse.py",
+        args=("--gate",),
+        timeout=300,
+        marker="---- 第 55 门禁 PowerShell 解析：",
+        crash_msg="PowerShell 解析槽执行异常（第 55 槽·crash 即拦）: %s",
+        fail_msg="PowerShell 脚本语法错误或含非 ASCII 缺 UTF-8 BOM（PS 5.1 解析静默死亡·E-68）",
+        marker_msg="PowerShell 解析槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="PowerShell 解析门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1110：内联脚本 CSP 零漂移**增量**判据挂第 56 槽——既有第 8 槽是全站校验，
+    # 不区分「谁改的」且无归因信息；本槽按交集判红（本批改动页 ∩ 漂移页）+ merge-base 基点
+    # 逐段字节比对 + 失败信息三要素（漂移页 / 命中段 / 修复命令）。
+    _StrictGate(
+        section="CSP增量漂移",
+        script="check_csp_drift.py",
+        args=("--gate",),
+        timeout=300,
+        marker="---- 第 56 门禁 CSP 增量漂移：",
+        crash_msg="CSP 增量漂移槽执行异常（第 56 槽·crash 即拦）: %s",
+        fail_msg="本批改动的内联脚本字节已变但 CSP meta 未同步（跑 python scripts/generate_csp.py）",
+        marker_msg="CSP 增量漂移槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="CSP 增量漂移门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1110：CSS 变量自引用判据挂第 57 槽——本批施工⑤核档时实测抓出的真实缺陷：
+    # W1108 批把 chart-design 两页 INLINED 副本 :root 里的图表令牌定义改成「--chart-1: var(--chart-1)」
+    # 自引用 ⇒ 浏览器在 computed-value time 判为**无效值** ⇒ getComputedStyle 返回**空串**
+    # ⇒ 连带动使用它的 --accent 一并失效 ⇒ 图表主题色回落为黑/继承色。
+    # 这类缺陷全绿（CSP/结构/内联语法等门禁都不看 CSS 变量语义·页面照常渲染只是颜色不对）⇒ 机器判据缺位是根因。
+    _StrictGate(
+        section="CSS变量自引用",
+        script="check_css_var_selfref.py",
+        args=("--gate",),
+        timeout=180,
+        marker="---- CSS 变量自引用：",
+        crash_msg="CSS 变量自引用槽执行异常（第 57 槽·crash 即拦）: %s",
+        fail_msg="CSS 变量自引用（--X: var(--X)）⇒ 浏览器解析为空串·连带引用变量一并失效",
+        marker_msg="CSS 变量自引用槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="CSS 变量自引用门禁通过（%s）",
         ok_line=-1,
     ),
 ]
