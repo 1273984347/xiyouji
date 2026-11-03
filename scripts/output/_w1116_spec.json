@@ -9,6 +9,8 @@
  "agents_note": "2026-11-04（W1116）收官链自检闸批：新增 scripts/check_doc_numbers.py 与 scripts/check_registration_surface.py，接入 batch_closeout 末位（versions 之后、csp/cspcheck 之前）；新增单测 14 例含 6 个负样本；同步对方顺序锁单测与 pytest 计数标记；不改 verify 槽数（62 段不变）·不新增坑表条目（教训随 W1118 统一入表）。",
  "file_index_rows": [
   "| scripts/check_doc_numbers.py | W1116 | 本批工具/产物 |",
+  "| tests/unit/README.md | W1116 | 本批工具/产物 |",
+  "| tests/unit/INDEX.md | W1116 | 本批工具/产物 |",
   "| scripts/INDEX.md | W1116 | 本批工具/产物 |",
   "| scripts/output/INDEX.md | W1116 | 本批工具/产物 |",
   "| site/en/search.html | W1116 | 本批工具/产物 |",
