@@ -16,6 +16,16 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W993（2026-10-27）：全仓行尾定形批（CRLF 时代终结·用户问责「为什么不解决」）
+
+> **来源**：用户问责「CRLF 老问题你为什么不解决呢」——W971-W989 期间六次地鼠（裸 LF 注入/混行尾 fail-closed/CRLF 锚补丁）全部就地修未治系统，本批根治。
+> **摘要**：① **.gitattributes 落地**——text=auto eol=lf + 21 类二进制显式排除；② **renormalize**——22 个 i/crlf 烤死 blob + 混行尾面归 LF（纯机械提交 84cce358·入 .git-blame-ignore-revs 防 blame 污染）；③ **工作树重写**——git 内容比对（CRLF 经 clean=LF≈索引）致 reset --hard 不生效，按标准配方删跟踪件重 checkout：4688 文件全 i/lf w/lf·零 CRLF·零 mixed·工作树零漂移；④ **语义收口**——pitfalls 新条目「行尾定形时代结束」（补丁串按 CRLF 锚定作废·一律 
+；旧条目留作历史）；AGENTS 坑位计数 88→89 两处同步；⑤ 自此工具以 
+ 构建无分歧、混行尾防线（load fail-closed）保留作最后防线。
+> **文件**：.gitattributes · .git-blame-ignore-revs · docs/agent/pitfalls.md · AGENTS.md · CHANGELOG.md · scripts/output/file-index.md · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
+> **验证**：行尾普查 4688 全 i/lf w/lf（renormalize 前 22 i/crlf + 10 mixed 清零）+ pytest 全量 934 passed + verify docs rc=0 + 数字断言 N4 一致 + 体积四窗全绿。
+> **状态**：**已收官**（W993 git 反填·全仓行尾定形 4688 文件全 LF）
+
 ### W992（2026-10-27）：一次性件定向退役与提示位口径校准批
 
 > **来源**：用户菜单②（退役扫描）——[SCRIPTS] 提示位持续报警裸跟踪数 67>20。
