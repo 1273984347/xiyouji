@@ -42,7 +42,7 @@ import re
 import subprocess
 import sys
 
-from doc_areas import board_count_mismatches  # W1110（P-3 L2）：C10 复算式共享单一事实源
+from doc_areas import BOARD_KEY_NAMES, board_count_mismatches  # W1110（P-3 L2）：C10 复算式共享单一事实源
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -720,8 +720,8 @@ def _check_c10_stats_independent(inp, issues):
     # 本判据与 agent_start 的 L2 告警**同源复用**，避免两处实现漂移（原内联实现在此）。
     for key, computed, stored in board_count_mismatches(stats):
         issues.append(
-            "C10: 板块 %s 内容篇数异源复算 %d ≠ stats.json %s=%d（排除集口径漂移或未刷新 stats）"
-            % (key, computed, key, stored)
+            "C10: 板块 %s（%s）内容篇数异源复算 %d ≠ stats.json %s=%d（排除集口径漂移或未刷新 stats）"
+            % (BOARD_KEY_NAMES.get(key, key), key, computed, key, stored)
         )
 
 
