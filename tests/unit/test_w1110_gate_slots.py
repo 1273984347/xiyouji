@@ -54,6 +54,19 @@ def test_pitfall_no_false_positive_on_distinct_ids():
     assert not dups
 
 
+def test_pitfall_added_lines_limited_to_pitfalls_file():
+    """「新增行」必须**限定坑表文件**——否则其他文件的 + 行会被误当条目本体。
+
+    **跨会话回执知悉**：对方在其同族判据上踩到同款（全仓 diff ⇒ 形似条目的 + 行被误收）。
+    """
+    src = pitfall._added_lines.__doc__ or ""
+    assert "pitfalls.md" in src, "_added_lines 必须限定 pathspec 到坑表文件"
+    # 实跑：构造一个非坑表文件的新增行（形似条目本体）不应被收进新增集合
+    fake = ["- **他处**（W9999 实证·E-999）：非坑表文件的形似行"]
+    _dups, _stock, added = pitfall.audit("HEAD", [], added=fake)
+    assert len(added) == 1, "audit 的 added 参数应原样传入（单测层不做路径判定）"
+
+
 def test_pitfall_base_resolves_to_fork_point():
     """默认基点必须是**本批开叉点**（merge-base）而非 HEAD（HEAD ⇒ CI 上恒绿）。
 
