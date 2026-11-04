@@ -102,13 +102,31 @@ def collect_pending():
         established |= {w for w, _ in segments(arc)}
     out = []
     for p in sorted(glob.glob(os.path.join(ROOT, "scripts", "output", "_w*_spec.json"))):
-        spec = json.load(open(p, encoding="utf-8"))
+        try:
+            spec = json.load(open(p, encoding="utf-8"))
+        except Exception:
+            # W1117 根修：历史 spec 可能含裸控制字符而不可解析（实测 _w1115_spec.json·
+            # JSONDecodeError: Invalid control character）⇒ 阻断整个补段流程。
+            # 处置：该件对应的号若**已立段**（可从文件名取号）⇒ 跳过（不阻断补段）；
+            # 若**未立段** ⇒ 原样抛出（fail-closed·不得静默放过待补段的坏件）。
+            m = re.search(r"_w(\d+)_spec\.json$", os.path.basename(p))
+            if m and int(m.group(1)) in established:
+                continue
+            raise
+        # W1117 根修：完整性检查移到「已立段」判定**之后**。
+        # 病根：原顺序对**每一个** spec 做字段完整性检查 ⇒ 任何一个**已立段**的老 spec
+        # （实测 _w1077_spec.json 缺 changelog_body / milestone_block / agents_note）
+        # 都会把整个补段流程阻断（本批实测 AssertionError）⇒ 而完整性只对**待补段**有意义：
+        # 待补段的 spec 缺字段 ⇒ 仍 fail-closed 拦住（判据强度不降）。
+        batch = spec.get("batch")
+        if not batch:
+            continue
+        w = int(batch[1:])
+        if w in established:
+            continue
         missing = [k for k in SPEC_KEYS if k not in spec]
         if missing:
             raise AssertionError("%s 缺字段 %s（补段前先补 spec）" % (os.path.basename(p), missing))
-        w = int(spec["batch"][1:])
-        if w in established:
-            continue
         out.append((w, spec))
     out.sort(key=lambda t: t[0])
     return out, established

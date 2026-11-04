@@ -177,7 +177,9 @@ def _face_changelog(ctx):
     _ins = new_title + ctx.spec["changelog_body"].replace("\n", nl) + nl + cur_anchor
     out = re.sub(rf"^{re.escape(cur_anchor)}", lambda m: _ins, s, count=1, flags=re.M)  # W717：lambda 字面替换——replacement 串语义会把 body 中的 \d 等当转义（bad escape·本批实证）
     # re.sub 行首锚定插入（W712：防 body 自指·replace 全文计数会误伤）
-    out = out.replace(old_rule, new_rule, 1)
+    # 规则段上限属**版本面字面量**（W1117：跨文件字面量面）⇒ 改调共享模块
+    # （单一事实源·只引用不复制·幂等）——原先在此处就地 replace 属段面耦合。
+    out, _rule_changed = version_surface.advance_changelog_rule(out, ctx.batch)
     assert out.count(new_title) == 1 and out.count(new_rule) == 1
     ctx.pend.append((p, out, nl))
 

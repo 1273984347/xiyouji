@@ -42,6 +42,32 @@ def test_pick_target_none_when_both_empty():
     assert w is None
 
 
+def test_pick_target_new_section_not_at_top():
+    """索引新增段**不在顶位**（低号批后落段·乱序合并）→ 归属取该新增段，不落回更高号批。
+
+    W1117 实证：对方 W1118 先合入 main，我方 W1117 后落段 ⇒ 索引顶段仍是 W1118；
+    原判据只认顶段 ⇒ 归属落 W1118 ⇒ 拿他批 spec 当应动全集 ⇒ 假红。
+    """
+    idx = "### W1118（x）：更高号批\n### W1117（x）：本批新增段\n### W1116（x）：旧\n"
+    head = "### W1118（x）：更高号批\n### W1116（x）：旧\n"
+    w, why = ccs.pick_target_with_coverage(idx, head)
+    assert w == 1117, "归属应取新增段 W1117（实际 %s）" % w
+    assert "非顶位" in why
+
+
+def test_pick_target_by_spec_coverage():
+    """新增段集合为空（修正本批自身段 / 追加提交）⇒ 用 spec 覆盖性反查归属。
+
+    W1117 实证：amend 本批提交时「索引相对 HEAD 的新增段集合」为空 ⇒ 顶段判据落 W1118 ⇒ 判红。
+    """
+    idx = "### W1118（x）：更高号批\n### W1117（x）：本批段\n"
+    head = idx
+    staged = ["scripts/version_surface.py"]
+    w, why = ccs.pick_target_with_coverage(idx, head, staged)
+    assert w == 1117, "归属应反查到 W1117（实际 %s）" % w
+    assert "覆盖" in why
+
+
 def test_plan_subset_ok():
     ok, extra = ccs.plan(["a.py", "b.md"], ["a.py", "b.md", "c.md"])
     assert ok is True and extra == []
