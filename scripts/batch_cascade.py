@@ -449,14 +449,43 @@ def _face_citation(ctx):
 
 
 def _face_file_index(ctx):
-    """file-index 最新段插入。"""
+    """file-index 最新段插入（**幂等**：本批号已立段则不再追加·W1120 根修）。
+
+    W1120 根修（对方 W1121 批实证转交我方）：本面此前**无条件**在「最新段」之前插入
+    ⇒ 当本批号已由补段工具（backfill_changelog）立过段时，会插出**同号双段**
+    （CHANGELOG 面有「batch == 顶段+1」断言挡住 ⇒ 只有 file-index 面漏判）。
+    ⇒ 本批号已立段时：**内容一致 ⇒ 零变化不追加**（幂等）；
+      **内容不一致 ⇒ fail-closed** 并指引用 scripts/rebuild_section.py 重建该段
+      （不静默留 stale 段·不制造同号双段）。
+    """
     # ---------- file-index ----------
     p = "scripts/output/file-index.md"
     s, nl = load(p)
+    batch_w = int(str(ctx.batch).lstrip("Ww"))
+    head = "## {} {}（{}）".format(
+        ctx.batch, re.sub(r"^W\d+\s+", "", ctx.spec["title"].split(" — ")[0].split("（")[0]).strip(), ctx.date)
+    seg_lines = [head, "", "| 文件 | W | 说明 |", "|---|---|---|"] + list(ctx.spec["file_index_rows"]) + ["", ""]
+    rows = nl.join(seg_lines)          # 原生行尾（落盘用）
+    rows_lf = "\n".join(seg_lines)      # 归一形态（与 load() 读出的内存形态一致·供内容判等）
+    # W1120 幂等判定：本批号是否已立段
+    m_exist = None
+    for _m in re.finditer(r"^## (W\d+) ", s, re.M):
+        if int(_m.group(1)[1:]) == batch_w:
+            m_exist = _m
+            break
+    if m_exist is not None:
+        _nxt = re.search(r"^## (W\d+) ", s[m_exist.end():], re.M)
+        _end = m_exist.end() + (_nxt.start() if _nxt else len(s) - m_exist.end())
+        _old = s[m_exist.start():_end]
+        if _old.strip() == rows_lf.strip():
+            print("[FILE-INDEX] W%d 段已存在且内容一致 ⇒ 幂等跳过（不追加·防同号双段）" % batch_w)
+            return
+        raise AssertionError(
+            "file-index 已存在 W%d 段但内容与 spec 不一致 ⇒ 拒绝追加（防同号双段·不静默留 stale）"
+            "——修法=跑 py -3 scripts/rebuild_section.py --batch W%d --spec <spec 路径> --apply 重建该段"
+            % (batch_w, batch_w))
     mm = re.search(r"## (W\d+) ", s)
     assert mm, "file-index 未找到最新段"
-    rows = nl.join(["## {} {}（{}）".format(ctx.batch, re.sub(r"^W\d+\s+", "", ctx.spec["title"].split(" — ")[0].split("（")[0]).strip(), ctx.date),
-                    "", "| 文件 | W | 说明 |", "|---|---|---|"] + ctx.spec["file_index_rows"] + ["", ""])
     ctx.pend.append((p, s.replace(mm.group(0), rows + mm.group(0), 1), nl))
 
 
