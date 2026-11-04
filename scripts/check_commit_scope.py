@@ -147,11 +147,83 @@ def plan(staged, spec_set):
     return (not extra), extra
 
 
+def _index_blobs():
+    """索引态 blob 表（路径 → sha）——一次 git 调用取全量。"""
+    out = {}
+    for ln in _git("ls-files", "-s").splitlines():
+        parts = ln.split("\t", 1)
+        if len(parts) != 2:
+            continue
+        fields = parts[0].split()
+        if len(fields) >= 3:
+            out[parts[1]] = fields[1]
+    return out
+
+
+def _tree_blobs(rev):
+    """rev 侧的 blob 表（路径 → sha）——rev 取不到（CI 浅克隆等）⇒ 空表。"""
+    out = {}
+    for ln in _git("ls-tree", "-r", rev).splitlines():
+        m = re.match(r"^\d+ blob ([0-9a-f]+)\t(.+)$", ln)
+        if m:
+            out[m.group(2)] = m.group(1)
+    return out
+
+
+def carried_paths(staged):
+    """**merge 带入面**：索引 blob sha 与 origin/main 侧 blob sha 相同的路径。
+
+    W1123（并行会话 W1120 实证）：我方 PR 先合入 main 后，对方把新 main merge 进
+    自己分支 ⇒ 索引里含**他批交付面**（他批的 CHANGELOG 段 / 报告 / spec 等）⇒
+    提交范围门禁按「新增段集合」把归属判到他批 ⇒ 本提交自己的交付面被判
+    「spec 之外」⇒ **假红**。
+
+    ⇒ 判据：内容与 main 一致 ⇒ 该文件是 main 带来的、不是本提交改的 ⇒ 剔除。
+    **判据强度不降**：内容与 main 不同（确属本提交改动）的文件仍进判定 ⇒ 真越界仍判红。
+    origin/main 取不到（CI 浅克隆等）⇒ 返回空集（保持原行为·宁多报不漏判）。
+    """
+    if not staged:
+        return set()
+    main = _tree_blobs("origin/main")
+    if not main:
+        return set()
+    idx = _index_blobs()
+    return {p for p in staged if idx.get(p) and idx.get(p) == main.get(p)}
+
+
+def pick_target_merged(index_text, head_text, staged=None, main_text=None, carried=None):
+    """W1123：**merge 场景**的归属判定（新增函数·不改既有公开函数签名与行为）。
+
+    ⇒ 把「merge 带入」的内容（段与文件）从判定里剔除：
+      · 带入的段 = origin/main 侧已存在的段（CHANGELOG 文本比对）；
+      · 带入的文件 = carried（内容与 main 一致 ⇒ 非本提交改动）。
+    ⇒ 剔除后若「本提交新增段集合」为空 ⇒ 用剩余路径集做 spec 覆盖性反查 ⇒ 归属本提交批次。
+    **判据强度不降**：真越界（剩余路径集不在本批 spec）仍判红。
+    """
+    iw = top_w(index_text)
+    idx_segs = set(segments(index_text))
+    carried_segs = set(segments(main_text or ""))
+    new_segs = sorted(idx_segs - set(segments(head_text)) - carried_segs)
+    if len(new_segs) == 1 and new_segs[0] != iw:
+        return new_segs[0], "索引新增段 W%d（非顶位·乱序落段）" % new_segs[0]
+    carried = set(carried or [])
+    st_eff = set(staged or []) - carried
+    if not new_segs and carried_segs and st_eff:
+        for cand in sorted(idx_segs, reverse=True):
+            sp = spec_paths_for(cand)
+            if sp and st_eff.issubset(set(sp)):
+                return cand, "spec 覆盖性反查（剔除 merge 带入面后索引 ⊆ W%d spec）" % cand
+    return pick_target_with_coverage(index_text, head_text, staged)
+
+
 def run_gate():
     staged = staged_paths()
     idx_text, head_text = _show(":"), _show("HEAD")
-    target, why = pick_target_with_coverage(idx_text, head_text, staged)
+    main_text = _show("origin/main")
+    carried = carried_paths(staged)
+    target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
     spec_set = spec_paths_for(target)
+    effective = sorted(set(staged) - set(carried))
 
     fails = []
     warn = ""
@@ -160,7 +232,9 @@ def run_gate():
     elif spec_set is None:
         warn = "WARN  W%s 无 spec（scripts/output/_w%s_spec.json）——判据不可执行，本回合不判" % (target, target)
     else:
-        ok, extra = plan(staged, spec_set)
+        if carried:
+            print("NOTE  merge 带入面 %d 件（内容与 origin/main 一致·非本提交改动）已排除判定" % len(carried))
+        ok, extra = plan(effective, spec_set)
         if not ok:
             fails.append("索引含 %d 个本批 spec 之外的文件（归属 W%s·%s）——代提风险" % (len(extra), target, why))
             for n in extra[:10]:
@@ -181,12 +255,15 @@ def run_gate():
 def run_report():
     staged = staged_paths()
     idx_text, head_text = _show(":"), _show("HEAD")
-    target, why = pick_target_with_coverage(idx_text, head_text, staged)
+    main_text = _show("origin/main")
+    carried = carried_paths(staged)
+    target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
     spec_set = spec_paths_for(target)
-    ok, extra = plan(staged, spec_set)
+    effective = sorted(set(staged) - set(carried))
+    ok, extra = plan(effective, spec_set)
     print("归属：%s（%s）" % (target, why))
     print("spec：%s（%s 条）" % ("有" if spec_set else "缺", len(spec_set or [])))
-    print("索引：%d 件" % len(staged))
+    print("索引：%d 件（merge 带入面 %d 件已排除）" % (len(staged), len(carried)))
     print("多出：%s" % (extra or "无"))
     return 0 if ok else 1
 
