@@ -17,14 +17,14 @@
 | a6_docs | 13 | docs/05-诗词歌赋/*.md（排除 README） | W904 | W904 |
 | cognition_docs | 3 | docs/08-提升认知/*.md（排除 README） | W904 | W1096 |
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
-| gate_count | 57 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | 1110 |
+| gate_count | 60 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W1135 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
 | icon_allowlist_entries | 71 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1053 |
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W894 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 27 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | 1068 |
-| pytest_collected | 1373 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1134 |
-| report_docs | 154 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1134 |
+| pytest_collected | 1387 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1135 |
+| report_docs | 155 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1135 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -37,6 +37,11 @@
 | w864_entries | 256 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1053 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1135（2026-11-05 05:22:15）
+- gate_count: 57 → 60
+- pytest_collected: 1373 → 1387
+- report_docs: 154 → 155
 
 ### W1134（2026-11-05 03:42:26）
 - pytest_collected: 1367 → 1373

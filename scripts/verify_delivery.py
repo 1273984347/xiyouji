@@ -30,8 +30,8 @@ fail-closed 委派语义（W831·用户批准修 B1/B2·CLAUDE.md 第 10 条授�
 
 结构（W728 重构：原 905 行单体 main() 拆为五层·行为与输出逐字节不变）：
   模块级常量 → scope 分级工具 → 版本解析工具 → _Reporter/_GateContext（上报与执行态）
-  → 门禁参数表（_SimpleGate×18 / _StrictGate×31·委托合计 49）→ 通用 runner×2 → 13 个段函数
-  → 收尾三函数 → main() 编排（62 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
+  → 门禁参数表（_SimpleGate×18 / _StrictGate×34·委托合计 52）→ 通用 runner×2 → 13 个段函数
+  → 收尾三函数 → main() 编排（65 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
 """
 
 import json
@@ -115,13 +115,16 @@ EXPECTED_SECTION_NAMES = [
     "PowerShell解析",
     "CSP增量漂移",
     "CSS变量自引用",
+    "动效守卫覆盖",
+    "design 资产清单",
+    "tooltip 多行间距",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
 # 14 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14）恒跑不跳；跳过只作用于
-# 49 个 subprocess 委托段（62 段 - 13 内联/bespoke·W1110 实核：_SIMPLE×18+_STRICT×31 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
+# 52 个 subprocess 委托段（65 段 - 13 内联/bespoke·W1110 实核：_SIMPLE×18+_STRICT×34 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -181,6 +184,8 @@ SCOPE_SITE_SECTIONS = {
     "性能影子",
     "图表中英对拍",  # W1105：chart-design 中英两版数值 + 强制契约标记齐平（读页面 ⇒ site 轨）
     "CSP增量漂移",  # W1110：本批改动的内联脚本字节 vs CSP meta（读页面 ⇒ site 轨）
+    "动效守卫覆盖",  # W1135：d3 动效守卫覆盖率（读页面 ⇒ site 轨）
+    "tooltip 多行间距",  # W1135：tooltip 多行间距（运行层 playwright·读页面 ⇒ site 轨）
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本",
@@ -474,7 +479,7 @@ class _SimpleGate(NamedTuple):
 
 
 class _StrictGate(NamedTuple):
-    """严格委托门禁参数行（_STRICT_GATES 共 31 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
+    """严格委托门禁参数行（_STRICT_GATES 共 34 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
 
     与简单段差异：① 执行异常直接 FAIL（不静默放过）；② 退出码 0 还须校验 stdout 含
     marker 汇总行（防 wrapper 假绿）；③ ok 详情取 stdout 指定行（ok_line=-1 末行/
@@ -653,7 +658,7 @@ _SIMPLE_GATES_POST_A11Y = [
     ),
 ]
 
-# 31 个严格委托段（第 28-57 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
+# 34 个严格委托段（第 28-60 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
 _STRICT_GATES = [
     _StrictGate(
         section="可引用性",
@@ -1017,6 +1022,50 @@ _STRICT_GATES = [
         ok_msg="CSS 变量自引用门禁通过（%s）",
         ok_line=-1,
     ),
+    # W1135：d3 动效守卫覆盖率判据挂第 58 槽——站内 reduced-motion 契约（DESIGN.md §5.3）
+    # 要求用户开启「减少动态效果」时 d3 图表的 .duration()/.delay() 必须归零，但既有门禁
+    # 只清零**裸数字实参**（BARE）⇒ **表达式实参**（EXPR）未套守卫 ⇒ reduced-motion 用户
+    # 仍会经历动效与延迟（机器判据缺位是根因）；守卫变量名须枚举 MOYUN_RM 与 REDUCE_MOTION
+    # 两种命名（只认一种会漏判真实缺陷）。
+    _StrictGate(
+        section="动效守卫覆盖",
+        script="check_motion_guard.py",
+        timeout=180,
+        marker="---- 第 58 门禁 动效守卫覆盖：",
+        crash_msg="动效守卫覆盖槽执行异常（第 58 槽·crash 即拦）: %s",
+        fail_msg="d3 动效实参未套守卫变量（GUARDED 之外的实参形态一律判红·本批新增第 58 槽）",
+        marker_msg="动效守卫覆盖槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="动效守卫覆盖门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1135：assets/design 目录清单对拍判据挂第 59 槽——design 审查 P2-5 实测目录文档
+    # 声明过磁盘上不存在的文件，且代码块里的旧目录树整段指向已废弃的一次性工作区；既有门禁
+    # 无一在管「声明 vs 磁盘」⇒ 清单失准只能靠人工发现。
+    _StrictGate(
+        section="design 资产清单",
+        script="check_design_asset_manifest.py",
+        timeout=180,
+        marker="---- 第 59 门禁 design 资产清单对拍：",
+        crash_msg="design 资产清单对拍槽执行异常（第 59 槽·crash 即拦）: %s",
+        fail_msg="assets/design 清单声明与磁盘实况失准（声明存在但磁盘不存在即判红·本批新增第 59 槽）",
+        marker_msg="design 资产清单对拍槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="design 资产清单对拍门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1135：tooltip 多行间距判据挂第 60 槽——W1105 批把 EN 站私有 .tooltip{} 盒样式收敛为
+    # 规范 .chart-tooltip，但遗留 ZH 页的旧类名规则从未命中（死代码）⇒ tooltip 多行内容一直
+    # 挤在一起；本槽在运行层（playwright 真实计算样式）把该修复变成机器判据。
+    _StrictGate(
+        section="tooltip 多行间距",
+        script="check_tooltip_spacing.py",
+        timeout=300,
+        marker="---- 第 60 门禁 tooltip 多行间距：",
+        crash_msg="tooltip 多行间距槽执行异常（第 60 槽·crash 即拦）: %s",
+        fail_msg="tooltip 多行间距不合规（规范规则未命中/间距未取 --space-2/旧死规则残留·本批新增第 60 槽）",
+        marker_msg="tooltip 多行间距槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="tooltip 多行间距门禁通过（%s）",
+        ok_line=-1,
+    ),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
@@ -1027,7 +1076,7 @@ _GATE_SUMMARY_MARKERS = {g.section: g.marker for g in _STRICT_GATES if getattr(g
 
 # 仅 full 档生效的门禁段（刻意登记·不在任何 scope 子集）：仓库全域面，docs/site 变更子集
 # 不触碰其判据分母——漏登记此集合的段会在 R-1 断言红（W713 内联段盲区同族的显式化）。
-_FULL_ONLY_SECTIONS = {"脚本覆盖", "目录文档"}
+_FULL_ONLY_SECTIONS = {"脚本覆盖", "目录文档", "design 资产清单"}
 
 
 def _assert_registry_consistent() -> None:
@@ -1573,7 +1622,7 @@ def main():
     _assert_registry_consistent()  # W781 R-1：注册表一致性启动期防线
     """交付门禁编排（W728 重构：905 行单体 → 表驱动编排）。
 
-    执行序 = 62 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
+    执行序 = 65 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
     新增/调整门禁段只改对应参数表项或段函数，main() 编排面保持稳定。
     """
     rep = _Reporter()

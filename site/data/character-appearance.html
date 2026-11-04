@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-8dqYf9rW3yOhluFdI/7IrZ58Z7VsAoPoCHVxwcM3PsY=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-CQdLh6LG0xXAaO1oZ0MSt3C+PAt+PcvXdGLQ16nBNcM=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 人物出场频次与戏份分析 · 详解西游记</title>
@@ -1729,7 +1729,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         if (animate) {
             barSel.attr("width",0)
                 .transition().duration(MOYUN_RM?0:500)
-                .delay((d, i) => 200 + Math.min(i * 8, 400))
+                .delay(MOYUN_RM?0:((d, i) => 200 + Math.min(i * 8, 400)))
                 .ease(d3.easeCubicOut)
                 .attr("width",d => Math.max(0, x(d.appearances)));
         } else {
@@ -1748,7 +1748,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         if (animate) {
             valSel.style("opacity", 0)
                 .transition().duration(MOYUN_RM?0:500)
-                .delay((d, i) => 450 + Math.min(i * 8, 400))
+                .delay(MOYUN_RM?0:((d, i) => 450 + Math.min(i * 8, 400)))
                 .ease(d3.easeCubicOut)
                 .style("opacity", 1);
         }
@@ -1765,7 +1765,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         if (animate) {
             menSel.style("opacity", 0)
                 .transition().duration(MOYUN_RM?0:500)
-                .delay((d, i) => 550 + Math.min(i * 8, 400))
+                .delay(MOYUN_RM?0:((d, i) => 550 + Math.min(i * 8, 400)))
                 .ease(d3.easeCubicOut)
                 .style("opacity", 1);
         }
@@ -1879,7 +1879,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             if (animate) {
                 cellSel.style("opacity", 0)
                     .transition().duration(MOYUN_RM?0:500)
-                    .delay(d => 200 + Math.min((d.ri + d.ci) * 25, 400))
+                    .delay(MOYUN_RM?0:(d => 200 + Math.min((d.ri + d.ci) * 25, 400)))
                     .ease(d3.easeCubicOut)
                     .style("opacity", 1);
             }
@@ -1897,7 +1897,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     if (animate) {
                         cellText.style("opacity", 0)
                             .transition().duration(MOYUN_RM?0:500)
-                            .delay(200 + Math.min((ri + ci) * 25, 400) + 200)
+                            .delay(MOYUN_RM?0:(200 + Math.min((ri + ci) * 25, 400) + 200))
                             .ease(d3.easeCubicOut)
                             .style("opacity", 1);
                     }
@@ -2067,7 +2067,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             });
         if (animate) dotSel
             .transition().duration(MOYUN_RM?0:500)
-            .delay((d, i) => 200 + Math.min(i * 8, 400))
+            .delay(MOYUN_RM?0:((d, i) => 200 + Math.min(i * 8, 400)))
             .ease(d3.easeCubicOut)
             .attr("r", d => r(d.mentions));
 

@@ -173,6 +173,9 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 55. **PowerShell 解析槽**（check_powershell_parse.py·W1110）——仓内 `.ps1` 此前**零机器判据**：语法写坏只在运行时才报错 ⇒ pre-commit 守门链**静默失效**；且含非 ASCII 的 `.ps1` 缺 UTF-8 BOM 时 Windows PowerShell 5.1 的 `-File` 加载器回退 ANSI 代码页 ⇒ CJK 关键字**解析静默死亡**（E-68·而 pwsh 7 默认 UTF-8 ⇒ 本机跑得通 ≠ 5.1 跑得通）。两判据：C1 用官方 AST 解析器（`Parser::ParseFile`·只读不执行）逐文件解析，语法错误即 FAIL·解析器缺失按 fail-closed 退出码 2；C2 含非 ASCII 必须带 UTF-8 BOM（纯 ASCII 无 BOM 安全·不判红）。扫描域=tracked 的 `.ps1`（`archive/` 豁免）。
 56. **CSP 增量漂移槽**（check_csp_drift.py·W1110）——既有第 8 槽 `generate_csp.py --check` 是**全站**校验，不区分「谁改的」且无归因信息 ⇒ 存量漂移掩盖本批真问题、本批漂移被存量噪音淹没。增量口径：**交集判红**（本批改动页 ∩ CSP 漂移页 ≠ ∅ 即 FAIL）+ **merge-base 基点**逐段字节比对（只对本批碰过的内联段判漂移·CI 浅克隆无基点时退化为全段判·不漏判）+ **失败信息三要素**（漂移页 / 命中段标识 / 修复命令 `python scripts/generate_csp.py`）。
 57. **CSS 变量自引用槽**（check_css_var_selfref.py·W1110）——W1108 批把 chart-design 两页 INLINED 副本 `:root` 里的图表令牌定义改成「`--chart-1: var(--chart-1)`」**自引用** ⇒ 浏览器在 computed-value time 判为**无效值** ⇒ `getComputedStyle` 返回**空串** ⇒ 连带动使用它的 `--accent` 一并失效 ⇒ 图表主题色回落为黑/继承色（实测：改前 `--chart-1=#C8463A`·改后空串）。此类缺陷**全链无红灯**（CSP/结构/内联语法等门禁都不看 CSS 变量语义·页面照常渲染只是颜色不对）⇒ 机器判据缺位是根因。判据：扫 `site/**/*.html` 的全部 `<style>` 块 + `site/tokens.css`，任何 `--X: var(--X)` 同名自引用 ⇒ FAIL（带 fallback 的自引用仍判红·fallback 只在变量未定义时生效）。恒跑（毫秒级·与改动范围无关）。
+58. **动效守卫覆盖槽**（check_motion_guard.py·W1135）——站内 reduced-motion 契约（DESIGN.md §5.3）要求用户开启「减少动态效果」时 d3 图表的 `.duration()/.delay()` 必须归零，但既有门禁只清零**裸数字实参**（BARE）⇒ **表达式实参**（EXPR）未套守卫 ⇒ reduced-motion 用户仍会经历动效与延迟（机器判据缺位是根因）。判据：实参取宽口径（括号平衡扫描·窄口径正则会漏掉含嵌套括号的实参）后分档——GUARDED（实参含守卫变量 `MOYUN_RM` 或 `REDUCE_MOTION`·站内两种命名皆可）/ EXPR / BARE，GUARDED 之外一律判红；含调用点的页另须声明守卫变量。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；`--report` 只报不判红。
+59. **design 资产清单对拍槽**（check_design_asset_manifest.py·W1135）——`assets/design/` 目录文档声明过磁盘上不存在的文件，且代码块里的旧目录树整段指向已废弃的一次性工作区 ⇒ 清单失准只能靠人工发现。判据：条目取三来源并集（反引号条目 + 代码块目录树按**缩进栈**还原层级 + 命令形态路径条目）；**硬错**只判「声明存在但磁盘不存在」，外部引用 / 通配占位 / 枚举合并 / 仓库根引用四类降为 NOTE 不判红，「磁盘存在但未声明」只作 NOTE。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；`--report` 只报不判红。
+60. **tooltip 多行间距槽**（check_tooltip_spacing.py·W1135）——W1105 批把 EN 站私有 `.tooltip{}` 盒样式收敛为规范 `.chart-tooltip`，但遗留 ZH 页的旧类名规则从未命中（死代码）⇒ tooltip 多行内容一直挤在一起。判据（运行层·playwright·file:// 直开·亮/暗双主题）：CSSOM 中命中规范规则 `.chart-tooltip div + div` + 第二行计算样式 `margin-top` == `--space-2` 解析值 + 旧死规则 `.tooltip div + div` 残留为零 + 双主题读数一致。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（playwright/浏览器不可用·fail-closed）；`--report` 只报不判红。
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
@@ -180,7 +183,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 
-> **📖 阅读契约（W709）**：索引型——282 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——286 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-rCrhDUHK/Cfvhc/MsztgJg6LP6dR8ZHYINXjzpoCFbM=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-kE4kj6zx4WLECpXN79ATrM/iiTZHChsnZS21k1cWINs=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>章节字数与对话统计 · 详解西游记</title>
@@ -1661,7 +1661,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         if (animate) {
             narrRect.attr("y", innerH).attr("height", 0)
                 .transition().duration(MOYUN_RM?0:500)
-                .delay((d, i) => 200 + Math.min(i * 8, 400))
+                .delay(MOYUN_RM?0:((d, i) => 200 + Math.min(i * 8, 400)))
                 .ease(d3.easeCubicOut)
                 .attr("y", d => y(d.narrative))
                 .attr("height", d => innerH - y(d.narrative));
@@ -1678,7 +1678,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         if (animate) {
             dialRect.attr("y", d => y(d.narrative)).attr("height", 0)
                 .transition().duration(MOYUN_RM?0:500)
-                .delay((d, i) => 300 + Math.min(i * 8, 400))
+                .delay(MOYUN_RM?0:((d, i) => 300 + Math.min(i * 8, 400)))
                 .ease(d3.easeCubicOut)
                 .attr("y", d => y(d.total))
                 .attr("height", d => y(d.narrative) - y(d.total));
@@ -1824,7 +1824,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke-width", 1);
         if (animate) dots
             .transition().duration(MOYUN_RM?0:500)
-            .delay((d, i) => 200 + Math.min(i * 8, 400))
+            .delay(MOYUN_RM?0:((d, i) => 200 + Math.min(i * 8, 400)))
             .ease(d3.easeCubicOut)
             .attr("r", 3);
 
@@ -1917,7 +1917,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         if (animate) {
             poemBars.attr("y", innerH).attr("height", 0)
                 .transition().duration(MOYUN_RM?0:500)
-                .delay((d, i) => 200 + Math.min(i * 8, 400))
+                .delay(MOYUN_RM?0:((d, i) => 200 + Math.min(i * 8, 400)))
                 .ease(d3.easeCubicOut)
                 .attr("y", d => y(d.poems))
                 .attr("height", d => innerH - y(d.poems));

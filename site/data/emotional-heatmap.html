@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-heLkCs/fEKI1GiUNCM41v4nCW9C2fsIQI4HMtncP+bU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-INZU/4aQuUInKyO2gco7uRWlY3N5vwy8y7ByrzDaRR4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>情感热力图 · 详解西游记</title>
@@ -2058,7 +2058,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 if (animate) {
                     cell.attr("opacity", 0)
                         .transition().duration(MOYUN_RM?0:500)
-                        .delay(200 + Math.min((si + hi) * 20, 400))
+                        .delay(MOYUN_RM?0:(200 + Math.min((si + hi) * 20, 400)))
                         .ease(d3.easeCubicOut)
                         .attr("opacity", opacity);
                 }
@@ -2215,7 +2215,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr("x2", pts[i + 1].x).attr("y2", pts[i + 1].y)
                     .attr("stroke", sentimentColor(pts[i].r.sentiment));
                 if (animate) seg.attr("opacity", 0)
-                    .transition().duration(MOYUN_RM?0:500).delay(sDelay)
+                    .transition().duration(MOYUN_RM?0:500).delay(MOYUN_RM?0:sDelay)
                     .ease(d3.easeCubicOut)
                     .attr("opacity", 1);
             }
@@ -2259,7 +2259,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                         applyHeatmapHighlight();
                     });
                 if (animate) {
-                    dot.transition().duration(MOYUN_RM?0:500).delay(sDelay + 150)
+                    dot.transition().duration(MOYUN_RM?0:500).delay(MOYUN_RM?0:sDelay + 150)
                         .ease(d3.easeCubicOut)
                         .attr("r", 3.4);
                 }
@@ -2277,7 +2277,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr("fill", s.color)
                     .text(s.name);
                 if (animate) endLabel.attr("opacity", 0)
-                    .transition().duration(MOYUN_RM?0:500).delay(sDelay + 250)
+                    .transition().duration(MOYUN_RM?0:500).delay(MOYUN_RM?0:sDelay + 250)
                     .ease(d3.easeCubicOut)
                     .attr("opacity", 1);
             }

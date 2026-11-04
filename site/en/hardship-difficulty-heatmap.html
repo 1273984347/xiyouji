@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Q+AYcnVH8mNlRdJPIcIFscGSFgrS6YZPZlcxHAPF/qc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1bP24r1z+raQfJztp5M2Rt1VHp8DGYBK86xPPmZhFjY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Eighty-One Hardships Multi-Dimensional Difficulty Heatmap · Annotated Journey to the West</title>
@@ -1749,8 +1749,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         tip.style("opacity", 0);
                     })
                     .transition()
-                    .duration(DUR)
-                    .delay((di * 30 + ni * 4))
+                    .duration(REDUCE_MOTION?0:DUR)
+                    .delay(REDUCE_MOTION?0:(di * 30 + ni * 4))
                     .style("opacity", isCurrent ? 0.92 : 0.45);
             });
         });
@@ -1819,8 +1819,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke", "#fff")
             .attr("stroke-width", 1)
             .transition()
-            .duration(DUR)
-            .delay((d, i) => i * 80)
+            .duration(REDUCE_MOTION?0:DUR)
+            .delay(REDUCE_MOTION?0:((d, i) => i * 80))
             .attr("y", d => y(d.count))
             .attr("height", d => innerH - y(d.count));
 
@@ -1838,8 +1838,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("opacity", 0)
             .text(d => d.count)
             .transition()
-            .duration(DUR)
-            .delay((d, i) => i * 80 + 300)
+            .duration(REDUCE_MOTION?0:DUR)
+            .delay(REDUCE_MOTION?0:((d, i) => i * 80 + 300))
             .style("opacity", 1);
     }
 

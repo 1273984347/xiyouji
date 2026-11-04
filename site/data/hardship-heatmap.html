@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-y7ryBmSUYiDeLqxDiBrYVM8Ky1nknUsWJHrk+SlJT14=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-W3YFfVE9BQJHHVEMFss9VvpS6nQx4bTdC6BNzcZ/OQ0=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难难度热力图 · 详解西游记</title>
@@ -1779,7 +1779,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     })
                     .transition()
                     .duration(MOYUN_RM?0:600)
-                    .delay((i) * 30)
+                    .delay(MOYUN_RM?0:(i) * 30)
                     .style("opacity", 1);
             });
         });
@@ -1856,8 +1856,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             })
         .on("mouseout", function() { tip.classed("visible", false); })
             .transition()
-            .duration(DUR)
-            .delay((d, i) => i * 100)
+            .duration(MOYUN_RM?0:DUR)
+            .delay(MOYUN_RM?0:((d, i) => i * 100))
             .attr("y", d => y(d.avg))
             .attr("height", d => innerH - y(d.avg));
 
@@ -1876,8 +1876,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("opacity", 0)
             .text(d => d.avg)
             .transition()
-            .duration(DUR)
-            .delay((d, i) => i * 100 + 400)
+            .duration(MOYUN_RM?0:DUR)
+            .delay(MOYUN_RM?0:((d, i) => i * 100 + 400))
             .style("opacity", 1);
     }
 
@@ -1960,8 +1960,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             })
         .on("mouseout", function() { tip.classed("visible", false); })
             .transition()
-            .duration(DUR)
-            .delay((d, i) => i * 60)
+            .duration(MOYUN_RM?0:DUR)
+            .delay(MOYUN_RM?0:((d, i) => i * 60))
             .style("opacity", 1);
 
         // 图例

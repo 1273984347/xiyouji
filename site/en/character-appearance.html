@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-mN4HHhfxLWY9KMSOpJ6s3Ey9pfWbO3boOUGPNBb90i4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-DtgjkW6hSyoeLMZfwuD7FVSJ4rUdB1wxxEYmM/11iso=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Appearances &amp; Screen Time · Annotated Journey to the West</title>
@@ -1695,7 +1695,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .on("mouseout", () => tooltip.style("opacity", 0))
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 50)
+            .delay(MOYUN_RM?0:((d, i) => i * 50))
             .attr("width",d => Math.max(0, x(d.appearances)));
 
         // 数值标签：出场回数
@@ -1710,7 +1710,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 50 + 400)
+            .delay(MOYUN_RM?0:((d, i) => i * 50 + 400))
             .style("opacity", 1);
 
         // 提及次数（小字）
@@ -1725,7 +1725,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 50 + 500)
+            .delay(MOYUN_RM?0:((d, i) => i * 50 + 500))
             .style("opacity", 1);
     }
 
@@ -1839,7 +1839,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .on("mouseout", () => tooltip.style("opacity", 0))
                 .transition()
                 .duration(MOYUN_RM?0:600)
-                .delay(d => (d.ri + d.ci) * 25)
+                .delay(MOYUN_RM?0:(d => (d.ri + d.ci) * 25))
                 .style("opacity", 1);
 
             row.values.forEach((v, ci) => {
@@ -1855,7 +1855,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                         .text(v)
                         .transition()
                         .duration(MOYUN_RM?0:600)
-                        .delay((ri + ci) * 25 + 300)
+                        .delay(MOYUN_RM?0:(ri + ci) * 25 + 300)
                         .style("opacity", 1);
                 }
             });
@@ -2023,7 +2023,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             })
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 4)
+            .delay(MOYUN_RM?0:((d, i) => i * 4))
             .attr("r", d => r(d.mentions));
 
         // 图例：圆点大小

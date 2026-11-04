@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """build_assets.py — 第二轮 Logo 方案：生成资产 + 预览页 + 设计说明 + 自检。
 
 自检比第一轮多两项：
@@ -24,8 +23,8 @@ _OUT = tempfile.mkdtemp(prefix="logo-regen-")
 ASSETS = os.path.join(_OUT, "assets")
 
 from brush import fit_transform  # noqa: E402
+from svgkit2 import MARKS, PALETTES, lockup, mark_svg  # noqa: E402
 from svgkit_text import FONT_SANS, FONT_SERIF, TextPath  # noqa: E402
-from svgkit2 import BRANDS, MARKS, PALETTES, lockup, mark_svg  # noqa: E402
 
 DIRS = ["e", "f", "g", "h", "i"]
 
@@ -136,8 +135,6 @@ CONCEPTS = [
     ("concept-02-ruyi-cloud", "如意祥云", "闭合轮廓 + 内部涡卷 —— 该构造已回写为矢量（方向 F）。", True),
     ("concept-03-scroll", "经卷（已判废）", "画成了装饰画框，且图内混入了乱码汉字，违反「无文字」约束。", False),
     ("concept-04-mountains", "水墨远山", "文人画笔意的连绵山脊 + 地平线 + 朱点，气质最佳。", True),
-    ("concept-05-headband-ring", "紧箍环（已判废）", "读成了粗黑甜甜圈，缺紧箍的形制信息。", False),
-    ("concept-06-bodhi-leaf", "菩提叶（已判废）", "轮廓像水滴，叶脉走形，整体偏卡通。", False),
 ]
 
 # 第二批（12 张）：扩母题，挑出可用者并把最好的一张回写成矢量
@@ -149,7 +146,7 @@ CONCEPTS2 = [
     ("c2-05-prayer-beads", "佛珠念珠", "珠串 + 佛头 + 朱流苏，简洁清楚。", True),
     ("c2-06-vase-willow", "净瓶与柳枝", "细颈瓶 + 一枝垂柳，雅致好认。", True),
     ("c2-07-moon-spade", "月牙铲", "双月牙 + 杖身，辨识度高。", True),
-    ("c2-08-itinerary-map", "取经路舆图", "★ 全部 18 张里最具 Logo 潜力的一张 —— 已回写为矢量（方向 I）。", True),
+    ("c2-08-itinerary-map", "取经路舆图", "★ 全部 16 张入库稿里最具 Logo 潜力的一张 —— 已回写为矢量（方向 I）。", True),
     ("c2-09-sinan-compass", "司南", "圆盘 + 勺针 + 朱点，古代科学感。", True),
     ("c2-10-jade-seal", "玉印（已判废）", "印面出现伪篆乱码字符，违反「无文字」约束。", False),
     ("c2-11-banana-fan", "芭蕉扇（已判废）", "叶脉写实过密、底部两笔突兀，整体偏插画。", False),
@@ -383,7 +380,7 @@ __BRAND_ROWS__
 __DIR_BLOCKS__
 <h3>四、AI 概念稿（造型上限探索）</h3>
 <p class="lede">手工路径画不出工笔质感的东方纹样，因此另用生成模型做了一轮<strong>纯图形</strong>概念探索
-   （提示词已锁死：无文字、单色墨 + 一处朱砂、宣纸底、无渐变无 3D 无卡通）。六张里<strong>三张可用、三张已判废</strong>——
+   （提示词已锁死：无文字、单色墨 + 一处朱砂、宣纸底、无渐变无 3D 无卡通）。首批六张里<strong>三张可用</strong>（棒 / 云 / 山，云已回写为矢量）、经卷判废但留档，紧箍环与菩提叶判废后未入库——
    可用的棒 / 云 / 山，其形制已被回写成矢量：如意云的「闭合轮廓 + 内部涡卷」构造，就是从概念稿反推的。</p>
 <div class="concept-grid">
 __CONCEPT_BLOCKS__
@@ -421,7 +418,7 @@ __CONCEPT2_BLOCKS__
     <h4>与站点 / 与第一轮的关系</h4>
     <ul>
       <li>现有站点图标是红白蓝同心圆（见对比区），只表达「圆」</li>
-      <li>第一轮四个方向已归档在 tmpe/_reports/logo-explore/，可横向对照</li>
+      <li>第一轮（抽象方向）判定作废、未随本目录迁移，未入库</li>
       <li>本轮尚未改动仓库任何入库文件，也未替换现有图标</li>
     </ul>
   </div>
@@ -432,7 +429,7 @@ __CONCEPT2_BLOCKS__
 __COMPARE_MARKS__
 </div>
 <footer>
-  生成物 · tmpe/_reports/logo-explore-v2/ ｜ 中文字标：思源宋体 Heavy（已转 SVG 路径）<br>
+  生成物 · assets/design/ ｜ 中文字标：思源宋体 Heavy（已转 SVG 路径）<br>
   图形：楔形笔触引擎 tools/brush.py（Catmull-Rom 中线 + 宽度函数 + 平滑轮廓）<br>
   配色底座：site/tokens.css（--ink #23201A / --accent #C8463A / --ink-soft #6B6455）<br>
   引文核验：scripts/_cite_probe.py 实读 dataset/text-search.json（--max-len 100 默认档）
@@ -535,7 +532,7 @@ def build_html(serif: TextPath, sans: TextPath) -> None:
             .replace("__CONCEPT_BLOCKS__", concepts)
             .replace("__CONCEPT2_BLOCKS__", concepts2)
             .replace("__COMPARE_MARKS__", compare))
-    with open(os.path.join(BASE, "index.html"), "w", encoding="utf-8") as f:
+    with open(os.path.join(BASE, "index.html"), "w", encoding="utf-8", newline="\n") as f:
         f.write(html)
 
 
@@ -570,7 +567,7 @@ README = """# Logo 探索 · 第二轮（具象符号 + 楔形笔触）· 设计
 
 手工路径画不出工笔质感的东方纹样，因此另用生成模型做**纯图形**概念探索
 （提示词锁死：无文字、单色墨 + 一处朱砂、宣纸底、无渐变无 3D 无卡通）。
-共两批 18 张，**14 张可用、4 张判废**。
+共两批**生成 18 张、入库 16 张**（13 张可用 · 3 张判废）；另 2 张（紧箍环 / 菩提叶）判废后未入库。
 
 第一批（6 张）：
 
@@ -587,7 +584,7 @@ README = """# Logo 探索 · 第二轮（具象符号 + 楔形笔触）· 设计
 
 | 概念稿 | 判定 | 说明 |
 | --- | --- | --- |
-| **取经路舆图** | **可用 · 已回写为矢量（方向 I）** | 全部 18 张里最具 Logo 潜力的一张：几何化、可矢量化，且直指项目本体 |
+| **取经路舆图** | **可用 · 已回写为矢量（方向 I）** | 全部 16 张入库稿里最具 Logo 潜力的一张：几何化、可矢量化，且直指项目本体 |
 | 如意金箍棒 v2 | 可用 | 箍纹细节明显优于第一版（方向 E 已据此升级） |
 | 飞檐斗拱 | 可用 | 起翘飞檐 + 斗拱 + 铃铛，线条质量高 |
 | 九环锡杖 / 月牙铲 / 佛珠 / 净瓶柳枝 / 司南 / 晨钟 | 可用 | 各自形制清楚，可作后续储备 |
@@ -635,30 +632,60 @@ Catmull-Rom 转三次贝塞尔平滑闭合。笔锋的粗细变化是本轮视�
 ## 7. 资产清单
 
 ```
-tmpe/_reports/logo-explore-v2/
-├── index.html                 预览页（零外域依赖 · file:// 可开 · 深浅底切换 · 多档小尺寸实测 · AI 概念稿区）
-├── README.md                  本文件
-├── assets/
-│   ├── {e,f,g,h}-mark-{light,dark,mono}.svg
-│   ├── {e,f,g,h}-mark-inv.svg
-│   ├── {e,f,g,h}-lockup-{light,dark}.svg
-│   ├── current-icon-512.png   现有站点图标（对比用）
-│   ├── concepts/              AI 概念稿（6 张，640×640）
-│   └── png/                   PNG 导出（透明背景）+ favicon.ico
-├── screenshots/
-│   ├── preview-sheet.png      四方向 × 深浅底拼版
-│   ├── concept-sheet.png      AI 概念稿拼版
-│   ├── full-page-light.png    整页截图
-│   └── dir-{e,f,g,h}.png      四个方向分区截图
-└── tools/
+assets/design/
+├── index.html                 预览页（零外域依赖 · file:// 可开 · 深浅底切换）
+├── INDEX.md                   目录索引（生成件）
+├── README.md                  本文件（生成件 · 由 tools/build_assets.py 写盘）
+├── ai-concepts/               AI 概念稿（入库 16 张 · 640×640）
+│   ├── concept-01-ruyi-staff.png · concept-02-ruyi-cloud.png
+│   ├── concept-03-scroll.png · concept-04-mountains.png
+│   ├── c2-01-ruyi-staff-v2.png · c2-02-nine-ring-staff.png
+│   ├── c2-03-lotus.png · c2-04-eave.png
+│   ├── c2-05-prayer-beads.png · c2-06-vase-willow.png
+│   ├── c2-07-moon-spade.png · c2-08-itinerary-map.png
+│   ├── c2-09-sinan-compass.png · c2-10-jade-seal.png
+│   ├── c2-11-banana-fan.png · c2-12-bell.png
+│   ├── INDEX.md
+│   └── README.md
+├── alternatives/              备选方向矢量（浅底版）
+│   ├── e-mark-light.svg · f-mark-light.svg
+│   ├── g-mark-light.svg · i-mark-light.svg
+│   ├── INDEX.md
+│   └── README.md
+├── logo/                      品牌资产（现行）
+│   ├── logo-mark-light.svg            图形标（山形）矢量源
+│   ├── logo-lockup-light.svg          组合标（图形 + 字标）矢量源
+│   ├── logo-lockup-light-sub.svg      组合标（带副标）
+│   ├── current-icon-512.png           现有站点图标（对比用）
+│   ├── favicon-16.png · favicon-32.png · favicon-48.png · favicon.ico
+│   ├── icon-192.png · icon-512.png · icon-maskable-512.png
+│   ├── INDEX.md
+│   └── README.md
+├── process/                   过程留痕
+│   ├── RECEIPT-W855.md
+│   ├── INDEX.md
+│   └── README.md
+├── screenshots/               派生证据截图（源在 tools/）
+│   ├── preview-sheet.png · concept-sheet.png · concept-sheet2.png
+│   ├── dir-e.png · dir-f.png · dir-g.png · dir-h.png
+│   ├── landing-icons.png · logo-lockup-light-preview.png
+│   ├── logo-lockup-light-sub-preview.png · mark-i-check.png
+│   ├── site-home-after.png · full-page-light.png
+│   ├── INDEX.md
+│   └── README.md
+└── tools/                     生成工具（资产的唯一来源）
     ├── brush.py               楔形笔触引擎（中线 + 宽度函数 + 平滑轮廓）
     ├── svgkit2.py             四个图形 + 组合标
-    ├── build_assets.py              资产生成 + 自检（--check）
-    ├── preview_png.py         拼版预览（不依赖浏览器）
-    ├── concept_args.json      AI 概念稿提示词
-    ├── fetch_concepts.py      概念稿下载与归一
+    ├── svgkit_text.py         图形标转路径（字标）
+    ├── build_assets.py        资产生成 + 自检（--check）
+    ├── build_landing.py       落地资产（应用图标多档 + favicon）
     ├── export_png.py          SVG → PNG / favicon.ico
-    └── archive_shots.py       截图归档与分区裁切
+    ├── preview_png.py         拼版预览（不依赖浏览器）
+    ├── gen_concepts.py        概念稿生成与归一
+    ├── probe_font.py          字体字形覆盖探针
+    ├── concept_args.json · concept_args2.json   AI 概念稿提示词
+    ├── INDEX.md
+    └── README.md
 ```
 
 ## 8. 自检口径
@@ -689,7 +716,7 @@ python scripts/preflight_check.py --touches "site/static/icons/,site/manifest.we
 
 - [ ] 在对账表登记 W856 认领行（touches 声明上述 6 项）
 - [ ] 按选定方向 + 品牌名重新导出（字标随名字变，图形不变）
-- [ ] 替换 `site/static/icons/icon-{16,32,192,512}.png` 与 `icon-maskable-512.png`
+- [ ] 替换 `site/static/icons/icon-{16,32,192,512}.png` 与 `site/static/icons/icon-maskable-512.png`
 - [ ] 更新 `site/manifest.webmanifest` 的图标引用
 - [ ] `site/index.html` 页眉换成组合标，hero 深色区块用深底版
 - [ ] 桌面端应用图标（`xiyouji-desktop/`）同步
@@ -710,15 +737,14 @@ python scripts/preflight_check.py --touches "site/static/icons/,site/manifest.we
 ## 10. 复算命令
 
 ```powershell
-cd tmpe/_reports\\logo-explore-v2
-py -3 tools\\build_assets.py --check          # 生成 SVG / 预览页 / README + 全量自检
-py -3 tools\\preview_png.py              # 四方向 × 深浅底拼版（不依赖浏览器，最快的视觉回路）
-py -3 tools\\export_png.py               # SVG → PNG（透明背景）+ favicon.ico
-py -3 tools\\fetch_concepts.py           # 概念稿下载（需 mcode-tools）
-py -3 tools\\archive_shots.py <整页截图.png>   # 归档截图并裁四方向分区图
+cd assets/design
+py -3 tools/build_assets.py --check          # 生成 SVG / 预览页 / README + 全量自检
+py -3 tools/preview_png.py                  # 四方向 × 深浅底拼版（不依赖浏览器，最快的视觉回路）
+py -3 tools/export_png.py                   # SVG → PNG（透明背景）+ favicon.ico
+py -3 tools/gen_concepts.py                 # 概念稿生成与归一（提示词见 tools/concept_args*.json）
 ```
 
-第一轮的产物保留在 `tmpe/_reports/logo-explore/`，可横向对照（第一轮判定作废，仅留作对照）。
+第一轮（抽象方向）判定作废、未随本目录迁移，未入库。
 """
 
 
@@ -740,72 +766,97 @@ def write_readme() -> None:
             .replace("{changes}", changes)
             .replace("{brand_table}", brows)
             .replace("{dir_sections}", "\n".join(dirs)))
-    with open(os.path.join(BASE, "README.md"), "w", encoding="utf-8") as f:
+    with open(os.path.join(BASE, "README.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write(text)
+
+
+def _check_direction_files(key: str, errs: list[str]) -> None:
+    """某方向的 6 个产物文件：存在、可解析、非空。"""
+    for name in (f"{key}-mark-light.svg", f"{key}-mark-dark.svg", f"{key}-mark-mono.svg",
+                 f"{key}-mark-inv.svg", f"{key}-lockup-light.svg", f"{key}-lockup-dark.svg"):
+        p = os.path.join(ASSETS, name)
+        if not os.path.exists(p):
+            errs.append(f"缺文件 {name}")
+            continue
+        try:
+            ET.parse(p)
+        except ET.ParseError as e:
+            errs.append(f"XML 解析失败 {name}: {e}")
+        if os.path.getsize(p) < 120:
+            errs.append(f"文件过小（疑空） {name}")
+
+
+def _check_direction_geometry(key: str, errs: list[str], weights: dict[str, float]) -> None:
+    """某方向：归一化后包围盒（须完整落在 64×64 视口内）+ 笔画数下限 + 视觉体量。"""
+    raw = MARKS[key](PALETTES["light"])
+    tr, bb = fit_transform(raw)
+    strokes = raw.count("<path")
+    if strokes < MIN_STROKES[key]:
+        errs.append(f"方向 {key}: 楔形笔画数 {strokes} < {MIN_STROKES[key]}"
+                     f"（构造退化，预期 ≥{MIN_STROKES[key]}）")
+    if bb is None:
+        errs.append(f"方向 {key}: 无路径数据")
+        return
+    x0, y0, x1, y1 = bb
+    w, h = x1 - x0, y1 - y0
+    if x0 < 0.5 or y0 < 0.5 or x1 > 63.5 or y1 > 63.5:
+        errs.append(f"方向 {key}: 归一后越界 bbox=({x0:.1f},{y0:.1f},{x1:.1f},{y1:.1f})")
+    weight = (w * h) ** 0.5
+    weights[key] = weight
+    print(f"  方向 {key}  归一 bbox=({x0:.1f},{y0:.1f},{x1:.1f},{y1:.1f})"
+          f"  {w:.1f}×{h:.1f}  视觉体量 {weight:.1f}  笔画 {strokes}")
+
+
+def _check_weight_balance(weights: dict[str, float], errs: list[str]) -> None:
+    """视觉体量均衡：各方向归一化后面积差 ≤ 15%（最大/最小 ≤ 1.15）。"""
+    if len(weights) != len(DIRS):
+        return
+    lo, hi = min(weights.values()), max(weights.values())
+    if hi / lo > 1.15:
+        errs.append(f"视觉体量不均衡：最大/最小 = {hi / lo:.2f}（阈值 1.15）· {weights}")
+
+
+def _check_preview_page(errs: list[str]) -> None:
+    """预览页：占位符已替换、零外域资源引用、各方向区块齐备。"""
+    idx = os.path.join(BASE, "index.html")
+    if not os.path.exists(idx):
+        errs.append("缺 index.html")
+        return
+    text = open(idx, encoding="utf-8").read()
+    for token in ("__CHANGE_ROWS__", "__BRAND_ROWS__", "__DIR_BLOCKS__", "__COMPARE_MARKS__"):
+        if token in text:
+            errs.append(f"占位符未替换 {token}")
+    import re as _re
+    ext = _re.findall(r'(?:src|href)\s*=\s*["\']https?://[^"\']+', text)
+    ext += _re.findall(r'@import\s+[^;]*https?://', text)
+    if ext:
+        errs.append(f"预览页含外域资源引用（违反 file:// 零外域铁律）: {ext[:3]}")
+    for key in DIRS:
+        if f'id="dir-{key}"' not in text:
+            errs.append(f"方向 {key} 区块缺失")
+
+
+def _check_readme_page(errs: list[str]) -> None:
+    """设计说明：占位符已替换。"""
+    rd = os.path.join(BASE, "README.md")
+    if not os.path.exists(rd):
+        errs.append("缺 README.md")
+        return
+    rtext = open(rd, encoding="utf-8").read()
+    for token in ("{changes}", "{brand_table}", "{dir_sections}"):
+        if token in rtext:
+            errs.append(f"README 占位符未替换 {token}")
 
 
 def self_check() -> int:
     errs = []
     weights = {}
     for key in DIRS:
-        for name in (f"{key}-mark-light.svg", f"{key}-mark-dark.svg", f"{key}-mark-mono.svg",
-                     f"{key}-mark-inv.svg", f"{key}-lockup-light.svg", f"{key}-lockup-dark.svg"):
-            p = os.path.join(ASSETS, name)
-            if not os.path.exists(p):
-                errs.append(f"缺文件 {name}")
-                continue
-            try:
-                ET.parse(p)
-            except ET.ParseError as e:
-                errs.append(f"XML 解析失败 {name}: {e}")
-            if os.path.getsize(p) < 120:
-                errs.append(f"文件过小（疑空） {name}")
-        # 归一化后包围盒 + 笔画数 + 视觉体量
-        raw = MARKS[key](PALETTES["light"])
-        tr, bb = fit_transform(raw)
-        strokes = raw.count("<path")
-        if strokes < MIN_STROKES[key]:
-            errs.append(f"方向 {key}: 楔形笔画数 {strokes} < {MIN_STROKES[key]}"
-                         f"（构造退化，预期 ≥{MIN_STROKES[key]}）")
-        if bb is None:
-            errs.append(f"方向 {key}: 无路径数据")
-            continue
-        x0, y0, x1, y1 = bb
-        w, h = x1 - x0, y1 - y0
-        if x0 < 0.5 or y0 < 0.5 or x1 > 63.5 or y1 > 63.5:
-            errs.append(f"方向 {key}: 归一后越界 bbox=({x0:.1f},{y0:.1f},{x1:.1f},{y1:.1f})")
-        weight = (w * h) ** 0.5
-        weights[key] = weight
-        print(f"  方向 {key}  归一 bbox=({x0:.1f},{y0:.1f},{x1:.1f},{y1:.1f})"
-              f"  {w:.1f}×{h:.1f}  视觉体量 {weight:.1f}  笔画 {strokes}")
-    if len(weights) == len(DIRS):
-        lo, hi = min(weights.values()), max(weights.values())
-        if hi / lo > 1.15:
-            errs.append(f"视觉体量不均衡：最大/最小 = {hi / lo:.2f}（阈值 1.15）· {weights}")
-    idx = os.path.join(BASE, "index.html")
-    if not os.path.exists(idx):
-        errs.append("缺 index.html")
-    else:
-        text = open(idx, encoding="utf-8").read()
-        for token in ("__CHANGE_ROWS__", "__BRAND_ROWS__", "__DIR_BLOCKS__", "__COMPARE_MARKS__"):
-            if token in text:
-                errs.append(f"占位符未替换 {token}")
-        import re as _re
-        ext = _re.findall(r'(?:src|href)\s*=\s*["\']https?://[^"\']+', text)
-        ext += _re.findall(r'@import\s+[^;]*https?://', text)
-        if ext:
-            errs.append(f"预览页含外域资源引用（违反 file:// 零外域铁律）: {ext[:3]}")
-        for key in DIRS:
-            if f'id="dir-{key}"' not in text:
-                errs.append(f"方向 {key} 区块缺失")
-    rd = os.path.join(BASE, "README.md")
-    if not os.path.exists(rd):
-        errs.append("缺 README.md")
-    else:
-        rtext = open(rd, encoding="utf-8").read()
-        for token in ("{changes}", "{brand_table}", "{dir_sections}"):
-            if token in rtext:
-                errs.append(f"README 占位符未替换 {token}")
+        _check_direction_files(key, errs)
+        _check_direction_geometry(key, errs, weights)
+    _check_weight_balance(weights, errs)
+    _check_preview_page(errs)
+    _check_readme_page(errs)
     if errs:
         print("SELF-CHECK FAIL")
         for e in errs:

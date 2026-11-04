@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-HpAReYuOsxRu0TW/T7ZtRWOMBVEMNdyqWqjn1jTzZnw='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dUGrie0IwePMehk43i9Cs8moa6Ha3nFd204AareUmyE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>法术阵法体系 · 详解西游记</title>
@@ -2089,7 +2089,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("rx", 3)
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 120)
+            .delay(MOYUN_RM?0:((d, i) => i * 120))
             .attr("width",d => Math.max(0, x(d.value)));
 
         // 数值标签
@@ -2105,7 +2105,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .text(d => `${d.value.toLocaleString()} ${d.unit}`)
             .transition()
             .duration(MOYUN_RM?0:400)
-            .delay((d, i) => i * 120 + 600)
+            .delay(MOYUN_RM?0:((d, i) => i * 120 + 600))
             .style("opacity", 1);
 
         // Y 轴标签
@@ -2183,7 +2183,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("rx", 2)
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 80)
+            .delay(MOYUN_RM?0:((d, i) => i * 80))
             .attr("width",d => Math.max(0, x(d.consumption_per_act)));
 
         // 数值
@@ -2202,7 +2202,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .text(d => `${d.consumption_per_act} 单位 · ${d.note}`)
             .transition()
             .duration(MOYUN_RM?0:300)
-            .delay((d, i) => i * 80 + 500)
+            .delay(MOYUN_RM?0:((d, i) => i * 80 + 500))
             .style("opacity", 1);
 
         // Y 轴
@@ -2352,7 +2352,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 100)
+            .delay(MOYUN_RM?0:((d, i) => i * 100))
             .style("opacity", 1);
 
         // 中心数字

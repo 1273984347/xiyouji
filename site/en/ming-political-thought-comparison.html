@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-618iGTymuzQuHHihbMUAccgoqImkO5Z1qkuzlJ3Bqyc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5PIkv4VwgtLFIRkswj0R1cSSh9VECTL8ps2pgroXI8s=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Ming Political Thought Comparison · Annotated Journey to the West</title>
@@ -1811,7 +1811,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay(delay)
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:delay)
                 .style("opacity", 1);
 
             g.append("text")
@@ -1824,7 +1824,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("fill", d.score <= 6 ? "#C9A063" : "#fff")
                 .style("opacity", 0)
                 .text(d.score)
-                .transition().duration(DUR).delay(delay + 200)
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:delay + 200)
                 .style("opacity", 1);
         });
 
@@ -1917,7 +1917,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay(i * 80)
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80)
                 .attr("r", 6);
 
             g.append("text")
@@ -1929,7 +1929,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("font-weight", "600")
                 .style("opacity", 0)
                 .text(d.event)
-                .transition().duration(DUR).delay(i * 80 + 200)
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80 + 200)
                 .style("opacity", 1);
         });
 
@@ -2176,7 +2176,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         d3.select(this).attr("fill-opacity", 0.45);
                         tip.style("opacity", 0);
                     })
-                    .transition().duration(DUR).delay(i * 100)
+                    .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 100)
                     .attr("fill-opacity", 0.45);
             });
 
