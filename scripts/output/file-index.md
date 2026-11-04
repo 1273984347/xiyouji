@@ -74,6 +74,48 @@
 | docs/11-方案报告/计划方案/T88-任务计划执行与经验沉淀报告-2026-11-04.md | W1133 | 新增：本批任务计划执行与经验沉淀报告 |
 
 
+## W1132 第 51 槽 merge 带入面归属劫持根修（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_commit_scope.py | W1132 | 改：兜底分支透传 main 带入面 + 新增段集合剔除带入段 + 剔除后走覆盖性反查 |
+| tests/unit/test_w1132_scope_carried_owner.py | W1132 | 新增：归属劫持根修单测 4 例 |
+| scripts/output/_w1132_spec.json | W1132 | 新增：本批 spec（应动全集单一事实源） |
+| scripts/output/_cascade_files_W1132.txt | W1132 | 新增：本批级联清单 |
+| docs/00-导读/W批次编号对账表.md | W1132 | 改：W1132 认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1132 | 改：腾窗迁出（如触发） |
+| docs/11-方案报告/README.md | W1132 | 改：§六 第 100 号登记行（T86） |
+| docs/11-方案报告/计划方案/T86-任务计划执行与经验沉淀报告-2026-11-04.md | W1132 | 新增：本批任务计划执行与经验沉淀报告 |
+| CHANGELOG.md | W1132 | 改：W1132 段（降序位插段） |
+| scripts/output/file-index.md | W1132 | 改：W1132 段 |
+| HANDOVER.md | W1132 | 改：条目 + 最后更新行 |
+| AGENTS.md | W1132 | 本批工具/产物 |
+| README.md | W1132 | 本批工具/产物 |
+| STRUCTURE.md | W1132 | 本批工具/产物 |
+| CITATION.cff | W1132 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1132 | 本批工具/产物 |
+| docs/INDEX.md | W1132 | 本批工具/产物 |
+| .github/workflows/README.md | W1132 | 本批工具/产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1132 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1132 | 本批工具/产物 |
+| scripts/output/README.md | W1132 | 本批工具/产物 |
+| scripts/output/stats.json | W1132 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1132 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1132 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1132 | 本批工具/产物 |
+| tests/unit/INDEX.md | W1132 | 本批工具/产物 |
+| tests/unit/README.md | W1132 | 本批工具/产物 |
+| pytest.ini | W1132 | 本批工具/产物 |
+| site/index.html | W1132 | 本批工具/产物 |
+| site/data/search.html | W1132 | 本批工具/产物 |
+| site/en/search.html | W1132 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1132 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1132 | 本批工具/产物 |
+| site/dukou-engine.html | W1132 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1132 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1132 | 本批工具/产物 |
+
+
 ## W1130 C9 扫描面扩展 + 台账回填与腾窗 + 两面下界根修 + 三条教训入坑表（2026-11-04）
 
 | 文件 | W | 说明 |

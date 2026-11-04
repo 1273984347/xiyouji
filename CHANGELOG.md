@@ -48,6 +48,13 @@
 **验证**：合并后 worktree 内 verify_delivery --scope auto **62 段中 2 项 FAIL 属环境性假红**（第 43 槽可视化数据断言 + 朱砂实底槽：两棵工作树均无 node_modules ⇒ 无 playwright 浏览器环境，门禁拒绝在无浏览器环境出具结论；同一提交在 CI 侧「Delivery Gate (verify_delivery.py)」pass 即为绿证）· 第 31 门禁 C5e 0 FAIL · 第 54 槽坑表编号唯一性 0 FAIL · CSP 856 页 0 漂移 · 原型页双态浏览器实测逐值等价 · 归档 W1001 段行 833–847 逐字未动 · 编号规则锚点计数 = 1。
 
 > - **状态**：已收官（坑表 E-164 + W1001 段清理 + 档 3 实算与原型 + 台账 W1122 行回填 + W1125 认领行登记；档 3 全量施工待口径重建后另批）
+### W1132（2026-11-04）：第 51 槽 merge 带入面归属劫持根修
+
+**本批要点**（第 51 槽 merge 带入面归属劫持根修·工具层·零页面内容改动·不新增门禁槽 ⇒ 门禁 62 段不变·不新增坑表条目 ⇒ 计数链不动）：① **触发**：2026-11-04 代第三方解 W1125 与 main 的合并冲突时，第 51 槽把归属判成他批 W1127（而非本批 W1125）⇒ 提交面被拿他批 spec 判定 ⇒ 报「索引含本批 spec 之外的文件」。② **根因（实读确认）**：`pick_target_merged` 主路径已实现 merge 带入面剔除（W1129 批新增·有效），但其**兜底调用** `pick_target_with_coverage(index_text, head_text, staged)` **未透传 main_text / carried** ⇒ 兜底分支内「恰 1 个新增段且非顶位」判定用的是**含 main 侧带入段**的段集合⇒ merge 提交把 main 更高号批带入、而本提交自己的段在下方时 ⇒ 顶段判据落**带入段（他批）** ⇒ 归属劫持。③ **根修**：`pick_target_with_coverage` 增可选参数 `main_text=None` / `carried=None`（默认路径行为与 W1117 原实现逐字一致）+ 新增段集合改为「索引段 - HEAD 段 - main 侧带入段」+ 剔除后无新增段时用「剔除带入文件后的路径集」做 spec 覆盖性反查+ 兜底调用改为透传 main_text / carried。④ **单测 4 例**（带入段不劫持归属 / 兜底覆盖性反查命中本批 / 默认参数行为不变 / 真·代提仍判红）。⑤ **验证**：pytest **1321 passed / 4 skipped**（含 W1129 既有 4 例）· 全量门禁 **62 段 0 FAIL** · ruff 0 违规 · 坑表 268 不动。⑥ **纪律**：本批**不入坑表**（计数链零改动）⇒ 与并行会话（ROGSTRIX W1130 入 3 条、第五会话 W1131 零计数链）的入表时点严格串行。
+
+> - **文件**：scripts/check_commit_scope.py、tests/unit/test_w1132_scope_carried_owner.py、scripts/output/_w1132_spec.json、scripts/output/_cascade_files_W1132.txt、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T86-任务计划执行与经验沉淀报告-2026-11-04.md、CHANGELOG.md、scripts/output/file-index.md、HANDOVER.md
+
+> - **状态**：已收官（第 51 槽归属劫持根修 + 单测 4 例 + 登记面；坑表入表待三方协调时点）
 ### W1130（2026-11-04）：C9 扫描面扩展 + 台账回填与腾窗 + 两面下界根修 + 三条教训入坑表
 
 > **来源**：W1127 批遗留（① 报告件冲突标记残留未被门禁拦停·第 31 门禁 C9 原扫描面只有 5 个治理文件 ② 台账 W1127 行待 git 反填回填 ③ 三条教训待基线稳定后入坑表）· 基线 = #138 合并后 main（ed6b0cf6·坑表 268 条·台账正本 58 行）。
