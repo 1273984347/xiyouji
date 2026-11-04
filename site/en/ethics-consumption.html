@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-gjYv1yl414iamH0eVVBrSz383jrfS+Kq/nUBR59lPrA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-pF1JY9zPhKa59ilsYgnXSejY5Gxuj+u9tFRE1rSlGXI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Ethics & Consumption · Mount Rights and Monster IPOs · Annotated Journey to the West</title>
@@ -2482,7 +2482,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("rx", 3)
                 .style("cursor", "pointer")
                 .transition()
-                .delay(i * 80).duration(MOYUN_RM?0:600)
+                .delay(MOYUN_RM?0:i * 80).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(f.rating)));
 
@@ -2496,7 +2496,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-family", "JetBrains Mono, monospace")
                 .style("opacity", 0)
                 .text(f.rating.toFixed(1))
-                .transition().delay(i * 80 + 600).duration(MOYUN_RM?0:300)
+                .transition().delay(MOYUN_RM?0:i * 80 + 600).duration(MOYUN_RM?0:300)
                 .style("opacity", 1);
 
             // 交互层
@@ -2708,7 +2708,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("fill", "var(--accent)")
             .attr("stroke", "#fff").attr("stroke-width", 2)
             .style("cursor", "pointer")
-            .transition().delay((d, i) => i * 120).duration(MOYUN_RM?0:500)
+            .transition().delay(MOYUN_RM?0:((d, i) => i * 120)).duration(MOYUN_RM?0:500)
             .ease(d3.easeBackOut)
             .attr("r", d => d.name === "Lion Camel Ridge Group" ? 14 : 10);
 
@@ -2726,7 +2726,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("fill", "var(--ink)")
             .style("opacity", 0)
             .text(d => d.name)
-            .transition().delay((d, i) => i * 120 + 400).duration(MOYUN_RM?0:400)
+            .transition().delay(MOYUN_RM?0:((d, i) => i * 120 + 400)).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // 重新绑定交互

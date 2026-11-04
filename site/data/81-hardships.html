@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-FvtuTUrnGY0PlBLxTVcjsJrv5be7ct7ynjiQBslB1bc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-endldfrEQ3BdNuNp6JgQ0zQJy+1uqNBQJbfQQoNWWu0=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难深度统计 · 详解西游记</title>
@@ -1561,7 +1561,7 @@ function renderTreemap(opts){
     .style('opacity',animate?0:1);
   if(animate){
     cell.transition().duration(MOYUN_RM?0:500)
-      .delay(function(d,i){return 200+Math.min(i*40,400);})
+      .delay(MOYUN_RM?0:(function(d,i){return 200+Math.min(i*40,400);}))
       .ease(d3.easeCubicOut)
       .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')';})
       .style('opacity',1);
@@ -1858,7 +1858,7 @@ function renderTreemap(opts){
             .attr("opacity", animate ? 0 : 1);
         if (animate) {
             nodeG.transition().duration(MOYUN_RM?0:500)
-                .delay((d, i) => 200 + Math.min(i * 60, 400))
+                .delay(MOYUN_RM?0:((d, i) => 200 + Math.min(i * 60, 400)))
                 .ease(d3.easeCubicOut)
                 .attr("opacity", 1);
         }

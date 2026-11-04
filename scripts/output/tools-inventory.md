@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-05 04:45
+生成时间：2026-11-05 05:29
 
-共 **180** 件（门禁与校验 82 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 70 · 一次性（下划线前缀） 6）
+共 **183** 件（门禁与校验 85 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 70 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（82）
+## 门禁与校验（85）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -43,6 +43,7 @@
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
 | `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
 | `check_db_schema.py` | check_db_schema.py — DB schema 门禁（W917 建置·B-DB-05 清偿）。 |
+| `check_design_asset_manifest.py` | check_design_asset_manifest.py — assets/design 目录清单对拍判据（W1135·遗留③） |
 | `check_design_doc_drift.py` | check_design_doc_drift.py — 设计令牌文档对账门禁（PD-5 · W652） |
 | `check_doc_numbers.py` | check_doc_numbers.py — 文案数字与证据件键值逐字对表闸（W1116 建） |
 | `check_doc_size_budget.py` | check_doc_size_budget.py — 治理文档体积窗口门禁（W960 建 · 文档规范 §8 机器化）。 |
@@ -66,6 +67,7 @@
 | `check_js_syntax.py` | Check inline JS syntax in HTML files using `node --check`. |
 | `check_kpi_card_base.py` | kpi-card 基类门禁（第 37 门禁 · W673/WP-2.6）——防全局基类再被批量操作洗掉 / 页面漏分发。 |
 | `check_motion_ban.py` | check_motion_ban.py — Phase E E6 转正门禁（D4 动效禁止清单） |
+| `check_motion_guard.py` | check_motion_guard.py — d3 动效守卫覆盖率判据（W1135·遗留① 根治 + 防复发） |
 | `check_no_brand_refs.py` | check_no_brand_refs.py — 品牌字面量零命中守卫（W836·N2「归档检测器复活到活面」） |
 | `check_no_goatcounter.py` | check_no_goatcounter.py — GoatCounter 退役防回退守卫（W806 建立·CI 侧接线）。 |
 | `check_page_admission.py` | check_page_admission.py — 新建页准入门禁（W916 建置·C-W818-01 清偿·静态版）。 |
@@ -85,6 +87,7 @@
 | `check_story_timeline_sync.py` | check_story_timeline_sync.py — 故事内时间线双源同步校验（W694 六轮外审 P1-4 落地）。 |
 | `check_structure.py` | check_structure.py — 全站内联 <style> CSS 结构平衡静态门禁（W457 沉淀） |
 | `check_token_coverage.py` | check_token_coverage.py — Phase E E6 转正门禁（M2/M3：页面私有 <style> 令牌覆盖率） |
+| `check_tooltip_spacing.py` | check_tooltip_spacing.py — tooltip 多行间距判据（W1135·遗留② 根治 + 防复发） |
 | `check_untracked.py` | check_untracked.py — 交付物 untracked 文件检测 |
 | `check_vermilion_solid.js` | ---------- 纯逻辑（导出供单测·不触浏览器） ---------- |
 | `check_w_range_literal.py` | check_w_range_literal.py — W 号区间字面量门禁（W628 挂载·第 27 门禁）。 |

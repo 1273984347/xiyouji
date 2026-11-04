@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-rI7lqYtcR04BoKzy+DiFWrdYLMQB7YU5y1WqrCjFWDo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-mq72HeWUNW/sha2rhgTGChonFhF89d1hN/V7TGBd3Hs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chart Design · Annotated Journey to the West</title>
@@ -2438,7 +2438,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const tip = d3.select("#spiral-tip");
         data.spiral_stages.forEach((s, i) => {
             const g = svg.append("g").attr("opacity", 0);
-            g.transition().delay(1500 + i * 200).duration(MOYUN_RM?0:400).attr("opacity", 1);
+            g.transition().delay(MOYUN_RM?0:1500 + i * 200).duration(MOYUN_RM?0:400).attr("opacity", 1);
 
             // Wukong offset line (outward along the radius · red)
             const wkLen = s.wukong_offset * offsetScale;
@@ -2810,7 +2810,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("r", 0)
             .attr("fill", d => MONSTER_COLORS[MONSTER_KEY(d)])
             .attr("stroke", "#fff").attr("stroke-width", 2)
-            .transition().delay((d, i) => 200 + i * 120).duration(MOYUN_RM?0:500)
+            .transition().delay(MOYUN_RM?0:((d, i) => 200 + i * 120)).duration(MOYUN_RM?0:500)
             .ease(d3.easeBackOut)
             .attr("r", d => (d.monster === "White Bone Spirit" || d.monster === "Green Ox Spirit") ? 11 : 8);
 
@@ -2847,7 +2847,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("fill", d => MONSTER_COLORS[MONSTER_KEY(d)])
             .style("opacity", 0)
             .text(d => d.monster)
-            .transition().delay((d, i) => 600 + i * 120).duration(MOYUN_RM?0:400)
+            .transition().delay(MOYUN_RM?0:((d, i) => 600 + i * 120)).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // Mean line

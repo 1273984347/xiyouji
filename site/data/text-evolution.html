@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VqzO4xa7sMjHDmKwZrDNf/iDtbTeqHtl1ZP2OoXaTM0=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-k/7FuTT9spmQquQy8qUYAwNOOu4JjO1G6KM5ZRoCRFk=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>源流演变 · 详解西游记</title>
@@ -2240,7 +2240,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 100)
+            .delay(MOYUN_RM?0:((d, i) => i * 100))
             .style("opacity", 1);
 
         const total = d3.sum(commentators, d => d.commentary_count);
@@ -2342,7 +2342,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 80)
+            .delay(MOYUN_RM?0:((d, i) => i * 80))
             .style("opacity", 0.9);
 
         // 数值标签

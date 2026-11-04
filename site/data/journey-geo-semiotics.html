@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nmwIej+Yv4A+a97T/eK2VY2pw/Ytkrf7jBpuSUh1Qxc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/SR1fcPZ6tAoB0JphJT9xGwKsG3eO/3Vv85j24IHsqg=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经路径地理符号学 · 详解西游记</title>
@@ -1756,7 +1756,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("fill", d => NODE_COLORS[d.type] || '#999')
             .attr("stroke", "#fff")
             .attr("stroke-width", 2.5)
-            .transition().duration(MOYUN_RM?0:500).delay((d, i) => i * 80)
+            .transition().duration(MOYUN_RM?0:500).delay(MOYUN_RM?0:((d, i) => i * 80))
             .attr("r", radius);
 
         node.append("text")
@@ -1769,7 +1769,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("font-weight", 600)
             .style("pointer-events", "none")
             .style("opacity", 0)
-            .transition().duration(MOYUN_RM?0:400).delay((d, i) => i * 80 + 200)
+            .transition().duration(MOYUN_RM?0:400).delay(MOYUN_RM?0:((d, i) => i * 80 + 200))
             .style("opacity", 1);
 
         // 力学模型

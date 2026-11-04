@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-PnfqyEBvEu9dYmJiuO1OwyZl0ZSNhx8bQxOp4Wftvfc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-TY73+1OfncddoPQskVsNd9o9Uqwk20sqp9i/9c0JZcs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Social Media Persona · MBTI Personality Map · Annotated Journey to the West</title>
@@ -2254,7 +2254,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("class", "radar-poly poly-" + idx);
 
             poly.transition()
-                .delay(200 + idx * 120)
+                .delay(MOYUN_RM?0:200 + idx * 120)
                 .duration(MOYUN_RM?0:500)
                 .style("opacity", 1);
 
@@ -2270,7 +2270,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                         .attr("stroke-width", 1.5)
                         .style("opacity", 0)
                         .transition()
-                        .delay(500 + idx * 120)
+                        .delay(MOYUN_RM?0:500 + idx * 120)
                         .duration(MOYUN_RM?0:300)
                         .style("opacity", 1);
                 }
@@ -2419,7 +2419,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("class", "fit-bar");
 
             bar.transition()
-                .delay(i * 100).duration(MOYUN_RM?0:600)
+                .delay(MOYUN_RM?0:i * 100).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(val)));
 
@@ -2434,7 +2434,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(m.mbti + " " + val + "/10")
-                .transition().delay(i * 100 + 600).duration(MOYUN_RM?0:400)
+                .transition().delay(MOYUN_RM?0:i * 100 + 600).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // role 标注（条右侧）
@@ -2446,7 +2446,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text(m.role)
-                .transition().delay(i * 100 + 700).duration(MOYUN_RM?0:400)
+                .transition().delay(MOYUN_RM?0:i * 100 + 700).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 交互

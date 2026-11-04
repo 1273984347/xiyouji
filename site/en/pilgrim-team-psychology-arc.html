@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-XJUfbS3y+MQUUqxL/McFAxC70gdxj7TW4qx2D4RpSeg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VKfZw50beO7ta8fa9my7+IPok4YgpxjK1Djq/V07WqY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Pilgrim Team Psychology Arc · Annotated Journey to the West</title>
@@ -1788,8 +1788,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("stroke-opacity", 0)
                 .style("pointer-events", "none")
                 .transition()
-                .duration(DUR)
-                .delay(ci * 120)
+                .duration(REDUCE_MOTION?0:DUR)
+                .delay(REDUCE_MOTION?0:ci * 120)
                 .attr("fill-opacity", 0.12)
                 .attr("stroke-opacity", 0.85);
             // 顶点
@@ -1817,8 +1817,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         tip.style("opacity", 0);
                     })
                     .transition()
-                    .duration(DUR)
-                    .delay(ci * 120 + 200)
+                    .duration(REDUCE_MOTION?0:DUR)
+                    .delay(REDUCE_MOTION?0:ci * 120 + 200)
                     .attr("r", 4);
             });
         });
@@ -1917,7 +1917,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("stroke-dashoffset", totalLen)
                 .transition()
                 .duration(REDUCE_MOTION ? 0 : 800)
-                .delay(ci * 100)
+                .delay(REDUCE_MOTION?0:ci * 100)
                 .attr("stroke-dashoffset", 0);
 
             // 数据点
@@ -1948,7 +1948,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     d3.select(this).attr("r", 3.5);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay(ci * 100 + 200).style("opacity", 1);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:ci * 100 + 200).style("opacity", 1);
         });
 
         // 转折点垂直标注
@@ -2045,7 +2045,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5);
                         tip.style("opacity", 0);
                     })
-                    .transition().duration(DUR).delay(ri * 80 + ci * 40).style("opacity", 1);
+                    .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:ri * 80 + ci * 40).style("opacity", 1);
                 // 数值文本
                 g.append("text")
                     .attr("x", xScale(col.key) + xScale.bandwidth() / 2)
@@ -2058,7 +2058,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .style("fill", val >= 6 ? "#fff" : "#23201A")
                     .style("opacity", 0)
                     .text(val)
-                    .transition().duration(DUR).delay(ri * 80 + ci * 40 + 200).style("opacity", 1);
+                    .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:ri * 80 + ci * 40 + 200).style("opacity", 1);
             });
         });
 
@@ -2121,7 +2121,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("cx", cx).attr("cy", innerH / 2)
                 .attr("r", 0)
                 .attr("fill", color).attr("stroke", "#fff").attr("stroke-width", 2)
-                .transition().duration(DUR).delay(i * 80).attr("r", 8);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80).attr("r", 8);
             // 圆点（事件位置）
             g.append("circle")
                 .attr("cx", cx).attr("cy", cy)
@@ -2145,7 +2145,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     d3.select(this).attr("r", 8);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay(i * 80 + 100).attr("r", 8);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80 + 100).attr("r", 8);
             // 事件文本
             g.append("text")
                 .attr("x", cx).attr("y", up ? cy - 16 : cy + 22)
@@ -2155,7 +2155,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("fill", color)
                 .style("opacity", 0)
                 .text(t.event.length > 12 ? t.event.substring(0, 11) + "…" : t.event)
-                .transition().duration(DUR).delay(i * 80 + 200).style("opacity", 1);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80 + 200).style("opacity", 1);
             // 回目标注
             g.append("text")
                 .attr("x", cx).attr("y", innerH / 2 + (up ? 20 : -20))
@@ -2166,7 +2166,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("fill", "#C9A063")
                 .style("opacity", 0)
                 .text(`Ch.${t.chapter}`)
-                .transition().duration(DUR).delay(i * 80 + 250).style("opacity", 1);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80 + 250).style("opacity", 1);
         });
 
         // 图例
@@ -2233,7 +2233,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("y1", yScale(d.min)).attr("y2", yScale(d.max))
                 .attr("stroke", color).attr("stroke-width", 1.5)
                 .style("opacity", 0)
-                .transition().duration(DUR).delay(i * 100).style("opacity", 0.7);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 100).style("opacity", 0.7);
             // 上下横线
             [d.min, d.max].forEach(v => {
                 g.append("line")
@@ -2241,7 +2241,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .attr("y1", yScale(v)).attr("y2", yScale(v))
                     .attr("stroke", color).attr("stroke-width", 1.5)
                     .style("opacity", 0)
-                    .transition().duration(DUR).delay(i * 100).style("opacity", 0.85);
+                    .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 100).style("opacity", 0.85);
             });
             // 箱体（Q1-Q3）
             g.append("rect")
@@ -2272,7 +2272,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     d3.select(this).attr("fill-opacity", 0.25);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay(i * 100 + 100)
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 100 + 100)
                 .attr("fill-opacity", 0.25);
             // 中位线
             g.append("line")
@@ -2280,7 +2280,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("y1", yScale(d.median)).attr("y2", yScale(d.median))
                 .attr("stroke", "#fff").attr("stroke-width", 2.5)
                 .style("opacity", 0)
-                .transition().duration(DUR).delay(i * 100 + 200).style("opacity", 1);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 100 + 200).style("opacity", 1);
             // 中位值文本
             g.append("text")
                 .attr("x", cx + boxW / 2 + 6)
@@ -2292,7 +2292,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("fill", color)
                 .style("opacity", 0)
                 .text(d.median)
-                .transition().duration(DUR).delay(i * 100 + 300).style("opacity", 1);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 100 + 300).style("opacity", 1);
         });
     }
 

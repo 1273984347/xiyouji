@@ -37,6 +37,17 @@
 **认领登记 W1136**（占号 session=ROGSTRIX@xiyouji-w1136-4e5326·17:43:04 落占·preflight PASS·touches 12 面全清单登记）。
 
 **验证**：登记号与 E 号两套号段无撞号（§六 95~102 各归一批）· 坑表六节声明 48/10/31/26/15/139 = 269 = 列表行实数 269 · 台账归档 416 行 / 416 唯一号 / 重复 0 · 第 48 门禁计划方案合规 PASS · 门禁 62 段 0 FAIL。
+### W1135（2026-11-05）：遗留清偿批 · d3 动效守卫表达式实参根治 + tooltip 死规则收口 + design 清单生成源根修 + 盲审 6 条处置
+
+> **来源**：W1096 收官时登记的四项遗留（W1105 批留待次批根治）——① 全站 317 处 d3 动效表达式实参未套 reduced-motion 守卫（57 页）② 3 页 tooltip 多行间距死规则（类名收敛后从未命中）③ design 目录清单整体过期（真凶＝生成器模板自身过期）④ 独立盲审的 6 条可观察项。基线 = PR #139 合并后 main（fbe9f3fd·门禁 62 段·坑表 271 条·台账正本 54 行）。
+>
+> - **文件**：scripts/check_motion_guard.py、scripts/check_design_asset_manifest.py、scripts/check_tooltip_spacing.py、tests/unit/test_w1135_gates.py、scripts/verify_delivery.py、docs/agent/gates.md、AGENTS.md、docs/00-导读/文档规范.md、assets/design/tools/build_assets.py、assets/design/README.md、assets/design/index.html、assets/design/logo/README.md、assets/design/screenshots/README.md、docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md、site/ 下 60 个页面、docs/agent/pitfalls.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T87-任务计划执行与经验沉淀报告-2026-11-05.md、scripts/output/_w1135_spec.json、scripts/output/_cascade_files_W1135.txt。
+
+**本批要点**（遗留清偿批 · 站点改造 + 三条新判据 + 门禁挂槽 58/59/60 ⇒ 门禁 62 → 65 段 · 坑表 271 → 275 条）：① **遗留① d3 动效守卫实参根治**——317 处未套守卫的表达式实参（如 `.delay(1500 + i * 200)`、`.delay((d,i) => 200 + i*120)`）统一改写为 `MOYUN_RM?0:<表达式>` 形态，改写规则与仓内既有 545 处写法逐字对齐（简单表达式不加括号·箭头函数与含逗号实参加括号）⇒ 调用点 **GUARDED 545 → 862 · EXPR 317 → 0 · BARE 0**，d3 页 91/91 含守卫、违规页 0；「时长归零连带延迟归零」沿用仓内既有口径（既有 545 处即如此，非本批新定语义）。② **遗留② tooltip 死规则收口**——3 页的 `.tooltip div + div` 改为 `.chart-tooltip div + div`（tooltip 内为 3 个连续 div ⇒ 命中第 2/3 行·属有意的视觉修复）⇒ 全站旧类名残留 0；独立取证面（3 页 × 亮/暗 = 6 组）改前 `marginTop=0px / ruleHits=0` → 改后 `4px / 1`，且 4px 精确等于 `--space-2` ⇒ 间距取自令牌。③ **遗留③ design 目录清单根修到生成源**——真凶是 `assets/design/tools/build_assets.py` 的**模板常量自身过期**（整段指向已废弃的一次性工作区 `tmpe/_reports/logo-explore-v2/`、引用两个磁盘上不存在的脚本、把两张判废且磁盘不存在的概念稿写进 index.html ⇒ 站点图片 404）⇒ 改模板而非改产物；连带订正概念稿张数（生成 18 张 · 入库 16 张（13 可用 · 3 判废）· 另 2 张判废稿未入库）并**治本 Windows CRLF 污染**（生成器两处写盘补 `newline="\n"`）。④ **遗留④ 盲审 6 条处置**——逐条处置表落 design 审查报告**第九节**并纠正 T56 §6.1 ④ 与 §7 A-08 的指针失准（6 条真出处为独立盲审报告第四节）。⑤ **三条常设判据挂槽**——`check_motion_guard.py`（第 58 槽）· `check_design_asset_manifest.py`（第 59 槽）· `check_tooltip_spacing.py`（第 60 槽），同步六处字面量（gates.md 标题 60 槽 + 分组行 27-60 · AGENTS 三处 60 槽 + §4.2 三条摘要 · 文档规范 全量口径 65 段）+ 段数 62 → 65 + 第 58/59/60 门禁 注册字面量。
+
+**验证**：第 31/41/42 门禁 0 FAIL · 第 43/49/58/59/60 槽 0 FAIL（43/49 须带 NODE_PATH·否则 exit 2 假红）· CSP 856 页 0 漂移 · 全量 pytest 1335 passed / 4 skipped · J2 前后对拍 2736 元素前后全等、逐属性差异 0（reduced-motion 模拟态）· 三条判据负样本自证 11 例全绿（注入违规 ⇒ 退出码精确 = 1 且 ≠ 2，并做「去掉注入即变红」的鉴别力自证）· guardrails 阻断项 0 · 改动文件 CRLF 计数 0。
+
+> - **状态**：已收官（遗留四项清偿 + 三条新判据挂槽 + 生成源根修 + 盲审 6 条处置）
 ### W1134（2026-11-04）：前端质感 P0 批（暗色字重降档 / 中文防误发 / 阈值滚动 / 复制对勾 / 打印去硬编码）
 > **来源**：W1095 盘点批（T50 报告）§3.4 分档排期的 P0 档四项 + 统筹会话仲裁（登记号与顺位）。
 > - **文件**：docs/11-方案报告/计划方案/T89-任务计划执行与经验沉淀报告-2026-11-04.md · scripts/font_weight_probe.py · scripts/ime_scroll_probe.py
