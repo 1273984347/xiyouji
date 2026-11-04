@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（79）
+## 文件（80）
 
 ### Python 脚本
 
@@ -92,6 +92,7 @@
 - `test_w1122_pending_faces.py`
 - `test_w1123_commit_scope_merge.py`
 - `test_w1123_reserve_release.py`
+- `test_w1124_closeout_rebuild.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

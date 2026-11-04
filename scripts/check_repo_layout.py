@@ -92,11 +92,20 @@ def _ignored(names):
 
 
 def scan():
-    """→ (根文件, 顶层目录)——**只算版本库视角**：被 .gitignore 忽略的本地件不计入。"""
+    """→ (根文件, 顶层目录)——**只算版本库视角**：被 .gitignore 忽略的本地件不计入。
+
+    W1124：**排除根目录的 .git 指针文件**——git worktree add 形态下根目录的 .git 是
+    **文件**（指向主仓 .git/worktrees/<name> 的指针）⇒ 原实现把它当「未声明文件」判红
+    ⇒ **worktree 形态在本门禁下不可用**，而隔离 worktree 是并行协作的默认前提
+    （AGENTS 铁律 24）⇒ 制度与工具不匹配 ⇒ 排除 .git（Git 元数据·非仓库内容）。
+    普通克隆形态下 .git 是目录、本就不计入 root_files ⇒ 判据强度不降
+    （judge 层仍对任意未声明文件判红，含 .git 以外的同名伪装件）。
+    """
     entries = os.listdir(ROOT)
     ignored = _ignored(entries)
     root_files = [e for e in entries
-                  if os.path.isfile(os.path.join(ROOT, e)) and e not in ignored]
+                  if e != ".git"
+                  and os.path.isfile(os.path.join(ROOT, e)) and e not in ignored]
     dirs = [e for e in entries
             if os.path.isdir(os.path.join(ROOT, e)) and e not in ignored]
     return sorted(root_files), sorted(dirs)

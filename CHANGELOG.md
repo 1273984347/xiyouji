@@ -1,3 +1,16 @@
+### W1124（2026-11-04）：治理收尾批·教训入坑表 + 重建入口收进收官链
+
+> **来源**：T74 报告遗留 R-A（重建入口收进收官链）/ R-C（里程碑滚动重跑守卫）/ R-D（教训入坑表）· 归集自 W1122 批收官登记。
+>
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、.agent/skills/puti-shouye/SKILL.md、HANDOVER.md、scripts/batch_closeout.py、scripts/batch_cascade.py、tests/unit/test_w1124_closeout_rebuild.py、scripts/output/_w1124_spec.json、scripts/output/_cascade_files_W1124.txt、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md、docs/11-方案报告/README.md、CHANGELOG.md、scripts/output/file-index.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff、site/data/search.html、site/en/search.html、.github/workflows/README.md、scripts/output/stats.json、scripts/output/stats-index.md、scripts/output/stats-changelog.json、scripts/output/tools-inventory.md、archive/docs/AGENTS-ARCHIVE.md、docs/INDEX.md、scripts/INDEX.md、scripts/output/INDEX.md、scripts/output/README.md、tests/unit/INDEX.md、tests/unit/README.md、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md。
+
+**一、教训入坑表（根修 T74 R-D）**：W1122 批七条教训入表 E-165 ~ E-171 —— ① 同一机制的多个实现点若无统一判定原语则行为必然分裂；② 幂等化的对象不止是插入动作，还包括有状态的配套副作用；③ 多副本实现收敛到同一入口；④ 立段落段判定若只看一面则另一面的缺口永远补不上；⑤ 兜底保护要先于自动补段；⑥ 定位区间不得用条目正文内可能出现的分隔符界定；⑦ 链式面必须按批号序落位。坑表 260 → 267 条，计数链 13 处同步（坑表六个主题节标题 + AGENTS 阅读契约与六主题分项行 + HANDOVER 两处总计数与一处历史滞后补平 + SKILL 两处）。
+
+**二、重建入口收进收官链（根修 T74 R-A）**：rebuild_section.py 此前是独立入口（W1120 建）⇒ 段内容与 spec 不一致时只能人工想起单独跑它 ⇒ 改完段内容后重建这一步在流程里是断的 ⇒ 段与 spec 长期漂移。本批把它接入收官链主链：段已存在且内容一致则零变化（不写盘），内容不一致则就地重建本批段（历史段逐段比对断言不变），两面皆未立段则跳过（建段归级联与补段工具）。顺序锁：rebuild 必须排在 precheck 之前 —— precheck 是 fail-closed 中止，修复步排其后即死路径（W1117 同族教训：腾窗步前置）。
+
+**三、里程碑滚动幂等守卫（根修 T74 R-C）**：滚动淘汰的跳过守卫此前只在调用点（插入路径）生效 ⇒ 单独重跑滚动逻辑仍会再淘汰一块（指针指向的块被淘汰后指针移到新最老块 ⇒ 再跑一次就再淘汰一块 ⇒ 信息丢失且零红灯）。本批把守卫下沉到函数内：本批块已存在于链上即视为本批已滚动过 ⇒ 直接返回（零变化）；本批块不在链上时滚动照常执行（守卫不得变成一律跳过）。
+
+**四、台账订正与自证**：台账 W1122 行自证例数由 24 订正为 36（声明与落地对齐）并完成 git 反填回填；新增自证 12 例（收官链步骤顺序锁 4 例 + 幂等段重建 4 例 + 滚动守卫 2 例 + 布局门禁 worktree 形态适配 2 例）。
 ### W1123（2026-11-04）：预约释放语义根修 + 提交范围门禁 merge 场景归属根修
 
 **本批要点**（预约释放语义根修 + 提交范围门禁 merge 场景归属根修·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 258 → 260 条）：① **release 删除语义根修**：预约表有多个落点（本工作树表 + 同机兄弟克隆表 + 用户级共享表），写回函数统一走「先合并所有可见记录再 update」⇒ 释放操作也走同一路径 ⇒ 合并步骤把磁盘旧记录（含刚删的那条）重新合回 ⇒ **已释放的号复活**（自报已释放而 list 仍在⇒ 他方取号跳段）⇒ 根修 = 删除走独立「替换语义」路径 + 删除后**逐落点回读断言**（打印成功不算证据）+ 他人同号记录仅 session 相同时才删；新增 4 例单测；**由真实让号操作证明**（release W1122 真删除并回读校验通过）。② **第 51 槽 merge 场景归属根修**：并行会话 W1120 实证——我方 PR 先合入 main 后对方把新 main 合进自己分支 ⇒ 索引相对 HEAD 的新增段集合含他批段 ⇒ 归属判到他批 ⇒ 本提交交付面被判 spec 之外（假红）⇒ 根修 = 剔除「merge 带入面」（带入的段 = origin/main 侧已存在·带入的文件 = 索引 blob sha 与 origin/main 侧相同）⇒ 剔除后新增段集合为空则用剩余路径集做 spec 覆盖性反查定位归属；**判据强度不降**（内容与 main 不同者仍进判定⇒ 真越界仍判红）；新增 5 例单测。③ **号段让号**：取号两次得 W1122 与 W1123 ⇒ 主动 release W1122 让给并行会话（先声明者保留）· 我方用 W1123。④ **经验入库**：坑表 E-162（共享表写回的删除语义与合并语义不能混用）与 E-163（按索引态新增段定归属的门禁在 merge 场景会误判他批交付面为越界）+ 计数链 7 处同步（258 → 260）。
@@ -1334,7 +1347,7 @@ probe_error 0 页 · 影子分层报数结构性与缺口分离清晰。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1123），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1124），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
