@@ -20,6 +20,17 @@
 
 **验证**：收官链 12 步全绿（含新增 pycompile 步·regsurface OK·CSP 856 页 0 漂移）· 门禁 62 段 0 FAIL（CI 同档 full）· 全量 pytest 1310 passed / 4 skipped · ruff check scripts/ 0 违规 · 新增单测 4 例 + 行为锁 1 例 · 负样本实测门禁拦停（退出码 3）。
 
+### W1127（2026-11-04）：治理收官批·台账回填 + 滚动独立入口 + 历史缺口体检
+
+> **来源**：T74（W1122 批）报告遗留 R-2（滚动重跑守卫的独立入口）与 R-B 前置（历史缺口按序补齐的前置体检）· 归集自 W1122 批收官登记。
+>
+> - **文件**：scripts/batch_cascade.py、scripts/check_segment_gaps.py、tests/unit/test_w1127_closeout_tools.py、scripts/output/_w1127_spec.json、scripts/output/_cascade_files_W1127.txt、docs/00-导读/W批次编号对账表.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md、docs/11-方案报告/README.md、CHANGELOG.md、scripts/output/file-index.md、HANDOVER.md、AGENTS.md、.github/workflows/README.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff、site/data/search.html、site/en/search.html、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-index.md、scripts/output/stats-changelog.json、scripts/output/tools-inventory.md、docs/INDEX.md、scripts/INDEX.md、scripts/output/INDEX.md、scripts/output/README.md、tests/unit/INDEX.md、tests/unit/README.md、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md。
+
+**一、台账回填与腾窗**：台账 W1124 行 git 反填回填（hash 18a06a80·共 3 笔·指纹 de8ab24caa72）并入本批提交（不单开 PR）；台账腾窗迁出最老两行（W1065-W1066）使正本回到窗口内；W1127 认领行登记（含 touches 全清单）。
+
+**二、里程碑滚动独立入口（根修 T74 R-C）**：此前滚动只能作为「本批块插入」的副动作发生，若某批只想滚动或需重跑滚动，没有独立入口 ⇒ 只能手工改文档。W1124 已把幂等守卫下沉到_handover_rotate_oldest 内部（本批块已在链上 ⇒ 零变化），本批补上独立入口 --rotate-only：独立重跑同样零变化（零红灯·不丢信息），且不落盘时只报 dry-run。
+
+**三、历史缺口体检工具（根修 T74 R-B 前置）**：此前「立段/落段只看一面」根修后暴露的历史缺口只散落在运行输出里，既无法复核，也无法判断内容能否复原 ⇒ 新增 scripts/check_segment_gaps.py：盘点台账（正本 + 归档）出现过的批次号，与 CHANGELOG 与 file-index 两面正本的段集合做差集，输出缺口清单并逐件给出可复原来源提示（CHANGELOG 归档 / file-index 归档 / 台账归档是否含该批号）。本工具**只体检不补段**（补段须先评估可复原性，避免造段）⇒ **实测当前基线缺口 0 项**（两面正本已覆盖台账全部批次）⇒ T74 遗留 B 的补段动作无需执行。
 ### W1125（2026-11-04）：自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型
 
 
@@ -30,7 +41,7 @@
 
 **本批要点**（清理与沉淀批 + 1 页原型·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 267 → 268 条）：① **坑表 E-164 入表**——W1123 实证的「自举产物（spec / 级联清单 / 工具生成的清单文件）必须被它自己声明的应动全集收录，否则提交后 CI 干净 checkout 判「本批无 spec·判据不可执行」」⇒ 计数链全量同步（267 → 268·基于最新 origin/main 的 267 条基线重算）；**本批一处自我纠错如实留痕**：首次同步把计数链误改为「总数 268 / 级联 26 / 流程 138」（当时取自并行会话 7 条混入共享树的中间态，非 HEAD 干净基线；HEAD 实为 260 / 22 / 134）⇒ 经 git show HEAD 干净对照后回正为 261 / 22 / 135；**合并并行会话 W1124 批（E-165 ~ E-171，7 条）后按最新基线 267 重算 ⇒ 现役声明为总数 268 / 级联 26 / 流程 138**，第 31 门禁 C5e 复跑 0 FAIL。② **正本与归档并存的存量 W1001 段清理**（用户已批准「删正本那份·保留归档」）——逐行实证两份**段本体 15 行逐字完全相同**（此前「35 行仅差 1 行」的表象源于切段口径把段后文件级块一并纳入）；删除边界 = 正本 CHANGELOG.md 行 1313–1327，段后 19 行文件级块（# 更新日志标题 + 阅读契约 + Unreleased + 编号规则行 + 全站页数口径 + 维护契约）**原样保留**；前置断言三条全过：段本体与归档逐字一致、编号规则锚点行（行 1337）在删除区间外、删除后锚点计数仍为 1 ⇒ 版本面推进器锚点完好；归档 CHANGELOG-ARCHIVE.md 行 833–847 原样未动。③ **档 3 消费方式：实算推翻既有判断 + 1 页原型**——复现 W1100 归档盘点口径实算：全站调色板色 1658 处 / 331 页、豁免登记页 181 页、排除豁免页后余 **153 页且每页恰好 1 处**；**决定性发现**：那 153 处**全部是同一条暗色补偿规则的逐页副本**（`html[data-theme="dark"] svg [fill="#3a6b8c" i] { fill: #7d99a9; }`，全站 328 页各存一份），而**真实图表消费面 1330 处 100% 落在 181 个豁免页内**、非豁免页为 0 ⇒ 既有登记「每页 ≤2 处⇒近耗尽」把补偿规则副本误计为可施工面，**逐页改造 153 页属无效功**（改的不是图表消费位·且补偿收口按 W1100 定案排在档 3 之后·禁改）。原型实证（site/data/chart-design.html·144 图元·浏览器计算样式实测非源码推断）：10 处硬编码 #e9b885 → `var(--chart-5)` 后**浅色态实际值 rgb(216,207,188) ≡ 改前 #e9b885（逐值等价）**、暗色态一致（--chart-5 暗色未定义⇒沿用浅色）、图元数 144/144、错误未增、CSP 违规 0 ⇒ **表现属性位 .attr('fill') 确实解析 var()**（W1097/W1108 口径再证）；原型期两次真实失败均已归因：改内联脚本未重算 CSP 哈希 ⇒ 浏览器拒执行 ⇒ 渲染塌缩 144→3（须 Set-Location 到 worktree 再跑 generate_csp.py）；令牌槽位映射错误（#e9b885 误映射 --chart-3=#B38F58，真值为 --chart-5=#D8CFBC）⇒ 视觉回归。④ **工作树隔离**：三方会话共用 D:\xiyouji 造成级联/收官链互相覆盖 ⇒ 本批全程迁独立 worktree（D:\xiyouji-w1125·基线 30a73582）施工，共享树恢复零污染；并行会话 W1124 与我方 W1125 号段无冲突。
 
-**验证**：共享树 verify_delivery --scope auto **62 段 0 FAIL**（含第 43/49/52 槽——worktree 内三项 FAIL 经对照判定为环境性假红：.git 为文件形态 + node_modules 缺失 ⇒ 共享树同条件 0 FAIL）· 第 31 门禁 C5e 0 FAIL · 第 54 槽坑表编号唯一性 0 FAIL · CSP 856 页 0 漂移 · 原型页双态浏览器实测逐值等价 · 归档 W1001 段行 833–847 逐字未动 · 编号规则锚点计数 = 1。
+**验证**：合并后 worktree 内 verify_delivery --scope auto **62 段中 2 项 FAIL 属环境性假红**（第 43 槽可视化数据断言 + 朱砂实底槽：两棵工作树均无 node_modules ⇒ 无 playwright 浏览器环境，门禁拒绝在无浏览器环境出具结论；同一提交在 CI 侧「Delivery Gate (verify_delivery.py)」pass 即为绿证）· 第 31 门禁 C5e 0 FAIL · 第 54 槽坑表编号唯一性 0 FAIL · CSP 856 页 0 漂移 · 原型页双态浏览器实测逐值等价 · 归档 W1001 段行 833–847 逐字未动 · 编号规则锚点计数 = 1。
 
 > - **状态**：已收官（坑表 E-164 + W1001 段清理 + 档 3 实算与原型 + 台账 W1122 行回填 + W1125 认领行登记；档 3 全量施工待口径重建后另批）
 ### W1124（2026-11-04）：治理收尾批·教训入坑表 + 重建入口收进收官链
