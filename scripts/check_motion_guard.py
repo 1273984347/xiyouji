@@ -40,7 +40,7 @@ SITE = os.path.join(ROOT, "site")
 # 字符类写法（而非 re.IGNORECASE）⇒ 静态分析（CodeQL bad-html-filtering-regexp）可判定为已大小写不敏感。
 SCRIPT_RE = re.compile(
     r"<[sS][cC][rR][iI][pP][tT](?![^>]*\b[sS][rR][cC]\s*=)[^>]*>"
-    r"(.*?)</[sS][cC][rR][iI][pP][tT]\s*>",
+    r"(.*?)</[sS][cC][rR][iI][pP][tT](?:\s[^>]*)?\s*>",
     re.DOTALL,
 )
 CALL_RE = re.compile(r"\.(duration|delay)\s*\(")

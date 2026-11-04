@@ -222,6 +222,8 @@ def test_motion_guard_negative_missing_guard_declaration_exit_1(tmp_path):
 # ⇒ 过滤型正则必须大小写不敏感。以下两例把该盲区钉死：
 #   · 大写 <SCRIPT> 内联块必须被扫到（否则整页漏扫 ⇒ 动效守卫护栏静默归零）
 #   · 大写 SRC= 外链脚本必须被排除（浏览器不执行其内容 ⇒ 不得当成内联块）
+#     —— 夹具刻意用**小写标签 + 大写 SRC**：若标签也大写，小写正则下整段不匹配 ⇒ 天然绿 ⇒ 无鉴别力
+#   · 结束标签带属性/换行（</script\n bar>）必须能被识别为结束标签
 
 MOTION_UPPERCASE_SCRIPT_TAG = """<!DOCTYPE html>
 <html lang="zh">
@@ -239,7 +241,7 @@ MOTION_UPPERCASE_SRC_EXTERNAL = """<!DOCTYPE html>
 <html lang="zh">
 <head><meta charset="utf-8"><title>W1136 大写 SRC 外链正样本</title></head>
 <body>
-<SCRIPT SRC="external.js">d3.selectAll('.bar').transition().duration(600);</SCRIPT>
+<script SRC="external.js">d3.selectAll('.bar').transition().duration(600);</script>
 </body>
 </html>
 """
@@ -254,6 +256,32 @@ def test_motion_guard_negative_uppercase_script_tag_exit_1(tmp_path):
         _run(gate, cwd=tmp_path),
         ["未套守卫的 BARE", ".duration(600)"],
         "M1 负样本（大写 <SCRIPT> 内联块）",
+    )
+
+
+MOTION_SCRIPT_END_TAG_ATTR = """<!DOCTYPE html>
+<html lang="zh">
+<head><meta charset="utf-8"><title>W1136 结束标签带属性 负样本</title></head>
+<body>
+<script>
+var MOYUN_RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+d3.selectAll('.bar').transition().duration(600);
+</script
+ bar>
+</body>
+</html>
+"""
+
+
+def test_motion_guard_negative_script_end_tag_attr_exit_1(tmp_path):
+    """M1 负样本：结束标签带属性/换行（</script\n bar>·合法 HTML）⇒ 仍须被扫到并判红。"""
+    gate = _stage_gate(tmp_path, MOTION_GATE)
+    _write_motion_page(tmp_path, MOTION_SCRIPT_END_TAG_ATTR)
+
+    _assert_red(
+        _run(gate, cwd=tmp_path),
+        ["未套守卫的 BARE", ".duration(600)"],
+        "M1 负样本（结束标签带属性）",
     )
 
 

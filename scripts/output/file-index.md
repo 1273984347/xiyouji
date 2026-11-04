@@ -42,6 +42,10 @@
 | scripts/check_doc_sync.py | W1136 | 改：C4/C5 组判据死代码根修·补 return 与修缩进（E-195） |
 | scripts/check_motion_guard.py | W1136 | 改：CodeQL bad-html-filtering-regexp 根修·标签与属性名大小写不敏感（E-194） |
 | tests/unit/test_w1135_gates.py | W1136 | 改：新增大小写盲区鉴别用例 2 例（E-194） |
+| scripts/generate_csp.py | W1136 | 改：内联脚本块提取正则统一（标签/属性名大小写不敏感 + 结束标签可带属性·E-194 同族根修） |
+| scripts/check_csp_drift.py | W1136 | 改：与 generate_csp.py 的 SCRIPT_RE 逐字一致（E-194 同族根修·口径不得分叉） |
+| scripts/check_js_syntax.py | W1136 | 改：内联脚本块提取正则统一（E-194 同族根修） |
+| scripts/check_js_syntax.js | W1136 | 改：内联脚本块提取正则统一（E-194 同族根修） |
 
 
 ## W1135 遗留清偿批 · d3 动效守卫表达式实参根治 + tooltip 死规则收口 + design 清单生成源根修 + 盲审 6 条处置（2026-11-05）

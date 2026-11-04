@@ -28,7 +28,7 @@ function collectHtml(dir) {
   return out;
 }
 
-const SCRIPT_RE = /<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g;
+const SCRIPT_RE = /<[sS][cC][rR][iI][pP][tT](?![^>]*\b[sS][rR][cC]\s*=)[^>]*>([\s\S]*?)<\/[sS][cC][rR][iI][pP][tT](?:\s[^>]*)?\s*>/g;
 
 function checkFile(file) {
   const html = fs.readFileSync(file, 'utf-8');

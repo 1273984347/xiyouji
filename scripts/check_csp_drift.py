@@ -50,7 +50,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 内联脚本块：与 generate_csp.py 的 SCRIPT_RE 同口径（无 src 的 <script>）——
 # **必须逐字一致**，否则哈希口径分叉（哈希化 CSP 的口径由 generate_csp 定义）。
-SCRIPT_RE = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.DOTALL)
+SCRIPT_RE = re.compile(
+    r"<[sS][cC][rR][iI][pP][tT](?![^>]*\b[sS][rR][cC]\s*=)[^>]*>"
+    r"(.*?)</[sS][cC][rR][iI][pP][tT](?:\s[^>]*)?\s*>",
+    re.DOTALL,
+)
 META_RE = re.compile(
     r'<meta\s+http-equiv=["\']Content-Security-Policy["\']\s+content="([^"]*)"\s*/?>',
     re.IGNORECASE,
