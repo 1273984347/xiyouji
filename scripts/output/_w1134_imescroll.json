@@ -1,0 +1,111 @@
+{
+ "result": {
+  "ime": {
+   "G1": {
+    "sent": 0,
+    "prevented": false
+   },
+   "G2": {
+    "sent": 0,
+    "prevented": false
+   },
+   "G3": {
+    "sent": 1,
+    "prevented": true
+   }
+  },
+  "scroll": {
+   "hasBtn": true,
+   "btnOutsideHistory": true,
+   "nearBottomBefore": true,
+   "afterScrollUp": {
+    "distance": 1370,
+    "btnVisible": true,
+    "btnOpacity": "0"
+   },
+   "afterTransition": {
+    "opacity": "1",
+    "visibility": "visible"
+   },
+   "afterBackToBottom": {
+    "distance": 5,
+    "btnVisible": false,
+    "opacity": "0"
+   },
+   "afterRenderWhileScrolledUp": {
+    "scrollTopBefore": 0,
+    "scrollTopAfter": 0,
+    "stayedUp": true
+   }
+  },
+  "page_errors": []
+ },
+ "rows": [
+  {
+   "case": "G1 选字中回车不发送",
+   "pass": true,
+   "detail": {
+    "sent": 0,
+    "prevented": false
+   }
+  },
+  {
+   "case": "G2 选字完成 500ms 内回车不发送",
+   "pass": true,
+   "detail": {
+    "sent": 0,
+    "prevented": false
+   }
+  },
+  {
+   "case": "G3 选字完成 500ms 后回车正常发送",
+   "pass": true,
+   "detail": {
+    "sent": 1,
+    "prevented": true
+   }
+  },
+  {
+   "case": "G4 上翻后跳至最新按钮可见",
+   "pass": true,
+   "detail": {
+    "distance": 1370,
+    "btnVisible": true,
+    "btnOpacity": "0"
+   }
+  },
+  {
+   "case": "G4b 上翻后不得被强制拽回底部",
+   "pass": true,
+   "detail": {
+    "scrollTopBefore": 0,
+    "scrollTopAfter": 0,
+    "stayedUp": true
+   }
+  },
+  {
+   "case": "G4c 过渡完成后按钮真可见（opacity=1）",
+   "pass": true,
+   "detail": {
+    "opacity": "1",
+    "visibility": "visible"
+   }
+  },
+  {
+   "case": "G5 回到近底时按钮隐藏",
+   "pass": true,
+   "detail": {
+    "distance": 5,
+    "btnVisible": false,
+    "opacity": "0"
+   }
+  },
+  {
+   "case": "G6 无页面运行时错误",
+   "pass": true,
+   "detail": []
+  }
+ ],
+ "fails": [],
+ "ok": true
+}

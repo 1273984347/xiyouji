@@ -827,7 +827,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    /* W1134：边框色改走令牌（原为硬编码 #ccc·违反 token 覆盖率口径·且暗色打印下偏灰失真） */
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 /* ===== 图表移动端降级（W494）：≤640px 图例纵排/文字缩小/tooltip 收窄——CSS 显示层降级，D3 渲染不变 ===== */

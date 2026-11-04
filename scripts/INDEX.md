@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（187）
+## 文件（189）
 
 ### Markdown 文档
 
@@ -166,12 +166,14 @@
 - `extract_strings.py`
 - `fetch_gate_stats.py`
 - `file_protocol_probe.py`
+- `font_weight_probe.py`
 - `gen_folder_docs.py`
 - `gen_og_cover.py`
 - `gen_rss.py`
 - `gen_sitemap.py`
 - `gen_tools_inventory.py`
 - `generate_csp.py`
+- `ime_scroll_probe.py`
 - `inject_chart_a11y.py`
 - `inject_descriptions.py`
 - `inject_rum.py`

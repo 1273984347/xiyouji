@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VhNVhTeSIgjTN6ifEgdN14vGNKKmv/YmZRIF6oR2TKQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Xqt0FoCxzR2kkhmidlLe6mRUw1xr+mgd1uDYXkw4zFc='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>AI 名人对话 · 详解西游记</title>
@@ -185,7 +185,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -198,6 +200,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1038,6 +1050,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1124,7 +1151,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {
@@ -1367,6 +1395,12 @@ html[data-theme="dark"] .chapter-plate {
             min-width: 0;
         }
         .chat-header .active-name { color: var(--accent); font-weight: 600; }
+        .chat-history-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+            display: flex;
+        }
         .chat-history {
             flex: 1;
             padding: 16px;
@@ -1377,6 +1411,31 @@ html[data-theme="dark"] .chapter-plate {
             gap: 14px;
             min-width: 0;
         }
+        /* W1134：跳至最新按钮（用户上翻超过阈值行数时出现·点击回到底部） */
+        .jump-latest {
+            position: absolute;
+            right: 18px;
+            bottom: 12px;
+            z-index: 5;
+            padding: 6px 14px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-pill);
+            background: var(--paper);
+            color: var(--accent);
+            font-size: 12px;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            box-shadow: var(--elev-2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--dur-base) var(--ease-out-quart),
+                        visibility var(--dur-base) var(--ease-out-quart);
+        }
+        .jump-latest.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .jump-latest:hover { background: var(--accent-tint); border-color: var(--accent); }
         .chat-empty {
             text-align: center;
             color: var(--ink-soft);
@@ -1636,7 +1695,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <span>当前对话：<span id="active-name" class="active-name">自动匹配</span></span>
                     <span style="font-size:0.78rem;">已对话 <span id="msg-count">0</span> 轮</span>
                 </div>
-                <div id="chat-history" class="chat-history" aria-live="polite" aria-label="对话历史"></div>
+                <div class="chat-history-wrap">
+                    <div id="chat-history" class="chat-history" aria-live="polite" aria-label="对话历史"></div>
+                    <button id="jump-latest" class="jump-latest" type="button" aria-label="跳至最新消息">↓ 跳至最新</button>
+                </div>
                 <div id="quick-topics" class="quick-topics"></div>
                 <div class="input-area">
                     <input type="text" id="chat-input"
@@ -1911,10 +1973,36 @@ const EMBEDDED_DATA = {
 const state = {
     activeCelebrityId: null,        // null = 自动匹配
     chatHistory: [],                // { role, text/quote, celebrity, avatar, era, source }
-    usedReplies: {}                 // { celebrityId: Set<replyIndex> }
+    usedReplies: {},                // { celebrityId: Set<replyIndex> }
+    isComposing: false,             // W1134：中文输入法选字中
+    lastCompositionEnd: 0           // W1134：上次选字结束时间戳（用于 500ms 拦截窗）
 };
 
+// ===== W1134 · 交互细节常量 =====
+// 选字刚完成后的回车拦截窗（ms）——视频拆解口径「选字完成半秒内的回车也会被拦截」
+const COMPOSITION_GUARD_MS = 500;
+// 判定「距底部不足一行」的阈值（px）——按一行正文行高估算
+const NEAR_BOTTOM_PX = 24;
+
 const fetchStatus = { anyFetched: false };
+
+// ===== W1134 · 滚动跟随辅助 =====
+// 距底部不足一行 ⇒ 视为「用户仍想看最新」⇒ 允许自动跟随
+function isNearBottom(el) {
+    if (!el) return true;
+    return (el.scrollHeight - el.scrollTop - el.clientHeight) < NEAR_BOTTOM_PX;
+}
+
+// 上翻超过阈值行数 ⇒ 显示「跳至最新」按钮
+function updateJumpLatest(el) {
+    const btn = document.getElementById("jump-latest");
+    if (!btn || !el) return;
+    if (isNearBottom(el)) {
+        btn.classList.remove("show");
+    } else {
+        btn.classList.add("show");
+    }
+}
 
 // ===== F6 骨架：fetchJson → loadData → main → renderXxx =====
 async function fetchJson(path, fallbackKey) {
@@ -2114,9 +2202,15 @@ function renderChatHistory() {
         }
     });
 
-    // 滚动到底部
+    // W1134：滚动跟随改为「阈值跟随」——用户上翻即停止跟随，并显示「跳至最新」按钮。
+    // 原实现为无条件 scrollTop = scrollHeight ⇒ 用户上翻时被强制拽回底部，无法回看上文。
+    // 判据：距底不足一行（scrollHeight - scrollTop - clientHeight < 一行行高）⇒ 跟随；
+    //       否则停止跟随并露出跳至最新按钮。
     const history = document.getElementById("chat-history");
-    history.scrollTop = history.scrollHeight;
+    if (isNearBottom(history)) {
+        history.scrollTop = history.scrollHeight;
+    }
+    updateJumpLatest(history);
 
     // 更新对话轮数（用户消息数）
     const rounds = state.chatHistory.filter(m => m.role === "user").length;
@@ -2179,11 +2273,26 @@ function setupEventHandlers() {
 
     input.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
+            // W1134 · 中文防误发（IME 选字期回车只应完成选字，不应发送）：
+            // ① composition 期间（选字未完成）⇒ 不拦截，回车交给输入法处理；
+            // ② 选字刚完成（compositionend 后 500ms 内）⇒ 拦截这次回车，
+            //    避免用户「选完字顺手按回车」把内容误发出去。
+            if (event.isComposing || event.keyCode === 229) return;
+            if (Date.now() - state.lastCompositionEnd < COMPOSITION_GUARD_MS) return;
             event.preventDefault();
             const text = input.value;
             input.value = "";
             sendMessage(text);
         }
+    });
+
+    // 选字状态跟踪（中文输入法）
+    input.addEventListener("compositionstart", function() {
+        state.isComposing = true;
+    });
+    input.addEventListener("compositionend", function() {
+        state.isComposing = false;
+        state.lastCompositionEnd = Date.now();
     });
 
     sendBtn.addEventListener("click", function() {
@@ -2192,6 +2301,22 @@ function setupEventHandlers() {
         sendMessage(text);
         input.focus();
     });
+
+    // W1134：滚动监听——用户上翻即停止自动跟随并露出「跳至最新」
+    const history = document.getElementById("chat-history");
+    if (history) {
+        history.addEventListener("scroll", function() {
+            updateJumpLatest(history);
+        }, { passive: true });
+    }
+    const jumpBtn = document.getElementById("jump-latest");
+    if (jumpBtn) {
+        jumpBtn.addEventListener("click", function() {
+            if (!history) return;
+            history.scrollTop = history.scrollHeight;
+            updateJumpLatest(history);
+        });
+    }
 }
 
 // ===== 主流程 =====
