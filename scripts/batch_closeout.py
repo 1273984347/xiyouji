@@ -30,6 +30,7 @@ STEPS = [
     ('precheck',   '台账预检（正本同号多行 / 行数窗口）'),
     ('selfref',    'CSS 变量自引用体检（引用第 57 槽既有判据·只引用不复制）'),
     ('add',        'git add 本批改动（生成器按索引收集·须先 add）'),
+    ('pycompile',  'py_compile 语法自检（**须在 add 之后**：索引态 + 工作树态 + 未跟踪三态清单的 .py 逐件编译·任一 SyntaxError 即中止整链·W1128）'),
     ('refresh',    'gen_folder_docs --refresh（迭代至收敛）'),
     ('stats',      'stats.py --w <批号>'),
     ('versions',   '版本面推进（跨文件字面量·幂等·只引用 version_surface）'),
@@ -284,6 +285,79 @@ def _add_paths(paths):
     return True
 
 
+def _changed_py_files():
+    """本批改动的 .py 清单：**三态并集**（索引态 + 工作树态 + 未跟踪）。
+
+    为什么要三态：① 索引态 = 已暂存（add 步之后本批改动都在里面）；② 工作树态 =
+    「改了就忘 add」的件；③ 未跟踪 = 新建但既未 add 也未 commit 的件
+    （ls-files --others --exclude-standard 已排除 .gitignore 目录如 tmpe/）。
+    只取 .py；非 .py 一律跳过（零成本）。
+    """
+    paths = set()
+    for args in (['diff', '--cached', '--name-only'],
+                 ['diff', '--name-only'],
+                 ['ls-files', '--others', '--exclude-standard']):
+        rc, out = run(['git', '-c', 'core.quotePath=false'] + args)
+        if rc != 0:
+            continue
+        for ln in out.splitlines():
+            p = ln.strip()
+            if p.endswith('.py'):
+                paths.add(p)
+    return sorted(paths)
+
+
+def _compile_check(rel_paths, root=None):
+    """纯逻辑：逐件编译给定 .py 路径 ⇒ 返回 (ok, 错误清单)。
+
+    非 .py 一律跳过（零成本）；只编译不落盘（不产生 __pycache__）。
+    抽成独立函数以便单测直接喂临时文件（不依赖 git 仓库）。
+    """
+    base = root or ROOT
+    bad = []
+    checked = 0
+    for rel in rel_paths:
+        if not rel.endswith('.py'):
+            continue
+        checked += 1
+        path = os.path.join(base, rel)
+        try:
+            with open(path, 'rb') as fh:
+                src = fh.read()
+            compile(src, rel, 'exec')
+        except SyntaxError as exc:
+            bad.append('%s:%s: %s' % (rel, exc.lineno, exc.msg))
+        except OSError as exc:
+            bad.append('%s: 读取失败: %s' % (rel, exc))
+    return (not bad), bad, checked
+
+
+def _run_pycompile():
+    """py_compile 语法自检（W1128）：把「写盘出错」这类事故挡在提交之前。
+
+    病根（2026-11-04 实测）：批量写 .py 后若落盘出现语法错（字面两字符反斜杠 n、
+    缺引号、续行残缺），此前**无任何机器门禁拦截** ⇒ 坏文件直接进索引进提交；
+    而本地跑的是好版本 ⇒ 本地全绿、提交里是坏版本 ⇒ 直到 CI 才暴露（本次 8 个
+    文件同时触发 3 个 job 红灯）。
+
+    ⇒ 本步对三态清单的全部 .py 逐件 compile()（**只编译不落盘**·不污染
+    __pycache__），任一件 SyntaxError ⇒ 打印「文件:行号 + 错误」并**中止整条收官链**
+    （fail-closed·宁可停在收官前也不让坏件进提交）。
+    """
+    files = _changed_py_files()
+    if not files:
+        print('[pycompile] 本批无 .py 改动（跳过）')
+        return True
+    ok, bad, _checked = _compile_check(files)
+    if not ok:
+        print('[pycompile] 发现 %d 件 .py 语法错 => 中止（先修语法再收官）' % len(bad))
+        for b in bad:
+            print('  ' + b)
+        return False
+    print('[pycompile] %d 件 .py 语法自检通过' % len(files))
+    return True
+
+
 def _run_index():
     """index 步：搜索索引 + 文档索引。"""
     for cmd in ('_gen_search_index.py', 'docs_index.py'):
@@ -466,6 +540,8 @@ def main(argv=None):
         print('[dry-run] 预检通过，未落盘')
         return 0
     if not _add_paths(collect_paths(a.spec, a.paths)):
+        return 1
+    if not _run_pycompile():
         return 1
     if not _run_content_stage(a, batch):
         return 1
