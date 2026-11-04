@@ -94,7 +94,62 @@ def _to_nl(text, target_nl):
     return t
 
 
-def move(target, keep, apply, batch_tag):
+def _rule_seg_index(hits, src_text):
+    """返回含「（W001-W…）」编号规则串的段下标（找不到返回 None）——该段**不得被迁出**。
+    W1119 实证：编号规则段上限是版本面字面量（version_surface.advance_changelog_rule 要改写它）
+    ⇒ 若被腾窗迁进 archive，版本面推进器即 fail-closed「未找到锚点」⇒ 整条收官链停摆。
+    """
+    for i, (_w, start) in enumerate(hits):
+        end = hits[i + 1][1] if i + 1 < len(hits) else len(src_text)
+        if re.search(r"（W001-W\d+）", src_text[start:end]):
+            return i
+    return None
+
+
+def plan_by_size(src_text, re_seg, max_bytes, chunk):
+    """W1119 体积阈值规划：每批迁出 chunk 个 W 段（最后一批可不足），循环直到正本 <= max_bytes。
+    段为降序（最新在前）⇒ 迁出块恒为尾部（最老）连续段 ⇒ 与 move() 的 A1/A4 断言兼容。"""
+    hits = [(_wnum(m), m.start()) for m in re_seg.finditer(src_text)]
+    assert hits, "正本未找到任何段（结构异常）"
+    ws = [w for w, _ in hits]
+    assert ws == sorted(ws, reverse=True), "正本段序非严格降序（先修复再归档）"
+    assert len(set(ws)) == len(ws), "正本出现重复段号（先修复再归档）"
+    n = len(hits)
+    if len(src_text.encode('utf-8')) <= max_bytes:
+        return None, []
+    guard = _rule_seg_index(hits, src_text)   # 编号规则段不可迁出
+    limit = guard if guard is not None else n
+    k = 0
+    while k < limit - 1:
+        k += min(chunk, limit - 1 - k)
+        cut = hits[n - k][1]
+        if len(src_text[:cut].encode('utf-8')) <= max_bytes:
+            break
+    if guard is not None and k >= limit - 1:
+        k = limit - 1
+    cut = hits[n - k][1]
+    moved_ws = [w for w, _ in hits[n - k:]]
+    return cut, moved_ws
+
+
+def plan_to_boundary(src_text, re_seg, boundary):
+    """迁出所有 W 号 <= boundary 的段（两面按同一 W 号边界对齐用·W1119）。"""
+    hits = [(_wnum(m), m.start()) for m in re_seg.finditer(src_text)]
+    assert hits, "正本未找到任何段（结构异常）"
+    ws = [w for w, _ in hits]
+    assert ws == sorted(ws, reverse=True), "正本段序非严格降序（先修复再归档）"
+    guard = _rule_seg_index(hits, src_text)   # 编号规则段不可迁出
+    idx = [i for i, w in enumerate(ws) if w <= boundary]
+    if guard is not None:
+        idx = [i for i in idx if i < guard]
+    if not idx:
+        return None, []
+    cut = hits[idx[0]][1]
+    moved_ws = [w for w, _ in hits[idx[0]:]]
+    return cut, moved_ws
+
+
+def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None):
     """执行单面迁移。返回 (迁出段号清单, 描述行清单)。dry-run 时零落盘。"""
     cfg = TARGETS[target]
     src_rel, arc_rel, re_seg, arc_mode = cfg["src"], cfg["arc"], cfg["re_seg"], cfg["arc_mode"]
@@ -104,10 +159,19 @@ def move(target, keep, apply, batch_tag):
     s, nl = bc.load(src_rel)
     a, anl = bc.load(arc_rel)
 
-    cut, moved_ws = plan(s, re_seg, keep)
+    if boundary is not None:
+        cut, moved_ws = plan_to_boundary(s, re_seg, boundary)
+    elif max_bytes is not None:
+        cut, moved_ws = plan_by_size(s, re_seg, max_bytes, chunk)
+    else:
+        cut, moved_ws = plan(s, re_seg, keep)
     if cut is None:
         # W1014：未超窗 → 无段可迁（正常状态·非失败）——原实现断言失败致级联回窗误报 FAIL
-        print("[SKIP] %s 段数 %d ≤ keep %d——未超窗·无段可迁" % (src_rel, len(re_seg.findall(s)), keep))
+        n_seg = len(re_seg.findall(s))
+        if keep is None:
+            print("[SKIP] %s 段数 %d·体积未超阈值·无段可迁" % (src_rel, n_seg))
+        else:
+            print("[SKIP] %s 段数 %d ≤ keep %d——未超窗·无段可迁" % (src_rel, n_seg, keep))
         return []
     moved_text = s[cut:]
     kept_text = s[:cut]
@@ -164,7 +228,9 @@ def move(target, keep, apply, batch_tag):
     assert new_src == s[:cut], "A3 留存前缀被改动"
     rule = re.search(r"（W001-W\d+）", s)
     if rule:
-        assert new_src.count(rule.group(0)) == s.count(rule.group(0)), "A3 编号规则行被改动"
+        # W1119 批量迁移订正：原断言比**全文**计数 ⇒ 迁出块带走「（W001-W####）」字样时计数必减 ⇒ 批量模式恒假红。
+        # 意图是「编号规则行未被改动」⇒ 留存前缀逐字节不变（A3 主断言）已覆盖 ⇒ 收紧为「留存前缀内计数相等」·判据强度不降。
+        assert new_src.count(rule.group(0)) == s[:cut].count(rule.group(0)), "A3 编号规则行被改动"
     top_before = re_seg.search(s)
     top_after = re_seg.search(new_src)
     assert top_before and top_after and top_before.group(0) == top_after.group(0), "A3 顶段标题行被改动"
@@ -189,6 +255,10 @@ def main() -> int:
     ap.add_argument("--target", choices=["changelog", "file-index", "both"], default="both")
     ap.add_argument("--keep", type=int, default=109,
                     help="正本保留段数（默认 109 = 窗口 110 - 本批级联将插入的 1 段）")
+    ap.add_argument("--max-bytes", type=int, default=None,
+                    help="正本体积上限（字节）·给了即按体积阈值迁出·每批 --chunk 段·循环到达标·未超阈值零动作")
+    ap.add_argument("--chunk", type=int, default=50,
+                    help="体积模式每次迁出的段数（默认 50·最后一批可不足）")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--batch-tag", default="W960", help="归档注记的批次号")
@@ -197,8 +267,27 @@ def main() -> int:
         ap.error("必须指定 --dry-run 或 --apply")
     targets = ["changelog", "file-index"] if args.target == "both" else [args.target]
     moved_all = {}
-    for t in targets:
-        moved_all[t] = move(t, args.keep, args.apply, args.batch_tag)
+    if args.max_bytes is not None:
+        moved_all = {}
+        boundary = None
+        if args.target in ("changelog", "both"):
+            moved_all["changelog"] = move("changelog", None, args.apply, args.batch_tag,
+                                          max_bytes=args.max_bytes, chunk=args.chunk)
+            # W1119：边界取迁出块的**最大 W 号** ⇒ 两面正本都从同一下界起（按最小号会只迁 1 段⇒下界不同）
+            boundary = max(moved_all["changelog"]) if moved_all["changelog"] else None
+        if args.target in ("file-index", "both"):
+            moved_all["file-index"] = move("file-index", None, args.apply, args.batch_tag,
+                                          max_bytes=args.max_bytes, chunk=args.chunk,
+                                          boundary=boundary)
+        if boundary is not None and moved_all.get("file-index"):
+            assert max(moved_all["file-index"]) == boundary, (
+                "两面未迁到同一 W 号下界：changelog=%s file-index=%s" % (boundary, max(moved_all["file-index"])))
+            print("[ALIGN] 两面同下界 W%d（正本均保留 W 号 >= %d）" % (boundary, boundary + 1))
+        elif boundary is not None:
+            print("[ALIGN] file-index 无 <= W%d 的段可迁（该面号集合与 CHANGELOG 不同·需人工核）" % boundary)
+    else:
+        for t in targets:
+            moved_all[t] = move(t, args.keep, args.apply, args.batch_tag)
     if not args.apply:
         print("[DRY-RUN] 未落盘。加 --apply 写回。")
     else:

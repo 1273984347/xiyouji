@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0LK9Ra5oipd0Q6a6HmiKbwwe6aW1Kpj9yLDja+vg0y8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zTlmCzY6n1X/u/+qpezSnn5pE9nCDd5KkKt9ZxqKru4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>法理经济 · 详解西游记</title>
@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="天庭量刑经济学 · 法宝产权界定 · 生死簿作为数据库治理 · 详解西游记">
     <meta property="og:description" content="天庭量刑经济学 · 法宝产权界定 · 生死簿作为数据库治理 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -2324,10 +2324,10 @@ function renderTreemap(opts){
                     `罪犯：${d.criminal}<br>` +
                     `身份：${d.identity}<br>` +
                     `罪行：${d.crime}<br>` +
-                    `<span style="color:#e9b885">罪行严重度</span>：${d.crime_severity} / 10<br>` +
-                    `<span style="color:#e9b885">刑罚</span>：${d.actual_sentence}<br>` +
-                    `<span style="color:#e9b885">刑罚严重度</span>：${d.sentence_severity} / 10<br>` +
-                    `<span style="color:#e9b885">失衡分数</span>：${d.disparity_score} / 10<br>` +
+                    `<span style="color:var(--chart-3)">罪行严重度</span>：${d.crime_severity} / 10<br>` +
+                    `<span style="color:var(--chart-3)">刑罚</span>：${d.actual_sentence}<br>` +
+                    `<span style="color:var(--chart-3)">刑罚严重度</span>：${d.sentence_severity} / 10<br>` +
+                    `<span style="color:var(--chart-3)">失衡分数</span>：${d.disparity_score} / 10<br>` +
                     `<em>${d.disparity_reason}</em>`,
                     event
                 );
@@ -2523,7 +2523,7 @@ function renderTreemap(opts){
                     `声称所有人：${d.claimed_owner}<br>` +
                     `实际产权类型：${d.actual_property_type}<br>` +
                     `来历：${d.creation_context}<br>` +
-                    `<span style="color:#e9b885">产权清晰度</span>：${d.property_clarity} / 10<br>` +
+                    `<span style="color:var(--chart-3)">产权清晰度</span>：${d.property_clarity} / 10<br>` +
                     `法律风险：${d.legal_risk}<br>` +
                     `<em>争议：${d.property_dispute}</em>`,
                     event
@@ -2586,7 +2586,7 @@ function renderTreemap(opts){
         svgId: 'chart-artifact-pie', data: pieData, legendId: 'legend-artifact-pie', tipId: 'tm-tooltip',
         nameOf: d => ({private_pure:'纯私人财产', public_pure:'纯公有资产', mixed_ownership:'混合产权', delegated_use:'委托使用', usucaption:'使用即所有'})[d.key] || d.label,
         valueOf: d => d.value, colorOf: d => color[d.key],
-        htmlOf: (d, total) => `<strong>${d.label}</strong><div class="row">数量：<strong style="color:#e9b885">${d.value}</strong> 件（${((d.value/total)*100).toFixed(1)}%）</div>`
+        htmlOf: (d, total) => `<strong>${d.label}</strong><div class="row">数量：<strong style="color:var(--chart-3)">${d.value}</strong> 件（${((d.value/total)*100).toFixed(1)}%）</div>`
     });
 }
 
@@ -2683,9 +2683,9 @@ function renderTreemap(opts){
                     `事件类型：${d.incident_type}<br>` +
                     `影响数据：${d.data_affected}<br>` +
                     `数据量：${d.data_volume}<br>` +
-                    `<span style="color:#e9b885">授权</span>：${d.unauthorized_access ? '未授权' : '授权'}<br>` +
-                    `<span style="color:#e9b885">审计</span>：${d.audit_trail}<br>` +
-                    `<span style="color:#e9b885">严重度</span>：${d.severity} / 10<br>` +
+                    `<span style="color:var(--chart-3)">授权</span>：${d.unauthorized_access ? '未授权' : '授权'}<br>` +
+                    `<span style="color:var(--chart-3)">审计</span>：${d.audit_trail}<br>` +
+                    `<span style="color:var(--chart-3)">严重度</span>：${d.severity} / 10<br>` +
                     `漏洞：${d.vulnerability}<br>` +
                     `<em>${d.data_governance_failure}</em>`,
                     event

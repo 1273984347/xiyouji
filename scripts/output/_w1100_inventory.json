@@ -1,10 +1,10 @@
 {
  "layers_total": {
-  "L5 裸 hex 字面量": 2623,
+  "L5 裸 hex 字面量": 2573,
   "L1 D3 .attr/.style(fill|stroke)": 994,
   "L4 通用 CSS 属性值": 32,
   "L3 Canvas fillStyle/strokeStyle": 13,
-  "L2 echarts 配置色": 1154
+  "L2 echarts 配置色": 1112
  },
  "layers_pages": {
   "L5 裸 hex 字面量": {
@@ -22,9 +22,9 @@
    "data/character-presence-timeline.html": 3,
    "data/character-relationship-3d-view.html": 6,
    "data/character-semantic-network.html": 32,
-   "data/chart-design.html": 24,
+   "data/chart-design.html": 9,
    "data/cognitive-psychology.html": 8,
-   "data/concept-device.html": 5,
+   "data/concept-device.html": 3,
    "data/counterfactual.html": 9,
    "data/criticism-history.html": 10,
    "data/cultural-misreading.html": 8,
@@ -59,7 +59,7 @@
    "data/monster-female-network.html": 36,
    "data/monster-hierarchy-network.html": 47,
    "data/monster-sociology.html": 26,
-   "data/monster-victims-network.html": 24,
+   "data/monster-victims-network.html": 16,
    "data/music-structure.html": 23,
    "data/narrative-experiment.html": 7,
    "data/narrative-rhythm-curve.html": 7,
@@ -92,9 +92,9 @@
    "en/character-presence-timeline.html": 3,
    "en/character-relationship-3d-view.html": 6,
    "en/character-semantic-network.html": 32,
-   "en/chart-design.html": 24,
+   "en/chart-design.html": 9,
    "en/cognitive-psychology.html": 8,
-   "en/concept-device.html": 5,
+   "en/concept-device.html": 3,
    "en/counterfactual.html": 9,
    "en/criticism-history.html": 10,
    "en/cultural-misreading.html": 8,
@@ -130,7 +130,7 @@
    "en/monster-female-network.html": 36,
    "en/monster-hierarchy-network.html": 47,
    "en/monster-sociology.html": 26,
-   "en/monster-victims-network.html": 24,
+   "en/monster-victims-network.html": 16,
    "en/music-structure.html": 23,
    "en/narrative-experiment.html": 7,
    "en/narrative-rhythm-curve.html": 7,
@@ -308,9 +308,8 @@
    "data/character-appearance.html": 15,
    "data/character-dynamic-network.html": 10,
    "data/character-semantic-network.html": 18,
-   "data/character-sentiment-arc.html": 15,
-   "data/chart-design.html": 3,
-   "data/concept-device.html": 17,
+   "data/character-sentiment-arc.html": 7,
+   "data/concept-device.html": 11,
    "data/criticism-history.html": 6,
    "data/deconstruction.html": 4,
    "data/emotional-heatmap.html": 8,
@@ -332,7 +331,7 @@
    "data/monster-capability-radar.html": 5,
    "data/monster-female-network.html": 40,
    "data/monster-hierarchy-network.html": 13,
-   "data/monster-victims-network.html": 9,
+   "data/monster-victims-network.html": 5,
    "data/narrative-experiment.html": 45,
    "data/narratology-12d-network.html": 49,
    "data/narratology-16d-network.html": 69,
@@ -350,9 +349,8 @@
    "en/character-appearance.html": 15,
    "en/character-dynamic-network.html": 10,
    "en/character-semantic-network.html": 18,
-   "en/character-sentiment-arc.html": 15,
-   "en/chart-design.html": 3,
-   "en/concept-device.html": 17,
+   "en/character-sentiment-arc.html": 7,
+   "en/concept-device.html": 11,
    "en/criticism-history.html": 6,
    "en/deconstruction.html": 4,
    "en/emotional-heatmap.html": 8,
@@ -374,7 +372,7 @@
    "en/monster-capability-radar.html": 5,
    "en/monster-female-network.html": 40,
    "en/monster-hierarchy-network.html": 13,
-   "en/monster-victims-network.html": 9,
+   "en/monster-victims-network.html": 5,
    "en/narrative-experiment.html": 45,
    "en/narratology-12d-network.html": 49,
    "en/narratology-16d-network.html": 69,
@@ -391,16 +389,16 @@
   }
  },
  "bare_hex_split": {
-  "调色板色": 1412,
+  "调色板色": 1320,
   "页面自有 hex": 3404
  },
  "layer_split": {
-  "L5 裸 hex 字面量|调色板色": 1058,
+  "L5 裸 hex 字面量|调色板色": 1008,
   "L5 裸 hex 字面量|页面自有 hex": 1565,
   "L1 D3 .attr/.style(fill|stroke)|页面自有 hex": 994,
   "L4 通用 CSS 属性值|页面自有 hex": 26,
   "L3 Canvas fillStyle/strokeStyle|页面自有 hex": 13,
-  "L2 echarts 配置色|调色板色": 348,
+  "L2 echarts 配置色|调色板色": 306,
   "L2 echarts 配置色|页面自有 hex": 806,
   "L4 通用 CSS 属性值|调色板色": 6
  },
@@ -468,20 +466,18 @@
    "调色板色": 24
   },
   "data/character-sentiment-arc.html": {
-   "调色板色": 8,
    "页面自有 hex": 9
   },
   "data/chart-design.html": {
-   "调色板色": 19,
-   "页面自有 hex": 8
+   "页面自有 hex": 8,
+   "调色板色": 1
   },
   "data/cognitive-psychology.html": {
    "调色板色": 7,
    "页面自有 hex": 6
   },
   "data/concept-device.html": {
-   "页面自有 hex": 18,
-   "调色板色": 8
+   "页面自有 hex": 18
   },
   "data/counterfactual.html": {
    "调色板色": 6,
@@ -636,8 +632,7 @@
    "调色板色": 13
   },
   "data/monster-victims-network.html": {
-   "页面自有 hex": 31,
-   "调色板色": 12
+   "页面自有 hex": 31
   },
   "data/music-structure.html": {
    "页面自有 hex": 16,
@@ -778,20 +773,18 @@
    "调色板色": 24
   },
   "en/character-sentiment-arc.html": {
-   "调色板色": 8,
    "页面自有 hex": 9
   },
   "en/chart-design.html": {
    "页面自有 hex": 8,
-   "调色板色": 19
+   "调色板色": 1
   },
   "en/cognitive-psychology.html": {
    "调色板色": 7,
    "页面自有 hex": 14
   },
   "en/concept-device.html": {
-   "页面自有 hex": 22,
-   "调色板色": 8
+   "页面自有 hex": 22
   },
   "en/counterfactual.html": {
    "调色板色": 6,
@@ -947,8 +940,7 @@
    "页面自有 hex": 27
   },
   "en/monster-victims-network.html": {
-   "页面自有 hex": 34,
-   "调色板色": 12
+   "页面自有 hex": 34
   },
   "en/music-structure.html": {
    "页面自有 hex": 24,
@@ -1037,7 +1029,7 @@
  },
  "comp_total": {
   "C1 前缀型 [fill^=\"#\"]": 990,
-  "C2 字面值型 [fill=\"#..\" i]": 20130,
+  "C2 字面值型 [fill=\"#..\" i]": 20128,
   "C3 其它按属性匹配的补偿选择器": 37620
  },
  "comp_pages_top": {
@@ -1059,7 +1051,6 @@
   "data/character-relationship-3d.html": 178,
   "data/character-semantic-network.html": 178,
   "data/character-sentiment-arc.html": 178,
-  "data/chart-design.html": 178,
   "data/cognitive-psychology.html": 178,
   "data/concept-device.html": 178,
   "data/counterfactual.html": 178,
@@ -1070,7 +1061,8 @@
   "data/data-explorer.html": 178,
   "data/deconstruction.html": 178,
   "data/dialogue-sentiment.html": 178,
-  "data/ecology.html": 178
+  "data/ecology.html": 178,
+  "data/emotional-heatmap.html": 178
  },
  "comp_page_count": 330,
  "comp_detail": {
@@ -1333,7 +1325,7 @@
    ],
    [
     "C2 字面值型 [fill=\"#..\" i]",
-    61
+    60
    ],
    [
     "C3 其它按属性匹配的补偿选择器",
@@ -2691,7 +2683,7 @@
    ],
    [
     "C2 字面值型 [fill=\"#..\" i]",
-    61
+    60
    ],
    [
     "C3 其它按属性匹配的补偿选择器",
@@ -5760,20 +5752,19 @@
    "L1 D3 .attr/.style(fill|stroke)": 1
   },
   "data/character-sentiment-arc.html": {
-   "L2 echarts 配置色": 15,
+   "L2 echarts 配置色": 7,
    "L1 D3 .attr/.style(fill|stroke)": 2
   },
   "data/chart-design.html": {
-   "L5 裸 hex 字面量": 24,
-   "L2 echarts 配置色": 3
+   "L5 裸 hex 字面量": 9
   },
   "data/cognitive-psychology.html": {
    "L5 裸 hex 字面量": 8,
    "L1 D3 .attr/.style(fill|stroke)": 5
   },
   "data/concept-device.html": {
-   "L5 裸 hex 字面量": 5,
-   "L2 echarts 配置色": 17,
+   "L5 裸 hex 字面量": 3,
+   "L2 echarts 配置色": 11,
    "L1 D3 .attr/.style(fill|stroke)": 4
   },
   "data/counterfactual.html": {
@@ -5943,8 +5934,8 @@
   },
   "data/monster-victims-network.html": {
    "L1 D3 .attr/.style(fill|stroke)": 10,
-   "L2 echarts 配置色": 9,
-   "L5 裸 hex 字面量": 24
+   "L5 裸 hex 字面量": 16,
+   "L2 echarts 配置色": 5
   },
   "data/music-structure.html": {
    "L1 D3 .attr/.style(fill|stroke)": 4,
@@ -6103,12 +6094,11 @@
    "L1 D3 .attr/.style(fill|stroke)": 1
   },
   "en/character-sentiment-arc.html": {
-   "L2 echarts 配置色": 15,
+   "L2 echarts 配置色": 7,
    "L1 D3 .attr/.style(fill|stroke)": 2
   },
   "en/chart-design.html": {
-   "L5 裸 hex 字面量": 24,
-   "L2 echarts 配置色": 3
+   "L5 裸 hex 字面量": 9
   },
   "en/cognitive-psychology.html": {
    "L5 裸 hex 字面量": 8,
@@ -6116,8 +6106,8 @@
   },
   "en/concept-device.html": {
    "L1 D3 .attr/.style(fill|stroke)": 8,
-   "L5 裸 hex 字面量": 5,
-   "L2 echarts 配置色": 17
+   "L5 裸 hex 字面量": 3,
+   "L2 echarts 配置色": 11
   },
   "en/counterfactual.html": {
    "L5 裸 hex 字面量": 9,
@@ -6290,8 +6280,8 @@
   },
   "en/monster-victims-network.html": {
    "L1 D3 .attr/.style(fill|stroke)": 13,
-   "L5 裸 hex 字面量": 24,
-   "L2 echarts 配置色": 9
+   "L5 裸 hex 字面量": 16,
+   "L2 echarts 配置色": 5
   },
   "en/music-structure.html": {
    "L1 D3 .attr/.style(fill|stroke)": 12,

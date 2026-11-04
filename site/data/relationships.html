@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zWdMyT+qD5PHI2hUFEpijzYuxJC5x3zmjRvoLfcObZI=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-v41HxQterIGxxJvnz/BIbJ+MgQc3d+fX+K7yjQdddj4=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>关系网络 · 详解西游记</title>
@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="导言 · 关系网络的四重透镜 · 壹 · 三界势力分布 · 贰 · 法宝克制关系网 · 详解西游记">
     <meta property="og:description" content="导言 · 关系网络的四重透镜 · 壹 · 三界势力分布 · 贰 · 法宝克制关系网 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -5889,7 +5889,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
                 if (isMain) {
                     const d = node.data;
                     tooltip.show(
-                        `<strong style="color:#c8463a">${d.artifact}</strong><br>` +
+                        `<strong style="color:var(--chart-1)">${d.artifact}</strong><br>` +
                         `持有者：${d.owner}<br>` +
                         `可收：${d.can_collect.join('、')}<br>` +
                         `被克：${d.countered_by}<br>` +
@@ -5897,7 +5897,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
                         `章节：${d.chapter}`, e);
                 } else {
                     tooltip.show(
-                        `<strong style="color:#3a6b8c">${node.id}</strong><br>` +
+                        `<strong style="color:var(--chart-2)">${node.id}</strong><br>` +
                         `克制者（卫星节点）<br>` +
                         `克制目标：${node.parent}`, e);
                 }

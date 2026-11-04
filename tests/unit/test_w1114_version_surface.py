@@ -133,7 +133,13 @@ def test_closeout_steps_put_versions_between_stats_and_csp():
     assert order[-2:] == ['csp', 'cspcheck']
     assert 'docnums' in order and 'regsurface' in order
     assert order.index('versions') < order.index('docnums') < order.index('csp')
-    assert order[0] == 'precheck'
+    # W1119 跨批留痕：改的是「STEPS 首步必须是 precheck」这一条断言。
+    # 放宽/变更理由：收官链新增腾窗步（archive）且必须**前置到 precheck 之前**——
+    #   precheck 是 fail-closed 中止（台账数据行 > 窗口即 return 1）⇒ 腾窗步排在其后时，
+    #   台账超窗场景会在预检直接中止 ⇒ 永远到不了腾窗步 ⇒ 死路径（并行会话 W1117 实证）。
+    # 新表述原文：assert order[0] == 'archive' + assert order.index('archive') < order.index('precheck')
+    assert order[0] == 'archive'
+    assert order.index('archive') < order.index('precheck')
 
 
 def test_closeout_main_runs_versions_step(monkeypatch):
