@@ -6,6 +6,7 @@ description: |
   docs/agent/pitfalls.md 的完整条目（271 条·六主题）。只给判据，不复述项目结构。
   docs/agent/pitfalls.md 的完整条目（269 条·六主题）。只给判据，不复述项目结构。
   docs/agent/pitfalls.md 的完整条目（274 条·六主题）。只给判据，不复述项目结构。
+  docs/agent/pitfalls.md 的完整条目（283 条·六主题）。只给判据，不复述项目结构。
   触发场景：开工前自检 / 门禁报红定位 / 批次收官 / 归档与迁移 / 文档时效判断。
 license: MIT
 compatibility: any-agent
@@ -67,6 +68,7 @@ grep -n "关键词" docs/agent/pitfalls.md     # 六主题：CSS / JS·CSP / git
 | `docs/agent/pitfalls.md` | 271 条完整教训（**唯一权威源**——本位约束：避免双源漂移） |
 | `docs/agent/pitfalls.md` | 269 条完整教训（**唯一权威源**——本位约束：避免双源漂移） |
 | `docs/agent/pitfalls.md` | 274 条完整教训（**唯一权威源**——本位约束：避免双源漂移） |
+| `docs/agent/pitfalls.md` | 283 条完整教训（**唯一权威源**——本位约束：避免双源漂移） |
 | `docs/agent/gates.md` | 每一道门禁判什么（判据定义） |
 | `docs/agent/gate-triage-template.md` | 门禁红了**怎么查**（五步法） |
 | `docs/agent/batch-closeout-checklist.md` | 批次收官**按什么顺序做**（9 步） |
