@@ -218,6 +218,54 @@ def test_motion_guard_negative_missing_guard_declaration_exit_1(tmp_path):
 
 
 # ---------------------------------------------------------------------------
+# W1136（CodeQL bad-html-filtering-regexp 根修·E-194）：HTML 标签名/属性名大小写不敏感
+# ⇒ 过滤型正则必须大小写不敏感。以下两例把该盲区钉死：
+#   · 大写 <SCRIPT> 内联块必须被扫到（否则整页漏扫 ⇒ 动效守卫护栏静默归零）
+#   · 大写 SRC= 外链脚本必须被排除（浏览器不执行其内容 ⇒ 不得当成内联块）
+
+MOTION_UPPERCASE_SCRIPT_TAG = """<!DOCTYPE html>
+<html lang="zh">
+<head><meta charset="utf-8"><title>W1136 大写标签负样本</title></head>
+<body>
+<SCRIPT>
+var MOYUN_RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+d3.selectAll('.bar').transition().duration(600);
+</SCRIPT>
+</body>
+</html>
+"""
+
+MOTION_UPPERCASE_SRC_EXTERNAL = """<!DOCTYPE html>
+<html lang="zh">
+<head><meta charset="utf-8"><title>W1136 大写 SRC 外链正样本</title></head>
+<body>
+<SCRIPT SRC="external.js">d3.selectAll('.bar').transition().duration(600);</SCRIPT>
+</body>
+</html>
+"""
+
+
+def test_motion_guard_negative_uppercase_script_tag_exit_1(tmp_path):
+    """M1 负样本：大写 <SCRIPT> 包裹的内联块必须被扫到 ⇒ 裸数字实参判红（防大小写盲区）。"""
+    gate = _stage_gate(tmp_path, MOTION_GATE)
+    _write_motion_page(tmp_path, MOTION_UPPERCASE_SCRIPT_TAG)
+
+    _assert_red(
+        _run(gate, cwd=tmp_path),
+        ["未套守卫的 BARE", ".duration(600)"],
+        "M1 负样本（大写 <SCRIPT> 内联块）",
+    )
+
+
+def test_motion_guard_uppercase_src_external_excluded_exit_0(tmp_path):
+    """M1 正样本：大写 SRC= 外链脚本的内容不执行 ⇒ 不得当作内联块（否则误判红）。"""
+    gate = _stage_gate(tmp_path, MOTION_GATE)
+    _write_motion_page(tmp_path, MOTION_UPPERCASE_SRC_EXTERNAL)
+
+    _assert_green(_run(gate, cwd=tmp_path), "M1 正样本（大写 SRC= 外链被排除）")
+
+
+# ---------------------------------------------------------------------------
 # M2 assets/design 清单对拍
 # ---------------------------------------------------------------------------
 

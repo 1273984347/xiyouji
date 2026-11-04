@@ -39,6 +39,9 @@
 | site/data/tag-cloud.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
 | site/dukou-engine.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
 | site/index.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+| scripts/check_doc_sync.py | W1136 | 改：C4/C5 组判据死代码根修·补 return 与修缩进（E-195） |
+| scripts/check_motion_guard.py | W1136 | 改：CodeQL bad-html-filtering-regexp 根修·标签与属性名大小写不敏感（E-194） |
+| tests/unit/test_w1135_gates.py | W1136 | 改：新增大小写盲区鉴别用例 2 例（E-194） |
 
 
 ## W1135 遗留清偿批 · d3 动效守卫表达式实参根治 + tooltip 死规则收口 + design 清单生成源根修 + 盲审 6 条处置（2026-11-05）
