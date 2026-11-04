@@ -1,3 +1,14 @@
+### W1128（2026-11-04）：收官链 py_compile 语法自检门禁
+
+**本批要点**（收官链 py_compile 语法自检门禁·工具面·零页面内容改动·不新增门禁槽 ⇒ 门禁 62 段不变·**不新增坑表条目 ⇒ 计数链不动**）：① **病根**：批量写 .py 后若落盘出现语法错（字面两字符反斜杠 n、缺引号、续行残缺），此前**无任何机器门禁拦截** ⇒ 坏文件直接进索引进提交，而本地跑的是好版本 ⇒ 本地全绿、提交里是坏版本 ⇒ 直到 CI 才暴露（2026-11-04 实测：8 个文件同时触发 3 个 job 红灯）。② **根修 = 收官链新增 pycompile 步**（排在 add 之后·紧随其后）：对**三态清单**（索引态 + 工作树态 + 未跟踪·排除 .gitignore）的全部 .py 逐件 compile()（**只编译不落盘**·不污染 __pycache__）⇒ 任一件 SyntaxError 即打印「文件:行号 + 错误」并**中止整条收官链**（fail-closed·宁可停在收官前也不让坏件进提交）；纯逻辑抽为 _compile_check 便于负样本直喂。③ **负样本实测**：在工作树放入语法错文件 ⇒ 门禁拦停（退出码 3·报出 文件:1: invalid syntax）⇒ 删除探针后复跑「3 件 .py 语法自检通过」⇒ 证明该门禁真会拦而非只跑通。④ **顺序锁同步**：既有行为锁只锁 add→refresh→stats→index→csp→cspcheck 的相对顺序 ⇒ 插入 pycompile 不破坏它；另**追加**一条行为锁「pycompile 实际被调用且排在 add 之后」+ 声明顺序断言（pycompile == add + 1），防 STEPS 与 main 双写漂移。⑤ **号段让号**：W1127 于 15:11:09 被并行会话先落地占号 ⇒ 我方顺延用 W1128；台账因新增认领行达 61 段超窗 ⇒ 先腾窗迁出 W1065-W1066（正本 59 行）再动工。⑥ **不新增坑表条目** ⇒ 计数链零改动（避与并行会话 W1125 未合并批的计数链对撞）· 本批教训暂落 T77 报告 §5 · 待下一批入表。
+
+**文件**：
+- docs/agent/pitfalls.md- AGENTS.md- .agent/skills/puti-shouye/SKILL.md- HANDOVER.md- scripts/batch_closeout.py- scripts/batch_cascade.py- scripts/check_repo_layout.py- tests/unit/test_w1124_closeout_rebuild.py- scripts/output/_w1124_spec.json- scripts/output/_cascade_files_W1124.txt- docs/00-导读/W批次编号对账表.md- archive/docs/W批次编号对账表-ARCHIVE.md- docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md- docs/11-方案报告/README.md- CHANGELOG.md- scripts/output/file-index.md- README.md- STRUCTURE.md- docs/00-导读/项目说明.md- CITATION.cff- site/data/search.html- site/en/search.html- .github/workflows/README.md- scripts/output/stats.json- scripts/output/stats-index.md- scripts/output/stats-changelog.json- scripts/output/tools-inventory.md- archive/docs/AGENTS-ARCHIVE.md- docs/INDEX.md- scripts/INDEX.md- scripts/output/INDEX.md- scripts/output/README.md- tests/unit/INDEX.md- tests/unit/README.md- pytest.ini- docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md- docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md- site/index.html- site/data/cross-time-danmaku.html- site/data/tag-cloud.html- site/dukou-engine.html- scripts/cascade_idempotence.py- scripts/batch_cascade.py- scripts/backfill_changelog.py- tests/unit/test_w1122_cascade_idempotence.py- tests/unit/test_w1122_pending_faces.py- docs/00-导读/W批次编号对账表.md- docs/11-方案报告/计划方案/T74-任务计划执行与经验沉淀报告-2026-11-04.md- docs/11-方案报告/README.md- scripts/output/_w1122_spec.json- scripts/output/_cascade_files_W1122.txt- CHANGELOG.md- scripts/output/file-index.md- HANDOVER.md- AGENTS.md- .github/workflows/README.md- site/index.html- site/data/cross-time-danmaku.html- site/data/tag-cloud.html- site/dukou-engine.html- README.md- STRUCTURE.md- docs/00-导读/项目说明.md- CITATION.cff- scripts/output/tools-inventory.md- scripts/output/stats.json- scripts/output/stats-index.md- scripts/output/stats-changelog.json- archive/docs/AGENTS-ARCHIVE.md- pytest.ini- docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md- docs/INDEX.md- scripts/INDEX.md- archive/docs/W批次编号对账表-ARCHIVE.md- docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md- site/data/search.html- site/en/search.html- scripts/output/INDEX.md- scripts/output/README.md- tests/unit/INDEX.md- tests/unit/README.md- tests/unit/test_w1102_batch_closeout.py- tests/unit/test_w1128_pycompile_gate.py- docs/11-方案报告/计划方案/T77-任务计划执行与经验沉淀报告-2026-11-04.md- scripts/output/_w1128_spec.json- scripts/output/_cascade_files_W1128.txt
+
+**认领登记 W1128**（占号 session=mvs_1d2745db…·W1127 已让给并行会话·preflight PASS·touches 全清单登记）。
+
+**验证**：收官链 12 步全绿（含新增 pycompile 步·regsurface OK·CSP 856 页 0 漂移）· 门禁 62 段 0 FAIL（CI 同档 full）· 全量 pytest 1310 passed / 4 skipped · ruff check scripts/ 0 违规 · 新增单测 4 例 + 行为锁 1 例 · 负样本实测门禁拦停（退出码 3）。
+
 ### W1124（2026-11-04）：治理收尾批·教训入坑表 + 重建入口收进收官链
 
 > **来源**：T74 报告遗留 R-A（重建入口收进收官链）/ R-C（里程碑滚动重跑守卫）/ R-D（教训入坑表）· 归集自 W1122 批收官登记。
@@ -1347,7 +1358,7 @@ probe_error 0 页 · 影子分层报数结构性与缺口分离清晰。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1124），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1128），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
