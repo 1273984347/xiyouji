@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（72）
+## 文件（73）
 
 ### Python 脚本
 
@@ -85,6 +85,7 @@
 - `test_w1114_version_surface.py`
 - `test_w1116_selfcheck_gates.py`
 - `test_w1117_version_surface_idempotence.py`
+- `test_w1120_size_threshold_and_rebuild.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（183）
+## 文件（184）
 
 ### Markdown 文档
 
@@ -193,6 +193,7 @@
 - `pre-commit-validate.py`
 - `pre_release_screenshot.py`
 - `preflight_check.py`
+- `rebuild_section.py`
 - `refresh_icon_paths.py`
 - `release.py`
 - `release_prep.py`
