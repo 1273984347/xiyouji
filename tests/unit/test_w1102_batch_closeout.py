@@ -151,4 +151,3 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     assert order.index('index') > order.index('versions')
     assert order.index('versions') == order.index('stats') + 1
     assert order[-2:] == ['csp', 'cspcheck']
-\n

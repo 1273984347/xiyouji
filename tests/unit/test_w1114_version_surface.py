@@ -208,4 +208,3 @@ def test_precheck_ledger_counts_data_rows_only(tmp_path):
     ok2, msgs2 = bc.precheck_ledger(str(led))
     assert ok2 is False, '数据行 61 应 FAIL'
     assert any('数据行' in m for m in msgs2), msgs2
-\n
