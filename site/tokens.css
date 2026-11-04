@@ -201,6 +201,31 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+/* W1134 · 暗色字重降档（对抗黑底白字光晕·人眼在纯暗底上的白字视觉偏胖）
+   依据：视频拆解「大厂 AI 客户端暗色模式自动将字重调细一档」；本站暗色底为 #221D16（非纯黑）
+   但仍存在黑底白字的光晕放大效应 ⇒ 标题字重降一档。
+   字体可用档位约束（@font-face 实读）：
+   - Noto Serif SC = 可变字体 200-900 ⇒ 全档可降（700→600 / 600→500 / 500→400）
+   - Noto Sans SC  = 仅 400/500 两档 ⇒ 降 600 会落回合成字重（字形由浏览器合成·发虚）
+   - JetBrains Mono= 仅 400/500 两档 ⇒ **数字位一律不动**（等宽族降档会改字形宽度·破坏
+     tabular-nums 数字对齐；且数字位本身不是「白字显胖」的主要来源）
+   故：只降**标题层级**（h1-h6）与两处品牌字重（.seal/.wordmark），数字位与正文不动。
+   为什么用 !important：页内私有 <style> 块（含 INLINED 副本）加载在 tokens.css **之后**
+   ⇒ 同特异性的页内私有规则会覆盖共享层规则（实测：dashboard 的 .banner h3 500、
+   ai-dialogue 的页内 h1 700 均未被降档）。暗色降档是**全站视觉策略**，必须压过
+   页内局部值，否则同一元素在不同页暗色表现不一致 ⇒ 故用 !important（与本站
+   暗色 SVG text 压 d3 内联样式的既有做法同源）。
+   降档幅度：按「基准上限」取值——h1≤600、h2≤500、h3≤500、h4≤400；页内若本已更轻
+   （如 .banner h3=500）则维持 500 不再叠加降（避免过度降档致层级塌陷）。 */
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+/* serif 族的另外两处重字重（.seal 700 / .wordmark 600）——可变字体可降档 */
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 /* 图表深色适配（通用）：SVG 数据色温和提亮，tooltip 边框跟随令牌 */

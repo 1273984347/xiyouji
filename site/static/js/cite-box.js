@@ -21,16 +21,24 @@
     '.cite-block pre.cite-text{flex:1;margin:0;padding:6px 8px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);font-family:var(--font-mono);font-size:11px;white-space:pre-wrap;word-break:break-all;color:var(--ink);}',
     '.cite-block .cite-copy{flex:0 0 auto;padding:4px 10px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--paper);color:var(--accent-2);font-size:11px;cursor:pointer;transition:background var(--dur-fast) var(--ease-out-quart),color var(--dur-fast) var(--ease-out-quart);}',
     '.cite-block .cite-copy:hover{background:var(--accent-tint);color:var(--accent);}',
-    '.cite-block .cite-copy.ok{color:var(--ok);border-color:var(--ok);}',
+    // W1134: 复制成功显示对勾，2.5s 后自动淡出（视频拆解口径「复制成功对勾 2.5 秒后自动淡出」）
+    '.cite-block .cite-copy.ok{color:var(--ok);border-color:var(--ok);animation:cite-copy-fadeout 2.5s ease-out forwards;}',
+    '@keyframes cite-copy-fadeout{0%,60%{opacity:1;}100%{opacity:0;}}',
+    // 降低动效偏好：不播淡出动画，只做文案与配色反馈
+    '@media (prefers-reduced-motion: reduce){.cite-block .cite-copy.ok{animation:none;}}',
     '.cite-block a[href$=".json"]{display:inline-block;margin-top:6px;color:var(--accent-2);}'
   ].join('\n');
 
   function copyText(text, btn) {
     var done = function () {
       var old = btn.textContent;
-      btn.textContent = '已复制';
+      // W1134: 文案改为对勾（✓）·2.5s 后由 CSS 动画淡出并在此刻还原文案
+      btn.textContent = '✓';
+      btn.classList.remove('ok');
+      // 强制重排以便连续复制时重新触发淡出动画
+      void btn.offsetWidth;
       btn.classList.add('ok');
-      setTimeout(function () { btn.textContent = old; btn.classList.remove('ok'); }, 2000);
+      setTimeout(function () { btn.textContent = old; btn.classList.remove('ok'); }, 2500);
     };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(done, function () { legacy(); });
