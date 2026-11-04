@@ -26,6 +26,7 @@ LEDGER_WINDOW = 60       # W1119：台账正本数据行窗口
 
 STEPS = [
     ('archive',    '腾窗（**须在 precheck 之前**：体积阈值 262144B·每批 50 段·两面同 W 号下界 + 台账行窗口·W1119）'),
+    ('rebuild',    '幂等段重建（**须在 precheck 之前**：precheck fail-closed ⇒ 修复步排其后即死路径·W1124）'),
     ('precheck',   '台账预检（正本同号多行 / 行数窗口）'),
     ('selfref',    'CSS 变量自引用体检（引用第 57 槽既有判据·只引用不复制）'),
     ('add',        'git add 本批改动（生成器按索引收集·须先 add）'),
@@ -38,6 +39,47 @@ STEPS = [
     ('csp',        'generate_csp（**csp/cspcheck 仍为末两步**：前面步骤会改内联脚本）'),
     ('cspcheck',   'generate_csp --check（零漂移校验）'),
 ]
+
+
+def _run_rebuild(spec_path, batch):
+    """幂等段重建步（W1124·T74 R-A）：把 scripts/rebuild_section.py 接进收官链主链。
+
+    病根：rebuild_section.py 是**独立入口**（W1120 建）⇒ 段内容与 spec 不一致时只能人工
+    想起单独跑它 ⇒ 「改完段内容后重建」这一步在流程里是断的 ⇒ 段与 spec 长期漂移。
+
+    W1124：接入收官链 ⇒ 每批收官时对本批段自动做一次「就地重建 + 幂等零变化」：
+      · 段已存在且内容一致 ⇒ 零变化（不写盘）
+      · 段已存在但内容不一致 ⇒ 就地重建该段（只动本批段·历史段逐段比对不变）
+      · 两面皆未立段 ⇒ 跳过（建段归 batch_cascade / backfill·本步不建段）
+    **顺序须在 precheck 之前**：precheck 是 fail-closed 中止 ⇒ 修复步排其后即死路径
+    （W1117 实证·同族教训：腾窗步前置）。
+    """
+    if not spec_path or not os.path.isfile(os.path.join(ROOT, spec_path)):
+        print('[rebuild] 无 spec 路径或文件不存在 ⇒ 跳过（非阻断）')
+        return True
+    try:
+        import backfill_changelog as bf
+        bnum = int(str(batch).lstrip('Ww'))
+        with open(os.path.join(ROOT, 'CHANGELOG.md'), encoding='utf-8') as fh:
+            cl_text = fh.read()
+        with open(os.path.join(ROOT, 'scripts', 'output', 'file-index.md'), encoding='utf-8') as fh:
+            fi_text = fh.read()
+        cl_has = any(w == bnum for w, _st in bf.segments(cl_text))
+        fi_has = any(int(m.group(1)[1:]) == bnum
+                     for m in bf.RE_FI_SEG.finditer(fi_text))
+    except (ImportError, OSError, ValueError) as e:
+        print('[rebuild] 立段判定依赖异常（跳过·非阻断）: %s' % e)
+        return True
+    if not (cl_has or fi_has):
+        print('[rebuild] 本批段两面皆未立段 ⇒ 跳过（建段归 batch_cascade / backfill）')
+        return True
+    import sys
+    rc, out = run([sys.executable, os.path.join('scripts', 'rebuild_section.py'),
+                   '--batch', str(batch), '--spec', spec_path, '--apply'])
+    sys.stdout.write(out)
+    if rc != 0:
+        return False
+    return True
 
 
 def _run_archive():
@@ -415,6 +457,8 @@ def main(argv=None):
         batch = json.loads(open(a.spec, encoding='utf-8').read()).get('batch')
     led = os.path.join(ROOT, 'docs', '00-导读', 'W批次编号对账表.md')
     if not _run_archive():
+        return 1
+    if not _run_rebuild(a.spec, batch):
         return 1
     if not _run_prechecks(led):
         return 1

@@ -1,3 +1,49 @@
+## W1124 治理收尾批·教训入坑表 + 重建入口收进收官链（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W1124 | 改：七条教训入表 E-165 ~ E-171 + 两处主题节标题计数 |
+| AGENTS.md | W1124 | 改：阅读契约总计数 + 六主题分项行 + 版本脚注条目 |
+| .agent/skills/puti-shouye/SKILL.md | W1124 | 改：坑表总计数两处 |
+| HANDOVER.md | W1124 | 改：坑表总计数三处（含历史滞后补平）+ 头链 entry + 里程碑块 + 脚注条目 |
+| scripts/batch_closeout.py | W1124 | 改：收官链接入幂等段重建步（rebuild·排在 precheck 之前） |
+| scripts/batch_cascade.py | W1124 | 改：里程碑滚动幂等守卫下沉到函数内 |
+| scripts/check_repo_layout.py | W1124 | 改：布局门禁适配 worktree 形态（根目录 .git 指针文件不计入根文件清单·judge 层判据强度不降） |
+| tests/unit/test_w1124_closeout_rebuild.py | W1124 | 新增：收官链顺序锁 + 重建幂等 + 滚动守卫自证 10 例 |
+| scripts/output/_w1124_spec.json | W1124 | 新增：本批 spec（应动全集单一事实源） |
+| scripts/output/_cascade_files_W1124.txt | W1124 | 新增：级联文件清单 |
+| docs/00-导读/W批次编号对账表.md | W1124 | 改：W1124 认领行登记 + W1122 行回填与例数订正 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1124 | 改：台账腾窗迁出的最老行（收官链 archive 步产物·副作用面） |
+| docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md | W1124 | 新增：本批任务计划执行与经验沉淀报告 |
+| docs/11-方案报告/README.md | W1124 | 改：登记第 90 号 |
+| CHANGELOG.md | W1124 | 改：W1124 段 |
+| scripts/output/file-index.md | W1124 | 改：W1124 段 |
+| README.md | W1124 | 改：版本行（幂等推进） |
+| STRUCTURE.md | W1124 | 改：版本行（幂等推进） |
+| docs/00-导读/项目说明.md | W1124 | 改：版本行（幂等推进） |
+| CITATION.cff | W1124 | 改：版本与日期（幂等推进） |
+| site/data/search.html | W1124 | 改：版本面字面量（搜索页版本行·副作用面） |
+| site/en/search.html | W1124 | 改：版本面字面量（搜索页版本行·副作用面） |
+| .github/workflows/README.md | W1124 | 改：版本面字面量（副作用面） |
+| scripts/output/stats.json | W1124 | 改：统计产物 |
+| scripts/output/stats-index.md | W1124 | 改：统计产物 |
+| scripts/output/stats-changelog.json | W1124 | 改：统计产物 |
+| scripts/output/tools-inventory.md | W1124 | 改：工具清单（收官链产物刷新） |
+| archive/docs/AGENTS-ARCHIVE.md | W1124 | 改：AGENTS 脚注滚动迁入的最老条目归档件（副作用面） |
+| docs/INDEX.md | W1124 | 改：文档索引（索引刷新步产物·副作用面） |
+| scripts/INDEX.md | W1124 | 改：脚本索引（索引刷新步产物·副作用面） |
+| scripts/output/INDEX.md | W1124 | 改：产物索引（索引刷新步产物·副作用面） |
+| scripts/output/README.md | W1124 | 改：产物说明（索引刷新步产物·副作用面） |
+| tests/unit/INDEX.md | W1124 | 改：单测索引（索引刷新步产物·副作用面） |
+| tests/unit/README.md | W1124 | 改：单测说明（索引刷新步产物·副作用面） |
+| pytest.ini | W1124 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1124 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1124 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| site/index.html | W1124 | 改：页脚批次链 token（W1124·副作用面） |
+| site/data/cross-time-danmaku.html | W1124 | 改：页脚批次链 token（W1124·副作用面） |
+| site/data/tag-cloud.html | W1124 | 改：页脚批次链 token（W1124·副作用面） |
+| site/dukou-engine.html | W1124 | 改：页脚批次链 token（W1124·副作用面） |
+
 ## W1123 预约释放语义根修 + 提交范围门禁 merge 场景归属根修（2026-11-04）
 
 | 文件 | W | 说明 |
