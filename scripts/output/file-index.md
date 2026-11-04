@@ -59,6 +59,8 @@
 | docs/11-方案报告/计划方案/T73-任务计划执行与经验沉淀报告-2026-11-04.md | W1123 | 本批工具/产物 |
 | tests/unit/test_w1123_commit_scope_merge.py | W1123 | 本批工具/产物 |
 | tests/unit/test_w1123_reserve_release.py | W1123 | 本批工具/产物 |
+| scripts/output/_w1123_spec.json | W1123 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1123.txt | W1123 | 本批工具/产物 |
 
 ## W1121 收官链缺陷根修 + 跨克隆占号机制根修 + 台账回填（2026-11-04）
 
