@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-XWcP+NI3XQdyW9f59Z4PbuHo670Yhlss6x5gjvqlBis=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tnUnUKlrP5DvkDaVdCAubyemNQYjJKJkUHbUNIw05kA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>图表设计 · 详解西游记</title>
@@ -2149,7 +2149,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         "白骨精": "var(--chart-1)",
         "青牛精": "var(--chart-4)",
         "黄袍怪": "#d97706",
-        "红孩儿": "#e9b885",
+        "红孩儿": "var(--chart-5)",
         "六耳猕猴": "var(--chart-6)",
         "大鹏金翅雕": "var(--chart-2)"
     };
@@ -2457,10 +2457,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 9);
                     tip.style("opacity", 1).html(
                         `<div class="tip-title">${s.stage_id} · ${s.stage_name}</div>` +
-                        `<div style="font-size:0.76rem;color:#e9b885;">${s.chapter_range} · 第 ${s.loop_number} 圈</div>` +
-                        `<div style="margin-top:var(--space-2);">悟空 · <span style="color:#e9b885;">${s.wukong_emotion}</span> · 偏移 ${s.wukong_offset.toFixed(1)}</div>` +
-                        `<div>唐僧 · <span style="color:#e9b885;">${s.tang_monk_emotion}</span> · 偏移 ${s.tang_monk_offset.toFixed(1)}</div>` +
-                        `<div style="margin-top:var(--space-2);font-size:0.76rem;color:#e9b885;">${s.stage_summary}</div>`
+                        `<div style="font-size:0.76rem;color:var(--chart-5);">${s.chapter_range} · 第 ${s.loop_number} 圈</div>` +
+                        `<div style="margin-top:var(--space-2);">悟空 · <span style="color:var(--chart-5);">${s.wukong_emotion}</span> · 偏移 ${s.wukong_offset.toFixed(1)}</div>` +
+                        `<div>唐僧 · <span style="color:var(--chart-5);">${s.tang_monk_emotion}</span> · 偏移 ${s.tang_monk_offset.toFixed(1)}</div>` +
+                        `<div style="margin-top:var(--space-2);font-size:0.76rem;color:var(--chart-5);">${s.stage_summary}</div>`
                     );
                 })
                 .on("mousemove", function(e) {
@@ -2654,9 +2654,9 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             tip = d3.select("body").append("div").attr("class", "sundial-tip");
         }
         tip.style("opacity", 1).html(
-            `<div style="color:#e9b885;font-weight:600;margin-bottom:var(--space-1);">${data.hour}</div>` +
+            `<div style="color:var(--chart-5);font-weight:600;margin-bottom:var(--space-1);">${data.hour}</div>` +
             `<div>活动 · ${data.activity}</div>` +
-            `<div style="font-size:0.74rem;color:#e9b885;">分类 · ${ACTIVITY_LABELS[data.cat]}</div>`
+            `<div style="font-size:0.74rem;color:var(--chart-5);">分类 · ${ACTIVITY_LABELS[data.cat]}</div>`
         );
         tip.style("left", (e.clientX + 14) + "px")
            .style("top", (e.clientY - 10) + "px");
@@ -2807,9 +2807,9 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     `<div class="tip-title">${d.monster}</div>` +
                     `<div>类别 · ${d.category}</div>` +
                     `<div>背景 · ${d.background}</div>` +
-                    `<div style="margin-top:var(--space-2);">压力指数 · <strong style="color:#e9b885;">${d.stress_index.toFixed(1)}</strong></div>` +
-                    `<div>松弛指数 · <strong style="color:#e9b885;">${d.ease_index.toFixed(1)}</strong></div>` +
-                    `<div style="margin-top:var(--space-2);font-size:0.76rem;color:#e9b885;">${d.analysis}</div>`
+                    `<div style="margin-top:var(--space-2);">压力指数 · <strong style="color:var(--chart-5);">${d.stress_index.toFixed(1)}</strong></div>` +
+                    `<div>松弛指数 · <strong style="color:var(--chart-5);">${d.ease_index.toFixed(1)}</strong></div>` +
+                    `<div style="margin-top:var(--space-2);font-size:0.76rem;color:var(--chart-5);">${d.analysis}</div>`
                 );
             })
             .on("mousemove", function(e) {
