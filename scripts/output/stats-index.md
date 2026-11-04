@@ -23,8 +23,8 @@
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W894 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 27 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | 1068 |
-| pytest_collected | 1247 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1120 |
-| report_docs | 140 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1120 |
+| pytest_collected | 1251 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1120 |
+| report_docs | 141 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1120 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -38,14 +38,15 @@
 
 ## 反向：W → stats key 变更（新→旧）
 
-### W1120（2026-11-04 11:44:30）
-- pytest_collected: 1244 → 1247
+### W1120（2026-11-04 11:53:35）
+- pytest_collected: 1237 → 1251
+- report_docs: 140 → 141
 
-### W1120（2026-11-04 11:12:39）
+### W1121（2026-11-04 11:19:40）
 - report_docs: 139 → 140
 
-### 1120（2026-11-04 11:11:42）
-- pytest_collected: 1233 → 1244
+### 1121（2026-11-04 11:13:31）
+- pytest_collected: 1233 → 1237
 
 ### W1119（2026-11-04 10:20:50）
 - report_docs: 138 → 139

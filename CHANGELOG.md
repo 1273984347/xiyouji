@@ -1,3 +1,14 @@
+### W1121（2026-11-04）：收官链缺陷根修 + 跨克隆占号机制根修 + 台账回填
+
+**本批要点**（收官链缺陷根修 + 跨克隆占号机制根修 + 台账回填·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 256 → 258 条）：① **静默失效根修**：W1119 新增收官链腾窗步在读台账行数时用了 io.open 却**未 import io** ⇒ NameError 被同函数宽 except Exception 捕获后 return True ⇒ **台账行窗口判定从未真正触发**（每批收官都「成功」rc=0·缺陷零红灯·可持续数周）⇒ 根修 = 改仓内主流 open(..., encoding=) 写法 + except 收窄到 ImportError 与 OSError ⇒ 代码缺陷类异常直接抛出（宁可整链中止也不静默通过）。② **W605 修复**：_rule_upper 的 docstring 内反斜杠 d 未转义 ⇒ ruff W605 ⇒ 改 raw string ⇒ scripts 全量 ruff 由 10 错转 0（CI 的 Code Quality job 由红转绿）。③ **跨克隆占号机制根修**：批次号预约表写在仓内 tmpe（.gitignore ⇒ 随仓不随 git）⇒ 跨 worktree 与跨克隆并行时互不可见 ⇒ **2026-11-04 实测双方各占 W1120**（各打印 W1120·零红灯·未设 WB_SESSION 时 session 回落 hostname 致两条记录同名不可仲裁）⇒ 根修 = 取号集合改为「本仓表 + 同机兄弟克隆表 + 用户级共享表」三源合并取并集（同名取 ts 最新·写共享表前先合并他人记录不覆盖）+ session 标识含仓路径指纹 + 同号多会话即打印跨克隆撞号预警 + release 只撤本工作树登记且 session 相同的号 ⇒ **实测取号由 W1120 正确让至 W1121**。④ **台账列定位根修**：ledger_backfill 按「从右起固定偏移」定位且状态修正循环左边界写死为 5 ⇒ 对多一列 files 的 10 格行整体错位一格（status 会写进认领会话列·hash 写进级联列）⇒ 改以**状态格内容**为锚点定位（9 格与 10 格皆成立·锚点缺失即 fail-closed·判据强度不降）。⑤ **台账回填**：W1118 与 W1119 两行用 git 反填真正回填（W1119 批主题与 T70 报告虽声称已回填·实际该行仍在途——本批订正该假收敛）。⑥ **经验同步**：坑表 E-160（互斥机制的共享面必须覆盖实际并行作用域·否则是假互斥）+ E-161（宽 except 吞缺陷 ⇒ 新增保护逻辑在异常路径上等于没有）+ E-159 补注（同族复发·写说明文字时描述正则须用 raw string）+ 计数链 12 处同步（256 → 258）+ AGENTS 新增铁律 23（异常分类必须与失败语义对齐）与占号共享区纪律段改写。
+
+**文件**：
+- .github/workflows/README.md- CHANGELOG.md- CITATION.cff- HANDOVER.md- README.md- STRUCTURE.md- .agent/skills/puti-shouye/SKILL.md- AGENTS.md- archive/docs/CHANGELOG-ARCHIVE.md- archive/docs/file-index-ARCHIVE.md- archive/docs/W批次编号对账表-ARCHIVE.md- docs/00-导读/W批次编号对账表.md- docs/00-导读/项目说明.md- docs/11-方案报告/README.md- docs/11-方案报告/计划方案/T71-任务计划执行与经验沉淀报告-2026-11-04.md- docs/agent/pitfalls.md- docs/INDEX.md- scripts/INDEX.md- scripts/batch_closeout.py- scripts/check_registration_surface.py- scripts/ledger_backfill.py- scripts/reserve_w.py- scripts/output/INDEX.md- scripts/output/README.md- scripts/output/_w1121_spec.json- scripts/output/file-index.md- scripts/output/stats-changelog.json- scripts/output/stats-index.md- scripts/output/stats.json- scripts/output/tools-inventory.md- scripts/output/_cascade_files_W1121.txt- scripts/output/_vermilion_solid_cache.json- site/data/search.html- site/en/search.html- tests/unit/INDEX.md- tests/unit/README.md- tests/unit/test_w1121_reserve_w.py- archive/docs/AGENTS-ARCHIVE.md- docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md- pytest.ini- site/data/cross-time-danmaku.html- site/data/tag-cloud.html- site/dukou-engine.html- site/index.html
+
+**认领登记 W1121**（占号 session=mvs_1d2745db779a427db4fb4a15ef5d2f7e·跨克隆可见性根修后取得·preflight touches 交集检查通过·与并行会话 W1120 声明面零交集·对方已书面确认不碰本批涉及的 batch_closeout 与 check_registration_surface）。
+
+**验证**：收官链 12 步全绿（含腾窗步·regsurface OK·CSP 856 页 0 漂移）· 门禁 62 段 0 FAIL（CI 同档 full）· 全量 pytest 通过 · ruff check scripts/ 0 违规 · 新增单测 4 例（跨克隆合并·撞号检出·session 可辨·release 不误删）。
+
 ### W1120（2026-11-04）：幂等段重建独立入口 + 体积第二阈值接入 + T68 事实订正
 
 **本批要点**（幂等段重建独立入口 + 体积第二阈值接入 + T68 事实订正 + 台账回填·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 256 条不变 ⇒ 不占任何 E-NN）：
@@ -29,7 +40,7 @@
 -docs/00-导读/项目说明.md
 -docs/11-方案报告/README.md
 -docs/11-方案报告/计划方案/T68-任务计划执行与经验沉淀报告-2026-11-04.md
--docs/11-方案报告/计划方案/T71-任务计划执行与经验沉淀报告-2026-11-04.md
+-docs/11-方案报告/计划方案/T72-任务计划执行与经验沉淀报告-2026-11-04.md
 -docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md
 -docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
 -docs/INDEX.md
@@ -58,6 +69,16 @@
 -tests/unit/README.md
 -tests/unit/test_w1120_cascade_file_index_idempotence.py
 -tests/unit/test_w1120_size_threshold_and_rebuild.py
+-.agent/skills/puti-shouye/SKILL.md
+-docs/11-方案报告/计划方案/T71-任务计划执行与经验沉淀报告-2026-11-04.md
+-docs/agent/pitfalls.md
+-scripts/batch_closeout.py
+-scripts/check_registration_surface.py
+-scripts/ledger_backfill.py
+-scripts/output/_cascade_files_W1121.txt
+-scripts/output/_w1121_spec.json
+-scripts/reserve_w.py
+-tests/unit/test_w1121_reserve_w.py
 
 **认领登记 W1120**（主仓共享区占号 session=session_237a5e53-…·preflight touches 交集检查通过·与对方 W1119 零同文件冲突）。
 
@@ -1287,7 +1308,7 @@ probe_error 0 页 · 影子分层报数结构性与缺口分离清晰。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1120），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1121），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
