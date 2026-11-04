@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（81）
+## 文件（82）
 
 ### Python 脚本
 
@@ -94,6 +94,7 @@
 - `test_w1123_reserve_release.py`
 - `test_w1124_closeout_rebuild.py`
 - `test_w1128_pycompile_gate.py`
+- `test_w1129_commit_scope_multibatch.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 
