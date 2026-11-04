@@ -1,3 +1,46 @@
+## W1136 并行会话统筹调度批（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W1136 | 改：W1136 认领行登记（touches 12 面全清单） |
+| docs/11-方案报告/计划方案/T90-任务计划执行与经验沉淀报告-2026-11-04.md | W1136 | 新增：本批任务计划执行与经验沉淀报告（统筹调度） |
+| docs/11-方案报告/README.md | W1136 | 改：登记第 102 号（尾部段末·双锚校验定位） |
+| docs/agent/pitfalls.md | W1136 | 改：E-185 入表 + 流程节计数 138 → 139 |
+| AGENTS.md | W1136 | 改：坑表总计数 268 → 269 + 六主题分项（流程 139） |
+| HANDOVER.md | W1136 | 改：坑表计数三处 267/268 → 269 |
+| .agent/skills/puti-shouye/SKILL.md | W1136 | 改：坑表总计数两处 268 → 269 |
+| CHANGELOG.md | W1136 | 改：W1136 段 |
+| scripts/output/file-index.md | W1136 | 改：W1136 段 |
+| scripts/output/_w1136_spec.json | W1136 | 新增：本批 spec（应动全集单一事实源） |
+| scripts/output/_cascade_files_W1136.txt | W1136 | 新增：级联文件清单 |
+| README.md | W1136 | 改：版本行（幂等推进·跟随现役段） |
+| STRUCTURE.md | W1136 | 改：版本行（幂等推进） |
+| docs/00-导读/项目说明.md | W1136 | 改：版本行（幂等推进） |
+| CITATION.cff | W1136 | 改：版本与日期（幂等推进） |
+| site/data/search.html | W1136 | 改：版本面字面量（副作用面） |
+| site/en/search.html | W1136 | 改：版本面字面量（副作用面） |
+| .github/workflows/README.md | W1136 | 改：版本面字面量（副作用面） |
+| scripts/output/stats.json | W1136 | 改：统计产物 |
+| scripts/output/stats-index.md | W1136 | 改：统计产物 |
+| scripts/output/stats-changelog.json | W1136 | 改：统计产物 |
+| scripts/output/tools-inventory.md | W1136 | 改：工具清单（收官链产物刷新） |
+| archive/docs/AGENTS-ARCHIVE.md | W1136 | 改：AGENTS 脚注滚动迁入的最老条目归档件（副作用面） |
+| docs/INDEX.md | W1136 | 改：文档索引（索引刷新步产物·副作用面） |
+| scripts/INDEX.md | W1136 | 改：脚本索引（索引刷新步产物·副作用面） |
+| scripts/output/INDEX.md | W1136 | 改：产物索引（索引刷新步产物·副作用面） |
+| scripts/output/README.md | W1136 | 改：产物说明（索引刷新步产物·副作用面） |
+| tests/unit/INDEX.md | W1136 | 改：单测索引（索引刷新步产物·副作用面） |
+| tests/unit/README.md | W1136 | 改：单测说明（索引刷新步产物·副作用面） |
+| pytest.ini | W1136 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1136 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1136 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| scripts/output/_vermilion_solid_cache.json | W1136 | 改：朱砂实底扫描缓存（收官链刷新产物·副作用面） |
+| site/data/cross-time-danmaku.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+| site/data/tag-cloud.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+| site/dukou-engine.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+| site/index.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+
+
 ## W1130 C9 扫描面扩展 + 台账回填与腾窗 + 两面下界根修 + 三条教训入坑表（2026-11-04）
 
 | 文件 | W | 说明 |
