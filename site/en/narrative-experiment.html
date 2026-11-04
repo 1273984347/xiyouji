@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-LLueJC/aCajQ0hxhZjywrYXFx3WVNMhwcq5vBrzlNhE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-oQgu79a4UJVrvSJDX2XzOeqff2mJiOCkMWhY5FXA5bc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Narrative Experiment · Board Game & Card Mechanics · Annotated Journey to the West</title>
@@ -184,7 +184,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -197,6 +199,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1037,6 +1049,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1123,7 +1150,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {
@@ -2545,7 +2573,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr("points", `${ax - 10},${cy - 6} ${ax - 10},${cy + 6} ${ax - 2},${cy}`)
                     .attr("fill", "var(--accent)")
                     .style("opacity", 0)
-                    .transition().delay(400 + i * 200).duration(MOYUN_RM?0:400)
+                    .transition().delay(MOYUN_RM?0:400 + i * 200).duration(MOYUN_RM?0:400)
                     .style("opacity", 1);
             }
         });
@@ -2828,7 +2856,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("opacity", 0.5)
                 .attr("stroke-dasharray", "6,4")
                 .transition()
-                .delay(300 + i * 200)
+                .delay(MOYUN_RM?0:300 + i * 200)
                 .duration(MOYUN_RM?0:600)
                 .attr("x2", x2)
                 .attr("y2", y2);
@@ -2842,7 +2870,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr("cy", y1)
                     .style("opacity", 0)
                     .transition()
-                    .delay(1200 + i * 200 + k * 600)
+                    .delay(MOYUN_RM?0:1200 + i * 200 + k * 600)
                     .duration(MOYUN_RM?0:600)
                     .ease(d3.easeCubicInOut)
                     .style("opacity", 0.8)
@@ -2877,7 +2905,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("filter", "drop-shadow(0 4px 12px rgba(60, 40, 20, 0.2))");
 
             circ.transition()
-                .delay(i * 150)
+                .delay(MOYUN_RM?0:i * 150)
                 .duration(MOYUN_RM?0:600)
                 .ease(d3.easeBackOut)
                 .attr("r", r);
@@ -2891,7 +2919,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-weight", "600")
                 .style("opacity", 0)
                 .text(g.name)
-                .transition().delay(i * 150 + 400).duration(MOYUN_RM?0:400)
+                .transition().delay(MOYUN_RM?0:i * 150 + 400).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 卡组英文名
@@ -2904,7 +2932,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-family", "JetBrains Mono, monospace")
                 .style("opacity", 0)
                 .text(g.name_en)
-                .transition().delay(i * 150 + 500).duration(MOYUN_RM?0:400)
+                .transition().delay(MOYUN_RM?0:i * 150 + 500).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 卡数（大字）
@@ -2917,7 +2945,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-family", "JetBrains Mono, monospace")
                 .style("opacity", 0)
                 .text(g.count)
-                .transition().delay(i * 150 + 600).duration(MOYUN_RM?0:400)
+                .transition().delay(MOYUN_RM?0:i * 150 + 600).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 标签
@@ -2928,7 +2956,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-size", "0.7rem")
                 .style("opacity", 0)
                 .text("cards")
-                .transition().delay(i * 150 + 700).duration(MOYUN_RM?0:400)
+                .transition().delay(MOYUN_RM?0:i * 150 + 700).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 交互

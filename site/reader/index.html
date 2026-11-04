@@ -26,9 +26,6 @@
 
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
-/* W1074（N-05）：目录页补站内壳（页头/页脚/h1）——此前 622 链接零出口 */
-.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;border-bottom:1px solid var(--line);background:var(--paper);}.site-header .brand{font-family:var(--font-serif);font-weight:700;color:var(--ink);text-decoration:none;}.site-header nav{display:flex;gap:18px;flex-wrap:wrap;}.site-header nav a{color:var(--ink-soft);text-decoration:none;font-size:14px;}.site-header nav a:hover{color:var(--accent);}.catalog-title{font-family:var(--font-serif);font-size:30px;margin:0 0 6px;color:var(--ink);}.hub-links{margin:10px 0 0;font-size:13px;color:var(--ink-soft);}.hub-links a{color:var(--accent-2);text-decoration:none;}.site-footer{margin-top:48px;padding:20px 24px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:13px;}.site-footer a{color:var(--accent-2);text-decoration:none;}
-
 @font-face {
     font-family: 'Noto Serif SC';
     font-style: normal;
@@ -189,7 +186,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -202,6 +201,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1042,6 +1051,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1128,7 +1152,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {

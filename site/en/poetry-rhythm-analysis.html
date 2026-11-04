@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-iCKpmfR8XuRjP4Tokb3XO3CWDt/ZmaOG7xFgYeBF/AU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-j9TeOcHYogu0d6p8v0X+uHICMjaGxH/pp8H2/Lbtv74=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Poetry Rhythm Analysis Atlas · Annotated Journey to the West</title>
@@ -184,7 +184,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -197,6 +199,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1037,6 +1049,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1123,7 +1150,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {
@@ -1696,7 +1724,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .style("top", (event.clientY - rect.top + 14) + "px");
             })
             .on("mouseout", function() { tip.style("opacity", 0); })
-            .transition().duration(DUR).style("opacity", 1);
+            .transition().duration(REDUCE_MOTION?0:DUR).style("opacity", 1);
 
         // 标签：仅当格子足够大，否则依赖图例 + hover
         const showLbl = d => ((d.x1 - d.x0) > 48 && (d.y1 - d.y0) > 28);
@@ -1788,7 +1816,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5);
                         tip.style("opacity", 0);
                     })
-                    .transition().duration(DUR).delay(ri * 60 + ti * 30)
+                    .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:ri * 60 + ti * 30)
                     .style("opacity", 1);
 
                 g.append("text")
@@ -1798,7 +1826,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .style("fill", val > 55 ? "#fff" : "#23201A")
                     .style("opacity", 0)
                     .text(val + "%")
-                    .transition().duration(DUR).delay(ri * 60 + ti * 30 + 200)
+                    .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:ri * 60 + ti * 30 + 200)
                     .style("opacity", 1);
             });
         });
@@ -1885,7 +1913,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
                 tip.style("opacity", 0);
             })
-            .transition().duration(DUR).delay((d, i) => i * 40)
+            .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:((d, i) => i * 40))
             .attr("y", d => y(d.count))
             .attr("height", d => innerH - y(d.count));
 
@@ -1900,7 +1928,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-size", "0.82rem").style("font-weight", "700").style("fill", "var(--chart-1)")
             .style("opacity", 0)
             .text(d => d.count)
-            .transition().duration(DUR).delay((d, i) => i * 40 + 250)
+            .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:((d, i) => i * 40 + 250))
             .style("opacity", (d, i) => i <= segIdx ? 1 : 0.4);
 
         // 进度
@@ -2032,7 +2060,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay((d, i) => i * 50 + li * 120)
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:((d, i) => i * 50 + li * 120))
                 .attr("y", d => y(d[1]))
                 .attr("height", d => y(d[0]) - y(d[1]));
         });
@@ -2093,21 +2121,21 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("fill", PIE_COLORS[i % PIE_COLORS.length]).attr("opacity", 0.55)
                 .attr("stroke", "#23201A").attr("stroke-width", 1)
                 .style("opacity", 0)
-                .transition().duration(DUR).delay(i * 80)
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80)
                 .style("opacity", 0.55);
             // 中位线
             g.append("line").attr("x1", cx - boxW / 2).attr("x2", cx + boxW / 2)
                 .attr("y1", y(d.median)).attr("y2", y(d.median))
                 .attr("stroke", "var(--chart-1)").attr("stroke-width", 2.5)
                 .style("opacity", 0)
-                .transition().duration(DUR).delay(i * 80 + 200).style("opacity", 1);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80 + 200).style("opacity", 1);
             // 中位数标签
             g.append("text").attr("x", cx).attr("y", y(d.median) - 4)
                 .attr("text-anchor", "middle")
                 .style("font-size", "0.72rem").style("font-weight", "700").style("fill", "var(--chart-1)")
                 .style("opacity", 0)
                 .text(d.median)
-                .transition().duration(DUR).delay(i * 80 + 300).style("opacity", 1);
+                .transition().duration(REDUCE_MOTION?0:DUR).delay(REDUCE_MOTION?0:i * 80 + 300).style("opacity", 1);
         });
     }
 

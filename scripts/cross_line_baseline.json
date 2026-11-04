@@ -41,6 +41,6 @@
   "scripts/check_kpi_card_base.py#0df90807841f",
   "scripts/inject_descriptions.py#b61da8219a08",
   "scripts/lint_links.py#e77639df2ca0",
-  "scripts/verify_delivery.py#a2733ec81525"
+  "scripts/verify_delivery.py#d1eedb3d0701"
  ]
 }

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-AVApkROzGhd0sU64/eBirHzfYgtKkC5G08cG5RilBd4=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+slM5W5vryc26u5lm82BfkXh+LjCEIdkPbwrlOP45xU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>游戏网文 · 角色卡牌战力系统 · 详解西游记</title>
@@ -185,7 +185,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -198,6 +200,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1038,6 +1050,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1124,7 +1151,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {
@@ -2613,7 +2641,7 @@ function renderTreemap(opts){
                 .attr("class", "power-bar");
 
             bar.transition().duration(MOYUN_RM?0:250)
-                .delay(i * 80).duration(MOYUN_RM?0:600)
+                .delay(MOYUN_RM?0:i * 80).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(c.power)));
 
@@ -2627,7 +2655,7 @@ function renderTreemap(opts){
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(c.rarity + " " + c.power.toLocaleString())
-                .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 600).duration(MOYUN_RM?0:400).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 80 + 600).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             // Top 3 皇冠/数字
             if (isTop3) {
@@ -2637,7 +2665,7 @@ function renderTreemap(opts){
                     .style("font-size", "0.95rem")
                     .style("opacity", 0)
                     .text(medal)
-                    .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 700).duration(MOYUN_RM?0:400).style("opacity", 1);
+                    .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 80 + 700).duration(MOYUN_RM?0:400).style("opacity", 1);
             }
 
             bar.on("mouseover", function(e) {
@@ -2795,7 +2823,7 @@ function renderTreemap(opts){
             .attr("stroke", d => RARITY_COLORS[d.rarity])
             .attr("stroke-width", 2)
             .style("cursor", "pointer")
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => i * 80).duration(MOYUN_RM?0:500)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => i * 80)).duration(MOYUN_RM?0:500)
             .attr("r", d => r(d.total));
 
         g.selectAll(".scatter-dot")
@@ -2832,7 +2860,7 @@ function renderTreemap(opts){
             .style("fill", "var(--ink)")
             .style("opacity", 0)
             .text(d => d.name.length > 5 ? d.name.slice(0, 5) + "…" : d.name)
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => i * 80 + 400).duration(MOYUN_RM?0:400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => i * 80 + 400)).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
     }
 
@@ -2957,7 +2985,7 @@ function renderTreemap(opts){
                 .style("cursor", "pointer");
 
             bar.transition().duration(MOYUN_RM?0:250)
-                .delay(i * 80).duration(MOYUN_RM?0:600)
+                .delay(MOYUN_RM?0:i * 80).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(nv.score)));
 
@@ -2971,7 +2999,7 @@ function renderTreemap(opts){
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(nv.genre + " " + nv.score.toFixed(1))
-                .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 600).duration(MOYUN_RM?0:400).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 80 + 600).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             // 右侧：主角
             g.append("text")
@@ -2981,7 +3009,7 @@ function renderTreemap(opts){
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text(nv.protagonist)
-                .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 700).duration(MOYUN_RM?0:400).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 80 + 700).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             bar.on("mouseover", function(e) {
                 d3.select(this).attr("fill", d3.color(color).darker(0.6));

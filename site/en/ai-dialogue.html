@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-mKfMXHmUtP9V+39MkR42P186VOA/b9TT/5RCrImHxCA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-MRoT9txgiV4EjpssA/o5B0zZqxop+DQz/0BLPLuvyVY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>AI Celebrity Dialogue · Annotated Journey to the West</title>
@@ -184,7 +184,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -197,6 +199,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1037,6 +1049,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1123,7 +1150,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {
@@ -1366,16 +1394,48 @@ html[data-theme="dark"] .chapter-plate {
             min-width: 0;
         }
         .chat-header .active-name { color: var(--accent); font-weight: 600; }
+        .chat-history-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+            display: flex;
+        }
         .chat-history {
             flex: 1;
             padding: 16px;
             overflow-y: auto;
             max-height: 460px;
+            position: relative;
             display: flex;
             flex-direction: column;
             gap: 14px;
             min-width: 0;
         }
+        /* W1134: jump-to-latest button (appears when user scrolls up past threshold) */
+        .jump-latest {
+            position: absolute;
+            right: 18px;
+            bottom: 12px;
+            z-index: 5;
+            padding: 6px 14px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-pill);
+            background: var(--paper);
+            color: var(--accent);
+            font-size: 12px;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            box-shadow: var(--elev-2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--dur-base) var(--ease-out-quart),
+                        visibility var(--dur-base) var(--ease-out-quart);
+        }
+        .jump-latest.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .jump-latest:hover { background: var(--accent-tint); border-color: var(--accent); }
         .chat-empty {
             text-align: center;
             color: var(--ink-soft);
@@ -1616,7 +1676,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <span>Currently talking with: <span id="active-name" class="active-name">Auto-match</span></span>
                     <span style="font-size:0.78rem;">Rounds: <span id="msg-count">0</span></span>
                 </div>
-                <div id="chat-history" class="chat-history" aria-live="polite" aria-label="Chat history"></div>
+                <div class="chat-history-wrap">
+                    <div id="chat-history" class="chat-history" aria-live="polite" aria-label="Chat history"></div>
+                    <button id="jump-latest" class="jump-latest" type="button" aria-label="Jump to latest message">↓ Jump to latest</button>
+                </div>
                 <div id="quick-topics" class="quick-topics"></div>
                 <div class="input-area">
                     <input type="text" id="chat-input"
@@ -1881,13 +1944,39 @@ const EMBEDDED_DATA = {
 };
 
 // ===== State =====
+// ===== W1134 · interaction constants =====
+// Enter-key guard window after IME composition ends (ms)
+const COMPOSITION_GUARD_MS = 500;
+// threshold for "near bottom" (px) — about one body line height
+const NEAR_BOTTOM_PX = 24;
+
 const state = {
     activeCelebrityId: null,        // null = auto-match
     chatHistory: [],                // { role, text/quote, celebrity, avatar, era, source }
-    usedReplies: {}                 // { celebrityId: Set<replyIndex> }
+    usedReplies: {},                // { celebrityId: Set<replyIndex> }
+    isComposing: false,             // W1134: IME composing
+    lastCompositionEnd: 0           // W1134: last compositionend timestamp
 };
 
 const fetchStatus = { anyFetched: false };
+
+// ===== W1134 · scroll follow helpers =====
+// within one line of the bottom ⇒ user still wants to follow new messages
+function isNearBottom(el) {
+    if (!el) return true;
+    return (el.scrollHeight - el.scrollTop - el.clientHeight) < NEAR_BOTTOM_PX;
+}
+
+// user scrolled up ⇒ surface the jump-to-latest button
+function updateJumpLatest(el) {
+    const btn = document.getElementById("jump-latest");
+    if (!btn || !el) return;
+    if (isNearBottom(el)) {
+        btn.classList.remove("show");
+    } else {
+        btn.classList.add("show");
+    }
+}
 
 // ===== F6 skeleton: fetchJson → loadData → main → renderXxx =====
 async function fetchJson(path, fallbackKey) {
@@ -2087,9 +2176,12 @@ function renderChatHistory() {
         }
     });
 
-    // Scroll to bottom
+    // W1134: threshold-based scroll follow — stop following when the user scrolls up
     const history = document.getElementById("chat-history");
-    history.scrollTop = history.scrollHeight;
+    if (isNearBottom(history)) {
+        history.scrollTop = history.scrollHeight;
+    }
+    updateJumpLatest(history);
 
     // Update round count (user message count)
     const rounds = state.chatHistory.filter(m => m.role === "user").length;
@@ -2152,11 +2244,26 @@ function setupEventHandlers() {
 
     input.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
+            // W1134 · IME guard: Enter during composition only completes the candidate word.
+            // ① while composing ⇒ do not intercept, let the IME handle Enter;
+            // ② within 500ms after compositionend ⇒ intercept, so pressing Enter right
+            //    after picking a candidate does not send the message by accident.
+            if (event.isComposing || event.keyCode === 229) return;
+            if (Date.now() - state.lastCompositionEnd < COMPOSITION_GUARD_MS) return;
             event.preventDefault();
             const text = input.value;
             input.value = "";
             sendMessage(text);
         }
+    });
+
+    // IME composition tracking (Chinese input)
+    input.addEventListener("compositionstart", function() {
+        state.isComposing = true;
+    });
+    input.addEventListener("compositionend", function() {
+        state.isComposing = false;
+        state.lastCompositionEnd = Date.now();
     });
 
     sendBtn.addEventListener("click", function() {
@@ -2165,6 +2272,22 @@ function setupEventHandlers() {
         sendMessage(text);
         input.focus();
     });
+
+    // W1134: scroll listener — stop auto-follow and surface "jump to latest" when scrolled up
+    const history = document.getElementById("chat-history");
+    if (history) {
+        history.addEventListener("scroll", function() {
+            updateJumpLatest(history);
+        }, { passive: true });
+    }
+    const jumpBtn = document.getElementById("jump-latest");
+    if (jumpBtn) {
+        jumpBtn.addEventListener("click", function() {
+            if (!history) return;
+            history.scrollTop = history.scrollHeight;
+            updateJumpLatest(history);
+        });
+    }
 }
 
 // ===== Main flow =====

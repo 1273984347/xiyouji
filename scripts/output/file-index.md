@@ -1,3 +1,609 @@
+## W1136 并行会话统筹调度批（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W1136 | 改：W1136 认领行登记（touches 12 面全清单） |
+| docs/11-方案报告/计划方案/T90-任务计划执行与经验沉淀报告-2026-11-04.md | W1136 | 新增：本批任务计划执行与经验沉淀报告（统筹调度） |
+| docs/11-方案报告/README.md | W1136 | 改：登记第 102 号（尾部段末·双锚校验定位） |
+| docs/agent/pitfalls.md | W1136 | 改：E-185 入表 + 流程节计数 138 → 139 |
+| AGENTS.md | W1136 | 改：坑表总计数 268 → 269 + 六主题分项（流程 139） |
+| HANDOVER.md | W1136 | 改：坑表计数三处 267/268 → 269 |
+| .agent/skills/puti-shouye/SKILL.md | W1136 | 改：坑表总计数两处 268 → 269 |
+| CHANGELOG.md | W1136 | 改：W1136 段 |
+| scripts/output/file-index.md | W1136 | 改：W1136 段 |
+| scripts/output/_w1136_spec.json | W1136 | 新增：本批 spec（应动全集单一事实源） |
+| scripts/output/_cascade_files_W1136.txt | W1136 | 新增：级联文件清单 |
+| README.md | W1136 | 改：版本行（幂等推进·跟随现役段） |
+| STRUCTURE.md | W1136 | 改：版本行（幂等推进） |
+| docs/00-导读/项目说明.md | W1136 | 改：版本行（幂等推进） |
+| CITATION.cff | W1136 | 改：版本与日期（幂等推进） |
+| site/data/search.html | W1136 | 改：版本面字面量（副作用面） |
+| site/en/search.html | W1136 | 改：版本面字面量（副作用面） |
+| .github/workflows/README.md | W1136 | 改：版本面字面量（副作用面） |
+| scripts/output/stats.json | W1136 | 改：统计产物 |
+| scripts/output/stats-index.md | W1136 | 改：统计产物 |
+| scripts/output/stats-changelog.json | W1136 | 改：统计产物 |
+| scripts/output/tools-inventory.md | W1136 | 改：工具清单（收官链产物刷新） |
+| archive/docs/AGENTS-ARCHIVE.md | W1136 | 改：AGENTS 脚注滚动迁入的最老条目归档件（副作用面） |
+| docs/INDEX.md | W1136 | 改：文档索引（索引刷新步产物·副作用面） |
+| scripts/INDEX.md | W1136 | 改：脚本索引（索引刷新步产物·副作用面） |
+| scripts/output/INDEX.md | W1136 | 改：产物索引（索引刷新步产物·副作用面） |
+| scripts/output/README.md | W1136 | 改：产物说明（索引刷新步产物·副作用面） |
+| tests/unit/INDEX.md | W1136 | 改：单测索引（索引刷新步产物·副作用面） |
+| tests/unit/README.md | W1136 | 改：单测说明（索引刷新步产物·副作用面） |
+| pytest.ini | W1136 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1136 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1136 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| scripts/output/_vermilion_solid_cache.json | W1136 | 改：朱砂实底扫描缓存（收官链刷新产物·副作用面） |
+| site/data/cross-time-danmaku.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+| site/data/tag-cloud.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+| site/dukou-engine.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+| site/index.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
+| scripts/check_doc_sync.py | W1136 | 改：C4/C5 组判据死代码根修·补 return 与修缩进（E-195） |
+| scripts/check_motion_guard.py | W1136 | 改：CodeQL bad-html-filtering-regexp 根修·标签与属性名大小写不敏感（E-194） |
+| tests/unit/test_w1135_gates.py | W1136 | 改：新增大小写盲区鉴别用例 2 例（E-194） |
+| scripts/generate_csp.py | W1136 | 改：内联脚本块提取正则统一（标签/属性名大小写不敏感 + 结束标签可带属性·E-194 同族根修） |
+| scripts/check_csp_drift.py | W1136 | 改：与 generate_csp.py 的 SCRIPT_RE 逐字一致（E-194 同族根修·口径不得分叉） |
+| scripts/check_js_syntax.py | W1136 | 改：内联脚本块提取正则统一（E-194 同族根修） |
+| scripts/check_js_syntax.js | W1136 | 改：内联脚本块提取正则统一（E-194 同族根修） |
+
+
+## W1135 遗留清偿批 · d3 动效守卫表达式实参根治 + tooltip 死规则收口 + design 清单生成源根修 + 盲审 6 条处置（2026-11-05）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1135 | 本批实质/生成链连带 |
+| CHANGELOG.md | W1135 | 本批实质/生成链连带 |
+| HANDOVER.md | W1135 | 本批实质/生成链连带 |
+| README.md | W1135 | 本批实质/生成链连带 |
+| STRUCTURE.md | W1135 | 本批实质/生成链连带 |
+| assets/design/README.md | W1135 | 本批实质/生成链连带 |
+| assets/design/index.html | W1135 | 本批实质/生成链连带 |
+| assets/design/logo/README.md | W1135 | 本批实质/生成链连带 |
+| assets/design/screenshots/README.md | W1135 | 本批实质/生成链连带 |
+| assets/design/tools/build_assets.py | W1135 | 本批实质/生成链连带 |
+| docs/00-导读/W批次编号对账表.md | W1135 | 本批实质/生成链连带 |
+| docs/00-导读/文档规范.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/README.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/计划方案/T87-任务计划执行与经验沉淀报告-2026-11-05.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1135 | 本批实质/生成链连带 |
+| docs/INDEX.md | W1135 | 本批实质/生成链连带 |
+| docs/agent/gates.md | W1135 | 本批实质/生成链连带 |
+| docs/agent/pitfalls.md | W1135 | 本批实质/生成链连带 |
+| pytest.ini | W1135 | 本批实质/生成链连带 |
+| scripts/INDEX.md | W1135 | 本批实质/生成链连带 |
+| scripts/check_design_asset_manifest.py | W1135 | 本批实质/生成链连带 |
+| scripts/check_motion_guard.py | W1135 | 本批实质/生成链连带 |
+| scripts/check_tooltip_spacing.py | W1135 | 本批实质/生成链连带 |
+| scripts/cross_line_baseline.json | W1135 | 本批实质/生成链连带 |
+| scripts/output/INDEX.md | W1135 | 本批实质/生成链连带 |
+| scripts/output/README.md | W1135 | 本批实质/生成链连带 |
+| scripts/output/_w1135_spec.json | W1135 | 本批实质/生成链连带 |
+| scripts/output/file-index.md | W1135 | 本批实质/生成链连带 |
+| scripts/output/stats-changelog.json | W1135 | 本批实质/生成链连带 |
+| scripts/output/stats-index.md | W1135 | 本批实质/生成链连带 |
+| scripts/output/stats.json | W1135 | 本批实质/生成链连带 |
+| scripts/output/tools-inventory.md | W1135 | 本批实质/生成链连带 |
+| scripts/verify_delivery.py | W1135 | 本批实质/生成链连带 |
+| site/dashboard.html | W1135 | 本批实质/生成链连带 |
+| site/data/81-hardships.html | W1135 | 本批实质/生成链连带 |
+| site/data/cave-estate.html | W1135 | 本批实质/生成链连带 |
+| site/data/chapter-stats.html | W1135 | 本批实质/生成链连带 |
+| site/data/character-appearance.html | W1135 | 本批实质/生成链连带 |
+| site/data/chart-design.html | W1135 | 本批实质/生成链连带 |
+| site/data/counterfactual.html | W1135 | 本批实质/生成链连带 |
+| site/data/cultural-misreading.html | W1135 | 本批实质/生成链连带 |
+| site/data/deconstruction.html | W1135 | 本批实质/生成链连带 |
+| site/data/emotional-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/data/ethics-consumption.html | W1135 | 本批实质/生成链连带 |
+| site/data/game-webnovel.html | W1135 | 本批实质/生成链连带 |
+| site/data/global-pattern.html | W1135 | 本批实质/生成链连带 |
+| site/data/hardship-difficulty-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/data/hardship-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/data/heaven-power-network.html | W1135 | 本批实质/生成链连带 |
+| site/data/journey-geo-semiotics.html | W1135 | 本批实质/生成链连带 |
+| site/data/journey-route.html | W1135 | 本批实质/生成链连带 |
+| site/data/journey-spacetime.html | W1135 | 本批实质/生成链连带 |
+| site/data/magic-system.html | W1135 | 本批实质/生成链连带 |
+| site/data/mbti-evolution.html | W1135 | 本批实质/生成链连带 |
+| site/data/methodology-matrix.html | W1135 | 本批实质/生成链连带 |
+| site/data/ming-political-thought-comparison.html | W1135 | 本批实质/生成链连带 |
+| site/data/monster-capability-radar.html | W1135 | 本批实质/生成链连带 |
+| site/data/monster-hierarchy-network.html | W1135 | 本批实质/生成链连带 |
+| site/data/narrative-experiment.html | W1135 | 本批实质/生成链连带 |
+| site/data/pilgrim-team-psychology-arc.html | W1135 | 本批实质/生成链连带 |
+| site/data/poetry-rhythm-analysis.html | W1135 | 本批实质/生成链连带 |
+| site/data/search.html | W1135 | 本批实质/生成链连带 |
+| site/data/social-media.html | W1135 | 本批实质/生成链连带 |
+| site/data/text-evolution.html | W1135 | 本批实质/生成链连带 |
+| site/data/underworld-power-network.html | W1135 | 本批实质/生成链连带 |
+| site/data/visual-art.html | W1135 | 本批实质/生成链连带 |
+| site/data/workplace.html | W1135 | 本批实质/生成链连带 |
+| site/en/cave-estate.html | W1135 | 本批实质/生成链连带 |
+| site/en/chapter-stats.html | W1135 | 本批实质/生成链连带 |
+| site/en/character-appearance.html | W1135 | 本批实质/生成链连带 |
+| site/en/chart-design.html | W1135 | 本批实质/生成链连带 |
+| site/en/counterfactual.html | W1135 | 本批实质/生成链连带 |
+| site/en/cultural-misreading.html | W1135 | 本批实质/生成链连带 |
+| site/en/deconstruction.html | W1135 | 本批实质/生成链连带 |
+| site/en/ethics-consumption.html | W1135 | 本批实质/生成链连带 |
+| site/en/game-webnovel.html | W1135 | 本批实质/生成链连带 |
+| site/en/global-pattern.html | W1135 | 本批实质/生成链连带 |
+| site/en/hardship-difficulty-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/en/hardship-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/en/journey-geo-semiotics.html | W1135 | 本批实质/生成链连带 |
+| site/en/journey-route.html | W1135 | 本批实质/生成链连带 |
+| site/en/journey-spacetime.html | W1135 | 本批实质/生成链连带 |
+| site/en/magic-system.html | W1135 | 本批实质/生成链连带 |
+| site/en/mbti-evolution.html | W1135 | 本批实质/生成链连带 |
+| site/en/methodology-matrix.html | W1135 | 本批实质/生成链连带 |
+| site/en/ming-political-thought-comparison.html | W1135 | 本批实质/生成链连带 |
+| site/en/monster-capability-radar.html | W1135 | 本批实质/生成链连带 |
+| site/en/narrative-experiment.html | W1135 | 本批实质/生成链连带 |
+| site/en/pilgrim-team-psychology-arc.html | W1135 | 本批实质/生成链连带 |
+| site/en/poetry-rhythm-analysis.html | W1135 | 本批实质/生成链连带 |
+| site/en/search.html | W1135 | 本批实质/生成链连带 |
+| site/en/social-media.html | W1135 | 本批实质/生成链连带 |
+| site/en/text-evolution.html | W1135 | 本批实质/生成链连带 |
+| site/en/visual-art.html | W1135 | 本批实质/生成链连带 |
+| site/en/workplace.html | W1135 | 本批实质/生成链连带 |
+| tests/unit/INDEX.md | W1135 | 本批实质/生成链连带 |
+| tests/unit/README.md | W1135 | 本批实质/生成链连带 |
+| tests/unit/test_w1135_gates.py | W1135 | 本批实质/生成链连带 |
+
+
+## W1134 前端质感 P0 批（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1134 | 治理文档 |
+| .github/workflows/README.md | W1134 | 治理文档 |
+| AGENTS.md | W1134 | 治理文档 |
+| CHANGELOG.md | W1134 | 治理文档 |
+| CITATION.cff | W1134 | 治理文档 |
+| HANDOVER.md | W1134 | 治理文档 |
+| README.md | W1134 | 治理文档 |
+| STRUCTURE.md | W1134 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1134 | 治理文档 |
+| docs/00-导读/项目说明.md | W1134 | 治理文档 |
+| docs/11-方案报告/README.md | W1134 | 治理文档 |
+| docs/11-方案报告/计划方案/T89-任务计划执行与经验沉淀报告-2026-11-04.md | W1134 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1134 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1134 | 治理文档 |
+| docs/INDEX.md | W1134 | 治理文档 |
+| docs/agent/pitfalls.md | W1134 | 治理文档 |
+| pytest.ini | W1134 | 治理文档 |
+| scripts/INDEX.md | W1134 | 本批工具/产物 |
+| scripts/docs_index.py | W1134 | 本批工具/产物 |
+| scripts/font_weight_probe.py | W1134 | 本批工具/产物 |
+| scripts/ime_scroll_probe.py | W1134 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1134 | 本批工具/产物 |
+| scripts/output/README.md | W1134 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1134.txt | W1134 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1134 | 本批工具/产物 |
+| scripts/output/_w1134_fontweight.json | W1134 | 本批工具/产物 |
+| scripts/output/_w1134_imescroll.json | W1134 | 本批工具/产物 |
+| scripts/output/_w1134_spec.json | W1134 | 本批工具/产物 |
+| scripts/output/file-index.md | W1134 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1134 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1134 | 本批工具/产物 |
+| scripts/output/stats.json | W1134 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1134 | 本批工具/产物 |
+| site/_template.html | W1134 | 页面 |
+| site/data/81-hardships-view.html | W1134 | 页面 |
+| site/data/81-hardships.html | W1134 | 页面 |
+| site/data/_shell.html | W1134 | 页面 |
+| site/data/aesthetics.html | W1134 | 页面 |
+| site/data/ai-dialogue.html | W1134 | 页面 |
+| site/data/business-model.html | W1134 | 页面 |
+| site/data/cave-estate.html | W1134 | 页面 |
+| site/data/century-dialogue.html | W1134 | 页面 |
+| site/data/chapter-stats.html | W1134 | 页面 |
+| site/data/chapter-structure-graph.html | W1134 | 页面 |
+| site/data/character-appearance.html | W1134 | 页面 |
+| site/data/character-dynamic-network.html | W1134 | 页面 |
+| site/data/character-presence-timeline.html | W1134 | 页面 |
+| site/data/character-relationship-3d-view.html | W1134 | 页面 |
+| site/data/character-relationship-3d.html | W1134 | 页面 |
+| site/data/character-semantic-network.html | W1134 | 页面 |
+| site/data/character-sentiment-arc.html | W1134 | 页面 |
+| site/data/chart-design.html | W1134 | 页面 |
+| site/data/cognitive-psychology.html | W1134 | 页面 |
+| site/data/concept-device.html | W1134 | 页面 |
+| site/data/counterfactual.html | W1134 | 页面 |
+| site/data/criticism-history.html | W1134 | 页面 |
+| site/data/cross-time-danmaku.html | W1134 | 页面 |
+| site/data/cultural-misreading.html | W1134 | 页面 |
+| site/data/customs-pass-route.html | W1134 | 页面 |
+| site/data/data-explorer.html | W1134 | 页面 |
+| site/data/deconstruction.html | W1134 | 页面 |
+| site/data/dialogue-sentiment.html | W1134 | 页面 |
+| site/data/ecology.html | W1134 | 页面 |
+| site/data/emotional-heatmap.html | W1134 | 页面 |
+| site/data/ethics-consumption.html | W1134 | 页面 |
+| site/data/famous-time-travel.html | W1134 | 页面 |
+| site/data/four-dimensional-research-network.html | W1134 | 页面 |
+| site/data/four-heavenly-kings-artifacts.html | W1134 | 页面 |
+| site/data/game-webnovel.html | W1134 | 页面 |
+| site/data/global-pattern.html | W1134 | 页面 |
+| site/data/graph-explorer.html | W1134 | 页面 |
+| site/data/guanyin-six-roles-network.html | W1134 | 页面 |
+| site/data/hardship-difficulty-heatmap.html | W1134 | 页面 |
+| site/data/hardship-heatmap.html | W1134 | 页面 |
+| site/data/heaven-power-network.html | W1134 | 页面 |
+| site/data/intertextuality-network.html | W1134 | 页面 |
+| site/data/journey-geo-3d.html | W1134 | 页面 |
+| site/data/journey-geo-semiotics.html | W1134 | 页面 |
+| site/data/journey-map-interactive.html | W1134 | 页面 |
+| site/data/journey-route.html | W1134 | 页面 |
+| site/data/journey-spacetime.html | W1134 | 页面 |
+| site/data/jurisprudence.html | W1134 | 页面 |
+| site/data/karma-reincarnation.html | W1134 | 页面 |
+| site/data/language-style-radar.html | W1134 | 页面 |
+| site/data/linguistics.html | W1134 | 页面 |
+| site/data/magic-system.html | W1134 | 页面 |
+| site/data/material-archaeology.html | W1134 | 页面 |
+| site/data/mbti-evolution.html | W1134 | 页面 |
+| site/data/methodology-matrix.html | W1134 | 页面 |
+| site/data/ming-political-thought-comparison.html | W1134 | 页面 |
+| site/data/monster-background.html | W1134 | 页面 |
+| site/data/monster-capability-radar.html | W1134 | 页面 |
+| site/data/monster-ecology-network.html | W1134 | 页面 |
+| site/data/monster-female-network.html | W1134 | 页面 |
+| site/data/monster-hierarchy-network.html | W1134 | 页面 |
+| site/data/monster-sociology.html | W1134 | 页面 |
+| site/data/monster-victims-network.html | W1134 | 页面 |
+| site/data/music-structure.html | W1134 | 页面 |
+| site/data/narrative-experiment.html | W1134 | 页面 |
+| site/data/narrative-rhythm-curve.html | W1134 | 页面 |
+| site/data/narratology-12d-network.html | W1134 | 页面 |
+| site/data/narratology-16d-network.html | W1134 | 页面 |
+| site/data/perf-canvas-rendering.html | W1134 | 页面 |
+| site/data/philosophy.html | W1134 | 页面 |
+| site/data/pilgrim-team-dynamic-network.html | W1134 | 页面 |
+| site/data/pilgrim-team-psychology-arc.html | W1134 | 页面 |
+| site/data/poetry-rhythm-analysis.html | W1134 | 页面 |
+| site/data/power-resources.html | W1134 | 页面 |
+| site/data/relationships.html | W1134 | 页面 |
+| site/data/risk-project.html | W1134 | 页面 |
+| site/data/search.html | W1134 | 页面 |
+| site/data/six-senses-narratology-network.html | W1134 | 页面 |
+| site/data/social-media.html | W1134 | 页面 |
+| site/data/story-timeline.html | W1134 | 页面 |
+| site/data/tag-cloud.html | W1134 | 页面 |
+| site/data/text-evolution.html | W1134 | 页面 |
+| site/data/text-search.html | W1134 | 页面 |
+| site/data/theological-intervention-network.html | W1134 | 页面 |
+| site/data/timeline.html | W1134 | 页面 |
+| site/data/underworld-power-network.html | W1134 | 页面 |
+| site/data/visual-art.html | W1134 | 页面 |
+| site/data/workplace.html | W1134 | 页面 |
+| site/dukou-engine.html | W1134 | 页面 |
+| site/en/81-hardships-view.html | W1134 | 页面 |
+| site/en/81-hardships.html | W1134 | 页面 |
+| site/en/academic-papers.html | W1134 | 页面 |
+| site/en/aesthetics.html | W1134 | 页面 |
+| site/en/ai-dialogue.html | W1134 | 页面 |
+| site/en/bestiary.html | W1134 | 页面 |
+| site/en/business-model.html | W1134 | 页面 |
+| site/en/cave-estate.html | W1134 | 页面 |
+| site/en/century-dialogue.html | W1134 | 页面 |
+| site/en/chapter-stats.html | W1134 | 页面 |
+| site/en/chapter-structure-graph.html | W1134 | 页面 |
+| site/en/chapters-map.html | W1134 | 页面 |
+| site/en/character-appearance.html | W1134 | 页面 |
+| site/en/character-bailongma.html | W1134 | 页面 |
+| site/en/character-bajie.html | W1134 | 页面 |
+| site/en/character-dynamic-network.html | W1134 | 页面 |
+| site/en/character-presence-timeline.html | W1134 | 页面 |
+| site/en/character-relationship-3d-view.html | W1134 | 页面 |
+| site/en/character-relationship-3d.html | W1134 | 页面 |
+| site/en/character-semantic-network.html | W1134 | 页面 |
+| site/en/character-sentiment-arc.html | W1134 | 页面 |
+| site/en/character-shaseng.html | W1134 | 页面 |
+| site/en/character-tangseng.html | W1134 | 页面 |
+| site/en/character-wukong.html | W1134 | 页面 |
+| site/en/characters.html | W1134 | 页面 |
+| site/en/chart-design.html | W1134 | 页面 |
+| site/en/cognitive-psychology.html | W1134 | 页面 |
+| site/en/concept-device.html | W1134 | 页面 |
+| site/en/counterfactual.html | W1134 | 页面 |
+| site/en/criticism-history.html | W1134 | 页面 |
+| site/en/cross-time-danmaku.html | W1134 | 页面 |
+| site/en/cultural-misreading.html | W1134 | 页面 |
+| site/en/customs-pass-route.html | W1134 | 页面 |
+| site/en/dashboard.html | W1134 | 页面 |
+| site/en/data-explorer.html | W1134 | 页面 |
+| site/en/deconstruction.html | W1134 | 页面 |
+| site/en/dialogue-sentiment.html | W1134 | 页面 |
+| site/en/dukou-engine.html | W1134 | 页面 |
+| site/en/ecology.html | W1134 | 页面 |
+| site/en/emotional-heatmap.html | W1134 | 页面 |
+| site/en/essay-ai-era.html | W1134 | 页面 |
+| site/en/essay-buddhist-chan.html | W1134 | 页面 |
+| site/en/essay-chapter-couplets.html | W1134 | 页面 |
+| site/en/essay-character-fu.html | W1134 | 页面 |
+| site/en/essay-cipai-linjiangxian.html | W1134 | 页面 |
+| site/en/essay-cipai-mantingfang.html | W1134 | 页面 |
+| site/en/essay-cipai-shuidiaogetou.html | W1134 | 页面 |
+| site/en/essay-cipai-xijiangyue.html | W1134 | 页面 |
+| site/en/essay-composition-origins.html | W1134 | 页面 |
+| site/en/essay-divine-bureaucracy.html | W1134 | 页面 |
+| site/en/essay-folk-belief.html | W1134 | 页面 |
+| site/en/essay-historical-xuanzang.html | W1134 | 页面 |
+| site/en/essay-information-cocoon.html | W1134 | 页面 |
+| site/en/essay-ming-economy.html | W1134 | 页面 |
+| site/en/essay-ming-examination.html | W1134 | 页面 |
+| site/en/essay-ming-garrison.html | W1134 | 页面 |
+| site/en/essay-ming-intellectual-history.html | W1134 | 页面 |
+| site/en/essay-ming-judiciary.html | W1134 | 页面 |
+| site/en/essay-ming-literary-thought.html | W1134 | 页面 |
+| site/en/essay-ming-maritime-ban.html | W1134 | 页面 |
+| site/en/essay-ming-metaphor.html | W1134 | 页面 |
+| site/en/essay-ming-military.html | W1134 | 页面 |
+| site/en/essay-ming-politics.html | W1134 | 页面 |
+| site/en/essay-ming-religion.html | W1134 | 页面 |
+| site/en/essay-ming-social-customs.html | W1134 | 页面 |
+| site/en/essay-modern-management.html | W1134 | 页面 |
+| site/en/essay-original-poetry.html | W1134 | 页面 |
+| site/en/essay-poetry-imagery.html | W1134 | 页面 |
+| site/en/essay-poetry-opening.html | W1134 | 页面 |
+| site/en/essay-quanzhen-daoism.html | W1134 | 页面 |
+| site/en/essay-rhythm-analysis.html | W1134 | 页面 |
+| site/en/essay-scenery-poems.html | W1134 | 页面 |
+| site/en/essay-thematic-poetry.html | W1134 | 页面 |
+| site/en/essay-three-teachings.html | W1134 | 页面 |
+| site/en/essay-version-evolution.html | W1134 | 页面 |
+| site/en/essay-zen-koan-vs-neidan.html | W1134 | 页面 |
+| site/en/ethics-consumption.html | W1134 | 页面 |
+| site/en/famous-time-travel.html | W1134 | 页面 |
+| site/en/four-dimensional-research-network.html | W1134 | 页面 |
+| site/en/four-heavenly-kings-artifacts.html | W1134 | 页面 |
+| site/en/game-webnovel.html | W1134 | 页面 |
+| site/en/global-pattern.html | W1134 | 页面 |
+| site/en/graph-explorer.html | W1134 | 页面 |
+| site/en/guanyin-six-roles-network.html | W1134 | 页面 |
+| site/en/guide.html | W1134 | 页面 |
+| site/en/hardship-difficulty-heatmap.html | W1134 | 页面 |
+| site/en/hardship-heatmap.html | W1134 | 页面 |
+| site/en/heaven-power-network.html | W1134 | 页面 |
+| site/en/index.html | W1134 | 页面 |
+| site/en/intertextuality-network.html | W1134 | 页面 |
+| site/en/journey-geo-semiotics.html | W1134 | 页面 |
+| site/en/journey-map-interactive.html | W1134 | 页面 |
+| site/en/journey-route.html | W1134 | 页面 |
+| site/en/journey-spacetime.html | W1134 | 页面 |
+| site/en/jurisprudence.html | W1134 | 页面 |
+| site/en/karma-reincarnation.html | W1134 | 页面 |
+| site/en/language-style-radar.html | W1134 | 页面 |
+| site/en/linguistics.html | W1134 | 页面 |
+| site/en/magic-system.html | W1134 | 页面 |
+| site/en/material-archaeology.html | W1134 | 页面 |
+| site/en/mbti-evolution.html | W1134 | 页面 |
+| site/en/methodology-matrix.html | W1134 | 页面 |
+| site/en/methodology.html | W1134 | 页面 |
+| site/en/ming-political-thought-comparison.html | W1134 | 页面 |
+| site/en/monster-background.html | W1134 | 页面 |
+| site/en/monster-capability-radar.html | W1134 | 页面 |
+| site/en/monster-ecology-network.html | W1134 | 页面 |
+| site/en/monster-female-network.html | W1134 | 页面 |
+| site/en/monster-hierarchy-network.html | W1134 | 页面 |
+| site/en/monster-sociology.html | W1134 | 页面 |
+| site/en/monster-victims-network.html | W1134 | 页面 |
+| site/en/music-structure.html | W1134 | 页面 |
+| site/en/narrative-experiment.html | W1134 | 页面 |
+| site/en/narrative-rhythm-curve.html | W1134 | 页面 |
+| site/en/narratology-12d-network.html | W1134 | 页面 |
+| site/en/narratology-16d-network.html | W1134 | 页面 |
+| site/en/perf-canvas-rendering.html | W1134 | 页面 |
+| site/en/philosophy.html | W1134 | 页面 |
+| site/en/pilgrim-team-dynamic-network.html | W1134 | 页面 |
+| site/en/pilgrim-team-psychology-arc.html | W1134 | 页面 |
+| site/en/poetry-rhythm-analysis.html | W1134 | 页面 |
+| site/en/power-resources.html | W1134 | 页面 |
+| site/en/relationships.html | W1134 | 页面 |
+| site/en/risk-project.html | W1134 | 页面 |
+| site/en/search.html | W1134 | 页面 |
+| site/en/site-map.html | W1134 | 页面 |
+| site/en/six-senses-narratology-network.html | W1134 | 页面 |
+| site/en/social-media.html | W1134 | 页面 |
+| site/en/tag-cloud.html | W1134 | 页面 |
+| site/en/text-evolution.html | W1134 | 页面 |
+| site/en/text-search.html | W1134 | 页面 |
+| site/en/theological-intervention-network.html | W1134 | 页面 |
+| site/en/timeline.html | W1134 | 页面 |
+| site/en/tribulations.html | W1134 | 页面 |
+| site/en/underworld-power-network.html | W1134 | 页面 |
+| site/en/visual-art.html | W1134 | 页面 |
+| site/en/visualizations.html | W1134 | 页面 |
+| site/en/workplace.html | W1134 | 页面 |
+| site/reader/ch001.html | W1134 | 页面 |
+| site/reader/ch002.html | W1134 | 页面 |
+| site/reader/ch003.html | W1134 | 页面 |
+| site/reader/ch004.html | W1134 | 页面 |
+| site/reader/ch005.html | W1134 | 页面 |
+| site/reader/ch006.html | W1134 | 页面 |
+| site/reader/ch007.html | W1134 | 页面 |
+| site/reader/ch008.html | W1134 | 页面 |
+| site/reader/ch009.html | W1134 | 页面 |
+| site/reader/ch010.html | W1134 | 页面 |
+| site/reader/ch011.html | W1134 | 页面 |
+| site/reader/ch012.html | W1134 | 页面 |
+| site/reader/ch013.html | W1134 | 页面 |
+| site/reader/ch014.html | W1134 | 页面 |
+| site/reader/ch015.html | W1134 | 页面 |
+| site/reader/ch016.html | W1134 | 页面 |
+| site/reader/ch017.html | W1134 | 页面 |
+| site/reader/ch018.html | W1134 | 页面 |
+| site/reader/ch019.html | W1134 | 页面 |
+| site/reader/ch020.html | W1134 | 页面 |
+| site/reader/ch021.html | W1134 | 页面 |
+| site/reader/ch022.html | W1134 | 页面 |
+| site/reader/ch023.html | W1134 | 页面 |
+| site/reader/ch024.html | W1134 | 页面 |
+| site/reader/ch025.html | W1134 | 页面 |
+| site/reader/ch026.html | W1134 | 页面 |
+| site/reader/ch027.html | W1134 | 页面 |
+| site/reader/ch028.html | W1134 | 页面 |
+| site/reader/ch029.html | W1134 | 页面 |
+| site/reader/ch030.html | W1134 | 页面 |
+| site/reader/ch031.html | W1134 | 页面 |
+| site/reader/ch032.html | W1134 | 页面 |
+| site/reader/ch033.html | W1134 | 页面 |
+| site/reader/ch034.html | W1134 | 页面 |
+| site/reader/ch035.html | W1134 | 页面 |
+| site/reader/ch036.html | W1134 | 页面 |
+| site/reader/ch037.html | W1134 | 页面 |
+| site/reader/ch038.html | W1134 | 页面 |
+| site/reader/ch039.html | W1134 | 页面 |
+| site/reader/ch040.html | W1134 | 页面 |
+| site/reader/ch041.html | W1134 | 页面 |
+| site/reader/ch042.html | W1134 | 页面 |
+| site/reader/ch043.html | W1134 | 页面 |
+| site/reader/ch044.html | W1134 | 页面 |
+| site/reader/ch045.html | W1134 | 页面 |
+| site/reader/ch046.html | W1134 | 页面 |
+| site/reader/ch047.html | W1134 | 页面 |
+| site/reader/ch048.html | W1134 | 页面 |
+| site/reader/ch049.html | W1134 | 页面 |
+| site/reader/ch050.html | W1134 | 页面 |
+| site/reader/ch051.html | W1134 | 页面 |
+| site/reader/ch052.html | W1134 | 页面 |
+| site/reader/ch053.html | W1134 | 页面 |
+| site/reader/ch054.html | W1134 | 页面 |
+| site/reader/ch055.html | W1134 | 页面 |
+| site/reader/ch056.html | W1134 | 页面 |
+| site/reader/ch057.html | W1134 | 页面 |
+| site/reader/ch058.html | W1134 | 页面 |
+| site/reader/ch059.html | W1134 | 页面 |
+| site/reader/ch060.html | W1134 | 页面 |
+| site/reader/ch061.html | W1134 | 页面 |
+| site/reader/ch062.html | W1134 | 页面 |
+| site/reader/ch063.html | W1134 | 页面 |
+| site/reader/ch064.html | W1134 | 页面 |
+| site/reader/ch065.html | W1134 | 页面 |
+| site/reader/ch066.html | W1134 | 页面 |
+| site/reader/ch067.html | W1134 | 页面 |
+| site/reader/ch068.html | W1134 | 页面 |
+| site/reader/ch069.html | W1134 | 页面 |
+| site/reader/ch070.html | W1134 | 页面 |
+| site/reader/ch071.html | W1134 | 页面 |
+| site/reader/ch072.html | W1134 | 页面 |
+| site/reader/ch073.html | W1134 | 页面 |
+| site/reader/ch074.html | W1134 | 页面 |
+| site/reader/ch075.html | W1134 | 页面 |
+| site/reader/ch076.html | W1134 | 页面 |
+| site/reader/ch077.html | W1134 | 页面 |
+| site/reader/ch078.html | W1134 | 页面 |
+| site/reader/ch079.html | W1134 | 页面 |
+| site/reader/ch080.html | W1134 | 页面 |
+| site/reader/ch081.html | W1134 | 页面 |
+| site/reader/ch082.html | W1134 | 页面 |
+| site/reader/ch083.html | W1134 | 页面 |
+| site/reader/ch084.html | W1134 | 页面 |
+| site/reader/ch085.html | W1134 | 页面 |
+| site/reader/ch086.html | W1134 | 页面 |
+| site/reader/ch087.html | W1134 | 页面 |
+| site/reader/ch088.html | W1134 | 页面 |
+| site/reader/ch089.html | W1134 | 页面 |
+| site/reader/ch090.html | W1134 | 页面 |
+| site/reader/ch091.html | W1134 | 页面 |
+| site/reader/ch092.html | W1134 | 页面 |
+| site/reader/ch093.html | W1134 | 页面 |
+| site/reader/ch094.html | W1134 | 页面 |
+| site/reader/ch095.html | W1134 | 页面 |
+| site/reader/ch096.html | W1134 | 页面 |
+| site/reader/ch097.html | W1134 | 页面 |
+| site/reader/ch098.html | W1134 | 页面 |
+| site/reader/ch099.html | W1134 | 页面 |
+| site/reader/ch100.html | W1134 | 页面 |
+| site/reader/index.html | W1134 | 页面 |
+| site/reader/themes-hub.html | W1134 | 页面 |
+| site/static/js/cite-box.js | W1134 | 治理文档 |
+| site/system.css | W1134 | 治理文档 |
+| site/tokens.css | W1134 | 治理文档 |
+| tests/unit/INDEX.md | W1134 | 本批工具/产物 |
+| tests/unit/README.md | W1134 | 本批工具/产物 |
+| tests/unit/test_w1134_interaction_probes.py | W1134 | 本批工具/产物 |
+
+
+## W1133 自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1125 | 本批工具/产物 |
+| AGENTS.md | W1125 | 本批工具/产物 |
+| CHANGELOG.md | W1125 | 本批工具/产物 |
+| HANDOVER.md | W1125 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1125 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1125 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T80-任务计划执行与经验沉淀报告-2026-11-04.md | W1125 | 本批工具/产物 |
+| docs/INDEX.md | W1125 | 本批工具/产物 |
+| docs/agent/pitfalls.md | W1125 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1125 | 本批工具/产物 |
+| scripts/output/README.md | W1125 | 本批工具/产物 |
+| scripts/output/_w1125_spec.json | W1125 | 本批工具/产物 |
+| scripts/output/file-index.md | W1125 | 本批工具/产物 |
+| scripts/output/stats.json | W1125 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1125 | 本批工具/产物 |
+| site/data/chart-design.html | W1125 | 本批工具/产物 |
+| site/data/search.html | W1125 | 本批工具/产物 |
+| site/en/search.html | W1125 | 本批工具/产物 |
+| STRUCTURE.md | W1125 | 生成链连带：报告件数变动后的结构口径同步 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1125 | 生成链连带：报告件数标记面跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1125 | 生成链连带：报告件数标记面跟随 |
+| scripts/output/stats-changelog.json | W1125 | 生成物：CHANGELOG 统计与现役口径同步 |
+| scripts/output/stats-index.md | W1125 | 生成物：索引面统计同步 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1125 | 台账腾窗：迁出 2 行至归档 |
+| scripts/INDEX.md | W1125 | 生成链连带：scripts 目录索引（含补回文件）|
+| docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md | W1125 | 修复 main 侧遗留冲突标记残留（对方 W1127 批报告·首行冲突标记 + 夹带 T78 全文）|
+| docs/11-方案报告/计划方案/T88-任务计划执行与经验沉淀报告-2026-11-04.md | W1133 | 新增：本批任务计划执行与经验沉淀报告 |
+
+
+## W1132 第 51 槽 merge 带入面归属劫持根修（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_commit_scope.py | W1132 | 改：兜底分支透传 main 带入面 + 新增段集合剔除带入段 + 剔除后走覆盖性反查 |
+| tests/unit/test_w1132_scope_carried_owner.py | W1132 | 新增：归属劫持根修单测 4 例 |
+| scripts/output/_w1132_spec.json | W1132 | 新增：本批 spec（应动全集单一事实源） |
+| scripts/output/_cascade_files_W1132.txt | W1132 | 新增：本批级联清单 |
+| docs/00-导读/W批次编号对账表.md | W1132 | 改：W1132 认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1132 | 改：腾窗迁出（如触发） |
+| docs/11-方案报告/README.md | W1132 | 改：§六 第 100 号登记行（T86） |
+| docs/11-方案报告/计划方案/T86-任务计划执行与经验沉淀报告-2026-11-04.md | W1132 | 新增：本批任务计划执行与经验沉淀报告 |
+| CHANGELOG.md | W1132 | 改：W1132 段（降序位插段） |
+| scripts/output/file-index.md | W1132 | 改：W1132 段 |
+| HANDOVER.md | W1132 | 改：条目 + 最后更新行 |
+| AGENTS.md | W1132 | 本批工具/产物 |
+| README.md | W1132 | 本批工具/产物 |
+| STRUCTURE.md | W1132 | 本批工具/产物 |
+| CITATION.cff | W1132 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1132 | 本批工具/产物 |
+| docs/INDEX.md | W1132 | 本批工具/产物 |
+| .github/workflows/README.md | W1132 | 本批工具/产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1132 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1132 | 本批工具/产物 |
+| scripts/output/README.md | W1132 | 本批工具/产物 |
+| scripts/output/stats.json | W1132 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1132 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1132 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1132 | 本批工具/产物 |
+| tests/unit/INDEX.md | W1132 | 本批工具/产物 |
+| tests/unit/README.md | W1132 | 本批工具/产物 |
+| pytest.ini | W1132 | 本批工具/产物 |
+| site/index.html | W1132 | 本批工具/产物 |
+| site/data/search.html | W1132 | 本批工具/产物 |
+| site/en/search.html | W1132 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1132 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1132 | 本批工具/产物 |
+| site/dukou-engine.html | W1132 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1132 | 本批工具/产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1132 | 本批工具/产物 |
+
+
 ## W1130 C9 扫描面扩展 + 台账回填与腾窗 + 两面下界根修 + 三条教训入坑表（2026-11-04）
 
 | 文件 | W | 说明 |

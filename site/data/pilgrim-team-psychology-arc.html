@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tpPyCyk2tOgNVGi1a68twfLrmT96mT8OYwaL2LLJr4Q=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Qnsfpb9EJt377Wzgck/MR9hxTt9sSnkEftNHkym5P4g=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队心理变化曲线 · 详解西游记</title>
@@ -185,7 +185,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -198,6 +200,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1038,6 +1050,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1124,7 +1151,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {
@@ -1786,8 +1814,8 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("stroke-opacity", 0)
                 .style("pointer-events", "none")
                 .transition()
-                .duration(DUR)
-                .delay(ci * 120)
+                .duration(MOYUN_RM?0:DUR)
+                .delay(MOYUN_RM?0:ci * 120)
                 .attr("fill-opacity", 0.12)
                 .attr("stroke-opacity", 0.85);
             // 顶点
@@ -1815,8 +1843,8 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                         tip.style("opacity", 0);
                     })
                     .transition()
-                    .duration(DUR)
-                    .delay(ci * 120 + 200)
+                    .duration(MOYUN_RM?0:DUR)
+                    .delay(MOYUN_RM?0:ci * 120 + 200)
                     .attr("r", 4);
             });
         });
@@ -1915,7 +1943,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("stroke-dashoffset", totalLen)
                 .transition()
                 .duration(REDUCE_MOTION ? 0 : 800)
-                .delay(ci * 100)
+                .delay(MOYUN_RM?0:ci * 100)
                 .attr("stroke-dashoffset", 0);
 
             // 数据点
@@ -1946,7 +1974,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     d3.select(this).attr("r", 3.5);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay(ci * 100 + 200).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:ci * 100 + 200).style("opacity", 1);
         });
 
         // 转折点垂直标注
@@ -2043,7 +2071,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                         d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5);
                         tip.style("opacity", 0);
                     })
-                    .transition().duration(DUR).delay(ri * 80 + ci * 40).style("opacity", 1);
+                    .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:ri * 80 + ci * 40).style("opacity", 1);
                 // 数值文本
                 g.append("text")
                     .attr("x", xScale(col.key) + xScale.bandwidth() / 2)
@@ -2056,7 +2084,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .style("fill", val >= 6 ? "#fff" : "#23201A")
                     .style("opacity", 0)
                     .text(val)
-                    .transition().duration(DUR).delay(ri * 80 + ci * 40 + 200).style("opacity", 1);
+                    .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:ri * 80 + ci * 40 + 200).style("opacity", 1);
             });
         });
 
@@ -2119,7 +2147,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("cx", cx).attr("cy", innerH / 2)
                 .attr("r", 0)
                 .attr("fill", color).attr("stroke", "#fff").attr("stroke-width", 2)
-                .transition().duration(DUR).delay(i * 80).attr("r", 8);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80).attr("r", 8);
             // 圆点（事件位置）
             g.append("circle")
                 .attr("cx", cx).attr("cy", cy)
@@ -2143,7 +2171,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     d3.select(this).attr("r", 8);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay(i * 80 + 100).attr("r", 8);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80 + 100).attr("r", 8);
             // 事件文本
             g.append("text")
                 .attr("x", cx).attr("y", up ? cy - 16 : cy + 22)
@@ -2153,7 +2181,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .style("fill", color)
                 .style("opacity", 0)
                 .text(t.event.length > 12 ? t.event.substring(0, 11) + "…" : t.event)
-                .transition().duration(DUR).delay(i * 80 + 200).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80 + 200).style("opacity", 1);
             // 回目标注
             g.append("text")
                 .attr("x", cx).attr("y", innerH / 2 + (up ? 20 : -20))
@@ -2164,7 +2192,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .style("fill", "var(--chart-3)")
                 .style("opacity", 0)
                 .text(`第${t.chapter}回`)
-                .transition().duration(DUR).delay(i * 80 + 250).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80 + 250).style("opacity", 1);
         });
 
         // 图例
@@ -2231,7 +2259,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("y1", yScale(d.min)).attr("y2", yScale(d.max))
                 .attr("stroke", color).attr("stroke-width", 1.5)
                 .style("opacity", 0)
-                .transition().duration(DUR).delay(i * 100).style("opacity", 0.7);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 100).style("opacity", 0.7);
             // 上下横线
             [d.min, d.max].forEach(v => {
                 g.append("line")
@@ -2239,7 +2267,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .attr("y1", yScale(v)).attr("y2", yScale(v))
                     .attr("stroke", color).attr("stroke-width", 1.5)
                     .style("opacity", 0)
-                    .transition().duration(DUR).delay(i * 100).style("opacity", 0.85);
+                    .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 100).style("opacity", 0.85);
             });
             // 箱体（Q1-Q3）
             g.append("rect")
@@ -2270,7 +2298,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     d3.select(this).attr("fill-opacity", 0.25);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay(i * 100 + 100)
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 100 + 100)
                 .attr("fill-opacity", 0.25);
             // 中位线
             g.append("line")
@@ -2278,7 +2306,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("y1", yScale(d.median)).attr("y2", yScale(d.median))
                 .attr("stroke", "#fff").attr("stroke-width", 2.5)
                 .style("opacity", 0)
-                .transition().duration(DUR).delay(i * 100 + 200).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 100 + 200).style("opacity", 1);
             // 中位值文本
             g.append("text")
                 .attr("x", cx + boxW / 2 + 6)
@@ -2290,7 +2318,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .style("fill", color)
                 .style("opacity", 0)
                 .text(d.median)
-                .transition().duration(DUR).delay(i * 100 + 300).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 100 + 300).style("opacity", 1);
         });
     }
 
