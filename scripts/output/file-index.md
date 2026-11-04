@@ -234,59 +234,66 @@
 | 文件 | W | 说明 |
 |---|---|---|
 | .github/workflows/README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| AGENTS.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | CHANGELOG.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| CITATION.cff | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | HANDOVER.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | STRUCTURE.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| archive/docs/AGENTS-ARCHIVE.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | docs/00-导读/W批次编号对账表.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | docs/00-导读/项目说明.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | docs/11-方案报告/README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| docs/11-方案报告/计划方案/T77-任务计划执行与经验沉淀报告-2026-11-04.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| docs/11-方案报告/计划方案/T78-任务计划执行与经验沉淀报告-2026-11-04.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | docs/INDEX.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | pytest.ini | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/INDEX.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/batch_cascade.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/batch_closeout.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/check_commit_scope.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/check_screenshot_scope.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/check_segment_gaps.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/INDEX.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/_cascade_files_W1126.txt | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/output/_cascade_files_W1127.txt | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/output/_cascade_files_W1128.txt | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/output/_cascade_files_W1129.txt | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/_vermilion_solid_cache.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/_w1126_spec.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/output/_w1127_spec.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/output/_w1128_spec.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| scripts/output/_w1129_spec.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/file-index.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/stats-changelog.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/stats-index.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/stats.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | scripts/output/tools-inventory.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| site/data/cross-time-danmaku.html | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | site/data/search.html | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| site/data/tag-cloud.html | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| site/dukou-engine.html | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | site/en/search.html | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| site/index.html | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | tests/unit/INDEX.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | tests/unit/README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| tests/unit/test_w1102_batch_closeout.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
 | tests/unit/test_w1126_screenshot_scope.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| tests/unit/test_w1127_closeout_tools.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| tests/unit/test_w1128_pycompile_gate.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
-| tests/unit/test_w1129_commit_scope_multibatch.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+
+## W1125 自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1125 | 本批工具/产物 |
+| AGENTS.md | W1125 | 本批工具/产物 |
+| CHANGELOG.md | W1125 | 本批工具/产物 |
+| HANDOVER.md | W1125 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1125 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1125 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T80-任务计划执行与经验沉淀报告-2026-11-04.md | W1125 | 本批工具/产物 |
+| docs/INDEX.md | W1125 | 本批工具/产物 |
+| docs/agent/pitfalls.md | W1125 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1125 | 本批工具/产物 |
+| scripts/output/README.md | W1125 | 本批工具/产物 |
+| scripts/output/_w1125_spec.json | W1125 | 本批工具/产物 |
+| scripts/output/file-index.md | W1125 | 本批工具/产物 |
+| scripts/output/stats.json | W1125 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1125 | 本批工具/产物 |
+| site/data/chart-design.html | W1125 | 本批工具/产物 |
+| site/data/search.html | W1125 | 本批工具/产物 |
+| site/en/search.html | W1125 | 本批工具/产物 |
+| STRUCTURE.md | W1125 | 生成链连带：报告件数变动后的结构口径同步 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1125 | 生成链连带：报告件数标记面跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1125 | 生成链连带：报告件数标记面跟随 |
+| scripts/output/stats-changelog.json | W1125 | 生成物：CHANGELOG 统计与现役口径同步 |
+| scripts/output/stats-index.md | W1125 | 生成物：索引面统计同步 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1125 | 台账腾窗：迁出 2 行至归档 |
+| scripts/INDEX.md | W1125 | 生成链连带：scripts 目录索引（含补回文件）|
+| docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md | W1125 | 修复 main 侧遗留冲突标记残留（对方 W1127 批报告·首行冲突标记 + 夹带 T78 全文）|
+
 
 ## W1124 治理收尾批·教训入坑表 + 重建入口收进收官链（2026-11-04）
 

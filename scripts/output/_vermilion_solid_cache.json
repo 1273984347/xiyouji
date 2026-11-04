@@ -108,7 +108,7 @@
    }
   },
   "data/chart-design.html": {
-   "sha1": "f6f6f4bdd01128c48da6a3009c478fb73e57090b",
+   "sha1": "dfbf64f5fc5747f3a64aeeb261d8331f4f949e01",
    "counts": {
     "div.kpi-card": 1,
     "div.domino-card": 4,
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "2df01de7953dddff19c8ef98ac832db5ff53001e",
+   "sha1": "3975be8d3f1f09b92a09e67f5e7f1c97372cacde",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1399,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "0c98473d78562a18959a9fe0ffaa84279025d092",
+   "sha1": "7a11de935a17759830b659cc62a485b15cb51d73",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-11-04T08:29:17.285Z"
+ "generated_at": "2026-11-04T09:24:50.968Z"
 }
