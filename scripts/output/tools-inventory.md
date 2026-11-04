@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-05 03:27
+生成时间：2026-11-05 04:41
 
-共 **178** 件（门禁与校验 82 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 68 · 一次性（下划线前缀） 6）
+共 **180** 件（门禁与校验 82 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 70 · 一次性（下划线前缀） 6）
 
 ## 门禁与校验（82）
 
@@ -137,7 +137,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（68）
+## 工具（70）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -170,7 +170,9 @@
 | `extract_datasets.js` | extract_datasets.js — 从 site/data/*.html 提取 EMBEDDED_DATA 为 dataset/*.js |
 | `extract_strings.py` | Dump every chrome text node and every CJK-bearing script literal from a  |
 | `file_protocol_probe.py` | file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊断件·不入  |
+| `font_weight_probe.py` | 暗色字重探针（W1134）——证明「暗色模式字重降档」真实生效。 |
 | `icon_probe.js` | — |
+| `ime_scroll_probe.py` | IME 防误发 + 阈值滚动探针（W1134）——证明两项交互修复真实生效。 |
 | `inject_chart_a11y.py` | inject_chart_a11y.py — 可视化页 a11y 模块加载器注入器（W701·BL-20·W773 加 --dir）。 |
 | `inject_descriptions.py` | inject_descriptions.py — 全站 meta description 注入 + title 清理（W641）。 |
 | `inject_rum.py` | W390 · P0 埋点注入脚本 |

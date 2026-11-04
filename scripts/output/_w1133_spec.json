@@ -37,9 +37,10 @@
   "| docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md | W1125 | 修复 main 侧遗留冲突标记残留（对方 W1127 批报告·首行冲突标记 + 夹带 T78 全文）|",
   "| docs/11-方案报告/计划方案/T88-任务计划执行与经验沉淀报告-2026-11-04.md | W1133 | 新增：本批任务计划执行与经验沉淀报告 |",
   "| scripts/output/_w1133_spec.json | W1133 | 新增：本批 spec（应动全集单一事实源） |"
- ]
+ ],
   "desc": "台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复 D1/D2/D3",
   "head_sentence": "台账 W1125 行 git 反填回填 · 坑表 E-179~E-184 六条入表 · README §六 D1/D2 修复 · T88 报告 · 登记号 96",
+ "file_index_rows": [
     "| .agent/skills/puti-shouye/SKILL.md | W1133 | 本批应动全集 |",
     "| .github/workflows/README.md | W1133 | 本批应动全集 |",
     "| AGENTS.md | W1133 | 本批应动全集 |",
@@ -92,7 +93,7 @@
     "| tests/unit/test_w1126_screenshot_scope.py | W1133 | 本批应动全集 |",
     "| tests/unit/test_w1130_archive_tail_block.py | W1133 | 本批应动全集 |",
     "| tests/unit/test_w1130_c9_report_scope.py | W1133 | 本批应动全集 |"
-  ],
+ ],
   "date": "2026-11-05",
   "title": "W1133 台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复",
   "head_entry": "2026-11-05（W1133 台账回填 + 坑表经验入表 + 登记面缺陷修复）",
