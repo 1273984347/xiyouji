@@ -51,18 +51,30 @@ SECTION_TITLES = {
 }
 
 
+def _is_h1(line: str) -> bool:
+    """是否一级标题行（# 开头且非 ##）。"""
+    s = line.strip()
+    return s.startswith("# ") and not s.startswith("## ")
+
+
+def _stops_head_scan(line: str) -> bool:
+    """是否该停止扫描文件头部（既非标题行、也不是分隔线、且非空行）。"""
+    s = line.strip()
+    if s.startswith("#"):
+        return False
+    return bool(s) and not s.startswith("---")
+
+
 def extract_title(path: Path) -> str:
     """从 Markdown 文件提取标题：首个 # 行；否则用文件名（去扩展名）。"""
     try:
         with path.open(encoding="utf-8") as f:
             for line in f:
-                s = line.strip()
-                if s.startswith("# ") and not s.startswith("## "):
-                    return s[2:].strip()
-                if not s.startswith("#"):
-                    # 遇到非标题行即停止扫描头部
-                    if s and not s.startswith("---"):
-                        break
+                if _is_h1(line):
+                    return line.strip()[2:].strip()
+                # 遇到非标题行即停止扫描头部
+                if _stops_head_scan(line):
+                    break
     except OSError:
         pass
     return path.stem
@@ -191,7 +203,11 @@ def main():
         return 1
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(new_content, encoding="utf-8")
+    # W1134：显式 newline="\n"——Windows 上 write_text 默认 newline=None 会把 \n 转成 CRLF
+    # ⇒ 产物带 CRLF ⇒ 与仓内 LF 基线不一致（工作树/索引/提交三方对拍会炸）。
+    # 治本：生成器写盘禁转换（其余生成器同此纪律）。
+    with output.open("w", encoding="utf-8", newline="\n") as fh:
+        fh.write(new_content)
     total = sum(len(v) for v in scanned.values())
     print(f"[OK] 已生成 {output}（{total} 篇文档，{len(scanned)} 个板块）")
     return 0
