@@ -440,6 +440,7 @@ def _c4_registered_ws(inp):
     for text in inp.get("archive_changelogs_text", []):
         reg |= changelog_section_ws(text)
     reg |= table_registered_ws(inp["table"])
+    return reg
 def _c4_commit_ws_check(inp, reg, issues):
     """C4：提交信息里的 W 号须有 CHANGELOG 版段或对账表登记。"""
     for s in inp["subjects"]:
@@ -506,15 +507,6 @@ def _c4_file_list_check(inp, issues, notes):
         else:
             _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
             _dirty = set(inp.get("dirty") or [])
-    if top:
-        has_line, fl = file_list_paths(inp["changelog"], top[1])
-        if has_line is None:
-            notes.append("C4-f: 现役段缺「文件」行（四件套缺件·W723 起级联 precheck 强制）")
-        elif not fl:
-            notes.append("C4-f: 「文件」行无可解析路径 token（须写 repo 相对路径·见 pitfalls git 类）")
-        else:
-            _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
-            _dirty = set(inp.get("dirty") or [])
             _foreign = inp.get("foreign_append_only") or set()
             for f in fl:
                 _c4_file_entry_check(f, _tree2, _dirty, _foreign, issues, notes)
@@ -525,7 +517,7 @@ def _check_c4_commit_ledger(inp, issues, notes):
     """
     if inp.get("shallow"):
         notes.append("C4: 浅克隆环境（.git/shallow），提交对账跳过（pre-commit 本地为主执行点）")
-    return
+        return
     reg = _c4_registered_ws(inp)
     _c4_commit_ws_check(inp, reg, issues)
     _c4_claim_row_check(inp, issues)
@@ -556,6 +548,7 @@ def _c5_scan_lines(inp):
                 text = text[:cut]
         for i, ln in enumerate(text.splitlines(), 1):
             scans.append(("%s:%d" % (C5_DOC_NAMES[key], i), ln))
+    return scans
 def _c5_pattern_check(scans, stats, issues):
     """C5：句式白名单数字 vs stats.json 对账。"""
     for where, ln in scans:
@@ -701,7 +694,7 @@ def _check_c5_aggregate_stats(inp, issues, notes):
     stats = inp.get("stats")
     if not stats:
         issues.append("C5: scripts/output/stats.json 缺失或不可解析——先跑 python scripts/stats.py（fail-closed）")
-    return
+        return
     scans = _c5_scan_lines(inp)
     _c5_pattern_check(scans, stats, issues)
     _c5_bare_agg_check(scans, stats, issues)
