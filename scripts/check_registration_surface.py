@@ -67,7 +67,7 @@ def _ledger_rows(text, row_re):
 
 
 def _rule_upper(text):
-    """CHANGELOG 编号规则段上限（W001-W####）的取值——**只取编号规则段本体那一行**。
+    r"""CHANGELOG 编号规则段上限（W001-W####）的取值——**只取编号规则段本体那一行**。
 
     W1119 实证：旧实现取**全文首个** W001-W(\d{4}) 匹配 ⇒ 首个匹配可能落在历史段的
     陈述正文里（如 W1117 段正文写「编号规则 W001-W1118」）⇒ 误当成「编号规则段上限」
@@ -84,6 +84,48 @@ def _rule_upper(text):
     m = re.search(r"W001-W(\d{4})", text or "")
     return m.group(1) if m else ""
 
+
+def _check_handover_chain(top, hov, fails, notes):
+    """②④ HANDOVER 最后更新链首与条目数（W1121 结构拆分·行为不变）。"""
+    # ②④ HANDOVER 最后更新链首与条目数
+    # 只取真正的链条目行（「最后更新：<日期>（W#### …」形态）⇒ 排除阅读契约/维护契约里
+    # 仅提到「最后更新」字样的说明行（否则把说明行当链条目 ⇒ 假阳）
+    upd = [ln for ln in (hov or "").splitlines()
+           if re.search(r"最后更新：\d{4}-\d{2}-\d{2}（W\d{4}", ln)]
+    if not upd:
+        fails.append("HANDOVER 无「最后更新」行 ⇒ 交接链首未维护")
+    for i, ln in enumerate(upd, 1):
+        # 条目数只数「批次摘要」⇒ 排除「（W#### 及更早批次详见 CHANGELOG.md）」这类指针
+        # 条目数 = 该链条目行内「W####」的出现次数（后续条目用「；」或「·」分隔·不带前缀）
+        ws = [w for w in re.findall(r"W(\d{4})", ln) if not re.search(r"W%s[^）]*及更早" % w, ln)]
+        if not ws:
+            fails.append("HANDOVER 第 %d 处「最后更新」行无 W 号" % i)
+            continue
+        if int(ws[0]) != top:
+            fails.append("HANDOVER 第 %d 处「最后更新」链首 W%s ≠ CHANGELOG 现役段 W%d ⇒ 每批须前置最新条目" % (i, ws[0], top))
+        if len(ws) > 3:
+            fails.append("HANDOVER 第 %d 处「最后更新」链条目 %d 条 > 3 ⇒ 保留最新 3 条其余迁 CHANGELOG" % (i, len(ws)))
+    if upd:
+        notes.append("HANDOVER 最后更新 %d 处（链首与条目数已核）" % len(upd))
+
+def _check_rule_and_index(top, batch, chg, fidx, fails, notes):
+    """③⑤ 编号规则段上限与 file-index 本批段登记（W1121 结构拆分·行为不变）。"""
+    # ③ CHANGELOG 编号规则段上限
+    up = _rule_upper(chg or "")
+    if not up:
+        fails.append("CHANGELOG 编号规则段上限不可解析")
+    elif int(up) != top:
+        fails.append("CHANGELOG 编号规则段上限 W001-W%s ≠ 现役段 W%d ⇒ 同步该段" % (up, top))
+    else:
+        notes.append("CHANGELOG 编号规则段上限 = W%d" % top)
+
+    # ⑤ file-index 本批段登记
+    if fidx is None:
+        fails.append("file-index 缺失（scripts/output/file-index.md）")
+    elif not re.search(r"^## W%d\s" % int(batch), fidx, re.M):
+        fails.append("file-index 无 W%s 段登记 ⇒ 落段时同步（cascade 级联段面负责）" % batch)
+    else:
+        notes.append("file-index 已含 W%s 段" % batch)
 
 def check_all(batch):
     """返回 (fails, notes)；fails 为可执行改法描述列表。"""
@@ -127,44 +169,8 @@ def check_all(batch):
     else:
         notes.append("台账正本 %d 数据行 ≤ 窗口 %d" % (n, WINDOW))
 
-    # ②④ HANDOVER 最后更新链首与条目数
-    # 只取真正的链条目行（「最后更新：<日期>（W#### …」形态）⇒ 排除阅读契约/维护契约里
-    # 仅提到「最后更新」字样的说明行（否则把说明行当链条目 ⇒ 假阳）
-    upd = [ln for ln in (hov or "").splitlines()
-           if re.search(r"最后更新：\d{4}-\d{2}-\d{2}（W\d{4}", ln)]
-    if not upd:
-        fails.append("HANDOVER 无「最后更新」行 ⇒ 交接链首未维护")
-    for i, ln in enumerate(upd, 1):
-        # 条目数只数「批次摘要」⇒ 排除「（W#### 及更早批次详见 CHANGELOG.md）」这类指针
-        # 条目数 = 该链条目行内「W####」的出现次数（后续条目用「；」或「·」分隔·不带前缀）
-        ws = [w for w in re.findall(r"W(\d{4})", ln) if not re.search(r"W%s[^）]*及更早" % w, ln)]
-        if not ws:
-            fails.append("HANDOVER 第 %d 处「最后更新」行无 W 号" % i)
-            continue
-        if int(ws[0]) != top:
-            fails.append("HANDOVER 第 %d 处「最后更新」链首 W%s ≠ CHANGELOG 现役段 W%d ⇒ 每批须前置最新条目" % (i, ws[0], top))
-        if len(ws) > 3:
-            fails.append("HANDOVER 第 %d 处「最后更新」链条目 %d 条 > 3 ⇒ 保留最新 3 条其余迁 CHANGELOG" % (i, len(ws)))
-    if upd:
-        notes.append("HANDOVER 最后更新 %d 处（链首与条目数已核）" % len(upd))
-
-    # ③ CHANGELOG 编号规则段上限
-    up = _rule_upper(chg or "")
-    if not up:
-        fails.append("CHANGELOG 编号规则段上限不可解析")
-    elif int(up) != top:
-        fails.append("CHANGELOG 编号规则段上限 W001-W%s ≠ 现役段 W%d ⇒ 同步该段" % (up, top))
-    else:
-        notes.append("CHANGELOG 编号规则段上限 = W%d" % top)
-
-    # ⑤ file-index 本批段登记
-    if fidx is None:
-        fails.append("file-index 缺失（scripts/output/file-index.md）")
-    elif not re.search(r"^## W%d\s" % int(batch), fidx, re.M):
-        fails.append("file-index 无 W%s 段登记 ⇒ 落段时同步（cascade 级联段面负责）" % batch)
-    else:
-        notes.append("file-index 已含 W%s 段" % batch)
-
+    _check_handover_chain(top, hov, fails, notes)
+    _check_rule_and_index(top, batch, chg, fidx, fails, notes)
     return fails, notes
 
 

@@ -88,26 +88,36 @@ def fingerprint(text: str) -> str:
 
 
 def locate_cells(cells: list[str]) -> dict[str, int]:
-    """从右起定位各列下标（摘要含裸竖线时前列右移，末列不动）。
+    """按**内容锚点**定位各列下标（标准 7 列行与 8 列行皆成立·W1121）。
 
-    与 preflight_check.py 的列定位同策略：touches=末格、session=右起第 3、
-    status=右起首个状态形态格（否则右起第 4）、hash=右起第 5、级联=右起第 6。
+    病根（2026-11-04 实测）：原实现按「从右起固定偏移」定位（touches=n-2 ·
+    session=n-3 · status=n-4 · cascade=n-5 · hash=n-6），并用「右起首个状态形态格」
+    修正 status——但该修正循环的左边界写死为 5（range(n-2, 5, -1) **不含 5**）
+    ⇒ 对**多一列 files** 的 8 列行（cells 长 10）整体偏移一格 ⇒ status 被写进
+    「认领会话」格、hash 被写进「级联」格（干跑实测：status 旧值显示为主会话列）。
+
+    ⇒ 根修：以**状态格内容**（「在途」/「已收官」形态）为唯一锚点定位 status，
+      hash/cascade = status 前两格，session = status 后一格，touches = 末格。
+      判据强度不降：锚点找不到 ⇒ fail-closed（列定位失败），**不做位置兜底**。
     """
     n = len(cells)
     if n < 9:
         raise ValueError("行格数不足 9（标准 7 格 + 首尾空）·实得 %d" % n)
-    # 标准 7 格的列序（cells 含首尾两个空元素）：
-    #   1=编号 2=描述 3=hash 4=级联hash 5=状态 6=认领会话 7=touches
-    #   ⇒ touches=n-2 · session=n-3 · status=n-4 · cascade=n-5 · hash=n-6
-    #   （hash 与级联两列的下标不可互换——W931 自测实测抓出过一次错位）
-    loc = {"touches": n - 2, "session": n - 3, "status": n - 4,
-           "cascade": n - 5, "hash": n - 6}
-    for i in range(n - 2, 5, -1):
+    status_idx = None
+    for i in range(n - 2, 1, -1):
         norm = re.sub(r"[\s*]+", "", cells[i])
         if RE_STATUS_CELL.match(norm):
-            loc["status"] = i
+            status_idx = i
             break
-    return loc
+    if status_idx is None:
+        raise ValueError("找不到状态形态格（在途/已收官）·列定位失败")
+    if status_idx < 3:
+        raise ValueError("状态格位置异常（下标 %d）·列定位失败" % status_idx)
+    return {"status": status_idx,
+            "hash": status_idx - 2,
+            "cascade": status_idx - 1,
+            "session": status_idx + 1,
+            "touches": n - 2}
 
 
 def read_ledger(path: str) -> list[str]:
@@ -158,6 +168,23 @@ def _resolve(explicit, auto):
     if auto is not None:
         return auto, True
     return None, False
+
+
+def _resolve_changes(args, loc, auto_status, auto_hash, auto_cascade):
+    """统一决议：显式优先，其次机器反填（W1042 根因修法·三条列同一套语义）。
+
+    W1121 结构拆分：从 cmd_backfill 抽出（行为不变·仅函数边界）。
+    """
+    changes = []
+    for name, explicit, auto in (("status", args.status, auto_status),
+                                 ("hash", args.hash, auto_hash),
+                                 ("cascade", args.cascade, auto_cascade)):
+        val, changed = _resolve(explicit, auto)
+        if changed:
+            changes.append((name, loc[name], val))
+    if args.touches is not None:
+        changes.append(("touches", loc["touches"], args.touches))
+    return changes
 
 
 def cmd_backfill(args, path: str, commit_index=None) -> int:
@@ -213,15 +240,7 @@ def cmd_backfill(args, path: str, commit_index=None) -> int:
             print("FAIL  W%03d 在 git 无批次标签提交——不能反填 hash（先落库再回填）" % args.w)
             return 1
 
-    # 统一决议：显式优先，其次机器反填（W1042 根因修法·三条列同一套语义）
-    for name, explicit, auto in (("status", args.status, auto_status),
-                                 ("hash", args.hash, auto_hash),
-                                 ("cascade", args.cascade, auto_cascade)):
-        val, changed = _resolve(explicit, auto)
-        if changed:
-            changes.append((name, loc[name], val))
-    if args.touches is not None:
-        changes.append(("touches", loc["touches"], args.touches))
+    changes = _resolve_changes(args, loc, auto_status, auto_hash, auto_cascade)
     if not changes:
         print("FAIL  未指定任何要改的列（--hash/--cascade/--status/--touches/--from-git）")
         return 1
@@ -272,20 +291,8 @@ def cmd_append_claim(args, path: str) -> int:
     return 0
 
 
-def _self_test() -> int:
-    """自测：正例必绿 + 负例必红（负例红不了 ⇒ 判据无效，不算通过）。"""
-    fails = []
-    tmpdir = tempfile.mkdtemp(prefix="w931_backfill_")
-    sample = (
-        "# 台账样本\n\n"
-        "| W930 | 布局批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | a.py · b.md |\n"
-        "| W929 | 素材批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | c.py |\n"
-        "| W932 | 工具批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | e.py |\n"
-    )
-    path = os.path.join(tmpdir, "ledger.md")
-    with open(path, "w", encoding="utf-8", newline="") as f:
-        f.write(sample)
-
+def _st_backfill_basic(path, fails):
+    """自测组 1：回填/复核/基线/不存在四类（正例 1-2 与负例 1-3）。"""
     # 正例 1：回填 hash + 状态 → 成功、指纹变化
     rc = cmd_backfill(argparse.Namespace(w=930, hash="abc1234", cascade=None,
                                         status="**已收官**（abc1234·全绿）", touches=None,
@@ -324,6 +331,9 @@ def _self_test() -> int:
                       path)
     if rc == 0:
         fails.append("负例3 行不存在必须判红")
+
+def _st_compose_git_status(fails):
+    """自测组 2：compose_git_status 纯函数与提交索引口径。"""
     # W956/P-43-01：compose_git_status 纯函数（正例绿 + 无提交负例 None）
     _idx = wnum_commit_index(["d093bf64 docs(w955): GSAP 计划子批", "e5b262e7 docs(w884): 审计落盘",
                              "92175003 chore(w884): 收官回填"])
@@ -333,6 +343,9 @@ def _self_test() -> int:
         fails.append("compose_git_status 无提交号必须返回 None（不可反填）")
     if wnum_commit_index(["chore: 提及 W940 教训但不带批次标签"]):
         fails.append("散文提及 W 号（无 type(w###): 标签）不得计入提交索引")
+
+def _st_from_git_precedence(path, fails):
+    """自测组 3：--from-git 的显式值优先级回归锁。"""
     # W1042 根因修复回归锁：--from-git 分支**不得吞掉**显式 --status/--hash/--cascade
     # （原实现把「取值优先级」与「是否产生变更」耦合在同一个 `is None` 判断里 ⇒ 显式值静默丢失；
     #   同族缺陷：--cascade 只在 else 分支处理 ⇒ --from-git --cascade X 也被吞）
@@ -404,11 +417,29 @@ def _self_test() -> int:
         return 1
     # 用例数动态统计（禁硬编码——W1042：硬编码汇总数会在加用例后失同步，
     # 「3 正例」实为 7 是典型形态）⇒ 从自身源码数「正例/负例」失败消息条数。
-    _src = inspect.getsource(_self_test)
+    _src = inspect.getsource(inspect.getmodule(_self_test))
     _pos = len(re.findall(r'fails\.append\("正例', _src))
     _neg = len(re.findall(r'fails\.append\("负例', _src))
     print("自测通过：%d 条正例断言绿 + %d 条负例断言红 + git 反填纯函数 3 例（判据可证伪）"
           % (_pos, _neg))
+
+def _self_test() -> int:
+    """自测：正例必绿 + 负例必红（负例红不了 ⇒ 判据无效，不算通过）。"""
+    fails = []
+    tmpdir = tempfile.mkdtemp(prefix="w931_backfill_")
+    sample = (
+        "# 台账样本\n\n"
+        "| W930 | 布局批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | a.py · b.md |\n"
+        "| W929 | 素材批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | c.py |\n"
+        "| W932 | 工具批 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 | e.py |\n"
+    )
+    path = os.path.join(tmpdir, "ledger.md")
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        f.write(sample)
+
+    _st_backfill_basic(path, fails)
+    _st_compose_git_status(fails)
+    _st_from_git_precedence(path, fails)
     return 0
 
 
