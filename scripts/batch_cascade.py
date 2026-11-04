@@ -18,6 +18,7 @@ import re
 import sys
 import time
 
+import cascade_idempotence as ci  # W1122：级联插入型面的幂等原语（单一事实源）
 import version_surface  # W1114：版本面字面量的共享单一事实源（只引用不复制）
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -136,6 +137,34 @@ class _Ctx:
         self.cl_src = ""      # CHANGELOG 原文（交接文档面 W534 断言用）
 
 
+def _locate_cl_section(s, batch):
+    """定位 CHANGELOG 里本批号已立段的区间（起点=段标题行首·终点=下一段标题行首）。
+
+    W1122（根修 W1117 R-01）：级联插入型面的幂等定位器。
+    """
+    m = re.search(r"^### %s（[^\n]*" % re.escape(batch), s, re.M)
+    if not m:
+        return None
+    start = m.start()
+    nxt = re.search(r"^### ", s[m.end():], re.M)
+    end = m.end() + nxt.start() if nxt else len(s)
+    return start, end
+
+
+def _locate_handover_milestone(s, batch):
+    """定位交接文档「一、当前进度」段内本批号里程碑块的区间。
+
+    W1122（根修 W1117 R-01）：级联插入型面的幂等定位器。
+    """
+    m = re.search(r"^- \*\*(?:v[\d.]+ )?%s\b" % re.escape(batch), s, re.M)
+    if not m:
+        return None
+    start = m.start()
+    nxt = re.search(r"^- \*\*", s[m.end():], re.M)
+    end = m.end() + nxt.start() if nxt else len(s)
+    return start, end
+
+
 def _face_changelog(ctx):
     """CHANGELOG 面：插入新段并推进编号规则（回填 ctx.new_w/new_rule/cl_src）。"""
     # ---------- CHANGELOG ----------
@@ -160,6 +189,27 @@ def _face_changelog(ctx):
                 f"缺口 {g} 在台账无认领行（台账登记行形态应为「| W{g} |」）")
             assert f"### {g}" not in s, f"缺口 {g} 已有段（无需允许）"
         print("  缺口许可：%s（在途·台账已有认领行）" % "、".join(gaps))
+    # W1122（根修 W1117 R-01「段插入仍非幂等」）：本批段**已存在** ⇒ 不重复插入。
+    # 原语义是「段已存在即断言失败」⇒ 落段后无法重跑级联；且「批次号=顶段+1」的强断言
+    # 在**降序位补段**（我方 W1120 的形态）下必然失败 ⇒ 本批已立段时走幂等分支。
+    # 内容不一致 ⇒ fail-closed 并指引用 scripts/rebuild_section.py 重建（与 file-index 面同策略）。
+    _cspan = _locate_cl_section(s, ctx.batch)
+    if _cspan is not None:
+        _title_body = re.sub(r"^W\d+\s+", "", ctx.spec["title"]).strip()
+        _new_title = f"### {ctx.batch}（{ctx.date}）：{_title_body}"
+        _expected = _new_title + ctx.spec["changelog_body"].replace("\n", nl) + nl
+        _old = s[_cspan[0]:_cspan[1]]
+        if _old.replace("\r\n", "\n").strip() != _expected.replace("\r\n", "\n").strip():
+            raise AssertionError(
+                "CHANGELOG 已存在 %s 段但内容与 spec 不一致 ⇒ 拒绝重复插入"
+                "（防同号双段·不静默留 stale）——修法=跑 py -3 scripts/rebuild_section.py"
+                " --batch %s --spec <spec 路径> --apply 重建该段" % (ctx.batch, ctx.batch))
+        ctx.new_w = int(str(ctx.batch).lstrip("Ww"))
+        ctx.new_rule = "（W001-W%d）" % ctx.new_w
+        out, _rule_changed = version_surface.advance_changelog_rule(s, ctx.batch)
+        ctx.pend.append((p, out, nl))
+        print("[CHANGELOG] %s 段已存在且内容一致 ⇒ 幂等跳过插入（不产生同号双段）" % ctx.batch)
+        return
     new_w = cur_w + 1 + len(gaps)
     ctx.new_w = new_w
     assert ctx.batch == "W" + str(new_w), f"批次号应为 W{new_w}" + (f"（含缺口 {gaps}）" if gaps else "")
@@ -251,7 +301,27 @@ def _face_handover(ctx):
     p = "HANDOVER.md"
     s, nl = load(p)
     assert s.count("））；") == 0, "基线已存在双括号，先人工处理"
-    s = s.replace("> 最后更新：", "> 最后更新：" + ctx.entry + "·", 1)
+    # W1122（根修 W1117 R-01）：头链 entry 此前**无条件 prepend** ⇒ 重跑级联静默重复。
+    # 本版：头链内已存在本批 entry ⇒ 内容一致则零变化·不一致则替换。
+    _hspan = _locate_handover_head_entry(s, ctx.entry)
+    if _hspan is not None:
+        _st, _en = _hspan[0], _hspan[1]
+        _hbuild = "·" + ctx.entry
+        if s[_st:_en].strip() != _hbuild.strip():
+            s = s[:_st] + _hbuild + s[_en:]
+    else:
+        # W1122：头链是「**最新在前**」形态 ⇒ 低号批（并行让号形态）不得占据链首
+        # （登记面一致性闸要求「链首 ≡ CHANGELOG 现役段」）⇒ 按批号序插入。
+        _h0x = s.find("> 最后更新：")
+        _h1x = s.find(nl, _h0x) if _h0x != -1 else -1
+        _hrow = s[_h0x:_h1x] if (_h0x != -1 and _h1x != -1) else ""
+        _first = re.search(r"·?20\d{2}-\d{2}-\d{2}（(?:v[\d.]+ )?W(\d{3,4})）", _hrow)
+        _bn2 = int(str(ctx.batch).lstrip("Ww"))
+        if _first and int(_first.group(1)) > _bn2:
+            _pos = _h0x + _first.end()
+            s = s[:_pos] + "·" + ctx.entry + s[_pos:]
+        else:
+            s = s.replace("> 最后更新：", "> 最后更新：" + ctx.entry + "·", 1)
     h0 = s.find("> 最后更新：")
     h1 = s.find(nl, h0)
     head_line = s[h0:h1]
@@ -280,8 +350,17 @@ def _face_handover(ctx):
     # （W706 防线在下批 dry-run 正确拦截·fail-closed 实证）。LF 工作树 nl 单字符故 +1 恒正确，
     # 此前批次均运行于 LF 工作树所以未暴露。+len(nl) 双形态恒公。
     at = s.rfind(nl, 0, fb.start()) + len(nl)
-    s = s[:at] + ctx.spec["milestone_block"].replace("\n", nl) + nl + s[at:]
-    s = _handover_rotate_oldest(s, ctx, nl, h1pos)
+    # W1122（根修 W1117 R-01）：里程碑块此前**无条件插入** ⇒ 重跑级联静默重复插块；
+    # 且里程碑滚动（淘汰最老块）是**有状态**的 ⇒ 重跑会再淘汰一块（信息丢失）。
+    # 本版：本批块已存在 ⇒ 只做「一致则零变化·不一致则替换」；**跳过滚动**（滚动已在首次执行时完成）。
+    _mbuild = ctx.spec["milestone_block"].replace("\n", nl) + nl
+    _mspan = _locate_handover_milestone(s, ctx.batch)
+    if _mspan is not None:
+        if s[_mspan[0]:_mspan[1]].strip() != _mbuild.strip():
+            s = s[:_mspan[0]] + _mbuild + s[_mspan[1]:]
+    else:
+        s = s[:at] + _mbuild + s[at:]
+        s = _handover_rotate_oldest(s, ctx, nl, h1pos)
     hs = re.search(r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^）]*；详见 CHANGELOG）", s)
     assert hs, "未找到当前 HEAD 句"
     s = s[:hs.start()] + "当前 HEAD = {}（{}；详见 CHANGELOG）".format(ctx.batch, ctx.spec["head_sentence"]) + s[hs.end():]
@@ -290,7 +369,15 @@ def _face_handover(ctx):
     tail_idx = s.rfind("最后更新：")
     assert tail_idx != -1, "未找到文末「最后更新」历史链"
     if ctx.entry + "；" not in s[tail_idx : tail_idx + len(ctx.entry) + 2]:
-        s = s[:tail_idx] + "最后更新：" + ctx.entry + "；" + s[tail_idx + len("最后更新："):]
+        # W1122：尾链同为「最新在前」形态 ⇒ 低号批不得占据链首（登记面一致性闸要求链首 ≡ 现役段）
+        _trow = s[tail_idx:s.find(nl, tail_idx)]
+        _tfirst = re.search(r"20\d{2}-\d{2}-\d{2}（(?:v[\d.]+ )?W(\d{3,4})）", _trow)
+        _bn3 = int(str(ctx.batch).lstrip("Ww"))
+        if _tfirst and int(_tfirst.group(1)) > _bn3:
+            _tpos = tail_idx + _tfirst.end()
+            s = s[:_tpos] + "；" + ctx.entry + s[_tpos:]
+        else:
+            s = s[:tail_idx] + "最后更新：" + ctx.entry + "；" + s[tail_idx + len("最后更新："):]
     # W560: 尾链维持 ≤3 条（交接文档维护契约②）
     tline_end = s.find(nl, tail_idx)
     tline = s[tail_idx:tline_end]
@@ -320,7 +407,15 @@ def _face_workflows(ctx):
         s, p, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
     marker = "无 workflow 结构改动）。"
     assert out.count(marker) == 1, f"里程碑尾标记出现 {out.count(marker)} 次"
-    out = out.replace(marker, f"无 workflow 结构改动）+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。", 1)
+    # W1122（根修 W1117 R-01）：尾标记此前**无条件包裹** ⇒ 重跑级联会层层累积。
+    # 本版：已存在本批标记 ⇒ 内容一致则零变化·不一致则替换。
+    _wbuild = f"+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。"
+    _wspan = _locate_workflows_marker(out, ctx.new_w, ctx.desc)
+    if _wspan is not None:
+        if out[_wspan[0]:_wspan[1]].strip() != _wbuild.strip():
+            out = out[:_wspan[0]] + _wbuild + out[_wspan[1]:]
+    else:
+        out = out.replace(marker, f"无 workflow 结构改动）{_wbuild}", 1)
     ctx.pend.append((p, out, nl))
 
 
@@ -357,6 +452,36 @@ def _foot_insert(s_html, new_token):
     return s_html[:n_start] + new_node + s_html[n_start + len(node):]
 
 
+def _foot_upsert(s_html, new_token, batch):
+    """页脚批次链插入的**幂等版**（W1122 · 根修 W1117 R-01）。
+
+    原 _foot_insert 无条件前插 ⇒ 重跑级联会插出**同号双 token**（被 W724 去重断言拦下·fail-closed）。
+    本版：链节点内已有本批号 token ⇒ 内容一致则**零变化**·不一致则**替换该段**。
+    """
+    f = _FOOT_RE.search(s_html)
+    assert f, "未找到 <footer>"
+    f_close = s_html.find("</footer>", f.end())
+    node_e = f_close if f_close != -1 else len(s_html)
+    mm = _FOOT_TOKEN.search(s_html, f.end(), node_e)
+    assert mm, "页脚链头 token 未命中（footer 节点全宽）"
+    n_start = s_html.rfind(">", 0, mm.start()) + 1
+    n_end = s_html.find("<", mm.start())
+    node = s_html[n_start:n_end]
+    parts = node.split(" · ")
+    _bnum = int(re.sub(r"\D", "", batch))
+    for i, seg in enumerate(parts):
+        if re.search(r"\bW%d\b" % _bnum, seg):
+            new_parts = list(parts)
+            new_parts[i] = new_token
+            new_node = " · ".join(new_parts)
+            _wns = re.findall(r"W\d{3,4}", new_node)
+            assert len(_wns) == len(set(_wns)), "页脚链 token 重复（W724 防线）"
+            if new_node == node:
+                return s_html
+            return s_html[:n_start] + new_node + s_html[n_start + len(node):]
+    return _foot_insert(s_html, new_token)
+
+
 def _face_footers(ctx):
     """四页脚批次链插入（W717 锚定·W724 双重缺陷根修+链长治理·W781 防御性剥离前导批次号）。"""
     # W781 R-2：desc 以 W### 开头会叠成「W779 W779…」双 token（W779 四页实证·存量缺陷
@@ -364,11 +489,63 @@ def _face_footers(ctx):
     desc = re.sub(r"^W\d{3,4}\s*", "", ctx.desc)
     for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html"]:
         s, _ = load(p)
-        ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {desc}"), None))
+        ctx.pend.append((p, _foot_upsert(s, f"{ctx.batch} {desc}", ctx.batch), None))
     p = "site/dukou-engine.html"
     s, _ = load(p)
     head_short = ctx.spec["head_sentence"].split("——")[0]
-    ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {desc}（{head_short}）"), None))
+    ctx.pend.append((p, _foot_upsert(s, f"{ctx.batch} {desc}（{head_short}）", ctx.batch), None))
+
+
+_AGENTS_TAIL = "。如与上述权威文档冲突，以权威文档为准。*"
+
+
+def _locate_agents_note(s, batch):
+    """定位 AGENTS 脚注行内**本批号条目**的区间（起点=条目日期 token 起点·终点=条目文本末尾）。
+
+    W1122（根修 W1117 R-01）：脚注条目此前**无条件追加** ⇒ 重跑级联会静默重复插入同号条目。
+    """
+    m = re.search(r"（%s）" % re.escape(batch), s)
+    if not m:
+        return None
+    _dm = list(re.finditer(
+        r"(?:20\d{2}-\d{2}-\d{2}|二〇[一二三四五六七八九〇零十廿卅]+年"
+        r"[一二三四五六七八九〇零十廿卅]+月[一二三四五六七八九〇零十廿卅]+日)", s[:m.start()]))
+    start = _dm[-1].start() if _dm else m.start()
+    _tail_i = s.find(_AGENTS_TAIL)
+    _nxt = s.find("；", m.end())
+    if _nxt != -1 and (_tail_i == -1 or _nxt < _tail_i):
+        end = _nxt
+    elif _tail_i != -1:
+        end = _tail_i + 1          # 含条末句号（tail 的前导「。」）
+    else:
+        end = len(s)
+    return start, end
+
+
+def _locate_handover_head_entry(s, entry):
+    """定位交接文档**头链**内本批 entry 的区间（起点=分隔「·」·终点=entry 文本末尾）。
+
+    W1122（根修 W1117 R-01）：头链 entry 此前无条件 prepend ⇒ 重跑级联静默重复。
+    """
+    h0 = s.find("> 最后更新：")
+    if h0 == -1:
+        return None
+    h1 = s.find("\n", h0)
+    if h1 == -1:
+        h1 = len(s)
+    span = ci.locate_entry(s[h0:h1], re.escape(entry), r"·")
+    if span is None:
+        return None
+    return h0 + span[0], h0 + span[1]
+
+
+def _locate_workflows_marker(s, batch_w, desc):
+    """定位 workflows README 里本批里程碑尾标记的区间。
+
+    W1122（根修 W1117 R-01）：尾标记此前无条件包裹 ⇒ 重跑级联层层累积。
+    """
+    return ci.locate_entry(s, r"\+ W%s %s·无 workflow 结构改动）。"
+                          % (re.escape(str(batch_w)), re.escape(desc)))
 
 
 def _agents_entry_wn(part):
@@ -383,10 +560,36 @@ def _face_agents(ctx):
     # ---------- AGENTS 脚注 ----------
     p = "AGENTS.md"
     s, nl = load(p)
-    tail = "。如与上述权威文档冲突，以权威文档为准。*"
+    tail = _AGENTS_TAIL
     assert s.count(tail) == 1, "AGENTS 脚注尾锚点异常"
     _sep = "" if s[: s.index(tail)].rstrip().endswith("；") else "；"
-    s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(ctx.spec["agents_note"].rstrip("。")), 1)  # W972 修：尾句号不剥会拼出「。。」
+    _note_text = ctx.spec["agents_note"].rstrip("。")  # W972 修：尾句号不剥会拼出「。。」
+    # W1122（根修 W1117 R-01）：脚注条目此前**无条件追加** ⇒ 重跑级联静默重复插同号条目。
+    # 本版：已存在本批条目 ⇒ 内容一致则零变化·不一致则替换（可重跑级联修正）。
+    _span = _locate_agents_note(s, ctx.batch)
+    if _span is not None:
+        _st, _en = _span
+        _entry_new = _note_text + "。"
+        if s[_st:_en].strip() != _entry_new.strip():
+            s = s[:_st] + _entry_new + s[_en:]
+    else:
+        # W1122：按批号**升序**插入（脚注条目断言 _nums == sorted(_nums)）——
+        # 原实现恒插在末尾 ⇒ 低号批（并行让号后的常见形态）落段即触发「脚注条目乱序」断言。
+        _fs0 = s.find("*本文件由")
+        assert _fs0 != -1, "AGENTS 脚注起点锚点缺失"
+        _bn = int(str(ctx.batch).lstrip("Ww"))
+        _target = None
+        for _m2 in re.finditer(
+                r"(?:20\d{2}-\d{2}-\d{2}|二〇[一二三四五六七八九〇零十廿卅]+年"
+                r"[一二三四五六七八九〇零十廿卅]+月[一二三四五六七八九〇零十廿卅]+日)"
+                r"（(?:v[\d.]+ )?W(\d{3,4})）", s[_fs0:]):
+            if int(_m2.group(1)) > _bn:
+                _target = _fs0 + _m2.start()
+                break
+        if _target is not None:
+            s = s[:_target] + _note_text + "；" + s[_target:]
+        else:
+            s = s.replace(tail, _sep + _note_text + tail, 1)
     # W721 根修（S-29·FAM-14 闭环·W719 R1 制度破约教训）：脚注滚动内建——条目 >5 时最老条迁
     # ARCHIVE 尾块（第 12 面），指针上界同步；制度自此有执行机制，不再依赖手工 trim（W713/W719 两度）。
     _fs = s.find("*本文件由")
@@ -444,7 +647,18 @@ def _face_citation(ctx):
     s, nl = load(p)
     out, _changed = version_surface.advance_text(
         s, p, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
-    assert out != s, "CITATION.cff 版本/日期行未变化"
+    if out == s:
+        # W1122：低号批落段 ⇒ 版本面**单调守卫**（只升不降）⇒ 本批号 ≤ 现役批号 ⇒ 零变化是正确结果。
+        # 原断言「必须有变化」会把单调守卫的正当零变化误判为推进失效 ⇒ 改为零变化时校验
+        # 「现役批号 ≥ 本批号」⇒ 判据强度不降（该改却没改仍判红）。
+        _cur = re.search(r"W(\d{3,4})", s)
+        _cur_w = int(_cur.group(1)) if _cur else None
+        _mine = int(str(ctx.batch).lstrip("Ww"))
+        assert _cur_w is not None and _cur_w >= _mine, (
+            "CITATION.cff 版本/日期行未变化且现役批号 %s < 本批 W%d ⇒ 版本面推进失效"
+            % (_cur_w, _mine))
+        print("[CITATION] 现役批号 W%d ≥ 本批 W%d ⇒ 单调守卫零变化（低号批落段的正确结果）"
+              % (_cur_w, _mine))
     ctx.pend.append((p, out, nl))
 
 
