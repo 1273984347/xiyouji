@@ -23,8 +23,8 @@
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W894 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 27 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | 1068 |
-| pytest_collected | 1325 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1125 |
-| report_docs | 146 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1125 |
+| pytest_collected | 1325 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1127 |
+| report_docs | 148 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1125 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -38,43 +38,12 @@
 
 ## 反向：W → stats key 变更（新→旧）
 
-### W1125（2026-11-04 16:39:06）
-- report_docs: 147 → 146
+### W1125（2026-11-04 16:41:22）
+- report_docs: 147 → 148
 
-### W1125（2026-11-04 16:31:35）
+### 1127（2026-11-04 16:02:28）
 - pytest_collected: 1318 → 1325
-
-### W1125（2026-11-04 16:21:36）
-- pytest_collected: 1314 → 1318
-- report_docs: 145 → 147
-
-### W1125（2026-11-04 16:20:37）
-- a1_a6_docs: None → 616
-- a2_docs: None → 44
-- a3_docs: None → 215
-- a4_docs: None → 209
-- a5_docs: None → 35
-- a6_docs: None → 13
-- cognition_docs: None → 3
-- csp_covered: None → 856
-- gate_count: None → 57
-- html_total: None → 857
-- icon_allowlist_entries: None → 71
-- inline_css_pages: None → 330
-- learn_docs: None → 4
-- methodology_docs: None → 27
-- pytest_collected: None → 1318
-- report_docs: None → 147
-- scan_files: None → 855
-- script_classes: None → 34
-- seo_scanned: None → 855
-- site_data_html: None → 88
-- site_en_html: None → 138
-- site_reader_html: None → 622
-- site_root_html: None → 9
-- spirit_docs: None → 4
-- visualization_pages: None → 87
-- w864_entries: None → 256
+- report_docs: 146 → 147
 
 ### W1129（2026-11-04 15:42:11）
 - report_docs: 145 → 146

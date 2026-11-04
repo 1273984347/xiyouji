@@ -2920,179 +2920,30 @@
     {
       "changes": [
         {
-          "from": null,
-          "key": "a1_a6_docs",
-          "to": 616
-        },
-        {
-          "from": null,
-          "key": "a2_docs",
-          "to": 44
-        },
-        {
-          "from": null,
-          "key": "a3_docs",
-          "to": 215
-        },
-        {
-          "from": null,
-          "key": "a4_docs",
-          "to": 209
-        },
-        {
-          "from": null,
-          "key": "a5_docs",
-          "to": 35
-        },
-        {
-          "from": null,
-          "key": "a6_docs",
-          "to": 13
-        },
-        {
-          "from": null,
-          "key": "cognition_docs",
-          "to": 3
-        },
-        {
-          "from": null,
-          "key": "csp_covered",
-          "to": 856
-        },
-        {
-          "from": null,
-          "key": "gate_count",
-          "to": 57
-        },
-        {
-          "from": null,
-          "key": "html_total",
-          "to": 857
-        },
-        {
-          "from": null,
-          "key": "icon_allowlist_entries",
-          "to": 71
-        },
-        {
-          "from": null,
-          "key": "inline_css_pages",
-          "to": 330
-        },
-        {
-          "from": null,
-          "key": "learn_docs",
-          "to": 4
-        },
-        {
-          "from": null,
-          "key": "methodology_docs",
-          "to": 27
-        },
-        {
-          "from": null,
-          "key": "pytest_collected",
-          "to": 1318
-        },
-        {
-          "from": null,
-          "key": "report_docs",
-          "to": 147
-        },
-        {
-          "from": null,
-          "key": "scan_files",
-          "to": 855
-        },
-        {
-          "from": null,
-          "key": "script_classes",
-          "to": 34
-        },
-        {
-          "from": null,
-          "key": "seo_scanned",
-          "to": 855
-        },
-        {
-          "from": null,
-          "key": "site_data_html",
-          "to": 88
-        },
-        {
-          "from": null,
-          "key": "site_en_html",
-          "to": 138
-        },
-        {
-          "from": null,
-          "key": "site_reader_html",
-          "to": 622
-        },
-        {
-          "from": null,
-          "key": "site_root_html",
-          "to": 9
-        },
-        {
-          "from": null,
-          "key": "spirit_docs",
-          "to": 4
-        },
-        {
-          "from": null,
-          "key": "visualization_pages",
-          "to": 87
-        },
-        {
-          "from": null,
-          "key": "w864_entries",
-          "to": 256
-        }
-      ],
-      "date": "2026-11-04",
-      "time": "16:20:37",
-      "w": "W1125"
-    },
-    {
-      "changes": [
-        {
-          "from": 1314,
-          "key": "pytest_collected",
-          "to": 1318
-        },
-        {
-          "from": 145,
-          "key": "report_docs",
-          "to": 147
-        }
-      ],
-      "date": "2026-11-04",
-      "time": "16:21:36",
-      "w": "W1125"
-    },
-    {
-      "changes": [
-        {
           "from": 1318,
           "key": "pytest_collected",
           "to": 1325
+        },
+        {
+          "from": 146,
+          "key": "report_docs",
+          "to": 147
         }
       ],
       "date": "2026-11-04",
-      "time": "16:31:35",
-      "w": "W1125"
+      "time": "16:02:28",
+      "w": "1127"
     },
     {
       "changes": [
         {
           "from": 147,
           "key": "report_docs",
-          "to": 146
+          "to": 148
         }
       ],
       "date": "2026-11-04",
-      "time": "16:39:06",
+      "time": "16:41:22",
       "w": "W1125"
     }
   ]
