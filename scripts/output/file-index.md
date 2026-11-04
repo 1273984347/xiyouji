@@ -39,6 +39,10 @@
 | pytest.ini | W1124 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
 | docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1124 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
 | docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1124 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| site/index.html | W1124 | 改：页脚批次链 token（W1124·副作用面） |
+| site/data/cross-time-danmaku.html | W1124 | 改：页脚批次链 token（W1124·副作用面） |
+| site/data/tag-cloud.html | W1124 | 改：页脚批次链 token（W1124·副作用面） |
+| site/dukou-engine.html | W1124 | 改：页脚批次链 token（W1124·副作用面） |
 
 ## W1123 预约释放语义根修 + 提交范围门禁 merge 场景归属根修（2026-11-04）
 
