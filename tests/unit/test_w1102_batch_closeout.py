@@ -151,3 +151,41 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     assert order.index('index') > order.index('versions')
     assert order.index('versions') == order.index('stats') + 1
     assert order[-2:] == ['csp', 'cspcheck']
+
+
+def test_pycompile_step_runs_after_add(monkeypatch):
+    """W1128 行为锁：pycompile 步**实际被调用**且排在 add 之后。
+
+    为什么要行为锁：STEPS 常量与 main() 实现是**双写** ⇒ 只断言声明顺序时，
+    改 main() 而不动 STEPS 仍全绿（既有 test_main_executes_steps_in_declared_order
+    同源教训）。⇒ 此例既断言调用发生，也断言它在 add 之后。
+
+    排位理由：pycompile 要看**索引态**（add 之后本批改动才在索引里），故必须
+    排在 add 之后；而 refresh/stats 等生成步在 add 之后跑，若 pycompile 排在它们
+    之后则坏文件已进索引 ⇒ 故取「紧随 add」的位置。
+    """
+    calls = []
+
+    def fake_run(args, cwd=None):
+        calls.append(' '.join(str(a) for a in args))
+        return 0, 'ok'
+
+    monkeypatch.setattr(bc, 'run', fake_run)
+    monkeypatch.setattr(bc, 'snapshot_index', lambda: ['x'])
+    monkeypatch.setattr(bc, 'precheck_ledger', lambda *a, **k: (True, []))
+    monkeypatch.setattr(bc, 'selfref_precheck', lambda: (True, ['通过']))
+    monkeypatch.setattr(bc, '_run_pycompile', lambda: calls.append('pycompile') or True)
+
+    rc = bc.main(['--batch', 'W9999', '--paths', 'README.md'])
+    assert rc == 0
+    assert 'pycompile' in calls, calls
+
+    def first(pred):
+        return next(i for i, c in enumerate(calls) if pred(c))
+
+    i_add = first(lambda c: c.startswith('git add'))
+    i_pyc = first(lambda c: c == 'pycompile')
+    assert i_add < i_pyc, calls
+    # 声明顺序同步断言（防 STEPS 与实现漂移）
+    order = bc.step_order()
+    assert order.index('pycompile') == order.index('add') + 1, order
