@@ -22,6 +22,7 @@
 | docs/INDEX.md | W1120 | 本批工具/产物 |
 | pytest.ini | W1120 | 本批工具/产物 |
 | scripts/INDEX.md | W1120 | 本批工具/产物 |
+| scripts/batch_cascade.py | W1120 | 本批工具/产物 |
 | scripts/check_doc_size_budget.py | W1120 | 本批工具/产物 |
 | scripts/output/INDEX.md | W1120 | 本批工具/产物 |
 | scripts/output/README.md | W1120 | 本批工具/产物 |
@@ -42,6 +43,7 @@
 | site/index.html | W1120 | 本批工具/产物 |
 | tests/unit/INDEX.md | W1120 | 本批工具/产物 |
 | tests/unit/README.md | W1120 | 本批工具/产物 |
+| tests/unit/test_w1120_cascade_file_index_idempotence.py | W1120 | 本批工具/产物 |
 | tests/unit/test_w1120_size_threshold_and_rebuild.py | W1120 | 本批工具/产物 |
 
 ## W1119 CI 成本治理 + 档 3 第二批 + 归档规则工具化（2026-11-04）

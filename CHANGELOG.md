@@ -35,6 +35,7 @@
 -docs/INDEX.md
 -pytest.ini
 -scripts/INDEX.md
+-scripts/batch_cascade.py
 -scripts/check_doc_size_budget.py
 -scripts/output/INDEX.md
 -scripts/output/README.md
@@ -55,6 +56,7 @@
 -site/index.html
 -tests/unit/INDEX.md
 -tests/unit/README.md
+-tests/unit/test_w1120_cascade_file_index_idempotence.py
 -tests/unit/test_w1120_size_threshold_and_rebuild.py
 
 **认领登记 W1120**（主仓共享区占号 session=session_237a5e53-…·preflight touches 交集检查通过·与对方 W1119 零同文件冲突）。
