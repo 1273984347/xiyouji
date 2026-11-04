@@ -923,10 +923,40 @@ def _post_check(pend, batch):
         print("[SELF-CHECK]", line)
 
 
+def _rotate_only(ctx, apply):
+    """独立滚动入口（W1127·T74 R-C）：只跑交接文档的「里程碑滚动淘汰」这一个动作。
+
+    病根：此前滚动只能作为「本批块插入」的副动作发生 ⇒ 若某批只想滚动（或需重跑滚动），
+    没有独立入口 ⇒ 只能手工改文档；且「重跑会再淘汰一块」的隐患只靠调用点守卫。
+    W1124 已把守卫**下沉到 _handover_rotate_oldest 内部**（本批块已在链上 ⇒ 零变化），
+    本步提供独立入口 ⇒ 独立重跑同样零变化（零红灯·不丢信息）。
+
+    用法：py -3 scripts/batch_cascade.py --spec <spec> --rotate-only [--apply]
+    """
+    p = "HANDOVER.md"
+    s, nl = load(p)
+    ctx.cl_src = open(os.path.join(ROOT, "CHANGELOG.md"), encoding="utf-8").read()
+    h1pos = s.find("## 一、当前进度")
+    assert h1pos != -1, "未找到交接文档「一、当前进度」段"
+    out = _handover_rotate_oldest(s, ctx, nl, h1pos)
+    if out == s:
+        print("[ROTATE] 本批块已在链上 ⇒ 视为本批已滚动过 ⇒ 零变化（幂等）")
+        return 0
+    if not apply:
+        print("[ROTATE] 需滚动最老里程碑块（dry-run·未落盘）·加 --apply 落盘")
+        return 0
+    _apply_pend([(p, out, nl)], ctx.batch)
+    print("[ROTATE] 已落盘：滚动淘汰最老里程碑块并同步历史概要指针")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--spec", required=True)
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--rotate-only", action="store_true",
+                    help="只执行「交接文档里程碑滚动淘汰」一个动作（W1127·T74 R-C 独立入口）："
+                         "幂等——本批块已在链上 ⇒ 零变化并直接退出")
     ap.add_argument("--allow-gap", default="",
                     help="允许的在途缺口 W 号（逗号分隔·须台账有认领行且 CHANGELOG 无段·W895 新增）")
     ap.add_argument("--skip-changelog", action="store_true",
@@ -943,6 +973,8 @@ def main():
         return 1
     ctx = _Ctx(spec)
     ctx.allow_gap = [x.strip() for x in args.allow_gap.split(",") if x.strip()]
+    if args.rotate_only:
+        return _rotate_only(ctx, args.apply)
     assert ctx.entry.endswith("）"), "head_entry 必须以闭合括号结尾"
     assert "（" not in ctx.spec["head_sentence"] and "）" not in ctx.spec["head_sentence"], (
         "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"
