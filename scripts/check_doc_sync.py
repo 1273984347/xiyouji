@@ -430,14 +430,8 @@ def _check_c3_agents_slots(inp, issues):
         issues.append("C3: AGENTS §4.2 门禁清单止于 %d，verify 实况最高槽位 %d（声明落后于代码实况）" % (a_max, v_max))
 
 
-def _check_c4_commit_ledger(inp, issues, notes):
-    """C4：提交-版段对账 + 认领行强制（W720）+ 级联清单（C4-e·W722）+ 文件清单入库（C4-f·W723）。
-
-    W730 提取：浅克隆早退（仅 NOTE）；对账表登记即豁免（D2）。
-    """
-    if inp.get("shallow"):
-        notes.append("C4: 浅克隆环境（.git/shallow），提交对账跳过（pre-commit 本地为主执行点）")
-        return
+def _c4_registered_ws(inp):
+    """C4 登记集合：CHANGELOG 段号 + 归档段号 + 对账表登记号。"""
     reg = changelog_section_ws(inp["changelog"])
     # W1014 hermetic 修：归档登记文本经 inp 注入（真实轨 gather 读盘·自测轨注入空文本）。
     # 原实现在此处 open(ARCHIVE_CHANGELOGS) 直读磁盘，使「未登记 W 必红」负样本一旦被
@@ -446,6 +440,8 @@ def _check_c4_commit_ledger(inp, issues, notes):
     for text in inp.get("archive_changelogs_text", []):
         reg |= changelog_section_ws(text)
     reg |= table_registered_ws(inp["table"])
+def _c4_commit_ws_check(inp, reg, issues):
+    """C4：提交信息里的 W 号须有 CHANGELOG 版段或对账表登记。"""
     for s in inp["subjects"]:
         s2 = re.sub(r"W\d{3,4}\s*[-–—]\s*W\d{3,4}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
         for w in RE_COMMIT_W.findall(s2):
@@ -454,6 +450,8 @@ def _check_c4_commit_ledger(inp, issues, notes):
     # C4 认领行强制（W720·W719 流程遗漏根修）：现役段 W 号须有对账表「表格行」登记——
     # 预留豁免 bullet（- **WXXX**：现势下一自由号…）不算认领；此前 C4 只查 W 号在登记集合，
     # 两种形态不可区分，动工未先登记认领行不会被拦（W719 实证被豁免 bullet 救场）
+def _c4_claim_row_check(inp, issues):
+    """C4：现役段 W 号须有对账表「表格行」认领登记（W720）。"""
     top = changelog_top(inp["changelog"])
     if top and ("%03d" % top[1]) not in set(RE_TABLE_ROW_W.findall(inp["table"])):
         issues.append(
@@ -464,6 +462,8 @@ def _check_c4_commit_ledger(inp, issues, notes):
     # amend 补件场景 staged 仅含新增·本门禁自证修正）⊇ 当批级联清单；
     # 清单不存在→NOTE（手工级联批须自建清单·pitfalls git 类义务）；
     # staged 空（CI/普通跑）→本项不适用
+def _c4_cascade_manifest_check(inp, issues, notes):
+    """C4-e：级联清单强校验（W722）——清单文件须全部入提交树。"""
     staged = inp.get("staged") or []
     if staged:
         mf = inp.get("cascade_manifest")
@@ -482,6 +482,21 @@ def _check_c4_commit_ledger(inp, issues, notes):
     # 现役段「文件」行的路径 token ⊆ HEAD 树 且 无工作树未提交残留——
     # 级联清单只列级联面，手工编辑件（脚本/文档）唯此防线（W721/W722 三处漏 add 实证）；
     # 缺「文件」行/无路径 token → NOTE（四件套缺件或形态不合规·起步策略，成文 pitfalls）
+def _c4_file_entry_check(f, _tree2, _dirty, _foreign, issues, notes):
+    """C4-f 单文件条目核对：入提交树 + 工作树残留（他方纯追加登记行豁免）。"""
+    if f not in _tree2:
+        issues.append("C4-f: 文件清单 %s 未入提交树（W537③·手工件漏 add 族）" % f)
+    elif f in _dirty:
+        if f in _foreign:
+            notes.append(
+                "C4-f: 文件清单 %s 工作树残留为并行批次登记行纯追加"
+                "（他方在途·非漏 add·W906 三态——以 HEAD 为准不重做）" % f
+            )
+        else:
+            issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
+def _c4_file_list_check(inp, issues, notes):
+    """C4-f：现役段「文件」行路径须入提交树且无工作树残留（W723）。"""
+    top = changelog_top(inp["changelog"])
     if top:
         has_line, fl = file_list_paths(inp["changelog"], top[1])
         if has_line is None:
@@ -491,19 +506,31 @@ def _check_c4_commit_ledger(inp, issues, notes):
         else:
             _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
             _dirty = set(inp.get("dirty") or [])
+    if top:
+        has_line, fl = file_list_paths(inp["changelog"], top[1])
+        if has_line is None:
+            notes.append("C4-f: 现役段缺「文件」行（四件套缺件·W723 起级联 precheck 强制）")
+        elif not fl:
+            notes.append("C4-f: 「文件」行无可解析路径 token（须写 repo 相对路径·见 pitfalls git 类）")
+        else:
+            _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
+            _dirty = set(inp.get("dirty") or [])
+            _foreign = inp.get("foreign_append_only") or set()
             for f in fl:
-                if f not in _tree2:
-                    issues.append("C4-f: 文件清单 %s 未入提交树（W537③·手工件漏 add 族）" % f)
-                elif f in _dirty:
-                    if f in (inp.get("foreign_append_only") or set()):
-                        notes.append(
-                            "C4-f: 文件清单 %s 工作树残留为并行批次登记行纯追加"
-                            "（他方在途·非漏 add·W906 三态——以 HEAD 为准不重做）" % f
-                        )
-                    else:
-                        issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
+                _c4_file_entry_check(f, _tree2, _dirty, _foreign, issues, notes)
+def _check_c4_commit_ledger(inp, issues, notes):
+    """C4：提交-版段对账 + 认领行强制（W720）+ 级联清单（C4-e·W722）+ 文件清单入库（C4-f·W723）。
 
-
+    W730 提取：浅克隆早退（仅 NOTE）；对账表登记即豁免（D2）。
+    """
+    if inp.get("shallow"):
+        notes.append("C4: 浅克隆环境（.git/shallow），提交对账跳过（pre-commit 本地为主执行点）")
+    return
+    reg = _c4_registered_ws(inp)
+    _c4_commit_ws_check(inp, reg, issues)
+    _c4_claim_row_check(inp, issues)
+    _c4_cascade_manifest_check(inp, issues, notes)
+    _c4_file_list_check(inp, issues, notes)
 def _check_stats_marker(m, where, stats, issues):
     """C5b 单标记对账（W830 提取：主叙述面与扩展面共用·判据一致防双源漂移）。"""
     key_name = m.group(2)
@@ -518,17 +545,8 @@ def _check_stats_marker(m, where, stats, issues):
         )
 
 
-def _check_c5_aggregate_stats(inp, issues, notes):
-    """C5 聚合数字对账 + C5b 实体标记 + C5c 裸数字报告（W703/W704）。
-
-    W730 提取：句式白名单 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明/CONTRIBUTING +
-    CHANGELOG 口径块）vs stats.json；标记键未登记/数字失配 fail-closed；裸聚合数字 W904 起判红。
-    stats 缺失 fail-closed 早退（原 else 分支等价）。
-    """
-    stats = inp.get("stats")
-    if not stats:
-        issues.append("C5: scripts/output/stats.json 缺失或不可解析——先跑 python scripts/stats.py（fail-closed）")
-        return
+def _c5_scan_lines(inp):
+    """C5 扫描面：CHANGELOG 口径块 + 现役叙述面逐行。"""
     scans = [("CHANGELOG 口径块", ln) for ln in RE_CHANGELOG_SCOPE.findall(inp["changelog"])]
     for key in C5_DOC_NAMES:
         text = inp[key]
@@ -538,6 +556,8 @@ def _check_c5_aggregate_stats(inp, issues, notes):
                 text = text[:cut]
         for i, ln in enumerate(text.splitlines(), 1):
             scans.append(("%s:%d" % (C5_DOC_NAMES[key], i), ln))
+def _c5_pattern_check(scans, stats, issues):
+    """C5：句式白名单数字 vs stats.json 对账。"""
     for where, ln in scans:
         if EXEMPT_MARK in ln:
             continue
@@ -565,6 +585,8 @@ def _check_c5_aggregate_stats(inp, issues, notes):
     #              原「行内含即整行跳」会吞掉后置豁免行上的标记对账·T30 负样本实证·现存零使用零迁移）
     #            ②命中后置豁免（W904 新增）：裸命中后紧跟（可隔空白）EXEMPT_MARK 只豁免该命中，
     #              行内其余判定（句式/标记对账）照跑——供「混排行」（如既有 stats 标记又含常量数字）精确豁免。
+def _c5_bare_agg_check(scans, stats, issues):
+    """C5c：裸聚合数字（W904 起判红）+ C5b 实体标记对账。"""
     bare_hits = []
     for where, ln in scans:
         if ln.lstrip().startswith(EXEMPT_MARK):
@@ -591,6 +613,8 @@ def _check_c5_aggregate_stats(inp, issues, notes):
         )
 
     # W830 扩展面 C5b 标记对账（只标记·不句式·不裸数字·rationale 见 c5b_extra_surfaces docstring）
+def _c5_extra_surfaces_check(inp, stats, issues):
+    """W830 扩展面 C5b 标记对账（只标记·不句式·不裸数字）。"""
     for rel, text in (inp.get("reports_extra") or {}).items():
         for i, ln in enumerate(text.splitlines(), 1):
             if EXEMPT_MARK in ln:
@@ -602,6 +626,8 @@ def _check_c5_aggregate_stats(inp, issues, notes):
     # 病根：坑表各主题标题写「（N 条）」、AGENTS 有总数与分项行、HANDOVER 有两处总数——
     # 四处全靠手改。实证 AGENTS 分项停在 25/25/15/10/28=109 长期无人核（总数声明已到 118），
     # 而 W1024 手算 118+4=121、实算为 122。此类「分项之和 vs 总数」偏差机器可查，不该靠人核。
+def _c5e_pitfall_counts(issues):
+    """C5e：坑表分项计数三向一致（W1025·W1044 补分项对拍）。"""
     try:
         _pf = os.path.join(ROOT, "docs", "agent", "pitfalls.md")
         _t = open(_pf, encoding="utf-8").read()
@@ -665,6 +691,22 @@ def _check_c5_aggregate_stats(inp, issues, notes):
         issues.append("C5e: 坑表分项对账不可读（%s）——fail-closed" % _e)
 
 
+def _check_c5_aggregate_stats(inp, issues, notes):
+    """C5 聚合数字对账 + C5b 实体标记 + C5c 裸数字报告（W703/W704）。
+
+    W730 提取：句式白名单 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明/CONTRIBUTING +
+    CHANGELOG 口径块）vs stats.json；标记键未登记/数字失配 fail-closed；裸聚合数字 W904 起判红。
+    stats 缺失 fail-closed 早退（原 else 分支等价）。
+    """
+    stats = inp.get("stats")
+    if not stats:
+        issues.append("C5: scripts/output/stats.json 缺失或不可解析——先跑 python scripts/stats.py（fail-closed）")
+    return
+    scans = _c5_scan_lines(inp)
+    _c5_pattern_check(scans, stats, issues)
+    _c5_bare_agg_check(scans, stats, issues)
+    _c5_extra_surfaces_check(inp, stats, issues)
+    _c5e_pitfall_counts(issues)
 def _check_c5d_stats_recheck(inp, issues):
     """C5d：stats.py --check（stats.json vs 磁盘实算）零差异背书（W718）。W730 提取。"""
     if not inp.get("stats_check_ok", False):
@@ -672,6 +714,32 @@ def _check_c5d_stats_recheck(inp, issues):
             "C5d: stats.json 与磁盘实算漂移（%s）——跑 python scripts/stats.py --w <批号> 刷新"
             % inp.get("stats_check_tail", "stats --check 未通过")
         )
+
+
+def c9_report_surfaces():
+    """C9 冲突标记对账的**方案报告扫描面**（W1130 立·根修我方 W1127 带入的缺陷）。
+
+    病根（W1127 实证）：C9 的 surfaces 只有 5 个治理文件（CHANGELOG / HANDOVER / 台账 /
+    AGENTS / STRUCTURE）⇒ **方案报告目录（含 计划方案/ 子目录）完全不在扫描面内** ⇒ 我方
+    W1127 合并冲突时把**未清理的冲突标记**带进 T79 报告并合入 main ⇒ 门禁仍报 0 FAIL
+    ⇒ 后续任何读该文件的工具/正则都可能被标记行误导。
+
+    与 C5b 的「计划方案/ 子目录刻意除外」**不冲突**：那条除外针对的是**聚合数字 / 实体标记
+    对账**（计划件是时点快照·其引用的基线数字随批次冻结·入面即假红）；而**冲突标记是结构
+    缺陷**，不是时点快照数字 ⇒ 不该被同一理由排除。⇒ 本扫描面覆盖
+    docs/11-方案报告/**/*.md 全递归（含 计划方案/）。
+
+    豁免：报告件若**刻意引用**冲突标记字面量（教学/复盘场景），行内带
+    <!--doc-sync:exempt--> 者跳过（结构缺陷不应静默豁免·须显式声明）。
+    """
+    base = os.path.join(ROOT, "docs", "11-方案报告")
+    out = []
+    for dirpath, dirnames, filenames in os.walk(base):
+        dirnames[:] = sorted(d for d in dirnames if d not in (".git", "__pycache__"))
+        for fn in sorted(filenames):
+            if fn.endswith(".md"):
+                out.append(os.path.join(dirpath, fn))
+    return out
 
 
 def _check_c9_conflict_marks(inp, issues):
@@ -691,11 +759,20 @@ def _check_c9_conflict_marks(inp, issues):
         "AGENTS.md": inp.get("agents", ""),
         "STRUCTURE.md": inp.get("structure", ""),
     }
+    # W1130：并入**方案报告目录**扫描面（根修「报告件不在 C9 扫描面 ⇒ 带标记入库仍 0 FAIL」）
+    surfaces.update(inp.get("c9_report_texts") or {})
     pat = re.compile(r"^(<<<<<<< |=======\s*$|>>>>>>> )", re.M)
     for name, text in surfaces.items():
         if not text:
             continue
-        hits = [i + 1 for i, ln in enumerate(text.split(chr(10))) if pat.match(ln)]
+        _is_report = name.startswith("docs/11-方案报告/")
+        hits = []
+        for i, ln in enumerate(text.split(chr(10))):
+            if not pat.match(ln):
+                continue
+            if _is_report and EXEMPT_MARK in ln:
+                continue  # 报告件显式豁免（刻意引用标记字面量）
+            hits.append(i + 1)
         if hits:
             issues.append("C9: %s 含 Git 冲突标记（L%d 等 %d 处）——治理面不得带标记入库" % (name, hits[0], len(hits)))
 
@@ -825,6 +902,11 @@ def gather():
         "shallow": os.path.exists(os.path.join(ROOT, ".git", "shallow")),
         # W889：GitHub 仓库主页展示位实况（.github/README.md 存在即抢占仓库主页）
         # W1052：C8 治理文档同段重复扫描面（判据与读取源解耦·self-test 可注入）
+        # W1130：C9 冲突标记对账的方案报告扫描面（结构缺陷·不随 C5b 的「计划方案/ 除外」）
+        "c9_report_texts": {
+            os.path.relpath(p, ROOT).replace(os.sep, "/"): rd(p)
+            for p in c9_report_surfaces() if os.path.exists(p)
+        },
         "c8_texts": {
             rel: rd(os.path.join(ROOT, rel)) if os.path.exists(os.path.join(ROOT, rel)) else "" for rel in C8_FILES
         },

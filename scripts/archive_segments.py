@@ -106,6 +106,47 @@ def _rule_seg_index(hits, src_text):
     return None
 
 
+def _tail_block_start(src_text):
+    """返回正本末尾文件级块的起始下标；无末尾块返回 None。
+
+    W1130 实证（两面下界对齐时触发）：归档迁出时的迁出块是 s[cut:]（一路到文件末尾）
+    => 末尾文件级块（# 更新日志标题 + 阅读契约 + Unreleased + 编号规则行（含编号规则串）
+    + 全站页数口径 + 维护契约）也被一起搬走 => 正本不再含编号规则串
+    => 版本面推进器 fail-closed「编号规则段上限未找到锚点」=> 整条收官链停摆。
+    正确行为：末尾块不属于任何批段 => 必须留在正本，不得随段迁出。
+    """
+    m = re.search(r"(?m)^# 更新日志\s*$", src_text)
+    return m.start() if m else None
+
+
+def split_tail_block(src_text, cut, tail_start):
+    """按「末尾文件级块」边界拆分迁出文本与留存文本。
+
+    返回 (moved_text, kept_text)：迁出块不含末尾块（留存在正本）；
+    tail_start 为 None 或 <= cut 时行为与原实现一致。
+    """
+    if tail_start is None or tail_start <= cut:
+        return src_text[cut:], src_text[:cut]
+    return src_text[cut:tail_start], src_text[:cut] + src_text[tail_start:]
+
+
+def _split_decl_blocks(src_text):
+    """抽出治理文档声明行（以「> **维护契约**」开头的引用行），返回 (remaining, decls)。
+
+    W1130 实证：file-index.md 的「> **维护契约**：本索引按 W 追加登记……」声明行位于段区**中部**，
+    体积模式迁出（迁出块 = s[cut:]）时随之被搬走 => 正本不再含「维护契约」
+    => 治理文档维护契约门禁判红。声明行不属于任何批段 => 必须留在正本。
+    """
+    lines = src_text.splitlines(True)
+    keep, decls = [], []
+    for _line in lines:
+        if _line.lstrip().startswith("> **维护契约**"):
+            decls.append(_line)
+        else:
+            keep.append(_line)
+    return "".join(keep), "".join(decls)
+
+
 def plan_by_size(src_text, re_seg, max_bytes, chunk):
     """W1119 体积阈值规划：每批迁出 chunk 个 W 段（最后一批可不足），循环直到正本 <= max_bytes。
     段为降序（最新在前）⇒ 迁出块恒为尾部（最老）连续段 ⇒ 与 move() 的 A1/A4 断言兼容。"""
@@ -149,6 +190,33 @@ def plan_to_boundary(src_text, re_seg, boundary):
     return cut, moved_ws
 
 
+def _split_for_move(src_text, cut):
+    """按「末尾文件级块」与「治理声明行」两种形态拆分迁出/留存文本。
+
+    返回 (moved_text, kept_text, tail_start)：
+    - 有末尾文件级块（CHANGELOG 形态）⇒ 迁出块止于末尾块起点，末尾块留在正本；
+    - 无末尾块（file-index 形态）⇒ 治理声明行（维护契约行）抽出并留存正本末尾。
+    """
+    tail = _tail_block_start(src_text)
+    moved, kept = split_tail_block(src_text, cut, tail)
+    if tail is not None and tail > cut:
+        return moved, kept, tail
+    body, decls = _split_decl_blocks(moved)
+    if decls:
+        moved = body
+        kept = kept + decls
+    return moved, kept, tail
+
+
+def _a3_ok(new_src, src_text, cut, tail):
+    """A3 断言辅助：留存前缀逐字节不变 + 末尾文件级块逐字节留在正本。"""
+    if not new_src.startswith(src_text[:cut]):
+        return False
+    if tail is not None and tail > cut:
+        return not new_src.endswith(src_text[tail:])
+    return True
+
+
 def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None):
     """执行单面迁移。返回 (迁出段号清单, 描述行清单)。dry-run 时零落盘。"""
     cfg = TARGETS[target]
@@ -173,8 +241,8 @@ def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None
         else:
             print("[SKIP] %s 段数 %d ≤ keep %d——未超窗·无段可迁" % (src_rel, n_seg, keep))
         return []
-    moved_text = s[cut:]
-    kept_text = s[:cut]
+    # W1130 根修：迁出块不得吞掉正本末尾文件级块（含编号规则串）=> 否则版本面推进器 fail-closed
+    moved_text, kept_text, _tail = _split_for_move(s, cut)
 
     # ---- A4 迁出块内部降序（块内段号）----
     moved_in_block = [_wnum(m) for m in re_seg.finditer(moved_text)]
@@ -225,12 +293,15 @@ def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None
     assert moved_arc.rstrip() and (moved_arc.rstrip() in new_arc), "A2 内容守恒失败（迁出块未出现在归档）"
 
     # ---- A3 锚点不动 ----
-    assert new_src == s[:cut], "A3 留存前缀被改动"
+    assert _a3_ok(new_src, s, cut, _tail), "A3 留存前缀被改动或末尾文件级块未留在正本"
     rule = re.search(r"（W001-W\d+）", s)
     if rule:
         # W1119 批量迁移订正：原断言比**全文**计数 ⇒ 迁出块带走「（W001-W####）」字样时计数必减 ⇒ 批量模式恒假红。
         # 意图是「编号规则行未被改动」⇒ 留存前缀逐字节不变（A3 主断言）已覆盖 ⇒ 收紧为「留存前缀内计数相等」·判据强度不降。
-        assert new_src.count(rule.group(0)) == s[:cut].count(rule.group(0)), "A3 编号规则行被改动"
+        _rule_base = s[:cut].count(rule.group(0))
+        if _tail is not None and _tail > cut:
+            _rule_base += s[_tail:].count(rule.group(0))
+        assert new_src.count(rule.group(0)) == _rule_base, "A3 编号规则行被改动"
     top_before = re_seg.search(s)
     top_after = re_seg.search(new_src)
     assert top_before and top_after and top_before.group(0) == top_after.group(0), "A3 顶段标题行被改动"
