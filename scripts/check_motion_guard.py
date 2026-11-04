@@ -36,10 +36,11 @@ SITE = os.path.join(ROOT, "site")
 # 标签名/属性名大小写不敏感（HTML 语义）⇒ 过滤型正则必须大小写不敏感：
 # 原写法 `<script` 只匹配小写 ⇒ 大写 `<SCRIPT>` 的内联块被整块漏扫（动效守卫漏判）；
 # 同理 `src=` 只匹配小写 ⇒ 大写 `SRC=` 的外链脚本会被误当内联块。
+# 结束标签允许尾随空白（`</script >` 是合法 HTML）⇒ 结束侧加 \s*。
 # 字符类写法（而非 re.IGNORECASE）⇒ 静态分析（CodeQL bad-html-filtering-regexp）可判定为已大小写不敏感。
 SCRIPT_RE = re.compile(
-    r"<[sS][cC][rR][iI][pP][tT](?![^>]*\b[sS][rR][cC]=)[^>]*>"
-    r"(.*?)</[sS][cC][rR][iI][pP][tT]>",
+    r"<[sS][cC][rR][iI][pP][tT](?![^>]*\b[sS][rR][cC]\s*=)[^>]*>"
+    r"(.*?)</[sS][cC][rR][iI][pP][tT]\s*>",
     re.DOTALL,
 )
 CALL_RE = re.compile(r"\.(duration|delay)\s*\(")

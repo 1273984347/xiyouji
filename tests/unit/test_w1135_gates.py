@@ -265,6 +265,31 @@ def test_motion_guard_uppercase_src_external_excluded_exit_0(tmp_path):
     _assert_green(_run(gate, cwd=tmp_path), "M1 正样本（大写 SRC= 外链被排除）")
 
 
+MOTION_UPPERCASE_SCRIPT_TAG_SPACE_END = """<!DOCTYPE html>
+<html lang="zh">
+<head><meta charset="utf-8"><title>W1136 大写标签 + 结束标签空白 负样本</title></head>
+<body>
+<SCRIPT>
+var MOYUN_RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+d3.selectAll('.bar').transition().duration(600);
+</SCRIPT >
+</body>
+</html>
+"""
+
+
+def test_motion_guard_negative_uppercase_script_tag_space_end_exit_1(tmp_path):
+    """M1 负样本：大写标签 + 结束标签尾随空白（</SCRIPT >·合法 HTML）⇒ 仍须被扫到并判红。"""
+    gate = _stage_gate(tmp_path, MOTION_GATE)
+    _write_motion_page(tmp_path, MOTION_UPPERCASE_SCRIPT_TAG_SPACE_END)
+
+    _assert_red(
+        _run(gate, cwd=tmp_path),
+        ["未套守卫的 BARE", ".duration(600)"],
+        "M1 负样本（大写 <SCRIPT> + 结束标签空白）",
+    )
+
+
 # ---------------------------------------------------------------------------
 # M2 assets/design 清单对拍
 # ---------------------------------------------------------------------------
