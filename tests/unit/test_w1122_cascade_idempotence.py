@@ -296,3 +296,115 @@ def test_locate_workflows_marker_finds_batch_marker():
     assert span is not None
     st, en = span
     assert "W1122" in s[st:en]
+
+
+# ---------------- 里程碑块链（按批号序·低号批不得占链首） ----------------
+#
+# 病根（W1122 批 PR #130 CI 实证）：里程碑块此前**无条件插到链首** ⇒ 低号批（W1122 < 现役
+# W1123）占据链首 ⇒ 第 31 门禁 C2「交接文档头链链首 ≡ CHANGELOG 顶段」判红（本地与 CI 同红）。
+# 与 AGENTS 脚注条目 / 交接头尾链同族：链式面必须按批号序落位。
+
+HANDOVER_SAMPLE = (
+    "# 交接文档\n\n"
+    "## 零、当前阻塞\n\n无\n\n"
+    "## 一、当前进度（W1123 新描述；更早批次详见 CHANGELOG.md）\n"
+    "- **W1123 新批次**：新内容\n"
+    "- **W1121 旧批次**：旧内容\n"
+    "> 历史概要（W1100 及更早）的详细记录见 CHANGELOG.md\n\n"
+    "## 二、下一步方向候选清单\n\n正文不应被吞\n"
+)
+
+
+def _ms_chain(s):
+    return [b[0] for b in bc._handover_milestone_blocks(s)]
+
+
+def test_milestone_insert_places_low_batch_by_number_order():
+    """正样本：低号批落段 ⇒ 插到按序位（不得占链首）。"""
+    out, st = bc._upsert_handover_milestone(
+        HANDOVER_SAMPLE, "- **W1122 测试批**：内容\n", "W1122", "\n")
+    assert st == "inserted"
+    assert _ms_chain(out) == [1123, 1122, 1121]
+    assert out.index("W1123") < out.index("W1122") < out.index("W1121")
+
+
+def test_milestone_upsert_is_idempotent_on_rerun():
+    """正样本：本批块已存在且位置正确 ⇒ 零变化（可重复执行）。"""
+    once, _ = bc._upsert_handover_milestone(
+        HANDOVER_SAMPLE, "- **W1122 测试批**：内容\n", "W1122", "\n")
+    twice, st = bc._upsert_handover_milestone(once, "- **W1122 测试批**：内容\n", "W1122", "\n")
+    assert st == "unchanged"
+    assert twice == once
+
+
+def test_milestone_moves_low_batch_off_chain_head():
+    """正样本：本批块占链首而链上有更高号 ⇒ 位置校正（第 31 门禁 C2 的根因修复）。"""
+    bad = HANDOVER_SAMPLE.replace(
+        "- **W1123 新批次**：新内容\n",
+        "- **W1122 测试批**：内容\n- **W1123 新批次**：新内容\n")
+    out, st = bc._upsert_handover_milestone(bad, "- **W1122 测试批**：内容\n", "W1122", "\n")
+    assert st == "moved"
+    assert _ms_chain(out) == [1123, 1122, 1121]
+    assert out.index("W1123") < out.index("W1122"), "低号批块不得占据链首"
+
+
+def test_milestone_replace_does_not_swallow_following_section():
+    """负样本：链尾块内容不一致 ⇒ 替换区间有界·不得吞掉后续章节与历史概要指针。"""
+    bad = HANDOVER_SAMPLE.replace(
+        "- **W1121 旧批次**：旧内容\n",
+        "- **W1121 旧批次**：旧内容\n- **W1120 更早**：更早内容\n")
+    out, st = bc._upsert_handover_milestone(bad, "- **W1120 更早**：新内容\n", "W1120", "\n")
+    assert st == "replaced"
+    assert "正文不应被吞" in out, "替换区间越界吞掉了后续章节正文"
+    assert "> 历史概要" in out, "替换区间越界吞掉了历史概要指针"
+
+
+# ---------------- 脚注条目区间（条目正文可含分号·不得累积副本） ----------------
+#
+# 病根（W1122 批 PR #130 工作树实证）：脚注条目终点此前按「下一个『；』」界定 ⇒ **条目正文
+# 本身含分号时区间被截断** ⇒ 每次重跑判定「内容不一致」⇒ 替换 ⇒ 残留尾巴 ⇒ 同号条目无限
+# 累积（实测脚注里累积到 4 份）。
+
+AGENTS_SAMPLE_SEMICOLON = (
+    "# AGENTS\n\n"
+    "规则正文。\n\n"
+    "*本文件由 AGENTS 维护；2026-11-04（W1122）条目甲；条目乙。；"
+    "2026-11-04（W1121）旧条目。如与上述权威文档冲突，以权威文档为准。*\n"
+)
+
+
+def test_agents_note_span_covers_whole_entry_containing_semicolon():
+    """正样本：条目正文含分号 ⇒ 定位区间必须覆盖整条（不得在内部分号处截断）。"""
+    spans = bc._locate_agents_note(AGENTS_SAMPLE_SEMICOLON, "W1122")
+    assert len(spans) == 1
+    st, en = spans[0]
+    seg = AGENTS_SAMPLE_SEMICOLON[st:en]
+    assert "条目甲" in seg and "条目乙" in seg, "条目区间在内部分号处被截断"
+    assert "W1121" not in seg
+
+
+def test_agents_note_span_ignores_batch_mentioned_outside_footnote():
+    """正样本：正文提及本批号 ⇒ 不得被误当作脚注条目定位。"""
+    s = AGENTS_SAMPLE_SEMICOLON.replace("规则正文。", "规则正文（W1122）。")
+    spans = bc._locate_agents_note(s, "W1122")
+    assert len(spans) == 1
+    st, _en = spans[0]
+    assert s[st:].startswith("2026-11-04（W1122）"), "定位到了脚注行之外的提及"
+
+
+def test_agents_face_collapses_duplicated_entries(monkeypatch):
+    """正样本：同号条目重复副本 ⇒ 收敛为唯一一条（旧缺陷曾累积到 4 份）。"""
+    dup = AGENTS_SAMPLE.replace(
+        "（W1121）旧条目。",
+        "（W1121）旧条目；2026-11-04（W1122）测试条目。；2026-11-04（W1122）测试条目。")
+    out = _agents_run(monkeypatch, dup)
+    assert out.count("（W1122）") == 1, "同号脚注条目重复未收敛"
+    assert out.count("测试条目") == 1
+
+
+def test_agents_face_rerun_does_not_accumulate_entries(monkeypatch):
+    """正样本：条目正文含分号时重跑 ⇒ 零变化（不得重复插入）。"""
+    once = _agents_run(monkeypatch, AGENTS_SAMPLE_SEMICOLON)
+    twice = _agents_run(monkeypatch, once)
+    assert twice.count("（W1122）") == 1
+    assert twice == once, "含分号条目在重跑后发生累积或改写"
