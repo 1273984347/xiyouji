@@ -12,7 +12,9 @@
 | `logo-lockup-light.svg` | 组合标（图形 + 《取经录》字标）矢量源 |
 | `icon-512.png` / `icon-192.png` | 应用图标（宣纸底 + 图形占 72%） |
 | `icon-maskable-512.png` | maskable 版（图形收至 56%，留圆形裁切安全区） |
-| `favicon-16/32/48.png` | 浏览器标签页 / 收藏夹 |
+| `favicon-16.png` / `favicon-32.png` / `favicon-48.png` | 浏览器标签页 / 收藏夹（多档） |
+| `current-icon-512.png` | 现有站点图标（对比用） |
+| `logo-lockup-light-sub.svg` | 组合标（带副标）矢量源 |
 | `favicon.ico` | 多档 ico（16/32/48） |
 
 ## 站点在用版本

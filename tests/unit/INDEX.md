@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（88）
+## 文件（89）
 
 ### Python 脚本
 
@@ -101,6 +101,7 @@
 - `test_w1130_c9_report_scope.py`
 - `test_w1132_scope_carried_owner.py`
 - `test_w1134_interaction_probes.py`
+- `test_w1135_gates.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

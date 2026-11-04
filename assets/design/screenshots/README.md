@@ -19,5 +19,5 @@
 
 ## 维护约定
 
-截图是**派生证据**，源在 `../tools/`（`preview_png.py` / `build_landing.py` 可重出）；
+截图是**派生证据**，源在 `../tools/`（`../tools/preview_png.py` / `../tools/build_landing.py` 可重出）；
 改了图形请重出后覆盖本目录，避免截图与源不一致。

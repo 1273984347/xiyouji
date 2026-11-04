@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Tumx8a26qFIZKhieFgKk3JC4zKU2Jh4BX0qaJywEq2Y=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rlFO5z107JjnDhNPzbgemlVktSN5SRuTwHFQoplswCc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 取经全路程图 · 详解西游记</title>
@@ -1868,7 +1868,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
             dot.transition()
                 .duration(MOYUN_RM?0:400)
-                .delay(i * 25)
+                .delay(MOYUN_RM?0:i * 25)
                 .attr("r", 7);
 
             // hover 行为
@@ -1966,7 +1966,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 100)
+            .delay(MOYUN_RM?0:((d, i) => i * 100))
             .style("opacity", 1);
 
         // 中心数字

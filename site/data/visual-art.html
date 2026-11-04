@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-gptDEzTqZ//657uypfPKfe9mvl79TZlhy86R/saR44U=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-AkCDJ9f6TfQ2EK0J5Xug3jBNfIZe1X+jhC9uMUcxBzI=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>视觉艺术 · 心经物质形态与气味地图 · 详解西游记</title>
@@ -2367,7 +2367,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke-width", 1.5)
             .style("cursor", "pointer")
             .style("filter", "drop-shadow(0 0 4px rgba(212,175,55,0.6))")
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 200 + i * 150).duration(MOYUN_RM?0:400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => 200 + i * 150)).duration(MOYUN_RM?0:400)
             .attr("r", d => d.wave_amplitude >= 1.0 ? 7 : 5);
 
         g.selectAll(".wave-dot")
@@ -2407,7 +2407,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => d.chapter.replace("第 ", "").replace(" 回", ""))
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 400 + i * 150).duration(MOYUN_RM?0:400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => 400 + i * 150)).duration(MOYUN_RM?0:400)
             .style("opacity", 0.9);
 
         g.selectAll(".wave-label-bottom")
@@ -2423,7 +2423,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("font-weight", "600")
             .style("opacity", 0)
             .text(d => d.location)
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 500 + i * 150).duration(MOYUN_RM?0:400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => 500 + i * 150)).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // X 轴标题
@@ -2691,7 +2691,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke-width", 2)
             .style("cursor", "pointer")
             .style("filter", "drop-shadow(0 1px 3px rgba(0,0,0,0.2))")
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 300 + i * 100).duration(MOYUN_RM?0:400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => 300 + i * 100)).duration(MOYUN_RM?0:400)
             .attr("r", d => 4 + d.intensity * 1.6);
 
         g.selectAll(".scent-dot")
@@ -2732,7 +2732,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("fill", d => d._color)
             .style("opacity", 0)
             .text(d => d.location)
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 400 + i * 100).duration(MOYUN_RM?0:400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => 400 + i * 100)).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // X 轴：地点序号
@@ -2749,7 +2749,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => "No." + d.n)
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 500 + i * 100).duration(MOYUN_RM?0:400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => 500 + i * 100)).duration(MOYUN_RM?0:400)
             .style("opacity", 0.8);
 
         // 标题

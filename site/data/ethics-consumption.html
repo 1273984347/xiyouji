@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-x+qaoxhWpuwX1fDkiucgP34Fv2lIHlGPig2FxGUALwI=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-7namyD0HtQJKFW6dWjnxiB2a5RWa4hXaOFVS23UZJ9A=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>伦理消费 · 坐骑权益与妖怪 IPO · 详解西游记</title>
@@ -2505,7 +2505,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("rx", 3)
                 .style("cursor", "pointer")
                 .transition().duration(MOYUN_RM?0:250)
-                .delay(i * 80).duration(MOYUN_RM?0:600)
+                .delay(MOYUN_RM?0:i * 80).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(f.rating)));
 
@@ -2519,7 +2519,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-family", "JetBrains Mono, monospace")
                 .style("opacity", 0)
                 .text(f.rating.toFixed(1))
-                .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 600).duration(MOYUN_RM?0:300)
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 80 + 600).duration(MOYUN_RM?0:300)
                 .style("opacity", 1);
 
             // 交互层
@@ -2731,7 +2731,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("fill", "var(--accent)")
             .attr("stroke", "#fff").attr("stroke-width", 2)
             .style("cursor", "pointer")
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => i * 120).duration(MOYUN_RM?0:500)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => i * 120)).duration(MOYUN_RM?0:500)
             .ease(d3.easeBackOut)
             .attr("r", d => d.name === "狮驼岭集团" ? 14 : 10);
 
@@ -2749,7 +2749,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("fill", "var(--ink)")
             .style("opacity", 0)
             .text(d => d.name)
-            .transition().duration(MOYUN_RM?0:250).delay((d, i) => i * 120 + 400).duration(MOYUN_RM?0:400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:((d, i) => i * 120 + 400)).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // 重新绑定交互

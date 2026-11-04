@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pERlng3p8vIiHXVAN4TGlRhBMCe8Fu1gN2ezzyrIiVQ=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cXo8kjlK14FnNZm/2bKr6PFsCe5yu3tuJR4GFVlXiNQ=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队 MBTI 动态演变图 · 详解西游记</title>
@@ -1679,13 +1679,13 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             radarState.paths[idx]
                 .datum(values)
                 .transition()
-                .duration(DUR)
+                .duration(MOYUN_RM?0:DUR)
                 .attr("d", radarState.lineGen);
 
             radarState.vertexGroups[idx].selectAll("circle")
                 .data(values)
                 .transition()
-                .duration(DUR)
+                .duration(MOYUN_RM?0:DUR)
                 .attr("cx", (v, i) => cx + rScale(v) * Math.cos(angle(i)))
                 .attr("cy", (v, i) => cy + rScale(v) * Math.sin(angle(i)));
         });

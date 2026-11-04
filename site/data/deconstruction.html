@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-S/UJH/bjj6NXlMNgMTgR39qUF/zKVj2HijBOnr562v0=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-027RutP+gQCujYwYNWgirw2xj55qXUxR8VsGkXEggWI=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>解构作品与东亚再创作 · 详解西游记</title>
@@ -2081,7 +2081,7 @@ function renderTreemap(opts){
 
         points.transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 60)
+            .delay(MOYUN_RM?0:((d, i) => i * 60))
             .attr("r", d => 9);
 
         // hover 事件
@@ -2127,7 +2127,7 @@ function renderTreemap(opts){
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:500)
-            .delay((d, i) => 600 + i * 40)
+            .delay(MOYUN_RM?0:((d, i) => 600 + i * 40))
             .style("opacity", 1);
 
         // 图例
@@ -2272,7 +2272,7 @@ function renderTreemap(opts){
             .attr("opacity", 0.9)
             .transition()
             .duration(MOYUN_RM?0:500)
-            .delay((d, i) => i * 60)
+            .delay(MOYUN_RM?0:((d, i) => i * 60))
             .attr("r", 7);
 
         // 文本（年份 + 简称）
@@ -2286,7 +2286,7 @@ function renderTreemap(opts){
             .text(d => d.year_num)
             .transition()
             .duration(MOYUN_RM?0:400)
-            .delay((d, i) => 300 + i * 60)
+            .delay(MOYUN_RM?0:((d, i) => 300 + i * 60))
             .style("opacity", 1);
 
         items.append("text")
@@ -2300,7 +2300,7 @@ function renderTreemap(opts){
             })
             .transition()
             .duration(MOYUN_RM?0:400)
-            .delay((d, i) => 350 + i * 60)
+            .delay(MOYUN_RM?0:((d, i) => 350 + i * 60))
             .style("opacity", 1);
 
         // hover

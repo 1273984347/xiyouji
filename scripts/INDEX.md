@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（189）
+## 文件（192）
 
 ### Markdown 文档
 
@@ -111,6 +111,7 @@
 - `check_css_var_selfref.py`
 - `check_data_copy_chain.py`
 - `check_db_schema.py`
+- `check_design_asset_manifest.py`
 - `check_design_doc_drift.py`
 - `check_doc_numbers.py`
 - `check_doc_size_budget.py`
@@ -133,6 +134,7 @@
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
 - `check_motion_ban.py`
+- `check_motion_guard.py`
 - `check_no_brand_refs.py`
 - `check_no_goatcounter.py`
 - `check_page_admission.py`
@@ -152,6 +154,7 @@
 - `check_story_timeline_sync.py`
 - `check_structure.py`
 - `check_token_coverage.py`
+- `check_tooltip_spacing.py`
 - `check_untracked.py`
 - `check_w_range_literal.py`
 - `ci_sim.py`
