@@ -8,6 +8,7 @@
 > 本文件用于跨 session 交接，记录当前进度、下一步可推进方向、方法论沉淀与待办事项。
 > 创建于 2026-07-25（v2.0.41 W068 后）
 > 最后更新：2026-11-04（W1136 并行会话统筹调度批）·2026-11-04（W1130 C9 扫描面扩展 + 台账回填与腾窗 + 两面下界根修 + 三条教训入坑表）·（W1129 及更早批次详见 CHANGELOG.md）
+> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（283 条坑·六主题——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（57 槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
 > 与 [CHANGELOG.md](CHANGELOG.md)（变更日志）/ [STRUCTURE.md](STRUCTURE.md)（目录结构）/ [README.md](README.md)（项目说明）/ [docs/00-导读/项目说明.md](docs/00-导读/项目说明.md)（项目状态）配套使用。
 > **维护契约（防乱写）**：本文件是项目进度中枢，只允许结构性编辑——① 保持「零 / 一 / 二 / 三」四段骨架不变；②「最后更新」行只写最新 1–3 批摘要（每批 ≤ 1 行），**禁止把历史批次堆进该行**（历史已归档 / 在 CHANGELOG）；③ 每批详细记录只写 CHANGELOG + 归档（历史段禁改）；④ 任何「当前 HEAD / 当前版本」表述必须与 `git rev-parse --short HEAD` 核对后更新；⑤ 本文件是状态快照，与 CHANGELOG（时间线）冲突时以 CHANGELOG 为准。
 > **历史归档**：v2.0.39-v2.2.49（W066-W280）段的详细进度记录已迁移至 [archive/docs/HANDOVER-ARCHIVE.md](archive/docs/HANDOVER-ARCHIVE.md)。本文件仅保留 v2.2.50+（W277）现役记录与全局概要。
@@ -42,6 +43,7 @@
 - **收官链 py_compile 语法自检门禁**：三态清单逐件编译 · 语法错即中止整链 · 负样本实测拦停
 - **PR 节奏纪律变更 + 提交范围门禁多批归属支持**：回填并入下批 · 同会话当日一 PR · 多批归属取并集
 - **W1136 并行会话统筹调度批**（协调层·零页面内容改动·不新增门禁槽 ⇒ 门禁 62 段不变·**新增坑表 1 条 E-185 ⇒ 计数链 268 → 269**）：① **实读全部并行面建占用矩阵**：12 会话 / 6 工作树 / 预约表 / 台账正本 58 行 + 归档 416 行 / README §六 全文口径 86 行（跨三段分布）/ 坑表 268 条 / CHANGELOG 顶段 W1129 / 门禁 57 槽 ⇒ 定位 9 类碰撞（C1~C9）并逐项裁决 ② **登记号仲裁**：§六 实测重复号 [27,35,36,69,74]（35/36 均为 T-29 ⇒ 同号两行非缺号·补第三行更糟）⇒ 裁定 W1133 批撤销补登记并只占 96、**97 号空出**留 §六 治理批 ③ **写顺序仲裁**：touches 实测 W1133∩W1130=7 面 / W1132∩W1130=6 面 / W1135∩W1130=5 面 ⇒ 强制串行·W1130 批先收官 ④ **计数链基线纠错**：preflight 打印 267 系旧快照 ⇒ origin/main 实算 268 为基线 ⑤ **双锚校验纪律**（本轮 P0 澄清产出·已落 E-185）：定位登记表须章节标题 + 表头列双锚定、禁全文兜底、禁按章节区间单点取段 ⇒ 「登记行数骤减」先排锚点错位再判数据丢失 ⑥ **主树占用风险处置 + PR #138 冲突处置指引 + PR 节奏按 2026-11-04 二次口径**（回填类不单开 PR / 同会话当日合并一个 PR / **跨批合并为一个集成分支·一次门禁·一个 PR**）
+- **W1133 台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复**（登记面修复 + 沉淀面入表 + 回填类订正批·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 271 → 277 条）：
 - **W1132 第 51 槽 merge 带入面归属劫持根修**：兜底分支透传带入面 · 单测 4 例 · 计数链不动
 - **W1130 C9 扫描面扩展 + 台账回填与腾窗 + 两面下界根修 + 三条教训入坑表**（治理面根修批·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 268 → 271 条）：
   - C9 扫描面从 5 个治理文件扩到 docs/11-方案报告/ 全树递归，扩展落地后当场抓到本方 T79 报告残留冲突标记 3 处并清理；
@@ -147,6 +149,7 @@
 > [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（271 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（57 槽）；
 > [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（269 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（57 槽）；
 > [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（274 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（57 槽）；
+> [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（283 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（57 槽）；
 > 诊断 SOP 读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)；
 > 本区历史叙事全文已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查）。
 ## 四、待办事项（短期）
@@ -267,6 +270,7 @@ python detect_unwrapped_tables.py  # 表格溢出扫描
 > **雷区权威 = [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（271 条·六主题·含 shell 场景查坑表）**；
 > **雷区权威 = [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（269 条·六主题·含 shell 场景查坑表）**；
 > **雷区权威 = [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（274 条·六主题·含 shell 场景查坑表）**；
+> **雷区权威 = [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（283 条·六主题·含 shell 场景查坑表）**；
 > 本区历史雷区叙事已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查勿通读）。
 ## 九、使用说明
 
