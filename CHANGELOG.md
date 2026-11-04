@@ -1,3 +1,19 @@
+### W1126（2026-11-04）：截图审查 scope 判定根修（EN 搜索页定向 + 搜索索引内容级免审）
+
+> **来源**：用户 2026-11-04「为什么不直接在 main 分支进行」追问后引出「为什么 Screenshot Review 每次都要跑」诊断 → 用户选定「把 B+C 方案落成 W1126 的施工计划」。
+>
+> - **文件**：.github/workflows/screenshot-review.yml、scripts/check_screenshot_scope.py、tests/unit/test_w1126_screenshot_scope.py、docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、docs/agent/pitfalls.md、scripts/output/_w1126_spec.json、scripts/output/_cascade_files_W1126.txt、docs/INDEX.md、scripts/output/INDEX.md、scripts/output/README.md、scripts/output/tools-inventory.md、scripts/output/stats.json、site/data/search.html、site/en/search.html。
+
+**一、诊断根因（三段错配·非配置过严）**：Screenshot Review 每批必跑的真实原因 = ① 收官链每批必改 `site/en/search.html`（版本面推进 + 搜索索引刷新）② 该文件既不在页脚版本号免审名单，`site/*` 的 `*` 又不跨 `/` ⇒ 匹配不到 `site/data/*` 的 targeted 分支 ③ 于是掉进「未知路径 ⇒ 保守全量」兜底 ⇒ 为 2 行零视觉改动付全站 88 页截图代价。PR #130 实测坐实：39 个改动文件逐文件复现，`site/en/search.html` 判定为 FULL，其余 4 个页脚页 SKIP、`site/data/search.html` TARGETED；该文件实际改动仅 2 行（1 行 CSP `sha256-` 哈希 + 1 行 230,455 字符的内嵌搜索索引常量）⇒ 零布局改动、零样式改动、零 DOM 结构改动。
+
+**二、B+C 两条修法（判据强度不降）**：**B** 新增 `site/en/*` ⇒ targeted 分支（截该页 + 入口页·保留该页视觉审查强度·只削范围）；**C** 内容级免审判据（变更行集合 ⊆ {CSP 哈希行, 内嵌索引数据行} ⇒ 免审·白名单式最保守·任一未识别行变化即不 skip）。**判据抽为仓内脚本** `scripts/check_screenshot_scope.py`（单一事实源·可单测·可复算·workflow 只调用不内联）。
+
+**三、协作事故与隔离处置（DV-03）**：施工中并行会话于 15:18:32 执行 `reset: moving to origin/main`（reflog 实测）⇒ 清空共享工作树未提交内容 ⇒ 我方已落盘的 T76 文档 / spec / 级联清单三件被清除（reflog + `git log --all` + `ls-files` 三方核对确认从未提交、无对象可恢复）⇒ 依 AGENTS 铁律 24 迁独立 worktree `D:/xiyouji-w1126` 重建，共享树 31 件他方在途改动**不动·不代提·不回滚**。
+
+**四、验证**：第 48 门禁计划方案合规 0 FAIL（T76 全项符合）· 第 51 门禁提交范围 0 FAIL（归属落 W1126）· 第 46 门禁搜索索引新鲜度 0 FAIL（zh 953 / en 996 与生成器实算一致）· CSP 856 页 0 漂移 · docs 全量链接 5706 条 0 断链 · 第 54 槽坑表编号唯一性 0 FAIL。
+
+> - **状态**：已收官（截图审查 scope 判定根修 + B/C 两规则落地 + 判据脚本化 + 单测自证；台账 W1122 行回填并入本批）
+
 ### W1124（2026-11-04）：治理收尾批·教训入坑表 + 重建入口收进收官链
 
 > **来源**：T74 报告遗留 R-A（重建入口收进收官链）/ R-C（里程碑滚动重跑守卫）/ R-D（教训入坑表）· 归集自 W1122 批收官登记。
@@ -1347,7 +1363,7 @@ probe_error 0 页 · 影子分层报数结构性与缺口分离清晰。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1124），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1126），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
