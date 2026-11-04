@@ -108,7 +108,13 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
 
     W1112 收官笔·独立盲审 M1：STEPS 常量与 main() 实现是**双写** ⇒ 只断言 STEPS 顺序时，
     改 main() 顺序而不动 STEPS 仍全绿。⇒ 此例锁**实际调用序列**：
-    add -> refresh -> index(搜索/文档) -> stats -> csp -> cspcheck。
+    add -> refresh -> stats -> index(搜索/文档) -> csp -> cspcheck。
+
+    **W1117 订正**（跨批改动·留痕见 CHANGELOG W1117 段与 T68 §2.2 B-06）：
+    原断言把 index 排在 stats **之前**；W1117 实测该序致**内嵌索引陈旧**——
+    版本面推进（versions）会改 README/STRUCTURE/项目说明等 docs 条目 ⇒ 索引若早于 versions 生成，
+    内嵌索引不含推进后的内容 ⇒ 第 46 槽「搜索索引新鲜度」判红（本批实测：字段漂移 + 内嵌索引陈旧）。
+    ⇒ index 步改到 versions 之后（versions 仍紧邻 stats 之后 ⇒ 并行会话 W1116 的四条顺序断言全成立）。
     """
     calls = []
 
@@ -134,4 +140,9 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     i_stat = first(lambda c: 'stats.py' in c)
     i_csp = first(lambda c: 'generate_csp.py' in c and '--check' not in c)
     i_chk = first(lambda c: 'generate_csp.py' in c and '--check' in c)
-    assert i_add < i_ref < i_idx < i_doc < i_stat < i_csp < i_chk, calls
+    assert i_add < i_ref < i_stat < i_idx < i_doc < i_csp < i_chk, calls
+    # index 步须在 versions 步之后（见 docstring·W1117）⇒ versions 不经 run() 可见，故断言声明位置
+    order = bc.step_order()
+    assert order.index('index') > order.index('versions')
+    assert order.index('versions') == order.index('stats') + 1
+    assert order[-2:] == ['csp', 'cspcheck']

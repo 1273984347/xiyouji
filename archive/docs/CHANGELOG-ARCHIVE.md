@@ -16,6 +16,26 @@
 
 > **2026-11-02（W994 迁出 110 段·W560-W672 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W995（2026-10-28）：tier2 按W段拆分批（政策落地·archive_tier2 自持闭环·提示位扩展）
+
+
+
+> **来源**：主人 2026-10-28 授权「按 W 段拆分文件」（tier2 容器 1044KB 破 1MB 的政策裁决）+ W994 延后的提示位扩展（W992 校准提交 27281553 落地后错峰补上）。
+
+> - **文件**：archive/docs/CHANGELOG-ARCHIVE-tier2.md、archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md、scripts/archive_tier2.py、scripts/check_archive_health.py、scripts/batch_cascade.py、scripts/verify_delivery.py、archive/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w995_spec.json、scripts/output/_cascade_files_W995.txt。
+
+**tier2 按 W 段拆分（政策落地）**：CHANGELOG-ARCHIVE-tier2.md 1044KB→**746KB**（W001-W399·210 段留存）+ 新建范围件 **CHANGELOG-ARCHIVE-tier2-W400-W559.md**（299KB·144 段·范围命名约定首件）——拆分脚本守恒三道+号域断言（留存全 <400·迁出全 ≥400）零落盘前置。**约定定形**：tier2 容器范围命名 `*-tier2-W<lo>-W<hi>.md`·单件 ≤1MB。
+
+**archive_tier2 追加逻辑升级（自持闭环）**：追加前容量判断——容器现体积+本次迁出 >1MB → 自动开范围命名新件（合规头部生成），tier-2 递增不再破线；LIMIT 常量化。
+
+**探针 T1b 升格**：tier2 破线从「登记观察」升为 problem（strict 判红——拆分约定落地后已可执行）+ glob 扩至范围命名件 + run(prefix) 参数（供级联提示位复用）。
+
+**提示位扩展（W994 延后件）**：batch_cascade 收官提示位独立尾部块新增——[ARCHIVE] 归档健康行（探针 T1-T4·prefix 复用）+ [TMPE] 上次清理活动日期（.journal 最新落笔·清理节奏可见性）。verify_delivery ARCHIVE_DOCS 登记 +2（§11.2「tier2 须登记」条款）；archive/README 台账 2 行 + 结构树。
+
+**验证**：拆分守恒断言 + archive_tier2/check_archive_health --self-test 双过 + 单测 5/5 + 探针 strict rc=0（三件 tier2 全 ≤1MB）+ 提示位直测（[ARCHIVE] 前缀行与清理日期行在位）+ 全量 verify rc=0 见状态行。
+
+> - **状态**：已收官（`71a1add4`·verify 全量 rc=0 + 单测 5/5 + 自测双过·tier2 三件全 ≤1MB·提示位四件齐）
+
 ### W994（2026-10-28）：归档系统打磨批（tier-2 规则机器化：探针+常驻工具+双件实跑回线）
 
 

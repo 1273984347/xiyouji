@@ -15,6 +15,35 @@
 **认领登记 W1118**（主仓共享区占号 session=mvs_1d2745db…·preflight touches 交集检查通过）。
 
 **验证**：门禁 62 段 0 FAIL · 坑表 255 条 0 重号 · 两个 workflow YAML 解析通过 · 台账正本数据行不超过窗口 60。
+### W1117（2026-11-04）：版本面幂等修复与编号规则并入版本面（修描述含分号时二次推进失配）
+> **来源**：并行会话 W1113 批独立复核实测（2026-11-04）——我方 W1114 批的版本面推进器**在批次描述含分号时，二次推进会 fail-closed**（非幂等）⇒ 我方 W1114 报告与 CHANGELOG 段中「六个文件全『已是目标态』」的表述在该形态下不成立 ⇒ 本批根修并订正该表述。
+> - **文件**：`scripts/version_surface.py` · `scripts/batch_cascade.py` · `scripts/batch_closeout.py` · `scripts/backfill_changelog.py` · `tests/unit/test_w1117_version_surface_idempotence.py` · `tests/unit/test_w1102_batch_closeout.py` · `scripts/output/_w1117_spec.json` · `docs/11-方案报告/计划方案/T68-任务计划执行与经验沉淀报告-2026-11-04.md` · `docs/11-方案报告/计划方案/T65-任务计划执行与经验沉淀报告-2026-11-03.md` · `docs/11-方案报告/README.md` · `docs/00-导读/W批次编号对账表.md` · `CHANGELOG.md` · `scripts/output/file-index.md` · `archive/docs/CHANGELOG-ARCHIVE.md` · `archive/docs/file-index-ARCHIVE.md`
+
+**本批要点**（工具层·零页面内容逻辑改动·不新增条目 => 计数链条数不变）：
+
+① **根修版本面推进的二次失配**：交接文档「一、当前进度」标题与「当前 HEAD」句的描述匹配段原为 `[^；]*`（隐含假设描述不含分号）⇒ 描述一旦含分号，第一次推进后文本出现两个分号，第二次推进即正则失配而 fail-closed ⇒ 非幂等。⇒ 改为 `[^
+）]*`（行内·容许分号·不跨行·遇右括号止）⇒ 二次推进零变化。
+
+② **尾部锚点唯一性断言**：描述若含右括号会使正则提前闭合 ⇒ 断言尾部锚点各恰一处，否则 **fail-closed**（明确报错·不静默产出坏文本）⇒ 该面从「静默失效」改为「显式失效」。
+
+③ **批次级单调守卫（低号批不回退现役面）**：版本面表达的是「**现在是什么**」⇒ 只能指向**最高号**批次。落段批号与合并次序可以不一致（并行会话乱序合并：对方 W1118 先合入 main，我方 W1117 后落段）⇒ 原语义会把 README / STRUCTURE / 项目说明 / CITATION / workflows README / HANDOVER / 编号规则段**全部回退**到低号，抹掉已合并批次的现役标记（且与 `backfill_changelog.py` 明文的「当前态六面该指向最高号」相悖）⇒ 推进器改为**单调**：目标批号 ≤ 该文件现役批号 ⇒ 该文件零变化（不回退·不 fail-closed）；编号规则段上限同步改为只升不降（与 `backfill_changelog.py` 同名规则一致）。
+
+④ **CHANGELOG 编号规则段上限并入版本面**：原由级联在插段时一并改写（与段插入耦合·属非幂等面）⇒ 本批划为**版本面字面量**（新增 `advance_changelog_rule` 并入 POINTS），级联改为**调用同一实现**（单一事实源·只引用不复制·幂等）⇒ 今后随版本面自动推进，**不再需要手工 bump**。口径区分留痕：**历史段本体不改**（只订正新增/修改段）vs **编号规则段属现役面可推进**。
+
+⑤ **收官链 index 步移到 versions 之后**：版本面推进会改 README / STRUCTURE / 项目说明等 docs 条目 ⇒ 索引若早于推进则内嵌索引陈旧（第 46 槽判红）⇒ 步序改为 precheck → selfref → add → refresh → stats → versions → index → docnums → regsurface → csp → cspcheck（csp / cspcheck 恒为末两步）。
+
+⑥ **落段方式改用仓内既有工具**：本批号低于已合入 main 的 W1118 ⇒ 按 `backfill_changelog.py` 的既定语义「段按批号降序排列·新段插在第一个号小于自己的段之前·当前态六面只指向最高号」，本段落在 **W1118 段之下、W1116 段之上**（降序位），编号规则段上限只升不降（保持 W001-W1118）；两面先各腾窗一段（正本 110 → 109）再插段，落段后正本与索引各 110 段（窗口 110）。
+
+⑦ **补段工具的完整性检查顺序根修**：补段工具原在判断「该号是否已立段」**之前**对**每一个** spec 做字段完整性检查 ⇒ 任何一个**已立段**的老 spec（实测 `_w1077_spec.json` 缺 `changelog_body` / `milestone_block` / `agents_note`）都会把补段流程整个阻断（本批实测 AssertionError）⇒ 检查移到「未立段」判定之后（完整性只对**待补段**有意义·待补段缺字段仍 fail-closed·判据强度不降）。
+
+⑧ **二次幂等自证与单调守卫自证**：本批单测共 9 例（幂等自证 5 例：描述含分号 / 含右括号 / 两者皆含 / 编号规则 bump 幂等 / 逐文件逐点二次零变化；单调守卫 4 例：现役批号提取 / 低号批不回退 / 高号批正常推进不误伤 / 编号规则只升不降）⇒ 全量 pytest **1228 passed / 3 skipped / 0 failed**（本地工地的历史一次性探针已按治理处置移出仓外·此前本地恒 2 failed 的污染源已清零）· 双档 ruff 全绿。
+
+⑨ **对 W1114 表述的订正**：W1114 段与 T65 报告称「六个文件全『已是目标态』」，该读数在描述**不含**分号时成立（实测），在**含**分号时因上述缺陷不成立 ⇒ 本段与 T65 §2.6 的相应表述一并订正为**按描述形态分述**（W1114 段本体不改·历史段禁改·以本段留痕）。
+
+⑩ **提交范围门禁的归属判定扩展（乱序落段）**：第 51 门禁（提交范围）原判据只认「索引态 CHANGELOG `**顶段**`」⇒ 隐含假设「新增批必是顶段」。低号批在更高号批之后落段（对方 W1118 先合入 main，我方 W1117 后落段）⇒ 本提交新增的段**不在顶位** ⇒ 归属错落到 W1118 ⇒ 拿他批 spec 当应动全集 ⇒ 假红「索引含本批 spec 之外的文件」。⇒ 归属判定扩展为「索引态相对 HEAD 的新增段集合；恰有 1 个新增段 ⇒ 归属它（无论是否顶位）」，多个或无新增段时沿用原判据（顶段优先·回填取 HEAD）⇒ **判据强度不降**（仍要求索引态路径集 ⊆ 归属批 spec 的应动全集），并在单测中**追加**一例（不改他人既有断言）。
+
+**验证**：门禁 62 段 0 FAIL · 全量 pytest 1228 passed / 3 skipped · CSP 856 页零漂移 · CHANGELOG 与 file-index 正本各 110 段（窗口 110）· 台账正本 60 数据行（窗口 60）· 坑表不新增条目。
+
 ### W1116（2026-11-04）：收官链自检闸（文案数字对表 + 登记面一致性）
 
 > **来源**：跨批复盘（W1105~W1117）共识 P0-1 / P0-2 · 用户 2026-11-04 批准。
@@ -2054,24 +2083,4 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **验证**：--self-test 过（2 正例+4 负例+C2 三态）+ 实树 rc=0 + ruff 0 + 全量 verify 见状态行。
 
 > - **状态**：已收官（`80d2b9c6`·verify 全量 rc=0 + self-test 含 C2 三态 + 实树 59 行窗口零存量误报——单段流程批·级联即收官）
-
-### W995（2026-10-28）：tier2 按W段拆分批（政策落地·archive_tier2 自持闭环·提示位扩展）
-
-
-
-> **来源**：主人 2026-10-28 授权「按 W 段拆分文件」（tier2 容器 1044KB 破 1MB 的政策裁决）+ W994 延后的提示位扩展（W992 校准提交 27281553 落地后错峰补上）。
-
-> - **文件**：archive/docs/CHANGELOG-ARCHIVE-tier2.md、archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md、scripts/archive_tier2.py、scripts/check_archive_health.py、scripts/batch_cascade.py、scripts/verify_delivery.py、archive/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w995_spec.json、scripts/output/_cascade_files_W995.txt。
-
-**tier2 按 W 段拆分（政策落地）**：CHANGELOG-ARCHIVE-tier2.md 1044KB→**746KB**（W001-W399·210 段留存）+ 新建范围件 **CHANGELOG-ARCHIVE-tier2-W400-W559.md**（299KB·144 段·范围命名约定首件）——拆分脚本守恒三道+号域断言（留存全 <400·迁出全 ≥400）零落盘前置。**约定定形**：tier2 容器范围命名 `*-tier2-W<lo>-W<hi>.md`·单件 ≤1MB。
-
-**archive_tier2 追加逻辑升级（自持闭环）**：追加前容量判断——容器现体积+本次迁出 >1MB → 自动开范围命名新件（合规头部生成），tier-2 递增不再破线；LIMIT 常量化。
-
-**探针 T1b 升格**：tier2 破线从「登记观察」升为 problem（strict 判红——拆分约定落地后已可执行）+ glob 扩至范围命名件 + run(prefix) 参数（供级联提示位复用）。
-
-**提示位扩展（W994 延后件）**：batch_cascade 收官提示位独立尾部块新增——[ARCHIVE] 归档健康行（探针 T1-T4·prefix 复用）+ [TMPE] 上次清理活动日期（.journal 最新落笔·清理节奏可见性）。verify_delivery ARCHIVE_DOCS 登记 +2（§11.2「tier2 须登记」条款）；archive/README 台账 2 行 + 结构树。
-
-**验证**：拆分守恒断言 + archive_tier2/check_archive_health --self-test 双过 + 单测 5/5 + 探针 strict rc=0（三件 tier2 全 ≤1MB）+ 提示位直测（[ARCHIVE] 前缀行与清理日期行在位）+ 全量 verify rc=0 见状态行。
-
-> - **状态**：已收官（`71a1add4`·verify 全量 rc=0 + 单测 5/5 + 自测双过·tier2 三件全 ≤1MB·提示位四件齐）
 
