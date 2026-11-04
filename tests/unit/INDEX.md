@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（77）
+## 文件（79）
 
 ### Python 脚本
 
@@ -88,6 +88,8 @@
 - `test_w1120_cascade_file_index_idempotence.py`
 - `test_w1120_size_threshold_and_rebuild.py`
 - `test_w1121_reserve_w.py`
+- `test_w1122_cascade_idempotence.py`
+- `test_w1122_pending_faces.py`
 - `test_w1123_commit_scope_merge.py`
 - `test_w1123_reserve_release.py`
 - `test_w851_j1_name_audit.py`
