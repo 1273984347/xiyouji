@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（185）
+## 文件（186）
 
 ### Markdown 文档
 
@@ -144,6 +144,7 @@
 - `check_registration_surface.py`
 - `check_repo_layout.py`
 - `check_review_trigger.py`
+- `check_screenshot_scope.py`
 - `check_script_coverage.py`
 - `check_search_index_fresh.py`
 - `check_seo_head.py`
