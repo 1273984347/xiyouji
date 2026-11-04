@@ -8,5 +8,6 @@ site/index.html
 site/data/cross-time-danmaku.html
 site/data/tag-cloud.html
 site/dukou-engine.html
+archive/docs/AGENTS-ARCHIVE.md
 AGENTS.md
 CITATION.cff
