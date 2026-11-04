@@ -62,6 +62,52 @@
 | scripts/output/_w1123_spec.json | W1123 | 本批工具/产物 |
 | scripts/output/_cascade_files_W1123.txt | W1123 | 本批工具/产物 |
 
+## W1122 级联插入型面幂等原语 + 补段工具双面判定根修（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/cascade_idempotence.py | W1122 | 新增：级联插入型面幂等 upsert 原语（单一事实源·不存在⇒插入/一致⇒零变化/不一致⇒替换） |
+| scripts/batch_cascade.py | W1122 | 改：六个插入型面接幂等原语（交接头链与里程碑块/AGENTS 脚注/workflows 尾标记/页脚链 token/CHANGELOG 段/file-index 段） |
+| scripts/backfill_changelog.py | W1122 | 改：立段判定改双面独立（CHANGELOG 面与 file-index 面分判·只补缺的一面·历史缺口须显式确认才补） |
+| tests/unit/test_w1122_cascade_idempotence.py | W1122 | 新增：幂等原语与六面接入自证 19 例 |
+| tests/unit/test_w1122_pending_faces.py | W1122 | 新增：双面独立判定自证 5 例 |
+| docs/00-导读/W批次编号对账表.md | W1122 | 改：W1120 与 W1121 两行回填 + W1122 认领行登记 |
+| docs/11-方案报告/计划方案/T74-任务计划执行与经验沉淀报告-2026-11-04.md | W1122 | 新增：本批任务计划执行与经验沉淀报告 |
+| docs/11-方案报告/README.md | W1122 | 改：登记第 89 号 |
+| scripts/output/_w1122_spec.json | W1122 | 新增：本批 spec（应动全集单一事实源） |
+| scripts/output/_cascade_files_W1122.txt | W1122 | 新增：级联文件清单 |
+| CHANGELOG.md | W1122 | 改：W1122 段 |
+| scripts/output/file-index.md | W1122 | 改：W1122 段 |
+| HANDOVER.md | W1122 | 改：头链 entry 与里程碑块与进度标题与 HEAD 句（幂等） |
+| AGENTS.md | W1122 | 改：版本脚注条目（幂等） |
+| .github/workflows/README.md | W1122 | 改：里程碑尾标记（幂等） |
+| site/index.html | W1122 | 改：页脚批次链 token（幂等） |
+| site/data/cross-time-danmaku.html | W1122 | 改：页脚批次链 token（幂等） |
+| site/data/tag-cloud.html | W1122 | 改：页脚批次链 token（幂等） |
+| site/dukou-engine.html | W1122 | 改：页脚批次链 token（幂等） |
+| README.md | W1122 | 改：版本行（幂等推进） |
+| STRUCTURE.md | W1122 | 改：版本行（幂等推进） |
+| docs/00-导读/项目说明.md | W1122 | 改：版本行（幂等推进） |
+| CITATION.cff | W1122 | 改：版本与日期（幂等推进） |
+| scripts/output/tools-inventory.md | W1122 | 改：工具清单（新增模块入册） |
+| scripts/output/stats.json | W1122 | 改：统计产物 |
+| scripts/output/stats-index.md | W1122 | 改：统计产物 |
+| scripts/output/stats-changelog.json | W1122 | 改：统计产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1122 | 改：AGENTS 脚注滚动迁入的最老条目归档件（级联副作用面） |
+| pytest.ini | W1122 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1122 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/INDEX.md | W1122 | 改：文档索引（级联/索引刷新步产物·副作用面） |
+| scripts/INDEX.md | W1122 | 改：脚本索引（级联/索引刷新步产物·副作用面） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1122 | 改：台账腾窗迁出的最老行（收官链 archive 步产物·副作用面） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1122 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| site/data/search.html | W1122 | 改：版本面字面量（搜索页版本行·幂等推进·副作用面） |
+| site/en/search.html | W1122 | 改：版本面字面量（搜索页版本行·幂等推进·副作用面） |
+| scripts/output/INDEX.md | W1122 | 改：产物索引（索引刷新步产物·副作用面） |
+| scripts/output/README.md | W1122 | 改：产物说明（索引刷新步产物·副作用面） |
+| tests/unit/INDEX.md | W1122 | 改：单测索引（索引刷新步产物·副作用面） |
+| tests/unit/README.md | W1122 | 改：单测说明（索引刷新步产物·副作用面） |
+
+
 ## W1121 收官链缺陷根修 + 跨克隆占号机制根修 + 台账回填（2026-11-04）
 
 | 文件 | W | 说明 |
