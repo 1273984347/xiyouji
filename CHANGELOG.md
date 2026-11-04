@@ -20,6 +20,17 @@
 
 **验证**：收官链 12 步全绿（含新增 pycompile 步·regsurface OK·CSP 856 页 0 漂移）· 门禁 62 段 0 FAIL（CI 同档 full）· 全量 pytest 1310 passed / 4 skipped · ruff check scripts/ 0 违规 · 新增单测 4 例 + 行为锁 1 例 · 负样本实测门禁拦停（退出码 3）。
 
+### W1127（2026-11-04）：治理收官批·台账回填 + 滚动独立入口 + 历史缺口体检
+
+> **来源**：T74（W1122 批）报告遗留 R-2（滚动重跑守卫的独立入口）与 R-B 前置（历史缺口按序补齐的前置体检）· 归集自 W1122 批收官登记。
+>
+> - **文件**：scripts/batch_cascade.py、scripts/check_segment_gaps.py、tests/unit/test_w1127_closeout_tools.py、scripts/output/_w1127_spec.json、scripts/output/_cascade_files_W1127.txt、docs/00-导读/W批次编号对账表.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md、docs/11-方案报告/README.md、CHANGELOG.md、scripts/output/file-index.md、HANDOVER.md、AGENTS.md、.github/workflows/README.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff、site/data/search.html、site/en/search.html、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-index.md、scripts/output/stats-changelog.json、scripts/output/tools-inventory.md、docs/INDEX.md、scripts/INDEX.md、scripts/output/INDEX.md、scripts/output/README.md、tests/unit/INDEX.md、tests/unit/README.md、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md。
+
+**一、台账回填与腾窗**：台账 W1124 行 git 反填回填（hash 18a06a80·共 3 笔·指纹 de8ab24caa72）并入本批提交（不单开 PR）；台账腾窗迁出最老两行（W1065-W1066）使正本回到窗口内；W1127 认领行登记（含 touches 全清单）。
+
+**二、里程碑滚动独立入口（根修 T74 R-C）**：此前滚动只能作为「本批块插入」的副动作发生，若某批只想滚动或需重跑滚动，没有独立入口 ⇒ 只能手工改文档。W1124 已把幂等守卫下沉到_handover_rotate_oldest 内部（本批块已在链上 ⇒ 零变化），本批补上独立入口 --rotate-only：独立重跑同样零变化（零红灯·不丢信息），且不落盘时只报 dry-run。
+
+**三、历史缺口体检工具（根修 T74 R-B 前置）**：此前「立段/落段只看一面」根修后暴露的历史缺口只散落在运行输出里，既无法复核，也无法判断内容能否复原 ⇒ 新增 scripts/check_segment_gaps.py：盘点台账（正本 + 归档）出现过的批次号，与 CHANGELOG 与 file-index 两面正本的段集合做差集，输出缺口清单并逐件给出可复原来源提示（CHANGELOG 归档 / file-index 归档 / 台账归档是否含该批号）。本工具**只体检不补段**（补段须先评估可复原性，避免造段）⇒ **实测当前基线缺口 0 项**（两面正本已覆盖台账全部批次）⇒ T74 遗留 B 的补段动作无需执行。
 ### W1125（2026-11-04）：自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型
 
 > **来源**：W1122 批登记的三项遗留（① W1123 自举产物教训入坑表 ② 正本与归档并存的存量 W1001 段清理·须用户批准 ③ 档 3 剩余可施工面近耗尽·需先改消费方式）· 用户 2026-11-04 裁决：W1001 段删正本那份保留归档、档 3 本批出方案并做 1 页原型验证。

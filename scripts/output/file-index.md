@@ -185,6 +185,48 @@
 | scripts/output/_w1128_spec.json | W1128 | 本批工具/产物 |
 | scripts/output/_cascade_files_W1128.txt | W1128 | 本批工具/产物 |
 
+## W1127 治理收官批·台账回填 + 滚动独立入口 + 历史缺口体检（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W1127 | 改：增里程碑滚动独立入口 --rotate-only（幂等守卫沿用函数内·零变化） |
+| scripts/check_segment_gaps.py | W1127 | 新增：历史缺口体检工具（台账有认领行而两面正本皆无段·含可复原来源提示） |
+| tests/unit/test_w1127_closeout_tools.py | W1127 | 新增：滚动独立入口与缺口体检自证 6 例 |
+| scripts/output/_w1127_spec.json | W1127 | 新增：本批 spec（应动全集单一事实源） |
+| scripts/output/_cascade_files_W1127.txt | W1127 | 新增：级联文件清单 |
+| docs/00-导读/W批次编号对账表.md | W1127 | 改：W1127 认领行登记 + W1124 行回填与例数订正 + 台账腾窗 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1127 | 改：台账腾窗迁出的最老行（收官链 archive 步产物·副作用面） |
+| archive/docs/AGENTS-ARCHIVE.md | W1127 | 改：AGENTS 脚注滚动迁入的最老条目归档件（级联副作用面） |
+| docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md | W1127 | 新增：本批任务计划执行与经验沉淀报告 |
+| docs/11-方案报告/README.md | W1127 | 改：登记第 92 号 |
+| CHANGELOG.md | W1127 | 改：W1127 段 |
+| scripts/output/file-index.md | W1127 | 改：W1127 段 |
+| HANDOVER.md | W1127 | 改：头链 entry 与里程碑块与进度标题与 HEAD 句（幂等） |
+| AGENTS.md | W1127 | 改：版本脚注条目（幂等） |
+| .github/workflows/README.md | W1127 | 改：里程碑尾标记（幂等） |
+| README.md | W1127 | 改：版本行（幂等推进） |
+| STRUCTURE.md | W1127 | 改：版本行（幂等推进） |
+| docs/00-导读/项目说明.md | W1127 | 改：版本行（幂等推进） |
+| CITATION.cff | W1127 | 改：版本与日期（幂等推进） |
+| site/data/search.html | W1127 | 改：版本面字面量（搜索页版本行·副作用面） |
+| site/en/search.html | W1127 | 改：版本面字面量（搜索页版本行·副作用面） |
+| site/index.html | W1127 | 改：页脚批次链 token（副作用面） |
+| site/data/cross-time-danmaku.html | W1127 | 改：页脚批次链 token（副作用面） |
+| site/data/tag-cloud.html | W1127 | 改：页脚批次链 token（副作用面） |
+| site/dukou-engine.html | W1127 | 改：页脚批次链 token（副作用面） |
+| scripts/output/stats.json | W1127 | 改：统计产物 |
+| scripts/output/stats-index.md | W1127 | 改：统计产物 |
+| scripts/output/stats-changelog.json | W1127 | 改：统计产物 |
+| scripts/output/tools-inventory.md | W1127 | 改：工具清单（新增脚本入册） |
+| docs/INDEX.md | W1127 | 改：文档索引（索引刷新步产物·副作用面） |
+| scripts/INDEX.md | W1127 | 改：脚本索引（索引刷新步产物·副作用面） |
+| scripts/output/INDEX.md | W1127 | 改：产物索引（索引刷新步产物·副作用面） |
+| scripts/output/README.md | W1127 | 改：产物说明（索引刷新步产物·副作用面） |
+| tests/unit/INDEX.md | W1127 | 改：单测索引（索引刷新步产物·副作用面） |
+| tests/unit/README.md | W1127 | 改：单测说明（索引刷新步产物·副作用面） |
+| pytest.ini | W1127 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1127 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1127 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
 ## W1125 自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型（2026-11-04）
 
 | 文件 | W | 说明 |
