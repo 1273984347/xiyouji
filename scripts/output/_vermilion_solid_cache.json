@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "73448af37f6032bc6ede9c67c78d9741bd544082",
+   "sha1": "5ad37c118e94e6b311bd6af00fd97da805271fec",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -321,7 +321,7 @@
    }
   },
   "data/jurisprudence.html": {
-   "sha1": "e6c5ca12eabe83a2e932403e77d113bc938933d3",
+   "sha1": "f9d0913409aa7a6efe017bac6ede1b8535f03650",
    "counts": {
     "div.kpi-card": 1,
     "span.severity-pill.sev-high": 8,
@@ -449,7 +449,7 @@
    }
   },
   "data/narrative-experiment.html": {
-   "sha1": "f5e773caf5be8b14467dae2b54c5b48aa0bdfed9",
+   "sha1": "d3e83b0119458a7c060f8982ceb9393edb2d0e91",
    "counts": {
     "div.kpi-card": 1,
     "div.player-card": 1,
@@ -523,7 +523,7 @@
    }
   },
   "data/relationships.html": {
-   "sha1": "80f584d3a67ca19f4c88846dd7d9896ea96d5030",
+   "sha1": "0e42ce9a437cd4cae8eca3705614eb8ae72b2d5a",
    "counts": {
     "div.kpi-card": 1,
     "span.role-tag.primary": 5
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "5352c433293ef39247310e7edbc6cfad55a54260",
+   "sha1": "9577900295a01c1e3605799dc3b98e58ab9a6c41",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "4d5a6f03fe13ecb36951d9aca11814a4637743fd",
+   "sha1": "945d46b88b91f06827b7e7053fd39c9908f5121a",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -640,7 +640,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "181ef9670fdbc381afb80ed90322dab9f1ad5cdf",
+   "sha1": "ecac0976d9e275cd931ccc6001a767b095b2e67f",
    "counts": {
     "button": 1
    }
@@ -652,7 +652,7 @@
    }
   },
   "index.html": {
-   "sha1": "f581d14d3bc1d0f93ce30ba29f9646b7e4a95b83",
+   "sha1": "66ec1da92739db4d2eb5f53f0046e0e69868410d",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1179,7 +1179,7 @@
    }
   },
   "en/jurisprudence.html": {
-   "sha1": "e7d84cda66256a8518829ba118031d8fe4c4a332",
+   "sha1": "ece636b831a9525d44fbc05566f6a218e8d229ec",
    "counts": {
     "div.kpi-card": 1,
     "span.severity-pill.sev-high": 8,
@@ -1311,7 +1311,7 @@
    }
   },
   "en/narrative-experiment.html": {
-   "sha1": "f141da89e0281e7a21a3550c4ed9807a9f998cb0",
+   "sha1": "80f4965645b92f213878f825ba99ab22f96a1293",
    "counts": {
     "div.kpi-card": 1,
     "div.player-card": 1,
@@ -1385,7 +1385,7 @@
    }
   },
   "en/relationships.html": {
-   "sha1": "103abd7f85cc85187e15566b61fa2f0525205d0a",
+   "sha1": "56395765420df76d6786ff85c031fe56d9c1f950",
    "counts": {
     "div.kpi-card": 1,
     "span.role-tag.primary": 5
@@ -1399,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "3db026898158437d11afaa2fbe6e9a381449dd6d",
+   "sha1": "f0d55c7df73a9eed0a7f933eaa98a996d293ba42",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-11-04T00:00:24.013Z"
+ "generated_at": "2026-11-04T03:28:08.694Z"
 }

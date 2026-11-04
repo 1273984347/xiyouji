@@ -18,6 +18,7 @@
 
 铁律 17（AGENTS.md）要求：开批第一步必须跑 reserve，未占号不动手。
 """
+import hashlib
 import json
 import os
 import re
@@ -30,6 +31,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEDGER = os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")
 RES_DIR = os.path.join(ROOT, "tmpe")
 RES_FILE = os.path.join(RES_DIR, "_w_reservations.json")
+# W1121：预约表的**共享面**此前只覆盖「本工作树」（tmpe/ 随仓不随 git）⇒
+# 跨 worktree / 跨克隆并行时互相不可见 ⇒ 实测双方各占 W1120（2026-11-04·同机两克隆）。
+# ⇒ 取号集合改为「所有可达预约表」的并集：① 本仓 tmpe/ ② 同机兄弟克隆的 tmpe/
+# ③ 用户级共享表（跨克隆主共享面）；写入同时落 ① 与 ③（① 留给既有读取方）。
+SHARED_RES_FILE = os.path.join(os.path.expanduser("~"), ".mavis", "xiyouji_w_reservations.json")
 TTL = 24 * 3600  # 预约 24h 过期
 
 W_RE = re.compile(r"W(\d{3,4})")
@@ -68,28 +74,107 @@ def changelog_max():
     return mx
 
 
-def load_res():
+def _read_one(path):
+    """读单个预约表；文件缺失/损坏/非 dict 一律视空（不阻断取号）。"""
     try:
-        return json.load(open(RES_FILE, encoding="utf-8"))
+        data = json.load(open(path, encoding="utf-8"))
     except (OSError, ValueError):
         return {}
+    return data if isinstance(data, dict) else {}
+
+
+def sibling_repo_roots():
+    """同机兄弟克隆目录（仓名前缀相同 **且** 内含 scripts/reserve_w.py ⇒ 才认）。"""
+    out = []
+    parent = os.path.dirname(ROOT)
+    prefix = os.path.basename(ROOT)
+    try:
+        names = sorted(os.listdir(parent))
+    except OSError:
+        return out
+    for name in names:
+        if not name.startswith(prefix):
+            continue
+        cand = os.path.join(parent, name)
+        if cand == ROOT or not os.path.isdir(cand):
+            continue
+        if os.path.isfile(os.path.join(cand, "scripts", "reserve_w.py")):
+            out.append(cand)
+    return out
+
+
+def res_paths():
+    """所有可达预约表路径（去重·顺序：本仓 → 兄弟克隆 → 用户级共享表）。"""
+    paths = [RES_FILE]
+    for root in sibling_repo_roots():
+        paths.append(os.path.join(root, "tmpe", "_w_reservations.json"))
+    paths.append(SHARED_RES_FILE)
+    seen, uniq = set(), []
+    for p in paths:
+        key = os.path.normcase(os.path.abspath(p))
+        if key not in seen:
+            seen.add(key)
+            uniq.append(p)
+    return uniq
+
+
+def merge_res(paths=None):
+    """合并所有可达预约表（同号取 ts 最新者）⇒ 取号集合跨克隆完整（W1121）。"""
+    merged = {}
+    for p in (res_paths() if paths is None else paths):
+        for w, info in _read_one(p).items():
+            if not isinstance(info, dict):
+                continue
+            old = merged.get(w)
+            if old is None or info.get("ts", 0) >= old.get("ts", 0):
+                merged[w] = info
+    return merged
+
+
+def load_res():
+    return merge_res()
 
 
 def save_res(d):
-    os.makedirs(RES_DIR, exist_ok=True)
-    tmp = RES_FILE + ".tmp"
-    json.dump(d, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    os.replace(tmp, RES_FILE)  # 同文件系统原子替换
+    """写预约表：本仓表 + 用户级共享表；写共享表时先合并他人记录（不覆盖）。"""
+    for target in (RES_FILE, SHARED_RES_FILE):
+        merged = merge_res([target])
+        merged.update(d)
+        try:
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            tmp = target + ".tmp"
+            json.dump(merged, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            os.replace(tmp, target)  # 同文件系统原子替换
+        except OSError:
+            continue
 
 
-def active_res():
+def active_res(paths=None):
     now = time.time()
-    return {w: info for w, info in load_res().items()
+    return {w: info for w, info in merge_res(paths).items()
             if now - info.get("ts", 0) <= TTL}
 
 
+def conflict_res(paths=None):
+    """同一号被**多个会话**预约 ⇒ 跨克隆撞号（返回 {号: [会话…]}）。"""
+    owners = {}
+    now = time.time()
+    for p in (res_paths() if paths is None else paths):
+        for w, info in _read_one(p).items():
+            if not isinstance(info, dict) or now - info.get("ts", 0) > TTL:
+                continue
+            owners.setdefault(w, set()).add(info.get("session", "?"))
+    return {w: sorted(s) for w, s in owners.items() if len(s) > 1}
+
+
 def session_id():
-    return os.environ.get("WB_SESSION", socket.gethostname() or "unknown")
+    """会话标识：WB_SESSION 优先；否则 hostname+仓路径指纹 ⇒ 跨克隆可辨（W1121）。"""
+    env = os.environ.get("WB_SESSION")
+    if env:
+        return env
+    host = socket.gethostname() or "unknown"
+    tag = hashlib.sha1(os.path.abspath(ROOT).encode("utf-8")).hexdigest()[:6]
+    return "%s@%s-%s" % (host, os.path.basename(ROOT), tag)
 
 
 def reserve():
@@ -132,11 +217,14 @@ def warn_unclaimed():
     try:
         txt = open(LEDGER, encoding="utf-8").read()
     except OSError:
-        return
+        txt = ""
     ghost = unclaimed_in_ledger(txt, active_res())
     for w in sorted(ghost):
         print("WARN  台账 %s 在途认领行无占号支撑（未跑 reserve_w 先登记＝绕过铁律 17）——"
               "请补占号或改状态列" % w)
+    for w, sessions in sorted(conflict_res().items()):
+        print("WARN  跨克隆撞号预警：%s 被多个会话预约（%s）——按「先落地者保留」仲裁"
+              % (w, " / ".join(sessions)))
 
 
 def list_res():
@@ -152,12 +240,24 @@ def list_res():
 
 
 def release(w):
-    res = load_res()
-    if res.pop(w, None) is not None:
-        save_res(res)
-        print("已释放 %s" % w)
-    else:
-        print("%s 不在预约表中" % w)
+    """只释放**本工作树**登记的号——绝不误删其它克隆/会话的预约（W1121）。"""
+    res = _read_one(RES_FILE)
+    info = res.pop(w, None)
+    if info is None:
+        print("%s 不在本工作树预约表中（若为其它克隆所占·勿释放）" % w)
+        return
+    shared = _read_one(SHARED_RES_FILE)
+    if shared.get(w, {}).get("session") == info.get("session"):
+        shared.pop(w, None)
+        try:
+            os.makedirs(os.path.dirname(SHARED_RES_FILE), exist_ok=True)
+            tmp = SHARED_RES_FILE + ".tmp"
+            json.dump(shared, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            os.replace(tmp, SHARED_RES_FILE)
+        except OSError:
+            pass
+    save_res(res)
+    print("已释放 %s" % w)
 
 
 def self_test():
