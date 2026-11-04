@@ -46,6 +46,8 @@
   "| site/data/search.html | W1122 | 改：版本面字面量（搜索页版本行·幂等推进·副作用面） |",
   "| site/en/search.html | W1122 | 改：版本面字面量（搜索页版本行·幂等推进·副作用面） |",
   "| scripts/output/INDEX.md | W1122 | 改：产物索引（索引刷新步产物·副作用面） |",
-  "| scripts/output/README.md | W1122 | 改：产物说明（索引刷新步产物·副作用面） |"
+  "| scripts/output/README.md | W1122 | 改：产物说明（索引刷新步产物·副作用面） |",
+  "| tests/unit/INDEX.md | W1122 | 改：单测索引（索引刷新步产物·副作用面） |",
+  "| tests/unit/README.md | W1122 | 改：单测说明（索引刷新步产物·副作用面） |"
  ]
 }
