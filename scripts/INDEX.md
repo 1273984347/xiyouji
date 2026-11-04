@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（186）
+## 文件（187）
 
 ### Markdown 文档
 
@@ -147,6 +147,7 @@
 - `check_screenshot_scope.py`
 - `check_script_coverage.py`
 - `check_search_index_fresh.py`
+- `check_segment_gaps.py`
 - `check_seo_head.py`
 - `check_story_timeline_sync.py`
 - `check_structure.py`
