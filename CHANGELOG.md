@@ -1,3 +1,81 @@
+### W1136（2026-11-04）：并行会话统筹调度批
+
+**本批要点**（并行会话统筹调度批·协调层·零页面内容改动·不新增门禁槽 ⇒ 门禁 62 段不变·**新增坑表 1 条 E-185 ⇒ 计数链 268 → 269**）：① **实读全部并行面建占用矩阵**：12 个并行会话 / 6 棵工作树 / 共享预约表 / 台账正本 58 行 + 归档 416 行 / README §六 全文口径 86 行 / 坑表 268 条 / CHANGELOG 顶段 W1129 / 门禁 57 槽 ⇒ 据此定位 9 类碰撞（C1~C9）并逐项裁决 ② **登记号仲裁**：实读 §六 实测重复登记号 = [27, 35, 36, 69, 74]，其中 35/36 均为 T-29 ⇒ 判定为「同号两行」而非「缺号」（补第三行反而变三行同号）且 T-29 属他人历史交付物（补登记即越权改他方行）⇒ 裁定 W1133 批撤销补登记并只占 96 号、**97 号刻意空出**留后续 §六 治理批；终版分配 95(W1126)/96(W1133)/97(空)/98(W1130)/99(W1132)/100(W1135)/101(W1134)/102(W1136) ③ **写顺序仲裁**：touches 实测 W1133 与 W1130 重叠 7 面、W1132 与 W1130 重叠 6 面、W1135 与 W1130 重叠 5 面 ⇒ 五批同时跑收官链必然互相覆盖（生成面冲突须靠「取远端基底 + 重跑生成链」消解）⇒ 强制串行，裁定 W1130 批先收官、其余批基于合并后 origin/main 重跑收官链 ④ **计数链基线纠错**：门禁 preflight 打印的 267 系旧快照（打印值取自旧工作树），origin/main 实算为 268 ⇒ 基线裁定 268（链序 268 → 271 → 277 → 277+N → 本批 269）⑤ **E 号与登记号规则分离**：E 号起点 = 收官时实测 max + 1（在途未落库不构成占用）；README §六 登记号 = 先落地者保留的硬分配 ⇒ E-172~E-175 为空洞刻意不回收 ⑥ **双锚校验纪律（本轮 P0 澄清产出·已落 E-185）**：定位登记表须「章节标题 + 表头列」双锚定 + 全文与分段交叉对账，禁全文兜底匹配、禁按章节区间单点取段 ⇒ 实测登记表跨三段物理分布（文件首行 + §六 段内 58 行 + 文件末尾尾段 28 行），按区间取会漏读 28 行；**「登记行数骤减」类告警必须先排除「解析锚点错位」再判定「数据丢失」** ⑦ **主树占用风险处置**：主树 D:/xiyouji 落后 origin/main 14 提交且承载 5 件他方未提交改动 ⇒ 裁决迁独立 worktree（W1134 批已迁 D:/xiyouji-w1134）⑧ **PR #138 CONFLICTING 处置指引**：禁 --ours 批量覆盖生成面 + 合并三查（文件集差集 / 内容逐字比对 / 对方新增行为落点）+ 冲突标记逐文件复扫（门禁 C9 扫描面不含方案报告目录）⑨ **PR 节奏按 2026-11-04 二次口径**：回填/订正类永不单独开 PR、同会话当日多批合并一个 PR。
+
+**文件**：
+- docs/00-导读/W批次编号对账表.md
+- docs/11-方案报告/计划方案/T90-任务计划执行与经验沉淀报告-2026-11-04.md
+- docs/11-方案报告/README.md
+- docs/agent/pitfalls.md
+- AGENTS.md
+- HANDOVER.md
+- .agent/skills/puti-shouye/SKILL.md
+- CHANGELOG.md
+- scripts/output/file-index.md
+- scripts/output/_w1136_spec.json
+- scripts/output/_cascade_files_W1136.txt
+- README.md
+- STRUCTURE.md
+- docs/00-导读/项目说明.md
+- CITATION.cff
+- site/data/search.html
+- site/en/search.html
+- .github/workflows/README.md
+- scripts/output/stats.json
+- scripts/output/stats-index.md
+- scripts/output/stats-changelog.json
+- scripts/output/tools-inventory.md
+- archive/docs/AGENTS-ARCHIVE.md
+- docs/INDEX.md
+- scripts/INDEX.md
+- scripts/output/INDEX.md
+- scripts/output/README.md
+- tests/unit/INDEX.md
+- tests/unit/README.md
+- pytest.ini
+
+**认领登记 W1136**（占号 session=ROGSTRIX@xiyouji-w1136-4e5326·17:43:04 落占·preflight PASS·touches 12 面全清单登记）。
+
+**验证**：登记号与 E 号两套号段无撞号（§六 95~102 各归一批）· 坑表六节声明 48/10/31/26/15/139 = 269 = 列表行实数 269 · 台账归档 416 行 / 416 唯一号 / 重复 0 · 第 48 门禁计划方案合规 PASS · 门禁 62 段 0 FAIL。
+### W1135（2026-11-05）：遗留清偿批 · d3 动效守卫表达式实参根治 + tooltip 死规则收口 + design 清单生成源根修 + 盲审 6 条处置
+
+> **来源**：W1096 收官时登记的四项遗留（W1105 批留待次批根治）——① 全站 317 处 d3 动效表达式实参未套 reduced-motion 守卫（57 页）② 3 页 tooltip 多行间距死规则（类名收敛后从未命中）③ design 目录清单整体过期（真凶＝生成器模板自身过期）④ 独立盲审的 6 条可观察项。基线 = PR #139 合并后 main（fbe9f3fd·门禁 62 段·坑表 271 条·台账正本 54 行）。
+>
+> - **文件**：scripts/check_motion_guard.py、scripts/check_design_asset_manifest.py、scripts/check_tooltip_spacing.py、tests/unit/test_w1135_gates.py、scripts/verify_delivery.py、docs/agent/gates.md、AGENTS.md、docs/00-导读/文档规范.md、assets/design/tools/build_assets.py、assets/design/README.md、assets/design/index.html、assets/design/logo/README.md、assets/design/screenshots/README.md、docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md、site/ 下 60 个页面、docs/agent/pitfalls.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T87-任务计划执行与经验沉淀报告-2026-11-05.md、scripts/output/_w1135_spec.json、scripts/output/_cascade_files_W1135.txt。
+
+**本批要点**（遗留清偿批 · 站点改造 + 三条新判据 + 门禁挂槽 58/59/60 ⇒ 门禁 62 → 65 段 · 坑表 271 → 275 条）：① **遗留① d3 动效守卫实参根治**——317 处未套守卫的表达式实参（如 `.delay(1500 + i * 200)`、`.delay((d,i) => 200 + i*120)`）统一改写为 `MOYUN_RM?0:<表达式>` 形态，改写规则与仓内既有 545 处写法逐字对齐（简单表达式不加括号·箭头函数与含逗号实参加括号）⇒ 调用点 **GUARDED 545 → 862 · EXPR 317 → 0 · BARE 0**，d3 页 91/91 含守卫、违规页 0；「时长归零连带延迟归零」沿用仓内既有口径（既有 545 处即如此，非本批新定语义）。② **遗留② tooltip 死规则收口**——3 页的 `.tooltip div + div` 改为 `.chart-tooltip div + div`（tooltip 内为 3 个连续 div ⇒ 命中第 2/3 行·属有意的视觉修复）⇒ 全站旧类名残留 0；独立取证面（3 页 × 亮/暗 = 6 组）改前 `marginTop=0px / ruleHits=0` → 改后 `4px / 1`，且 4px 精确等于 `--space-2` ⇒ 间距取自令牌。③ **遗留③ design 目录清单根修到生成源**——真凶是 `assets/design/tools/build_assets.py` 的**模板常量自身过期**（整段指向已废弃的一次性工作区 `tmpe/_reports/logo-explore-v2/`、引用两个磁盘上不存在的脚本、把两张判废且磁盘不存在的概念稿写进 index.html ⇒ 站点图片 404）⇒ 改模板而非改产物；连带订正概念稿张数（生成 18 张 · 入库 16 张（13 可用 · 3 判废）· 另 2 张判废稿未入库）并**治本 Windows CRLF 污染**（生成器两处写盘补 `newline="\n"`）。④ **遗留④ 盲审 6 条处置**——逐条处置表落 design 审查报告**第九节**并纠正 T56 §6.1 ④ 与 §7 A-08 的指针失准（6 条真出处为独立盲审报告第四节）。⑤ **三条常设判据挂槽**——`check_motion_guard.py`（第 58 槽）· `check_design_asset_manifest.py`（第 59 槽）· `check_tooltip_spacing.py`（第 60 槽），同步六处字面量（gates.md 标题 60 槽 + 分组行 27-60 · AGENTS 三处 60 槽 + §4.2 三条摘要 · 文档规范 全量口径 65 段）+ 段数 62 → 65 + 第 58/59/60 门禁 注册字面量。
+
+**验证**：第 31/41/42 门禁 0 FAIL · 第 43/49/58/59/60 槽 0 FAIL（43/49 须带 NODE_PATH·否则 exit 2 假红）· CSP 856 页 0 漂移 · 全量 pytest 1335 passed / 4 skipped · J2 前后对拍 2736 元素前后全等、逐属性差异 0（reduced-motion 模拟态）· 三条判据负样本自证 11 例全绿（注入违规 ⇒ 退出码精确 = 1 且 ≠ 2，并做「去掉注入即变红」的鉴别力自证）· guardrails 阻断项 0 · 改动文件 CRLF 计数 0。
+
+> - **状态**：已收官（遗留四项清偿 + 三条新判据挂槽 + 生成源根修 + 盲审 6 条处置）
+### W1134（2026-11-04）：前端质感 P0 批（暗色字重降档 / 中文防误发 / 阈值滚动 / 复制对勾 / 打印去硬编码）
+> **来源**：W1095 盘点批（T50 报告）§3.4 分档排期的 P0 档四项 + 统筹会话仲裁（登记号与顺位）。
+> - **文件**：docs/11-方案报告/计划方案/T89-任务计划执行与经验沉淀报告-2026-11-04.md · scripts/font_weight_probe.py · scripts/ime_scroll_probe.py
+**本批要点**：
+① **暗色字重降档**（site/tokens.css）：暗色令牌块补标题层级降档（h1 700→600 / h2·h3 600→500 / h4-h6 500→400）；**数字位/等宽/表格数值位一律豁免**（mono 族仅 400/500 两档·降档会落合成字重并破坏 tabular-nums 对齐）。降档规则用 `!important`——实测页内私有 `<style>` 块加载在 `<link>` **之后**，位置决定胜负（高特异性仍被覆盖）。
+② **中文输入防误发**（site/data/ai-dialogue.html + site/en/ai-dialogue.html）：IME 选字期回车只完成选字不发送；选字完成后 500ms 内的回车被拦截；500ms 后正常发送（防误发不得变成永久禁用）。
+③ **翻页不被拖拽**（同两页）：滚动改为阈值跟随——距底不足一行才跟随，用户上翻即停止并浮出「跳至最新」按钮；按钮放在渲染容器**之外**（D3 `container.selectAll("*").remove()` 会连带删除容器内元素）。
+④ **复制对勾 2.5s 淡出**（site/static/js/cite-box.js·87 页外链引用）：成功时文案切 ✓，2.5s 后由 CSS 动画淡出并还原；连续复制可重触发；`prefers-reduced-motion` 下不播动画。
+⑤ **打印样式去硬编码**（site/system.css + 330 页 INLINED 副本）：`border: 1px solid #ccc` → `var(--line)`；全站该硬编码归零（实测 330 处全在 `@media print` 块内 ⇒ 屏幕视觉零变化）。
+⑥ **两个取证探针**（E-191）：J2 视觉回归的 31 项属性集**不含 font-weight** ⇒ 暗色字重类改动在 J2 上只会报「零差异」；`font_weight_probe.py` 直接读明暗双态计算样式（三条断言 + 8 例负样本自证），`ime_scroll_probe.py` 以合成 IME 事件序列驱动真实浏览器读行为结果（8 组断言 + 9 例负样本自证）。两探针首跑各抓出 3 项失败——**每一项都对应一个真实实现缺陷**（INLINED 副本未同步 / 页内私有样式覆盖 / D3 清空按钮）。
+⑦ **传播面同步**：`inline_css.py --force` 重同步 330 页 INLINED 副本（值改与传播必须同批——否则改了共享层而页面没变）。
+**验证**：字重探针 13 读数行失败 0 · 交互探针 8 组断言全过（含「过渡后 opacity=1」真可见性断言）· CSP 856 页零漂移（哈希 862→909）· pytest 1327 passed / 4 skipped · 两项门禁 FAIL 经基线态对照确认为环境性（缺 Node playwright·非本批引入）。
+### W1133（2026-11-05）：台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复
+
+> **来源**：W1122 批三项遗留的收官批（W1125）+ 合并后核对清单实读发现的三处登记面缺陷。· 基线 = origin/main fbe9f3fd（W1130 批已合·坑表 271 条·台账正本 54 行·§六 末号 98）。
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、.agent/skills/puti-shouye/SKILL.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T88-任务计划执行与经验沉淀报告-2026-11-04.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w1133_spec.json、scripts/output/_cascade_files_W1133.txt。
+
+**本批要点**（登记面修复 + 沉淀面入表 + 回填类订正批·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 271 → 277 条）：① **台账 W1125 行 git 反填回填**（0bf49abc·共 11 笔·P-43-01·回填/订正类不单开 PR·并入本批提交）；② **坑表 E-179 ~ E-184 六条经验入表**（W1125 批合并冲突四条教训 + 撤销补登记两条理由·流程/协作/取证节 141 → 147）+ 计数链 271 → 277 同步（坑表节标题 + AGENTS 总数与分项 + HANDOVER 三处 + SKILL 两处）；③ **修复 D1**——README §六 首行错位与 1/2/3 三号缺位（根因：重建登记面的脚本按行号猜插入位⇒覆盖首行历史登记行）⇒ 定点复原；④ **修复 D2**——§六 35/36 同号重复（两行均为 T-29·我方补登记引入）⇒ 撤销补登记（T-29 属他人历史交付物·缺口移交 §六 治理批·97 号留该批）；⑤ **D3**——file-index 正本 W1001 段残留由 W1136 批先行修复·本批不重复施工；⑥ **升基线后重放**（基线 fbe9f3fd·merge 不 rebase·生成面取远端基底后重跑生成链·治理面按锚点重放）。
+
+**验证**：第 48 门禁 0 FAIL（第 32 项结构判据全项符合）· 第 31 门禁 C5e 0 FAIL · CSP 856 页 0 漂移 · §六 末号 96(T-88) 且 1/2/3 归位 · 35/36 各 1 份 · 全量 pytest 与 ci_sim --ref HEAD 读数见 T88 报告 §3.2。
+
+### W1132（2026-11-04）：第 51 槽 merge 带入面归属劫持根修
+
+**本批要点**（第 51 槽 merge 带入面归属劫持根修·工具层·零页面内容改动·不新增门禁槽 ⇒ 门禁 62 段不变·不新增坑表条目 ⇒ 计数链不动）：① **触发**：2026-11-04 代第三方解 W1125 与 main 的合并冲突时，第 51 槽把归属判成他批 W1127（而非本批 W1125）⇒ 提交面被拿他批 spec 判定 ⇒ 报「索引含本批 spec 之外的文件」。② **根因（实读确认）**：`pick_target_merged` 主路径已实现 merge 带入面剔除（W1129 批新增·有效），但其**兜底调用** `pick_target_with_coverage(index_text, head_text, staged)` **未透传 main_text / carried** ⇒ 兜底分支内「恰 1 个新增段且非顶位」判定用的是**含 main 侧带入段**的段集合⇒ merge 提交把 main 更高号批带入、而本提交自己的段在下方时 ⇒ 顶段判据落**带入段（他批）** ⇒ 归属劫持。③ **根修**：`pick_target_with_coverage` 增可选参数 `main_text=None` / `carried=None`（默认路径行为与 W1117 原实现逐字一致）+ 新增段集合改为「索引段 - HEAD 段 - main 侧带入段」+ 剔除后无新增段时用「剔除带入文件后的路径集」做 spec 覆盖性反查+ 兜底调用改为透传 main_text / carried。④ **单测 4 例**（带入段不劫持归属 / 兜底覆盖性反查命中本批 / 默认参数行为不变 / 真·代提仍判红）。⑤ **验证**：pytest **1321 passed / 4 skipped**（含 W1129 既有 4 例）· 全量门禁 **62 段 0 FAIL** · ruff 0 违规 · 坑表 268 不动。⑥ **纪律**：本批**不入坑表**（计数链零改动）⇒ 与并行会话（ROGSTRIX W1130 入 3 条、第五会话 W1131 零计数链）的入表时点严格串行。
+
+> - **文件**：scripts/check_commit_scope.py、tests/unit/test_w1132_scope_carried_owner.py、scripts/output/_w1132_spec.json、scripts/output/_cascade_files_W1132.txt、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T86-任务计划执行与经验沉淀报告-2026-11-04.md、CHANGELOG.md、scripts/output/file-index.md、HANDOVER.md
+
+> - **状态**：已收官（第 51 槽归属劫持根修 + 单测 4 例 + 登记面；坑表入表待三方协调时点）
 ### W1130（2026-11-04）：C9 扫描面扩展 + 台账回填与腾窗 + 两面下界根修 + 三条教训入坑表
 
 > **来源**：W1127 批遗留（① 报告件冲突标记残留未被门禁拦停·第 31 门禁 C9 原扫描面只有 5 个治理文件 ② 台账 W1127 行待 git 反填回填 ③ 三条教训待基线稳定后入坑表）· 基线 = #138 合并后 main（ed6b0cf6·坑表 268 条·台账正本 58 行）。
@@ -42,6 +120,7 @@
 **二、里程碑滚动独立入口（根修 T74 R-C）**：此前滚动只能作为「本批块插入」的副动作发生，若某批只想滚动或需重跑滚动，没有独立入口 ⇒ 只能手工改文档。W1124 已把幂等守卫下沉到_handover_rotate_oldest 内部（本批块已在链上 ⇒ 零变化），本批补上独立入口 --rotate-only：独立重跑同样零变化（零红灯·不丢信息），且不落盘时只报 dry-run。
 
 **三、历史缺口体检工具（根修 T74 R-B 前置）**：此前「立段/落段只看一面」根修后暴露的历史缺口只散落在运行输出里，既无法复核，也无法判断内容能否复原 ⇒ 新增 scripts/check_segment_gaps.py：盘点台账（正本 + 归档）出现过的批次号，与 CHANGELOG 与 file-index 两面正本的段集合做差集，输出缺口清单并逐件给出可复原来源提示（CHANGELOG 归档 / file-index 归档 / 台账归档是否含该批号）。本工具**只体检不补段**（补段须先评估可复原性，避免造段）⇒ **实测当前基线缺口 0 项**（两面正本已覆盖台账全部批次）⇒ T74 遗留 B 的补段动作无需执行。
+
 ### W1126（2026-11-04）：截图审查 scope 判定根修（EN 搜索页定向 + 搜索索引内容级免审）
 
 > **来源**：用户 2026-11-04「为什么不直接在 main 分支进行」追问后引出「为什么 Screenshot Review 每次都要跑」诊断 → 用户选定「把 B+C 方案落成 W1126 的施工计划」。
@@ -71,6 +150,7 @@
 **验证**：合并后 worktree 内 verify_delivery --scope auto **62 段中 2 项 FAIL 属环境性假红**（第 43 槽可视化数据断言 + 朱砂实底槽：两棵工作树均无 node_modules ⇒ 无 playwright 浏览器环境，门禁拒绝在无浏览器环境出具结论；同一提交在 CI 侧「Delivery Gate (verify_delivery.py)」pass 即为绿证）· 第 31 门禁 C5e 0 FAIL · 第 54 槽坑表编号唯一性 0 FAIL · CSP 856 页 0 漂移 · 原型页双态浏览器实测逐值等价 · 归档 W1001 段行 833–847 逐字未动 · 编号规则锚点计数 = 1。
 
 > - **状态**：已收官（坑表 E-164 + W1001 段清理 + 档 3 实算与原型 + 台账 W1122 行回填 + W1125 认领行登记；档 3 全量施工待口径重建后另批）
+
 ### W1124（2026-11-04）：治理收尾批·教训入坑表 + 重建入口收进收官链
 
 > **来源**：T74 报告遗留 R-A（重建入口收进收官链）/ R-C（里程碑滚动重跑守卫）/ R-D（教训入坑表）· 归集自 W1122 批收官登记。
@@ -84,6 +164,7 @@
 **三、里程碑滚动幂等守卫（根修 T74 R-C）**：滚动淘汰的跳过守卫此前只在调用点（插入路径）生效 ⇒ 单独重跑滚动逻辑仍会再淘汰一块（指针指向的块被淘汰后指针移到新最老块 ⇒ 再跑一次就再淘汰一块 ⇒ 信息丢失且零红灯）。本批把守卫下沉到函数内：本批块已存在于链上即视为本批已滚动过 ⇒ 直接返回（零变化）；本批块不在链上时滚动照常执行（守卫不得变成一律跳过）。
 
 **四、台账订正与自证**：台账 W1122 行自证例数由 24 订正为 36（声明与落地对齐）并完成 git 反填回填；新增自证 12 例（收官链步骤顺序锁 4 例 + 幂等段重建 4 例 + 滚动守卫 2 例 + 布局门禁 worktree 形态适配 2 例）。
+
 ### W1123（2026-11-04）：预约释放语义根修 + 提交范围门禁 merge 场景归属根修
 
 **本批要点**（预约释放语义根修 + 提交范围门禁 merge 场景归属根修·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 258 → 260 条）：① **release 删除语义根修**：预约表有多个落点（本工作树表 + 同机兄弟克隆表 + 用户级共享表），写回函数统一走「先合并所有可见记录再 update」⇒ 释放操作也走同一路径 ⇒ 合并步骤把磁盘旧记录（含刚删的那条）重新合回 ⇒ **已释放的号复活**（自报已释放而 list 仍在⇒ 他方取号跳段）⇒ 根修 = 删除走独立「替换语义」路径 + 删除后**逐落点回读断言**（打印成功不算证据）+ 他人同号记录仅 session 相同时才删；新增 4 例单测；**由真实让号操作证明**（release W1122 真删除并回读校验通过）。② **第 51 槽 merge 场景归属根修**：并行会话 W1120 实证——我方 PR 先合入 main 后对方把新 main 合进自己分支 ⇒ 索引相对 HEAD 的新增段集合含他批段 ⇒ 归属判到他批 ⇒ 本提交交付面被判 spec 之外（假红）⇒ 根修 = 剔除「merge 带入面」（带入的段 = origin/main 侧已存在·带入的文件 = 索引 blob sha 与 origin/main 侧相同）⇒ 剔除后新增段集合为空则用剩余路径集做 spec 覆盖性反查定位归属；**判据强度不降**（内容与 main 不同者仍进判定⇒ 真越界仍判红）；新增 5 例单测。③ **号段让号**：取号两次得 W1122 与 W1123 ⇒ 主动 release W1122 让给并行会话（先声明者保留）· 我方用 W1123。④ **经验入库**：坑表 E-162（共享表写回的删除语义与合并语义不能混用）与 E-163（按索引态新增段定归属的门禁在 merge 场景会误判他批交付面为越界）+ 计数链 7 处同步（258 → 260）。
@@ -110,6 +191,7 @@
 **四、台账回填与自证**：顺带回填台账前批两行（git 反填·行指纹复核一致）；新增自证 36 例（幂等原语与六面接入 31 例 + 双面独立判定 5 例），其中负样本直接实证原缺陷形态：脚注条目重跑出现同号重复、页脚链重跑触发 token 去重断言。
 
 **五、追加根修（PR #130 CI 红项回灌）**：CI 第 31 门禁 C2 判红「交接文档头链链首 W1122 ≠ CHANGELOG 顶段 W1123」⇒ 根因是里程碑块**无条件插到链首**⇒ 低号批（W1122 < 现役 W1123）占据链首 ⇒ 改为按批号序落位（单一事实源 _upsert_handover_milestone·含位置校正），并把块区间**有界于进度段**（原实现对链尾块返回 end=len(s)⇒ 替换会吞掉后文）。同一轮复查又抓出脚注条目区间按「下一个『；』」界定 ⇒ **条目正文含分号时区间被截断** ⇒ 每次重跑判定「内容不一致」⇒ 同号条目无限累积（实测脚注累积到 4 份）⇒ 改为按**下一个条目 token** 定界并收敛同号副本。
+
 ### W1121（2026-11-04）：收官链缺陷根修 + 跨克隆占号机制根修 + 台账回填
 
 **本批要点**（收官链缺陷根修 + 跨克隆占号机制根修 + 台账回填·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 256 → 258 条）：① **静默失效根修**：W1119 新增收官链腾窗步在读台账行数时用了 io.open 却**未 import io** ⇒ NameError 被同函数宽 except Exception 捕获后 return True ⇒ **台账行窗口判定从未真正触发**（每批收官都「成功」rc=0·缺陷零红灯·可持续数周）⇒ 根修 = 改仓内主流 open(..., encoding=) 写法 + except 收窄到 ImportError 与 OSError ⇒ 代码缺陷类异常直接抛出（宁可整链中止也不静默通过）。② **W605 修复**：_rule_upper 的 docstring 内反斜杠 d 未转义 ⇒ ruff W605 ⇒ 改 raw string ⇒ scripts 全量 ruff 由 10 错转 0（CI 的 Code Quality job 由红转绿）。③ **跨克隆占号机制根修**：批次号预约表写在仓内 tmpe（.gitignore ⇒ 随仓不随 git）⇒ 跨 worktree 与跨克隆并行时互不可见 ⇒ **2026-11-04 实测双方各占 W1120**（各打印 W1120·零红灯·未设 WB_SESSION 时 session 回落 hostname 致两条记录同名不可仲裁）⇒ 根修 = 取号集合改为「本仓表 + 同机兄弟克隆表 + 用户级共享表」三源合并取并集（同名取 ts 最新·写共享表前先合并他人记录不覆盖）+ session 标识含仓路径指纹 + 同号多会话即打印跨克隆撞号预警 + release 只撤本工作树登记且 session 相同的号 ⇒ **实测取号由 W1120 正确让至 W1121**。④ **台账列定位根修**：ledger_backfill 按「从右起固定偏移」定位且状态修正循环左边界写死为 5 ⇒ 对多一列 files 的 10 格行整体错位一格（status 会写进认领会话列·hash 写进级联列）⇒ 改以**状态格内容**为锚点定位（9 格与 10 格皆成立·锚点缺失即 fail-closed·判据强度不降）。⑤ **台账回填**：W1118 与 W1119 两行用 git 反填真正回填（W1119 批主题与 T70 报告虽声称已回填·实际该行仍在途——本批订正该假收敛）。⑥ **经验同步**：坑表 E-160（互斥机制的共享面必须覆盖实际并行作用域·否则是假互斥）+ E-161（宽 except 吞缺陷 ⇒ 新增保护逻辑在异常路径上等于没有）+ E-159 补注（同族复发·写说明文字时描述正则须用 raw string）+ 计数链 12 处同步（256 → 258）+ AGENTS 新增铁律 23（异常分类必须与失败语义对齐）与占号共享区纪律段改写。
@@ -195,6 +277,7 @@
 **认领登记 W1120**（主仓共享区占号 session=session_237a5e53-…·preflight touches 交集检查通过·与对方 W1119 零同文件冲突）。
 
 **验证**：全量 pytest 1241 passed / 3 skipped / 0 failed · 新增自证 10 例 + 既有 12 例全绿 · 体积门禁字节双阈值三面 0 FAIL · 门禁 62 段 0 FAIL（CI 同档 full）。
+
 ### W1119（2026-11-04）：CI 成本治理 + 档 3 第二批 + 归档规则工具化
 
 **本批要点**（CI 成本治理 + 档 3 第二批 + 归档规则工具化·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 242 → 256 条）：① **档 3 第二批施工**（relationships / narrative-experiment / jurisprudence 中英各一对）：实测三对页的图色主体走 D3 .attr() 与 canvas（SVG presentation attribute 与 Canvas fillStyle 均不支持 var()）且带 e-track-exempt chart-data-colors 门禁豁免登记 ⇒ 只改安全位（style 属性 + CSS 声明）共 40 行；首轮替换误改 6 处暗色补偿规则的选择器 LHS ⇒ 已按 HEAD 原文逐行复原（残留越界选择器行 = 0·补偿表与指纹零改动）。② **盘点结论**：全站剩余调色板色 1320 处 / 139 页（W1113 三对已归零）；排除 181 页带 chart-data-colors 豁免登记的页后，可安全令牌化面 **每页 <= 2 处** ⇒ 档 3 可施工对象已近耗尽，后续需先改消费方式（属独立工具批）。③ **归档规则工具化**：archive_segments 增 --max-bytes / --chunk 与两面同 W 号下界对齐 + 迁完断言；A3 编号规则行断言由全文计数收紧为留存前缀内计数（批量迁移下原口径恒假红）；batch_closeout 增腾窗步并**置于 precheck 之前**（precheck fail-closed ⇒ 腾窗排其后即死路径）；顺序锁单测同步（test_w1102 新增 archive 步断言·test_w1114 首步断言改为 archive 并留痕）。④ **两面腾窗**：CHANGELOG 与 file-index 各迁出 W996 段（留存 109）+ 台账迁出 W1058 行 + W1119 认领行 ⇒ 台账 60/60；CHANGELOG 段位由 109 段（390.8KB）经体积模式降至 60 段（<= 256KiB）；⑤ **经验同步**：坑表 E-159（反斜杠字面量须转义）+ E-146 补注（--force-with-lease 例外）+ 计数链 12 处同步（255 → 256）+ CHANGELOG 孤立 CR 归一。
@@ -205,6 +288,7 @@
 **认领登记 W1119**（主仓共享区占号 session=mvs_1d2745db…·preflight touches 交集检查通过·8 项与在途声明方零交集）。
 
 **验证**：收官链 11 步全绿（含腾窗步·regsurface OK·CSP 856 页 0 漂移）· 门禁 62 段 0 FAIL（CI 同档 full）· 全量 pytest 1228 passed / 4 skipped。
+
 ### W1118（2026-11-04）：CI 成本治理与经验同步入仓
 
 **本批要点**（CI 成本治理 + 经验同步入仓·不新增门禁槽 ⇒ 门禁 62 段不变）：① **归因实测**：最近 60 个 run 的 run 级墙钟 418.1 分钟，我方 37 run / 330.7 分钟 = 79.1%，对方 23 run / 87.5 分钟 = 20.9%；PR 数 14:6。② **根修一**：暗色态门禁的跳过判定此前只挂 push 事件 ⇒ PR 事件下无任何跳过路径 ⇒ 每次命中 site/** 即跑全站约 163 页 × 4 分片，是本仓最大成本单点 ⇒ 判定扩展到 pull_request，且 schedule 与 workflow_dispatch 恒为全量。③ **根修二**：Lighthouse CI 只采集 5 个页面，未触及这 5 页即跳过采集。④ 搜索索引数据页 site/data/search.html 与 site/en/search.html 进非渲染面免审名单，其布局仍由主截图 job 的定向截图与每周定时全量审查覆盖。⑤ **经验同步入仓**：Agent Memory 内 W1114~W1118 的 13 条教训落坑表 E-141 ~ E-153，坑表 242 → 255 条。⑥ **节奏收紧**：一批一 PR 一 push，收官链产物必须在提交前生成完毕。
@@ -222,6 +306,7 @@
 **认领登记 W1118**（主仓共享区占号 session=mvs_1d2745db…·preflight touches 交集检查通过）。
 
 **验证**：门禁 62 段 0 FAIL · 坑表 255 条 0 重号 · 两个 workflow YAML 解析通过 · 台账正本数据行不超过窗口 60。
+
 ### W1117（2026-11-04）：版本面幂等修复与编号规则并入版本面（修描述含分号时二次推进失配）
 > **来源**：并行会话 W1113 批独立复核实测（2026-11-04）——我方 W1114 批的版本面推进器**在批次描述含分号时，二次推进会 fail-closed**（非幂等）⇒ 我方 W1114 报告与 CHANGELOG 段中「六个文件全『已是目标态』」的表述在该形态下不成立 ⇒ 本批根修并订正该表述。
 > - **文件**：`scripts/version_surface.py` · `scripts/batch_cascade.py` · `scripts/batch_closeout.py` · `scripts/backfill_changelog.py` · `tests/unit/test_w1117_version_surface_idempotence.py` · `tests/unit/test_w1102_batch_closeout.py` · `scripts/output/_w1117_spec.json` · `docs/11-方案报告/计划方案/T68-任务计划执行与经验沉淀报告-2026-11-04.md` · `docs/11-方案报告/计划方案/T65-任务计划执行与经验沉淀报告-2026-11-03.md` · `docs/11-方案报告/README.md` · `docs/00-导读/W批次编号对账表.md` · `CHANGELOG.md` · `scripts/output/file-index.md` · `archive/docs/CHANGELOG-ARCHIVE.md` · `archive/docs/file-index-ARCHIVE.md`
@@ -331,7 +416,6 @@
 
 **收官订正**（2026-11-03·PR #117）：本段三处数字经复算订正为与仓内证据件逐字对齐——改动面 60 → **78 行**（`git diff --numstat` site 6 页实测 14+12+13 × 中英）· 残留起点 10 → **56 处**（W1100 基线盘点表逐页读数：arc 中英各 8 · device 中英各 8 · monster 中英各 12；该 56 为**旧口径**（色值须带引号）·引号盲区修正后**新口径**基线 = **64**（差 8 处 = arc 页 L4 无引号内联色 4 处 × 中英）⇒ **两口径下当前态均 = 0**）· 坑表 241 → **242 条 / E-140**（条目实测 242·max E-140）。原值系收官前未复核的旧读数（其中「10 处」为首版脚本漏改的中间态·非权威口径读数）。核档读数（552 条差异 / OK 166·WARN 122·BLOCK 52 / 改后取暗色令牌值 340/340 / 元素数 5512）经 `scripts/output/_w1113_delta.json` 复算一致。
 
-
 ### W1112（2026-11-03）：落段收官一键脚本（八步固定顺序·refresh 迭代收敛·csp 恒末位）
 
 
@@ -353,6 +437,7 @@
 ⑥ **归档迁移（体积窗口治理·由级联工具自动执行·非手工搬移）**：W989 段由 CHANGELOG 迁入 archive/docs/CHANGELOG-ARCHIVE.md（逐字比对零丢失）· AGENTS 的 W1106 脚注迁入 archive/docs/AGENTS-ARCHIVE.md · file-index 归档时间行同步。CHANGELOG 与 file-index 段数窗口各 110 段（满窗后由级联归档 1 段）。
 
 **验证**：门禁 62 段 0 FAIL · 单测 13 passed（batch_closeout 10 + 判据正向锁 3）· 全量 pytest 本地 1184 passed / 3 skipped（2 failed 为本地工地 scripts/_s4_* 污染·157 件·CI 检出树不含）· CSP 856 页零漂移 · 台账 60/60 窗口内。
+
 ### W1110（2026-11-03）：图表色工程档 3 施工前置批（门禁与接线四槽 + CSS 令牌自引用根修）
 
 > **来源**：用户 2026-11-03 指令「开 W1110（54 槽编号唯一性 + 55 槽 PowerShell 解析 + P-3 L2 接线 + CSP 零漂移门禁 + 24 处差异 ΔL* 双口径核档 + 占号纪律），一个 PR、CI 跑一次，且合并只看 required 两项」。
@@ -419,7 +504,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1130），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1136），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

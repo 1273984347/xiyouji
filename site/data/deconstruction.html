@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-S/UJH/bjj6NXlMNgMTgR39qUF/zKVj2HijBOnr562v0=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-027RutP+gQCujYwYNWgirw2xj55qXUxR8VsGkXEggWI=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>解构作品与东亚再创作 · 详解西游记</title>
@@ -185,7 +185,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -198,6 +200,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1038,6 +1050,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1124,7 +1151,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {
@@ -2053,7 +2081,7 @@ function renderTreemap(opts){
 
         points.transition()
             .duration(MOYUN_RM?0:600)
-            .delay((d, i) => i * 60)
+            .delay(MOYUN_RM?0:((d, i) => i * 60))
             .attr("r", d => 9);
 
         // hover 事件
@@ -2099,7 +2127,7 @@ function renderTreemap(opts){
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:500)
-            .delay((d, i) => 600 + i * 40)
+            .delay(MOYUN_RM?0:((d, i) => 600 + i * 40))
             .style("opacity", 1);
 
         // 图例
@@ -2244,7 +2272,7 @@ function renderTreemap(opts){
             .attr("opacity", 0.9)
             .transition()
             .duration(MOYUN_RM?0:500)
-            .delay((d, i) => i * 60)
+            .delay(MOYUN_RM?0:((d, i) => i * 60))
             .attr("r", 7);
 
         // 文本（年份 + 简称）
@@ -2258,7 +2286,7 @@ function renderTreemap(opts){
             .text(d => d.year_num)
             .transition()
             .duration(MOYUN_RM?0:400)
-            .delay((d, i) => 300 + i * 60)
+            .delay(MOYUN_RM?0:((d, i) => 300 + i * 60))
             .style("opacity", 1);
 
         items.append("text")
@@ -2272,7 +2300,7 @@ function renderTreemap(opts){
             })
             .transition()
             .duration(MOYUN_RM?0:400)
-            .delay((d, i) => 350 + i * 60)
+            .delay(MOYUN_RM?0:((d, i) => 350 + i * 60))
             .style("opacity", 1);
 
         // hover

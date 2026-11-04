@@ -1,0 +1,115 @@
+{
+ "pages": [
+  "dashboard.html",
+  "data/ai-dialogue.html",
+  "index.html"
+ ],
+ "rows": [
+  {
+   "page": "dashboard.html",
+   "slot": "h1",
+   "light_weight": 700,
+   "dark_weight": 600,
+   "rule": "A1 降档生效（<=基准上限 600）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "dashboard.html",
+   "slot": "h2",
+   "light_weight": 600,
+   "dark_weight": 500,
+   "rule": "A1 降档生效（<=基准上限 500）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "dashboard.html",
+   "slot": "h3",
+   "light_weight": 500,
+   "dark_weight": 500,
+   "rule": "A1 降档生效（<=基准上限 500）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "dashboard.html",
+   "slot": "h4",
+   "light_weight": 600,
+   "dark_weight": 400,
+   "rule": "A1 降档生效（<=基准上限 400）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "dashboard.html",
+   "slot": "kpi-value",
+   "light_weight": 500,
+   "dark_weight": 500,
+   "rule": "A3 数字位豁免（明暗一致）",
+   "pass": true
+  },
+  {
+   "page": "dashboard.html",
+   "slot": "table-cell",
+   "light_weight": 600,
+   "dark_weight": 600,
+   "rule": "A3 数字位豁免（明暗一致）",
+   "pass": true
+  },
+  {
+   "page": "data/ai-dialogue.html",
+   "slot": "h1",
+   "light_weight": 700,
+   "dark_weight": 600,
+   "rule": "A1 降档生效（<=基准上限 600）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "data/ai-dialogue.html",
+   "slot": "h2",
+   "light_weight": 600,
+   "dark_weight": 500,
+   "rule": "A1 降档生效（<=基准上限 500）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "data/ai-dialogue.html",
+   "slot": "h3",
+   "light_weight": 600,
+   "dark_weight": 500,
+   "rule": "A1 降档生效（<=基准上限 500）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "index.html",
+   "slot": "h1",
+   "light_weight": 700,
+   "dark_weight": 600,
+   "rule": "A1 降档生效（<=基准上限 600）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "index.html",
+   "slot": "h2",
+   "light_weight": 600,
+   "dark_weight": 500,
+   "rule": "A1 降档生效（<=基准上限 500）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "index.html",
+   "slot": "h3",
+   "light_weight": 600,
+   "dark_weight": 500,
+   "rule": "A1 降档生效（<=基准上限 500）+ A2 底线下限 >=400",
+   "pass": true
+  },
+  {
+   "page": "index.html",
+   "slot": "text-mono",
+   "light_weight": 400,
+   "dark_weight": 400,
+   "rule": "A3 数字位豁免（明暗一致）",
+   "pass": true
+  }
+ ],
+ "fails": [],
+ "ok": true
+}

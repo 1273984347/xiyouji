@@ -30,7 +30,11 @@ DASHBOARD_FILE = ROOT / "site" / "dashboard.html"
 # 排除下划线前缀模板（_shell.html/_template.html 含 {{PAGE_TITLE}} 占位符，node --check 会误报）。
 EXCLUDE_PREFIX = "_"
 
-SCRIPT_RE = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.DOTALL)
+SCRIPT_RE = re.compile(
+    r"<[sS][cC][rR][iI][pP][tT](?![^>]*\b[sS][rR][cC]\s*=)[^>]*>"
+    r"(.*?)</[sS][cC][rR][iI][pP][tT](?:\s[^>]*)?\s*>",
+    re.DOTALL,
+)
 
 
 def collect_site_html_files(root_dir: Path) -> list:

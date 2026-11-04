@@ -31,7 +31,7 @@
      都级联不了。版本行是 desc 的唯一落点，扫它就把手工路径一并闭上。文档非空但版本行形态不识别
      按 FAIL 计（形态变更会让本支静默失效）。
 豁免：行级 <!--doc-sync:exempt 原因-->；.git/shallow 存在时 C4 跳过（pre-commit 本地为主执行点）。
-用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 24 例（纯合成输入，不改真实文件）；
+用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 35 例（纯合成输入·C5e 读数面亦注入·不读磁盘·不改真实文件）；
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
@@ -440,6 +440,7 @@ def _c4_registered_ws(inp):
     for text in inp.get("archive_changelogs_text", []):
         reg |= changelog_section_ws(text)
     reg |= table_registered_ws(inp["table"])
+    return reg
 def _c4_commit_ws_check(inp, reg, issues):
     """C4：提交信息里的 W 号须有 CHANGELOG 版段或对账表登记。"""
     for s in inp["subjects"]:
@@ -506,15 +507,6 @@ def _c4_file_list_check(inp, issues, notes):
         else:
             _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
             _dirty = set(inp.get("dirty") or [])
-    if top:
-        has_line, fl = file_list_paths(inp["changelog"], top[1])
-        if has_line is None:
-            notes.append("C4-f: 现役段缺「文件」行（四件套缺件·W723 起级联 precheck 强制）")
-        elif not fl:
-            notes.append("C4-f: 「文件」行无可解析路径 token（须写 repo 相对路径·见 pitfalls git 类）")
-        else:
-            _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
-            _dirty = set(inp.get("dirty") or [])
             _foreign = inp.get("foreign_append_only") or set()
             for f in fl:
                 _c4_file_entry_check(f, _tree2, _dirty, _foreign, issues, notes)
@@ -525,7 +517,7 @@ def _check_c4_commit_ledger(inp, issues, notes):
     """
     if inp.get("shallow"):
         notes.append("C4: 浅克隆环境（.git/shallow），提交对账跳过（pre-commit 本地为主执行点）")
-    return
+        return
     reg = _c4_registered_ws(inp)
     _c4_commit_ws_check(inp, reg, issues)
     _c4_claim_row_check(inp, issues)
@@ -556,6 +548,7 @@ def _c5_scan_lines(inp):
                 text = text[:cut]
         for i, ln in enumerate(text.splitlines(), 1):
             scans.append(("%s:%d" % (C5_DOC_NAMES[key], i), ln))
+    return scans
 def _c5_pattern_check(scans, stats, issues):
     """C5：句式白名单数字 vs stats.json 对账。"""
     for where, ln in scans:
@@ -627,10 +620,27 @@ def _c5_extra_surfaces_check(inp, stats, issues):
     # 四处全靠手改。实证 AGENTS 分项停在 25/25/15/10/28=109 长期无人核（总数声明已到 118），
     # 而 W1024 手算 118+4=121、实算为 122。此类「分项之和 vs 总数」偏差机器可查，不该靠人核。
 def _c5e_pitfall_counts(issues):
-    """C5e：坑表分项计数三向一致（W1025·W1044 补分项对拍）。"""
+    """C5e：坑表分项计数三向一致（W1025·W1044 补分项对拍）。
+
+    **W1136 根修**：原实现直读磁盘（pitfalls.md / AGENTS.md / HANDOVER.md / SKILL.md）
+    ⇒ 自测的合成输入无法覆盖它 ⇒ 真实文件一旦失配，T7「干净输入零误报」/ T9
+    「行级豁免放行」必被污染（假红），且**读取源与被测输入耦合**（承 W1014 对
+    _c4_registered_ws 的同类根修）⇒ 本函数**公开签名不变**并委托私有助手
+    _c5e_pitfall_counts_injected（可注入文本·inp=None 时回退读盘）。
+    """
+    return _c5e_pitfall_counts_injected(None, issues)
+
+
+def _c5e_pitfall_counts_injected(inp, issues):
+    """C5e 主体（可注入文本·inp=None 时回退读盘·W1136 根修）。"""
+    def _text(key, rel):
+        if inp is not None and inp.get(key) is not None:
+            return inp[key]
+        with open(os.path.join(ROOT, rel), encoding="utf-8") as _f:
+            return _f.read()
+
     try:
-        _pf = os.path.join(ROOT, "docs", "agent", "pitfalls.md")
-        _t = open(_pf, encoding="utf-8").read()
+        _t = _text("pitfalls", os.path.join("docs", "agent", "pitfalls.md"))
         _declared, _actual = {}, {}
         for _seg in re.split(r"(?m)^### ", _t)[1:]:
             _head, _, _rest = _seg.partition("\n")
@@ -653,18 +663,20 @@ def _c5e_pitfall_counts(issues):
             issues.append("C5e: 坑表分项声明之和 %d ≠ 实测条目之和 %d" % (_sum_decl, _sum_act))
         # W1058：对账面补 SKILL.md 两处（W1051 ASM-09 已画出的 6 点清单此前只扫 2 类载体——
         # W1055/W1056 两次坑表 +1 均漏 SKILL 实证盲区；形态：L6「N 条·六主题」/ L65「N 条完整教训」）
-        for _f, _pat in (
-            ("AGENTS.md", r"(\d+) 条坑位"),
-            ("HANDOVER.md", r"（(\d+) 条·六主题）"),
-            (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条·六主题"),
-            (os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条完整教训"),
+        for _key, _disp, _rel, _pat in (
+            ("agents", "AGENTS.md", "AGENTS.md", r"(\d+) 条坑位"),
+            ("jiaojie", "HANDOVER.md", "HANDOVER.md", r"（(\d+) 条·六主题）"),
+            ("skill", os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"),
+             os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条·六主题"),
+            ("skill", os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"),
+             os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条完整教训"),
         ):
-            for _mm in re.finditer(_pat, open(os.path.join(ROOT, _f), encoding="utf-8").read()):
+            for _mm in re.finditer(_pat, _text(_key, _rel)):
                 if int(_mm.group(1)) != _sum_act:
-                    issues.append("C5e: %s 声明 %d 条 ≠ 坑表实测 %d 条" % (_f, int(_mm.group(1)), _sum_act))
+                    issues.append("C5e: %s 声明 %d 条 ≠ 坑表实测 %d 条" % (_disp, int(_mm.group(1)), _sum_act))
         # W1044 补：AGENTS §4.3 六主题**分项**逐项对拍（原只核总数 ⇒ 分项长期陈旧而门禁看不见·
         # W1043 审查实证：分项之和 123 ≠ 总数 133）。
-        _a = open(os.path.join(ROOT, "AGENTS.md"), encoding="utf-8").read()
+        _a = _text("agents", "AGENTS.md")
         _seg = re.search(
             r"CSS / 视觉渲染（(\d+)）·JS / CSP / 运行时（(\d+)）·git / 提交 / 并发（(\d+)）"
             r"·级联 / CHANGELOG（(\d+)）·数据 / 内容可信度（(\d+)）·流程 / 协作 / 取证（(\d+)）",
@@ -701,12 +713,12 @@ def _check_c5_aggregate_stats(inp, issues, notes):
     stats = inp.get("stats")
     if not stats:
         issues.append("C5: scripts/output/stats.json 缺失或不可解析——先跑 python scripts/stats.py（fail-closed）")
-    return
+        return
     scans = _c5_scan_lines(inp)
     _c5_pattern_check(scans, stats, issues)
     _c5_bare_agg_check(scans, stats, issues)
     _c5_extra_surfaces_check(inp, stats, issues)
-    _c5e_pitfall_counts(issues)
+    _c5e_pitfall_counts_injected(inp, issues)
 def _check_c5d_stats_recheck(inp, issues):
     """C5d：stats.py --check（stats.json vs 磁盘实算）零差异背书（W718）。W730 提取。"""
     if not inp.get("stats_check_ok", False):
@@ -885,6 +897,9 @@ def gather():
         "readme": rd(os.path.join(ROOT, "README.md")),
         "jiaojie": rd(os.path.join(ROOT, "HANDOVER.md")),
         "agents": rd(os.path.join(ROOT, "AGENTS.md")),
+        # W1136：C5e 读数面改注入（判据与读取源解耦·自测可 hermetic）
+        "pitfalls": rd(os.path.join(ROOT, "docs", "agent", "pitfalls.md")),
+        "skill": rd(os.path.join(ROOT, ".agent", "skills", "puti-shouye", "SKILL.md")),
         "structure": rd(os.path.join(ROOT, "STRUCTURE.md")),
         "xiangmu": rd(os.path.join(ROOT, "docs", "00-导读", "项目说明.md")),
         "contributing": rd(os.path.join(ROOT, "CONTRIBUTING.md")),
@@ -998,14 +1013,29 @@ def run_check():
 
 
 def run_self_test():
-    """26 例注入式负样本/正样本（纯合成输入，不改真实文件）。"""
+    """35 例注入式负样本/正样本（纯合成输入·含 C5e 读数面·不改真实文件）。"""
     base = {
         "changelog": "### W999（2026-10-05）：自测顶段\n\n### v9.9.8（2026-10-04）：W998 旧段\n",
         "readme": "> **当前批次 W999（2026-10-05）**：自测抬头行\n",
-        "jiaojie": "- **W999 自测链首**：\n",
-        "agents": "### 4.2 交付门禁\n\n30. **甲门**\n31. **乙门**\n\n### 4.3 其他\n",
+        "jiaojie": "- **W999 自测链首**：\n\n自测合成（6 条·六主题）\n",
+        "agents": (
+            "### 4.2 交付门禁\n\n30. **甲门**\n31. **乙门**\n\n### 4.3 其他\n\n"
+            "自测合成 6 条坑位\n"
+            "CSS / 视觉渲染（1）·JS / CSP / 运行时（1）·git / 提交 / 并发（1）"
+            "·级联 / CHANGELOG（1）·数据 / 内容可信度（1）·流程 / 协作 / 取证（1）\n"
+        ),
         "verify_src": "# ---- 第 30 槽 ----\n# ---- 第 31 槽 ----\n",
         "archive_changelogs_text": [],  # W1014：自测注入空归档文本（hermetic·不读磁盘）
+        # W1136：C5e 亦注入（合成坑表声明数=实算数 ⇒ 干净输入零误报·不读磁盘）
+        "pitfalls": (
+            "### CSS / 视觉渲染（1 条）\n\n- **a**：自测注入\n\n"
+            "### JS / CSP / 运行时（1 条）\n\n- **b**：自测注入\n\n"
+            "### git / 提交 / 并发（1 条）\n\n- **c**：自测注入\n\n"
+            "### 级联 / CHANGELOG（1 条）\n\n- **d**：自测注入\n\n"
+            "### 数据 / 内容可信度（1 条）\n\n- **e**：自测注入\n\n"
+            "### 流程 / 协作 / 取证（1 条）\n\n- **f**：自测注入\n"
+        ),
+        "skill": "自测合成 6 条·六主题\n自测合成 6 条完整教训\n",  # W1136：自测注入（C5e 不读磁盘）
         "subjects": ["feat(w999): 自测提交"],
         "table": "| W999 | x | y | z | s | c |\n- **W659 / W660**：递延登记\n",
         "structure": "",
@@ -1076,18 +1106,18 @@ def run_self_test():
     case(
         "T8 聚合数字失配必红（C5）",
         lambda d: d.update(readme=d["readme"] + "每次提交需通过 99 项自动化门禁\n"),
-        "C5",
+        "C5:",
     )
     case(
         "T9 聚合数字行级豁免放行（C5）",
         lambda d: d.update(readme=d["readme"] + "每次提交需通过 99 项自动化门禁 <!--doc-sync:exempt 自测豁免-->\n"),
-        "C5",
+        "C5:",
         expect_absent=True,
     )
     case(
         "T10 stats.json 缺失 fail-closed（C5）",
         lambda d: d.update(stats=None),
-        "C5",
+        "C5:",
     )
     case(
         "T11 实体标记失配必红（C5b）",

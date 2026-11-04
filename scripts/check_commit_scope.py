@@ -101,21 +101,48 @@ def pick_target_with_coverage(index_text, head_text, staged=None):
     ⇒ 在顶段回落时用「索引态路径集能否被某批 spec 的应动全集覆盖」反查归属（批号大者优先）；
     无候选 ⇒ 沿用原判据（真·代提风险仍判红）。
     **判据强度不降**：最终仍要求「索引态路径集 ⊆ 归属批 spec 的应动全集」。
+
+    **W1132**：本函数**签名与行为逐字不变**（公开 API 零变更）⇒ merge 场景的带入面
+    剔除逻辑下沉到私有助手 _pick_target_with_coverage_merged（见下），
+    由 pick_target_merged 的兜底分支调用。
+    """
+    return _pick_target_with_coverage_merged(index_text, head_text, staged, None, None)
+
+
+def _pick_target_with_coverage_merged(index_text, head_text, staged=None, main_text=None, carried=None):
+    """**W1132 新增私有助手**：带 merge 带入面剔除的 spec 覆盖性反查（默认参数等价原实现）。
+
+    **病根**：pick_target_merged 的兜底调用曾**不透传 main_text / carried** ⇒ 该分支内
+    「恰 1 个新增段」判定用的是**含 main 侧带入段**的集合 ⇒ merge 提交把 main 新段
+    带入且本提交未新增段时 ⇒ 顶段判据落**带入段（他批）** ⇒ 归属劫持。
+    ⇒ ① 新增段集合改为「索引 - HEAD - main 侧带入段」；
+    ⇒ ② 剔除后新增段为空 ⇒ 用「剔除带入文件后的路径集」做 spec 覆盖性反查；
+    ⇒ 默认 main_text=None / carried=None ⇒ carried_segs 为空 ⇒ 行为与 W1117 原实现一致。
+
+    **为什么用私有函数而非给公开函数加可选参数**：公开函数签名变更会被
+    agent-guardrails 的 api_diff 判为「破坏性 API 变化」⇒ 该判据只做文本级参数比较，
+    无法区分「追加带默认值的可选参数」与「改动既有参数」⇒ 属真实风险信号
+    （调用方可能按位置传参）⇒ 改为新增私有助手承载新语义，公开 API 零变更。
     """
     iw, hw = top_w(index_text), top_w(head_text)
-    new_segs = sorted(set(segments(index_text)) - set(segments(head_text)))
+    carried_segs = set(segments(main_text or ""))
+    new_segs = sorted(set(segments(index_text)) - set(segments(head_text)) - carried_segs)
     if len(new_segs) == 1 and new_segs[0] != iw:
         return new_segs[0], "索引新增段 W%d（非顶位·乱序落段）" % new_segs[0]
+    st = set(staged or [])
+    st_eff = st - set(carried or [])
+    if carried_segs and not new_segs and st_eff:
+        for cand in sorted(set(segments(index_text)), reverse=True):
+            sp = spec_paths_for(cand)
+            if sp and st_eff.issubset(set(sp)):
+                return cand, "spec 覆盖性反查（剔除 merge 带入面后索引 ⊆ W%d spec）" % cand
     if iw is not None and iw == hw:
-        st = set(staged or [])
         if st:
             for cand in sorted(set(segments(index_text)), reverse=True):
                 sp = spec_paths_for(cand)
                 if sp and st.issubset(set(sp)):
                     return cand, "spec 覆盖性反查（索引 ⊆ W%d spec·修正/追加提交场景）" % cand
     return pick_target(index_text, head_text)
-
-
 def spec_paths_for(w):
     """本批 spec 的应动全集；spec 缺失/不可读 → None（判据不可执行·不伪造红）。
 
@@ -213,7 +240,7 @@ def pick_target_merged(index_text, head_text, staged=None, main_text=None, carri
             sp = spec_paths_for(cand)
             if sp and st_eff.issubset(set(sp)):
                 return cand, "spec 覆盖性反查（剔除 merge 带入面后索引 ⊆ W%d spec）" % cand
-    return pick_target_with_coverage(index_text, head_text, staged)
+    return _pick_target_with_coverage_merged(index_text, head_text, staged, main_text, carried)
 
 
 def _multi_batch_scope(index_text, head_text, main_text, carried):

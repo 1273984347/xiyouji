@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-qCm1h2QBNzkNg7e311AvZ34B03so0h5uZSjHoFRSYUI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-HblafN3hHuIRKObJS/4BnVdNy+Uznkzlj8vooQZRCt8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Visual Art · The Material Form of the Heart Sutra & Scent Map · Annotated Journey to the West</title>
@@ -184,7 +184,9 @@ html[data-theme="dark"] {
     --accent-4: #9DB98A;
     --chart-1: #E0604F;
     --chart-2: #7FA8C9;
+    --chart-3: #C8A063;
     --chart-4: #9DB98A;
+    --chart-5: #F2E8D3;
     --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
@@ -197,6 +199,16 @@ html[data-theme="dark"] {
     --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
     color-scheme: dark;
 }
+
+html[data-theme="dark"] h1 { font-weight: 600 !important; }
+html[data-theme="dark"] h2 { font-weight: 500 !important; }
+html[data-theme="dark"] h3 { font-weight: 500 !important; }
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 { font-weight: 400 !important; }
+
+html[data-theme="dark"] .seal { font-weight: 600 !important; }
+html[data-theme="dark"] .wordmark { font-weight: 500 !important; }
 html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
@@ -1037,6 +1049,21 @@ td.num, th.num {
     color: var(--ink-faint);
 }
 
+.ask-chip {
+    font-size: 13px;
+    color: var(--accent-2);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    background: var(--bg);
+    user-select: none;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart);
+}
+.ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+.ask-chip:active { transform: scale(0.97); }
+
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -1123,7 +1150,8 @@ td.num, th.num {
 @media print {
     .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
     body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+    
+    .card, .chart-block { border: 1px solid var(--line); break-inside: avoid; }
 }
 
 @media (max-width: 640px) {
@@ -2316,7 +2344,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke-width", 1.5)
             .style("cursor", "pointer")
             .style("filter", "drop-shadow(0 0 4px rgba(212,175,55,0.6))")
-            .transition().delay((d, i) => 200 + i * 150).duration(MOYUN_RM?0:400)
+            .transition().delay(MOYUN_RM?0:((d, i) => 200 + i * 150)).duration(MOYUN_RM?0:400)
             .attr("r", d => d.wave_amplitude >= 1.0 ? 7 : 5);
 
         g.selectAll(".wave-dot")
@@ -2356,7 +2384,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => d.chapter.replace("Ch. ", ""))
-            .transition().delay((d, i) => 400 + i * 150).duration(MOYUN_RM?0:400)
+            .transition().delay(MOYUN_RM?0:((d, i) => 400 + i * 150)).duration(MOYUN_RM?0:400)
             .style("opacity", 0.9);
 
         g.selectAll(".wave-label-bottom")
@@ -2372,7 +2400,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("font-weight", "600")
             .style("opacity", 0)
             .text(d => d.location)
-            .transition().delay((d, i) => 500 + i * 150).duration(MOYUN_RM?0:400)
+            .transition().delay(MOYUN_RM?0:((d, i) => 500 + i * 150)).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // X 轴标题
@@ -2640,7 +2668,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke-width", 2)
             .style("cursor", "pointer")
             .style("filter", "drop-shadow(0 1px 3px rgba(0,0,0,0.2))")
-            .transition().delay((d, i) => 300 + i * 100).duration(MOYUN_RM?0:400)
+            .transition().delay(MOYUN_RM?0:((d, i) => 300 + i * 100)).duration(MOYUN_RM?0:400)
             .attr("r", d => 4 + d.intensity * 1.6);
 
         g.selectAll(".scent-dot")
@@ -2681,7 +2709,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("fill", d => d._color)
             .style("opacity", 0)
             .text(d => d.location)
-            .transition().delay((d, i) => 400 + i * 100).duration(MOYUN_RM?0:400)
+            .transition().delay(MOYUN_RM?0:((d, i) => 400 + i * 100)).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // X 轴：地点序号
@@ -2698,7 +2726,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => "No." + d.n)
-            .transition().delay((d, i) => 500 + i * 100).duration(MOYUN_RM?0:400)
+            .transition().delay(MOYUN_RM?0:((d, i) => 500 + i * 100)).duration(MOYUN_RM?0:400)
             .style("opacity", 0.8);
 
         // 标题

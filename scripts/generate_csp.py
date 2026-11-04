@@ -50,7 +50,11 @@ RAG_ORIGIN = "http://127.0.0.1:8777"
 # 开发模板（不入站、不入 sitemap）：不注入 CSP，避免模板占位内容干扰哈希门禁
 TEMPLATE_EXCLUDE = {"_template.html"}
 
-SCRIPT_RE = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.DOTALL)
+SCRIPT_RE = re.compile(
+    r"<[sS][cC][rR][iI][pP][tT](?![^>]*\b[sS][rR][cC]\s*=)[^>]*>"
+    r"(.*?)</[sS][cC][rR][iI][pP][tT](?:\s[^>]*)?\s*>",
+    re.DOTALL,
+)
 # 本工具始终以双引号包裹 content；CSP 令牌用单引号（'self'/'sha256-…'），
 # 因此 content 内不会出现双引号，用 [^"]* 即可完整捕获。
 META_RE = re.compile(

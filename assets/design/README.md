@@ -111,7 +111,7 @@
 
 手工路径画不出工笔质感的东方纹样，因此另用生成模型做**纯图形**概念探索
 （提示词锁死：无文字、单色墨 + 一处朱砂、宣纸底、无渐变无 3D 无卡通）。
-共两批 18 张，**14 张可用、4 张判废**。
+共两批**生成 18 张、入库 16 张**（13 张可用 · 3 张判废）；另 2 张（紧箍环 / 菩提叶）判废后未入库。
 
 第一批（6 张）：
 
@@ -128,7 +128,7 @@
 
 | 概念稿 | 判定 | 说明 |
 | --- | --- | --- |
-| **取经路舆图** | **可用 · 已回写为矢量（方向 I）** | 全部 18 张里最具 Logo 潜力的一张：几何化、可矢量化，且直指项目本体 |
+| **取经路舆图** | **可用 · 已回写为矢量（方向 I）** | 全部 16 张入库稿里最具 Logo 潜力的一张：几何化、可矢量化，且直指项目本体 |
 | 如意金箍棒 v2 | 可用 | 箍纹细节明显优于第一版（方向 E 已据此升级） |
 | 飞檐斗拱 | 可用 | 起翘飞檐 + 斗拱 + 铃铛，线条质量高 |
 | 九环锡杖 / 月牙铲 / 佛珠 / 净瓶柳枝 / 司南 / 晨钟 | 可用 | 各自形制清楚，可作后续储备 |
@@ -176,30 +176,60 @@ Catmull-Rom 转三次贝塞尔平滑闭合。笔锋的粗细变化是本轮视�
 ## 7. 资产清单
 
 ```
-tmpe/_reports/logo-explore-v2/
-├── index.html                 预览页（零外域依赖 · file:// 可开 · 深浅底切换 · 多档小尺寸实测 · AI 概念稿区）
-├── README.md                  本文件
-├── assets/
-│   ├── {e,f,g,h}-mark-{light,dark,mono}.svg
-│   ├── {e,f,g,h}-mark-inv.svg
-│   ├── {e,f,g,h}-lockup-{light,dark}.svg
-│   ├── current-icon-512.png   现有站点图标（对比用）
-│   ├── concepts/              AI 概念稿（6 张，640×640）
-│   └── png/                   PNG 导出（透明背景）+ favicon.ico
-├── screenshots/
-│   ├── preview-sheet.png      四方向 × 深浅底拼版
-│   ├── concept-sheet.png      AI 概念稿拼版
-│   ├── full-page-light.png    整页截图
-│   └── dir-{e,f,g,h}.png      四个方向分区截图
-└── tools/
+assets/design/
+├── index.html                 预览页（零外域依赖 · file:// 可开 · 深浅底切换）
+├── INDEX.md                   目录索引（生成件）
+├── README.md                  本文件（生成件 · 由 tools/build_assets.py 写盘）
+├── ai-concepts/               AI 概念稿（入库 16 张 · 640×640）
+│   ├── concept-01-ruyi-staff.png · concept-02-ruyi-cloud.png
+│   ├── concept-03-scroll.png · concept-04-mountains.png
+│   ├── c2-01-ruyi-staff-v2.png · c2-02-nine-ring-staff.png
+│   ├── c2-03-lotus.png · c2-04-eave.png
+│   ├── c2-05-prayer-beads.png · c2-06-vase-willow.png
+│   ├── c2-07-moon-spade.png · c2-08-itinerary-map.png
+│   ├── c2-09-sinan-compass.png · c2-10-jade-seal.png
+│   ├── c2-11-banana-fan.png · c2-12-bell.png
+│   ├── INDEX.md
+│   └── README.md
+├── alternatives/              备选方向矢量（浅底版）
+│   ├── e-mark-light.svg · f-mark-light.svg
+│   ├── g-mark-light.svg · i-mark-light.svg
+│   ├── INDEX.md
+│   └── README.md
+├── logo/                      品牌资产（现行）
+│   ├── logo-mark-light.svg            图形标（山形）矢量源
+│   ├── logo-lockup-light.svg          组合标（图形 + 字标）矢量源
+│   ├── logo-lockup-light-sub.svg      组合标（带副标）
+│   ├── current-icon-512.png           现有站点图标（对比用）
+│   ├── favicon-16.png · favicon-32.png · favicon-48.png · favicon.ico
+│   ├── icon-192.png · icon-512.png · icon-maskable-512.png
+│   ├── INDEX.md
+│   └── README.md
+├── process/                   过程留痕
+│   ├── RECEIPT-W855.md
+│   ├── INDEX.md
+│   └── README.md
+├── screenshots/               派生证据截图（源在 tools/）
+│   ├── preview-sheet.png · concept-sheet.png · concept-sheet2.png
+│   ├── dir-e.png · dir-f.png · dir-g.png · dir-h.png
+│   ├── landing-icons.png · logo-lockup-light-preview.png
+│   ├── logo-lockup-light-sub-preview.png · mark-i-check.png
+│   ├── site-home-after.png · full-page-light.png
+│   ├── INDEX.md
+│   └── README.md
+└── tools/                     生成工具（资产的唯一来源）
     ├── brush.py               楔形笔触引擎（中线 + 宽度函数 + 平滑轮廓）
     ├── svgkit2.py             四个图形 + 组合标
-    ├── build_assets.py              资产生成 + 自检（--check）
-    ├── preview_png.py         拼版预览（不依赖浏览器）
-    ├── concept_args.json      AI 概念稿提示词
-    ├── fetch_concepts.py      概念稿下载与归一
+    ├── svgkit_text.py         图形标转路径（字标）
+    ├── build_assets.py        资产生成 + 自检（--check）
+    ├── build_landing.py       落地资产（应用图标多档 + favicon）
     ├── export_png.py          SVG → PNG / favicon.ico
-    └── archive_shots.py       截图归档与分区裁切
+    ├── preview_png.py         拼版预览（不依赖浏览器）
+    ├── gen_concepts.py        概念稿生成与归一
+    ├── probe_font.py          字体字形覆盖探针
+    ├── concept_args.json · concept_args2.json   AI 概念稿提示词
+    ├── INDEX.md
+    └── README.md
 ```
 
 ## 8. 自检口径
@@ -230,7 +260,7 @@ python scripts/preflight_check.py --touches "site/static/icons/,site/manifest.we
 
 - [ ] 在对账表登记 W856 认领行（touches 声明上述 6 项）
 - [ ] 按选定方向 + 品牌名重新导出（字标随名字变，图形不变）
-- [ ] 替换 `site/static/icons/icon-{16,32,192,512}.png` 与 `icon-maskable-512.png`
+- [ ] 替换 `site/static/icons/icon-{16,32,192,512}.png` 与 `site/static/icons/icon-maskable-512.png`
 - [ ] 更新 `site/manifest.webmanifest` 的图标引用
 - [ ] `site/index.html` 页眉换成组合标，hero 深色区块用深底版
 - [ ] 桌面端应用图标（`xiyouji-desktop/`）同步
@@ -251,12 +281,11 @@ python scripts/preflight_check.py --touches "site/static/icons/,site/manifest.we
 ## 10. 复算命令
 
 ```powershell
-cd tmpe/_reports\logo-explore-v2
-py -3 tools\build_assets.py --check          # 生成 SVG / 预览页 / README + 全量自检
-py -3 tools\preview_png.py              # 四方向 × 深浅底拼版（不依赖浏览器，最快的视觉回路）
-py -3 tools\export_png.py               # SVG → PNG（透明背景）+ favicon.ico
-py -3 tools\fetch_concepts.py           # 概念稿下载（需 mcode-tools）
-py -3 tools\archive_shots.py <整页截图.png>   # 归档截图并裁四方向分区图
+cd assets/design
+py -3 tools/build_assets.py --check          # 生成 SVG / 预览页 / README + 全量自检
+py -3 tools/preview_png.py                  # 四方向 × 深浅底拼版（不依赖浏览器，最快的视觉回路）
+py -3 tools/export_png.py                   # SVG → PNG（透明背景）+ favicon.ico
+py -3 tools/gen_concepts.py                 # 概念稿生成与归一（提示词见 tools/concept_args*.json）
 ```
 
-第一轮的产物保留在 `tmpe/_reports/logo-explore/`，可横向对照（第一轮判定作废，仅留作对照）。
+第一轮（抽象方向）判定作废、未随本目录迁移，未入库。
