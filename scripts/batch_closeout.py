@@ -60,14 +60,20 @@ def _run_archive():
     if rc != 0:
         return False
     led = os.path.join(ROOT, 'docs', '00-导读', 'W批次编号对账表.md')
-    rows = 0
+    # W1121：原实现用 io.open 但**未 import io** ⇒ NameError 被同句宽 except 吞掉
+    # ⇒ 台账行窗口腾窗**从未真正触发**（静默失效·每次都走「读取失败·跳过」分支）。
+    # ⇒ 根修：改仓内主流 open(..., encoding=) 写法；except 收窄到 ImportError/OSError
+    #    ⇒ 代码缺陷（NameError 等）不再被吞，直接暴露。
     try:
         import archive_ledger_rows
-        for line in io.open(led, encoding='utf-8').read().split(chr(10)):
-            if archive_ledger_rows.ROW_RE.match(line):
-                rows += 1
-    except Exception as e:
-        print('[archive] 台账行数读取失败（跳过行窗口）: %s' % e)
+    except ImportError as e:
+        print('[archive] 行数统计依赖缺失（跳过行窗口·非阻断）: %s' % e)
+        return True
+    try:
+        with open(led, encoding='utf-8') as fh:
+            rows = sum(1 for line in fh if archive_ledger_rows.ROW_RE.match(line))
+    except OSError as e:
+        print('[archive] 台账行数读取失败（跳过行窗口·非阻断）: %s' % e)
         return True
     if rows > LEDGER_WINDOW:
         rc2, out2 = run([sys.executable, os.path.join('scripts', 'archive_ledger_rows.py'),
