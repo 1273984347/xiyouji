@@ -1,3 +1,24 @@
+## W1125 自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1125 | 本批工具/产物 |
+| AGENTS.md | W1125 | 本批工具/产物 |
+| CHANGELOG.md | W1125 | 本批工具/产物 |
+| HANDOVER.md | W1125 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1125 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1125 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md | W1125 | 本批工具/产物 |
+| docs/agent/pitfalls.md | W1125 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1125.txt | W1125 | 本批工具/产物 |
+| scripts/output/_w1125_spec.json | W1125 | 本批工具/产物 |
+| scripts/output/file-index.md | W1125 | 本批工具/产物 |
+| site/data/chart-design.html | W1125 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1125 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1125 | 本批工具/产物 |
+| site/dukou-engine.html | W1125 | 本批工具/产物 |
+| site/index.html | W1125 | 本批工具/产物 |
+
 ## W1123 预约释放语义根修 + 提交范围门禁 merge 场景归属根修（2026-11-04）
 
 | 文件 | W | 说明 |
