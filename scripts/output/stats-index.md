@@ -24,7 +24,7 @@
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 27 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | 1068 |
 | pytest_collected | 1352 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1126 |
-| report_docs | 147 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 1126 |
+| report_docs | 149 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 1126 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -38,15 +38,28 @@
 
 ## 反向：W → stats key 变更（新→旧）
 
-### 1126（2026-11-04 16:38:19）
-- pytest_collected: 1336 → 1352
-- report_docs: 145 → 147
+### 1126（2026-11-04 17:22:45）
+- pytest_collected: 1325 → 1352
+- report_docs: 148 → 149
 
-### 1126（2026-11-04 16:02:50）
-- pytest_collected: 1309 → 1336
+### W1125（2026-11-04 16:41:22）
+- report_docs: 147 → 148
 
-### 1126（2026-11-04 15:32:09）
+### 1127（2026-11-04 16:02:28）
+- pytest_collected: 1318 → 1325
+- report_docs: 146 → 147
+
+### W1129（2026-11-04 15:42:11）
+- report_docs: 145 → 146
+
+### 1129（2026-11-04 15:41:52）
+- pytest_collected: 1314 → 1318
+
+### W1128（2026-11-04 15:21:42）
 - report_docs: 144 → 145
+
+### 1128（2026-11-04 15:21:14）
+- pytest_collected: 1309 → 1314
 
 ### 1124（2026-11-04 14:37:29）
 - pytest_collected: 1307 → 1309
