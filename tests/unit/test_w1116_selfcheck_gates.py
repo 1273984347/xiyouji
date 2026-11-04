@@ -215,4 +215,4 @@ def test_rule_upper_picks_rule_line_not_history_mention():
     ])
     assert reg._rule_upper(body) == "1119"
     # 无本体行时回退旧行为（兼容既有样本）
-    assert reg._rule_upper("编号规则 W001-W0900") == "0900"
+    assert reg._rule_upper("编号规则 W001-W0900") == "0900"\n

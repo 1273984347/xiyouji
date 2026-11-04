@@ -145,3 +145,4 @@ if __name__ == "__main__":
     if "--self-test" in sys.argv:
         sys.exit(_self_test())
     sys.exit(main())
+\n
