@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（184）
+## 文件（185）
 
 ### Markdown 文档
 
@@ -81,6 +81,7 @@
 - `build_reader.py`
 - `bump_footer_version.py`
 - `bump_version.py`
+- `cascade_idempotence.py`
 - `cascade_lock.py`
 - `chart_render_probe.py`
 - `check_action_refs.py`

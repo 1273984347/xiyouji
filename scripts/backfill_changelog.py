@@ -40,9 +40,17 @@ RE_RULE = re.compile(r"（W001-W(\d+)）")
 # 本工具原先只读现役面 ⇒ 已归档段被误判「未立段」（实测待补 74 段假清单·W728-W802 全是
 # 归档段假阳性）。立段判定自此两面合扫；**插入目标仍只有现役面**（归档文件禁写）。
 ARCHIVE_CHANGELOG = os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md")
+# W1122：file-index 面的归档件（立段判定须与 CHANGELOG 面同口径合看现役+归档两面）
+ARCHIVE_FILE_INDEX = os.path.join("archive", "docs", "file-index-ARCHIVE.md")
 
 SPEC_KEYS = ("batch", "date", "title", "desc", "head_entry", "head_sentence",
              "changelog_body", "milestone_block", "agents_note", "file_index_rows")
+
+# W1122：字段需求按「写入去向」拆分——CHANGELOG 面与 file-index 面所需字段不同。
+# 完整性检查改为按**待补的那一面**校验：该面缺字段 ⇒ 阻断（判据强度不降）；
+# 无关面的历史缺字段不再误伤待补面（原单面判定会让「只缺一面字段」的件整批阻断）。
+CL_FACE_KEYS = ("batch", "date", "title", "changelog_body")
+FI_FACE_KEYS = ("batch", "date", "title", "file_index_rows")
 
 
 def load(path):
@@ -92,44 +100,73 @@ def insert_fi(text, w, block):
     raise AssertionError("file-index 找不到更小的段可作锚点（W%d）" % w)
 
 
-def collect_pending():
-    """扫 spec，筛出「未立段」的（现役+归档两面合看·已立段的不重复补）。"""
+def fi_segments(text):
+    """file-index 已立段号集合（W1122 新增·与 segments 同形态）。"""
+    return {int(m.group(1)[1:]) for m in RE_FI_SEG.finditer(text)}
+
+
+def collect_pending_faces():
+    """扫 spec，判定每个 spec 在 **CHANGELOG 面**与 **file-index 面**各自的立段状态。
+
+    W1122 根修（遗留 A）：原 collect_pending 的「已立段」判定**只看 CHANGELOG 一面**
+    ⇒ 某批若 CHANGELOG 已立段而 file-index 未立段 ⇒ 被判「已立段」⇒ 跳过
+    ⇒ **file-index 段永远补不上**（单面判定 ⇒ 双面独立判定）。
+
+    返回 ([(W 号, spec, need_changelog, need_file_index)], established, fi_established)；
+    两面皆已立段 ⇒ 不在结果内。
+    """
     cl, _ = load("CHANGELOG.md")
     established = {w for w, _ in segments(cl)}
     arc_p = os.path.join(ROOT, ARCHIVE_CHANGELOG)
     if os.path.exists(arc_p):
         arc, _ = load(ARCHIVE_CHANGELOG)
         established |= {w for w, _ in segments(arc)}
+    fi, _ = load("scripts/output/file-index.md")
+    fi_established = fi_segments(fi)
+    fi_arc_p = os.path.join(ROOT, ARCHIVE_FILE_INDEX)
+    if os.path.exists(fi_arc_p):
+        fi_arc, _ = load(ARCHIVE_FILE_INDEX)
+        fi_established |= fi_segments(fi_arc)
     out = []
     for p in sorted(glob.glob(os.path.join(ROOT, "scripts", "output", "_w*_spec.json"))):
         try:
             spec = json.load(open(p, encoding="utf-8"))
         except Exception:
-            # W1117 根修：历史 spec 可能含裸控制字符而不可解析（实测 _w1115_spec.json·
-            # JSONDecodeError: Invalid control character）⇒ 阻断整个补段流程。
-            # 处置：该件对应的号若**已立段**（可从文件名取号）⇒ 跳过（不阻断补段）；
-            # 若**未立段** ⇒ 原样抛出（fail-closed·不得静默放过待补段的坏件）。
+            # W1117 根修：历史 spec 可能含裸控制字符而不可解析 ⇒ 不阻断整个补段流程。
+            # W1122：跳过条件由「CHANGELOG 已立段」收紧为「**两面皆已立段**」
+            # ⇒ 一面已立一面未立的坏件仍阻断（该件确实需要补段 ⇒ fail-closed）。
             m = re.search(r"_w(\d+)_spec\.json$", os.path.basename(p))
-            if m and int(m.group(1)) in established:
+            if m and int(m.group(1)) in established and int(m.group(1)) in fi_established:
                 continue
             raise
-        # W1117 根修：完整性检查移到「已立段」判定**之后**。
-        # 病根：原顺序对**每一个** spec 做字段完整性检查 ⇒ 任何一个**已立段**的老 spec
-        # （实测 _w1077_spec.json 缺 changelog_body / milestone_block / agents_note）
-        # 都会把整个补段流程阻断（本批实测 AssertionError）⇒ 而完整性只对**待补段**有意义：
-        # 待补段的 spec 缺字段 ⇒ 仍 fail-closed 拦住（判据强度不降）。
         batch = spec.get("batch")
         if not batch:
             continue
         w = int(batch[1:])
-        if w in established:
+        need_cl = w not in established
+        need_fi = w not in fi_established
+        if not need_cl and not need_fi:
             continue
-        missing = [k for k in SPEC_KEYS if k not in spec]
+        missing = []
+        if need_cl:
+            missing += [k for k in CL_FACE_KEYS if k not in spec]
+        if need_fi:
+            missing += [k for k in FI_FACE_KEYS if k not in spec]
         if missing:
             raise AssertionError("%s 缺字段 %s（补段前先补 spec）" % (os.path.basename(p), missing))
-        out.append((w, spec))
+        out.append((w, spec, need_cl, need_fi))
     out.sort(key=lambda t: t[0])
-    return out, established
+    return out, established, fi_established
+
+
+def collect_pending():
+    """扫 spec，筛出「未立段」的（现役+归档两面合看·已立段的不重复补）。
+
+    W1122：返回形状与语义**均保持不变**（按 CHANGELOG 面判定）⇒ 既有调用方不受影响；
+    双面独立判定的新能力见 collect_pending_faces。
+    """
+    faces, established, _fi_established = collect_pending_faces()
+    return [(w, spec) for w, spec, need_cl, _need_fi in faces if need_cl], established
 
 
 def refresh_current(apply):
@@ -193,33 +230,54 @@ def main():
     if args.refresh_current:
         return refresh_current(apply=args.apply)
 
-    pending, established = collect_pending()
+    # W1122：改用**双面独立判定**（CHANGELOG 面与 file-index 面分判）——
+    # 原判定只看 CHANGELOG 一面 ⇒ 一面已立一面未立的批次被永久跳过 ⇒ file-index 段补不上。
+    pending_faces, established, fi_established = collect_pending_faces()
     if args.only:
         only = {int(x.strip().lstrip("Ww")) for x in args.only.split(",") if x.strip()}
-        known = {w for w, _ in pending}
+        known = {w for w, _s, _c, _f in pending_faces}
         unknown = sorted(only - known)
-        assert not unknown, "--only 指定号 %s 不在待补清单（或 spec 缺失/已立段）" % unknown
-        pending = [(w, s) for w, s in pending if w in only]
-    if not pending:
-        print("[BACKFILL] 无待补段（所有 spec 均已在 CHANGELOG 有对应段）")
+        assert not unknown, "--only 指定号 %s 不在待补清单（或 spec 缺失/两面皆已立段）" % unknown
+        pending_faces = [t for t in pending_faces if t[0] in only]
+    # W1122：**历史缺口**（待补 W 号低于已立段 max）默认**不自动补**——补它会把 2026-10 的
+    # 老段插进现役降序位（改现役面 + 撞体积窗）⇒ 须显式 --only 指定才补（fail-closed·先看清单）。
+    if not args.only and established:
+        _hist = [t[0] for t in pending_faces if t[0] < max(established)]
+        if _hist:
+            print("[BACKFILL] 提示：以下为**历史缺口**（W 号低于已立段 max W%d）·默认不自动补"
+                  "（会改现役面）⇒ 须显式 --only %s 确认后补：%s"
+                  % (max(established), ",".join("W%d" % x for x in _hist),
+                     " ".join("W%d" % x for x in _hist)))
+            pending_faces = [t for t in pending_faces if t[0] >= max(established)]
+    if not pending_faces:
+        print("[BACKFILL] 无待补段（所有 spec 均已在 CHANGELOG 与 file-index 两面有对应段）")
         return 0
-    print("[BACKFILL] 已立段 %d 个（max W%d）· 待补 %d 段：%s"
-          % (len(established), max(established), len(pending),
-             " ".join("W%d" % w for w, _ in pending)))
+    n_cl = sum(1 for _w, _s, c, _f in pending_faces if c)
+    n_fi = sum(1 for _w, _s, _c, f in pending_faces if f)
+    print("[BACKFILL] 已立段 CHANGELOG %d 个（max W%d）· file-index %d 个（max W%d）"
+          "· 待补 %d 段（CHANGELOG 面 %d · file-index 面 %d）：%s"
+          % (len(established), max(established), len(fi_established),
+             max(fi_established) if fi_established else 0,
+             len(pending_faces), n_cl, n_fi,
+             " ".join("W%d" % t[0] for t in pending_faces)))
 
     cl, cl_nl = load("CHANGELOG.md")
     fi, fi_nl = load("scripts/output/file-index.md")
     seg_before = len(segments(cl))
     fi_before = len(RE_FI_SEG.findall(fi))
-    max_w = max(max(established), max(w for w, _ in pending))
+    max_w = max(max(established), max(fi_established) if fi_established else 0,
+                max(t[0] for t in pending_faces))
 
-    for w, spec in pending:
-        # W956/P-43-05：与 batch_cascade 同款段状态断言（两个段状态写入点共用判据·E-28 防线）
-        import batch_cascade as _bc
-        _bc._assert_status_wnum(spec, spec["batch"])
-        cl, anchor = insert_before_smaller(cl, w, changelog_block(spec))
-        fi = insert_fi(fi, w, file_index_block(spec))
-        print("  + W%-3d 插在 W%d 段之前" % (w, anchor))
+    for w, spec, need_cl, need_fi in pending_faces:
+        if need_cl:
+            # W956/P-43-05：与 batch_cascade 同款段状态断言（两个段状态写入点共用判据·E-28 防线）
+            import batch_cascade as _bc
+            _bc._assert_status_wnum(spec, spec["batch"])
+            cl, anchor = insert_before_smaller(cl, w, changelog_block(spec))
+            print("  + W%-3d CHANGELOG 段插在 W%d 段之前" % (w, anchor))
+        if need_fi:
+            fi = insert_fi(fi, w, file_index_block(spec))
+            print("  + W%-3d file-index 段插入" % w)
 
     # ---------- 编号规则推进（只升不降） ----------
     m = RE_RULE.search(cl)
@@ -234,15 +292,17 @@ def main():
     # ---------- 落盘前全量断言 ----------
     segs = segments(cl)
     ws = [w for w, _ in segs]
-    assert len(ws) == seg_before + len(pending), \
-        "段数不符：%d + %d != %d" % (seg_before, len(pending), len(ws))
+    assert len(ws) == seg_before + n_cl, \
+        "段数不符：%d + %d != %d" % (seg_before, n_cl, len(ws))
     assert ws == sorted(ws, reverse=True), "段序未保持严格降序：%s" % ws[:20]
     assert len(set(ws)) == len(ws), "出现重复段号"
-    for w, spec in pending:
+    for w, spec, need_cl, _need_fi in pending_faces:
+        if not need_cl:
+            continue
         title_body = re.sub(r"^W\d+\s+", "", spec["title"]).strip()
         head = "### %s（%s）：%s" % (spec["batch"], spec["date"], title_body)
         assert cl.count(head) == 1, "W%d 段标题命中 %d 次（应为 1）" % (w, cl.count(head))
-    assert len(RE_FI_SEG.findall(fi)) == fi_before + len(pending), "file-index 段数不符"
+    assert len(RE_FI_SEG.findall(fi)) == fi_before + n_fi, "file-index 段数不符"
     fi_ws = [int(x[1:]) for x in RE_FI_SEG.findall(fi)]
     assert fi_ws == sorted(fi_ws, reverse=True), "file-index 段序未保持降序"
 
@@ -258,7 +318,7 @@ def main():
         with open(os.path.join(ROOT, path), "w", encoding="utf-8", newline="") as f:
             f.write(text.replace("\n", nl))
         print("  写入 %s（%s）" % (path, "CRLF" if nl == "\r\n" else "LF"))
-    print("[APPLY] 补段完成：%d 段" % len(pending))
+    print("[APPLY] 补段完成：%d 段" % len(pending_faces))
     return 0
 
 
