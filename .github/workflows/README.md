@@ -1,7 +1,6 @@
 # CI/CD 工作流说明
 
 > **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1136** — 西游记解读项目（`D:\xiyouji`，W1136）的 GitHub Actions 工作流层。
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1136** — 西游记解读项目（`D:\xiyouji`，W1136）的 GitHub Actions 工作流层。
 > **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1132** — 西游记解读项目（`D:\xiyouji`，W1132）的 GitHub Actions 工作流层。
 > **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1133** — 西游记解读项目（`D:\xiyouji`，W1133）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
