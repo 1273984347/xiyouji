@@ -62,14 +62,58 @@ def top_w(changelog_text):
     return int(m.group(1)) if m else None
 
 
+def segments(changelog_text):
+    """CHANGELOG 全部段号（按文中顺序·即批号降序）。"""
+    return [int(m.group(1)) for m in TOP_RE.finditer(changelog_text or "")]
+
+
 def pick_target(index_text, head_text):
-    """归属批次：索引顶段 ≠ HEAD 顶段时取索引（本提交在新增该段），否则取 HEAD。→ (w, 依据)"""
+    """归属批次：索引顶段 ≠ HEAD 顶段时取索引（本提交在新增该段），否则取 HEAD。→ (w, 依据)
+
+    **W1117 扩展一（乱序落段·新增段不在顶位）**：低号批在更高号批**之后**落段
+    （并行会话乱序合并的真实场景：对方 W1118 先合入 main，我方 W1117 后落段）⇒
+    本提交新增的段**不在顶位**（顶位仍是更高号批）⇒ 原判据只认顶段 ⇒ 归属错落到
+    更高号批 ⇒ 拿**他批** spec 当应动全集 ⇒ 假红「索引含本批 spec 之外的文件」。
+    ⇒ 先取「索引态相对 HEAD 的新增段集合」；**恰有 1 个**新增段 ⇒ 归属它
+    （无论是否顶位）。
+
+    **W1117 扩展二（修正本批自身段 / 追加提交）**：此时新增段集合为空 ⇒ 顶段判据落他批。
+    ⇒ 用**spec 覆盖性反查**：在索引态各段号里找「其 spec 的应动全集覆盖索引态路径集」
+    的批次（批号大者优先）⇒ 归属它。无候选 ⇒ 沿用原判据（真·代提风险仍判红）。
+
+    **判据强度不降**：最终仍要求「索引态路径集 ⊆ 归属批 spec 的应动全集」。
+    """
     iw, hw = top_w(index_text), top_w(head_text)
     if iw is not None and iw != hw:
         return iw, "索引新增段 W%d" % iw
     if hw is not None:
         return hw, "HEAD 现役段 W%d（回填/补账类）" % hw
     return None, "两侧都读不到段号"
+
+
+def pick_target_with_coverage(index_text, head_text, staged=None):
+    """归属判定 + **spec 覆盖性反查**（修正本批自身段 / 追加提交场景）。
+
+    **W1117 两项扩展**（均在 pick_target 之外新增·不改既有公开函数签名与行为）：
+    ① **乱序落段**：低号批后落段 ⇒ 本提交新增的段不在顶位 ⇒ 顶段判据落他批 ⇒ 假红。
+    ⇒ 先取「索引态相对 HEAD 的新增段集合」；恰 1 个且非顶位 ⇒ 归属它。
+    ② **修正本批自身段 / 追加提交**：新增段集合为空 ⇒ 顶段判据同样落他批 ⇒ 假红。
+    ⇒ 在顶段回落时用「索引态路径集能否被某批 spec 的应动全集覆盖」反查归属（批号大者优先）；
+    无候选 ⇒ 沿用原判据（真·代提风险仍判红）。
+    **判据强度不降**：最终仍要求「索引态路径集 ⊆ 归属批 spec 的应动全集」。
+    """
+    iw, hw = top_w(index_text), top_w(head_text)
+    new_segs = sorted(set(segments(index_text)) - set(segments(head_text)))
+    if len(new_segs) == 1 and new_segs[0] != iw:
+        return new_segs[0], "索引新增段 W%d（非顶位·乱序落段）" % new_segs[0]
+    if iw is not None and iw == hw:
+        st = set(staged or [])
+        if st:
+            for cand in sorted(set(segments(index_text)), reverse=True):
+                sp = spec_paths_for(cand)
+                if sp and st.issubset(set(sp)):
+                    return cand, "spec 覆盖性反查（索引 ⊆ W%d spec·修正/追加提交场景）" % cand
+    return pick_target(index_text, head_text)
 
 
 def spec_paths_for(w):
@@ -106,7 +150,7 @@ def plan(staged, spec_set):
 def run_gate():
     staged = staged_paths()
     idx_text, head_text = _show(":"), _show("HEAD")
-    target, why = pick_target(idx_text, head_text)
+    target, why = pick_target_with_coverage(idx_text, head_text, staged)
     spec_set = spec_paths_for(target)
 
     fails = []
@@ -137,7 +181,7 @@ def run_gate():
 def run_report():
     staged = staged_paths()
     idx_text, head_text = _show(":"), _show("HEAD")
-    target, why = pick_target(idx_text, head_text)
+    target, why = pick_target_with_coverage(idx_text, head_text, staged)
     spec_set = spec_paths_for(target)
     ok, extra = plan(staged, spec_set)
     print("归属：%s（%s）" % (target, why))
