@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-+FvqUj7Pj+P+CgNOMf6mK8PhIgdyAc7qGe5J6PIp5GQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-LLueJC/aCajQ0hxhZjywrYXFx3WVNMhwcq5vBrzlNhE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Narrative Experiment · Board Game & Card Mechanics · Annotated Journey to the West</title>
@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Board Game: Spirit Mountain Board of Directors · Game Phases · A Three-Stage Flow · Hardship Cards · 10 Cards · Annotated Journey to the West">
     <meta property="og:description" content="Board Game: Spirit Mountain Board of Directors · Game Phases · A Three-Stage Flow · Hardship Cards · 10 Cards · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -2043,7 +2043,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <div class="card-group">
                 <div class="group-header">
-                    <span class="gh-tag" style="background: #c8463a;">Karma Cards</span>
+                    <span class="gh-tag" style="background: var(--chart-1);">Karma Cards</span>
                     <span class="gh-title">KARMA</span>
                     <span class="gh-count">12 cards · K01–K12</span>
                 </div>
@@ -2052,7 +2052,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <div class="card-group">
                 <div class="group-header">
-                    <span class="gh-tag" style="background: #3a6b8c;">Artifact Cards</span>
+                    <span class="gh-tag" style="background: var(--chart-2);">Artifact Cards</span>
                     <span class="gh-title">ARTIFACT</span>
                     <span class="gh-count">10 cards · F01–F10</span>
                 </div>
@@ -2105,10 +2105,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="combo-tip" id="combo-tip"></div>
             </div>
             <div class="combo-legend">
-                <div class="lg-item"><span class="lg-dot" style="background:#c8463a;"></span><span>Karma Cards · 12</span></div>
-                <div class="lg-item"><span class="lg-dot" style="background:#3a6b8c;"></span><span>Artifact Cards · 10</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--chart-1);"></span><span>Karma Cards · 12</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--chart-2);"></span><span>Artifact Cards · 10</span></div>
                 <div class="lg-item"><span class="lg-dot" style="background:#C9A063;"></span><span>Obsession Cards · 10</span></div>
-                <div class="lg-item"><span class="lg-dot" style="background:#6B8E5A;"></span><span>Story Output · 1200</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--chart-4);"></span><span>Story Output · 1200</span></div>
             </div>
         </section>
 
@@ -2937,7 +2937,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 const cardList = g.cards.slice(0, 4).map(c => c.id + " " + c.name).join(" · ");
                 tip.style("opacity", 1)
                     .html(`<div style="color:${g.color};font-weight:700;margin-bottom:var(--space-2);">${g.name} · ${g.name_en}</div>` +
-                          `<div style="font-size:0.78rem;color:#e9b885;margin-bottom:var(--space-2);">${g.count} cards total</div>` +
+                          `<div style="font-size:0.78rem;color:var(--chart-3);margin-bottom:var(--space-2);">${g.count} cards total</div>` +
                           `<div style="font-size:0.78rem;">${cardList} ...</div>`);
             })
             .on("mousemove", function(e) {

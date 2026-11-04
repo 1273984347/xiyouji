@@ -168,6 +168,13 @@ def advance_changelog_rule(text, batch):
     m = re.search(r"（W001-W(\d+)）", text)
     if m and int(m.group(1)) >= _bnum(batch):
         return text, False
+    # W1119 取位修复：旧实现取**全文首个**（W001-W<四位数字>）匹配 ⇒ 首个匹配可能落在
+    #   历史段陈述正文里（如 W1117 段写「编号规则 W001-W1118」）⇒ 改写历史正文而非本体。
+    #   ⇒ 改为定位「编号规则段本体」行（含 **W### 编号规则**）再改写该行；找不到则回退旧行为。
+    _pat = re.compile(r"（W001-W\d+）")
+    for _ln in text.split(chr(10)):
+        if "**W### 编号规则**" in _ln and _pat.search(_ln):
+            return _sub_once(text, r"（W001-W\d+）", "（W001-W%s）" % num, "CHANGELOG 编号规则段上限")
     return _sub_once(text, r"（W001-W\d+）", "（W001-W%s）" % num, "CHANGELOG 编号规则段上限")
 
 

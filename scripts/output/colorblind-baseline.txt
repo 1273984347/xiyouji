@@ -1,6 +1,6 @@
 # 第 29 门禁 · 图表配色色盲安全基线（PD-1a·W653）
 # 语义：违规集合单调不增——基线内 frozen（WARN 豁免）·基线外新增 FAIL·修复后删行收紧
-# 格式：page|hexA|hexB|sim|delta   ·快照 2026-10-22 ·阈值 ΔE<10.0·口径=light 静态
+# 格式：page|hexA|hexB|sim|delta   ·快照 2026-11-04 ·阈值 ΔE<10.0·口径=light 静态
 site/data/81-hardships-view.html|#006837|#2d6a4f|protan|7.3
 site/data/81-hardships-view.html|#006837|#4a6a2a|protan|4.8
 site/data/81-hardships-view.html|#006837|#5a3828|deuter|6.8
@@ -12583,6 +12583,7 @@ site/data/narrative-experiment.html|#69a17f|#9a9280|deuter|1.3
 site/data/narrative-experiment.html|#69a17f|#a39383|deuter|2.0
 site/data/narrative-experiment.html|#69a17f|#aa907b|protan|3.0
 site/data/narrative-experiment.html|#69a17f|#b28d80|deuter|3.2
+site/data/narrative-experiment.html|#69a17f|#b38f58|protan|9.0
 site/data/narrative-experiment.html|#69a17f|#b78d6a|protan|5.0
 site/data/narrative-experiment.html|#69a17f|#ba8a7a|protan|3.8
 site/data/narrative-experiment.html|#69a17f|#be8880|deuter|3.9
@@ -12659,6 +12660,7 @@ site/data/narrative-experiment.html|#6b8e5a|#a39383|deuter|9.2
 site/data/narrative-experiment.html|#6b8e5a|#a85a3a|deuter|7.7
 site/data/narrative-experiment.html|#6b8e5a|#aa907b|deuter|7.7
 site/data/narrative-experiment.html|#6b8e5a|#b28d80|deuter|8.6
+site/data/narrative-experiment.html|#6b8e5a|#b38f58|protan|4.3
 site/data/narrative-experiment.html|#6b8e5a|#b78d6a|protan|4.0
 site/data/narrative-experiment.html|#6b8e5a|#ba8a7a|deuter|7.9
 site/data/narrative-experiment.html|#6b8e5a|#be8880|deuter|8.6
@@ -12851,6 +12853,7 @@ site/data/narrative-experiment.html|#8a9c6e|#9a9280|deuter|5.6
 site/data/narrative-experiment.html|#8a9c6e|#a39383|deuter|5.6
 site/data/narrative-experiment.html|#8a9c6e|#aa907b|deuter|2.9
 site/data/narrative-experiment.html|#8a9c6e|#b28d80|deuter|4.3
+site/data/narrative-experiment.html|#8a9c6e|#b38f58|protan|4.6
 site/data/narrative-experiment.html|#8a9c6e|#b78d6a|protan|2.1
 site/data/narrative-experiment.html|#8a9c6e|#ba8a7a|deuter|2.3
 site/data/narrative-experiment.html|#8a9c6e|#be8880|deuter|3.7
@@ -13101,6 +13104,7 @@ site/data/narrative-experiment.html|#a88bb0|#ab8ba2|protan|5.1
 site/data/narrative-experiment.html|#a88bb0|#b8879c|protan|6.8
 site/data/narrative-experiment.html|#a88bb0|#bf81b3|deuter|0.8
 site/data/narrative-experiment.html|#aa907b|#b28d80|deuter|1.4
+site/data/narrative-experiment.html|#aa907b|#b38f58|deuter|9.0
 site/data/narrative-experiment.html|#aa907b|#b78d6a|deuter|5.4
 site/data/narrative-experiment.html|#aa907b|#ba8a7a|protan|0.9
 site/data/narrative-experiment.html|#aa907b|#be8880|deuter|1.0
@@ -13133,6 +13137,17 @@ site/data/narrative-experiment.html|#b28d80|#ce7e88|deuter|1.7
 site/data/narrative-experiment.html|#b28d80|#d67b7c|protan|2.9
 site/data/narrative-experiment.html|#b28d80|#d87c6e|protan|4.7
 site/data/narrative-experiment.html|#b28d80|#e17670|protan|4.2
+site/data/narrative-experiment.html|#b38f58|#b78d6a|deuter|3.7
+site/data/narrative-experiment.html|#b38f58|#ba8a7a|deuter|8.1
+site/data/narrative-experiment.html|#b38f58|#be8880|deuter|9.6
+site/data/narrative-experiment.html|#b38f58|#be8a6c|deuter|4.0
+site/data/narrative-experiment.html|#b38f58|#c8463a|deuter|9.8
+site/data/narrative-experiment.html|#b38f58|#c88479|deuter|7.0
+site/data/narrative-experiment.html|#b38f58|#c9a063|protan|5.6
+site/data/narrative-experiment.html|#b38f58|#c9a14a|deuter|7.6
+site/data/narrative-experiment.html|#b38f58|#d67b7c|deuter|7.3
+site/data/narrative-experiment.html|#b38f58|#d87c6e|deuter|3.8
+site/data/narrative-experiment.html|#b38f58|#e17670|deuter|4.0
 site/data/narrative-experiment.html|#b40325|#c82428|deuter|6.1
 site/data/narrative-experiment.html|#b40325|#c8463a|deuter|9.4
 site/data/narrative-experiment.html|#b40325|#d62728|protan|8.8

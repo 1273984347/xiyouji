@@ -12,7 +12,7 @@ import batch_closeout as bc  # noqa: E402
 def test_step_order_puts_csp_last():
     """CSP 重算与 --check 必须是最后两步（前面步骤会改内联脚本）。"""
     order = bc.step_order()
-    assert order[0] == 'precheck'
+    assert order[0] == 'archive', 'precheck'
     assert order[-2:] == ['csp', 'cspcheck']
     assert order.index('csp') > order.index('stats')
     assert order.index('csp') > order.index('index')
@@ -133,6 +133,7 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     def first(pred):
         return next(i for i, c in enumerate(calls) if pred(c))
 
+    i_arch = first(lambda c: 'archive_segments.py' in c)
     i_add = first(lambda c: c.startswith('git add'))
     i_ref = first(lambda c: 'gen_folder_docs.py' in c)
     i_idx = first(lambda c: '_gen_search_index.py' in c)
@@ -140,7 +141,11 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     i_stat = first(lambda c: 'stats.py' in c)
     i_csp = first(lambda c: 'generate_csp.py' in c and '--check' not in c)
     i_chk = first(lambda c: 'generate_csp.py' in c and '--check' in c)
-    assert i_add < i_ref < i_stat < i_idx < i_doc < i_csp < i_chk, calls
+    # W1119：腾窗步须在 precheck 之前（precheck fail-closed 中止 ⇒ 腾窗排其后即死路径）
+    #           且须在 add 之前（腾窗会改 CHANGELOG/file-index ⇒ 先 add 会把迁前态带进提交）
+    assert i_arch < i_add < i_ref < i_stat < i_idx < i_doc < i_csp < i_chk, calls
+    assert bc.step_order()[0] == 'archive', bc.step_order()
+    assert bc.step_order().index('archive') < bc.step_order().index('precheck'), bc.step_order()
     # index 步须在 versions 步之后（见 docstring·W1117）⇒ versions 不经 run() 可见，故断言声明位置
     order = bc.step_order()
     assert order.index('index') > order.index('versions')

@@ -66,6 +66,25 @@ def _ledger_rows(text, row_re):
     return [ln for ln in (text or "").splitlines() if row_re.match(ln)]
 
 
+def _rule_upper(text):
+    """CHANGELOG 编号规则段上限（W001-W####）的取值——**只取编号规则段本体那一行**。
+
+    W1119 实证：旧实现取**全文首个** W001-W(\d{4}) 匹配 ⇒ 首个匹配可能落在历史段的
+    陈述正文里（如 W1117 段正文写「编号规则 W001-W1118」）⇒ 误当成「编号规则段上限」
+    ⇒ 判红而实际本体行已是新值。
+    ⇒ 改为：先定位含 **W### 编号规则** 的行（编号规则段本体），再在**该行内**取值；
+      找不到本体行则回退旧行为（全文首个匹配）·判据强度不降：仍要求该值 == 现役段。
+    """
+    for ln in (text or "").split(chr(10)):
+        if "**W### 编号规则**" in ln:
+            m = re.search(r"W001-W(\d{4})", ln)
+            if m:
+                return m.group(1)
+            break
+    m = re.search(r"W001-W(\d{4})", text or "")
+    return m.group(1) if m else ""
+
+
 def check_all(batch):
     """返回 (fails, notes)；fails 为可执行改法描述列表。"""
     fails = []
@@ -130,11 +149,11 @@ def check_all(batch):
         notes.append("HANDOVER 最后更新 %d 处（链首与条目数已核）" % len(upd))
 
     # ③ CHANGELOG 编号规则段上限
-    m = re.search(r"W001-W(\d{4})", chg or "")
-    if not m:
+    up = _rule_upper(chg or "")
+    if not up:
         fails.append("CHANGELOG 编号规则段上限不可解析")
-    elif int(m.group(1)) != top:
-        fails.append("CHANGELOG 编号规则段上限 W001-W%s ≠ 现役段 W%d ⇒ 同步该段" % (m.group(1), top))
+    elif int(up) != top:
+        fails.append("CHANGELOG 编号规则段上限 W001-W%s ≠ 现役段 W%d ⇒ 同步该段" % (up, top))
     else:
         notes.append("CHANGELOG 编号规则段上限 = W%d" % top)
 

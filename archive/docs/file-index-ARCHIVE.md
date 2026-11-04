@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -10089,3 +10089,2585 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W995 | W995 段插入
 | scripts/output/_w995_spec.json | W995 | 本批级联 spec（补建）
 | scripts/output/_cascade_files_W995.txt | W995 | 级联落盘清单
+## W996 流程提示位批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/ledger_close_check.py | W996 | C2 判据：反向迭代台账——已收官+hash 落地+无级联段（现役+归档两面）=漏跑 batch_cascade；豁免让号/并号/已停止/空壳/作废/补录/追记；--allow-open 不豁免本判据；self-test 扩 C2 三态
+| docs/00-导读/W批次编号对账表.md | W996 | W996 认领行与收官回填
+| CHANGELOG.md | W996 | W996 段
+| HANDOVER.md | W996 | 级联头尾链与里程碑块
+| README.md | W996 | 当前批次版本行
+| STRUCTURE.md | W996 | 当前批次版本行
+| docs/00-导读/项目说明.md | W996 | 当前批次版本行
+| .github/workflows/README.md | W996 | 工作流层版本面推进 W996
+| site/index.html | W996 | 页脚批次链插入 W996
+| site/data/cross-time-danmaku.html | W996 | 页脚批次链插入 W996
+| site/data/tag-cloud.html | W996 | 页脚批次链插入 W996
+| site/dukou-engine.html | W996 | 页脚批次链插入 W996
+| AGENTS.md | W996 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W996 | 脚注滚动迁入的最老条目
+| CITATION.cff | W996 | version 同步为 W996
+| scripts/output/file-index.md | W996 | W996 段插入
+| scripts/output/_w996_spec.json | W996 | 本批级联 spec
+| scripts/output/_cascade_files_W996.txt | W996 | 级联落盘清单
+## W1048 P2 治理与孤儿批收编（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CLAUDE.md | W1048 | 本批新增/修改（P2·补铁律 15/16/17 速查行·49/60 行） |
+| docs/agent/gates.md | W1048 | 本批新增/修改（P2·计数旧值 615→616·四源印证） |
+| scripts/check_doc_sync.py | W1048 | W1044 收编（C5e 坑表六主题分项逐项对拍·fail-closed） |
+| scripts/check_plan_template.py | W1048 | W1044 收编（计划目录卫生判据·拦无 .md 扩展名/0 字节坏件） |
+| pytest.ini | W1048 | W1044 收编（pytest_collected 1085→1087 标记跟随） |
+| scripts/output/_vermilion_solid_cache.json | W1048 | 登记面产物（第 49 槽机器缓存自跟随） |
+| archive/scripts/batches/w10xx/_w1013_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1018_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_make_spec.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_master.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_pick.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_prepare.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_verify.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1044_make_spec.py | W1048 | W1044 收编（本批 spec 生成器归档） |
+| docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1048 | W1043 收官口径订正（slug 111→112·随本批入库） |
+| docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md | W1048 | W1046 收编（方案件入库·只出方案不实施·待用户审批） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1048 | 登记面产物（stats 标记自动跟随·W1047 收官余波随本批入库） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1048 | 登记面产物（stats 标记自动跟随·W1047 收官余波随本批入库） |
+| CHANGELOG.md | W1048 | 收官面（顶段 W1048·含 W1047 段订正注） |
+| HANDOVER.md | W1048 | 收官面（最后更新/一、当前进度/四、待办正式登记） |
+| README.md | W1048 | 级联面（版本行） |
+| STRUCTURE.md | W1048 | 级联面（版本行） |
+| AGENTS.md | W1048 | 级联面（脚注滚动） |
+| CITATION.cff | W1048 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1048 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1048 | 台账（W1044 行补·W1046 行回填·W1048 行新增） |
+| docs/INDEX.md | W1048 | 登记面（docs 索引） |
+| INDEX.md | W1048 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1048 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1048 | 级联归档滚动 |
+| scripts/output/stats.json | W1048 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1048 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1048 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1048 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1048 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1048 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1048 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1048.txt | W1048 | 级联清单（本批产物） |
+| scripts/output/_w1048_spec.json | W1048 | 本批 spec |
+
+## W1047 图表判据剥标签根修（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1045 | 本批新增/修改 |
+| .github/workflows/README.md | W1045 | 本批新增/修改 |
+| AGENTS.md | W1045 | 本批新增/修改 |
+| CHANGELOG.md | W1045 | 本批新增/修改 |
+| CITATION.cff | W1045 | 本批新增/修改 |
+| HANDOVER.md | W1045 | 本批新增/修改 |
+| README.md | W1045 | 本批新增/修改 |
+| STRUCTURE.md | W1045 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1047_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/index.md | W1045 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1045 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1045 | 台账（认领行与收官回填） |
+| docs/11-方案报告/计划方案/执行前计划-W1047-图表判据剥标签根修.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/INDEX.md | W1045 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| INDEX.md | W1045 | 本批新增/修改 |
+| scripts/batch_cascade.py | W1045 | 级联工具（上一批成果·本批未改） |
+| scripts/check_chart_data.py | W1045 | 图表判据（剥标签按语法约束 + 注释优先剥离 + 2 例可证伪锁） |
+| scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1047.txt | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1047_spec.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/file-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1045 | 本批新增/修改 |
+| site/data/search.html | W1045 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1045 | 本批新增/修改 |
+| site/dukou-engine.html | W1045 | 本批新增/修改 |
+| site/en/search.html | W1045 | 本批新增/修改 |
+| site/index.html | W1045 | 本批新增/修改 |
+
+## W1045 改写面候选逐处复核 + 存量陈旧清理 + og 切头 A+ 修复（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1045 | 本批新增/修改 |
+| .github/workflows/README.md | W1045 | 本批新增/修改 |
+| AGENTS.md | W1045 | 本批新增/修改 |
+| CHANGELOG.md | W1045 | 本批新增/修改 |
+| CITATION.cff | W1045 | 本批新增/修改 |
+| HANDOVER.md | W1045 | 本批新增/修改 |
+| README.md | W1045 | 本批新增/修改 |
+| STRUCTURE.md | W1045 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1042_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1045_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/index.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w6xx/_w661_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w662_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w663_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w666_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w667_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w668_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w669_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w670_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w671_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w676_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w679_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w684_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w691_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| docs/00-导读/W批次编号对账表.md | W1045 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1045 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/11-方案报告/审查与评审/改写面候选逐处复核与存量陈旧清理报告-W1045.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/11-方案报告/计划方案/执行前计划-W1045-改写面候选逐处复核与存量陈旧清理.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/INDEX.md | W1045 | 本批新增/修改 |
+| docs/agent/gates.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| INDEX.md | W1045 | 本批新增/修改 |
+| scripts/README.md | W1045 | 本批新增/修改 |
+| scripts/batch_cascade.py | W1045 | 级联工具（CITATION.cff 面补行数断言） |
+| scripts/check_crop.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
+| scripts/check_cross_line_rewrite.py | W1045 | 跨行扫描器（基线键升四输入 + 跨行判定补 \s 盲区） |
+| scripts/cross_line_baseline.json | W1045 | 跨行判据基线（四输入键·失效项已清理） |
+| scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1045.txt | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1043_batch_a.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1045_spec.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/file-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/subject_band.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
+| site/data/cross-time-danmaku.html | W1045 | 本批新增/修改 |
+| site/data/search.html | W1045 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1045 | 本批新增/修改 |
+| site/dukou-engine.html | W1045 | 本批新增/修改 |
+| site/en/search.html | W1045 | 本批新增/修改 |
+| site/index.html | W1045 | 本批新增/修改 |
+| site/static/images/og-plate-line-59-ch089-huangshi.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-81-ch074-qingshi.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-88-ch073-duomuguai.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-92-ch086-bihan-bishu.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-93-ch095-yumian.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-95-ch085-diyongfuren.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-96-ch097-xiniu.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| tests/unit/test_cross_line_rewrite.py | W1045 | 键口径回归锁（4 条） |
+
+## W1043 回次 og:image 全覆盖批·第四轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1043 | 本批新增/修改 |
+| .github/workflows/README.md | W1043 | 本批新增/修改 |
+| AGENTS.md | W1043 | 本批新增/修改 |
+| CHANGELOG.md | W1043 | 本批新增/修改 |
+| CITATION.cff | W1043 | 本批新增/修改 |
+| HANDOVER.md | W1043 | 本批新增/修改 |
+| README.md | W1043 | 本批新增/修改 |
+| STRUCTURE.md | W1043 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/misc/_localize_cdn_libs.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w10xx/README.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1042_make_spec.py | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1043_derive_prepare.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_derive_stage.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_derive_verify.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_download.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_make_spec.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_master.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_pick.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_prepare.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_probe_pages.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_sheet.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_stage.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_verify.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/index.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w4xx/_w478_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w4xx/_w490_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w4xx/_w491_en_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w9xx/_w974_cascade.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| assets/promo/plate-set/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-86-ch033-chuikouxian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-86-ch033-chuikouxian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-88-ch073-duomuguai.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-88-ch073-duomuguai.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-93-ch095-yumian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-93-ch095-yumian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-95-ch085-diyongfuren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-95-ch085-diyongfuren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-96-ch097-xiniu.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-96-ch097-xiniu.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1043-sheet.png | W1043 | 拼图预览（本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/raw/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round17/README.md | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/index.md | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-85-ch053-ruyizhenxian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-86-ch033-chuikouxian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-87-ch094-taiyinxingjun.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-88-ch073-duomuguai.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-89-ch069-ziyangzhenren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-90-ch090-yijiukutianzun.png | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-91-ch071-jiuling-shiba.png | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-92-ch086-bihan-bishu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-93-ch095-yumian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-94-ch029-bengpo-baboren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-95-ch085-diyongfuren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-96-ch097-xiniu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1043 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1043 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1043 | 方案报告（目录索引·W1044 订正说明列） |
+| docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1043 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1043 | 方案报告（架构方案·stats report_docs 标记级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1043 | 方案报告（架构方案·stats report_docs 标记级联） |
+| docs/INDEX.md | W1043 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1043 | 坑表（+1 条·判据脆性） |
+| scripts/_w1042_make_spec.py | W1043 | 本批改名·旧名（已由 archive/scripts/batches/w10xx/_w1042_make_spec.py 取代） |
+| scripts/check_cross_line_rewrite.py | W1043 | 本批新增/修改 |
+| scripts/cross_line_baseline.json | W1043 | 本批新增/修改 |
+| scripts/index.md | W1043 | 本批新增/修改 |
+| scripts/output/README.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1043.txt | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1043_batch.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_a.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_b.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_c.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_a.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_b.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_c.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_spec.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/file-index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1043 | 本批新增/修改 |
+| site/data/search.html | W1043 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1043 | 本批新增/修改 |
+| site/dukou-engine.html | W1043 | 本批新增/修改 |
+| site/en/search.html | W1043 | 本批新增/修改 |
+| site/index.html | W1043 | 本批新增/修改 |
+| site/reader/ch029.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch033.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch053.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch069.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch071.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch073.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch085.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch086.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch090.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch094.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch095.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch097.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/static/images/README.md | W1043 | 本批新增/修改 |
+| site/static/images/index.md | W1043 | 本批新增/修改 |
+| site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-86-ch033-chuikouxian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-88-ch073-duomuguai.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-89-ch069-ziyangzhenren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-92-ch086-bihan-bishu.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-93-ch095-yumian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-95-ch085-diyongfuren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-96-ch097-xiniu.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-86-ch033-chuikouxian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-87-ch094-taiyinxingjun.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-88-ch073-duomuguai.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-89-ch069-ziyangzhenren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-90-ch090-yijiukutianzun.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-91-ch071-jiuling-shiba.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-92-ch086-bihan-bishu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-93-ch095-yumian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-95-ch085-diyongfuren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-96-ch097-xiniu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+
+## W1042 工具面根因修复与判据补覆盖批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1042 | 本批新增/修改 |
+| .github/workflows/README.md | W1042 | 本批新增/修改 |
+| AGENTS.md | W1042 | 计数链同步（坑表条数指针） |
+| CHANGELOG.md | W1042 | 本批新增/修改 |
+| CITATION.cff | W1042 | 本批新增/修改 |
+| HANDOVER.md | W1042 | 计数链同步（坑表条数指针） |
+| Makefile | W1042 | 本地 CI 编排（完成提示归位） |
+| README.md | W1042 | 本批新增/修改 |
+| STRUCTURE.md | W1042 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1042 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1042 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1042 | 台账（认领行与收官回填） |
+| docs/11-方案报告/审查与评审/跨行改写面逐处复核报告-2026-10-30.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-30.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/计划方案/执行前计划-W1042-工具面根因修复与判据补覆盖.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/INDEX.md | W1042 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1042 | 坑表（+4 条教训） |
+| pytest.ini | W1042 | 本批新增/修改 |
+| scripts/A_文本基础/章节切分.py | W1042 | 本批新增/修改 |
+| scripts/_w1042_make_spec.py | W1042 | 本批工具脚本 |
+| scripts/check_cross_line_rewrite.py | W1042 | 本批新增/修改 |
+| scripts/cross_line_baseline.json | W1042 | 本批新增/修改 |
+| scripts/index.md | W1042 | 本批新增/修改 |
+| scripts/ledger_backfill.py | W1042 | 台账回填工具（显式参数生效根因修复） |
+| scripts/output/README.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1042.txt | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1042_spec.json | W1042 | 本批 spec 与级联清单 |
+| scripts/output/file-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1042 | 本批新增/修改 |
+| site/data/search.html | W1042 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1042 | 本批新增/修改 |
+| site/dukou-engine.html | W1042 | 本批新增/修改 |
+| site/en/search.html | W1042 | 本批新增/修改 |
+| site/index.html | W1042 | 本批新增/修改 |
+| tests/unit/test_archive_segments.py | W1042 | 本批单测（判据覆盖） |
+| tests/unit/test_cross_line_rewrite.py | W1042 | 本批单测（判据覆盖） |
+| tests/unit/test_plan_template_read_disk.py | W1042 | 本批单测（判据覆盖） |
+
+## W1041 批次号预约机制（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1041 | 本批新增/修改 |
+| AGENTS.md | W1041 | 本批新增/修改 |
+| CHANGELOG.md | W1041 | 本批新增/修改 |
+| CITATION.cff | W1041 | 本批新增/修改 |
+| HANDOVER.md | W1041 | 本批新增/修改 |
+| README.md | W1041 | 本批新增/修改 |
+| STRUCTURE.md | W1041 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1041 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1041 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1041 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1041 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1041 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1041 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1041 | 本批新增/修改 |
+| scripts/output/_w1041_spec.json | W1041 | 本批新增/修改 |
+| scripts/output/file-index.md | W1041 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1041 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1041 | 本批新增/修改 |
+| scripts/output/tools-inventory.md | W1041 | 本批新增/修改 |
+| scripts/reserve_w.py | W1041 | 本批新增/修改 |
+| site/index.html | W1041 | 本批新增/修改 |
+
+## W1040 任务分级协议入库（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/任务分级协议.md | W1040 | 本批新增 |
+| docs/10-方法论沉淀/README.md | W1040 | 索引登记第 27 号 |
+| docs/11-方案报告/README.md | W1040 | §六 登记执行前计划行（T-39） |
+| docs/11-方案报告/计划方案/执行前计划-W1040-任务分级协议入库.md | W1040 | 本批新增（计划归档·W1033 T05 先例·框架号 T-39） |
+| docs/INDEX.md | W1040 | 索引重生成 |
+| docs/00-导读/W批次编号对账表.md | W1040 | 认领登记与收官回填 |
+| scripts/output/_w1040_spec.json | W1040 | 本批新增 |
+| scripts/output/_cascade_files_W1040.txt | W1040 | 级联清单 |
+| CHANGELOG.md | W1040 | 级联·现役段 |
+| README.md | W1040 | 级联 |
+| STRUCTURE.md | W1040 | 级联+stats 标记 sweep |
+| HANDOVER.md | W1040 | 级联 |
+| AGENTS.md | W1040 | 级联（agents_note 脚注轮换） |
+| CITATION.cff | W1040 | 级联（version/date 随批） |
+| docs/00-导读/项目说明.md | W1040 | 级联 |
+| .github/workflows/README.md | W1040 | 级联 |
+| site/index.html | W1040 | 级联 |
+| site/data/cross-time-danmaku.html | W1040 | 级联 |
+| site/data/tag-cloud.html | W1040 | 级联 |
+| site/dukou-engine.html | W1040 | 级联 |
+| site/data/search.html | W1040 | 搜索索引重建 |
+| site/en/search.html | W1040 | 搜索索引重建 |
+| scripts/output/file-index.md | W1040 | 级联 |
+| scripts/output/stats.json | W1040 | methodology_docs 25→26 |
+| archive/docs/AGENTS-ARCHIVE.md | W1040 | 回窗（脚注窗轮换时·未触发删行） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1040 | 回窗（段窗轮换·上轮同窗位已触发） |
+| archive/docs/file-index-ARCHIVE.md | W1040 | 回窗（段窗轮换·上轮同窗位已触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1040 | 回窗（台账行窗轮换·已触发：迁出 W980-W981） |
+| scripts/output/README.md | W1040 | 目录文档 refresh（scripts/output 新件触发时） |
+| scripts/output/index.md | W1040 | 目录文档 refresh（同上） |
+| scripts/output/tools-inventory.md | W1040 | 工具面 refresh（触发时） |
+
+## W1039 用户级记忆五则入项目铁律（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1039 | 本批新增/修改 |
+| AGENTS.md | W1039 | 本批新增/修改 |
+| CHANGELOG.md | W1039 | 本批新增/修改 |
+| CITATION.cff | W1039 | 本批新增/修改 |
+| HANDOVER.md | W1039 | 本批新增/修改 |
+| README.md | W1039 | 本批新增/修改 |
+| STRUCTURE.md | W1039 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1039 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1039 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1039 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1039 | 本批新增/修改 |
+| scripts/output/_w1039_spec.json | W1039 | 本批新增/修改 |
+| scripts/output/file-index.md | W1039 | 本批新增/修改 |
+| site/index.html | W1039 | 本批新增/修改 |
+
+## W1038 a11y 性能优化（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1038 | 本批新增/修改 |
+| AGENTS.md | W1038 | 本批新增/修改 |
+| CHANGELOG.md | W1038 | 本批新增/修改 |
+| CITATION.cff | W1038 | 本批新增/修改 |
+| HANDOVER.md | W1038 | 本批新增/修改 |
+| README.md | W1038 | 本批新增/修改 |
+| STRUCTURE.md | W1038 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1038 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1038 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1038 | 本批新增/修改 |
+| scripts/a11y_audit.py | W1038 | 本批新增/修改 |
+| scripts/output/_w1038_spec.json | W1038 | 本批新增/修改 |
+| scripts/output/file-index.md | W1038 | 本批新增/修改 |
+| site/index.html | W1038 | 本批新增/修改 |
+
+## W1037 门禁耗时剖析（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1037 | 本批新增/修改 |
+| AGENTS.md | W1037 | 本批新增/修改 |
+| CHANGELOG.md | W1037 | 本批新增/修改 |
+| CITATION.cff | W1037 | 本批新增/修改 |
+| HANDOVER.md | W1037 | 本批新增/修改 |
+| README.md | W1037 | 本批新增/修改 |
+| STRUCTURE.md | W1037 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1037 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1037 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1037 | 本批新增/修改 |
+| scripts/output/_w1037_spec.json | W1037 | 本批新增/修改 |
+| scripts/output/file-index.md | W1037 | 本批新增/修改 |
+| scripts/verify_delivery.py | W1037 | 本批新增/修改 |
+| site/index.html | W1037 | 本批新增/修改 |
+
+## W1036 授业官 skill 按编制定名（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1036 | 本批新增/修改 |
+| .agent/skills/xiyouji-guard/SKILL.md | W1036 | 本批新增/修改 |
+| .github/workflows/README.md | W1036 | 本批新增/修改 |
+| AGENTS.md | W1036 | 本批新增/修改 |
+| CHANGELOG.md | W1036 | 本批新增/修改 |
+| CITATION.cff | W1036 | 本批新增/修改 |
+| HANDOVER.md | W1036 | 本批新增/修改 |
+| README.md | W1036 | 本批新增/修改 |
+| STRUCTURE.md | W1036 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1036 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1036 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1036 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1036 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1036 | 本批新增/修改 |
+| scripts/output/_w1036_spec.json | W1036 | 本批新增/修改 |
+| scripts/output/file-index.md | W1036 | 本批新增/修改 |
+| site/index.html | W1036 | 本批新增/修改 |
+
+## W1035 三份职责书（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1035 | 本批新增/修改 |
+| AGENTS.md | W1035 | 本批新增/修改 |
+| CHANGELOG.md | W1035 | 本批新增/修改 |
+| CITATION.cff | W1035 | 本批新增/修改 |
+| HANDOVER.md | W1035 | 本批新增/修改 |
+| README.md | W1035 | 本批新增/修改 |
+| STRUCTURE.md | W1035 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1035 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1035 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1035 | 本批新增/修改 |
+| docs/agent/README.md | W1035 | 本批新增/修改 |
+| docs/agent/closeout-agent-prompt.md | W1035 | 本批新增/修改 |
+| docs/agent/index.md | W1035 | 本批新增/修改 |
+| docs/agent/reconcile-agent-prompt.md | W1035 | 本批新增/修改 |
+| docs/agent/text-audit-agent-prompt.md | W1035 | 本批新增/修改 |
+| scripts/output/_w1035_spec.json | W1035 | 本批新增/修改 |
+| scripts/output/file-index.md | W1035 | 本批新增/修改 |
+| scripts/output/tools-inventory.md | W1035 | 本批新增/修改 |
+| site/index.html | W1035 | 本批新增/修改 |
+
+## W1034 授业官位补全（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/xiyouji-guard/SKILL.md | W1034 | 本批新增/修改 |
+| .github/workflows/README.md | W1034 | 本批新增/修改 |
+| .gitignore | W1034 | 本批新增/修改 |
+| AGENTS.md | W1034 | 本批新增/修改 |
+| CHANGELOG.md | W1034 | 本批新增/修改 |
+| CITATION.cff | W1034 | 本批新增/修改 |
+| HANDOVER.md | W1034 | 本批新增/修改 |
+| README.md | W1034 | 本批新增/修改 |
+| STRUCTURE.md | W1034 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1034 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1034 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1034 | 本批新增/修改 |
+| scripts/output/_w1034_spec.json | W1034 | 本批新增/修改 |
+| scripts/output/file-index.md | W1034 | 本批新增/修改 |
+| site/index.html | W1034 | 本批新增/修改 |
+
+## W1033 T05 计划状态校正（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1033 | 本批新增/修改 |
+| AGENTS.md | W1033 | 本批新增/修改 |
+| CHANGELOG.md | W1033 | 本批新增/修改 |
+| CITATION.cff | W1033 | 本批新增/修改 |
+| HANDOVER.md | W1033 | 本批新增/修改 |
+| README.md | W1033 | 本批新增/修改 |
+| STRUCTURE.md | W1033 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1033 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1033 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1033 | 本批新增/修改 |
+| docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md | W1033 | 本批新增/修改 |
+| scripts/output/_w1033_spec.json | W1033 | 本批新增/修改 |
+| scripts/output/file-index.md | W1033 | 本批新增/修改 |
+| site/index.html | W1033 | 本批新增/修改 |
+
+## W1032 编制表环境依赖纠错（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1032 | 本批新增/修改 |
+| AGENTS.md | W1032 | 本批新增/修改 |
+| CHANGELOG.md | W1032 | 本批新增/修改 |
+| CITATION.cff | W1032 | 本批新增/修改 |
+| HANDOVER.md | W1032 | 本批新增/修改 |
+| README.md | W1032 | 本批新增/修改 |
+| STRUCTURE.md | W1032 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1032 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1032 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1032 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1032 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1032 | 本批新增/修改 |
+| scripts/output/_w1032_spec.json | W1032 | 本批新增/修改 |
+| scripts/output/file-index.md | W1032 | 本批新增/修改 |
+| site/index.html | W1032 | 本批新增/修改 |
+
+## W1031 取经编制表数据重核（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1031 | 本批新增/修改 |
+| AGENTS.md | W1031 | 本批新增/修改 |
+| CHANGELOG.md | W1031 | 本批新增/修改 |
+| CITATION.cff | W1031 | 本批新增/修改 |
+| HANDOVER.md | W1031 | 本批新增/修改 |
+| README.md | W1031 | 本批新增/修改 |
+| STRUCTURE.md | W1031 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1031 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1031 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1031 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1031 | 本批新增/修改 |
+| scripts/output/_w1031_spec.json | W1031 | 本批新增/修改 |
+| scripts/output/file-index.md | W1031 | 本批新增/修改 |
+| site/index.html | W1031 | 本批新增/修改 |
+
+## W1030 方案报告抽查 + 归档覆盖口径入规范（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1030 | 本批新增/修改 |
+| AGENTS.md | W1030 | 本批新增/修改 |
+| CHANGELOG.md | W1030 | 本批新增/修改 |
+| CITATION.cff | W1030 | 本批新增/修改 |
+| HANDOVER.md | W1030 | 本批新增/修改 |
+| README.md | W1030 | 本批新增/修改 |
+| STRUCTURE.md | W1030 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1030 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1030 | 本批新增/修改 |
+| docs/00-导读/文档规范.md | W1030 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1030 | 本批新增/修改 |
+| scripts/output/_w1030_spec.json | W1030 | 本批新增/修改 |
+| scripts/output/file-index.md | W1030 | 本批新增/修改 |
+| site/index.html | W1030 | 本批新增/修改 |
+
+## W1029 方案报告归档判断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1029 | 本批新增/修改 |
+| AGENTS.md | W1029 | 本批新增/修改 |
+| CHANGELOG.md | W1029 | 本批新增/修改 |
+| CITATION.cff | W1029 | 本批新增/修改 |
+| HANDOVER.md | W1029 | 本批新增/修改 |
+| README.md | W1029 | 本批新增/修改 |
+| STRUCTURE.md | W1029 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1029 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1029 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1029 | 本批新增/修改 |
+| docs/11-方案报告/README.md | W1029 | 本批新增/修改 |
+| scripts/output/_w1029_spec.json | W1029 | 本批新增/修改 |
+| scripts/output/file-index.md | W1029 | 本批新增/修改 |
+| site/index.html | W1029 | 本批新增/修改 |
+
+## W1028 归档系统与临时文件系统诊断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1028 | 本批新增/修改 |
+| AGENTS.md | W1028 | 本批新增/修改 |
+| CHANGELOG.md | W1028 | 本批新增/修改 |
+| CITATION.cff | W1028 | 本批新增/修改 |
+| HANDOVER.md | W1028 | 本批新增/修改 |
+| README.md | W1028 | 本批新增/修改 |
+| STRUCTURE.md | W1028 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1028 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1028 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1028 | 本批新增/修改 |
+| docs/agent/batch-closeout-checklist.md | W1028 | 本批新增/修改 |
+| scripts/output/_w1028_spec.json | W1028 | 本批新增/修改 |
+| scripts/output/file-index.md | W1028 | 本批新增/修改 |
+| site/index.html | W1028 | 本批新增/修改 |
+
+## W1027 治理文档文字审查 A 档（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1027 | 本批新增/修改 |
+| AGENTS.md | W1027 | 本批新增/修改 |
+| CHANGELOG.md | W1027 | 本批新增/修改 |
+| CITATION.cff | W1027 | 本批新增/修改 |
+| HANDOVER.md | W1027 | 本批新增/修改 |
+| README.md | W1027 | 本批新增/修改 |
+| STRUCTURE.md | W1027 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1027 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1027 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1027 | 本批新增/修改 |
+| scripts/output/_w1027_spec.json | W1027 | 本批新增/修改 |
+| scripts/output/file-index.md | W1027 | 本批新增/修改 |
+| site/index.html | W1027 | 本批新增/修改 |
+
+## W1026 HANDOVER 已完成内容归档 + 归档机制诊断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1026 | 本批新增/修改 |
+| AGENTS.md | W1026 | 本批新增/修改 |
+| CHANGELOG.md | W1026 | 本批新增/修改 |
+| CITATION.cff | W1026 | 本批新增/修改 |
+| HANDOVER.md | W1026 | 本批新增/修改 |
+| README.md | W1026 | 本批新增/修改 |
+| STRUCTURE.md | W1026 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1026 | 本批新增/修改 |
+| archive/docs/HANDOVER-ARCHIVE.md | W1026 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1026 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1026 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1026 | 本批新增/修改 |
+| scripts/output/_w1026_spec.json | W1026 | 本批新增/修改 |
+| scripts/output/file-index.md | W1026 | 本批新增/修改 |
+| site/index.html | W1026 | 本批新增/修改 |
+
+## W1025 坑表计数升机器判据（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1025 | 本批新增/修改 |
+| AGENTS.md | W1025 | 本批新增/修改 |
+| CHANGELOG.md | W1025 | 本批新增/修改 |
+| CITATION.cff | W1025 | 本批新增/修改 |
+| HANDOVER.md | W1025 | 本批新增/修改 |
+| README.md | W1025 | 本批新增/修改 |
+| STRUCTURE.md | W1025 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1025 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1025 | 本批新增/修改 |
+| scripts/check_doc_sync.py | W1025 | 本批新增/修改 |
+| scripts/output/_w1025_spec.json | W1025 | 本批新增/修改 |
+| scripts/output/file-index.md | W1025 | 本批新增/修改 |
+| site/index.html | W1025 | 本批新增/修改 |
+
+## W1024 本次任务教训固化对账（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1024 | 本批新增/修改 |
+| AGENTS.md | W1024 | 本批新增/修改 |
+| CHANGELOG.md | W1024 | 本批新增/修改 |
+| CITATION.cff | W1024 | 本批新增/修改 |
+| HANDOVER.md | W1024 | 本批新增/修改 |
+| README.md | W1024 | 本批新增/修改 |
+| STRUCTURE.md | W1024 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1024 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1024 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1024 | 本批新增/修改 |
+| docs/agent/batch-closeout-checklist.md | W1024 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1024 | 本批新增/修改 |
+| scripts/output/_w1024_spec.json | W1024 | 本批新增/修改 |
+| scripts/output/file-index.md | W1024 | 本批新增/修改 |
+| site/index.html | W1024 | 本批新增/修改 |
+
+## W1023 提示词库派发骨架补齐（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1023 | 本批新增/修改 |
+| AGENTS.md | W1023 | 本批新增/修改 |
+| CHANGELOG.md | W1023 | 本批新增/修改 |
+| CITATION.cff | W1023 | 本批新增/修改 |
+| HANDOVER.md | W1023 | 本批新增/修改 |
+| README.md | W1023 | 本批新增/修改 |
+| STRUCTURE.md | W1023 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1023 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1023 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/03-工作复盘提示词.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/05-项目审查任务书.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/09-导师提问流程.md | W1023 | 本批新增/修改 |
+| scripts/output/_w1023_spec.json | W1023 | 本批新增/修改 |
+| scripts/output/file-index.md | W1023 | 本批新增/修改 |
+| site/index.html | W1023 | 本批新增/修改 |
+
+## W1022 对抗式审查批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1022 | 本批新增/修改 |
+| AGENTS.md | W1022 | 本批新增/修改 |
+| CHANGELOG.md | W1022 | 本批新增/修改 |
+| CITATION.cff | W1022 | 本批新增/修改 |
+| HANDOVER.md | W1022 | 本批新增/修改 |
+| README.md | W1022 | 本批新增/修改 |
+| STRUCTURE.md | W1022 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1022 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1022 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1022 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1022 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1022 | 本批新增/修改 |
+| pytest.ini | W1022 | 本批新增/修改 |
+| scripts/check_audit_trigger.py | W1022 | 本批新增/修改 |
+| scripts/check_backlog_review.py | W1022 | 本批新增/修改 |
+| scripts/check_motion_ban.py | W1022 | 本批新增/修改 |
+| scripts/check_token_coverage.py | W1022 | 本批新增/修改 |
+| scripts/inline_css.py | W1022 | 本批新增/修改 |
+| scripts/output/_w1022_spec.json | W1022 | 本批新增/修改 |
+| scripts/output/file-index.md | W1022 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1022 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1022 | 本批新增/修改 |
+| scripts/output/stats.json | W1022 | 本批新增/修改 |
+| site/_template.html | W1022 | 本批新增/修改 |
+| site/data/81-hardships-view.html | W1022 | 本批新增/修改 |
+| site/data/81-hardships.html | W1022 | 本批新增/修改 |
+| site/data/_shell.html | W1022 | 本批新增/修改 |
+| site/data/aesthetics.html | W1022 | 本批新增/修改 |
+| site/data/ai-dialogue.html | W1022 | 本批新增/修改 |
+| site/data/business-model.html | W1022 | 本批新增/修改 |
+| site/data/cave-estate.html | W1022 | 本批新增/修改 |
+| site/data/century-dialogue.html | W1022 | 本批新增/修改 |
+| site/data/chapter-stats.html | W1022 | 本批新增/修改 |
+| site/data/chapter-structure-graph.html | W1022 | 本批新增/修改 |
+| site/data/character-appearance.html | W1022 | 本批新增/修改 |
+| site/data/character-dynamic-network.html | W1022 | 本批新增/修改 |
+| site/data/character-presence-timeline.html | W1022 | 本批新增/修改 |
+| site/data/character-relationship-3d-view.html | W1022 | 本批新增/修改 |
+| site/data/character-relationship-3d.html | W1022 | 本批新增/修改 |
+| site/data/character-semantic-network.html | W1022 | 本批新增/修改 |
+| site/data/character-sentiment-arc.html | W1022 | 本批新增/修改 |
+| site/data/chart-design.html | W1022 | 本批新增/修改 |
+| site/data/cognitive-psychology.html | W1022 | 本批新增/修改 |
+| site/data/concept-device.html | W1022 | 本批新增/修改 |
+| site/data/counterfactual.html | W1022 | 本批新增/修改 |
+| site/data/criticism-history.html | W1022 | 本批新增/修改 |
+| site/data/cross-time-danmaku.html | W1022 | 本批新增/修改 |
+| site/data/cultural-misreading.html | W1022 | 本批新增/修改 |
+| site/data/customs-pass-route.html | W1022 | 本批新增/修改 |
+| site/data/data-explorer.html | W1022 | 本批新增/修改 |
+| site/data/deconstruction.html | W1022 | 本批新增/修改 |
+| site/data/dialogue-sentiment.html | W1022 | 本批新增/修改 |
+| site/data/ecology.html | W1022 | 本批新增/修改 |
+| site/data/emotional-heatmap.html | W1022 | 本批新增/修改 |
+| site/data/ethics-consumption.html | W1022 | 本批新增/修改 |
+| site/data/famous-time-travel.html | W1022 | 本批新增/修改 |
+| site/data/four-dimensional-research-network.html | W1022 | 本批新增/修改 |
+| site/data/four-heavenly-kings-artifacts.html | W1022 | 本批新增/修改 |
+| site/data/game-webnovel.html | W1022 | 本批新增/修改 |
+| site/data/global-pattern.html | W1022 | 本批新增/修改 |
+| site/data/graph-explorer.html | W1022 | 本批新增/修改 |
+| site/data/guanyin-six-roles-network.html | W1022 | 本批新增/修改 |
+| site/data/hardship-difficulty-heatmap.html | W1022 | 本批新增/修改 |
+| site/data/hardship-heatmap.html | W1022 | 本批新增/修改 |
+| site/data/heaven-power-network.html | W1022 | 本批新增/修改 |
+| site/data/intertextuality-network.html | W1022 | 本批新增/修改 |
+| site/data/journey-geo-3d.html | W1022 | 本批新增/修改 |
+| site/data/journey-geo-semiotics.html | W1022 | 本批新增/修改 |
+| site/data/journey-map-interactive.html | W1022 | 本批新增/修改 |
+| site/data/journey-route.html | W1022 | 本批新增/修改 |
+| site/data/journey-spacetime.html | W1022 | 本批新增/修改 |
+| site/data/jurisprudence.html | W1022 | 本批新增/修改 |
+| site/data/karma-reincarnation.html | W1022 | 本批新增/修改 |
+| site/data/language-style-radar.html | W1022 | 本批新增/修改 |
+| site/data/linguistics.html | W1022 | 本批新增/修改 |
+| site/data/magic-system.html | W1022 | 本批新增/修改 |
+| site/data/material-archaeology.html | W1022 | 本批新增/修改 |
+| site/data/mbti-evolution.html | W1022 | 本批新增/修改 |
+| site/data/methodology-matrix.html | W1022 | 本批新增/修改 |
+| site/data/ming-political-thought-comparison.html | W1022 | 本批新增/修改 |
+| site/data/monster-background.html | W1022 | 本批新增/修改 |
+| site/data/monster-capability-radar.html | W1022 | 本批新增/修改 |
+| site/data/monster-ecology-network.html | W1022 | 本批新增/修改 |
+| site/data/monster-female-network.html | W1022 | 本批新增/修改 |
+| site/data/monster-hierarchy-network.html | W1022 | 本批新增/修改 |
+| site/data/monster-sociology.html | W1022 | 本批新增/修改 |
+| site/data/monster-victims-network.html | W1022 | 本批新增/修改 |
+| site/data/music-structure.html | W1022 | 本批新增/修改 |
+| site/data/narrative-experiment.html | W1022 | 本批新增/修改 |
+| site/data/narrative-rhythm-curve.html | W1022 | 本批新增/修改 |
+| site/data/narratology-12d-network.html | W1022 | 本批新增/修改 |
+| site/data/narratology-16d-network.html | W1022 | 本批新增/修改 |
+| site/data/perf-canvas-rendering.html | W1022 | 本批新增/修改 |
+| site/data/philosophy.html | W1022 | 本批新增/修改 |
+| site/data/pilgrim-team-dynamic-network.html | W1022 | 本批新增/修改 |
+| site/data/pilgrim-team-psychology-arc.html | W1022 | 本批新增/修改 |
+| site/data/poetry-rhythm-analysis.html | W1022 | 本批新增/修改 |
+| site/data/power-resources.html | W1022 | 本批新增/修改 |
+| site/data/relationships.html | W1022 | 本批新增/修改 |
+| site/data/risk-project.html | W1022 | 本批新增/修改 |
+| site/data/search.html | W1022 | 本批新增/修改 |
+| site/data/six-senses-narratology-network.html | W1022 | 本批新增/修改 |
+| site/data/social-media.html | W1022 | 本批新增/修改 |
+| site/data/story-timeline.html | W1022 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1022 | 本批新增/修改 |
+| site/data/text-evolution.html | W1022 | 本批新增/修改 |
+| site/data/text-search.html | W1022 | 本批新增/修改 |
+| site/data/theological-intervention-network.html | W1022 | 本批新增/修改 |
+| site/data/timeline.html | W1022 | 本批新增/修改 |
+| site/data/underworld-power-network.html | W1022 | 本批新增/修改 |
+| site/data/visual-art.html | W1022 | 本批新增/修改 |
+| site/data/workplace.html | W1022 | 本批新增/修改 |
+| site/dukou-engine.html | W1022 | 本批新增/修改 |
+| site/en/81-hardships-view.html | W1022 | 本批新增/修改 |
+| site/en/81-hardships.html | W1022 | 本批新增/修改 |
+| site/en/academic-papers.html | W1022 | 本批新增/修改 |
+| site/en/aesthetics.html | W1022 | 本批新增/修改 |
+| site/en/ai-dialogue.html | W1022 | 本批新增/修改 |
+| site/en/bestiary.html | W1022 | 本批新增/修改 |
+| site/en/business-model.html | W1022 | 本批新增/修改 |
+| site/en/cave-estate.html | W1022 | 本批新增/修改 |
+| site/en/century-dialogue.html | W1022 | 本批新增/修改 |
+| site/en/chapter-stats.html | W1022 | 本批新增/修改 |
+| site/en/chapter-structure-graph.html | W1022 | 本批新增/修改 |
+| site/en/chapters-map.html | W1022 | 本批新增/修改 |
+| site/en/character-appearance.html | W1022 | 本批新增/修改 |
+| site/en/character-bailongma.html | W1022 | 本批新增/修改 |
+| site/en/character-bajie.html | W1022 | 本批新增/修改 |
+| site/en/character-dynamic-network.html | W1022 | 本批新增/修改 |
+| site/en/character-presence-timeline.html | W1022 | 本批新增/修改 |
+| site/en/character-relationship-3d-view.html | W1022 | 本批新增/修改 |
+| site/en/character-relationship-3d.html | W1022 | 本批新增/修改 |
+| site/en/character-semantic-network.html | W1022 | 本批新增/修改 |
+| site/en/character-sentiment-arc.html | W1022 | 本批新增/修改 |
+| site/en/character-shaseng.html | W1022 | 本批新增/修改 |
+| site/en/character-tangseng.html | W1022 | 本批新增/修改 |
+| site/en/character-wukong.html | W1022 | 本批新增/修改 |
+| site/en/characters.html | W1022 | 本批新增/修改 |
+| site/en/chart-design.html | W1022 | 本批新增/修改 |
+| site/en/cognitive-psychology.html | W1022 | 本批新增/修改 |
+| site/en/concept-device.html | W1022 | 本批新增/修改 |
+| site/en/counterfactual.html | W1022 | 本批新增/修改 |
+| site/en/criticism-history.html | W1022 | 本批新增/修改 |
+| site/en/cross-time-danmaku.html | W1022 | 本批新增/修改 |
+| site/en/cultural-misreading.html | W1022 | 本批新增/修改 |
+| site/en/customs-pass-route.html | W1022 | 本批新增/修改 |
+| site/en/dashboard.html | W1022 | 本批新增/修改 |
+| site/en/data-explorer.html | W1022 | 本批新增/修改 |
+| site/en/deconstruction.html | W1022 | 本批新增/修改 |
+| site/en/dialogue-sentiment.html | W1022 | 本批新增/修改 |
+| site/en/dukou-engine.html | W1022 | 本批新增/修改 |
+| site/en/ecology.html | W1022 | 本批新增/修改 |
+| site/en/emotional-heatmap.html | W1022 | 本批新增/修改 |
+| site/en/essay-ai-era.html | W1022 | 本批新增/修改 |
+| site/en/essay-buddhist-chan.html | W1022 | 本批新增/修改 |
+| site/en/essay-chapter-couplets.html | W1022 | 本批新增/修改 |
+| site/en/essay-character-fu.html | W1022 | 本批新增/修改 |
+| site/en/essay-cipai-linjiangxian.html | W1022 | 本批新增/修改 |
+| site/en/essay-cipai-mantingfang.html | W1022 | 本批新增/修改 |
+| site/en/essay-cipai-shuidiaogetou.html | W1022 | 本批新增/修改 |
+| site/en/essay-cipai-xijiangyue.html | W1022 | 本批新增/修改 |
+| site/en/essay-composition-origins.html | W1022 | 本批新增/修改 |
+| site/en/essay-divine-bureaucracy.html | W1022 | 本批新增/修改 |
+| site/en/essay-folk-belief.html | W1022 | 本批新增/修改 |
+| site/en/essay-historical-xuanzang.html | W1022 | 本批新增/修改 |
+| site/en/essay-information-cocoon.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-economy.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-examination.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-garrison.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-intellectual-history.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-judiciary.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-literary-thought.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-maritime-ban.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-metaphor.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-military.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-politics.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-religion.html | W1022 | 本批新增/修改 |
+| site/en/essay-ming-social-customs.html | W1022 | 本批新增/修改 |
+| site/en/essay-modern-management.html | W1022 | 本批新增/修改 |
+| site/en/essay-original-poetry.html | W1022 | 本批新增/修改 |
+| site/en/essay-poetry-imagery.html | W1022 | 本批新增/修改 |
+| site/en/essay-poetry-opening.html | W1022 | 本批新增/修改 |
+| site/en/essay-quanzhen-daoism.html | W1022 | 本批新增/修改 |
+| site/en/essay-rhythm-analysis.html | W1022 | 本批新增/修改 |
+| site/en/essay-scenery-poems.html | W1022 | 本批新增/修改 |
+| site/en/essay-thematic-poetry.html | W1022 | 本批新增/修改 |
+| site/en/essay-three-teachings.html | W1022 | 本批新增/修改 |
+| site/en/essay-version-evolution.html | W1022 | 本批新增/修改 |
+| site/en/essay-zen-koan-vs-neidan.html | W1022 | 本批新增/修改 |
+| site/en/ethics-consumption.html | W1022 | 本批新增/修改 |
+| site/en/famous-time-travel.html | W1022 | 本批新增/修改 |
+| site/en/four-dimensional-research-network.html | W1022 | 本批新增/修改 |
+| site/en/four-heavenly-kings-artifacts.html | W1022 | 本批新增/修改 |
+| site/en/game-webnovel.html | W1022 | 本批新增/修改 |
+| site/en/global-pattern.html | W1022 | 本批新增/修改 |
+| site/en/graph-explorer.html | W1022 | 本批新增/修改 |
+| site/en/guanyin-six-roles-network.html | W1022 | 本批新增/修改 |
+| site/en/guide.html | W1022 | 本批新增/修改 |
+| site/en/hardship-difficulty-heatmap.html | W1022 | 本批新增/修改 |
+| site/en/hardship-heatmap.html | W1022 | 本批新增/修改 |
+| site/en/heaven-power-network.html | W1022 | 本批新增/修改 |
+| site/en/index.html | W1022 | 本批新增/修改 |
+| site/en/intertextuality-network.html | W1022 | 本批新增/修改 |
+| site/en/journey-geo-semiotics.html | W1022 | 本批新增/修改 |
+| site/en/journey-map-interactive.html | W1022 | 本批新增/修改 |
+| site/en/journey-route.html | W1022 | 本批新增/修改 |
+| site/en/journey-spacetime.html | W1022 | 本批新增/修改 |
+| site/en/jurisprudence.html | W1022 | 本批新增/修改 |
+| site/en/karma-reincarnation.html | W1022 | 本批新增/修改 |
+| site/en/language-style-radar.html | W1022 | 本批新增/修改 |
+| site/en/linguistics.html | W1022 | 本批新增/修改 |
+| site/en/magic-system.html | W1022 | 本批新增/修改 |
+| site/en/material-archaeology.html | W1022 | 本批新增/修改 |
+| site/en/mbti-evolution.html | W1022 | 本批新增/修改 |
+| site/en/methodology-matrix.html | W1022 | 本批新增/修改 |
+| site/en/methodology.html | W1022 | 本批新增/修改 |
+| site/en/ming-political-thought-comparison.html | W1022 | 本批新增/修改 |
+| site/en/monster-background.html | W1022 | 本批新增/修改 |
+| site/en/monster-capability-radar.html | W1022 | 本批新增/修改 |
+| site/en/monster-ecology-network.html | W1022 | 本批新增/修改 |
+| site/en/monster-female-network.html | W1022 | 本批新增/修改 |
+| site/en/monster-hierarchy-network.html | W1022 | 本批新增/修改 |
+| site/en/monster-sociology.html | W1022 | 本批新增/修改 |
+| site/en/monster-victims-network.html | W1022 | 本批新增/修改 |
+| site/en/music-structure.html | W1022 | 本批新增/修改 |
+| site/en/narrative-experiment.html | W1022 | 本批新增/修改 |
+| site/en/narrative-rhythm-curve.html | W1022 | 本批新增/修改 |
+| site/en/narratology-12d-network.html | W1022 | 本批新增/修改 |
+| site/en/narratology-16d-network.html | W1022 | 本批新增/修改 |
+| site/en/perf-canvas-rendering.html | W1022 | 本批新增/修改 |
+| site/en/philosophy.html | W1022 | 本批新增/修改 |
+| site/en/pilgrim-team-dynamic-network.html | W1022 | 本批新增/修改 |
+| site/en/pilgrim-team-psychology-arc.html | W1022 | 本批新增/修改 |
+| site/en/poetry-rhythm-analysis.html | W1022 | 本批新增/修改 |
+| site/en/power-resources.html | W1022 | 本批新增/修改 |
+| site/en/relationships.html | W1022 | 本批新增/修改 |
+| site/en/risk-project.html | W1022 | 本批新增/修改 |
+| site/en/search.html | W1022 | 本批新增/修改 |
+| site/en/site-map.html | W1022 | 本批新增/修改 |
+| site/en/six-senses-narratology-network.html | W1022 | 本批新增/修改 |
+| site/en/social-media.html | W1022 | 本批新增/修改 |
+| site/en/tag-cloud.html | W1022 | 本批新增/修改 |
+| site/en/text-evolution.html | W1022 | 本批新增/修改 |
+| site/en/text-search.html | W1022 | 本批新增/修改 |
+| site/en/theological-intervention-network.html | W1022 | 本批新增/修改 |
+| site/en/timeline.html | W1022 | 本批新增/修改 |
+| site/en/tribulations.html | W1022 | 本批新增/修改 |
+| site/en/underworld-power-network.html | W1022 | 本批新增/修改 |
+| site/en/visual-art.html | W1022 | 本批新增/修改 |
+| site/en/visualizations.html | W1022 | 本批新增/修改 |
+| site/en/workplace.html | W1022 | 本批新增/修改 |
+| site/index.html | W1022 | 本批新增/修改 |
+| site/reader/ch001.html | W1022 | 本批新增/修改 |
+| site/reader/ch002.html | W1022 | 本批新增/修改 |
+| site/reader/ch003.html | W1022 | 本批新增/修改 |
+| site/reader/ch004.html | W1022 | 本批新增/修改 |
+| site/reader/ch005.html | W1022 | 本批新增/修改 |
+| site/reader/ch006.html | W1022 | 本批新增/修改 |
+| site/reader/ch007.html | W1022 | 本批新增/修改 |
+| site/reader/ch008.html | W1022 | 本批新增/修改 |
+| site/reader/ch009.html | W1022 | 本批新增/修改 |
+| site/reader/ch010.html | W1022 | 本批新增/修改 |
+| site/reader/ch011.html | W1022 | 本批新增/修改 |
+| site/reader/ch012.html | W1022 | 本批新增/修改 |
+| site/reader/ch013.html | W1022 | 本批新增/修改 |
+| site/reader/ch014.html | W1022 | 本批新增/修改 |
+| site/reader/ch015.html | W1022 | 本批新增/修改 |
+| site/reader/ch016.html | W1022 | 本批新增/修改 |
+| site/reader/ch017.html | W1022 | 本批新增/修改 |
+| site/reader/ch018.html | W1022 | 本批新增/修改 |
+| site/reader/ch019.html | W1022 | 本批新增/修改 |
+| site/reader/ch020.html | W1022 | 本批新增/修改 |
+| site/reader/ch021.html | W1022 | 本批新增/修改 |
+| site/reader/ch022.html | W1022 | 本批新增/修改 |
+| site/reader/ch023.html | W1022 | 本批新增/修改 |
+| site/reader/ch024.html | W1022 | 本批新增/修改 |
+| site/reader/ch025.html | W1022 | 本批新增/修改 |
+| site/reader/ch026.html | W1022 | 本批新增/修改 |
+| site/reader/ch027.html | W1022 | 本批新增/修改 |
+| site/reader/ch028.html | W1022 | 本批新增/修改 |
+| site/reader/ch029.html | W1022 | 本批新增/修改 |
+| site/reader/ch030.html | W1022 | 本批新增/修改 |
+| site/reader/ch031.html | W1022 | 本批新增/修改 |
+| site/reader/ch032.html | W1022 | 本批新增/修改 |
+| site/reader/ch033.html | W1022 | 本批新增/修改 |
+| site/reader/ch034.html | W1022 | 本批新增/修改 |
+| site/reader/ch035.html | W1022 | 本批新增/修改 |
+| site/reader/ch036.html | W1022 | 本批新增/修改 |
+| site/reader/ch037.html | W1022 | 本批新增/修改 |
+| site/reader/ch038.html | W1022 | 本批新增/修改 |
+| site/reader/ch039.html | W1022 | 本批新增/修改 |
+| site/reader/ch040.html | W1022 | 本批新增/修改 |
+| site/reader/ch041.html | W1022 | 本批新增/修改 |
+| site/reader/ch042.html | W1022 | 本批新增/修改 |
+| site/reader/ch043.html | W1022 | 本批新增/修改 |
+| site/reader/ch044.html | W1022 | 本批新增/修改 |
+| site/reader/ch045.html | W1022 | 本批新增/修改 |
+| site/reader/ch046.html | W1022 | 本批新增/修改 |
+| site/reader/ch047.html | W1022 | 本批新增/修改 |
+| site/reader/ch048.html | W1022 | 本批新增/修改 |
+| site/reader/ch049.html | W1022 | 本批新增/修改 |
+| site/reader/ch050.html | W1022 | 本批新增/修改 |
+| site/reader/ch051.html | W1022 | 本批新增/修改 |
+| site/reader/ch052.html | W1022 | 本批新增/修改 |
+| site/reader/ch053.html | W1022 | 本批新增/修改 |
+| site/reader/ch054.html | W1022 | 本批新增/修改 |
+| site/reader/ch055.html | W1022 | 本批新增/修改 |
+| site/reader/ch056.html | W1022 | 本批新增/修改 |
+| site/reader/ch057.html | W1022 | 本批新增/修改 |
+| site/reader/ch058.html | W1022 | 本批新增/修改 |
+| site/reader/ch059.html | W1022 | 本批新增/修改 |
+| site/reader/ch060.html | W1022 | 本批新增/修改 |
+| site/reader/ch061.html | W1022 | 本批新增/修改 |
+| site/reader/ch062.html | W1022 | 本批新增/修改 |
+| site/reader/ch063.html | W1022 | 本批新增/修改 |
+| site/reader/ch064.html | W1022 | 本批新增/修改 |
+| site/reader/ch065.html | W1022 | 本批新增/修改 |
+| site/reader/ch066.html | W1022 | 本批新增/修改 |
+| site/reader/ch067.html | W1022 | 本批新增/修改 |
+| site/reader/ch068.html | W1022 | 本批新增/修改 |
+| site/reader/ch069.html | W1022 | 本批新增/修改 |
+| site/reader/ch070.html | W1022 | 本批新增/修改 |
+| site/reader/ch071.html | W1022 | 本批新增/修改 |
+| site/reader/ch072.html | W1022 | 本批新增/修改 |
+| site/reader/ch073.html | W1022 | 本批新增/修改 |
+| site/reader/ch074.html | W1022 | 本批新增/修改 |
+| site/reader/ch075.html | W1022 | 本批新增/修改 |
+| site/reader/ch076.html | W1022 | 本批新增/修改 |
+| site/reader/ch077.html | W1022 | 本批新增/修改 |
+| site/reader/ch078.html | W1022 | 本批新增/修改 |
+| site/reader/ch079.html | W1022 | 本批新增/修改 |
+| site/reader/ch080.html | W1022 | 本批新增/修改 |
+| site/reader/ch081.html | W1022 | 本批新增/修改 |
+| site/reader/ch082.html | W1022 | 本批新增/修改 |
+| site/reader/ch083.html | W1022 | 本批新增/修改 |
+| site/reader/ch084.html | W1022 | 本批新增/修改 |
+| site/reader/ch085.html | W1022 | 本批新增/修改 |
+| site/reader/ch086.html | W1022 | 本批新增/修改 |
+| site/reader/ch087.html | W1022 | 本批新增/修改 |
+| site/reader/ch088.html | W1022 | 本批新增/修改 |
+| site/reader/ch089.html | W1022 | 本批新增/修改 |
+| site/reader/ch090.html | W1022 | 本批新增/修改 |
+| site/reader/ch091.html | W1022 | 本批新增/修改 |
+| site/reader/ch092.html | W1022 | 本批新增/修改 |
+| site/reader/ch093.html | W1022 | 本批新增/修改 |
+| site/reader/ch094.html | W1022 | 本批新增/修改 |
+| site/reader/ch095.html | W1022 | 本批新增/修改 |
+| site/reader/ch096.html | W1022 | 本批新增/修改 |
+| site/reader/ch097.html | W1022 | 本批新增/修改 |
+| site/reader/ch098.html | W1022 | 本批新增/修改 |
+| site/reader/ch099.html | W1022 | 本批新增/修改 |
+| site/reader/ch100.html | W1022 | 本批新增/修改 |
+| site/reader/index.html | W1022 | 本批新增/修改 |
+| site/reader/themes-hub.html | W1022 | 本批新增/修改 |
+| tests/unit/test_style_block_judgement.py | W1022 | 本批新增/修改 |
+
+## W1021 Backlog 对账触发器常驻化（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1021 | 本批新增/修改 |
+| AGENTS.md | W1021 | 本批新增/修改 |
+| CHANGELOG.md | W1021 | 本批新增/修改 |
+| CITATION.cff | W1021 | 本批新增/修改 |
+| HANDOVER.md | W1021 | 本批新增/修改 |
+| README.md | W1021 | 本批新增/修改 |
+| STRUCTURE.md | W1021 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1021 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1021 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1021 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1021 | 本批新增/修改 |
+| pytest.ini | W1021 | 本批新增/修改 |
+| scripts/check_backlog_review.py | W1021 | 本批新增/修改 |
+| scripts/output/_w1021_spec.json | W1021 | 本批新增/修改 |
+| scripts/output/file-index.md | W1021 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1021 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1021 | 本批新增/修改 |
+| scripts/output/stats.json | W1021 | 本批新增/修改 |
+| scripts/preflight_check.py | W1021 | 本批新增/修改 |
+| site/index.html | W1021 | 本批新增/修改 |
+| tests/unit/test_backlog_review.py | W1021 | 本批新增/修改 |
+
+## W1020 Backlog 登记面对账批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1020 | 本批新增/修改 |
+| AGENTS.md | W1020 | 本批新增/修改 |
+| CHANGELOG.md | W1020 | 本批新增/修改 |
+| CITATION.cff | W1020 | 本批新增/修改 |
+| HANDOVER.md | W1020 | 本批新增/修改 |
+| README.md | W1020 | 本批新增/修改 |
+| STRUCTURE.md | W1020 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1020 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1020 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1020 | 本批新增/修改 |
+| docs/00-导读/统计口径说明.md | W1020 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1020 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1020 | 本批新增/修改 |
+| scripts/README.md | W1020 | 本批新增/修改 |
+| scripts/output/_w1020_spec.json | W1020 | 本批新增/修改 |
+| scripts/output/file-index.md | W1020 | 本批新增/修改 |
+| site/index.html | W1020 | 本批新增/修改 |
+
+## W1019 BL-33/BL-29 收官批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1019 | 本批新增/修改 |
+| AGENTS.md | W1019 | 本批新增/修改 |
+| CHANGELOG.md | W1019 | 本批新增/修改 |
+| CITATION.cff | W1019 | 本批新增/修改 |
+| DESIGN.md | W1019 | 本批新增/修改 |
+| HANDOVER.md | W1019 | 本批新增/修改 |
+| README.md | W1019 | 本批新增/修改 |
+| STRUCTURE.md | W1019 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1019 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1019 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1019 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1019 | 本批新增/修改 |
+| pytest.ini | W1019 | 本批新增/修改 |
+| scripts/inline_css.py | W1019 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1019 | 本批新增/修改 |
+| scripts/output/file-index.md | W1019 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1019 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1019 | 本批新增/修改 |
+| scripts/output/stats.json | W1019 | 本批新增/修改 |
+| site/_template.html | W1019 | 本批新增/修改 |
+| site/data/81-hardships-view.html | W1019 | 本批新增/修改 |
+| site/data/81-hardships.html | W1019 | 本批新增/修改 |
+| site/data/_shell.html | W1019 | 本批新增/修改 |
+| site/data/aesthetics.html | W1019 | 本批新增/修改 |
+| site/data/ai-dialogue.html | W1019 | 本批新增/修改 |
+| site/data/business-model.html | W1019 | 本批新增/修改 |
+| site/data/cave-estate.html | W1019 | 本批新增/修改 |
+| site/data/century-dialogue.html | W1019 | 本批新增/修改 |
+| site/data/chapter-stats.html | W1019 | 本批新增/修改 |
+| site/data/chapter-structure-graph.html | W1019 | 本批新增/修改 |
+| site/data/character-appearance.html | W1019 | 本批新增/修改 |
+| site/data/character-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/data/character-presence-timeline.html | W1019 | 本批新增/修改 |
+| site/data/character-relationship-3d-view.html | W1019 | 本批新增/修改 |
+| site/data/character-relationship-3d.html | W1019 | 本批新增/修改 |
+| site/data/character-semantic-network.html | W1019 | 本批新增/修改 |
+| site/data/character-sentiment-arc.html | W1019 | 本批新增/修改 |
+| site/data/chart-design.html | W1019 | 本批新增/修改 |
+| site/data/cognitive-psychology.html | W1019 | 本批新增/修改 |
+| site/data/concept-device.html | W1019 | 本批新增/修改 |
+| site/data/counterfactual.html | W1019 | 本批新增/修改 |
+| site/data/criticism-history.html | W1019 | 本批新增/修改 |
+| site/data/cross-time-danmaku.html | W1019 | 本批新增/修改 |
+| site/data/cultural-misreading.html | W1019 | 本批新增/修改 |
+| site/data/customs-pass-route.html | W1019 | 本批新增/修改 |
+| site/data/data-explorer.html | W1019 | 本批新增/修改 |
+| site/data/deconstruction.html | W1019 | 本批新增/修改 |
+| site/data/dialogue-sentiment.html | W1019 | 本批新增/修改 |
+| site/data/ecology.html | W1019 | 本批新增/修改 |
+| site/data/emotional-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/ethics-consumption.html | W1019 | 本批新增/修改 |
+| site/data/famous-time-travel.html | W1019 | 本批新增/修改 |
+| site/data/four-dimensional-research-network.html | W1019 | 本批新增/修改 |
+| site/data/four-heavenly-kings-artifacts.html | W1019 | 本批新增/修改 |
+| site/data/game-webnovel.html | W1019 | 本批新增/修改 |
+| site/data/global-pattern.html | W1019 | 本批新增/修改 |
+| site/data/graph-explorer.html | W1019 | 本批新增/修改 |
+| site/data/guanyin-six-roles-network.html | W1019 | 本批新增/修改 |
+| site/data/hardship-difficulty-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/hardship-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/heaven-power-network.html | W1019 | 本批新增/修改 |
+| site/data/intertextuality-network.html | W1019 | 本批新增/修改 |
+| site/data/journey-geo-3d.html | W1019 | 本批新增/修改 |
+| site/data/journey-geo-semiotics.html | W1019 | 本批新增/修改 |
+| site/data/journey-map-interactive.html | W1019 | 本批新增/修改 |
+| site/data/journey-route.html | W1019 | 本批新增/修改 |
+| site/data/journey-spacetime.html | W1019 | 本批新增/修改 |
+| site/data/jurisprudence.html | W1019 | 本批新增/修改 |
+| site/data/karma-reincarnation.html | W1019 | 本批新增/修改 |
+| site/data/language-style-radar.html | W1019 | 本批新增/修改 |
+| site/data/linguistics.html | W1019 | 本批新增/修改 |
+| site/data/magic-system.html | W1019 | 本批新增/修改 |
+| site/data/material-archaeology.html | W1019 | 本批新增/修改 |
+| site/data/mbti-evolution.html | W1019 | 本批新增/修改 |
+| site/data/methodology-matrix.html | W1019 | 本批新增/修改 |
+| site/data/ming-political-thought-comparison.html | W1019 | 本批新增/修改 |
+| site/data/monster-background.html | W1019 | 本批新增/修改 |
+| site/data/monster-capability-radar.html | W1019 | 本批新增/修改 |
+| site/data/monster-ecology-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-female-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-hierarchy-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-sociology.html | W1019 | 本批新增/修改 |
+| site/data/monster-victims-network.html | W1019 | 本批新增/修改 |
+| site/data/music-structure.html | W1019 | 本批新增/修改 |
+| site/data/narrative-experiment.html | W1019 | 本批新增/修改 |
+| site/data/narrative-rhythm-curve.html | W1019 | 本批新增/修改 |
+| site/data/narratology-12d-network.html | W1019 | 本批新增/修改 |
+| site/data/narratology-16d-network.html | W1019 | 本批新增/修改 |
+| site/data/perf-canvas-rendering.html | W1019 | 本批新增/修改 |
+| site/data/philosophy.html | W1019 | 本批新增/修改 |
+| site/data/pilgrim-team-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/data/pilgrim-team-psychology-arc.html | W1019 | 本批新增/修改 |
+| site/data/poetry-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/data/power-resources.html | W1019 | 本批新增/修改 |
+| site/data/relationships.html | W1019 | 本批新增/修改 |
+| site/data/risk-project.html | W1019 | 本批新增/修改 |
+| site/data/search.html | W1019 | 本批新增/修改 |
+| site/data/six-senses-narratology-network.html | W1019 | 本批新增/修改 |
+| site/data/social-media.html | W1019 | 本批新增/修改 |
+| site/data/story-timeline.html | W1019 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1019 | 本批新增/修改 |
+| site/data/text-evolution.html | W1019 | 本批新增/修改 |
+| site/data/text-search.html | W1019 | 本批新增/修改 |
+| site/data/theological-intervention-network.html | W1019 | 本批新增/修改 |
+| site/data/timeline.html | W1019 | 本批新增/修改 |
+| site/data/underworld-power-network.html | W1019 | 本批新增/修改 |
+| site/data/visual-art.html | W1019 | 本批新增/修改 |
+| site/data/workplace.html | W1019 | 本批新增/修改 |
+| site/dukou-engine.html | W1019 | 本批新增/修改 |
+| site/en/81-hardships-view.html | W1019 | 本批新增/修改 |
+| site/en/81-hardships.html | W1019 | 本批新增/修改 |
+| site/en/academic-papers.html | W1019 | 本批新增/修改 |
+| site/en/aesthetics.html | W1019 | 本批新增/修改 |
+| site/en/ai-dialogue.html | W1019 | 本批新增/修改 |
+| site/en/bestiary.html | W1019 | 本批新增/修改 |
+| site/en/business-model.html | W1019 | 本批新增/修改 |
+| site/en/cave-estate.html | W1019 | 本批新增/修改 |
+| site/en/century-dialogue.html | W1019 | 本批新增/修改 |
+| site/en/chapter-stats.html | W1019 | 本批新增/修改 |
+| site/en/chapter-structure-graph.html | W1019 | 本批新增/修改 |
+| site/en/chapters-map.html | W1019 | 本批新增/修改 |
+| site/en/character-appearance.html | W1019 | 本批新增/修改 |
+| site/en/character-bailongma.html | W1019 | 本批新增/修改 |
+| site/en/character-bajie.html | W1019 | 本批新增/修改 |
+| site/en/character-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/en/character-presence-timeline.html | W1019 | 本批新增/修改 |
+| site/en/character-relationship-3d-view.html | W1019 | 本批新增/修改 |
+| site/en/character-relationship-3d.html | W1019 | 本批新增/修改 |
+| site/en/character-semantic-network.html | W1019 | 本批新增/修改 |
+| site/en/character-sentiment-arc.html | W1019 | 本批新增/修改 |
+| site/en/character-shaseng.html | W1019 | 本批新增/修改 |
+| site/en/character-tangseng.html | W1019 | 本批新增/修改 |
+| site/en/character-wukong.html | W1019 | 本批新增/修改 |
+| site/en/characters.html | W1019 | 本批新增/修改 |
+| site/en/chart-design.html | W1019 | 本批新增/修改 |
+| site/en/cognitive-psychology.html | W1019 | 本批新增/修改 |
+| site/en/concept-device.html | W1019 | 本批新增/修改 |
+| site/en/counterfactual.html | W1019 | 本批新增/修改 |
+| site/en/criticism-history.html | W1019 | 本批新增/修改 |
+| site/en/cross-time-danmaku.html | W1019 | 本批新增/修改 |
+| site/en/cultural-misreading.html | W1019 | 本批新增/修改 |
+| site/en/customs-pass-route.html | W1019 | 本批新增/修改 |
+| site/en/dashboard.html | W1019 | 本批新增/修改 |
+| site/en/data-explorer.html | W1019 | 本批新增/修改 |
+| site/en/deconstruction.html | W1019 | 本批新增/修改 |
+| site/en/dialogue-sentiment.html | W1019 | 本批新增/修改 |
+| site/en/dukou-engine.html | W1019 | 本批新增/修改 |
+| site/en/ecology.html | W1019 | 本批新增/修改 |
+| site/en/emotional-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/essay-ai-era.html | W1019 | 本批新增/修改 |
+| site/en/essay-buddhist-chan.html | W1019 | 本批新增/修改 |
+| site/en/essay-chapter-couplets.html | W1019 | 本批新增/修改 |
+| site/en/essay-character-fu.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-linjiangxian.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-mantingfang.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-shuidiaogetou.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-xijiangyue.html | W1019 | 本批新增/修改 |
+| site/en/essay-composition-origins.html | W1019 | 本批新增/修改 |
+| site/en/essay-divine-bureaucracy.html | W1019 | 本批新增/修改 |
+| site/en/essay-folk-belief.html | W1019 | 本批新增/修改 |
+| site/en/essay-historical-xuanzang.html | W1019 | 本批新增/修改 |
+| site/en/essay-information-cocoon.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-economy.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-examination.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-garrison.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-intellectual-history.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-judiciary.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-literary-thought.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-maritime-ban.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-metaphor.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-military.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-politics.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-religion.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-social-customs.html | W1019 | 本批新增/修改 |
+| site/en/essay-modern-management.html | W1019 | 本批新增/修改 |
+| site/en/essay-original-poetry.html | W1019 | 本批新增/修改 |
+| site/en/essay-poetry-imagery.html | W1019 | 本批新增/修改 |
+| site/en/essay-poetry-opening.html | W1019 | 本批新增/修改 |
+| site/en/essay-quanzhen-daoism.html | W1019 | 本批新增/修改 |
+| site/en/essay-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/en/essay-scenery-poems.html | W1019 | 本批新增/修改 |
+| site/en/essay-thematic-poetry.html | W1019 | 本批新增/修改 |
+| site/en/essay-three-teachings.html | W1019 | 本批新增/修改 |
+| site/en/essay-version-evolution.html | W1019 | 本批新增/修改 |
+| site/en/essay-zen-koan-vs-neidan.html | W1019 | 本批新增/修改 |
+| site/en/ethics-consumption.html | W1019 | 本批新增/修改 |
+| site/en/famous-time-travel.html | W1019 | 本批新增/修改 |
+| site/en/four-dimensional-research-network.html | W1019 | 本批新增/修改 |
+| site/en/four-heavenly-kings-artifacts.html | W1019 | 本批新增/修改 |
+| site/en/game-webnovel.html | W1019 | 本批新增/修改 |
+| site/en/global-pattern.html | W1019 | 本批新增/修改 |
+| site/en/graph-explorer.html | W1019 | 本批新增/修改 |
+| site/en/guanyin-six-roles-network.html | W1019 | 本批新增/修改 |
+| site/en/guide.html | W1019 | 本批新增/修改 |
+| site/en/hardship-difficulty-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/hardship-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/heaven-power-network.html | W1019 | 本批新增/修改 |
+| site/en/index.html | W1019 | 本批新增/修改 |
+| site/en/intertextuality-network.html | W1019 | 本批新增/修改 |
+| site/en/journey-geo-semiotics.html | W1019 | 本批新增/修改 |
+| site/en/journey-map-interactive.html | W1019 | 本批新增/修改 |
+| site/en/journey-route.html | W1019 | 本批新增/修改 |
+| site/en/journey-spacetime.html | W1019 | 本批新增/修改 |
+| site/en/jurisprudence.html | W1019 | 本批新增/修改 |
+| site/en/karma-reincarnation.html | W1019 | 本批新增/修改 |
+| site/en/language-style-radar.html | W1019 | 本批新增/修改 |
+| site/en/linguistics.html | W1019 | 本批新增/修改 |
+| site/en/magic-system.html | W1019 | 本批新增/修改 |
+| site/en/material-archaeology.html | W1019 | 本批新增/修改 |
+| site/en/mbti-evolution.html | W1019 | 本批新增/修改 |
+| site/en/methodology-matrix.html | W1019 | 本批新增/修改 |
+| site/en/methodology.html | W1019 | 本批新增/修改 |
+| site/en/ming-political-thought-comparison.html | W1019 | 本批新增/修改 |
+| site/en/monster-background.html | W1019 | 本批新增/修改 |
+| site/en/monster-capability-radar.html | W1019 | 本批新增/修改 |
+| site/en/monster-ecology-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-female-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-hierarchy-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-sociology.html | W1019 | 本批新增/修改 |
+| site/en/monster-victims-network.html | W1019 | 本批新增/修改 |
+| site/en/music-structure.html | W1019 | 本批新增/修改 |
+| site/en/narrative-experiment.html | W1019 | 本批新增/修改 |
+| site/en/narrative-rhythm-curve.html | W1019 | 本批新增/修改 |
+| site/en/narratology-12d-network.html | W1019 | 本批新增/修改 |
+| site/en/narratology-16d-network.html | W1019 | 本批新增/修改 |
+| site/en/perf-canvas-rendering.html | W1019 | 本批新增/修改 |
+| site/en/philosophy.html | W1019 | 本批新增/修改 |
+| site/en/pilgrim-team-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/en/pilgrim-team-psychology-arc.html | W1019 | 本批新增/修改 |
+| site/en/poetry-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/en/power-resources.html | W1019 | 本批新增/修改 |
+| site/en/relationships.html | W1019 | 本批新增/修改 |
+| site/en/risk-project.html | W1019 | 本批新增/修改 |
+| site/en/search.html | W1019 | 本批新增/修改 |
+| site/en/site-map.html | W1019 | 本批新增/修改 |
+| site/en/six-senses-narratology-network.html | W1019 | 本批新增/修改 |
+| site/en/social-media.html | W1019 | 本批新增/修改 |
+| site/en/tag-cloud.html | W1019 | 本批新增/修改 |
+| site/en/text-evolution.html | W1019 | 本批新增/修改 |
+| site/en/text-search.html | W1019 | 本批新增/修改 |
+| site/en/theological-intervention-network.html | W1019 | 本批新增/修改 |
+| site/en/timeline.html | W1019 | 本批新增/修改 |
+| site/en/tribulations.html | W1019 | 本批新增/修改 |
+| site/en/underworld-power-network.html | W1019 | 本批新增/修改 |
+| site/en/visual-art.html | W1019 | 本批新增/修改 |
+| site/en/visualizations.html | W1019 | 本批新增/修改 |
+| site/en/workplace.html | W1019 | 本批新增/修改 |
+| site/index.html | W1019 | 本批新增/修改 |
+| site/reader/ch001.html | W1019 | 本批新增/修改 |
+| site/reader/ch002.html | W1019 | 本批新增/修改 |
+| site/reader/ch003.html | W1019 | 本批新增/修改 |
+| site/reader/ch004.html | W1019 | 本批新增/修改 |
+| site/reader/ch005.html | W1019 | 本批新增/修改 |
+| site/reader/ch006.html | W1019 | 本批新增/修改 |
+| site/reader/ch007.html | W1019 | 本批新增/修改 |
+| site/reader/ch008.html | W1019 | 本批新增/修改 |
+| site/reader/ch009.html | W1019 | 本批新增/修改 |
+| site/reader/ch010.html | W1019 | 本批新增/修改 |
+| site/reader/ch011.html | W1019 | 本批新增/修改 |
+| site/reader/ch012.html | W1019 | 本批新增/修改 |
+| site/reader/ch013.html | W1019 | 本批新增/修改 |
+| site/reader/ch014.html | W1019 | 本批新增/修改 |
+| site/reader/ch015.html | W1019 | 本批新增/修改 |
+| site/reader/ch016.html | W1019 | 本批新增/修改 |
+| site/reader/ch017.html | W1019 | 本批新增/修改 |
+| site/reader/ch018.html | W1019 | 本批新增/修改 |
+| site/reader/ch019.html | W1019 | 本批新增/修改 |
+| site/reader/ch020.html | W1019 | 本批新增/修改 |
+| site/reader/ch021.html | W1019 | 本批新增/修改 |
+| site/reader/ch022.html | W1019 | 本批新增/修改 |
+| site/reader/ch023.html | W1019 | 本批新增/修改 |
+| site/reader/ch024.html | W1019 | 本批新增/修改 |
+| site/reader/ch025.html | W1019 | 本批新增/修改 |
+| site/reader/ch026.html | W1019 | 本批新增/修改 |
+| site/reader/ch027.html | W1019 | 本批新增/修改 |
+| site/reader/ch028.html | W1019 | 本批新增/修改 |
+| site/reader/ch029.html | W1019 | 本批新增/修改 |
+| site/reader/ch030.html | W1019 | 本批新增/修改 |
+| site/reader/ch031.html | W1019 | 本批新增/修改 |
+| site/reader/ch032.html | W1019 | 本批新增/修改 |
+| site/reader/ch033.html | W1019 | 本批新增/修改 |
+| site/reader/ch034.html | W1019 | 本批新增/修改 |
+| site/reader/ch035.html | W1019 | 本批新增/修改 |
+| site/reader/ch036.html | W1019 | 本批新增/修改 |
+| site/reader/ch037.html | W1019 | 本批新增/修改 |
+| site/reader/ch038.html | W1019 | 本批新增/修改 |
+| site/reader/ch039.html | W1019 | 本批新增/修改 |
+| site/reader/ch040.html | W1019 | 本批新增/修改 |
+| site/reader/ch041.html | W1019 | 本批新增/修改 |
+| site/reader/ch042.html | W1019 | 本批新增/修改 |
+| site/reader/ch043.html | W1019 | 本批新增/修改 |
+| site/reader/ch044.html | W1019 | 本批新增/修改 |
+| site/reader/ch045.html | W1019 | 本批新增/修改 |
+| site/reader/ch046.html | W1019 | 本批新增/修改 |
+| site/reader/ch047.html | W1019 | 本批新增/修改 |
+| site/reader/ch048.html | W1019 | 本批新增/修改 |
+| site/reader/ch049.html | W1019 | 本批新增/修改 |
+| site/reader/ch050.html | W1019 | 本批新增/修改 |
+| site/reader/ch051.html | W1019 | 本批新增/修改 |
+| site/reader/ch052.html | W1019 | 本批新增/修改 |
+| site/reader/ch053.html | W1019 | 本批新增/修改 |
+| site/reader/ch054.html | W1019 | 本批新增/修改 |
+| site/reader/ch055.html | W1019 | 本批新增/修改 |
+| site/reader/ch056.html | W1019 | 本批新增/修改 |
+| site/reader/ch057.html | W1019 | 本批新增/修改 |
+| site/reader/ch058.html | W1019 | 本批新增/修改 |
+| site/reader/ch059.html | W1019 | 本批新增/修改 |
+| site/reader/ch060.html | W1019 | 本批新增/修改 |
+| site/reader/ch061.html | W1019 | 本批新增/修改 |
+| site/reader/ch062.html | W1019 | 本批新增/修改 |
+| site/reader/ch063.html | W1019 | 本批新增/修改 |
+| site/reader/ch064.html | W1019 | 本批新增/修改 |
+| site/reader/ch065.html | W1019 | 本批新增/修改 |
+| site/reader/ch066.html | W1019 | 本批新增/修改 |
+| site/reader/ch067.html | W1019 | 本批新增/修改 |
+| site/reader/ch068.html | W1019 | 本批新增/修改 |
+| site/reader/ch069.html | W1019 | 本批新增/修改 |
+| site/reader/ch070.html | W1019 | 本批新增/修改 |
+| site/reader/ch071.html | W1019 | 本批新增/修改 |
+| site/reader/ch072.html | W1019 | 本批新增/修改 |
+| site/reader/ch073.html | W1019 | 本批新增/修改 |
+| site/reader/ch074.html | W1019 | 本批新增/修改 |
+| site/reader/ch075.html | W1019 | 本批新增/修改 |
+| site/reader/ch076.html | W1019 | 本批新增/修改 |
+| site/reader/ch077.html | W1019 | 本批新增/修改 |
+| site/reader/ch078.html | W1019 | 本批新增/修改 |
+| site/reader/ch079.html | W1019 | 本批新增/修改 |
+| site/reader/ch080.html | W1019 | 本批新增/修改 |
+| site/reader/ch081.html | W1019 | 本批新增/修改 |
+| site/reader/ch082.html | W1019 | 本批新增/修改 |
+| site/reader/ch083.html | W1019 | 本批新增/修改 |
+| site/reader/ch084.html | W1019 | 本批新增/修改 |
+| site/reader/ch085.html | W1019 | 本批新增/修改 |
+| site/reader/ch086.html | W1019 | 本批新增/修改 |
+| site/reader/ch087.html | W1019 | 本批新增/修改 |
+| site/reader/ch088.html | W1019 | 本批新增/修改 |
+| site/reader/ch089.html | W1019 | 本批新增/修改 |
+| site/reader/ch090.html | W1019 | 本批新增/修改 |
+| site/reader/ch091.html | W1019 | 本批新增/修改 |
+| site/reader/ch092.html | W1019 | 本批新增/修改 |
+| site/reader/ch093.html | W1019 | 本批新增/修改 |
+| site/reader/ch094.html | W1019 | 本批新增/修改 |
+| site/reader/ch095.html | W1019 | 本批新增/修改 |
+| site/reader/ch096.html | W1019 | 本批新增/修改 |
+| site/reader/ch097.html | W1019 | 本批新增/修改 |
+| site/reader/ch098.html | W1019 | 本批新增/修改 |
+| site/reader/ch099.html | W1019 | 本批新增/修改 |
+| site/reader/ch100.html | W1019 | 本批新增/修改 |
+| site/reader/index.html | W1019 | 本批新增/修改 |
+| site/reader/themes-hub.html | W1019 | 本批新增/修改 |
+| site/system.css | W1019 | 本批新增/修改 |
+| tests/unit/test_inline_css_resync.py | W1019 | 本批新增/修改 |
+| tests/unit/test_rag_server_clamp.py | W1019 | 本批新增/修改 |
+
+## W1018 回次 og:image 全覆盖批·第三轮（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1018 | 本批新增/修改 |
+| AGENTS.md | W1018 | 本批新增/修改 |
+| CHANGELOG.md | W1018 | 本批新增/修改 |
+| CITATION.cff | W1018 | 本批新增/修改 |
+| HANDOVER.md | W1018 | 本批新增/修改 |
+| README.md | W1018 | 本批新增/修改 |
+| STRUCTURE.md | W1018 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1018 | 本批新增/修改 |
+| assets/promo/plate-set/index.md | W1018 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-73-ch020-huxianfeng.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-73-ch020-huxianfeng.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-74-ch024-qingfeng.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-74-ch024-qingfeng.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-75-ch034-bashanhu.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-75-ch034-bashanhu.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-76-ch043-tuolong.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-76-ch043-tuolong.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-77-ch044-yangli.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-77-ch044-yangli.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-78-ch049-laoyuan.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-78-ch049-laoyuan.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-79-ch051-qingniu.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-79-ch051-qingniu.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-80-ch064-xingxian.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-80-ch064-xingxian.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-81-ch074-qingshi.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-81-ch074-qingshi.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-82-ch091-bidun.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-82-ch091-bidun.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-84-ch008-jinding.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-84-ch008-jinding.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1018-sheet.png | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/index.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/README.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/index.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/plate-line-73-ch020-huxianfeng.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-74-ch024-qingfeng.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-75-ch034-bashanhu.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-76-ch043-tuolong.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-77-ch044-yangli.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-78-ch049-laoyuan.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-79-ch051-qingniu.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-80-ch064-xingxian.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-81-ch074-qingshi.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-82-ch091-bidun.png | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-83-ch096-kouyuanwai.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-84-ch008-jinding.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/00-导读/项目说明.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/README.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/T38-任务计划执行与经验沉淀报告-2026-10-29.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/INDEX.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/agent/pitfalls.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| scripts/_w1018_closeout_faces.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_prepare.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_stage.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_verify.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_download.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_index_order.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_names_order.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_refs.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_round16.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_make_spec.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_master.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_pick2.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_prepare.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_probe_covered.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_retry.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_sheet.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_stage.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_verify.py | W1018 | 本批工具/产物 |
+| scripts/index.md | W1018 | 本批工具/产物 |
+| scripts/output/README.md | W1018 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1018.txt | W1018 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch_a.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch_b.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_manifest.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_retry.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1018_spec.json | W1018 | 本批工具/产物 |
+| scripts/output/file-index.md | W1018 | 本批工具/产物 |
+| scripts/output/index.md | W1018 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1018 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1018 | 本批工具/产物 |
+| scripts/output/stats.json | W1018 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1018 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1018 | 本批新增/修改 |
+| site/data/search.html | W1018 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1018 | 本批新增/修改 |
+| site/dukou-engine.html | W1018 | 本批新增/修改 |
+| site/en/search.html | W1018 | 本批新增/修改 |
+| site/index.html | W1018 | 本批新增/修改 |
+| site/reader/ch008.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch020.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch024.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch034.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch043.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch044.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch049.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch051.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch064.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch074.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch091.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch096.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/README.md | W1018 | 本批新增/修改 |
+| site/static/images/index.md | W1018 | 本批新增/修改 |
+| site/static/images/og-plate-line-73-ch020-huxianfeng.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-74-ch024-qingfeng.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-75-ch034-bashanhu.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-76-ch043-tuolong.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-77-ch044-yangli.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-78-ch049-laoyuan.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-79-ch051-qingniu.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-80-ch064-xingxian.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-81-ch074-qingshi.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-82-ch091-bidun.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-83-ch096-kouyuanwai.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-84-ch008-jinding.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-73-ch020-huxianfeng.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-74-ch024-qingfeng.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-75-ch034-bashanhu.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-76-ch043-tuolong.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-77-ch044-yangli.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-78-ch049-laoyuan.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-79-ch051-qingniu.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-80-ch064-xingxian.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-81-ch074-qingshi.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-82-ch091-bidun.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-83-ch096-kouyuanwai.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-84-ch008-jinding.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| assets/promo/plate-set/preview-w1016-sheet.png | W1018 | 本批改名·旧名（已由 assets/promo/plate-set/preview-w1018-sheet.png 取代） |
+| scripts/_w1016_derive_prepare.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_derive_prepare.py 取代） |
+| scripts/_w1016_derive_stage.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_derive_stage.py 取代） |
+| scripts/_w1016_download.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_download.py 取代） |
+| scripts/_w1016_fix_round16.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_fix_round16.py 取代） |
+| scripts/_w1016_master.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_master.py 取代） |
+| scripts/_w1016_pick2.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_pick2.py 取代） |
+| scripts/_w1016_prepare.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_prepare.py 取代） |
+| scripts/_w1016_retry.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_retry.py 取代） |
+| scripts/_w1016_sheet.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_sheet.py 取代） |
+| scripts/_w1016_stage.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_stage.py 取代） |
+
+## W1017 产物目录归位 + 临时区清理批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W1017 | 产物目录归位 / 临时区清理 |
+| STRUCTURE.md | W1017 | 产物目录归位 / 临时区清理 |
+| archive/README.md | W1017 | 产物目录归位 / 临时区清理 |
+| docs/00-导读/W批次编号对账表.md | W1017 | 产物目录归位 / 临时区清理 |
+
+## W1016 教训固化批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1016 | 教训固化 |
+| docs/00-导读/W批次编号对账表.md | W1016 | 教训固化 |
+| docs/00-导读/新Agent启动Prompt.md | W1016 | 教训固化 |
+| docs/agent/pitfalls.md | W1016 | 教训固化 |
+| scripts/batch_cascade.py | W1016 | 教训固化 |
+| scripts/check_doc_sync.py | W1016 | 教训固化 |
+| tests/unit/test_cascade_precheck.py | W1016 | 教训固化 |
+| tests/unit/test_status_z_parse.py | W1016 | 教训固化 |
+
+## W1015 工具链稳健性补强①（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_cross_line_rewrite.py | W1015 | 跨行改写扫描器（改写面高危 0 处·自带 4 例负样本自证） |
+| scripts/check_plan_template.py | W1015 | 第 48 门禁读盘路径补覆盖（self_test 第 ⑧ 例） |
+| scripts/ci_sim.py | W1015 | CI 侧预演接线（新增第 8 项跨行扫描） |
+| tests/unit/test_cross_line_rewrite.py | W1015 | 扫描器单测 5 例 |
+| tests/unit/test_plan_template_read_disk.py | W1015 | 读盘路径单测 4 例 |
+| docs/00-导读/W批次编号对账表.md | W1015 | 台账认领行（精确暂存·未代提他方在途件） |
+
+## W1014 工具链体检整改批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W1014 | 工具链体检整改 |
+| .pre-commit-config.yaml | W1014 | 工具链体检整改 |
+| AGENTS.md | W1014 | 工具链体检整改 |
+| Makefile | W1014 | 工具链体检整改 |
+| archive/README.md | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_align_files.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_derive_prepare.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_download.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_fix_desc.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_inventory.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_make_spec.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_master.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_prepare.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_read.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_retry.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_retry2.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_roster_check.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_sheet.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_shot.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_stage.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_verify.py | W1014 | 工具链体检整改 |
+| docs/00-/345/257/274/350/257/273/W/346/211/271/346/254/241/347/274/226/345/217/267/345/257/271/350/264/246/350/241/250.md | W1014 | 工具链体检整改 |
+| docs/11-/346/226/271/346/241/210/346/212/245/345/221/212//345/256/241/346/237/245/344/270/216/350/257/204/345/256/241//345/267/245/345/205/267/350/204/232/346/234/254/351/227/250/347/246/201/344/275/223/346/243/200/344/270/216/344/270/264/346/227/266/345/275/222/346/241/243/345/256/241/350/256/241-2026-10-29.md | W1014 | 工具链体检整改 |
+| docs/11-/346/226/271/346/241/210/346/212/245/345/221/212/README.md | W1014 | 工具链体检整改 |
+| scripts/A_/346/226/207/346/234/254/345/237/272/347/241/200//347/253/240/350/212/202/345/210/207/345/210/206.py | W1014 | 工具链体检整改 |
+| scripts/batch_cascade.py | W1014 | 工具链体检整改 |
+| scripts/batch_screenshots.js | W1014 | 工具链体检整改 |
+| scripts/check_archive_health.py | W1014 | 工具链体检整改 |
+| scripts/check_audit_trigger.py | W1014 | 工具链体检整改 |
+| scripts/check_chart_values.js | W1014 | 工具链体检整改 |
+| scripts/check_commit_scope.py | W1014 | 工具链体检整改 |
+| scripts/check_doc_size_budget.py | W1014 | 工具链体检整改 |
+| scripts/check_doc_sync.py | W1014 | 工具链体检整改 |
+| scripts/check_emoji_icons.py | W1014 | 工具链体检整改 |
+| scripts/check_plan_template.py | W1014 | 工具链体检整改 |
+| scripts/check_script_coverage.py | W1014 | 工具链体检整改 |
+| scripts/file_protocol_probe.py | W1014 | 工具链体检整改 |
+| scripts/judge_gate.py | W1014 | 工具链体检整改 |
+| scripts/lib/py_launch.js | W1014 | 工具链体检整改 |
+| scripts/output/script-coverage-baseline.txt | W1014 | 工具链体检整改 |
+| scripts/preflight_check.py | W1014 | 工具链体检整改 |
+| scripts/rag/build_vectors.py | W1014 | 工具链体检整改 |
+| scripts/refresh_icon_paths.py | W1014 | 工具链体检整改 |
+| scripts/scan_targets.py | W1014 | 工具链体检整改 |
+| scripts/security_scan.py | W1014 | 工具链体检整改 |
+| scripts/site_audit.py | W1014 | 工具链体检整改 |
+| scripts/subject_band.py | W1014 | 工具链体检整改 |
+| scripts/tmpe_tidy.py | W1014 | 工具链体检整改 |
+| scripts/verify_delivery.py | W1014 | 工具链体检整改 |
+| tests/unit/test_cascade_line_anchor.py | W1014 | 工具链体检整改 |
+| tests/unit/test_doc_size_budget.py | W1014 | 工具链体检整改 |
+| tests/unit/test_milestone_block_regex.py | W1014 | 工具链体检整改 |
+| tests/unit/test_tmpe_tidy.py | W1014 | 工具链体检整改 |
+| tmpe/policy.yml | W1014 | 工具链体检整改 |
+
+## W1013 回次 og:image 全覆盖批·第二轮（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1013 | 本批新增/修改 |
+| HANDOVER.md | W1013 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-61-ch002-puti.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-61-ch002-puti.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-62-ch012-jinchanzi.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-62-ch012-jinchanzi.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-63-ch013-taibaixingxing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-63-ch013-taibaixingxing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-64-ch021-lingji.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-64-ch021-lingji.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-65-ch038-wujiguowang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-65-ch038-wujiguowang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-66-ch045-huli.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-66-ch045-huli.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-67-ch078-zhizhujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-67-ch078-zhizhujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-68-ch082-bailujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-68-ch082-bailujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-69-ch083-laoshujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-69-ch083-laoshujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-70-ch086-bichandawang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-70-ch086-bichandawang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-71-ch087-yuhuawang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-71-ch087-yuhuawang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-72-ch092-dizang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-72-ch092-dizang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1013-sheet.png | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/round15/plate-line-61-ch002-puti.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-62-ch012-jinchanzi.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-63-ch013-taibaixingxing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-64-ch021-lingji.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-65-ch038-wujiguowang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-66-ch045-huli.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-67-ch078-zhizhujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-68-ch082-bailujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-69-ch083-laoshujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-70-ch086-bichandawang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-71-ch087-yuhuawang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-72-ch092-dizang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| docs/11-方案报告/README.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/T37-任务计划执行与经验沉淀报告-2026-10-29.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/执行前计划-T32-回次ogimage全覆盖第二轮.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/agent/pitfalls.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| scripts/_w1013_derive_prepare.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_download.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_inventory.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_make_spec.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_master.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_prepare.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_read.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_retry.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_retry2.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_roster_check.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_sheet.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_shot.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_stage.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_verify.py | W1013 | 本批工具/产物 |
+| scripts/check_js_syntax.py | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch_a.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch_b.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_inventory.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_manifest.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_read.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_retry.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_retry2.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_spec.json | W1013 | 本批工具/产物 |
+| site/reader/ch002.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch012.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch013.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch021.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch038.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch045.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch078.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch082.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch083.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch086.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch087.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch092.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/og-plate-line-61-ch002-puti.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-62-ch012-jinchanzi.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-63-ch013-taibaixingxing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-64-ch021-lingji.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-65-ch038-wujiguowang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-66-ch045-huli.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-67-ch078-zhizhujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-68-ch082-bailujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-69-ch083-laoshujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-70-ch086-bichandawang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-71-ch087-yuhuawang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-72-ch092-dizang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-61-ch002-puti.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-62-ch012-jinchanzi.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-63-ch013-taibaixingxing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-64-ch021-lingji.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-65-ch038-wujiguowang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-66-ch045-huli.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-67-ch078-zhizhujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-68-ch082-bailujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-69-ch083-laoshujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-70-ch086-bichandawang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-71-ch087-yuhuawang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-72-ch092-dizang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+
+## W1012 产物目录瘦身 + 在途收口批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1012 | 产物瘦身 / 在途收口 |
+| AGENTS.md | W1012 | 产物瘦身 / 在途收口 |
+| CHANGELOG.md | W1012 | 产物瘦身 / 在途收口 |
+| CITATION.cff | W1012 | 产物瘦身 / 在途收口 |
+| HANDOVER.md | W1012 | 产物瘦身 / 在途收口 |
+| README.md | W1012 | 产物瘦身 / 在途收口 |
+| STRUCTURE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/README.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/AGENTS-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/file-index-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/README.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/_w851_visual_snapshot_after.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/_w851_visual_snapshot_before.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/_w876_baseline_after.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/_w876_baseline_before.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/index.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/00-导读/W批次编号对账表.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/00-导读/项目说明.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1012 | 产物瘦身 / 在途收口 |
+| pytest.ini | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/README.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_cascade_files_W1012.txt | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_vermilion_solid_cache.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_w1012_spec.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/file-index.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/index.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/stats.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/tools-inventory.md | W1012 | 产物瘦身 / 在途收口 |
+| site/data/cross-time-danmaku.html | W1012 | 产物瘦身 / 在途收口 |
+| site/data/tag-cloud.html | W1012 | 产物瘦身 / 在途收口 |
+| site/dukou-engine.html | W1012 | 产物瘦身 / 在途收口 |
+| site/index.html | W1012 | 产物瘦身 / 在途收口 |
+
+## W1011 仓库整理分类批（2026-10-29）
+
+|---|---|---|
+
+| 文件 | W | 说明 |
+| AGENTS.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| STRUCTURE.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| archive/scripts/batches/misc/_tmp_chap_sheet.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/W批次编号对账表.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/协议边界速查.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/文档规范.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/新Agent启动Prompt.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/04-文化与历史背景/西游记大事年表.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/10-方法论沉淀/例-佛法AI框架原始对话.txt | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/INDEX.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/agent/gates.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/A_文本基础/章节切分.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_gov_doc_claims.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_governance_docs.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_repo_layout.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_w_range_literal.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/output/_vermilion_solid_cache.json | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/output/tools-inventory.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/verify_delivery.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch001.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch003.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch009.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch011.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch022.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch028.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch047.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch063.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch066.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch079.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch089.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch093.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| tests/unit/test_repo_layout.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+
+## W1010 级联自动回窗批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1010 | 级联自动回窗 |
+| CHANGELOG.md | W1010 | 级联自动回窗 |
+| CITATION.cff | W1010 | 级联自动回窗 |
+| HANDOVER.md | W1010 | 级联自动回窗 |
+| README.md | W1010 | 级联自动回窗 |
+| STRUCTURE.md | W1010 | 级联自动回窗 |
+| .github/workflows/README.md | W1010 | 级联自动回窗 |
+| docs/00-导读/项目说明.md | W1010 | 级联自动回窗 |
+| docs/00-导读/W批次编号对账表.md | W1010 | 级联自动回窗 |
+| scripts/batch_cascade.py | W1010 | 级联自动回窗 |
+| tests/unit/test_batch_spec.py | W1010 | 级联自动回窗 |
+| archive/docs/AGENTS-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/FILE-INDEX-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1010 | 级联自动回窗 |
+| scripts/output/file-index.md | W1010 | 级联自动回窗 |
+| scripts/output/tools-inventory.md | W1010 | 级联自动回窗 |
+| scripts/output/_w1010_spec.json | W1010 | 级联自动回窗 |
+| scripts/output/_cascade_files_W1010.txt | W1010 | 级联自动回窗 |
+| scripts/output/_vermilion_solid_cache.json | W1010 | 级联自动回窗 |
+
+## W1009 流程收口批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| CHANGELOG.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| CITATION.cff | W1009 | 流程收口（stats 自动 + spec 单点） |
+| HANDOVER.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| README.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| STRUCTURE.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| .github/workflows/README.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/00-导读/项目说明.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/00-导读/W批次编号对账表.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/agent/pitfalls.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/batch_spec.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/batch_cascade.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/safe_commit.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/check_commit_scope.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| tests/unit/test_batch_spec.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| archive/docs/AGENTS-ARCHIVE.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/file-index.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/tools-inventory.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/_w1009_spec.json | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/_cascade_files_W1009.txt | W1009 | 流程收口（stats 自动 + spec 单点） |
+
+## W1008 回窗 + 触发器归档盲区批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1008 | 回窗 / 归档盲区修复 |
+| CHANGELOG.md | W1008 | 回窗 / 归档盲区修复 |
+| CITATION.cff | W1008 | 回窗 / 归档盲区修复 |
+| HANDOVER.md | W1008 | 回窗 / 归档盲区修复 |
+| README.md | W1008 | 回窗 / 归档盲区修复 |
+| STRUCTURE.md | W1008 | 回窗 / 归档盲区修复 |
+| .github/workflows/README.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/00-导读/项目说明.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/00-导读/W批次编号对账表.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/agent/pitfalls.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/check_audit_trigger.py | W1008 | 回窗 / 归档盲区修复 |
+| tests/unit/test_audit_trigger.py | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/AGENTS-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/FILE-INDEX-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/file-index.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/tools-inventory.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/_w1008_spec.json | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/_cascade_files_W1008.txt | W1008 | 回窗 / 归档盲区修复 |
+
+## W1007 提交范围门禁批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1007 | 提交范围门禁（第 51 槽） |
+| CHANGELOG.md | W1007 | 提交范围门禁（第 51 槽） |
+| CITATION.cff | W1007 | 提交范围门禁（第 51 槽） |
+| HANDOVER.md | W1007 | 提交范围门禁（第 51 槽） |
+| README.md | W1007 | 提交范围门禁（第 51 槽） |
+| STRUCTURE.md | W1007 | 提交范围门禁（第 51 槽） |
+| .github/workflows/README.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/项目说明.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/W批次编号对账表.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/文档规范.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/agent/gates.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/agent/pitfalls.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/check_commit_scope.py | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/verify_delivery.py | W1007 | 提交范围门禁（第 51 槽） |
+| tests/unit/test_commit_scope.py | W1007 | 提交范围门禁（第 51 槽） |
+| archive/docs/AGENTS-ARCHIVE.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/file-index.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/tools-inventory.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/_w1007_spec.json | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/_cascade_files_W1007.txt | W1007 | 提交范围门禁（第 51 槽） |
+
+## W1006 防代提硬拦批（safe_commit --expect-spec）（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| AGENTS.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| CHANGELOG.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| CITATION.cff | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| HANDOVER.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| STRUCTURE.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/docs/AGENTS-ARCHIVE.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_fix_c6.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_fix_head_sentence.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_fix_tail_sep.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_handover_line.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_heroes.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_patch_changelog_files.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_asset_sizes.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_cascade_line.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_changelog_files.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_faces.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_head.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_probe_readme.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_render_flyer.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_serve.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_spec.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/_w1005_sync_faces.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/scripts/batches/w10xx/index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/00-导读/W批次编号对账表.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/00-导读/项目说明.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/agent/pitfalls.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/check_script_coverage.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/_cascade_files_W1006.txt | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/_vermilion_solid_cache.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/_w1006_spec.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/file-index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/stats-changelog.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/stats-index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/stats.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/tools-inventory.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/safe_commit.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| site/data/cross-time-danmaku.html | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| site/data/tag-cloud.html | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| site/dukou-engine.html | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| site/index.html | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| tests/unit/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| tests/unit/index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| tests/unit/test_safe_commit_expect_spec.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+
+## W1005 hero 水墨图人数修正（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| "archive/docs/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250-ARCHIVE.md" | W1005 | 本批改动 |
+| "docs/00-\345\257\274\350\257\273/\351\241\271\347\233\256\350\257\264\346\230\216.md" | W1005 | 本批改动 |
+| "docs/11-\346\226\271\346\241\210\346\212\245\345\221\212/\350\256\276\350\256\241\344\270\216\346\236\266\346\236\204\346\226\271\346\241\210/\347\263\273\347\273\237\346\236\266\346\236\204\346\226\271\346\241\210v2-\347\233\256\346\240\207\346\200\201\344\270\216\350\220\275\345\234\260\350\267\257\347\272\277-2026-10-25.md" | W1005 | 本批改动 |
+| DESIGN.md | W1005 | 本批改动 |
+| archive/README.md | W1005 | 本批改动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1005 | 本批改动 |
+| archive/docs/file-index-ARCHIVE.md | W1005 | 本批改动 |
+| archive/scripts/batches/w9xx/README.md | W1005 | 本批改动 |
+| archive/scripts/batches/w9xx/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg | W1005 | 本批改动 |
+| assets/promo/output/xiyouji-flyer-a4-en-front.png | W1005 | flyer A4 正面 PNG 重渲染（静态快照同步新图） |
+| assets/promo/output/xiyouji-flyer-a4-front.png | W1005 | flyer A4 正面 PNG 重渲染（静态快照同步新图） |
+| docs/agent/adversarial-audit-prompt.md | W1005 | 登记面 |
+| docs/agent/gates.md | W1005 | 登记面 |
+| docs/agent/pitfalls.md | W1005 | 登记面 |
+| pytest.ini | W1005 | 本批改动 |
+| scripts/_w1005_fix_c6.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_fix_head_sentence.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_handover_line.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_heroes.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_faces.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_head.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_readme.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_render_flyer.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_serve.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_spec.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_sync_faces.py | W1005 | 本批工具/产物 |
+| scripts/accent_audit.py | W1005 | 本批工具/产物 |
+| scripts/check_audit_trigger.py | W1005 | 本批工具/产物 |
+| scripts/check_crop.py | W1005 | 本批工具/产物 |
+| scripts/check_emoji_icons.py | W1005 | 本批工具/产物 |
+| scripts/check_page_admission.py | W1005 | 本批工具/产物 |
+| scripts/check_script_coverage.py | W1005 | 本批工具/产物 |
+| scripts/check_vermilion_solid.js | W1005 | 本批工具/产物 |
+| scripts/file_protocol_probe.py | W1005 | 本批工具/产物 |
+| scripts/icon_probe.js | W1005 | 本批工具/产物 |
+| scripts/index.md | W1005 | 本批工具/产物 |
+| scripts/j1_name_audit.py | W1005 | 本批工具/产物 |
+| scripts/output/README.md | W1005 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1004_spec.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_batch.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_heroes.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_map.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_spec.json | W1005 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1005 | 本批工具/产物 |
+| scripts/refresh_icon_paths.py | W1005 | 本批工具/产物 |
+| scripts/scan_targets.py | W1005 | 本批工具/产物 |
+| scripts/site_audit.py | W1005 | 本批工具/产物 |
+| scripts/subject_band.py | W1005 | 本批工具/产物 |
+| scripts/visual_regression_probe.py | W1005 | 本批工具/产物 |
+| site/static/images/hero-01-xihai-yunhai.webp | W1005 | 原地替换（人数修正·4 人形 + 1 匹白马） |
+| site/static/images/ink-mountains-hero.webp | W1005 | 原地替换（人数修正·4 人形 + 1 匹白马） |
+| tests/unit/README.md | W1005 | 本批改动 |
+| tests/unit/index.md | W1005 | 本批改动 |
+| tests/unit/test_audit_trigger.py | W1005 | 本批改动 |
+| tests/unit/test_script_hygiene.py | W1005 | 本批改动 |
+| tests/unit/test_w851_j1_name_audit.py | W1005 | 本批改动 |
+| tests/unit/test_w851_visual_regression_probe.py | W1005 | 本批改动 |
+
+## W1004 转正清零 + 审查触发器判据修正批（B1 字样≠事件 / B2 max / B4 台账归位）（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| AGENTS.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| CHANGELOG.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| CITATION.cff | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| DESIGN.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| HANDOVER.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| STRUCTURE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/AGENTS-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/file-index-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/scripts/batches/w9xx/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/scripts/batches/w9xx/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/00-导读/W批次编号对账表.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/00-导读/项目说明.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/adversarial-audit-prompt.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/gates.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/pitfalls.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/AD_认知心理/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/accent_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_audit_trigger.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_crop.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_emoji_icons.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_page_admission.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_script_coverage.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_vermilion_solid.js | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/file_protocol_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/icon_probe.js | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/j1_name_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_cascade_files_W1003.txt | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_vermilion_solid_cache.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_w1003_spec.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_w1004_spec.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/file-index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats-changelog.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats-index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/refresh_icon_paths.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/scan_targets.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/site_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/subject_band.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/visual_regression_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_audit_trigger.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_script_hygiene.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_w851_j1_name_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_w851_visual_regression_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+
+## W1003 agent-web chat 集成验证与死重清退批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/package.json | W1003 | 移除零引用死重依赖 @tdesign-react/aigc（W401 带入） |
+| xiyouji-agent-web/package-lock.json | W1003 | 随 aigc 清退同步重锁 |
+| xiyouji-agent-web/e2e/chat.e2e.mjs | W1003 | 前端端口 4232→4600（迁出 WinNAT 保留段 4138-4237·EACCES 假故障修根） |
+
+## W1002 脚本三档归位批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1002 | §3 目录注释改写 + §4.3 坑位计数同步（95 条·git 节 23） |
+| Makefile | W1002 | ledger 目标改 `scripts/ledger_mutation_test.py` |
+| archive/README.md | W1002 | 归档结构补 w8xx/w9xx/w10xx 桶 + 归档台账追加 W1002 组行 |
+| archive/scripts/batches/w10xx/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_clean_locks.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_final.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_finish_faces.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_fix_index.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_fix_rule_anchor.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_probe_faces.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_restore_changelog_head.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_stage.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w954_review_evidence.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w978_review_evidence.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_derive.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_download.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_insert_plates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_precheck_pages.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_retry.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_serve.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_zoom.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_derive.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_download.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_insert_plates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_precheck_pages.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_retry.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_serve.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_zoom.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w986_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w986_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_family_scan.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_insert_scenes.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_card_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_docs.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_cascade.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_eol.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_gates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_insert.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_inventory.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_make_assets.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_match.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_pitfalls.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_plan.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_precheck.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_subject.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_verify.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_map.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_master.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_og_gap.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_pick.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_read.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_roster.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_split.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_closeout.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_crop_recheck.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_derive_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_diag.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_fix_t35.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_fix_wnum.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_insert.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_ledger_fill.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_probe.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_probe_h1.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_rebuild_missing_og.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo2.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo_map.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_register.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_renumber.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_sync_counts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_verify.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| assets/promo/plate-set/README.md | W1002 | 验算脚本改转正名 + 逐批 prep 路径死链修正 |
+| docs/00-导读/文档规范.md | W1002 | §5 归档新增「脚本三档归位（W1002 定式）」条款 |
+| docs/11-方案报告/README.md | W1002 | 判据表路径改转正名 `plan_template_review.py` |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md | W1002 | 取证脚本链接改归档路径（lint_links 活链校正） |
+| docs/agent/pitfalls.md | W1002 | 坑表：「`_` 前缀=一次性」口径改写为「脚本三档归位」（94→95 条）+ E-05/E-19 转正名 |
+| scripts/check_crop.py | W1002 | 转正：去 `_` 前缀（跨批裁切判据）+ 仓根硬编码改 `dirname(dirname(__file__))` |
+| scripts/check_plan_template.py | W1002 | import 与 docstring 改转正名 |
+| scripts/check_script_coverage.py | W1002 | 第 42 门禁新增 C4（历史批滞留必红 + 转正候选棘轮 8 件）+ 自测 6→9 例 |
+| scripts/ledger_mutation_test.py | W1002 | 转正：去 `_` 前缀（Makefile ledger 目标调用·W933 建） |
+| scripts/output/tools-inventory.md | W1002 | 重生成（152 件） |
+| scripts/plan_template_review.py | W1002 | 转正：去 `_` 前缀（第 48 门禁判据表·W857 建） |
+| scripts/plates_verify.py | W1002 | 转正：去 `_` 前缀（跨批素材判据 J1–J10·W945 建） |
+| tests/unit/test_script_hygiene.py | W1002 | C4 判据纯函数 + 转正件加载性 + 门禁自测端到端（5 例） |
+| .github/workflows/README.md | W1002 | 本批新增/修改 |
+| CHANGELOG.md | W1002 | 本批新增/修改 |
+| CITATION.cff | W1002 | 本批新增/修改 |
+| HANDOVER.md | W1002 | 本批新增/修改 |
+| README.md | W1002 | 本批新增/修改 |
+| STRUCTURE.md | W1002 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/file-index-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/scripts/batches/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/w9xx/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/w9xx/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| docs/00-导读/W批次编号对账表.md | W1002 | 台账认领行 + 行归档回窗（W942-W943 迁出） |
+| docs/00-导读/项目说明.md | W1002 | 本批新增/修改 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md | W1002 | 取证脚本链接改归档路径（lint_links 活链校正） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1002 | 本批新增/修改 |
+| pytest.ini | W1002 | 本批新增/修改 |
+| scripts/index.md | W1002 | 目录索引重生成（scripts/ 根减 84 件） |
+| scripts/output/_cascade_files_W1002.txt | W1002 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1002 | 本批新增/修改 |
+| scripts/output/_w1002_spec.json | W1002 | 本批级联 spec |
+| scripts/output/file-index.md | W1002 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1002 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1002 | 本批新增/修改 |
+| scripts/output/stats.json | W1002 | C5d 实算对账刷新（--w W1002） |
+| site/data/cross-time-danmaku.html | W1002 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1002 | 本批新增/修改 |
+| site/dukou-engine.html | W1002 | 本批新增/修改 |
+| site/index.html | W1002 | 本批新增/修改 |
+| scripts/output/README.md | W1002 | 本批新增/修改 |
+| scripts/output/index.md | W1002 | 本批新增/修改 |
+| tests/unit/README.md | W1002 | 本批新增/修改 |
+| tests/unit/index.md | W1002 | 本批新增/修改 |
+
+## W1001 回次 og:image 全覆盖批·第一轮试点（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1001 | 本批新增/修改 |
+| AGENTS.md | W1001 | 本批新增/修改 |
+| CHANGELOG.md | W1001 | 本批新增/修改 |
+| CITATION.cff | W1001 | 本批新增/修改 |
+| HANDOVER.md | W1001 | 本批新增/修改 |
+| README.md | W1001 | 本批新增/修改 |
+| STRUCTURE.md | W1001 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1001 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-49-ch001-xianshi.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-49-ch001-xianshi.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-50-ch003-aoguang.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-50-ch003-aoguang.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-51-ch009-yuanshoucheng.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-51-ch009-yuanshoucheng.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-52-ch011-xiaoyu.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-52-ch011-xiaoyu.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-53-ch022-liushahe.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-53-ch022-liushahe.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-54-ch028-qunyao.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-54-ch028-qunyao.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-55-ch047-tongtianhe.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-55-ch047-tongtianhe.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-56-ch063-jiutou.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-56-ch063-jiutou.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-57-ch066-mile.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-57-ch066-mile.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-58-ch079-nanpo.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-58-ch079-nanpo.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-59-ch089-huangshi.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-59-ch089-huangshi.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-60-ch093-geigu.png | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-60-ch093-geigu.webp | W1001 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1001 | 本批新增/修改 |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1001 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round14/README.md | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/index.md | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-49-ch001-xianshi.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-50-ch003-aoguang.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-51-ch009-yuanshoucheng.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-52-ch011-xiaoyu.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-53-ch022-liushahe.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-54-ch028-qunyao.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-55-ch047-tongtianhe.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-56-ch063-jiutou.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-57-ch066-mile.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-58-ch079-nanpo.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-59-ch089-huangshi.jpg | W1001 | 出图原件（12 张·含重出） |
+| assets/promo/plate-set/raw/round14/plate-line-60-ch093-geigu.jpg | W1001 | 出图原件（12 张·含重出） |
+| docs/00-导读/W批次编号对账表.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/00-导读/项目说明.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/11-方案报告/README.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/11-方案报告/计划方案/T35-任务计划执行与经验沉淀报告-2026-10-28.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/agent/pitfalls.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| scripts/_w1001_stage.py | W1001 | 本批工具/产物 |
+| scripts/_w951_check_crop.py | W1001 | 本批工具/产物 |
+| scripts/_w990_map.py | W1001 | 本批工具/产物 |
+| scripts/_w990_master.py | W1001 | 本批工具/产物 |
+| scripts/_w990_og_gap.py | W1001 | 本批工具/产物 |
+| scripts/_w990_read.py | W1001 | 本批工具/产物 |
+| scripts/_w990_roster.py | W1001 | 本批工具/产物 |
+| scripts/_w990_split.py | W1001 | 本批工具/产物 |
+| scripts/_w999_closeout.py | W1001 | 本批工具/产物 |
+| scripts/_w999_derive_prepare.py | W1001 | 本批工具/产物 |
+| scripts/_w999_insert.py | W1001 | 本批工具/产物 |
+| scripts/_w999_make_spec.py | W1001 | 本批工具/产物 |
+| scripts/_w999_prepare.py | W1001 | 本批工具/产物 |
+| scripts/_w999_rebuild_missing_og.py | W1001 | 本批工具/产物 |
+| scripts/_w999_redo.py | W1001 | 本批工具/产物 |
+| scripts/_w999_redo2.py | W1001 | 本批工具/产物 |
+| scripts/_w999_sheet.py | W1001 | 本批工具/产物 |
+| scripts/_w999_verify.py | W1001 | 本批工具/产物 |
+| scripts/output/_w1001_spec.json | W1001 | 本批工具/产物 |
+| scripts/output/file-index.md | W1001 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1001 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1001 | 本批新增/修改 |
+| site/dukou-engine.html | W1001 | 本批新增/修改 |
+| site/index.html | W1001 | 本批新增/修改 |
+| site/reader/ch001.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch003.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch009.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch011.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch022.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch028.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch047.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch063.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch066.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch079.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch089.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch093.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/og-plate-line-40-ch023-sichan.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-41-ch027-bailong.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-42-ch030-sancha.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-43-luoshanv.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-44-kuimulang.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-45-zhaoan-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-46-fushi-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-47-jingwu-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-48-xuanzang-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-49-ch001-xianshi.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-50-ch003-aoguang.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-51-ch009-yuanshoucheng.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-52-ch011-xiaoyu.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-53-ch022-liushahe.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-54-ch028-qunyao.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-55-ch047-tongtianhe.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-56-ch063-jiutou.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-57-ch066-mile.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-58-ch079-nanpo.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-59-ch089-huangshi.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-60-ch093-geigu.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-49-ch001-xianshi.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-50-ch003-aoguang.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-51-ch009-yuanshoucheng.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-52-ch011-xiaoyu.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-53-ch022-liushahe.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-54-ch028-qunyao.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-55-ch047-tongtianhe.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-56-ch063-jiutou.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-57-ch066-mile.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-58-ch079-nanpo.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-59-ch089-huangshi.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-60-ch093-geigu.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+
+## W1000 对抗式审查常驻化批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_audit_trigger.py | W1000 | 新建对抗式审查触发器（台账即事实源·四态自测） |
+| docs/agent/adversarial-audit-prompt.md | W1000 | 派发 prompt 模板（W998 实战沉淀·收尾义务四条） |
+| scripts/preflight_check.py | W1000 | 触发器提示位接线 |
+
+## W999 必守纪律晋升批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W999 | §6 铁律 14 修实例必修根（权威落点） |
+| CLAUDE.md | W999 | 速查第 12 行（指向 §6-14 与 pitfalls 流程组） |
+
+## W998 对抗式审查修复批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_size_budget.py | W998 | C4 移出 HANDOVER 门控（死门控+fline NameError 修复） |
+| scripts/cascade_lock.py | W998 | 创建中短重试防双持 + CLI --pid |
+| scripts/batch_cascade.py | W998 | finally release 传 pid + [SCRIPTS] 口径随 W992 |
+| docs/agent/pitfalls.md | W997 | 子节标题计数校准（级联 9·流程 20） |
+
+## W997 协作纪律入库批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W997 | 流程组新增「修实例必修根+检查按字面范围」（89→90） |
+| AGENTS.md | W997 | §4.3 计数两处同步（90 条·流程 20） |
+| scripts/archive_ledger_rows.py | W997 | A4 收紧为真在途判据（已停止行不误伤） |

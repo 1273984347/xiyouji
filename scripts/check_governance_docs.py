@@ -88,7 +88,13 @@ def main():
         if hw != cw:
             issues.append("交接文档 HEAD W%s 与 CHANGELOG 最新段 W%s 不一致" % (hw, cw))
     # 5. CHANGELOG 编号规则 W001-W### 与最新版本段一致
-    wm = re.search(r"W001-W(\d+)", changelog)
+    # W1119 取位修复：旧实现取全文首个 W001-W<数字> 匹配 ⇒ 首个匹配可能落在历史段陈述正文 ⇒ 改为定位「编号规则段本体」行（含 **W### 编号规则**）再取值·判据强度不降。
+    _rule_line = None
+    for _ln in (changelog or "").split(chr(10)):
+        if "**W### 编号规则**" in _ln:
+            _rule_line = _ln
+            break
+    wm = re.search(r"W001-W(\d+)", _rule_line if _rule_line is not None else (changelog or ""))
     if wm and cm:
         cw5 = cm.group(2) or cm.group(3)  # W713：历史形态下 W 号在 group(3)（与检查 4/7 同款·原裸取 group(2) 历史段恒误报）
         if cw5 and wm.group(1) != cw5:
