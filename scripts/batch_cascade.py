@@ -171,11 +171,14 @@ def _face_changelog(ctx):
     p = "CHANGELOG.md"
     s, nl = load(p)
     ctx.cl_src = s  # W713：保留 CHANGELOG 原文，供交接里程碑淘汰前断言（W534 承诺）
+    # W1122：记录 CHANGELOG **现役顶段号**（低号批落段时交接面不得回退现役单点·现役面只指最高号批）
+    ctx.cur_w = None  # 由下方 cur_w 解析后回填
     # W711 方案 D 双形态：历史段 ### vX.Y.Z（date）：W### / 新段 ### W###（date）：标题
     m = re.search(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", s, re.M)
     assert m, "CHANGELOG 未找到现役段"
     cur_anchor = m.group(0)
     cur_w = int(m.group(1) or m.group(2))
+    ctx.cur_w = cur_w  # W1122：现役顶段号（低号批守卫用）
     # W895：显式缺口许可（并行在途批的现实）——--allow-gap 列出的 W 号须在台账有认领行、
     # 且在 CHANGELOG 尚无段（其落段自理：晚到者用 backfill_changelog.py 按号序补）。
     gaps = getattr(ctx, "allow_gap", [])
@@ -295,33 +298,61 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     return s
 
 
+def _upsert_chain_entry(chain, entry, batch, sep):
+    """「最后更新」链**内容**（不含锚点）的幂等 upsert（最新在前·按批号序）。
+
+    W1122（根修 W1117 R-01 + 低号批落段）：链式面此前**各自判定「已存在」**且判定方式错误
+    （尾链切窗少算了锚点长度 ⇒ 恒判「不存在」⇒ 每次重跑都前置一条 ⇒ 重复累积且占链首）。
+    本函数为头链与尾链的**单一事实源**：
+      · 本批 entry 不存在 ⇒ 按批号序插入（链首批次 > 本批 ⇒ 插到链首之后）
+      · 已存在且内容一致 ⇒ 零变化；若**占链首而链首更新** ⇒ 重排到按序位
+      · 已存在但内容不一致 ⇒ 替换
+    返回 (新链内容, 状态)；状态 ∈ inserted / unchanged / moved / replaced
+    """
+    bn = int(re.sub(r"\D", "", batch))
+    nums = [int(m.group(1)) for m in re.finditer(r"（(?:v[\d.]+ )?W(\d{3,4})[^）]*）", chain)]
+    first_num = nums[0] if nums else None
+    first_re = re.compile(r"20\d{2}-\d{2}-\d{2}（(?:v[\d.]+ )?W(\d{3,4})[^）]*）")
+    mi = re.search(re.escape(entry), chain)
+    if mi is not None:
+        if chain[mi.start():mi.end()].strip() != entry.strip():
+            return chain[:mi.start()] + entry + chain[mi.end():], "replaced"
+        fe = first_re.search(chain)
+        # 位置校正：本批 entry 占链首、而链上存在**更高号批次** ⇒ 移到按序位
+        _higher = [x for x in nums if x > bn]
+        if fe is not None and _higher and mi.start() <= fe.start():
+            e = mi.group(0)
+            rest = (chain[:mi.start()] + chain[mi.end():]).replace(sep + sep, sep)
+            fe2 = first_re.search(rest)
+            if fe2 is None:
+                return chain, "unchanged"
+            pos = fe2.end()
+            return rest[:pos] + sep + e + rest[pos:], "moved"
+        return chain, "unchanged"
+    fe = first_re.search(chain)
+    if first_num is not None and first_num > bn and fe is not None:
+        pos = fe.end()
+        return chain[:pos] + sep + entry + chain[pos:], "inserted"
+    return entry + sep + chain, "inserted"
+
+
 def _face_handover(ctx):
     """交接文档面：头尾链/进度标题/里程碑块/HEAD 句全量改写与结构断言。"""
     # ---------- 交接文档 ----------
     p = "HANDOVER.md"
     s, nl = load(p)
     assert s.count("））；") == 0, "基线已存在双括号，先人工处理"
-    # W1122（根修 W1117 R-01）：头链 entry 此前**无条件 prepend** ⇒ 重跑级联静默重复。
-    # 本版：头链内已存在本批 entry ⇒ 内容一致则零变化·不一致则替换。
-    _hspan = _locate_handover_head_entry(s, ctx.entry)
-    if _hspan is not None:
-        _st, _en = _hspan[0], _hspan[1]
-        _hbuild = "·" + ctx.entry
-        if s[_st:_en].strip() != _hbuild.strip():
-            s = s[:_st] + _hbuild + s[_en:]
-    else:
-        # W1122：头链是「**最新在前**」形态 ⇒ 低号批（并行让号形态）不得占据链首
-        # （登记面一致性闸要求「链首 ≡ CHANGELOG 现役段」）⇒ 按批号序插入。
-        _h0x = s.find("> 最后更新：")
-        _h1x = s.find(nl, _h0x) if _h0x != -1 else -1
-        _hrow = s[_h0x:_h1x] if (_h0x != -1 and _h1x != -1) else ""
-        _first = re.search(r"·?20\d{2}-\d{2}-\d{2}（(?:v[\d.]+ )?W(\d{3,4})）", _hrow)
-        _bn2 = int(str(ctx.batch).lstrip("Ww"))
-        if _first and int(_first.group(1)) > _bn2:
-            _pos = _h0x + _first.end()
-            s = s[:_pos] + "·" + ctx.entry + s[_pos:]
-        else:
-            s = s.replace("> 最后更新：", "> 最后更新：" + ctx.entry + "·", 1)
+    # W1122（根修 W1117 R-01 + 低号批落段）：头链 entry 此前**无条件 prepend** ⇒ 重跑级联静默重复；
+    # 且低号批会占据链首（登记面一致性闸要求「链首 ≡ CHANGELOG 现役段」）⇒ 改为统一幂等 upsert
+    # （_upsert_chain_entry 为头链与尾链的单一事实源·含位置校正）。
+    _hanchor = "> 最后更新："
+    _h0x = s.find(_hanchor)
+    _h1x = s.find(nl, _h0x) if _h0x != -1 else -1
+    assert _h0x != -1 and _h1x != -1, "未找到交接文档头链行"
+    _hchain, _hst = _upsert_chain_entry(s[_h0x + len(_hanchor):_h1x], ctx.entry, ctx.batch, "·")
+    if _hst != "unchanged":
+        print("[HANDOVER] 头链 entry：%s" % _hst)
+    s = s[:_h0x + len(_hanchor)] + _hchain + s[_h1x:]
     h0 = s.find("> 最后更新：")
     h1 = s.find(nl, h0)
     head_line = s[h0:h1]
@@ -339,7 +370,11 @@ def _face_handover(ctx):
     # 里程碑块遂在头部错位堆积、drop_block 跨段淘汰吞掉「一、当前进度」标题。此处改双形态锚点 + count 断言 fail-closed。
     _prog = re.compile(r"## 一、当前进度（(?:v[\d.]+ )?W\d+ [^；]*；更早批次详见 CHANGELOG\.md）")
     assert len(_prog.findall(s)) == 1, "「一、当前进度」标题锚点失配（W705 教训：静默失配后逐批漂移·先修复交接文档结构再级联）"
-    s = _prog.sub(f"## 一、当前进度（{ctx.batch} {ctx.desc}；更早批次详见 CHANGELOG.md）", s, count=1)
+    # W1122：**低号批不得回退现役单点**（历史版本面不可回退）——现役面只指最高号批。
+    _cur_w = getattr(ctx, "cur_w", None)
+    _is_current = (_cur_w is None) or (int(str(ctx.batch).lstrip("Ww")) >= int(_cur_w))
+    if _is_current:
+        s = _prog.sub(f"## 一、当前进度（{ctx.batch} {ctx.desc}；更早批次详见 CHANGELOG.md）", s, count=1)
     fb = re.search(r"- \*\*(?:v[\d.]+ )?W\d+", s)  # W713 双形态（W711 起新块无 v 前缀）
     h1pos = s.find("## 一、当前进度")
     assert fb and h1pos != -1 and fb.start() > h1pos, (
@@ -363,21 +398,20 @@ def _face_handover(ctx):
         s = _handover_rotate_oldest(s, ctx, nl, h1pos)
     hs = re.search(r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^）]*；详见 CHANGELOG）", s)
     assert hs, "未找到当前 HEAD 句"
-    s = s[:hs.start()] + "当前 HEAD = {}（{}；详见 CHANGELOG）".format(ctx.batch, ctx.spec["head_sentence"]) + s[hs.end():]
+    if _is_current:  # W1122：低号批不改现役 HEAD 句（现役面只指最高号批）
+        s = s[:hs.start()] + "当前 HEAD = {}（{}；详见 CHANGELOG）".format(ctx.batch, ctx.spec["head_sentence"]) + s[hs.end():]
     # W560 修复：尾链 prepend 必须锚定文末行（旧实现 s.replace("最后更新：", ..., 1) 命中的是
     # 头链首处 → 头链 entry 双写「E；E·」，W556/W557/W558 三批实证）。改用 rfind 定位文末行。
     tail_idx = s.rfind("最后更新：")
     assert tail_idx != -1, "未找到文末「最后更新」历史链"
-    if ctx.entry + "；" not in s[tail_idx : tail_idx + len(ctx.entry) + 2]:
-        # W1122：尾链同为「最新在前」形态 ⇒ 低号批不得占据链首（登记面一致性闸要求链首 ≡ 现役段）
-        _trow = s[tail_idx:s.find(nl, tail_idx)]
-        _tfirst = re.search(r"20\d{2}-\d{2}-\d{2}（(?:v[\d.]+ )?W(\d{3,4})）", _trow)
-        _bn3 = int(str(ctx.batch).lstrip("Ww"))
-        if _tfirst and int(_tfirst.group(1)) > _bn3:
-            _tpos = tail_idx + _tfirst.end()
-            s = s[:_tpos] + "；" + ctx.entry + s[_tpos:]
-        else:
-            s = s[:tail_idx] + "最后更新：" + ctx.entry + "；" + s[tail_idx + len("最后更新："):]
+    # W1122：尾链的「已存在」判定此前切窗少算锚点长度 ⇒ 恒判「不存在」⇒ 每次重跑都前置一条
+    # ⇒ 重复累积且占链首。改走同一幂等 upsert 原语（单一事实源）。
+    _tanchor = "最后更新："
+    _tline_end = s.find(nl, tail_idx)
+    _tchain, _tst = _upsert_chain_entry(s[tail_idx + len(_tanchor):_tline_end], ctx.entry, ctx.batch, "；")
+    if _tst != "unchanged":
+        print("[HANDOVER] 尾链 entry：%s" % _tst)
+    s = s[:tail_idx + len(_tanchor)] + _tchain + s[_tline_end:]
     # W560: 尾链维持 ≤3 条（交接文档维护契约②）
     tline_end = s.find(nl, tail_idx)
     tline = s[tail_idx:tline_end]
