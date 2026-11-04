@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dXSczQnS4Nc7oaMsyOQpBETREZG1QTCE+Om8RSwt4Wo=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cXDGpQfGO3QtjkcBGy2xCE4PcMWI74FNrbMWRgcZa5c=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事实验 · 桌游与卡牌机制 · 详解西游记</title>
@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="桌游《灵山董事会》 · 游戏阶段 · 三段式流程 · 劫难卡牌 · 10 张 · 详解西游记">
     <meta property="og:description" content="桌游《灵山董事会》 · 游戏阶段 · 三段式流程 · 劫难卡牌 · 10 张 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -2062,7 +2062,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <div class="card-group">
                 <div class="group-header">
-                    <span class="gh-tag" style="background: #c8463a;">因果卡</span>
+                    <span class="gh-tag" style="background: var(--chart-1);">因果卡</span>
                     <span class="gh-title">KARMA · 故事场景</span>
                     <span class="gh-count">12 张 · K01–K12</span>
                 </div>
@@ -2071,7 +2071,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <div class="card-group">
                 <div class="group-header">
-                    <span class="gh-tag" style="background: #3a6b8c;">法器卡</span>
+                    <span class="gh-tag" style="background: var(--chart-2);">法器卡</span>
                     <span class="gh-title">ARTIFACT · 法宝道具</span>
                     <span class="gh-count">10 张 · F01–F10</span>
                 </div>
@@ -2124,10 +2124,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="combo-tip" id="combo-tip"></div>
             </div>
             <div class="combo-legend">
-                <div class="lg-item"><span class="lg-dot" style="background:#c8463a;"></span><span>因果卡 · 12 张</span></div>
-                <div class="lg-item"><span class="lg-dot" style="background:#3a6b8c;"></span><span>法器卡 · 10 张</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--chart-1);"></span><span>因果卡 · 12 张</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--chart-2);"></span><span>法器卡 · 10 张</span></div>
                 <div class="lg-item"><span class="lg-dot" style="background:#C9A063;"></span><span>执念卡 · 10 张</span></div>
-                <div class="lg-item"><span class="lg-dot" style="background:#6B8E5A;"></span><span>故事输出 · 1200 种</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--chart-4);"></span><span>故事输出 · 1200 种</span></div>
             </div>
         </section>
 
@@ -2962,7 +2962,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 const cardList = g.cards.slice(0, 4).map(c => c.id + " " + c.name).join(" · ");
                 tip.style("opacity", 1)
                     .html(`<div style="color:${g.color};font-weight:700;margin-bottom:var(--space-2);">${g.name} · ${g.name_en}</div>` +
-                          `<div style="font-size:0.78rem;color:#e9b885;margin-bottom:var(--space-2);">共 ${g.count} 张卡牌</div>` +
+                          `<div style="font-size:0.78rem;color:var(--chart-3);margin-bottom:var(--space-2);">共 ${g.count} 张卡牌</div>` +
                           `<div style="font-size:0.78rem;">${cardList} ...</div>`);
             })
             .on("mousemove", function(e) {

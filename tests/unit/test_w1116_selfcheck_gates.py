@@ -195,3 +195,24 @@ def test_registration_ledger_window_red(tmp_path, monkeypatch):
     _use_repo(repo, monkeypatch, reg)
     fails, _ = reg.check_all("1116")
     assert any("数据行 > 窗口" in f for f in fails), fails
+
+def test_rule_upper_picks_rule_line_not_history_mention():
+    """W1119：编号规则段上限取「编号规则段本体」那一行·历史段陈述里的同串不得干扰。
+
+    旧实现取全文首个 W001-W<四位数字> 匹配 ⇒ 首个落在历史段正文（W1117 段写「编号规则
+    W001-W1118」）⇒ 误判红而本体行已是新值 ⇒ 本例锁定新取位。
+    """
+    import check_registration_surface as reg
+    nl = chr(10)
+    body = nl.join([
+        "### W1119（2026-11-04）：样例段",
+        "",
+        "> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1119）",
+        "",
+        "### W1117（2026-11-04）：历史段",
+        "",
+        "⑥ 本段曾把编号规则写到 W001-W1118。",
+    ])
+    assert reg._rule_upper(body) == "1119"
+    # 无本体行时回退旧行为（兼容既有样本）
+    assert reg._rule_upper("编号规则 W001-W0900") == "0900"

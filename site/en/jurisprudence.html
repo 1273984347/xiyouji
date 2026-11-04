@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-YfiFgcKMUwXm3VD31BzXX9UCE3gm8DKPdhMQbJCBfUo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-30y9VrLhwF/zGz1LQaQmRsrNNNHNlxO+SAAZQ1bOBCc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Jurisprudence · Annotated Journey to the West</title>
@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="I · Heavenly Court Sentencing Economics · II · Artifact Property Rights Definition · III · The Life-Death Registry as Data Governance · Annotated Journey to the West">
     <meta property="og:description" content="I · Heavenly Court Sentencing Economics · II · Artifact Property Rights Definition · III · The Life-Death Registry as Data Governance · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -2300,10 +2300,10 @@ function renderTreemap(opts){
                     `Offender: ${d.criminal}<br>` +
                     `Identity: ${d.identity}<br>` +
                     `Crime: ${d.crime}<br>` +
-                    `<span style="color:#e9b885">Crime severity</span>: ${d.crime_severity} / 10<br>` +
-                    `<span style="color:#e9b885">Sentence</span>: ${d.actual_sentence}<br>` +
-                    `<span style="color:#e9b885">Sentence severity</span>: ${d.sentence_severity} / 10<br>` +
-                    `<span style="color:#e9b885">Disparity score</span>: ${d.disparity_score} / 10<br>` +
+                    `<span style="color:var(--chart-3)">Crime severity</span>: ${d.crime_severity} / 10<br>` +
+                    `<span style="color:var(--chart-3)">Sentence</span>: ${d.actual_sentence}<br>` +
+                    `<span style="color:var(--chart-3)">Sentence severity</span>: ${d.sentence_severity} / 10<br>` +
+                    `<span style="color:var(--chart-3)">Disparity score</span>: ${d.disparity_score} / 10<br>` +
                     `<em>${d.disparity_reason}</em>`,
                     event
                 );
@@ -2499,7 +2499,7 @@ function renderTreemap(opts){
                     `Claimed owner: ${d.claimed_owner}<br>` +
                     `Actual property type: ${d.actual_property_type}<br>` +
                     `Origin: ${d.creation_context}<br>` +
-                    `<span style="color:#e9b885">Property clarity</span>: ${d.property_clarity} / 10<br>` +
+                    `<span style="color:var(--chart-3)">Property clarity</span>: ${d.property_clarity} / 10<br>` +
                     `Legal risk: ${d.legal_risk}<br>` +
                     `<em>Dispute: ${d.property_dispute}</em>`,
                     event
@@ -2562,7 +2562,7 @@ function renderTreemap(opts){
         svgId: 'chart-artifact-pie', data: pieData, legendId: 'legend-artifact-pie', tipId: 'tm-tooltip',
         nameOf: d => ({private_pure:'Purely private property', public_pure:'Purely public asset', mixed_ownership:'Mixed ownership', delegated_use:'Delegated use', usucaption:'Use-as-ownership'})[d.key] || d.label,
         valueOf: d => d.value, colorOf: d => color[d.key],
-        htmlOf: (d, total) => `<strong>${d.label}</strong><div class="row">Count: <strong style="color:#e9b885">${d.value}</strong> item(s) (${((d.value/total)*100).toFixed(1)}%)</div>`
+        htmlOf: (d, total) => `<strong>${d.label}</strong><div class="row">Count: <strong style="color:var(--chart-3)">${d.value}</strong> item(s) (${((d.value/total)*100).toFixed(1)}%)</div>`
     });
 }
 
@@ -2659,9 +2659,9 @@ function renderTreemap(opts){
                     `Incident type: ${d.incident_type}<br>` +
                     `Data affected: ${d.data_affected}<br>` +
                     `Data volume: ${d.data_volume}<br>` +
-                    `<span style="color:#e9b885">Authorization</span>: ${d.unauthorized_access ? 'unauthorized' : 'authorized'}<br>` +
-                    `<span style="color:#e9b885">Audit</span>: ${d.audit_trail}<br>` +
-                    `<span style="color:#e9b885">Severity</span>: ${d.severity} / 10<br>` +
+                    `<span style="color:var(--chart-3)">Authorization</span>: ${d.unauthorized_access ? 'unauthorized' : 'authorized'}<br>` +
+                    `<span style="color:var(--chart-3)">Audit</span>: ${d.audit_trail}<br>` +
+                    `<span style="color:var(--chart-3)">Severity</span>: ${d.severity} / 10<br>` +
                     `Vulnerability: ${d.vulnerability}<br>` +
                     `<em>${d.data_governance_failure}</em>`,
                     event

@@ -20,7 +20,12 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+MAX_DOC_BYTES = 262144   # W1119：治理文档正本体积上限（256KiB）
+ARCHIVE_CHUNK = 50       # W1119：体积模式每批迁出的段数（最后一批可不足）
+LEDGER_WINDOW = 60       # W1119：台账正本数据行窗口
+
 STEPS = [
+    ('archive',    '腾窗（**须在 precheck 之前**：体积阈值 262144B·每批 50 段·两面同 W 号下界 + 台账行窗口·W1119）'),
     ('precheck',   '台账预检（正本同号多行 / 行数窗口）'),
     ('selfref',    'CSS 变量自引用体检（引用第 57 槽既有判据·只引用不复制）'),
     ('add',        'git add 本批改动（生成器按索引收集·须先 add）'),
@@ -33,6 +38,46 @@ STEPS = [
     ('csp',        'generate_csp（**csp/cspcheck 仍为末两步**：前面步骤会改内联脚本）'),
     ('cspcheck',   'generate_csp --check（零漂移校验）'),
 ]
+
+
+def _run_archive():
+    """腾窗步（W1119）：**必须排在 precheck 之前**。
+
+    W1117 实证：precheck 是 fail-closed 中止（台账数据行 > 窗口即 return 1）⇒
+    若腾窗步排在其后，台账超窗时流水线在预检就中止 ⇒ 永远到不了腾窗步 ⇒ 死路径。
+    ⇒ 顺序：先修窗（腾窗）再体检（precheck）。
+
+    ① 体积阈值：CHANGELOG 与 file-index 正本各 ≤ MAX_DOC_BYTES 字节；每批 ARCHIVE_CHUNK 段，
+       循环到达标；两面迁到**同一 W 号下界**（迁完断言·W1119）。
+    ② 台账行窗口：正本数据行 > LEDGER_WINDOW 时迁出最老行（--keep = 窗口-1）。
+    两步皆幂等：未超阈值时工具自身报 SKIP 且 rc=0 ⇒ 零动作。
+    """
+    import sys
+    rc, out = run([sys.executable, os.path.join('scripts', 'archive_segments.py'),
+                   '--target', 'both', '--max-bytes', str(MAX_DOC_BYTES),
+                   '--chunk', str(ARCHIVE_CHUNK), '--apply'])
+    sys.stdout.write(out)
+    if rc != 0:
+        return False
+    led = os.path.join(ROOT, 'docs', '00-导读', 'W批次编号对账表.md')
+    rows = 0
+    try:
+        import archive_ledger_rows
+        for line in io.open(led, encoding='utf-8').read().split(chr(10)):
+            if archive_ledger_rows.ROW_RE.match(line):
+                rows += 1
+    except Exception as e:
+        print('[archive] 台账行数读取失败（跳过行窗口）: %s' % e)
+        return True
+    if rows > LEDGER_WINDOW:
+        rc2, out2 = run([sys.executable, os.path.join('scripts', 'archive_ledger_rows.py'),
+                         '--keep', str(LEDGER_WINDOW - 1), '--apply'])
+        sys.stdout.write(out2)
+        if rc2 != 0:
+            return False
+    else:
+        print('[archive] 台账 %d 行 <= 窗口 %d·行窗口未触发' % (rows, LEDGER_WINDOW))
+    return True
 
 
 def run(args, cwd=None):
@@ -363,6 +408,8 @@ def main(argv=None):
         import json
         batch = json.loads(open(a.spec, encoding='utf-8').read()).get('batch')
     led = os.path.join(ROOT, 'docs', '00-导读', 'W批次编号对账表.md')
+    if not _run_archive():
+        return 1
     if not _run_prechecks(led):
         return 1
     if a.dry_run:
