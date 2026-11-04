@@ -3465,10 +3465,3 @@
 | site/static/images/plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
 | site/static/images/plate-line-98-ch039-wenshu-pusa.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
 | site/static/images/plate-line-99-ch046-luli-daxian.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
-
-
-## W1001 回次 og:image 全覆盖批·第一轮试点（12 张线描立像/场面）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CHANGELOG.md | W1001 | 本批新增/修改（W1001 段 + 编号规则段上限本体所在段） |

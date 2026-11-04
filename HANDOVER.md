@@ -2,7 +2,7 @@
 
 
 > **📖 阅读契约（W707）**：首段型+查表型——接手时只读「零、当前阻塞」+「一、当前进度」+ 文件末尾「最后更新」链；「三、方法论沉淀」「四、待办」按需查；历史批次细节在 CHANGELOG（grep 查）勿在本文件找。
-> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（267 条坑·六主题——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（57 槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
+> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（274 条坑·六主题——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（57 槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
 > 轨标：教学讲解
 > 本文件用于跨 session 交接，记录当前进度、下一步可推进方向、方法论沉淀与待办事项。
 > 创建于 2026-07-25（v2.0.41 W068 后）
@@ -136,7 +136,7 @@
 ## 三、方法论沉淀
 
 > **经验总入口（W755 指针化·W973 真指针化收口）**：现役坑位与门禁读
-> [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（268 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（57 槽）；
+> [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（274 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（57 槽）；
 > 诊断 SOP 读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)；
 > 本区历史叙事全文已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查）。
 ## 四、待办事项（短期）
@@ -256,7 +256,7 @@ python detect_unwrapped_tables.py  # 表格溢出扫描
 ---
 ## 八、已知雷区
 
-> **雷区权威 = [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（268 条·六主题·含 shell 场景查坑表）**；
+> **雷区权威 = [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（274 条·六主题·含 shell 场景查坑表）**；
 > 本区历史雷区叙事已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查勿通读）。
 ## 九、使用说明
 
