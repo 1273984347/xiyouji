@@ -295,7 +295,15 @@ def _face_three_docs(ctx):
 
 
 def _handover_rotate_oldest(s, ctx, nl, h1pos):
-    """交接文档：滚动淘汰最老里程碑块并同步「历史概要」指针（W534/W624/W713 语义）。"""
+    """交接文档：滚动淘汰最老里程碑块并同步「历史概要」指针（W534/W624/W713 语义）。
+
+    W1124（T74 R-C）：**滚动幂等守卫下沉到函数内**——病根是守卫此前只在调用点
+    （插入路径）生效 ⇒ 若单独重跑滚动逻辑，仍会再淘汰一块（指针指向的块被淘汰后
+    指针移到新最老块 ⇒ 再跑一次就再淘汰一块 ⇒ 信息丢失·零红灯）。
+    ⇒ 本版：本批块**已存在于链上** ⇒ 视为本批已滚动过 ⇒ 直接返回（零变化）。
+    """
+    if _locate_handover_milestone(s, ctx.batch) is not None:
+        return s
     pm = re.search(r"> 历史概要（W(\d+) 及更早）的详细记录见", s)
     assert pm, "未找到历史概要指针"
     oldest_w = pm.group(1)
