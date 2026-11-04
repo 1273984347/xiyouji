@@ -229,6 +229,40 @@
 | docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1127 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
 
 
+## W1126 截图审查 scope 判定根修（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| CHANGELOG.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| HANDOVER.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| STRUCTURE.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| docs/00-导读/W批次编号对账表.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| docs/00-导读/项目说明.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| docs/11-方案报告/README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| docs/INDEX.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| pytest.ini | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/INDEX.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/check_screenshot_scope.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/INDEX.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/_cascade_files_W1126.txt | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/_vermilion_solid_cache.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/_w1126_spec.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/file-index.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/stats-changelog.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/stats-index.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/stats.json | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| scripts/output/tools-inventory.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| site/data/search.html | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| site/en/search.html | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| tests/unit/INDEX.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| tests/unit/README.md | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+| tests/unit/test_w1126_screenshot_scope.py | W1126 | 改：本批交付面（scope 判据脚本 + 单测 + 施工前对齐件 + 登记面） |
+
 ## W1125 自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型（2026-11-04）
 
 | 文件 | W | 说明 |
