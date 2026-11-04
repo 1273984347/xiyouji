@@ -1,18 +1,51 @@
+### W1129（2026-11-04）：PR 节奏纪律变更 + 提交范围门禁多批归属支持
+
+**本批要点**（PR 节奏纪律变更 + 提交范围门禁多批归属支持·铁律层 + 工具面·零页面内容改动·不新增门禁槽 ⇒ 门禁 62 段不变·**不新增坑表条目 ⇒ 计数链不动**）：① **用户 2026-11-04 裁定的新 PR 节奏**（实测 11-04 开 9 个 PR、11-03 开 11 个·两日 20 个·其中 **7 个是纯回填/订正**·无一带新功能）：**回填与订正类改动永不单独开 PR**（台账行回填 / CHANGELOG 数字订正 / 复盘补记 一律并入**下次在途批**的 PR）+ **同一会话当日多个批次合并进同一个 PR**（批次号仍各自登记占号 / 认领行 / CHANGELOG 段 / 报告）+ 跨会话仍各自开 PR（不牺牲并行度）⇒ 落 AGENTS §6 **铁律 21**（改写 W1118「一批一 PR」旧口径；每 PR ≈ 25 个 job ⇒ **PR 数是 job 数的乘数**，触发面治理与 PR 节奏治理是同一问题的两面）。② **配套工具根修**：第 51 槽「提交范围门禁」原按「新增段集合恰 1 个」定归属 ⇒ 多批同 PR 时新增段 > 1 ⇒ 归属落空并拿**单批** spec 当应动全集 ⇒ 本提交里前几批的交付面被判「spec 之外」⇒ **假红** ⇒ 根修 = 新增 _multi_batch_scope：新增段 > 1 时归属取**批号最小**者、应动全集取**各批 spec 并集**；**真·代提仍判红**（不在任何一批 spec 内的文件仍红·并集不含者照红）⇒ 判据强度不降，且单批提交路径逐字未变（既有 6 例自测仍 6/6）。③ **实跑读数**：MULTI_TARGET=1129 · MULTI_PATHS=['/a.py','/b.py'] · PLAN_ALL_IN_SCOPE=True · PLAN_WITH_EVIL=False extra=['/evil.py']；新增单测 4 例全过。④ **不新增坑表条目** ⇒ 计数链零改动（并行会话 W1125 未合并·远端 267 vs 其 261 口径·此刻动必对撞）⇒ 两条教训（多批归属·PR 数是 job 数乘数）暂落 T78 报告 §5，待下一批入坑表（拟 E-172 起）。
+
+**文件**：
+- docs/agent/pitfalls.md- AGENTS.md- .agent/skills/puti-shouye/SKILL.md- HANDOVER.md- scripts/batch_closeout.py- scripts/batch_cascade.py- scripts/check_repo_layout.py- tests/unit/test_w1124_closeout_rebuild.py- scripts/output/_w1124_spec.json- scripts/output/_cascade_files_W1124.txt- docs/00-导读/W批次编号对账表.md- archive/docs/W批次编号对账表-ARCHIVE.md- docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md- docs/11-方案报告/README.md- CHANGELOG.md- scripts/output/file-index.md- README.md- STRUCTURE.md- docs/00-导读/项目说明.md- CITATION.cff- site/data/search.html- site/en/search.html- .github/workflows/README.md- scripts/output/stats.json- scripts/output/stats-index.md- scripts/output/stats-changelog.json- scripts/output/tools-inventory.md- archive/docs/AGENTS-ARCHIVE.md- docs/INDEX.md- scripts/INDEX.md- scripts/output/INDEX.md- scripts/output/README.md- tests/unit/INDEX.md- tests/unit/README.md- pytest.ini- docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md- docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md- site/index.html- site/data/cross-time-danmaku.html- site/data/tag-cloud.html- site/dukou-engine.html- scripts/cascade_idempotence.py- scripts/batch_cascade.py- scripts/backfill_changelog.py- tests/unit/test_w1122_cascade_idempotence.py- tests/unit/test_w1122_pending_faces.py- docs/00-导读/W批次编号对账表.md- docs/11-方案报告/计划方案/T74-任务计划执行与经验沉淀报告-2026-11-04.md- docs/11-方案报告/README.md- scripts/output/_w1122_spec.json- scripts/output/_cascade_files_W1122.txt- CHANGELOG.md- scripts/output/file-index.md- HANDOVER.md- AGENTS.md- .github/workflows/README.md- site/index.html- site/data/cross-time-danmaku.html- site/data/tag-cloud.html- site/dukou-engine.html- README.md- STRUCTURE.md- docs/00-导读/项目说明.md- CITATION.cff- scripts/output/tools-inventory.md- scripts/output/stats.json- scripts/output/stats-index.md- scripts/output/stats-changelog.json- archive/docs/AGENTS-ARCHIVE.md- pytest.ini- docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md- docs/INDEX.md- scripts/INDEX.md- archive/docs/W批次编号对账表-ARCHIVE.md- docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md- site/data/search.html- site/en/search.html- scripts/output/INDEX.md- scripts/output/README.md- tests/unit/INDEX.md- tests/unit/README.md- tests/unit/test_w1102_batch_closeout.py- tests/unit/test_w1128_pycompile_gate.py- docs/11-方案报告/计划方案/T77-任务计划执行与经验沉淀报告-2026-11-04.md- scripts/output/_w1128_spec.json- scripts/output/_cascade_files_W1128.txt- scripts/check_commit_scope.py- tests/unit/test_w1129_commit_scope_multibatch.py- docs/11-方案报告/计划方案/T78-任务计划执行与经验沉淀报告-2026-11-04.md- scripts/output/_w1129_spec.json- scripts/output/_cascade_files_W1129.txt
+
+**认领登记 W1129**（占号 session=mvs_1d2745db…·preflight PASS·touches 全清单登记·W1128 批收官后顺延）。
+
+**验证**：收官链 14 步全绿（含 pycompile 门禁步·CSP 856 页 0 漂移）· 门禁 62 段 0 FAIL（CI 同档 full）· 全量 pytest 0 failed · ruff check scripts/ 0 违规 · 新增单测 4 例 + 既有 6 例自测 6/6。
+
+### W1128（2026-11-04）：收官链 py_compile 语法自检门禁
+
+**本批要点**（收官链 py_compile 语法自检门禁·工具面·零页面内容改动·不新增门禁槽 ⇒ 门禁 62 段不变·**不新增坑表条目 ⇒ 计数链不动**）：① **病根**：批量写 .py 后若落盘出现语法错（字面两字符反斜杠 n、缺引号、续行残缺），此前**无任何机器门禁拦截** ⇒ 坏文件直接进索引进提交，而本地跑的是好版本 ⇒ 本地全绿、提交里是坏版本 ⇒ 直到 CI 才暴露（2026-11-04 实测：8 个文件同时触发 3 个 job 红灯）。② **根修 = 收官链新增 pycompile 步**（排在 add 之后·紧随其后）：对**三态清单**（索引态 + 工作树态 + 未跟踪·排除 .gitignore）的全部 .py 逐件 compile()（**只编译不落盘**·不污染 __pycache__）⇒ 任一件 SyntaxError 即打印「文件:行号 + 错误」并**中止整条收官链**（fail-closed·宁可停在收官前也不让坏件进提交）；纯逻辑抽为 _compile_check 便于负样本直喂。③ **负样本实测**：在工作树放入语法错文件 ⇒ 门禁拦停（退出码 3·报出 文件:1: invalid syntax）⇒ 删除探针后复跑「3 件 .py 语法自检通过」⇒ 证明该门禁真会拦而非只跑通。④ **顺序锁同步**：既有行为锁只锁 add→refresh→stats→index→csp→cspcheck 的相对顺序 ⇒ 插入 pycompile 不破坏它；另**追加**一条行为锁「pycompile 实际被调用且排在 add 之后」+ 声明顺序断言（pycompile == add + 1），防 STEPS 与 main 双写漂移。⑤ **号段让号**：W1127 于 15:11:09 被并行会话先落地占号 ⇒ 我方顺延用 W1128；台账因新增认领行达 61 段超窗 ⇒ 先腾窗迁出 W1065-W1066（正本 59 行）再动工。⑥ **不新增坑表条目** ⇒ 计数链零改动（避与并行会话 W1125 未合并批的计数链对撞）· 本批教训暂落 T77 报告 §5 · 待下一批入表。
+
+**文件**：
+- docs/agent/pitfalls.md- AGENTS.md- .agent/skills/puti-shouye/SKILL.md- HANDOVER.md- scripts/batch_closeout.py- scripts/batch_cascade.py- scripts/check_repo_layout.py- tests/unit/test_w1124_closeout_rebuild.py- scripts/output/_w1124_spec.json- scripts/output/_cascade_files_W1124.txt- docs/00-导读/W批次编号对账表.md- archive/docs/W批次编号对账表-ARCHIVE.md- docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md- docs/11-方案报告/README.md- CHANGELOG.md- scripts/output/file-index.md- README.md- STRUCTURE.md- docs/00-导读/项目说明.md- CITATION.cff- site/data/search.html- site/en/search.html- .github/workflows/README.md- scripts/output/stats.json- scripts/output/stats-index.md- scripts/output/stats-changelog.json- scripts/output/tools-inventory.md- archive/docs/AGENTS-ARCHIVE.md- docs/INDEX.md- scripts/INDEX.md- scripts/output/INDEX.md- scripts/output/README.md- tests/unit/INDEX.md- tests/unit/README.md- pytest.ini- docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md- docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md- site/index.html- site/data/cross-time-danmaku.html- site/data/tag-cloud.html- site/dukou-engine.html- scripts/cascade_idempotence.py- scripts/batch_cascade.py- scripts/backfill_changelog.py- tests/unit/test_w1122_cascade_idempotence.py- tests/unit/test_w1122_pending_faces.py- docs/00-导读/W批次编号对账表.md- docs/11-方案报告/计划方案/T74-任务计划执行与经验沉淀报告-2026-11-04.md- docs/11-方案报告/README.md- scripts/output/_w1122_spec.json- scripts/output/_cascade_files_W1122.txt- CHANGELOG.md- scripts/output/file-index.md- HANDOVER.md- AGENTS.md- .github/workflows/README.md- site/index.html- site/data/cross-time-danmaku.html- site/data/tag-cloud.html- site/dukou-engine.html- README.md- STRUCTURE.md- docs/00-导读/项目说明.md- CITATION.cff- scripts/output/tools-inventory.md- scripts/output/stats.json- scripts/output/stats-index.md- scripts/output/stats-changelog.json- archive/docs/AGENTS-ARCHIVE.md- pytest.ini- docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md- docs/INDEX.md- scripts/INDEX.md- archive/docs/W批次编号对账表-ARCHIVE.md- docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md- site/data/search.html- site/en/search.html- scripts/output/INDEX.md- scripts/output/README.md- tests/unit/INDEX.md- tests/unit/README.md- tests/unit/test_w1102_batch_closeout.py- tests/unit/test_w1128_pycompile_gate.py- docs/11-方案报告/计划方案/T77-任务计划执行与经验沉淀报告-2026-11-04.md- scripts/output/_w1128_spec.json- scripts/output/_cascade_files_W1128.txt
+
+**认领登记 W1128**（占号 session=mvs_1d2745db…·W1127 已让给并行会话·preflight PASS·touches 全清单登记）。
+
+**验证**：收官链 12 步全绿（含新增 pycompile 步·regsurface OK·CSP 856 页 0 漂移）· 门禁 62 段 0 FAIL（CI 同档 full）· 全量 pytest 1310 passed / 4 skipped · ruff check scripts/ 0 违规 · 新增单测 4 例 + 行为锁 1 例 · 负样本实测门禁拦停（退出码 3）。
+
+### W1127（2026-11-04）：治理收官批·台账回填 + 滚动独立入口 + 历史缺口体检
+
+> **来源**：T74（W1122 批）报告遗留 R-2（滚动重跑守卫的独立入口）与 R-B 前置（历史缺口按序补齐的前置体检）· 归集自 W1122 批收官登记。
+>
+> - **文件**：scripts/batch_cascade.py、scripts/check_segment_gaps.py、tests/unit/test_w1127_closeout_tools.py、scripts/output/_w1127_spec.json、scripts/output/_cascade_files_W1127.txt、docs/00-导读/W批次编号对账表.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md、docs/11-方案报告/README.md、CHANGELOG.md、scripts/output/file-index.md、HANDOVER.md、AGENTS.md、.github/workflows/README.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff、site/data/search.html、site/en/search.html、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、scripts/output/stats.json、scripts/output/stats-index.md、scripts/output/stats-changelog.json、scripts/output/tools-inventory.md、docs/INDEX.md、scripts/INDEX.md、scripts/output/INDEX.md、scripts/output/README.md、tests/unit/INDEX.md、tests/unit/README.md、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md。
+
+**一、台账回填与腾窗**：台账 W1124 行 git 反填回填（hash 18a06a80·共 3 笔·指纹 de8ab24caa72）并入本批提交（不单开 PR）；台账腾窗迁出最老两行（W1065-W1066）使正本回到窗口内；W1127 认领行登记（含 touches 全清单）。
+
+**二、里程碑滚动独立入口（根修 T74 R-C）**：此前滚动只能作为「本批块插入」的副动作发生，若某批只想滚动或需重跑滚动，没有独立入口 ⇒ 只能手工改文档。W1124 已把幂等守卫下沉到_handover_rotate_oldest 内部（本批块已在链上 ⇒ 零变化），本批补上独立入口 --rotate-only：独立重跑同样零变化（零红灯·不丢信息），且不落盘时只报 dry-run。
+
+**三、历史缺口体检工具（根修 T74 R-B 前置）**：此前「立段/落段只看一面」根修后暴露的历史缺口只散落在运行输出里，既无法复核，也无法判断内容能否复原 ⇒ 新增 scripts/check_segment_gaps.py：盘点台账（正本 + 归档）出现过的批次号，与 CHANGELOG 与 file-index 两面正本的段集合做差集，输出缺口清单并逐件给出可复原来源提示（CHANGELOG 归档 / file-index 归档 / 台账归档是否含该批号）。本工具**只体检不补段**（补段须先评估可复原性，避免造段）⇒ **实测当前基线缺口 0 项**（两面正本已覆盖台账全部批次）⇒ T74 遗留 B 的补段动作无需执行。
 ### W1126（2026-11-04）：截图审查 scope 判定根修（EN 搜索页定向 + 搜索索引内容级免审）
 
 > **来源**：用户 2026-11-04「为什么不直接在 main 分支进行」追问后引出「为什么 Screenshot Review 每次都要跑」诊断 → 用户选定「把 B+C 方案落成 W1126 的施工计划」。
 >
-> - **文件**：.github/workflows/screenshot-review.yml、scripts/check_screenshot_scope.py、tests/unit/test_w1126_screenshot_scope.py、docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、docs/agent/pitfalls.md、scripts/output/_w1126_spec.json、scripts/output/_cascade_files_W1126.txt、docs/INDEX.md、scripts/output/INDEX.md、scripts/output/README.md、scripts/output/tools-inventory.md、scripts/output/stats.json、site/data/search.html、site/en/search.html。
+> - **文件**：scripts/check_screenshot_scope.py、tests/unit/test_w1126_screenshot_scope.py、docs/11-方案报告/计划方案/T81-任务计划执行与经验沉淀报告-2026-11-04.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/_w1126_spec.json、scripts/output/_cascade_files_W1126.txt。
 
-**一、诊断根因（三段错配·非配置过严）**：Screenshot Review 每批必跑的真实原因 = ① 收官链每批必改 `site/en/search.html`（版本面推进 + 搜索索引刷新）② 该文件既不在页脚版本号免审名单，`site/*` 的 `*` 又不跨 `/` ⇒ 匹配不到 `site/data/*` 的 targeted 分支 ③ 于是掉进「未知路径 ⇒ 保守全量」兜底 ⇒ 为 2 行零视觉改动付全站 88 页截图代价。PR #130 实测坐实：39 个改动文件逐文件复现，`site/en/search.html` 判定为 FULL，其余 4 个页脚页 SKIP、`site/data/search.html` TARGETED；该文件实际改动仅 2 行（1 行 CSP `sha256-` 哈希 + 1 行 230,455 字符的内嵌搜索索引常量）⇒ 零布局改动、零样式改动、零 DOM 结构改动。
+**一、诊断根因（三段错配·非配置过严）**：Screenshot Review 每批必跑的真实原因 = ① 收官链每批必改 `site/en/search.html`（版本面推进 + 搜索索引刷新）② bash case 的 `site/*` 在 `site/data/*` 之后命中 ⇒ 掉进「未知路径 ⇒ 保守全量」兜底 ⇒ **为 2 行零视觉改动付全站 88 页截图代价**。PR #130 实测坐实：39 个改动文件逐文件复现，`site/en/search.html` 判定为 FULL，其余 4 个页脚页 SKIP、`site/data/search.html` TARGETED；该文件实际改动仅 2 行（1 行 CSP `sha256-` 哈希 + 1 行 230,455 字符的内嵌搜索索引常量）⇒ 零布局改动、零样式改动、零 DOM 结构改动。
 
 **二、B+C 两条修法（判据强度不降）**：**B** 新增 `site/en/*` ⇒ targeted 分支（截该页 + 入口页·保留该页视觉审查强度·只削范围）；**C** 内容级免审判据（变更行集合 ⊆ {CSP 哈希行, 内嵌索引数据行} ⇒ 免审·白名单式最保守·任一未识别行变化即不 skip）。**判据抽为仓内脚本** `scripts/check_screenshot_scope.py`（单一事实源·可单测·可复算·workflow 只调用不内联）。
 
-**三、协作事故与隔离处置（DV-03）**：施工中并行会话于 15:18:32 执行 `reset: moving to origin/main`（reflog 实测）⇒ 清空共享工作树未提交内容 ⇒ 我方已落盘的 T76 文档 / spec / 级联清单三件被清除（reflog + `git log --all` + `ls-files` 三方核对确认从未提交、无对象可恢复）⇒ 依 AGENTS 铁律 24 迁独立 worktree `D:/xiyouji-w1126` 重建，共享树 31 件他方在途改动**不动·不代提·不回滚**。
+**三、协作事故与隔离处置（DV-03）**：施工中共享工作树曾被清空未提交内容（reflog 实测 15:18:32）⇒ 依 AGENTS 铁律 24 迁独立 worktree `D:/xiyouji-w1126` 重建，共享树他方在途改动**不动·不代提·不回滚**；报告号两次主动让号（T-76 → T-79 → T-81）以避让他方同号文件。
 
-**四、验证**：第 48 门禁计划方案合规 0 FAIL（T76 全项符合）· 第 51 门禁提交范围 0 FAIL（归属落 W1126）· 第 46 门禁搜索索引新鲜度 0 FAIL（zh 953 / en 996 与生成器实算一致）· CSP 856 页 0 漂移 · docs 全量链接 5706 条 0 断链 · 第 54 槽坑表编号唯一性 0 FAIL。
+**四、验证**：第 48 门禁计划方案合规 0 FAIL（T81 全项符合）· 第 51 门禁提交范围 0 FAIL · 第 46 门禁搜索索引新鲜度 0 FAIL · 第 31 门禁文档口径体检 0 FAIL · CSP 856 页 0 漂移 · 脚本自测 22 例全过 · 单测 26 例全过。
 
-> - **状态**：已收官（截图审查 scope 判定根修 + B/C 两规则落地 + 判据脚本化 + 单测自证；台账 W1122 行回填并入本批）
+> - **状态**：已收官（截图审查 scope 判定根修 + B/C 两规则落地 + 判据脚本化 + 单测自证）
 
 ### W1124（2026-11-04）：治理收尾批·教训入坑表 + 重建入口收进收官链
 
@@ -1363,7 +1396,7 @@ probe_error 0 页 · 影子分层报数结构性与缺口分离清晰。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1126），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1129），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

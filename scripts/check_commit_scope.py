@@ -216,13 +216,46 @@ def pick_target_merged(index_text, head_text, staged=None, main_text=None, carri
     return pick_target_with_coverage(index_text, head_text, staged)
 
 
+def _multi_batch_scope(index_text, head_text, main_text, carried):
+    """多批同 PR 的归属与应动全集（W1129）。
+
+    背景：PR 节奏纪律改为「同一会话当日多个批次合并进同一个 PR」⇒ 索引态的
+    **新增段集合可能 > 1** ⇒ 原判据（新增段恰 1 个才归属它）会落空并拿**单批**
+    spec 当应动全集 ⇒ 本提交里**前几批的交付面被判「spec 之外」** ⇒ 假红。
+
+    ⇒ 处置：新增段集合 > 1 时，归属取**批号最小**的新增段（便于追责与回填），
+    应动全集取**各新增批 spec 的并集**。
+    **判据强度不降**：不在任何一批 spec 里的文件仍判红（真·代提风险仍拦得住），
+    且只在「新增段集合 > 1」这一明确场景放宽（单批提交行为完全不变）。
+    """
+    idx_segs = set(segments(index_text))
+    head_segs = set(segments(head_text))
+    carried_segs = set(segments(main_text or ""))
+    new_segs = sorted(idx_segs - head_segs - carried_segs)
+    if len(new_segs) <= 1:
+        return None, []
+    paths = set()
+    for w in new_segs:
+        sp = spec_paths_for(w)
+        if sp:
+            paths |= set(sp)
+    return new_segs[0], sorted(paths)
+
+
 def run_gate():
     staged = staged_paths()
     idx_text, head_text = _show(":"), _show("HEAD")
     main_text = _show("origin/main")
     carried = carried_paths(staged)
-    target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
-    spec_set = spec_paths_for(target)
+    multi_target, multi_paths = _multi_batch_scope(idx_text, head_text, main_text, carried)
+    if multi_paths:
+        target = multi_target
+        why = "多批同 PR（新增段 %d 个·取最小批号归属·应动全集取各批 spec 并集）" % (
+            len(set(segments(idx_text)) - set(segments(head_text)) - set(segments(main_text or ""))))
+        spec_set = multi_paths
+    else:
+        target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
+        spec_set = spec_paths_for(target)
     effective = sorted(set(staged) - set(carried))
 
     fails = []
@@ -257,8 +290,15 @@ def run_report():
     idx_text, head_text = _show(":"), _show("HEAD")
     main_text = _show("origin/main")
     carried = carried_paths(staged)
-    target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
-    spec_set = spec_paths_for(target)
+    multi_target, multi_paths = _multi_batch_scope(idx_text, head_text, main_text, carried)
+    if multi_paths:
+        target = multi_target
+        why = "多批同 PR（新增段 %d 个·取最小批号归属·应动全集取各批 spec 并集）" % (
+            len(set(segments(idx_text)) - set(segments(head_text)) - set(segments(main_text or ""))))
+        spec_set = multi_paths
+    else:
+        target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
+        spec_set = spec_paths_for(target)
     effective = sorted(set(staged) - set(carried))
     ok, extra = plan(effective, spec_set)
     print("归属：%s（%s）" % (target, why))
