@@ -191,6 +191,30 @@ AGENTS_SAMPLE_TWO = (
 )
 
 
+def test_upsert_chain_entry_inserts_in_batch_order():
+    """正样本：本批 entry 不存在 ⇒ 按批号序插入（比链首批次小 ⇒ 插到链首之后）。"""
+    chain = "2026-11-04（W1123 新批）·2026-11-04（W1121 旧批）·"
+    out, st = bc._upsert_chain_entry(chain, "2026-11-04（W1122 测试批）", "W1122", "·")
+    assert st == "inserted"
+    assert out.index("（W1123") < out.index("（W1122") < out.index("（W1121"), "低号批 entry 必须排在链首之后"
+
+
+def test_upsert_chain_entry_moves_entry_off_chain_head():
+    """正样本：本批 entry 已占链首而链首更新 ⇒ 重排到按序位（幂等路径的��置校正）。"""
+    chain = "2026-11-04（W1122 测试批）·2026-11-04（W1123 新批）·"
+    out, st = bc._upsert_chain_entry(chain, "2026-11-04（W1122 测试批）", "W1122", "·")
+    assert st == "moved"
+    assert out.index("（W1123") < out.index("（W1122"), "低号批 entry 不得占据链首"
+
+
+def test_upsert_chain_entry_is_idempotent_when_in_place():
+    """正样本：本批 entry 已存在且位置正确 ⇒ 零变化（可重复执行）。"""
+    chain = "2026-11-04（W1123 新批）·2026-11-04（W1122 测试批）·"
+    out, st = bc._upsert_chain_entry(chain, "2026-11-04（W1122 测试批）", "W1122", "·")
+    assert st == "unchanged"
+    assert out == chain
+
+
 def test_agents_face_inserts_note_in_batch_order(monkeypatch):
     """正样本：低号批落段时按批号序插入（不得插在末尾）。
 

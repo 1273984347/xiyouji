@@ -96,6 +96,16 @@
 | archive/docs/AGENTS-ARCHIVE.md | W1122 | 改：AGENTS 脚注滚动迁入的最老条目归档件（级联副作用面） |
 | pytest.ini | W1122 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
 | docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1122 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| docs/INDEX.md | W1122 | 改：文档索引（级联/索引刷新步产物·副作用面） |
+| scripts/INDEX.md | W1122 | 改：脚本索引（级联/索引刷新步产物·副作用面） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1122 | 改：台账腾窗迁出的最老行（收官链 archive 步产物·副作用面） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1122 | 改：统计面 pytest 用例计数（实体化字面量·stats 同步） |
+| site/data/search.html | W1122 | 改：版本面字面量（搜索页版本行·幂等推进·副作用面） |
+| site/en/search.html | W1122 | 改：版本面字面量（搜索页版本行·幂等推进·副作用面） |
+| scripts/output/INDEX.md | W1122 | 改：产物索引（索引刷新步产物·副作用面） |
+| scripts/output/README.md | W1122 | 改：产物说明（索引刷新步产物·副作用面） |
+| tests/unit/INDEX.md | W1122 | 改：单测索引（索引刷新步产物·副作用面） |
+| tests/unit/README.md | W1122 | 改：单测说明（索引刷新步产物·副作用面） |
 
 
 ## W1121 收官链缺陷根修 + 跨克隆占号机制根修 + 台账回填（2026-11-04）
