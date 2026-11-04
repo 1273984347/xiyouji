@@ -89,6 +89,42 @@
 | scripts/output/_w1128_spec.json | W1128 | 本批工具/产物 |
 | scripts/output/_cascade_files_W1128.txt | W1128 | 本批工具/产物 |
 
+## W1125 自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1125 | 本批工具/产物 |
+| .github/workflows/README.md | W1125 | 本批工具/产物 |
+| AGENTS.md | W1125 | 本批工具/产物 |
+| CHANGELOG.md | W1125 | 本批工具/产物 |
+| CITATION.cff | W1125 | 本批工具/产物 |
+| HANDOVER.md | W1125 | 本批工具/产物 |
+| README.md | W1125 | 本批工具/产物 |
+| STRUCTURE.md | W1125 | 本批工具/产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1125 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1125 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1125 | 本批工具/产物 |
+| docs/00-导读/项目说明.md | W1125 | 本批工具/产物 |
+| docs/11-方案报告/README.md | W1125 | 本批工具/产物 |
+| docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md | W1125 | 本批工具/产物 |
+| docs/INDEX.md | W1125 | 本批工具/产物 |
+| docs/agent/pitfalls.md | W1125 | 本批工具/产物 |
+| scripts/output/INDEX.md | W1125 | 本批工具/产物 |
+| scripts/output/README.md | W1125 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1125.txt | W1125 | 本批工具/产物 |
+| scripts/output/_w1125_spec.json | W1125 | 本批工具/产物 |
+| scripts/output/file-index.md | W1125 | 本批工具/产物 |
+| scripts/output/stats.json | W1125 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1125 | 本批工具/产物 |
+| site/data/chart-design.html | W1125 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1125 | 本批工具/产物 |
+| site/data/search.html | W1125 | 本批工具/产物 |
+| site/data/tag-cloud.html | W1125 | 本批工具/产物 |
+| site/dukou-engine.html | W1125 | 本批工具/产物 |
+| site/en/search.html | W1125 | 本批工具/产物 |
+| site/index.html | W1125 | 本批工具/产物 |
+
+
 ## W1124 治理收尾批·教训入坑表 + 重建入口收进收官链（2026-11-04）
 
 | 文件 | W | 说明 |
@@ -3295,8 +3331,3 @@
 | site/static/images/plate-line-99-ch046-luli-daxian.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
 
 
-## W1001 回次 og:image 全覆盖批·第一轮试点（12 张线描立像/场面）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CHANGELOG.md | W1001 | 本批新增/修改（W1001 段 + 编号规则段上限本体所在段） |
