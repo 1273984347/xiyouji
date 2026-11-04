@@ -239,25 +239,50 @@ def list_res():
                                          time.ctime(info.get("ts", 0))))
 
 
+def _write_json(path, data):
+    """按「替换」语义写单个 JSON（**不合并**）——删除类操作用它，勿走 save_res。
+
+    W1123 根修：save_res 是**合并语义**（写共享表前先合并他人记录）⇒ 删除操作若也走
+    它，合并步骤会把磁盘上的旧记录（含刚要删的那条）重新合回来 ⇒ **已释放的号复活**
+    （2026-11-04 实测：工具自报「已释放 W1121」而 list 仍能看到它）。
+    ⇒ 删除与合并必须是两条独立路径。
+    """
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        tmp = path + ".tmp"
+        json.dump(data, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        os.replace(tmp, path)
+    except OSError:
+        pass
+
+
 def release(w):
-    """只释放**本工作树**登记的号——绝不误删其它克隆/会话的预约（W1121）。"""
+    """释放**本工作树**登记的号——删除语义 + 回读断言（W1121 建·W1123 根修）。
+
+    ① 只删本工作树表中的该号（本表由本工作树写入⇒不含他方预约）；
+    ② 共享表里仅当**同 session**才删（他人同号记录保留）；
+    ③ 删除后**回读校验**两个位置都不再含该号——「工具打印成功」不算证据。
+    """
     res = _read_one(RES_FILE)
     info = res.pop(w, None)
     if info is None:
         print("%s 不在本工作树预约表中（若为其它克隆所占·勿释放）" % w)
         return
+    _write_json(RES_FILE, res)
     shared = _read_one(SHARED_RES_FILE)
     if shared.get(w, {}).get("session") == info.get("session"):
         shared.pop(w, None)
-        try:
-            os.makedirs(os.path.dirname(SHARED_RES_FILE), exist_ok=True)
-            tmp = SHARED_RES_FILE + ".tmp"
-            json.dump(shared, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-            os.replace(tmp, SHARED_RES_FILE)
-        except OSError:
-            pass
-    save_res(res)
+        _write_json(SHARED_RES_FILE, shared)
     print("已释放 %s" % w)
+    still = []
+    if w in _read_one(RES_FILE):
+        still.append(RES_FILE)
+    shared_rec = _read_one(SHARED_RES_FILE).get(w)
+    if shared_rec is not None and shared_rec.get("session") == info.get("session"):
+        still.append(SHARED_RES_FILE)
+    if still:
+        raise RuntimeError("释放回读校验失败：%s 仍含 %s" % ("、".join(still), w))
+    print("OK    回读校验一致：%s 已不在本工作树表（共享表中同 session 的该号亦已清）" % w)
 
 
 def self_test():
