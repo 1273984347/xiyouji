@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0tLHkkE+fyRXMQQ4MFFDrFDIJQ1BoiOvrz83roM9NLk=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-IvOmkKkdCOT5TNmr2sPe+KLBwhpSU4wN2FVksaEYt2I=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sJAlEyxhSaCZFu1VoPxO3BGK32zfpIHsLQi0VvZaZKA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-IvOmkKkdCOT5TNmr2sPe+KLBwhpSU4wN2FVksaEYt2I=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Relationship Network · Annotated Journey to the West</title>
@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Introduction · Four Lenses on the Relationship Topology · I · Faction Distribution of the Three Realms · II · Artifact Counter Network · Annotated Journey to the West">
     <meta property="og:description" content="Introduction · Four Lenses on the Relationship Topology · I · Faction Distribution of the Three Realms · II · Artifact Counter Network · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:var(--chart-1);padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -5872,7 +5872,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                 if (isMain) {
                     const d = node.data;
                     tooltip.show(
-                        `<strong style="color:#c8463a">${d.artifact}</strong><br>` +
+                        `<strong style="color:var(--chart-1)">${d.artifact}</strong><br>` +
                         `Owner: ${d.owner}<br>` +
                         `Can collect: ${d.can_collect.join(', ')}<br>` +
                         `Countered by: ${d.countered_by}<br>` +
@@ -5880,7 +5880,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                         `Chapter: ${d.chapter}`, e);
                 } else {
                     tooltip.show(
-                        `<strong style="color:#3a6b8c">${node.id}</strong><br>` +
+                        `<strong style="color:var(--chart-2)">${node.id}</strong><br>` +
                         `Counterer (satellite node)<br>` +
                         `Counter target: ${node.parent}`, e);
                 }
