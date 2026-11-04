@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uolsC3/bx+eSke/IzkdKOKY1Rw8oS6qyIQJwnzOMHO4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-k25S4JVsig0S6Vn+2Im1OzLTEsPLb1uwbLv7gfUuztk=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>明代政治思想对照图谱 · 详解西游记</title>
@@ -1842,7 +1842,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
                     tip.classed("visible", false);
                 })
-                .transition().duration(DUR).delay(delay)
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:delay)
                 .style("opacity", 1);
 
             g.append("text")
@@ -1855,7 +1855,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .style("fill", d.score <= 6 ? "#C9A063" : "#fff")
                 .style("opacity", 0)
                 .text(d.score)
-                .transition().duration(DUR).delay(delay + 200)
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:delay + 200)
                 .style("opacity", 1);
         });
 
@@ -1948,7 +1948,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
                     tip.classed("visible", false);
                 })
-                .transition().duration(DUR).delay(i * 80)
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80)
                 .attr("r", 6);
 
             g.append("text")
@@ -1960,7 +1960,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .style("font-weight", "600")
                 .style("opacity", 0)
                 .text(d.event)
-                .transition().duration(DUR).delay(i * 80 + 200)
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80 + 200)
                 .style("opacity", 1);
         });
 
@@ -2207,7 +2207,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                         d3.select(this).attr("fill-opacity", 0.45);
                         tip.classed("visible", false);
                     })
-                    .transition().duration(DUR).delay(i * 100)
+                    .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 100)
                     .attr("fill-opacity", 0.45);
             });
 

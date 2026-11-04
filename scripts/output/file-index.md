@@ -41,6 +41,112 @@
 | site/index.html | W1136 | 改：版本面字面量（页脚链 token·副作用面） |
 
 
+## W1135 遗留清偿批 · d3 动效守卫表达式实参根治 + tooltip 死规则收口 + design 清单生成源根修 + 盲审 6 条处置（2026-11-05）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1135 | 本批实质/生成链连带 |
+| CHANGELOG.md | W1135 | 本批实质/生成链连带 |
+| HANDOVER.md | W1135 | 本批实质/生成链连带 |
+| README.md | W1135 | 本批实质/生成链连带 |
+| STRUCTURE.md | W1135 | 本批实质/生成链连带 |
+| assets/design/README.md | W1135 | 本批实质/生成链连带 |
+| assets/design/index.html | W1135 | 本批实质/生成链连带 |
+| assets/design/logo/README.md | W1135 | 本批实质/生成链连带 |
+| assets/design/screenshots/README.md | W1135 | 本批实质/生成链连带 |
+| assets/design/tools/build_assets.py | W1135 | 本批实质/生成链连带 |
+| docs/00-导读/W批次编号对账表.md | W1135 | 本批实质/生成链连带 |
+| docs/00-导读/文档规范.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/README.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/计划方案/T87-任务计划执行与经验沉淀报告-2026-11-05.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1135 | 本批实质/生成链连带 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1135 | 本批实质/生成链连带 |
+| docs/INDEX.md | W1135 | 本批实质/生成链连带 |
+| docs/agent/gates.md | W1135 | 本批实质/生成链连带 |
+| docs/agent/pitfalls.md | W1135 | 本批实质/生成链连带 |
+| pytest.ini | W1135 | 本批实质/生成链连带 |
+| scripts/INDEX.md | W1135 | 本批实质/生成链连带 |
+| scripts/check_design_asset_manifest.py | W1135 | 本批实质/生成链连带 |
+| scripts/check_motion_guard.py | W1135 | 本批实质/生成链连带 |
+| scripts/check_tooltip_spacing.py | W1135 | 本批实质/生成链连带 |
+| scripts/cross_line_baseline.json | W1135 | 本批实质/生成链连带 |
+| scripts/output/INDEX.md | W1135 | 本批实质/生成链连带 |
+| scripts/output/README.md | W1135 | 本批实质/生成链连带 |
+| scripts/output/_w1135_spec.json | W1135 | 本批实质/生成链连带 |
+| scripts/output/file-index.md | W1135 | 本批实质/生成链连带 |
+| scripts/output/stats-changelog.json | W1135 | 本批实质/生成链连带 |
+| scripts/output/stats-index.md | W1135 | 本批实质/生成链连带 |
+| scripts/output/stats.json | W1135 | 本批实质/生成链连带 |
+| scripts/output/tools-inventory.md | W1135 | 本批实质/生成链连带 |
+| scripts/verify_delivery.py | W1135 | 本批实质/生成链连带 |
+| site/dashboard.html | W1135 | 本批实质/生成链连带 |
+| site/data/81-hardships.html | W1135 | 本批实质/生成链连带 |
+| site/data/cave-estate.html | W1135 | 本批实质/生成链连带 |
+| site/data/chapter-stats.html | W1135 | 本批实质/生成链连带 |
+| site/data/character-appearance.html | W1135 | 本批实质/生成链连带 |
+| site/data/chart-design.html | W1135 | 本批实质/生成链连带 |
+| site/data/counterfactual.html | W1135 | 本批实质/生成链连带 |
+| site/data/cultural-misreading.html | W1135 | 本批实质/生成链连带 |
+| site/data/deconstruction.html | W1135 | 本批实质/生成链连带 |
+| site/data/emotional-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/data/ethics-consumption.html | W1135 | 本批实质/生成链连带 |
+| site/data/game-webnovel.html | W1135 | 本批实质/生成链连带 |
+| site/data/global-pattern.html | W1135 | 本批实质/生成链连带 |
+| site/data/hardship-difficulty-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/data/hardship-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/data/heaven-power-network.html | W1135 | 本批实质/生成链连带 |
+| site/data/journey-geo-semiotics.html | W1135 | 本批实质/生成链连带 |
+| site/data/journey-route.html | W1135 | 本批实质/生成链连带 |
+| site/data/journey-spacetime.html | W1135 | 本批实质/生成链连带 |
+| site/data/magic-system.html | W1135 | 本批实质/生成链连带 |
+| site/data/mbti-evolution.html | W1135 | 本批实质/生成链连带 |
+| site/data/methodology-matrix.html | W1135 | 本批实质/生成链连带 |
+| site/data/ming-political-thought-comparison.html | W1135 | 本批实质/生成链连带 |
+| site/data/monster-capability-radar.html | W1135 | 本批实质/生成链连带 |
+| site/data/monster-hierarchy-network.html | W1135 | 本批实质/生成链连带 |
+| site/data/narrative-experiment.html | W1135 | 本批实质/生成链连带 |
+| site/data/pilgrim-team-psychology-arc.html | W1135 | 本批实质/生成链连带 |
+| site/data/poetry-rhythm-analysis.html | W1135 | 本批实质/生成链连带 |
+| site/data/search.html | W1135 | 本批实质/生成链连带 |
+| site/data/social-media.html | W1135 | 本批实质/生成链连带 |
+| site/data/text-evolution.html | W1135 | 本批实质/生成链连带 |
+| site/data/underworld-power-network.html | W1135 | 本批实质/生成链连带 |
+| site/data/visual-art.html | W1135 | 本批实质/生成链连带 |
+| site/data/workplace.html | W1135 | 本批实质/生成链连带 |
+| site/en/cave-estate.html | W1135 | 本批实质/生成链连带 |
+| site/en/chapter-stats.html | W1135 | 本批实质/生成链连带 |
+| site/en/character-appearance.html | W1135 | 本批实质/生成链连带 |
+| site/en/chart-design.html | W1135 | 本批实质/生成链连带 |
+| site/en/counterfactual.html | W1135 | 本批实质/生成链连带 |
+| site/en/cultural-misreading.html | W1135 | 本批实质/生成链连带 |
+| site/en/deconstruction.html | W1135 | 本批实质/生成链连带 |
+| site/en/ethics-consumption.html | W1135 | 本批实质/生成链连带 |
+| site/en/game-webnovel.html | W1135 | 本批实质/生成链连带 |
+| site/en/global-pattern.html | W1135 | 本批实质/生成链连带 |
+| site/en/hardship-difficulty-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/en/hardship-heatmap.html | W1135 | 本批实质/生成链连带 |
+| site/en/journey-geo-semiotics.html | W1135 | 本批实质/生成链连带 |
+| site/en/journey-route.html | W1135 | 本批实质/生成链连带 |
+| site/en/journey-spacetime.html | W1135 | 本批实质/生成链连带 |
+| site/en/magic-system.html | W1135 | 本批实质/生成链连带 |
+| site/en/mbti-evolution.html | W1135 | 本批实质/生成链连带 |
+| site/en/methodology-matrix.html | W1135 | 本批实质/生成链连带 |
+| site/en/ming-political-thought-comparison.html | W1135 | 本批实质/生成链连带 |
+| site/en/monster-capability-radar.html | W1135 | 本批实质/生成链连带 |
+| site/en/narrative-experiment.html | W1135 | 本批实质/生成链连带 |
+| site/en/pilgrim-team-psychology-arc.html | W1135 | 本批实质/生成链连带 |
+| site/en/poetry-rhythm-analysis.html | W1135 | 本批实质/生成链连带 |
+| site/en/search.html | W1135 | 本批实质/生成链连带 |
+| site/en/social-media.html | W1135 | 本批实质/生成链连带 |
+| site/en/text-evolution.html | W1135 | 本批实质/生成链连带 |
+| site/en/visual-art.html | W1135 | 本批实质/生成链连带 |
+| site/en/workplace.html | W1135 | 本批实质/生成链连带 |
+| tests/unit/INDEX.md | W1135 | 本批实质/生成链连带 |
+| tests/unit/README.md | W1135 | 本批实质/生成链连带 |
+| tests/unit/test_w1135_gates.py | W1135 | 本批实质/生成链连带 |
+
+
 ## W1134 前端质感 P0 批（2026-11-04）
 
 | 文件 | W | 说明 |

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zf6kb5Mur3vhtvsEMEu+K4s58dJNQ9fVscSGXX6pOU4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-idh1f7hT4JMXSNNS8RQNmVQsDksY2awDCMqOKlbOX/o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>社媒人设 · MBTI 人格图谱 · 详解西游记</title>
@@ -2272,7 +2272,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("class", "radar-poly poly-" + idx);
 
             poly.transition()
-                .delay(200 + idx * 120)
+                .delay(MOYUN_RM?0:200 + idx * 120)
                 .duration(MOYUN_RM?0:500)
                 .style("opacity", 1);
 
@@ -2288,7 +2288,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                         .attr("stroke-width", 1.5)
                         .style("opacity", 0)
                         .transition()
-                        .delay(500 + idx * 120)
+                        .delay(MOYUN_RM?0:500 + idx * 120)
                         .duration(MOYUN_RM?0:300)
                         .style("opacity", 1);
                 }
@@ -2424,7 +2424,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("class", "fit-bar");
 
             bar.transition()
-                .delay(i * 100).duration(MOYUN_RM?0:600)
+                .delay(MOYUN_RM?0:i * 100).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(val)));
 
@@ -2439,7 +2439,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(m.mbti + " " + val + "/10")
-                .transition().delay(i * 100 + 600).duration(MOYUN_RM?0:400)
+                .transition().delay(MOYUN_RM?0:i * 100 + 600).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // role 标注（条右侧）
@@ -2451,7 +2451,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text(m.role)
-                .transition().delay(i * 100 + 700).duration(MOYUN_RM?0:400)
+                .transition().delay(MOYUN_RM?0:i * 100 + 700).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 交互

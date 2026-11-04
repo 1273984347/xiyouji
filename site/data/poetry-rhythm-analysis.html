@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-QZ8Yjh+EgnMbg4FenyOmy25VNQT9QzgWxJFp92CxbYE=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CAGIXk+beujjy3e2KljefcNgz79bKf1fim+oc0EnW4o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>诗词韵律分析图谱 · 详解西游记</title>
@@ -1751,7 +1751,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .style("top", (event.clientY - rect.top + 14) + "px");
             })
             .on("mouseout", function() { tip.style("opacity", 0); })
-            .transition().duration(DUR).style("opacity", 1);
+            .transition().duration(MOYUN_RM?0:DUR).style("opacity", 1);
 
         // 标签：仅当格子足够大，否则依赖图例 + hover
         const showLbl = d => ((d.x1 - d.x0) > 48 && (d.y1 - d.y0) > 28);
@@ -1843,7 +1843,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                         d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5);
                         tip.style("opacity", 0);
                     })
-                    .transition().duration(DUR).delay(ri * 60 + ti * 30)
+                    .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:ri * 60 + ti * 30)
                     .style("opacity", 1);
 
                 g.append("text")
@@ -1853,7 +1853,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .style("fill", val > 55 ? "#fff" : "#23201A")
                     .style("opacity", 0)
                     .text(val + "%")
-                    .transition().duration(DUR).delay(ri * 60 + ti * 30 + 200)
+                    .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:ri * 60 + ti * 30 + 200)
                     .style("opacity", 1);
             });
         });
@@ -1940,7 +1940,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
                 tip.style("opacity", 0);
             })
-            .transition().duration(DUR).delay((d, i) => i * 40)
+            .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:((d, i) => i * 40))
             .attr("y", d => y(d.count))
             .attr("height", d => innerH - y(d.count));
 
@@ -1955,7 +1955,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .style("font-size", "0.82rem").style("font-weight", "700").style("fill", "var(--chart-1)")
             .style("opacity", 0)
             .text(d => d.count)
-            .transition().duration(DUR).delay((d, i) => i * 40 + 250)
+            .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:((d, i) => i * 40 + 250))
             .style("opacity", (d, i) => i <= segIdx ? 1 : 0.4);
 
         // 进度
@@ -2087,7 +2087,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
                     tip.style("opacity", 0);
                 })
-                .transition().duration(DUR).delay((d, i) => i * 50 + li * 120)
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:((d, i) => i * 50 + li * 120))
                 .attr("y", d => y(d[1]))
                 .attr("height", d => y(d[0]) - y(d[1]));
         });
@@ -2148,21 +2148,21 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("fill", PIE_COLORS[i % PIE_COLORS.length]).attr("opacity", 0.55)
                 .style("stroke", "var(--ink)").attr("stroke-width", 1)
                 .style("opacity", 0)
-                .transition().duration(DUR).delay(i * 80)
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80)
                 .style("opacity", 0.55);
             // 中位线
             g.append("line").attr("x1", cx - boxW / 2).attr("x2", cx + boxW / 2)
                 .attr("y1", y(d.median)).attr("y2", y(d.median))
                 .style("stroke", "var(--chart-1)").attr("stroke-width", 2.5)
                 .style("opacity", 0)
-                .transition().duration(DUR).delay(i * 80 + 200).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80 + 200).style("opacity", 1);
             // 中位数标签
             g.append("text").attr("x", cx).attr("y", y(d.median) - 4)
                 .attr("text-anchor", "middle")
                 .style("font-size", "0.72rem").style("font-weight", "700").style("fill", "var(--chart-1)")
                 .style("opacity", 0)
                 .text(d.median)
-                .transition().duration(DUR).delay(i * 80 + 300).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:DUR).delay(MOYUN_RM?0:i * 80 + 300).style("opacity", 1);
         });
     }
 

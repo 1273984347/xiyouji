@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cXDGpQfGO3QtjkcBGy2xCE4PcMWI74FNrbMWRgcZa5c=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lFDt2k6cUszhKaylFUFrKGBTpapehiPDLZGHv3ArG1A=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事实验 · 桌游与卡牌机制 · 详解西游记</title>
@@ -2598,7 +2598,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr("points", `${ax - 10},${cy - 6} ${ax - 10},${cy + 6} ${ax - 2},${cy}`)
                     .attr("fill", "var(--accent)")
                     .style("opacity", 0)
-                    .transition().duration(MOYUN_RM?0:250).delay(400 + i * 200).duration(MOYUN_RM?0:400)
+                    .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:400 + i * 200).duration(MOYUN_RM?0:400)
                     .style("opacity", 1);
             }
         });
@@ -2881,7 +2881,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("opacity", 0.5)
                 .attr("stroke-dasharray", "6,4")
                 .transition().duration(MOYUN_RM?0:250)
-                .delay(300 + i * 200)
+                .delay(MOYUN_RM?0:300 + i * 200)
                 .duration(MOYUN_RM?0:600)
                 .attr("x2", x2)
                 .attr("y2", y2);
@@ -2895,7 +2895,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr("cy", y1)
                     .style("opacity", 0)
                     .transition().duration(MOYUN_RM?0:250)
-                    .delay(1200 + i * 200 + k * 600)
+                    .delay(MOYUN_RM?0:1200 + i * 200 + k * 600)
                     .duration(MOYUN_RM?0:600)
                     .ease(d3.easeCubicInOut)
                     .style("opacity", 0.8)
@@ -2930,7 +2930,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("filter", "drop-shadow(0 4px 12px rgba(60, 40, 20, 0.2))");
 
             circ.transition().duration(MOYUN_RM?0:250)
-                .delay(i * 150)
+                .delay(MOYUN_RM?0:i * 150)
                 .duration(MOYUN_RM?0:600)
                 .ease(d3.easeBackOut)
                 .attr("r", r);
@@ -2944,7 +2944,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-weight", "600")
                 .style("opacity", 0)
                 .text(g.name)
-                .transition().duration(MOYUN_RM?0:250).delay(i * 150 + 400).duration(MOYUN_RM?0:400)
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 150 + 400).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 卡组英文名
@@ -2957,7 +2957,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-family", "JetBrains Mono, monospace")
                 .style("opacity", 0)
                 .text(g.name_en)
-                .transition().duration(MOYUN_RM?0:250).delay(i * 150 + 500).duration(MOYUN_RM?0:400)
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 150 + 500).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 卡数（大字）
@@ -2970,7 +2970,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-family", "JetBrains Mono, monospace")
                 .style("opacity", 0)
                 .text(g.count)
-                .transition().duration(MOYUN_RM?0:250).delay(i * 150 + 600).duration(MOYUN_RM?0:400)
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 150 + 600).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 标签
@@ -2981,7 +2981,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-size", "0.7rem")
                 .style("opacity", 0)
                 .text("张卡牌")
-                .transition().duration(MOYUN_RM?0:250).delay(i * 150 + 700).duration(MOYUN_RM?0:400)
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:i * 150 + 700).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 交互
