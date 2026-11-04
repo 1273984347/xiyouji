@@ -151,18 +151,58 @@ def _locate_cl_section(s, batch):
     return start, end
 
 
-def _locate_handover_milestone(s, batch):
-    """定位交接文档「一、当前进度」段内本批号里程碑块的区间。
+def _handover_progress_bounds(s):
+    """交接文档「一、当前进度」段的区间（起点=段标题行首·终点=下一 '## ' 章节标题行首）。
 
-    W1122（根修 W1117 R-01）：级联插入型面的幂等定位器。
+    W1122（根修 W1117 R-02）：块区间必须**有界于进度段**——原实现对链尾块返回
+    end=len(s) ⇒ 「不一致替换」会把进度段之后的全部文档内容吞掉。
     """
-    m = re.search(r"^- \*\*(?:v[\d.]+ )?%s\b" % re.escape(batch), s, re.M)
-    if not m:
+    h = s.find("## 一、当前进度")
+    if h == -1:
         return None
-    start = m.start()
-    nxt = re.search(r"^- \*\*", s[m.end():], re.M)
-    end = m.end() + nxt.start() if nxt else len(s)
-    return start, end
+    nxt = re.search(r"^## ", s[h + 1:], re.M)
+    end = h + 1 + nxt.start() if nxt else len(s)
+    return h, end
+
+
+def _handover_milestone_blocks(s):
+    """交接文档「一、当前进度」段内的里程碑块链（文档序·区间有界）。
+
+    W1122（根修 W1117 R-02）：里程碑块链是**按批号降序**（最新在前）的有序面，
+    低号批落段不得占链首（第 31 门禁 C2「交接头链链首 ≡ CHANGELOG 顶段」判红）。
+    返回 [(批号:int, 起点:int, 终点:int), ...]：
+      · 块终点 = 下一块起点；
+      · 链尾块终点 = 进度段内「历史概要」指针行首（若有）或进度段末（**不越段**）。
+    """
+    bounds = _handover_progress_bounds(s)
+    if bounds is None:
+        return []
+    h, end = bounds
+    seg = s[h:end]
+    heads = list(re.finditer(r"^- \*\*(?:v[\d.]+ )?(W\d+)\b", seg, re.M))
+    blocks = []
+    for i, m in enumerate(heads):
+        st = h + m.start()
+        if i + 1 < len(heads):
+            en = h + heads[i + 1].start()
+        else:
+            pm = re.search(r"^> 历史概要（W\d+ 及更早）的详细记录见", seg[m.end():], re.M)
+            en = h + m.end() + pm.start() if pm else end
+        blocks.append((int(m.group(1)[1:]), st, en))
+    return blocks
+
+
+def _locate_handover_milestone(s, batch):
+    """定位交接文档「一、当前进度」段内本批号里程碑块的区间（有界）。
+
+    W1122（根修 W1117 R-01 + R-02）：级联插入型面的幂等定位器；
+    区间**有界于进度段**（原实现对链尾块返回 end=len(s) ⇒ 替换时会吞掉后文）。
+    """
+    bn = int(re.sub(r"\D", "", batch))
+    for num, st, en in _handover_milestone_blocks(s):
+        if num == bn:
+            return st, en
+    return None
 
 
 def _face_changelog(ctx):
@@ -336,6 +376,49 @@ def _upsert_chain_entry(chain, entry, batch, sep):
     return entry + sep + chain, "inserted"
 
 
+def _upsert_handover_milestone(s, build, batch, nl):
+    """交接文档「一、当前进度」里程碑块的幂等 upsert（按批号序·最新在前）。
+
+    W1122（根修 W1117 R-02 + 低号批落段）：里程碑块此前**无条件插到链首** ⇒
+    低号批（W1122 < 现役 W1123）占据链首 ⇒ 第 31 门禁 C2
+    「交接文档头链链首 ≡ CHANGELOG 顶段」判红（本地与 CI 同红·真红非分歧）。
+    本函数为里程碑块的**单一事实源**（与头尾链 _upsert_chain_entry 同族语义）：
+      · 不存在 ⇒ 按批号序插入（插到链上第一个更小号块之前；无更小号 ⇒ 插到链尾）
+      · 已存在且一致 ⇒ 零变化；占链首而链上有更高号 ⇒ 移到按序位（moved）
+      · 已存在但不一致 ⇒ 替换（区间有界于进度段·不吞后文）
+    返回 (新 s, 状态)；状态取值 inserted / unchanged / moved / replaced。
+    """
+    bn = int(re.sub(r"\D", "", batch))
+    blocks = _handover_milestone_blocks(s)
+    mspan = _locate_handover_milestone(s, batch)
+    if mspan is None:
+        lower = [b for b in blocks if b[0] < bn]
+        if lower:
+            pos = lower[0][1]
+        else:
+            bounds = _handover_progress_bounds(s)
+            pos = blocks[-1][2] if blocks else (bounds[1] if bounds else len(s))
+            if pos > 0 and not s[:pos].endswith(nl):
+                s = s[:pos] + nl + s[pos:]
+                pos += len(nl)
+        return s[:pos] + build + s[pos:], "inserted"
+    cur = s[mspan[0]:mspan[1]]
+    if cur.strip() != build.strip():
+        return s[:mspan[0]] + build + s[mspan[1]:], "replaced"
+    others = [b for b in blocks if b[0] != bn]
+    higher = [b for b in others if b[0] > bn]
+    if blocks and blocks[0][0] == bn and higher:
+        rest = s[:mspan[0]] + s[mspan[1]:]
+        blocks2 = _handover_milestone_blocks(rest)
+        lower2 = [b for b in blocks2 if b[0] < bn]
+        if lower2:
+            pos = lower2[0][1]
+        else:
+            pos = blocks2[-1][2] if blocks2 else mspan[0]
+        return rest[:pos] + cur + rest[pos:], "moved"
+    return s, "unchanged"
+
+
 def _face_handover(ctx):
     """交接文档面：头尾链/进度标题/里程碑块/HEAD 句全量改写与结构断言。"""
     # ---------- 交接文档 ----------
@@ -384,17 +467,21 @@ def _face_handover(ctx):
     # 标题行尾 \r\n 被撕成裸 \r（里程碑块插到 \r 与 \n 之间）+ 块尾多出裸 \n，交接文档混行尾
     # （W706 防线在下批 dry-run 正确拦截·fail-closed 实证）。LF 工作树 nl 单字符故 +1 恒正确，
     # 此前批次均运行于 LF 工作树所以未暴露。+len(nl) 双形态恒公。
-    at = s.rfind(nl, 0, fb.start()) + len(nl)
+    # W1122（根修 W1117 R-02）：不再以「链首块行首」为插入点——低号批落段会占据链首
+    # （第 31 门禁 C2「交接文档头链链首 ≡ CHANGELOG 顶段」判红·本地与 CI 同红）；
+    # 插入位改由 _upsert_handover_milestone 按批号序判定（含位置校正）。
     # W1122（根修 W1117 R-01）：里程碑块此前**无条件插入** ⇒ 重跑级联静默重复插块；
     # 且里程碑滚动（淘汰最老块）是**有状态**的 ⇒ 重跑会再淘汰一块（信息丢失）。
     # 本版：本批块已存在 ⇒ 只做「一致则零变化·不一致则替换」；**跳过滚动**（滚动已在首次执行时完成）。
+    # W1122（根修 W1117 R-01 + R-02）：里程碑块此前**无条件插入** ⇒ 重跑级联静默重复插块；
+    # 且里程碑滚动（淘汰最老块）是**有状态**的 ⇒ 重跑会再淘汰一块（信息丢失）。
+    # 本版：统一走单一事实源 _upsert_handover_milestone（按批号序·含位置校正）；
+    # **仅首次插入**才执行滚动（滚动已在首次执行时完成）。
     _mbuild = ctx.spec["milestone_block"].replace("\n", nl) + nl
-    _mspan = _locate_handover_milestone(s, ctx.batch)
-    if _mspan is not None:
-        if s[_mspan[0]:_mspan[1]].strip() != _mbuild.strip():
-            s = s[:_mspan[0]] + _mbuild + s[_mspan[1]:]
-    else:
-        s = s[:at] + _mbuild + s[at:]
+    s, _mst = _upsert_handover_milestone(s, _mbuild, ctx.batch, nl)
+    if _mst != "unchanged":
+        print("[HANDOVER] 里程碑块：%s" % _mst)
+    if _mst == "inserted":
         s = _handover_rotate_oldest(s, ctx, nl, h1pos)
     hs = re.search(r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^）]*；详见 CHANGELOG）", s)
     assert hs, "未找到当前 HEAD 句"
@@ -533,27 +620,45 @@ def _face_footers(ctx):
 _AGENTS_TAIL = "。如与上述权威文档冲突，以权威文档为准。*"
 
 
-def _locate_agents_note(s, batch):
-    """定位 AGENTS 脚注行内**本批号条目**的区间（起点=条目日期 token 起点·终点=条目文本末尾）。
+_AGENTS_ENTRY_TOKEN_RE = re.compile(
+    r"(?:20\d{2}-\d{2}-\d{2}|二〇[一二三四五六七八九〇零十廿卅]+年"
+    r"[一二三四五六七八九〇零十廿卅]+月[一二三四五六七八九〇零十廿卅]+日)"
+    r"（(?:v[\d.]+ )?W(\d{3,4})）"
+)
 
-    W1122（根修 W1117 R-01）：脚注条目此前**无条件追加** ⇒ 重跑级联会静默重复插入同号条目。
+
+def _locate_agents_note(s, batch):
+    """定位 AGENTS 脚注行内**本批号条目**的区间（列表·按出现顺序）。
+
+    W1122（根修 W1117 R-01 + R-03）：
+      · 原实现按**全文首个** `（W###）` 定位 ⇒ 正文提及批号时会误定位到非脚注位置。
+      · 原实现用「下一个『；』」界定条目终点 ⇒ **条目正文本身含分号时区间被截断**
+        （实证 W1122 条目含「只补真缺的那一面；顺带回填…」⇒ 终点落在内部分号）
+        ⇒ 每次重跑判定「内容不一致」⇒ 替换 ⇒ 残留尾巴 ⇒ **同号条目无限累积**
+        （PR #130 实测脚注里累积到 4 份）。
+      · 本版：限定在脚注行（`*本文件由` 之后）内查找；按**下一个条目 token** 定界
+        （条目正文可含任意分号）；返回**全部**同号副本（供去重）。
+    返回 [(start, end), ...]；无则 []。
     """
-    m = re.search(r"（%s）" % re.escape(batch), s)
-    if not m:
-        return None
-    _dm = list(re.finditer(
-        r"(?:20\d{2}-\d{2}-\d{2}|二〇[一二三四五六七八九〇零十廿卅]+年"
-        r"[一二三四五六七八九〇零十廿卅]+月[一二三四五六七八九〇零十廿卅]+日)", s[:m.start()]))
-    start = _dm[-1].start() if _dm else m.start()
-    _tail_i = s.find(_AGENTS_TAIL)
-    _nxt = s.find("；", m.end())
-    if _nxt != -1 and (_tail_i == -1 or _nxt < _tail_i):
-        end = _nxt
-    elif _tail_i != -1:
-        end = _tail_i + 1          # 含条末句号（tail 的前导「。」）
-    else:
-        end = len(s)
-    return start, end
+    _fs = s.find("*本文件由")
+    if _fs == -1:
+        return []
+    _bnum = str(batch).lstrip("Ww")
+    _toks = list(_AGENTS_ENTRY_TOKEN_RE.finditer(s, _fs))
+    spans = []
+    for i, t in enumerate(_toks):
+        if t.group(1) != _bnum:
+            continue
+        start = t.start()
+        if i + 1 < len(_toks):
+            end = _toks[i + 1].start()
+            while end > t.end() and s[end - 1] == "；":
+                end -= 1
+        else:
+            _tail_i = s.find(_AGENTS_TAIL)
+            end = (_tail_i + 1) if _tail_i != -1 else len(s)
+        spans.append((start, end))
+    return spans
 
 
 def _locate_handover_head_entry(s, entry):
@@ -600,9 +705,18 @@ def _face_agents(ctx):
     _note_text = ctx.spec["agents_note"].rstrip("。")  # W972 修：尾句号不剥会拼出「。。」
     # W1122（根修 W1117 R-01）：脚注条目此前**无条件追加** ⇒ 重跑级联静默重复插同号条目。
     # 本版：已存在本批条目 ⇒ 内容一致则零变化·不一致则替换（可重跑级联修正）。
-    _span = _locate_agents_note(s, ctx.batch)
-    if _span is not None:
-        _st, _en = _span
+    _spans = _locate_agents_note(s, ctx.batch)
+    if _spans:
+        # W1122（根修 W1117 R-03）：先删**同号重复副本**（从后往前删·区间稳定），
+        # 再校准首个副本内容（重复副本源于旧实现的分号截断缺陷·本版一并订正）。
+        for _st2, _en2 in reversed(_spans[1:]):
+            _cut = _st2
+            _semi = s.rfind("；", 0, _st2)
+            if _semi != -1:
+                _cut = _semi
+            s = s[:_cut] + s[_en2:]
+        _spans = _locate_agents_note(s, ctx.batch)
+        _st, _en = _spans[0]
         _entry_new = _note_text + "。"
         if s[_st:_en].strip() != _entry_new.strip():
             s = s[:_st] + _entry_new + s[_en:]
