@@ -1,3 +1,65 @@
+### W1120（2026-11-04）：幂等段重建独立入口 + 体积第二阈值接入 + T68 事实订正
+
+**本批要点**（幂等段重建独立入口 + 体积第二阈值接入 + T68 事实订正 + 台账回填·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 256 条不变 ⇒ 不占任何 E-NN）：
+
+① **幂等段重建独立入口**（scripts/rebuild_section.py）：段体一律由 spec 经 backfill_changelog 的块生成函数产出（单一事实源·只引用不复制）· 只动本批段（历史段逐段比对断言·违者零落盘）· 内容一致即零变化（二次执行零 diff）· 两面同 W 号下界对齐检查（不对齐即拒）· 行尾按原文件主导行尾归一写回· **不接收官链主链**（收官链属对方 W1119 批已动面 ⇒ 本批不双改·零同文件冲突）。
+
+② **体积第二阈值接入**（check_doc_size_budget.py 新增 C8 判据）：段数窗口只管条数管不住单条超长（实测段面曾达 390.8KB / 109 段·段数在窗内而体积已超 256KiB 约 1.5 倍）⇒ 正本窗口改为**双阈值先到者为准**：段数 ≤ 110 且体积字节 ≤ 262144（台账为数据行 ≤ 60 且字节 ≤ 262144）· 字节上限**只引用** batch_closeout 顶层 MAX_DOC_BYTES（不复制·不新建中立模块⇒持有方零改动·省一组 CI）· 台账行窗口同源引用 LEDGER_WINDOW · 同源引用失败即 fail-closed 判红（体积判据不可执行不得静默放行）。
+
+③ **结构档等价拆分**（check_doc_size_budget.collect）：本批改动该文件后 ruff 宽档结构阈值即扫到其既有复杂度超标（复杂度 21 > 15 / 分支 22 > 16）⇒ 按仓内先例（W1114 结构档根因拆分）把 HANDOVER 与 AGENTS 两面判据与 C7 版本行锚尾检查抽为三个私有函数·**判据与文案逐字不变**（既有 12 例单测全绿即等价性证据）。
+
+④ **T68 事实订正**（新增 §2.4·不改 §6.1 本体）：W1117 登记的 R-05（_w1115_spec.json 含裸控制字符致 JSON 不可解析）在当前基线**不复现**（末次改动 b5b64423·json.load 正常）⇒ 撤回修复动作·保留 W1117 已落地的防御性容错·现状为准结案。
+
+⑤ **台账回填与腾窗**：W1118 行与 W1119 行状态与 hash 列仍为待回填（git 反填算出新指纹 403fcdf6953b 与 572a98b2d681·其中 403fcdf6953b 与对方 W1119 批声称的 verify 值一致）⇒ 本批并入回填（省一次 PR）· 台账腾窗迁 W1059 行（正本 60 数据行 = 窗口 60）。
+
+⑥ **自证 10 例**（字节阈值 5 + 重建 5：边界 / 缺件 fail-closed / 双阈值独立 / 现网在窗 / 降序位插入 / 幂等 / 只动本批段 / 篡改可检出 / 下界失配可检出）。
+
+**文件**：
+-.github/workflows/README.md
+-AGENTS.md
+-CHANGELOG.md
+-CITATION.cff
+-HANDOVER.md
+-README.md
+-STRUCTURE.md
+-archive/docs/AGENTS-ARCHIVE.md
+-archive/docs/W批次编号对账表-ARCHIVE.md
+-docs/00-导读/W批次编号对账表.md
+-docs/00-导读/文档规范.md
+-docs/00-导读/项目说明.md
+-docs/11-方案报告/README.md
+-docs/11-方案报告/计划方案/T68-任务计划执行与经验沉淀报告-2026-11-04.md
+-docs/11-方案报告/计划方案/T71-任务计划执行与经验沉淀报告-2026-11-04.md
+-docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md
+-docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
+-docs/INDEX.md
+-pytest.ini
+-scripts/INDEX.md
+-scripts/check_doc_size_budget.py
+-scripts/output/INDEX.md
+-scripts/output/README.md
+-scripts/output/_cascade_files_W1120.txt
+-scripts/output/_vermilion_solid_cache.json
+-scripts/output/_w1120_spec.json
+-scripts/output/file-index.md
+-scripts/output/stats-changelog.json
+-scripts/output/stats-index.md
+-scripts/output/stats.json
+-scripts/output/tools-inventory.md
+-scripts/rebuild_section.py
+-site/data/cross-time-danmaku.html
+-site/data/search.html
+-site/data/tag-cloud.html
+-site/dukou-engine.html
+-site/en/search.html
+-site/index.html
+-tests/unit/INDEX.md
+-tests/unit/README.md
+-tests/unit/test_w1120_size_threshold_and_rebuild.py
+
+**认领登记 W1120**（主仓共享区占号 session=session_237a5e53-…·preflight touches 交集检查通过·与对方 W1119 零同文件冲突）。
+
+**验证**：全量 pytest 1241 passed / 3 skipped / 0 failed · 新增自证 10 例 + 既有 12 例全绿 · 体积门禁字节双阈值三面 0 FAIL · 门禁 62 段 0 FAIL（CI 同档 full）。
 ### W1119（2026-11-04）：CI 成本治理 + 档 3 第二批 + 归档规则工具化
 
 **本批要点**（CI 成本治理 + 档 3 第二批 + 归档规则工具化·不新增门禁槽 ⇒ 门禁 62 段不变·坑表 242 → 256 条）：① **档 3 第二批施工**（relationships / narrative-experiment / jurisprudence 中英各一对）：实测三对页的图色主体走 D3 .attr() 与 canvas（SVG presentation attribute 与 Canvas fillStyle 均不支持 var()）且带 e-track-exempt chart-data-colors 门禁豁免登记 ⇒ 只改安全位（style 属性 + CSS 声明）共 40 行；首轮替换误改 6 处暗色补偿规则的选择器 LHS ⇒ 已按 HEAD 原文逐行复原（残留越界选择器行 = 0·补偿表与指纹零改动）。② **盘点结论**：全站剩余调色板色 1320 处 / 139 页（W1113 三对已归零）；排除 181 页带 chart-data-colors 豁免登记的页后，可安全令牌化面 **每页 <= 2 处** ⇒ 档 3 可施工对象已近耗尽，后续需先改消费方式（属独立工具批）。③ **归档规则工具化**：archive_segments 增 --max-bytes / --chunk 与两面同 W 号下界对齐 + 迁完断言；A3 编号规则行断言由全文计数收紧为留存前缀内计数（批量迁移下原口径恒假红）；batch_closeout 增腾窗步并**置于 precheck 之前**（precheck fail-closed ⇒ 腾窗排其后即死路径）；顺序锁单测同步（test_w1102 新增 archive 步断言·test_w1114 首步断言改为 archive 并留痕）。④ **两面腾窗**：CHANGELOG 与 file-index 各迁出 W996 段（留存 109）+ 台账迁出 W1058 行 + W1119 认领行 ⇒ 台账 60/60；CHANGELOG 段位由 109 段（390.8KB）经体积模式降至 60 段（<= 256KiB）；⑤ **经验同步**：坑表 E-159（反斜杠字面量须转义）+ E-146 补注（--force-with-lease 例外）+ 计数链 12 处同步（255 → 256）+ CHANGELOG 孤立 CR 归一。
@@ -1223,7 +1285,7 @@ probe_error 0 页 · 影子分层报数结构性与缺口分离清晰。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1119），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1120），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
