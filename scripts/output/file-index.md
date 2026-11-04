@@ -30,6 +30,44 @@
 | site/data/search.html | W1118 | 本批工具/产物 |
 | site/en/search.html | W1118 | 本批工具/产物 |
 
+## W1117 版本面幂等修复与编号规则并入版本面（2026-11-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W1117 | 本批版段 + 编号规则段上限（只升不降） |
+| STRUCTURE.md | W1117 | 本批生成物（报告类文档计数标记 137 -> 138） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1117 | 本批段面腾窗迁出段（W995） |
+| archive/docs/file-index-ARCHIVE.md | W1117 | 本批段面腾窗迁出段（W995） |
+| docs/00-导读/W批次编号对账表.md | W1117 | 本批认领登记行 |
+| docs/11-方案报告/README.md | W1117 | 本批登记行 |
+| docs/11-方案报告/计划方案/T65-任务计划执行与经验沉淀报告-2026-11-03.md | W1117 | 本批 §2.6 订正小节 |
+| docs/11-方案报告/计划方案/T68-任务计划执行与经验沉淀报告-2026-11-04.md | W1117 | 本批交付报告 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1117 | 本批生成物（报告类文档计数标记） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1117 | 本批生成物（报告类文档计数标记） |
+| docs/INDEX.md | W1117 | 本批生成物（文档索引） |
+| pytest.ini | W1117 | 本批生成物（pytest collected 标记对账） |
+| scripts/backfill_changelog.py | W1117 | 本批工具改动（完整性检查移到已立段判定之后 + 坏件容错） |
+| scripts/batch_cascade.py | W1117 | 本批工具改动（级联改调共享实现） |
+| scripts/batch_closeout.py | W1117 | 本批工具改动（index 步后置 + 内容阶段抽取） |
+| scripts/check_commit_scope.py | W1117 | 本批工具改动（归属判定支持新增段非顶位） |
+| scripts/output/INDEX.md | W1117 | 本批生成物（脚本索引） |
+| scripts/output/README.md | W1117 | 本批生成物（脚本目录索引） |
+| scripts/output/_w1117_spec.json | W1117 | 本批 spec |
+| scripts/output/file-index.md | W1117 | 本批 file-index 段 + 段面腾窗 |
+| scripts/output/stats-changelog.json | W1117 | 本批生成物（统计） |
+| scripts/output/_vermilion_solid_cache.json | W1117 | 本批生成物（朱砂实底扫描缓存·搜索页变更后刷新） |
+| scripts/output/stats-index.md | W1117 | 本批生成物（统计） |
+| scripts/output/stats.json | W1117 | 本批生成物（统计） |
+| scripts/output/tools-inventory.md | W1117 | 本批生成物（工具清单） |
+| scripts/version_surface.py | W1117 | 本批工具改动（幂等 + 批次级单调守卫） |
+| site/data/search.html | W1117 | 本批生成物（搜索索引） |
+| site/en/search.html | W1117 | 本批生成物（搜索索引） |
+| tests/unit/INDEX.md | W1117 | 本批生成物（测试索引） |
+| tests/unit/README.md | W1117 | 本批生成物（测试目录索引） |
+| tests/unit/test_commit_scope.py | W1117 | 本批归属判定新例（追加·未改他人既有断言） |
+| tests/unit/test_w1102_batch_closeout.py | W1117 | 本批行为锁更新 |
+| tests/unit/test_w1117_version_surface_idempotence.py | W1117 | 本批新增自证 9 例 |
+
 ## W1116 收官链自检闸（2026-11-04）
 
 | 文件 | W | 说明 |
@@ -5440,33 +5478,4 @@
 | scripts/output/file-index.md | W996 | W996 段插入
 | scripts/output/_w996_spec.json | W996 | 本批级联 spec
 | scripts/output/_cascade_files_W996.txt | W996 | 级联落盘清单
-
-## W995 tier2 按W段拆分批（2026-10-28）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| archive/docs/CHANGELOG-ARCHIVE-tier2.md | W995 | 拆分：1044KB→746KB（W001-W399·210 段留存·范围件 W400-W559 抽出）
-| archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md | W995 | 新建范围件（W400-W559·144 段 299KB·范围命名约定首件）
-| scripts/archive_tier2.py | W995 | 追加逻辑升级：容量判断（容器+迁出 >1MB → 自动开范围命名新件·合规头部生成）+ LIMIT 常量
-| scripts/check_archive_health.py | W995 | T1b 升格：tier2 破线从登记观察升为 problem（拆分约定后可执行）+ glob 扩范围件 + run(prefix) 参数
-| scripts/batch_cascade.py | W995 | 收官提示位扩展（W994 延后件·W992 校准提交后落）：[ARCHIVE] 健康行 + [TMPE] 上次清理活动日期（独立尾部块）
-| scripts/verify_delivery.py | W995 | ARCHIVE_DOCS 登记 +2（file-index-ARCHIVE-tier2.md·CHANGELOG-ARCHIVE-tier2-W400-W559.md·§11.2 tier2 须登记条款）
-| archive/README.md | W995 | 台账 2 行（范围件/file-index-tier2）+ 结构树补范围件
-| docs/00-导读/W批次编号对账表.md | W995 | W995 认领行与收官回填
-| CHANGELOG.md | W995 | W995 段
-| HANDOVER.md | W995 | 级联头尾链与里程碑块
-| README.md | W995 | 当前批次版本行
-| STRUCTURE.md | W995 | 当前批次版本行
-| docs/00-导读/项目说明.md | W995 | 当前批次版本行
-| .github/workflows/README.md | W995 | 工作流层版本面推进 W995
-| site/index.html | W995 | 页脚批次链插入 W995
-| site/data/cross-time-danmaku.html | W995 | 页脚批次链插入 W995
-| site/data/tag-cloud.html | W995 | 页脚批次链插入 W995
-| site/dukou-engine.html | W995 | 页脚批次链插入 W995
-| AGENTS.md | W995 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W995 | 脚注滚动迁入的最老条目
-| CITATION.cff | W995 | version 同步为 W995
-| scripts/output/file-index.md | W995 | W995 段插入
-| scripts/output/_w995_spec.json | W995 | 本批级联 spec（补建）
-| scripts/output/_cascade_files_W995.txt | W995 | 级联落盘清单
 

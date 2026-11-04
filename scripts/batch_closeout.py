@@ -25,9 +25,9 @@ STEPS = [
     ('selfref',    'CSS 变量自引用体检（引用第 57 槽既有判据·只引用不复制）'),
     ('add',        'git add 本批改动（生成器按索引收集·须先 add）'),
     ('refresh',    'gen_folder_docs --refresh（迭代至收敛）'),
-    ('index',      '搜索索引 + 文档索引'),
     ('stats',      'stats.py --w <批号>'),
     ('versions',   '版本面推进（跨文件字面量·幂等·只引用 version_surface）'),
+    ('index',      '搜索索引 + 文档索引（**须在 versions 之后**：版本面推进会改 README/STRUCTURE/项目说明等 docs 条目·索引早于推进则内嵌索引陈旧·W1117 修）'),
     ('docnums',    '文案数字 ↔ 证据件对表闸（清单驱动·读最终产物·W1116）'),
     ('regsurface', '登记面一致性闸（六项·W1116）'),
     ('csp',        'generate_csp（**csp/cspcheck 仍为末两步**：前面步骤会改内联脚本）'),
@@ -327,6 +327,25 @@ def _run_cspcheck():
     return True
 
 
+def _run_content_stage(a, batch):
+    """内容生成段：refresh -> stats -> versions -> index（W1117 抽函数·降 main 复杂度）。
+
+    顺序要点（W1117 实测修）：**index 必须在 versions 之后**——版本面推进会改
+    README / STRUCTURE / 项目说明 等 docs 条目，索引若早于推进生成 ⇒ 内嵌索引不含推进后的内容
+    ⇒ 第 46 槽「搜索索引新鲜度」判红（字段漂移 + 内嵌索引陈旧）。
+    """
+    good, logs = refresh_until_stable()
+    for line in logs:
+        print('[refresh] ' + line)
+    if not good:
+        return False
+    if not _run_stats(batch):
+        return False
+    if not _run_versions(a.spec, batch):
+        return False
+    return _run_index()
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description='落段收官一键脚本')
     ap.add_argument('--spec', help='本批 spec json 路径')
@@ -351,16 +370,7 @@ def main(argv=None):
         return 0
     if not _add_paths(collect_paths(a.spec, a.paths)):
         return 1
-    good, logs = refresh_until_stable()
-    for line in logs:
-        print('[refresh] ' + line)
-    if not good:
-        return 1
-    if not _run_index():
-        return 1
-    if not _run_stats(batch):
-        return 1
-    if not _run_versions(a.spec, batch):
+    if not _run_content_stage(a, batch):
         return 1
     if not _run_docnums(a.spec):
         return 1

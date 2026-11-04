@@ -37,7 +37,7 @@ def save(rel, text):
         f.write(text)
 
 
-def _sub_once(text, pattern, repl, label, flags=re.M):
+def _sub_once(text, pattern, repl, label, flags=re.M, tail_anchor=None):
     """替换一次并判定幂等。
 
     返回 (新文本, 是否变化)：
@@ -55,8 +55,60 @@ def _sub_once(text, pattern, repl, label, flags=re.M):
             raise AssertionError("%s 替换吞行（行锚定失效）" % label)
         return out, True
     if re.search(pattern, text, flags=flags):
+        if tail_anchor is not None and out.count(tail_anchor) != 1:
+            raise AssertionError("%s 尾部锚点异常（描述含右括号或标题重复）" % label)
         return text, False
     raise AssertionError("%s 未找到锚点（正则失配·fail-closed）" % label)
+
+
+# ---------------------------------------------------------------------------
+# W1117 追加：批次级单调守卫（不回退）
+#
+# 病根：版本面表达的是「**现在是什么**」⇒ 只能指向**最高号**批次。而落段批号
+# 与合并次序可以不一致（并行会话乱序合并的真实场景：对方 W1118 先合入 main，
+# 我方 W1117 后落段）⇒ 若按「把版本面推进到本批号」的语义执行，会把 README /
+# STRUCTURE / 项目说明 / CITATION / workflows README / HANDOVER / 编号规则段
+# **全部回退**到低号 ⇒ 抹掉已合并批次的现役标记，且与 backfill_changelog.py
+# 明文的「当前态六面该指向最高号·被一批历史段拉回去是错的」相悖。
+#
+# 正解：推进器改为**单调**——目标批号 ≤ 该文件当前批号 ⇒ 该文件**零变化**
+# （不回退·也不 fail-closed·该面本就不该由低号批改写）。
+# 与 backfill_changelog.py 的「编号规则只升不降」同一语义（单一事实源精神）。
+# ---------------------------------------------------------------------------
+
+
+def _bnum(batch):
+    """批号 → 整数（'W1117' → 1117）。"""
+    s = str(batch)
+    return int(s[1:] if s.upper().startswith("W") else s)
+
+
+# 各文件「现役批号」所在位（只匹配现役位置·不扫正文历史引用）。
+_CURRENT_BATCH_PATTERNS = {
+    "CHANGELOG.md": [r"（W001-W(?P<w>\d+)）"],
+    "README.md": [r"当前批次 W(?P<w>\d+)（"],
+    "STRUCTURE.md": [r"当前批次：W(?P<w>\d+)（"],
+    "docs/00-导读/项目说明.md": [r"当前批次 W(?P<w>\d+)（"],
+    "CITATION.cff": [r'(?m)^version:\s*"W(?P<w>\d+)"'],
+    ".github/workflows/README.md": [r"W450-W(?P<w>\d+)"],
+    "HANDOVER.md": [r"当前 HEAD = W(?P<w>\d+)",
+                    r"## 一、当前进度（(?:v[\d.]+ )?W(?P<w>\d+) "],
+}
+
+
+def _current_batch(rel, text):
+    """返回该文件现役批号（取各现役位上的最大值）；取不到 ⇒ None（该文件无版本面）。"""
+    pats = _CURRENT_BATCH_PATTERNS.get(rel)
+    if not pats:
+        return None
+    nums = []
+    for pat in pats:
+        for m in re.finditer(pat, text):
+            g = m.group("w")
+            if g is None:
+                continue
+            nums.append(int(g))
+    return max(nums) if nums else None
 
 
 def advance_readme(text, batch, date, desc):
@@ -104,19 +156,43 @@ def advance_workflows_readme(text, batch):
     return out, (c1 or c2)
 
 
+def advance_changelog_rule(text, batch):
+    """CHANGELOG 编号规则段上限「（W001-W####）」推进到本批号（幂等）。
+
+    W1117：原由级联工具在插段时一并改写（与段插入耦合·属非幂等面）⇒ 本批把它明确划为
+    **版本面字面量**（跨文件字面量面）·级联改为调用本函数（单一事实源·只引用不复制）。
+    """
+    num = batch[1:] if batch.startswith("W") else batch
+    # W1117 单调守卫：编号规则段上限语义是「已用到的最大 W 号」⇒ 只升不降
+    # （与 backfill_changelog.py 的同名规则一致）⇒ 当前值 ≥ 目标号 ⇒ 零变化。
+    m = re.search(r"（W001-W(\d+)）", text)
+    if m and int(m.group(1)) >= _bnum(batch):
+        return text, False
+    return _sub_once(text, r"（W001-W\d+）", "（W001-W%s）" % num, "CHANGELOG 编号规则段上限")
+
+
 def advance_handover_current_head(text, batch, head_sentence):
-    pat = r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^）]*；详见 CHANGELOG）"
-    return _sub_once(text, pat, "当前 HEAD = %s（%s；详见 CHANGELOG）" % (batch, head_sentence),
-                     "交接文档「当前 HEAD」句")
+    # W1117：[^）]* 会匹配换行 ⇒ 改 [^\n\r）]*（行锚定）
+    pat = r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^\n\r）]*；详见 CHANGELOG）"
+    out, changed = _sub_once(text, pat, "当前 HEAD = %s（%s；详见 CHANGELOG）" % (batch, head_sentence),
+                             "交接文档「当前 HEAD」句",
+                             tail_anchor="；详见 CHANGELOG）")
+    return out, changed
 
 
 def advance_handover_progress(text, batch, desc):
-    pat = r"## 一、当前进度（(?:v[\d.]+ )?W\d+ [^；]*；更早批次详见 CHANGELOG\.md）"
-    return _sub_once(text, pat, "## 一、当前进度（%s %s；更早批次详见 CHANGELOG.md）" % (batch, desc),
-                     "交接文档「一、当前进度」标题")
+    # W1117 修正则过窄：原用 [^；]* 匹配 desc（隐含假设 desc 不含分号）⇒ desc 一旦含
+    # 「；」，第一次推进后文本出现两个「；」⇒ 第二次推进即失配 ⇒ fail-closed（非幂等·贵方实证）。
+    # ⇒ 改为 [^\n\r）]*（行内 · 容许分号 · 不跨行 · 遇右括号止）
+    pat = r"## 一、当前进度（(?:v[\d.]+ )?W\d+ [^\n\r）]*；更早批次详见 CHANGELOG\.md）"
+    out, changed = _sub_once(text, pat, "## 一、当前进度（%s %s；更早批次详见 CHANGELOG.md）" % (batch, desc),
+                             "交接文档「一、当前进度」标题",
+                             tail_anchor="；更早批次详见 CHANGELOG.md）")
+    return out, changed
 
 
 POINTS = [
+    ("CHANGELOG.md", advance_changelog_rule),
     ("README.md", advance_readme),
     ("STRUCTURE.md", advance_structure),
     ("docs/00-导读/项目说明.md", advance_project_note_head),
@@ -136,12 +212,19 @@ def advance_text(text, rel, batch, date, desc, head_sentence):
     级联的 load() 注入**合成样本**（若本模块自己读盘，判据就会读到磁盘真实文件 ⇒
     合成样本驱动机制失效 ⇒ 判据整体误判）。⇒ 返回 (新文本, 是否变化)。
     """
+    # W1117 单调守卫：版本面只表达「现在是什么」⇒ 指向最高号批次。
+    # 目标批号 ≤ 该文件现役批号 ⇒ 该文件零变化（不回退·低号批不改写现役面）。
+    cur = _current_batch(rel, text)
+    if cur is not None and cur > _bnum(batch):
+        return text, False
     out = text
     changed = False
     for target, fn in POINTS:
         if target != rel:
             continue
-        if fn is advance_citation:
+        if fn is advance_changelog_rule:
+            out, c = fn(out, batch)
+        elif fn is advance_citation:
             out, c = fn(out, batch, date)
         elif fn is advance_workflows_readme:
             out, c = fn(out, batch)
