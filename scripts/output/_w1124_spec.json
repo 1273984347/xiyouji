@@ -20,6 +20,7 @@
     "| scripts/output/_w1124_spec.json | W1124 | 新增：本批 spec（应动全集单一事实源） |",
     "| scripts/output/_cascade_files_W1124.txt | W1124 | 新增：级联文件清单 |",
     "| docs/00-导读/W批次编号对账表.md | W1124 | 改：W1124 认领行登记 + W1122 行回填与例数订正 |",
+    "| archive/docs/W批次编号对账表-ARCHIVE.md | W1124 | 改：台账腾窗迁出的最老行（收官链 archive 步产物·副作用面） |",
     "| docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md | W1124 | 新增：本批任务计划执行与经验沉淀报告 |",
     "| docs/11-方案报告/README.md | W1124 | 改：登记第 90 号 |",
     "| CHANGELOG.md | W1124 | 改：W1124 段 |",
