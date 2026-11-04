@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（83）
+## 文件（84）
 
 ### Python 脚本
 
@@ -96,6 +96,7 @@
 - `test_w1127_closeout_tools.py`
 - `test_w1128_pycompile_gate.py`
 - `test_w1129_commit_scope_multibatch.py`
+- `test_w1132_scope_carried_owner.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 
