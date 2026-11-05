@@ -16,26 +16,7 @@
 
   // W1071（A 案·用户 2026-10-31 裁决）：生产环境不注入——本组件依赖访客本机 RAG 服务，
   // 仅 localhost / 127.0.0.1 / file:// 调试态出现；线上不再渲染浮钮/面板/健康检查。
-  var __host = location.hostname;
-  if (__host !== 'localhost' && __host !== '127.0.0.1' && __host !== '' && location.protocol !== 'file:') { return; }
-
-  // W1071（A 案·用户 2026-10-31 裁决）：生产环境不注入——本组件依赖访客本机 RAG 服务，
-  // 仅 localhost / 127.0.0.1 / file:// 调试态出现；线上不再渲染浮钮/面板/健康检查。
-  var __host = location.hostname;
-  if (__host !== 'localhost' && __host !== '127.0.0.1' && __host !== '' && location.protocol !== 'file:') { return; }
-
-  // W1071（A 案·用户 2026-10-31 裁决）：生产环境不注入——本组件依赖访客本机 RAG 服务，
-  // 仅 localhost / 127.0.0.1 / file:// 调试态出现；线上不再渲染浮钮/面板/健康检查。
-  var __host = location.hostname;
-  if (__host !== 'localhost' && __host !== '127.0.0.1' && __host !== '' && location.protocol !== 'file:') { return; }
-
-  // W1071（A 案·用户 2026-10-31 裁决）：生产环境不注入——本组件依赖访客本机 RAG 服务，
-  // 仅 localhost / 127.0.0.1 / file:// 调试态出现；线上不再渲染浮钮/面板/健康检查。
-  var __host = location.hostname;
-  if (__host !== 'localhost' && __host !== '127.0.0.1' && __host !== '' && location.protocol !== 'file:') { return; }
-
-  // W1071（A 案·用户 2026-10-31 裁决）：生产环境不注入——本组件依赖访客本机 RAG 服务，
-  // 仅 localhost / 127.0.0.1 / file:// 调试态出现；线上不再渲染浮钮/面板/健康检查。
+  // W1137 去重：同守卫块曾重复 5 份（机械复制残留），收敛为 1 份。
   var __host = location.hostname;
   if (__host !== 'localhost' && __host !== '127.0.0.1' && __host !== '' && location.protocol !== 'file:') { return; }
 

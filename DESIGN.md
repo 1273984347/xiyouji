@@ -139,6 +139,19 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 | Empty state | `8px` | `44px 24px` | — |
 | Table wrapper | `6px` | — | `12px 0 0 0` |
 
+### 2.6 品牌图标（favicon · W1137）
+
+- **单一事实源**：`site/static/icons/`（与 PWA manifest 同源）——SVG 用 `logo-mark-light.svg`（墨线山势 + 朱砂日点），PNG/apple-touch 用 `icon-192.png`；**禁止另造第二品牌标记**。
+- 全站 857 页 `<head>` 统一注入三行（深度感知相对路径）：
+
+```html
+<link rel="icon" type="image/png" sizes="192x192" href=".../static/icons/icon-192.png">
+<link rel="icon" type="image/svg+xml" href=".../static/icons/logo-mark-light.svg">
+<link rel="apple-touch-icon" href=".../static/icons/icon-192.png">
+```
+
+- 新增页面（含模板壳 `_template.html`）必须携带这三行；页脚批次链访客可见面只允许 W 号短令牌（W1137 R-02 根修·批次描述权威载体为 CHANGELOG）。
+
 ---
 
 ## 3. 布局
