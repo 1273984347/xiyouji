@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -25,6 +26,7 @@ DATA = ROOT / "dataset" / "character-relationship-3d.json"
 PAGE = ROOT / "site" / "data" / "character-relationship-3d.html"
 EDGE_DATA = ROOT / "dataset" / "edge-wukong-tangseng.json"
 EDGE_PAGE = ROOT / "site" / "data" / "wukong-tangseng-benchmark.html"
+TEXT_SEARCH = ROOT / "dataset" / "text-search.json"
 
 META_REQUIRED = (
     "coding_version",
@@ -288,6 +290,29 @@ def validate_edge(data):
     return errors
 
 
+def quote_exactness_errors(data, search):
+    """每一条直接引文去空白后，必须是对应回目原文的精确子串。"""
+    errors = []
+    chapters = search.get("chapters") or []
+    if len(chapters) < 100:
+        return ["原文索引章节数不足 100（实际 %d）" % len(chapters)]
+
+    def norm(value):
+        return re.sub(r"\s+", "", str(value or ""))
+
+    for event in data.get("events") or []:
+        for quote in event.get("quotes") or []:
+            chapter = quote.get("chapter")
+            text = norm(quote.get("text"))
+            if not isinstance(chapter, int) or not 1 <= chapter <= 100:
+                errors.append("事件 %s 引文回目非法：%r" % (event.get("id"), chapter))
+                continue
+            body = norm(chapters[chapter - 1].get("text"))
+            if not text or text not in body:
+                errors.append("事件 %s 第 %d 回引文非原文精确子串：%s" % (event.get("id"), chapter, quote.get("text")))
+    return errors
+
+
 def page_sync_errors():
     errors = []
     targets = (
@@ -307,7 +332,7 @@ def page_sync_errors():
     return errors
 
 
-def self_test(data, edge=None):
+def self_test(data, edge=None, search=None):
     cases = []
 
     bad = copy.deepcopy(data)
@@ -352,6 +377,12 @@ def self_test(data, edge=None):
         for name, sample in edge_cases:
             if not validate_edge(sample):
                 failures.append(name)
+
+    if edge is not None and search is not None:
+        bad = copy.deepcopy(edge)
+        bad["events"][0]["quotes"][0]["text"] = "这是伪造的引文"
+        if not quote_exactness_errors(bad, search):
+            failures.append("quote-not-exact")
     return failures
 
 
@@ -363,22 +394,24 @@ def main():
     try:
         data = json.loads(DATA.read_text(encoding="utf-8"))
         edge = json.loads(EDGE_DATA.read_text(encoding="utf-8"))
+        search = json.loads(TEXT_SEARCH.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         print("FAIL 数据不可读：%s" % exc)
         print("---- 第 61 门禁 数据集溯源：1 FAIL ----")
         return 2
 
     if args.self_test:
-        failures = self_test(data, edge)
+        failures = self_test(data, edge, search)
         if failures:
             print("FAIL 自测未拦：%s" % "、".join(failures))
             return 1
-        print("OK 自测 8 例全部按预期拦截")
+        print("OK 自测 9 例全部按预期拦截")
         return 0
 
     errors = (
         ["关系网络：" + err for err in validate(data)]
         + ["标杆档案：" + err for err in validate_edge(edge)]
+        + ["标杆档案引文：" + err for err in quote_exactness_errors(edge, search)]
         + page_sync_errors()
     )
     if errors:
@@ -386,7 +419,7 @@ def main():
             print("FAIL " + err)
         print("---- 第 61 门禁 数据集溯源：%d FAIL ----" % len(errors))
         return 1
-    print("OK 数据集溯源校验：22 节点 / 32 边 + 9 组标杆事件字段完整 · 引用闭合 · 回目与权重合法")
+    print("OK 数据集溯源校验：22 节点 / 32 边 + 9 组标杆事件 + 9 条引文精确 · 引用闭合 · 回目与权重合法")
     print("---- 第 61 门禁 数据集溯源：0 FAIL ----")
     return 0
 

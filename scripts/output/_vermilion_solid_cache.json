@@ -83,14 +83,14 @@
    "counts": {}
   },
   "data/character-relationship-3d-view.html": {
-   "sha1": "109dd624d35db4eb65262aecf95ce48b5bf213d9",
+   "sha1": "b2b1755edf59b94421ceaab3a2238ca7d1ce4483",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
    }
   },
   "data/character-relationship-3d.html": {
-   "sha1": "b4d94b41b516c50e9ac6218734c49a5b89c28af1",
+   "sha1": "4cfd7b44f14ff83c4841335cb54a5b8b8dffca86",
    "counts": {
     "div.kpi-card": 1
    }
@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "55a60afe45cd28d6c6593fbd42faf18f646e138d",
+   "sha1": "e7030135245a2463aedff78703ef96c3ff80063e",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "94684f2cbd3b7cca9459f9d2c7d7e05e08dd124f",
+   "sha1": "07fb790ecf7fec552864786d5f4c692f0fe884b9",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "31da705f3eb3ec0e3de792b0b9806794938323fc",
+   "sha1": "9c6cabb52f7e27947604edc47457e8e62f174014",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -621,7 +621,7 @@
    }
   },
   "data/wukong-tangseng-benchmark.html": {
-   "sha1": "3787bdf3dc17595d9851b7f51a34e0a4ff62d502",
+   "sha1": "89451c970cdd400761bafc99c96de627e2e2f2db",
    "counts": {}
   },
   "404.html": {
@@ -641,7 +641,7 @@
    }
   },
   "dashboard.html": {
-   "sha1": "e569b6b31c70e3c02f4d3200ee3dc191bd7d5b70",
+   "sha1": "370dd51a59387ad9f685529ae1ab4881ad653bd3",
    "counts": {
     "section.route-strip": 1,
     "button.vt-btn": 2,
@@ -650,19 +650,19 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "46273c18d7fe0c77d26cb0358a4bc785a8d3caf2",
+   "sha1": "57c2dabb8e2a1c8aff28827060d9626735df3298",
    "counts": {
     "button": 1
    }
   },
   "guide.html": {
-   "sha1": "bbbb26c10bae06f7d2c491f06fa1621012a62b35",
+   "sha1": "94d7fee80e197c63f02aa34195b4ac440d89bc19",
    "counts": {
     "a.primary": 1
    }
   },
   "index.html": {
-   "sha1": "736f0455a6ffb6473bcaab30d800d074512f81ec",
+   "sha1": "c83dd9bbf8c4180e99bfce7ff62955cd7428fb59",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1499,5 +1499,5 @@
    }
   }
  },
- "generated_at": "2026-11-05T22:37:11.554Z"
+ "generated_at": "2026-11-05T23:33:03.917Z"
 }
