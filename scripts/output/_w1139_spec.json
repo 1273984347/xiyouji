@@ -944,6 +944,7 @@
   "| scripts/output/_cascade_files_W1143.txt | W1143 | 新增：级联文件清单 |",
   "| scripts/output/_cascade_files_W1144.txt | W1144 | 新增：级联清单 |",
   "| scripts/output/_w1144_spec.json | W1144 | 新增：本批 spec |",
-  "| scripts/guardrails/api_diff.py | W1144 | 改：尾部追加带默认值参数=向后兼容不判破坏（判据缺陷修正·W1143 self_test 加 edge=None 实证误拦） |"
+  "| scripts/guardrails/api_diff.py | W1144 | 改：尾部追加带默认值参数=向后兼容不判破坏（判据缺陷修正·W1143 self_test 加 edge=None 实证误拦） |",
+  "| site/system.css | W1144 | 改：≤768 抽屉态关顶条 backdrop-filter（抽屉 fixed 塌陷根修·用户 745 实报·W335 引入磨砂 W492 落地即带缺陷）+ 331 页 inline 副本同步 |"
  ]
 }

@@ -364,6 +364,8 @@ def run_gate():
     else:
         target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
         spec_set = spec_paths_for(target)
+        multi_rows = _spec_rows_for(target)  # W1144：判定与反查同口径（group-aware）——
+        # 反查可因分组子树命中而归属本批，plan 退回精确集会口径断裂（实证 324 件同步面全列表多出）
     effective = sorted(set(staged) - set(carried))
 
     fails = []
@@ -411,6 +413,8 @@ def run_report():
     else:
         target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
         spec_set = spec_paths_for(target)
+        multi_rows = _spec_rows_for(target)  # W1144：判定与反查同口径（group-aware）——
+        # 反查可因分组子树命中而归属本批，plan 退回精确集会口径断裂（实证 332 件同步面全列表多出）
     effective = sorted(set(staged) - set(carried))
     ok, extra = (plan_group(effective, multi_rows) if multi_rows
                  else plan(effective, spec_set))
