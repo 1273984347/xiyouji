@@ -886,6 +886,16 @@
 | CITATION.cff | W1137 | 改：版本面推进（级联 versions 步·幂等） |
 | docs/00-导读/项目说明.md | W1137 | 改：版本面推进（级联 versions 步·幂等） |
 | scripts/output/_cascade_files_W1137.txt | W1137 | 新增：级联文件清单（级联） |
+| site/static/js/rag-chat.js | W1137 | 改：W1071 生产守卫块去重（5 份→1 份·行为零变化） |
+| docs/00-导读/W批次编号对账表.md | W1137 | 改：W1137 认领行登记 + W1095 行改注已收编 |
+| .github/workflows/README.md | W1137 | 改：版本抬头推进 W450-W1137（级联 versions·幂等） |
+| archive/docs/AGENTS-ARCHIVE.md | W1137 | 改：脚注滚动归档（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1137 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/tools-inventory.md | W1137 | 改：工具清单刷新（收官链产物·生成时间滚动） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1137 | 改：版本抬头推进（级联 versions·幂等） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1137 | 改：版本抬头推进（级联 versions·幂等） |
+| .github/dependabot.yml | W1137 | 删：dependabot 永久降噪（用户 2026-11-05 批准·12 PR 已全关；依赖升级改由专项批统一评估·安全面由 CI pip-audit/npm-audit 盯防） |
+| .github/INDEX.md | W1137 | 改：gen_folder_docs 重生成（dependabot.yml 行随删件移除） |
 
 ## W1136 并行会话统筹调度批（2026-11-04）
 
