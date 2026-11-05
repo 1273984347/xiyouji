@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-baa8B2MIHySl1atZD/8vDncSqlwL5wL6LQYLfkALOC4=' 'sha256-J+d1Ppu57glL5TcXjHNXIBBppV/e8n3fCPgDAAq1yDw=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      // 夜读模式（W488）：首屏防 FOUC——先读 localStorage，无则跟随系统
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('xy-theme'); } catch (_) {}
+        if (t !== 'light' && t !== 'dark') {
+          try { t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } catch (_) { t = 'light'; }
+        }
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      })();
+    </script>
+    <meta name="theme-color" content="#FAF7F0">
+    <title>关于 · 方法与边界 · 详解西游记</title>
+    <link rel="canonical" href="https://1273984347.github.io/xiyouji/about.html">
+    <meta property="og:url" content="https://1273984347.github.io/xiyouji/about.html">
+    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <!-- SEO:INJECTED -->
+    <link rel="stylesheet" href="tokens.css">
+    <link rel="stylesheet" href="system.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <style>
+        /* === 仅「关于」页特有样式 === */
+        .about-hero {
+            padding: clamp(var(--space-9), 8vw, 88px) clamp(var(--space-6), 6vw, var(--space-12)) clamp(28px, 4vw, 44px);
+            border-bottom: 1px solid var(--line);
+            background: var(--paper-warm);
+        }
+        .about-hero-inner { max-width: var(--container-content); margin: 0 auto; }
+        .about-hero .kicker { color: var(--accent-text); margin-bottom: 16px; }
+        .about-hero h1 { font-size: clamp(30px, 5vw, 48px); margin: 0 0 16px; line-height: 1.2; }
+        .about-hero .lede { max-width: 820px; font-size: 16px; color: var(--ink-soft); line-height: 1.75; }
+        .about-hero .lede strong { color: var(--ink); font-weight: 600; }
+        .hero-meta {
+            margin-top: var(--space-5); font-family: var(--font-mono); font-size: 13px;
+            color: var(--ink-faint); letter-spacing: 0.02em;
+        }
+        .about-cta { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: 14px; }
+        .about-cta a {
+            font-family: var(--font-serif); font-size: 15px; font-weight: 600;
+            padding: var(--space-4) var(--space-6); border-radius: 6px; text-decoration: none;
+            transition: transform var(--dur-fast) var(--ease-out-quart), opacity var(--dur-fast) var(--ease-out-quart);
+        }
+        .about-cta a:hover { transform: translateY(-1px); opacity: .92; }
+        .about-cta .primary { background: var(--accent); color: var(--paper); }
+        .about-cta .ghost { border: 1px solid var(--line); color: var(--ink); background: var(--paper); }
+
+        .flow {
+            display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            align-items: stretch; gap: var(--space-3); margin-top: var(--space-4);
+        }
+        .flow-step {
+            background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
+            padding: var(--space-5); box-shadow: var(--elev-1);
+        }
+        .flow-num {
+            display: block; font-family: var(--font-mono); font-size: 12px;
+            color: var(--accent-text); margin-bottom: var(--space-3);
+        }
+        .flow-step h3 { font-size: 16px; margin: 0 0 var(--space-2); }
+        .flow-step p { margin: 0; font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+        .flow-arrow { display: grid; place-items: center; color: var(--ink-faint); font-size: 18px; }
+        .flow-note { margin-top: var(--space-5); font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+
+        .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
+        .kpi {
+            background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
+            padding: var(--space-6); box-shadow: var(--elev-1);
+        }
+        .kpi-num {
+            display: block; font-family: var(--font-mono); font-size: 34px; line-height: 1.1;
+            color: var(--accent-text); font-variant-numeric: tabular-nums;
+        }
+        .kpi-label { display: block; margin-top: var(--space-3); font-size: 15px; font-weight: 600; color: var(--ink); }
+        .kpi-note { display: block; margin-top: 6px; font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+
+        .tradeoff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
+        .tradeoff {
+            background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
+            padding: var(--space-6); box-shadow: var(--elev-1);
+        }
+        .tradeoff h3 { font-size: 17px; margin: 0 0 var(--space-3); }
+        .tradeoff p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+        .tradeoff-cost {
+            display: block; margin-top: var(--space-4); padding-top: var(--space-3);
+            border-top: 1px dashed var(--line); font-size: 13px; color: var(--ink-faint);
+        }
+
+        .boundary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
+        .boundary-box {
+            border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6);
+            background: var(--paper); box-shadow: var(--elev-1);
+        }
+        .boundary-box h3 { font-size: 17px; margin: 0 0 var(--space-4); }
+        .boundary-box ul { margin: 0; padding-left: 1.2em; }
+        .boundary-box li { font-size: 14px; color: var(--ink-soft); line-height: 1.7; margin-bottom: var(--space-3); }
+        .boundary-fact { border-top: 3px solid var(--accent-4); }
+        .boundary-assumption { border-top: 3px solid var(--accent-3); }
+        .boundary-note {
+            margin-top: var(--space-5); padding: var(--space-5); border-radius: var(--radius-lg);
+            background: var(--paper-warm); border: 1px solid var(--line);
+            font-size: 14px; color: var(--ink-soft); line-height: 1.75;
+        }
+        .boundary-note strong { color: var(--ink); }
+
+        .route { list-style: none; margin: var(--space-4) 0 0; padding: 0; }
+        .route li {
+            display: grid; grid-template-columns: 48px 1fr; gap: var(--space-4);
+            padding: var(--space-5) 0; border-bottom: 1px solid var(--line); align-items: start;
+        }
+        .route li:first-child { border-top: 1px solid var(--line); }
+        .route-no {
+            font-family: var(--font-mono); font-size: 13px; color: var(--accent-text);
+            padding-top: 3px;
+        }
+        .route h3 { font-size: 17px; margin: 0 0 4px; }
+        .route h3 a { color: var(--ink); text-decoration: none; }
+        .route h3 a:hover { color: var(--accent); }
+        .route p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
+        .route .tag { margin-left: var(--space-3); font-size: 11px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+        .cite-box {
+            margin-top: var(--space-4); padding: var(--space-6); border: 1px solid var(--line);
+            border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--elev-1);
+        }
+        .cite-box p { margin: 0 0 var(--space-4); font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+        .cite-box code { background: var(--paper-warm); padding: 1px 6px; border-radius: 4px; color: var(--ink); }
+        .cite-box a { color: var(--accent-2); }
+
+        @media (max-width: 900px) {
+            .flow { grid-template-columns: 1fr; }
+            .flow-arrow { display: none; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .tradeoff-grid, .boundary-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: 1fr; }
+            .route li { grid-template-columns: 36px 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .about-cta a:hover,
+            .card:hover { transform: none; }
+        }
+
+        /* === W488：夜读模式（页面内联 dark 覆盖）+ 夜读切换器 === */
+        .theme-toggle {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 34px; height: 34px; margin-left: var(--space-4);
+            border: 1px solid var(--line); border-radius: var(--radius-pill);
+            background: var(--paper); color: var(--ink-soft); cursor: pointer;
+            transition: border-color var(--dur-fast) var(--ease-out-quart),
+                        color var(--dur-fast) var(--ease-out-quart),
+                        transform var(--dur-fast) var(--ease-out-quart);
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .theme-toggle:active { transform: scale(0.94); }
+        .theme-toggle .icon-moon { display: block; }
+        .theme-toggle .icon-sun { display: none; }
+        html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+        html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+    </style>
+    <meta name="description" content="详解西游记 · 关于：项目定位、一源多形数据管线、关键取舍、可信度建设与解释边界。给评审的 5 分钟速览，也给研究者的数据与方法说明。">
+    <meta name="keywords" content="西游记数据可视化,数字人文,作品集,一源多形,数据治理,解释边界">
+    <meta name="author" content="西游记研究项目组">
+    <meta property="og:title" content="关于 · 方法与边界 · 详解西游记">
+    <meta property="og:description" content="项目定位、数据管线、关键取舍与解释边界：先看 5 分钟主线，再按需深入。">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="详解西游记">
+    <meta name="twitter:card" content="summary_large_image">
+  <script src="js/theme-init.js"></script>
+  <script defer src="js/rum.js"></script>
+  <script defer src="js/visit-log.js"></script>
+
+<link rel="preload" href="static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/png" sizes="192x192" href="static/icons/icon-192.png">
+<link rel="icon" type="image/svg+xml" href="static/icons/logo-mark-light.svg">
+<link rel="apple-touch-icon" href="static/icons/icon-192.png">
+</head>
+<body>
+    <div class="nav-mask" aria-hidden="true"></div>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html">
+            <span class="seal" aria-hidden="true">详<br>解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="打开导航菜单" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <nav aria-label="主导航">
+            <a href="guide.html">导读</a>
+            <a href="reader/index.html">阅读</a>
+            <a href="dashboard.html">数据看板</a>
+            <a href="dukou-engine.html">西游·渡口</a>
+            <a href="data/text-search.html">全文检索</a>
+            <a class="active" href="about.html" aria-current="page">关于</a>
+            <a href="en/guide.html" hreflang="en" class="text-mono text-xs text-faint">EN</a>
+        </nav>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="切换夜读模式" title="夜读模式">
+            <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+    </header>
+
+    <main id="main">
+        <section class="about-hero" aria-labelledby="about-title">
+            <div class="about-hero-inner">
+                <p class="kicker">PROJECT DOSSIER · 方法与边界</p>
+                <h1 id="about-title">把一百回《西游记》，做成一套可复现的数据解读</h1>
+                <p class="lede">
+                    这是一个<strong>「一源多形」</strong>的数字人文项目：同一份原文与数据，被组织成 <strong>616 篇解读</strong>、<strong>87 个可视化页</strong>和一个可以离线打开的站点。
+                    它既是可浏览的作品，也是一份还能继续做研究的底稿——区别在于，每一层都尽量留下可核对的入口。
+                </p>
+                <p class="hero-meta">100 回 · 616 篇解读 · 87 个可视化页 · 34 类主题 · 60 项交付门禁</p>
+                <div class="about-cta">
+                    <a class="primary" href="#route">先看 5 分钟主线</a>
+                    <a class="ghost" href="index.html">直接打开站点</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-wrap">
+            <section class="section reveal-in" aria-labelledby="review-title">
+                <div class="section-head">
+                    <p class="kicker">FOR REVIEWERS</p>
+                    <h2 id="review-title">30 秒判断：这是什么</h2>
+                    <p class="note">给作品集评审、合作者与第一次打开站点的人。三句话说完，不展开。</p>
+                </div>
+                <div class="card-grid">
+                    <article class="card">
+                        <p class="card-kicker">WHAT</p>
+                        <h3>一部小说，一套内容系统</h3>
+                        <p>原文、逐回解读、人物谱系、主题专题与数据可视化并存；不是单页作品，而是同一事实源的多形态输出。</p>
+                    </article>
+                    <article class="card">
+                        <p class="card-kicker">HOW</p>
+                        <h3>管线而不是手工拼页</h3>
+                        <p>文本分析脚本生成 JSON，页面读取数据并内嵌回退；样式与脚本由单一事实源同步，交付前跑全量门禁。</p>
+                    </article>
+                    <article class="card">
+                        <p class="card-kicker">BOUNDARY</p>
+                        <h3>解释性映射，不是统计推断</h3>
+                        <p>管理理论、团队阶段与角色编码是解读框架；小样本网络只作示意。边界写在页面里，不藏在脚注里。</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section reveal-in" aria-labelledby="pipeline-title">
+                <div class="section-head">
+                    <p class="kicker">ARCHITECTURE</p>
+                    <h2 id="pipeline-title">它是怎么运转的</h2>
+                    <p class="note">一条单向数据流：文本层只进不改，数据层可复跑，展示层只读数据。</p>
+                </div>
+                <div class="flow" aria-label="一源多形数据流">
+                    <div class="flow-step">
+                        <span class="flow-num">01 · SOURCE</span>
+                        <h3>原文与引用</h3>
+                        <p><code>source/</code> 分回存放原著与学术引用，作为所有解读的可回查底本。</p>
+                    </div>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <div class="flow-step">
+                        <span class="flow-num">02 · DOCS</span>
+                        <h3>解读层</h3>
+                        <p><code>docs/</code> 逐回、人物、主题、文化、诗词与随笔，按统一元信息块组织。</p>
+                    </div>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <div class="flow-step">
+                        <span class="flow-num">03 · DATA</span>
+                        <h3>数据层</h3>
+                        <p><code>scripts/</code> 的文本分析产出 JSON；<code>dataset/</code> 是可下载的结构化快照。</p>
+                    </div>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <div class="flow-step">
+                        <span class="flow-num">04 · SITE</span>
+                        <h3>展示层</h3>
+                        <p><code>site/</code> 的页面读取 JSON，并内嵌 <code>EMBEDDED</code> 回退，断网也能打开。</p>
+                    </div>
+                </div>
+                <p class="flow-note">
+                    这套管线的关键不是「生成得快」，而是<strong>每一层都能被单独核对</strong>：原文能回查回目，数据能重跑脚本，页面能追溯数据源。
+                    交付前由统一门禁检查文档同步、链接、CSP、CSS 结构、数据一致性与 SEO；任一项硬失败即阻断提交。
+                </p>
+            </section>
+
+            <section class="section reveal-in" aria-labelledby="scale-title">
+                <div class="section-head">
+                    <p class="kicker">SCALE</p>
+                    <h2 id="scale-title">规模与覆盖</h2>
+                    <p class="note">数字全部来自 <code>scripts/output/stats.json</code> 的磁盘实算，不靠手写。</p>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi"><span class="kpi-num">100</span><span class="kpi-label">回原文</span><span class="kpi-note">分回存放，逐回可查</span></div>
+                    <div class="kpi"><span class="kpi-num">616</span><span class="kpi-label">篇解读</span><span class="kpi-note">逐回 / 人物 / 主题 / 文化 / 诗词 / 随笔</span></div>
+                    <div class="kpi"><span class="kpi-num">87</span><span class="kpi-label">个可视化页</span><span class="kpi-note">D3.js 与 Three.js，全部本地依赖</span></div>
+                    <div class="kpi"><span class="kpi-num">34</span><span class="kpi-label">类主题</span><span class="kpi-note">A–AH，覆盖统计、关系、地理、批评史等</span></div>
+                    <div class="kpi"><span class="kpi-num">138</span><span class="kpi-label">页英文站</span><span class="kpi-note">面向外部读者的英文化入口</span></div>
+                    <div class="kpi"><span class="kpi-num">60</span><span class="kpi-label">项交付门禁</span><span class="kpi-note">提交前统一执行，核心项硬阻断</span></div>
+                </div>
+            </section>
+
+            <section class="section reveal-in" aria-labelledby="tradeoff-title">
+                <div class="section-head">
+                    <p class="kicker">TRADE-OFFS</p>
+                    <h2 id="tradeoff-title">关键取舍</h2>
+                    <p class="note">这些不是「暂时没做」，而是有明确代价的主动选择。</p>
+                </div>
+                <div class="tradeoff-grid">
+                    <div class="tradeoff">
+                        <h3>纯静态 · file:// 直开</h3>
+                        <p>站点不依赖服务器，双击任意页面即可阅读；可视化页必须内嵌数据回退，fetch 失败也能渲染。</p>
+                        <span class="tradeoff-cost">代价：没有实时查询、个性化与用户数据</span>
+                    </div>
+                    <div class="tradeoff">
+                        <h3>零外域依赖</h3>
+                        <p>D3、Three、字体与图标全部本地化；页面不引用 CDN，离线与内网环境同样可用。</p>
+                        <span class="tradeoff-cost">代价：库升级与体积控制要自己做</span>
+                    </div>
+                    <div class="tradeoff">
+                        <h3>单一事实源</h3>
+                        <p>设计令牌、数据 JSON、统计口径各自只有一个源头；页面副本由脚本同步，避免手工漂移。</p>
+                        <span class="tradeoff-cost">代价：改共享层要重跑同步与门禁</span>
+                    </div>
+                    <div class="tradeoff">
+                        <h3>内容与工程同仓</h3>
+                        <p>解读文档、生成脚本、可视化页面与交付门禁放在同一个仓库，改动可追溯、可复现。</p>
+                        <span class="tradeoff-cost">代价：仓库更大，协作需要更严格的批次纪律</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section reveal-in" aria-labelledby="boundary-title">
+                <div class="section-head">
+                    <p class="kicker">EVIDENCE &amp; BOUNDARY</p>
+                    <h2 id="boundary-title">可信度与解释边界</h2>
+                    <p class="note">哪些是文本事实，哪些是解读假设，分开写；这不会减分，反而让结论可被检验。</p>
+                </div>
+                <div class="boundary-grid">
+                    <div class="boundary-box boundary-fact">
+                        <h3>文本事实层</h3>
+                        <ul>
+                            <li>原文引文标注回目，引用前经脚本探针核对，禁止凭记忆编造。</li>
+                            <li>篇章、页面与维度数量由 <code>stats.py</code> 从磁盘实算，治理文档与统计对账。</li>
+                            <li>人物共现网络的权重定义写在页面：同回或同场景共现次数，方法可复跑。</li>
+                        </ul>
+                    </div>
+                    <div class="boundary-box boundary-assumption">
+                        <h3>解读假设层</h3>
+                        <ul>
+                            <li>Belbin 角色、Tuckman 阶段、MBTI 与职场映射均为<strong>本文采用的解释框架</strong>，不是文本自带的结论。</li>
+                            <li>「震荡期过长是因为缺少监督评估者」这类因果表述属于解读，需与文本事实分开引用。</li>
+                            <li>趣味跨界维度（职场黑话、卡牌战力、招股书等）是刻意保留的雅集成分，不承担学术论证。</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="boundary-note">
+                    <strong>当前已知边界：</strong>人物关系 3D 图为 22 个节点、32 条边的人工整理网络，边权重与逐条回目依据尚未公开到单边级，引用时请当作<strong>示意性网络</strong>，不要据此做度中心性或聚类推断。
+                    共现网络另有一套 NLP 抽取结果（35 节点 / 329 边），两者口径不同，不可混用。
+                </p>
+            </section>
+
+            <section class="section reveal-in" id="route" aria-labelledby="route-title">
+                <div class="section-head">
+                    <p class="kicker">5-MINUTE ROUTE</p>
+                    <h2 id="route-title">如果只看六页</h2>
+                    <p class="note">87 个页面不删；主线只负责给第一次打开的人一条能走完的路。</p>
+                </div>
+                <ol class="route">
+                    <li>
+                        <span class="route-no">01</span>
+                        <div><h3><a href="guide.html">导读</a><span class="tag">先读</span></h3><p>按身份选阅读路径：新手、深度读者、研究者、教师、创作者与数据爱好者各有入口。</p></div>
+                    </li>
+                    <li>
+                        <span class="route-no">02</span>
+                        <div><h3><a href="data/pilgrim-team-dynamic-network.html">取经团队动力学</a><span class="tag">团队</span></h3><p>Belbin 角色、Tuckman 阶段与关系网络：最集中的解释框架样本，也最适合检验边界。</p></div>
+                    </li>
+                    <li>
+                        <span class="route-no">03</span>
+                        <div><h3><a href="data/relationships.html">关系网络五重切片</a><span class="tag">关系</span></h3><p>势力、法宝、搬救兵、团队角色与共现网络的合页，可对照不同口径。</p></div>
+                    </li>
+                    <li>
+                        <span class="route-no">04</span>
+                        <div><h3><a href="data/criticism-history.html">四百年批评史</a><span class="tag">学术</span></h3><p>批评家档案、解读流派与三教争辩：项目学术面最完整的一页。</p></div>
+                    </li>
+                    <li>
+                        <span class="route-no">05</span>
+                        <div><h3><a href="dashboard.html">数据看板</a><span class="tag">总览</span></h3><p>55 项 KPI 与全站数据入口，适合快速判断覆盖范围与数据密度。</p></div>
+                    </li>
+                    <li>
+                        <span class="route-no">06</span>
+                        <div><h3><a href="data/text-search.html">全文检索</a><span class="tag">工具</span></h3><p>七十万字原著逐字可查；任何一条解读都能回到原文核对。</p></div>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="section reveal-in" aria-labelledby="cite-title">
+                <div class="section-head">
+                    <p class="kicker">CITE &amp; FEEDBACK</p>
+                    <h2 id="cite-title">引用、纠错与继续使用</h2>
+                </div>
+                <div class="cite-box">
+                    <p>
+                        学术引用请使用仓库根目录的 <code>CITATION.cff</code>；结构化数据在 <code>dataset/</code>，可直接下载 JSON。
+                        发现数据或引文问题，请到 <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener">GitHub Issues</a> 提交，注明页面、回目与依据。
+                        代码采用 MIT 协议，文本内容采用 CC BY-NC 4.0（禁商用），详见 <code>LICENSE</code> 与 <code>LICENSE-CONTENT.md</code>。
+                    </p>
+                    <p><a href="https://github.com/1273984347/xiyouji" rel="noopener">仓库主页</a> · <a href="https://1273984347.github.io/xiyouji/" rel="noopener">在线站点</a> · <a href="data/search.html">站内搜索</a></p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">2026 · MIT License（代码）· CC BY-NC 4.0（文本）· 持续更新中</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="index.html">首页</a>
+            <a href="guide.html">导读</a>
+            <a href="dashboard.html">数据看板</a>
+            <a href="about.html">关于</a>
+            <a href="en/guide.html">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a>
+        </nav>
+    </footer>
+    <script>
+      // W488：滚动显现 reveal-in + 夜读切换
+      (function () {
+        var rm = false;
+        try { rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+        if (!rm && 'IntersectionObserver' in window) {
+          document.documentElement.classList.add('js-reveal');
+          var els = document.querySelectorAll('.reveal-in');
+          if (els.length) {
+            var io = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                io.unobserve(e.target);
+                e.target.classList.add('in-view');
+              });
+            }, { threshold: 0.12 });
+            Array.prototype.forEach.call(els, function (el) { io.observe(el); });
+          }
+        }
+        var btn = document.getElementById('themeToggle');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', cur);
+            try { localStorage.setItem('xy-theme', cur); } catch (_) {}
+            btn.setAttribute('aria-pressed', cur === 'dark');
+          });
+        }
+      })();
+    </script>
+    <script>
+      // W492：导航抽屉（≤768px 滑出面板 + 遮罩 + ESC + 窗口变大自动关闭；RM 下仍可开关无动效）
+      (function () {
+        var btn = document.querySelector('.nav-toggle');
+        var nav = document.querySelector('.topnav nav');
+        var mask = document.querySelector('.nav-mask');
+        if (!btn || !nav || !mask) return;
+        function close() {
+          nav.classList.remove('open'); mask.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
+          setTimeout(function () { if (!nav.classList.contains('open')) nav.style.display = (window.innerWidth <= 768 ? 'none' : ''); }, 350);
+        }
+        btn.addEventListener('click', function () {
+          if (nav.classList.contains('open')) { close(); return; }
+          nav.style.display = 'flex';
+          requestAnimationFrame(function () { requestAnimationFrame(function () { nav.classList.add('open'); mask.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }); });
+        });
+        mask.addEventListener('click', close);
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+        window.addEventListener('resize', function () { if (window.innerWidth > 768) close(); });
+      })();
+    </script>
+</body>
+</html>

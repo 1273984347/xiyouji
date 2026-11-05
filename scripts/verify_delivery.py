@@ -118,13 +118,14 @@ EXPECTED_SECTION_NAMES = [
     "动效守卫覆盖",
     "design 资产清单",
     "tooltip 多行间距",
+    "数据集溯源",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
-# 14 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14）恒跑不跳；跳过只作用于
-# 52 个 subprocess 委托段（65 段 - 13 内联/bespoke·W1110 实核：_SIMPLE×18+_STRICT×34 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
+# 15 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14·W1141 加「数据集溯源」=15）恒跑不跳；跳过只作用于
+# 53 个 subprocess 委托段（66 段 - 13 内联/bespoke·W1141 实核：_SIMPLE×18+_STRICT×35 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -205,6 +206,7 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "坑表编号唯一",  # W1110：恒跑——任何提交都可能改坑表（新增条目撞号须当场红）
     "PowerShell解析",  # W1110：恒跑——.ps1 语法/编码面与改动范围无关（tracked 口径·毫秒级）
     "CSS变量自引用",  # W1110：恒跑——CSS 变量语义与改动范围无关（扫 site/ 全树·毫秒级）
+    "数据集溯源",  # W1141：恒跑——数据集字段契约与改动范围无关（读 dataset JSON·毫秒级）
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -479,7 +481,7 @@ class _SimpleGate(NamedTuple):
 
 
 class _StrictGate(NamedTuple):
-    """严格委托门禁参数行（_STRICT_GATES 共 34 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
+    """严格委托门禁参数行（_STRICT_GATES 共 35 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
 
     与简单段差异：① 执行异常直接 FAIL（不静默放过）；② 退出码 0 还须校验 stdout 含
     marker 汇总行（防 wrapper 假绿）；③ ok 详情取 stdout 指定行（ok_line=-1 末行/
@@ -1065,6 +1067,20 @@ _STRICT_GATES = [
         marker_msg="tooltip 多行间距槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
         ok_msg="tooltip 多行间距门禁通过（%s）",
         ok_line=-1,
+    ),
+    # W1141：数据集溯源判据挂第 61 槽——22 节点/32 边关系数据补溯源字段后，若后续编辑
+    # 删字段/改回目/把权重写出 0-1 都不会红；本槽把 dataset/CODING.md 的字段契约变成
+    # 提交前硬判据（含页面 EMBEDDED 同步标记）。
+    _StrictGate(
+        section="数据集溯源",
+        script="check_dataset_provenance.py",
+        timeout=120,
+        marker="---- 第 61 门禁 数据集溯源：",
+        crash_msg="数据集溯源槽执行异常（第 61 槽·crash 即拦）: %s",
+        fail_msg="数据集溯源字段缺失/引用不闭合/回目或权重越界（本批新增第 61 槽）",
+        marker_msg="数据集溯源槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="数据集溯源门禁通过（%s）",
+        ok_line=-2,
     ),
 ]
 

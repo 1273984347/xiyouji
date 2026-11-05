@@ -3,7 +3,16 @@
     "title": "人物关系 3D 网络图",
     "version": "v2.2.42",
     "w_id": "W236-V",
-    "direction": "V4"
+    "direction": "V4",
+    "coding_version": "v0.1.0",
+    "provenance_batch": "W1138",
+    "coder": "项目维护者（人工整理）",
+    "updated": "2026-11-05",
+    "text_source": "世德堂本（明万历二十年，1592）为底本，参校人民文学出版社整理本",
+    "coding_doc": "dataset/CODING.md",
+    "evidence_policy": "每条边标注章节、判定规则、理由与证据级别；证据级别=文本事实/解读假设。",
+    "weight_method": "人工关系强度评分 0-1：1.0 核心关系，0.8 多次互动，0.6 单次事件，0.4 间接推断。",
+    "note": "示意性网络，不做统计推断；逐边来源与判定理由见本文件 links 字段。"
   },
   "kpi": [
     {
@@ -38,316 +47,1038 @@
       "name": "唐僧",
       "group": 0,
       "importance": 9,
-      "desc": "金蝉子转世，取经团队核心，意志坚定但常陷险境。"
+      "desc": "金蝉子转世，取经团队核心，意志坚定但常陷险境。",
+      "faction": "取经团",
+      "chapter_range": "第 8-100 回",
+      "source_chapters": [
+        8,
+        12,
+        13,
+        14,
+        22,
+        27,
+        57,
+        58,
+        100
+      ],
+      "note": "金蝉子转世，取经团队核心。",
+      "evidence": "文本事实"
     },
     {
       "id": 2,
       "name": "孙悟空",
       "group": 0,
       "importance": 10,
-      "desc": "齐天大圣，神通广大，降妖除魔的主力。"
+      "desc": "齐天大圣，神通广大，降妖除魔的主力。",
+      "faction": "取经团",
+      "chapter_range": "第 1-7 回、第 14-100 回",
+      "source_chapters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        14,
+        27,
+        57,
+        58,
+        100
+      ],
+      "note": "齐天大圣，取经团队降妖主力。",
+      "evidence": "文本事实"
     },
     {
       "id": 3,
       "name": "猪八戒",
       "group": 0,
       "importance": 7,
-      "desc": "天蓬元帅转世，贪吃好色但忠心耿耿。"
+      "desc": "天蓬元帅转世，贪吃好色但忠心耿耿。",
+      "faction": "取经团",
+      "chapter_range": "第 18-19 回、第 22-100 回",
+      "source_chapters": [
+        18,
+        19,
+        22,
+        32,
+        61,
+        100
+      ],
+      "note": "天蓬元帅转世，高老庄入队。",
+      "evidence": "文本事实"
     },
     {
       "id": 4,
       "name": "沙悟净",
       "group": 0,
       "importance": 6,
-      "desc": "卷帘大将转世，沉稳老实，挑担随行。"
+      "desc": "卷帘大将转世，沉稳老实，挑担随行。",
+      "faction": "取经团",
+      "chapter_range": "第 22-100 回",
+      "source_chapters": [
+        22,
+        57,
+        58,
+        100
+      ],
+      "note": "卷帘大将转世，流沙河入队。",
+      "evidence": "文本事实"
     },
     {
       "id": 5,
       "name": "白龙马",
       "group": 0,
       "importance": 5,
-      "desc": "西海龙王三太子，化身为马驮唐僧。"
+      "desc": "西海龙王三太子，化身为马驮唐僧。",
+      "faction": "取经团",
+      "chapter_range": "第 15-100 回",
+      "source_chapters": [
+        15,
+        30,
+        100
+      ],
+      "note": "西海龙王三太子，鹰愁涧化马随行。",
+      "evidence": "文本事实"
     },
     {
       "id": 6,
       "name": "观音菩萨",
       "group": 2,
       "importance": 9,
-      "desc": "南海普陀落伽山，取经事业的策划者与守护者。"
+      "desc": "南海普陀落伽山，取经事业的策划者与守护者。",
+      "faction": "佛门",
+      "chapter_range": "第 8-100 回",
+      "source_chapters": [
+        8,
+        12,
+        15,
+        22,
+        27,
+        40,
+        42,
+        57,
+        58,
+        100
+      ],
+      "note": "取经事业策划者；跨天庭/佛门，按授职归佛门。",
+      "evidence": "文本事实"
     },
     {
       "id": 7,
       "name": "如来佛祖",
       "group": 2,
       "importance": 10,
-      "desc": "西天灵山释迦牟尼，最终授经者。"
+      "desc": "西天灵山释迦牟尼，最终授经者。",
+      "faction": "佛门",
+      "chapter_range": "第 1-8 回、第 52-100 回",
+      "source_chapters": [
+        1,
+        7,
+        8,
+        52,
+        77,
+        98,
+        100
+      ],
+      "note": "西天灵山释迦牟尼，最终授经者。",
+      "evidence": "文本事实"
     },
     {
       "id": 8,
       "name": "文殊菩萨",
       "group": 2,
       "importance": 6,
-      "desc": "五台山文殊，智慧象征。"
+      "desc": "五台山文殊，智慧象征。",
+      "faction": "佛门",
+      "chapter_range": "第 15 回、第 37-39 回、第 74-77 回",
+      "source_chapters": [
+        15,
+        37,
+        38,
+        39,
+        74,
+        77
+      ],
+      "note": "五台山文殊，乌鸡国与狮驼岭事件中间接出场。",
+      "evidence": "文本事实"
     },
     {
       "id": 9,
       "name": "普贤菩萨",
       "group": 2,
       "importance": 6,
-      "desc": "峨眉山普贤，行愿象征。"
+      "desc": "峨眉山普贤，行愿象征。",
+      "faction": "佛门",
+      "chapter_range": "第 74-77 回",
+      "source_chapters": [
+        74,
+        77
+      ],
+      "note": "峨眉山普贤，狮驼岭事件中间接出场。",
+      "evidence": "文本事实"
     },
     {
       "id": 10,
       "name": "玉皇大帝",
       "group": 1,
       "importance": 9,
-      "desc": "天庭最高统治者，三界之主。"
+      "desc": "天庭最高统治者，三界之主。",
+      "faction": "天庭",
+      "chapter_range": "第 3-100 回",
+      "source_chapters": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        100
+      ],
+      "note": "天庭最高统治者。",
+      "evidence": "文本事实"
     },
     {
       "id": 11,
       "name": "太白金星",
       "group": 1,
       "importance": 7,
-      "desc": "天庭外交官，多次招安悟空。"
+      "desc": "天庭外交官，多次招安悟空。",
+      "faction": "天庭",
+      "chapter_range": "第 3-4 回、第 7 回",
+      "source_chapters": [
+        3,
+        4,
+        7
+      ],
+      "note": "天庭外交官，多次招安悟空。",
+      "evidence": "文本事实"
     },
     {
       "id": 12,
       "name": "二郎神",
       "group": 1,
       "importance": 8,
-      "desc": "杨戬，玉帝外甥，擒获悟空。"
+      "desc": "杨戬，玉帝外甥，擒获悟空。",
+      "faction": "天庭",
+      "chapter_range": "第 6 回、第 63 回",
+      "source_chapters": [
+        6,
+        63
+      ],
+      "note": "玉帝外甥，擒悟空；后助降九头虫。",
+      "evidence": "文本事实"
     },
     {
       "id": 13,
       "name": "托塔天王",
       "group": 1,
       "importance": 7,
-      "desc": "李靖，天兵统帅，多次征讨。"
+      "desc": "李靖，天兵统帅，多次征讨。",
+      "faction": "天庭",
+      "chapter_range": "第 4-7 回、第 61 回",
+      "source_chapters": [
+        4,
+        5,
+        6,
+        7,
+        61
+      ],
+      "note": "天兵统帅，多次征讨。",
+      "evidence": "文本事实"
     },
     {
       "id": 14,
       "name": "哪吒",
       "group": 1,
       "importance": 7,
-      "desc": "三太子，先锋官，与悟空交战。"
+      "desc": "三太子，先锋官，与悟空交战。",
+      "faction": "天庭",
+      "chapter_range": "第 4-7 回、第 61 回",
+      "source_chapters": [
+        4,
+        5,
+        6,
+        7,
+        61
+      ],
+      "note": "三太子，先锋官。",
+      "evidence": "文本事实"
     },
     {
       "id": 15,
       "name": "牛魔王",
       "group": 3,
       "importance": 8,
-      "desc": "平天大圣，悟空结拜大哥，最终归顺。"
+      "desc": "平天大圣，悟空结拜大哥，最终归顺。",
+      "faction": "妖界",
+      "chapter_range": "第 3 回、第 59-61 回",
+      "source_chapters": [
+        3,
+        59,
+        60,
+        61
+      ],
+      "note": "平天大圣，悟空结拜大哥；最终归顺佛门，按主要身份归妖界。",
+      "evidence": "文本事实"
     },
     {
       "id": 16,
       "name": "铁扇公主",
       "group": 3,
       "importance": 6,
-      "desc": "罗刹女，芭蕉扇主人，牛魔王之妻。"
+      "desc": "罗刹女，芭蕉扇主人，牛魔王之妻。",
+      "faction": "妖界",
+      "chapter_range": "第 59-61 回",
+      "source_chapters": [
+        59,
+        60,
+        61
+      ],
+      "note": "罗刹女，芭蕉扇主人。",
+      "evidence": "文本事实"
     },
     {
       "id": 17,
       "name": "红孩儿",
       "group": 3,
       "importance": 7,
-      "desc": "圣婴大王，牛魔王之子，三昧真火。"
+      "desc": "圣婴大王，牛魔王之子，三昧真火。",
+      "faction": "妖界",
+      "chapter_range": "第 40-42 回",
+      "source_chapters": [
+        40,
+        41,
+        42
+      ],
+      "note": "圣婴大王，牛魔王之子，后被观音收服。",
+      "evidence": "文本事实"
     },
     {
       "id": 18,
       "name": "白骨精",
       "group": 3,
       "importance": 6,
-      "desc": "白骨夫人，三变戏悟空，致师徒离心。"
+      "desc": "白骨夫人，三变戏悟空，致师徒离心。",
+      "faction": "妖界",
+      "chapter_range": "第 27 回",
+      "source_chapters": [
+        27
+      ],
+      "note": "白骨夫人，三变戏悟空。",
+      "evidence": "文本事实"
     },
     {
       "id": 19,
       "name": "黄袍怪",
       "group": 3,
       "importance": 6,
-      "desc": "奎木狼下凡，与百花羞宿缘。"
+      "desc": "奎木狼下凡，与百花羞宿缘。",
+      "faction": "妖界",
+      "chapter_range": "第 28-31 回",
+      "source_chapters": [
+        28,
+        29,
+        30,
+        31
+      ],
+      "note": "奎木狼下凡。",
+      "evidence": "文本事实"
     },
     {
       "id": 20,
       "name": "六耳猕猴",
       "group": 3,
       "importance": 8,
-      "desc": "假悟空，乱真难辨，全书最大悬案。"
+      "desc": "假悟空，乱真难辨，全书最大悬案。",
+      "faction": "妖界",
+      "chapter_range": "第 57-58 回",
+      "source_chapters": [
+        57,
+        58
+      ],
+      "note": "假悟空，真假美猴王事件。",
+      "evidence": "文本事实"
     },
     {
       "id": 21,
       "name": "东海龙王",
       "group": 4,
       "importance": 6,
-      "desc": "敖广，悟空借取定海神针。"
+      "desc": "敖广，悟空借取定海神针。",
+      "faction": "龙族",
+      "chapter_range": "第 3 回、第 14 回、第 22 回",
+      "source_chapters": [
+        3,
+        14,
+        22
+      ],
+      "note": "东海龙王敖广，悟空借取定海神针。",
+      "evidence": "文本事实"
     },
     {
       "id": 22,
       "name": "西海龙王",
       "group": 4,
       "importance": 5,
-      "desc": "敖闰，白龙马之父。"
+      "desc": "敖闰，白龙马之父。",
+      "faction": "龙族",
+      "chapter_range": "第 15 回",
+      "source_chapters": [
+        15
+      ],
+      "note": "西海龙王敖闰，白龙马之父。",
+      "evidence": "文本事实"
     }
   ],
   "links": [
     {
       "source": 1,
       "target": 2,
-      "type": "师徒"
+      "type": "师徒",
+      "rule": "E-01",
+      "chapters": [
+        14,
+        27,
+        57,
+        58,
+        100
+      ],
+      "summary": "五行山收悟空；白骨精事件逐徒；真假美猴王后回归；终至灵山。",
+      "rationale": "E-01 师徒关系：有明确拜师、逐徒与回归事件。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "师徒",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 1,
       "target": 3,
-      "type": "师徒"
+      "type": "师徒",
+      "rule": "E-01",
+      "chapters": [
+        18,
+        19,
+        22,
+        32,
+        100
+      ],
+      "summary": "高老庄收八戒；取经途中多次分合；终至灵山。",
+      "rationale": "E-01 师徒关系：有明确收徒与随行至西天事件。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "师徒",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 1,
       "target": 4,
-      "type": "师徒"
+      "type": "师徒",
+      "rule": "E-01",
+      "chapters": [
+        22,
+        57,
+        58,
+        100
+      ],
+      "summary": "流沙河收沙僧；一路挑担随行至灵山。",
+      "rationale": "E-01 师徒关系：有明确收徒与随行至西天事件。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "师徒",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 1,
       "target": 5,
-      "type": "师徒"
+      "type": "师徒",
+      "rule": "E-01",
+      "chapters": [
+        15,
+        30,
+        100
+      ],
+      "summary": "鹰愁涧收小白龙化马驮行；终至灵山。",
+      "rationale": "E-01 师徒关系：白龙马受唐僧乘骑并随行至西天。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "师徒",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 1,
       "target": 6,
-      "type": "庇护"
+      "type": "庇护",
+      "rule": "E-05",
+      "chapters": [
+        8,
+        12,
+        15,
+        22,
+        27,
+        57,
+        58,
+        100
+      ],
+      "summary": "观音奉旨寻取经人；多次点化与救助唐僧。",
+      "rationale": "E-05 合作/互助：文本多次呈现观音救助与指引。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "庇护",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 6,
       "target": 7,
-      "type": "从属"
+      "type": "从属",
+      "rule": "E-03",
+      "chapters": [
+        8,
+        98,
+        100
+      ],
+      "summary": "观音领如来法旨组织取经；事毕缴旨。",
+      "rationale": "E-03 从属/授职：观音受如来法旨。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "从属",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 6,
       "target": 1,
-      "type": "指派"
+      "type": "指派",
+      "rule": "E-03",
+      "chapters": [
+        8,
+        12
+      ],
+      "summary": "观音选定唐僧为取经人并授以法旨。",
+      "rationale": "E-03 从属/授职：观音奉旨选定并指点取经人。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "指派",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 6,
       "target": 8,
-      "type": "同僚"
+      "type": "同僚",
+      "rule": "E-07",
+      "chapters": [
+        15,
+        37,
+        38,
+        39,
+        74,
+        77
+      ],
+      "summary": "文殊与观音同列佛门菩萨；乌鸡国与狮驼岭事件中间接并现。",
+      "rationale": "E-07 同僚/并列：文本未直接称同僚，按佛门职衔并列归类。",
+      "evidence": "解读假设",
+      "weight": 0.6,
+      "weight_basis": "W-3",
+      "disputed": true,
+      "relation": "同僚",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "单次事件"
     },
     {
       "source": 6,
       "target": 9,
-      "type": "同僚"
+      "type": "同僚",
+      "rule": "E-07",
+      "chapters": [
+        74,
+        77
+      ],
+      "summary": "普贤与观音同列佛门菩萨；狮驼岭事件中间接并现。",
+      "rationale": "E-07 同僚/并列：文本未直接称同僚，按佛门职衔并列归类。",
+      "evidence": "解读假设",
+      "weight": 0.6,
+      "weight_basis": "W-3",
+      "disputed": true,
+      "relation": "同僚",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "单次事件"
     },
     {
       "source": 7,
       "target": 1,
-      "type": "授经"
+      "type": "授经",
+      "rule": "E-06",
+      "chapters": [
+        98,
+        100
+      ],
+      "summary": "唐僧师徒抵达灵山；如来授经并封佛。",
+      "rationale": "E-06 索取/授予：如来授经是文本明确事件。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "授经",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 2,
       "target": 10,
-      "type": "反叛"
+      "type": "反叛",
+      "rule": "E-04",
+      "chapters": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary": "悟空嫌弼马温官职反下天宫；搅乱蟠桃会；大闹天宫。",
+      "rationale": "E-04 敌对/冲突：文本明确反叛与对抗事件。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "反叛",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 2,
       "target": 12,
-      "type": "敌对"
+      "type": "敌对",
+      "rule": "E-04",
+      "chapters": [
+        6,
+        63
+      ],
+      "summary": "二郎神受命擒悟空；后助悟空降九头虫。",
+      "rationale": "E-04 敌对/冲突：第 6 回明确交战与擒拿。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "敌对",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 2,
       "target": 13,
-      "type": "敌对"
+      "type": "敌对",
+      "rule": "E-04",
+      "chapters": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary": "托塔天王率天兵征讨花果山。",
+      "rationale": "E-04 敌对/冲突：文本明确天兵征讨。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "敌对",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 2,
       "target": 14,
-      "type": "敌对"
+      "type": "敌对",
+      "rule": "E-04",
+      "chapters": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary": "哪吒作为先锋与悟空交战。",
+      "rationale": "E-04 敌对/冲突：文本明确哪吒出战。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "敌对",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 2,
       "target": 21,
-      "type": "索取"
+      "type": "索取",
+      "rule": "E-06",
+      "chapters": [
+        3
+      ],
+      "summary": "悟空入龙宫索取定海神针。",
+      "rationale": "E-06 索取/授予：第 3 回明确借宝事件。",
+      "evidence": "文本事实",
+      "weight": 0.6,
+      "weight_basis": "W-3",
+      "disputed": false,
+      "relation": "索取",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "单次事件"
     },
     {
       "source": 2,
       "target": 15,
-      "type": "结拜"
+      "type": "结拜",
+      "rule": "E-05",
+      "chapters": [
+        3,
+        59,
+        60,
+        61
+      ],
+      "summary": "悟空与牛魔王等结拜；火焰山时因芭蕉扇反目。",
+      "rationale": "E-05 合作/互助：结拜为文本明确事件；火焰山冲突另行计入敌对关系。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "结拜",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 2,
       "target": 20,
-      "type": "宿敌"
+      "type": "宿敌",
+      "rule": "E-04",
+      "chapters": [
+        57,
+        58
+      ],
+      "summary": "六耳猕猴假冒悟空；真假难辨；最终被如来识破。",
+      "rationale": "E-04 敌对/冲突：真假美猴王为文本核心冲突；宿敌为关系标签。",
+      "evidence": "解读假设",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": true,
+      "relation": "宿敌",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 10,
       "target": 11,
-      "type": "从属"
+      "type": "从属",
+      "rule": "E-03",
+      "chapters": [
+        3,
+        4,
+        7
+      ],
+      "summary": "太白金星奉玉帝命多次招安悟空。",
+      "rationale": "E-03 从属/授职：太白金星受玉帝差遣。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "从属",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 10,
       "target": 12,
-      "type": "从属"
+      "type": "从属",
+      "rule": "E-03",
+      "chapters": [
+        6
+      ],
+      "summary": "二郎神为玉帝外甥；受调遣擒悟空。",
+      "rationale": "E-03 从属/授职：文本明确玉帝调遣二郎神。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "从属",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 10,
       "target": 13,
-      "type": "从属"
+      "type": "从属",
+      "rule": "E-03",
+      "chapters": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary": "托塔天王受玉帝命统兵征讨。",
+      "rationale": "E-03 从属/授职：文本明确天庭君臣调遣。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "从属",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 10,
       "target": 14,
-      "type": "从属"
+      "type": "从属",
+      "rule": "E-03",
+      "chapters": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary": "哪吒随父受玉帝调遣出战。",
+      "rationale": "E-03 从属/授职：文本明确天庭君臣调遣。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "从属",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 13,
       "target": 14,
-      "type": "父子"
+      "type": "父子",
+      "rule": "E-02",
+      "chapters": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary": "李靖与哪吒父子；同殿为将。",
+      "rationale": "E-02 亲缘关系：文本明确父子关系。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "父子",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 12,
       "target": 14,
-      "type": "兄弟"
+      "type": "兄弟",
+      "rule": "E-07",
+      "chapters": [
+        6
+      ],
+      "summary": "二郎神与哪吒同为天庭战将；共同围剿花果山。",
+      "rationale": "E-07 同僚/并列：兄弟为同袍类推，非文本亲缘。",
+      "evidence": "解读假设",
+      "weight": 0.6,
+      "weight_basis": "W-3",
+      "disputed": true,
+      "relation": "兄弟",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "单次事件"
     },
     {
       "source": 15,
       "target": 16,
-      "type": "夫妻"
+      "type": "夫妻",
+      "rule": "E-02",
+      "chapters": [
+        59,
+        60,
+        61
+      ],
+      "summary": "牛魔王与铁扇公主为夫妻；共居翠云山与积雷山。",
+      "rationale": "E-02 亲缘关系：文本明确夫妻关系。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "夫妻",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 15,
       "target": 17,
-      "type": "父子"
+      "type": "父子",
+      "rule": "E-02",
+      "chapters": [
+        40,
+        41,
+        42
+      ],
+      "summary": "牛魔王与红孩儿父子。",
+      "rationale": "E-02 亲缘关系：文本明确父子关系。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "父子",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 16,
       "target": 17,
-      "type": "母子"
+      "type": "母子",
+      "rule": "E-02",
+      "chapters": [
+        40,
+        41,
+        42
+      ],
+      "summary": "铁扇公主与红孩儿母子。",
+      "rationale": "E-02 亲缘关系：文本明确母子关系。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "母子",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 2,
       "target": 16,
-      "type": "敌对"
+      "type": "敌对",
+      "rule": "E-04",
+      "chapters": [
+        59,
+        60,
+        61
+      ],
+      "summary": "悟空三借芭蕉扇；与铁扇公主冲突。",
+      "rationale": "E-04 敌对/冲突：文本明确三借芭蕉扇冲突。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "敌对",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 2,
       "target": 17,
-      "type": "敌对"
+      "type": "敌对",
+      "rule": "E-04",
+      "chapters": [
+        40,
+        41,
+        42
+      ],
+      "summary": "悟空大战红孩儿；最终观音收服。",
+      "rationale": "E-04 敌对/冲突：文本明确交战事件。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "敌对",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 2,
       "target": 18,
-      "type": "击杀"
+      "type": "击杀",
+      "rule": "E-04",
+      "chapters": [
+        27
+      ],
+      "summary": "三打白骨精；悟空最终击杀白骨夫人。",
+      "rationale": "E-04 敌对/冲突：第 27 回明确击杀事件。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "击杀",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     },
     {
       "source": 2,
       "target": 19,
-      "type": "交战"
+      "type": "交战",
+      "rule": "E-04",
+      "chapters": [
+        28,
+        29,
+        30,
+        31
+      ],
+      "summary": "宝象国黄袍怪事件；悟空与其交战。",
+      "rationale": "E-04 敌对/冲突：文本明确交战事件。",
+      "evidence": "文本事实",
+      "weight": 0.6,
+      "weight_basis": "W-3",
+      "disputed": false,
+      "relation": "交战",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "单次事件"
     },
     {
       "source": 5,
       "target": 22,
-      "type": "父子"
+      "type": "父子",
+      "rule": "E-02",
+      "chapters": [
+        15
+      ],
+      "summary": "白龙马为西海龙王三太子。",
+      "rationale": "E-02 亲缘关系：文本明确父子关系。",
+      "evidence": "文本事实",
+      "weight": 1.0,
+      "weight_basis": "W-1",
+      "disputed": false,
+      "relation": "父子",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "核心关系"
     },
     {
       "source": 21,
       "target": 22,
-      "type": "兄弟"
+      "type": "兄弟",
+      "rule": "E-02",
+      "chapters": [
+        3,
+        15
+      ],
+      "summary": "东海龙王敖广与西海龙王敖闰为四海龙王兄弟。",
+      "rationale": "E-02 亲缘关系：文本明确四海龙王兄弟关系。",
+      "evidence": "文本事实",
+      "weight": 0.8,
+      "weight_basis": "W-2",
+      "disputed": false,
+      "relation": "兄弟",
+      "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
+      "weight_basis_label": "多次互动"
     }
   ]
 }
