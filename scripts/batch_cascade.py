@@ -88,6 +88,19 @@ def precheck(spec):
     if len(_note) > 120:
         issues.append("spec.agents_note 长 %d 字 > 120 上限（W964 定形·W989 收紧·脚注是索引不是摘要·"
                       "细节归 CHANGELOG）" % len(_note))
+    # W1137 口径对齐根修（铁律 15）：写入侧 AGENTS 条目 = note + 「。」+ 固定尾句家具，而体积门禁
+    # check_doc_size_budget.check_footnote_shape 量的是**剥家具后含尾句「。」拼装**的条目本体
+    # ——W1137 实证 note=119 过本守卫、拼装后 139 过不了门禁（本地绿 CI 红）。预检改与门禁
+    # 同源计量（单一事实源·只引用不复制），note 预算随拼装开销自动收紧。
+    try:
+        from check_doc_size_budget import check_footnote_shape
+        _probe = _note.rstrip("。") + "。" + _AGENTS_TAIL.lstrip("。")
+        _bad = check_footnote_shape("；2026-11-05（W0000）占位；" + _probe)
+        if _bad:
+            issues.append("spec.agents_note 拼装后 %s（门禁 check_footnote_shape 同源计量·"
+                          "预算 = 120 − 固定尾句家具与尾句号开销）" % _bad[0])
+    except ImportError:
+        pass  # 判据模块缺失时退回上行 len 守卫（不静默放行超长·上守卫仍在）
     # W1016 硬守卫：desc / head_sentence 禁裸聚合数字（`N 项/篇/页/个/类`）。
     # 病根：两字段逐字写入 README/STRUCTURE/项目说明的**版本抬头行**，而第 31 门禁 C5c
     # 对抬头行也查裸聚合数字（`<!--doc-sync:exempt-->` 在行尾、不紧跟命中 ⇒ 后置豁免不命中）
@@ -260,7 +273,11 @@ def _face_changelog(ctx):
     old_rule, new_rule = f"（W001-W{cur_w}）", f"（W001-W{new_w}）"
     ctx.new_rule = new_rule
     # W712：cur_anchor 改行首锚定——段 body 内的形态示例引用（反引号内·非行首）不再使计数爆炸
-    assert s.count(old_rule) == 1, "编号规则段锚点异常"
+    # W1137 续跑容忍：收官链 versions 步同为幂等版本面——乱序（先 closeout 后 cascade）时规则行
+    # 已被提前推进到本批号 ⇒ old 0 次 / new 恰 1 次，跳过锚点断言继续（尾部 advance 幂等归零）；
+    # 其余形态（old≠1 或 new 重复）仍 fail-closed，断言强度不降。
+    if not (s.count(old_rule) == 0 and s.count(new_rule) == 1):
+        assert s.count(old_rule) == 1, "编号规则段锚点异常"
     _anchor_hits = len(re.findall(rf"^{re.escape(cur_anchor)}", s, re.M))
     assert _anchor_hits == 1, f"现役段标题行首命中 {_anchor_hits}（应为 1·body 自指内容须避开行首同形）"
     # W713：precheck 强制 title 以批次号领衔（历史段 ：W### 解析依赖），新形态段标题由模板自带 batch——
@@ -612,17 +629,17 @@ def _foot_upsert(s_html, new_token, batch):
 
 
 def _face_footers(ctx):
-    """四页脚批次链插入（W717 锚定·W724 双重缺陷根修+链长治理·W781 防御性剥离前导批次号）。"""
-    # W781 R-2：desc 以 W### 开头会叠成「W779 W779…」双 token（W779 四页实证·存量缺陷
-    # 由 W780 顺修）——插入前无条件剥离，与 release_prep 的 spec 时点校验构成双防线。
-    desc = re.sub(r"^W\d{3,4}\s*", "", ctx.desc)
-    for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html"]:
+    """四页脚批次链插入（W717 锚定·W724 双重缺陷根修+链长治理·W1137 短令牌根修）。
+
+    W1137（R-02 访客页脚去工程化·用户 2026-11-05 批准）：页脚链只写 W 号短令牌——
+    批次描述的访客可见面曾达 ~1650 字/页（W926 R-02 P0「信任损失」），
+    权威载体恒为 CHANGELOG，desc/head_sentence 不再进页脚。
+    本批随附一次性存量清理（index/danmaku/tag-cloud/dukou 四页链段裁剪为纯令牌）。
+    """
+    for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html",
+              "site/dukou-engine.html"]:
         s, _ = load(p)
-        ctx.pend.append((p, _foot_upsert(s, f"{ctx.batch} {desc}", ctx.batch), None))
-    p = "site/dukou-engine.html"
-    s, _ = load(p)
-    head_short = ctx.spec["head_sentence"].split("——")[0]
-    ctx.pend.append((p, _foot_upsert(s, f"{ctx.batch} {desc}（{head_short}）", ctx.batch), None))
+        ctx.pend.append((p, _foot_upsert(s, ctx.batch, ctx.batch), None))
 
 
 _AGENTS_TAIL = "。如与上述权威文档冲突，以权威文档为准。*"
