@@ -120,6 +120,23 @@ def content_only_search_change(path, changed_lines):
     return set(changed_lines).issubset(allowed)
 
 
+def _csp_index_lines(path):
+    """动态定位搜索页的 CSP 哈希行与内嵌索引行行号（自测/单测夹具专用）。
+
+    W1137 根修：夹具此前硬编码 [5, 1275]/[5, 1291]——任何 head 行数变化都会平移行号
+    （favicon 三行注入实证断一次·判据脆弱特征）；改由与判据同源的正则动态定位，
+    夹具语义不变（正例 = 变更行恰为 CSP+索引行）。第三返回值 = 非 CSP/索引的稳定
+    内容行（title 行）·供「未识别行」负样本使用。
+    """
+    with open(os.path.join(ROOT, path), encoding="utf-8") as f:
+        lines = f.read().splitlines()
+    csp = next(i for i, ln in enumerate(lines, 1) if CSP_RE.search(ln))
+    idx = next(i for i, ln in enumerate(lines, 1) if INDEX_RE.match(ln))
+    other = next(i for i, ln in enumerate(lines, 1)
+                 if ln.lstrip().startswith("<title>") and i not in (csp, idx))
+    return csp, idx, other
+
+
 def decide(files, changed_map=None):
     """files: 改动文件列表；changed_map: {path: [行号]}（可选·用于 C 修法）。
 
@@ -189,20 +206,23 @@ def _self_test():
     n5, s5, _, _ = decide(["assets/x.png"])
     check("assets ⇒ full", (n5, s5), (True, "full"))
 
-    # C 修法（正例 + 负例）
-    c_ok = content_only_search_change("site/en/search.html", [5, 1275])
+    # C 修法（正例 + 负例）——行号由 _csp_index_lines 动态定位（W1137 根修：硬编码行号被
+    # favicon head 注入平移断过一次·夹具改与判据同源正则取行）
+    csp_en, idx_en, other_en = _csp_index_lines("site/en/search.html")
+    csp_zh, idx_zh, _ = _csp_index_lines("site/data/search.html")
+    c_ok = content_only_search_change("site/en/search.html", [csp_en, idx_en])
     check("搜索页仅 CSP + 索引行变更 ⇒ 豁免（正例）", c_ok, True)
-    c_bad = content_only_search_change("site/en/search.html", [5, 1275, 1300])
+    c_bad = content_only_search_change("site/en/search.html", [csp_en, idx_en, other_en])
     check("搜索页含未识别行变更 ⇒ 不豁免（负样本）", c_bad, False)
-    c_bad2 = content_only_search_change("site/en/search.html", [900])
+    c_bad2 = content_only_search_change("site/en/search.html", [other_en])
     check("搜索页仅布局行变更 ⇒ 不豁免（负样本）", c_bad2, False)
-    c_non = content_only_search_change("site/en/other.html", [5])
+    c_non = content_only_search_change("site/en/other.html", [csp_en])
     check("非搜索页不适用内容级豁免（负样本）", c_non, False)
-    n6, s6, _, _ = decide(["site/en/search.html"], {"site/en/search.html": [5, 1275]})
+    n6, s6, _, _ = decide(["site/en/search.html"], {"site/en/search.html": [csp_en, idx_en]})
     check("EN 搜索页内容级豁免后 ⇒ 免审（正例）", (n6, s6), (False, "skip"))
-    n6b, s6b, _, _ = decide(["site/data/search.html"], {"site/data/search.html": [5, 1291]})
+    n6b, s6b, _, _ = decide(["site/data/search.html"], {"site/data/search.html": [csp_zh, idx_zh]})
     check("ZH 搜索页内容级豁免后 ⇒ 免审（正例·对称）", (n6b, s6b), (False, "skip"))
-    n7, s7, _, _ = decide(["site/en/search.html"], {"site/en/search.html": [5, 1275, 1300]})
+    n7, s7, _, _ = decide(["site/en/search.html"], {"site/en/search.html": [csp_en, idx_en, other_en]})
     check("含未识别行 ⇒ 降级 targeted（负样本）", (n7, s7), (True, "targeted"))
 
     print("---- scope 判据自测：%s ----" % ("全过" if ok else "存在失败"))
