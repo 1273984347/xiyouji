@@ -1,3 +1,17 @@
+### W1145（2026-11-06）：引文精确性槽批
+
+**本批要点**（校验器收紧 + 回归锁 + 四份文档同步·零页面改动 ⇒ 门禁 61 槽不变·不新增坑表条目 ⇒ 计数链不动）：
+
+> **来源**：W1143 标杆页的引文只校验「回目落在事件区间」，未校验「文字确为原文」⇒ 伪造或改写引文可零红灯通过；用户 2026-11-06 令补引文精确性槽。
+> - **T1 判据扩展**：`scripts/check_dataset_provenance.py` 新增 `TEXT_SEARCH` 与 `quote_exactness_errors()`——每条直接引文去空白后必须是 `dataset/text-search.json` 对应回目原文的精确子串；回目非法、原文索引不足 100 回、引文为空或非子串均判红。
+> - **T2 自测 8→9 例**：新增 `quote-not-exact` 负样本（伪造引文必被拦截）。
+> - **T3 回归锁**：新增 `tests/unit/test_w1145_quote_exactness.py` 三例（9 条引文精确命中 / 篡改引文被拦 / 原文索引覆盖 100 回）。
+> - **T4 文档同步**：`docs/agent/gates.md` 第 61 条、`AGENTS.md` §4.2 第 61 槽、`dataset/CODING.md` §9、`dataset/README.md` 校验说明同步补引文精确性判据与 9 例自测。
+> - **T5 判据根修（用户批准）**：第 31 门禁 C4 的归档登记面原只认 `CHANGELOG-ARCHIVE.md` / `CHANGELOG-ARCHIVE-tier2.md` 两个主档，W995 按 W 段拆分出的 `CHANGELOG-ARCHIVE-tier2-W400-W559.md` 分册不在读取面 ⇒ 并行批提交提到 W492（其段在分册内）被误判「未登记」⇒ 集合改 glob `archive/docs/CHANGELOG-ARCHIVE*.md`；gates.md 第 31 条同步；新增 `tests/unit/test_w1145_archive_glob.py` 2 例回归锁。
+> - **验证**：溯源校验 0 FAIL + 自测 9 例全拦 · 溯源相关 13 例单测通过 · 全量 verify 66 段（61 槽）核心全绿 · pytest 1416 passed / 3 skipped（collected 1419）。
+> - **状态**：已落地（本地提交·不 push·不开 PR）。
+> - **文件**：见 file-index。
+
 ### W1144（2026-11-06）：v4 语义令牌第一批（B1 根页 gap 族等值消费）+ 四批台账回填
 
 **本批要点**（v4 语义角色族第一批·消费面施工·不新增门禁槽 ⇒ 门禁 66 段不变·坑表不新增 ⇒ 计数链不动）：
@@ -614,7 +628,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1144），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1145），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

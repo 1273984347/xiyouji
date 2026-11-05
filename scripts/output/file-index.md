@@ -1,3 +1,43 @@
+## W1145 引文精确性槽批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_dataset_provenance.py | W1145 | 改：新增引文精确性判据（text-search 原文精确子串） |
+| tests/unit/test_w1145_quote_exactness.py | W1145 | 新增：引文精确性三例回归锁 |
+| dataset/CODING.md | W1145 | 改：§9 校验说明补引文精确性 |
+| dataset/README.md | W1145 | 改：校验说明补引文精确性 |
+| dataset/INDEX.md | W1145 | 改：目录索引刷新（级联） |
+| docs/agent/gates.md | W1145 | 改：第 61 条补引文精确性与 9 例自测 |
+| AGENTS.md | W1145 | 改：第 61 槽摘要补引文精确性 + 脚注（级联） |
+| docs/00-导读/W批次编号对账表.md | W1145 | 改：新增认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1145 | 改：台账窗口归档（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1145 | 改：脚注滚动归档（级联） |
+| CHANGELOG.md | W1145 | 改：新增 W1145 段（级联） |
+| HANDOVER.md | W1145 | 改：当前进度/头链/里程碑（级联） |
+| README.md | W1145 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1145 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1145 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1145 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1145 | 改：版本抬头推进（级联·幂等） |
+| docs/INDEX.md | W1145 | 改：docs_index 刷新（级联 index 步） |
+| docs/00-导读/统计口径说明.md | W1145 | 改：stats 刷新连带（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1145 | 改：版本抬头推进（级联·幂等） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1145 | 改：版本抬头推进（级联·幂等） |
+| scripts/output/file-index.md | W1145 | 改：本批条目（级联） |
+| scripts/output/stats.json | W1145 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1145 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1145 | 改：stats changelog 面（级联） |
+| scripts/output/tools-inventory.md | W1145 | 改：工具清单刷新（级联） |
+| scripts/output/INDEX.md | W1145 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1145 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1145 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1145 | 改：朱砂实底报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1145 | 改：目录索引收录新测试（级联） |
+| tests/unit/README.md | W1145 | 改：测试计数刷新（级联） |
+| pytest.ini | W1145 | 改：pytest collected 统计标记（级联） |
+| scripts/output/_w1145_spec.json | W1145 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1145.txt | W1145 | 新增：级联清单（级联） |
+
 ## W1144 v4 语义令牌第一批（2026-11-06）
 
 | 文件 | W | 说明 |

@@ -191,10 +191,10 @@ def c5b_extra_surfaces():
 
 
 EXEMPT_MARK = "<!--doc-sync:exempt"
-ARCHIVE_CHANGELOGS = [
-    os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE.md"),
-    os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE-tier2.md"),
-]
+ARCHIVE_CHANGELOGS = sorted(glob.glob(os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE*.md")))
+# W1145 根修：W995 按 W 段把 tier2 拆成 CHANGELOG-ARCHIVE-tier2-W400-W559.md 等分册，
+# 原读取面只列两个主档 ⇒ 分册里的版段（如 W492）对 C4 不可见 ⇒ 提交信息提到即误判「未登记」。
+# 改为通配全部分册（集合语义·顺序无关），并补 2 例回归锁。
 
 
 def changelog_top(text):

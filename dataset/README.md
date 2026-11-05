@@ -61,7 +61,7 @@
 - [CODING.md](CODING.md)：人物关系编码手册（关系类型、权重、证据级别、边界案例与争议处理）。
 - `character-relationship-3d.json`：节点补阵营、登场回目与证据级别；边补关系规则、来源回目、判定理由、权重与争议标记。
 - `edge-wukong-tangseng.json`：唐僧—孙悟空单边示范档案（9 组逐回事件、引文探针结果、max/mean/count 权重敏感性、3 条争议点）。
-- 校验：第 61 门禁 `python scripts/check_dataset_provenance.py`（字段完整性、引用闭合、回目与权重范围、重复边）；`verify_delivery.py` 全量提交前自动执行。
+- 校验：第 61 门禁 `python scripts/check_dataset_provenance.py`（字段完整性、引用闭合、回目与权重范围、重复边、引文精确性——每条引文须为 `text-search.json` 对应回目原文的精确子串）；`verify_delivery.py` 全量提交前自动执行。
 
 > 该网络为示意性人工整理网络，不做统计推断；与调用 `character_nlp.py` 生成的 35 节点 / 329 边共现网络不是同一口径。
 
