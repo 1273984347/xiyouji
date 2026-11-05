@@ -166,7 +166,7 @@
 python scripts/check_dataset_provenance.py
 ```
 
-该命令与 `verify_delivery.py` 第 61 门禁同源：字段完整性、节点引用、回目 1–100、规则编号、权重 0–1、证据级别、重复边、`disputed` 边 rationale、页面 `EMBEDDED_DATA` 同步标记。提交前全量 verify 会自动执行，不再依赖人工记得跑。
+该命令与 `verify_delivery.py` 第 61 门禁同源：校验 22 节点 / 32 边网络与 `edge-wukong-tangseng.json` 的 9 组标杆事件；字段完整性、节点引用、回目 1–100、规则编号、权重 0–1、证据级别、重复边、`disputed` 边 rationale、引文回目落在事件区间、`edge_weight = max(event_weight)`、页面 `EMBEDDED_DATA` 同步标记。提交前全量 verify 会自动执行，不再依赖人工记得跑。
 
 发现编码错误时，请开 GitHub Issue（模板：数据纠错 / 编码争议），写清：
 

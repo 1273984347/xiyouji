@@ -1,0 +1,323 @@
+{
+  "meta": {
+    "title": "唐僧—孙悟空：一条关系边的完整档案",
+    "version": "v0.1.0",
+    "coding_version": "v0.1.0",
+    "provenance_batch": "W1143",
+    "coder": "项目维护者（人工整理）",
+    "updated": "2026-11-06",
+    "text_source": "世德堂本（明万历二十年，1592）为底本，参校人民文学出版社整理本",
+    "coding_doc": "dataset/CODING.md",
+    "quote_probe": "scripts/_cite_probe.py",
+    "evidence_policy": "事件级证据级别=文本事实/解读假设；直接引文仅用 _cite_probe.py 返回的精确子串，转述用 summary。",
+    "weight_method": "边权重 = max(事件权重)；事件权重按 W-1 核心结构 1.0 / W-2 重大冲突 0.8 / W-3 协作救助 0.6 / W-4 弱关联 0.4。",
+    "note": "本档案是示意性人工整理数据，不做统计推断；逐事件来源与判定理由见 events 字段。"
+  },
+  "edge": {
+    "source": 1,
+    "target": 2,
+    "source_name": "唐僧",
+    "target_name": "孙悟空",
+    "relation": "师徒",
+    "rule": "E-01",
+    "weight": 1.0,
+    "weight_basis": "W-1",
+    "weight_basis_label": "核心关系",
+    "evidence": "文本事实",
+    "disputed": false,
+    "chapters": [
+      14,
+      27,
+      28,
+      29,
+      30,
+      31,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      65,
+      66,
+      75,
+      76,
+      77,
+      100
+    ],
+    "source_note": "本档案在原有 3D 边 chapters 基础上补入第 28-31 回（回归救师）与第 56 回（再逐），补入理由见 events 的 rationale。"
+  },
+  "events": [
+    {
+      "id": "E1",
+      "chapter_start": 14,
+      "chapter_end": 14,
+      "chapters": [
+        14
+      ],
+      "title": "五行山收徒",
+      "type": "师徒",
+      "rule": "E-01",
+      "event_weight": 1.0,
+      "weight_basis": "W-1",
+      "summary": "唐僧揭去五行山金字帖，救出孙悟空；悟空拜师，师徒名分确立。",
+      "quotes": [
+        {
+          "text": "徒弟之分，揭得金字，救出神猴，同证灵山",
+          "speaker": "叙述者",
+          "note": "第 14 回，收徒事件的关键句；探针精确子串。",
+          "chapter": 14
+        }
+      ],
+      "rationale": "E-01 师徒关系：文本有明确救出与拜师事件，是整条关系边的起点。",
+      "evidence": "文本事实",
+      "disputed": false,
+      "disputed_note": ""
+    },
+    {
+      "id": "E2",
+      "chapter_start": 27,
+      "chapter_end": 27,
+      "chapters": [
+        27
+      ],
+      "title": "三打白骨精与逐徒",
+      "type": "冲突/逐徒",
+      "rule": "E-04",
+      "event_weight": 0.8,
+      "weight_basis": "W-2",
+      "summary": "白骨夫人三次变化，悟空三次打杀；唐僧写贬书逐走悟空。",
+      "quotes": [
+        {
+          "text": "写了一纸贬书",
+          "speaker": "叙述者",
+          "note": "第 27 回，唐僧逐徒的关键动作；探针精确子串。",
+          "chapter": 27
+        },
+        {
+          "text": "行者连忙接了贬书道：“师父，不消发誓，老孙去罢。",
+          "speaker": "孙悟空",
+          "note": "第 27 回，悟空接贬书离去；探针精确子串。",
+          "chapter": 27
+        }
+      ],
+      "rationale": "E-04 敌对/冲突：三打白骨精与写贬书是明确的冲突与逐徒事件；本条主类型取逐徒/冲突。",
+      "evidence": "文本事实",
+      "disputed": true,
+      "disputed_note": "同一事件同时含‘冲突’与‘逐徒’；若按纯冲突编码，event_weight 仍为 0.8，但 rationale 的落点不同。"
+    },
+    {
+      "id": "E3",
+      "chapter_start": 28,
+      "chapter_end": 31,
+      "chapters": [
+        28,
+        29,
+        30,
+        31
+      ],
+      "title": "八戒义激猴王与回归救师",
+      "type": "合作/回归",
+      "rule": "E-05",
+      "event_weight": 1.0,
+      "weight_basis": "W-1",
+      "summary": "唐僧被黄袍怪所困；八戒到花果山请回悟空；悟空救师，师徒复合。",
+      "quotes": [
+        {
+          "text": "贬书为照，永不听用了。",
+          "speaker": "孙悟空",
+          "note": "第 28 回，悟空念及贬书；探针精确子串。",
+          "chapter": 28
+        },
+        {
+          "text": "你趁早儿驾云回上花果山，请大师兄",
+          "speaker": "白龙马",
+          "note": "第 30 回，小白龙劝八戒去请悟空；探针精确子串。",
+          "chapter": 30
+        }
+      ],
+      "rationale": "E-05 合作/互助：悟空回归并救出唐僧，师徒关系由此修复；回归属核心结构事件。",
+      "evidence": "文本事实",
+      "disputed": false,
+      "disputed_note": ""
+    },
+    {
+      "id": "E4",
+      "chapter_start": 56,
+      "chapter_end": 56,
+      "chapters": [
+        56
+      ],
+      "title": "诛草寇与再逐",
+      "type": "冲突/逐徒",
+      "rule": "E-04",
+      "event_weight": 0.8,
+      "weight_basis": "W-2",
+      "summary": "悟空打死草寇，唐僧再次赶走悟空。",
+      "quotes": [
+        {
+          "text": "三藏却才住口道：“没话说，我不要你跟了，你回去",
+          "speaker": "唐僧",
+          "note": "第 56 回，唐僧再逐悟空；探针精确子串。",
+          "chapter": 56
+        }
+      ],
+      "rationale": "E-04 敌对/冲突：第 56 回是独立于第 27 回的第二次逐徒事件。",
+      "evidence": "文本事实",
+      "disputed": true,
+      "disputed_note": "第 56 回与第 27 回是否合并为同一条‘逐徒链’存在争议；本数据按两次独立事件分列。"
+    },
+    {
+      "id": "E5",
+      "chapter_start": 57,
+      "chapter_end": 58,
+      "chapters": [
+        57,
+        58
+      ],
+      "title": "真假美猴王与和解",
+      "type": "冲突/和解",
+      "rule": "E-04",
+      "event_weight": 0.8,
+      "weight_basis": "W-2",
+      "summary": "六耳猕猴假冒悟空，真假难辨；如来识破，师徒和解。",
+      "quotes": [
+        {
+          "text": "我观假悟空乃六耳猕猴也。",
+          "speaker": "如来",
+          "note": "第 58 回，如来识破假悟空；探针精确子串。",
+          "chapter": 58
+        },
+        {
+          "text": "汝等俱是一心，且看二心竞斗而来也。",
+          "speaker": "如来",
+          "note": "第 58 回，如来点破‘二心’；探针精确子串。",
+          "chapter": 58
+        }
+      ],
+      "rationale": "E-04 敌对/冲突：真假美猴王是明确冲突事件；summary 同时记录和解。",
+      "evidence": "文本事实",
+      "disputed": true,
+      "disputed_note": "‘二心’可读作悟空心魔，也可读作叙事修辞；本数据只记事件，不裁定寓意。"
+    },
+    {
+      "id": "E6",
+      "chapter_start": 59,
+      "chapter_end": 61,
+      "chapters": [
+        59,
+        60,
+        61
+      ],
+      "title": "火焰山协作",
+      "type": "合作",
+      "rule": "E-05",
+      "event_weight": 0.6,
+      "weight_basis": "W-3",
+      "summary": "师徒过火焰山；悟空三借芭蕉扇，师徒协作脱险。",
+      "quotes": [],
+      "rationale": "E-05 合作/互助：跨三回协作事件，但不是师徒关系的结构节点。",
+      "evidence": "文本事实",
+      "disputed": false,
+      "disputed_note": ""
+    },
+    {
+      "id": "E7",
+      "chapter_start": 65,
+      "chapter_end": 66,
+      "chapters": [
+        65,
+        66
+      ],
+      "title": "小雷音寺救师",
+      "type": "救助",
+      "rule": "E-05",
+      "event_weight": 0.6,
+      "weight_basis": "W-3",
+      "summary": "黄眉怪设小雷音寺，悟空救出唐僧。",
+      "quotes": [],
+      "rationale": "E-05 合作/互助：悟空救师，属重复出现的救助模式。",
+      "evidence": "文本事实",
+      "disputed": false,
+      "disputed_note": ""
+    },
+    {
+      "id": "E8",
+      "chapter_start": 75,
+      "chapter_end": 77,
+      "chapters": [
+        75,
+        76,
+        77
+      ],
+      "title": "狮驼岭救师",
+      "type": "救助",
+      "rule": "E-05",
+      "event_weight": 0.6,
+      "weight_basis": "W-3",
+      "summary": "狮驼岭三妖擒住唐僧；悟空救师。",
+      "quotes": [],
+      "rationale": "E-05 合作/互助：悟空救师，属重复出现的救助模式。",
+      "evidence": "文本事实",
+      "disputed": false,
+      "disputed_note": ""
+    },
+    {
+      "id": "E9",
+      "chapter_start": 100,
+      "chapter_end": 100,
+      "chapters": [
+        100
+      ],
+      "title": "灵山成佛",
+      "type": "授职/终局",
+      "rule": "E-06",
+      "event_weight": 1.0,
+      "weight_basis": "W-1",
+      "summary": "师徒抵达灵山；如来授经，悟空封斗战胜佛。",
+      "quotes": [
+        {
+          "text": "孙悟空，汝因大闹天宫，吾以甚深法力，压在五行山下，幸天灾满足，归于释教，且喜汝隐恶扬善，在途中炼魔降怪有功，全终全始，加升大职正果，汝为斗战胜佛。",
+          "speaker": "如来",
+          "note": "第 100 回，如来授职；探针精确子串。",
+          "chapter": 100
+        }
+      ],
+      "rationale": "E-06 索取/授予：如来授职是明确事件，也是师徒关系的终局。",
+      "evidence": "文本事实",
+      "disputed": false,
+      "disputed_note": ""
+    }
+  ],
+  "aggregate": {
+    "formula": "max(event_weight)",
+    "edge_weight": 1.0,
+    "event_weight_max": 1.0,
+    "event_weight_mean": 0.8,
+    "event_count": 9,
+    "event_weight_sum": 7.2,
+    "sensitivity": [
+      {
+        "method": "max",
+        "value": 1.0,
+        "note": "本项目采用；网络表达关系强度，取最强事件而不是累加频次。"
+      },
+      {
+        "method": "mean",
+        "value": 0.8,
+        "note": "若按平均事件强度，权重会降到 0.8；说明算法选择会改变结论。"
+      },
+      {
+        "method": "count",
+        "value": 9,
+        "note": "仅作对照；互动次数不是 0-1 权重，不能直接替代。"
+      }
+    ]
+  },
+  "disputed_points": [
+    "第 27 回同时含‘冲突’与‘逐徒’，主类型取逐徒/冲突；若按纯冲突编码，理由要改写。",
+    "第 56 回与第 27 回是否合并为同一条‘逐徒链’；本数据按两次独立事件分列。",
+    "第 58 回‘二心竞斗’可作心魔解读，也可作叙事修辞；本数据只记事件，不裁定寓意。"
+  ],
+  "quote_policy": "直接引文仅使用 _cite_probe.py 返回的精确子串；未探针回目只用 summary 转述。"
+}

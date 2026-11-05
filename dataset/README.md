@@ -24,6 +24,7 @@
 | criticism-history.json | 7 | 8.9 KB | summary, streams, critics, triangle, candidates |
 | cross-time-danmaku.json | 6 | 9.6 KB | celebrity_profiles, age_groups, mouthpiece_quotes, modern_commentary, international_critics |
 | dashboard.json | 2 | 4.2 KB | meta, kpi |
+| edge-wukong-tangseng.json | 6 | 10.7 KB | meta, edge, events（9 组逐回事件）, aggregate（max/mean/count 敏感性）, disputed_points, quote_policy |
 | emotional-heatmap.json | 4 | 26.7 KB | meta, scholars, hardships, reactions |
 | famous-time-travel.json | 2 | 1.7 KB | travel_identities, scene_illustrations |
 | four-dimensional-research-network.json | 8 | 7.3 KB | meta, dimensions, indicators, radar, theorists |
@@ -59,6 +60,7 @@
 
 - [CODING.md](CODING.md)：人物关系编码手册（关系类型、权重、证据级别、边界案例与争议处理）。
 - `character-relationship-3d.json`：节点补阵营、登场回目与证据级别；边补关系规则、来源回目、判定理由、权重与争议标记。
+- `edge-wukong-tangseng.json`：唐僧—孙悟空单边示范档案（9 组逐回事件、引文探针结果、max/mean/count 权重敏感性、3 条争议点）。
 - 校验：第 61 门禁 `python scripts/check_dataset_provenance.py`（字段完整性、引用闭合、回目与权重范围、重复边）；`verify_delivery.py` 全量提交前自动执行。
 
 > 该网络为示意性人工整理网络，不做统计推断；与调用 `character_nlp.py` 生成的 35 节点 / 329 边共现网络不是同一口径。

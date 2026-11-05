@@ -23,6 +23,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "dataset" / "character-relationship-3d.json"
 PAGE = ROOT / "site" / "data" / "character-relationship-3d.html"
+EDGE_DATA = ROOT / "dataset" / "edge-wukong-tangseng.json"
+EDGE_PAGE = ROOT / "site" / "data" / "wukong-tangseng-benchmark.html"
 
 META_REQUIRED = (
     "coding_version",
@@ -66,6 +68,49 @@ FACTIONS = {"取经团", "天庭", "佛门", "妖界", "龙族"}
 EVIDENCE = {"文本事实", "解读假设"}
 RULES = {"E-01", "E-02", "E-03", "E-04", "E-05", "E-06", "E-07"}
 WEIGHTS = {"W-1", "W-2", "W-3", "W-4"}
+EDGE_META_REQUIRED = (
+    "title",
+    "coding_version",
+    "provenance_batch",
+    "coder",
+    "updated",
+    "text_source",
+    "coding_doc",
+    "quote_probe",
+    "evidence_policy",
+    "weight_method",
+    "note",
+)
+EDGE_REQUIRED = (
+    "source",
+    "target",
+    "source_name",
+    "target_name",
+    "relation",
+    "rule",
+    "weight",
+    "weight_basis",
+    "evidence",
+    "disputed",
+    "chapters",
+    "source_note",
+)
+EVENT_REQUIRED = (
+    "id",
+    "chapter_start",
+    "chapter_end",
+    "chapters",
+    "title",
+    "type",
+    "rule",
+    "event_weight",
+    "weight_basis",
+    "summary",
+    "rationale",
+    "evidence",
+    "disputed",
+    "disputed_note",
+)
 
 
 def _is_int_list(value):
@@ -146,20 +191,123 @@ def validate(data):
     return errors
 
 
-def page_sync_errors():
+def _validate_edge_meta(meta):
+    return ["meta 缺字段或为空：%s" % key for key in EDGE_META_REQUIRED if not meta.get(key)]
+
+
+def _validate_edge_core(edge, events):
     errors = []
-    try:
-        page = PAGE.read_text(encoding="utf-8")
-    except OSError as exc:
-        return ["页面不可读：%s" % exc]
-    if 'coding_version: "v0.1.0"' not in page:
-        errors.append("页面 EMBEDDED_DATA 未同步 coding_version")
-    if 'provenance_batch: "W1138"' not in page:
-        errors.append("页面 EMBEDDED_DATA 未同步 provenance_batch")
+    for key in EDGE_REQUIRED:
+        if key not in edge or edge.get(key) in (None, "", []):
+            errors.append("edge 缺字段或为空：%s" % key)
+    if edge.get("rule") not in RULES:
+        errors.append("edge 规则编号非法：%r" % edge.get("rule"))
+    if edge.get("weight_basis") not in WEIGHTS:
+        errors.append("edge 权重档位非法：%r" % edge.get("weight_basis"))
+    if edge.get("evidence") not in EVIDENCE:
+        errors.append("edge 证据级别非法：%r" % edge.get("evidence"))
+    w = edge.get("weight")
+    if not isinstance(w, (int, float)) or isinstance(w, bool) or not 0 <= w <= 1:
+        errors.append("edge 权重越界：%r" % w)
+    if not _is_int_list(edge.get("chapters")) or any(ch < 1 or ch > 100 for ch in edge["chapters"]):
+        errors.append("edge chapters 非 1-100 整数列表")
+    else:
+        union = sorted({ch for event in events for ch in event.get("chapters", [])})
+        if sorted(set(edge["chapters"])) != union:
+            errors.append("edge chapters 与事件回目并集不一致")
     return errors
 
 
-def self_test(data):
+def _validate_edge_events(events):
+    errors = []
+    seen = set()
+    for event in events:
+        label = event.get("id")
+        for key in EVENT_REQUIRED:
+            if key not in event:
+                errors.append("事件 %s 缺字段：%s" % (label, key))
+        if label in seen:
+            errors.append("事件 id 重复：%s" % label)
+        seen.add(label)
+        if not isinstance(event.get("event_weight"), (int, float)) or isinstance(event.get("event_weight"), bool) or not 0 <= event["event_weight"] <= 1:
+            errors.append("事件 %s 权重越界" % label)
+        if event.get("rule") not in RULES:
+            errors.append("事件 %s 规则编号非法：%r" % (label, event.get("rule")))
+        if event.get("weight_basis") not in WEIGHTS:
+            errors.append("事件 %s 权重档位非法：%r" % (label, event.get("weight_basis")))
+        if event.get("evidence") not in EVIDENCE:
+            errors.append("事件 %s 证据级别非法：%r" % (label, event.get("evidence")))
+        if event.get("disputed") is True and not str(event.get("disputed_note") or "").strip():
+            errors.append("事件 %s 标为争议但缺 disputed_note" % label)
+        if not _is_int_list(event.get("chapters")) or any(not event["chapter_start"] <= ch <= event["chapter_end"] for ch in event["chapters"]):
+            errors.append("事件 %s chapters 越界或不在区间内" % label)
+        if not (isinstance(event.get("chapter_start"), int) and isinstance(event.get("chapter_end"), int) and 1 <= event["chapter_start"] <= event["chapter_end"] <= 100):
+            errors.append("事件 %s 回目区间非法" % label)
+        for quote in event.get("quotes", []):
+            if not quote.get("text") or not quote.get("chapter"):
+                errors.append("事件 %s 引文缺 text/chapter" % label)
+            elif not event["chapter_start"] <= quote["chapter"] <= event["chapter_end"]:
+                errors.append("事件 %s 引文回目不在事件区间内" % label)
+    return errors
+
+
+def _validate_edge_aggregate(aggregate, edge, events):
+    errors = []
+    weights = [event.get("event_weight") for event in events]
+    if not weights:
+        return ["events 为空，无法计算权重"]
+    expected_max = max(weights)
+    expected_mean = sum(weights) / len(weights)
+    if aggregate.get("formula") != "max(event_weight)":
+        errors.append("aggregate formula 非 max(event_weight)")
+    if aggregate.get("edge_weight") != expected_max or edge.get("weight") != expected_max:
+        errors.append("aggregate/edge weight 与 max(event_weight) 不一致")
+    if aggregate.get("event_count") != len(events):
+        errors.append("aggregate event_count 与 events 数不一致")
+    if abs(float(aggregate.get("event_weight_sum", -1)) - sum(weights)) > 1e-9:
+        errors.append("aggregate event_weight_sum 不一致")
+    if abs(float(aggregate.get("event_weight_mean", -1)) - expected_mean) > 1e-9:
+        errors.append("aggregate event_weight_mean 不一致")
+    methods = {item.get("method") for item in aggregate.get("sensitivity", []) if isinstance(item, dict)}
+    if not {"max", "mean", "count"}.issubset(methods):
+        errors.append("aggregate sensitivity 缺 max/mean/count 对照")
+    return errors
+
+
+def validate_edge(data):
+    edge = data.get("edge") or {}
+    events = data.get("events") or []
+    errors = _validate_edge_meta(data.get("meta") or {})
+    errors.extend(_validate_edge_core(edge, events))
+    errors.extend(_validate_edge_events(events))
+    errors.extend(_validate_edge_aggregate(data.get("aggregate") or {}, edge, events))
+    if len(events) != 9:
+        errors.append("事件数应为 9，实际 %d" % len(events))
+    if len(data.get("disputed_points") or []) < 3:
+        errors.append("disputed_points 应至少 3 条")
+    return errors
+
+
+def page_sync_errors():
+    errors = []
+    targets = (
+        (PAGE, "3D 页面", "v0.1.0", "W1138"),
+        (EDGE_PAGE, "标杆页面", "v0.1.0", "W1143"),
+    )
+    for path, label, coding, batch in targets:
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as exc:
+            errors.append("%s 不可读：%s" % (label, exc))
+            continue
+        if ('coding_version: "%s"' % coding) not in text and ('"coding_version": "%s"' % coding) not in text:
+            errors.append("%s EMBEDDED_DATA 未同步 coding_version" % label)
+        if ('provenance_batch: "%s"' % batch) not in text and ('"provenance_batch": "%s"' % batch) not in text:
+            errors.append("%s EMBEDDED_DATA 未同步 provenance_batch" % label)
+    return errors
+
+
+def self_test(data, edge=None):
     cases = []
 
     bad = copy.deepcopy(data)
@@ -186,6 +334,24 @@ def self_test(data):
     for name, sample in cases:
         if not validate(sample):
             failures.append(name)
+
+    if edge is not None:
+        edge_cases = []
+        bad = copy.deepcopy(edge)
+        bad["aggregate"]["edge_weight"] = 0.8
+        edge_cases.append(("edge-bad-max", bad))
+
+        bad = copy.deepcopy(edge)
+        bad["events"][0]["quotes"][0]["chapter"] = 100
+        edge_cases.append(("edge-quote-outside-range", bad))
+
+        bad = copy.deepcopy(edge)
+        bad["events"][1]["disputed_note"] = ""
+        edge_cases.append(("edge-disputed-without-note", bad))
+
+        for name, sample in edge_cases:
+            if not validate_edge(sample):
+                failures.append(name)
     return failures
 
 
@@ -196,26 +362,31 @@ def main():
 
     try:
         data = json.loads(DATA.read_text(encoding="utf-8"))
+        edge = json.loads(EDGE_DATA.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         print("FAIL 数据不可读：%s" % exc)
         print("---- 第 61 门禁 数据集溯源：1 FAIL ----")
         return 2
 
     if args.self_test:
-        failures = self_test(data)
+        failures = self_test(data, edge)
         if failures:
             print("FAIL 自测未拦：%s" % "、".join(failures))
             return 1
-        print("OK 自测 5 例全部按预期拦截")
+        print("OK 自测 8 例全部按预期拦截")
         return 0
 
-    errors = validate(data) + page_sync_errors()
+    errors = (
+        ["关系网络：" + err for err in validate(data)]
+        + ["标杆档案：" + err for err in validate_edge(edge)]
+        + page_sync_errors()
+    )
     if errors:
         for err in errors:
             print("FAIL " + err)
         print("---- 第 61 门禁 数据集溯源：%d FAIL ----" % len(errors))
         return 1
-    print("OK 数据集溯源校验：22 节点 / 32 边字段完整 · 引用闭合 · 回目与权重合法")
+    print("OK 数据集溯源校验：22 节点 / 32 边 + 9 组标杆事件字段完整 · 引用闭合 · 回目与权重合法")
     print("---- 第 61 门禁 数据集溯源：0 FAIL ----")
     return 0
 
