@@ -353,6 +353,54 @@ def _collect_section_files(src, sub, docs_root):
     return rendered
 
 
+_PROVENANCE_BLOCK_RE = re.compile(
+    r"<blockquote>\s*(?:<blockquote>\s*)?<p>(生成来源：.*?)</p>\s*(?:</blockquote>\s*)?</blockquote>\s*",
+    re.S,
+)
+# W1139 R-02 二级：混合溯源块（轨标/引用/原文引文等学术面与出处/核验状态混排）中的
+# 工程字段行——学术面行（轨标/引用/原文引文/主题类别/数据指标）一律保留。
+# 行首锚定（行首或换行后）：正文散文「…都有出处：…」的行中「出处：」不被误吞。
+_PROVENANCE_LINE_RE = re.compile(r"(?:^|(?<=\n))(?:出处|核验状态|生成来源|生成模型|生成日期)：[^\n<]*")
+
+
+def _strip_v1_provenance(body_html: str) -> str:
+    """W1139（R-02 根修·用户 2026-11-06 指令「三个都做」）：工程溯源字样不进访客可见面。
+
+    docs md 源**保持不动**（可信度轨契约与第 18/20 门禁不受影响）；渲染层两级剥离：
+    ① 纯溯源块（仅含 生成来源/生成模型/生成日期/核验状态 的 blockquote·01 逐回双嵌套
+       与 02-06 单层）→ 整块替换为机读注释；
+    ② 混合块（学术面混排工程字段行）→ 按行剥离 出处/核验状态/生成来源/生成模型/生成日期，
+       轨标/引用/原文引文/主题类别/数据指标等访客有价值的行保留；剥离字段汇总为块尾机读注释。
+    机器守卫（铁律 15）：剥离后可见文本（去注释）不得再含 生成来源/生成模型/生成日期/核验状态
+    字段形态——fail-closed（正文散文中的「出处：」一词不受影响：行锚定 + 字段键不含裸「出处」）。
+    search.html 内嵌索引里的 docs 摘要属语料数据面，不在本变换范围（登记于批次报告）。
+    """
+    def _to_comment(m: re.Match) -> str:
+        # 行界类 [^\n>]+：语义同 <[^>]+>（语料中标签不跨行）且不可跨行——
+        # 满足跨行改写门禁（check_cross_line_rewrite·可跨行 [^…]* × 固定替换 = 高危形态）。
+        text = re.sub(r"<[^\n>]+>", "", m.group(1)).strip()
+        text = text.replace("--", "－－")  # 防注释内容截断注释
+        return f"<!-- provenance(v1, machine-only · W1139 R-02): {text} -->\n"
+
+    out = _PROVENANCE_BLOCK_RE.sub(_to_comment, body_html)
+
+    def _strip_mixed(m: re.Match) -> str:
+        span = m.group(0)
+        stripped = _PROVENANCE_LINE_RE.findall(span)
+        if not stripped:
+            return span
+        cleaned = _PROVENANCE_LINE_RE.sub("", span)
+        joined = " / ".join(s.strip() for s in stripped).replace("--", "－－")
+        return cleaned.rstrip() + f"\n<!-- provenance(v2, machine-only · W1139 R-02): {joined} -->\n"
+
+    out = re.sub(r"<blockquote>.*?</blockquote>", _strip_mixed, out, flags=re.S)
+
+    visible = re.sub(r"<!--.*?-->", "", out, flags=re.S)
+    for key in ("生成来源", "生成模型", "生成日期", "核验状态"):
+        assert key not in visible, f"渲染正文可见面残留溯源字样「{key}」（R-02 渲染层守卫）"
+    return out
+
+
 def _render_one_page(src, docs_root, cat_title, rendered, idx):
     """渲染单页（链接改写/markdown/上下篇导航/shell 写盘）（W733 提取）；返回未识别链接清单。"""
     out_rel, fname, _disp = rendered[idx]
@@ -377,6 +425,7 @@ def _render_one_page(src, docs_root, cat_title, rendered, idx):
 
     blob = f"{BLOB}{docs_root}/{fname}"
     body_html, _n_folded = fold_sections(body_html)  # W847 AC-22
+    body_html = _strip_v1_provenance(body_html)  # W1139 R-02：溯源块出访客可见面
     # W888：百回母版插画（仅六回有母版图·插在回目 H1 之后）
     plate = CHAPTER_PLATES.get(out_rel.rsplit("/", 1)[-1])
     if plate:

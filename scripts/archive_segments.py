@@ -244,6 +244,15 @@ def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None
     # W1130 根修：迁出块不得吞掉正本末尾文件级块（含编号规则串）=> 否则版本面推进器 fail-closed
     moved_text, kept_text, _tail = _split_for_move(s, cut)
 
+    # W1142 立式（铁律 22 保留条款的机器化）：体积模式迁出后正本剩余段数不得 < 20——
+    # W1139 实测 29 段曾被 chunk=50 全迁剩 1 段（合法工具调用 → 违规终态）；不足属
+    # 「需压缩而非归档」场景，fail-closed 指引改用段行压缩（batch_spec.fi_group_rows 立式）。
+    if max_bytes is not None:
+        kept_segs = len(re_seg.findall(kept_text))
+        assert kept_segs >= 20, (
+            "体积迁移后正本仅剩 %d 段 < 保留底线 20（AGENTS 铁律 22）——此体量矛盾应压缩段行密度"
+            "（batch_spec.fi_group_rows 立式）而非归档搬段" % kept_segs)
+
     # ---- A4 迁出块内部降序（块内段号）----
     moved_in_block = [_wnum(m) for m in re_seg.finditer(moved_text)]
     assert moved_in_block == sorted(moved_in_block, reverse=True), "迁出块内部段序非降序（尾部含异常内容）"

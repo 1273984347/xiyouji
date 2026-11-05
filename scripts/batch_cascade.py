@@ -851,7 +851,10 @@ def _face_file_index(ctx):
     batch_w = int(str(ctx.batch).lstrip("Ww"))
     head = "## {} {}（{}）".format(
         ctx.batch, re.sub(r"^W\d+\s+", "", ctx.spec["title"].split(" — ")[0].split("（")[0]).strip(), ctx.date)
-    seg_lines = [head, "", "| 文件 | W | 说明 |", "|---|---|---|"] + list(ctx.spec["file_index_rows"]) + ["", ""]
+    # W1142 立式：行数超阈值自动分组（与 backfill_changelog.file_index_block 同口径·
+    # 单一原语 batch_spec.fi_group_rows——spec 恒全量·登记面压缩）
+    import batch_spec as _bs
+    seg_lines = [head, "", "| 文件 | W | 说明 |", "|---|---|---|"] + _bs.fi_group_rows(ctx.spec["file_index_rows"], ctx.batch) + ["", ""]
     rows = nl.join(seg_lines)          # 原生行尾（落盘用）
     rows_lf = "\n".join(seg_lines)      # 归一形态（与 load() 读出的内存形态一致·供内容判等）
     # W1120 幂等判定：本批号是否已立段

@@ -9,7 +9,7 @@
 
 ## 这个目录装什么
 
-生成时点含 19 个直属文件（HTML 页面、JavaScript / TypeScript、其他、数据与配置、样式与资源）；下辖 8 个子目录。详见同目录 `INDEX.md` 的逐文件清单。
+生成时点含 20 个直属文件（HTML 页面、JavaScript / TypeScript、其他、数据与配置、样式与资源）；下辖 8 个子目录。详见同目录 `INDEX.md` 的逐文件清单。
 
 ## 子目录
 

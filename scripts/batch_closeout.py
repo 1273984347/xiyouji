@@ -223,15 +223,41 @@ def selfref_precheck():
     return False, ['CSS 变量自引用体检未过（详见下方输出）', out.strip()[-600:]]
 
 
+def _expand_group_row(p):
+    """分组行 → 目录下磁盘现有文件（递归·W1142 立式）。非分组行返回 None。"""
+    import batch_spec as _bs
+    m = _bs._DIR_GROUP_RE.match(p)  # W1142（P2-3）：正则单一实现（batch_spec 唯一定义）
+    if not m:
+        return None
+    d = m.group(1).replace('\\', '/')
+    out = []
+    for root, _dirs, files in os.walk(os.path.join(ROOT, d)):
+        for f in files:
+            rel = os.path.relpath(os.path.join(root, f), ROOT).replace('\\', '/')
+            if rel not in out:
+                out.append(rel)
+    return out
+
+
 def collect_paths(spec_path, extra):
-    """待 add 的路径集合：spec 的 file_index_rows + 显式 --paths（禁 git add -A·防代提他方在途件）。"""
+    """待 add 的路径集合：spec 的 file_index_rows + 显式 --paths（禁 git add -A·防代提他方在途件）。
+
+    W1142 兼容：目录分组行（「<目录>/（<N> 件）」·batch_spec.fi_group_rows 立式）
+    展开为该目录的磁盘现有文件——分组只在 spec 分组形态时出现（现役 spec 恒全量，
+    本兜底防未来分组态让 add 静默跳过·W1139 实测「跳过 9 个 site/（10 件）」教训）。
+    """
     paths = []
     if spec_path and os.path.isfile(spec_path):
         import json
         sp = json.loads(open(spec_path, encoding='utf-8').read())
         for row in sp.get('file_index_rows', []):
             p = row.strip().strip('|').split('|')[0].strip()
-            if p:
+            if not p:
+                continue
+            expanded = _expand_group_row(p)
+            if expanded is not None:
+                paths.extend(x for x in expanded if x not in paths)
+            elif p not in paths:
                 paths.append(p)
     for p in extra:
         if p not in paths:

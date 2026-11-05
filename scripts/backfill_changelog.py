@@ -84,10 +84,16 @@ def changelog_block(spec):
 
 
 def file_index_block(spec):
-    """单段 file-index 块（与 batch_cascade._face_file_index 同形态）。"""
+    """单段 file-index 块（与 batch_cascade._face_file_index 同形态）。
+
+    W1142 立式：行数超阈值时自动转目录分组行（职责分工——spec 恒全量·登记面压缩，
+    每文件路径集由 spec 权威承载·covers group-aware 判定兼容）。
+    """
+    import batch_spec as _bs
     tb = re.sub(r"^W\d+\s+", "", spec["title"].split(" — ")[0].split("（")[0]).strip()
+    grouped = _bs.fi_group_rows(spec["file_index_rows"], spec.get("batch", ""))
     rows = ["## %s %s（%s）" % (spec["batch"], tb, spec["date"]),
-            "", "| 文件 | W | 说明 |", "|---|---|---|"] + list(spec["file_index_rows"]) + ["", ""]
+            "", "| 文件 | W | 说明 |", "|---|---|---|"] + grouped + ["", ""]
     return "\n".join(rows)
 
 

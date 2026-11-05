@@ -136,12 +136,16 @@ def _pick_target_with_coverage_merged(index_text, head_text, staged=None, main_t
             sp = spec_paths_for(cand)
             if sp and st_eff.issubset(set(sp)):
                 return cand, "spec 覆盖性反查（剔除 merge 带入面后索引 ⊆ W%d spec）" % cand
+            if _spec_covers_candidate(cand, st_eff):
+                return cand, "spec 覆盖性反查（剔除 merge 带入面后索引 ⊆ W%d spec·group-aware）" % cand
     if iw is not None and iw == hw:
         if st:
             for cand in sorted(set(segments(index_text)), reverse=True):
                 sp = spec_paths_for(cand)
                 if sp and st.issubset(set(sp)):
                     return cand, "spec 覆盖性反查（索引 ⊆ W%d spec·修正/追加提交场景）" % cand
+                if _spec_covers_candidate(cand, st):
+                    return cand, "spec 覆盖性反查（索引 ⊆ W%d spec·修正/追加提交场景·group-aware）" % cand
     return pick_target(index_text, head_text)
 def spec_paths_for(w):
     """本批 spec 的应动全集；spec 缺失/不可读 → None（判据不可执行·不伪造红）。
@@ -160,18 +164,77 @@ def spec_paths_for(w):
         return None
 
 
+def spec_covers(w, staged):
+    """group-aware 覆盖判定（W1139 立式）：staged ⊆（精确路径 ∪ 分组目录子树）。
+
+    spec 缺失/不可读 → None（判据不可执行·不伪造红·与 spec_paths_for 同口径）。
+    """
+    if w is None:
+        return None
+    p = os.path.join(SPEC_DIR, "_w%d_spec.json" % w)
+    if not os.path.exists(p):
+        return None
+    try:
+        import batch_spec
+        spec = batch_spec.load_spec(p)
+    except (OSError, ValueError):
+        return None
+    return batch_spec.covers((spec or {}).get("file_index_rows") or [], staged)
+
+
 def staged_paths():
     """索引态路径集（rename 两侧都要·diff.renames=false）。"""
     out = _git("-c", "diff.renames=false", "diff", "--cached", "--name-only")
     return sorted({ln.strip().replace("\\", "/") for ln in out.splitlines() if ln.strip()})
 
 
+def _spec_rows_for(w):
+    """本批 spec 的 file_index_rows 原始行（group-aware 判定用）；缺失/不可读 → None。"""
+    if w is None:
+        return None
+    p = os.path.join(SPEC_DIR, "_w%d_spec.json" % w)
+    if not os.path.exists(p):
+        return None
+    try:
+        import batch_spec
+        return (batch_spec.load_spec(p) or {}).get("file_index_rows") or []
+    except (OSError, ValueError):
+        return None
+
+
+def _spec_covers_candidate(w, staged):
+    """group-aware 覆盖判定（W1139 立式·目录分组行按子树展开）。
+
+    spec 缺失/不可读 → False（判据不可执行·不伪造红：该候选不被选中·行为与旧
+    「sp 为 None 跳过候选」一致）。单一实现 = batch_spec.covers。
+    """
+    rows = _spec_rows_for(w)
+    if not rows:
+        return False
+    import batch_spec
+    ok, _extra = batch_spec.covers(rows, staged)
+    return ok
+
+
 def plan(staged, spec_set):
-    """纯逻辑：返回 (ok, extra)。spec_set 为空/None → 不可判定（ok=True·由调用方打 WARN）。"""
+    """纯逻辑：返回 (ok, extra)。spec_set 为空/None → 不可判定（ok=True·由调用方打 WARN）。
+
+    公开签名保持双参（W1142·api_diff 破坏性回归：三参化曾判破坏性变化阻断 pre-commit）。
+    group-aware 判定走 plan_group（新函数）。
+    """
     if not spec_set:
         return True, []
     extra = sorted(set(staged) - set(spec_set))
     return (not extra), extra
+
+
+def plan_group(staged, spec_rows):
+    """W1139 立式：group-aware 覆盖判定（目录分组行按子树展开·铁律 15 同源计量——
+    与 batch_spec.covers 单一实现）。spec_rows 空 → 按不可判定放行（调用方打 WARN）。"""
+    if not spec_rows:
+        return True, []
+    import batch_spec
+    return batch_spec.covers(spec_rows, staged)
 
 
 def _index_blobs():
@@ -240,6 +303,8 @@ def pick_target_merged(index_text, head_text, staged=None, main_text=None, carri
             sp = spec_paths_for(cand)
             if sp and st_eff.issubset(set(sp)):
                 return cand, "spec 覆盖性反查（剔除 merge 带入面后索引 ⊆ W%d spec）" % cand
+            if _spec_covers_candidate(cand, st_eff):
+                return cand, "spec 覆盖性反查（剔除 merge 带入面后索引 ⊆ W%d spec·group-aware）" % cand
     return _pick_target_with_coverage_merged(index_text, head_text, staged, main_text, carried)
 
 
@@ -269,12 +334,28 @@ def _multi_batch_scope(index_text, head_text, main_text, carried):
     return new_segs[0], sorted(paths)
 
 
+def _multi_batch_rows(new_segs):
+    """多批 rows 并集（W1139 group-aware 判定用·新函数不改 W1129 公开签名）。
+
+    new_segs 为空 → None（无分组判定面）。spec 缺失的批静默跳过（与并集口径一致）。
+    """
+    rows_all = []
+    for w in new_segs or []:
+        rows = _spec_rows_for(w)
+        if rows:
+            rows_all.extend(rows)
+    return rows_all or None
+
+
 def run_gate():
     staged = staged_paths()
     idx_text, head_text = _show(":"), _show("HEAD")
     main_text = _show("origin/main")
     carried = carried_paths(staged)
     multi_target, multi_paths = _multi_batch_scope(idx_text, head_text, main_text, carried)
+    multi_rows = _multi_batch_rows(
+        sorted(set(segments(idx_text)) - set(segments(head_text)) - set(segments(main_text or "")))
+    ) if multi_paths else None
     if multi_paths:
         target = multi_target
         why = "多批同 PR（新增段 %d 个·取最小批号归属·应动全集取各批 spec 并集）" % (
@@ -294,7 +375,8 @@ def run_gate():
     else:
         if carried:
             print("NOTE  merge 带入面 %d 件（内容与 origin/main 一致·非本提交改动）已排除判定" % len(carried))
-        ok, extra = plan(effective, spec_set)
+        ok, extra = (plan_group(effective, multi_rows) if multi_rows
+                     else plan(effective, spec_set))
         if not ok:
             fails.append("索引含 %d 个本批 spec 之外的文件（归属 W%s·%s）——代提风险" % (len(extra), target, why))
             for n in extra[:10]:
@@ -318,6 +400,9 @@ def run_report():
     main_text = _show("origin/main")
     carried = carried_paths(staged)
     multi_target, multi_paths = _multi_batch_scope(idx_text, head_text, main_text, carried)
+    multi_rows = _multi_batch_rows(
+        sorted(set(segments(idx_text)) - set(segments(head_text)) - set(segments(main_text or "")))
+    ) if multi_paths else None
     if multi_paths:
         target = multi_target
         why = "多批同 PR（新增段 %d 个·取最小批号归属·应动全集取各批 spec 并集）" % (
@@ -327,7 +412,8 @@ def run_report():
         target, why = pick_target_merged(idx_text, head_text, staged, main_text, carried)
         spec_set = spec_paths_for(target)
     effective = sorted(set(staged) - set(carried))
-    ok, extra = plan(effective, spec_set)
+    ok, extra = (plan_group(effective, multi_rows) if multi_rows
+                 else plan(effective, spec_set))
     print("归属：%s（%s）" % (target, why))
     print("spec：%s（%s 条）" % ("有" if spec_set else "缺", len(spec_set or [])))
     print("索引：%d 件（merge 带入面 %d 件已排除）" % (len(staged), len(carried)))

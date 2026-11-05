@@ -90,7 +90,7 @@
    }
   },
   "data/character-relationship-3d.html": {
-   "sha1": "6f1db07a2f818d65e73716c2575e6ed89443f2f7",
+   "sha1": "1a8e84b5440904857833cd299ec763ceab9f3da8",
    "counts": {
     "div.kpi-card": 1
    }
@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "800f38276a103259c96a6f4c773f750b8cc9b9df",
+   "sha1": "8124566f00c22d2490c77913af086f31ea919f89",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "019f2d7a90a4447a12584ac051fb874b7d3b346c",
+   "sha1": "497175ed292eb55edcfa3e64b8fffce880dc7ea1",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "7ada05eab8129f995164895638feee8e0790f179",
+   "sha1": "38d90df308be635f5bf7c23c2277af7e840aac7b",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -624,6 +624,12 @@
    "sha1": "a690c110c165a2d7498826e090af331b316fd0f6",
    "counts": {}
   },
+  "about.html": {
+   "sha1": "072b8aea99d4a688dfe2d8aecd7a54a05b003afb",
+   "counts": {
+    "a.primary": 1
+   }
+  },
   "curated.html": {
    "sha1": "dcd3ba51f094914592f18efd269c6fb1e6a50788",
    "counts": {
@@ -640,19 +646,19 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "731a71b007f3ee3b3f3c4f0b684b87b16d0e4083",
+   "sha1": "f8a91438a96db5478794d75ff0ef9e3a1cb7631d",
    "counts": {
     "button": 1
    }
   },
   "guide.html": {
-   "sha1": "ef00b031c083c00891355c10e6c39c96b8b5aef5",
+   "sha1": "bbbb26c10bae06f7d2c491f06fa1621012a62b35",
    "counts": {
     "a.primary": 1
    }
   },
   "index.html": {
-   "sha1": "68a9b6c5ba7e531fc67bc43dfe270a0c804a9484",
+   "sha1": "48efd68d9dc6030d71d281fdfed724b32174d187",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1399,7 +1405,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "451988950a7ebb3e75d6ba358eb711d9083e005b",
+   "sha1": "4b4ec8861e9f6e699efd1fc96ea192cb5609e773",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1495,5 @@
    }
   }
  },
- "generated_at": "2026-11-05T02:04:38.997Z"
+ "generated_at": "2026-11-05T20:02:19.399Z"
 }
