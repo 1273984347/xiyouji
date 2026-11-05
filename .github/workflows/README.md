@@ -30,7 +30,7 @@
 | Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site`（W401 决策：不采用 build-test-deploy.yml，避免部署竞态·已删除） |
 | Lighthouse CI | [`perf.yml`](perf.yml) | `push` main（site/**）+ `pull_request` + 每周一 + `workflow_dispatch`（W422 补 push：原仅 PR 从不运行·首跑暴露性能债后阈值已校准） | LHCI 性能预算断言（LCP≤5000ms/CLS≤0.3/TBT≤300ms，W424 实测校准） |
 | Screenshot Review | [`screenshot-review.yml`](screenshot-review.yml) | `push` main（site/** 或脚本/workflow 变更）+ `pull_request` + 每周一 + `workflow_dispatch`（W421：页脚/文档-only 跳过·data 页定向截图） | Playwright 截图 + 布局审计 |
-| Dependency Review | [`dependency-review.yml`](dependency-review.yml) | `pull_request`（main·dependabot PR 即真实流量） | 依赖变更审查：漏洞/许可证（W683·fail-on-severity=moderate） |
+| Dependency Review | [`dependency-review.yml`](dependency-review.yml) | `pull_request`（main·W1137 起 dependabot 退役·人工依赖 PR 仍走本审查） | 依赖变更审查：漏洞/许可证（W683·fail-on-severity=moderate） |
 | Mark Stale | [`stale.yml`](stale.yml) | 每日 01:30 UTC + `workflow_dispatch`（W683） | 陈旧 issue/PR 标记（60 天）与自动关闭（再 14 天·pinned 豁免） |
 | OpenSSF Scorecard | [`scorecard.yml`](scorecard.yml) | 每周一 03:00 UTC + `branch_protection_rule` 变更 + `workflow_dispatch`（W683） | OpenSSF 安全评分（SARIF 入 Code scanning + publish_results 徽章） |
 | Release Desktop | [`release.yml`](release.yml) | `push` tag `v*` + `workflow_dispatch` | 三平台桌面安装包构建（Win NSIS / macOS universal dmg+zip / Linux AppImage）并发布 GitHub Release + latest*.yml 自动更新元数据 |
