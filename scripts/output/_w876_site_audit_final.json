@@ -4516,5 +4516,16 @@
         "area": 0
       }
     ]
+  },
+  "data/wukong-tangseng-benchmark.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "rect",
+        "cls": "weight-bar",
+        "kind": "fill",
+        "area": 0
+      }
+    ]
   }
 }

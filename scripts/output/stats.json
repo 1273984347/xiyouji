@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-06T03:48:23",
+  "_generated": "2026-11-06T05:50:29",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -55,8 +55,8 @@
     "domain": "html_total − _template.html（generate_csp TEMPLATE_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1141",
-    "value": 857
+    "last_changed_by": "W1143",
+    "value": 858
   },
   "gate_count": {
     "domain": "scripts/verify_delivery.py「第 N 槽/门禁」max",
@@ -69,8 +69,8 @@
     "domain": "site/**/*.html（递归全站）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1141",
-    "value": 858
+    "last_changed_by": "W1143",
+    "value": 859
   },
   "icon_allowlist_entries": {
     "domain": "scripts/output/_w949_icon_field_allowlist.json 顶层数组长度",
@@ -83,8 +83,8 @@
     "domain": "site 全树含 INLINED 标记页",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W894",
-    "value": 330
+    "last_changed_by": "W1143",
+    "value": 331
   },
   "learn_docs": {
     "domain": "docs/07-学以致用/*.md（排除 README）",
@@ -104,8 +104,8 @@
     "domain": "pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议）",
     "generator": "scripts/stats.py",
     "introduced_by": "W830",
-    "last_changed_by": "W1142",
-    "value": 1409
+    "last_changed_by": "W1143",
+    "value": 1413
   },
   "report_docs": {
     "domain": "docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化）",
@@ -118,8 +118,8 @@
     "domain": "html_total − _template.html − _shell.html（check_js_syntax/check_structure）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1141",
-    "value": 856
+    "last_changed_by": "W1143",
+    "value": 857
   },
   "script_classes": {
     "domain": "scripts/[A-Z]_* 类目录数",
@@ -132,15 +132,15 @@
     "domain": "html_total − 两模板壳（check_seo_head SEO_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W591",
-    "last_changed_by": "W1141",
-    "value": 856
+    "last_changed_by": "W1143",
+    "value": 857
   },
   "site_data_html": {
     "domain": "site/data/*.html",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W459",
-    "value": 88
+    "last_changed_by": "W1143",
+    "value": 89
   },
   "site_en_html": {
     "domain": "site/en/*.html",
@@ -174,8 +174,8 @@
     "domain": "site/data_html − _shell.html",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W459",
-    "value": 87
+    "last_changed_by": "W1143",
+    "value": 88
   },
   "w864_entries": {
     "domain": "scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计",

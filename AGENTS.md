@@ -14,7 +14,7 @@
 
 - **文档（Docs）**：Markdown 写就的逐回解读、人物分析、主题专题、文化背景、诗词赏析、个人随笔。
 - **站点（Site）**：可浏览的纯静态 HTML 站点，`file://` 双击即可打开，部署于 GitHub Pages（https://1273984347.github.io/xiyouji/ ）。
-- **数据可视化**：87<!--stats:visualization_pages--> 个 D3.js / Three.js 可视化页（site/data/ 共 88<!--stats:site_data_html--> 个 HTML，「87」不含模板壳 _shell.html），覆盖 133 个<!--doc-sync:exempt--> 数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34<!--stats:script_classes--> 类主题 A–AH）。
+- **数据可视化**：88<!--stats:visualization_pages--> 个 D3.js / Three.js 可视化页（site/data/ 共 89<!--stats:site_data_html--> 个 HTML，「87」不含模板壳 _shell.html），覆盖 133 个<!--doc-sync:exempt--> 数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34<!--stats:script_classes--> 类主题 A–AH）。
 - **可问询入口**：Web Agent「西游记·渡口问津」（xiyouji-agent-web/）——自研 OpenAI-compatible 引擎（server/engine/·W680·全主流大模型端点适配），可对话、检索 docs/source、跑脚本。
 
 **核心内容规模**：A1–A6 内容板块共 616<!--stats:a1_a6_docs--> 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 35 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→616）；英文站 site/en/ 138<!--stats:site_en_html--> 页已全量英文化。
@@ -63,7 +63,7 @@ xiyouji/
 ├── source/                # 原著原文（分回）+ 引用与网络解读（含学术论文索引）
 ├── site/                  # 可浏览 HTML 站点
 │   ├── index.html dashboard.html dukou-engine.html curated.html 等
-│   ├── data/              # 可视化页（88<!--stats:site_data_html--> 个 HTML，D3/Three；「87 可视化页」口径不含模板壳 _shell.html）
+│   ├── data/              # 可视化页（89<!--stats:site_data_html--> 个 HTML，D3/Three；「88 可视化页」口径不含模板壳 _shell.html）
 │   ├── en/                # 英文站（138<!--stats:site_en_html--> 页）
 │   ├── static/js|css|fonts/  # 本地化 D3/Three、tokens.css/system.css、子集化字体
 │   └── sitemap.xml
@@ -176,7 +176,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 58. **动效守卫覆盖槽**（check_motion_guard.py·W1135）——站内 reduced-motion 契约（DESIGN.md §5.3）要求用户开启「减少动态效果」时 d3 图表的 `.duration()/.delay()` 必须归零，但既有门禁只清零**裸数字实参**（BARE）⇒ **表达式实参**（EXPR）未套守卫 ⇒ reduced-motion 用户仍会经历动效与延迟（机器判据缺位是根因）。判据：实参取宽口径（括号平衡扫描·窄口径正则会漏掉含嵌套括号的实参）后分档——GUARDED（实参含守卫变量 `MOYUN_RM` 或 `REDUCE_MOTION`·站内两种命名皆可）/ EXPR / BARE，GUARDED 之外一律判红；含调用点的页另须声明守卫变量。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；`--report` 只报不判红。
 59. **design 资产清单对拍槽**（check_design_asset_manifest.py·W1135）——`assets/design/` 目录文档声明过磁盘上不存在的文件，且代码块里的旧目录树整段指向已废弃的一次性工作区 ⇒ 清单失准只能靠人工发现。判据：条目取三来源并集（反引号条目 + 代码块目录树按**缩进栈**还原层级 + 命令形态路径条目）；**硬错**只判「声明存在但磁盘不存在」，外部引用 / 通配占位 / 枚举合并 / 仓库根引用四类降为 NOTE 不判红，「磁盘存在但未声明」只作 NOTE。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；`--report` 只报不判红。
 60. **tooltip 多行间距槽**（check_tooltip_spacing.py·W1135）——W1105 批把 EN 站私有 `.tooltip{}` 盒样式收敛为规范 `.chart-tooltip`，但遗留 ZH 页的旧类名规则从未命中（死代码）⇒ tooltip 多行内容一直挤在一起。判据（运行层·playwright·file:// 直开·亮/暗双主题）：CSSOM 中命中规范规则 `.chart-tooltip div + div` + 第二行计算样式 `margin-top` == `--space-2` 解析值 + 旧死规则 `.tooltip div + div` 残留为零 + 双主题读数一致。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（playwright/浏览器不可用·fail-closed）；`--report` 只报不判红。
-61. **数据集溯源槽**（check_dataset_provenance.py·W1141）——22 节点/32 边人物关系数据补溯源字段后，若后续编辑删字段、改回目越界或把权重写出 0–1，既有门禁全都不看数据集字段 ⇒ 数据层会静默退化。判据：`dataset/character-relationship-3d.json` 的 meta 必填键、节点与边必填字段、节点引用闭合、`chapters` 1–100、`weight` 0–1、规则编号 E-01～E-07、证据级别枚举、重复边、`disputed` 边 rationale、页面 `EMBEDDED_DATA` 的 `coding_version`/`provenance_batch` 同步标记。恒跑（读 dataset JSON·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 61 门禁 数据集溯源：N FAIL ----`；退出码 0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；单测 `tests/unit/test_w1138_dataset_provenance.py` + `tests/unit/test_w1141_gate_mount.py`。
+61. **数据集溯源槽**（check_dataset_provenance.py·W1141）——22 节点/32 边人物关系数据补溯源字段后，若后续编辑删字段、改回目越界或把权重写出 0–1，既有门禁全都不看数据集字段 ⇒ 数据层会静默退化。判据：`dataset/character-relationship-3d.json` 的 meta 必填键、节点与边必填字段、节点引用闭合、`chapters` 1–100、`weight` 0–1、规则编号 E-01～E-07、证据级别枚举、重复边、`disputed` 边 rationale；并校验 `dataset/edge-wukong-tangseng.json` 的 9 组事件、引文回目落在事件区间、`edge_weight = max(event_weight)`；页面 `EMBEDDED_DATA` 的 `coding_version`/`provenance_batch` 同步标记。恒跑（读 dataset JSON·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 61 门禁 数据集溯源：N FAIL ----`；退出码 0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；单测 `tests/unit/test_w1138_dataset_provenance.py` + `tests/unit/test_w1141_gate_mount.py` + `tests/unit/test_w1143_benchmark.py`；自测 8 例负样本（3D 5 + 标杆 3）。
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
@@ -325,4 +325,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1134-W1134 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-05（W1137）界面交互迭代批：页脚短令牌根修 + favicon 全站 + 三 hub 入口 + 结构缺陷修复 + W1095 收编（E-196/E-197·坑表 290）· pytest 一千三百八十八 passed；2026-11-05（W1138）作品集入口与数据地基批：新增方法与边界页与关系数据溯源 + 首页/导读导航 + README 速览 + sitemap/搜索索引/统计同步；2026-11-06（W1139）R-02 模板层去工程化批：溯源块出访客可见面（纯块整剥/混合块行剥·学术面保留）· 外科应用 616 页 · 守卫 fail-closed · pytest 一千三百八十八 passed；2026-11-06（W1141）数据集溯源门禁批：校验器挂第 61 槽 + verify 注册表/文档规范同步 + 三例回归锁；2026-11-06（W1142）治理维护批：体积四层根修（写入侧分组/腾窗保留/密度判据·246 到 107KB）· 对抗审查已派发 · Backlog 对账 · pytest 一千三百九十一 passed。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1138-W1138 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-06（W1139）R-02 模板层去工程化批：溯源块出访客可见面（纯块整剥/混合块行剥·学术面保留）· 外科应用 616 页 · 守卫 fail-closed · pytest 一千三百八十八 passed；2026-11-06（W1141）数据集溯源门禁批：校验器挂第 61 槽 + verify 注册表/文档规范同步 + 三例回归锁；2026-11-06（W1142）治理维护批：体积四层根修（写入侧分组/腾窗保留/密度判据·246 到 107KB）· 对抗审查已派发 · Backlog 对账 · pytest 一千三百九十一 passed；2026-11-06（W1143）唐僧—孙悟空标杆页批：9 组事件逐回档案 + 第 61 槽扩展 + 四例回归锁；2026-11-06（W1144）v4 语义令牌第一批：B1 三根页 gap 族 12 位等值消费（别名同指·J2 零差异）· 四批台账回填 · pytest 一千四百零六 passed。如与上述权威文档冲突，以权威文档为准。*

@@ -90,7 +90,7 @@
    }
   },
   "data/character-relationship-3d.html": {
-   "sha1": "1a8e84b5440904857833cd299ec763ceab9f3da8",
+   "sha1": "4cfd7b44f14ff83c4841335cb54a5b8b8dffca86",
    "counts": {
     "div.kpi-card": 1
    }
@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "8124566f00c22d2490c77913af086f31ea919f89",
+   "sha1": "c3a13eb5af34767606f67ae059e3d461b1be02f2",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "497175ed292eb55edcfa3e64b8fffce880dc7ea1",
+   "sha1": "07fb790ecf7fec552864786d5f4c692f0fe884b9",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "38d90df308be635f5bf7c23c2277af7e840aac7b",
+   "sha1": "8129201d2827065904272cfa6a243c1a4467c698",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -620,12 +620,16 @@
     "div.bw-cat": 1
    }
   },
+  "data/wukong-tangseng-benchmark.html": {
+   "sha1": "89451c970cdd400761bafc99c96de627e2e2f2db",
+   "counts": {}
+  },
   "404.html": {
    "sha1": "a690c110c165a2d7498826e090af331b316fd0f6",
    "counts": {}
   },
   "about.html": {
-   "sha1": "072b8aea99d4a688dfe2d8aecd7a54a05b003afb",
+   "sha1": "30aacc772e54320e172bc21db9e4d3d774d892e0",
    "counts": {
     "a.primary": 1
    }
@@ -646,7 +650,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "f8a91438a96db5478794d75ff0ef9e3a1cb7631d",
+   "sha1": "070d5138c829b90ff5339c62ec51b49a3eb800a5",
    "counts": {
     "button": 1
    }
@@ -658,7 +662,7 @@
    }
   },
   "index.html": {
-   "sha1": "48efd68d9dc6030d71d281fdfed724b32174d187",
+   "sha1": "e89a397153fd2895b2d7ec77f4af95b016085b41",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1495,5 +1499,5 @@
    }
   }
  },
- "generated_at": "2026-11-05T20:02:19.399Z"
+ "generated_at": "2026-11-05T21:58:40.469Z"
 }

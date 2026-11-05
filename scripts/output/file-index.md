@@ -1,3 +1,84 @@
+## W1144 v4 语义令牌第一批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W1144 | 改：gap: var(--space-3/5/6/7) → var(--gap-tight/base/loose/block) 4 位（语义角色族第一批·别名等值·J2 零差异） |
+| site/guide.html | W1144 | 改：gap 族等值替换 2 位（同上） |
+| site/dashboard.html | W1144 | 改：gap 族等值替换 6 位（同上） |
+| docs/00-导读/W批次编号对账表.md | W1144 | 改：W1138/W1139/W1141/W1142 四行 hash 与状态回填（PR #143·96dfb12b） |
+| scripts/output/_w1144_spec.json | W1144 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1144.txt | W1144 | 新增：级联清单（级联） |
+| CHANGELOG.md | W1144 | 改：W1144 段落（级联） |
+| HANDOVER.md | W1144 | 改：最后更新链+里程碑块（级联） |
+| scripts/output/file-index.md | W1144 | 改：file-index 段（级联） |
+| AGENTS.md | W1144 | 改：脚注+版本（级联） |
+| site/dukou-engine.html | W1144 | 改：页脚短令牌推进（级联） |
+| site/data/cross-time-danmaku.html | W1144 | 改：页脚短令牌推进（级联） |
+| site/data/tag-cloud.html | W1144 | 改：页脚短令牌推进（级联） |
+| scripts/output/stats.json | W1144 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1144 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1144 | 改：stats changelog 面（级联） |
+| scripts/output/INDEX.md | W1144 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1144 | 改：gen_folder_docs 刷新（级联） |
+| README.md | W1144 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1144 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1144 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1144 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1144 | 改：版本抬头推进（级联·幂等） |
+| docs/INDEX.md | W1144 | 改：docs_index 刷新（级联 index 步） |
+| scripts/batch_cascade.py | W1144 | 改：rotate 三重根修（幂等守卫超限放行补滚 / 淘汰目标严格口径 min 块自愈指针 / _remain 与 W534 两处潜伏炸点修复·P1-1 复发真根因闭环） |
+
+## W1143 唐僧—孙悟空标杆页批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| dataset/edge-wukong-tangseng.json | W1143 | 新增：9 组事件单边档案（引文/权重/争议） |
+| dataset/README.md | W1143 | 改：数据索引与标杆档案说明 |
+| dataset/character-relationship-3d.json | W1143 | 改：唐僧→悟空边补 28-31/56 回 |
+| dataset/CODING.md | W1143 | 改：第 61 槽扩展说明 |
+| dataset/INDEX.md | W1143 | 改：目录索引收录标杆 JSON |
+| site/data/wukong-tangseng-benchmark.html | W1143 | 新增：单边档案标杆页 |
+| site/about.html | W1143 | 改：七页主线 + 第 07 项 |
+| site/data/character-relationship-3d.html | W1143 | 改：逐边档案链接 + EMBEDDED 回目同步 |
+| site/data/tag-cloud.html | W1143 | 改：标签云收录标杆页 |
+| site/data/search.html | W1143 | 改：搜索索引重建 |
+| site/en/search.html | W1143 | 改：英文搜索索引重建 |
+| site/sitemap.xml | W1143 | 改：收录标杆页 |
+| site/data/INDEX.md | W1143 | 改：数据页目录收录 |
+| site/data/README.md | W1143 | 改：数据页计数刷新 |
+| site/INDEX.md | W1143 | 改：站点目录收录 |
+| site/README.md | W1143 | 改：站点计数刷新 |
+| site/index.html | W1143 | 改：页脚 W 令牌推进 |
+| site/data/cross-time-danmaku.html | W1143 | 改：页脚 W 令牌推进 |
+| site/dukou-engine.html | W1143 | 改：页脚 W 令牌推进 |
+| scripts/check_dataset_provenance.py | W1143 | 改：第 61 槽扩展校验标杆档案 |
+| tests/unit/test_w1143_benchmark.py | W1143 | 新增：标杆档案四例回归锁 |
+| tests/unit/test_w1138_dataset_provenance.py | W1143 | 改：双数据集自测与页面同步 |
+| tests/unit/INDEX.md | W1143 | 改：目录索引收录新测试 |
+| tests/unit/README.md | W1143 | 改：测试计数刷新 |
+| AGENTS.md | W1143 | 改：第 61 槽摘要补标杆数据 |
+| docs/agent/gates.md | W1143 | 改：第 61 条补标杆数据判据 |
+| docs/00-导读/W批次编号对账表.md | W1143 | 改：新增认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1143 | 改：台账窗口归档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1143 | 改：脚注滚动归档 |
+| CHANGELOG.md | W1143 | 改：新增 W1143 段 |
+| HANDOVER.md | W1143 | 改：当前进度/头链/里程碑 |
+| README.md | W1143 | 改：版本行同步 |
+| STRUCTURE.md | W1143 | 改：版本行同步 |
+| docs/00-导读/项目说明.md | W1143 | 改：版本行同步 |
+| CITATION.cff | W1143 | 改：版本面同步 |
+| .github/workflows/README.md | W1143 | 改：版本面同步 |
+| scripts/output/file-index.md | W1143 | 改：本批条目 |
+| scripts/output/stats.json | W1143 | 改：7 键统计刷新 |
+| scripts/output/stats-changelog.json | W1143 | 改：变更史追加 |
+| scripts/output/stats-index.md | W1143 | 改：反向索引重渲染 |
+| scripts/output/_w1143_spec.json | W1143 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1143.txt | W1143 | 新增：级联文件清单 |
+| scripts/output/tools-inventory.md | W1143 | 改：工具清单刷新 |
+| scripts/output/INDEX.md | W1143 | 改：目录索引刷新 |
+| scripts/output/README.md | W1143 | 改：目录计数刷新 |
+| pytest.ini | W1143 | 改：pytest collected 统计标记 |
+
 ## W1142 治理维护批（2026-11-06）
 
 | 文件 | W | 说明 |

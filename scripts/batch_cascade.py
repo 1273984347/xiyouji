@@ -320,32 +320,50 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     ⇒ 本版：本批块**已存在于链上** ⇒ 视为本批已滚动过 ⇒ 直接返回（零变化）。
     """
     if _locate_handover_milestone(s, ctx.batch) is not None:
-        return s
+        # W1144 根修（P1-1 复发真根因·W1142/W1144 两批连续实证 7>6）：W1124 幂等守卫与
+        # 插入路径 rotate 序列自相矛盾——本批块刚被 upsert 进链，locate 恒命中 ⇒ rotate
+        # 恒零变化 ⇒ 概要块只增不减。守卫改为「本批在链上 **且** 窗口未超限（≤6）」：
+        # 超限 = 本批插入后未滚（补救路径·继续往下滚）；未超限的重跑场景维持零变化
+        # （W1124 防「单独重跑再淘汰一块」语义保留）。
+        _win_blocks = [b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：", s)
+                       if h1pos < b.start() < s.find("## 二、", h1pos)]
+        if len(_win_blocks) <= 6:
+            return s
     pm = re.search(r"> 历史概要（W(\d+) 及更早）的详细记录见", s)
     assert pm, "未找到历史概要指针"
-    oldest_w = pm.group(1)
-    # W713 双形态 + 窗口限定进度段内（防后文待办/方法论区 bullet 误入旋转窗）
-    blocks_all = [b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：", s) if b.start() > h1pos]
+    # W1144 根修：淘汰目标 = 进度段有界窗口内 **min 批号块**——块形态用与门禁 C7 同口径
+    # 的严格正则（`**：` 尾约束·_handover_milestone_blocks 是宽松定位器会把进度段内
+    # 非 milestone bullet 一并计入（实测 19 vs 7）→ min 漂移误拦）；不再按指针号全文匹配。
+    # 指针在淘汰后统一改指新最老（W713 旋转语义·自愈式归位）。
+    _bounds = _handover_progress_bounds(s)
+    assert _bounds, "未找到「一、当前进度」段"
+    _seg = s[_bounds[0]:_bounds[1]]
+    _mb = [(int(m.group(1)), _bounds[0] + m.start()) for m in
+           re.finditer(r"^- \*\*(?:v[\d.]+ )?W(\d+)[^*]*\*+[^\r\n:*]{0,30}：", _seg, re.M)]
+    assert len(_mb) >= 2, "里程碑窗口不足 2 块（W913：无盈可滚）"
+    _min_num = min(x[0] for x in _mb)
+    oldest_w = "W%d" % _min_num
+    tgt = [st for num, st in _mb if num == _min_num]
+    blocks_all = _mb
     # W913：窗口不足 2 块不滚动（契约「只留最近 5 版」——不足时无盈可滚；原无条件滚动在
     # 单块窗口必致空窗异常·阻断后续一切级联·W912/W913 两批连续实证）
     if len(blocks_all) < 2:
         return s
-    tgt = [b for b in blocks_all if b.group(1) == "W" + oldest_w]
-    if not tgt:
-        raise AssertionError(f"未找到最老里程碑块 W{oldest_w}；现存块 {[b.group(1) for b in blocks_all]}")
-    assert int(tgt[0].group(1)[1:]) == min(int(b.group(1)[1:]) for b in blocks_all), (
-        "淘汰目标非窗口最老块——「历史概要」指针漂移（W712 手工段实证 pm=最新块形态）："
-        "先手工把指针归位到最老可见块再级联（W713 旋转语义防线）"
-    )
-    bm_start = tgt[0].start()
+    bm_start = tgt[0]
+    # W1144：tgt 取自有界窗口（_handover_milestone_blocks·恒在进度段内），跨段断言随之
+    # 保留为双保险（W705 教训：跨段整块淘汰会吞掉段标题）。
     assert bm_start > h1pos, (
-        f"最老里程碑块 W{oldest_w} 不在「一、当前进度」段内（W705 教训：跨段整块淘汰会吞掉段标题）"
+        f"最老里程碑块 {oldest_w} 不在「一、当前进度」段内（W705 教训：跨段整块淘汰会吞掉段标题）"
     )
-    eidx = s.find(f"> 历史概要（W{oldest_w} 及更早）的详细记录见", bm_start)
-    assert eidx != -1
+    eidx = s.find(f"> 历史概要（W{_min_num} 及更早）的详细记录见", bm_start)
+    assert eidx != -1, (
+        "W1144 自愈语义：指针未指窗口最老块（旧指针 W%s）——淘汰后 replace 需旧行在位；"
+        "此形态说明指针曾指向更老已滚块，先归位指针再级联" % pm.group(1)
+    )
     # W534 承诺恢复（W713）：淘汰前断言该批详细记录已入 CHANGELOG 段（信息零丢失）
-    assert re.search(rf"^### (?:v[\d.]+（[^）]*）：W{oldest_w}\b|W{oldest_w}（[^）]*）：)", ctx.cl_src, re.M), (
-        f"CHANGELOG 无 W{oldest_w} 段（W534 契约：删前逐批断言 CHANGELOG 有段）"
+    # W1144：oldest_w 已是 "W1127" 带前缀形态——rf 内不再重复加 W（双 W 曾使断言恒假）
+    assert re.search(rf"^### (?:v[\d.]+（[^）]*）：{oldest_w}\b|{oldest_w}（[^）]*）：)", ctx.cl_src, re.M), (
+        f"CHANGELOG 无 {oldest_w} 段（W534 契约：删前逐批断言 CHANGELOG 有段）"
     )
     # W624 修复：整块淘汰 = 标题行 + 其后连续 bullet 行（至空行/新组/标题/引用行止）。
     # W557 版候选表里的裸 "\n" 命中标题行自身行尾 → 每批只删标题行文本，bullets 留成
@@ -356,9 +374,11 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     # W713 旋转语义修正：pm ← 淘汰后窗口剩余最老块（W534 滚动窗口意图——原实现 pm←new_w
     # 使下一批淘汰上批最新块、更老块永不滚动，W710→W711 实证行为）
     _win = s[h1pos:s.find("> 历史概要（W")]
-    _remain = [int(x[1:]) for x in re.findall(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：", _win)]
+    # W1144 修：捕获组移到 W 之后（原 (W\d+) 使 int('W1144') 炸——rotate 恒早退从未触达的潜伏炸点）
+    _remain = [int(x) for x in re.findall(r"- \*\*(?:v[\d.]+ )?W(\d+)[^*]*\*+[^\r\n:*]{0,30}：", _win)]
     assert _remain, "淘汰后里程碑窗口为空（异常）"
-    s = s.replace(f"> 历史概要（W{oldest_w} 及更早）的详细记录见",
+    # W1144：oldest_w 已含 W 前缀——f 串不再重复加 W（双 W 曾使 replace 恒不命中·指针不随淘汰同步）
+    s = s.replace(f"> 历史概要（{oldest_w} 及更早）的详细记录见",
                   f"> 历史概要（W{min(_remain)} 及更早）的详细记录见", 1)
     return s
 
