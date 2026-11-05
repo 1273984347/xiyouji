@@ -88,6 +88,19 @@ def precheck(spec):
     if len(_note) > 120:
         issues.append("spec.agents_note 长 %d 字 > 120 上限（W964 定形·W989 收紧·脚注是索引不是摘要·"
                       "细节归 CHANGELOG）" % len(_note))
+    # W1137 口径对齐根修（铁律 15）：写入侧 AGENTS 条目 = note + 「。」+ 固定尾句家具，而体积门禁
+    # check_doc_size_budget.check_footnote_shape 量的是**剥家具后含尾句「。」拼装**的条目本体
+    # ——W1137 实证 note=119 过本守卫、拼装后 139 过不了门禁（本地绿 CI 红）。预检改与门禁
+    # 同源计量（单一事实源·只引用不复制），note 预算随拼装开销自动收紧。
+    try:
+        from check_doc_size_budget import check_footnote_shape
+        _probe = _note.rstrip("。") + "。" + _AGENTS_TAIL.lstrip("。")
+        _bad = check_footnote_shape("；2026-11-05（W0000）占位；" + _probe)
+        if _bad:
+            issues.append("spec.agents_note 拼装后 %s（门禁 check_footnote_shape 同源计量·"
+                          "预算 = 120 − 固定尾句家具与尾句号开销）" % _bad[0])
+    except ImportError:
+        pass  # 判据模块缺失时退回上行 len 守卫（不静默放行超长·上守卫仍在）
     # W1016 硬守卫：desc / head_sentence 禁裸聚合数字（`N 项/篇/页/个/类`）。
     # 病根：两字段逐字写入 README/STRUCTURE/项目说明的**版本抬头行**，而第 31 门禁 C5c
     # 对抬头行也查裸聚合数字（`<!--doc-sync:exempt-->` 在行尾、不紧跟命中 ⇒ 后置豁免不命中）

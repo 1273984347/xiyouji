@@ -866,7 +866,7 @@
   "| site/reader/themes-hub.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |",
   "| site/rum-viewer.html | W1137 | 改：favicon 注入 + noindex/nofollow robots meta（R-09 收口·sitemap 已 EXCLUDE 的兜底） |",
   "| site/visit-viewer.html | W1137 | 改：favicon 注入 + noindex/nofollow robots meta（R-09 收口） |",
-  "| scripts/batch_cascade.py | W1137 | 改：_face_footers 短令牌根修（R-02·desc/head_sentence 不再进访客页脚·dukou 并入同循环） |",
+  "| scripts/batch_cascade.py | W1137 | 改：_face_footers 短令牌根修（R-02）+ 级联续跑容忍（规则行已被幂等 versions 提前推进时）+ agents_note 预检与门禁 check_footnote_shape 同源计量（口径对齐） |",
   "| DESIGN.md | W1137 | 改：新增 §2.6 品牌图标（favicon 单一事实源 = static/icons·禁第二标记·页脚短令牌契约） |",
   "| docs/11-方案报告/审查与评审/站点交互流程审查第四轮复核报告-2026-11-05.md | W1137 | 新增：四轮复核报告（W926/W1070 遗留闭环核验 + 五维度现势 + N-10~N-13 四条新增发现） |",
   "| docs/11-方案报告/设计与架构方案/界面交互迭代施工方案-W1137-2026-11-05.md | W1137 | 新增：本批施工方案（方案即落地记录·欠账路线 v4 语义族/R-02 模板层） |",
@@ -902,6 +902,7 @@
   "| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1137 | 改：版本抬头推进（级联 versions·幂等） |",
   "| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1137 | 改：版本抬头推进（级联 versions·幂等） |",
   "| .github/dependabot.yml | W1137 | 删：dependabot 永久降噪（用户 2026-11-05 批准·12 PR 已全关；依赖升级改由专项批统一评估·安全面由 CI pip-audit/npm-audit 盯防） |",
-  "| .github/INDEX.md | W1137 | 改：gen_folder_docs 重生成（dependabot.yml 行随删件移除） |"
+  "| .github/INDEX.md | W1137 | 改：gen_folder_docs 重生成（dependabot.yml 行随删件移除） |",
+  "| scripts/check_doc_size_budget.py | W1137 | 改：_agents_face 行切片根修——脚注=末行且无换行尾时 find(nl)=-1 使 t[fs:-1] 吞收尾星号致剥家具失败误判 +19 字（W1137 note=119 首踩·往批短 note 潜伏）末行取到文件尾 |"
  ]
 }
