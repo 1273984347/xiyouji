@@ -94,6 +94,22 @@ def _plan_spec(staged, spec_paths):
     return (not extra and bool(spec_set)), extra, missing
 
 
+def _group_aware_relax(spec, staged, ok_spec, extra):
+    """W1139 立式兜底：精确集判不过时试 group-aware 覆盖（目录分组行按子树展开）。
+
+    batch_spec.covers 单一实现；判不过 ⇒ 维持精确集结果（extra 不变）。解析异常 ⇒
+    维持原判（不静默放行）。
+    """
+    try:
+        import batch_spec as _bs
+        ok2, _extra2 = _bs.covers(spec.get("file_index_rows") or [], staged)
+        if ok2:
+            return True, []
+    except (OSError, ValueError):
+        pass
+    return ok_spec, extra
+
+
 def _guard_staged(staged_names, pathspecs, expect_spec=None):
     """W991 守卫：无 pathspec 且索引有暂存件 → 拒绝（防扫入他方暂存·W989 实证）。
 
@@ -109,6 +125,44 @@ def _guard_staged(staged_names, pathspecs, expect_spec=None):
         "（含并行会话的·W989 实证混入级联十四面）。改用：safe_commit -F <msg> -- <逐文件路径>" % len(staged_names))
 
 
+def _load_spec_file(path):
+    """读 spec JSON（读不出抛 OSError/ValueError·调用方在场内捕获转拒绝）。"""
+    import json
+    return json.load(open(path, encoding="utf-8"))
+
+
+def _verify_expect_spec(expect_spec, staged):
+    """--expect-spec 全量判定（W1002/W1004 口径·W1139 group-aware 兜底并入）。
+
+    返回 None = 判过（继续提交流程）；返回 1 = 已打印拒绝原因（调用方直接 return）。
+    """
+    try:
+        spec = _load_spec_file(expect_spec)
+    except (OSError, ValueError) as e:
+        print("[safe_commit] 拒绝：--expect-spec 读不出（%s）：%s" % (expect_spec, e))
+        return 1
+    spec_paths = _spec_paths(spec)
+    ok_spec, extra, missing = _plan_spec(staged, spec_paths)
+    if not ok_spec:
+        ok_spec, extra = _group_aware_relax(spec, staged, ok_spec, extra)
+    if not spec_paths:
+        print("[safe_commit] 拒绝：spec 的 file_index_rows 为空（判据不可执行·fail-closed）")
+        return 1
+    if extra:
+        print("[safe_commit] 拒绝：索引含 %d 个 **spec 之外** 的文件（代提风险·W989/W1002/W1004 三次实证）"
+              % len(extra))
+        for name in extra[:10]:
+            print("      extra: " + name)
+        if len(extra) > 10:
+            print("      …另 %d 件" % (len(extra) - 10))
+        print("      改法：git restore --staged <路径> 摘出；或把该件写入本批 spec 后再提交")
+        return 1
+    if missing:
+        print("[safe_commit] NOTE：spec 声明了 %d 件但索引里没有（可能已入库/无需改）：%s%s"
+              % (len(missing), ", ".join(missing[:5]), " …" if len(missing) > 5 else ""))
+    return None
+
+
 def commit(msg_args, pathspecs, max_retry=1, expect_spec=None):
     staged = []
     r = subprocess.run(["git", "-c", "core.quotePath=false", "-c", "diff.renames=false",
@@ -116,31 +170,10 @@ def commit(msg_args, pathspecs, max_retry=1, expect_spec=None):
                        capture_output=True, text=True, encoding="utf-8", errors="replace")
     if r.returncode == 0:
         staged = [x.strip().replace("\\", "/") for x in r.stdout.split("\n") if x.strip()]
-    spec_paths = None
     if expect_spec:
-        import json
-        try:
-            spec = json.load(open(expect_spec, encoding="utf-8"))
-        except (OSError, ValueError) as e:
-            print("[safe_commit] 拒绝：--expect-spec 读不出（%s）：%s" % (expect_spec, e))
-            return 1
-        spec_paths = _spec_paths(spec)
-        ok_spec, extra, missing = _plan_spec(staged, spec_paths)
-        if not spec_paths:
-            print("[safe_commit] 拒绝：spec 的 file_index_rows 为空（判据不可执行·fail-closed）")
-            return 1
-        if extra:
-            print("[safe_commit] 拒绝：索引含 %d 个 **spec 之外** 的文件（代提风险·W989/W1002/W1004 三次实证）"
-                  % len(extra))
-            for name in extra[:10]:
-                print("      extra: " + name)
-            if len(extra) > 10:
-                print("      …另 %d 件" % (len(extra) - 10))
-            print("      改法：git restore --staged <路径> 摘出；或把该件写入本批 spec 后再提交")
-            return 1
-        if missing:
-            print("[safe_commit] NOTE：spec 声明了 %d 件但索引里没有（可能已入库/无需改）：%s%s"
-                  % (len(missing), ", ".join(missing[:5]), " …" if len(missing) > 5 else ""))
+        _rc = _verify_expect_spec(expect_spec, staged)
+        if _rc is not None:
+            return _rc
     ok, why = _guard_staged(staged, pathspecs, expect_spec)
     if not ok:
         print(why)

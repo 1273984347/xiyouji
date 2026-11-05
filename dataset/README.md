@@ -19,7 +19,7 @@
 | cave-estate.json | 4 | 12.2 KB | caves, by_owner_rank, by_region, top_luxury |
 | century-dialogue.json | 2 | 1.5 KB | triangle_dialogue, roundtable_topics |
 | chapter-structure-graph.json | 5 | 4.1 KB | meta, kpi, cluster, heatmap, wordCount |
-| character-relationship-3d.json | 4 | 4.1 KB | meta, kpi, nodes, links |
+| character-relationship-3d.json | 4 | 4.1 KB | meta, kpi, nodes（22，含阵营/回目/证据）, links（32，含规则/理由/权重） |
 | concept-device.json | 9 | 10.1 KB | nav, prism, radio, mobius, cipher |
 | criticism-history.json | 7 | 8.9 KB | summary, streams, critics, triangle, candidates |
 | cross-time-danmaku.json | 6 | 9.6 KB | celebrity_profiles, age_groups, mouthpiece_quotes, modern_commentary, international_critics |
@@ -54,6 +54,14 @@
 | theological-intervention-network.json | 5 | 5.9 KB | meta, network, sankey, radar, timeline |
 | timeline.json | 1 | 4.3 KB | timeline |
 | underworld-power-network.json | 6 | 8.6 KB | hierarchy, network, sankey, radar, timeline |
+
+## 编码与溯源
+
+- [CODING.md](CODING.md)：人物关系编码手册（关系类型、权重、证据级别、边界案例与争议处理）。
+- `character-relationship-3d.json`：节点补阵营、登场回目与证据级别；边补关系规则、来源回目、判定理由、权重与争议标记。
+- 校验：第 61 门禁 `python scripts/check_dataset_provenance.py`（字段完整性、引用闭合、回目与权重范围、重复边）；`verify_delivery.py` 全量提交前自动执行。
+
+> 该网络为示意性人工整理网络，不做统计推断；与调用 `character_nlp.py` 生成的 35 节点 / 329 边共现网络不是同一口径。
 
 ## 使用方式
 

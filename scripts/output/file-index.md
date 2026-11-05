@@ -1,902 +1,166 @@
+## W1142 治理维护批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_spec.py | W1142 | 改：fi_group_rows 分组原语 + FI_SEGMENT_GROUP_THRESHOLD=200（体积根修①·登记面/应动全集职责分工定形） |
+| scripts/backfill_changelog.py | W1142 | 改：file_index_block 写入侧自动分组（行数超阈值→目录分组行·单一原语） |
+| scripts/batch_cascade.py | W1142 | 改：_face_file_index 写入侧自动分组（与 backfill 同口径） |
+| scripts/archive_segments.py | W1142 | 改：体积模式迁出后剩余段 ≥20 断言（体积根修③·铁律 22 保留条款机器化·不足指引压缩而非归档） |
+| scripts/check_doc_size_budget.py | W1142 | 改：_fileindex_row_density 段行密度判据 cap 200（体积根修④·拦绕过写入侧的段） |
+| scripts/batch_closeout.py | W1142 | 改：collect_paths 分组行展开兜底（体积根修②·防分组态 add 静默跳过） |
+| scripts/output/file-index.md | W1142 | 改：W1137/W1134/W1139 三巨段按新立式分组重写（246KB→107KB·存量清偿） |
+| scripts/output/_w1139_spec.json | W1142 | 改：恢复全量逐行（职责分工定形配套·8 special+858 页+4 判据脚本行） |
+| HANDOVER.md | W1142 | 改：Backlog 对账（T6·W1095 条目实证移出 + W1142 对账注记·触发器 84 批）+ 最后更新链（级联） |
+| docs/11-方案报告/审查与评审/对抗审查报告-2026-11-06.md | W1142 | 新增：对抗审查派发回报（T5·W1072 以来 69 批变更面·七项清单） |
+| docs/11-方案报告/设计与架构方案/界面交互迭代施工方案-W1137-2026-11-05.md | W1142 | 改：§2 欠账路线体积矛盾行改注已根修（四层） |
+| scripts/output/_w1142_spec.json | W1142 | 新增：本批 spec |
+| docs/00-导读/W批次编号对账表.md | W1142 | 改：W1142 认领行登记（含「对抗审查已派发」token） |
+| tests/unit/test_w1142_volume_remedies.py | W1142 | 新增：体积根修回归锁 11 例（对抗审查 P2-1·铁律 18-②） |
+| AGENTS.md | W1142 | 改：铁律 22 就地并入超窗处置优先序（①压缩②搬段③拆批·对抗审查 E 项采纳） |
+
+## W1141 数据集溯源门禁挂载批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_dataset_provenance.py | W1141 | 改：门禁化输出（固定汇总行 + 0/1/2 退出码） |
+| scripts/verify_delivery.py | W1141 | 改：新增第 61 槽 数据集溯源 + _SCOPE_CORE 恒跑 |
+| docs/agent/gates.md | W1141 | 改：补第 61 条完整定义 |
+| AGENTS.md | W1141 | 改：§4.2 补第 61 槽摘要 + 陈旧「57 槽」订正为「61 槽」 |
+| docs/00-导读/文档规范.md | W1141 | 改：verify full 段数 65 → 66 |
+| tests/unit/test_w1141_gate_mount.py | W1141 | 新增：门禁挂载回归锁三例 |
+| tests/unit/INDEX.md | W1141 | 改：目录索引收录新测试 |
+| tests/unit/README.md | W1141 | 改：测试计数刷新 |
+| dataset/README.md | W1141 | 改：校验入口改为第 61 门禁 |
+| dataset/CODING.md | W1141 | 改：校验说明改为第 61 门禁同源 |
+| pytest.ini | W1141 | 改：pytest collected 统计标记刷新 |
+| CHANGELOG.md | W1141 | 改：新增 W1141 段 |
+| HANDOVER.md | W1141 | 改：当前进度/头链/里程碑块 |
+| README.md | W1141 | 改：版本行同步 |
+| STRUCTURE.md | W1141 | 改：版本行同步 |
+| docs/00-导读/项目说明.md | W1141 | 改：版本行同步 |
+| CITATION.cff | W1141 | 改：版本面同步 |
+| .github/workflows/README.md | W1141 | 改：版本面同步 |
+| scripts/output/file-index.md | W1141 | 改：本批条目 |
+| scripts/output/stats.json | W1141 | 改：gate_count 61 与 pytest_collected 刷新 |
+| scripts/output/stats-changelog.json | W1141 | 改：变更史追加 |
+| scripts/output/stats-index.md | W1141 | 改：反向索引重渲染 |
+| scripts/output/_w1141_spec.json | W1141 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1141.txt | W1141 | 新增：级联文件清单 |
+| archive/docs/AGENTS-ARCHIVE.md | W1141 | 改：脚注滚动归档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1141 | 改：台账行窗口归档 |
+| site/index.html | W1141 | 改：页脚 W 令牌推进 |
+| site/data/cross-time-danmaku.html | W1141 | 改：页脚 W 令牌推进 |
+| site/data/tag-cloud.html | W1141 | 改：页脚 W 令牌推进 |
+| site/dukou-engine.html | W1141 | 改：页脚 W 令牌推进 |
+| docs/00-导读/W批次编号对账表.md | W1141 | 改：新增认领行 |
+
+## W1139 R-02 模板层去工程化批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/（1 件） | W1139 | 改：file-index 窗口归档连带 |
+| docs/11-方案报告/设计与架构方案/（1 件） | W1139 | 改：§2 欠账路线 R-02 行改注已落地（含测绘修正：可见面涉页 515） |
+| scripts/（5 件） | W1139 | 改：_strip_v1_provenance 两级变换（纯溯源块整剥→机读注释  |
+| scripts/output/（2 件） | W1139 | 新增：本批 spec（618 面） |
+| site/（10 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+| site/data/（88 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+| site/en/（138 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+| site/reader/（102 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+| site/reader/culture/（35 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+| site/reader/essays/（45 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+| site/reader/people/（216 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+| site/reader/poetry/（14 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+| site/reader/themes/（210 件） | W1139 | 改：v1/v2 溯源元信息块出访客可见面（→机读注释·学术面保留）或零改动重写 |
+
+## W1138 作品集入口与数据地基批（2026-11-05）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/about.html | W1138 | 新增：作品集入口页（方法与边界） |
+| site/index.html | W1138 | 改：主导航/页脚加关于入口 + 全卷索引第 15 行 |
+| site/guide.html | W1138 | 改：导航/页脚加关于入口 |
+| site/data/cross-time-danmaku.html | W1138 | 改：页脚 W 令牌推进 |
+| site/data/tag-cloud.html | W1138 | 改：页脚 W 令牌推进 |
+| site/dukou-engine.html | W1138 | 改：页脚 W 令牌推进 |
+| README.md | W1138 | 改：作品集速览段 + 30 秒上手表入口 |
+| CHANGELOG.md | W1138 | 改：新增 W1138 段 + 全站页数口径刷新 |
+| HANDOVER.md | W1138 | 改：当前进度/头链/里程碑块 |
+| AGENTS.md | W1138 | 改：版本脚注批次注记 |
+| STRUCTURE.md | W1138 | 改：版本行同步 |
+| docs/00-导读/项目说明.md | W1138 | 改：版本行同步 |
+| docs/00-导读/W批次编号对账表.md | W1138 | 改：新增认领行 |
+| docs/agent/gates.md | W1138 | 改：stats 标记数值同步 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1138 | 改：stats 标记数值同步 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1138 | 改：stats 标记数值同步 |
+| site/sitemap.xml | W1138 | 改：新增 about.html 条目 |
+| site/data/search.html | W1138 | 改：搜索索引重建 |
+| site/en/search.html | W1138 | 改：搜索索引重建 |
+| scripts/output/stats.json | W1138 | 改：统计基线 5 键刷新 |
+| scripts/output/stats-changelog.json | W1138 | 改：变更史追加 |
+| scripts/output/stats-index.md | W1138 | 改：反向索引重渲染 |
+| scripts/output/file-index.md | W1138 | 改：本批条目 |
+| scripts/output/INDEX.md | W1138 | 改：目录文档 refreshing 收录新页 |
+| scripts/output/README.md | W1138 | 改：目录文档计数刷新 |
+| scripts/output/tools-inventory.md | W1138 | 改：工具清单刷新 |
+| site/INDEX.md | W1138 | 改：目录文档收录 about.html |
+| site/README.md | W1138 | 改：直属文件计数 19→20 |
+| scripts/output/_vermilion_solid_cache.json | W1138 | 改：朱砂实底门禁缓存纳入 about.html |
+| scripts/output/_vermilion_solid_report.json | W1138 | 改：朱砂实底门禁报告 scope 235 与 about.html 读数 |
+| scripts/output/_w1138_spec.json | W1138 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1138.txt | W1138 | 新增：级联文件清单 |
+| CITATION.cff | W1138 | 改：版本面同步 |
+| .github/workflows/README.md | W1138 | 改：版本面同步 |
+| archive/docs/AGENTS-ARCHIVE.md | W1138 | 改：脚注滚动归档 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1138 | 改：台账行窗口归档 |
+| dataset/CODING.md | W1138 | 新增：人物关系编码手册 |
+| dataset/character-relationship-3d.json | W1138 | 改：22 节点/32 边补溯源字段 |
+| dataset/README.md | W1138 | 改：编码与溯源入口 |
+| site/data/character-relationship-3d.html | W1138 | 改：EMBEDDED 同步 + 数据源脚注 |
+| scripts/check_dataset_provenance.py | W1138 | 新增：数据集溯源校验器 |
+| tests/unit/test_w1138_dataset_provenance.py | W1138 | 新增：溯源校验器回归锁 |
+| tests/unit/INDEX.md | W1138 | 改：目录索引收录新测试 |
+| tests/unit/README.md | W1138 | 改：测试计数刷新 |
+| .github/ISSUE_TEMPLATE/data_correction.yml | W1138 | 新增：数据纠错/编码争议模板 |
+| .github/ISSUE_TEMPLATE/README.md | W1138 | 改：模板数量说明 |
+| .github/ISSUE_TEMPLATE/INDEX.md | W1138 | 改：目录索引收录新模板 |
+| dataset/INDEX.md | W1138 | 改：目录索引收录 CODING.md |
+| scripts/INDEX.md | W1138 | 改：目录索引收录溯源校验器 |
+| pytest.ini | W1138 | 改：pytest collected 统计标记 1391→1392 |
+
 ## W1137 界面交互迭代批·四轮复核落地（2026-11-05）
 
 | 文件 | W | 说明 |
 |---|---|---|
-| site/404.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/_template.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/curated.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/dashboard.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/81-hardships-view.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/81-hardships.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/_shell.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/aesthetics.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/ai-dialogue.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/business-model.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/cave-estate.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/century-dialogue.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/chapter-stats.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/chapter-structure-graph.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/character-appearance.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/character-dynamic-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/character-presence-timeline.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/character-relationship-3d-view.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/character-relationship-3d.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/character-semantic-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/character-sentiment-arc.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/chart-design.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/cognitive-psychology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/concept-device.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/counterfactual.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/criticism-history.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/cross-time-danmaku.html | W1137 | 改：favicon 注入 + 页脚链存量清理（1636→116 字） |
-| site/data/cultural-misreading.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/customs-pass-route.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/data-explorer.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/deconstruction.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/dialogue-sentiment.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/ecology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/emotional-heatmap.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/ethics-consumption.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/famous-time-travel.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/four-dimensional-research-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/four-heavenly-kings-artifacts.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/game-webnovel.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/global-pattern.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/graph-explorer.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/guanyin-six-roles-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/hardship-difficulty-heatmap.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/hardship-heatmap.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/heaven-power-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/intertextuality-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/journey-geo-3d.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/journey-geo-semiotics.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/journey-map-interactive.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/journey-route.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/journey-spacetime.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/jurisprudence.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/karma-reincarnation.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/language-style-radar.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/linguistics.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/magic-system.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/material-archaeology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/mbti-evolution.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/methodology-matrix.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/ming-political-thought-comparison.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/monster-background.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/monster-capability-radar.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/monster-ecology-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/monster-female-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/monster-hierarchy-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/monster-sociology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/monster-victims-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/music-structure.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/narrative-experiment.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/narrative-rhythm-curve.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/narratology-12d-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/narratology-16d-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/perf-canvas-rendering.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/philosophy.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/pilgrim-team-dynamic-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/pilgrim-team-psychology-arc.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/poetry-rhythm-analysis.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/power-resources.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/relationships.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/risk-project.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/search.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/six-senses-narratology-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/social-media.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/story-timeline.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/tag-cloud.html | W1137 | 改：favicon 注入 + 页脚链存量清理（1627→116 字） |
-| site/data/text-evolution.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/text-search.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/theological-intervention-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/timeline.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/underworld-power-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/visual-art.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/data/workplace.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/dukou-engine.html | W1137 | 改：favicon 注入 + 页脚链存量清理（668→68 字）+ 补全站唯一缺失的 </footer> 闭合（N-10） |
-| site/en/81-hardships-view.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/81-hardships.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/academic-papers.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/aesthetics.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/ai-dialogue.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/bestiary.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/business-model.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/cave-estate.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/century-dialogue.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/chapter-stats.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/chapter-structure-graph.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/chapters-map.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-appearance.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-bailongma.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-bajie.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-dynamic-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-presence-timeline.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-relationship-3d-view.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-relationship-3d.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-semantic-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-sentiment-arc.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-shaseng.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-tangseng.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/character-wukong.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/characters.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/chart-design.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/cognitive-psychology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/concept-device.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/counterfactual.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/criticism-history.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/cross-time-danmaku.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/cultural-misreading.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/customs-pass-route.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/dashboard.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/data-explorer.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/deconstruction.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/dialogue-sentiment.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/dukou-engine.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/ecology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/emotional-heatmap.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ai-era.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-buddhist-chan.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-chapter-couplets.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-character-fu.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-cipai-linjiangxian.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-cipai-mantingfang.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-cipai-shuidiaogetou.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-cipai-xijiangyue.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-composition-origins.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-divine-bureaucracy.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-folk-belief.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-historical-xuanzang.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-information-cocoon.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-economy.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-examination.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-garrison.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-intellectual-history.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-judiciary.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-literary-thought.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-maritime-ban.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-metaphor.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-military.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-politics.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-religion.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-ming-social-customs.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-modern-management.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-original-poetry.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-poetry-imagery.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-poetry-opening.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-quanzhen-daoism.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-rhythm-analysis.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-scenery-poems.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-thematic-poetry.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-three-teachings.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-version-evolution.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/essay-zen-koan-vs-neidan.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/ethics-consumption.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/famous-time-travel.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/four-dimensional-research-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/four-heavenly-kings-artifacts.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/game-webnovel.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/global-pattern.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/graph-explorer.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/guanyin-six-roles-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/guide.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/hardship-difficulty-heatmap.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/hardship-heatmap.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/heaven-power-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/index.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/intertextuality-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/journey-geo-semiotics.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/journey-map-interactive.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/journey-route.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/journey-spacetime.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/jurisprudence.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/karma-reincarnation.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/language-style-radar.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/linguistics.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/magic-system.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/material-archaeology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/mbti-evolution.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/methodology-matrix.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/methodology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/ming-political-thought-comparison.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/monster-background.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/monster-capability-radar.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/monster-ecology-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/monster-female-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/monster-hierarchy-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/monster-sociology.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/monster-victims-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/music-structure.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/narrative-experiment.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/narrative-rhythm-curve.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/narratology-12d-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/narratology-16d-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/perf-canvas-rendering.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/philosophy.html | W1137 | 改：favicon 注入 + </head><body> 归位与游离 <body> 移除（全站唯一 head 未闭合·N-11） |
-| site/en/pilgrim-team-dynamic-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/pilgrim-team-psychology-arc.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/poetry-rhythm-analysis.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/power-resources.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/relationships.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/risk-project.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/search.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/site-map.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/six-senses-narratology-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/social-media.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/tag-cloud.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/text-evolution.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/text-search.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/theological-intervention-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/timeline.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/tribulations.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/underworld-power-network.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/visual-art.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/visualizations.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/en/workplace.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/guide.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/index.html | W1137 | 改：favicon 注入 + 全卷索引补 02 主题 hub/03 人物目录/04 文化目录三行（后续行重编号 05-14）+ meta description 十三维→十六维（N-07 残留）+ 页脚链存量清理（1694→116 字） |
-| site/reader/ch001.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch002.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch003.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch004.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch005.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch006.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch007.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch008.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch009.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch010.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch011.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch012.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch013.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch014.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch015.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch016.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch017.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch018.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch019.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch020.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch021.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch022.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch023.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch024.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch025.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch026.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch027.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch028.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch029.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch030.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch031.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch032.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch033.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch034.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch035.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch036.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch037.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch038.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch039.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch040.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch041.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch042.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch043.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch044.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch045.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch046.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch047.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch048.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch049.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch050.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch051.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch052.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch053.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch054.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch055.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch056.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch057.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch058.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch059.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch060.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch061.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch062.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch063.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch064.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch065.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch066.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch067.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch068.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch069.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch070.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch071.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch072.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch073.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch074.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch075.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch076.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch077.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch078.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch079.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch080.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch081.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch082.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch083.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch084.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch085.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch086.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch087.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch088.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch089.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch090.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch091.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch092.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch093.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch094.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch095.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch096.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch097.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch098.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch099.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/ch100.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/index.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/三教合一明代思想史深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/佛道思想.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/历史玄奘与小说玄奘专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/成书背景.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代军事制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代医学养生制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代卫所制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代司法制度深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代婚姻家庭制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代宗教制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代宗教政策对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代宫廷与宦官制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代市井百态对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代思想史对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代政治制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代文学体裁与西游对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代文学思想对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代服饰舆服制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代海禁政策对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代盐法开中制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代社会风俗对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代神祇官僚体系对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代科举制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代经济制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代隐喻.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/明代驿递交通制度对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/版本演变.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/版本演变补遗-平话层.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/西游与佛教禅宗专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/西游与明代商业经济专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/西游与明代民间宗教专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/西游与民间信仰专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/西游与禅宗公案专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/culture/西游与道教全真派专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/index.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/现代视角解读.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与AI时代.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与人类学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与代理悖论.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与传播学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与伦理学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与体育学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与信息茧房.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与化学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与医学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与博弈论.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与地理学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与天文学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与媒介史.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与宗教学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与平台经济.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与建筑学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与心理学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与性别政治.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与情绪劳动.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与教育学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与数学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与明代嘉靖镜像.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与服饰学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与比较文学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与民俗学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与法理政治.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与流亡者.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与演化论.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与物理学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与现代组织管理.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与生态学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与社会学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与神话学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与符号学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与经济学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与美学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与翻译学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与考古学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与认知科学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与语言学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与音乐学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与项目管理.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/essays/西游与饮食学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/index.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/index.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/万圣公主外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/严嵩与牛魔王对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/乌巢禅师外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/乌鸡国国王-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/九头虫.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/九头驸马外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/九灵元圣-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/二十八宿外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/二郎神-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/二郎神.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/二郎神外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/二郎神深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/人物分类增补专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/人物谱系表.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/六耳猕猴-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/六耳猕猴.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/六耳猕猴深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/刘伯钦外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/南极仙翁外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/卵二姐外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/取经五众关系网络深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/取经团队动力学深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/变的哲学-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/哪吒.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/哪吒外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/哪吒深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/唐僧-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/唐僧.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/唐僧深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/四值功曹五方揭谛六丁六甲外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/四大天王合集专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/四海龙王外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/国师王菩萨.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/土地公-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/地府体系深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/多目怪-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/大鹏金翅雕.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/大鹏金翅雕外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/天庭体系深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/太上老君-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/太上老君.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/太上老君外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/太上老君深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/太宗李世民外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/太白金星-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/太白金星.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/奎木狼-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/奎木狼不负前情外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/奎木狼外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/女儿国国王-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/女儿国国王.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/女儿国国王深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/如意真仙外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/如来.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/如来佛祖-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/如来佛祖-方向二深化B.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/妖怪群体组织形态深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/妖怪谱系深度分析.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/嫦娥外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/孙悟空-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/孙悟空.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/孙悟空外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/孙悟空深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/宝象国国王后外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/宝象国国王外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/小妖外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/张居正与玉帝权术对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/弥勒佛外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/悟空-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/托塔李天王外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/扫塔人外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/接引佛祖外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/推云童子外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/敖广外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/文殊与普贤外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/日值功曹外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/明代历史原型对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/昴日星官.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/昴日星官外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/有来有去外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/李贽与悟空对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/杏仙外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/次要人物关系网络深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/殷温娇外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/沙僧-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/沙僧.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/沙僧外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/沙僧深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/泥鳅外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/泾河龙王外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/海瑞与悟空直谏对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/火焰山土地外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/灵吉菩萨.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/灵感大王-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/灵感大王.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/灵感大王外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/燃灯古佛外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/牛魔王-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/牛魔王-方向二深化B.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/牛魔王.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/牛魔王深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/独角兕大王.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/狮驼岭三魔-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/猪八戒-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/猪八戒.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/猪八戒深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玄奘-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玄奘外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玉兔精-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玉兔精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玉兔精深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玉帝.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玉帝深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玉皇大帝-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玉皇大帝外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/玉面狐狸深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/王母娘娘.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/王母娘娘深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/王阳明与唐僧心学对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白象精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白骨精-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白骨精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白骨精外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白骨精深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白鹿精-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白龙马-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白龙马-方向二深化B.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白龙马.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白龙马外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/白龙马深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/百眼魔君.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/百眼魔君外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/百花羞-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/百花羞外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/紧箍儿的内侧-器物传记.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/紫金铃外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/红孩儿-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/红孩儿.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/红孩儿外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/红孩儿深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/红蟒精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/给孤独长者外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/罗刹女外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/老鼋外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/老鼠精-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/老鼠精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/老鼠精深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/芭蕉扇外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/荆棘岭外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/菩提祖师-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/菩提祖师.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/菩提祖师外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/菩提祖师深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/虎先锋外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/虾兵外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/虾兵外传B.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/蜘蛛精-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/蜘蛛精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/蜘蛛精七姐妹合集专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/蜘蛛精七姐妹深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/蜘蛛精外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/蝎子精-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/蝎子精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/蝎子精深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/袁守诚外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/被借来的道具-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/观音.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/观音外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/观音菩萨-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/观音菩萨深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/规矩的多重面孔-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/赛太岁-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/赛太岁.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/车迟国三国师-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/车迟国三国师外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/辟寒辟暑辟尘-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/边缘神祇深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/迦叶外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/通臂猿猴外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金刚琢外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金圣宫娘娘-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金圣宫娘娘外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金圣宫娘娘深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金池长老外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金箍棒-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金蝉子外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金角大王.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金角银角-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金角银角外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/金角银角深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/铁扇公主-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/铁扇公主.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/铁扇公主深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/铜台府外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/银角大王.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/镇元大仙-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/镇元大仙.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/阿傩迦叶外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/陈关保外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/青牛精-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/青狮精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/驼罗庄外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/高翠兰-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/高翠兰外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/高翠兰深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/鱼篮观音外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黄眉老佛外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黄袍怪-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黄袍怪.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黄袍怪外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黄风怪-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黄风怪外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黎山老母外传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黑熊精-方向二深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/people/黑熊精.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/index.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/主题诗词创作.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/原著人物赋诗词赏析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/原著景物诗分类赏析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/原著景物诗赏析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/原著诗词赏析.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/回目对联分析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/开篇诗专题深化.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/西游与临江仙词牌赏析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/西游与水调歌头词牌赏析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/西游与满庭芳词牌赏析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/西游与西江月词牌赏析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/西游诗词意象谱系专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/poetry/西游诗词韵律分析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/index.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/不可靠叙述专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/二十八星宿专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/二郎神与悟空-自由观碰撞.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/互文性叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/五方揭谛专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/五次蜕变专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/人参果-人与欲望的关系.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/佛学AI西游三维语义映射表.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/修辞叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/倒果为因专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/元叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/全世界重写西游记.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/全球重写专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/八十一难专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/八十一难结构学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/八十一难风险管理学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/六丁六甲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/兵器的自我修养专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/创伤叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/动物研究专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/历史叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/反抗与束缚的永恒循环专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经人类学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经传播学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经伦理学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经历史学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经叙事经济学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经团队-凭什么走到西天.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经团队决策论专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经团队动力学.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经团队心理学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经团队组织学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经团队身体地理学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经地理学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经地理批评专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经声音政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经媒介考古学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经密码学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经情感结构专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经拓扑学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经教育学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经数字人文专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经气候学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经生态学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经社会学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经神话政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经空间生产专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经符号学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经网络叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经网络叙事学深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经美学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经考古学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经路径地理符号学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经路线地理专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/取经路线社会学研究专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/名字的政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/后人类主义专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/后殖民叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/听觉叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/味觉叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/唐僧-凡躯圣心.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/嗅觉叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/器物传记学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/四值功曹专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/增补一三十九位神祇总序与编制表专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/增补七很多很多劫之后专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/增补三土地公与山神专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/增补二全员集结专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/增补五老亥的日常生活专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/增补八值日功曹的最后一笔专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/增补六波罗僧揭谛的前身暗示专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/增补四值月功曹的花册与节气专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/大闹天宫-英雄还是悲剧.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/大闹天宫专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/女性主义叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/妖怪伦理学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/妖怪生态学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/妖怪经济学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/妖怪身份政治专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/妖魔谱系政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/小妖生命史专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/底层叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/开篇诗-被跳过的总纲.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/开篇诗专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/情感叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/招安对比重写专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/招安的两种结局专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/接受美学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/文化记忆专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/无字真经-灵山的玩笑.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/无字真经专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/时间叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/时间哲学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/时间的政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/明代司法制度镜像专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/暗数据遗忘者列传.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/权力五联对照专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/根器专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/比较文学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/水帘洞-瀑布门的世界.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/水帘洞专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/沙僧-沉默者的智慧.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/法宝政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/法宝系统专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/混世四猴专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/物质生态学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/猪八戒-不愿承认的自己.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/猴王到行者-五次蜕变.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/生态批评专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/白龙马-沉默龙的真相.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/真假美猴王-二心之战.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/真假美猴王专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/神学干预机制专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/神话学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/空间叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/空间政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/筋斗云与高铁-速度焦虑.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/筋斗云专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/紧箍儿咒-四百年回响.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/紧箍咒专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/缘起即算法-章节体.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/缘起即算法专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/翻译学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/芭蕉扇-终极灭火器的关系.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/蟠桃园-体制内的秘密.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与信息论专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与全球神话比较专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与后结构主义专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与复杂性科学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与媒介理论专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与媒介生态学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与存在主义专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与弗洛伊德精神分析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与拉康精神分析专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与政治思想史专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与死亡研究专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与游戏学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与社会理论延伸专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与符号学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与系统论专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与经济学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与经济学派深化专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与荣格分析心理学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与解构主义专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与解释学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与认知科学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游与记忆技术专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游体检-你走到第几回了.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游体检专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游四维研究专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡元定义.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第一讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第三十讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十一讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十七讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十三讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十九讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十二讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十五讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十八讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十六讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十四讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二十讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第二讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第十七讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第十九讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第十五讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第十八讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游渡第十六讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学第一讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学第七讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学第三讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学第二讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学第五讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学第六讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学第四讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学终讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游职场学附篇专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游记原著与黑神话悟空长生体系对比总结专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第一讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第七讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第三讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第九讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第二讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第五讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第八讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第六讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第十一讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第十二讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第十讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局第四讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/西游败局终讲专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/视觉叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/触觉叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/认知叙事学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/记忆之场专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/记忆伦理专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/身体政治学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/长生之后神仙为什么死了专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/长生之道专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/长生之道的代价专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/长生之道的政治经济学专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/长生之道的权力谱系专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/长生之道终章专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/集体记忆专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/须菩提祖师-消失的师父.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes/黑神话拒绝金箍专题.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/reader/themes-hub.html | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons 单一事实源） |
-| site/rum-viewer.html | W1137 | 改：favicon 注入 + noindex/nofollow robots meta（R-09 收口·sitemap 已 EXCLUDE 的兜底） |
-| site/visit-viewer.html | W1137 | 改：favicon 注入 + noindex/nofollow robots meta（R-09 收口） |
-| scripts/batch_cascade.py | W1137 | 改：_face_footers 短令牌根修（R-02）+ 级联续跑容忍（规则行已被幂等 versions 提前推进时）+ agents_note 预检与门禁 check_footnote_shape 同源计量（口径对齐） |
+| .agent/skills/puti-shouye/（1 件） | W1137 | 改：坑表总数引用 288→290（两处） |
+| .github/（2 件） | W1137 | 删：dependabot 永久降噪（用户 2026-11-05 批准·12 PR |
+| .github/workflows/（1 件） | W1137 | 改：版本抬头推进 W450-W1137（级联 versions·幂等） |
+| archive/docs/（1 件） | W1137 | 改：脚注滚动归档（级联） |
+| docs/（1 件） | W1137 | 改：gen_folder_docs 刷新（级联） |
+| docs/00-导读/（2 件） | W1137 | 改：版本面推进（级联 versions 步·幂等） |
+| docs/11-方案报告/（1 件） | W1137 | 改：登记第 103/104 号（四轮复核报告 + W1137 施工方案·尾部段末 |
+| docs/11-方案报告/审查与评审/（1 件） | W1137 | 新增：四轮复核报告（W926/W1070 遗留闭环核验 + 五维度现势 + N- |
+| docs/11-方案报告/设计与架构方案/（3 件） | W1137 | 新增：本批施工方案（方案即落地记录·欠账路线 v4 语义族/R-02 模板层） |
+| docs/agent/（1 件） | W1137 | 改：W1095 收编 E-196/E-197 续号入表（流程节 158→160· |
+| scripts/（3 件） | W1137 | 改：_face_footers 短令牌根修（R-02）+ 级联续跑容忍（规则行已 |
+| scripts/output/（10 件） | W1137 | 新增：本批 spec（file_index_rows 864 面·含 857 页 |
+| site/（9 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/data/（88 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/en/（138 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/reader/（102 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/reader/culture/（35 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/reader/essays/（45 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/reader/people/（216 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/reader/poetry/（14 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/reader/themes/（210 件） | W1137 | 改：favicon 品牌图标注入（三行 link·复用 static/icons |
+| site/static/js/（1 件） | W1137 | 改：W1071 生产守卫块去重（5 份→1 份·行为零变化） |
+| tests/unit/（3 件） | W1137 | 改：TestFixC/TestDecide 夹具改用 _csp_index_li |
 | DESIGN.md | W1137 | 改：新增 §2.6 品牌图标（favicon 单一事实源 = static/icons·禁第二标记·页脚短令牌契约） |
-| docs/11-方案报告/审查与评审/站点交互流程审查第四轮复核报告-2026-11-05.md | W1137 | 新增：四轮复核报告（W926/W1070 遗留闭环核验 + 五维度现势 + N-10~N-13 四条新增发现） |
-| docs/11-方案报告/设计与架构方案/界面交互迭代施工方案-W1137-2026-11-05.md | W1137 | 新增：本批施工方案（方案即落地记录·欠账路线 v4 语义族/R-02 模板层） |
-| docs/11-方案报告/README.md | W1137 | 改：登记第 103/104 号（四轮复核报告 + W1137 施工方案·尾部段末） |
-| scripts/output/_w1137_spec.json | W1137 | 新增：本批 spec（file_index_rows 864 面·含 857 页 favicon 注入全集） |
-| scripts/check_screenshot_scope.py | W1137 | 改：自测夹具行号硬编码根修——新增 _csp_index_lines 动态定位（favicon head 注入平移行号曾断一次·判据脆弱特征） |
-| tests/unit/test_w1126_screenshot_scope.py | W1137 | 改：TestFixC/TestDecide 夹具改用 _csp_index_lines 动态定位（语义不变·26 例过） |
-| docs/agent/pitfalls.md | W1137 | 改：W1095 收编 E-196/E-197 续号入表（流程节 158→160·原分支号 E-86/E-87 废止） |
 | AGENTS.md | W1137 | 改：坑位计数 288→290（§4.3）+ 脚注 W1137 条目（级联） |
-| .agent/skills/puti-shouye/SKILL.md | W1137 | 改：坑表总数引用 288→290（两处） |
 | HANDOVER.md | W1137 | 改：坑表总数 288→290（两处）+ W1095 待办勾选 + 最后更新链（级联） |
 | CHANGELOG.md | W1137 | 改：W1137 段落（级联） |
-| scripts/output/file-index.md | W1137 | 改：反向索引刷新（级联） |
-| scripts/output/stats.json | W1137 | 改：stats --w W1137（级联） |
-| scripts/output/stats-index.md | W1137 | 改：stats 索引（级联） |
-| scripts/output/stats-changelog.json | W1137 | 改：stats changelog 面（级联） |
-| scripts/output/INDEX.md | W1137 | 改：gen_folder_docs 刷新（级联） |
-| scripts/output/README.md | W1137 | 改：gen_folder_docs 刷新（级联） |
-| docs/INDEX.md | W1137 | 改：gen_folder_docs 刷新（级联） |
-| tests/unit/INDEX.md | W1137 | 改：gen_folder_docs 刷新（级联） |
-| tests/unit/README.md | W1137 | 改：gen_folder_docs 刷新（级联） |
 | README.md | W1137 | 改：版本面推进（级联 versions 步·幂等） |
 | STRUCTURE.md | W1137 | 改：版本面推进（级联 versions 步·幂等） |
 | CITATION.cff | W1137 | 改：版本面推进（级联 versions 步·幂等） |
-| docs/00-导读/项目说明.md | W1137 | 改：版本面推进（级联 versions 步·幂等） |
-| scripts/output/_cascade_files_W1137.txt | W1137 | 新增：级联文件清单（级联） |
-| site/static/js/rag-chat.js | W1137 | 改：W1071 生产守卫块去重（5 份→1 份·行为零变化） |
-| docs/00-导读/W批次编号对账表.md | W1137 | 改：W1137 认领行登记 + W1095 行改注已收编 |
-| .github/workflows/README.md | W1137 | 改：版本抬头推进 W450-W1137（级联 versions·幂等） |
-| archive/docs/AGENTS-ARCHIVE.md | W1137 | 改：脚注滚动归档（级联） |
-| scripts/output/_vermilion_solid_cache.json | W1137 | 改：朱砂实底增量缓存刷新（门禁产物） |
-| scripts/output/tools-inventory.md | W1137 | 改：工具清单刷新（收官链产物·生成时间滚动） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1137 | 改：版本抬头推进（级联 versions·幂等） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1137 | 改：版本抬头推进（级联 versions·幂等） |
-| .github/dependabot.yml | W1137 | 删：dependabot 永久降噪（用户 2026-11-05 批准·12 PR 已全关；依赖升级改由专项批统一评估·安全面由 CI pip-audit/npm-audit 盯防） |
-| .github/INDEX.md | W1137 | 改：gen_folder_docs 重生成（dependabot.yml 行随删件移除） |
-| scripts/check_doc_size_budget.py | W1137 | 改：_agents_face 行切片根修——脚注=末行且无换行尾时 find(nl)=-1 使 t[fs:-1] 吞收尾星号致剥家具失败误判 +19 字（W1137 note=119 首踩·往批短 note 潜伏）末行取到文件尾 |
 
 ## W1136 并行会话统筹调度批（2026-11-04）
 
@@ -1058,375 +322,30 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-| .agent/skills/puti-shouye/SKILL.md | W1134 | 治理文档 |
-| .github/workflows/README.md | W1134 | 治理文档 |
+| .agent/skills/puti-shouye/（1 件） | W1134 | 治理文档 |
+| .github/workflows/（1 件） | W1134 | 治理文档 |
+| archive/docs/（1 件） | W1134 | 治理文档 |
+| docs/（1 件） | W1134 | 治理文档 |
+| docs/00-导读/（2 件） | W1134 | 治理文档 |
+| docs/11-方案报告/（1 件） | W1134 | 治理文档 |
+| docs/11-方案报告/计划方案/（4 件） | W1134 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/（2 件） | W1134 | 治理文档 |
+| docs/agent/（1 件） | W1134 | 治理文档 |
+| scripts/（5 件） | W1134 | 本批工具/产物 |
+| scripts/output/（18 件） | W1134 | 本批工具/产物 |
+| site/（5 件） | W1134 | 页面 |
+| site/data/（88 件） | W1134 | 页面 |
+| site/en/（138 件） | W1134 | 页面 |
+| site/reader/（102 件） | W1134 | 页面 |
+| site/static/js/（1 件） | W1134 | 治理文档 |
+| tests/unit/（4 件） | W1134 | 本批工具/产物 |
 | AGENTS.md | W1134 | 治理文档 |
 | CHANGELOG.md | W1134 | 治理文档 |
 | CITATION.cff | W1134 | 治理文档 |
 | HANDOVER.md | W1134 | 治理文档 |
 | README.md | W1134 | 治理文档 |
 | STRUCTURE.md | W1134 | 治理文档 |
-| docs/00-导读/W批次编号对账表.md | W1134 | 治理文档 |
-| docs/00-导读/项目说明.md | W1134 | 治理文档 |
-| docs/11-方案报告/README.md | W1134 | 治理文档 |
-| docs/11-方案报告/计划方案/T89-任务计划执行与经验沉淀报告-2026-11-04.md | W1134 | 治理文档 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1134 | 治理文档 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1134 | 治理文档 |
-| docs/INDEX.md | W1134 | 治理文档 |
-| docs/agent/pitfalls.md | W1134 | 治理文档 |
 | pytest.ini | W1134 | 治理文档 |
-| scripts/INDEX.md | W1134 | 本批工具/产物 |
-| scripts/docs_index.py | W1134 | 本批工具/产物 |
-| scripts/font_weight_probe.py | W1134 | 本批工具/产物 |
-| scripts/ime_scroll_probe.py | W1134 | 本批工具/产物 |
-| scripts/output/INDEX.md | W1134 | 本批工具/产物 |
-| scripts/output/README.md | W1134 | 本批工具/产物 |
-| scripts/output/_cascade_files_W1134.txt | W1134 | 本批工具/产物 |
-| scripts/output/_vermilion_solid_cache.json | W1134 | 本批工具/产物 |
-| scripts/output/_w1134_fontweight.json | W1134 | 本批工具/产物 |
-| scripts/output/_w1134_imescroll.json | W1134 | 本批工具/产物 |
-| scripts/output/_w1134_spec.json | W1134 | 本批工具/产物 |
-| scripts/output/file-index.md | W1134 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1134 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1134 | 本批工具/产物 |
-| scripts/output/stats.json | W1134 | 本批工具/产物 |
-| scripts/output/tools-inventory.md | W1134 | 本批工具/产物 |
-| site/_template.html | W1134 | 页面 |
-| site/data/81-hardships-view.html | W1134 | 页面 |
-| site/data/81-hardships.html | W1134 | 页面 |
-| site/data/_shell.html | W1134 | 页面 |
-| site/data/aesthetics.html | W1134 | 页面 |
-| site/data/ai-dialogue.html | W1134 | 页面 |
-| site/data/business-model.html | W1134 | 页面 |
-| site/data/cave-estate.html | W1134 | 页面 |
-| site/data/century-dialogue.html | W1134 | 页面 |
-| site/data/chapter-stats.html | W1134 | 页面 |
-| site/data/chapter-structure-graph.html | W1134 | 页面 |
-| site/data/character-appearance.html | W1134 | 页面 |
-| site/data/character-dynamic-network.html | W1134 | 页面 |
-| site/data/character-presence-timeline.html | W1134 | 页面 |
-| site/data/character-relationship-3d-view.html | W1134 | 页面 |
-| site/data/character-relationship-3d.html | W1134 | 页面 |
-| site/data/character-semantic-network.html | W1134 | 页面 |
-| site/data/character-sentiment-arc.html | W1134 | 页面 |
-| site/data/chart-design.html | W1134 | 页面 |
-| site/data/cognitive-psychology.html | W1134 | 页面 |
-| site/data/concept-device.html | W1134 | 页面 |
-| site/data/counterfactual.html | W1134 | 页面 |
-| site/data/criticism-history.html | W1134 | 页面 |
-| site/data/cross-time-danmaku.html | W1134 | 页面 |
-| site/data/cultural-misreading.html | W1134 | 页面 |
-| site/data/customs-pass-route.html | W1134 | 页面 |
-| site/data/data-explorer.html | W1134 | 页面 |
-| site/data/deconstruction.html | W1134 | 页面 |
-| site/data/dialogue-sentiment.html | W1134 | 页面 |
-| site/data/ecology.html | W1134 | 页面 |
-| site/data/emotional-heatmap.html | W1134 | 页面 |
-| site/data/ethics-consumption.html | W1134 | 页面 |
-| site/data/famous-time-travel.html | W1134 | 页面 |
-| site/data/four-dimensional-research-network.html | W1134 | 页面 |
-| site/data/four-heavenly-kings-artifacts.html | W1134 | 页面 |
-| site/data/game-webnovel.html | W1134 | 页面 |
-| site/data/global-pattern.html | W1134 | 页面 |
-| site/data/graph-explorer.html | W1134 | 页面 |
-| site/data/guanyin-six-roles-network.html | W1134 | 页面 |
-| site/data/hardship-difficulty-heatmap.html | W1134 | 页面 |
-| site/data/hardship-heatmap.html | W1134 | 页面 |
-| site/data/heaven-power-network.html | W1134 | 页面 |
-| site/data/intertextuality-network.html | W1134 | 页面 |
-| site/data/journey-geo-3d.html | W1134 | 页面 |
-| site/data/journey-geo-semiotics.html | W1134 | 页面 |
-| site/data/journey-map-interactive.html | W1134 | 页面 |
-| site/data/journey-route.html | W1134 | 页面 |
-| site/data/journey-spacetime.html | W1134 | 页面 |
-| site/data/jurisprudence.html | W1134 | 页面 |
-| site/data/karma-reincarnation.html | W1134 | 页面 |
-| site/data/language-style-radar.html | W1134 | 页面 |
-| site/data/linguistics.html | W1134 | 页面 |
-| site/data/magic-system.html | W1134 | 页面 |
-| site/data/material-archaeology.html | W1134 | 页面 |
-| site/data/mbti-evolution.html | W1134 | 页面 |
-| site/data/methodology-matrix.html | W1134 | 页面 |
-| site/data/ming-political-thought-comparison.html | W1134 | 页面 |
-| site/data/monster-background.html | W1134 | 页面 |
-| site/data/monster-capability-radar.html | W1134 | 页面 |
-| site/data/monster-ecology-network.html | W1134 | 页面 |
-| site/data/monster-female-network.html | W1134 | 页面 |
-| site/data/monster-hierarchy-network.html | W1134 | 页面 |
-| site/data/monster-sociology.html | W1134 | 页面 |
-| site/data/monster-victims-network.html | W1134 | 页面 |
-| site/data/music-structure.html | W1134 | 页面 |
-| site/data/narrative-experiment.html | W1134 | 页面 |
-| site/data/narrative-rhythm-curve.html | W1134 | 页面 |
-| site/data/narratology-12d-network.html | W1134 | 页面 |
-| site/data/narratology-16d-network.html | W1134 | 页面 |
-| site/data/perf-canvas-rendering.html | W1134 | 页面 |
-| site/data/philosophy.html | W1134 | 页面 |
-| site/data/pilgrim-team-dynamic-network.html | W1134 | 页面 |
-| site/data/pilgrim-team-psychology-arc.html | W1134 | 页面 |
-| site/data/poetry-rhythm-analysis.html | W1134 | 页面 |
-| site/data/power-resources.html | W1134 | 页面 |
-| site/data/relationships.html | W1134 | 页面 |
-| site/data/risk-project.html | W1134 | 页面 |
-| site/data/search.html | W1134 | 页面 |
-| site/data/six-senses-narratology-network.html | W1134 | 页面 |
-| site/data/social-media.html | W1134 | 页面 |
-| site/data/story-timeline.html | W1134 | 页面 |
-| site/data/tag-cloud.html | W1134 | 页面 |
-| site/data/text-evolution.html | W1134 | 页面 |
-| site/data/text-search.html | W1134 | 页面 |
-| site/data/theological-intervention-network.html | W1134 | 页面 |
-| site/data/timeline.html | W1134 | 页面 |
-| site/data/underworld-power-network.html | W1134 | 页面 |
-| site/data/visual-art.html | W1134 | 页面 |
-| site/data/workplace.html | W1134 | 页面 |
-| site/dukou-engine.html | W1134 | 页面 |
-| site/en/81-hardships-view.html | W1134 | 页面 |
-| site/en/81-hardships.html | W1134 | 页面 |
-| site/en/academic-papers.html | W1134 | 页面 |
-| site/en/aesthetics.html | W1134 | 页面 |
-| site/en/ai-dialogue.html | W1134 | 页面 |
-| site/en/bestiary.html | W1134 | 页面 |
-| site/en/business-model.html | W1134 | 页面 |
-| site/en/cave-estate.html | W1134 | 页面 |
-| site/en/century-dialogue.html | W1134 | 页面 |
-| site/en/chapter-stats.html | W1134 | 页面 |
-| site/en/chapter-structure-graph.html | W1134 | 页面 |
-| site/en/chapters-map.html | W1134 | 页面 |
-| site/en/character-appearance.html | W1134 | 页面 |
-| site/en/character-bailongma.html | W1134 | 页面 |
-| site/en/character-bajie.html | W1134 | 页面 |
-| site/en/character-dynamic-network.html | W1134 | 页面 |
-| site/en/character-presence-timeline.html | W1134 | 页面 |
-| site/en/character-relationship-3d-view.html | W1134 | 页面 |
-| site/en/character-relationship-3d.html | W1134 | 页面 |
-| site/en/character-semantic-network.html | W1134 | 页面 |
-| site/en/character-sentiment-arc.html | W1134 | 页面 |
-| site/en/character-shaseng.html | W1134 | 页面 |
-| site/en/character-tangseng.html | W1134 | 页面 |
-| site/en/character-wukong.html | W1134 | 页面 |
-| site/en/characters.html | W1134 | 页面 |
-| site/en/chart-design.html | W1134 | 页面 |
-| site/en/cognitive-psychology.html | W1134 | 页面 |
-| site/en/concept-device.html | W1134 | 页面 |
-| site/en/counterfactual.html | W1134 | 页面 |
-| site/en/criticism-history.html | W1134 | 页面 |
-| site/en/cross-time-danmaku.html | W1134 | 页面 |
-| site/en/cultural-misreading.html | W1134 | 页面 |
-| site/en/customs-pass-route.html | W1134 | 页面 |
-| site/en/dashboard.html | W1134 | 页面 |
-| site/en/data-explorer.html | W1134 | 页面 |
-| site/en/deconstruction.html | W1134 | 页面 |
-| site/en/dialogue-sentiment.html | W1134 | 页面 |
-| site/en/dukou-engine.html | W1134 | 页面 |
-| site/en/ecology.html | W1134 | 页面 |
-| site/en/emotional-heatmap.html | W1134 | 页面 |
-| site/en/essay-ai-era.html | W1134 | 页面 |
-| site/en/essay-buddhist-chan.html | W1134 | 页面 |
-| site/en/essay-chapter-couplets.html | W1134 | 页面 |
-| site/en/essay-character-fu.html | W1134 | 页面 |
-| site/en/essay-cipai-linjiangxian.html | W1134 | 页面 |
-| site/en/essay-cipai-mantingfang.html | W1134 | 页面 |
-| site/en/essay-cipai-shuidiaogetou.html | W1134 | 页面 |
-| site/en/essay-cipai-xijiangyue.html | W1134 | 页面 |
-| site/en/essay-composition-origins.html | W1134 | 页面 |
-| site/en/essay-divine-bureaucracy.html | W1134 | 页面 |
-| site/en/essay-folk-belief.html | W1134 | 页面 |
-| site/en/essay-historical-xuanzang.html | W1134 | 页面 |
-| site/en/essay-information-cocoon.html | W1134 | 页面 |
-| site/en/essay-ming-economy.html | W1134 | 页面 |
-| site/en/essay-ming-examination.html | W1134 | 页面 |
-| site/en/essay-ming-garrison.html | W1134 | 页面 |
-| site/en/essay-ming-intellectual-history.html | W1134 | 页面 |
-| site/en/essay-ming-judiciary.html | W1134 | 页面 |
-| site/en/essay-ming-literary-thought.html | W1134 | 页面 |
-| site/en/essay-ming-maritime-ban.html | W1134 | 页面 |
-| site/en/essay-ming-metaphor.html | W1134 | 页面 |
-| site/en/essay-ming-military.html | W1134 | 页面 |
-| site/en/essay-ming-politics.html | W1134 | 页面 |
-| site/en/essay-ming-religion.html | W1134 | 页面 |
-| site/en/essay-ming-social-customs.html | W1134 | 页面 |
-| site/en/essay-modern-management.html | W1134 | 页面 |
-| site/en/essay-original-poetry.html | W1134 | 页面 |
-| site/en/essay-poetry-imagery.html | W1134 | 页面 |
-| site/en/essay-poetry-opening.html | W1134 | 页面 |
-| site/en/essay-quanzhen-daoism.html | W1134 | 页面 |
-| site/en/essay-rhythm-analysis.html | W1134 | 页面 |
-| site/en/essay-scenery-poems.html | W1134 | 页面 |
-| site/en/essay-thematic-poetry.html | W1134 | 页面 |
-| site/en/essay-three-teachings.html | W1134 | 页面 |
-| site/en/essay-version-evolution.html | W1134 | 页面 |
-| site/en/essay-zen-koan-vs-neidan.html | W1134 | 页面 |
-| site/en/ethics-consumption.html | W1134 | 页面 |
-| site/en/famous-time-travel.html | W1134 | 页面 |
-| site/en/four-dimensional-research-network.html | W1134 | 页面 |
-| site/en/four-heavenly-kings-artifacts.html | W1134 | 页面 |
-| site/en/game-webnovel.html | W1134 | 页面 |
-| site/en/global-pattern.html | W1134 | 页面 |
-| site/en/graph-explorer.html | W1134 | 页面 |
-| site/en/guanyin-six-roles-network.html | W1134 | 页面 |
-| site/en/guide.html | W1134 | 页面 |
-| site/en/hardship-difficulty-heatmap.html | W1134 | 页面 |
-| site/en/hardship-heatmap.html | W1134 | 页面 |
-| site/en/heaven-power-network.html | W1134 | 页面 |
-| site/en/index.html | W1134 | 页面 |
-| site/en/intertextuality-network.html | W1134 | 页面 |
-| site/en/journey-geo-semiotics.html | W1134 | 页面 |
-| site/en/journey-map-interactive.html | W1134 | 页面 |
-| site/en/journey-route.html | W1134 | 页面 |
-| site/en/journey-spacetime.html | W1134 | 页面 |
-| site/en/jurisprudence.html | W1134 | 页面 |
-| site/en/karma-reincarnation.html | W1134 | 页面 |
-| site/en/language-style-radar.html | W1134 | 页面 |
-| site/en/linguistics.html | W1134 | 页面 |
-| site/en/magic-system.html | W1134 | 页面 |
-| site/en/material-archaeology.html | W1134 | 页面 |
-| site/en/mbti-evolution.html | W1134 | 页面 |
-| site/en/methodology-matrix.html | W1134 | 页面 |
-| site/en/methodology.html | W1134 | 页面 |
-| site/en/ming-political-thought-comparison.html | W1134 | 页面 |
-| site/en/monster-background.html | W1134 | 页面 |
-| site/en/monster-capability-radar.html | W1134 | 页面 |
-| site/en/monster-ecology-network.html | W1134 | 页面 |
-| site/en/monster-female-network.html | W1134 | 页面 |
-| site/en/monster-hierarchy-network.html | W1134 | 页面 |
-| site/en/monster-sociology.html | W1134 | 页面 |
-| site/en/monster-victims-network.html | W1134 | 页面 |
-| site/en/music-structure.html | W1134 | 页面 |
-| site/en/narrative-experiment.html | W1134 | 页面 |
-| site/en/narrative-rhythm-curve.html | W1134 | 页面 |
-| site/en/narratology-12d-network.html | W1134 | 页面 |
-| site/en/narratology-16d-network.html | W1134 | 页面 |
-| site/en/perf-canvas-rendering.html | W1134 | 页面 |
-| site/en/philosophy.html | W1134 | 页面 |
-| site/en/pilgrim-team-dynamic-network.html | W1134 | 页面 |
-| site/en/pilgrim-team-psychology-arc.html | W1134 | 页面 |
-| site/en/poetry-rhythm-analysis.html | W1134 | 页面 |
-| site/en/power-resources.html | W1134 | 页面 |
-| site/en/relationships.html | W1134 | 页面 |
-| site/en/risk-project.html | W1134 | 页面 |
-| site/en/search.html | W1134 | 页面 |
-| site/en/site-map.html | W1134 | 页面 |
-| site/en/six-senses-narratology-network.html | W1134 | 页面 |
-| site/en/social-media.html | W1134 | 页面 |
-| site/en/tag-cloud.html | W1134 | 页面 |
-| site/en/text-evolution.html | W1134 | 页面 |
-| site/en/text-search.html | W1134 | 页面 |
-| site/en/theological-intervention-network.html | W1134 | 页面 |
-| site/en/timeline.html | W1134 | 页面 |
-| site/en/tribulations.html | W1134 | 页面 |
-| site/en/underworld-power-network.html | W1134 | 页面 |
-| site/en/visual-art.html | W1134 | 页面 |
-| site/en/visualizations.html | W1134 | 页面 |
-| site/en/workplace.html | W1134 | 页面 |
-| site/reader/ch001.html | W1134 | 页面 |
-| site/reader/ch002.html | W1134 | 页面 |
-| site/reader/ch003.html | W1134 | 页面 |
-| site/reader/ch004.html | W1134 | 页面 |
-| site/reader/ch005.html | W1134 | 页面 |
-| site/reader/ch006.html | W1134 | 页面 |
-| site/reader/ch007.html | W1134 | 页面 |
-| site/reader/ch008.html | W1134 | 页面 |
-| site/reader/ch009.html | W1134 | 页面 |
-| site/reader/ch010.html | W1134 | 页面 |
-| site/reader/ch011.html | W1134 | 页面 |
-| site/reader/ch012.html | W1134 | 页面 |
-| site/reader/ch013.html | W1134 | 页面 |
-| site/reader/ch014.html | W1134 | 页面 |
-| site/reader/ch015.html | W1134 | 页面 |
-| site/reader/ch016.html | W1134 | 页面 |
-| site/reader/ch017.html | W1134 | 页面 |
-| site/reader/ch018.html | W1134 | 页面 |
-| site/reader/ch019.html | W1134 | 页面 |
-| site/reader/ch020.html | W1134 | 页面 |
-| site/reader/ch021.html | W1134 | 页面 |
-| site/reader/ch022.html | W1134 | 页面 |
-| site/reader/ch023.html | W1134 | 页面 |
-| site/reader/ch024.html | W1134 | 页面 |
-| site/reader/ch025.html | W1134 | 页面 |
-| site/reader/ch026.html | W1134 | 页面 |
-| site/reader/ch027.html | W1134 | 页面 |
-| site/reader/ch028.html | W1134 | 页面 |
-| site/reader/ch029.html | W1134 | 页面 |
-| site/reader/ch030.html | W1134 | 页面 |
-| site/reader/ch031.html | W1134 | 页面 |
-| site/reader/ch032.html | W1134 | 页面 |
-| site/reader/ch033.html | W1134 | 页面 |
-| site/reader/ch034.html | W1134 | 页面 |
-| site/reader/ch035.html | W1134 | 页面 |
-| site/reader/ch036.html | W1134 | 页面 |
-| site/reader/ch037.html | W1134 | 页面 |
-| site/reader/ch038.html | W1134 | 页面 |
-| site/reader/ch039.html | W1134 | 页面 |
-| site/reader/ch040.html | W1134 | 页面 |
-| site/reader/ch041.html | W1134 | 页面 |
-| site/reader/ch042.html | W1134 | 页面 |
-| site/reader/ch043.html | W1134 | 页面 |
-| site/reader/ch044.html | W1134 | 页面 |
-| site/reader/ch045.html | W1134 | 页面 |
-| site/reader/ch046.html | W1134 | 页面 |
-| site/reader/ch047.html | W1134 | 页面 |
-| site/reader/ch048.html | W1134 | 页面 |
-| site/reader/ch049.html | W1134 | 页面 |
-| site/reader/ch050.html | W1134 | 页面 |
-| site/reader/ch051.html | W1134 | 页面 |
-| site/reader/ch052.html | W1134 | 页面 |
-| site/reader/ch053.html | W1134 | 页面 |
-| site/reader/ch054.html | W1134 | 页面 |
-| site/reader/ch055.html | W1134 | 页面 |
-| site/reader/ch056.html | W1134 | 页面 |
-| site/reader/ch057.html | W1134 | 页面 |
-| site/reader/ch058.html | W1134 | 页面 |
-| site/reader/ch059.html | W1134 | 页面 |
-| site/reader/ch060.html | W1134 | 页面 |
-| site/reader/ch061.html | W1134 | 页面 |
-| site/reader/ch062.html | W1134 | 页面 |
-| site/reader/ch063.html | W1134 | 页面 |
-| site/reader/ch064.html | W1134 | 页面 |
-| site/reader/ch065.html | W1134 | 页面 |
-| site/reader/ch066.html | W1134 | 页面 |
-| site/reader/ch067.html | W1134 | 页面 |
-| site/reader/ch068.html | W1134 | 页面 |
-| site/reader/ch069.html | W1134 | 页面 |
-| site/reader/ch070.html | W1134 | 页面 |
-| site/reader/ch071.html | W1134 | 页面 |
-| site/reader/ch072.html | W1134 | 页面 |
-| site/reader/ch073.html | W1134 | 页面 |
-| site/reader/ch074.html | W1134 | 页面 |
-| site/reader/ch075.html | W1134 | 页面 |
-| site/reader/ch076.html | W1134 | 页面 |
-| site/reader/ch077.html | W1134 | 页面 |
-| site/reader/ch078.html | W1134 | 页面 |
-| site/reader/ch079.html | W1134 | 页面 |
-| site/reader/ch080.html | W1134 | 页面 |
-| site/reader/ch081.html | W1134 | 页面 |
-| site/reader/ch082.html | W1134 | 页面 |
-| site/reader/ch083.html | W1134 | 页面 |
-| site/reader/ch084.html | W1134 | 页面 |
-| site/reader/ch085.html | W1134 | 页面 |
-| site/reader/ch086.html | W1134 | 页面 |
-| site/reader/ch087.html | W1134 | 页面 |
-| site/reader/ch088.html | W1134 | 页面 |
-| site/reader/ch089.html | W1134 | 页面 |
-| site/reader/ch090.html | W1134 | 页面 |
-| site/reader/ch091.html | W1134 | 页面 |
-| site/reader/ch092.html | W1134 | 页面 |
-| site/reader/ch093.html | W1134 | 页面 |
-| site/reader/ch094.html | W1134 | 页面 |
-| site/reader/ch095.html | W1134 | 页面 |
-| site/reader/ch096.html | W1134 | 页面 |
-| site/reader/ch097.html | W1134 | 页面 |
-| site/reader/ch098.html | W1134 | 页面 |
-| site/reader/ch099.html | W1134 | 页面 |
-| site/reader/ch100.html | W1134 | 页面 |
-| site/reader/index.html | W1134 | 页面 |
-| site/reader/themes-hub.html | W1134 | 页面 |
-| site/static/js/cite-box.js | W1134 | 治理文档 |
-| site/system.css | W1134 | 治理文档 |
-| site/tokens.css | W1134 | 治理文档 |
-| tests/unit/INDEX.md | W1134 | 本批工具/产物 |
-| tests/unit/README.md | W1134 | 本批工具/产物 |
-| tests/unit/test_w1134_interaction_probes.py | W1134 | 本批工具/产物 |
 
 
 ## W1133 自举产物教训入坑表 + W1001 段清理 + 档 3 消费方式原型（2026-11-04）

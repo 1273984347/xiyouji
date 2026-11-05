@@ -1,7 +1,7 @@
 {
  "gate": "第 49 门禁 朱砂实底",
  "criterion": "每页非豁免朱砂实底 ≤3 处（背景=--accent 盒面积>400·或 ≥2 朱砂顶条条带面积>400）",
- "scope": 234,
+ "scope": 235,
  "exemptions_file": "scripts/output/_w864_accent_exemptions.json",
  "pages": {
   "data/81-hardships-view.html": {
@@ -1629,6 +1629,19 @@
    "nonExempt": 0,
    "fail": false,
    "perCls": {}
+  },
+  "about.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "a.primary": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
   },
   "curated.html": {
    "measured": 1,
@@ -3714,5 +3727,5 @@
  "notes": [
   "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）"
  ],
- "generated_at": "2026-11-04T01:52:52.088Z"
+ "generated_at": "2026-11-05T04:56:44.672Z"
 }

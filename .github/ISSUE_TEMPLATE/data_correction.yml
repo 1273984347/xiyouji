@@ -1,0 +1,56 @@
+name: 数据纠错 / 编码争议
+description: 报告人物关系数据、编码规则、来源回目或权重判定中的错误与争议
+title: "[数据] 简述问题"
+labels: ["data", "content"]
+body:
+  - type: input
+    id: dataset
+    attributes:
+      label: 数据集 / 页面
+      description: 写仓库相对路径或页面 URL
+      placeholder: dataset/character-relationship-3d.json 或 https://1273984347.github.io/xiyouji/data/character-relationship-3d.html
+    validations:
+      required: true
+  - type: input
+    id: edge
+    attributes:
+      label: 节点 / 边
+      description: 涉及哪个人物或哪条关系
+      placeholder: 如 唐僧 → 孙悟空（师徒）
+  - type: textarea
+    id: current
+    attributes:
+      label: 当前编码
+      description: 当前的关系类型、回目、权重、证据级别或判定理由
+      placeholder: 例如：type=师徒，chapters=[14,27]，weight=1.0，evidence=文本事实
+  - type: textarea
+    id: correction
+    attributes:
+      label: 建议改为
+      description: 你认为正确的编码或字段值
+    validations:
+      required: true
+  - type: input
+    id: chapters
+    attributes:
+      label: 依据回目
+      description: 至少写一个回目编号
+      placeholder: 如 第 27 回
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 依据摘要
+      description: 原文摘要或情节说明；如直接引用原文，请注明回目并自行核对
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 自检
+      options:
+        - label: 我已核对回目，不是凭记忆填写
+          required: true
+        - label: 我理解该网络是示意性人工整理网络，不作为统计推断
+          required: true

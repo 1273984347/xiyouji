@@ -194,6 +194,8 @@ def collect():
             mark = "超窗!" if n > window else "ok"
             lines.append("体积窗口  %-38s %7.1f KB %6d 行  段 %4d / 窗口 %d  %s"
                          % (rel, kb, nlines, n, window, mark))
+            if kind == "file-index":
+                extra_fails.extend(_fileindex_row_density(t))
         else:
             extra = ""
             if "HANDOVER" in rel:
@@ -206,6 +208,32 @@ def collect():
 
     extra_fails.extend(_version_line_anchors())
     return counts, lines, extra_fails
+
+
+def _fileindex_row_density(t, cap=200):
+    """file-index 单段行数密度判据（W1142 立式·T4 防复发）。
+
+    病根：巨批（W1139 实测 861 行段 ≈ +74KB）逐文件行把登记面顶破体积窗，且与
+    「同下界 + 保留 ≥20 段」无解。机制修法 = 写入侧自动分组（batch_spec.fi_group_rows）；
+    本判据拦**绕过写入侧**的段（手搓/工具遗漏）——任一段 `|` 行数 > cap 即 FAIL，
+    指引用分组立式重写该段。纯文本判据·对幂等重写后的分组段天然绿。
+    """
+    fails = []
+    seg = None
+    rows = 0
+    for ln in t.splitlines():
+        m = re.match(r"^## (W\d+)", ln)
+        if m:
+            if seg is not None and rows > cap:
+                fails.append("file-index %s 段 %d 行 > %d（巨批须目录分组立式："
+                             "batch_spec.fi_group_rows / 腾窗改压缩）" % (seg, rows, cap))
+            seg, rows = m.group(1), 0
+        elif ln.startswith("| ") and not ln.startswith("| 文件 |"):  # W1142（P3-3）：|---| 分支死代码移除（外层 | 前缀已排除）
+            rows += 1
+    if seg is not None and rows > cap:
+        fails.append("file-index %s 段 %d 行 > %d（巨批须目录分组立式："
+                     "batch_spec.fi_group_rows / 腾窗改压缩）" % (seg, rows, cap))
+    return fails
 
 
 def _handover_face(t):

@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-05T10:57:29",
+  "_generated": "2026-11-06T03:48:23",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -55,22 +55,22 @@
     "domain": "html_total − _template.html（generate_csp TEMPLATE_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W459",
-    "value": 856
+    "last_changed_by": "W1141",
+    "value": 857
   },
   "gate_count": {
     "domain": "scripts/verify_delivery.py「第 N 槽/门禁」max",
     "generator": "scripts/stats.py",
     "introduced_by": "W493",
-    "last_changed_by": "W1135",
-    "value": 60
+    "last_changed_by": "1141",
+    "value": 61
   },
   "html_total": {
     "domain": "site/**/*.html（递归全站）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W459",
-    "value": 857
+    "last_changed_by": "W1141",
+    "value": 858
   },
   "icon_allowlist_entries": {
     "domain": "scripts/output/_w949_icon_field_allowlist.json 顶层数组长度",
@@ -104,22 +104,22 @@
     "domain": "pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议）",
     "generator": "scripts/stats.py",
     "introduced_by": "W830",
-    "last_changed_by": "W1136",
-    "value": 1391
+    "last_changed_by": "W1142",
+    "value": 1409
   },
   "report_docs": {
     "domain": "docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化）",
     "generator": "scripts/stats.py",
     "introduced_by": "W737",
-    "last_changed_by": "W1137",
-    "value": 157
+    "last_changed_by": "W1142",
+    "value": 158
   },
   "scan_files": {
     "domain": "html_total − _template.html − _shell.html（check_js_syntax/check_structure）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W459",
-    "value": 855
+    "last_changed_by": "W1141",
+    "value": 856
   },
   "script_classes": {
     "domain": "scripts/[A-Z]_* 类目录数",
@@ -132,8 +132,8 @@
     "domain": "html_total − 两模板壳（check_seo_head SEO_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W591",
-    "last_changed_by": "W591",
-    "value": 855
+    "last_changed_by": "W1141",
+    "value": 856
   },
   "site_data_html": {
     "domain": "site/data/*.html",
@@ -160,8 +160,8 @@
     "domain": "site/*.html",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W459",
-    "value": 9
+    "last_changed_by": "W1141",
+    "value": 10
   },
   "spirit_docs": {
     "domain": "docs/09-精神塑造/*.md（排除 README）",

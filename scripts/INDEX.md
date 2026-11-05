@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（192）
+## 文件（193）
 
 ### Markdown 文档
 
@@ -110,6 +110,7 @@
 - `check_css_var_refs.py`
 - `check_css_var_selfref.py`
 - `check_data_copy_chain.py`
+- `check_dataset_provenance.py`
 - `check_db_schema.py`
 - `check_design_asset_manifest.py`
 - `check_design_doc_drift.py`
