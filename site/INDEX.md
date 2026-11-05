@@ -18,12 +18,13 @@
 - `static/`
 - `themes/`
 
-## 文件（19）
+## 文件（20）
 
 ### HTML 页面
 
 - `404.html`
 - `_template.html`
+- `about.html`
 - `curated.html`
 - `dashboard.html`
 - `dukou-engine.html`

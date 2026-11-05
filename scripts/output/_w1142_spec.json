@@ -1,0 +1,30 @@
+{
+ "batch": "W1142",
+ "date": "2026-11-06",
+ "title": "W1142 治理维护批（体积根修四层 + 对抗审查 + Backlog 对账）",
+ "desc": "治理维护批 体积矛盾四层根修 写入侧自动分组 腾窗保留下限 段行密度判据 add 收集分组兼容 存量三巨段分组清偿 file index 246 到 107KB 对抗审查已派发 Backlog 对账 W1095 条目实证移出",
+ "head_entry": "2026-11-06（W1142 治理维护批（体积根修四层 + 对抗审查 + Backlog 对账））",
+ "head_sentence": "治理维护批 · 体积根修四层 · 对抗审查已派发",
+ "changelog_body": "\n\n**本批要点**（治理维护批·工具层+登记面·不新增门禁槽 ⇒ 门禁 65 段不变·坑表不新增 ⇒ 计数链不动）：\n\n> **来源**：W1139 实测体积矛盾（巨段 vs 体积窗/同下界/保留三约束无解）+ preflight 双 WARN（对抗审查 69 批/Backlog 对账 84 批）；用户批准开工。\n> - **T1 写入侧自动分组（根修①职责分工）**：spec 恒全量逐行（第 51 槽精确权威·不受体积窗管）·file-index 登记面由写入侧在行数 >200 时自动转目录分组行——单一原语 batch_spec.fi_group_rows，backfill_changelog.file_index_block 与 batch_cascade._face_file_index 两处写段方同口径；group-aware covers 降为兜底（W1139 已立）。\n> - **T2 add 收集分组兼容（根修②）**：batch_closeout.collect_paths 对分组行做 os.walk 目录展开（W1139 实测「跳过 9 个 site/（10 件）」教训闭环）。\n> - **T3 腾窗保留下限（根修③）**：archive_segments 体积模式迁出后剩余段 <20 即 fail-closed（铁律 22 保留条款机器化·W1139 曾 29 段被迁剩 1 段）·合成负样本实测拦下。\n> - **T4 段行密度判据（根修④防复发）**：check_doc_size_budget._fileindex_row_density——任一段 >200 行 FAIL（拦绕过写入侧的手搓段）·首跑抓到存量 W1137（895 行）/W1134（369 行）两巨段→按新立式分组重写·file-index 246KB→107KB。\n> - **T5 对抗审查已派发**（触发器 69 批 ≥20·W1072 以来变更面七项清单·只读 subagent）·回报落审查与评审/对抗审查报告-2026-11-06.md。\n> - **T6 Backlog 对账**（触发器 84 批 ≥25）：[x] 两条逐条 git 实证——W1095 条目全部动作完成（E-196/197 在表·分支删净·dependabot 已删·49 分支已清）移出本段·形态锚 gates.md=616 ✓·当前无未决待办。\n> - **验证（全绿）**：体积窗 0 FAIL · doc_sync 除 C4-f 冻结态预期项外 0 · cascade 行为锁 31 例 · doc_size_budget 单测 12 例 · fi_group_rows 四断言（阈值内原样/阈值上分组/正覆盖/负覆盖）· T3 负样本合成拦截 · ruff 全过 · pytest 1391 passed。\n> - **T7 对抗审查修复轮**（审查与修复分离·报告见审查与评审/对抗审查报告-2026-11-06.md）：P1-3 fi_group_rows 无斜杠根级文件保留精确行（伪装目录 9 处清零·三巨段重建后守恒对拍无缺）· P1-2 W1139 段 6 行缺口随重建闭合 · P1-1 W1125 块手工滚动（W534 断言后删+指针归位）· P2-1 回归锁 11 例落仓 · P2-3 分组正则单一实现 · P3-3 死代码清 · P1-4 双声明交集登记提交时摘出。\n> - **T8 铁律 22 定形**：超窗处置优先序（①段行压缩 ②归档搬段（迁后 <20 禁搬）③拆批）就地并入。\n> - **状态**：已落地（工作树态·用户令冻结提交·提交时机待用户）。\n> - **文件**：13 面·详见 file-index。\n",
+ "milestone_block": "- **W1142 治理维护批（体积根修四层 + 对抗审查 + Backlog 对账）**：\n",
+ "agents_note": "2026-11-06（W1142）治理维护批：体积四层根修（写入侧分组/腾窗保留/密度判据·246 到 107KB）· 对抗审查已派发 · Backlog 对账 · pytest 一千三百九十一 passed",
+ "file_index_rows": [
+  "| scripts/batch_spec.py | W1142 | 改：fi_group_rows 分组原语 + FI_SEGMENT_GROUP_THRESHOLD=200（体积根修①·登记面/应动全集职责分工定形） |",
+  "| scripts/backfill_changelog.py | W1142 | 改：file_index_block 写入侧自动分组（行数超阈值→目录分组行·单一原语） |",
+  "| scripts/batch_cascade.py | W1142 | 改：_face_file_index 写入侧自动分组（与 backfill 同口径） |",
+  "| scripts/archive_segments.py | W1142 | 改：体积模式迁出后剩余段 ≥20 断言（体积根修③·铁律 22 保留条款机器化·不足指引压缩而非归档） |",
+  "| scripts/check_doc_size_budget.py | W1142 | 改：_fileindex_row_density 段行密度判据 cap 200（体积根修④·拦绕过写入侧的段） |",
+  "| scripts/batch_closeout.py | W1142 | 改：collect_paths 分组行展开兜底（体积根修②·防分组态 add 静默跳过） |",
+  "| scripts/output/file-index.md | W1142 | 改：W1137/W1134/W1139 三巨段按新立式分组重写（246KB→107KB·存量清偿） |",
+  "| scripts/output/_w1139_spec.json | W1142 | 改：恢复全量逐行（职责分工定形配套·8 special+858 页+4 判据脚本行） |",
+  "| HANDOVER.md | W1142 | 改：Backlog 对账（T6·W1095 条目实证移出 + W1142 对账注记·触发器 84 批）+ 最后更新链（级联） |",
+  "| docs/11-方案报告/审查与评审/对抗审查报告-2026-11-06.md | W1142 | 新增：对抗审查派发回报（T5·W1072 以来 69 批变更面·七项清单） |",
+  "| docs/11-方案报告/设计与架构方案/界面交互迭代施工方案-W1137-2026-11-05.md | W1142 | 改：§2 欠账路线体积矛盾行改注已根修（四层） |",
+  "| scripts/output/_w1142_spec.json | W1142 | 新增：本批 spec |",
+  "| docs/00-导读/W批次编号对账表.md | W1142 | 改：W1142 认领行登记（含「对抗审查已派发」token） |",
+  "| tests/unit/test_w1142_volume_remedies.py | W1142 | 新增：体积根修回归锁 11 例（对抗审查 P2-1·铁律 18-②） |",
+  "| AGENTS.md | W1142 | 改：铁律 22 就地并入超窗处置优先序（①压缩②搬段③拆批·对抗审查 E 项采纳） |",
+  "| docs/INDEX.md | W1142 | 改：docs_index 刷新（收官链 index 步产物） |",
+  "| scripts/output/_cascade_files_W1142.txt | W1142 | 新增：级联文件清单（级联产物） |"
+ ]
+}

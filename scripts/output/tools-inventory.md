@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-05 10:57
+生成时间：2026-11-06 04:00
 
-共 **183** 件（门禁与校验 85 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 70 · 一次性（下划线前缀） 6）
+共 **184** 件（门禁与校验 86 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 70 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（85）
+## 门禁与校验（86）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -42,6 +42,7 @@
 | `check_dark_state_gate.js` | scripts/check_dark_state_gate.js — W579：暗色态门禁（O2 常驻化，挂 screenshot-review |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
 | `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
+| `check_dataset_provenance.py` | 人物关系数据溯源校验器（W1138 建·W1141 挂第 61 槽）。 |
 | `check_db_schema.py` | check_db_schema.py — DB schema 门禁（W917 建置·B-DB-05 清偿）。 |
 | `check_design_asset_manifest.py` | check_design_asset_manifest.py — assets/design 目录清单对拍判据（W1135·遗留③） |
 | `check_design_doc_drift.py` | check_design_doc_drift.py — 设计令牌文档对账门禁（PD-5 · W652） |
