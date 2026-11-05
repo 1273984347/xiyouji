@@ -12,16 +12,12 @@
 - `ISSUE_TEMPLATE/`
 - `workflows/`
 
-## 文件（3）
+## 文件（2）
 
 ### Markdown 文档
 
 - `PULL_REQUEST_TEMPLATE.md`
 - `README-internal.md`
-
-### 数据与配置
-
-- `dependabot.yml`
 
 ---
 

@@ -63,21 +63,29 @@ class TestFixB:
 
 
 class TestFixC:
-    """C 修法：搜索页内容级免审（白名单式·判据强度不降）"""
+    """C 修法：搜索页内容级免审（白名单式·判据强度不降）
+
+    W1137 根修：夹具行号不再硬编码（favicon head 注入平移行号曾断一次）——
+    由 S._csp_index_lines 按判据同源正则动态定位。
+    """
 
     def test_only_csp_and_index_exempt(self):
-        assert S.content_only_search_change("site/en/search.html", [5, 1275]) is True
+        csp, idx, _ = S._csp_index_lines("site/en/search.html")
+        assert S.content_only_search_change("site/en/search.html", [csp, idx]) is True
 
     def test_zh_page_symmetric(self):
-        assert S.content_only_search_change("site/data/search.html", [5, 1291]) is True
+        csp, idx, _ = S._csp_index_lines("site/data/search.html")
+        assert S.content_only_search_change("site/data/search.html", [csp, idx]) is True
 
     def test_extra_line_not_exempt(self):
         """负样本：多一个未识别行 ⇒ 不豁免"""
-        assert S.content_only_search_change("site/en/search.html", [5, 1275, 1300]) is False
+        csp, idx, other = S._csp_index_lines("site/en/search.html")
+        assert S.content_only_search_change("site/en/search.html", [csp, idx, other]) is False
 
     def test_layout_only_not_exempt(self):
         """负样本：仅布局行 ⇒ 不豁免"""
-        assert S.content_only_search_change("site/en/search.html", [900]) is False
+        _, _, other = S._csp_index_lines("site/en/search.html")
+        assert S.content_only_search_change("site/en/search.html", [other]) is False
 
     def test_non_search_page_not_applicable(self):
         """负样本：非搜索页不适用内容级豁免"""
@@ -100,14 +108,16 @@ class TestDecide:
         assert (needed, scope) == (True, "targeted")
 
     def test_content_change_exempt(self):
+        csp, idx, _ = S._csp_index_lines("site/en/search.html")
         needed, scope, _, _ = S.decide(
-            ["site/en/search.html"], {"site/en/search.html": [5, 1275]}
+            ["site/en/search.html"], {"site/en/search.html": [csp, idx]}
         )
         assert (needed, scope) == (False, "skip")
 
     def test_content_change_with_extra_downgrades(self):
+        csp, idx, other = S._csp_index_lines("site/en/search.html")
         needed, scope, _, _ = S.decide(
-            ["site/en/search.html"], {"site/en/search.html": [5, 1275, 1300]}
+            ["site/en/search.html"], {"site/en/search.html": [csp, idx, other]}
         )
         assert (needed, scope) == (True, "targeted")
 

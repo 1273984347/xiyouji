@@ -250,7 +250,11 @@ def _agents_face(t):
     fs = t.find("*本文件由")
     if fs < 0:
         return "", []
-    fline = t[fs:t.find("\n", fs)]
+    # W1137 根修：find('\n') 为 -1（脚注=末行且无换行尾·AGENTS.md 恒为该形态）时
+    # t[fs:-1] 会把末字节剥掉——本仓固定尾句的收尾「*」被吞 ⇒ 剥家具失败 ⇒ 条目恒 +19 字误判
+    # （往批 note 短未触顶·W1137 note=119 首踩）。末行无换行时取到文件尾。
+    _nl = t.find("\n", fs)
+    fline = t[fs:] if _nl == -1 else t[fs:_nl]
     fkb = len(fline.encode("utf-8")) / 1024
     extra = "  版本脚注 %.1f KB" % fkb
     fails = []
