@@ -67,7 +67,7 @@
            （16:9 素材溢出 290px·主体被裁没）；dots 为装饰性切换器·JS 不可用时整组隐藏 */
         /* W1074（N-08 根修②）：375 视口下 9 圆点×26px+8 间距=298px 不换行，加前置标签 61px
    总计 359px > 父内容宽 327px——正是首页 8px 横向溢出的真源头（W1074 实测定位）。 */
-        .hero-dots { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+        .hero-dots { display: flex; flex-wrap: wrap; gap: var(--gap-tight); margin-top: var(--space-5); }
         .hero-dots[hidden] { display: none; }
         .hero-dots button {
             width: 26px; height: 26px; padding: 0; cursor: pointer;
@@ -138,9 +138,9 @@
         .stat .l { margin-top: 6px; font-size: 12px; color: var(--ink-soft); }
 
         .tools-grid {
-            display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-5);
+            display: grid; grid-template-columns: 2fr 1fr; gap: var(--gap-base);
         }
-        .tools-side { display: flex; flex-direction: column; gap: var(--space-5); }
+        .tools-side { display: flex; flex-direction: column; gap: var(--gap-base); }
         .tools-side .card { flex: 1; }
         .tools-side .card h3 { font-size: 20px; }
         /* W1076 手术 5：卡片 ⑨ 内距改 v4 间距令牌——本页 .card 消费 var(--space-6)（24px）；
@@ -159,7 +159,7 @@
             /* W938：窄屏 masthead 变 column 布局（文字在上）⇒ 插画移到容器顶部，首屏即可见
                （contain 下按宽贴合·375px 视口图高约 159px·完整不裁切） */
             .masthead { background-position: right top; }
-            .stats { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+            .stats { grid-template-columns: repeat(2, 1fr); gap: var(--gap-base); }
             .tools-grid { grid-template-columns: 1fr; }
         }
 
