@@ -155,10 +155,47 @@ class TestDrawerFixedAtNarrow:
                 r = pg.evaluate("""(() => {
                     const nav = document.querySelector('.topnav nav');
                     const rect = nav.getBoundingClientRect();
-                    return {h: rect.height, links: nav.querySelectorAll('a').length};
+                    return {h: rect.height, links: nav.querySelectorAll('a').length,
+                            overflow: document.documentElement.scrollWidth
+                                      - document.documentElement.clientWidth};
                 })()""")
+                assert r["overflow"] <= 0, "745 缝隙档横向溢出 %s px（待办②常态化断言）" % r["overflow"]
                 b.close()
             assert r["h"] == 957, "抽屉面板须全高（实测 %s）——fixed 被祖先 backdrop-filter 退化" % r["h"]
             assert r["links"] == 8
         finally:
             srv.terminate()
+
+
+class TestAgentsBudget:
+    """W1148 a 方案：AGENTS 正本双预算（字节 + 铁律条数·防 Agent 懒读）。"""
+
+    def test_current_tree_green(self):
+        import glob as _g
+        p = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__)))), "AGENTS.md")
+        t = open(p, encoding="utf-8").read()
+        assert dsb._agents_budget(t) == []
+
+    def test_rule_over_cap_red(self):
+        lines = ["# x", "## 6. 必须遵守的铁律"]
+        lines += ["%d. **条目%d**：正文" % (i, i) for i in range(1, 32)]
+        lines += ["## 7. x"]
+        fails = dsb._agents_budget("\n".join(lines))
+        assert len(fails) == 1 and "铁律 31 条 > 30" in fails[0]
+
+    def test_rules_scoped_to_section(self):
+        """§6 外的有序列表（如门禁清单）不计入铁律数。"""
+        body = ["# x", "## 5. y", "\n".join("%d. **z**：d" % i for i in range(1, 40)),
+                "## 6. 必须遵守的铁律", "1. **真铁律**：d", "## 7. x"]
+        assert dsb._agents_budget("\n".join(body)) == []
+
+    def test_body_bytes_over_cap_red(self):
+        big = "x" * (49 * 1024)
+        fails = dsb._agents_budget("# AGENTS\n" + big + "\n*本文件由 x 生成")
+        assert any("正本" in f and "48KB" in f for f in fails)
+
+    def test_negative_tail_stripped(self):
+        """正本计数须排除脚注家具行。"""
+        ok = "# AGENTS\n正文\n*本文件由 x 生成。如与上述权威文档冲突，以权威文档为准。*"
+        assert dsb._agents_budget(ok) == []

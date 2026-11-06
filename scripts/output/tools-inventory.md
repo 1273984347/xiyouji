@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-06 11:42
+生成时间：2026-11-06 13:50
 
-共 **188** 件（门禁与校验 88 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 71 · 一次性（下划线前缀） 6）
+共 **192** 件（门禁与校验 88 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 75 · 一次性（下划线前缀） 6）
 
 ## 门禁与校验（88）
 
@@ -144,7 +144,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（71）
+## 工具（75）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -167,6 +167,7 @@
 | `chart_render_probe.py` | 逐段渲染探针：定位图表色改动下 DOM 塌缩的真实成因（W1084）。 |
 | `ci_sim.py` | ci_sim.py — CI 侧预演工具（W894·用户批准根修的配套工具） |
 | `color_delta_guard.py` | color_delta_guard.py — ΔL* 阈值机器判据（补偿失配可接受幅度·W1103） |
+| `containment_block_scan.py` | containment_block_scan.py — 包含块退化族静态扫描（CSS 特性 × fixed/sticky 规则交叉面） |
 | `data_validate.py` | data_validate.py — output/data/ JSON 结构完整性校验 |
 | `debug_page.js` | Debug a web page using Playwright. Capture console messages and/or page  |
 | `diagnose_overflow.js` | 批量诊断 mobile (375x812) 视口下所有页面的横向溢出根因 |
@@ -178,6 +179,7 @@
 | `extract_datasets.js` | extract_datasets.js — 从 site/data/*.html 提取 EMBEDDED_DATA 为 dataset/*.js |
 | `extract_strings.py` | Dump every chrome text node and every CJK-bearing script literal from a  |
 | `file_protocol_probe.py` | file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊断件·不入  |
+| `fixed_ancestor_probe.py` | fixed_ancestor_probe.py — 运行时包含块退化探针（position:fixed 元素 offsetParent ∈ {n |
 | `font_weight_probe.py` | 暗色字重探针（W1134）——证明「暗色模式字重降档」真实生效。 |
 | `icon_probe.js` | — |
 | `ime_scroll_probe.py` | IME 防误发 + 阈值滚动探针（W1134）——证明两项交互修复真实生效。 |
@@ -187,6 +189,8 @@
 | `inject_seo_head.py` | inject_seo_head.py — 全站 SEO head 注入器（W591 SEO 清零·幂等）。 |
 | `inject_visit_log.py` | W403 · 本地访问记录注入脚本（localStorage 自建基线） |
 | `inline_css.py` | inline_css.py — 将数据页的外部 ../tokens.css + ../system.css <link> 标签 |
+| `interaction_components.py` | interaction_components.py — 全站开合组件清单（W1147 待办①·交互后态门禁覆盖的数据面）。 |
+| `interaction_state_probe.py` | interaction_state_probe.py — 交互后态探针（W1147 待办①·12 类开合组件清单驱动）。 |
 | `j1_name_audit.py` | j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件） |
 | `new_page.py` | new_page.py — 可视化页面脚手架 |
 | `obs_sample.py` | obs_sample.py — OBS-10/11/14 逐批采样件（W850 建·Q2 裁决的取数入口）。 |
