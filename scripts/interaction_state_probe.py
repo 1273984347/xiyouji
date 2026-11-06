@@ -62,10 +62,18 @@ def probe_component(b, args, comp, page, entry, open_sel, residue_wl):
         if acted:
             pg.keyboard.press("Escape")
             pg.wait_for_timeout(450)
-        leftover = [x for x in pg.evaluate(
+        open_els = pg.evaluate(
             """(() => [...document.querySelectorAll('.open')].map(
                 x => (x.className||'').toString().slice(0,40)))()""")
-            if not any(w and w in x for w in residue_wl)]
+        leftover = []
+        for x in open_els:
+            skip = False
+            for w in residue_wl:
+                if w and w in x:
+                    skip = True
+                    break
+            if not skip:
+                leftover.append(x)
         entry_found = bool(pg.query_selector(entry)) if entry else True
         return {"acted": acted, "entry_found": entry_found,
                 "degraded": degraded, "open_ok": open_ok, "leftover": leftover}

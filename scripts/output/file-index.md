@@ -29,6 +29,102 @@
 | docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md | W1149 | 改：认领行 W1149 + 迁出 W1086（窗口 61→60） |
 | scripts/output/stats.json · stats-index.md · stats-changelog.json · file-index.md | W1149 | 改：计数链刷新 |
 
+## W1148 懒读治理批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_size_budget.py | W1148 | 改：_agents_budget AGENTS 正本双预算判据（C9·正本 ≤48KB + 铁律 ≤30 条§6 段内计数·a 方案） |
+| scripts/agent_start.py | W1148 | 改：--task 增最小铁律集注入（b 方案·恒真 7 条 ∪ touches 路径敏感·抽整条原文带回指锚·单条 400 字截断） |
+| tests/unit/test_w1142_volume_remedies.py | W1148 | 改：TestAgentsBudget 5 例（现树绿/条数超限红/§6 外不计/字节超限红/尾句剥离） |
+| scripts/output/_w1148_spec.json | W1148 | 新增：本批 spec |
+| docs/00-导读/W批次编号对账表.md | W1148 | 改：W1148 认领行登记 |
+| CHANGELOG.md | W1148 | 改：W1148 段落（级联） |
+| HANDOVER.md | W1148 | 改：最后更新链+里程碑（级联） |
+| scripts/output/file-index.md | W1148 | 改：file-index 段（级联） |
+| AGENTS.md | W1148 | 改：脚注+版本（级联） |
+| site/dukou-engine.html | W1148 | 改：页脚短令牌（级联） |
+| site/data/cross-time-danmaku.html | W1148 | 改：页脚短令牌（级联） |
+| site/data/tag-cloud.html | W1148 | 改：页脚短令牌（级联） |
+| scripts/output/stats.json | W1148 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1148 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1148 | 改：stats 面（级联） |
+| README.md | W1148 | 改：版本面（级联·幂等） |
+| STRUCTURE.md | W1148 | 改：版本面（级联·幂等） |
+| CITATION.cff | W1148 | 改：版本面（级联·幂等） |
+| docs/00-导读/项目说明.md | W1148 | 改：版本面（级联·幂等） |
+| .github/workflows/README.md | W1148 | 改：版本抬头（级联·幂等） |
+| docs/INDEX.md | W1148 | 改：docs_index（级联） |
+| scripts/output/_cascade_files_W1148.txt | W1148 | 新增：级联清单 |
+| archive/docs/AGENTS-ARCHIVE.md | W1148 | 改：AGENTS 脚注滚动归档（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1148 | 改：台账腾窗归档（级联） |
+| docs/10-方法论沉淀/README.md | W1148 | 改：两篇沉淀登记 |
+| scripts/containment_block_scan.py | W1148 | 新增：包含块退化静态扫描固化（W1146 探针移出 tmpe·用户令） |
+| scripts/fixed_ancestor_probe.py | W1148 | 新增：offsetParent 运行时探针固化（W1146 机检范式·用户令移出 tmpe） |
+| scripts/output/_w1139_spec.json | W1148 | 改：恢复全量逐行 867 行（职责分工定形执行件·W1139 台账注记配套） |
+| scripts/output/tools-inventory.md | W1148 | 改：gen_folder_docs --refresh 产物（184 件） |
+
+
+## W1147 方法论沉淀固化批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/containment_block_scan.py | W1147 | 新增：包含块退化族静态扫描（临时桶固化正名） |
+| scripts/fixed_ancestor_probe.py | W1147 | 新增：运行时 offsetParent 退化探针（375/745/1440 参数化·临时桶固化） |
+| scripts/interaction_state_probe.py | W1147 | 新增：12 类开合组件交互后态探针（清单驱动·W1147 待办①） |
+| scripts/interaction_components.py | W1147 | 新增：开合组件清单单一事实源（12 类×五元组） |
+| docs/10-方法论沉淀/CSS包含块退化与交互后态机检范式.md | W1147 | 新增：沉淀第 29 号 |
+| docs/10-方法论沉淀/幂等守卫与判定口径三类自相矛盾根修.md | W1147 | 新增：沉淀第 30 号 |
+| docs/10-方法论沉淀/README.md | W1147 | 改：登记第 29/30 号（第 28 行后插入） |
+| tests/unit/test_w1147_probes.py | W1147 | 新增：探针引用锁 6 例（第 42 槽 C1 引用面） |
+| tests/unit/test_w1142_volume_remedies.py | W1147 | 改：745 溢出断言入抽屉锁（待办②常态化） |
+| scripts/output/_w1147_spec.json | W1147 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1147.txt | W1147 | 新增：级联清单（级联） |
+| CHANGELOG.md | W1147 | 改：W1147 段落（级联） |
+| HANDOVER.md | W1147 | 改：最后更新链+里程碑块（级联） |
+| scripts/output/file-index.md | W1147 | 改：file-index 段（级联） |
+| AGENTS.md | W1147 | 改：脚注+版本（级联） |
+| site/dukou-engine.html | W1147 | 改：页脚短令牌推进（级联） |
+| site/data/cross-time-danmaku.html | W1147 | 改：页脚短令牌推进（级联） |
+| site/data/tag-cloud.html | W1147 | 改：页脚短令牌推进（级联） |
+| site/index.html | W1147 | 改：页脚短令牌推进（级联） |
+| scripts/output/stats.json | W1147 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1147 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1147 | 改：stats changelog 面（级联） |
+| scripts/output/INDEX.md | W1147 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1147 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1147 | 改：工具清单刷新（级联） |
+| README.md | W1147 | 改：版本面推进（级联·幂等） |
+| STRUCTURE.md | W1147 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1147 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1147 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1147 | 改：版本抬头推进（级联·幂等） |
+| docs/INDEX.md | W1147 | 改：docs_index 刷新（级联 index 步） |
+| docs/00-导读/W批次编号对账表.md | W1147 | 改：W1147 认领行登记 |
+| archive/docs/AGENTS-ARCHIVE.md | W1147 | 改：AGENTS 脚注滚动归档（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1147 | 改：台账腾窗归档（级联） |
+| docs/11-方案报告/README.md | W1147 | 改：登记第 105/106 号（两篇沉淀） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1147 | 改：版本抬头推进（级联·幂等） |
+| pytest.ini | W1147 | 改：pytest 标记跟随（stats C5b 面·W1143 同族） |
+| scripts/INDEX.md | W1147 | 改：gen_folder_docs 刷新（级联） |
+| scripts/archive_ledger_rows.py | W1147 | 改：腾窗迁出集合排除在途行（A4 死锁解·_status_of 帮手与 A4 同源判定） |
+| tests/unit/INDEX.md | W1147 | 改：gen_folder_docs 刷新（级联） |
+| tests/unit/README.md | W1147 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/_w1144_spec.json | W1144 | 新增：本批 spec |
+| scripts/output/_w1139_spec.json | W1144 | 改：五批集成载体增补（W1138/1139/1141/1142/1143 并集 933 行·multi-batch 归属载体） |
+| scripts/agent_start.py | W1144 | 集成载体登记：改：现势快照连带的 agent_start 面（多批共有·W1147 集成载体登记） |
+| scripts/check_doc_size_budget.py | W1144 | 集成载体登记：改：_agents_face 切片根修+密度判据（W1144 主体·W1145 连带暂存） |
+| site/data/wukong-tangseng-benchmark.html | W1147 | 同步：W1143 兄弟批标杆页 EMBEDDED 索引随本批搜索索引刷新连带（集成载体登记） |
+| site/en/search.html | W1147 | 同步：EN 内嵌索引刷新连带（集成载体登记） |
+| site/data/character-relationship-3d.html | W1147 | 同步：W1141 兄弟批 3D 页 EMBEDDED 索引连带（集成载体登记） |
+| site/data/search.html | W1147 | 同步：内嵌索引刷新连带（第 46 槽·集成载体登记） |
+| docs/11-方案报告/审查与评审/包含块退化族举一反三扫描报告-2026-11-06.md | W1147 | 新增：举一反三扫描报告（56 组页面×视口 0 退化 0 溢出·机检范式固化来源） |
+| scripts/output/_vermilion_solid_cache.json | W1147 | 改：朱砂实底增量缓存刷新（门禁产物·多批共有） |
+| site/data/character-relationship-3d-view.html | W1147 | 同步：W1141 兄弟批 3D-view 页 EMBEDDED 索引连带（集成载体登记） |
+| scripts/output/_w1148_spec.json | W1148 | 新增：懒读治理批 spec（前置代合并随 W1147 入库·兄弟会话同树） |
+| scripts/output/_cascade_files_W1148.txt | W1148 | 新增：级联清单（前置代合并随 W1147 入库） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1147 | 改：版本抬头推进（级联 versions·幂等） |
+
+
 ## W1145 引文精确性槽批（2026-11-06）
 
 | 文件 | W | 说明 |
