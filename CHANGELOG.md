@@ -1,3 +1,20 @@
+### W1151（2026-11-07）：v4 type/grid 族消费批（type 死令牌根修 + --type-number 等值消费 + 台账回填与分支裁决）
+
+**本批要点**（v4 语义角色第二批·消费面施工+根修·不新增门禁槽 ⇒ 门禁 68 段不变·坑表不新增 ⇒ 计数链不动）：
+
+> **来源**：W1144 defer 项（--type-*/--grid-* 复合值·真实值变化按 W826 程序随迁移批逐页 proof 后再落）+ 用户三任务（v4 type/grid 消费批 / 5 条未 merged 远端分支裁决 / W1148 兄弟会话交付面确认）。共享树有并行会话在途施工 ⇒ 本批全程独立 worktree `feat/w1151-v4-type-grid` 施工（铁律 24·共享树零残留）。
+> - **T1 type 令牌死序根修（浏览器实证）**：--type-* 九定义值序「字重 族 字号/行高」经 `font: var()` 展开不合 shorthand 文法（字号须在族前）⇒ 整条声明 IACVT（探针实测：font 栈全回落 16px/Times New Roman）⇒ 死令牌+地雷（首个天真消费批会把页面字体打到浏览器默认）。`site/tokens.css` 订正为合法序「字重 字号/行高 族」（探针对照四值全等·clamp 形另证）；订正时全站消费位 0 ⇒ 渲染零影响；v4 规格文档 §4 补订正行（原稿字面保留存历史）；design-tokens.json + docs/00-导读/design.md 导出再生成（134 键·对账 0 问题）。
+> - **T2 --type-number 等值消费（4 位）**：system.css `.kpi .kpi-value` 与 `.kpi-card .value/.kpi-value`（组件实现覆盖 ~230 kpi 组件页）+ dukou-engine 页内影子副本 2 位——四值簇（mono 500 32px/1.1）与令牌逐字全等（机扫）；消费形态 = `font: var(--type-number)` + `color`/`font-variant-numeric` 就地补位（font shorthand 会重置 font-variant-numeric·探针实证）。**终态全站等值残余簇 0**（机扫·INLINED 外）。
+> - **T3 J2 视觉回归零差异**：22 页（J2 采样 21 + dukou-engine）× light+dark × **22,167 元素逐属性对拍 = 0 差异**（15s 地板 + DOM 静默收敛·重传播 851 页后采集）。
+> - **T4 grid/B1 盘点裁定**：B1 八页无 `repeat(12,…)` 无独立 gutter 位 ⇒ --grid-* 等值消费 0 位（改值消费须栅格重构=另批裁定）；B1 masthead 自有排版与 v4 角色无等值位 ⇒ 不强迁（保留页面个性）；body 1.75→1.80 改值消费登记后续批。DESIGN.md §4C 现况表订正（W1144 gap 3 页 12 位补录 + type 首角色启用 + grid 0 裁定 + 后续批范围三条）。
+> - **T5 台账回填与登记面修复（回填类·并入本批·铁律 21①）**：W1144/W1145/W1149 行 hash+状态回填（0edda44a·git 反填 2 笔 / a95cea6c·PR #145 / 2277eef3·PR #144 共 3 笔）；**W1148 行补建**（兄弟会话批登记面缺行·代码随集成 PR #145 入库·8f724d1f·W1151 代登记）；W1145/W1149 状态格「已合并」正名为「已收官」形态（ledger_backfill 定位器白名单口径）；腾窗迁出 2 行（W1085-W1088·正本 59 行 ≤ 窗口 60）。
+> - **T6 任务 2 分支裁决（远程面·不入仓）**：5 条未 merged 远端分支内容级核验（tip blob ∈ main 历史 + 台账让号/收官行 + 落地提交链 + 祖先四线合一）后删除：feat/w1091-index-unify（487 文件 0 独有 blob·W1091 让号留痕·工作以 W1096 落库）/ feat/w1106-pitfall-id-unique（工作经 e430828a「W1107+W1106 合批」落地·T57 草稿被落地版 T58 取代）/ feat/w1125-merge-main / feat/w1125-rebased / feat/w1125-selfboot-pitfall-and-dang3-2（0bf49abc 链在 main 祖先·台账已收官；独有字节=级联中间态+T80 落地前草稿）。tip SHA 留痕 `tmpe/w1151_deleted_branches.txt`（gitignore·不入仓）。
+> - **T7 任务 3 W1148 交付面确认（四项全过）**：C9 门禁实跑 0 FAIL（AGENTS 45.1KB ≤ 48KB 现树绿）· TestAgentsBudget 5 回归锁全过 · `agent_start --task` 恒真 7 条注入实跑（回指锚 + 400 字截断指引）· 五类 touches 敏感命中（site 12 / py 20 / 级联 24 / docs 6 / dataset 13）全对（模拟注入 15 条 = 7 恒真 + 8 敏感）。
+> - **T8 工具链双根修（本批实测炸点·铁律 15）**：① `batch_closeout._add_paths` 巨批分块——851 页单条 `git add` 超 Windows CreateProcess 32767 字符上限 ⇒ WinError 206 炸链，改分块 add（暂存区跨调用累积·语义等价）+ 3 例回归锁；② 第 31 门禁 C4 登记面读两面——C4 注册集合原只读现役台账，与腾窗纪律（W960）互搏（W1147 重建的 W1085 行被本批腾窗迁走 ⇒ 已入库提交假红 2 FAIL），根修 = 现役表 ∪ 归档表 glob（同 W1145 CHANGELOG 侧同型·gates.md 第 31 条同步）+ 3 例回归锁；③ 跨行改写扫描基线随判据编辑刷新（存量 `（[^）]*）` 单行 token 剥离经人工复核无害·--update-baseline）。
+> - **验证（全绿）**：J2 22 页双主题 22,167 元素零差异 · check_structure 858 文件 · INLINED 849 页完整（min 40281B）· CSP 859 页 0 漂移 · 设计令牌对账 0 问题 · 体积窗 0 FAIL（腾窗后）· verify 68 段核心全绿 · pytest 1451 passed / 4 skipped（含新增回归锁 6 例）· 终态等值残余簇 0。
+> - **状态**：已落地（独立 worktree feat/w1151-v4-type-grid·PR 待开）。
+> - **文件**：见 file-index。
+
 ### W1149（2026-11-06）：reader/dataset 审计修复批（B1+B2）
 
 **本批要点**（reader 生成器根修 + docs 源清理 + dataset 快照治理 + 新增 2 个门禁槽 ⇒ 61→63 槽）：
@@ -673,7 +690,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1149），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1151），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

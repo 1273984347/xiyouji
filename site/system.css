@@ -279,11 +279,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 var(--elev-2);
 }
 .kpi .kpi-value {
-    font-family: var(--font-mono);
-    font-size: 32px;
-    font-weight: 500;
+    /* W1151 type 语义消费：--type-number 与本规则四值逐字等值（mono 500 32px/1.1）；
+       font shorthand 会重置 font-variant-numeric ⇒ 就地补位（探针实证） */
+    font: var(--type-number);
     color: var(--ink);
-    line-height: 1.1;
     font-variant-numeric: tabular-nums;
 }
 .kpi .kpi-label {
@@ -322,7 +321,7 @@ h4 { font-size: 18px; font-weight: 500; }
                 var(--elev-2);
 }
 .kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
-.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .value, .kpi-card .kpi-value { font: var(--type-number); color: var(--ink); font-variant-numeric: tabular-nums; }
 .kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
 
 /* ===== 图表容器 ===== */
