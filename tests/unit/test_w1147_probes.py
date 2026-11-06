@@ -72,7 +72,8 @@ class TestInteractionStateProbe:
         无此文件 ⇒ skip（本地已实跑全绿·tmpe 为 gitignore 临时区不入仓）。"""
         rep = "tmpe/w1147/interaction_report.json"
         if not os.path.isfile(rep):
-            self.skipTest("本地探针报告不在盘（tmpe 临时区·CI 无浏览器环境不生成）")
+            import pytest
+            pytest.skip("本地探针报告不在盘（tmpe 临时区·CI 无浏览器环境不生成）")
         r = json.load(open(rep, encoding="utf-8"))
         assert len(r) == 12, "报告须覆盖 12 组件（现 %d）" % len(r)
         for k, v in r.items():
