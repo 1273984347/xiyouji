@@ -247,7 +247,7 @@ def file_list_paths(changelog, wnum):
         return None, []
     out = []
     for tok in re.split(r"[、；;，,\s]+", m.group(1)):
-        tok = re.sub(r"（[^）]*）", "", tok).strip("·。")
+        tok = re.sub(r"（[^）\n\r]*）", "", tok).strip("·。")
         if tok and RE_FILE_TOKEN.match(tok):
             out.append(tok)
     return True, out
