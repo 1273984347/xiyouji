@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（197）
+## 文件（201）
 
 ### Markdown 文档
 
@@ -163,6 +163,7 @@
 - `check_w_range_literal.py`
 - `ci_sim.py`
 - `color_delta_guard.py`
+- `containment_block_scan.py`
 - `data_validate.py`
 - `detect_unwrapped_tables.py`
 - `doc_areas.py`
@@ -173,6 +174,7 @@
 - `extract_strings.py`
 - `fetch_gate_stats.py`
 - `file_protocol_probe.py`
+- `fixed_ancestor_probe.py`
 - `font_weight_probe.py`
 - `gen_dataset_index.py`
 - `gen_folder_docs.py`
@@ -188,6 +190,8 @@
 - `inject_seo_head.py`
 - `inject_visit_log.py`
 - `inline_css.py`
+- `interaction_components.py`
+- `interaction_state_probe.py`
 - `j1_name_audit.py`
 - `judge_gate.py`
 - `ledger_backfill.py`

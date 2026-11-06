@@ -204,6 +204,7 @@ def collect():
             elif "AGENTS" in rel:
                 extra, face_fails = _agents_face(t)
                 extra_fails.extend(face_fails)
+                extra_fails.extend(_agents_budget(t))  # W1148 a 方案：正本双预算
             lines.append("体积报告  %-38s %7.1f KB %6d 行%s" % (rel, kb, nlines, extra))
 
     extra_fails.extend(_version_line_anchors())
@@ -233,6 +234,34 @@ def _fileindex_row_density(t, cap=200):
     if seg is not None and rows > cap:
         fails.append("file-index %s 段 %d 行 > %d（巨批须目录分组立式："
                      "batch_spec.fi_group_rows / 腾窗改压缩）" % (seg, rows, cap))
+    return fails
+
+
+# W1148 立式（a 方案·防「Agent 懒读」继续恶化）：AGENTS 正本双预算——
+# 正文字节 ≤ 48KB（现势 43.2KB·余量 ~11%）+ 铁律 ≤ 30 条（现势 25·余量 5）；
+# 「增量配对」不可机判（需历史快照）→ 归级联面：级联后条数增量 >0 时 WARN 提示等量精简。
+# 超限修法 = 摘要层下放（铁律细节迁 L2 pitfalls/门禁·宪法只留恒真高频短句）。
+AGENTS_BODY_BYTES_CAP = 48 * 1024
+AGENTS_RULES_CAP = 30
+_RE_AGENTS_RULE = re.compile(r"^\d+\. \*\*", re.M)
+
+
+def _agents_budget(t):
+    """AGENTS 正本双预算判据（a 方案·W1148）→ FAIL 清单（空 = 合规）。"""
+    fails = []
+    k = t.find("*本文件由")
+    body = t[:k] if k != -1 else t
+    body_bytes = len(body.encode("utf-8"))
+    # 段内限缩：只数「## 6. 必须遵守的铁律」段（全文 ^N. ** 会把各级有序列表一并算入·实测 86）
+    _r0 = t.find("## 6. 必须遵守的铁律")
+    _r1 = t.find("## 7.", _r0) if _r0 != -1 else -1
+    rules = len(_RE_AGENTS_RULE.findall(t[_r0:_r1])) if _r0 != -1 and _r1 != -1 else 0
+    if body_bytes > AGENTS_BODY_BYTES_CAP:
+        fails.append("体积窗口 C9: AGENTS.md 正本 %d B > 48KB 预算（防 Agent 懒读·W1148 立式）"
+                     "——修法=摘要层下放（铁律细节迁 L2 pitfalls/gates·宪法只留恒真高频短句）" % body_bytes)
+    if rules > AGENTS_RULES_CAP:
+        fails.append("体积窗口 C9: AGENTS.md 铁律 %d 条 > 30 条上限（W1148 立式）"
+                     "——新增铁律须等量精简旧条目（合并/下放），或并入既有条目正文" % rules)
     return fails
 
 
