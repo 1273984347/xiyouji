@@ -62,6 +62,7 @@
   "| scripts/output/_vermilion_solid_cache.json | W1147 | 改：朱砂实底增量缓存刷新（门禁产物·多批共有） |",
   "| site/data/character-relationship-3d-view.html | W1147 | 同步：W1141 兄弟批 3D-view 页 EMBEDDED 索引连带（集成载体登记） |",
   "| scripts/output/_w1148_spec.json | W1148 | 新增：懒读治理批 spec（前置代合并随 W1147 入库·兄弟会话同树） |",
-  "| scripts/output/_cascade_files_W1148.txt | W1148 | 新增：级联清单（前置代合并随 W1147 入库） |"
+  "| scripts/output/_cascade_files_W1148.txt | W1148 | 新增：级联清单（前置代合并随 W1147 入库） |",
+  "| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1147 | 改：版本抬头推进（级联 versions·幂等） |"
  ]
 }
