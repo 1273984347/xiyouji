@@ -192,6 +192,10 @@ def c5b_extra_surfaces():
 
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = sorted(glob.glob(os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE*.md")))
+# W1150：台账归档件（archive_ledger_rows.py 迁出行落此）——C4 登记集须并入（镜像 W1014
+# CHANGELOG 归档注入先例），否则腾窗迁走的行号一旦被近期提交 subject 引用即假红
+# （W1150 实证：腾窗迁出 W1085 行后，W1147 两条提交信息里的 W1085 判「未登记」）。
+ARCHIVE_LEDGER = os.path.join(ROOT, "archive", "docs", "W批次编号对账表-ARCHIVE.md")
 # W1145 根修：W995 按 W 段把 tier2 拆成 CHANGELOG-ARCHIVE-tier2-W400-W559.md 等分册，
 # 原读取面只列两个主档 ⇒ 分册里的版段（如 W492）对 C4 不可见 ⇒ 提交信息提到即误判「未登记」。
 # 改为通配全部分册（集合语义·顺序无关），并补 2 例回归锁。
@@ -243,7 +247,7 @@ def file_list_paths(changelog, wnum):
         return None, []
     out = []
     for tok in re.split(r"[、；;，,\s]+", m.group(1)):
-        tok = re.sub(r"（[^）]*）", "", tok).strip("·。")
+        tok = re.sub(r"（[^）\n\r]*）", "", tok).strip("·。")
         if tok and RE_FILE_TOKEN.match(tok):
             out.append(tok)
     return True, out
@@ -431,7 +435,7 @@ def _check_c3_agents_slots(inp, issues):
 
 
 def _c4_registered_ws(inp):
-    """C4 登记集合：CHANGELOG 段号 + 归档段号 + 对账表登记号。"""
+    """C4 登记集合：CHANGELOG 段号 + 归档段号 + 对账表登记号（正本 ∪ 归档）。"""
     reg = changelog_section_ws(inp["changelog"])
     # W1014 hermetic 修：归档登记文本经 inp 注入（真实轨 gather 读盘·自测轨注入空文本）。
     # 原实现在此处 open(ARCHIVE_CHANGELOGS) 直读磁盘，使「未登记 W 必红」负样本一旦被
@@ -440,6 +444,9 @@ def _c4_registered_ws(inp):
     for text in inp.get("archive_changelogs_text", []):
         reg |= changelog_section_ws(text)
     reg |= table_registered_ws(inp["table"])
+    # W1150：台账归档行并入登记集（W1014 对称管线·见 ARCHIVE_LEDGER 注释）
+    if inp.get("archive_ledger_text"):
+        reg |= table_registered_ws(inp["archive_ledger_text"])
     return reg
 def _c4_commit_ws_check(inp, reg, issues):
     """C4：提交信息里的 W 号须有 CHANGELOG 版段或对账表登记。"""
@@ -907,6 +914,8 @@ def gather():
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
         # W1014：归档登记文本在此读盘注入（判据与读取源解耦·见 _check_c4_commit_ledger）
         "archive_changelogs_text": [rd(p) for p in ARCHIVE_CHANGELOGS if os.path.exists(p)],
+        # W1150：台账归档行同款注入（真实轨读盘·自测轨注入空文本）
+        "archive_ledger_text": rd(ARCHIVE_LEDGER) if os.path.exists(ARCHIVE_LEDGER) else "",
         "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
         # W830：C5b 扩展面（pytest.ini + 11-方案报告根层·只跑标记对账·见 c5b_extra_surfaces）
@@ -1026,6 +1035,7 @@ def run_self_test():
         ),
         "verify_src": "# ---- 第 30 槽 ----\n# ---- 第 31 槽 ----\n",
         "archive_changelogs_text": [],  # W1014：自测注入空归档文本（hermetic·不读磁盘）
+        "archive_ledger_text": "",  # W1150：自测注入空台账归档文本（hermetic·不读磁盘）
         # W1136：C5e 亦注入（合成坑表声明数=实算数 ⇒ 干净输入零误报·不读磁盘）
         "pitfalls": (
             "### CSS / 视觉渲染（1 条）\n\n- **a**：自测注入\n\n"
@@ -1093,6 +1103,23 @@ def run_self_test():
         lambda d: d.update(subjects=["chore(w659): 递延批提交"]),
         "C4",
         expect_absent=True,
+    )
+    case(
+        "T5b 台账归档行号引用即豁免（W1150·archive_ledger_text 注入生效）",
+        lambda d: d.update(
+            subjects=["fix(w776): 引用已腾窗归档行号的提交"],
+            archive_ledger_text="| W776 | 归档行 | h1 | h2 | 已收官 | 会话 | a,b |\n",
+        ),
+        "C4",
+        expect_absent=True,
+    )
+    case(
+        "T5c 归档注入空文本仍拦未登记号（W1150·hermetic 不读磁盘）",
+        lambda d: d.update(
+            subjects=["fix(w775): 未登记且不在归档的提交"],
+            archive_ledger_text="",
+        ),
+        "C4",
     )
     case(
         "T6 行级豁免标记生效",

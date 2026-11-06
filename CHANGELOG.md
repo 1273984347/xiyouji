@@ -1,3 +1,20 @@
+### W1150（2026-11-07）：全站 UI/UX 修复升级批
+
+**本批要点**（用户令 2026-11-07「每一页面/按键/图标/图表/反馈/UI/UX/布局/配色字体/按钮反馈与加载/跳转路径/表单与出错提示/空状态与异常分支修复升级优化」·两翼施工：agent-web 前端缺陷修复 + 站点侧机检取证）：
+
+> **来源**：agent-web 自 W808/W825 加固后未再做整面 UI/UX 审计（W1137 边界明确排除 agent-web 交互复测）；站点侧 reader 于 W1149 由 build_reader 重建后 favicon 三行 head 注入丢失（W1137 的一次性全站注入未进生成器模板）⇒ 623 页浏览器标签页回落默认文件图标、http 下每页一个 404。
+> - **T1 agent-web 工具名映射错位（P1×2）**：`toolIcons.ts` 判定用 `name === 'bash'` 等窄等值，而引擎真名是 `run_command`/`write_file`/`read_file`/`edit_file`/`glob`（server/engine/tools.ts）⇒ 专用面板永不渲染、汇总条全退化「其他」、`InlinePermissionCard` 全落灰色兜底且 run_command 的「危险操作」标记永不出现。根修＝归一函数（小写+去下划线）+ 卡片键改引擎真名 + `ToolCallPanels.WriteToolPanel` 改读 `input.path`（旧读 `file_path` 永空）。回归锁 9 例（toolIcons 6 + InlinePermissionCard 3）。
+> - **T2 agent-web 交互反馈面（P1×4）**：① `App.tsx` 补 `*` 通配路由（未知路径整页空白→重定向首页）+ URL 会话不存在时显式提示卡（旧静默渲染「新对话」）；② `Sidebar` 删会话补 Popconfirm 二次确认（误触即永久丢失·与 Agent 删除对齐）+ 加载骨架/空态占位；③ `ChatMessages` 踩按钮死 token `--td-danger-color`（TDesign 无此令牌→点击无视觉反馈）改 `--td-error-color` + 赞踩失败 toast（旧只 console）+ 在途防重 + 复制成功反馈；④ `useChat` 权限回执失败保留卡片并 toast（旧无条件关卡片⇒用户以为已生效而后端挂起到超时）+ 流未收 done/error 补「回答不完整」提示。
+> - **T3 agent-web 加载与空态（P1×2 + P2 多项）**：`useSessions.isLoading`/`useModels.isLoading` 消费落地（侧栏骨架、刷新按钮 loading、输入框禁用原因占位、Select 空列表解释）；会话切换 `messagesLoadingId` 防落地页闪现；草稿持久化根修（旧注释声称持久化但从未 setItem）；localStorage Agent 配置损坏 toast+重置；SettingsPage 字段级校验错误态 + 引擎检查失败改 error 色 + 0 自定义 Agent 空态说明；NewChatView cwd 默认值去开发机硬编码。
+> - **T4 配色 token 化（P2）**：权限模式四色/权限卡片/工具色板/搜索与写入标题色/暗色 markdown 代码块全部字面 hex 改 TDesign 主题令牌（亮暗双主题自适应·color-mix 兼容变量取色）。
+> - **T5 reader favicon 回归根修（站点侧）**：`build_reader.py` head 模板与重定向 stub 补三行 favicon 链接（深度感知相对路径·与 data 页同构）+ 重生成 623 页；icon_probe 复跑 http 环境 reader 页 404 清零。
+> - **T6 站点侧取证（零缺陷确认面）**：全量 63 槽门禁基线绿（68 段 0 FAIL）；交互后态探针 12 类 0 退化 0 残留 0 异常；a11y_audit 19 项 exit 0；CSP 859 页 0 漂移；timeline/concept-device/graph-explorer 三页 http 下 json 404 属**设计内回退**（fetch 失败→EMBEDDED 兜底+数据源标签诚实标注），不属缺陷不立项。
+> - **治理连带**：台账 W1139 行状态措辞归一（已合并→已收官·解 build_reader.py 幻影冲突）+ 腾窗迁出 W1085-W1088 两行（61→59 段）+ **C4 登记集根修**（腾窗迁走的 W1085 被 W1147 提交信息引用 ⇒ 第 31 门禁假红；`check_doc_sync.py` C4 登记集并入台账归档件·镜像 W1014 CHANGELOG 归档注入先例·自测 T5b/T5c 两例锁）+ 坑表新增 E-198（291→292·计数链 AGENTS/HANDOVER/SKILL/pitfalls 四面同步）。
+> **验证（全绿）**：agent-web `npm run build`（tsc+vite）通过；test:server 98 passed / 2 skipped；test:client 60 passed（含本批 9 例回归锁）；test:integration 19 passed / 1 skipped；站点侧 reader 完整性 623 页 0 FAIL、generate_csp 0 漂移、preflight PASS。
+> - **文件**：见 file-index（spec file_index_rows 647 行＝应动全集权威·reader 623 页逐页登记）。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **遗留**：对抗审查触发（距 W1072 已 78 批）与 Backlog 对账触发（距 W1057 已 93 批）为跨批常设项，待治理批处置；agent-web 三图标体系并存（tdesign/lucide/自研）收敛与 v4 type/grid 语义令牌族推进为本批未涉欠账。
+
 ### W1149（2026-11-06）：reader/dataset 审计修复批（B1+B2）
 
 **本批要点**（reader 生成器根修 + docs 源清理 + dataset 快照治理 + 新增 2 个门禁槽 ⇒ 61→63 槽）：
@@ -673,7 +690,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1149），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1150），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

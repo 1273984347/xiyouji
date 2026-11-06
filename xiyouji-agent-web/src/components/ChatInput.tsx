@@ -9,6 +9,8 @@ interface ChatInputProps {
   selectedModel: string;
   models: Model[];
   isLoading: boolean;
+  /** W1150：模型列表加载中（输入框占位提示「正在获取模型」）。 */
+  modelsLoading: boolean;
   permissionMode: PermissionMode;
   onSend: (message: string) => void;
   onStop: () => void;
@@ -17,40 +19,40 @@ interface ChatInputProps {
   onPermissionModeChange: (mode: PermissionMode) => void;
 }
 
-// 权限模式配置
-const PERMISSION_MODE_CONFIG: Record<PermissionMode, { 
-  label: string; 
+// 权限模式配置（W1150：颜色改走主题令牌——旧字面 hex 在深色模式下未经调整）
+const PERMISSION_MODE_CONFIG: Record<PermissionMode, {
+  label: string;
   shortLabel: string;
-  icon: React.ReactNode; 
+  icon: React.ReactNode;
   color: string;
   description: string;
 }> = {
-  'default': { 
-    label: '默认模式', 
+  'default': {
+    label: '默认模式',
     shortLabel: '默认',
-    icon: <LockOnIcon />, 
-    color: '#0052d9',
+    icon: <LockOnIcon />,
+    color: 'var(--td-brand-color)',
     description: '每次操作都需要确认'
   },
-  'acceptEdits': { 
-    label: '自动编辑', 
+  'acceptEdits': {
+    label: '自动编辑',
     shortLabel: '自动编辑',
-    icon: <EditIcon />, 
-    color: '#2ba471',
+    icon: <EditIcon />,
+    color: 'var(--td-success-color)',
     description: '自动允许文件编辑操作'
   },
-  'plan': { 
-    label: '仅规划', 
+  'plan': {
+    label: '仅规划',
     shortLabel: '仅规划',
-    icon: <TaskIcon />, 
-    color: '#ed7b2f',
+    icon: <TaskIcon />,
+    color: 'var(--td-warning-color)',
     description: '只生成计划，不执行操作'
   },
-  'bypassPermissions': { 
-    label: '全部允许', 
+  'bypassPermissions': {
+    label: '全部允许',
     shortLabel: '全部允许',
-    icon: <LockOffIcon />, 
-    color: '#e34d59',
+    icon: <LockOffIcon />,
+    color: 'var(--td-error-color)',
     description: '跳过所有权限确认（危险）'
   },
 };
@@ -60,6 +62,7 @@ export function ChatInput({
   selectedModel,
   models,
   isLoading,
+  modelsLoading,
   permissionMode,
   onSend,
   onStop,
@@ -70,7 +73,6 @@ export function ChatInput({
   const chatSenderRef = useRef<any>(null);
 
   const handleSend = useCallback((e: any) => {
-    console.log('ChatSender send event:', e);
     const content = e?.detail?.message || e?.detail || e?.message || inputValue;
     if (content && typeof content === 'string' && content.trim() && selectedModel) {
       onSend(content.trim());
@@ -80,7 +82,6 @@ export function ChatInput({
   }, [inputValue, selectedModel, onSend]);
 
   const handleChange = useCallback((e: any) => {
-    console.log('ChatSender change event:', e);
     const value = e?.detail ?? e ?? '';
     onChange(typeof value === 'string' ? value : '');
   }, [onChange]);
@@ -98,7 +99,12 @@ export function ChatInput({
         <ChatSender
           ref={chatSenderRef}
           value={inputValue}
-          placeholder="输入消息..."
+          // W1150：禁用态给原因（旧实现模型未就绪时输入框灰着但无解释）
+          placeholder={
+            !selectedModel
+              ? (modelsLoading ? '正在获取模型…' : (models.length === 0 ? '未获取到模型，请检查引擎配置' : '请先选择模型'))
+              : '输入消息...'
+          }
           disabled={!selectedModel}
           loading={isLoading}
           autosize={{ minRows: 1, maxRows: 6 }}
@@ -118,6 +124,8 @@ export function ChatInput({
               style={{ width: 160 }}
               filterable
               borderless
+              // W1150：空列表给解释（旧实现 models 为空时下拉展开是空白面板）
+              empty={modelsLoading ? '正在获取模型…' : '未获取到模型，请检查引擎配置'}
               suffixIcon={<ChevronDownIcon />}
             >
               {models.map(model => (
