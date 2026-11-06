@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-qQ5yFYeMzzz+7SSGHWxcTOtsZIaMuw0vNO6wIMSr6Kg=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-a6AZBT3y2O7qStHGVeARbq+JLMY8xyFW3geB8JQY4VI=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-muD2h42rNS04ALd5hdd0pPxVlwVkq6Vy4XDJapvgALA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-a6AZBT3y2O7qStHGVeARbq+JLMY8xyFW3geB8JQY4VI=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Hierarchy Visualization · Annotated Journey to the West</title>
@@ -1145,6 +1145,11 @@ td.num, th.num {
         transition: transform var(--dur-base) var(--ease-out-quart);
     }
     .topnav:has(.nav-toggle) nav.open { transform: translateX(0); }
+    
+    .topnav:has(.nav-toggle) {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
 }
 
 @media print {
@@ -1718,12 +1723,12 @@ const EMBEDDED_DATA = {
       { id: "Yellow Robe Demon", type: "Bureaucrat", power: 7, chapter: 28 },
       { id: "Yellow Wind Demon", type: "Bureaucrat", power: 6, chapter: 20 },
       // Heaven Hub节点（边端点）
-      { id: "Supreme Lord Laozi", type: "Heaven", power: 10, chapter: 0 },
-      { id: "Guanyin", type: "Heaven", power: 10, chapter: 0 },
-      { id: "Bodhisattva Lingji", type: "Heaven", power: 8, chapter: 0 },
-      { id: "Tathāgata", type: "Heaven", power: 10, chapter: 0 },
-      { id: "Bodhisattva Manjushri", type: "Heaven", power: 9, chapter: 0 },
-      { id: "Bodhisattva Samantabhadra", type: "Heaven", power: 9, chapter: 0 }
+      { id: "Supreme Lord Laozi", type: "Heaven", power: 10, chapter: null, chapter_scope: "deity_no_chapter" },
+      { id: "Guanyin", type: "Heaven", power: 10, chapter: null, chapter_scope: "deity_no_chapter" },
+      { id: "Bodhisattva Lingji", type: "Heaven", power: 8, chapter: null, chapter_scope: "deity_no_chapter" },
+      { id: "Tathāgata", type: "Heaven", power: 10, chapter: null, chapter_scope: "deity_no_chapter" },
+      { id: "Bodhisattva Manjushri", type: "Heaven", power: 9, chapter: null, chapter_scope: "deity_no_chapter" },
+      { id: "Bodhisattva Samantabhadra", type: "Heaven", power: 9, chapter: null, chapter_scope: "deity_no_chapter" }
     ],
     links: [
       // 血缘 - the Bull Demon King family
@@ -2083,7 +2088,7 @@ const link = svg.append('g').selectAll('line')
       tooltip.append('div').text('Type: ' + d.type);
       if (d.type !== "Heaven") {
         tooltip.append('div').text('Sphere of influence: ' + d.power + ' / 10');
-        tooltip.append('div').text('First appearance: Ch. ' + d.chapter);
+        if (d.chapter) tooltip.append('div').text('First appearance: Ch. ' + d.chapter);
       }
       const connected = links.filter(l =>
         (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id

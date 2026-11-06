@@ -148,7 +148,16 @@ def diff_one(rel: str, base: dict[str, Signature], cur: dict[str, Signature]) ->
         old, new = base[name], cur[name]
         if old.params != new.params:
             lines.append(f"~ {name}: 参数变化 {_fmt_params(old)} → {_fmt_params(new)}")
-            breaking.append(name)
+            # W1144 根修（铁律 15·判据缺陷修正）：尾部追加**带默认值**的参数 = 向后兼容
+            # （旧调用 f(旧参) 仍合法·W1143 实证 self_test 加 edge=None 被误判破坏阻断
+            # pre-commit）→ 不判破坏；删除/改名/必填新增/既有默认值变更仍判破坏。
+            tail_added = (
+                len(new.params) > len(old.params)
+                and new.params[: len(old.params)] == old.params
+                and all(p[2] for p in new.params[len(old.params):])
+            )
+            if not tail_added:
+                breaking.append(name)
         if old.returns != new.returns:
             lines.append(f"~ {name}: 返回注解变化 -> {old.returns or 'None'} → -> {new.returns or 'None'}")
             breaking.append(name)

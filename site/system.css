@@ -821,6 +821,15 @@ td.num, th.num {
         transition: transform var(--dur-base) var(--ease-out-quart);
     }
     .topnav:has(.nav-toggle) nav.open { transform: translateX(0); }
+    /* W1144（抽屉塌陷根修）：≤768 抽屉态下关掉顶条 backdrop-filter——backdrop-filter ≠ 0
+       使祖先成为 fixed 后代的包含块（同 transform 语义）⇒ 抽屉 nav 的 position:fixed
+       相对 144px 高的 sticky 顶条而非视口 ⇒ 面板塌成 320×144、其余链接裸浮页外
+       （W335 引入磨砂·W492 抽屉落地即带此缺陷·用户 2026-11-06 窄视口 745 实报）。
+       桌面（>768）磨砂保留（nav 非 fixed 无影响）；≤768 顶条为纸色 sticky·磨砂增益本就不可感。 */
+    .topnav:has(.nav-toggle) {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
 }
 
 /* ===== 打印 ===== */

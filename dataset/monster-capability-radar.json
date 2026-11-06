@@ -321,7 +321,8 @@
         "target": 7,
         "value": 1
       }
-    ]
+    ],
+    "link_endpoint_schema": "index"
   },
   "kpi_extreme": [
     {

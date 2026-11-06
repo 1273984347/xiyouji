@@ -28,6 +28,7 @@ import markdown
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site" / "reader"
 BLOB = "https://github.com/1273984347/xiyouji/blob/main/docs/"
+REPO_BLOB = "https://github.com/1273984347/xiyouji/blob/main/"
 BASE = "https://1273984347.github.io/xiyouji/"
 OG_IMAGE = BASE + "static/img/og-cover-ink-zh.jpg"   # W880：reader 生成器仅产出中文页 → 取中文站分享图
 
@@ -187,6 +188,50 @@ def feedback_html(title: str, url: str) -> str:
                           link("待改进", "👎 待改进", "（哪里不清楚、哪里写错了？）")))
 
 
+def _blob_url(rel_path: str) -> str:
+    """把 docs 相对链接映射为 GitHub blob URL：docs 子目录走 docs/，仓库根目录走根路径。"""
+    rel_path = re.sub(r"^(\.\./)+", "", rel_path)
+    first = rel_path.split("/")[0]
+    root_dir = ROOT / first
+    docs_dir = ROOT / "docs" / first
+    if "/" in rel_path and docs_dir.is_dir() and not root_dir.is_dir():
+        return BLOB + rel_path
+    return REPO_BLOB + rel_path
+
+
+def demote_extra_headings(md: str) -> str:
+    """多一级标题文档：首个 `#` 保留 h1，其后所有标题整体降一级，避免页面出现多个 h1。
+
+    只在代码围栏外判断标题；首个 `#` 之前的标题不动，第二个 `#` 起整体 +1（上限 6）。
+    """
+    lines = md.splitlines()
+    fence = None
+    top_idx = []
+    for i, ln in enumerate(lines):
+        m = re.match(r"^\s*(```|~~~)", ln)
+        if m:
+            tag = m.group(1)
+            fence = None if fence == tag else (fence or tag)
+            continue
+        if fence is None and re.match(r"^#\s", ln):
+            top_idx.append(i)
+    if len(top_idx) < 2:
+        return md
+    start = top_idx[1]
+    out = []
+    for i, ln in enumerate(lines):
+        if i >= start and fence is None:
+            m = re.match(r"^(#+)(\s.*)$", ln)
+            if m:
+                ln = "#" * min(6, len(m.group(1)) + 1) + m.group(2)
+        m2 = re.match(r"^\s*(```|~~~)", ln)
+        if m2:
+            tag = m2.group(1)
+            fence = None if fence == tag else (fence or tag)
+        out.append(ln)
+    return "\n".join(out)
+
+
 def rewrite_links(md: str, docs_root: str, up: str, up2: str, up3: str) -> tuple[str, list[str]]:
     """深度感知改写。up = 页面到 reader 根的相对前缀（'' 或 '../'）。
 
@@ -220,13 +265,14 @@ def rewrite_links(md: str, docs_root: str, up: str, up2: str, up3: str) -> tuple
     md = md.replace("](../../site/", "](" + up2)
     # ③c 仓库根的 scripts 引用（up3 由调用方传入）
     md = md.replace("](../../scripts/", "](" + up3 + "scripts/")
-    # ③b 非六板块 docs → GitHub blob（单段/双段）
-    md = re.sub(r"\]\(\.\./((?!0[1-6]-)[^)/]+\.md)\)",
-                lambda m: "](" + BLOB + m.group(1) + ")", md)
-    md = re.sub(r"\]\(\.\./([^)/]+)/([^)/]+\.md)\)",
-                lambda m: "](" + BLOB + m.group(1) + "/" + m.group(2) + ")", md)
+    # ③b 非六板块 md → GitHub blob（按真实仓库路径选 docs/ 或仓库根）
+    # 先处理两级相对路径，避免被「../dir/file」规则把 dir 误读为 ..
     md = re.sub(r"\]\(\.\./\.\./((?!site/)[^)]+\.md)\)",
-                lambda m: "](" + BLOB + m.group(1) + ")", md)
+                lambda m: "](" + _blob_url(m.group(1)) + ")", md)
+    md = re.sub(r"\]\(\.\./((?!0[1-6]-)[^)/]+\.md)\)",
+                lambda m: "](" + _blob_url(m.group(1)) + ")", md)
+    md = re.sub(r"\]\(\.\./([^)/]+)/([^)/]+\.md)\)",
+                lambda m: "](" + _blob_url(m.group(1) + "/" + m.group(2)) + ")", md)
     # 审计残留
     left = [u for u in re.findall(r"\]\(([^)]+)\)", md)
             if u.endswith(".md") and not u.startswith("http")]
@@ -255,6 +301,7 @@ def head(rel: str, title: str, desc: str) -> str:
     t = html.escape(title, quote=True)
     d = html.escape(desc, quote=True)
     return f"""<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{t}</title>
 <!-- SEO:INJECTED -->
@@ -410,6 +457,7 @@ def _render_one_page(src, docs_root, cat_title, rendered, idx):
     up3 = "../" * (depth + 2)
     md = (src / fname).read_text(encoding="utf-8")
     md, leftovers = rewrite_links(md, docs_root, up, up2, up3)
+    md = demote_extra_headings(md)
     body_html = markdown.markdown(md, extensions=["tables"])
     h1, full = extract((src / fname).read_text(encoding="utf-8"))
     title = full or h1 or out_rel
@@ -455,8 +503,42 @@ def _render_one_page(src, docs_root, cat_title, rendered, idx):
     return leftovers
 
 
+REDIRECT_SECTIONS = {"themes": "themes-hub.html"}
+
+
 def _render_section_index(sub, cat_title, entries) -> None:
     """板块目录页（02-06·目录页位于 sub/ 内·条目链接补 ../ 前缀）（W733 提取）。"""
+    if sub in REDIRECT_SECTIONS:
+        target = REDIRECT_SECTIONS[sub]
+        self_url = BASE + "reader/" + sub + "/index.html"
+        stub = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,follow">
+<title>{cat_title} · 目录（已并入导航 hub）</title>
+<meta name="description" content="{cat_title}目录已并入主题专题导航 hub。">
+<link rel="canonical" href="{self_url}">
+<meta property="og:title" content="{cat_title} · 目录（已并入导航 hub）">
+<meta property="og:description" content="{cat_title}目录已并入主题专题导航 hub。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{self_url}">
+<meta property="og:image" content="{OG_IMAGE}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="refresh" content="0; url=../{target}">
+<style>body{{font-family:serif;background:#FAF7F0;color:#23201A;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0}}a{{color:#C8463A}}</style>
+</head>
+<body>
+<main><p>{cat_title}目录已并入 <a href="../{target}">主题专题导航 hub</a>（正在跳转…）。</p></main>
+</body>
+</html>
+"""
+        (OUT / sub / "index.html").write_text(stub, encoding="utf-8", newline="\n")
+        return
     items = "\n".join(f'<li><a href="../{rel}">{disp}</a></li>' for rel, disp in entries)
     (OUT / sub / "index.html").write_text(
         page_shell(sub + "/index.html", f"{cat_title} · 目录",
@@ -513,6 +595,7 @@ def _render_root_index(sections_out, n_hub) -> None:
     """总目录页：六板块分组（顶部附主题 hub 入口）+ 检索工具条（W733 提取·W865 D2 扩展）"""
     n_total = sum(len(entries) for _, entries in sections_out)
     idx_body = CATALOG_TOOLS_CSS
+    idx_body += '<h1 style="font-size:26px;">站内阅读 · 全目录</h1>\n'
     idx_body += _catalog_tools_html([t for t, _ in sections_out], n_total)
     idx_body += '<p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（%d 篇·按族分组）</a></p>\n' % n_hub
     for gi, (cat_title, entries) in enumerate(sections_out):
@@ -526,6 +609,14 @@ def _render_root_index(sections_out, n_hub) -> None:
         encoding="utf-8", newline="\n")
 
 
+def _inline_reader_css() -> None:
+    """生成后把 reader 的相对 CSS 链接内联，恢复单文件自包含（W1149）。"""
+    import inline_css
+    counts = inline_css.inline_dir(str(OUT))
+    print("[OK] reader CSS 内联：inlined=%d re-synced=%d skip-no-link=%d skip-inlined=%d"
+          % (counts["inlined"], counts["re-synced"], counts["skip-no-link"], counts["skip-inlined"]))
+
+
 def main() -> None:
     docs = ROOT / "docs"
     OUT.mkdir(parents=True, exist_ok=True)
@@ -537,6 +628,7 @@ def main() -> None:
 
     if hub_only:
         n = build_themes_hub()
+        _inline_reader_css()
         print(f"[OK] themes-hub 生成（{n} 链接）→ site/reader/themes-hub.html")
         return
 
@@ -559,6 +651,7 @@ def main() -> None:
     n_pages += 1
     _render_root_index(sections_out, n_hub)
     n_pages += 1
+    _inline_reader_css()
 
     print(f"[OK] 生成 {n_pages} 页（含内容页/板块目录/总目录）→ site/reader/")
     if leftovers_all:

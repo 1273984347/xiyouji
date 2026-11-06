@@ -1,3 +1,155 @@
+## W1149 reader/dataset 审计修复批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W1149 | 改：BLOB 路径映射（docs/ vs 仓库根）+ 多 h1 降级 + themes 跳转 canonical + 根目录 h1 + 生成后自动内联 reader CSS |
+| scripts/inline_css.py | W1149 | 改：新增 `--reader` 与 `inline_dir()`（reader 单文件自包含恢复） |
+| scripts/check_inlined_css.py | W1149 | 改：扫描面扩 `site/reader/**/*.html` + 跳转桩豁免 |
+| scripts/check_reader_integrity.py | W1149 | 新增：第 62 槽（占位/GitHub 链接/单 h1/标题唯一） |
+| scripts/check_dataset_manifest.py | W1149 | 新增：第 63 槽（README/量纲/端点/哨兵/空值/废弃） |
+| scripts/check_dataset_provenance.py | W1149 | 改：第 61 槽扩展 quote_status |
+| scripts/gen_dataset_index.py | W1149 | 新增：从磁盘生成 dataset/README 索引 |
+| scripts/audit_repo.py | W1149 | 新增：全仓审计四子命令（只读） |
+| scripts/verify_delivery.py | W1149 | 改：新增第 62/63 槽 + `_SCOPE_CORE` |
+| tests/unit/test_w1149_reader_dataset.py | W1149 | 新增：9 例回归锁 |
+| docs/01-全书逐回解读 … docs/06-个人随笔 | W1149 | 改：207 文件删除「双索引链接…（待补）」块；3 篇同题标题加区分（逐文件清单见 git diff） |
+| site/reader/**/*.html | W1149 | 改：重生成 623 页（补齐《西游记大事年表》；199 条 GitHub 链接修复；33 页多 h1 归零） |
+| site/data/monster-female-network.html · site/data/monster-hierarchy-network.html · site/data/underworld-power-network.html | W1149 | 改：chapter=0→null+scope + tooltip null 守卫（EN 三页同步） |
+| site/data/search.html · site/en/search.html | W1149 | 改：搜索索引刷新 + CSP 重算 |
+| site/sitemap.xml | W1149 | 改：新增 reader 页收录（854→855 URL） |
+| dataset/*.json（19 件） | W1149 | 改：chapter null / weight_scale / sankey schema / 空值状态 / quote_status / 13d 废弃 |
+| dataset/README.md · dataset/CODING.md | W1149 | 改：README 改磁盘生成；CODING §2.4 schema 约定 + §9 校验说明 |
+| AGENTS.md · docs/agent/gates.md · HANDOVER.md · CHANGELOG.md | W1149 | 改：第 62/63 槽摘要/全量定义/进度/版段 |
+| docs/10-方法论沉淀/全仓深度审计SOP-可复用.md | W1149 | 新增：五维矩阵 + 七步流程 + 四类根因 + 准入三件套 |
+| .agent/skills/huoyan-jinjing/SKILL.md | W1149 | 新增：悟空火眼金睛·全仓巡检速查 skill |
+| docs/11-方案报告/审查与评审/全仓逐逻辑深度审计报告-2026-11-06.md · 基础设施口径与门禁全量审计报告-2026-11-06.md · docs/11-方案报告/设计与架构方案/数据分层与reader-dataset修复方案-2026-11-06.md | W1149 | 新增：审计报告与修复方案入库 |
+| docs/11-方案报告/README.md · docs/10-方法论沉淀/README.md · docs/INDEX.md | W1149 | 改：登记与索引刷新 |
+| scripts/archive_ledger_rows.py | W1149 | 改：在途行保留集（防最老在途行被迁走） |
+| scripts/cross_line_baseline.json | W1149 | 改：补 1 条人工复核安全候选（URL host strip） |
+| docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md | W1149 | 改：认领行 W1149 + 迁出 W1086（窗口 61→60） |
+| scripts/output/stats.json · stats-index.md · stats-changelog.json · file-index.md | W1149 | 改：计数链刷新 |
+
+## W1145 引文精确性槽批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_dataset_provenance.py | W1145 | 改：新增引文精确性判据（text-search 原文精确子串） |
+| tests/unit/test_w1145_quote_exactness.py | W1145 | 新增：引文精确性三例回归锁 |
+| dataset/CODING.md | W1145 | 改：§9 校验说明补引文精确性 |
+| dataset/README.md | W1145 | 改：校验说明补引文精确性 |
+| dataset/INDEX.md | W1145 | 改：目录索引刷新（级联） |
+| docs/agent/gates.md | W1145 | 改：第 61 条补引文精确性与 9 例自测 |
+| AGENTS.md | W1145 | 改：第 61 槽摘要补引文精确性 + 脚注（级联） |
+| docs/00-导读/W批次编号对账表.md | W1145 | 改：新增认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1145 | 改：台账窗口归档（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1145 | 改：脚注滚动归档（级联） |
+| CHANGELOG.md | W1145 | 改：新增 W1145 段（级联） |
+| HANDOVER.md | W1145 | 改：当前进度/头链/里程碑（级联） |
+| README.md | W1145 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1145 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1145 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1145 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1145 | 改：版本抬头推进（级联·幂等） |
+| docs/INDEX.md | W1145 | 改：docs_index 刷新（级联 index 步） |
+| docs/00-导读/统计口径说明.md | W1145 | 改：stats 刷新连带（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1145 | 改：版本抬头推进（级联·幂等） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1145 | 改：版本抬头推进（级联·幂等） |
+| scripts/output/file-index.md | W1145 | 改：本批条目（级联） |
+| scripts/output/stats.json | W1145 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1145 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1145 | 改：stats changelog 面（级联） |
+| scripts/output/tools-inventory.md | W1145 | 改：工具清单刷新（级联） |
+| scripts/output/INDEX.md | W1145 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1145 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1145 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1145 | 改：朱砂实底报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1145 | 改：目录索引收录新测试（级联） |
+| tests/unit/README.md | W1145 | 改：测试计数刷新（级联） |
+| pytest.ini | W1145 | 改：pytest collected 统计标记（级联） |
+| scripts/output/_w1145_spec.json | W1145 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1145.txt | W1145 | 新增：级联清单（级联） |
+
+## W1144 v4 语义令牌第一批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W1144 | 改：gap: var(--space-3/5/6/7) → var(--gap-tight/base/loose/block) 4 位（语义角色族第一批·别名等值·J2 零差异） |
+| site/guide.html | W1144 | 改：gap 族等值替换 2 位（同上） |
+| site/dashboard.html | W1144 | 改：gap 族等值替换 6 位（同上） |
+| docs/00-导读/W批次编号对账表.md | W1144 | 改：W1138/W1139/W1141/W1142 四行 hash 与状态回填（PR #143·96dfb12b） |
+| scripts/output/_w1144_spec.json | W1144 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1144.txt | W1144 | 新增：级联清单（级联） |
+| CHANGELOG.md | W1144 | 改：W1144 段落（级联） |
+| HANDOVER.md | W1144 | 改：最后更新链+里程碑块（级联） |
+| scripts/output/file-index.md | W1144 | 改：file-index 段（级联） |
+| AGENTS.md | W1144 | 改：脚注+版本（级联） |
+| site/dukou-engine.html | W1144 | 改：页脚短令牌推进（级联） |
+| site/data/cross-time-danmaku.html | W1144 | 改：页脚短令牌推进（级联） |
+| site/data/tag-cloud.html | W1144 | 改：页脚短令牌推进（级联） |
+| scripts/output/stats.json | W1144 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1144 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1144 | 改：stats changelog 面（级联） |
+| scripts/output/INDEX.md | W1144 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1144 | 改：gen_folder_docs 刷新（级联） |
+| README.md | W1144 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1144 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1144 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1144 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1144 | 改：版本抬头推进（级联·幂等） |
+| docs/INDEX.md | W1144 | 改：docs_index 刷新（级联 index 步） |
+| scripts/batch_cascade.py | W1144 | 改：rotate 三重根修（幂等守卫超限放行补滚 / 淘汰目标严格口径 min 块自愈指针 / _remain 与 W534 两处潜伏炸点修复·P1-1 复发真根因闭环） |
+
+## W1143 唐僧—孙悟空标杆页批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| dataset/edge-wukong-tangseng.json | W1143 | 新增：9 组事件单边档案（引文/权重/争议） |
+| dataset/README.md | W1143 | 改：数据索引与标杆档案说明 |
+| dataset/character-relationship-3d.json | W1143 | 改：唐僧→悟空边补 28-31/56 回 |
+| dataset/CODING.md | W1143 | 改：第 61 槽扩展说明 |
+| dataset/INDEX.md | W1143 | 改：目录索引收录标杆 JSON |
+| site/data/wukong-tangseng-benchmark.html | W1143 | 新增：单边档案标杆页 |
+| site/about.html | W1143 | 改：七页主线 + 第 07 项 |
+| site/data/character-relationship-3d.html | W1143 | 改：逐边档案链接 + EMBEDDED 回目同步 |
+| site/data/tag-cloud.html | W1143 | 改：标签云收录标杆页 |
+| site/data/search.html | W1143 | 改：搜索索引重建 |
+| site/en/search.html | W1143 | 改：英文搜索索引重建 |
+| site/sitemap.xml | W1143 | 改：收录标杆页 |
+| site/data/INDEX.md | W1143 | 改：数据页目录收录 |
+| site/data/README.md | W1143 | 改：数据页计数刷新 |
+| site/INDEX.md | W1143 | 改：站点目录收录 |
+| site/README.md | W1143 | 改：站点计数刷新 |
+| site/index.html | W1143 | 改：页脚 W 令牌推进 |
+| site/data/cross-time-danmaku.html | W1143 | 改：页脚 W 令牌推进 |
+| site/dukou-engine.html | W1143 | 改：页脚 W 令牌推进 |
+| scripts/check_dataset_provenance.py | W1143 | 改：第 61 槽扩展校验标杆档案 |
+| tests/unit/test_w1143_benchmark.py | W1143 | 新增：标杆档案四例回归锁 |
+| tests/unit/test_w1138_dataset_provenance.py | W1143 | 改：双数据集自测与页面同步 |
+| tests/unit/INDEX.md | W1143 | 改：目录索引收录新测试 |
+| tests/unit/README.md | W1143 | 改：测试计数刷新 |
+| AGENTS.md | W1143 | 改：第 61 槽摘要补标杆数据 |
+| docs/agent/gates.md | W1143 | 改：第 61 条补标杆数据判据 |
+| docs/00-导读/W批次编号对账表.md | W1143 | 改：新增认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1143 | 改：台账窗口归档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1143 | 改：脚注滚动归档 |
+| CHANGELOG.md | W1143 | 改：新增 W1143 段 |
+| HANDOVER.md | W1143 | 改：当前进度/头链/里程碑 |
+| README.md | W1143 | 改：版本行同步 |
+| STRUCTURE.md | W1143 | 改：版本行同步 |
+| docs/00-导读/项目说明.md | W1143 | 改：版本行同步 |
+| CITATION.cff | W1143 | 改：版本面同步 |
+| .github/workflows/README.md | W1143 | 改：版本面同步 |
+| scripts/output/file-index.md | W1143 | 改：本批条目 |
+| scripts/output/stats.json | W1143 | 改：7 键统计刷新 |
+| scripts/output/stats-changelog.json | W1143 | 改：变更史追加 |
+| scripts/output/stats-index.md | W1143 | 改：反向索引重渲染 |
+| scripts/output/_w1143_spec.json | W1143 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1143.txt | W1143 | 新增：级联文件清单 |
+| scripts/output/tools-inventory.md | W1143 | 改：工具清单刷新 |
+| scripts/output/INDEX.md | W1143 | 改：目录索引刷新 |
+| scripts/output/README.md | W1143 | 改：目录计数刷新 |
+| pytest.ini | W1143 | 改：pytest collected 统计标记 |
+
 ## W1142 治理维护批（2026-11-06）
 
 | 文件 | W | 说明 |

@@ -1146,6 +1146,11 @@ td.num, th.num {
         transition: transform var(--dur-base) var(--ease-out-quart);
     }
     .topnav:has(.nav-toggle) nav.open { transform: translateX(0); }
+    
+    .topnav:has(.nav-toggle) {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
 }
 
 @media print {

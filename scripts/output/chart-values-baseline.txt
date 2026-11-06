@@ -1,5 +1,5 @@
 # 第 43 门禁 · 可视化数据断言基线（W753 建立·存量缺口冻结）
-# 生成：2026-10-15 · 页数 87 · 每页 6 项 = 522 行
+# 生成：2026-11-06 · 页数 88 · 每页 6 项 = 528 行
 # 生成命令：node scripts/check_chart_values.js --generate-baseline
 # 格式：page|item|measured|status    status ∈ ok | fail:<reason> | na:<reason>（na = 判据对该页不适用/缺覆盖，计入缺口报告）
 # 语义：违规集合单调不增——本文件内 fail 为冻结存量（WARN 冻结·不算 FAIL）；
@@ -7,7 +7,7 @@
 #       fail→ok 或 fail→na = 可收紧（提示删/改行）；基线文件缺失 = 拒绝通过（fail-closed）。
 # 判据口径：V1 无 pageerror / V2 图表容器非空 / V3 数据量级自洽 / V4 KPI 可复算 / V5 数据源四要素（第 28 门禁口径·缺口）
 # 阈值：v3MinDataN=4 v3Ratio=0.5 chartMin=160x120 worsenFactor=0.5
-# 普查分布：族分布 {"line":14,"other":3,"sankey":5,"pie":14,"treemap":7,"bar":2,"network":20,"scatter":11,"dom":3,"3d":2,"area":3,"chord":1,"heatmap":2} · 有数据页 78/87 · V3 比例分位 p05=2.8 p25=16.071 p50=41
+# 普查分布：族分布 {"line":15,"other":3,"sankey":5,"pie":14,"treemap":7,"bar":2,"network":20,"scatter":11,"dom":3,"3d":2,"area":3,"chord":1,"heatmap":2} · 有数据页 80/88 · V3 比例分位 p05=2.8 p25=16.071 p50=39.167
 site/data/81-hardships-view.html|V1|n=0|ok
 site/data/81-hardships-view.html|V2|shapes=4 rows=0 domItems=8 painted=0 containers=1 scene=-|ok
 site/data/81-hardships-view.html|V3|N=0 best=- L=0 shapes=8 pathPts=14 domItems=8|na:no-data-source
@@ -530,3 +530,9 @@ site/data/workplace.html|V3|N=15 best=EMBEDDED:$.wukong_resume.work_experience:3
 site/data/workplace.html|V4|kpi=3 matched=EMBEDDED:$.project_review.duration_years=14 ↔ 14|ok
 site/data/workplace.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
 site/data/workplace.html|PROBE|ms=1052 stable=true samples=3|ok
+site/data/wukong-tangseng-benchmark.html|V1|n=0|ok
+site/data/wukong-tangseng-benchmark.html|V2|shapes=53 rows=9 domItems=45 painted=0 containers=2 scene=-|ok
+site/data/wukong-tangseng-benchmark.html|V3|N=18 best=EMBEDDED_DATA:$.events[1].quotes:2 r=26.50 shapes=53 pathPts=3 domItems=45|ok
+site/data/wukong-tangseng-benchmark.html|V4|kpi=4 matched=EMBEDDED_DATA:$.edge.source=1 ↔ 1.0|ok
+site/data/wukong-tangseng-benchmark.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
+site/data/wukong-tangseng-benchmark.html|PROBE|ms=938 stable=true samples=3|ok

@@ -274,7 +274,8 @@
         "target": 8,
         "value": 1
       }
-    ]
+    ],
+    "link_endpoint_schema": "index"
   },
   "polar": [
     {
@@ -322,5 +323,8 @@
       "axis": "个人体制",
       "value": 8
     }
-  ]
+  ],
+  "_schema": {
+    "weight_scale": "0-10"
+  }
 }
