@@ -208,6 +208,47 @@ def changed_paths():
     return [ln[3:].strip().strip('"') for ln in r.stdout.splitlines() if ln.strip()]
 
 
+# W1148 b 方案（治懒读）：touches 路径 → 最小铁律集。恒真高频条目（任何任务都适用）
+# 与路径敏感条目（按 touches 分类）→ 从 AGENTS §6 抽**整条原文**注入会话头——
+# 「精准喂」取代「全读靠自觉」。每条带「AGENTS 铁律 N」回指锚（防注入件与源漂移失联）。
+ALWAYS_RULES = (1, 2, 5, 8, 17, 18, 21)  # 恒真：声明≠落地/纯设计/先取证/禁擅改/预约/三问/CI节奏
+RULE_PATH_MAP = [  # (路径模式, 铁律号)
+    (r"^site/|\.(css|js|html)$", (12, 6)),      # 动效契约 / file:// 铁律
+    (r"\.py$", (20, 23)),                        # Python 结构检查 / 异常分类
+    (r"^scripts/(batch_cascade|backfill|rebuild)", (24, 16)),  # 并行隔离 / 协作约束
+    (r"^docs/|^HANDOVER|^CHANGELOG", (6, 1)),    # 文档同步 / 六文档
+    (r"^dataset/", (13, 14)),                    # 可信度 / 修实例必修根
+]
+
+
+def minimal_rules(paths):
+    """touches → 最小铁律集（恒真 ∪ 路径敏感·抽整条原文·带回指锚）。"""
+    src = read("AGENTS.md")
+    r0 = src.find("## 6. 必须遵守的铁律")
+    r1 = src.find("## 7.", r0)
+    seg = src[r0:r1] if r0 != -1 and r1 != -1 else ""
+    blocks = re.split(r"(?=^\d+\. \*\*)", seg, flags=re.M)
+    by_num = {}
+    for b in blocks:
+        m = re.match(r"^(\d+)\. ", b)
+        if m:
+            by_num[int(m.group(1))] = b.strip()
+    want = set(ALWAYS_RULES)
+    for pat, nums in RULE_PATH_MAP:
+        if any(re.search(pat, x) for x in paths):
+            want.update(nums)
+    out = []
+    for n in sorted(want):
+        body = by_num.get(n)
+        if not body:
+            continue
+        # 单条超 400 字符截断（细节归原文·回指锚保联）
+        if len(body) > 400:
+            body = body[:400] + "…（全文见 AGENTS.md §6）"
+        out.append("【AGENTS 铁律 %d】%s" % (n, body))
+    return out
+
+
 def render_task():
     paths = changed_paths()
     hits = []
@@ -221,6 +262,12 @@ def render_task():
         out.append("（工作树干净——无未提交改动；按任务性质自行选择节）")
     out.extend(hits if hits else ["（改动未命中已知分类——按 AGENTS §7 快速上手路径走）"])
     out.append("通用必读：CLAUDE.md（宿主已加载）→ 交接「零、当前阻塞」→ 动手前 verify_delivery 全绿。")
+    # W1148 b 方案：最小铁律集注入（恒真 ∪ 路径敏感·抽整条原文带回指锚）
+    rules = minimal_rules(paths)
+    if rules:
+        out.append("")
+        out.append("===== 最小铁律集（恒真 + 按 touches 敏感·共 %d 条·全文见 AGENTS §6）=====" % len(rules))
+        out.extend(rules)
     out.append("=" * 60)
     return "\n".join(out)
 

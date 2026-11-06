@@ -37,6 +37,12 @@ ARC = os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")
 ROW_RE = re.compile(r"^\| W(\d{3,4}) ")
 
 
+def _status_of(line):
+    """台账行 → 状态列（第 6 格·index 5）——A4 在途判定的行级形态（W1147）。"""
+    cells = [c.strip() for c in line.split("|")]
+    return cells[5] if len(cells) > 5 else ""
+
+
 def move(keep, apply, src_p=None, arc_p=None):
     src_p = src_p or os.path.join(ROOT, SRC)
     arc_p = arc_p or os.path.join(ROOT, ARC)
@@ -54,6 +60,17 @@ def move(keep, apply, src_p=None, arc_p=None):
             inflight_idx.add(i)
     keep_set = set(ordered[:keep]) | inflight_idx
     move_idx = [i for i in row_idx if i not in keep_set]
+    # W1147 根修（A4 死锁解）：在途行**永不迁出**——最老行恰为在途时，迁出集合排除之
+    # （保留在正本·占 keep 窗口），否则「窗口满 + 最老行在途 + A4 在途不许迁」三约束死锁
+    # （W1144 实测 W1085/W1087 让号留痕行连续崩 A4）。在途判定与 A4 同源（preflight.is_inflight）。
+    import preflight_check as _pf
+    _inflight_idx = {i for i in move_idx
+                     if _pf.is_inflight(_status_of(lines[i]))}
+    if _inflight_idx:
+        print("  注：跳过在途行 %s（A4 在途不迁·保留正本）"
+              % sorted(ws[i] for i in _inflight_idx))
+        keep_set |= _inflight_idx
+        move_idx = [i for i in move_idx if i not in _inflight_idx]
     if not move_idx:
         if len(row_idx) > keep:
             print("无迁出行但正本 %d 行 > keep %d（在途行占满窗口·须人工处置）" % (len(row_idx), keep))
