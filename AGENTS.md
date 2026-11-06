@@ -177,12 +177,15 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 59. **design 资产清单对拍槽**（check_design_asset_manifest.py·W1135）——`assets/design/` 目录文档声明过磁盘上不存在的文件，且代码块里的旧目录树整段指向已废弃的一次性工作区 ⇒ 清单失准只能靠人工发现。判据：条目取三来源并集（反引号条目 + 代码块目录树按**缩进栈**还原层级 + 命令形态路径条目）；**硬错**只判「声明存在但磁盘不存在」，外部引用 / 通配占位 / 枚举合并 / 仓库根引用四类降为 NOTE 不判红，「磁盘存在但未声明」只作 NOTE。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；`--report` 只报不判红。
 60. **tooltip 多行间距槽**（check_tooltip_spacing.py·W1135）——W1105 批把 EN 站私有 `.tooltip{}` 盒样式收敛为规范 `.chart-tooltip`，但遗留 ZH 页的旧类名规则从未命中（死代码）⇒ tooltip 多行内容一直挤在一起。判据（运行层·playwright·file:// 直开·亮/暗双主题）：CSSOM 中命中规范规则 `.chart-tooltip div + div` + 第二行计算样式 `margin-top` == `--space-2` 解析值 + 旧死规则 `.tooltip div + div` 残留为零 + 双主题读数一致。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（playwright/浏览器不可用·fail-closed）；`--report` 只报不判红。
 61. **数据集溯源槽**（check_dataset_provenance.py·W1141）——22 节点/32 边人物关系数据补溯源字段后，若后续编辑删字段、改回目越界或把权重写出 0–1，既有门禁全都不看数据集字段 ⇒ 数据层会静默退化。判据：`dataset/character-relationship-3d.json` 的 meta 必填键、节点与边必填字段、节点引用闭合、`chapters` 1–100、`weight` 0–1、规则编号 E-01～E-07、证据级别枚举、重复边、`disputed` 边 rationale；并校验 `dataset/edge-wukong-tangseng.json` 的 9 组事件、引文回目落在事件区间、**引文精确性**（每条引文去空白后须为 `dataset/text-search.json` 对应回目原文的精确子串·W1145）、`edge_weight = max(event_weight)`；页面 `EMBEDDED_DATA` 的 `coding_version`/`provenance_batch` 同步标记。恒跑（读 dataset JSON·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 61 门禁 数据集溯源：N FAIL ----`；退出码 0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；单测 `tests/unit/test_w1138_dataset_provenance.py` + `tests/unit/test_w1141_gate_mount.py` + `tests/unit/test_w1143_benchmark.py` + `tests/unit/test_w1145_quote_exactness.py`；自测 9 例负样本（3D 5 + 标杆 3 + 引文 1）。
+62. **reader 完整性**（check_reader_integrity.py·W1149）——`site/reader` 独立生成、此前无专属判据：C1 可见正文禁「（待补）/待完善/TODO」；C2 GitHub `blob|tree/main/<path>` 必须映射仓内真实文件；C3 内容页恰一个 h1（跳转页豁免）；C4 标题唯一。恒跑（扫全量 reader 页·秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 62 门禁 reader 完整性：N FAIL（扫描 N 页） ----`；自测 6 例；单测 `tests/unit/test_w1149_reader_dataset.py`。
+63. **数据集清单**（check_dataset_manifest.py·W1149）——dataset 快照层防退化：C1 README 行 ↔ 磁盘 ↔ 大小/条目数；C2 `_schema.weight_scale` 量纲与 sankey 端点索引；C3 `chapter/回目` 只允许 1–100 或 `null`+`chapter_scope`（禁 0 哨兵）；C4 空数组/null 必须有状态归类；C5 `deprecated` 必须有 note + 存在的 replacement_page。恒跑（读 46 JSON·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 63 门禁 数据集清单：N FAIL（扫描 N 文件） ----`；自测 6 例；单测同 62。
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
+> **🔥 火眼金睛 skill（W1149 建·`huoyan-jinjing`）**：全仓巡检速查 [`.agent/skills/huoyan-jinjing/SKILL.md`](.agent/skills/huoyan-jinjing/SKILL.md)——五维扫描（覆盖/失败语义/CI 形态/数据血缘/同类复发）+ 判据 fail-closed + 数据分级 + manifest 对拍 + 链接/内联 + 修复三原则；完整方法论文档在 [docs/10-方法论沉淀/全仓深度审计SOP-可复用.md](docs/10-方法论沉淀/全仓深度审计SOP-可复用.md)，可执行入口 `scripts/audit_repo.py`。
 
 > **📖 阅读契约（W709）**：索引型——290 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 

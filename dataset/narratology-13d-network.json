@@ -1164,5 +1164,8 @@
         "color": "#8b4513"
       }
     ]
-  }
+  },
+  "deprecated": true,
+  "deprecation_note": "页面已升级为 narratology-16d-network.html；本文件保留为历史快照，不再维护",
+  "replacement_page": "site/data/narratology-16d-network.html"
 }

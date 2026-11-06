@@ -119,13 +119,15 @@ EXPECTED_SECTION_NAMES = [
     "design 资产清单",
     "tooltip 多行间距",
     "数据集溯源",
+    "reader完整性",
+    "数据集清单",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
-# 15 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14·W1141 加「数据集溯源」=15）恒跑不跳；跳过只作用于
-# 53 个 subprocess 委托段（66 段 - 13 内联/bespoke·W1141 实核：_SIMPLE×18+_STRICT×35 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
+# 17 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14·W1141 加「数据集溯源」=15·W1149 加「reader完整性」「数据集清单」=17）恒跑不跳；跳过只作用于
+# 55 个 subprocess 委托段（68 段 - 13 内联/bespoke·W1149 实核：_SIMPLE×18+_STRICT×37 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -207,6 +209,8 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "PowerShell解析",  # W1110：恒跑——.ps1 语法/编码面与改动范围无关（tracked 口径·毫秒级）
     "CSS变量自引用",  # W1110：恒跑——CSS 变量语义与改动范围无关（扫 site/ 全树·毫秒级）
     "数据集溯源",  # W1141：恒跑——数据集字段契约与改动范围无关（读 dataset JSON·毫秒级）
+    "reader完整性",  # W1149：恒跑——reader 占位/链接/h1/标题与改动范围无关（扫 623 页·秒级）
+    "数据集清单",  # W1149：恒跑——README/量纲/哨兵/端点/空值与改动范围无关（读 dataset JSON·毫秒级）
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -660,7 +664,7 @@ _SIMPLE_GATES_POST_A11Y = [
     ),
 ]
 
-# 34 个严格委托段（第 28-60 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
+# 严格委托段（第 28-63 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
 _STRICT_GATES = [
     _StrictGate(
         section="可引用性",
@@ -1081,6 +1085,32 @@ _STRICT_GATES = [
         marker_msg="数据集溯源槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
         ok_msg="数据集溯源门禁通过（%s）",
         ok_line=-2,
+    ),
+    # W1149：reader 完整性四判据（占位词 / GitHub 链接 / 单 h1 / 标题唯一）合并为一条门禁，
+    # 避免为同一产物族拆四个槽；判据与自测在 check_reader_integrity.py。
+    _StrictGate(
+        section="reader完整性",
+        script="check_reader_integrity.py",
+        timeout=120,
+        marker="---- 第 62 门禁 reader 完整性：",
+        crash_msg="reader 完整性槽执行异常（第 62 槽·crash 即拦）: %s",
+        fail_msg="reader 占位词/GitHub 链接/h1/标题唯一性违规（本批新增第 62 槽）",
+        marker_msg="reader 完整性槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="reader 完整性门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1149：dataset 清单与 schema 对拍——README 41/44 与体积失真、权重两套量纲、
+    # sankey 数字端点无声明、chapter=0 哨兵、17 空数组 + 1 null 无归类。
+    _StrictGate(
+        section="数据集清单",
+        script="check_dataset_manifest.py",
+        timeout=120,
+        marker="---- 第 63 门禁 数据集清单：",
+        crash_msg="数据集清单槽执行异常（第 63 槽·crash 即拦）: %s",
+        fail_msg="dataset README/量纲/哨兵/端点/空值状态违规（本批新增第 63 槽）",
+        marker_msg="数据集清单槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="数据集清单门禁通过（%s）",
+        ok_line=-1,
     ),
 ]
 

@@ -836,5 +836,8 @@
       "intensity": 0,
       "phase": "退场归零"
     }
-  ]
+  ],
+  "_schema": {
+    "weight_scale": "0-10"
+  }
 }

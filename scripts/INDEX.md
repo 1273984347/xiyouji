@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（193）
+## 文件（197）
 
 ### Markdown 文档
 
@@ -73,6 +73,7 @@
 - `archive_ledger_rows.py`
 - `archive_segments.py`
 - `archive_tier2.py`
+- `audit_repo.py`
 - `backfill_changelog.py`
 - `baseline_snapshot.py`
 - `batch_cascade.py`
@@ -110,6 +111,7 @@
 - `check_css_var_refs.py`
 - `check_css_var_selfref.py`
 - `check_data_copy_chain.py`
+- `check_dataset_manifest.py`
 - `check_dataset_provenance.py`
 - `check_db_schema.py`
 - `check_design_asset_manifest.py`
@@ -144,6 +146,7 @@
 - `check_pitfall_id_unique.py`
 - `check_plan_template.py`
 - `check_powershell_parse.py`
+- `check_reader_integrity.py`
 - `check_registration_surface.py`
 - `check_repo_layout.py`
 - `check_review_trigger.py`
@@ -171,6 +174,7 @@
 - `fetch_gate_stats.py`
 - `file_protocol_probe.py`
 - `font_weight_probe.py`
+- `gen_dataset_index.py`
 - `gen_folder_docs.py`
 - `gen_og_cover.py`
 - `gen_rss.py`

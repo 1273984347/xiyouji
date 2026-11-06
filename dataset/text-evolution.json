@@ -62,7 +62,10 @@
       "missing_elements": [
         "完整文本"
       ],
-      "archaeological_layer": "层2·元末平话"
+      "archaeological_layer": "层2·元末平话",
+      "field_status": {
+        "chapters": "unknown"
+      }
     },
     {
       "version": "世德堂本《西游记》",
@@ -87,7 +90,11 @@
       "feature": "世本的早期翻刻本·文字略异",
       "key_role_introduction": [],
       "missing_elements": [],
-      "archaeological_layer": "层4·明万历杨闽斋本"
+      "archaeological_layer": "层4·明万历杨闽斋本",
+      "field_status": {
+        "key_role_introduction": "unknown",
+        "missing_elements": "unknown"
+      }
     },
     {
       "version": "朱鼎臣本《唐三藏西游释厄传》",
@@ -113,7 +120,10 @@
         "唐僧出身入正文"
       ],
       "missing_elements": [],
-      "archaeological_layer": "层5·清证道本"
+      "archaeological_layer": "层5·清证道本",
+      "field_status": {
+        "missing_elements": "unknown"
+      }
     },
     {
       "version": "《西游真诠》",
@@ -123,7 +133,11 @@
       "feature": "陈士斌评点·以金丹解西游·清代最流行评本",
       "key_role_introduction": [],
       "missing_elements": [],
-      "archaeological_layer": "层6·清真诠本"
+      "archaeological_layer": "层6·清真诠本",
+      "field_status": {
+        "key_role_introduction": "unknown",
+        "missing_elements": "unknown"
+      }
     },
     {
       "version": "《新说西游记》",
@@ -133,7 +147,11 @@
       "feature": "张书绅评点·以儒解西游·主张'学庸论语'为内学",
       "key_role_introduction": [],
       "missing_elements": [],
-      "archaeological_layer": "层6·清新说本"
+      "archaeological_layer": "层6·清新说本",
+      "field_status": {
+        "key_role_introduction": "unknown",
+        "missing_elements": "unknown"
+      }
     },
     {
       "version": "《西游原旨》",
@@ -143,7 +161,11 @@
       "feature": "刘一明评点·道教龙门派·以丹道解西游最系统",
       "key_role_introduction": [],
       "missing_elements": [],
-      "archaeological_layer": "层7·清原旨本"
+      "archaeological_layer": "层7·清原旨本",
+      "field_status": {
+        "key_role_introduction": "unknown",
+        "missing_elements": "unknown"
+      }
     }
   ],
   "variants": [

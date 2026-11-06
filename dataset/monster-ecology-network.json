@@ -619,7 +619,8 @@
         "target": 3,
         "value": 20
       }
-    ]
+    ],
+    "link_endpoint_schema": "index"
   },
   "radar": [
     {
