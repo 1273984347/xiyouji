@@ -371,8 +371,9 @@ t-chat-sender::part(send-btn):disabled,
 }
 
 .dark .chat-markdown pre {
-  background-color: #1a1a1a !important;
-  border-color: #333 !important;
+  /* W1150：字面色改主题令牌（暗色组件底/描边），与全站暗色体系一致 */
+  background-color: var(--td-bg-color-component) !important;
+  border-color: var(--td-component-stroke) !important;
 }
 
 .chat-markdown code {
@@ -389,8 +390,9 @@ t-chat-sender::part(send-btn):disabled,
 }
 
 .dark .chat-markdown :not(pre) > code {
-  background-color: #333;
-  color: #e6e6e6;
+  /* W1150：字面色改主题令牌 */
+  background-color: var(--td-bg-color-component);
+  color: var(--td-text-color-primary);
 }
 
 .chat-markdown a {

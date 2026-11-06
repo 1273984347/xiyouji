@@ -12,8 +12,11 @@ export function useModels() {
   });
   /** W808：加载失败的用户可读文案（null = 无错误）。此前失败只 console.error，模型选择器静默为空。 */
   const [error, setError] = useState<string | null>(null);
+  /** W1150：模型列表加载中（供刷新按钮 loading 与输入框占位提示，旧实现从未暴露）。 */
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchModels = useCallback(async () => {
+    setIsLoading(true);
     try {
       // W808：改走统一 client——服务端错误不再被当成功数据返回
       const data = await api.models();
@@ -30,6 +33,8 @@ export function useModels() {
       }
     } catch (err) {
       setError(getErrorMessage(err));
+    } finally {
+      setIsLoading(false);
     }
   }, [selectedModel]);
 
@@ -44,5 +49,6 @@ export function useModels() {
     setSelectedModel,
     fetchModels,
     error,
+    isLoading,
   };
 }
