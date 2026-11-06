@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { MessagePlugin } from 'tdesign-react';
 import { Message, ToolCall, PermissionRequest, PermissionMode, Session, CustomAgent, ContentBlock } from '../types';
 import { api, ApiError } from '../utils/api';
 import { getErrorMessage } from '../utils/errorMessage';
@@ -27,6 +28,8 @@ interface NewChatOptions {
   cwd: string;
   permissionMode: PermissionMode;
 }
+
+type NavigateFn = (path: string, opts?: { replace?: boolean }) => void;
 
 export function useChat(options: UseChatOptions) {
   const {
@@ -59,15 +62,22 @@ export function useChat(options: UseChatOptions) {
   }, []);
 
   // 保存输入框内容到 localStorage（防抖）
+  // W1150 根修：旧实现注释声称持久化草稿但从未 setItem ⇒ 草稿恢复是死功能、刷新即丢输入
+  const draftTimerRef = useRef<number | null>(null);
   const saveInput = useCallback((value: string) => {
     setInputValue(value);
+    if (draftTimerRef.current !== null) window.clearTimeout(draftTimerRef.current);
+    draftTimerRef.current = window.setTimeout(() => {
+      if (value) localStorage.setItem(STORAGE_KEYS.draftInput, value);
+      else localStorage.removeItem(STORAGE_KEYS.draftInput);
+    }, 300);
   }, []);
 
   // 发送消息
   const sendMessage = useCallback(async (
     messageContent: string,
     newChatOptions?: NewChatOptions,
-    onNavigate?: (path: string) => void
+    onNavigate?: NavigateFn
   ) => {
     if (!messageContent.trim() || isLoading) return;
 
@@ -157,6 +167,8 @@ export function useChat(options: UseChatOptions) {
     // 错误文案写不进任何消息·isStreaming 永不复位（「思考中…」永久挂起）。
     let realSessionId: string = sessionId!;
     let realAssistantMessageId = tempAssistantMessageId;
+    // W1150：是否收到过终止事件（done/error）——须在 try 外声明（finally 分支要读）
+    let sawTerminalEvent = false;
 
     try {
       // W808：SSE 请求也须带共享 token——否则服务端开了 AGENT_WEB_TOKEN 后聊天流直接 401，
@@ -230,10 +242,13 @@ export function useChat(options: UseChatOptions) {
                   usedModel = data.model;
                   
                   if (realSessionId !== sessionId) {
-                    setSessions(prev => prev.map(s => 
+                    setSessions(prev => prev.map(s =>
                       s.id === sessionId ? { ...s, id: realSessionId } : s
                     ));
                     setCurrentSessionId(realSessionId);
+                    // W1150：URL 同步——旧实现只改 state 不导航 ⇒ URL 仍挂旧临时 id，
+                    // App 的 URL 同步 effect 会把 currentSessionId 拉回失效 id（流式中的会话从界面消失）
+                    onNavigate?.(`/chat/${realSessionId}`, { replace: true });
                     sessionId = realSessionId;
                   }
                   
@@ -361,6 +376,7 @@ export function useChat(options: UseChatOptions) {
                     }));
                   }
                 } else if (data.type === 'done') {
+                  sawTerminalEvent = true;
                   setSessions(prev => prev.map(s => {
                     if (s.id === realSessionId) {
                       return {
@@ -376,6 +392,7 @@ export function useChat(options: UseChatOptions) {
                   }));
                 } else if (data.type === 'error') {
                   // W568：SSE error 事件此前被静默丢弃，前端「思考中…」永久挂起（后端 catch 路径实际有推送）
+                  sawTerminalEvent = true;
                   const errorMessage: string = data.message || '处理请求时发生错误';
                   setSessions(prev => prev.map(s => {
                     if (s.id === realSessionId) {
@@ -398,7 +415,6 @@ export function useChat(options: UseChatOptions) {
                     return s;
                   }));
                 } else if (data.type === 'permission_request') {
-                  console.log('[Permission] Request received:', data);
                   setPermissionRequest({
                     requestId: data.requestId,
                     toolUseId: data.toolUseId,
@@ -446,6 +462,21 @@ export function useChat(options: UseChatOptions) {
       }));
     } finally {
       setIsLoading(false);
+      // W1150：流干净关闭但从未收到 done/error（服务端异常断开·TCP 正常收尾）⇒
+      // 半截回答看起来像完整回答。非用户中止时补「回答不完整」提示（用户主动停止已有 catch 路径文案）。
+      if (!sawTerminalEvent && !controller.signal.aborted) {
+        setSessions(prev => prev.map(s => {
+          if (s.id !== realSessionId) return s;
+          return {
+            ...s,
+            messages: s.messages.map(m =>
+              m.id === tempAssistantMessageId || m.id === realAssistantMessageId
+                ? { ...m, contentBlocks: [...(m.contentBlocks ?? []), { type: 'text' as const, text: '⚠️ 回答不完整：连接提前断开，可重新生成。' }] }
+                : m
+            )
+          };
+        }));
+      }
       if (abortRef.current === controller) abortRef.current = null;
       // W825：兜底清流式态——流可能未收到 done 事件就结束（连接被掐断·服务端异常关闭），
       // 此前 isStreaming 仅在 done/error 事件里复位 ⇒ 消息永久停在「思考中…」
@@ -465,7 +496,6 @@ export function useChat(options: UseChatOptions) {
 
   // 处理停止事件
   const handleStop = useCallback(() => {
-    console.log('ChatSender stop event');
     // W825：**真正中止**在途 SSE 请求（此前只改 UI 状态——流继续推进、答案继续增长、
     // 服务端继续跑完本轮；且 isLoading 复位后可再次发送 → 同一会话两条并发流同时写状态）
     abortRef.current?.abort();
@@ -479,38 +509,38 @@ export function useChat(options: UseChatOptions) {
   }, []);
 
   // 处理权限允许
+  // W1150：回执提交失败时**保留卡片**并 toast（旧实现无条件关卡片 ⇒ 用户以为操作已生效，
+  // 而服务端挂起表里的请求会一直等到超时）
   const handlePermissionAllow = useCallback(async () => {
     if (!permissionRequest) return;
-    
-    console.log('[Permission] User allowed:', permissionRequest.requestId);
-    
-    // W808：改走统一 client（自动带 token + 判 res.ok——此前 401 被静默忽略，
-    // 用户点了「允许」却什么都没发生，挂起表里的请求一直等到超时）
-    await api.permissionResponse({
-      requestId: permissionRequest.requestId,
-      behavior: 'allow'
-    }).catch((err) => {
-      console.error('[Permission] 提交许可回执失败:', err);
-    });
 
-    setPermissionRequest(null);
+    try {
+      // W808：改走统一 client（自动带 token + 判 res.ok——此前 401 被静默忽略，
+      // 用户点了「允许」却什么都没发生，挂起表里的请求一直等到超时）
+      await api.permissionResponse({
+        requestId: permissionRequest.requestId,
+        behavior: 'allow'
+      });
+      setPermissionRequest(null);
+    } catch (err) {
+      MessagePlugin.error({ content: '许可回执提交失败：' + getErrorMessage(err), duration: 4000 });
+    }
   }, [permissionRequest]);
 
   // 处理权限拒绝
   const handlePermissionDeny = useCallback(async () => {
     if (!permissionRequest) return;
-    
-    console.log('[Permission] User denied:', permissionRequest.requestId);
-    
-    await api.permissionResponse({
-      requestId: permissionRequest.requestId,
-      behavior: 'deny',
-      message: '用户拒绝了此操作'
-    }).catch((err) => {
-      console.error('[Permission] 提交许可回执失败:', err);
-    });
 
-    setPermissionRequest(null);
+    try {
+      await api.permissionResponse({
+        requestId: permissionRequest.requestId,
+        behavior: 'deny',
+        message: '用户拒绝了此操作'
+      });
+      setPermissionRequest(null);
+    } catch (err) {
+      MessagePlugin.error({ content: '许可回执提交失败：' + getErrorMessage(err), duration: 4000 });
+    }
   }, [permissionRequest]);
 
   return {
