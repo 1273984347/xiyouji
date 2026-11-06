@@ -574,8 +574,8 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 | `--space-*`（间距刻度 13） | **854** / 855 页 | 已大面积落地 |
 | `--container-*`（容器三档 3） | **639** / 855 页 | 已落地 |
 | `--gap-*`（语义 gap 6） | **3 页 12 位**（W1144·B1 三根页·别名等值） | 已启用 |
-| `--type-*`（排版角色 9） | **`--type-number` × system.css kpi 组件实现（覆盖 ~230 kpi 组件页）+ dukou-engine 页内影子副本 2 位**（W1151·等值消费·J2 22 页双主题零差异） | 首角色启用 |
-| `--grid-*`（栅格 2） | **0** | **B1 等值位盘点 0**（无 `repeat(12,…)` / 独立 gutter 位·等值消费无位可落；改值消费须重构页面栅格 = 另批裁定） |
+| `--type-*`（排版角色 9） | **`--type-number` × system.css kpi 组件实现（覆盖 ~230 kpi 组件页）+ dukou-engine 页内影子副本 2 位**（W1151·等值消费·J2 22 页双主题零差异）；**`--type-body` × body 基础正文**（W1152·语义消费 + 改值 1.75→1.80·J2 22 页逐属性对拍：line-height 16,554 处因子传递 + 4 处图表轴标签 1px 自适应重排为次生确定性效应、其余 31 属性零差异） | 两角色启用 |
+| `--grid-*`（栅格 2） | **0** | **W1152 终裁：不迁移**——全站现役栅格均为语义 2/3/4 列（`repeat(2/3/4,1fr)`·无一处 `repeat(12,…)`/独立 gutter 位），v4 §5 十张组件卡亦无 grid 令牌位 ⇒ 强推 12 列栅格 = 高风险重构零收益；两令牌保留定义（供未来真需 12 列的新页），回归锁 `test_w1152_body_lh_alignment.py` 兼防 body/leading 分叉 |
 
 ⇒ **语义角色族已从 0 启动**（gap 3 页 / type 1 角色·grid 待裁定）⇒ 阶段 2+ 迁移批继续以语义角色族为主目标。
 **W1151 根修与消费记录**：type 九定义值序「字重 族 字号/行高」经 `font: var()` 展开不合 shorthand 文法
@@ -583,9 +583,12 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 「字重 字号/行高 族」（四值语义零变化·订正时消费位 0 ⇒ 渲染零影响）；
 消费形态 = `font: var(--type-number)` + `color`/`font-variant-numeric` 就地补位
 （font shorthand 会重置 font-variant-numeric，探针实证）。**全站等值残余簇 0**（终态机扫）。
-**登记的后续批范围**：① body 行高 1.75→1.80（`--type-body` 改值消费·全站改值批·含 build_reader STYLE）；
-② B1 masthead 自有排版（clamp 78px/900 等）与 v4 角色无等值位 ⇒ 不强迁（保留页面个性·裁定记录）；
-③ `--grid-columns` 改值消费须页面栅格重构（另批裁定）。
+**登记的后续批范围（W1152 复盘后余量）**：① ~~body 行高 1.75→1.80~~ **已落地（W1152）**——body 语义消费
+`--type-body`（font shorthand·重置的 style/variant 在 body 本为初始 normal）+ `--leading-body` 同批 1.75→1.80
+对齐（孤儿刻度令牌留旧值 = 与正文行高分叉的地雷·防患于未然；页自有 `var(--leading-body)` 消费实测 0·
+唯一消费位即 body）；② B1 masthead 自有排版（clamp 78px/900 等）与 v4 角色无等值位 ⇒ 不强迁（保留页面
+个性·裁定记录）；③ ~~`--grid-columns` 栅格重构裁定~~ **已裁定（W1152）：不迁移**（见上表 grid 行）；
+④ v4 余量 = 其余 7 个 type 角色在 B1/B2+ 页面的逐页消费（等值位机扫为准）+ en/reader 随传播自动跟随。
 （实测口径与命令见 `docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md` §二 C）
 
 ---

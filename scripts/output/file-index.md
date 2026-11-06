@@ -1,3 +1,49 @@
+## W1152 v4 body 行高改值批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W1152 | 改：--leading-body 1.75→1.80（与 --type-body /1.80 对齐·孤儿刻度令牌防分叉地雷·页自有消费 0 实测） |
+| site/system.css | W1152 | 改：body 语义消费 --type-body（font shorthand·行高 1.75→1.80 v4 明文改值项·style/variant 重置在 body 本为初始） |
+| DESIGN.md | W1152 | 改：§4C type 行补 body 消费 + grid 行终裁不迁移 + 后续批范围复盘 |
+| docs/00-导读/design.md | W1152 | 改：令牌导出再生成（134 键·0 警告） |
+| scripts/output/design-tokens.json | W1152 | 改：令牌导出再生成（反篡改比对源） |
+| docs/00-导读/W批次编号对账表.md | W1152 | 改：W1152 认领行 + 腾窗迁出 2 行（W1089-W1090） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1152 | 改：台账腾窗接收 W1089-W1090 两行 |
+| tests/unit/test_w1152_body_lh_alignment.py | W1152 | 新增：行高双源对齐 + body 语义消费守卫 2 例 |
+| scripts/output/_w864_accent_exemptions.json | W1152 | 改：data/aesthetics.html 豁免对齐 W886 EN 姊妹页三类（stage-color-bar/color-swatch/kpi-card·纠正误判类·16-⑦ 留痕） |
+| CHANGELOG.md | W1152 | 改：W1152 段落（级联） |
+| HANDOVER.md | W1152 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1152 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1152 | 改：AGENTS 脚注滚动归档（级联） |
+| README.md | W1152 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1152 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1152 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1152 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1152 | 改：版本抬头推进（级联·幂等） |
+| docs/00-导读/统计口径说明.md | W1152 | 改：stats 刷新连带（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1152 | 改：版本抬头推进（级联 versions·幂等） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1152 | 改：版本抬头推进（级联·幂等） |
+| scripts/output/file-index.md | W1152 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1152 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1152 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1152 | 改：stats changelog 面（级联） |
+| docs/INDEX.md | W1152 | 改：docs_index 刷新（级联 index 步） |
+| scripts/INDEX.md | W1152 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1152 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1152 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1152 | 改：工具清单刷新（gen_folder_docs） |
+| scripts/output/_w1152_spec.json | W1152 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1152.txt | W1152 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1152 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1152 | 改：朱砂实底报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1152 | 改：gen_folder_docs 刷新（新增测试件登记） |
+| tests/unit/README.md | W1152 | 改：gen_folder_docs 刷新（新增测试件登记） |
+| pytest.ini | W1152 | 改：collected 头注推进（W830 C5b 对账面·stats 连带） |
+| site/（2 件） | W1152 | inline_css 副本同步（body 消费与 leading 值传播·_template.html + dukou-engine） |
+| site/data/（89 件） | W1152 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1152 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1152 | inline_css 副本同步（同上·W1142 分组登记） |
+
 ## W1151 v4 type/grid 族消费批（2026-11-07）
 
 | 文件 | W | 说明 |

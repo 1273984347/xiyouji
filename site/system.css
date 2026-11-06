@@ -25,9 +25,10 @@ html {
 body {
     background: var(--bg);
     color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: var(--leading-body);
+    /* W1152 v4 正文语义消费：--type-body = sans 400 15px/1.80——行高 1.75→1.80 是 v4
+       明文改值项（W826 预览页卡 ⑤「正文行高由 1.75 提到 1.80」）；font shorthand 重置的
+       font-style/variant 在 body 本为初始 normal ⇒ 计算值仅行高一变（J2 逐属性对拍佐证）。 */
+    font: var(--type-body);
     min-height: 100vh;
 }
 @media (prefers-reduced-motion: reduce) {
