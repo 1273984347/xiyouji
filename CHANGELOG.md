@@ -1,3 +1,18 @@
+### W1152（2026-11-07）：v4 body 行高改值批（--type-body 正文语义消费 1.75→1.80 + --leading-body 对齐 + grid 终裁）
+
+**本批要点**（v4 改值消费批·全站改值 + 终裁·不新增门禁槽 ⇒ 门禁 68 段不变·坑表不新增 ⇒ 计数链不动）：
+
+> **来源**：W1151 §4C 登记的后续批范围第 ①③ 项（body 行高 1.75→1.80 改值消费 + --grid-columns 栅格重构裁定）·W826 defer 改值项（预览页卡 ⑤「正文行高由 1.75 提到 1.80」）·用户 2026-11-07「继续」令。叠支施工：PR #147（W1151）未合并 ⇒ 本批基于 `feat/w1151-v4-type-grid` 叠支 `feat/w1152-body-lh`（合并顺序 = 先 #147 后本 PR）。
+> - **T1 body 语义消费 --type-body（改值）**：system.css body 由三长手（family/size/`line-height: var(--leading-body)`）改 `font: var(--type-body)`（sans 400 15px/**1.80**）——行高 1.75→1.80 为 v4 明文改值项，family/size 计算值不变；font shorthand 重置的 font-style/variant 在 body 本为初始 normal ⇒ 全站唯一变化 = 行高。消费面机扫：`var(--leading-body)` 页自有消费 **0**（851 处引用全在内联副本·即 system.css body 自身）⇒ 唯一真消费位即 body。
+> - **T2 --leading-body 同批对齐 1.75→1.80**：body 语义消费后该令牌转为无现役消费的刻度令牌，留 1.75 = 未来任何消费者与正文行高分叉的地雷（与 IACVT 同类·防患于未然）；值随 --type-body 对齐 + 回归锁 `test_w1152_body_lh_alignment.py` 2 例（双源不分叉 / body 禁回退长手）。
+> - **T3 --grid-columns/--grid-gutter 终裁：不迁移**——全站现役栅格均语义 2/3/4 列（无一处 repeat(12,…)/独立 gutter 位·W1151 盘点 + 本批复扫），v4 §5 十张组件卡亦无 grid 令牌位 ⇒ 强推 12 列栅格 = 高风险重构零收益；两令牌保留定义供未来新页。裁定落 DESIGN §4C grid 行。
+> - **T4 J2 改值批取证（22 页 × light+dark × 22,167 元素逐属性对拍）**：line-height **16,558 处**（16,554 处为 body 因子 1.75→1.80 的继承传递 + 4 处为图表轴标签 1px 自适应重排的下游）+ font-size **4 处**（hardship-heatmap x 轴 10→9 / en relationships y 轴 9→10——SVG 标签自适应启发式对容器尺寸变化的确定性反应，**同态双拍零差异实证非采集抖动**）；**其余 31 属性零差异**（color/background/border/margin/padding/stroke/fill/filter/stop-color 全 0）。目检 reader ch001 与 index 截图无破版（正文更疏朗·版面结构不变）。
+> - **T5 传播与导出**：inline_css --force 重传播 851 页 · design-tokens.json + docs/00-导读/design.md 导出再生成（134 键·0 警告）·对账 0 问题。
+> - **T6 朱砂豁免对称对齐（纠正误判类·16-⑦ CHANGELOG 留痕）**：body 行高抬升使 `data/aesthetics.html` 的 `.stage-color-bar`（6px×~68px·面积跨过 400px² 阈值）+2 检出 ⇒ 第 49 槽红（非豁免 4 > 3）；实查豁免簿发现 **EN 姊妹页同名三类元素早在 W886 已豁免**（数据语义色片·同 class 同理由），zh 页因历史尺寸未越限而漏登 = zh/EN 姊妹页豁免面不对称 ⇒ 对齐登记三类（stage-color-bar 2 / color-swatch 1 / kpi-card 1·owner W1152·review_by 未复核）。**登记后续待办**：zh/EN 姊妹页豁免面对称性机检（本批 49 槽红靠阈值翻转偶然暴露·对称性无常驻判据）。
+> - **验证（全绿）**：check_structure 858 文件 · INLINED 849 页完整 · CSP 859 页 0 漂移 · 设计令牌对账 0 问题 · 体积窗 0 FAIL（腾窗 W1089-W1090 两行）· verify 68 段核心全绿 · pytest 全量（含新增对齐锁 2 例）· 第 51 槽全落 spec。
+> - **状态**：已落地（叠支 feat/w1152-body-lh·PR 待开·base=feat/w1151-v4-type-grid）。
+> - **文件**：见 file-index。
+
 ### W1151（2026-11-07）：v4 type/grid 族消费批（type 死令牌根修 + --type-number 等值消费 + 台账回填与分支裁决）
 
 **本批要点**（v4 语义角色第二批·消费面施工+根修·不新增门禁槽 ⇒ 门禁 68 段不变·坑表不新增 ⇒ 计数链不动）：
@@ -690,7 +705,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1151），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1152），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -85,7 +85,7 @@
 | `--text-hero` | `clamp(1.75rem, 1.2rem + 2.5vw, 2.75rem)` |  |
 | `--leading-tight` | `1.3` |  |
 | `--leading-heading` | `1.4` |  |
-| `--leading-body` | `1.75` |  |
+| `--leading-body` | `1.80` |  |
 
 ### z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）（4）
 
