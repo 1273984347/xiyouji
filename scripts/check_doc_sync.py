@@ -195,6 +195,12 @@ ARCHIVE_CHANGELOGS = sorted(glob.glob(os.path.join(ROOT, "archive", "docs", "CHA
 # W1145 根修：W995 按 W 段把 tier2 拆成 CHANGELOG-ARCHIVE-tier2-W400-W559.md 等分册，
 # 原读取面只列两个主档 ⇒ 分册里的版段（如 W492）对 C4 不可见 ⇒ 提交信息提到即误判「未登记」。
 # 改为通配全部分册（集合语义·顺序无关），并补 2 例回归锁。
+ARCHIVE_TABLES = sorted(glob.glob(os.path.join(ROOT, "archive", "docs", "W批次编号对账表*.md")))
+# W1151 根修：台账腾窗（W960 立窗·archive_ledger_rows --apply 迁最老行入归档表）与 C4 登记
+# 集合只读现役表互搏——W1147 批为满足 C4 重建 W1085 行，下批腾窗依法迁走后 C4 又红
+# （W1151 实证：747ed75e/26e446a7 提交信息提 W1085 ⇒ 2 FAIL）。登记面正本 = 现役表 ∪ 归档表
+# ⇒ C4 注册集合读两面（同 W1145 CHANGELOG 侧 T5 同型根修）；「未登记必红」语义不变
+# （真未登记号两面皆无·仍判红），补回归锁。
 
 
 def changelog_top(text):
@@ -431,7 +437,7 @@ def _check_c3_agents_slots(inp, issues):
 
 
 def _c4_registered_ws(inp):
-    """C4 登记集合：CHANGELOG 段号 + 归档段号 + 对账表登记号。"""
+    """C4 登记集合：CHANGELOG 段号 + 归档段号 + 对账表现役行 + 台账归档表行（W1151）。"""
     reg = changelog_section_ws(inp["changelog"])
     # W1014 hermetic 修：归档登记文本经 inp 注入（真实轨 gather 读盘·自测轨注入空文本）。
     # 原实现在此处 open(ARCHIVE_CHANGELOGS) 直读磁盘，使「未登记 W 必红」负样本一旦被
@@ -440,6 +446,10 @@ def _c4_registered_ws(inp):
     for text in inp.get("archive_changelogs_text", []):
         reg |= changelog_section_ws(text)
     reg |= table_registered_ws(inp["table"])
+    # W1151：腾窗迁入归档表的登记行仍是登记面正本的一部分——只读现役表 ⇒ 腾窗批
+    # （W960 窗口纪律）必然制造「已登记→不可见」假红（W1085 实证）。
+    for text in inp.get("archive_tables_text", []):
+        reg |= table_registered_ws(text)
     return reg
 def _c4_commit_ws_check(inp, reg, issues):
     """C4：提交信息里的 W 号须有 CHANGELOG 版段或对账表登记。"""
@@ -907,6 +917,8 @@ def gather():
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
         # W1014：归档登记文本在此读盘注入（判据与读取源解耦·见 _check_c4_commit_ledger）
         "archive_changelogs_text": [rd(p) for p in ARCHIVE_CHANGELOGS if os.path.exists(p)],
+        # W1151：台账归档表同面注入（腾窗迁入行对 C4 仍可见·登记面 = 现役表 ∪ 归档表）
+        "archive_tables_text": [rd(p) for p in ARCHIVE_TABLES if os.path.exists(p)],
         "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
         # W830：C5b 扩展面（pytest.ini + 11-方案报告根层·只跑标记对账·见 c5b_extra_surfaces）
