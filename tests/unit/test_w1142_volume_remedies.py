@@ -9,6 +9,8 @@ import os
 import re
 import sys
 
+import pytest
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 
 import archive_segments as arcs  # noqa: E402
@@ -141,7 +143,10 @@ class TestDrawerFixedAtNarrow:
         try:
             from playwright.sync_api import sync_playwright
             with sync_playwright() as pw:
-                b = pw.chromium.launch()
+                try:
+                    b = pw.chromium.launch()
+                except Exception as exc:  # noqa: BLE001
+                    pytest.skip("Playwright 浏览器不可用（CI pytest-unit 未装浏览器）：%s" % exc)
                 pg = b.new_context(viewport={"width": 745, "height": 957}).new_page()
                 pg.goto("http://127.0.0.1:8791/site/index.html", wait_until="load")
                 pg.wait_for_timeout(900)
