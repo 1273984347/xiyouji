@@ -945,6 +945,12 @@
   "| scripts/output/_cascade_files_W1144.txt | W1144 | 新增：级联清单 |",
   "| scripts/output/_w1144_spec.json | W1144 | 新增：本批 spec |",
   "| scripts/guardrails/api_diff.py | W1144 | 改：尾部追加带默认值参数=向后兼容不判破坏（判据缺陷修正·W1143 self_test 加 edge=None 实证误拦） |",
-  "| site/system.css | W1144 | 改：≤768 抽屉态关顶条 backdrop-filter（抽屉 fixed 塌陷根修·用户 745 实报·W335 引入磨砂 W492 落地即带缺陷）+ 331 页 inline 副本同步 |"
+  "| site/system.css | W1144 | 改：≤768 抽屉态关顶条 backdrop-filter（抽屉 fixed 塌陷根修·用户 745 实报·W335 引入磨砂 W492 落地即带缺陷）+ 331 页 inline 副本同步 |",
+  "| docs/11-方案报告/README.md | W1147 | 改：登记第 105/106 号（两篇沉淀） |",
+  "| scripts/archive_ledger_rows.py | W1147 | 改：腾窗迁出集合排除在途行（A4 死锁解·_status_of 帮手与 A4 同源判定） |",
+  "| scripts/agent_start.py | W1144 | 集成载体登记：改：现势快照连带的 agent_start 面（多批共有·W1147 集成载体登记） |",
+  "| scripts/containment_block_scan.py | W1144 | 集成载体登记：改：静态扫描探针（W1147 固化·集成暂存） |",
+  "| docs/10-方法论沉淀/README.md | W1144 | 集成载体登记：改：登记第 29/30 号（W1147 沉淀·W1145 连带暂存） |",
+  "| scripts/fixed_ancestor_probe.py | W1144 | 新增：运行时 offsetParent 探针（举一反三固化·W1147 入仓·嵌套重构版） |"
  ]
 }

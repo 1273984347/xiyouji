@@ -56,6 +56,11 @@
   "| site/data/（83 件） | W1144 | system.css 抽屉根修全站 INLINED 副本同步 + 分组登记（W1142 立式） |",
   "| site/en/（138 件） | W1144 | system.css 抽屉根修全站 INLINED 副本同步 + 分组登记（W1142 立式） |",
   "| site/reader/（102 件） | W1144 | system.css 抽屉根修全站 INLINED 副本同步 + 分组登记（W1142 立式） |",
-  "| scripts/check_commit_scope.py | W1144 | 改：第 51 槽判定与反查同口径统一（group-aware·反查命中分组后 plan 退回精确集曾口径断裂 332 件全列表多出） |"
+  "| scripts/check_commit_scope.py | W1144 | 改：第 51 槽判定与反查同口径统一（group-aware·反查命中分组后 plan 退回精确集曾口径断裂 332 件全列表多出） |",
+  "| scripts/agent_start.py | W1144 | 集成载体登记：改：现势快照连带的 agent_start 面（多批共有·W1147 集成载体登记） |",
+  "| scripts/check_doc_size_budget.py | W1144 | 集成载体登记：改：_agents_face 切片根修+密度判据（W1144 主体·W1145 连带暂存） |",
+  "| scripts/containment_block_scan.py | W1144 | 集成载体登记：改：静态扫描探针（W1147 固化·集成暂存） |",
+  "| docs/10-方法论沉淀/README.md | W1144 | 集成载体登记：改：登记第 29/30 号（W1147 沉淀·W1145 连带暂存） |",
+  "| scripts/fixed_ancestor_probe.py | W1144 | 新增：运行时 offsetParent 探针（举一反三固化·W1147 入仓·嵌套重构版） |"
  ]
 }
