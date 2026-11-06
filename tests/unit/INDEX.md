@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（97）
+## 文件（99）
 
 ### Python 脚本
 
@@ -110,6 +110,8 @@
 - `test_w1145_quote_exactness.py`
 - `test_w1147_probes.py`
 - `test_w1149_reader_dataset.py`
+- `test_w1151_c4_archive_table.py`
+- `test_w1151_closeout_add_chunk.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

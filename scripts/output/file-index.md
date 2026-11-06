@@ -1,3 +1,52 @@
+## W1151 v4 type/grid 族消费批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W1151 | 改：type 九定义值序订正「字重 族 字号/行高」→「字重 字号/行高 族」（font shorthand 合法序·IACVT 死令牌根修·四值语义零变化·订正时消费位 0） |
+| site/system.css | W1151 | 改：--type-number 等值消费 ×2（.kpi .kpi-value 与 .kpi-card .value/.kpi-value·font: var() + color/variant 补位·四值簇逐字全等） |
+| site/dukou-engine.html | W1151 | 改：页内 kpi 影子副本 --type-number 消费 ×2（与 system.css 同位）+ INLINED 副本同步 |
+| DESIGN.md | W1151 | 改：§4C 现况表订正（W1144 gap 3 页 12 位补录 + type 首角色启用 + grid 0 裁定）+ 根修与消费记录 + 后续批范围三条 |
+| docs/11-方案报告/设计与架构方案/界面视觉重设计细化规格-v4-2026-10-20.md | W1151 | 改：§4 补 W1151 订正行（原稿字面保留存历史·以 tokens.css 现行序为准） |
+| docs/00-导读/design.md | W1151 | 改：令牌导出再生成（export_design_tokens·134 键） |
+| scripts/output/design-tokens.json | W1151 | 改：令牌导出再生成（反篡改比对源） |
+| docs/00-导读/W批次编号对账表.md | W1151 | 改：W1144/W1145/W1149 行 hash+状态回填 + W1148 行补建（8f724d1f·PR #145）+ W1145/W1149 状态格正名 + W1151 认领行 + 腾窗迁出 2 行（W1085-W1088） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1151 | 改：台账腾窗接收 W1085-W1088 两行 |
+| scripts/output/tools-inventory.md | W1151 | 改：工具清单时间戳刷新 |
+| CHANGELOG.md | W1151 | 改：W1151 段落（级联） |
+| HANDOVER.md | W1151 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1151 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1151 | 改：AGENTS 脚注滚动归档（级联） |
+| README.md | W1151 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1151 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1151 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1151 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1151 | 改：版本抬头推进（级联·幂等） |
+| docs/00-导读/统计口径说明.md | W1151 | 改：stats 刷新连带（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1151 | 改：版本抬头推进（级联 versions·幂等） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1151 | 改：版本抬头推进（级联·幂等） |
+| scripts/output/file-index.md | W1151 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1151 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1151 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1151 | 改：stats changelog 面（级联） |
+| docs/INDEX.md | W1151 | 改：docs_index 刷新（级联 index 步） |
+| scripts/INDEX.md | W1151 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1151 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1151 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/_w1151_spec.json | W1151 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1151.txt | W1151 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1151 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1151 | 改：朱砂实底报告刷新（门禁产物） |
+| scripts/batch_closeout.py | W1151 | 改：_add_paths 巨批分块根修（WinError 206·851 页单条 git add 超 CreateProcess 32767 字符上限·W1151 实证炸链） |
+| tests/unit/test_w1151_closeout_add_chunk.py | W1151 | 新增：3 例回归锁（巨批 450 件分 3 块 / 小批单块不退化 / 块失败中止 fail-closed） |
+| scripts/check_doc_sync.py | W1151 | 改：C4 登记面读两面根修（现役表 ∪ 台账归档表 glob·腾窗与 C4 互搏 W1085 假红实证） |
+| tests/unit/test_w1151_c4_archive_table.py | W1151 | 新增：3 例回归锁（归档表行计入注册 / 提交提归档号通过 / 真未登记仍红） |
+| docs/agent/gates.md | W1151 | 改：第 31 条补 W1151 台账归档面根修段 |
+| scripts/cross_line_baseline.json | W1151 | 改：跨行改写基线刷新（check_doc_sync 编辑致锚点变·存量单行 token 剥离复核无害） |
+| site/（2 件） | W1151 | inline_css 副本同步（tokens/system 根修与消费传播·_template.html + dukou-engine·dukou-engine 兼手改主体行） |
+| site/data/（89 件） | W1151 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1151 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1151 | inline_css 副本同步（同上·W1142 分组登记） |
+
 ## W1149 reader/dataset 审计修复批（2026-11-06）
 
 | 文件 | W | 说明 |
