@@ -11,7 +11,7 @@
 
 - `toolCalls/`
 
-## 文件（12）
+## 文件（13）
 
 ### JavaScript / TypeScript
 
@@ -19,6 +19,7 @@
 - `ChatInput.tsx`
 - `ChatMessages.tsx`
 - `Header.tsx`
+- `InlinePermissionCard.test.tsx`
 - `InlinePermissionCard.tsx`
 - `NewChatDialog.tsx`
 - `NewChatView.tsx`

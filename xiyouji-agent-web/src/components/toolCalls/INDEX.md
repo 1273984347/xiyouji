@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（5）
+## 文件（6）
 
 ### JavaScript / TypeScript
 
@@ -19,6 +19,7 @@
 - `ToolCallPanels.tsx`
 - `ToolCallParts.tsx`
 - `ToolCallsBar.tsx`
+- `toolIcons.test.ts`
 - `toolIcons.ts`
 
 ---
