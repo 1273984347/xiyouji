@@ -34,11 +34,13 @@ TOKEN_MIN = 8
 SYS_MIN = 3
 
 EXCLUDE = ("_shell.html", "_template.html")
+REDIRECT_RE = re.compile(r"<meta[^>]+http-equiv=[\"']refresh[\"']", re.I)
 
 
 def main():
     files = sorted(glob.glob(os.path.join(ROOT, "site", "data", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "en", "*.html")))
+                   + glob.glob(os.path.join(ROOT, "site", "en", "*.html"))
+                   + glob.glob(os.path.join(ROOT, "site", "reader", "**", "*.html"), recursive=True))
     files = [f for f in files if os.path.basename(f) not in EXCLUDE]
     bad = []
     sizes = []
@@ -47,6 +49,8 @@ def main():
             t = fh.read()
         m = MARKER_RE.search(t)
         n = len(m.group(1).strip()) if m else 0
+        if not m and REDIRECT_RE.search(t) and "tokens.css" not in t:
+            continue  # reader 跳转桩无 CSS 链接（themes/index.html）
         if not m or n < MIN_BYTES:
             bad.append((os.path.relpath(f, ROOT), "体积 %dB < %dB 或块缺失" % (n, MIN_BYTES)))
             continue

@@ -220,6 +220,18 @@ def _validate_edge_core(edge, events):
     return errors
 
 
+def _validate_quote_status(event, label):
+    errors = []
+    status = event.get("quote_status")
+    if status not in ("verified", "not_probed"):
+        errors.append("事件 %s quote_status 非 verified/not_probed：%r" % (label, status))
+    elif status == "verified" and not (event.get("quotes") or []):
+        errors.append("事件 %s quote_status=verified 但无引文" % label)
+    elif status == "not_probed" and not str(event.get("quote_note") or "").strip():
+        errors.append("事件 %s quote_status=not_probed 但缺 quote_note" % label)
+    return errors
+
+
 def _validate_edge_events(events):
     errors = []
     seen = set()
@@ -241,6 +253,7 @@ def _validate_edge_events(events):
             errors.append("事件 %s 证据级别非法：%r" % (label, event.get("evidence")))
         if event.get("disputed") is True and not str(event.get("disputed_note") or "").strip():
             errors.append("事件 %s 标为争议但缺 disputed_note" % label)
+        errors.extend(_validate_quote_status(event, label))
         if not _is_int_list(event.get("chapters")) or any(not event["chapter_start"] <= ch <= event["chapter_end"] for ch in event["chapters"]):
             errors.append("事件 %s chapters 越界或不在区间内" % label)
         if not (isinstance(event.get("chapter_start"), int) and isinstance(event.get("chapter_end"), int) and 1 <= event["chapter_start"] <= event["chapter_end"] <= 100):
@@ -373,6 +386,10 @@ def self_test(data, edge=None, search=None):
         bad = copy.deepcopy(edge)
         bad["events"][1]["disputed_note"] = ""
         edge_cases.append(("edge-disputed-without-note", bad))
+
+        bad = copy.deepcopy(edge)
+        bad["events"][5]["quote_status"] = "verified"
+        edge_cases.append(("edge-verified-without-quotes", bad))
 
         for name, sample in edge_cases:
             if not validate_edge(sample):

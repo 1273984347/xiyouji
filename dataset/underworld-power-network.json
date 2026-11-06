@@ -151,13 +151,15 @@
         "id": "玉帝",
         "type": "天庭",
         "power": 10,
-        "chapter": 0
+        "chapter": null,
+        "chapter_scope": "deity_no_chapter"
       },
       {
         "id": "如来",
         "type": "天庭",
         "power": 10,
-        "chapter": 0
+        "chapter": null,
+        "chapter_scope": "deity_no_chapter"
       },
       {
         "id": "唐太宗",

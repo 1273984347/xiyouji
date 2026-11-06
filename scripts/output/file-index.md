@@ -1,3 +1,34 @@
+## W1149 reader/dataset 审计修复批（2026-11-06）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W1149 | 改：BLOB 路径映射（docs/ vs 仓库根）+ 多 h1 降级 + themes 跳转 canonical + 根目录 h1 + 生成后自动内联 reader CSS |
+| scripts/inline_css.py | W1149 | 改：新增 `--reader` 与 `inline_dir()`（reader 单文件自包含恢复） |
+| scripts/check_inlined_css.py | W1149 | 改：扫描面扩 `site/reader/**/*.html` + 跳转桩豁免 |
+| scripts/check_reader_integrity.py | W1149 | 新增：第 62 槽（占位/GitHub 链接/单 h1/标题唯一） |
+| scripts/check_dataset_manifest.py | W1149 | 新增：第 63 槽（README/量纲/端点/哨兵/空值/废弃） |
+| scripts/check_dataset_provenance.py | W1149 | 改：第 61 槽扩展 quote_status |
+| scripts/gen_dataset_index.py | W1149 | 新增：从磁盘生成 dataset/README 索引 |
+| scripts/audit_repo.py | W1149 | 新增：全仓审计四子命令（只读） |
+| scripts/verify_delivery.py | W1149 | 改：新增第 62/63 槽 + `_SCOPE_CORE` |
+| tests/unit/test_w1149_reader_dataset.py | W1149 | 新增：9 例回归锁 |
+| docs/01-全书逐回解读 … docs/06-个人随笔 | W1149 | 改：207 文件删除「双索引链接…（待补）」块；3 篇同题标题加区分（逐文件清单见 git diff） |
+| site/reader/**/*.html | W1149 | 改：重生成 623 页（补齐《西游记大事年表》；199 条 GitHub 链接修复；33 页多 h1 归零） |
+| site/data/monster-female-network.html · site/data/monster-hierarchy-network.html · site/data/underworld-power-network.html | W1149 | 改：chapter=0→null+scope + tooltip null 守卫（EN 三页同步） |
+| site/data/search.html · site/en/search.html | W1149 | 改：搜索索引刷新 + CSP 重算 |
+| site/sitemap.xml | W1149 | 改：新增 reader 页收录（854→855 URL） |
+| dataset/*.json（19 件） | W1149 | 改：chapter null / weight_scale / sankey schema / 空值状态 / quote_status / 13d 废弃 |
+| dataset/README.md · dataset/CODING.md | W1149 | 改：README 改磁盘生成；CODING §2.4 schema 约定 + §9 校验说明 |
+| AGENTS.md · docs/agent/gates.md · HANDOVER.md · CHANGELOG.md | W1149 | 改：第 62/63 槽摘要/全量定义/进度/版段 |
+| docs/10-方法论沉淀/全仓深度审计SOP-可复用.md | W1149 | 新增：五维矩阵 + 七步流程 + 四类根因 + 准入三件套 |
+| .agent/skills/huoyan-jinjing/SKILL.md | W1149 | 新增：悟空火眼金睛·全仓巡检速查 skill |
+| docs/11-方案报告/审查与评审/全仓逐逻辑深度审计报告-2026-11-06.md · 基础设施口径与门禁全量审计报告-2026-11-06.md · docs/11-方案报告/设计与架构方案/数据分层与reader-dataset修复方案-2026-11-06.md | W1149 | 新增：审计报告与修复方案入库 |
+| docs/11-方案报告/README.md · docs/10-方法论沉淀/README.md · docs/INDEX.md | W1149 | 改：登记与索引刷新 |
+| scripts/archive_ledger_rows.py | W1149 | 改：在途行保留集（防最老在途行被迁走） |
+| scripts/cross_line_baseline.json | W1149 | 改：补 1 条人工复核安全候选（URL host strip） |
+| docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md | W1149 | 改：认领行 W1149 + 迁出 W1086（窗口 61→60） |
+| scripts/output/stats.json · stats-index.md · stats-changelog.json · file-index.md | W1149 | 改：计数链刷新 |
+
 ## W1145 引文精确性槽批（2026-11-06）
 
 | 文件 | W | 说明 |

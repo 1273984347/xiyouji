@@ -12,7 +12,7 @@
 <meta property="og:description" content="《详解西游记》站内阅读目录（六板块）">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/index.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/images/og-02-tangseng.webp">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -20,10 +20,6 @@
 
 <script src="../js/theme-init.js"></script>
 <script src="../js/reader-enhance.js" defer></script>
-<script defer src="../static/js/gsap.min.js"></script><script defer src="../static/js/ScrollTrigger.min.js"></script><script defer src="../static/js/motion-gsap.js"></script>
-
-
-
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 @font-face {
@@ -1320,27 +1316,14 @@ html[data-theme="dark"] .chapter-plate {
   .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
     border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
   .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+  /* W888：百回母版插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+  .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+  .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+  html[data-theme="dark"] .chapter-plate { display: none; }
 </style>
-<link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
-<link rel="icon" type="image/svg+xml" href="../static/icons/logo-mark-light.svg">
-<link rel="apple-touch-icon" href="../static/icons/icon-192.png">
 </head>
 <body>
-<a class="skip-link" href="#main">跳到主要内容</a>
-<header class="site-header" role="banner">
-  <a class="brand" href="../index.html">取经录 · 详解西游记</a>
-  <nav aria-label="主导航">
-    <a href="../index.html">首页</a>
-    <a href="../guide.html">导读</a>
-    <a href="../dashboard.html">数据看板</a>
-    <a href="../data/text-search.html">全文检索</a>
-    <a href="../en/">EN</a>
-  </nav>
-<p class="hub-links">按分类浏览全部： <a href="people/index.html">人物深度 hub</a> · <a href="themes-hub.html">主题专题 hub</a> · <a href="culture/index.html">文化背景 hub</a></p>
-</header>
-
-<main class="reader-wrap" id="main" data-gsap="cards" data-gsap-target=".reader-idx a">
-<h1 class="catalog-title">站内阅读 · 全目录</h1>
+<main class="reader-wrap">
   <style>
     .catalog-tools { margin: 0 0 24px; padding: 14px 16px; background: var(--paper-warm);
       border: 1px solid var(--line); border-radius: var(--radius-md); }
@@ -1365,10 +1348,11 @@ html[data-theme="dark"] .chapter-plate {
       .catalog-count { text-align: right; }
     }
   </style>
+<h1 style="font-size:26px;">站内阅读 · 全目录</h1>
   <div class="catalog-tools" data-catalog-tools>
     <div class="catalog-tools-row">
       <input id="catalogFilter" type="search" autocomplete="off" aria-label="按回号或关键词过滤目录" placeholder="输入回号（如 42）或人物 / 主题关键词">
-      <span class="catalog-count" data-role="count">全部 615 条</span>
+      <span class="catalog-count" data-role="count">全部 616 条</span>
     </div>
     <nav class="catalog-jump" aria-label="分组跳转"><a href="#catalog-group-0">逐回解读</a><a href="#catalog-group-1">人物深度</a><a href="#catalog-group-2">主题专题</a><a href="#catalog-group-3">文化背景</a><a href="#catalog-group-4">诗词歌赋</a><a href="#catalog-group-5">个人随笔</a></nav>
   </div>
@@ -1604,14 +1588,14 @@ html[data-theme="dark"] .chapter-plate {
 <li><a href="people/白骨精深化专题.html">白骨精深化专题</a></li>
 <li><a href="people/白鹿精-方向二深化.html">白鹿精：一千一百一十一个心洞</a></li>
 <li><a href="people/白龙马-方向二深化.html">白龙马：被遗忘的第五人</a></li>
-<li><a href="people/白龙马-方向二深化B.html">白龙马：被遗忘的第五人</a></li>
+<li><a href="people/白龙马-方向二深化B.html">白龙马（B 稿）：被遗忘的第五人</a></li>
 <li><a href="people/白龙马.html">白龙马</a></li>
 <li><a href="people/白龙马外传.html">白龙马·外传：龙鳞</a></li>
 <li><a href="people/白龙马深化专题.html">白龙马深化专题</a></li>
 <li><a href="people/百眼魔君.html">百眼魔君</a></li>
 <li><a href="people/百眼魔君外传.html">百眼魔君：千只眼与一根针</a></li>
 <li><a href="people/百花羞-方向二深化.html">百花羞：被解救后，她去了哪里？</a></li>
-<li><a href="people/百花羞外传.html">百花羞：被解救后，她去了哪里？</a></li>
+<li><a href="people/百花羞外传.html">百花羞外传：被解救后，她去了哪里？</a></li>
 <li><a href="people/紧箍儿的内侧-器物传记.html">紧箍儿的内侧</a></li>
 <li><a href="people/紫金铃外传.html">紫金铃：那三个铃铛，摇响的是因果</a></li>
 <li><a href="people/红孩儿-方向二深化.html">红孩儿：膝盖上的刀疤，是成佛的代价</a></li>
@@ -1687,7 +1671,7 @@ html[data-theme="dark"] .chapter-plate {
 <li><a href="people/黄眉老佛外传.html">黄眉老佛：假如灵山是假的</a></li>
 <li><a href="people/黄袍怪-方向二深化.html">黄袍怪：碗子山波月洞里的十三载日常</a></li>
 <li><a href="people/黄袍怪.html">黄袍怪</a></li>
-<li><a href="people/黄袍怪外传.html">黄袍怪：碗子山波月洞里的十三载日常</a></li>
+<li><a href="people/黄袍怪外传.html">黄袍怪外传：碗子山波月洞里的十三载日常</a></li>
 <li><a href="people/黄风怪-方向二深化.html">黄风怪：当一个小恶被判了重刑</a></li>
 <li><a href="people/黄风怪外传.html">黄风怪·外传：那盏被偷走的灯油，烧成了三昧神风</a></li>
 <li><a href="people/黎山老母外传.html">黎山老母：她来试你的真心，不让你知道她是谁</a></li>
@@ -1906,7 +1890,7 @@ html[data-theme="dark"] .chapter-plate {
 <li><a href="themes/须菩提祖师-消失的师父.html">须菩提祖师：那个教会悟空一切，却消失在故事里的人</a></li>
 <li><a href="themes/黑神话拒绝金箍专题.html">黑神话拒绝金箍专题</a></li>
 </ul>
-<div class="reader-group" id="catalog-group-3">文化背景（34）</div>
+<div class="reader-group" id="catalog-group-3">文化背景（35）</div>
 <ul class="reader-idx">
 <li><a href="culture/三教合一明代思想史深化专题.html">三教合一明代思想史深化专题</a></li>
 <li><a href="culture/佛道思想.html">佛道思想</a></li>
@@ -1942,6 +1926,7 @@ html[data-theme="dark"] .chapter-plate {
 <li><a href="culture/西游与民间信仰专题.html">西游与民间信仰专题</a></li>
 <li><a href="culture/西游与禅宗公案专题.html">西游与禅宗公案：心印不传之妙 vs 内丹修炼次第</a></li>
 <li><a href="culture/西游与道教全真派专题.html">西游与道教全真派专题</a></li>
+<li><a href="culture/西游记大事年表.html">西游记大事年表</a></li>
 </ul>
 <div class="reader-group" id="catalog-group-4">诗词歌赋（13）</div>
 <ul class="reader-idx">
@@ -2008,6 +1993,5 @@ html[data-theme="dark"] .chapter-plate {
 </ul>
 
 </main>
-<footer class="site-footer"><a href="../index.html">首页</a> · <a href="../dashboard.html">数据看板</a> · <a href="../guide.html">导读</a> · 取经录 · 详解西游记</footer>
 </body>
 </html>

@@ -17,6 +17,7 @@ inline_css.py — 将数据页的外部 ../tokens.css + ../system.css <link> 标
     python scripts/inline_css.py                 # 无操作（已内联页 skip-inlined、外链页 skip-external）
     python scripts/inline_css.py --force         # 重同步已内联页（传播 CSS 改动用这个·外链页仍不动）
     python scripts/inline_css.py --inline-links  # 显式把外链页也转为内联（大动作·W895 护栏）
+    python scripts/inline_css.py --reader --inline-links  # 仅 reader 页转内联（W1149 恢复单文件自包含）
     python scripts/inline_css.py --dry           # 仅统计，不写文件
 """
 import os
@@ -133,15 +134,10 @@ def process(path, force, dry, inline_links=False):
     return "inlined" if not already else "re-synced"
 
 
-def main():
-    force = "--force" in sys.argv
-    dry = "--dry" in sys.argv
-    inline_links = "--inline-links" in sys.argv   # W895 护栏：外链页转内联须显式
+def inline_dir(directory, force=False, dry=False):
+    """对指定目录下的 HTML 做内联（W1149：build_reader 生成后自动恢复 reader 自包含）。"""
     count = {"inlined": 0, "re-synced": 0, "skip-no-link": 0, "skip-inlined": 0, "skip-external": 0}
-    processed = []
-
-    for root, _, files in os.walk(SITE_DIR):
-        # 跳过构建缓存/隐藏目录
+    for root, _, files in os.walk(directory):
         if any(seg.startswith(".") for seg in root.split(os.sep)):
             continue
         for fn in files:
@@ -149,7 +145,36 @@ def main():
                 continue
             p = os.path.join(root, fn)
             try:
-                r = process(p, force, dry, inline_links)
+                r = process(p, force, dry, inline_links=True)
+            except Exception as e:
+                print("ERR  %s -> %s" % (p, e))
+                continue
+            count[r] = count.get(r, 0) + 1
+    return count
+
+
+def main():
+    force = "--force" in sys.argv
+    dry = "--dry" in sys.argv
+    inline_links = "--inline-links" in sys.argv   # W895 护栏：外链页转内联须显式
+    reader_only = "--reader" in sys.argv         # W1149：只处理 site/reader
+    count = {"inlined": 0, "re-synced": 0, "skip-no-link": 0, "skip-inlined": 0, "skip-external": 0}
+    processed = []
+
+    for root, _, files in os.walk(SITE_DIR):
+        # 跳过构建缓存/隐藏目录
+        if any(seg.startswith(".") for seg in root.split(os.sep)):
+            continue
+        if reader_only and os.path.normpath(root) != os.path.normpath(os.path.join(SITE_DIR, "reader")):
+            # reader 子目录（people/themes/...）也算 reader
+            if not os.path.normpath(root).startswith(os.path.normpath(os.path.join(SITE_DIR, "reader")) + os.sep):
+                continue
+        for fn in files:
+            if not fn.endswith(".html"):
+                continue
+            p = os.path.join(root, fn)
+            try:
+                r = process(p, force, dry, inline_links or reader_only)
             except Exception as e:
                 print("ERR  %s -> %s" % (p, e))
                 continue

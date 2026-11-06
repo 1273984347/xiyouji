@@ -1093,5 +1093,8 @@
       "source_note": "关键回目为示例性列举，非穷举；summary 为情节转述，不是原文引文。",
       "weight_basis_label": "多次互动"
     }
-  ]
+  ],
+  "_schema": {
+    "weight_scale": "0-1"
+  }
 }

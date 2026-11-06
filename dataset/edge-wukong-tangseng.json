@@ -72,7 +72,8 @@
       "rationale": "E-01 师徒关系：文本有明确救出与拜师事件，是整条关系边的起点。",
       "evidence": "文本事实",
       "disputed": false,
-      "disputed_note": ""
+      "disputed_note": "",
+      "quote_status": "verified"
     },
     {
       "id": "E2",
@@ -104,7 +105,8 @@
       "rationale": "E-04 敌对/冲突：三打白骨精与写贬书是明确的冲突与逐徒事件；本条主类型取逐徒/冲突。",
       "evidence": "文本事实",
       "disputed": true,
-      "disputed_note": "同一事件同时含‘冲突’与‘逐徒’；若按纯冲突编码，event_weight 仍为 0.8，但 rationale 的落点不同。"
+      "disputed_note": "同一事件同时含‘冲突’与‘逐徒’；若按纯冲突编码，event_weight 仍为 0.8，但 rationale 的落点不同。",
+      "quote_status": "verified"
     },
     {
       "id": "E3",
@@ -139,7 +141,8 @@
       "rationale": "E-05 合作/互助：悟空回归并救出唐僧，师徒关系由此修复；回归属核心结构事件。",
       "evidence": "文本事实",
       "disputed": false,
-      "disputed_note": ""
+      "disputed_note": "",
+      "quote_status": "verified"
     },
     {
       "id": "E4",
@@ -165,7 +168,8 @@
       "rationale": "E-04 敌对/冲突：第 56 回是独立于第 27 回的第二次逐徒事件。",
       "evidence": "文本事实",
       "disputed": true,
-      "disputed_note": "第 56 回与第 27 回是否合并为同一条‘逐徒链’存在争议；本数据按两次独立事件分列。"
+      "disputed_note": "第 56 回与第 27 回是否合并为同一条‘逐徒链’存在争议；本数据按两次独立事件分列。",
+      "quote_status": "verified"
     },
     {
       "id": "E5",
@@ -198,7 +202,8 @@
       "rationale": "E-04 敌对/冲突：真假美猴王是明确冲突事件；summary 同时记录和解。",
       "evidence": "文本事实",
       "disputed": true,
-      "disputed_note": "‘二心’可读作悟空心魔，也可读作叙事修辞；本数据只记事件，不裁定寓意。"
+      "disputed_note": "‘二心’可读作悟空心魔，也可读作叙事修辞；本数据只记事件，不裁定寓意。",
+      "quote_status": "verified"
     },
     {
       "id": "E6",
@@ -219,7 +224,9 @@
       "rationale": "E-05 合作/互助：跨三回协作事件，但不是师徒关系的结构节点。",
       "evidence": "文本事实",
       "disputed": false,
-      "disputed_note": ""
+      "disputed_note": "",
+      "quote_status": "not_probed",
+      "quote_note": "未跑 _cite_probe 或无可用精确引文；summary 仅作转述"
     },
     {
       "id": "E7",
@@ -239,7 +246,9 @@
       "rationale": "E-05 合作/互助：悟空救师，属重复出现的救助模式。",
       "evidence": "文本事实",
       "disputed": false,
-      "disputed_note": ""
+      "disputed_note": "",
+      "quote_status": "not_probed",
+      "quote_note": "未跑 _cite_probe 或无可用精确引文；summary 仅作转述"
     },
     {
       "id": "E8",
@@ -260,7 +269,9 @@
       "rationale": "E-05 合作/互助：悟空救师，属重复出现的救助模式。",
       "evidence": "文本事实",
       "disputed": false,
-      "disputed_note": ""
+      "disputed_note": "",
+      "quote_status": "not_probed",
+      "quote_note": "未跑 _cite_probe 或无可用精确引文；summary 仅作转述"
     },
     {
       "id": "E9",
@@ -286,7 +297,8 @@
       "rationale": "E-06 索取/授予：如来授职是明确事件，也是师徒关系的终局。",
       "evidence": "文本事实",
       "disputed": false,
-      "disputed_note": ""
+      "disputed_note": "",
+      "quote_status": "verified"
     }
   ],
   "aggregate": {
@@ -319,5 +331,8 @@
     "第 56 回与第 27 回是否合并为同一条‘逐徒链’；本数据按两次独立事件分列。",
     "第 58 回‘二心竞斗’可作心魔解读，也可作叙事修辞；本数据只记事件，不裁定寓意。"
   ],
-  "quote_policy": "直接引文仅使用 _cite_probe.py 返回的精确子串；未探针回目只用 summary 转述。"
+  "quote_policy": "直接引文仅使用 _cite_probe.py 返回的精确子串；未探针回目只用 summary 转述。",
+  "_schema": {
+    "weight_scale": "0-1"
+  }
 }

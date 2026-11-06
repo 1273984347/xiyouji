@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-d0KrIuycdib90LhD1XiW1gIdKzxIkky9gjtGDnP5oeE=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n275dnk7XXI5Sy53wRN9pALUhRE8lapxtym4/NlAmgs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>地府权力关系图 - 西游数据可视化 · 详解西游记</title>
@@ -1756,8 +1756,8 @@ const EMBEDDED_DATA = {
       // 佛祖
       { id: "接引佛祖", type: "佛祖", power: 9, chapter: 100 },
       // 天庭枢纽节点（边端点）
-      { id: "玉帝", type: "天庭", power: 10, chapter: 0 },
-      { id: "如来", type: "天庭", power: 10, chapter: 0 },
+      { id: "玉帝", type: "天庭", power: 10, chapter: null, chapter_scope: "deity_no_chapter" },
+      { id: "如来", type: "天庭", power: 10, chapter: null, chapter_scope: "deity_no_chapter" },
       // 阳间太宗（边端点）
       { id: "唐太宗", type: "阳间", power: 6, chapter: 10 }
     ],
@@ -2114,7 +2114,7 @@ const link = svg.append('g').selectAll('line')
       tooltip.append('div').text('类别：' + d.type);
       if (d.type !== "天庭") {
         tooltip.append('div').text('权力强度：' + d.power + ' / 10');
-        tooltip.append('div').text('首次出场：第' + d.chapter + '回');
+        if (d.chapter) tooltip.append('div').text('首次出场：第' + d.chapter + '回');
       }
       const connected = links.filter(l =>
         (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id

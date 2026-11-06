@@ -1,3 +1,21 @@
+### W1149（2026-11-06）：reader/dataset 审计修复批（B1+B2）
+
+**本批要点**（reader 生成器根修 + docs 源清理 + dataset 快照治理 + 新增 2 个门禁槽 ⇒ 61→63 槽）：
+
+> **来源**：用户 2026-11-06 令「按推荐方案执行 B1 和 B2」，并裁决 chapter=0 改 null、权重只声明量纲、narratology-13d 标废弃、dataset 继续做页面快照。
+> - **T1 reader 根修**：`build_reader.py` 路径映射改为「docs 子目录→docs/，source/archive/scripts/dataset→仓库根」，修复 199 条 `docs/source/` 404；多一级标题按「首 #→h1、其后整体降一级」生成，33 页多 h1 归零；themes 跳转页 canonical 改指 `themes-hub.html`；根目录页补 h1。
+> - **T2 docs 源清理**：207 个内容文件删除「双索引链接 … W… 段（待补）」块（414 处占位归零）；3 组同题页在源标题加区分后缀；重生成 reader **623 页**（补齐 docs/04 漏生成的《西游记大事年表》）。
+> - **T3 reader 门禁**：新增第 62 槽 `check_reader_integrity.py`（C1 占位词 / C2 GitHub 链接映射 / C3 单 h1 / C4 标题唯一），自测 6 例，`_SCOPE_CORE` 恒跑。
+> - **T4 dataset 内容修复**：`gen_dataset_index.py` 从磁盘生成 README（44 根级 + 2 实体、大小/条目数实算）；9 节点 `chapter=0`→`null`+`chapter_scope`（6 个页面内嵌副本同步，tooltip 加 null 守卫）；7 个文件补 `_schema.weight_scale`（0–1 / 0–10）；4 个 sankey 段声明 `link_endpoint_schema=index`；17 空数组 + 1 null 补状态归类；edge 9 事件补 `quote_status`（6 verified / 3 not_probed）；`narratology-13d` 标废弃。
+> - **T5 dataset 门禁**：新增第 63 槽 `check_dataset_manifest.py`（README ↔ 磁盘 ↔ 大小/条目数、量纲、sankey 端点、chapter 哨兵、空值状态、废弃标记），自测 6 例，`_SCOPE_CORE` 恒跑；第 61 槽扩展 `quote_status` 判据（verified 必须有引文 / not_probed 必须给原因）。
+> - **T6 沉淀**：新增 `scripts/audit_repo.py`（reader/dataset/trees/patterns 四子命令，只读）与 `docs/10-方法论沉淀/全仓深度审计SOP-可复用.md`；新增项目级 skill `.agent/skills/huoyan-jinjing/SKILL.md`（悟空火眼金睛·全仓巡检速查：五维/判据/数据/清单/链接/停手）；两份审计报告与修复方案入库并登记 docs/11 README。
+> - **T7 统计与口径**：html_total 860 · site_data_html 89 · site_en_html 138 · site_reader_html 623 · csp_covered 859 · scan_files 858 · seo_scanned 858 · inline_css_pages 851 · visualization_pages 88 · pytest_collected 1432。
+> - **T8 台账归档根修（窗口前置）**：`archive_ledger_rows.py` 原按纯号序切分，最老在途行 W1085 会被一并迁走（A4 丢行断言阻断）；改为「最新 keep 行 ∪ 全部真在途行」保留集，迁出 W1086 一行后正本 60 行（W1085-W1149）；跨行改写基线补 1 条人工复核安全候选（`verify_delivery.py` URL host strip）。
+> - **T9 reader 单文件自包含恢复**：`inline_css.py` 新增 `--reader` 与 `inline_dir()`；`build_reader.py` 生成末尾自动内联 622 页相对 CSS（themes 跳转桩 skip-no-link 1 页），页面不再依赖 `../tokens.css`/`../system.css` 外链；`check_inlined_css.py` 扫描面扩至 `site/reader/**/*.html`（849 页全过，跳转桩豁免）；`inline_css_pages` 229→851。
+> - **验证**：reader 门禁 0 FAIL（623 页）· dataset 清单 0 FAIL（46 文件）· 溯源 0 FAIL + 自测 9 例 · CSP 859 页 0 漂移 · 内联脚本语法 858 文件通过 · INLINED CSS 849 页块完整 · W1149 单测（含自包含断言）通过 · pytest 1431 passed / 3 skipped · guardrails 通过 · 全量 verify 68 段核心全绿（1 项辅助 WARN 不阻断）。
+> - **状态**：已提交（本地分支 `fix/w1149-reader-dataset`·待合并）。
+> - **文件**：见 file-index。
+
 ### W1145（2026-11-06）：引文精确性槽批
 
 **本批要点**（校验器收紧 + 回归锁 + 四份文档同步·零页面改动 ⇒ 门禁 61 槽不变·不新增坑表条目 ⇒ 计数链不动）：
@@ -628,7 +646,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1145），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1149），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -636,7 +654,7 @@
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
-> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 859<!--stats:html_total--> 页（site/data 89<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 858<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 857<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 857<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 331<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 88<!--stats:visualization_pages-->」= site/data 89 减 `_shell.html`。
+> **全站页数口径**（W459 建·W702 实跑刷新·W1149 随批刷新，各门禁分母不同）：HTML 共 860<!--stats:html_total--> 页（site/data 89<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 623<!--stats:site_reader_html-->）；CSP 覆盖 859<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 858<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 858<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 851<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 88<!--stats:visualization_pages-->」= site/data 89 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 > - **T9 体积门禁脚注切片根修（CI 首红暴露·铁律 15）**：check_doc_size_budget._agents_face 的行切片在「脚注=文件末行且无换行尾」（AGENTS.md 恒为该形态）时 find(nl)=-1 使 t[fs:-1] 吞收尾家具星号 ⇒ 剥家具失败条目恒 +19 字误判（往批短 note 潜伏未触顶·W1137 note=119 首踩本地绿 CI 红）⇒ 末行无换行时取到文件尾 + batch_cascade agents_note 预检与门禁同源计量（口径对齐）· 单测 12 例全过。

@@ -413,13 +413,13 @@
    }
   },
   "data/monster-female-network.html": {
-   "sha1": "f7542fd95277069026adde124c2da14112215871",
+   "sha1": "4a72f96dea6a90524e9c818b09b7087a5effdf4e",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/monster-hierarchy-network.html": {
-   "sha1": "e5cc628173fae95f6289f0e4792ca39a8ad7c25d",
+   "sha1": "68d2403e0fda9fa0d308468d5fcc80ac85c2e96d",
    "counts": {
     "div.kpi-card": 2
    }
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "07fb790ecf7fec552864786d5f4c692f0fe884b9",
+   "sha1": "af16e03475c90b716f002cb06428885fd4361654",
    "counts": {
     "button.vt-btn": 1
    }
@@ -595,7 +595,7 @@
    }
   },
   "data/underworld-power-network.html": {
-   "sha1": "2715fad9353b6e5a836bec28e0bf37da35d5436f",
+   "sha1": "998dacbad4579ee292e611d7f2b91569fd400811",
    "counts": {
     "div.kpi-card": 2,
     "div.role-card.r-king": 1
@@ -1285,13 +1285,13 @@
    }
   },
   "en/monster-female-network.html": {
-   "sha1": "0e19156491f0ebea29acfa699394f978846fe2cb",
+   "sha1": "68bb0a0993e4156d1503501a233c13088f8b9211",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "en/monster-hierarchy-network.html": {
-   "sha1": "00878674863e5f32f3ca66c033d118caeda5ea19",
+   "sha1": "551d3faf9a67079c5260c5eee8e8f61bd25f9672",
    "counts": {
     "div.kpi-card": 2
    }
@@ -1409,7 +1409,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "97ed7218ec731e9446fbed7469490fb1ed542c9e",
+   "sha1": "68cc11f4c894bf67e4c14ef31066a2be99840c07",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1469,7 +1469,7 @@
    "counts": {}
   },
   "en/underworld-power-network.html": {
-   "sha1": "80310fec9deb6d79f637a75ec6385fa1aad9e66e",
+   "sha1": "9054ac747005fd0d70959e376b1d80aa9b8fc2c0",
    "counts": {
     "div.kpi-card": 2,
     "div.role-card.r-king": 1
@@ -1499,5 +1499,5 @@
    }
   }
  },
- "generated_at": "2026-11-05T23:33:03.917Z"
+ "generated_at": "2026-11-06T03:01:24.131Z"
 }

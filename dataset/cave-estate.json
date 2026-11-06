@@ -144,7 +144,8 @@
       "subordinates": [],
       "territory": "金兜山",
       "luxury": 8,
-      "feature": "太上老君青牛下凡，金刚琢套尽诸神兵器"
+      "feature": "太上老君青牛下凡，金刚琢套尽诸神兵器",
+      "subordinates_status": "none"
     },
     {
       "name": "琵琶洞",
@@ -250,7 +251,8 @@
       "subordinates": [],
       "territory": "七绝山稀柿衕",
       "luxury": 2,
-      "feature": "未修成人形的大蟒，'稀柿衕'恶臭难当"
+      "feature": "未修成人形的大蟒，'稀柿衕'恶臭难当",
+      "subordinates_status": "none"
     },
     {
       "name": "盘丝洞",
@@ -302,7 +304,8 @@
       "subordinates": [],
       "territory": "比丘国都城",
       "luxury": 6,
-      "feature": "南极寿星坐骑白鹿下凡，欲用1111小儿心肝"
+      "feature": "南极寿星坐骑白鹿下凡，欲用1111小儿心肝",
+      "subordinates_status": "none"
     },
     {
       "name": "陷空山无底洞",
@@ -390,7 +393,8 @@
       "subordinates": [],
       "territory": "毛颖山",
       "luxury": 3,
-      "feature": "广寒宫玉兔，欲招唐僧为偶"
+      "feature": "广寒宫玉兔，欲招唐僧为偶",
+      "subordinates_status": "none"
     }
   ],
   "by_owner_rank": [

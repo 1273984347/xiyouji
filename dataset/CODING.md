@@ -72,6 +72,18 @@
 | `disputed` | 是否有编码争议 | 是 |
 | `source_note` | 回目列举与转述边界说明 | 是 |
 
+### 2.4 通用 schema 声明（`_schema` / 状态字段）
+
+非人物关系数据集也用同一套机器可读约定（W1149）：
+
+| 声明 | 取值 | 适用 |
+|---|---|---|
+| `_schema.weight_scale` | `0-1` / `0-10` / `0-100` | 含 `weight` / `edge_weight` / `event_weight` / `score` 的文件；数值必须落在声明量纲内 |
+| `sankey.link_endpoint_schema` | `index` / `id` | `sankey.links` 的端点类型；`index` 必须满足 `0 <= x < nodes.length` |
+| `chapter` / `回目` | 整数 1–100 或 `null` | `null` 仅用于无具体回目的天庭/佛门常驻节点，且必须同时给 `chapter_scope`（如 `deity_no_chapter`）；禁止用 `0` 作哨兵 |
+| `<field>_status` 或 `field_status` | `none` / `unknown` | 空数组或 `null` 必须声明语义；`none`=确无该项，`unknown`=待补 |
+| `deprecated` + `deprecation_note` | 布尔 + 文本 | 历史快照文件；须给 `replacement_page` 且目标存在 |
+
 ---
 
 ## 3. 关系类型与判定规则
@@ -166,7 +178,9 @@
 python scripts/check_dataset_provenance.py
 ```
 
-该命令与 `verify_delivery.py` 第 61 门禁同源：校验 22 节点 / 32 边网络与 `edge-wukong-tangseng.json` 的 9 组标杆事件；字段完整性、节点引用、回目 1–100、规则编号、权重 0–1、证据级别、重复边、`disputed` 边 rationale、引文回目落在事件区间、**每条引文去空白后必须是 `dataset/text-search.json` 对应回目原文的精确子串**（W1145 起，伪造/改写引文即判红）、`edge_weight = max(event_weight)`、页面 `EMBEDDED_DATA` 同步标记。提交前全量 verify 会自动执行，不再依赖人工记得跑。
+该命令与 `verify_delivery.py` 第 61 门禁同源：校验 22 节点 / 32 边网络与 `edge-wukong-tangseng.json` 的 9 组标杆事件；字段完整性、节点引用、回目 1–100、规则编号、权重 0–1、证据级别、重复边、`disputed` 边 rationale、引文回目落在事件区间、**每条引文去空白后必须是 `dataset/text-search.json` 对应回目原文的精确子串**（W1145 起，伪造/改写引文即判红）、`quote_status`（`verified` 必须有引文，`not_probed` 必须给原因）、`edge_weight = max(event_weight)`、页面 `EMBEDDED_DATA` 同步标记。提交前全量 verify 会自动执行，不再依赖人工记得跑。
+
+`python scripts/check_dataset_manifest.py`（第 63 槽）另校验：README 行 ↔ 磁盘文件 ↔ 大小/条目数、`_schema` 量纲与端点、`chapter` 哨兵、空值状态、废弃标记。README 由 `python scripts/gen_dataset_index.py` 生成，禁手改。
 
 发现编码错误时，请开 GitHub Issue（模板：数据纠错 / 编码争议），写清：
 

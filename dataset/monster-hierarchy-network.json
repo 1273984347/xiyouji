@@ -141,37 +141,43 @@
         "id": "太上老君",
         "type": "天庭",
         "power": 10,
-        "chapter": 0
+        "chapter": null,
+        "chapter_scope": "deity_no_chapter"
       },
       {
         "id": "观音",
         "type": "天庭",
         "power": 10,
-        "chapter": 0
+        "chapter": null,
+        "chapter_scope": "deity_no_chapter"
       },
       {
         "id": "灵吉菩萨",
         "type": "天庭",
         "power": 8,
-        "chapter": 0
+        "chapter": null,
+        "chapter_scope": "deity_no_chapter"
       },
       {
         "id": "如来",
         "type": "天庭",
         "power": 10,
-        "chapter": 0
+        "chapter": null,
+        "chapter_scope": "deity_no_chapter"
       },
       {
         "id": "文殊菩萨",
         "type": "天庭",
         "power": 9,
-        "chapter": 0
+        "chapter": null,
+        "chapter_scope": "deity_no_chapter"
       },
       {
         "id": "普贤菩萨",
         "type": "天庭",
         "power": 9,
-        "chapter": 0
+        "chapter": null,
+        "chapter_scope": "deity_no_chapter"
       }
     ],
     "links": [
