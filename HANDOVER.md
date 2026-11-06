@@ -2,11 +2,11 @@
 
 
 > **📖 阅读契约（W707）**：首段型+查表型——接手时只读「零、当前阻塞」+「一、当前进度」+ 文件末尾「最后更新」链；「三、方法论沉淀」「四、待办」按需查；历史批次细节在 CHANGELOG（grep 查）勿在本文件找。
-> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（290 条坑·六主题——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（六十三槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
+> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（291 条坑·六主题——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（六十三槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
 > 轨标：教学讲解
 > 本文件用于跨 session 交接，记录当前进度、下一步可推进方向、方法论沉淀与待办事项。
 > 创建于 2026-07-25（v2.0.41 W068 后）
-> 最后更新：2026-11-06（W1149 reader/dataset 审计修复批（B1+B2））·2026-11-06（W1145 引文精确性槽批）·2026-11-06（W1144 v4 语义令牌第一批 + 四批台账回填）·（W1143 及更早批次详见 CHANGELOG.md）
+> 最后更新：2026-11-06（W1149 reader/dataset 审计修复批（B1+B2）·2026-11-06（W1147 方法论沉淀固化批））·2026-11-06（W1145 引文精确性槽批）·（W1143 及更早批次详见 CHANGELOG.md）
 > 与 [CHANGELOG.md](CHANGELOG.md)（变更日志）/ [STRUCTURE.md](STRUCTURE.md)（目录结构）/ [README.md](README.md)（项目说明）/ [docs/00-导读/项目说明.md](docs/00-导读/项目说明.md)（项目状态）配套使用。
 > **维护契约（防乱写）**：本文件是项目进度中枢，只允许结构性编辑——① 保持「零 / 一 / 二 / 三」四段骨架不变；②「最后更新」行只写最新 1–3 批摘要（每批 ≤ 1 行），**禁止把历史批次堆进该行**（历史已归档 / 在 CHANGELOG）；③ 每批详细记录只写 CHANGELOG + 归档（历史段禁改）；④ 任何「当前 HEAD / 当前版本」表述必须与 `git rev-parse --short HEAD` 核对后更新；⑤ 本文件是状态快照，与 CHANGELOG（时间线）冲突时以 CHANGELOG 为准。
 > **历史归档**：v2.0.39-v2.2.49（W066-W280）段的详细进度记录已迁移至 [archive/docs/HANDOVER-ARCHIVE.md](archive/docs/HANDOVER-ARCHIVE.md)。本文件仅保留 v2.2.50+（W277）现役记录与全局概要。
@@ -31,6 +31,10 @@
   - dataset：README 改磁盘生成（44+2）；9 节点 `chapter=0`→null+scope；7 文件声明 `_schema.weight_scale`；4 个 sankey 声明 index；17 空数组+1 null 归类；edge 9 事件补 quote_status；13d 标废弃
   - 新增第 62 槽 `check_reader_integrity.py`、第 63 槽 `check_dataset_manifest.py`；第 61 槽扩展 quote_status；9 例 W1149 单测通过
   - 新增 `scripts/audit_repo.py` 与 `docs/10-方法论沉淀/全仓深度审计SOP-可复用.md`（四子命令只读审计）
+- **W1147 方法论沉淀固化批**（探针出 tmpe 入仓 + 两篇沉淀 + 12 类交互后态探针基线全绿 + 断点缝隙常态化）：
+  - 三探针正名入 scripts（containment_block_scan/fixed_ancestor_probe/interaction_state_probe）+ interaction_components 清单单一事实源
+  - 两篇方法论（包含块退化机检范式 / 幂等守卫与判定口径三类自相矛盾根修）
+
 - **W1145 引文精确性槽批**（校验器收紧 + 回归锁 + 四份文档同步·零页面改动 ⇒ 门禁 61 槽·不新增坑表条目 ⇒ 计数链不动）：
   - `check_dataset_provenance.py` 新增引文精确性判据：9 条引文去空白后须为 `dataset/text-search.json` 对应回目原文精确子串
   - 自测 8→9 例；新增 `tests/unit/test_w1145_quote_exactness.py` 三例回归锁
@@ -119,7 +123,7 @@
 ## 三、方法论沉淀
 
 > **经验总入口（W755 指针化·W973 真指针化收口）**：现役坑位与门禁读
-> [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（290 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（57 槽）；
+> [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（291 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（57 槽）；
 > 诊断 SOP 读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)；
 > 本区历史叙事全文已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查）。
 ## 四、待办事项（短期）

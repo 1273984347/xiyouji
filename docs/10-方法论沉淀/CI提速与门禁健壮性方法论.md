@@ -90,6 +90,16 @@
 语法守卫（工作流可解析性）若住在被守卫的工作流里，等于没有守卫——被守卫的坏掉时守卫自己不启动。
 本项目把它独立成 `.github/workflows/workflow-lint.yml`，并要求**负样本实证**（把文件还原成坏形态 ⇒ 守卫必须报错并指到行号）。
 
+### 3.5 环境依赖型测试：写之前先问「clean checkout 里它能跑吗」（W1147）
+
+测试依赖**运行环境产物**（tmpe 临时区文件、实时浏览器、http server、网络）而 CI job 不提供时——本地全绿、CI 必红，且红因是 `FileNotFoundError`/环境缺工具这类「与被测代码无关」的噪音。本项目实证：探针基线复核测试依赖 tmpe 临时报告 + 实时浏览器，push 后 CI 首红；skip 兜底又用错形态（非 TestCase 类无 `self.skipTest`）连环二红。
+
+**三条纪律**：
+
+1. **写测试时先答**：「这个测试在 clean checkout + CI job 环境里，依赖的东西都存在吗？」——答案是否就要么补环境（CI job 装 playwright），要么显式 skip 兜底（依赖不在时 `pytest.skip(...)` **调用形态**——非 TestCase 类没有 `self.skipTest` 方法，`raise` 语句形态又会被 api_diff 当 API 破坏拦下，三选一取 `pytest.skip()` 调用）；
+2. **环境依赖测试与纯逻辑测试分文件**：探针锁（需浏览器）与判据锁（纯函数）不同文件，CI 挑纯逻辑的跑，环境型的进 playwright job；
+3. **skip 不是丢分**：skip 兜底保留本地复核价值——本地在环境内照常真跑，CI 只免环境依赖部分（对照 3.2「先怀疑判据」：skip 理由要写明依赖什么）。
+
 ---
 
 ## 四、CI 依赖红线：action ref 必须是真实存在的完整 SHA
