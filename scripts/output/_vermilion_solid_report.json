@@ -43,24 +43,29 @@
    "perCls": {}
   },
   "data/aesthetics.html": {
-   "measured": 6,
-   "exempted": 4,
-   "nonExempt": 2,
+   "measured": 8,
+   "exempted": 8,
+   "nonExempt": 0,
    "fail": false,
    "perCls": {
     "div.kpi-card": {
      "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
+     "exempted": 1,
+     "nonExempt": 0
     },
     "div.color-swatch": {
      "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
+     "exempted": 1,
+     "nonExempt": 0
     },
     "div.scene-bar": {
      "measured": 4,
      "exempted": 4,
+     "nonExempt": 0
+    },
+    "div.stage-color-bar": {
+     "measured": 2,
+     "exempted": 2,
      "nonExempt": 0
     }
    }
@@ -3734,5 +3739,5 @@
  "notes": [
   "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）"
  ],
- "generated_at": "2026-11-05T21:01:27.227Z"
+ "generated_at": "2026-11-06T22:49:27.469Z"
 }
