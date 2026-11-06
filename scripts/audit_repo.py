@@ -33,8 +33,8 @@ DOCS_SOURCE_RE = re.compile(r"docs/source/")
 H1_RE = re.compile(r"<h1\b", re.I)
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
 STRIP = (
-    (re.compile(r"<script\b[\s\S]*?</script\s*>", re.I), " "),
-    (re.compile(r"<style\b[\s\S]*?</style\s*>", re.I), " "),
+    (re.compile(r"<script\b[\s\S]*?</script[^>]*>", re.I), " "),
+    (re.compile(r"<style\b[\s\S]*?</style[^>]*>", re.I), " "),
     (re.compile(r"<!--[\s\S]*?-->", re.I), " "),
     (re.compile(r"<[^>]+>", re.I), " "),
 )
