@@ -17,7 +17,7 @@ function makeRequest(toolName: string, input: Record<string, unknown>): Permissi
     toolName,
     input,
     sessionId: 's-1',
-    timestamp: new Date(),
+    timestamp: Date.now(),
   };
 }
 
