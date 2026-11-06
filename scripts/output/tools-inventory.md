@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-06 04:00
+生成时间：2026-11-06 11:42
 
-共 **184** 件（门禁与校验 86 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 70 · 一次性（下划线前缀） 6）
+共 **188** 件（门禁与校验 88 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 71 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（86）
+## 门禁与校验（88）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -42,6 +42,7 @@
 | `check_dark_state_gate.js` | scripts/check_dark_state_gate.js — W579：暗色态门禁（O2 常驻化，挂 screenshot-review |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
 | `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
+| `check_dataset_manifest.py` | 第 63 门禁：dataset 清单与 schema 对拍（README ↔ 磁盘 / 量纲 / 端点 / 空值 / 废弃标记）。 |
 | `check_dataset_provenance.py` | 人物关系数据溯源校验器（W1138 建·W1141 挂第 61 槽）。 |
 | `check_db_schema.py` | check_db_schema.py — DB schema 门禁（W917 建置·B-DB-05 清偿）。 |
 | `check_design_asset_manifest.py` | check_design_asset_manifest.py — assets/design 目录清单对拍判据（W1135·遗留③） |
@@ -77,6 +78,7 @@
 | `check_pitfall_id_unique.py` | check_pitfall_id_unique.py —— 坑表编号唯一性判据（W1106 建）。 |
 | `check_plan_template.py` | check_plan_template.py — 第 48 门禁：计划方案模板符合性（增量口径·W860） |
 | `check_powershell_parse.py` | check_powershell_parse.py — PowerShell 脚本可解析性判据（W1110 新增第 55 槽）。 |
+| `check_reader_integrity.py` | 第 62 门禁：site/reader 完整性（C1 占位词 / C2 GitHub 链接 / C3 单 h1 / C4 标题唯一）。 |
 | `check_registration_surface.py` | check_registration_surface.py — 登记面一致性自检闸（W1116 建） |
 | `check_repo_layout.py` | check_repo_layout.py — 第 52 门禁：仓库布局（W1011 挂槽·用户 2026-10-29「全都做」） |
 | `check_screenshot_gates.js` | check_screenshot_gates.js — 图表/渲染动态门禁（W551 新建，挂 screenshot-review workfl |
@@ -124,10 +126,11 @@
 | `judge_gate.py` | W465 决策闸门判定脚本（Phase 3 路线图 v7 · W530 落地）。 |
 | `stats.py` | 聚合数字统计器 stats（W703 建·W704 实体化）——从磁盘实算生成 scripts/output/stats.json（tracke |
 
-## 生成与索引（6）
+## 生成与索引（7）
 
 | 脚本 | 用途 |
 |:---|:---|
+| `gen_dataset_index.py` | 生成 dataset/README.md 数据索引（从磁盘实读，替代手工维护的 41 行表）。 |
 | `gen_folder_docs.py` | gen_folder_docs.py — 为全仓目录补齐 INDEX.md / README.md（W779 批·用户令「检查所有文件夹，添加  |
 | `gen_og_cover.py` | gen_og_cover.py — 生成社交分享封面 site/static/img/og-cover.png（W591 SEO 清零）。 |
 | `gen_rss.py` | gen_rss.py — 生成 site/rss.xml（B-1·W644）。 |
@@ -141,7 +144,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（70）
+## 工具（71）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -150,6 +153,7 @@
 | `acceptance_snapshot.py` | acceptance_snapshot.py — W496 转正工具：验收数字当批现测速览。 |
 | `agent_start.py` | Agent 开局状态摘要 agent_start（W705 建·W707 加 --task）——把「读文档的负担」转移到系统。 |
 | `agg_entities.py` | agg_entities.py — B-5 聚合器先行（W651 启动·读 100 回 chapter-meta 出 entities 两类） |
+| `audit_repo.py` | 全仓深度审计可复用入口（W1149 沉淀）。 |
 | `backfill_changelog.py` | CHANGELOG / file-index 递延段补写器（W842）。 |
 | `baseline_snapshot.py` | baseline_snapshot.py — W464 Phase 3 观测基线快照生成器（入库脚本） |
 | `batch_closeout.py` | batch_closeout.py —— 落段收官一键脚本（工具层·不碰门禁脚本）。 |

@@ -45,15 +45,25 @@ def move(keep, apply, src_p=None, arc_p=None):
     assert row_idx, "正本无行（结构异常）"
     ws = {i: int(ROW_RE.match(lines[i]).group(1)) for i in row_idx}
     ordered = sorted(row_idx, key=lambda i: -ws[i])  # 号降序
-    keep_set = set(ordered[:keep])
+    # W1149：在途行必须保留（旧实现按纯号序切分，会把最老的在途行一起迁走 ⇒ A4 丢行）。
+    led_rows = pf.parse_ledger("\n".join(lines))["rows"]
+    inflight_idx = set()
+    for j, i in enumerate(row_idx):
+        r = led_rows[j]
+        if pf.is_inflight(r["status"]) and r["touches"] and not re.search(r"已停止|让号留痕", r["status"]):
+            inflight_idx.add(i)
+    keep_set = set(ordered[:keep]) | inflight_idx
     move_idx = [i for i in row_idx if i not in keep_set]
     if not move_idx:
+        if len(row_idx) > keep:
+            print("无迁出行但正本 %d 行 > keep %d（在途行占满窗口·须人工处置）" % (len(row_idx), keep))
+            return 1
         print("无迁出行（正本 %d 行 ≤ keep %d）" % (len(row_idx), keep))
         return 0
     moved_lines = [lines[i] for i in move_idx]
     moved_ws = [ws[i] for i in move_idx]
     kept_ws = [ws[i] for i in sorted(keep_set)]
-    assert max(moved_ws) < min(kept_ws), "号区间交叠（异常）"
+    assert set(move_idx).isdisjoint(keep_set), "迁出与留存集合交叠（异常）"
 
     arc_txt = open(arc_p, encoding="utf-8", newline="").read() if os.path.exists(arc_p) else ""
     anl = "\r\n" if "\r\n" in arc_txt else "\n"

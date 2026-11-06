@@ -9,6 +9,8 @@ import os
 import re
 import sys
 
+import pytest
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 
 import archive_segments as arcs  # noqa: E402
@@ -124,3 +126,39 @@ class TestRowDensity:
         t = "## W1 x\n\n" + "\n".join(
             "| site/%s/（10 件） | W1 | 分组 |" % d for d in ("data", "en", "reader")) + "\n"
         assert dsb._fileindex_row_density(t) == []
+
+
+class TestDrawerFixedAtNarrow:
+    """⑤ 抽屉 fixed 塌陷回归锁（用户 2026-11-06 窄视口 745 实报·W335 backdrop-filter
+    使祖先成为 fixed 包含块 ⇒ 抽屉被压进 144px 顶条）。运行时探针·Playwright 本地站。"""
+
+    def test_drawer_full_height_at_745(self):
+        import subprocess
+        import time
+        root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        srv = subprocess.Popen(
+            [sys.executable, "-m", "http.server", "8791", "--bind", "127.0.0.1"],
+            cwd=root, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(1.2)
+        try:
+            from playwright.sync_api import sync_playwright
+            with sync_playwright() as pw:
+                try:
+                    b = pw.chromium.launch()
+                except Exception as exc:  # noqa: BLE001
+                    pytest.skip("Playwright 浏览器不可用（CI pytest-unit 未装浏览器）：%s" % exc)
+                pg = b.new_context(viewport={"width": 745, "height": 957}).new_page()
+                pg.goto("http://127.0.0.1:8791/site/index.html", wait_until="load")
+                pg.wait_for_timeout(900)
+                pg.click(".nav-toggle")
+                pg.wait_for_timeout(600)
+                r = pg.evaluate("""(() => {
+                    const nav = document.querySelector('.topnav nav');
+                    const rect = nav.getBoundingClientRect();
+                    return {h: rect.height, links: nav.querySelectorAll('a').length};
+                })()""")
+                b.close()
+            assert r["h"] == 957, "抽屉面板须全高（实测 %s）——fixed 被祖先 backdrop-filter 退化" % r["h"]
+            assert r["links"] == 8
+        finally:
+            srv.terminate()
