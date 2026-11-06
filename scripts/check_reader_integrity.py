@@ -22,8 +22,8 @@ GITHUB_RE = re.compile(
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
 H1_RE = re.compile(r"<h1\b", re.I)
 REDIRECT_RE = re.compile(r"<meta[^>]+http-equiv=[\"']refresh[\"']", re.I)
-STRIP_SCRIPT = re.compile(r"<script\b[\s\S]*?</script\s*>", re.I)
-STRIP_STYLE = re.compile(r"<style\b[\s\S]*?</style\s*>", re.I)
+STRIP_SCRIPT = re.compile(r"<script\b[\s\S]*?</script[^>]*>", re.I)
+STRIP_STYLE = re.compile(r"<style\b[\s\S]*?</style[^>]*>", re.I)
 STRIP_COMMENT = re.compile(r"<!--[\s\S]*?-->")
 STRIP_TAG = re.compile(r"<[^>]+>")
 
