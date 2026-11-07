@@ -1,3 +1,15 @@
+## W1163 收尾微批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/safe_commit.py | W1163 | 改：--expect-spec 逗号分隔多 spec 并集判定（21② 形态·向后兼容单值） |
+| docs/00-导读/W批次编号对账表.md | W1163 | 改：W1163 认领行+W1162 hash 回填 |
+| CHANGELOG.md | W1163 | 改：W1163 段落（级联） |
+| HANDOVER.md | W1163 | 改：最后更新行（级联） |
+| scripts/output/_w1163_spec.json | W1163 | 新建：本批 spec |
+| scripts/output/file-index.md | W1163 | 改：W1163 段（级联） |
+| scripts/output/_cascade_files_W1163.txt | W1163 | 新建：级联清单 |
+
 ## W1162 微批轻量通道实施批（2026-11-07）
 
 | 文件 | W | 说明 |
