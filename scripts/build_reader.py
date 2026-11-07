@@ -315,6 +315,9 @@ def head(rel: str, title: str, desc: str) -> str:
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="192x192" href="{prefix}static/icons/icon-192.png">
+<link rel="icon" type="image/svg+xml" href="{prefix}static/icons/logo-mark-light.svg">
+<link rel="apple-touch-icon" href="{prefix}static/icons/icon-192.png">
 <link rel="stylesheet" href="{prefix}tokens.css">
 <link rel="stylesheet" href="{prefix}system.css">
 <script src="{prefix}js/theme-init.js"></script>
@@ -529,6 +532,9 @@ def _render_section_index(sub, cat_title, entries) -> None:
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="192x192" href="../../static/icons/icon-192.png">
+<link rel="icon" type="image/svg+xml" href="../../static/icons/logo-mark-light.svg">
+<link rel="apple-touch-icon" href="../../static/icons/icon-192.png">
 <meta http-equiv="refresh" content="0; url=../{target}">
 <style>body{{font-family:serif;background:#FAF7F0;color:#23201A;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0}}a{{color:#C8463A}}</style>
 </head>

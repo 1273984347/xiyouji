@@ -1,10 +1,11 @@
-import { Loading } from 'tdesign-react';
+import { Loading, MessagePlugin } from 'tdesign-react';
 import { ChatMarkdown } from '@tdesign-react/chat';
 import { User, Bot, ThumbsUp, ThumbsDown, Copy, RotateCcw } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import DOMPurify from 'dompurify'; // P2-6：ChatMarkdown 内部 html:true + unsafeHTML 无消毒，渲染前净化
 import { Message, Model, PermissionRequest, ContentBlock } from '../types';
 import { api } from '../utils/api';
+import { getErrorMessage } from '../utils/errorMessage';
 import { ToolCallsCollapse } from './ToolCallsCollapse';
 import { InlinePermissionCard } from './InlinePermissionCard';
 
@@ -32,27 +33,49 @@ export function ChatMessages({
   sessionId
 }: ChatMessagesProps) {
   const [feedbacks, setFeedbacks] = useState<Record<string, 'up' | 'down'>>({});
+  // W1150：赞/踩提交在途标记（旧实现快速双击会发出两个请求——判重只在成功后生效）
+  const feedbackPending = useRef<Set<string>>(new Set());
+  // W1150：复制成功反馈（旧实现复制后无任何提示，剪贴板失败也静默）
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const handleFeedback = (messageId: string, verdict: 'up' | 'down') => {
-    if (feedbacks[messageId]) return;
+    if (feedbacks[messageId] || feedbackPending.current.has(messageId)) return;
     // W808 修复真实缺陷：此前提交体只有 { messageId, verdict }，**缺 sessionId**，
     // 而服务端要求三者齐备 → 恒返回 400，且此处 .catch(() => {}) 静默吞掉 →
     // 用户的赞/踩**从未被记录**且界面无任何异常表现。
-    // 现在：① 补齐 sessionId；② 改走统一 client（失败不再静默）；③ 失败时回滚乐观 UI。
+    // 现在：① 补齐 sessionId；② 改走统一 client（失败不再静默）；③ 失败时提示可重试。
     if (!sessionId) {
       console.warn('[Feedback] 缺少 sessionId，跳过提交');
       return;
     }
+    feedbackPending.current.add(messageId);
     api.feedback({ sessionId, messageId, verdict })
       .then(() => {
         setFeedbacks(prev => ({ ...prev, [messageId]: verdict }));
       })
       .catch((err) => {
-        console.error('[Feedback] 提交失败:', err);
+        // W1150：失败必须让用户看见（旧实现只 console ⇒ 点击「看起来没反应」）
+        MessagePlugin.error({ content: '反馈提交失败：' + getErrorMessage(err), duration: 3000 });
+      })
+      .finally(() => {
+        feedbackPending.current.delete(messageId);
       });
   };
   const handleCopy = (message: Message) => {
     const text = message.content || (message.contentBlocks || []).filter(b => b.type === 'text').map(b => (b as { text: string }).text).join('\n');
-    navigator.clipboard?.writeText(text).catch(() => { });
+    if (!navigator.clipboard) {
+      MessagePlugin.warning({ content: '当前环境不支持剪贴板访问', duration: 2000 });
+      return;
+    }
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        setCopiedId(message.id);
+        window.setTimeout(() => {
+          setCopiedId(prev => (prev === message.id ? null : prev));
+        }, 1500);
+      })
+      .catch((err) => {
+        MessagePlugin.error({ content: '复制失败：' + getErrorMessage(err), duration: 3000 });
+      });
   };
 
   const formatModelName = (modelId: string) => {
@@ -198,8 +221,8 @@ export function ChatMessages({
             {message.role === 'assistant' && !message.isStreaming && (
               <div className="flex items-center gap-3 px-1 text-xs" style={{ color: 'var(--td-text-color-placeholder)' }}>
                 <button title="赞" className="flex items-center gap-1" onClick={() => handleFeedback(message.id, 'up')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: feedbacks[message.id] === 'up' ? 'var(--td-brand-color)' : 'var(--td-text-color-placeholder)' }}><ThumbsUp size={13} /> 赞</button>
-                <button title="踩" className="flex items-center gap-1" onClick={() => handleFeedback(message.id, 'down')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: feedbacks[message.id] === 'down' ? 'var(--td-danger-color)' : 'var(--td-text-color-placeholder)' }}><ThumbsDown size={13} /> 踩</button>
-                <button title="复制全文" className="flex items-center gap-1" onClick={() => handleCopy(message)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--td-text-color-placeholder)' }}><Copy size={13} /> 复制</button>
+                <button title="踩" className="flex items-center gap-1" onClick={() => handleFeedback(message.id, 'down')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: feedbacks[message.id] === 'down' ? 'var(--td-error-color)' : 'var(--td-text-color-placeholder)' }}><ThumbsDown size={13} /> 踩</button>
+                <button title="复制全文" className="flex items-center gap-1" onClick={() => handleCopy(message)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: copiedId === message.id ? 'var(--td-success-color)' : 'var(--td-text-color-placeholder)' }}><Copy size={13} /> {copiedId === message.id ? '已复制' : '复制'}</button>
                 {onRegenerate && <button title="按上一条提问重新生成" className="flex items-center gap-1" onClick={() => onRegenerate(message)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--td-text-color-placeholder)' }}><RotateCcw size={13} /> 重新生成</button>}
                 {typeof message.durationSec === 'number' && <span>· {message.durationSec}s</span>}
               </div>

@@ -18,6 +18,8 @@ interface HeaderProps {
   currentSession: Session | undefined;
   currentAgent: Agent | undefined;
   models: Model[];
+  /** W1150：模型列表加载中（刷新按钮显示 loading，点击后有进行中反馈）。 */
+  modelsLoading: boolean;
   onToggleSidebar: () => void;
   onToggleTheme: () => void;
   onRefreshModels: () => void;
@@ -30,6 +32,7 @@ export function Header({
   currentSession,
   currentAgent,
   models,
+  modelsLoading,
   onToggleSidebar,
   onToggleTheme,
   onRefreshModels,
@@ -95,6 +98,7 @@ export function Header({
               variant="outline"
               shape="circle"
               icon={<RefreshIcon />}
+              loading={modelsLoading}
               onClick={onRefreshModels}
             />
           </Tooltip>
