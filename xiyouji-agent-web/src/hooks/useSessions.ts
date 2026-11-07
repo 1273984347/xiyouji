@@ -14,6 +14,11 @@ export function useSessions() {
   const [error, setError] = useState<string | null>(null);
   /** W808：会话列表是否正在加载（供 UI 显示加载态·skill 纪律：禁空白屏）。 */
   const [isLoading, setIsLoading] = useState(false);
+  /**
+   * W1150：正在拉取消息的会话 id（null = 无在途拉取）。
+   * 此前切换历史会话时 messages 短暂为空 ⇒ ChatPage 闪现为「新对话」落地页再跳回。
+   */
+  const [messagesLoadingId, setMessagesLoadingId] = useState<string | null>(null);
   
   // 每个会话的模型选择缓存
   const [sessionModels, setSessionModels] = useState<Record<string, string>>(() => {
@@ -57,6 +62,8 @@ export function useSessions() {
 
   // 加载单个会话的消息
   const loadSessionMessages = useCallback(async (sessionId: string) => {
+    // W1150：登记在途拉取（finally 仅清自己——快速连切 A→B 时 A 的收尾不误清 B 的加载态）
+    setMessagesLoadingId(sessionId);
     try {
       const data = await api.getSession(sessionId);
 
@@ -76,6 +83,8 @@ export function useSessions() {
       }
     } catch (err) {
       setError(getErrorMessage(err));
+    } finally {
+      setMessagesLoadingId(prev => (prev === sessionId ? null : prev));
     }
   }, []);
 
@@ -171,5 +180,6 @@ export function useSessions() {
     error,
     setError,
     isLoading,
+    messagesLoadingId,
   };
 }

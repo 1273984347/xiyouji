@@ -11,10 +11,14 @@ interface ChatPageProps {
   selectedModel: string;
   agents: CustomAgent[];
   isLoading: boolean;
+  /** W1150：模型列表加载中（输入框占位提示用）。 */
+  modelsLoading: boolean;
+  /** W1150：当前会话的消息是否正在拉取（切换历史会话期间防「新对话」落地页闪现）。 */
+  messagesLoading: boolean;
   inputValue: string;
   permissionRequest: PermissionRequest | null;
   permissionMode: PermissionMode;
-  onSendMessage: (message: string, newChatOptions?: NewChatOptions, onNavigate?: (path: string) => void) => void;
+  onSendMessage: (message: string, newChatOptions?: NewChatOptions, onNavigate?: (path: string, opts?: { replace?: boolean }) => void) => void;
   onStop: () => void;
   onInputChange: (value: string) => void;
   onModelChange: (modelId: string) => void;
@@ -35,6 +39,8 @@ export function ChatPage({
   selectedModel,
   agents,
   isLoading,
+  modelsLoading,
+  messagesLoading,
   inputValue,
   permissionRequest,
   permissionMode,
@@ -51,7 +57,9 @@ export function ChatPage({
   
   // 新对话页面状态
   const [newChatAgentId, setNewChatAgentId] = useState('default');
-  const [newChatCwd, setNewChatCwd] = useState('D:/1/xiyouji');
+  // W1150：工作目录默认空（留空 = 使用后端默认）——旧默认硬编码开发机路径
+  // 'D:/1/xiyouji'，其他环境会静默携带无效 cwd 建会话
+  const [newChatCwd, setNewChatCwd] = useState('');
 
   // 自动滚动到底部
   useEffect(() => {
@@ -66,24 +74,36 @@ export function ChatPage({
         agentId: newChatAgentId,
         cwd: newChatCwd,
         permissionMode: permissionMode,
-      }, (path) => {
+      }, (path, opts) => {
         // 重置新对话选项
         setNewChatAgentId('default');
         setNewChatCwd('');
-        navigate(path);
+        navigate(path, opts);
       });
     } else {
       onSendMessage(message);
     }
   }, [currentSession, newChatAgentId, newChatCwd, permissionMode, onSendMessage, navigate]);
 
-  const showNewChatView = !currentSession || currentSession.messages.length === 0;
+  // W1150：消息在途拉取期间不显示「新对话」落地页——旧判据只看 messages.length===0，
+  // 切换历史会话时异步拉取未完成 ⇒ 先闪现落地页再跳回对话
+  const showNewChatView = !messagesLoading && (!currentSession || currentSession.messages.length === 0);
+  const showMessagesLoading = messagesLoading && (!currentSession || currentSession.messages.length === 0);
 
   return (
     <>
       {/* 消息区域 */}
       <div className="flex-1 overflow-y-auto p-6">
-        {showNewChatView ? (
+        {showMessagesLoading ? (
+          <div className="flex-1 flex items-center justify-center h-full" role="status" aria-label="会话消息加载中">
+            <div
+              className="animate-pulse flex flex-col items-center gap-3"
+              style={{ color: 'var(--td-text-color-placeholder)' }}
+            >
+              <span className="text-sm">正在加载会话消息…</span>
+            </div>
+          </div>
+        ) : showNewChatView ? (
           <NewChatView
             agents={agents}
             models={models}
@@ -122,6 +142,7 @@ export function ChatPage({
         selectedModel={selectedModel}
         models={models}
         isLoading={isLoading}
+        modelsLoading={modelsLoading}
         permissionMode={permissionMode}
         onSend={handleSend}
         onStop={onStop}

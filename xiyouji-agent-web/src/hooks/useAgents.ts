@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { MessagePlugin } from 'tdesign-react';
 import { CustomAgent } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -55,7 +56,10 @@ export function useAgents() {
         }))];
       }
     } catch (e) {
+      // W1150：本地配置损坏必须让用户看见（旧实现只 console ⇒ 全部自定义 Agent 静默丢失）
       console.error('Failed to load agents:', e);
+      MessagePlugin.warning({ content: '本地自定义 Agent 配置损坏，已重置为默认。', duration: 5000 });
+      localStorage.removeItem(STORAGE_KEY);
     }
     return [DEFAULT_AGENT];
   });

@@ -1,4 +1,4 @@
-import { Button, Tooltip } from 'tdesign-react';
+import { Button, Tooltip, Popconfirm } from 'tdesign-react';
 import { AddIcon, DeleteIcon, SettingIcon } from 'tdesign-icons-react';
 import { Bot } from 'lucide-react';
 import { APP_CONFIG } from '../config';
@@ -10,6 +10,8 @@ interface SidebarProps {
   currentSessionId: string | null;
   isSettingsPage: boolean;
   sidebarOpen: boolean;
+  /** W1150：会话列表加载中（显示骨架占位，不再空白）。 */
+  sessionsLoading: boolean;
   agents: Agent[];
   getAgent: (id: string) => Agent | undefined;
   onNewChat: () => void;
@@ -23,6 +25,7 @@ export function Sidebar({
   currentSessionId,
   isSettingsPage,
   sidebarOpen,
+  sessionsLoading,
   agents,
   getAgent,
   onNewChat,
@@ -70,6 +73,27 @@ export function Sidebar({
 
       {/* 会话列表 */}
       <div className="flex-1 overflow-y-auto p-2 space-y-1">
+        {/* W1150：加载骨架与空态占位——旧实现两态均渲染为纯空白区域 */}
+        {sessionsLoading && (
+          <div className="space-y-2 px-1 py-2" aria-label="会话列表加载中" role="status">
+            {[0, 1, 2].map(i => (
+              <div
+                key={i}
+                className="h-9 rounded-lg animate-pulse"
+                style={{ backgroundColor: 'var(--td-bg-color-component)' }}
+              />
+            ))}
+          </div>
+        )}
+        {!sessionsLoading && sessions.length === 0 && (
+          <div
+            className="flex flex-col items-center gap-1 px-4 py-10 text-center"
+            style={{ color: 'var(--td-text-color-placeholder)' }}
+          >
+            <span className="text-sm">暂无会话</span>
+            <span className="text-xs">点击上方「新对话」开始</span>
+          </div>
+        )}
         {sessions.map(session => {
           const sessionAgent = session.agentId ? getAgent(session.agentId) : getAgent('default');
           const AgentIcon = ICON_MAP[sessionAgent?.icon || 'Bot'] || Bot;
@@ -105,17 +129,23 @@ export function Sidebar({
               </div>
               <span className="flex-1 truncate text-sm">{session.title}</span>
               <Tooltip content="删除会话">
-                <Button
-                  className="opacity-0 group-hover:opacity-100 transition-opacity"
-                  variant="text"
-                  shape="circle"
-                  size="medium"
-                  icon={<DeleteIcon />}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDeleteSession(session.id);
-                  }}
-                />
+                {/* W1150：删除整会话补二次确认（误触即永久丢失·与 Agent 删除的 Popconfirm 对齐） */}
+                <Popconfirm
+                  content="确定删除该会话？删除后不可恢复。"
+                  theme="danger"
+                  onConfirm={() => onDeleteSession(session.id)}
+                >
+                  <Button
+                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    variant="text"
+                    shape="circle"
+                    size="medium"
+                    icon={<DeleteIcon />}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  />
+                </Popconfirm>
               </Tooltip>
             </div>
           );

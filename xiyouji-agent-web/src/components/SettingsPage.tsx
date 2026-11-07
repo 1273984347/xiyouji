@@ -108,6 +108,8 @@ export function SettingsPage({
 }: SettingsPageProps) {
   const [editingAgent, setEditingAgent] = useState<CustomAgent | null>(null);
   const [isCreating, setIsCreating] = useState(false);
+  // W1150：字段级校验错误（name / systemPrompt）
+  const [formErrors, setFormErrors] = useState<{ name?: string; systemPrompt?: string }>({});
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -165,6 +167,8 @@ export function SettingsPage({
       color: '#0052d9',
       permissionMode: 'default',
     });
+    // W1150：重置字段级校验错误
+    setFormErrors({});
     setEditingAgent(null);
     setIsCreating(false);
   };
@@ -184,8 +188,13 @@ export function SettingsPage({
   };
 
   const handleSave = () => {
-    if (!formData.name.trim() || !formData.systemPrompt.trim()) {
-      MessagePlugin.warning('请填写名称和系统提示词');
+    // W1150：字段级校验（旧实现只有聚合 toast，无逐字段 inline 错误态）
+    const errors: { name?: string; systemPrompt?: string } = {};
+    if (!formData.name.trim()) errors.name = '请填写 Agent 名称';
+    if (!formData.systemPrompt.trim()) errors.systemPrompt = '请填写系统提示词';
+    setFormErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      MessagePlugin.warning('请按下方提示补全必填项');
       return;
     }
 
@@ -323,11 +332,13 @@ export function SettingsPage({
           )}
 
           {loginStatus.error && !loginStatus.isLoggedIn && (
+            // W1150：检查失败属错误信息，改用 error 色（旧 placeholder 灰与提示语无异）
             <div
-              className="text-xs mt-4"
-              style={{ color: 'var(--td-text-color-placeholder)' }}
+              className="text-xs mt-4 flex items-start gap-1"
+              style={{ color: 'var(--td-error-color)' }}
             >
-              {loginStatus.error}
+              <CloseCircleFilledIcon size="14px" style={{ marginTop: '2px' }} />
+              <span>{loginStatus.error}</span>
             </div>
           )}
         </div>
@@ -375,10 +386,18 @@ export function SettingsPage({
                     </div>
                     
                     <Form labelAlign="top">
-                      <Form.FormItem label="名称" requiredMark>
-                        <Input 
+                      <Form.FormItem
+                        label="名称"
+                        requiredMark
+                        status={formErrors.name ? 'error' : undefined}
+                        help={formErrors.name}
+                      >
+                        <Input
                           value={formData.name}
-                          onChange={(v) => setFormData(prev => ({ ...prev, name: v as string }))}
+                          onChange={(v) => {
+                            setFormData(prev => ({ ...prev, name: v as string }));
+                            if (formErrors.name) setFormErrors(prev => ({ ...prev, name: undefined }));
+                          }}
                           placeholder="例如：代码助手"
                         />
                       </Form.FormItem>
@@ -447,10 +466,18 @@ export function SettingsPage({
                         </Select>
                       </Form.FormItem>
                       
-                      <Form.FormItem label="系统提示词" requiredMark>
-                        <Textarea 
+                      <Form.FormItem
+                        label="系统提示词"
+                        requiredMark
+                        status={formErrors.systemPrompt ? 'error' : undefined}
+                        help={formErrors.systemPrompt}
+                      >
+                        <Textarea
                           value={formData.systemPrompt}
-                          onChange={(v) => setFormData(prev => ({ ...prev, systemPrompt: v as string }))}
+                          onChange={(v) => {
+                            setFormData(prev => ({ ...prev, systemPrompt: v as string }));
+                            if (formErrors.systemPrompt) setFormErrors(prev => ({ ...prev, systemPrompt: undefined }));
+                          }}
                           placeholder="定义 Agent 的行为和能力..."
                           autosize={{ minRows: 4, maxRows: 8 }}
                         />
@@ -514,7 +541,12 @@ export function SettingsPage({
                     从头创建 Agent
                   </Button>
 
-                  {/* 已有的自定义 Agent */}
+                  {/* 已有的自定义 Agent（W1150：0 个时给空态说明，不再整块消失） */}
+                  {customAgents.length === 0 && (
+                    <p className="text-sm" style={{ color: 'var(--td-text-color-placeholder)' }}>
+                      还没有自定义 Agent——可用上方模板快速创建，或点击「从头创建 Agent」。
+                    </p>
+                  )}
                   {customAgents.length > 0 && (
                     <div>
                       <h4 className="text-sm font-medium mb-3" style={{ color: 'var(--td-text-color-secondary)' }}>
