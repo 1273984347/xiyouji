@@ -1,3 +1,18 @@
+## W1164 触发器硬拦升格批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_review_trigger.py | W1164 | 改：HARD_MULTIPLIER+hard_triggered+hard_triggered_today+自测五态锁 |
+| scripts/check_audit_trigger.py | W1164 | 改：hard_triggered（40 批）+ledger_text_for_preflight+自测 hard 双态锁 |
+| scripts/check_backlog_review.py | W1164 | 改：hard_triggered（50 批）+ledger_text_for_preflight+自测 hard 双态锁 |
+| scripts/preflight_check.py | W1164 | 改：三 _step_* 接线（签名加 problems+hard 判据 FAIL 进 problems） |
+| docs/00-导读/W批次编号对账表.md | W1164 | 改：W1164 认领行+W1160/1163 收官回填（含双 token 保留） |
+| CHANGELOG.md | W1164 | 改：W1164 段落（级联） |
+| HANDOVER.md | W1164 | 改：最后更新行（级联） |
+| scripts/output/_w1164_spec.json | W1164 | 新建：本批 spec |
+| scripts/output/file-index.md | W1164 | 改：W1164 段（级联） |
+| scripts/output/_cascade_files_W1164.txt | W1164 | 新建：级联清单 |
+
 ## W1163 收尾微批（2026-11-07）
 
 | 文件 | W | 说明 |

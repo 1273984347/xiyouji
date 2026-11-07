@@ -605,16 +605,19 @@ def _step_worktree(git):
         print(f"       ……另 {len(tree['items']) - 8} 项")
 
 
-def _step_review_trigger(git):
-    """5.5) 复盘触发器提示位（W956·P-43-02）——只提示不拦截·故障留痕。W1158 自 main 拆出。"""
-    # 只提示不拦截（W822「只输出提示行·不改任何判定与退出码」语义）——触发清单由
-    # scripts/check_review_trigger.py 产出；提示位故障降级为 WARN 不阻断开工，
-    # 但**禁静默跳过**（必须留下不可用痕迹）。
+def _step_review_trigger(git, problems):
+    """5.5) 复盘触发器提示位（W956·P-43-02）——提示不拦截；超阈 1 倍升格 FAIL（W1164 用户裁决）。"""
+    # WARN 档语义（W822）保留：阈值内只输出提示行·故障降级 WARN 不阻断但禁静默跳过。
+    # W1164 硬拦：任一维度 ≥ 2×阈值（6 天/60 批/160 提交）⇒ FAIL 进 problems（实证：
+    # 复盘 WARN 债单超阈约一倍才被清偿——提示档对「重要不紧急」欠账无强制力）。
     try:
         import check_review_trigger as _crt
 
         for _line in _crt.notice_lines(git):
             print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+        if _crt.hard_triggered_today(git):
+            print("FAIL  复盘欠账超阈 1 倍（W1164 硬拦）——先认领复盘批（落盘复盘报告+登记面可见）再开新批")
+            problems.append("复盘触发器超阈 1 倍（W1164 硬拦·清偿=复盘批）")
     except Exception as _exc:  # noqa: BLE001 — 提示位兜底（W822 语义）
         print(f"WARN  复盘触发器不可用（{_exc}）——本回合跳过复盘周期提示")
 
@@ -648,27 +651,36 @@ def _step_gov_claims():
         print(f"WARN  数字断言对账器不可用（{_exc2}）——本回合跳过（禁静默）")
 
 
-def _step_audit_trigger():
-    """5.75) 对抗式审查触发器（W1000）：≥20 批未派发即提示。W1158 自 main 拆出。"""
-    # 只提示不拦截·模板见 docs/agent/adversarial-audit-prompt.md
+def _step_audit_trigger(problems):
+    """5.75) 对抗式审查触发器（W1000）：≥20 批提示；≥40 批 FAIL（W1164 硬拦）。W1158 自 main 拆出。"""
+    # 模板见 docs/agent/adversarial-audit-prompt.md；W1164：超阈 1 倍升格硬拦（85 批实证 WARN 失灵）。
     try:
         import check_audit_trigger as _cat
 
         for _line in _cat.notice_lines():
             print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+        _lt, _la = _cat.ledger_text_for_preflight()
+        if _cat.hard_triggered(_lt, _la):
+            print("FAIL  对抗审查超阈 1 倍（W1164 硬拦）——先按 adversarial-audit-prompt 派发 subagent"
+                  "（登记行写 token「对抗审查已派发」）再开新批")
+            problems.append("对抗审查触发器超阈 1 倍（W1164 硬拦·清偿=派发+token）")
     except Exception as _exc3:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"WARN  对抗审查触发器不可用（{_exc3}）——本回合跳过（禁静默）")
 
 
-def _step_backlog_trigger():
-    """5.8) Backlog 登记面对账触发器（W1021）：≥25 批未对账即提示。W1158 自 main 拆出。"""
-    # 只提示不拦截。起因：W1019 连中两条「已做完仍挂待办」，W1020 全量对账实测滞后率 41%（12/29）。
+def _step_backlog_trigger(problems):
+    """5.8) Backlog 触发器（W1021）：≥25 批提示；≥50 批 FAIL（W1164 硬拦）。W1158 自 main 拆出。"""
     # 判据与对抗审查触发器同族（token 认状态列 / 取 max 不取文件序 / 归档同扫）。
     try:
         import check_backlog_review as _cbr
 
         for _line in _cbr.notice_lines():
             print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+        _lt2, _la2 = _cbr.ledger_text_for_preflight()
+        if _cbr.hard_triggered(_lt2, _la2):
+            print("FAIL  Backlog 对账超阈 1 倍（W1164 硬拦）——先按 git 与测试实况核 HANDOVER Backlog"
+                  "并在注记写 token「Backlog 对账已执行」再开新批")
+            problems.append("Backlog 触发器超阈 1 倍（W1164 硬拦·清偿=对账注记）")
     except Exception as _exc4:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"WARN  Backlog 对账触发器不可用（{_exc4}）——本回合跳过（禁静默）")
 
@@ -726,11 +738,11 @@ def main():
         problems.append("环境缺件（pytest/ruff）")
 
     # 5.5) 复盘触发器 + 5.6) 体积窗口（硬判据） + 5.7/5.75/5.8) 提示位族
-    _step_review_trigger(git)
+    _step_review_trigger(git, problems)
     _step_size_budget(problems)
     _step_gov_claims()
-    _step_audit_trigger()
-    _step_backlog_trigger()
+    _step_audit_trigger(problems)
+    _step_backlog_trigger(problems)
 
     print("== 结论 ==")
     if problems:
