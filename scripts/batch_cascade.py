@@ -1010,6 +1010,10 @@ def main():
                          "幂等——本批块已在链上 ⇒ 零变化并直接退出")
     ap.add_argument("--allow-gap", default="",
                     help="允许的在途缺口 W 号（逗号分隔·须台账有认领行且 CHANGELOG 无段·W895 新增）")
+    ap.add_argument("--light", action="store_true",
+                    help="轻量批通道（W1069 三档·W1162 落地）：纯 md 治理文档批——只跑 "
+                         "CHANGELOG/三文档/HANDOVER/file-index 面，跳页脚四面/workflows/"
+                         "agents 脚注/citation；准入判据=触碰面 ⊆ md 治理文档且无 scripts/site 改动")
     ap.add_argument("--skip-changelog", action="store_true",
                     help="跳过 CHANGELOG 面（段改由 backfill_changelog.py 按号序补·"
                          "用于「并行批次占号未立段」的号段缺口；此时 --allow-gap 的号"
@@ -1023,6 +1027,7 @@ def main():
         print("[PRECHECK] %d 项违例——修正 spec 后重跑（参照 AGENTS §4.3 desc 分隔符规则）" % len(pre_issues))
         return 1
     ctx = _Ctx(spec)
+    ctx.light = bool(args.light)
     ctx.allow_gap = [x.strip() for x in args.allow_gap.split(",") if x.strip()]
     if args.rotate_only:
         return _rotate_only(ctx, args.apply)
@@ -1050,6 +1055,29 @@ def main():
               % (ctx.new_w, "、".join(ctx.allow_gap) or "无"))
     else:
         _face_changelog(ctx)
+    if ctx.light:
+        # W1069 三、1 准入硬性判据（防滥用）：--light 触碰面必须 ⊆ md 治理文档——
+        # 暂存/工作树含 scripts/site/图片改动即拒绝（请走全量批）。
+        import subprocess as _sp
+
+        _r_st = _sp.run(["git", "-c", "core.quotepath=false", "status", "--porcelain"],
+                        capture_output=True, text=True, encoding="utf-8",
+                        errors="replace", cwd=ROOT)
+        _bad = sorted({ln[3:].strip().strip('"') for ln in _r_st.stdout.splitlines()
+                       if ln.strip() and ln[3:].strip().strip('"')
+                       and not ln[3:].strip().strip('"').endswith(".md")})
+        if _bad:
+            raise AssertionError(
+                "[LIGHT] 准入判据不满足（W1069 三、1）：触碰面含非 md 文件 %s——请走全量批（去掉 --light）"
+                % "、".join(_bad[:5]))
+        print("[LIGHT] 准入判据通过：触碰面 ⊆ md 治理文档")
+        # W1162 微批轻量通道（W1069 设计·用户 2026-11-07「全都开始做」批准）：
+        # 纯 md 治理文档批只跑 CHANGELOG/三文档/HANDOVER 四面——跳页脚四面
+        # （site 页脚滚动对小批是纯仪式）、workflows 区间、agents 脚注、citation。
+        # 判据不裁剪：verify --scope docs 照跑，CHANGELOG/台账照写（三问与 BOM 等门禁全档生效）。
+        print("[LIGHT] 轻量批：跳页脚四面/workflows/agents 脚注/citation（W1069 三档通道）")
+        _face_file_index(ctx)
+        return
     _face_three_docs(ctx)
     _face_handover(ctx)
     _face_workflows(ctx)

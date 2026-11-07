@@ -104,6 +104,119 @@ def _waivers(text: str):
     return ok, bad, lines
 
 
+def _carrier_waive_issues(waived: set[str], bad_waive: list[str]) -> list[str]:
+    """豁免判题（W960）：J2 请求豁免一律判红；豁免超出可豁免范围的规则号也判红。"""
+    issues: list[str] = []
+    for rule in bad_waive:
+        issues.append("J2 宪法级规则不可豁免：%s 请求 waive（豁免仅对 J3/J4/J7 开放）" % rule)
+    for rule in sorted(waived - {"J3", "J4", "J7"}):
+        issues.append("豁免规则号不存在的规则：%s（可豁免范围 J3 / J4 / J7）" % rule)
+    return issues
+
+
+def _carrier_j1_non_motion_issues(name: str, text: str, node_result=None) -> list[str]:
+    """非动效件 J1 语法判定（node 结果优先；None=node 不可用 ⇒ 粗检兜底）。"""
+    issues: list[str] = []
+    if node_result is None:
+        if text.count("{") != text.count("}"):
+            issues.append("J1 %s 花括号不平衡（node 不可用·粗检）" % name)
+        if text.count("(") != text.count(")"):
+            issues.append("J1 %s 圆括号不平衡（node 不可用·粗检）" % name)
+    elif node_result.returncode != 0:
+        issues.append("J1 %s JS 语法错误：%s"
+                      % (name, (node_result.stderr or node_result.stdout).strip()[:200]))
+    return issues
+
+
+def _carrier_j1_motion_issues(text: str, node_result=None) -> list[str]:
+    """动效载体 J1 语法判定（node 结果优先；None=node 不可用 ⇒ 粗检兜底）。"""
+    issues: list[str] = []
+    if node_result is not None:
+        if node_result.returncode != 0:
+            issues.append("J1 载体 JS 语法错误：%s" % (node_result.stderr or node_result.stdout).strip()[:200])
+    else:
+        if text.count("{") != text.count("}"):
+            issues.append("J1 载体花括号不平衡（node 不可用·粗检）")
+        if text.count("(") != text.count(")"):
+            issues.append("J1 载体圆括号不平衡（node 不可用·粗检）")
+    return issues
+
+
+def _carrier_j2_issues(text: str, name: str | None = None) -> list[str]:
+    """J2 禁用字面量扫描（W1053 G-04：扫描前剥注释——堵「写注释里再拼出来」与注释误伤）。
+
+    name 非 None ⇒ 非动效件形态（报文带文件名前缀）；None ⇒ 动效载体形态。
+    """
+    issues: list[str] = []
+    stripped = _strip_js_comments(text)
+    for pat, desc in BANNED_LITERALS:
+        hits = re.findall(pat, stripped, flags=re.I)
+        if hits:
+            if name is None:
+                issues.append("J2 禁用字面量命中 %d 处：%s" % (len(hits), desc))
+            else:
+                issues.append("J2 %s 禁用字面量命中 %d 处：%s" % (name, len(hits), desc))
+    return issues
+
+
+def _carrier_j3_issues(text: str) -> list[str]:
+    """J3 时长上限（两形态：① 直接 duration 字面量 ② 时长常量表内的字面量）。"""
+    issues: list[str] = []
+    for m in re.finditer(r"duration\s*:\s*([0-9]*\.?[0-9]+)", text):
+        v = float(m.group(1))
+        if v > 0.6:
+            issues.append("J3 动画时长 %s s 超 0.6 s 上限" % v)
+    for m in re.finditer(r"\b(?:DUR|TIMING|DURATION)\w*\s*=\s*\{([^}]*)\}", text):
+        for num in re.finditer(r":\s*([0-9]*\.?[0-9]+)", m.group(1)):
+            v = float(num.group(1))
+            if v > 0.6:
+                issues.append("J3 时长常量表内 %s s 超 0.6 s 上限" % v)
+    return issues
+
+
+def _carrier_j4_issues(text: str) -> list[str]:
+    """J4 缓动白名单（两形态：① 直接 ease 字面量 ② 缓动常量表内的字面量）。"""
+    issues: list[str] = []
+    for m in re.finditer(r"ease\s*:\s*['\"]([^'\"]+)['\"]", text):
+        if m.group(1) not in EASE_WHITELIST:
+            issues.append("J4 缓动 '%s' 不在白名单 %s" % (m.group(1), sorted(EASE_WHITELIST)))
+    for m in re.finditer(r"\b(?:EASE|EASING)\w*\s*=\s*\{([^}]*)\}", text):
+        for e in re.finditer(r":\s*['\"]([^'\"]+)['\"]", m.group(1)):
+            if e.group(1) not in EASE_WHITELIST:
+                issues.append("J4 缓动常量表内 '%s' 不在白名单 %s"
+                              % (e.group(1), sorted(EASE_WHITELIST)))
+    return issues
+
+
+def _carrier_j5_issues(text: str) -> list[str]:
+    """J5 RM 双守卫（prefers-reduced-motion 字面量 + matchMedia）。"""
+    issues: list[str] = []
+    if "prefers-reduced-motion" not in text:
+        issues.append("J5 缺 reduced-motion 守卫（无 prefers-reduced-motion 字面量）")
+    if "matchMedia" not in text:
+        issues.append("J5 缺 reduced-motion 守卫（无 matchMedia）")
+    return issues
+
+
+def _carrier_j6_issues(text: str) -> list[str]:
+    """J6 fail-open 证据（try/catch + 终态兜底 clearProps）。"""
+    issues: list[str] = []
+    if "try" not in text or "catch" not in text:
+        issues.append("J6 缺 fail-open 证据（无 try/catch）")
+    if "clearProps" not in text:
+        issues.append("J6 缺 fail-open 终态兜底（无 clearProps）")
+    return issues
+
+
+def _carrier_j7_issues(text: str) -> list[str]:
+    """J7 布局属性键位（DESIGN §5.8 只动 transform/opacity）。"""
+    issues: list[str] = []
+    for k in LAYOUT_KEYS:
+        if re.search(r"[\{,]\s*%s\s*:" % re.escape(k), text):
+            issues.append("J7 出现布局属性键位 '%s'（DESIGN §5.8 只动 transform/opacity）" % k)
+    return issues
+
+
 def check_carrier_text(name: str, text: str, node_result=None) -> list[str]:
     """单文件判定（纯函数·W1053 G-04 可测化）：J1-J7 对自有 js 全适用，J5/J6 仅动效载体。
 
@@ -113,87 +226,31 @@ def check_carrier_text(name: str, text: str, node_result=None) -> list[str]:
     issues: list[str] = []
     is_motion_carrier = "gsap" in text  # 动效载体判据：引用了 gsap
     waived, bad_waive, waive_lines = _waivers(text)
-    for rule in bad_waive:
-        issues.append("J2 宪法级规则不可豁免：%s 请求 waive（豁免仅对 J3/J4/J7 开放）" % rule)
-    for rule in sorted(waived - {"J3", "J4", "J7"}):
-        issues.append("豁免规则号不存在的规则：%s（可豁免范围 J3 / J4 / J7）" % rule)
+    issues.extend(_carrier_waive_issues(waived, bad_waive))
 
     # J1 语法：node --check 结果由调用方注入；None=node 不可用 ⇒ 粗检兜底
     if not is_motion_carrier:
         # 非动效件：只查语法（J1）与禁词（J2·全适用）——J3-J7 语义不适用
-        if node_result is None:
-            if text.count("{") != text.count("}"):
-                issues.append("J1 %s 花括号不平衡（node 不可用·粗检）" % name)
-            if text.count("(") != text.count(")"):
-                issues.append("J1 %s 圆括号不平衡（node 不可用·粗检）" % name)
-        elif node_result.returncode != 0:
-            issues.append("J1 %s JS 语法错误：%s"
-                          % (name, (node_result.stderr or node_result.stdout).strip()[:200]))
-        stripped = _strip_js_comments(text)
-        for pat, desc in BANNED_LITERALS:
-            hits = re.findall(pat, stripped, flags=re.I)
-            if hits:
-                issues.append("J2 %s 禁用字面量命中 %d 处：%s" % (name, len(hits), desc))
+        issues.extend(_carrier_j1_non_motion_issues(name, text, node_result))
+        issues.extend(_carrier_j2_issues(text, name))
         return issues
 
-    if node_result is not None:
-        if node_result.returncode != 0:
-            issues.append("J1 载体 JS 语法错误：%s" % (node_result.stderr or node_result.stdout).strip()[:200])
-    else:
-        if text.count("{") != text.count("}"):
-            issues.append("J1 载体花括号不平衡（node 不可用·粗检）")
-        if text.count("(") != text.count(")"):
-            issues.append("J1 载体圆括号不平衡（node 不可用·粗检）")
-
-    # J2 禁用字面量（W1053 G-04：扫描前剥注释——堵「写注释里再拼出来」与注释误伤）
-    stripped2 = _strip_js_comments(text)
-    for pat, desc in BANNED_LITERALS:
-        hits = re.findall(pat, stripped2, flags=re.I)
-        if hits:
-            issues.append("J2 禁用字面量命中 %d 处：%s" % (len(hits), desc))
+    issues.extend(_carrier_j1_motion_issues(text, node_result))
+    issues.extend(_carrier_j2_issues(text))
 
     # J3 时长上限（两形态：① 直接 duration 字面量 ② 时长常量表内的字面量）
     #   自证实证：初版只扫 ① ⇒ 时长表 `{ enter: 1.2 }` 形态越限不被抓（负样本 case5 未被抓住）
     if "J3" not in waived:
-        for m in re.finditer(r"duration\s*:\s*([0-9]*\.?[0-9]+)", text):
-            v = float(m.group(1))
-            if v > 0.6:
-                issues.append("J3 动画时长 %s s 超 0.6 s 上限" % v)
-        for m in re.finditer(r"\b(?:DUR|TIMING|DURATION)\w*\s*=\s*\{([^}]*)\}", text):
-            for num in re.finditer(r":\s*([0-9]*\.?[0-9]+)", m.group(1)):
-                v = float(num.group(1))
-                if v > 0.6:
-                    issues.append("J3 时长常量表内 %s s 超 0.6 s 上限" % v)
+        issues.extend(_carrier_j3_issues(text))
 
     # J4 缓动白名单（两形态：① 直接 ease 字面量 ② 缓动常量表内的字面量）
     #   自证实证：初版只扫 ① ⇒ 常量表形态的越权缓动不被抓（负样本 case8 未被抓住）
     if "J4" not in waived:
-        for m in re.finditer(r"ease\s*:\s*['\"]([^'\"]+)['\"]", text):
-            if m.group(1) not in EASE_WHITELIST:
-                issues.append("J4 缓动 '%s' 不在白名单 %s" % (m.group(1), sorted(EASE_WHITELIST)))
-        for m in re.finditer(r"\b(?:EASE|EASING)\w*\s*=\s*\{([^}]*)\}", text):
-            for e in re.finditer(r":\s*['\"]([^'\"]+)['\"]", m.group(1)):
-                if e.group(1) not in EASE_WHITELIST:
-                    issues.append("J4 缓动常量表内 '%s' 不在白名单 %s"
-                                  % (e.group(1), sorted(EASE_WHITELIST)))
+        issues.extend(_carrier_j4_issues(text))
 
-    # J5 RM 双守卫
-    if "prefers-reduced-motion" not in text:
-        issues.append("J5 缺 reduced-motion 守卫（无 prefers-reduced-motion 字面量）")
-    if "matchMedia" not in text:
-        issues.append("J5 缺 reduced-motion 守卫（无 matchMedia）")
-
-    # J6 fail-open 证据
-    if "try" not in text or "catch" not in text:
-        issues.append("J6 缺 fail-open 证据（无 try/catch）")
-    if "clearProps" not in text:
-        issues.append("J6 缺 fail-open 终态兜底（无 clearProps）")
-
-    # J7 布局属性
-    for k in LAYOUT_KEYS:
-        if re.search(r"[\{,]\s*%s\s*:" % re.escape(k), text):
-            issues.append("J7 出现布局属性键位 '%s'（DESIGN §5.8 只动 transform/opacity）" % k)
-
+    issues.extend(_carrier_j5_issues(text))
+    issues.extend(_carrier_j6_issues(text))
+    issues.extend(_carrier_j7_issues(text))
     return issues
 
 
