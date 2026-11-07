@@ -236,6 +236,52 @@ def negative_check(path: str) -> int:
     return 0
 
 
+def _judge_one_stem(stem):
+    """单张题图全判据（J1-J10）：→ rows 行元组；png 缺失时打印 FAIL 并返回 None（调用方即刻退出 1）。"""
+    png = os.path.join(SET_DIR, stem + ".png")
+    webp = os.path.join(SET_DIR, stem + ".webp")
+    site = os.path.join(SITE_IMG, stem + ".webp")
+    if not os.path.exists(png):
+        print("FAIL  文件缺失: " + png)
+        return None
+    im = Image.open(png).convert("RGB")
+    w, h = im.size
+    top = ink_ratio(im, (0, 0, w, int(h * 0.10)))
+    whole = ink_ratio(im)
+    lower = ink_ratio(im, (0, int(h * 0.28), w, h))
+    verm = near_px(im, VERM, VERM_TOL)
+    dens = max_dense_block(im, (0, int(h * 0.28), w, h))
+    frame = frame_ink(im)
+    is_frame, frame_desc = frame_line(im)
+    resid = paper_residual(im)
+    bgdiff = bg_band_diff(im)
+    webp_ok = os.path.exists(webp) and os.path.getsize(webp) > 0 and os.path.exists(site)
+
+    fails = []
+    if (w, h) != TARGET:
+        fails.append("J1 尺寸=" + str((w, h)))
+    if top > J2_MAX:
+        fails.append("J2 顶部留白墨量=" + format(top, ".4f"))
+    if not (J3_LO <= whole <= J3_HI):
+        fails.append("J3 整图墨量=" + format(whole, ".4f"))
+    if lower < J4_MIN:
+        fails.append("J4 下部主体墨量=" + format(lower, ".4f"))
+    if verm <= 0:
+        fails.append("J5 朱砂点缺失")
+    if dens > J6_MAX:
+        fails.append("J6 实心块 3×3 窗口暗占比=" + format(dens, ".3f"))
+    if not webp_ok:
+        fails.append("J7 webp 缺失")
+    if is_frame:
+        fails.append("J8 检出相框（贯穿暗线）：" + frame_desc)
+    if resid > J9_MAX:
+        fails.append("J9 纸色残差=" + format(resid, ".2f"))
+    if bgdiff > J10_MAX:
+        fails.append("J10 背景竖向不均匀（顶部带分段亮度差=" + format(bgdiff, ".2f") + "·疑白边/色带）")
+
+    return (stem, (w, h), top, whole, lower, verm, dens, frame, resid, bgdiff, fails)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="W945 内页专题题图成套判据")
     ap.add_argument("--negative", metavar="FILE", help="负样本路径：同一判据跑它必须 FAIL")
@@ -249,48 +295,10 @@ def main() -> int:
         print("FAIL  %s 下无 plate-line-*.png" % SET_DIR)
         return 1
     for stem in stems:
-        png = os.path.join(SET_DIR, stem + ".png")
-        webp = os.path.join(SET_DIR, stem + ".webp")
-        site = os.path.join(SITE_IMG, stem + ".webp")
-        if not os.path.exists(png):
-            print("FAIL  文件缺失: " + png)
+        row = _judge_one_stem(stem)
+        if row is None:
             return 1
-        im = Image.open(png).convert("RGB")
-        w, h = im.size
-        top = ink_ratio(im, (0, 0, w, int(h * 0.10)))
-        whole = ink_ratio(im)
-        lower = ink_ratio(im, (0, int(h * 0.28), w, h))
-        verm = near_px(im, VERM, VERM_TOL)
-        dens = max_dense_block(im, (0, int(h * 0.28), w, h))
-        frame = frame_ink(im)
-        is_frame, frame_desc = frame_line(im)
-        resid = paper_residual(im)
-        bgdiff = bg_band_diff(im)
-        webp_ok = os.path.exists(webp) and os.path.getsize(webp) > 0 and os.path.exists(site)
-
-        fails = []
-        if (w, h) != TARGET:
-            fails.append("J1 尺寸=" + str((w, h)))
-        if top > J2_MAX:
-            fails.append("J2 顶部留白墨量=" + format(top, ".4f"))
-        if not (J3_LO <= whole <= J3_HI):
-            fails.append("J3 整图墨量=" + format(whole, ".4f"))
-        if lower < J4_MIN:
-            fails.append("J4 下部主体墨量=" + format(lower, ".4f"))
-        if verm <= 0:
-            fails.append("J5 朱砂点缺失")
-        if dens > J6_MAX:
-            fails.append("J6 实心块 3×3 窗口暗占比=" + format(dens, ".3f"))
-        if not webp_ok:
-            fails.append("J7 webp 缺失")
-        if is_frame:
-            fails.append("J8 检出相框（贯穿暗线）：" + frame_desc)
-        if resid > J9_MAX:
-            fails.append("J9 纸色残差=" + format(resid, ".2f"))
-        if bgdiff > J10_MAX:
-            fails.append("J10 背景竖向不均匀（顶部带分段亮度差=" + format(bgdiff, ".2f") + "·疑白边/色带）")
-
-        rows.append((stem, (w, h), top, whole, lower, verm, dens, frame, resid, bgdiff, fails))
+        rows.append(row)
 
     print("=== W945/W948 内页专题题图成套判据（目录扫描·覆盖全部成品） ===")
     hdr = "%-30s %-11s %7s %7s %7s %7s %7s %6s %6s %6s  %s" % (

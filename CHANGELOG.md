@@ -1,3 +1,25 @@
+### W1162（2026-11-07）：微批轻量通道实施批（--light 五面+准入硬守卫+设计 V1.1）
+
+**本批要点**（W1069 微批轻量通道 V1.1 实施·用户 2026-11-07「全都开始做」批准设计）：
+
+> - **T1 `batch_cascade --light` 接线**：轻量批（纯 md 治理文档）只跑 CHANGELOG/三文档/HANDOVER/file-index 五面，跳页脚四面/workflows 区间/agents 脚注/citation（设计 §二 轻量批档）；ctx.light 属性+CLI 参数。
+> - **T2 准入硬守卫**（设计 §三、1 防滥用）：--light 触碰面含非 md 文件即 raise 拒绝（提示请走全量批）——判据不裁剪：verify --scope docs 照跑、CHANGELOG/台账照写、三问与 BOM 等门禁全档生效（设计 §五 不做清单守恒）。
+> - **T3 设计文档 V1.0 待批 → V1.1 已批准实施**：三前提落位说明（verify 档=现成 --scope docs 零改动/第 22 槽简化=ledger_backfill 单行现义）；微批（0 面）档暂不开通——每日 ≤2 笔准入需先有使用数据再放开。
+> - **验证**：ruff 绿 + cascade 面回归 60 passed + 验收 dry-run 于 md-only 工作树实测准入守卫双态（收官栏补终值）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
+### W1161（2026-11-07）：存量复杂度棘轮第 1 轮（重症 34→4+轻症七件清零·8 函数消号·零回归）
+
+**本批要点**（存量复杂度棘轮第 1 轮·宽档 15 实测 65 处起）：
+
+> - **T1 重症一件**：check_gsap_motion.check_carrier_text **34→4**（9 个 _carrier_* helper·J1-J7 判据块拆解·self-test 11/11 输出逐字节一致）。
+> - **T2 轻症七件**：perf_monitor._render_optional_sections(16)/check_perf_shadow.report(16)/check_governance_docs.main(17)/ledger_close_check.main(17)/plates_verify.main(17)/scan_targets.classify_file(17)/visual_regression_probe._diff_snapshots(17) 全部清零（抽条件块为 _ 前缀 helper·行为零变化）。
+> - **T3 验收**：改写完整性判据（E-199 新判据首次护航 subagent 分包）8 文件 0 FAIL + self-test 全过（11/11·9/9·3/3·2+4+3/4/4）+ CLI smoke 8/8 + **全量 pytest 1213 passed 零回归** + guardrails 双档绿。
+> - **T4 过程记录**：轻症包 subagent 因平台使用限额中断——8 件中 7 件已完成、check_audit_trigger(18) 未动；中断后逐文件验收确认已完成件全部合规·未完成件保持原样（无半成品残留）。**剩余 53 处**（本轮清单内 8 处未完成：check_audit_trigger 18/check_cross_line_rewrite 18/j1_name_audit 18/tmpe_tidy 19/refresh_icon_paths 23/gen_folder_docs 29/check_review_trigger 23/check_emoji_icons 21+16 + 清单外 4 处 16 档）→ 后续棘轮轮次消化（每批 10-15 处节奏不变）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1160（2026-11-07）：治理欠账清偿批（复盘+对抗审查派发+Backlog 对账+archive_tier2+台账反填+is_inflight 词表根修）
 
 **本批要点**（用户令「全都开始做」·盘点四面实测后的欠账清偿批）：
@@ -840,7 +862,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1160），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1162），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

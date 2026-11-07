@@ -117,6 +117,42 @@ def notice_lines():
     return lines
 
 
+def _self_test_t6_b2_max(rows):
+    """T6（B2 回归）token 在 W1000、max=1024、末尾追加低号 token 补登记行 W996 → last 必须取 1000。"""
+    b2 = rows(token_at=1000, upto=1024, start=1000,
+              extra=["| W996 | 补登记（欠账补齐） | a | b | 已收官（对抗审查已派发） | s | z |"])
+    ok6, lines6 = evaluate(b2)
+    fails = []
+    if not ok6:
+        fails.append("T6 B2 回归：24 批应触发")
+    elif not any("W1000" in x and "24 批" in x for x in lines6):
+        fails.append("T6 B2 回归：应报「W1000…24 批」而非按文件序算 28 批：%s" % lines6)
+    return fails
+
+
+def _self_test_b_regressions(rows):
+    """T5（B1）/T6（B2）回归组——W1161 自 _self_test 抽出（复杂度降档·文案逐字保留）。"""
+    fails = []
+    # T5（B1 回归）41 批未真审，末行只提泛词「对抗式审查」→ 必须触发（旧实现被静默重置）
+    b1 = rows(token_at=None, upto=1040, start=1001,
+              extra=["| W1041 | 修 W998 遗留问题 | a | b | 已收官（对抗式审查修复批·未打 token） | s | q |"])
+    ok5b, lines5b = evaluate(b1)
+    if not ok5b:
+        fails.append("T5 B1 回归：泛词行不得重置计数（应触发）")
+    if not any("疑似未打标" in x for x in lines5b):
+        fails.append("T5 B1 回归：应给出「疑似未打标」提示")
+
+    # T6（B2 回归）token 在 W1000、max=1024、末尾追加低号 token 补登记行 W996 → last 必须取 1000
+    b2 = rows(token_at=1000, upto=1024, start=1000,
+              extra=["| W996 | 补登记（欠账补齐） | a | b | 已收官（对抗审查已派发） | s | z |"])
+    ok6, lines6 = evaluate(b2)
+    if not ok6:
+        fails.append("T6 B2 回归：24 批应触发")
+    elif not any("W1000" in x and "24 批" in x for x in lines6):
+        fails.append("T6 B2 回归：应报「W1000…24 批」而非按文件序算 28 批：%s" % lines6)
+    return fails
+
+
 def _self_test() -> int:
     """七态自证：阈值两侧 / 不可判定 / 散文豁免 / B1 字样不重置 / B2 取 max 不取文件序 / 疑似提示。"""
     fails = []
@@ -152,23 +188,8 @@ def _self_test() -> int:
     if not ok4:
         fails.append("T4 非台账行提及不应计为登记")
 
-    # T5（B1 回归）41 批未真审，末行只提泛词「对抗式审查」→ 必须触发（旧实现被静默重置）
-    b1 = rows(token_at=None, upto=1040, start=1001,
-              extra=["| W1041 | 修 W998 遗留问题 | a | b | 已收官（对抗式审查修复批·未打 token） | s | q |"])
-    ok5b, lines5b = evaluate(b1)
-    if not ok5b:
-        fails.append("T5 B1 回归：泛词行不得重置计数（应触发）")
-    if not any("疑似未打标" in x for x in lines5b):
-        fails.append("T5 B1 回归：应给出「疑似未打标」提示")
-
-    # T6（B2 回归）token 在 W1000、max=1024、末尾追加低号 token 补登记行 W996 → last 必须取 1000
-    b2 = rows(token_at=1000, upto=1024, start=1000,
-              extra=["| W996 | 补登记（欠账补齐） | a | b | 已收官（对抗审查已派发） | s | z |"])
-    ok6, lines6 = evaluate(b2)
-    if not ok6:
-        fails.append("T6 B2 回归：24 批应触发")
-    elif not any("W1000" in x and "24 批" in x for x in lines6):
-        fails.append("T6 B2 回归：应报「W1000…24 批」而非按文件序算 28 批：%s" % lines6)
+    # T5/T6（B1/B2 回归）抽 helper（W1161 复杂度降档·文案逐字保留）
+    fails.extend(_self_test_b_regressions(rows))
 
     # T6b 主题列写 token、状态列没有 → 不算派发（W1004 自伤实证）
     ok6b, lines6b = evaluate("| W1005 | 触发器改认事件 token「对抗审查已派发」 | a | b | 已收官 | s | x |")

@@ -96,6 +96,27 @@ def graphic_chars(text: str) -> set[str]:
     return out
 
 
+def _scan_body_text(text: str, covered, cats, hits):
+    """E body-text：未被前面形态覆盖的正文具象字符（装饰·不在治理范围，只记数与明细）。"""
+    for lineno, line in enumerate(text.split("\n"), 1):
+        if not CAND_RE.search(line):
+            continue
+        gc = graphic_chars(line)
+        if not gc:
+            continue
+        idxs = [i for i, ch in enumerate(line) if ch in gc]
+        if idxs and all(covered[i] for i in idxs):
+            continue
+        cats["E body-text"] += 1
+        hits.append({
+            "line": lineno,
+            "cat": "E body-text",
+            "tag": "-",
+            "chars": "".join(sorted(graphic_chars(line))),
+            "snippet": re.sub(r"\s+", " ", line.strip())[:80],
+        })
+
+
 def classify_file(text: str):
     cats = collections.Counter()
     hits = []
@@ -151,23 +172,7 @@ def classify_file(text: str):
             for i in range(m.start(), m.end()):
                 covered[i] = True
 
-    for lineno, line in enumerate(text.split("\n"), 1):
-        if not CAND_RE.search(line):
-            continue
-        gc = graphic_chars(line)
-        if not gc:
-            continue
-        idxs = [i for i, ch in enumerate(line) if ch in gc]
-        if idxs and all(covered[i] for i in idxs):
-            continue
-        cats["E body-text"] += 1
-        hits.append({
-            "line": lineno,
-            "cat": "E body-text",
-            "tag": "-",
-            "chars": "".join(sorted(graphic_chars(line))),
-            "snippet": re.sub(r"\s+", " ", line.strip())[:80],
-        })
+    _scan_body_text(text, covered, cats, hits)
     return cats, hits
 
 

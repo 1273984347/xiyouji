@@ -262,6 +262,23 @@ def _fmt_delta(cur, prev, key):
     return " %+.1f%%" % ratio
 
 
+def _scan_oversize_html(site_dir):
+    """C2 OBS-10 全站体积扫描 →（硬超标页, 软超标页）。排除两模板壳。"""
+    over_hard, over_soft = [], []
+    for dirpath, _dirs, files in os.walk(site_dir):
+        for f in sorted(files):
+            if not f.endswith(".html") or f in ("_template.html", "_shell.html"):
+                continue
+            full = os.path.join(dirpath, f)
+            size = os.path.getsize(full)
+            rel = os.path.relpath(full, site_dir).replace(os.sep, "/")
+            if size > OBS10_HARD:
+                over_hard.append(rel)
+            elif size > OBS10_SOFT:
+                over_soft.append(rel)
+    return over_hard, over_soft
+
+
 def report(pages, baseline_path=BASELINE, site_dir=SITE):
     """打印明细 + 汇总行；返回 (exit_code, summary)。C1 缺页 / C2 OBS-10 硬上限超标 = 1。"""
     missing = [p["url"] for p in pages if not p.get("exists")]
@@ -292,18 +309,7 @@ def report(pages, baseline_path=BASELINE, site_dir=SITE):
     batch = _current_batch()
     recorded = any(s.get("batch") == batch for s in samples) if batch else False
     # C2 OBS-10 全站体积（W924 Q2 裁决升格·全站扫描排除两模板壳）：>500KB 判红·>200KB 记观察清单
-    over_hard, over_soft = [], []
-    for dirpath, _dirs, files in os.walk(site_dir):
-        for f in sorted(files):
-            if not f.endswith(".html") or f in ("_template.html", "_shell.html"):
-                continue
-            full = os.path.join(dirpath, f)
-            size = os.path.getsize(full)
-            rel = os.path.relpath(full, site_dir).replace(os.sep, "/")
-            if size > OBS10_HARD:
-                over_hard.append(rel)
-            elif size > OBS10_SOFT:
-                over_soft.append(rel)
+    over_hard, over_soft = _scan_oversize_html(site_dir)
     if over_hard:
         print("C2 OBS-10 硬上限超标 %d 页（>%dKB·W924 Q2 裁决升格·只拦新增劣化）：%s"
               % (len(over_hard), OBS10_HARD // 1024, "、".join(over_hard[:6])))

@@ -257,6 +257,21 @@ def _self_test() -> int:
     return 0
 
 
+def _collect_c3_issues(root, nums, allow_open):
+    """C3（W1053 P-01/P-02）：顶段号修复类 ⇒ spec 五问 + 回归锁必填 → 问题清单。"""
+    c3_issues = []
+    if not allow_open and nums:
+        import subprocess as _sp
+        _r = _sp.run(["git", "-c", "core.quotePath=false", "log", "--format=%s", "-40"],
+                     cwd=root, capture_output=True, text=True, encoding="utf-8")
+        _subjects = (_r.stdout or "").splitlines()
+        for _w in nums:
+            if is_fix_batch(_w, _subjects):
+                c3_issues.extend(check_fix_interrogation(
+                    _w, os.path.join(root, "scripts", "output", "_w%d_spec.json" % _w), _subjects))
+    return c3_issues
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="台账收官回填自检（W931 判据 C）")
     ap.add_argument("--all-sections", action="store_true", help="检查全部 W 段（默认只查现役段）")
@@ -292,16 +307,7 @@ def main() -> int:
         # 已收官批次的漏级联是确定性缺陷（非在途态）——--allow-open 也不豁免
         bad.append({"w": i["w"], "ok": False, "why": i["why"], "cascade": True})
     # C3（W1053 P-01/P-02）：顶段号修复类 ⇒ spec 五问 + 回归锁必填
-    c3_issues = []
-    if not args.allow_open and nums:
-        import subprocess as _sp
-        _r = _sp.run(["git", "-c", "core.quotePath=false", "log", "--format=%s", "-40"],
-                     cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
-        _subjects = (_r.stdout or "").splitlines()
-        for _w in nums:
-            if is_fix_batch(_w, _subjects):
-                c3_issues.extend(check_fix_interrogation(
-                    _w, os.path.join(ROOT, "scripts", "output", "_w%d_spec.json" % _w), _subjects))
+    c3_issues = _collect_c3_issues(ROOT, nums, args.allow_open)
     for why in c3_issues:
         bad.append({"w": nums[0] if nums else 0, "ok": False, "why": why, "c3": True})
     if args.json:

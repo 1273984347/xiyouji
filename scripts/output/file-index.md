@@ -1,3 +1,34 @@
+## W1162 微批轻量通道实施批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W1162 | 改：--light 通道（跳页脚四面/workflows/agents/citation·留五面）+准入硬守卫（非 md 触碰即拒）+ctx.light |
+| docs/11-方案报告/设计与架构方案/微批轻量通道设计-三档与准入判据-2026-10-31.md | W1162 | 改：V1.0 待批 → V1.1 已批准实施（三前提落位说明·微批档暂不开通） |
+| docs/00-导读/W批次编号对账表.md | W1162 | 改：W1162 认领行 |
+| CHANGELOG.md | W1162 | 改：W1162 段落（级联） |
+| scripts/output/_w1162_spec.json | W1162 | 新建：本批 spec |
+| scripts/output/file-index.md | W1162 | 改：W1162 段（级联） |
+| scripts/output/_cascade_files_W1162.txt | W1162 | 新建：级联清单 |
+
+## W1161 存量复杂度棘轮第 1 轮（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_gsap_motion.py | W1161 | 改：check_carrier_text 34→4（9 个 _carrier_* helper·J1-J7 拆解·输出逐字节一致） |
+| scripts/perf_monitor.py | W1161 | 改：_render_optional_sections 16→绿 |
+| scripts/check_perf_shadow.py | W1161 | 改：report 16→绿 |
+| scripts/check_governance_docs.py | W1161 | 改：main 17→绿 |
+| scripts/ledger_close_check.py | W1161 | 改：main 17→绿 |
+| scripts/plates_verify.py | W1161 | 改：main 17→绿 |
+| scripts/scan_targets.py | W1161 | 改：classify_file 17→绿 |
+| scripts/visual_regression_probe.py | W1161 | 改：_diff_snapshots 17→绿 |
+| docs/00-导读/W批次编号对账表.md | W1161 | 改：W1161 认领行 |
+| CHANGELOG.md | W1161 | 改：W1161 段落（级联） |
+| HANDOVER.md | W1161 | 改：最后更新行（级联） |
+| scripts/output/_w1161_spec.json | W1161 | 新建：本批 spec |
+| scripts/output/file-index.md | W1161 | 改：W1161 段（级联） |
+| scripts/output/_cascade_files_W1161.txt | W1161 | 新建：级联清单 |
+
 ## W1160 治理欠账清偿批（2026-11-07）
 
 | 文件 | W | 说明 |
