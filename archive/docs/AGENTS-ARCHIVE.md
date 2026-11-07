@@ -1208,3 +1208,8 @@
 ```text
 2026-11-07（W1153）安全批：GIT_DANGER 前缀族拦截+DENY_WRITE /i+realpath 复检+会话新写脚本拒执行+childEnv 大小写不敏感+RAG CORS 白名单/限速/异常不回显·回归锁 8 例
 ```
+以下为 AGENTS.md 版本脚注早期条目（W1154-W1154）段的原文（单行沿革链·W1159 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-11-07（W1154）治理快批：数字面三处清零+precommit 动态上游+run_all B 根修+下一自由号+scope 接线+docs/11 登记+orchestration_refs 新建
+```

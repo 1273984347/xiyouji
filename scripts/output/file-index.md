@@ -1,3 +1,20 @@
+## W1159 坑表 E-199 批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| pitfalls.md | W1159 | 改：流程组 +1 条 E-199（161→162·总 293）——大块程序化改写三重防线（E-32 同族扩展到 Edit/行扫描工具面） |
+| AGENTS.md | W1159 | 改：坑表计数 292→293+分项行 161→162（级联+计数链） |
+| HANDOVER.md | W1159 | 改：坑表计数三处 292→293（级联+计数链） |
+| .agent/skills/puti-shouye/SKILL.md | W1159 | 改：坑表计数两处 292→293（计数链） |
+| scripts/guardrails/check_rewrite_integrity.py | W1159 | 新建：E-199 机器判据（C1 py_compile/C2 函数集缩水/C3 双定义·自测 5 例） |
+| scripts/guardrails/check_changed.ps1 | W1159 | 改：第 3.5 步接线改写完整性判据+聚合行 |
+| scripts/guardrails/check_changed.sh | W1159 | 改：第 3.5 步接线（CI/pre-commit strict-api 路径） |
+| docs/00-导读/W批次编号对账表.md | W1159 | 改：W1159 认领行 |
+| CHANGELOG.md | W1159 | 改：W1159 段落（级联） |
+| scripts/output/_w1159_spec.json | W1159 | 新建：本批 spec |
+| scripts/output/file-index.md | W1159 | 改：W1159 段（级联） |
+| scripts/output/_cascade_files_W1159.txt | W1159 | 新建：级联清单 |
+
 ## W1158 W1157 遗留收尾批（2026-11-07）
 
 | 文件 | W | 说明 |
