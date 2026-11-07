@@ -1,3 +1,16 @@
+### W1155（2026-11-07）：假绿 P1 批（审计报告落实③：深度审计 21 条 P1 门禁判据修复·各配负样本）
+
+**本批要点**（《全仓逐逻辑深度审计报告-2026-11-06》P1 落实·21 条全清·各配负样本/判据收紧实证）：
+
+> **来源**：用户令「按顺序全部开始」③。**深度审计 90 条中 P1 全部清零**（#62 已由 W1149 修）。
+> - **T1 核心链**：#1 ledger_backfill._self_test 无条件 return 0 → 按 fails 判红；#5 verify site 档并 docs 段（混合批文档 11 段不再跳过）；#6 safe_commit expect-spec+pathspec 并用时声明件「暂存≡工作树」一致性校验（堵未暂存漂移被一并提交）；#13 commit_scope 坏 spec 哨兵异常（SpecBrokenError→FAIL·缺失仍 WARN）。
+> - **T2 判据面**：#10 structure 三括号平衡+零面守卫；#46 story_timeline 双空判红；#47 folder_docs git 失效 fail-closed（exit 2）；#48 citations 恰 100 回断言（缺/多回均红）；#57 design manifest 零条目红；#63 dark_state 基线页缺失+采集面数量断言；#64 screenshot_gates --only 零命中 exit 2；#70 db_schema 锚定执行形态+剥注释行；#72 archive_health git -C ROOT+returncode 检查；#56 pitfall 同号同标题豁免移除（复制粘贴重复可检出·测试改真增量形态）；#55 plan_template CI 干净检出回退 merge-base..HEAD 面；#54 action_refs 补 `--ci` 参数（workflow 每周必炸根修）；#12 chart_values consoleErrors 入判据（三类离线探针环境伪影白名单：file:// 字体 CORS/资源加载失败/file fetch·实跑三轮收敛）+stability=false 判 fail+覆盖缺口进退出码（printSummary 返 nFail）；#11 data_drift 双逗号正则修+单侧键摘要通道（首轮升 FAIL 实测 1702 条存量 schema 分歧·降级 NOTE 计数可见·清理登记后续批）；#9 coverage 收紧为实质调用面三通道（E1 解释器执行/E2 注册表含 js 槽/E3 测试实质执行·import 冒烟不算覆盖）+语料补 pre-commit 钩子面+48 件真未接线存量登记（第 42 槽 0 FAIL·接线或归档另批）；#14 docnums 未声明静默跳过→NOTE 前向要求。
+> - **T3 数据/判据透明**：#15 provenance 汇总句带引文状态分布（verified 6/not_probed 3·与 W1145 的 quote_status 机制衔接）。
+> - **验证**：pitfall 套件 17 过 · provenance 套件 13 过 · ci_wiring 23 过 · chart-values 自测 12/12 · scope 判据自测 6/6 · safe_commit 自测 8/8 · data_drift/structure/citations/db_schema/manifest/orchestration 全绿 · ruff 全过。
+> - **登记去向**：单侧键 1702 条 schema 分歧清理（专批）；48 件未接线脚本接线/归档决策（专批）；#51 基线自服务重写加审批标记（另批）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1154（2026-11-07）：治理快批（审计报告落实②：基础设施报告 §7 P0 十项 + P1 本地项）
 
 **本批要点**（治理快批·《基础设施口径与门禁全量审计报告-2026-11-06》落实·P0 十项+P1 本地项）：
@@ -761,7 +774,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1154），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1155），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

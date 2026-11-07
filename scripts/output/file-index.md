@@ -1,3 +1,68 @@
+## W1155 假绿 P1 批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/ledger_backfill.py | W1155 | 改：#1 self_test 按 fails 判红 |
+| scripts/verify_delivery.py | W1155 | 改：#5 site 档并 docs 段 |
+| scripts/safe_commit.py | W1155 | 改：#6 expect-spec+pathspec 漂移拒绝 |
+| scripts/check_commit_scope.py | W1155 | 改：#13 SpecBrokenError 哨兵+main 捕获 |
+| scripts/check_structure.py | W1155 | 改：#10 三括号平衡+零面守卫 |
+| scripts/check_story_timeline_sync.py | W1155 | 改：#46 双空判红 |
+| scripts/check_folder_docs.py | W1155 | 改：#47 git 失效 fail-closed |
+| scripts/check_citations.py | W1155 | 改：#48 恰 100 回断言 |
+| scripts/check_design_asset_manifest.py | W1155 | 改：#57 零条目红 |
+| scripts/check_dark_state_gate.js | W1155 | 改：#63 基线缺页+数量断言 |
+| scripts/check_screenshot_gates.js | W1155 | 改：#64 --only 零命中 exit 2 |
+| scripts/check_db_schema.py | W1155 | 改：#70 锚定执行形态+剥注释 |
+| scripts/check_archive_health.py | W1155 | 改：#72 -C ROOT+returncode |
+| scripts/check_pitfall_id_unique.py | W1155 | 改：#56 同号同标题豁免移除 |
+| tests/unit/test_w1106_pitfall_id_unique.py | W1155 | 改：测试改真增量形态 |
+| scripts/check_plan_template.py | W1155 | 改：#55 merge-base 回退面 |
+| scripts/check_action_refs.py | W1155 | 改：#54 --ci 参数+透传 |
+| scripts/check_chart_values.js | W1155 | 改：#12 console/stability 入判据+缺口进退出码 |
+| scripts/check_data_drift.js | W1155 | 改：#11 双逗号正则+单侧键摘要通道 |
+| scripts/check_script_coverage.py | W1155 | 改：#9 实质调用面三通道+语料补钩子+分类注入 |
+| scripts/output/script-coverage-baseline.txt | W1155 | 改：48 件存量登记+check_js_syntax 陈旧行删 |
+| scripts/batch_closeout.py | W1155 | 改：#14 docnums 前向 NOTE |
+| scripts/check_dataset_provenance.py | W1155 | 改：#15 汇总句引文状态分布 |
+| tests/unit/test_w1141_gate_mount.py | W1155 | 改：槽数断言改动态对账 |
+| tests/unit/test_w1154_run_all_discovery.py | W1154 | 新增：B 类发现器锁（W1154 随批暂存） |
+| docs/00-导读/W批次编号对账表.md | W1155 | 改：W1155 认领行 |
+| CHANGELOG.md | W1155 | 改：W1155 段落（级联） |
+| HANDOVER.md | W1155 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1155 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1155 | 改：AGENTS 脚注滚动（级联） |
+| README.md | W1155 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1155 | 改：版本面推进（级联） |
+| CITATION.cff | W1155 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1155 | 改：版本面推进（级联） |
+| .github/workflows/README.md | W1155 | 改：版本抬头推进（级联） |
+| scripts/output/file-index.md | W1155 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1155 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1155 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1155 | 改：stats changelog（级联） |
+| docs/INDEX.md | W1155 | 改：docs_index 刷新（级联） |
+| scripts/INDEX.md | W1155 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1155 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1155 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1155 | 改：工具清单刷新 |
+| scripts/output/_w1155_spec.json | W1155 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1155.txt | W1155 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1155 | 改：朱砂缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1155 | 改：朱砂报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1155 | 改：gen_folder_docs 刷新 |
+| tests/unit/README.md | W1155 | 改：gen_folder_docs 刷新 |
+| pytest.ini | W1155 | 改：collected 头注（级联） |
+| site/sitemap.xml | W1155 | 改：gen_sitemap 随批（级联） |
+| site/data/cross-time-danmaku.html | W1155 | 改：页脚短令牌（级联） |
+| site/data/tag-cloud.html | W1155 | 改：页脚短令牌（级联） |
+| site/dukou-engine.html | W1155 | 改：页脚短令牌（级联） |
+| site/index.html | W1155 | 改：页脚短令牌（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1155 | 改：版本抬头（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1155 | 改：台账窗口滚动（级联） |
+| .github/workflows/ci.yml | W1155 | 改：级联连带 |
+| tests/unit/test_ci_wiring.py | W1155 | 改：级联连带 |
+
 ## W1154 治理快批（2026-11-07）
 
 | 文件 | W | 说明 |

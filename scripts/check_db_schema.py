@@ -41,9 +41,12 @@ def check(verbose: bool = True) -> int:
     except OSError as e:
         print("FAIL  P1: 目标文件读取失败（fail-closed·%s）：%s" % (SQLITE_TS.name, e))
         return 1
-    if "foreign_keys = ON" not in db:
-        fails.append("P1: sqlite.ts 缺 pragma foreign_keys = ON（外键声明不开启=级联从未生效）")
-    m = re.search(r"clearAllData\s*\([^)]*\)[^{]*\{[^}]*\}", db, re.S)
+    # W1155（深度审计 #70）：原 P1 全文子串匹配 ⇒ 搬迁纪律**注释**已含该串（删真 pragma 仍绿）；
+    # P2 的 DELETE 匹配含注释原文（// 注释即可满足）⇒ 改锚定执行形态 + 剥注释行。
+    if not re.search(r'^\s*db\.pragma\(\s*["\']foreign_keys = ON["\']', db, re.M):
+        fails.append("P1: sqlite.ts 缺执行形态 pragma foreign_keys = ON（注释形态不再算数·W1155）")
+    _code = "\n".join(ln for ln in db.splitlines() if not ln.strip().startswith("//"))
+    m = re.search(r"clearAllData\s*\([^)]*\)[^{]*\{[^}]*\}", _code, re.S)
     if not m or not all(("DELETE FROM %s" % t) in m.group(0) for t in ("feedback", "messages", "sessions")):
         fails.append("P2: clearAllData 未覆盖 feedback/messages/sessions 三表")
     if not re.search(r"UNIQUE INDEX[^;]*ON feedback\(message_id\)", db) or re.search(

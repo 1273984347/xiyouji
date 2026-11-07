@@ -415,7 +415,13 @@ class _GateContext:
         if self.scope == "full":
             self.active_sections = set(EXPECTED_SECTION_NAMES)
         else:
-            self.active_sections = _SCOPE_CORE | (SCOPE_DOCS_SECTIONS if self.scope == "docs" else SCOPE_SITE_SECTIONS)
+            # W1155（深度审计 #5）：混合批被 _classify_scope 归 site ⇒ 文档侧 11 段
+            # （元信息块/术语一致/引文核验/docs 链接等）在 pre-commit auto 下全部跳过。
+            # 实际上 site 批经常连带 docs 面（台账/CHANGELOG/报告登记）⇒ site 档取两集并集。
+            if self.scope == "site":
+                self.active_sections = _SCOPE_CORE | SCOPE_SITE_SECTIONS | SCOPE_DOCS_SECTIONS
+            else:
+                self.active_sections = _SCOPE_CORE | SCOPE_DOCS_SECTIONS
         print(
             "---- verify_delivery --scope %s（生效段 %d/%d）----"
             % (self.scope, len(self.active_sections), len(EXPECTED_SECTION_NAMES))

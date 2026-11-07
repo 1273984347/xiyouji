@@ -122,7 +122,10 @@ def audit(base="HEAD", lines=None, added=None):
     new_dups = []
     for w, eid, line in added_ids:
         title = line[4 : line.find("（W")] if "（W" in line else line
-        others = [x for x in existing.get(eid, []) if x[1] != title]
+        # W1155（深度审计 #56）：原实现按「标题相同视为自身」豁免 ⇒ 复制粘贴式重复条目
+        # （同号同标题·恰是本槽立项原场景）永远漏检。自身排除改由**新增集合来自基线 diff**
+        # 的生产路径保证（新增条目定义上不在既有表）；全表传入形态属测试域·由测试修正。
+        others = list(existing.get(eid, []))
         if others:
             new_dups.append((eid, w, others))
     return new_dups, dup_existing, added_ids

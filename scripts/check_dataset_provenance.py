@@ -431,12 +431,19 @@ def main():
         + ["标杆档案引文：" + err for err in quote_exactness_errors(edge, search)]
         + page_sync_errors()
     )
+    # W1155（深度审计 #15）：汇总句带引文状态分布——读者可直接区分「已核引文」与
+    # 「not_probed 无引文事件」（原句仅报引文总数·状态分布只在 per-event 字段里）。
+    _ev = edge.get("events") or []
+    _verified = sum(1 for e in _ev if e.get("quote_status") == "verified")
+    _notprobed = sum(1 for e in _ev if e.get("quote_status") == "not_probed")
     if errors:
         for err in errors:
             print("FAIL " + err)
         print("---- 第 61 门禁 数据集溯源：%d FAIL ----" % len(errors))
         return 1
-    print("OK 数据集溯源校验：22 节点 / 32 边 + 9 组标杆事件 + 9 条引文精确 · 引用闭合 · 回目与权重合法")
+    print("OK 数据集溯源校验：22 节点 / 32 边 + 9 组标杆事件 + 9 条引文精确"
+          "（verified %d / not_probed %d 事件）· 引用闭合 · 回目与权重合法"
+          % (_verified, _notprobed))
     print("---- 第 61 门禁 数据集溯源：0 FAIL ----")
     return 0
 

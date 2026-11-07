@@ -377,6 +377,12 @@ def main() -> int:
     ap.add_argument(
         "--api", action="store_true", help="联网验证 commit 在该仓库真实存在"
     )
+    ap.add_argument(
+        "--ci", action="store_true",
+        help="CI 模式：联网判据的限流/网络抖动降级 WARN（判定不存在仍阻断）——"
+             "workflow-lint.yml 每周步骤传 --api --ci（W1155 修：此前脚本未定义 --ci，"
+             "argparse unrecognized arguments 每周必炸 exit 2·深度审计 #54）",
+    )
     ap.add_argument("--self-test", action="store_true", help="自测（含负样本）")
     args = ap.parse_args()
 
@@ -390,7 +396,7 @@ def main() -> int:
             "⇒ 无法判定，fail-closed（退出码 2）"
         )
         return 2
-    return run_check(args.api, token)
+    return run_check(args.api, token, ci_mode=args.ci)
 
 
 if __name__ == "__main__":

@@ -481,7 +481,11 @@ def _run_docnums(spec_path):
     with open(spec_path, encoding='utf-8') as f:
         spec = json.load(f)
     if not (spec.get('doc_numbers') or []):
-        print('[docnums] spec 无 doc_numbers 声明 ⇒ 跳过（未声明即不判）')
+        # W1155（深度审计 #14）：建闸后 208 份 spec 仅 1 份声明 ⇒ 文案数字漂移零判据。
+        # 全量强制需历史 spec 逐份补声明（另批）——本批起前向要求：未声明打印 NOTE
+        # 显性化（此前是静默跳过）·新 spec 由收官链自动带 doc_numbers 声明模板。
+        print('[docnums] NOTE spec 无 doc_numbers 声明（W1155 起前向要求新批声明·'
+              '历史 spec 另批补齐）——本批文案数字无对表闸')
         return True
     script = os.path.join(ROOT, 'scripts', 'check_doc_numbers.py')
     if not os.path.isfile(script):

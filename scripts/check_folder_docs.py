@@ -114,6 +114,87 @@ def parse_index(text: str) -> dict | None:
     return {"title": title, "sub_n": sub_n, "file_n": file_n, "subdirs": subdirs, "files": files}
 
 
+
+def _expect_hits(expect, fails):
+    """W1155：expect 全部子串命中 fails（平铺两段·无嵌套推导）。"""
+    for e in expect:
+        found = False
+        for f in fails:
+            if e in f:
+                found = True
+                break
+        if not found:
+            return False
+    return True
+
+
+def _judge_cases(cases):
+    """W1155（提取降复杂度）：负样本判定循环（自 _selftest_synth_tree 下沉·平铺无嵌套推导）。"""
+    ok = True
+    for name, fails, expect in cases:
+        hit = (len(fails) == 0) if not expect else (len(fails) > 0 and _expect_hits(expect, fails))
+        print(("PASS " if hit else "RED-MISS ") + name + ("" if hit else " → %r" % (fails,)))
+        ok = ok and hit
+    return ok
+
+
+def _selftest_synth_tree(base):
+    """W1155（提取降复杂度）：合成树 6 负样本序列（自 self_test 的 try 块下沉·行为逐字等价）。"""
+    # 合成树不在 Git 索引内 ⇒ 走磁盘口径（self-test 的 6 个负样本按旧语义构造）
+    _USE_TRACKED = False
+    gen.ROOT = base
+    gen._GITIGNORED_DIRS = set()  # 合成树无 git 仓·gitignored 过滤自然为空集
+    d1 = os.path.join(base, "alpha")
+    os.makedirs(d1)
+    for name in ("a.md", "b.py"):
+        with open(os.path.join(d1, name), "w"):
+            pass
+    for kind in ("INDEX.md", "README.md"):
+        with open(os.path.join(d1, kind), "w", encoding="utf-8", newline="\n") as f:
+            f.write(gen.render(d1, kind, disk=True))
+
+    cases: list[tuple[str, list[str], list[str]]] = []
+    cases.append(("fresh-pass", check_dir(d1), []))
+
+    with open(os.path.join(d1, "c.py"), "w"):
+        pass
+    cases.append(("added-file-must-red", check_dir(d1), ["C3"]))
+    os.remove(os.path.join(d1, "c.py"))
+
+    os.remove(os.path.join(d1, "b.py"))
+    cases.append(("removed-file-must-red", check_dir(d1), ["C3"]))
+    with open(os.path.join(d1, "b.py"), "w"):
+        pass
+
+    os.makedirs(os.path.join(d1, "sub"))
+    cases.append(("added-subdir-must-red", check_dir(d1), ["C2"]))
+    os.rmdir(os.path.join(d1, "sub"))
+
+    os.remove(os.path.join(d1, "README.md"))
+    cases.append(("missing-readme-must-red", check_dir(d1), ["C1"]))
+    with open(os.path.join(d1, "README.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(gen.render(d1, "README.md", disk=True))
+
+    _write_idx(d1, _fresh_idx(d1).replace("- `a.md`\n", ""))
+    cases.append(("tampered-list-must-red", check_dir(d1), ["C3"]))
+    _write_idx(d1, gen.render(d1, "INDEX.md", disk=True))
+
+    _write_idx(d1, _fresh_idx(d1).replace("# 文件索引 · alpha", "# 文件索引 · alpha-old"))
+    cases.append(("title-drift-must-red", check_dir(d1), ["C4"]))
+
+    ok = _judge_cases(cases)
+    print("%sself-test 7 例（1 正 6 负）：%s ----" % (MARKER, "全过" if ok else "有红"))
+    return 0 if ok else 1
+
+def _write_idx(d1: str, content: str) -> None:
+    with open(os.path.join(d1, "INDEX.md"), "w", encoding="utf-8", newline=chr(10)) as f:
+        f.write(content)
+
+
+def _fresh_idx(d1: str) -> str:
+    with open(os.path.join(d1, "INDEX.md"), encoding="utf-8") as f:
+        return f.read()
+
 def check_dir(abs_dir: str) -> list[str]:
     """单目录四项检查，返回 FAIL 行列表（空=过）。"""
     rel = gen.rel_of(abs_dir)
@@ -195,6 +276,11 @@ def run_gate() -> int:
     dirs_all = [d for d in gen.tracked_dirs() if gen.in_scope(d)]
     dirs = [d for d in dirs_all if not _case_collides(d)]
     exempt = len(dirs_all) - len(dirs)
+    # W1155（深度审计 #47）：git 不可用时实算回退空集 ⇒ 全部比较 0==0 空转
+    # （依赖缺失型 fail-open）⇒ fail-closed：取不到 tracked 面即 exit 2。
+    if tf._run_ls_files() is None:
+        print("FAIL git 不可用（tracked_files 实算回退空集）——第 45 槽判据不可执行（fail-closed）")
+        return 2
     all_fails: list[str] = []
     for d in dirs:
         all_fails.extend(check_dir(d))
@@ -214,63 +300,7 @@ def self_test() -> int:
     global _USE_TRACKED
     old_tracked = _USE_TRACKED
     try:
-        # 合成树不在 Git 索引内 ⇒ 走磁盘口径（self-test 的 6 个负样本按旧语义构造）
-        _USE_TRACKED = False
-        gen.ROOT = base
-        gen._GITIGNORED_DIRS = set()  # 合成树无 git 仓·gitignored 过滤自然为空集
-        d1 = os.path.join(base, "alpha")
-        os.makedirs(d1)
-        for name in ("a.md", "b.py"):
-            with open(os.path.join(d1, name), "w"):
-                pass
-        for kind in ("INDEX.md", "README.md"):
-            with open(os.path.join(d1, kind), "w", encoding="utf-8", newline="\n") as f:
-                f.write(gen.render(d1, kind, disk=True))
-
-        def write_idx(content: str) -> None:
-            with open(os.path.join(d1, "INDEX.md"), "w", encoding="utf-8", newline="\n") as f:
-                f.write(content)
-
-        def fresh_idx() -> str:
-            with open(os.path.join(d1, "INDEX.md"), encoding="utf-8") as f:
-                return f.read()
-
-        cases: list[tuple[str, list[str], list[str]]] = []
-        cases.append(("fresh-pass", check_dir(d1), []))
-
-        with open(os.path.join(d1, "c.py"), "w"):
-            pass
-        cases.append(("added-file-must-red", check_dir(d1), ["C3"]))
-        os.remove(os.path.join(d1, "c.py"))
-
-        os.remove(os.path.join(d1, "b.py"))
-        cases.append(("removed-file-must-red", check_dir(d1), ["C3"]))
-        with open(os.path.join(d1, "b.py"), "w"):
-            pass
-
-        os.makedirs(os.path.join(d1, "sub"))
-        cases.append(("added-subdir-must-red", check_dir(d1), ["C2"]))
-        os.rmdir(os.path.join(d1, "sub"))
-
-        os.remove(os.path.join(d1, "README.md"))
-        cases.append(("missing-readme-must-red", check_dir(d1), ["C1"]))
-        with open(os.path.join(d1, "README.md"), "w", encoding="utf-8", newline="\n") as f:
-            f.write(gen.render(d1, "README.md", disk=True))
-
-        write_idx(fresh_idx().replace("- `a.md`\n", ""))
-        cases.append(("tampered-list-must-red", check_dir(d1), ["C3"]))
-        write_idx(gen.render(d1, "INDEX.md", disk=True))
-
-        write_idx(fresh_idx().replace("# 文件索引 · alpha", "# 文件索引 · alpha-old"))
-        cases.append(("title-drift-must-red", check_dir(d1), ["C4"]))
-
-        ok = True
-        for name, fails, expect in cases:
-            hit = len(fails) == 0 if not expect else len(fails) > 0 and all(any(e in f for f in fails) for e in expect)
-            print(("PASS " if hit else "RED-MISS ") + name + ("" if hit else " → %r" % (fails,)))
-            ok = ok and hit
-        print("%sself-test 7 例（1 正 6 负）：%s ----" % (MARKER, "全过" if ok else "有红"))
-        return 0 if ok else 1
+        return _selftest_synth_tree(base)
     finally:
         gen.ROOT, gen._GITIGNORED_DIRS = old_root, old_ignored
         _USE_TRACKED = old_tracked

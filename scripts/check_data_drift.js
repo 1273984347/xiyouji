@@ -91,7 +91,7 @@ function normalizeJsStringLiterals(raw) {
 function quoteBareKeysAndDropTrailingCommas(jsonish) {
   return jsonish
     .replace(/([{,]\s*)([\w$\u00C0-\uFFFF][\w$\u00C0-\uFFFF]*?)(\s*:)/g, '$1"$2"$3')
-    .replace(/,,\s*([}\]])/g, '$1');
+    .replace(/,\s*([}\]])/g, '$1');
 }
 
 /** JS 对象字面量 → JSON 字符串。失败返回 null。 */
@@ -132,6 +132,9 @@ function compareTopLevelArrayLengths(label, embedded, json) {
  * 共路深比对（W767）：递归遍历双方皆有的键，数组按位对齐，标量严格比。
  * 仅一侧有的键不计（内嵌为源之子集属设计形态）。深度上限 8 防环。
  */
+// W1155（深度审计 #11）：单侧键摘要通道（计数可见·不进 FAIL·清理为后续批）
+const singleSideNotes = [];
+
 function deepDiff(embedded, json, label, acc, depth = 0) {
   if (depth > 8) return;
   if (embedded === null || json === null) {
@@ -157,7 +160,14 @@ function deepDiff(embedded, json, label, acc, depth = 0) {
     }
     const keys = new Set([...Object.keys(embedded), ...Object.keys(json)]);
     for (const k of keys) {
-      if (!(k in embedded) || !(k in json)) continue;
+      // W1155（深度审计 #11）：单侧键原实现直接 continue ⇒ 键漂移永不报。改记入
+      // **单侧键摘要通道**（计数+样例可见·不进 FAIL）——首轮升 FAIL 实测命中 1702 条
+      // 存量 schema 分歧（n/index 改名、_schema 增补等历史形态），一刀 FAIL 不可执行；
+      // 全量清理登记为后续批（单侧键≠值漂移·共享键的值差异仍走 acc FAIL）。
+      if (!(k in embedded) || !(k in json)) {
+        singleSideNotes.push(label + '.' + k + '（单侧键：' + (k in embedded ? '仅内嵌' : '仅 json') + '）');
+        continue;
+      }
       deepDiff(embedded[k], json[k], `${label}.${k}`, acc, depth + 1);
     }
     return;
@@ -262,6 +272,10 @@ function comparePageAgainstJson(embedded, jsonPath, pageStem, driftBaseline, dee
 
   const acc = [];
   deepDiff(embedded, json, '$', acc);
+  if (singleSideNotes.length) {
+    console.log(`  · 单侧键（schema 分歧·NOTE 计 ${singleSideNotes.length}·样例：${singleSideNotes.slice(0, 3).join(' | ')}）`);
+    singleSideNotes.length = 0;
+  }
   let baselined = 0;
   for (const item of acc) {
     const colon = item.indexOf(': ');

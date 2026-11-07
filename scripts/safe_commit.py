@@ -131,6 +131,20 @@ def _load_spec_file(path):
     return json.load(open(path, encoding="utf-8"))
 
 
+
+
+def _pathspec_drift(pathspecs):
+    """W1155（深度审计 #6）：pathspec 声明件中「已暂存≠工作树」的未暂存漂移清单——
+    expect-spec 校验索引态而 pathspec 提交工作树 ⇒ 二者必须一致（否则先 git add）。"""
+    drift = []
+    for p in pathspecs:
+        pn = p.replace("\\", "/")
+        d = subprocess.run(["git", "diff", "--stat", "--", pn],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace")
+        if d.returncode == 0 and d.stdout.strip():
+            drift.append(pn)
+    return drift
+
 def _verify_expect_spec(expect_spec, staged):
     """--expect-spec 全量判定（W1002/W1004 口径·W1139 group-aware 兜底并入）。
 
@@ -163,7 +177,9 @@ def _verify_expect_spec(expect_spec, staged):
     return None
 
 
-def commit(msg_args, pathspecs, max_retry=1, expect_spec=None):
+def _staged_and_expect_guard(pathspecs, expect_spec):
+    """W1155（提取降复杂度）：commit 前置守卫——staged 取数 + expect-spec 校验 +
+    pathspec 漂移拒绝。返回 (staged, rc_or_None)：rc 非 None 即拒绝退出。"""
     staged = []
     r = subprocess.run(["git", "-c", "core.quotePath=false", "-c", "diff.renames=false",
                         "diff", "--cached", "--name-only"],
@@ -173,7 +189,21 @@ def commit(msg_args, pathspecs, max_retry=1, expect_spec=None):
     if expect_spec:
         _rc = _verify_expect_spec(expect_spec, staged)
         if _rc is not None:
-            return _rc
+            return staged, _rc
+        drift = _pathspec_drift(pathspecs)  # 深度审计 #6
+        if drift:
+            print("[safe_commit] 拒绝：以下声明件存在「已暂存≠工作树」漂移（expect-spec 按"
+                  "索引态校验·pathspec 按工作树提交——二者必须一致）：")
+            for n in drift[:10]:
+                print("      drift: " + n)
+            return staged, 1
+    return staged, None
+
+
+def commit(msg_args, pathspecs, max_retry=1, expect_spec=None):
+    staged, guard_rc = _staged_and_expect_guard(pathspecs, expect_spec)
+    if guard_rc is not None:
+        return guard_rc
     ok, why = _guard_staged(staged, pathspecs, expect_spec)
     if not ok:
         print(why)
