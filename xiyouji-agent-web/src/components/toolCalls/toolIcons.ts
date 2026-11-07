@@ -47,60 +47,82 @@ export type ToolType =
   | 'other';
 
 /**
+ * 引擎工具名归一：小写 + 去下划线，使 `run_command`/`write_file`/`read_file`/
+ * `edit_file`（server/engine/tools.ts 的真实工具名）与历史 PascalCase/无下划线
+ * 写法（bash/write/read…）走同一条判定。
+ * （W1150 根修：此前判定用 `name === 'bash'` 等窄等值，引擎真名全部落空——
+ * 专用面板永不渲染、汇总条全部退化为「其他」，见 toolIcons 头注释与实现的失配。）
+ */
+function normToolName(toolName: string): string {
+  return toolName.toLowerCase().replace(/_/g, '');
+}
+
+/** 图标色板：优先主题令牌；紫/青两色无对应令牌，为既定色板常量（亮暗两态均可读）。 */
+const TOOL_COLORS = {
+  websearch: 'var(--td-brand-color)',
+  webfetch: 'var(--td-success-color)',
+  write: 'var(--td-warning-color)',
+  read: '#722ed1',
+  search: '#13c2c2',
+  danger: 'var(--td-error-color)',
+  task: 'var(--td-warning-color)',
+} as const;
+
+/**
  * 工具名 → 图标与颜色。
  * 之所以保留逐个 `if` 而非查表：原实现的判定顺序即优先级（如 `search|grep` 先于
  * `listdir|ls` 命中），改成表会改变 `ls` 这类同时匹配多条的落点。
  */
 export function getToolIcon(toolName: string): ToolVisual {
-  const name = toolName.toLowerCase();
+  const name = normToolName(toolName);
 
   // Skill 技能调用
   if (name === 'skill') {
     return { icon: Sparkles, color: 'var(--td-warning-color)' };
   }
-  // Bash 命令执行
-  if (name === 'bash') {
+  // Bash 命令执行（引擎名 run_command）
+  if (name === 'bash' || name === 'runcommand') {
     return { icon: Terminal, color: 'var(--td-text-color-secondary)' };
   }
   // Web 搜索
   if (name === 'websearch') {
-    return { icon: Search, color: '#1890ff' };
+    return { icon: Search, color: TOOL_COLORS.websearch };
   }
   // Web 抓取
   if (name === 'webfetch') {
-    return { icon: Globe, color: '#52c41a' };
+    return { icon: Globe, color: TOOL_COLORS.webfetch };
   }
-  // 写入文件
-  if (name === 'write') {
-    return { icon: FileText, color: '#fa8c16' };
+  // 写入文件（引擎名 write_file）
+  if (name === 'write' || name === 'writefile') {
+    return { icon: FileText, color: TOOL_COLORS.write };
   }
-  // 读取文件
+  // 读取文件（引擎名 read_file）
   if (name === 'read' || name === 'readfile') {
-    return { icon: Eye, color: '#722ed1' };
+    return { icon: Eye, color: TOOL_COLORS.read };
   }
-  // 编辑文件
+  // 编辑文件（引擎名 edit_file）
   if (name === 'edit' || name === 'editfile') {
-    return { icon: Edit, color: '#fa8c16' };
+    return { icon: Edit, color: TOOL_COLORS.write };
   }
   // 删除文件
   if (name === 'delete' || name === 'deletefile') {
-    return { icon: Trash2, color: '#ff4d4f' };
+    return { icon: Trash2, color: TOOL_COLORS.danger };
   }
-  // 搜索
-  if (name === 'search' || name === 'grep') {
-    return { icon: FolderSearch, color: '#13c2c2' };
+  // 搜索（引擎名 glob / grep）
+  if (name === 'search' || name === 'grep' || name === 'glob') {
+    return { icon: FolderSearch, color: TOOL_COLORS.search };
   }
   // 列出目录
   if (name === 'listdir' || name === 'ls') {
-    return { icon: FolderSearch, color: '#13c2c2' };
+    return { icon: FolderSearch, color: TOOL_COLORS.search };
   }
   // 图片生成
   if (name === 'imagegen') {
-    return { icon: Image, color: '#f5222d' };
+    return { icon: Image, color: TOOL_COLORS.danger };
   }
   // 任务
   if (name === 'task') {
-    return { icon: Zap, color: '#faad14' };
+    return { icon: Zap, color: TOOL_COLORS.task };
   }
 
   // 默认图标
@@ -109,17 +131,17 @@ export function getToolIcon(toolName: string): ToolVisual {
 
 /** 工具名 → 汇总大类（用于收缩条右侧的图标汇总与去重计数）。 */
 export function getToolType(toolName: string): ToolType {
-  const name = toolName.toLowerCase();
+  const name = normToolName(toolName);
 
   if (name === 'skill') return 'skill';
-  if (name === 'bash') return 'bash';
+  if (name === 'bash' || name === 'runcommand') return 'bash';
   if (name === 'websearch') return 'websearch';
   if (name === 'webfetch') return 'webfetch';
-  if (name === 'write') return 'write';
+  if (name === 'write' || name === 'writefile') return 'write';
   if (name === 'read' || name === 'readfile') return 'read';
   if (name === 'edit' || name === 'editfile') return 'edit';
   if (name === 'delete' || name === 'deletefile') return 'delete';
-  if (name === 'search' || name === 'grep' || name === 'listdir') return 'search';
+  if (name === 'search' || name === 'grep' || name === 'glob' || name === 'listdir') return 'search';
   if (name === 'imagegen') return 'image';
   if (name === 'task') return 'task';
 
@@ -133,12 +155,12 @@ export function getToolType(toolName: string): ToolType {
 export type ToolRenderKind = 'skill' | 'bash' | 'websearch' | 'webfetch' | 'write' | 'generic';
 
 export function getToolRenderKind(toolName: string): ToolRenderKind {
-  const name = toolName.toLowerCase();
+  const name = normToolName(toolName);
   if (name === 'skill') return 'skill';
-  if (name === 'bash') return 'bash';
+  if (name === 'bash' || name === 'runcommand') return 'bash';
   if (name === 'websearch') return 'websearch';
   if (name === 'webfetch') return 'webfetch';
-  if (name === 'write') return 'write';
+  if (name === 'write' || name === 'writefile') return 'write';
   return 'generic';
 }
 

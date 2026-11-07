@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Routes, Route, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { Button } from 'tdesign-react';
 import '@tdesign-react/chat/es/style/index.js';
 
 import { useAgents } from './hooks/useAgents';
@@ -20,6 +21,8 @@ function App() {
       <Route path="/" element={<AppContent />} />
       <Route path="/chat/:sessionId" element={<AppContent />} />
       <Route path="/settings" element={<AppContent />} />
+      {/* W1150：通配兜底——旧路由表无 * 项，未知路径（失效收藏/手输错地址）整页空白连侧栏都不渲染 */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
@@ -33,7 +36,7 @@ function AppContent() {
   // Hooks
   const { theme, toggleTheme } = useTheme();
   const { agents, addAgent, updateAgent, deleteAgent, getAgent } = useAgents();
-  const { models, selectedModel, setSelectedModel, fetchModels, error: modelsError } = useModels();
+  const { models, selectedModel, setSelectedModel, fetchModels, error: modelsError, isLoading: modelsLoading } = useModels();
   const {
     sessions,
     setSessions,
@@ -49,10 +52,13 @@ function AppContent() {
     updateSessionMessages,
     error: sessionsError,
     setError: setSessionsError,
+    isLoading: sessionsLoading,
+    messagesLoadingId,
   } = useSessions();
 
   // W808：把加载失败暴露到界面（此前失败只进 console，表现为「列表空白且无提示」）
   const loadError = sessionsError ?? modelsError ?? null;
+  const [retrying, setRetrying] = useState(false);
 
   // 聊天 Hook
   const {
@@ -136,9 +142,17 @@ function AppContent() {
 
   // Sidebar 状态
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  
+
   // 权限模式状态
   const [permissionMode, setPermissionMode] = useState<PermissionMode>('default');
+
+  // W1150：URL 指向的会话不存在（列表已加载且无加载失败）⇒ 显式提示而非静默渲染「新对话」
+  const sessionNotFound =
+    !isSettingsPage &&
+    Boolean(urlSessionId) &&
+    !sessionsLoading &&
+    !sessionsError &&
+    !currentSession;
 
   return (
     <div 
@@ -151,6 +165,7 @@ function AppContent() {
         currentSessionId={currentSessionId}
         isSettingsPage={isSettingsPage}
         sidebarOpen={sidebarOpen}
+        sessionsLoading={sessionsLoading}
         agents={agents}
         getAgent={getAgent}
         onNewChat={handleNewChat}
@@ -172,6 +187,7 @@ function AppContent() {
           currentSession={currentSession}
           currentAgent={currentAgent}
           models={models}
+          modelsLoading={modelsLoading}
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
           onToggleTheme={toggleTheme}
           onRefreshModels={fetchModels}
@@ -189,17 +205,24 @@ function AppContent() {
             }}
           >
             <span>{loadError}</span>
-            <button
-              type="button"
-              onClick={() => {
-                setSessionsError(null);
-                fetchSessions();
-                fetchModels();
+            {/* W1150：裸 button 改带 loading 态的重试按钮（双击不再并发重复拉取） */}
+            <Button
+              size="small"
+              variant="text"
+              loading={retrying}
+              onClick={async () => {
+                setRetrying(true);
+                try {
+                  setSessionsError(null);
+                  await Promise.all([fetchSessions(), fetchModels()]);
+                } finally {
+                  setRetrying(false);
+                }
               }}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', textDecoration: 'underline' }}
+              style={{ color: 'inherit', textDecoration: 'underline' }}
             >
               重试
-            </button>
+            </Button>
           </div>
         )}
 
@@ -211,6 +234,25 @@ function AppContent() {
             onUpdate={updateAgent}
             onDelete={deleteAgent}
           />
+        ) : sessionNotFound ? (
+          <div className="flex-1 flex items-center justify-center p-8">
+            <div
+              className="flex flex-col items-center gap-4 rounded-lg px-10 py-8"
+              style={{
+                backgroundColor: 'var(--td-bg-color-container)',
+                border: '1px solid var(--td-component-border)',
+                color: 'var(--td-text-color-secondary)',
+              }}
+            >
+              <span className="text-base font-medium" style={{ color: 'var(--td-text-color-primary)' }}>
+                会话不存在或已被删除
+              </span>
+              <span className="text-sm">链接指向的会话在当前列表中找不到，可能已被删除或来自其他工作目录。</span>
+              <Button theme="primary" onClick={() => navigate('/')}>
+                返回首页
+              </Button>
+            </div>
+          </div>
         ) : (
           <ChatPage
             currentSession={currentSession}
@@ -218,6 +260,8 @@ function AppContent() {
             selectedModel={selectedModel}
             agents={agents}
             isLoading={isLoading}
+            modelsLoading={modelsLoading}
+            messagesLoading={messagesLoadingId !== null && messagesLoadingId === currentSessionId}
             inputValue={inputValue}
             permissionRequest={permissionRequest}
             permissionMode={permissionMode}

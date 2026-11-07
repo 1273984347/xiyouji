@@ -47,6 +47,37 @@
 | site/en/（138 件） | W1151 | inline_css 副本同步（同上·W1142 分组登记） |
 | site/reader/（622 件） | W1151 | inline_css 副本同步（同上·W1142 分组登记） |
 
+## W1150 全站 UI/UX 修复升级批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/（1 件） | W1150 | 改：坑表计数 292 两处同步 |
+| .github/workflows/（1 件） | W1150 | 改：级联 workflows README 面（本批） |
+| archive/docs/（2 件） | W1150 | 改：级联脚注滚动（历史沿革迁档） |
+| docs/00-导读/（2 件） | W1150 | 改：W1150 认领行+W1139 幻影冲突回填+腾窗 61→59 段 |
+| docs/agent/（1 件） | W1150 | 改：新增 E-198+流程节计数 161 |
+| scripts/（2 件） | W1150 | 改：head 模板+重定向 stub 补 favicon 三行（T5 根修） |
+| scripts/output/（8 件） | W1150 | 改：级联反向索引段（本批·目录分组立式） |
+| site/（2 件） | W1150 | 改：级联页脚短令牌（本批） |
+| site/data/（2 件） | W1150 | 改：级联页脚短令牌（本批） |
+| site/reader/（102 件） | W1150 | 改：favicon 三行 head 注入（build_reader 模板根修重生 |
+| site/reader/culture/（36 件） | W1150 | 改：favicon 三行 head 注入（build_reader 模板根修重生 |
+| site/reader/essays/（45 件） | W1150 | 改：favicon 三行 head 注入（build_reader 模板根修重生 |
+| site/reader/people/（216 件） | W1150 | 改：favicon 三行 head 注入（build_reader 模板根修重生 |
+| site/reader/poetry/（14 件） | W1150 | 改：favicon 三行 head 注入（build_reader 模板根修重生 |
+| site/reader/themes/（210 件） | W1150 | 改：favicon 三行 head 注入（build_reader 模板根修重生 |
+| xiyouji-agent-web/src/（2 件） | W1150 | 改：通配路由+会话不存在提示卡+加载态消费+重试按钮 loading（T2/T3 |
+| xiyouji-agent-web/src/components/（10 件） | W1150 | 改：映射键改引擎真名+run_command 危险标记+token 化（T1/T |
+| xiyouji-agent-web/src/components/toolCalls/（5 件） | W1150 | 改：引擎工具名归一根修+色板 token 化（T1/T4） |
+| xiyouji-agent-web/src/hooks/（4 件） | W1150 | 改：权限回执失败保留卡片+截断提示+草稿持久化+init 导航（T2/T3） |
+| xiyouji-agent-web/src/pages/（1 件） | W1150 | 改：messagesLoading 防闪现+cwd 默认去硬编码（T3） |
+| CHANGELOG.md | W1150 | 改：级联现役段（本批） |
+| HANDOVER.md | W1150 | 改：级联现役段（本批） |
+| README.md | W1150 | 改：级联批头版本行（本批） |
+| STRUCTURE.md | W1150 | 改：级联批头版本行（本批） |
+| AGENTS.md | W1150 | 改：级联脚注滚动+坑表计数 292+主题分项 161 |
+| CITATION.cff | W1150 | 改：级联版本面（本批） |
+
 ## W1149 reader/dataset 审计修复批（2026-11-06）
 
 | 文件 | W | 说明 |
