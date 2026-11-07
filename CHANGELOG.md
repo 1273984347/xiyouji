@@ -1,3 +1,17 @@
+### W1153（2026-11-07）：安全批（审计报告落实①：agent-web 三根修 + RAG CORS 白名单）
+
+**本批要点**（安全批·两份 2026-11-06 审计报告落实第①批·用户令「按顺序全部开始」并批准改 agent-web 权限边界）：
+
+> **来源**：《全仓逐逻辑深度审计报告-2026-11-06》#27/#28/#29（P0/P1 安全 ⚠ 需用户裁决→本批获批准）+《基础设施口径与门禁全量审计报告》外部接入面 + #30（RAG）。**用户令：Actions 额度归零期间全程本地提交不推送。**
+> - **T1 tools.ts #27 前缀绕过封堵**：`GIT_DANGER` 由长名全匹配改**危险前缀族**拦截（`--no-index|--output|--open|--ext-d|--pager`）——git 支持长选项前缀缩写（`--open=` 即 `--open-files-in-pager=` 缩写·经 pager `sh -c` 任意命令执行），原判据可被缩写绕过；空格形态 `--output <file>` 与 `-O` 前缀维持既有拦截。
+> - **T2 tools.ts #28 大小写 + realpath 复检**：`DENY_WRITE` 的 `.git//` 与门禁脚本两条规则加 `/i`（Windows 文件系统不区分大小写：`.GIT/hooks`、`VERIFY_DELIVERY.PY` 大写形态此前可覆写持久化执行原语与门禁脚本）；`guardPath` 在 realpath 解析后对**真实路径**复检黑名单（首检 relPosix 取自 path.resolve·符号链接/大小写改写后的真实路径可能变形入黑名单外）。
+> - **T3 tools.ts #29 组合逃逸封堵**：会话级 `sessionWrittenScripts` 集合——write_file/edit_file 落盘 scripts/ 下即记名，run_command 对**本会话新写入**的解释器脚本一律拒绝（「先写 scripts/x.py 再 run_command python scripts/x.py」可组合出任意代码执行·绕过命令白名单与受保护路径）；`childEnv` 剔除凭证改大小写不敏感（Windows 环境变量不区分大小写·`llm_api_key` 小写形态此前原样下发）。
+> - **T4 rag_server #30**：CORS 白名单对齐 `scripts/api/api_server.py` P3-2 形态（仅 file://（Origin:null）与本地站点源回显·命中回显**固定常量**防头注入·其余来源不带 CORS 头⇒任意网页无法跨域读取 docs/source 片段）；`/route` 500 改固定文案（原 `%s` 回显内部异常可泄露本地路径/模型栈·细节落 stderr）；新增每 IP 60 次/分固定窗限速（/query /graph /route·stdlib 实现）。
+> - **回归锁 8 例**：TS 4 例（前缀缩写拦 / .GIT 大写拦 / 会话新写脚本拒执行 / childEnv 大小写·tools.test.ts 套件 52 例 51 过 1 skip）+ PY 3 例（CORS 白名单三态 / 限速阈值 / route 异常不回显）+ guardrails/ruff/tsc 全过。
+> - **验证**：tools 套件 51 passed / 1 skipped（pre-existing）· 新增 PY 锁 3 passed · tsc -b 0 错 · ruff 全过 · guardrails 通过 · verify 全绿（级联后）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1152（2026-11-07）：v4 body 行高改值批（--type-body 正文语义消费 1.75→1.80 + --leading-body 对齐 + grid 终裁）
 
 **本批要点**（v4 改值消费批·全站改值 + 终裁·不新增门禁槽 ⇒ 门禁 68 段不变·坑表不新增 ⇒ 计数链不动）：
@@ -722,7 +736,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1152），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1153），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
