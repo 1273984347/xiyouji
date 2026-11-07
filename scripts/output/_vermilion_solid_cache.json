@@ -55,7 +55,7 @@
    }
   },
   "data/chapter-stats.html": {
-   "sha1": "51025d7296998e451b9e5f5f1dadabffe613207a",
+   "sha1": "4383b97436af6a8996fbc18cf4c871468feea86b",
    "counts": {
     "div.kpi-card": 1
    }
@@ -67,7 +67,7 @@
    }
   },
   "data/character-appearance.html": {
-   "sha1": "580d011218d1ddbdaadd7f6612a6d9d8388ebff4",
+   "sha1": "3ce155930271acadfc070ca17c91df94df79dd64",
    "counts": {
     "div.kpi-card": 1
    }
@@ -150,7 +150,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "d063ef65354cae4585db02c0913515127815648c",
+   "sha1": "162cdc3ff8f35e6b26b61cef312278791dc416d1",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -475,7 +475,7 @@
    }
   },
   "data/narratology-16d-network.html": {
-   "sha1": "e879ec5211f50dc43cb99057584a6399a9613092",
+   "sha1": "a53c466824815d583285fa4158834f8ef441c8d1",
    "counts": {
     "div.kpi-card": 1
    }
@@ -563,7 +563,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "ec9cca5e7f86c5d09f8ca4dc4c86dcfba4f7aa5d",
+   "sha1": "347156edfe037bc421484fce12a9d02f31452598",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -590,7 +590,7 @@
    }
   },
   "data/timeline.html": {
-   "sha1": "96ba3173dcc06adc1a9f6d17e2cb815ea32fd786",
+   "sha1": "f403ff85da988af505b4b58d4eb90f6461114603",
    "counts": {
     "div.kpi-card": 1
    }
@@ -651,7 +651,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "771048c8548942392c285e302034d543abbaa1ef",
+   "sha1": "b580da7dc46e84694f61a504272260490d517abb",
    "counts": {
     "button": 1
    }
@@ -663,7 +663,7 @@
    }
   },
   "index.html": {
-   "sha1": "45739137fa67e5d712d0c7b70e40a3be0d297379",
+   "sha1": "67facd744c9133d2f63fb96c1a75f5b5a1815fd1",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -818,7 +818,7 @@
    "counts": {}
   },
   "en/chart-design.html": {
-   "sha1": "7c33709d8c87f8120c8fe7f49f2756c94e1bdcfd",
+   "sha1": "174cbd3fa6a898d12c0fec87b2b3199a6b9b3b97",
    "counts": {
     "div.kpi-card": 1,
     "div.domino-card": 4,
@@ -1410,7 +1410,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "bc278be1b1fc36c7aca4cd2ed6e802c9c7d58ac8",
+   "sha1": "87299b337f9828f72c48904c4b864671882a617b",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1500,5 +1500,5 @@
    }
   }
  },
- "generated_at": "2026-11-07T03:26:45.492Z"
+ "generated_at": "2026-11-07T04:54:26.967Z"
 }

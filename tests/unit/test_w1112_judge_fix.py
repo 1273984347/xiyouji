@@ -19,10 +19,16 @@ def test_same_batch_different_title_is_duplicate():
 
 
 def test_same_entry_itself_not_counted_as_duplicate():
-    """豁免口径的正向侧：既有条目与新增条目「编号+标题完全相同」⇒ 视为自身 ⇒ 不判红。"""
-    line = '- **甲**（W1000 实证·E-500）：甲'
-    dups, _stock, _added = chk.audit('HEAD', [line], [line])
-    assert not dups, '自身被误判为撞号（豁免口径反向失真）'
+    """W1155 语义订正（深度审计 #56）：原「编号+标题相同视为自身」豁免正是复制粘贴
+    重复条目（同号同标题）永不检出的漏洞本体。新语义：added 是真增量（生产路径来自
+    基线 diff，与 existing 无交集）⇒ 不判红；同号（含同标题）即红。"""
+    existing = ['- **甲**（W1000 实证·E-500）：甲']
+    added = ['- **乙**（W1001 实证·E-501）：乙']
+    dups, _stock, _added = chk.audit('HEAD', existing, added)
+    assert not dups, '真增量被误判撞号'
+    copy_line = '- **甲**（W1001 实证·E-500）：甲'
+    dups2, _s2, _a2 = chk.audit('HEAD', existing, [copy_line])
+    assert dups2, '同号复制粘贴形态必须判红（56 修复本体）'
 
 
 def test_resolve_base_returns_usable_ref():
