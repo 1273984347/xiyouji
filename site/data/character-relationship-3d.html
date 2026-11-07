@@ -1289,6 +1289,19 @@ td.num, th.num {
         min-height: 44px;
     }
     
+    .legend-item:not([role="button"]),
+    .legend-cell:not([role="button"]) {
+        min-height: 32px;
+    }
+    
+    .site-footer {
+        padding-bottom: 80px;
+    }
+    
+    body:has(.rag-fab) .site-footer {
+        padding-bottom: 104px;
+    }
+    
     select,
     input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
     label[for] {

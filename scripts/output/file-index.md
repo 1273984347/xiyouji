@@ -1,3 +1,38 @@
+## W1166 移动端收尾微批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css | W1166 | 改：移动端 .site-footer 安全区（80px + body:has(.rag-fab) 104px）+ 纯视觉图例项 min-height 32px |
+| scripts/check_mobile_viewport.py | W1166 | 改：A6 页脚安全区契约（padding-bottom≥54px）+ 自测 5→6 例 |
+| AGENTS.md | W1166 | 改：第 64 槽摘要补 A6 与自测例数 |
+| docs/agent/gates.md | W1166 | 改：第 64 槽 A6 判据与自测 6 例、契约数 5→6 |
+| docs/00-导读/文档规范.md | W1166 | 改：verify full 现役段数 68→69（W1165 挂第 64 槽后实况） |
+| HANDOVER.md | W1166 | 改：里程碑滚动淘汰最老块 + 最后更新行 + 当前进度 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1166 | 改：台账腾窗迁入 W1104（archive_ledger_rows 号序切分） |
+| docs/00-导读/W批次编号对账表.md | W1166 | 改：W1166 认领行 + W1165 收官回填（b64a4435） |
+| scripts/output/_w1166_spec.json | W1166 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1166.txt | W1166 | 新建：级联清单 |
+| scripts/output/_cascade_files_W1165.txt | W1166 | 改：里程碑滚动清单同步 |
+| scripts/output/mobile_viewport_report.json | W1166 | 改：探针复跑（FAIL 0 无回归） |
+| site/（3 件） | W1166 | inline_css 副本同步 + 搜索索引重生成（_template.html / dukou-engine.html / search.html） |
+| site/data/（89 件） | W1166 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1166 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1166 | inline_css 副本同步（同上·W1142 分组登记） |
+| CHANGELOG.md | W1166 | 改：W1166 段落（级联） |
+| scripts/output/file-index.md | W1166 | 改：W1166 段（级联） |
+| .github/workflows/README.md | W1166 | 改：区间行推进（版本面） |
+| CITATION.cff | W1166 | 改：version/date 推进（级联） |
+| README.md | W1166 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1166 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1166 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1166 | 改：逐批明细追加（W1166·级联） |
+| docs/00-导读/项目说明.md | W1166 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1166 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1166 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1166 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1166 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1166 | 改：再生成/验证缓存（级联） |
+
 ## W1165 V4 移动端 375px 回归批（2026-11-07）
 
 | 文件 | W | 说明 |
