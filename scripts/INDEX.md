@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（203）
+## 文件（208）
 
 ### Python 脚本
 
@@ -106,6 +106,7 @@
 - `check_css_orphan_selectors.py`
 - `check_css_var_refs.py`
 - `check_css_var_selfref.py`
+- `check_data_badge_coverage.py`
 - `check_data_copy_chain.py`
 - `check_dataset_manifest.py`
 - `check_dataset_provenance.py`
@@ -135,6 +136,7 @@
 - `check_mobile_viewport.py`
 - `check_motion_ban.py`
 - `check_motion_guard.py`
+- `check_nav_parity.py`
 - `check_no_brand_refs.py`
 - `check_no_goatcounter.py`
 - `check_orchestration_refs.py`
@@ -234,6 +236,9 @@
 - `verify_delivery.py`
 - `version_surface.py`
 - `visual_regression_probe.py`
+- `w1167_analytics_inject.py`
+- `w1167_badge_inject.py`
+- `w1167_nav_inject.py`
 - `worktree_rehearse.py`
 
 ### JavaScript / TypeScript

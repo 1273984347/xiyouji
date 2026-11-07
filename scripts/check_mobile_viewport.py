@@ -10,8 +10,12 @@
     A1 site/system.css 的 `.cite-details summary` 含 min-height ≥ 24px
     A2 `@media (max-width: 640px)` 块内 `.legend-item[role="button"]` 含 min-height
     A3 `.site-footer nav` 含 flex-wrap（防回退为 nowrap 压缩子项 → 中文逐字竖排）
-    A4 `.site-footer nav a` 含 white-space:nowrap
+    A4 `.site-footer nav a` 含 white-space:nowrap（+ min-height ≥ 24px 触摸线）
     A5 site/static/js/cite-box.js 不含 createElement('style')（样式不得倒退回脚本寄生）
+    A6 `@media (max-width: 640px)` 块内 `.site-footer` 含 padding-bottom ≥ 54px（底部浮层安全区）
+    A7 `@media (max-width: 768px)` 块内 `.site-mainnav .nav-item` 含 min-height ≥ 24px **且**
+       min-width ≥ 24px（W1167：WCAG 2.5.8 判双维，只设高度会漏掉「EN」这类窄标签）
+    （A1–A7 的定位一律走 media_blocks 聚合全部同名 @media 块，不再只取首块）
   B 报告采信（动态证据链）：
     B1 scripts/output/mobile_viewport_report.json 存在时其 FAIL 页数必须为 0
     B2 报告旧于 system.css / cite-box.js ⇒ NOTE 提示重跑探针（不判红：探针 84 秒不进 pre-commit）
@@ -36,6 +40,10 @@ CSS_PATH = os.path.join(ROOT, "site", "system.css")
 JS_PATH = os.path.join(ROOT, "site", "static", "js", "cite-box.js")
 REPORT_PATH = os.path.join(ROOT, "scripts", "output", "mobile_viewport_report.json")
 MIN_TAP_PX = 24.0
+
+# A 层契约清单（汇总行计数由此派生——硬编码「6 项」在 W1167 加 A7 后即刻失真，
+# 且加判据时最容易漏改的就是自己的计数，故让数字来自清单本身）
+CONTRACT_IDS = ("A1", "A2", "A3", "A4", "A5", "A6", "A7")
 
 
 LEAF_RULE_RE = re.compile(r"([^{}]+)\{([^{}]*)\}")
@@ -71,8 +79,45 @@ def px_of(decl: str, prop: str) -> float | None:
     return float(m.group(1)) if m else None
 
 
+def media_blocks(css: str, query: str) -> str:
+    """返回**所有**同名 @media 查询块的正文拼接（大括号配平）。
+
+    W1167 实证：system.css 里 `@media (max-width: 768px)` 有 6 个独立块（历史分批追加），
+    首块匹配版会只看第一个 ⇒ 规则写在第 4 块就被判「缺失」——即判据自身失效（假红/假绿
+    取决于运气）。640px 恰好只有一块，所以 A2/A6 此前没暴露这个问题。
+    拼接全部块后，「移动端是否存在该规则」与「规则写在第几块」解耦。
+    """
+    out: list[str] = []
+    pos = 0
+    while True:
+        idx = css.find(query, pos)
+        if idx < 0:
+            break
+        start = css.find("{", idx)
+        if start < 0:
+            break
+        depth = 0
+        end = -1
+        for i in range(start, len(css)):
+            if css[i] == "{":
+                depth += 1
+            elif css[i] == "}":
+                depth -= 1
+                if depth == 0:
+                    end = i
+                    break
+        if end < 0:
+            break
+        out.append(css[start + 1 : end])
+        pos = end + 1
+    return "\n".join(out)
+
+
 def media_block(css: str, query: str) -> str:
-    """返回 @media 查询块的正文（大括号配平·首个匹配）。"""
+    """返回 @media 查询块的正文（大括号配平·首个匹配）。
+
+    保留供逐块定位的历史调用；契约判定一律改用 media_blocks（否则多块 CSS 会漏判）。
+    """
     idx = css.find(query)
     if idx < 0:
         return ""
@@ -159,19 +204,43 @@ def _check_footer_safe_area(mob: str) -> list[str]:
     return []
 
 
+def _check_nav_tap_box(nav_mob: str) -> list[str]:
+    """A7：主导航触摸目标**双维**下限（W1167 视口探针 FAIL 6 页实证）。
+
+    WCAG 2.5.8 判的是「两维都 ≥24px」，只设 min-height 会漏掉宽度维度——正本里「EN」
+    两项字符宽实测 20px，高度合规仍是不合格目标。而探针（B 层）不进 pre-commit，
+    所以这条必须进 A 层静态契约，否则改回单维设置可以静默合入。
+    下限取 min-height≥44（Ask 4 拍板机制值）+ min-width≥24（WCAG 硬线）。
+    """
+    if not nav_mob:
+        return ["A7 缺 @media (max-width: 768px) 移动端块（主导航无触摸尺寸规则）"]
+    blk = css_block(nav_mob, ".site-mainnav .nav-item")
+    if blk is None:
+        return ["A7 移动端块缺 .site-mainnav .nav-item 规则（导航触摸目标无机制保证）"]
+    h = px_of(blk, "min-height")
+    if h is None or h < MIN_TAP_PX:
+        return [f"A7 .site-mainnav .nav-item 缺 min-height≥{MIN_TAP_PX:g}px（实测 {h}）"]
+    w = px_of(blk, "min-width")
+    if w is None or w < MIN_TAP_PX:
+        return [f"A7 .site-mainnav .nav-item 缺 min-width≥{MIN_TAP_PX:g}px（实测 {w}）"
+                "——短标签（EN）高度合规但宽度不足即为不合格触摸目标"]
+    return []
+
+
 def check_static(css: str, js: str) -> list[str]:
-    """A 层判据：按 A1–A6 逐项委托，返回违规描述列表。
+    """A 层判据：按 A1–A7 逐项委托，返回违规描述列表。
 
     拆成单项函数是结构档要求（`too-many-branches` ≤16·W1166 加 A6 后主函数超阈），
     同时让「哪一条契约被破坏」在代码层可见，而不是一长串 if。
     """
-    mob = media_block(css, "@media (max-width: 640px)")
+    mob = media_blocks(css, "@media (max-width: 640px)")
     fails: list[str] = []
     fails += _check_cite_summary(css)
     fails += _check_legend_mobile(mob)
     fails += _check_footer_nav(css)
     fails += _check_js_no_style(js)
     fails += _check_footer_safe_area(mob)
+    fails += _check_nav_tap_box(media_blocks(css, "@media (max-width: 768px)"))
     return fails
 
 
@@ -203,7 +272,7 @@ def check_report() -> tuple[list[str], list[str]]:
     return fails, notes
 
 
-SELF_TEST = [
+_CASES = [
     # (css, js, 期望静态违规数)
     # 1 合约齐备
     ("""\
@@ -249,6 +318,21 @@ SELF_TEST = [
 """, "", 1),
 ]
 
+# A7 合规范式（W1167 引入）：既有用例都是「A1–A6 齐备」的正面基线，加判据后须一并补齐，
+# 否则 A7 会把 6 例全部误判红——用共享片段拼接，而不是六处字面量各改一遍（改漏一处即假绿）。
+NAV_OK = ("@media (max-width: 768px) { .site-mainnav .nav-item, .site-mainnav .nav-brand"
+          " { min-height: 44px; min-width: 44px; } }")
+SELF_TEST = [(css + "\n" + NAV_OK, js, want) for css, js, want in _CASES] + [
+    # 负样本（A7）：只设高度、不设宽度——W1167 探针实抓形态（「EN」宽 20px）
+    ("""
+.cite-details summary { min-height: 44px; }
+@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } .site-footer { padding-bottom: 80px; } }
+.site-footer nav { flex-wrap: wrap; }
+.site-footer nav a { white-space: nowrap; min-height: 24px; }
+@media (max-width: 768px) { .site-mainnav .nav-item { min-height: 44px; } }
+""", "", 1),
+]
+
 
 def self_test() -> int:
     bad = 0
@@ -285,7 +369,7 @@ def main() -> int:
     for n in notes:
         print("NOTE " + n)
     state = "FAIL" if fails else "OK"
-    print(f"{MARKER} 契约 6 项 · 违规 {len(fails)} · 提示 {len(notes)} · {state} ----")
+    print(f"{MARKER} 契约 {len(CONTRACT_IDS)} 项 · 违规 {len(fails)} · 提示 {len(notes)} · {state} ----")
     return 1 if fails else 0
 
 

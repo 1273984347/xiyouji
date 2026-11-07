@@ -538,6 +538,51 @@ h4 { font-size: 18px; font-weight: 500; }
     .wordmark { font-size: 16px; }
 }
 
+.site-mainnav { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.site-mainnav .nav-brand { font-family: var(--font-serif); font-weight: 600; font-size: 15px; color: var(--ink); white-space: nowrap; }
+.site-mainnav .nav-item { font-size: 14px; color: var(--ink-soft); position: relative; white-space: nowrap; transition: color 0.15s; }
+.site-mainnav .nav-item::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-base) var(--ease-out-quart); }
+.site-mainnav .nav-item:hover { color: var(--accent); }
+.site-mainnav .nav-item:hover::after,
+.site-mainnav .nav-item.is-active::after { transform: scaleX(1); }
+.site-mainnav .nav-item.is-active { color: var(--ink); font-weight: 600; }
+header.site-header:has(.site-mainnav) {
+    position: sticky; top: 0; z-index: var(--z-nav);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 16px clamp(20px, 5vw, 64px);
+}
+@media (max-width: 768px) {
+    .site-mainnav { gap: 16px; }
+    
+    .site-mainnav .nav-item,
+    .site-mainnav .nav-brand {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .site-mainnav .nav-item::after { transition: none; }
+}
+
+.data-status-badge {
+    display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    margin: 12px 0 6px; padding: 8px 14px;
+    border: 1px solid var(--line); border-radius: var(--radius-pill);
+    background: var(--paper); font-size: 13px;
+}
+.data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
+.data-status-badge .ds-label { font-weight: 600; color: var(--info); }
+.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
+.data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
+.data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
+.data-status-badge[data-status="sample"] .ds-dot { background: var(--warn); }
+.data-status-badge[data-status="sample"] .ds-label { color: var(--warn); }
+
 .hero {
     background: var(--dark);
     background-image: url('static/images/ink-mountains-hero.webp');

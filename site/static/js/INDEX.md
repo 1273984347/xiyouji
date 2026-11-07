@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（15）
+## 文件（16）
 
 ### JavaScript / TypeScript
 
@@ -23,6 +23,7 @@
 - `d3.v7.min.js`
 - `datahub-index.js`
 - `dataset-view.js`
+- `goatcounter.js`
 - `graph-fallback.js`
 - `gsap.min.js`
 - `motion-gsap.js`

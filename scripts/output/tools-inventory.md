@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-08 02:43
+生成时间：2026-11-08 07:25
 
-共 **195** 件（门禁与校验 90 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 76 · 一次性（下划线前缀） 6）
+共 **200** 件（门禁与校验 92 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 79 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（90）
+## 门禁与校验（92）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -40,6 +40,7 @@
 | `check_css_var_refs.py` | CSS 变量引用门禁（第 34 门禁 · W672/WP-1.4）——防 style 块引用未定义 CSS 变量。 |
 | `check_css_var_selfref.py` | check_css_var_selfref.py — CSS 变量**自引用**判据（W1110 新增·随第 54/55/56 槽同批建置）。 |
 | `check_dark_state_gate.js` | scripts/check_dark_state_gate.js — W579：暗色态门禁（O2 常驻化，挂 screenshot-review |
+| `check_data_badge_coverage.py` | check_data_badge_coverage.py — 第 66 门禁 · 数据徽标覆盖（W1167 · MVP 迁移批③） |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
 | `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
 | `check_dataset_manifest.py` | 第 63 门禁：dataset 清单与 schema 对拍（README ↔ 磁盘 / 量纲 / 端点 / 空值 / 废弃标记）。 |
@@ -71,8 +72,9 @@
 | `check_mobile_viewport.py` | check_mobile_viewport.py — 第 64 门禁 · 移动视口触摸与裁剪（W1165 · V4 375px 回归） |
 | `check_motion_ban.py` | check_motion_ban.py — Phase E E6 转正门禁（D4 动效禁止清单） |
 | `check_motion_guard.py` | check_motion_guard.py — d3 动效守卫覆盖率判据（W1135·遗留① 根治 + 防复发） |
+| `check_nav_parity.py` | check_nav_parity.py — 第 65 门禁 · 导航一致性（W1167 · MVP 迁移批③） |
 | `check_no_brand_refs.py` | check_no_brand_refs.py — 品牌字面量零命中守卫（W836·N2「归档检测器复活到活面」） |
-| `check_no_goatcounter.py` | check_no_goatcounter.py — GoatCounter 退役防回退守卫（W806 建立·CI 侧接线）。 |
+| `check_no_goatcounter.py` | check_no_goatcounter.py — 统计「具名例外面」对账守卫（W806 建立 · W1167 重指向）。 |
 | `check_orchestration_refs.py` | check_orchestration_refs.py —— 编排面引用存在性门禁（W1154 新建·基础设施审计 §6 建议）。 |
 | `check_page_admission.py` | check_page_admission.py — 新建页准入门禁（W916 建置·C-W818-01 清偿·静态版）。 |
 | `check_parser_anchor_coverage.py` | check_parser_anchor_coverage.py — 解析器锚点覆盖面扫描（W965 沉淀·W964 双虫探针常驻化）。 |
@@ -146,7 +148,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（76）
+## 工具（79）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -225,6 +227,9 @@
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `version_surface.py` | version_surface.py — 版本面（跨文件字面量）幂等推进器（W1114）。 |
 | `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
+| `w1167_analytics_inject.py` | w1167_analytics_inject.py — 第⑤步 双轨统计注入器（A 方案：GA4 海外面 + GoatCounter 大陆面） |
+| `w1167_badge_inject.py` | W1167② 三态数据徽标分发生成器（正本=本文件；文案与 spark-output 链路 STATUS_* 对齐）。 |
+| `w1167_nav_inject.py` | W1167① 主导航单组件分发生成器（正本=本文件内 CANONICAL，改导航只改这里）。 |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
 ## 一次性（下划线前缀）（6）

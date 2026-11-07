@@ -122,13 +122,15 @@ EXPECTED_SECTION_NAMES = [
     "reader完整性",
     "数据集清单",
     "移动视口",
+    "导航一致性",
+    "数据徽标",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
-# 17 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14·W1141 加「数据集溯源」=15·W1149 加「reader完整性」「数据集清单」=17）恒跑不跳；跳过只作用于
-# 55 个 subprocess 委托段（68 段 - 13 内联/bespoke·W1149 实核：_SIMPLE×18+_STRICT×37 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
+# 19 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14·W1141 加「数据集溯源」=15·W1149 加「reader完整性」「数据集清单」=17·W1167 加「导航一致性」「数据徽标」=19）恒跑不跳；跳过只作用于
+# 57 个 subprocess 委托段（70 段 - 13 内联/bespoke·W1149 实核：_SIMPLE×18+_STRICT×37 注册表派生·W1167 加 65/66 两 STRICT 段·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -213,6 +215,8 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "reader完整性",  # W1149：恒跑——reader 占位/链接/h1/标题与改动范围无关（扫 623 页·秒级）
     "数据集清单",  # W1149：恒跑——README/量纲/哨兵/端点/空值与改动范围无关（读 dataset JSON·毫秒级）
     "移动视口",  # W1165：恒跑——CSS/JS 契约与改动范围无关（读 2 个文件 + 报告 JSON·毫秒级）
+    "导航一致性",  # W1167：恒跑——audit-1 major 判据化，859 页静态扫描毫秒级，与改动范围无关
+    "数据徽标",  # W1167：恒跑——story-2 AC1/AC3 判据化，88 页静态扫描毫秒级
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -1133,6 +1137,31 @@ _STRICT_GATES = [
         fail_msg="移动视口触摸/裁剪契约违规（本批新增第 64 槽）",
         marker_msg="移动视口槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
         ok_msg="移动视口门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1167（MVP 迁移批③）：audit-1 唯一 major 的判据化——主导航正本分发全站一致（brief 定量
+    # 「导航一致率 100%」机器形态）。判据同源引用 w1167_nav_inject 正本，不复制清单。
+    _StrictGate(
+        section="导航一致性",
+        script="check_nav_parity.py",
+        timeout=120,
+        marker="---- 第 65 门禁 导航一致性：",
+        crash_msg="导航一致性槽执行异常（第 65 槽·crash 即拦）: %s",
+        fail_msg="主导航正本一致性违规（第 65 槽·audit-1 判据化）",
+        marker_msg="导航一致性槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="导航一致性门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1167：story-2 三态徽标覆盖+读者语言判据化（audit-6 透明度不一致的清偿面）。
+    _StrictGate(
+        section="数据徽标",
+        script="check_data_badge_coverage.py",
+        timeout=60,
+        marker="---- 第 66 门禁 数据徽标：",
+        crash_msg="数据徽标槽执行异常（第 66 槽·crash 即拦）: %s",
+        fail_msg="三态徽标覆盖/文案违规（第 66 槽·story-2 判据化）",
+        marker_msg="数据徽标槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="数据徽标门禁通过（%s）",
         ok_line=-1,
     ),
 ]

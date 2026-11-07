@@ -1,21 +1,30 @@
-r"""W806 专项测试：scripts/check_no_goatcounter.py（GoatCounter 退役防回退守卫）
+r"""统计具名例外面对账守卫专项测试（W806 建 · W1167 判据重指向）
 
 ## 为什么测这个脚本
 
-W806 裁决「彻底退役 GoatCounter」后，防回退面只剩这一道机器防线：页面若被重新
-注入埋点标签、或 CSP 又放行该外域，**没有其他门禁会红**（CSP 漂移门禁只校验
-「meta 与生成器输出一致」，不校验「该不该放行这个域」；脚本覆盖门禁只管脚本存废）。
+W806 的守卫形态是「GoatCounter 存在即红」。W1167 用户拍板 G0-1 把统计改为双轨具名例外
+（GoatCounter 大陆面 + GA4 海外面），旧裁决被推翻——**但被推翻的是裁决，不是防线**：
+现在真的存在外域统计面，失控风险比退役期更大。守卫因此从「不得存在」重指向
+「必须等于具名例外全集」（判据定义见脚本头注 C1-C5）。
+
+本测试的存在意义随之变为两条，缺一即失守：
+① 越界形态必须命中对应 C 码（原防回退面）；
+② **规范形态必须放行**（新增的正向证据——否则重指向只是换了个误报器，
+   铁律 23「每条保护逻辑要配一条它真的生效的正向证据」）。
+
 守卫自身若判据失效（模式写宽/写窄、忽略规则放水），该防线会静默归零——
-项目 W663/W709 教训：门禁自身漂移要靠点检抓。
+项目 W663/W709 教训：门禁自身漂移要靠点检抓。W1167 实证形态：初版沿用
+`data-goatcounter` 前缀子串，把导航正本的事件属性 `data-goatcounter-click` 误判成追踪标签，
+现网直接 1 FAIL——两形态用途不同，必须分形态定义（G3 已锁住两种形态都拦）。
 
 ## 覆盖判据
 
-  G1 现网实跑 0 FAIL（当前仓库真实状态·退役已落地）
-  G2 自检：`--self-test` 5/5（1 正 4 负）且退出码 0
-  G3 判据单元：scan() 对四类回退（埋点标签 / 外域放行 / 追踪脚本文件 / 注入器文件）
-     必须给出对应 C1-C4 码
+  G1 现网实跑 0 FAIL（例外面 == 具名全集）
+  G2 自检：`--self-test` 8/8（2 正 6 负）且退出码 0
+  G3 判据单元：规范形态放行 + C1 无 MARK / C2 他人端点 / C3 影子脚本 /
+     C4 第二写入口（标签与事件两形态）/ C5 双源分叉
   G4 忽略规则：守卫自身与 `__pycache__` 字节码不参与判定（自指误报防线）
-  G5 CLI 退出码语义：现网实跑退出码 0（自检形态退出码亦为 0）
+  G5 CLI 退出码语义：现网实跑与自检形态均退出码 0
 
 ## 手法
 
@@ -62,40 +71,59 @@ def test_g1_repo_clean():
 
 
 def test_g2_self_test():
-    """G2 自检：5/5 且退出码 0。"""
+    """G2 自检：8/8（2 正 + 6 负）且退出码 0。"""
     res = _run("--self-test")
     assert res.returncode == 0, res.stdout + res.stderr
-    assert res.stdout.count("PASS") == 5, res.stdout
+    assert res.stdout.count("PASS") == 8, res.stdout
     assert "SELF_TEST_OK" in res.stdout
 
 
 def test_g3_judgements(tmp_path):
-    """G3 判据单元：四类回退分别命中 C1-C4。"""
+    """G3 判据单元：具名例外面越界分别命中 C1-C5，规范形态必须放行。"""
     site, scripts = _tree(tmp_path)
-    assert guard.scan(str(site), str(scripts)) == []
+    truth = guard._load_truth()
+    assert guard.scan(str(site), str(scripts), truth) == []
 
-    # C1 埋点标签
-    (site / "a.html").write_text(
-        '<script data-goatcounter="https://x.goatcounter.com/count" async '
-        'src="../static/js/goatcounter.js"></script>\n', encoding="utf-8")
-    assert any(f.startswith("C1") for f in guard.scan(str(site), str(scripts)))
-
-    # C2 外域放行残留（CSP connect-src）
-    (site / "a.html").write_text(
-        '<meta http-equiv="Content-Security-Policy" '
-        'content="connect-src \'self\' https://1273984347.goatcounter.com">\n',
-        encoding="utf-8")
-    assert any(f.startswith("C2") for f in guard.scan(str(site), str(scripts)))
-
-    # C3 站点残留追踪脚本
-    (site / "a.html").unlink()
+    # 正样本：规范形态（MARK + 正本端点 + 正本脚本路径）必须零 FAIL
+    # ——W1167 重指向判据的核心正向证据：改造后的守卫不是「换了个误报器」
     (site / "static" / "js" / "goatcounter.js").write_text("// tracker\n", encoding="utf-8")
-    assert any(f.startswith("C3") for f in guard.scan(str(site), str(scripts)))
+    (site / "a.html").write_text(
+        '%s\n<script data-goatcounter="%s" async src="static/js/goatcounter.js"></script>\n'
+        % (truth["mark"], truth["endpoint"]), encoding="utf-8")
+    assert guard.scan(str(site), str(scripts), truth) == [], "规范形态被误判"
 
-    # C4 工具残留注入器
+    # C1：有追踪标签、无 MARK（手工散落埋点）
+    (site / "a.html").write_text(
+        '<script data-goatcounter="%s" async src="static/js/goatcounter.js"></script>\n'
+        % truth["endpoint"], encoding="utf-8")
+    assert any(f.startswith("C1") for f in guard.scan(str(site), str(scripts), truth))
+
+    # C2：端点被换成他人账号（例外面扩散）
+    (site / "a.html").write_text(
+        '%s\n<script data-goatcounter="https://someone-else.goatcounter.com/count" '
+        'async src="static/js/goatcounter.js"></script>\n' % truth["mark"], encoding="utf-8")
+    assert any(f.startswith("C2") for f in guard.scan(str(site), str(scripts), truth))
+
+    # C3：第二份追踪脚本（影子文件；正本路径自身不算越界，上面正样本已证）
+    (site / "a.html").unlink()
     (site / "static" / "js" / "goatcounter.js").unlink()
-    (scripts / "inject_goatcounter.py").write_text("# injector\n", encoding="utf-8")
-    assert any(f.startswith("C4") for f in guard.scan(str(site), str(scripts)))
+    (site / "static" / "js" / "goatcounter-legacy.js").write_text("// second\n", encoding="utf-8")
+    assert any(f.startswith("C3") for f in guard.scan(str(site), str(scripts), truth))
+
+    # C4：第二个写入口——标签形态与事件属性形态都要拦（W1167 实证前缀子串判据会混这两态）
+    (site / "static" / "js" / "goatcounter-legacy.js").unlink()
+    (scripts / "ad_hoc_inject.py").write_text('X = "data-goatcounter=\\"https://x\\""\n',
+                                              encoding="utf-8")
+    assert any(f.startswith("C4") for f in guard.scan(str(site), str(scripts), truth))
+    (scripts / "ad_hoc_inject.py").write_text('X = \'data-goatcounter-click="nav-hacked"\'\n',
+                                              encoding="utf-8")
+    assert any(f.startswith("C4") for f in guard.scan(str(site), str(scripts), truth))
+    (scripts / "ad_hoc_inject.py").unlink()
+
+    # C5：配置端点与 CSP 白名单分叉
+    desync = dict(truth)
+    desync["csp_hosts"] = {"other.goatcounter.com"}
+    assert any(f.startswith("C5") for f in guard.scan(str(site), str(scripts), desync))
 
 
 def test_g4_ignore_rules(tmp_path):
