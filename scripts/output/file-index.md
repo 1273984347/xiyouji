@@ -1,3 +1,56 @@
+## W1154 治理快批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/新Agent启动Prompt.md | W1154 | 改：可视化页 87→88/data HTML 88→89（N5） |
+| docs/00-导读/文档规范.md | W1154 | 改：「现役 66 段」→68（N2） |
+| AGENTS.md | W1154 | 改：§4.2 61 槽→63 三处 + 第 16 槽退役标注 + 脚注/版本（级联） |
+| docs/agent/gates.md | W1154 | 改：第 49 槽页数 88→89 + _w857 死指针订正 |
+| .git/hooks/pre-commit | W1154 | 改：origin/dev→动态 @{u} + gitleaks 缺失 WARN |
+| assets/promo/README.md | W1154 | 改：_w892 死指针→已归档说明 |
+| scripts/plates_verify.py | W1154 | 改：docstring 转正名 |
+| scripts/gen_folder_docs.py | W1154 | 改：重复 _kind_exists 去重 |
+| Makefile | W1154 | 改：.PHONY 补 cross-line |
+| scripts/run_all.py | W1154 | 改：discover_scripts 排除 __init__/_ 前缀 + main-guard 优先 |
+| tests/unit/test_w1154_run_all_discovery.py | W1154 | 新增：B 类发现器回归锁 2 例 |
+| scripts/agent_start.py | W1154 | 改：下一自由号=台账 max(W)+1（碑化块依赖移除） |
+| pytest.ini | W1154 | 改：stats 行去重 + 52 段指针化 + collected 头注（级联） |
+| .github/workflows/screenshot-review.yml | W1154 | 改：内联 case 判定改调 check_screenshot_scope.py（接线） |
+| tests/unit/test_ci_wiring.py | W1154 | 改：接线回归锁（断言脚本名+无内联残留） |
+| docs/11-方案报告/README.md | W1154 | 改：9 份报告补登记 |
+| scripts/check_index_health.py | W1154 | 改：新增 check_docs11_registration 双向对账 |
+| docs/agent/batch-closeout-checklist.md | W1154 | 改：段窗/verify 段指针化 + 禁 add -A |
+| .pre-commit-config.yaml | W1154 | 改：删休眠钩子 drl-contracts/check-untracked + 非等价声明 |
+| scripts/check_orchestration_refs.py | W1154 | 新增：编排面引用存在性门禁（双边界判据+self-test） |
+| .github/workflows/ci.yml | W1154 | 改：verify-delivery job 挂 orchestration_refs 步 |
+| scripts/batch_closeout.py | W1154 | 改：index 步接入 gen_sitemap.py |
+| site/sitemap.xml | W1154 | 改：gen_sitemap 重生成（854 URLs·随批） |
+| docs/00-导读/W批次编号对账表.md | W1154 | 改：W1154 认领行 |
+| CHANGELOG.md | W1154 | 改：W1154 段落（级联） |
+| HANDOVER.md | W1154 | 改：最后更新链+里程碑块（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1154 | 改：AGENTS 脚注滚动归档（级联） |
+| README.md | W1154 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1154 | 改：版本面推进（级联） |
+| CITATION.cff | W1154 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1154 | 改：版本面推进（级联） |
+| .github/workflows/README.md | W1154 | 改：版本抬头推进（级联） |
+| scripts/output/file-index.md | W1154 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1154 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1154 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1154 | 改：stats changelog 面（级联） |
+| docs/INDEX.md | W1154 | 改：docs_index 刷新（级联） |
+| scripts/INDEX.md | W1154 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1154 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1154 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1154 | 改：工具清单刷新 |
+| scripts/output/_w1154_spec.json | W1154 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1154.txt | W1154 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1154 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1154 | 改：朱砂实底报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1154 | 改：gen_folder_docs 刷新 |
+| tests/unit/README.md | W1154 | 改：gen_folder_docs 刷新 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1154 | 改：台账窗口滚动归档（级联） |
+
 ## W1153 安全批（2026-11-07）
 
 | 文件 | W | 说明 |

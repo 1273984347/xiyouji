@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（201）
+## 文件（202）
 
 ### Markdown 文档
 
@@ -140,6 +140,7 @@
 - `check_motion_guard.py`
 - `check_no_brand_refs.py`
 - `check_no_goatcounter.py`
+- `check_orchestration_refs.py`
 - `check_page_admission.py`
 - `check_parser_anchor_coverage.py`
 - `check_perf_shadow.py`

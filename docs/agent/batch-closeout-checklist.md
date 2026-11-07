@@ -20,7 +20,7 @@
 - [ ] `batch_cascade.py --spec … --apply`
 
 ## 3. 回窗（级联自带，但独立跑更稳）
-- [ ] `archive_segments.py --apply`（CHANGELOG + file-index 段窗 109）
+- [ ] `archive_segments.py --apply`（CHANGELOG + file-index 段窗 110（随批演进·以 check_doc_size_budget 实测为准））
 - [ ] `archive_ledger_rows.py --apply`（台账行窗 60）
 
 ## 4. 上批一次性脚本归位
@@ -29,9 +29,9 @@
       （不归位则本批提交后立刻红，且下一批开不了工）
 
 ## 5. 目录文档（顺序不能反）
-- [ ] **先 `git add -A`**
+- [ ] **先 `git add 按 spec 精确路径（禁 add -A·W1124 禁代提）`**
 - [ ] 再 `python scripts/gen_folder_docs.py --refresh`（生成器按 Git 索引收集，顺序反了必漏新件）
-- [ ] 再 `git add -A`（把生成结果收进索引）
+- [ ] 再 `git add 按 spec 精确路径（禁 add -A·W1124 禁代提）`（把生成结果收进索引）
 - [ ] **再同步一次 spec 的 `file_index_rows`**——refresh 会新增/改动目录文档，若 spec 不同步，第 51 槽必判「索引含本批 spec 之外的文件」（W1019–W1028 连踩 6 次，每次都白跑一轮门禁）
 
 ## 6. 计数、统计与文档连锁
@@ -43,7 +43,7 @@
 - [ ] `python scripts/stats.py --w W####` 刷新，再 `--check` 求 24 键零差异
 
 ## 7. 全量门禁（约 13 分钟·务必后台跑）
-- [ ] **pytest 本地必跑（W1088 增补）**：`python -m pytest tests -q`——全量 verify 57 段
+- [ ] **pytest 本地必跑（W1088 增补）**：`python -m pytest tests -q`——全量 verify 现役段数（以 verify 自洽锁输出为准）
       不含 pytest，本地 verify 绿≠CI 绿；漏跑=CI「Unit Tests」红来回
       （W1071/W1074/W1075 三批实证·各挨一次 CI 红才补跑）
 - [ ] `python scripts/verify_delivery.py`（前台 15 分钟会超时被杀，且杀掉不留完整日志）

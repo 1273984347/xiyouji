@@ -393,7 +393,8 @@ def _run_pycompile():
 
 def _run_index():
     """index 步：搜索索引 + 文档索引。"""
-    for cmd in ('_gen_search_index.py', 'docs_index.py'):
+    # W1154（基础设施审计 §4-3）：index 步补 gen_sitemap——新增页面批次此前靠第 7 槽报红后手工补；幂等生成随批入库
+    for cmd in ('_gen_search_index.py', 'docs_index.py', 'gen_sitemap.py'):
         rc, out = run([sys.executable, 'scripts/' + cmd])
         print('[index] %s -> %s' % (cmd, 'OK' if rc == 0 else 'FAIL'))
         if rc != 0:

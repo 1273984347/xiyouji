@@ -12,7 +12,7 @@
 #   - 任一命令失败即整体退出（makefile 默认行为）
 #   - 目标注释 `## ` 由 help 目标自动解析
 
-.PHONY: help analyze analyze-list analyze-only screenshots slice audit lint links test ci clean release data-validate docs-index validate-en ledger
+.PHONY: help analyze analyze-list analyze-only screenshots slice audit lint links test ci clean release data-validate docs-index validate-en ledger cross-line
 
 help: ## 显示所有目标
 	@python -c "import re; lines=open('Makefile',encoding='utf-8').read().splitlines(); print('\n用法:\n  make <target>\n\n目标:'); [print(f'  {m.group(1):<15} {m.group(2)}') for l in lines for m in [re.match(r'^([a-zA-Z_-]+):.*?##\s*(.*)', l)] if m]; print('')"

@@ -8,7 +8,7 @@
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
 
-> 当前批次：W1153（2026-11-07）— 安全批 两份审计报告落实 用户令按顺序全部开始并批准改 agent-web 权限边界 tools.ts 三根修 GIT_DANGER 前缀族拦截 堵前缀缩写绕过 DENY_WRITE 加 i 加 realpath 复检 堵大写与符号链接变形 会话新写脚本拒执行 childEnv 大小写不敏感 堵写后跑组合逃逸 rag CORS 白名单对齐 api 形态 route 异常不回显 限速 回归锁八例—A1-A6
+> 当前批次：W1154（2026-11-07）— 治理快批 基础设施审计落实 数字面三处 gov_claims 清零 gates 页数与退役标注 precommit 动态上游加 gitleaks 留痕 死指针三处 去重 PHONY run_all B 类发现器根修 下一自由号 max 加一 pytestini 去重 screenshot scope 接线 根修 W1126 声明不落地 docs11 登记九份 index_health 扩面 checklist 修正 休眠钩子清理 orchestration_refs 新建接 ci sitemap 入收官链—A1-A6
 > 当前批次：W1132（2026-11-04）— 提交范围门禁兜底分支透传 merge 带入面 + 带入段不再劫持归属 + 单测 4 例 + 计数链不动—A1-A6
 > 当前批次：W1133（2026-11-05）— 台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复 D1/D2/D3—A1-A6
 > 当前批次：W1134（2026-11-04）—前端质感 P0 批五项改动 + 双探针取证：暗色字重降档 / 中文输入防误发与阈值滚动 / 复制对勾淡出 / 打印样式去硬编码—A1-A6

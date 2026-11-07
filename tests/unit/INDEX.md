@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（101）
+## 文件（102）
 
 ### Python 脚本
 
@@ -114,6 +114,7 @@
 - `test_w1151_closeout_add_chunk.py`
 - `test_w1152_body_lh_alignment.py`
 - `test_w1153_rag_cors.py`
+- `test_w1154_run_all_discovery.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 
