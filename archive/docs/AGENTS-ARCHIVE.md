@@ -1193,3 +1193,8 @@
 ```text
 2026-11-07（W1150）UI/UX 批：agent-web 工具名映射等九 P1 根修+reader favicon 生成器根修，详见 CHANGELOG T1-T6。
 ```
+以下为 AGENTS.md 版本脚注早期条目（W1151-W1151）段的原文（单行沿革链·W1156 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-11-07（W1151）v4 type 消费批：type 令牌死序根修（IACVT 实证·序订正）+ --type-number 等值消费（J2 全采样零差异）+ 台账回填与 W1148 行补建 + 旧分支裁决。
+```

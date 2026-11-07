@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-mq72HeWUNW/sha2rhgTGChonFhF89d1hN/V7TGBd3Hs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-29GleYseE1vrJ+wBsDB2O4iyVGiZaIBdfoWM1qDmb/Q=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chart Design · Annotated Journey to the West</title>
@@ -1038,7 +1038,7 @@ td.num, th.num {
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
 }
 .search-box::before {
-    content: "搜";
+    content: "Q";  /* W1156 (#35): zh glyph → EN */
     position: absolute;
     left: 14px;
     top: 50%;
@@ -1335,7 +1335,7 @@ html[data-theme="dark"] .chapter-plate {
             box-shadow: var(--shadow);
         }
         .domino-insight::before {
-            content: "链末洞察 · ";
+            content: "End-of-chain insight · ";  /* W1156 #35 */
             color: var(--chain-color);
             font-weight: 600;
             font-style: normal;
@@ -1418,7 +1418,7 @@ html[data-theme="dark"] .chapter-plate {
             margin-bottom: var(--space-3);
         }
         .domino-cause::before {
-            content: "因 · ";
+            content: "Cause · ";  /* W1156 #35 */
             color: var(--accent-3);
             font-weight: 600;
             font-size: 0.72rem;
@@ -1433,7 +1433,7 @@ html[data-theme="dark"] .chapter-plate {
             border-left: 2px solid var(--chain-color);
         }
         .domino-effect::before {
-            content: "果 → ";
+            content: "Effect → ";  /* W1156 #35 */
             color: var(--chain-color);
             font-weight: 700;
             font-size: 0.72rem;
@@ -1517,7 +1517,7 @@ html[data-theme="dark"] .chapter-plate {
             margin-bottom: 6px;
         }
         .spiral-stage-events::before {
-            content: "关键事件 · ";
+            content: "Key event · ";  /* W1156 #35 */
             color: var(--accent-3);
             font-weight: 600;
             font-size: 0.72rem;
@@ -2970,7 +2970,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const noticeEl = document.getElementById("dataSource");
         if (_allLive) {
             noticeEl.className = "notice live";
-            noticeEl.innerHTML = "Data source: loaded live from <code>../data/json/</code> (running in http server mode)";
+            noticeEl.innerHTML = "Data source: loaded live from <code>../en/json/</code> (running in http server mode)";
         } else {
             noticeEl.innerHTML = "Data source: embedded data (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)";
         }

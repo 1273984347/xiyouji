@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2TClDg73fSzQOwpBorzo05GgLqwUbVlJhZCqMJtP4NY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-Zy+U0PF+e+lwn1DCEeuzMc461YKLR0doSw86T6QYvFo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1zJk2idsl5nzJBIkbGpTAt/rXSZz/km9+XYbJEK/mOY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-Zy+U0PF+e+lwn1DCEeuzMc461YKLR0doSw86T6QYvFo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Annotated Journey to the West · Site-wide Search</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/en/search.html">
@@ -1294,13 +1294,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <body>
 <header class="top">
   <h1>Annotated Journey to the West · Site-wide Search</h1>
-  <p>W338 Data API integration · online recursive search across 42 datasets (/search) · offline file:// fallback to the built-in dataset index</p>
+  <p>Offline catalog search across research docs and site pages · W338 Data API retired for static deployment (W1156 · mirrors zh W1074)</p>
 </header>
 <div id="banner" class="banner">Connecting to Data API…</div>
 <div class="searchbar">
   <input id="q" type="search" placeholder="Search keywords, e.g. Flame Mountain / Sun Wukong / Tathāgata" aria-label="Search">
   <button class="vt-btn" id="go">Search</button>
-  <span class="hint">Online: matches datasets + snippets; offline: filters by dataset name/title only.</span>
+  <span class="hint">Offline: filters by dataset name/title only (W1156 · online Data API branch removed, mirrors zh W1074).</span>
 </div>
 <div id="results"></div>
 <script src="../static/js/vis-tools.js"></script>
@@ -1315,13 +1315,11 @@ function setBanner(html, offline){var b=document.getElementById("banner");b.inne
 function apiFetch(path){return fetch(path,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});}
 
 function probe(){
-  apiFetch("/datasets").then(function(list){
-    API_OK=true;
-    setBanner("Connected to Data API · total "+list.length+" datasets · enter keywords to search across them.",false);
-  }).catch(function(){
-    API_OK=false;
-    setBanner("Offline catalog search: covers all research docs and site pages (title / category / summary match, top 50). Document titles are shown in their original Chinese.",true);
-  });
+  /* W1156（深度审计 #32·W1074 EN 镜像）：/datasets 数据 API 在纯静态部署与 /xiyouji/
+     子路径下不存在，原 probe 每次加载必发一个注定 404 的请求——在线分支移除，恒走
+     离线目录检索（与 zh 页同口径）。 */
+  API_OK=false;
+  setBanner("Offline catalog search: covers all research docs and site pages (title / category / summary match, top 50). Document titles are shown in their original Chinese.",true);
 }
 
 // P2-5 修复：drill 数据拼串转义（Dataset名/路径/片段来自检索数据）

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-CQdLh6LG0xXAaO1oZ0MSt3C+PAt+PcvXdGLQ16nBNcM=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-/iAb/l/Y/bTFSHFr5DLP9rPnzOyBW5FQ/02z75FW3Rs=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 人物出场频次与戏份分析 · 详解西游记</title>
@@ -1567,20 +1567,20 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // 至少 5 个人物 + Top 15 排行所需的辅助人物
     // ============================================================
     const MOCK_CHARACTERS = [
-        {name: "孙悟空",   appearances: 100, mentions: 5000, first_chapter: 1,  color: "#c8463a"},
-        {name: "唐僧",     appearances: 95,  mentions: 3000, first_chapter: 9,  color: "#e9b885"},
-        {name: "猪八戒",   appearances: 85,  mentions: 2500, first_chapter: 18, color: "#C9A063"},
-        {name: "沙僧",     appearances: 80,  mentions: 1500, first_chapter: 22, color: "#3a6b8c"},
-        {name: "观音",     appearances: 30,  mentions: 800,  first_chapter: 8,  color: "#6B8E5A"},
-        {name: "如来",     appearances: 25,  mentions: 600,  first_chapter: 7,  color: "#d4af37"},
-        {name: "玉帝",     appearances: 20,  mentions: 500,  first_chapter: 1,  color: "#9a8c70"},
-        {name: "白龙马",   appearances: 70,  mentions: 700,  first_chapter: 15, color: "#b8a890"},
-        {name: "太白金星", appearances: 15,  mentions: 300,  first_chapter: 3,  color: "#c0b49c"},
-        {name: "牛魔王",   appearances: 12,  mentions: 400,  first_chapter: 41, color: "#8a3a3a"},
-        {name: "铁扇公主", appearances: 8,   mentions: 200,  first_chapter: 59, color: "#a8556a"},
-        {name: "红孩儿",   appearances: 10,  mentions: 250,  first_chapter: 40, color: "#c66868"},
-        {name: "二郎神",   appearances: 8,   mentions: 220,  first_chapter: 6,  color: "#4a7a9a"},
-        {name: "哪吒",     appearances: 12,  mentions: 280,  first_chapter: 4,  color: "#b85a8a"},
+        {name: "孙悟空",   appearances: 96, mentions: 6197, first_chapter: 1,  color: "#c8463a"},
+        {name: "唐僧",     appearances: 92,  mentions: 2726, first_chapter: 7,  color: "#e9b885"},
+        {name: "猪八戒",   appearances: 83,  mentions: 2384, first_chapter: 8, color: "#C9A063"},
+        {name: "沙僧",     appearances: 78,  mentions: 928, first_chapter: 8, color: "#3a6b8c"},
+        {name: "观音",     appearances: 72,  mentions: 906,  first_chapter: 6,  color: "#6B8E5A"},
+        {name: "如来",     appearances: 54,  mentions: 318,  first_chapter: 7,  color: "#d4af37"},
+        {name: "玉帝",     appearances: 41,  mentions: 227,  first_chapter: 1,  color: "#9a8c70"},
+        {name: "白龙马",   appearances: 40,  mentions: 93,  first_chapter: 8, color: "#b8a890"},
+        {name: "太白金星", appearances: 10,  mentions: 31,  first_chapter: 3,  color: "#c0b49c"},
+        {name: "牛魔王",   appearances: 12,  mentions: 49,  first_chapter: 3, color: "#8a3a3a"},
+        {name: "铁扇公主", appearances: 4,   mentions: 31,  first_chapter: 40, color: "#a8556a"},
+        {name: "红孩儿",   appearances: 10,  mentions: 31,  first_chapter: 40, color: "#c66868"},
+        {name: "二郎神",   appearances: 7,   mentions: 51,  first_chapter: 6,  color: "#4a7a9a"},
+        {name: "哪吒",     appearances: 17,  mentions: 110,  first_chapter: 4,  color: "#b85a8a"},
         {name: "镇元大仙", appearances: 5,   mentions: 150,  first_chapter: 24, color: "#6a8a4a"}
     ];
 
@@ -2156,7 +2156,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             console.log('[INFO] 使用嵌入式 mock 数据：', e.message);
             const mock = buildMockData();
             document.getElementById('dataSource').innerHTML =
-                '数据源：<strong>嵌入式 mock 数据</strong>（fallback 状态）。运行 <code>py B_人物/character_appearance.py --input ../source/原文/分回/ --output output/data/character_appearance.json</code> 生成完整数据';
+                '数据源：<strong>嵌入式 mock 数据</strong>（fallback 状态）。运行 <code>py B_人物/character_appearance.py --input ../source/原文/分回/ --output site/data/json/character_appearance.json</code> 生成完整数据';
             return mock;
         }
     }
