@@ -148,17 +148,37 @@ def _pathspec_drift(pathspecs):
 def _verify_expect_spec(expect_spec, staged):
     """--expect-spec 全量判定（W1002/W1004 口径·W1139 group-aware 兜底并入）。
 
+    W1162：支持**多批并集**——铁律 21②「同会话当日多批合并一笔提交」形态下，
+    索引态 = 各批 spec 的并集，单 spec 判定会把另一批的面误判为「spec 之外」代提。
+    expect_spec 接受逗号分隔多路径（如 `_w1161_spec.json,_w1162_spec.json`），
+    取并集判定；group-aware 兜底逐 spec 依序尝试。与第 51 槽 check_commit_scope
+    的「新增段集合>1 ⇒ 各批 spec 并集」同一口径（两处实现共用 batch_spec 解析）。
     返回 None = 判过（继续提交流程）；返回 1 = 已打印拒绝原因（调用方直接 return）。
     """
-    try:
-        spec = _load_spec_file(expect_spec)
-    except (OSError, ValueError) as e:
-        print("[safe_commit] 拒绝：--expect-spec 读不出（%s）：%s" % (expect_spec, e))
-        return 1
-    spec_paths = _spec_paths(spec)
+    spec_list = [s.strip() for s in expect_spec.split(",") if s.strip()]
+    spec_paths = set()
+    specs = []
+    for sp in spec_list:
+        try:
+            spec = _load_spec_file(sp)
+        except (OSError, ValueError) as e:
+            print("[safe_commit] 拒绝：--expect-spec 读不出（%s）：%s" % (sp, e))
+            return 1
+        specs.append((sp, spec))
+        spec_paths |= set(_spec_paths(spec))
+    if len(spec_list) > 1:
+        print("[safe_commit] 多批并集判定：%s（%d 路径）"
+              % (", ".join(spec_list), len(spec_paths)))
     ok_spec, extra, missing = _plan_spec(staged, spec_paths)
     if not ok_spec:
-        ok_spec, extra = _group_aware_relax(spec, staged, ok_spec, extra)
+        # group-aware 兜底：任一 spec 的分组子树覆盖即可
+        ok_spec, extra = False, sorted(extra)
+        for _sp, spec in specs:
+            ok2, extra2 = _group_aware_relax(spec, staged, ok_spec, extra)
+            if ok2:
+                ok_spec, extra = ok2, extra2
+                break
+            extra = sorted(set(extra) & set(extra2)) or extra2
     if not spec_paths:
         print("[safe_commit] 拒绝：spec 的 file_index_rows 为空（判据不可执行·fail-closed）")
         return 1
