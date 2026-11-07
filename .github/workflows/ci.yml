@@ -319,6 +319,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        # W1155（深度审计 #55/#56）：默认 fetch-depth=1（浅克隆）⇒ merge-base/origin/main
+        # 取数链恒空 ⇒ plan_template 增量面与 pitfall 编号判据在 CI 上等于没跑。补全历史。
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7

@@ -160,8 +160,20 @@ def spec_paths_for(w):
     try:
         import batch_spec
         return batch_spec.spec_paths(p)
-    except (OSError, ValueError):
+    except (OSError, ValueError) as err:
+        # W1155（深度审计 #13）：spec 文件存在但 JSON 损坏 ≠ spec 缺失——
+        # 原实现两者同折 None ⇒ 坏 spec 只 WARN 放行。改记录到模块级 _BROKEN_SPECS
+        # 并保持返回 None（对外 API 零变化·--strict-api 不判破坏）；run_gate 末尾
+        # 检查记录即判红（缺失仍 WARN·用户既定口径不变）。
+        _BROKEN_SPECS.append("%s（%s）" % (p, err))
         return None
+
+
+class SpecBrokenError(RuntimeError):
+    """spec 文件存在但解析失败（区别于 spec 缺失·W1155 fail-closed）。"""
+
+
+_BROKEN_SPECS: list = []  # W1155：坏 spec 记录（run_gate 末尾判红·对外 API 零变化）
 
 
 def spec_covers(w, staged):
@@ -392,6 +404,8 @@ def run_gate():
         print(warn)
     for it in fails:
         print("FAIL  " + it)
+    if _BROKEN_SPECS:
+        fails.append("spec 存在但 JSON 损坏（判据不可执行即红·缺失仍 WARN）：%s" % "; ".join(_BROKEN_SPECS))
     print("%s%d FAIL ----" % (MARKER, 1 if fails else 0))
     return 1 if fails else 0
 

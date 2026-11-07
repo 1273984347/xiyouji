@@ -79,20 +79,28 @@ def _run_blocks(job_body: str) -> str:
             indent = len(m.group(1))
             rest = m.group(2).strip()
             if rest.startswith("|"):  # `run: |` 多行块——收后续更深缩进行
-                i += 1
-                while i < len(lines):
-                    nxt = lines[i]
-                    if not nxt.strip():
-                        i += 1
-                        continue
-                    if len(nxt) - len(nxt.lstrip()) <= indent:
-                        break
-                    out.append(nxt.strip())
-                    i += 1
+                blk, i = _collect_block(lines, i + 1, indent)
+                out.extend(blk)
                 continue
             out.append(rest)  # `run: <单行命令>`
         i += 1
     return "\n".join(out)
+
+
+def _collect_block(lines, i, indent):
+    """W1154：多行 run 块收集器（自原内联 while 抽出——存量嵌套 5>4 被「文件已改」
+    激活宽档拦截·行为逐字等价的去嵌套重构）。"""
+    blk = []
+    while i < len(lines):
+        nxt = lines[i]
+        if not nxt.strip():
+            i += 1
+            continue
+        if len(nxt) - len(nxt.lstrip()) <= indent:
+            break
+        blk.append(nxt.strip())
+        i += 1
+    return blk, i
 
 
 # ---------------------------------------------------------------------------

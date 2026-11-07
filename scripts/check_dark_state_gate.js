@@ -43,6 +43,17 @@ function loadRows(file) {
 
 function compare(base, cur) {
   const fails = [];
+  // W1155（深度审计 #63）：① 基线侧缺页永不判（for 只遍历 cur）——CI 4 shard 缺一/upload
+  // 缺 always() 时页面静默丢失仍输出「零新增通过」⇒ 加基线页缺失断言；② cur.size < base.size
+  // 即采集面萎缩 ⇒ fail-closed（判据未执行形态）。
+  if (cur.size < base.size) {
+    fails.push({ page: '(采集面)', kind: 'size-mismatch', detail: `当前采集 ${cur.size} 页 < 基线 ${base.size} 页（分片缺失或 upload 非 always·判据未执行）` });
+  }
+  for (const [page, b] of base) {
+    if (!cur.has(page)) {
+      fails.push({ page, kind: 'base-page-missing', detail: `基线页在当前采集中缺失（分片缺失/upload 失败）` });
+    }
+  }
   for (const [page, c] of cur) {
     const b = base.get(page);
     if (!b) {

@@ -318,6 +318,15 @@ def check_corpus(chapters, verbose=True):
     返回失败清单[(回次, 原因)]；空列表 = 通过。
     """
     fails = []
+    # W1155（深度审计 #48）：原循环只遍历 json 已有回次（缩水少回时无红灯）且无
+    # 「恰 100 回」断言（多出回次也不扫）⇒ 输出「100 回逐回全等」的失真文案。先验全集。
+    if set(chapters) != set(range(1, 101)):
+        missing = sorted(set(range(1, 101)) - set(chapters))
+        extra = sorted(set(chapters) - set(range(1, 101)))
+        fails.extend((n, "json 回次集合 ≠ 1-100（缺回/多回）") for n in missing[:5])
+        for n, why in fails[:5]:
+            print("FAIL 语料保真：第%d回 %s（缺=%s 多=%s）" % (n, why, missing[:5], extra[:5]))
+        return fails
     for n in sorted(chapters):
         try:
             body = fenhui_body(n)
@@ -350,7 +359,8 @@ ATTRIB_SELF = [
 ]
 
 
-def self_test(chapters):
+def _self_test_cases(chapters):
+    """W1155（提取降复杂度）：SELF_TEST_CASES 循环（自 self_test 下沉·行为逐字等价）。"""
     bad = 0
     for expect_pass, line, label in SELF_TEST_CASES:
         total_c, total_a, fails = check_text(line + "\n", chapters)
@@ -359,6 +369,12 @@ def self_test(chapters):
             print("FAIL self-test：%s（期望 %s，实得 total=%d / fails=%d）"
                   % (label, "通过" if expect_pass else "失败", total_c, len(fails)))
             bad += 1
+    return bad
+
+
+def _self_test_attrib(chapters):
+    """W1155：ATTRIB_SELF 归属对白自检循环（自 self_test 下沉·行为逐字等价）。"""
+    bad = 0
     for expect_pass, line, label in ATTRIB_SELF:
         _, _, fails = check_text(line + "\n", chapters)
         passed = len(fails) == 0
@@ -366,6 +382,13 @@ def self_test(chapters):
             print("FAIL self-test：%s（期望 %s，实得 fails=%d）"
                   % (label, "通过" if expect_pass else "失败", len(fails)))
             bad += 1
+    return bad
+
+
+def self_test(chapters):
+    bad = 0
+    bad += _self_test_cases(chapters)
+    bad += _self_test_attrib(chapters)
     # 演绎豁免语义：标记区内的虚构对白不得判 FAIL
     fiction_doc = "## 深度解读\n\n### SD001 · 测试\n\n> " + FICTION_MARK + "测试标记行\n\n八戒道：「娘啊，你物件有多少？都要我也用得着。」\n"
     _, _, fails = check_text(fiction_doc, chapters)
@@ -432,6 +455,31 @@ def self_test(chapters):
     return 1 if bad else 0
 
 
+
+
+def _run_reverse(args, chapters):
+    """W1155（提取降复杂度）：S-35 反向扫描分支（自 main 下沉·行为逐字等价）。"""
+    base = resolve_scan_base(args.dir) if args.dir else os.path.join(ROOT, "docs", "01-全书逐回解读")
+    n_files = 0
+    all_cands = []
+    for p in iter_md(base):
+        n_files += 1
+        with open(p, encoding="utf-8") as fh:
+            text = fh.read()
+        for t, line_no, n_total, n_miss, ex in scan_reverse(text, chapters):
+            all_cands.append((rel_or_abs(p), line_no, t, n_total, n_miss, ex))
+    print("== S-35 漏标反向扫描（判据 §4.12 逆向·W742）==")
+    print("扫描 %d 篇 · 候选节 %d 个" % (n_files, len(all_cands)))
+    for rel, line_no, t, n_total, n_miss, ex in all_cands[:40]:
+        print("候选 %s:%d 「%s」 样本%d 未命中%d（%.0f%%） 示例：「%s…」"
+              % (rel, line_no, t[:24], n_total, n_miss, 100.0 * n_miss / n_total, ex))
+    if len(all_cands) > 40:
+        print("…（其余 %d 条省略）" % (len(all_cands) - 40))
+    if not all_cands:
+        print("PASS 未发现漏标候选（已标区正向回归语义成立）")
+    return 1 if (getattr(args, "fail_on_candidates", False) and all_cands) else 0
+
+
 def main():
     ap = argparse.ArgumentParser(description="原著引文硬验证（W503·W737 三检扩展）")
     ap.add_argument("--file", help="单文件模式（检查 1+2）")
@@ -453,25 +501,7 @@ def main():
         return 1 if check_corpus(chapters) else 0
 
     if args.reverse:
-        base = resolve_scan_base(args.dir) if args.dir else os.path.join(ROOT, "docs", "01-全书逐回解读")
-        n_files = 0
-        all_cands = []
-        for p in iter_md(base):
-            n_files += 1
-            with open(p, encoding="utf-8") as fh:
-                text = fh.read()
-            for t, line_no, n_total, n_miss, ex in scan_reverse(text, chapters):
-                all_cands.append((rel_or_abs(p), line_no, t, n_total, n_miss, ex))
-        print("== S-35 漏标反向扫描（判据 §4.12 逆向·W742）==")
-        print("扫描 %d 篇 · 候选节 %d 个" % (n_files, len(all_cands)))
-        for rel, line_no, t, n_total, n_miss, ex in all_cands[:40]:
-            print("候选 %s:%d 「%s」 样本%d 未命中%d（%.0f%%） 示例：「%s…」"
-                  % (rel, line_no, t[:24], n_total, n_miss, 100.0 * n_miss / n_total, ex))
-        if len(all_cands) > 40:
-            print("…（其余 %d 条省略）" % (len(all_cands) - 40))
-        if not all_cands:
-            print("PASS 未发现漏标候选（已标区正向回归语义成立）")
-        return 1 if (args.fail_on_candidates and all_cands) else 0
+        return _run_reverse(args, chapters)  # W1155（提取降复杂度）
 
     if not args.file and not args.dir:
         ap.error("需要 --file 或 --dir（或 --self-test / --check-corpus）")

@@ -697,12 +697,25 @@ function makeVerdict(status, reason, measured) {
   return { status, reason, measured: measured == null ? '-' : String(measured) };
 }
 
-/** V1：无 pageerror。 */
+/** V1：无 pageerror。W1155（深度审计 #12）：consoleErrors 同入判据——
+ *  原实现只看 pageErrors ⇒ console 层报错（数据装载失败等）可组合 V3 na 成全绿。
+ *  白名单排除 file:// 字体 CORS 良性噪声（Chrome 对 file:// 源的字体跨域告警·
+ *  88/88 页均有·环境伪影非页面缺陷）。 */
+const BENIGN_CONSOLE_RES = [
+  /Access to (?:font|image) .* blocked by CORS policy.*protocol schemes/i, // file:// 字体跨域告警
+  /^Failed to load resource:/, // 离线探针按设计断网 ⇒ 资源加载失败（EMBEDDED 兜底）必现
+  /^Fetch API cannot load file:/, // 同上：file:// 协议 fetch 不受支持（离线形态环境伪影）
+];
 function judgeV1(probe) {
   const errors = probe.pageErrors || [];
-  return errors.length
-    ? makeVerdict('fail', 'pageerror', `n=${errors.length} ${errors[0]}`)
-    : makeVerdict('ok', 'no-pageerror', 'n=0');
+  const consoleErrors = (probe.consoleErrors || []).filter((t) => !BENIGN_CONSOLE_RES.some((rx) => rx.test(t)));
+  if (errors.length) {
+    return makeVerdict('fail', 'pageerror', `n=${errors.length} ${errors[0]}`);
+  }
+  if (consoleErrors.length) {
+    return makeVerdict('fail', 'console-error', `n=${consoleErrors.length} ${consoleErrors[0]}`);
+  }
+  return makeVerdict('ok', 'no-pageerror', 'n=0');
 }
 
 /** V2：视图非空（图元 / 2D 画布像素 / Three 场景对象 / 表格行 / DOM 数据项）。 */
@@ -847,8 +860,10 @@ function judgeProbe(probe, thresholds) {
   }
 
   const stability = probe.stability || {};
+  // W1155（深度审计 #12）：stability.stable === false（DOM 未收敛）原实现只改 reason
+  // 仍判 ok ⇒ 不稳定页按**中途值**比对。改 fail（超时未收敛=证据不可信）。
   verdicts.PROBE = makeVerdict(
-    'ok',
+    stability.stable === false ? 'fail' : 'ok',
     stability.stable === false ? 'dom-unstable' : 'probe-ok',
     `ms=${(probe.timing && probe.timing.ms) || 0} stable=${stability.stable !== false} samples=${stability.samples || 0}`
   );
@@ -1153,6 +1168,7 @@ function printSummary(judged, cmp, cfg, elapsed, mode) {
   }
   if (probeErr.length) console.log('probe_error 页：' + probeErr.map((j) => j.page).join(', '));
   console.log(gateSummaryLine(GATE_NAME, nFail));
+  return nFail; // W1155（深度审计 #12）：把含覆盖缺口的总 FAIL 数交回 main 供退出码判定
 }
 
 // ---------------- 自检（注入式·无浏览器） ----------------
@@ -1603,8 +1619,12 @@ async function main() {
     printReportOutput(cfg, cal, cmp, baselineFile, baselineMissing, baselineProblems);
   }
 
-  printSummary(judged, cmp, cfg, elapsed, cfg.mode);
-  if (cfg.mode === 'gate') return cmp.exit;
+  const nFailTotal = printSummary(judged, cmp, cfg, elapsed, cfg.mode);
+  if (cfg.mode === 'gate') {
+    // W1155（深度审计 #12）：覆盖缺口 nFail 在 cmp.exit 计算之后累加 ⇒ 缺口不进退出码
+    // （汇总行红·gate 绿）。改按最终 nFail（newFail+gap）判退出。
+    return nFailTotal > 0 ? 1 : 0;
+  }
   return 0;
 }
 
