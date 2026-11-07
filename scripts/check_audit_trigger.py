@@ -103,6 +103,30 @@ def evaluate(ledger_text, archive_text=""):
     return False, ["对抗审查触发器：距上次（W%d）%d 批 < %d——未触发" % (last, gap, THRESHOLD)] + notes
 
 
+HARD_MULTIPLIER = 2
+
+
+def hard_triggered(ledger_text, archive_text=""):
+    """W1164 用户裁决：超阈 1 倍（40 批）⇒ preflight FAIL 硬拦（WARN 债单失灵实证：
+    对抗审查 85 批才清偿）。不可判定/从未审查不硬拦（该态走 WARN fail-closed·首装期不卡死）。"""
+    merged = ledger_text + chr(10) + (archive_text or "")
+    max_w = pf.parse_ledger(merged)["max_w"]
+    token_ws, _legacy = scan_rows(merged)
+    if max_w is None or not token_ws:
+        return False
+    return max_w - max(token_ws) >= THRESHOLD * HARD_MULTIPLIER
+
+
+def ledger_text_for_preflight():
+    """W1164：hard_triggered 的取数面（正本+归档·与 notice_lines 同源）。归档缺失不阻断。"""
+    text = open(os.path.join(pf.ROOT, pf.LEDGER), encoding="utf-8", newline="").read()
+    try:
+        archived = open(os.path.join(pf.ROOT, ARCHIVE_LEDGER), encoding="utf-8", newline="").read()
+    except OSError:
+        archived = ""
+    return text, archived
+
+
 def notice_lines():
     """preflight 提示位入口。"""
     try:
@@ -215,10 +239,15 @@ def _self_test() -> int:
         fails.append("T9 在途行不得重置计数（应以 W1000 计 25 批触发）：%s" % lines9)
 
     print()
+    # W1164 hard 判据双态锁（独立断言·不进 fails 主链）
+    assert not hard_triggered("| W1000 | a | x | b | 已收官（对抗审查已派发） | s | z |"), "gap 0 误硬拦"
+    rows40 = (chr(10).join("| W%d | a | x | b | 已收官 | s | z |" % w for w in range(1001, 1041))
+              + chr(10) + "| W1000 | a | x | b | 已收官（对抗审查已派发） | s | z |")
+    assert hard_triggered(rows40), "gap 40 未硬拦（升格失效）"
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：阈值两侧/不可判定/散文豁免/B1 字样不重置/B1b 主题列不算/B2 取 max/归档同扫/同批 八态（判据可证伪）")
+    print("自测通过：阈值两侧/不可判定/散文豁免/B1 字样不重置/B1b 主题列不算/B2 取 max/归档同扫/同批 八态+hard 双态（判据可证伪）")
     return 0
 
 

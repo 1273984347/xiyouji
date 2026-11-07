@@ -183,6 +183,26 @@ def evaluate(today, last_date, batches, commits, thresholds=None, exemptions_age
     return triggered
 
 
+HARD_MULTIPLIER = 2
+
+
+def hard_triggered(today, last_date, batches, commits, thresholds=None):
+    """W1164 用户裁决：任一维度超阈 **1 倍**（6 天/60 批/160 提交）⇒ preflight FAIL 硬拦。
+
+    实证背景（复盘第 53 篇经验 3）：WARN 档债单失灵——复盘超阈约一倍（7 天/59 批/360 提交）
+    才被清偿。硬拦只认「明确超 2×阈值」；日期不可解析（T1 不可判定态）不硬拦（该态已由
+    evaluate 按「已触发」WARN 提示·首装期不卡死）。清偿动作 = 落盘复盘报告并使登记面可见。
+    """
+    th = thresholds or THRESHOLDS
+    try:
+        d0 = datetime.date.fromisoformat(last_date)
+        if (today - d0).days >= th["days"] * HARD_MULTIPLIER:
+            return True
+    except (ValueError, TypeError):
+        return False
+    return batches >= th["batches"] * HARD_MULTIPLIER or commits >= th["commits"] * HARD_MULTIPLIER
+
+
 def _git_commits_since(git, date):
     """git log --since 计数（读 git 不经登记面——P-43-01 口径）。失败返回 None（调用方降级）。"""
     try:
@@ -280,15 +300,50 @@ def render(info):
     return lines
 
 
+def hard_triggered_today(git):
+    """W1164：preflight 硬拦取数面——collect 实盘 + hard_triggered（任一维度 ≥2×阈值）。
+
+    取数不完整（days/batches/commits 为 None）⇒ 保守 False（该态由 evaluate 的
+    不可判定 WARN 提示·不硬拦首装期）。"""
+    try:
+        info = collect(git)
+    except Exception:  # noqa: BLE001 — 取数故障不硬拦（WARN 面已留痕）
+        return False
+    d, b, c = info.get("days"), info.get("batches"), info.get("commits")
+    if not all(isinstance(x, int) for x in (d, b, c)):
+        return False
+    review = info.get("review")
+    last_date = review["date"] if review else None
+    import datetime as _dt
+    return hard_triggered(_dt.date.today(), last_date, b, c)
+
+
 def notice_lines(git):
     """preflight 提示位入口：返回提示行（异常由调用方兜底）。"""
     return render(collect(git))
 
 
-def _self_test() -> int:
+def _self_test():
     """自测：正例必绿 + 负例必红（负例红不了 ⇒ 判据无效）。"""
     fails = []
+    fails.extend(_self_test_locate_cases())
+    fails.extend(_self_test_dir_and_merge_cases())
+    fails.extend(_self_test_eval_cases())
+    fails.extend(_self_test_batches_since_cases())
 
+    print()
+    # W1164 hard 判据五态锁（独立断言·抽 helper 防自测函数超档）
+    _self_test_hard_locks()
+    if fails:
+        print("自测 %d 项不一致：%s" % (len(fails), fails))
+        return 1
+    print("自测通过：定位/计数/三判据/负样本/hard 五态全过（判据可证伪）")
+    return 0
+
+
+def _self_test_locate_cases():
+    """find_last_review 定位与三信号识别案例组（W1164 复杂度降档拆出·文案逐字保留）。"""
+    fails = []
     # find_last_review：复盘段与非复盘段混排（降序）→ 取最高复盘段
     sample = "\n".join([
         "### W960（2026-10-30）：某功能批",
@@ -321,7 +376,12 @@ def _self_test() -> int:
         fails.append("否定语境「不认领复盘批角色」不应命中（信号 C 否定词前瞻失效）")
     if find_last_review("### W960（2026-10-31）：某功能批\n\n> 参考上次工作复盘报告的口径。\n") is not None:
         fails.append("仅散文提及「工作复盘」的普通批不应命中")
+    return fails
 
+
+def _self_test_dir_and_merge_cases():
+    """目录面与双源合并案例组（W1164 复杂度降档拆出·文案逐字保留）。"""
+    fails = []
     # 目录面：最新报告文件（W1051 新增独立证据源）
     import tempfile
     with tempfile.TemporaryDirectory() as td:
@@ -347,20 +407,12 @@ def _self_test() -> int:
         fails.append("pick_latest_review 应取较新者（与参数顺序无关）")
     if pick_latest_review(None, b)["w"] != 1042 or pick_latest_review(a, None)["w"] != 978:
         fails.append("pick_latest_review 单侧 None 时应让位给非 None 侧")
+    return fails
 
-    # batches_since：排除让号留痕 / 已停止 / ≤last_w
-    ledger = "\n".join([
-        "| W958 | 新批 | a | b | 在途 | s | x |",
-        "| W957 | 让号留痕批 | — | — | 已收官（让号留痕·最终 W958） | s | — |",
-        "| W956 | 停止批 | — | — | 已停止（零提交） | s | — |",
-        "| W955 | 旧批 | a | b | 已收官 | s | y |",
-    ])
-    if batches_since(ledger, 955) != 1:
-        fails.append("batches_since 应计 1（W958）——让号留痕/已停止/≤last 全部排除")
-    if batches_since(ledger, 958) != 0:
-        fails.append("batches_since 无后续行应计 0")
 
-    # evaluate：三判据各自触发 + 全不触发的负样本
+def _self_test_eval_cases():
+    """evaluate 三判据与 T4 豁免簿案例组（W1164 复杂度降档拆出·文案逐字保留）。"""
+    fails = []
     today = datetime.date(2026, 10, 30)
     if evaluate(today, "2026-10-26", 0, 0) != ["T1 距上篇复盘 4 天 ≥ 3 天"]:
         fails.append("T1 应单独触发（4 天）")
@@ -380,13 +432,34 @@ def _self_test() -> int:
         fails.append("T4 负样本：29 天停更必须不触发")
     if evaluate(today, "2026-10-29", 0, 0, exemptions_age=None) != []:
         fails.append("T4 负样本：None（取数失败）必须不评估")
+    return fails
 
-    print()
-    if fails:
-        print("自测 %d 项不一致：%s" % (len(fails), fails))
-        return 1
-    print("自测通过：定位/计数/三判据/负样本全过（判据可证伪）")
-    return 0
+
+def _self_test_batches_since_cases():
+    """batches_since 排除规则案例组（W1164 复杂度降档拆出·文案逐字保留）。"""
+    fails = []
+    ledger = "\n".join([
+        "| W958 | 新批 | a | b | 在途 | s | x |",
+        "| W957 | 让号留痕批 | — | — | 已收官（让号留痕·最终 W958） | s | — |",
+        "| W956 | 停止批 | — | — | 已停止（零提交） | s | — |",
+        "| W955 | 旧批 | a | b | 已收官 | s | y |",
+    ])
+    if batches_since(ledger, 955) != 1:
+        fails.append("batches_since 应计 1（W958）——让号留痕/已停止/≤last 全部排除")
+    if batches_since(ledger, 958) != 0:
+        fails.append("batches_since 无后续行应计 0")
+    return fails
+
+
+def _self_test_hard_locks():
+    """W1164 hard 五态锁（W1161 复杂度棘轮同款拆法·独立断言）。"""
+    import datetime as _dt
+    _today = _dt.date(2026, 11, 7)
+    assert not hard_triggered(_today, "2026-11-05", 5, 20), "阈内误硬拦"
+    assert hard_triggered(_today, "2026-10-30", 5, 20), "8 天 ≥6 天未硬拦（T1 维度失效）"
+    assert hard_triggered(_today, "2026-11-06", 65, 20), "65 批 ≥60 未硬拦（T2 维度失效）"
+    assert hard_triggered(_today, "2026-11-06", 5, 170), "170 提交 ≥160 未硬拦（T3 维度失效）"
+    assert not hard_triggered(_today, "not-a-date", 5, 20), "日期不可解析不硬拦（首装期守卫）"
 
 
 def main() -> int:

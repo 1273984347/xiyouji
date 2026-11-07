@@ -1,3 +1,15 @@
+### W1164（2026-11-07）：触发器硬拦升格批（超阈 1 倍 preflight FAIL·用户裁决）
+
+**本批要点**（用户裁决「做」·触发器超阈 1 倍升格 preflight FAIL 硬拦）：
+
+> - **T1 三触发器 hard 判据**：check_review_trigger.hard_triggered（T1 6 天/T2 60 批/T3 160 提交任一即硬）+check_audit_trigger.hard_triggered（40 批）+check_backlog_review.hard_triggered（50 批）——WARN 债单失灵实证（复盘超阈一倍/对抗审查 85 批/Backlog 100 批才清偿）后的强制力补齐；**不可判定/从未审查态不硬拦**（该态保持 WARN fail-closed·首装期不卡死全仓）。
+> - **T2 preflight 接线**：_step_review_trigger/_step_audit_trigger/_step_backlog_trigger 签名加 problems+取数面（ledger_text_for_preflight ×2/hard_triggered_today·与 notice_lines 同源正本+归档）——硬拦 FAIL 进 problems 拒绝开新批。
+> - **T3 负样本锁**：audit/backlog hard 双态（gap 0 放行/gap 阈×2 必红·锁样本首版构造错全 token 行 gap=0 咬出后修正为 token 行与普通行分离）+review hard 五态（阈内放行/T1/T2/T3 三维度各一红/日期不可解析放行）——三 self-test 全过。
+> - **T4 过程自证**：接线完成实跑 preflight 即真实拦下两笔登记面欠账（W1160 行在途态含 token 不计事件=W1022 语义正确·回填已收官保留双 token 后归零）——硬拦从上线第一分钟就在工作。
+> - **验证**：三 self-test 全过 + preflight PASS + ruff 绿（收官栏终值）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1163（2026-11-07）：收尾微批（safe_commit 多批并集支持+W1162 回填+残置件并入）
 
 **本批要点**（W1161+W1162 合并提交的判定面补齐）：
@@ -872,7 +884,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1163），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1164），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
