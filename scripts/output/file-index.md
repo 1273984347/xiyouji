@@ -1,3 +1,18 @@
+## W1158 W1157 遗留收尾批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W1158 | 改：拆 main 根治——复杂度 47>15/branches 48>16/statements 143>80/step_env 嵌套 6>4 → 11 个 _step_*/_load/_ruff_version_drift_line 函数（行为零变化·基线 diff 验证） |
+| docs/00-导读/W批次编号对账表.md | W1158 | 改：W1158 认领行+W1157 行 hash 回填（20921299·ledger_backfill 行指纹） |
+| site/data/search.html | W1157 | 改：内嵌搜索索引再生成（W1157 提交后验证轮再生·本批并入） |
+| site/en/search.html | W1158 | 改：内嵌搜索索引再生成（同上并入） |
+| scripts/output/_vermilion_solid_cache.json | W1158 | 改：朱砂实底增量缓存（验证轮再生产物并入） |
+| CHANGELOG.md | W1158 | 改：W1158 段落（级联） |
+| HANDOVER.md | W1158 | 改：最后更新行+进度（级联） |
+| scripts/output/_w1158_spec.json | W1158 | 新建：本批 spec |
+| scripts/output/file-index.md | W1158 | 改：W1158 段（级联） |
+| scripts/output/_cascade_files_W1158.txt | W1158 | 新建：级联清单 |
+
 ## W1157 全仓文件重构分类整理批（2026-11-07）
 
 | 文件 | W | 说明 |

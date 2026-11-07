@@ -1203,3 +1203,8 @@
 ```text
 2026-11-07（W1152）v4 body 改值批：body 语义消费 --type-body（1.75→1.80）+ --leading-body 对齐 + grid 终裁不迁移 + J2 逐属性对拍全绿
 ```
+以下为 AGENTS.md 版本脚注早期条目（W1153-W1153）段的原文（单行沿革链·W1158 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-11-07（W1153）安全批：GIT_DANGER 前缀族拦截+DENY_WRITE /i+realpath 复检+会话新写脚本拒执行+childEnv 大小写不敏感+RAG CORS 白名单/限速/异常不回显·回归锁 8 例
+```

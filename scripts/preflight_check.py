@@ -376,8 +376,27 @@ def step_fetch(git, no_fetch):
         return False, f"fetch 失败（rc={r.returncode}）且 API 降级通道失败：{exc}"
 
 
+def _ruff_version_drift_line(ver_line):
+    """W1069 env-sync：ruff 实际版本 vs requirements 声明对拍；不符返回提示行（否则 None）。
+
+    W1158 自 step_env 拆出（宽档 too-many-nested-blocks 6>4 根治·行为零变化）。
+    """
+    req_p = os.path.join(ROOT, "scripts", "requirements.txt")
+    try:
+        import re as _re
+        _m = _re.search(r"(?m)^ruff==([\w.]+)", open(req_p, encoding="utf-8").read())
+        _want = _m.group(1) if _m else None
+        _got = ver_line.split()[-1] if ver_line else ""
+        if _want and _got and _got != _want:
+            return (f"⚠ ruff 版本漂移：本地 {_got} ≠ requirements {_want}"
+                    f"——pip install -r scripts/requirements.txt 对齐（CI 用声明版·版本差=lint 规则差）")
+    except OSError:
+        pass
+    return None
+
+
 def step_env():
-    """环境核验：返回 (ok, [报告行])。"""
+    """环境核验：返回 (ok, [报告行])。W1158 拆 _ruff_version_drift_line（行为零变化）。"""
     lines = []
     ok = True
     lines.append(f"python（本脚本）={sys.version.split()[0]}")
@@ -388,74 +407,61 @@ def step_env():
                       ("ruff", [launcher, "-m", "ruff", "--version"])):
         try:
             r = run(cmd, timeout=30)
-            if r.returncode == 0:
-                ver_line = r.stdout.strip().splitlines()[0]
-                lines.append(f"{name}={ver_line}")
-                # W1069 env-sync（用户批「都可做」）：关键工具实际版本 vs requirements 声明对拍——
-                # 本日实证：本地 ruff 0.16.7 vs CI 0.17.3 的版本差令 5 处 lint 红只有 CI 能看见。
-                # 只对拍 ruff（其余工具无 ==锁定行）；不符 = WARN（提示对齐，不阻断动工）。
-                if name == "ruff":
-                    req_p = os.path.join(ROOT, "scripts", "requirements.txt")
-                    try:
-                        import re as _re
-                        _m = _re.search(r"(?m)^ruff==([\w.]+)", open(req_p, encoding="utf-8").read())
-                        _want = _m.group(1) if _m else None
-                        _got = ver_line.split()[-1] if ver_line else ""
-                        if _want and _got and _got != _want:
-                            lines.append(f"⚠ ruff 版本漂移：本地 {_got} ≠ requirements {_want}"
-                                         f"——pip install -r scripts/requirements.txt 对齐（CI 用声明版·版本差=lint 规则差）")
-                    except OSError:
-                        pass
-            else:
-                ok = False
-                lines.append(f"{name}=不可用（rc={r.returncode}·复跑门禁前需修复）")
         except Exception:  # noqa: BLE001
             ok = False
             lines.append(f"{name}=不可用（调用异常）")
+            continue
+        if r.returncode != 0:
+            ok = False
+            lines.append(f"{name}=不可用（rc={r.returncode}·复跑门禁前需修复）")
+            continue
+        ver_line = r.stdout.strip().splitlines()[0]
+        lines.append(f"{name}={ver_line}")
+        # W1069 env-sync（用户批「都可做」）：关键工具实际版本 vs requirements 声明对拍——
+        # 本日实证：本地 ruff 0.16.7 vs CI 0.17.3 的版本差令 5 处 lint 红只有 CI 能看见。
+        # 只对拍 ruff（其余工具无 ==锁定行）；不符 = WARN（提示对齐，不阻断动工）。
+        if name == "ruff":
+            drift = _ruff_version_drift_line(ver_line)
+            if drift:
+                lines.append(drift)
     return ok, lines
 
 
-def main():
-    ap = argparse.ArgumentParser(description="批次开工前置核验（S-33）")
-    ap.add_argument("--no-fetch", action="store_true", help="跳过 fetch（离线/已核验时）")
-    ap.add_argument("--touches", default="",
-                    help="本批计划手工修改的共享文件清单（逗号分隔）——与在途批次 touches 取交集，"
-                         "非空即拒绝并行（级联面由 batch_cascade 单写路径保护·无需声明）")
-    ap.add_argument("--self", dest="self_w", default="",
-                    help="本批 W 号（如 W739）——交集检查时排除自己的认领行（自己的 touches 不挡自己）")
-    args = ap.parse_args()
-
-    problems = []
-    print("== 批次开工前置核验（preflight_check · S-33）==")
-
-    # 0) 仓库根校验
+def _step_root(problems):
+    """0) 仓库根校验。返回 (git, ok)。W1158 自 main 拆出（复杂度 47>15 根治·行为零变化）。"""
     if not os.path.exists(os.path.join(ROOT, "scripts", "batch_cascade.py")):
         print("FAIL  非 xiyouji 仓库根（scripts/batch_cascade.py 缺失）")
-        return 1
+        return None, False
     print(f"OK    仓库根：{ROOT}")
-    git = git_bin()
+    return git_bin(), True
 
-    # 1) fetch / 降级通道
-    fetch_ok, fetch_line = step_fetch(git, args.no_fetch)
+
+def _step_fetch_and_remote(git, no_fetch, problems):
+    """1) fetch / 降级通道 + 2) origin/main 顶部。W1158 自 main 拆出。"""
+    fetch_ok, fetch_line = step_fetch(git, no_fetch)
     print(("OK    fetch：") if fetch_ok else "FAIL  fetch：", fetch_line)
     if not fetch_ok:
         problems.append("远端核验失败——撞号风险不可判")
-    if args.no_fetch:
+    if no_fetch:
         print("WARN  --no-fetch：远端状态以本地 origin/main 引用为准（可能滞后）")
-
-    # 2) origin/main 顶部
     r = run([git, "log", "--oneline", "-1", "origin/main"])
     remote_top = r.stdout.strip()[:100] if r.returncode == 0 else "（读取失败）"
     print(f"OK    origin/main 顶部：{remote_top}")
 
-    # 3) 对账表取号
+
+def _load_ledger(problems):
+    """3) 对账表读取。返回 ledger dict（失败时空壳 + FAIL 留痕）。W1158 自 main 拆出。"""
     try:
         text = open(os.path.join(ROOT, LEDGER), encoding="utf-8").read()
-        ledger = parse_ledger(text)
+        return parse_ledger(text)
     except OSError as exc:
-        ledger = {"max_w": None, "bullet_w": None, "rows": []}
         print("FAIL  对账表读取失败：", exc)
         problems.append("对账表不可读")
+        return {"max_w": None, "bullet_w": None, "rows": []}
+
+
+def _step_ledger_numbering(ledger, problems):
+    """3) 取号解析与现势 bullet 交叉核验。W1158 自 main 拆出。"""
     if ledger["max_w"]:
         next_free = ledger["max_w"] + 1
         print(f"OK    取号：已认领 max=W{ledger['max_w']} → 下一自由号 W{next_free}（表头规则 max+1）")
@@ -471,19 +477,9 @@ def main():
         print("FAIL  取号解析失败（未找到 W 行）")
         problems.append("取号异常")
 
-    # 3.4) W931 新增：共享面串行化机制 · 判据 A（撞号检测）+ 判据 B'（台账脏行提示）
-    #   A 撞号检测（W935 修订）：**同一 W 号在台账里出现多行** = 撞号的机器特征
-    #     （两方各登记一行）⇒ FAIL 并要求人工裁决。
-    #     「本批登记前被更晚的号插队」属**插队**而非撞号（先落地者保留·后补登记合法）
-    #     ⇒ 只出 NOTE（旧判据在此误伤后补登记）。
-    #     未登记时出 NOTE 提示「先登记认领行并提交·再复跑本脚本」。
-    #   B' 台账脏行提示：台账工作树有未提交改动时，提交必须**精确暂存**（禁整文件 git add），
-    #     否则会把他方在途行代提交（lost update 族）。
-    #     **只出 NOTE 不 FAIL**：台账的「纯追加认领行」行级独立、可并发，
-    #     强行 FAIL 会卡死合法批次（W930 实证：台账脏但实为合法在途）。
-    #     真正的互斥放在回填工具 scripts/ledger_backfill.py 的**行指纹校验**里。
-    _sn = args.self_w.strip().lstrip("Ww")
-    _self_num = int(_sn) if _sn.isdigit() else None
+
+def _step_collision_and_selfnum(git, ledger, self_num, problems):
+    """3.4) 撞号检测（判据 A）+ 取号校验 + 台账脏行提示（判据 B'）。W1158 自 main 拆出。"""
     if ledger.get("rows"):
         _dups = duplicate_wnums(ledger["rows"])
         if _dups:
@@ -492,16 +488,16 @@ def main():
             problems.append(f"撞号：台账中 W{_dups} 出现多行")
         else:
             print("OK    撞号检测：台账无同号多行（未被两方重复登记）")
-    if _self_num is not None and ledger.get("rows"):
-        _self_row = next((r for r in ledger["rows"] if r["w"] == _self_num), None)
+    if self_num is not None and ledger.get("rows"):
+        _self_row = next((r for r in ledger["rows"] if r["w"] == self_num), None)
         if _self_row is None:
-            print(f"NOTE  取号校验：本批 W{_self_num} 的认领行尚未登记——"
+            print(f"NOTE  取号校验：本批 W{self_num} 的认领行尚未登记——"
                   "按新规则应「先登记认领行并提交·再复跑本脚本」")
-        elif ledger["max_w"] == _self_num:
-            print(f"OK    取号校验：W{_self_num} 是台账最新登记号（无更晚登记）")
+        elif ledger["max_w"] == self_num:
+            print(f"OK    取号校验：W{self_num} 是台账最新登记号（无更晚登记）")
         else:
-            _later = sorted(r["w"] for r in ledger["rows"] if r["w"] > _self_num)
-            print(f"NOTE  取号校验：W{_self_num} 之后有更晚的登记号 {_later}——"
+            _later = sorted(r["w"] for r in ledger["rows"] if r["w"] > self_num)
+            print(f"NOTE  取号校验：W{self_num} 之后有更晚的登记号 {_later}——"
                   "本批属**后补登记**（先落地者保留·非撞号）·后续批次请以 max+1 为准")
     _r_led = run([git, "status", "--porcelain", "--", LEDGER])
     if _r_led.returncode == 0 and _r_led.stdout.strip():
@@ -509,9 +505,9 @@ def main():
               "提交时**勿整文件 git add**（会把他方在途行代提交）："
               "用 git update-index --cacheinfo 精确暂存本批行，或用 scripts/ledger_backfill.py 回填")
 
-    # 3.5) touches 在途盘点 + 交集拒绝（W739）+ git 条件二分（W956·P-43-01）
-    self_norm = args.self_w.strip().lstrip("Ww")
-    self_num = int(self_norm) if self_norm.isdigit() else None
+
+def _step_touches(git, ledger, args, self_num, problems):
+    """3.5) touches 在途盘点 + 交集拒绝（W739）+ git 条件二分（W956·P-43-01）。W1158 自 main 拆出。"""
     inflight_all = [r for r in ledger.get("rows", []) if is_inflight(r["status"]) and r["touches"]]
     _r_log = run([git, "log", "--all", "--format=%h %s"])
     if _r_log.returncode == 0 and _r_log.stdout.strip():
@@ -560,8 +556,9 @@ def main():
         if not bad:
             print(f"OK    touches 交集检查：本批声明 {len(mine)} 项·与在途批次（{len(inflight_others)} 个声明方）无交集")
 
-    # 3.6) 级联运行锁状态（W991·①层重启）：活动锁=他方级联写序列进行中——共享面读会撞中态
-    # （混行尾假红/锚点对拍假红族），开工与门禁解读都应知悉。只提示不拦截。
+
+def _step_cascade_lock():
+    """3.6) 级联运行锁状态（W991·①层重启）：只提示不拦截。W1158 自 main 拆出。"""
     try:
         import cascade_lock
 
@@ -575,7 +572,16 @@ def main():
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"WARN  级联锁状态不可读（{_exc}）")
 
-    # 4) 工作树态
+
+_HANDOFF_FACES = ("CHANGELOG.md", "HANDOVER.md", "README.md", "STRUCTURE.md",
+                  "docs/00-导读/项目说明.md", ".github/workflows/README.md",
+                  "site/index.html", "site/data/cross-time-danmaku.html",
+                  "site/data/tag-cloud.html", "site/dukou-engine.html",
+                  "AGENTS.md", "CITATION.cff", "scripts/output/file-index.md")
+
+
+def _step_worktree(git):
+    """4) 工作树态 + W982 手搓前置劝导（只提示不拦截）。W1158 自 main 拆出。"""
     r = run([git, "status", "--porcelain", "-z"])
     tree = summarize_porcelain(r.stdout)
     print(f"OK    工作树：staged={tree['staged']} 未暂存={tree['unstaged']} 未跟踪={tree['untracked']}")
@@ -584,14 +590,9 @@ def main():
     # W982 三层方案③：手搓前置劝导——工作树含级联面未提交改动即提示走 batch_cascade
     # （只提示不拦截·W822 语义；中文路径经 core.quotepath=false 二次取数防转义漏配）
     try:
-        _faces = ("CHANGELOG.md", "HANDOVER.md", "README.md", "STRUCTURE.md",
-                  "docs/00-导读/项目说明.md", ".github/workflows/README.md",
-                  "site/index.html", "site/data/cross-time-danmaku.html",
-                  "site/data/tag-cloud.html", "site/dukou-engine.html",
-                  "AGENTS.md", "CITATION.cff", "scripts/output/file-index.md")
         _r2 = run([git, "-c", "core.quotepath=false", "status", "--porcelain", "-z"])
         _dirty = {it[1] for it in summarize_porcelain(_r2.stdout)["items"] if it[0] != "??"}
-        _hit = sorted(_dirty & set(_faces))
+        _hit = sorted(_dirty & set(_HANDOFF_FACES))
         if _hit:
             print("NOTE  手搓劝导：工作树含级联面未提交改动 "
                   + ", ".join(_hit[:3]) + ("…共 %d 项" % len(_hit) if len(_hit) > 3 else "")
@@ -600,6 +601,114 @@ def main():
         print(f"NOTE  手搓劝导不可用（{_exc}）")
     if len(tree["items"]) > 8:
         print(f"       ……另 {len(tree['items']) - 8} 项")
+
+
+def _step_review_trigger(git):
+    """5.5) 复盘触发器提示位（W956·P-43-02）——只提示不拦截·故障留痕。W1158 自 main 拆出。"""
+    # 只提示不拦截（W822「只输出提示行·不改任何判定与退出码」语义）——触发清单由
+    # scripts/check_review_trigger.py 产出；提示位故障降级为 WARN 不阻断开工，
+    # 但**禁静默跳过**（必须留下不可用痕迹）。
+    try:
+        import check_review_trigger as _crt
+
+        for _line in _crt.notice_lines(git):
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc:  # noqa: BLE001 — 提示位兜底（W822 语义）
+        print(f"WARN  复盘触发器不可用（{_exc}）——本回合跳过复盘周期提示")
+
+
+def _step_size_budget(problems):
+    """5.6) 治理文档体积窗口（W960）——硬判据：超窗 FAIL 拦截开工。W1158 自 main 拆出。"""
+    # 修法唯一 = scripts/archive_segments.py 归档（守恒断言五道）；门禁故障降级 WARN 禁静默跳过。
+    try:
+        import check_doc_size_budget as _dsb
+
+        _dsb_fails, _dsb_lines = _dsb.gate_lines()
+        for _line in _dsb_lines:
+            print(("FAIL  " if "超窗!" in _line else "NOTE  ") + _line)
+        for _f in _dsb_fails:
+            problems.append(_f)
+    except Exception as _exc:  # noqa: BLE001 — 判据不可执行须留痕（W809 fail-closed 族）
+        print(f"WARN  体积窗口门禁不可用（{_exc}）——本回合跳过（禁静默·W960 建置纪律）")
+
+
+def _step_gov_claims():
+    """5.7) 治理文档数字断言对账提示位（W967·报告型 WARN 不拦截）。W1158 自 main 拆出。"""
+    try:
+        import check_gov_doc_claims as _gdc
+
+        _gdc_lines, _gdc_fails = _gdc.check()
+        for _line in _gdc_lines:
+            print("NOTE  " + _line)
+        for _f in _gdc_fails:
+            print("WARN  " + _f)
+    except Exception as _exc2:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  数字断言对账器不可用（{_exc2}）——本回合跳过（禁静默）")
+
+
+def _step_audit_trigger():
+    """5.75) 对抗式审查触发器（W1000）：≥20 批未派发即提示。W1158 自 main 拆出。"""
+    # 只提示不拦截·模板见 docs/agent/adversarial-audit-prompt.md
+    try:
+        import check_audit_trigger as _cat
+
+        for _line in _cat.notice_lines():
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc3:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  对抗审查触发器不可用（{_exc3}）——本回合跳过（禁静默）")
+
+
+def _step_backlog_trigger():
+    """5.8) Backlog 登记面对账触发器（W1021）：≥25 批未对账即提示。W1158 自 main 拆出。"""
+    # 只提示不拦截。起因：W1019 连中两条「已做完仍挂待办」，W1020 全量对账实测滞后率 41%（12/29）。
+    # 判据与对抗审查触发器同族（token 认状态列 / 取 max 不取文件序 / 归档同扫）。
+    try:
+        import check_backlog_review as _cbr
+
+        for _line in _cbr.notice_lines():
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc4:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  Backlog 对账触发器不可用（{_exc4}）——本回合跳过（禁静默）")
+
+
+def main():
+    ap = argparse.ArgumentParser(description="批次开工前置核验（S-33）")
+    ap.add_argument("--no-fetch", action="store_true", help="跳过 fetch（离线/已核验时）")
+    ap.add_argument("--touches", default="",
+                    help="本批计划手工修改的共享文件清单（逗号分隔）——与在途批次 touches 取交集，"
+                         "非空即拒绝并行（级联面由 batch_cascade 单写路径保护·无需声明）")
+    ap.add_argument("--self", dest="self_w", default="",
+                    help="本批 W 号（如 W739）——交集检查时排除自己的认领行（自己的 touches 不挡自己）")
+    args = ap.parse_args()
+
+    problems = []
+    print("== 批次开工前置核验（preflight_check · S-33）==")
+
+    # 0) 仓库根校验
+    git, root_ok = _step_root(problems)
+    if not root_ok:
+        return 1
+
+    # 1) fetch / 降级通道 + 2) origin/main 顶部
+    _step_fetch_and_remote(git, args.no_fetch, problems)
+
+    # 3) 对账表读取 + 取号
+    ledger = _load_ledger(problems)
+    _step_ledger_numbering(ledger, problems)
+
+    # 3.4) 撞号检测 + 取号校验 + 台账脏行提示（W931 判据 A/B'·细则见函数注释）
+    _sn = args.self_w.strip().lstrip("Ww")
+    self_num = int(_sn) if _sn.isdigit() else None
+    _step_collision_and_selfnum(git, ledger, self_num, problems)
+
+    # 3.5) touches 在途盘点 + 交集拒绝（W739）+ git 条件二分（W956·P-43-01）
+    _step_touches(git, ledger, args, self_num, problems)
+
+    # 3.6) 级联运行锁状态（W991·①层重启）
+    _step_cascade_lock()
+
+    # 4) 工作树态 + 手搓劝导（W982）
+    _step_worktree(git)
     # W821 注：原拟的「触发①（开工 git status 发现非本会话变更）」已按用户裁决删除
     # （2026-10-20）——preflight 内无法可靠区分「本会话变更」与「他方变更」
     # （工作树里的已暂存件可能来自并行会话），按「staged>0 即提示」会在正常态误报，
@@ -614,61 +723,12 @@ def main():
     if not env_ok:
         problems.append("环境缺件（pytest/ruff）")
 
-    # 5.5) 复盘触发器提示位（W956·P-43-02）：只提示不拦截（W822「只输出提示行·不改任何
-    # 判定与退出码」语义）——触发清单由 scripts/check_review_trigger.py 产出；提示位故障
-    # 降级为 WARN 不阻断开工，但**禁静默跳过**（必须留下不可用痕迹）。
-    try:
-        import check_review_trigger as _crt
-
-        for _line in _crt.notice_lines(git):
-            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
-    except Exception as _exc:  # noqa: BLE001 — 提示位兜底（W822 语义）
-        print(f"WARN  复盘触发器不可用（{_exc}）——本回合跳过复盘周期提示")
-
-    # 5.6) 治理文档体积窗口（W960·文档规范 §8 机器化）——硬判据：超窗 FAIL 拦截开工。
-    # 修法唯一 = scripts/archive_segments.py 归档（守恒断言五道）；门禁故障降级 WARN 禁静默跳过。
-    try:
-        import check_doc_size_budget as _dsb
-
-        _dsb_fails, _dsb_lines = _dsb.gate_lines()
-        for _line in _dsb_lines:
-            print(("FAIL  " if "超窗!" in _line else "NOTE  ") + _line)
-        for _f in _dsb_fails:
-            problems.append(_f)
-    except Exception as _exc:  # noqa: BLE001 — 判据不可执行须留痕（W809 fail-closed 族）
-        print(f"WARN  体积窗口门禁不可用（{_exc}）——本回合跳过（禁静默·W960 建置纪律）")
-
-    # 5.7) 治理文档数字断言对账提示位（W967·报告型 WARN 不拦截·挂 verify 槽需另行批准）
-    try:
-        import check_gov_doc_claims as _gdc
-
-        _gdc_lines, _gdc_fails = _gdc.check()
-        for _line in _gdc_lines:
-            print("NOTE  " + _line)
-        for _f in _gdc_fails:
-            print("WARN  " + _f)
-    except Exception as _exc2:  # noqa: BLE001 — 提示位故障留痕不阻断
-        print(f"WARN  数字断言对账器不可用（{_exc2}）——本回合跳过（禁静默）")
-
-    # 5.75) 对抗式审查触发器（W1000）：≥20 批未派发即提示（只提示不拦截·模板见 docs/agent/adversarial-audit-prompt.md）
-    try:
-        import check_audit_trigger as _cat
-
-        for _line in _cat.notice_lines():
-            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
-    except Exception as _exc3:  # noqa: BLE001 — 提示位故障留痕不阻断
-        print(f"WARN  对抗审查触发器不可用（{_exc3}）——本回合跳过（禁静默）")
-
-    # 5.8) Backlog 登记面对账触发器（W1021）：≥25 批未对账即提示（只提示不拦截）。
-    # 起因：W1019 连中两条「已做完仍挂待办」，W1020 全量对账实测滞后率 41%（12/29）。
-    # 判据与对抗审查触发器同族（token 认状态列 / 取 max 不取文件序 / 归档同扫）。
-    try:
-        import check_backlog_review as _cbr
-
-        for _line in _cbr.notice_lines():
-            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
-    except Exception as _exc4:  # noqa: BLE001 — 提示位故障留痕不阻断
-        print(f"WARN  Backlog 对账触发器不可用（{_exc4}）——本回合跳过（禁静默）")
+    # 5.5) 复盘触发器 + 5.6) 体积窗口（硬判据） + 5.7/5.75/5.8) 提示位族
+    _step_review_trigger(git)
+    _step_size_budget(problems)
+    _step_gov_claims()
+    _step_audit_trigger()
+    _step_backlog_trigger()
 
     print("== 结论 ==")
     if problems:

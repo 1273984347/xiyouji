@@ -1,3 +1,14 @@
+### W1158（2026-11-07）：W1157 遗留收尾批（preflight 拆 main 根治+台账 hash 回填+残置产物并入）
+
+**本批要点**（W1157 收官遗留三项清偿）：
+
+> - **T1 preflight_check.py 拆 main 根治**：存量 main 复杂度 47>15 / branches 48>16 / statements 143>80 / step_env 嵌套 6>4（W1157 批「改动触发扫面」撤改动规避的欠账）——按原编号段拆 11 个 _step_*/_load/_ruff_version_drift_line 函数（行为零变化·重构前后输出基线 diff 仅剩自身改动动态行）+ guardrails 全档绿 + 44 例测试锁全过。
+> - **T2 台账 W1157 行 hash 回填**：20921299 + 状态列转「已收官」（ledger_backfill 行指纹回填）。
+> - **T3 W1157 残置 3 件验证产物并入**（铁律 21①）：site/data/search.html、site/en/search.html、scripts/output/_vermilion_solid_cache.json（提交后验证轮再生产物）。
+> - **验证**：ruff 风格/结构档全绿（复杂度判据清零）+ pytest preflight 面 44 passed + 输出基线 diff 行为零变化 + verify_delivery（收官栏终值）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1157（2026-11-07）：全仓文件重构分类整理批（用户令：四文档治理体系+四档删除清理+错位归位）
 
 **本批要点**（用户令「对项目的文件进行重构分类整理，该删除的就删除。增加 RULES.md 和 AGENTS.md CLAUDE.md pitfalls.md 进行区分」·其中 AGENT.md 系笔误已澄清为 AGENTS.md·AGENT.md 误建件当批撤除）：
@@ -803,7 +814,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1157），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1158），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
