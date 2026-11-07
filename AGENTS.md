@@ -187,7 +187,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 > **🔥 火眼金睛 skill（W1149 建·`huoyan-jinjing`）**：全仓巡检速查 [`.agent/skills/huoyan-jinjing/SKILL.md`](.agent/skills/huoyan-jinjing/SKILL.md)——五维扫描（覆盖/失败语义/CI 形态/数据血缘/同类复发）+ 判据 fail-closed + 数据分级 + manifest 对拍 + 链接/内联 + 修复三原则；完整方法论文档在 [docs/10-方法论沉淀/全仓深度审计SOP-可复用.md](docs/10-方法论沉淀/全仓深度审计SOP-可复用.md)，可执行入口 `scripts/audit_repo.py`。
 
-> **📖 阅读契约（W709）**：索引型——291 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——292 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
@@ -195,7 +195,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **占号共享区纪律（W1110·E-128·W1121 根修）**：`reserve_w.py` 的预约集原先写在**工作树内**的 `tmpe/_w_reservations.json`（已 gitignore）⇒ **共享范围 = 工作树·不是仓库** ⇒ 隔离 clone / 并行 worktree 内占号他方看不见 ⇒ **实测撞过 W1120**（双方各占一号·零红灯·记录 session 同名无法仲裁）⇒ **W1121 根修**：取号集合改为「本仓表 + 同机兄弟克隆表 + 用户级共享表」三源**合并取并集**（同名取 ts 最新·写共享表前先合并他人记录不覆盖）+ session 标识含仓路径指纹（WB_SESSION 优先）+ 同号多会话即打印**跨克隆撞号预警** + release 只撤本工作树登记且 session 相同的号 ⇒ 落地后实测取号由 W1120 正确让至 W1121；**纪律不变**：落段前复核「本批号仍在预约集内」，且**占号必须在与并行会话共享的克隆里执行**。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（160）
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（161）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -328,4 +328,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1144-W1144 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-06（W1145）引文精确性槽批：9 条标杆引文须为原文精确子串 · 自测 9 例 · 三例回归锁；2026-11-06（W1147）方法论沉淀固化批：三探针出 tmpe 入仓 + 两篇沉淀（包含块退化机检范式 / 幂等守卫三类自相矛盾）+ 12 类交互后态探针基线全绿 · pytest 一千四百一十八 passed。；2026-11-06（W1148）懒读治理批：AGENTS 正本双预算门禁（48KB/30 条·C9）+ --task 最小铁律集注入（恒真并 touches·带回指锚）· 回归锁 5 例；2026-11-07（W1151）v4 type 消费批：type 令牌死序根修（IACVT 实证·序订正）+ --type-number 等值消费（J2 全采样零差异）+ 台账回填与 W1148 行补建 + 旧分支裁决；2026-11-07（W1152）v4 body 改值批：body 语义消费 --type-body（1.75→1.80）+ --leading-body 对齐 + grid 终裁不迁移 + J2 逐属性对拍全绿。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1144-W1144 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-06（W1147）方法论沉淀固化批：三探针出 tmpe 入仓 + 两篇沉淀（包含块退化机检范式 / 幂等守卫三类自相矛盾）+ 12 类交互后态探针基线全绿 · pytest 一千四百一十八 passed。；2026-11-06（W1148）懒读治理批：AGENTS 正本双预算门禁（48KB/30 条·C9）+ --task 最小铁律集注入（恒真并 touches·带回指锚）· 回归锁 5 例；2026-11-07（W1150）UI/UX 批：agent-web 工具名映射等九 P1 根修+reader favicon 生成器根修，详见 CHANGELOG T1-T6。；2026-11-07（W1151）v4 type 消费批：type 令牌死序根修（IACVT 实证·序订正）+ --type-number 等值消费（J2 全采样零差异）+ 台账回填与 W1148 行补建 + 旧分支裁决。；2026-11-07（W1152）v4 body 改值批：body 语义消费 --type-body（1.75→1.80）+ --leading-body 对齐 + grid 终裁不迁移 + J2 逐属性对拍全绿。；如与上述权威文档冲突，以权威文档为准。*

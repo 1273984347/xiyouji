@@ -80,7 +80,7 @@ export function NewChatView({
                   <div className="flex items-center gap-3">
                     <div 
                       className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: agent.color || '#0052d9' }}
+                      style={{ backgroundColor: agent.color || 'var(--td-brand-color)' }}
                     >
                       <AgentIcon size={20} color="white" />
                     </div>
@@ -109,11 +109,11 @@ export function NewChatView({
           <Input
             value={newChatCwd}
             onChange={(v) => onSetCwd(v as string)}
-            placeholder="例如：/Users/username/projects/my-app"
+            placeholder="留空则使用后端启动时的工作目录"
             prefixIcon={<FolderOpenIcon />}
           />
           <p className="text-xs mt-1.5" style={{ color: 'var(--td-text-color-placeholder)' }}>
-            指定 Agent 的工作目录，用于文件操作等
+            指定 Agent 的工作目录，用于文件操作等；留空使用后端默认
           </p>
         </div>
 
@@ -130,7 +130,7 @@ export function NewChatView({
                   <>
                     <div 
                       className="w-6 h-6 rounded-md flex items-center justify-center"
-                      style={{ backgroundColor: selectedAgent.color || '#0052d9' }}
+                      style={{ backgroundColor: selectedAgent.color || 'var(--td-brand-color)' }}
                     >
                       <Icon size={14} color="white" />
                     </div>

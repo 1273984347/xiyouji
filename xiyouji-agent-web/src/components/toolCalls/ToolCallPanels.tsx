@@ -109,7 +109,7 @@ export function WebSearchToolPanel({ tool, state, visual, input }: ToolPanelProp
         phrases={{ running: '搜索中...' }}
         title={
           <>
-            搜索: <span style={{ color: '#1890ff' }}>{query || '...'}</span>
+            搜索: <span style={{ color: 'var(--td-brand-color)' }}>{query || '...'}</span>
           </>
         }
         titleClassName="flex-1 text-sm font-medium"
@@ -159,7 +159,9 @@ export function WebFetchToolPanel({ tool, state, visual, input, expanded, onTogg
  * Write：标题为「写入 {文件名}」（title 属性给全路径），展开后显示完整路径与内容（1000 字上限）。
  */
 export function WriteToolPanel({ tool, state, visual, input, expanded, onToggle }: ToolPanelProps) {
-  const filePath = (input.file_path || '') as string;
+  // W1150：引擎 write_file 的路径参数名是 path（server/engine/tools.ts schema）——
+  // 旧读法 file_path 永远为空 ⇒ 标题退化为「写入 」、展开后路径区空白
+  const filePath = ((input.path || input.file_path) || '') as string;
   const content = (input.content || '') as string;
   // 提取文件名（仅用于标题展示）
   const fileName = filePath.split('/').pop() || filePath;
@@ -173,7 +175,7 @@ export function WriteToolPanel({ tool, state, visual, input, expanded, onToggle 
         phrases={{ running: '写入中...' }}
         title={
           <>
-            写入 <span style={{ color: '#fa8c16' }}>{fileName}</span>
+            写入 <span style={{ color: 'var(--td-warning-color)' }}>{fileName}</span>
           </>
         }
         titleAttrs={{ title: filePath }}
