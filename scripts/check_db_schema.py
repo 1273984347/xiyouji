@@ -70,7 +70,7 @@ def self_test() -> int:
         try:
             SQLITE_TS = Path(td) / "sqlite.ts"
             CHAT_TS = Path(td) / "chat.ts"
-            good_db = ("pragma('journal_mode = WAL');\npragma('foreign_keys = ON');\n"
+            good_db = ("  db.pragma('journal_mode = WAL');\n  db.pragma('foreign_keys = ON');\n"
                        "CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_message ON feedback(message_id);\n"
                        "async clearAllData(): Promise<void> { db.exec('DELETE FROM feedback');"
                        "db.exec('DELETE FROM messages');db.exec('DELETE FROM sessions'); }")

@@ -389,7 +389,12 @@ def run_self_test():
     fill = ["fill%02d.py" % i for i in range(MIN_SCRIPTS)]
     dummy_scripts = ["alpha.py", "beta.py"] + fill
     dummy_declared = "\n".join(["# 注释"] + ["fill%02d.py" % i for i in range(MIN_BASELINE)])
-    dummy_corpus = "\n".join(['GUARD = "alpha.py"', "import beta"] + fill)
+    # W1155：夹具升级到「实质调用面」语义——alpha 走 E1（解释器执行形态）·
+    # beta 走 E3（import+执行标记同在）·fill 走 E1（执行形态行·豁免 dummy_declared）。
+    dummy_corpus = "\n".join(['node scripts/alpha.py --self-test',
+                              'import beta',
+                              'subprocess.run(["python", "scripts/beta.py"])']
+                             + ['node scripts/%s --self-test' % f for f in fill])
 
     clean = {
         "scripts": dummy_scripts,
