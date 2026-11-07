@@ -32,24 +32,6 @@ repos:
         # 与手动钩子 .git/hooks/pre-commit 等价（六文档版本/A4 209 计数/范围漂移/导航/链接/sitemap/回退）
         # W424 补入框架配置：防止 pre-commit install 覆盖手动钩子后核心门禁静默消失
 
-      - id: drl-contracts
-        name: DRL contract 批量验证 (drl_spotcheck.py --batch)
-        entry: python scripts/drl_spotcheck.py --batch scripts/drl_contracts.yaml
-        language: system
-        pass_filenames: false
-        always_run: true
-        # E1 升级版铁律工程化：验证"修复声明已落地"的文件内容实际包含期望值
-        # 失败时阻断 commit；更新 contract 见 scripts/drl_contracts.yaml
-
-      - id: check-untracked
-        name: 交付物 untracked 文件检测 (check_untracked.py)
-        entry: python scripts/check_untracked.py
-        language: system
-        pass_filenames: false
-        always_run: true
-        # E1 铁律工程化：检测 docs/site/data/scripts/ 中 untracked 文件
-        # 警告不阻断 commit（可能有合理未跟踪文件）
-
       - id: pytest
         name: pytest 测试套件
         entry: python -m pytest tests/ -q

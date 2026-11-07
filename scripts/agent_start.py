@@ -26,7 +26,6 @@ ROOT = os.path.dirname(HERE)
 
 RE_SEG_HIST = re.compile(r"^###\s+v([\d.]+)（([^）]+)）：(W\d+)\s*([^\n]*)", re.M)
 RE_SEG_NEW = re.compile(r"^###\s+(W\d+)（([^）]+)）：\s*([^\n]*)", re.M)  # W711 方案 D 新形态（W713 兼容·历史段不匹配）
-RE_LEDGER_NOW = re.compile(r"现势：下一自由号 = \*\*(W\d+)\*\*")
 RE_CLAUDE_RULE = re.compile(r"^\d+\. \*\*(.+?)→", re.M)
 
 TASK_MAP = [  # (路径模式, 必读提示) —— W713 更新：BL-24 已收官（W709），指针改 L2 主题文件
@@ -143,7 +142,10 @@ def gather():
         os.path.join(HERE, "output", "stats.json"),
         os.path.join(ROOT, "CHANGELOG.md"))
     ledger = read(os.path.join("docs", "00-导读", "W批次编号对账表.md"))
-    m_now = RE_LEDGER_NOW.search(ledger)
+    # W1154（基础设施审计 §3.5.2-5）：「现势：下一自由号」块 W737 起已碑化（台账第 8 行明示
+    # 停止维护）⇒ 原读数恒 None；权威规则 = 台账认领行 max(W)+1（与 reserve_w 同源口径）。
+    _ledger_ws = [int(w) for w in re.findall(r"^\|\s*W?(\d{3,4})\s*\|", ledger, re.M)]
+    ledger_next = "W%d" % (max(_ledger_ws) + 1) if _ledger_ws else None
     jiaojie = read("HANDOVER.md")
     i = jiaojie.find("零、当前阻塞（接手必读）")  # W713：锚段标题（原锚「零、当前阻塞」命中阅读契约引述·取不到正文）
     blockers = []
@@ -167,7 +169,7 @@ def gather():
         "recent_batches": recent,
         "stats": {k: (e.get("value") if isinstance(e, dict) else e) for k, e in stats.items() if not k.startswith("_")},
         "stats_warnings": stats_warnings,
-        "ledger_next_free": m_now.group(1) if m_now else None,
+        "ledger_next_free": ledger_next,
         "blockers": blockers,
         "claude_md": "CLAUDE.md 已由宿主自动加载（速查层·指针化）；必守规则入口=" + (rules[0] if rules else "CLAUDE.md"),
     }

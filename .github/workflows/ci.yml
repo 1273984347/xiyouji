@@ -304,6 +304,11 @@ jobs:
       - name: Install Python deps
         run: pip install -r scripts/requirements.txt
 
+      # W1154（基础设施审计 §6 建议）：编排面引用存在性——Makefile/pre-commit/workflow
+      # 指向的 scripts/ 路径必须真实存在（W1014 sync_docs 死钩子 + drl-contracts 休眠族防复发）。
+      - name: Orchestration refs existence (W1154)
+        run: python scripts/check_orchestration_refs.py
+
       # W401 修复：tests/ 全量（pytest.ini testpaths=tests + --ignore=tests/e2e
       # 排除需 playwright browser 的 test_narratology_render.py，由 pages-smoke job 的存活烟测覆盖（W699 更名））
       - name: Run pytest (unit + root tests)

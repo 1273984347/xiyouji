@@ -1,3 +1,28 @@
+### W1154（2026-11-07）：治理快批（审计报告落实②：基础设施报告 §7 P0 十项 + P1 本地项）
+
+**本批要点**（治理快批·《基础设施口径与门禁全量审计报告-2026-11-06》落实·P0 十项+P1 本地项）：
+
+> **来源**：用户令「按顺序全部开始」②。数字类 4 项修复后 `check_gov_doc_claims` **4 FAIL → 0 FAIL**。
+> - **T1 数字面三处**：启动Prompt 可视化页 87→88 / data HTML 88→89（N5）；文档规范「现役 66 段」→68（N2）；AGENTS §4.2「61 槽」→63（N3·三处语境）。
+> - **T2 gates.md**：第 49 槽扫描面页数 88→89（97 页）；AGENTS 第 16 槽补「W562 退役·编号保留」标注（P3-11）。
+> - **T3 pre-commit 钩子**：`origin/dev`（不存在·fatal→AHEAD 恒 0·提示永不触发）改动态解析上游 `@{u}`；gitleaks 缺失显式 WARN（P3-17 判据不可执行须留痕）。
+> - **T4 死指针三处**：gates.md `_w857_plan_template_review.py`→`plan_template_review.py`；promo README `_w892_export_flyer.mjs`→已归档说明；`plates_verify.py` docstring 转正名。
+> - **T5 gen_folder_docs**：重复 `_kind_exists`（逐字双份·F811 未报）删一份。
+> - **T6 Makefile**：`.PHONY` 补 `cross-line`。
+> - **T7 run_all B 类发现器根修（§3.5.2-1）**：字典序首文件会选中 `B_人物/__init__.py` ⇒ B 类三分析器从未进批量生成而页面声明「由 run_all 批量生成」+ 数据漂移门禁对无 JSON 页跳过 = 静默陈旧；修 = 排除 `__init__.py`/`_` 前缀件 + main-guard 优先；回归锁 2 例（B 选中 character_appearance.py / 全类别禁 dunder）。
+> - **T8 agent_start**：「下一自由号」读 W737 已碑化的「现势」块恒 None → 改台账认领行 max(W)+1（与 reserve_w 同源）·实测 W1154。
+> - **T9 pytest.ini**：重复 `<!--stats:pytest_collected-->` 实体行去重；「verify 52 段」指针化。
+> - **T10 screenshot-scope 接线（P0-1·W1126 声明≠落地根修）**：screenshot-review.yml 内联 case 判定整块改调 `check_screenshot_scope.py`（单一事实源·三态仿真 targeted/full/skip 全对）；回归锁 = test_ci_wiring 断言接线且无内联残留（23 过）。
+> - **T11 docs/11 登记面（P0-2）**：9 份未登记报告全部补登（审查与评审 2 + 计划方案 7）；`check_index_health` 新增 `check_docs11_registration`（六子目录 md ↔ README 双向对账 + 引用存在性）。
+> - **T12 checklist 修正**：段窗/verify 段数指针化 + `git add -A` 两处改按 spec 精确 add（W1124 禁代提口径）。
+> - **T13 .pre-commit-config 清理**：删除休眠失效钩子 drl-contracts（历史契约全 FAIL）与 check-untracked（恒 0）·「等价备份」声明改「非等价备份」如实口径。
+> - **T14 新建 check_orchestration_refs.py（§6 建议）**：编排面（Makefile/pre-commit entry/workflows）引用的 scripts/ 路径存在性——双边界判据（左界防 archive/scripts 子串咬入·右界防 .json/.shard 前缀咬入·三轮假阳性实测收敛）+ self-test 负/正样本 + 接入 ci.yml verify-delivery job。
+> - **T15 收官链 index 步接入 gen_sitemap.py**（§4-3）：新增页批次不再靠第 7 槽报红后手工补（幂等生成·随批入库）。
+> - **登记去向（需用户裁决/外部动作·三问①）**：E2E 接线决策（test_visual/visualization_assertions 入 CI 或降级 manual）；emoji/icon 探针挂槽；MCP 注册（fastmcp 未装）；packaging 同步 CI；reader/rss 新鲜度门禁（CI 成本需实测）；`<brand-runtime>` 本地残留清理（本地面）。
+> - **验证**：check_gov_doc_claims 0 FAIL · run_all --dry-run B=character_appearance.py · agent_start W1154 · scope 判据三态仿真全对 · orchestration_refs 0 FAIL+自测过 · ci_wiring 23 过 · YAML 合法 · pytest/verify 全绿（级联后）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1153（2026-11-07）：安全批（审计报告落实①：agent-web 三根修 + RAG CORS 白名单）
 
 **本批要点**（安全批·两份 2026-11-06 审计报告落实第①批·用户令「按顺序全部开始」并批准改 agent-web 权限边界）：
@@ -736,7 +761,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1153），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1154），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -35,7 +35,11 @@ SCRIPT_TIMEOUT_SECONDS = 300
 def discover_scripts() -> list[tuple[str, Path]]:
     """扫描 A_*/ ~ AH_*/ 目录，返回 [(类别名, 脚本路径)]。
 
-    每个目录取其中第一个 .py 文件作为主脚本（按文件名排序）。
+    每个目录取其中第一个**可运行**的 .py 文件作为主脚本（按文件名排序）。
+    W1154（基础设施审计 §3.5.2-1）：原实现「字典序第一个 .py」会把 `__init__.py`
+    误选为主脚本（B 类三分析器 character_appearance/network/nlp 从未进批量生成）
+    ⇒ 排除 `__init__.py` 与 `_` 前缀一次性件，优先选含 `if __name__ == "__main__"`
+    的文件（无则回退首个非排除件）。
     """
     result = []
     for d in sorted(SCRIPTS.iterdir()):
@@ -44,11 +48,17 @@ def discover_scripts() -> list[tuple[str, Path]]:
         # 仅取单字母前缀 + 下划线开头的目录（A_*/ B_*/ ... AH_*/）
         if "_" not in d.name:
             continue
-        py_files = sorted(d.glob("*.py"))
+        py_files = [
+            f for f in sorted(d.glob("*.py"))
+            if f.name != "__init__.py" and not f.name.startswith("_")
+        ]
         if py_files:
+            # 优先含 main 守卫的文件（可运行）；否则回退首个非排除件
+            main_guard = [f for f in py_files if "__main__" in f.read_text(encoding="utf-8", errors="replace")]
+            pick = (main_guard or py_files)[0]
             # 类别名 = 目录名下划线前部分
             category = d.name.split("_")[0]
-            result.append((category, py_files[0]))
+            result.append((category, pick))
     return result
 
 
