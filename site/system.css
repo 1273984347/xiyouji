@@ -977,6 +977,23 @@ td.num, th.num {
     .legend-cell[role="button"] {
         min-height: 44px;
     }
+    /* W1166：纯视觉图例项（无 role·不可点击）原 20px，与上方 44px 可点击项纵向相邻时
+       呈现「上半松、下半紧」的节奏断裂（W1165 验收实测 12 项图例视觉）。补到 32px——
+       既远高于 24px AA 线，又把两组行距差从 24px 收敛到 12px，列表总高仅增约 72px。 */
+    .legend-item:not([role="button"]),
+    .legend-cell:not([role="button"]) {
+        min-height: 32px;
+    }
+    /* W1166：底部固定浮层与页脚的行为冲突——.rag-fab（56px @ bottom:28 ⇒ 占底部 84px）
+       压住首页/看板页脚右下链接（实证：首页「反馈」被遮），.xy-fab-theme（40px @ bottom:14
+       ⇒ 占 54px）同区域。移动端为页脚预留安全区，浮层不再与文字重叠。 */
+    .site-footer {
+        padding-bottom: 80px;
+    }
+    /* 更高占用（56px 问答浮层 @ bottom:28 ⇒ 84px）再加高；:has 不支持的浏览器自动落回上一条 80px 兜底 */
+    body:has(.rag-fab) .site-footer {
+        padding-bottom: 104px;
+    }
     /* W1165：表单控件原高度 21–23px（页内内联 padding 决定，差 1–3px 触线）。
        仅限窄屏补足，桌面端视觉零变化。 */
     select,

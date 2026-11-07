@@ -90,36 +90,38 @@ def media_block(css: str, query: str) -> str:
     return ""
 
 
-def check_static(css: str, js: str) -> list[str]:
-    """A 层判据：返回违规描述列表。"""
-    fails = []
-
+def _check_cite_summary(css: str) -> list[str]:
+    """A1：cite 折叠标题触摸尺寸。"""
     block = css_block(css, ".cite-details summary")
     if block is None:
-        fails.append("A1 缺 .cite-details summary 规则（cite 折叠标题触摸尺寸契约丢失）")
-    else:
-        h = px_of(block, "min-height")
-        if h is None or h < MIN_TAP_PX:
-            fails.append(f"A1 .cite-details summary 缺 min-height≥{MIN_TAP_PX:g}px（实测 {h}）——88 页折叠标题会退回 19px")
+        return ["A1 缺 .cite-details summary 规则（cite 折叠标题触摸尺寸契约丢失）"]
+    h = px_of(block, "min-height")
+    if h is None or h < MIN_TAP_PX:
+        return [f"A1 .cite-details summary 缺 min-height≥{MIN_TAP_PX:g}px（实测 {h}）——88 页折叠标题会退回 19px"]
+    return []
 
-    mob = media_block(css, "@media (max-width: 640px)")
+
+def _check_legend_mobile(mob: str) -> list[str]:
+    """A2：移动端可点击图例项触摸尺寸。"""
     if not mob:
-        fails.append("A2 缺 @media (max-width: 640px) 移动端降级块")
-    else:
-        lg = css_block(mob, '.legend-item[role="button"]')
-        if lg is None:
-            fails.append('A2 移动端块缺 .legend-item[role="button"] 规则（可点击图例项退回 20px）')
-        else:
-            h = px_of(lg, "min-height")
-            if h is None or h < MIN_TAP_PX:
-                fails.append(f'A2 .legend-item[role="button"] 缺 min-height≥{MIN_TAP_PX:g}px（实测 {h}）')
+        return ["A2 缺 @media (max-width: 640px) 移动端降级块"]
+    lg = css_block(mob, '.legend-item[role="button"]')
+    if lg is None:
+        return ['A2 移动端块缺 .legend-item[role="button"] 规则（可点击图例项退回 20px）']
+    h = px_of(lg, "min-height")
+    if h is None or h < MIN_TAP_PX:
+        return [f'A2 .legend-item[role="button"] 缺 min-height≥{MIN_TAP_PX:g}px（实测 {h}）']
+    return []
 
+
+def _check_footer_nav(css: str) -> list[str]:
+    """A3/A4：页脚 nav 换行与子项不折字 + 触摸线。"""
+    fails = []
     nav = css_block(css, ".site-footer nav")
     if nav is None:
         fails.append("A3 缺 .site-footer nav 规则")
-    else:
-        if not re.search(r"flex-wrap\s*:\s*wrap", nav):
-            fails.append("A3 .site-footer nav 缺 flex-wrap:wrap（回退即 375px 下链接被压缩成逐字竖排）")
+    elif not re.search(r"flex-wrap\s*:\s*wrap", nav):
+        fails.append("A3 .site-footer nav 缺 flex-wrap:wrap（回退即 375px 下链接被压缩成逐字竖排）")
 
     nav_a = css_block(css, ".site-footer nav a")
     if nav_a is None:
@@ -130,9 +132,46 @@ def check_static(css: str, js: str) -> list[str]:
         h = px_of(nav_a, "min-height")
         if h is None or h < MIN_TAP_PX:
             fails.append(f"A4 .site-footer nav a 缺 min-height≥{MIN_TAP_PX:g}px（实测 {h}）")
+    return fails
 
+
+def _check_js_no_style(js: str) -> list[str]:
+    """A5：样式不得回退为脚本寄生。"""
     if "createElement('style')" in js or 'createElement("style")' in js:
-        fails.append("A5 cite-box.js 重新出现 createElement('style')——样式须留在 system.css，不得回退为脚本寄生")
+        return ["A5 cite-box.js 重新出现 createElement('style')——样式须留在 system.css，不得回退为脚本寄生"]
+    return []
+
+
+def _check_footer_safe_area(mob: str) -> list[str]:
+    """A6：页脚底部安全区。
+
+    底部固定浮层（.xy-fab-theme 40px@bottom14 ⇒ 占 54px；.rag-fab 56px@bottom28 ⇒ 占 84px）
+    会压住页脚右下链接（W1166 实证：首页「反馈」被 .rag-fab 遮挡）。阈值取最小浮层占用 54px。
+    """
+    if not mob:
+        return []
+    sf = css_block(mob, ".site-footer")
+    if sf is None:
+        return ["A6 移动端块缺 .site-footer 安全区规则（底部浮层将遮挡页脚链接）"]
+    pb = px_of(sf, "padding-bottom")
+    if pb is None or pb < 54:
+        return [f"A6 .site-footer 移动端 padding-bottom < 54px（实测 {pb}）——.xy-fab-theme 占底部 54px"]
+    return []
+
+
+def check_static(css: str, js: str) -> list[str]:
+    """A 层判据：按 A1–A6 逐项委托，返回违规描述列表。
+
+    拆成单项函数是结构档要求（`too-many-branches` ≤16·W1166 加 A6 后主函数超阈），
+    同时让「哪一条契约被破坏」在代码层可见，而不是一长串 if。
+    """
+    mob = media_block(css, "@media (max-width: 640px)")
+    fails: list[str] = []
+    fails += _check_cite_summary(css)
+    fails += _check_legend_mobile(mob)
+    fails += _check_footer_nav(css)
+    fails += _check_js_no_style(js)
+    fails += _check_footer_safe_area(mob)
     return fails
 
 
@@ -169,38 +208,45 @@ SELF_TEST = [
     # 1 合约齐备
     ("""\
 .cite-details summary { min-height: 44px; }
-@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } }
+@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } .site-footer { padding-bottom: 80px; } }
 .site-footer nav { flex-wrap: wrap; }
 .site-footer nav a { white-space: nowrap; min-height: 24px; }
 """, "(function(){})()", 0),
     # 2 summary 缺 min-height
     ("""\
 .cite-details summary { cursor: pointer; }
-@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } }
+@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } .site-footer { padding-bottom: 80px; } }
 .site-footer nav { flex-wrap: wrap; }
 .site-footer nav a { white-space: nowrap; min-height: 24px; }
 """, "", 1),
     # 3 页脚 nav 缺 flex-wrap
     ("""\
 .cite-details summary { min-height: 44px; }
-@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } }
+@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } .site-footer { padding-bottom: 80px; } }
 .site-footer nav { display: flex; gap: 20px; }
 .site-footer nav a { white-space: nowrap; min-height: 24px; }
 """, "", 1),
     # 4 图例缺 min-height（20px 不足）
     ("""\
 .cite-details summary { min-height: 44px; }
-@media (max-width: 640px) { .legend-item[role="button"] { min-height: 20px; } }
+@media (max-width: 640px) { .legend-item[role="button"] { min-height: 20px; } .site-footer { padding-bottom: 80px; } }
 .site-footer nav { flex-wrap: wrap; }
 .site-footer nav a { white-space: nowrap; min-height: 24px; }
 """, "", 1),
     # 5 cite-box.js 回退为脚本寄生
     ("""\
 .cite-details summary { min-height: 44px; }
-@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } }
+@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } .site-footer { padding-bottom: 80px; } }
 .site-footer nav { flex-wrap: wrap; }
 .site-footer nav a { white-space: nowrap; min-height: 24px; }
 """, "var s = document.createElement('style');", 1),
+    # 6 页脚安全区缺失（浮层会遮挡页脚链接）
+    ("""\
+.cite-details summary { min-height: 44px; }
+@media (max-width: 640px) { .legend-item[role="button"] { min-height: 44px; } .site-footer { padding-bottom: 16px; } }
+.site-footer nav { flex-wrap: wrap; }
+.site-footer nav a { white-space: nowrap; min-height: 24px; }
+""", "", 1),
 ]
 
 
@@ -239,7 +285,7 @@ def main() -> int:
     for n in notes:
         print("NOTE " + n)
     state = "FAIL" if fails else "OK"
-    print(f"{MARKER} 契约 5 项 · 违规 {len(fails)} · 提示 {len(notes)} · {state} ----")
+    print(f"{MARKER} 契约 6 项 · 违规 {len(fails)} · 提示 {len(notes)} · {state} ----")
     return 1 if fails else 0
 
 
