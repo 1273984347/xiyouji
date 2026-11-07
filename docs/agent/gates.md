@@ -1,4 +1,4 @@
-# 交付门禁体系全量定义（60 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽·W768 补第 44 槽·W780 补第 45 槽·W809 补第 46 槽·W849 补第 47 槽·W860 补第 48 槽·W883 补第 49 槽·W961 补第 50 槽·W1045 补第 51/52 槽入标题并订正槽数 50 → 52·W1110 补第 54/55/56 槽并订正槽数 53 → 56）
+# 交付门禁体系全量定义（64 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽·W768 补第 44 槽·W780 补第 45 槽·W809 补第 46 槽·W849 补第 47 槽·W860 补第 48 槽·W883 补第 49 槽·W961 补第 50 槽·W1045 补第 51/52 槽入标题并订正槽数 50 → 52·W1110 补第 54/55/56 槽并订正槽数 53 → 56·W1165 补第 64 槽并订正槽数）
 
 > **📖 阅读契约（W709）**：查表型——改 site/、加门禁、动 verify_delivery.py 时按编号查；每条含完整口径与历史实证；编号与 AGENTS §4.2 摘要一一对应。
 > **何时读**：门禁失败要懂原因 / 新增门禁要挂槽 / 复核某条防线范围。**读完你应该能**：说出任一槽位拦什么、豁免与基线在哪。
@@ -11,7 +11,7 @@
 | 结构与加载类（6-11） | 6-11 | docs 全量链接校验、sitemap 覆盖、CSP 漂移、数据漂移、内联脚本语法、CSS 结构平衡 |
 | 声明与完整性类（12-15） | 12-15 | token 覆盖率、动效禁止清单、a11y 对比度、INLINED CSS 完整性 |
 | 数据与一致性类（16-26） | 16-26 | Skills 索引一致性、索引健康、元信息块 v2、术语一致性、原著引文硬验证、动态链接门禁、治理文档维护契约、旁文档同步、图表静态自洽、数据内容一致性、SEO head |
-| 编号与质量防线类（27-60） | 27-60 | W 号区间字面量、可视化可引用性、色盲安全、窄屏降级声明、文档口径体检、CLAUDE.md 速查层完整性、head 内容合法性、CSS 变量引用、声明分隔、孤立选择器、kpi-card 基类、页面内嵌残留标记、故事内时间线双源同步、chapter_stats 双源同步、AGENTS 分层完整性、根级脚本覆盖、目录文档新鲜度、搜索索引新鲜度、性能影子槽、朱砂实底限额、GSAP 写法机检 |
+| 编号与质量防线类（27-64） | 27-64 | W 号区间字面量、可视化可引用性、色盲安全、窄屏降级声明、文档口径体检、CLAUDE.md 速查层完整性、head 内容合法性、CSS 变量引用、声明分隔、孤立选择器、kpi-card 基类、页面内嵌残留标记、故事内时间线双源同步、chapter_stats 双源同步、AGENTS 分层完整性、根级脚本覆盖、目录文档新鲜度、搜索索引新鲜度、性能影子槽、朱砂实底限额、GSAP 写法机检 |
 
 ## 完整定义
 
@@ -112,3 +112,8 @@
 62. **reader 完整性**（check_reader_integrity.py，W1149 挂载·622 页此前无专属判据）：**病根**——`site/reader` 由 `build_reader.py` 独立生成，既不进 `check_inlined_css` 的 `site/data|en` 扫描面，也没有占位/链接/标题类判据 ⇒ 实测 205 页正文「（待补）」、199 条 GitHub 链接 `docs/source/` 前缀 404、33 页多 h1、3 组同题页全部靠人工发现。**判据四条**：C1 可见正文（剥 script/style/注释/标签后）禁「（待补）/待完善/内容建设中/TODO/FIXME/Lorem ipsum」；C2 GitHub `blob|tree/main/<path>` 必须映射到仓内真实文件（含 `../` 归一）；C3 内容页恰 1 个 h1（`meta refresh` 跳转页豁免）；C4 标题空白归一后全站唯一。**恒跑**：扫 623 页·秒级·登记 `_SCOPE_CORE`。**留痕**：`--report` 只报不判红；退出码 0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（`site/reader` 无 HTML 即红）；汇总行恒为 `---- 第 62 门禁 reader 完整性：N FAIL（扫描 N 页） ----`；自测 6 例（四负样本各判红 + 正向页不误报 + 页数断言）；单测 `tests/unit/test_w1149_reader_dataset.py`。
 
 63. **数据集清单**（check_dataset_manifest.py，W1149 挂载·dataset 快照层防退化）：**病根**——`dataset/README.md` 由一次性提取器生成后冻结，实测索引 41/44、体积与「40/80」声明失真、示例文件不存在；同时权重存在 0–1 与 4–10 两套量纲、4 个 sankey 用数字端点、9 节点 `chapter=0` 哨兵、17 空数组 + 1 null 无「无/待补」语义，均无机器判据。**判据五条**：C1 README 行 ↔ 磁盘文件 ↔ 大小（±5%/0.2KB）↔ 条目数；C2 含 weight/score 的文件必须声明 `_schema.weight_scale` 且数值落在声明量纲，sankey 数字端点必须声明 `link_endpoint_schema=index` 且索引 `< nodes.length`；C3 `chapter/回目` 只允许 1–100 或 `null`+`chapter_scope`，禁 0 哨兵；C4 空数组/null 必须有 `<field>_status` / `field_status` / `quote_status` 归类；C5 `deprecated` 必须有 note 与存在的 replacement_page。**恒跑**：读 46 个 JSON·毫秒级·登记 `_SCOPE_CORE`。**留痕**：`--report` 只报不判红；退出码 0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（dataset 无 JSON 即红）；汇总行恒为 `---- 第 63 门禁 数据集清单：N FAIL（扫描 N 文件） ----`；自测 6 例；单测 `tests/unit/test_w1149_reader_dataset.py`。
+
+64. **移动视口**（check_mobile_viewport.py，W1165 挂载·V4 375px 回归批产出）：**病根**——移动端可用性此前全门禁零覆盖：第 30 槽只查「是否声明了降级形态」，不查声明落地后的真实渲染；交互后态探针（W1147）覆盖开合组件但不量尺寸。W1165 以 Playwright 375×667 全量普查 99 页（`mobile_viewport_probe.py`·file:// 加载·84 秒），首跑 **84 页 FAIL**——cite 折叠标题 19px（88 页同构，样式寄生在 `cite-box.js` 的字符串数组，未引脚本的页面结构在而样式缺）、页脚 6 个导航链接被压缩到 18px 宽致中文逐字竖排（91 页）、可点击图例项 70×20、`select`/`input` 21–23px、`phase-timeline` 5 列网格在窄屏把卡片撑到 103px 并被裁剪（内容不可达）。
+   **判据**（A 层 5 项静态契约·毫秒级恒跑）：A1 `site/system.css` 的 `.cite-details summary` 含 `min-height` ≥ 24px；A2 `@media (max-width:640px)` 块内 `.legend-item[role="button"]` 含 `min-height`；A3 `.site-footer nav` 含 `flex-wrap:wrap`；A4 `.site-footer nav a` 含 `white-space:nowrap` 且 `min-height` ≥ 24px；A5 `site/static/js/cite-box.js` 不得出现 `createElement('style')`（样式须留在 system.css，禁止倒退回脚本寄生）。**B 层报告采信**：`scripts/output/mobile_viewport_report.json` 的 FAIL/ERROR 页数必须为 0；报告缺失不判红（NOTE 提示）；报告 mtime 早于 `system.css`/`cite-box.js` ⇒ NOTE 提示重跑（探针 84 秒，刻意不进 pre-commit）。
+   **解析纪律（本槽自身两次踩坑）**：① 多选择器组（`.a,<换行>.b{}`）用「单选择器 + 紧跟 `{`」的正则会漏判 ⇒ 改为叶子规则解析后按逗号切分做**精确字符串比较**（同时避免 `.site-footer nav` 误命中 `.site-footer nav a`）；② CSS 注释会被选择器捕获正则吃进选择器文本（实测 `/* … */` + 换行 + `.cite-details summary` ⇒ 永不命中 ⇒ 对已落地修复持续误报）⇒ 解析前必须 `strip_comments`。
+   汇总行恒为 `---- 第 64 门禁 移动视口：契约 5 项 · 违规 N · 提示 M · OK|FAIL ----`；自测 5 例（4 正 + 1 项 JS 回退负样本）；探针自测 9 例（含「可滚动容器越界不计」与「真裁剪计 WARN」对偶）。恒跑（`_SCOPE_CORE`）。

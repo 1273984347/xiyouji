@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-07 19:22
+生成时间：2026-11-07 21:01
 
-共 **193** 件（门禁与校验 89 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 75 · 一次性（下划线前缀） 6）
+共 **195** 件（门禁与校验 90 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 76 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（89）
+## 门禁与校验（90）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -68,6 +68,7 @@
 | `check_js_syntax.js` | W591（经用户批准）：非 JS 数据块（application/ld+json、application/json、importmap 等） |
 | `check_js_syntax.py` | Check inline JS syntax in HTML files using `node --check`. |
 | `check_kpi_card_base.py` | kpi-card 基类门禁（第 37 门禁 · W673/WP-2.6）——防全局基类再被批量操作洗掉 / 页面漏分发。 |
+| `check_mobile_viewport.py` | check_mobile_viewport.py — 第 64 门禁 · 移动视口触摸与裁剪（W1165 · V4 375px 回归） |
 | `check_motion_ban.py` | check_motion_ban.py — Phase E E6 转正门禁（D4 动效禁止清单） |
 | `check_motion_guard.py` | check_motion_guard.py — d3 动效守卫覆盖率判据（W1135·遗留① 根治 + 防复发） |
 | `check_no_brand_refs.py` | check_no_brand_refs.py — 品牌字面量零命中守卫（W836·N2「归档检测器复活到活面」） |
@@ -145,7 +146,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（75）
+## 工具（76）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -193,6 +194,7 @@
 | `interaction_components.py` | interaction_components.py — 全站开合组件清单（W1147 待办①·交互后态门禁覆盖的数据面）。 |
 | `interaction_state_probe.py` | interaction_state_probe.py — 交互后态探针（W1147 待办①·12 类开合组件清单驱动）。 |
 | `j1_name_audit.py` | j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件） |
+| `mobile_viewport_probe.py` | mobile_viewport_probe.py — 移动视口渲染探针（W1165 · V4 375px 回归）。 |
 | `new_page.py` | new_page.py — 可视化页面脚手架 |
 | `obs_sample.py` | obs_sample.py — OBS-10/11/14 逐批采样件（W850 建·Q2 裁决的取数入口）。 |
 | `optimize-html-size.py` | W230 E3 · HTML 文件体积优化脚本 |

@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（201）
+## 文件（203）
 
 ### Python 脚本
 
@@ -132,6 +132,7 @@
 - `check_interaction_binding.py`
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
+- `check_mobile_viewport.py`
 - `check_motion_ban.py`
 - `check_motion_guard.py`
 - `check_no_brand_refs.py`
@@ -195,6 +196,7 @@
 - `ledger_close_check.py`
 - `ledger_mutation_test.py`
 - `lint_links.py`
+- `mobile_viewport_probe.py`
 - `new_page.py`
 - `obs_sample.py`
 - `optimize-html-size.py`

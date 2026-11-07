@@ -583,11 +583,19 @@ td.num, th.num {
 }
 .site-footer nav {
     display: flex;
-    gap: 20px;
+    /* W1165（V4 移动端 375px 回归）：原为 nowrap 且子项可折字 ⇒ 375px 下 6 项被压缩到 18px 宽，
+       视觉呈「每行 1–2 字」的竖排堆叠（perf-canvas-rendering 页实证）。改为允许换行 + 子项不折字。 */
+    flex-wrap: wrap;
+    gap: 12px 20px;
 }
 .site-footer nav a {
     font-size: 13px;
     color: var(--ink-soft);
+    /* W1165：子项占满 24px 触摸线（WCAG 2.5.8 AA），并禁止中文逐字折行 */
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    white-space: nowrap;
 }
 .site-footer nav a:hover { color: var(--accent); }
 
@@ -749,6 +757,114 @@ td.num, th.num {
 }
 .empty-state p { font-size: 15px; }
 
+/* ===== 可引用性组件（cite · W1165 从 cite-box.js 归位到单一事实源）=====
+   背景：本组件样式原以字符串数组形式注入于 site/static/js/cite-box.js，由 JS 建 <style> 节点挂 head。
+   后果——未引用该脚本的页面（如 data/wukong-tangseng-benchmark.html，自实现复制逻辑）结构在而样式缺，
+   .cite-copy 回落浏览器默认 31×21。样式属于表现层，不该由脚本寄生携带；归位 system.css 后
+   全部 88 个含 cite 块的页面（内联或外链 system.css）统一获得样式，JS 只留交互职责。 */
+.cite-block {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--paper-warm);
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+}
+.cite-block code {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 1px 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+.cite-block .cite-details { margin-top: 6px; }
+/* summary 触摸尺寸：原为浏览器默认 19px 高（88 页统一落在 WCAG 2.5.8 的 24px 线以下）。
+   display:flex 会吃掉 list-item 原生三角，故显式绘制箭头；动效仅 transform，时长走 --dur-fast 预算。 */
+.cite-details summary {
+    cursor: pointer;
+    color: var(--accent-2);
+    font-weight: 500;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+}
+.cite-details summary::before {
+    content: "\25B8";
+    flex: 0 0 auto;
+    color: var(--accent-2);
+    transition: transform var(--dur-fast) var(--ease-out-quart);
+}
+.cite-details[open] summary::before { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) {
+    .cite-details summary::before { transition: none; }
+}
+.cite-block .cite-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+.cite-block .cite-item > span {
+    flex: 0 0 44px;
+    font-weight: 600;
+    color: var(--ink);
+    padding-top: 6px;
+}
+.cite-block pre.cite-text {
+    flex: 1;
+    margin: 0;
+    padding: 6px 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: var(--ink);
+}
+/* 复制按钮：原 44×25（低于 24px 线仅差 1px、远低于 44px 建议值），补到 44×36 */
+.cite-copy {
+    flex: 0 0 auto;
+    min-height: 36px;
+    min-width: 44px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--paper);
+    color: var(--accent-2);
+    font-size: 11px;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart), color var(--dur-fast) var(--ease-out-quart);
+}
+.cite-copy:hover {
+    background: var(--accent-tint);
+    color: var(--accent);
+}
+/* W1134：复制成功显示对勾，2.5s 后自动淡出 */
+.cite-copy.ok {
+    color: var(--ok);
+    border-color: var(--ok);
+    animation: cite-copy-fadeout 2.5s ease-out forwards;
+}
+@keyframes cite-copy-fadeout {
+    0%, 60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cite-copy.ok { animation: none; }
+}
+.cite-block a[href$=".json"] {
+    display: inline-block;
+    margin-top: 6px;
+    color: var(--accent-2);
+}
+
 /* ===== 微交互工具类（W477 Phase E1 · DESIGN.md §4A.7 · 时长取 §5 契约档） ===== */
 /* 滚动显现：fail-open——仅 JS 在 <html> 挂 .js-reveal 后启用（E5 接入）；无 JS 内容直接可见 */
 .js-reveal .reveal-in {
@@ -854,6 +970,19 @@ td.num, th.num {
     .legend-cell,
     .legend-label {
         font-size: 11px;
+    }
+    /* W1165（V4 移动端回归）：可点击图例项（role=button·D3 系列切换控件）原为 20px 高，
+       低于 WCAG 2.5.8 的 24px 线；纵排列表下补足 44px 不改变原有单列布局宽度。 */
+    .legend-item[role="button"],
+    .legend-cell[role="button"] {
+        min-height: 44px;
+    }
+    /* W1165：表单控件原高度 21–23px（页内内联 padding 决定，差 1–3px 触线）。
+       仅限窄屏补足，桌面端视觉零变化。 */
+    select,
+    input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+    label[for] {
+        min-height: 32px;
     }
     .chart-block svg text,
     .chart-wrap svg text,

@@ -1,3 +1,52 @@
+## W1165 V4 移动端 375px 回归批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/mobile_viewport_probe.py | W1165 | 新建：375px 视口探针（四类判据·file:// 加载·自测 9 例） |
+| scripts/check_mobile_viewport.py | W1165 | 新建：第 64 槽（A 层 5 项静态契约 + B 层报告采信·自测 5 例） |
+| scripts/verify_delivery.py | W1165 | 改：挂第 64 槽 + EXPECTED_SECTION_NAMES 加「移动视口」+ _SCOPE_CORE 登记 |
+| site/system.css | W1165 | 改：cite 组件段新增（样式自 JS 归位）+ 页脚 nav flex-wrap/nowrap + 移动端图例与表单触摸尺寸 |
+| site/static/js/cite-box.js | W1165 | 改：剥离 CSS 注入（样式归位 system.css），仅保留复制交互 |
+| site/dashboard.html | W1165 | 改：私有 .flinks 页脚触摸尺寸（外链 CSS 页不走内联） |
+| site/data/pilgrim-team-dynamic-network.html | W1165 | 改：.phase-timeline 窄屏 5 列→2 列（375px 下卡片溢出被裁剪） |
+| scripts/output/mobile_viewport_report.json | W1165 | 新建：探针全量报告（99 页终值 FAIL 0） |
+| tests/unit/test_w1165_mobile_viewport.py | W1165 | 新建：13 例回归锁（探针分级语义 / 门禁解析器两处缺陷形态 / 仓库契约） |
+| site/（3 件） | W1165 | inline_css 副本同步 + 搜索索引重生成（_template.html / dukou-engine.html / search.html） |
+| site/data/（89 件） | W1165 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1165 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1165 | inline_css 副本同步（同上·W1142 分组登记） |
+| docs/00-导读/W批次编号对账表.md | W1165 | 改：W1165 认领行 + W1102/1103 腾窗迁出 + W1164 收官回填 |
+| pitfalls.md | W1165 | 改：+E-200（组件样式不得寄生脚本·尺寸缺陷须有真实渲染判据）+ 分项计数 163 |
+| docs/agent/gates.md | W1165 | 改：第 64 槽定义（契约与口径） |
+| AGENTS.md | W1165 | 改：§4.2 第 64 槽摘要 + 槽数 63→64（三处） |
+| CHANGELOG.md | W1165 | 改：W1165 段落（级联） |
+| HANDOVER.md | W1165 | 改：最后更新行 + 当前进度（级联） |
+| scripts/output/_w1165_spec.json | W1165 | 新建：本批 spec |
+| scripts/output/file-index.md | W1165 | 改：W1165 段（级联） |
+| scripts/output/_cascade_files_W1165.txt | W1165 | 新建：级联清单 |
+| .github/workflows/README.md | W1165 | 改：区间行推进（版本面） |
+| CITATION.cff | W1165 | 改：version/date 推进（级联） |
+| README.md | W1165 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1165 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1165 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1165 | 改：逐批明细追加（W1165·级联） |
+| docs/00-导读/项目说明.md | W1165 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1165 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1165 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1165 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1165 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1165 | 改：再生成/验证缓存（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1165 | 改：stats 标记 gate_count 63→64（stats.py 标记面跟随） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1165 | 改：stats 标记 gate_count 63→64（同上） |
+| pytest.ini | W1165 | 改：stats 标记 pytest_collected 随本批新增单测更新 |
+| scripts/output/stats-changelog.json | W1165 | 改：stats 生成件跟随（stats.py --w 1165） |
+| scripts/output/stats-index.md | W1165 | 改：stats 生成件跟随（同上） |
+| .agent/skills/puti-shouye/SKILL.md | W1165 | 改：坑表计数 293→294（菩提授业 skill 双处） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1165 | 改：台账腾窗迁入 W1102-W1103（archive_ledger_rows --apply） |
+| scripts/INDEX.md | W1165 | 改：目录清单刷新（gen_folder_docs --refresh·新增两脚本） |
+| tests/unit/INDEX.md | W1165 | 改：目录清单刷新（同上·新增 W1165 单测） |
+| tests/unit/README.md | W1165 | 改：目录清单刷新（同上） |
+
 ## W1164 触发器硬拦升格批（2026-11-07）
 
 | 文件 | W | 说明 |

@@ -1,3 +1,19 @@
+### W1165（2026-11-07）：V4 移动端 375px 回归批（全量 99 页普查 FAIL 84→0·四层根因根修·新增第 64 槽）
+
+**本批要点**（用户「开工」指令·HANDOVER 待动方向 V4「移动端体验：375px 视口回归/触摸交互优化」）：
+
+> - **T1 普查基线与判据建立**：新建 `scripts/mobile_viewport_probe.py`（第 64 槽配套探针）——逐页在 375×667 下量四类渲染事实：A 水平溢出 / B 越界元凶（最外层）/ C 触摸目标（<44 与 <24 双线）/ D 正文字号，产出 JSON 报告；file:// 加载（同时验证「双击可开」铁律与 EMBEDDED 回退路径）；99 页 84 秒。首跑实测 **FAIL 84 页 / WARN 15 / OK 0**，水平溢出 0（无横向滚动条）但存在内容被 overflow:hidden 裁掉。
+> - **T2 判据先修后修数据（三次修正，全部属判据缺陷而非页面缺陷）**：① `input[type=range]` 的 rect 是**轨道**（实测 129×6）不是触摸区，按 rect 判会系统性误报 ⇒ 剔除；② SVG 内部节点尺寸由数据与坐标系决定（D3 网络图），移动端替代方案是缩放与点选 ⇒ 单列 `svgSmall` 信息项不进分级；③ 越界元素须区分「落在可横向滚动容器内＝移动端表格/图表的既定形态」与「无可滚动祖先＝被裁掉不可达」——前者不计、后者计 WARN；④ 装饰性越界白名单（弹幕 `.danmaku-fly` 按设计从视口外飞入）。修正后 53 页「越界」收敛为 **2 页真裁剪**。
+> - **T3 cite 组件：样式寄生 JS 的根因根修（单一最大收益·88 页）**：`.cite-details summary` 原无任何尺寸定义 ⇒ 浏览器默认 19px 高，88 页统一落在 24px 触摸线以下（84 页 FAIL 的主因）。更深层根因是**样式以字符串数组寄生在 `cite-box.js` 并在 init 建 `<style>` 注入 head**——导致未引用该脚本但含 cite 结构的页面（`data/wukong-tangseng-benchmark.html` 自实现复制逻辑）结构在而样式缺，复制按钮回落浏览器默认 31×21。修复：全部 `.cite-*` 样式**归位 `site/system.css`「可引用性组件」段**（单一事实源），`cite-box.js` 只留交互（删 CSS 数组与 style 注入）；summary 19→44px 并自绘箭头（`display:flex` 吃掉原生 marker）；`.cite-copy` 44×25 → 44×36；选择器去掉 `.cite-block` 祖先限定以覆盖无容器页面。
+> - **T4 页脚导航：91 页中文逐字竖排（视觉实证缺陷）**：`.site-footer nav` 为 `display:flex` 无 `flex-wrap`、子项无 `white-space:nowrap` ⇒ 375px 下 6 个链接被压缩到 18px 宽、文字逐字折行，实测截图呈「首 页 / 看 板 / 标 签 云 / 全 文 检 索」竖排堆叠。修复：`flex-wrap:wrap` + `gap:12px 20px` + 子项 `white-space:nowrap` + `min-height:24px`（顺带消除 18×59 的触摸缺陷）。
+> - **T5 图例与表单控件（移动端块）**：`.legend-item[role="button"]`（D3 系列切换·带 aria-label「切换 X 显示」与 tabindex）实测 70×20 ⇒ 移动端块补 `min-height:44px`（3 页可点击图例；纵排列表形态下不改变宽度）；`select`/`input`（非 checkbox/radio）/`label[for]` 实测 21–23px（页内内联 padding 决定）⇒ 窄屏统一 `min-height:32px`，桌面端零变化。
+> - **T6 两处页内私有实现**：① `site/dashboard.html` 是外链 CSS 页（不走 inline_css 内联），其页脚用私有 `.flinks` 而非 `.site-footer nav` —— 同样补 `flex-wrap`/`nowrap`/`min-height`（3 个链接原 48×20）；② `data/pilgrim-team-dynamic-network.html` 的 `.phase-timeline` 为 `grid-template-columns: repeat(5,1fr)`，375px 下每列约 60px、内容区 36px ⇒ 卡片文字撑爆至 103px 且被裁剪**内容不可达**，窄屏改 2 列（≥640px 维持原 5 列）。
+> - **T7 门禁化（第 64 槽 `check_mobile_viewport.py`）**：A 层 5 项静态契约毫秒级恒跑——A1 `.cite-details summary` 有 min-height≥24 / A2 移动端块内 `.legend-item[role="button"]` 有 min-height / A3 `.site-footer nav` 有 flex-wrap / A4 `.site-footer nav a` 有 nowrap+min-height / A5 `cite-box.js` 不得再现 `createElement('style')`（防样式倒退回脚本寄生）；B 层采信探针报告（FAIL 必为 0·报告旧于 CSS/JS 时 NOTE 提示重跑而不判红——探针 84 秒不进 pre-commit）。自测 5/5。**判据解析两处自身缺陷当场咬出并修正**：多选择器组（`.a,<换行>.b{}`）漏判 ⇒ 改叶子规则解析+选择器组精确比较；CSS 注释污染选择器（`/* … */\n.cite-details summary`）⇒ 解析前 strip_comments——门禁若带这两处缺陷，会对已落地修复持续误报。
+> - **T8 全量终值与副作用验证**：99 页终值 **FAIL 0 · 真裁剪 0 · 水平溢出 0 · WARN 99**（剩余 WARN 全为 <44px 与 10–11px 字号，属信息密度型设计的有意选择，不修）；`inline_css.py --force` 重同步 **851 页**（system.css 新增 cite 段与页脚改动的传播）；`generate_csp.py --check` **859 页 913 哈希零漂移**（仅改 CSS 内联与外部 JS、未动内联脚本）；`check_mobile_viewport.py` 实跑契约 5 项违规 0。
+> - **验证**：探针自测 8→9 例全过（新增「可滚动容器越界不计」用例）+ 第 64 槽自测 5/5 + verify auto 全档绿（收官栏终值）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1164（2026-11-07）：触发器硬拦升格批（超阈 1 倍 preflight FAIL·用户裁决）
 
 **本批要点**（用户裁决「做」·触发器超阈 1 倍升格 preflight FAIL 硬拦）：
@@ -884,7 +900,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1164），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1165），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
