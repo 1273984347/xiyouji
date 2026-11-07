@@ -1,3 +1,18 @@
+### W1160（2026-11-07）：治理欠账清偿批（复盘+对抗审查派发+Backlog 对账+archive_tier2+台账反填+is_inflight 词表根修）
+
+**本批要点**（用户令「全都开始做」·盘点四面实测后的欠账清偿批）：
+
+> - **T1 archive tier-2 两件超限清偿**：CHANGELOG-ARCHIVE 1384KB→898KB（迁 138 段 W673-W813 → tier2-W673-W813）+ file-index-ARCHIVE 1706KB→899KB（迁 579 段 W335-W979 → tier2-W335-W979）——archive_health 待办 2→0。
+> - **T2 台账滞后行全量反填**：19 笔（W1115-W1159 在途行）`ledger_backfill --from-git` 行指纹回填；W1137/W1147「已合并」形态行暴露 **is_inflight 词表缺口**（不识别「已合并/已让号/已撤销」⇒ 每批 19 条滞后误报 WARN 淹没真信号）→ DONE_PREFIXES 根修 + 回归锁 test_inflight_recognizes_merged_status（滞后误报 19→0）。
+> - **T3 复盘批清偿**（三触发全超：7 天/59 批/360 提交）：第 53 篇《工作复盘与优化分析报告-2026-11-07》落 11-方案报告/工作复盘与优化分析报告/（四批速览+五条复利经验+五道新判据表+遗留去向），README 登记面 16→17 篇同步。
+> - **T4 对抗审查派发清偿**（85 批 ≥20 阈值）：adversarial-audit-prompt 模板 subagent 后台派发（A-G 七项清单·被审对象 W1157-W1160 四批声明）——台账认领行已写 token「对抗审查已派发」；报告回来后 P0/P1 立即修、P2 同批或次批（铁律 14·修复与登记同批）。
+> - **T5 Backlog 对账清偿**（100 批 ≥25 阈值）：HANDOVER §四新增 W1160 对账注记——W1048 形态锚三方槽位一致复核留存 / 三批台账行 hash 实证回填 / 审计派生面四批落地核验 / 滞后行+词表误报归零 ⇒ 登记面无未决待办。
+> - **验证**：archive_health --strict 0 待办 + preflight 滞后 WARN 19→0 + pytest preflight 面 25 passed + check_index_health 绿（收官栏补终值）。
+> - **T6 对抗审查回收与修复（同批·模板收尾义务）**：subagent A-G 七项审查报告回收——**P1×2 已修**：① check_gov_doc_claims._pitfalls_count 仍读跳转壳（W1157 迁根漏改的第四个取数面·N4 判据失效且方向指鹿为马）→ 改读根正本（0 FAIL 恢复）；② check_rewrite_integrity DEF_RE 对 async def 全盲（切除/残留假绿）→ 正则加可选 async 前缀+T6/T7 负样本（自测 5→7 例）。**P2×4 已修**：跳转壳计数 292→293（计数链第六处）；backfill_changelog docstring 双文案矛盾统一为规范化语义；docs/11 五处分区标题计数按磁盘实算刷新（69→107 等）；HANDOVER「57 槽」→63。**P3 知悉留痕**：死代码表达式已顺手简化；git diff 失败静默放行与铁律 23 的张力登记待议；存量同号 12 个（门禁 NOTE 合规面）；台账版段列噪声已清。
+> - **T7 声明与实况不符项（审查 §3·按义务落档）**：① W1159「计数链五处」实为六处载体（跳转壳漏改）；② W1157「changelog_block fail-closed 守卫」实况为规范化兜底不 raise（W1159 已定稿·docstring 已统一）；③ W1158「11 个函数」实数 14、「44 例测试锁」test_preflight_check 实收 24；④ W1157「3 门禁脚本路径」漏第四个取数面（P1-1）。教训：批次收官的数字必须产物终态后采集（E-142 四载体对表法）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1159（2026-11-07）：坑表 E-199 批（大块程序化改写三重防线·用户问责落载体）
 
 **本批要点**（用户问责「不止一次出现过」——大块程序化改写事故族坑表落载体）：
@@ -825,7 +840,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1159），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1160），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -77,6 +77,21 @@ def test_is_inflight_strips_markdown_bold():
     assert preflight_check.is_inflight("**进行中**")
 
 
+def test_inflight_recognizes_merged_status():
+    """W1160 根修锁：「已合并」是兄弟会话 PR 收官登记形态，必须判非在途。
+
+    实证：W1137/W1147 状态列「**已合并（PR #142·8f724d1f）**」不被识别 ⇒
+    preflight 每批误报「登记滞后」WARN ×19（触发器噪音淹没真信号）。
+    同族形态「已让号/已撤销」（让号先例 W894/W1039）一并纳入。
+    """
+    assert not preflight_check.is_inflight("**已合并（PR #142·8f724d1f）**")
+    assert not preflight_check.is_inflight("已合并")
+    assert not preflight_check.is_inflight("**已让号（W895 先落地）**")
+    assert not preflight_check.is_inflight("**已撤销（撞号停手）**")
+    # 真在途形态仍判在途（判据强度不降）
+    assert preflight_check.is_inflight("在途（认领·未收官）")
+    assert preflight_check.is_inflight("进行中（剩余=联调）")
+
 def test_inflight_with_bold_status_variants():
     # W741 加固回归：单星/多星/空白变体（replace("**") 防不住单星·re.sub 全量剥离）
     assert not preflight_check.is_inflight("*已收官*")

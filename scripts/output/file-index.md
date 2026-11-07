@@ -1,3 +1,58 @@
+## W1160 治理欠账清偿批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W1160 | 改：DONE_PREFIXES 补「已合并/已让号/已撤销」（is_inflight 词表根修·每批 19 条滞后误报归零） |
+| tests/unit/test_preflight_check.py | W1160 | 改：+test_inflight_recognizes_merged_status 回归锁 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-07.md | W1160 | 新建：第 53 篇复盘（W1157-W1160 四批·五条复利经验+五道新判据表） |
+| docs/11-方案报告/README.md | W1160 | 改：复盘登记面 16→17 篇+编号 53 行 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1160 | 改：tier2 腾窗（1384KB→898KB·迁 138 段） |
+| archive/docs/CHANGELOG-ARCHIVE-tier2-W673-W813.md | W1160 | 新建：二级归档（W673-W813） |
+| archive/docs/file-index-ARCHIVE.md | W1160 | 改：tier2 腾窗（1706KB→899KB·迁 579 段） |
+| archive/docs/file-index-ARCHIVE-tier2-W335-W979.md | W1160 | 新建：二级归档（W335-W979） |
+| archive/README.md | W1160 | 改：台账登记（tier2 两件） |
+| archive/INDEX.md | W1160 | 改：再生成 |
+| archive/docs/INDEX.md | W1160 | 改：再生成（tier2 两件+台账迁出） |
+| archive/docs/README.md | W1160 | 改：再生成 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1160 | 改：台账腾窗迁出 3 行（W1097-W1099） |
+| docs/00-导读/W批次编号对账表.md | W1160 | 改：W1160 认领行（含对抗审查 token）+腾窗迁出+19 行反填 |
+| HANDOVER.md | W1160 | 改：坑表计数+Backlog 对账注记+级联 |
+| CHANGELOG.md | W1160 | 改：W1160 段落（级联） |
+| scripts/output/_w1160_spec.json | W1160 | 新建：本批 spec |
+| scripts/output/file-index.md | W1160 | 改：W1160 段（级联） |
+| scripts/output/_cascade_files_W1160.txt | W1160 | 新建：级联清单 |
+| .github/workflows/README.md | W1160 | 改：W450-W1160 区间行推进（版本面） |
+| AGENTS.md | W1160 | 改：版本脚注滚动（级联） |
+| CITATION.cff | W1160 | 改：version/date 推进（级联） |
+| README.md | W1160 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1160 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1160 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1160 | 改：逐批明细追加（W1160） |
+| docs/00-导读/项目说明.md | W1160 | 改：版本行推进（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1160 | 改：级联面 |
+| pytest.ini | W1160 | 改：级联面 |
+| scripts/guardrails/INDEX.md | W1160 | 改：级联面 |
+| scripts/guardrails/README.md | W1160 | 改：级联面 |
+| scripts/output/_vermilion_solid_cache.json | W1160 | 改：级联面 |
+| scripts/output/stats-changelog.json | W1160 | 改：stats 级联 |
+| scripts/output/stats-index.md | W1160 | 改：stats 级联 |
+| scripts/output/stats.json | W1160 | 改：stats 刷新（级联） |
+| site/data/cross-time-danmaku.html | W1160 | 改：页脚链推进（级联） |
+| site/data/tag-cloud.html | W1160 | 改：页脚链推进（级联） |
+| site/dukou-engine.html | W1160 | 改：页脚链推进（级联） |
+| site/index.html | W1160 | 改：页脚链推进（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1160 | 改：stats 标记面跟随（report_docs/report_docs 键刷新） |
+| docs/INDEX.md | W1160 | 改：再生成（复盘新件 860 篇） |
+| scripts/output/INDEX.md | W1160 | 改：再生成 |
+| scripts/output/README.md | W1160 | 改：再生成 |
+| scripts/output/tools-inventory.md | W1160 | 改：再生成 |
+| site/data/search.html | W1160 | 改：内嵌搜索索引再生成（复盘报告入索引） |
+| site/en/search.html | W1160 | 改：内嵌搜索索引再生成（同上） |
+| scripts/check_gov_doc_claims.py | W1160 | 改：P1-1 根修——_pitfalls_count 改读根 pitfalls.md（第四取数面跟随） |
+| scripts/guardrails/check_rewrite_integrity.py | W1160 | 改：P1-2 根修——DEF_RE 支持 async def+T6/T7 负样本（自测 7 例）+P3-1 死代码简化 |
+| scripts/backfill_changelog.py | W1160 | 改：P2-2 docstring 统一为规范化语义（删旧 fail-closed 双文案） |
+| docs/agent/pitfalls.md | W1160 | 改：P2-1 跳转壳计数 292→293（计数链第六处） |
+
 ## W1159 坑表 E-199 批（2026-11-07）
 
 | 文件 | W | 说明 |

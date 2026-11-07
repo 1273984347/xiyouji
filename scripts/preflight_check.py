@@ -70,7 +70,9 @@ def parse_ledger(text):
             "rows": rows}
 
 
-DONE_PREFIXES = ("已收官", "已闭环")
+# W1160 根修：补「已合并」——兄弟会话以 PR 合并收官的登记形态（W1137/W1147 实证：状态列
+# 已写「**已合并（PR #142·8f724d1f）**」而 is_inflight 不识别 ⇒ preflight 每批误报「登记滞后」WARN）。
+DONE_PREFIXES = ("已收官", "已闭环", "已合并", "已让号", "已撤销")
 
 # W825：状态列与 touches 列的**内容定位**（禁按固定下标 cells[4]/cells[6]）。
 #

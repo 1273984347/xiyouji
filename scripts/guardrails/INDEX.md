@@ -11,12 +11,13 @@
 
 - （无）
 
-## 文件（7）
+## 文件（8）
 
 ### Python 脚本
 
 - `api_diff.py`
 - `check_nested_comprehension.py`
+- `check_rewrite_integrity.py`
 - `once_call.py`
 - `precommit_entry.py`
 
