@@ -29,10 +29,10 @@ RE_SEG_NEW = re.compile(r"^###\s+(W\d+)（([^）]+)）：\s*([^\n]*)", re.M)  # 
 RE_CLAUDE_RULE = re.compile(r"^\d+\. \*\*(.+?)→", re.M)
 
 TASK_MAP = [  # (路径模式, 必读提示) —— W713 更新：BL-24 已收官（W709），指针改 L2 主题文件
-    (r"^site/|\.(css|js|html)$", "docs/agent/gates.md（改 site 必读门禁）+ docs/agent/pitfalls.md §CSS/视觉渲染"),
+    (r"^site/|\.(css|js|html)$", "docs/agent/gates.md（改 site 必读门禁）+ pitfalls.md §CSS/视觉渲染"),
     (r"^scripts/check_|verify_delivery", "docs/agent/gates.md 对应槽位 + verify 段自洽锁（改门禁必读）"),
-    (r"\.py$", "AGENTS §4.3 工具链要点 + docs/agent/pitfalls.md §流程/协作/取证 + ruff/pytest 计数钉纪律"),
-    (r"^dataset/|scripts/output/data", "docs/agent/pitfalls.md §数据/内容可信度（计数钉/旧值标记扫描/双源门禁第 39/40）"),
+    (r"\.py$", "AGENTS §4.3 工具链要点 + pitfalls.md §流程/协作/取证 + ruff/pytest 计数钉纪律"),
+    (r"^dataset/|scripts/output/data", "pitfalls.md §数据/内容可信度（计数钉/旧值标记扫描/双源门禁第 39/40）"),
     (r"^docs/|^HANDOVER|^CHANGELOG|^README|^STRUCTURE", "docs/00-导读/文档规范.md §4.9-4.11 + 第 31 门禁 C5 对账"),
     (r"^xiyouji-agent-web/", "docs/agent/agent-web.md（W680 引擎层）"),
     (r"^\.github/", "AGENTS §4.3 CI 类（workflow 触发条件/quotePath/SHA 钉）"),

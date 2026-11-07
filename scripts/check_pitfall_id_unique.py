@@ -23,31 +23,61 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PITFALLS = os.path.join(ROOT, "docs", "agent", "pitfalls.md")
+PITFALLS = os.path.join(ROOT, "pitfalls.md")  # W1157 正本迁根（docs/agent/ 留跳转壳）
+# W1157 迁根过渡：diff pathspec 必须同时含新旧两路径——只含新路径时 rename 无法配对，
+# 整表会以「+ 行」形态冒充新增条目 ⇒ 111 例自撞假红（本批实测）。加 -M 显式开 rename 检测。
+PITFALLS_PATHS = ["pitfalls.md", "docs/agent/pitfalls.md"]
 
 RX_ENTRY = re.compile(r"^- \*\*.*?（(W\d+) 实证·(E-\d+)）")
 
 
-def _added_lines_for_file(rel):
-    """取某文件的「工作树 vs HEAD」新增行（+ 行）——**与基点无关**。
+def _extract_added(diff_stdout):
+    """从 unified diff 输出提取「真新增」+ 行——**剔除「就地改写」伪象**（W1157 根修）。
+
+    两类 + 行会冒充「新增条目」：
+      ① 编辑既有条目（改措辞不改编号）呈 -旧/+新 相邻对；
+      ② （pathspec 单路径时的）纯改名整表 + 行——由 PITFALLS_PATHS 双路径在源头消除。
+    判别：+ 行若与**紧邻其前的 - 行**同 E-NN ⇒ 属改写而非新增 ⇒ 剔除；
+    真新增（无 - 对应或对应不同号）保留；复制粘贴重号（原行不动+新行另起）保留 ⇒ 必判红
+    （W1112/W1155 锁语义不变：audit 层不看 diff 形态，本函数只保证喂进去的是真增量）。
+    """
+    out = []
+    last_minus_eid = None
+    for line in diff_stdout.splitlines():
+        if line.startswith("@@") or line.startswith("--- "):
+            last_minus_eid = None
+            continue
+        if line.startswith("-"):
+            m = RX_ENTRY.match(line[1:])
+            last_minus_eid = m.group(2) if m else None
+            continue
+        if line.startswith("+") and not line.startswith("+++"):
+            m = RX_ENTRY.match(line[1:])
+            if m and last_minus_eid == m.group(2):
+                last_minus_eid = None  # 改写对已配对消费
+                continue
+            out.append(line[1:])
+            last_minus_eid = None
+    return out
+
+
+def _added_lines_for_file(rels=None):
+    """取坑表「工作树 vs HEAD」真新增行（+ 行·已剔除改写对）——**与基点无关**。
 
     用于基点不可得时的兜底：CI 浅克隆下 `git diff <base>` 为空 ⇒ 判据恒绿，
     而「工作树 vs HEAD」在有未提交新增时仍能抓到 ⇒ 不静默失效。
+    W1157：rels 缺省为双路径（PITFALLS_PATHS），rename 配对可见。
     """
     try:
         r = subprocess.run(
-            ["git", "-C", ROOT, "diff", "HEAD", "--", rel],
+            ["git", "-C", ROOT, "diff", "-M", "HEAD", "--"] + list(PITFALLS_PATHS if rels is None else rels),
             capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60,
         )
     except (OSError, subprocess.SubprocessError):
         return []
     if r.returncode != 0:
         return []
-    out = []
-    for line in (r.stdout or "").splitlines():
-        if line.startswith("+") and not line.startswith("+++"):
-            out.append(line[1:])
-    return out
+    return _extract_added(r.stdout or "")
 
 
 def _entries(lines):
@@ -65,39 +95,70 @@ def _entries(lines):
 
 
 def _added_lines(base):
-    """取本次改动新增的行（git diff base..工作树·+ 行）——**限定坑表文件**。
+    """取本次改动**真新增**的行（git diff base..工作树·剔除改写对）——**限定坑表文件**。
 
     **W1110 收官笔三修（跨会话回执知悉·对方在其同族判据上踩到同款）**：
     原实现不带 pathspec ⇒ `git diff <base>` 返回**全仓**差异 ⇒ 其他文件的 `+ 行`
     若恰好形如条目本体（`- **…（W#### 实证·E-NN）`）就会被误当「新增条目」⇒ 假红/失真。
-    ⇒ 加 `-- docs/agent/pitfalls.md` 限定。
+    ⇒ 加 pathspec 限定（W1110）；W1157 正本迁根后 pathspec 升级为
+    `["pitfalls.md", "docs/agent/pitfalls.md"]`（双路径·rename 配对可见）+ `-M` +
+    `_extract_added` 改写对剔除（rename 整表 + 行与就地编辑均不再冒充新增）。
     """
     try:
         r = subprocess.run(
-            ["git", "diff", "%s" % base, "--", "docs/agent/pitfalls.md"],
+            ["git", "diff", "-M", "%s" % base, "--"] + PITFALLS_PATHS,
             cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace"
         )
     except OSError:
         return []
-    out = []
-    for line in (r.stdout or "").splitlines():
-        if line.startswith("+") and not line.startswith("+++"):
-            out.append(line[1:])
-    return out
+    return _extract_added(r.stdout or "")
 
 
-def audit(base="HEAD", lines=None, added=None):
+def _base_entry_counts(base):
+    """基线版本的坑表 E-NN 计数（W1157 净增判据的取数面）。
+
+    迁根过渡形态（stub 驻守旧路径）下 rename 配对失效 ⇒ diff 会把正本整表呈 + 行；
+    「撞号」的**本质判据**从「added 行撞 existing」升级为「**净增重号**」：
+    当前计数 > 基线计数 且 > 1 ⇒ 本批引入了重复。基线取数优先新路径，回退旧路径，
+    双双不可得（浅克隆/首次建表）⇒ 空 dict（退化为「工作树内 >1 即撞」·不静默失效）。
+    """
+    import subprocess
+
+    def _show(rel):
+        r = subprocess.run(["git", "-C", ROOT, "show", "%s:%s" % (base, rel)],
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=60)
+        return r.stdout if r.returncode == 0 else None
+
+    txt = _show("pitfalls.md") or _show(os.path.join("docs", "agent", "pitfalls.md"))
+    if not txt:
+        return {}
+    counts = {}
+    for _ln, _w, eid, _title in _entries(txt.splitlines()):
+        counts[eid] = counts.get(eid, 0) + 1
+    return counts
+
+
+def audit(base="HEAD", lines=None, added=None, base_counts=None):
     """返回 (新增重号列表, 存量重号列表, 新增条目列表)。
 
     lines：坑表全量行（默认读磁盘）
     added：**本次改动新增的行**（默认取 git diff base 的 + 行）⇒ 显式传入便于自测/单测
+    base_counts：基线 E-NN 计数（默认由 _base_entry_counts 读基线版本·W1157 净增判据）
+
+    **W1157 判据语义升级（净增重号）**：撞号 = 当前计数 > max(基线计数, 1)。
+    迁移态（stub 驻守旧路径·rename 配对失效）整表 + 行不再误报；真新增（0→1）、
+    就地编辑（1→1）、纯改名（1→1）均放行；复制粘贴重号（1→2）与两批同号（1→2）
+    仍必判红（W1112/W1155 锁语义保持）。合成 added ∉ lines 的测试形态按「净增」补计。
     """
     if lines is None:
         with open(PITFALLS, encoding="utf-8") as f:
             lines = f.read().splitlines()
     existing = {}
+    now_counts = {}
     for _ln, w, eid, title in _entries(lines):
         existing.setdefault(eid, []).append((w, title))
+        now_counts[eid] = now_counts.get(eid, 0) + 1
     if added is None:
         added = _added_lines(base)
         if not added:
@@ -105,28 +166,24 @@ def audit(base="HEAD", lines=None, added=None):
             # `git diff <base>` 为空 ⇒ 「新增条目 0 条」⇒ 判据恒绿。
             # ⇒ 退化为「坑表文件的工作树内容 vs HEAD 内容」逐行比对（**与基点无关**）：
             #    干净检出时两者相同 ⇒ 仍为空（真无新增）；有未提交新增时能抓到。
-            added = _added_lines_for_file("docs/agent/pitfalls.md")
+            added = _added_lines_for_file()
+    if base_counts is None:
+        base_counts = _base_entry_counts(base)
     added_ids = []
+    line_set = set(lines)
     for line in added:
         m = RX_ENTRY.match(line)
         if m:
             added_ids.append((m.group(1), m.group(2), line))
+            if line not in line_set:
+                # 合成/测试形态：added 不在工作树文件里 ⇒ 按净增补计数
+                now_counts[m.group(2)] = now_counts.get(m.group(2), 0) + 1
     dup_existing = {k: v for k, v in existing.items() if len(v) > 1}
-    # 新增条目若与既有条目同号 ⇒ 撞号
-    # **W1110 收官笔修（阻断 #2）**：原实现带 `x[0] != w` 过滤（同批号豁免）⇒
-    # 「同批内两条同号」与「新条目批号与既有条目批号字面相同」两种形态**漏判**——
-    # 而后者恰是本槽的**立项原场景**（两批各占同一号·批号字面相同）。
-    # ⇒ 去掉该豁免：同号即撞。**但必须排除「自身」**——新增集合若整表传入（单测常见形态），
-    # 条目会与**自己**同号 ⇒ 不该判红。
-    # ⇒ 排除口径 = 既有条目与新增条目的「标题」完全相同 ⇒ 视为同一行（自身）·其余同号即撞。
+    # 净增重号判据（W1157）：当前计数 > max(基线计数, 1) ⇒ 本批引入重复
     new_dups = []
-    for w, eid, line in added_ids:
-        title = line[4 : line.find("（W")] if "（W" in line else line
-        # W1155（深度审计 #56）：原实现按「标题相同视为自身」豁免 ⇒ 复制粘贴式重复条目
-        # （同号同标题·恰是本槽立项原场景）永远漏检。自身排除改由**新增集合来自基线 diff**
-        # 的生产路径保证（新增条目定义上不在既有表）；全表传入形态属测试域·由测试修正。
-        others = list(existing.get(eid, []))
-        if others:
+    for w, eid, _line in added_ids:
+        if now_counts.get(eid, 0) > max(base_counts.get(eid, 0), 1):
+            others = list(existing.get(eid, []))
             new_dups.append((eid, w, others))
     return new_dups, dup_existing, added_ids
 
@@ -183,7 +240,7 @@ def main():
 
 
 def _self_test():
-    """负样本自证：注入重号必红 + 干净输入不误报。"""
+    """负样本自证：注入重号必红 + 干净输入不误报 + 改写对剔除（W1157）。"""
     base_lines = [
         "- **样例甲**（W1000 实证·E-500）：甲",
         "- **样例乙**（W1001 实证·E-501）：乙",
@@ -196,7 +253,46 @@ def _self_test():
     d2, _s2, _a2 = audit("HEAD", dup_lines, added=[new_line])
     assert d2 and d2[0][0] == "E-500", "注入同号未被抓"
     print("self-test 2 注入同号 ⇒ 必红（抓到 E-500）")
-    print("---- 坑表编号唯一性自测：2 例全过 ----")
+    # W1157：_extract_added 改写对剔除——负样本 3 例（迁移态实测 111 例自撞假红的根修锁）
+    # 注意 diff 行形态：条目行本体以 "- " 开头 ⇒ diff 中删除行 = "-- **…"、新增行 = "+- **…"
+    diff_edit = (
+        "diff --git a/pitfalls.md b/pitfalls.md\n"
+        "--- a/pitfalls.md\n+++ b/pitfalls.md\n"
+        "@@ -1,2 +1,2 @@\n"
+        "-- **样例甲**（W1000 实证·E-500）：旧措辞\n"
+        "+- **样例甲**（W1000 实证·E-500）：新措辞\n"
+    )
+    assert _extract_added(diff_edit) == [], "就地改写被误当新增（自撞假红复发）"
+    print("self-test 3 -旧/+新 同号改写对 ⇒ 剔除（不冒充新增）")
+    diff_mixed = (
+        "@@ -1,2 +1,3 @@\n"
+        "-- **样例甲**（W1000 实证·E-500）：旧措辞\n"
+        "+- **样例甲**（W1000 实证·E-500）：新措辞\n"
+        "+- **样例丁**（W1003 实证·E-502）：真新增\n"
+        "+- **样例甲**（W1004 实证·E-500）：复制粘贴重号\n"
+    )
+    got = _extract_added(diff_mixed)
+    assert len(got) == 2 and "E-502" in got[0] and "E-500" in got[1], \
+        "混合形态过滤失真：%r" % (got,)
+    print("self-test 4 真新增/复制粘贴重号 ⇒ 保留（W1112 锁语义不变）")
+    diff_nonentry = (
+        "@@ -1,2 +1,2 @@\n"
+        "-普通行改写无编号\n"
+        "+- **样例戊**（W1005 实证·E-503）：前 - 行非条目本体\n"
+    )
+    got2 = _extract_added(diff_nonentry)
+    assert len(got2) == 1 and "E-503" in got2[0], "非条目 - 行误配对"
+    print("self-test 5 前 - 行非条目本体 ⇒ 不配对（+ 行保留）")
+    # W1157 净增判据：迁移态（stub 驻守旧路径·rename 失效·整表 + 行）不再误报
+    moved = "- **迁移样例**（W1150 实证·E-700）：迁移后条目"
+    d5, _s5, _a5 = audit("HEAD", [moved], added=[moved], base_counts={"E-700": 1})
+    assert not d5, "纯迁移（计数 1→1）被误判撞号"
+    print("self-test 6 迁移态整表 + 行（净增 1→1）⇒ 放行（111 例假红根修锁）")
+    d6, _s6, _a6 = audit("HEAD", [moved, moved2 := "- **复制样例**（W1151 实证·E-700）：复制"],
+                         added=[moved2], base_counts={"E-700": 1})
+    assert d6 and d6[0][0] == "E-700", "净增重号（1→2）未被抓"
+    print("self-test 7 净增重号（1→2）⇒ 必红（W1112/W1155 锁语义保持）")
+    print("---- 坑表编号唯一性自测：7 例全过 ----")
     return 0
 
 

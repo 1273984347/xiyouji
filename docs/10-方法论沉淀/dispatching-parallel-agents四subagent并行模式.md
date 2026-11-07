@@ -22,7 +22,7 @@
 
 上文"无文件冲突"的判据在现役流程中已收敛为可机检的三条：
 
-1. **跨 Agent**：文件冲突由 [W 批次编号对账表](../00-导读/W批次编号对账表.md) 的 touches 列登记，动工前跑 `python scripts/preflight_check.py --touches <清单> --self W###`，touches 交集非空即拒绝并行（见 [pitfalls.md](../agent/pitfalls.md) git/提交/并发主题）。
+1. **跨 Agent**：文件冲突由 [W 批次编号对账表](../00-导读/W批次编号对账表.md) 的 touches 列登记，动工前跑 `python scripts/preflight_check.py --touches <清单> --self W###`，touches 交集非空即拒绝并行（见 [pitfalls.md](../../pitfalls.md) git/提交/并发主题）。
 2. **同 Agent**：同一文件的多处 Edit 仍须串行（并行 Edit 基于同一原始内容，后写覆盖先写）——见 [AGENTS.md](../../AGENTS.md) §4.3。
 3. **提交**：并行会话提交走 `python scripts/safe_commit.py -F <file> <pathspec...>`（ref-lock 竞争自动重试），级联清单由 `batch_cascade.py` 落盘后按 `_cascade_files_<批号>.txt` 逐面 git add。
 

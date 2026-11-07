@@ -2,11 +2,11 @@
 
 > 来源：`site/data/*.html` 的 `EMBEDDED_DATA` 快照 + 人工整理件；
 > 本索引由 `scripts/gen_dataset_index.py` 从磁盘实读生成（禁手改）。
-> 当前规模：根级 44 个 JSON + `entities/` 2 个 JSON，合计 2698.8 KB。
+> 当前规模：根级 43 个 JSON + `entities/` 2 个 JSON，合计 2692.3 KB。
 
 ## 概览
 
-- 根级数据文件：44 个；实体聚合：2 个。
+- 根级数据文件：43 个；实体聚合：2 个。
 - 快照来源：页面 `EMBEDDED_DATA`（未找到对应页面的文件在「主要键」列标注人工件）。
 - 校验：第 61 门禁 `python scripts/check_dataset_provenance.py`；清单对拍 `python scripts/check_dataset_manifest.py`。
 
@@ -24,7 +24,6 @@
 | concept-device.json | 9 | 13.2 KB | 9 | cipher、commentators、danmaku、detective、insights、mobius… |
 | criticism-history.json | 8 | 11.8 KB | 8 | _schema、alchemy、candidates、critics、lu_xun_words、streams… |
 | cross-time-danmaku.json | 6 | 12.0 KB | 6 | age_groups、celebrity_profiles、global_adaptations、international_critics、modern_commentary、mouthpiece_quotes |
-| dashboard.json | 2 | 6.4 KB | 2 | kpi、meta |
 | edge-wukong-tangseng.json | 7 | 11.0 KB | 7 | _schema、aggregate、disputed_points、edge、events、meta… |
 | emotional-heatmap.json | 4 | 37.1 KB | 4 | hardships、meta、reactions、scholars |
 | famous-time-travel.json | 2 | 2.1 KB | 2 | scene_illustrations、travel_identities |

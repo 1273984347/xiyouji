@@ -32,7 +32,7 @@ Edit 工具无文件级锁，并行 Edit 同一文件时基于同一原始文件
 
 > 同一文件的多个 Edit 必须串行执行；若多行有共同模式，用 `replace_all=true` 一次性处理。
 
-> **跨 Agent 版（W739·本铁律现役未被取代）**：单 Agent 内同文件 Edit 串行约束（AGENTS.md §4.3「同文件 Edit 串行」）不变；跨 Agent 的同类竞态由 `scripts/preflight_check.py --touches "<清单>" --self W###` 交集拒绝承接（W739 起·与在途批次 touches 交集非空即拒绝并行），纪律见 [docs/agent/pitfalls.md](../agent/pitfalls.md) git/提交/并发类。承接关系是「事后 Grep 验证」前移到「动工前交集拒绝」，非机制淘汰。
+> **跨 Agent 版（W739·本铁律现役未被取代）**：单 Agent 内同文件 Edit 串行约束（AGENTS.md §4.3「同文件 Edit 串行」）不变；跨 Agent 的同类竞态由 `scripts/preflight_check.py --touches "<清单>" --self W###` 交集拒绝承接（W739 起·与在途批次 touches 交集非空即拒绝并行），纪律见 [pitfalls.md](../../pitfalls.md) git/提交/并发类。承接关系是「事后 Grep 验证」前移到「动工前交集拒绝」，非机制淘汰。
 
 ### 当前 session 立即验证原则
 

@@ -17,7 +17,7 @@ W265 E3 性能深化 · v2.2.47
     py scripts/perf_optimize.py --threshold 800  # 自定义 Canvas 切换阈值
 
 仅依赖 stdlib（argparse/re/json/pathlib/datetime/html.parser/gzip）。
-字体子集化方案引用 scripts/font-subset-guide.md（v2.2.47）。
+字体子集化方案引用 assets/fonts/font-subset-guide.md（v2.2.47·W1157 迁）。
 """
 import argparse
 import gzip
@@ -30,7 +30,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE_DIR = ROOT / "site"
 DEFAULT_OUTPUT = ROOT / "scripts" / "output" / "perf-optimization-report.md"
-FONT_SUBSET_GUIDE = ROOT / "scripts" / "font-subset-guide.md"
+FONT_SUBSET_GUIDE = ROOT / "assets" / "fonts" / "font-subset-guide.md"  # W1157 迁 assets/fonts/（紧邻字体母本）
 
 VERSION = "v2.2.47"
 WID = "W265"
@@ -149,7 +149,7 @@ def optimize_lcp(html_dir):
 
     - 为非首屏 <img> 自动添加 loading="lazy"
     - 为首屏大图生成 <link rel="preload" as="image">
-    - 为字体生成 preload（参考 font-subset-guide.md 方案）
+    - 为字体生成 preload（参考 assets/fonts/font-subset-guide.md 方案）
 
     返回 dict：{lazy_added, preload_generated, font_preload_added, files_modified}
     W732：懒加载/预加载收集两段提取（_apply_lazy_pass/_collect_preload_lines）。
@@ -628,7 +628,7 @@ def _render_report_header(timestamp):
     md.append("")
     md.append(f"> 生成时间：{timestamp}")
     md.append("> 工具：`scripts/perf_optimize.py` · W265 E3 性能深化")
-    md.append("> 字体子集化方案：参考 `scripts/font-subset-guide.md`")
+    md.append("> 字体子集化方案：参考 `assets/fonts/font-subset-guide.md`")
     md.append("")
     return md
 

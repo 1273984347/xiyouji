@@ -16,7 +16,7 @@
 - `w550-shot-review/`
 - `复盘报告/`
 
-## 文件（10）
+## 文件（13）
 
 ### Markdown 文档
 
@@ -30,6 +30,12 @@
 - `file-index-ARCHIVE-tier2.md`
 - `file-index-ARCHIVE.md`
 - `w-b-critique.md`
+- `workflows-readme-history.md`
+- `可视化测试计划-十七维叙事学图谱.md`
+
+### 数据与配置
+
+- `例-佛法AI框架原始对话.txt`
 
 ---
 

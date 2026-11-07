@@ -565,24 +565,35 @@ def _face_workflows(ctx):
 
     **W1114**：头部区间（两处「W450-W####」）改由共享模块 version_surface 推进（幂等）；
     里程碑尾标记是**追加型**内容（每批加一条），仍由本面负责（不属版本面字面量）。
+    **W1157 有界化根修**：里程碑尾标记原追加在 README 门禁体系区间行尾 ⇒ 单行无限累计
+    （实测 27KB 撑爆文件体积，本批已把累计历史拆往归档件）。改为双面——README 保留
+    **有界区间行**（区间号仍由 version_surface 推进·锚点不变故 test_w1114/w1117 语义
+    零变化），逐批明细行改追加 `archive/docs/workflows-readme-history.md`（归档件
+    只增不删·语义合规·台账已登记）。
     """
-    # ---------- workflows README ----------
+    # ---------- workflows README（有界区间行） ----------
     p = ".github/workflows/README.md"
     s, nl = load(p)
     out, _changed = version_surface.advance_text(
         s, p, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
-    marker = "无 workflow 结构改动）。"
-    assert out.count(marker) == 1, f"里程碑尾标记出现 {out.count(marker)} 次"
-    # W1122（根修 W1117 R-01）：尾标记此前**无条件包裹** ⇒ 重跑级联会层层累积。
-    # 本版：已存在本批标记 ⇒ 内容一致则零变化·不一致则替换。
-    _wbuild = f"+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。"
-    _wspan = _locate_workflows_marker(out, ctx.new_w, ctx.desc)
-    if _wspan is not None:
-        if out[_wspan[0]:_wspan[1]].strip() != _wbuild.strip():
-            out = out[:_wspan[0]] + _wbuild + out[_wspan[1]:]
-    else:
-        out = out.replace(marker, f"无 workflow 结构改动）{_wbuild}", 1)
     ctx.pend.append((p, out, nl))
+    # ---------- 逐批明细追加面（归档件·行制） ----------
+    ap = "archive/docs/workflows-readme-history.md"
+    s_arch, nl_arch = load(ap)
+    _line = f"+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。"
+    lines = s_arch.splitlines(keepends=True)
+    idx = next((i for i, ln in enumerate(lines)
+                if ln.strip().startswith(f"+ W{ctx.new_w} ")), None)
+    if idx is not None:
+        # W1122 同款幂等：已存在本批行 ⇒ 内容一致则零变化·不一致则替换
+        if lines[idx].strip() != _line.strip():
+            lines[idx] = _line + ("\n" if lines[idx].endswith("\n") else "")
+    else:
+        if lines and not lines[-1].endswith("\n"):
+            lines[-1] += "\n"
+        lines.append(_line + "\n")
+    s_arch = "".join(lines)
+    ctx.pend.append((ap, s_arch, nl_arch))
 
 
 # ---------- 四页脚（W717 锚定·W724 双重缺陷根修+链长治理）：

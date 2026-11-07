@@ -49,7 +49,7 @@ TREE_LINE_RE = re.compile(r"^([\s\u2502]*)(?:\u251c\u2500\u2500|\u2514\u2500\u25
 CMD_TOKEN_RE = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_.\\\\/-]*\.(?:png|svg|py|json|html|md|ico|js|css|txt|yaml|yml)\b")
 EXT_RE = re.compile(r"\.(png|svg|py|json|html|md|ico|js|css|txt|yaml|yml)$")
 WILDCARD_HINTS = ("*", "<", ">", "{", "}", "\u2026", "...")
-EXTERNAL_ROOTS = ("site", "docs", "scripts", "archive", "tests", "hyperframes")
+EXTERNAL_ROOTS = ("site", "docs", "scripts", "archive", "tests")
 
 
 def _looks_wildcard(token):

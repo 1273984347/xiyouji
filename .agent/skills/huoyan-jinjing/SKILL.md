@@ -79,7 +79,7 @@ python scripts/check_inlined_css.py             # 849 页 INLINED 块完整性�
 ## 与项目其他载体的分工
 
 - 避坑速查 → 本目录 `puti-shouye`（菩提授业·15 条）；
-- 全量坑表 → `docs/agent/pitfalls.md`（六主题）；
+- 全量坑表 → `pitfalls.md`（六主题）；
 - 门禁全量定义 → `docs/agent/gates.md`；
 - 完整审计方法 → `docs/10-方法论沉淀/全仓深度审计SOP-可复用.md`；
 - 可执行入口 → `scripts/audit_repo.py`。

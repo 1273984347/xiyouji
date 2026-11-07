@@ -377,7 +377,7 @@ C8_FILES = (
     "AGENTS.md",
     "HANDOVER.md",
     os.path.join("docs", "agent", "gates.md"),
-    os.path.join("docs", "agent", "pitfalls.md"),
+    "pitfalls.md",  # W1157 正本迁根（docs/agent/ 留跳转壳）
 )
 
 
@@ -662,7 +662,7 @@ def _c5e_pitfall_counts_injected(inp, issues):
             return _f.read()
 
     try:
-        _t = _text("pitfalls", os.path.join("docs", "agent", "pitfalls.md"))
+        _t = _text("pitfalls", "pitfalls.md")  # W1157 正本迁根（docs/agent/ 留跳转壳）
         _declared, _actual = {}, {}
         for _seg in re.split(r"(?m)^### ", _t)[1:]:
             _head, _, _rest = _seg.partition("\n")
@@ -773,6 +773,11 @@ def c9_report_surfaces():
         for fn in sorted(filenames):
             if fn.endswith(".md"):
                 out.append(os.path.join(dirpath, fn))
+    # W1157 根修：10-方法论沉淀/README.md（治理索引件）实存孤儿冲突标记
+    # （「<<<<<<< Updated upstream」随合并入库且扫描面不含它 ⇒ 假绿），纳入扫描面。
+    readme10 = os.path.join(ROOT, "docs", "10-方法论沉淀", "README.md")
+    if os.path.exists(readme10):
+        out.append(readme10)
     return out
 
 
@@ -920,7 +925,7 @@ def gather():
         "jiaojie": rd(os.path.join(ROOT, "HANDOVER.md")),
         "agents": rd(os.path.join(ROOT, "AGENTS.md")),
         # W1136：C5e 读数面改注入（判据与读取源解耦·自测可 hermetic）
-        "pitfalls": rd(os.path.join(ROOT, "docs", "agent", "pitfalls.md")),
+        "pitfalls": rd(os.path.join(ROOT, "pitfalls.md")),  # W1157 正本迁根
         "skill": rd(os.path.join(ROOT, ".agent", "skills", "puti-shouye", "SKILL.md")),
         "structure": rd(os.path.join(ROOT, "STRUCTURE.md")),
         "xiangmu": rd(os.path.join(ROOT, "docs", "00-导读", "项目说明.md")),
