@@ -36,3 +36,20 @@ def test_resolve_base_returns_usable_ref():
     ref, source = chk.resolve_base()
     assert isinstance(ref, str) and ref.strip(), '基点 ref 为空'
     assert isinstance(source, str) and source.strip(), '基点来源说明为空'
+
+
+def test_extract_added_skips_inplace_rewrite_pair():
+    """W1157 正本迁根根修锁：-旧/+新 同号改写对不得冒充「新增条目」。
+
+    迁移态实测：git mv 后 pathspec 单路径 diff 把整表 292 条全呈 + 行 ⇒ 111 例自撞假红。
+    双路径 pathspec（PITFALLS_PATHS）+ 改写对剔除双保险，此锁防二者任一退化。
+    """
+    diff_edit = (
+        "@@ -1,2 +1,2 @@\n"
+        "-- **甲**（W1000 实证·E-500）：旧措辞\n"
+        "+- **甲**（W1000 实证·E-500）：新措辞\n"
+    )
+    assert chk._extract_added(diff_edit) == [], "就地改写被误当新增"
+    diff_copy = "+- **乙**（W1001 实证·E-500）：复制粘贴重号（原行不动）\n"
+    got = chk._extract_added(diff_copy)
+    assert len(got) == 1 and "E-500" in got[0], "复制粘贴重号必须保留（W1112/W1155 锁）"

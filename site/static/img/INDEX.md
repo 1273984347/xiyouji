@@ -11,14 +11,12 @@
 
 - （无）
 
-## 文件（5）
+## 文件（3）
 
 ### 样式与资源
 
 - `og-cover-ink-en.jpg`
-- `og-cover-ink-en.png`
 - `og-cover-ink-zh.jpg`
-- `og-cover-ink-zh.png`
 - `og-cover.png`
 
 ---

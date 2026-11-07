@@ -77,10 +77,22 @@ def insert_before_smaller(text, w, block):
 
 
 def changelog_block(spec):
-    """单段 CHANGELOG 块（与 batch_cascade._face_changelog 同形态）。"""
+    """单段 CHANGELOG 块（与 batch_cascade._face_changelog 同形态）。
+
+    W1157 根修（粘行事故）：段头与 body 是**直接字符串拼接**，依赖 body 以空行（\\n\\n）
+    开场才不粘行——batch_cascade 的 PRECHECK 有此判据而本共享渲染点没有 ⇒ 无判据入口
+    （rebuild_section）会产出「…错位归位）**本批要点**…」粘行段（本批实证）。判据上移到
+    单一事实源：body 非空行开场即 fail-closed（与 cascade PRECHECK 同语义），指引自改 spec。
+    """
+    body = spec["changelog_body"]
+    # W1157 根修（粘行事故）：段头与 body 是**直接字符串拼接**，body 不以空行开场即产出
+    # 「…错位归位）**本批要点**…」粘行段（batch_cascade PRECHECK 有判据而本共享渲染点
+    # 没有的同族缺口·本批实证）。渲染点做**规范化兜底**（缺空行自动补·不 raise·api_diff
+    # 零破坏）：任何入口（含未来新入口）经此渲染永不粘行。
+    if not body.startswith("\n\n"):
+        body = "\n\n" + body.lstrip("\n")
     title_body = re.sub(r"^W\d+\s+", "", spec["title"]).strip()
-    return "### %s（%s）：%s" % (spec["batch"], spec["date"], title_body) + \
-           spec["changelog_body"] + "\n"
+    return "### %s（%s）：%s" % (spec["batch"], spec["date"], title_body) + body + "\n"
 
 
 def file_index_block(spec):

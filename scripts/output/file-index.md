@@ -1,3 +1,79 @@
+## W1157 全仓文件重构分类整理批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/huoyan-jinjing/（1 件） | W1157 | 改：坑表路径改根 |
+| .agent/skills/puti-shouye/（1 件） | W1157 | 改：坑表路径改根（3 处） |
+| .github/workflows/（1 件） | W1157 | 改：拆分——27KB 历史流水账单行迁 archive（77KB→21KB） |
+| archive/（2 件） | W1157 | 改：再生成 |
+| archive/docs/（7 件） | W1157 | 改/迁：W1157 重构整理批 |
+| archive/hyperframes/（5 件） | W1157 | 迁：hyperframes 顶层目录退役整迁（git mv·TOP_DIRS 摘 |
+| archive/hyperframes/compositions/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| archive/hyperframes/compositions/d3-visualizations/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| archive/hyperframes/output/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/（2 件） | W1157 | 改：再生成（images/maps 摘除） |
+| assets/fonts/（3 件） | W1157 | 改：再生成（+font-subset-guide） |
+| assets/images/（4 件） | W1157 | 删：空壳目录 |
+| assets/maps/（3 件） | W1157 | 删：空壳目录（仅 INDEX+README） |
+| assets/promo/plate-set/（4 件） | W1157 | 改：再生成（raw/zoom 摘除） |
+| assets/promo/plate-set/raw/（3 件） | W1157 | 删：出图原件加工层退役（用户令·git 史承载回溯） |
+| assets/promo/plate-set/raw/round1/（10 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round10/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round11/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round12/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round13/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round14/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round15/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round16/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round17/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round18/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round2/（10 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round3/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round4/（10 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round5/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round6/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round7/（6 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round8/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round9/（6 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/zoom-w948/（8 件） | W1157 | 删：加工放大层退役 |
+| assets/promo/plate-set/zoom-w952/（9 件） | W1157 | 删：加工放大层退役 |
+| assets/promo/plate-set/zoom-w953/（4 件） | W1157 | 删：加工放大层退役 |
+| assets/promo/plate-set/zoom-w974/（34 件） | W1157 | 删：加工放大层退役 |
+| dataset/（3 件） | W1157 | 改：再生成 |
+| docs/（1 件） | W1157 | 改：再生成（859 篇） |
+| docs/00-导读/（8 件） | W1157 | 改：再生成（2 件迁出） |
+| docs/10-方法论沉淀/（17 件） | W1157 | 改/迁：W1157 重构整理批 |
+| docs/11-方案报告/（1 件） | W1157 | 改/迁：W1157 重构整理批 |
+| docs/11-方案报告/治理与核查/（2 件） | W1157 | 迁：自 10-方法论沉淀 归位 11-方案报告 |
+| docs/11-方案报告/设计与架构方案/（2 件） | W1157 | 改：stats 级联标记面跟随（report_docs 165） |
+| docs/11-方案报告/调研与数据复盘/（2 件） | W1157 | 迁：自 00-导读 归位 11-方案报告（退役记录类） |
+| docs/agent/（2 件） | W1157 | 改：坑表路径改根 |
+| hyperframes/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| hyperframes/compositions/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| hyperframes/compositions/d3-visualizations/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| hyperframes/output/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| scripts/（14 件） | W1157 | 改：font-subset-guide 行摘除 |
+| scripts/output/（14 件） | W1157 | 改：再生成 |
+| site/（2 件） | W1157 | 改/迁：W1157 重构整理批 |
+| site/data/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| site/en/（1 件） | W1157 | 改/迁：W1157 重构整理批 |
+| site/static/fonts/（6 件） | W1157 | 改：再生成（4 件摘除） |
+| site/static/img/（4 件） | W1157 | 改：再生成 |
+| tests/unit/（7 件） | W1157 | 改：touches 合成串 pitfalls 路径改根（8 处） |
+| .gitignore | W1157 | 改：e2e baseline 两行死 ignore 移除（W773 决策落地）+archive/hyperframes/.thumbnails 改路径+.zcode/ 忽略 |
+| AGENTS.md | W1157 | 改：§6 第 24/25 重复条去重（删尾条不改号）+§7/§8 四文档指针（AGENT.md 系笔误撤除·流程以 §7 为正本）+目录树 hyperframes 摘行 |
+| CHANGELOG.md | W1157 | 改：W1157 段落（级联） |
+| CITATION.cff | W1157 | 改/迁：W1157 重构整理批 |
+| CLAUDE.md | W1157 | 改：pitfalls 指针改根+接手导航四文档行（55/60 行） |
+| HANDOVER.md | W1157 | 改：pitfalls 路径引用+收官进度 |
+| INDEX.md | W1157 | 改：根索引再生成（gen_folder_docs） |
+| README.en.md | W1157 | 改：目录树 hyperframes 摘行 |
+| README.md | W1157 | 改：目录树 hyperframes 摘行 |
+| RULES.md | W1157 | 新建：必守规则单一入口（7 域分节·一行条目+权威指针·四文档体系） |
+| STRUCTURE.md | W1157 | 改：顶层表补 6 目录声明缺口+4 根文件行+hyperframes 摘行 |
+| pitfalls.md | W1157 | 迁根：坑表正本自 docs/agent/ 迁入（292 条·3 门禁脚本路径同批改） |
+| pytest.ini | W1157 | 改：pytest_collected 1464→1465（stats 级联·本批回归锁 +1） |
+
 ## W1156 运行时数据批（2026-11-07）
 
 | 文件 | W | 说明 |

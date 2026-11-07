@@ -42,7 +42,7 @@ def test_dataset_manifest_self_test():
 
 def test_dataset_manifest_repo_clean():
     fails, n = check_dataset_manifest.scan(ROOT)
-    assert n == 46
+    assert n == 45  # W1157 退役孤儿 dashboard.json：46→45（README/INDEX 已同步）
     assert fails == []
 
 
@@ -79,7 +79,7 @@ def test_audit_repo_smoke():
     d = audit_repo.dataset_report()
     p = audit_repo.patterns_report()
     assert r["fail_n"] == 0 and r["pages"] >= 623
-    assert d["fail_n"] == 0 and d["files"] == 46
+    assert d["fail_n"] == 0 and d["files"] == 45  # W1157 退役孤儿 dashboard.json：46→45
     assert p["placeholders"]["pages"] == 0
     assert p["docs_source_prefix"]["pages"] == 0
 

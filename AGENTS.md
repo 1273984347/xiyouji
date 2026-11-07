@@ -79,7 +79,6 @@ xiyouji/
 ├── mcp-server/            # MCP 工具（xiyouji_mcp.py：drl_spotcheck 等）
 ├── tests/                 # pytest + Playwright E2E
 ├── assets/                # 字体源、图片
-├── hyperframes/           # 视频化架构（HyperFrames compositions）
 ├── README.md / STRUCTURE.md / CHANGELOG.md / DESIGN.md / HANDOVER.md / [新Agent启动Prompt](docs/00-导读/新Agent启动Prompt.md)（入口文档·W1011 归位 docs/00-导读）/ CLAUDE.md（AI 速查层·W664）
 └── LICENSE + LICENSE-CONTENT.md  # 双协议
 ```
@@ -187,7 +186,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 > **🔥 火眼金睛 skill（W1149 建·`huoyan-jinjing`）**：全仓巡检速查 [`.agent/skills/huoyan-jinjing/SKILL.md`](.agent/skills/huoyan-jinjing/SKILL.md)——五维扫描（覆盖/失败语义/CI 形态/数据血缘/同类复发）+ 判据 fail-closed + 数据分级 + manifest 对拍 + 链接/内联 + 修复三原则；完整方法论文档在 [docs/10-方法论沉淀/全仓深度审计SOP-可复用.md](docs/10-方法论沉淀/全仓深度审计SOP-可复用.md)，可执行入口 `scripts/audit_repo.py`。
 
-> **📖 阅读契约（W709）**：索引型——292 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——292 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
@@ -195,7 +194,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **占号共享区纪律（W1110·E-128·W1121 根修）**：`reserve_w.py` 的预约集原先写在**工作树内**的 `tmpe/_w_reservations.json`（已 gitignore）⇒ **共享范围 = 工作树·不是仓库** ⇒ 隔离 clone / 并行 worktree 内占号他方看不见 ⇒ **实测撞过 W1120**（双方各占一号·零红灯·记录 session 同名无法仲裁）⇒ **W1121 根修**：取号集合改为「本仓表 + 同机兄弟克隆表 + 用户级共享表」三源**合并取并集**（同名取 ts 最新·写共享表前先合并他人记录不覆盖）+ session 标识含仓路径指纹（WB_SESSION 优先）+ 同号多会话即打印**跨克隆撞号预警** + release 只撤本工作树登记且 session 相同的号 ⇒ 落地后实测取号由 W1120 正确让至 W1121；**纪律不变**：落段前复核「本批号仍在预约集内」，且**占号必须在与并行会话共享的克隆里执行**。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（161）
+**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（161）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -296,20 +295,18 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 22. **治理文档体积上限与批量归档（W1119）**：CHANGELOG.md 与 file-index.md 正本各 **<= 262144 字节（256KiB）**；台账正本 **<= 60 数据行** 且 **<= 262144 字节**（先到者为准）。**仅当超阈值才搬**（未超阈值零动作）；每次搬**最老 50 段**（W 段号优先序）、循环到达标（最后一批可不足 50）；**两面必须迁到同一 W 号下界**（迁完断言两面正本剩余最小 W 号相同）；正文至少保留最近二十个批次段。超窗处置优先序（W1142 定形）：① **段行压缩**——巨批登记面按目录分组立式（单一原语 `batch_spec.fi_group_rows`·阈值 200 行·单段超限由体积窗门禁密度判据拦·spec 恒全量为应动全集权威不受体积窗管）；② **归档搬段**——最老 50 段、两面同下界、迁后正本剩余段 <20 即禁止搬段（须先压缩·W1139 曾 29 段被迁剩 1 段实证）；③ 仍超限方考虑拆批。能用压缩解决的不搬段。工具 = scripts/archive_segments.py（--max-bytes / --chunk / --keep 兼容旧路径）；收官链已内置腾窗步（**置于 precheck 之前**：precheck 是 fail-closed 中止，腾窗排其后即死路径·W1117 实证）。
 23. **异常分类必须与失败语义对齐（W1121 立·E-161）**：新增的「检查/保护」逻辑若被宽 `except Exception` 包住并 `return True`，则缺陷路径与正常路径**同样成功**⇒ 零红灯且可持续数周（实测：腾窗步漏 `import io` ⇒ NameError 被吞 ⇒ 台账行窗口判定**从未真正触发**）⇒ 依赖缺失走 ImportError、文件不可读走 OSError，**代码缺陷类（NameError/TypeError/AttributeError）直接抛出**，宁可整链中止；且每条新增保护逻辑必须配一条「它真的生效」的正向证据（单测/自检）。
 
-24. **并行会话必须工作树隔离（W1124 立·三方共用工作树实证）**：本仓的级联/收官链会**整面重写** HANDOVER / CHANGELOG / AGENTS / SKILL / 坑表 / 台账 ⇒ 多个会话**共用同一工作树**时，一方跑链即覆盖另两方未提交改动；计数类面会按「含他方条目的中间态」算出漂移值（本次实测：坑表流程节标题被算成 138 而真值为 135）；一方整文件 `git add` 即**代提**他方改动 ⇒ 违反禁代提纪律。**纪律**：并行会话各自 `git worktree add <独立路径> -b <独立分支> <基线>`（或独立克隆）⇒ worktree 共享 `.git` 故**分支名不可重名**；迁出后必须**精确回滚**自己在共享树里的残留（按自己条目的唯一前缀匹配，禁整文件覆盖以免反吃他方并发改动）；迁出与回滚须**书面告知其余会话**并给出「正确计数基线」，避免他方按中间态校准。
-
-25. **并行会话必须工作树隔离（W1124 立·三方共用工作树实证）**：本仓的级联/收官链会**整面重写** HANDOVER / CHANGELOG / AGENTS / SKILL / 坑表 / 台账 ⇒ 多个会话**共用同一工作树**时，一方跑链即覆盖另两方未提交改动；计数类面会按「含他方条目的中间态」算出漂移值（本次实测：坑表流程节标题被算成 138 而真值为 135）；一方整文件 git add 即**代提**他方改动 ⇒ 违反禁代提纪律。**纪律**：并行会话各自 git worktree add <独立路径> -b <独立分支> <基线>（或独立克隆）⇒ worktree 共享 .git 目录故**分支名不可重名**；迁出后必须**精确回滚**自己在共享树里的残留（按自己条目的唯一前缀匹配，禁整文件覆盖以免反吃他方并发改动）；迁出与回滚须**书面告知其余会话**并给出「正确计数基线」，避免他方按中间态校准。
+24. **并行会话必须工作树隔离（W1124 立·三方共用工作树实证）**：本仓的级联/收官链会**整面重写** HANDOVER / CHANGELOG / AGENTS / SKILL / 坑表 / 台账 ⇒ 多个会话**共用同一工作树**时，一方跑链即覆盖另两方未提交改动；计数类面会按「含他方条目的中间态」算出漂移值（本次实测：坑表流程节标题被算成 138 而真值为 135）；一方整文件 `git add` 即**代提**他方改动 ⇒ 违反禁代提纪律。**纪律**：并行会话各自 `git worktree add <独立路径> -b <独立分支> <基线>`（或独立克隆）⇒ worktree 共享 `.git` 故**分支名不可重名**；迁出后必须**精确回滚**自己在共享树里的残留（按自己条目的唯一前缀匹配，禁整文件覆盖以免反吃他方并发改动）；迁出与回滚须**书面告知其余会话**并给出「正确计数基线」，避免他方按中间态校准。（W1157 去重：原第 25 条与本条完全同文双写，系 W1124 入载事故——删重复尾条不改号。）
 
 ---
 
 ## 7. 快速上手路径（新 Agent 接手）
 
 0. 开局先跑 `python scripts/agent_start.py`——实读磁盘输出当前事实摘要（现役三元组/近 3 批次/stats 全键/对账表现势/阻塞·W705）——防「记忆代读」，值全部来自磁盘实时读取。
-1. 读 `CLAUDE.md`（AI 速查层，1 分钟）→ 必守规则与常用命令速览（W664 起，宿主自动加载）。
+1. 读 `CLAUDE.md`（AI 速查层，1 分钟）→ 必守规则与常用命令速览（W664 起，宿主自动加载）；**四文档体系分工**（W1157 建）：规则全量查 `RULES.md` / 坑位表查 `pitfalls.md` / 本文件=项目全貌·工作流程（§7）与门禁摘要正本。
 2. 读 `HANDOVER.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
 3. 读 `README.md` → 项目全貌、内容规模、在线站点、双协议。
 4. 读 `docs/00-导读/文档规范.md` §11 → 文件管控清单（必同步/禁擅改/接手速查 6 步/同步核对 10 项<!--doc-sync:exempt-->）。
-5. 读 `HANDOVER.md`「三、方法论沉淀」→ 经验**总入口**（W755 起指针化：现役坑位/门禁读 [docs/agent/pitfalls.md](docs/agent/pitfalls.md) 与 [docs/agent/gates.md](docs/agent/gates.md)，深度篇读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)）。
+5. 读 `HANDOVER.md`「三、方法论沉淀」→ 经验**总入口**（W755 起指针化：现役坑位/门禁读 [pitfalls.md](pitfalls.md) 与 [docs/agent/gates.md](docs/agent/gates.md)，深度篇读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)）。
 6. 深挖结构看 `STRUCTURE.md`、`scripts/output/file-index.md`（反向索引）、`CHANGELOG.md`（正向时间线）。
 7. 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
 
@@ -320,6 +317,7 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 > **清单间裁定链（W706）**：文档规范 §11（文件管控）> CHANGELOG 现役段 > HANDOVER。本节与 CLAUDE.md（速查指针）、CONTRIBUTING（贡献者协作面）系三视角清单，内容不一致时按裁定链与本节为准。
 
 - 进度中枢 / 规则：`HANDOVER.md`、[docs/00-导读/新Agent启动Prompt.md](docs/00-导读/新Agent启动Prompt.md)（速用精简版）、`CLAUDE.md`（AI 速查层·W664）
+- **规则与流程入口（W1157 四文档体系）**：[RULES.md](RULES.md)（必守规则单一入口·索引层）+ [pitfalls.md](pitfalls.md)（坑位表正本·本批自 docs/agent/ 迁根）；工作流程以本文件 §7 为正本
 - 文档规范：`docs/00-导读/文档规范.md`（尤其 §11 文件管控）
 - 设计规范：`DESIGN.md`（§1-4 视觉 / **§5 动效契约**）
 - 目录结构：`STRUCTURE.md`
@@ -328,4 +326,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1151-W1151 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-07（W1152）v4 body 改值批：body 语义消费 --type-body（1.75→1.80）+ --leading-body 对齐 + grid 终裁不迁移 + J2 逐属性对拍全绿；2026-11-07（W1153）安全批：GIT_DANGER 前缀族拦截+DENY_WRITE /i+realpath 复检+会话新写脚本拒执行+childEnv 大小写不敏感+RAG CORS 白名单/限速/异常不回显·回归锁 8 例；2026-11-07（W1154）治理快批：数字面三处清零+precommit 动态上游+run_all B 根修+下一自由号+scope 接线+docs/11 登记+orchestration_refs 新建；2026-11-07（W1155）假绿 P1 批：深度审计 21 条 P1 判据修复（自测判红/双空/零面/坏 spec/同号豁免/CI 形态/实质调用面等）·各配负样本；2026-11-07（W1156）运行时数据批：EN 搜索在线分支移除+两页死 fetch 删除+chapter-stats/tag-cloud/appearance 文案与内嵌对齐+EN chart-design 中文字形清零。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1152-W1152 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-07（W1153）安全批：GIT_DANGER 前缀族拦截+DENY_WRITE /i+realpath 复检+会话新写脚本拒执行+childEnv 大小写不敏感+RAG CORS 白名单/限速/异常不回显·回归锁 8 例；2026-11-07（W1154）治理快批：数字面三处清零+precommit 动态上游+run_all B 根修+下一自由号+scope 接线+docs/11 登记+orchestration_refs 新建；2026-11-07（W1155）假绿 P1 批：深度审计 21 条 P1 判据修复（自测判红/双空/零面/坏 spec/同号豁免/CI 形态/实质调用面等）·各配负样本；2026-11-07（W1156）运行时数据批：EN 搜索在线分支移除+两页死 fetch 删除+chapter-stats/tag-cloud/appearance 文案与内嵌对齐+EN chart-design 中文字形清零；2026-11-07（W1157）全仓文件重构分类整理批：四文档治理体系（RULES/AGENT 新建+pitfalls 迁根+3 门禁脚本路径+82 处活性引用+坑表自撞假红根修）+四档删除清理+错位归位+AGENTS §6 去重。如与上述权威文档冲突，以权威文档为准。*

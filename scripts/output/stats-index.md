@@ -22,9 +22,9 @@
 | icon_allowlist_entries | 71 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1053 |
 | inline_css_pages | 851 | site 全树含 INLINED 标记页 | W459 | 1149 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
-| methodology_docs | 30 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1147 |
-| pytest_collected | 1464 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1154 |
-| report_docs | 162 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1147 |
+| methodology_docs | 28 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1157 |
+| pytest_collected | 1466 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1157 |
+| report_docs | 165 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1157 |
 | scan_files | 858 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | 1149 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 858 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | 1149 |
@@ -37,6 +37,14 @@
 | w864_entries | 259 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1152 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1157（2026-11-07 16:15:00）
+- pytest_collected: 1465 → 1466
+
+### W1157（2026-11-07 15:05:27）
+- methodology_docs: 30 → 28
+- pytest_collected: 1464 → 1465
+- report_docs: 162 → 165
 
 ### W1154（2026-11-07 10:14:52）
 - pytest_collected: 1460 → 1464

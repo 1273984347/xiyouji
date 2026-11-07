@@ -41,7 +41,7 @@ FOOTER_EXEMPT = (
 )
 NONVISUAL_PREFIXES = (
     "scripts/", "docs/", "source/", "dataset/", "references/", "timeline/",
-    "tools/", "mcp-server/", "xiyouji-agent-web/", "hyperframes/", "tests/",
+    "tools/", "mcp-server/", "xiyouji-agent-web/", "tests/",
     ".github/",
 )
 NONVISUAL_NAMES = (

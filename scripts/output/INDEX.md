@@ -12,22 +12,16 @@
 - `data/`
 - `figures/`
 
-## 文件（618）
+## 文件（616）
 
 ### Markdown 文档
 
-- `_a02_matrix_body.md`
-- `_s23_full_matrix.md`
 - `_w1078_color_inventory.md`
 - `file-index.md`
 - `rag_eval_report.md`
 - `stats-index.md`
 - `tools-inventory.md`
 - `观测基线快照.md`
-
-### JavaScript / TypeScript
-
-- `_w946_timeline_icons.js`
 
 ### 数据与配置
 
@@ -159,6 +153,7 @@
 - `_cascade_files_W1154.txt`
 - `_cascade_files_W1155.txt`
 - `_cascade_files_W1156.txt`
+- `_cascade_files_W1157.txt`
 - `_cascade_files_W751.txt`
 - `_cascade_files_W761.txt`
 - `_cascade_files_W816.txt`
@@ -429,6 +424,7 @@
 - `_w1154_spec.json`
 - `_w1155_spec.json`
 - `_w1156_spec.json`
+- `_w1157_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
@@ -639,7 +635,6 @@
 
 ### 其他
 
-- `_w1005_serve.err`
 - `_w1076_j2_after`
 - `_w1076_j2_before`
 - `_w1080_j2_after`

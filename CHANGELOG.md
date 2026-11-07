@@ -1,3 +1,18 @@
+### W1157（2026-11-07）：全仓文件重构分类整理批（用户令：四文档治理体系+四档删除清理+错位归位）
+
+**本批要点**（用户令「对项目的文件进行重构分类整理，该删除的就删除。增加 RULES.md 和 AGENTS.md CLAUDE.md pitfalls.md 进行区分」·其中 AGENT.md 系笔误已澄清为 AGENTS.md·AGENT.md 误建件当批撤除）：
+
+> - **T1 四文档治理体系（索引入口式·用户已裁决）**：RULES.md（必守规则单一入口·7 域分节一行条目+权威指针）新建；**pitfalls.md 正本迁根**（git mv·docs/agent/ 留跳转壳）；CLAUDE.md 指针微调（55/60 行）。
+> - **T2 pitfalls 迁根级联**：3 门禁脚本路径改根（check_agents_layers/check_pitfall_id_unique/check_doc_sync）+ 82 处活性引用更新（历史段/归档/spec 不动）+ check_pitfall_id_unique **自撞假红根修**（迁移态 rename diff 整表冒充新增 ⇒ 111 例假红 → 双路径 pathspec+-M+_extract_added 改写对剔除·自测 5 例+回归锁）。
+> - **T3 计划外缺陷根修**：10-方法论沉淀/README.md **孤儿冲突标记**（HEAD 已入库·C9 扫描面不含它 ⇒ 假绿）清除 + C9 扫描面扩入该件（W1127 同族根修口径）。
+> - **T4 四档删除清理**：A 本地垃圾（缓存/node_modules/.pw-browsers/_s5_*/diag 等 ~1.6G）+ B 跟踪孤儿（dashboard.json/未引用字体 4 件 2.1M/og-cover png 2 件/孤儿图/空壳 maps·images/output 残余 4 件）+ B2 大体积（tmpe wt 2.2G+wt.zip 993M·agent-web 构建产物 848M·**promo 加工中间层 256 件 ~780M 用户二次确认**）+ C 裁决件（SECURITY-AUDIT 7z+.password 唯一副本·docs/_dev W650 PRD）。
+> - **T5 错位归位**：docs 4 件迁 11-方案报告/2 件迁 archive（可视化测试计划改道 archive 避第 48 槽新增件模板判红）+ font-subset-guide → assets/fonts + **hyperframes/ 整目录归档**（4 门禁接线+6 文档+.gitignore）+ workflows README 77KB 拆分（历史入档台账登记）。
+> - **T6 治理面修正**：AGENTS §6 第 24/25 完全同文双写去重（挂账待办）+ .gitignore e2e baseline 两行死 ignore 移除（W773 决策落地·12 PNG 已 tracked）+ STRUCTURE.md 顶层表补 6 目录声明缺口（check_repo_layout 自称与实况漂移）+ 台账腾窗迁出 2 行（preflight FAIL→59 行）。
+> - **决策记录**：① 2026-11-06「不新增 rules 规则文件」裁决被本次用户明确要求推翻（RULES.md 建立·索引层形态）② 裁决件删除（审计档唯一副本+无备份 PRD）③ promo 中间层在「留档原件」新事实披露后仍确认删除（git 史承载回溯）④ og-cover.png 经引用精验为 SEO 门禁 R4 在管回退件·保留（与侦察初判不同）。
+> - **验证**：第 31/32/41/52/63 槽+自测全绿（坑表自测 5 例/回归 12 例）+ verify_delivery 全量+pytest+guardrails+csp+archive_health+lint_links（终值见收官提交信息验证栏）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1156（2026-11-07）：运行时数据批（审计报告落实④：深度审计 §3 运行时六项）
 
 **本批要点**（《全仓逐逻辑深度审计报告-2026-11-06》§3 运行时六项落实）：
@@ -788,7 +803,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1156），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1157），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

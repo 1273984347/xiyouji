@@ -66,8 +66,6 @@
 
 **无需安装，点开即读** 👉 [**https://1273984347.github.io/xiyouji/**](https://1273984347.github.io/xiyouji/)
 
-![取经录 · 站点首页预览](assets/images/index-preview.png)
-
 *如果图片加载慢，请直接点击上方链接打开站点。*
 
 **本地浏览**：克隆仓库后双击 `site/index.html`（纯静态站点，支持 `file://` 协议直接打开，无需安装任何软件）。
@@ -138,7 +136,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W1156（2026-11-07）**：运行时数据批 EN 搜索在线分支移除镜像 W1074 两页死 fetch 承诺删除直读内嵌 chapter stats 文案订正 EN chart design 五处中文字形与目录文案 appearance 内嵌对齐随站 JSON 十四条 tag cloud 八十二条订正·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
+> **当前批次 W1157（2026-11-07）**：全仓文件重构分类整理批·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1132（2026-11-04）**：提交范围门禁兜底分支透传 merge 带入面 + 带入段不再劫持归属 + 单测 4 例 + 计数链不动·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1133（2026-11-05）**：台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复 D1/D2/D3·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1134（2026-11-04）**：前端质感 P0 批五项改动 + 双探针取证：暗色字重降档 / 中文输入防误发与阈值滚动 / 复制对勾淡出 / 打印样式去硬编码·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
@@ -187,7 +185,6 @@ xiyouji/
 ├── site/                  # 可浏览的 HTML 站点（D3.js 驱动·index/dashboard/chapters/characters/themes/data/static）
 ├── scripts/               # Python 文本分析脚本（按 A-AH 34 类组织 + utils + output）
 ├── assets/                # 字体源、图片等静态资源
-├── hyperframes/           # HTML 视频实验产物（W200 遗留·待清理决策）
 ├── mcp-server/            # MCP 服务（xiyouji_drl_spotcheck 等工具）
 ├── tests/                 # pytest 测试 + Playwright E2E
 ├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（OpenAI-compatible 引擎）
