@@ -60,7 +60,10 @@ def _gates_slot_count():
 
 
 def _pitfalls_count():
-    t = _read(os.path.join("docs", "agent", "pitfalls.md"))
+    # W1160（P1-1 对抗审查实证）：W1157 正本迁根时第四个取数面漏改——本函数仍读
+    # docs/agent/pitfalls.md 跳转壳（0 条目）⇒ N4 坑位数对拍整体失效且方向指鹿为马。
+    # 改读根正本，与 check_pitfall_id_unique/check_doc_sync/check_agents_layers 同口径。
+    t = _read("pitfalls.md")
     sec = None
     counts = {}
     for ln in t.split("\n"):

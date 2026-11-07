@@ -23,7 +23,9 @@ import re
 import subprocess
 import sys
 
-DEF_RE = re.compile(r"(?m)^def\s+(\w+)\s*\(")
+# W1160（P1-2 对抗审查实证）：原 ^def 对 async def 全盲（行首是 async 不匹配）⇒
+# async 函数被切除/拼接残留时 C2/C3 假绿。改为可选前缀形态。
+DEF_RE = re.compile(r"(?m)^(?:async\s+)?def\s+(\w+)\s*\(")
 
 
 def module_defs(text):
@@ -65,8 +67,7 @@ def check_one(path):
         notes.append("NOTE  %s HEAD 无此文件（新增文件·C2 跳过）" % path)
         return fails, notes
     old_defs, _ = module_defs(old)
-    vanished = sorted(n for n in (old_defs & set(re.findall(r"\w+", "")) | old_defs)
-                      if n not in cur_defs and not n.startswith("_"))
+    vanished = sorted(n for n in old_defs if n not in cur_defs and not n.startswith("_"))
     for n in vanished:
         fails.append("C2: %s 公开函数 %r 在 HEAD 存在而当前版消失（切除/误删形态·E-199）——"
                      "若属有意改名须在提交说明声明" % (path, n))
@@ -134,6 +135,13 @@ def _self_test():
     run_case("T5 私有函数消失放行（C2 不越权）",
              "def main():\n    return 0\n\ndef _helper():\n    return 1\n",
              "def main():\n    return 0\n", None)
+    # W1160（P1-2 对抗审查实证）：async def 形态补锁
+    run_case("T6 async def 消失必红（C2）",
+             "async def main():\n    return 0\n\ndef sync_fn():\n    return 1\n",
+             "async def main():\n    return 0\n", "C2")
+    run_case("T7 async def 双定义必红（C3）",
+             "async def main():\n    return 0\n",
+             "async def main():\n    return 0\n\n\nasync def main():\n    return 1\n", "C3")
     print("---- 改写完整性自测：%d/%d 过 ----" % (sum(tally), len(tally)))
     return 0 if all(tally) else 2
 
