@@ -1,3 +1,44 @@
+## W1156 运行时数据批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/search.html | W1156 | 改：#32 probe 在线分支移除（W1074 镜像）+文案两处 |
+| site/data/narratology-16d-network.html | W1156 | 改：#33 死 fetch 承诺删除·直读 EMBEDDED |
+| site/data/timeline.html | W1156 | 改：#33 同上 |
+| site/data/chapter-stats.html | W1156 | 改：#34 数据源文案实况订正 |
+| site/en/chart-design.html | W1156 | 改：#35 五处中文字形→EN+目录文案对齐 |
+| site/data/character-appearance.html | W1156 | 改：#36 内嵌 14 条对齐随站 JSON+回退目录文案 |
+| site/data/tag-cloud.html | W1156 | 改：#37 条数 81→82 实测订正+数据源行 |
+| docs/00-导读/W批次编号对账表.md | W1156 | 改：W1156 认领行 |
+| CHANGELOG.md | W1156 | 改：W1156 段落（级联） |
+| HANDOVER.md | W1156 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1156 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1156 | 改：AGENTS 脚注滚动（级联） |
+| README.md | W1156 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1156 | 改：版本面推进（级联） |
+| CITATION.cff | W1156 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1156 | 改：版本面推进（级联） |
+| .github/workflows/README.md | W1156 | 改：版本抬头推进（级联） |
+| scripts/output/file-index.md | W1156 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1156 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1156 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1156 | 改：stats changelog（级联） |
+| docs/INDEX.md | W1156 | 改：docs_index 刷新（级联） |
+| scripts/INDEX.md | W1156 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1156 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1156 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1156 | 改：工具清单刷新 |
+| scripts/output/_w1156_spec.json | W1156 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1156.txt | W1156 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1156 | 改：朱砂缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1156 | 改：朱砂报告刷新（门禁产物） |
+| site/sitemap.xml | W1156 | 改：gen_sitemap 随批（级联） |
+| site/data/cross-time-danmaku.html | W1156 | 改：页脚短令牌（级联） |
+| site/dukou-engine.html | W1156 | 改：页脚短令牌（级联） |
+| site/index.html | W1156 | 改：页脚短令牌（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1156 | 改：版本抬头（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1156 | 改：台账窗口滚动（级联） |
+
 ## W1155 假绿 P1 批（2026-11-07）
 
 | 文件 | W | 说明 |

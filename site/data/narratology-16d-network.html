@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-D8sFAgcTyKfe8WzvbobvKql7/kKAjm9yymeI6G0/ZYs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OTs0aWVFqiHLd53b5ujMncIZh6m8aixlVgXJPs3fk2Y=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>十六维叙事学关系图谱 · 详解西游记</title>
@@ -1869,7 +1869,9 @@ async function fetchJson(path, fallbackKey) {
 
 async function loadData() {
   const base = 'json/';
-  const narratology = await fetchJson(base + 'narratology-16d-network.json', 'narratology');
+  // W1156（深度审计 #33）：json/narratology-16d-network.json 从未入库（fetch 恒 404+回退）——
+  // 删除注定失败的 fetch 承诺，直读内嵌数据（EMBEDDED 兜底语义不变）。
+  const narratology = EMBEDDED_DATA.narratology;
   const nr = narratology.narratology || narratology;
   return {
     dimensions: nr.dimensions || EMBEDDED_DATA.narratology.dimensions,

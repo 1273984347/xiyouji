@@ -8,7 +8,7 @@
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
 
-> 当前批次：W1155（2026-11-07）— 假绿 P1 批 深度审计 21 条 P1 修复 ledger 自测判红 story timeline 双空 folder docs fail closed citations 百回断言 structure 三括号加零面守卫 screenshot gates 零命中 exit2 commit scope 坏 spec 哨兵 design manifest 零条目红 dark state 基线缺页与数量断言 archive health C 根与 returncode pitfall 同号豁免移除 plan template 合并基面回退 action refs ci 参数 verify site 档并 docs 段 safe commit pathspec 漂移拒绝 data drift 单侧键摘要通道 chart values console 与 stability 入判据与缺口进退出码 coverage 实质调用面三通道加存量登记 doc numbers 前向 NOTE provenance 引文状态分布—A1-A6
+> 当前批次：W1156（2026-11-07）— 运行时数据批 EN 搜索在线分支移除镜像 W1074 两页死 fetch 承诺删除直读内嵌 chapter stats 文案订正 EN chart design 五处中文字形与目录文案 appearance 内嵌对齐随站 JSON 十四条 tag cloud 八十二条订正—A1-A6
 > 当前批次：W1132（2026-11-04）— 提交范围门禁兜底分支透传 merge 带入面 + 带入段不再劫持归属 + 单测 4 例 + 计数链不动—A1-A6
 > 当前批次：W1133（2026-11-05）— 台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复 D1/D2/D3—A1-A6
 > 当前批次：W1134（2026-11-04）—前端质感 P0 批五项改动 + 双探针取证：暗色字重降档 / 中文输入防误发与阈值滚动 / 复制对勾淡出 / 打印样式去硬编码—A1-A6

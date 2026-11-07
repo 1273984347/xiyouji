@@ -1,3 +1,17 @@
+### W1156（2026-11-07）：运行时数据批（审计报告落实④：深度审计 §3 运行时六项）
+
+**本批要点**（《全仓逐逻辑深度审计报告-2026-11-06》§3 运行时六项落实）：
+
+> - **T1 #32 EN 搜索页在线分支**：probe 的 `/datasets` fetch（每次加载必发注定 404 请求）移除·恒走离线目录检索（W1074 zh 形态镜像）+ 页面文案两处同步。
+> - **T2 #33 两页死 fetch 承诺**：narratology-16d-network / timeline 的 `json/*.json` 从未入库（fetch 恒 404+回退）→ 直读 EMBEDDED（兜底语义不变·死请求与 console 噪声消除）。
+> - **T3 #34 chapter-stats 文案**：「见 dataset 同名 JSON」→ 实况订正（dataset/ 无同名 JSON·数据以 EMBEDDED 与 scripts/output/data 为准）。
+> - **T4 #35 EN chart-design**：五处中文 `content` 字形改 EN（搜→Q/链末洞察/因/果/关键事件）+ 数据源目录文案 `../data/json/`→`../en/json/`（与实际 loadJson 对齐）。
+> - **T5 #36 character-appearance 内嵌对齐**：14 条 entries 按随站 `scripts/output/data/character_appearance.json` 真值对齐（唐僧 95/3000/9→92/2726/7 等·mentions 5000→6197 类）+ 回退目录文案订正。
+> - **T6 #37 tag-cloud**：注释 81→82 实测条数 + 数据源行订正（页目元数据手工维护·无 dataset 同名 JSON）。
+> - **验证**：check_js_syntax 858 文件全过 · check_data_drift 0 FAIL · 单页 EMBEDDED 解析验证。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1155（2026-11-07）：假绿 P1 批（审计报告落实③：深度审计 21 条 P1 门禁判据修复·各配负样本）
 
 **本批要点**（《全仓逐逻辑深度审计报告-2026-11-06》P1 落实·21 条全清·各配负样本/判据收紧实证）：
@@ -774,7 +788,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1155），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1156），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
