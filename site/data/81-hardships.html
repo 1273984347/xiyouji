@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-endldfrEQ3BdNuNp6JgQ0zQJy+1uqNBQJbfQQoNWWu0=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-endldfrEQ3BdNuNp6JgQ0zQJy+1uqNBQJbfQQoNWWu0=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://region1.google-analytics.com https://analytics.google.com https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难深度统计 · 详解西游记</title>
@@ -528,6 +528,51 @@ h4 { font-size: 18px; font-weight: 500; }
     .topnav nav a { font-size: 13px; }
     .wordmark { font-size: 16px; }
 }
+
+.site-mainnav { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.site-mainnav .nav-brand { font-family: var(--font-serif); font-weight: 600; font-size: 15px; color: var(--ink); white-space: nowrap; }
+.site-mainnav .nav-item { font-size: 14px; color: var(--ink-soft); position: relative; white-space: nowrap; transition: color 0.15s; }
+.site-mainnav .nav-item::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-base) var(--ease-out-quart); }
+.site-mainnav .nav-item:hover { color: var(--accent); }
+.site-mainnav .nav-item:hover::after,
+.site-mainnav .nav-item.is-active::after { transform: scaleX(1); }
+.site-mainnav .nav-item.is-active { color: var(--ink); font-weight: 600; }
+header.site-header:has(.site-mainnav) {
+    position: sticky; top: 0; z-index: var(--z-nav);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 16px clamp(20px, 5vw, 64px);
+}
+@media (max-width: 768px) {
+    .site-mainnav { gap: 16px; }
+    
+    .site-mainnav .nav-item,
+    .site-mainnav .nav-brand {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .site-mainnav .nav-item::after { transition: none; }
+}
+
+.data-status-badge {
+    display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    margin: 12px 0 6px; padding: 8px 14px;
+    border: 1px solid var(--line); border-radius: var(--radius-pill);
+    background: var(--paper); font-size: 13px;
+}
+.data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
+.data-status-badge .ds-label { font-weight: 600; color: var(--info); }
+.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
+.data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
+.data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
+.data-status-badge[data-status="sample"] .ds-dot { background: var(--warn); }
+.data-status-badge[data-status="sample"] .ds-label { color: var(--warn); }
 
 .hero {
     background: var(--dark);
@@ -1464,6 +1509,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
 <link rel="icon" type="image/svg+xml" href="../static/icons/logo-mark-light.svg">
 <link rel="apple-touch-icon" href="../static/icons/icon-192.png">
+
+<!-- ANALYTICS-DUAL v1 w1167 -->
+<script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
 </head>
 <body>
     <a class="skip-link" href="#main">跳到主要内容</a>
@@ -1473,18 +1521,16 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <span class="seal">西游<br>详解</span>
             <span class="wordmark">详解西游记</span>
         </a>
-        <nav aria-label="主导航">
-            <a href="../index.html">首页</a>
-            <a href="../dashboard.html">数据看板</a>
-            <a href="tag-cloud.html">标签云</a>
-            <a href="text-search.html">全文检索</a>
-        </nav>
+        <!-- NAV-CANONICAL v1 w1167 -->
+<nav class="site-mainnav" aria-label="主导航"><a class="nav-brand" href="../index.html">西游详解</a><a href="../guide.html" class="nav-item" data-goatcounter-click="nav-guide">导读</a><a href="../reader/index.html" class="nav-item" data-goatcounter-click="nav-reader">阅读</a><a href="../dashboard.html" class="nav-item is-active" aria-current="page" data-goatcounter-click="nav-dashboard">看板</a><a href="../data/text-search.html" class="nav-item" data-goatcounter-click="nav-search">检索</a><a href="../about.html" class="nav-item" data-goatcounter-click="nav-about">关于</a><a href="../en/index.html" class="nav-item" data-goatcounter-click="nav-switch-en">EN</a></nav>
     </header>
 
     <section class="hero">
         <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 八十一难</p>
         <p class="kicker">C · 情节</p>
         <h1>八十一难深度统计</h1>
+<!-- DATA-STATUS-BADGE v1 w1167 -->
+<div class="data-status-badge" data-status="snapshot"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">内嵌快照</span><span class="ds-note">本页数字为发布时生成的快照，离线双击也能看，不随接口更新。</span></div>
         <p class="subtitle">EIGHTY-ONE HARDSHIPS · 起因 × 结局 × 难度全维度透视</p>
     
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">

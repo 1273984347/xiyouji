@@ -1,3 +1,39 @@
+## W1167 MVP 迁移批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/（1 件） | W1167 | 改：随本批级联刷新 |
+| .github/workflows/（1 件） | W1167 | 改：随本批级联刷新 |
+| archive/docs/（3 件） | W1167 | 改：归档面随级联刷新 |
+| docs/（1 件） | W1167 | 改：stats 计数标记随实算刷新（gate_count 64→66 / pyt |
+| docs/00-导读/（3 件） | W1167 | 改：stats 计数标记随实算刷新（gate_count 64→66 / pyt |
+| docs/11-方案报告/（1 件） | W1167 | 改：stats 计数标记随实算刷新（gate_count 64→66 / pyt |
+| docs/11-方案报告/设计与架构方案/（3 件） | W1167 | 新建：改版方案仓内正本（决策台账 G0-1/2·Ask1/2/4·六项实况·门禁 |
+| docs/agent/（1 件） | W1167 | 改：stats 计数标记随实算刷新（gate_count 64→66 / pyt |
+| scripts/（12 件） | W1167 | 改：随本批级联刷新 |
+| scripts/output/（12 件） | W1167 | 改：门禁/统计生成产物刷新（stats / 缓存 / 计划面） |
+| site/（12 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/data/（89 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/en/（138 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/js/（2 件） | W1167 | 改：上报通道注释「统计链已退役」失真订正 + 与注入轨不重复计数声明 |
+| site/reader/（102 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/culture/（36 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/essays/（45 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/people/（216 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/poetry/（14 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/themes/（210 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/static/js/（3 件） | W1167 | 改：随本批级联刷新 |
+| tests/unit/（5 件） | W1167 | 改：随本批级联刷新 |
+| .gitignore | W1167 | 改：spark-output/ 工作目录不入库（改版方案正本已落 docs/11-方案报告，链路产物不作规则载体） |
+| AGENTS.md | W1167 | 改：随本批级联刷新 |
+| CHANGELOG.md | W1167 | 改：随本批级联刷新 |
+| CITATION.cff | W1167 | 改：随本批级联刷新 |
+| HANDOVER.md | W1167 | 改：随本批级联刷新 |
+| README.md | W1167 | 改：随本批级联刷新 |
+| STRUCTURE.md | W1167 | 改：随本批级联刷新 |
+| pitfalls.md | W1167 | 改：随本批级联刷新 |
+| pytest.ini | W1167 | 改：pytest collected 计数标记刷新 |
+
 ## W1166 移动端收尾微批（2026-11-07）
 
 | 文件 | W | 说明 |

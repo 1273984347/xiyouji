@@ -3,7 +3,8 @@
 generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校验
 
 为 site/**/*.html 逐页生成并注入 <meta http-equiv="Content-Security-Policy">：
-  - script-src 'self'（W695 起外部脚本白名单移除——W456 禁外域 CDN 后全站零外域脚本加载，grep 实证无引用）
+  - script-src 'self' + 外部脚本白名单 EXTERNAL_SCRIPT_HOSTS（W695 曾清空——W456 禁外域 CDN
+      后全站零外域脚本；W1167 G0-1 用户拍板恢复**具名例外**：仅 GA4 下载域）
       + 该页全部内联 <script> 的 SHA-256 哈希（无 'unsafe-inline' / 'unsafe-eval'；
       全站 0 eval 已核；graph-explorer / mobile-index 的动态 onclick 与
       javascript: URL 已改事件绑定，脚本可严格哈希化）
@@ -12,8 +13,8 @@ generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校
       样式注入风险显著低于脚本，且全站 766 处 @font-face / 1636 处 style 属性
       哈希化不可维护）
   - img-src / font-src 'self'（全站资源本地化后无外部图片/字体）
-  - connect-src 'self'（dukou-engine 两页追加本地 RAG 引擎 127.0.0.1:8777；
-      W806 起不再放行 GoatCounter 计数端点——统计链已退役，全站零外域）
+  - connect-src 'self' + 统计双轨回传域（W1167 G0-1 具名例外：GA4 两域 + GoatCounter 计数端点
+      复活；dukou-engine 两页追加本地 RAG 引擎 127.0.0.1:8777）
   - object-src 'none' · base-uri 'self' · form-action 'self' · frame-src 'none'
 
 用法：
@@ -43,10 +44,24 @@ _w536_guard_open = make_guard(PROJECT_ROOT)  # W761：W536 守卫单模块化（
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 项目根
 SITE = os.path.join(ROOT, "site")
 
-EXTERNAL_SCRIPT_HOSTS = []  # W695 收紧：W456 禁外域 CDN 后零引用（grep 实证），script-src 仅 self+哈希
+# W1167 G0-1 用户拍板（2026-11-08·decision_log 见 spark-output/context/brief.json）：
+# 零外域约束的**具名例外**——仅 GA4 统计（脚本下载域 + 数据回传域），file:// 场景由注入侧
+# 异步+失败静默兜底（G0-3 口径）；例外清单之外任何外域资源仍为门禁违规。
+# 注意：host 源必须**裸写不加单引号**——Chrome 实测拒绝带引号的 scheme-host
+# （`''https://...''` invalid source 被忽略·第 43 门禁 console 回归当场抓出）；
+# 引号形态仅 'self' 等关键字与 'sha256-' 源合法。
+EXTERNAL_SCRIPT_HOSTS = ["https://www.googletagmanager.com"]
+# 统计回传域「具名例外」全集（双轨 = GA4 海外面 + GoatCounter 大陆面·用户 2026-11-08 选 A）：
+# GoatCounter 端点须与 scripts/output/_w1167_analytics.json 的 goatcounter_endpoint 同源
+# ——改其一必同步改另一，否则注入页与 CSP 白名单分叉（第 56 槽 CSP 增量漂移判红）。
+ANALYTICS_CONNECT_HOSTS = (
+    "https://region1.google-analytics.com https://analytics.google.com "
+    "https://1273984347.goatcounter.com"
+)
 RAG_ORIGIN = "http://127.0.0.1:8777"
-# W806：GoatCounter 计数端点已退役（站点代码失效实测 404·统计链无数据），
-# connect-src 不再放行任何外域——全站零外域请求口径。
+# 口径沿革：W806 因 GoatCounter 账号实测 404 退役统计链，connect-src 归零外域；
+# W1167 G0-1 拍板恢复为「具名例外」——仅 ANALYTICS_CONNECT_HOSTS 所列回传域
+# （GoatCounter 端点本次复验 HTTP 400=缺参而非 404=死号，账号在活），其余外域仍为门禁违规。
 # 开发模板（不入站、不入 sitemap）：不注入 CSP，避免模板占位内容干扰哈希门禁
 TEMPLATE_EXCLUDE = {"_template.html"}
 
@@ -85,9 +100,9 @@ def build_policy(html, needs_rag):
     parts.append("img-src 'self'")
     parts.append("font-src 'self'")
     if needs_rag:
-        parts.append("connect-src 'self' %s" % RAG_ORIGIN)
+        parts.append("connect-src 'self' %s %s" % (RAG_ORIGIN, ANALYTICS_CONNECT_HOSTS))
     else:
-        parts.append("connect-src 'self'")
+        parts.append("connect-src 'self' %s" % ANALYTICS_CONNECT_HOSTS)
     parts.append("object-src 'none'")
     parts.append("base-uri 'self'")
     parts.append("form-action 'self'")

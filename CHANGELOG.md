@@ -1,3 +1,25 @@
+### W1167（2026-11-08）：MVP 迁移批（导航单组件分发 · 三态徽标 · 双门禁 · CSP 具名例外 · 统计双轨 · 44px 机制）
+
+**文件**：scripts/w1167_nav_inject.py · scripts/w1167_badge_inject.py · scripts/w1167_analytics_inject.py · scripts/check_nav_parity.py · scripts/check_data_badge_coverage.py · scripts/generate_csp.py · scripts/verify_delivery.py · site/system.css · site/static/js/goatcounter.js · site/js/visit-log.js · site/js/rum.js · tests/unit/test_w1167_nav_badge.py · docs/11-方案报告/设计与架构方案/全站改版方案与门禁扩展-v5-2026-11-08.md · site/**.html（导航/徽标/统计/CSP 分发面）
+
+**本批要点**（产品设计链路 13 Skill 全跑后·用户令「开批动工，先占号」·MVP 六项范围由 Ask 1 锁定）：
+
+> - **① 主导航单组件全站分发**：`scripts/w1167_nav_inject.py` 为唯一正本（中英各 6 项三元组 标签/目标/事件名），859 页同源注入；`system.css` 新增 `.site-mainnav` 复用墨韵下划线语言 + 夜读联动。审计唯一 major「导航不一致」就此归零。
+> - **② 三态数据徽标 88 页**：`scripts/w1167_badge_inject.py` 把「实时/快照/示例」从各页自写行话收敛为正本文案（`STATUS_TEXT` 含读者语言免责句）；**策略取 h1 后兄弟插入**——取证发现原 `#dataSource` 是 39 页内联 JS 运行时槽且 `chart-a11y.js` 依赖它，整行替换会静默打断无障碍链路。分类零虚构纪律：`graph-explorer` / `business-model` 查证无 API/演示证据后从 LIVE/DEMO 集剔除。
+> - **③ 第 65/66 槽**：导航一致性与徽标覆盖率升为**恒跑核心门禁**。第 65 槽真值 `import` 自导航正本（不复制常量·取 `it[0]` 不解包，正本日后加字段不炸门禁）；第 66 槽除「态==分类器结果」外硬校验 **label 逐字等于正本**，专防三态被改写回旧行话（check 阶段实证过的回潮形态）。两槽 `--self-test` 各 5 例负样本，退出码 0/1/2 fail-closed。
+> - **④ CSP 具名例外 + 全站重哈希**（G0-2 批准改门禁脚本本体·铁律 8 拍板例外）：`generate_csp.py` 新增 `EXTERNAL_SCRIPT_HOSTS` / `ANALYTICS_CONNECT_HOSTS`。**踩坑实录**：初版把 host 写成带引号形态 `'https://…'`，Chrome 直接判 invalid source 忽略→第 43 门禁 88 页 FAIL 当场抓出；git 取证 W424 历史白名单本就裸写，改裸 host 后归零——引号仅对关键字与 `'sha256-'` 合法。
+> - **⑤ 统计双轨（用户选 A）**：GA4 海外面 + GoatCounter 大陆面。GoatCounter 自托管脚本自 git 历史 `9e009dcd` 恢复（W806 曾按「实测 404=死号」退役，本批复验端点 **HTTP 400=缺参=账号在活**）；GA4 轨在 Measurement ID 填入前**优雅跳过**而非硬注入。`file://` 实测：脚本 200 加载、Console 零 CSP 违规、且 GoatCounter 源码判 `location.protocol==='file:'` 主动不计数（离线面零数据是设计事实，不是缺陷——已回写 G0-3 口径证据）。
+> - **⑥ 44px 移动命中区机制**（Ask 4 捆绑）：`system.css` 移动端块内 `.nav-item/.nav-brand { min-height:44px }`——机制层全局规则，非逐页补丁。
+> - **埋点实况拒绝夸大**：本批交付「传输通道 + 一个声明式事件（nav_click）」，metric.json 逐事件写 `w1167_status`（landed 1 / partial 2 / missing 9）与钩子点，**不写「must×8 已埋」**。
+> - **声明失真三条当场订正**：`visit-log.js` / `rum.js` 仍宣称「本站不再加载任何外域统计脚本」、本方案初稿误写「DESIGN.md 零外域条款」（取证：DESIGN.md 全文无「外域」字样，真正本=AGENTS.md 铁律 5）——零外域例外条款已就地并入铁律 5，不新增条目号。
+> - **三条「判据自身失效」根修（本批比六项交付更值钱的产出——它们此前都在零红灯下工作）**：
+>   ① **git 中文路径八进制转义进登记面**：`git status --porcelain` 非 `-z` 形态把 CJK 路径转义，**加 `core.quotePath=false` 也照转**（仓内 W814/W1014/W1016 已记过，本批又踩＝文档型教训不足以防线）。乱码目录名进 spec 后级联写出磁盘不存在的「`docs/00-/345/257/274/`」行（实测 522 行），`collect_paths` 按磁盘遍历静默丢弃 ⇒ 第 51 槽应动全集与 file-index 登记面双双失真、**全程零红灯**。根修＝取数面改用仓内既有 `_git_status_z`（`-z`）+ 在 `batch_spec.paths_from_rows` 与 `fi_group_rows` **两个写入口**加 fail-closed 守卫（正则要求 ≥3 段连续八进制三元组；`photos/200/301/` 这类真数字目录不误伤——守卫误伤同样会卡死收官链）+ 8 形态单测锁。
+>   ② **`media_block()` 只取首个同名 @media 块**，而 `system.css` 实有 **6 个** `max-width:768px` 块 ⇒ 规则写在后面几块即被判「缺失」。640px 恰好只有一块，所以 A2/A6 一直"通过"——**侥幸通过不等于判据正确**。新增 `media_blocks()` 聚合全部匹配块，A1–A7 一律改走它。
+>   ③ **第 64 槽 A 层只校验高度、不校验宽度**：探针（B 层）抓到 `.site-mainnav .nav-item`「EN」宽 20px 越界 6 页（WCAG 2.5.8 判**双维** ≥24px），而 A 层零覆盖；探针 84 秒刻意不进 pre-commit ⇒ 静态面无锁即可静默回退。升格为 **A7 双维契约**（自测补「只设高度」负样本，现 7 例），汇总行「契约 N 项」改由 `CONTRACT_IDS` **派生**（硬编码「6 项」在加 A7 当场失真，此类计数最容易漏改）。
+> - **统计守卫重指向（不删、不豁免）**：`scripts/check_no_goatcounter.py` 原为 W806「GoatCounter 存在即红」；G0-1 拍双轨后该裁决被推翻，但它守的是「**统计外域面失控却零红灯**」，新口径下风险更大。故判据从「不得存在」改为「**必须等于具名例外全集**」：C1 标签须在注入器 MARK 块内 / C2 端点须等于配置正本 / C3 脚本唯一 / C4 写入口唯一（且**分追踪标签与事件属性两态**——初版用前缀子串把导航的 `data-goatcounter-click` 误判成追踪标签，现网当场 1 FAIL 自证判据不精确）/ C5 配置正本 ↔ CSP 白名单双源一致。自测 2 正 6 负，**正样本含「规范形态必须放行」**（否则重指向只是换了个误报器）；单测 5 例同步新契约。
+> - **CI-only 潜伏缺陷根修**：三个注入器把仓库根硬编码成 `Path("D:/xiyouji")`——Linux runner 上不存在该目录，消费方门禁会「扫到 0 页」而**假绿**（本地绿≠CI 绿·W700 教训形态）；改为按 `__file__` 派生，三注入器 `--dry-run` 复验改动仍为 0。
+> - **验证**：第 65 槽 859 页违规 0 / 第 66 槽 88 页违规 0 / 第 56 槽 CSP 增量漂移 0 FAIL / `generate_csp --check` 859 页 913 哈希零漂移 / 三注入器 `--dry-run` 二次改动 0（幂等）/ 视口探针 FAIL 6→0 且溢出 0（851 页 CSS 重分发后复跑）/ 第 64 槽契约 7 项违规 0 自测 7/7 / 守卫自测 8/8 / 第 31·42·43·46 槽由 FAIL 归零 / pytest 首轮 6 失败全部在本批内根修（含把 `links == 8` 魔法数改为对导航正本引用式对拍：数量 + 标签序列双校验）。
+
 ### W1166（2026-11-07）：移动端收尾微批（浮层遮挡修复 + 图例节奏统一 + 第 64 槽 A6）
 
 **本批要点**（W1165 验收发现项·用户「继续」指令）：
@@ -912,7 +934,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1166），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1167），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
