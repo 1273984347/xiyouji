@@ -1,3 +1,38 @@
+## W1153 安全批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/engine/tools.ts | W1153 | 改：#27 GIT_DANGER 前缀族拦截 + #28 DENY_WRITE /i 与 realpath 复检 + #29 会话新写 scripts 拒执行/childEnv 大小写不敏感 |
+| xiyouji-agent-web/server/engine/tools.test.ts | W1153 | 改：回归锁 4 例（S1 前缀缩写/S2 大小写/S3 会话新写拒执行/S4 childEnv） |
+| scripts/rag/rag_server.py | W1153 | 改：#30 CORS 白名单（对齐 api P3-2）+ /route 异常不回显 + 每 IP 60 次分限速 |
+| tests/unit/test_w1153_rag_cors.py | W1153 | 新增：回归锁 3 例（白名单三态/限速/route 不回显） |
+| CHANGELOG.md | W1153 | 改：W1153 段落（级联） |
+| HANDOVER.md | W1153 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1153 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1153 | 改：AGENTS 脚注滚动归档（级联） |
+| README.md | W1153 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1153 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1153 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1153 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1153 | 改：版本抬头推进（级联·幂等） |
+| docs/00-导读/W批次编号对账表.md | W1153 | 改：W1153 认领行 |
+| scripts/output/file-index.md | W1153 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1153 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1153 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1153 | 改：stats changelog 面（级联） |
+| docs/INDEX.md | W1153 | 改：docs_index 刷新（级联 index 步） |
+| scripts/INDEX.md | W1153 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1153 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1153 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1153 | 改：工具清单刷新 |
+| scripts/output/_w1153_spec.json | W1153 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1153.txt | W1153 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1153 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1153 | 改：朱砂实底报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1153 | 改：gen_folder_docs 刷新（新增测试件登记） |
+| tests/unit/README.md | W1153 | 改：gen_folder_docs 刷新（新增测试件登记） |
+| pytest.ini | W1153 | 改：collected 头注推进（W830 C5b 对账面·stats 连带） |
+
 ## W1152 v4 body 行高改值批（2026-11-07）
 
 | 文件 | W | 说明 |

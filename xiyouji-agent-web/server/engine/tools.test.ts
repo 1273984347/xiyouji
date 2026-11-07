@@ -553,3 +553,51 @@ test("W817-C5b 遍历类工具仍能命中普通文件（过滤未误伤正常�
   assert.equal(g.isError, false, g.content);
   assert.match(g.content, /甲/, "普通文件仍应可 grep：" + g.content);
 });
+
+// ---- W1153（深度审计 #27/#28/#29 回归锁）----
+
+test("W1153-S1 git 长选项前缀缩写不得绕过 GIT_DANGER（--open= 型）", async () => {
+  // 深度审计 #27：git 支持 --open= 即 --open-files-in-pager= 的前缀缩写，
+  // 原全名匹配正则可被缩写绕过（pager 经 sh -c 执行 = 任意命令执行）。
+  const r = await call("run_command", { command: "git grep --open=sh -c id pattern" });
+  assert.equal(r.isError, true, "前缀缩写形态必须被拦：" + r.content);
+  assert.match(r.content, /被禁止的参数/);
+  const r2 = await call("run_command", { command: "git log --ext-d=x HEAD" });
+  assert.equal(r2.isError, true, "--ext-d= 缩写必须被拦：" + r2.content);
+});
+
+test("W1153-S2 写面黑名单大小写不敏感（.GIT/ 大写形态）", async () => {
+  // 深度审计 #28：Windows 文件系统不区分大小写，.GIT/hooks 大写形态此前不命中
+  // ⇒ 可覆写版本库钩子（持久化执行原语）。
+  const r = await call("write_file", { path: ".GIT/hooks/pre-commit", content: "echo pwned" });
+  assert.equal(r.isError, true, ".GIT/ 大写形态必须被拦：" + r.content);
+  assert.match(r.content, /受保护路径/);
+  const r2 = await call("write_file", { path: "scripts/VERIFY_DELIVERY.PY", content: "x" });
+  assert.equal(r2.isError, true, "门禁脚本大写形态必须被拦：" + r2.content);
+});
+
+test("W1153-S3 本会话新写入的 scripts/ 件拒绝执行（白名单组合逃逸封堵）", async () => {
+  // 深度审计 #29：先写 scripts/x.py 再 run_command python scripts/x.py
+  // = 命令白名单 + 受保护路径的组合逃逸 ⇒ 会话内新写脚本一律拒绝执行。
+  const w = await call("write_file", { path: "scripts/w1153_probe.py", content: "print('pwned')" });
+  assert.equal(w.isError, false, "scripts/ 写入本身应放行（守卫点是执行面）：" + w.content);
+  const r = await call("run_command", { command: "python scripts/w1153_probe.py" });
+  assert.equal(r.isError, true, "会话新写脚本必须拒执行：" + r.content);
+  assert.match(r.content, /拒绝执行本会话新写入的脚本/);
+});
+
+test("W1153-S4 childEnv 大小写不敏感剔除凭证", () => {
+  // 深度审计 #29：Windows 环境变量不区分大小写，llm_api_key 小写形态此前原样下发。
+  process.env.llm_api_key = "sk-leak";
+  process.env.AGENT_WEB_TOKEN = "tok-leak";
+  try {
+    const env = childEnv();
+    assert.equal(env.llm_api_key, undefined, "小写键必须被剔除");
+    assert.equal(env.LLM_API_KEY, undefined, "大写键必须被剔除");
+    assert.equal(env.AGENT_WEB_TOKEN, undefined);
+    assert.equal(env.agent_web_token, undefined);
+  } finally {
+    delete process.env.llm_api_key;
+    delete process.env.AGENT_WEB_TOKEN;
+  }
+});

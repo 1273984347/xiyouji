@@ -29,6 +29,32 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import xiyouji_rag as RAG
 
+# W1153（深度审计 #30）：CORS 白名单（对齐 scripts/api/api_server.py 的 P3-2 形态）——
+# 仅 file://（Origin:null）与本地站点源（http 服务模式）放行；其余来源不带 CORS 头
+# ⇒ 任意网页无法跨域读取本仓 docs/source 片段。命中后回显**固定常量**而非请求头原值（防头注入污点流）。
+_CORS_FILE_ORIGIN = "null"
+_CORS_LOCAL_ORIGINS = ("http://127.0.0.1:8000", "http://localhost:8000",
+                       "http://127.0.0.1:8777", "http://localhost:8777")
+_CORS_RESPONSE_ORIGIN = "http://127.0.0.1:8000"
+
+# W1153（深度审计 #30）：简易固定窗限速（每 IP 60 次/分·覆盖 /query /graph /route）——
+# 回环服务仍有被本机浏览器里任意页面打点的面（CPU/IO）；stdlib 实现·不引依赖。
+_RATE_LIMIT = 60
+_RATE_WINDOW = 60.0
+_rate_hits = {}  # ip -> [window_start_ts, count]
+
+
+def _rate_ok(ip):
+    import time as _t
+    now = _t.time()
+    win = _rate_hits.get(ip)
+    if win is None or now - win[0] >= _RATE_WINDOW:
+        _rate_hits[ip] = [now, 1]
+        return True
+    win[1] += 1
+    return win[1] <= _RATE_LIMIT
+
+
 # W746：语义页面路由（懒加载·/route 只读 page_vectors 缓存·不触发 RAG BM25 索引）
 _router_state = {"model": None, "vecs": None, "pages": None}
 
@@ -97,17 +123,31 @@ def _sanitize_history(raw):
 
 
 class Handler(BaseHTTPRequestHandler):
+    def _cors_origin(self):
+        """CORS 白名单——仅回显 file://（Origin:null）与本地站点源，其余不带 CORS 头（W1153）。"""
+        origin = self.headers.get("Origin", "")
+        if origin == _CORS_FILE_ORIGIN:
+            return _CORS_FILE_ORIGIN
+        if origin in _CORS_LOCAL_ORIGINS:
+            return _CORS_RESPONSE_ORIGIN
+        return None
+
     def _send(self, obj, code=200):
         body = json.dumps(obj, ensure_ascii=False).encode("utf-8")
         self.send_response(code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Access-Control-Allow-Origin", "*")  # 允许前端 file:// 跨域
+        cors = self._cors_origin()
+        if cors:
+            self.send_header("Access-Control-Allow-Origin", cors)  # 白名单命中才回显（W1153·原为 *）
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path in ("/query", "/graph", "/route") and not _rate_ok(self.client_address[0]):
+            self._send({"error": "rate limited"}, code=429)
+            return
         q = urllib.parse.parse_qs(parsed.query)
         if parsed.path == "/health":
             # W746：解绑 RAG 索引（dukou-engine 不消费 docs 字段·已实证）——
@@ -138,7 +178,10 @@ class Handler(BaseHTTPRequestHandler):
                 self._send({"query": query, "routes": [
                     {"file": f, "title": t, "score": round(s, 4)} for f, t, s in results]})
             except Exception as exc:
-                self._send({"error": "route failed: %s" % exc}, code=500)
+                # W1153（深度审计 #30）：内部异常不再回显给调用方（此前 500 回显 %s 可泄露
+                # 本地路径/模型栈信息）——细节只落本地 stderr。
+                print("[rag] /route failed: %r" % (exc,), file=sys.stderr)
+                self._send({"error": "route failed"}, code=500)
             return
         self._send({"error": "not found"}, code=404)
 
