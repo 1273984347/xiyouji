@@ -5,7 +5,7 @@
 > - **T1 缺陷取证**：5 个数据页（chapter-stats / story-timeline / tag-cloud / timeline / cross-time-danmaku）的提示框只绑鼠标专有事件。触摸设备上：① 手指抬起不触发 `mouseleave`（提示框永久残留，用户无关闭手段）；② 单击不产生 `mousemove`（仅靠浏览器合成的一次 mouse 事件，位置固定、不随拖动更新）；③ `mouseover` 单点绑定无移动跟随。
 > - **T2 改造（零结构改动）**：事件名整体切到 Pointer Events——`mousemove→pointermove`（拖动跟随）/ `mouseleave→pointerleave`（抬手即触发·触摸结束派发 pointerleave）/ `mouseover→pointerover`+`mouseout→pointerout`（按下即显示/离开即隐藏）/ `mouseenter→pointerenter`。共 5 页 23 处，纯字符串替换、不改回调结构与分支。
 > - **T3 三重防线（E-199）**：`scripts/_w1169_touch_events.py` 逐页锚点唯一性预检（五类 mouse* 事件计数须与基线全等）+ 改后断言（行数不变 / 替换计数守恒 / 无残留鼠标事件名）+ 逐页打印便于归因；首版基线漏 `mouseout`/`mouseenter` 两类（只统计了 3 类），预检当场咬出并补全后重跑。
-> - **T4 验证（分层证据）**：运行时实测 3 页——`g.bar-group` 经 pointermove 显示、pointerleave 复位（chapter-stats）；`g.ev` 经 pointerover 显示、pointerout 复位（story-timeline）；`g.star-node` 经 pointerenter 显示、pointerleave 复位（cross-time-danmaku）。另 2 页源码核实：timeline 事件绑于 `circle.ev-circle`（pointerenter/pointermove/pointerleave 链条完整）、tag-cloud 对应节点已完成同类替换——这两页因探针节点定位（视口外/非 SVG 载体）未纳入运行时断言，**如实标注为源码级验证**。
+> - **T4 验证（5 页全部运行时实测）**：`g.bar-group` 经 pointermove 显示、pointerleave 复位（chapter-stats）；`g.ev` 经 pointerover 显示、pointerout 复位（story-timeline）；`g.star-node` 经 pointerenter 显示、pointerleave 复位（cross-time-danmaku）；`circle.ev-circle` 经 pointerenter 显示「玄奘西行 629」、pointerleave 复位（timeline·桌面视口——该页窄屏走 HTML 卡片分支不渲染 SVG，卡片 hover 仅上浮/阴影装饰、click 本身在触摸下正常，无信息依赖）；`span.tag-item` 经 pointerenter 显示「数据仪表盘…」、pointerleave 复位（tag-cloud·HTML 载体非 SVG，故首轮 SVG 探针扫不到）。**首轮标为「源码核实」的 2 页在本批收尾补验为运行时实测，验证面由此闭合**。
 > - **T5 CSP**：5 页内联脚本变更 ⇒ `generate_csp.py` 重算，859 页 913 哈希零漂移（否则整段脚本会被浏览器拒绝执行）。
 > - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
 > - **文件**：见 file-index。
