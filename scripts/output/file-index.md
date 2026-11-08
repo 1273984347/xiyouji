@@ -1,3 +1,37 @@
+## W1169 图表触摸交互批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/chapter-stats.html | W1169 | 改：3 组 tooltip 事件 mousemove/mouseleave → pointer* |
+| site/data/story-timeline.html | W1169 | 改：mouseover/mouseout → pointerover/pointerout |
+| site/data/tag-cloud.html | W1169 | 改：mousemove/mouseleave/mouseenter → pointer* |
+| site/data/timeline.html | W1169 | 改：2 组 mousemove/mouseleave/mouseenter → pointer* |
+| site/data/cross-time-danmaku.html | W1169 | 改：2 组 mousemove/mouseleave/mouseenter → pointer* |
+| scripts/_w1169_touch_events.py | W1169 | 新建：一次性改造脚本（锚点预检 + 替换断言·三重防线） |
+| docs/00-导读/W批次编号对账表.md | W1169 | 改：W1169 认领行 |
+| CHANGELOG.md | W1169 | 改：W1169 段落（级联） |
+| HANDOVER.md | W1169 | 改：最后更新行 + 当前进度（级联） |
+| scripts/output/_w1169_spec.json | W1169 | 新建：本批 spec |
+| scripts/output/file-index.md | W1169 | 改：W1169 段（级联） |
+| scripts/output/_cascade_files_W1169.txt | W1169 | 新建：级联清单 |
+| .github/workflows/README.md | W1169 | 改：区间行推进（版本面） |
+| CITATION.cff | W1169 | 改：version/date 推进（级联） |
+| README.md | W1169 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1169 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1169 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1169 | 改：逐批明细追加（W1169·级联） |
+| docs/00-导读/项目说明.md | W1169 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1169 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1169 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1169 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1169 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1169 | 改：再生成/验证缓存（级联） |
+| AGENTS.md | W1169 | 改：脚注沿革滚动（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1169 | 改：台账腾窗迁出（号序切分） |
+| site/dukou-engine.html | W1169 | 改：页脚版本推进（级联） |
+| site/index.html | W1169 | 改：页脚版本推进（级联） |
+| scripts/INDEX.md | W1169 | 改：目录清单刷新（新增改造脚本·gen_folder_docs --refresh） |
+
 ## W1168 统计单轨收敛批（2026-11-08）
 
 | 文件 | W | 说明 |

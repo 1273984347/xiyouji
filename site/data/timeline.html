@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Oc9CpUcTR7CJmgT82veoB4JrC+pDkJg0lgc+hbE8upQ=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-eZz1BJ9x4TyrAfkygN3UUaZXzGf0JbfQNASia6Z8CjE=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>交互式时间线 · 详解西游记</title>
@@ -2191,14 +2191,14 @@ var TL_ICO = {
                         selectEvent(i);
                     }
                 })
-                .on('mouseenter', function (event) {
+                .on('pointerenter', function (event) {
                     tooltip.style('opacity', 1);
                     showTooltip(d);
                 })
-                .on('mousemove', function (event) {
+                .on('pointermove', function (event) {
                     positionTooltip(event);
                 })
-                .on('mouseleave', function () {
+                .on('pointerleave', function () {
                     tooltip.style('opacity', 0);
                 });
 
@@ -2236,13 +2236,13 @@ var TL_ICO = {
                         selectEvent(i);
                     }
                 })
-                .on('mouseenter', function (event) {
+                .on('pointerenter', function (event) {
                     tooltip.style('opacity', 1);
                     showTooltip(d);
                     positionTooltip(event);
                 })
-                .on('mousemove', positionTooltip)
-                .on('mouseleave', function () {
+                .on('pointermove', positionTooltip)
+                .on('pointerleave', function () {
                     tooltip.style('opacity', 0);
                 });
             item.append('div')

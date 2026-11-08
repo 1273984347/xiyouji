@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-xISM9PmCtC05OHQnVv+jhZMcy2Oh2+3bTOE5x116GM4='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-W0Kz9wwdkYyxScOf+dw7tgP7z6e7vyrHZzexOjr6amY='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>全站标签云 · 可视化导航中心 · 详解西游记</title>
@@ -1895,7 +1895,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W1168 · W1167 · W1166 · W1165 · W1164 · W1163 · W1162 · W1161 · W1160 · W1159 · W1158 · W1157 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W1169 · W1168 · W1167 · W1166 · W1165 · W1164 · W1163 · W1162 · W1161 · W1160 · W1159 · W1158 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -2104,13 +2104,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 event.preventDefault();
                 handleTagClick(d);
             })
-            .on("mouseenter", (event, d) => {
+            .on("pointerenter", (event, d) => {
                 showTooltip(event, d);
             })
-            .on("mousemove", (event) => {
+            .on("pointermove", (event) => {
                 positionTooltip(event);
             })
-            .on("mouseleave", () => {
+            .on("pointerleave", () => {
                 hideTooltip();
             })
             .on("keydown", (event, d) => {

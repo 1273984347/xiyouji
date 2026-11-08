@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-l2NSwEe6nYaNDtISfKdwlOeg9MdeK3qfMlb6rvO1phI=' 'sha256-CNjtVe6sYjIW2ZSnyWJZH2eRr03OSQw7ftKL6tONTlk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Nmc36sA/ZmsffmCKCCHe6tHwGZvI0MjMU7PpsBPd/cw=' 'sha256-CNjtVe6sYjIW2ZSnyWJZH2eRr03OSQw7ftKL6tONTlk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>故事内时间线 · 详解西游记</title>
@@ -1756,7 +1756,7 @@ html[data-theme="dark"] .chapter-plate {
                 .text(function (d) {
                     return '第' + d.chapter + '回 · ' + d.event + '（' + d.characters.join('、') + '）';
                 });
-            dots.on('mouseover', function (event, d) {
+            dots.on('pointerover', function (event, d) {
                     tip.html('<strong>第' + d.chapter + '回</strong> · ' + PHASES[phaseIdx[d.phase]].name +
                         '<br>' + d.event +
                         '<br>人物：' + d.characters.join('、'))
@@ -1764,7 +1764,7 @@ html[data-theme="dark"] .chapter-plate {
                         .style('top', (event.pageY - 12) + 'px')
                         .classed('visible', true);
                 })
-                .on('mouseout', function () { tip.classed('visible', false); })
+                .on('pointerout', function () { tip.classed('visible', false); })
                 .on('click', function (event, d) {
                     detail.html('<h4>第' + d.chapter + '回 · ' + PHASES[phaseIdx[d.phase]].name + '</h4>' +
                         '<ul><li><strong>' + d.event + '</strong></li>' +

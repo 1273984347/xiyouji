@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-9OkUXteNIj8ZSMia0tipN2atSxyVs3xShe5jYms8Y54='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-wBxT8T0wtZuG9E+HNpL0Rp+vKbAF0KX6s66yo1eA0Kk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>跨时空弹幕博物馆 · 详解西游记</title>
@@ -1847,7 +1847,7 @@ main { overflow-x: clip; }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W1168 · W1167 · W1166 · W1165 · W1164 · W1163 · W1162 · W1161 · W1160 · W1159 · W1158 · W1157 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W1169 · W1168 · W1167 · W1166 · W1165 · W1164 · W1163 · W1162 · W1161 · W1160 · W1159 · W1158 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -2153,7 +2153,7 @@ function renderHeroStarMap(profilesData) {
         const left = (x + tw > width - 16) ? Math.max(8, x - tw - 28) : x;
         tooltip.style("left", left + "px").style("top", y + "px");
     }
-    node.on("mouseenter", function(event, d) {
+    node.on("pointerenter", function(event, d) {
         tooltip.classed("visible", true).attr("aria-hidden", "false");
         tooltip.html(
             `<div class="t-name">${escapeHtml(d.name)} · ${escapeHtml(d.role)}</div>` +
@@ -2162,8 +2162,8 @@ function renderHeroStarMap(profilesData) {
         );
         positionTooltip(event);
     })
-    .on("mousemove", positionTooltip)
-    .on("mouseleave", function() {
+    .on("pointermove", positionTooltip)
+    .on("pointerleave", function() {
         tooltip.classed("visible", false).attr("aria-hidden", "true");
     });
 
@@ -2302,7 +2302,7 @@ function renderWorldMap(criticsData) {
         popup.style("left", Math.min(x, rect.width - 280) + "px")
              .style("top", Math.min(y, rect.height - 100) + "px");
     }
-    dotG.on("mouseenter", function(event, d) {
+    dotG.on("pointerenter", function(event, d) {
         popup.classed("visible", true).html(
             `<div class="p-head">${escapeHtml(d.flag)} ${escapeHtml(d.name)} · ${escapeHtml(d.country)}</div>` +
             `<div class="p-view">「${escapeHtml(d.viewpoint)}」</div>` +
@@ -2310,8 +2310,8 @@ function renderWorldMap(criticsData) {
         );
         positionPopup(event);
     })
-    .on("mousemove", positionPopup)
-    .on("mouseleave", function() { popup.classed("visible", false); });
+    .on("pointermove", positionPopup)
+    .on("pointerleave", function() { popup.classed("visible", false); });
 }
 
 const fetchStatus = { anyFetched: false };
