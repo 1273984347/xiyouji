@@ -1,3 +1,33 @@
+## W1175 方案 §7 核验订正批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/设计与架构方案/全站改版方案与门禁扩展-v5-2026-11-08.md | W1175 | 改：§7 四条逐条复算订正 + 核验纪律 + 同批补记 W1172-W1174 真缺陷 |
+| docs/00-导读/W批次编号对账表.md | W1175 | 改：W1175 认领行 |
+| scripts/output/_w1175_spec.json | W1175 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1175.txt | W1175 | 新建：级联清单 |
+| CHANGELOG.md | W1175 | 改：W1175 段落（级联） |
+| scripts/output/file-index.md | W1175 | 改：W1175 段（级联） |
+| .github/workflows/README.md | W1175 | 改：区间行推进（版本面） |
+| CITATION.cff | W1175 | 改：version/date 推进（级联） |
+| README.md | W1175 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1175 | 改：版本行推进（级联） |
+| HANDOVER.md | W1175 | 改：最后更新行 + 当前进度（级联） |
+| AGENTS.md | W1175 | 改：脚注沿革滚动（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1175 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1175 | 改：逐批明细追加（W1175·级联） |
+| docs/00-导读/项目说明.md | W1175 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1175 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1175 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1175 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1175 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1175 | 改：再生成/验证缓存（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1175 | 改：级联/目录刷新产物 |
+| site/data/cross-time-danmaku.html | W1175 | 改：级联/目录刷新产物 |
+| site/data/tag-cloud.html | W1175 | 改：级联/目录刷新产物 |
+| site/dukou-engine.html | W1175 | 改：级联/目录刷新产物 |
+| site/index.html | W1175 | 改：级联/目录刷新产物 |
+
 ## W1174 移动端全量确认 + 数据源表述统一批（2026-11-08）
 
 | 文件 | W | 说明 |
