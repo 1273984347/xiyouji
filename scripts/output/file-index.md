@@ -1,3 +1,38 @@
+## W1173 移动端覆盖面与视口补齐批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/mobile_viewport_probe.py | W1173 | 改：list_pages 加 scope(+en/reader/all) 与 reader_sample 抽样·修正 reader 子目录递归遗漏 |
+| scripts/check_mobile_viewport.py | W1173 | 改：B 层加 B3 采信 320px 报告（FAIL 须 0·缺失仅 NOTE） |
+| site/system.css | W1173 | 改：移动端补 button{min-height:24px}（W1165 规则漏 button） |
+| scripts/output/mobile_viewport_report_320.json | W1173 | 新建：320px 三目录报告（268 页·FAIL 0） |
+| scripts/output/mobile_viewport_report.json | W1173 | 改：375px 重跑为三目录口径（268 页·FAIL 0） |
+| AGENTS.md | W1173 | 改：第 64 槽 B 层补 320 采信与双盲区说明 |
+| docs/agent/gates.md | W1173 | 改：第 64 槽补 W1173 双盲区段落 |
+| docs/00-导读/W批次编号对账表.md | W1173 | 改：W1173 认领行 |
+| scripts/output/_w1173_spec.json | W1173 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1173.txt | W1173 | 新建：级联清单 |
+| CHANGELOG.md | W1173 | 改：W1173 段落（级联） |
+| scripts/output/file-index.md | W1173 | 改：W1173 段（级联） |
+| site/（3 件） | W1173 | inline_css 副本同步（button 规则传播） |
+| site/data/（89 件） | W1173 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1173 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1173 | inline_css 副本同步（同上·W1142 分组登记） |
+| .github/workflows/README.md | W1173 | 改：区间行推进（版本面） |
+| CITATION.cff | W1173 | 改：version/date 推进（级联） |
+| README.md | W1173 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1173 | 改：版本行推进（级联） |
+| HANDOVER.md | W1173 | 改：最后更新行 + 当前进度（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1173 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1173 | 改：逐批明细追加（W1173·级联） |
+| docs/00-导读/项目说明.md | W1173 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1173 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1173 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1173 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1173 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1173 | 改：再生成/验证缓存（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1173 | 改：级联/目录刷新产物 |
+
 ## W1172 表格窄屏溢出根修批（2026-11-08）
 
 | 文件 | W | 说明 |

@@ -1107,6 +1107,12 @@ td.num, th.num {
     label[for] {
         min-height: 32px;
     }
+    /* W1173：W1165 那条规则漏了 button——en/relationships 的「Redraw」实测 73×23px，差 1px 到
+       WCAG 2.5.8 的 24px 线。只加 min-height:24 不影响已够高的按钮（40/44px 原值保留），
+       对 23px 这类仅 +1px 视觉无感。 */
+    button {
+        min-height: 24px;
+    }
     .chart-block svg text,
     .chart-wrap svg text,
     .chart-container svg text,

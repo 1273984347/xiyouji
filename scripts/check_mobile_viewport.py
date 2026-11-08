@@ -39,6 +39,9 @@ MARKER = "---- 第 64 门禁 移动视口："
 CSS_PATH = os.path.join(ROOT, "site", "system.css")
 JS_PATH = os.path.join(ROOT, "site", "static", "js", "cite-box.js")
 REPORT_PATH = os.path.join(ROOT, "scripts", "output", "mobile_viewport_report.json")
+# W1173：320px 极窄屏报告（scope=all·含 en/reader 抽样）。W1165 起只测 375px + data 目录，
+# 而 reader 正文裸 table 在 375px 就溢出 274px——覆盖面与视口双盲区，本批一并补齐。
+REPORT_320_PATH = os.path.join(ROOT, "scripts", "output", "mobile_viewport_report_320.json")
 MIN_TAP_PX = 24.0
 
 # A 层契约清单（汇总行计数由此派生——硬编码「6 项」在 W1167 加 A7 后即刻失真，
@@ -264,6 +267,21 @@ def check_report() -> tuple[list[str], list[str]]:
         fails.append(f"B 探针报告仍有 {len(bad)} 页未达标：{names}")
     if not pages:
         fails.append("B 探针报告 pages 为空（疑似空跑）")
+
+    # W1173：320px 报告（三目录抽样）同样必须 FAIL=0；缺失只 NOTE（探针 4 分钟不进 pre-commit）
+    if os.path.exists(REPORT_320_PATH):
+        try:
+            with open(REPORT_320_PATH, encoding="utf-8") as fh:
+                rep320 = json.load(fh)
+            bad320 = [p for p in rep320.get("pages", []) if p.get("grade") in ("FAIL", "ERROR")]
+            if bad320:
+                names = "、".join(p.get("page", "?") for p in bad320[:6])
+                fails.append(f"B3 320px 报告仍有 {len(bad320)} 页未达标：{names}")
+        except (OSError, json.JSONDecodeError) as exc:
+            fails.append(f"B3 320px 报告不可读：{type(exc).__name__}")
+    else:
+        notes.append("B3 无 mobile_viewport_report_320.json——批收尾建议 "
+                     "py -3 scripts/mobile_viewport_probe.py --scope all --reader-sample 20 --width 320 --height 640")
 
     rep_m = os.path.getmtime(REPORT_PATH)
     stale = [n for n, p in (("system.css", CSS_PATH), ("cite-box.js", JS_PATH)) if os.path.exists(p) and os.path.getmtime(p) > rep_m]
