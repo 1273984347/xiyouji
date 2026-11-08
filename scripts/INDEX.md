@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（212）
+## 文件（211）
 
 ### Python 脚本
 
@@ -60,7 +60,6 @@
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
 - `_gen_search_index.py`
-- `_w1176_glossary_page.py`
 - `a11y_audit.py`
 - `accent_audit.py`
 - `acceptance_snapshot.py`

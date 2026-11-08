@@ -1,3 +1,42 @@
+## W1177 新增页上线自动化批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/new_page.py | W1177 | 改：加 --post/--batch，run_post 按依赖序跑七步（fail-fast）；description/cite 占位符替换 |
+| site/_template.html | W1177 | 改：补 description / chart-degrade 声明 / div#dataSource 锚点 / cite-block HTML 结构 |
+| docs/00-导读/W批次编号对账表.md | W1177 | 改：W1177 认领行 |
+| scripts/output/_w1177_spec.json | W1177 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1177.txt | W1177 | 新建：级联清单 |
+| CHANGELOG.md | W1177 | 改：W1177 段落（级联） |
+| scripts/output/file-index.md | W1177 | 改：W1177 段（级联） |
+| scripts/output/colorblind-baseline.txt | W1177 | 改：探针页增删后重冻结（终态回 18292） |
+| site/sitemap.xml | W1177 | 改：探针页增删后重生成（终态回 855） |
+| site/（2 件） | W1177 | 搜索索引重生成 + CSP 重哈希（探针页增删的终态） |
+| .github/workflows/README.md | W1177 | 改：区间行推进（版本面） |
+| CITATION.cff | W1177 | 改：version/date 推进（级联） |
+| README.md | W1177 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1177 | 改：版本行推进（级联） |
+| HANDOVER.md | W1177 | 改：最后更新行 + 当前进度（级联） |
+| AGENTS.md | W1177 | 改：脚注沿革滚动（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1177 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1177 | 改：逐批明细追加（W1177·级联） |
+| docs/00-导读/项目说明.md | W1177 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1177 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1177 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1177 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1177 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1177 | 改：再生成/验证缓存（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1177 | 改：级联/修复产物 |
+| archive/scripts/batches/w1175/INDEX.md | W1177 | 改：级联/修复产物 |
+| scripts/output/_w1167_nav_plan.json | W1177 | 改：级联/修复产物 |
+| scripts/_w1176_glossary_page.py | W1177 | 删：W1176 一次性脚本归档迁入 archive/scripts/batches/w1176/ |
+| archive/scripts/batches/w1176/_w1176_glossary_page.py | W1177 | 新建：归档 |
+| archive/scripts/batches/INDEX.md | W1177 | 改：归档产物 |
+| archive/scripts/batches/README.md | W1177 | 改：归档产物 |
+| archive/scripts/batches/w1176/INDEX.md | W1177 | 改：归档产物 |
+| archive/scripts/batches/w1176/README.md | W1177 | 改：归档产物 |
+| scripts/INDEX.md | W1177 | 改：归档产物 |
+
 ## W1176 术语表可视化页（2026-11-08）
 
 | 文件 | W | 说明 |

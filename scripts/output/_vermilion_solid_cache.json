@@ -150,7 +150,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "8872be59e55a4101ee89698de79ebacae68c315f",
+   "sha1": "b272e884506548de6bb7a6f77c57b8fe93581e71",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -569,7 +569,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "5ee201434ee35a499c3cb1db8d2c36ee84060279",
+   "sha1": "cfab42be7950390d9fd5658136d13bea26aac59f",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -657,7 +657,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "b99ffeb95f8306015aafb67c4d1ddc3114eb4c03",
+   "sha1": "b551dc98e9c7135e17e803c90b68fc13b6854086",
    "counts": {
     "button": 1
    }
@@ -669,7 +669,7 @@
    }
   },
   "index.html": {
-   "sha1": "e974e0872ce4a1d6d4af721ca8c9140f88e39261",
+   "sha1": "401fdd0a40ef6e48c466741c2efa664c546b3271",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1506,5 +1506,5 @@
    }
   }
  },
- "generated_at": "2026-11-08T07:33:31.586Z"
+ "generated_at": "2026-11-08T08:44:02.302Z"
 }
