@@ -1,7 +1,7 @@
 {
-  "mode": "--dry-run",
+  "mode": "--apply",
   "stats": {
-    "update": 859
+    "update": 860
   },
   "changed_sample": [],
   "changed_total": 0

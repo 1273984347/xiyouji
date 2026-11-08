@@ -16,27 +16,36 @@
 | a5_docs | 35 | docs/04-文化与历史背景/*.md（排除 README） | W904 | 1011 |
 | a6_docs | 13 | docs/05-诗词歌赋/*.md（排除 README） | W904 | W904 |
 | cognition_docs | 3 | docs/08-提升认知/*.md（排除 README） | W904 | W1096 |
-| csp_covered | 859 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | 1149 |
+| csp_covered | 860 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | 1176 |
 | gate_count | 68 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | 1170 |
-| html_total | 860 | site/**/*.html（递归全站） | W459 | 1149 |
+| html_total | 861 | site/**/*.html（递归全站） | W459 | 1176 |
 | icon_allowlist_entries | 71 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1053 |
-| inline_css_pages | 851 | site 全树含 INLINED 标记页 | W459 | 1149 |
+| inline_css_pages | 852 | site 全树含 INLINED 标记页 | W459 | 1176 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 28 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1157 |
 | pytest_collected | 1529 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1170 |
 | report_docs | 167 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1167 |
-| scan_files | 858 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | 1149 |
+| scan_files | 859 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | 1176 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
-| seo_scanned | 858 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | 1149 |
-| site_data_html | 89 | site/data/*.html | W459 | W1143 |
+| seo_scanned | 859 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | 1176 |
+| site_data_html | 90 | site/data/*.html | W459 | 1176 |
 | site_en_html | 138 | site/en/*.html | W528 | W528 |
 | site_reader_html | 623 | site/reader/**/*.html | W593 | 1149 |
 | site_root_html | 10 | site/*.html | W459 | W1141 |
 | spirit_docs | 4 | docs/09-精神塑造/*.md（排除 README） | W904 | W1096 |
-| visualization_pages | 88 | site/data_html − _shell.html | W459 | W1143 |
+| visualization_pages | 89 | site/data_html − _shell.html | W459 | 1176 |
 | w864_entries | 259 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1152 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### 1176（2026-11-08 15:21:26）
+- csp_covered: 859 → 860
+- html_total: 860 → 861
+- inline_css_pages: 851 → 852
+- scan_files: 858 → 859
+- seo_scanned: 858 → 859
+- site_data_html: 89 → 90
+- visualization_pages: 88 → 89
 
 ### 1170（2026-11-08 11:53:26）
 - gate_count: 67 → 68

@@ -31,7 +31,7 @@
 
 6. **docs 全量链接校验**（lint_links 0 broken·W699 扩自 docs/01 至 docs 全量·W700 五改后内建五豁免=fenced+inline code 去噪/git check-ignore 本地产物/archive 冻结档/POSIX 根绝对路径跳过/_w588_ce.html 快照件）
 7. **sitemap 覆盖**、**site/data 回退模式**（两条共占第 7 槽·历史形态不拆以保 C2 三方对账不改）
-8. **CSP 漂移**（generate_csp.py --check，859<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）——**重建操作规程（PRE-26·W742）**：reader/站点产物重建必须四连跑 `build_reader → inline_css → generate_csp → chapter-stats EMBEDDED 重灌`，缺一步即本门禁或第 40 门禁双源红（W737 实证：build_reader 直出无 INLINED·EMBEDDED 漏重灌）
+8. **CSP 漂移**（generate_csp.py --check，860<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）——**重建操作规程（PRE-26·W742）**：reader/站点产物重建必须四连跑 `build_reader → inline_css → generate_csp → chapter-stats EMBEDDED 重灌`，缺一步即本门禁或第 40 门禁双源红（W737 实证：build_reader 直出无 INLINED·EMBEDDED 漏重灌）
 9. **数据漂移**（check_data_drift.js；W563 扩展：site/data/json 部署副本逐字节对账 47 副本基线 + 页面副本引用存在性 + 副本路径形态解析回原件 + EMBEDDED 单源页页名↔同名原件回退——对账面 44→46 页/71→74 项）、**腐蚀/插件**（check_corruption.py）
 10. **内联脚本语法**（check_js_syntax.js，node vm.Script 批量编译，含 EN 站）
 11. **CSS 结构平衡**（check_structure.py，括号/引号/url 闭合）
@@ -55,7 +55,7 @@
 23. **旁文档同步**（W526 挂载：.github/workflows/README.md 头部版本行（vX.Y.Z W###）== CHANGELOG 现役段 + 里程碑行 W450-W### 上限 == 现役 W，任一不符 FAIL——W499/W525 两次实证旁文档滞后漏网，verify 覆盖外盲区封堵）
 24. **图表静态自洽**（W551 挂载：check_chart_data.py——R1 调用 d3.sankey( 必须引用 d3-sankey.min.js 且磁盘存在；R2 可见饼图系措辞（饼图/环形图/圆环图/Pie/Donut）×treemap 实现×无弧形实现 = 错配。源自 W550 截图审查实证的 10 页桑基空渲染与 4 组饼图错配；需真实渲染的遮挡/空带/溢出/桑基运行时由 scripts/check_screenshot_gates.js 动态门禁覆盖（挂 screenshot-review workflow，pageerror/sankey-typeof/溢出/reveal/画布遮挡五类））
 25. **数据内容一致性**（W555 挂载，经用户确认：check_content_consistency.py --gate 第 25 门禁——W550 实证三类同页数字矛盾规则化：同实体对/同主语多值、图注数 vs 数组字面长、桑基去重节点数、案例数 vs 边数；--self-test 负样本 4/4；基线 content-consistency-baseline.txt 冻结 W554 人工裁决 4 条误报·只拦新增；L2 站-dataset 对账与 L3 语义判读为报告型见 W554 审计报告）
-26. **SEO head**（W630 挂载，经用户裁决：check_seo_head.py 第 26 门禁（slot 自 W591 预留·脚本 W591 建置）——og:image/canonical 全页覆盖·JSON-LD 内联有效·hreflang 配对（89 对）·sitemap 集合一致；858<!--stats:seo_scanned--> 页扫描（site 全树减两个模板壳·W702 校真）；SEO head 属静默腐烂面（W628 实证同族：W575 字面量腐烂 52 批无人察觉））
+26. **SEO head**（W630 挂载，经用户裁决：check_seo_head.py 第 26 门禁（slot 自 W591 预留·脚本 W591 建置）——og:image/canonical 全页覆盖·JSON-LD 内联有效·hreflang 配对（89 对）·sitemap 集合一致；859<!--stats:seo_scanned--> 页扫描（site 全树减两个模板壳·W702 校真）；SEO head 属静默腐烂面（W628 实证同族：W575 字面量腐烂 52 批无人察觉））
 
 ### 编号与质量防线类（27-47）
 

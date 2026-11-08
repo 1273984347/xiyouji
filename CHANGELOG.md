@@ -1,3 +1,16 @@
+### W1176（2026-11-08）：术语表可视化页（V2 首批·数据管道根修 + 新页落地）
+
+**本批要点**（用户「开工」指令·V2 首批）：
+
+> - **T1 数据管道根修（先修管道再建页）**：`scripts/check_glossary.py` 的 `parse_md` 原实现只取前 1-2 列——`variant` 类取「异名/指代」丢「出处说明」、`term` 类只取术语名丢「含义/书中用法」两列。源表 `docs/00-导读/术语表.md` 是三列结构，**近半信息在生成管道里蒸发**，直接拿 JSON 建页会得到一个只有词名的空壳。改为保留完整列（缺列给空串保持结构稳定），重新生成 `dataset/glossary.json`（6 组 59 条，C1 与源表逐条对拍零差异）。
+> - **T2 新页 `site/data/glossary.html`**：KPI 四卡（6 组 / 59 条 / 10 异名映射 / 49 术语）+ 6 组筛选 tab + 防抖搜索 + 59 张术语卡片（人物称谓组展示「异名 → 正名」的内丹配属关系，其余组保留含义与书中用法）+ 完整对照表（与源表同构）。渲染实测：59 卡 / 59 行 / 7 tab / 计数正确、JS 无报错。
+> - **T3 模板缺陷根修（影响所有未来新页）**：`site/_template.html` 的说明注释里写了 `<script>` 字面量，被 HTML 解析器当成真的脚本块开始标签 ⇒ 注释文字被当脚本执行、报语法错误（`Unexpected identifier 'EMBEDDED_DATA'`）。浏览器容错使其不致命，但第 8 槽内联脚本语法门禁必红。改为「script 标签」文字表述，模板与新页同修；修后全站 859 文件语法通过。
+> - **T4 新增页的全链路要素补齐**：`w1167_badge_inject.py` 注入数据源徽标（snapshot/内嵌快照）、`w1167_nav_inject.py` 注入主导航（MARK 恰一次）、`<div id="dataSource">` 锚点满足第 28 槽 C1/C2/C4（citability 89/89）、`<!-- chart-degrade: n/a -->` 声明（第 30 槽）、`gen_sitemap.py` 补 sitemap、搜索索引重生成、CSP 全站重哈希（860 页 915 哈希零漂移）。
+> - **T5 色盲基线**：新页内联 CSS 继承模板的深色适配映射规则（两处近色 `#d87c6e`/`#e17670` ΔE=0.3），按官方路径 `--generate-baseline` 重冻结：17448 → 18295 行（+847 = 新页配对，其余页零变化，符合「单调不增」语义），基线外违规归零。
+> - **T6 V2 定位说明**：V2 原列的「西游地理 3D / 人物关系动态网络 / 八十一难难度热力图」三项**已全部存在**（2069 / 3156·2422 / 2276 行）。全站 89 个 data 页与 43 个数据集配对后，真正「有数据、无页面」的孤儿只有 `glossary` 一项——本批即把它落地，V2 的可视化侧至此清空。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1175（2026-11-08）：方案 §7 核验订正批（v5 批后清偿逐条复算）
 
 **本批要点**（用户「先订正方案」指令）：
@@ -1042,7 +1055,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1175），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1176），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1050,7 +1063,7 @@
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
-> **全站页数口径**（W459 建·W702 实跑刷新·W1149 随批刷新，各门禁分母不同）：HTML 共 860<!--stats:html_total--> 页（site/data 89<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 623<!--stats:site_reader_html-->）；CSP 覆盖 859<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 858<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 858<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 851<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 88<!--stats:visualization_pages-->」= site/data 89 减 `_shell.html`。
+> **全站页数口径**（W459 建·W702 实跑刷新·W1149 随批刷新，各门禁分母不同）：HTML 共 861<!--stats:html_total--> 页（site/data 90<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 623<!--stats:site_reader_html-->）；CSP 覆盖 860<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 859<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 859<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 852<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 89<!--stats:visualization_pages-->」= site/data 90 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 > - **T9 体积门禁脚注切片根修（CI 首红暴露·铁律 15）**：check_doc_size_budget._agents_face 的行切片在「脚注=文件末行且无换行尾」（AGENTS.md 恒为该形态）时 find(nl)=-1 使 t[fs:-1] 吞收尾家具星号 ⇒ 剥家具失败条目恒 +19 字误判（往批短 note 潜伏未触顶·W1137 note=119 首踩本地绿 CI 红）⇒ 末行无换行时取到文件尾 + batch_cascade agents_note 预检与门禁同源计量（口径对齐）· 单测 12 例全过。

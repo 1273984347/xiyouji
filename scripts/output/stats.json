@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-08T14:17:33",
+  "_generated": "2026-11-08T15:21:26",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -55,8 +55,8 @@
     "domain": "html_total − _template.html（generate_csp TEMPLATE_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "1149",
-    "value": 859
+    "last_changed_by": "1176",
+    "value": 860
   },
   "gate_count": {
     "domain": "scripts/verify_delivery.py「第 N 槽/门禁」max",
@@ -69,8 +69,8 @@
     "domain": "site/**/*.html（递归全站）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "1149",
-    "value": 860
+    "last_changed_by": "1176",
+    "value": 861
   },
   "icon_allowlist_entries": {
     "domain": "scripts/output/_w949_icon_field_allowlist.json 顶层数组长度",
@@ -83,8 +83,8 @@
     "domain": "site 全树含 INLINED 标记页",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "1149",
-    "value": 851
+    "last_changed_by": "1176",
+    "value": 852
   },
   "learn_docs": {
     "domain": "docs/07-学以致用/*.md（排除 README）",
@@ -118,8 +118,8 @@
     "domain": "html_total − _template.html − _shell.html（check_js_syntax/check_structure）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "1149",
-    "value": 858
+    "last_changed_by": "1176",
+    "value": 859
   },
   "script_classes": {
     "domain": "scripts/[A-Z]_* 类目录数",
@@ -132,15 +132,15 @@
     "domain": "html_total − 两模板壳（check_seo_head SEO_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W591",
-    "last_changed_by": "1149",
-    "value": 858
+    "last_changed_by": "1176",
+    "value": 859
   },
   "site_data_html": {
     "domain": "site/data/*.html",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1143",
-    "value": 89
+    "last_changed_by": "1176",
+    "value": 90
   },
   "site_en_html": {
     "domain": "site/en/*.html",
@@ -174,8 +174,8 @@
     "domain": "site/data_html − _shell.html",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1143",
-    "value": 88
+    "last_changed_by": "1176",
+    "value": 89
   },
   "w864_entries": {
     "domain": "scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计",
