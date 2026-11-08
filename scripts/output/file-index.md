@@ -1,3 +1,34 @@
+## W1171 坑表补强批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| pitfalls.md | W1171 | 改：E-11 补第三种形态（Python 默认 CRLF）+ 新增 E-211 元教训 + 流程段 171→172 |
+| AGENTS.md | W1171 | 改：坑表计数 304→305 + 分项 171→172 |
+| HANDOVER.md | W1171 | 改：坑表计数 304→305（两处）+ 最后更新行 + 当前进度（级联） |
+| .agent/skills/puti-shouye/SKILL.md | W1171 | 改：坑表计数 304→305（两处） |
+| docs/00-导读/W批次编号对账表.md | W1171 | 改：W1171 认领行 |
+| scripts/output/_w1171_spec.json | W1171 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1171.txt | W1171 | 新建：级联清单 |
+| CHANGELOG.md | W1171 | 改：W1171 段落（级联） |
+| scripts/output/file-index.md | W1171 | 改：W1171 段（级联） |
+| .github/workflows/README.md | W1171 | 改：区间行推进（版本面） |
+| CITATION.cff | W1171 | 改：version/date 推进（级联） |
+| README.md | W1171 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1171 | 改：版本行推进（级联） |
+| docs/00-导读/项目说明.md | W1171 | 改：版本行推进（级联） |
+| archive/docs/workflows-readme-history.md | W1171 | 改：逐批明细追加（W1171·级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1171 | 改：级联/目录刷新产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1171 | 改：级联/目录刷新产物 |
+| archive/scripts/batches/w1169/INDEX.md | W1171 | 改：级联/目录刷新产物 |
+| scripts/output/INDEX.md | W1171 | 改：级联/目录刷新产物 |
+| scripts/output/README.md | W1171 | 改：级联/目录刷新产物 |
+| scripts/output/stats.json | W1171 | 改：级联/目录刷新产物 |
+| scripts/output/tools-inventory.md | W1171 | 改：级联/目录刷新产物 |
+| site/data/cross-time-danmaku.html | W1171 | 改：级联/目录刷新产物 |
+| site/data/tag-cloud.html | W1171 | 改：级联/目录刷新产物 |
+| site/dukou-engine.html | W1171 | 改：级联/目录刷新产物 |
+| site/index.html | W1171 | 改：级联/目录刷新产物 |
+
 ## W1170 dashboard KPI 对拍批（2026-11-08）
 
 | 文件 | W | 说明 |
