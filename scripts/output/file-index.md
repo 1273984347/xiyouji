@@ -1,3 +1,35 @@
+## W1174 移动端全量确认 + 数据源表述统一批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w1175_datasource_wording.py | W1174 | 新建：数据源前缀词统一脚本（三重防线·逐层补映射） |
+| scripts/output/mobile_viewport_report.json | W1174 | 改：375px 报告升级为全量 859 页（FAIL 0） |
+| scripts/output/mobile_viewport_report_320.json | W1174 | 改：320px 报告升级为全量 859 页（FAIL 0） |
+| site/data/（89 件） | W1174 | 改：数据源前缀词统一 30 页 32 处 + 搜索索引/CSP 跟随 |
+| docs/00-导读/W批次编号对账表.md | W1174 | 改：W1174 认领行 |
+| scripts/output/_w1174_spec.json | W1174 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1174.txt | W1174 | 新建：级联清单 |
+| CHANGELOG.md | W1174 | 改：W1174 段落（级联） |
+| scripts/output/file-index.md | W1174 | 改：W1174 段（级联） |
+| site/（3 件） | W1174 | 搜索索引重生成（search 页内嵌索引跟随） |
+| .github/workflows/README.md | W1174 | 改：区间行推进（版本面） |
+| CITATION.cff | W1174 | 改：version/date 推进（级联） |
+| README.md | W1174 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1174 | 改：版本行推进（级联） |
+| HANDOVER.md | W1174 | 改：最后更新行 + 当前进度（级联） |
+| AGENTS.md | W1174 | 改：脚注沿革滚动（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1174 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1174 | 改：逐批明细追加（W1174·级联） |
+| docs/00-导读/项目说明.md | W1174 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1174 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1174 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1174 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1174 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1174 | 改：再生成/验证缓存（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1174 | 改：级联/目录刷新产物 |
+| scripts/INDEX.md | W1174 | 改：级联/目录刷新产物 |
+| scripts/output/citability-report.json | W1174 | 改：级联/目录刷新产物 |
+
 ## W1173 移动端覆盖面与视口补齐批（2026-11-08）
 
 | 文件 | W | 说明 |

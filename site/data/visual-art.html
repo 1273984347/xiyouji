@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-AkCDJ9f6TfQ2EK0J5Xug3jBNfIZe1X+jhC9uMUcxBzI=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2i0sF75i0B1Injg1SRWc2eaOAT0CNTgt0JdeLNu4fjk=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>视觉艺术 · 心经物质形态与气味地图 · 详解西游记</title>
@@ -2125,7 +2125,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            数据源：嵌入式版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+            数据源：页面内嵌 EMBEDDED 数据（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
         <div class="cite-block" id="citeBox">
   数据源：<code>json/heart_sutra_sculpture.json</code>、<code>json/scent_map.json</code>、<code>json/visual_art_summary.json</code>（快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
   <div class="cite-type-note"><!-- W668-T3 -->数据性质：<strong>方法论总结展示</strong>（文档型页面·内容为专题章节索引与要点摘要）</div>
@@ -3078,7 +3078,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 "数据源：实时加载自 <code>json/</code>（运行于 http server 模式）";
         } else {
             document.getElementById("dataSource").innerHTML =
-                "数据源：嵌入式数据（file:// 协议·fetch 不可用·直接读取硬编码 JSON）";
+                "数据源：页面内嵌 EMBEDDED 数据（file:// 协议·fetch 不可用·直接读取硬编码 JSON）";
         }
 
         // 渲染心经板块
