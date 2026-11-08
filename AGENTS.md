@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 66 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 67 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前按 §7 路径按需读节；更细的规则以文末「权威文档」为准。
 >
@@ -102,9 +102,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=66 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=67 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 66 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 67 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -140,7 +140,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 25. **数据内容一致性**
 26. **SEO head**
 
-**编号与质量防线类（27-57）**：
+**编号与质量防线类（27-67）**：
 27. **W 号区间字面量**
 28. **可视化可引用性**
 29. **色盲安全**
@@ -178,9 +178,10 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 61. **数据集溯源槽**（check_dataset_provenance.py·W1141）——22 节点/32 边人物关系数据补溯源字段后，若后续编辑删字段、改回目越界或把权重写出 0–1，既有门禁全都不看数据集字段 ⇒ 数据层会静默退化。判据：`dataset/character-relationship-3d.json` 的 meta 必填键、节点与边必填字段、节点引用闭合、`chapters` 1–100、`weight` 0–1、规则编号 E-01～E-07、证据级别枚举、重复边、`disputed` 边 rationale；并校验 `dataset/edge-wukong-tangseng.json` 的 9 组事件、引文回目落在事件区间、**引文精确性**（每条引文去空白后须为 `dataset/text-search.json` 对应回目原文的精确子串·W1145）、`edge_weight = max(event_weight)`；页面 `EMBEDDED_DATA` 的 `coding_version`/`provenance_batch` 同步标记。恒跑（读 dataset JSON·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 61 门禁 数据集溯源：N FAIL ----`；退出码 0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；单测 `tests/unit/test_w1138_dataset_provenance.py` + `tests/unit/test_w1141_gate_mount.py` + `tests/unit/test_w1143_benchmark.py` + `tests/unit/test_w1145_quote_exactness.py`；自测 9 例负样本（3D 5 + 标杆 3 + 引文 1）。
 62. **reader 完整性**（check_reader_integrity.py·W1149）——`site/reader` 独立生成、此前无专属判据：C1 可见正文禁「（待补）/待完善/TODO」；C2 GitHub `blob|tree/main/<path>` 必须映射仓内真实文件；C3 内容页恰一个 h1（跳转页豁免）；C4 标题唯一。恒跑（扫全量 reader 页·秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 62 门禁 reader 完整性：N FAIL（扫描 N 页） ----`；自测 6 例；单测 `tests/unit/test_w1149_reader_dataset.py`。
 63. **数据集清单**（check_dataset_manifest.py·W1149）——dataset 快照层防退化：C1 README 行 ↔ 磁盘 ↔ 大小/条目数；C2 `_schema.weight_scale` 量纲与 sankey 端点索引；C3 `chapter/回目` 只允许 1–100 或 `null`+`chapter_scope`（禁 0 哨兵）；C4 空数组/null 必须有状态归类；C5 `deprecated` 必须有 note + 存在的 replacement_page。恒跑（读 46 JSON·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 63 门禁 数据集清单：N FAIL（扫描 N 文件） ----`；自测 6 例；单测同 62。
-64. **移动视口**（check_mobile_viewport.py·W1165）——375px 视口下触摸目标与内容可达性的长期形态（V4 回归批产出）。全量普查实测**多数页面**触摸目标低于 WCAG 2.5.8 的 24px 线，根因分散四层：cite 组件样式寄生在 JS（未引脚本的页面结构在而样式缺）、页脚 nav 不换行致中文逐字竖排、可点击图例项无尺寸、5 列网格在窄屏挤压裁剪。A 层静态契约 7 项<!--doc-sync:exempt 契约数由 CONTRACT_IDS 派生的功能描述·非漂移值-->（`.cite-details summary` min-height≥24 / 移动端块内 `.legend-item[role="button"]` min-height / `.site-footer nav` flex-wrap / `.site-footer nav a` nowrap+min-height / `cite-box.js` 禁 `createElement('style')` 防样式倒退寄生 / 移动端 `.site-footer` padding-bottom≥54px 防底部浮层遮挡页脚链接 / `.site-mainnav .nav-item` **min-height 与 min-width 双 ≥24**，W1167 补 A7——WCAG 2.5.8 判双维，只设高度会漏掉「EN」这类窄标签）；@media 定位一律聚合**全部**同名块（W1167 实证 system.css 有 6 个<!--doc-sync:exempt @media 块实测数·历史时点事实--> 768px 块，首块匹配即判据自身失效）；B 层采信 `scripts/output/mobile_viewport_report.json`（FAIL 必须 0；报告旧于 CSS/JS 时 NOTE 提示重跑而不判红——探针 84 秒不进 pre-commit）。恒跑（读 2 文件 + 报告 JSON·毫秒级·`_SCOPE_CORE`）；汇总行契约数由 `CONTRACT_IDS` 派生（禁硬编码计数）；自测 7 例。配套探针 `scripts/mobile_viewport_probe.py`（四类判据·自测 9 例·批收尾手动跑）。
-65. **导航一致性**（check_nav_parity.py·W1167）——audit-1 唯一 major（跨页主导航不一致·普查 20 签名族实证）的判据化：主导航正本 `scripts/w1167_nav_inject.py` 全站分发 859 页<!--doc-sync:exempt W1167 时点历史数-->后，「一致率 100%」不再靠人眼。判据四则（MARK 恰一次 / nav-item 文本序==正本 ZH·EN 六项 / aria-current ≤1 / 有 MARK 无结构=破损红）；判据**同源引用**正本模块不复制清单（W1120 引用不复制纪律）。恒跑（静态扫描·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 65 门禁 导航一致性：页面 N · 违规 M · OK|FAIL ----`；自测 5 例（含双高亮与结构剥壳负样本）；退出码 0/1/2（正本不可读=fail-closed）。
+64. **移动视口**（check_mobile_viewport.py·W1165）——375px 触摸目标与内容可达性的静态契约面（V4 回归批产出·根因四层与普查数据见 gates.md）。A 层契约 7 项<!--doc-sync:exempt 契约数由 CONTRACT_IDS 派生的功能描述·非漂移值（原条目同款豁免随压缩保留）-->：A1 `.cite-details summary` min-height≥24 / A2 移动端 `.legend-item[role="button"]` min-height / A3 `.site-footer nav` flex-wrap / A4 页脚链接 nowrap+min-height≥24 / A5 `cite-box.js` 禁 `createElement('style')`（样式归位 system.css，防倒退寄生）/ A6 移动端页脚 padding-bottom≥54（防底部浮层遮挡「反馈」）/ A7 `.site-mainnav .nav-item` **双维**≥24（WCAG 2.5.8 判宽高两维）。B 层采信 `scripts/output/mobile_viewport_report.json`（FAIL 必须 0；报告旧于 CSS/JS 时 NOTE 提示重跑——探针 84 秒不进 pre-commit）。恒跑·`_SCOPE_CORE`；汇总行 `---- 第 64 门禁 移动视口：N FAIL ----`；自测 7 例（含「只设高度」负样本）。
+65. **导航一致性**（check_nav_parity.py·W1167）——audit-1 唯一 major（跨页主导航不一致）的判据化：主导航正本 `scripts/w1167_nav_inject.py` 全站分发后，「一致率 100%」不再靠人眼。判据四则（MARK 恰一次 / nav-item 文本序==正本 ZH·EN 六项 / aria-current ≤1 / 有 MARK 无结构=破损红）；判据**同源引用**正本模块不复制清单（W1120 引用不复制纪律）。恒跑（静态扫描·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 65 门禁 导航一致性：页面 N · 违规 M · OK|FAIL ----`；自测 5 例（含双高亮与结构剥壳负样本）；退出码 0/1/2（正本不可读=fail-closed）。
 66. **数据徽标**（check_data_badge_coverage.py·W1167）——story-2「三态徽标 100% 覆盖+读者语言」判据化（audit-6 透明度不一致·旧「数据源：」行实测 11 种口径含 EMBEDDED 行话、1 页<!--doc-sync:exempt W1167 时点历史数-->缺失）。判据三则（88 页<!--doc-sync:exempt W1167 时点历史数-->徽标 MARK 恰一次 / data-status==正本 classify 分类（live 以接口 grep 证据、sample 以人工证据清单，零虚构分类）/ ds-label 逐字==STATUS_TEXT 防行话回潮）；同源引用 `w1167_badge_inject.py` 正本。恒跑（毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 66 门禁 数据徽标：页面 N · 违规 M · OK|FAIL ----`；自测 5 例（含态越界与行话回潮负样本）；旧 #dataSource JS 运行时槽保留不破坏（39 页<!--doc-sync:exempt W1167 时点历史数--> innerHTML 契约实证）。
+67. **统计事件契约**（check_stat_events.py·W1168）——删调用/改事件名/清单与代码漂移此前全链零红灯。清单正本 `scripts/output/_w1168_stat_events.json`（11 组 21 名）+ 判据六则：C1 slug 唯一 / C2 有清单必有落点（`file`·`files` 同等）/ C3-C4 源面与页面面反向对拍未登记名即红 / C5 metric 反向链（结构性要求·gitignore 件缺失只作 NOTE）/ C6 `runtime_layer` ∈ {bridge, goatcounter} 必填（探针按声明层取数，读错面即恒 0 假红）。恒跑·`_SCOPE_CORE`；汇总行形态同 65/66 槽；自测 10 例；运行面 `scripts/stat_event_probe.py`（P1-P7·手动跑）。
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
@@ -189,15 +190,15 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 > **🔥 火眼金睛 skill（W1149 建·`huoyan-jinjing`）**：全仓巡检速查 [`.agent/skills/huoyan-jinjing/SKILL.md`](.agent/skills/huoyan-jinjing/SKILL.md)——五维扫描（覆盖/失败语义/CI 形态/数据血缘/同类复发）+ 判据 fail-closed + 数据分级 + manifest 对拍 + 链接/内联 + 修复三原则；完整方法论文档在 [docs/10-方法论沉淀/全仓深度审计SOP-可复用.md](docs/10-方法论沉淀/全仓深度审计SOP-可复用.md)，可执行入口 `scripts/audit_repo.py`。
 
-> **📖 阅读契约（W709）**：索引型——297 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——304 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**占号共享区纪律（W1110·E-128·W1121 根修）**：`reserve_w.py` 的预约集原先写在**工作树内**的 `tmpe/_w_reservations.json`（已 gitignore）⇒ **共享范围 = 工作树·不是仓库** ⇒ 隔离 clone / 并行 worktree 内占号他方看不见 ⇒ **实测撞过 W1120**（双方各占一号·零红灯·记录 session 同名无法仲裁）⇒ **W1121 根修**：取号集合改为「本仓表 + 同机兄弟克隆表 + 用户级共享表」三源**合并取并集**（同名取 ts 最新·写共享表前先合并他人记录不覆盖）+ session 标识含仓路径指纹（WB_SESSION 优先）+ 同号多会话即打印**跨克隆撞号预警** + release 只撤本工作树登记且 session 相同的号 ⇒ 落地后实测取号由 W1120 正确让至 W1121；**纪律不变**：落段前复核「本批号仍在预约集内」，且**占号必须在与并行会话共享的克隆里执行**。
+**占号共享区纪律（W1110·E-128·W1121 根修）**：`reserve_w.py` 的预约集在 W1120 前只写工作树内 `tmpe/_w_reservations.json`（已 gitignore）⇒ 共享范围=工作树而非仓库 ⇒ 隔离 clone/并行 worktree 的占号他方看不见 ⇒ 实测撞号。**W1121 根修**＝取号集合改「本仓表 + 同机兄弟克隆表 + 用户级共享表」三源并集（同名取 ts 最新·写共享表前先合并他人记录不覆盖）+ session 标识含仓路径指纹 + 同号多会话打印跨克隆撞号预警 + release 只撤本工作树且 session 相同的号。**纪律**：落段前复核「本批号仍在预约集内」，且占号必须在与并行会话共享的克隆里执行（叙事与实证细节 → pitfalls E-128）。
 
-**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（10）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（166）
+**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（12）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（171）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -277,7 +278,7 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 2. **E1 铁律（声明 ≠ 落地）**：每个文件修改后 Grep spot-check 验证落地，禁止假收敛。
 3. **改内联脚本 → 重跑 generate_csp.py**（CSP 哈希失配会整脚本被拒）。
 4. **批量改 CSS/JS → 验证括号/引号平衡**（check_structure.py）。
-5. **file:// 铁律**：新页面必须内嵌 EMBEDDED 回退、零外域依赖（D3/Three 本地引用 `site/static/js/`，禁 d3js.org/cdnjs 外域 CDN）。**具名例外**（W1167 G0-1 用户拍板·铁律 16⑦ 留痕）：统计双轨四域为唯一放行外域——`script-src` www.googletagmanager.com；`connect-src` region1.google-analytics.com · analytics.google.com · 1273984347.goatcounter.com（全集定义在 `scripts/generate_csp.py` 的 `EXTERNAL_SCRIPT_HOSTS`/`ANALYTICS_CONNECT_HOSTS`，与 `scripts/output/_w1167_analytics.json` 同源）；例外之外任何外域仍为门禁违规。例外仅在线 http(s) 生效，`file://` 下 GoatCounter 源码判 `location.protocol==='file:'` 主动不计数、GA4 异步静默，页面渲染零依赖统计。
+5. **file:// 铁律**：新页面必须内嵌 EMBEDDED 回退、零外域依赖（D3/Three 本地引用 `site/static/js/`，禁 d3js.org/cdnjs 外域 CDN）。**具名例外**（W1167 G0-1 拍板·W1168 收敛为单轨·铁律 16⑦ 留痕）：唯一放行外域是 GoatCounter 回传域 `connect-src https://1273984347.goatcounter.com`；`script-src` 自 W1168 起再次为空集——GA4 轨退役（账号未建 + 大陆可达性差 + web vitals/自定义事件改由自托管链承载），统计改由自托管 `goatcounter.js` + `site/static/js/stats.js` 桥发起。例外全集唯一定义在 `scripts/generate_csp.py`（`EXTERNAL_SCRIPT_HOSTS`/`ANALYTICS_CONNECT_HOSTS`），与配置端点不一致由第 67 槽 C5 + 第 56 槽增量漂移拦下；例外之外任何外域仍为门禁违规。例外仅在线 http(s) 生效，`file://` 下统计桥短路、页面渲染零依赖统计。
 6. **新页落地**：可视化页进 site/data/、索引进 site/ 根 + tag-cloud + sitemap；禁往 site/chapters|characters|themes（空遗留目录）。
 7. **先取证再假设**：诊断前端显示问题，先拿截图 + Console + 复现条件，再下根因结论（见 docs/10-方法论沉淀/前端显示问题诊断SOP.md）。
 8. **禁止擅改**：CHANGELOG 历史段、归档 3 份、.env、SECURITY-AUDIT 档、verify_delivery.py、bump_version.py 等门禁脚本（详见文档规范 §11.2）。
@@ -329,4 +330,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1162-W1162 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-07（W1163）收尾微批：safe_commit --expect-spec 多批并集+W1162 回填+残置并入；2026-11-07（W1164）触发器硬拦升格：三触发器 hard 判据+preflight 接线+负样本锁 10 例+登记面欠账当场拦截实证；2026-11-07（W1165）移动端 375px 回归：99 页普查 FAIL 84→0 / cite 样式归位 system.css / 页脚 nav 换行 / 图例与表单触摸尺寸 / 第 64 槽 5 项契约；2026-11-07（W1166）移动端收尾：页脚安全区（浮层不再遮挡「反馈」）/ 图例纯视觉项 20→32px 节奏收敛 / 第 64 槽补 A6 契约（自测 6 例）；2026-11-08（W1167）MVP 迁移：导航单组件全站分发（含 nav_click 埋点）/ 三态徽标 / 第 65·66 槽 / CSP 具名例外 + 全站重哈希 / GoatCounter+GA4 双轨 / 44px 移动机制。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1163-W1163 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-07（W1164）触发器硬拦升格：三触发器 hard 判据+preflight 接线+负样本锁 10 例+登记面欠账当场拦截实证；2026-11-07（W1165）移动端 375px 回归：99 页普查 FAIL 84→0 / cite 样式归位 system.css / 页脚 nav 换行 / 图例与表单触摸尺寸 / 第 64 槽 5 项契约；2026-11-07（W1166）移动端收尾：页脚安全区（浮层不再遮挡「反馈」）/ 图例纯视觉项 20→32px 节奏收敛 / 第 64 槽补 A6 契约（自测 6 例）；2026-11-08（W1167）MVP 迁移：导航单组件全站分发（含 nav_click 埋点）/ 三态徽标 / 第 65·66 槽 / CSP 具名例外 + 全站重哈希 / GoatCounter+GA4 双轨 / 44px 移动机制；2026-11-08（W1168）统计单轨收敛：GA4 轨退役 / CSP 具名例外 4→1 / stats.js 全站桥 / 11 组 21 名事件落地 / 第 67 槽契约门禁 + 运行面探针 P1-P7。如与上述权威文档冲突，以权威文档为准。*

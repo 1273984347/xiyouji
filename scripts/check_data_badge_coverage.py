@@ -25,7 +25,11 @@ DATA = ROOT / "site/data"
 MARKER = "---- 第 66 门禁 数据徽标："
 SKIP = {"_shell.html"}
 
-BADGE = re.compile(r'<div class="data-status-badge" data-status="(live|snapshot|sample)">.*?</div>', re.S)
+# 结构判据按「属性集合」识别，不按「属性顺序 + 恰好这两个属性」：正本给徽标加属性
+# （W1168 的 `data-goatcounter-view` 曝光面）不该把 88 页全判成「破损」——同族老坑见第 65 槽
+# 「取 it[0] 不解包」，判据必须抗正本的字段增扩。
+BADGE = re.compile(r'<div\b[^>]*class="[^"]*\bdata-status-badge\b[^"]*"[^>]*>.*?</div>', re.S)
+STATUS = re.compile(r'\bdata-status="(live|snapshot|sample)"')
 LABEL = re.compile(r'<span class="ds-label">([^<]+)</span>')
 
 
@@ -44,7 +48,10 @@ def check_page(mod, name: str, txt: str):
     m = BADGE.search(txt)
     if not m:
         return ["有 MARK 无徽标结构（破损）"]
-    status = m.group(1)
+    st = STATUS.search(m.group(0))
+    if not st:
+        return ["徽标结构内无合法 data-status（破损）"]
+    status = st.group(1)
     want = mod.classify(name)
     if status != want:
         errs.append(f"data-status={status} ≠ 正本 classify={want}")

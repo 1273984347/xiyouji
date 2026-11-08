@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com 'sha256-Oa21ZposE2YqUxR2SMauI4fS8e4PfaBOBWFCLTZO4V4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://region1.google-analytics.com https://analytics.google.com https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-NyNJCv1UlJpsaLvOOojaCYe1J2gXTlKX6Ogv/aD5MkU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Relations 3D Network · Journey to the West Explained</title>
@@ -559,6 +559,45 @@ header.site-header:has(.site-mainnav) {
 @media (prefers-reduced-motion: reduce) {
     .site-mainnav .nav-item::after { transition: none; }
 }
+
+.reset-view-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: var(--z-nav, 50);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 6px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--paper-warm);
+    background: rgba(34, 29, 22, 0.72);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart),
+        color var(--dur-fast) var(--ease-out-quart);
+}
+.reset-view-btn:hover { background: var(--accent-deep); color: var(--paper); }
+.reset-view-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 767.98px) {
+    .reset-view-btn { min-height: 44px; min-width: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reset-view-btn { transition: none; }
+}
+
+.hit-mark {
+    background: color-mix(in srgb, var(--accent) 18%, var(--paper));
+    color: inherit;
+    border-radius: var(--radius-sm);
+    padding: 0 2px;
+    box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+}
+html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14); }
 
 .data-status-badge {
     display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
@@ -1483,8 +1522,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <link rel="icon" type="image/svg+xml" href="../static/icons/logo-mark-light.svg">
 <link rel="apple-touch-icon" href="../static/icons/icon-192.png">
 
-<!-- ANALYTICS-DUAL v1 w1167 -->
+<!-- ANALYTICS v2 w1168 -->
 <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+<script defer src="../static/js/stats.js"></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -1522,7 +1562,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         🖱 Scroll: zoom<br>
                         👆 Click node: view details
                     </div>
-                    <div class="info-panel" id="infoPanel">
+<button type="button" id="reset-view" class="reset-view-btn" data-goatcounter-click="reset_view" aria-label="Reset view">Reset view</button>
+
                         <span class="close" id="infoClose">×</span>
                         <h3 id="infoName"></h3>
                         <div id="infoDesc"></div>
@@ -1836,6 +1877,34 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     let cameraTheta = 0;
     let cameraPhi = Math.PI / 2;
     let cameraRadius = 280;
+    // W1168 视角复位（audit 原始发现：手机上把 3D 图拖乱了，没有任何按钮能回到初始视角）。
+    // 快照在相机状态声明处取——此刻还是初值；后续任何拖拽只改活值，不动这份快照。
+    var VIEW_INITIAL = {
+        theta: cameraTheta, phi: cameraPhi, radius: cameraRadius,
+        tx: (typeof orbitTarget !== "undefined" && orbitTarget) ? orbitTarget.x : 0,
+        ty: (typeof orbitTarget !== "undefined" && orbitTarget) ? orbitTarget.y : 0,
+        tz: (typeof orbitTarget !== "undefined" && orbitTarget) ? orbitTarget.z : 0
+    };
+
+    function resetView() {
+        cameraTheta = VIEW_INITIAL.theta;
+        cameraPhi = VIEW_INITIAL.phi;
+        cameraRadius = VIEW_INITIAL.radius;
+        if (typeof orbitTarget !== "undefined" && orbitTarget) {
+            orbitTarget.set(VIEW_INITIAL.tx, VIEW_INITIAL.ty, VIEW_INITIAL.tz);
+        }
+        updateCameraPosition();
+    }
+
+    (function bindResetViewBtn() {
+        var b = document.getElementById("reset-view");
+        if (b) { b.addEventListener("click", resetView); return; }
+        document.addEventListener("DOMContentLoaded", function () {
+            var el = document.getElementById("reset-view");
+            if (el) { el.addEventListener("click", resetView); }
+        });
+    })();
+
 
     function setupOrbitControls(container) {
         container.addEventListener("mousedown", function(e) {

@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-08 07:25
+生成时间：2026-11-08 09:56
 
-共 **200** 件（门禁与校验 92 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 79 · 一次性（下划线前缀） 6）
+共 **202** 件（门禁与校验 93 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（92）
+## 门禁与校验（93）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -91,6 +91,7 @@
 | `check_search_index_fresh.py` | check_search_index_fresh.py — 站内搜索索引新鲜度门禁（W809 建立·verify_delivery 第 46 槽 |
 | `check_segment_gaps.py` | check_segment_gaps.py — 历史缺口体检（W1127·T74 遗留 B 的前置） |
 | `check_seo_head.py` | check_seo_head.py — SEO head 完整性常驻检查（W591 SEO 清零）。 |
+| `check_stat_events.py` | check_stat_events.py — 第 67 槽 · 统计事件契约对拍（W1168） |
 | `check_story_timeline_sync.py` | check_story_timeline_sync.py — 故事内时间线双源同步校验（W694 六轮外审 P1-4 落地）。 |
 | `check_structure.py` | check_structure.py — 全站内联 <style> CSS 结构平衡静态门禁（W457 沉淀） |
 | `check_token_coverage.py` | check_token_coverage.py — Phase E E6 转正门禁（M2/M3：页面私有 <style> 令牌覆盖率） |
@@ -148,7 +149,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（79）
+## 工具（80）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -222,6 +223,7 @@
 | `slice_screenshots.py` | Slice full-page screenshots into fixed-height chunks for pixel-level rev |
 | `source_collate.py` | source_collate.py — 原文考据三方对拍器（S-23·W699）。 |
 | `spot_check_nlp.py` | spot-check character_nlp.py 输出数据。 |
+| `stat_event_probe.py` | stat_event_probe.py — 统计事件运行面取证探针（W1168·第 67 槽的动态证据链） |
 | `subject_band.py` | subject_band.py — 主体检测与派生裁切（不写盘·纯函数·W988 建·W1004 由归档桶转正） |
 | `sync_data_json.py` | W678 WP-6.1：dataset 生成器输出 → site/data/json 部署副本 单向同步（清单制）。 |
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |

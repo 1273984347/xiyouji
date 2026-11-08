@@ -25,6 +25,9 @@
       void btn.offsetWidth;
       btn.classList.add('ok');
       setTimeout(function () { btn.textContent = old; btn.classList.remove('ok'); }, 2500);
+      // W1168：只报「复制发生了」，**不回传引文内容**（隐私面：引文虽为公版文本，
+      // 但把用户复制的内容送进第三方统计不是本项目的承诺）。值固定为空串。
+      if (window.XYstats) { window.XYstats.count('copy_citation', ''); }
     };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(done, function () { legacy(); });

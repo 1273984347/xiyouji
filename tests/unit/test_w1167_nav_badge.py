@@ -34,8 +34,11 @@ def test_analytics_block_shape():
     assert analytics.MARK in blk
     assert 'data-goatcounter="https://a.goatcounter.com/count"' in blk
     assert 'src="../static/js/goatcounter.js"' in blk
-    assert "G-TEST123" in blk and "gtag('config','G-TEST123')" in blk
-    assert analytics.build_block("x.html", {}) == ""  # 双关=不注入
+    assert 'src="../static/js/stats.js"' in blk  # 桥随块分发：全站唯一统计发射出口
+    # W1168 G0-1-R GA4 轨退役：配置里即便还留着 ID 也不得再生成 gtag 块
+    # （「待填位 + 已退役」共存就是死轨形态，正本是 generate_csp.py 的例外域全集）
+    assert "G-TEST123" not in blk and "gtag" not in blk
+    assert analytics.build_block("x.html", {}) == ""  # 无端点=不注入
 
 
 # ---- 导航正本 ----
@@ -129,6 +132,23 @@ def test_gate_badge_negative_samples():
     assert gate_badge.check_page(badge, "x.html", badge.build_badge("live"))  # 与 classify 不符
 
 
+def test_gate_badge_tolerates_new_attribute_on_canonical():
+    """正本给徽标**加属性**（W1168 的 `data-goatcounter-view` 曝光面）不得判成「破损」。
+
+    第 66 槽原按「属性顺序 + 恰好 class/data-status 两个属性」的正则识别结构，加一个属性
+    就让 88 页全红——与第 65 槽「正本元组加字段炸门禁」同族：判据必须抗正本的字段增扩。
+    """
+    good = badge.build_badge("snapshot")
+    assert 'data-goatcounter-view="badge_view"' in good, "正本未带曝光属性（W1168 埋点面）"
+    assert not gate_badge.check_page(badge, "x.html", good)
+    # 属性换序同样放行（结构判据按属性集合而非顺序）
+    swapped = good.replace('<div class="data-status-badge" data-status="snapshot"',
+                           '<div data-status="snapshot" class="data-status-badge"')
+    assert swapped != good and not gate_badge.check_page(badge, "x.html", swapped)
+    # 但真破损仍要红：徽标 div 整个不在
+    assert gate_badge.check_page(badge, "x.html", badge.MARK + "\n<p>手删了徽标</p>\n")
+
+
 # ---- 实质执行面（第 42 槽 E3：subprocess 真跑 --dry-run/--self-test，import 冒烟不算覆盖） ----
 
 def test_nav_inject_dry_run_executes():
@@ -149,7 +169,7 @@ def test_analytics_inject_dry_run_executes():
     r = subprocess.run([sys.executable, "scripts/w1167_analytics_inject.py", "--dry-run"],
                        capture_output=True, text=True, encoding="utf-8", timeout=300, cwd=str(ROOT))
     assert r.returncode == 0
-    assert "GoatCounter=开" in r.stdout and "GA4=关" in r.stdout  # ID 未配置时 GA4 轨优雅跳过
+    assert "GoatCounter 单轨=开" in r.stdout and "GA4=已退役" in r.stdout  # W1168 起单轨形态如实打印
 
 
 def test_spec_mangled_path_guard_blocks_git_octal_escapes():

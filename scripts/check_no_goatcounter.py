@@ -85,6 +85,20 @@ def _load_truth() -> dict:
     finally:
         sys.path.remove(scripts_dir)
 
+    # 写入口全集从**事件清单正本**派生（引用不复制）：清单里声明为 emitter 的 scripts/*.py
+    # 就是「被批准的写入口」，加一个事件不必再改守卫；反之新增一个不进清单的写入口必红。
+    # W1168 实证：徽标正本开始写 data-goatcounter-view 后，硬编码两元素的写入口集合当场
+    # 把 88 页的分发判成越界——那是登记面陈腐，不是越界。
+    with open(os.path.join(scripts_dir, "output", "_w1168_stat_events.json"), encoding="utf-8") as f:
+        manifest = json.load(f)
+    listed_writers = set()
+    for g in manifest.get("groups", []):
+        for em in ([g["emitter"]] if isinstance(g.get("emitter"), dict)
+                   else (g.get("emitter") or {}).get("files", []) or []):
+            rel = (em or {}).get("file") or ""
+            if rel.startswith("scripts/") and rel.endswith(".py"):
+                listed_writers.add(os.path.basename(rel))
+
     with open(inj.CONFIG, encoding="utf-8") as f:
         cfg = json.load(f)
     endpoint = (cfg.get("goatcounter_endpoint") or "").strip()
@@ -101,8 +115,8 @@ def _load_truth() -> dict:
         "canon_script": inj.rel_static("x.html"),           # 唯一自托管脚本相对路径
         # 声明过的写入口（两个形态各有各的正本，都是「具名例外」的一部分）：
         # 追踪标签由统计注入器分发，事件属性 data-goatcounter-click 由导航正本分发
-        "canon_writers": {os.path.basename(inj.__file__),
-                          os.path.basename(nav.__file__)},
+        "canon_writers": ({os.path.basename(inj.__file__), os.path.basename(nav.__file__)}
+                          | listed_writers),
         "csp_hosts": {h.lower() for h in HOST_RE.findall(csp_blob.lower())},
     }
 
@@ -193,7 +207,13 @@ def scan(site_dir: str, scripts_dir: str, truth: dict | None = None) -> list[str
     for path in _iter_files(scripts_dir):
         if _is_ignored(path) or not path.lower().endswith(".py"):
             continue
-        if os.path.basename(path) not in truth["canon_writers"]:
+        base = os.path.basename(path)
+        # 判据/探针面里的 `data-goatcounter-*` 是**负样本夹具与扫描正则**，不是发射点——
+        # 与第 67 槽 C3 的 _is_emitter_surface 同一口径（守卫把自己的测试读成违规即误报，
+        # W1168 实证：check_stat_events / stat_event_probe 双双被 C4 判越界）。
+        if base.startswith("check_") or "_probe" in base or base.startswith("test_"):
+            continue
+        if base not in truth["canon_writers"]:
             fails += _scan_script(path, truth)
     # C5：配置正本 ↔ CSP 白名单 双源一致
     if truth["endpoint_host"] not in truth["csp_hosts"]:

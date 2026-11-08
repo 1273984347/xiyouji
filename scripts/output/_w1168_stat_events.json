@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "_note": "统计事件契约正本（W1168·第 67 槽消费）。事件名**不重复声明**：能从正本派生的用 names_from，一次性事件用 names。判据 scripts/check_stat_events.py 做「清单↔发射点↔页面落地↔metric 反向链」四面对拍。",
+  "groups": [
+    {
+      "group": "page_view",
+      "kind": "builtin",
+      "metric": "page_view + FCP/LCP",
+      "emitter": {
+        "file": "site/static/js/goatcounter.js",
+        "token": "goatcounter.count()"
+      },
+      "names": [],
+      "runtime_layer": "goatcounter"
+    },
+    {
+      "group": "nav_click",
+      "kind": "click",
+      "metric": "nav_click",
+      "emitter": {
+        "file": "scripts/w1167_nav_inject.py",
+        "token": "data-goatcounter-click"
+      },
+      "names_from": {
+        "module": "w1167_nav_inject",
+        "lists": [
+          "ZH_ITEMS",
+          "EN_ITEMS"
+        ],
+        "index": 2
+      },
+      "runtime_layer": "goatcounter"
+    },
+    {
+      "group": "debug_error",
+      "kind": "call",
+      "metric": "debug_error",
+      "emitter": {
+        "file": "site/static/js/stats.js",
+        "token": "api.count('debug_error'"
+      },
+      "names": [
+        "debug_error"
+      ],
+      "runtime_layer": "bridge"
+    },
+    {
+      "group": "reader_progress",
+      "kind": "call",
+      "metric": "reader_progress",
+      "emitter": {
+        "file": "site/js/reader-enhance.js",
+        "token": "XYstats.count('reader_progress'"
+      },
+      "names": [
+        "reader_progress"
+      ],
+      "runtime_layer": "bridge"
+    },
+    {
+      "group": "dark_mode_toggle",
+      "kind": "call",
+      "metric": "dark_mode_toggle",
+      "emitter": {
+        "file": "site/js/theme-init.js",
+        "token": "XYstats.count('dark_mode_toggle'"
+      },
+      "names": [
+        "dark_mode_toggle"
+      ],
+      "runtime_layer": "bridge"
+    },
+    {
+      "group": "copy_citation",
+      "kind": "call",
+      "metric": "copy_citation",
+      "emitter": {
+        "file": "site/static/js/cite-box.js",
+        "token": "XYstats.count('copy_citation'"
+      },
+      "names": [
+        "copy_citation"
+      ],
+      "runtime_layer": "bridge"
+    },
+    {
+      "group": "badge_view",
+      "kind": "view",
+      "metric": "badge_view",
+      "emitter": {
+        "file": "scripts/w1167_badge_inject.py",
+        "token": "data-goatcounter-view=\"badge_view\""
+      },
+      "names": [
+        "badge_view"
+      ],
+      "runtime_layer": "bridge"
+    },
+    {
+      "group": "reset_view",
+      "kind": "click",
+      "metric": "reset_view",
+      "emitter": {
+        "files": [
+          {
+            "file": "site/data/character-relationship-3d.html",
+            "token": "data-goatcounter-click=\"reset_view\""
+          },
+          {
+            "file": "site/en/character-relationship-3d.html",
+            "token": "data-goatcounter-click=\"reset_view\""
+          },
+          {
+            "file": "site/data/journey-geo-3d.html",
+            "token": "data-goatcounter-click=\"reset_view\""
+          }
+        ]
+      },
+      "names": [
+        "reset_view"
+      ],
+      "runtime_layer": "goatcounter"
+    },
+    {
+      "group": "search_perform",
+      "kind": "call",
+      "metric": "search_perform / search_hit_open",
+      "emitter": {
+        "file": "site/static/js/text-search-app.js",
+        "token": "XYstats.count('search_perform'"
+      },
+      "names": [
+        "search_perform"
+      ],
+      "runtime_layer": "bridge"
+    },
+    {
+      "group": "search_hit_open",
+      "kind": "click",
+      "metric": "search_perform / search_hit_open",
+      "_landing_note": "动态渲染的结果卡不会被 goatcounter 的 load 时 bind_events 绑定 ⇒ 走 #result-region 委托调用桥，不用声明式属性",
+      "emitter": {
+        "file": "site/static/js/text-search-app.js",
+        "token": "XYstats.count('search_hit_open'"
+      },
+      "names": [
+        "search_hit_open"
+      ],
+      "runtime_layer": "bridge"
+    },
+    {
+      "group": "web_vitals",
+      "kind": "call",
+      "metric": "page_view + FCP/LCP",
+      "_why_single_event": "GoatCounter 按事件名计数、数值只进 title——发五条会把 pageview 虚增 5 倍却仍取不到分位数。故一条 rum_vitals 带紧凑数值串，逐条可查；分位数/聚合需真后端（挂 G0-3 与 H1）。",
+      "emitter": {
+        "file": "site/js/rum.js",
+        "token": "XYstats.count('rum_vitals'"
+      },
+      "names": [
+        "rum_vitals"
+      ],
+      "runtime_layer": "bridge"
+    }
+  ]
+}

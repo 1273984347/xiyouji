@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com 'sha256-z8MC/9VoX6WjaagpvL7naGzQBqMAH64SV7jOh+XcSO0=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://region1.google-analytics.com https://analytics.google.com https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-z8MC/9VoX6WjaagpvL7naGzQBqMAH64SV7jOh+XcSO0=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难多维度难度热力图 · 详解西游记</title>
@@ -559,6 +559,45 @@ header.site-header:has(.site-mainnav) {
 @media (prefers-reduced-motion: reduce) {
     .site-mainnav .nav-item::after { transition: none; }
 }
+
+.reset-view-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: var(--z-nav, 50);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 6px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--paper-warm);
+    background: rgba(34, 29, 22, 0.72);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart),
+        color var(--dur-fast) var(--ease-out-quart);
+}
+.reset-view-btn:hover { background: var(--accent-deep); color: var(--paper); }
+.reset-view-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 767.98px) {
+    .reset-view-btn { min-height: 44px; min-width: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reset-view-btn { transition: none; }
+}
+
+.hit-mark {
+    background: color-mix(in srgb, var(--accent) 18%, var(--paper));
+    color: inherit;
+    border-radius: var(--radius-sm);
+    padding: 0 2px;
+    box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+}
+html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14); }
 
 .data-status-badge {
     display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
@@ -1560,8 +1599,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <link rel="icon" type="image/svg+xml" href="../static/icons/logo-mark-light.svg">
 <link rel="apple-touch-icon" href="../static/icons/icon-192.png">
 
-<!-- ANALYTICS-DUAL v1 w1167 -->
+<!-- ANALYTICS v2 w1168 -->
 <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+<script defer src="../static/js/stats.js"></script>
 </head>
 <body>
     <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
@@ -1594,7 +1634,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="kicker">数据可视化</p>
         <h1>八十一难多维度难度热力图</h1>
 <!-- DATA-STATUS-BADGE v1 w1167 -->
-<div class="data-status-badge" data-status="snapshot"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">内嵌快照</span><span class="ds-note">本页数字为发布时生成的快照，离线双击也能看，不随接口更新。</span></div>
+<div class="data-status-badge" data-status="snapshot" data-goatcounter-view="badge_view"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">内嵌快照</span><span class="ds-note">本页数字为发布时生成的快照，离线双击也能看，不随接口更新。</span></div>
         <p class="subtitle">D2A+ · 战斗时长 / 求助次数 / 法宝使用 / 难度等级 四维矩阵深化</p>
         <p class="tagline">—— 在原难度系数基础上叠加四类难度维度，呈现 81 难的"难法地形图"</p>
     
