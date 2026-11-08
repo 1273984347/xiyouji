@@ -1,3 +1,43 @@
+## W1181 A5 文化专题（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/04-文化与历史背景/西游东传与译介专题.md | W1181 | 新建：A5 文化专题·14551 字符·4 条逐字核验引文·仅据索引已收录条目立论 |
+| docs/00-导读/统计口径说明.md | W1181 | 改：分板块表格 A5 36→37（合计 618） |
+| site/dashboard.html | W1181 | 改：A5 KPI 卡片 36→37 + A1-A6 段落 617→618（第 68 槽） |
+| docs/INDEX.md | W1181 | 改：docs_index.py 重建（863 篇·13 板块） |
+| docs/00-导读/W批次编号对账表.md | W1181 | 改：W1181 认领行 |
+| scripts/output/_w1181_spec.json | W1181 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1181.txt | W1181 | 新建：级联清单 |
+| CHANGELOG.md | W1181 | 改：W1181 段落（级联） |
+| scripts/output/file-index.md | W1181 | 改：W1181 段（级联） |
+| site/data/search.html | W1181 | 改：搜索索引重生成（第 46 槽） |
+| site/en/search.html | W1181 | 改：搜索索引重生成（同上） |
+| README.md | W1181 | 改：A1-A6 计数标记跟随 + 版本行（级联） |
+| STRUCTURE.md | W1181 | 改：版本行推进（级联） |
+| HANDOVER.md | W1181 | 改：最后更新行 + 当前进度（级联） |
+| .github/workflows/README.md | W1181 | 改：区间行推进（版本面） |
+| CITATION.cff | W1181 | 改：version/date 推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1181 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1181 | 改：逐批明细追加（W1181·级联） |
+| docs/00-导读/项目说明.md | W1181 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1181 | 改：a5_docs 36→37 / a1_a6_docs 617→618 |
+| scripts/output/INDEX.md | W1181 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1181 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1181 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1181 | 改：再生成/验证缓存（级联） |
+| AGENTS.md | W1181 | 改：级联/目录刷新产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1181 | 改：级联/目录刷新产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1181 | 改：级联/目录刷新产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1181 | 改：级联/目录刷新产物 |
+| docs/agent/gates.md | W1181 | 改：级联/目录刷新产物 |
+| scripts/output/stats-changelog.json | W1181 | 改：级联/目录刷新产物 |
+| scripts/output/stats-index.md | W1181 | 改：级联/目录刷新产物 |
+| site/data/cross-time-danmaku.html | W1181 | 改：级联/目录刷新产物 |
+| site/data/tag-cloud.html | W1181 | 改：级联/目录刷新产物 |
+| site/dukou-engine.html | W1181 | 改：级联/目录刷新产物 |
+| site/index.html | W1181 | 改：级联/目录刷新产物 |
+
 ## W1180 A5 内容深化首批（2026-11-09）
 
 | 文件 | W | 说明 |
