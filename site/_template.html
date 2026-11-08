@@ -27,6 +27,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>页面标题 · 详解西游记</title>
+    <meta name="description" content="【占位】一句话描述本页面内容（W1177：SEO 第 26 槽 R1 必备，new_page 会替换）">
     <!-- D3.js 本地引用（W456 起 CDN→本地，禁改用外域 CDN）·W563 起 head 仅保留 preload，执行引用移至 body 首个内联脚本前 -->
     <link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
@@ -1700,6 +1701,7 @@ html[data-theme="dark"] .chapter-plate {
     </header>
 
     <!-- 主容器：面包屑 + KPI + 多个 section -->
+    <!-- chart-degrade: n/a（新建页默认·第 30 槽要求；本页有图表时改为具体降级说明，如「离线仍可看数值表」） -->
     <main class="container">
 
         <!-- 面包屑导航：首页 > 数据 > 当前页 -->
@@ -1710,6 +1712,14 @@ html[data-theme="dark"] .chapter-plate {
             <span class="sep">/</span>
             <span class="current">当前页面</span>
         </nav>
+
+        <!-- 数据源区：第 28 槽 C1/C2/C4 的扫描锚点（判据按 <div id="dataSource"> 取区域文本，
+             内部不可有嵌套 div——非贪婪匹配会截断）。C1 需 json 路径或 EMBEDDED 声明 + 版本标识；
+             C2 需 scripts/xxx.py + 参数口径词；C4 需 EMBEDDED 或下载链接。 -->
+        <div class="notice" id="dataSource">
+            数据源：<code>dataset/【占位】数据文件.json</code>（由 <code>scripts/【占位】生成脚本.py</code> 生成，
+            参数与口径见生成脚本源；快照 【占位】YYYY-MM-DD）。本页数据以页面内嵌 EMBEDDED 方式随发布生成，离线可读。
+        </div>
 
         <!-- KPI 行：4 个关键指标卡片（按需增减） -->
         <section class="kpi-row">
@@ -1775,6 +1785,16 @@ html[data-theme="dark"] .chapter-plate {
                 </table>
             </div>
         </section>
+
+        <!-- 引用格式块：第 28 槽 C3（结构化引用）·占位符由 new_page 替换 -->
+        <div class="cite-block">
+            <details class="cite-details">
+                <summary>引用格式</summary>
+                <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 【占位】页面标题. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/【占位】文件名.html（访问日期 2026-11-08）</pre><button type="button" class="cite-copy">复制</button></div>
+                <div class="cite-item"><span>GB/T</span><pre class="cite-text">《详解西游记》项目. 【占位】页面标题[EB/OL]. (2026)[2026-11-08]. https://1273984347.github.io/xiyouji/data/【占位】文件名.html.</pre><button type="button" class="cite-copy">复制</button></div>
+                <div class="cite-item"><span>MLA</span><pre class="cite-text">"【占位】页面标题." 详解西游记可视化站点, 2026, 1273984347.github.io/xiyouji/data/【占位】文件名.html. Accessed 8 Nov. 2026.</pre><button type="button" class="cite-copy">复制</button></div>
+            </details>
+        </div>
 
     </main>
 
