@@ -1,3 +1,34 @@
+## W1168 统计单轨收敛批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/（1 件） | W1168 | 改：坑表总数引用同步 304 条 |
+| docs/（1 件） | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+| docs/00-导读/（2 件） | W1168 | 改：stats 计数标记随实算刷新（gate_count 66→67 / pyt |
+| docs/11-方案报告/设计与架构方案/（1 件） | W1168 | 改：W1168 续批留痕（§2 决策台账 G0-1-R·§4.1 第 67 槽五 |
+| docs/agent/（1 件） | W1168 | 改：标题沿革 66→67 槽 + 第 67 槽全量定义（含 C6 运行层） |
+| scripts/（6 件） | W1168 | 改：具名例外域 4→1（EXTERNAL_SCRIPT_HOSTS 归空集 +  |
+| scripts/output/（8 件） | W1168 | 改：ga4_measurement_id 由待填项降为退役说明位（_note 写 |
+| site/（12 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/data/（89 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/en/（138 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/js/（3 件） | W1168 | 改：reader_progress 档位上报（25/50/75/100 每访问每 |
+| site/reader/（102 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/culture/（36 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/essays/（45 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/people/（216 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/poetry/（14 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/themes/（210 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/static/js/（3 件） | W1168 | 改：copy_citation 上报（只报页标识，不回传引文内容） |
+| tests/unit/（1 件） | W1168 | 新建：第 67 槽 + 桥 + CSP 单域 + 探针分层 23 例（含 N11 |
+| AGENTS.md | W1168 | 改：铁律 5 例外域收缩为单域 + §4.2 计数 66→67 + 条目 67 摘要 + 坑位计数五面 |
+| HANDOVER.md | W1168 | 改：槽数与坑数引用（六十七槽 / 304 条） |
+| pitfalls.md | W1168 | 改：W1168 新形态 7 条（E-204~E-210·仪器单源/读错层/gitignore 硬判据/死轨待填位/夹具落点面/分支未覆盖/node 桩全局） |
+| CHANGELOG.md | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+| README.md | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+| STRUCTURE.md | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+| pytest.ini | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+
 ## W1167 MVP 迁移批（2026-11-08）
 
 | 文件 | W | 说明 |

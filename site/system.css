@@ -209,6 +209,51 @@ header.site-header:has(.site-mainnav) {
     .site-mainnav .nav-item::after { transition: none; }
 }
 
+/* ===== W1168 · 3D 视角复位控件（三张 Three.js 页共用）=====
+ * 落地 audit 原始发现「手机上把 3D 关系图拖乱了，找不到任何按钮回到初始视角」——
+ * 复位为瞬时归位、不做动画：减少动态效果的用户不应被动效干扰，且动画期间继续拖拽会打架。 */
+.reset-view-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: var(--z-nav, 50);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 6px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--paper-warm);
+    background: rgba(34, 29, 22, 0.72);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart),
+        color var(--dur-fast) var(--ease-out-quart);
+}
+.reset-view-btn:hover { background: var(--accent-deep); color: var(--paper); }
+.reset-view-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 767.98px) {
+    .reset-view-btn { min-height: 44px; min-width: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reset-view-btn { transition: none; }
+}
+
+/* ===== W1168 · 检索深链命中高亮（reader 正文）=====
+ * 由 site/js/reader-enhance.js 消费 `#q=<词>` 时插入 <mark class="hit-mark">。
+ * 底色调到朱砂 18%（与索引页 .is-flash 同源配方），文字色继承正文——不改对比度基线。 */
+.hit-mark {
+    background: color-mix(in srgb, var(--accent) 18%, var(--paper));
+    color: inherit;
+    border-radius: var(--radius-sm);
+    padding: 0 2px;
+    box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+}
+html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14); }
+
 /* ===== W1167 三态数据徽标组件（DATA-STATUS-BADGE v1）=====
  * 语义色走正本功能色三件套：live=--ok 苔绿 / snapshot=--info 靛蓝 / sample=--warn 赭。
  * 文案与结构正本在 scripts/w1167_badge_inject.py；file:// 离线时徽标为静态 HTML 恒在。 */

@@ -1,5 +1,5 @@
 {
   "ga4_measurement_id": "",
   "goatcounter_endpoint": "https://1273984347.goatcounter.com/count",
-  "_note": "ga4_measurement_id 留空=GA4 轨跳过（待用户提供 G-XXX）；GoatCounter 端点 2026-11-08 实测 HTTP 400（缺参=账号活）复活自托管链（W426 形态）"
+  "_note": "ga4_measurement_id=退役说明位（W1168 用户裁决 GA4 轨退出，非待填项；恢复双轨需先建账号再改 generate_csp 的 EXTERNAL_SCRIPT_HOSTS，走铁律 16⑦ 批准）；GoatCounter 端点 2026-11-08 实测 HTTP 400（缺参=账号活）复活自托管链（W426 形态）"
 }

@@ -54,7 +54,8 @@ def build_badge(status: str) -> str:
     label, note = STATUS_TEXT[status]
     return (
         f'{MARK}\n'
-        f'<div class="data-status-badge" data-status="{status}">'
+        f'<div class="data-status-badge" data-status="{status}"'
+        f' data-goatcounter-view="badge_view">'
         f'<span class="ds-dot" aria-hidden="true"></span>'
         f'<span class="ds-label">{label}</span>'
         f'<span class="ds-note">{note}</span>'

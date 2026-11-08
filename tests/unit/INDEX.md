@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（105）
+## 文件（106）
 
 ### Python 脚本
 
@@ -118,6 +118,7 @@
 - `test_w1157_changelog_block_guard.py`
 - `test_w1165_mobile_viewport.py`
 - `test_w1167_nav_badge.py`
+- `test_w1168_stat_events.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（16）
+## 文件（17）
 
 ### JavaScript / TypeScript
 
@@ -28,6 +28,7 @@
 - `gsap.min.js`
 - `motion-gsap.js`
 - `rag-chat.js`
+- `stats.js`
 - `text-search-app.js`
 - `three.r128.min.js`
 - `vis-tools.js`

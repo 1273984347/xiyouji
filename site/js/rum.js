@@ -305,6 +305,22 @@
     // 1) 本地备援优先（即使上报失败也不丢数据）
     storeLocal(payload);
 
+    // 2) W1168 统计面：一条 rum_vitals 带紧凑数值串（不发五条——GoatCounter 按事件名计数，
+    //    五条会把 pageview 虚增 5 倍却仍取不到分位数；聚合分析挂 G0-3/H1 的真后端需求）。
+    //    桥缺席或 file:// 下由桥自身短路，本处只管把数据交出去，不判断网络形态。
+    try {
+      if (window.XYstats && payload.metrics) {
+        var mm = payload.metrics;
+        window.XYstats.count('rum_vitals', [
+          'FCP=' + (mm.fcp === null ? '-' : mm.fcp),
+          'LCP=' + (mm.lcp === null ? '-' : mm.lcp),
+          'CLS=' + (mm.cls === null ? '-' : mm.cls),
+          'INP=' + (mm.inp === null ? '-' : mm.inp),
+          'TBT=' + (mm.tbt === null ? '-' : mm.tbt)
+        ].join(' '));
+      }
+    } catch (e) { /* 统计是增强面，绝不影响性能采集与本地备援 */ }
+
     // W1167：GoatCounter 账号复验存活后按双轨具名例外恢复（与 GA4 并列·由
     // scripts/w1167_analytics_inject.py 注入页面），本文件仍不自发外域请求。线上通道收敛为三条：
     //   ① 本地 dev origin → POST /api/rum 回流本地后端（scripts/api/api_server.py）

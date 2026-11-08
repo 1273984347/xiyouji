@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com 'sha256-VEPR2b1COtqLwnITlboPadwhX9hH4AFL0gTc5iwQAfk=' 'sha256-NGPaMqoeM5B3HElON/5HPrN1E6bdVX0Db+3B7B3Cu08=' 'sha256-piDdr4nQnOh3xIEjw4kvMS/PCGsFzVklfQJn40o0r5E=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://region1.google-analytics.com https://analytics.google.com https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VEPR2b1COtqLwnITlboPadwhX9hH4AFL0gTc5iwQAfk=' 'sha256-NGPaMqoeM5B3HElON/5HPrN1E6bdVX0Db+3B7B3Cu08=' 'sha256-piDdr4nQnOh3xIEjw4kvMS/PCGsFzVklfQJn40o0r5E=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>详解西游记 · 八十一难可交互视图</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/81-hardships-view.html">
@@ -557,6 +557,45 @@ header.site-header:has(.site-mainnav) {
 @media (prefers-reduced-motion: reduce) {
     .site-mainnav .nav-item::after { transition: none; }
 }
+
+.reset-view-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: var(--z-nav, 50);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 6px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--paper-warm);
+    background: rgba(34, 29, 22, 0.72);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart),
+        color var(--dur-fast) var(--ease-out-quart);
+}
+.reset-view-btn:hover { background: var(--accent-deep); color: var(--paper); }
+.reset-view-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 767.98px) {
+    .reset-view-btn { min-height: 44px; min-width: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reset-view-btn { transition: none; }
+}
+
+.hit-mark {
+    background: color-mix(in srgb, var(--accent) 18%, var(--paper));
+    color: inherit;
+    border-radius: var(--radius-sm);
+    padding: 0 2px;
+    box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+}
+html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14); }
 
 .data-status-badge {
     display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
@@ -1467,8 +1506,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <link rel="icon" type="image/svg+xml" href="../static/icons/logo-mark-light.svg">
 <link rel="apple-touch-icon" href="../static/icons/icon-192.png">
 
-<!-- ANALYTICS-DUAL v1 w1167 -->
+<!-- ANALYTICS v2 w1168 -->
 <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+<script defer src="../static/js/stats.js"></script>
 </head>
 <body>
 <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
@@ -1488,7 +1528,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <header class="top">
   <h1>详解西游记 · 八十一难可交互视图</h1>
 <!-- DATA-STATUS-BADGE v1 w1167 -->
-<div class="data-status-badge" data-status="live"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">实时数据</span><span class="ds-note">本页数据来自本地问答服务接口；服务未启动时自动回退到发布快照，徽标会如实变化。</span></div>
+<div class="data-status-badge" data-status="live" data-goatcounter-view="badge_view"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">实时数据</span><span class="ds-note">本页数据来自本地问答服务接口；服务未启动时自动回退到发布快照，徽标会如实变化。</span></div>
   <p>W338 可视化交互范式复用示范 · 数据集 81-hardships（筛选 / 钻取 / 导出，复用 vis-tools.js + dataset-view.js）</p>
 <!-- NAV-CANONICAL v1 w1167 -->
 <nav class="site-mainnav" aria-label="主导航"><a class="nav-brand" href="../index.html">西游详解</a><a href="../guide.html" class="nav-item" data-goatcounter-click="nav-guide">导读</a><a href="../reader/index.html" class="nav-item" data-goatcounter-click="nav-reader">阅读</a><a href="../dashboard.html" class="nav-item is-active" aria-current="page" data-goatcounter-click="nav-dashboard">看板</a><a href="../data/text-search.html" class="nav-item" data-goatcounter-click="nav-search">检索</a><a href="../about.html" class="nav-item" data-goatcounter-click="nav-about">关于</a><a href="../en/index.html" class="nav-item" data-goatcounter-click="nav-switch-en">EN</a></nav>

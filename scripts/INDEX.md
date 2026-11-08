@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（208）
+## 文件（210）
 
 ### Python 脚本
 
@@ -155,6 +155,7 @@
 - `check_search_index_fresh.py`
 - `check_segment_gaps.py`
 - `check_seo_head.py`
+- `check_stat_events.py`
 - `check_story_timeline_sync.py`
 - `check_structure.py`
 - `check_token_coverage.py`
@@ -226,6 +227,7 @@
 - `slice_screenshots.py`
 - `source_collate.py`
 - `spot_check_nlp.py`
+- `stat_event_probe.py`
 - `stats.py`
 - `subject_band.py`
 - `sync_data_json.py`

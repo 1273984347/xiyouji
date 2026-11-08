@@ -155,6 +155,23 @@ var mkPath = markBtn.querySelector('svg path');
   var progress = getJSON(KEY_PROGRESS, {});
   if (!progress || typeof progress !== 'object' || progress instanceof Array) progress = {};
 
+  // W1168 统计接线：只报「跨过档位」这一事实，每次页面访问每档最多一次。
+  // 不回传阅读位置精度（比例值仅取 25/50/75/100 四档），也不改动上面任何 localStorage 语义——
+  // 统计是观察者，不是这份缓存的第二个写者。
+  var PROGRESS_BUCKETS = [25, 50, 75, 100];
+  var sentBuckets = {};
+
+  function reportBuckets(pct) {
+    if (!window.XYstats) return;
+    for (var i = 0; i < PROGRESS_BUCKETS.length; i++) {
+      var b = PROGRESS_BUCKETS[i];
+      if (pct >= b && !sentBuckets[b]) {
+        sentBuckets[b] = 1;
+        window.XYstats.count('reader_progress', b + '%');
+      }
+    }
+  }
+
   function scrollSpan() {
     var doc = document.documentElement;
     var h = Math.max(doc.scrollHeight, document.body ? document.body.scrollHeight : 0);
@@ -179,8 +196,10 @@ var mkPath = markBtn.querySelector('svg path');
     if (timer) window.clearTimeout(timer);
     timer = window.setTimeout(function () {
       if (!page) return;
-      progress[page] = Math.round(ratio() * 1000) / 1000;
+      var r = ratio();
+      progress[page] = Math.round(r * 1000) / 1000;
       setJSON(KEY_PROGRESS, progress);
+      reportBuckets(r * 100);
     }, 400);
   }
 
@@ -204,6 +223,56 @@ var mkPath = markBtn.querySelector('svg path');
     paint();
   } else {
     window.addEventListener('load', function () { restore(); paint(); });
+  }
+  // —— W1168 检索深链命中高亮 ——
+  // 约定 `../reader/chNNN.html#q=<词>`（hash 而非 query string：file:// 下查询串可能被
+  // 当作文件名一部分而打不开，hash 永不参与文件解析）。
+  // 与既有的目录筛选（#catalogFilter）是两件事：那个过滤索引 li，这个在正文里定位原文，
+  // 故不复用 applyFilter，也不得反过来用它替代正文高亮（会只剩筛选、正文无标记）。
+  function hashQuery() {
+    var h = String(location.hash || '');
+    var m = h.match(/[#&]q=([^&]*)/);
+    return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
+  }
+
+  function highlightTerm(term) {
+    if (!article || !term) { return 0; }
+    var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null);
+    var node, lower = term.toLowerCase();
+    while ((node = walker.nextNode())) {
+      var text = node.nodeValue || '';
+      var at = text.toLowerCase().indexOf(lower);
+      if (at < 0) { continue; }
+      var hit = document.createElement('mark');
+      hit.className = 'hit-mark';
+      hit.textContent = text.substr(at, term.length);
+      node.parentNode.insertBefore(hit, node.nextSibling);
+      // 拆三段：命中前 / 命中 / 命中后（后段继续走查，命中点之后的文字不丢）
+      var before = text.substr(0, at);
+      var after = text.substr(at + term.length);
+      node.nodeValue = before;
+      if (after) { node.parentNode.insertBefore(document.createTextNode(after), hit.nextSibling); }
+      return 1;
+    }
+    return 0;
+  }
+
+  function jumpToHit() {
+    var term = hashQuery();
+    if (!term) { return; }
+    var n = highlightTerm(term);
+    if (!n) { return; }
+    var mark = article.querySelector('mark.hit-mark');
+    if (mark && mark.scrollIntoView) {
+      var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      mark.scrollIntoView({ behavior: rm ? 'auto' : 'smooth', block: 'center' });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', jumpToHit);
+  } else {
+    jumpToHit();
   }
 })();
 
@@ -289,5 +358,6 @@ var mkPath = markBtn.querySelector('svg path');
       if (e.key === 'Enter') { e.preventDefault(); if (!jumpToNo()) applyFilter(); }
     });
   }
+
   applyFilter();
 })();

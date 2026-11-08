@@ -1,3 +1,23 @@
+### W1168（2026-11-08）：统计单轨收敛批（GA4 轨退役 · GoatCounter 单轨 · 事件清单正本与第 67 槽契约门禁 · 运行面探针）
+
+**文件**：scripts/check_stat_events.py · scripts/stat_event_probe.py · scripts/output/_w1168_stat_events.json · site/static/js/stats.js · scripts/w1167_analytics_inject.py · scripts/w1167_badge_inject.py · scripts/generate_csp.py · scripts/verify_delivery.py · site/js/reader-enhance.js · site/js/rum.js · site/js/theme-init.js · site/static/js/cite-box.js · site/static/js/text-search-app.js · site/system.css · site/data/character-relationship-3d.html · site/en/character-relationship-3d.html · site/data/journey-geo-3d.html · tests/unit/test_w1168_stat_events.py · docs/11-方案报告/设计与架构方案/全站改版方案与门禁扩展-v5-2026-11-08.md · site/**.html（统计块 v2 + CSP 重哈希分发面）
+
+**本批要点**（用户令「按推荐那条起批」·G0-1-R 裁决 GA4 轨退出·验收口径「机制 + 本地证据，不推送」）：
+
+> - **为什么起批**：W1167 落的双轨里 GA4 轨从未通电——用户侧无 GA4 账号，「Measurement ID 在哪」这一问即前提否证。留待填位等于留一条永不亮灯的死轨，同时让三个 Google 域白占 CSP 例外面（每域都是攻击面与可达性解释成本）。裁决落地＝同时收缩**声明面 + 例外面 + 代码面**三处，不留「文档说双轨、代码跑一轨」。
+> - **① 统计桥（全站唯一发射出口）**：`site/static/js/stats.js`——`silenced()` 短路 file:// 与 localhost（**不发也不 warn**，离线页面不刷 console）；库未就绪时入队、`load` 时 flush 并挂曝光观察器；`[data-goatcounter-view]` 一次性曝光按 dataset 去重；`window error/unhandledrejection` → `debug_error`。
+> - **② 事件清单正本 + 第 67 槽**：`scripts/output/_w1168_stat_events.json`（11 组 21 名，含 emitter 落点、`runtime_layer` 运行层、metric 反向链）；`scripts/check_stat_events.py` 判据六则——C1 slug 唯一 / C2 有清单必有落点（`file` 与 `files` 同等逐个验）/ C3 源面反向对拍未登记事件名即红（模板串、vendor、判据与探针自身排除）/ C4 页面面同等 / C5 metric 结构性要求 / C6 `runtime_layer` ∈ {bridge, goatcounter} 必填。恒跑核心槽，汇总行形态沿用 65/66 槽不另造第四种。
+> - **③ 八类事件接线**（含两处「清单先有事件、页面上没有控件」的真实功能补齐，用户令「两个都补」）：`nav_click` 12 名（导航正本声明式）· `badge_view`（徽标曝光）· `page_view`（goatcounter 原生）· `reader_progress`（档位去重）· `dark_mode_toggle` · `copy_citation` · `search_perform`（同义查询不重报）· `search_hit_open`（结果卡改 `<a class="result-card">` 真可点开，深链 `reader/ch###.html#q=<词>` 落地高亮）· `reset_view`（三个 3D 页新增 `#reset-view` 控件 + `VIEW_INITIAL` 复位）· `rum_vitals`（FCP/LCP/CLS/INP/TBT 一条事件回流，刻意不做五条：GoatCounter 无指标类型，五个名字会把计数面切成五份小样本）。**隐私**：检索词与引文内容永不离开本机。
+> - **④ 注入器跨版本迁移**：MARK 升 `ANALYTICS v2 w1168`，`LEGACY_MARKS` 保留 v1 识别 ⇒ 旧块**整块替换**而非并存（同页留两份即双份上报）。`--check` 分支残留 `ga4_on` 引用是本批抓到的潜伏缺陷：`--dry-run`/`--apply` 同步改掉、`--check`（恰是 verify 唯一会走的一支）漏改，一执行即 NameError——单测只覆盖 dry-run 所以零暴露，已补该支回归。
+> - **⑤ 运行面探针**：`scripts/stat_event_probe.py` P1-P7 十项检查 FAIL 0（P1 file:// 零远端上报且桥短路 / P2 声明式通道带 event 标记 / P3 去重语义 / P4 结果卡真跳转 / P5 深链高亮命中 / P6 拖动生效→复位回初始相机 / P7a-d 其余四类）。刻意不进 pre-commit（浏览器面测量分钟级），由批收尾手动跑。
+> - **三条「仪器本身错了」根修（红不是结论，先验仪器）**：
+>   ① **捕获容器活在被替换的文档里**：点击导航即换文档、`window.__xyEvents` 随之消失 ⇒ P2/P4 恒 0 而接线完好。第一版修法「内存 + sessionStorage 都写」把漏计翻成**双计**（P3 首查 2·换词后 4）；根修＝**写入单源**（storage 成功即不写内存，写不进才退回内存），并给自测补第 3 例「storage 可用时内存数组必须为空」——旧形态当场 mem=2 判红，锁有牙齿已实测。
+>   ② **判据读错发射面**：`reset_view` 是 `data-goatcounter-click`，记录在 goatcounter.count **入口层**，探针只读 XYstats **桥层** ⇒ events=0。没有采用「两层并读」这种放宽断言的写法，而是把「读哪一层」升格为清单必填面（C6），合法集 `RUNTIME_LAYERS` 定义在判据脚本、探针 import 引用不复制。
+>   ③ **夹具落点面与判据取数面不一致**：单测 `_tree(html=…)` 把页面写进 `site/data/`，emitter 却声明 `site/a.html` ⇒ 「两个落点缺一个即红」因两条都缺而假绿、「补齐后转绿」从未通过。夹具改为同一路径面并加 `assert not any(...)` 成对断言；新增负样本必须跑整文件而非只跑新例。
+> - **CI 侧 fail-closed 陷阱根修**：第 67 槽 C5 首版要求 `spark-output/context/metric.json` 可读并逐条对名，而 `spark-output/` 整目录在 `.gitignore` 第 148 行 ⇒ 本地绿、CI「基础设施缺失」恒红。改为**结构性硬判据**（每组必须声明 `metric` 字段），文件可读时才交叉对名、不可读降 NOTE。教训：判据真值只能取仓内受版本控制的正本，工作目录产物至多作交叉校验面。
+> - **治理留痕**：AGENTS 铁律 5 具名例外从句按现实改写（4 域→1 域、`script-src` 重回空集）；槽数 66→67 五处同改（`EXPECTED_SECTION_NAMES` / `_SCOPE_CORE` / `_STRICT_GATES` / AGENTS 三处计数 + gates.md 全量定义 / HANDOVER 引用）；方案文档 v5 新增 §2 G0-1-R、§4.1、§5.1、§6.2、§7 两项关闭、附录 A 复算命令、附录 B 推翻清单；链路 context（brief/prd/pitch/metric）同步 G0-1-R，`metric.json` 的 `instrumentation_gaps` 明确不再是机器正本。**外发动作如实交代**：为验证自托管链复活，向用户 GoatCounter 账号写入过一条测试记录（`/count?p=/test&e=1`→200），删除方式已在方案文档与收官说明中交代。
+> - **验证**：第 67 槽「组 11 · 事件名 21 · 违规 0 · OK」/ 探针 `--self-test` 3 例 PASS + 全量 10 项 FAIL 0 / `generate_csp --check` 全站 0 漂移 / 注入器 `--check` PASS 且 `--dry-run` 改动 0（幂等）/ `check_no_goatcounter` 例外面==具名全集 / `check_pitfall_id_unique` 0 FAIL（E-204~E-210 无重号）/ guardrails 结构档与嵌套推导式档通过（P1 的嵌套推导式提取为具名 `_known_offline_console`，未加豁免）/ `tests/unit/test_w1168_stat_events.py` 25 例全过（含新增的探针/门禁自测实质执行面两例）。
+
 ### W1167（2026-11-08）：MVP 迁移批（导航单组件分发 · 三态徽标 · 双门禁 · CSP 具名例外 · 统计双轨 · 44px 机制）
 
 **文件**：scripts/w1167_nav_inject.py · scripts/w1167_badge_inject.py · scripts/w1167_analytics_inject.py · scripts/check_nav_parity.py · scripts/check_data_badge_coverage.py · scripts/generate_csp.py · scripts/verify_delivery.py · site/system.css · site/static/js/goatcounter.js · site/js/visit-log.js · site/js/rum.js · tests/unit/test_w1167_nav_badge.py · docs/11-方案报告/设计与架构方案/全站改版方案与门禁扩展-v5-2026-11-08.md · site/**.html（导航/徽标/统计/CSP 分发面）
@@ -934,7 +954,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1167），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1168），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
