@@ -1,3 +1,54 @@
+## W1176 术语表可视化页（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/glossary.html | W1176 | 新建：术语表速查页（KPI 四卡 + 6 组筛选 + 搜索 + 59 术语卡 + 对照表） |
+| site/_template.html | W1176 | 改：说明注释里的 `<script>` 字面量改为「script 标签」（防被解析器当真标签） |
+| scripts/check_glossary.py | W1176 | 改：parse_md 保留「含义/出处说明/书中用法」列（原只取前 1-2 列） |
+| dataset/glossary.json | W1176 | 改：重生成（6 组 59 条·含完整三列） |
+| scripts/_w1176_glossary_page.py | W1176 | 新建：术语页内容填充脚本 |
+| scripts/output/colorblind-baseline.txt | W1176 | 改：色盲基线重冻结（+847 新页配对·其余零变化） |
+| site/sitemap.xml | W1176 | 改：补 data/glossary.html |
+| docs/00-导读/W批次编号对账表.md | W1176 | 改：W1176 认领行 |
+| scripts/output/_w1176_spec.json | W1176 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1176.txt | W1176 | 新建：级联清单 |
+| CHANGELOG.md | W1176 | 改：W1176 段落（级联） |
+| scripts/output/file-index.md | W1176 | 改：W1176 段（级联） |
+| site/（5 件） | W1176 | 搜索索引重生成 + CSP 重哈希 + 页脚版本推进 |
+| site/data/（89 件） | W1176 | CSP 重哈希 + 导航/徽标注入（幂等·实际改动仅新页） |
+| .github/workflows/README.md | W1176 | 改：区间行推进（版本面） |
+| CITATION.cff | W1176 | 改：version/date 推进（级联） |
+| README.md | W1176 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1176 | 改：版本行推进（级联） |
+| HANDOVER.md | W1176 | 改：最后更新行 + 当前进度（级联） |
+| AGENTS.md | W1176 | 改：脚注沿革滚动（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1176 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1176 | 改：逐批明细追加（W1176·级联） |
+| docs/00-导读/项目说明.md | W1176 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1176 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1176 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1176 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1176 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1176 | 改：再生成/验证缓存（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1176 | 改：级联/目录刷新产物 |
+| scripts/INDEX.md | W1176 | 改：级联/目录刷新产物 |
+| scripts/output/_vermilion_solid_report.json | W1176 | 改：级联/目录刷新产物 |
+| scripts/output/_w1167_nav_plan.json | W1176 | 改：级联/目录刷新产物 |
+| scripts/output/citability-report.json | W1176 | 改：级联/目录刷新产物 |
+| archive/scripts/batches/w1175/_w1175_datasource_wording.py | W1176 | 改：级联/修复产物 |
+| dataset/README.md | W1176 | 改：级联/修复产物 |
+| docs/00-导读/统计口径说明.md | W1176 | 改：级联/修复产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1176 | 改：级联/修复产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1176 | 改：级联/修复产物 |
+| docs/agent/gates.md | W1176 | 改：级联/修复产物 |
+| scripts/output/stats-changelog.json | W1176 | 改：级联/修复产物 |
+| scripts/output/stats-index.md | W1176 | 改：级联/修复产物 |
+| scripts/_w1175_datasource_wording.py | W1176 | 删：W1175 一次性脚本归档迁入 archive/scripts/batches/w1175/ |
+| archive/scripts/batches/INDEX.md | W1176 | 改：修复产物 |
+| archive/scripts/batches/README.md | W1176 | 改：修复产物 |
+| archive/scripts/batches/w1175/INDEX.md | W1176 | 改：修复产物 |
+| archive/scripts/batches/w1175/README.md | W1176 | 改：修复产物 |
+
 ## W1175 方案 §7 核验订正批（2026-11-08）
 
 | 文件 | W | 说明 |

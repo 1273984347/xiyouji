@@ -1,7 +1,7 @@
 {
  "scan_date": "2026-11-08",
  "scope": "site/data (D1: 不含 EN 镜像)",
- "pages": 88,
+ "pages": 89,
  "items": [
   "C1",
   "C2",
@@ -9,10 +9,10 @@
   "C4"
  ],
  "pass_rate": {
-  "C1": "88/88",
-  "C2": "88/88",
-  "C3": "88/88",
-  "C4": "88/88"
+  "C1": "89/89",
+  "C2": "89/89",
+  "C3": "89/89",
+  "C4": "89/89"
  },
  "detail": {
   "site/data/81-hardships-view.html": {
@@ -764,6 +764,28 @@
    "has_anchor": true
   },
   "site/data/global-pattern.html": {
+   "items": {
+    "C1": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": true
+  },
+  "site/data/glossary.html": {
    "items": {
     "C1": {
      "status": "ok",

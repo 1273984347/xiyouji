@@ -29,7 +29,7 @@
 | famous-time-travel.json | 2 | 2.1 KB | 2 | scene_illustrations、travel_identities |
 | four-dimensional-research-network.json | 8 | 13.0 KB | 8 | dimensions、indicators、meta、network、polarExtra、radar… |
 | four-heavenly-kings-artifacts.json | 5 | 5.2 KB | 5 | _schema、chord、kings、radar、timeline |
-| glossary.json | 3 | 4.3 KB | 3 | groups、note、source |
+| glossary.json | 3 | 9.6 KB | 3 | groups、note、source |
 | guanyin-six-roles-network.json | 7 | 16.5 KB | 7 | _schema、intensity、network、radar、roles、sankey… |
 | heaven-power-network.json | 6 | 15.8 KB | 6 | hierarchy、network、radar、sankey、summary、timeline |
 | intertextuality-network.json | 1 | 14.2 KB | 1 | intertextuality |
