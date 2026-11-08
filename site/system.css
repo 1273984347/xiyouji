@@ -1082,6 +1082,14 @@ td.num, th.num {
     .legend-cell:not([role="button"]) {
         min-height: 32px;
     }
+    /* W1172：宽表格在窄屏撑破视口——reader 正文的裸 <table>（无 .table-wrap 包裹）实测
+       375px 下溢出 274px、320px 下溢出 329px，en/data 亦有多页同类。display:block 让表格
+       自身成为横向滚动容器：内容不压缩（表高不变）、桌面/平板不受影响（媒体查询边界 640）。 */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
     /* W1166：底部固定浮层与页脚的行为冲突——.rag-fab（56px @ bottom:28 ⇒ 占底部 84px）
        压住首页/看板页脚右下链接（实证：首页「反馈」被遮），.xy-fab-theme（40px @ bottom:14
        ⇒ 占 54px）同区域。移动端为页脚预留安全区，浮层不再与文字重叠。 */
