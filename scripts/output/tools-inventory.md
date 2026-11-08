@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-08 11:37
+生成时间：2026-11-08 12:05
 
-共 **203** 件（门禁与校验 93 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 7）
+共 **203** 件（门禁与校验 94 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（93）
+## 门禁与校验（94）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -40,6 +40,7 @@
 | `check_css_var_refs.py` | CSS 变量引用门禁（第 34 门禁 · W672/WP-1.4）——防 style 块引用未定义 CSS 变量。 |
 | `check_css_var_selfref.py` | check_css_var_selfref.py — CSS 变量**自引用**判据（W1110 新增·随第 54/55/56 槽同批建置）。 |
 | `check_dark_state_gate.js` | scripts/check_dark_state_gate.js — W579：暗色态门禁（O2 常驻化，挂 screenshot-review |
+| `check_dashboard_kpi.py` | check_dashboard_kpi.py — 第 68 门禁 · 首页 KPI 与统计快照对拍（W1170） |
 | `check_data_badge_coverage.py` | check_data_badge_coverage.py — 第 66 门禁 · 数据徽标覆盖（W1167 · MVP 迁移批③） |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
 | `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
@@ -234,7 +235,7 @@
 | `w1167_nav_inject.py` | W1167① 主导航单组件分发生成器（正本=本文件内 CANONICAL，改导航只改这里）。 |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（7）
+## 一次性（下划线前缀）（6）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -244,4 +245,3 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
-| `_w1169_touch_events.py` | _w1169_touch_events.py — 图表 tooltip 事件改造（W1169 · V4 触摸交互优化）。 |

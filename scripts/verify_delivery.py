@@ -125,6 +125,7 @@ EXPECTED_SECTION_NAMES = [
     "导航一致性",
     "数据徽标",
     "统计事件契约",
+    "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON·毫秒级
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -219,6 +220,7 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "导航一致性",  # W1167：恒跑——audit-1 major 判据化，859 页静态扫描毫秒级，与改动范围无关
     "数据徽标",  # W1167：恒跑——story-2 AC1/AC3 判据化，88 页静态扫描毫秒级
     "统计事件契约",  # W1168：恒跑——事件清单↔发射面双向对拍与改动范围无关（静态扫描·秒级）
+    "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON 逐项对拍·毫秒级
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -1181,6 +1183,19 @@ _STRICT_GATES = [
         ok_msg="统计事件契约门禁通过（%s）",
         ok_line=-1,
     ),
+    # W1170（V1 首批）：首页 KPI 卡片与 stats.json 权威值对拍——实测 5 项全部滞后（累计少 41 篇）
+    # 且同页段落文字与卡片自相矛盾（文字 44/215/209 vs 卡片 43/199/199）。硬编码数字无联动机制，
+    # 本项目按「读 1 HTML + 1 JSON」毫秒级恒跑，防再滞后。
+    _StrictGate(
+        section="dashboard KPI",
+        script="check_dashboard_kpi.py",
+        timeout=60,
+        marker="---- 第 68 门禁 dashboard KPI：",
+        crash_msg="dashboard KPI 槽执行异常（第 68 槽·crash 即拦）: %s",
+        fail_msg="首页 KPI 与 stats.json 失配（本批新增第 68 槽）",
+        marker_msg="dashboard KPI 槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="dashboard KPI 门禁通过（%s）",
+        ok_line=-1,    ),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----

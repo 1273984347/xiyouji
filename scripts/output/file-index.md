@@ -1,3 +1,51 @@
+## W1170 dashboard KPI 对拍批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/dashboard.html | W1170 | 改：A2-A6 五张 KPI 卡片值对齐 stats.json + 段落合计 615→616、A5 34→35 |
+| scripts/check_dashboard_kpi.py | W1170 | 新建：第 68 槽（C1 卡片存在性 / C2 值与 stats 一致 / C3 段落合计·自测 4 例） |
+| scripts/verify_delivery.py | W1170 | 改：挂第 68 槽 + EXPECTED_SECTION_NAMES + _SCOPE_CORE 登记 |
+| AGENTS.md | W1170 | 改：§4.2 第 68 条摘要 + 槽数 67→68（三处） |
+| docs/agent/gates.md | W1170 | 改：第 68 条完整定义 + 标题槽数与沿革 |
+| docs/00-导读/文档规范.md | W1170 | 改：verify full 现役段数 69→73 |
+| HANDOVER.md | W1170 | 改：六十七槽→六十八槽 + 最后更新行 + 当前进度（级联） |
+| docs/00-导读/W批次编号对账表.md | W1170 | 改：W1170 认领行 |
+| scripts/output/_w1170_spec.json | W1170 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1170.txt | W1170 | 新建：级联清单 |
+| CHANGELOG.md | W1170 | 改：W1170 段落（级联） |
+| scripts/output/file-index.md | W1170 | 改：W1170 段（级联） |
+| .github/workflows/README.md | W1170 | 改：区间行推进（版本面） |
+| CITATION.cff | W1170 | 改：version/date 推进（级联） |
+| README.md | W1170 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1170 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1170 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1170 | 改：逐批明细追加（W1170·级联） |
+| docs/00-导读/项目说明.md | W1170 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1170 | 改：stats 刷新（gate_count 67→68） |
+| scripts/output/stats-changelog.json | W1170 | 改：stats 生成件跟随 |
+| scripts/output/stats-index.md | W1170 | 改：stats 生成件跟随 |
+| scripts/output/INDEX.md | W1170 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1170 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1170 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1170 | 改：再生成/验证缓存（级联） |
+| scripts/INDEX.md | W1170 | 改：目录清单刷新（新增 check_dashboard_kpi.py） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1170 | 改：台账腾窗迁出（号序切分） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1170 | 改：stats 标记 gate_count 67→68 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1170 | 改：stats 标记 gate_count 67→68（同上） |
+| pytest.ini | W1170 | 改：stats 标记 pytest_collected 跟随刷新 |
+| site/data/cross-time-danmaku.html | W1170 | 改：级联产物（页脚版本推进 / 标注跟随） |
+| site/data/tag-cloud.html | W1170 | 改：级联产物（页脚版本推进 / 标注跟随） |
+| site/dukou-engine.html | W1170 | 改：级联产物（页脚版本推进 / 标注跟随） |
+| site/index.html | W1170 | 改：级联产物（页脚版本推进 / 标注跟随） |
+| archive/scripts/batches/w1169/_w1169_touch_events.py | W1170 | 改：级联/归档产物（页脚版本推进·W1169 一次性脚本归档） |
+| site/data/search.html | W1170 | 改：级联/归档产物（页脚版本推进·W1169 一次性脚本归档） |
+| site/en/search.html | W1170 | 改：级联/归档产物（页脚版本推进·W1169 一次性脚本归档） |
+| scripts/_w1169_touch_events.py | W1170 | 删：W1169 一次性改造脚本归档迁入 archive/scripts/batches/w1169/ |
+| archive/scripts/batches/INDEX.md | W1170 | 改：目录清单刷新（归档迁入后的目录文档） |
+| archive/scripts/batches/README.md | W1170 | 改：目录清单刷新（归档迁入后的目录文档） |
+| archive/scripts/batches/w1169/INDEX.md | W1170 | 改：目录清单刷新（归档迁入后的目录文档） |
+| archive/scripts/batches/w1169/README.md | W1170 | 改：目录清单刷新（归档迁入后的目录文档） |
+
 ## W1169 图表触摸交互批（2026-11-08）
 
 | 文件 | W | 说明 |
