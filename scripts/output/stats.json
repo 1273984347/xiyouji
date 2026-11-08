@@ -1,13 +1,13 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-09T07:07:44",
+  "_generated": "2026-11-09T07:39:01",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
     "generator": "scripts/stats.py",
     "introduced_by": "W505",
-    "last_changed_by": "1011",
-    "value": 616
+    "last_changed_by": "W1180",
+    "value": 617
   },
   "a2_docs": {
     "domain": "docs/06-个人随笔/*.md（排除 README）",
@@ -34,8 +34,8 @@
     "domain": "docs/04-文化与历史背景/*.md（排除 README）",
     "generator": "scripts/stats.py",
     "introduced_by": "W904",
-    "last_changed_by": "1011",
-    "value": 35
+    "last_changed_by": "W1180",
+    "value": 36
   },
   "a6_docs": {
     "domain": "docs/05-诗词歌赋/*.md（排除 README）",

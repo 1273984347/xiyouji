@@ -340,17 +340,49 @@ CHANGE_CHECKLISTS = (
         ),
     },
     {
+        "key": "new-doc",
+        "name": "新增内容文档（docs/**/*.md）",
+        "basis": "坑表 L219（引文实提·W503）/ E-93（计数排除集）/ 第 3·4·6·19·20·31·45·46 槽",
+        "pattern": r"^docs/.+\.md$",
+        "items": (
+            ("note", "写 `> 原文引文（第N回）` 行前必须实提，禁止凭记忆编造——第 20 槽只拦「写入后未命中」，"
+                     "拦不住「恰好像原文」；示例命令按主题替换关键词即可。用变体称谓（行者/八戒/圣僧）须同时含"
+                     " canonical（孙悟空/猪八戒/玄奘），先查 dataset/glossary.json 人物称谓组"),
+            ("cmd", "py -3 scripts/_cite_probe.py --kw 心猿 --chap 1-100 --frag"),
+            ("cmd", "py -3 scripts/check_citations.py --dir docs"),
+            ("cmd", "py -3 scripts/lint_links.py --internal --dir docs"),
+            ("cmd", "py -3 scripts/check_glossary.py"),
+            ("cmd", "py -3 scripts/check_frontmatter.py"),
+            ("cmd", "py -3 scripts/docs_index.py"),
+            ("cmd", "git add -A -- . ':(exclude).gitignore'"),
+            ("cmd", "py -3 scripts/stats.py --w {W}"),
+            ("cmd", "py -3 scripts/check_doc_sync.py"),
+            ("cmd", "py -3 scripts/gen_folder_docs.py --refresh"),
+            ("cmd", "py -3 scripts/_gen_search_index.py"),
+            ("cmd", "py -3 scripts/generate_csp.py"),
+            ("note", "顺序硬约束：`stats.py` 与 `gen_folder_docs.py` 都按 Git 索引收集，新增文件须先 `git add`，"
+                     "否则统计静默不变（W1180 实证：A5 35→36、A1-A6 616→617 在 add 后才生效）"),
+            ("note", "新增一篇会令首页 dashboard 的硬编码 KPI 失配（第 68 槽）：同步 site/dashboard.html 的"
+                     " A5 卡片值与「A1-A6 共 N 篇文档」段落；元信息块须含生成来源/生成模型/生成日期/核验状态"
+                     " 且核验状态为三值枚举（第 18 槽）；docs/INDEX.md 需 docs_index.py 重建（W1180 实证三项全红）"),
+            ("note", "计数链同步：AGENTS §1/§3、README、STRUCTURE、CHANGELOG 口径块、"
+                     " docs/00-导读/统计口径说明.md 的板块篇数——新增一篇会令 A1-A6 总数变化（第 3 槽 C5/C5b/C5d）"),
+            ("note", "双索引：CHANGELOG 本批 W### 段（四件套：来源/文件/验证/状态）+ file-index.md 本文件条目；"
+                     "元数据区按所属板块 README 固定格式（轨标/引用/原文引文/主题类别/数据指标/出处/核验状态）"),
+        ),
+    },
+    {
         "key": "stats-scope",
         "name": "改口径块 / 统计 / 计数链",
         "basis": "第 31 槽 C5·C5b·C5d·C5e / 第 41·45·46·54 槽 / W1178 提交失败第二轮（索引陈旧）",
         "pattern": r"^(CHANGELOG\.md|HANDOVER\.md|AGENTS\.md|pitfalls\.md|STRUCTURE\.md|README\.md|"
                    r"scripts/output/stats\.json|\.agent/skills/puti-shouye/SKILL\.md)$",
         "items": (
+            ("cmd", "git add -A -- . ':(exclude).gitignore'"),
             ("cmd", "py -3 scripts/stats.py --w {W}"),
             ("cmd", "py -3 scripts/check_doc_sync.py"),
             ("cmd", "py -3 scripts/check_pitfall_id_unique.py"),
             ("cmd", "py -3 scripts/check_agents_layers.py"),
-            ("cmd", "git add -A -- . ':(exclude).gitignore'"),
             ("cmd", "py -3 scripts/gen_folder_docs.py --refresh"),
             ("cmd", "py -3 scripts/_gen_search_index.py"),
             ("cmd", "py -3 scripts/generate_csp.py"),
@@ -397,7 +429,7 @@ def checklist_hits(entries):
     for spec in CHANGE_CHECKLISTS:
         pat = re.compile(spec["pattern"])
         ms = [(c, p) for c, p in entries if pat.search(p)]
-        if spec["key"] == "new-page":
+        if spec["key"] in ("new-page", "new-doc"):
             ms = [(c, p) for c, p in ms if _is_new(c)]
         if spec["key"] == "new-gate":
             ms = [(c, p) for c, p in ms
@@ -453,9 +485,10 @@ def render_checklist(keys, entries, matched=None):
 
 
 def checklist_selftest():
-    """四类命中 + 命令完整性自测（不含省略号 / 占位符 / 假批号）。"""
+    """五类命中 + 命令完整性自测（不含省略号 / 占位符 / 假批号）。"""
     cases = [
         ("new-page", [("A", "site/data/probe.html")]),
+        ("new-doc", [("A", "docs/04-文化与历史背景/新专题.md")]),
         ("new-gate", [("A", "scripts/check_probe.py"), ("M", "scripts/verify_delivery.py")]),
         ("shared-css", [("M", "site/system.css")]),
         ("stats-scope", [("M", "CHANGELOG.md"), ("M", "scripts/output/stats.json")]),
@@ -503,8 +536,8 @@ def render_task():
     if ck_keys:
         out.append(render_checklist(ck_keys, entries, ck_matched))
     else:
-        out.append("本次必跑清单：未命中四类变更；如需动手前查，用 --checklist <new-page|new-gate|"
-                   "shared-css|stats-scope|all>")
+        out.append("本次必跑清单：未命中五类变更；如需动手前查，用 --checklist <new-page|new-gate|"
+                   "shared-css|stats-scope|new-doc|all>")
     # W1148 b 方案：最小铁律集注入（恒真 ∪ 路径敏感·抽整条原文带回指锚）
     rules = minimal_rules(paths)
     if rules:

@@ -17,7 +17,7 @@
 - **数据可视化**：89<!--stats:visualization_pages--> 个 D3.js / Three.js 可视化页（site/data/ 共 90<!--stats:site_data_html--> 个 HTML，「87」不含模板壳 _shell.html），覆盖 133 个<!--doc-sync:exempt--> 数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34<!--stats:script_classes--> 类主题 A–AH）。
 - **可问询入口**：Web Agent「西游记·渡口问津」（xiyouji-agent-web/）——自研 OpenAI-compatible 引擎（server/engine/·W680·全主流大模型端点适配），可对话、检索 docs/source、跑脚本。
 
-**核心内容规模**：A1–A6 内容板块共 616<!--stats:a1_a6_docs--> 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 35 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→616）；英文站 site/en/ 138<!--stats:site_en_html--> 页已全量英文化。
+**核心内容规模**：A1–A6 内容板块共 617<!--stats:a1_a6_docs--> 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 35 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→616）；英文站 site/en/ 138<!--stats:site_en_html--> 页已全量英文化。
 
 **设计方向**：锁定「新中式·数字雅集」（宣纸底/墨文/朱砂点缀/零外域依赖）；**页面动效是强制契约**——时长三档预算（≤150/250/600ms）、reduced-motion 双守卫、tooltip 统一 `.chart-tooltip`、count-up fail-open 等，详见 DESIGN.md（视觉 §1-4、**动效 §5**）。
 
@@ -308,7 +308,7 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 ## 7. 快速上手路径（新 Agent 接手）
 
 0. 开局先跑 `python scripts/agent_start.py`——实读磁盘输出当前事实摘要（现役三元组/近 3 批次/stats 全键/对账表现势/阻塞·W705）——防「记忆代读」，值全部来自磁盘实时读取。
-   **W1179 必跑清单**：`python scripts/agent_start.py --task` 除必读节外，另按 git 改动路径输出「变更类型 → 必跑动作」（新增页 / 新增门禁槽 / 改共享 CSS / 改口径块四类，命令由台账批号与改动路径实况推导，可直接粘贴）；工作树干净时动手前用 `python scripts/agent_start.py --checklist all` 主动查，或 `--checklist new-page` 等按类型查；`--checklist-selftest` 验四类命中、批号口径与命令完整性。每条带坑表 E-NN / 门禁槽号 / W 批次依据锚，便于 Grep 检索核对，防清单与源漂移。
+   **W1179 必跑清单**：`python scripts/agent_start.py --task` 除必读节外，另按 git 改动路径输出「变更类型 → 必跑动作」（新增页 / 新增内容文档 / 新增门禁槽 / 改共享 CSS / 改口径块五类，命令由台账批号与改动路径实况推导，可直接粘贴）；工作树干净时动手前用 `python scripts/agent_start.py --checklist all` 主动查，或 `--checklist new-page` 等按类型查；`--checklist-selftest` 验四类命中、批号口径与命令完整性。每条带坑表 E-NN / 门禁槽号 / W 批次依据锚，便于 Grep 检索核对，防清单与源漂移。
 1. 读 `CLAUDE.md`（AI 速查层，1 分钟）→ 必守规则与常用命令速览（W664 起，宿主自动加载）；**四文档体系分工**（W1157 建）：规则全量查 `RULES.md` / 坑位表查 `pitfalls.md` / 本文件=项目全貌·工作流程（§7）与门禁摘要正本。
 2. 读 `HANDOVER.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
 3. 读 `README.md` → 项目全貌、内容规模、在线站点、双协议。
@@ -333,4 +333,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1174-W1174 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-08（W1175）方案 §7 逐条复算：qa-1 失效 / qa-5 仍有效（演示态从未出现）/ qa-6 形态不符，并补核验纪律；2026-11-08（W1176）术语表页：数据管道补全含义/用法列 + 59 条术语卡片页 + 模板 <script> 注释缺陷根修；2026-11-08（W1177）新增页自动化：new_page --post 按依赖序跑七步 + 模板补齐 cite/dataSource/chart-degrade/description；2026-11-08（W1178）第 69 槽：check_template_contract.py 把「类名计数 ≠ 结构存在」变成红灯，并给 --evidence 输出可复算命中位置；2026-11-09（W1179）agent_start --task 按改动路径输出四类必跑清单；--checklist 供动手前查；命令由台账批号与路径实况推导。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1175-W1175 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-08（W1176）术语表页：数据管道补全含义/用法列 + 59 条术语卡片页 + 模板 <script> 注释缺陷根修；2026-11-08（W1177）新增页自动化：new_page --post 按依赖序跑七步 + 模板补齐 cite/dataSource/chart-degrade/description；2026-11-08（W1178）第 69 槽：check_template_contract.py 把「类名计数 ≠ 结构存在」变成红灯，并给 --evidence 输出可复算命中位置；2026-11-09（W1179）agent_start --task 按改动路径输出四类必跑清单；--checklist 供动手前查；命令由台账批号与路径实况推导；2026-11-09（W1180）A5 新增《天罡地煞与变化之术专题》；清单补第五类 new-doc 并修 git add 顺序。如与上述权威文档冲突，以权威文档为准。*
