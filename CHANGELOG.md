@@ -1,3 +1,15 @@
+### W1169（2026-11-08）：图表触摸交互批（tooltip 事件切 Pointer Events·5 页 23 处）
+
+**本批要点**（V4「触摸交互优化」子项·用户「继续」指令）：
+
+> - **T1 缺陷取证**：5 个数据页（chapter-stats / story-timeline / tag-cloud / timeline / cross-time-danmaku）的提示框只绑鼠标专有事件。触摸设备上：① 手指抬起不触发 `mouseleave`（提示框永久残留，用户无关闭手段）；② 单击不产生 `mousemove`（仅靠浏览器合成的一次 mouse 事件，位置固定、不随拖动更新）；③ `mouseover` 单点绑定无移动跟随。
+> - **T2 改造（零结构改动）**：事件名整体切到 Pointer Events——`mousemove→pointermove`（拖动跟随）/ `mouseleave→pointerleave`（抬手即触发·触摸结束派发 pointerleave）/ `mouseover→pointerover`+`mouseout→pointerout`（按下即显示/离开即隐藏）/ `mouseenter→pointerenter`。共 5 页 23 处，纯字符串替换、不改回调结构与分支。
+> - **T3 三重防线（E-199）**：`scripts/_w1169_touch_events.py` 逐页锚点唯一性预检（五类 mouse* 事件计数须与基线全等）+ 改后断言（行数不变 / 替换计数守恒 / 无残留鼠标事件名）+ 逐页打印便于归因；首版基线漏 `mouseout`/`mouseenter` 两类（只统计了 3 类），预检当场咬出并补全后重跑。
+> - **T4 验证（分层证据）**：运行时实测 3 页——`g.bar-group` 经 pointermove 显示、pointerleave 复位（chapter-stats）；`g.ev` 经 pointerover 显示、pointerout 复位（story-timeline）；`g.star-node` 经 pointerenter 显示、pointerleave 复位（cross-time-danmaku）。另 2 页源码核实：timeline 事件绑于 `circle.ev-circle`（pointerenter/pointermove/pointerleave 链条完整）、tag-cloud 对应节点已完成同类替换——这两页因探针节点定位（视口外/非 SVG 载体）未纳入运行时断言，**如实标注为源码级验证**。
+> - **T5 CSP**：5 页内联脚本变更 ⇒ `generate_csp.py` 重算，859 页 913 哈希零漂移（否则整段脚本会被浏览器拒绝执行）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1168（2026-11-08）：统计单轨收敛批（GA4 轨退役 · GoatCounter 单轨 · 事件清单正本与第 67 槽契约门禁 · 运行面探针）
 
 **文件**：scripts/check_stat_events.py · scripts/stat_event_probe.py · scripts/output/_w1168_stat_events.json · site/static/js/stats.js · scripts/w1167_analytics_inject.py · scripts/w1167_badge_inject.py · scripts/generate_csp.py · scripts/verify_delivery.py · site/js/reader-enhance.js · site/js/rum.js · site/js/theme-init.js · site/static/js/cite-box.js · site/static/js/text-search-app.js · site/system.css · site/data/character-relationship-3d.html · site/en/character-relationship-3d.html · site/data/journey-geo-3d.html · tests/unit/test_w1168_stat_events.py · docs/11-方案报告/设计与架构方案/全站改版方案与门禁扩展-v5-2026-11-08.md · site/**.html（统计块 v2 + CSP 重哈希分发面）
@@ -955,7 +967,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1168），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1169），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
