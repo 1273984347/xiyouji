@@ -544,7 +544,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "99ddaa54d162eb0bfb1e901d1adacfd177c949d1",
+   "sha1": "38a07a995da34cffc797860ebb134ca2b9feeda7",
    "counts": {
     "button.vt-btn": 1
    }
@@ -648,7 +648,7 @@
    }
   },
   "dashboard.html": {
-   "sha1": "ae042df21075ad63f9284c177b81bfb4e34e1668",
+   "sha1": "420036c6e8c7b41ec605dde1222257231ce3d9aa",
    "counts": {
     "section.route-strip": 1,
     "button.vt-btn": 2,
@@ -1416,7 +1416,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "4e7187347b99ae5956b6a2c044520ec5301bfb39",
+   "sha1": "4396c32bb4337cab7c01ee11d2e8cca99820384f",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1506,5 +1506,5 @@
    }
   }
  },
- "generated_at": "2026-11-08T23:36:34.100Z"
+ "generated_at": "2026-11-08T23:42:52.379Z"
 }
