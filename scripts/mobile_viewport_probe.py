@@ -162,12 +162,35 @@ PROBE_JS = r"""
 """
 
 
-def list_pages(site_root: str, only: list[str] | None) -> list[str]:
-    """返回相对 site/ 的页面路径列表（根页 + data 页）。"""
+def list_pages(site_root: str, only: list[str] | None, scope: str = "data", reader_sample: int = 0) -> list[str]:
+    """返回相对 site/ 的页面路径列表。
+
+    scope（W1173 扩面）：
+      data    根页 + site/data（默认·W1165 起的覆盖面）
+      en      根页 + site/en
+      reader  根页 + site/reader（623 页·可用 reader_sample 抽样：每 N 页取一）
+      all     根页 + data + en + reader
+
+    W1173 起因：原实现只覆盖 data，而 en(138)/reader(623) 从未被移动端检查过——
+    实测 reader 正文裸 <table> 在 375px 下就溢出 274px，却在 99 页的口径里「全部通过」。
+    """
     if only:
         return only
-    pages = sorted(os.path.basename(p) for p in glob.glob(os.path.join(site_root, "*.html")))
-    pages += sorted("data/" + os.path.basename(p) for p in glob.glob(os.path.join(site_root, "data", "*.html")))
+    roots = sorted(os.path.basename(p) for p in glob.glob(os.path.join(site_root, "*.html")))
+    pages = list(roots)
+    want = {"data", "en", "reader"} if scope == "all" else ({scope} if scope in ("data", "en", "reader") else {"data"})
+    for sub in ("data", "en", "reader"):
+        if sub not in want:
+            continue
+        # 递归：reader 有 people/themes/essays/culture 四个子目录（623 页），只取直接子文件会漏掉八成
+        items = sorted(
+            os.path.relpath(p, site_root).replace("\\", "/")
+            for p in glob.glob(os.path.join(site_root, sub, "**", "*.html"), recursive=True)
+        )
+        items = [x for x in items if not os.path.basename(x).startswith("_")]
+        if sub == "reader" and reader_sample > 1:
+            items = items[::reader_sample]
+        pages += items
     return pages
 
 
@@ -284,6 +307,9 @@ def main() -> int:
     ap.add_argument("--width", type=int, default=375)
     ap.add_argument("--height", type=int, default=667)
     ap.add_argument("--pages", nargs="*", default=None, help="只测指定页（相对 site/）")
+    ap.add_argument("--scope", default="data", choices=["data", "en", "reader", "all"],
+                    help="覆盖面（W1173 扩面）：data=根页+data / en / reader / all=三目录")
+    ap.add_argument("--reader-sample", type=int, default=0, help="reader 抽样步长（0/1=全量）")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--settle", type=int, default=400, help="加载后等待 ms（动效/图表落位）")
     ap.add_argument("--min-font", type=float, default=12.0)
@@ -295,7 +321,7 @@ def main() -> int:
     if args.self_test:
         return self_test()
 
-    pages = list_pages(args.site_root, args.pages)
+    pages = list_pages(args.site_root, args.pages, args.scope, args.reader_sample)
     if args.limit:
         pages = pages[: args.limit]
     print(f"探针视口 {args.width}x{args.height} · 页数 {len(pages)}")

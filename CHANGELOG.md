@@ -1,3 +1,16 @@
+### W1173（2026-11-08）：移动端覆盖面与视口补齐批（探针扩面 data→all + 320px 采信）
+
+**本批要点**（W1172 期间暴露的双盲区补齐·用户「继续 V1」指令）：
+
+> - **T1 双盲区**：① **覆盖面**——探针原只扫 `site/data`，`site/en`（138 页）与 `site/reader`（623 页）从未被移动端检查；② **视口**——原只测 375px，320px（最窄主流宽度）未覆盖。W1165 起的所有「FAIL 归零」结论仅对 data 目录 + 375px 成立。
+> - **T2 探针扩面**：`list_pages` 加 `scope`（data/en/reader/all）+ `reader_sample` 抽样，且修正递归遗漏——`site/reader` 下有 people/themes/essays/culture 四个子目录，只取直接子文件会漏掉八成页面。扩面后：data 98 → all 268 页（en 148 含根页、reader 抽样 42）。
+> - **T3 button 触摸线**：W1165 那条移动端规则覆盖了 `select/input/label[for]` 却**漏了 button**——`en/relationships` 的「Redraw」实测 73×23px，差 1px 到 WCAG 2.5.8 的 24px 线。补 `button{min-height:24px}`：已够高的按钮（40/44px）原值保留，23px 这类仅 +1px 视觉无感。
+> - **T4 第 64 槽加 B3**：采信 320px 报告（`mobile_viewport_report_320.json`）的 FAIL=0；缺失仅 NOTE（探针约 4 分钟不进 pre-commit）。连同既有 B1（375px）构成双视口判据。
+> - **T5 验证**：双视口三目录普查——**375px 268 页 FAIL 0 / 溢出 0**、**320px 268 页 FAIL 0 / 溢出 0**；第 64 槽契约 7 项实跑 0 违规、自测 7/7。
+> - **T6 说明**：本轮为抽样口径（reader 每 20 页取一），非全量；全量 623 页需约 20 分钟，留作批收尾可选动作。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1172（2026-11-08）：表格窄屏溢出根修批（V4 视口延伸·851 页传播）
 
 **本批要点**（V4 视口延伸·用户「继续 V1」指令期间的实测发现）：
@@ -1004,7 +1017,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1172），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1173），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
