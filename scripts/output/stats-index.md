@@ -9,11 +9,11 @@
 |---|---|---|---|---|
 > **字段语义（W716 注）**：`introduced_by`=口径首次**正式化**批次（非历史首次出现批次）；`last_changed_by`=stats.py **检出**值变更的最近批次（建账前变更不记，如 site/reader 621→622 系主题枢纽页批次新增、早于建账）；`generator` 恒为 `scripts/stats.py` 故省略列。
 
-| a1_a6_docs | 617 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | W1180 |
+| a1_a6_docs | 618 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | W1181 |
 | a2_docs | 44 | docs/06-个人随笔/*.md（排除 README） | W904 | W904 |
 | a3_docs | 215 | docs/02-人物深度分析/*.md（排除 README） | W904 | W904 |
 | a4_docs | 209 | docs/03-主题与情节专题/*.md（排除 README） | W722 | W722 |
-| a5_docs | 36 | docs/04-文化与历史背景/*.md（排除 README） | W904 | W1180 |
+| a5_docs | 37 | docs/04-文化与历史背景/*.md（排除 README） | W904 | W1181 |
 | a6_docs | 13 | docs/05-诗词歌赋/*.md（排除 README） | W904 | W904 |
 | cognition_docs | 3 | docs/08-提升认知/*.md（排除 README） | W904 | W1096 |
 | csp_covered | 860 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | 1176 |
@@ -37,6 +37,10 @@
 | w864_entries | 259 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1152 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1181（2026-11-09 07:52:18）
+- a1_a6_docs: 617 → 618
+- a5_docs: 36 → 37
 
 ### W1180（2026-11-09 07:30:56）
 - a1_a6_docs: 616 → 617
