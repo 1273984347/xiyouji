@@ -9,7 +9,7 @@
    }
   },
   "data/81-hardships.html": {
-   "sha1": "39ac70198994d0b35d4409005586308b4b11ee89",
+   "sha1": "4f796d1d08f58738b3201b7d760da537cbdcc8b4",
    "counts": {
     "span.tag": 90
    }
@@ -19,7 +19,7 @@
    "counts": {}
   },
   "data/aesthetics.html": {
-   "sha1": "e942e4577b6ee2bce78a5ac51be45b2ec84d0ce1",
+   "sha1": "435d499207b42c3059f1345ccafcc0f42bc84741",
    "counts": {
     "div.kpi-card": 1,
     "div.color-swatch": 1,
@@ -42,14 +42,14 @@
    }
   },
   "data/cave-estate.html": {
-   "sha1": "645142c2241c3993828ff5ec3561bc4720afcca2",
+   "sha1": "3d0c9ecd3f8e0fab28c151aa4ebb5dea0796b6bf",
    "counts": {
     "div.kpi-card": 1,
     "span.tag.king": 19
    }
   },
   "data/century-dialogue.html": {
-   "sha1": "7d1e11f73b9589ace152212bbf40725b82b967d8",
+   "sha1": "c8b65e33e107f7f14484ea8f022711deb1341ad2",
    "counts": {
     "div.speech-bubble": 3
    }
@@ -67,7 +67,7 @@
    }
   },
   "data/character-appearance.html": {
-   "sha1": "92868b4881702a86745f66cb0f2717d59af285cf",
+   "sha1": "632f55fdb02da666dbb639bb3b51fba98e28dad8",
    "counts": {
     "div.kpi-card": 1
    }
@@ -109,7 +109,7 @@
    }
   },
   "data/chart-design.html": {
-   "sha1": "9d129cdf95812d884c73152a0696e92abfffffe2",
+   "sha1": "413656f12dacaf59ca97e78ac35c61479c1d256d",
    "counts": {
     "div.kpi-card": 1,
     "div.domino-card": 4,
@@ -135,14 +135,14 @@
    }
   },
   "data/counterfactual.html": {
-   "sha1": "72ca9478c004e353779a1cab7337bb430813c226",
+   "sha1": "97c16b6948d5dbebc1fc80ce7092f5715e8c7307",
    "counts": {
     "div.kpi-card": 1,
     "span.badge.validity-high": 7
    }
   },
   "data/criticism-history.html": {
-   "sha1": "b38a627bc49ffb4ef855da9f87ba85a59da68af9",
+   "sha1": "c6d6b7e6b41675a6b64eefb2380d7df38a438ffe",
    "counts": {
     "div.kpi-card": 1,
     "div.candidate-card.main": 1,
@@ -150,14 +150,14 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "18986379b9ea9dcfe461bfb85213e5e7c1123a91",
+   "sha1": "76e45e71513bab38df8136322c3b542dda5d2c69",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
    }
   },
   "data/cultural-misreading.html": {
-   "sha1": "91c58784954780763d363c456336d341605c59a4",
+   "sha1": "86f3f5afdcc5c72527c05724ed7fbf596988e196",
    "counts": {
     "div.kpi-card": 1
    }
@@ -176,7 +176,7 @@
    }
   },
   "data/deconstruction.html": {
-   "sha1": "4e08e85495c2dd743909495d5fa3fecf873a4c4a",
+   "sha1": "4119b78cc2965561bdb2cb8cc51fdc9cd340986c",
    "counts": {
     "div.kpi-card": 1,
     "span.tag": 5
@@ -199,14 +199,14 @@
    }
   },
   "data/emotional-heatmap.html": {
-   "sha1": "83e849f38e8e583a2cdeadc5904c5ec4847f729f",
+   "sha1": "49e94656e6c156348032decdd58d090b74fea4d9",
    "counts": {
     "div.kpi-card": 1,
     "div.scholar-card": 1
    }
   },
   "data/ethics-consumption.html": {
-   "sha1": "ecdcb358f034dd634d8e2a7001b0517d6fdc66b2",
+   "sha1": "fcf70f1316e5a692da368652e191be34b094395a",
    "counts": {
     "div.kpi-card": 1,
     "div.sev-badge.sev-extreme": 1,
@@ -216,7 +216,7 @@
    }
   },
   "data/famous-time-travel.html": {
-   "sha1": "b7dab3481c000e6b0ac060d059584cf4de512efe",
+   "sha1": "c554e3be41f58874104a0bd44fcc567b50202fa1",
    "counts": {}
   },
   "data/four-dimensional-research-network.html": {
@@ -235,7 +235,7 @@
    }
   },
   "data/game-webnovel.html": {
-   "sha1": "b9c12dff9be40d3af56caef02c49cea5bb9d5581",
+   "sha1": "6da110e554cbfdb42bfbbfd3738e6b6cc9cdae73",
    "counts": {
     "div.kpi-card": 1,
     "div.cc-stat-fill": 10,
@@ -245,7 +245,7 @@
    }
   },
   "data/global-pattern.html": {
-   "sha1": "d6325408817f3d300c985bd7e490a8cf935421cb",
+   "sha1": "f7088e4911f3af69ad8dc2caec54e2b32ae81e15",
    "counts": {
     "div.kpi-card": 1,
     "span.p-country": 1
@@ -296,7 +296,7 @@
    "counts": {}
   },
   "data/journey-geo-semiotics.html": {
-   "sha1": "959d33ab2e90bddb691da17f2b258440448a8d9d",
+   "sha1": "dd2300db59ac57ed02d6b71a283ec5a78befa20e",
    "counts": {
     "article.mech-card": 1
    }
@@ -309,7 +309,7 @@
    }
   },
   "data/journey-route.html": {
-   "sha1": "870380a969bd412041f5d97ca36cb105fe107b3d",
+   "sha1": "595b0d4ccc0c09baa51c5e6ec8a2defbc55282a4",
    "counts": {
     "div.kpi-card": 1
    }
@@ -353,7 +353,7 @@
    }
   },
   "data/magic-system.html": {
-   "sha1": "c176703a71a1f51abeb877d6e0ed32ef9fe586dc",
+   "sha1": "108d64c7f7e99b7b800a15b20aad5a037512afcd",
    "counts": {
     "div.kpi-card": 1,
     "span.intensity-bar": 1,
@@ -361,7 +361,7 @@
    }
   },
   "data/material-archaeology.html": {
-   "sha1": "ccb4c06bcffbafcf502ebdc539a08c5b4d2ec91c",
+   "sha1": "50c29281746b116b6baa44d9e42c8d51839615fc",
    "counts": {
     "div.kpi-card": 1,
     "div.artifact-card": 1,
@@ -378,7 +378,7 @@
    }
   },
   "data/methodology-matrix.html": {
-   "sha1": "793d51d4579e2930bea23d398f39f8c7f9c8e3a2",
+   "sha1": "fa062dd0f08332945eb93ecfb6a12ed1d4f6a0f8",
    "counts": {
     "div.kpi-card": 1,
     "div.quadrant-card": 1,
@@ -441,7 +441,7 @@
    }
   },
   "data/music-structure.html": {
-   "sha1": "7a30ba6a69a257218ed1bb0d5f19926510985d61",
+   "sha1": "733ba5b0cf614060cab11679aa5937fc9d8217d5",
    "counts": {
     "div.kpi-card": 1,
     "div.mv-card": 1,
@@ -450,7 +450,7 @@
    }
   },
   "data/narrative-experiment.html": {
-   "sha1": "82c96cc58a2d099ca9fa781f1a31b1fc51e2c259",
+   "sha1": "c85dbc8eb2fb3761bb902fef13dfe111e7e3199f",
    "counts": {
     "div.kpi-card": 1,
     "div.player-card": 1,
@@ -550,27 +550,27 @@
    }
   },
   "data/social-media.html": {
-   "sha1": "9d36ddc7c17b7a0f0fe8b52c23cf7e5284e0e269",
+   "sha1": "cba3964c299b185576b0f5c034d0b7d2ff25f713",
    "counts": {
     "div.kpi-card": 1,
     "div.platform-badge": 1
    }
   },
   "data/story-timeline.html": {
-   "sha1": "826ea3ca6c02bdb5a54eb2c0075672f42ad16c0e",
+   "sha1": "8321b323bfedc7d102ed1803dadf4a46b8a4f7d3",
    "counts": {
     "div.kpi-card": 1
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "84eda5cad371d89ac6109c558c44ec15e4eb2c1a",
+   "sha1": "c84bd4d31353da777b2dcbfc2b70573fc8bed02c",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
    }
   },
   "data/text-evolution.html": {
-   "sha1": "9259bdec62a3d88a5d0da37c267b464834793a7c",
+   "sha1": "9e4ff68892e9c58ff5c8e4e9922c05c440ed5687",
    "counts": {
     "div.kpi-card": 1,
     "div.evo-step.first": 6,
@@ -590,7 +590,7 @@
    }
   },
   "data/timeline.html": {
-   "sha1": "eaf4a3a49f760b9ab953c8e7dd8d999f16be42ff",
+   "sha1": "cacd4d4fca0ded04bb748a0af2b6bf5323494b8d",
    "counts": {
     "div.kpi-card": 1
    }
@@ -603,7 +603,7 @@
    }
   },
   "data/visual-art.html": {
-   "sha1": "6b262d2850498f8a470cbbeec6b7613040d9db35",
+   "sha1": "0cea3ca0e3fb00e2cab19d7b1c9bcf1c386a4b29",
    "counts": {
     "div.kpi-card": 1,
     "div.chant-card.amp-high": 1,
@@ -614,7 +614,7 @@
    }
   },
   "data/workplace.html": {
-   "sha1": "71c7889fc716886d74c5d36c9c06ae3bf2392573",
+   "sha1": "93b97bda5ceb5a8a01397d0bb1b3ef99b12621d4",
    "counts": {
     "div.kpi-card": 1,
     "span.alert-badge": 7,
@@ -651,7 +651,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "1f67e6411104be69c3b06431eba9c75fbfdd55ed",
+   "sha1": "e9370cd140b05baf9e360b50da9781e1ffa39e2d",
    "counts": {
     "button": 1
    }
@@ -663,7 +663,7 @@
    }
   },
   "index.html": {
-   "sha1": "838ca737e49c70ff955d81252f0ceaa5e2d58770",
+   "sha1": "c7b83473210096a1f3cb870b95c752fc0181507c",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1500,5 +1500,5 @@
    }
   }
  },
- "generated_at": "2026-11-08T05:14:01.871Z"
+ "generated_at": "2026-11-08T05:52:49.652Z"
 }
