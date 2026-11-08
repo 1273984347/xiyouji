@@ -1,3 +1,15 @@
+### W1178（2026-11-08）：检索假阳性判据化批（第 69 槽 · 模板结构契约）
+
+**本批要点**（用户「先把检索假阳性变成机器判据」指令）：
+
+> - **T1 两次同类实证**：W1177 `grep -c cite-block site/_template.html` 返回 7 就判「模板已有引用块」，实际 7 处全是 CSS 选择器、HTML 结构为 0 ⇒ 新页 citability C3 判红；W1175 只 grep `site/` 就断「`STATUS_TEXT` 无定义」，实为正本在 `scripts/w1167_badge_inject.py`，差点把错误结论写进方案。共同点：**检索给了个数就下结论，且结论不可复算**。
+> - **T2 新增第 69 槽 `check_template_contract.py`**：C1 模板（及 `--target` 新页）必须含四项**完整标签串**——`<div class="cite-block">` / `<div id="dataSource">` / `<meta name="description"` / `<!-- chart-degrade:`，**类名 / CSS 选择器命中一律不算证据**；C2 `--evidence KEYWORD [--scope all]` 输出命中行号、行文本与形态（结构 / CSS / 注释 / 其他），命中全是非结构时显式告警。默认只约束模板（历史页有各自合规形态，全量套新契约会误伤存量），新页由 `--post --target` 单验。
+> - **T3 机器化接入三处**：挂 `verify_delivery.py` 第 69 槽（`_StrictGate`·恒跑·毫秒级）；`new_page.py --post` 追加第 8 步「模板契约自检」；`--post` 的 `run_post` 现接收 `name` 以便 `--target`。
+> - **T4 反例自测与实证**：自测 4/4（含「只有 CSS 类无结构」反例）；实测 `--evidence cite-block` 把 727 处命中拆为 637 CSS + 90 结构并给出行号；构造「只有 `.cite-block` CSS 类」的假页 → 判红（违规 4 · 退出码 1）。E-167 自指防护：扫描面不含 `scripts/`，自测样本在内存构造不落盘；另修跨盘符 `--target` 的 `os.path.relpath` 异常回退。
+> - **T5 文档链**：`AGENTS.md` §4.2 第 69 条 + 槽数三处 68→69；`docs/agent/gates.md` 第 69 条（有序列表条目 + 文末详细定义）；`pitfalls.md` 新增 **E-212**（305→306 条·流程段 172→173）并同步 HANDOVER / puti-shouye skill 计数；`stats.py --w 1178` 刷新；第 41 槽三方编号 69/69/69、第 31 槽 0 FAIL。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1177（2026-11-08）：新增页上线自动化批（--post 一键全链路 + 模板补齐四要素）
 
 **本批要点**（用户「做」指令·W1176 四轮返工的机制化沉淀）：
@@ -1067,7 +1079,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1177），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1178），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

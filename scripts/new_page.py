@@ -93,7 +93,7 @@ def append_to_index(name: str, title: str, category: str) -> list[str]:
 PY = sys.executable
 
 
-def run_post(batch: str = "") -> int:
+def run_post(batch: str = "", name: str = "") -> int:
     """W1177：新增页全链路收尾。顺序敏感——所有改 HTML 的步骤必须在 sitemap/索引/CSP 之前。
 
     踩过的坑（W1176 四轮返工）：新页牵连 13 项门禁，逐个手跑必然漏。此处按依赖排序一次跑完：
@@ -113,6 +113,9 @@ def run_post(batch: str = "") -> int:
     if batch:
         steps.append(("统计刷新", [PY, "scripts/stats.py", "--w", batch]))
     steps.append(("色盲基线", [PY, "scripts/check_chart_colorblind.py", "--generate-baseline"]))
+    if name:
+        steps.append(("模板契约自检（第 69 槽）",
+                      [PY, "scripts/check_template_contract.py", "--target", f"site/data/{name}.html"]))
 
     total = len(steps)
     for i, (label, cmd) in enumerate(steps, 1):
@@ -169,7 +172,7 @@ def main():
 
     if args.post:
         print(f"[post] 开始新增页全链路：data/{args.name}.html")
-        rc = run_post(args.batch)
+        rc = run_post(args.batch, args.name)
         if rc != 0:
             sys.exit(rc)
 
