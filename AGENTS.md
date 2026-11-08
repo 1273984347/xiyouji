@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 67 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 68 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前按 §7 路径按需读节；更细的规则以文末「权威文档」为准。
 >
@@ -102,9 +102,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=67 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=68 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 67 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 68 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -183,6 +183,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 66. **数据徽标**（check_data_badge_coverage.py·W1167）——story-2「三态徽标 100% 覆盖+读者语言」判据化（audit-6 透明度不一致·旧「数据源：」行实测 11 种口径含 EMBEDDED 行话、1 页<!--doc-sync:exempt W1167 时点历史数-->缺失）。判据三则（88 页<!--doc-sync:exempt W1167 时点历史数-->徽标 MARK 恰一次 / data-status==正本 classify 分类（live 以接口 grep 证据、sample 以人工证据清单，零虚构分类）/ ds-label 逐字==STATUS_TEXT 防行话回潮）；同源引用 `w1167_badge_inject.py` 正本。恒跑（毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 66 门禁 数据徽标：页面 N · 违规 M · OK|FAIL ----`；自测 5 例（含态越界与行话回潮负样本）；旧 #dataSource JS 运行时槽保留不破坏（39 页<!--doc-sync:exempt W1167 时点历史数--> innerHTML 契约实证）。
 67. **统计事件契约**（check_stat_events.py·W1168）——删调用/改事件名/清单与代码漂移此前全链零红灯。清单正本 `scripts/output/_w1168_stat_events.json`（11 组 21 名）+ 判据六则：C1 slug 唯一 / C2 有清单必有落点（`file`·`files` 同等）/ C3-C4 源面与页面面反向对拍未登记名即红 / C5 metric 反向链（结构性要求·gitignore 件缺失只作 NOTE）/ C6 `runtime_layer` ∈ {bridge, goatcounter} 必填（探针按声明层取数，读错面即恒 0 假红）。恒跑·`_SCOPE_CORE`；汇总行形态同 65/66 槽；自测 10 例；运行面 `scripts/stat_event_probe.py`（P1-P7·手动跑）。
 
+68. **dashboard KPI**（check_dashboard_kpi.py·W1170）——首页 A 系列 KPI 卡片是**硬编码数字**，与 `stats.json`（`stats.py` 磁盘实算权威值）无任何联动：W1170 实测五个分项全部滞后（五个分项全部有缺口，差值从个位数到十余篇不等），且**同页自相矛盾**——上方段落文字的合计与下方卡片的对应值分属两套数字，一屏之内两组数打架。判据：C1 映射表内每个 label 前缀必须在页面找到对应卡片（防卡片被删后静默通过）；C2 卡片 `<div class="value">N</div>` 必等 `stats.json` 对应键；C3「A1-A6 共 N 篇文档」段落必等 `a1_a6_docs`。映射表刻意写死（label 改名属页面重构，届时同步改；模糊匹配会误配「A3 · 人物深化」与「A3 · 人物分析」并存的历史形态）。恒跑（读 1 HTML + 1 JSON·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 68 门禁 dashboard KPI：卡片 5 · 段落 1 · 违规 N · OK|FAIL ----`；自测 4 例。
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
@@ -330,4 +331,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1164-W1164 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-07（W1165）移动端 375px 回归：99 页普查 FAIL 84→0 / cite 样式归位 system.css / 页脚 nav 换行 / 图例与表单触摸尺寸 / 第 64 槽 5 项契约；2026-11-07（W1166）移动端收尾：页脚安全区（浮层不再遮挡「反馈」）/ 图例纯视觉项 20→32px 节奏收敛 / 第 64 槽补 A6 契约（自测 6 例）；2026-11-08（W1167）MVP 迁移：导航单组件全站分发（含 nav_click 埋点）/ 三态徽标 / 第 65·66 槽 / CSP 具名例外 + 全站重哈希 / GoatCounter+GA4 双轨 / 44px 移动机制；2026-11-08（W1168）统计单轨收敛：GA4 轨退役 / CSP 具名例外 4→1 / stats.js 全站桥 / 11 组 21 名事件落地 / 第 67 槽契约门禁 + 运行面探针 P1-P7；2026-11-08（W1169）图表触摸交互：5 页 tooltip 由 mouse* 切 pointer*（23 处）—— 按住即显示/拖动跟随/抬手隐藏。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1165-W1165 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-07（W1166）移动端收尾：页脚安全区（浮层不再遮挡「反馈」）/ 图例纯视觉项 20→32px 节奏收敛 / 第 64 槽补 A6 契约（自测 6 例）；2026-11-08（W1167）MVP 迁移：导航单组件全站分发（含 nav_click 埋点）/ 三态徽标 / 第 65·66 槽 / CSP 具名例外 + 全站重哈希 / GoatCounter+GA4 双轨 / 44px 移动机制；2026-11-08（W1168）统计单轨收敛：GA4 轨退役 / CSP 具名例外 4→1 / stats.js 全站桥 / 11 组 21 名事件落地 / 第 67 槽契约门禁 + 运行面探针 P1-P7；2026-11-08（W1169）图表触摸交互：5 页 tooltip 由 mouse* 切 pointer*（23 处）—— 按住即显示/拖动跟随/抬手隐藏；2026-11-08（W1170）dashboard KPI 对拍：5 项滞后订正（累计少 41 篇）+ 同页段落与卡片矛盾消除 + 第 68 槽对拍门禁。如与上述权威文档冲突，以权威文档为准。*
