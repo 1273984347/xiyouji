@@ -328,7 +328,9 @@ def main() -> int:
     report = run(pages, args)
     out_path = os.path.join(ROOT, args.out)
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    with open(out_path, "w", encoding="utf-8") as fh:
+    # W1173：显式 newline="\n"——Windows 文本模式默认产 CRLF。报告入库时 git 会转 LF 而工作树
+    # 留 CRLF，工作树与索引字节不一致 ⇒ batch_cascade 读工作树时 fail-closed「混合行尾」（E-11 第三种形态）。
+    with open(out_path, "w", encoding="utf-8", newline="\n") as fh:
         json.dump(report, fh, ensure_ascii=False, indent=1)
 
     c = report["summary"]["counts"]
