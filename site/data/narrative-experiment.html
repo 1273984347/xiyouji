@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lFDt2k6cUszhKaylFUFrKGBTpapehiPDLZGHv3ArG1A=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n5h57mWYAoGkUxwY2dsYqFiwhTLDXTY3d32SewJeFH4=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事实验 · 桌游与卡牌机制 · 详解西游记</title>
@@ -2210,7 +2210,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            数据源：嵌入式 fallback 数据（file:// 协议兼容）。如需加载最新 JSON，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>。
+            数据源：页面内嵌 EMBEDDED 数据（fallback）（file:// 协议兼容）。如需加载最新 JSON，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>。
         <div class="cite-block" id="citeBox">
   数据源：<code>json/board_game.json</code>、<code>json/narrative_cards.json</code>、<code>json/narrative_experiment_summary.json</code>、<code>json/story_generator.json</code>（快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
   <div class="cite-type-note"><!-- W668-T3 -->数据性质：<strong>趣味向</strong>（非学术数据·仅供阅读娱乐；学术引用请使用八十一难/对话情感/人物出场等 A 级数据集）</div>
@@ -3298,7 +3298,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 "数据源：实时加载自 <code>json/</code>（http server 模式）";
         } else {
             document.getElementById("dataSource").innerHTML =
-                "数据源：嵌入式 fallback 数据（file:// 协议兼容 · 双击 HTML 文件可直接打开）";
+                "数据源：页面内嵌 EMBEDDED 数据（fallback）（file:// 协议兼容 · 双击 HTML 文件可直接打开）";
         }
 
         const safe = (name, fn) => { try { fn(); } catch (e) { console.error("[render] " + name + ":", e.message); } };
