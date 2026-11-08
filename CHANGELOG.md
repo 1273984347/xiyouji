@@ -1,3 +1,16 @@
+### W1172（2026-11-08）：表格窄屏溢出根修批（V4 视口延伸·851 页传播）
+
+**本批要点**（V4 视口延伸·用户「继续 V1」指令期间的实测发现）：
+
+> - **T1 发现（探针覆盖面盲区暴露）**：既有移动端探针只扫 `site/data`（99 页），**从未覆盖 `site/en`（138 页）与 `site/reader`（623 页）**。本次扩展到三目录后实测：`reader/ch006` 在 **375px 下就溢出 274px**、320px 下 329px；`ch004` 94px；`en/monster-sociology` 54px。即 W1165「99 页 FAIL 84→0」的结论只对 data 目录成立，全站视角下 reader/en 的表格从未被检查过。
+> - **T2 根因（统一且单一）**：reader 模板虽定义了 `.table-wrap`（带 `overflow:auto`），但正文表格是**裸 `<table>`**，未用该容器包裹；表格按内容撑开（实测 633px），直接把文档宽度顶破。en/data 多页同类。
+> - **T3 修法（共享层一条规则）**：`system.css` 移动端块加 `table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}` —— 让表格自身成为横向滚动容器。三档实测：**375px 溢出 274→0**（表高 441 不变 ⇒ 内容未被压缩）、**768px/1280px 零变化**（断点 640 不触发）。
+> - **T4 传播**：`inline_css --force` 重同步 851 页（reader 623 + en 138 + data 89 + 根页 3），单一事实源改动一次即全站生效。
+> - **T5 验证**：375px 六页抽查（reader ch006/ch004 + en monster-sociology + data 三页）溢出**全部归零**；320px 下 reader 两页归零。
+> - **T6 遗留（已开 W1173 追踪）**：320px 极窄屏另有 4 类**个别页硬编码宽度**残留（`en/monster-sociology` 表格内部 2599px、`data/character-dynamic-network` 的 `.stage-display`、`data/global-pattern` 的 `.pilgrim-card` 170px×2 列、`data/hardship-heatmap` 的 SVG 760px）——与 table 规则不同类，需逐页诊断，已后台跑 320px 全量拿完整清单。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1171（2026-11-08）：坑表补强批（行尾形态补全 + 元教训 E-211）
 
 **本批要点**（用户「先记坑」指令·W1170 三次提交失败的教训沉淀）：
@@ -991,7 +1004,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1171），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1172），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -1,3 +1,34 @@
+## W1172 表格窄屏溢出根修批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css | W1172 | 改：移动端块加 table{display:block;overflow-x:auto}（宽表格横向滚动·断点 640） |
+| docs/00-导读/W批次编号对账表.md | W1172 | 改：W1172 认领行 |
+| scripts/output/_w1172_spec.json | W1172 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1172.txt | W1172 | 新建：级联清单 |
+| CHANGELOG.md | W1172 | 改：W1172 段落（级联） |
+| scripts/output/file-index.md | W1172 | 改：W1172 段（级联） |
+| site/（3 件） | W1172 | inline_css 副本同步（table 规则传播·_template/dukou-engine/search） |
+| site/data/（89 件） | W1172 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1172 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1172 | inline_css 副本同步（同上·W1142 分组登记） |
+| .github/workflows/README.md | W1172 | 改：区间行推进（版本面） |
+| CITATION.cff | W1172 | 改：version/date 推进（级联） |
+| README.md | W1172 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1172 | 改：版本行推进（级联） |
+| HANDOVER.md | W1172 | 改：最后更新行 + 当前进度（级联） |
+| AGENTS.md | W1172 | 改：脚注沿革滚动（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1172 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1172 | 改：逐批明细追加（W1172·级联） |
+| docs/00-导读/项目说明.md | W1172 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1172 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1172 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1172 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1172 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1172 | 改：再生成/验证缓存（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1172 | 改：级联/目录刷新产物 |
+| scripts/output/mobile_viewport_report_320.json | W1172 | 改：级联/目录刷新产物 |
+
 ## W1171 坑表补强批（2026-11-08）
 
 | 文件 | W | 说明 |
