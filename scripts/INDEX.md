@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（211）
+## 文件（212）
 
 ### Python 脚本
 
@@ -159,6 +159,7 @@
 - `check_stat_events.py`
 - `check_story_timeline_sync.py`
 - `check_structure.py`
+- `check_template_contract.py`
 - `check_token_coverage.py`
 - `check_tooltip_spacing.py`
 - `check_untracked.py`

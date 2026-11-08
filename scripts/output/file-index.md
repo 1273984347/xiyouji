@@ -1,3 +1,47 @@
+## W1178 检索假阳性判据化批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_template_contract.py | W1178 | 新建：第 69 槽 · 模板结构契约与可复算检索证据 |
+| scripts/verify_delivery.py | W1178 | 改：挂第 69 槽 _StrictGate |
+| scripts/new_page.py | W1178 | 改：--post 追加第 8 步模板契约自检（run_post 接收 name） |
+| AGENTS.md | W1178 | 改：§4.2 第 69 条 + 槽数三处 68→69 + 坑表计数 |
+| docs/agent/gates.md | W1178 | 改：第 69 条（有序列表 + 详细定义）+ 标题槽数 |
+| pitfalls.md | W1178 | 改：新增 E-212 + 流程段 172→173 |
+| HANDOVER.md | W1178 | 改：槽数/坑表计数 + 最后更新行（级联） |
+| .agent/skills/puti-shouye/SKILL.md | W1178 | 改：坑表计数 305→306 |
+| docs/00-导读/W批次编号对账表.md | W1178 | 改：W1178 认领行 |
+| scripts/output/_w1178_spec.json | W1178 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1178.txt | W1178 | 新建：级联清单 |
+| CHANGELOG.md | W1178 | 改：W1178 段落（级联） |
+| scripts/output/file-index.md | W1178 | 改：W1178 段（级联） |
+| .github/workflows/README.md | W1178 | 改：区间行推进（版本面） |
+| CITATION.cff | W1178 | 改：version/date 推进（级联） |
+| README.md | W1178 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1178 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1178 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1178 | 改：逐批明细追加（W1178·级联） |
+| docs/00-导读/项目说明.md | W1178 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1178 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1178 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1178 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1178 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1178 | 改：再生成/验证缓存（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1178 | 改：级联/目录刷新产物 |
+| archive/scripts/batches/w1176/INDEX.md | W1178 | 改：级联/目录刷新产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1178 | 改：级联/目录刷新产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1178 | 改：级联/目录刷新产物 |
+| pytest.ini | W1178 | 改：级联/目录刷新产物 |
+| scripts/INDEX.md | W1178 | 改：级联/目录刷新产物 |
+| scripts/output/stats-changelog.json | W1178 | 改：级联/目录刷新产物 |
+| scripts/output/stats-index.md | W1178 | 改：级联/目录刷新产物 |
+| site/data/cross-time-danmaku.html | W1178 | 改：级联/目录刷新产物 |
+| site/data/tag-cloud.html | W1178 | 改：级联/目录刷新产物 |
+| site/dukou-engine.html | W1178 | 改：级联/目录刷新产物 |
+| site/index.html | W1178 | 改：级联/目录刷新产物 |
+| site/data/search.html | W1178 | 改：索引重生成产物 |
+| site/en/search.html | W1178 | 改：索引重生成产物 |
+
 ## W1177 新增页上线自动化批（2026-11-08）
 
 | 文件 | W | 说明 |

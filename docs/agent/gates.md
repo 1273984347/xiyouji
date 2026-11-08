@@ -1,4 +1,4 @@
-# 交付门禁体系全量定义（68 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽·W768 补第 44 槽·W780 补第 45 槽·W809 补第 46 槽·W849 补第 47 槽·W860 补第 48 槽·W883 补第 49 槽·W961 补第 50 槽·W1045 补第 51/52 槽入标题并订正槽数 50 → 52·W1110 补第 54/55/56 槽并订正槽数 53 → 56·W1165 补第 64 槽并订正槽数·W1167 补第 65/66 槽并订正槽数 64 → 66·W1168 补第 67 槽并订正槽数 66 → 67）
+# 交付门禁体系全量定义（69 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽·W768 补第 44 槽·W780 补第 45 槽·W809 补第 46 槽·W849 补第 47 槽·W860 补第 48 槽·W883 补第 49 槽·W961 补第 50 槽·W1045 补第 51/52 槽入标题并订正槽数 50 → 52·W1110 补第 54/55/56 槽并订正槽数 53 → 56·W1165 补第 64 槽并订正槽数·W1167 补第 65/66 槽并订正槽数 64 → 66·W1168 补第 67 槽并订正槽数 66 → 67·W1170 补第 68 槽·W1178 补第 69 槽并订正槽数 68 → 69）
 
 > **📖 阅读契约（W709）**：查表型——改 site/、加门禁、动 verify_delivery.py 时按编号查；每条含完整口径与历史实证；编号与 AGENTS §4.2 摘要一一对应。
 > **何时读**：门禁失败要懂原因 / 新增门禁要挂槽 / 复核某条防线范围。**读完你应该能**：说出任一槽位拦什么、豁免与基线在哪。
@@ -125,6 +125,28 @@
 67. **统计事件契约**（check_stat_events.py，W1168 挂载·统计单轨收敛批）：**病根**——埋点面此前只有「人工读 `spark-output/metric.json`」一条判断路径：删掉一处 `XYstats.count(...)`、把事件名改成同义词、或清单与代码各说各话，页面照常渲染、CSP 照常绿、六文档照常同步 ⇒ 零红灯（W1167 双轨期实证：手工剥壳后 `nav_click` 声明式属性静默消失，靠人工对比才发现）；GA4 轨退出后具名例外域从 4 收缩为 1，「哪些域允许出现」同样需要单一正本而非散落的注释。**判据五则**（真值 import 清单正本 `scripts/output/_w1168_stat_events.json` + `w1167_nav_inject.py` / `w1167_badge_inject.py` / `generate_csp.py`，引用不复制）：C1 事件名 slug 合法且全局唯一（重名即两个落点面无法区分）；C2 清单每项必须有落点，`files`（多页逐个）与 `file`（单页）两形态同等对待，落点缺失即红；C3 源面反向对拍——自有 `.py` 只看声明式属性、`.js` 另加 `.count('name')` 调用形态；模板串（含 `{}`/`%`/`$`/反引号）、vendor（`*.min.js`、d3、three）、判据与探针自身（`check_*`、`*probe*`）排除在发射面外，出现**未登记事件名即红**；C4 页面面（HTML 内联属性）同等对拍；C5 结构性要求：`spark-output/context/metric.json` 可读时逐条对名（不在清单降 NOTE），**不可读不判红**——首版把「该 gitignore 件存在」当硬判据，CI 侧恒 fail-closed 变红，属判据自身失效。C6 运行层必填且合法：`runtime_layer` ∈ `RUNTIME_LAYERS`（`bridge` / `goatcounter`）——运行面探针据此选读取层；W1168 实测探针按猜测只读桥层，而 `reset_view` 由 `data-goatcounter-click` 走计数入口层 ⇒ 接线完好而事件恒 0，「读哪一层」因此升格为清单必填面（合法集定义在 `check_stat_events.py`，探针 import 引用不复制）。**单轨纪律**：`data-goatcounter*=` 只允许出现在 `ANALYTICS v2` 块与正本注入器内（`check_no_goatcounter.py` 由「存在即红」重指向为「必须等于具名例外全集」），写入口唯一防手工散点埋点。汇总行恒为 `---- 第 67 门禁 统计事件契约： 组 N · 事件名 M · 违规 K · OK|FAIL ----`（形态沿用 65/66 槽，不另造第四种格式——多一种形态就多一处 marker 与人工读数的漂移面）；退出码 0/1/2（清单正本不可读=fail-closed）；单测 `tests/unit/test_w1168_stat_events.py`。恒跑（`_SCOPE_CORE`·静态扫描秒级）。运行面证据在 `scripts/stat_event_probe.py`（P1–P7·批收尾手动跑，不进 pre-commit）。
 
 68. **dashboard KPI**（check_dashboard_kpi.py，W1170 挂载·V1「现有页面内容深化」首批）：**病根**——`site/dashboard.html` 的 A 系列 KPI 卡片是硬编码数字，与 `scripts/output/stats.json`（`scripts/stats.py` 磁盘实算的权威值）无任何联动，改动后只能靠人记得同步。W1170 实测 **5 项全部滞后、累计少 41 篇**：A2 43/44、A3 199/215、A4 199/209、A5 22/35、A6 12/13；更严重的是**同页自相矛盾**——上方段落文字写「A2 个人随笔 44 篇 + A3 人物分析 215 篇 + A4 主题专题 209 篇」，下方卡片却写 43/199/199，同一屏内两组数字打架（读者无法判断哪组可信）。
+69. **模板结构契约**（check_template_contract.py·W1178）——把「检索假阳性」判据化：模板（及 `--target` 新页）必须含四项**完整标签串**（`<div class="cite-block">` / `<div id="dataSource">` / `<meta name="description"` / `<!-- chart-degrade:`），类名/CSS 命中不算证据；`--evidence KEYWORD` 输出行号 + 上下文 + 形态，只有非结构命中时告警。详见文末「第 69 槽 · 详细定义」。恒跑·`_SCOPE_CORE`·自测 4 例。
    **判据**（C1/C2/C3）：C1 **卡片存在性**——映射表内每个 label 前缀必须在页面找到对应 KPI 卡片，缺失即红（防卡片被删或 label 改名后静默通过）；C2 **数值一致**——卡片 `<div class="value">N</div>` 必须等于 `stats.json` 对应键的 value；C3 **段落合计**——`A1-A6 共 N 篇文档` 的 N 必须等于 `a1_a6_docs`。
    **映射表刻意写死**（label 前缀 → stats 键）：label 文案变更属页面重构，届时同步改此处；不做模糊匹配——「A3 · 人物深化」与「A3 · 人物分析」曾在同仓并存，模糊匹配会误配。
    汇总行恒为 `---- 第 68 门禁 dashboard KPI：卡片 5 · 段落 1 · 违规 N · OK|FAIL ----`；退出码 0/1/2（分母缺失 fail-closed）；自测 4 例（全一致放行 / 单项滞后必红 / 卡片缺失必红 / 段落合计失配必红）。恒跑（读 1 HTML + 1 JSON·毫秒级·`_SCOPE_CORE`）。
+
+### 第 69 槽 · 模板结构契约详细定义（check_template_contract.py · W1178）
+
+**起因（检索假阳性两例）**：W1177 用 `grep -c cite-block site/_template.html` 得到 7 就判定
+「模板已有引用块」，实际那 7 处全是 CSS 选择器（`.cite-block` / `.cite-item` / …），HTML 结构 0
+⇒ 新页 citability C3 判红；W1175 只 grep `site/` 就断言「`STATUS_TEXT` 无定义」，实为正本在
+`scripts/w1167_badge_inject.py`。两者共同点：**检索给了个数就下结论，且结论不可复算**。
+
+**判据**：
+- C1 结构存在性——模板必须含四项**完整标签串**：`<div class="cite-block">`（第 28 槽 C3）、
+  `<div id="dataSource">`（C1/C2/C4 扫描锚点）、`<meta name="description"`（第 26 槽 R1）、
+  `<!-- chart-degrade:`（第 30 槽）。**类名 / CSS 选择器命中一律不算证据**。
+  `--target site/data/xxx.html` 时连同新页一起验（`--post` 的第 8 步）。
+- C2 检索可复算——`--evidence KEYWORD [--scope all]` 输出命中行号、行文本与形态
+  （结构 / CSS / 注释 / 其他）；命中全是非结构时显式告警「类名不构成结构存在的证据」。
+- 默认只约束模板：历史页有各自的合规形态，全量套新契约会误伤存量。
+
+**边界**：扫描面严格限定 `site/_template.html` + `site/data/*.html`（`--evidence --scope all`
+可扩到 `scripts/`），不含脚本自身——E-167「守卫不能把自己判红」。自测反例在内存构造，
+不落盘。恒跑（读 1–2 个 HTML·毫秒级·`_SCOPE_CORE`）；自测 4 例。
+汇总行恒为 `---- 第 69 门禁 模板契约：契约 4 项 · 违规 N · OK|FAIL ----`。

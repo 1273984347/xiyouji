@@ -125,6 +125,7 @@ EXPECTED_SECTION_NAMES = [
     "导航一致性",
     "数据徽标",
     "统计事件契约",
+    "模板结构契约",  # W1178：第 69 槽·恒跑——读 1 HTML·毫秒级
     "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON·毫秒级
 ]
 
@@ -220,6 +221,7 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "导航一致性",  # W1167：恒跑——audit-1 major 判据化，859 页静态扫描毫秒级，与改动范围无关
     "数据徽标",  # W1167：恒跑——story-2 AC1/AC3 判据化，88 页静态扫描毫秒级
     "统计事件契约",  # W1168：恒跑——事件清单↔发射面双向对拍与改动范围无关（静态扫描·秒级）
+    "模板结构契约",  # W1178：第 69 槽·恒跑——读 1 HTML·毫秒级
     "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON 逐项对拍·毫秒级
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
@@ -1186,6 +1188,18 @@ _STRICT_GATES = [
     # W1170（V1 首批）：首页 KPI 卡片与 stats.json 权威值对拍——实测 5 项全部滞后（累计少 41 篇）
     # 且同页段落文字与卡片自相矛盾（文字 44/215/209 vs 卡片 43/199/199）。硬编码数字无联动机制，
     # 本项目按「读 1 HTML + 1 JSON」毫秒级恒跑，防再滞后。
+    # W1178：把「检索假阳性」变成机器判据——类名/CSS 命中不等于结构存在。
+    # W1177 实证：grep -c cite-block = 7 全是 CSS 选择器，HTML 结构 0，新页 C3 判红。
+    _StrictGate(
+        section="模板结构契约",
+        script="check_template_contract.py",
+        timeout=60,
+        marker="---- 第 69 门禁 模板契约：",
+        crash_msg="模板契约槽执行异常（第 69 槽·crash 即拦）: %s",
+        fail_msg="模板结构契约违规（本批新增第 69 槽）",
+        marker_msg="模板契约槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="模板结构契约门禁通过（%s）",
+        ok_line=-1,    ),
     _StrictGate(
         section="dashboard KPI",
         script="check_dashboard_kpi.py",
