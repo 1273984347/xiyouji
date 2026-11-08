@@ -1,3 +1,36 @@
+## W1179 变更类型→必跑清单批（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/agent_start.py | W1179 | 改：--task 输出四类必跑清单 + --checklist/--checklist-selftest；changed_entries 保留状态码；current_batch_w 与 next_batch_w 分离 |
+| scripts/verify_delivery.py | W1179 | 改：_SCOPE_CORE 注释恒跑段计数 19→20（第 69 槽已入恒跑） |
+| AGENTS.md | W1179 | 改：§7 第 0 步补 W1179 必跑清单用法 |
+| docs/00-导读/W批次编号对账表.md | W1179 | 改：W1179 认领行 |
+| scripts/output/_w1179_spec.json | W1179 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1179.txt | W1179 | 新建：级联清单 |
+| CHANGELOG.md | W1179 | 改：W1179 段落（级联） |
+| scripts/output/file-index.md | W1179 | 改：W1179 段（级联） |
+| site/data/search.html | W1179 | 改：搜索索引重生成（AGENTS 文档改动·第 46 槽） |
+| site/en/search.html | W1179 | 改：搜索索引重生成（同上） |
+| .github/workflows/README.md | W1179 | 改：区间行推进（版本面） |
+| CITATION.cff | W1179 | 改：version/date 推进（级联） |
+| README.md | W1179 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1179 | 改：版本行推进（级联） |
+| HANDOVER.md | W1179 | 改：最后更新行 + 当前进度（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1179 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1179 | 改：逐批明细追加（W1179·级联） |
+| docs/00-导读/项目说明.md | W1179 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1179 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1179 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1179 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1179 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1179 | 改：再生成/验证缓存（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1179 | 改：级联/目录刷新产物 |
+| site/data/cross-time-danmaku.html | W1179 | 改：级联/目录刷新产物 |
+| site/data/tag-cloud.html | W1179 | 改：级联/目录刷新产物 |
+| site/dukou-engine.html | W1179 | 改：级联/目录刷新产物 |
+| site/index.html | W1179 | 改：级联/目录刷新产物 |
+
 ## W1178 检索假阳性判据化批（2026-11-08）
 
 | 文件 | W | 说明 |
