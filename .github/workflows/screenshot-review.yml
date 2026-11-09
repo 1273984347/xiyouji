@@ -152,7 +152,7 @@ jobs:
       - name: Install Playwright
         if: steps.scope.outputs.needed == 'true'
         run: |
-          npm install playwright @playwright/test
+          npm install playwright@1.63.0 @playwright/test@1.63.0  # W1194：钉版（对齐 scripts/package-lock.json·W913 口径）
           npx playwright install --with-deps chromium
 
       - name: Detect unwrapped tables (baseline diff, blocking on new entries)
@@ -335,7 +335,7 @@ jobs:
       - name: Install Playwright
         if: steps.scope.outputs.run != 'false'
         run: |
-          npm install playwright @playwright/test
+          npm install playwright@1.63.0 @playwright/test@1.63.0  # W1194：钉版（对齐 scripts/package-lock.json·W913 口径）
           npx playwright install --with-deps chromium
 
       - name: Start local server (site/ as root)

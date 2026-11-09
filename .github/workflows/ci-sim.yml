@@ -45,7 +45,7 @@ jobs:
       #    Pillow / markdown / jieba），只装 pytest 会让收集期报错
       - name: Install test dependencies
         run: |
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade "pip==26.3"  # W1194：钉版（Scorecard Pinned-Dependencies 判 pip 自身未固定）
           python -m pip install -r scripts/requirements.txt
 
       - name: CI-side simulation

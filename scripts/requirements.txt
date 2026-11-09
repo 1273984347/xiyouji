@@ -6,7 +6,10 @@ jieba==0.42.1
 # W1191 复核（2026-11-09）：GitHub Dependabot 仍列 37 条 Pillow/pillow 告警，但逐条核对 vulnerable_version_range 全为「< 13.0.0」或「<= 12.3.0」，
 # 而本行已钉 13.0.0（= advisory 的 first_patched_version）⇒ 判定为**告警未随清单变更重算**（stale 状态），非真实未修；
 # 本注释变更即用于触发 Dependabot 对本清单重新解析（不改钉版·不改依赖面），并在告警面板留下复核证据。
-Pillow==13.0.0
+# W1193 复核（2026-11-09）：W1191 的纯注释变更**未触发**重算（告警 updated_at 仍停在 2026-10-24）⇒ 改用
+# 依赖名大小写归一（PyPI 名大小写不敏感，安装与导入行为零变化）制造**依赖行实质变更**以触发重新解析；
+# 钉版仍为 13.0.0（= 全部 advisory 的 first_patched_version），依赖面不变。
+pillow==13.0.0
 # W758：markdown 为 build_reader.py 渲染依赖（CI 首跑暴露本地有装而未登记→第 42 门禁可导入性必红）
 markdown==3.10.2
 
