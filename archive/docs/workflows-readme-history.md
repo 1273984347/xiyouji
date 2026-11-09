@@ -39,3 +39,5 @@
 + W1190 CI 周级联网扫描根修：脚本 --api 匿名兜底 + workflow 注入 token·无 workflow 结构改动）。
 + W1191 GitHub Security and quality 全清：三面板告警 + Scorecard 治理 + 存量红灯清偿·无 workflow 结构改动）。
 + W1192 PR #150 五个失败 job 的根因全修：暗色门禁断言域同源 + CodeQL #120 + CHANGELOG 4 断链 + E2E 事件族 + evals 语料·无 workflow 结构改动）。
++ W1193 面板残余收口：minimatch 2 条真告警真修 + Pillow 41 条 stale 源头触发重算 + Scorecard 投影复查·无 workflow 结构改动）。
++ W1194 Scorecard 告警真项收口：7 处安装命令钉版 + 2 处写权限最小化 + 镜像 digest 机器判据与 CI 取值·无 workflow 结构改动）。

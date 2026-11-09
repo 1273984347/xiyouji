@@ -1,3 +1,77 @@
+## W1194 Scorecard 告警真项收口批（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W1194 | 改：pip-audit 钉 2.10.1 + black/mypy 钉 26.10.1/2.4.1 |
+| .github/workflows/security.yml | W1194 | 改：pip-audit 钉 2.10.1 + 新增 docker-pin job（打印期望 digest + 跑严格判据） |
+| .github/workflows/perf.yml | W1194 | 改：@lhci/cli 由 0.13.x 钉精确版 0.13.0 |
+| .github/workflows/screenshot-review.yml | W1194 | 改：两处 playwright/@playwright/test 钉 1.63.0 |
+| .github/workflows/ci-sim.yml | W1194 | 改：pip 自身钉版 26.3 |
+| .github/workflows/stale.yml | W1194 | 改：删 job 级多余 contents: write（权限最小化） |
+| .github/workflows/release.yml | W1194 | 改：顶层 contents: write 收窄为 contents: read + 仅 release job 级提权 |
+| scripts/check_docker_pin.py | W1194 | 新建：Dockerfile 基础镜像 digest 钉版守卫（5 例负样本自证） |
+| docs/00-导读/W批次编号对账表.md | W1194 | 改：W1194 认领行 |
+| docs/11-方案报告/README.md | W1194 | 改：§六 登记 T94（登记号 108） |
+| docs/11-方案报告/计划方案/T94-任务计划执行与经验沉淀报告-2026-11-09.md | W1194 | 新建：Scorecard 告警真项收口报告 |
+| scripts/output/_w1194_spec.json | W1194 | 新建：本批 spec |
+| .github/workflows/ci.yml | W1194 | 改：pip-audit 钉 2.10.1 + black/mypy 钉 26.10.1/2.4.1 |
+| .github/workflows/security.yml | W1194 | 改：pip-audit 钉 2.10.1 + 新增 dependency-pin job（打印期望 digest + 跑两道钉版判据） |
+| .github/workflows/perf.yml | W1194 | 改：@lhci/cli 由 0.13.x 钉精确版 0.13.0 |
+| .github/workflows/screenshot-review.yml | W1194 | 改：两处 playwright/@playwright/test 钉 1.63.0 |
+| .github/workflows/ci-sim.yml | W1194 | 改：pip 自身钉版 26.3 |
+| .github/workflows/stale.yml | W1194 | 改：删 job 级多余 contents: write（权限最小化） |
+| .github/workflows/release.yml | W1194 | 改：顶层 contents: write 收窄为 contents: read + 仅 release job 级提权 |
+| scripts/check_docker_pin.py | W1194 | 新建：Dockerfile 基础镜像 digest 钉版守卫（5 例负样本自证） |
+| scripts/check_install_pins.py | W1194 | 新建：workflow 安装命令钉版守卫（9 例负样本自证） |
+| docs/11-方案报告/计划方案/T94-任务计划执行与经验沉淀报告-2026-11-09.md | W1194 | 新建：Scorecard 告警真项收口报告 |
+| scripts/output/_w1194_spec.json | W1194 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1194.txt | W1194 | 新建：级联清单 |
+
+## W1193 Security and quality 面板残余收口批（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/package.json | W1193 | 改：加 minimatch 精确版本选择器 override（>=9.0.0 <11.0.1 → ^11.0.5） |
+| scripts/package-lock.json | W1193 | 改：lock 同步（minimatch 10.2.6 → 11.0.5） |
+| scripts/requirements.txt | W1193 | 改：Pillow 依赖名大小写归一（触发 Dependabot 重算·钉版 13.0.0 不变） |
+| xiyouji-desktop/package.json | W1193 | 改：加 minimatch 精确版本选择器 override |
+| xiyouji-desktop/package-lock.json | W1193 | 改：lock 同步（minimatch 9.0.9 / 10.2.6 → 11.0.5） |
+| docs/00-导读/W批次编号对账表.md | W1193 | 改：W1193 认领行 |
+| docs/11-方案报告/README.md | W1193 | 改：§六 登记 T93（登记号 107） |
+| docs/11-方案报告/计划方案/T93-任务计划执行与经验沉淀报告-2026-11-09.md | W1193 | 新建：面板残余收口报告 |
+| scripts/output/_w1193_spec.json | W1193 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1193.txt | W1193 | 新建：级联清单 |
+| CHANGELOG.md | W1193 | 改：W1193 段 + W1194 段（级联·两批共用） |
+| scripts/output/file-index.md | W1193 | 改：W1193 段 + W1194 段（级联·两批共用） |
+| HANDOVER.md | W1193 | 改：最后更新行 + 当前进度（级联） |
+| CITATION.cff | W1193 | 改：version/date 推进（级联） |
+| README.md | W1193 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1193 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1193 | 改：版本面推进（级联） |
+| AGENTS.md | W1193 | 改：版本脚注推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1193 | 改：脚注沿革滚动（级联） |
+| .github/workflows/README.md | W1193 | 改：区间行推进（版本面） |
+| archive/docs/workflows-readme-history.md | W1193 | 改：逐批明细追加（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1193 | 改：迁入 W1132-W1133 两行（台账正本段数回体积窗 60） |
+| site/index.html | W1193 | 改：页脚版本戳推进（级联） |
+| site/data/cross-time-danmaku.html | W1193 | 改：页脚版本戳推进（级联） |
+| site/data/tag-cloud.html | W1193 | 改：页脚版本戳推进（级联） |
+| site/dukou-engine.html | W1193 | 改：页脚版本戳推进（级联） |
+| site/data/search.html | W1193 | 改：搜索索引刷新 + CSP meta 重哈希 |
+| site/en/search.html | W1193 | 改：搜索索引刷新 + CSP meta 重哈希 |
+| scripts/output/stats.json | W1193 | 改：stats 刷新（级联） |
+| scripts/output/stats-changelog.json | W1193 | 改：stats 变更记录刷新（级联） |
+| scripts/output/stats-index.md | W1193 | 改：stats 索引刷新（级联） |
+| scripts/output/tools-inventory.md | W1193 | 改：工具清单刷新（gen_folder_docs） |
+| scripts/output/_vermilion_solid_cache.json | W1193 | 改：朱砂实底缓存 sha1 跟随页面改动刷新 |
+| pytest.ini | W1193 | 改：pytest collected 计数标记跟随 stats 实算（新增 2 个守卫脚本） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1193 | 改：stats 实体标记跟随（级联） |
+| docs/INDEX.md | W1193 | 改：docs 目录索引重建（docs_index.py） |
+| scripts/INDEX.md | W1193 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/output/INDEX.md | W1193 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1193 | 改：目录文档刷新（gen_folder_docs） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1193 | 改：stats 实体标记跟随（级联） |
+
 ## W1192 CI 五处红灯清偿批（2026-11-09）
 
 | 文件 | W | 说明 |
