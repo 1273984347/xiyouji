@@ -11,13 +11,14 @@
 
 - （无）
 
-## 文件（11）
+## 文件（12）
 
 ### 数据与配置
 
 - `ci-sim.yml`
 - `ci.yml`
 - `dependency-review.yml`
+- `fuzz.yml`
 - `pages.yml`
 - `perf.yml`
 - `release.yml`

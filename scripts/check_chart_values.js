@@ -951,10 +951,11 @@ function baselineLines(judged, snapshot, census) {
     '# 第 43 门禁 · 可视化数据断言基线（W753 建立·存量缺口冻结）',
     `# 生成：${snapshot} · 页数 ${judged.length} · 每页 ${ITEMS.length} 项 = ${judged.length * ITEMS.length} 行`,
     '# 生成命令：node scripts/check_chart_values.js --generate-baseline',
-    '# 格式：page|item|measured|status    status ∈ ok | fail:<reason> | na:<reason>',
+    '# 格式：page|item|measured|status    status ∈ ok | fail:<reason> | na:<reason>（na = 判据对该页不适用/缺覆盖，计入缺口报告）',
     '# 语义：违规集合单调不增——本文件内 fail 为冻结存量（WARN 冻结·不算 FAIL）；',
     '#       基线外新增/回归 = FAIL 阻断；冻结项图元数跌破基线 50% = 恶化 FAIL；',
     '#       fail→ok 或 fail→na = 可收紧（提示删/改行）；基线文件缺失 = 拒绝通过（fail-closed）。',
+    '# 判据口径：V1 无 pageerror / V2 图表容器非空 / V3 数据量级自洽 / V4 KPI 可复算 / V5 数据源四要素（第 28 门禁口径·缺口）',
     `# 阈值：v3MinDataN=${TH.v3MinDataN} v3Ratio=${TH.v3Ratio} chartMin=${TH.chartMinW}x${TH.chartMinH} worsenFactor=${TH.v3WorsenFactor}`,
     `# 普查分布：${census}`,
   ];

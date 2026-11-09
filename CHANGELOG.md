@@ -1,3 +1,29 @@
+### W1191（2026-11-09）：GitHub「Security and quality」全清批
+
+**本批要点**（用户「把 GitHub 上面的 Security and quality 里面的所有问题一并解决」·全部读数来自 GitHub REST API 实查）：
+
+> - **T1 摸底（三张面板）**：Dependabot 65 条（open 47 / fixed 18）、Code scanning 95 条（open 26 / fixed 17 / dismissed 52）、仓库安全配置 3 项缺口（Dependabot alerts 关、private vulnerability reporting 关、secret scanning validity checks 关）。
+> - **T2 判定（多数告警实为「已修未推送」）**：open 26 条里 15 条 Scorecard `PinnedDependenciesID` + 2 条 `TokenPermissionsID` 在本地早已修复（全部 action 钉 40-hex SHA、release/stale 已加 `permissions`），症结是**本地 main 领先 origin/main 64 个提交、全部未推送** ⇒ 推送即消；Dependabot 37 条 Pillow/pillow 的 vulnerable range 全为 `< 13.0.0` 而清单已钉 13.0.0 ⇒ stale 告警，requirements.txt 留复核痕以触发重算。
+> - **T3 真待办与处置**：① 6 条 `py/bad-tag-filter` 全在 `archive/scripts/batches/` 归档脚本，四条实证判为假阳性（该正则是「选取 `<script>` 块」而非剥标签；输入为本仓自产 HTML 且 861 页大小写敏感扫描 `<SCRIPT` 命中 0；输出非 HTML；归档位已被 ruff 与 CI 排除）⇒ 按仓内既有 28 条同族口径以 `won't fix` 关闭，open 26→20；② 仓库安全配置：Dependabot alerts 开启、private vulnerability reporting 开启（`PATCH` 返 404·改 `PUT` 成功）、secret scanning validity checks 平台侧对本 public + 个人账户仓不可用（记为已知限制）；③ Scorecard 4 项治理（CII / CodeReview / Fuzzing / Vulnerabilities：CODEOWNERS + README 徽章 + SECURITY.md 披露流程 + Jazzer/fast-check 双层 fuzz 与 CI）；④ 依赖版本对齐（electron 44.9.1、fast-uri 3.1.9、qs 6.17.1，npm audit 0 vulnerabilities）。
+> - **T4 连带清偿存量 CI 红灯 7 条**（推 main 前必须全绿，否则 Unit Tests 必红）：AGENTS 正本体积 51273 B > 48KB 预算 ⇒ §4.2 五条槽摘要下放至 gates.md（51273→46702 B）；台账 61 数据行 > 窗口 60 ⇒ 归档 3 行至 58 行；glossary 新页未入可视化基线与朱砂实底面；`scripts/verify_delivery.py:1604` 的跨行高危正则；统计事件 `--check` 断言；三处口径数字漂移（速查 A5 35→42、文档规范 71→75 段、启动 Prompt 616/88/89→623/89/90）。
+> - **T5 附带**：CodeQL action v3 → v4（GitHub 公告 2026-12 弃用·钉 `33d7b85da1a04171e211befe2c739303b9a4c066`·存在性实测通过）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+
+### W1190（2026-11-09）：CI 周级联网扫描根修批（Workflow Lint 每周 schedule 必红的两层根因）
+
+**本批要点**（用户「检查一下 Workflow Lint 失败」·GitHub run #42605193188 实证·`unrecognized arguments: --ci`·退出码 2）：
+
+> - **T1 失败本体**：schedule 触发的「Workflow YAML parseable」job 里，「Action refs 存在性扫描（联网·周级/手动）」一步失败；其前的 YAML 全量解析与 40-hex 形态判据均通过。**不阻塞 PR**（main 分支 required checks 仅 `Delivery Gate (verify_delivery.py)` 与 `Unit Tests (pytest)`），但周级门禁面每次必红并掩盖真实信号。
+> - **T2 根因一（远端缺参）**：远端 `scripts/check_action_refs.py` 无 `--ci` 参数，而远端 workflow 已传 `--api --ci` ⇒ argparse 直接退出码 2。修复其实早在 W1155（本地 commit `5ebb587d`），但**本地 main 领先 origin/main 64 个提交、全部未推送** ⇒ 远端每周一 03:00 UTC 必然复现同一失败。
+> - **T3 根因二（脚本与 workflow 矛盾·此前无人修）**：脚本入口对 `--api` **强制要求 token**，无 token 即退出码 2；而 workflow 注释明写「刻意不带 token：目标仓库均为 public，匿名读即可」⇒ **即便把 64 个提交全部推送，周级扫描仍是红的**（实测 `py -3 scripts/check_action_refs.py --api --ci` → 退出码 2）。这是典型「补丁加补丁」：只补参数缺失、没碰能力矛盾。
+> - **T4 两侧同修**：① 脚本新增 `api_auth_decision()`——无 token 不再立即失败，改走匿名（实测匿名读 public 仓库 commit 返回 HTTP 200）；匿名限流归入「无法判定」，`--ci` 模式降级 WARN 不阻断，不带 `--ci` 仍 fail-closed。② workflow 联网步注入 `GH_TOKEN: ${{ github.token }}`（实测匿名配额 60 次/小时 < 本步最坏 84 次请求 ＝ 14 ref × 2 endpoint × 3 次重试；认证后 5000 次/小时）。
+> - **T5 验证与负样本锁**：脚本自测 8/8 通过（新增 N7「无 token 判为可继续」+ N8「入口不早退」）；**变异自证 2/2**——mutant A「入口早退」被 N8 专属咬红、mutant B「认证判定拒绝」被 N7 专属咬红，证明两把锁都不是假锁；`check_changed.ps1` 四档全绿；全量 workflow YAML 12/12 可解析。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+
 ### W1189（2026-11-09）：集成连通：A5 文化背景系列 ↔ 角色/器物文档 双向补链
 
 **本批要点**（用户「继续」· A2 人物深度分析经核查已饱和：216 篇且含女性主义理论子簇 W173/W224/W237/W240/W242，「A3 人物深化」作为新内容方向属假缺口；遂转做真实缺口「集成连通」· 用户的头号优先级）：
@@ -1229,7 +1255,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1189），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1191），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

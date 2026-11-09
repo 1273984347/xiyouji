@@ -1601,7 +1601,13 @@ def _gate_sitemap(ctx):
         locs = set()
         for m in re.finditer(r"<loc>([^<]+)</loc>", sm_txt):
             u = m.group(1).strip().rstrip("/")
-            u = re.sub(r"^https?://[^/]+/", "", u)
+            # 剥 scheme+host 前缀：与原 `re.sub(r"^https?://[^/]+/", "", u)` 语义等价
+            # （host 取首个 "/" 之前；host 为空或其后无 "/" 时原样返回），
+            # 但不用正则——`[^/]+` 可跨行匹配且替换为空串 ⇒ 会被「跨行改写」守卫判为高危真删。
+            if u.startswith(("http://", "https://")):
+                parts = u.split("/", 3)          # ["https:", "", host, rest]
+                if len(parts) == 4 and parts[2]:
+                    u = parts[3]
             u = u[len("xiyouji/") :] if u.startswith("xiyouji/") else u
             locs.add(u if u else "index.html")
         actual = set()
