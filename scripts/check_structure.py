@@ -33,7 +33,10 @@ def iter_html(root):
 
 
 def check_css_balance(css):
-    """返回 (括号深度终态, 首个负深行号, 未闭合字符串, 未闭合注释)。"""
+    """返回 (括号深度终态, 首个负深行号, 未闭合字符串, 未闭合注释)。
+
+    W1155（深度审计 #10）：原实现只平衡 ()；{} 与 [] 完全不检查 ⇒ 缺右花括号/
+    方括号零红灯。三种括号统一走同一深度计数（CSS 内嵌场景无嵌套歧义）。"""
     depth = 0
     in_str = None
     esc = False
@@ -62,9 +65,9 @@ def check_css_balance(css):
                 i += 1
             elif c in "'\"":
                 in_str = c
-            elif c == "(":
+            elif c in "([{":
                 depth += 1
-            elif c == ")":
+            elif c in ")]}":
                 depth -= 1
                 if depth < 0 and first_neg is None:
                     first_neg = line
@@ -111,7 +114,12 @@ def main():
             seen.add(key)
             print("[FAIL] %s %s" % (rel, msg))
         sys.exit(1)
-    print("OK    CSS 结构平衡通过（%d 文件 · %d 个 style 块）" % (sum(1 for _ in iter_html(SITE)), style_count))
+    files_n = sum(1 for _ in iter_html(SITE))
+    if files_n == 0 or style_count == 0:
+        # W1155（深度审计 #10）：扫描面 0 文件/0 style 块时原实现仍打印 OK exit 0（空面假绿）。
+        print("FAIL 扫描面为空（文件 %d / style 块 %d）——判据不可执行即红" % (files_n, style_count))
+        sys.exit(1)
+    print("OK    CSS 结构平衡通过（%d 文件 · %d 个 style 块）" % (files_n, style_count))
     sys.exit(0)
 
 

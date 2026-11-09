@@ -440,6 +440,14 @@ def _self_test() -> int:
     _st_backfill_basic(path, fails)
     _st_compose_git_status(fails)
     _st_from_git_precedence(path, fails)
+    # W1155（深度审计 #1）：原实现无条件 return 0 ⇒ 自测负例全红仍 SELFTEST_RC=0
+    # ⇒ 唯一自测永远绿·判据回归零报警。改按 fails 判（负样本命中即 1）。
+    if fails:
+        for f in fails:
+            print("FAIL  " + f)
+        print("---- ledger_backfill self-test：%d FAIL ----" % len(fails))
+        return 1
+    print("---- ledger_backfill self-test：0 FAIL ----")
     return 0
 
 

@@ -7,14 +7,13 @@
 > 本文件逐条列出 仓库根目录 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（14）
+## 子目录（13）
 
 - `.github/`
 - `archive/`
 - `assets/`
 - `dataset/`
 - `docs/`
-- `hyperframes/`
 - `mcp-server/`
 - `packaging/`
 - `scripts/`
@@ -24,7 +23,7 @@
 - `xiyouji-agent-web/`
 - `xiyouji-desktop/`
 
-## 文件（22）
+## 文件（24）
 
 ### Markdown 文档
 
@@ -37,7 +36,9 @@
 - `HANDOVER.md`
 - `LICENSE-CONTENT.md`
 - `README.en.md`
+- `RULES.md`
 - `SECURITY.md`
+- `pitfalls.md`
 
 ### JavaScript / TypeScript
 

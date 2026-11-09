@@ -15,7 +15,7 @@ import sys
 
 from utils.gate_common import ROOT, SCRIPTS_DIR, SelfTestTally, cli_main, read_text_strict
 
-L2_FILES = ["docs/agent/gates.md", "docs/agent/pitfalls.md", "docs/agent/agent-web.md"]
+L2_FILES = ["docs/agent/gates.md", "pitfalls.md", "docs/agent/agent-web.md"]  # pitfalls W1157 正本迁根
 RE_AGENT_ITEM = re.compile(r"^(\d+)\. \*\*", re.M)
 RE_GATE_ITEM = re.compile(r"^(\d+)\. \*\*", re.M)
 RE_VERIFY_SLOT = re.compile(r"第\s*(\d+)\s*(?:槽|门禁)")

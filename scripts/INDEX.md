@@ -51,11 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（201）
-
-### Markdown 文档
-
-- `font-subset-guide.md`
+## 文件（213）
 
 ### Python 脚本
 
@@ -110,6 +106,8 @@
 - `check_css_orphan_selectors.py`
 - `check_css_var_refs.py`
 - `check_css_var_selfref.py`
+- `check_dashboard_kpi.py`
+- `check_data_badge_coverage.py`
 - `check_data_copy_chain.py`
 - `check_dataset_manifest.py`
 - `check_dataset_provenance.py`
@@ -136,10 +134,13 @@
 - `check_interaction_binding.py`
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
+- `check_mobile_viewport.py`
 - `check_motion_ban.py`
 - `check_motion_guard.py`
+- `check_nav_parity.py`
 - `check_no_brand_refs.py`
 - `check_no_goatcounter.py`
+- `check_orchestration_refs.py`
 - `check_page_admission.py`
 - `check_parser_anchor_coverage.py`
 - `check_perf_shadow.py`
@@ -155,8 +156,10 @@
 - `check_search_index_fresh.py`
 - `check_segment_gaps.py`
 - `check_seo_head.py`
+- `check_stat_events.py`
 - `check_story_timeline_sync.py`
 - `check_structure.py`
+- `check_template_contract.py`
 - `check_token_coverage.py`
 - `check_tooltip_spacing.py`
 - `check_untracked.py`
@@ -198,6 +201,7 @@
 - `ledger_close_check.py`
 - `ledger_mutation_test.py`
 - `lint_links.py`
+- `mobile_viewport_probe.py`
 - `new_page.py`
 - `obs_sample.py`
 - `optimize-html-size.py`
@@ -225,6 +229,7 @@
 - `slice_screenshots.py`
 - `source_collate.py`
 - `spot_check_nlp.py`
+- `stat_event_probe.py`
 - `stats.py`
 - `subject_band.py`
 - `sync_data_json.py`
@@ -235,11 +240,15 @@
 - `verify_delivery.py`
 - `version_surface.py`
 - `visual_regression_probe.py`
+- `w1167_analytics_inject.py`
+- `w1167_badge_inject.py`
+- `w1167_nav_inject.py`
 - `worktree_rehearse.py`
 
 ### JavaScript / TypeScript
 
 - `_audit_render_states.js`
+- `_render_scope.js`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`

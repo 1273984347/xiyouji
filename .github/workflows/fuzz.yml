@@ -1,0 +1,55 @@
+name: Fuzz
+
+# OpenSSF Scorecard「Fuzzing」检查项配套 CI：对 xiyouji-agent-web 的 JS/TS 工具面跑 fuzz。
+# 触发面：仅 fuzz target 与被测 server 代码变更时触发（避免无谓 CI 轮次）。
+# fuzz 依赖由 package.json 的 @jazzer.js/core 提供（devDependencies）。
+on:
+  push:
+    paths:
+      - 'xiyouji-agent-web/fuzz/**'
+      - 'xiyouji-agent-web/server/**'
+  pull_request:
+    paths:
+      - 'xiyouji-agent-web/fuzz/**'
+      - 'xiyouji-agent-web/server/**'
+  workflow_dispatch:
+
+# W663/T4 最小权限：默认只读（本工作流无需写权限）。
+permissions:
+  contents: read
+
+concurrency:
+  group: fuzz-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fuzz:
+    name: Jazzer.js fuzz (agent-web)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: xiyouji-agent-web
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: xiyouji-agent-web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Run fuzz
+        # npm run fuzz → package.json scripts.fuzz → jazzer fuzz fuzz -- -runs=100
+        #   （入口在包根 fuzz.js：Jazzer 会把 "fuzz" 解析为 <包根>/fuzz.js）
+        run: npm run fuzz
+
+      - name: 属性测试（fast-check · Scorecard Fuzzing 检查的检出面）
+        # npm run test:prop → node --import tsx --test fuzz/fastcheck.test.ts
+        run: npm run test:prop

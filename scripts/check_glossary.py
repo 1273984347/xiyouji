@@ -58,11 +58,22 @@ def parse_md(path=None):
             continue
         if cells[0] in ("称谓", "术语", "地名", "法宝") or set(cells[0]) <= {"-", ":", " "}:
             continue  # 表头 / 分隔行
+        # W1176：原实现只取前 1-2 列，把源表的「含义 / 出处说明 / 书中用法」列丢掉了——
+        # 导致 glossary.json 只有术语名，无法支撑一个给读者看的术语页（44% 的信息在管道里蒸发）。
+        # 现保留完整列，缺列时给空串（保持结构稳定，避免下游 KeyError）。
         if cur["type"] == "variant":
             variants = [v.strip() for v in cells[0].split("/") if v.strip()]
-            cur["entries"].append({"variants": variants, "canonical": cells[1]})
+            cur["entries"].append({
+                "variants": variants,
+                "canonical": cells[1],
+                "note": cells[2] if len(cells) > 2 else "",
+            })
         else:
-            cur["entries"].append({"term": cells[0]})
+            cur["entries"].append({
+                "term": cells[0],
+                "meaning": cells[1] if len(cells) > 1 else "",
+                "usage": cells[2] if len(cells) > 2 else "",
+            })
     return {"groups": groups}
 
 

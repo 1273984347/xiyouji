@@ -62,21 +62,10 @@ const SHARD = (() => {
   return { index, total };
 })();
 
-function listPages() {
-  const out = [];
-  const walk = (d) => {
-    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
-      const p = path.join(d, e.name);
-      if (e.isDirectory()) {
-        if (!e.name.startsWith('.') && e.name !== 'node_modules') walk(p);
-      } else if (e.name.endsWith('.html') && !e.name.startsWith('_')) {
-        out.push(path.relative(SITE, p).split(path.sep).join('/'));
-      }
-    }
-  };
-  walk(SITE);
-  return out.sort();
-}
+// W1192：候选页枚举与 charts 面判定下沉到 _render_scope.js——
+//   采集端（本脚本）与比对端（check_dark_state_gate.js）共用同一实现，
+//   禁两处各自实现「含 <svg」判定（两处实现 ⇒ 必然漂移 ⇒ 断言域与采集域错配 ⇒ 恒红）。
+const { listPages, chartsPages } = require('./_render_scope.js');
 
 // W579：--scope charts = 全站含 <svg 的页面（中英合计，机判口径单一来源；约 163 页）
 const scopeCharts = (() => {
@@ -324,9 +313,11 @@ async function auditState(context, pageRel, state) {
 }
 
 async function main() {
-  let pages = listPages();
+  let pages = listPages(SITE);
   if (scopeCharts) {
-    pages = pages.filter(p => fs.readFileSync(path.join(SITE, p), 'utf8').includes('<svg'));
+    // W1192：charts 面口径取自 _render_scope.js（与暗色门禁比对端同一实现）
+    const charts = new Set(chartsPages(SITE));
+    pages = pages.filter(p => charts.has(p));
   }
   if (PREFIX) {
     pages = pages.filter(p => p.startsWith(PREFIX));

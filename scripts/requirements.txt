@@ -3,6 +3,9 @@
 # W890 修正（2026-10-23）：Pillow 12.3.0→13.0.0（25 个新 CVE·fix 13.0.0·含 GHSA-78g4-xqwv-q3g8）——与 W412 同型复发（上游新版本→旧版本出现新 CVE）；
 #   本地实测：pip-audit -r 实跑 25 漏洞→0；pytest 全量 831 passed 3 skipped（含 test_slice_screenshots 的 PIL 切片面）·第 33 门禁 head 内容链路读图正常
 jieba==0.42.1
+# W1191 复核（2026-11-09）：GitHub Dependabot 仍列 37 条 Pillow/pillow 告警，但逐条核对 vulnerable_version_range 全为「< 13.0.0」或「<= 12.3.0」，
+# 而本行已钉 13.0.0（= advisory 的 first_patched_version）⇒ 判定为**告警未随清单变更重算**（stale 状态），非真实未修；
+# 本注释变更即用于触发 Dependabot 对本清单重新解析（不改钉版·不改依赖面），并在告警面板留下复核证据。
 Pillow==13.0.0
 # W758：markdown 为 build_reader.py 渲染依赖（CI 首跑暴露本地有装而未登记→第 42 门禁可导入性必红）
 markdown==3.10.2

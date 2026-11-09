@@ -1,7 +1,7 @@
 {
- "scan_date": "2026-10-21",
+ "scan_date": "2026-11-08",
  "scope": "site/data (D1: 不含 EN 镜像)",
- "pages": 87,
+ "pages": 89,
  "items": [
   "C1",
   "C2",
@@ -9,10 +9,10 @@
   "C4"
  ],
  "pass_rate": {
-  "C1": "87/87",
-  "C2": "87/87",
-  "C3": "87/87",
-  "C4": "87/87"
+  "C1": "89/89",
+  "C2": "89/89",
+  "C3": "89/89",
+  "C4": "89/89"
  },
  "detail": {
   "site/data/81-hardships-view.html": {
@@ -764,6 +764,28 @@
    "has_anchor": true
   },
   "site/data/global-pattern.html": {
+   "items": {
+    "C1": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": true
+  },
+  "site/data/glossary.html": {
    "items": {
     "C1": {
      "status": "ok",
@@ -1908,6 +1930,28 @@
    "has_anchor": true
   },
   "site/data/workplace.html": {
+   "items": {
+    "C1": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": true
+  },
+  "site/data/wukong-tangseng-benchmark.html": {
    "items": {
     "C1": {
      "status": "ok",

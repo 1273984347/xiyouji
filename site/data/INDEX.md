@@ -11,7 +11,7 @@
 
 - `json/`
 
-## 文件（89）
+## 文件（90）
 
 ### HTML 页面
 
@@ -51,6 +51,7 @@
 - `four-heavenly-kings-artifacts.html`
 - `game-webnovel.html`
 - `global-pattern.html`
+- `glossary.html`
 - `graph-explorer.html`
 - `guanyin-six-roles-network.html`
 - `hardship-difficulty-heatmap.html`

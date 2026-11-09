@@ -4,6 +4,9 @@
 ① batch_spec.fi_group_rows —— 阈值边界/无斜杠根级文件保留精确行（P1-3）/分组形态
 ② archive_segments 体积模式迁后剩余段 ≥20 断言 —— 合成树负样本拦截（P1-1 同族）
 ③ check_doc_size_budget._fileindex_row_density —— cap 内绿/超限红/边界段
+
+W1167 追加：④ 745 缝隙档抽屉的链接契约——原断言 `links == 8` 是硬编码魔法数，导航统一
+为正本后必然失配；现对拍 `w1167_nav_inject` 正本的**数量 + 标签序列**（改错项也会红）。
 """
 import os
 import re
@@ -16,6 +19,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(
 import archive_segments as arcs  # noqa: E402
 import batch_spec  # noqa: E402
 import check_doc_size_budget as dsb  # noqa: E402
+import w1167_nav_inject as nav_truth  # noqa: E402  主导航正本（抽屉链接契约的唯一事实源）
 
 
 class TestFiGroupRows:
@@ -156,13 +160,19 @@ class TestDrawerFixedAtNarrow:
                     const nav = document.querySelector('.topnav nav');
                     const rect = nav.getBoundingClientRect();
                     return {h: rect.height, links: nav.querySelectorAll('a').length,
+                            labels: [...nav.querySelectorAll('a')].map(a => a.textContent.trim()),
                             overflow: document.documentElement.scrollWidth
                                       - document.documentElement.clientWidth};
                 })()""")
                 assert r["overflow"] <= 0, "745 缝隙档横向溢出 %s px（待办②常态化断言）" % r["overflow"]
                 b.close()
             assert r["h"] == 957, "抽屉面板须全高（实测 %s）——fixed 被祖先 backdrop-filter 退化" % r["h"]
-            assert r["links"] == 8
+            # W1167：原断言 `links == 8` 是硬编码魔法数——导航统一为正本 6 项 + 品牌位后
+            # 必然为 7，而「8」既没说明为什么是 8、也不检查是哪 8 项（改错项同样绿）。
+            # 现改为对导航正本引用式对拍（与第 65 槽同源纪律）：数量与标签序列都须等于正本。
+            expect = [nav_truth.BRAND_ZH[0]] + [t for t, _, _ in nav_truth.ZH_ITEMS]
+            assert r["links"] == len(expect), "抽屉链接数 %s ≠ 正本 %s" % (r["links"], len(expect))
+            assert r["labels"] == expect, "抽屉链接序列偏离导航正本：%s" % (r["labels"],)
         finally:
             srv.terminate()
 

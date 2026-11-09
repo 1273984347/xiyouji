@@ -49,7 +49,7 @@ TREE_LINE_RE = re.compile(r"^([\s\u2502]*)(?:\u251c\u2500\u2500|\u2514\u2500\u25
 CMD_TOKEN_RE = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_.\\\\/-]*\.(?:png|svg|py|json|html|md|ico|js|css|txt|yaml|yml)\b")
 EXT_RE = re.compile(r"\.(png|svg|py|json|html|md|ico|js|css|txt|yaml|yml)$")
 WILDCARD_HINTS = ("*", "<", ">", "{", "}", "\u2026", "...")
-EXTERNAL_ROOTS = ("site", "docs", "scripts", "archive", "tests", "hyperframes")
+EXTERNAL_ROOTS = ("site", "docs", "scripts", "archive", "tests")
 
 
 def _looks_wildcard(token):
@@ -219,6 +219,11 @@ def main() -> int:
 
     print("---- 第 59 门禁 design 资产清单对拍：判定条目 %d · 失准 %d · 提示 %d ----"
           % (checked, len(fails), len(notes)))
+    # W1155（深度审计 #57）：README/INDEX 解析出 0 条目时原实现仍「0 FAIL」（目录文档
+    # 改名/重建 ⇒ 门禁静默绿·恰与 W1135 立项原场景相悖）⇒ 0 判定条目 = 判据不可执行即红。
+    if checked == 0:
+        print("FAIL  判定条目为 0——清单文档解析空面（改名/重建/格式漂移即静默失守）")
+        fails.append("checked==0（fail-closed）")
     for n in notes:
         print("  NOTE " + n)
     for f in fails:

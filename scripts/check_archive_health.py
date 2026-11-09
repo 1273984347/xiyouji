@@ -53,8 +53,14 @@ def _disk_batches_segments():
     import subprocess as _sp
 
     out = _sp.run(
-        ["git", "-c", "core.quotepath=false", "ls-files"], capture_output=True, text=True, encoding="utf-8"
-    ).stdout
+        # W1155（深度审计 #72）：原实现无 -C ROOT ⇒ 子目录/cwd 变化时取面错位（同一脚本
+        # 两种 cwd 两种结论）；并显式检查 returncode（git 失败时 stdout 空 ⇒ 段集空 ⇒ 假绿）。
+        ["git", "-C", ROOT, "-c", "core.quotepath=false", "ls-files"],
+        capture_output=True, text=True, encoding="utf-8",
+    )
+    if out.returncode != 0:
+        raise SystemExit("FAIL git ls-files 不可用（archive 段全集权威源失效·fail-closed）")
+    out = out.stdout
     pre = "archive/scripts/batches/"
     segs = set()
     for p in out.splitlines():
@@ -134,6 +140,38 @@ def t3_cold_warning(readme_text):
     return any(m in readme_text for m in COLD_MARKS)
 
 
+def _t2_accounting(cov, lines, problems):
+    """W1155（提取降复杂度）：T2 顶层/子目录/段目录对账判定（自 run 内联块下沉）。"""
+    if cov["top_row"] is None:
+        problems.append("T2 顶层存量组行缺失")
+        lines.append(
+            "T2  ⚠ 顶层存量组行缺失（磁盘 %d 件）——修法=archive/README.md 台账补 `archive/scripts/`（顶层存量 +N 件）行"
+            % cov["top_disk"]
+        )
+    elif cov["top_row"] != cov["top_disk"]:
+        problems.append("T2 顶层计数漂移：台账 %d ≠ 磁盘 %d" % (cov["top_row"], cov["top_disk"]))
+        lines.append(
+            "T2  ⚠ 顶层计数漂移：台账 + %d 件 ≠ 磁盘 %d 件——修法=更新顶层组行计数" % (cov["top_row"], cov["top_disk"])
+        )
+    else:
+        lines.append(
+            "T2  顶层存量对账一致（%d 件）·子目录缺 %s·段目录缺 %s"
+            % (cov["top_disk"], cov["subdirs_missing"] or "无", cov["segs_missing"] or "无")
+        )
+    if cov["subdirs_missing"]:
+        problems.append("T2 子目录未登记：%s" % cov["subdirs_missing"])
+        lines.append("T2  ⚠ 子目录缺结构树/台账提及：%s" % "、".join(cov["subdirs_missing"]))
+    if cov["segs_missing"]:
+        problems.append("T2 段目录缺组行：%s" % cov["segs_missing"])
+        lines.append("T2  ⚠ 段目录缺组行：%s" % "、".join(cov["segs_missing"]))
+    # W1014 接线升格：段全集双向对账（BATCHES_SEG 上岗·堵死新桶漂移与声明陈腐盲区）
+    if cov["segs_unlisted"]:
+        problems.append("T2 段全集派生与磁盘不符：%s" % cov["segs_unlisted"])
+        lines.append("T2  ⚠ 段全集派生值与磁盘不一致：%s——修法=重跑本脚本刷新派生" % "、".join(cov["segs_unlisted"]))
+    if cov["segs_stale"]:
+        problems.append("T2 段全集派生含磁盘不存在的段：%s" % cov["segs_stale"])
+
+
 def run(strict=False, prefix=""):
     import tracked_files as tf
 
@@ -167,43 +205,14 @@ def run(strict=False, prefix=""):
         else:
             lines.append("T1b %-38s %8s" % (name, _kb(size)))
 
-    # T2
+    # T2（W1155 提取降复杂度：对账细节下沉 _t2_accounting）
     tracked = sorted(
         r.replace(os.sep, "/") for r in tf.tracked_files() if r.replace(os.sep, "/").startswith("archive/scripts/")
     )
     readme_p = os.path.join(arch, "README.md")
     readme = open(readme_p, encoding="utf-8", errors="replace").read() if os.path.exists(readme_p) else ""
     cov = t2_coverage(tracked, readme, batches_seg=BATCHES_SEG)
-    if cov["top_row"] is None:
-        problems.append("T2 顶层存量组行缺失")
-        lines.append(
-            "T2  ⚠ 顶层存量组行缺失（磁盘 %d 件）——修法=archive/README.md 台账补 `archive/scripts/`（顶层存量 +N 件）行"
-            % cov["top_disk"]
-        )
-    elif cov["top_row"] != cov["top_disk"]:
-        problems.append("T2 顶层计数漂移：台账 %d ≠ 磁盘 %d" % (cov["top_row"], cov["top_disk"]))
-        lines.append(
-            "T2  ⚠ 顶层计数漂移：台账 + %d 件 ≠ 磁盘 %d 件——修法=更新顶层组行计数" % (cov["top_row"], cov["top_disk"])
-        )
-    else:
-        lines.append(
-            "T2  顶层存量对账一致（%d 件）·子目录缺 %s·段目录缺 %s"
-            % (cov["top_disk"], cov["subdirs_missing"] or "无", cov["segs_missing"] or "无")
-        )
-    if cov["subdirs_missing"]:
-        problems.append("T2 子目录未登记：%s" % cov["subdirs_missing"])
-        lines.append("T2  ⚠ 子目录缺结构树/台账提及：%s" % "、".join(cov["subdirs_missing"]))
-    if cov["segs_missing"]:
-        problems.append("T2 段目录缺组行：%s" % cov["segs_missing"])
-        lines.append("T2  ⚠ 段目录缺组行：%s" % "、".join(cov["segs_missing"]))
-    # W1014 接线升格：段全集双向对账（BATCHES_SEG 上岗·堵死新桶漂移与声明陈腐盲区）
-    if cov["segs_unlisted"]:
-        problems.append("T2 段全集派生与磁盘不符：%s" % cov["segs_unlisted"])
-        lines.append("T2  ⚠ 段全集派生值与磁盘不一致：%s——修法=重跑本脚本刷新派生" % "、".join(cov["segs_unlisted"]))
-    if cov["segs_stale"]:
-        problems.append("T2 段全集派生含磁盘不存在的段：%s" % cov["segs_stale"])
-        lines.append("T2  ⚠ 段全集派生含磁盘不存在的段：%s——修法=重跑本脚本刷新派生" % "、".join(cov["segs_stale"]))
-
+    _t2_accounting(cov, lines, problems)
     # T3
     batches_readme = os.path.join(arch, "scripts", "batches", "README.md")
     btxt = open(batches_readme, encoding="utf-8", errors="replace").read() if os.path.exists(batches_readme) else ""

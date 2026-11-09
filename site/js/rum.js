@@ -28,11 +28,12 @@
  *       <script defer src="js/rum.js"></script>            （站点根页）
  *       <script defer src="../js/rum.js"></script>         （data/ en/ 等子目录页）
  *       可通过 window.__RUM_CONFIG__ 覆盖默认配置。
- * 上报通道（W806 口径·取代 W573 E-2 的 GoatCounter 改道）：GoatCounter 统计链已退役
- *       （站点代码失效·实测 HTTP 404·采不到任何数据），本站不再加载任何外域统计脚本。
- *       现口径：① 本地 dev origin（localhost / 127.0.0.1 / [::1]）→ POST /api/rum 回流
+ * 上报通道（W1167 口径）：GoatCounter 曾于 W806 因站点代码失效（实测 HTTP 404）退役，
+ *       W1167 复验该账号仍在活（端点返回 400=缺参而非 404=死号）后按「双轨具名例外」恢复，
+ *       与 GA4 gtag 并列由 scripts/w1167_analytics_inject.py 注入页面；本文件不自发外域请求，
+ *       与注入轨互不重复计数。现口径：① 本地 dev origin（localhost / 127.0.0.1 / [::1]）→ POST /api/rum 回流
  *       本地后端（scripts/api/api_server.py）；② 显式配置 window.__RUM_CONFIG__.endpoint
- *       → 按配置外发（未来接入新统计端点的唯一入口）；③ 其余（GitHub Pages 等纯静态托管）
+ *       → 按配置外发；③ 其余（GitHub Pages 等纯静态托管）
  *       → 零网络请求，仅落 localStorage 备援（rum_queue）。storeLocal 恒启用为备援。
  */
 (function (window, document) {
@@ -304,8 +305,24 @@
     // 1) 本地备援优先（即使上报失败也不丢数据）
     storeLocal(payload);
 
-    // W806：GoatCounter 统计链已退役（站点代码失效·实测 HTTP 404·采不到任何数据），
-    // 本站不再加载外域统计脚本。线上通道收敛为三条：
+    // 2) W1168 统计面：一条 rum_vitals 带紧凑数值串（不发五条——GoatCounter 按事件名计数，
+    //    五条会把 pageview 虚增 5 倍却仍取不到分位数；聚合分析挂 G0-3/H1 的真后端需求）。
+    //    桥缺席或 file:// 下由桥自身短路，本处只管把数据交出去，不判断网络形态。
+    try {
+      if (window.XYstats && payload.metrics) {
+        var mm = payload.metrics;
+        window.XYstats.count('rum_vitals', [
+          'FCP=' + (mm.fcp === null ? '-' : mm.fcp),
+          'LCP=' + (mm.lcp === null ? '-' : mm.lcp),
+          'CLS=' + (mm.cls === null ? '-' : mm.cls),
+          'INP=' + (mm.inp === null ? '-' : mm.inp),
+          'TBT=' + (mm.tbt === null ? '-' : mm.tbt)
+        ].join(' '));
+      }
+    } catch (e) { /* 统计是增强面，绝不影响性能采集与本地备援 */ }
+
+    // W1167：GoatCounter 账号复验存活后按双轨具名例外恢复（与 GA4 并列·由
+    // scripts/w1167_analytics_inject.py 注入页面），本文件仍不自发外域请求。线上通道收敛为三条：
     //   ① 本地 dev origin → POST /api/rum 回流本地后端（scripts/api/api_server.py）
     //   ② 显式配置 window.__RUM_CONFIG__.endpoint → 按配置外发（新统计端点唯一入口）
     //   ③ 其余（GitHub Pages 等纯静态托管）→ 零网络请求，仅 localStorage 备援

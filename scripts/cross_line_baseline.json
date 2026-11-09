@@ -34,13 +34,11 @@
   "archive/scripts/w335_migrate_design_system.py#23cd5a3843a4",
   "archive/scripts/w335_migrate_design_system.py#4a7c6c0f28b1",
   "archive/scripts/w335_migrate_design_system.py#734dfd6a336f",
-  "scripts/check_doc_sync.py#0d99570d5b28",
   "scripts/check_html_head_content.py#341661ac9807",
   "scripts/check_html_head_content.py#7805345a12fa",
   "scripts/check_html_head_content.py#ea3e25eda206",
   "scripts/check_kpi_card_base.py#0df90807841f",
   "scripts/inject_descriptions.py#b61da8219a08",
-  "scripts/lint_links.py#e77639df2ca0",
-  "scripts/verify_delivery.py#229340551805"
+  "scripts/lint_links.py#e77639df2ca0"
  ]
 }

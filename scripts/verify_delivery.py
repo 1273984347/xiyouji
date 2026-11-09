@@ -121,13 +121,19 @@ EXPECTED_SECTION_NAMES = [
     "数据集溯源",
     "reader完整性",
     "数据集清单",
+    "移动视口",
+    "导航一致性",
+    "数据徽标",
+    "统计事件契约",
+    "模板结构契约",  # W1178：第 69 槽·恒跑——读 1 HTML·毫秒级
+    "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON·毫秒级
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
-# 17 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14·W1141 加「数据集溯源」=15·W1149 加「reader完整性」「数据集清单」=17）恒跑不跳；跳过只作用于
-# 55 个 subprocess 委托段（68 段 - 13 内联/bespoke·W1149 实核：_SIMPLE×18+_STRICT×37 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
+# 19 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14·W1141 加「数据集溯源」=15·W1149 加「reader完整性」「数据集清单」=17·W1167 加「导航一致性」「数据徽标」=19·W1178 加「模板结构契约」=20）恒跑不跳；跳过只作用于
+# 57 个 subprocess 委托段（70 段 - 13 内联/bespoke·W1149 实核：_SIMPLE×18+_STRICT×37 注册表派生·W1167 加 65/66 两 STRICT 段·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -211,6 +217,12 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "数据集溯源",  # W1141：恒跑——数据集字段契约与改动范围无关（读 dataset JSON·毫秒级）
     "reader完整性",  # W1149：恒跑——reader 占位/链接/h1/标题与改动范围无关（扫 623 页·秒级）
     "数据集清单",  # W1149：恒跑——README/量纲/哨兵/端点/空值与改动范围无关（读 dataset JSON·毫秒级）
+    "移动视口",  # W1165：恒跑——CSS/JS 契约与改动范围无关（读 2 个文件 + 报告 JSON·毫秒级）
+    "导航一致性",  # W1167：恒跑——audit-1 major 判据化，859 页静态扫描毫秒级，与改动范围无关
+    "数据徽标",  # W1167：恒跑——story-2 AC1/AC3 判据化，88 页静态扫描毫秒级
+    "统计事件契约",  # W1168：恒跑——事件清单↔发射面双向对拍与改动范围无关（静态扫描·秒级）
+    "模板结构契约",  # W1178：第 69 槽·恒跑——读 1 HTML·毫秒级
+    "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON 逐项对拍·毫秒级
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -415,7 +427,13 @@ class _GateContext:
         if self.scope == "full":
             self.active_sections = set(EXPECTED_SECTION_NAMES)
         else:
-            self.active_sections = _SCOPE_CORE | (SCOPE_DOCS_SECTIONS if self.scope == "docs" else SCOPE_SITE_SECTIONS)
+            # W1155（深度审计 #5）：混合批被 _classify_scope 归 site ⇒ 文档侧 11 段
+            # （元信息块/术语一致/引文核验/docs 链接等）在 pre-commit auto 下全部跳过。
+            # 实际上 site 批经常连带 docs 面（台账/CHANGELOG/报告登记）⇒ site 档取两集并集。
+            if self.scope == "site":
+                self.active_sections = _SCOPE_CORE | SCOPE_SITE_SECTIONS | SCOPE_DOCS_SECTIONS
+            else:
+                self.active_sections = _SCOPE_CORE | SCOPE_DOCS_SECTIONS
         print(
             "---- verify_delivery --scope %s（生效段 %d/%d）----"
             % (self.scope, len(self.active_sections), len(EXPECTED_SECTION_NAMES))
@@ -1112,6 +1130,86 @@ _STRICT_GATES = [
         ok_msg="数据集清单门禁通过（%s）",
         ok_line=-1,
     ),
+    # W1165（V4 375px 回归）：移动视口触摸尺寸与内容裁剪契约。实测 99 页中 84 页触摸目标低于
+    # WCAG 2.5.8 的 24px 线，根因分散四层（cite 样式寄生 JS / 页脚 nav 不换行 / 图例项无触摸尺寸 /
+    # 5 列网格挤压）。本槽做毫秒级静态契约校验（CSS/JS 单一事实源 key 声明）＋ 采信探针全量报告；
+    # 探针本体（84 秒/99 页）不进 pre-commit，由批收尾手动执行。
+    _StrictGate(
+        section="移动视口",
+        script="check_mobile_viewport.py",
+        timeout=60,
+        marker="---- 第 64 门禁 移动视口：",
+        crash_msg="移动视口槽执行异常（第 64 槽·crash 即拦）: %s",
+        fail_msg="移动视口触摸/裁剪契约违规（本批新增第 64 槽）",
+        marker_msg="移动视口槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="移动视口门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1167（MVP 迁移批③）：audit-1 唯一 major 的判据化——主导航正本分发全站一致（brief 定量
+    # 「导航一致率 100%」机器形态）。判据同源引用 w1167_nav_inject 正本，不复制清单。
+    _StrictGate(
+        section="导航一致性",
+        script="check_nav_parity.py",
+        timeout=120,
+        marker="---- 第 65 门禁 导航一致性：",
+        crash_msg="导航一致性槽执行异常（第 65 槽·crash 即拦）: %s",
+        fail_msg="主导航正本一致性违规（第 65 槽·audit-1 判据化）",
+        marker_msg="导航一致性槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="导航一致性门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1167：story-2 三态徽标覆盖+读者语言判据化（audit-6 透明度不一致的清偿面）。
+    _StrictGate(
+        section="数据徽标",
+        script="check_data_badge_coverage.py",
+        timeout=60,
+        marker="---- 第 66 门禁 数据徽标：",
+        crash_msg="数据徽标槽执行异常（第 66 槽·crash 即拦）: %s",
+        fail_msg="三态徽标覆盖/文案违规（第 66 槽·story-2 判据化）",
+        marker_msg="数据徽标槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="数据徽标门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1168（统计单轨收敛批）：埋点契约判据化——metric 蓝图 11 组 must 事件与仓内发射面双向对拍。
+    # 根因面：此前「事件有没有埋」只有人工读 spark-output/metric.json，删调用/改事件名/清单与
+    # 代码漂移全链零红灯（W1167 双轨期实证 nav_click 声明式属性被剥壳即静默失效）。
+    # 判据同源引用 w1167_nav_inject / w1167_badge_inject / generate_csp 正本，不复制清单。
+    _StrictGate(
+        section="统计事件契约",
+        script="check_stat_events.py",
+        timeout=60,
+        marker="---- 第 67 门禁 统计事件契约：",
+        crash_msg="统计事件契约槽执行异常（第 67 槽·crash 即拦）: %s",
+        fail_msg="统计事件清单与发射面漂移（第 67 槽·埋点契约判据化）",
+        marker_msg="统计事件契约槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="统计事件契约门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1170（V1 首批）：首页 KPI 卡片与 stats.json 权威值对拍——实测 5 项全部滞后（累计少 41 篇）
+    # 且同页段落文字与卡片自相矛盾（文字 44/215/209 vs 卡片 43/199/199）。硬编码数字无联动机制，
+    # 本项目按「读 1 HTML + 1 JSON」毫秒级恒跑，防再滞后。
+    # W1178：把「检索假阳性」变成机器判据——类名/CSS 命中不等于结构存在。
+    # W1177 实证：grep -c cite-block = 7 全是 CSS 选择器，HTML 结构 0，新页 C3 判红。
+    _StrictGate(
+        section="模板结构契约",
+        script="check_template_contract.py",
+        timeout=60,
+        marker="---- 第 69 门禁 模板契约：",
+        crash_msg="模板契约槽执行异常（第 69 槽·crash 即拦）: %s",
+        fail_msg="模板结构契约违规（本批新增第 69 槽）",
+        marker_msg="模板契约槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="模板结构契约门禁通过（%s）",
+        ok_line=-1,    ),
+    _StrictGate(
+        section="dashboard KPI",
+        script="check_dashboard_kpi.py",
+        timeout=60,
+        marker="---- 第 68 门禁 dashboard KPI：",
+        crash_msg="dashboard KPI 槽执行异常（第 68 槽·crash 即拦）: %s",
+        fail_msg="首页 KPI 与 stats.json 失配（本批新增第 68 槽）",
+        marker_msg="dashboard KPI 槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="dashboard KPI 门禁通过（%s）",
+        ok_line=-1,    ),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
@@ -1503,7 +1601,13 @@ def _gate_sitemap(ctx):
         locs = set()
         for m in re.finditer(r"<loc>([^<]+)</loc>", sm_txt):
             u = m.group(1).strip().rstrip("/")
-            u = re.sub(r"^https?://[^/]+/", "", u)
+            # 剥 scheme+host 前缀：与原 `re.sub(r"^https?://[^/]+/", "", u)` 语义等价
+            # （host 取首个 "/" 之前；host 为空或其后无 "/" 时原样返回），
+            # 但不用正则——`[^/]+` 可跨行匹配且替换为空串 ⇒ 会被「跨行改写」守卫判为高危真删。
+            if u.startswith(("http://", "https://")):
+                parts = u.split("/", 3)          # ["https:", "", host, rest]
+                if len(parts) == 4 and parts[2]:
+                    u = parts[3]
             u = u[len("xiyouji/") :] if u.startswith("xiyouji/") else u
             locs.add(u if u else "index.html")
         actual = set()

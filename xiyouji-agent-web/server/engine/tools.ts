@@ -46,8 +46,8 @@ const DENY_READ: RegExp[] = [
 ];
 const DENY_WRITE: RegExp[] = [
   ...DENY_READ,
-  /(^|\/)\.git\//, // hooks 等版本库内部（持久化执行原语）·去掉 ^ 锚（cwd 为子目录时 relPosix 不含仓库根前缀）
-  /(^|\/)(verify_delivery|bump_version|batch_cascade)\.py$/, // 门禁脚本（铁律 8）·基名形态：cwd=scripts 时 relPosix 形如 verify_delivery.py（无 scripts/ 段·原 ^ 锚定规则失配可绕）
+  /(^|\/)\.git\//i, // hooks 等版本库内部（持久化执行原语）·去掉 ^ 锚（cwd 为子目录时 relPosix 不含仓库根前缀）·W1153 加 /i（Windows 不区分大小写：.GIT/hooks 大写形态此前可绕）
+  /(^|\/)(verify_delivery|bump_version|batch_cascade)\.py$/i, // 门禁脚本（铁律 8）·基名形态：cwd=scripts 时 relPosix 形如 verify_delivery.py（无 scripts/ 段·原 ^ 锚定规则失配可绕）·W1153 加 /i（VERIFY_DELIVERY.PY 大写可绕）
 ];
 
 /** 受保护路径判定（read/write 两面）——不抛异常版，供遍历类工具（glob/grep）过滤用。 */
@@ -113,6 +113,10 @@ function guardPath(cwd: string, rel: string, mode: "read" | "write", mustExist: 
     if (real !== root && !real.startsWith(root + path.sep)) {
       throw new Error("路径越界（symlink 解析后）：" + rel);
     }
+    // W1153（深度审计 #28）：realpath 解析后对**真实路径**复检黑名单——
+    // 首检的 relPosix 取自 path.resolve 结果；symlink/大小写改写后的真实路径
+    // 可能落进黑名单（如 .GIT/hooks 形态）⇒ 首检 + 复检双保险。
+    checkProtected(toRelPosix(root, real), mode);
     return real; // 返回解析后的绝对路径（后续读写跟随它·不再二次跟随链接）
   }
   // write：目标已存在时（可能是指向仓外的符号链接）先解析后判定
@@ -198,12 +202,31 @@ function runAllowed(cmd: string): boolean {
   return RUN_ALLOW.some((r) => r.first.has(first) && r.prefix.test(cmd.trim()));
 }
 
+// W1153（深度审计 #29）：本会话经 write_file/edit_file 新写入的 scripts/ 件集合——
+// 「先写 scripts/x.py 再 run_command python scripts/x.py」可组合出任意代码执行
+// （命令白名单 + 受保护路径均可被这条组合绕过）⇒ 会话内新写的解释器脚本一律拒绝执行。
+const sessionWrittenScripts = new Set<string>();
+function noteSessionWrite(cwd: string, absPath: string): void {
+  try {
+    const root = fs.realpathSync(cwd);
+    const real = fs.realpathSync(absPath);
+    if (real !== root && !real.startsWith(root + path.sep)) return;
+    const rel = toRelPosix(root, real);
+    if (rel.startsWith("scripts/")) sessionWrittenScripts.add(rel);
+  } catch {
+    /* 留痕失败不影响写入本身（执行面判定取不到就按未写处理·守卫另有三层） */
+  }
+}
+
 /** spawn 子进程环境：剔除凭证（LLM_API_KEY/AGENT_WEB_TOKEN 等不下发给 LLM 可执行的子进程）。
  *  W752：导出供专项单测直接断言（纯增加导出，行为不变）。 */
 export function childEnv(): NodeJS.ProcessEnv {
   const env = { ...process.env };
-  delete env.LLM_API_KEY;
-  delete env.AGENT_WEB_TOKEN;
+  // W1153（深度审计 #29）：大小写不敏感剔除——Windows 环境变量不区分大小写，
+  // `llm_api_key` 形态的继承键此前会原样下发给 LLM 可执行的子进程。
+  for (const k of Object.keys(env)) {
+    if (/^(llm_api_key|agent_web_token)$/i.test(k)) delete env[k];
+  }
   return env;
 }
 
@@ -355,6 +378,7 @@ export function createToolset(cwd: string): Toolset {
           const p = guardPath(cwd, String(input.path ?? ""), "write", false);
           fs.mkdirSync(path.dirname(p), { recursive: true });
           fs.writeFileSync(p, content, "utf8");
+          noteSessionWrite(cwd, p);
           return { content: `已写入 ${input.path}（${Buffer.byteLength(content, "utf8")} 字节）`, isError: false };
         }
         case "edit_file": {
@@ -366,6 +390,7 @@ export function createToolset(cwd: string): Toolset {
           if (first === -1) return { content: "old_string 在文件中未找到", isError: true };
           if (src.indexOf(oldStr, first + 1) !== -1) return { content: "old_string 在文件中出现多次，需唯一", isError: true };
           fs.writeFileSync(p, src.slice(0, first) + newStr + src.slice(first + oldStr.length), "utf8");
+          noteSessionWrite(cwd, p);
           return { content: `已编辑 ${input.path}`, isError: false };
         }
         case "run_command": {
@@ -380,7 +405,11 @@ export function createToolset(cwd: string): Toolset {
           // ② W764（W760 S-01 落盘实证）：-O / -O=<pager> / --open-files-in-pager —— git 把
           //    pager 交 `sh -c '<pager> "$@"'` 执行（参数未转义）→ 任意命令执行；--ext-diff
           //    （外部 diff 驱动）与 --pager= 同族外呼，一并拦截。
-          const GIT_DANGER = /^(--no-index|--output=|--open-files-in-pager|--ext-diff|--pager=)/;
+          // W1153（深度审计 #27）：git 支持长选项**前缀缩写**（--open= 即 --open-files-in-pager=
+          // 的缩写）⇒ 原全名匹配可被缩写绕过 ⇒ 改按危险**前缀族**拦截：
+          // --open*（--open-files-in-pager 及其全部缩写）/ --output*（含空格形态另拦）/
+          // --ext-d*（--ext-diff 缩写）/ --pager* / --no-index。
+          const GIT_DANGER = /^(--no-index|--output|--open|--ext-d|--pager)/;
           if (tokens[0] === "git") {
             // W817：`--output` 的**空格形态**（`git log --output <file>`）此前不匹配
             // GIT_DANGER（该正则只认 `--output=` 带等号形态）→ 可把输出写到工作目录外的任意路径
@@ -417,6 +446,16 @@ export function createToolset(cwd: string): Toolset {
             const scriptReal = fs.realpathSync(path.resolve(root, tokens[1])); // 不存在即拒绝
             if (scriptReal !== root && !scriptReal.startsWith(root + path.sep)) {
               return { content: "脚本路径越界", isError: true };
+            }
+            // W1153（深度审计 #29）：本会话经 write_file/edit_file 新写入的 scripts/ 件
+            // 一律拒绝执行——「先写 scripts/x.py 再 run_command python scripts/x.py」
+            // 可组合出任意代码执行（绕过命令白名单与受保护路径）⇒ 需人工运行。
+            const relReal = toRelPosix(root, scriptReal);
+            if (sessionWrittenScripts.has(relReal) || sessionWrittenScripts.has(norm)) {
+              return {
+                content: `拒绝执行本会话新写入的脚本（防白名单组合逃逸·需人工运行）：${tokens[1]}`,
+                isError: true,
+              };
             }
           }
           const out = await new Promise<{ stdout: string; stderr: string; code: number | null }>((resolve, reject) => {

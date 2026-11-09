@@ -18,6 +18,7 @@
 """
 import argparse
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -41,8 +42,16 @@ def render_template(name: str, title: str, category: str, desc: str) -> str:
         sys.exit(f"[ERROR] 模板文件不存在: {TEMPLATE}")
     text = TEMPLATE.read_text(encoding="utf-8")
 
+    # W1183 根因修：模板位于 site/ 根，图标等资源写作 "static/..."；输出固定落到 site/data/，
+    # 不重写会使 rel=icon / apple-touch-icon 全部指向 site/data/static/（lint_links 实测 3 broken）。
+    # 只匹配「引号后紧跟 static/」，不会误伤已经写成 ../static/ 或 ../js/ 的路径。
+    text = text.replace('"static/', '"../static/')
     # <title>
     text = text.replace("页面标题 · 详解西游记", f"{title} · 详解西游记")
+    # W1177：引用格式块占位符（第 28 槽 C3）
+    text = text.replace("【占位】页面标题", title).replace("【占位】文件名", name)
+    # W1177：description（第 26 槽 R1 必备；占位符与 title 同源替换）
+    text = text.replace("【占位】一句话描述本页面内容（W1177：SEO 第 26 槽 R1 必备，new_page 会替换）", desc)
     # hero h1
     text = text.replace("<h1>页面主标题</h1>", f"<h1>{title}</h1>")
     # subtitle（副标题改为分类名）
@@ -85,6 +94,49 @@ def append_to_index(name: str, title: str, category: str) -> list[str]:
     return [new_line.strip()]
 
 
+PY = sys.executable
+
+
+def run_post(batch: str = "", name: str = "") -> int:
+    """W1177：新增页全链路收尾。顺序敏感——所有改 HTML 的步骤必须在 sitemap/索引/CSP 之前。
+
+    踩过的坑（W1176 四轮返工）：新页牵连 13 项门禁，逐个手跑必然漏。此处按依赖排序一次跑完：
+      改 HTML：徽标 → 导航 → SEO
+      读 HTML：sitemap → 搜索索引 → CSP 哈希（必须最后，哈希依赖上面的改动）
+      读全站：统计刷新（需批号）→ 色盲基线
+    任一步非 0 即停（fail-fast）——继续跑只会叠加更难定位的错误。
+    """
+    steps = [
+        ("数据源徽标", [PY, "scripts/w1167_badge_inject.py", "--apply"]),
+        ("主导航", [PY, "scripts/w1167_nav_inject.py", "--apply"]),
+        ("SEO head", [PY, "scripts/inject_seo_head.py"]),
+        ("sitemap", [PY, "scripts/gen_sitemap.py"]),
+        ("搜索索引", [PY, "scripts/_gen_search_index.py"]),
+        ("CSP 哈希", [PY, "scripts/generate_csp.py"]),
+    ]
+    if batch:
+        steps.append(("统计刷新", [PY, "scripts/stats.py", "--w", batch]))
+    steps.append(("色盲基线", [PY, "scripts/check_chart_colorblind.py", "--generate-baseline"]))
+    if name:
+        steps.append(("模板契约自检（第 69 槽）",
+                      [PY, "scripts/check_template_contract.py", "--target", f"site/data/{name}.html"]))
+
+    total = len(steps)
+    for i, (label, cmd) in enumerate(steps, 1):
+        print(f"[post {i}/{total}] {label} …", end=" ", flush=True)
+        r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+        tail = (r.stdout or r.stderr or "").strip().splitlines()
+        brief = tail[-1][:110] if tail else ""
+        if r.returncode != 0:
+            print("FAIL")
+            print(f"  ↳ {brief}")
+            print(f"  ↳ 命令：{' '.join(cmd)}")
+            return r.returncode
+        print(f"OK  {brief}")
+    print(f"[post] 全链路完成（{total} 步）。下一步：py -3 scripts/verify_delivery.py --scope auto")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="可视化页面脚手架")
     parser.add_argument("--name", required=True, help="页面文件名（不含 .html，如 power-resources）")
@@ -93,6 +145,9 @@ def main():
     parser.add_argument("--desc", default="", help="一句话描述本页面内容")
     parser.add_argument("--no-index", action="store_true", help="不修改 site/index.html 导航")
     parser.add_argument("--dry-run", action="store_true", help="仅打印将生成的文件内容，不写入")
+    parser.add_argument("--post", action="store_true",
+                        help="W1177：生成后自动跑新增页全链路（徽标→导航→SEO→sitemap→索引→CSP→可选统计→色盲基线）")
+    parser.add_argument("--batch", default="", help="配合 --post：批号（如 W1178），给出时追加统计刷新")
     args = parser.parse_args()
 
     # 校验 name 仅含 a-z 0-9 -
@@ -118,6 +173,12 @@ def main():
         added = append_to_index(args.name, args.title, args.category)
         for line in added:
             print(f"[OK] 已追加到 index.html: {line}")
+
+    if args.post:
+        print(f"[post] 开始新增页全链路：data/{args.name}.html")
+        rc = run_post(args.batch, args.name)
+        if rc != 0:
+            sys.exit(rc)
 
 
 if __name__ == "__main__":

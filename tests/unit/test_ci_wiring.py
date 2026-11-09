@@ -79,20 +79,28 @@ def _run_blocks(job_body: str) -> str:
             indent = len(m.group(1))
             rest = m.group(2).strip()
             if rest.startswith("|"):  # `run: |` 多行块——收后续更深缩进行
-                i += 1
-                while i < len(lines):
-                    nxt = lines[i]
-                    if not nxt.strip():
-                        i += 1
-                        continue
-                    if len(nxt) - len(nxt.lstrip()) <= indent:
-                        break
-                    out.append(nxt.strip())
-                    i += 1
+                blk, i = _collect_block(lines, i + 1, indent)
+                out.extend(blk)
                 continue
             out.append(rest)  # `run: <单行命令>`
         i += 1
     return "\n".join(out)
+
+
+def _collect_block(lines, i, indent):
+    """W1154：多行 run 块收集器（自原内联 while 抽出——存量嵌套 5>4 被「文件已改」
+    激活宽档拦截·行为逐字等价的去嵌套重构）。"""
+    blk = []
+    while i < len(lines):
+        nxt = lines[i]
+        if not nxt.strip():
+            i += 1
+            continue
+        if len(nxt) - len(nxt.lstrip()) <= indent:
+            break
+        blk.append(nxt.strip())
+        i += 1
+    return blk, i
 
 
 # ---------------------------------------------------------------------------
@@ -436,3 +444,17 @@ def test_pyyaml_is_registered_in_requirements():
     req = (ROOT / "scripts" / "requirements.txt").read_text(encoding="utf-8")
     assert "PyYAML" in req, "PyYAML 未登记进 requirements.txt——J3 在 CI 将静默跳过"
     assert re.search(r"^PyYAML==\S+", req, re.M), "PyYAML 须固定精确版本（P2-7 供应链纪律）"
+
+
+def test_screenshot_scope_wired_into_workflow():
+    """W1154 回归锁（基础设施审计 P0-1·W1126 声明≠落地根修）：
+
+    W1126 新增 check_screenshot_scope.py 时明写「workflow 只调用不内联」，但
+    screenshot-review.yml 从未引用它（git log -S 零命中）⇒ 内联旧判定跑了多批。
+    判据：workflow 必须出现该脚本名；且不得再保留内联 case 判定残留（NEEDED=false）。
+    """
+    import os
+    p = Path(ROOT) / ".github" / "workflows" / "screenshot-review.yml"
+    text = p.read_text(encoding="utf-8")
+    assert "check_screenshot_scope.py" in text, "screenshot-review.yml 未接线 scope 判据脚本"
+    assert "NEEDED=false" not in text, "内联 case 判定残留（应由单一事实源脚本取代）"

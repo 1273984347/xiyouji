@@ -121,6 +121,8 @@ for ((i = 0; i < N; i += CHUNK)); do
   "${RUFF[@]}" "${RUFF_ARGS[@]}" "${SLICE[@]}" || RC=1
   # 3) 嵌套推导式
   "${PY[@]}" scripts/guardrails/check_nested_comprehension.py "${SLICE[@]}" || RC=1
+  # 3.5) 改写完整性（阻塞·W1159 E-199 机器判据）
+  "${PY[@]}" scripts/guardrails/check_rewrite_integrity.py "${SLICE[@]}" || RC=1
   # 4) 一次性函数（提示）
   "${PY[@]}" scripts/guardrails/once_call.py "${SLICE[@]}"
   # 5) 公开 API 变化（--strict / --strict-api 阻断；--all 跳过）

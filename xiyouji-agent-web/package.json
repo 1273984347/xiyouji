@@ -17,7 +17,9 @@
     "test:client": "vitest run",
     "test:e2e": "node e2e/chat.e2e.mjs",
     "test:all": "npm run test:server && npm run test:integration && npm run test:client",
-    "smoke:engine": "node server/engine.smoke.mjs"
+    "smoke:engine": "node server/engine.smoke.mjs",
+    "fuzz": "jazzer fuzz fuzz -- -runs=100",
+    "test:prop": "node --import tsx --test fuzz/fastcheck.test.ts"
   },
   "dependencies": {
     "@tdesign-react/chat": "^1.1.0",
@@ -36,6 +38,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@jazzer.js/core": "^4.0.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.9.1",
@@ -50,6 +53,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "@vitest/coverage-v8": "^5.0.5",
     "concurrently": "^10.0.5",
+    "fast-check": "^4.10.2",
     "jsdom": "^25.0.1",
     "less": "^4.9.1",
     "postcss": "^8.5.28",
@@ -62,7 +66,7 @@
   "overrides": {
     "cherry-markdown": "^0.11.9",
     "mermaid": "^11.16.1",
-    "qs": "^6.16.0",
+    "qs": "^6.16.1",
     "fast-uri": "^4.2.1",
     "proxy-addr": "^2.0.8",
     "shell-quote": "1.11.0",

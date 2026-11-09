@@ -45,7 +45,12 @@ def _fake_input(**over):
     fill = ["fill%02d.py" % i for i in range(cov.MIN_SCRIPTS)]
     base = {
         "scripts": ["alpha.py", "beta.py"] + fill,
-        "corpus_text": "\n".join(['"alpha.py"', "import beta"] + fill),
+        # W1155：夹具升级「实质调用面」语义——alpha E1 / beta E3 / fill E1（执行形态行）
+        "corpus_text": "\n".join(
+            ["node scripts/alpha.py --self-test",
+             "import beta",
+             'subprocess.run(["python", "scripts/beta.py"])']
+            + ['node scripts/%s --self-test' % f for f in fill]),
         "baseline_raw": "\n".join(["# c"] + ["fill%02d.py" % i for i in range(cov.MIN_BASELINE)]),
         "_self_test": True,
     }

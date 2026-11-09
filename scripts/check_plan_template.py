@@ -40,7 +40,8 @@ def changed_plan_files():
     if r.returncode != 0:
         return []
     out = []
-    for rec in r.stdout.split('\0'):
+    nul = chr(0)  # W1155：-z 分隔符（字面量经 JSON 层会被转义层咬·运行时构造）
+    for rec in r.stdout.split(nul):
         if not rec.strip():
             continue
         # 形如 "XY path"：前 2 字符为状态位，其后为路径（-z 模式不加引号）
@@ -49,6 +50,17 @@ def changed_plan_files():
             path = path[1:-1]
         if path.endswith('.md') and '计划方案' in path:
             out.append(path)
+    if not out and not _git(['status', '--porcelain']).stdout.strip():
+        # W1155（深度审计 #55）：CI 干净检出 porcelain 恒空 ⇒ 增量口径只在本批改动
+        # 瞬间生效、CI 全量运行下结构性判据恒绿。回退 merge-base..HEAD 的 diff 面。
+        mb = _git(['merge-base', 'origin/main', 'HEAD'])
+        base = mb.stdout.strip() if mb.returncode == 0 and mb.stdout.strip() else 'origin/main'
+        d = _git(['diff', '--name-only', '-z', base + '..HEAD', '--', PLAN_REL])
+        if d.returncode == 0:
+            for rec in d.stdout.split(nul):
+                p = rec.strip().strip('"')
+                if p.endswith('.md') and '计划方案' in p:
+                    out.append(p)
     return sorted(set(out))
 
 

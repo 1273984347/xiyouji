@@ -112,6 +112,41 @@ def check_file_index(errors: list[str]) -> None:
         errors.append(f"file-index 缺 {len(missing)} 个 CHANGELOG 版段登记：{[f'W{w:03d}' for w in missing]}")
 
 
+def check_docs11_registration(errors: list[str]) -> None:
+    """W1154（基础设施审计 P0-2）：docs/11 报告登记面双向对账——
+
+    README 开头明文要求「新报告入库须在此登记」，但审计实证 9 份未登记且无任何
+    门禁覆盖（第 17 槽只覆盖 docs/10 与 docs/INDEX.md）。判据：① 六个子目录的
+    每份 .md（除 README/INDEX）必须以文件名出现在 README 正文；② README 引用的
+    相对 .md 链接必须真实存在（防死指针）。
+    """
+    base = ROOT / "docs" / "11-方案报告"
+    readme = base / "README.md"
+    text = readme.read_text(encoding="utf-8-sig")
+    missing = []
+    for sub in ("审查与评审", "设计与架构方案", "治理与核查", "计划方案",
+                "工作复盘与优化分析报告", "调研与数据复盘"):
+        d = base / sub
+        if not d.is_dir():
+            continue
+        for p in d.glob("*.md"):
+            if p.name in ("README.md", "INDEX.md"):
+                continue
+            if p.name not in text:
+                missing.append(f"{sub}/{p.name}")
+    if missing:
+        errors.append(f"docs/11 报告登记面缺 {len(missing)} 份：{sorted(missing)}")
+    dead = []
+    for m in re.findall(r"\]\(([^)#]+?\.md)\)", text):
+        if m.startswith(("http", "/")):
+            continue
+        if not (base / m).exists():
+            dead.append(m)
+    if dead:
+        errors.append(f"docs/11 README 引用不存在 {len(dead)} 份：{sorted(set(dead))}")
+    print(f"docs/11 登记：缺 {len(missing)} · README 死链 {len(dead)}")
+
+
 def check_methodology_readme(errors: list[str]) -> None:
     files = {
         p.name for p in METHOD_DIR.iterdir()
@@ -207,6 +242,7 @@ def main() -> int:
     errors: list[str] = []
     check_file_index(errors)
     check_methodology_readme(errors)
+    check_docs11_registration(errors)
     check_docs_index(errors)
     check_changelog_w_upper(errors)
     check_governance_refs(errors)

@@ -821,6 +821,27 @@ def _render_budget_details(md, budget):
             md.append(f"- [{v['severity']}] {v['message']}")
 
 
+def _render_rum_section(md, rum):
+    """渲染 RUM 真实用户监控段（W267·错误行或事件汇总 + 逐页 P75 表）。"""
+    md.append("\n## 五、W267 · RUM 真实用户监控\n")
+    if "error" in rum:
+        md.append(f"- 错误：{rum['error']}\n")
+    else:
+        md.append(f"- 事件总数：{rum.get('events', 0)}")
+        agg = rum.get("aggregate", {})
+        if agg:
+            md.append("- 全站 P75 汇总：")
+            for key in ("lcp_p75", "cls_p75", "inp_p75", "tbt_p75", "fcp_p75"):
+                if key in agg and agg[key] is not None:
+                    md.append(f"  - {key} = {agg[key]}")
+        pages_rum = rum.get("pages", {})
+        if pages_rum:
+            md.append("\n| 页面 | LCP(P75) | CLS(P75) | INP(P75) | TBT(P75) | FCP(P75) | 样本 |")
+            md.append("|------|----------|----------|----------|----------|----------|------|")
+            for page, v in list(pages_rum.items())[:20]:
+                md.append(f"| {page} | {v.get('lcp')} | {v.get('cls')} | {v.get('inp')} | {v.get('tbt')} | {v.get('fcp')} | {v.get('samples', 0)} |")
+
+
 def _render_optional_sections(md, alerts, rum, trend, budget):
     """渲染 W267 可选子报告段（警报/RUM/趋势/预算·按传入数据有无分流）。
 
@@ -836,23 +857,7 @@ def _render_optional_sections(md, alerts, rum, trend, budget):
             md.append(f"| {a['severity']} | {a['page']} | {a['metric']} | {a['value']} | {a['threshold']} | {a['message']} |")
 
     if rum:
-        md.append("\n## 五、W267 · RUM 真实用户监控\n")
-        if "error" in rum:
-            md.append(f"- 错误：{rum['error']}\n")
-        else:
-            md.append(f"- 事件总数：{rum.get('events', 0)}")
-            agg = rum.get("aggregate", {})
-            if agg:
-                md.append("- 全站 P75 汇总：")
-                for key in ("lcp_p75", "cls_p75", "inp_p75", "tbt_p75", "fcp_p75"):
-                    if key in agg and agg[key] is not None:
-                        md.append(f"  - {key} = {agg[key]}")
-            pages_rum = rum.get("pages", {})
-            if pages_rum:
-                md.append("\n| 页面 | LCP(P75) | CLS(P75) | INP(P75) | TBT(P75) | FCP(P75) | 样本 |")
-                md.append("|------|----------|----------|----------|----------|----------|------|")
-                for page, v in list(pages_rum.items())[:20]:
-                    md.append(f"| {page} | {v.get('lcp')} | {v.get('cls')} | {v.get('inp')} | {v.get('tbt')} | {v.get('fcp')} | {v.get('samples', 0)} |")
+        _render_rum_section(md, rum)
 
     if trend:
         md.append("\n## 六、W267 · 历史趋势对比\n")

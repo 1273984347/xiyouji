@@ -39,6 +39,8 @@ ROOT_FILES = {
     "AGENTS.md", "CLAUDE.md", "DESIGN.md", "HANDOVER.md", "STRUCTURE.md",
     "CHANGELOG.md", "README.md", "README.en.md", "CONTRIBUTING.md",
     "CODE_OF_CONDUCT.md", "SECURITY.md", "LICENSE", "LICENSE-CONTENT.md", "CITATION.cff",
+    # 四文档治理体系（W1157 建·用户令）：RULES=规则入口 / pitfalls=坑表正本（docs/agent/ 留跳转壳）·AGENTS/CLAUDE 既有
+    "RULES.md", "pitfalls.md",
     # 工程配置
     "Makefile", "pyproject.toml", "pytest.ini", "mypy.ini", "eslint.config.mjs",
     ".gitignore", ".gitattributes", ".git-blame-ignore-revs", ".pre-commit-config.yaml",
@@ -53,7 +55,6 @@ TOP_DIRS = {
     "assets": "设计母版与素材",
     "dataset": "结构化数据（从站点提取）",
     "docs": "内容与方法论（编号板块 + 00-导读 + agent）",
-    "hyperframes": "视频化架构（Compositions）",
     "mcp-server": "MCP 服务端",
     "packaging": "打包与分发",
     "scripts": "生成器 / 门禁 / 工具",

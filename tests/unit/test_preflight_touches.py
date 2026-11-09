@@ -98,7 +98,8 @@ def test_dir_slash_form_conflicts_with_file_inside():
 
 def test_prefix_match_is_bidirectional():
     """本方声明目录、对方声明具体文件时同样命中（对称）。"""
-    assert pf.touches_conflict({"docs/agent/pitfalls.md"}, {"docs/agent/**"}) != []
+    # W1157：pitfalls 正本迁根后样例改用仍在 docs/agent/ 的 gates.md（机制不变·样例随迁）
+    assert pf.touches_conflict({"docs/agent/gates.md"}, {"docs/agent/**"}) != []
 
 
 def test_prefix_match_no_false_positive_on_sibling_names():

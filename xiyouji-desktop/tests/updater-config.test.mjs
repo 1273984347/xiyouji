@@ -31,7 +31,7 @@ describe('package.json 契约', () => {
 
   it('依赖版本精确锁定，且不引入其它运行时依赖', () => {
     assert.deepEqual(packageJson.dependencies, { 'electron-updater': '6.8.9' });
-    assert.equal(packageJson.devDependencies.electron, '44.9.0');
+    assert.equal(packageJson.devDependencies.electron, '44.9.1');
     assert.equal(packageJson.devDependencies['electron-builder'], '26.15.3');
     assert.equal(Object.keys(packageJson.dependencies).length, 1);
   });

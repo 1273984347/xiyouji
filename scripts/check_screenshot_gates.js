@@ -213,6 +213,12 @@ async function main() {
     );
     console.log('json: ' + cfg.jsonPath);
   }
+  // W1155（深度审计 #64）：--only 零命中（页面删除/改名/基名不存在）时 0 页 → 0 FAIL
+  // = G1-G5 全部空转且无「判据未执行」信号 ⇒ 判据未执行 exit 2（fail-closed）。
+  if (onlyList && pages.length === 0) {
+    console.error("[FAIL] --only 零命中（%s）——定向判据未执行即红", JSON.stringify(onlyList));
+    process.exit(2);
+  }
   process.exit(bad.length ? 1 : 0);
 }
 

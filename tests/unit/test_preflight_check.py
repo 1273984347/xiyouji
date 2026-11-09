@@ -22,7 +22,7 @@ ROOT_SCRIPTS = Path(__file__).resolve().parent.parent.parent / "scripts"
 
 LEDGER_SAMPLE = "\n".join([
     "| W735 | 全仓归档大扫除批 | 1fd372b4 | W735 | 已收官 | 主会话 |",
-    "| W739 | touches 机制批 | 认领占位 | W739 | 进行中 | 主会话 | AGENTS.md, docs/agent/pitfalls.md |",
+    "| W739 | touches 机制批 | 认领占位 | W739 | 进行中 | 主会话 | AGENTS.md, pitfalls.md |",
     "- **W733**：现势下一自由号（756a7089 w732 收官级联后 checklist 例行）——预留登记豁免。",
     "- **W736**：现势下一自由号（1fd372b4 w735 收官级联后 checklist 例行）——预留登记豁免。",
     "> ## 现势：下一自由号 = **W721**（上一代机制遗留块·不参与解析）",
@@ -51,7 +51,7 @@ def test_parse_ledger_tolerates_empty():
 def test_parse_ledger_touches_column():
     got = preflight_check.parse_ledger(LEDGER_SAMPLE)
     w739 = [r for r in got["rows"] if r["w"] == 739][0]
-    assert w739["touches"] == {"AGENTS.md", "docs/agent/pitfalls.md"}
+    assert w739["touches"] == {"AGENTS.md", "pitfalls.md"}
     assert w739["status"] == "进行中"
 
 
@@ -76,6 +76,21 @@ def test_is_inflight_strips_markdown_bold():
     assert not preflight_check.is_inflight("**已闭环**")
     assert preflight_check.is_inflight("**进行中**")
 
+
+def test_inflight_recognizes_merged_status():
+    """W1160 根修锁：「已合并」是兄弟会话 PR 收官登记形态，必须判非在途。
+
+    实证：W1137/W1147 状态列「**已合并（PR #142·8f724d1f）**」不被识别 ⇒
+    preflight 每批误报「登记滞后」WARN ×19（触发器噪音淹没真信号）。
+    同族形态「已让号/已撤销」（让号先例 W894/W1039）一并纳入。
+    """
+    assert not preflight_check.is_inflight("**已合并（PR #142·8f724d1f）**")
+    assert not preflight_check.is_inflight("已合并")
+    assert not preflight_check.is_inflight("**已让号（W895 先落地）**")
+    assert not preflight_check.is_inflight("**已撤销（撞号停手）**")
+    # 真在途形态仍判在途（判据强度不降）
+    assert preflight_check.is_inflight("在途（认领·未收官）")
+    assert preflight_check.is_inflight("进行中（剩余=联调）")
 
 def test_inflight_with_bold_status_variants():
     # W741 加固回归：单星/多星/空白变体（replace("**") 防不住单星·re.sub 全量剥离）
@@ -116,9 +131,9 @@ def test_touches_conflict_intersection():
 
 
 def test_touches_conflict_multi_path():
-    inflight = {"docs/00-导读/文档规范.md", "AGENTS.md", "docs/agent/pitfalls.md"}
-    mine = {"AGENTS.md", "docs/agent/pitfalls.md", "scripts/README.md"}
-    assert preflight_check.touches_conflict(inflight, mine) == ["AGENTS.md", "docs/agent/pitfalls.md"]
+    inflight = {"docs/00-导读/文档规范.md", "AGENTS.md", "pitfalls.md"}
+    mine = {"AGENTS.md", "pitfalls.md", "scripts/README.md"}
+    assert preflight_check.touches_conflict(inflight, mine) == ["AGENTS.md", "pitfalls.md"]
 
 
 # ---------------------------------------------------------------------------
@@ -213,14 +228,14 @@ def test_interference_log_hint_in_safe_commit():
 def test_parse_ledger_survives_extra_cell_from_pipe_in_summary():
     """W825 核心：摘要含裸竖线（行被切成 8 格）时，状态与 touches 仍须定位正确。"""
     line = (
-        "| W900 | 修复 `a|b` 形态的批 | abc1234（级联） | W900 | **已收官**（abc1234） | 主会话 | AGENTS.md, docs/agent/pitfalls.md |"
+        "| W900 | 修复 `a|b` 形态的批 | abc1234（级联） | W900 | **已收官**（abc1234） | 主会话 | AGENTS.md, pitfalls.md |"
     )
     got = preflight_check.parse_ledger(line)
     assert len(got["rows"]) == 1
     row = got["rows"][0]
     assert row["status"] == "**已收官**（abc1234）", "状态列读错：%r" % row["status"]
     assert not preflight_check.is_inflight(row["status"]), "已收官批次不得被误判为在途"
-    assert row["touches"] == {"AGENTS.md", "docs/agent/pitfalls.md"}, "touches 列读错：%r" % row["touches"]
+    assert row["touches"] == {"AGENTS.md", "pitfalls.md"}, "touches 列读错：%r" % row["touches"]
 
 
 def test_parse_ledger_touches_placeholder_is_empty_set():
@@ -245,7 +260,7 @@ def test_parse_ledger_normal_row_unchanged():
     got = preflight_check.parse_ledger(LEDGER_SAMPLE)
     w739 = [r for r in got["rows"] if r["w"] == 739][0]
     assert w739["status"] == "进行中"
-    assert w739["touches"] == {"AGENTS.md", "docs/agent/pitfalls.md"}
+    assert w739["touches"] == {"AGENTS.md", "pitfalls.md"}
     w735 = [r for r in got["rows"] if r["w"] == 735][0]
     assert w735["status"] == "已收官"
     assert w735["touches"] == set()

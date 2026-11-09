@@ -43,6 +43,8 @@
       var next = dark ? 'light' : 'dark';
       apply(next);
       try { localStorage.setItem('xy-theme', next); } catch (_) {}
+      // W1168：只报切换后的主题档位（should 级事件）；桥缺席或 file:// 下自带静默
+      if (window.XYstats) { window.XYstats.count('dark_mode_toggle', next); }
     });
     document.body.appendChild(b);
   }

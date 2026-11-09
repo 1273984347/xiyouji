@@ -6832,6 +6832,16 @@
     /* ==========================================================
        工具函数
        ========================================================== */
+    function readerHref(num, query) {
+        // W1168：结果卡可点开 ⇒ 深链到对应回目页并带检索词做高亮。
+        // 约定 `../reader/chNNN.html#q=<词>` 用 hash 而非 query string：file:// 下查询串
+        // 可能被当作文件名的一部分解析而打不开，hash 永不参与文件解析（file:// 铁律）。
+        // 两层编码缺一不可：encodeURIComponent 保 URL 语义，escapeHtml 保属性边界
+        // （本函数结果被拼进 innerHTML 的 href="…"，检索词是用户输入，不转义引号即可越界注入）。
+        const pad = String(num).padStart(3, '0');
+        return escapeHtml('../reader/ch' + pad + '.html#q=' + encodeURIComponent(query || ''));
+    }
+
     function escapeHtml(s) {
         return String(s).replace(/[&<>"']/g, c => ({
             '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -6953,7 +6963,7 @@
         summary.innerHTML = `共找到 <strong>${result.total}</strong> 处匹配「<span class="q">${escapeHtml(result.query)}</span>」${state.chapterFilter !== 'all' ? '（范围：' + scopeLabel + '）' : ''}${result.capped ? ' · 已显示前 ' + MAX_RESULTS + ' 处' : ''}`;
 
         region.innerHTML = '<div class="result-list">' + result.items.map(item => `
-            <div class="result-card">
+            <a class="result-card" href="${readerHref(item.chapter.num, result.query)}">
                 <div class="rc-head">
                     <span class="rc-chapter">第${item.chapter.num}回</span>
                     <span class="rc-title">${escapeHtml(item.chapter.title)}</span>
@@ -6961,16 +6971,29 @@
                 </div>
                 <div class="rc-context">${escapeHtml(item.prefix)}<mark>${escapeHtml(item.match)}</mark>${escapeHtml(item.suffix)}</div>
                 <div class="rc-pos">位置：约第 ${item.position} 字</div>
-            </div>
+            </a>
         `).join('') + '</div>';
     }
 
     /* ==========================================================
        交互：执行检索
        ========================================================== */
+    let lastReportedQuery = null;
+
+    function reportSearch(result) {
+        const q = (result && result.query || '').trim();
+        // 一次检索意图 = 一条事件：输入防抖会让同一次查询重复触发，按「查询词是否变化」去重；
+        // 空查询不计。值只带命中数，**不回传查询词**（检索词可能含用户私人信息，
+        // 而指标只需「查了、有没有查到」——D3/D4 的口径都是命中率而非关键词本身）。
+        if (!q || q === lastReportedQuery) { return; }
+        lastReportedQuery = q;
+        if (window.XYstats) { window.XYstats.count('search_perform', (result.total || 0) + ' hits'); }
+    }
+
     function performSearch() {
         const result = search(state.query, state.chapterFilter);
         renderResults(result);
+        reportSearch(result);
     }
 
     function setQuery(q) {
@@ -7000,6 +7023,19 @@
         const clearBtn = document.getElementById('clear-btn');
         const form = document.getElementById('search-form');
         let debounceTimer;
+
+        // W1168 结果打开事件：结果卡是渲染后才出现的，goatcounter 的 bind_events 只在 load 时
+        // 绑定一次 ⇒ 声明式属性对动态节点根本不生效（留属性＝「已埋」错觉）。
+        // 改挂在**持久容器** #result-region 上做委托（其 innerHTML 每次替换，元素本身不换）。
+        // 值刻意留空：href 里含用户检索词，属私人信息，不进统计。
+        const region = document.getElementById('result-region');
+        if (region) {
+            region.addEventListener('click', (e) => {
+                const card = e.target && e.target.closest ? e.target.closest('.result-card') : null;
+                if (!card || !window.XYstats) { return; }
+                window.XYstats.count('search_hit_open', '');
+            });
+        }
 
         input.addEventListener('input', () => {
             clearTimeout(debounceTimer);
@@ -7074,6 +7110,9 @@
     function main() {
         renderAll();
         bindEvents();
+        // 就绪标志：本 app 是 window.load 之后动态注入的（W424 首屏性能优化），
+        // 消费方（stat_event_probe / E2E）据此等待而不是靠猜等待时长
+        window.__xySearchReady = true;
         const _gt=document.getElementById('gen-time');if(_gt)_gt.textContent =
             '页面生成时间：' + new Date().toISOString().slice(0, 19).replace('T', ' ') + '（本地嵌入）';
     }

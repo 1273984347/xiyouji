@@ -276,6 +276,41 @@ def _resolve_pages(rel_list):
     return out
 
 
+def _identity_multiset_diff(rel, theme, eb, ea):
+    """元素数差异时的**身份多重集差集**条目（W1097）⇒ 二分「采集抖动」与「真实增删」。
+
+    口径要点（实测实证·非推断）：
+    ① 元素数不同时身份多重集差集**必有一边非空** ⇒ 「两边皆空=抖动」不可达
+       （那是死分支·会给人「已判过抖动」的错觉）⇒ 改按差集**形态**二分：
+         · 仅一侧非空 ⇒ 同身份元素数量增减（抖动：多采/漏采一个副本）
+         · 两侧非空   ⇒ 身份集变化（真实增删）
+    ② 用 **Counter 多重集**而非 set：同身份元素数量变化在 set 口径下差集为空
+       ⇒ 会被误判为「抖动」（3 个 div.a → 2 个 div.a 实为真实减少）。
+    实测锚点：W1097 同页受控回退对照（回退态 vs 改动态·同参数单页采集）元素数
+    零差异；而 10 页批量基线与单页复采相差 1 ⇒ 差在**采样面**，不在改动。
+    """
+    _idb = Counter((r[0], r[1]) for r in eb)
+    _ida = Counter((r[0], r[1]) for r in ea)
+    _db = _idb - _ida  # Counter 差集只保留正计数
+    _da = _ida - _idb
+    if _db and _da:
+        _verdict = "真实增删（身份集变化）"
+    elif _da:
+        _verdict = "同身份元素数量增加（抖动·多采一个副本）"
+    elif _db:
+        _verdict = "同身份元素数量减少（抖动·漏采一个副本）"
+    else:
+        _verdict = "数量差异但身份多重集相同（不可达·防御分支）"
+    return {
+        "page": rel,
+        "theme": theme,
+        "kind": "元素身份差集",
+        "仅before有": sorted(_db.elements())[:5],
+        "仅after有": sorted(_da.elements())[:5],
+        "判定": _verdict,
+    }
+
+
 def _diff_snapshots(before, after, max_report=20):
     """对拍两个快照。返回 (diffs, notes)。diffs 非空即 J2 不过。
 
@@ -304,38 +339,7 @@ def _diff_snapshots(before, after, max_report=20):
                 diffs.append({"page": rel, "theme": theme, "kind": "元素数", "before": len(eb), "after": len(ea)})
                 # 不短路：计数差异曾把属性对拍整个掩盖（W851 实证）——
                 # 公共前缀仍按索引逐属性比，多退少补都显形
-                # W1097：元素数差异时输出**身份多重集差集** ⇒ 二分「采集抖动」与「真实增删」。
-                # 口径要点（实测实证·非推断）：
-                # ① 元素数不同时身份多重集差集**必有一边非空** ⇒ 「两边皆空=抖动」不可达
-                #    （那是死分支·会给人「已判过抖动」的错觉）⇒ 改按差集**形态**二分：
-                #      · 仅一侧非空 ⇒ 同身份元素数量增减（抖动：多采/漏采一个副本）
-                #      · 两侧非空   ⇒ 身份集变化（真实增删）
-                # ② 用 **Counter 多重集**而非 set：同身份元素数量变化在 set 口径下差集为空
-                #    ⇒ 会被误判为「抖动」（3 个 div.a → 2 个 div.a 实为真实减少）。
-                # 实测锚点：W1097 同页受控回退对照（回退态 vs 改动态·同参数单页采集）元素数
-                # 零差异；而 10 页批量基线与单页复采相差 1 ⇒ 差在**采样面**，不在改动。
-                _idb = Counter((r[0], r[1]) for r in eb)
-                _ida = Counter((r[0], r[1]) for r in ea)
-                _db = _idb - _ida  # Counter 差集只保留正计数
-                _da = _ida - _idb
-                if _db and _da:
-                    _verdict = "真实增删（身份集变化）"
-                elif _da:
-                    _verdict = "同身份元素数量增加（抖动·多采一个副本）"
-                elif _db:
-                    _verdict = "同身份元素数量减少（抖动·漏采一个副本）"
-                else:
-                    _verdict = "数量差异但身份多重集相同（不可达·防御分支）"
-                diffs.append(
-                    {
-                        "page": rel,
-                        "theme": theme,
-                        "kind": "元素身份差集",
-                        "仅before有": sorted(_db.elements())[:5],
-                        "仅after有": sorted(_da.elements())[:5],
-                        "判定": _verdict,
-                    }
-                )
+                diffs.append(_identity_multiset_diff(rel, theme, eb, ea))
             for i, (rb, ra) in enumerate(zip(eb, ea, strict=False)):
                 if rb == ra:
                     continue

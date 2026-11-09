@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lZfKwgs0q6bWdfpAUJG4GMPCC0Yh/1rcjz+FIAfYFYQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lZfKwgs0q6bWdfpAUJG4GMPCC0Yh/1rcjz+FIAfYFYQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <!-- W1137（R-09 收口）：本地工具页·sitemap 已排除（gen_sitemap EXCLUDE），noindex 兜底直达爬虫 -->
@@ -41,8 +41,15 @@
 <link rel="icon" type="image/png" sizes="192x192" href="static/icons/icon-192.png">
 <link rel="icon" type="image/svg+xml" href="static/icons/logo-mark-light.svg">
 <link rel="apple-touch-icon" href="static/icons/icon-192.png">
+
+<!-- ANALYTICS v2 w1168 -->
+<script data-goatcounter="https://1273984347.goatcounter.com/count" async src="static/js/goatcounter.js"></script>
+<script defer src="static/js/stats.js"></script>
 </head>
 <body>
+<header class="site-header"><!-- NAV-CANONICAL v1 w1167 -->
+<nav class="site-mainnav" aria-label="主导航"><a class="nav-brand" href="index.html">西游详解</a><a href="guide.html" class="nav-item" data-goatcounter-click="nav-guide">导读</a><a href="reader/index.html" class="nav-item" data-goatcounter-click="nav-reader">阅读</a><a href="dashboard.html" class="nav-item" data-goatcounter-click="nav-dashboard">看板</a><a href="data/text-search.html" class="nav-item" data-goatcounter-click="nav-search">检索</a><a href="about.html" class="nav-item" data-goatcounter-click="nav-about">关于</a><a href="en/index.html" class="nav-item" data-goatcounter-click="nav-switch-en">EN</a></nav></header>
+
   <h1>访问记录</h1>
   <div class="sub">读取 localStorage「visit_log」中由 <code>js/visit-log.js</code> 采集的本地访问记录。
     <b>仅统计本浏览器</b>（localStorage 限制·无法统计真实读者）。外部统计接入后可导出后弃用。</div>

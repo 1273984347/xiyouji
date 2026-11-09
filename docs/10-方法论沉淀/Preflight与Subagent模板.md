@@ -370,7 +370,7 @@ subagent 创建随笔时禁止编造 line 号；
 
 - `C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·**W754 校：实测失联·去链留值**）
 - [C:\Users\12739\.trae-cn\skills\executing-plans\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/executing-plans/SKILL.md)（Step 2 子步骤 2 Preflight interface analysis + 子步骤 3 Scope-lock constraint）
-- **W754 校**：上述全局路径中 deep-review-loop 已实测失联、仓内 `skills/` 已 W562 退役（executing-plans 全局路径仍在，但非本仓协议载体）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + [CLAUDE.md](../../CLAUDE.md) + [docs/agent/pitfalls.md](../agent/pitfalls.md)，开工侧工具＝`scripts/preflight_check.py`
+- **W754 校**：上述全局路径中 deep-review-loop 已实测失联、仓内 `skills/` 已 W562 退役（executing-plans 全局路径仍在，但非本仓协议载体）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + [CLAUDE.md](../../CLAUDE.md) + [pitfalls.md](../../pitfalls.md)，开工侧工具＝`scripts/preflight_check.py`
 
 ### 项目内关联
 
