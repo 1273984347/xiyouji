@@ -1,3 +1,45 @@
+## W1185 A5 章回套语专题（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/04-文化与历史背景/且听下回分解套语专题.md | W1185 | 新建：A5 章回套语专题·10879 字符·6 条逐字核验引文·百回分布实算 |
+| docs/04-文化与历史背景/README.md | W1185 | 改：系列段扩为 W1180–W1185 + 新增一行 |
+| site/data/glossary.html | W1185 | 改：深度解读区加「四、回目结构」反向入口 |
+| docs/00-导读/统计口径说明.md | W1185 | 改：分板块表格 A5 39→40（合计 621） |
+| site/dashboard.html | W1185 | 改：A5 KPI 卡片 39→40 + A1-A6 段落 620→621（第 68 槽） |
+| docs/INDEX.md | W1185 | 改：docs_index.py 重建（866 篇·13 板块） |
+| docs/00-导读/W批次编号对账表.md | W1185 | 改：W1185 认领行 |
+| scripts/output/_w1185_spec.json | W1185 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1185.txt | W1185 | 新建：级联清单 |
+| CHANGELOG.md | W1185 | 改：W1185 段落（级联） |
+| scripts/output/file-index.md | W1185 | 改：W1185 段（级联） |
+| site/data/search.html | W1185 | 改：搜索索引重生成（第 46 槽） |
+| site/en/search.html | W1185 | 改：搜索索引重生成（同上） |
+| README.md | W1185 | 改：A1-A6 计数标记跟随 + 版本行（级联） |
+| STRUCTURE.md | W1185 | 改：版本行推进（级联） |
+| HANDOVER.md | W1185 | 改：最后更新行 + 当前进度（级联） |
+| .github/workflows/README.md | W1185 | 改：区间行推进（版本面） |
+| CITATION.cff | W1185 | 改：version/date 推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1185 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1185 | 改：逐批明细追加（W1185·级联） |
+| docs/00-导读/项目说明.md | W1185 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1185 | 改：a5_docs 39→40 / a1_a6_docs 620→621 |
+| scripts/output/INDEX.md | W1185 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1185 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1185 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1185 | 改：再生成/验证缓存（级联） |
+| AGENTS.md | W1185 | 改：级联/目录刷新产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1185 | 改：级联/目录刷新产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1185 | 改：级联/目录刷新产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1185 | 改：级联/目录刷新产物 |
+| docs/agent/gates.md | W1185 | 改：级联/目录刷新产物 |
+| scripts/output/stats-changelog.json | W1185 | 改：级联/目录刷新产物 |
+| scripts/output/stats-index.md | W1185 | 改：级联/目录刷新产物 |
+| site/data/cross-time-danmaku.html | W1185 | 改：级联/目录刷新产物 |
+| site/data/tag-cloud.html | W1185 | 改：级联/目录刷新产物 |
+| site/dukou-engine.html | W1185 | 改：级联/目录刷新产物 |
+| site/index.html | W1185 | 改：级联/目录刷新产物 |
+
 ## W1184 A5 空间框架专题（2026-11-09）
 
 | 文件 | W | 说明 |
