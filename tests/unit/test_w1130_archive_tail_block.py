@@ -79,3 +79,34 @@ def test_split_tail_block_stays_file_tail():
     assert moved == SAMPLE[cut:tail]
     assert kept == SAMPLE[:cut] + SAMPLE[tail:]
     assert kept.endswith("> **维护契约**：历史段只增不删。" + chr(10))
+
+
+# W1192：_a3_ok 的末尾块分支原写成 `not new_src.endswith(src_text[tail:])`，
+#   与 split_tail_block「末尾块留在正本末尾」的行为相互矛盾 ⇒ 该分支恒假 ⇒
+#   CHANGELOG 体积模式迁移必红（W1192 实测：264907 B 超上限触发迁移后 A3 AssertionError）。
+#   下列三例把判据语义钉死：末尾块逐字节留在正本末尾 = 通过；前缀被改 = 拦截；
+#   末尾块被搬走 = 拦截。
+def test_a3_ok_accepts_tail_block_kept_at_file_end():
+    m = _load()
+    cut = SAMPLE.index("### W1129")
+    tail = m._tail_block_start(SAMPLE)
+    moved, kept = m.split_tail_block(SAMPLE, cut, tail)
+    assert m._a3_ok(kept, SAMPLE, cut, tail) is True
+
+
+def test_a3_ok_rejects_modified_prefix():
+    m = _load()
+    cut = SAMPLE.index("### W1129")
+    tail = m._tail_block_start(SAMPLE)
+    moved, kept = m.split_tail_block(SAMPLE, cut, tail)
+    tampered = "X" + kept
+    assert m._a3_ok(tampered, SAMPLE, cut, tail) is False
+
+
+def test_a3_ok_rejects_tail_block_moved_away():
+    m = _load()
+    cut = SAMPLE.index("### W1129")
+    tail = m._tail_block_start(SAMPLE)
+    moved, kept = m.split_tail_block(SAMPLE, cut, tail)
+    without_tail = kept[: len(kept) - len(SAMPLE[tail:])]
+    assert m._a3_ok(without_tail, SAMPLE, cut, tail) is False

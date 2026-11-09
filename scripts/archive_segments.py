@@ -213,7 +213,13 @@ def _a3_ok(new_src, src_text, cut, tail):
     if not new_src.startswith(src_text[:cut]):
         return False
     if tail is not None and tail > cut:
-        return not new_src.endswith(src_text[tail:])
+        # W1192 根修：原写法 `not new_src.endswith(src_text[tail:])` 与本函数文档及
+        #   split_tail_block 的行为**相互矛盾**——split_tail_block 在 tail > cut 时把末尾块
+        #   留在正本末尾（kept = src[:cut] + src[tail:]）⇒ new_src 必以末尾块结尾；
+        #   原断言却要求「不以末尾块结尾」⇒ 该分支恒假 ⇒ CHANGELOG 体积模式迁移必红
+        #   （W1192 实测：CHANGELOG 264907 B 超 262144 B 上限 → 触发体积迁移 → A3 AssertionError）。
+        #   判据意图「末尾块逐字节留在正本」应判为「以末尾块结尾」；留存前缀不变由上一行保证。
+        return new_src.endswith(src_text[tail:])
     return True
 
 
