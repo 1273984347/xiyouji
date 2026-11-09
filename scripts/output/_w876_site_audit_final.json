@@ -4527,5 +4527,16 @@
         "area": 0
       }
     ]
+  },
+  "data/glossary.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "button",
+        "cls": "filter-tab active",
+        "kind": "background",
+        "area": 2577
+      }
+    ]
   }
 }

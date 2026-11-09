@@ -36,3 +36,5 @@
 + W1187 A5 佛教术语专题·无 workflow 结构改动）。
 + W1188 读者路径验收与导航修复·无 workflow 结构改动）。
 + W1189 集成连通：A5 系列 ↔ 角色/器物文档 双向补链·无 workflow 结构改动）。
++ W1190 CI 周级联网扫描根修：脚本 --api 匿名兜底 + workflow 注入 token·无 workflow 结构改动）。
++ W1191 GitHub Security and quality 全清：三面板告警 + Scorecard 治理 + 存量红灯清偿·无 workflow 结构改动）。

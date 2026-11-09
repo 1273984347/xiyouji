@@ -1,3 +1,141 @@
+## W1191 GitHub「Security and quality」全清批（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/workflow-lint.yml | W1191 | 改：联网扫描步注入 GH_TOKEN（匿名配额不足） |
+| .github/workflows/security.yml | W1191 | 改：CodeQL action v3 → v4（2026-12 弃用） |
+| .github/workflows/fuzz.yml | W1191 | 新建：Jazzer + fast-check 双层 fuzz 工作流 |
+| .github/CODEOWNERS | W1191 | 新建：Scorecard CodeReview 检查的 CODEOWNERS（11 条规则） |
+| xiyouji-agent-web/fuzz.js | W1191 | 新建：Jazzer 入口（路径语义两轮实证·须落包根） |
+| xiyouji-agent-web/fuzz/fuzz.ts | W1191 | 新建：Jazzer.js fuzz target（tools.ts 真实导出·白名单+凭证过滤） |
+| xiyouji-agent-web/fuzz/fastcheck.test.ts | W1191 | 新建：fast-check 属性测试（Scorecard Fuzzing 检查的检出面） |
+| xiyouji-agent-web/package.json | W1191 | 改：electron/fast-check 依赖 + fuzz 与 test:prop 脚本 |
+| xiyouji-agent-web/package-lock.json | W1191 | 改：lock 同步（qs 6.17.1 等·npm audit 0 vulnerabilities） |
+| xiyouji-desktop/package.json | W1191 | 改：electron 44.9.0 → 44.9.1 |
+| xiyouji-desktop/package-lock.json | W1191 | 改：lock 同步（fast-uri 3.1.9） |
+| xiyouji-desktop/tests/updater-config.test.mjs | W1191 | 改：electron 版本硬断言同步为 44.9.1 |
+| scripts/check_action_refs.py | W1191 | 改：新增 api_auth_decision()（--api 无 token 走匿名兜底）+ 自测 N7/N8 |
+| scripts/requirements.txt | W1191 | 改：Pillow 13.0.0 复核痕（触发 Dependabot 重解析） |
+| scripts/verify_delivery.py | W1191 | 改：URL 剥离改等价非正则实现（消跨行高危判红） |
+| scripts/cross_line_baseline.json | W1191 | 改：基线刷新（只删 1 条陈旧键·零新增） |
+| scripts/check_chart_values.js | W1191 | 改：基线生成器补「判据口径」协议行（重生成不再丢行） |
+| scripts/output/chart-values-baseline.txt | W1191 | 改：可视化基线 88 → 89 页（纳入 glossary 新页） |
+| scripts/output/_w876_site_audit_final.json | W1191 | 改：朱砂实底台账纯新增 11 行（zh 审计面 98 → 99 页） |
+| scripts/output/_vermilion_solid_cache.json | W1191 | 改：级联/探针缓存刷新 |
+| site/data/glossary.html | W1191 | 改：补 ANALYTICS 块（统计事件门禁的唯一未注入页） |
+| site/data/search.html | W1191 | 改：搜索索引刷新 + CSP 重哈希 |
+| site/en/search.html | W1191 | 改：搜索索引刷新 + CSP 重哈希 |
+| AGENTS.md | W1191 | 改：§4.2 五条槽摘要下放 gates.md（正文 51273 → 46702 B·入 48KB 窗口） |
+| README.md | W1191 | 改：OpenSSF Best Practices 徽章（图片走 Scorecard SVG·链接指向 CII criteria） |
+| SECURITY.md | W1191 | 改：补漏洞报告渠道 / 支持版本 / 公开披露策略三段 |
+| docs/00-导读/协议边界速查.md | W1191 | 改：A5 篇数 35 → 42（磁盘实算对齐） |
+| docs/00-导读/文档规范.md | W1191 | 改：verify full 段数 71 → 75（实数对齐） |
+| docs/00-导读/新Agent启动Prompt.md | W1191 | 改：统计键 616/88/89 → 623/89/90（实算对齐） |
+| docs/11-方案报告/README.md | W1191 | 改：§六 登记 T91（登记号 105） |
+| docs/11-方案报告/计划方案/T91-任务计划执行与经验沉淀报告-2026-11-09.md | W1191 | 新建：两批收官报告 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1191 | 改：台账归档滚动（迁 W1128–W1130） |
+| docs/00-导读/W批次编号对账表.md | W1191 | 改：W1190/W1191 认领行 + 归档至 58 行 |
+| STRUCTURE.md | W1191 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1191 | 改：版本面推进（级联） |
+| scripts/output/stats.json | W1191 | 改：stats 刷新（级联） |
+| site/index.html | W1191 | 改：页脚版本戳推进（级联） |
+| site/dukou-engine.html | W1191 | 改：页脚版本戳推进（级联） |
+| site/data/tag-cloud.html | W1191 | 改：页脚版本戳推进（级联） |
+| site/data/cross-time-danmaku.html | W1191 | 改：页脚版本戳推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1191 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1191 | 改：逐批明细追加（级联） |
+| scripts/output/INDEX.md | W1191 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1191 | 改：目录文档刷新（gen_folder_docs） |
+| docs/00-导读/INDEX.md | W1191 | 改：目录文档刷新（gen_folder_docs） |
+| docs/00-导读/README.md | W1191 | 改：目录文档刷新（gen_folder_docs） |
+| xiyouji-agent-web/fuzz/INDEX.md | W1191 | 新建：fuzz 目录索引（目录文档） |
+| xiyouji-agent-web/fuzz/README.md | W1191 | 新建：fuzz 目录说明（目录文档） |
+| .github/INDEX.md | W1191 | 改：目录文档刷新（gen_folder_docs） |
+| .github/workflows/INDEX.md | W1191 | 改：目录文档刷新（gen_folder_docs） |
+| xiyouji-agent-web/INDEX.md | W1191 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/output/tools-inventory.md | W1191 | 改：工具清单刷新（gen_folder_docs） |
+| docs/INDEX.md | W1191 | 改：docs 目录索引重建（docs_index.py） |
+| scripts/output/stats-changelog.json | W1191 | 改：stats 变更记录刷新（stats.py） |
+| scripts/output/stats-index.md | W1191 | 改：stats 索引刷新（stats.py） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1191 | 改：stats 实体标记跟随（stats.py） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1191 | 改：stats 实体标记跟随（stats.py） |
+| scripts/output/_w1191_spec.json | W1191 | 新建：本批 spec |
+| CHANGELOG.md | W1191 | 改：W1191 段（级联） |
+| scripts/output/file-index.md | W1191 | 改：W1191 段（级联） |
+| HANDOVER.md | W1191 | 改：最后更新行 + 当前进度（级联） |
+| CITATION.cff | W1191 | 改：version/date 推进（级联） |
+| .github/workflows/README.md | W1191 | 改：区间行推进（版本面） |
+| scripts/output/_cascade_files_W1191.txt | W1191 | 新建：级联清单 |
+
+## W1190 CI 周级联网扫描根修批（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/workflow-lint.yml | W1190 | 改：联网扫描步注入 GH_TOKEN（匿名配额不足） |
+| .github/workflows/security.yml | W1190 | 改：CodeQL action v3 → v4（2026-12 弃用） |
+| .github/workflows/fuzz.yml | W1190 | 新建：Jazzer + fast-check 双层 fuzz 工作流 |
+| .github/CODEOWNERS | W1190 | 新建：Scorecard CodeReview 检查的 CODEOWNERS（11 条规则） |
+| xiyouji-agent-web/fuzz.js | W1190 | 新建：Jazzer 入口（路径语义两轮实证·须落包根） |
+| xiyouji-agent-web/fuzz/fuzz.ts | W1190 | 新建：Jazzer.js fuzz target（tools.ts 真实导出·白名单+凭证过滤） |
+| xiyouji-agent-web/fuzz/fastcheck.test.ts | W1190 | 新建：fast-check 属性测试（Scorecard Fuzzing 检查的检出面） |
+| xiyouji-agent-web/package.json | W1190 | 改：electron/fast-check 依赖 + fuzz 与 test:prop 脚本 |
+| xiyouji-agent-web/package-lock.json | W1190 | 改：lock 同步（qs 6.17.1 等·npm audit 0 vulnerabilities） |
+| xiyouji-desktop/package.json | W1190 | 改：electron 44.9.0 → 44.9.1 |
+| xiyouji-desktop/package-lock.json | W1190 | 改：lock 同步（fast-uri 3.1.9） |
+| xiyouji-desktop/tests/updater-config.test.mjs | W1190 | 改：electron 版本硬断言同步为 44.9.1 |
+| scripts/check_action_refs.py | W1190 | 改：新增 api_auth_decision()（--api 无 token 走匿名兜底）+ 自测 N7/N8 |
+| scripts/requirements.txt | W1190 | 改：Pillow 13.0.0 复核痕（触发 Dependabot 重解析） |
+| scripts/verify_delivery.py | W1190 | 改：URL 剥离改等价非正则实现（消跨行高危判红） |
+| scripts/cross_line_baseline.json | W1190 | 改：基线刷新（只删 1 条陈旧键·零新增） |
+| scripts/check_chart_values.js | W1190 | 改：基线生成器补「判据口径」协议行（重生成不再丢行） |
+| scripts/output/chart-values-baseline.txt | W1190 | 改：可视化基线 88 → 89 页（纳入 glossary 新页） |
+| scripts/output/_w876_site_audit_final.json | W1190 | 改：朱砂实底台账纯新增 11 行（zh 审计面 98 → 99 页） |
+| scripts/output/_vermilion_solid_cache.json | W1190 | 改：级联/探针缓存刷新 |
+| site/data/glossary.html | W1190 | 改：补 ANALYTICS 块（统计事件门禁的唯一未注入页） |
+| site/data/search.html | W1190 | 改：搜索索引刷新 + CSP 重哈希 |
+| site/en/search.html | W1190 | 改：搜索索引刷新 + CSP 重哈希 |
+| AGENTS.md | W1190 | 改：§4.2 五条槽摘要下放 gates.md（正文 51273 → 46702 B·入 48KB 窗口） |
+| README.md | W1190 | 改：OpenSSF Best Practices 徽章（图片走 Scorecard SVG·链接指向 CII criteria） |
+| SECURITY.md | W1190 | 改：补漏洞报告渠道 / 支持版本 / 公开披露策略三段 |
+| docs/00-导读/协议边界速查.md | W1190 | 改：A5 篇数 35 → 42（磁盘实算对齐） |
+| docs/00-导读/文档规范.md | W1190 | 改：verify full 段数 71 → 75（实数对齐） |
+| docs/00-导读/新Agent启动Prompt.md | W1190 | 改：统计键 616/88/89 → 623/89/90（实算对齐） |
+| docs/11-方案报告/README.md | W1190 | 改：§六 登记 T91（登记号 105） |
+| docs/11-方案报告/计划方案/T91-任务计划执行与经验沉淀报告-2026-11-09.md | W1190 | 新建：两批收官报告 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1190 | 改：台账归档滚动（迁 W1128–W1130） |
+| docs/00-导读/W批次编号对账表.md | W1190 | 改：W1190/W1191 认领行 + 归档至 58 行 |
+| STRUCTURE.md | W1190 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1190 | 改：版本面推进（级联） |
+| scripts/output/stats.json | W1190 | 改：stats 刷新（级联） |
+| site/index.html | W1190 | 改：页脚版本戳推进（级联） |
+| site/dukou-engine.html | W1190 | 改：页脚版本戳推进（级联） |
+| site/data/tag-cloud.html | W1190 | 改：页脚版本戳推进（级联） |
+| site/data/cross-time-danmaku.html | W1190 | 改：页脚版本戳推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1190 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1190 | 改：逐批明细追加（级联） |
+| scripts/output/INDEX.md | W1190 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1190 | 改：目录文档刷新（gen_folder_docs） |
+| docs/00-导读/INDEX.md | W1190 | 改：目录文档刷新（gen_folder_docs） |
+| docs/00-导读/README.md | W1190 | 改：目录文档刷新（gen_folder_docs） |
+| xiyouji-agent-web/fuzz/INDEX.md | W1190 | 新建：fuzz 目录索引（目录文档） |
+| xiyouji-agent-web/fuzz/README.md | W1190 | 新建：fuzz 目录说明（目录文档） |
+| .github/INDEX.md | W1190 | 改：目录文档刷新（gen_folder_docs） |
+| .github/workflows/INDEX.md | W1190 | 改：目录文档刷新（gen_folder_docs） |
+| xiyouji-agent-web/INDEX.md | W1190 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/output/tools-inventory.md | W1190 | 改：工具清单刷新（gen_folder_docs） |
+| docs/INDEX.md | W1190 | 改：docs 目录索引重建（docs_index.py） |
+| scripts/output/stats-changelog.json | W1190 | 改：stats 变更记录刷新（stats.py） |
+| scripts/output/stats-index.md | W1190 | 改：stats 索引刷新（stats.py） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1190 | 改：stats 实体标记跟随（stats.py） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1190 | 改：stats 实体标记跟随（stats.py） |
+| scripts/output/_w1190_spec.json | W1190 | 新建：本批 spec |
+| CHANGELOG.md | W1190 | 改：W1190 段（级联） |
+| scripts/output/file-index.md | W1190 | 改：W1190 段（级联） |
+| HANDOVER.md | W1190 | 改：最后更新行 + 当前进度（级联） |
+| CITATION.cff | W1190 | 改：version/date 推进（级联） |
+| .github/workflows/README.md | W1190 | 改：区间行推进（版本面） |
+| scripts/output/_cascade_files_W1190.txt | W1190 | 新建：级联清单 |
+
 ## W1189 集成连通：A5 文化背景系列 ↔ 角色/器物文档 双向补链（2026-11-09）
 
 | 文件 | W | 说明 |

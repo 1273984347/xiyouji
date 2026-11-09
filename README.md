@@ -9,6 +9,8 @@
 
 [![在线访问](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE-%E7%AB%8B%E5%8D%B3%E4%BD%93%E9%AA%8C-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://1273984347.github.io/xiyouji/) [![双协议授权](https://img.shields.io/badge/%E5%8F%8C%E5%8D%8F%E8%AE%AE-MIT%20%2B%20CC%20BY--NC%204.0-blue)](LICENSE) [![部署状态](https://img.shields.io/github/actions/workflow/status/1273984347/xiyouji/pages.yml?label=%E9%83%A8%E7%BD%B2%E7%8A%B6%E6%80%81)](.github/workflows/pages.yml) [![CI 门禁](https://img.shields.io/badge/CI%20gates-pass-brightgreen)](https://github.com/1273984347/xiyouji/actions)
 
+[![OpenSSF Best Practices](https://api.securityscorecards.dev/projects/github.com/1273984347/xiyouji/badge)](https://bestpractices.coreinfrastructure.org/criteria/0)
+
 ---
 
 ## 📖 普通读者专区
@@ -136,7 +138,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W1189（2026-11-09）**：集成连通：A5 系列 ↔ 角色/器物文档 双向补链·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
+> **当前批次 W1191（2026-11-09）**：GitHub Security and quality 全清：三面板告警 + Scorecard 治理 + 存量红灯清偿·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1132（2026-11-04）**：提交范围门禁兜底分支透传 merge 带入面 + 带入段不再劫持归属 + 单测 4 例 + 计数链不动·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1133（2026-11-05）**：台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复 D1/D2/D3·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1134（2026-11-04）**：前端质感 P0 批五项改动 + 双探针取证：暗色字重降档 / 中文输入防误发与阈值滚动 / 复制对勾淡出 / 打印样式去硬编码·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->

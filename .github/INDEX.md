@@ -12,12 +12,16 @@
 - `ISSUE_TEMPLATE/`
 - `workflows/`
 
-## 文件（2）
+## 文件（3）
 
 ### Markdown 文档
 
 - `PULL_REQUEST_TEMPLATE.md`
 - `README-internal.md`
+
+### 其他
+
+- `CODEOWNERS`
 
 ---
 

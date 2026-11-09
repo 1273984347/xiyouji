@@ -81,7 +81,13 @@ jobs:
 
       # W1067：action ref **存在性**扫描（联网·判定不存在即阻断·无法判定降级 WARN）
       #   仅在 schedule / workflow_dispatch 触发（PR 与 push 的形态判据已足够拦截本次缺陷）。
-      #   刻意不带 token：目标仓库均为 public，匿名读即可；匿名限流只会让本步降级为 WARN。
+      # W1190：**注入 github.token**——实测匿名配额 60 次/小时，而本步最坏需
+      #   14 ref × 2 endpoint × 3 次重试 = 84 次请求 ⇒ 纯匿名必然限流、只能降级 WARN，
+      #   周级扫描形同虚设；注入 token 后配额 5000 次/小时，本步可真正判存在性。
+      #   脚本侧同时支持匿名兜底（check_action_refs.py·api_auth_decision）⇒
+      #   「workflow 刻意不带 token」与「脚本强制要求 token」的历史矛盾已消。
       - name: Action refs 存在性扫描（联网·周级/手动）
         if: github.event_name != 'pull_request' && github.event_name != 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python3 scripts/check_action_refs.py --api --ci
