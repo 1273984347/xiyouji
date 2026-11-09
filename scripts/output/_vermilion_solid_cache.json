@@ -150,7 +150,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "238c2312bf0048e8157d78b41001e3ae782d7127",
+   "sha1": "bd519119f154995efc687b6310859b0c0505e731",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -252,7 +252,7 @@
    }
   },
   "data/glossary.html": {
-   "sha1": "fa82a7207f118a4e5ce046edbce919d7a3c56570",
+   "sha1": "17c56c10c064955e67d42a4a6bc6061028918270",
    "counts": {
     "button.filter-tab.active": 1
    }
@@ -544,7 +544,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "b2cde88e9661ceed9229429980f5097421d6b6f1",
+   "sha1": "02d9d0ad5fcb7325937213e35a79ddf1c47d9ac3",
    "counts": {
     "button.vt-btn": 1
    }
@@ -569,7 +569,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "48c79ce9718c015c5bc4060fcc23d7a09b028063",
+   "sha1": "b85f8d9ca7fa749b77222e1f02d1d5bbe7030fbc",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -648,7 +648,7 @@
    }
   },
   "dashboard.html": {
-   "sha1": "614e2426ae7dc0919b8f6fda6877e09f3ad2a91d",
+   "sha1": "42c8f57b9a7e4fe8eeaaf8a36d6ea0aacc01e42f",
    "counts": {
     "section.route-strip": 1,
     "button.vt-btn": 2,
@@ -657,7 +657,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "0e1b5ce29a1878f2c0c54af8b6883f54f4f39401",
+   "sha1": "83843f2fcf93b139737d3c4e23b724e234b387a4",
    "counts": {
     "button": 1
    }
@@ -669,7 +669,7 @@
    }
   },
   "index.html": {
-   "sha1": "0046f588dac7f02ec2444284ae7d3f891a79922c",
+   "sha1": "18dcb27c8f2be012e5f068ce6614336740c33598",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1416,7 +1416,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "7a2fecd77498b1f16dfddcb0fc76f446b6a1a0b4",
+   "sha1": "3aef72c0b4af5d99a2601281f9d30529ba2645ce",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1506,5 +1506,5 @@
    }
   }
  },
- "generated_at": "2026-11-09T01:51:00.527Z"
+ "generated_at": "2026-11-09T02:15:00.166Z"
 }
