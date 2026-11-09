@@ -1,3 +1,31 @@
+## W1188 读者路径验收与导航修复（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/04-文化与历史背景/金公木母与心猿意马称谓专题.md | W1188 | 改：补标准页脚（双索引/导航）修复读者返回路径 |
+| docs/04-文化与历史背景/八十一难与正果专题.md | W1188 | 改：补标准页脚（双索引/导航）修复读者返回路径 |
+| site/index.html | W1188 | 改：工具网格新增术语速查入口卡 + 注记去「两件」数词 |
+| site/dashboard.html | W1188 | 改：标签云横幅旁新增术语速查横幅入口 |
+| site/data/glossary.html | W1188 | 改：深度解读区小标题去旧批次口径（W1180–W1182→W1180–W1187） |
+| scripts/output/_w1188_spec.json | W1188 | 新建：本批 spec |
+| CHANGELOG.md | W1188 | 改：W1188 段（级联） |
+| docs/00-导读/W批次编号对账表.md | W1188 | 改：W1188 认领行 |
+| scripts/output/file-index.md | W1188 | 改：W1188 段（级联） |
+| scripts/output/stats.json | W1188 | 改：stats 刷新（级联） |
+| site/data/cross-time-danmaku.html | W1188 | 改：级联/目录刷新产物 |
+| site/data/tag-cloud.html | W1188 | 改：级联/目录刷新产物 |
+| site/dukou-engine.html | W1188 | 改：级联/目录刷新产物 |
+| scripts/output/_cascade_files_W1188.txt | W1188 | 新建：级联清单 |
+| README.md | W1188 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1188 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1188 | 改：版本面推进（级联） |
+| HANDOVER.md | W1188 | 改：最后更新行 + 当前进度（级联） |
+| AGENTS.md | W1188 | 改：级联/目录刷新产物 |
+| CITATION.cff | W1188 | 改：version/date 推进（级联） |
+| .github/workflows/README.md | W1188 | 改：区间行推进（版本面） |
+| archive/docs/AGENTS-ARCHIVE.md | W1188 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1188 | 改：逐批明细追加（W1188·级联） |
+
 ## W1187 A5 佛教术语专题（2026-11-09）
 
 | 文件 | W | 说明 |
