@@ -42,6 +42,10 @@ def render_template(name: str, title: str, category: str, desc: str) -> str:
         sys.exit(f"[ERROR] 模板文件不存在: {TEMPLATE}")
     text = TEMPLATE.read_text(encoding="utf-8")
 
+    # W1183 根因修：模板位于 site/ 根，图标等资源写作 "static/..."；输出固定落到 site/data/，
+    # 不重写会使 rel=icon / apple-touch-icon 全部指向 site/data/static/（lint_links 实测 3 broken）。
+    # 只匹配「引号后紧跟 static/」，不会误伤已经写成 ../static/ 或 ../js/ 的路径。
+    text = text.replace('"static/', '"../static/')
     # <title>
     text = text.replace("页面标题 · 详解西游记", f"{title} · 详解西游记")
     # W1177：引用格式块占位符（第 28 槽 C3）

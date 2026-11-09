@@ -1,3 +1,42 @@
+## W1183 A5 系列收口批（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/04-文化与历史背景/README.md | W1183 | 改：新增「近期专题系列（W1180–W1182）」索引段 |
+| docs/04-文化与历史背景/天罡地煞与变化之术专题.md | W1183 | 改：补「系列关联」段（→ W1181/W1182 + 板块 README） |
+| docs/04-文化与历史背景/西游东传与译介专题.md | W1183 | 改：补「系列关联」段（→ W1180/W1182 + 板块 README） |
+| scripts/new_page.py | W1183 | 改：render_template 增加 "static/→"../static/ 路径重写（图标链接根修） |
+| site/data/glossary.html | W1183 | 改：新增「深度解读」区 + 修正 3 处图标相对路径 |
+| site/data/cultural-misreading.html | W1183 | 改：新增「关联解读」行指向译介专题 |
+| site/data/deconstruction.html | W1183 | 改：新增「关联解读」行指向译介专题 |
+| docs/00-导读/W批次编号对账表.md | W1183 | 改：W1183 认领行 |
+| scripts/output/_w1183_spec.json | W1183 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1183.txt | W1183 | 新建：级联清单 |
+| CHANGELOG.md | W1183 | 改：W1183 段落（级联） |
+| scripts/output/file-index.md | W1183 | 改：W1183 段（级联） |
+| site/data/search.html | W1183 | 改：搜索索引重生成（第 46 槽） |
+| site/en/search.html | W1183 | 改：搜索索引重生成（同上） |
+| docs/INDEX.md | W1183 | 改：docs_index.py 重建 |
+| README.md | W1183 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1183 | 改：版本行推进（级联） |
+| HANDOVER.md | W1183 | 改：最后更新行 + 当前进度（级联） |
+| .github/workflows/README.md | W1183 | 改：区间行推进（版本面） |
+| CITATION.cff | W1183 | 改：version/date 推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1183 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1183 | 改：逐批明细追加（W1183·级联） |
+| docs/00-导读/项目说明.md | W1183 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1183 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1183 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1183 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1183 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1183 | 改：再生成/验证缓存（级联） |
+| AGENTS.md | W1183 | 改：级联/目录刷新产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1183 | 改：级联/目录刷新产物 |
+| site/data/cross-time-danmaku.html | W1183 | 改：级联/目录刷新产物 |
+| site/data/tag-cloud.html | W1183 | 改：级联/目录刷新产物 |
+| site/dukou-engine.html | W1183 | 改：级联/目录刷新产物 |
+| site/index.html | W1183 | 改：级联/目录刷新产物 |
+
 ## W1182 A5 文化专题第二篇（2026-11-09）
 
 | 文件 | W | 说明 |

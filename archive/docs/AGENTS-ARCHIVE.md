@@ -1328,3 +1328,8 @@
 ```text
 2026-11-08（W1177）新增页自动化：new_page --post 按依赖序跑七步 + 模板补齐 cite/dataSource/chart-degrade/description
 ```
+以下为 AGENTS.md 版本脚注早期条目（W1178-W1178）段的原文（单行沿革链·W1183 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-11-08（W1178）第 69 槽：check_template_contract.py 把「类名计数 ≠ 结构存在」变成红灯，并给 --evidence 输出可复算命中位置
+```
