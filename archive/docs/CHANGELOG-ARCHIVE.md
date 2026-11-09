@@ -19,6 +19,165 @@
 
 > **2026-11-07（W994 迁出 138 段·W673-W813 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W1116（2026-11-04）：收官链自检闸（文案数字对表 + 登记面一致性）
+
+> **来源**：跨批复盘（W1105~W1117）共识 P0-1 / P0-2 · 用户 2026-11-04 批准。
+> - **文件**：scripts/check_doc_numbers.py · scripts/check_registration_surface.py · scripts/batch_closeout.py · tests/unit/test_w1116_selfcheck_gates.py · tests/unit/test_w1114_version_surface.py · pytest.ini · docs/11-方案报告/计划方案/T67-任务计划执行与经验沉淀报告-2026-11-04.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md · scripts/output/_w1116_spec.json
+
+**本批要点**（工具层·**零页面内容改动**·**不新增门禁槽 ⇒ 门禁 62 段不变**·**不新增坑表条目 ⇒ 坑表 242 条不变**）：
+
+① **P0-1 文案数字 ↔ 证据件对表闸**（scripts/check_doc_numbers.py）：把「收官读数须与最终落盘产物对表」从人工核对变成机器断言 —— 每批在 spec 的 doc_numbers 段声明「哪处文案 ↔ 哪个证据键」，收官链末位逐项断言（source 支持 json 键 / git numstat 单 ref 与 A..B 双 ref / count 正则 / literal；pattern 用具名捕获组 v）；另加 **coverage 类**（对一组目标逐项断言「N 个文件全 X」这类枚举声明·采纳并行会话 W1117 建议）。
+
+② **P0-2 登记面一致性闸**（scripts/check_registration_surface.py）：六项 —— 台账本批认领行存在 · HANDOVER 最后更新链首 == CHANGELOG 现役段 · CHANGELOG 编号规则段上限 == 现役段 · HANDOVER 最后更新链条目 ≤3 · file-index 含本批段 · 台账正本数据行 ≤ 窗口（行口径**复用 scripts/archive_ledger_rows.py 的 ROW_RE**·唯一事实源·不另写正则）。
+
+③ **接入收官链末位**：STEPS 增 docnums + regsurface（versions 之后 · csp/cspcheck 之前 ⇒ **W1112 既有「csp 末两步」承诺不破**）；判据缺失即 fail-closed 中止；未声明 doc_numbers 的批次跳过（不伪造红·不阻塞在途批）。
+
+④ **闸自跑即抓出自身三处缺陷（价值实证）**：把新闸指向本批自身（spec 声明 → 闸实跑）⇒ 首跑红三条 —— ① count 源用行首锚点却未加 re.MULTILINE ⇒ **取到假零 0**（与 W1113「假零」同族）② pattern 写 **62 段** 而正文实为 **62 段 0 FAIL** ⇒ 尾部闭合不匹配且缺捕获组 ⇒ 报「未匹配到任何位置」③ 新增单测实为 **17 例**（非 14）⇒ 报告与 pytest 标记同步订正 ⇒ 复跑全绿（对表闸 4 项全一致）。
+
+⑤ **共享面连带同步**：改 STEPS 破坏并行会话 W1114 的顺序锁单测（断言 versions 与 csp 紧邻）⇒ 已同步该断言（放宽为 versions 在 stats 之后 · csp 之前 + 加两闸位置断言·比原断言更强）· 全量 pytest 复跑 0 failed。
+
+⑤b **跨批留痕（改的是哪一批的哪个断言 · 放宽理由 · 新的更强表述原文）**：本批改动了 **W1114 批落盘的 `tests/unit/test_w1114_version_surface.py::test_closeout_steps_put_versions_between_stats_and_csp`**（原断言「versions 紧邻 csp」）。**放宽理由**：本批两道闸必须读**版本面推进后的最终产物面**（versions 之后才成立）⇒ 原断言在新链序下必然不成立，故把「紧邻」放宽为「versions 在 stats 之后 · csp 之前」。**新的更强表述原文**：`assert order.index('versions') == order.index('stats') + 1` · `assert order.index('versions') < order.index('csp')` · `assert order[-2:] == ['csp', 'cspcheck']` · `assert 'docnums' in order and 'regsurface' in order` · `assert order.index('versions') < order.index('docnums') < order.index('csp')` ⇒ 替代表述**多断言了两闸的相对位置**（比原断言更强）。**对方 W1114 批已书面确认接受该放宽**（回执七十八），其 W1117 批报告将引用本表述以免两批文档各说一套。
+
+**验证**：门禁 62 段 0 FAIL · 单测 1217 passed / 4 skipped / 0 failed（新增 17 例含 10 个负样本）· ruff 双档全绿 · CSP 856 页 / 909 内联哈希 / 0 漂移 · 台账正本 58 数据行（窗口 60）· 坑表 242 条不变（不占 E-NN）· 本批自身过自己的两道闸。
+
+### W1115（2026-11-03）：图表色工程批收官订正批（承接独立盲审 F1~F8 · 纯文档 · 零页面内容改动）
+
+> **来源**：并行会话对 W1113 的独立盲审最终报告（判 FAIL：订正数值全部正确，但报告内仍有 5 处同类旧数未订正 + 「同口径」措辞口径混用）。
+> - **文件**：docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md · docs/11-方案报告/计划方案/T66-任务计划执行与经验沉淀报告-2026-11-03.md · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · docs/11-方案报告/README.md · HANDOVER.md · README.md · STRUCTURE.md · CITATION.cff · .github/workflows/README.md · docs/00-导读/项目说明.md · scripts/output/_w1115_spec.json（版本面推进与索引生成物另见 spec 应动全集）
+
+**本批要点**（**零人工页面内容改动**（仅 site/data/search.html 与 site/en/search.html 的内嵌搜索索引由搜索索引生成器同步）·**不新增坑表条目 ⇒ 计数链条数不变**）：
+
+① **承接盲审 F1（口径混用·阻断·已由 #119 落地）**：盲审指出「56 → 0」前后两数非同一口径（56 = W1100 旧口径基线·引号必需；0 = 本批修正引号盲区后的新口径复算）⇒ 我方以权威脚本自身层正则逻辑独立复算确认成立：**旧口径基线 56 → 0** 与 **新口径基线 64 → 0** 两条都成立（两口径下当前态均为 0）⇒ 据此在 CHANGELOG / 台账 / HANDOVER / T64 / 坑表 E-138 共 10 处补口径注（该笔为 #119，已合并入 main）。
+
+② **承接盲审 F2~F8（本批）**：T64 报告内 5 处同类旧数未订正 —— AC-01 仍写「10 → 0」⇒ 56 → 0 · AC-02 仍写「542 条差异」⇒ 552 · V 表坑表条数 241 ⇒ 242 · ST 表「E-133~E-136」⇒ E-133~E-140 · §3.2「各页 18~24 行 + 坑表 7 条」⇒ 新增口径 12~14 行 + 8 条；另订正附录 A 的「2350 类读数」（不可复现 ⇒ 删具体数保留定性）与「同口径复算」措辞（⇒「分别标注口径」）⇒ **报告的验收表、V 表、ST 表与正文不再自相矛盾**。
+
+③ **台账登记面补齐**：用仓内 `scripts/ledger_backfill.py --w 1113 --cascade "W1113（2026-11-03）"` 回填 W1113 行的 CHANGELOG 版段列（—（待回填）→ W1113（2026-11-03）·行指纹 290ef506621f → 14275162d6b7）· 状态格补记后续订正 3 笔（#116/#117/#119）· 台账腾窗迁出 2 行（W1054-W1055·正本 58 数据行 ≤ 窗口 60）。
+
+④ **第 51 槽归属说明（本批为何新立批次号而非并入他批）**：提交范围门禁按**索引态 CHANGELOG 顶段**定归属批次 ⇒ 补订他批交付物时归属必落现役批（W1114）⇒ 他批 spec 不含该文件 ⇒ 判红 ⇒ 正解是**新增批次段**（归属随索引顶段切到本批）+ 本批 spec 登记应动全集 ⇒ 顺带暴露该门禁「补他批交付物」场景的固有局限（登记去向）。
+
+**验证**：门禁 62 段 0 FAIL · 单测 1198 passed / 4 skipped · CSP 856 页 / 909 哈希 / 0 漂移 · 台账正本 58 数据行（窗口 60）· 坑表 242 条不变（不占 E-NN）· 行指纹复核 `ledger_backfill.py --w 1113 --verify 14275162d6b7`。
+
+### W1114（2026-11-03）：落段收官链加版本面幂等推进步（并根修收官脚本两处工具缺陷）
+
+
+> **来源**：并行会话 W1113 批 rebase 实测（2026-11-03）——版本面是**跨文件字面量同步面**，rebase 只解内容冲突、不自动同步现役批次号字面量；且级联工具把「版本面字面量」与「CHANGELOG/file-index 段插入」耦合在同一条**非幂等**命令里，落段后想单独同步版本面无路可走。
+> - **文件**：scripts/version_surface.py · scripts/batch_cascade.py · scripts/batch_closeout.py · tests/unit/test_w1114_version_surface.py · tests/unit/test_w1102_batch_closeout.py · scripts/output/_w1114_spec.json · docs/11-方案报告/计划方案/T65-任务计划执行与经验沉淀报告-2026-11-03.md · docs/00-导读/W批次编号对账表.md · CHANGELOG.md
+
+**本批要点**（工具层·零页面内容逻辑改动·不新增条目 => 计数链条数不变）：
+
+① 新增 **scripts/version_surface.py**（版本面幂等推进器）：只做**跨文件字面量**的现役批次号推进（README 抬头 / STRUCTURE 头部 / 项目说明头部与列表行 / CITATION.cff / workflows README 区间 / 交接文档当前进度标题与当前 HEAD 句）⇒ **已是目标态则不动**（幂等·可重复跑）⇒ 与「段插入」彻底解耦。
+
+② 级联工具的版本面改为**调用同一共享模块**（只引用不复制·避免两份实现漂移）。（**勘误**：本段初稿曾写「修掉交接文档当前 HEAD 句缺失导致级联整链 assert 失败」——该判断为**误判**：W1114 批复核时以级联 dry-run 实测通过（10 面全过）证伪，真相是该句藏在 HANDOVER 超长段落末尾、被打印截断吃掉；详见 T63 §2.2 B-01。）
+
+③ 收官脚本加**版本面推进**步（插在 stats 之后、csp 之前 ⇒ **csp/cspcheck 仍为末两步**·既有承诺不破）并补 **add 收尾**（末位生成器产物必须再暂存一次）。
+
+④ 单测锁定（**12 例**）：版本面幂等性（重复执行零变化）·各字面量点逐一推进 · fail-closed 负样本 · 收官链 STEPS 顺序 · add 收尾 · precheck 行数口径负样本。⑤ **根修收官脚本两处工具缺陷**：(a) **add 步静默失效**——pathspec 含尚不存在的路径时 git add 整体放弃（不做部分暂存）而脚本仍打印「已 add N 件」⇒ 改为过滤 + 如实报告跳过数 + 检查退出码并中止；(b) **precheck 行数口径 off-by-one**——原用 startswith(| W) 计数，台账**表头行**同形被计入 ⇒ 读数恒多 1 ⇒ 窗口 60（数据行 ≤ 60）被误判超窗 ⇒ 收官工具在本仓恒判超窗、实际不可用 ⇒ 改为复用 scripts/archive_ledger_rows.py 的 ROW_RE（单一事实源）并补负样本（数据行 60 PASS / 61 FAIL / 表头不计入）。⑥ 台账按数据行口径腾窗与迁回：正本 **60 数据行**（窗口 60·表头不计）。
+
+⑦ **对 W1112 段的订正留痕**：W1112 段把「precheck 拦下『台账正本 61 行超过窗口 60』」记为正面案例，W1114 批复核发现该拦下是**口径缺陷导致的假阳**——precheck 原用 startswith(| W) 逐行计数，而台账**表头行**同样以「| W」开头 ⇒ 读数恒比真实**数据行**多 1；窗口 60 的真实语义是「数据行 ≤ 60」（唯一事实源：scripts/archive_ledger_rows.py 的 ROW_RE，--keep 默认 59 = 窗口 60 − 当批认领 1）⇒ 该收官工具在本仓恒判超窗、实际不可用。⇒ W1114 已改为复用 ROW_RE（单一事实源·不另写正则）并补负样本单测（数据行 60 PASS / 61 FAIL / 表头行不计入）。W1112 段原文不改（历史段禁改）⇒ 订正以本段留痕。
+
+**验证**：门禁 62 段 0 FAIL · 单测 12 例全绿（本批文件）· 版本面真机幂等自证（6 点「已是目标态」）· CSP 856 页 / 909 哈希 / 0 漂移 · 台账正本 60 数据行（窗口 60·数据行口径·表头不计）。
+
+### W1113（2026-11-03）：图表色工程档 3 铺开第一批（3 对 6 页·chart 色常量令牌化）
+
+> **来源**：用户 2026-11-03 指令「那继续」（承接 W1110 档 3 施工前置批）。
+> - **文件**：site/data/character-sentiment-arc.html · site/en/character-sentiment-arc.html · site/data/concept-device.html · site/en/concept-device.html · site/data/monster-victims-network.html · site/en/monster-victims-network.html · docs/agent/pitfalls.md · docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md · scripts/output/_w1113_spec.json · scripts/output/_w1113_delta.json
+
+**本批要点**（档 3 铺开第一批·**6 页·78 行**）：
+
+① **范围**：3 对 6 页（character-sentiment-arc · concept-device · monster-victims-network，中英同批），施工面 = 图表色常量改读 `var(--chart-N)`；档 3 权威口径（`archive/scripts/batches/w1100/_w1100_layer3_pages.py`·互斥归类 L2/L4/L5）复算本批 6 页残留归零（**旧口径基线 56 处 → 0 处**；引号盲区修正后的**新口径基线 64 处**（差 8 处 = arc 页 L4 无引号内联色 4 处 × 中英）⇒ **两口径下当前态均为 0** ⇒ 归零结论不受口径影响）。
+
+② **本批最大产出＝施工期越界动作的自我纠正（补偿机制）**：施工初稿曾按 W1108 先例把每页的字面值型补偿规则 LHS 由 `#xxx` 改写为 `var(--chart-N)`，并新增 `[fill^="var("]` 前缀规则。二者均**越界**：W1100 台账「工程次序定案」明确「**补偿收口排在档 3 之后**（补偿表含调色板色条目且当前仍生效，先删会让 1412 处暗色变暗）」，且站内补偿表是**每页 112 条同源指纹**（330 页逐页条数一致·其中 328 页共享同一指纹、chart-design 中英 2 页为 W1108 原型批遗留的另一种指纹·规则条数同为 112），改 LHS 即破指纹。DOM 级取证（规则命中面对拍）实测该越界造成两类真实缺陷：① 新增前缀规则命中了**基线中早已是 `var()`** 的元素（它们在基线本就不吃亮度补偿）⇒ 凭空多出 22 处 filter；② 改写 LHS 后仍有字面值元素失配 ⇒ 9 处补偿值互换（其中 8 处为**暗色态变暗**回归）。**处置**：撤销两条越界改动，补偿机制原样保留（与 W1100 定案一致），6 页各 1 条前缀规则删除 + 1 条字面值规则还原。
+
+③ **补齐 10 处施工缺口**（权威口径复算所得）：arc 页 pairs 常量（对象字面量 `color:` 形式，被首版脚本的行首锚定正则排除）· concept-device 页渐变 `stop-color` 两处 · monster 页 `catColors` 数组字面量两处。
+
+④ **呈现色等效核档**（J2 双态对拍·**浅色零差异 + 元素零损失**）：暗色态 552 条差异（按属性 fill 226 / filter 212 / stroke 44 / background-color 46 / 其余 24），逐颜色属性按「computed 颜色叠加 CSS filter（brightness 后 saturate·drop-shadow 不改主体色）」实算呈现色后分档：**OK 166 / WARN 122 / BLOCK 52**，方向变亮 268 / 变暗 72，**改后取暗色令牌值 340/340**。BLOCK 52 条全部为「改前裸浅色 → 改后暗色令牌」的**令牌口径差**（`--chart-2` / `--chart-4` 暗色令牌值本身与其「浅色值×站内补偿等效值」的差），与站内既有口径对照读数一致（`--chart-2` dL 18.83 / `--chart-6` dL 17.34 BLOCK 是 W1103 已登记的既有口径差），**非本批引入的回归** ⇒ 登记为补偿收口批的去向，不在本批改补偿机制。
+
+⑤ **防线**：复用 W1110 新增四槽（第 54 坑表编号唯一 / 第 55 PowerShell 解析 / 第 56 CSP 增量漂移 / 第 57 CSS 变量自引用）· CSP 856 页零漂移（909 内联哈希）· 档 3 权威口径复算归零。
+
+**验证**：元素数 12 组零不一致（5512 元素·探针 SCHEMA 6 含 stop-color）· 浅色态 0 差异 · 档 3 残留 **旧口径基线 56 → 0**（引号盲区修正后新口径基线 **64 → 0**·两口径当前态均 0·真归零） · CSP 零漂移 · 第 56/57 槽 0 FAIL · 坑表本体 **234 → 242 条**（本批新增 **E-133 ~ E-140 八条**·E-130~E-132 为 W1110 既有条目）· 计数链同步。
+
+**收官订正**（2026-11-03·PR #117）：本段三处数字经复算订正为与仓内证据件逐字对齐——改动面 60 → **78 行**（`git diff --numstat` site 6 页实测 14+12+13 × 中英）· 残留起点 10 → **56 处**（W1100 基线盘点表逐页读数：arc 中英各 8 · device 中英各 8 · monster 中英各 12；该 56 为**旧口径**（色值须带引号）·引号盲区修正后**新口径**基线 = **64**（差 8 处 = arc 页 L4 无引号内联色 4 处 × 中英）⇒ **两口径下当前态均 = 0**）· 坑表 241 → **242 条 / E-140**（条目实测 242·max E-140）。原值系收官前未复核的旧读数（其中「10 处」为首版脚本漏改的中间态·非权威口径读数）。核档读数（552 条差异 / OK 166·WARN 122·BLOCK 52 / 改后取暗色令牌值 340/340 / 元素数 5512）经 `scripts/output/_w1113_delta.json` 复算一致。
+
+### W1112（2026-11-03）：落段收官一键脚本（八步固定顺序·refresh 迭代收敛·csp 恒末位）
+
+
+> **来源**：W1109 批 CI 三次红项（第 45 槽 ×2 + CSP 漂移 ×1）的根因方案化。
+> - **文件**：.github/workflows/README.md · AGENTS.md · CHANGELOG.md · CITATION.cff · HANDOVER.md · README.md · STRUCTURE.md · archive/docs/AGENTS-ARCHIVE.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/W批次编号对账表-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md · docs/00-导读/W批次编号对账表.md · docs/00-导读/项目说明.md · docs/11-方案报告/README.md · docs/11-方案报告/计划方案/T63-任务计划执行与经验沉淀报告-2026-11-03.md · docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · docs/INDEX.md · pytest.ini · scripts/INDEX.md · scripts/batch_closeout.py · scripts/output/INDEX.md · scripts/output/README.md · scripts/output/_cascade_files_W1112.txt · scripts/output/_vermilion_solid_cache.json · scripts/output/_w1106_spec.json · scripts/output/_w1112_spec.json · scripts/output/file-index.md · scripts/output/stats-changelog.json · scripts/output/stats-index.md · scripts/output/stats.json · scripts/output/tools-inventory.md · site/data/cross-time-danmaku.html · site/data/search.html · site/data/tag-cloud.html · site/dukou-engine.html · site/en/search.html · site/index.html · tests/unit/INDEX.md · tests/unit/README.md · tests/unit/test_w1102_batch_closeout.py · tests/unit/test_w1112_judge_fix.py
+
+**本批要点**（工具层·**零页面内容逻辑改动**（级联页脚链 4 页 + 搜索页内嵌索引/CSP 哈希 2 页由生成器改写）·不新增条目 ⇒ 计数链条数不变）：
+
+① 新增 **scripts/batch_closeout.py**（落段收官一键脚本）八步固定顺序：precheck（台账同号多行/行数窗口预检·不通过即中止并给修复指引）=> selfref（CSS 变量自引用体检·**只引用**第 57 槽既有判据不复制实现）=> add（按 spec.rows 显式 pathspec·禁 git add -A）=> refresh（**迭代至索引快照不再变化**·实测第 2 轮才收敛）=> 搜索索引 + 文档索引 => stats => **csp（恒末位·因前面步骤会改内联脚本）** => csp --check（零漂移）。
+
+② **单测全绿**（batch_closeout **10 例** = 7 计划 + 3 收官笔行为锁·判据正向锁 3 例·合计 13 例） + **真实仓跑通取证**：precheck 当场拦下「台账正本 61 行超窗口 60」并给修复指引 · refresh 第 2 轮收敛 · CSP 856 页零漂移。
+
+③ 台账腾窗迁 3 行（W1050-W1052） + 登记 **W1111 空号·让号行**（先例 W1101/W1102）⇒ 段序连续无空洞。
+
+④ **诚实边界**：本批**不改任何门禁脚本与判据**（主会话 W1110 已根治·避免同文件对改）；chart-design 两页残留的补偿规则越界动作属我方 W1108 遗留，另立小批撤销。
+
+⑤ **收官笔（CI 三红修复）**：PR #113 首次 CI 判红三项（ruff 6 error / 站内搜索索引陈旧 / 判据测试调旧私有 API）⇒ 根因为「落段漏跑生成链」与「主会话 #110 已把私有 _resolve_base 改为公开 resolve_base()」；修法：逐处清裸 l（ruff check scripts/ 0 error）+ 跑本批收官脚本八步链（refresh 第 2 轮收敛 · CSP 856 页零漂移）+ 判据测试改写为正向回归锁 3 例。
+
+⑥ **归档迁移（体积窗口治理·由级联工具自动执行·非手工搬移）**：W989 段由 CHANGELOG 迁入 archive/docs/CHANGELOG-ARCHIVE.md（逐字比对零丢失）· AGENTS 的 W1106 脚注迁入 archive/docs/AGENTS-ARCHIVE.md · file-index 归档时间行同步。CHANGELOG 与 file-index 段数窗口各 110 段（满窗后由级联归档 1 段）。
+
+**验证**：门禁 62 段 0 FAIL · 单测 13 passed（batch_closeout 10 + 判据正向锁 3）· 全量 pytest 本地 1184 passed / 3 skipped（2 failed 为本地工地 scripts/_s4_* 污染·157 件·CI 检出树不含）· CSP 856 页零漂移 · 台账 60/60 窗口内。
+
+### W1110（2026-11-03）：图表色工程档 3 施工前置批（门禁与接线四槽 + CSS 令牌自引用根修）
+
+> **来源**：用户 2026-11-03 指令「开 W1110（54 槽编号唯一性 + 55 槽 PowerShell 解析 + P-3 L2 接线 + CSP 零漂移门禁 + 24 处差异 ΔL* 双口径核档 + 占号纪律），一个 PR、CI 跑一次，且合并只看 required 两项」。
+> - **文件**：scripts/verify_delivery.py · scripts/check_powershell_parse.py · scripts/check_csp_drift.py · scripts/check_css_var_selfref.py · scripts/check_pitfall_id_unique.py · scripts/doc_areas.py · scripts/check_doc_sync.py · scripts/agent_start.py · site/data/chart-design.html · site/en/chart-design.html · scripts/guardrails/check_changed.ps1 · scripts/install_hooks.ps1 · xiyouji-agent-web/cleanup.ps1 · docs/agent/gates.md · docs/agent/pitfalls.md · AGENTS.md · HANDOVER.md · .agent/skills/puti-shouye/SKILL.md
+
+**本批要点**（门禁与接线批·**新槽四个**·工具面为主·页面改动 2 件）：
+
+① **第 54 槽「坑表编号唯一」**：W1106 建置的判据自此**兑现接线**（W1107 已登记为「下一批接线」）—— 坑表 E-NN 编号是「按编号检索教训」的唯一键，而第 31 门禁只统计条数不校验编号唯一性 ⇒ 两批各占同号时计数链五处全绿而检索静默取到错条目；本槽常驻后新增条目撞号**当场判红**。
+
+② **第 55 槽「PowerShell 解析」**：仓内 .ps1 此前**零机器判据**。C1 用官方 AST 解析器（只读不执行）逐文件解析⇒语法错误即 FAIL（解析器缺失按 fail-closed 退出码 2）；C2 含非 ASCII 必须带 UTF-8 BOM（PS 5.1 的 -File 加载器回退 ANSI 代码页 ⇒ CJK 关键字**解析静默死亡**·E-68）。本槽**当场抓出 3 个存量缺陷并同批根治**（scripts/guardrails/check_changed.ps1 · scripts/install_hooks.ps1 · xiyouji-agent-web/cleanup.ps1 均含非 ASCII 且无 BOM）—— 加 BOM 后 PS 5.1 解析实测通过。
+
+③ **P-3 L2 接线（复用 C10 同一复算式）**：W1104 批（P-3 L1）落地四类 stats 告警时挂账「口径一致性待异源复算（C10）落地后接入」⇒ 本批把 C10 的板块篇数复算式**抽到 scripts/doc_areas.py** 作共享单一事实源（C10 与 agent_start **同源复用**），agent_start 新增第 5 类告警（口径漂移）。正样本零告警、负样本（注入 a2_docs 漂移）实测命中。
+
+④ **第 56 槽「CSP 增量漂移」**：既有第 8 槽是全站校验，不区分「谁改的」且无归因信息 ⇒ 存量漂移掩盖本批真问题。本槽按**交集判红**（本批改动页 ∩ 漂移页 ≠ ∅）+ **merge-base 基点**逐段字节比对（只对本批碰过的内联段判）+ **失败信息三要素**（漂移页 / 命中段标识 / 修复命令）。端到端负样本实测：注入内联脚本不重算 CSP ⇒ 精准报出「第 3 段内联块（哈希 sha256-IYSkkgjHaoho）」；按提示重算后转绿。
+
+⑤ **双口径核档 ⇒ 抓出并根修 W1108 真实缺陷（本批最大产出）**：对 W1108 的 24 处差异逐项核 ΔL*+ΔE76 时，核档数据与「24 处差异全为同向转换」的既有结论**不一致** ⇒ 追根：W1108 批把 chart-design 两页 INLINED 副本 `:root` 里的图表令牌定义改成「`--chart-1: var(--chart-1)`」**自引用** ⇒ 浏览器在 computed-value time 判为**无效值** ⇒ `getComputedStyle` 返回**空串** ⇒ 连带动使用它的 `--accent` 一并失效 ⇒ 图表主题色回落为继承色。Playwright 受控对照实测：改前 `--chart-1=#C8463A`·主题色 `rgb(200,70,58)` ✔；改后空串·`rgb(35,32,26)` ✘。**根修**：两页副本的 4 条自引用恢复为站点令牌真值（各 4 行·真源 site/tokens.css 完好未动）。**新增第 57 槽「CSS 变量自引用」**把该类缺陷变成常驻机器判据（负样本注入实测判红）。
+
+⑥ **占号共享区纪律 + 落段前占用复核判据**写入 AGENTS §4.3 最高频铁则与坑表 E-128（预约集在工作树内 ⇒ 共享范围=工作树 ⇒ 隔离 clone 占号他方不可见必撞号）。
+
+⑦ **顺带收口 W1088 僵尸行**：该行「登记为在途」但内容早已随 W1086 提交落地（§3.1 迁移批效率协议四条 + 收官清单 step 7 均在 main）且自身无 `type(w1088)` 标签提交 ⇒ preflight 恒红拒绝所有碰 HANDOVER.md 的新批次；本批核实后按收官流程回填状态列（**内容零改动·只改登记面**）。
+
+**验证**：四槽自测 22 例全绿 · 第 41 门禁三方编号对账 0 FAIL（AGENTS/gates/verify 三方同为 57 槽）· CSP 856 页零漂移（909 哈希）· 计数链 229 → **231**（流程段 110 → 112）· 坑表本体 101 条 0 重号（现役最大 E-129）。
+
+### W1109（2026-11-03）：坑表编号重号收敛（18 条改号与本体清零）
+
+> **来源**：W1107 体检批（随 PR #104 落段）登记的存量去向。
+> - **文件**：docs/agent/pitfalls.md
+
+**本批要点**（纯文档面·零页面改动·计数链条数不变）：
+
+① **16 组真重号全部跨批次**（同批次 0 组）⇒ 引用可按批次号精确判定 ⇒ 保留各组**批次最早**的一条原号，其余 **18 条改号**（E-110~E-127）⇒ 坑表本体编号重号 **清零**。
+
+② **引用同步**：本体 99 处「（W### 实证·E-NN）」随改号自动同步；「坑表/pitfalls … E-NN」宽松形态的引用按**无歧义口径**（同句含被改批次号 + 旧编号）同步，**其余指向待人工判读**（已登记去向）⇒ 历史报告自有的裸 E-NN 量化经验编号**不动**（两套编号体系并存）。
+
+③ **口径不变**：先落地者保留 + 编号连续（现役最大 E-127）；**条数不变 ⇒ 计数链数值不变（229）**。
+
+**验证**：本体重号自检 0 · 判据脚本 scripts/check_pitfall_id_unique.py 输出存量 NOTE 清单 · 门禁 0 FAIL。
+
+### W1108（2026-11-03）：图表色工程批·档 3 原型验证批（读令牌喂图表 + J2 双态取证）
+
+> **来源**：用户 2026-11-03 裁决「先做 chart-design 这一对原型页，验过机理再按 ≤10 页/批铺开剩余 145 页」。
+>
+> - **文件**：site/data/chart-design.html · site/en/chart-design.html · docs/11-方案报告/计划方案/T60-任务计划执行与经验沉淀报告-2026-11-03.md · docs/agent/pitfalls.md
+
+**本批要点**（档 3 首支原型批 · 中英成对）：
+
+① **机理验证通过**：站内图表为自研 D3 + 自绘 SVG（全站 echarts 字样 0 处），色值经 .style(--chain-color, color) CSS 变量中转 ⇒ 常量内调色板 hex 可直写 var(--chart-N)；该页已有 10 处 attr(fill/stroke, var(...)) 先例且无任何色值运算 ⇒ 换 var() 不破坏运算。
+
+② **改动面**：两页四常量共 24 处裸 hex，其中 15 处有 --chart-N 对应本次令牌化；其余 9 处（#d97706 / #C9A063 / #e9b885 / #6B6455 / #1a1410 / #d9cdb8）登记去向，待铺开批统一处理（不新增令牌，避免扩大原型批风险面）。
+
+③ **取证读数**：J2 双态逐属性对拍 ⇒ 浅色态 0 差异；暗色态 24 处差异全部为同一方向颜色转换（rgb(200,70,58) → rgb(224,96,79)，即 #c8463a → --chart-1 暗色值）；元素数 750 → 751 / 749（零损失）；非属性类差异 0 ⇒ 非塌缩、无渲染错位。
+
+④ **塌缩防线**：首轮对拍元素数掉到 112，根因为改了内联 JS 未重算 CSP 哈希 ⇒ 浏览器拒绝执行该段脚本 ⇒ 整页图表失效（W1082 同型机理）；重算后恢复 ⇒ 写入坑表 E-108 与 E-109，并建议 W1110 增门禁：diff 命中页面内联 script ⇒ 必须 --check 零漂移。
+
+⑤ **E-108 与 E-109** + 计数链六段求和 = 229（CSS 48 / JS 10 / git 26 / 级联 20 / 数据 15 / 流程 110）。
+
+**验证**：J2 双态 24 处同向颜色转换 + 元素零损失 · 第 53 槽 0 FAIL（专名本地化 2 项属预期）· CSP --check 零漂移 · 第 31 门禁 0 FAIL · 体积窗口 0 FAIL · 推前 ci_sim 干净检出预演全 PASS。
+
 ### W1107（2026-11-03）：坑表编号唯一性体检与机器判据建置 + 档 3 前置（暗色图表令牌补齐与双态取证）
 
 > **来源**：用户 2026-11-03 裁决「先开原型验证批」+ 并行会话协作（坑表编号体检批原占 W1106，按号序契约改号 W1107 后与档 3 前置批合批为一个 PR）。

@@ -45,6 +45,7 @@ import sys
 import threading
 from http.server import SimpleHTTPRequestHandler
 from socketserver import TCPServer
+from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MARKER = "---- W1168 统计事件探针："
@@ -269,6 +270,26 @@ def _known_offline_console(text: str) -> bool:
     return any(k in text for k in OFFLINE_KNOWN_CONSOLE)
 
 
+# W1192：远端统计上报判定——**不做 URL 子串匹配**。
+#   原写法 `("goatcounter.com" in u)` 有两个问题：
+#     ① 语义错：`https://evil.example/?x=goatcounter.com` 这类查询串/路径含该词即被误判为远端上报；
+#     ② 安全告警：CodeQL py/incomplete-url-substring-sanitization（告警 #120·severity=warning /
+#        security_severity_level=high·位置 scripts/stat_event_probe.py:286）——「用固定子串判断 URL
+#        是否属于某域」被判定为不完整 URL 净化（子串匹配既可误判也可被绕过）。
+#   改法：解析 URL → 取 hostname → 按 DNS 标签**精确**比对（goatcounter.com 及其子域）。
+#   口径与 scripts/fetch_gate_stats.py:117 同款（同族单一实现）；file: 等非 http(s) 协议天然排除
+#   （原 `not u.startswith("file:")` 的语义由 scheme 判定承担，判据强度不减）。
+def _is_remote_gc(url: str) -> bool:
+    try:
+        parts = urlparse(url)
+    except ValueError:
+        return False
+    if parts.scheme not in ("http", "https"):
+        return False
+    labels = (parts.hostname or "").lower().split(".")
+    return len(labels) >= 2 and labels[-2:] == ["goatcounter", "com"]
+
+
 def _p1_file(ctx, checks, want):
     if not want("P1"):
         return
@@ -283,7 +304,7 @@ def _p1_file(ctx, checks, want):
     # 那属导航后语境、与本批「加载期静默」命题无关（点击面由 P2 覆盖）
     bridged = _events(page)
     page.close()
-    remote = [u for u in all_req if "goatcounter.com" in u and not u.startswith("file:")]
+    remote = [u for u in all_req if _is_remote_gc(u)]
     # 断言三件本批该负责的：① 零**远端**统计请求 ② 桥在 file:// 短路（零 XYstats 调用）
     # ③ console 错误只允许既有两类（file:// fetch 降级 + 本地 RAG 探活）——新增错误必须红，
     #   但也不把既有债算到本批头上（那会让探针长期红而无人看）。
@@ -491,11 +512,23 @@ def _self_test() -> int:
         return 1
     ss = json.loads(r2.stdout.strip().splitlines()[-1])
     single_ok = ss["mem"] == 0 and ss["sp"] == ["dup_a", "dup_b"]
+    # W1192：远端 goatcounter 判定口径自测（7 例·含误判反例与绕过反例）
+    url_cases = [
+        ("https://1273984347.goatcounter.com/count", True),
+        ("https://goatcounter.com/count", True),
+        ("https://foo.goatcounter.com/count", True),
+        ("file:///D:/xiyouji/site/dashboard.html", False),
+        ("https://evil.example/?u=goatcounter.com", False),
+        ("https://notgoatcounter.com/count", False),
+        ("https://goatcounter.com.evil.net/count", False),
+    ]
+    url_ok = all(_is_remote_gc(u) is want for u, want in url_cases)
     for label, ok in (("XYstats 包装（编程式面）", xy_ok),
                       ("goatcounter.count 包装（声明式面·晚挂方法时序·且原实现仍被执行）", gc_ok),
-                      ("捕获单源（sessionStorage 可用时内存数组为空·防双计）", single_ok)):
+                      ("捕获单源（sessionStorage 可用时内存数组为空·防双计）", single_ok),
+                      ("远端 goatcounter 判定（hostname 标签精确比对·非子串匹配）", url_ok)):
         print("  %s %s" % ("PASS" if ok else "FAIL", label))
-    ok = xy_ok and gc_ok and single_ok
+    ok = xy_ok and gc_ok and single_ok and url_ok
     print("SELF_TEST_OK" if ok else "SELF_TEST_FAIL")
     return 0 if ok else 1
 

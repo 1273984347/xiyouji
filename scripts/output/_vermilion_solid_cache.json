@@ -150,7 +150,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "673efe76e92746d1a1d7d5b3ec0ea681516f6094",
+   "sha1": "311fda87e9fe5d773a8436ee126d5a42b710aff4",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -544,7 +544,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "d5c88691422fc908c722bbe51c1abae003ff8e99",
+   "sha1": "cf507426898aa3bc5def01b4252435ee50b26987",
    "counts": {
     "button.vt-btn": 1
    }
@@ -569,7 +569,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "f661bc779df010e36cc9ff3193085207e44188ad",
+   "sha1": "36cb1f3ad48f50944902aa5017eca0340d2a7813",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -657,7 +657,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "c61f396a908cda3df5965e6197f531469b2eb303",
+   "sha1": "b21490dfc1ccce524d3ee0863a49eb29311a971e",
    "counts": {
     "button": 1
    }
@@ -669,7 +669,7 @@
    }
   },
   "index.html": {
-   "sha1": "fa8a0317499f589266fc84ece032def73d935a88",
+   "sha1": "6823afd4cff63aeb6276596e477c9c210e286eff",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1416,7 +1416,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "10b42ad37e94ec5da2d11377834ef6eb3626d5b4",
+   "sha1": "63f21a1ac7ad82a0366a7e9d1a671f5ea0f830e3",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1506,5 +1506,5 @@
    }
   }
  },
- "generated_at": "2026-11-09T12:15:07.387Z"
+ "generated_at": "2026-11-09T13:50:30.182Z"
 }

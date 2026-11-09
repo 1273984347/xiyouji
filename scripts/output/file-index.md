@@ -1,3 +1,53 @@
+## W1192 CI 五处红灯清偿批（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_dark_state_gate.js | W1192 | 改：断言域限定到采集面内 + 已下线页白名单门禁（自测 5 → 9 负样本） |
+| scripts/_render_scope.js | W1192 | 新建：采集面口径单点来源（listPages / chartsPages） |
+| scripts/_audit_render_states.js | W1192 | 改：候选页枚举与 charts 判定改用 _render_scope.js |
+| scripts/stat_event_probe.py | W1192 | 改：远端 goatcounter 判定改 hostname 标签精确比对（CodeQL #120）+ 7 例自测 |
+| tests/e2e/test_site_quality.js | W1192 | 改：A1 派发 PointerEvent（对齐 W1169 事件族迁移） |
+| xiyouji-agent-web/evals/golden-50.jsonl | W1192 | 改：dataset-039/041 改指现存等价数据集（dataset/dashboard.json 已于 W1157 删除） |
+| docs/11-方案报告/计划方案/T92-任务计划执行与经验沉淀报告-2026-11-09.md | W1192 | 新建：五处红灯清偿报告 |
+| docs/11-方案报告/README.md | W1192 | 改：§六 登记 T92（登记号 106） |
+| docs/00-导读/W批次编号对账表.md | W1192 | 改：W1192 认领行 |
+| scripts/output/_w1192_spec.json | W1192 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1192.txt | W1192 | 新建：级联清单 |
+| CHANGELOG.md | W1192 | 改：W1181 段 4 条链接路径订正 + W1192 段（级联） |
+| scripts/output/file-index.md | W1192 | 改：W1192 段（级联） |
+| HANDOVER.md | W1192 | 改：最后更新行 + 当前进度（级联） |
+| CITATION.cff | W1192 | 改：version/date 推进（级联） |
+| README.md | W1192 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1192 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1192 | 改：版本面推进（级联） |
+| AGENTS.md | W1192 | 改：版本脚注推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1192 | 改：脚注沿革滚动（级联） |
+| .github/workflows/README.md | W1192 | 改：区间行推进（版本面） |
+| archive/docs/workflows-readme-history.md | W1192 | 改：逐批明细追加（级联） |
+| site/index.html | W1192 | 改：页脚版本戳推进（级联） |
+| site/data/cross-time-danmaku.html | W1192 | 改：页脚版本戳推进（级联） |
+| site/data/tag-cloud.html | W1192 | 改：页脚版本戳推进（级联） |
+| site/dukou-engine.html | W1192 | 改：页脚版本戳推进（级联） |
+| site/data/search.html | W1192 | 改：搜索索引刷新 + CSP meta 重哈希 |
+| site/en/search.html | W1192 | 改：搜索索引刷新 + CSP meta 重哈希 |
+| scripts/output/stats.json | W1192 | 改：stats 刷新（级联） |
+| scripts/output/tools-inventory.md | W1192 | 改：工具清单刷新（gen_folder_docs） |
+| xiyouji-agent-web/fuzz/INDEX.md | W1192 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/archive_segments.py | W1192 | 改：A3 末尾块断言方向根修（原写法与 split_tail_block 行为矛盾 ⇒ 体积迁移恒红） |
+| tests/unit/test_w1130_archive_tail_block.py | W1192 | 改：补 3 条 A3 回归锁（末尾块留在正本末尾 / 前缀被改拦截 / 末尾块被搬走拦截） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1192 | 改：迁入 W1108-W1116 共 9 段（正本体积窗 236837 B） |
+| archive/docs/file-index-ARCHIVE.md | W1192 | 改：追加 W1108-W1116 共 9 段（正本体积窗 244634 B） |
+| pytest.ini | W1192 | 改：pytest collected 计数标记跟随 stats 实算（1530 → 1533·新增 3 条 A3 回归锁） |
+| scripts/output/stats-changelog.json | W1192 | 改：stats 变更记录刷新（级联） |
+| scripts/output/stats-index.md | W1192 | 改：stats 索引刷新（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1192 | 改：朱砂实底缓存 sha1 跟随页面改动刷新 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1192 | 改：stats 实体标记跟随（级联） |
+| docs/INDEX.md | W1192 | 改：docs 目录索引重建（docs_index.py·870 篇） |
+| scripts/INDEX.md | W1192 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/output/INDEX.md | W1192 | 改：目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1192 | 改：目录文档刷新（gen_folder_docs） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1192 | 改：stats 实体标记跟随（级联） |
+
 ## W1191 GitHub「Security and quality」全清批（2026-11-09）
 
 | 文件 | W | 说明 |
@@ -3029,320 +3079,4 @@
 | tests/unit/test_w1102_batch_closeout.py | W1117 | 本批行为锁更新 |
 | tests/unit/test_w1117_version_surface_idempotence.py | W1117 | 本批新增自证 9 例 |
 
-## W1116 收官链自检闸（2026-11-04）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_doc_numbers.py | W1116 | 本批工具/产物 |
-| docs/00-导读/项目说明.md | W1116 | 本批工具/产物 |
-| .github/workflows/README.md | W1116 | 本批工具/产物 |
-| CITATION.cff | W1116 | 本批工具/产物 |
-| STRUCTURE.md | W1116 | 本批工具/产物 |
-| README.md | W1116 | 本批工具/产物 |
-| scripts/check_registration_surface.py | W1116 | 本批工具/产物 |
-| scripts/batch_closeout.py | W1116 | 本批工具/产物 |
-| tests/unit/test_w1116_selfcheck_gates.py | W1116 | 本批工具/产物 |
-| tests/unit/test_w1114_version_surface.py | W1116 | 本批工具/产物 |
-| pytest.ini | W1116 | 本批工具/产物 |
-| CHANGELOG.md | W1116 | 本批工具/产物 |
-| docs/00-导读/W批次编号对账表.md | W1116 | 本批工具/产物 |
-| docs/11-方案报告/README.md | W1116 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T67-任务计划执行与经验沉淀报告-2026-11-04.md | W1116 | 本批工具/产物 |
-| scripts/output/_w1116_spec.json | W1116 | 本批工具/产物 |
-| docs/INDEX.md | W1116 | 本批工具/产物 |
-| scripts/output/stats.json | W1116 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1116 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1116 | 本批工具/产物 |
-| scripts/output/tools-inventory.md | W1116 | 本批工具/产物 |
-| scripts/output/file-index.md | W1116 | 本批工具/产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1116 | 本批工具/产物 |
-| archive/docs/CHANGELOG-ARCHIVE.md | W1116 | 本批工具/产物 |
-| archive/docs/file-index-ARCHIVE.md | W1116 | 本批工具/产物 |
-
-## W1115 图表色工程批收官订正批（2026-11-03）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1115 | 本批工具/产物 |
-| CITATION.cff | W1115 | 本批工具/产物 |
-| CHANGELOG.md | W1115 | 本批工具/产物 |
-| HANDOVER.md | W1115 | 本批工具/产物 |
-| README.md | W1115 | 本批工具/产物 |
-| STRUCTURE.md | W1115 | 本批工具/产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1115 | 本批工具/产物 |
-| docs/00-导读/W批次编号对账表.md | W1115 | 本批工具/产物 |
-| docs/00-导读/项目说明.md | W1115 | 本批工具/产物 |
-| docs/11-方案报告/README.md | W1115 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1115 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1115 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md | W1115 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T66-任务计划执行与经验沉淀报告-2026-11-03.md | W1115 | 本批工具/产物 |
-| docs/INDEX.md | W1115 | 本批工具/产物 |
-| scripts/output/INDEX.md | W1115 | 本批工具/产物 |
-| scripts/output/README.md | W1115 | 本批工具/产物 |
-| scripts/output/_w1115_spec.json | W1115 | 本批工具/产物 |
-| scripts/output/file-index.md | W1115 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1115 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1115 | 本批工具/产物 |
-| scripts/output/stats.json | W1115 | 本批工具/产物 |
-| scripts/output/tools-inventory.md | W1115 | 本批工具/产物 |
-| site/data/search.html | W1115 | 本批工具/产物 |
-| site/en/search.html | W1115 | 本批工具/产物 |
-
-## W1114 落段收官链加版本面幂等推进步（2026-11-03）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/version_surface.py | W1114 | 本批工具/产物 |
-| scripts/batch_cascade.py | W1114 | 本批工具/产物 |
-| scripts/batch_closeout.py | W1114 | 本批工具/产物 |
-| tests/unit/test_w1114_version_surface.py | W1114 | 本批工具/产物 |
-| tests/unit/test_w1102_batch_closeout.py | W1114 | 本批工具/产物 |
-| scripts/output/_w1114_spec.json | W1114 | 本批工具/产物 |
-| scripts/output/_cascade_files_W1114.txt | W1114 | 本批工具/产物 |
-| CHANGELOG.md | W1114 | 本批工具/产物 |
-| README.md | W1114 | 本批工具/产物 |
-| STRUCTURE.md | W1114 | 本批工具/产物 |
-| docs/00-导读/项目说明.md | W1114 | 本批工具/产物 |
-| HANDOVER.md | W1114 | 本批工具/产物 |
-| AGENTS.md | W1114 | 本批工具/产物 |
-| CITATION.cff | W1114 | 本批工具/产物 |
-| .github/workflows/README.md | W1114 | 本批工具/产物 |
-| scripts/output/file-index.md | W1114 | 本批工具/产物 |
-| site/index.html | W1114 | 本批工具/产物 |
-| site/data/cross-time-danmaku.html | W1114 | 本批工具/产物 |
-| site/data/tag-cloud.html | W1114 | 本批工具/产物 |
-| site/dukou-engine.html | W1114 | 本批工具/产物 |
-| archive/docs/AGENTS-ARCHIVE.md | W1114 | 本批工具/产物 |
-| archive/docs/CHANGELOG-ARCHIVE.md | W1114 | 本批工具/产物 |
-| archive/docs/file-index-ARCHIVE.md | W1114 | 本批工具/产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1114 | 本批工具/产物 |
-| docs/00-导读/W批次编号对账表.md | W1114 | 本批工具/产物 |
-| docs/11-方案报告/README.md | W1114 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T65-任务计划执行与经验沉淀报告-2026-11-03.md | W1114 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1114 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1114 | 本批工具/产物 |
-| scripts/output/stats.json | W1114 | 本批工具/产物 |
-| scripts/output/tools-inventory.md | W1114 | 本批工具/产物 |
-| scripts/output/INDEX.md | W1114 | 本批工具/产物 |
-| scripts/output/README.md | W1114 | 本批工具/产物 |
-| scripts/output/_vermilion_solid_cache.json | W1114 | 本批工具/产物 |
-| site/data/search.html | W1114 | 本批工具/产物 |
-| site/en/search.html | W1114 | 本批工具/产物 |
-| docs/INDEX.md | W1114 | 本批工具/产物 |
-| scripts/INDEX.md | W1114 | 本批工具/产物 |
-| tests/unit/INDEX.md | W1114 | 本批工具/产物 |
-| tests/unit/README.md | W1114 | 本批工具/产物 |
-| pytest.ini | W1114 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1114 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1114 | 本批工具/产物 |
-
-## W1113 图表色工程档 3 铺开第一批（2026-11-03）
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/character-sentiment-arc.html | W1113 | 本批工具/产物 |
-| site/en/character-sentiment-arc.html | W1113 | 本批工具/产物 |
-| site/data/concept-device.html | W1113 | 本批工具/产物 |
-| site/en/concept-device.html | W1113 | 本批工具/产物 |
-| site/data/monster-victims-network.html | W1113 | 本批工具/产物 |
-| site/en/monster-victims-network.html | W1113 | 本批工具/产物 |
-| docs/agent/pitfalls.md | W1113 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T64-任务计划执行与经验沉淀报告-2026-11-03.md | W1113 | 本批工具/产物 |
-| scripts/output/_w1113_spec.json | W1113 | 本批工具/产物 |
-| scripts/output/_w1113_delta.json | W1113 | 本批工具/产物 |
-| STRUCTURE.md | W1113 | 本批工具/产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1113 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1113 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1113 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1113 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1113 | 本批工具/产物 |
-| scripts/output/stats.json | W1113 | 本批工具/产物 |
-| dataset/concept-device.json | W1113 | 本批工具/产物 |
-| dataset/monster-victims-network.json | W1113 | 本批工具/产物 |
-| docs/INDEX.md | W1113 | 本批工具/产物 |
-| scripts/output/INDEX.md | W1113 | 本批工具/产物 |
-| scripts/output/README.md | W1113 | 本批工具/产物 |
-| scripts/output/tools-inventory.md | W1113 | 本批工具/产物 |
-| site/data/search.html | W1113 | 本批工具/产物 |
-| site/en/search.html | W1113 | 本批工具/产物 |
-| .agent/skills/puti-shouye/SKILL.md | W1113 | 本批工具/产物 |
-| .github/workflows/README.md | W1113 | 本批工具/产物 |
-| AGENTS.md | W1113 | 本批工具/产物 |
-| CHANGELOG.md | W1113 | 本批工具/产物 |
-| CITATION.cff | W1113 | 本批工具/产物 |
-| HANDOVER.md | W1113 | 本批工具/产物 |
-| README.md | W1113 | 本批工具/产物 |
-| archive/docs/AGENTS-ARCHIVE.md | W1113 | 本批工具/产物 |
-| docs/00-导读/W批次编号对账表.md | W1113 | 本批工具/产物 |
-| docs/00-导读/项目说明.md | W1113 | 本批工具/产物 |
-| docs/11-方案报告/README.md | W1113 | 本批工具/产物 |
-| scripts/output/_cascade_files_W1113.txt | W1113 | 本批工具/产物 |
-| scripts/output/_vermilion_solid_cache.json | W1113 | 本批工具/产物 |
-| scripts/output/file-index.md | W1113 | 本批工具/产物 |
-| site/data/cross-time-danmaku.html | W1113 | 本批工具/产物 |
-| site/data/tag-cloud.html | W1113 | 本批工具/产物 |
-| site/dukou-engine.html | W1113 | 本批工具/产物 |
-| site/index.html | W1113 | 本批工具/产物 |
-| archive/docs/CHANGELOG-ARCHIVE.md | W1113 | 本批工具/产物 |
-| archive/docs/file-index-ARCHIVE.md | W1113 | 本批工具/产物 |
-| archive/scripts/batches/w1100/_w1100_layer3_pages.py | W1113 | 本批工具/产物 |
-| scripts/visual_regression_probe.py | W1113 | 本批工具/产物 |
-| tests/unit/test_w851_visual_regression_probe.py | W1113 | 本批工具/产物 |
-
-## W1112 落段收官一键脚本（2026-11-03）
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1112 | 本批工具/产物 |
-| AGENTS.md | W1112 | 本批工具/产物 |
-| CHANGELOG.md | W1112 | 本批工具/产物 |
-| CITATION.cff | W1112 | 本批工具/产物 |
-| HANDOVER.md | W1112 | 本批工具/产物 |
-| README.md | W1112 | 本批工具/产物 |
-| STRUCTURE.md | W1112 | 本批工具/产物 |
-| archive/docs/AGENTS-ARCHIVE.md | W1112 | 本批工具/产物 |
-| archive/docs/CHANGELOG-ARCHIVE.md | W1112 | 本批工具/产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1112 | 本批工具/产物 |
-| archive/docs/file-index-ARCHIVE.md | W1112 | 本批工具/产物 |
-| docs/00-导读/W批次编号对账表.md | W1112 | 本批工具/产物 |
-| docs/00-导读/项目说明.md | W1112 | 本批工具/产物 |
-| docs/11-方案报告/README.md | W1112 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T63-任务计划执行与经验沉淀报告-2026-11-03.md | W1112 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1112 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1112 | 本批工具/产物 |
-| docs/INDEX.md | W1112 | 本批工具/产物 |
-| pytest.ini | W1112 | 本批工具/产物 |
-| scripts/INDEX.md | W1112 | 本批工具/产物 |
-| scripts/batch_closeout.py | W1112 | 本批工具/产物 |
-| scripts/output/INDEX.md | W1112 | 本批工具/产物 |
-| scripts/output/README.md | W1112 | 本批工具/产物 |
-| scripts/output/_cascade_files_W1112.txt | W1112 | 本批工具/产物 |
-| scripts/output/_vermilion_solid_cache.json | W1112 | 本批工具/产物 |
-| scripts/output/_w1106_spec.json | W1112 | 本批工具/产物 |
-| scripts/output/_w1112_spec.json | W1112 | 本批工具/产物 |
-| scripts/output/file-index.md | W1112 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1112 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1112 | 本批工具/产物 |
-| scripts/output/stats.json | W1112 | 本批工具/产物 |
-| scripts/output/tools-inventory.md | W1112 | 本批工具/产物 |
-| site/data/cross-time-danmaku.html | W1112 | 本批工具/产物 |
-| site/data/search.html | W1112 | 本批工具/产物 |
-| site/data/tag-cloud.html | W1112 | 本批工具/产物 |
-| site/dukou-engine.html | W1112 | 本批工具/产物 |
-| site/en/search.html | W1112 | 本批工具/产物 |
-| site/index.html | W1112 | 本批工具/产物 |
-| tests/unit/INDEX.md | W1112 | 本批工具/产物 |
-| tests/unit/README.md | W1112 | 本批工具/产物 |
-| tests/unit/test_w1102_batch_closeout.py | W1112 | 本批工具/产物 |
-| tests/unit/test_w1112_judge_fix.py | W1112 | 本批工具/产物 |
-
-## W1110 图表色工程档 3 施工前置批（2026-11-03）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/verify_delivery.py | W1110 | 本批工具/产物 |
-| scripts/check_powershell_parse.py | W1110 | 本批工具/产物 |
-| scripts/check_csp_drift.py | W1110 | 本批工具/产物 |
-| scripts/check_css_var_selfref.py | W1110 | 本批工具/产物 |
-| scripts/check_pitfall_id_unique.py | W1110 | 本批工具/产物 |
-| scripts/doc_areas.py | W1110 | 本批工具/产物 |
-| scripts/check_doc_sync.py | W1110 | 本批工具/产物 |
-| scripts/agent_start.py | W1110 | 本批工具/产物 |
-| site/data/chart-design.html | W1110 | 本批工具/产物 |
-| site/en/chart-design.html | W1110 | 本批工具/产物 |
-| scripts/guardrails/check_changed.ps1 | W1110 | 本批工具/产物 |
-| scripts/install_hooks.ps1 | W1110 | 本批工具/产物 |
-| xiyouji-agent-web/cleanup.ps1 | W1110 | 本批工具/产物 |
-| docs/agent/gates.md | W1110 | 本批工具/产物 |
-| docs/agent/pitfalls.md | W1110 | 本批工具/产物 |
-| AGENTS.md | W1110 | 本批工具/产物 |
-| HANDOVER.md | W1110 | 本批工具/产物 |
-| .agent/skills/puti-shouye/SKILL.md | W1110 | 本批工具/产物 |
-| docs/00-导读/W批次编号对账表.md | W1110 | 本批工具/产物 |
-| docs/11-方案报告/README.md | W1110 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T62-任务计划执行与经验沉淀报告-2026-11-03.md | W1110 | 本批工具/产物 |
-| scripts/output/_w1110_spec.json | W1110 | 本批工具/产物 |
-| scripts/output/_w1110_w1108_delta.json | W1110 | 本批工具/产物 |
-| scripts/output/stats.json | W1110 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1110 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1110 | 本批工具/产物 |
-| scripts/output/file-index.md | W1110 | 本批工具/产物 |
-| CHANGELOG.md | W1110 | 本批工具/产物 |
-| README.md | W1110 | 本批工具/产物 |
-| README.en.md | W1110 | 本批工具/产物 |
-| STRUCTURE.md | W1110 | 本批工具/产物 |
-| CITATION.cff | W1110 | 本批工具/产物 |
-| docs/00-导读/项目说明.md | W1110 | 本批工具/产物 |
-| .github/workflows/README.md | W1110 | 本批工具/产物 |
-| scripts/output/_cascade_files_W1110.txt | W1110 | 本批工具/产物 |
-
-## W1109 坑表编号重号收敛（2026-11-03）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1109 | governance-or-doc |
-| AGENTS.md | W1109 | governance-or-doc |
-| CHANGELOG.md | W1109 | governance-or-doc |
-| CITATION.cff | W1109 | governance-or-doc |
-| HANDOVER.md | W1109 | governance-or-doc |
-| README.md | W1109 | governance-or-doc |
-| STRUCTURE.md | W1109 | governance-or-doc |
-| archive/docs/AGENTS-ARCHIVE.md | W1109 | governance-or-doc |
-| archive/docs/CHANGELOG-ARCHIVE.md | W1109 | governance-or-doc |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1109 | governance-or-doc |
-| archive/docs/file-index-ARCHIVE.md | W1109 | governance-or-doc |
-| docs/00-导读/W批次编号对账表.md | W1109 | governance-or-doc |
-| docs/00-导读/项目说明.md | W1109 | governance-or-doc |
-| docs/agent/pitfalls.md | W1109 | governance-or-doc |
-| scripts/output/_vermilion_solid_cache.json | W1109 | tool |
-| scripts/output/_vermilion_solid_report.json | W1109 | tool |
-| scripts/output/file-index.md | W1109 | tool |
-| scripts/output/stats.json | W1109 | tool |
-| site/data/cross-time-danmaku.html | W1109 | governance-or-doc |
-| site/data/tag-cloud.html | W1109 | governance-or-doc |
-| site/dukou-engine.html | W1109 | governance-or-doc |
-| site/index.html | W1109 | governance-or-doc |
-| scripts/output/_cascade_files_W1109.txt | W1109 | tool |
-| scripts/output/_w1109_spec.json | W1109 | tool |
-
-## W1108 图表色工程批·档 3 原型验证批（2026-11-03）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .agent/skills/puti-shouye/SKILL.md | W1108 | 本批工具/产物 |
-| .github/workflows/README.md | W1108 | 本批工具/产物 |
-| AGENTS.md | W1108 | 本批工具/产物 |
-| CHANGELOG.md | W1108 | 本批工具/产物 |
-| CITATION.cff | W1108 | 本批工具/产物 |
-| HANDOVER.md | W1108 | 本批工具/产物 |
-| README.md | W1108 | 本批工具/产物 |
-| STRUCTURE.md | W1108 | 本批工具/产物 |
-| archive/docs/AGENTS-ARCHIVE.md | W1108 | 本批工具/产物 |
-| archive/docs/CHANGELOG-ARCHIVE.md | W1108 | 本批工具/产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1108 | 本批工具/产物 |
-| archive/docs/file-index-ARCHIVE.md | W1108 | 本批工具/产物 |
-| docs/00-导读/W批次编号对账表.md | W1108 | 本批工具/产物 |
-| docs/00-导读/项目说明.md | W1108 | 本批工具/产物 |
-| docs/11-方案报告/README.md | W1108 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T60-任务计划执行与经验沉淀报告-2026-11-03.md | W1108 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1108 | 本批工具/产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1108 | 本批工具/产物 |
-| docs/INDEX.md | W1108 | 本批工具/产物 |
-| docs/agent/pitfalls.md | W1108 | 本批工具/产物 |
-| scripts/output/INDEX.md | W1108 | 本批工具/产物 |
-| scripts/output/README.md | W1108 | 本批工具/产物 |
-| scripts/output/_cascade_files_W1108.txt | W1108 | 本批工具/产物 |
-| scripts/output/_w1108_spec.json | W1108 | 本批工具/产物 |
-| scripts/output/file-index.md | W1108 | 本批工具/产物 |
-| scripts/output/stats-changelog.json | W1108 | 本批工具/产物 |
-| scripts/output/stats-index.md | W1108 | 本批工具/产物 |
-| scripts/output/stats.json | W1108 | 本批工具/产物 |
-| scripts/output/tools-inventory.md | W1108 | 本批工具/产物 |
-| site/data/chart-design.html | W1108 | 本批工具/产物 |
-| site/data/cross-time-danmaku.html | W1108 | 本批工具/产物 |
-| site/data/search.html | W1108 | 本批工具/产物 |
-| site/data/tag-cloud.html | W1108 | 本批工具/产物 |
-| site/dukou-engine.html | W1108 | 本批工具/产物 |
-| site/en/chart-design.html | W1108 | 本批工具/产物 |
-| site/en/search.html | W1108 | 本批工具/产物 |
-| site/index.html | W1108 | 本批工具/产物 |
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

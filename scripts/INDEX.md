@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（212）
+## 文件（213）
 
 ### Python 脚本
 
@@ -248,6 +248,7 @@
 ### JavaScript / TypeScript
 
 - `_audit_render_states.js`
+- `_render_scope.js`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`

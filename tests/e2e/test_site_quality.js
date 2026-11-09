@@ -64,11 +64,14 @@ function check(ok, label, detail) {
     });
     check(t1 !== null && t1 !== t2, 'A2b 力导向在动', JSON.stringify([t1, t2]));
     // A1：世界地图 popup（hover 国家圆点）
+    // 事件族对齐：页面侧自 W1169（提交 0582f327「图表触摸交互批——tooltip 事件族切 Pointer Events」）
+    // 起把世界地图 hover 监听由 mouseenter 改为 pointerenter（site/data/cross-time-danmaku.html:2315），
+    // 而 d3 .on("pointerenter") 只监听 pointerenter 事件类型 ⇒ 测试须同步派发 pointer 族事件，否则 popup 恒为空串。
     const a1 = await page.evaluate(() => {
       const g = document.querySelector('#world-map g');
       if (!g) return { skip: 'no world-map g' };
       const r = g.getBoundingClientRect();
-      g.dispatchEvent(new MouseEvent('mouseenter', { clientX: r.x + r.width / 2, clientY: r.y + r.height / 2 }));
+      g.dispatchEvent(new PointerEvent('pointerenter', { clientX: r.x + r.width / 2, clientY: r.y + r.height / 2 }));
       const popup = document.querySelector('.map-popup');
       return { html: popup ? popup.innerHTML.slice(0, 80) : null, hasHead: popup ? popup.innerHTML.includes('p-head') : false };
     });

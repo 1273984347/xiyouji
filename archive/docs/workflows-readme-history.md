@@ -38,3 +38,4 @@
 + W1189 集成连通：A5 系列 ↔ 角色/器物文档 双向补链·无 workflow 结构改动）。
 + W1190 CI 周级联网扫描根修：脚本 --api 匿名兜底 + workflow 注入 token·无 workflow 结构改动）。
 + W1191 GitHub Security and quality 全清：三面板告警 + Scorecard 治理 + 存量红灯清偿·无 workflow 结构改动）。
++ W1192 PR #150 五个失败 job 的根因全修：暗色门禁断言域同源 + CodeQL #120 + CHANGELOG 4 断链 + E2E 事件族 + evals 语料·无 workflow 结构改动）。
