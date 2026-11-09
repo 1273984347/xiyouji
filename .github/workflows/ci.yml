@@ -304,6 +304,11 @@ jobs:
       - name: Install Python deps
         run: pip install -r scripts/requirements.txt
 
+      # W1154（基础设施审计 §6 建议）：编排面引用存在性——Makefile/pre-commit/workflow
+      # 指向的 scripts/ 路径必须真实存在（W1014 sync_docs 死钩子 + drl-contracts 休眠族防复发）。
+      - name: Orchestration refs existence (W1154)
+        run: python scripts/check_orchestration_refs.py
+
       # W401 修复：tests/ 全量（pytest.ini testpaths=tests + --ignore=tests/e2e
       # 排除需 playwright browser 的 test_narratology_render.py，由 pages-smoke job 的存活烟测覆盖（W699 更名））
       - name: Run pytest (unit + root tests)
@@ -314,6 +319,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        # W1155（深度审计 #55/#56）：默认 fetch-depth=1（浅克隆）⇒ merge-base/origin/main
+        # 取数链恒空 ⇒ plan_template 增量面与 pitfall 编号判据在 CI 上等于没跑。补全历史。
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7

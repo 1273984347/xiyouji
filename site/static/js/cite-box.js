@@ -1,33 +1,19 @@
 /*!
  * cite-box.js — 可引用性组件交互模块（B-6 第二步 · W657）
  *
- * 职责：为页面静态 cite-block（由 _w657_cite_inject.py 注入）绑定「复制」按钮与样式。
- * 复制：navigator.clipboard 优先，file:// 降级 execCommand；成功后按钮文案 2s 内反馈。
- * 样式：全部 var(--token)（零裸色·token 覆盖率门禁合规）；样式节点由本模块注入 head
- *       （details 默认收起·视觉零扰动——W550 验收面不变）。
+ * 职责：为页面静态 cite-block（由 _w657_cite_inject.py 注入）绑定「复制」按钮。
+ * 复制：navigator.clipboard 优先，file:// 降级 execCommand；成功后按钮显示对勾并在 2.5s 后还原。
+ *
+ * 样式归属（W1165 变更）：本模块原以字符串数组声明全部 .cite-* 样式并在 init() 里建 <style> 注入 head。
+ *   该设计把表现层寄生于脚本——未引用本脚本但含 cite 结构的页面（如 wukong-tangseng-benchmark）
+ *   结构在而样式缺，复制按钮回落浏览器默认 31×21。W1165 已将样式整体迁至 site/system.css
+ *   「可引用性组件（cite）」段，本模块只保留交互职责。
+ *
  * 挂载：<script defer src="../static/js/cite-box.js"></script>——DOMContentLoaded 委托绑定，
- *       无需配置（cite-block 存在即生效，不存在的页面零开销）。
+ *       无需配置（.cite-block 存在即生效，不存在的页面零开销）。
  */
 (function () {
   'use strict';
-
-  var CSS = [
-    '.cite-block{margin:10px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--paper-warm);font-size:12px;color:var(--ink-soft);line-height:1.6;}',
-    '.cite-block code{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);padding:1px 5px;font-family:var(--font-mono);font-size:11px;}',
-    '.cite-block .cite-details{margin-top:6px;}',
-    '.cite-block .cite-details summary{cursor:pointer;color:var(--accent-2);font-weight:500;user-select:none;}',
-    '.cite-block .cite-item{display:flex;gap:8px;align-items:flex-start;margin-top:8px;}',
-    '.cite-block .cite-item>span{flex:0 0 44px;font-weight:600;color:var(--ink);padding-top:6px;}',
-    '.cite-block pre.cite-text{flex:1;margin:0;padding:6px 8px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);font-family:var(--font-mono);font-size:11px;white-space:pre-wrap;word-break:break-all;color:var(--ink);}',
-    '.cite-block .cite-copy{flex:0 0 auto;padding:4px 10px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--paper);color:var(--accent-2);font-size:11px;cursor:pointer;transition:background var(--dur-fast) var(--ease-out-quart),color var(--dur-fast) var(--ease-out-quart);}',
-    '.cite-block .cite-copy:hover{background:var(--accent-tint);color:var(--accent);}',
-    // W1134: 复制成功显示对勾，2.5s 后自动淡出（视频拆解口径「复制成功对勾 2.5 秒后自动淡出」）
-    '.cite-block .cite-copy.ok{color:var(--ok);border-color:var(--ok);animation:cite-copy-fadeout 2.5s ease-out forwards;}',
-    '@keyframes cite-copy-fadeout{0%,60%{opacity:1;}100%{opacity:0;}}',
-    // 降低动效偏好：不播淡出动画，只做文案与配色反馈
-    '@media (prefers-reduced-motion: reduce){.cite-block .cite-copy.ok{animation:none;}}',
-    '.cite-block a[href$=".json"]{display:inline-block;margin-top:6px;color:var(--accent-2);}'
-  ].join('\n');
 
   function copyText(text, btn) {
     var done = function () {
@@ -39,6 +25,9 @@
       void btn.offsetWidth;
       btn.classList.add('ok');
       setTimeout(function () { btn.textContent = old; btn.classList.remove('ok'); }, 2500);
+      // W1168：只报「复制发生了」，**不回传引文内容**（隐私面：引文虽为公版文本，
+      // 但把用户复制的内容送进第三方统计不是本项目的承诺）。值固定为空串。
+      if (window.XYstats) { window.XYstats.count('copy_citation', ''); }
     };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(done, function () { legacy(); });
@@ -70,9 +59,6 @@
   function init() {
     var box = document.querySelector('.cite-block');
     if (!box) return; /* 无组件页零开销 */
-    var style = document.createElement('style');
-    style.textContent = CSS;
-    document.head.appendChild(style);
     bind(box);
   }
 

@@ -1,7 +1,7 @@
 {
  "gate": "第 49 门禁 朱砂实底",
  "criterion": "每页非豁免朱砂实底 ≤3 处（背景=--accent 盒面积>400·或 ≥2 朱砂顶条条带面积>400）",
- "scope": 236,
+ "scope": 237,
  "exemptions_file": "scripts/output/_w864_accent_exemptions.json",
  "pages": {
   "data/81-hardships-view.html": {
@@ -43,24 +43,29 @@
    "perCls": {}
   },
   "data/aesthetics.html": {
-   "measured": 6,
-   "exempted": 4,
-   "nonExempt": 2,
+   "measured": 8,
+   "exempted": 8,
+   "nonExempt": 0,
    "fail": false,
    "perCls": {
     "div.kpi-card": {
      "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
+     "exempted": 1,
+     "nonExempt": 0
     },
     "div.color-swatch": {
      "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
+     "exempted": 1,
+     "nonExempt": 0
     },
     "div.scene-bar": {
      "measured": 4,
      "exempted": 4,
+     "nonExempt": 0
+    },
+    "div.stage-color-bar": {
+     "measured": 2,
+     "exempted": 2,
      "nonExempt": 0
     }
    }
@@ -646,6 +651,19 @@
      "measured": 1,
      "exempted": 1,
      "nonExempt": 0
+    }
+   }
+  },
+  "data/glossary.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "button.filter-tab.active": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
     }
    }
   },
@@ -3734,5 +3752,5 @@
  "notes": [
   "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）"
  ],
- "generated_at": "2026-11-05T21:01:27.227Z"
+ "generated_at": "2026-11-08T07:12:41.778Z"
 }

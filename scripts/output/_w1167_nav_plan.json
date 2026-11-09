@@ -1,0 +1,11 @@
+{
+  "mode": "--apply",
+  "stats": {
+    "update": 860,
+    "replace-header-nav": 1
+  },
+  "changed_sample": [
+    "data/w1177-probe.html"
+  ],
+  "changed_total": 1
+}

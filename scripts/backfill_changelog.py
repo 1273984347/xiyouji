@@ -77,10 +77,19 @@ def insert_before_smaller(text, w, block):
 
 
 def changelog_block(spec):
-    """单段 CHANGELOG 块（与 batch_cascade._face_changelog 同形态）。"""
+    """单段 CHANGELOG 块（与 batch_cascade._face_changelog 同形态）。
+
+    W1157 根修（粘行事故）：段头与 body 是**直接字符串拼接**，body 不以空行开场即产出
+    粘行段（batch_cascade PRECHECK 有判据而本共享渲染点没有的同族缺口·W1157 实证）。
+    W1159 定稿形态：渲染点做**规范化兜底**（缺空行自动补·不 raise·api_diff 零破坏）——
+    任何入口（含未来新入口）经此渲染永不粘行；回归锁
+    tests/unit/test_w1157_changelog_block_guard.py（无空行/显式空行/前导单换行三态）。
+    """
+    body = spec["changelog_body"]
+    if not body.startswith("\n\n"):
+        body = "\n\n" + body.lstrip("\n")
     title_body = re.sub(r"^W\d+\s+", "", spec["title"]).strip()
-    return "### %s（%s）：%s" % (spec["batch"], spec["date"], title_body) + \
-           spec["changelog_body"] + "\n"
+    return "### %s（%s）：%s" % (spec["batch"], spec["date"], title_body) + body + "\n"
 
 
 def file_index_block(spec):

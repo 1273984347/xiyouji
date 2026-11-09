@@ -25,9 +25,10 @@ html {
 body {
     background: var(--bg);
     color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: var(--leading-body);
+    /* W1152 v4 正文语义消费：--type-body = sans 400 15px/1.80——行高 1.75→1.80 是 v4
+       明文改值项（W826 预览页卡 ⑤「正文行高由 1.75 提到 1.80」）；font shorthand 重置的
+       font-style/variant 在 body 本为初始 normal ⇒ 计算值仅行高一变（J2 逐属性对拍佐证）。 */
+    font: var(--type-body);
     min-height: 100vh;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -172,6 +173,104 @@ h4 { font-size: 18px; font-weight: 500; }
     .wordmark { font-size: 16px; }
 }
 
+/* ===== W1167 主导航正本分发组件（NAV-CANONICAL v1）=====
+ * 有 .topnav 壳的页复用上方墨韵下划线；独立 .site-mainnav（reader 等无壳页）自带布局。
+ * active=下划线+字重+色 三通道（不只靠颜色）；改导航结构请走 scripts/w1167_nav_inject.py 正本。 */
+.site-mainnav { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.site-mainnav .nav-brand { font-family: var(--font-serif); font-weight: 600; font-size: 15px; color: var(--ink); white-space: nowrap; }
+.site-mainnav .nav-item { font-size: 14px; color: var(--ink-soft); position: relative; white-space: nowrap; transition: color 0.15s; }
+.site-mainnav .nav-item::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-base) var(--ease-out-quart); }
+.site-mainnav .nav-item:hover { color: var(--accent); }
+.site-mainnav .nav-item:hover::after,
+.site-mainnav .nav-item.is-active::after { transform: scaleX(1); }
+.site-mainnav .nav-item.is-active { color: var(--ink); font-weight: 600; }
+header.site-header:has(.site-mainnav) {
+    position: sticky; top: 0; z-index: var(--z-nav);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 16px clamp(20px, 5vw, 64px);
+}
+@media (max-width: 768px) {
+    .site-mainnav { gap: 16px; }
+    /* Ask4 拍板⑥：触摸命中区机制规则（一条覆盖导航全部可点位，替代逐按钮补丁；brief 定量 ≥44px）
+       min-width 同须设：WCAG 2.5.8 判的是**两维都 ≥24px**，正本里「EN」两项字符宽仅 20px，
+       只设 min-height 会留下宽度维度的合格目标缺失（W1167 视口探针 FAIL 6 页实证）。 */
+    .site-mainnav .nav-item,
+    .site-mainnav .nav-brand {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .site-mainnav .nav-item::after { transition: none; }
+}
+
+/* ===== W1168 · 3D 视角复位控件（三张 Three.js 页共用）=====
+ * 落地 audit 原始发现「手机上把 3D 关系图拖乱了，找不到任何按钮回到初始视角」——
+ * 复位为瞬时归位、不做动画：减少动态效果的用户不应被动效干扰，且动画期间继续拖拽会打架。 */
+.reset-view-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: var(--z-nav, 50);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 6px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--paper-warm);
+    background: rgba(34, 29, 22, 0.72);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart),
+        color var(--dur-fast) var(--ease-out-quart);
+}
+.reset-view-btn:hover { background: var(--accent-deep); color: var(--paper); }
+.reset-view-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 767.98px) {
+    .reset-view-btn { min-height: 44px; min-width: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reset-view-btn { transition: none; }
+}
+
+/* ===== W1168 · 检索深链命中高亮（reader 正文）=====
+ * 由 site/js/reader-enhance.js 消费 `#q=<词>` 时插入 <mark class="hit-mark">。
+ * 底色调到朱砂 18%（与索引页 .is-flash 同源配方），文字色继承正文——不改对比度基线。 */
+.hit-mark {
+    background: color-mix(in srgb, var(--accent) 18%, var(--paper));
+    color: inherit;
+    border-radius: var(--radius-sm);
+    padding: 0 2px;
+    box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+}
+html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14); }
+
+/* ===== W1167 三态数据徽标组件（DATA-STATUS-BADGE v1）=====
+ * 语义色走正本功能色三件套：live=--ok 苔绿 / snapshot=--info 靛蓝 / sample=--warn 赭。
+ * 文案与结构正本在 scripts/w1167_badge_inject.py；file:// 离线时徽标为静态 HTML 恒在。 */
+.data-status-badge {
+    display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    margin: 12px 0 6px; padding: 8px 14px;
+    border: 1px solid var(--line); border-radius: var(--radius-pill);
+    background: var(--paper); font-size: 13px;
+}
+.data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
+.data-status-badge .ds-label { font-weight: 600; color: var(--info); }
+.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
+.data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
+.data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
+.data-status-badge[data-status="sample"] .ds-dot { background: var(--warn); }
+.data-status-badge[data-status="sample"] .ds-label { color: var(--warn); }
+
 /* ===== Hero（数据页通用） ===== */
 .hero {
     background: var(--dark);
@@ -279,11 +378,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 var(--elev-2);
 }
 .kpi .kpi-value {
-    font-family: var(--font-mono);
-    font-size: 32px;
-    font-weight: 500;
+    /* W1151 type 语义消费：--type-number 与本规则四值逐字等值（mono 500 32px/1.1）；
+       font shorthand 会重置 font-variant-numeric ⇒ 就地补位（探针实证） */
+    font: var(--type-number);
     color: var(--ink);
-    line-height: 1.1;
     font-variant-numeric: tabular-nums;
 }
 .kpi .kpi-label {
@@ -322,7 +420,7 @@ h4 { font-size: 18px; font-weight: 500; }
                 var(--elev-2);
 }
 .kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
-.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .value, .kpi-card .kpi-value { font: var(--type-number); color: var(--ink); font-variant-numeric: tabular-nums; }
 .kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
 
 /* ===== 图表容器 ===== */
@@ -583,11 +681,19 @@ td.num, th.num {
 }
 .site-footer nav {
     display: flex;
-    gap: 20px;
+    /* W1165（V4 移动端 375px 回归）：原为 nowrap 且子项可折字 ⇒ 375px 下 6 项被压缩到 18px 宽，
+       视觉呈「每行 1–2 字」的竖排堆叠（perf-canvas-rendering 页实证）。改为允许换行 + 子项不折字。 */
+    flex-wrap: wrap;
+    gap: 12px 20px;
 }
 .site-footer nav a {
     font-size: 13px;
     color: var(--ink-soft);
+    /* W1165：子项占满 24px 触摸线（WCAG 2.5.8 AA），并禁止中文逐字折行 */
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    white-space: nowrap;
 }
 .site-footer nav a:hover { color: var(--accent); }
 
@@ -749,6 +855,114 @@ td.num, th.num {
 }
 .empty-state p { font-size: 15px; }
 
+/* ===== 可引用性组件（cite · W1165 从 cite-box.js 归位到单一事实源）=====
+   背景：本组件样式原以字符串数组形式注入于 site/static/js/cite-box.js，由 JS 建 <style> 节点挂 head。
+   后果——未引用该脚本的页面（如 data/wukong-tangseng-benchmark.html，自实现复制逻辑）结构在而样式缺，
+   .cite-copy 回落浏览器默认 31×21。样式属于表现层，不该由脚本寄生携带；归位 system.css 后
+   全部 88 个含 cite 块的页面（内联或外链 system.css）统一获得样式，JS 只留交互职责。 */
+.cite-block {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--paper-warm);
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+}
+.cite-block code {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 1px 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+.cite-block .cite-details { margin-top: 6px; }
+/* summary 触摸尺寸：原为浏览器默认 19px 高（88 页统一落在 WCAG 2.5.8 的 24px 线以下）。
+   display:flex 会吃掉 list-item 原生三角，故显式绘制箭头；动效仅 transform，时长走 --dur-fast 预算。 */
+.cite-details summary {
+    cursor: pointer;
+    color: var(--accent-2);
+    font-weight: 500;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+}
+.cite-details summary::before {
+    content: "\25B8";
+    flex: 0 0 auto;
+    color: var(--accent-2);
+    transition: transform var(--dur-fast) var(--ease-out-quart);
+}
+.cite-details[open] summary::before { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) {
+    .cite-details summary::before { transition: none; }
+}
+.cite-block .cite-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+.cite-block .cite-item > span {
+    flex: 0 0 44px;
+    font-weight: 600;
+    color: var(--ink);
+    padding-top: 6px;
+}
+.cite-block pre.cite-text {
+    flex: 1;
+    margin: 0;
+    padding: 6px 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: var(--ink);
+}
+/* 复制按钮：原 44×25（低于 24px 线仅差 1px、远低于 44px 建议值），补到 44×36 */
+.cite-copy {
+    flex: 0 0 auto;
+    min-height: 36px;
+    min-width: 44px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--paper);
+    color: var(--accent-2);
+    font-size: 11px;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart), color var(--dur-fast) var(--ease-out-quart);
+}
+.cite-copy:hover {
+    background: var(--accent-tint);
+    color: var(--accent);
+}
+/* W1134：复制成功显示对勾，2.5s 后自动淡出 */
+.cite-copy.ok {
+    color: var(--ok);
+    border-color: var(--ok);
+    animation: cite-copy-fadeout 2.5s ease-out forwards;
+}
+@keyframes cite-copy-fadeout {
+    0%, 60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cite-copy.ok { animation: none; }
+}
+.cite-block a[href$=".json"] {
+    display: inline-block;
+    margin-top: 6px;
+    color: var(--accent-2);
+}
+
 /* ===== 微交互工具类（W477 Phase E1 · DESIGN.md §4A.7 · 时长取 §5 契约档） ===== */
 /* 滚动显现：fail-open——仅 JS 在 <html> 挂 .js-reveal 后启用（E5 接入）；无 JS 内容直接可见 */
 .js-reveal .reveal-in {
@@ -854,6 +1068,50 @@ td.num, th.num {
     .legend-cell,
     .legend-label {
         font-size: 11px;
+    }
+    /* W1165（V4 移动端回归）：可点击图例项（role=button·D3 系列切换控件）原为 20px 高，
+       低于 WCAG 2.5.8 的 24px 线；纵排列表下补足 44px 不改变原有单列布局宽度。 */
+    .legend-item[role="button"],
+    .legend-cell[role="button"] {
+        min-height: 44px;
+    }
+    /* W1166：纯视觉图例项（无 role·不可点击）原 20px，与上方 44px 可点击项纵向相邻时
+       呈现「上半松、下半紧」的节奏断裂（W1165 验收实测 12 项图例视觉）。补到 32px——
+       既远高于 24px AA 线，又把两组行距差从 24px 收敛到 12px，列表总高仅增约 72px。 */
+    .legend-item:not([role="button"]),
+    .legend-cell:not([role="button"]) {
+        min-height: 32px;
+    }
+    /* W1172：宽表格在窄屏撑破视口——reader 正文的裸 <table>（无 .table-wrap 包裹）实测
+       375px 下溢出 274px、320px 下溢出 329px，en/data 亦有多页同类。display:block 让表格
+       自身成为横向滚动容器：内容不压缩（表高不变）、桌面/平板不受影响（媒体查询边界 640）。 */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    /* W1166：底部固定浮层与页脚的行为冲突——.rag-fab（56px @ bottom:28 ⇒ 占底部 84px）
+       压住首页/看板页脚右下链接（实证：首页「反馈」被遮），.xy-fab-theme（40px @ bottom:14
+       ⇒ 占 54px）同区域。移动端为页脚预留安全区，浮层不再与文字重叠。 */
+    .site-footer {
+        padding-bottom: 80px;
+    }
+    /* 更高占用（56px 问答浮层 @ bottom:28 ⇒ 84px）再加高；:has 不支持的浏览器自动落回上一条 80px 兜底 */
+    body:has(.rag-fab) .site-footer {
+        padding-bottom: 104px;
+    }
+    /* W1165：表单控件原高度 21–23px（页内内联 padding 决定，差 1–3px 触线）。
+       仅限窄屏补足，桌面端视觉零变化。 */
+    select,
+    input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+    label[for] {
+        min-height: 32px;
+    }
+    /* W1173：W1165 那条规则漏了 button——en/relationships 的「Redraw」实测 73×23px，差 1px 到
+       WCAG 2.5.8 的 24px 线。只加 min-height:24 不影响已够高的按钮（40/44px 原值保留），
+       对 23px 这类仅 +1px 视觉无感。 */
+    button {
+        min-height: 24px;
     }
     .chart-block svg text,
     .chart-wrap svg text,

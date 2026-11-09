@@ -111,6 +111,11 @@ def reference_corpus():
     for p in [GATE_FILE, MAKEFILE]:
         if os.path.exists(p):
             parts.append(rd(p))
+    # W1155（深度审计 #9）：.git/hooks/pre-commit 是真实执行面（现役唯一钩子）——
+    # 原语料不含 ⇒ 钩子调用的脚本不算已覆盖。
+    _hook = os.path.join(ROOT, ".git", "hooks", "pre-commit")
+    if os.path.isfile(_hook):
+        parts.append(rd(_hook))
     if os.path.isdir(CI_DIR):
         for f in sorted(os.listdir(CI_DIR)):
             if f.endswith((".yml", ".yaml")):
@@ -124,20 +129,38 @@ def covered_set(scripts, corpus):
     用「带边界 token 出现」判定，不做语义解析——判据类门禁先做形态普查再写正则（W638 教训）。
     排除自引用：门禁脚本自身文本会命中自己的名字，由调用方从 corpus 语义上规避（本门禁自身
     只可能在测试面被引用，故自名不构成假覆盖——普查已实测 15→15 无自引用污染）。
+
+    W1155（深度审计 #9）收紧为「实质调用面」（原「词干出现即算覆盖」让 import 冒烟
+    （check_crop/plates_verify 类）长期假绿灯、常用词亦可误命中）：
+      E1 执行形态——解释器后随 `scripts/<name>`（workflow/Makefile/hook 语料）；
+      E2 门禁注册表——verify_delivery 槽位登记 `script="<name>.py"`；
+      E3 测试实质执行——测试面同时含模块 import **与** 执行标记（subprocess/
+         --self-test/main() 调用形态·import 冒烟不再算覆盖）。
     """
     hits = set()
     for name in scripts:
         stem = os.path.splitext(name)[0]
-        pats = [
-            r"(?<![\w.-])" + re.escape(name) + r"(?![\w-])",
-            r"scripts/" + re.escape(name),
-        ]
-        if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", stem):
-            pats.append(r"(?<![\w.])" + re.escape(stem) + r"(?![\w])")
-        for pat in pats:
-            if re.search(pat, corpus):
-                hits.add(name)
-                break
+        # E1 执行形态
+        exec_pat = re.compile(
+            r"(?:python3?|node|bash|sh|pwsh|py)\s+[\w./-]*[/\\]?scripts/"
+            + re.escape(name) + r"(?![\w.])"
+        )
+        if exec_pat.search(corpus):
+            hits.add(name)
+            continue
+        # E2 门禁注册表（verify 槽位·kwarg 形态 script="x.py" 或字典式 script":"x.py"）
+        if re.search(r'script["\']?\s*[:=]\s*["\']' + re.escape(stem) + r'\.\w+"', corpus):
+            hits.add(name)
+            continue
+        # E3 测试实质执行：import 与执行标记同在
+        imp = re.compile(r"^import\s+" + re.escape(stem) + r"\s*$|^from\s+" + re.escape(stem) + r"\s+import", re.M)
+        marker = re.compile(r"subprocess|--self-test|import_module|main\(\)")
+        if imp.search(corpus) and marker.search(corpus):
+            hits.add(name)
+            continue
+        # 兼容保留：`scripts/<name>` 完整路径出现（编排面脚本引用·非词干裸匹配）
+        if re.search(r"scripts/" + re.escape(name) + r"(?![\w.])", corpus):
+            hits.add(name)
     return hits
 
 
@@ -366,7 +389,12 @@ def run_self_test():
     fill = ["fill%02d.py" % i for i in range(MIN_SCRIPTS)]
     dummy_scripts = ["alpha.py", "beta.py"] + fill
     dummy_declared = "\n".join(["# 注释"] + ["fill%02d.py" % i for i in range(MIN_BASELINE)])
-    dummy_corpus = "\n".join(['GUARD = "alpha.py"', "import beta"] + fill)
+    # W1155：夹具升级到「实质调用面」语义——alpha 走 E1（解释器执行形态）·
+    # beta 走 E3（import+执行标记同在）·fill 走 E1（执行形态行·豁免 dummy_declared）。
+    dummy_corpus = "\n".join(['node scripts/alpha.py --self-test',
+                              'import beta',
+                              'subprocess.run(["python", "scripts/beta.py"])']
+                             + ['node scripts/%s --self-test' % f for f in fill])
 
     clean = {
         "scripts": dummy_scripts,
@@ -413,6 +441,86 @@ def run_self_test():
 
 CATEGORY_OF = {
     # ① 一次性/取证/人工审阅类
+    "check_emoji_icons.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_audit_trigger.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_icon_fields.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "cascade_lock.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_content_hygiene.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_gov_doc_claims.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_parser_anchor_coverage.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "accent_audit.py": "①朱砂盘点（人工审阅）",
+    "acceptance_snapshot.py": "①取证快照",
+    "archive_tier2.py": "①归档动作（1MB 线）",
+    "chart_render_probe.py": "④浏览器探针",
+    "check_agents_layers.py": "①分层结构扫描",
+    "check_archive_health.py": "①归档健康",
+    "check_backlog_review.py": "①Backlog 对账",
+    "check_cascade_line_anchor.py": "①级联锚点",
+    "check_chapter_stats_sync.py": "①章节统计双源",
+    "check_chart_colorblind.py": "①色盲安全",
+    "check_chart_data.py": "①图表数据形态",
+    "check_chart_degrade.py": "①降级声明",
+    "check_citability.py": "①可引用性",
+    "check_citations.py": "①引文保真",
+    "check_claude_md.py": "①速查层",
+    "check_content_consistency.py": "①内容一致性",
+    "check_corruption.py": "①腐蚀扫描",
+    "check_crop.py": "①题图裁切（人工判据）",
+    "check_csp_drift.py": "①CSP 增量漂移",
+    "check_css_decl_separators.py": "①声明分隔",
+    "check_css_orphan_selectors.py": "①孤立选择器",
+    "check_css_var_refs.py": "①变量引用",
+    "check_css_var_selfref.py": "①变量自引用",
+    "check_data_copy_chain.py": "①拷贝链",
+    "check_dataset_manifest.py": "①数据集清单",
+    "check_db_schema.py": "①DB 不变量",
+    "check_design_doc_drift.py": "①设计令牌对账",
+    "check_doc_numbers.py": "①文案数字对表",
+    "check_doc_size_budget.py": "①体积窗口",
+    "check_dynamic_links.py": "①动态链接",
+    "check_embedded_stale_markers.py": "①内嵌残留",
+    "check_folder_docs.py": "①目录新鲜度",
+    "check_no_brand_refs.py": "①品牌残留",
+    "check_page_admission.py": "①页面准入",
+    "check_plan_template.py": "①计划方案合规",
+    "check_tooltip_spacing.py": "①tooltip 间距",
+    "check_untracked.py": "①未 add 扫描",
+    "check_w_range_literal.py": "①W 区间字面量",
+    "gen_sitemap.py": "③发布链·sitemap（W1154 入收官链）",
+    "probe_runtime_bypass.py": "①运行时探针",
+    "archive_segments.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "audit_repo.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "batch_closeout.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "batch_spec.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_interaction_binding.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_js_syntax.js": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_registration_surface.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_review_trigger.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "check_segment_gaps.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "color_delta_guard.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "containment_block_scan.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "export_design_tokens.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "file_protocol_probe.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "fixed_ancestor_probe.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "gen_dataset_index.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "gen_tools_inventory.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "icon_probe.js": "②会话直接执行（人工终端·W1155 存量登记）",
+    "interaction_components.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "interaction_state_probe.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "j1_name_audit.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "obs_sample.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "optimize-html-size.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "perf_optimize.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "plan_template_review.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "plates_verify.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "pre-commit-validate.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "pre_release_screenshot.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "refresh_icon_paths.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "scan_targets.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "site_audit.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "subject_band.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "tmpe_tidy.py": "②会话直接执行（人工终端·W1155 存量登记）",
+    "visual_regression_probe.py": "②会话直接执行（人工终端·W1155 存量登记）",
     "baseline_snapshot.py": "①取证快照",
     "build_reader.py": "①阅读器构建",
     "extract_datasets.js": "①数据集抽取",
@@ -421,7 +529,6 @@ CATEGORY_OF = {
     "inject_descriptions.py": "①批量注入·人工审形",
     "inject_rum.py": "①RUM 信标注入",
     "inject_visit_log.py": "①访问日志注入",
-    "check_untracked.py": "①取证扫描",
     "archive_file.py": "①归档动作",
     "bump_footer_version.py": "①批量页脚版本",
     "source_collate.py": "①原文归集",

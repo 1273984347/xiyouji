@@ -85,7 +85,7 @@
 | `--text-hero` | `clamp(1.75rem, 1.2rem + 2.5vw, 2.75rem)` |  |
 | `--leading-tight` | `1.3` |  |
 | `--leading-heading` | `1.4` |  |
-| `--leading-body` | `1.75` |  |
+| `--leading-body` | `1.80` |  |
 
 ### z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）（4）
 
@@ -124,15 +124,15 @@
 | `--container-wide` | `1320px` |  |
 | `--grid-columns` | `12` |  |
 | `--grid-gutter` | `var(--space-6)` |  |
-| `--type-display` | `600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15` |  |
-| `--type-title` | `600 var(--font-serif) 24px / 1.30` |  |
-| `--type-subtitle` | `500 var(--font-serif) 18px / 1.50` |  |
-| `--type-lead` | `400 var(--font-sans) 17px / 1.75` |  |
-| `--type-body` | `400 var(--font-sans) 15px / 1.80` |  |
-| `--type-label` | `500 var(--font-sans) 13px / 1.50` |  |
-| `--type-caption` | `400 var(--font-sans) 12px / 1.60` |  |
-| `--type-eyebrow` | `500 var(--font-mono) 12px / 1.40` |  |
-| `--type-number` | `500 var(--font-mono) 32px / 1.10` |  |
+| `--type-display` | `600 clamp(34px, 4.4vw, 56px) / 1.15 var(--font-serif)` |  |
+| `--type-title` | `600 24px / 1.30 var(--font-serif)` |  |
+| `--type-subtitle` | `500 18px / 1.50 var(--font-serif)` |  |
+| `--type-lead` | `400 17px / 1.75 var(--font-sans)` |  |
+| `--type-body` | `400 15px / 1.80 var(--font-sans)` |  |
+| `--type-label` | `500 13px / 1.50 var(--font-sans)` |  |
+| `--type-caption` | `400 12px / 1.60 var(--font-sans)` |  |
+| `--type-eyebrow` | `500 12px / 1.40 var(--font-mono)` |  |
+| `--type-number` | `500 32px / 1.10 var(--font-mono)` |  |
 | `--accent-text` | `#C7463A` | 朱砂文字落在 --bg 上（4.50:1） |
 
 ## Dark 主题（html[data-theme="dark"]·夜读模式）

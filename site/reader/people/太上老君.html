@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>太上老君</title>
 <!-- SEO:INJECTED -->
@@ -144,7 +144,8 @@
     --text-step-0: 1rem;       --text-step-1: 1.25rem;    --text-step-2: 1.5625rem;
     --text-step-3: 1.953rem;   --text-step-4: 2.441rem;   --text-step-5: 3.052rem;
     --text-hero: clamp(1.75rem, 1.2rem + 2.5vw, 2.75rem);
-    --leading-tight: 1.3;  --leading-heading: 1.4;  --leading-body: 1.75;
+    --leading-tight: 1.3;  --leading-heading: 1.4;  --leading-body: 1.80;
+    
 }
 
 body {
@@ -358,15 +359,15 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
     --grid-columns: 12; --grid-gutter: var(--space-6);
 
     
-    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
-    --type-title:    600 var(--font-serif) 24px / 1.30;
-    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
-    --type-lead:     400 var(--font-sans) 17px / 1.75;
-    --type-body:     400 var(--font-sans) 15px / 1.80;
-    --type-label:    500 var(--font-sans) 13px / 1.50;
-    --type-caption:  400 var(--font-sans) 12px / 1.60;
-    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
-    --type-number:   500 var(--font-mono) 32px / 1.10;
+    --type-display: 600 clamp(34px, 4.4vw, 56px) / 1.15 var(--font-serif);
+    --type-title:    600 24px / 1.30 var(--font-serif);
+    --type-subtitle: 500 18px / 1.50 var(--font-serif);
+    --type-lead:     400 17px / 1.75 var(--font-sans);
+    --type-body:     400 15px / 1.80 var(--font-sans);
+    --type-label:    500 13px / 1.50 var(--font-sans);
+    --type-caption:  400 12px / 1.60 var(--font-sans);
+    --type-eyebrow:  500 12px / 1.40 var(--font-mono);
+    --type-number:   500 32px / 1.10 var(--font-mono);
 
     
     --accent-text: #C7463A;          
@@ -386,9 +387,8 @@ html {
 body {
     background: var(--bg);
     color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: var(--leading-body);
+    
+    font: var(--type-body);
     min-height: 100vh;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -529,6 +529,90 @@ h4 { font-size: 18px; font-weight: 500; }
     .wordmark { font-size: 16px; }
 }
 
+.site-mainnav { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.site-mainnav .nav-brand { font-family: var(--font-serif); font-weight: 600; font-size: 15px; color: var(--ink); white-space: nowrap; }
+.site-mainnav .nav-item { font-size: 14px; color: var(--ink-soft); position: relative; white-space: nowrap; transition: color 0.15s; }
+.site-mainnav .nav-item::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-base) var(--ease-out-quart); }
+.site-mainnav .nav-item:hover { color: var(--accent); }
+.site-mainnav .nav-item:hover::after,
+.site-mainnav .nav-item.is-active::after { transform: scaleX(1); }
+.site-mainnav .nav-item.is-active { color: var(--ink); font-weight: 600; }
+header.site-header:has(.site-mainnav) {
+    position: sticky; top: 0; z-index: var(--z-nav);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 16px clamp(20px, 5vw, 64px);
+}
+@media (max-width: 768px) {
+    .site-mainnav { gap: 16px; }
+    
+    .site-mainnav .nav-item,
+    .site-mainnav .nav-brand {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .site-mainnav .nav-item::after { transition: none; }
+}
+
+.reset-view-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: var(--z-nav, 50);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 6px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--paper-warm);
+    background: rgba(34, 29, 22, 0.72);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart),
+        color var(--dur-fast) var(--ease-out-quart);
+}
+.reset-view-btn:hover { background: var(--accent-deep); color: var(--paper); }
+.reset-view-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 767.98px) {
+    .reset-view-btn { min-height: 44px; min-width: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reset-view-btn { transition: none; }
+}
+
+.hit-mark {
+    background: color-mix(in srgb, var(--accent) 18%, var(--paper));
+    color: inherit;
+    border-radius: var(--radius-sm);
+    padding: 0 2px;
+    box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+}
+html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14); }
+
+.data-status-badge {
+    display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    margin: 12px 0 6px; padding: 8px 14px;
+    border: 1px solid var(--line); border-radius: var(--radius-pill);
+    background: var(--paper); font-size: 13px;
+}
+.data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
+.data-status-badge .ds-label { font-weight: 600; color: var(--info); }
+.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
+.data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
+.data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
+.data-status-badge[data-status="sample"] .ds-dot { background: var(--warn); }
+.data-status-badge[data-status="sample"] .ds-label { color: var(--warn); }
+
 .hero {
     background: var(--dark);
     background-image: url('../../static/images/ink-mountains-hero.webp');
@@ -633,11 +717,9 @@ h4 { font-size: 18px; font-weight: 500; }
                 var(--elev-2);
 }
 .kpi .kpi-value {
-    font-family: var(--font-mono);
-    font-size: 32px;
-    font-weight: 500;
+    
+    font: var(--type-number);
     color: var(--ink);
-    line-height: 1.1;
     font-variant-numeric: tabular-nums;
 }
 .kpi .kpi-label {
@@ -673,7 +755,7 @@ h4 { font-size: 18px; font-weight: 500; }
                 var(--elev-2);
 }
 .kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
-.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .value, .kpi-card .kpi-value { font: var(--type-number); color: var(--ink); font-variant-numeric: tabular-nums; }
 .kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
 
 .chart-block {
@@ -920,11 +1002,18 @@ td.num, th.num {
 }
 .site-footer nav {
     display: flex;
-    gap: 20px;
+    
+    flex-wrap: wrap;
+    gap: 12px 20px;
 }
 .site-footer nav a {
     font-size: 13px;
     color: var(--ink-soft);
+    
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    white-space: nowrap;
 }
 .site-footer nav a:hover { color: var(--accent); }
 
@@ -1077,6 +1166,108 @@ td.num, th.num {
 }
 .empty-state p { font-size: 15px; }
 
+.cite-block {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--paper-warm);
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+}
+.cite-block code {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 1px 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+.cite-block .cite-details { margin-top: 6px; }
+
+.cite-details summary {
+    cursor: pointer;
+    color: var(--accent-2);
+    font-weight: 500;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+}
+.cite-details summary::before {
+    content: "\25B8";
+    flex: 0 0 auto;
+    color: var(--accent-2);
+    transition: transform var(--dur-fast) var(--ease-out-quart);
+}
+.cite-details[open] summary::before { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) {
+    .cite-details summary::before { transition: none; }
+}
+.cite-block .cite-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+.cite-block .cite-item > span {
+    flex: 0 0 44px;
+    font-weight: 600;
+    color: var(--ink);
+    padding-top: 6px;
+}
+.cite-block pre.cite-text {
+    flex: 1;
+    margin: 0;
+    padding: 6px 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: var(--ink);
+}
+
+.cite-copy {
+    flex: 0 0 auto;
+    min-height: 36px;
+    min-width: 44px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--paper);
+    color: var(--accent-2);
+    font-size: 11px;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart), color var(--dur-fast) var(--ease-out-quart);
+}
+.cite-copy:hover {
+    background: var(--accent-tint);
+    color: var(--accent);
+}
+
+.cite-copy.ok {
+    color: var(--ok);
+    border-color: var(--ok);
+    animation: cite-copy-fadeout 2.5s ease-out forwards;
+}
+@keyframes cite-copy-fadeout {
+    0%, 60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cite-copy.ok { animation: none; }
+}
+.cite-block a[href$=".json"] {
+    display: inline-block;
+    margin-top: 6px;
+    color: var(--accent-2);
+}
+
 .js-reveal .reveal-in {
     opacity: 0;
     transform: translateY(8px);
@@ -1173,6 +1364,40 @@ td.num, th.num {
     .legend-cell,
     .legend-label {
         font-size: 11px;
+    }
+    
+    .legend-item[role="button"],
+    .legend-cell[role="button"] {
+        min-height: 44px;
+    }
+    
+    .legend-item:not([role="button"]),
+    .legend-cell:not([role="button"]) {
+        min-height: 32px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .site-footer {
+        padding-bottom: 80px;
+    }
+    
+    body:has(.rag-fab) .site-footer {
+        padding-bottom: 104px;
+    }
+    
+    select,
+    input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+    label[for] {
+        min-height: 32px;
+    }
+    
+    button {
+        min-height: 24px;
     }
     .chart-block svg text,
     .chart-wrap svg text,
@@ -1324,8 +1549,15 @@ html[data-theme="dark"] .chapter-plate {
   .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
   html[data-theme="dark"] .chapter-plate { display: none; }
 </style>
+
+<!-- ANALYTICS v2 w1168 -->
+<script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../../static/js/goatcounter.js"></script>
+<script defer src="../../static/js/stats.js"></script>
 </head>
 <body>
+<header class="site-header"><!-- NAV-CANONICAL v1 w1167 -->
+<nav class="site-mainnav" aria-label="主导航"><a class="nav-brand" href="../../index.html">西游详解</a><a href="../../guide.html" class="nav-item" data-goatcounter-click="nav-guide">导读</a><a href="../../reader/index.html" class="nav-item is-active" aria-current="page" data-goatcounter-click="nav-reader">阅读</a><a href="../../dashboard.html" class="nav-item" data-goatcounter-click="nav-dashboard">看板</a><a href="../../data/text-search.html" class="nav-item" data-goatcounter-click="nav-search">检索</a><a href="../../about.html" class="nav-item" data-goatcounter-click="nav-about">关于</a><a href="../../en/index.html" class="nav-item" data-goatcounter-click="nav-switch-en">EN</a></nav></header>
+
 <main class="reader-wrap">
   <nav class="reader-topnav">
     <a class="brand" href="../index.html">详解西游记 · 站内阅读</a>

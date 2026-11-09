@@ -212,6 +212,36 @@ def ref_exists(owner_repo: str, ref: str, token: str | None) -> tuple[bool, str]
     return False, f"无法判定（最后一个错误: {last_err}）"
 
 
+# --------------------------------------------------------------------------- 认证模式判定
+
+
+def api_auth_decision(token: str | None) -> tuple[bool, str]:
+    """判定「无 token 时是否仍可继续联网判据」。
+
+    W1190 根修：脚本此前对 `--api` **强制要求 token**（无 token 直接 exit 2），
+    而 workflow-lint.yml 的设计意图明写「刻意不带 token：目标仓库均为 public，
+    匿名读即可」⇒ **脚本要求与 workflow 设计直接矛盾**：即便补齐 `--ci` 参数，
+    周级扫描仍会以退出码 2 失败（实证：2026-11-09 run #42605193188 的后继同型）。
+
+    实测（2026-11-09）：匿名调 `api.github.com` 读 public 仓库的 commit 返回
+    HTTP 200（可行）；匿名配额 60 次/小时，认证后 5000 次/小时。而本步最坏需
+    14 ref × 2 endpoint × 3 次重试 = 84 次请求 ⇒ **纯匿名必然限流**。
+
+    ⇒ 无 token 不再是「立即失败」，而是「匿名继续」：匿名触发限流（HTTP 403）
+    时归入「无法判定」⇒ `--ci` 模式降级 WARN、不阻断（与 workflow 注释的
+    「匿名限流只会让本步降级为 WARN」一致）；不带 `--ci` 时仍 fail-closed（退出码 2）。
+
+    返回 (可否继续, 说明)。
+    """
+    if token:
+        return True, "认证模式：使用 token 访问 GitHub API（配额 5000 次/小时）"
+    return True, (
+        "匿名模式：未提供 token ⇒ 以匿名方式访问 GitHub API"
+        "（目标仓库均为 public，匿名读实测 HTTP 200 可行；配额 60 次/小时，"
+        "触发限流时归入「无法判定」⇒ --ci 模式降级 WARN、不阻断）"
+    )
+
+
 # --------------------------------------------------------------------------- 主流程
 
 
@@ -291,6 +321,36 @@ def run_check(api: bool, token: str | None, ci_mode: bool = False) -> int:
 # --------------------------------------------------------------------------- 自测
 
 
+def _probe_no_token_api_entry() -> tuple[int, bool]:
+    """探测：无 token + `--api` 时，入口是否早退（未进入判据层）。
+
+    用替身替换 run_check ⇒ **不触网**，只验证「入口是否放行到判据层」。
+    这是 W1190 的**行为级负样本锁**：把入口改回「无 token 直接 exit 2」时本例必红。
+
+    返回 (main() 退出码, 是否到达判据层)。
+    """
+    saved = {k: os.environ.pop(k, None) for k in ("GH_TOKEN", "GITHUB_TOKEN")}
+    orig_run_check = globals()["run_check"]
+    reached = {"hit": False}
+
+    def _fake(*_a, **_kw):
+        reached["hit"] = True
+        return 0
+
+    old_argv = sys.argv
+    try:
+        globals()["run_check"] = _fake
+        sys.argv = ["check_action_refs.py", "--api", "--ci"]
+        rc = main()
+    finally:
+        sys.argv = old_argv
+        globals()["run_check"] = orig_run_check
+        for k, v in saved.items():
+            if v is not None:
+                os.environ[k] = v
+    return rc, reached["hit"]
+
+
 def _selftest() -> int:
     """负样本自证：每条判据都必须能被证伪（能判红）。
 
@@ -365,6 +425,25 @@ def _selftest() -> int:
     else:
         print("  ? N6 联网正样本：仓内未抽到可用 ref（跳过，不计失败）")
 
+    # N7：认证模式判定——无 token 不得判「不可继续」（旧行为：无 token 直接 exit 2）
+    ok7, why7 = api_auth_decision(None)
+    print(
+        f"  {'✓' if ok7 else '✗'} N7 无 token 时 --api 判为「可继续」"
+        f"（{why7.split('：')[0]}·而非立即失败）"
+    )
+    if not ok7:
+        failed += 1
+
+    # N8：入口行为级——无 token + --api 时不得在入口早退（须到达判据层）
+    rc8, reached8 = _probe_no_token_api_entry()
+    ok8 = rc8 == 0 and reached8
+    print(
+        f"  {'✓' if ok8 else '✗'} N8 无 token + --api 入口不早退"
+        f"（rc={rc8}·到达判据层={reached8}）"
+    )
+    if not ok8:
+        failed += 1
+
     if failed:
         print(f"\n自测 FAIL：{failed} 条判据不可证伪")
         return 1
@@ -377,6 +456,12 @@ def main() -> int:
     ap.add_argument(
         "--api", action="store_true", help="联网验证 commit 在该仓库真实存在"
     )
+    ap.add_argument(
+        "--ci", action="store_true",
+        help="CI 模式：联网判据的限流/网络抖动降级 WARN（判定不存在仍阻断）——"
+             "workflow-lint.yml 每周步骤传 --api --ci（W1155 修：此前脚本未定义 --ci，"
+             "argparse unrecognized arguments 每周必炸 exit 2·深度审计 #54）",
+    )
     ap.add_argument("--self-test", action="store_true", help="自测（含负样本）")
     args = ap.parse_args()
 
@@ -384,13 +469,12 @@ def main() -> int:
         return _selftest()
 
     token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
-    if args.api and not token:
-        print(
-            "FAIL: --api 需要 token（设 GH_TOKEN 或 GITHUB_TOKEN）"
-            "⇒ 无法判定，fail-closed（退出码 2）"
-        )
-        return 2
-    return run_check(args.api, token)
+    if args.api:
+        proceed, why = api_auth_decision(token)
+        print(why)
+        if not proceed:
+            return 2
+    return run_check(args.api, token, ci_mode=args.ci)
 
 
 if __name__ == "__main__":

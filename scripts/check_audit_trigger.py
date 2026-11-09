@@ -103,6 +103,30 @@ def evaluate(ledger_text, archive_text=""):
     return False, ["对抗审查触发器：距上次（W%d）%d 批 < %d——未触发" % (last, gap, THRESHOLD)] + notes
 
 
+HARD_MULTIPLIER = 2
+
+
+def hard_triggered(ledger_text, archive_text=""):
+    """W1164 用户裁决：超阈 1 倍（40 批）⇒ preflight FAIL 硬拦（WARN 债单失灵实证：
+    对抗审查 85 批才清偿）。不可判定/从未审查不硬拦（该态走 WARN fail-closed·首装期不卡死）。"""
+    merged = ledger_text + chr(10) + (archive_text or "")
+    max_w = pf.parse_ledger(merged)["max_w"]
+    token_ws, _legacy = scan_rows(merged)
+    if max_w is None or not token_ws:
+        return False
+    return max_w - max(token_ws) >= THRESHOLD * HARD_MULTIPLIER
+
+
+def ledger_text_for_preflight():
+    """W1164：hard_triggered 的取数面（正本+归档·与 notice_lines 同源）。归档缺失不阻断。"""
+    text = open(os.path.join(pf.ROOT, pf.LEDGER), encoding="utf-8", newline="").read()
+    try:
+        archived = open(os.path.join(pf.ROOT, ARCHIVE_LEDGER), encoding="utf-8", newline="").read()
+    except OSError:
+        archived = ""
+    return text, archived
+
+
 def notice_lines():
     """preflight 提示位入口。"""
     try:
@@ -115,6 +139,42 @@ def notice_lines():
         archived = ""   # 归档缺失不阻断：正本判据仍成立，只是少了历史行
     _, lines = evaluate(text, archived)
     return lines
+
+
+def _self_test_t6_b2_max(rows):
+    """T6（B2 回归）token 在 W1000、max=1024、末尾追加低号 token 补登记行 W996 → last 必须取 1000。"""
+    b2 = rows(token_at=1000, upto=1024, start=1000,
+              extra=["| W996 | 补登记（欠账补齐） | a | b | 已收官（对抗审查已派发） | s | z |"])
+    ok6, lines6 = evaluate(b2)
+    fails = []
+    if not ok6:
+        fails.append("T6 B2 回归：24 批应触发")
+    elif not any("W1000" in x and "24 批" in x for x in lines6):
+        fails.append("T6 B2 回归：应报「W1000…24 批」而非按文件序算 28 批：%s" % lines6)
+    return fails
+
+
+def _self_test_b_regressions(rows):
+    """T5（B1）/T6（B2）回归组——W1161 自 _self_test 抽出（复杂度降档·文案逐字保留）。"""
+    fails = []
+    # T5（B1 回归）41 批未真审，末行只提泛词「对抗式审查」→ 必须触发（旧实现被静默重置）
+    b1 = rows(token_at=None, upto=1040, start=1001,
+              extra=["| W1041 | 修 W998 遗留问题 | a | b | 已收官（对抗式审查修复批·未打 token） | s | q |"])
+    ok5b, lines5b = evaluate(b1)
+    if not ok5b:
+        fails.append("T5 B1 回归：泛词行不得重置计数（应触发）")
+    if not any("疑似未打标" in x for x in lines5b):
+        fails.append("T5 B1 回归：应给出「疑似未打标」提示")
+
+    # T6（B2 回归）token 在 W1000、max=1024、末尾追加低号 token 补登记行 W996 → last 必须取 1000
+    b2 = rows(token_at=1000, upto=1024, start=1000,
+              extra=["| W996 | 补登记（欠账补齐） | a | b | 已收官（对抗审查已派发） | s | z |"])
+    ok6, lines6 = evaluate(b2)
+    if not ok6:
+        fails.append("T6 B2 回归：24 批应触发")
+    elif not any("W1000" in x and "24 批" in x for x in lines6):
+        fails.append("T6 B2 回归：应报「W1000…24 批」而非按文件序算 28 批：%s" % lines6)
+    return fails
 
 
 def _self_test() -> int:
@@ -152,23 +212,8 @@ def _self_test() -> int:
     if not ok4:
         fails.append("T4 非台账行提及不应计为登记")
 
-    # T5（B1 回归）41 批未真审，末行只提泛词「对抗式审查」→ 必须触发（旧实现被静默重置）
-    b1 = rows(token_at=None, upto=1040, start=1001,
-              extra=["| W1041 | 修 W998 遗留问题 | a | b | 已收官（对抗式审查修复批·未打 token） | s | q |"])
-    ok5b, lines5b = evaluate(b1)
-    if not ok5b:
-        fails.append("T5 B1 回归：泛词行不得重置计数（应触发）")
-    if not any("疑似未打标" in x for x in lines5b):
-        fails.append("T5 B1 回归：应给出「疑似未打标」提示")
-
-    # T6（B2 回归）token 在 W1000、max=1024、末尾追加低号 token 补登记行 W996 → last 必须取 1000
-    b2 = rows(token_at=1000, upto=1024, start=1000,
-              extra=["| W996 | 补登记（欠账补齐） | a | b | 已收官（对抗审查已派发） | s | z |"])
-    ok6, lines6 = evaluate(b2)
-    if not ok6:
-        fails.append("T6 B2 回归：24 批应触发")
-    elif not any("W1000" in x and "24 批" in x for x in lines6):
-        fails.append("T6 B2 回归：应报「W1000…24 批」而非按文件序算 28 批：%s" % lines6)
+    # T5/T6（B1/B2 回归）抽 helper（W1161 复杂度降档·文案逐字保留）
+    fails.extend(_self_test_b_regressions(rows))
 
     # T6b 主题列写 token、状态列没有 → 不算派发（W1004 自伤实证）
     ok6b, lines6b = evaluate("| W1005 | 触发器改认事件 token「对抗审查已派发」 | a | b | 已收官 | s | x |")
@@ -194,10 +239,15 @@ def _self_test() -> int:
         fails.append("T9 在途行不得重置计数（应以 W1000 计 25 批触发）：%s" % lines9)
 
     print()
+    # W1164 hard 判据双态锁（独立断言·不进 fails 主链）
+    assert not hard_triggered("| W1000 | a | x | b | 已收官（对抗审查已派发） | s | z |"), "gap 0 误硬拦"
+    rows40 = (chr(10).join("| W%d | a | x | b | 已收官 | s | z |" % w for w in range(1001, 1041))
+              + chr(10) + "| W1000 | a | x | b | 已收官（对抗审查已派发） | s | z |")
+    assert hard_triggered(rows40), "gap 40 未硬拦（升格失效）"
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：阈值两侧/不可判定/散文豁免/B1 字样不重置/B1b 主题列不算/B2 取 max/归档同扫/同批 八态（判据可证伪）")
+    print("自测通过：阈值两侧/不可判定/散文豁免/B1 字样不重置/B1b 主题列不算/B2 取 max/归档同扫/同批 八态+hard 双态（判据可证伪）")
     return 0
 
 

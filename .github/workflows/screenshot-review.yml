@@ -112,70 +112,15 @@ jobs:
             exit 0
           fi
 
-          NEEDED=false
-          SCOPE=skip
-          ONLY="index.html:site,dashboard.html:site"
-          while IFS= read -r f; do
-            [ -z "$f" ] && continue
-            case "$f" in
-              # 页脚版本号免审（版本 bump 常态；真实布局改动由每周全量 + PR 兜底）
-              site/dukou-engine.html|site/index.html|site/data/cross-time-danmaku.html|site/data/tag-cloud.html)
-                ;;
-              # W563：site/data/json/ 为部署数据副本（fetch 目标），非页面——免审
-              # （页面本身变更时按其页面路径另行触发定向截图）
-              site/data/json/*)
-                ;;
-              # 可视化数据页变更 → 定向截图（变更页 + 入口页）
-              site/data/*)
-                NEEDED=true
-                SCOPE=targeted
-                ONLY="$ONLY,${f##*/}:site/data"
-                ;;
-              # 影响全站布局/样式的变更 → 全量
-              site/*|assets/*|scripts/batch_screenshots.js|scripts/slice_screenshots.py|scripts/detect_unwrapped_tables.py|.github/workflows/screenshot-review.yml)
-                NEEDED=true
-                SCOPE=full
-                ;;
-              # 非可视化变更 → 免审
-              scripts/*|docs/*|source/*|dataset/*|references/*|timeline/*|tools/*|mcp-server/*|xiyouji-agent-web/*|hyperframes/*|tests/*|.github/*|*.md|Makefile|LICENSE*|CITATION.cff|CONTRIBUTING.md|pyproject.toml|pytest.ini|mypy.ini|.gitignore|.pre-commit-config.yaml|.eslintrc.json|eslint.config.mjs|.env.example)
-                ;;
-              # 未知路径：保守全量
-              *)
-                NEEDED=true
-                SCOPE=full
-                ;;
-            esac
-          done <<< "$CHANGED"
-
-          if [ "$NEEDED" = "true" ]; then
-            echo "needed=true" >> "$GITHUB_OUTPUT"
-            echo "scope=$SCOPE" >> "$GITHUB_OUTPUT"
-            if [ "$SCOPE" = "targeted" ]; then
-              echo "only_pages=$ONLY" >> "$GITHUB_OUTPUT"
-            fi
-            # W1066：定向时另输出「变更页文件名列表」（逗号分隔·供 chart-gates 的
-            #   --only 定向用）——原实现无论定向都跑全量 chart-gates（857+ 页），
-            #   是 Screenshot Review job 的主要耗时来源之一。
-            if [ "$SCOPE" = "targeted" ]; then
-              CHANGED_NAMES=$(printf '%s\n' "$CHANGED" \
-                | grep -E '^site/.*\.html$' \
-                | sed 's|.*/||' \
-                | sort -u | paste -sd, - || true)
-              echo "changed_names=$CHANGED_NAMES" >> "$GITHUB_OUTPUT"
-            fi
-            echo "## 截图审查：$SCOPE" >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "needed=false" >> "$GITHUB_OUTPUT"
-            echo "scope=skip" >> "$GITHUB_OUTPUT"
-            COUNT=$(printf '%s\n' "$CHANGED" | sed '/^$/d' | wc -l)
-            {
-              echo "## 截图审查：已跳过（W421）"
-              echo ""
-              echo "本次改动（$COUNT 个文件）仅涉及页脚版本号/非可视化文件，无需全量截图。"
-              echo ""
-              echo "触发条件：改动 site/data/*.html、site/static、assets、审查脚本或工作流自身。"
-            } >> "$GITHUB_STEP_SUMMARY"
-          fi
+          # W1154（基础设施审计 P0-1·W1126 声明≠落地根修）：内联 case 判定整块改调
+          # scripts/check_screenshot_scope.py（单一事实源·与原 case 顺序逐字对等·自带
+          # --self-test；接线回归锁 = tests/unit/test_ci_wiring.py 断言本文件含该脚本名）。
+          FILES_TMP=$(mktemp)
+          echo "$CHANGED" | sed '/^$/d' > "$FILES_TMP"
+          python3 scripts/check_screenshot_scope.py --files-from "$FILES_TMP" >> "$GITHUB_OUTPUT"
+          rm -f "$FILES_TMP"
+          SCOPE_OUT=$(grep -m1 '^scope=' "$GITHUB_OUTPUT" | cut -d= -f2)
+          echo "## 截图审查：$SCOPE_OUT（W1154 起由单一事实源脚本判定）" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Set up Node.js 20
         if: steps.scope.outputs.needed == 'true'

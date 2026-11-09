@@ -86,7 +86,13 @@ def main():
             print("  -", s)
         print("---- 第 39 门禁 故事内时间线双源同步：失配 %d 项 ----" % len(issues))
         return 1
+    # W1155（深度审计 #46）：两侧解析同时为空 ⇒ 0==0 判绿（timeline.py 或页面任一侧
+    # 格式重构时第 39 槽输出「一致」但未比对任何条目）⇒ 双空判红。
     n = len(parse_py())
+    if n == 0:
+        print("FAIL 双源解析条目均为 0（timeline.py KEY_EVENTS 与页面 EMBEDDED_DATA 任一侧格式重构即静默失守）")
+        print("---- 第 39 门禁 故事内时间线双源同步：双空 FAIL ----")
+        return 1
     print("OK 故事内时间线双源一致（KEY_EVENTS %d 条 == EMBEDDED_DATA %d 条·phase 区间全匹配）" % (n, n))
     print("---- 第 39 门禁 故事内时间线双源同步：KEY_EVENTS %d 条 == EMBEDDED_DATA %d 条 · 失配 0 · phase 区间全匹配 ----" % (n, n))
     return 0

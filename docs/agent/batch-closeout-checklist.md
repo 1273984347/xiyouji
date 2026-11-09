@@ -20,7 +20,7 @@
 - [ ] `batch_cascade.py --spec … --apply`
 
 ## 3. 回窗（级联自带，但独立跑更稳）
-- [ ] `archive_segments.py --apply`（CHANGELOG + file-index 段窗 109）
+- [ ] `archive_segments.py --apply`（CHANGELOG + file-index 段窗 110（随批演进·以 check_doc_size_budget 实测为准））
 - [ ] `archive_ledger_rows.py --apply`（台账行窗 60）
 
 ## 4. 上批一次性脚本归位
@@ -29,9 +29,9 @@
       （不归位则本批提交后立刻红，且下一批开不了工）
 
 ## 5. 目录文档（顺序不能反）
-- [ ] **先 `git add -A`**
+- [ ] **先 `git add 按 spec 精确路径（禁 add -A·W1124 禁代提）`**
 - [ ] 再 `python scripts/gen_folder_docs.py --refresh`（生成器按 Git 索引收集，顺序反了必漏新件）
-- [ ] 再 `git add -A`（把生成结果收进索引）
+- [ ] 再 `git add 按 spec 精确路径（禁 add -A·W1124 禁代提）`（把生成结果收进索引）
 - [ ] **再同步一次 spec 的 `file_index_rows`**——refresh 会新增/改动目录文档，若 spec 不同步，第 51 槽必判「索引含本批 spec 之外的文件」（W1019–W1028 连踩 6 次，每次都白跑一轮门禁）
 
 ## 6. 计数、统计与文档连锁
@@ -43,7 +43,7 @@
 - [ ] `python scripts/stats.py --w W####` 刷新，再 `--check` 求 24 键零差异
 
 ## 7. 全量门禁（约 13 分钟·务必后台跑）
-- [ ] **pytest 本地必跑（W1088 增补）**：`python -m pytest tests -q`——全量 verify 57 段
+- [ ] **pytest 本地必跑（W1088 增补）**：`python -m pytest tests -q`——全量 verify 现役段数（以 verify 自洽锁输出为准）
       不含 pytest，本地 verify 绿≠CI 绿；漏跑=CI「Unit Tests」红来回
       （W1071/W1074/W1075 三批实证·各挨一次 CI 红才补跑）
 - [ ] `python scripts/verify_delivery.py`（前台 15 分钟会超时被杀，且杀掉不留完整日志）
@@ -54,7 +54,7 @@
 - [ ] 台账回填 commit 号与状态 → 第二笔 `docs(w####): 台账回填…`
 
 ## 9. 收官后
-- [ ] 坑表：本次是否踩了**新形态**的坑？**改完必须实算分项**——`grep -c '^- \*\*'` 按主题逐段数，别手算（W1024 实证：六主题 26/6/26/19/11/34 之和是 122，我手算成 121 并写进 AGENTS/HANDOVER，而 AGENTS 的分项行当时还停在 25/25/15/10/28=109 的旧值上、长期无人核）⇒ 同步四处：`docs/agent/pitfalls.md` 各段标题 + AGENTS 总数 + AGENTS 分项行 + HANDOVER 两处就地并入对应主题（禁追加尾部段落），同步四处计数
+- [ ] 坑表：本次是否踩了**新形态**的坑？**改完必须实算分项**——`grep -c '^- \*\*'` 按主题逐段数，别手算（W1024 实证：六主题 26/6/26/19/11/34 之和是 122，我手算成 121 并写进 AGENTS/HANDOVER，而 AGENTS 的分项行当时还停在 25/25/15/10/28=109 的旧值上、长期无人核）⇒ 同步四处：`pitfalls.md` 各段标题 + AGENTS 总数 + AGENTS 分项行 + HANDOVER 两处就地并入对应主题（禁追加尾部段落），同步四处计数
 - [ ] 若本次产生了「应回写模板」的新检查项 → 回写 `docs/agent/*-template.md` 并更新其校准戳
 - [ ] **临时区（tmpe/）**：每 10 批或 `tmpe/` 超 150MB 时跑一次 `python scripts/tmpe_tidy.py --plan` → 确认后 `--apply --confirm`（**只移动归桶·零删除**，有 `--undo` 可悔）。近期改动在冻结期内不迁，属正常。
       ⚠ `_trash/` 的**清空**单独确认（个人文件安全铁律：列清单 → 主人确认 → 回收站），不在本清单自动范围

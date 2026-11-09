@@ -294,6 +294,9 @@ def _add_paths(paths):
     files」并**整体放弃**（不做部分暂存）⇒ 收官链打印「已 add N 件」而实际 0 件入库
     ⇒ 末位产物漏进提交（C4-f 判「工作树未提交残留」判红）。⇒ 现：① 过滤尚不存在的路径
     并如实报告跳过数；② 检查退出码·失败即中止（fail-closed）。
+    **W1151 根修（WinError 206）**：巨批（全站 INLINED 副本同步 851 页）单条 `git add`
+    命令行超 Windows CreateProcess 32767 字符上限 ⇒ FileNotFoundError 直接炸链
+    ⇒ 分块 add（git add 暂存区跨调用累积·结果与单条等价）。
     """
     exist = [p for p in paths if os.path.exists(os.path.join(ROOT, p))]
     missing = [p for p in paths if p not in exist]
@@ -303,11 +306,15 @@ def _add_paths(paths):
     if not exist:
         print('[add] 无待 add 路径（spec.file_index_rows 为空？请用 --paths 显式指定）')
         return True
-    rc, out = run(['git', 'add', '--'] + exist)
-    if rc != 0:
-        print('[add] git add 失败 => 中止：' + out.strip()[-400:])
-        return False
-    print('[add] 已 add %d 件' % len(exist))
+    chunk = 200
+    total = (len(exist) + chunk - 1) // chunk
+    for i in range(0, len(exist), chunk):
+        rc, out = run(['git', 'add', '--'] + exist[i:i + chunk])
+        if rc != 0:
+            print('[add] git add 失败（块 %d/%d）=> 中止：' % (i // chunk + 1, total)
+                  + out.strip()[-400:])
+            return False
+    print('[add] 已 add %d 件（%d 块·防 WinError 206）' % (len(exist), total))
     return True
 
 
@@ -386,7 +393,8 @@ def _run_pycompile():
 
 def _run_index():
     """index 步：搜索索引 + 文档索引。"""
-    for cmd in ('_gen_search_index.py', 'docs_index.py'):
+    # W1154（基础设施审计 §4-3）：index 步补 gen_sitemap——新增页面批次此前靠第 7 槽报红后手工补；幂等生成随批入库
+    for cmd in ('_gen_search_index.py', 'docs_index.py', 'gen_sitemap.py'):
         rc, out = run([sys.executable, 'scripts/' + cmd])
         print('[index] %s -> %s' % (cmd, 'OK' if rc == 0 else 'FAIL'))
         if rc != 0:
@@ -473,7 +481,11 @@ def _run_docnums(spec_path):
     with open(spec_path, encoding='utf-8') as f:
         spec = json.load(f)
     if not (spec.get('doc_numbers') or []):
-        print('[docnums] spec 无 doc_numbers 声明 ⇒ 跳过（未声明即不判）')
+        # W1155（深度审计 #14）：建闸后 208 份 spec 仅 1 份声明 ⇒ 文案数字漂移零判据。
+        # 全量强制需历史 spec 逐份补声明（另批）——本批起前向要求：未声明打印 NOTE
+        # 显性化（此前是静默跳过）·新 spec 由收官链自动带 doc_numbers 声明模板。
+        print('[docnums] NOTE spec 无 doc_numbers 声明（W1155 起前向要求新批声明·'
+              '历史 spec 另批补齐）——本批文案数字无对表闸')
         return True
     script = os.path.join(ROOT, 'scripts', 'check_doc_numbers.py')
     if not os.path.isfile(script):

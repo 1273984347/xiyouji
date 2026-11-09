@@ -162,6 +162,11 @@ $compArgs = @('scripts/guardrails/check_nested_comprehension.py')
 $rcComp = Invoke-Tool -Tool $python -ToolArgs $compArgs -Files $pyFiles
 Write-Host "[$(if ($rcComp -eq 0) { 'OK' } else { 'FAIL' })] 嵌套推导式检查"
 
+# 3.5) 改写完整性（阻塞·W1159 E-199 机器判据）：语法可编译 + 公开函数集不缩水 + 模块级 def 不重复
+$rwArgs = @('scripts/guardrails/check_rewrite_integrity.py')
+$rcRewrite = Invoke-Tool -Tool $python -ToolArgs $rwArgs -Files $pyFiles
+Write-Host "[$(if ($rcRewrite -eq 0) { 'OK' } else { 'FAIL' })] 改写完整性（E-199：语法/函数集缩水/双定义）"
+
 # 4) 一次性函数（提示，不阻断）
 $onceArgs = @('scripts/guardrails/once_call.py')
 Invoke-Tool -Tool $python -ToolArgs $onceArgs -Files $pyFiles | Out-Null
@@ -178,7 +183,7 @@ if ($All) {
     Write-Host "[$(if ($rcApi -eq 0) { 'OK' } else { 'FAIL' })] 公开 API 变化（$(if ($Strict -or $StrictApi) { '阻断' } else { '提示' })）"
 }
 
-$failed = @($rcStyle, $rcRuff, $rcComp, $rcApi) | Where-Object { $_ -ne 0 }
+$failed = @($rcStyle, $rcRuff, $rcComp, $rcRewrite, $rcApi) | Where-Object { $_ -ne 0 }
 if ($failed.Count -gt 0) {
     Write-Host "== 结论：有阻断项，请修到 0 再提交 =="
     exit 1

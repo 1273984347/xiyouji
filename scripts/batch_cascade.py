@@ -565,24 +565,35 @@ def _face_workflows(ctx):
 
     **W1114**：头部区间（两处「W450-W####」）改由共享模块 version_surface 推进（幂等）；
     里程碑尾标记是**追加型**内容（每批加一条），仍由本面负责（不属版本面字面量）。
+    **W1157 有界化根修**：里程碑尾标记原追加在 README 门禁体系区间行尾 ⇒ 单行无限累计
+    （实测 27KB 撑爆文件体积，本批已把累计历史拆往归档件）。改为双面——README 保留
+    **有界区间行**（区间号仍由 version_surface 推进·锚点不变故 test_w1114/w1117 语义
+    零变化），逐批明细行改追加 `archive/docs/workflows-readme-history.md`（归档件
+    只增不删·语义合规·台账已登记）。
     """
-    # ---------- workflows README ----------
+    # ---------- workflows README（有界区间行） ----------
     p = ".github/workflows/README.md"
     s, nl = load(p)
     out, _changed = version_surface.advance_text(
         s, p, ctx.batch, ctx.date, ctx.desc, ctx.head_sentence)
-    marker = "无 workflow 结构改动）。"
-    assert out.count(marker) == 1, f"里程碑尾标记出现 {out.count(marker)} 次"
-    # W1122（根修 W1117 R-01）：尾标记此前**无条件包裹** ⇒ 重跑级联会层层累积。
-    # 本版：已存在本批标记 ⇒ 内容一致则零变化·不一致则替换。
-    _wbuild = f"+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。"
-    _wspan = _locate_workflows_marker(out, ctx.new_w, ctx.desc)
-    if _wspan is not None:
-        if out[_wspan[0]:_wspan[1]].strip() != _wbuild.strip():
-            out = out[:_wspan[0]] + _wbuild + out[_wspan[1]:]
-    else:
-        out = out.replace(marker, f"无 workflow 结构改动）{_wbuild}", 1)
     ctx.pend.append((p, out, nl))
+    # ---------- 逐批明细追加面（归档件·行制） ----------
+    ap = "archive/docs/workflows-readme-history.md"
+    s_arch, nl_arch = load(ap)
+    _line = f"+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。"
+    lines = s_arch.splitlines(keepends=True)
+    idx = next((i for i, ln in enumerate(lines)
+                if ln.strip().startswith(f"+ W{ctx.new_w} ")), None)
+    if idx is not None:
+        # W1122 同款幂等：已存在本批行 ⇒ 内容一致则零变化·不一致则替换
+        if lines[idx].strip() != _line.strip():
+            lines[idx] = _line + ("\n" if lines[idx].endswith("\n") else "")
+    else:
+        if lines and not lines[-1].endswith("\n"):
+            lines[-1] += "\n"
+        lines.append(_line + "\n")
+    s_arch = "".join(lines)
+    ctx.pend.append((ap, s_arch, nl_arch))
 
 
 # ---------- 四页脚（W717 锚定·W724 双重缺陷根修+链长治理）：
@@ -999,6 +1010,10 @@ def main():
                          "幂等——本批块已在链上 ⇒ 零变化并直接退出")
     ap.add_argument("--allow-gap", default="",
                     help="允许的在途缺口 W 号（逗号分隔·须台账有认领行且 CHANGELOG 无段·W895 新增）")
+    ap.add_argument("--light", action="store_true",
+                    help="轻量批通道（W1069 三档·W1162 落地）：纯 md 治理文档批——只跑 "
+                         "CHANGELOG/三文档/HANDOVER/file-index 面，跳页脚四面/workflows/"
+                         "agents 脚注/citation；准入判据=触碰面 ⊆ md 治理文档且无 scripts/site 改动")
     ap.add_argument("--skip-changelog", action="store_true",
                     help="跳过 CHANGELOG 面（段改由 backfill_changelog.py 按号序补·"
                          "用于「并行批次占号未立段」的号段缺口；此时 --allow-gap 的号"
@@ -1012,6 +1027,7 @@ def main():
         print("[PRECHECK] %d 项违例——修正 spec 后重跑（参照 AGENTS §4.3 desc 分隔符规则）" % len(pre_issues))
         return 1
     ctx = _Ctx(spec)
+    ctx.light = bool(args.light)
     ctx.allow_gap = [x.strip() for x in args.allow_gap.split(",") if x.strip()]
     if args.rotate_only:
         return _rotate_only(ctx, args.apply)
@@ -1039,6 +1055,29 @@ def main():
               % (ctx.new_w, "、".join(ctx.allow_gap) or "无"))
     else:
         _face_changelog(ctx)
+    if ctx.light:
+        # W1069 三、1 准入硬性判据（防滥用）：--light 触碰面必须 ⊆ md 治理文档——
+        # 暂存/工作树含 scripts/site/图片改动即拒绝（请走全量批）。
+        import subprocess as _sp
+
+        _r_st = _sp.run(["git", "-c", "core.quotepath=false", "status", "--porcelain"],
+                        capture_output=True, text=True, encoding="utf-8",
+                        errors="replace", cwd=ROOT)
+        _bad = sorted({ln[3:].strip().strip('"') for ln in _r_st.stdout.splitlines()
+                       if ln.strip() and ln[3:].strip().strip('"')
+                       and not ln[3:].strip().strip('"').endswith(".md")})
+        if _bad:
+            raise AssertionError(
+                "[LIGHT] 准入判据不满足（W1069 三、1）：触碰面含非 md 文件 %s——请走全量批（去掉 --light）"
+                % "、".join(_bad[:5]))
+        print("[LIGHT] 准入判据通过：触碰面 ⊆ md 治理文档")
+        # W1162 微批轻量通道（W1069 设计·用户 2026-11-07「全都开始做」批准）：
+        # 纯 md 治理文档批只跑 CHANGELOG/三文档/HANDOVER 四面——跳页脚四面
+        # （site 页脚滚动对小批是纯仪式）、workflows 区间、agents 脚注、citation。
+        # 判据不裁剪：verify --scope docs 照跑，CHANGELOG/台账照写（三问与 BOM 等门禁全档生效）。
+        print("[LIGHT] 轻量批：跳页脚四面/workflows/agents 脚注/citation（W1069 三档通道）")
+        _face_file_index(ctx)
+        return
     _face_three_docs(ctx)
     _face_handover(ctx)
     _face_workflows(ctx)

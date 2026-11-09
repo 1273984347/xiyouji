@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-07 02:23
+生成时间：2026-11-09 21:43
 
-共 **192** 件（门禁与校验 88 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 75 · 一次性（下划线前缀） 6）
+共 **205** 件（门禁与校验 95 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（88）
+## 门禁与校验（95）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -40,6 +40,8 @@
 | `check_css_var_refs.py` | CSS 变量引用门禁（第 34 门禁 · W672/WP-1.4）——防 style 块引用未定义 CSS 变量。 |
 | `check_css_var_selfref.py` | check_css_var_selfref.py — CSS 变量**自引用**判据（W1110 新增·随第 54/55/56 槽同批建置）。 |
 | `check_dark_state_gate.js` | scripts/check_dark_state_gate.js — W579：暗色态门禁（O2 常驻化，挂 screenshot-review |
+| `check_dashboard_kpi.py` | check_dashboard_kpi.py — 第 68 门禁 · 首页 KPI 与统计快照对拍（W1170） |
+| `check_data_badge_coverage.py` | check_data_badge_coverage.py — 第 66 门禁 · 数据徽标覆盖（W1167 · MVP 迁移批③） |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
 | `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
 | `check_dataset_manifest.py` | 第 63 门禁：dataset 清单与 schema 对拍（README ↔ 磁盘 / 量纲 / 端点 / 空值 / 废弃标记）。 |
@@ -68,10 +70,13 @@
 | `check_js_syntax.js` | W591（经用户批准）：非 JS 数据块（application/ld+json、application/json、importmap 等） |
 | `check_js_syntax.py` | Check inline JS syntax in HTML files using `node --check`. |
 | `check_kpi_card_base.py` | kpi-card 基类门禁（第 37 门禁 · W673/WP-2.6）——防全局基类再被批量操作洗掉 / 页面漏分发。 |
+| `check_mobile_viewport.py` | check_mobile_viewport.py — 第 64 门禁 · 移动视口触摸与裁剪（W1165 · V4 375px 回归） |
 | `check_motion_ban.py` | check_motion_ban.py — Phase E E6 转正门禁（D4 动效禁止清单） |
 | `check_motion_guard.py` | check_motion_guard.py — d3 动效守卫覆盖率判据（W1135·遗留① 根治 + 防复发） |
+| `check_nav_parity.py` | check_nav_parity.py — 第 65 门禁 · 导航一致性（W1167 · MVP 迁移批③） |
 | `check_no_brand_refs.py` | check_no_brand_refs.py — 品牌字面量零命中守卫（W836·N2「归档检测器复活到活面」） |
-| `check_no_goatcounter.py` | check_no_goatcounter.py — GoatCounter 退役防回退守卫（W806 建立·CI 侧接线）。 |
+| `check_no_goatcounter.py` | check_no_goatcounter.py — 统计「具名例外面」对账守卫（W806 建立 · W1167 重指向）。 |
+| `check_orchestration_refs.py` | check_orchestration_refs.py —— 编排面引用存在性门禁（W1154 新建·基础设施审计 §6 建议）。 |
 | `check_page_admission.py` | check_page_admission.py — 新建页准入门禁（W916 建置·C-W818-01 清偿·静态版）。 |
 | `check_parser_anchor_coverage.py` | check_parser_anchor_coverage.py — 解析器锚点覆盖面扫描（W965 沉淀·W964 双虫探针常驻化）。 |
 | `check_perf_shadow.py` | check_perf_shadow.py — 性能影子槽判据件（W849 建立·verify_delivery 第 47 门禁）。 |
@@ -87,8 +92,10 @@
 | `check_search_index_fresh.py` | check_search_index_fresh.py — 站内搜索索引新鲜度门禁（W809 建立·verify_delivery 第 46 槽 |
 | `check_segment_gaps.py` | check_segment_gaps.py — 历史缺口体检（W1127·T74 遗留 B 的前置） |
 | `check_seo_head.py` | check_seo_head.py — SEO head 完整性常驻检查（W591 SEO 清零）。 |
+| `check_stat_events.py` | check_stat_events.py — 第 67 槽 · 统计事件契约对拍（W1168） |
 | `check_story_timeline_sync.py` | check_story_timeline_sync.py — 故事内时间线双源同步校验（W694 六轮外审 P1-4 落地）。 |
 | `check_structure.py` | check_structure.py — 全站内联 <style> CSS 结构平衡静态门禁（W457 沉淀） |
+| `check_template_contract.py` | check_template_contract.py — 第 69 槽 · 模板结构契约 / 检索假阳性判据（W1178）。 |
 | `check_token_coverage.py` | check_token_coverage.py — Phase E E6 转正门禁（M2/M3：页面私有 <style> 令牌覆盖率） |
 | `check_tooltip_spacing.py` | check_tooltip_spacing.py — tooltip 多行间距判据（W1135·遗留② 根治 + 防复发） |
 | `check_untracked.py` | check_untracked.py — 交付物 untracked 文件检测 |
@@ -144,7 +151,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（75）
+## 工具（80）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -192,6 +199,7 @@
 | `interaction_components.py` | interaction_components.py — 全站开合组件清单（W1147 待办①·交互后态门禁覆盖的数据面）。 |
 | `interaction_state_probe.py` | interaction_state_probe.py — 交互后态探针（W1147 待办①·12 类开合组件清单驱动）。 |
 | `j1_name_audit.py` | j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件） |
+| `mobile_viewport_probe.py` | mobile_viewport_probe.py — 移动视口渲染探针（W1165 · V4 375px 回归）。 |
 | `new_page.py` | new_page.py — 可视化页面脚手架 |
 | `obs_sample.py` | obs_sample.py — OBS-10/11/14 逐批采样件（W850 建·Q2 裁决的取数入口）。 |
 | `optimize-html-size.py` | W230 E3 · HTML 文件体积优化脚本 |
@@ -217,14 +225,18 @@
 | `slice_screenshots.py` | Slice full-page screenshots into fixed-height chunks for pixel-level rev |
 | `source_collate.py` | source_collate.py — 原文考据三方对拍器（S-23·W699）。 |
 | `spot_check_nlp.py` | spot-check character_nlp.py 输出数据。 |
+| `stat_event_probe.py` | stat_event_probe.py — 统计事件运行面取证探针（W1168·第 67 槽的动态证据链） |
 | `subject_band.py` | subject_band.py — 主体检测与派生裁切（不写盘·纯函数·W988 建·W1004 由归档桶转正） |
 | `sync_data_json.py` | W678 WP-6.1：dataset 生成器输出 → site/data/json 部署副本 单向同步（清单制）。 |
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `version_surface.py` | version_surface.py — 版本面（跨文件字面量）幂等推进器（W1114）。 |
 | `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
+| `w1167_analytics_inject.py` | w1167_analytics_inject.py — 第⑤步 双轨统计注入器（A 方案：GA4 海外面 + GoatCounter 大陆面） |
+| `w1167_badge_inject.py` | W1167② 三态数据徽标分发生成器（正本=本文件；文案与 spark-output 链路 STATUS_* 对齐）。 |
+| `w1167_nav_inject.py` | W1167① 主导航单组件分发生成器（正本=本文件内 CANONICAL，改导航只改这里）。 |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（6）
+## 一次性（下划线前缀）（7）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -234,3 +246,4 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
+| `_render_scope.js` | scripts/_render_scope.js — W1192：渲染审计「采集面」口径单一来源 |

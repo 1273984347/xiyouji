@@ -7,15 +7,16 @@
 > 本文件逐条列出 `xiyouji-agent-web/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（5）
+## 子目录（6）
 
 - `deploy/`
 - `e2e/`
 - `evals/`
+- `fuzz/`
 - `server/`
 - `src/`
 
-## 文件（15）
+## 文件（16）
 
 ### Markdown 文档
 
@@ -28,6 +29,7 @@
 
 ### JavaScript / TypeScript
 
+- `fuzz.js`
 - `postcss.config.js`
 - `tailwind.config.js`
 - `vite.config.ts`

@@ -11,19 +11,15 @@
 
 - （无）
 
-## 文件（9）
+## 文件（5）
 
 ### 样式与资源
 
 - `JetBrainsMono-Medium.woff2`
 - `JetBrainsMono-Regular.woff2`
 - `NotoSansSC-Medium.subset.woff2`
-- `NotoSansSC-Medium.woff2`
 - `NotoSansSC-Regular.subset.woff2`
-- `NotoSansSC-Regular.woff2`
-- `noto-serif-sc-micro.woff2`
 - `noto-serif-sc-shared.subset.woff2`
-- `noto-serif-sc-shared.woff2`
 
 ---
 

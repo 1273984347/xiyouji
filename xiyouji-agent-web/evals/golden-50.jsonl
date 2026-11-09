@@ -36,9 +36,9 @@
 {"id": "dataset-036", "category": "dataset", "question": "八十一难数据集总共记录了多少难？请查 dataset/81-hardships.json 后回答数值。", "expect_source_paths": ["dataset/81-hardships.json"], "must_mention": ["81"], "forbid": []}
 {"id": "dataset-037", "category": "dataset", "question": "章节数据集覆盖了多少回？请查 dataset/chapters-metadata.json 后回答数值。", "expect_source_paths": ["dataset/chapters-metadata.json"], "must_mention": ["100"], "forbid": []}
 {"id": "dataset-038", "category": "dataset", "question": "术语表数据集里有多少个术语组？请查 dataset/glossary.json 后回答数值。", "expect_source_paths": ["dataset/glossary.json"], "must_mention": ["6"], "forbid": []}
-{"id": "dataset-039", "category": "dataset", "question": "dashboard 数据集顶层有多少个字段组？请查 dataset/dashboard.json 后回答数值。", "expect_source_paths": ["dataset/dashboard.json"], "must_mention": ["2"], "forbid": []}
+{"id": "dataset-039", "category": "dataset", "question": "世纪对话数据集顶层有多少个字段组？请查 dataset/century-dialogue.json 后回答数值。", "expect_source_paths": ["dataset/century-dialogue.json"], "must_mention": ["2"], "forbid": []}
 {"id": "dataset-040", "category": "dataset", "question": "dataset/emotional-heatmap.json 里「meta」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/emotional-heatmap.json"], "must_mention": ["meta"], "forbid": []}
-{"id": "dataset-041", "category": "dataset", "question": "dataset/dashboard.json 里「meta」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/dashboard.json"], "must_mention": ["meta"], "forbid": []}
+{"id": "dataset-041", "category": "dataset", "question": "dataset/yuanqi-graph.json 里「meta」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/yuanqi-graph.json"], "must_mention": ["meta"], "forbid": []}
 {"id": "dataset-042", "category": "dataset", "question": "dataset/chapter-structure-graph.json 里「meta」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/chapter-structure-graph.json"], "must_mention": ["meta"], "forbid": []}
 {"id": "dataset-043", "category": "dataset", "question": "dataset/criticism-history.json 里「summary」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/criticism-history.json"], "must_mention": ["summary"], "forbid": []}
 {"id": "dataset-044", "category": "dataset", "question": "dataset/journey-geo-semiotics.json 里「nodes」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/journey-geo-semiotics.json"], "must_mention": ["nodes"], "forbid": []}

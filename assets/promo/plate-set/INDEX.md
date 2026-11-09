@@ -7,15 +7,11 @@
 > 本文件逐条列出 `assets/promo/plate-set/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（5）
+## 子目录（0）
 
-- `raw/`
-- `zoom-w948/`
-- `zoom-w952/`
-- `zoom-w953/`
-- `zoom-w974/`
+- （无）
 
-## 文件（281）
+## 文件（279）
 
 ### 样式与资源
 
@@ -291,9 +287,7 @@
 - `plate-line-98-ch039-wenshu-pusa.webp`
 - `plate-line-99-ch046-luli-daxian.png`
 - `plate-line-99-ch046-luli-daxian.webp`
-- `preview-contact-sheet.png`
 - `preview-contact-sheet.webp`
-- `preview-detail-sheet.png`
 - `preview-site-sheet.png`
 - `preview-site-sheet.webp`
 - `preview-w1013-sheet.png`

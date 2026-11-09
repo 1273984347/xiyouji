@@ -64,8 +64,6 @@ Every data dimension is drawn with D3.js. Below are representative samples; the 
 
 **Nothing to install — open and read** 👉 [**https://1273984347.github.io/xiyouji/en/**](https://1273984347.github.io/xiyouji/en/)
 
-![Journey to the West · Annotated — site homepage preview](assets/images/index-preview.png)
-
 *If images load slowly, just click the link above.*
 
 **Locally**: clone the repository and open `site/en/index.html` in a browser (a fully static site — it opens straight from `file://`, with no software to install).
@@ -185,7 +183,6 @@ xiyouji/
 ├── assets/                # font sources, images and other static resources
 ├── references/            # bibliography
 ├── tools/                 # helper tools (chapter splitting and friends)
-├── hyperframes/           # HTML video experiments (W200 leftovers · pending a cleanup decision)
 ├── mcp-server/            # MCP services (xiyouji_drl_spotcheck and others)
 ├── tests/                 # pytest suites + Playwright E2E
 ├── xiyouji-agent-web/     # Web Agent "Journey to the West · Crossing at the Ferry" (OpenAI-compatible engine)

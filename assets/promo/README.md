@@ -75,7 +75,7 @@
 **改文案或改版式后必须重导出**（否则 PDF/PNG 与真源脱节）：
 
 ```bash
-node scripts/_w892_export_flyer.mjs          # 起本地静态服务器导出（推荐·字体必加载）
+node scripts/_w892_export_flyer.mjs          # 已归档（一次性件·git log --diff-filter=D 取回）；现用人工截图导出（W1154 订正）
 node scripts/_w892_export_flyer.mjs --en     # 重出英文版 PDF + PNG
 node scripts/_w892_export_flyer.mjs --file   # 走 file:// 复核「双击直开」的降级表现
 ```
