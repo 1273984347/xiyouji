@@ -17,7 +17,7 @@
 - **数据可视化**：89<!--stats:visualization_pages--> 个 D3.js / Three.js 可视化页（site/data/ 共 90<!--stats:site_data_html--> 个 HTML，「87」不含模板壳 _shell.html），覆盖 133 个<!--doc-sync:exempt--> 数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34<!--stats:script_classes--> 类主题 A–AH）。
 - **可问询入口**：Web Agent「西游记·渡口问津」（xiyouji-agent-web/）——自研 OpenAI-compatible 引擎（server/engine/·W680·全主流大模型端点适配），可对话、检索 docs/source、跑脚本。
 
-**核心内容规模**：A1–A6 内容板块共 618<!--stats:a1_a6_docs--> 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 35 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→616）；英文站 site/en/ 138<!--stats:site_en_html--> 页已全量英文化。
+**核心内容规模**：A1–A6 内容板块共 619<!--stats:a1_a6_docs--> 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 35 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→616）；英文站 site/en/ 138<!--stats:site_en_html--> 页已全量英文化。
 
 **设计方向**：锁定「新中式·数字雅集」（宣纸底/墨文/朱砂点缀/零外域依赖）；**页面动效是强制契约**——时长三档预算（≤150/250/600ms）、reduced-motion 双守卫、tooltip 统一 `.chart-tooltip`、count-up fail-open 等，详见 DESIGN.md（视觉 §1-4、**动效 §5**）。
 
@@ -333,4 +333,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1176-W1176 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-08（W1177）新增页自动化：new_page --post 按依赖序跑七步 + 模板补齐 cite/dataSource/chart-degrade/description；2026-11-08（W1178）第 69 槽：check_template_contract.py 把「类名计数 ≠ 结构存在」变成红灯，并给 --evidence 输出可复算命中位置；2026-11-09（W1179）agent_start --task 按改动路径输出四类必跑清单；--checklist 供动手前查；命令由台账批号与路径实况推导；2026-11-09（W1180）A5 新增《天罡地煞与变化之术专题》；清单补第五类 new-doc 并修 git add 顺序；2026-11-09（W1181）A5 新建《西游东传与译介专题》；按用户指定方向直接写作，仅据学术论文索引已收录条目立论。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1177-W1177 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-08（W1178）第 69 槽：check_template_contract.py 把「类名计数 ≠ 结构存在」变成红灯，并给 --evidence 输出可复算命中位置；2026-11-09（W1179）agent_start --task 按改动路径输出四类必跑清单；--checklist 供动手前查；命令由台账批号与路径实况推导；2026-11-09（W1180）A5 新增《天罡地煞与变化之术专题》；清单补第五类 new-doc 并修 git add 顺序；2026-11-09（W1181）A5 新建《西游东传与译介专题》；按用户指定方向直接写作，仅据学术论文索引已收录条目立论；2026-11-09（W1182）A5 新建《法器与兵器器物体系专题》；补术语表第六组背景，与服饰专题分工为「穿什么 / 拿什么」。如与上述权威文档冲突，以权威文档为准。*
