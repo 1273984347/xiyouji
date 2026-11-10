@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-10 13:59
+生成时间：2026-11-10 14:30
 
-共 **207** 件（门禁与校验 97 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 7）
+共 **208** 件（门禁与校验 98 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（97）
+## 门禁与校验（98）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -57,6 +57,7 @@
 | `check_dynamic_links.py` | check_dynamic_links.py — JS 动态链接存在性门禁（补 lint_links 静态扫描盲区）。 |
 | `check_embedded_stale_markers.py` | 第 38 门禁：页面内嵌残留标记（W693·W692 报告 A-01 用户裁决挂载）。 |
 | `check_emoji_icons.py` | W949 · 报告型探针：UI 图标位 emoji 残留 + 图标渲染正确性 |
+| `check_external_rule_coverage.py` | check_external_rule_coverage.py — W1196：外部规则覆盖面审计守卫。 |
 | `check_folder_docs.py` | check_folder_docs.py — 目录文档新鲜度门禁（W780 建立·verify_delivery 第 45 槽）。 |
 | `check_frontmatter.py` | 元信息块 v2 门禁（W501 第 18 门禁）：校验 docs/01-06 新文件含血缘 + 核验状态 4 字段。 |
 | `check_glossary.py` | 术语一致性门禁（W502 第 19 门禁）：术语表.md ↔ dataset/glossary.json 双向同步 + 规范词锚定。 |
