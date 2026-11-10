@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-09 21:43
+生成时间：2026-11-10 08:53
 
-共 **205** 件（门禁与校验 95 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 7）
+共 **207** 件（门禁与校验 97 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（95）
+## 门禁与校验（97）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -52,6 +52,7 @@
 | `check_doc_numbers.py` | check_doc_numbers.py — 文案数字与证据件键值逐字对表闸（W1116 建） |
 | `check_doc_size_budget.py` | check_doc_size_budget.py — 治理文档体积窗口门禁（W960 建 · 文档规范 §8 机器化）。 |
 | `check_doc_sync.py` | 文档口径体检 doc-sync（第 31 门禁 · W663）——代码/提交是真值源，文档当前态声明是派生物。 |
+| `check_docker_pin.py` | check_docker_pin.py — W1194：Dockerfile 基础镜像必须钉到不可变 digest。 |
 | `check_dual_source_scan.py` | check_dual_source_scan.py — 双源对发现器（S-24·W699）。 |
 | `check_dynamic_links.py` | check_dynamic_links.py — JS 动态链接存在性门禁（补 lint_links 静态扫描盲区）。 |
 | `check_embedded_stale_markers.py` | 第 38 门禁：页面内嵌残留标记（W693·W692 报告 A-01 用户裁决挂载）。 |
@@ -66,6 +67,7 @@
 | `check_icon_fields.py` | W949 · 第 50 门禁扩展：字段图标位判据（avatar / icon / flag / stage） |
 | `check_index_health.py` | 索引健康门禁（W500 转正，verify_delivery 第 17 门禁）。 |
 | `check_inlined_css.py` | check_inlined_css.py — W495 转正门禁：data/EN 页 INLINED CSS 块完整性防回归。 |
+| `check_install_pins.py` | check_install_pins.py — W1194：workflow 安装命令必须钉到精确版本。 |
 | `check_interaction_binding.py` | check_interaction_binding.py — 交互绑定门禁（W908 建置·T-18/A-T07-05）。 |
 | `check_js_syntax.js` | W591（经用户批准）：非 JS 数据块（application/ld+json、application/json、importmap 等） |
 | `check_js_syntax.py` | Check inline JS syntax in HTML files using `node --check`. |

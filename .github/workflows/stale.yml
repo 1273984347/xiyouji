@@ -13,8 +13,7 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      issues: write
+      issues: write  # W1194：删 job 级多余的 contents 写权限（actions/stale 只需 issues 与 pull-requests·Scorecard Token-Permissions 判 contents 写权限）
       pull-requests: write
     steps:
       - uses: actions/stale@5bef64f19d7facfb25b37b414482c7164d639639 # v9

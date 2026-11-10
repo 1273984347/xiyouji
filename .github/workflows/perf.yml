@@ -108,7 +108,7 @@ jobs:
 
       - name: Install Lighthouse CI
         if: steps.scope.outputs.run != 'false'
-        run: npm install -g @lhci/cli@0.13.x
+        run: npm install -g @lhci/cli@0.13.0  # W1194：钉精确版（0.13.x 是浮动范围·Scorecard 判未固定依赖）
 
       - name: Start static server
         if: steps.scope.outputs.run != 'false'

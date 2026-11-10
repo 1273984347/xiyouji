@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（213）
+## 文件（215）
 
 ### Python 脚本
 
@@ -117,6 +117,7 @@
 - `check_doc_numbers.py`
 - `check_doc_size_budget.py`
 - `check_doc_sync.py`
+- `check_docker_pin.py`
 - `check_dual_source_scan.py`
 - `check_dynamic_links.py`
 - `check_embedded_stale_markers.py`
@@ -131,6 +132,7 @@
 - `check_icon_fields.py`
 - `check_index_health.py`
 - `check_inlined_css.py`
+- `check_install_pins.py`
 - `check_interaction_binding.py`
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
