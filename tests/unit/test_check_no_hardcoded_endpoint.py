@@ -69,7 +69,10 @@ def test_injection_replaces_placeholder(tmp_path):
     rec = inject.inject_file(str(f), "https://rag.example.com", "default")
     assert rec["status"] == "injected"
     assert rec["replacements"] == 1
-    assert "https://rag.example.com" in rec["content"]
+    # 用 count 而非 in：CodeQL 的 js/incomplete-url-substring-sanitization 会把
+    # 形如 assert <url> in text 的断言误判为「不完整的 URL 子串清理」⇒ 改用等价的 count 断言
+    # （语义更强：恰好出现一次），既消掉误报又不放松任何判据。
+    assert rec["content"].count("https://rag.example.com") == 1
     assert guard.PLACEHOLDER not in rec["content"]
 
 
