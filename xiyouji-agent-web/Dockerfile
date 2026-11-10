@@ -3,7 +3,7 @@
 # 公网暴露需自行前置反代 + 鉴权 + 配额（见 docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md WP-B-ALT）。
 # 构建示例：docker build -t xiyouji-agent-web .
 # 运行示例：docker run --rm -p 3000:3000 --env-file .env -v "<仓库根>:/workspace" xiyouji-agent-web
-FROM node:22-alpine
+FROM node:22-alpine@sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --no-audit --no-fund

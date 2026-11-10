@@ -15,15 +15,22 @@ playwright ×2），它们在 Scorecard 面板上以告警形态暴露。
   ③ 命令替换取版本（如 `pip install "$(grep '^ruff==' scripts/requirements.txt)"`）——
      版本来自仓内已钉版的清单。
 
+额外判据（W1194 二轮：供应链面）：仓内每个 `package-lock.json` 的 `resolved` 字段必须指向官方
+npm 注册表（`registry.npmjs.org`）——指向第三方镜像站的 lock 会把 CI 的安装取值绑在外部站点，
+对方站点故障时取值失败且无法定位（PR 首轮 CI 实测：`registry.npmmirror.com` 返回 500，拉
+`omi-7.7.13.tgz` 失败 → `npm ci` 中断）。
+
 用法：
   py -3 scripts/check_install_pins.py             # 判据模式：逐条校验，退出码 0/1
-  py -3 scripts/check_install_pins.py --self-test # 负样本自证（含 8 例）
+  py -3 scripts/check_install_pins.py --self-test # 负样本自证（含 13 例）
 """
 import argparse
+import json
 import os
 import re
 import shlex
 import sys
+import tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WF_DIR = os.path.join(ROOT, ".github", "workflows")
@@ -35,6 +42,10 @@ PIP_OPTION_TOKENS = {"-r", "--requirement", "-U", "--upgrade", "--user", "--no-c
                      "--disable-pip-version-check", "--index-url", "--extra-index-url", "-q", "--quiet"}
 NPM_OPTION_TOKENS = {"-g", "--global", "--prefix", "--save-dev", "-D", "--no-audit", "--no-fund",
                      "--registry", "--loglevel"}
+
+# W1194 二轮：lock 的 resolved 只允许指向官方 npm 注册表（供应链面判据）
+LOCK_SKIP_DIRS = {"node_modules", ".git", "archive", "dist", "release", "site", ".agent"}
+ALLOWED_REGISTRY_HOSTS = {"registry.npmjs.org"}
 
 
 def strip_comment(command):
@@ -168,6 +179,45 @@ def check_workflow_text(text):
     return bad
 
 
+def find_lockfiles(root=ROOT):
+    """产出仓内所有 package-lock.json（排除 node_modules / archive 等非源目录）。"""
+    out = []
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames if d not in LOCK_SKIP_DIRS]
+        for fn in filenames:
+            if fn == "package-lock.json":
+                out.append(os.path.join(dirpath, fn))
+    return sorted(out)
+
+
+def check_lock_registry(path):
+    """返回 [(host, 违规条数)] —— lock 里指向非官方注册表的 resolved 主机与条数。
+
+    判据：lock 的 `resolved` 字段只允许官方 npm 注册表（registry.npmjs.org）。
+    指向第三方镜像站的 lock 会把 CI 的安装取值绑定在外部站点，对方站点故障时
+    取值失败且无法定位（W1194 二轮 CI 实测：registry.npmmirror.com 返回 500）。
+    """
+    counts = {}
+    try:
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+    except (OSError, ValueError) as exc:
+        return [("<lock 不可解析: %s>" % exc.__class__.__name__, 1)]
+    packages = data.get("packages") if isinstance(data, dict) else None
+    if not isinstance(packages, dict):
+        return []
+    for node in packages.values():
+        if not isinstance(node, dict):
+            continue
+        resolved = node.get("resolved")
+        if not isinstance(resolved, str) or not resolved.startswith(("http://", "https://")):
+            continue
+        host = resolved.split("//", 1)[1].split("/", 1)[0].split(":", 1)[0].lower()
+        if host not in ALLOWED_REGISTRY_HOSTS:
+            counts[host] = counts.get(host, 0) + 1
+    return sorted(counts.items())
+
+
 def run_gate(root=ROOT):
     wf_dir = os.path.join(root, ".github", "workflows")
     fails = 0
@@ -188,7 +238,20 @@ def run_gate(root=ROOT):
             fails += 1
             print("  FAIL %s:%d  [%s] %s" % (rel, lineno, kind, command[:110]))
             print("       ↳ 安装命令的包规格必须钉到精确版本（如 pkg==1.2.3 / pkg@1.2.3）")
-    print("---- 安装命令钉版门禁：%d FAIL / %d 文件 / %d 条安装命令 ----" % (fails, len(files), checked))
+    # 供应链面（W1194 二轮）：lock 的 resolved 不得指向第三方镜像站
+    lock_files = find_lockfiles(root)
+    for path in lock_files:
+        rel = os.path.relpath(path, root).replace(os.sep, "/")
+        bad = check_lock_registry(path)
+        if not bad:
+            print("  PASS %s（resolved 均指向官方 npm 注册表）" % rel)
+            continue
+        for host, cnt in bad:
+            fails += 1
+            print("  FAIL %s  [%s] %d 条 resolved 指向非官方注册表" % (rel, host, cnt))
+            print("       ↳ lock 的 resolved 必须统一为 https://registry.npmjs.org/（避免安装取值绑定外部镜像站）")
+    print("---- 安装命令钉版门禁：%d FAIL / %d 文件 / %d 条安装命令 / %d 个 lock ----"
+          % (fails, len(files), checked, len(lock_files)))
     return 1 if fails else 0
 
 
@@ -212,9 +275,34 @@ def _self_test():
             ok += 1
         else:
             print("  FAIL 自证用例：%s（期望 FAIL 数 %d·实际 %d）" % (desc, expect_fail, got))
-    print("  自证 %d/%d 通过" % (ok, len(cases)))
-    print("SELF_TEST_OK" if ok == len(cases) else "SELF_TEST_FAILED")
-    return 0 if ok == len(cases) else 1
+    # lock 供应链面用例（W1194 二轮）
+    lock_cases = [
+        ('{"packages": {"node_modules/x": {"resolved": "https://registry.npmjs.org/x/-/x-1.0.0.tgz"}}}',
+         0, "lock 指向官方注册表 ⇒ 通过"),
+        ('{"packages": {"node_modules/x": {"resolved": "https://registry.npmmirror.com/x/-/x-1.0.0.tgz"}}}',
+         1, "lock 指向第三方镜像 ⇒ 判红"),
+        ('{"packages": {"node_modules/x": {"version": "1.0.0"}}}',
+         0, "lock 无 resolved 字段 ⇒ 通过"),
+        ('{"packages": {"node_modules/x": {"resolved": "git+https://example.com/x.git"}}}',
+         0, "lock 指向 git 地址 ⇒ 通过"),
+    ]
+    total_cases = len(cases) + len(lock_cases)
+    for content, expect_fail, desc in lock_cases:
+        with tempfile.NamedTemporaryFile("w", suffix="package-lock.json", delete=False,
+                                         encoding="utf-8") as fh:
+            fh.write(content)
+            tmp = fh.name
+        try:
+            got = len(check_lock_registry(tmp))
+        finally:
+            os.unlink(tmp)
+        if got == expect_fail:
+            ok += 1
+        else:
+            print("  FAIL 自证用例：%s（期望 FAIL 数 %d·实际 %d）" % (desc, expect_fail, got))
+    print("  自证 %d/%d 通过" % (ok, total_cases))
+    print("SELF_TEST_OK" if ok == total_cases else "SELF_TEST_FAILED")
+    return 0 if ok == total_cases else 1
 
 
 def main():
