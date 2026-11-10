@@ -1,3 +1,19 @@
+## W1196 外部规则覆盖面审计批（2026-11-10）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_external_rule_coverage.py | W1196 | 新建：外部规则覆盖面审计守卫（shell 面安装命令 / 各生态清单源 / 守卫覆盖缺口）|
+| .github/workflows/security.yml | W1196 | 改：安装命令面守卫 job 新增「校验外部规则覆盖面」步骤 |
+| pitfalls.md | W1196 | 改：E-218 入表（守卫扫描面宽于外部规则的扫描面）|
+| AGENTS.md | W1196 | 改：坑表计数链同步 |
+| HANDOVER.md | W1196 | 改：坑表计数链同步 |
+| .agent/skills/puti-shouye/SKILL.md | W1196 | 改：坑表计数链同步 |
+| CHANGELOG.md | W1196 | 改：W1196 段 |
+| docs/00-导读/W批次编号对账表.md | W1196 | 改：W1196 认领行 |
+| scripts/output/_w1196_spec.json | W1196 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1196.txt | W1196 | 新建：级联清单 |
+
+
 ## W1195 Scorecard Pinned-Dependencies 真修批（2026-11-09）
 
 | 文件 | W | 说明 |

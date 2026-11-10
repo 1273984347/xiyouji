@@ -42,3 +42,4 @@
 + W1193 面板残余收口：minimatch 2 条真告警真修 + Pillow 41 条 stale 源头触发重算 + Scorecard 投影复查·无 workflow 结构改动）。
 + W1194 Scorecard 告警真项收口：7 处安装命令钉版 + 2 处写权限最小化 + 镜像 digest 机器判据与 CI 取值·无 workflow 结构改动）。
 + W1195 Scorecard Pinned-Dependencies 真修：全部 pip 安装点改为 --require-hashes + 哈希化清单 全部 npm 安装点改为 npm ci（走 lock）·无 workflow 结构改动）。
++ W1196 外部规则覆盖面审计：新增 check_external_rule_coverage.py 监控「规则面 × 守卫面」差集并接入 CI 登记已知覆盖缺口·无 workflow 结构改动）。
