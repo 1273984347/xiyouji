@@ -8,6 +8,8 @@
 > - **T4 删除 black 遗留安装（W400 起从未被执行）**：ci.yml 的 code-quality job 原本安装 black 仅为「遗留安装」（自 W400 起 `black --check` 步骤已移除，black 从未被执行）——本批删除该安装，同时把 ruff 的安装改为从哈希化清单统一安装（ruff 已在清单里·与 requirements.txt 版本一致）。
 > - **T5 守卫升级为与 Scorecard 源码同源**：`scripts/check_install_pins.py` 的判据从「钉精确版本」改为「按 Scorecard 源码判定」（pip 需 `--require-hashes`·npm 需 `npm ci`），自证用例升级为 14 例（含「钉了版本但无 --require-hashes → 判红」与「钉了版本的 npm install 仍→ 判红」两个反例），自证 14/14 通过。
 > - **T6 实测证据（不假收敛）**：干净 venv 实测 `pip install --require-hashes -r <小包哈希清单>` → rc 0（真实安装成功）；改掉一个 hash 后重跑 → pip 报 `THESE PACKAGES DO NOT MATCH THE HASHES FROM THE REQUIREMENTS FILE` → 伪 hash 被拒（判据真会红、非恒绿）。
+> - **T7 首轮 CI 的 Dependency review 失败的漏洞处置（新建依赖树带来的 high 级漏洞）**：PR #152 首轮 CI 报 `basic-ftp@5.3.1` 漏洞（GHSA-c475-qrg2-pj4r·high·`Client.list()` 二次时间 DoS）——来自 lhci 子项目引入的 `express@4` 依赖链（`get-uri` → `basic-ftp@^5.0.2`）；advisory 的 vulnerable range 为 `<= 6.2.0`、`first_patched_version` 为 `6.2.1` ⇒ 用 npm `overrides` 把 `basic-ftp` 锁到 `6.2.6`（已超过修复版）；重生成 lock 后实测：`basic-ftp -> 6.2.6`、348 包不变、`resolved` 全为 `registry.npmjs.org`、无缺 `integrity`、`npm ci` rc 0（added 347 packages）且 `lhci` bin 可用。
+> - **T8 坑表 E-216（新建依赖树带来新漏洞）**：新建依赖树后必须跑一次依赖审查；新漏洞的 advisory 可能还未入库（OSV 与 GitHub Advisory API 均查不到，仅 CI 审查实测输出报出）。
 > - **状态**：已落地。
 > - **文件**：见 file-index。
 
