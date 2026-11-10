@@ -1,3 +1,14 @@
+### W1202（2026-11-10）：GitHub「Security and quality」面板归零收官批（41 条 pillow 告警人工关闭 + 可复跑脚本入仓 + 终态读数回填）
+
+**本批要点**（GitHub「Security and quality」面板归零·41 条 pillow 告警人工关闭）：
+
+> - **T1 处置动作**：41 条 pillow 告警以 `dismiss_reason=inaccurate` 批量关闭（API 实跑 ok=41 fail=0）⇒ **Dependabot open 41 → 0**（fixed 26 条历史不动）。
+> - **T2 依据链（全部实测·非推断）**：① 仓库自 2026-10-23（W890·654a289c）起钉 `pillow==13.0.0`，而 13.0.0 是全部 41 条 advisory 的 `first_patched_version` ⇒ 告警断言「12.3.0 被依赖」在仓库侧不成立；② 依赖图里的 `pillow@12.3.0` 是 2026-10-22 前的历史条目，**无仓内清除路径**（内容变更只新增 / 删除 manifest 使路径消失亦不清理 / Dependency submission API 为追加语义·W1198–W1201 四批实测）；③ CI 的 pip audit 审计哈希化清单 51 项闭包 ⇒ 漏洞检测不中断。
+> - **T3 可复跑与可回滚**：新建 `scripts/dismiss_pillow_alerts.py`（--dry-run / --apply / --revert）⇒ 关闭动作可复现、可审计、可一键回滚；依据链写在脚本头注释。
+> - **T4 终态读数回填**：报告 T96 新增 §8.3（归零前/终态对照表）+ 台账回填 W1201（4299a7ac）+ 坑表 E-219 补最终处置。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
 ### W1201（2026-11-10）：重建态批·恢复仓库完整态 + 落仓路径 A 的否证结论（E-219 订正 + T96 §8.2 补记）
 
 **本批要点**（从删除态恢复完整态·并落仓路径 A 的否证结论）：
@@ -409,7 +420,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1201），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1202），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

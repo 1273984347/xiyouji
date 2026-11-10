@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（218）
+## 文件（219）
 
 ### Python 脚本
 
@@ -173,6 +173,7 @@
 - `containment_block_scan.py`
 - `data_validate.py`
 - `detect_unwrapped_tables.py`
+- `dismiss_pillow_alerts.py`
 - `doc_areas.py`
 - `docs_index.py`
 - `drl_spotcheck.py`
