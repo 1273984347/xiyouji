@@ -1,0 +1,221 @@
+{
+  "batch": "W1205",
+  "subtask": "B — D-2 应用迁移批收尾：检索层接入（O-4）+ 静态产物服务地址注入机制（契约 C-8）",
+  "spec_source": "docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md（§10.6 / §5.4 #8 / §5.5 C-8 / §6.6 / §9.2 F1）",
+  "files_created": [
+    "scripts/rag/retrieval_cli.py",
+    "scripts/check_no_hardcoded_endpoint.py",
+    "scripts/inject_service_endpoint.py",
+    "xiyouji-agent-web/server/retrieval.ts",
+    "xiyouji-agent-web/server/retrieval.routes.ts",
+    "xiyouji-agent-web/server/retrieval.test.ts",
+    "tests/unit/test_check_no_hardcoded_endpoint.py",
+    "scripts/output/_w1205_retrieval_endpoint.json"
+  ],
+  "files_modified": [],
+  "b1_retrieval": {
+    "route": {
+      "file": "xiyouji-agent-web/server/retrieval.routes.ts",
+      "endpoints": [
+        "GET /api/retrieval?q=&k=&answer=",
+        "GET /api/retrieval/status"
+      ],
+      "mount": "控制器需在 xiyouji-agent-web/server/index.ts 的 registerApiRoutes(app, pendingPermissions) 之后调用 registerRetrievalRoutes(app)",
+      "status_codes": {
+        "200": "正常检索",
+        "400": "缺检索词/超长（{error} 形状）",
+        "503": "异源降级（{error,...outcome}）"
+      },
+      "read_path": "L2 静态层不依赖本路由；L3 不可达时静态站仍完整可用（§6.6）"
+    },
+    "citation_guard": {
+      "file": "xiyouji-agent-web/server/retrieval.ts",
+      "function": "verifyCitation",
+      "reuse": "复用 server/citationGuard.ts 的 applyCitationGuard 做路径存在性核实（unverified 判据）",
+      "four_gates": [
+        "路径形态（相对/无越界/落在 docs 或 source 真源目录）",
+        "文件存在且是普通文件",
+        "摘录非空",
+        "段落级溯源：归一化摘录逐字出现在该文件内容中"
+      ],
+      "rule": "不可溯源的命中一律拦截、不下发（只计数不下发）"
+    },
+    "degradation_decision_points": {
+      "D1": "检索层不可达 → cross_source（异源）· complianceDegraded=true · HTTP 503 · UI 明示「这不是检索结果」",
+      "D2": "无任何可溯源引用 → cross_source（异源）· 禁止产出任何文本",
+      "D3": "生成层不可用/失败 → same_source（同源）· complianceDegraded=false · 引用照常下发",
+      "D4": "未请求生成 → retrieval_only（非降级）"
+    },
+    "measured": {
+      "node_test": {
+        "exit": 0,
+        "counts": {
+          "tests": 9,
+          "pass": 9,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        "cases": [
+          "✔ 可溯源命中：引用下发且守卫计数一致 (3.1998ms)",
+          "✔ 可溯源命中 + 生成层可用 ⇒ full 模式且带回答 (1.1602ms)",
+          "✔ 不可溯源命中：路径不存在 → 拦截不下发 (3.0851ms)",
+          "✔ 不可溯源命中：摘录与文件不符 → 拦截不下发 (1.2121ms)",
+          "✔ 引用守卫：越界路径与产物目录路径一并拒绝 (0.6046ms)",
+          "✔ 索引不可达：异源降级（cross_source）且带 UI 明示 (2.887ms)",
+          "✔ 生成层不可用：同源降级（引用仍可溯源·不计合规降级） (1.4671ms)",
+          "✔ 无可溯源引用 + 请求生成：异源降级且不产出无据文本 (1.9508ms)",
+          "✔ 路由：缺检索词 400 · 正常检索 200 · 异源降级 503 (110.4649ms)"
+        ]
+      },
+      "real_backend_run": {
+        "raw_head": ""
+      }
+    }
+  },
+  "b2_address_injection": {
+    "mechanism": "构建期占位符 __XIJ_SERVICE_BASE__ + 部署期替换（scripts/inject_service_endpoint.py）",
+    "placeholder": "__XIJ_SERVICE_BASE__",
+    "developer_local_marker": "xij-build-profile:developer-local endpoint=<地址>",
+    "guard": "scripts/check_no_hardcoded_endpoint.py",
+    "inject": "scripts/inject_service_endpoint.py",
+    "self_test": {
+      "exit": 0,
+      "cases": [
+        {
+          "case": "负样本·硬编码回环地址必红",
+          "result": "PASS"
+        },
+        {
+          "case": "正样本·占位符必绿",
+          "result": "PASS"
+        },
+        {
+          "case": "开发者本机专用构建豁免且可审计",
+          "result": "PASS"
+        },
+        {
+          "case": "本地地址检测模式不算服务地址",
+          "result": "PASS"
+        },
+        {
+          "case": "未声明的裸域名地址必红",
+          "result": "PASS"
+        },
+        {
+          "case": "已声明的部署地址必绿",
+          "result": "PASS"
+        }
+      ]
+    },
+    "product_scan": {
+      "exit": 1,
+      "scanned_files": 1037,
+      "violation_count": 26,
+      "violation_files": [
+        "site/_headers",
+        "site/dashboard.html",
+        "site/data/81-hardships-view.html",
+        "site/data/cave-estate.html",
+        "site/data/character-relationship-3d-view.html",
+        "site/data/data-explorer.html",
+        "site/data/material-archaeology.html",
+        "site/dukou-engine.html",
+        "site/en/81-hardships-view.html",
+        "site/en/cave-estate.html",
+        "site/en/character-relationship-3d-view.html",
+        "site/en/data-explorer.html",
+        "site/en/dukou-engine.html",
+        "site/en/material-archaeology.html",
+        "site/index.html",
+        "site/static/js/dataset-view.js",
+        "site/static/js/rag-chat.js"
+      ],
+      "by_role": {
+        "csp": 5,
+        "network": 6,
+        "prose": 15
+      },
+      "mention_count": 11,
+      "exempted": []
+    },
+    "lifecycle_proof": [
+      {
+        "step": "1_before_injection",
+        "guard_exit": 1,
+        "violation_count": 3,
+        "violations": [
+          [
+            "before/_headers",
+            17,
+            "127.0.0.1",
+            "csp"
+          ],
+          [
+            "before/_headers",
+            5,
+            "127.0.0.1",
+            "prose"
+          ],
+          [
+            "before/static/js/rag-chat.js",
+            24,
+            "127.0.0.1",
+            "prose"
+          ]
+        ],
+        "exempted_count": 0
+      },
+      {
+        "step": "2_placeholder",
+        "guard_exit": 0,
+        "violation_count": 0,
+        "mention_count": 4
+      },
+      {
+        "step": "3_inject_default",
+        "inject_exit": 0,
+        "replacements": 2,
+        "rag_chat_endpoint_present": true,
+        "rag_chat_placeholder_left": false,
+        "headers_endpoint_present": true,
+        "headers_placeholder_left": false,
+        "guard_exit_with_declared_endpoint": 0,
+        "violation_count": 0
+      },
+      {
+        "step": "4_inject_developer_local",
+        "inject_exit": 0,
+        "marker_present": true,
+        "marker_line": "/* xij-build-profile:developer-local endpoint=http://127.0.0.1:8777 */",
+        "endpoint_present": true,
+        "guard_exit": 0,
+        "violation_count": 0,
+        "exempted_files": [
+          "inject_devlocal/_headers",
+          "inject_devlocal/static/js/rag-chat.js"
+        ]
+      },
+      {
+        "step": "5_default_profile_rejects_loopback",
+        "exit": 2,
+        "stderr": "校验失败：默认构建禁止回环/内网地址（契约 C-8）：http://127.0.0.1:8777；开发者本机专用请用 --profile developer-local"
+      },
+      {
+        "step": "6_check_placeholder_residue",
+        "exit": 1,
+        "stdout_head": "{   \"check\": true,   \"root\": \"D:\\\\xiyouji\\\\tmpe\\\\_w1205_proof\\\\check_residue\",   \"placeholder_remaining\": 2,   \"files\": [     \"D:\\\\xiyouji\\\\tmpe\\\\_w1205_proof\\\\check_residue\\\\_headers\",     \"D:\\\\xiyou"
+      }
+    ],
+    "pytest": {
+      "exit": 0,
+      "passed": 11
+    }
+  },
+  "guardrails": {
+    "command": "pwsh -File scripts/guardrails/check_changed.ps1",
+    "result": "ruff 风格档 + 结构档 + 嵌套推导式 + 改写完整性判据 全 OK（退出码 0）"
+  },
+  "product_surface_untouched": "site/** 未手工改动（产物面·禁改）",
+  "timestamp": "2026-11-11T00:16:40+0800"
+}

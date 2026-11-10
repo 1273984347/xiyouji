@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "_note": "私有化部署基线（W1205 · D-3 合规批）·由 AGENT_WEB_COMPLIANCE_BASELINE_FILE 指向本文件",
+  "_note2": "启动期自检不通过 ⇒ 拒绝启动（fail-closed）·不是警告",
+  "_note3": "改本文件即改部署姿态（进版本库⇒可审计）；不要靠环境变量绕过姿态要求",
+  "requireAuth": true,
+  "minTokenLength": 32,
+  "requireLoopbackBind": true,
+  "allowedBindHosts": ["127.0.0.1", "::1", "localhost"],
+  "requireHostAllowlist": true,
+  "requireTlsTerminated": true,
+  "requirePgTls": true,
+  "requireColumnEncryption": true,
+  "minAuditRetentionDays": 180
+}

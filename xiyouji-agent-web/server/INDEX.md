@@ -7,12 +7,13 @@
 > 本文件逐条列出 `xiyouji-agent-web/server/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（2）
+## 子目录（3）
 
+- `compliance/`
 - `engine/`
 - `storage/`
 
-## 文件（28）
+## 文件（31）
 
 ### JavaScript / TypeScript
 
@@ -37,6 +38,9 @@
 - `middleware.ts`
 - `permissions.ts`
 - `requestId.ts`
+- `retrieval.routes.ts`
+- `retrieval.test.ts`
+- `retrieval.ts`
 - `routes.ts`
 - `security.test.ts`
 - `security.ts`

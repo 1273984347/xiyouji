@@ -107,6 +107,8 @@ export function registerApiRoutes(app: Express, permissions: PendingPermissionSt
       id: uuidv4(),
       session_id: body.sessionId,
       message_id: body.messageId,
+      // C-6：分级标签显式化（反馈 = L2·§12.1 落点）——缺标签在强制模式下会被拒
+      data_class: "L2",
       verdict: body.verdict,
       comment: body.comment ?? "",
     });
@@ -231,6 +233,8 @@ function registerSessionRoutes(app: Express): void {
       id: uuidv4(),
       title: body.title ?? "新对话",
       model: body.model ?? defaultModel,
+      // C-6：分级标签显式化（会话 = L3·§12.1 落点）
+      data_class: "L3",
       sdk_session_id: null,
       created_at: now,
       updated_at: now,

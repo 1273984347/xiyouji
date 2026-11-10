@@ -1,0 +1,355 @@
+{
+  "batch": "W1205",
+  "subtask": "D-3 合规批（架构方案 v2 §8.2 档 2 第 3 条：分级目录 + 强制鉴权 + 审计流水结构化 + 加密与留存期）",
+  "generated_at": "2026-11-11T00:12:57+08:00",
+  "spec_source": {
+    "file": "docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md",
+    "sections_used": [
+      "§12.1 数据分级四级",
+      "§12.2 现役缺口与整改 8 条",
+      "§12.3 审计事件结构",
+      "§12.4 加密口径",
+      "§12.5 留存期口径",
+      "§5.4 禁止依赖形态 #4",
+      "§5.5 契约 C-4/C-6/C-7",
+      "§9.2 降级矩阵 F10",
+      "§8.2 档 2 第 3 条"
+    ]
+  },
+  "env_vars_introduced": {
+    "AGENT_WEB_COMPLIANCE_BASELINE": "=1 启用整套合规基线（启动期自检·不通过则拒绝启动）；默认不启用⇒现役启动行为不变",
+    "AGENT_WEB_COMPLIANCE_BASELINE_FILE": "基线配置文件路径（示例见 server/compliance/baseline.example.json）",
+    "AGENT_WEB_COMPLIANCE_ENFORCE": "=1 只开启「入库强制校验」这一项（便于灰度）",
+    "AGENT_WEB_DATA_KEY": "列级加密密钥（base64/hex 的 32 字节·只从环境变量读·不入库不落盘不进日志）",
+    "AGENT_WEB_DATA_KEY_ID": "密钥标识（仅用于轮换区分·不含密钥材料）",
+    "AGENT_WEB_BIND_HOST": "监听地址声明（基线校验其必须为回环）",
+    "AGENT_WEB_TLS_TERMINATED": "=1 声明反代侧已终止 TLS（客户端↔服务端）",
+    "AGENT_WEB_PUBLIC_BASE_URL": "对外地址（基线要求 https://）",
+    "AGENT_WEB_RETENTION_<类别>_DAYS": "按类别覆盖留存期（audit/session/message/feedback/content）·低于硬下限即拒绝启动"
+  },
+  "deliverables": {
+    "D-1_分级目录与入库强制校验": {
+      "single_source_of_truth": {
+        "file": "xiyouji-agent-web/server/compliance/data-class.ts",
+        "symbols": [
+          "DATA_CLASS_CATALOG:51",
+          "RESOURCE_CLASS",
+          "SENSITIVE_COLUMNS",
+          "requireDataClass:148",
+          "resolveWriteDataClass:205",
+          "dataClassEnforcementEnabled:192"
+        ],
+        "note": "枚举 + 判定标准 + 本项目落点 + 存储要求 + 传输要求 + 资源种类映射 + 敏感列映射，全部程序可读（不只写在文档里）"
+      },
+      "enforcement": {
+        "error_contract": "xiyouji-agent-web/server/compliance/errors.ts（ComplianceErrorCode 枚举 9 项 + ComplianceError + complianceErrorCodes() 可穷举 + complianceHttpStatus 映射）",
+        "codes": [
+          "COMPLIANCE_DATA_CLASS_MISSING",
+          "COMPLIANCE_DATA_CLASS_INVALID"
+        ],
+        "applies_to_backends": [
+          "sqlite",
+          "postgres",
+          "dualwrite"
+        ],
+        "behavior": "显式非法标签值 ⇒ 一律拒绝；强制模式下缺标签 ⇒ 拒绝入库；非强制模式 ⇒ 按分级目录推导并落库"
+      },
+      "storage_columns": {
+        "sqlite": "server/storage/sqlite.ts · 新库 DDL 内含 data_class 列 + 存量库迁移 v4（server/compliance/schema.ts 的 COMPLIANCE_COLUMNS 为事实源）",
+        "postgres": "server/storage/postgres.ts · INSERT 带 data_class 列；缺列时报可枚举错误 COMPLIANCE_SCHEMA_OUT_OF_DATE（提示补 0003 迁移）"
+      },
+      "readings": {
+        "缺标签被拒": "两后端各 3 例（会话/消息/反馈）= 6 例命中 DATA_CLASS_MISSING",
+        "非法标签值被拒": "两后端各 1 例 = 2 例命中 DATA_CLASS_INVALID",
+        "带标签通过": "两后端各 1 例（标签原样落库并可读回）",
+        "tests": "storage.test.ts 的 runComplianceCases（SQLite + PG 同一份断言）· compliance.test.ts E3/E5"
+      }
+    },
+    "D-2_强制鉴权升格为部署基线": {
+      "baseline_module": "xiyouji-agent-web/server/compliance/baseline.ts",
+      "symbols": [
+        "baselineEnabled:68",
+        "effectiveAllowedHosts:78",
+        "loadBaselineFile:96",
+        "evaluateDeploymentBaseline:173",
+        "assertDeploymentBaseline:293"
+      ],
+      "baseline_config_file": "xiyouji-agent-web/server/compliance/baseline.example.json（由 AGENT_WEB_COMPLIANCE_BASELINE_FILE 指向·改姿态进版本库⇒可审计）",
+      "startup_wiring": "xiyouji-agent-web/server/config.ts 模块加载期（config.ts 是 index.ts 的首个 import ⇒ 自检发生在 listen 之前）·不通过 ⇒ console.error + process.exit(1)",
+      "checks": [
+        "auth.token（强制 token + 最小长度 32）",
+        "net.bind_loopback（监听回环）",
+        "net.host_allowlist（Host 白名单非空且禁通配）",
+        "transport.client_tls（反代侧 TLS 终止）",
+        "transport.pg_tls（PG 后端下 AGENT_WEB_PG_SSL=require）",
+        "crypto.column_encryption（列级加密密钥存在且合法）",
+        "retention.audit_floor（审计留存期 ≥ 180 天）",
+        "audit.writable（审计落盘目录可写）"
+      ],
+      "fail_closed": "assertDeploymentBaseline 抛 ComplianceError(BASELINE_VIOLATION)⇒ 调用方拒绝启动（不是警告）",
+      "readings": {
+        "基线不满足⇒拒绝启动": "compliance.test.ts E7（断言抛错且违规清单含具体项）",
+        "基线各要素违规": "compliance.test.ts E6（7 类违规各命中 1 次）"
+      }
+    },
+    "D-3_审计流水结构化与合规降级": {
+      "event_contract": {
+        "file": "xiyouji-agent-web/server/compliance/audit-event.ts",
+        "required_fields": [
+          "schema_version",
+          "ts",
+          "event_id",
+          "actor",
+          "action",
+          "target",
+          "decision",
+          "result",
+          "data_class",
+          "trace_id",
+          "source_ip"
+        ],
+        "note": "§12.3 的 10 个规定字段 + schema_version = 11 个必填字段（AUDIT_REQUIRED_FIELDS 可枚举）"
+      },
+      "writer": {
+        "file": "xiyouji-agent-web/server/audit.ts",
+        "symbols": [
+          "buildAuditEvent:182",
+          "appendAudit:339",
+          "readAudit:357",
+          "purgeAuditBefore:424",
+          "purgeExpiredAudit:507",
+          "auditDegradation:146",
+          "auditDegradationMarkerPath:112",
+          "clearAuditDegradation:522"
+        ],
+        "backward_compat": "既有字段（ts/sessionId/tool/phase/decision/kind/path/command/bytes/isError/reason）一字未动；新字段调用方可选提供、服务端派生默认值 ⇒ 存量日志行仍可解析（C-7 只增不改）"
+      },
+      "f10_degradation": {
+        "semantics": "写入失败 ⇒ ① console.error 告警（保留既有「[audit] 写入失败」前缀·明示合规降级）② 标记「合规降级」（进程内 + 落盘 data/audit.degraded.json⇒重启后仍可见）③ 开缺口窗口（起点＝最后一次成功写入）④ 恢复时补记一条缺口事件（start/end/failures）",
+        "no_backfill": "缺口期间丢失的事件不可补造（F10 原文：审计缺失期间不可补·如实记录缺口窗口）",
+        "service_continuity": "保留 fail-open（审计失败绝不带崩工具调用）——F10 原文即「服务继续但标记合规降级」"
+      },
+      "retention_and_destroy": {
+        "file": "xiyouji-agent-web/server/compliance/retention.ts",
+        "policies": "audit 180（硬下限）/ session 90（归档 180）/ message 90（归档 180）/ feedback 365 / content 永久（L1 不可再生）",
+        "destroy_rule": "留存期内只追加不修改；删除只允许按留存期批量销毁，且销毁动作本身写一条新事件（销毁留证·action=destroy·data_class=L4）",
+        "destroy_entrypoints": [
+          "audit.ts purgeAuditBefore / purgeExpiredAudit",
+          "compliance/audit-archive.ts purgeAuditArchiveBefore"
+        ]
+      },
+      "pg_archive": {
+        "file": "xiyouji-agent-web/server/compliance/audit-archive.ts",
+        "table": "audit_archive（复用 deploy/pg/migrations/0001_baseline.sql 既有表·实测本机 PG 16.4 列一致·未另起一套）",
+        "append_only": "INSERT ... ON CONFLICT (id) DO NOTHING（幂等重放·不覆盖旧行）",
+        "readings": "audit-archive.test.ts（真实 PG）：写入 1 行 ⇒ 重放 0 行 ⇒ 销毁 1 行 + 销毁留证 1 行仍在表内"
+      }
+    },
+    "D-4_加密口径": {
+      "module": "xiyouji-agent-web/server/storage/encryption.ts",
+      "algorithm": "AES-256-GCM（认证标签 ⇒ 密文被篡改会解密失败）",
+      "key_handling": "只从 AGENT_WEB_DATA_KEY 读；不入库、不落盘、不进日志（日志只允许出现 keyId）",
+      "aad_binding": "AAD = 表.列 ⇒ 密文不可跨列搬运",
+      "encrypted_columns": {
+        "sessions": [
+          "title"
+        ],
+        "messages": [
+          "content",
+          "tool_calls"
+        ],
+        "feedback": []
+      },
+      "sqlite_side": "同样实现（同一模块·同一 AAD 规则）——分级按数据级别而非按存储产品；单机 SQLite 也装着 L3 会话正文",
+      "pg_tls": "核对既有 deploy/pg/postgresql.conf.base（ssl=on、ssl_min_protocol_version=TLSv1.2）与 pg_hba.conf.base（无 trust）⇒ 不重复造；改由基线校验 AGENT_WEB_PG_SSL=require；本机 PG 实测 ssl=on",
+      "dual_write_note": "双写期敏感列只加密一次（dualwrite.ts）⇒ 两侧同一份密文（否则对账判「内容不等」⇒ 切读被永久阻断）",
+      "readings": {
+        "明文落库前已加密": "encryption.test.ts X6（直读底层库：content/title 均为 enc:v1: 信封·不含明文）",
+        "错误密钥读出失败且不泄露明文": "encryption.test.ts X2（抛 COMPLIANCE_ENCRYPTION_DECRYPT_FAILED·消息/明细均不含明文、密文、密钥）",
+        "密钥不落盘不进日志": "encryption.test.ts X6（扫描 .db 与 -wal 字节：明文/密钥材料均 0 命中）·X4（密钥标识可查·材料不可见）",
+        "跨列搬运失败": "encryption.test.ts X3",
+        "未配密钥⇒明文落库（现役形态不变）": "encryption.test.ts X7",
+        "双写两侧密文逐字节一致": "dualwrite.test.ts 新增用例"
+      }
+    }
+  },
+  "test_readings": {
+    "affected_files_total": 43,
+    "affected_files_pass": 43,
+    "affected_files_fail": 0,
+    "affected_files_skipped": 0,
+    "affected_files_list": [
+      "server/audit.test.ts（13）",
+      "server/compliance/compliance.test.ts（12）",
+      "server/compliance/audit-archive.test.ts（1·真实 PG 16.4）",
+      "server/storage/encryption.test.ts（7）",
+      "server/storage/storage.test.ts（4·含 SQLite 与 PG 契约 + 存量库迁移 + PG 缺列）",
+      "server/storage/dualwrite.test.ts（6）"
+    ],
+    "regression": {
+      "npm run test:server": "124 tests · 123 pass · 0 fail · 1 skipped（既有平台跳过：W817-C2b Windows 建链需特权·与本批无关）",
+      "npm run test:integration": "20 tests · 19 pass · 0 fail · 1 skipped（既有平台跳过：Windows 无 SIGTERM 语义）",
+      "node e2e/chat.e2e.mjs": "11 通过 / 0 失败（真实后端 + 真实前端 + 真实 SQLite·含会话/消息/反馈落库断言）",
+      "npx tsc -b": "退出码 0（无输出）"
+    },
+    "pg_environment": "本机 PG 16.4（127.0.0.1:5432）·凭据只从 %LOCALAPPDATA%\\pg16\\w934_pg.env 读入环境变量·口令未写入任何代码/证据/输出"
+  },
+  "decision_table": [
+    {
+      "item": "§12.1 四级目录",
+      "status": "原样落地",
+      "detail": "L1/L2/L3/L4 四级 + 判定标准 + 本项目落点 + 存储要求 + 传输要求逐字落进 DATA_CLASS_CATALOG（E1 逐字断言·改口径即红）",
+      "basis": "方案 §12.1"
+    },
+    {
+      "item": "§12.2 缺口 5「入库强制校验」",
+      "status": "分档落地（收窄默认行为）",
+      "detail": "强制模式：缺标签拒绝入库（COMPLIANCE_DATA_CLASS_MISSING）；显式非法值任何模式都拒绝（COMPLIANCE_DATA_CLASS_INVALID）；非强制模式（默认）：缺标签由分级目录按资源种类推导并落库",
+      "narrowed": "默认模式下不拒绝缺标签",
+      "reason": "现役 4 个建行调用点（routes.ts 的 createSession/insertFeedback、chat.ts 的 createSession/createMessage×2）属另一子任务（检索接入）的所有权，本批不得改；改默认会破坏现役与 E2E。落库标签在两种模式下都存在（C-6 的「带标签」在存储层始终成立）",
+      "unlock": "控制器/该子任务给 4 个调用点补 data_class 后，可把默认切到强制（改 data-class.ts:192 的开关口径）",
+      "basis": "server/compliance/data-class.ts:192/205 · storage.test.ts runComplianceCases"
+    },
+    {
+      "item": "§12.2 缺口 2「强制鉴权升格为部署基线」",
+      "status": "原样落地（不改默认行为）",
+      "detail": "交付物是部署基线的形式化：基线配置文件 + 启动期基线自检（config.ts 模块加载期·index.ts 首个 import⇒自检在 listen 之前）+ fail-closed（不通过⇒exit 1）。现役「AGENT_WEB_REQUIRE_TOKEN=1 且未设 token ⇒ 拒绝启动」的事实原样保留",
+      "basis": "server/compliance/baseline.ts · server/config.ts"
+    },
+    {
+      "item": "基线要素「监听回环」",
+      "status": "收窄（声明式）",
+      "detail": "基线校验 AGENT_WEB_BIND_HOST（缺省 127.0.0.1，与 index.ts 现役硬编码一致）；声明了非回环即违规",
+      "narrowed": "不改 index.ts 的实际 bind（属他人所有权）",
+      "reason": "server/index.ts 在禁区清单内；基线以「声明必须合规」的方式实现同一约束，不越界改线",
+      "basis": "server/compliance/baseline.ts:173（net.bind_loopback）"
+    },
+    {
+      "item": "§12.2 缺口 4「fail-open 静默 ⇒ 告警 + 合规降级标记（F10）」",
+      "status": "原样落地（保留 fail-open 的不中断语义）",
+      "detail": "告警 + 降级标记（进程内 + 落盘）+ 缺口窗口如实记录（恢复时补记一条缺口事件）；缺口期间丢失的事件不可补造",
+      "basis": "server/audit.ts recordAuditFailure/onAuditSuccess · audit.test.ts A10/A11"
+    },
+    {
+      "item": "§12.3 审计事件 11 字段 + C-7 只增不改",
+      "status": "原样落地",
+      "detail": "11 个必填字段（§12.3 的 10 个 + schema_version）；既有字段一字未动；存量旧格式行仍可解析（A9 实测）",
+      "basis": "server/compliance/audit-event.ts · audit.test.ts A8/A9"
+    },
+    {
+      "item": "§12.2 缺口 3「PG 归档 + 只追加 + ≥180 天留存」",
+      "status": "原样落地（销毁的触发时机未做调度）",
+      "detail": "归档复用既有 audit_archive 表（不另起一套·实测列一致）；只追加（ON CONFLICT DO NOTHING·授权 SQL 待控制器落迁移）；留存按类别可配、审计默认且下限 180 天",
+      "narrowed": "未实现定时销毁调度",
+      "reason": "仓内无调度器归属；提供的是可调用的销毁入口（purgeAuditBefore / purgeExpiredAudit / purgeAuditArchiveBefore），调度由控制器接 cron/运维",
+      "basis": "server/compliance/audit-archive.ts · server/audit.ts:424/507"
+    },
+    {
+      "item": "§12.4 加密口径",
+      "status": "原样落地 + 一处扩展",
+      "detail": "PG L3/L4 列级加密用应用层 AES-256-GCM（密钥不入库·只从环境变量读）；服务端↔PG 的 TLS 口径核对既有部署基线（ssl=on/TLSv1.2·pg_hba 无 trust）⇒ 不重复造，改由基线校验 AGENT_WEB_PG_SSL=require",
+      "extended": "SQLite 侧同样加密（同一模块）",
+      "reason": "§12.4 的加密要求按数据级别（L3/L4）而非按存储产品；单机部署的 SQLite 同样装着 L3 会话正文，不加密即缺口。两后端共用同一实现⇒ 不存在双标",
+      "basis": "server/storage/encryption.ts · deploy/pg/postgresql.conf.base:108-113 · deploy/pg/pg_hba.conf.base"
+    },
+    {
+      "item": "§12.4「列级加密（敏感列）」的列范围",
+      "status": "收窄（表级分级 → 列级加密）",
+      "detail": "仅 sessions.title / messages.content / messages.tool_calls 加密；L2 反馈表不加密",
+      "narrowed": "不是整表所有列都加密",
+      "reason": "分级是表级的、加密是列级的：会话行的 id/model/时间戳不是敏感内容；§12.1 对 L2 的存储要求是「DB 明文或列级加密」⇒ 可不加密",
+      "basis": "server/compliance/data-class.ts SENSITIVE_COLUMNS"
+    },
+    {
+      "item": "加密的启用口径",
+      "status": "口径自定（依据性）",
+      "detail": "加密随「密钥存在」启用（不随基线开关）",
+      "reason": "避免「配了密钥却不加密」的静默态；基线额外要求密钥必须存在",
+      "basis": "server/storage/encryption.ts resolveEncryptionKey"
+    },
+    {
+      "item": "§12.5 留存期",
+      "status": "原样落地 + 一处收窄（审计下限做成硬下限）",
+      "detail": "审计默认 180 天且**硬下限 180**（配置低于它 ⇒ 启动期拒绝）；会话/消息 90（归档 180）；反馈 365；L1 公开内容永久",
+      "narrowed": "审计留存期不能被环境变量调到 180 天以下",
+      "reason": "若 180 可被随手调到 30，「≥180 天」就退化成一个可关掉的开关。§12.5 的「最终以本单位定级备案与测评方案为准」需要改口径时 ⇒ 改代码常量（走代码评审、进版本历史），而不是悄悄改环境变量",
+      "basis": "server/compliance/retention.ts AUDIT_RETENTION_FLOOR_DAYS · compliance.test.ts E10"
+    },
+    {
+      "item": "「备份件留存」未进销毁清单",
+      "status": "按 §9.5 口径不实现按天销毁",
+      "detail": "备份是「全量 7 份 + WAL 14 天」，不是按天数销毁的数据类别",
+      "basis": "方案 §9.5 / §12.5"
+    }
+  ],
+  "not_completed": [
+    {
+      "item": "PG 业务表的 data_class 迁移文件未落",
+      "reason": "deploy/pg/** 属另一子任务（PG 部署件）地盘·本批禁改",
+      "impact": "PG 后端在迁移落库前写入会抛 COMPLIANCE_SCHEMA_OUT_OF_DATE（已实测该错误路径）",
+      "todo": "控制器落 deploy/pg/migrations/0003_compliance_columns.sql（内容 = server/compliance/schema.ts 的 pgComplianceDdl() 输出·三张表各加 data_class 列）"
+    },
+    {
+      "item": "审计归档未接进写入主路径",
+      "reason": "appendAudit 是同步 fail-open 函数；接归档需异步/后台队列，且 index.ts/routes.ts 属他人所有权",
+      "impact": "PG audit_archive 目前由显式调用 archiveAuditEvents 写入，JSONL 流水仍是主路径",
+      "todo": "控制器决定接线方式（写入后 best-effort 异步归档 / 运维批处理扫描 JSONL 归档）"
+    },
+    {
+      "item": "audit_archive 的「只追加」授权未落库",
+      "reason": "REVOKE/GRANT 属迁移内容（deploy/pg/** 禁区）",
+      "impact": "当前应用账号理论上仍可 UPDATE/DELETE audit_archive（应用层不提供这两条路径）",
+      "todo": "控制器在 0003 迁移里加 server/compliance/schema.ts 的 pgAuditAppendOnlyGrants('xiyouji_app')"
+    },
+    {
+      "item": "强制模式下 API 侧错误未映射为 400",
+      "reason": "server/routes.ts / server/chat.ts 属另一子任务",
+      "impact": "强制模式下建会话缺标签会抛 ComplianceError，由现役错误处理兜住（多半是 500）",
+      "todo": "控制器/该子任务在路由错误处理里用 complianceHttpStatus(err.code) 映射（400 数据类 / 503 基线类）"
+    }
+  ],
+  "controller_todos": [
+    {
+      "priority": "P0",
+      "file": "xiyouji-agent-web/package.json",
+      "action": "把 3 个新测试文件加入 test:server 脚本的文件清单",
+      "detail": "server/compliance/compliance.test.ts、server/compliance/audit-archive.test.ts、server/storage/encryption.test.ts",
+      "why": "本批禁改 package.json；不入清单则 CI 不跑这 43 例断言"
+    },
+    {
+      "priority": "P0",
+      "file": "xiyouji-agent-web/deploy/pg/migrations/0003_compliance_columns.sql",
+      "action": "新建迁移：业务三表加 data_class 列（幂等 ALTER TABLE ADD COLUMN IF NOT EXISTS）+ audit_archive 只追加授权",
+      "detail": "DDL 内容须与 server/compliance/schema.ts 的 pgComplianceDdl() / pgAuditAppendOnlyGrants() 逐字一致（该文件是 DDL 事实源）",
+      "why": "PG 后端写入需要 data_class 列；缺列会抛 SCHEMA_OUT_OF_DATE"
+    },
+    {
+      "priority": "P1",
+      "file": "xiyouji-agent-web/server/routes.ts、server/chat.ts",
+      "action": "4 个建行调用点补 data_class（会话/消息 L3、反馈 L2），并把路由错误处理按 complianceHttpStatus 映射",
+      "detail": "补完后可把「入库强制校验」从推导模式切到强制模式（缺标签即拒）",
+      "why": "强制模式下缺标签的 API 写入会被拒；且 C-6 的「显式带标签」需由调用点提供"
+    },
+    {
+      "priority": "P1",
+      "file": "xiyouji-agent-web/server/index.ts",
+      "action": "（可选）把审计降级状态与归档接线暴露到就绪探针/健康检查",
+      "detail": "auditDegradation() 已可查（server/audit.ts:146）；归档接线见上",
+      "why": "§12.2 缺口 3/4 的运维可见性"
+    },
+    {
+      "priority": "P2",
+      "file": "部署侧（不在仓内）",
+      "action": "私有化部署基线落地：AGENT_WEB_COMPLIANCE_BASELINE=1 + AGENT_WEB_COMPLIANCE_BASELINE_FILE 指向 server/compliance/baseline.example.json 的副本 + AGENT_WEB_DATA_KEY + AGENT_WEB_PG_SSL=require + 反代 TLS",
+      "detail": "口令与密钥只从环境变量/仓外密钥管理注入，禁写进代码或镜像",
+      "why": "§12.2 缺口 2 的整改形态"
+    }
+  ],
+  "lessons_suggestions": [
+    "「强制校验」若要落地，必须先回答：调用点归谁？——默认严格会打断现役调用方（本批因此做成「推导/强制」双档并把开关显式化），比默默降级成「永远不校验」诚实。",
+    "对账期与随机化加密天然冲突：AES-GCM 的随机 IV 让两侧密文不同 ⇒ 对账判「内容不等」⇒ 切读被永久阻断。解法是「加密点提到双写层之上，只加密一次」——同类问题还会出现在任何随机化改写上（时间戳同族·W1204）。",
+    "「不可篡改/只追加」在应用层是口号，在数据库层是授权：REVOKE UPDATE/DELETE 才叫只追加。应用层不写 UPDATE 路径≠ 只追加。",
+    "留存期写成环境变量 = 可被随手关掉的开关。硬下限应落成代码常量（改口径要过评审、进版本历史）。",
+    "fail-open 保留与「不得静默」不矛盾：服务不中断 + 告警 + 降级标记 + 缺口窗口如实记录 = F10；只 console.error 一句 = §5.4 明令禁止的形态。"
+  ]
+}

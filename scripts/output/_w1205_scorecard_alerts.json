@@ -1,0 +1,179 @@
+{
+  "batch": "W1205-A",
+  "title": "GitHub Security and quality 面板 · Code scanning 剩余 3 条 Scorecard 整体评级告警收尾",
+  "repo": "1273984347/xiyouji",
+  "generated_at": "2026-11-10T16:30:00+08:00",
+  "panel_before": { "code_scanning_open": 3, "dependabot_open": 0 },
+  "panel_after": { "code_scanning_open": 0, "dependabot_open": 0 },
+  "alert_source": {
+    "producer": ".github/workflows/scorecard.yml",
+    "action": "ossf/scorecard-action@2d1146689b8cda280b9bc96326124645441f03bc (v2.4.4)",
+    "pinned_scorecard": "github.com/ossf/scorecard/v5 v5.5.0 (go.mod of scorecard-action@2d11466)",
+    "sarif_to_code_scanning": "github/codeql-action/upload-sarif@v3",
+    "triggers": ["cron 0 3 * * 1", "workflow_dispatch", "branch_protection_rule"],
+    "publish_results": true
+  },
+  "dismiss_reason_enum_fact": {
+    "endpoint": "PATCH /repos/{owner}/{repo}/code-scanning/alerts/{number}",
+    "allowed_dismissed_reason": ["false positive", "won't fix", "used in tests", "mitigated"],
+    "evidence": "实测 HTTP 422 回显: is not a member of [false positive, won't fix, used in tests, mitigated]",
+    "note": "用户授权口径 tolerable_risk 属 Dependabot 枚举, Code scanning 侧不可用; 逐条映射到语义最近值(见各条 mapping_to_user_intent)"
+  },
+  "alerts": [
+    {
+      "number": 65,
+      "rule_id": "CodeReviewID",
+      "rule_name": "Code-Review",
+      "severity": "high",
+      "severity_note": "SARIF rule properties: problem.severity=error, security-severity=7.0; GitHub 面板显示 severity=error",
+      "sarif_location": "no file associated with this alert (start_line=1)",
+      "sarif_message": "score is 0: Found 0/12 approved changesets -- score normalized to 0",
+      "sarif_message_previous_run": "score is 0: Found 0/25 approved changesets -- score normalized to 0",
+      "assertion_holds": true,
+      "code_evidence": [
+        "checks/evaluation/code_review.go CodeReview(): OutcomeNotApplicable=>CreateInconclusiveResult; OutcomeTrue=>max; 否则按 approved/total 比例分",
+        "probes/codeApproved/impl.go approvedRun(): 遍历 changesets 统计 nApproved/nChanges; nApproved!=nChanges=>OutcomeFalse; !foundHumanActivity=>OutcomeNotApplicable; 否则 OutcomeTrue",
+        "probes/codeApproved/impl.go approved(): 通过条件 review.State=='APPROVED' && review.Author.Login != c.Author.Login (评审人必须 != 提交者本人)",
+        "checks/raw/code_review.go getGithubReviews(): PR 已 merge 时把 MergedBy 补成一条 APPROVED, 但 MergedBy==Author 时被上述条件否掉",
+        "checks/raw/code_review.go CodeReview(): 数据源为 ListCommits()(GraphQL history 窗口), 与 CODEOWNERS 文件是否存在无关"
+      ],
+      "repo_facts": {
+        "merged_prs_sampled": 20,
+        "merged_prs_author_equals_mergedby": "全部 (author=mergedBy=1273984347, 唯一 owner)",
+        "approved_reviews_by_other_account": 0,
+        "note": "owner 自写自合 => 结构性 0/N approved; CODEOWNERS 已存在但不参与该判定"
+      },
+      "fixable_in_repo": false,
+      "fixability_reason": "满分需 approved/total=100%, 即每个 changeset 都由不同于作者的账号 APPROVED; 单人仓无此账号 => 仓内无任何可达路径(不刷分、不臆造 reviewer)",
+      "dismiss_action": "state=dismissed, dismissed_reason=won't fix",
+      "mapping_to_user_intent": "tolerable_risk -> won't fix (语义最近: 断言成立且不修)",
+      "dismissed_comment_prefix": "W1205",
+      "state_before_dismiss": "open",
+      "state_after_dismiss": "dismissed",
+      "state_after_rerun": "dismissed (未复活)",
+      "instance_commit_sha_after_rerun": "d3b549f55c861c7d2182ae96036b7a6085deceb5"
+    },
+    {
+      "number": 62,
+      "rule_id": "FuzzingID",
+      "rule_name": "Fuzzing",
+      "severity": "medium",
+      "severity_note": "SARIF rule properties: problem.severity=warning, security-severity=4.0; GitHub 面板显示 severity=error",
+      "sarif_location": "no file associated with this alert (start_line=1)",
+      "sarif_message": "score is 0: project is not fuzzed: Warn: no fuzzer integrations found",
+      "assertion_holds": true,
+      "code_evidence": [
+        "checks/evaluation/fuzzing.go Fuzzing(): 任一 finding OutcomeTrue => CreateMaxScoreResult(project is fuzzed); 否则 CreateMinScoreResult(project is not fuzzed)",
+        "probes/fuzzed/impl.go Run(): raw.FuzzingResults.Fuzzers 为空 => NewFalse(no fuzzer integrations found)",
+        "checks/raw/fuzzing.go Fuzzing(): 只认三种形态 => checkCFLite(.clusterfuzzlite/Dockerfile) / checkOSSFuzz(OSS-Fuzz project.yaml) / checkFuzzFunc(显著语言的 languageFuzzSpecs)",
+        "checks/raw/fuzzing.go checkFuzzFunc(): 仅当 lang 出现在 getProminentLanguages 结果中才扫描该语言",
+        "checks/raw/fuzzing.go getProminentLanguages(): 门槛 = (总字节/语种数)/4; 显著 => loC >= 门槛",
+        "checks/raw/fuzzing.go languageFuzzSpecs[TypeScript/JavaScript]: 只认 fast-check import 正则, 不认 Jazzer.js",
+        "clients/githubrepo/languages.go languagesHandler.setup(): 取 GitHub /languages 的字节数当作 NumLines"
+      ],
+      "repo_facts": {
+        "languages_api_bytes_total": 90185399,
+        "languages_api_num_langs": 11,
+        "prominent_threshold_bytes": 2049668,
+        "prominent_languages": ["HTML", "Python"],
+        "typescript_bytes": 605934,
+        "typescript_is_prominent": false,
+        "python_is_prominent": true,
+        "python_spec_requires": "import atheris (仓内 0 命中)",
+        "html_has_no_language_fuzz_spec": true,
+        "existing_fastcheck_marker": "xiyouji-agent-web/fuzz/fastcheck.test.ts:19 import fc from fast-check (形态正确, 但 TS 非显著 => 探针未扫 TS)",
+        "real_fuzzing_present": true,
+        "real_fuzzing_evidence": [
+          "xiyouji-agent-web/fuzz/fuzz.ts (Jazzer.js 覆盖率引导 fuzz target)",
+          "xiyouji-agent-web/fuzz/fastcheck.test.ts (fast-check 属性测试)",
+          "xiyouji-agent-web/package.json scripts.fuzz = jazzer fuzz fuzz -- -runs=100",
+          ".github/workflows/fuzz.yml (push/PR 触发, 跑 npm run fuzz + npm run test:prop)"
+        ]
+      },
+      "fixable_in_repo": false,
+      "fixability_reason": "仓内已有正确形态的 fast-check 标记, 但探针在扫描前就被显著语言门槛挡掉(TS 605934 < 门槛 2049668); 门槛被 site/ 构建产物的 78.5MB HTML 撑高 => 根因在 .gitattributes 的 linguist 属性(不在本子任务文件所有权内), 本子任务不越界改",
+      "root_cause_fix_proposal_for_controller": {
+        "file": ".gitattributes",
+        "change": "为 site/** 加 linguist-generated=true 或 linguist-vendored=true, 使 GitHub 语言统计不计入 site/ 构建产物",
+        "expected_effect": "总字节从 90185399 降至约 11629670 => 门槛从 2049668 降至约 264310 => TypeScript(605934) 与 JavaScript 变显著 => 仓内现有 fast-check 标记即被 probes/fuzzed 识别 => Fuzzing 满分",
+        "supporting_evidence": "GitHub /languages 已排除 docs/ (HTML 79750689 = 全部 .html 79889413 - docs 的 138724, 差值精确吻合) => 证明 linguist 排除语义在 /languages 上确实生效",
+        "verification": "改后需重跑 scorecard.yml 并复查 open 计数"
+      },
+      "dismiss_action": "state=dismissed, dismissed_reason=mitigated",
+      "mapping_to_user_intent": "tolerable_risk -> mitigated (语义最近: 真实 fuzz 风险已由仓内 Jazzer.js+fast-check 覆盖)",
+      "dismissed_comment_prefix": "W1205",
+      "state_before_dismiss": "open",
+      "state_after_dismiss": "dismissed",
+      "state_after_rerun": "dismissed (未复活)",
+      "instance_commit_sha_after_rerun": "d3b549f55c861c7d2182ae96036b7a6085deceb5"
+    },
+    {
+      "number": 66,
+      "rule_id": "CIIBestPracticesID",
+      "rule_name": "CII-Best-Practices",
+      "severity": "low",
+      "severity_note": "SARIF rule properties: problem.severity=recommendation, security-severity=1.0; GitHub 面板显示 severity=error",
+      "sarif_location": "no file associated with this alert (start_line=1)",
+      "sarif_message": "score is 0: no effort to earn an OpenSSF best practices badge detected",
+      "assertion_holds": true,
+      "code_evidence": [
+        "checks/raw/cii_best_practices.go CIIBestPractices(): results.Badge = c.CIIClient.GetBadgeLevel(c.Ctx, c.Repo.URI())",
+        "clients/cii_http_client.go GetBadgeLevel(): GET https://www.bestpractices.dev/projects.json?url=<repo URI>; 响应长度<1 => BadgeLevel=NotFound",
+        "probes/hasOpenSSFBadge/impl.go Run(): Badge 为 NotFound(不在 Gold/Silver/Passing/InProgress/Unknown 枚举内) => 走 default 分支 => OutcomeFalse Project does not have an OpenSSF badge",
+        "checks/evaluation/cii_best_practices.go CIIBestPractices(): OutcomeFalse => CreateMinScoreResult(no effort to earn an OpenSSF best practices badge detected); 徽章等级分 Passing=5/Silver=7/Gold=10/InProgress=2",
+        "scorecard-action policies/template.yml: CII-Best-Practices score=5 mode=enforced (未达标即出 result)"
+      ],
+      "repo_facts": {
+        "cii_api_probe": "GET https://www.bestpractices.dev/projects.json?url=https://github.com/1273984347/xiyouji => HTTP 200, 响应体 []",
+        "badge_level": "NotFound",
+        "reachable_paths_in_repo": "无(徽章来自 CII Best Practices 外部登记与评审流程)"
+      },
+      "fixable_in_repo": false,
+      "fixability_reason": "徽章等级完全由外部 CII 登记决定, 仓内无任何可达路径; 按用户要求不申请认证、不伪造徽章",
+      "dismiss_action": "state=dismissed, dismissed_reason=won't fix",
+      "mapping_to_user_intent": "tolerable_risk -> won't fix (语义最近: 断言成立且不修)",
+      "dismissed_comment_prefix": "W1205",
+      "state_before_dismiss": "open",
+      "state_after_dismiss": "dismissed",
+      "state_after_rerun": "dismissed (未复活)",
+      "instance_commit_sha_after_rerun": "d3b549f55c861c7d2182ae96036b7a6085deceb5"
+    }
+  ],
+  "rerun_verification": {
+    "required_by_brief": true,
+    "trigger_command": "gh workflow run scorecard.yml --repo 1273984347/xiyouji",
+    "run_id": 42854082530,
+    "run_url": "https://github.com/1273984347/xiyouji/actions/runs/42854082530",
+    "run_status": "success",
+    "run_head_sha": "d3b549f55c861c7d2182ae96036b7a6085deceb5",
+    "run_created_at": "2026-11-10T16:23:41Z",
+    "run_updated_at": "2026-11-10T16:25:21Z",
+    "code_scanning_open_after_rerun": 0,
+    "revived": false,
+    "revived_detail": "三条告警在重跑后仍为 dismissed, 且 most_recent_instance.commit_sha 已更新为本次 run 的 d3b549f5 => GitHub 端确实收到了新 SARIF 的同指纹结果并沿用了 dismissed 状态, 未复活为 open",
+    "fingerprint_stability_reason": "pkg/scorecard/sarif.go createSARIFCheckResult 不写 partialFingerprints => GitHub 按 (ruleId + location) 生成默认指纹; 三条 location 恒为 no file associated with this alert + startLine=1 => 指纹稳定",
+    "fingerprint_change_evidence": "重跑 SARIF 里 CodeReviewID 消息由 Found 0/25 approved changesets 变为 Found 0/12 approved changesets (窗口内 changeset 数变化) 但告警编号与 dismissed 状态未变 => 指纹不含消息文本"
+  },
+  "script": {
+    "path": "scripts/dismiss_scorecard_alerts.py",
+    "modes": ["--dry-run", "--apply", "--revert", "--emit-json"],
+    "credential_handling": "凭据只由 gh CLI 自身管理(gh auth status), 脚本不读环境变量令牌、不打印任何令牌或连接串",
+    "idempotent": true,
+    "revert_scope": "只回滚 dismissed_comment 以 W1205 开头的告警(本脚本留下的), 不动他人关闭的告警",
+    "roundtrip_test": {
+      "revert": "命中 3 条 · reverted ok=3 fail=0 · open now: 3",
+      "reapply": "命中 3 条 · dismissed ok=3 fail=0 · open now: 0"
+    }
+  },
+  "unit_test": {
+    "path": "tests/unit/test_dismiss_scorecard_alerts.py",
+    "cases": 11,
+    "result": "11 passed"
+  },
+  "not_done_by_design": [
+    "未改 .gitattributes(Fuzzing 根因修法所需, 不在本子任务文件所有权内)",
+    "未改 .github/CODEOWNERS(该文件不影响 Code-Review 判定, 改动无意义)",
+    "未改 xiyouji-agent-web/fuzz/fuzz.ts 与 fastcheck.test.ts(形态已正确, 加标记无效)",
+    "未改 docs/CHANGELOG.md/HANDOVER.md/AGENTS.md/pitfalls.md 等禁区文件"
+  ]
+}

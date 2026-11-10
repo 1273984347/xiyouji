@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（107）
+## 文件（110）
 
 ### Python 脚本
 
@@ -30,6 +30,7 @@
 - `test_check_db_schema.py`
 - `test_check_interaction_binding.py`
 - `test_check_no_goatcounter.py`
+- `test_check_no_hardcoded_endpoint.py`
 - `test_check_page_admission.py`
 - `test_check_plan_template.py`
 - `test_check_script_coverage.py`
@@ -40,6 +41,7 @@
 - `test_cross_line_rewrite.py`
 - `test_d3_data_processors.py`
 - `test_dismiss_pillow_alerts.py`
+- `test_dismiss_scorecard_alerts.py`
 - `test_doc_size_budget.py`
 - `test_docs_index.py`
 - `test_embed_json.py`
@@ -120,6 +122,7 @@
 - `test_w1165_mobile_viewport.py`
 - `test_w1167_nav_badge.py`
 - `test_w1168_stat_events.py`
+- `test_w1205_batch_scripts.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 
