@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（217）
+## 文件（218）
 
 ### Python 脚本
 
@@ -178,6 +178,7 @@
 - `drl_spotcheck.py`
 - `embed_json.py`
 - `export_design_tokens.py`
+- `external_rule_scope.py`
 - `extract_strings.py`
 - `fetch_gate_stats.py`
 - `file_protocol_probe.py`

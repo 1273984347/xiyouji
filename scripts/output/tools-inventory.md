@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-10 14:30
+生成时间：2026-11-10 15:33
 
-共 **208** 件（门禁与校验 98 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 80 · 一次性（下划线前缀） 7）
+共 **209** 件（门禁与校验 98 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 81 · 一次性（下划线前缀） 7）
 
 ## 门禁与校验（98）
 
@@ -154,7 +154,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（80）
+## 工具（81）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -186,6 +186,7 @@
 | `drl_spotcheck.py` | drl_spotcheck.py — DRL 真循环 spot-check 工具 |
 | `embed_json.py` | embed_json.py — 通用 JSON 嵌入工具 |
 | `export_design_tokens.py` | export_design_tokens.py — 设计令牌机器可读导出（PD-5 · W652） |
+| `external_rule_scope.py` | external_rule_scope.py — W1197：外部规则扫描面的共享识别。 |
 | `extract_datasets.js` | extract_datasets.js — 从 site/data/*.html 提取 EMBEDDED_DATA 为 dataset/*.js |
 | `extract_strings.py` | Dump every chrome text node and every CJK-bearing script literal from a  |
 | `file_protocol_probe.py` | file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊断件·不入  |
