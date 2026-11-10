@@ -161,7 +161,7 @@
 ## 三、方法论沉淀
 
 > **经验总入口（W755 指针化·W973 真指针化收口）**：现役坑位与门禁读
-> [pitfalls.md](pitfalls.md)（310 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（67 槽）；
+> [pitfalls.md](pitfalls.md)（311 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（67 槽）；
 > 诊断 SOP 读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)；
 > 本区历史叙事全文已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查）。
 ## 四、待办事项（短期）

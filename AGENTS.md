@@ -192,7 +192,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 > **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 224 条仍在本节下方的 pitfalls；两者是「速查 → 详查」关系，不重复维护。
 > **🔥 火眼金睛 skill（W1149 建·`huoyan-jinjing`）**：全仓巡检速查 [`.agent/skills/huoyan-jinjing/SKILL.md`](.agent/skills/huoyan-jinjing/SKILL.md)——五维扫描（覆盖/失败语义/CI 形态/数据血缘/同类复发）+ 判据 fail-closed + 数据分级 + manifest 对拍 + 链接/内联 + 修复三原则；完整方法论文档在 [docs/10-方法论沉淀/全仓深度审计SOP-可复用.md](docs/10-方法论沉淀/全仓深度审计SOP-可复用.md)，可执行入口 `scripts/audit_repo.py`。
 
-> **📖 阅读契约（W709）**：索引型——310 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——311 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
@@ -200,7 +200,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **占号共享区纪律（W1110·E-128·W1121 根修）**：`reserve_w.py` 的预约集在 W1120 前只写工作树内 `tmpe/_w_reservations.json`（已 gitignore）⇒ 共享范围=工作树而非仓库 ⇒ 隔离 clone/并行 worktree 的占号他方看不见 ⇒ 实测撞号。**W1121 根修**＝取号集合改「本仓表 + 同机兄弟克隆表 + 用户级共享表」三源并集（同名取 ts 最新·写共享表前先合并他人记录不覆盖）+ session 标识含仓路径指纹 + 同号多会话打印跨克隆撞号预警 + release 只撤本工作树且 session 相同的号。**纪律**：落段前复核「本批号仍在预约集内」，且占号必须在与并行会话共享的克隆里执行（叙事与实证细节 → pitfalls E-128）。
 
-**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（12）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（177）
+**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（12）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（178）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。

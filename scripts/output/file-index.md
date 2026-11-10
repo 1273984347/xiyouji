@@ -10,8 +10,8 @@
 | .github/workflows/screenshot-review.yml | W1195 | 改：npm 安装改 npm ci --prefix scripts + pip 安装改 --require-hashes |
 | .github/workflows/security.yml | W1195 | 改：pip-audit 安装改 --require-hashes 哈希化清单 |
 | .github/workflows/workflow-lint.yml | W1195 | 改：PyYAML 安装改 --require-hashes 哈希化清单 |
-| scripts/lighthouse/package.json | W1195 | 新建：lhci 独立安装单元（仅 @lhci/cli 0.13.0）|
-| scripts/lighthouse/package-lock.json | W1195 | 新建：lhci 锁文件（348 包·resolved 全为 registry.npmjs.org）|
+| scripts/lighthouse/package.json | W1195 | 新建：lhci 独立安装单元（@lhci/cli 0.16.0·含 basic-ftp 的 overrides 6.2.6）|
+| scripts/lighthouse/package-lock.json | W1195 | 新建：lhci 锁文件（356 包·resolved 全为 registry.npmjs.org·basic-ftp 锁 6.2.6·无 extract-zip）|
 | pitfalls.md | W1195 | 改：E-215 入表（外部规则必须读判据源码）|
 | AGENTS.md | W1195 | 改：坑表计数链同步 |
 | HANDOVER.md | W1195 | 改：坑表计数链同步 |
