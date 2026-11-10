@@ -151,7 +151,11 @@ def _self_test() -> int:
         def case(label, expect_codes, pages, expected=None):
             nonlocal ok
             got = check_pages(expected or {"zh": exp_zh, "en": exp_en}, pages)
-            hit = [g for g in got if any(g.startswith(c) for c in expect_codes)] if expect_codes else []
+            hit = []
+            if expect_codes:
+                for g in got:
+                    if any(g.startswith(c) for c in expect_codes):
+                        hit.append(g)
             passed = (not got) if not expect_codes else bool(hit)
             print("  %s %s" % ("PASS" if passed else "FAIL", label))
             if not passed:
@@ -216,7 +220,7 @@ def main() -> int:
     if getattr(gen, "jieba", None) is None:
         print(MARKER + "1 FAIL")
         print("  FAIL 环境缺 jieba（索引关键词依赖·缺则 kw 退化为逐字）——本槽不可判定，"
-              "禁静默跳过（装依赖：pip install -r scripts/requirements.txt）")
+              "禁静默跳过（装依赖：pip install --require-hashes -r scripts/requirements-hashed.txt）")
         return 1
 
     try:

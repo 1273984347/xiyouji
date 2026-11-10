@@ -138,7 +138,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W1197（2026-11-10）**：守卫扫描面扩到全仓 shell：check_install_pins 与 check_action_refs 各管一面 并接入 CI 阻断·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
+> **当前批次 W1198（2026-11-10）**：Dependabot 41 条 Pillow 告警归零：删除后重建 scripts/requirements.txt 触发依赖图条目重算 清掉残留 pillow@12.3.0 条目  CI 判据同源修正·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1132（2026-11-04）**：提交范围门禁兜底分支透传 merge 带入面 + 带入段不再劫持归属 + 单测 4 例 + 计数链不动·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1133（2026-11-05）**：台账回填 + 坑表经验入表 + W1125 批登记面缺陷修复 D1/D2/D3·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 > **当前批次 W1134（2026-11-04）**：前端质感 P0 批五项改动 + 双探针取证：暗色字重降档 / 中文输入防误发与阈值滚动 / 复制对勾淡出 / 打印样式去硬编码·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->

@@ -348,14 +348,15 @@ def test_workflow_yaml_is_parseable():
                 "%s:%d 的 %s 值是未加引号的裸标量且含 ': '——YAML 映射歧义，"
                 "GitHub 会以「workflow file issue」0 秒失败该 workflow 且 PR 不生成 "
                 "check（请给该值加引号）" % (f.name, lineno, key))
-        # J3：PyYAML 全量解析（加严）——W813 起 PyYAML 已登记进 requirements.txt，
+        # J3：PyYAML 全量解析（加严）——PyYAML 已登记进 CI 真实安装源
+        #     requirements-hashed.txt（W1195 起 CI 安装源已改哈希化清单·W1198 改绑），
         #     CI 恒有该包；若缺失即判红（禁静默跳过假绿——原实现正是因此让 J3 在 CI 恒失效）
         try:
             import yaml
         except ImportError as exc:
             raise AssertionError(
                 "PyYAML 不可用——J3 全量解析判据不可用（PyYAML 已登记进 "
-                "scripts/requirements.txt·CI 应恒有该包）：%s" % exc
+                "scripts/requirements-hashed.txt·CI 应恒有该包）：%s" % exc
             ) from exc
         try:
             yaml.safe_load(text)
@@ -436,14 +437,16 @@ def test_guard_accepts_quoted_and_block_scalar_forms(tmp_path):
 
 
 def test_pyyaml_is_registered_in_requirements():
-    """W813：PyYAML 必须登记进 scripts/requirements.txt——否则 J3 在 CI 静默跳过。
+    """W1198：PyYAML 必须登记进 CI 真实安装源 scripts/requirements-hashed.txt——否则 J3 在 CI 静默跳过。
 
-    这是 J3 恒生效的前提条件：CI 的 pytest-unit job 只装本文件。
+    W813 立此判据时 CI 的 pytest-unit job 装的是 scripts/requirements.txt；W1195 起 CI 的
+    全部 pip 安装点已改用哈希化清单 scripts/requirements-hashed.txt ⇒ 原判据绑定的文件
+    已不再是 CI 安装源（判据漂移·本地绿而 CI 装的是另一份清单）。本批改绑真实安装源。
     缺登记 → J3 走 ImportError 分支 → 守卫只剩 J1+J2 → 覆盖面塌缩。
     """
-    req = (ROOT / "scripts" / "requirements.txt").read_text(encoding="utf-8")
-    assert "PyYAML" in req, "PyYAML 未登记进 requirements.txt——J3 在 CI 将静默跳过"
-    assert re.search(r"^PyYAML==\S+", req, re.M), "PyYAML 须固定精确版本（P2-7 供应链纪律）"
+    req = (ROOT / "scripts" / "requirements-hashed.txt").read_text(encoding="utf-8")
+    assert re.search(r"(?im)^pyyaml==", req), "PyYAML 未登记进 requirements-hashed.txt——J3 在 CI 将静默跳过"
+    assert re.search(r"(?im)^pyyaml==[\w.]+", req), "PyYAML 须固定精确版本（P2-7 供应链纪律）"
 
 
 def test_screenshot_scope_wired_into_workflow():

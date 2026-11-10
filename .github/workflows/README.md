@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1197** — 西游记解读项目（`D:\xiyouji`，W1197）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1198** — 西游记解读项目（`D:\xiyouji`，W1198）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -19,7 +19,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
-> **W450-W1197**：verify 门禁体系扩展（区间号滚动推进自本行；逐批明细自 W1157 起追加 [archive/docs/workflows-readme-history.md](../../archive/docs/workflows-readme-history.md)，原单行累计已拆档）。
+> **W450-W1198**：verify 门禁体系扩展（区间号滚动推进自本行；逐批明细自 W1157 起追加 [archive/docs/workflows-readme-history.md](../../archive/docs/workflows-readme-history.md)，原单行累计已拆档）。
 
 ## 1. 工作流列表
 
@@ -67,7 +67,7 @@
 
 ### Job 4 · `dependency-scan`（pip-audit）
 
-- **流程**：`pip-audit -r scripts/requirements.txt -f json -o pip-audit-report.json`
+- **流程**：`pip-audit -r scripts/requirements-hashed.txt -f json -o pip-audit-report.json`
 - **artifact**：`pip-audit-report`（保留 30 天）
 
 ### Job 5 · `code-quality`（ruff）
@@ -79,7 +79,7 @@
 ### Job 6 · `pytest-unit`（单元测试）
 
 - **运行环境**：`ubuntu-latest` + Python 3.12
-- **流程**：`pip install -r scripts/requirements.txt` → `python -m pytest tests -q`（W401 补齐 + DRL 修复：原 ci.yml 五 job 未覆盖 Python 单元测试；pytest.ini `testpaths=tests` + `--ignore=tests/e2e`，浏览器测试移入 tests/e2e/ 由 screenshots-regression job 覆盖）
+- **流程**：`pip install --require-hashes -r scripts/requirements-hashed.txt` → `python -m pytest tests -q`（W401 补齐 + DRL 修复：原 ci.yml 五 job 未覆盖 Python 单元测试；pytest.ini `testpaths=tests` + `--ignore=tests/e2e`，浏览器测试移入 tests/e2e/ 由 screenshots-regression job 覆盖）
 - **本地验证**：`py -3 -m pytest tests -q` → 321 passed（2026-08-09 DRL 修复后实测）
 
 ### Job 7 · `agent-web-build`（xiyouji-agent-web 前端构建）
@@ -93,7 +93,7 @@
 ### Job 8 · `verify-delivery`（交付校验门禁，W424 新增）
 
 - **运行环境**：`ubuntu-latest` + Python 3.12 + Node 20
-- **流程**：`pip install -r scripts/requirements.txt` → `python scripts/run_all.py`（重新生成 scripts/output/data/*.json，生成物未入库）→ `python scripts/verify_delivery.py`——门禁集合以 scripts/verify_delivery.py 现役为准（编号至 27·16/26 预留退役；与本地 pre-commit 同轨，无 workflow 结构改动）
+- **流程**：`pip install --require-hashes -r scripts/requirements-hashed.txt` → `python scripts/run_all.py`（重新生成 scripts/output/data/*.json，生成物未入库）→ `python scripts/verify_delivery.py`——门禁集合以 scripts/verify_delivery.py 现役为准（编号至 27·16/26 预留退役；与本地 pre-commit 同轨，无 workflow 结构改动）
 - **与 pre-commit 的关系**：本地 pre-commit 钩子（手动 .git/hooks/pre-commit + .pre-commit-config.yaml 双轨）已含等价检查；CI 兜底防 `--no-verify` 提交。run_all 的 2 个历史 FAIL（hardships_81/journey_route 缺 --output）已修默认值，34/34 全过。
 
 ### Job 9 · `e2e-interaction`（E2E 交互断言，W773 新增）
