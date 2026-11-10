@@ -4,7 +4,7 @@
   "private": true,
   "description": "Lighthouse CI runner deps (W1195) - locked so CI can use npm ci (Scorecard Pinned-Dependencies)",
   "dependencies": {
-    "@lhci/cli": "0.13.0"
+    "@lhci/cli": "0.16.0"
   },
   "overrides": {
     "basic-ftp": "6.2.6"

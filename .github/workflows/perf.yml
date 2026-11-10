@@ -95,7 +95,10 @@ jobs:
         if: steps.scope.outputs.run != 'false'
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
-          node-version: '20'
+          # W1195：lhci 升到 0.16.0（其 lighthouse 13.6.0 → puppeteer-core 25.16.0 →
+          # @puppeteer/browsers 3.2.6 不再拉 extract-zip，消除该 high 级漏洞）⇒
+          # @lhci/cli 0.16.0 的 engines 要求 node >= 22.19.0 ⇒ 本 job 由 Node 20 升到 22。
+          node-version: '22'
           cache: npm
           cache-dependency-path: scripts/package-lock.json
 
