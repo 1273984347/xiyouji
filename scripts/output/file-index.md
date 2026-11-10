@@ -1,3 +1,41 @@
+## W1203 架构方案 v2 档 2 施工第二子批（2026-11-10）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| AGENTS.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| CHANGELOG.md | W1203 | 立段：v2 档 2 施工第二子批 + W1202 终态收口 |
+| CITATION.cff | W1203 | 改：本批级联/索引/统计产物刷新 |
+| HANDOVER.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| STRUCTURE.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/AGENTS-ARCHIVE.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/workflows-readme-history.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| docs/00-导读/W批次编号对账表.md | W1203 | 回填：W1202 行关联 commit 61c95567 + 状态已收官 + 本批认领行 |
+| docs/00-导读/项目说明.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| docs/11-方案报告/计划方案/T96-任务计划执行与经验沉淀报告-2026-11-10.md | W1203 | 改：§8.3 补记 W1202 收官批合并提交 61c95567 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1203 | 订正：§13.6 归属批次号（原 W935/W936/W937 已被占用）→ D-2b 重取 W1203·另两项标待取号 |
+| scripts/output/INDEX.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_cascade_files_W1203.txt | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1203_spec.json | W1203 | 新建：本批 spec |
+| scripts/output/file-index.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/stats.json | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/tools-inventory.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| site/data/cross-time-danmaku.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+| site/data/tag-cloud.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+| site/dukou-engine.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+| site/index.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/package.json | W1203 | 改：test:server 挂入 dualwrite.test.ts |
+| xiyouji-agent-web/server/storage/INDEX.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/dualwrite.test.ts | W1203 | 新建：双写层契约测试 4 例（两 SQLite 实例互为两侧·无外部依赖全跑） |
+| xiyouji-agent-web/server/storage/dualwrite.ts | W1203 | 新建：双写后端（写两侧·读只走主库·副库写失败 fail-closed·返回值以主库为准·kind 沿用主库） |
+| xiyouji-agent-web/server/storage/index.ts | W1203 | 改：接入 AGENT_WEB_DB_WRITE_MODE（primary/dual·非法取值 fail-closed）+ writeMode() 可查 |
+
+
 ## W1202 GitHub「Security and quality」面板归零收官批（2026-11-10）
 
 | 文件 | W | 说明 |
