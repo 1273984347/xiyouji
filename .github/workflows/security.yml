@@ -256,4 +256,10 @@ jobs:
       - name: 校验 Dockerfile FROM 已钉 digest
         run: python3 scripts/check_docker_pin.py
 
+      - name: 校验外部规则覆盖面（含非 workflow 的 shell 面与各生态清单源）
+        # W1196：Scorecard 的依赖扫描面是 Pattern:"*"（全仓 shell）与 "*Dockerfile*"，
+        # 而本仓守卫只扫 .github/workflows 与 Dockerfile —— 面窄于规则面就会留盲区。
+        # 本守卫进一步监控「规则面×守卫面」的差集（shell 面内的安装命令 / 各生态清单的非官方源 / 守卫覆盖缺口）。
+        run: python3 scripts/check_external_rule_coverage.py
+
 # FILE_INDEX: .github/workflows/security.yml | W236-E | E8 安全工作流

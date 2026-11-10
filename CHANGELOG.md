@@ -1,3 +1,16 @@
+### W1196（2026-11-10）：外部规则覆盖面审计批（守卫扫描面宽于规则面 + 盲区监控守卫）
+
+**本批要点**（外部规则覆盖面审计·读数来自 Scorecard 源码实读与沙箱变异自证）：
+
+> - **T1 第三类复发面（本批根因）**：W1194→W1195 两批解决了「判定口径错误」与「新依赖树带漏洞」两类问题，但都依赖「人工发现规则要求」——第三类是「规则的覆盖面本身可能超出本仓守卫的扫描面」。
+> - **T2 读 Scorecard 扫描 Pattern（不只读判定函数）**：`checks/raw/pinned_dependencies.go` 的三个扫描面为 `collectShellScriptInsecureDownloads` → `Pattern: "*"`（**全仓所有 shell 脚本**）、`collectDockerfile…` → `"*Dockerfile*"`、`collectGitHubWorkflow…` → `".github/workflows/*"`。即 shell 面不只是 workflow。
+> - **T3 覆盖缺口实测（变异自证）**：本仓守卫为 workflow-only（`check_install_pins.py` / `check_action_refs.py`）。在 `scripts/` 下放一个含 `npm install somepkg@1.0.0` 与 `pip install somepkg==1.0.0` 的 `.sh` → 两个守卫均 **rc=0、无任何输出** ⇒ 确认是覆盖盲区。
+> - **T4 实测暴露面内容**：Scorecard shell 扫描面内本仓共 5 个文件（`scripts/guardrails/check_changed.sh`、`scripts/install_hooks.sh`、`xiyouji-agent-web/deploy/pg/bin/{backup,initdb-bootstrap,restore-drill}.sh`）——实测均无安装类命令（唯一命中是 `echo` 字符串内的提示文本·非真实命令），即目前无真实漏洞；但面窄本身就是未来的盲区。
+> - **T5 新增监控守卫**：`scripts/check_external_rule_coverage.py`（守卫「规则面 × 守卫面」差集：① shell 面内的安装命令、② 各生态清单的非官方 `resolved` 源、③ 守卫覆盖缺口），自证 8/8 通过，变异自证：放 shell 里未钉版安装命令 → rc=1报错；把 lock 的 `resolved` 改回第三方镜像 → rc=1报错；已接入 `security.yml` 的安装命令面守卫 job。覆盖缺口项目前以 **WARN 不阻断**（实测无真实漏洞），修法是扩守卫扫描面（另批）。
+> - **T6 新生态面核对**：全仓依赖清单仅 4 个 npm lock 与 1 个 pip 清单；无 NuGet / Go / Ruby / PHP 生态文件（Scorecard 的 NuGet / Go 面在本仓不适用）；无多阶段 Dockerfile（1 条 FROM·已钉 digest）；无其他 CI 配置文件。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
 ### W1195（2026-11-09）：Scorecard Pinned-Dependencies 真修批（pip 哈希化清单 + npm ci 化）
 
 **本批要点**（Scorecard Pinned-Dependencies 真修·读数来自 Scorecard 源码与实测）：
@@ -1155,7 +1168,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1195），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1196），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
