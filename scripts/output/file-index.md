@@ -47,6 +47,7 @@
 | site/en/search.html | W1198 | W1198 | 改：本批改动 | |
 | site/index.html | W1198 | W1198 | 生成：页脚版本行随本批版本面推进 | |
 | tests/unit/test_ci_wiring.py | W1198 | W1198 | 改：PyYAML 登记断言改绑 CI 真实安装源 requirements-hashed.txt（修 W1195 遗留判据漂移）并加回 Dependabot 监控面的第二段断言 | |
+| scripts/batch_cascade.py | W1198 | 改：W534 契约的 CHANGELOG 检查面扩到归档面（归档机制 W960 落地后的机制缺口·正本无该段时假红）|
 
 ## W1197 守卫扫描面扩到全仓 shell 批（2026-11-10）
 
