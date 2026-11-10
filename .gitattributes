@@ -5,6 +5,30 @@
 # From W993 on: blobs are LF, worktrees are LF, tools build with \n unconditionally.
 * text=auto eol=lf
 
+# Linguist: exclude generated site artifacts from language statistics (W1205)
+# Rationale: OSSF Scorecard's Fuzzing check only scans *prominent* languages, where the
+#   threshold = (total bytes from GitHub /languages) / (language count) / 4. With site/**
+#   counted in, the threshold was 2,049,668 bytes and TypeScript (605,934 B) fell below it
+#   => the probe never scanned our TS fuzz target, so Scorecard reported
+#   "no fuzzer integrations found" despite a real Jazzer.js + fast-check setup.
+#   Marking site/** as generated removes build artifacts from the statistics, so the
+#   existing fast-check marker in xiyouji-agent-web/fuzz/fastcheck.test.ts becomes visible.
+# Note: effect is verified by GitHub's async re-statistics; the next scheduled Scorecard
+#   run (weekly) is the verification point. See pitfalls E-222 / W1205 notes.
+site/** linguist-generated=true
+
+# Linguist: exclude generated site artifacts from language statistics (W1205)
+# Rationale: OSSF Scorecard's Fuzzing check only scans *prominent* languages, where the
+#   threshold = (total bytes from GitHub /languages) / (language count) / 4. With site/**
+#   counted in, the threshold was 2,049,668 bytes and TypeScript (605,934 B) fell below it
+#   => the probe never scanned our TS fuzz target, so Scorecard reported
+#   "no fuzzer integrations found" despite a real Jazzer.js + fast-check setup.
+#   Marking site/** as generated removes build artifacts from the statistics, so the
+#   existing fast-check marker in xiyouji-agent-web/fuzz/fastcheck.test.ts becomes visible.
+# Note: effect is verified by GitHub's async re-statistics; the next scheduled Scorecard
+#   run (weekly) is the verification point.
+site/** linguist-generated=true
+
 # Binary assets (explicit — never normalize)
 *.png -text
 *.webp -text

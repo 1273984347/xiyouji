@@ -1,3 +1,5 @@
+import type { DataClass } from "../compliance/data-class.js";
+
 /**
  * types.ts — M12 存储层抽象：接口与数据契约（W934 · 架构方案 v2 §8.2 档 2 · D-2a）
  *
@@ -35,6 +37,17 @@ export interface DbSession {
   created_at: string;
   /** ISO-8601 UTC 毫秒精度字符串。 */
   updated_at: string;
+  /**
+   * 数据分级标签（C-6·入库必带）。
+   *
+   * 类型上可选是为**现役调用点**（routes.ts / chat.ts）不被迫改签名；
+   * 但**运行时**由存储层强制：
+   *  - 强制模式（AGENT_WEB_COMPLIANCE_BASELINE=1 或 AGENT_WEB_COMPLIANCE_ENFORCE=1）
+   *    ⇒ 缺标签**拒绝入库**（报可枚举错误码 COMPLIANCE_DATA_CLASS_MISSING）；
+   *  - 非强制模式 ⇒ 由分级目录（server/compliance/data-class.ts）按资源种类推导并落库。
+   *  - 显式给了非法值 ⇒ **一律拒绝**（COMPLIANCE_DATA_CLASS_INVALID），不因开关而放宽。
+   */
+  data_class?: DataClass;
 }
 
 /** 消息行（与现役 SQLite `messages` 表同构）。 */
@@ -48,6 +61,8 @@ export interface DbMessage {
   created_at: string;
   /** JSON 字符串或 null（与现役一致，不做结构化解析）。 */
   tool_calls: string | null;
+  /** 数据分级标签（C-6·入库必带；会话与消息 = L3）。 */
+  data_class?: DataClass;
 }
 
 /** 反馈行（与现役 SQLite `feedback` 表同构）。 */
@@ -59,6 +74,8 @@ export interface DbFeedback {
   comment: string | null;
   /** ISO-8601 UTC 毫秒精度字符串。 */
   created_at: string;
+  /** 数据分级标签（C-6·入库必带；反馈 = L2）。 */
+  data_class?: DataClass;
 }
 
 /** 可更新字段集合（与现役函数签名一致）。 */
@@ -107,6 +124,10 @@ export interface StorageHealth {
  *  5. `clearAllData` 按 `feedback → messages → sessions` 依赖序清空（幂等）。
  *  6. `feedbackSummary(days)` 只统计 `created_at` 在窗口内的行。
  *  7. 所有 SQL **禁字符串拼接**——全部走参数化查询。
+ *  8. **入库必带分级标签**（C-6·W1205）：见各行类型的 data_class 字段说明——
+ *     强制模式下缺标签拒绝入库；非强制模式按分级目录推导后落库。
+ *  9. **L3/L4 敏感列落库即加密**（§12.4·W1205）：配置了加密密钥时，
+ *     会话标题与消息正文/工具调用在落库前加密；读出时解密（存量明文行仍可读）。
  */
 export interface StorageBackend {
   /** 后端种类（运行时可查，用于日志与断言）。 */

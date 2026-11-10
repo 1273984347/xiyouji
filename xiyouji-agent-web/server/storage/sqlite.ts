@@ -31,9 +31,20 @@ import type {
   StorageHealth,
   WriteTimeOpts,
 } from "./types.js";
+import { resolveWriteDataClass } from "../compliance/data-class.js";
+import { COMPLIANCE_COLUMNS, sqliteAddColumnDdl } from "../compliance/schema.js";
+import { decryptSensitiveColumns, encryptSensitiveColumns } from "./encryption.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+/**
+ * 单字段加密（更新路径用；幂等——已是密文信封的值原样保留）。
+ */
+function encryptField(table: string, column: string, value: string): string {
+  const row = encryptSensitiveColumns({ [column]: value } as Record<string, unknown>, table);
+  return String(row[column]);
+}
 
 /**
  * 数据库文件路径。
@@ -83,7 +94,8 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
     model TEXT NOT NULL,
     sdk_session_id TEXT,
     created_at TEXT NOT NULL,
-    updated_at TEXT NOT NULL
+    updated_at TEXT NOT NULL,
+    data_class TEXT NOT NULL DEFAULT 'L3' CHECK (data_class IN ('L1','L2','L3','L4'))
   );
 
   -- 消息表
@@ -95,6 +107,7 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
     model TEXT,
     created_at TEXT NOT NULL,
     tool_calls TEXT,
+    data_class TEXT NOT NULL DEFAULT 'L3' CHECK (data_class IN ('L1','L2','L3','L4')),
     FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
   );
 
@@ -108,7 +121,8 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
     message_id TEXT NOT NULL,
     verdict TEXT NOT NULL CHECK (verdict IN ('up', 'down')),
     comment TEXT,
-    created_at TEXT NOT NULL
+    created_at TEXT NOT NULL,
+    data_class TEXT NOT NULL DEFAULT 'L2' CHECK (data_class IN ('L1','L2','L3','L4'))
   );
   -- 同一消息唯一 verdict（W917 B-DB-01：维度由 (message_id, verdict) 收紧为 (message_id)——
   -- 原维度允许同一消息同时存在赞与踩两条互相矛盾的记录·W823 审查 P0 之三；改判走 upsert 覆盖）
@@ -163,6 +177,20 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
         d.pragma("foreign_keys = ON");
       },
     },
+    // v4（W1205 · D-3 合规批）：业务表补分级标签列（C-6·入库必带）
+    //   存量行按分级目录默认值回填（会话/消息 = L3，反馈 = L2）——
+    //   列定义的事实源在 server/compliance/schema.ts（PG 侧同名迁移由控制器落）。
+    {
+      version: 4,
+      up(d) {
+        for (const spec of COMPLIANCE_COLUMNS) {
+          const tableInfo = d.prepare("PRAGMA table_info(" + spec.table + ")").all() as Array<{ name: string }>;
+          if (!tableInfo.some((col) => col.name === spec.column)) {
+            d.exec(sqliteAddColumnDdl(spec));
+          }
+        }
+      },
+    },
   ];
   function migrate(d: import("better-sqlite3").Database): void {
     const cur = d.pragma("user_version", { simple: true }) as unknown as number;
@@ -184,36 +212,44 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
     // 获取所有会话
     // W919 B-DB-02：会话列表单 SQL 版（含 message_count 子查询·ORDER BY updated_at DESC·LIMIT）
     async listSessionsWithMessageCount(limit: number): Promise<Array<Record<string, unknown>>> {
-      return db.prepare(`
+      const rows = db.prepare(`
     SELECT s.*, (SELECT COUNT(*) FROM messages m WHERE m.session_id = s.id) AS message_count, message_count AS messageCount
     FROM (SELECT s2.*, (SELECT COUNT(*) FROM messages m2 WHERE m2.session_id = s2.id) AS message_count FROM sessions s2 ORDER BY s2.updated_at DESC LIMIT ?) AS s
   `).all(limit) as Array<Record<string, unknown>>;
+      // L3 敏感列（会话标题）读出即解密（存量明文行原样返回）
+      return rows.map((row) => decryptSensitiveColumns(row, "sessions"));
     },
 
     async getAllSessions(): Promise<DbSession[]> {
       const stmt = db.prepare("SELECT * FROM sessions ORDER BY updated_at DESC");
-      return stmt.all() as DbSession[];
+      return (stmt.all() as DbSession[]).map((row) => decryptSensitiveColumns(row, "sessions"));
     },
 
     async getSession(id: string): Promise<DbSession | undefined> {
       const stmt = db.prepare("SELECT * FROM sessions WHERE id = ?");
-      return stmt.get(id) as DbSession | undefined;
+      const row = stmt.get(id) as DbSession | undefined;
+      return row ? decryptSensitiveColumns(row, "sessions") : undefined;
     },
 
     async createSession(session: DbSession): Promise<DbSession> {
+      // C-6：入库必带分级标签（强制模式缺标签 ⇒ 拒绝；否则按分级目录推导）
+      const cls = resolveWriteDataClass(session.data_class, "sessions", "sessions.insert");
+      // §12.4：L3 敏感列（会话标题）落库前加密
+      const prepared = encryptSensitiveColumns({ ...session, data_class: cls }, "sessions");
       const stmt = db.prepare(`
-    INSERT INTO sessions (id, title, model, sdk_session_id, created_at, updated_at)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO sessions (id, title, model, sdk_session_id, created_at, updated_at, data_class)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `);
       stmt.run(
-        session.id,
-        session.title,
-        session.model,
-        session.sdk_session_id,
-        session.created_at,
-        session.updated_at
+        prepared.id,
+        prepared.title,
+        prepared.model,
+        prepared.sdk_session_id,
+        prepared.created_at,
+        prepared.updated_at,
+        cls
       );
-      return session;
+      return { ...session, data_class: cls };
     },
 
     async updateSession(id: string, updates: SessionUpdates, opts?: WriteTimeOpts): Promise<boolean> {
@@ -222,7 +258,7 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
 
       if (updates.title !== undefined) {
         fields.push("title = ?");
-        values.push(updates.title);
+        values.push(encryptField("sessions", "title", updates.title));
       }
       if (updates.model !== undefined) {
         fields.push("model = ?");
@@ -255,22 +291,26 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
 
     async getMessagesBySession(sessionId: string): Promise<DbMessage[]> {
       const stmt = db.prepare("SELECT * FROM messages WHERE session_id = ? ORDER BY created_at ASC");
-      return stmt.all(sessionId) as DbMessage[];
+      // L3 敏感列（消息正文/工具调用）读出即解密
+      return (stmt.all(sessionId) as DbMessage[]).map((row) => decryptSensitiveColumns(row, "messages"));
     },
 
     async createMessage(message: DbMessage, opts?: WriteTimeOpts): Promise<DbMessage> {
+      const cls = resolveWriteDataClass(message.data_class, "messages", "messages.insert");
+      const prepared = encryptSensitiveColumns({ ...message, data_class: cls }, "messages");
       const stmt = db.prepare(`
-    INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls, data_class)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `);
       stmt.run(
-        message.id,
-        message.session_id,
-        message.role,
-        message.content,
-        message.model,
-        message.created_at,
-        message.tool_calls
+        prepared.id,
+        prepared.session_id,
+        prepared.role,
+        prepared.content,
+        prepared.model,
+        prepared.created_at,
+        prepared.tool_calls,
+        cls
       );
 
       // 更新会话的 updated_at
@@ -278,7 +318,7 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
       // W1204 实测修根：会话 updated_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
       updateStmt.run(opts?.now ?? new Date().toISOString(), message.session_id);
 
-      return message;
+      return { ...message, data_class: cls };
     },
 
     async updateMessage(id: string, updates: MessageUpdates): Promise<boolean> {
@@ -287,7 +327,7 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
 
       if (updates.content !== undefined) {
         fields.push("content = ?");
-        values.push(updates.content);
+        values.push(encryptField("messages", "content", updates.content));
       }
       if (updates.tool_calls !== undefined) {
         fields.push("tool_calls = ?");
@@ -311,20 +351,23 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
 
     async createMessages(messages: DbMessage[]): Promise<void> {
       const stmt = db.prepare(`
-    INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls, data_class)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
       const insertMany = db.transaction((msgs: DbMessage[]) => {
         for (const msg of msgs) {
+          const cls = resolveWriteDataClass(msg.data_class, "messages", "messages.insertMany");
+          const prepared = encryptSensitiveColumns({ ...msg, data_class: cls }, "messages");
           stmt.run(
-            msg.id,
-            msg.session_id,
-            msg.role,
-            msg.content,
-            msg.model,
-            msg.created_at,
-            msg.tool_calls
+            prepared.id,
+            prepared.session_id,
+            prepared.role,
+            prepared.content,
+            prepared.model,
+            prepared.created_at,
+            prepared.tool_calls,
+            cls
           );
         }
       });
@@ -335,12 +378,13 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
     // ============= 反馈 =============
 
     async insertFeedback(f: Omit<DbFeedback, "created_at">, opts?: WriteTimeOpts): Promise<number> {
+      const cls = resolveWriteDataClass(f.data_class, "feedback", "feedback.insert");
       const r = db
         .prepare(
-          "INSERT INTO feedback (id, session_id, message_id, verdict, comment, created_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(message_id) DO UPDATE SET verdict = excluded.verdict, comment = excluded.comment, created_at = excluded.created_at"
+          "INSERT INTO feedback (id, session_id, message_id, verdict, comment, created_at, data_class) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(message_id) DO UPDATE SET verdict = excluded.verdict, comment = excluded.comment, created_at = excluded.created_at"
         )
         // W1204 实测修根：feedback.created_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
-        .run(f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, opts?.now ?? new Date().toISOString());
+        .run(f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, opts?.now ?? new Date().toISOString(), cls);
       return r.changes;
     },
 

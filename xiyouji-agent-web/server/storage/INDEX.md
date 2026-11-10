@@ -11,12 +11,14 @@
 
 - （无）
 
-## 文件（8）
+## 文件（10）
 
 ### JavaScript / TypeScript
 
 - `dualwrite.test.ts`
 - `dualwrite.ts`
+- `encryption.test.ts`
+- `encryption.ts`
 - `index.ts`
 - `postgres.ts`
 - `reconcile-core.ts`
