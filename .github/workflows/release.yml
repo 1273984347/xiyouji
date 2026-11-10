@@ -27,10 +27,11 @@ on:
         type: boolean
         default: false
 
-# 仓库默认 contents: read（W663/T4 最小权限）；建 Release / 传资产需 workflow 级提权，
-# 先例：pages.yml 在 workflow 级声明 pages/id-token 写权限。
+# W1194 收紧（Scorecard Token-Permissions：workflow 级 contents: write 判未最小化）：
+# 顶层降为 contents: read，写权限收进真正需要它的 release job（job 级覆盖顶层·仅该 job 持有）
+# ⇒ preflight / build 两个 job 的 token 只读，写权限面从「整个 workflow」收窄到「发布 job」。
 permissions:
-  contents: write
+  contents: read
 
 # 同 tag 的发布串行执行、不取消进行中的发布（避免 release 资产只传一半）
 concurrency:
@@ -179,6 +180,9 @@ jobs:
     name: Publish GitHub Release
     needs: [preflight, build]
     runs-on: ubuntu-latest
+    # W1194：创建 Release / 上传资产必需 contents 写权限 ⇒ 提到 job 级（其余 job 保持只读）
+    permissions:
+      contents: write
     steps:
       - name: Download all platform artifacts
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0（v7 系列 full SHA·仓库此前未使用 download-artifact）

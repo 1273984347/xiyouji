@@ -229,7 +229,7 @@ jobs:
           cache-dependency-path: scripts/requirements.txt
 
       - name: Install pip-audit
-        run: pip install pip-audit
+        run: pip install pip-audit==2.10.1  # W1194：钉版（Scorecard Pinned-Dependencies：未钉版安装命令判未固定依赖）
 
       - name: Run pip-audit
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
@@ -264,7 +264,7 @@ jobs:
         # W1014：ruff 版本从 scripts/requirements.txt 派生（单一事实源·原 `pip install ruff`
         # 不钉版致「本机 0.16.7 / requirements 钉 0.16.9 / CI 不钉」三重漂移·本地绿≠CI 绿）；
         # 上方 cache-dependency-path 已指向该文件，版本随其浮动。black 自 W400 不再运行仅遗留安装。
-        run: pip install "$(grep '^ruff==' scripts/requirements.txt)" black mypy
+        run: pip install "$(grep '^ruff==' scripts/requirements.txt)" black==26.10.1 mypy==2.4.1  # W1194：black/mypy 钉版（ruff 仍从 requirements 派生）
 
       - name: Run ruff check
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4

@@ -1,3 +1,32 @@
+### W1194（2026-11-09）：Scorecard 告警真项收口批（安装命令钉版 + 权限最小化 + 镜像 digest 守卫）
+
+**本批要点**（Scorecard 告警真项收口·读数来自 GitHub REST API 实查与本地实跑）：
+
+> - **T1 告警逐条定位（Code scanning 20 条全部为 Scorecard 投影）**：`PinnedDependenciesID` 14 条 + `TokenPermissionsID` 2 条 + `CIIBestPracticesID`/`CodeReviewID`/`FuzzingID`/`VulnerabilitiesID` 各 1 条（后四条无文件关联·属组织级整体评级项）。前批只核了 `uses:` 面（90 个引用全钉 40-hex SHA）就判「陈旧投影」⇒ 核对面窄于 Scorecard 的告据面，漏判两类真实对象。
+> - **T2 告警定位行逐条回读当前内容（行号漂移须人工对账）**：SARIF 行号是告警产生时的快照，多条已漂移至空行；回读后确认真实对象——`xiyouji-agent-web/Dockerfile:6` 的 `FROM node:22-alpine`（未钉 digest）、`screenshot-review.yml` 两处 `npm install playwright @playwright/test`、`ci-sim.yml` 的 `python -m pip install --upgrade pip`、`ci.yml` 两处 `pip install pip-audit` 与 `pip install … black mypy`、`perf.yml` 的 `npm install -g @lhci/cli@0.13.x`。
+> - **T3 七处安装命令钉精确版本**：pip-audit==2.10.1（ci.yml + security.yml）、black==26.10.1 + mypy==2.4.1（ci.yml）、@lhci/cli@0.13.0（perf.yml·registry 实查 0.13.x 区间仅此一版⇒钉版语义等价）、playwright@1.63.0 + @playwright/test@1.63.0（screenshot-review.yml 两处·对齐 scripts/package-lock.json 的 W913 口径）、pip==26.3（ci-sim.yml·CI 全量固定 Python 3.12）。改后三面扫描：`uses:` 91 个 0 未钉、安装命令 13 条全部带版本。
+> - **T4 钉版不改变 CI 判定行为（实查使用面后决策）**：`black` 在 CI 仅安装不执行（自 W400 起移除 `--check`）、`mypy` 为 `|| true` 的 report-only、`pip-audit` 为审计工具、`@lhci/cli` 的 0.13.x 区间唯一解 ⇒ 钉版零行为漂移，故不走上游升级路径。
+> - **T5 两处写权限最小化**：release.yml 顶层 `contents: write` 收窄为顶层 `contents: read` + 仅 `release` job 持 `contents: write`（原先覆盖 preflight 与 build 两个不需要写权限的 job）；stale.yml 的 job 级 `contents: write` 为多余项（`actions/stale` 只需 `issues: write` + `pull-requests: write`）⇒ 直接删除。
+> - **T6 镜像 digest 落成机器判据**：新增 `scripts/check_docker_pin.py`（仓内每条 `FROM` 必须写成 `image@sha256:<64 位十六进制>`，5 例负样本自证通过）；`security.yml` 新增 `docker-pin` job——首步用 `docker buildx imagetools inspect` 打印当前 tag 的期望 digest 供回填，步二跑严格判据。本机对 registry 全域不可达（registry/auth/mirror/index 均连接失败或 503·本机无 docker 可执行程序）⇒ 取值动作交由具出网能力的 CI runner 承担，判据不降级（回填前该 job 判红）。
+> - **T7 Scorecard 四条整体评级项**：CII / CodeReview / Fuzzing / Vulnerabilities 属组织级指标，仓内基础件已具备（SECURITY.md、CODEOWNERS、CONTRIBUTING.md、fuzz.yml、dependency-review 与 codeql 双轨）；外部登记动作（CII 徽章与项目网站登记、OSS-Fuzz 集成、PR review 强制要求）登记在案，不在本仓代码面内。
+
+> - **T8 二轮·digest 取值并回填（PR #151 首轮 CI 后）**：`docker buildx imagetools inspect` 在 PR 首轮 CI（run `42645364116`·job `129257068185`）上 **exit 255**、连 `EXPECTED_DIGEST` 都未打印 ⇒ 取值改走纯 HTTP registry API（curl 读 `Docker-Content-Digest` 响应头 + 三源回退 + 失败只警告不阻断）。最终取值 `sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202`，**双证确认**：`dockerproxy.net` 与 `docker.1panel.live` 两个互相独立的代理各自返回的 manifest 响应体 SHA256 **逐字节一致**且与响应头相同，按该 digest 直取 manifest 200，官方镜像清单仓库 `docker-library/official-images` 确认 `22-alpine` 标签存在。回填 `xiyouji-agent-web/Dockerfile` 后 `check_docker_pin.py` 输出 `0 FAIL / 1 文件 / 1 条 FROM`。
+> - **T9 二轮·npm audit job 500 根因真修（供应链面）**：同 run 的 job `129257068115` 报 `npm error 500 Internal Server Error - GET https://registry.npmmirror.com/omi/-/omi-7.7.13.tgz - [ER_NO_SUCH_TABLE]` ⇒ 表层是第三方镜像站数据库故障（外部故障），根因在本仓依赖解析层——`xiyouji-agent-web/package-lock.json` 里 26 条 `resolved` 指向该镜像站 ⇒ 安装取值被绑到别人站点。归一前逐条核对 26 个包的 lock `integrity` 与 npmjs 官方 `dist.integrity` **26/26 一致、0 mismatch**（同一 tarball·行为零变化），随后 26 条 `resolved` 全部归一为 `registry.npmjs.org`（host 分布 570+26 → 596）；`npm ci --dry-run` 通过、两侧 `npm audit --omit=dev` 均 `found 0 vulnerabilities`。同步把该口径落成机器判据：`scripts/check_install_pins.py` 扩供应链面（lock 的 `resolved` 只允许官方注册表，新增 4 例负样本自证 ⇒ 13/13 通过；沙箱内变异自证：改回镜像站即判红、原件不红）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1193（2026-11-09）：Security and quality 面板残余收口批（minimatch 真修 + Pillow stale 源头 + Scorecard 投影复查）
+
+**本批要点**（Security and quality 面板残余收口·读数来自 GitHub REST API 实查与本地实跑）：
+
+> - **T1 面板基线（PR #150 合并后平台重算）**：Dependabot open 47 → 43（electron 1 条 + fast-uri 4 条 + qs 1 条随合并重算消除）；Code scanning open 20 条全部为 Scorecard 投影（PinnedDependenciesID 14 / TokenPermissionsID 2 / CIIBestPracticesID / CodeReviewID / VulnerabilitiesID / FuzzingID 各 1）——本地逐行核对 90 个 workflow `uses:` 引用**全部钉 40-hex SHA**、0 未钉 ⇒ 属新 SARIF 上传前的陈旧投影。
+> - **T2 minimatch 2 条真告警真修（GHSA-g3hv-75wg-m249·moderate·vulnerable 7.0.0-11.0.0）**：依赖链实查 —— scripts 侧 eslint@10.11.0 → minimatch@10.2.6（eslint 最新 10.14.0 仍声明 `minimatch: ^10.2.6` ⇒ 升级 eslint 不解决）；desktop 侧 electron-builder@26.15.3 → app-builder-lib → minimatch@10.2.6，且 @electron/universal@2.0.3 → minimatch@9.0.9（electron-builder 26.18.0 仍带 @electron/universal@2.x ⇒ 升级 electron-builder 亦不解决）。修法：两处 package.json 各加**精确版本选择器** override `minimatch@>=9.0.0 <11.0.1` → `^11.0.5`——只覆盖落在 vulnerable 范围内的实例，glob@7 的 minimatch@3.1.5 与 filelist 的 5.1.9 保持原版本 ⇒ 不引入 glob 7 与 minimatch 11 的兼容风险。
+> - **T3 实测（判据不降）**：两处 `npm ls minimatch` 显示受影响实例升到 11.0.5 且非受影响实例版本不变；两处 `npm audit` 均 0 vulnerabilities；scripts 侧 eslint 全量跑，override 前后诊断数**逐项相同**（20 problems = 10 errors + 10 warnings，全部为既有 no-undef 浏览器全局存量，CI 不跑 eslint）；desktop 侧 electron-builder 打包链路由 CI `Desktop Build` job 复验。
+> - **T4 Pillow 41 条 stale 告警的源头处置**：告警 vulnerable_version_range 全为「< 13.0.0」及其子集，清单已钉 13.0.0（= advisory 的 first_patched_version），且告警 updated_at 停在 2026-10-24 ⇒ 未重算的 stale 投影。W1191 的纯注释变更未触发重算，本批改用**依赖名大小写归一**（PyPI 名大小写不敏感·安装与导入行为零变化）制造依赖行实质变更以触发重新解析；钉版与依赖面不变。
+> - **T5 平台侧限制（沿用 W1191 登记）**：`secret_scanning_validity_checks` 在 public + 个人账户仓由平台判定为不可用（需 GitHub Advanced Security 订阅）；Scorecard 四项（CII / CodeReview / Vulnerabilities / Fuzzing）需新一轮 SARIF 上传后由平台消。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
 ### W1192（2026-11-09）：CI 五处红灯清偿批（PR #150 存量缺陷全修）
 
 **本批要点**（PR #150 五个失败 job 的根因全修·全部读数来自本地实跑 + GitHub REST API 实查）：
@@ -1109,7 +1138,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1192），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1194），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
