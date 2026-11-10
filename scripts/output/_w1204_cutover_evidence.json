@@ -1,0 +1,99 @@
+{
+  "generated_at": "2026-11-10T14:19:23Z",
+  "port": 3111,
+  "steps": [
+    {
+      "tag": "step3_cutover_dual_pg",
+      "env": {
+        "AGENT_WEB_DB_BACKEND": "postgres",
+        "AGENT_WEB_DB_WRITE_MODE": "dual"
+      },
+      "ready": true,
+      "ready_detail": {
+        "status": 200,
+        "body": {
+          "status": "ok",
+          "checks": {
+            "database": {
+              "status": "ok"
+            }
+          }
+        }
+      },
+      "db_label": "数据库: PostgreSQL 16",
+      "http_status": 200,
+      "sessions_count": 50,
+      "sessions_sample_ids": [
+        "__w1204fix_s_20261110141700362",
+        "dd9c9ba5-d897-4562-8ded-83a8804ea61f",
+        "f68ac262-2565-4517-ac00-ca9d4d43ce14"
+      ],
+      "drill": {
+        "exit_code": 0,
+        "probe_session_id": "__w1204cut_s_20261110141924119",
+        "tail": "\"dual\",\n  \"probe\": {\n    \"session_id\": \"__w1204cut_s_20261110141924119\",\n    \"message_id\": \"__w1204cut_m_20261110141924119\",\n    \"feedback_id\": \"__w1204cut_f_20261110141924119\"\n  },\n  \"ok\": true,\n  \"readback\": {\n    \"session_found\": true,\n    \"session_updated_at\": \"2026-11-10T14:19:24.194Z\",\n    \"message_count\": 1\n  }\n}\n写入演练完成：backend=postgres write_mode=dual ⇒ 探针主键 __w1204cut_s_20261110141924119\n"
+      },
+      "sessions_count_after_drill": 50
+    },
+    {
+      "tag": "step4_stopwrite_pg_only",
+      "env": {
+        "AGENT_WEB_DB_BACKEND": "postgres",
+        "AGENT_WEB_DB_WRITE_MODE": "primary"
+      },
+      "ready": true,
+      "ready_detail": {
+        "status": 200,
+        "body": {
+          "status": "ok",
+          "checks": {
+            "database": {
+              "status": "ok"
+            }
+          }
+        }
+      },
+      "db_label": "数据库: PostgreSQL 16",
+      "http_status": 200,
+      "sessions_count": 50,
+      "sessions_sample_ids": [
+        "__w1204cut_s_20261110141924119",
+        "__w1204fix_s_20261110141700362",
+        "dd9c9ba5-d897-4562-8ded-83a8804ea61f"
+      ],
+      "drill": {
+        "exit_code": 0,
+        "probe_session_id": "__w1204stop_s_20261110141925077",
+        "tail": "\n  \"probe\": {\n    \"session_id\": \"__w1204stop_s_20261110141925077\",\n    \"message_id\": \"__w1204stop_m_20261110141925077\",\n    \"feedback_id\": \"__w1204stop_f_20261110141925077\"\n  },\n  \"ok\": true,\n  \"readback\": {\n    \"session_found\": true,\n    \"session_updated_at\": \"2026-11-10T14:19:25.156Z\",\n    \"message_count\": 1\n  }\n}\n写入演练完成：backend=postgres write_mode=primary ⇒ 探针主键 __w1204stop_s_20261110141925077\n"
+      },
+      "sessions_count_after_drill": 50
+    },
+    {
+      "tag": "step5_rollback_sqlite",
+      "env": {
+        "AGENT_WEB_DB_BACKEND": "sqlite",
+        "AGENT_WEB_DB_WRITE_MODE": "primary"
+      },
+      "ready": true,
+      "ready_detail": {
+        "status": 200,
+        "body": {
+          "status": "ok",
+          "checks": {
+            "database": {
+              "status": "ok"
+            }
+          }
+        }
+      },
+      "db_label": "数据库: SQLite (data/chat.db)",
+      "http_status": 200,
+      "sessions_count": 50,
+      "sessions_sample_ids": [
+        "__w1204cut_s_20261110141924119",
+        "__w1204fix_s_20261110141700362",
+        "dd9c9ba5-d897-4562-8ded-83a8804ea61f"
+      ]
+    }
+  ]
+}

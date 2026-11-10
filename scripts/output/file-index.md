@@ -1,3 +1,59 @@
+## W1204 v2 档 2 D-2 第二子批：双写期集合级三重对账器 + 切读/停写流程（2026-11-10）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| .github/workflows/README.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| AGENTS.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| CHANGELOG.md | W1204 | 立段：W1204 对账器与切读/停写流程 |
+| CITATION.cff | W1204 | 改：本批级联/索引/统计产物刷新 |
+| HANDOVER.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| README.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| STRUCTURE.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/AGENTS-ARCHIVE.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1204 | 改：台账行归档追加（腾窗迁出 W1140 僵尸预约占位行） |
+| archive/docs/workflows-readme-history.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| docs/00-导读/W批次编号对账表.md | W1204 | 登记：W1204 认领行 |
+| docs/00-导读/项目说明.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1204 | 改：§13.6 补记 D-2 第二子批交付与「真实 PG 实跑未做」 |
+| docs/agent/pitfalls.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| pitfalls.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/archive_ledger_rows.py | W1204 | 改：真在途判定收敛为唯一实现（占位 touches 不算真在途）·补自测形态四 |
+| scripts/output/INDEX.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/README.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_cascade_files_W1204.txt | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1204_cutover_evidence.json | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1204_drill_dual.json | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1204_drill_dual_fixed.json | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1204_drill_redual.json | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1204_migrate_backfill.json | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1204_spec.json | W1204 | 新建：本批 spec |
+| scripts/output/file-index.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/stats.json | W1204 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/tools-inventory.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| site/data/cross-time-danmaku.html | W1204 | 改：本批级联/索引/统计产物刷新 |
+| site/data/search.html | W1204 | 改：本批级联/索引/统计产物刷新 |
+| site/data/tag-cloud.html | W1204 | 改：本批级联/索引/统计产物刷新 |
+| site/dukou-engine.html | W1204 | 改：本批级联/索引/统计产物刷新 |
+| site/en/search.html | W1204 | 改：本批级联/索引/统计产物刷新 |
+| site/index.html | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/deploy/pg/README.md | W1204 | 改：补「切读 → 停写旧库」三步流程与回滚路径 |
+| xiyouji-agent-web/deploy/pg/bin/INDEX.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/deploy/pg/bin/README.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/deploy/pg/bin/dualwrite-drill.ts | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/deploy/pg/bin/reconcile-dualwrite.test.ts | W1204 | 新建：对账器契约测试 4 例（含假对账被抓住） |
+| xiyouji-agent-web/deploy/pg/bin/reconcile-dualwrite.ts | W1204 | 新建：双写期对账 CLI（SQLite×SQLite 与 SQLite×PG 两侧读适配） |
+| xiyouji-agent-web/package.json | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/INDEX.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/README.md | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/dualwrite.test.ts | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/dualwrite.ts | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/postgres.ts | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/reconcile-core.ts | W1204 | 新建：对账判定核心（与数据源无关·三重对账·D-08 比集合不只比计数） |
+| xiyouji-agent-web/server/storage/sqlite.ts | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/storage.test.ts | W1204 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/types.ts | W1204 | 改：本批级联/索引/统计产物刷新 |
+
 ## W1203 架构方案 v2 档 2 施工第二子批（2026-11-10）
 
 | 文件 | W | 说明 |

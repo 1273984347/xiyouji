@@ -65,6 +65,26 @@ export interface DbFeedback {
 export type SessionUpdates = Partial<Pick<DbSession, "title" | "model" | "sdk_session_id">>;
 export type MessageUpdates = Partial<Pick<DbMessage, "content" | "tool_calls">>;
 
+/**
+ * 写入时的**权威时间**（可选）。
+ *
+ * 为什么需要它（W1204 真实 PG 实测抓到的真缺陷）：写路径上有三处时间戳是**后端自己生成**的——
+ *   - `updateSession` 刷 `sessions.updated_at`
+ *   - `createMessage` 刷所属会话的 `updated_at`
+ *   - `insertFeedback` 写 `feedback.created_at`
+ * 双写期两侧**各生成一次** ⇒ 同一笔写入的两个副本时间戳差几毫秒
+ * ⇒ 集合级对账判「内容不等」⇒ **切读被永久阻断**
+ * （实测读数：sessions 时间列逐字节 149/150，唯一不等的就是被刷的那一列）。
+ *
+ * 修法（**不降判据强度·不改现役语义**）：把「本次写入的时间」**一次生成、两处复用**——
+ *   - 单库模式不传 ⇒ 后端仍取当前时间（现役行为逐字不变）；
+ *   - 双写模式由双写层生成一次并两侧同传 ⇒ 两个副本逐字节一致。
+ */
+export interface WriteTimeOpts {
+  /** 本次写入的权威时间（ISO-8601 UTC 毫秒精度字符串）。缺省=后端取当前时间。 */
+  now?: string;
+}
+
 /** 健康探针结果（方案 §5.1 M12「健康探针」）。 */
 export interface StorageHealth {
   ok: boolean;
@@ -105,7 +125,7 @@ export interface StorageBackend {
   createSession(session: DbSession): Promise<DbSession>;
 
   /** 更新会话（不存在 ⇒ false）。 */
-  updateSession(id: string, updates: SessionUpdates): Promise<boolean>;
+  updateSession(id: string, updates: SessionUpdates, opts?: WriteTimeOpts): Promise<boolean>;
 
   /** 删除会话（级联删 messages / feedback）。 */
   deleteSession(id: string): Promise<boolean>;
@@ -114,7 +134,7 @@ export interface StorageBackend {
   getMessagesBySession(sessionId: string): Promise<DbMessage[]>;
 
   /** 创建消息（并更新所属会话的 updated_at）。 */
-  createMessage(message: DbMessage): Promise<DbMessage>;
+  createMessage(message: DbMessage, opts?: WriteTimeOpts): Promise<DbMessage>;
 
   /** 更新消息（不存在 ⇒ false）。 */
   updateMessage(id: string, updates: MessageUpdates): Promise<boolean>;
@@ -126,7 +146,7 @@ export interface StorageBackend {
   createMessages(messages: DbMessage[]): Promise<void>;
 
   /** 写入反馈（同 message_id 覆盖）。 */
-  insertFeedback(feedback: Omit<DbFeedback, "created_at">): Promise<number>;
+  insertFeedback(feedback: Omit<DbFeedback, "created_at">, opts?: WriteTimeOpts): Promise<number>;
 
   /** 反馈汇总（窗口内 up / down 计数）。 */
   feedbackSummary(days?: number): Promise<{ up: number; down: number }>;

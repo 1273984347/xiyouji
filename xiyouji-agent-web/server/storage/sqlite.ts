@@ -29,6 +29,7 @@ import type {
   SessionUpdates,
   StorageBackend,
   StorageHealth,
+  WriteTimeOpts,
 } from "./types.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -215,7 +216,7 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
       return session;
     },
 
-    async updateSession(id: string, updates: SessionUpdates): Promise<boolean> {
+    async updateSession(id: string, updates: SessionUpdates, opts?: WriteTimeOpts): Promise<boolean> {
       const fields: string[] = [];
       const values: unknown[] = [];
 
@@ -235,7 +236,8 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
       if (fields.length === 0) return false;
 
       fields.push("updated_at = ?");
-      values.push(new Date().toISOString());
+      // W1204 实测修根：权威时间由调用方给（双写期两侧同值）⇒ 缺省才取当前时间（现役语义不变）
+      values.push(opts?.now ?? new Date().toISOString());
       values.push(id);
 
       const stmt = db.prepare(`UPDATE sessions SET ${fields.join(", ")} WHERE id = ?`);
@@ -256,7 +258,7 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
       return stmt.all(sessionId) as DbMessage[];
     },
 
-    async createMessage(message: DbMessage): Promise<DbMessage> {
+    async createMessage(message: DbMessage, opts?: WriteTimeOpts): Promise<DbMessage> {
       const stmt = db.prepare(`
     INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls)
     VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -273,7 +275,8 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
 
       // 更新会话的 updated_at
       const updateStmt = db.prepare("UPDATE sessions SET updated_at = ? WHERE id = ?");
-      updateStmt.run(new Date().toISOString(), message.session_id);
+      // W1204 实测修根：会话 updated_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
+      updateStmt.run(opts?.now ?? new Date().toISOString(), message.session_id);
 
       return message;
     },
@@ -331,12 +334,13 @@ export function createSqliteBackend(dbPath?: string): SqliteBackend {
 
     // ============= 反馈 =============
 
-    async insertFeedback(f: Omit<DbFeedback, "created_at">): Promise<number> {
+    async insertFeedback(f: Omit<DbFeedback, "created_at">, opts?: WriteTimeOpts): Promise<number> {
       const r = db
         .prepare(
           "INSERT INTO feedback (id, session_id, message_id, verdict, comment, created_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(message_id) DO UPDATE SET verdict = excluded.verdict, comment = excluded.comment, created_at = excluded.created_at"
         )
-        .run(f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, new Date().toISOString());
+        // W1204 实测修根：feedback.created_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
+        .run(f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, opts?.now ?? new Date().toISOString());
       return r.changes;
     },
 

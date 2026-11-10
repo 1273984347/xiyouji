@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-11-10T14:17:00.363Z",
+  "tag": "w1204fix",
+  "backend": "sqlite",
+  "write_mode": "dual",
+  "probe": {
+    "session_id": "__w1204fix_s_20261110141700362",
+    "message_id": "__w1204fix_m_20261110141700362",
+    "feedback_id": "__w1204fix_f_20261110141700362"
+  },
+  "ok": true,
+  "readback": {
+    "session_found": true,
+    "session_updated_at": "2026-11-10T14:17:00.443Z",
+    "message_count": 1
+  }
+}
