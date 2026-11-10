@@ -14,9 +14,12 @@
 | docs/00-导读/W批次编号对账表.md | W1203 | 回填：W1202 行关联 commit 与状态 + 本批认领行 |
 | docs/00-导读/项目说明.md | W1203 | 改：本批级联/索引/统计产物刷新 |
 | docs/11-方案报告/计划方案/T96-任务计划执行与经验沉淀报告-2026-11-10.md | W1203 | 改：8.3 补记 W1202 收官批的合并提交 hash |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1203 | 改：本批级联/索引产物刷新 |
+| pytest.ini | W1203 | 改：本批级联/索引产物刷新 |
 | scripts/output/INDEX.md | W1203 | 改：本批级联/索引/统计产物刷新 |
 | scripts/output/README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
 | scripts/output/_cascade_files_W1203.txt | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1203 | 改：本批级联/索引产物刷新 |
 | scripts/output/_w1203_spec.json | W1203 | 新建：本批 spec |
 | scripts/output/file-index.md | W1203 | 改：本批级联/索引/统计产物刷新 |
 | scripts/output/stats.json | W1203 | 改：本批级联/索引/统计产物刷新 |
