@@ -136,7 +136,7 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-          cache-dependency-path: scripts/requirements.txt
+          cache-dependency-path: scripts/requirements-hashed.txt
 
       - name: Cache Playwright browsers (W421)
         if: steps.scope.outputs.needed == 'true'

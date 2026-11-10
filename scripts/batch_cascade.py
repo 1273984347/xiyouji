@@ -362,8 +362,18 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     )
     # W534 承诺恢复（W713）：淘汰前断言该批详细记录已入 CHANGELOG 段（信息零丢失）
     # W1144：oldest_w 已是 "W1127" 带前缀形态——rf 内不再重复加 W（双 W 曾使断言恒假）
-    assert re.search(rf"^### (?:v[\d.]+（[^）]*）：{oldest_w}\b|{oldest_w}（[^）]*）：)", ctx.cl_src, re.M), (
-        f"CHANGELOG 无 {oldest_w} 段（W534 契约：删前逐批断言 CHANGELOG 有段）"
+    # W1198：CHANGELOG 归档机制（W960 引入·治理文档版段滚动归档）落地后·W534 契约的
+    # 检查面须同时覆盖**归档面**——该批详细记录迁入 archive/docs/CHANGELOG-ARCHIVE.md
+    # 即「已留存」⇒ 信息零丢失的保证未被削弱（归档件在仓内可读·只判正本会假红）。
+    _cl_pat = rf"^### (?:v[\d.]+（[^）]*）：{oldest_w}\b|{oldest_w}（[^）]*）：)"
+    _cl_all = ctx.cl_src
+    if not re.search(_cl_pat, _cl_all, re.M):
+        _arch = os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE.md")
+        if os.path.exists(_arch):
+            with open(_arch, encoding="utf-8") as _fh:
+                _cl_all = _cl_all + "\n" + _fh.read()
+    assert re.search(_cl_pat, _cl_all, re.M), (
+        f"CHANGELOG 正本与归档面均无 {oldest_w} 段（W534 契约：删前逐批断言 CHANGELOG 有段）"
     )
     # W624 修复：整块淘汰 = 标题行 + 其后连续 bullet 行（至空行/新组/标题/引用行止）。
     # W557 版候选表里的裸 "\n" 命中标题行自身行尾 → 每批只删标题行文本，bullets 留成
