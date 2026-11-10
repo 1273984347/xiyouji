@@ -1408,3 +1408,8 @@
 ```text
 2026-11-09（W1194）Scorecard 告警真项收口：7 处安装命令钉版 + 2 处写权限最小化 + 镜像 digest 守卫接入 CI
 ```
+以下为 AGENTS.md 版本脚注早期条目（W1195-W1195）段的原文（单行沿革链·W1201 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-11-09（W1195）Scorecard Pinned-Dependencies 真修：pip 哈希化清单 + npm ci 化
+```

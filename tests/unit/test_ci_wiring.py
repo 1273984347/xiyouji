@@ -447,6 +447,12 @@ def test_pyyaml_is_registered_in_requirements():
     req = (ROOT / "scripts" / "requirements-hashed.txt").read_text(encoding="utf-8")
     assert re.search(r"(?im)^pyyaml==", req), "PyYAML 未登记进 requirements-hashed.txt——J3 在 CI 将静默跳过"
     assert re.search(r"(?im)^pyyaml==[\w.]+", req), "PyYAML 须固定精确版本（P2-7 供应链纪律）"
+    # W1198 第二步 / W1201 重建态：依赖清单重建后·Dependabot 监控面亦须声明 PyYAML
+    # （监控面与安装面双覆盖——W813 判据的覆盖面不因改绑安装源而丢失）
+    dep = (ROOT / "scripts" / "requirements.txt").read_text(encoding="utf-8")
+    assert re.search(r"(?im)^pyyaml==", dep), "PyYAML 未登记进 requirements.txt——Dependabot 监控面将漏监控该包"
+    assert re.search(r"(?im)^pyyaml==[\w.]+", dep), "PyYAML 须固定精确版本（P2-7 供应链纪律）"
+
 
 
 def test_screenshot_scope_wired_into_workflow():
