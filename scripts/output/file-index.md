@@ -1,3 +1,39 @@
+## W1201 重建态批·恢复仓库完整态 + 落仓路径 A 的否证结论（2026-11-10）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| AGENTS.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| CHANGELOG.md | W1201 | 立段：W1201 重建态批（恢复完整态 + 路径 A 否证结论落仓） |
+| CITATION.cff | W1201 | 改：本批级联/索引/统计产物刷新 |
+| HANDOVER.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| README.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| STRUCTURE.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/AGENTS-ARCHIVE.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/workflows-readme-history.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| docs/00-导读/W批次编号对账表.md | W1201 | 登记：W1201 认领行 + W1199 回填（a473141c） |
+| docs/00-导读/项目说明.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| docs/11-方案报告/计划方案/T96-任务计划执行与经验沉淀报告-2026-11-10.md | W1201 | 改：新增 §8.2 补记（删除态已被正确解析·残留仍在·AC-10/AC-11 在依赖图侧不可达） |
+| pitfalls.md | W1201 | 订正：E-219 原结论作废并改写（删除态被正确解析后残留仍在⇒ 该动作无效·仓内无清除路径） |
+| scripts/INDEX.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/INDEX.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/README.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_cascade_files_W1201.txt | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1201_spec.json | W1201 | 新建：本批 spec |
+| scripts/output/citability-report.json | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/file-index.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/stats.json | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/tools-inventory.md | W1201 | 改：本批级联/索引/统计产物刷新 |
+| scripts/requirements.txt | W1201 | 重建：逐字恢复（基准 852f20bf·diff 0 行）⇒ 恢复 Dependabot 对 /scripts 的监控 |
+| site/data/cross-time-danmaku.html | W1201 | 改：本批级联/索引/统计产物刷新 |
+| site/data/tag-cloud.html | W1201 | 改：本批级联/索引/统计产物刷新 |
+| site/dukou-engine.html | W1201 | 改：本批级联/索引/统计产物刷新 |
+| site/index.html | W1201 | 改：本批级联/索引/统计产物刷新 |
+| tests/unit/test_ci_wiring.py | W1201 | 改：加回监控面 PyYAML 第二段断言（安装面 + 监控面双覆盖） |
+
+
 ## W1199 提交前一次性就绪链落仓（2026-11-10）
 
 | 文件 | W | 说明 |
