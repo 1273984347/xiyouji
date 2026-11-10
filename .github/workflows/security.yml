@@ -224,15 +224,31 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: 打印当前 tag 的期望 digest（供回填用）
+        # W1194 二轮：取值改用纯 HTTP registry API 多源回退（不依赖 docker CLI）。
+        # 首版用 `docker buildx imagetools inspect` 在 runner 上 exit 255（本机与 runner 对 Docker Hub
+        # 全域不可达）。本版读 Docker-Content-Digest 响应头，取首个可达源的值作参考。
+        # 取值的可信度验证（两个互相独立的代理返回体 SHA256 一致 + 响应头自洽）已在本地完成，
+        # 证据链记入 docs/11-方案报告/计划方案/T94-...md 附录 A。
+        # 本步不阻断（失败只警告）——严格判据由后续两步承担；上游 tag 滚动不判红。
         run: |
           set -uo pipefail
-          digest=$(docker buildx imagetools inspect node:22-alpine 2>/dev/null | awk '/^Digest:/ {print $2; exit}')
+          digest=""
+          for base in https://registry-1.docker.io https://dockerproxy.net https://docker.1panel.live; do
+            hdr=$(curl -fsSL --max-time 25 \
+              -H 'Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json' \
+              -D - -o /dev/null "$base/v2/library/node/manifests/22-alpine" 2>/dev/null || true)
+            cand=$(printf '%s' "$hdr" | tr -d '\r' | awk 'tolower($1)=="docker-content-digest:" {print $2; exit}')
+            if [ -n "$cand" ]; then
+              echo "EXPECTED_DIGEST=$cand"
+              echo "::notice::node:22-alpine 当前 tag digest = $cand（取值源 $base）"
+              digest="$cand"
+              break
+            fi
+          done
           if [ -z "$digest" ]; then
-            docker pull node:22-alpine >/dev/null 2>&1 || true
-            digest=$(docker image inspect node:22-alpine --format '{{index .RepoDigests 0}}' 2>/dev/null | awk -F@ '{print $2}')
+            echo "EXPECTED_DIGEST="
+            echo "::warning::本 runner 对所有 registry 源均不可达，未取到 node:22-alpine 的 digest（不阻断，严格判据由后续两步负责）"
           fi
-          echo "EXPECTED_DIGEST=$digest"
-          echo "::notice::node:22-alpine 当前 tag digest = ${digest:-<runner 无 Docker Hub 出网>}"
 
       - name: 校验安装命令已钉版本
         run: python3 scripts/check_install_pins.py

@@ -26,6 +26,13 @@
 | docs/11-方案报告/计划方案/T94-任务计划执行与经验沉淀报告-2026-11-09.md | W1194 | 新建：Scorecard 告警真项收口报告 |
 | scripts/output/_w1194_spec.json | W1194 | 新建：本批 spec |
 | scripts/output/_cascade_files_W1194.txt | W1194 | 新建：级联清单 |
+| xiyouji-agent-web/Dockerfile | W1194 | 改：FROM node:22-alpine 钉到 sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202 |
+| xiyouji-agent-web/package-lock.json | W1194 | 改：26 条 resolved 从第三方镜像站归一为 registry.npmjs.org（integrity 26/26 逐条核对一致） |
+| scripts/check_install_pins.py | W1194 | 改：扩供应链面判据（lock 的 resolved 只允许官方注册表）+4 例负样本自证 |
+| pitfalls.md | W1194 | 改：E-213 + E-214 两条（外部告警面逐面重核 + 取值双证与供应链归因）|
+| AGENTS.md | W1194 | 改：坑表计数链同步（307→308 与分项一处）|
+| HANDOVER.md | W1194 | 改：坑表计数链同步（两处）|
+| .agent/skills/puti-shouye/SKILL.md | W1194 | 改：坑表计数链同步（两处）|
 
 ## W1193 Security and quality 面板残余收口批（2026-11-09）
 
