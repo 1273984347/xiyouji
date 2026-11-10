@@ -36,6 +36,43 @@ SRC = os.path.join("docs", "00-导读", "W批次编号对账表.md")
 ARC = os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")
 ROW_RE = re.compile(r"^\| W(\d{3,4}) ")
 
+# 占位 touches 形态（台账「—」「—（待其登记）」「—（待回填）」等）——**不算真实 touches**。
+# 理由（W1204 实证）：并行会话的**预约占位行** touches 填的是占位符而非文件清单，
+# 若按「非空即真实」判定 ⇒ 这类行被判真在途 ⇒ 永不迁出 ⇒ 而它恰好是最老行时
+# **窗口被锁死**（正本 61 行 > keep 60），工具自报「在途行占满窗口·须人工处置」。
+# 真实故障形态：一个**从未开工**的预约号（W1140·2026-11-06 留的占位）把整条收官链卡住。
+# 判定与 preflight 的「真在途」同源：状态在途 + touches 真实 + 非「已停止/让号留痕」。
+_PLACEHOLDER_WORDS = ('待其登记', '待回填', '待补')
+_PUNCT_ONLY = set('—–-_ （）()·、.。')
+
+
+def _is_placeholder_touch(token: str) -> bool:
+    """单个 touches token 是否为占位形态。"""
+    t = str(token).strip()
+    if not t:
+        return True
+    if any(w in t for w in _PLACEHOLDER_WORDS):
+        return True
+    return all(ch in _PUNCT_ONLY for ch in t)
+
+
+def _real_touches(touches) -> list:
+    """touches → 真实文件清单（滤掉占位形态）。"""
+    if not touches:
+        return []
+    toks = [touches] if isinstance(touches, str) else list(touches)
+    return [str(t).strip() for t in toks
+            if not _is_placeholder_touch(str(t)) and str(t).strip()]
+
+
+def _is_real_inflight(status: str, touches) -> bool:
+    """**真在途**判定（唯一实现·本文件三处调用同源）。"""
+    if not pf.is_inflight(status):
+        return False
+    if re.search(r'已停止|让号留痕', status):
+        return False
+    return bool(_real_touches(touches))
+
 
 def _status_of(line):
     """台账行 → 状态列（第 6 格·index 5）——A4 在途判定的行级形态（W1147）。"""
@@ -56,16 +93,17 @@ def move(keep, apply, src_p=None, arc_p=None):
     inflight_idx = set()
     for j, i in enumerate(row_idx):
         r = led_rows[j]
-        if pf.is_inflight(r["status"]) and r["touches"] and not re.search(r"已停止|让号留痕", r["status"]):
+        if _is_real_inflight(r["status"], r["touches"]):
             inflight_idx.add(i)
     keep_set = set(ordered[:keep]) | inflight_idx
     move_idx = [i for i in row_idx if i not in keep_set]
     # W1147 根修（A4 死锁解）：在途行**永不迁出**——最老行恰为在途时，迁出集合排除之
     # （保留在正本·占 keep 窗口），否则「窗口满 + 最老行在途 + A4 在途不许迁」三约束死锁
     # （W1144 实测 W1085/W1087 让号留痕行连续崩 A4）。在途判定与 A4 同源（preflight.is_inflight）。
-    import preflight_check as _pf
-    _inflight_idx = {i for i in move_idx
-                     if _pf.is_inflight(_status_of(lines[i]))}
+    _move_set = set(move_idx)
+    _inflight_idx = {i for j, i in enumerate(row_idx)
+                     if i in _move_set
+                     and _is_real_inflight(_status_of(lines[i]), led_rows[j]["touches"])}
     if _inflight_idx:
         print("  注：跳过在途行 %s（A4 在途不迁·保留正本）"
               % sorted(ws[i] for i in _inflight_idx))
@@ -111,9 +149,7 @@ def move(keep, apply, src_p=None, arc_p=None):
     # 只比「真在途」（有 touches 且状态非收官/停止）——已停止/让号行的 touches 是占位
     def _real_inflight(led):
         return [r["w"] for r in led["rows"]
-                if pf.is_inflight(r["status"])
-                and not re.search(r"已停止|让号留痕", r["status"])
-                and r["touches"]]
+                if _is_real_inflight(r["status"], r["touches"])]
     inflight_before = _real_inflight(led_before)
     inflight_after = _real_inflight(led)
     # A4 放宽（W997 实证）：并行会话会在扫描与落盘之间追加认领行（读-写窗口），
@@ -173,6 +209,24 @@ def _self_test() -> int:
     rc, src, arc = _run([920, 919], 5)
     if rc != 0 or arc:
         fails.append("无迁出形态失败（不应落归档）")
+
+    # 形态四（W1204 实证）：在途行的 touches 是**占位符**（「—（待其登记）」）⇒ 不算真在途
+    #   ⇒ 窗口满时它可被迁出；否则一个**从未开工**的预约号会把整条收官链的窗口锁死
+    #   （实测：正本 61 行 > keep 60 且无可迁出行 ⇒ 工具自报「在途行占满窗口·须人工处置」）
+    lines4 = [
+        "| W930 | 行930 | a | b | 在途（认领·未收官） | s | —（待其登记） |",
+        "| W931 | 行931 | a | b | **已收官** | s | x |",
+    ]
+    txt4 = "# 台账样本\n\n" + "\n".join(lines4) + "\n\n## ASCII\n- W# 三位数零填充（W001 形态）。\n"
+    td4 = tempfile.mkdtemp()
+    sp4 = os.path.join(td4, "l.md")
+    open(sp4, "w", encoding="utf-8", newline="").write(txt4)
+    ap4 = os.path.join(td4, "a.md")
+    rc4 = move(1, True, src_p=sp4, arc_p=ap4)
+    src4 = open(sp4, encoding="utf-8", newline="").read()
+    arc4 = open(ap4, encoding="utf-8", newline="").read() if os.path.exists(ap4) else ""
+    if rc4 != 0 or "| W930 " not in arc4 or "| W930 " in src4:
+        fails.append("占位 touches 的在途行未被迁出（窗口锁死形态·W1204 实证）")
 
     print()
     if fails:

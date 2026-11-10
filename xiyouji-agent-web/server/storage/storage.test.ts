@@ -143,6 +143,39 @@ async function runContractSuite(
   await b.clearAllData(); // 幂等
   assert.equal((await b.getAllSessions()).length, 0, "清库后不应有残留会话");
 
+  // ---- ⑨' 写入权威时间（双写期两侧必须落同一个时间戳）----
+  // W1204 真实 PG 实测抓到的真缺陷的**契约闸门**：
+  //   写路径上的时间戳若由后端各自生成 ⇒ 双写期两侧副本差几毫秒
+  //   ⇒ 集合级对账判「内容不等」⇒ 切读被永久阻断（实测读数：时间列 149/150）。
+  const pinned = "2026-01-02T03:04:05.678Z";
+  await b.createSession(session); // 上一步 clearAllData 已清空 ⇒ 先重建再验时间戳
+  await b.updateSession(sid, { title: "钉时间的标题" }, { now: pinned });
+  assert.equal(
+    (await b.getSession(sid))?.updated_at,
+    pinned,
+    "updateSession 刷的 updated_at 应逐字节等于指定的权威时间",
+  );
+  await b.createMessage(message, { now: pinned });
+  assert.equal(
+    (await b.getSession(sid))?.updated_at,
+    pinned,
+    "createMessage 刷的会话 updated_at 应逐字节等于指定的权威时间",
+  );
+  await b.insertFeedback(
+    { id: "fb-pinned", session_id: sid, message_id: mid, verdict: "up", comment: "钉到 2020 年" },
+    { now: "2020-01-01T00:00:00.000Z" },
+  );
+  assert.equal(
+    (await b.feedbackSummary(36500)).up,
+    1,
+    "insertFeedback 应落指定时间（否则 100 年窗口里查不到 ⇒ 说明后端忽略了权威时间）",
+  );
+  assert.equal(
+    (await b.feedbackSummary(1)).up,
+    0,
+    "钉到 2020 年的反馈不该落进 1 天窗口（否则说明后端仍用自己的当前时间）",
+  );
+
   // ---- ⑩ healthCheck ----
   const health = await b.healthCheck();
   assert.equal(health.ok, true, `健康探针应通过：${health.detail}`);
