@@ -1,3 +1,19 @@
+### W1195（2026-11-09）：Scorecard Pinned-Dependencies 真修批（pip 哈希化清单 + npm ci 化）
+
+**本批要点**（Scorecard Pinned-Dependencies 真修·读数来自 Scorecard 源码与实测）：
+
+> - **T1 前批方向性错误的实证（本批根因）**：W1194 把 Scorecard 的安装命令面判定为「未钉精确版本」并钉了 7 处；合并 PR #151 后重跑 Scorecard（run `42736414215`）实测：**该面 13 条 `PinnedDependenciesID` 告警一条未消**（总数 20 → 16，消的是 Dockerfile digest 与 TokenPermissions 那几条）。读 Scorecard 源码（`checks/raw/shell_download_validate.go`）后确认：**它要的是「钉 hash」而非「钉版本」**——pip 面命令含 `--require-hashes` → pinned（直接 `return false`），含其他参数 → unpinned（其中 `--hash=` 是 flag、被 `isFlag` 跳过 ⇒ 不作用）；npm 面只有命令含 `ci`（走 lockfile·ci 会校验 lock 内的 integrity hash）→ pinned。
+> - **T2 pip 面真修（新建哈希化清单）**：新建 `scripts/requirements-hashed.txt`（51 项闭包：直接依赖 9 + 测试传递 8 + CI 工具包与传递 34），每包列出其「全部发布文件」的 sha256（含各平台 wheel + sdist）。闭包完整性实测：`pip install --require-hashes` 会拒绝未钉 hash 的**任何依赖包括传递依赖**，故用 pip resolver 验证合并后闭包可解（resolved 51 · 额外依赖 0）；传递依赖版本与直接依赖的冲突（packaging 26.0 vs 26.3）已按仓内现行版本取低者。
+> - **T3 npm 面真修（全部改 npm ci）**：3 处 `npm install playwright@1.63.0 @playwright/test@1.63.0` 改为 `npm ci --prefix scripts`（scripts/package-lock.json 已钉 playwright 1.63.0 含 integrity），同时删除 `@playwright/test`（全仓仅 `tests/e2e/test_w266_e2e_extended.js` 引用它，而该文件按 `.github/workflows/README.md` 的 D-02 裁决明确排除出 CI 首波）；lhci 单独建 `scripts/lighthouse/{package.json,package-lock.json}`（348 包·resolved 全为 registry.npmjs.org），`npm ci` 实测 added 347 packages · lhci bin 可用。
+> - **T4 删除 black 遗留安装（W400 起从未被执行）**：ci.yml 的 code-quality job 原本安装 black 仅为「遗留安装」（自 W400 起 `black --check` 步骤已移除，black 从未被执行）——本批删除该安装，同时把 ruff 的安装改为从哈希化清单统一安装（ruff 已在清单里·与 requirements.txt 版本一致）。
+> - **T5 守卫升级为与 Scorecard 源码同源**：`scripts/check_install_pins.py` 的判据从「钉精确版本」改为「按 Scorecard 源码判定」（pip 需 `--require-hashes`·npm 需 `npm ci`），自证用例升级为 14 例（含「钉了版本但无 --require-hashes → 判红」与「钉了版本的 npm install 仍→ 判红」两个反例），自证 14/14 通过。
+> - **T6 实测证据（不假收敛）**：干净 venv 实测 `pip install --require-hashes -r <小包哈希清单>` → rc 0（真实安装成功）；改掉一个 hash 后重跑 → pip 报 `THESE PACKAGES DO NOT MATCH THE HASHES FROM THE REQUIREMENTS FILE` → 伪 hash 被拒（判据真会红、非恒绿）。
+> - **T7 首轮 CI 的 Dependency review 失败的漏洞处置（新建依赖树带来的 high 级漏洞）**：PR #152 首轮 CI 报 `basic-ftp@5.3.1` 漏洞（GHSA-c475-qrg2-pj4r·high·`Client.list()` 二次时间 DoS）——来自 lhci 子项目引入的 `express@4` 依赖链（`get-uri` → `basic-ftp@^5.0.2`）；advisory 的 vulnerable range 为 `<= 6.2.0`、`first_patched_version` 为 `6.2.1` ⇒ 用 npm `overrides` 把 `basic-ftp` 锁到 `6.2.6`（已超过修复版）；重生成 lock 后实测：`basic-ftp -> 6.2.6`、348 包不变、`resolved` 全为 `registry.npmjs.org`、无缺 `integrity`、`npm ci` rc 0（added 347 packages）且 `lhci` bin 可用。
+> - **T8 坑表 E-216（新建依赖树带来新漏洞）**：新建依赖树后必须跑一次依赖审查；新漏洞的 advisory 可能还未入库（OSV 与 GitHub Advisory API 均查不到，仅 CI 审查实测输出报出）。
+> - **T9 二轮·extract-zip 无修复版的漏洞通过升 lhci 解决**：二轮 CI 报出 `小 scripts/lighthouse/package-lock.json » extract-zip@2.0.1` 两条 high 级漏洞（GHSA-7pqw-9j4j-h8q3 与 GHSA-jmr9-qjv8-65gv，均为 `first_patched_version: None` ⇒ **最新版 2.0.1 仍落在漏洞区间**）。来源链：`lighthouse@11.4.0` → `puppeteer-core@21.x` → `@puppeteer/browsers@1.x/2.x` → `extract-zip@2.0.1`；而 `@puppeteer/browsers@3.x`（依赖改为 `modern-tar`）**不再拉 extract-zip**。解法：将 `@lhci/cli` 升到 `0.16.0`（其 `lighthouse 13.6.0` → `puppeteer-core 25.16.0` → `@puppeteer/browsers 3.2.6`），实测：新 lock 356 包、**extract-zip 已不再存在**、`basic-ftp` 仍锁 6.2.6、`resolved` 全为官方源、`npm ci` rc 0（added 337 packages）且 `lhci` bin 可用；配合需求：`@lhci/cli 0.16.0` 的 `engines` 要求 `node >= 22.19.0` ⇒ `perf.yml` 该 job 的 Node 由 20 升到 22（仓内 Node 22 已为主流，6 处）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
 ### W1194（2026-11-09）：Scorecard 告警真项收口批（安装命令钉版 + 权限最小化 + 镜像 digest 守卫）
 
 **本批要点**（Scorecard 告警真项收口·读数来自 GitHub REST API 实查与本地实跑）：
@@ -1138,7 +1154,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1194），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1195），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

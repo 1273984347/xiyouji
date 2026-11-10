@@ -45,8 +45,8 @@ jobs:
       #    Pillow / markdown / jieba），只装 pytest 会让收集期报错
       - name: Install test dependencies
         run: |
-          python -m pip install --upgrade "pip==26.3"  # W1194：钉版（Scorecard Pinned-Dependencies 判 pip 自身未固定）
-          python -m pip install -r scripts/requirements.txt
+          python -m pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes 哈希化清单（pip 26.3 也在清单里）
+          python -m pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes + 哈希化清单（Scorecard 的 pip 面要求「钉 hash」，「钉版本」无效）
 
       - name: CI-side simulation
         run: python scripts/ci_sim.py

@@ -47,7 +47,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install PyYAML
-        run: pip install "PyYAML==6.0.2"
+        run: pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 hash 化清单（PyYAML 无跨平台通用 wheel·单包安装需多 hash 行形式）
       - name: 解析全部工作流（PyYAML 全量解析）
         run: |
           python - <<'PY'

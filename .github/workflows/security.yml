@@ -80,7 +80,7 @@ jobs:
           cache-dependency-path: scripts/requirements.txt
 
       - name: 安装 pip-audit
-        run: pip install pip-audit==2.10.1  # W1194：钉版（Scorecard Pinned-Dependencies）
+        run: pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes 哈希化清单（Scorecard pip 面要求命令含 --require-hashes；单包安装命令行不允许带 --hash，且会拒绝未钉 hash 的传递依赖）
 
       - name: pip-audit（扫描 requirements 漏洞）
         run: |

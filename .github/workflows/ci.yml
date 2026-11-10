@@ -43,8 +43,15 @@ jobs:
           # W401 修复：本 job 不安装 pip 依赖（仅 npm playwright），移除 cache: pip 避免 Post 步骤缓存目录缺失报错（同 W400 a11y-audit 修复）
 
       - name: Install Playwright
+        # W1195：改用 `npm ci --prefix scripts`（Scorecard Pinned-Dependencies 认的 pinned 形态）。
+        # Scorecard 源码 `checks/raw/shell_download_validate.go` 的 `isNpmUnpinnedDownload`：
+        # 只有 `npm ci`（lock 内含 integrity hash·ci 会校验）才算 pinned，`npm install pkg@版本`
+        # 一律判 unpinned —— 故前批的「钉精确版本」对该规则无效。
+        # 本仓 scripts/package-lock.json 已钉 playwright 1.63.0（含 integrity），走 lock 安装等价且更强。
+        # 同时去掉 @playwright/test：全仓仅 tests/e2e/test_w266_e2e_extended.js 引用它，而该文件
+        # 按 .github/workflows/README.md 的 D-02 裁决明确排除出 CI 首波（CI 只跑 test_site_quality.js）。
         run: |
-          npm install playwright@1.63.0 @playwright/test@1.63.0  # W913 钉版对齐 scripts/package-lock.json（T10 实证无约束安装绕过 lockfile 为真漂移面）
+          npm ci --prefix scripts
           npx playwright install --with-deps chromium
 
       - name: Start static server
@@ -229,7 +236,7 @@ jobs:
           cache-dependency-path: scripts/requirements.txt
 
       - name: Install pip-audit
-        run: pip install pip-audit==2.10.1  # W1194：钉版（Scorecard Pinned-Dependencies：未钉版安装命令判未固定依赖）
+        run: pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes 哈希化清单（Scorecard pip 面要求命令含 --require-hashes；单包安装命令行不允许带 --hash，且会拒绝未钉 hash 的传递依赖）
 
       - name: Run pip-audit
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
@@ -260,11 +267,15 @@ jobs:
           cache: pip
           cache-dependency-path: scripts/requirements.txt
 
-      - name: Install ruff, black, mypy
-        # W1014：ruff 版本从 scripts/requirements.txt 派生（单一事实源·原 `pip install ruff`
-        # 不钉版致「本机 0.16.7 / requirements 钉 0.16.9 / CI 不钉」三重漂移·本地绿≠CI 绿）；
-        # 上方 cache-dependency-path 已指向该文件，版本随其浮动。black 自 W400 不再运行仅遗留安装。
-        run: pip install "$(grep '^ruff==' scripts/requirements.txt)" black==26.10.1 mypy==2.4.1  # W1194：black/mypy 钉版（ruff 仍从 requirements 派生）
+      - name: Install ruff + mypy
+        # W1195：改用 `pip install --require-hashes -r scripts/requirements-hashed.txt`
+        #   （Scorecard Pinned-Dependencies 的 pip 面要求命令含 `--require-hashes`——
+        #    源码 checks/raw/shell_download_validate.go 的 isUnpinnedPipInstall：含 `--require-hashes` → pinned，
+        #    含其他参数（如 `pip install pkg==1.2.3`、单包 `--hash=`——`--hash` 是 flag·被跳过）→ unpinned。
+        #    即「钉精确版本」对该规则无效）。
+        # ruff 已在哈希化清单里（与 requirements.txt 版本一致）；
+        # black 自 W400 起从未被执行（仅遗留安装）——本批删除该冗余安装。
+        run: pip install --require-hashes -r scripts/requirements-hashed.txt
 
       - name: Run ruff check
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
@@ -302,7 +313,7 @@ jobs:
           cache-dependency-path: scripts/requirements.txt
 
       - name: Install Python deps
-        run: pip install -r scripts/requirements.txt
+        run: pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes + 哈希化清单（Scorecard 的 pip 面要求「钉 hash」，「钉版本」无效）
 
       # W1154（基础设施审计 §6 建议）：编排面引用存在性——Makefile/pre-commit/workflow
       # 指向的 scripts/ 路径必须真实存在（W1014 sync_docs 死钩子 + drl-contracts 休眠族防复发）。
@@ -332,7 +343,7 @@ jobs:
           cache-dependency-path: scripts/requirements.txt
 
       - name: Install Python deps
-        run: pip install -r scripts/requirements.txt
+        run: pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes + 哈希化清单（Scorecard 的 pip 面要求「钉 hash」，「钉版本」无效）
 
       - name: Set up Node.js 20
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
