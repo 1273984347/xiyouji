@@ -23,6 +23,33 @@
 | docs/11-方案报告/计划方案/T94-任务计划执行与经验沉淀报告-2026-11-09.md | W1195 | 改：V1.0 → V1.1（后续发现说明）|
 | scripts/output/_w1195_spec.json | W1195 | 新建：本批 spec |
 | scripts/output/_cascade_files_W1195.txt | W1195 | 新建：级联清单 |
+| scripts/lighthouse/INDEX.md | W1195 | 新建：目录索引（级联）|
+| scripts/lighthouse/README.md | W1195 | 新建：目录说明（级联）|
+| CITATION.cff | W1195 | 改：version/date 推进（级联） |
+| README.md | W1195 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1195 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1195 | 改：版本面推进（级联） |
+| docs/INDEX.md | W1195 | 改：docs 目录索引重建（含 T95 报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1195 | 改：stats 实体标记跟随（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1195 | 改：stats 实体标记跟随（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1195 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1195 | 改：逐批明细追加（级联） |
+| .github/workflows/README.md | W1195 | 改：区间行推进（版本面） |
+| site/index.html | W1195 | 改：页脚版本戳推进（级联） |
+| site/data/cross-time-danmaku.html | W1195 | 改：页脚版本戳推进（级联） |
+| site/data/tag-cloud.html | W1195 | 改：页脚版本戳推进（级联） |
+| site/dukou-engine.html | W1195 | 改：页脚版本戳推进（级联） |
+| site/data/search.html | W1195 | 改：搜索索引刷新 + CSP meta 重哈希 |
+| site/en/search.html | W1195 | 改：搜索索引刷新 + CSP meta 重哈希 |
+| scripts/output/stats.json | W1195 | 改：stats 刷新（级联） |
+| scripts/output/tools-inventory.md | W1195 | 改：工具清单刷新（含新增脚本） |
+| scripts/output/README.md | W1195 | 改：目录文档刷新（级联） |
+| scripts/output/file-index.md | W1195 | 改：W1195 段重建（含二轮交付面） |
+| scripts/output/stats-changelog.json | W1195 | 改：stats 变更记录刷新（级联） |
+| scripts/output/stats-index.md | W1195 | 改：stats 索引刷新（级联） |
+| scripts/INDEX.md | W1195 | 改：目录索引刷新（含新增 scripts/lighthouse）（级联） |
+| scripts/output/INDEX.md | W1195 | 改：目录索引刷新（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1195 | 改：朱砂实底缓存 sha1 跟随页面改动刷新（级联）|
 
 
 ## W1194 Scorecard 告警真项收口批（2026-11-09）
