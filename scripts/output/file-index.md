@@ -1,3 +1,46 @@
+## W1197 守卫扫描面扩到全仓 shell 批（2026-11-10）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/external_rule_scope.py | W1197 | 新建：外部规则 shell 扫描面的共享识别（与 Scorecard isMatchingShellScriptFile 同源）|
+| scripts/check_install_pins.py | W1197 | 改：扫描面扩到全仓 shell（安装命令面）+ 自证升至 20 例 |
+| scripts/check_action_refs.py | W1197 | 改：扫描面扩到全仓 shell（不可变引用面）+ 自证新增 N9-N14 |
+| scripts/check_external_rule_coverage.py | W1197 | 改：守卫扫描面表更新（两守卫已扩到全仓 shell）→覆盖缺口闭合 |
+| .github/workflows/security.yml | W1197 | 改：dependency-pin job 新增 check_action_refs.py 步骤（无 paths 过滤·失败即阻断）|
+| .github/workflows/workflow-lint.yml | W1197 | 改：paths 扩到 **/*.sh（shell 改动也触发守卫）|
+| pitfalls.md | W1197 | 改：E-218 补充重褄理记录（缺口已修）|
+| AGENTS.md | W1197 | 改：坑表计数链同步 |
+| HANDOVER.md | W1197 | 改：坑表计数链同步 |
+| .agent/skills/puti-shouye/SKILL.md | W1197 | 改：坑表计数链同步 |
+| CHANGELOG.md | W1197 | 改：W1197 段 |
+| docs/00-导读/W批次编号对账表.md | W1197 | 改：W1197 认领行 |
+| scripts/output/_w1197_spec.json | W1197 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1197.txt | W1197 | 新建：级联清单 |
+| .github/workflows/README.md | W1197 | 改：区间行推进（版本面） |
+| CITATION.cff | W1197 | 改：version/date 推进（级联） |
+| README.md | W1197 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1197 | 改：版本面推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1197 | 改：脚注沿革滚动（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1197 | 改：迁出行（级联） |
+| archive/docs/workflows-readme-history.md | W1197 | 改：逐批明细追加（级联） |
+| docs/00-导读/项目说明.md | W1197 | 改：版本面推进（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1197 | 改：stats 实体标记跟随（级联） |
+| pytest.ini | W1197 | 改：pytest collected 计数标记跟随 stats 实算（新增守卫脚本） |
+| scripts/output/file-index.md | W1197 | 改：W1197 段重建 |
+| scripts/output/stats-changelog.json | W1197 | 改：stats 变更记录刷新（级联） |
+| scripts/output/stats-index.md | W1197 | 改：stats 索引刷新（级联） |
+| scripts/output/stats.json | W1197 | 改：stats 刷新（级联） |
+| scripts/output/tools-inventory.md | W1197 | 改：工具清单刷新（含新增守卫） |
+| site/data/cross-time-danmaku.html | W1197 | 改：页脚版本戳推进（级联） |
+| site/data/tag-cloud.html | W1197 | 改：页脚版本戳推进（级联） |
+| site/dukou-engine.html | W1197 | 改：页脚版本戳推进（级联） |
+| site/index.html | W1197 | 改：页脚版本戳推进（级联） |
+| scripts/output/INDEX.md | W1197 | 改：目录索引/说明刷新（级联）|
+| scripts/output/README.md | W1197 | 改：目录索引/说明刷新（级联）|
+| scripts/INDEX.md | W1197 | 改：目录索引刷新（级联）|
+| scripts/output/_vermilion_solid_cache.json | W1197 | 改：朱砂实底缓存 sha1 跟随页面改动刷新（级联）|
+
+
 ## W1196 外部规则覆盖面审计批（2026-11-10）
 
 | 文件 | W | 说明 |

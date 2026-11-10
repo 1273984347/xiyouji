@@ -253,6 +253,12 @@ jobs:
       - name: 校验安装命令已钉版本
         run: python3 scripts/check_install_pins.py
 
+      - name: 校验 action 引用与 shell 面不可变引用
+        # W1197：check_action_refs.py 的扫描面从 workflow-only 扩到全仓 shell
+        # （与 Scorecard 的 Pattern:"*" 对齐）——本步在本工作流内执行，因
+        # workflow-lint.yml 的 paths 收窄到 workflow 改动，shell 改动不会触发它。
+        run: python3 scripts/check_action_refs.py
+
       - name: 校验 Dockerfile FROM 已钉 digest
         run: python3 scripts/check_docker_pin.py
 

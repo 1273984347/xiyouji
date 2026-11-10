@@ -94,10 +94,12 @@ OFFICIAL_REGISTRY = {
 }
 
 # 本仓既有守卫的扫描面（用于第 3 条判据：覆盖缺口）
+# W1197：check_install_pins.py 与 check_action_refs.py 已扩到全仓 shell（与 Scorecard 的
+# Pattern:"*" 对齐）；check_docker_pin.py 全仓扫 Dockerfile（与 Pattern:"*Dockerfile*" 对齐）。
 GUARD_SCOPE = {
-    "check_install_pins.py": [".github/workflows"],
-    "check_action_refs.py": [".github/workflows"],
-    "check_docker_pin.py": ["<repo-root>"],   # 全仓扫 Dockerfile
+    "check_install_pins.py": ["<repo-root>"],   # 全仓 shell（W1197）
+    "check_action_refs.py": ["<repo-root>"],    # 全仓 shell（W1197）
+    "check_docker_pin.py": ["<repo-root>"],     # 全仓 Dockerfile
 }
 
 
@@ -242,9 +244,9 @@ def run_gate(root=ROOT):
         # 这一项是「当前已知的覆盖缺口」——报出但不阻断：
         # 它对应的修法是把守卫扫描面扩到全仓 shell（需另行批处理），
         # 在那之前不能用它阻断 CI。依据：本批实测 5 个 shell 面文件内实际无安装命令（见上方① 项）。
-        print("  WARN %s 的扫描面不含 %d 个 shell 面文件（已知覆盖缺口·不阻断）：%s"
+        print("  WARN %s 的扫描面不含 %d 个 shell 面文件（覆盖缺口·不阻断）：%s"
               % (guard, len(uncovered), uncovered[:5]))
-        print("       ↳ Scorecard 扫 Pattern:\"*\"（全仓 shell）⇒ 本仓守卫面窄于规则面；修法是扩守卫扫描面（另批）")
+        print("       ↳ Scorecard 扫 Pattern:\"*\"（全仓 shell）⇒ 本仓守卫面窄于规则面；修法是扩守卫扫描面")
 
     print("---- 外部规则覆盖面门禁：%d FAIL / %d shell 文件 / %d 个清单 ----"
           % (fails, len(shell_files), len(manifests)))

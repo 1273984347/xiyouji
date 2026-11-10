@@ -1,3 +1,18 @@
+### W1197（2026-11-10）：守卫扫描面扩到全仓 shell 批（两守卫扩面 + 接入 CI 阻断）
+
+**本批要点**（守卫扫描面扩到全仓 shell·读数来自 Scorecard 源码实读与变异自证）：
+
+> - **T1 根因（上批登记的已知缺口）**：Scorecard 的依赖扫描面是 `Pattern: "*"`（**全仓 shell 脚本**）、`"*Dockerfile*"`、`".github/workflows/*"`；而本仓守卫 `check_install_pins.py` / `check_action_refs.py` 是 workflow-only。上批变异自证已确认该缺口真实。
+> - **T2 识别规则抽共享模块**：新建 `scripts/external_rule_scope.py`，实现 Scorecard `isMatchingShellScriptFile` 的识别规则（扩展名属 shell 家族 或 首行 shebang 匹配 shell 家族）——两个守卫共用同一份实现，避免「口径分裂」。
+> - **T3 check_install_pins.py 扩面（安装命令面）**：扫描面从 workflow 扩到全仓 shell，判据与 Scorecard shell 面同源（pip 需 `--require-hashes`·npm 需 `npm ci`）；自证用例由 14 例升为 **20 例**（新增 shell 面 6 例：包含注释行与 echo 参数位不算命令的反例）。
+> - **T4 check_action_refs.py 扩面（不可变引用面）**：Scorecard 的 uses 面只扫 workflow（从 YAML AST 解析 `uses:` 键），它的 shell 面只判安装命令——但 shell 里同样可能出现「静默替换」的外部下载（归档/tag clone/管道执行），属同类安全面，故一并管理；自证用例新增 N9-N14 六例（三个形态的正样本 + 三个反样本）。
+> - **T5 CI 接入与阻断**：`security.yml` 的 dependency-pin job 新增 `check_action_refs.py` 步骤（该 workflow 无 paths 过滤·PR/push 全触发）；`workflow-lint.yml` 的 paths 扩到 `**/*.sh`（否则 shell 改动不会触发它）。两处均为无 `continue-on-error` 的 `run:` → 失败即阻断。
+> - **T6 变异自证（判据真会红、非恒绿）**：在仓内临时放一个 `.sh` → `check_install_pins.py` rc=1（报出其中的 `npm install`）、`check_action_refs.py` rc=1（报出其中的归档下载）→ 两守卫在 shell 面均真会阻断。
+> - **T7 覆盖缺口已闭合**：`check_external_rule_coverage.py` 的第③ 项由「已知缺口·WARN」变为「PASS 无覆盖缺口」。
+> - **T8 自查口径必须与门禁实际口径一致**：自查时用 `ruff check --select C901,PLR`（ruff 默认阈值 C901=10/branches=12/statements=50）判定「超限」，而门禁实际用的是 `scripts/guardrails/ruff-structure.toml`（宽档 C901=15/branches=16/statements=80）⇒ **误报为阻断项**，差点为不存在的缺陷去改代码。⇒ 判「某门禁会不会拦我」必须跑该门禁的**真实入口**（`pwsh -File scripts/guardrails/check_changed.ps1`），不能拿等价规则名 + 默认阈值代替。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
 ### W1196（2026-11-10）：外部规则覆盖面审计批（守卫扫描面宽于规则面 + 盲区监控守卫）
 
 **本批要点**（外部规则覆盖面审计·读数来自 Scorecard 源码实读与沙箱变异自证）：
@@ -1168,7 +1183,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1196），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1197），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
