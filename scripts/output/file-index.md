@@ -1,3 +1,31 @@
+## W1203 W1202 收官回填批（2026-11-10）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| AGENTS.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| CHANGELOG.md | W1203 | 立段：W1202 收官回填批 |
+| CITATION.cff | W1203 | 改：本批级联/索引/统计产物刷新 |
+| HANDOVER.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| STRUCTURE.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/AGENTS-ARCHIVE.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/workflows-readme-history.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| docs/00-导读/W批次编号对账表.md | W1203 | 回填：W1202 行关联 commit 与状态 + 本批认领行 |
+| docs/00-导读/项目说明.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| docs/11-方案报告/计划方案/T96-任务计划执行与经验沉淀报告-2026-11-10.md | W1203 | 改：8.3 补记 W1202 收官批的合并提交 hash |
+| scripts/output/INDEX.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_cascade_files_W1203.txt | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1203_spec.json | W1203 | 新建：本批 spec |
+| scripts/output/file-index.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/stats.json | W1203 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/tools-inventory.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| site/data/cross-time-danmaku.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+| site/data/tag-cloud.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+| site/dukou-engine.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+| site/index.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+
 ## W1202 GitHub「Security and quality」面板归零收官批（2026-11-10）
 
 | 文件 | W | 说明 |
