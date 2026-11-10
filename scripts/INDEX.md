@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（217）
+## 文件（218）
 
 ### Python 脚本
 
@@ -277,6 +277,7 @@
 - `package-lock.json`
 - `package.json`
 - `requirements-hashed.txt`
+- `requirements.txt`
 
 ### 其他
 
