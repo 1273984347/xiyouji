@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（106）
+## 文件（107）
 
 ### Python 脚本
 
@@ -39,6 +39,7 @@
 - `test_commit_scope.py`
 - `test_cross_line_rewrite.py`
 - `test_d3_data_processors.py`
+- `test_dismiss_pillow_alerts.py`
 - `test_doc_size_budget.py`
 - `test_docs_index.py`
 - `test_embed_json.py`

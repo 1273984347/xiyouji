@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-10 19:28
+生成时间：2026-11-10 20:24
 
-共 **209** 件（门禁与校验 98 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 81 · 一次性（下划线前缀） 7）
+共 **210** 件（门禁与校验 98 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
 
 ## 门禁与校验（98）
 
@@ -154,7 +154,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（81）
+## 工具（82）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -181,6 +181,7 @@
 | `data_validate.py` | data_validate.py — output/data/ JSON 结构完整性校验 |
 | `debug_page.js` | Debug a web page using Playwright. Capture console messages and/or page  |
 | `diagnose_overflow.js` | 批量诊断 mobile (375x812) 视口下所有页面的横向溢出根因 |
+| `dismiss_pillow_alerts.py` | 批量关闭 / 恢复 GitHub Dependabot 的 pillow 告警（W1202·GitHub「Security and qualit |
 | `doc_areas.py` | doc_areas.py — A1-A6 内容板块目录与计数口径的单一事实源（W728 重构提取）。 |
 | `docs_index.py` | docs_index.py — 自动生成 docs/ 目录索引 |
 | `drl_spotcheck.py` | drl_spotcheck.py — DRL 真循环 spot-check 工具 |
