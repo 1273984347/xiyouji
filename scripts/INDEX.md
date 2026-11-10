@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（216）
+## 文件（217）
 
 ### Python 脚本
 
@@ -123,6 +123,7 @@
 - `check_dynamic_links.py`
 - `check_embedded_stale_markers.py`
 - `check_emoji_icons.py`
+- `check_external_rule_coverage.py`
 - `check_folder_docs.py`
 - `check_frontmatter.py`
 - `check_glossary.py`
