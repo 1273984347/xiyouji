@@ -47,3 +47,4 @@
 + W1198 Dependabot 41 条 Pillow 告警归零：删除后重建 scripts/requirements.txt 触发依赖图条目重算 清掉残留 pillow@12.3.0 条目  CI 判据同源修正·无 workflow 结构改动）。
 + W1199 提交前就绪链落仓  E-220 入坑表与计数链同步  规则正文入 AGENTS 铁则段  方法论沉淀入 HANDOVER 三  W1198 终态读数回填·无 workflow 结构改动）。
 + W1201 重建态批  逐字重建 scripts/requirements.txt 并加回监控面断言  E-219 订正  T96 §8.2 补记  台账回填 W1199·无 workflow 结构改动）。
++ W1202 面板归零收官批  41 条 pillow 告警以 dismiss_reason=inaccurate 关闭  open 41→0  可复跑与可回滚脚本入仓  终态读数回填·无 workflow 结构改动）。
