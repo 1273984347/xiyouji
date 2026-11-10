@@ -1,3 +1,15 @@
+### W1203（2026-11-10）：架构方案 v2 档 2 施工第二子批（D-2b 双写对账期→切读→停写旧库）+ W1202 终态收口
+
+**本批要点**（架构方案 v2 档 2 施工第二子批 + W1202 终态收口）：
+
+> - **T1 根因链（承 W1198-W1201 四批）**：Dependabot 41 条 pillow 告警的根因是依赖图里的历史条目pillow@12.3.0（2026-10-22 前写入）永不被清理——内容变更只新增条目、删除 manifest 使路径消失亦不清理、Dependency submission API 为追加语义 ⇒ 面板归零在依赖图侧不可达；仓库自 2026-10-23 起已钉 pillow==13.0.0（= 全部 advisory 的 first_patched_version）⇒ 告警断言不成立 ⇒ 以 dismiss_reason=inaccurate 关闭（API 实跑 ok=41 fail=0·open 41→0）。
+> - **T2 W1202 终态收口**：台账 W1202 行回填合并提交 61c95567（PR #161）·状态改已收官；报告 T96 §8.3 补记同一 hash ⇒ 报告与台账指向同一合并事件。
+> - **T3 v2 归属批次号订正**：v2 §13.6 原写的归属批次 W935/W936/W937 已被后续批次占用（W935=速赢两处批·W936=首屏图集接入批·W937=首屏版式修正批）⇒ 本批重取 W1203（号取 CHANGELOG max+1）并订正 v2 文档，避免方案指向错批号。
+> - **T4 统计口径与台账窗口**：统计一律取干净 checkout 实算（并行会话在工作树上的在途改动不计入本批）；台账新增认领行使正本达 61 段超窗 ⇒ 按门禁提示 archive_ledger_rows.py --apply 归档最老行腾窗。
+> - **T5 施工面盘点（v2 档 2 D-2 第二子批）**：切读开关已现成（AGENT_WEB_DB_BACKEND=postgres·非法取值 fail-closed）、存储层接口已异步化且时间列统一 ISO-8601 UTC 毫秒、门面 db.ts 16 个导出齐备、D-2a 双后端契约测试在位、迁移与备份编排件在 deploy/pg/ 齐备 ⇒ 在其上推进「双写对账期 → 切读 → 停写旧库」。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
 ### W1202（2026-11-10）：GitHub「Security and quality」面板归零收官批（41 条 pillow 告警人工关闭 + 可复跑脚本入仓 + 终态读数回填）
 
 **本批要点**（GitHub「Security and quality」面板归零·41 条 pillow 告警人工关闭）：
@@ -420,7 +432,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1202），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1203），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
