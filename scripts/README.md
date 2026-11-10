@@ -84,7 +84,7 @@
 
 ## 依赖
 
-- Python：见 `requirements.txt`（`jieba` + `Pillow`）
+- Python：CI 安装源见 `requirements-hashed.txt`（哈希化闭包 51 项）；Dependabot 监控面见 `requirements.txt`（直接依赖 9 项声明）
 - Node.js：见 `package.json`（`playwright`，`npm install` 自动下载 chromium）
 
 ## 工程规范约定

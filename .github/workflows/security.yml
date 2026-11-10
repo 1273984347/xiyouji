@@ -77,18 +77,13 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: scripts/requirements.txt
+          cache-dependency-path: scripts/requirements-hashed.txt
 
       - name: 安装 pip-audit
         run: pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes 哈希化清单（Scorecard pip 面要求命令含 --require-hashes；单包安装命令行不允许带 --hash，且会拒绝未钉 hash 的传递依赖）
 
       - name: pip-audit（扫描 requirements 漏洞）
-        run: |
-          if [ -f scripts/requirements.txt ]; then
-            pip-audit -r scripts/requirements.txt --strict
-          else
-            echo "无 scripts/requirements.txt，跳过 pip-audit"
-          fi
+        run: pip-audit -r scripts/requirements-hashed.txt --strict
 
   # E8-3 CSP 头配置检查
   csp-check:

@@ -44,3 +44,4 @@
 + W1195 Scorecard Pinned-Dependencies 真修：全部 pip 安装点改为 --require-hashes + 哈希化清单 全部 npm 安装点改为 npm ci（走 lock）·无 workflow 结构改动）。
 + W1196 外部规则覆盖面审计：新增 check_external_rule_coverage.py 监控「规则面 × 守卫面」差集并接入 CI 登记已知覆盖缺口·无 workflow 结构改动）。
 + W1197 守卫扫描面扩到全仓 shell：check_install_pins 与 check_action_refs 各管一面 并接入 CI 阻断·无 workflow 结构改动）。
++ W1198 Dependabot 41 条 Pillow 告警归零：删除后重建 scripts/requirements.txt 触发依赖图条目重算 清掉残留 pillow@12.3.0 条目  CI 判据同源修正·无 workflow 结构改动）。

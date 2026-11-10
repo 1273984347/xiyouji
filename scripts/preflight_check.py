@@ -383,7 +383,7 @@ def _ruff_version_drift_line(ver_line):
 
     W1158 自 step_env 拆出（宽档 too-many-nested-blocks 6>4 根治·行为零变化）。
     """
-    req_p = os.path.join(ROOT, "scripts", "requirements.txt")
+    req_p = os.path.join(ROOT, "scripts", "requirements-hashed.txt")
     try:
         import re as _re
         _m = _re.search(r"(?m)^ruff==([\w.]+)", open(req_p, encoding="utf-8").read())
@@ -391,7 +391,7 @@ def _ruff_version_drift_line(ver_line):
         _got = ver_line.split()[-1] if ver_line else ""
         if _want and _got and _got != _want:
             return (f"⚠ ruff 版本漂移：本地 {_got} ≠ requirements {_want}"
-                    f"——pip install -r scripts/requirements.txt 对齐（CI 用声明版·版本差=lint 规则差）")
+                    f"——pip install --require-hashes -r scripts/requirements-hashed.txt 对齐（CI 用声明版·版本差=lint 规则差）")
     except OSError:
         pass
     return None
