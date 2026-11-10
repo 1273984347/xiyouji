@@ -1,3 +1,43 @@
+## W1202 GitHub「Security and quality」面板归零收官批（2026-11-10）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| AGENTS.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| CHANGELOG.md | W1202 | 立段：W1202 面板归零收官批（41 条 pillow 告警关闭）|
+| CITATION.cff | W1202 | 改：本批级联/索引/统计产物刷新 |
+| HANDOVER.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| README.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| STRUCTURE.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/AGENTS-ARCHIVE.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/workflows-readme-history.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| docs/00-导读/W批次编号对账表.md | W1202 | 登记：W1202 认领行 + W1201 回填（4299a7ac）|
+| docs/00-导读/项目说明.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| docs/11-方案报告/计划方案/T96-任务计划执行与经验沉淀报告-2026-11-10.md | W1202 | 改：新增 §8.3 终态读数回填（open 41→0·AC-11 达成·AC-10 在依赖图侧不可达）|
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| pitfalls.md | W1202 | 订正：E-219 补最终处置（人工关闭 dismiss_reason=inaccurate + 可复跑脚本入仓）|
+| pytest.ini | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/INDEX.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/dismiss_pillow_alerts.py | W1202 | 新建：41 条 pillow 告警的批量关闭/回滚脚本（--dry-run/--apply/--revert·依据链写在头注释）|
+| scripts/output/INDEX.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/README.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_cascade_files_W1202.txt | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1202 | 改：本批实算/级联产物刷新 |
+| scripts/output/_w1202_spec.json | W1202 | 新建：本批 spec |
+| scripts/output/file-index.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/stats-changelog.json | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/stats-index.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/stats.json | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/tools-inventory.md | W1202 | 改：本批级联/索引/统计产物刷新 |
+| site/data/cross-time-danmaku.html | W1202 | 改：本批级联/索引/统计产物刷新 |
+| site/data/tag-cloud.html | W1202 | 改：本批级联/索引/统计产物刷新 |
+| site/dukou-engine.html | W1202 | 改：本批级联/索引/统计产物刷新 |
+| site/index.html | W1202 | 改：本批级联/索引/统计产物刷新 |
+| tests/unit/INDEX.md | W1202 | 改：目录清单补入本批新件（新单测）|
+| tests/unit/README.md | W1202 | 改：目录清单补入本批新件（新单测）|
+| tests/unit/test_dismiss_pillow_alerts.py | W1202 | 新建：dismiss 脚本的目标筛选逻辑单测（第 42 门禁 C1 引用面·5 例） |
+
 ## W1201 重建态批·恢复仓库完整态 + 落仓路径 A 的否证结论（2026-11-10）
 
 | 文件 | W | 说明 |
