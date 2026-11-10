@@ -1,3 +1,30 @@
+## W1195 Scorecard Pinned-Dependencies 真修批（2026-11-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/requirements-hashed.txt | W1195 | 新建：哈希化依赖清单（51 项闭包·直接 9 + 测试传递 8 + CI 工具包与传递 34）|
+| scripts/check_install_pins.py | W1195 | 改：判据改为与 Scorecard 源码同源（pip 需 --require-hashes·npm 需 npm ci）+ 自证用例升级为 14 例 |
+| .github/workflows/ci.yml | W1195 | 改：npm 安装改 npm ci --prefix scripts（去掉零调用的 @playwright/test）+ pip 安装改 --require-hashes 哈希化清单 + 删除 black 遗留安装 |
+| .github/workflows/ci-sim.yml | W1195 | 改：pip 自身升级带 --hash + 清单安装改 --require-hashes |
+| .github/workflows/perf.yml | W1195 | 改：lhci 安装改 npm ci --prefix scripts/lighthouse（新建独立 lock）+ 调用改本地 bin |
+| .github/workflows/screenshot-review.yml | W1195 | 改：npm 安装改 npm ci --prefix scripts + pip 安装改 --require-hashes |
+| .github/workflows/security.yml | W1195 | 改：pip-audit 安装改 --require-hashes 哈希化清单 |
+| .github/workflows/workflow-lint.yml | W1195 | 改：PyYAML 安装改 --require-hashes 哈希化清单 |
+| scripts/lighthouse/package.json | W1195 | 新建：lhci 独立安装单元（仅 @lhci/cli 0.13.0）|
+| scripts/lighthouse/package-lock.json | W1195 | 新建：lhci 锁文件（348 包·resolved 全为 registry.npmjs.org）|
+| pitfalls.md | W1195 | 改：E-215 入表（外部规则必须读判据源码）|
+| AGENTS.md | W1195 | 改：坑表计数链同步 |
+| HANDOVER.md | W1195 | 改：坑表计数链同步 |
+| .agent/skills/puti-shouye/SKILL.md | W1195 | 改：坑表计数链同步 |
+| CHANGELOG.md | W1195 | 改：W1195 段 |
+| docs/00-导读/W批次编号对账表.md | W1195 | 改：W1195 认领行 |
+| docs/11-方案报告/README.md | W1195 | 改：§六 登记 T95（登记号 109）|
+| docs/11-方案报告/计划方案/T95-任务计划执行与经验沉淀报告-2026-11-09.md | W1195 | 新建：Scorecard Pinned-Dependencies 真修报告 |
+| docs/11-方案报告/计划方案/T94-任务计划执行与经验沉淀报告-2026-11-09.md | W1195 | 改：V1.0 → V1.1（后续发现说明）|
+| scripts/output/_w1195_spec.json | W1195 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1195.txt | W1195 | 新建：级联清单 |
+
+
 ## W1194 Scorecard 告警真项收口批（2026-11-09）
 
 | 文件 | W | 说明 |

@@ -7,7 +7,7 @@
 > 本文件逐条列出 `scripts/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（41）
+## 子目录（42）
 
 - `AA_叙事实验/`
 - `AB_视觉艺术/`
@@ -47,11 +47,12 @@
 - `audit/`
 - `guardrails/`
 - `lib/`
+- `lighthouse/`
 - `output/`
 - `rag/`
 - `utils/`
 
-## 文件（215）
+## 文件（216）
 
 ### Python 脚本
 
@@ -273,6 +274,7 @@
 - `drl_contracts.yaml`
 - `package-lock.json`
 - `package.json`
+- `requirements-hashed.txt`
 - `requirements.txt`
 
 ### 其他

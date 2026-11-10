@@ -108,7 +108,15 @@ jobs:
 
       - name: Install Lighthouse CI
         if: steps.scope.outputs.run != 'false'
-        run: npm install -g @lhci/cli@0.13.0  # W1194：钉精确版（0.13.x 是浮动范围·Scorecard 判未固定依赖）
+        # W1195：改用 `npm ci --prefix scripts/lighthouse`（Scorecard Pinned-Dependencies 认的 pinned 形态）。
+        # Scorecard 源码 checks/raw/shell_download_validate.go 的 isNpmUnpinnedDownload：
+        #   只有 `npm ci`（走 lock·ci 会校验 lock 内的 integrity hash）算 pinned，
+        #   `npm install pkg@版本`（即前批的钉版形态）一律判 unpinned。
+        # 因此为 lhci 单独建 scripts/lighthouse/{package.json,package-lock.json}（仅 @lhci/cli 0.13.0），
+        # 以 lock 安装（npm ci 实测：added 347 packages·lhci bin 可用·resolved 全为 registry.npmjs.org）。
+        run: |
+          npm ci --prefix scripts/lighthouse
+          echo "\$(scripts/lighthouse/node_modules/.bin/lhci --version)"
 
       - name: Start static server
         if: steps.scope.outputs.run != 'false'
@@ -180,7 +188,8 @@ jobs:
         with:
           max_attempts: 3
           timeout_minutes: 20
-          command: lhci autorun --config=.lhci/lighthouserc.json --upload.target=temporary-public-storage
+          # W1195：改用 scripts/lighthouse/node_modules/.bin/lhci（npm ci 安装的本地 bin）
+          command: scripts/lighthouse/node_modules/.bin/lhci autorun --config=.lhci/lighthouserc.json --upload.target=temporary-public-storage
 
       - name: Stop static server
         if: always()
