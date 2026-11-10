@@ -10,6 +10,7 @@
 | README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
 | STRUCTURE.md | W1203 | 改：本批级联/索引/统计产物刷新 |
 | archive/docs/AGENTS-ARCHIVE.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1203 | 改：台账归档腾窗与目录/索引产物刷新 |
 | archive/docs/workflows-readme-history.md | W1203 | 改：本批级联/索引/统计产物刷新 |
 | docs/00-导读/W批次编号对账表.md | W1203 | 回填：W1202 行关联 commit 与状态 + 本批认领行 |
 | docs/00-导读/项目说明.md | W1203 | 改：本批级联/索引/统计产物刷新 |
