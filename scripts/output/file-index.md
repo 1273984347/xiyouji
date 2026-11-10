@@ -28,6 +28,12 @@
 | site/data/tag-cloud.html | W1203 | 改：本批级联/索引/统计产物刷新 |
 | site/dukou-engine.html | W1203 | 改：本批级联/索引/统计产物刷新 |
 | site/index.html | W1203 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/package.json | W1203 | 改：test:server 挂入 dualwrite.test.ts |
+| xiyouji-agent-web/server/storage/INDEX.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/README.md | W1203 | 改：本批级联/索引/统计产物刷新 |
+| xiyouji-agent-web/server/storage/dualwrite.test.ts | W1203 | 新建：双写层契约测试 4 例（两 SQLite 实例互为两侧·无外部依赖全跑） |
+| xiyouji-agent-web/server/storage/dualwrite.ts | W1203 | 新建：双写后端（写两侧·读只走主库·副库写失败 fail-closed·返回值以主库为准·kind 沿用主库） |
+| xiyouji-agent-web/server/storage/index.ts | W1203 | 改：接入 AGENT_WEB_DB_WRITE_MODE（primary/dual·非法取值 fail-closed）+ writeMode() 可查 |
 
 
 ## W1202 GitHub「Security and quality」面板归零收官批（2026-11-10）

@@ -11,10 +11,12 @@
 
 - （无）
 
-## 文件（5）
+## 文件（7）
 
 ### JavaScript / TypeScript
 
+- `dualwrite.test.ts`
+- `dualwrite.ts`
 - `index.ts`
 - `postgres.ts`
 - `sqlite.ts`

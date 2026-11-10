@@ -15,6 +15,7 @@
  */
 import { createSqliteBackend, resolveSqlitePath } from "./sqlite.js";
 import { createPostgresBackend } from "./postgres.js";
+import { createDualWriteBackend } from "./dualwrite.js";
 import type {
   BackendKind,
   DbFeedback,
@@ -46,15 +47,40 @@ export function resolveBackendKind(): BackendKind {
   );
 }
 
+/**
+ * 写入模式（W1203 · v2 §8.2 档 2 · D-2 第二子批）：
+ *  - `primary`（默认）= 只写活跃后端（现役行为·逐字不变）
+ *  - `dual` = 两侧同写（双写对账期：为「切读 → 停写旧库」提供可回滚窗口）
+ *
+ * 取值非法 ⇒ 启动失败（fail-closed）：配错了却跑起来 ⇒ 以为在双写其实没双写。
+ */
+export function resolveWriteMode(): "primary" | "dual" {
+  const raw = (process.env.AGENT_WEB_DB_WRITE_MODE || "").trim().toLowerCase();
+  if (raw === "" || raw === "primary") return "primary";
+  if (raw === "dual") return "dual";
+  throw new Error(
+    `AGENT_WEB_DB_WRITE_MODE 取值非法：${JSON.stringify(raw)}（允许 primary | dual）`
+  );
+}
+
 /** 活跃后端（模块加载时创建·单例）。 */
 export const backend: StorageBackend = (() => {
   const kind = resolveBackendKind();
-  return kind === "postgres" ? createPostgresBackend() : createSqliteBackend();
+  const primary = kind === "postgres" ? createPostgresBackend() : createSqliteBackend();
+  if (resolveWriteMode() === "primary") return primary;
+  // dual：副库 = 另一种后端（sqlite ↔ postgres）；两侧都写、读只走主库
+  const secondary = kind === "postgres" ? createSqliteBackend() : createPostgresBackend();
+  return createDualWriteBackend(primary, secondary);
 })();
 
 /** 活跃后端种类（运行时可查·用于日志与断言）。 */
 export function backendKind(): BackendKind {
   return backend.kind;
+}
+
+/** 写入模式（运行时可查·用于日志与断言）。 */
+export function writeMode(): "primary" | "dual" {
+  return resolveWriteMode();
 }
 
 // ============= 契约转发 =============

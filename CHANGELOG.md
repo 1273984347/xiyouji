@@ -7,6 +7,7 @@
 > - **T3 v2 归属批次号订正**：v2 §13.6 原写的归属批次 W935/W936/W937 已被后续批次占用（W935=速赢两处批·W936=首屏图集接入批·W937=首屏版式修正批）⇒ 本批重取 W1203（号取 CHANGELOG max+1）并订正 v2 文档，避免方案指向错批号。
 > - **T4 统计口径与台账窗口**：统计一律取干净 checkout 实算（并行会话在工作树上的在途改动不计入本批）；台账新增认领行使正本达 61 段超窗 ⇒ 按门禁提示 archive_ledger_rows.py --apply 归档最老行腾窗。
 > - **T5 施工面盘点（v2 档 2 D-2 第二子批）**：切读开关已现成（AGENT_WEB_DB_BACKEND=postgres·非法取值 fail-closed）、存储层接口已异步化且时间列统一 ISO-8601 UTC 毫秒、门面 db.ts 16 个导出齐备、D-2a 双后端契约测试在位、迁移与备份编排件在 deploy/pg/ 齐备 ⇒ 在其上推进「双写对账期 → 切读 → 停写旧库」。
+> - **T6 本批已交付：双写后端 + 工厂接入 + 契约测试**：新增 `server/storage/dualwrite.ts`（写两侧·读只走主库·副库写失败 fail-closed·返回值以主库为准·`kind` 沿用主库⇒不扩 BackendKind 枚举·既有调用点零改动），`server/storage/index.ts` 接入 `AGENT_WEB_DB_WRITE_MODE`（primary=现役逐字不变·dual=两侧同写·非法取值启动即失败），新增 `server/storage/dualwrite.test.ts` 四例契约测试（写两侧·读只走主库·副库失败 fail-closed·清库与健康检查）——用两个临时 SQLite 实例互为双写两侧⇒无外部依赖全跑；package.json 的 test:server 已挂入该测试文件。
 > - **状态**：已落地。
 > - **文件**：见 file-index。
 
