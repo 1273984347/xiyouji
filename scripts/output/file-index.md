@@ -34,6 +34,8 @@
 | site/data/tag-cloud.html | W1202 | 改：本批级联/索引/统计产物刷新 |
 | site/dukou-engine.html | W1202 | 改：本批级联/索引/统计产物刷新 |
 | site/index.html | W1202 | 改：本批级联/索引/统计产物刷新 |
+| tests/unit/INDEX.md | W1202 | 改：目录清单补入本批新件（新单测）|
+| tests/unit/README.md | W1202 | 改：目录清单补入本批新件（新单测）|
 | tests/unit/test_dismiss_pillow_alerts.py | W1202 | 新建：dismiss 脚本的目标筛选逻辑单测（第 42 门禁 C1 引用面·5 例） |
 
 ## W1201 重建态批·恢复仓库完整态 + 落仓路径 A 的否证结论（2026-11-10）
