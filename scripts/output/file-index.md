@@ -23,6 +23,7 @@
 | scripts/output/INDEX.md | W1202 | 改：本批级联/索引/统计产物刷新 |
 | scripts/output/README.md | W1202 | 改：本批级联/索引/统计产物刷新 |
 | scripts/output/_cascade_files_W1202.txt | W1202 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1202 | 改：本批实算/级联产物刷新 |
 | scripts/output/_w1202_spec.json | W1202 | 新建：本批 spec |
 | scripts/output/file-index.md | W1202 | 改：本批级联/索引/统计产物刷新 |
 | scripts/output/stats-changelog.json | W1202 | 改：本批级联/索引/统计产物刷新 |
@@ -33,6 +34,7 @@
 | site/data/tag-cloud.html | W1202 | 改：本批级联/索引/统计产物刷新 |
 | site/dukou-engine.html | W1202 | 改：本批级联/索引/统计产物刷新 |
 | site/index.html | W1202 | 改：本批级联/索引/统计产物刷新 |
+| tests/unit/test_dismiss_pillow_alerts.py | W1202 | 新建：dismiss 脚本的目标筛选逻辑单测（第 42 门禁 C1 引用面·5 例） |
 
 ## W1201 重建态批·恢复仓库完整态 + 落仓路径 A 的否证结论（2026-11-10）
 
