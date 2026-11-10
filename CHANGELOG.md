@@ -1,3 +1,18 @@
+### W1199（2026-11-10）：提交前一次性就绪链落仓（E-220 + 规则正文入 AGENTS + 计数链同步 + W1198 终态读数回填）
+
+**本批要点**（提交前就绪链的仓内沉淀·起因是用户对工作方式的直接批评）：
+
+> - **T1 起因与实证**：用户 2026-11-10 直接批评「工作方式工作流程效率太低浪费时间」。本批据 W1198 的实测数据定位四处低效源：① **拿全量 verify_delivery 当调试器**（C5e 计数链 / C5d stats 漂移 / 目录文档新鲜度本可用 check_doc_sync.py、check_plan_template.py 单跑定位，却每次跑全量·每次约 4 分钟）② **中途追加 commit**（报告订正与 W534 契约根修各 push 一次 ⇒ 每次取消旧 run 并全量重跑；一 push = 一轮 CI ≈ 25-31 jobs）③ **索引刷新顺序错**（先生成后 add ⇒ 生成器按 Git 索引收集文件 ⇒ 必漏新件 ⇒ 第 45 门禁判红）④ **外部工具要求靠试错**（级联 PRECHECK 两条、rebuild 的「两面同 W 号下界」硬判据、archive_segments 体积模式只迁超限一侧致下界分叉）。
+> - **T2 规则正文入 AGENTS.md**：最高频铁则段新增「提交前就绪链」一条（定位走局部判据单跑·全量门禁只当验收器；就绪链一次跑完且顺序不可换：git add → gen_folder_docs --refresh → docs_index → _gen_search_index → generate_csp → stats --w → rebuild_section → spec/touches 同步 → 一次全量门禁；一次 push 带齐全部内容·禁中途追加 commit；外部工具判据先读源码/--help 读全；spec 只写一次按最终 git status 生成）。
+> - **T3 坑表 E-220 入表**：条目落在「流程 / 协作 / 取证」节（节计数 180→181），并同步三处总数声明（AGENTS.md 阅读契约、HANDOVER.md 指针、puti-shouye skill）312→314（E-219 已使总数达 313·本批再加 E-220）。
+> - **T4 方法论沉淀入 HANDOVER「三」**：把本条规则写成可查的沉淀条目（依据：用户 2026-11-10 直接批评；证据：W1198 单批 3 轮 CI、4 次全量门禁）。
+> - **T5 纠正「只落私有记忆」的偏差**：上一轮该教训只写入 Agent 私有用户记忆，未同步进项目仓内——与用户既定要求「多 Agent 协作项目的经验沉淀必须同时进项目仓内」相悖，本批补齐落仓（坑表 + AGENTS 规则正文 + HANDOVER 方法论），私有记忆仅作镜像。
+> - **T6 附带修复 HANDOVER「最后更新」行的同批重复**：该行曾同时出现级联写入与手工写入的两条 W1198 摘要——手工改动与级联工具的写入面冲突所致；本批恢复「该行由级联唯一写」的不变量（手工条目改为经 spec 的 head_entry 传入级联生成）。
+> - **T7 订正 W1198 段的表述（合并后实证）**：Graph Update run **只解析 default branch 的 head commit**（历史 10 个 run 的 head_sha 全部是合并提交·无一指向源 commit）⇒ W1198 段所述「两次提交在同一个 PR 内相邻落地⇒ main 上依次出现两个状态」**不成立**（删除态从未被解析·合并后实测 pillow 仍含 12.3.0·open 仍 41）⇒ 修法改为**两个 PR**：W1199 删 manifest 使删除态单独成为 head·W1200 重建。
+> - **T8 删除态批的作用与降级边界**：删除态合并后 head = 删除态 ⇒ Graph Update 解析它 ⇒ 依赖图移除该路径条目⇒ 41 条告警随之关闭；降级影响限于 Dependabot 对 /scripts 的新增告警提示（CI 的 pip audit 仍审计哈希化清单 51 项闭包 ⇒ 漏洞检测不中断）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
 ### W1198（2026-11-10）：Dependabot 41 条 Pillow 告警归零批（删除后重建依赖清单触发依赖图重算）
 
 **本批要点**（41 条 Pillow 告警的根因在依赖图条目生命周期·读数来自 Graph Update run 日志与 SBOM API 实查）：
@@ -383,7 +398,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1198），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1199），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
