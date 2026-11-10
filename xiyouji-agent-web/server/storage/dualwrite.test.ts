@@ -113,6 +113,38 @@ test("双写：副库写失败 ⇒ fail-closed（抛错不静默吞）", async (
   await dual.close();
 });
 
+test("双写：两侧时间戳逐字节一致（权威时间一次生成·两侧同传）", async () => {
+  const primaryPath = tempDbPath("primary");
+  const secondaryPath = tempDbPath("secondary");
+  const primary = createSqliteBackend(primaryPath);
+  const secondary = createSqliteBackend(secondaryPath);
+  const dual = createDualWriteBackend(primary, secondary);
+
+  await dual.createSession(session("s4", "标题"));
+  await dual.createMessage(message("m4", "s4"));
+  await dual.insertFeedback({ id: "f4", session_id: "s4", message_id: "m4", verdict: "up", comment: "c" });
+  await dual.updateSession("s4", { title: "改标题" });
+
+  const primaryDirect = createSqliteBackend(primaryPath);
+  const secondaryDirect = createSqliteBackend(secondaryPath);
+  const p = await primaryDirect.getSession("s4");
+  const s = await secondaryDirect.getSession("s4");
+  assert.ok(p && s, "两侧都应写入该会话");
+  assert.equal(
+    p.updated_at,
+    s.updated_at,
+    "会话 updated_at 两侧必须逐字节一致（否则对账判内容不等 ⇒ 切读被永久阻断）",
+  );
+  const pSum = await primaryDirect.feedbackSummary(36500);
+  const sSum = await secondaryDirect.feedbackSummary(36500);
+  assert.equal(pSum.up, sSum.up, "反馈两侧计数须一致");
+  assert.equal(pSum.down, sSum.down, "反馈两侧计数须一致");
+
+  await dual.close();
+  await primaryDirect.close();
+  await secondaryDirect.close();
+});
+
 test("双写：clearAllData 清两侧 · healthCheck 可用", async () => {
   const primaryPath = tempDbPath("primary");
   const secondaryPath = tempDbPath("secondary");

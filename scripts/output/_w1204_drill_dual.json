@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-11-10T14:14:02.712Z",
+  "tag": "w1204dual",
+  "backend": "sqlite",
+  "write_mode": "dual",
+  "probe": {
+    "session_id": "__w1204dual_s_20261110141402711",
+    "message_id": "__w1204dual_m_20261110141402711",
+    "feedback_id": "__w1204dual_f_20261110141402711"
+  },
+  "ok": true,
+  "readback": {
+    "session_found": true,
+    "session_updated_at": "2026-11-10T14:14:02.796Z",
+    "message_count": 1
+  }
+}

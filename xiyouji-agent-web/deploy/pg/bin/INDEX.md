@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（6）
+## 文件（9）
 
 ### Python 脚本
 
@@ -20,7 +20,10 @@
 
 ### JavaScript / TypeScript
 
+- `dualwrite-drill.ts`
 - `migrate-sqlite-to-pg.ts`
+- `reconcile-dualwrite.test.ts`
+- `reconcile-dualwrite.ts`
 
 ### 其他
 

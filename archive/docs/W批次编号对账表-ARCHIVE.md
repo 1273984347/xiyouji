@@ -929,3 +929,5 @@
 | W1139 | R-02 模板层去工程化批（渲染层两级变换：纯溯源块整剥/混合块行剥·学术面保留·机读注释承 provenance·docs 源不动·外科应用 616 页·可见面残留零） | —（待回填） | 96dfb12b | **已收官（PR #143·96dfb12b 四批集成·main=a4e72cff·W1150 回填措辞归一）** | 本会话 2026-11-06 | scripts/build_reader.py,docs/11-方案报告/设计与架构方案/界面交互迭代施工方案-W1137-2026-11-05.md,scripts/output/_w1139_spec.json,docs/00-导读/W批次编号对账表.md |
 - 2026-11-10（修剪迁入 1 行·W1141-W1141·号序切分）
 | W1141 | 数据集溯源门禁挂载批（校验器挂第 61 槽 + verify 注册表/文档规范/AGENTS 计数链同步 + 三例回归锁·不新增坑表条目） | 96dfb12b | 1fa1d49d | **已收官（PR #143 合并）** | 本会话 2026-11-06 | scripts/verify_delivery.py,scripts/check_dataset_provenance.py,docs/agent/gates.md,AGENTS.md,docs/00-导读/文档规范.md,tests/unit/test_w1141_gate_mount.py,scripts/output/_w1141_spec.json,docs/00-导读/W批次编号对账表.md,CHANGELOG.md,HANDOVER.md |
+- 2026-11-10（修剪迁入 1 行·W1140-W1140·号序切分）
+| W1140 | 并行会话预约（在途·内容待其认领行登记） | —（待回填） | —（待回填） | 在途（预约·未登记内容） | 并行会话 2026-11-06 | —（待其登记） |

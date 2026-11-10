@@ -24,7 +24,19 @@ import type {
   SessionUpdates,
   StorageBackend,
   StorageHealth,
+  WriteTimeOpts,
 } from "./types.js";
+
+/**
+ * 本次写入的**权威时间**（一次生成·两侧同传）。
+ *
+ * 为什么必须显式生成（types.ts 的 WriteTimeOpts 头注有完整背景）：写路径上
+ * `updateSession` / `createMessage` / `insertFeedback` 的时间戳由**后端**生成 ⇒
+ * 双写期两侧各生成一次 ⇒ 两个副本差几毫秒 ⇒ 对账判「内容不等」⇒ 切读被永久阻断。
+ */
+function writeTimeOpts(): WriteTimeOpts {
+  return { now: new Date().toISOString() };
+}
 
 /** 双写态的运行时可查信息（供日志与断言；不并入 StorageBackend 契约以免扩枚举）。 */
 export interface DualWriteState {
@@ -91,9 +103,12 @@ export function createDualWriteBackend(
       return created;
     },
     async updateSession(id: string, updates: SessionUpdates) {
-      const hit = await primary.updateSession(id, updates);
+      // W1204 实测修根：本次写入的权威时间**一次生成·两侧同传**
+      //   （否则两侧各取当前时间 ⇒ updated_at 差几毫秒 ⇒ 对账判「内容不等」⇒ 切读被永久阻断）
+      const opts = writeTimeOpts();
+      const hit = await primary.updateSession(id, updates, opts);
       // 主库未命中 ⇒ 两侧都不动（保持「未命中」语义一致）
-      if (hit) await mirrorWrite(() => secondary.updateSession(id, updates));
+      if (hit) await mirrorWrite(() => secondary.updateSession(id, updates, opts));
       return hit;
     },
     async deleteSession(id: string) {
@@ -102,8 +117,10 @@ export function createDualWriteBackend(
       return hit;
     },
     async createMessage(message: DbMessage) {
-      const created = await primary.createMessage(message);
-      await mirrorWrite(() => secondary.createMessage(message));
+      // W1204 实测修根：会话 updated_at 由**后端**刷 ⇒ 权威时间必须两侧同传（同上）
+      const opts = writeTimeOpts();
+      const created = await primary.createMessage(message, opts);
+      await mirrorWrite(() => secondary.createMessage(message, opts));
       return created;
     },
     async updateMessage(id: string, updates: MessageUpdates) {
@@ -121,8 +138,10 @@ export function createDualWriteBackend(
       await mirrorWrite(() => secondary.createMessages(messages));
     },
     async insertFeedback(feedback: Omit<DbFeedback, "created_at">) {
-      const rowId = await primary.insertFeedback(feedback);
-      await mirrorWrite(() => secondary.insertFeedback(feedback));
+      // W1204 实测修根：feedback.created_at 由**后端**生成 ⇒ 权威时间必须两侧同传（同上）
+      const opts = writeTimeOpts();
+      const rowId = await primary.insertFeedback(feedback, opts);
+      await mirrorWrite(() => secondary.insertFeedback(feedback, opts));
       return rowId;
     },
 
