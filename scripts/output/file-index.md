@@ -1,3 +1,38 @@
+## W1199 提交前一次性就绪链落仓（2026-11-10）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1199 | 改：坑表条数声明 313→314（两处） |
+| .github/workflows/README.md | W1199 | 改：批头版本行与里程碑随 W1199 版本面推进 |
+| .md | W1199 | 改：本批级联/索引/统计产物刷新 |
+| AGENTS.md | W1199 | 改：最高频铁则段新增「提交前就绪链」一条 + 坑表总数 313→314 + 分项节计数 180→181 |
+| CHANGELOG.md | W1199 | 立段：W1199 提交前一次性就绪链落仓批（E-220 + 规则入 AGENTS + 计数链同步） |
+| CITATION.cff | W1199 | 改：版本条目随 W1199 版本面推进 |
+| HANDOVER.md | W1199 | 改：方法论沉淀新增条目 + 坑表指针 313→314 + 最后更新行同批重复修复（恢复级联唯一写） |
+| README.md | W1199 | 改：批头版本行与批次摘要随 W1199 版本面推进 |
+| STRUCTURE.md | W1199 | 改：批头版本行随 W1199 版本面推进 |
+| archive/docs/AGENTS-ARCHIVE.md | W1199 | 归档：AGENTS 脚注滚动历史段迁移 |
+| archive/docs/workflows-readme-history.md | W1199 | 归档：workflow README 历史段滚动登记 |
+| docs/00-导读/W批次编号对账表.md | W1199 | 登记：W1199 认领行 + W1198 收官回填（852f20bf）|
+| docs/00-导读/项目说明.md | W1199 | 改：批头版本行与摘要随 W1199 版本面推进 |
+| docs/11-方案报告/计划方案/T96-任务计划执行与经验沉淀报告-2026-11-10.md | W1199 | 改：新增 §8 合并后实证订正（订正「逐 commit 处理」论证错误 + 记录合并后读数 + 修法升级为两步 PR）|
+| pitfalls.md | W1199 | 入表：E-220 提交前就绪链 + 节计数 180→181；E-219 补注（删除态须单独成为 default branch head 才会被解析）+ 三处总数声明同步到 314 |
+| scripts/INDEX.md | W1199 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/INDEX.md | W1199 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/README.md | W1199 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_cascade_files_W1199.txt | W1199 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/_w1199_spec.json | W1199 | 新建：本批 spec（批级产物登记与提交范围判据的应动全集） |
+| scripts/output/file-index.md | W1199 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/stats.json | W1199 | 改：本批级联/索引/统计产物刷新 |
+| scripts/output/tools-inventory.md | W1199 | 改：本批级联/索引/统计产物刷新 |
+| scripts/requirements.txt | W1199 | 删除：删除态使该路径在 main head 上消失一次（Graph Update 只解析 head commit⇒删除态须单独成 head）|
+| site/data/cross-time-danmaku.html | W1199 | 改：本批级联/索引/统计产物刷新 |
+| site/data/tag-cloud.html | W1199 | 改：本批级联/索引/统计产物刷新 |
+| site/dukou-engine.html | W1199 | 改：本批级联/索引/统计产物刷新 |
+| site/index.html | W1199 | 改：本批级联/索引/统计产物刷新 |
+| tests/unit/test_ci_wiring.py | W1199 | 改：暂删监控面 PyYAML 第二段断言（删除态下该文件不存在·W1200 加回）|
+
+
 ## W1198 Dependabot 41 条 Pillow 告警归零批（2026-11-10）
 
 | 文件 | W | 说明 |
