@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-11-10T14:19:44.431Z",
+  "tag": "w1204redual",
+  "backend": "postgres",
+  "write_mode": "dual",
+  "probe": {
+    "session_id": "__w1204redual_s_20261110141944430",
+    "message_id": "__w1204redual_m_20261110141944430",
+    "feedback_id": "__w1204redual_f_20261110141944430"
+  },
+  "ok": true,
+  "readback": {
+    "session_found": true,
+    "session_updated_at": "2026-11-10T14:19:44.511Z",
+    "message_count": 1
+  }
+}

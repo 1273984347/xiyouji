@@ -26,6 +26,7 @@ import type {
   SessionUpdates,
   StorageBackend,
   StorageHealth,
+  WriteTimeOpts,
 } from "./types.js";
 
 /** PG 后端配置（全部有默认值；口令只从环境变量取，绝不落盘）。 */
@@ -245,7 +246,7 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
       return session;
     },
 
-    async updateSession(id: string, updates: SessionUpdates): Promise<boolean> {
+    async updateSession(id: string, updates: SessionUpdates, opts?: WriteTimeOpts): Promise<boolean> {
       const fields: string[] = [];
       const values: unknown[] = [];
       if (updates.title !== undefined) {
@@ -262,7 +263,8 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
       }
       if (fields.length === 0) return false;
 
-      values.push(new Date());
+      // W1204 实测修根：权威时间由调用方给（双写期两侧同值）⇒ 缺省才取当前时间（现役语义不变）
+      values.push(toDate(opts?.now ?? new Date().toISOString(), "sessions.updated_at"));
       fields.push(`updated_at = $${values.length}`);
       values.push(id);
 
@@ -287,7 +289,7 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
       return rows.map(toMessage);
     },
 
-    async createMessage(message: DbMessage): Promise<DbMessage> {
+    async createMessage(message: DbMessage, opts?: WriteTimeOpts): Promise<DbMessage> {
       // 建消息 + 刷会话 updated_at 必须在同一事务里（否则可能出现「消息已建但时间未刷」）
       await inTransaction(async (client) => {
         await client.query(
@@ -303,8 +305,9 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
             message.tool_calls,
           ]
         );
+        // W1204 实测修根：会话 updated_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
         await client.query("UPDATE sessions SET updated_at = $1 WHERE id = $2", [
-          new Date(),
+          toDate(opts?.now ?? new Date().toISOString(), "sessions.updated_at"),
           message.session_id,
         ]);
       });
@@ -358,7 +361,7 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
       });
     },
 
-    async insertFeedback(f: Omit<DbFeedback, "created_at">): Promise<number> {
+    async insertFeedback(f: Omit<DbFeedback, "created_at">, opts?: WriteTimeOpts): Promise<number> {
       // 同 message_id 覆盖（W917 B-DB-01 的单维唯一口径）
       const res = await pool.query(
         `INSERT INTO feedback (id, session_id, message_id, verdict, comment, created_at)
@@ -367,7 +370,8 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
            SET verdict = EXCLUDED.verdict,
                comment = EXCLUDED.comment,
                created_at = EXCLUDED.created_at`,
-        [f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, new Date()]
+        // W1204 实测修根：feedback.created_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
+        [f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, toDate(opts?.now ?? new Date().toISOString(), "feedback.created_at")]
       );
       return res.rowCount ?? 0;
     },
