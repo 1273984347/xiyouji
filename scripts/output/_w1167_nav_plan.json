@@ -1,11 +1,8 @@
 {
-  "mode": "--apply",
+  "mode": "--dry-run",
   "stats": {
-    "update": 860,
-    "replace-header-nav": 1
+    "update": 860
   },
-  "changed_sample": [
-    "data/w1177-probe.html"
-  ],
-  "changed_total": 1
+  "changed_sample": [],
+  "changed_total": 0
 }

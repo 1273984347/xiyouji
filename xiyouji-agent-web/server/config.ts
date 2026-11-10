@@ -12,6 +12,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
+import { assertDeploymentBaseline, baselineEnabled, effectiveAllowedHosts } from "./compliance/baseline.js";
 
 /**
  * W808：加载服务端 .env（W411 起 .env.example 与 DEPLOYMENT.md 均以「复制 .env.example → .env
@@ -91,21 +92,41 @@ export const AGENT_WEB_TOKEN = process.env.AGENT_WEB_TOKEN || "";
  * 追加而非替换：设 AGENT_WEB_ALLOWED_HOSTS 时在默认回环之外**追加**主机名，
  * 想要「只认某主机」也仍保留回环（回环本就是本机）。
  */
-export const ALLOWED_HOSTS: string[] = [
-  "127.0.0.1",
-  "localhost",
-  "::1",
-  ...(process.env.AGENT_WEB_ALLOWED_HOSTS || "")
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean),
-];
+export const ALLOWED_HOSTS: string[] = effectiveAllowedHosts(process.env);
 
 /**
  * W835：token 硬开关——AGENT_WEB_REQUIRE_TOKEN=1 时若未设 AGENT_WEB_TOKEN 则**拒绝启动**
  * （fail-closed·不静默降级为免认证）。默认不启用（保持 W411 起的「本地免认证」口径不变）。
  */
 export const REQUIRE_TOKEN = process.env.AGENT_WEB_REQUIRE_TOKEN === "1";
+
+/**
+ * 合规基线是否启用（W1205 · D-3 合规批 · 方案 §12.2 缺口 2）。
+ *
+ * 默认**不启用** ⇒ 现役「本地免认证」启动形态逐字不变（单机构建/开发/E2E 不受影响）。
+ * 启用后：基线自检不通过 ⇒ **拒绝启动**（exit 1），不是打印警告后继续跑。
+ */
+export const COMPLIANCE_BASELINE = baselineEnabled(process.env);
+
+/**
+ * 启动期基线自检（**fail-closed**：不通过 ⇒ 拒绝启动）。
+ *
+ * 为什么放在 config.ts 的模块加载期：config.ts 是 index.ts 的第一个 import，
+ * ⇒ 自检发生在 listen 之前 ⇒ 「基线不满足却对外提供服务」不可能发生。
+ *
+ * 要素（方案 §12.2 缺口 2 + §12.4 传输口径）：强制 token · 监听回环 · Host 白名单 ·
+ * TLS（反代侧终止）· PG 链路 TLS · 列级加密密钥 · 审计留存期下限 · 审计落盘可写。
+ */
+if (COMPLIANCE_BASELINE) {
+  try {
+    const result = assertDeploymentBaseline(process.env);
+    console.log("[boot] 合规基线自检通过（" + result.checks.length + " 项）");
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : String(err);
+    console.error("[FATAL] 部署基线自检失败（拒绝启动·fail-closed）：" + detail);
+    process.exit(1);
+  }
+}
 
 /** W681 CodeQL 处置（missing-rate-limiting）：/api/* 无依赖内存限流参数（每 IP 30 req/min）。 */
 export const RATE_LIMIT_WINDOW_MS = 60 * 1000;

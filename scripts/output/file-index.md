@@ -1,3 +1,97 @@
+## W1205 档 2 收尾四件：面板归零 + 检索接入与地址注入 + 容量实测 + D-3 合规批（2026-11-11）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1205 | mod:pitfall count declaration |
+| .gitattributes | W1205 | mod:linguist-generated for site/** (Scorecard Fuzzing root cause) |
+| .github/workflows/README.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| AGENTS.md | W1205 | mod:rule pointer for E-221 + count chain |
+| CHANGELOG.md | W1205 | mod:W1205 section |
+| CITATION.cff | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| HANDOVER.md | W1205 | mod:progress + methodology + count chain |
+| README.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| STRUCTURE.md | W1205 | mod:pitfall count declaration |
+| archive/docs/AGENTS-ARCHIVE.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| archive/docs/workflows-readme-history.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| docs/00-导读/W批次编号对账表.md | W1205 | mod:W1205 claim row |
+| docs/00-导读/项目说明.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1205 | mod:13.8 delivery section + 8.3 measured values + 3 threshold breaches |
+| docs/agent/pitfalls.md | W1205 | mod:new E-222 / E-223 + count chain 315->317 |
+| pitfalls.md | W1205 | mod:new E-222 / E-223 + count chain 315->317 |
+| pytest.ini | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/INDEX.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/check_capacity_budget.py | W1205 | new:capacity threshold measurer (8.3 ten items) |
+| scripts/check_no_hardcoded_endpoint.py | W1205 | new:C-8 guard (no hardcoded service address + negative self-test) |
+| scripts/dismiss_scorecard_alerts.py | W1205 | new:code-scanning alert dismiss/revert script |
+| scripts/gen_compliance_migration.mjs | W1205 | new:0003 migration generator (fact source + --check) |
+| scripts/inject_service_endpoint.py | W1205 | new:deployment-time endpoint injection (two fail-closed profiles) |
+| scripts/output/INDEX.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/README.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/_cascade_files_W1205.txt | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/_vermilion_solid_cache.json | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/_w1167_nav_plan.json | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/_w1205_capacity_audit.json | W1205 | new:machine evidence for this batch |
+| scripts/output/_w1205_compliance.json | W1205 | new:machine evidence for this batch |
+| scripts/output/_w1205_retrieval_endpoint.json | W1205 | new:machine evidence for this batch |
+| scripts/output/_w1205_scorecard_alerts.json | W1205 | new:machine evidence for this batch |
+| scripts/output/_w1205_spec.json | W1205 | new:machine evidence for this batch |
+| scripts/output/file-index.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/stats-changelog.json | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/stats-index.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/stats.json | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/output/tools-inventory.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/rag/INDEX.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| scripts/rag/retrieval_cli.py | W1205 | new:retrieval CLI entry |
+| site/data/cross-time-danmaku.html | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| site/data/search.html | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| site/data/tag-cloud.html | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| site/dukou-engine.html | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| site/en/search.html | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| site/index.html | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| tests/unit/INDEX.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| tests/unit/README.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| tests/unit/test_check_no_hardcoded_endpoint.py | W1205 | new:regression tests for C-8 guard |
+| tests/unit/test_dismiss_scorecard_alerts.py | W1205 | new:regression tests for dismiss script |
+| tests/unit/test_w1205_batch_scripts.py | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| xiyouji-agent-web/deploy/pg/migrations/0003_compliance_columns.sql | W1205 | new:compliance column migration (generated from schema fact source) |
+| xiyouji-agent-web/deploy/pg/migrations/INDEX.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| xiyouji-agent-web/deploy/pg/migrations/README.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| xiyouji-agent-web/package.json | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| xiyouji-agent-web/server/INDEX.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| xiyouji-agent-web/server/README.md | W1205 | mod:batch delivery (see CHANGELOG section + file-index) |
+| xiyouji-agent-web/server/audit.test.ts | W1205 | mod:structured audit events + F10 compliance degradation + purge evidence |
+| xiyouji-agent-web/server/audit.ts | W1205 | mod:structured audit events + F10 compliance degradation + purge evidence |
+| xiyouji-agent-web/server/chat.ts | W1205 | mod:grading tag on writes |
+| xiyouji-agent-web/server/compliance/INDEX.md | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/README.md | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/audit-archive.test.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/audit-archive.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/audit-event.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/baseline.example.json | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/baseline.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/compliance.test.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/data-class.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/errors.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/retention.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/compliance/schema.ts | W1205 | new:D-3 compliance (grading catalog / deploy baseline / retention / audit archive / error contract) |
+| xiyouji-agent-web/server/config.ts | W1205 | mod:compliance baseline self-check at startup |
+| xiyouji-agent-web/server/index.ts | W1205 | mod:register retrieval routes |
+| xiyouji-agent-web/server/retrieval.routes.ts | W1205 | new:retrieval layer wiring (O-4 / citation guard / degradation semantics) |
+| xiyouji-agent-web/server/retrieval.test.ts | W1205 | new:retrieval layer wiring (O-4 / citation guard / degradation semantics) |
+| xiyouji-agent-web/server/retrieval.ts | W1205 | new:retrieval layer wiring (O-4 / citation guard / degradation semantics) |
+| xiyouji-agent-web/server/routes.ts | W1205 | mod:grading tag on writes + citation wiring |
+| xiyouji-agent-web/server/storage/INDEX.md | W1205 | mod:storage contract + backends (C-6 grading tag / authoritative write time / encrypt-once) |
+| xiyouji-agent-web/server/storage/README.md | W1205 | mod:storage contract + backends (C-6 grading tag / authoritative write time / encrypt-once) |
+| xiyouji-agent-web/server/storage/dualwrite.test.ts | W1205 | mod:storage contract + backends (C-6 grading tag / authoritative write time / encrypt-once) |
+| xiyouji-agent-web/server/storage/dualwrite.ts | W1205 | mod:storage contract + backends (C-6 grading tag / authoritative write time / encrypt-once) |
+| xiyouji-agent-web/server/storage/encryption.test.ts | W1205 | new:column-level encryption (AES-256-GCM / AAD bound / idempotent) |
+| xiyouji-agent-web/server/storage/encryption.ts | W1205 | new:column-level encryption (AES-256-GCM / AAD bound / idempotent) |
+| xiyouji-agent-web/server/storage/postgres.ts | W1205 | mod:storage contract + backends (C-6 grading tag / authoritative write time / encrypt-once) |
+| xiyouji-agent-web/server/storage/sqlite.ts | W1205 | mod:storage contract + backends (C-6 grading tag / authoritative write time / encrypt-once) |
+| xiyouji-agent-web/server/storage/storage.test.ts | W1205 | mod:storage contract + backends (C-6 grading tag / authoritative write time / encrypt-once) |
+| xiyouji-agent-web/server/storage/types.ts | W1205 | mod:storage contract + backends (C-6 grading tag / authoritative write time / encrypt-once) |
+
 ## W1204 v2 档 2 D-2 第二子批：双写期集合级三重对账器 + 切读/停写流程（2026-11-10）
 
 | 文件 | W | 说明 |

@@ -170,6 +170,8 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
           : uuidv4(),
         title: titleFromMessage(message),
         model: model || defaultModel,
+        // C-6：分级标签显式化（会话 = L3·§12.1 落点）
+        data_class: "L3",
         sdk_session_id: null, // W680：SDK resume 退役，历史从 SQLite 重建
         created_at: now,
         updated_at: now,
@@ -192,6 +194,8 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         role: "user",
         content: message,
         model: null,
+        // C-6：分级标签显式化（消息 = L3·§12.1 落点）
+        data_class: "L3",
         created_at: now,
         tool_calls: null,
       });
@@ -335,6 +339,8 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         role: "assistant",
         content: fullResponse,
         model: selectedModel,
+        // C-6：分级标签显式化（消息 = L3·§12.1 落点）
+        data_class: "L3",
         created_at: new Date().toISOString(),
         tool_calls: toolCalls.length > 0 ? JSON.stringify(toolCalls) : null,
       });

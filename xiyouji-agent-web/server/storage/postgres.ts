@@ -28,6 +28,9 @@ import type {
   StorageHealth,
   WriteTimeOpts,
 } from "./types.js";
+import { isDataClass, resolveWriteDataClass } from "../compliance/data-class.js";
+import { ComplianceError, ComplianceErrorCode } from "../compliance/errors.js";
+import { decryptSensitiveColumns, encryptSensitiveColumns } from "./encryption.js";
 
 /** PG 后端配置（全部有默认值；口令只从环境变量取，绝不落盘）。 */
 export interface PostgresConfig {
@@ -101,6 +104,32 @@ export function toIso(v: unknown): string {
   return String(v);
 }
 
+/**
+ * 单字段加密（更新路径用；幂等——已是密文信封的值原样保留）。
+ */
+function encryptField(table: string, column: string, value: string): string {
+  const row = encryptSensitiveColumns({ [column]: value } as Record<string, unknown>, table);
+  return String(row[column]);
+}
+
+/**
+ * 把 PG 的「缺列」错误翻译成可枚举的合规错误（部署缺陷提示）。
+ *
+ * 业务表的 data_class 列由 deploy/pg/migrations 下的合规迁移提供；
+ * 迁移未落 ⇒ 写入报 PG 的 column does not exist ⇒ 翻译成 SCHEMA_OUT_OF_DATE，
+ * 免得运维看到一条裸 SQL 错误猜不出是「迁移没跑」。
+ */
+function assertNoMissingComplianceColumn(err: unknown): void {
+  const msg = err instanceof Error ? err.message : String(err);
+  if (/column "data_class".*does not exist/i.test(msg)) {
+    throw new ComplianceError(
+      ComplianceErrorCode.SCHEMA_OUT_OF_DATE,
+      "业务表缺少 data_class 列（缺合规迁移）",
+      { hint: "apply deploy/pg/migrations/0003_compliance_columns.sql" }
+    );
+  }
+}
+
 /** PG 的 `COUNT(*)` 是 int8 ⇒ 驱动默认给字符串 ⇒ 统一转 number。 */
 function toCount(v: unknown): number {
   if (typeof v === "number") return v;
@@ -160,32 +189,36 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
     }
   }
 
-  /** 行 → DbSession（时间列转 ISO 字符串）。 */
+  /** 行 → DbSession（时间列转 ISO 字符串 + 敏感列解密）。 */
   function toSession(row: Record<string, unknown>): DbSession {
+    const decrypted = decryptSensitiveColumns(row, "sessions");
     return {
-      id: String(row.id),
-      title: String(row.title),
-      model: String(row.model),
-      sdk_session_id: row.sdk_session_id === null || row.sdk_session_id === undefined
+      id: String(decrypted.id),
+      title: String(decrypted.title),
+      model: String(decrypted.model),
+      sdk_session_id: decrypted.sdk_session_id === null || decrypted.sdk_session_id === undefined
         ? null
-        : String(row.sdk_session_id),
-      created_at: toIso(row.created_at),
-      updated_at: toIso(row.updated_at),
+        : String(decrypted.sdk_session_id),
+      created_at: toIso(decrypted.created_at),
+      updated_at: toIso(decrypted.updated_at),
+      data_class: isDataClass(decrypted.data_class) ? decrypted.data_class : undefined,
     };
   }
 
   /** 行 → DbMessage。 */
   function toMessage(row: Record<string, unknown>): DbMessage {
+    const decrypted = decryptSensitiveColumns(row, "messages");
     return {
-      id: String(row.id),
-      session_id: String(row.session_id),
-      role: row.role === "assistant" ? "assistant" : "user",
-      content: String(row.content),
-      model: row.model === null || row.model === undefined ? null : String(row.model),
-      created_at: toIso(row.created_at),
-      tool_calls: row.tool_calls === null || row.tool_calls === undefined
+      id: String(decrypted.id),
+      session_id: String(decrypted.session_id),
+      role: decrypted.role === "assistant" ? "assistant" : "user",
+      content: String(decrypted.content),
+      model: decrypted.model === null || decrypted.model === undefined ? null : String(decrypted.model),
+      created_at: toIso(decrypted.created_at),
+      tool_calls: decrypted.tool_calls === null || decrypted.tool_calls === undefined
         ? null
-        : String(row.tool_calls),
+        : String(decrypted.tool_calls),
+      data_class: isDataClass(decrypted.data_class) ? decrypted.data_class : undefined,
     };
   }
 
@@ -231,26 +264,34 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
     },
 
     async createSession(session: DbSession): Promise<DbSession> {
-      await pool.query(
-        `INSERT INTO sessions (id, title, model, sdk_session_id, created_at, updated_at)
-         VALUES ($1, $2, $3, $4, $5, $6)`,
-        [
-          session.id,
-          session.title,
-          session.model,
-          session.sdk_session_id,
-          toDate(session.created_at, "sessions.created_at"),
-          toDate(session.updated_at, "sessions.updated_at"),
-        ]
-      );
-      return session;
+      const cls = resolveWriteDataClass(session.data_class, "sessions", "sessions.insert");
+      const prepared = encryptSensitiveColumns({ ...session, data_class: cls }, "sessions");
+      try {
+        await pool.query(
+          `INSERT INTO sessions (id, title, model, sdk_session_id, created_at, updated_at, data_class)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          [
+            prepared.id,
+            prepared.title,
+            prepared.model,
+            prepared.sdk_session_id,
+            toDate(prepared.created_at, "sessions.created_at"),
+            toDate(prepared.updated_at, "sessions.updated_at"),
+            cls,
+          ]
+        );
+      } catch (err) {
+        assertNoMissingComplianceColumn(err);
+        throw err;
+      }
+      return { ...session, data_class: cls };
     },
 
     async updateSession(id: string, updates: SessionUpdates, opts?: WriteTimeOpts): Promise<boolean> {
       const fields: string[] = [];
       const values: unknown[] = [];
       if (updates.title !== undefined) {
-        values.push(updates.title);
+        values.push(encryptField("sessions", "title", updates.title));
         fields.push(`title = $${values.length}`);
       }
       if (updates.model !== undefined) {
@@ -290,35 +331,43 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
     },
 
     async createMessage(message: DbMessage, opts?: WriteTimeOpts): Promise<DbMessage> {
+      const cls = resolveWriteDataClass(message.data_class, "messages", "messages.insert");
+      const prepared = encryptSensitiveColumns({ ...message, data_class: cls }, "messages");
       // 建消息 + 刷会话 updated_at 必须在同一事务里（否则可能出现「消息已建但时间未刷」）
       await inTransaction(async (client) => {
-        await client.query(
-          `INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls)
-           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-          [
-            message.id,
-            message.session_id,
-            message.role,
-            message.content,
-            message.model,
-            toDate(message.created_at, "messages.created_at"),
-            message.tool_calls,
-          ]
-        );
+        try {
+          await client.query(
+            `INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls, data_class)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+            [
+              prepared.id,
+              prepared.session_id,
+              prepared.role,
+              prepared.content,
+              prepared.model,
+              toDate(prepared.created_at, "messages.created_at"),
+              prepared.tool_calls,
+              cls,
+            ]
+          );
+        } catch (err) {
+          assertNoMissingComplianceColumn(err);
+          throw err;
+        }
         // W1204 实测修根：会话 updated_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
         await client.query("UPDATE sessions SET updated_at = $1 WHERE id = $2", [
           toDate(opts?.now ?? new Date().toISOString(), "sessions.updated_at"),
-          message.session_id,
+          prepared.session_id,
         ]);
       });
-      return message;
+      return { ...message, data_class: cls };
     },
 
     async updateMessage(id: string, updates: MessageUpdates): Promise<boolean> {
       const fields: string[] = [];
       const values: unknown[] = [];
       if (updates.content !== undefined) {
-        values.push(updates.content);
+        values.push(encryptField("messages", "content", updates.content));
         fields.push(`content = $${values.length}`);
       }
       if (updates.tool_calls !== undefined) {
@@ -344,35 +393,58 @@ export function createPostgresBackend(cfg: PostgresConfig = resolvePostgresConfi
       if (messages.length === 0) return;
       await inTransaction(async (client) => {
         for (const msg of messages) {
-          await client.query(
-            `INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls)
-             VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-            [
-              msg.id,
-              msg.session_id,
-              msg.role,
-              msg.content,
-              msg.model,
-              toDate(msg.created_at, "messages.created_at"),
-              msg.tool_calls,
-            ]
-          );
+          const cls = resolveWriteDataClass(msg.data_class, "messages", "messages.insertMany");
+          const prepared = encryptSensitiveColumns({ ...msg, data_class: cls }, "messages");
+          try {
+            await client.query(
+              `INSERT INTO messages (id, session_id, role, content, model, created_at, tool_calls, data_class)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+              [
+                prepared.id,
+                prepared.session_id,
+                prepared.role,
+                prepared.content,
+                prepared.model,
+                toDate(prepared.created_at, "messages.created_at"),
+                prepared.tool_calls,
+                cls,
+              ]
+            );
+          } catch (err) {
+            assertNoMissingComplianceColumn(err);
+            throw err;
+          }
         }
       });
     },
 
     async insertFeedback(f: Omit<DbFeedback, "created_at">, opts?: WriteTimeOpts): Promise<number> {
+      const cls = resolveWriteDataClass(f.data_class, "feedback", "feedback.insert");
       // 同 message_id 覆盖（W917 B-DB-01 的单维唯一口径）
-      const res = await pool.query(
-        `INSERT INTO feedback (id, session_id, message_id, verdict, comment, created_at)
-         VALUES ($1, $2, $3, $4, $5, $6)
+      let res;
+      try {
+        res = await pool.query(
+          `INSERT INTO feedback (id, session_id, message_id, verdict, comment, created_at, data_class)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)
          ON CONFLICT (message_id) DO UPDATE
            SET verdict = EXCLUDED.verdict,
                comment = EXCLUDED.comment,
                created_at = EXCLUDED.created_at`,
-        // W1204 实测修根：feedback.created_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
-        [f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, toDate(opts?.now ?? new Date().toISOString(), "feedback.created_at")]
-      );
+          // W1204 实测修根：feedback.created_at 的权威时间两侧同传（见 types.ts 的 WriteTimeOpts）
+          [
+            f.id,
+            f.session_id,
+            f.message_id,
+            f.verdict,
+            f.comment ?? null,
+            toDate(opts?.now ?? new Date().toISOString(), "feedback.created_at"),
+            cls,
+          ]
+        );
+      } catch (err) {
+        assertNoMissingComplianceColumn(err);
+        throw err;
+      }
       return res.rowCount ?? 0;
     },
 
