@@ -34,6 +34,7 @@
 | xiyouji-agent-web/server/storage/dualwrite.test.ts | W1203 | 新建：双写层契约测试 4 例（两 SQLite 实例互为两侧·无外部依赖全跑） |
 | xiyouji-agent-web/server/storage/dualwrite.ts | W1203 | 新建：双写后端（写两侧·读只走主库·副库写失败 fail-closed·返回值以主库为准·kind 沿用主库） |
 | xiyouji-agent-web/server/storage/index.ts | W1203 | 改：接入 AGENT_WEB_DB_WRITE_MODE（primary/dual·非法取值 fail-closed）+ writeMode() 可查 |
+| pitfalls.md | W1203 | 订正：E-220 就绪链补精确（batch_cascade 后须再 add 再刷目录索引·改 .ts 必先 tsc -b·类型层缺字段致 CI Agent Web Build 红的实证） |
 
 
 ## W1202 GitHub「Security and quality」面板归零收官批（2026-11-10）

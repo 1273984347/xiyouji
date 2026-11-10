@@ -42,6 +42,8 @@ function message(id: string, sessionId: string) {
     session_id: sessionId,
     role: "user" as const,
     content: "hello",
+    model: null,
+    tool_calls: null,
     created_at: "2026-11-10T08:00:01.000Z",
   };
 }
