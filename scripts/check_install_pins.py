@@ -7,11 +7,20 @@ PinnedDependenciesID 检查三类可固定对象——`uses:` 引用、安装命
 实查查出 7 处未钉版安装命令（pip-audit / black / mypy / pip 自身 / @lhci/cli /
 playwright ×2），它们在 Scorecard 面板上以告警形态暴露。
 
-判据：`.github/workflows/*.yml` 的每个 `run` 块里，安装类命令的每个包规格必须钉到精确版本。
+判据：`.github/workflows/*.yml` 的每个 `run` 块里，安装类命令必须处于 OSSF Scorecard
+的 Pinned-Dependencies 认定的 pinned 形态（**与 Scorecard 源码同源，不自拟口径**）：
 
-豁免（三种，均属「已由另一处钉版」而非「未钉版」）：
-  ① `npm ci` —— 按 lockfile 安装，版本由 package-lock.json 钉定；
-  ② `pip install -r <清单>` —— 版本由该清单钉定（本仓清单逐行 `==` 钉版）；
+· **pip**（Scorecard `checks/raw/shell_download_validate.go` 的 `isUnpinnedPipInstall`）：
+  命令含 `--require-hashes` → pinned（直接 return false）；
+  含其他参数（如 `pip install pkg==1.2.3`、`pip install -r file`）→ unpinned。
+  即 pip 面必须「钉 hash」而非「钉版本」。
+· **npm**（同文件 `isNpmUnpinnedDownload`）：
+  命令含 `npm ci`（走 lockfile·ci 会校验 lock 内的 integrity hash）→ pinned；
+  `npm install pkg@版本`、`npm install pkg@hash` 等形态 → unpinned。
+
+豁免（三种，均属「本层已处于 pinned 形态」）：
+  ① `npm ci` —— 走 lockfile，lock 内含 integrity hash·ci 会校验（Scorecard 认 pinned）；
+  ② `pip install --require-hashes -r <哈希化清单>` —— 每个依赖（含传递）都钉版本 + hash；
   ③ 命令替换取版本（如 `pip install "$(grep '^ruff==' scripts/requirements.txt)"`）——
      版本来自仓内已钉版的清单。
 
@@ -22,7 +31,7 @@ npm 注册表（`registry.npmjs.org`）——指向第三方镜像站的 lock �
 
 用法：
   py -3 scripts/check_install_pins.py             # 判据模式：逐条校验，退出码 0/1
-  py -3 scripts/check_install_pins.py --self-test # 负样本自证（含 13 例）
+  py -3 scripts/check_install_pins.py --self-test # 负样本自证（含 14 例）
 """
 import argparse
 import json
@@ -117,6 +126,12 @@ def _unquote(tok):
 
 
 def _pip_unpinned(command):
+    """返回非 pinned 的 pip 安装命令中的包规格（供闭口陈述）。
+
+    Scorecard 对 pip 的 pinned 判定是「命令含 --require-hashes」，而非「包规格钉了版本」。
+    因此本函数只报「带包规格但无 --require-hashes」的命令中的非标志参数，
+    供闭口陈述具体是哪个包规格未被 hash 固定。
+    """
     bad = []
     for tok in _after_install(_tokens(command)):
         if tok.startswith("-"):
@@ -126,8 +141,6 @@ def _pip_unpinned(command):
         inner = _unquote(tok)
         if "$(" in inner or inner.startswith("$"):
             continue  # 命令替换取版本（来自仓内已钉版清单）
-        if "==" in inner:
-            continue
         if inner in ("pip", "setuptools", "wheel"):
             continue  # 工具自身
         bad.append(tok)
@@ -135,20 +148,31 @@ def _pip_unpinned(command):
 
 
 def _npm_unpinned(command):
+    """返回非 pinned 的 npm 安装命令中的包规格（供闭口陈述）。
+
+    Scorecard 对 npm 的 pinned 判定是「命令里有 ci」（走 lockfile·ci 会校验 lock 内的 integrity hash），
+    而非「包规格钉了版本」——即 `npm install pkg@1.2.3` 也判 unpinned。
+    本函数因此报出命令里出现的非标志包规格，供闭口陈述具体是哪个。
+    """
     bad = []
     for tok in _after_install(_tokens(command)):
         if tok.startswith("-"):
             continue
         if tok in NPM_OPTION_TOKENS:
             continue
-        if tok.count("@") >= 1 and tok.rsplit("@", 1)[1]:
-            continue  # pkg@version 或 @scope/name@version
         bad.append(tok)
     return bad
 
 
 def check_command(command):
-    """返回 (类别, 未钉版包列表)。类别 ∈ {pip, npm, other, None}。"""
+    """返回 (类别, 未钉 hash 的包规格列表)。类别 ∈ {pip, npm, other, None}。
+
+    判定与 Scorecard 源码同源（ossf/scorecard checks/raw/shell_download_validate.go）：
+      pip：命令含 `--require-hashes` → pinned（直接 return false）；
+           含其他参数（包规格形式的包名 / 版本 / 清单名）→ unpinned。
+      npm：命令含 `ci`（走 lockfile·lock 内含 integrity hash）→ pinned；
+           `npm install` / `npm i` / `npm update` 带包规格 → unpinned。
+    """
     cmd = strip_comment(command).strip()
     if not cmd:
         return None, []
@@ -157,12 +181,12 @@ def check_command(command):
     if NPM_RE.search(cmd):
         tail = cmd.split("npm", 1)[1].strip()
         if tail.startswith("ci"):
-            return None, []  # npm ci：按 lockfile 安装（豁免）
+            return None, []  # npm ci：走 lockfile·ci 校验 lock 内的 integrity hash（Scorecard 认 pinned）
         return "npm", _npm_unpinned(cmd)
     if PIP_RE.search(cmd):
-        tail = cmd.split("install", 1)[1].strip()
-        if tail.startswith(("-r", "--requirement")):
-            return None, []  # -r 清单：版本由清单钉定（豁免）
+        # pip：含 --require-hashes → pinned（不再看包规格）
+        if "--require-hashes" in cmd:
+            return None, []
         return "pip", _pip_unpinned(cmd)
     return None, []
 
@@ -257,15 +281,16 @@ def run_gate(root=ROOT):
 
 def _self_test():
     cases = [
-        ("        run: pip install pip-audit==2.10.1", 0, "pip 已钉版 ⇒ 通过"),
-        ("        run: pip install pip-audit", 1, "pip 未钉版 ⇒ 判红"),
-        ("        run: pip install -r scripts/requirements.txt", 0, "pip -r 清单 ⇒ 豁免"),
-        ("        run: npm install -g @lhci/cli@0.13.0", 0, "npm scope 包已钉版 ⇒ 通过"),
-        ("        run: npm install playwright @playwright/test", 1, "npm 未钉版 ⇒ 判红"),
-        ("        run: npm ci --prefix scripts", 0, "npm ci ⇒ 豁免"),
-        ("        run: pip install \"$(grep '^ruff==' scripts/requirements.txt)\" black==26.10.1", 0, "命令替换取版本 ⇒ 豁免"),
-        ("        run: pip install pip-audit==2.10.1  # 钉版注释不应被当包名", 0, "行尾注释被剥离 ⇒ 通过"),
-        ("        run: npm install playwright@1.63.0 @playwright/test@1.63.0  # 注释", 0, "scope 包带版本 + 注释 ⇒ 通过"),
+        ("        run: pip install --require-hashes -r scripts/requirements-hashed.txt", 0, "pip --require-hashes → pinned（Scorecard 认定形态）"),
+        ("        run: pip install pip-audit==2.10.1", 1, "pip 钉版本但无 --require-hashes → 判红（Scorecard 要求钉 hash）"),
+        ("        run: pip install pip-audit", 1, "pip 未钉版 → 判红"),
+        ("        run: pip install -r scripts/requirements.txt", 1, "pip -r 清单但无 --require-hashes → 判红"),
+        ("        run: npm install -g @lhci/cli@0.13.0", 1, "npm install 钉了版本仍 → 判红（Scorecard 只认 npm ci）"),
+        ("        run: npm install playwright@1.63.0 @playwright/test@1.63.0", 1, "npm install 钉了版本仍 → 判红"),
+        ("        run: npm ci --prefix scripts", 0, "npm ci → pinned（走 lockfile·ci 校验 integrity hash）"),
+        ("        run: pip install \"$(grep '^ruff==' scripts/requirements.txt)\" black==26.10.1", 1, "命令替换取版本但无 --require-hashes → 判红"),
+        ("        run: pip install --require-hashes -r scripts/requirements-hashed.txt  # 注释", 0, "行尾注释被剥离 ⇒ 通过"),
+        ("        run: npm ci --prefix scripts  # 注释", 0, "npm ci + 注释 ⇒ 通过"),
     ]
     ok = 0
     for content, expect_fail, desc in cases:

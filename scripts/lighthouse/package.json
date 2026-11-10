@@ -1,0 +1,9 @@
+{
+  "name": "xiyouji-lighthouse-runner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lighthouse CI runner deps (W1195) - locked so CI can use npm ci (Scorecard Pinned-Dependencies)",
+  "dependencies": {
+    "@lhci/cli": "0.13.0"
+  }
+}

@@ -147,12 +147,16 @@ jobs:
 
       - name: Install Python deps (Pillow)
         if: steps.scope.outputs.needed == 'true'
-        run: pip install -r scripts/requirements.txt
+        run: pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes + 哈希化清单（Scorecard 的 pip 面要求「钉 hash」，「钉版本」无效）
 
       - name: Install Playwright
         if: steps.scope.outputs.needed == 'true'
+        # W1195：改用 `npm ci --prefix scripts`（Scorecard Pinned-Dependencies 认的 pinned 形态·
+        # 源码 checks/raw/shell_download_validate.go 的 isNpmUnpinnedDownload：只有 `npm ci` 算 pinned，
+        # `npm install pkg@版本` 一律判 unpinned ⇒ 前批「钉精确版本」对该规则无效）。
+        # scripts/package-lock.json 已钉 playwright 1.63.0（含 integrity）；同时去掉 CI 零调用的 @playwright/test。
         run: |
-          npm install playwright@1.63.0 @playwright/test@1.63.0  # W1194：钉版（对齐 scripts/package-lock.json·W913 口径）
+          npm ci --prefix scripts
           npx playwright install --with-deps chromium
 
       - name: Detect unwrapped tables (baseline diff, blocking on new entries)
@@ -334,8 +338,9 @@ jobs:
 
       - name: Install Playwright
         if: steps.scope.outputs.run != 'false'
+        # W1195：同上一处——改用 `npm ci --prefix scripts`（Scorecard 只认 `npm ci` 为 pinned·详见上一处注释）。
         run: |
-          npm install playwright@1.63.0 @playwright/test@1.63.0  # W1194：钉版（对齐 scripts/package-lock.json·W913 口径）
+          npm ci --prefix scripts
           npx playwright install --with-deps chromium
 
       - name: Start local server (site/ as root)
