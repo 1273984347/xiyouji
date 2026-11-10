@@ -26,6 +26,8 @@ import { installMiddleware } from "./middleware.js";
 import { createPendingPermissionStore } from "./permissions.js";
 import { registerApiRoutes } from "./routes.js";
 import { registerChatRoute } from "./chat.js";
+// O-4 检索层接入（W1205 · D-2 收尾）：独立路由文件·不改动既有路由契约
+import { registerRetrievalRoutes } from "./retrieval.routes.js";
 import { errorHandler, notFoundHandler } from "./errors.js";
 import { logger } from "./logger.js";
 import { closeDatabase } from "./db.js";
@@ -68,6 +70,8 @@ const pendingPermissions = createPendingPermissionStore();
 
 registerApiRoutes(app, pendingPermissions);
 registerChatRoute(app, pendingPermissions);
+// O-4：检索路由（静态层不依赖它·L3 不可达只影响本路由·见 retrieval.routes.ts 降级语义）
+registerRetrievalRoutes(app);
 
 // W808：/api 未命中路由 → JSON 404（此前落到 Express 默认 HTML 404，前端 client 无法一致解析）。
 // 注意只兜 /api——非 /api 路径仍走 Express 默认行为（保持既有语义）。

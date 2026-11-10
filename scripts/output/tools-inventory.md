@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-10 22:32
+生成时间：2026-11-11 00:46
 
-共 **210** 件（门禁与校验 98 · 批次与登记 12 · 统计与对账 3 · 生成与索引 7 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
+共 **215** 件（门禁与校验 100 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 84 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（98）
+## 门禁与校验（100）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -17,6 +17,7 @@
 | `check_archive_health.py` | check_archive_health.py — 归档区健康探针（W994 建·报告型 exit 0）。 |
 | `check_audit_trigger.py` | check_audit_trigger.py — 对抗式审查触发器（W1000 建·与复盘触发器同族的第三哨）。 |
 | `check_backlog_review.py` | check_backlog_review.py — Backlog 登记面对账触发器（W1021 建·与对抗审查触发器同族第四哨）。 |
+| `check_capacity_budget.py` | check_capacity_budget.py — 架构方案 v2 §8.3「容量阈值（10 条）」实算门禁（W1205）。 |
 | `check_cascade_line_anchor.py` | check_cascade_line_anchor.py — 级联三文档面「行锚定」不变量自证（跨批复用判据 · W1005 建） |
 | `check_chapter_stats_sync.py` | check_chapter_stats_sync.py — chapter_stats 双源同步校验（S-24 家族化首对·W699）。 |
 | `check_chart_colorblind.py` | check_chart_colorblind.py — 第 29 门禁 · 图表配色色盲安全（PD-1a · W653） |
@@ -79,6 +80,7 @@
 | `check_nav_parity.py` | check_nav_parity.py — 第 65 门禁 · 导航一致性（W1167 · MVP 迁移批③） |
 | `check_no_brand_refs.py` | check_no_brand_refs.py — 品牌字面量零命中守卫（W836·N2「归档检测器复活到活面」） |
 | `check_no_goatcounter.py` | check_no_goatcounter.py — 统计「具名例外面」对账守卫（W806 建立 · W1167 重指向）。 |
+| `check_no_hardcoded_endpoint.py` | check_no_hardcoded_endpoint.py — 产物面「服务端地址硬编码」守卫（W1205 · 契约 C-8） |
 | `check_orchestration_refs.py` | check_orchestration_refs.py —— 编排面引用存在性门禁（W1154 新建·基础设施审计 §6 建议）。 |
 | `check_page_admission.py` | check_page_admission.py — 新建页准入门禁（W916 建置·C-W818-01 清偿·静态版）。 |
 | `check_parser_anchor_coverage.py` | check_parser_anchor_coverage.py — 解析器锚点覆盖面扫描（W965 沉淀·W964 双虫探针常驻化）。 |
@@ -136,10 +138,11 @@
 | `judge_gate.py` | W465 决策闸门判定脚本（Phase 3 路线图 v7 · W530 落地）。 |
 | `stats.py` | 聚合数字统计器 stats（W703 建·W704 实体化）——从磁盘实算生成 scripts/output/stats.json（tracke |
 
-## 生成与索引（7）
+## 生成与索引（8）
 
 | 脚本 | 用途 |
 |:---|:---|
+| `gen_compliance_migration.mjs` | gen_compliance_migration.mjs — 从 DDL 事实源生成 PG 合规列迁移（W1205 · D-3 合规批） |
 | `gen_dataset_index.py` | 生成 dataset/README.md 数据索引（从磁盘实读，替代手工维护的 41 行表）。 |
 | `gen_folder_docs.py` | gen_folder_docs.py — 为全仓目录补齐 INDEX.md / README.md（W779 批·用户令「检查所有文件夹，添加  |
 | `gen_og_cover.py` | gen_og_cover.py — 生成社交分享封面 site/static/img/og-cover.png（W591 SEO 清零）。 |
@@ -154,7 +157,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（82）
+## 工具（84）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -182,6 +185,7 @@
 | `debug_page.js` | Debug a web page using Playwright. Capture console messages and/or page  |
 | `diagnose_overflow.js` | 批量诊断 mobile (375x812) 视口下所有页面的横向溢出根因 |
 | `dismiss_pillow_alerts.py` | 批量关闭 / 恢复 GitHub Dependabot 的 pillow 告警（W1202·GitHub「Security and qualit |
+| `dismiss_scorecard_alerts.py` | 批量关闭 / 恢复 GitHub Code scanning 的 Scorecard 整体评级告警（W1205 子任务 A）。 |
 | `doc_areas.py` | doc_areas.py — A1-A6 内容板块目录与计数口径的单一事实源（W728 重构提取）。 |
 | `docs_index.py` | docs_index.py — 自动生成 docs/ 目录索引 |
 | `drl_spotcheck.py` | drl_spotcheck.py — DRL 真循环 spot-check 工具 |
@@ -199,6 +203,7 @@
 | `inject_descriptions.py` | inject_descriptions.py — 全站 meta description 注入 + title 清理（W641）。 |
 | `inject_rum.py` | W390 · P0 埋点注入脚本 |
 | `inject_seo_head.py` | inject_seo_head.py — 全站 SEO head 注入器（W591 SEO 清零·幂等）。 |
+| `inject_service_endpoint.py` | inject_service_endpoint.py — 静态产物服务地址注入（部署期）· W1205 契约 C-8 |
 | `inject_visit_log.py` | W403 · 本地访问记录注入脚本（localStorage 自建基线） |
 | `inline_css.py` | inline_css.py — 将数据页的外部 ../tokens.css + ../system.css <link> 标签 |
 | `interaction_components.py` | interaction_components.py — 全站开合组件清单（W1147 待办①·交互后态门禁覆盖的数据面）。 |

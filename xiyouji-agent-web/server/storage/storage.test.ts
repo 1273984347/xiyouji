@@ -32,9 +32,12 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Pool } from "pg";
+import Database from "better-sqlite3";
 import { createSqliteBackend } from "./sqlite.js";
 import { createPostgresBackend, resolvePostgresConfig } from "./postgres.js";
 import type { DbMessage, DbSession, StorageBackend } from "./types.js";
+import { ComplianceError, ComplianceErrorCode } from "../compliance/errors.js";
+import { pgComplianceDdl } from "../compliance/schema.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
@@ -56,6 +59,7 @@ async function runContractSuite(
     sdk_session_id: null,
     created_at: now,
     updated_at: now,
+    data_class: "L3",
   };
   const message: DbMessage = {
     id: mid,
@@ -65,6 +69,7 @@ async function runContractSuite(
     model: null,
     created_at: now,
     tool_calls: null,
+    data_class: "L3",
   };
 
   // ---- ① 建会话：返回入参对象本身 ----
@@ -118,6 +123,7 @@ async function runContractSuite(
     message_id: mid,
     verdict: "up",
     comment: "第一次",
+    data_class: "L2",
   });
   await b.insertFeedback({
     id: "fb-2",
@@ -125,6 +131,7 @@ async function runContractSuite(
     message_id: mid,
     verdict: "down",
     comment: "第二次",
+    data_class: "L2",
   });
   const sum1 = await b.feedbackSummary(30);
   assert.equal(sum1.up, 0, "同 message_id 覆盖后不应残留 up");
@@ -181,8 +188,94 @@ async function runContractSuite(
   assert.equal(health.ok, true, `健康探针应通过：${health.detail}`);
   assert.ok(health.detail.length > 0, "探针应给出可读依据");
 
+  // ---- ⑪ C-6 合规契约（缺标签被拒 / 带标签通过 / 非法标签被拒）----
+  await runComplianceCases(b);
+
   await b.close();
   console.log(`  ✔ 契约套件通过：${name}`);
+}
+
+/**
+ * C-6 入库强制校验用例（**两个后端跑同一份断言**）。
+ *
+ * 四条口径：
+ *  ① 非强制模式（默认）：缺标签 ⇒ 按分级目录推导并**落库**（现役调用点不被破坏）；
+ *  ② 强制模式：缺标签 ⇒ **拒绝入库**，报可枚举错误码 COMPLIANCE_DATA_CLASS_MISSING；
+ *  ③ 强制模式：带标签 ⇒ 通过，且标签原样落库可读回；
+ *  ④ 非法标签值 ⇒ **一律拒绝**（COMPLIANCE_DATA_CLASS_INVALID，不因开关而放宽）。
+ */
+async function runComplianceCases(b: StorageBackend): Promise<void> {
+  const now = "2026-02-03T04:05:06.000Z";
+  const prev = process.env.AGENT_WEB_COMPLIANCE_ENFORCE;
+  const mk = (id: string, over: Partial<DbSession> = {}): DbSession => ({
+    id,
+    title: "合规用例会话",
+    model: "test-model",
+    sdk_session_id: null,
+    created_at: now,
+    updated_at: now,
+    ...over,
+  });
+  try {
+    // ① 非强制模式：缺标签 ⇒ 推导并落库
+    delete process.env.AGENT_WEB_COMPLIANCE_ENFORCE;
+    const derived = await b.createSession(mk("sess-derived"));
+    assert.equal(derived.data_class, "L3", "非强制模式：会话应按分级目录推导为 L3");
+    assert.equal(
+      (await b.getSession("sess-derived"))?.data_class,
+      "L3",
+      "推导出的分级标签应落库并可读回（不是只在内存里过一遍）",
+    );
+
+    // ② 强制模式：缺标签 ⇒ 拒绝入库
+    process.env.AGENT_WEB_COMPLIANCE_ENFORCE = "1";
+    await assert.rejects(
+      () => b.createSession(mk("sess-no-class")),
+      (err: unknown) => {
+        assert.ok(err instanceof ComplianceError, "缺标签应抛 ComplianceError（可按类渲染）");
+        assert.equal(err.code, ComplianceErrorCode.DATA_CLASS_MISSING, "错误码应为 DATA_CLASS_MISSING");
+        return true;
+      },
+      "强制模式：缺分级标签必须拒绝入库",
+    );
+    assert.equal(await b.getSession("sess-no-class"), undefined, "被拒的行不应入库");
+
+    // ③ 强制模式：带标签 ⇒ 通过
+    const tagged = await b.createSession(mk("sess-tagged", { data_class: "L2" }));
+    assert.equal(tagged.data_class, "L2", "显式标签应原样返回");
+    assert.equal(
+      (await b.getSession("sess-tagged"))?.data_class,
+      "L2",
+      "显式标签应落库并可读回",
+    );
+
+    // ④ 非法标签值 ⇒ 一律拒绝（不因开关而放宽）
+    await assert.rejects(
+      () => b.createSession(mk("sess-bad-class", { data_class: "L9" as never })),
+      (err: unknown) => {
+        assert.ok(err instanceof ComplianceError, "非法标签应抛 ComplianceError");
+        assert.equal(err.code, ComplianceErrorCode.DATA_CLASS_INVALID, "错误码应为 DATA_CLASS_INVALID");
+        return true;
+      },
+      "非法分级标签值必须拒绝入库",
+    );
+    assert.equal(await b.getSession("sess-bad-class"), undefined, "被拒的行不应入库");
+
+    // ⑤ 消息与反馈同样受约束（L3 / L2）
+    await assert.rejects(
+      () => b.createMessage({ id: "msg-no-class", session_id: "sess-tagged", role: "user", content: "x", model: null, created_at: now, tool_calls: null }),
+      (err: unknown) => err instanceof ComplianceError && err.code === ComplianceErrorCode.DATA_CLASS_MISSING,
+      "强制模式：消息缺标签同样拒绝",
+    );
+    await assert.rejects(
+      () => b.insertFeedback({ id: "fb-no-class", session_id: "sess-tagged", message_id: "msg-x", verdict: "up", comment: null }),
+      (err: unknown) => err instanceof ComplianceError && err.code === ComplianceErrorCode.DATA_CLASS_MISSING,
+      "强制模式：反馈缺标签同样拒绝",
+    );
+  } finally {
+    if (prev === undefined) delete process.env.AGENT_WEB_COMPLIANCE_ENFORCE;
+    else process.env.AGENT_WEB_COMPLIANCE_ENFORCE = prev;
+  }
 }
 
 // ============= SQLite 后端（永远全跑） =============
@@ -194,7 +287,12 @@ test("契约：SQLite 后端满足 StorageBackend 全部语义", async () => {
   } finally {
     for (const suffix of ["", "-wal", "-shm"]) {
       const f = tmp + suffix;
-      if (fs.existsSync(f)) fs.unlinkSync(f);
+      // 清理失败不得掩盖真正的断言失败（Windows 上文件仍被打开时会 EBUSY）
+      try {
+        if (fs.existsSync(f)) fs.unlinkSync(f);
+      } catch {
+        /* 临时文件残留不影响结论 */
+      }
     }
   }
 });
@@ -268,6 +366,10 @@ async function prepareContractSchema(): Promise<void> {
         "utf-8"
       );
       await scoped.query(sql);
+      // W1205（D-3 合规批）：业务表补 data_class 列——
+      //   DDL 事实源在 server/compliance/schema.ts（生产侧由控制器落成 0003_compliance_columns.sql，
+      //   内容必须与 pgComplianceDdl() 逐字一致 ⇒ 测试 schema 与生产 schema 不漂移）。
+      await scoped.query(pgComplianceDdl());
     } finally {
       await scoped.end().catch(() => undefined);
     }
@@ -275,6 +377,119 @@ async function prepareContractSchema(): Promise<void> {
     await admin.end().catch(() => undefined);
   }
 }
+
+test("迁移：存量 SQLite 库（无 data_class 列）打开即补列并可写可读", async () => {
+  const tmp = path.join(os.tmpdir(), `xiyouji-legacy-migrate-${process.pid}-${Date.now()}.db`);
+  try {
+    // 造一个「旧形态」库：只有 W919 之前的表定义（无 data_class 列）
+    const legacy = new Database(tmp);
+    legacy.exec(`
+      CREATE TABLE sessions (id TEXT PRIMARY KEY, title TEXT NOT NULL, model TEXT NOT NULL,
+        sdk_session_id TEXT, created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
+      CREATE TABLE messages (id TEXT PRIMARY KEY, session_id TEXT NOT NULL, role TEXT NOT NULL,
+        content TEXT NOT NULL, model TEXT, created_at TEXT NOT NULL, tool_calls TEXT);
+      CREATE TABLE feedback (id TEXT PRIMARY KEY, session_id TEXT NOT NULL, message_id TEXT NOT NULL,
+        verdict TEXT NOT NULL, comment TEXT, created_at TEXT NOT NULL);
+    `);
+    legacy.close();
+
+    // 打开后端 ⇒ 迁移框架应补上 data_class 列（存量行按目录默认值回填）
+    const backend = createSqliteBackend(tmp);
+    try {
+      const now = "2026-04-05T06:07:08.000Z";
+      const created = await backend.createSession({
+        id: "legacy-1",
+        title: "存量库会话",
+        model: "m",
+        sdk_session_id: null,
+        created_at: now,
+        updated_at: now,
+      });
+      assert.equal(created.data_class, "L3", "存量库补列后应带分级标签");
+      assert.equal((await backend.getSession("legacy-1"))?.data_class, "L3", "分级标签应落库可读回");
+    } finally {
+      await backend.close();
+    }
+  } finally {
+    for (const suffix of ["", "-wal", "-shm"]) {
+      const f = tmp + suffix;
+      try {
+        if (fs.existsSync(f)) fs.unlinkSync(f);
+      } catch {
+        /* 临时文件残留不影响结论 */
+      }
+    }
+  }
+});
+
+test("PG 缺合规列 ⇒ 抛可枚举错误 SCHEMA_OUT_OF_DATE（提示补迁移，而非裸 SQL 错）", async (t) => {
+  const probe = await probePostgres();
+  if (!probe.ok) {
+    t.skip(`跳过（${probe.reason}）`);
+    return;
+  }
+  const cfg = resolvePostgresConfig();
+  const admin = new Pool({
+    host: cfg.host,
+    port: cfg.port,
+    user: cfg.user,
+    password: cfg.password,
+    database: cfg.database,
+    max: 2,
+    connectionTimeoutMillis: 5_000,
+  });
+  try {
+    // 只建 0002 的业务表（**不建**合规列）⇒ 模拟「迁移未落」
+    await admin.query("DROP SCHEMA IF EXISTS " + CONTRACT_SCHEMA + " CASCADE");
+    await admin.query("CREATE SCHEMA " + CONTRACT_SCHEMA);
+    const scoped = new Pool({
+      host: cfg.host,
+      port: cfg.port,
+      user: cfg.user,
+      password: cfg.password,
+      database: cfg.database,
+      max: 1,
+      options: `-c search_path=${CONTRACT_SCHEMA}`,
+      connectionTimeoutMillis: 5_000,
+    });
+    try {
+      const sql = fs.readFileSync(
+        path.resolve(HERE, "..", "..", "deploy", "pg", "migrations", "0002_app_tables.sql"),
+        "utf-8"
+      );
+      await scoped.query(sql);
+    } finally {
+      await scoped.end().catch(() => undefined);
+    }
+    const backend = createPostgresBackend({ ...resolvePostgresConfig(), schema: CONTRACT_SCHEMA });
+    try {
+      const now = "2026-04-05T06:07:08.000Z";
+      await assert.rejects(
+        () =>
+          backend.createSession({
+            id: "pg-missing-col",
+            title: "缺列",
+            model: "m",
+            sdk_session_id: null,
+            created_at: now,
+            updated_at: now,
+          }),
+        (err: unknown) => {
+          assert.ok(err instanceof ComplianceError, "应为 ComplianceError");
+          assert.equal(err.code, ComplianceErrorCode.SCHEMA_OUT_OF_DATE, "错误码应为 SCHEMA_OUT_OF_DATE");
+          assert.match(String(err.detail.hint), /0003_compliance_columns/, "应提示补哪份迁移");
+          return true;
+        },
+        "PG 业务表缺 data_class 列时必须给出可枚举的部署缺陷错误",
+      );
+    } finally {
+      await backend.close();
+    }
+  } finally {
+    await admin.query("DROP SCHEMA IF EXISTS " + CONTRACT_SCHEMA + " CASCADE").catch(() => undefined);
+    await admin.end().catch(() => undefined);
+  }
+});
 
 test("契约：PostgreSQL 后端满足 StorageBackend 全部语义", async (t) => {
   const probe = await probePostgres();

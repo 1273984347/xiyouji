@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（219）
+## 文件（224）
 
 ### Python 脚本
 
@@ -87,6 +87,7 @@
 - `check_archive_health.py`
 - `check_audit_trigger.py`
 - `check_backlog_review.py`
+- `check_capacity_budget.py`
 - `check_cascade_line_anchor.py`
 - `check_chapter_stats_sync.py`
 - `check_chart_colorblind.py`
@@ -144,6 +145,7 @@
 - `check_nav_parity.py`
 - `check_no_brand_refs.py`
 - `check_no_goatcounter.py`
+- `check_no_hardcoded_endpoint.py`
 - `check_orchestration_refs.py`
 - `check_page_admission.py`
 - `check_parser_anchor_coverage.py`
@@ -174,6 +176,7 @@
 - `data_validate.py`
 - `detect_unwrapped_tables.py`
 - `dismiss_pillow_alerts.py`
+- `dismiss_scorecard_alerts.py`
 - `doc_areas.py`
 - `docs_index.py`
 - `drl_spotcheck.py`
@@ -197,6 +200,7 @@
 - `inject_descriptions.py`
 - `inject_rum.py`
 - `inject_seo_head.py`
+- `inject_service_endpoint.py`
 - `inject_visit_log.py`
 - `inline_css.py`
 - `interaction_components.py`
@@ -266,6 +270,7 @@
 - `debug_page.js`
 - `diagnose_overflow.js`
 - `extract_datasets.js`
+- `gen_compliance_migration.mjs`
 - `icon_probe.js`
 - `render_check.js`
 - `verify_v2_pages.js`

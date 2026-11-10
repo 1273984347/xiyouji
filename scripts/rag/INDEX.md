@@ -11,7 +11,7 @@
 
 - `eval/`
 
-## 文件（8）
+## 文件（9）
 
 ### Python 脚本
 
@@ -20,6 +20,7 @@
 - `page_router.py`
 - `rag_enhance.py`
 - `rag_server.py`
+- `retrieval_cli.py`
 - `xiyouji_rag.py`
 
 ### 其他

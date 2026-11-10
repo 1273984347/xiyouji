@@ -16,6 +16,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+import Database from "better-sqlite3";
 import { createDualWriteBackend } from "./dualwrite.js";
 import { createSqliteBackend } from "./sqlite.js";
 import type { StorageBackend } from "./types.js";
@@ -143,6 +144,44 @@ test("双写：两侧时间戳逐字节一致（权威时间一次生成·两侧
   await dual.close();
   await primaryDirect.close();
   await secondaryDirect.close();
+});
+
+test("双写：加密开启时两侧密文逐字节一致（否则对账判内容不等 ⇒ 切读被永久阻断）", async () => {
+  const prevKey = process.env.AGENT_WEB_DATA_KEY;
+  process.env.AGENT_WEB_DATA_KEY = Buffer.alloc(32, 3).toString("base64");
+  const primaryPath = tempDbPath("enc-primary");
+  const secondaryPath = tempDbPath("enc-secondary");
+  const primary = createSqliteBackend(primaryPath);
+  const secondary = createSqliteBackend(secondaryPath);
+  const dual = createDualWriteBackend(primary, secondary);
+  const readRaw = (dbPath: string, sql: string, id: string): Record<string, unknown> => {
+    const db = new Database(dbPath, { readonly: true });
+    try {
+      return db.prepare(sql).get(id) as Record<string, unknown>;
+    } finally {
+      db.close();
+    }
+  };
+  try {
+    await dual.createSession(session("s-enc", "机密标题"));
+    await dual.createMessage(message("m-enc", "s-enc"));
+    const pTitle = readRaw(primaryPath, "SELECT title FROM sessions WHERE id = ?", "s-enc");
+    const sTitle = readRaw(secondaryPath, "SELECT title FROM sessions WHERE id = ?", "s-enc");
+    const pContent = readRaw(primaryPath, "SELECT content FROM messages WHERE id = ?", "m-enc");
+    const sContent = readRaw(secondaryPath, "SELECT content FROM messages WHERE id = ?", "m-enc");
+    assert.ok(String(pTitle.title).startsWith("enc:v1:"), "主库应落密文");
+    assert.ok(String(pContent.content).startsWith("enc:v1:"), "主库应落密文");
+    assert.equal(String(sTitle.title), String(pTitle.title), "两侧会话标题密文必须逐字节一致");
+    assert.equal(String(sContent.content), String(pContent.content), "两侧消息正文密文必须逐字节一致");
+    // 读回仍是明文（业务不受影响）
+    const seen = await dual.getMessagesBySession("s-enc");
+    assert.equal(seen.length, 1);
+    assert.equal(seen[0].content, "hello", "读回必须解密成明文");
+  } finally {
+    await dual.close();
+    if (prevKey === undefined) delete process.env.AGENT_WEB_DATA_KEY;
+    else process.env.AGENT_WEB_DATA_KEY = prevKey;
+  }
 });
 
 test("双写：clearAllData 清两侧 · healthCheck 可用", async () => {

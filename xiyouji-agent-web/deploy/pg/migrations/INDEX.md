@@ -11,12 +11,13 @@
 
 - （无）
 
-## 文件（2）
+## 文件（3）
 
 ### 其他
 
 - `0001_baseline.sql`
 - `0002_app_tables.sql`
+- `0003_compliance_columns.sql`
 
 ---
 

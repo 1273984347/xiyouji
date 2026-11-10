@@ -26,6 +26,8 @@ import type {
   StorageHealth,
   WriteTimeOpts,
 } from "./types.js";
+import { resolveWriteDataClass } from "../compliance/data-class.js";
+import { encryptSensitiveColumns } from "./encryption.js";
 
 /**
  * 本次写入的**权威时间**（一次生成·两侧同传）。
@@ -98,9 +100,14 @@ export function createDualWriteBackend(
 
     // ---------- 写：主库 + 副库 ----------
     async createSession(session: DbSession) {
-      const created = await primary.createSession(session);
-      await mirrorWrite(() => secondary.createSession(session));
-      return created;
+      // C-6：分级标签解析一次·两侧同传（强制模式下缺标签 ⇒ 两侧都不写）
+      const cls = resolveWriteDataClass(session.data_class, "sessions", "sessions.insert");
+      // §12.4：敏感列**只加密一次**——两侧拿到同一份密文
+      //   （各自加密会因随机 IV 得到不同密文 ⇒ 对账判「内容不等」⇒ 切读被永久阻断）
+      const prepared = encryptSensitiveColumns({ ...session, data_class: cls }, "sessions");
+      await primary.createSession(prepared);
+      await mirrorWrite(() => secondary.createSession(prepared));
+      return { ...session, data_class: cls };
     },
     async updateSession(id: string, updates: SessionUpdates) {
       // W1204 实测修根：本次写入的权威时间**一次生成·两侧同传**
@@ -119,9 +126,12 @@ export function createDualWriteBackend(
     async createMessage(message: DbMessage) {
       // W1204 实测修根：会话 updated_at 由**后端**刷 ⇒ 权威时间必须两侧同传（同上）
       const opts = writeTimeOpts();
-      const created = await primary.createMessage(message, opts);
-      await mirrorWrite(() => secondary.createMessage(message, opts));
-      return created;
+      const cls = resolveWriteDataClass(message.data_class, "messages", "messages.insert");
+      // 敏感列只加密一次 ⇒ 两侧同一份密文（见 createSession 的注释）
+      const prepared = encryptSensitiveColumns({ ...message, data_class: cls }, "messages");
+      await primary.createMessage(prepared, opts);
+      await mirrorWrite(() => secondary.createMessage(prepared, opts));
+      return { ...message, data_class: cls };
     },
     async updateMessage(id: string, updates: MessageUpdates) {
       const hit = await primary.updateMessage(id, updates);
@@ -134,14 +144,21 @@ export function createDualWriteBackend(
       return hit;
     },
     async createMessages(messages: DbMessage[]) {
-      await primary.createMessages(messages);
-      await mirrorWrite(() => secondary.createMessages(messages));
+      // 逐条解析分级标签并加密一次（两侧同传·同密文）
+      const prepared = messages.map((m) => {
+        const cls = resolveWriteDataClass(m.data_class, "messages", "messages.insertMany");
+        return encryptSensitiveColumns({ ...m, data_class: cls }, "messages");
+      });
+      await primary.createMessages(prepared);
+      await mirrorWrite(() => secondary.createMessages(prepared));
     },
     async insertFeedback(feedback: Omit<DbFeedback, "created_at">) {
       // W1204 实测修根：feedback.created_at 由**后端**生成 ⇒ 权威时间必须两侧同传（同上）
       const opts = writeTimeOpts();
-      const rowId = await primary.insertFeedback(feedback, opts);
-      await mirrorWrite(() => secondary.insertFeedback(feedback, opts));
+      const cls = resolveWriteDataClass(feedback.data_class, "feedback", "feedback.insert");
+      const prepared = { ...feedback, data_class: cls };
+      const rowId = await primary.insertFeedback(prepared, opts);
+      await mirrorWrite(() => secondary.insertFeedback(prepared, opts));
       return rowId;
     },
 
