@@ -56,6 +56,9 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from external_rule_scope import find_shell_files  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 WF_DIR = ROOT / ".github" / "workflows"
 
@@ -120,6 +123,74 @@ def scan_dir(wf_dir: Path) -> list[dict]:
                 }
             )
     return out
+
+
+# echo / printf 的参数位不是命令（Scorecard 的 shell 解析器同理）
+ECHO_ONLY_RE = re.compile(r"^\s*(echo|printf)\b", re.I)
+
+# —— shell 面（W1197）的「不可变引用」形态——
+#
+# 背景：Scorecard 的 uses 面只扫 workflow（从 YAML AST 解析 `uses:` 键），而它的
+# shell 面（Pattern "*"）只判包管理器安装命令。但 shell 脚本里同样可能出现「不可变引用」：
+#   下载 action 归档 / 指定 tag 的 clone / 外部脚本管道执行 ⇒ 都是「可被静默替换」的下载。
+# 它与 uses 面属同类安全面（不可变引用），故在本守卫一并管理。
+SHELL_REF_PATTERNS = [
+    # (标识, 正则, 说明)
+    ("action-archive",
+     re.compile(r"github(?:usercontent)?\.com/[^\s]*/(?:archive|releases)/[^\s]*"),
+     "下载 github 归档/release"),
+    ("git-clone-tag",
+     re.compile(r"\bgit\s+clone\b[^\n]*?(?:--branch|--tag)\s+[^\s]+"),
+     "git clone 指定标签"),
+    ("pipe-to-shell",
+     re.compile(r"\b(curl|wget)\b[^\n]*?\|\s*(?:sudo\s+)?(?:sh|bash|zsh)\b"),
+     "下载后直接管道执行"),
+]
+
+
+def scan_shell_files(root: Path) -> list[dict]:
+    """扫描全仓 shell 面（Scorecard 的 Pattern:"*"）里的「不可变引用」形态。
+
+    返回清单，每项含 {kind, ref, loc, error}；`error` 非空时表示读取失败（fail-closed）。
+    """
+    out: list[dict] = []
+
+    for rel in find_shell_files(str(root)):
+        path = root / rel
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError as exc:
+            out.append({"kind": "read-error", "ref": "", "loc": f"{rel}:<读取失败>",
+                        "error": f"读取失败（fail-closed）: {exc}"})
+            continue
+        for lineno, line in enumerate(text.splitlines(), 1):
+            s = line.strip()
+            if not s or s.startswith("#"):
+                continue
+            # echo/printf 的参数位不是命令（与 Scorecard shell 解析器同理）
+            if ECHO_ONLY_RE.match(s):
+                continue
+            for kind, pattern, note in SHELL_REF_PATTERNS:
+                if pattern.search(line):
+                    out.append({"kind": kind, "ref": s[:160], "loc": f"{rel}:{lineno}",
+                                "error": "", "note": note})
+                    break
+    return out
+
+
+def format_shell_violations(entries: list[dict]) -> list[dict]:
+    """判定 shell 面：不得有「非不可变」的外部下载引用。
+
+    目前 shell 面的判据是「下载/拉取的外部代码必须钉到不可变引用」——
+    本仓当前 shell 面实测零命中（五个文件均无下载命令），本判据为防复发面。
+    """
+    bad: list[dict] = []
+    for e in entries:
+        if e.get("error"):
+            bad.append(e)
+            continue
+        bad.append(e)
+    return bad
 
 
 def format_violations(entries: list[dict]) -> list[dict]:
@@ -245,6 +316,32 @@ def api_auth_decision(token: str | None) -> tuple[bool, str]:
 # --------------------------------------------------------------------------- 主流程
 
 
+def report_shell_face() -> list[dict]:
+    """③ shell 面（W1197）：全仓 shell 的「不可变引用」形态。
+
+    Scorecard 的 uses 面只扫 workflow（从 YAML AST 解析 `uses:` 键），它的 shell 面只判安装命令；
+    但 shell 里同样可能出现「静默替换」的外部下载（归档 / tag clone / 管道执行）——
+    属同类安全面，故一并管理（本仓 shell 面实测零命中·为防复发面）。
+
+    返回不合规清单（空列表 = 全部通过）。
+    """
+    entries = scan_shell_files(ROOT)
+    bad = format_shell_violations(entries)
+    print(f"\n[③ shell 面「不可变引用」形态] 扫描 {len(entries)} 条")
+    if not bad:
+        print("  PASS — 全部 shell 面无「非不可变」的外部下载")
+        return bad
+    print(f"  FAIL — {len(bad)} 处不合规：")
+    for e in bad:
+        note = e.get("note", "")
+        print(f"  ✗ {e['loc']}  [{e['kind']}] {e['ref']}")
+        if note:
+            print(f"      ↳ {note}")
+        if e.get("error"):
+            print(f"      {e['error']}")
+    return bad
+
+
 def run_check(api: bool, token: str | None, ci_mode: bool = False) -> int:
     entries = scan_dir(WF_DIR)
     if not entries:
@@ -311,8 +408,10 @@ def run_check(api: bool, token: str | None, ci_mode: bool = False) -> int:
             )
             return 2
 
-    if bad:
-        print(f"\n结论: FAIL（{len(bad)} 处）")
+    shell_bad = report_shell_face()
+
+    if bad or shell_bad:
+        print(f"\n结论: FAIL（uses {len(bad)} 处 + shell {len(shell_bad)} 处）")
         return 1
     print("\n结论: PASS")
     return 0
@@ -443,6 +542,41 @@ def _selftest() -> int:
     )
     if not ok8:
         failed += 1
+
+    # N9–N11：shell 面（W1197）——「不可变引用」形态必须可证伪
+    shell_cases = [
+        ("N9 shell 下载 github 归档",
+         "#!/bin/bash\ncurl -L https://github.com/foo/bar/archive/v1.2.3.tar.gz -o a.tgz\n",
+         True, "外部下载须钉不可变引用"),
+        ("N10 shell clone 指定 tag",
+         "#!/bin/bash\ngit clone --branch v1.2.3 https://github.com/foo/bar.git\n",
+         True, "clone 须钉不可变引用"),
+        ("N11 shell 下载后管道执行",
+         "#!/bin/bash\ncurl -sSL https://example.com/install.sh | bash\n",
+         True, "管道执行须钉不可变引用"),
+        ("N12 shell 无外部下载（放行）",
+         "#!/bin/bash\ncurl -sSL https://example.com/f.txt -o f.txt\n",
+         False, "普通下载非引用面"),
+        ("N13 shell 注释行（放行）",
+         "#!/bin/bash\n# curl -L https://github.com/foo/bar/archive/v1.tar.gz\n",
+         False, "注释不算命令"),
+        ("N14 shell echo 参数位（放行）",
+         "#!/bin/bash\necho 'curl https://github.com/a/b/archive/v1.tar.gz'\n",
+         False, "echo 参数位不算命令"),
+    ]
+    with tempfile.TemporaryDirectory() as tmp:
+        for name, content, expect_bad, _why in shell_cases:
+            shell_root = Path(tmp) / name.split()[0]
+            shell_root.mkdir(parents=True, exist_ok=True)
+            (shell_root / "probe.sh").write_text(content, encoding="utf-8")
+            entries = scan_shell_files(shell_root)
+            got_bad = bool(format_shell_violations(entries))
+            ok = got_bad == expect_bad
+            print(
+                f"  {'✓' if ok else '✗'} {name}：期望{'判红' if expect_bad else '放行'} 实得{'判红' if got_bad else '放行'}"
+            )
+            if not ok:
+                failed += 1
 
     if failed:
         print(f"\n自测 FAIL：{failed} 条判据不可证伪")

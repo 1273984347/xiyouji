@@ -31,7 +31,7 @@ npm 注册表（`registry.npmjs.org`）——指向第三方镜像站的 lock �
 
 用法：
   py -3 scripts/check_install_pins.py             # 判据模式：逐条校验，退出码 0/1
-  py -3 scripts/check_install_pins.py --self-test # 负样本自证（含 14 例）
+  py -3 scripts/check_install_pins.py --self-test # 负样本自证（含 20 例：安装命令 10 + shell 面 6 + lock 供应链 4）
 """
 import argparse
 import json
@@ -40,6 +40,9 @@ import re
 import shlex
 import sys
 import tempfile
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from external_rule_scope import find_shell_files  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WF_DIR = os.path.join(ROOT, ".github", "workflows")
@@ -55,6 +58,8 @@ NPM_OPTION_TOKENS = {"-g", "--global", "--prefix", "--save-dev", "-D", "--no-aud
 # W1194 二轮：lock 的 resolved 只允许指向官方 npm 注册表（供应链面判据）
 LOCK_SKIP_DIRS = {"node_modules", ".git", "archive", "dist", "release", "site", ".agent"}
 ALLOWED_REGISTRY_HOSTS = {"registry.npmjs.org"}
+# echo / printf 的参数位不是命令（Scorecard 的 shell 解析器同理）
+ECHO_ONLY_RE = re.compile(r"^\s*(echo|printf)\b", re.I)
 
 
 def strip_comment(command):
@@ -164,6 +169,24 @@ def _npm_unpinned(command):
     return bad
 
 
+def _is_install_command(command):
+    """返回该命令是否为安装类命令（不考虑是否已 pinned）。
+
+    用于统计口径的可视化：已 pinned 的命令也要算在「安装命令总数」里，
+    否则输出会让读者误以为目标文件内没有安装命令。
+    """
+    cmd = strip_comment(command).strip()
+    if not cmd:
+        return False
+    if OTHER_INSTALL_RE.search(cmd):
+        return True
+    if NPM_RE.search(cmd):
+        return True
+    if PIP_RE.search(cmd):
+        return True
+    return False
+
+
 def check_command(command):
     """返回 (类别, 未钉 hash 的包规格列表)。类别 ∈ {pip, npm, other, None}。
 
@@ -200,6 +223,28 @@ def check_workflow_text(text):
         kind, unpinned = check_command(command)
         if kind and unpinned:
             bad.append((lineno, kind, command))
+    return bad
+
+
+def check_shell_text(text):
+    """返回 [(lineno, 类别, 命令)] —— shell 文件内未钉 hash 的安装命令。
+
+    判据与 workflow 的 `run:` 块同源（Scorecard 的 shell 面与 workflow run: 块走同一套
+    `validateShellFile` 判定）：
+      pip 面必须含 `--require-hashes`；npm 面只认 `npm ci`。
+
+    跳过：注释行、echo/printf 的参数位（它们不是命令）。
+    """
+    bad = []
+    for lineno, raw in enumerate(text.splitlines(), 1):
+        s = raw.strip()
+        if not s or s.startswith("#"):
+            continue
+        if ECHO_ONLY_RE.match(s):
+            continue
+        kind, unpinned = check_command(s)
+        if kind and unpinned:
+            bad.append((lineno, kind, s))
     return bad
 
 
@@ -242,6 +287,52 @@ def check_lock_registry(path):
     return sorted(counts.items())
 
 
+def report_shell_face(root=ROOT):
+    """扫描全仓 shell 面并报告。
+
+    Scorecard 的扫描 Pattern 是 "*"（全仓 shell）——与 workflow 的 run: 块同一套判定（validateShellFile）。
+    本守卫原本只扫 workflow ⇒ 面窄于规则面（W1197 扩面后对齐）。
+
+    返回 (shell 文件数, 安装命令总数, FAIL 数)。
+    """
+    shell_files = find_shell_files(root)
+    shell_checked = 0
+    fails = 0
+    for rel in shell_files:
+        path = os.path.join(root, rel.replace("/", os.sep))
+        try:
+            with open(path, encoding="utf-8", errors="replace") as fh:
+                text = fh.read()
+        except OSError as exc:
+            fails += 1
+            print("  FAIL %s  [读取失败]→ fail-closed: %s" % (rel, exc))
+            continue
+        bad = check_shell_text(text)
+        n_install = _count_install_commands(text)
+        shell_checked += n_install
+        if not bad:
+            print("  PASS %s（%d 条安装命令均已钉 hash）" % (rel, n_install))
+            continue
+        for lineno, kind, command in bad:
+            fails += 1
+            print("  FAIL %s:%d  [%s] %s" % (rel, lineno, kind, command[:110]))
+            print("       ↳ 安装命令的包规格必须钉 hash（pip 需 --require-hashes·npm 需 npm ci）")
+            print("       ↳ 该文件在 Scorecard 的 Pattern:"*" 扫描面内（非 workflow 也在）")
+    return shell_files, shell_checked, fails
+
+
+def _count_install_commands(text):
+    """统计文本内的安装类命令数（含已 pinned 的）——仅用于可视化输出。"""
+    n = 0
+    for raw in text.splitlines():
+        s = raw.strip()
+        if not s or s.startswith("#") or ECHO_ONLY_RE.match(s):
+            continue
+        if _is_install_command(s):
+            n += 1
+    return n
+
+
 def run_gate(root=ROOT):
     wf_dir = os.path.join(root, ".github", "workflows")
     fails = 0
@@ -252,7 +343,9 @@ def run_gate(root=ROOT):
         with open(path, encoding="utf-8") as fh:
             text = fh.read()
         bad = check_workflow_text(text)
-        install_lines = [1 for _, c in _iter_run_blocks(text) if check_command(c)[0]]
+        # 计「安装命令总数」（含已 pinned 的）——check_command 对 pinned 的命令返回
+        # (None, [])，若只统计非 None 则输出为 0，会让读者误以为「无安装命令」。
+        install_lines = [1 for _, c in _iter_run_blocks(text) if _is_install_command(c)]
         checked += len(install_lines)
         rel = ".github/workflows/" + fn
         if not bad:
@@ -262,6 +355,8 @@ def run_gate(root=ROOT):
             fails += 1
             print("  FAIL %s:%d  [%s] %s" % (rel, lineno, kind, command[:110]))
             print("       ↳ 安装命令的包规格必须钉到精确版本（如 pkg==1.2.3 / pkg@1.2.3）")
+    shell_files, shell_checked, shell_fails = report_shell_face(root)
+    fails += shell_fails
     # 供应链面（W1194 二轮）：lock 的 resolved 不得指向第三方镜像站
     lock_files = find_lockfiles(root)
     for path in lock_files:
@@ -274,8 +369,8 @@ def run_gate(root=ROOT):
             fails += 1
             print("  FAIL %s  [%s] %d 条 resolved 指向非官方注册表" % (rel, host, cnt))
             print("       ↳ lock 的 resolved 必须统一为 https://registry.npmjs.org/（避免安装取值绑定外部镜像站）")
-    print("---- 安装命令钉版门禁：%d FAIL / %d 文件 / %d 条安装命令 / %d 个 lock ----"
-          % (fails, len(files), checked, len(lock_files)))
+    print("---- 安装命令钉版门禁：%d FAIL / %d workflow / %d 个 shell 面文件 / %d 条 workflow 安装命令 / %d 条 shell 安装命令 / %d 个 lock ----"
+          % (fails, len(files), len(shell_files), checked, shell_checked, len(lock_files)))
     return 1 if fails else 0
 
 
@@ -300,6 +395,22 @@ def _self_test():
             ok += 1
         else:
             print("  FAIL 自证用例：%s（期望 FAIL 数 %d·实际 %d）" % (desc, expect_fail, got))
+    # shell 面用例（W1197：全仓 shell 面·与 Scorecard 的 Pattern:"*" 对齐）
+    shell_cases = [
+        ("#!/bin/bash\nnpm ci --prefix scripts\n", 0, "shell 内 npm ci → pinned"),
+        ("#!/bin/bash\nnpm install somepkg@1.0.0\n", 1, "shell 内 npm install 钉版本仍 → 判红"),
+        ("#!/bin/bash\npip install somepkg==1.0.0\n", 1, "shell 内 pip 钉版本但无 --require-hashes → 判红"),
+        ("#!/bin/bash\npip install --require-hashes -r requirements-hashed.txt\n", 0, "shell 内 pip --require-hashes → pinned"),
+        ("#!/bin/bash\n# npm install somepkg@1.0.0\n", 0, "shell 内注释行不算命令"),
+        ("#!/bin/bash\necho 'npm install somepkg@1.0.0'\n", 0, "shell 内 echo 参数位不算命令"),
+    ]
+    for content, expect_fail, desc in shell_cases:
+        got = len(check_shell_text(content))
+        if got == expect_fail:
+            ok += 1
+        else:
+            print("  FAIL 自证用例：%s（期望 FAIL 数 %d·实际 %d）" % (desc, expect_fail, got))
+
     # lock 供应链面用例（W1194 二轮）
     lock_cases = [
         ('{"packages": {"node_modules/x": {"resolved": "https://registry.npmjs.org/x/-/x-1.0.0.tgz"}}}',
@@ -311,7 +422,7 @@ def _self_test():
         ('{"packages": {"node_modules/x": {"resolved": "git+https://example.com/x.git"}}}',
          0, "lock 指向 git 地址 ⇒ 通过"),
     ]
-    total_cases = len(cases) + len(lock_cases)
+    total_cases = len(cases) + len(shell_cases) + len(lock_cases)
     for content, expect_fail, desc in lock_cases:
         with tempfile.NamedTemporaryFile("w", suffix="package-lock.json", delete=False,
                                          encoding="utf-8") as fh:

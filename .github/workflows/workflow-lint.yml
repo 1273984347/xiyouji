@@ -17,14 +17,24 @@ on:
     #   ⚠ 姊妹 workflow（ci/security/ci-sim）**刻意不加 paths**——它们各有扫全仓的 job
     #   （brand guard / XSS --all / ci_sim 全量门禁）且含分支保护 required check
     #   ⇒ 加过滤会缩小验证面 ⇒ 违反「判据强度不可降」。详见坑表 E-84。
+    # W1197：check_action_refs.py 的扫描面已扩到全仓 shell ⇒ 改动任何 shell 脚本
+    #   也要触发本工作流（否则 shell 面的新判据在 PR 上不会跑）。
     paths:
       - '.github/workflows/**'
       - 'scripts/check_action_refs.py'
+      - 'scripts/external_rule_scope.py'
+      - 'scripts/install_hooks.sh'
+      - 'scripts/guardrails/**'
+      - '**/*.sh'
   pull_request:
     branches: [main]
     paths:
       - '.github/workflows/**'
       - 'scripts/check_action_refs.py'
+      - 'scripts/external_rule_scope.py'
+      - 'scripts/install_hooks.sh'
+      - 'scripts/guardrails/**'
+      - '**/*.sh'
   schedule:
     # W1067：每周一次「action ref 存在性」联网扫描（语义族：40-hex 但该仓库无此 commit）
     - cron: '0 3 * * 1'
