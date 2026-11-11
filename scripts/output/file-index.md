@@ -12,6 +12,7 @@
 | README.md | W1206 | 改：本批公开面清理（本机绝对路径脱敏） |
 | STRUCTURE.md | W1206 | 改：本批公开面清理（本机绝对路径脱敏） |
 | archive/docs/AGENTS-ARCHIVE.md | W1206 | 改：本批公开面清理（本机绝对路径脱敏） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1206 | 改：本批公开面清理（本机绝对路径脱敏） |
 | archive/docs/workflows-readme-history.md | W1206 | 改：本批公开面清理（本机绝对路径脱敏） |
 | docs/00-导读/W批次编号对账表.md | W1206 | 改：本批公开面清理（本机绝对路径脱敏） |
 | docs/00-导读/项目说明.md | W1206 | 改：本批公开面清理（本机绝对路径脱敏） |
