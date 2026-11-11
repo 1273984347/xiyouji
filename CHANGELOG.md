@@ -1,3 +1,16 @@
+### W1214（2026-11-12）：LFS 文本文件根修批：文本文件移出 LFS + 第 45 槽 C5 防复发
+
+**本批要点**（W1214 LFS 文本文件根修批）：
+
+> - **CI 红灯真因坐实（本地绿 / CI 红）**：PR #171 本轮 CI（head=fc2c3b9df）只剩 Delivery Gate 一红，第 45 槽报「6 FAIL / 214 目录」；W1212 把失败明细并入汇总行后，CI 日志**首次可见** 6 个目录全在 assets/promo/*（assets/promo · hero-set · hero-set/raw · hero-set/raw/round-w1005 · output · plate-set），判据一律是 **C2「INDEX.md 结构不合生成器模板」**。取证：全仓 139 个 INDEX.md，**恰好这 6 个的 blob 是 LFS 指针**（git cat-file -p HEAD:assets/promo/INDEX.md ⇒ 首行 version https://git-lfs.github.com/spec/v1），其余 133 个是普通文本 ⇒ 因果链闭合。
+> - **根因（双因叠加·逐环实证）**：① **配置层**——W1209 迁移时给 assets/promo/** 写了 filter=lfs，migrate 自动追加的「**/*.md !text -filter -merge -diff」排除行被同批**整行删除**（理由：!text 压制 W993 立的 LF 规范化、-diff 让 md 被当二进制）⇒ **排除语义连同 filter/merge 一起消失** ⇒ 此后凡被 git add 的文本文件都走 LFS clean filter ⇒ 落成指针（实测 8 md + 2 html）；两版 commit 对拍坐实时序：改写后的 W1096 commit 里 assets/promo 下 12 个 md **全是普通文本**（排除当时生效），到 W1209 commit 时其中 8 个变成指针 ⇒ 落成发生在「排除行被删之后」而非迁移当时。② **机制层**——CI 的 actions/checkout **默认不拉 LFS 真身** ⇒ 工作树是指针文本 ⇒ 第 45 槽 parse_index() 返回 None ⇒ C2 判红；**本地恒绿**是因为 git lfs checkout 已把工作树恢复成真身（读磁盘永远读不到指针）。
+> - **修法（不重犯 W1209 的两个副作用）**：.gitattributes 恢复排除语义但**逐项改写**而非整行删除——「-filter -merge diff text eol=lf」（清除 LFS filter/merge · 覆盖 diff=lfs 保留文本 diff · 强制 LF 规范化替代被删的 !text）；范围 md 全仓（文本本就不该进 LFS）+ html 仅 assets/promo（site 产物量大不动）；随后把 10 个已被托管的文本文件**重新入库为普通 blob**（git rm --cached + git add，**无历史改写**）⇒ 索引内指针 0。
+> - **端到端反证（复现与修复双向成立）**：在工作树注入 6 个 INDEX.md 的 LFS 指针文本 ⇒ 第 45 槽实测「**6 FAIL / 214 目录**」，6 个目录名与 CI 日志**逐字一致**；还原 ⇒ **0 FAIL / 214 目录**。
+> - **防复发机器判据（教训转判据）**：新建 scripts/check_lfs_text_purity.py——**索引 blob 口径**（索引 = 将要入库的内容 = CI 干净检出的内容；读工作树本地恒读真身 ⇒ 判据恒绿 ⇒ 只能等 CI 报红）扫全仓文本扩展名白名单，命中指针即判红；接进第 45 槽 **C5 子项**（目录文档层·Delivery Gate 必跑 ⇒ 拦合并）+ ci_sim GATES（13→14 项·全仓层）；单测 7 例（指针识别 / 扩展名圈定 / 合成仓命中 / **真仓 0 命中回归锁** / 汇总行形态）；C5 判据抽独立函数 `_c5_lfs_ptr_fails`（check_dir 复杂度 18>15 超 guardrails 结构档 ⇒ 抽函数过档·语义零变化·铁律 20 补跑）。
+> - **性能修复（实测读数）**：判据初版逐个起 git cat-file 子进程 ⇒ 第 45 槽从 0.9 s 拖到 **32.6 s** ⇒ 改批量（一次 --batch-check 取体量筛小件 + 一次 --batch 取内容）⇒ 实测 **885 ms**。
+> - **计数链**：坑表 E-228 入表 + 计数链 321→322 同步 9 处（AGENTS 两处 + HANDOVER 两处 + SKILL.md 两处 + STRUCTURE.md + docs/agent/pitfalls.md 壳 + 坑表流程主题 188→189；主题计数自洽 48+12+32+26+15+189=322）。
+> - **未做（不假收敛）**：① **历史里的这 10 个文件仍是 LFS 指针**——彻底清理需再次改写历史（不可逆·全部 commit hash 变化）⇒ 须用户批准，本批只做「向前不再恶化」；② **二进制媒体仍在 LFS** ⇒ CI 上若站内引用 promo 图仍是指针（现测站内未引用·登记待办）；③ 挂第 72 槽（verify_delivery.py 注册表）须用户批准（规则 10）⇒ 本批以「第 45 槽 C5 + ci_sim」双落点替代；④ 复盘触发器 T1/T2/T3 全触发 ⇒ 本批未认领复盘批，登记下批；⑤ PR #171 合并仍待 CI 绿后由用户裁决。
+> - **文件**：见 file-index。
 ### W1212（2026-11-12）：第 45 槽失败明细并入汇总行批：排障盲区根修（CI 侧看不到失败明细）
 
 **本批要点**（W1212 第 45 槽失败明细并入汇总行批）：
@@ -553,7 +566,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1212），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1214），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

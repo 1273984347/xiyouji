@@ -42,6 +42,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import check_lfs_text_purity as lfs_p  # noqa: E402  # W1214：文本不得被 LFS 托管（索引 blob 口径）
 import gen_folder_docs as gen  # noqa: E402  # 单一事实源：在管目录集与清单算法全在此
 import tracked_files as tf  # noqa: E402  # W894：目标提交树口径（git ls-files）
 
@@ -195,8 +196,31 @@ def _fresh_idx(d1: str) -> str:
     with open(os.path.join(d1, "INDEX.md"), encoding="utf-8") as f:
         return f.read()
 
-def check_dir(abs_dir: str) -> list[str]:
-    """单目录四项检查，返回 FAIL 行列表（空=过）。"""
+
+def _c5_lfs_ptr_fails(rel: str, lfs_ptr_paths: set[str] | None) -> list[str]:
+    """C5（W1214）：目录文档在**索引里**是 LFS 指针 ⇒ CI 无 LFS 真身时不可读。
+
+    actions/checkout 默认不拉 LFS ⇒ 工作树是指针文本 ⇒ C2 连带判红（E-228）。
+    索引口径 ⇒ 本地即可提前发现，不必等 CI 报红。lfs_ptr_paths 为 None/空集时跳过
+    （self-test 合成树不在 Git 索引内，无该口径）。独立成函数是 guardrails 结构档要求
+    （check_dir 复杂度预算有限·判据本体自含便于单测）。
+    """
+    if not lfs_ptr_paths:
+        return []
+    fails: list[str] = []
+    for _name in ("INDEX.md", "README.md"):
+        _p = (rel + "/" + _name) if rel else _name
+        if _p in lfs_ptr_paths:
+            fails.append("C5 目录文档被 LFS 托管（CI 无 LFS 真身时不可读）：%s" % _p)
+    return fails
+
+
+def check_dir(abs_dir: str, lfs_ptr_paths: set[str] | None = None) -> list[str]:
+    """单目录五项检查，返回 FAIL 行列表（空=过）。
+
+    lfs_ptr_paths：索引里被 LFS 托管的文本文件集合（W1214·C5 用）⇒ None 时跳过 C5
+    （self-test 合成树不在 Git 索引内，无该口径）。
+    """
     rel = gen.rel_of(abs_dir)
     label = rel or "<root>"
     fails: list[str] = []
@@ -222,6 +246,8 @@ def check_dir(abs_dir: str) -> list[str]:
         fails.append("C2 INDEX.md 结构不合生成器模板（疑手改/旧版/截断）：%s" % label)
         return fails
     if _USE_TRACKED and gen._in_repo(abs_dir):
+        # C5（W1214）：目录文档在索引里是 LFS 指针 ⇒ CI 无 LFS 真身时不可读（E-228·判据在 _c5_lfs_ptr_fails）
+        fails.extend(_c5_lfs_ptr_fails(rel, lfs_ptr_paths))
         # 子目录口径与生成器同源：EXCLUDE_SUBSTR / EXCLUDE_TOP 命中的目录不进清单
         # （例：tmpe 整目录被排除，但其 README.md 与 policy.yml 仍入库·W738 策略件）
         want_sub = {n for n in tf.tracked_subdirs(rel) if not gen._is_excluded(os.path.join(abs_dir, n))}
@@ -299,9 +325,15 @@ def run_gate() -> int:
     if tf._run_ls_files() is None:
         print("FAIL git 不可用（tracked_files 实算回退空集）——第 45 槽判据不可执行（fail-closed）")
         return 2
+    # W1214：一次性扫描索引里被 LFS 托管的文本文件（C5 用·git 不可用 ⇒ fail-closed）
+    try:
+        lfs_ptr_paths = set(lfs_p.scan_index_text_pointers()[1])
+    except RuntimeError as e:
+        print("FAIL git 不可用（LFS 文本纯净性实算失败·fail-closed）：%s" % e)
+        return 2
     all_fails: list[str] = []
     for d in dirs:
-        all_fails.extend(check_dir(d))
+        all_fails.extend(check_dir(d, lfs_ptr_paths))
     for f in all_fails:
         print("FAIL " + f)
     print(summary_line(len(all_fails), len(dirs), exempt, all_fails))

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（114）
+## 文件（115）
 
 ### Python 脚本
 
@@ -52,6 +52,7 @@
 - `test_folder_docs_summary.py`
 - `test_four_digit_wnum.py`
 - `test_inline_css_resync.py`
+- `test_lfs_text_purity.py`
 - `test_lint_links_refactor.py`
 - `test_milestone_block_regex.py`
 - `test_new_page.py`

@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（227）
+## 文件（228）
 
 ### Python 脚本
 
@@ -139,6 +139,7 @@
 - `check_interaction_binding.py`
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
+- `check_lfs_text_purity.py`
 - `check_mobile_viewport.py`
 - `check_motion_ban.py`
 - `check_motion_guard.py`

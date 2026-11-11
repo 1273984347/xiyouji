@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-12 01:38
+生成时间：2026-11-12 02:18
 
-共 **218** 件（门禁与校验 102 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 85 · 一次性（下划线前缀） 7）
+共 **219** 件（门禁与校验 103 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 85 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（102）
+## 门禁与校验（103）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -74,6 +74,7 @@
 | `check_js_syntax.js` | W591（经用户批准）：非 JS 数据块（application/ld+json、application/json、importmap 等） |
 | `check_js_syntax.py` | Check inline JS syntax in HTML files using `node --check`. |
 | `check_kpi_card_base.py` | kpi-card 基类门禁（第 37 门禁 · W673/WP-2.6）——防全局基类再被批量操作洗掉 / 页面漏分发。 |
+| `check_lfs_text_purity.py` | check_lfs_text_purity.py — 文本文件不得被 LFS 托管（W1214 立·PR #171 CI 红灯根因判据） |
 | `check_mobile_viewport.py` | check_mobile_viewport.py — 第 64 门禁 · 移动视口触摸与裁剪（W1165 · V4 375px 回归） |
 | `check_motion_ban.py` | check_motion_ban.py — Phase E E6 转正门禁（D4 动效禁止清单） |
 | `check_motion_guard.py` | check_motion_guard.py — d3 动效守卫覆盖率判据（W1135·遗留① 根治 + 防复发） |

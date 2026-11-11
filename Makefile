@@ -12,7 +12,7 @@
 #   - 任一命令失败即整体退出（makefile 默认行为）
 #   - 目标注释 `## ` 由 help 目标自动解析
 
-.PHONY: help analyze analyze-list analyze-only screenshots slice audit lint links test ci clean release data-validate docs-index validate-en ledger cross-line
+.PHONY: help analyze analyze-list analyze-only screenshots slice audit lint links test ci clean release data-validate docs-index validate-en ledger cross-line lfs-text-purity
 
 help: ## 显示所有目标
 	@python -c "import re; lines=open('Makefile',encoding='utf-8').read().splitlines(); print('\n用法:\n  make <target>\n\n目标:'); [print(f'  {m.group(1):<15} {m.group(2)}') for l in lines for m in [re.match(r'^([a-zA-Z_-]+):.*?##\s*(.*)', l)] if m]; print('')"
@@ -49,6 +49,11 @@ lint: ## ruff + eslint（如配置存在）— 跨平台兼容
 	@echo "==> lint: ruff + eslint"
 	@python -c "import shutil,sys,subprocess; rc=0; exec('''for t in ['ruff','eslint']:\n p=shutil.which(t)\n if p:\n  args=[t]+(['check','scripts/'] if t=='ruff' else ['.'])\n  r=subprocess.run(args)\n  rc=rc or r.returncode\n else:\n  print(f'  [skip] {t} 未安装')\n'''); sys.exit(rc)"
 	@echo "==> lint 完成"
+
+lfs-text-purity: ## LFS 文本纯净性门禁（索引 blob 口径·文本文件不得被 LFS 托管）
+	@echo "==> lfs-text-purity: 检查被跟踪的文本文件是否被 LFS 托管"
+	python scripts/check_lfs_text_purity.py --gate
+	@echo "==> lfs-text-purity 完成"
 
 links: ## 链接校验（全仓库 HTML href/src + Markdown，排除 node_modules/_template.html）
 	@echo "==> links: 全仓库链接校验（排除第三方包/模板）"

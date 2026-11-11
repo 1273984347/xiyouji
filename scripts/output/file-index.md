@@ -1,3 +1,65 @@
+## W1214 LFS 文本文件根修批：文本文件移出 LFS + 第 45 槽 C5 防复发（2026-11-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| .gitattributes | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| .github/workflows/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| AGENTS.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| CHANGELOG.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| CITATION.cff | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| HANDOVER.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| Makefile | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| STRUCTURE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| archive/docs/AGENTS-ARCHIVE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| archive/docs/workflows-readme-history.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/hero-set/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/hero-set/raw/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/hero-set/raw/round-w1005/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/output/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/output/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/plate-set/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/xiyouji-flyer-a4-en.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/xiyouji-flyer-a4.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/00-导读/W批次编号对账表.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/00-导读/项目说明.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/11-方案报告/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/11-方案报告/计划方案/T102-任务计划执行与经验沉淀报告-2026-11-12.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/agent/gates.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/agent/pitfalls.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| pitfalls.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| pytest.ini | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/check_folder_docs.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/check_lfs_text_purity.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/ci_sim.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/_cascade_files_W1214.txt | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/_vermilion_solid_cache.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/_w1214_spec.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/file-index.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/stats-changelog.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/stats-index.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/stats.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/tools-inventory.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/data/cross-time-danmaku.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/data/search.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/data/tag-cloud.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/dukou-engine.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/en/search.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/index.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| tests/unit/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| tests/unit/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| tests/unit/test_lfs_text_purity.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+
 ## W1212 第 45 槽失败明细并入汇总行批：排障盲区根修（2026-11-12）
 
 | 文件 | W | 说明 |
