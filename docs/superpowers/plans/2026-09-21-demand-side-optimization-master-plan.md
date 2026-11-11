@@ -5,7 +5,7 @@
 > 生成日期：2026-09-21
 > 核验状态：未核验
 >
-> 实测基线：HEAD `91cdb8e`（2026-09-21）；基线命令与期望值见 §0.2。
+> 实测基线：HEAD `388ef77`（2026-09-21）；基线命令与期望值见 §0.2。
 > 创建：2026-09-21。状态：**已全部收官**（WP-A~M 全部完成·D2/E 状态行于 W790/W791 对盘回写；WP-B-ALT 为冻结预案·待触发条件满足且用户明示批准后另行立项·不计入收官）。每个 WP（Work Package）为独立可交付单元，按 §5 顺序执行。
 > 用户已裁决（2026-09-21，本方案立项前双问确认）：
 > ① **AI 公网路径 = 暂不部署后端**。本方案 WP-B 只做入口收敛/品牌去重/文案诚实化；公网部署作为冻结预案 WP-B-ALT，触发条件满足且用户明示批准后才执行。
@@ -359,7 +359,7 @@ B14 WP-L  信任字段补全
 
 ### 8.2 Mode B 自审记录（2026-09-21，plan-authoring-review 流程）
 
-取证口径：HEAD `91cdb8e` 对齐；方案全部「新建」声称经 `ls` 证实不存在（gen_sitemap/inject_seo_head/check_seo_head/build_reader/evals 目录）；全部「已有」引用经实测存在且能力匹配（`fetch_gate_stats.py` uv7/uv30 字段与 ：265 自带 judge_gate 命令拼接、`judge_gate.py` 落盘读者数据复盘、`check_citations.py --dir`、`verify_delivery.py` sitemap 门禁与 `EXPECT_A4="209 篇"`、`_gen_search_index.py` 双页写入、`search.html` 打分 +5/+2/+1 原文、`site/js/rum.js:318-326` 含 `event:true`、EXCLUDE 五文件存在、`index.ts:37`/`:725` 行号精确、DEVELOPMENT.md Dockerfile 示例在位）。基线数字复核：待回填=5、dashboard `href="data/` 原始行数=51（恰等于去重链接数）、`from=home` 仅 index.html 1 处、「渡口问津」6 个 html + 1 个 js、A1 无本地图片引用（0 文件）、A1 含 `](../` 相对链接 101 文件、EN 站扁平 138/0。
+取证口径：HEAD `388ef77` 对齐；方案全部「新建」声称经 `ls` 证实不存在（gen_sitemap/inject_seo_head/check_seo_head/build_reader/evals 目录）；全部「已有」引用经实测存在且能力匹配（`fetch_gate_stats.py` uv7/uv30 字段与 ：265 自带 judge_gate 命令拼接、`judge_gate.py` 落盘读者数据复盘、`check_citations.py --dir`、`verify_delivery.py` sitemap 门禁与 `EXPECT_A4="209 篇"`、`_gen_search_index.py` 双页写入、`search.html` 打分 +5/+2/+1 原文、`site/js/rum.js:318-326` 含 `event:true`、EXCLUDE 五文件存在、`index.ts:37`/`:725` 行号精确、DEVELOPMENT.md Dockerfile 示例在位）。基线数字复核：待回填=5、dashboard `href="data/` 原始行数=51（恰等于去重链接数）、`from=home` 仅 index.html 1 处、「渡口问津」6 个 html + 1 个 js、A1 无本地图片引用（0 文件）、A1 含 `](../` 相对链接 101 文件、EN 站扁平 138/0。
 
 **结论：有条件通过——2 处高危失实 + 1 处阈值假 FAIL + 5 处中低危偏差，均已当场修正入文**：
 
@@ -368,7 +368,7 @@ B14 WP-L  信任字段补全
 | 1 | 高 | hreflang 规则假设存在 `site/en/data/<p>`，实测 EN 站全扁平（138 页 0 嵌套），原规则永不命中 | WP-C 第 4 条改「去 data/ 前缀找同名」，补实测样本 |
 | 2 | 高 | hub 分组声称「README 双索引既有分组」，实测 `docs/03-主题与情节专题/README.md` 仅 25 行、无文章列表 | WP-E 第 1 条改前缀族机械分组+音序平铺 |
 | 3 | 中高 | blob ≤700 阈值未计 reader 自身 615 个源链接与非核心索引条目，实算 ≈985 必然假 FAIL | WP-D2 增 footer-meta 改链步骤、阈值校准 ≤1000+四路分拆 |
-| 4 | 中 | 元信息块缺实测基线 HEAD | 头部补 `91cdb8e`（2026-09-21） |
+| 4 | 中 | 元信息块缺实测基线 HEAD | 头部补 `388ef77`（2026-09-21） |
 | 5 | 中 | WP-B 验收只扫 `*.html`，漏测唯一 js 命中 rag-chat.js | WP-B 验收增 `*.js` == 0 |
 | 6 | 低 | WP-A「回访率取 views/visitors 对比」系未核实的取数路径 | 改「只填后台实有字段，平台无则如实注明」 |
 | 7 | 低 | B-04 基线注释「41 vs 51」未说明命令输出口径 | 注释改「原始行数 51（=去重链接数）且 tab 文案合计 41」 |
@@ -378,18 +378,18 @@ B14 WP-L  信任字段补全
 
 | WP | 状态（⏸未启动/🔄进行中/✅完成/⏸️暂停） | 批次/W 号 | commit | 偏差记录 |
 |---|---|---|---|---|
-| WP-A | ✅ 2026-09-30（W626 判定＝归档：7 日 UV=1 / 30 日 UV=24·token 实配 + judge_gate 正式判定·942c64e 追记） | W626 | c3f1c0e | 2026-10-03 状态回写（W651）：原 🔄 行系回写滞后·判定当日即落地 |
-| WP-B | ✅ 2026-09-21（W592） | W592 | 7f326bc | 偏差①：`?q=` 预执行为 search.html 既有原生能力（前批深链功能），无需新增；偏差②：品牌验收口径细化——两搜索页内嵌索引数据引用 agent-web 工具名保留（文档事实描述非品牌使用），UI 品牌面 0 命中；偏差③：dukou-engine 页自身零品牌残留（改名早已完成，撞车在各页链接文案）；偏差④：EN「Ferry Crossing」本为引擎英文名无撞车，仅修 2 处语义失真（引擎不答问题→站内搜索）；首页 `xiyouji_asks` 本地记录随改道移除（无消费方·WP-F 以搜索词记录替代） |
-| WP-C | ✅ 2026-09-21（W591·sitemap 补全 W595） | W591/W595 | 9392459/a85608b | 偏差①：sitemap 口径 230→229（以现役 sitemap 门禁期望集为准·404 收录·两个 data/-view 排除）；偏差②：check_js_syntax.js 经用户批准修改——非 JS 数据块（ld+json 等）不编译（原实现把数据块当 JS 必误报）；偏差③：W593 批漏 add sitemap.xml 致 CI 红灯，W595 热修复补提交；其余验收全达（og:image 233/canonical 233/JSON-LD 内联 0 example.com/配对 89/CSP 0 漂移） |
-| WP-D1 | ✅ 2026-09-21（W593） | W593 | b507944 | 偏差①：reader 页无版本页脚（不参与新鲜度耦合面，替代原「对齐 bump_version 正则」设计）；偏差②：blob 外跳 D1 后临时升至 2379（1717-198 索引 A1 站内化+100 源文件链+762 正文跨板块暂走 blob·按方案 D2 收敛至 ≤1000）；偏差③：一致性门禁新增 5 条叙述性回目提及误报已冻结基线（W555 机制） |
-| WP-D2 | ✅ 已收官（W659-W667 六批全关：reader 扩量 02-06 板块 515 篇 + 搜索索引站内化 + footer-meta blob 改链 + 暗色审计 reader 入基线 + 治理三卡；对账表 W662 行「WP-D2 六批全关」实证） | W659-W667 | d733e1e/a8c0e47/5c615b3/78e8a6e 族 | 原 ⏸ 系 W626 归档裁决冻结·2026-10-03 用户「全部启动」点名解除（W651 入档）；本状态行系 W790/W791 对盘发现陈滞后回写（防后续会话被陈表误导） |
-| WP-E | ✅ 已收官（W669 dd432e9：A4 主题 hub + dashboard tab 口径 + mobile-index 删除；对账表 W669 行实证） | W669 | dd432e9 | 依赖 WP-D2 全量 reader 链接（已满足）；本状态行系 W790/W791 对盘发现陈滞后回写 |
-| WP-F | ✅ 2026-09-21（W594） | W594 | d8e10fe | 偏差①：黄金查询由构建时 python 同款评分模拟预验证（确定性·无抽样）+ 常驻 e2e `_check_search_golden_e2e.js` 双层把守；偏差②：rum e2e 需 shim 适配 ZH/EN 双常量 + en 段候选回退加固（原实现只试 pages[0] 单候选）；偏差③：EN 索引仍含 docs 条目（中文标题·kind 标注保留）——docs 内容本为中文，符合方案「docs 条目标注 zh 原文」口径 |
+| WP-A | ✅ 2026-09-30（W626 判定＝归档：7 日 UV=1 / 30 日 UV=24·token 实配 + judge_gate 正式判定·ddb0458 追记） | W626 | b2d6500 | 2026-10-03 状态回写（W651）：原 🔄 行系回写滞后·判定当日即落地 |
+| WP-B | ✅ 2026-09-21（W592） | W592 | 2f017a2 | 偏差①：`?q=` 预执行为 search.html 既有原生能力（前批深链功能），无需新增；偏差②：品牌验收口径细化——两搜索页内嵌索引数据引用 agent-web 工具名保留（文档事实描述非品牌使用），UI 品牌面 0 命中；偏差③：dukou-engine 页自身零品牌残留（改名早已完成，撞车在各页链接文案）；偏差④：EN「Ferry Crossing」本为引擎英文名无撞车，仅修 2 处语义失真（引擎不答问题→站内搜索）；首页 `xiyouji_asks` 本地记录随改道移除（无消费方·WP-F 以搜索词记录替代） |
+| WP-C | ✅ 2026-09-21（W591·sitemap 补全 W595） | W591/W595 | a16445f/2cf05a1 | 偏差①：sitemap 口径 230→229（以现役 sitemap 门禁期望集为准·404 收录·两个 data/-view 排除）；偏差②：check_js_syntax.js 经用户批准修改——非 JS 数据块（ld+json 等）不编译（原实现把数据块当 JS 必误报）；偏差③：W593 批漏 add sitemap.xml 致 CI 红灯，W595 热修复补提交；其余验收全达（og:image 233/canonical 233/JSON-LD 内联 0 example.com/配对 89/CSP 0 漂移） |
+| WP-D1 | ✅ 2026-09-21（W593） | W593 | a2be371 | 偏差①：reader 页无版本页脚（不参与新鲜度耦合面，替代原「对齐 bump_version 正则」设计）；偏差②：blob 外跳 D1 后临时升至 2379（1717-198 索引 A1 站内化+100 源文件链+762 正文跨板块暂走 blob·按方案 D2 收敛至 ≤1000）；偏差③：一致性门禁新增 5 条叙述性回目提及误报已冻结基线（W555 机制） |
+| WP-D2 | ✅ 已收官（W659-W667 六批全关：reader 扩量 02-06 板块 515 篇 + 搜索索引站内化 + footer-meta blob 改链 + 暗色审计 reader 入基线 + 治理三卡；对账表 W662 行「WP-D2 六批全关」实证） | W659-W667 | d733e1e/99d54a0/be4ea57/a6df244 族 | 原 ⏸ 系 W626 归档裁决冻结·2026-10-03 用户「全部启动」点名解除（W651 入档）；本状态行系 W790/W791 对盘发现陈滞后回写（防后续会话被陈表误导） |
+| WP-E | ✅ 已收官（W669 5aecb44：A4 主题 hub + dashboard tab 口径 + mobile-index 删除；对账表 W669 行实证） | W669 | 5aecb44 | 依赖 WP-D2 全量 reader 链接（已满足）；本状态行系 W790/W791 对盘发现陈滞后回写 |
+| WP-F | ✅ 2026-09-21（W594） | W594 | ee9889d | 偏差①：黄金查询由构建时 python 同款评分模拟预验证（确定性·无抽样）+ 常驻 e2e `_check_search_golden_e2e.js` 双层把守；偏差②：rum e2e 需 shim 适配 ZH/EN 双常量 + en 段候选回退加固（原实现只试 pages[0] 单候选）；偏差③：EN 索引仍含 docs 条目（中文标题·kind 标注保留）——docs 内容本为中文，符合方案「docs 条目标注 zh 原文」口径 |
 | WP-G | ✅ 2026-09-21（W601） | W601 | 待提交 | 偏差①：可见互链落位为页脚导航（W572 反馈链接 235/235 统一锚点前插），非方案原文的「顶导推广」——各页顶导结构不一无统一锚点；偏差②：内部信息泄露实测仅 en/index.html 1 处（36 篇随笔句），已改写为读者视角并补 subset 量化句（138 of 235） |
 | WP-H1 | ✅ 2026-09-21（W598） | W598 | 待提交 | 偏差：本地 LLM 基线跑未执行——xiyouji-agent-web/.env 无 旧厂商_API_KEY（用户侧凭证·与 WP-A 同因），判分逻辑以 --self-check 4/4 替代性机检，凭证具备后 --limit 5 起步补基线；golden-50 由构造器数据驱动生成（真实文件名/dataset 实值·构造时全路径过磁盘验证），非人工手写 |
 | WP-H2 | ✅ 2026-09-21（W600） | W600 | 待提交 | 偏差①：Playwright 点按 e2e 未做——产生 assistant 消息需 旧厂商_API_KEY（用户侧凭证·与 WP-A 同因），以「真实起服 HTTP 集成测试 5/5（首插 1/幂等 0/400 校验/summary/sqlite 直查恰 1 行）」替代核心机判，UI 点按链路待凭证补 e2e；偏差②：cost 字段单位未确认——首版仅展示 duration（秒·ms 自动换算），cost 展示待 SDK 单位确认后启用（方案原文允许该取舍）；偏差③：sessionId 入参由前端透传（DB 外键未约束 sessions 存在性——容错设计，离线历史消息仍可反馈） |
 | WP-I | ✅ 2026-09-21（W599） | W599 | 待提交 | 偏差①：单测用 node:test + tsx 运行（agent-web 无 vitest·零新增依赖·5/5 过）；偏差②：citationGuard 以 SSE 新事件 citation_guard 回写最终文本（前端 useChat 替换末文本块），替代方案原设想的文内标注 ✓——避免流式过程被改写；已链接/未核实计数随事件下发便于前端扩展 |
-| WP-J | ✅ 2026-09-21（W596） | W596 | e0ee2a9 | 偏差①：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限且用户指示「先不用 Docker」，Dockerfile/.dockerignore/DEPLOYMENT.md 已入库，条件具备后补验（方案口径：如实标注禁假收敛）；偏差②：`/api/health` 健康探针为既有路由（102 行实测），HEALTHCHECK 合法；偏差③：脏路径活面清零含级联脚本 winpath 根因修复（旧值每批续写 workflows README·修文档不改脚本必回潮）；豁免域 21 文件登记（CHANGELOG 历史段禁改/会话级记忆/docs/_dev/历史方案档/scripts/output 产物/检测器 `_audit_agentweb_baseline.py`（搜索模式即旧路径·设计保留）/gitignore 产物 index.js） |
+| WP-J | ✅ 2026-09-21（W596） | W596 | 8071504 | 偏差①：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限且用户指示「先不用 Docker」，Dockerfile/.dockerignore/DEPLOYMENT.md 已入库，条件具备后补验（方案口径：如实标注禁假收敛）；偏差②：`/api/health` 健康探针为既有路由（102 行实测），HEALTHCHECK 合法；偏差③：脏路径活面清零含级联脚本 winpath 根因修复（旧值每批续写 workflows README·修文档不改脚本必回潮）；豁免域 21 文件登记（CHANGELOG 历史段禁改/会话级记忆/docs/_dev/历史方案档/scripts/output 产物/检测器 `_audit_agentweb_baseline.py`（搜索模式即旧路径·设计保留）/gitignore 产物 index.js） |
 | WP-K | ✅ 2026-09-21（W597） | W597 | 待提交 | 偏差①：90 天年龄规则在两个月龄仓库产出 0，执行期修订为 ≥45 天（=半个项目生命周期·实扫 25 项迁移）；偏差②：pyproject ruff 排除未新增——W400 已有 **/_*.py 排除且 _attic 迁移物全为 js/md/json（一次误写坏 toml 当场 git checkout 还原；教训：双引号 python -c 内含反引号路径触发 bash 命令替换，回归 Write 临时文件铁律）；未跟踪 42 项全部零引用删除（含 _w597_scan 扫描器自身与 W593 漏删的 _w593_edits.py） |
-| WP-L | ✅ 2026-09-21（W602） | W602 | ca48a59 | 偏差：核验状态升级为 no-op——A1 实测 0 条引文行（check_citations 101 文件扫描），受「0 条引文禁止标引文已核验」空真防护全部保持未核验并如实登记；生成日期取 git 首次提交日期（机器取值）；其余 511 篇不补生成模型的否决维持 |
+| WP-L | ✅ 2026-09-21（W602） | W602 | 429078d | 偏差：核验状态升级为 no-op——A1 实测 0 条引文行（check_citations 101 文件扫描），受「0 条引文禁止标引文已核验」空真防护全部保持未核验并如实登记；生成日期取 git 首次提交日期（机器取值）；其余 511 篇不补生成模型的否决维持 |
 | W603（计划外·CI 热修复） | LHCI a11y 回归 | W603 | 待提交 | 根因：lhci 0.13.x 浮动捆绑的 lighthouse 新增 target-size/label-content-name-mismatch 审计，暴露既有问题（dashboard 顶导 brand aria-label 与可见文本分词不匹配·页脚反馈/语言链接点击目标 <24px）；修复：全站 235 页 brand aria-label 摘除+四类链接 padding 补齐（本地 Lighthouse dashboard 0.92→0.96·仅剩存量 color-contrast 属设计批）|

@@ -7,7 +7,7 @@
   "head_sentence": "面板归零收官  41 条 pillow 告警关闭  open 41→0  可复跑脚本入仓",
   "milestone_block": "- **W1202 GitHub「Security and quality」面板归零收官批（41 条 pillow 告警人工关闭 + 可复跑脚本入仓）**：\n  - 41 条 pillow 告警以 dismiss_reason=inaccurate 关闭（ok=41 fail=0）⇒ Dependabot open 41→0\n  - 依据链：仓库已钉 pillow==13.0.0（= advisory 的 first_patched_version）·依赖图历史条目无仓内清除路径（W1198-W1201 实测）\n  - scripts/dismiss_pillow_alerts.py 入仓（--dry-run/--apply/--revert 可回滚）\n  - 报告 T96 §8.3 终态读数回填 + 台账回填 W1201",
   "agents_note": "2026-11-10（W1202）面板归零收官：41 条 pillow 告警关闭 + 可复跑脚本入仓 + 终态读数回填",
-  "changelog_body": "\n\n**本批要点**（GitHub「Security and quality」面板归零·41 条 pillow 告警人工关闭）：\n\n> - **T1 处置动作**：41 条 pillow 告警以 `dismiss_reason=inaccurate` 批量关闭（API 实跑 ok=41 fail=0）⇒ **Dependabot open 41 → 0**（fixed 26 条历史不动）。\n> - **T2 依据链（全部实测·非推断）**：① 仓库自 2026-10-23（W890·654a289c）起钉 `pillow==13.0.0`，而 13.0.0 是全部 41 条 advisory 的 `first_patched_version` ⇒ 告警断言「12.3.0 被依赖」在仓库侧不成立；② 依赖图里的 `pillow@12.3.0` 是 2026-10-22 前的历史条目，**无仓内清除路径**（内容变更只新增 / 删除 manifest 使路径消失亦不清理 / Dependency submission API 为追加语义·W1198–W1201 四批实测）；③ CI 的 pip audit 审计哈希化清单 51 项闭包 ⇒ 漏洞检测不中断。\n> - **T3 可复跑与可回滚**：新建 `scripts/dismiss_pillow_alerts.py`（--dry-run / --apply / --revert）⇒ 关闭动作可复现、可审计、可一键回滚；依据链写在脚本头注释。\n> - **T4 终态读数回填**：报告 T96 新增 §8.3（归零前/终态对照表）+ 台账回填 W1201（4299a7ac）+ 坑表 E-219 补最终处置。\n> - **状态**：已落地。\n> - **文件**：见 file-index。\n",
+  "changelog_body": "\n\n**本批要点**（GitHub「Security and quality」面板归零·41 条 pillow 告警人工关闭）：\n\n> - **T1 处置动作**：41 条 pillow 告警以 `dismiss_reason=inaccurate` 批量关闭（API 实跑 ok=41 fail=0）⇒ **Dependabot open 41 → 0**（fixed 26 条历史不动）。\n> - **T2 依据链（全部实测·非推断）**：① 仓库自 2026-10-23（W890·c6a3cb41）起钉 `pillow==13.0.0`，而 13.0.0 是全部 41 条 advisory 的 `first_patched_version` ⇒ 告警断言「12.3.0 被依赖」在仓库侧不成立；② 依赖图里的 `pillow@12.3.0` 是 2026-10-22 前的历史条目，**无仓内清除路径**（内容变更只新增 / 删除 manifest 使路径消失亦不清理 / Dependency submission API 为追加语义·W1198–W1201 四批实测）；③ CI 的 pip audit 审计哈希化清单 51 项闭包 ⇒ 漏洞检测不中断。\n> - **T3 可复跑与可回滚**：新建 `scripts/dismiss_pillow_alerts.py`（--dry-run / --apply / --revert）⇒ 关闭动作可复现、可审计、可一键回滚；依据链写在脚本头注释。\n> - **T4 终态读数回填**：报告 T96 新增 §8.3（归零前/终态对照表）+ 台账回填 W1201（39b65372）+ 坑表 E-219 补最终处置。\n> - **状态**：已落地。\n> - **文件**：见 file-index。\n",
   "file_index_rows": [
     "| .github/workflows/README.md | W1202 | 改：本批级联/索引/统计产物刷新 |",
     "| AGENTS.md | W1202 | 改：本批级联/索引/统计产物刷新 |",
@@ -19,7 +19,7 @@
     "| archive/docs/AGENTS-ARCHIVE.md | W1202 | 改：本批级联/索引/统计产物刷新 |",
     "| archive/docs/W批次编号对账表-ARCHIVE.md | W1202 | 改：本批级联/索引/统计产物刷新 |",
     "| archive/docs/workflows-readme-history.md | W1202 | 改：本批级联/索引/统计产物刷新 |",
-    "| docs/00-导读/W批次编号对账表.md | W1202 | 登记：W1202 认领行 + W1201 回填（4299a7ac）|",
+    "| docs/00-导读/W批次编号对账表.md | W1202 | 登记：W1202 认领行 + W1201 回填（39b65372）|",
     "| docs/00-导读/项目说明.md | W1202 | 改：本批级联/索引/统计产物刷新 |",
     "| docs/11-方案报告/计划方案/T96-任务计划执行与经验沉淀报告-2026-11-10.md | W1202 | 改：新增 §8.3 终态读数回填（open 41→0·AC-11 达成·AC-10 在依赖图侧不可达）|",
     "| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1202 | 改：本批级联/索引/统计产物刷新 |",

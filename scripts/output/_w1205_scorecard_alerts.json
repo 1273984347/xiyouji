@@ -51,7 +51,7 @@
       "state_before_dismiss": "open",
       "state_after_dismiss": "dismissed",
       "state_after_rerun": "dismissed (未复活)",
-      "instance_commit_sha_after_rerun": "d3b549f55c861c7d2182ae96036b7a6085deceb5"
+      "instance_commit_sha_after_rerun": "6855fc170c17d957b1a2647eff16530fe7a26d43"
     },
     {
       "number": 62,
@@ -105,7 +105,7 @@
       "state_before_dismiss": "open",
       "state_after_dismiss": "dismissed",
       "state_after_rerun": "dismissed (未复活)",
-      "instance_commit_sha_after_rerun": "d3b549f55c861c7d2182ae96036b7a6085deceb5"
+      "instance_commit_sha_after_rerun": "6855fc170c17d957b1a2647eff16530fe7a26d43"
     },
     {
       "number": 66,
@@ -136,7 +136,7 @@
       "state_before_dismiss": "open",
       "state_after_dismiss": "dismissed",
       "state_after_rerun": "dismissed (未复活)",
-      "instance_commit_sha_after_rerun": "d3b549f55c861c7d2182ae96036b7a6085deceb5"
+      "instance_commit_sha_after_rerun": "6855fc170c17d957b1a2647eff16530fe7a26d43"
     }
   ],
   "rerun_verification": {
@@ -145,12 +145,12 @@
     "run_id": 42854082530,
     "run_url": "https://github.com/1273984347/xiyouji/actions/runs/42854082530",
     "run_status": "success",
-    "run_head_sha": "d3b549f55c861c7d2182ae96036b7a6085deceb5",
+    "run_head_sha": "6855fc170c17d957b1a2647eff16530fe7a26d43",
     "run_created_at": "2026-11-10T16:23:41Z",
     "run_updated_at": "2026-11-10T16:25:21Z",
     "code_scanning_open_after_rerun": 0,
     "revived": false,
-    "revived_detail": "三条告警在重跑后仍为 dismissed, 且 most_recent_instance.commit_sha 已更新为本次 run 的 d3b549f5 => GitHub 端确实收到了新 SARIF 的同指纹结果并沿用了 dismissed 状态, 未复活为 open",
+    "revived_detail": "三条告警在重跑后仍为 dismissed, 且 most_recent_instance.commit_sha 已更新为本次 run 的 6855fc17 => GitHub 端确实收到了新 SARIF 的同指纹结果并沿用了 dismissed 状态, 未复活为 open",
     "fingerprint_stability_reason": "pkg/scorecard/sarif.go createSARIFCheckResult 不写 partialFingerprints => GitHub 按 (ruleId + location) 生成默认指纹; 三条 location 恒为 no file associated with this alert + startLine=1 => 指纹稳定",
     "fingerprint_change_evidence": "重跑 SARIF 里 CodeReviewID 消息由 Found 0/25 approved changesets 变为 Found 0/12 approved changesets (窗口内 changeset 数变化) 但告警编号与 dismissed 状态未变 => 指纹不含消息文本"
   },

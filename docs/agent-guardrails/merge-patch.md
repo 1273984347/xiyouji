@@ -2,7 +2,7 @@
 
 > 背景：仓库根目录**已有** `CLAUDE.md`（52 行 / 16 条，宿主自动加载）与 `AGENTS.md`（31 KB 治理手册）。
 > 所以本目录不再放第二份 `CLAUDE.md` —— 那永远不会被自动加载。这里只给「插入位置 + 可复制措辞」。
-> 行号基于本批 HEAD `e48c1878` 实读；合并前请用 `git show HEAD:CLAUDE.md | Select-String "^16\."` 复核锚点。
+> 行号基于本批 HEAD `f647726e` 实读；合并前请用 `git show HEAD:CLAUDE.md | Select-String "^16\."` 复核锚点。
 
 ## 1. 去重映射：8 条候选里 7 条已被根文件覆盖
 

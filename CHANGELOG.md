@@ -1,3 +1,16 @@
+### W1209（2026-11-11）：仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填
+
+**本批要点**（W1209 仓库体积治理批）：
+
+> - **取证（先取证再动手）**：`.git` 1198.8 MB **全在历史对象**（单 pack 1194.5 MB）；全量 blob 58,842 件 / **逻辑 5,499.5 MB**（delta 压缩率 4.6×）；**最大单体仅 24 MB**（字体）⇒ **无任何异常巨型文件** ⇒ 膨胀主因是「**同一路径反复改写**」（CHANGELOG.md 927 个历史版本共 225.8 MB / file-index.md 842 版本 150 MB / 台账 940 版本 141.6 MB / reader+data 页 2.4 万对象）⇒ 不改历史的手段最多到 1.13 GiB（`git gc --prune=now` 回收 643.3 MB + `git repack --window=250 --depth=250` 728 s 仅再省 30 MB）⇒ **仍越 1 GB 线 13%** ⇒ 改写历史是唯一达标路径⇒ **用户批准执行 `git lfs migrate import`**。
+> - **迁移范围与零影响论证**：迁移 `assets/promo/**`（png 672 MB + jpg 424 MB + webp 36 MB + pdf 11 MB ≈ 1,143 MB 逻辑·非 delta 友好 ⇒ 物理收益最大），**排除 `**/*.md`**（`perf_optimize.py` 读 font-subset-guide.md、设计资产清单读 assets/design/README.md ⇒ 须保持真实内容）；**Pages 发布路径是 `site/` 目录**（仓根 assets/ 不在发布物内）· 三个扫描器只扫源码扩展名（png/jpg 不在扫描面）⇒ **迁移对 Pages 与 CI 门禁零影响**。
+> - **执行**：改写前本地 mirror 备份（1,162.8 MB·回退底稿）⇒ migrate **55 s 重写 1900 个 commit** ⇒ LFS 对象 **614 件 / 1.1 GB 全部上传远端**（rc=0）⇒ 工作区经 `git lfs checkout` 恢复 324 对象 / 414 MB（二进制 magic 校验通过）。
+> - **commit hash 引用回填（审计追溯链修复）**：改写使全部 commit hash 变化 ⇒ 172 个文档的引用失效 ⇒ 映射 **1898 条**（改写前后同源 ref 按提交顺序配对）⇒ **单 pass 最长匹配**回填 **1529 处** ⇒ 复核三面全绿：**旧 hash 残留 0 · 混合串残留 0 · 真失效引用 0**（426 个未知 hex 经旧仓二次过滤全为假阳性：文献编号 / 缓存 blob hash）。
+> - **顺手修正**：`git lfs migrate` 为被排除路径自动追加的 `**/*.md !text -filter -merge -diff` 会**压制 W993 立的「md 一律 LF 规范化」机制**（E-11 行尾漂移族）且 **`-diff` 让 md 被 git 当二进制**（审计类判据失效）⇒ 已删除该行。
+> - **沉淀**：pitfalls 新增 **E-226**（改写历史后 commit hash 引用必须用「单 pass + 最长匹配」回填——子串式的短 hash 替换会造出混合串且逐条修复会级联歧义）+ 计数链 319→320 同步七处。
+> - **待授权**：远端 main 尚未指向改写后历史——`main` 受保护分支**不可 force-push**，而普通 PR 合并会新建 merge commit ⇒ 旧历史仍可达 ⇒ 体积尚未真正下降 ⇒ **需用户解除 main 的「禁止强推」保护（或授权管理员 API）**后执行 force-push + 清理旧分支与 tag。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
 ### W1208（2026-11-11）：C-8 守卫接入提交门禁批：第 70 槽挂载 + 注册表与槽数声明面同改
 
 **本批要点**（W1208 C-8 守卫接入提交门禁批）：
@@ -17,7 +30,7 @@
 > - **占位符位置判据（实测确立）**：占位符只落**非哈希载体**——落进内联 `<script>` 会在部署期替换时改变脚本文本 ⇒ `script-src 'sha256-…'` 失配 ⇒ **整脚本被浏览器拒执行**（实测站内内联块命中 0）。
 > - **部署期两档注入实证**：默认档（公网地址）rc=0 + 开发者本机档（回环地址）rc=0（6 条可审计豁免）+ 默认档拒绝回环地址 rc=2（fail-closed）+ 注入后逐页「内联脚本哈希集合 ≡ CSP 声明集合」全等。
 > - **实跑抓出并根修 2 个真缺陷**：① 注入脚本标记注释形态恒为 JS 形态 ⇒ 注入 HTML 产物时该串不是注释、被浏览器当正文渲染（守卫豁免只看 `endpoint=` ⇒ 判据照样报绿）⇒ 改为按文件类型分派模板 + 1 例变异自证单测；② `/api/ready` 新字段直接序列化审计降级全量 ⇒ 泄露服务端绝对路径与 fs 错误原文（与 W832 收敛红线冲突）⇒ 改为只投影 `degraded/failures/gapStart` 三字段 + 集成测试回归锁。
-> - **B 台账 W1204 commit hash 回填** `d3b549f5`（git log 实证）。
+> - **B 台账 W1204 commit hash 回填** `6855fc17`（git log 实证）。
 > - **C 仓库体积处置**（不改历史）：删 `.git/lost-found`（2595 文件）+ `git gc --prune=now` ⇒ `.git` **1844.3 → 1201.0 MB**（回收 643.3 MB）· `git fsck --connectivity-only` rc=0。
 > - **D `/api/ready` 暴露合规降级**：`compliance.audit` **刻意不进 `ok` 聚合**（F10：审计降级时服务继续可用，算进 ok 会 503 致编排摘除服务）；降级标记**启动时回填**（此前只写不读回 ⇒ 重启即报「未降级」，属声明≠落地）。
 > - **独立盲审**：1 条 P1（就绪响应泄露本机绝对路径与错误原文）当批根修；7 条 P2 处置 5 / 登记待批 2（C-8 守卫接入 CI 槽、审计降级跨重启语义余项）。
@@ -73,7 +86,7 @@
 **本批要点**（架构方案 v2 档 2 施工第二子批 + W1202 终态收口）：
 
 > - **T1 根因链（承 W1198-W1201 四批）**：Dependabot 41 条 pillow 告警的根因是依赖图里的历史条目pillow@12.3.0（2026-10-22 前写入）永不被清理——内容变更只新增条目、删除 manifest 使路径消失亦不清理、Dependency submission API 为追加语义 ⇒ 面板归零在依赖图侧不可达；仓库自 2026-10-23 起已钉 pillow==13.0.0（= 全部 advisory 的 first_patched_version）⇒ 告警断言不成立 ⇒ 以 dismiss_reason=inaccurate 关闭（API 实跑 ok=41 fail=0·open 41→0）。
-> - **T2 W1202 终态收口**：台账 W1202 行回填合并提交 61c95567（PR #161）·状态改已收官；报告 T96 §8.3 补记同一 hash ⇒ 报告与台账指向同一合并事件。
+> - **T2 W1202 终态收口**：台账 W1202 行回填合并提交 0f820f37（PR #161）·状态改已收官；报告 T96 §8.3 补记同一 hash ⇒ 报告与台账指向同一合并事件。
 > - **T3 v2 归属批次号订正**：v2 §13.6 原写的归属批次 W935/W936/W937 已被后续批次占用（W935=速赢两处批·W936=首屏图集接入批·W937=首屏版式修正批）⇒ 本批重取 W1203（号取 CHANGELOG max+1）并订正 v2 文档，避免方案指向错批号。
 > - **T4 统计口径与台账窗口**：统计一律取干净 checkout 实算（并行会话在工作树上的在途改动不计入本批）；台账新增认领行使正本达 61 段超窗 ⇒ 按门禁提示 archive_ledger_rows.py --apply 归档最老行腾窗。
 > - **T5 施工面盘点（v2 档 2 D-2 第二子批）**：切读开关已现成（AGENT_WEB_DB_BACKEND=postgres·非法取值 fail-closed）、存储层接口已异步化且时间列统一 ISO-8601 UTC 毫秒、门面 db.ts 16 个导出齐备、D-2a 双后端契约测试在位、迁移与备份编排件在 deploy/pg/ 齐备 ⇒ 在其上推进「双写对账期 → 切读 → 停写旧库」。
@@ -86,9 +99,9 @@
 **本批要点**（GitHub「Security and quality」面板归零·41 条 pillow 告警人工关闭）：
 
 > - **T1 处置动作**：41 条 pillow 告警以 `dismiss_reason=inaccurate` 批量关闭（API 实跑 ok=41 fail=0）⇒ **Dependabot open 41 → 0**（fixed 26 条历史不动）。
-> - **T2 依据链（全部实测·非推断）**：① 仓库自 2026-10-23（W890·654a289c）起钉 `pillow==13.0.0`，而 13.0.0 是全部 41 条 advisory 的 `first_patched_version` ⇒ 告警断言「12.3.0 被依赖」在仓库侧不成立；② 依赖图里的 `pillow@12.3.0` 是 2026-10-22 前的历史条目，**无仓内清除路径**（内容变更只新增 / 删除 manifest 使路径消失亦不清理 / Dependency submission API 为追加语义·W1198–W1201 四批实测）；③ CI 的 pip audit 审计哈希化清单 51 项闭包 ⇒ 漏洞检测不中断。
+> - **T2 依据链（全部实测·非推断）**：① 仓库自 2026-10-23（W890·c6a3cb41）起钉 `pillow==13.0.0`，而 13.0.0 是全部 41 条 advisory 的 `first_patched_version` ⇒ 告警断言「12.3.0 被依赖」在仓库侧不成立；② 依赖图里的 `pillow@12.3.0` 是 2026-10-22 前的历史条目，**无仓内清除路径**（内容变更只新增 / 删除 manifest 使路径消失亦不清理 / Dependency submission API 为追加语义·W1198–W1201 四批实测）；③ CI 的 pip audit 审计哈希化清单 51 项闭包 ⇒ 漏洞检测不中断。
 > - **T3 可复跑与可回滚**：新建 `scripts/dismiss_pillow_alerts.py`（--dry-run / --apply / --revert）⇒ 关闭动作可复现、可审计、可一键回滚；依据链写在脚本头注释。
-> - **T4 终态读数回填**：报告 T96 新增 §8.3（归零前/终态对照表）+ 台账回填 W1201（4299a7ac）+ 坑表 E-219 补最终处置。
+> - **T4 终态读数回填**：报告 T96 新增 §8.3（归零前/终态对照表）+ 台账回填 W1201（39b65372）+ 坑表 E-219 补最终处置。
 > - **状态**：已落地。
 > - **文件**：见 file-index。
 
@@ -96,10 +109,10 @@
 
 **本批要点**（从删除态恢复完整态·并落仓路径 A 的否证结论）：
 
-> - **T1 背景与结论**：W1199 删除态批合并后（merge commit `a473141c`），Graph Update run `42801150314` 于 7 秒后跑完（completed success），其 manifests 段**只含 /scripts/requirements-hashed.txt** ⇒ **删除态确被正确解析**；但依赖图 pillow 条目仍为 `["13.0.0", "12.3.0"]`、Dependabot open 仍 41、fixed 仍 26 ⇒ **「让路径消失一次」不能清除依赖图历史条目**（依赖图对同一路径纯累积·且不因 manifest 消失而清理）。
+> - **T1 背景与结论**：W1199 删除态批合并后（merge commit `6dbf27dc`），Graph Update run `42801150314` 于 7 秒后跑完（completed success），其 manifests 段**只含 /scripts/requirements-hashed.txt** ⇒ **删除态确被正确解析**；但依赖图 pillow 条目仍为 `["13.0.0", "12.3.0"]`、Dependabot open 仍 41、fixed 仍 26 ⇒ **「让路径消失一次」不能清除依赖图历史条目**（依赖图对同一路径纯累积·且不因 manifest 消失而清理）。
 > - **T2 仓内无清除路径（已穷举）**：内容变更只新增条目（10-22 实证）、删除路径不清理（本批实证）、Dependency submission API 是追加语义（官方文档 "in addition to"）⇒ **依赖图里的 pillow@12.3.0 无仓内清除手段** ⇒ 41 条告警在依赖图侧不可归零，唯一剩余手段是人工 dismiss（dismiss_reason=inaccurate·非真实未修）——待用户裁决。
-> - **T3 本批动作（恢复完整态）**：逐字重建 `scripts/requirements.txt`（基准 852f20bf·diff 0 行）+ 加回监控面 PyYAML 第二段断言 ⇒ 恢复 Dependabot 对 /scripts 的监控与仓内完整态（删除态窗口结束）。
-> - **T4 订正落仓**：坑表 **E-219 原结论作废并改写**（「让路径消失一次是清残留的可靠动作」已被本批证伪⇒ 改为「处置前须先确认是否存在仓内清除路径」）+ 报告 T96 新增 §8.2 补记 + 台账回填 W1199（a473141c）。
+> - **T3 本批动作（恢复完整态）**：逐字重建 `scripts/requirements.txt`（基准 70d8e51d·diff 0 行）+ 加回监控面 PyYAML 第二段断言 ⇒ 恢复 Dependabot 对 /scripts 的监控与仓内完整态（删除态窗口结束）。
+> - **T4 订正落仓**：坑表 **E-219 原结论作废并改写**（「让路径消失一次是清残留的可靠动作」已被本批证伪⇒ 改为「处置前须先确认是否存在仓内清除路径」）+ 报告 T96 新增 §8.2 补记 + 台账回填 W1199（6dbf27dc）。
 > - **状态**：已落地。
 > - **文件**：见 file-index。
 
@@ -173,7 +186,7 @@
 > - **T7 首轮 CI 的 Dependency review 失败的漏洞处置（新建依赖树带来的 high 级漏洞）**：PR #152 首轮 CI 报 `basic-ftp@5.3.1` 漏洞（GHSA-c475-qrg2-pj4r·high·`Client.list()` 二次时间 DoS）——来自 lhci 子项目引入的 `express@4` 依赖链（`get-uri` → `basic-ftp@^5.0.2`）；advisory 的 vulnerable range 为 `<= 6.2.0`、`first_patched_version` 为 `6.2.1` ⇒ 用 npm `overrides` 把 `basic-ftp` 锁到 `6.2.6`（已超过修复版）；重生成 lock 后实测：`basic-ftp -> 6.2.6`、348 包不变、`resolved` 全为 `registry.npmjs.org`、无缺 `integrity`、`npm ci` rc 0（added 347 packages）且 `lhci` bin 可用。
 > - **T8 坑表 E-216（新建依赖树带来新漏洞）**：新建依赖树后必须跑一次依赖审查；新漏洞的 advisory 可能还未入库（OSV 与 GitHub Advisory API 均查不到，仅 CI 审查实测输出报出）。
 > - **T9 二轮·extract-zip 无修复版的漏洞通过升 lhci 解决**：二轮 CI 报出 `小 scripts/lighthouse/package-lock.json » extract-zip@2.0.1` 两条 high 级漏洞（GHSA-7pqw-9j4j-h8q3 与 GHSA-jmr9-qjv8-65gv，均为 `first_patched_version: None` ⇒ **最新版 2.0.1 仍落在漏洞区间**）。来源链：`lighthouse@11.4.0` → `puppeteer-core@21.x` → `@puppeteer/browsers@1.x/2.x` → `extract-zip@2.0.1`；而 `@puppeteer/browsers@3.x`（依赖改为 `modern-tar`）**不再拉 extract-zip**。解法：将 `@lhci/cli` 升到 `0.16.0`（其 `lighthouse 13.6.0` → `puppeteer-core 25.16.0` → `@puppeteer/browsers 3.2.6`），实测：新 lock 356 包、**extract-zip 已不再存在**、`basic-ftp` 仍锁 6.2.6、`resolved` 全为官方源、`npm ci` rc 0（added 337 packages）且 `lhci` bin 可用；配合需求：`@lhci/cli 0.16.0` 的 `engines` 要求 `node >= 22.19.0` ⇒ `perf.yml` 该 job 的 Node 由 20 升到 22（仓内 Node 22 已为主流，6 处）。
-> - **T10 收官（面板复查最终读数）**：PR #152 三轮 CI 全绿 31/31（`mergeStateStatus=CLEAN`）→ 合并 `d44c1f4b` → 重跑 Scorecard（run `42753322885`）：**Code scanning open 16 → 3**（安装命令面 13 条 `PinnedDependenciesID` 全部消解）；**Dependabot open 43 → 41**（2 条 minimatch 真告警自动关闭·fixed 计数 26），剩余 41 条 Pillow 为未随清单变更重算的 stale 投影（告警内 `version_requirement` 仍为 `= 12.3.0`·而现行清单已钉 13.0.0）。剩余 3 条 Code scanning 为无文件关联的整体评级项（CII / CodeReview / Fuzzing）——其判定依据已逐条核实，属平台侧配置与外部登记项（非代码面缺陷）。
+> - **T10 收官（面板复查最终读数）**：PR #152 三轮 CI 全绿 31/31（`mergeStateStatus=CLEAN`）→ 合并 `9a4d01ce` → 重跑 Scorecard（run `42753322885`）：**Code scanning open 16 → 3**（安装命令面 13 条 `PinnedDependenciesID` 全部消解）；**Dependabot open 43 → 41**（2 条 minimatch 真告警自动关闭·fixed 计数 26），剩余 41 条 Pillow 为未随清单变更重算的 stale 投影（告警内 `version_requirement` 仍为 `= 12.3.0`·而现行清单已钉 13.0.0）。剩余 3 条 Code scanning 为无文件关联的整体评级项（CII / CodeReview / Fuzzing）——其判定依据已逐条核实，属平台侧配置与外部登记项（非代码面缺陷）。
 > - **状态**：已落地。
 > - **文件**：见 file-index。
 
@@ -214,7 +227,7 @@
 > - **T2 暗色门禁 625 项恒红（断言域与采集面错配）**：基线 `scripts/output/render-state-audit-baseline.jsonl` 784 行混装两个采集面——charts 面 160 行（W579 建门禁时采）+ reader 面 621 行（W662 事后并入）+ 3 个已下线页；CI 只采 charts 面（当前磁盘 168 页），而 W1155 深度审计新增的「基线页缺失 / 采集面萎缩」断言遍历**全部**基线行 ⇒ reader 面 621 行与 3 个已下线页被恒判缺失。W662 段原文已定口径「gate compare 只遍历 charts scope 当前输出侧，reader 行不参与比对」，W1155 的新增断言未按该口径限定 ⇒ 属实现偏离设计意图。修法四项：① 新建 `scripts/_render_scope.js`（`listPages` / `chartsPages`）作采集面口径**单点来源**，采集端 `_audit_render_states.js` 与比对端 `check_dark_state_gate.js` 共用；② 缺失/萎缩断言只在「基线 ∩ 当前 charts 面」内成立（分片丢页与 upload 缺 `always()` 仍被拦）；③ **新增**「基线页磁盘已无且未登记 `RETIRED_PAGES` ⇒ FAIL」（防悄悄删页被 scope 限定放过）；④ reader 面遗留 621 行不参与比对但计数输出可见。基线不刷新（`--update-baseline` 会把 784 行砍到 168 行并抹掉 reader 面 ⇒ 属降判据·本批禁用）。本地实证：charts 面 168 页全采、基线同面 160 页 0 缺失、8 个新页 0 缺陷 ⇒ 门禁 OK；自测 9/9（原 5 例 + 新增同面缺页 / 采集面萎缩 / 已下线页未登记 / 已下线页已登记）。
 > - **T3 CodeQL #120 真修（`py/incomplete-url-substring-sanitization`·high）**：`scripts/stat_event_probe.py:286` 的 `"goatcounter.com" in u` 是 URL 子串匹配——既会误判 `https://evil.example/?u=goatcounter.com`，也被 CodeQL 判为不完整 URL 净化。改为解析 URL 取 hostname 后按 DNS 标签**精确**比对（末两段标签等于 goatcounter 与 com），口径与 `scripts/fetch_gate_stats.py:117` 同款（同族单一实现）；`file:` 等非 http(s) 协议由 scheme 判定排除，原「file:// 下零远端上报」断言强度不减。7 例自测（真实域 / 子域 / file: / 查询串含词 / 伪后缀域 / 域后缀攻击）全通过，`--self-test` 输出 `SELF_TEST_OK`。
 > - **T4 CHANGELOG 4 条断链**：W1181 段把正文（位于 `docs/` 下）的相对链接原样抄进仓库根的 CHANGELOG ⇒ `../03-主题与情节专题/…` 与 `../../source/…` 解析到仓库外。4 条改为根相对（`docs/03-主题与情节专题/…`、`source/引用与网络解读/…`）；`lint_links.py --dir .` 实跑 29321 链接 0 broken。
-> - **T5 E2E 与 evals 两处**：① 页面自 W1169（`0582f327`）起监听 `pointerenter`，E2E 仍派发 `mouseenter` ⇒ A1 失败；改测试派发 `PointerEvent`（坐标来源与断言不变；A7 的 mouse 族派发因对应页面仍用 mouse 族而保持原样）；② evals dataset-039/041 指向 `dataset/dashboard.json`，该文件已于 W1157 删除 ⇒ 改指现存等价数据集（`dataset/century-dialogue.json` 顶层恰 2 组、`dataset/yuanqi-graph.json` 含 `meta`），`must_mention` 与真实结构相符、判据强度不减；`validate.mjs` 实跑 50/50 通过。
+> - **T5 E2E 与 evals 两处**：① 页面自 W1169（`a981066e`）起监听 `pointerenter`，E2E 仍派发 `mouseenter` ⇒ A1 失败；改测试派发 `PointerEvent`（坐标来源与断言不变；A7 的 mouse 族派发因对应页面仍用 mouse 族而保持原样）；② evals dataset-039/041 指向 `dataset/dashboard.json`，该文件已于 W1157 删除 ⇒ 改指现存等价数据集（`dataset/century-dialogue.json` 顶层恰 2 组、`dataset/yuanqi-graph.json` 含 `meta`），`must_mention` 与真实结构相符、判据强度不减；`validate.mjs` 实跑 50/50 通过。
 > - **T6 连带清偿（本批新增的体积窗红灯 + 归档工具根修）**：本批 CHANGELOG 段落盘后体积达 264907 B > 上限 262144 B（pytest `test_real_tree_within_size_budget` 判红），file-index 面同步超限（263023 B）⇒ 走 `archive_segments.py` 体积模式迁出 W1108-W1116 共 9 段（正本回落 236837 B / 244634 B·上限 262144 B·余量 25307 B / 17510 B）；迁移时暴露工具自身缺陷——`archive_segments.py` 的 `_a3_ok` 末尾块分支写作「正本**不**以末尾块结尾」，而 W1130 引入的 `split_tail_block` 明确把末尾文件级块留在正本末尾 ⇒ 该分支恒假、CHANGELOG 体积迁移必红。已根修为「以末尾块结尾」并补 3 条回归锁（末尾块留在正本末尾 / 前缀被改拦截 / 末尾块被搬走拦截），相关 29 条测试全通过。
 > - **状态**：已落地。
 > - **文件**：见 file-index。
@@ -237,7 +250,7 @@
 **本批要点**（用户「检查一下 Workflow Lint 失败」·GitHub run #42605193188 实证·`unrecognized arguments: --ci`·退出码 2）：
 
 > - **T1 失败本体**：schedule 触发的「Workflow YAML parseable」job 里，「Action refs 存在性扫描（联网·周级/手动）」一步失败；其前的 YAML 全量解析与 40-hex 形态判据均通过。**不阻塞 PR**（main 分支 required checks 仅 `Delivery Gate (verify_delivery.py)` 与 `Unit Tests (pytest)`），但周级门禁面每次必红并掩盖真实信号。
-> - **T2 根因一（远端缺参）**：远端 `scripts/check_action_refs.py` 无 `--ci` 参数，而远端 workflow 已传 `--api --ci` ⇒ argparse 直接退出码 2。修复其实早在 W1155（本地 commit `5ebb587d`），但**本地 main 领先 origin/main 64 个提交、全部未推送** ⇒ 远端每周一 03:00 UTC 必然复现同一失败。
+> - **T2 根因一（远端缺参）**：远端 `scripts/check_action_refs.py` 无 `--ci` 参数，而远端 workflow 已传 `--api --ci` ⇒ argparse 直接退出码 2。修复其实早在 W1155（本地 commit `6d66773e`），但**本地 main 领先 origin/main 64 个提交、全部未推送** ⇒ 远端每周一 03:00 UTC 必然复现同一失败。
 > - **T3 根因二（脚本与 workflow 矛盾·此前无人修）**：脚本入口对 `--api` **强制要求 token**，无 token 即退出码 2；而 workflow 注释明写「刻意不带 token：目标仓库均为 public，匿名读即可」⇒ **即便把 64 个提交全部推送，周级扫描仍是红的**（实测 `py -3 scripts/check_action_refs.py --api --ci` → 退出码 2）。这是典型「补丁加补丁」：只补参数缺失、没碰能力矛盾。
 > - **T4 两侧同修**：① 脚本新增 `api_auth_decision()`——无 token 不再立即失败，改走匿名（实测匿名读 public 仓库 commit 返回 HTTP 200）；匿名限流归入「无法判定」，`--ci` 模式降级 WARN 不阻断，不带 `--ci` 仍 fail-closed。② workflow 联网步注入 `GH_TOKEN: ${{ github.token }}`（实测匿名配额 60 次/小时 < 本步最坏 84 次请求 ＝ 14 ref × 2 endpoint × 3 次重试；认证后 5000 次/小时）。
 > - **T5 验证与负样本锁**：脚本自测 8/8 通过（新增 N7「无 token 判为可继续」+ N8「入口不早退」）；**变异自证 2/2**——mutant A「入口早退」被 N8 专属咬红、mutant B「认证判定拒绝」被 N7 专属咬红，证明两把锁都不是假锁；`check_changed.ps1` 四档全绿；全量 workflow YAML 12/12 可解析。
@@ -503,7 +516,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1208），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1209），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

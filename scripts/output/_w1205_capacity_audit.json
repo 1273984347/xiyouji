@@ -138,7 +138,7 @@
       "triggered": false,
       "pending": false,
       "source": "git diff --name-only HEAD~1..HEAD ∪ git status --porcelain（去重）",
-      "note": "已提交 51 + 工作树未提交 89 = 108；历史最大单提交 918 个（4c26a96b2e5f）；历史最大批次 spec 登记文件数 943（W1139）",
+      "note": "已提交 51 + 工作树未提交 89 = 108；历史最大单提交 918 个（9cc71e5aaa77）；历史最大批次 spec 登记文件数 943（W1139）",
       "extra": {
         "batch_base": "HEAD~1",
         "committed_count": 51,
@@ -254,7 +254,7 @@
           "xiyouji-agent-web/server/storage/types.ts"
         ],
         "history_max_single_commit_files": 918,
-        "history_max_commit": "4c26a96b2e5f02be4b121ab8bb21a163ad6aa61f",
+        "history_max_commit": "9cc71e5aaa775447b44e936f8aa508118a6b5db2",
         "history_max_subject": "feat(w1167): MVP 迁移批——设计链路 13 Skill 落生产·六项交付·六道防线根修",
         "history_max_batch_spec_files": 943,
         "history_max_batch_spec": "_w1139_spec.json",

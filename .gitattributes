@@ -37,4 +37,11 @@ site/** linguist-generated=true
 *.psd -text
 *.ai -text
 assets/promo/** filter=lfs diff=lfs merge=lfs -text
-**/*.md !text -filter -merge -diff
+# W1209：`git lfs migrate` 会为「被排除路径」自动追加 `**/*.md !text -filter -merge -diff`，
+# 其中 `!text` 会压制 W993 立的「md 文本一律 LF 规范化」机制（E-11 行尾漂移族），
+# `-diff` 会让 git 把 md 当二进制（审计/改写面判据依赖内容 diff）⇒ 本批整行删除。
+# md 本就不在 LFS 范围（迁移只覆盖 assets/promo/**），无需排除规则。
+# W1209：`git lfs migrate` 为「被排除路径」自动加的 `!text` 会压制 W993 立的
+# 「md 文本一律 LF 规范化」机制（E-11 行尾漂移族），且 `-diff` 会让 git diff
+# 不再显示 md 内容差异（仓内改写面判据依赖内容 diff）⇒ 本批去掉 `!text` 与 `-diff`，
+# 只保留「md 不进 LFS」的排除语义。
