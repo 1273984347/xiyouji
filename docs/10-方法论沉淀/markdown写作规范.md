@@ -78,4 +78,4 @@
 - [DRL真循环](DRL真循环.md) — 审查端方法论
 - [E1铁律](E1铁律.md) — 跨 session 验证铁律
 - [三skill闭环](三skill闭环.md) — 审查→收尾→沉淀闭环
-- 源 skill：`C:\Users\12739\.trae-cn\plugins\trae-remote-official\product-lifecycle-workbench\0.2.1\skills\product-doc-writing\SKILL.md` §3
+- 源 skill：`%USERPROFILE%\.trae-cn\plugins\trae-remote-official\product-lifecycle-workbench\0.2.1\skills\product-doc-writing\SKILL.md` §3

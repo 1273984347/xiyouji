@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（224）
+## 文件（225）
 
 ### Python 脚本
 
@@ -153,6 +153,7 @@
 - `check_pitfall_id_unique.py`
 - `check_plan_template.py`
 - `check_powershell_parse.py`
+- `check_public_repo_secrets.py`
 - `check_reader_integrity.py`
 - `check_registration_surface.py`
 - `check_repo_layout.py`
