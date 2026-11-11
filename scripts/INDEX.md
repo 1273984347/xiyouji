@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（225）
+## 文件（228）
 
 ### Python 脚本
 
@@ -139,6 +139,7 @@
 - `check_interaction_binding.py`
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
+- `check_lfs_text_purity.py`
 - `check_mobile_viewport.py`
 - `check_motion_ban.py`
 - `check_motion_guard.py`
@@ -151,6 +152,7 @@
 - `check_parser_anchor_coverage.py`
 - `check_perf_shadow.py`
 - `check_pitfall_id_unique.py`
+- `check_placeholder_hash_carrier.py`
 - `check_plan_template.py`
 - `check_powershell_parse.py`
 - `check_public_repo_secrets.py`
@@ -171,6 +173,7 @@
 - `check_tooltip_spacing.py`
 - `check_untracked.py`
 - `check_w_range_literal.py`
+- `ci_repair_apt_mirror.py`
 - `ci_sim.py`
 - `color_delta_guard.py`
 - `containment_block_scan.py`

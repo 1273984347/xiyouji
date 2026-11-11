@@ -37,11 +37,18 @@ site/** linguist-generated=true
 *.psd -text
 *.ai -text
 assets/promo/** filter=lfs diff=lfs merge=lfs -text
-# W1209：`git lfs migrate` 会为「被排除路径」自动追加 `**/*.md !text -filter -merge -diff`，
-# 其中 `!text` 会压制 W993 立的「md 文本一律 LF 规范化」机制（E-11 行尾漂移族），
-# `-diff` 会让 git 把 md 当二进制（审计/改写面判据依赖内容 diff）⇒ 本批整行删除。
-# md 本就不在 LFS 范围（迁移只覆盖 assets/promo/**），无需排除规则。
-# W1209：`git lfs migrate` 为「被排除路径」自动加的 `!text` 会压制 W993 立的
-# 「md 文本一律 LF 规范化」机制（E-11 行尾漂移族），且 `-diff` 会让 git diff
-# 不再显示 md 内容差异（仓内改写面判据依赖内容 diff）⇒ 本批去掉 `!text` 与 `-diff`，
-# 只保留「md 不进 LFS」的排除语义。
+# W1214（根修 CI 第 45 槽红灯·本地绿/CI 红的真因）：W1209 迁移时 `**/*.md` 排除**确实生效**
+# （取证：改写后 W1096 commit 的 assets/promo 下 12 个 md 全是普通文本），但同批把 migrate
+# 自动生成的 `**/*.md !text -filter -merge -diff` 排除行**整行删除**（理由：`!text` 压制 W993 的
+# LF 规范化、`-diff` 让 md 被当二进制）⇒ **连同 filter/merge 的排除语义一起消失** ⇒ 此后凡被
+# `git add` 的 assets/promo 下文本文件都走 LFS clean filter ⇒ 落成 LFS 指针（实测 8 个 md + 2 个 html）。
+# CI 的 actions/checkout 默认不拉 LFS 真身 ⇒ 工作树是指针文本 ⇒ 第 45 槽 parse_index() 返回 None
+# ⇒ C2「INDEX.md 结构不合生成器模板」× 6 目录 ⇒ Delivery Gate 红 ⇒ required check 未过 ⇒ PR 硬拦。
+# 本批恢复排除语义，且**不重犯 W1209 的两个副作用**（不压制 LF 规范化、不禁用文本 diff）：
+#   -filter          清除 LFS clean/smudge filter（⇒ 不再落成指针）
+#   -merge           清除 merge=lfs
+#   diff             覆盖 diff=lfs（保留文本 diff：审计/改写面判据依赖它）
+#   text eol=lf      强制文本 + LF（承接 W993 的行尾定形，替代被删掉的 `!text`）
+# 范围：md 全仓（文本文件本就不该进 LFS）；html 仅 assets/promo（site/ 产物量大，本批不动）。
+*.md -filter -merge diff text eol=lf
+assets/promo/**/*.html -filter -merge diff text eol=lf

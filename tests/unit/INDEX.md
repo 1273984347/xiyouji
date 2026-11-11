@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（111）
+## 文件（115）
 
 ### Python 脚本
 
@@ -32,10 +32,12 @@
 - `test_check_no_goatcounter.py`
 - `test_check_no_hardcoded_endpoint.py`
 - `test_check_page_admission.py`
+- `test_check_placeholder_hash_carrier.py`
 - `test_check_plan_template.py`
 - `test_check_public_repo_secrets.py`
 - `test_check_script_coverage.py`
 - `test_check_search_index_fresh.py`
+- `test_ci_repair_apt_mirror.py`
 - `test_ci_sim.py`
 - `test_ci_wiring.py`
 - `test_commit_scope.py`
@@ -47,8 +49,10 @@
 - `test_docs_index.py`
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
+- `test_folder_docs_summary.py`
 - `test_four_digit_wnum.py`
 - `test_inline_css_resync.py`
+- `test_lfs_text_purity.py`
 - `test_lint_links_refactor.py`
 - `test_milestone_block_regex.py`
 - `test_new_page.py`

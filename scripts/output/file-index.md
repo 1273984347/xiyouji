@@ -1,3 +1,200 @@
+## W1214 LFS 文本文件根修批：文本文件移出 LFS + 第 45 槽 C5 防复发（2026-11-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| .gitattributes | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| .github/workflows/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| AGENTS.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| CHANGELOG.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| CITATION.cff | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| HANDOVER.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| Makefile | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| STRUCTURE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| archive/docs/AGENTS-ARCHIVE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| archive/docs/workflows-readme-history.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/hero-set/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/hero-set/raw/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/hero-set/raw/round-w1005/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/output/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/output/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/plate-set/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/xiyouji-flyer-a4-en.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| assets/promo/xiyouji-flyer-a4.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/00-导读/W批次编号对账表.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/00-导读/项目说明.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/11-方案报告/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/11-方案报告/计划方案/T102-任务计划执行与经验沉淀报告-2026-11-12.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/agent/gates.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| docs/agent/pitfalls.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| pitfalls.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| pytest.ini | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/check_folder_docs.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/check_lfs_text_purity.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/ci_sim.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/_cascade_files_W1214.txt | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/_vermilion_solid_cache.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/_w1214_spec.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/file-index.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/stats-changelog.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/stats-index.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/stats.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| scripts/output/tools-inventory.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/data/cross-time-danmaku.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/data/search.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/data/tag-cloud.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/dukou-engine.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/en/search.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| site/index.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| tests/unit/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| tests/unit/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+| tests/unit/test_lfs_text_purity.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
+
+## W1212 第 45 槽失败明细并入汇总行批：排障盲区根修（2026-11-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| AGENTS.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| CHANGELOG.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| CITATION.cff | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| HANDOVER.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| STRUCTURE.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| archive/docs/AGENTS-ARCHIVE.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| archive/docs/workflows-readme-history.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| docs/00-导读/W批次编号对账表.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| docs/00-导读/项目说明.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| pytest.ini | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/check_folder_docs.py | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/INDEX.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/_cascade_files_W1212.txt | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/_w1212_spec.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/file-index.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/stats-changelog.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/stats-index.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/stats.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/tools-inventory.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| site/data/cross-time-danmaku.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| site/data/tag-cloud.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| site/dukou-engine.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| site/index.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| tests/unit/INDEX.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| tests/unit/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| tests/unit/test_folder_docs_summary.py | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+
+## W1211 CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿（2026-11-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| .github/workflows/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| .github/workflows/ci-sim.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| .github/workflows/ci.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| .github/workflows/screenshot-review.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| AGENTS.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| CHANGELOG.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| CITATION.cff | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| HANDOVER.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| STRUCTURE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| archive/docs/AGENTS-ARCHIVE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| archive/docs/workflows-readme-history.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/00-导读/W批次编号对账表.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/00-导读/项目说明.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/11-方案报告/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/11-方案报告/计划方案/T101-任务计划执行与经验沉淀报告-2026-11-12.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/agent/pitfalls.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| pitfalls.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| pytest.ini | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/ci_repair_apt_mirror.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/ci_sim.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/_cascade_files_W1211.txt | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/_w1211_spec.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/file-index.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/stats-changelog.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/stats-index.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/stats.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/tools-inventory.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/preflight_check.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/data/cross-time-danmaku.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/data/search.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/data/tag-cloud.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/dukou-engine.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/en/search.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/index.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| tests/unit/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| tests/unit/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| tests/unit/test_ci_repair_apt_mirror.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| tests/unit/test_preflight_check.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+
+## W1210 占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修（2026-11-11）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| AGENTS.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| CHANGELOG.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| CITATION.cff | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| HANDOVER.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| STRUCTURE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| archive/docs/AGENTS-ARCHIVE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| archive/docs/workflows-readme-history.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/00-导读/W批次编号对账表.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/00-导读/文档规范.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/00-导读/项目说明.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/11-方案报告/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/11-方案报告/计划方案/T100-任务计划执行与经验沉淀报告-2026-11-11.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/agent/gates.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| pytest.ini | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/check_gov_doc_claims.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/check_placeholder_hash_carrier.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/_cascade_files_W1210.txt | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/_vermilion_solid_cache.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/_w1210_spec.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/file-index.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/stats-changelog.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/stats-index.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/stats.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/tools-inventory.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/verify_delivery.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/data/cross-time-danmaku.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/data/search.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/data/tag-cloud.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/dukou-engine.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/en/search.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/index.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| tests/unit/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| tests/unit/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| tests/unit/test_check_placeholder_hash_carrier.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+
 ## W1209 仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填（2026-11-11）
 
 | 文件 | W | 说明 |

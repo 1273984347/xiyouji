@@ -301,6 +301,42 @@ def test_wnum_commit_index_empty_and_case():
     assert preflight_check.wnum_commit_index(["abc1234 FIX(W123): x"]) == {123: [1, "abc1234"]}
 
 
+
+def test_wnum_commit_index_scope_comma_separated():
+    """scope 段逗号分隔形态（fix(ci,w1191):）必须计入——原正则只认「括号内恰好是 w+数字」
+    ⇒ P-43-01 反填对这类批次判「无批次标签提交」而拒绝回填（W1211 实测 W1191 命中）。"""
+    idx = preflight_check.wnum_commit_index([
+        "f5729d68f fix(ci,w1191): GitHub「Security and quality」全清",
+    ])
+    assert idx[1191] == [1, "f5729d68f"]
+
+
+def test_wnum_commit_index_multi_tag_counts_each():
+    """一笔提交含多个批次标签时各号各计——原实现只 search 一次（注释与实现不符）。"""
+    idx = preflight_check.wnum_commit_index([
+        "abcdef12 feat(w932,w933): 跨批提交",
+    ])
+    assert idx[932] == [1, "abcdef12"]
+    assert idx[933] == [1, "abcdef12"]
+
+
+def test_wnum_commit_index_ignores_later_bracket_prose():
+    """首个括号组之后的散文括号引用不得计入（保持原语义·防误降在途批防护）。"""
+    idx = preflight_check.wnum_commit_index([
+        "12345678 feat(w932): 主体提交 (见 w933 讨论)",
+    ])
+    assert 932 in idx and 933 not in idx
+
+
+def test_wnum_commit_index_still_ignores_prose_mentions():
+    """回归锁：散文提及形态仍不计入（形态放宽不得削弱 touches 交集拒绝）。"""
+    idx = preflight_check.wnum_commit_index([
+        "chore(w950): 承接 W940 题材关修正后的打磨",
+        "docs: 复盘引用 W954 报告实例",
+    ])
+    assert 940 not in idx and 954 not in idx
+
+
 def test_split_inflight_lagged_basic():
     """git 已有提交的登记面在途行 → lagged（退出拒绝集）；无提交的保留真在途。"""
     rows = [

@@ -1,3 +1,54 @@
+### W1214（2026-11-12）：LFS 文本文件根修批：文本文件移出 LFS + 第 45 槽 C5 防复发
+
+**本批要点**（W1214 LFS 文本文件根修批）：
+
+> - **CI 红灯真因坐实（本地绿 / CI 红）**：PR #171 本轮 CI（head=fc2c3b9df）只剩 Delivery Gate 一红，第 45 槽报「6 FAIL / 214 目录」；W1212 把失败明细并入汇总行后，CI 日志**首次可见** 6 个目录全在 assets/promo/*（assets/promo · hero-set · hero-set/raw · hero-set/raw/round-w1005 · output · plate-set），判据一律是 **C2「INDEX.md 结构不合生成器模板」**。取证：全仓 139 个 INDEX.md，**恰好这 6 个的 blob 是 LFS 指针**（git cat-file -p HEAD:assets/promo/INDEX.md ⇒ 首行 version https://git-lfs.github.com/spec/v1），其余 133 个是普通文本 ⇒ 因果链闭合。
+> - **根因（双因叠加·逐环实证）**：① **配置层**——W1209 迁移时给 assets/promo/** 写了 filter=lfs，migrate 自动追加的「**/*.md !text -filter -merge -diff」排除行被同批**整行删除**（理由：!text 压制 W993 立的 LF 规范化、-diff 让 md 被当二进制）⇒ **排除语义连同 filter/merge 一起消失** ⇒ 此后凡被 git add 的文本文件都走 LFS clean filter ⇒ 落成指针（实测 8 md + 2 html）；两版 commit 对拍坐实时序：改写后的 W1096 commit 里 assets/promo 下 12 个 md **全是普通文本**（排除当时生效），到 W1209 commit 时其中 8 个变成指针 ⇒ 落成发生在「排除行被删之后」而非迁移当时。② **机制层**——CI 的 actions/checkout **默认不拉 LFS 真身** ⇒ 工作树是指针文本 ⇒ 第 45 槽 parse_index() 返回 None ⇒ C2 判红；**本地恒绿**是因为 git lfs checkout 已把工作树恢复成真身（读磁盘永远读不到指针）。
+> - **修法（不重犯 W1209 的两个副作用）**：.gitattributes 恢复排除语义但**逐项改写**而非整行删除——「-filter -merge diff text eol=lf」（清除 LFS filter/merge · 覆盖 diff=lfs 保留文本 diff · 强制 LF 规范化替代被删的 !text）；范围 md 全仓（文本本就不该进 LFS）+ html 仅 assets/promo（site 产物量大不动）；随后把 10 个已被托管的文本文件**重新入库为普通 blob**（git rm --cached + git add，**无历史改写**）⇒ 索引内指针 0。
+> - **端到端反证（复现与修复双向成立）**：在工作树注入 6 个 INDEX.md 的 LFS 指针文本 ⇒ 第 45 槽实测「**6 FAIL / 214 目录**」，6 个目录名与 CI 日志**逐字一致**；还原 ⇒ **0 FAIL / 214 目录**。
+> - **防复发机器判据（教训转判据）**：新建 scripts/check_lfs_text_purity.py——**索引 blob 口径**（索引 = 将要入库的内容 = CI 干净检出的内容；读工作树本地恒读真身 ⇒ 判据恒绿 ⇒ 只能等 CI 报红）扫全仓文本扩展名白名单，命中指针即判红；接进第 45 槽 **C5 子项**（目录文档层·Delivery Gate 必跑 ⇒ 拦合并）+ ci_sim GATES（13→14 项·全仓层）；单测 7 例（指针识别 / 扩展名圈定 / 合成仓命中 / **真仓 0 命中回归锁** / 汇总行形态）；C5 判据抽独立函数 `_c5_lfs_ptr_fails`（check_dir 复杂度 18>15 超 guardrails 结构档 ⇒ 抽函数过档·语义零变化·铁律 20 补跑）。
+> - **性能修复（实测读数）**：判据初版逐个起 git cat-file 子进程 ⇒ 第 45 槽从 0.9 s 拖到 **32.6 s** ⇒ 改批量（一次 --batch-check 取体量筛小件 + 一次 --batch 取内容）⇒ 实测 **885 ms**。
+> - **计数链**：坑表 E-228 入表 + 计数链 321→322 同步 9 处（AGENTS 两处 + HANDOVER 两处 + SKILL.md 两处 + STRUCTURE.md + docs/agent/pitfalls.md 壳 + 坑表流程主题 188→189；主题计数自洽 48+12+32+26+15+189=322）。
+> - **未做（不假收敛）**：① **历史里的这 10 个文件仍是 LFS 指针**——彻底清理需再次改写历史（不可逆·全部 commit hash 变化）⇒ 须用户批准，本批只做「向前不再恶化」；② **二进制媒体仍在 LFS** ⇒ CI 上若站内引用 promo 图仍是指针（现测站内未引用·登记待办）；③ 挂第 72 槽（verify_delivery.py 注册表）须用户批准（规则 10）⇒ 本批以「第 45 槽 C5 + ci_sim」双落点替代；④ 复盘触发器 T1/T2/T3 全触发 ⇒ 本批未认领复盘批，登记下批；⑤ PR #171 合并仍待 CI 绿后由用户裁决。
+> - **文件**：见 file-index。
+> - **CI 回检补滚（同批第二笔）**：pytest C7「HANDOVER 概要块 7>6」CI 红灯——本批 HANDOVER 入块推超窗而滚动淘汰漏跑（该判据在 pytest 面·不在 verify_delivery 覆盖内 ⇒「门禁全绿」未拦）；修法 = `batch_cascade --rotate-only --apply` 补滚（W1207 块淘汰·指针归位 W1208·W534 断言面核实 CHANGELOG 有段）⇒ test_doc_size_budget **12 passed**；防复发 = 就绪链两处加固（AGENTS §4.3：HANDOVER 插块必须经 batch_cascade 含滚动 + 就绪链尾挂 pytest tests -q）。
+### W1212（2026-11-12）：第 45 槽失败明细并入汇总行批：排障盲区根修（CI 侧看不到失败明细）
+
+**本批要点**（W1212 第 45 槽失败明细并入汇总行批）：
+
+> - **起因（排障盲区实证）**：PR #171 的 CI 上 Delivery Gate 只剩 1 项 FAIL——第 45 槽「目录文档新鲜度：6 FAIL / 214 目录」；但**日志里只有这一句汇总，看不到是哪 6 个目录、差在哪个文件**。根因在判定链的输出层：`verify_delivery.py` 的 `_StrictGate` **只取 marker 行**（脚本 stdout 其余行被丢弃），而 `check_folder_docs.py` 的逐条「FAIL <目录>」明细正是打在 stdout 的非 marker 行 ⇒ **失败明细在 CI 上被结构性吞掉** ⇒ 排障必须再跑一轮 CI 才能定位（一次 push = 一轮 CI ≈ 25 job 的代价）。
+> - **修法（不动管控脚本）**：把失败项**并入汇总行**本身——`summary_line()` 纯函数拼装 `---- 第 45 门禁 目录文档新鲜度：N FAIL / M 目录（大小写冲突豁免 K）· 失败项：<最多 5 条>（共 N 条·余 M 条见门禁 stdout）----`；marker 前缀**逐字不变**（`_GATE_SUMMARY_MARKERS` 依赖前缀匹配，既有解析与单测零影响），成功时行形与旧版**逐字相同**（向后兼容）。不选「改 `_StrictGate` 把 stdout 全量带出」是因为 `verify_delivery.py` 属管控文件（规则 10 须用户批准）。
+> - **配套证据**：① 纯函数抽取后可直接单测 ⇒ 新增 `tests/unit/test_folder_docs_summary.py` **4 例**（成功行形不变 / 失败项入行 / 超 5 条截断但报总数与余数 / marker 前缀不变）；② **端到端正向证据**：在真实仓内人为把 `tests/unit/INDEX.md` 的一行换成不存在的文件名 ⇒ 汇总行实测输出「1 FAIL / 214 目录 · 失败项：C3 文件清单漂移：tests/unit（索引有清单无 [...]·幽灵预引 [...]）」⇒ 证明失败明细确实进了 CI 可见的那一行（改完复原，读数一致）。
+> - **验证读数**：`pytest tests/unit/test_folder_docs_summary.py tests/unit/test_folder_docs_gate.py` ⇒ **20 passed**（新 4 + 既有 16）；`ruff check scripts/check_folder_docs.py tests/unit/test_folder_docs_summary.py` ⇒ All checks passed；既有 16 例目录文档门禁单测**零回归**。
+> - **未做（不假收敛）**：红灯**根因尚未定位**——本批只解决「看得见」不解决「是什么」；下一批（W1213）拿到 6 个目录明细后定位并根修，并补 T102 报告。另：PR #171 的合并仍待 CI 绿后由用户裁决；批次标签「描述段 W 号形态」与复盘批、CI 提速（run_all 按改动面选跑 / 截图 job 分片）均登记下批。
+> - **文件**：见 file-index。
+### W1211（2026-11-12）：CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿
+
+**本批要点**（W1211 CI 修复与机制补强批）：
+
+> - **CI 9 红归因坐实（父提交基线双对照）**：W1210 的 run 43055555196 与其父提交（W1209）run 43040082452 的**失败 job 集合完全相同**（Site Smoke / E2E Interaction / Delivery Gate / Agent Web Build），报错链**逐字相同**（Temporary failure resolving 'azure.archive.ubuntu.com' → Failed to install browsers → Installation process exited with code: 100）⇒ **存量环境故障·非本批引入**；更早的 9d72c3aef run 43028286035 为 10/10 全绿 ⇒ 故障出现在 LFS 迁移推送之后。attempt 2 重跑仍同款失败（16:30:29→16:38:15·连续 90+ 分钟未恢复）⇒ **重跑不是解法**。
+> - **修复（用户裁决「6 处全改」）**：新建 scripts/ci_repair_apt_mirror.py——把 runner 的 apt 源从 azure.archive.ubuntu.com 切到候选镜像链（官方源优先 + 国内镜像兜底）并用 apt-get update 实测验证；**全部候选失败时打 warning 并 rc=0**（修复层不掩盖后续步骤的真实失败语义）；接入 **6 处 Playwright 安装点**（ci.yml 4 处 + screenshot-review.yml 2 处）。
+> - **机制补强（用户裁决「接 ci_sim」）**：第 71 槽接进 ci_sim 的 GATES（12→13 项）⇒ CI 侧预演 job **不依赖浏览器安装**即可实跑第 71 槽 ⇒ 堵上「新挂门禁槽在 CI 侧零执行证据」的盲区（Delivery Gate 是唯一能跑**全量** verify_delivery 的 job，而它常挂在依赖安装步骤失败）。
+> - **Backlog 对账硬拦清偿**：preflight 抓到「对账超阈 1 倍」硬拦 ⇒ 按 git 与测试实况核 HANDOVER Backlog：**8 行登记滞后全部反填**（7 行 git 反填 + W1191）；并根修批次标签判据（scope 段逗号分隔形态如 fix(ci,w1191): 此前判不出 ⇒ P-43-01 反填对半数批次失效）+ 多标签各号各计（原实现只 search 一次·与注释不符）+ 4 例回归锁（含「散文提及仍不计」负样本·防削弱并行 touches 交集拒绝）。
+> - **存量漂移订正**：HANDOVER §三 写「gates.md（67 槽）」实况 71 槽、AGENTS §4.3 写「完整 224 条」实况 320 条 ⇒ 两处订正。
+> - **坑表 E-227 入表 + 计数链 320→321 同步 9 处**（AGENTS 两处 + HANDOVER 两处 + SKILL.md 两处 + STRUCTURE.md + docs/agent/pitfalls.md 壳 + 坑表流程主题 187→188）。
+> - **W1209 过时表述订正（不改写 W1209 历史段·订正写在本段）**：fetch 实证 origin/main=dfff13ecf（= W1209 提交·本地 HEAD 祖先）⇒ 远端 main **已指向改写后历史**；git count-objects -vH 实测 size-pack **187.40 MiB** + loose 1.50 MiB ⇒ **已低于 1 GB 线** ⇒ W1209 段「远端 main 尚未指向改写后历史」「体积尚未真正下降」两项陈述已过时。
+> - **验证读数**：apt 脚本 compile rc=0 · ruff 全过 · 本机实跑 rc=0 · 单测 6 passed；标签判据单测 39 passed（含新增 4 例）；check_gov_doc_claims N2 76 段 · N3 71 槽 · N4 321 条 · 0 FAIL；check_pitfall_id_unique 0 FAIL；台账腾窗迁 W1149-W1150 ⇒ 正本 59 行。
+> - **未做（不假收敛）**：批次标签的「描述段 W 号形态」仍不识别（放宽会削弱在途批的并行 touches 交集拒绝）⇒ 登记下批待办并写明可选方向；复盘触发器 T1/T2/T3 全触发 ⇒ 本批未认领复盘批，登记下批；PR #171 合并待 CI 绿后由用户裁决。
+> - **文件**：见 file-index。
+### W1210（2026-11-11）：占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修
+
+**本批要点**（W1210 占位符哈希载体常驻门禁批）：
+
+> - **第 71 槽挂载（用户批准改 verify_delivery.py）**：坑表 E-225（W1207 实证）已立正解「占位符只许落在**非哈希载体**上」，并在 W1207 当批实测「内联 script 块内占位符命中 0」——但那是一次性**人工读数**，**无防复发机制**；W1208 方案档 §13.10 明列本项为「明确未做·建议下一并挂槽」。本批新建 `scripts/check_placeholder_hash_carrier.py` 并以 `_StrictGate` 挂进 `verify_delivery.py` 为**第 71 槽**，登记 `_SCOPE_CORE`（**恒跑**——判据与改动范围无关：任何提交都可能夹带产物面占位符改写）。
+> - **判据四项**：C1 内联 `<script>` 块正文（= CSP `script-src 'sha256-…'` 的哈希输入）出现占位符 ⇒ 判红，报告给出**块序号 + 该块 sha256 前 12 位**；C2 `<script src>` 属性值出现占位符 ⇒ 判红（替换后成外域 ⇒ script-src 不含该域 ⇒ 外链被拒）；C3 产物面扫不到任何内联块 ⇒ **判红**（扫描面失效 fail-closed·防静默假绿）；C4 其余载体（`csp_meta` CSP 声明面 / `meta` 旁挂 / `external_js` / `style`）**登记不判红**——登记不是放行，角色分类让每处占位符可人工复核。
+> - **口径同源（引用不复制·W1120 纪律）**：内联块的提取与哈希**直接 import `generate_csp`**（`SCRIPT_RE` + `inline_script_hashes`），**不复制正则字面量**——第 56 槽 `check_csp_drift.py` 是复制式（注释写「必须逐字一致」），本槽改引用式以从根上杜绝两处正则分叉。
+> - **双向实证（断链真实可复现·非理论推演）**：往 `site/index.html` 内联 `<script>` 注入一处占位符 ⇒ ① 本槽判红并定位到 `site/index.html:7` / 角色 `inline_script` / 块 #1 / 该块 sha256 前 12 位 `Emuuv5mktPBa`；② `generate_csp.py --check` **同步报出** `DRIFT site/index.html`（哈希确实失配）⇒ 两条判据互相印证；复原后本槽与 CSP 校验双绿。
+> - **注册表三处同改 + 声明面同改**：门禁元组 / `EXPECTED_SECTION_NAMES` / `_SCOPE_CORE`；槽数 70→71（AGENTS §4.2 三处 + gates.md 标题沿革/第 71 条/文末详细定义 + HANDOVER）+ 文档规范 75→76 段 ⇒ C3「AGENTS 清单上限 == verify 实况最高槽位」与 N3「AGENTS 槽数 == gates.md 条目数」双向转绿。
+> - **顺带根修存量假红（修实例必修根）**：`scripts/check_gov_doc_claims.py` 的 N2 段数解析用 `find("]")` 切分 + 去换行 + 按逗号 split ⇒ 列表项的**行尾注释**把注释与**下一项**黏成一项 ⇒ 真实 75 段被读成 **76** 段 ⇒ N2「文档规范段数 == verify 实数」长期假红（本批实跑复现）⇒ 改用 `ast` 精确解析（注释天然被忽略），N2 随之转绿。
+> - **未新增坑表条目**：E-225 已在册且正解未变，本批只是把正解从人工一次性实测升级为常驻机器门禁 ⇒ 按「重复坑不新增条目」纪律，计数链保持 320 不变。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
 ### W1209（2026-11-11）：仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填
 
 **本批要点**（W1209 仓库体积治理批）：
@@ -516,7 +567,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1209），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1214），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
