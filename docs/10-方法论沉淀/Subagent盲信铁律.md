@@ -172,7 +172,7 @@ DRL R1b/R2 subagent spot-check 是本铁律的下游应用。DRL R1a 3 verifier 
 
 ### 上游 skill
 
-- 原指全局路径 `C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·本铁律补充"证据本身仍需主代理 spot-check"）——**W754 校：该全局路径随 `skills/` 治理退役（W562）失联**；仓内等价权威改指 [E1铁律.md](E1铁律.md)（§四 L3 层级）与 [AGENTS.md](../../AGENTS.md) §4.3（subagent prompt 约束与 spot-check 铁则）
+- 原指全局路径 `%USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·本铁律补充"证据本身仍需主代理 spot-check"）——**W754 校：该全局路径随 `skills/` 治理退役（W562）失联**；仓内等价权威改指 [E1铁律.md](E1铁律.md)（§四 L3 层级）与 [AGENTS.md](../../AGENTS.md) §4.3（subagent prompt 约束与 spot-check 铁则）
 
 ### memory 文件
 

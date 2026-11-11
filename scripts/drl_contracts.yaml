@@ -42,14 +42,14 @@
     - must_still_contain: "v2.2.55"
 
 # DRL skill v1.3.0 升级验证
-- file: C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md
+- file: %USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md
   checks:
     - must_still_contain: "v1.3.0"
     - must_still_contain: "evidence-based"
     - must_still_contain: "verification-before-completion"
 
 # user_profile skill 触发门控验证
-- file: C:\Users\12739\.trae-cn\memory\user_profile.md
+- file: %USERPROFILE%\.trae-cn\memory\user_profile.md
   checks:
     - must_still_contain: "Skill 触发门控"
     - must_still_contain: "using-superpowers"
