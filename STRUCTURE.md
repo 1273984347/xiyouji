@@ -70,7 +70,7 @@
 | `RULES.md` | 必守规则单一入口（按域分节·一行条目+权威指针·四文档治理体系 W1157） |
 
 
-| `pitfalls.md` | 坑位表正本（323<!--stats:pitfalls_total--> 条·六主题·按编号检索教训；docs/agent/pitfalls.md 为跳转壳·W1157 迁根） |
+| `pitfalls.md` | 坑位表正本（324<!--stats:pitfalls_total--> 条·六主题·按编号检索教训；docs/agent/pitfalls.md 为跳转壳·W1157 迁根） |
 
 | `AGENTS.md` | Agent 协作指南正本（项目用途/技术栈/门禁摘要/铁律·§1-§8 骨架） |
 

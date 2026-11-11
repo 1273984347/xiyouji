@@ -23,6 +23,7 @@
 | scripts/output/stats-index.md | W1215 | stats 反向索引重渲 |
 | scripts/output/stats.json | W1215 | stats 实算刷新（pitfalls 族 7 新键） |
 | scripts/output/tools-inventory.md | W1215 | 工具盘点重渲（+1 件 pre_push_gate） |
+| scripts/gen_sitemap.py | W1215 | sitemap lastmod UTC 钳（R3 时区窗根修·CI 回检补笔） |
 | scripts/pre_push_gate.py | W1215 | 新建：一命令真全量编排器（guardrails→verify→pytest→ci_sim） |
 | scripts/stats.py | W1215 | pitfalls 族 7 新键 + 窄域 sweep + 既有嵌套随档根修 |
 | site/data/search.html | W1215 | 搜索索引重渲（文档计数随动·自动） |

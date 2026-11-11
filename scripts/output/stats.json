@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-12T05:37:46",
+  "_generated": "2026-11-12T06:36:31",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -126,7 +126,7 @@
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
     "last_changed_by": "W1215",
-    "value": 190
+    "value": 191
   },
   "pitfalls_git": {
     "domain": "pitfalls.md 主题「git / 提交 / 并发」实测条目数",
@@ -147,7 +147,7 @@
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
     "last_changed_by": "W1215",
-    "value": 323
+    "value": 324
   },
   "pytest_collected": {
     "domain": "pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议）",
