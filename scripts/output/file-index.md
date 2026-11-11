@@ -1,3 +1,35 @@
+## W1208 C-8 守卫接入提交门禁批：第 70 槽挂载 + 注册表与槽数声明面同改（2026-11-11）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| AGENTS.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| CHANGELOG.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| CITATION.cff | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| HANDOVER.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| docs/00-导读/W批次编号对账表.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| docs/00-导读/项目说明.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| docs/11-方案报告/README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| docs/11-方案报告/计划方案/T98-任务计划执行与经验沉淀报告-2026-11-11.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| docs/agent/gates.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/INDEX.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/check_no_hardcoded_endpoint.py | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/INDEX.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/_cascade_files_W1208.txt | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/_w1208_spec.json | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/file-index.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/stats-changelog.json | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/stats-index.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/stats.json | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/output/tools-inventory.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| scripts/verify_delivery.py | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| tests/unit/INDEX.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+| tests/unit/README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
+
 ## W1207 C-8 全量占位符化 + 仓库体积处置 + 就绪探针暴露审计降级批（2026-11-11）
 
 | 文件 | W | 说明 |

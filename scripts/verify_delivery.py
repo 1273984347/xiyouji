@@ -127,6 +127,7 @@ EXPECTED_SECTION_NAMES = [
     "统计事件契约",
     "模板结构契约",  # W1178：第 69 槽·恒跑——读 1 HTML·毫秒级
     "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON·毫秒级
+    "产物服务地址",  # W1208：第 70 槽·恒跑——扫产物面服务端地址·秒级
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -223,6 +224,7 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "统计事件契约",  # W1168：恒跑——事件清单↔发射面双向对拍与改动范围无关（静态扫描·秒级）
     "模板结构契约",  # W1178：第 69 槽·恒跑——读 1 HTML·毫秒级
     "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON 逐项对拍·毫秒级
+    "产物服务地址",  # W1208：第 70 槽·恒跑——扫产物面服务端地址·秒级
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -1209,6 +1211,20 @@ _STRICT_GATES = [
         fail_msg="首页 KPI 与 stats.json 失配（本批新增第 68 槽）",
         marker_msg="dashboard KPI 槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
         ok_msg="dashboard KPI 门禁通过（%s）",
+        ok_line=-1,    ),
+    # W1208：把 C-8「产物面禁硬编码服务端地址」守卫挂上第 70 槽——此前该守卫只有
+    # 人工跑（脚本自证 6/6 + pytest 11/11），**未接任何提交门禁 ⇒ 产物面回填一处
+    # 回环地址不会被拦**（本批盲审 P2-3）。恒跑：判据与改动范围无关。
+    _StrictGate(
+        section="产物服务地址",
+        script="check_no_hardcoded_endpoint.py",
+        args=("--gate",),
+        timeout=120,
+        marker="---- 第 70 门禁 产物服务地址：",
+        crash_msg="产物服务地址槽执行异常（第 70 槽·crash 即拦）: %s",
+        fail_msg="产物面存在硬编码服务端地址（契约 C-8 禁止·本批新增第 70 槽）",
+        marker_msg="产物服务地址槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="产物服务地址门禁通过（%s）",
         ok_line=-1,    ),
 ]
 

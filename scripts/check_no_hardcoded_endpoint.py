@@ -534,6 +534,8 @@ def main(argv=None):
     parser.add_argument("--strict", action="store_true",
                         help="严格档：裸主机名「提及」也判红")
     parser.add_argument("--self-test", action="store_true", help="负样本自证（造临时件·跑完即删）")
+    parser.add_argument("--gate", action="store_true",
+                        help="门禁模式：输出汇总行（第 70 槽挂载用·W1208）")
     args = parser.parse_args(argv)
 
     if args.self_test:
@@ -574,6 +576,10 @@ def main(argv=None):
               % (v["file"], v["line"], v["col"], v["host"], v["class"], v["role"], v["reason"]))
     for e in report["exempted"]:
         print("  [豁免] %s  ← %s" % (e["file"], e["marker"]))
+    if args.gate:
+        # 第 70 槽汇总行（verify_delivery._StrictGate 依此判「确实执行过」·防静默跳过）
+        print("---- 第 70 门禁 产物服务地址：违规 %d · %s ----"
+              % (report["violation_count"], "OK" if report["ok"] else "FAIL"))
     return 0 if report["ok"] else 1
 
 
