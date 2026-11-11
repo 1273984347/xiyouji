@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-eOqLZrTwRoDUnWRcjqfMEfOVsDgJDkP62gSUTG3EETI=' 'sha256-1QKEzS+n1EVCmlE/Qv1zpI1g+AsaDMw8PHy4pXhoD2o=' 'sha256-AGmBhWiq/7R70DbgKuzYAq20XS1qRibTcJrhsvZ8h4g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-eOqLZrTwRoDUnWRcjqfMEfOVsDgJDkP62gSUTG3EETI=' 'sha256-ve27u2b6a49sx7ss2zJ9nyrnr2E3c4w5HeN9p/aO9cU=' 'sha256-AGmBhWiq/7R70DbgKuzYAq20XS1qRibTcJrhsvZ8h4g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Annotated Journey to the West · Eighty-One Hardships Interactive View</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/en/81-hardships-view.html">
@@ -1940,7 +1940,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
       function goOffline() {
         if (fallback) {
-          setBanner(ids.bannerId, "离线模式（file://）：展示内置示例。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/" + name + "-view.html 访问可得完整数据。", true);
+          setBanner(ids.bannerId, "离线模式（file://）：展示内置示例。启动 <code>python scripts/api/api_server.py</code> 后按该脚本提示的本机地址访问 <code>/data/" + name + "-view.html</code> 可得完整数据。", true);
           show(fallback);
         } else {
           setBanner(ids.bannerId, "Offline with no built-in sample: please start the Data API and access via http.", true);

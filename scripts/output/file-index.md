@@ -1,3 +1,61 @@
+## W1207 C-8 全量占位符化 + 仓库体积处置 + 就绪探针暴露审计降级批（2026-11-11）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| .github/workflows/README.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| AGENTS.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| CHANGELOG.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| CITATION.cff | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| HANDOVER.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| README.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| STRUCTURE.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| docs/00-导读/W批次编号对账表.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| docs/00-导读/项目说明.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| docs/11-方案报告/README.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| docs/11-方案报告/计划方案/T97-任务计划执行与经验沉淀报告-2026-11-11.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| docs/agent/pitfalls.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| pitfalls.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/INDEX.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/generate_csp.py | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/inject_service_endpoint.py | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/INDEX.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/README.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/_cascade_files_W1207.txt | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/_w1207_spec.json | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/file-index.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/stats-changelog.json | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/stats-index.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/stats.json | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/output/tools-inventory.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| scripts/rag/README.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/_headers | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/dashboard.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/data/81-hardships-view.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/data/cave-estate.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/data/character-relationship-3d-view.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/data/data-explorer.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/data/material-archaeology.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/dukou-engine.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/en/81-hardships-view.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/en/cave-estate.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/en/character-relationship-3d-view.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/en/data-explorer.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/en/dukou-engine.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/en/material-archaeology.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/index.html | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/static/js/dataset-view.js | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| site/static/js/rag-chat.js | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| tests/unit/INDEX.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| tests/unit/README.md | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| tests/unit/test_w1205_batch_scripts.py | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| xiyouji-agent-web/server/api.integration.test.ts | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| xiyouji-agent-web/server/audit.ts | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| xiyouji-agent-web/server/routes.ts | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+| xiyouji-agent-web/src/utils/apiTypes.ts | W1207 | 改：C-8 占位符化  仓库体积 1844→1201 MB  就绪探针暴露审计降级 |
+
 ## W1206 公开仓敏感面清理批：本机绝对路径脱敏 + 可复跑扫描防线（2026-11-11）
 
 | 文件 | W | 说明 |

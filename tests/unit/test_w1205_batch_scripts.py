@@ -48,3 +48,34 @@ def test_capacity_measurer_has_threshold_judgement():
     src = (ROOT / "scripts" / "check_capacity_budget.py").read_text(encoding="utf-8")
     assert "def main" in src
     assert "pg_database_size" in src or "max_connections" in src
+
+
+def test_injection_marker_comment_is_type_specific():
+    """W1207 实证根修：注入标记的注释形态须**按文件类型**取（HTML 用 <!-- -->）。
+
+    原实现恒用 JS 形态 /* ... */ ⇒ HTML 产物顶部被插入一段非注释文本（浏览器会把它
+    当正文渲染出来）；守卫豁免判定虽不受影响，但产物观感破、且是「标记形态与文件类型
+    不匹配」这一类静默缺陷。
+
+    变异自证：把模板退回代码形态，本用例必红（⇒ 判据可证伪，不是恒真断言）。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import inject_service_endpoint as inj
+
+    assert inj.marker_template_for("a.html").startswith("<!--")
+    assert inj.marker_template_for("a.js").startswith("/*")
+    assert inj.marker_template_for("a.txt").startswith("#")
+    assert inj.marker_template_for("a.json") is None
+
+    html = "<!DOCTYPE html>\n<html><body>" + inj.PLACEHOLDER + "</body></html>\n"
+    out, n, marker = inj.inject_text(html, "https://rag.example.com", "developer-local",
+                                     True, inj.marker_template_for("a.html"))
+    assert n == 1
+    assert marker.startswith("<!--"), marker
+    assert "<!--" in out and "/*" not in out
+    assert inj.PLACEHOLDER not in out
+
+    # 变异自证：退回恒定代码模板 ⇒ 判据必须能抓住（否则本用例是恒真断言）
+    _out2, _n2, marker2 = inj.inject_text(html, "https://rag.example.com", "developer-local",
+                                         True, inj.MARKER_TEMPLATE_CODE)
+    assert not marker2.startswith("<!--")

@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-If6roWejloBn4giuSBxZGrd8vCODgFvv37ap29JgCTE=' 'sha256-nY7v+eNhqFlXx/Wj44MVM+5No1yvQcwSreWAvQBENlg=' 'sha256-bKZ9RgCi75cO3I3+GK+6BgRJ1qR9z4g2Xf1pqUccOdU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-If6roWejloBn4giuSBxZGrd8vCODgFvv37ap29JgCTE=' 'sha256-K7cXG6azmC7gMNiNK7gGJpFZh1N7Ij5WObuJBZwQ9uU=' 'sha256-bKZ9RgCi75cO3I3+GK+6BgRJ1qR9z4g2Xf1pqUccOdU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' __XIJ_SERVICE_BASE__ https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta name="xij-service-base" content="__XIJ_SERVICE_BASE__">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
   // 夜读模式（W488）：首屏防 FOUC
@@ -1632,7 +1633,7 @@ html[data-theme="dark"] .chapter-plate {
     <div id="graphBox"></div>
   </div>
 </main>
-<footer>W1206 · W1205 · W1204 · W1203 · W1202 · W1201 · W1199 · W1198 · W1197 · W1196 · W1195 · W1194 · …更早批次详见 CHANGELOG.md</footer><script>
+<footer>W1207 · W1206 · W1205 · W1204 · W1203 · W1202 · W1201 · W1199 · W1198 · W1197 · W1196 · W1195 · …更早批次详见 CHANGELOG.md</footer><script>
 
 // ---- 渡口知识库（抽取自项目西游渡·翻面方法论）----
 const SENSORY = [
@@ -1707,19 +1708,22 @@ let graphState = { triples: [], seen: new Set(), seed: new Map() };
 let graphRootQuery = null;
 const nodePos = new Map();   // label -> {x,y}，跨重绘缓存，消除点击跳变
 let graphFocus = null;       // 当前焦点节点 label
+// W1207（契约 C-8）：服务地址取自 head 的 meta 占位符（部署期由 inject_service_endpoint.py 替换）。
+// 刻意不写进内联脚本：部署期替换会改变内联脚本文本 ⇒ CSP 的 sha256 哈希失配 ⇒ 整脚本被浏览器拒执行。
+var RAG_BASE = (document.querySelector('meta[name="xij-service-base"]') || {}).content || '';
 async function queryRAG(){
   const v = document.getElementById('q').value.trim();
   const out = document.getElementById('out');
   if(!v){ out.textContent = '请先输入渡口入口（路人 / 器物 / 地名）。'; return; }
-  out.textContent = '检索中……（本地 RAG 服务 http://127.0.0.1:8777）';
+  out.textContent = '检索中……（本地 RAG 服务）';
   try{
-    const r = await fetch('http://127.0.0.1:8777/query?q=' + encodeURIComponent(v));
+    const r = await fetch(RAG_BASE + '/query?q=' + encodeURIComponent(v));
     if(!r.ok) throw new Error('http '+r.status);
     const data = await r.json();
     renderRAG(v, data);
   }catch(e){
     document.getElementById('graphPanel').style.display='none';
-    out.textContent = generate(v) + '\n\n〔本地 RAG 服务未启动，已回退到模板引擎。启动：python scripts/rag/rag_server.py〕';
+    out.textContent = generate(v) + '\n\n〔本地 RAG 服务未启动或服务地址未注入，已回退到模板引擎。启动与地址注入配方见 scripts/rag/README.md〕';
   }
 }
 function renderRAG(name, data){
@@ -1878,7 +1882,7 @@ function renderGraph(){
 async function expandNode(label){
   if(!label) return;
   try{
-    const r = await fetch('http://127.0.0.1:8777/graph?q=' + encodeURIComponent(label));
+    const r = await fetch(RAG_BASE + '/graph?q=' + encodeURIComponent(label));
     if(!r.ok) return;
     const data = await r.json();
     if(data.graph && data.graph.length){
@@ -1892,7 +1896,7 @@ async function resetGraph(){
   graphState = { triples: [], seen: new Set(), seed: new Map() };
   nodePos.clear(); graphFocus = null;
   try{
-    const r = await fetch('http://127.0.0.1:8777/graph?q=' + encodeURIComponent(graphRootQuery));
+    const r = await fetch(RAG_BASE + '/graph?q=' + encodeURIComponent(graphRootQuery));
     const data = await r.json();
     mergeTriples(data.graph || []);
     renderGraph();

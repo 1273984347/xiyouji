@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VEPR2b1COtqLwnITlboPadwhX9hH4AFL0gTc5iwQAfk=' 'sha256-NGPaMqoeM5B3HElON/5HPrN1E6bdVX0Db+3B7B3Cu08=' 'sha256-piDdr4nQnOh3xIEjw4kvMS/PCGsFzVklfQJn40o0r5E=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VEPR2b1COtqLwnITlboPadwhX9hH4AFL0gTc5iwQAfk=' 'sha256-sMvHL0C+c14D1QtIjMEEqMgXcTPYrg9eHh+7UHA58V0=' 'sha256-piDdr4nQnOh3xIEjw4kvMS/PCGsFzVklfQJn40o0r5E=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>详解西游记 · 八十一难可交互视图</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/81-hardships-view.html">
@@ -1962,7 +1962,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
       function goOffline() {
         if (fallback) {
-          setBanner(ids.bannerId, "离线模式（file://）：展示内置示例。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/" + name + "-view.html 访问可得完整数据。", true);
+          setBanner(ids.bannerId, "离线模式（file://）：展示内置示例。启动 <code>python scripts/api/api_server.py</code> 后按该脚本提示的本机地址访问 <code>/data/" + name + "-view.html</code> 可得完整数据。", true);
           show(fallback);
         } else {
           setBanner(ids.bannerId, "离线且无内置示例：请启动数据 API 后通过 http 访问。", true);

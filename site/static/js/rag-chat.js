@@ -21,7 +21,9 @@
   if (__host !== 'localhost' && __host !== '127.0.0.1' && __host !== '' && location.protocol !== 'file:') { return; }
 
 
-  const RAG_BASE = 'http://127.0.0.1:8777';
+  // W1207（契约 C-8）：服务地址改用构建期占位符，部署期由 scripts/inject_service_endpoint.py
+  // 替换为真实地址；仓内产物不含任何服务地址（守卫 check_no_hardcoded_endpoint.py 判红 0）。
+  const RAG_BASE = '__XIJ_SERVICE_BASE__';
   const STORAGE_KEY = 'rag-chat-history';
 
   // === 样式注入 ===

@@ -152,7 +152,7 @@
         show(data);
       }).catch(function () {
         if (fallback) {
-          setBanner(ids.bannerId, "离线模式（file://）：展示内置示例。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/" + name + "-view.html 访问可得完整数据。", true);
+          setBanner(ids.bannerId, "离线模式（file://）：展示内置示例。启动 <code>python scripts/api/api_server.py</code> 后按该脚本提示的本机地址访问 <code>/data/" + name + "-view.html</code> 可得完整数据。", true);
           show(fallback);
         } else {
           setBanner(ids.bannerId, "离线且无内置示例：请启动数据 API 后通过 http 访问。", true);

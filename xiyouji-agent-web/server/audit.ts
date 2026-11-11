@@ -131,7 +131,35 @@ export interface AuditDegradationState {
   markerPath: string;
 }
 
-/** 进程内降级状态（模块级单例·与审计日志同生命周期）。 */
+/**
+ * 读取落盘的降级标记（**重启后回填**）。
+ *
+ * W1207 盲审 P2-1 根修：此前标记**只写不读回** ⇒ 进程重启后 `auditDegradation()` 返回
+ * 「未降级」，而磁盘上缺口窗口标记仍在 ⇒ 事故场景下就绪探针反而报「未降级」⇒
+ * 本模块注释承诺的「落标记文件⇒重启后仍可见」是**声明≠落地**（假收敛）。
+ *
+ * 读不到 / 坏文件 / 字段类型不符一律**降级为「未降级」并忽略该字段**（与本模块
+ * 「读写都不抛」纪律一致：坏标记不应让服务起不来）。
+ */
+function loadDegradationMarker(): Partial<AuditDegradationState> {
+  const out: Partial<AuditDegradationState> = {};
+  try {
+    const raw = fs.readFileSync(auditDegradationMarkerPath(), "utf-8");
+    const obj = JSON.parse(raw) as Record<string, unknown>;
+    if (!obj || typeof obj !== "object") return out;
+    if (typeof obj.degraded === "boolean") out.degraded = obj.degraded;
+    if (typeof obj.gap_start === "string") out.gapStart = obj.gap_start;
+    if (typeof obj.last_success_ts === "string") out.lastSuccessTs = obj.last_success_ts;
+    if (typeof obj.failures === "number" && Number.isFinite(obj.failures)) out.failures = obj.failures;
+    if (typeof obj.last_error === "string") out.lastError = obj.last_error;
+    if (typeof obj.last_error_at === "string") out.lastErrorAt = obj.last_error_at;
+  } catch {
+    /* 无标记 / 坏标记：按「未降级」处理（不抛·与读写都不抛纪律一致） */
+  }
+  return out;
+}
+
+/** 进程内降级状态（模块级单例·与审计日志同生命周期·**启动时从标记文件回填**）。 */
 let degradation: AuditDegradationState = {
   degraded: false,
   gapStart: null,
@@ -140,7 +168,10 @@ let degradation: AuditDegradationState = {
   lastError: null,
   lastErrorAt: null,
   markerPath: auditDegradationMarkerPath(),
+  ...loadDegradationMarker(),
 };
+// markerPath 始终以**当前运行路径**为准（标记文件可能来自另一个实例目录）。
+degradation.markerPath = auditDegradationMarkerPath();
 
 /** 读取当前合规降级状态（供健康探针/运维查询）。 */
 export function auditDegradation(): AuditDegradationState {
