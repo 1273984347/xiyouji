@@ -187,6 +187,12 @@ def c5b_extra_surfaces():
         for p in glob.glob(os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)
         if os.sep + "计划方案" + os.sep not in p
     )
+    # W1215：坑位计数链生成器化三面（pitfalls.md **不入本面**——其正文含历史示例标记
+    # （E-195「615<!--stats:a1_a6_docs-->」实证叙述）·整文件扫必假红，段头改由 C5e
+    # 声明↔实测对拍 + stats 窄域 sweep（仅段头行）双网兜住）
+    paths.append(os.path.join(ROOT, "HANDOVER.md"))  # 坑位总数两处 + a4_docs 等实体标记
+    paths.append(os.path.join(ROOT, ".agent", "skills", "puti-shouye", "SKILL.md"))  # 坑位总数两处
+    paths.append(os.path.join(ROOT, "docs", "agent", "pitfalls.md"))  # 跳转壳坑位总数一处
     return paths
 
 
@@ -641,6 +647,52 @@ def _c5_extra_surfaces_check(inp, stats, issues):
     # 病根：坑表各主题标题写「（N 条）」、AGENTS 有总数与分项行、HANDOVER 有两处总数——
     # 四处全靠手改。实证 AGENTS 分项停在 25/25/15/10/28=109 长期无人核（总数声明已到 118），
     # 而 W1024 手算 118+4=121、实算为 122。此类「分项之和 vs 总数」偏差机器可查，不该靠人核。
+# W1215：主题名 → stats 键（计数链生成器化单一事实源——pitfalls.md 段头 / AGENTS 分项行 /
+# stats sweep 三处共用此映射；新增主题必须在此登记键名，缺键 = stats build 判红）
+PITFALL_THEME_KEYS = {
+    "CSS / 视觉渲染": "pitfalls_css",
+    "JS / CSP / 运行时": "pitfalls_js",
+    "git / 提交 / 并发": "pitfalls_git",
+    "级联 / CHANGELOG": "pitfalls_cascade",
+    "数据 / 内容可信度": "pitfalls_data",
+    "流程 / 协作 / 取证": "pitfalls_flow",
+}
+# W1215：C5e 句式对账在**剥 stats 标记文本**上进行 ⇒ 既有句式与旧形态逐字兼容，
+# 标记数字与实值的对齐由 sweep 自动跟随 + C5b 对账面负责（两网各司其职不重复）
+RE_STAT_MARK_ANY = re.compile(r"<!--stats:[a-z_0-9]+-->")
+
+
+def strip_stat_marks(text):
+    """剥 stats 实体标记（供 C5e 句式对账·W1215·与 stats.py sweep 的窄域口径配套）。"""
+    return RE_STAT_MARK_ANY.sub("", text)
+
+
+def pitfall_theme_counts(inp=None):
+    """坑表主题计数取数面（C5e 对账与 stats sweep 共用·W1215 生成器化·引用不复制）。
+
+    返回 (declared, actual)：declared = 段头声明 {主题名: N}；actual = 实测 {主题名: N}。
+    段头形态 `### <名>（N 条）`——N 可带 stats 标记（sweep 自动跟随后的形态·剥离后匹配）。
+    """
+    def _text(key, rel):
+        if inp is not None and inp.get(key) is not None:
+            return inp[key]
+        with open(os.path.join(ROOT, rel), encoding="utf-8") as _f:
+            return _f.read()
+
+    _t = strip_stat_marks(_text("pitfalls", "pitfalls.md"))  # W1157 正本迁根（docs/agent/ 留跳转壳）
+    _declared, _actual = {}, {}
+    for _seg in re.split(r"(?m)^### ", _t)[1:]:
+        _head, _, _rest = _seg.partition("\n")
+        _m = re.search(r"^(.*?)（(\d+) 条）", _head)
+        if not _m:
+            continue
+        _name = _m.group(1).strip()
+        _body = re.split(r"(?m)^## ", _rest)[0]
+        _declared[_name] = int(_m.group(2))
+        _actual[_name] = len([_l for _l in _body.split("\n") if _l.startswith("- **")])
+    return _declared, _actual
+
+
 def _c5e_pitfall_counts(issues):
     """C5e：坑表分项计数三向一致（W1025·W1044 补分项对拍）。
 
@@ -662,17 +714,7 @@ def _c5e_pitfall_counts_injected(inp, issues):
             return _f.read()
 
     try:
-        _t = _text("pitfalls", "pitfalls.md")  # W1157 正本迁根（docs/agent/ 留跳转壳）
-        _declared, _actual = {}, {}
-        for _seg in re.split(r"(?m)^### ", _t)[1:]:
-            _head, _, _rest = _seg.partition("\n")
-            _m = re.search(r"^(.*?)（(\d+) 条）", _head)
-            if not _m:
-                continue
-            _name = _m.group(1).strip()
-            _body = re.split(r"(?m)^## ", _rest)[0]
-            _declared[_name] = int(_m.group(2))
-            _actual[_name] = len([_l for _l in _body.split("\n") if _l.startswith("- **")])
+        _declared, _actual = pitfall_theme_counts(inp)  # W1215：取数面单一事实源（段头标记剥离内建）
         _sum_decl = sum(_declared.values())
         _sum_act = sum(_actual.values())
         for _k, _v in _declared.items():
@@ -685,20 +727,25 @@ def _c5e_pitfall_counts_injected(inp, issues):
             issues.append("C5e: 坑表分项声明之和 %d ≠ 实测条目之和 %d" % (_sum_decl, _sum_act))
         # W1058：对账面补 SKILL.md 两处（W1051 ASM-09 已画出的 6 点清单此前只扫 2 类载体——
         # W1055/W1056 两次坑表 +1 均漏 SKILL 实证盲区；形态：L6「N 条·六主题」/ L65「N 条完整教训」）
+        # W1215 补两盲区形态：AGENTS「完整 N 条见」/ HANDOVER「N 条坑·六主题」——
+        # W1214 实证 321 漏改两处即此形态（既有 pattern 只锁「条坑位」/「（N 条·六主题）」两形态）；
+        # 匹配统一在**剥标记文本**上进行（markers 由 sweep 自动跟随·句式与旧形态逐字兼容）
         for _key, _disp, _rel, _pat in (
             ("agents", "AGENTS.md", "AGENTS.md", r"(\d+) 条坑位"),
+            ("agents", "AGENTS.md", "AGENTS.md", r"完整 (\d+) 条见"),
             ("jiaojie", "HANDOVER.md", "HANDOVER.md", r"（(\d+) 条·六主题）"),
+            ("jiaojie", "HANDOVER.md", "HANDOVER.md", r"(\d+) 条坑·六主题"),
             ("skill", os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"),
              os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条·六主题"),
             ("skill", os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"),
              os.path.join(".agent", "skills", "puti-shouye", "SKILL.md"), r"(\d+) 条完整教训"),
         ):
-            for _mm in re.finditer(_pat, _text(_key, _rel)):
+            for _mm in re.finditer(_pat, strip_stat_marks(_text(_key, _rel))):
                 if int(_mm.group(1)) != _sum_act:
                     issues.append("C5e: %s 声明 %d 条 ≠ 坑表实测 %d 条" % (_disp, int(_mm.group(1)), _sum_act))
         # W1044 补：AGENTS §4.3 六主题**分项**逐项对拍（原只核总数 ⇒ 分项长期陈旧而门禁看不见·
         # W1043 审查实证：分项之和 123 ≠ 总数 133）。
-        _a = _text("agents", "AGENTS.md")
+        _a = strip_stat_marks(_text("agents", "AGENTS.md"))  # W1215：剥标记后匹配（分项行带 stats 标记）
         _seg = re.search(
             r"CSS / 视觉渲染（(\d+)）·JS / CSP / 运行时（(\d+)）·git / 提交 / 并发（(\d+)）"
             r"·级联 / CHANGELOG（(\d+)）·数据 / 内容可信度（(\d+)）·流程 / 协作 / 取证（(\d+)）",

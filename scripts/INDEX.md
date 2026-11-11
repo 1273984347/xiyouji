@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（228）
+## 文件（229）
 
 ### Python 脚本
 
@@ -226,6 +226,7 @@
 - `plan_template_review.py`
 - `plates_verify.py`
 - `pre-commit-validate.py`
+- `pre_push_gate.py`
 - `pre_release_screenshot.py`
 - `preflight_check.py`
 - `rebuild_section.py`

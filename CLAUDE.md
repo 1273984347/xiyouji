@@ -24,13 +24,15 @@
 14. **禁 CodeBuddy/WorkBuddy**：项目一切 AI 功能不使用该品牌工具链（agent-web=OpenAI-compatible 自研）→ AGENTS.md §6-19
 15. **批次节奏**：按主题日批合并同类项（微任务不单独开批）·微批轻量通道三档设计已出档待批 → docs/11-方案报告/设计与架构方案/（微批轻量通道设计）
 16. **提交前三问**：本批问题全解决或登记去向？防复发判据/坑表落地？其他 Agent 能否从项目文件了解？私有记忆须同步落仓 → AGENTS.md §6-18
-17. **Python 改动自检**：改完跑 `pwsh -File scripts/guardrails/check_changed.ps1`（ruff 风格档 + 结构档 + 嵌套推导式，退出码 0 才算过）；单测 `py -3 -m pytest tests -q`；提交前 `py -3 scripts/verify_delivery.py --scope auto` → docs/agent-guardrails/README.md
+17. **Python 改动自检**：改完跑 `pwsh -File scripts/guardrails/check_changed.ps1`（ruff 风格档 + 结构档 + 嵌套推导式，退出码 0 才算过）；单测 `py -3 -m pytest tests -q`；推送前 `python scripts/pre_push_gate.py`（一命令真全量） → docs/agent-guardrails/README.md
 
 ## 常用命令（可直接复制）
 
 ```
 python scripts/agent_start.py            # 开局实读磁盘输出当前事实摘要（防记忆代读）
 python scripts/verify_delivery.py        # 提交前唯一硬门禁（pre-commit 自动跑）
+python scripts/pre_push_gate.py          # 推送前一命令真全量（guardrails+verify+pytest+ci_sim）
+python scripts/batch_closeout.py --spec scripts/output/_wNNNN_spec.json  # 收官链单入口（cascade→…→gate）
 python scripts/verify_delivery.py --scope auto  # 本地提交轻量档（CI 恒全量）
 python scripts/generate_csp.py --check   # CSP 0 漂移
 python scripts/check_doc_sync.py         # 第 31 门禁文档口径体检（--self-test 自测）

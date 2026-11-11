@@ -25,6 +25,7 @@ ARCHIVE_CHUNK = 50       # W1119：体积模式每批迁出的段数（最后一
 LEDGER_WINDOW = 60       # W1119：台账正本数据行窗口
 
 STEPS = [
+    ('cascade',    '级联落段（batch_cascade --apply --spec：段幂等 W1122 + 滚动超限补滚 W1144 ⇒ HANDOVER 旁路插块自动 catch-up·W1215）'),
     ('archive',    '腾窗（**须在 precheck 之前**：体积阈值 262144B·每批 50 段·两面同 W 号下界 + 台账行窗口·W1119）'),
     ('rebuild',    '幂等段重建（**须在 precheck 之前**：precheck fail-closed ⇒ 修复步排其后即死路径·W1124）'),
     ('precheck',   '台账预检（正本同号多行 / 行数窗口）'),
@@ -39,7 +40,53 @@ STEPS = [
     ('regsurface', '登记面一致性闸（六项·W1116）'),
     ('csp',        'generate_csp（**csp/cspcheck 仍为末两步**：前面步骤会改内联脚本）'),
     ('cspcheck',   'generate_csp --check（零漂移校验）'),
+    ('gate',       '真全量门禁（pre_push_gate：guardrails→verify→pytest→ci_sim·W1215·--skip-gate 可跳）'),
 ]
+
+
+def _run_cascade(spec_path, batch):
+    """cascade 步（W1215）：batch_cascade --apply --spec 接进收官链**链首**。
+
+    病根（W1214 C7 实证）：HANDOVER 里程碑块插块绕过 batch_cascade ⇒ 滚动淘汰不触发
+    ⇒ 概要块只增不减（7>6），而该判据只在 pytest 面 ⇒ 收官链三绿仍 CI 红、补滚要单独
+    想起 --rotate-only。⇒ 本步把级联纳入链首：段已存在且与 spec 一致 ⇒ 幂等零变化
+    （W1122 守卫）；滚动守卫 W1144 在窗口 >6 时**超限补滚** ⇒ 旁路插块的 miss 在每批
+    收官自动 catch-up，不再依赖人记。
+
+    位置在 archive/rebuild 之前：建段归 cascade（rebuild 的 cl_has 判定才有着落）。
+    无 spec ⇒ 跳过（非阻断·同 rebuild 语义）。
+    """
+    if not spec_path or not os.path.isfile(os.path.join(ROOT, spec_path)):
+        print('[cascade] 无 spec 路径或文件不存在 ⇒ 跳过（非阻断）')
+        return True
+    rc, out = run([sys.executable, os.path.join('scripts', 'batch_cascade.py'),
+                   '--apply', '--spec', spec_path])
+    sys.stdout.write(out)
+    if rc != 0:
+        return False
+    return True
+
+
+def _run_gate(skip=False):
+    """gate 步（W1215）：pre_push_gate 真全量（guardrails→verify→pytest→ci_sim）。
+
+    病根（W1214 两轮 CI 浪费实证）：「全量门禁绿」不含 pytest 与 guardrails ⇒ 三绿
+    不同源 ⇒ push 后 CI 两连红，而红灯本地各 0.5 s 可测。⇒ 收官链末位直接跑
+    pre_push_gate（单一事实源·不在链内复刻步骤清单），一命令出推送判据。
+    --skip-gate 供 dry-run/迭代期显式跳过（跳过时打印醒目 NOTE·不静默）。
+    """
+    if skip:
+        print('[gate] --skip-gate 显式跳过（汇总面无推送判据·提交前须单跑 pre_push_gate）')
+        return True
+    script = os.path.join(ROOT, 'scripts', 'pre_push_gate.py')
+    if not os.path.isfile(script):
+        print('[gate] scripts/pre_push_gate.py 缺失 => 中止（fail-closed·不得静默跳过）')
+        return False
+    rc, out = run([sys.executable, script])
+    sys.stdout.write(out)
+    if rc != 0:
+        return False
+    return True
 
 
 def _run_rebuild(spec_path, batch):
@@ -551,6 +598,19 @@ def _run_content_stage(a, batch):
     return _run_index()
 
 
+def _run_finalize(a, batch):
+    """链尾段（W1215 抽函数控 main 复杂度）：docnums → regsurface → csp → cspcheck → gate。"""
+    if not _run_docnums(a.spec):
+        return False
+    if not _run_regsurface(batch):
+        return False
+    if not _run_csp(a.spec):
+        return False
+    if not _run_cspcheck():
+        return False
+    return _run_gate(getattr(a, 'skip_gate', False))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description='落段收官一键脚本')
     ap.add_argument('--spec', help='本批 spec json 路径')
@@ -558,6 +618,8 @@ def main(argv=None):
     ap.add_argument('--paths', nargs='*', default=[], help='额外需 add 的路径')
     ap.add_argument('--steps', action='store_true', help='只打印执行顺序')
     ap.add_argument('--dry-run', action='store_true', help='只做预检不落盘')
+    ap.add_argument('--skip-gate', action='store_true',
+                    help='跳过链尾 pre_push_gate 真全量（W1215·迭代期用·提交前须单跑）')
     a = ap.parse_args(argv)
     if a.steps:
         for n, d in STEPS:
@@ -568,6 +630,8 @@ def main(argv=None):
         import json
         batch = json.loads(open(a.spec, encoding='utf-8').read()).get('batch')
     led = os.path.join(ROOT, 'docs', '00-导读', 'W批次编号对账表.md')
+    if not _run_cascade(a.spec, batch):
+        return 1
     if not _run_archive():
         return 1
     if not _run_rebuild(a.spec, batch):
@@ -583,13 +647,7 @@ def main(argv=None):
         return 1
     if not _run_content_stage(a, batch):
         return 1
-    if not _run_docnums(a.spec):
-        return 1
-    if not _run_regsurface(batch):
-        return 1
-    if not _run_csp(a.spec):
-        return 1
-    if not _run_cspcheck():
+    if not _run_finalize(a, batch):
         return 1
     print('---- 收官链完成：顺序 ' + ' -> '.join(step_order()) + ' ----')
     return 0

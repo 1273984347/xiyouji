@@ -10,10 +10,12 @@ import batch_closeout as bc  # noqa: E402
 
 
 def test_step_order_puts_csp_last():
-    """CSP 重算与 --check 必须是最后两步（前面步骤会改内联脚本）。"""
+    """CSP 重算与 --check 必须是最后两个**改文件**步（W1215：只读 gate 步挂其尾）。"""
     order = bc.step_order()
-    assert order[0] == 'archive', 'precheck'
-    assert order[-2:] == ['csp', 'cspcheck']
+    assert order[0] == 'cascade', order  # W1215：级联落段链首（含滚动补滚）
+    assert order[1] == 'archive', order
+    assert order[-3:-1] == ['csp', 'cspcheck']
+    assert order[-1] == 'gate'
     assert order.index('csp') > order.index('stats')
     assert order.index('csp') > order.index('index')
     assert order.index('csp') > order.index('refresh')
@@ -144,13 +146,16 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     # W1119：腾窗步须在 precheck 之前（precheck fail-closed 中止 ⇒ 腾窗排其后即死路径）
     #           且须在 add 之前（腾窗会改 CHANGELOG/file-index ⇒ 先 add 会把迁前态带进提交）
     assert i_arch < i_add < i_ref < i_stat < i_idx < i_doc < i_csp < i_chk, calls
-    assert bc.step_order()[0] == 'archive', bc.step_order()
+    # W1215：cascade 步声明为链首（本调用无 --spec ⇒ cascade 跳过不经 run() 可见·故只断言声明序）
+    assert bc.step_order()[0] == 'cascade', bc.step_order()
+    assert bc.step_order()[1] == 'archive', bc.step_order()
     assert bc.step_order().index('archive') < bc.step_order().index('precheck'), bc.step_order()
     # index 步须在 versions 步之后（见 docstring·W1117）⇒ versions 不经 run() 可见，故断言声明位置
     order = bc.step_order()
     assert order.index('index') > order.index('versions')
     assert order.index('versions') == order.index('stats') + 1
-    assert order[-2:] == ['csp', 'cspcheck']
+    assert order[-3:-1] == ['csp', 'cspcheck']
+    assert order[-1] == 'gate'
 
 
 def test_pycompile_step_runs_after_add(monkeypatch):

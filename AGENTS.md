@@ -191,22 +191,22 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 321 条见 [pitfalls.md](pitfalls.md)；两者是「速查 → 详查」关系，不重复维护。
+> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 324<!--stats:pitfalls_total--> 条见 [pitfalls.md](pitfalls.md)；两者是「速查 → 详查」关系，不重复维护。
 > **🔥 火眼金睛 skill（W1149 建·`huoyan-jinjing`）**：全仓巡检速查 [`.agent/skills/huoyan-jinjing/SKILL.md`](.agent/skills/huoyan-jinjing/SKILL.md)——五维扫描（覆盖/失败语义/CI 形态/数据血缘/同类复发）+ 判据 fail-closed + 数据分级 + manifest 对拍 + 链接/内联 + 修复三原则；完整方法论文档在 [docs/10-方法论沉淀/全仓深度审计SOP-可复用.md](docs/10-方法论沉淀/全仓深度审计SOP-可复用.md)，可执行入口 `scripts/audit_repo.py`。
 
-> **📖 阅读契约（W709）**：索引型——322 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——324<!--stats:pitfalls_total--> 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
-**提交前就绪链（W1198·E-220）**：定位走局部判据单跑（check_doc_sync / check_plan_template / 相关 pytest / 守卫脚本）·全量 verify_delivery 只在提交前跑一次；就绪链一次跑完且顺序不可换（git add → **batch_cascade --apply**（含生成级联清单·目录刷新须在其后·HANDOVER 里程碑块插块必须经本链含滚动——旁路手改 = 滚动淘汰不触发·概要块只增不减·W1214 实证）→ gen_folder_docs --refresh → docs_index → _gen_search_index → generate_csp → stats --w → spec/touches 同步 → rebuild_section → **gen_folder_docs --refresh** → 一次全量门禁 → **pytest tests -q**（体积窗 C7 概要块/台账行数等判据只在 pytest 面·verify_delivery 不覆盖·W1214 实证门禁全绿仍 CI 红））·一次 push 带齐全部内容（禁中途追加 commit·一 push = 一轮 CI）·外部工具判据先读源码/--help 读全·spec 只写一次按最终 git status 生成。
+**提交前就绪链（W1198 立·W1215 收敛为可执行）**：收官 = `python scripts/batch_closeout.py --spec scripts/output/_w###_spec.json`（按序不可跳·步序 `--steps` 自查；**cascade 链首**＝HANDOVER 插块必经——旁路手改＝滚动不触发·W1214 实证；**gate 链尾**＝真全量）；推送判据 = `python scripts/pre_push_gate.py`（guardrails→verify→pytest→ci_sim·根修三绿不同源·部分模式标「非推送判据」）·细节锚 → 各步 docstring 与坑表 E-229/E-228·定位走局部判据单跑·spec 只写一次按最终 git status 生成·一次 push 带齐全部内容（禁中途追加 commit）·外部工具判据先读源码/--help 读全。
 
-**多副本写入的派生值权威必须一次生成两侧同传（W1204·E-221）**：同一笔写入落 N 处（双写 / 多副本 / 多索引 / 多缓存）时，凡由**接收方自行生成**的派生值（时间戳 / 自增 id / 随机数 / UUID）都会让两侧副本天然不等 ⇒ 集合级对账必然判不等（实证：双写期 `sessions.updated_at` 差几毫秒 ⇒ 切读被永久阻断·时间列 149/150）⇒ 契约加可选权威值、发起方一次生成并两侧同传，单库路径不传则现役语义逐字不变（正文 → pitfalls E-221）。
+**多副本写入的派生值权威必须一次生成两侧同传（W1204·E-221）**：双写/多副本下，接收方自生成的派生值（时间戳/id/随机数）天然不等 ⇒ 集合级对账必判不等（实证：`sessions.updated_at` 差毫秒 ⇒ 切读永久阻断）⇒ 契约加可选权威值·发起方一次生成两侧同传·单库路径不传则现役语义不变（正文 → pitfalls E-221）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**占号共享区纪律（W1110·E-128·W1121 根修）**：`reserve_w.py` 的预约集在 W1120 前只写工作树内 `tmpe/_w_reservations.json`（已 gitignore）⇒ 共享范围=工作树而非仓库 ⇒ 隔离 clone/并行 worktree 的占号他方看不见 ⇒ 实测撞号。**W1121 根修**＝取号集合改「本仓表 + 同机兄弟克隆表 + 用户级共享表」三源并集（同名取 ts 最新·写共享表前先合并他人记录不覆盖）+ session 标识含仓路径指纹 + 同号多会话打印跨克隆撞号预警 + release 只撤本工作树且 session 相同的号。**纪律**：落段前复核「本批号仍在预约集内」，且占号必须在与并行会话共享的克隆里执行（叙事与实证细节 → pitfalls E-128）。
+**占号共享区纪律（W1110·E-128·W1121 根修）**：预约集曾只写工作树内 tmpe 文件 ⇒ 隔离 clone 互不可见 ⇒ 撞号；W1121 根修＝取号三源并集（本仓表＋兄弟克隆表＋用户级共享表·写前合并不覆盖）＋ session 含仓路径指纹＋跨克隆撞号预警。**纪律**：落段前复核「本批号仍在预约集内」·占号须在与并行会话共享的克隆执行（细节 → pitfalls E-128）。
 
-**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（48）·JS / CSP / 运行时（12）·git / 提交 / 并发（32）·级联 / CHANGELOG（26）·数据 / 内容可信度（15）·流程 / 协作 / 取证（189）
+**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（48<!--stats:pitfalls_css-->）·JS / CSP / 运行时（12<!--stats:pitfalls_js-->）·git / 提交 / 并发（32<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（15<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（191<!--stats:pitfalls_flow-->）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -246,6 +246,8 @@ make screenshots   # Playwright 双视口截图
 
 ```bash
 python scripts/verify_delivery.py        # 全部门禁，核心全绿才可提交
+python scripts/pre_push_gate.py          # W1215：一命令真全量（推送判据·四步见 --steps）
+python scripts/batch_closeout.py --spec scripts/output/_wNNNN_spec.json  # W1215：收官链单入口（cascade→…→gate）
 python scripts/generate_csp.py --check   # CSP 0 漂移
 python scripts/check_js_syntax.py --all  # 全站内联脚本语法（与 make ci / CI 同轨）
 python scripts/check_structure.py        # 全站 CSS 结构平衡
@@ -339,4 +341,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1208-W1208 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-11（W1209）仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填；2026-11-11（W1210）占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修；2026-11-12（W1211）CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿；2026-11-12（W1212）第 45 槽失败明细并入汇总行批：排障盲区根修；2026-11-12（W1214）LFS 文本文件根修批：文本移出 LFS，第 45 槽补 C5 防复发。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1209-W1209 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-11（W1210）占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修；2026-11-12（W1211）CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿；2026-11-12（W1212）第 45 槽失败明细并入汇总行批：排障盲区根修；2026-11-12（W1214）LFS 文本文件根修批：文本移出 LFS，第 45 槽补 C5 防复发；2026-11-12（W1215）一命令真全量与计数链生成器化批：pre_push_gate + batch_closeout 接步，坑位计数链 markers 化。如与上述权威文档冲突，以权威文档为准。*

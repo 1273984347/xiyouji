@@ -38,11 +38,15 @@ def lastmod(repo_rel: str, today: str) -> str:
         ["git", "log", "-1", "--format=%cs", "--", repo_rel],
         cwd=ROOT, capture_output=True, text=True,
     ).stdout.strip()
-    return out if out else today
+    # W1215 补笔（CI R3 时区窗根修）：%cs 按本机时区渲染（UTC+8 凌晨提交会比 UTC「超前一天」）
+    # ⇒ 钳到 UTC 当天：任何时区的 verify（第 26 槽 R3「lastmod 不晚于当天」）都不判「未来」。
+    return min(out, today) if out else today
 
 
 def main() -> None:
-    today = time.strftime("%Y-%m-%d")
+    # W1215 补笔：基准日期一律 **UTC 当天**（原 time.strftime 本地日期在 UTC+8 凌晨
+    # 推送时比 CI（UTC runner）的「当天」早一天 ⇒ R3 假红·PR #172 实证）。
+    today = time.strftime("%Y-%m-%d", time.gmtime())
     pages = sorted(
         p.relative_to(SITE).as_posix()
         for p in SITE.rglob("*.html")

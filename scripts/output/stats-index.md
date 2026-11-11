@@ -23,7 +23,14 @@
 | inline_css_pages | 852 | site 全树含 INLINED 标记页 | W459 | 1176 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 28 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1157 |
-| pytest_collected | 1613 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1214 |
+| pitfalls_cascade | 26 | pitfalls.md 主题「级联 / CHANGELOG」实测条目数 | W1215 | W1215 |
+| pitfalls_css | 48 | pitfalls.md 主题「CSS / 视觉渲染」实测条目数 | W1215 | W1215 |
+| pitfalls_data | 15 | pitfalls.md 主题「数据 / 内容可信度」实测条目数 | W1215 | W1215 |
+| pitfalls_flow | 191 | pitfalls.md 主题「流程 / 协作 / 取证」实测条目数 | W1215 | W1215 |
+| pitfalls_git | 32 | pitfalls.md 主题「git / 提交 / 并发」实测条目数 | W1215 | W1215 |
+| pitfalls_js | 12 | pitfalls.md 主题「JS / CSP / 运行时」实测条目数 | W1215 | W1215 |
+| pitfalls_total | 324 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | W1215 |
+| pytest_collected | 1631 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1215 |
 | report_docs | 179 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 1214 |
 | scan_files | 859 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | 1176 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
@@ -37,6 +44,33 @@
 | w864_entries | 259 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1152 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1215（2026-11-12 06:35:09）
+- pitfalls_flow: 190 → 191
+- pitfalls_total: 323 → 324
+
+### W1215（2026-11-12 05:37:46）
+- pytest_collected: 1630 → 1631
+
+### W1215（2026-11-12 05:05:21）
+- pitfalls_cascade: None → 26
+- pitfalls_css: None → 48
+- pitfalls_data: None → 15
+- pitfalls_flow: None → 190
+- pitfalls_git: None → 32
+- pitfalls_js: None → 12
+- pitfalls_total: None → 323
+- pytest_collected: 1613 → 1630
+
+### W1215（2026-11-12 05:04:56）
+- pitfalls_cascade: None → 26
+- pitfalls_css: None → 48
+- pitfalls_data: None → 15
+- pitfalls_flow: None → 190
+- pitfalls_git: None → 32
+- pitfalls_js: None → 12
+- pitfalls_total: None → 323
+- pytest_collected: 1613 → 1630
 
 ### W1214（2026-11-12 02:21:25）
 - pytest_collected: 1612 → 1613
