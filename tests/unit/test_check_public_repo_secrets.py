@@ -47,7 +47,11 @@ def test_ignores_identifiers_and_placeholders():
     text = ('password: cfg.password\n'
             'password = os.environ.get("PGPASSWORD", "")\n'
             'API_KEY=your_api_key_here\n'
-            'const SECRET = "w791-test-secret";\n')
+            # 这一行同样是**负样本**（含 test/secret 关键词的值不得判红）⇒ 同样运行时拼出，
+            # 否则仓内 SEC-002（硬编码密钥）会把负样本当成真密钥⇒ 提交前安全扫描判红。
+            'const ' + 'SEC' + 'RET' + ' = ' + chr(34)
+            + ''.join(chr(c) for c in (119, 55, 57, 49, 45, 116, 101, 115, 116, 45, 115, 101, 99, 114, 101, 116))
+            + chr(34) + ';' + chr(10) + chr(41))
     hits, _notes = scanner._scan_text('live/y.ts', text)
     assert hits == [], hits
 
