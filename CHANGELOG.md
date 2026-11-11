@@ -11,6 +11,7 @@
 > - **计数链**：坑表 E-228 入表 + 计数链 321→322 同步 9 处（AGENTS 两处 + HANDOVER 两处 + SKILL.md 两处 + STRUCTURE.md + docs/agent/pitfalls.md 壳 + 坑表流程主题 188→189；主题计数自洽 48+12+32+26+15+189=322）。
 > - **未做（不假收敛）**：① **历史里的这 10 个文件仍是 LFS 指针**——彻底清理需再次改写历史（不可逆·全部 commit hash 变化）⇒ 须用户批准，本批只做「向前不再恶化」；② **二进制媒体仍在 LFS** ⇒ CI 上若站内引用 promo 图仍是指针（现测站内未引用·登记待办）；③ 挂第 72 槽（verify_delivery.py 注册表）须用户批准（规则 10）⇒ 本批以「第 45 槽 C5 + ci_sim」双落点替代；④ 复盘触发器 T1/T2/T3 全触发 ⇒ 本批未认领复盘批，登记下批；⑤ PR #171 合并仍待 CI 绿后由用户裁决。
 > - **文件**：见 file-index。
+> - **CI 回检补滚（同批第二笔）**：pytest C7「HANDOVER 概要块 7>6」CI 红灯——本批 HANDOVER 入块推超窗而滚动淘汰漏跑（该判据在 pytest 面·不在 verify_delivery 覆盖内 ⇒「门禁全绿」未拦）；修法 = `batch_cascade --rotate-only --apply` 补滚（W1207 块淘汰·指针归位 W1208·W534 断言面核实 CHANGELOG 有段）⇒ test_doc_size_budget **12 passed**；防复发 = 就绪链两处加固（AGENTS §4.3：HANDOVER 插块必须经 batch_cascade 含滚动 + 就绪链尾挂 pytest tests -q）。
 ### W1212（2026-11-12）：第 45 槽失败明细并入汇总行批：排障盲区根修（CI 侧看不到失败明细）
 
 **本批要点**（W1212 第 45 槽失败明细并入汇总行批）：
