@@ -1,3 +1,56 @@
+## W1215 一命令真全量与计数链生成器化批：pre_push_gate + 收官链接步 + 计数链 markers（2026-11-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1215 | 一命令真全量与计数链生成器化批：坑位计数 markers 化 |
+| AGENTS.md | W1215 | 一命令真全量与计数链生成器化批：就绪链可执行化 + 计数 markers + §5.2 登记 |
+| CHANGELOG.md | W1215 | 一命令真全量与计数链生成器化批 |
+| CLAUDE.md | W1215 | 一命令真全量与计数链生成器化批：pre_push_gate/closeout 命令登记 |
+| HANDOVER.md | W1215 | 一命令真全量与计数链生成器化批：计数 markers + 里程碑块 |
+| STRUCTURE.md | W1215 | 一命令真全量与计数链生成器化批：坑位计数 marker 化 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1215 | 台账腾窗迁出 2 行（W1152-W1153·preflight 超窗前置清偿） |
+| docs/00-导读/W批次编号对账表.md | W1215 | W1215 认领行 + 台账腾窗（61→59 行） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1215 | sweep 存量面标记跟随（C5b 对账面·自动） |
+| docs/agent/pitfalls.md | W1215 | 跳转壳坑位计数 marker 化 |
+| pitfalls.md | W1215 | E-229 入表 + 六主题段头 markers |
+| pytest.ini | W1215 | sweep 收集数标记跟随（新 16 例·自动） |
+| scripts/batch_closeout.py | W1215 | cascade 链首 + gate 链尾接步 + _run_finalize 抽函数 |
+| scripts/check_doc_sync.py | W1215 | pitfall_theme_counts 取数面 + C5e 剥标记补盲 + C5b 面扩展 |
+| scripts/output/_cascade_files_W1215.txt | W1215 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1215_spec.json | W1215 | 本批 spec |
+| scripts/output/file-index.md | W1215 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats-changelog.json | W1215 | stats 变更史（W1215·7 新键 + 坑位族） |
+| scripts/output/stats-index.md | W1215 | stats 反向索引重渲 |
+| scripts/output/stats.json | W1215 | stats 实算刷新（pitfalls 族 7 新键） |
+| scripts/output/tools-inventory.md | W1215 | 工具盘点重渲（+1 件 pre_push_gate） |
+| scripts/pre_push_gate.py | W1215 | 新建：一命令真全量编排器（guardrails→verify→pytest→ci_sim） |
+| scripts/stats.py | W1215 | pitfalls 族 7 新键 + 窄域 sweep + 既有嵌套随档根修 |
+| site/data/search.html | W1215 | 搜索索引重渲（文档计数随动·自动） |
+| site/en/search.html | W1215 | 搜索索引重渲（文档计数随动·自动） |
+| tests/unit/test_pre_push_gate.py | W1215 | 新建：pre_push_gate 纯逻辑 10 例 |
+| tests/unit/test_w1114_version_surface.py | W1215 | 步序锁随链更新（cascade 链首/gate 链尾） |
+| tests/unit/test_w1215_count_markers.py | W1215 | 新建：计数链生成器化 6 例（含窄域与盲区负样本） |
+| tests/unit/test_w1124_closeout_rebuild.py | W1215 | 步序锁随链更新（cascade 链首/gate 链尾） |
+| .github/workflows/README.md | W1215 | 版本面推进（head_entry·cascade/versions 写入） |
+| CITATION.cff | W1215 | 版本面推进（version_surface） |
+| README.md | W1215 | 版本面推进（version_surface） |
+| archive/docs/AGENTS-ARCHIVE.md | W1215 | AGENTS 脚注滚动归档（cascade 写入） |
+| archive/docs/workflows-readme-history.md | W1215 | workflows README 历史归档（version_surface） |
+| docs/00-导读/项目说明.md | W1215 | 版本面推进（version_surface） |
+| scripts/INDEX.md | W1215 | 目录文档刷新（+pre_push_gate·gen_folder_docs） |
+| scripts/output/INDEX.md | W1215 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1215 | 目录文档刷新（gen_folder_docs） |
+| site/data/cross-time-danmaku.html | W1215 | 页脚四面批次版本随动（cascade 全档） |
+| site/data/tag-cloud.html | W1215 | 页脚四面批次版本随动（cascade 全档） |
+| site/dukou-engine.html | W1215 | 页脚四面批次版本随动（cascade 全档） |
+| site/index.html | W1215 | 页脚四面批次版本随动 + C5b 标记面 |
+| site/sitemap.xml | W1215 | sitemap 重渲（gen_sitemap） |
+| tests/unit/INDEX.md | W1215 | 目录文档刷新（+2 测试文件·gen_folder_docs） |
+| tests/unit/README.md | W1215 | 目录文档刷新（gen_folder_docs） |
+| Makefile | W1215 | gate 目标登记（编排面·第 42 槽 C1 四面引用） |
+| tests/unit/test_w1102_batch_closeout.py | W1215 | 步序锁随链更新（真全量 gate 首跑抓漏） |
+| scripts/output/_vermilion_solid_cache.json | W1215 | 朱砂门禁增量缓存随动（近四批惯例入库件） |
+
 ## W1214 LFS 文本文件根修批：文本文件移出 LFS + 第 45 槽 C5 防复发（2026-11-12）
 
 | 文件 | W | 说明 |

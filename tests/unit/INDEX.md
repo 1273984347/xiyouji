@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（115）
+## 文件（117）
 
 ### Python 脚本
 
@@ -61,6 +61,7 @@
 - `test_path_guard.py`
 - `test_perf_optimize.py`
 - `test_plan_template_read_disk.py`
+- `test_pre_push_gate.py`
 - `test_preflight_check.py`
 - `test_preflight_touches.py`
 - `test_rag_enhance.py`
@@ -128,6 +129,7 @@
 - `test_w1167_nav_badge.py`
 - `test_w1168_stat_events.py`
 - `test_w1205_batch_scripts.py`
+- `test_w1215_count_markers.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

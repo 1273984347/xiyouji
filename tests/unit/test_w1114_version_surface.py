@@ -122,23 +122,26 @@ def test_missing_anchor_fails_closed():
 
 
 def test_closeout_steps_put_versions_between_stats_and_csp():
-    """版本面推进步必须在 stats 之后、csp 之前（csp/cspcheck 仍末两步·既有承诺不破）。"""
+    """版本面推进步必须在 stats 之后、csp 之前（W1215：csp/cspcheck 末两个改文件步·gate 只读挂尾）。"""
     order = bc.step_order()
     assert 'versions' in order
     assert order.index('versions') == order.index('stats') + 1
     # W1116：收官链在 versions 之后插入两道自检闸（文案数字对表 / 登记面一致性），
     # 它们要读**版本面推进后的最终产物面** ⇒ versions 不再紧邻 csp，但仍在 stats 之后、csp 之前；
-    # csp/cspcheck 仍末两步（W1112 既有承诺不破）。
+    # W1215：csp/cspcheck 仍末两个改文件步，只读 pre_push_gate 步挂链尾。
     assert order.index('versions') < order.index('csp')
-    assert order[-2:] == ['csp', 'cspcheck']
+    assert order[-3:-1] == ['csp', 'cspcheck']
+    assert order[-1] == 'gate'
     assert 'docnums' in order and 'regsurface' in order
     assert order.index('versions') < order.index('docnums') < order.index('csp')
     # W1119 跨批留痕：改的是「STEPS 首步必须是 precheck」这一条断言。
     # 放宽/变更理由：收官链新增腾窗步（archive）且必须**前置到 precheck 之前**——
     #   precheck 是 fail-closed 中止（台账数据行 > 窗口即 return 1）⇒ 腾窗步排在其后时，
     #   台账超窗场景会在预检直接中止 ⇒ 永远到不了腾窗步 ⇒ 死路径（并行会话 W1117 实证）。
-    # 新表述原文：assert order[0] == 'archive' + assert order.index('archive') < order.index('precheck')
-    assert order[0] == 'archive'
+    # W1215 再演进：cascade 步挂链首（建段/滚动补滚最前置·batch_cascade 段幂等 W1122
+    #   + 滚动超限补滚 W1144 ⇒ HANDOVER 旁路插块的 miss 每批收官自动 catch-up）。
+    assert order[0] == 'cascade'
+    assert order[1] == 'archive'
     assert order.index('archive') < order.index('precheck')
 
 

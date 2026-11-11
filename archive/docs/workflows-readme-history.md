@@ -59,3 +59,4 @@
 + W1211 CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim·无 workflow 结构改动）。
 + W1212 第 45 槽失败明细并入汇总行  排障盲区根修·无 workflow 结构改动）。
 + W1214 LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发·无 workflow 结构改动）。
++ W1215 一命令真全量与计数链生成器化批：pre_push_gate + 收官链接步 + 计数链 markers·无 workflow 结构改动）。

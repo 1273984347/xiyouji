@@ -65,13 +65,18 @@ def test_closeout_rebuild_step_precedes_precheck():
 
 
 def test_closeout_rebuild_step_precedes_archive_only_by_design():
-    """顺序锁：archive 仍是首步（腾窗前置承诺不破）。"""
-    assert bcl.step_order()[0] == "archive"
+    """顺序锁（W1215 演进）：cascade 链首（建段/滚动补滚最前置）·archive 次步（腾窗仍前置于 precheck）。"""
+    order = bcl.step_order()
+    assert order[0] == "cascade"
+    assert order[1] == "archive"
+    assert order.index("archive") < order.index("precheck")
 
 
 def test_closeout_steps_keep_csp_last_two():
-    """W1112 既有承诺不破：csp/cspcheck 仍为末两步。"""
-    assert bcl.step_order()[-2:] == ["csp", "cspcheck"]
+    """W1112 承诺演进（W1215）：csp/cspcheck 仍为末两个**改文件步**，只读 gate 步挂其尾。"""
+    order = bcl.step_order()
+    assert order[-3:-1] == ["csp", "cspcheck"]
+    assert order[-1] == "gate"
 
 
 # ---------------- 幂等段重建（纯函数层） ----------------

@@ -1,3 +1,15 @@
+### W1215（2026-11-12）：一命令真全量与计数链生成器化批：pre_push_gate + 收官链接步 + 计数链 markers
+
+**本批要点**（W1215 一命令真全量与计数链生成器化批）：
+
+> - **起因（三绿不同源·两轮 CI 浪费实证）**：W1214 交接宣称「本地全量门禁绿」后 push 两连红——guardrails 复杂度 18>15（该档只在 safe_commit 钩子跑·verify 不覆盖）+ pytest 体积窗 C7「HANDOVER 概要块 7>6」（该判据只在 pytest 面），每轮 ≈25 job·15-25 分钟，而红灯本地各 0.5 s 可测；同日复盘再实锤计数链「同步 9 处」漏改两处 321（AGENTS「完整 N 条见」/ HANDOVER「N 条坑·六主题」——C5e 既有 pattern 不锁此两形态·裸字面量零门禁覆盖）。
+> - **① pre_push_gate.py（推送判据·一命令真全量）**：guardrails（无 .py 改动 SKIP）→ verify --scope full（Delivery Gate 同轨）→ pytest tests -q（体积窗等判据载体）→ ci_sim（clean worktree 预演；工作树未提交时自动 SKIP——预演目标 HEAD 不含未提交批，跑了是旧提交假安心）；aggregate/select_steps/_infra_missing 抽纯函数（root 可注入）+ 单测 10 例；退出码 0/1/2（基础设施缺失 fail-closed）；--skip-pytest 等部分模式汇总行标「非推送判据」。
+> - **② batch_closeout 接两步（收官链补完）**：cascade 步挂**链首**（batch_cascade --apply --spec：W1122 段幂等 + W1144 滚动超限补滚 ⇒ HANDOVER 旁路插块的 miss 每批收官自动 catch-up——W1214 概要块 7>6 的根源面收进链内）；gate 步挂**链尾**（调 pre_push_gate·单一事实源不在链内复刻步骤清单·--skip-gate 显式跳过不静默）；main 尾段抽 _run_finalize（guardrails 复杂度预算内）；既有步序锁两处随链更新（首步 archive→cascade·末两步 csp/cspcheck→cspcheck/gate）。
+> - **③ 坑位计数链生成器化（「9 处手工同步」退役）**：stats 新键 pitfalls_total+六主题分项（取数面=check_doc_sync.pitfall_theme_counts 单一事实源·引用不复制·未知主题名 KeyError fail-closed·META 七键登记）；计数位 11 处接 `<!--stats:...-->` 标记（AGENTS×3·HANDOVER×2·SKILL×2·STRUCTURE·docs/agent/pitfalls.md 壳·pitfalls.md 六段头）；sweep 自动跟随（实测 15 处·含 pytest.ini/search/方案报告存量面）；pitfalls.md 用**窄域 sweep**（只扫 ### 段头行——正文含历史示例标记 E-195「615<!--stats:a1_a6_docs-->」，整文件 sub 必误改历史叙述）；C5e 句式匹配改在剥标记文本上进行（旧形态逐字兼容）并补两盲区 pattern（负样本回归锁钉死）；C5b 对账面补 HANDOVER/SKILL/docs-agent-壳（pitfalls.md 刻意不入 C5b 面·窄域 sweep+C5e 声明↔实测双网兜住）。
+> - **④ 随批清偿**：W1214 两处 321 实漏随批修正（marker 化后 sweep 对齐 323）；坑表 E-229 入表（计数链形态盲区·窄域 sweep 与双网分工）；AGENTS §4.3 就绪链收敛为可执行指针 + §5.2/CLAUDE 命令登记；AGENTS 正文字节触 C9 预算顶（49756>49152）⇒ 按摘要层纪律下放（就绪链压缩·E-128/E-221 叙事归 pitfalls）⇒ 48843/49152。
+> - **验证读数**：单测 50 passed（新 16+既有步序锁更新）+ 体积窗 12 passed；check_doc_sync --self-test 37/37；guardrails 全档 OK（stats.py:214 既有 genexp 套 list-comp 随档根修为显式循环·语义等价）；stats --w sweep 15 处；坑位 322→323（流程 189→190）11 位标记全对齐。**gate 自证有效**：pre_push_gate 真全量首跑当场抓漏 4 红（第 42 槽 C1 新脚本未登记四面 + W1102 步序锁 ×2 漏随新链 + verify 同源）随批修后复跑全绿；窄域 sweep 的 basename 判定误伤 docs/agent/pitfalls.md 跳转壳（同名 basename ⇒ 壳标记漏 sweep ⇒ C5b 假红）随批根修为 ROOT 相对路径判定（T3 改 narrow_pred 注入式）。
+> - **未做（不假收敛）**：① 门禁槽数「71 槽」未 marker 化——gate_count 键在但为段口径（76 段）≠编号槽口径（71·差 5 伴随段），须先立编号槽注册表·登记下批；② ci_sim 步在提交前自动 SKIP（HEAD 不含未提交批）⇒ 推送前判据须提交后重跑 pre_push_gate 拿四步全绿（docstring 与 CLAUDE 行已写明）；③ 复盘触发器仍待认领（W1214 起积 2 批）。
+> - **文件**：见 file-index。
 ### W1214（2026-11-12）：LFS 文本文件根修批：文本文件移出 LFS + 第 45 槽 C5 防复发
 
 **本批要点**（W1214 LFS 文本文件根修批）：
@@ -567,7 +579,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1214），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1215），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -109,6 +109,14 @@ META = {
     # W1053 M-02（W1046 方案）：豁免/白名单存量实体化——「豁免只增不减」的度量基础
     "w864_entries": {"domain": "scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计", "introduced_by": "W1053"},
     "icon_allowlist_entries": {"domain": "scripts/output/_w949_icon_field_allowlist.json 顶层数组长度", "introduced_by": "W1053"},
+    # W1215：坑位计数族（取数面 = check_doc_sync.pitfall_theme_counts·计数链生成器化）
+    "pitfalls_total": {"domain": "pitfalls.md 六主题实测条目之和（E-NN 本体口径）", "introduced_by": "W1215"},
+    "pitfalls_css": {"domain": "pitfalls.md 主题「CSS / 视觉渲染」实测条目数", "introduced_by": "W1215"},
+    "pitfalls_js": {"domain": "pitfalls.md 主题「JS / CSP / 运行时」实测条目数", "introduced_by": "W1215"},
+    "pitfalls_git": {"domain": "pitfalls.md 主题「git / 提交 / 并发」实测条目数", "introduced_by": "W1215"},
+    "pitfalls_cascade": {"domain": "pitfalls.md 主题「级联 / CHANGELOG」实测条目数", "introduced_by": "W1215"},
+    "pitfalls_data": {"domain": "pitfalls.md 主题「数据 / 内容可信度」实测条目数", "introduced_by": "W1215"},
+    "pitfalls_flow": {"domain": "pitfalls.md 主题「流程 / 协作 / 取证」实测条目数", "introduced_by": "W1215"},
 }
 
 
@@ -202,11 +210,12 @@ def build():
     with open(os.path.join(HERE, "verify_delivery.py"), encoding="utf-8") as f:
         gate_max = max(int(x) for x in re.findall(r"第\s*(\d+)\s*(?:槽|门禁)", f.read()))
 
-    a1_a6 = sum(
-        len([p for p in _in("docs/%s/" % d, ".md", direct=True)
-             if not os.path.basename(p).startswith("README")])
-        for d in CONTENT_DIRS
-    )  # 口径对齐 verify 第 3 门禁：板块顶层内容 .md（排除各板块 README.md·615=621-6）
+    a1_a6 = 0
+    for d in CONTENT_DIRS:  # W1215 随档根修：原 genexp 套 list-comp 触 guardrails 嵌套档（改显式循环·语义等价）
+        a1_a6 += sum(
+            1 for p in _in("docs/%s/" % d, ".md", direct=True)
+            if not os.path.basename(p).startswith("README")
+        )  # 口径对齐 verify 第 3 门禁：板块顶层内容 .md（排除各板块 README.md·615=621-6）
     a4 = len([p for p in _in("docs/03-主题与情节专题/", ".md", direct=True)
               if not os.path.basename(p).startswith("README")])
     methodology = len(_in("docs/10-方法论沉淀/", ".md", direct=True))
@@ -245,7 +254,30 @@ def build():
         # C5b 标记自动跟随（登记面引用 <!--stats:w864_entries--> 等即被对账）。
         "w864_entries": _exemption_count("scripts/output/_w864_accent_exemptions.json", "exemptions"),
         "icon_allowlist_entries": _exemption_count("scripts/output/_w949_icon_field_allowlist.json"),
+        # W1215：坑位计数链生成器化（取数面复用 check_doc_sync.pitfall_theme_counts·引用不复制）——
+        # pitfalls 段头 / AGENTS 分项行 / 各治理文档总数标记由 sweep 自动跟随，「9 处手工同步」退役；
+        # 未知主题名在 _pitfall_stats 内直接抛出（fail-closed）
+        **_pitfall_stats(),
     }
+
+
+def _pitfall_stats():
+    """坑位计数族（W1215·取数面 = check_doc_sync.pitfall_theme_counts 单一事实源）。
+
+    返回 {pitfalls_total: N, pitfalls_<theme>: N×6}。未知主题名直接抛 KeyError
+    （新主题须先在 check_doc_sync.PITFALL_THEME_KEYS 登记键名·fail-closed 防静默漏扫）。
+    """
+    import check_doc_sync as _cds
+    _declared, _actual = _cds.pitfall_theme_counts()
+    out = {"pitfalls_total": sum(_actual.values())}
+    for _name, _n in _actual.items():
+        _key = _cds.PITFALL_THEME_KEYS.get(_name)
+        if _key is None:
+            raise KeyError(
+                "pitfalls.md 出现未登记主题「%s」——先在 check_doc_sync.PITFALL_THEME_KEYS 登记键名" % _name
+            )
+        out[_key] = _n
+    return out
 
 
 def load_json(path, default):
@@ -293,7 +325,7 @@ def render_index(hist, entities):
         f.write("\n".join(lines))
 
 
-def sweep_markers(values, files=None):
+def sweep_markers(values, files=None, narrow_pred=None):
     """P-44-05：C5b 对账面 stats 标记自动跟随实算源——登记面零手工。
 
     面 = check_doc_sync 权威面：C5_DOC_NAMES 六文件 + CHANGELOG 口径块 + c5b_extra_surfaces()
@@ -302,13 +334,27 @@ def sweep_markers(values, files=None):
     口径块——历史段含字面标记叙述（W913 段「615<!--stats:a1_a6_docs-->」实证），整文件扫必污染。
 
     返回 (更新数, 明细行)。
+
+    W1215 增补：pitfalls.md **正本**以**窄域**入面——只扫 `### ` 主题段头行（正文含历史示例
+    标记，E-195 引用「615<!--stats:a1_a6_docs-->」实证叙述，整文件 sub 必误改历史叙述）；
+    段头声明数字与实值的对齐另由 C5e 声明↔实测对拍兜底（双网各司其职）。窄域按 **ROOT 相对
+    路径恰为 pitfalls.md** 判定（W1215 实证：basename 判定会把 docs/agent/pitfalls.md 跳转壳
+    误伤成窄域 ⇒ 壳的计数标记漏 sweep ⇒ C5b 假红）；narrow_pred 可注入供单测。
     """
     import check_doc_sync as _cds  # 同目录·取权威面定义（面漂移=门禁与跟随同源漂移）
+
+    if narrow_pred is None:
+        def narrow_pred(fp):
+            try:
+                return os.path.relpath(fp, ROOT).replace("\\", "/") == "pitfalls.md"
+            except ValueError:  # 跨盘（pytest tmp 在别盘）——非正本 ⇒ 全扫
+                return False
 
     if files is None:
         files = [os.path.join(ROOT, rel) for rel in C5_MAIN_FILES]
         files.append(os.path.join(ROOT, "CHANGELOG.md"))
         files += _cds.c5b_extra_surfaces()
+        files.append(os.path.join(ROOT, "pitfalls.md"))  # W1215：段头主题计数窄域 sweep
     updated, details = 0, []
     for fp in files:
         if not os.path.isfile(fp):
@@ -320,6 +366,7 @@ def sweep_markers(values, files=None):
             text, tail = (text[:cut], text[cut:]) if cut != -1 else (text, "")
         else:
             tail = ""
+        narrow = narrow_pred(fp)  # W1215：正本只扫 ### 段头行（壳全扫）
         hits = []
 
         def _sub(m, _hits=hits):
@@ -330,7 +377,13 @@ def sweep_markers(values, files=None):
             _hits.append("%s %s→%s" % (key, m.group("num"), want))
             return "%s%s" % (want, m.group("mark"))
 
-        new_text = RE_STAT_MARK.sub(_sub, text) + tail
+        if narrow:
+            new_text = "\n".join(
+                RE_STAT_MARK.sub(_sub, ln) if ln.startswith("### ") else ln
+                for ln in text.split("\n")
+            ) + tail
+        else:
+            new_text = RE_STAT_MARK.sub(_sub, text) + tail
         if hits:
             with open(fp, "w", encoding="utf-8", newline="") as fh:
                 fh.write(new_text)
