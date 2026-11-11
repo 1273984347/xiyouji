@@ -1,3 +1,38 @@
+## W1212 第 45 槽失败明细并入汇总行批：排障盲区根修（2026-11-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| AGENTS.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| CHANGELOG.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| CITATION.cff | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| HANDOVER.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| STRUCTURE.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| archive/docs/AGENTS-ARCHIVE.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| archive/docs/workflows-readme-history.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| docs/00-导读/W批次编号对账表.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| docs/00-导读/项目说明.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| pytest.ini | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/check_folder_docs.py | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/INDEX.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/_cascade_files_W1212.txt | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/_w1212_spec.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/file-index.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/stats-changelog.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/stats-index.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/stats.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| scripts/output/tools-inventory.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| site/data/cross-time-danmaku.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| site/data/tag-cloud.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| site/dukou-engine.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| site/index.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| tests/unit/INDEX.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| tests/unit/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+| tests/unit/test_folder_docs_summary.py | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
+
 ## W1211 CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿（2026-11-12）
 
 | 文件 | W | 说明 |

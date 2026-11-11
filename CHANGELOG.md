@@ -1,3 +1,13 @@
+### W1212（2026-11-12）：第 45 槽失败明细并入汇总行批：排障盲区根修（CI 侧看不到失败明细）
+
+**本批要点**（W1212 第 45 槽失败明细并入汇总行批）：
+
+> - **起因（排障盲区实证）**：PR #171 的 CI 上 Delivery Gate 只剩 1 项 FAIL——第 45 槽「目录文档新鲜度：6 FAIL / 214 目录」；但**日志里只有这一句汇总，看不到是哪 6 个目录、差在哪个文件**。根因在判定链的输出层：`verify_delivery.py` 的 `_StrictGate` **只取 marker 行**（脚本 stdout 其余行被丢弃），而 `check_folder_docs.py` 的逐条「FAIL <目录>」明细正是打在 stdout 的非 marker 行 ⇒ **失败明细在 CI 上被结构性吞掉** ⇒ 排障必须再跑一轮 CI 才能定位（一次 push = 一轮 CI ≈ 25 job 的代价）。
+> - **修法（不动管控脚本）**：把失败项**并入汇总行**本身——`summary_line()` 纯函数拼装 `---- 第 45 门禁 目录文档新鲜度：N FAIL / M 目录（大小写冲突豁免 K）· 失败项：<最多 5 条>（共 N 条·余 M 条见门禁 stdout）----`；marker 前缀**逐字不变**（`_GATE_SUMMARY_MARKERS` 依赖前缀匹配，既有解析与单测零影响），成功时行形与旧版**逐字相同**（向后兼容）。不选「改 `_StrictGate` 把 stdout 全量带出」是因为 `verify_delivery.py` 属管控文件（规则 10 须用户批准）。
+> - **配套证据**：① 纯函数抽取后可直接单测 ⇒ 新增 `tests/unit/test_folder_docs_summary.py` **4 例**（成功行形不变 / 失败项入行 / 超 5 条截断但报总数与余数 / marker 前缀不变）；② **端到端正向证据**：在真实仓内人为把 `tests/unit/INDEX.md` 的一行换成不存在的文件名 ⇒ 汇总行实测输出「1 FAIL / 214 目录 · 失败项：C3 文件清单漂移：tests/unit（索引有清单无 [...]·幽灵预引 [...]）」⇒ 证明失败明细确实进了 CI 可见的那一行（改完复原，读数一致）。
+> - **验证读数**：`pytest tests/unit/test_folder_docs_summary.py tests/unit/test_folder_docs_gate.py` ⇒ **20 passed**（新 4 + 既有 16）；`ruff check scripts/check_folder_docs.py tests/unit/test_folder_docs_summary.py` ⇒ All checks passed；既有 16 例目录文档门禁单测**零回归**。
+> - **未做（不假收敛）**：红灯**根因尚未定位**——本批只解决「看得见」不解决「是什么」；下一批（W1213）拿到 6 个目录明细后定位并根修，并补 T102 报告。另：PR #171 的合并仍待 CI 绿后由用户裁决；批次标签「描述段 W 号形态」与复盘批、CI 提速（run_all 按改动面选跑 / 截图 job 分片）均登记下批。
+> - **文件**：见 file-index。
 ### W1211（2026-11-12）：CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿
 
 **本批要点**（W1211 CI 修复与机制补强批）：
@@ -543,7 +553,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1211），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1212），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

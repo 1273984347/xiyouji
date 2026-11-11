@@ -268,6 +268,24 @@ def check_dir(abs_dir: str) -> list[str]:
     return fails
 
 
+def summary_line(n_fail: int, n_dirs: int, exempt: int, fails: list[str]) -> str:
+    """门禁汇总行（W1212：失败明细**并入本行**）。
+
+    W1212 实证：verify_delivery 的 _StrictGate 只取 marker 行（stdout 其余行被丢弃）
+    ⇒ 只逐条打印「FAIL …」时，CI 侧只能看到「N FAIL / M 目录」，**看不到是哪几个目录、
+    差在哪个文件** ⇒ 排障必须再跑一轮 CI（一次 push = 一轮 CI 的代价）。
+    ⇒ 汇总行追加失败项（限 5 条·防行长失控），成功时行形不变（向后兼容）。
+
+    纯函数形态：供单测直接断言（不需构造 git 索引）。
+    """
+    detail = ""
+    if fails:
+        detail = "· 失败项：%s" % (" ｜ ".join(fails[:5]))
+        if len(fails) > 5:
+            detail += "（共 %d 条·余 %d 条见门禁 stdout）" % (len(fails), len(fails) - 5)
+    return "%s%d FAIL / %d 目录（大小写冲突豁免 %d）%s----" % (MARKER, n_fail, n_dirs, exempt, detail)
+
+
 def run_gate() -> int:
     """门禁主流程：逐在管目录对拍，汇总行恒输出（防静默跳过）。"""
     gen._GITIGNORED_DIRS = gen._build_gitignored_dirs()
@@ -286,7 +304,7 @@ def run_gate() -> int:
         all_fails.extend(check_dir(d))
     for f in all_fails:
         print("FAIL " + f)
-    print("%s%d FAIL / %d 目录（大小写冲突豁免 %d）----" % (MARKER, len(all_fails), len(dirs), exempt))
+    print(summary_line(len(all_fails), len(dirs), exempt, all_fails))
     return 1 if all_fails else 0
 
 
