@@ -2,7 +2,9 @@
 # W424（2026-08-12）注记：严格 CSP 已由每页 <meta http-equiv="Content-Security-Policy">
 # 落地（159 页·脚本 SHA-256 哈希·scripts/generate_csp.py 生成·verify_delivery 门禁）。
 # 本文件仅供 Netlify/Cloudflare 平台层使用（GitHub Pages 不消费 _headers），
-# 白名单需与 meta CSP 保持同步（d3js/cdnjs·本地 RAG 127.0.0.1:8777）。
+# 白名单需与 meta CSP 保持同步（d3js/cdnjs·本地 RAG 源为构建期占位符，部署期注入）。
+# W1207：占位符形态不是合法 host-source ⇒ **本文件与 meta CSP 必须先经
+# scripts/inject_service_endpoint.py 注入再发布**（未注入发布 ⇒ 该源被浏览器忽略）。
 # 文档：https://developers.cloudflare.com/pages/platform/headers/
 #       https://docs.netlify.com/routing/headers/
 #
@@ -14,7 +16,7 @@
 #   5. Permissions-Policy           限制浏览器功能（摄像头/麦克风/定位）
 
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://d3js.org https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://api.github.com; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://d3js.org https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' __XIJ_SERVICE_BASE__ https://api.github.com; base-uri 'self'; form-action 'self'
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

@@ -2,7 +2,7 @@
  "version": 1,
  "pages": {
   "data/81-hardships-view.html": {
-   "sha1": "d8cb2bdc0dead2f01ca4ac4f1572318f428924e0",
+   "sha1": "18961696f103cbb545d35c7d5bde3a20e7001133",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
@@ -42,7 +42,7 @@
    }
   },
   "data/cave-estate.html": {
-   "sha1": "3d0c9ecd3f8e0fab28c151aa4ebb5dea0796b6bf",
+   "sha1": "a12ca1b5c2661e6287f1e00aca2317b14a8759d4",
    "counts": {
     "div.kpi-card": 1,
     "span.tag.king": 19
@@ -84,7 +84,7 @@
    "counts": {}
   },
   "data/character-relationship-3d-view.html": {
-   "sha1": "f8d081621b6b844d49aaeb8ceefee1940d652ff8",
+   "sha1": "894482c5983020c8919adfbfbbcd349043d0c674",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
@@ -150,7 +150,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "1f9ed93dc99684c1d2e9ac8518afc41de3a2d545",
+   "sha1": "e7372c4c2850a33a138b9e30b0e46a2ecd249cf3",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -169,7 +169,7 @@
    }
   },
   "data/data-explorer.html": {
-   "sha1": "a714cc759afe4b24c0a09c3023dea95a6acb7fc7",
+   "sha1": "be37abeb5bc7b9a070b896673354280eaff76b33",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
@@ -367,7 +367,7 @@
    }
   },
   "data/material-archaeology.html": {
-   "sha1": "50c29281746b116b6baa44d9e42c8d51839615fc",
+   "sha1": "14d608d279ee50d5c1b0ee03d0c0068cc6cea3bf",
    "counts": {
     "div.kpi-card": 1,
     "div.artifact-card": 1,
@@ -544,7 +544,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "24f072987ecdca2962f02c09f5233fd2d23bf058",
+   "sha1": "2b79023418c8215c1d981643dc297042d254107b",
    "counts": {
     "button.vt-btn": 1
    }
@@ -569,7 +569,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "50892a70a3c8ad525daf1f70cf79edfeee0989f8",
+   "sha1": "4556a84adccb3c2a2e4f7b61ab5de891c4e410d7",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -648,7 +648,7 @@
    }
   },
   "dashboard.html": {
-   "sha1": "3270497654797f65e5d0fcf76649e9e64b1cab73",
+   "sha1": "7dfb81303720a2ae551b82dc840ca956b39d17db",
    "counts": {
     "section.route-strip": 1,
     "button.vt-btn": 2,
@@ -657,7 +657,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "b33bb1beb1f31d3020156f603009460655c2a97e",
+   "sha1": "93ce5708dafd2b58a1f57546e3a8cd3836514be6",
    "counts": {
     "button": 1
    }
@@ -669,7 +669,7 @@
    }
   },
   "index.html": {
-   "sha1": "443b28f829fb03fccfd5f1b2ea1dd2fd822780c2",
+   "sha1": "b07fb9833a6c27105b605ae683e75bc0c3675753",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -684,7 +684,7 @@
    "counts": {}
   },
   "en/81-hardships-view.html": {
-   "sha1": "958e9d3507fdb6291d7372b63928210919597ec4",
+   "sha1": "6c5c56c5259e0c36fd5ed4d50edfb1a04aaa6a93",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
@@ -729,7 +729,7 @@
    }
   },
   "en/cave-estate.html": {
-   "sha1": "b03a25430f6dde8470d9d755acfda25ea9e74bbf",
+   "sha1": "e98bb393d155f037156d4be4d7a076895dc61ca3",
    "counts": {
     "div.kpi-card": 1,
     "span.tag.king": 19
@@ -783,7 +783,7 @@
    "counts": {}
   },
   "en/character-relationship-3d-view.html": {
-   "sha1": "ddda0e0285bd61a3b4399fdb1c284b6f7cb9d2c5",
+   "sha1": "5223180fd20607cb7abe9e617f5f32ede9f4976e",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
@@ -888,7 +888,7 @@
    "counts": {}
   },
   "en/data-explorer.html": {
-   "sha1": "dc0dbfe15360075570160d6cdc33e7d606c96bd0",
+   "sha1": "b558e65f4515989917ae0a2b9022dbe2271b2274",
    "counts": {
     "span.keytab.active": 1,
     "button.vt-btn": 2
@@ -909,7 +909,7 @@
    }
   },
   "en/dukou-engine.html": {
-   "sha1": "2df08deb6c88d92f5e1a0cb3bdd2c53daaaeea5e",
+   "sha1": "5119153edea5f58746c7be834dafc49b49e521f2",
    "counts": {
     "button": 1
    }
@@ -1235,7 +1235,7 @@
    }
   },
   "en/material-archaeology.html": {
-   "sha1": "5547c06c9ed0858d2e8667b2d4611bfe2d597a12",
+   "sha1": "85e79f7158bdfbd41fa5632751ae8c7a173ab015",
    "counts": {
     "div.kpi-card": 1,
     "div.artifact-card": 8,
@@ -1416,7 +1416,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "fbdbc24ca8e171fe091dc347816ae1efc88be349",
+   "sha1": "96144200921789643955076e755dfdcc829d64b6",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1506,5 +1506,5 @@
    }
   }
  },
- "generated_at": "2026-11-11T09:47:55.057Z"
+ "generated_at": "2026-11-11T12:27:34.180Z"
 }

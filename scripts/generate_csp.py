@@ -38,6 +38,11 @@ import os
 import re
 import sys
 
+# W1207（契约 C-8）：RAG 引擎源改用**构建期占位符**，与服务地址注入机制同源——
+# 部署期由 scripts/inject_service_endpoint.py 替换为真实地址，仓内产物因此不含任何服务地址
+# （守卫 check_no_hardcoded_endpoint.py 判红 0）。占位符取自守卫脚本的单一事实源，
+# 避免「判据与生成器两处字面量」漂移（同 E-215「对外部规则须读判据源码」纪律）。
+from check_no_hardcoded_endpoint import PLACEHOLDER as SERVICE_BASE_PLACEHOLDER
 from utils.path_guard import PROJECT_ROOT, make_guard
 
 _w536_guard_open = make_guard(PROJECT_ROOT)  # W761：W536 守卫单模块化（root=仓库根）
@@ -59,7 +64,7 @@ EXTERNAL_SCRIPT_HOSTS = []
 # GoatCounter 端点须与 scripts/output/_w1167_analytics.json 的 goatcounter_endpoint 同源，
 # 二者不一致由第 67 槽 C5 与第 56 槽 CSP 增量漂移同批拦下。
 ANALYTICS_CONNECT_HOSTS = "https://1273984347.goatcounter.com"
-RAG_ORIGIN = "http://127.0.0.1:8777"
+RAG_ORIGIN = SERVICE_BASE_PLACEHOLDER
 # 口径沿革：W806 因 GoatCounter 账号实测 404 退役统计链，connect-src 归零外域；
 # W1167 G0-1 拍板恢复为「具名例外」——仅 ANALYTICS_CONNECT_HOSTS 所列回传域
 # （GoatCounter 端点本次复验 HTTP 400=缺参而非 404=死号，账号在活），其余外域仍为门禁违规。
@@ -150,7 +155,13 @@ def main():
         with open(path, encoding="utf-8") as f:
             html = f.read()
         # 本地 RAG 引擎放行：dukou-engine 直连 fetch，index/dashboard 经 rag-chat.js 探活
-        needs_rag = "127.0.0.1:8777" in html or "rag-chat.js" in html
+        # 判定看**服务基址载体**（meta 名 / 客户端脚本引用），而非占位符文本本身——
+        # 与部署期注入顺序解耦：已注入产物里占位符已被替换成真实地址，
+        # 若只看占位符则 needs_rag 退化为 False ⇒ connect-src 丢掉 RAG 源
+        # ⇒ 注入后的页面 fetch 被 CSP 阻断（顺序颠倒即失守·脚本仍 rc=0）。
+        needs_rag = ("xij-service-base" in html
+                     or "rag-chat.js" in html
+                     or RAG_ORIGIN in html)
         policy = build_policy(html, needs_rag)
         hashes = inline_script_hashes(html)
         total += 1

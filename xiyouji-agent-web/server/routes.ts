@@ -8,7 +8,7 @@
  *   POST   /api/feedback              400 invalid body | { ok, inserted }
  *   GET    /api/feedback/summary      { ok, up, down }
  *   GET    /api/health                { status, timestamp }
- *   GET    /api/ready                 { status, checks }        ← W808 新增（就绪探针）
+ *   GET    /api/ready                 { status, checks, compliance }   ← W808 新增（就绪探针）·W1207 补 compliance
  *   GET    /api/audit                 { ok, limit, total, skipped, entries }
  *   GET    /api/metrics               { ok, first_token:{count,window,p50,p95,min,max,sloMs} } ← W844 新增（OBS-14）
  *   GET    /api/check-login           LoginStatusResponse（apiKey 脱敏 `****` + 末四位）
@@ -29,7 +29,7 @@
 import type { Express, Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import * as db from "./db.js";
-import { readAudit } from "./audit.js";
+import { readAudit, auditDegradation } from "./audit.js";
 import { firstTokenSummary } from "./metrics.js";
 import { NotFoundError } from "./errors.js";
 import { logger } from "./logger.js";
@@ -128,7 +128,16 @@ export function registerApiRoutes(app: Express, permissions: PendingPermissionSt
   app.get("/api/ready", async (_req, res) => {
     const checks = { database: await checkDatabase() };
     const ok = Object.values(checks).every((c) => c.status === "ok");
-    res.status(ok ? 200 : 503).json({ status: ok ? "ok" : "degraded", checks });
+    // W1207：审计合规降级状态对外可见（§9.2 F10 + §12.2 缺口 3/4）。
+    //   **刻意不进 ok 聚合**：F10 口径是「审计写入失败 ⇒ 服务继续但标记合规降级」——
+    //   若把它算进 ok，降级会把就绪探针打成 503 ⇒ 编排器会摘除服务 ⇒ 违背 F10 的「服务继续」。
+    //   ⇒ 语义分层：checks = 能否接流量（数据库等）；compliance = 是否处于合规降级（运维可见）。
+    // W1207 盲审 P1-1 根修：只投影三字段（degraded / failures / gapStart）——
+    // auditDegradation() 全量含 markerPath（服务端绝对路径）与 lastError（fs 错误原文），
+    // 直接序列化会重开 W832 已收敛的信息泄露面（与 W1206 脱敏面冲突）。
+    const { degraded, failures, gapStart } = auditDegradation();
+    const compliance = { audit: { degraded, failures, gapStart } };
+    res.status(ok ? 200 : 503).json({ status: ok ? "ok" : "degraded", checks, compliance });
   });
 
   // W752 写操作审计回放（只读）：返回最近 limit 条（默认 100，上限 1000）。

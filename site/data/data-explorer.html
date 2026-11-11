@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4xklS2UQxWf6nOrq3d7e63rXlJVth1TRjtOHou3aXnM=' 'sha256-xVTEFCKMdoftqCIPFRm8YTDUAdhdJ3W/uWK3lSnVlJI=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4xklS2UQxWf6nOrq3d7e63rXlJVth1TRjtOHou3aXnM=' 'sha256-21wrfkdhItGJk/E1/wLY+ERwazFInvlQ9c4Yewa+FH4=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>详解西游记 · 数据浏览器</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/data-explorer.html">
@@ -1873,7 +1873,7 @@ function loadDatasets() {
     renderPicker(list.map(function (d) { return { name: d.name, title: d.title, size: d.size_kb }; }));
   }).catch(function () {
     API_OK = false;
-    setBanner("离线模式（file://）：仅内置示例可用。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/data-explorer.html 访问，即可浏览全部 40 个数据集。", true);
+    setBanner("离线模式（file://）：仅内置示例可用。启动 <code>python scripts/api/api_server.py</code> 后按该脚本提示的本机地址访问 <code>/data/data-explorer.html</code>，即可浏览全部 40 个数据集。", true);
     var names = Object.keys(FALLBACK);
     renderPicker(names.map(function (n) { return { name: n, title: (FALLBACK[n].meta || {}).title || n, size: null }; }));
   });

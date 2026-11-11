@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-A3/DexFL+ST8WtDykt5aoPfupHDTNl6iZKVO7o00y3A=' 'sha256-izS4O1zsaUbkksG5yyvsEPqRVN32Xk5t/YmQKUqbuic=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-A3/DexFL+ST8WtDykt5aoPfupHDTNl6iZKVO7o00y3A=' 'sha256-IGAVJXRpczYzh9/gd1/8teTf1z95PRhglfraPEV353E=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Annotated Journey to the West · Data Explorer</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/en/data-explorer.html">
@@ -1851,7 +1851,7 @@ function loadDatasets() {
     renderPicker(list.map(function (d) { return { name: d.name, title: d.title, size: d.size_kb }; }));
   }).catch(function () {
     API_OK = false;
-    setBanner("离线模式（file://）：仅内置示例可用。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/data-explorer.html 访问，即可浏览全部 40 个数据集。", true);
+    setBanner("离线模式（file://）：仅内置示例可用。启动 <code>python scripts/api/api_server.py</code> 后按该脚本提示的本机地址访问 <code>/data/data-explorer.html</code>，即可浏览全部 40 个数据集。", true);
     var names = Object.keys(FALLBACK);
     renderPicker(names.map(function (n) { return { name: n, title: (FALLBACK[n].meta || {}).title || n, size: null }; }));
   });

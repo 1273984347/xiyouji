@@ -255,3 +255,30 @@ LightRAG / GraphRAG 均为 **MIT**，可商用，仅需署名。本目录脚本�
 **评测集**：**检索 100 条已入仓**（`eval/queries_100q.jsonl`：人工冻结 30 + 标题派生 70，见下节）· 路由 21 条（基线 10 / 中等 8 / 难题 1 / 探针 2），路由评测 `py -3.12 scripts/rag/page_router.py --eval`。
 **已知两坑**（均已入项目记忆）：① http.server handler 子线程首次 import torch/ST 段错误（exit 139）→ 主线程预热；② `ruff --fix` 的 isort 会把「ST 先于 torch」改坏 → `# noqa: I001` 防守。
 
+## 站点端调试配方（W1207·契约 C-8 地址注入）
+
+站点的渡口检索（`site/dukou-engine.html`）与检索浮窗（`site/static/js/rag-chat.js`）在**仓内态不含任何服务地址**——契约 C-8 要求静态产物不得内嵌服务端地址，地址由「构建期占位符 + 部署期替换」承载。
+
+⇒ **只启动 `rag_server.py` 是不够的**：仓内产物里的服务地址仍是占位符，必须先注入本地地址。
+
+```bash
+# 1) 启动 RAG 服务（零第三方依赖）
+python scripts/rag/rag_server.py
+
+# 2) 把本地服务地址注入静态产物（开发者本机专用档 · 产物内留可审计标记）
+py -3 scripts/inject_service_endpoint.py --profile developer-local --endpoint http://127.0.0.1:8777 --apply
+
+# 3) 校验：注入后产物无残留违规（须带 --expected-endpoint 声明，否则真实地址会被判红）
+py -3 scripts/check_no_hardcoded_endpoint.py --root site --expected-endpoint http://127.0.0.1:8777
+```
+
+**注入后不需要重跑 `generate_csp.py`**：占位符只落在**非哈希载体**上（外部 JS / `<meta name="xij-service-base">` / 平台层 `_headers`），不改动内联脚本 ⇒ `script-src 'sha256-…'` 哈希不变。**但若曾把占位符写进内联脚本，注入后必须重跑**（否则整脚本会被浏览器拒执行——`script-src` 哈希失配）。
+
+**部署（默认档）**：默认档**拒绝回环/内网地址**（fail-closed），须传入部署方自己的服务地址：
+
+```bash
+py -3 scripts/inject_service_endpoint.py --endpoint https://<your-service-host> --apply
+```
+
+- 契约与机制：架构方案 v2 §10.6（C-8）· 守卫 `scripts/check_no_hardcoded_endpoint.py` · 注入器 `scripts/inject_service_endpoint.py`
+- 注入后产物的守卫复扫**必须**带 `--expected-endpoint`（或环境变量 `XIJ_SERVICE_BASE`）声明注入结果——否则「注入进来的真实地址」会被判成未声明地址。

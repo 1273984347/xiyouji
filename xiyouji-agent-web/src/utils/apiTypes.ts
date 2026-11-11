@@ -82,6 +82,8 @@ export interface HealthResponse {
 export interface ReadyResponse {
   status: "ok" | "degraded";
   checks: Record<string, { status: "ok" | "error"; detail?: string }>;
+  /** W1207：合规降级层（**不进 status/checks 聚合**——F10：审计降级时服务继续可用）。 */
+  compliance?: { audit: { degraded: boolean; failures: number; gapStart: string | null } };
 }
 
 /** 审计条目（GET /api/audit 的元素形状·与服务端 server/audit.ts 对应）。 */

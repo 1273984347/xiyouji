@@ -68,9 +68,24 @@ test("集成：/api/ready 就绪探针返回 200 且 checks.database=ok", async 
   try {
     const r = await fetch(`${base}/api/ready`);
     assert.equal(r.status, 200, "依赖可用时就绪探针应 200");
-    const body = (await r.json()) as { status: string; checks: Record<string, { status: string }> };
+    const body = (await r.json()) as {
+      status: string;
+      checks: Record<string, { status: string }>;
+      compliance?: { audit: { degraded: boolean; failures: number; gapStart: string | null } };
+    };
     assert.equal(body.status, "ok");
     assert.equal(body.checks.database.status, "ok", "SQLite 应可达");
+    // W1207：审计合规降级状态须在就绪探针里可见（§9.2 F10 · §12.2 缺口 3/4）
+    assert.ok(body.compliance?.audit, "就绪探针须带 compliance.audit（运维可见性）");
+    assert.equal(typeof body.compliance!.audit.degraded, "boolean");
+    assert.equal(body.compliance!.audit.degraded, false, "无审计写失败时不应处于降级");
+    assert.equal(body.compliance!.audit.failures, 0);
+    // W1207 盲审 P1-1 回归锁：只投影三字段——不得序列化 markerPath（服务端绝对路径）
+    // 与 lastError（fs 错误原文），否则重开 W832 已收敛的信息泄露面。
+    assert.deepEqual(Object.keys(body.compliance!.audit).sort(), ["degraded", "failures", "gapStart"]);
+    const raw = JSON.stringify(body);
+    assert.ok(!raw.includes("markerPath"), "就绪响应不得含 markerPath（服务端绝对路径）");
+    assert.ok(!raw.includes("lastError"), "就绪响应不得含 lastError（fs 错误原文）");
   } finally {
     child.kill();
   }

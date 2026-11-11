@@ -104,15 +104,21 @@ def insert_marker(text, marker_line, is_html):
     return marker_line + "\n" + text
 
 
-def inject_text(text, endpoint, profile, is_html=False):
-    """对单文件文本做注入，返回 (新文本, 替换处数, 标记行或 None)。"""
+def inject_text(text, endpoint, profile, is_html=False, marker_template=None):
+    """对单文件文本做注入，返回 (新文本, 替换处数, 标记行或 None)。
+
+    W1207 实证根修：标记模板须**按文件类型**取（HTML 用 <!-- -->、代码用 /* */、
+    文本用 #）——原实现恒用代码模板 ⇒ HTML 产物被插入 /* ... */，该串在 HTML 里
+    不是注释 ⇒ 会被浏览器当作文本渲染到页面顶部（守卫豁免判定不受影响，但产物观感破）。
+    """
     count = text.count(PLACEHOLDER)
     if count == 0:
         return text, 0, None
     new_text = text.replace(PLACEHOLDER, endpoint)
     marker_line = None
     if profile == "developer-local":
-        marker_line = MARKER_TEMPLATE_CODE.format(marker=DEV_LOCAL_MARKER, endpoint=endpoint)
+        template = marker_template or MARKER_TEMPLATE_CODE
+        marker_line = template.format(marker=DEV_LOCAL_MARKER, endpoint=endpoint)
         if marker_line not in new_text:
             new_text = insert_marker(new_text, marker_line, is_html)
     return new_text, count, marker_line
@@ -135,7 +141,8 @@ def inject_file(path, endpoint, profile):
                 "JSON 文件不支持注释标记（无法留可审计豁免痕迹）：" + path
                 + "；请改用非 JSON 载体或调整产物结构")
     is_html = os.path.splitext(path)[1].lower() in HTML_EXTS
-    new_text, count, marker_line = inject_text(text, endpoint, profile, is_html)
+    new_text, count, marker_line = inject_text(text, endpoint, profile, is_html,
+                                            marker_template_for(path))
     return {"file": path, "status": "injected", "replacements": count,
             "marker": marker_line, "content": new_text}
 

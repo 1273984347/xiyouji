@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-A3/DexFL+ST8WtDykt5aoPfupHDTNl6iZKVO7o00y3A=' 'sha256-iTYLxu83pR9kNGFSpy5c0WsF41MdD1mWwHv8IiIwBoU=' 'sha256-oTZFHP/cVjMtfgXU4qBiOAzwK97odzkeZD2GLjv6S/8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-A3/DexFL+ST8WtDykt5aoPfupHDTNl6iZKVO7o00y3A=' 'sha256-RksDPQ+5uLzOkSjniN+MWzBBseZbERyJZ5H6h6K1GTc=' 'sha256-oTZFHP/cVjMtfgXU4qBiOAzwK97odzkeZD2GLjv6S/8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Annotated Journey to the West · Character Relationship Interactive View</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/en/character-relationship-3d-view.html">
@@ -1940,7 +1940,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
       function goOffline() {
         if (fallback) {
-          setBanner(ids.bannerId, "Offline mode (file://): showing the built-in sample. Start <code>python scripts/api/api_server.py</code> and open via http://127.0.0.1:8787/data/" + name + "-view.html for full data.", true);
+          setBanner(ids.bannerId, "Offline mode (file://): showing the built-in sample. Start <code>python scripts/api/api_server.py</code> and open <code>/data/" + name + "-view.html</code> via the local address it prints for full data.", true);
           show(fallback);
         } else {
           setBanner(ids.bannerId, "Offline with no built-in sample: start the Data API and access it over http.", true);
