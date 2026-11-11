@@ -1,3 +1,51 @@
+## W1210 占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修（2026-11-11）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| AGENTS.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| CHANGELOG.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| CITATION.cff | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| HANDOVER.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| STRUCTURE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| archive/docs/AGENTS-ARCHIVE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| archive/docs/workflows-readme-history.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/00-导读/W批次编号对账表.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/00-导读/文档规范.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/00-导读/项目说明.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/11-方案报告/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/11-方案报告/计划方案/T100-任务计划执行与经验沉淀报告-2026-11-11.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| docs/agent/gates.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| pytest.ini | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/check_gov_doc_claims.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/check_placeholder_hash_carrier.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/_cascade_files_W1210.txt | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/_vermilion_solid_cache.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/_w1210_spec.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/file-index.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/stats-changelog.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/stats-index.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/stats.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/output/tools-inventory.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| scripts/verify_delivery.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/data/cross-time-danmaku.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/data/search.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/data/tag-cloud.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/dukou-engine.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/en/search.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| site/index.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| tests/unit/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| tests/unit/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+| tests/unit/test_check_placeholder_hash_carrier.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
+
 ## W1209 仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填（2026-11-11）
 
 | 文件 | W | 说明 |

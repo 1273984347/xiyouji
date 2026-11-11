@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（111）
+## 文件（112）
 
 ### Python 脚本
 
@@ -32,6 +32,7 @@
 - `test_check_no_goatcounter.py`
 - `test_check_no_hardcoded_endpoint.py`
 - `test_check_page_admission.py`
+- `test_check_placeholder_hash_carrier.py`
 - `test_check_plan_template.py`
 - `test_check_public_repo_secrets.py`
 - `test_check_script_coverage.py`

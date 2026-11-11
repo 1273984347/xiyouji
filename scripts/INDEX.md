@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（225）
+## 文件（226）
 
 ### Python 脚本
 
@@ -151,6 +151,7 @@
 - `check_parser_anchor_coverage.py`
 - `check_perf_shadow.py`
 - `check_pitfall_id_unique.py`
+- `check_placeholder_hash_carrier.py`
 - `check_plan_template.py`
 - `check_powershell_parse.py`
 - `check_public_repo_secrets.py`

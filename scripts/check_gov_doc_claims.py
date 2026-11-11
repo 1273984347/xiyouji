@@ -19,6 +19,7 @@ preflight 提示位与批收尾手跑；升格判红需用户批准挂 verify �
 from __future__ import annotations
 
 import argparse
+import ast
 import glob
 import json
 import os
@@ -47,11 +48,18 @@ def _disk_board_counts():
 
 
 def _verify_sections():
+    """读 EXPECTED_SECTION_NAMES 实数（段数）。
+
+    W1210 根修：原实现用 `find("]")` 切分 + 去换行 + 按逗号 split —— 列表项的**行尾注释**
+    （如 `"产物服务地址",  # W1208：…`）会把注释与**下一项**黏成一项，使计数虚高 1
+    （真实 75 段被读成 76 段 ⇒ N2「文档规范段数 == verify 实数」长期假红）。
+    改用 ast 精确解析（注释天然被忽略·不再依赖去换行的字符串手术）。
+    """
     t = _read(os.path.join("scripts", "verify_delivery.py"))
-    i = t.find("EXPECTED_SECTION_NAMES = [")
-    j = t.find("]", i)
-    body = t[i + len("EXPECTED_SECTION_NAMES = ["):j]
-    return [x.strip().strip(",").strip('"') for x in body.replace("\n", "").split(",") if x.strip()]
+    i = t.index("EXPECTED_SECTION_NAMES = [")
+    j = t.index("]", i)
+    tree = ast.parse(t[i:j + 1])
+    return list(ast.literal_eval(tree.body[0].value))
 
 
 def _gates_slot_count():

@@ -1,3 +1,16 @@
+### W1210（2026-11-11）：占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修
+
+**本批要点**（W1210 占位符哈希载体常驻门禁批）：
+
+> - **第 71 槽挂载（用户批准改 verify_delivery.py）**：坑表 E-225（W1207 实证）已立正解「占位符只许落在**非哈希载体**上」，并在 W1207 当批实测「内联 script 块内占位符命中 0」——但那是一次性**人工读数**，**无防复发机制**；W1208 方案档 §13.10 明列本项为「明确未做·建议下一并挂槽」。本批新建 `scripts/check_placeholder_hash_carrier.py` 并以 `_StrictGate` 挂进 `verify_delivery.py` 为**第 71 槽**，登记 `_SCOPE_CORE`（**恒跑**——判据与改动范围无关：任何提交都可能夹带产物面占位符改写）。
+> - **判据四项**：C1 内联 `<script>` 块正文（= CSP `script-src 'sha256-…'` 的哈希输入）出现占位符 ⇒ 判红，报告给出**块序号 + 该块 sha256 前 12 位**；C2 `<script src>` 属性值出现占位符 ⇒ 判红（替换后成外域 ⇒ script-src 不含该域 ⇒ 外链被拒）；C3 产物面扫不到任何内联块 ⇒ **判红**（扫描面失效 fail-closed·防静默假绿）；C4 其余载体（`csp_meta` CSP 声明面 / `meta` 旁挂 / `external_js` / `style`）**登记不判红**——登记不是放行，角色分类让每处占位符可人工复核。
+> - **口径同源（引用不复制·W1120 纪律）**：内联块的提取与哈希**直接 import `generate_csp`**（`SCRIPT_RE` + `inline_script_hashes`），**不复制正则字面量**——第 56 槽 `check_csp_drift.py` 是复制式（注释写「必须逐字一致」），本槽改引用式以从根上杜绝两处正则分叉。
+> - **双向实证（断链真实可复现·非理论推演）**：往 `site/index.html` 内联 `<script>` 注入一处占位符 ⇒ ① 本槽判红并定位到 `site/index.html:7` / 角色 `inline_script` / 块 #1 / 该块 sha256 前 12 位 `Emuuv5mktPBa`；② `generate_csp.py --check` **同步报出** `DRIFT site/index.html`（哈希确实失配）⇒ 两条判据互相印证；复原后本槽与 CSP 校验双绿。
+> - **注册表三处同改 + 声明面同改**：门禁元组 / `EXPECTED_SECTION_NAMES` / `_SCOPE_CORE`；槽数 70→71（AGENTS §4.2 三处 + gates.md 标题沿革/第 71 条/文末详细定义 + HANDOVER）+ 文档规范 75→76 段 ⇒ C3「AGENTS 清单上限 == verify 实况最高槽位」与 N3「AGENTS 槽数 == gates.md 条目数」双向转绿。
+> - **顺带根修存量假红（修实例必修根）**：`scripts/check_gov_doc_claims.py` 的 N2 段数解析用 `find("]")` 切分 + 去换行 + 按逗号 split ⇒ 列表项的**行尾注释**把注释与**下一项**黏成一项 ⇒ 真实 75 段被读成 **76** 段 ⇒ N2「文档规范段数 == verify 实数」长期假红（本批实跑复现）⇒ 改用 `ast` 精确解析（注释天然被忽略），N2 随之转绿。
+> - **未新增坑表条目**：E-225 已在册且正解未变，本批只是把正解从人工一次性实测升级为常驻机器门禁 ⇒ 按「重复坑不新增条目」纪律，计数链保持 320 不变。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
 ### W1209（2026-11-11）：仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填
 
 **本批要点**（W1209 仓库体积治理批）：
@@ -516,7 +529,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1209），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1210），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
