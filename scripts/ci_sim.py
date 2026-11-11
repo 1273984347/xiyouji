@@ -54,6 +54,7 @@ GATES = [
     ("页准入(W916建)", "{py} scripts/check_page_admission.py --gate"),
     ("DB schema(W917建)", "{py} scripts/check_db_schema.py --gate"),
     ("副本链对账(W920建)", "{py} scripts/check_data_copy_chain.py --gate"),
+    ("占位符哈希载体(第71槽)", "{py} scripts/check_placeholder_hash_carrier.py --gate"),
 ]
 
 

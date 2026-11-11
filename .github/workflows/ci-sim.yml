@@ -6,7 +6,7 @@ name: CI Sim
 # 未落库件）。此前只能靠人手工建 worktree 预演（易忘、易漏清）；
 # 本 workflow 把它固化为**每次 PR 自动跑**，让「本地红/CI 绿」从人工推理变成机器结论。
 #
-# 范围：只跑 `scripts/ci_sim.py` 内置的 7 项关键门禁（纯 Python·不需浏览器与
+# 范围：只跑 `scripts/ci_sim.py` 内置的 13 项关键门禁（纯 Python·不需浏览器与
 # node_modules）；**不跑**全量 verify_delivery（其第 43/49 段需 Playwright 浏览器·
 # 由 ci.yml 的既有 job 覆盖）。
 

@@ -1,3 +1,17 @@
+### W1211（2026-11-12）：CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿
+
+**本批要点**（W1211 CI 修复与机制补强批）：
+
+> - **CI 9 红归因坐实（父提交基线双对照）**：W1210 的 run 43055555196 与其父提交（W1209）run 43040082452 的**失败 job 集合完全相同**（Site Smoke / E2E Interaction / Delivery Gate / Agent Web Build），报错链**逐字相同**（Temporary failure resolving 'azure.archive.ubuntu.com' → Failed to install browsers → Installation process exited with code: 100）⇒ **存量环境故障·非本批引入**；更早的 9d72c3aef run 43028286035 为 10/10 全绿 ⇒ 故障出现在 LFS 迁移推送之后。attempt 2 重跑仍同款失败（16:30:29→16:38:15·连续 90+ 分钟未恢复）⇒ **重跑不是解法**。
+> - **修复（用户裁决「6 处全改」）**：新建 scripts/ci_repair_apt_mirror.py——把 runner 的 apt 源从 azure.archive.ubuntu.com 切到候选镜像链（官方源优先 + 国内镜像兜底）并用 apt-get update 实测验证；**全部候选失败时打 warning 并 rc=0**（修复层不掩盖后续步骤的真实失败语义）；接入 **6 处 Playwright 安装点**（ci.yml 4 处 + screenshot-review.yml 2 处）。
+> - **机制补强（用户裁决「接 ci_sim」）**：第 71 槽接进 ci_sim 的 GATES（12→13 项）⇒ CI 侧预演 job **不依赖浏览器安装**即可实跑第 71 槽 ⇒ 堵上「新挂门禁槽在 CI 侧零执行证据」的盲区（Delivery Gate 是唯一能跑**全量** verify_delivery 的 job，而它常挂在依赖安装步骤失败）。
+> - **Backlog 对账硬拦清偿**：preflight 抓到「对账超阈 1 倍」硬拦 ⇒ 按 git 与测试实况核 HANDOVER Backlog：**8 行登记滞后全部反填**（7 行 git 反填 + W1191）；并根修批次标签判据（scope 段逗号分隔形态如 fix(ci,w1191): 此前判不出 ⇒ P-43-01 反填对半数批次失效）+ 多标签各号各计（原实现只 search 一次·与注释不符）+ 4 例回归锁（含「散文提及仍不计」负样本·防削弱并行 touches 交集拒绝）。
+> - **存量漂移订正**：HANDOVER §三 写「gates.md（67 槽）」实况 71 槽、AGENTS §4.3 写「完整 224 条」实况 320 条 ⇒ 两处订正。
+> - **坑表 E-227 入表 + 计数链 320→321 同步 9 处**（AGENTS 两处 + HANDOVER 两处 + SKILL.md 两处 + STRUCTURE.md + docs/agent/pitfalls.md 壳 + 坑表流程主题 187→188）。
+> - **W1209 过时表述订正（不改写 W1209 历史段·订正写在本段）**：fetch 实证 origin/main=dfff13ecf（= W1209 提交·本地 HEAD 祖先）⇒ 远端 main **已指向改写后历史**；git count-objects -vH 实测 size-pack **187.40 MiB** + loose 1.50 MiB ⇒ **已低于 1 GB 线** ⇒ W1209 段「远端 main 尚未指向改写后历史」「体积尚未真正下降」两项陈述已过时。
+> - **验证读数**：apt 脚本 compile rc=0 · ruff 全过 · 本机实跑 rc=0 · 单测 6 passed；标签判据单测 39 passed（含新增 4 例）；check_gov_doc_claims N2 76 段 · N3 71 槽 · N4 321 条 · 0 FAIL；check_pitfall_id_unique 0 FAIL；台账腾窗迁 W1149-W1150 ⇒ 正本 59 行。
+> - **未做（不假收敛）**：批次标签的「描述段 W 号形态」仍不识别（放宽会削弱在途批的并行 touches 交集拒绝）⇒ 登记下批待办并写明可选方向；复盘触发器 T1/T2/T3 全触发 ⇒ 本批未认领复盘批，登记下批；PR #171 合并待 CI 绿后由用户裁决。
+> - **文件**：见 file-index。
 ### W1210（2026-11-11）：占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修
 
 **本批要点**（W1210 占位符哈希载体常驻门禁批）：
@@ -529,7 +543,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1210），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1211），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

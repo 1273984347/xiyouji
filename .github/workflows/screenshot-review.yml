@@ -149,6 +149,11 @@ jobs:
         if: steps.scope.outputs.needed == 'true'
         run: pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes + 哈希化清单（Scorecard 的 pip 面要求「钉 hash」，「钉版本」无效）
 
+      # W1211：runner 的 apt 源指向 azure.archive.ubuntu.com，该域名 2026-11-11 连续
+      # 90+ 分钟 DNS 解析失败 ⇒ playwright --with-deps 装不上系统依赖 ⇒ 本 job 必红。
+      # 先回退镜像源（候选链实测验证）；修不好也不阻断（后续步骤自然失败·保持原语义）。
+      - name: Repair apt mirror (Azure DNS fallback·W1211)
+        run: python scripts/ci_repair_apt_mirror.py
       - name: Install Playwright
         if: steps.scope.outputs.needed == 'true'
         # W1195：改用 `npm ci --prefix scripts`（Scorecard Pinned-Dependencies 认的 pinned 形态·
@@ -336,6 +341,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
 
+      # W1211：runner 的 apt 源指向 azure.archive.ubuntu.com，该域名 2026-11-11 连续
+      # 90+ 分钟 DNS 解析失败 ⇒ playwright --with-deps 装不上系统依赖 ⇒ 本 job 必红。
+      # 先回退镜像源（候选链实测验证）；修不好也不阻断（后续步骤自然失败·保持原语义）。
+      - name: Repair apt mirror (Azure DNS fallback·W1211)
+        run: python scripts/ci_repair_apt_mirror.py
       - name: Install Playwright
         if: steps.scope.outputs.run != 'false'
         # W1195：同上一处——改用 `npm ci --prefix scripts`（Scorecard 只认 `npm ci` 为 pinned·详见上一处注释）。

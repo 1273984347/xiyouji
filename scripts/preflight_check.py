@@ -258,27 +258,37 @@ def is_inflight(status):
 # 修法：参与交集拒绝的「在途」须同时满足「台账标在途 AND git 无该 W 提交」；
 # 台账标在途但 git 已有提交 ⇒ **登记滞后**——告警不拒绝（不改退出码语义），
 # 由该批自己按收官流程回填状态列（ledger_backfill.py --from-git 支持脚本反填）。
-# 口径：git 提交识别只认 subject 的批次标签形态 ``type(w###):``（仓内提交信息统一形态·
-# 大小写不敏感）——正文/散文里提及别批号（「承接 W###」「W### 教训」）**不计**，
+# 口径：git 提交识别只认 subject 的批次标签形态——``type(w###):`` 与 scope 段逗号分隔
+# 形态 ``type(scope,w###):``（W1211 实测：仓内存在 ``fix(ci,w1191):`` 这类多标签 scope，
+# 原正则只认「括号内恰好是 w+数字」⇒ P-43-01 反填对半数批次判不出「无批次标签提交」）
+# ——正文/散文里提及别批号（「承接 W###」「W### 教训」）**不计**，
 # 防止引用性提及误降真在途批次的 touches 防护。
-_RE_COMMIT_TAG = re.compile(r"\((w\d{3,4})\)", re.IGNORECASE)
+_RE_COMMIT_TAG = re.compile(r"\(([^)]*)\)", re.IGNORECASE)
+_RE_SCOPE_WNUM = re.compile(r"^w\d{3,4}$", re.IGNORECASE)
 
 
 def wnum_commit_index(subjects):
     """git log ``%h %s`` 行列表 → {W 号(int): [提交数, 首笔短 hash]}。
 
-    只认 subject 内批次标签 ``type(w###):`` 形态（见 _RE_COMMIT_TAG 注释·防散文引用误计）；
-    一笔提交含多个批次标签时各号各计一笔（跨批提交对每个被标签批次都是事实存在）。
+    批次标签形态（大小写不敏感）——**首个括号组内逗号分隔的每一项都算批次标签**：
+    ``type(w###):`` · ``type(scope,w###):`` · ``type(w###,scope):``。
+    一笔提交含多个批次标签时**各号各计一笔**（跨批提交对每个被标签批次都是事实存在）。
+    散文形态（「承接 W###」「引用 W### 报告」「…(见 w### 讨论)」）**不计**——
+    防误降真在途批次的 touches 防护。
     """
     idx = {}
     for line in subjects or []:
         m = _RE_COMMIT_TAG.search(line)
         if not m:
             continue
-        rec = idx.setdefault(int(m.group(1)[1:]), [0, ""])
-        rec[0] += 1
-        if not rec[1]:
-            rec[1] = line.split(" ", 1)[0]  # 首列 = %h 短 hash
+        for part in m.group(1).split(","):
+            token = part.strip()
+            if not _RE_SCOPE_WNUM.match(token):
+                continue
+            rec = idx.setdefault(int(token[1:]), [0, ""])
+            rec[0] += 1
+            if not rec[1]:
+                rec[1] = line.split(" ", 1)[0]  # 首列 = %h 短 hash
     return idx
 
 

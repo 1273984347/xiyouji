@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（112）
+## 文件（113）
 
 ### Python 脚本
 
@@ -37,6 +37,7 @@
 - `test_check_public_repo_secrets.py`
 - `test_check_script_coverage.py`
 - `test_check_search_index_fresh.py`
+- `test_ci_repair_apt_mirror.py`
 - `test_ci_sim.py`
 - `test_ci_wiring.py`
 - `test_commit_scope.py`

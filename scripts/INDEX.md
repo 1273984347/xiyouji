@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（226）
+## 文件（227）
 
 ### Python 脚本
 
@@ -172,6 +172,7 @@
 - `check_tooltip_spacing.py`
 - `check_untracked.py`
 - `check_w_range_literal.py`
+- `ci_repair_apt_mirror.py`
 - `ci_sim.py`
 - `color_delta_guard.py`
 - `containment_block_scan.py`

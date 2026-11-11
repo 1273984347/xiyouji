@@ -42,6 +42,11 @@ jobs:
           python-version: "3.12"
           # W401 修复：本 job 不安装 pip 依赖（仅 npm playwright），移除 cache: pip 避免 Post 步骤缓存目录缺失报错（同 W400 a11y-audit 修复）
 
+      # W1211：runner 的 apt 源指向 azure.archive.ubuntu.com，该域名 2026-11-11 连续
+      # 90+ 分钟 DNS 解析失败 ⇒ playwright --with-deps 装不上系统依赖 ⇒ 本 job 必红。
+      # 先回退镜像源（候选链实测验证）；修不好也不阻断（后续步骤自然失败·保持原语义）。
+      - name: Repair apt mirror (Azure DNS fallback·W1211)
+        run: python scripts/ci_repair_apt_mirror.py
       - name: Install Playwright
         # W1195：改用 `npm ci --prefix scripts`（Scorecard Pinned-Dependencies 认的 pinned 形态）。
         # Scorecard 源码 `checks/raw/shell_download_validate.go` 的 `isNpmUnpinnedDownload`：
@@ -361,6 +366,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
 
+      # W1211：runner 的 apt 源指向 azure.archive.ubuntu.com，该域名 2026-11-11 连续
+      # 90+ 分钟 DNS 解析失败 ⇒ playwright --with-deps 装不上系统依赖 ⇒ 本 job 必红。
+      # 先回退镜像源（候选链实测验证）；修不好也不阻断（后续步骤自然失败·保持原语义）。
+      - name: Repair apt mirror (Azure DNS fallback·W1211)
+        run: python scripts/ci_repair_apt_mirror.py
       - name: Install scripts deps + Playwright (第 43 门禁运行条件·W757)
         run: |
           npm ci --prefix scripts
@@ -405,6 +415,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
 
+      # W1211：runner 的 apt 源指向 azure.archive.ubuntu.com，该域名 2026-11-11 连续
+      # 90+ 分钟 DNS 解析失败 ⇒ playwright --with-deps 装不上系统依赖 ⇒ 本 job 必红。
+      # 先回退镜像源（候选链实测验证）；修不好也不阻断（后续步骤自然失败·保持原语义）。
+      - name: Repair apt mirror (Azure DNS fallback·W1211)
+        run: python scripts/ci_repair_apt_mirror.py
       - name: Install scripts deps + Playwright (E2E 运行条件·W773)
         run: |
           npm ci --prefix scripts
@@ -434,6 +449,11 @@ jobs:
         run: npm --prefix xiyouji-agent-web ci
 
       # W808：E2E 需要 Playwright + chromium（仓内 playwright 装在 scripts/·与 tests/e2e 同一份）
+      # W1211：runner 的 apt 源指向 azure.archive.ubuntu.com，该域名 2026-11-11 连续
+      # 90+ 分钟 DNS 解析失败 ⇒ playwright --with-deps 装不上系统依赖 ⇒ 本 job 必红。
+      # 先回退镜像源（候选链实测验证）；修不好也不阻断（后续步骤自然失败·保持原语义）。
+      - name: Repair apt mirror (Azure DNS fallback·W1211)
+        run: python scripts/ci_repair_apt_mirror.py
       - name: Install scripts deps + Playwright chromium (E2E 运行条件·W808)
         run: |
           npm ci --prefix scripts

@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-11 23:50
+生成时间：2026-11-12 01:11
 
-共 **217** 件（门禁与校验 102 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 84 · 一次性（下划线前缀） 7）
+共 **218** 件（门禁与校验 102 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 85 · 一次性（下划线前缀） 7）
 
 ## 门禁与校验（102）
 
@@ -159,7 +159,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（84）
+## 工具（85）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -180,6 +180,7 @@
 | `cascade_idempotence.py` | cascade_idempotence.py — 级联**插入型面**的幂等写入原语（W1122）。 |
 | `cascade_lock.py` | cascade_lock.py — 级联运行锁（W991 建·W982 缓建①层的重启设计）。 |
 | `chart_render_probe.py` | 逐段渲染探针：定位图表色改动下 DOM 塌缩的真实成因（W1084）。 |
+| `ci_repair_apt_mirror.py` | ci_repair_apt_mirror.py — CI runner apt 源回退修复（W1211） |
 | `ci_sim.py` | ci_sim.py — CI 侧预演工具（W894·用户批准根修的配套工具） |
 | `color_delta_guard.py` | color_delta_guard.py — ΔL* 阈值机器判据（补偿失配可接受幅度·W1103） |
 | `containment_block_scan.py` | containment_block_scan.py — 包含块退化族静态扫描（CSS 特性 × fixed/sticky 规则交叉面） |

@@ -1,3 +1,55 @@
+## W1211 CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿（2026-11-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| .github/workflows/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| .github/workflows/ci-sim.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| .github/workflows/ci.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| .github/workflows/screenshot-review.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| AGENTS.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| CHANGELOG.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| CITATION.cff | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| HANDOVER.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| STRUCTURE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| archive/docs/AGENTS-ARCHIVE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| archive/docs/workflows-readme-history.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/00-导读/W批次编号对账表.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/00-导读/项目说明.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/11-方案报告/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/11-方案报告/计划方案/T101-任务计划执行与经验沉淀报告-2026-11-12.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| docs/agent/pitfalls.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| pitfalls.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| pytest.ini | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/ci_repair_apt_mirror.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/ci_sim.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/_cascade_files_W1211.txt | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/_w1211_spec.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/file-index.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/stats-changelog.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/stats-index.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/stats.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/output/tools-inventory.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| scripts/preflight_check.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/data/cross-time-danmaku.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/data/search.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/data/tag-cloud.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/dukou-engine.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/en/search.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| site/index.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| tests/unit/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| tests/unit/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| tests/unit/test_ci_repair_apt_mirror.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+| tests/unit/test_preflight_check.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
+
 ## W1210 占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修（2026-11-11）
 
 | 文件 | W | 说明 |

@@ -2,11 +2,11 @@
 
 
 > **📖 阅读契约（W707）**：首段型+查表型——接手时只读「零、当前阻塞」+「一、当前进度」+ 文件末尾「最后更新」链；「三、方法论沉淀」「四、待办」按需查；历史批次细节在 CHANGELOG（grep 查）勿在本文件找。
-> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [pitfalls.md](pitfalls.md)（320 条坑·六主题——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（七十一槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
+> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [pitfalls.md](pitfalls.md)（321 条坑·六主题——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（七十一槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
 > 轨标：教学讲解
 > 本文件用于跨 session 交接，记录当前进度、下一步可推进方向、方法论沉淀与待办事项。
 > 创建于 2026-07-25（v2.0.41 W068 后）
-> 最后更新：2026-11-11（W1210 占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修）·2026-11-11（W1209 仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填）·2026-11-11（W1208 C-8 守卫接入提交门禁批：第 70 槽挂载 + 注册表与槽数声明面同改）·（W1143 及更早批次详见 CHANGELOG.md）
+> 最后更新：2026-11-12（W1211 CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿）·2026-11-11（W1210 占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修）·2026-11-11（W1209 仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填）·（W1143 及更早批次详见 CHANGELOG.md）
 > 与 [CHANGELOG.md](CHANGELOG.md)（变更日志）/ [STRUCTURE.md](STRUCTURE.md)（目录结构）/ [README.md](README.md)（项目说明）/ [docs/00-导读/项目说明.md](docs/00-导读/项目说明.md)（项目状态）配套使用。
 > **维护契约（防乱写）**：本文件是项目进度中枢，只允许结构性编辑——① 保持「零 / 一 / 二 / 三」四段骨架不变；②「最后更新」行只写最新 1–3 批摘要（每批 ≤ 1 行），**禁止把历史批次堆进该行**（历史已归档 / 在 CHANGELOG）；③ 每批详细记录只写 CHANGELOG + 归档（历史段禁改）；④ 任何「当前 HEAD / 当前版本」表述必须与 `git rev-parse --short HEAD` 核对后更新；⑤ 本文件是状态快照，与 CHANGELOG（时间线）冲突时以 CHANGELOG 为准。
 > **历史归档**：v2.0.39-v2.2.49（W066-W280）段的详细进度记录已迁移至 [archive/docs/HANDOVER-ARCHIVE.md](archive/docs/HANDOVER-ARCHIVE.md)。本文件仅保留 v2.2.50+（W277）现役记录与全局概要。
@@ -21,10 +21,13 @@
 
 
 
-**原唯一长期阻塞「档 B 真实生成需 LLM_API_KEY」已于 W402 解除**（provider 化 Base URL·渡口问津生成式问答·LLM_API_KEY 配于本地 .env 已 gitignore）。**访问数据基线已接入（W403·localStorage 自建·仅本浏览器可见）**，**S2 分发完成（W404 精选 27 篇发布版 + 合集页 curated.html + W405 第二批 27 篇随笔发布版·44 篇随笔全发布）**，**GoatCounter 已接入并完成自托管修复（W425 注册接入 + W426 gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管·计数回传 goatcounter.com·线上实测 HTTP 200）**；**真实跨访客读者量仍待回传验证**（部署生效后观察后台数据）；有流量则继续分发（S4 学术投稿等），无流量则停止内容生产。另存在平行入口 `xiyouji-agent-web`（OpenAI-compatible 自研引擎·引擎三键配于服务端 .env·W680 起·`PROJECT_CWD`=仓库根（自动解析·W596）直接对话/检索/跑脚本），与 scripts/rag 档B 二选一或并行。**安全审计 P0-1/P1-1 已处置（W411）**：Web Agent 默认权限改 acceptEdits + 可选 AGENT_WEB_TOKEN 认证 + 权限/工作目录白名单 + 仅回环监听 127.0.0.1·MCP 4 工具路径白名单拒越界。**安全审计剩余项已处置（W412）**：P0-2 禁运行时覆盖引擎凭证/端点键（前端表单移除·仅服务端 .env·W680 起=LLM_* 三键）·P1-2 静态站 XSS 转义 6 页·P2 RAG 参数钳制/LLM 端点校验/SSE 超时与断开清理/DOMPurify 消毒/依赖锁定·P3 日志收敛/CORS 白名单/死代码/版本漂移；密钥吊销轮换需用户在 DeepSeek 控制台操作（P1-3 仅告知）。**W424 对抗性审查修正与全仓整理已处置**：A4 门禁校准 209（verify EXPECT_A4 201→209）·3D 页 defer 修复·EN 页 Ch. 腐蚀修复·security 依赖审计修复（只扫仓库 requirements.txt·high 103→0）·新Agent启动Prompt/workflows README/DESIGN 同步·全仓清理（截图 416MB + 过期报告 14 + 原始审计 JSON 4）·RAG 索引重建。**W424 SRI/CSP 已处置**：95 外部脚本标签 SRI（SHA-384）·159 页 meta CSP（680 内联脚本哈希·script-src-attr none）·EN 腐蚀第二波（""X"" 32 处 + 反引号 4 处）·6 页 sankey 漏引修复·复盘沉淀批次（腐蚀/插件引用门禁 + 方法论新增 + 内容同步）。**W417 文档健康治理已处置**：CHANGELOG/file-index/交接文档归档精简降达标·verify_delivery 新增 A1-A6 真实计数校验（611==611）·actions 升级消除 Node 20 deprecation·RAG 索引重建演练通过·bump_version 增强（--desc/W 范围锚点/页脚同步）·LICENSE 双协议边界补强·sitemap 补全 154 页。**W418 内容质量深化已处置**：全站死链巡检（site/en/ 29 broken 链接修复——EN 版存在指向同目录/无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注·docs/ 全量 4784 链接 0 broken）+ A1 逐回解读 23 回补 `> 导航：` 引用行（100 回导航全覆盖 100/100）。**W419 修复 A1 深度解读 SD 错位已处置**：22 篇 SD（SD038-052/056-062）编号≠真实回号归位（根因 W286 合并脚本只读源第一行·元数据在第三行→fallback 按编号放置）·按正文真实回号范围式复制 40-72 回全覆盖（原 63-72 十连回空白消除）·源文件 24 篇元数据/H1/正文内嵌/关联行修正·第 56 回补写 SD101。**W420 A1 内容质量深化已处置**：A1 深度解读 100/100 补全（第038/039回新增 SD102/SD103·source 切片 101→103）+ 56 回「对应原著/数据指标」结构化元数据补齐 + 99 回导航上一回/下一回错链修复（此前约 60 回指向非相邻回）+ 10 回 sd-crossref 关联块死链修复（66 处·docs/01 1715 链接 0 broken）。**W421 Screenshot Review 提速优化已处置**：screenshot-review.yml 新增改动范围判定（页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 全量）+ batch_screenshots.js --only-pages 定向截图 + Playwright 浏览器缓存 + checkout fetch-depth 0。**W422 全量治理已处置**：perf.yml 补 push 触发（LHCI 预算门禁首次在真实发布路径运行）·verify_delivery 新增 4 项门禁（A1 导航相邻性/docs/01 链接/sitemap 覆盖/site/data 回退模式）·文档健康归档（CHANGELOG 83 行·file-index 127 行·交接文档 556 行）·双索引规则校准（新文档执行 + 存量以 file-index 追溯）·README 命令修正 + JS 检查进 CI·认知总览计数校准（756/611/211/209）·Dependabot/mypy report-only/a11y 口径/artifact 瘦身/_DEBRIS 清理。**W459 V2 审查收尾已处置**：D2 回目跳转死链修复（方案错误约定 `第NNN回-回目摘要.md` → A1_DOC_MAP 内嵌 100 条真实文件名映射·路径深度 ../→../../）+ check_dynamic_links.py 动态链接门禁挂 verify_delivery（补 lint_links 静态盲区·首跑抓出 tag-cloud dashboard 死链 + EN source_doc 虚构路径并同批修复）+ V2 方案文档回写 + 首页精选补 geo-3d 入口；W456-W458 积压改动同批基线提交（5d02b00）。当前 HEAD = W1210（W1210 占位符哈希载体常驻门禁：第 71 槽挂载；详见 CHANGELOG）。
+**原唯一长期阻塞「档 B 真实生成需 LLM_API_KEY」已于 W402 解除**（provider 化 Base URL·渡口问津生成式问答·LLM_API_KEY 配于本地 .env 已 gitignore）。**访问数据基线已接入（W403·localStorage 自建·仅本浏览器可见）**，**S2 分发完成（W404 精选 27 篇发布版 + 合集页 curated.html + W405 第二批 27 篇随笔发布版·44 篇随笔全发布）**，**GoatCounter 已接入并完成自托管修复（W425 注册接入 + W426 gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管·计数回传 goatcounter.com·线上实测 HTTP 200）**；**真实跨访客读者量仍待回传验证**（部署生效后观察后台数据）；有流量则继续分发（S4 学术投稿等），无流量则停止内容生产。另存在平行入口 `xiyouji-agent-web`（OpenAI-compatible 自研引擎·引擎三键配于服务端 .env·W680 起·`PROJECT_CWD`=仓库根（自动解析·W596）直接对话/检索/跑脚本），与 scripts/rag 档B 二选一或并行。**安全审计 P0-1/P1-1 已处置（W411）**：Web Agent 默认权限改 acceptEdits + 可选 AGENT_WEB_TOKEN 认证 + 权限/工作目录白名单 + 仅回环监听 127.0.0.1·MCP 4 工具路径白名单拒越界。**安全审计剩余项已处置（W412）**：P0-2 禁运行时覆盖引擎凭证/端点键（前端表单移除·仅服务端 .env·W680 起=LLM_* 三键）·P1-2 静态站 XSS 转义 6 页·P2 RAG 参数钳制/LLM 端点校验/SSE 超时与断开清理/DOMPurify 消毒/依赖锁定·P3 日志收敛/CORS 白名单/死代码/版本漂移；密钥吊销轮换需用户在 DeepSeek 控制台操作（P1-3 仅告知）。**W424 对抗性审查修正与全仓整理已处置**：A4 门禁校准 209（verify EXPECT_A4 201→209）·3D 页 defer 修复·EN 页 Ch. 腐蚀修复·security 依赖审计修复（只扫仓库 requirements.txt·high 103→0）·新Agent启动Prompt/workflows README/DESIGN 同步·全仓清理（截图 416MB + 过期报告 14 + 原始审计 JSON 4）·RAG 索引重建。**W424 SRI/CSP 已处置**：95 外部脚本标签 SRI（SHA-384）·159 页 meta CSP（680 内联脚本哈希·script-src-attr none）·EN 腐蚀第二波（""X"" 32 处 + 反引号 4 处）·6 页 sankey 漏引修复·复盘沉淀批次（腐蚀/插件引用门禁 + 方法论新增 + 内容同步）。**W417 文档健康治理已处置**：CHANGELOG/file-index/交接文档归档精简降达标·verify_delivery 新增 A1-A6 真实计数校验（611==611）·actions 升级消除 Node 20 deprecation·RAG 索引重建演练通过·bump_version 增强（--desc/W 范围锚点/页脚同步）·LICENSE 双协议边界补强·sitemap 补全 154 页。**W418 内容质量深化已处置**：全站死链巡检（site/en/ 29 broken 链接修复——EN 版存在指向同目录/无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注·docs/ 全量 4784 链接 0 broken）+ A1 逐回解读 23 回补 `> 导航：` 引用行（100 回导航全覆盖 100/100）。**W419 修复 A1 深度解读 SD 错位已处置**：22 篇 SD（SD038-052/056-062）编号≠真实回号归位（根因 W286 合并脚本只读源第一行·元数据在第三行→fallback 按编号放置）·按正文真实回号范围式复制 40-72 回全覆盖（原 63-72 十连回空白消除）·源文件 24 篇元数据/H1/正文内嵌/关联行修正·第 56 回补写 SD101。**W420 A1 内容质量深化已处置**：A1 深度解读 100/100 补全（第038/039回新增 SD102/SD103·source 切片 101→103）+ 56 回「对应原著/数据指标」结构化元数据补齐 + 99 回导航上一回/下一回错链修复（此前约 60 回指向非相邻回）+ 10 回 sd-crossref 关联块死链修复（66 处·docs/01 1715 链接 0 broken）。**W421 Screenshot Review 提速优化已处置**：screenshot-review.yml 新增改动范围判定（页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 全量）+ batch_screenshots.js --only-pages 定向截图 + Playwright 浏览器缓存 + checkout fetch-depth 0。**W422 全量治理已处置**：perf.yml 补 push 触发（LHCI 预算门禁首次在真实发布路径运行）·verify_delivery 新增 4 项门禁（A1 导航相邻性/docs/01 链接/sitemap 覆盖/site/data 回退模式）·文档健康归档（CHANGELOG 83 行·file-index 127 行·交接文档 556 行）·双索引规则校准（新文档执行 + 存量以 file-index 追溯）·README 命令修正 + JS 检查进 CI·认知总览计数校准（756/611/211/209）·Dependabot/mypy report-only/a11y 口径/artifact 瘦身/_DEBRIS 清理。**W459 V2 审查收尾已处置**：D2 回目跳转死链修复（方案错误约定 `第NNN回-回目摘要.md` → A1_DOC_MAP 内嵌 100 条真实文件名映射·路径深度 ../→../../）+ check_dynamic_links.py 动态链接门禁挂 verify_delivery（补 lint_links 静态盲区·首跑抓出 tag-cloud dashboard 死链 + EN source_doc 虚构路径并同批修复）+ V2 方案文档回写 + 首页精选补 geo-3d 入口；W456-W458 积压改动同批基线提交（5d02b00）。当前 HEAD = W1211（W1211 CI 修复与机制补强：apt 源回退 + 第 71 槽接 ci_sim；详见 CHANGELOG）。
 
 **冻结适用范围（W793 立·单一权威表述）**：内容扩容维持 W626 归档裁决冻结（2026-09-30 起判归档；**2026-10-27 重判=中间态**——账号 10-01 重启、数据链恢复、30 日 UV=78，归档线已脱离但分发线 200 未达·W793 二选一维持；详见 docs/11-方案报告/调研与数据复盘/读者数据复盘.md W981 订正注）；已点名解冻项（WP-D2/E、B-5/B-6 第二步、B-7）均已全部收官，不再另议；工程/治理/门禁批不受限（W626 原文即「仅推进 P0/P1 工程批」）；新增内容扩容批须二选一：**用户点名**，或 **judge_gate 重判为「继续分发」**（30 日 UV≥30）。
-## 一、当前进度（W1210 占位符哈希载体门禁挂槽  第 71 槽；更早批次详见 CHANGELOG.md）
+## 一、当前进度（W1211 CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim；更早批次详见 CHANGELOG.md）
+- **W1211 CI 修复与机制补强批**：apt 源回退脚本 + 6 处 Playwright 安装点接线  ·  第 71 槽接 ci_sim（CI 侧不依赖 apt 的独立证据面）
+  - CI 9 红归因坐实（父提交基线失败 job 集合 + 报错逐字双对照 ⇒ 存量环境故障）· Backlog 对账硬拦清偿（8 行反填 + 批次标签判据根修）
+  - 坑表 E-227 入表 + 计数链 320→321 同步 9 处 · W1209 过时表述订正（origin/main 已指向改写后历史 · size-pack 187.40 MiB）
 - **W1210 占位符哈希载体常驻门禁批（第 71 槽）**：
   - 新建 scripts/check_placeholder_hash_carrier.py（C1 内联 <script> 正文 / C2 <script src> 属性 / C3 扫描面失效 fail-closed / C4 其余载体登记）·口径同源（import generate_csp·不复制正则）
   - verify_delivery 挂第 71 槽（_StrictGate·恒跑 _SCOPE_CORE）+ 注册表三处同改 + 槽数声明面同改（70→71）+ 文档规范 75→76 段
@@ -49,13 +52,6 @@
   - 新增 scripts/check_public_repo_secrets.py 可复跑扫描器 + 5 例可证伪单测
   - .gitignore 补强（*.env 变体 / 备份 / pgpass 一律不入库）
   - 坑表 E-224 + 计数链 317→318
-- **W1205 档 2 收尾四件**：
-  - A 面板归零：Code scanning open 3→0（判定链源码级确证 + 重跑未复活 + 可复跑脚本与 11 例单测）
-  - B 检索接入（O-4）+ 地址注入机制（C-8）·守卫自证 6/6 ·存量缺口 26 处/17 文件已量化待清
-  - C 容量实测（W937）：十条阈值逐条实算 · 3 条越线已登记处置归属
-  - D D-3 合规批：四级分级 + 强制鉴权基线 + 审计 11 字段 + 加密与 180 天留存
-  - 0003 合规列迁移（事实源生成 · 已应用真实 PG · 只追加授权逐权限实测成立）
-  - 实跑抓出并修掉 4 个静态看不见的问题 · 沉淀 E-222/E-223 · 计数链 315→317
 - **W1204 v2 档 2 D-2 第二子批（双写期集合级三重对账器 + 切读/停写流程 + 真实 PG 实跑）**:
   - reconcile-core.ts 判定核心与数据源无关（只有一份实现）+ reconcile-dualwrite.ts 两侧读适配与 CLI（PG 配置走环境变量·口令不入命令行）
   - 三重对账：行数 + 主键集合逐位 + 逐行内容摘要（W934 同语义·D-08）· 编排层改 async
@@ -161,7 +157,7 @@
   - 档 1 全量清零：同口径独立复算 = 0 处 / 0 页（裸字面量 1535→1509）
   - 判据口径：图表色批次的「视觉零变化」不成立（那是预期差异）
 
-> 历史概要（W1205 及更早）的详细记录见 [CHANGELOG.md](CHANGELOG.md)（W534 裁剪：里程碑概要按维护契约只留最近 5 版，删前逐批断言 CHANGELOG 有段·信息零丢失·W713 归位=指针须指窗口最老可见块。W1137 恢复：指针行于 W1130-W1136 间被滚动链吞失·本批按 W1130 原形态恢复）
+> 历史概要（W1206 及更早）的详细记录见 [CHANGELOG.md](CHANGELOG.md)（W534 裁剪：里程碑概要按维护契约只留最近 5 版，删前逐批断言 CHANGELOG 有段·信息零丢失·W713 归位=指针须指窗口最老可见块。W1137 恢复：指针行于 W1130-W1136 间被滚动链吞失·本批按 W1130 原形态恢复）
 
 
 
@@ -201,7 +197,7 @@
 - **提交前一次性就绪链（W1198·E-220·跨项目通用）**：定位走局部判据单跑·全量门禁只当验收器不当调试器；就绪链一次跑完且顺序不可换；一次 push 带齐全部内容禁中途追加 commit；外部工具判据先读源码读全；spec 只写一次按最终 git status 生成。依据：W1198 单批跑 3 轮 CI、4 次全量门禁（用户 2026-11-10 直接批评效率低浪费时间）。
 
 > **经验总入口（W755 指针化·W973 真指针化收口）**：现役坑位与门禁读
-> [pitfalls.md](pitfalls.md)（320 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（67 槽）；
+> [pitfalls.md](pitfalls.md)（321 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（71 槽）；
 > 诊断 SOP 读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)；
 > 本区历史叙事全文已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查）。
 ## 四、待办事项（短期）
@@ -213,3 +209,6 @@
 > **对账注记（W1142·Backlog 对账已执行·W1021 触发器 84 批点名）**：本轮对 [x] 两条拿 git/测试实况核验——① **W1095 残批收编 + 远端旧分支清理**：全部动作实证完成（E-196/E-197 在坑表 2 命中 · feat/w1095 本地+远端 0 残留 · .github/dependabot.yml 已删 · 49 条 merged 远端分支已清含 dev · 留 5 条未 merged 待专项裁决）⇒ **移出本段**（详情见 CHANGELOG W1137 段与台账 W1095 行「已收编」注记）；② 形态锚条目（W1048）实况复核 gates.md=616 ✓ 留存。**当前无未决待办**——新待办按铁律 18 三问与 W1021 触发器（≥25 批对账）维护。）
 
 > **对账注记（W1160·Backlog 对账已执行·W1021 触发器 100 批点名）**：本轮对留存 [x] 形态锚条目（W1048）+ 上批在途面拿实况核验——① W1048 形态锚：gates.md 槽位声明 63（AGENTS §4.2/gates.md/verify 实况三方 max 一致·第 41 槽 C2 实测绿）✓ 留存；② W1157-W1159 三批台账行 hash/状态全部实证回填（699f2940/171290e5/37ec36e1·`ledger_backfill` 行指纹在案）；③ 2026-11-06 审计报告派生面（W1153 安全批/W1154 治理快批/W1155 假绿 P1 21 条/W1156 运行时六项）实况全部落地（各批 CHANGELOG 验证栏+回归锁在案）；④ **登记滞后行 19 笔已全量反填**（`ledger_backfill --from-git`·本批）且 is_inflight 词表根修消除「已合并」族误报（回归锁 test_inflight_recognizes_merged_status）⇒ 触发器面归零。**当前无未决待办**——新待办按铁律 18 三问与 W1021 触发器（≥25 批对账）维护。
+> **对账注记（W1211·Backlog 对账已执行·W1021 触发器 151 批点名）**：本轮按 git 与测试实况核——① **登记滞后行 8 笔已清偿**：W1151/W1152/W1153/W1154/W1155/W1156/W1172 七行 git 有批次标签提交 ⇒ `ledger_backfill --from-git` 反填「已收官 + 首笔 hash」；**W1191 行原判不出**——根因是批次标签正则只认「括号内恰好是 w+数字」，而该批提交形态为 `fix(ci,w1191):`（scope 段逗号分隔）⇒ 本批根修 `wnum_commit_index`（scope 段逗号项各算批次标签 + 多标签各号各计·原实现只 search 一次与注释不符）并补 4 例回归锁（含「散文提及仍不计」负样本·防削弱 touches 交集拒绝）；② **形态锚条目（W1048）实况复核**：gates.md 槽位声明 71（AGENTS §4.2 / gates.md / verify 实况三方 max 一致·第 41 槽 C2 实测绿）✓ 留存；③ **检出并修两处计数链存量漂移**：本文件 §三 入口写「gates.md（**67 槽**）」而实况 71 槽（W1168→W1210 四批未同步）⇒ 已订正；AGENTS §4.3「完整 **224** 条」同样陈旧 ⇒ 已订正为 321 条；④ **W1209 遗留表述订正**：经 fetch 实证 `origin/main=dfff13ecf`（= W1209 提交·且是本地 HEAD 祖先）⇒ 远端 main **已指向改写后历史**，且 `git count-objects -vH` 实测 size-pack **187.40 MiB** + loose 1.50 MiB ⇒ 已低于 1 GB 线 ⇒ W1209 段「远端 main 尚未指向改写后历史」「体积尚未真正下降」两项陈述**均已过时**（订正记于本批 CHANGELOG W1211 段·不改写 W1209 历史段原文）；⑤ **未决待办见下方条目**（P-43-01 反填对「描述段 W 号形态」批次无效·本批不做·登记去向）。
+
+- [ ] **P-43-01 反填对「描述段 W 号形态」批次无效**（W1211 对账检出·待下批）：`chore(scope): W####` 这类提交形态（仓内 W1209/W1210 等）不被 `wnum_commit_index` 识别 ⇒ 台账 hash 列只能手填、登记滞后行无法自动反填。**本批不做**——放宽该形态会把「在途批的号被别批提交描述段开头提及」误判为已提交 ⇒ 削弱铁律 24 的并行 touches 交集拒绝。可选方向：① 台账 hash 列语义从「批次标签首笔」改为「该批任一提交」；② 以 CHANGELOG 立段作收官证据锚。**责任人**：下批（与下一在途批合并或单独回填批）·**验收**：W1209/W1210 两行 hash 列由脚本反填且 preflight 登记滞后告警归零。
