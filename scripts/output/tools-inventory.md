@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-11 00:46
+生成时间：2026-11-11 18:40
 
-共 **215** 件（门禁与校验 100 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 84 · 一次性（下划线前缀） 7）
+共 **216** 件（门禁与校验 101 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 84 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（100）
+## 门禁与校验（101）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -88,6 +88,7 @@
 | `check_pitfall_id_unique.py` | check_pitfall_id_unique.py —— 坑表编号唯一性判据（W1106 建）。 |
 | `check_plan_template.py` | check_plan_template.py — 第 48 门禁：计划方案模板符合性（增量口径·W860） |
 | `check_powershell_parse.py` | check_powershell_parse.py — PowerShell 脚本可解析性判据（W1110 新增第 55 槽）。 |
+| `check_public_repo_secrets.py` | check_public_repo_secrets.py — 公开仓敏感内容扫描（可复跑防线） |
 | `check_reader_integrity.py` | 第 62 门禁：site/reader 完整性（C1 占位词 / C2 GitHub 链接 / C3 单 h1 / C4 标题唯一）。 |
 | `check_registration_surface.py` | check_registration_surface.py — 登记面一致性自检闸（W1116 建） |
 | `check_repo_layout.py` | check_repo_layout.py — 第 52 门禁：仓库布局（W1011 挂槽·用户 2026-10-29「全都做」） |

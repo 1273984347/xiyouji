@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（110）
+## 文件（111）
 
 ### Python 脚本
 
@@ -33,6 +33,7 @@
 - `test_check_no_hardcoded_endpoint.py`
 - `test_check_page_admission.py`
 - `test_check_plan_template.py`
+- `test_check_public_repo_secrets.py`
 - `test_check_script_coverage.py`
 - `test_check_search_index_fresh.py`
 - `test_ci_sim.py`

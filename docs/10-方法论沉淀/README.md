@@ -92,7 +92,7 @@
 
 **现役分工**：**协议层＝仓库内公共载体**——[AGENTS.md](../../AGENTS.md) §4.3 工具链要点 / §6 铁律、[CLAUDE.md](../../CLAUDE.md) 速查层、[pitfalls.md](../../pitfalls.md) 坑位表与 [docs/agent/gates.md](../agent/gates.md) 门禁全量、HANDOVER「三、方法论沉淀」批次经验；**本目录＝深度篇案例层**（复现记录 + 修复策略 + 可复用判据）。
 
-历史路径（仅存档·不可达）：`C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 含 4 层防护）、`...\mem-wrap-up\SKILL.md`（v1.1.0 含 6 面状态矩阵）、`...\self-evolution\SKILL.md`（蒸馏版）。
+历史路径（仅存档·不可达）：`%USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 含 4 层防护）、`...\mem-wrap-up\SKILL.md`（v1.1.0 含 6 面状态矩阵）、`...\self-evolution\SKILL.md`（蒸馏版）。
 
 ---
 

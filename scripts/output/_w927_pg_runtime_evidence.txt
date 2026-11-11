@@ -11,7 +11,7 @@
 
 
 ========== ⓪ 环境自检 ==========
-  psql: /c/Users/12739/AppData/Local/pg16/pgsql/bin/psql
+  psql: %LOCALAPPDATA%/pg16/pgsql/bin/psql
   pg_basebackup: OK
   server=PostgreSQL 16.4, compiled by Visual C++ build 1940, 64-bit
 
@@ -96,9 +96,9 @@
 
 ========== ⑨ restore-drill.sh（恢复演练 · 关键证据） ==========
   [drill] 选定备份：/d/pg16backup/full_20261025T085230Z
-  [drill] 恢复备份到演练目录：/c/Users/12739/AppData/Local/pg16/drill/drill_20261025T085234Z
+  [drill] 恢复备份到演练目录：%LOCALAPPDATA%/pg16/drill/drill_20261025T085234Z
   [drill] 移除 standby.signal（避免进入持续恢复等待 WAL）
-  [drill] WAL 归档接入：C:/Users/12739/AppData/Local/pg16/archive
+  [drill] WAL 归档接入：%LOCALAPPDATA%/AppData/Local/pg16/archive
   [drill] restore_command = call "C:\\Users\\12739\\AppData\\Local\\pg16\\drill\\drill_20261025T085234Z\\restore_wal.bat" "%f" "%p"
   [drill] 演练实例配置写入完毕（端口 55432·回环监听·归档关闭·unix_socket=0·auto.conf 已重写）
   [drill] 启动演练实例
@@ -116,7 +116,7 @@
   [drill] 恢复演练通过：备份可恢复、关键表可读、行数可断言
   [drill] （对应 §9.4：PG 数据目录 · RTO ≤ 30 min · RPO ≤ 5 min · 每月演练一次）
   [drill] 停止演练实例
-  [drill] 已清理演练目录：/c/Users/12739/AppData/Local/pg16/drill/drill_20261025T085234Z
+  [drill] 已清理演练目录：%LOCALAPPDATA%/pg16/drill/drill_20261025T085234Z
 
 ========== ⑩ 演练后自检：源库未被演练影响 + 演练目录已清理 ==========
   源库 sessions=6 messages=50
