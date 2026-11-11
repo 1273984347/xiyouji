@@ -221,3 +221,12 @@ pip-wheel-metadata/
 .tra*/
 .zcode/
 .wri*erHelper/
+
+# W1206 公开面清理批：凭据 / 会话库 / 备份 / 审计 一律不入库
+# （本机装 PG 的凭据文件如 w934_pg.env 是真实凭据面；*.env 只匹配以 .env 结尾的文件名）
+*.env
+*.env.local
+*.pgpass
+.pgpass
+backups/
+*/backups/

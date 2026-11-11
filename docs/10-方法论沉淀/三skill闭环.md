@@ -53,7 +53,7 @@ self-evolution（沉淀端，末端）
 | mem-wrap-up | [E1铁律.md](E1铁律.md)（落地验证）+ [HANDOVER.md](../../HANDOVER.md)「三、方法论沉淀」（收尾登记） | v1.1.0 | 收尾端（中段） |
 | self-evolution | [pitfalls.md](../../pitfalls.md)（经验/坑位沉淀） | TRAE 蒸馏版 | 沉淀端（末端，反向喂回 DRL） |
 
-> **W754 校**：三者的原全局路径 `C:\Users\12739\.trae-cn\skills\{deep-review-loop,mem-wrap-up,self-evolution}\SKILL.md` 实测已失联（junction 指向不存在的 D:\1\open-source·仓内不共享），随 skills 治理整体退役（W562）；上表「位置」列改指仓内等价载体，「版本」列保留原值（历史事实不改）。现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md。
+> **W754 校**：三者的原全局路径 `%USERPROFILE%\.trae-cn\skills\{deep-review-loop,mem-wrap-up,self-evolution}\SKILL.md` 实测已失联（junction 指向不存在的 D:\1\open-source·仓内不共享），随 skills 治理整体退役（W562）；上表「位置」列改指仓内等价载体，「版本」列保留原值（历史事实不改）。现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md。
 
 ---
 
