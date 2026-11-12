@@ -1,3 +1,40 @@
+## W1218 审查整改批：LFS 判据 fail-closed + C5 前置 + 计数跟随（2026-11-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1218 | 版本面推进（version_surface） |
+| AGENTS.md | W1218 | 版本脚注滚动（cascade 写入） |
+| CHANGELOG.md | W1218 | 审查整改批 |
+| CITATION.cff | W1218 | 版本面推进（version_surface） |
+| HANDOVER.md | W1218 | 里程碑块（cascade 写入） |
+| README.md | W1218 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1218 | 版本面推进（version_surface） |
+| archive/docs/AGENTS-ARCHIVE.md | W1218 | AGENTS 脚注滚动归档（cascade 写入） |
+| archive/docs/workflows-readme-history.md | W1218 | workflows README 历史归档（version_surface） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1218 | 台账腾窗迁出最老行（archive 写入） |
+| docs/00-导读/W批次编号对账表.md | W1218 | W1218 认领行 + 台账腾窗 |
+| docs/00-导读/项目说明.md | W1218 | 版本面推进（version_surface） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1218 | stats 标记跟随（pytest_collected） |
+| pytest.ini | W1218 | pytest_collected 标记跟随（新增 2 例） |
+| scripts/check_folder_docs.py | W1218 | C5 前移到结构解析之前（抽 _c1_fails/_c5_precheck） |
+| scripts/check_lfs_text_purity.py | W1218 | cat-file 返回码检查（fail-closed exit 2） |
+| scripts/output/INDEX.md | W1218 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1218 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/_cascade_files_W1218.txt | W1218 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1218_spec.json | W1218 | 本批 spec |
+| scripts/output/file-index.md | W1218 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats-changelog.json | W1218 | stats 变更史（pytest_collected） |
+| scripts/output/stats-index.md | W1218 | stats 反向索引重渲 |
+| scripts/output/stats.json | W1218 | stats 实算刷新（pytest_collected 1635→1637） |
+| scripts/output/tools-inventory.md | W1218 | 工具盘点时间戳随动（cascade/gate） |
+| scripts/output/_vermilion_solid_cache.json | W1218 | 朱砂门禁增量缓存随动（第 49 槽实跑刷新） |
+| site/data/cross-time-danmaku.html | W1218 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1218 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1218 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1218 | 页脚批次链滚动（cascade 全档） |
+| tests/unit/test_folder_docs_gate.py | W1218 | 新增 C5 指针消息 1 例 |
+| tests/unit/test_lfs_text_purity.py | W1218 | 新增 cat-file fail-closed 1 例 |
+
 ## W1217 审查整改批：ci_sim 自跳过降级 + dry-run 零写盘 + 登记面校正（2026-11-13）
 
 | 文件 | W | 说明 |

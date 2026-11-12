@@ -1,3 +1,11 @@
+### W1218（2026-11-13）：审查整改批：LFS 判据 fail-closed + C5 前置 + 计数跟随
+
+**本批要点**（W1218 审查整改批）：
+
+> - **① LFS 判据 fail-closed（审查 minor）**：check_lfs_text_purity 的 _blob_sizes/_blob_batch 原以 check=False 调用且只读 stdout ⇒ cat-file 整体失败时返回空表 ⇒ 判据报「0 FAIL」并退出 0，与 docstring 的 fail-closed 承诺相反。修法：两处检查 returncode，非零抛 RuntimeError 由 run_gate 走 exit 2；补 1 例单测（monkeypatch 模拟 rc=128，断言两个 helper 均抛错）。
+> - **② C5 前移（审查 minor）**：check_folder_docs 的 C5 原在 C2 解析之后，而指针 INDEX.md 必解析失败并提前 return ⇒ CI 干净检出下 C5 永不执行，复发只报含糊的「结构不合生成器模板」。修法：C5 判定前移到解析之前，指针 INDEX 直接以 C5 报出并跳过结构对拍；抽 _c1_fails/_c5_precheck 过 guardrails 结构档；补 1 例单测（合成树 + 显式模拟在管目录）。
+> - **③ 计数跟随**：新增 2 例测试 ⇒ pytest_collected 1635→1637 随 stats 刷新；标记面 6 处自动跟随。
+> - **文件**：见 file-index。
 ### W1217（2026-11-13）：审查整改批：ci_sim 自跳过降级 + dry-run 零写盘 + 登记面校正
 
 **本批要点**（W1217 审查整改批）：
@@ -596,7 +604,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1217），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1218），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

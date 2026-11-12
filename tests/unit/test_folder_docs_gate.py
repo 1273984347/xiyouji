@@ -58,6 +58,18 @@ def test_fresh_tree_passes(synth_tree):
     assert cfd.check_dir(str(synth_tree)) == []
 
 
+def test_pointer_index_reports_lfs_message_not_c2(synth_tree, monkeypatch):
+    """W1214 审查修复锁：指针 INDEX.md 须以 C5「被 LFS 托管」报出，不被 C2 早退遮蔽。"""
+    ptr = ("version https://git-lfs.github.com/spec/v1\n"
+           "oid sha256:" + "0" * 64 + "\nsize 42\n")
+    (synth_tree / "INDEX.md").write_text(ptr, encoding="utf-8", newline="\n")
+    # 合成树在真实仓外 ⇒ _in_repo 为 False，C5 不会执行；此处显式模拟「在管目录」。
+    monkeypatch.setattr(cfd.gen, "_in_repo", lambda _p: True)
+    fails = cfd.check_dir(str(synth_tree), {"alpha/INDEX.md"})
+    assert any("被 LFS 托管" in f and "alpha/INDEX.md" in f for f in fails), fails
+    assert not any(f.startswith("C2 INDEX.md 结构") for f in fails), fails
+
+
 def test_added_file_detected(synth_tree):
     (synth_tree / "c.py").write_text("", encoding="utf-8")
     assert "C3" in _codes(cfd.check_dir(str(synth_tree)))
