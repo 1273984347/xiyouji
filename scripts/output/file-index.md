@@ -1,3 +1,38 @@
+## W1219 归档维护批：段目录组行补登 + 一级归档分卷 + 临时区归桶（2026-11-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1219 | 版本面推进（version_surface） |
+| AGENTS.md | W1219 | 版本脚注滚动（cascade 写入） |
+| CHANGELOG.md | W1219 | 归档维护批 |
+| CITATION.cff | W1219 | 版本面推进（version_surface） |
+| HANDOVER.md | W1219 | 里程碑块（cascade 写入） |
+| README.md | W1219 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1219 | 版本面推进（version_surface） |
+| archive/README.md | W1219 | 段目录组行补登（w1169/w1175/w1176） |
+| archive/docs/AGENTS-ARCHIVE.md | W1219 | AGENTS 脚注滚动归档（cascade 写入） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1219 | 一级归档分卷（迁出 W814-W874·回落 899KB） |
+| archive/docs/CHANGELOG-ARCHIVE-tier2-W814-W874.md | W1219 | 新建二级归档分卷（59 段·196KB） |
+| archive/docs/file-index-ARCHIVE.md | W1219 | 一级归档分卷（迁出 W980-W1023·回落 899KB） |
+| archive/docs/file-index-ARCHIVE-tier2.md | W1219 | 二级归档追加 48 段（189KB） |
+| archive/docs/INDEX.md | W1219 | 目录文档刷新（gen_folder_docs·新分卷入清单） |
+| archive/docs/README.md | W1219 | 目录文档刷新（gen_folder_docs·新分卷入清单） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1219 | 台账腾窗迁出最老行（archive 写入） |
+| archive/docs/workflows-readme-history.md | W1219 | workflows README 历史归档（version_surface） |
+| docs/00-导读/W批次编号对账表.md | W1219 | W1219 认领行 + 台账腾窗 |
+| docs/00-导读/项目说明.md | W1219 | 版本面推进（version_surface） |
+| scripts/output/stats.json | W1219 | stats 重跑生成时点刷新（值无变更） |
+| scripts/output/INDEX.md | W1219 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1219 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/_cascade_files_W1219.txt | W1219 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1219_spec.json | W1219 | 本批 spec |
+| scripts/output/file-index.md | W1219 | 本批 file-index 段（cascade 写入） |
+| scripts/output/tools-inventory.md | W1219 | 工具盘点时间戳随动（cascade） |
+| site/data/cross-time-danmaku.html | W1219 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1219 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1219 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1219 | 页脚批次链滚动（cascade 全档） |
+
 ## W1218 审查整改批：LFS 判据 fail-closed + C5 前置 + 计数跟随（2026-11-13）
 
 | 文件 | W | 说明 |

@@ -955,3 +955,5 @@
 | W1154 | 治理快批（两份审计报告落实②·基础设施报告 §7 P0 十项+P1 本地项）= 启动Prompt/文档规范/AGENTS 数字面三处（gov_doc_claims 4 FAIL→0）+ gates 49 槽页数与 16 槽退役标注 + pre-commit 钩子 origin/dev 动态上游+gitleaks WARN + 死指针三处 + gen_folder_docs _kind_exists 去重 + Makefile .PHONY + run_all B 类发现器根修（__init__ 误选·2 锁）+ agent_start 下一自由号 max(W)+1 + pytest.ini 去重指针化 + screenshot-scope 接线（W1126 声明≠落地根修·ci_wiring 锁）+ docs/11 登记 9 份+index_health 扩面双向对账 + checklist 修正 + pre-commit-config 休眠钩子清理 + check_orchestration_refs 新建（编排面引用存在性·双边界判据·ci 接线）+ 收官链 index 步接入 gen_sitemap | 1add2b99b | —（待回填） | **已收官**（1add2b99b·git 反填·共 1 笔·P-43-01） | 本会话（W1154） | — |
 - 2026-11-13（修剪迁入 1 行·W1155-W1155·号序切分）
 | W1155 | 假绿 P1 批（两份审计报告落实③·深度审计 P1 门禁判据修复·各配负样本） | 6d66773ef | —（待回填） | **已收官**（6d66773ef·git 反填·共 1 笔·P-43-01） | 本会话（W1155） | — |
+- 2026-11-13（修剪迁入 1 行·W1156-W1156·号序切分）
+| W1156 | 运行时数据批（两份审计报告落实④·深度审计 §3 运行时六项） | 84df96f49 | —（待回填） | **已收官**（84df96f49·git 反填·共 2 笔·P-43-01） | 本会话（W1156） | — |

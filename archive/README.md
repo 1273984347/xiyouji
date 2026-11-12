@@ -118,6 +118,9 @@ archive/
 | `archive/scripts/batches/w1100/`（5 件） | W1100 档 3 落层分类盘点（只读批·1412 处口径与工程次序定案）的一次性盘点脚本与取证件 | W1105 | 2026-11-02 | 存量段组行补登记（W1105 根修：段目录磁盘自动派生 ⇒ 新建段目录的必做动作只剩本行登记一处·此前硬编码枚举每批必滞后） |
 | `archive/hyperframes/`（22 件·整目录迁） | `hyperframes/`（视频化架构 compositions·W206 建·最冷顶层目录：output 空·无 workflow 引用） | W1157 | 2026-11-07 | 用户令全仓文件重构分类整理批——退役顶层目录归位（TOP_DIRS 同步摘除·4 门禁脚本接线更新） |
 | `archive/docs/workflows-readme-history.md` | `.github/workflows/README.md` 的 W450-W1156 CI 变更流水账单行（27KB） | W1157 | 2026-11-07 | 用户令全仓文件重构分类整理批——README 拆分：留使用说明·历史明细归档 |
+| `archive/scripts/batches/w1169/`（3 件） | W1169 图表触摸交互批（5 个数据页 tooltip 改 Pointer Events·2026-11-08 归档）的一次性施工脚本 | W1218 | 2026-11-13 | 段目录组行补登记（check_archive_health T2 体检「段目录缺组行」3 项清偿） |
+| `archive/scripts/batches/w1175/`（3 件） | W1175 方案 §7 核验订正批（逐条按仓内证据复算 v5 方案并清偿登记·2026-11-08 归档）的一次性核验脚本 | W1218 | 2026-11-13 | 段目录组行补登记（check_archive_health T2 体检「段目录缺组行」3 项清偿） |
+| `archive/scripts/batches/w1176/`（3 件） | W1176 术语表可视化页批（V2 首批·数据管道根修与孤儿数据落地·2026-11-08 归档）的一次性施工脚本 | W1218 | 2026-11-13 | 段目录组行补登记（check_archive_health T2 体检「段目录缺组行」3 项清偿） |
 
 ---
 | rchive/scripts/batches/w10xx/_w1016_pick.py（1 件·代收） | scripts/_w1016_pick.py（缺口 68 回角色谱选材一次性件） | W1017 代收 | 2026-10-29 | 并行会话遗留（随 7771c9d3 入库·自称 W1016 而本会话已占该号）；登记 W1017 后其降为历史批滞留，第 42 门禁 C4 判「被四面引用的转正候选超配额」即此件——按 W1013 代收先例入档，其产出 scripts/output/_w1016_pick.json 保留原处（对方数据不丢） |
