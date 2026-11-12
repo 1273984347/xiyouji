@@ -196,3 +196,28 @@ def test_pycompile_step_runs_after_add(monkeypatch):
     # 声明顺序同步断言（防 STEPS 与实现漂移）
     order = bc.step_order()
     assert order.index('pycompile') == order.index('add') + 1, order
+
+
+def test_dry_run_never_writes(monkeypatch):
+    """W1215 审查修复锁：--dry-run 不得向写盘步传 --apply（cascade/archive/rebuild 一律 dry）。
+
+    病根（审查实证）：链首 cascade --apply 位于 dry-run 早退之前 ⇒ 预检会实写本批段落，
+    却打印「未落盘」。
+    """
+    calls = []
+
+    def fake_run(args, cwd=None):
+        calls.append(' '.join(str(a) for a in args))
+        return 0, 'dry ok'
+
+    monkeypatch.setattr(bc, 'run', fake_run)
+    monkeypatch.setattr(bc, 'snapshot_index', lambda: ['x'])
+    monkeypatch.setattr(bc, 'precheck_ledger', lambda *a, **k: (True, []))
+    monkeypatch.setattr(bc, 'selfref_precheck', lambda: (True, ['通过']))
+
+    rc = bc.main(['--batch', 'W9999', '--paths', 'README.md', '--dry-run'])
+    assert rc == 0
+    assert calls, calls
+    offenders = [c for c in calls if '--apply' in c]
+    assert not offenders, offenders
+    assert any('--dry-run' in c for c in calls), calls

@@ -63,6 +63,27 @@ def test_ci_sim_should_run_clean_tree_runs():
     assert ok
 
 
+def test_plan_run_clean_tree_is_full_without_skip_note():
+    steps, partial, note = ppg.plan_run({}, tree_dirty=False)
+    assert steps == ["guardrails", "verify", "pytest", "ci_sim"]
+    assert partial is False and note == ""
+
+
+def test_plan_run_dirty_tree_downranks_verdict():
+    """W1215 审查修复锁：ci_sim 自跳过必须降级判据文案，不得再印「真全量·推送判据」。"""
+    steps, partial, note = ppg.plan_run({}, tree_dirty=True)
+    assert "ci_sim" in steps and partial is True and "未提交" in note
+    code, verdict, _ = ppg.aggregate(
+        [("verify", "PASS", 1.0, ""), ("ci_sim", "SKIP", 0.0, note)], partial=partial)
+    assert code == 0
+    assert "非推送判据" in verdict and "真全量" not in verdict
+
+
+def test_plan_run_skip_flag_also_downranks():
+    _steps, partial, note = ppg.plan_run({"ci_sim": True}, tree_dirty=False)
+    assert partial is True and note == ""
+
+
 def test_infra_missing_fail_closed(tmp_path):
     missing = ppg._infra_missing(["verify", "ci_sim", "guardrails"], root=str(tmp_path))
     assert len(missing) == 3

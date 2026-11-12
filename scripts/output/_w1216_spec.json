@@ -33,7 +33,6 @@
     "| scripts/output/stats-index.md | W1216 | stats 反向索引重渲 |",
     "| scripts/output/stats.json | W1216 | stats 实算刷新（report_docs +1） |",
     "| scripts/output/tools-inventory.md | W1216 | 工具盘点时间戳随动（cascade） |",
-    "| site/sitemap.xml | W1216 | sitemap 重渲（gen_sitemap·index 步） |",
     "| STRUCTURE.md | W1216 | 版本面推进（version_surface） |",
     "| docs/00-导读/项目说明.md | W1216 | 版本面推进（version_surface） |",
     "| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1216 | sweep 存量面标记跟随（report_docs·自动） |",

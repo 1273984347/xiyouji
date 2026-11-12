@@ -1,3 +1,11 @@
+### W1217（2026-11-13）：审查整改批：ci_sim 自跳过降级 + dry-run 零写盘 + 登记面校正
+
+**本批要点**（W1217 审查整改批）：
+
+> - **① 推送判据自跳过降级（pre_push_gate·审查 major）**：脏度检查原在 ci_sim 分支内（三步之后）⇒ 全量 pytest 重写跟踪态生成物（test_w1167_nav_badge 触发 w1167_nav_inject --dry-run 写 _w1167_nav_plan.json）会把「提交后推送前」的干净树变脏 ⇒ ci_sim 空转；而 aggregate 的 partial 只取 --skip-* ⇒ 汇总仍印「真全量·推送判据」。修法：新增 plan_run 纯函数，脏度在四步开始前快照、自跳过计入 partial；补 3 例单测锁住「自跳过 ⇒ 非推送判据」。
+> - **② --dry-run 零写盘（batch_closeout·审查 minor）**：链首 cascade --apply 位于 dry-run 早退之前 ⇒ 预检会实写本批段却打印「未落盘」。修法：_run_cascade/_run_archive/_run_rebuild 增加 dry 参数（cascade/rebuild 不传 --apply、archive 与台账迁行传 --dry-run），main 透传 a.dry_run；补 1 例单测断言 dry-run 调用不含 --apply，并实测 dry-run 前后 git status 一致。
+> - **③ 登记面与判据校正（前轮审查遗留）**：W1216 file-index 段按提交重渲（33→37 行，与本批提交文件集全等，删除未落地的 sitemap 行）；_w1216_spec 同步删行；check_gov_doc_claims 的 N3/N4 改为剥 stats 标记后匹配（带标记自测 1 例）；两处测试槽号派生改无界正则；stats pytest_collected 1631→1635 随新增 4 例刷新。
+> - **文件**：见 file-index。
 ### W1216（2026-11-12）：收尾清偿批：台账 hash 回填 + 「71 槽」marker 化 + 复盘弧线交付
 
 **本批要点**（W1216 收尾清偿批）：
@@ -588,7 +596,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1216），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1217），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

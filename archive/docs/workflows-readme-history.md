@@ -61,3 +61,4 @@
 + W1214 LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发·无 workflow 结构改动）。
 + W1215 一命令真全量与计数链生成器化批：pre_push_gate + 收官链接步 + 计数链 markers·无 workflow 结构改动）。
 + W1216 收尾清偿批：台账 hash 回填 + 71 槽 marker 化 + 复盘弧线交付·无 workflow 结构改动）。
++ W1217 审查整改批：ci_sim 自跳过降级 + dry-run 零写盘 + 登记面校正·无 workflow 结构改动）。

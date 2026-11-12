@@ -32,6 +32,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOARD_MAP = [(1, "A1", 100), (2, "A3", 215), (3, "A4", 209),
              (4, "A5", 34), (5, "A6", 13), (6, "A2", 44)]
 
+# 计数位已接 <!--stats:KEY--> 标记（stats sweep 自动跟随）——散文断言须在**剥标记后的文本**上匹配：
+# 否则「71<!--stats:gate_count--> 槽」被标记隔开数字与量词 ⇒ 断言误报「形态缺失」而非比对数值
+RE_STAT_MARK = re.compile(r"<!--stats:[a-z_0-9]+-->")
+
+
+def _strip_stat_markers(text):
+    """剥掉 <!--stats:KEY--> 标记，得到与渲染后一致的散文文本。"""
+    return RE_STAT_MARK.sub("", text)
+
 
 def _read(rel):
     return open(os.path.join(ROOT, rel), encoding="utf-8", newline="").read()
@@ -118,7 +127,7 @@ def check():
 
     # N3 槽数
     slots = _gates_slot_count()
-    t = _read("AGENTS.md")
+    t = _strip_stat_markers(_read("AGENTS.md"))
     m = re.search(r"内含 (\d+) 槽，五组", t)
     if not m:
         fails.append("N3: AGENTS §4.2「内含 N 槽」断言形态缺失")
@@ -154,7 +163,7 @@ def check():
 
 
 def _self_test() -> int:
-    """自测：注入漂移必须被报出（N1 形态·合成数据）。"""
+    """自测：注入漂移必须被报出（N1/N3 形态·合成数据）。"""
     fails = []
     # N1 判据形态：正确行放行 / 错行（W967 实证错位形态）必报
     good = "`docs/02-人物深度分析/`（A3 人物谱系 215 篇）"
@@ -164,11 +173,16 @@ def _self_test() -> int:
         fails.append("正确行未放行")
     if re.search(pat, bad):
         fails.append("错位行（W967 实证形态）未被判漂移——判据无效")
+    # N3 判据形态：带 stats 标记的散文句须剥标记后命中（标记一插不致误报「形态缺失」）
+    marked = "内含 71<!--stats:gate_count--> 槽，五组"
+    m = re.search(r"内含 (\d+) 槽，五组", _strip_stat_markers(marked))
+    if not (m and m.group(1) == "71"):
+        fails.append("带标记的 N3 句未命中——剥标记判据无效")
     print()
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：N1 判据对 W967 实证错位形态必红（判据可证伪）")
+    print("自测通过：N1 错位形态必红 + N3 带标记句可命中（判据可证伪）")
     return 0
 
 
