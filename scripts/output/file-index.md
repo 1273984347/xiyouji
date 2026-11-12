@@ -1,3 +1,82 @@
+## W1218 审查整改批：LFS 判据 fail-closed + C5 前置 + 计数跟随（2026-11-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1218 | 版本面推进（version_surface） |
+| AGENTS.md | W1218 | 版本脚注滚动（cascade 写入） |
+| CHANGELOG.md | W1218 | 审查整改批 |
+| CITATION.cff | W1218 | 版本面推进（version_surface） |
+| HANDOVER.md | W1218 | 里程碑块（cascade 写入） |
+| README.md | W1218 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1218 | 版本面推进（version_surface） |
+| archive/docs/AGENTS-ARCHIVE.md | W1218 | AGENTS 脚注滚动归档（cascade 写入） |
+| archive/docs/workflows-readme-history.md | W1218 | workflows README 历史归档（version_surface） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1218 | 台账腾窗迁出最老行（archive 写入） |
+| docs/00-导读/W批次编号对账表.md | W1218 | W1218 认领行 + 台账腾窗 |
+| docs/00-导读/项目说明.md | W1218 | 版本面推进（version_surface） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1218 | stats 标记跟随（pytest_collected） |
+| pytest.ini | W1218 | pytest_collected 标记跟随（新增 2 例） |
+| scripts/check_folder_docs.py | W1218 | C5 前移到结构解析之前（抽 _c1_fails/_c5_precheck） |
+| scripts/check_lfs_text_purity.py | W1218 | cat-file 返回码检查（fail-closed exit 2） |
+| scripts/output/INDEX.md | W1218 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1218 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/_cascade_files_W1218.txt | W1218 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1218_spec.json | W1218 | 本批 spec |
+| scripts/output/file-index.md | W1218 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats-changelog.json | W1218 | stats 变更史（pytest_collected） |
+| scripts/output/stats-index.md | W1218 | stats 反向索引重渲 |
+| scripts/output/stats.json | W1218 | stats 实算刷新（pytest_collected 1635→1637） |
+| scripts/output/tools-inventory.md | W1218 | 工具盘点时间戳随动（cascade/gate） |
+| scripts/output/_vermilion_solid_cache.json | W1218 | 朱砂门禁增量缓存随动（第 49 槽实跑刷新） |
+| site/data/cross-time-danmaku.html | W1218 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1218 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1218 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1218 | 页脚批次链滚动（cascade 全档） |
+| tests/unit/test_folder_docs_gate.py | W1218 | 新增 C5 指针消息 1 例 |
+| tests/unit/test_lfs_text_purity.py | W1218 | 新增 cat-file fail-closed 1 例 |
+
+## W1217 审查整改批：ci_sim 自跳过降级 + dry-run 零写盘 + 登记面校正（2026-11-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1217 | 版本面推进（version_surface） |
+| AGENTS.md | W1217 | 版本脚注滚动（cascade 写入） |
+| CHANGELOG.md | W1217 | 审查整改批 |
+| CITATION.cff | W1217 | 版本面推进（version_surface） |
+| HANDOVER.md | W1217 | 里程碑块（cascade 写入） |
+| README.md | W1217 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1217 | 版本面推进（version_surface） |
+| archive/docs/AGENTS-ARCHIVE.md | W1217 | AGENTS 脚注滚动归档（cascade 写入） |
+| archive/docs/workflows-readme-history.md | W1217 | workflows README 历史归档（version_surface） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1217 | 台账腾窗迁出最老行（archive 写入） |
+| docs/00-导读/W批次编号对账表.md | W1217 | W1217 认领行 + 台账腾窗 |
+| docs/00-导读/项目说明.md | W1217 | 版本面推进（version_surface） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1217 | stats 标记跟随（pytest_collected） |
+| pytest.ini | W1217 | pytest_collected 标记跟随（新增 4 例） |
+| scripts/batch_closeout.py | W1217 | dry-run 零写盘：cascade/archive/rebuild 增 dry 参数 |
+| scripts/check_gov_doc_claims.py | W1217 | N3/N4 剥 stats 标记后匹配 + 自测补带标记句 |
+| scripts/pre_push_gate.py | W1217 | 脏度前置快照 + ci_sim 自跳过计入判据降级 |
+| scripts/output/INDEX.md | W1217 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1217 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/_cascade_files_W1217.txt | W1217 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1216_spec.json | W1217 | 删未落地 sitemap 行（登记面校正） |
+| scripts/output/_w1217_spec.json | W1217 | 本批 spec |
+| scripts/output/file-index.md | W1217 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats-changelog.json | W1217 | stats 变更史（pytest_collected） |
+| scripts/output/stats-index.md | W1217 | stats 反向索引重渲 |
+| scripts/output/stats.json | W1217 | stats 实算刷新（pytest_collected 1631→1635） |
+| scripts/output/tools-inventory.md | W1217 | 工具盘点时间戳随动（cascade/gate） |
+| scripts/output/_vermilion_solid_cache.json | W1217 | 朱砂门禁增量缓存随动（第 49 槽实跑刷新） |
+| site/data/cross-time-danmaku.html | W1217 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1217 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1217 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1217 | 页脚批次链滚动（cascade 全档） |
+| site/sitemap.xml | W1217 | sitemap 重渲（gen_sitemap） |
+| tests/unit/test_check_placeholder_hash_carrier.py | W1217 | 槽总数派生改无界正则 |
+| tests/unit/test_pre_push_gate.py | W1217 | 新增 plan_run 3 例（自跳过降级锁） |
+| tests/unit/test_w1102_batch_closeout.py | W1217 | 新增 dry-run 零写盘 1 例 |
+| tests/unit/test_w1141_gate_mount.py | W1217 | 槽号统计改无界正则 |
+
 ## W1216 收尾清偿批：台账 hash 回填 + 「71 槽」marker 化 + 复盘弧线交付（2026-11-12）
 
 | 文件 | W | 说明 |
@@ -14,6 +93,8 @@
 | docs/11-方案报告/README.md | W1216 | 复盘弧线篇登记（19 件/新行/总览纠偏） |
 | docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-12.md | W1216 | 新建：复盘弧线篇（W1212-W1215 弧线·三绿不同源主题） |
 | docs/agent/gates.md | W1216 | 标题 71 槽 marker 化 |
+| scripts/batch_closeout.py | W1216 | index 步内序根修（docs_index 在前·搜索内嵌派生字段陈旧族） |
+| scripts/output/_vermilion_solid_cache.json | W1216 | 朱砂门禁增量缓存随动（惯例入库件） |
 | docs/INDEX.md | W1216 | 文档索引重渲（+1 篇·docs_index） |
 | scripts/output/_cascade_files_W1216.txt | W1216 | 级联落盘清单（cascade 生成） |
 | scripts/output/_w1216_spec.json | W1216 | 本批 spec |
@@ -24,7 +105,6 @@
 | scripts/output/stats-index.md | W1216 | stats 反向索引重渲 |
 | scripts/output/stats.json | W1216 | stats 实算刷新（report_docs +1） |
 | scripts/output/tools-inventory.md | W1216 | 工具盘点时间戳随动（cascade） |
-| site/sitemap.xml | W1216 | sitemap 重渲（gen_sitemap·index 步） |
 | STRUCTURE.md | W1216 | 版本面推进（version_surface） |
 | docs/00-导读/项目说明.md | W1216 | 版本面推进（version_surface） |
 | docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1216 | sweep 存量面标记跟随（report_docs·自动） |
@@ -35,6 +115,9 @@
 | site/en/search.html | W1216 | 搜索索引重渲（自动） |
 | site/dukou-engine.html | W1216 | 页脚四面批次版本随动（cascade 全档） |
 | site/index.html | W1216 | 页脚四面批次版本随动 + C5b 标记面 |
+| tests/unit/test_check_placeholder_hash_carrier.py | W1216 | 声明面断言剥标记容错（gate_count marker） |
+| tests/unit/test_w1102_batch_closeout.py | W1216 | 行为锁随 index 内序对调更新（docs_index 在前） |
+| tests/unit/test_w1141_gate_mount.py | W1216 | 槽数断言剥标记容错（gate_count marker） |
 
 ## W1215 一命令真全量与计数链生成器化批：pre_push_gate + 收官链接步 + 计数链 markers（2026-11-12）
 

@@ -44,7 +44,7 @@ STEPS = [
 ]
 
 
-def _run_cascade(spec_path, batch):
+def _run_cascade(spec_path, batch, dry=False):
     """cascade 步（W1215）：batch_cascade --apply --spec 接进收官链**链首**。
 
     病根（W1214 C7 实证）：HANDOVER 里程碑块插块绕过 batch_cascade ⇒ 滚动淘汰不触发
@@ -55,12 +55,15 @@ def _run_cascade(spec_path, batch):
 
     位置在 archive/rebuild 之前：建段归 cascade（rebuild 的 cl_has 判定才有着落）。
     无 spec ⇒ 跳过（非阻断·同 rebuild 语义）。
+    **dry=True 时不传 --apply**（batch_cascade 默认只算不写）——否则 --dry-run 会实写段。
     """
     if not spec_path or not os.path.isfile(os.path.join(ROOT, spec_path)):
         print('[cascade] 无 spec 路径或文件不存在 ⇒ 跳过（非阻断）')
         return True
-    rc, out = run([sys.executable, os.path.join('scripts', 'batch_cascade.py'),
-                   '--apply', '--spec', spec_path])
+    cmd = [sys.executable, os.path.join('scripts', 'batch_cascade.py'), '--spec', spec_path]
+    if not dry:
+        cmd.append('--apply')
+    rc, out = run(cmd)
     sys.stdout.write(out)
     if rc != 0:
         return False
@@ -89,7 +92,7 @@ def _run_gate(skip=False):
     return True
 
 
-def _run_rebuild(spec_path, batch):
+def _run_rebuild(spec_path, batch, dry=False):
     """幂等段重建步（W1124·T74 R-A）：把 scripts/rebuild_section.py 接进收官链主链。
 
     病根：rebuild_section.py 是**独立入口**（W1120 建）⇒ 段内容与 spec 不一致时只能人工
@@ -122,15 +125,18 @@ def _run_rebuild(spec_path, batch):
         print('[rebuild] 本批段两面皆未立段 ⇒ 跳过（建段归 batch_cascade / backfill）')
         return True
     import sys
-    rc, out = run([sys.executable, os.path.join('scripts', 'rebuild_section.py'),
-                   '--batch', str(batch), '--spec', spec_path, '--apply'])
+    cmd = [sys.executable, os.path.join('scripts', 'rebuild_section.py'),
+           '--batch', str(batch), '--spec', spec_path]
+    if not dry:  # dry=True ⇒ rebuild_section 默认 dry-run（只报不写）
+        cmd.append('--apply')
+    rc, out = run(cmd)
     sys.stdout.write(out)
     if rc != 0:
         return False
     return True
 
 
-def _run_archive():
+def _run_archive(dry=False):
     """腾窗步（W1119）：**必须排在 precheck 之前**。
 
     W1117 实证：precheck 是 fail-closed 中止（台账数据行 > 窗口即 return 1）⇒
@@ -141,11 +147,13 @@ def _run_archive():
        循环到达标；两面迁到**同一 W 号下界**（迁完断言·W1119）。
     ② 台账行窗口：正本数据行 > LEDGER_WINDOW 时迁出最老行（--keep = 窗口-1）。
     两步皆幂等：未超阈值时工具自身报 SKIP 且 rc=0 ⇒ 零动作。
+    **dry=True 时两步都改传 --dry-run**——否则 --dry-run 预检会实迁段/迁行。
     """
     import sys
+    mode = '--dry-run' if dry else '--apply'
     rc, out = run([sys.executable, os.path.join('scripts', 'archive_segments.py'),
                    '--target', 'both', '--max-bytes', str(MAX_DOC_BYTES),
-                   '--chunk', str(ARCHIVE_CHUNK), '--apply'])
+                   '--chunk', str(ARCHIVE_CHUNK), mode])
     sys.stdout.write(out)
     if rc != 0:
         return False
@@ -167,7 +175,7 @@ def _run_archive():
         return True
     if rows > LEDGER_WINDOW:
         rc2, out2 = run([sys.executable, os.path.join('scripts', 'archive_ledger_rows.py'),
-                         '--keep', str(LEDGER_WINDOW - 1), '--apply'])
+                         '--keep', str(LEDGER_WINDOW - 1), '--dry-run' if dry else '--apply'])
         sys.stdout.write(out2)
         if rc2 != 0:
             return False
@@ -633,16 +641,16 @@ def main(argv=None):
         import json
         batch = json.loads(open(a.spec, encoding='utf-8').read()).get('batch')
     led = os.path.join(ROOT, 'docs', '00-导读', 'W批次编号对账表.md')
-    if not _run_cascade(a.spec, batch):
+    if not _run_cascade(a.spec, batch, dry=a.dry_run):
         return 1
-    if not _run_archive():
+    if not _run_archive(dry=a.dry_run):
         return 1
-    if not _run_rebuild(a.spec, batch):
+    if not _run_rebuild(a.spec, batch, dry=a.dry_run):
         return 1
     if not _run_prechecks(led):
         return 1
     if a.dry_run:
-        print('[dry-run] 预检通过，未落盘')
+        print('[dry-run] 预检通过，未落盘（cascade/archive/rebuild 均以 dry 模式运行）')
         return 0
     if not _add_paths(collect_paths(a.spec, a.paths)):
         return 1

@@ -197,6 +197,13 @@ def _fresh_idx(d1: str) -> str:
         return f.read()
 
 
+def _lfs_ptr_of(rel: str, name: str, lfs_ptr_paths: set[str] | None) -> bool:
+    """该目录文档是否在「索引 LFS 指针」集合里（空集/None ⇒ False）。"""
+    if not lfs_ptr_paths:
+        return False
+    return ((rel + "/" + name) if rel else name) in lfs_ptr_paths
+
+
 def _c5_lfs_ptr_fails(rel: str, lfs_ptr_paths: set[str] | None) -> list[str]:
     """C5（W1214）：目录文档在**索引里**是 LFS 指针 ⇒ CI 无 LFS 真身时不可读。
 
@@ -209,10 +216,34 @@ def _c5_lfs_ptr_fails(rel: str, lfs_ptr_paths: set[str] | None) -> list[str]:
         return []
     fails: list[str] = []
     for _name in ("INDEX.md", "README.md"):
-        _p = (rel + "/" + _name) if rel else _name
-        if _p in lfs_ptr_paths:
+        if _lfs_ptr_of(rel, _name, lfs_ptr_paths):
+            _p = (rel + "/" + _name) if rel else _name
             fails.append("C5 目录文档被 LFS 托管（CI 无 LFS 真身时不可读）：%s" % _p)
     return fails
+
+
+def _c1_fails(rel: str, label: str, idx_path: str, rdm_path: str) -> tuple[list[str], bool]:
+    """C1 存在性（INDEX.md 必在；README.md 走 showcase 豁免）→ (FAIL 行, INDEX 是否缺失)。"""
+    fails: list[str] = []
+    idx_missing = not os.path.isfile(idx_path)
+    if idx_missing:
+        fails.append("C1 缺 INDEX.md：%s" % label)
+    # W889：.github/ 的目录导读改存 README-internal.md（避免抢占 GitHub 仓库主页展示位）
+    # ——豁免判定与生成器共用 gen.showcase_guarded（单一事实源·两处口径同源）
+    if not os.path.isfile(rdm_path) and not gen.showcase_guarded(rel, "README.md"):
+        fails.append("C1 缺 README.md：%s" % label)
+    return fails, idx_missing
+
+
+def _c5_precheck(rel: str, lfs_ptr_paths: set[str] | None, tracked: bool) -> tuple[list[str], bool]:
+    """C5 前置判定（W1214）→ (FAIL 行, INDEX 是否 LFS 指针)。
+
+    指针 INDEX.md 的内容不可解析 ⇒ 结构对拍无意义。必须在 C2 解析**之前**判定：否则
+    CI 干净检出恒走 C2 早退分支，C5 永不执行（W1214 审查修正）。
+    """
+    if not tracked:
+        return [], False
+    return _c5_lfs_ptr_fails(rel, lfs_ptr_paths), _lfs_ptr_of(rel, "INDEX.md", lfs_ptr_paths)
 
 
 def check_dir(abs_dir: str, lfs_ptr_paths: set[str] | None = None) -> list[str]:
@@ -224,6 +255,7 @@ def check_dir(abs_dir: str, lfs_ptr_paths: set[str] | None = None) -> list[str]:
     rel = gen.rel_of(abs_dir)
     label = rel or "<root>"
     fails: list[str] = []
+    tracked = _USE_TRACKED and gen._in_repo(abs_dir)
     idx_path = os.path.join(abs_dir, "INDEX.md")
     rdm_path = os.path.join(abs_dir, "README.md")
     # W1091 语义豁免：该目录的 INDEX.md 属另一命名空间（docs/ 根 = docs_index.py 的
@@ -232,22 +264,18 @@ def check_dir(abs_dir: str, lfs_ptr_paths: set[str] | None = None) -> list[str]:
         if not os.path.isfile(rdm_path) and not gen.showcase_guarded(rel, "README.md"):
             fails.append("C1 缺 README.md：%s" % label)
         return fails
-    if not os.path.isfile(idx_path):
-        fails.append("C1 缺 INDEX.md：%s" % label)
-    if not os.path.isfile(rdm_path) and not gen.showcase_guarded(rel, "README.md"):
-        # W889：.github/ 的目录导读改存 README-internal.md（避免抢占 GitHub 仓库主页展示位）
-        # ——豁免判定与生成器共用 gen.showcase_guarded（单一事实源·两处口径同源）
-        fails.append("C1 缺 README.md：%s" % label)
-    if not os.path.isfile(idx_path):
-        return fails  # 清单不在，对拍无意义
+    c5_fails, idx_ptr = _c5_precheck(rel, lfs_ptr_paths, tracked)
+    fails.extend(c5_fails)
+    c1_fails, idx_missing = _c1_fails(rel, label, idx_path, rdm_path)
+    fails.extend(c1_fails)
+    if idx_missing or idx_ptr:
+        return fails  # 清单不在或内容不可读 ⇒ 结构对拍无意义（指针已由 C5 精确报出）
     with open(idx_path, encoding="utf-8") as f:
         parsed = parse_index(f.read())
     if parsed is None:
         fails.append("C2 INDEX.md 结构不合生成器模板（疑手改/旧版/截断）：%s" % label)
         return fails
-    if _USE_TRACKED and gen._in_repo(abs_dir):
-        # C5（W1214）：目录文档在索引里是 LFS 指针 ⇒ CI 无 LFS 真身时不可读（E-228·判据在 _c5_lfs_ptr_fails）
-        fails.extend(_c5_lfs_ptr_fails(rel, lfs_ptr_paths))
+    if tracked:
         # 子目录口径与生成器同源：EXCLUDE_SUBSTR / EXCLUDE_TOP 命中的目录不进清单
         # （例：tmpe 整目录被排除，但其 README.md 与 policy.yml 仍入库·W738 策略件）
         want_sub = {n for n in tf.tracked_subdirs(rel) if not gen._is_excluded(os.path.join(abs_dir, n))}

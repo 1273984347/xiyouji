@@ -16,7 +16,8 @@ pytest（体积窗 C7 / HANDOVER 概要块等判据只在 pytest 面）、不含
   3. pytest      python -m pytest tests -q（体积窗 C7 / HANDOVER 概要块等判据载体）
   4. ci_sim      python scripts/ci_sim.py（CI 侧预演·clean worktree 门禁；
                  **工作树有未提交改动时自动 SKIP**——预演目标 HEAD 不含未提交批，
-                 跑了只会给旧提交的假安心 ⇒ 提交后、推送前这一步才有意义）
+                 跑了只会给旧提交的假安心 ⇒ 提交后、推送前这一步才有意义；
+                 脏度在**四步开始前**快照——步骤本身会重写跟踪态生成物）
 
 ## 用法
 
@@ -26,7 +27,7 @@ pytest（体积窗 C7 / HANDOVER 概要块等判据只在 pytest 面）、不含
 
 ## 退出码
 
-    0 = 所选步全绿（--skip-* 部分跑时汇总行带「非推送判据」标记）
+    0 = 所选步全绿（--skip-* 或 ci_sim 自跳过时汇总行标「非推送判据」）
     1 = 有步红
     2 = 基础设施缺失（fail-closed：判据脚本本体不在/不可执行 ⇒ 宁可中止不放行）
 """
@@ -72,6 +73,25 @@ def _ci_sim_should_run(tree_dirty):
     if tree_dirty:
         return False, "工作树有未提交改动——预演目标 HEAD 不含本批，提交后重跑才有意义"
     return True, ""
+
+
+def plan_run(skip, tree_dirty):
+    """运行计划（纯函数·供单测）：返回 (steps, partial, ci_sim_skip_note)。
+
+    判据降级口径：命令行 --skip-* **或 ci_sim 因工作树未提交自跳过** ⇒ 本次不是推送判据
+    （自跳过与「本批无 .py 改动致 guardrails SKIP」不同：后者是无可检项，不降低覆盖）。
+    tree_dirty 须由调用方在**任何步骤开始前**快照——步骤本身会重写跟踪态生成物
+    （W1215 审查实证：全量 pytest 触发 w1167_nav_inject --dry-run 重写 _w1167_nav_plan.json）。
+    """
+    steps = select_steps(skip)
+    partial = bool(skip.get("pytest") or skip.get("ci_sim"))
+    note = ""
+    if "ci_sim" in steps:
+        ok, why = _ci_sim_should_run(tree_dirty)
+        if not ok:
+            partial = True
+            note = why
+    return steps, partial, note
 
 
 def aggregate(results, partial):
@@ -173,8 +193,9 @@ def main(argv=None):
             print("%-10s %s" % (s, STEP_DESC[s]))
         return 0
     skip = {"pytest": a.skip_pytest, "ci_sim": a.skip_ci_sim}
-    steps = select_steps(skip)
-    partial = bool(skip["pytest"] or skip["ci_sim"])
+    # 脏度在四步开始前快照：pytest 会重写跟踪态生成物，步骤后再取会误判「提交后推送前」为脏
+    tree_dirty = _tree_dirty() if not skip["ci_sim"] else False
+    steps, partial, ci_sim_skip = plan_run(skip, tree_dirty)
     missing = _infra_missing(steps)
     if missing:
         print("FAIL  基础设施缺失（fail-closed）：%s" % "；".join(missing))
@@ -189,9 +210,8 @@ def main(argv=None):
         elif s == "pytest":
             results.append(run_pytest())
         elif s == "ci_sim":
-            ok, why = _ci_sim_should_run(bool(_tree_dirty()))
-            if not ok:
-                results.append(("ci_sim", "SKIP", 0.0, why))
+            if ci_sim_skip:
+                results.append(("ci_sim", "SKIP", 0.0, ci_sim_skip))
             else:
                 results.append(run_ci_sim())
     code, verdict, lines = aggregate(results, partial)

@@ -111,6 +111,12 @@ def _blob_sizes(root: str, oids: list[str]) -> dict[str, int]:
         capture_output=True,
         check=False,
     )
+    if proc.returncode != 0:
+        # fail-closed：读不出体量 ⇒ 无法判定 ⇒ 宁可中止也不假绿（否则空表 ⇒ 0 FAIL）
+        raise RuntimeError(
+            "git cat-file --batch-check 失败（rc=%d）：%s"
+            % (proc.returncode, proc.stderr.decode("utf-8", errors="replace").strip()[:200])
+        )
     sizes: dict[str, int] = {}
     for line in proc.stdout.decode("utf-8", errors="replace").splitlines():
         parts = line.split()
@@ -137,6 +143,12 @@ def _blob_batch(root: str, oids: list[str]) -> dict[str, bytes]:
         capture_output=True,
         check=False,
     )
+    if proc.returncode != 0:
+        # fail-closed：内容读不出 ⇒ 不能把「没读到」当成「没有指针」（同 _blob_sizes）
+        raise RuntimeError(
+            "git cat-file --batch 失败（rc=%d）：%s"
+            % (proc.returncode, proc.stderr.decode("utf-8", errors="replace").strip()[:200])
+        )
     out = proc.stdout
     res: dict[str, bytes] = {}
     pos = 0

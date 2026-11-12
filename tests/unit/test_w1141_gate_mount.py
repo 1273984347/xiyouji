@@ -38,6 +38,6 @@ def test_gate_docs_agree_on_slot_61():
     m = _re.search(r"内含 (\d+) 槽", _re.sub(r"<!--stats:[a-z_0-9]+-->", "", agents))
     assert m, "AGENTS §4.2 须声明槽数（内含 N 槽）"
     n_agents = int(m.group(1))
-    n_gates = len(_re.findall(r"^\d{1,2}\. \*\*", gates, _re.M))
+    n_gates = len(_re.findall(r"^\d+\. \*\*", gates, _re.M))
     assert n_agents == n_gates, f"AGENTS 声明 {n_agents} 槽 ≠ gates.md 编号条目 {n_gates}"
     assert "61. **数据集溯源**" in gates

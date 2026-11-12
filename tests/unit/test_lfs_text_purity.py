@@ -17,6 +17,8 @@ import pathlib
 import subprocess
 import sys
 
+import pytest
+
 SCRIPT = pathlib.Path(__file__).resolve().parents[2] / "scripts" / "check_lfs_text_purity.py"
 REPO = pathlib.Path(__file__).resolve().parents[2]
 
@@ -107,3 +109,19 @@ def test_summary_line_carries_failure_items():
     many = mod.summary_line(7, 5644, ["p%d" % i for i in range(7)])
     assert "共 7 条" in many
     assert "余 2 条" in many
+
+
+def test_blob_helpers_fail_closed_on_git_error(monkeypatch):
+    """W1214 审查修复锁：cat-file 非零 ⇒ 抛 RuntimeError（空表不得当成 0 FAIL 假绿）。"""
+    mod = _load()
+
+    class _Proc:
+        returncode = 128
+        stdout = b""
+        stderr = b"fatal: bad object"
+
+    monkeypatch.setattr(mod.subprocess, "run", lambda *a, **k: _Proc())
+    with pytest.raises(RuntimeError):
+        mod._blob_sizes("/tmp", ["deadbeef"])
+    with pytest.raises(RuntimeError):
+        mod._blob_batch("/tmp", ["deadbeef"])
