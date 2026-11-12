@@ -138,6 +138,6 @@ def test_declaration_surfaces_in_sync():
     sec42 = agents[i:j]
     assert re.search(r"(?m)^71\. \*\*", sec42), "AGENTS §4.2 缺第 71 条"
     assert re.search(r"(?m)^71\. \*\*", gates), "gates.md 缺第 71 条"
-    assert "内含 71 槽，五组" in sec42
+    assert "内含 71 槽，五组" in re.sub(r"<!--stats:[a-z_0-9]+-->", "", sec42)  # W1216：槽数散文接 marker·剥标记后匹配
     m = re.search(r"verify full 全部执行段（随挂槽演进·现役 (\d+) 段", doc_spec)
     assert m and int(m.group(1)) == 76, "文档规范段数未随挂槽同步为 76"

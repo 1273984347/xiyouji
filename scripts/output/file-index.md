@@ -1,3 +1,41 @@
+## W1216 收尾清偿批：台账 hash 回填 + 「71 槽」marker 化 + 复盘弧线交付（2026-11-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1216 | 版本面推进（cascade/versions 写入） |
+| AGENTS.md | W1216 | 71 槽 marker 化 ×3（gate_count） |
+| CHANGELOG.md | W1216 | 收尾清偿批 |
+| CITATION.cff | W1216 | 版本面推进（version_surface） |
+| HANDOVER.md | W1216 | 71 槽 marker 化 ×2 + 里程碑块 |
+| README.md | W1216 | 版本面推进（version_surface） |
+| archive/docs/AGENTS-ARCHIVE.md | W1216 | AGENTS 脚注滚动归档（cascade 写入） |
+| archive/docs/workflows-readme-history.md | W1216 | workflows README 历史归档（version_surface） |
+| docs/00-导读/W批次编号对账表.md | W1216 | W1216 认领行 + W1214/W1215 hash 回填 |
+| docs/11-方案报告/README.md | W1216 | 复盘弧线篇登记（19 件/新行/总览纠偏） |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-12.md | W1216 | 新建：复盘弧线篇（W1212-W1215 弧线·三绿不同源主题） |
+| docs/agent/gates.md | W1216 | 标题 71 槽 marker 化 |
+| docs/INDEX.md | W1216 | 文档索引重渲（+1 篇·docs_index） |
+| scripts/output/_cascade_files_W1216.txt | W1216 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1216_spec.json | W1216 | 本批 spec |
+| scripts/output/file-index.md | W1216 | 本批 file-index 段（cascade 写入） |
+| scripts/output/INDEX.md | W1216 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1216 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/stats-changelog.json | W1216 | stats 变更史（report_docs 等） |
+| scripts/output/stats-index.md | W1216 | stats 反向索引重渲 |
+| scripts/output/stats.json | W1216 | stats 实算刷新（report_docs +1） |
+| scripts/output/tools-inventory.md | W1216 | 工具盘点时间戳随动（cascade） |
+| site/sitemap.xml | W1216 | sitemap 重渲（gen_sitemap·index 步） |
+| STRUCTURE.md | W1216 | 版本面推进（version_surface） |
+| docs/00-导读/项目说明.md | W1216 | 版本面推进（version_surface） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1216 | sweep 存量面标记跟随（report_docs·自动） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1216 | sweep 存量面标记跟随（report_docs·自动） |
+| site/data/cross-time-danmaku.html | W1216 | 页脚四面批次版本随动（cascade 全档） |
+| site/data/search.html | W1216 | 搜索索引重渲（自动） |
+| site/data/tag-cloud.html | W1216 | 页脚四面批次版本随动（cascade 全档） |
+| site/en/search.html | W1216 | 搜索索引重渲（自动） |
+| site/dukou-engine.html | W1216 | 页脚四面批次版本随动（cascade 全档） |
+| site/index.html | W1216 | 页脚四面批次版本随动 + C5b 标记面 |
+
 ## W1215 一命令真全量与计数链生成器化批：pre_push_gate + 收官链接步 + 计数链 markers（2026-11-12）
 
 | 文件 | W | 说明 |

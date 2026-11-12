@@ -34,7 +34,8 @@ def test_gate_docs_agree_on_slot_61():
     import re as _re
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     gates = (ROOT / "docs" / "agent" / "gates.md").read_text(encoding="utf-8")
-    m = _re.search(r"内含 (\d+) 槽", agents)
+    # W1216：槽数散文位接 gate_count marker（sweep 自动跟随）——剥标记后匹配（E-229 同法）
+    m = _re.search(r"内含 (\d+) 槽", _re.sub(r"<!--stats:[a-z_0-9]+-->", "", agents))
     assert m, "AGENTS §4.2 须声明槽数（内含 N 槽）"
     n_agents = int(m.group(1))
     n_gates = len(_re.findall(r"^\d{1,2}\. \*\*", gates, _re.M))

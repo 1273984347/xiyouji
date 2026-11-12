@@ -138,14 +138,16 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     i_arch = first(lambda c: 'archive_segments.py' in c)
     i_add = first(lambda c: c.startswith('git add'))
     i_ref = first(lambda c: 'gen_folder_docs.py' in c)
-    i_idx = first(lambda c: '_gen_search_index.py' in c)
     i_doc = first(lambda c: 'docs_index.py' in c)
+    i_idx = first(lambda c: '_gen_search_index.py' in c)
     i_stat = first(lambda c: 'stats.py' in c)
     i_csp = first(lambda c: 'generate_csp.py' in c and '--check' not in c)
     i_chk = first(lambda c: 'generate_csp.py' in c and '--check' in c)
     # W1119：腾窗步须在 precheck 之前（precheck fail-closed 中止 ⇒ 腾窗排其后即死路径）
     #           且须在 add 之前（腾窗会改 CHANGELOG/file-index ⇒ 先 add 会把迁前态带进提交）
-    assert i_arch < i_add < i_ref < i_stat < i_idx < i_doc < i_csp < i_chk, calls
+    # W1216：index 步内序对调（docs_index 在前）——搜索索引内嵌 docs/INDEX.md 派生字段，
+    #         原序遇新增文档批必留陈旧内嵌 ⇒ 第 46 槽 C2/C3 轮流补红（E-230 同族）
+    assert i_arch < i_add < i_ref < i_stat < i_doc < i_idx < i_csp < i_chk, calls
     # W1215：cascade 步声明为链首（本调用无 --spec ⇒ cascade 跳过不经 run() 可见·故只断言声明序）
     assert bc.step_order()[0] == 'cascade', bc.step_order()
     assert bc.step_order()[1] == 'archive', bc.step_order()
