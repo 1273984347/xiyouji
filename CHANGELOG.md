@@ -1,3 +1,11 @@
+### W1219（2026-11-13）：归档维护批：段目录组行补登 + 一级归档分卷 + 临时区归桶
+
+**本批要点**（W1219 归档维护批）：
+
+> - **① 归档健康清偿（check_archive_health 3 项待办）**：T2 段目录缺组行 w1169/w1175/w1176（各 3 件）⇒ archive/README.md 补 3 条组行（用途 + 归档日期 + 登记批次）；T1 一级归档件破 1MB 线 ⇒ archive_tier2 分卷：CHANGELOG 迁出 W814-W874（59 段·196KB）到新分卷 CHANGELOG-ARCHIVE-tier2-W814-W874.md、file-index 迁出 W980-W1023（48 段·189KB）到 file-index-ARCHIVE-tier2.md，一级两件各回落 899KB。
+> - **② 临时区归桶（tmpe_tidy）**：盘点 1 项（tmpe/case_test 为嵌套 git 测试仓）⇒ --apply --confirm 归桶到 tmpe/_inbox/，零删除，journal=tmpe/.journal/20261113-075516-10560.jsonl。
+> - **③ 复检读数**：check_archive_health 0 项待办 · check_segment_gaps 0 项 · 第 17 槽索引健康通过 · 体积窗 0 FAIL。
+> - **文件**：见 file-index。
 ### W1218（2026-11-13）：审查整改批：LFS 判据 fail-closed + C5 前置 + 计数跟随
 
 **本批要点**（W1218 审查整改批）：
@@ -604,7 +612,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1218），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1219），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
