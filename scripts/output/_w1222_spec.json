@@ -40,6 +40,7 @@
     "| scripts/output/INDEX.md | W1222 | 目录文档刷新（gen_folder_docs） |",
     "| scripts/output/README.md | W1222 | 目录文档刷新（gen_folder_docs） |",
     "| scripts/output/tools-inventory.md | W1222 | 工具盘点时间戳随动（cascade） |",
+    "| scripts/output/_vermilion_solid_cache.json | W1222 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽·首笔 hook verify 刷新） |",
     "| site/data/cross-time-danmaku.html | W1222 | 页脚批次链滚动（cascade 全档） |",
     "| site/data/tag-cloud.html | W1222 | 页脚批次链滚动（cascade 全档） |",
     "| site/dukou-engine.html | W1222 | 页脚批次链滚动（cascade 全档） |",
