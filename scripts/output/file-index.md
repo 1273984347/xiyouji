@@ -1,3 +1,42 @@
+## W1221 架构 v2 迁移施工手册批：执行面重述 + 独立审查整改 + 入库登记（2026-11-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/设计与架构方案/系统架构v2迁移施工手册-2026-11-13.md | W1221 | 新增：架构 v2 迁移施工手册（执行面重述 + 独立审查整改） |
+| docs/11-方案报告/README.md | W1221 | §二登记第 37 行 + 件数 19→20 |
+| CHANGELOG.md | W1221 | 迁移施工手册批 |
+| HANDOVER.md | W1221 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1221 | 版本脚注滚动（cascade 写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1221 | AGENTS 脚注滚动归档（cascade 写入） |
+| docs/00-导读/W批次编号对账表.md | W1221 | W1221 认领行 |
+| scripts/output/file-index.md | W1221 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats.json | W1221 | stats 重跑 |
+| scripts/output/stats-changelog.json | W1221 | stats 重跑产物（cascade 刷新） |
+| scripts/output/stats-index.md | W1221 | stats 重跑产物（cascade 刷新） |
+| scripts/output/_cascade_files_W1221.txt | W1221 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1221_spec.json | W1221 | 本批 spec |
+| README.md | W1221 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1221 | 版本面推进（version_surface） |
+| CITATION.cff | W1221 | 版本面推进（version_surface） |
+| docs/00-导读/项目说明.md | W1221 | 版本面推进（version_surface） |
+| docs/INDEX.md | W1221 | 文档索引重建（docs_index） |
+| site/data/search.html | W1221 | 搜索索引重建（版本面推进后重建） |
+| site/en/search.html | W1221 | 搜索索引重建（EN 版） |
+| site/sitemap.xml | W1221 | sitemap 重建（lastmod 刷新） |
+| scripts/output/INDEX.md | W1221 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1221 | 目录文档刷新（gen_folder_docs） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1221 | 台账行窗口腾窗迁出最老行（archive 写入） |
+| .github/workflows/README.md | W1221 | 版本面推进（version_surface） |
+| archive/docs/workflows-readme-history.md | W1221 | workflows README 历史归档（version_surface） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1221 | 统计数字标记随动（stats sweep） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1221 | 报告类文档计数随动（stats sweep·180→181） |
+| scripts/output/tools-inventory.md | W1221 | 工具盘点时间戳随动（cascade） |
+| scripts/output/_vermilion_solid_cache.json | W1221 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
+| site/data/cross-time-danmaku.html | W1221 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1221 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1221 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1221 | 页脚批次链滚动（cascade 全档） |
+
 ## W1220 CI 提速批：pytest 时间黑洞根修 + 三片并行 + 站点作业路由（2026-11-13）
 
 | 文件 | W | 说明 |

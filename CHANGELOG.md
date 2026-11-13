@@ -1,3 +1,16 @@
+### W1221（2026-11-13）：架构 v2 迁移施工手册批：执行面重述 + 独立审查整改 + 入库登记
+
+**本批要点**（W1221 架构 v2 迁移施工手册批）：
+
+> - **① 交付物**：新增 [系统架构 v2 迁移施工手册](docs/11-方案报告/设计与架构方案/系统架构v2迁移施工手册-2026-11-13.md)（543 行）。定位 = v2 目标态的**执行面重述**：读者无需回读目标态原文即可执行。结构：执行摘要 → 迁移定义与边界（三条硬边界 + 机器判据）→ 目标态自包含重述 → 阶段总览 → 五个已执行阶段的可复跑复核（D-1 / D-2a / D-2b / D-2c / D-3）→ 待执行项与批准门槛（tag `v2.3.0` / 容量 #1·#2）→ Agent 开批规程（占号 → preflight → spec → 收官链 → 推送判据 → 提交，含占位符取值表）→ 回滚与失败处置 → 验收标准 → 附录 A/B。
+> - **② 独立审查整改（无上下文子代理 · PASS WITH ISSUES）**：2 个 P0——(a) `150/150` 停写前对账读数**无 JSON 证据**（`_w1204_drill_dual*.json` 实为写入探针，机器证据只有 `_w1204_migrate_backfill.json` 的 74/142/4）⇒ 已如实标注「叙事记录·无独立 JSON」；(b) M6 合规基线按原文命令**必拒启动**（示例文件要求满配，实测 3 项违规 `auth.token` / `transport.client_tls` / `crypto.column_encryption`）⇒ 已给 9 项完整配方（`AGENT_WEB_REQUIRE_TOKEN` / `AGENT_WEB_TOKEN` / `AGENT_WEB_TLS_TERMINATED` / `AGENT_WEB_DATA_KEY` 等）。另修 5 个 P1（1319 ms 无证据 / WAL 27→37 段 / 存储测试 PG skip / M2 仅切流前有效 / `encryption.ts` 路径）与 5 个 P2（8→9 项 / 容量退码 2 说明 / Windows 恢复演练前提 / D-2c 命名统一等）。
+> - **③ 数字当批复测**：门禁 71 槽 · 静态站 861 页 · PG 基线静态校验 **98/98** · 反向验证 **23/23** · 第 70/71 槽违规 **0** · 容量 #1 448.89 KB / #2 73.27 KB / `.git` **602.02 MB < 1 GB** · 全仓链接 **29348 / 0 broken** · `check_doc_sync` 0 FAIL。
+> - **④ M1 实跑**：本机 PG 16.4 实例启动后以 `AGENT_WEB_DB_BACKEND=postgres` 起服，日志 `数据库: PostgreSQL 16`，`GET /api/ready` 200 且 `compliance.audit.degraded=false`；验证完毕即停止临时启动的 PG 实例。
+> - **⑤ 登记**：`docs/11-方案报告/README.md` §二新增第 37 行，件数 19→20。
+> - **⑥ 未做（如实登记）**：M2 未复跑（停写后旧库必然落后，对账不等属预期）；M6 端到端起服未跑（需完整 9 项合规环境）；全仓 `lint_links` 已跑（29348/0 broken）。
+> - **文件**：见 file-index。
+
+
 ### W1220（2026-11-13）：CI 提速批：pytest 时间黑洞根修 + 三片并行 + 站点作业路由
 
 **本批要点**（W1220 CI 提速批）：
@@ -624,7 +637,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1220），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1221），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
