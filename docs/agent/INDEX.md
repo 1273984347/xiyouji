@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（10）
+## 文件（11）
 
 ### Markdown 文档
 
@@ -22,6 +22,7 @@
 - `gate-triage-template.md`
 - `gates.md`
 - `parallel-evidence-template.md`
+- `periodic-ops-checklist.md`
 - `pitfalls.md`
 - `reconcile-agent-prompt.md`
 - `text-audit-agent-prompt.md`
