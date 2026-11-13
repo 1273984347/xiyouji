@@ -1,3 +1,42 @@
+## W1224 容量阈值裁决批：#1 双线制 + #2 双口径 + 测量器越线清单（2026-11-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_capacity_budget.py | W1224 | #1 双线制 + #2 页特有/共享块双口径 + 越线页清单与计数（§8.3 修订实现） |
+| scripts/output/_w1205_capacity_audit.json | W1224 | 容量证据刷新（修订后首跑读数·新 extra 形态） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1224 | §8.3 两行修订 + 修订落地记录（含 stats sweep 随动） |
+| docs/11-方案报告/设计与架构方案/系统架构v2迁移施工手册-2026-11-13.md | W1224 | T-2 状态行终写（E+R 全落地·T-2 闭环） |
+| CHANGELOG.md | W1224 | 容量阈值裁决批 |
+| HANDOVER.md | W1224 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1224 | 版本脚注滚动（cascade 写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1224 | AGENTS 脚注滚动归档（cascade 写入） |
+| docs/00-导读/W批次编号对账表.md | W1224 | W1224 认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1224 | 台账行窗口腾窗迁出最老行（archive 写入） |
+| scripts/output/file-index.md | W1224 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats.json | W1224 | stats 重跑 |
+| scripts/output/stats-changelog.json | W1224 | stats 重跑产物 |
+| scripts/output/stats-index.md | W1224 | stats 重跑产物 |
+| scripts/output/_cascade_files_W1224.txt | W1224 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1224_spec.json | W1224 | 本批 spec |
+| README.md | W1224 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1224 | 版本面推进（version_surface） |
+| CITATION.cff | W1224 | 版本面推进（version_surface） |
+| docs/00-导读/项目说明.md | W1224 | 版本面推进（version_surface） |
+| .github/workflows/README.md | W1224 | 版本面推进（version_surface） |
+| archive/docs/workflows-readme-history.md | W1224 | workflows README 历史归档（version_surface） |
+| site/data/search.html | W1224 | 搜索索引重建（方案/手册文档条目随动） |
+| site/en/search.html | W1224 | 搜索索引重建（EN 版） |
+| site/data/search-index-zh.js | W1224 | 索引数据件重写（生成器外置形态） |
+| site/en/search-index-en.js | W1224 | 索引数据件重写（生成器外置形态） |
+| scripts/output/INDEX.md | W1224 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1224 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/tools-inventory.md | W1224 | 工具盘点时间戳随动 |
+| scripts/output/_vermilion_solid_cache.json | W1224 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
+| site/data/cross-time-danmaku.html | W1224 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1224 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1224 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1224 | 页脚批次链滚动（cascade 全档） |
+
 ## W1223 容量 #1 执行批：search 索引外置 + 第 46 槽判据域随迁 + #4 口径诚实化（2026-11-14）
 
 | 文件 | W | 说明 |

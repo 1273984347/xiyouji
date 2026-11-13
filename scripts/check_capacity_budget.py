@@ -86,12 +86,16 @@ MB = 1024 * 1024
 GB = 1024 * 1024 * 1024
 
 # v2 §8.3 阈值表（权威来源：docs/11-方案报告/设计与架构方案/
-# 系统架构方案v2-目标态与落地路线-2026-10-25.md §8.3「容量阈值（10 条）」）。
+# 系统架构方案v2-目标态与落地路线-2026-10-25.md §8.3「容量阈值」）。
+# W1224 裁决批修订（用户批准·评估报告 W1222 §5.2）：#1 硬线 200→512 KB + 软线
+# 200 KB（越软线报页清单与计数·不判红）；#2 口径改「页特有内联 CSS」（扣除
+# INLINED 共享块——共享块是全站机制常数，不应记在页面头上），配套机制线 2b
+# 共享基线块 ≤ 56 KB（ breaches 计入触发与退出码）；#1/#2 增报越线页清单与计数。
 THRESHOLDS = {
-    1: {"metric": "单页 HTML 体积", "limit": 200 * KB, "unit": "bytes",
-        "action": "拆包评审（不得直接引入框架运行时）"},
-    2: {"metric": "单页内联 CSS", "limit": 60 * KB, "unit": "bytes",
-        "action": "抽离评审（须保证 file:// 仍可开）"},
+    1: {"metric": "单页 HTML 体积", "limit": 512 * KB, "unit": "bytes",
+        "action": "拆包评审（不得直接引入框架运行时）·软线 200 KB 预警清单随附"},
+    2: {"metric": "单页页特有内联 CSS", "limit": 60 * KB, "unit": "bytes",
+        "action": "页特有样式瘦身评审（须保证 file:// 仍可开）·共享块走 2b 机制线"},
     3: {"metric": "全站体积", "limit": 120 * MB, "unit": "bytes",
         "action": "资源分片评审"},
     4: {"metric": "站内搜索脚本", "limit": 3 * MB, "unit": "bytes",
@@ -124,6 +128,12 @@ SEARCH_SCRIPT_PATTERNS = (
 )
 
 STYLE_BLOCK_RE = re.compile(r"<style[^>]*>(.*?)</style>", re.S | re.I)
+# W1224：#2 口径的共享块识别——与 W1019 判据同源（`<!-- INLINED CSS … -->` 标记
+# 紧邻其后的 style 块 = inline_css.py 注入的 tokens+system 副本）。
+INLINED_MARKER_RE = re.compile(r"<!--[^>]*INLINED CSS[^>]*-->")
+# W1224：#1 软线（越线报清单不判红）与 #2b 共享基线块机制线（v2 §8.3 修订配套）。
+SOFT_LIMIT_1 = 200 * KB
+SHARED_INLINE_CSS_LIMIT = 56 * KB
 SEP = chr(31)
 
 
@@ -204,36 +214,89 @@ def measure_1_single_page_html() -> dict:
     biggest = None
     biggest_size = -1
     total = 0
+    hard_over = []
+    soft_over = []
     for f in files:
         size = os.path.getsize(f)
         total += size
         if size > biggest_size:
             biggest_size, biggest = size, f
+        if size > THRESHOLDS[1]["limit"]:
+            hard_over.append({"file": rel_path(f), "bytes": size})
+        elif size > SOFT_LIMIT_1:
+            soft_over.append({"file": rel_path(f), "bytes": size})
+    hard_over.sort(key=lambda x: -x["bytes"])
+    soft_over.sort(key=lambda x: -x["bytes"])
+    note = "最大页：%s" % rel_path(biggest)
+    if hard_over or soft_over:
+        note += "｜硬线越线 %d 页·软线越线 %d 页（清单见 extra/结论区）" % (
+            len(hard_over), len(soft_over))
     return row(1, biggest_size,
                "site/**/*.html 逐个 os.path.getsize() 取最大值（%d 个文件）" % len(files),
-               note="最大页：%s" % rel_path(biggest),
+               note=note,
                extra={"file": rel_path(biggest), "file_count": len(files),
-                      "site_html_total_bytes": total})
+                      "site_html_total_bytes": total,
+                      "hard_over_pages": hard_over[:20],
+                      "soft_over_pages": soft_over[:20],
+                      "soft_over_count": len(soft_over)})
+
+
+def _inline_css_split(text: str) -> tuple[int, int]:
+    """拆一页的内联 CSS 为 (页特有字节, 共享块字节)。
+
+    共享块判定与 W1019 消费者同源：`<!-- INLINED CSS … -->` 标记与其后**仅隔空白**的
+    style 块配对（inline_css.py 注入形态实测）。
+    """
+    shared_spans = set()
+    for mk in INLINED_MARKER_RE.finditer(text):
+        sm = STYLE_BLOCK_RE.search(text, mk.end())
+        if sm and not text[mk.end():sm.start()].strip():
+            shared_spans.add(sm.start())
+    total = 0
+    shared = 0
+    for m in STYLE_BLOCK_RE.finditer(text):
+        b = len(m.group(1).encode("utf-8"))
+        total += b
+        if m.start() in shared_spans:
+            shared += b
+    return total - shared, shared
 
 
 def measure_2_inline_css() -> dict:
     files = html_files()
     biggest = None
     biggest_size = -1
+    shared_biggest = None
+    shared_biggest_size = -1
+    over_pages = []
     for f in files:
         try:
             with open(f, encoding="utf-8", errors="replace") as fh:
                 text = fh.read()
         except OSError:
             continue
-        total = sum(len(m.group(1).encode("utf-8")) for m in STYLE_BLOCK_RE.finditer(text))
-        if total > biggest_size:
-            biggest_size, biggest = total, f
+        specific, shared = _inline_css_split(text)
+        if specific > biggest_size:
+            biggest_size, biggest = specific, f
+        if shared > shared_biggest_size:
+            shared_biggest_size, shared_biggest = shared, f
+        if specific > THRESHOLDS[2]["limit"]:
+            over_pages.append({"file": rel_path(f), "bytes": specific})
+    over_pages.sort(key=lambda x: -x["bytes"])
+    note = "页特有最多页：%s｜共享基线块最大 %s（%s）" % (
+        rel_path(biggest), human_bytes(shared_biggest_size), rel_path(shared_biggest))
+    if over_pages:
+        note += "｜越线 %d 页（清单见 extra）" % len(over_pages)
     return row(2, biggest_size,
-               "site/**/*.html 逐页解析 style 标签内联块并累加 UTF-8 字节，取最大值（%d 个文件）"
+               "site/**/*.html 逐页拆 (页特有, 共享块) 并取页特有最大值（%d 个文件·W1224 口径）"
                % len(files),
-               note="内联 CSS 最多页：%s" % rel_path(biggest),
-               extra={"file": rel_path(biggest)})
+               note=note,
+               extra={"file": rel_path(biggest),
+                      "shared_block_max_bytes": shared_biggest_size,
+                      "shared_block_max_file": rel_path(shared_biggest),
+                      "shared_block_triggered": shared_biggest_size > SHARED_INLINE_CSS_LIMIT,
+                      "over_threshold_pages": over_pages[:20],
+                      "over_threshold_count": len(over_pages)})
 
 
 def measure_3_site_total() -> dict:
@@ -512,6 +575,32 @@ def run_pg(rows: list, failures: list) -> None:
             rows.append(row(idx, None, "PG 取数失败：%s" % exc))
 
 
+def _print_over_lines(rows: list, shared_breach: bool) -> None:
+    """打印 #1 软/硬线与 #2 页特有的越线页清单（W1224：登记面不再止步 max 单页）。"""
+    r1 = next((r for r in rows if r["no"] == 1), None)
+    r2 = next((r for r in rows if r["no"] == 2), None)
+    if r1 and (r1["extra"].get("hard_over_pages") or r1["extra"].get("soft_over_pages")):
+        print("[#1] 硬线（>%s）越线页：%s" % (
+            human_bytes(r1["threshold"]),
+            "；".join("%s=%s" % (x["file"], human_bytes(x["bytes"]))
+                      for x in r1["extra"]["hard_over_pages"]) or "无"))
+        print("[#1] 软线（>%s，预警不判红）越线 %d 页：%s" % (
+            human_bytes(SOFT_LIMIT_1), r1["extra"]["soft_over_count"],
+            "；".join("%s=%s" % (x["file"], human_bytes(x["bytes"]))
+                      for x in r1["extra"]["soft_over_pages"])))
+    if r2 and r2["extra"].get("over_threshold_pages"):
+        print("[#2] 页特有（>%s）越线 %d 页：%s" % (
+            human_bytes(r2["threshold"]), r2["extra"]["over_threshold_count"],
+            "；".join("%s=%s" % (x["file"], human_bytes(x["bytes"]))
+                      for x in r2["extra"]["over_threshold_pages"])))
+    if shared_breach:
+        r2e = r2["extra"] if r2 else {}
+        print("[#2b] 共享基线块越线：最大 %s（%s）> 机制线 %s" % (
+            human_bytes(r2e.get("shared_block_max_bytes", 0)),
+            r2e.get("shared_block_max_file", "?"),
+            human_bytes(SHARED_INLINE_CSS_LIMIT)))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="架构方案 v2 §8.3 容量阈值（10 条）实算门禁")
     ap.add_argument("--no-json", action="store_true",
@@ -603,20 +692,26 @@ def main() -> int:
         if r["note"]:
             print("     %s" % r["note"])
     print("-" * 78)
-    if triggered:
-        print("结论：%d 项已触发阈值 → %s" % (
-            len(triggered), "；".join("#%d %s" % (r["no"], r["metric"]) for r in triggered)))
+    shared_breach = any(r["extra"].get("shared_block_triggered") for r in rows)
+    if triggered or shared_breach:
+        parts = ["#%d %s" % (r["no"], r["metric"]) for r in triggered]
+        if shared_breach:
+            parts.append("#2b 共享基线块（机制线 %s）" % human_bytes(SHARED_INLINE_CSS_LIMIT))
+        print("结论：%d 项已触发阈值 → %s" % (len(triggered) + (1 if shared_breach else 0),
+                                              "；".join(parts)))
     else:
         print("结论：无项触发阈值。")
+    # W1224：越线页清单（#1 软/硬线 + #2 页特有）——登记面不再止步 max 单页
+    _print_over_lines(rows, shared_breach)
     if pending:
         print("待回填（不可测，不得当作未触发）：%s"
               % "、".join("#%d %s" % (r["no"], r["metric"]) for r in pending))
     if failures:
         print("取数失败：%s" % "；".join(failures))
     print("证据文件：%s" % rel_path(OUT_JSON))
-    print("退出码：%d（0 = 无项触发 / 1 = 有项触发 / 2 = 取数失败）"
-          % (2 if failures else (1 if triggered else 0)))
-    return 2 if failures else (1 if triggered else 0)
+    code = 2 if failures else (1 if (triggered or shared_breach) else 0)
+    print("退出码：%d（0 = 无项触发 / 1 = 有项触发 / 2 = 取数失败）" % code)
+    return code
 
 
 if __name__ == "__main__":
