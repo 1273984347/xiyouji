@@ -253,9 +253,41 @@ def test_ci_jobs_are_distinct_and_locatable():
 
 
 # ---------------------------------------------------------------------------
-# W811：工作流 YAML 可解析性守卫（GitHub 侧「workflow file issue」防线）
+# W1220：required check 名恒存在（分支保护按名匹配·改名/条件化 = PR 永久卡住）
 # ---------------------------------------------------------------------------
-# W806 在 ci.yml 新增 goatcounter 防回退守卫步骤时，step 名写成
+
+def test_required_check_job_names_preserved():
+    """W1220：两个 required check 名必须恒存在，且由「恒会创建 check」的 job 承载。
+
+    背景：main 分支保护只认 `Delivery Gate (verify_delivery.py)` 与
+    `Unit Tests (pytest)` 两个 check 名。W1220 把 pytest 拆 3 分片时，分片 job 必须
+    改名，由 `pytest-aggregate` 沿用原名汇总——GitHub 在 job 因 `needs` 未满足而
+    根本不创建时不会产生 check ⇒ PR 永远等不到 required check。
+    """
+    ci = _ci_text()
+    job_names = re.findall(r"(?m)^    name: (.+)$", ci)
+    for required in ("Delivery Gate (verify_delivery.py)", "Unit Tests (pytest)"):
+        assert required in job_names, (
+            "required check 名 `%s` 在 ci.yml 的 job 级 name 中缺失——分支保护按名匹配，"
+            "改名或让承载它的 job 变条件化都会让 PR 永久卡住" % required)
+
+    # 分片 job 必须另起名字（不得占用 required 名，否则同名 check 语义互相覆盖）
+    assert [n for n in job_names if n.startswith("Unit Tests (pytest) shard ")], (
+        "pytest 分片 job 缺失（W1220 提速结构被删？）")
+
+    # 承载 required 名的 job：verify-delivery 不得挂 needs（被跳过即不生成 check）；
+    # pytest-aggregate 允许挂 needs，但必须 if: always() 才能在分片失败时产出红灯结论。
+    verify_body = _job_body(ci, "verify-delivery")
+    assert not re.search(r"(?m)^    needs:", verify_body), (
+        "verify-delivery 是 required check 承载 job，不得挂 needs（上游失败/跳过会让它不创建 check）")
+    agg_body = _job_body(ci, "pytest-aggregate")
+    assert re.search(r"(?m)^    if: always\(\)$", agg_body), (
+        "pytest-aggregate 必须 `if: always()`——分片失败时也要产出 required check 结论（红）")
+
+
+# ---------------------------------------------------------------------------
+# W811：工作流 YAML 可解析性守卫（GitHub 侧「workflow file issue」防线）
+# ---------------------------------------------------------------------------# W806 在 ci.yml 新增 goatcounter 防回退守卫步骤时，step 名写成
 # `- name: Guard: no GoatCounter references (W806)`——裸标量值内含 ": "（冒号+空格）
 # 在 YAML 映射上下文里属歧义语法：GitHub 解析该工作流时直接报
 # 「This run likely failed because of a workflow file issue」，run 0 秒失败，

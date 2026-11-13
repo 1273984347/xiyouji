@@ -957,3 +957,5 @@
 | W1155 | 假绿 P1 批（两份审计报告落实③·深度审计 P1 门禁判据修复·各配负样本） | 6d66773ef | —（待回填） | **已收官**（6d66773ef·git 反填·共 1 笔·P-43-01） | 本会话（W1155） | — |
 - 2026-11-13（修剪迁入 1 行·W1156-W1156·号序切分）
 | W1156 | 运行时数据批（两份审计报告落实④·深度审计 §3 运行时六项） | 84df96f49 | —（待回填） | **已收官**（84df96f49·git 反填·共 2 笔·P-43-01） | 本会话（W1156） | — |
+- 2026-11-13（修剪迁入 1 行·W1157-W1157·号序切分）
+| W1157 | 【已收官·hash 待回填】全仓文件重构分类整理批（用户令 2026-11-07）＝四文档治理体系（RULES.md 新建·pitfalls.md 正本迁根+3 门禁脚本路径·CLAUDE.md 指针微调·AGENT.md 系用户笔误误建当批撤除）+ 本地垃圾/跟踪孤儿/大体积本地件/裁决件四档删除 + 错位归位（docs 5 件+font-subset-guide+hyperframes 归档+workflows README 拆分+.gitignore baseline 修正）+ AGENTS §6 24/25 重复条去重 | 699f2940 | —（待回填） | 已收官（699f2940·本地提交·不推送） | 本会话（W1157） | CHANGELOG.md,HANDOVER.md,AGENTS.md,CLAUDE.md,STRUCTURE.md,README.md,.gitignore,scripts/check_repo_layout.py,scripts/check_agents_layers.py,scripts/check_pitfall_id_unique.py,scripts/check_doc_sync.py,scripts/check_screenshot_scope.py,scripts/check_design_asset_manifest.py,scripts/archive_file.py,scripts/preflight_check.py,docs/00-导读/文档规范.md,docs/agent/batch-closeout-checklist.md,.agent/skills/puti-shouye/SKILL.md,archive/README.md,.github/workflows/README.md |

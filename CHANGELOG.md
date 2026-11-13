@@ -1,3 +1,15 @@
+### W1220（2026-11-13）：CI 提速批：pytest 时间黑洞根修 + 三片并行 + 站点作业路由
+
+**本批要点**（W1220 CI 提速批）：
+
+> - **① pytest 时间黑洞根修（本地 381.8s→138.5s·2.76×）**：`pytest --durations=30` 实测最慢三项全指向同一脚本——`containment_block_scan.py` 把全站 866 文件扫描写在模块顶层，三个用例只是 import 它（93.1s / 84.4s / 73.9s）⇒ 占全量 **66%**（CI 侧 Unit Tests 因此从 325s 涨到 8m1s 而无人归因）。修法：扫描逻辑移入 `main()` + `__main__` 守卫（import 只许定义）；扫描面从「整份 HTML」收窄为「`<style>` 块」——单次 67.6s→0.8s（84×），并消除 JS 对象字面量花括号被当 CSS 规则的假阳性（选择器 105→103，差值全是 `" + "` 拼接噪声）。机器判据：`tests/unit/test_tool_scripts_cli.py` 的 `IMPORT_BUDGET_S = 5.0`——「可导入」断言带时间预算（实证见坑表 E-231）。
+> - **② pytest 三片并行 + 同名聚合（required check 名不变）**：单 job 拆 3 分片（`git ls-files` 清单序号取模·42/43/43 文件），分片 job 改名 `Unit Tests (pytest) shard N/3`，由 `pytest-aggregate` 承载原名并以 `if: always()` 汇总（fail-closed：分片任一失败即红）。W1154 编排引用步只在 shard 1 跑（消除三分片重复执行）。机器判据：新增 `test_required_check_job_names_preserved` 锁「两个 required 名恒存在 + verify-delivery 无 needs + 聚合 job 有 if: always()」（坑表 E-232）。
+> - **③ 站点作业路由（仅 PR·push main 恒全量）**：新增 `changes` job 判定改动范围——`docs/ archive/ source/ *.md` 之外无改动的 PR 直接跳过 Site Smoke / Lighthouse / a11y / E2E（纯文档 PR 的浏览器类作业全部免跑）；`xiyouji-agent-web/**` 才跑 Agent Web Build，`xiyouji-desktop/**` 或 site 变动才跑 Desktop Build。**两个 required check 刻意不挂 `needs`/`if`**（被跳过 ⇒ check 不出现 ⇒ PR 永久卡住）。
+> - **④ Playwright 缓存补齐 + 重复安装清理**：pages-smoke 与 agent-web-build 两处 `npx playwright install` 原无 `~/.cache/ms-playwright` 缓存（每次全量下载 chromium ≈2 分钟），本批按 W421 模式补齐；ci-sim.yml 的 pip 安装命令连续重复两行，删一。
+> - **⑤ a11y 对比度段并行化（63.1s→25.4s·2.7×）**：`verify_delivery --profile` 实测 a11y 段占交付门禁 162.8s 的 **38.8%**（最大单段）；`a11y_audit.py` 为纯 CPU 单线程扫描 861 页 × 40 规则 ⇒ 按文件切到 `ProcessPoolExecutor`（`--jobs` 默认 min(4, CPU)），`ex.map` 保序 ⇒ 输出逐字一致（实测 11898 findings 全等·`--jobs 1` 对照）。单测 53 例全绿。
+> - **⑥ 未采纳项与理由（留痕）**：P2「4 核 larger runner」不可用——GitHub Larger runners 仅对组织/企业账户开放，本仓为个人账户（配置面不存在，非成本问题）；P2「PR 快档 `-m not slow`」不再需要——热点根修后最慢用例仅 10.5s，且标记 slow 跳过等于削弱 required check；P2「12 workflow 收敛为 3」不采纳——`workflow-lint` 必须独立于被守卫工作流（方法论 §3.4 明确要求），`ci/security` 含扫全仓与 required check 不得加 paths（坑表 E-84），实测单 PR 仅约 4 个 workflow 触发，收敛收益为负。
+> - **文件**：见 file-index。
+
 ### W1219（2026-11-13）：归档维护批：段目录组行补登 + 一级归档分卷 + 临时区归桶
 
 **本批要点**（W1219 归档维护批）：
@@ -612,7 +624,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1219），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1220），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

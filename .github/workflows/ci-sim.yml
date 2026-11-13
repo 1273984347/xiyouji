@@ -44,8 +44,8 @@ jobs:
       # ⇒ 须装**全量测试依赖**（scripts/requirements.txt 含 pytest / PyYAML /
       #    Pillow / markdown / jieba），只装 pytest 会让收集期报错
       - name: Install test dependencies
+        # W1220：删除重复安装行（同一命令连续写了两遍·缓存命中后仍多花约 10s）
         run: |
-          python -m pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes 哈希化清单（pip 26.3 也在清单里）
           python -m pip install --require-hashes -r scripts/requirements-hashed.txt  # W1195：改用 --require-hashes + 哈希化清单（Scorecard 的 pip 面要求「钉 hash」，「钉版本」无效）
 
       - name: CI-side simulation

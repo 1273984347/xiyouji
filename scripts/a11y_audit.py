@@ -61,8 +61,10 @@ W263-E1 CI/CD 深化配套：9 矩阵 × 3 OS 跨平台验证
 """
 import argparse
 import json
+import os
 import re
 import sys
+from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
@@ -2364,12 +2366,26 @@ def audit_file(file_path):
     return findings
 
 
-def _scan_html_files(root):
+def _scan_html_files(root, jobs=None):
     """发现目录下全部 HTML 并逐文件执行 40 项检查（W729 重构从 audit_directory 提取）。
+
+    W1220 提速：860 页 × 40 规则是纯 CPU 单线程扫描，`--profile` 实测 63s、占交付门禁
+    总耗时的 38.8%（最大单段）。改为按文件切分到多进程执行——`ex.map` 保序，findings
+    拼接顺序与串行逐字一致 ⇒ **判定语义零变化**（不是放宽判据，只是并行）。
+    `jobs=None` 取 min(4, CPU 数)；文件数 < 32 时不起进程池（小目录起池反而更慢）。
 
     返回 (html_files, all_findings)。
     """
     html_files = sorted(root.rglob("*.html"))
+    if jobs is None:
+        jobs = min(4, os.cpu_count() or 1)
+    if jobs > 1 and len(html_files) >= 32:
+        with ProcessPoolExecutor(max_workers=jobs) as ex:
+            parts = list(ex.map(audit_file, html_files))
+        all_findings = []
+        for part in parts:
+            all_findings.extend(part)
+        return html_files, all_findings
     all_findings = []
     for f in html_files:
         all_findings.extend(audit_file(f))
@@ -2408,18 +2424,19 @@ def _emit_md(root, html_files, counts, all_findings, quiet):
     out_path.write_text(report, encoding="utf-8")
 
 
-def audit_directory(root_dir, output_format="md", quiet=False):
+def audit_directory(root_dir, output_format="md", quiet=False, jobs=None):
     """扫描目录下所有 HTML，运行 40 项检查，输出报告
 
     W729 重构：84 行单体拆为 _scan_html_files（发现+扫描）+ _count_by_rule（计数表）
     + _emit_json/_emit_md（输出分流）+ 本函数（编排+退出码）。
+    W1220：`jobs` 透传为扫描并发度（None = 自动）。
     """
     root = Path(root_dir)
     if not root.exists():
         print(f"错误：目录不存在 {root}", file=sys.stderr)
         return 2
 
-    html_files, all_findings = _scan_html_files(root)
+    html_files, all_findings = _scan_html_files(root, jobs=jobs)
     counts = _count_by_rule(all_findings)
     p0_total = sum(c["P0"] for c in counts.values())
 
@@ -2557,7 +2574,9 @@ def _render_md(root, html_files, counts, all_findings):
         lines.append(
             f"| {rule_id} | {RULE_NAMES[rule_id]} | {c['P0']} | {c['P1']} | {c['P2']} | {c['P3']} | {total} |"
         )
-    totals = {s: sum(counts[r][s] for r, _ in ALL_CHECKS) for s in ("P0", "P1", "P2", "P3")}
+    totals = {}
+    for s in ("P0", "P1", "P2", "P3"):
+        totals[s] = sum(counts[r][s] for r, _ in ALL_CHECKS)
     lines.append(
         f"| **合计** | - | **{totals['P0']}** | **{totals['P1']}** | "
         f"**{totals['P2']}** | **{totals['P3']}** | **{sum(totals.values())}** |"
@@ -2587,9 +2606,11 @@ def main():
     ap.add_argument("--dir", type=Path, default=Path("site"), help="扫描目录（默认 site）")
     ap.add_argument("--format", choices=["md", "json"], default="md", help="输出格式（默认 md）")
     ap.add_argument("--quiet", action="store_true", help="静默模式（仅退出码，不打印报告）")
+    # W1220：扫描并发度（默认自动 = min(4, CPU 数)）；--jobs 1 走原串行路径（对照/排障用）
+    ap.add_argument("--jobs", type=int, default=None, help="扫描并发进程数（默认自动·1=串行）")
     args = ap.parse_args()
 
-    return audit_directory(args.dir, output_format=args.format, quiet=args.quiet)
+    return audit_directory(args.dir, output_format=args.format, quiet=args.quiet, jobs=args.jobs)
 
 
 if __name__ == "__main__":
