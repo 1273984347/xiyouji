@@ -1,3 +1,42 @@
+### W1225（2026-11-14）：截图红警清偿批：scope 判据索引数据件归 skip + 批处理器仅认 HTML
+
+**本批要点**（W1225 截图红警清偿批）：
+
+> - **① 根因**：W1223 执行批 E 外置的 `site/data/search-index-zh.js` / `site/en/search-index-en.js` 被 [check_screenshot_scope.py](scripts/check_screenshot_scope.py) 的 `site/data` 前缀兜底判成 **targeted** ⇒ 截图工作流把它们当页面喂给 [batch_screenshots.js](scripts/batch_screenshots.js) ⇒ `page.goto` 原始 JS 文件 ⇒ `page.screenshot` 超时 30s ×4（两视口 ×两文件）⇒ PR #178 Screenshot Review 两轮红。
+> - **② 根修**：scope 判据增 `SEARCH_INDEX_DATA_FILES` ⇒ **skip**（纯数据载荷零视觉面·不进截图域）；自测增 3 例（ZH/EN skip + 组合免审）。
+> - **③ 兜底**：batch_screenshots.js `parseExtraPages` 仅认 `.html`——非 HTML 入参 `[skip]` 告警跳过不静默（防未来任何非页面件再进截图域）。
+> - **④ 验证**：scope 自测全过（含 3 新例）·node --check 过·单测 26 例过·verify 全量核心绿·pytest 1634 passed/4 skipped。
+> - **文件**：见 file-index。
+
+
+### W1224（2026-11-14）：容量阈值裁决批：#1 双线制 + #2 双口径 + 测量器越线清单（方案 v2 §8.3 修订落地）
+
+**本批要点**（W1224 容量阈值裁决批·用户批准）：
+
+> - **① 定位**：W1222 评估报告裁决批 R 的落地批——[方案 v2 §8.3](docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md) 阈值表两行修订 + [测量器](scripts/check_capacity_budget.py) 口径实现。至此评估批的 E+R 处置组合全部落地（E=W1223 已收官）。
+> - **② #1 双线制**：硬线 200→**512 KB**（容量语义=拆包评审线·现峰值 416.3 KB 为 reader 长文正文，余量 18.7%）；新增**软线 200 KB**——越软线报页清单与计数、不判红（保留预警可见性，防「硬线放宽=静默放行」）。**首跑即兑现**：软线清单 9 页，其中 dialogue-sentiment 中英两页（202.64/200.19 KB）在原 max 单页口径下**不可见**——逐页口径的登记面价值当场成立。
+> - **③ #2 双口径**：口径改「**页特有内联 CSS**」≤ 60 KB（按 `<!-- INLINED CSS -->` 标记配对扣除共享块——共享块是全站机制常数 47–52 KB，不应记在页面头上·识别判据与 W1019 消费者同源）；配套 **#2b 共享基线块机制线 ≤ 56 KB**（越线计入触发与退出码）。首跑：页特有最大 27.29 KB（余量 54.5%）·0 页越线；共享块最大 ~50.8 KB 合规。
+> - **④ 测量器增报越线页清单与计数**：#1 软/硬线双清单 + #2 页特有越线清单（extra 字段 + 结论区打印）——根治 W1205 以来「只报 max 单页」的登记面失真（W1222 评估 §2.2 验收项兑现）。
+> - **⑤ 方案与手册同步**：[方案 v2 §8.3](docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md) 两行修订（保留 W1205 实测结论原文·追加 W1224 修订落地记录与首跑读数）；[施工手册](docs/11-方案报告/设计与架构方案/系统架构v2迁移施工手册-2026-11-13.md) §1.3/§4.1/§6.1 T-2 状态行终写（**T-2 闭环**；手册待执行项仅余 T-1 远端 tag 清理·仍待用户单独批准）。
+> - **⑥ 验证**：测量器首跑读数如上（退出码 2=PG 取数失败待回填·预期）；guardrails --strict-api 过（api_diff 变化 0 处）；verify 全量核心绿；pytest 1634 passed/4 skipped；lint_links 0 broken。
+> - **文件**：见 file-index。
+
+
+### W1223（2026-11-14）：容量 #1 执行批：search 索引外置 + 第 46 槽判据域随迁 + #4 口径诚实化
+
+**本批要点**（W1223 容量 #1 执行批·search 索引外置·用户批准）：
+
+> - **① 定位**：W1222 评估报告执行批 E 的落地批。把 `site/data/search.html` / `site/en/search.html` 内联 `<script>` 中的索引段（ZH 347,664 B / EN 366,532 B·紧凑 JSON 零压缩空间）外置为同目录本地 JS 数据件，页面改 `<script src>` 引用。
+> - **② 可行性判据（评估批实测沿用）**：CSP `script-src 'self'` 已放行本地外链（零策略改动）；file:// 经典脚本相对路径可用（数据回退铁律不涉——该页无 EMBEDDED_DATA 契约）；常量名不变（`SITE_SEARCH_INDEX_ZH/EN`）⇒ 页面 app 逻辑（`renderOffline` 直呼常量）零改动，外链脚本先于 app 逻辑求值即语义等价。
+> - **③ 实测读数**：search.html **460,148→112,449 B（109.8 KB）**、en 版 **436,477→69,910 B（68.3 KB）**；容量 #1 峰值 **449.4→416.3 KB**（search 两页退出榜首·reader 长文页接棒·剩余 6 页越线归裁决批 R 口径处置）；#3 全站体积 74.92→74.24 MB（索引字节出 HTML）；**#4 诚实计数 2.07→2.76 MB / 3 MB（余量 8.1%）**——评估批预告的「指标搬家」已按诚实口径入账，不掩盖。
+> - **④ 第 46 槽判据域随迁**：[check_search_index_fresh.py](scripts/check_search_index_fresh.py) C1 改双侧判据——(a) 索引数据件存在 + 标记对/常量名正确；(b) 搜索页含指向本语言数据件的外链引用（防页面重写丢引用 ⇒ file:// 离线检索静默退化）；C2/C3 载荷逐条对拍不变。自测 4→**6 例**（新增缺数据件 / 缺页面引用两负样本）；[tests/unit/test_check_search_index_fresh.py](tests/unit/test_check_search_index_fresh.py) 同步（G2 6/6·G3 五类漂移）。
+> - **⑤ 生成器改形**：[_gen_search_index.py](scripts/_gen_search_index.py) `main()` 外科幂等——首跑摘内联段 + 插外链；重跑只重写数据件；两态皆无即 SystemExit 拒绝静默。输出行 `targets=2 external-js`。
+> - **⑥ file:// 直开冒烟（playwright·本批证据）**：ZH 页查「孙悟空」**24 命中**、EN 页英文查询 1 命中，两页 **0 JS 错误**——离线检索路径完整保活；CI E2E 已含 data/search.html 交互用例作常驻回归防线。
+> - **⑦ 连锁处理**：CSP 重生成（2 页哈希随内联块缩小更新）； Capacity 测量器 [#4 口径](scripts/check_capacity_budget.py) 纳入两份数据件（诚实口径注释入码）；CHANGELOG/HANDOVER/台账随级联。
+> - **⑧ 验证**：verify 全量核心绿；pytest 全量 1634 passed/4 skipped（配对单测 5 例全过）；lint_links 0 broken；容量 #1 峰值 416.3 KB / #2 73.3 KB / #4 2.76 MB（[测量器](scripts/check_capacity_budget.py)实跑）。
+> - **文件**：见 file-index。
+
+
 ### W1222（2026-11-14）：容量阈值越线处置评估批：T-2 评估定稿 + T-3 运维制度化 + W1191 台账回填
 
 **本批要点**（W1222 容量阈值越线处置评估批）：
@@ -652,7 +691,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1222），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1225），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

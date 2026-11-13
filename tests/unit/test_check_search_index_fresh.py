@@ -8,12 +8,12 @@ W807 实证的债：站内搜索索引停更（771 条仅含 61 篇 doc + 9 条�
 忽略规则放水、fail-closed 绕过），该防线会静默归零——项目 W663/W709 教训：门禁自身
 漂移要靠点检抓。
 
-## 覆盖判据
+## 覆盖判据（W1223 执行批 E 起判据域 = 外置索引数据件 + 页面外链引用双侧）
 
-  G1 现网实跑 0 FAIL（当前仓库真实状态·索引与生成器一致）
-  G2 自检：`--self-test` 5/5 且退出码 0
-  G3 判据单元：check_pages() 对四类漂移（缺块 / 少条目 / 字段漂移 / 常量名错位）
-     必须给出对应 C1-C3 码；一致态必须零 FAIL
+  G1 现网实跑 0 FAIL（当前仓库真实状态·索引数据件与生成器一致）
+  G2 自检：`--self-test` 6/6 且退出码 0
+  G3 判据单元：check_pages() 对五类漂移（缺数据件 / 缺页面外链 / 少条目 / 字段漂移 /
+     常量名错位）必须给出对应 C1-C3 码；一致态必须零 FAIL
   G4 环境 fail-closed：jieba 缺失即「不可判定→FAIL」（禁静默跳过假绿）
   G5 挂载一致性：verify_delivery 的 EXPECTED_SECTION_NAMES 与门禁元组均含「搜索索引」段
      （挂槽漏改任一手工面即启动期断言红——此处再做一层点检）
@@ -52,21 +52,29 @@ def _run(*args, timeout=600):
     )
 
 
-def _mk_html(const, items):
+def _mk_js(const, items):
     payload = json.dumps(items, ensure_ascii=False, separators=(",", ":"))
-    return ("<html><body>x</body></html>\n%s\nconst %s = %s;\n%s\n"
-            % (gate.BEGIN, const, payload, gate.END))
+    return "%s\nconst %s = %s;\n%s\n" % (gate.BEGIN, const, payload, gate.END)
+
+
+def _mk_page(js_basename):
+    return ('<html><body><script src="%s"></script>'
+            '<script>function renderOffline(q){return SITE_SEARCH_INDEX_ZH;}</script></body></html>'
+            % js_basename)
 
 
 def _pages():
+    """判据域全集（W1223 单参形态：页面 + 索引数据件同入一个文件文本映射）。"""
     return {
-        "site/data/search.html": _mk_html("SITE_SEARCH_INDEX_ZH", EXP_ZH),
-        "site/en/search.html": _mk_html("SITE_SEARCH_INDEX_EN", EXP_EN),
+        "site/data/search.html": _mk_page("search-index-zh.js"),
+        "site/en/search.html": _mk_page("search-index-en.js"),
+        "site/data/search-index-zh.js": _mk_js("SITE_SEARCH_INDEX_ZH", EXP_ZH),
+        "site/en/search-index-en.js": _mk_js("SITE_SEARCH_INDEX_EN", EXP_EN),
     }
 
 
 def test_g1_repo_fresh():
-    """G1 现网实跑：0 FAIL（索引与生成器实算一致）。"""
+    """G1 现网实跑：0 FAIL（索引数据件与生成器实算一致）。"""
     res = _run()
     assert res.returncode == 0, res.stdout + res.stderr
     assert gate.MARKER in res.stdout
@@ -74,39 +82,44 @@ def test_g1_repo_fresh():
 
 
 def test_g2_self_test():
-    """G2 自检：5/5 且退出码 0。"""
+    """G2 自检：6/6 且退出码 0。"""
     res = _run("--self-test")
     assert res.returncode == 0, res.stdout + res.stderr
-    assert res.stdout.count("PASS") == 5, res.stdout
+    assert res.stdout.count("PASS") == 6, res.stdout
     assert "SELF_TEST_OK" in res.stdout
 
 
 def test_g3_judgements():
-    """G3 判据单元：一致态零 FAIL + 四类漂移各命中对应码。"""
+    """G3 判据单元：一致态零 FAIL + 五类漂移各命中对应码。"""
     expected = {"zh": EXP_ZH, "en": EXP_EN}
     good = _pages()
     assert gate.check_pages(expected, good) == []
 
-    # 缺索引块 → C1
-    broken = dict(good)
-    broken["site/data/search.html"] = "<html><body>no index</body></html>"
-    assert any(f.startswith("C1") for f in gate.check_pages(expected, broken))
+    # 缺索引数据件 → C1
+    no_js = dict(good)
+    del no_js["site/data/search-index-zh.js"]
+    assert any(f.startswith("C1") for f in gate.check_pages(expected, no_js))
+
+    # 缺页面外链引用 → C1
+    no_ref = dict(good)
+    no_ref["site/data/search.html"] = "<html><body>no script ref</body></html>"
+    assert any(f.startswith("C1") for f in gate.check_pages(expected, no_ref))
 
     # 少一条条目 → C2
     stale = dict(good)
-    stale["site/data/search.html"] = _mk_html("SITE_SEARCH_INDEX_ZH", EXP_ZH[:1])
+    stale["site/data/search-index-zh.js"] = _mk_js("SITE_SEARCH_INDEX_ZH", EXP_ZH[:1])
     assert any(f.startswith("C2") for f in gate.check_pages(expected, stale))
 
     # 字段漂移（摘要被改）→ C2
     drift = dict(good)
     tampered = [dict(e) for e in EXP_ZH]
     tampered[0]["snippet"] = "改过的摘要"
-    drift["site/data/search.html"] = _mk_html("SITE_SEARCH_INDEX_ZH", tampered)
+    drift["site/data/search-index-zh.js"] = _mk_js("SITE_SEARCH_INDEX_ZH", tampered)
     assert any(f.startswith("C2") for f in gate.check_pages(expected, drift))
 
-    # en 页常量名错位 → C1
+    # en 件常量名错位 → C1
     wrong = dict(good)
-    wrong["site/en/search.html"] = _mk_html("SITE_SEARCH_INDEX_ZH", EXP_EN)
+    wrong["site/en/search-index-en.js"] = _mk_js("SITE_SEARCH_INDEX_ZH", EXP_EN)
     assert any(f.startswith("C1") for f in gate.check_pages(expected, wrong))
 
 

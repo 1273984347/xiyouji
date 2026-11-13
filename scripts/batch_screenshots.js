@@ -47,8 +47,15 @@ function parseExtraPages(value) {
   return value.split(',').map((part) => {
     const [file, dir] = part.split(':');
     if (!file || !dir) throw new Error(`Invalid extra page format: ${part} (expected file:dir)`);
-    return { file: file.trim(), dir: path.resolve(ROOT, dir.trim()) };
-  });
+    const f = file.trim();
+    // W1225 兜底：截图只对 .html 有意义——非 HTML 入参（如 search-index-*.js 数据件）
+    // 曾被 goto 原始 JS 造成 screenshot 超时。跳过并提示，不静默。
+    if (!f.endsWith('.html')) {
+      console.warn(`[skip] not an HTML page (screenshots apply to .html only): ${f}`);
+      return null;
+    }
+    return { file: f, dir: path.resolve(ROOT, dir.trim()) };
+  }).filter(Boolean);
 }
 
 function parseArgs(argv) {

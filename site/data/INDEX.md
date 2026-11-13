@@ -11,7 +11,7 @@
 
 - `json/`
 
-## 文件（90）
+## 文件（91）
 
 ### HTML 页面
 
@@ -105,6 +105,10 @@
 - `visual-art.html`
 - `workplace.html`
 - `wukong-tangseng-benchmark.html`
+
+### JavaScript / TypeScript
+
+- `search-index-zh.js`
 
 ---
 
