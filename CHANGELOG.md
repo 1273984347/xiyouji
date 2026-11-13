@@ -1,3 +1,18 @@
+### W1223（2026-11-14）：容量 #1 执行批：search 索引外置 + 第 46 槽判据域随迁 + #4 口径诚实化
+
+**本批要点**（W1223 容量 #1 执行批·search 索引外置·用户批准）：
+
+> - **① 定位**：W1222 评估报告执行批 E 的落地批。把 `site/data/search.html` / `site/en/search.html` 内联 `<script>` 中的索引段（ZH 347,664 B / EN 366,532 B·紧凑 JSON 零压缩空间）外置为同目录本地 JS 数据件，页面改 `<script src>` 引用。
+> - **② 可行性判据（评估批实测沿用）**：CSP `script-src 'self'` 已放行本地外链（零策略改动）；file:// 经典脚本相对路径可用（数据回退铁律不涉——该页无 EMBEDDED_DATA 契约）；常量名不变（`SITE_SEARCH_INDEX_ZH/EN`）⇒ 页面 app 逻辑（`renderOffline` 直呼常量）零改动，外链脚本先于 app 逻辑求值即语义等价。
+> - **③ 实测读数**：search.html **460,148→112,449 B（109.8 KB）**、en 版 **436,477→69,910 B（68.3 KB）**；容量 #1 峰值 **449.4→416.3 KB**（search 两页退出榜首·reader 长文页接棒·剩余 6 页越线归裁决批 R 口径处置）；#3 全站体积 74.92→74.24 MB（索引字节出 HTML）；**#4 诚实计数 2.07→2.76 MB / 3 MB（余量 8.1%）**——评估批预告的「指标搬家」已按诚实口径入账，不掩盖。
+> - **④ 第 46 槽判据域随迁**：[check_search_index_fresh.py](scripts/check_search_index_fresh.py) C1 改双侧判据——(a) 索引数据件存在 + 标记对/常量名正确；(b) 搜索页含指向本语言数据件的外链引用（防页面重写丢引用 ⇒ file:// 离线检索静默退化）；C2/C3 载荷逐条对拍不变。自测 4→**6 例**（新增缺数据件 / 缺页面引用两负样本）；[tests/unit/test_check_search_index_fresh.py](tests/unit/test_check_search_index_fresh.py) 同步（G2 6/6·G3 五类漂移）。
+> - **⑤ 生成器改形**：[_gen_search_index.py](scripts/_gen_search_index.py) `main()` 外科幂等——首跑摘内联段 + 插外链；重跑只重写数据件；两态皆无即 SystemExit 拒绝静默。输出行 `targets=2 external-js`。
+> - **⑥ file:// 直开冒烟（playwright·本批证据）**：ZH 页查「孙悟空」**24 命中**、EN 页英文查询 1 命中，两页 **0 JS 错误**——离线检索路径完整保活；CI E2E 已含 data/search.html 交互用例作常驻回归防线。
+> - **⑦ 连锁处理**：CSP 重生成（2 页哈希随内联块缩小更新）； Capacity 测量器 [#4 口径](scripts/check_capacity_budget.py) 纳入两份数据件（诚实口径注释入码）；CHANGELOG/HANDOVER/台账随级联。
+> - **⑧ 验证**：verify 全量核心绿；pytest 全量 1634 passed/4 skipped（配对单测 5 例全过）；lint_links 0 broken；容量 #1 峰值 416.3 KB / #2 73.3 KB / #4 2.76 MB（[测量器](scripts/check_capacity_budget.py)实跑）。
+> - **文件**：见 file-index。
+
+
 ### W1222（2026-11-14）：容量阈值越线处置评估批：T-2 评估定稿 + T-3 运维制度化 + W1191 台账回填
 
 **本批要点**（W1222 容量阈值越线处置评估批）：
@@ -652,7 +667,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1222），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1223），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

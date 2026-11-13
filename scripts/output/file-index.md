@@ -1,3 +1,43 @@
+## W1223 容量 #1 执行批：search 索引外置 + 第 46 槽判据域随迁 + #4 口径诚实化（2026-11-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_gen_search_index.py | W1223 | main() 外科幂等改形：索引外置 JS 数据件 + 页面外链（docstring 同步） |
+| scripts/check_search_index_fresh.py | W1223 | 第 46 槽判据域随迁：C1 双侧（数据件 + 页面外链）·自测 4→6 例 |
+| scripts/check_capacity_budget.py | W1223 | #4 口径纳入两份索引数据件（诚实口径） |
+| tests/unit/test_check_search_index_fresh.py | W1223 | G2 6/6 + G3 五类漂移同步 |
+| site/data/search.html | W1223 | 内联索引段摘除 + 外链引用（460,148→112,449 B） |
+| site/en/search.html | W1223 | 内联索引段摘除 + 外链引用（436,477→69,910 B） |
+| site/data/search-index-zh.js | W1223 | 新增：ZH 索引数据件（348,805 B·标记对随迁） |
+| site/en/search-index-en.js | W1223 | 新增：EN 索引数据件（367,673 B·标记对随迁） |
+| CHANGELOG.md | W1223 | 容量 #1 执行批 |
+| HANDOVER.md | W1223 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1223 | 版本脚注滚动（cascade 写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1223 | AGENTS 脚注滚动归档（cascade 写入） |
+| docs/00-导读/W批次编号对账表.md | W1223 | W1223 认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1223 | 台账行窗口腾窗迁出最老行（61>60·archive 写入） |
+| scripts/output/file-index.md | W1223 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats.json | W1223 | stats 重跑 |
+| scripts/output/stats-changelog.json | W1223 | stats 重跑产物（cascade 刷新） |
+| scripts/output/stats-index.md | W1223 | stats 重跑产物（cascade 刷新） |
+| scripts/output/_cascade_files_W1223.txt | W1223 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1223_spec.json | W1223 | 本批 spec |
+| README.md | W1223 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1223 | 版本面推进（version_surface） |
+| CITATION.cff | W1223 | 版本面推进（version_surface） |
+| docs/00-导读/项目说明.md | W1223 | 版本面推进（version_surface） |
+| .github/workflows/README.md | W1223 | 版本面推进（version_surface） |
+| archive/docs/workflows-readme-history.md | W1223 | workflows README 历史归档（version_surface） |
+| site/sitemap.xml | W1223 | sitemap 重建（search 两页 lastmod） |
+| scripts/output/INDEX.md | W1223 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1223 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/tools-inventory.md | W1223 | 工具盘点时间戳随动（cascade） |
+| scripts/output/_vermilion_solid_cache.json | W1223 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
+| site/data/cross-time-danmaku.html | W1223 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1223 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1223 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1223 | 页脚批次链滚动（cascade 全档） |
+
 ## W1222 容量阈值越线处置评估批：T-2 评估定稿 + T-3 运维制度化 + W1191 台账回填（2026-11-14）
 
 | 文件 | W | 说明 |

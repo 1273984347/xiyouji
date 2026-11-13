@@ -113,10 +113,14 @@ THRESHOLDS = {
 # 第 9 条只统计三类业务表（会话/消息/反馈），基础设施表不计入。
 BUSINESS_TABLES = ("sessions", "messages", "feedback")
 
-# 站内搜索自有脚本（排除第三方库 .min.js）。text-search-app.js 是现役唯一站内搜索实现。
+# 站内搜索自有字节（排除第三方库 .min.js）。W1223 执行批 E 起含两份索引数据件
+# （search-index-zh/en.js·自 search 两页外置而来）——诚实口径：索引字节从容量 #1
+# （单页 HTML）搬到本条，不得因「搬家」而在本条盲区里隐形。
 SEARCH_SCRIPT_PATTERNS = (
     os.path.join("site", "static", "js", "text-search-app.js"),
     os.path.join("site", "js", "text-search-app.js"),
+    os.path.join("site", "data", "search-index-zh.js"),
+    os.path.join("site", "en", "search-index-en.js"),
 )
 
 STYLE_BLOCK_RE = re.compile(r"<style[^>]*>(.*?)</style>", re.S | re.I)

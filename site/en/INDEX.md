@@ -11,7 +11,7 @@
 
 - `json/`
 
-## 文件（138）
+## 文件（139）
 
 ### HTML 页面
 
@@ -153,6 +153,10 @@
 - `visual-art.html`
 - `visualizations.html`
 - `workplace.html`
+
+### JavaScript / TypeScript
+
+- `search-index-en.js`
 
 ---
 

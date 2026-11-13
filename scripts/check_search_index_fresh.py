@@ -8,10 +8,13 @@ doc 条目，且 9 条链接仍指向已改名的 `docs/11-报告复盘/`（GitH
 ·老链接点不开）——本槽把该面关进笼子。
 
 判据（全过 exit 0，任一 FAIL exit 1）：
-C1 两页内嵌索引块存在：SEARCH_INDEX:BEGIN/END 标记对齐全（缺标记即 FAIL——索引被手删
-   或页面被重写，站内搜索退化为「无命中」而无人察觉）
-C2 zh 页内嵌载荷 == 生成器实算载荷（逐条对拍：kind/标题/分类/摘要/URL/关键词）
-C3 en 页内嵌载荷 == 生成器实算载荷（同上）
+C1 索引数据件与页面引用双侧在位（W1223 执行批 E 起索引外置）：
+   a) site/data/search-index-zh.js 与 site/en/search-index-en.js 存在且 SEARCH_INDEX:
+      BEGIN/END 标记对齐全、常量名正确（缺任一即 FAIL——索引被手删或生成器未跑）；
+   b) 两个搜索页各含指向本语言数据件的外链 <script src="…search-index-….js">
+      （页面被重写丢引用即 FAIL——file:// 离线检索会静默退化为「无命中」）。
+C2 zh 数据件载荷 == 生成器实算载荷（逐条对拍：kind/标题/分类/摘要/URL/关键词）
+C3 en 数据件载荷 == 生成器实算载荷（同上）
 
 口径与纪律：
 - 期望载荷由 `scripts/_gen_search_index.py` 的 `build_indexes()` **纯计算**得出（W809
@@ -27,7 +30,7 @@ C3 en 页内嵌载荷 == 生成器实算载荷（同上）
 用法：
     python scripts/check_search_index_fresh.py             # 门禁模式（= --gate）
     python scripts/check_search_index_fresh.py --gate      # 同上（verify_delivery 调用形态）
-    python scripts/check_search_index_fresh.py --self-test # 注入式自测（1 正 4 负·不触仓库）
+    python scripts/check_search_index_fresh.py --self-test # 注入式自测（1 正 5 负·不触仓库）
 
 退出码：0 全过；1 有 FAIL；2 参数/环境错误。
 """
@@ -45,17 +48,26 @@ MARKER = "---- 第 46 门禁 搜索索引新鲜度："
 BEGIN = "/* SEARCH_INDEX:BEGIN */"
 END = "/* SEARCH_INDEX:END */"
 
-# 页面 → 索引常量名（zh 页收 zh 站点页，en 页收 en 站点页·生成器口径）
-PAGES = {
-    "site/data/search.html": "SITE_SEARCH_INDEX_ZH",
-    "site/en/search.html": "SITE_SEARCH_INDEX_EN",
+# 索引数据件 → 索引常量名（W1223 执行批 E：载荷外置为本地 JS 数据件·标记对随迁）
+INDEX_FILES = {
+    "site/data/search-index-zh.js": "SITE_SEARCH_INDEX_ZH",
+    "site/en/search-index-en.js": "SITE_SEARCH_INDEX_EN",
+}
+
+# 搜索页 → 其索引数据件（页面必须以外链 <script src> 引用本件——C1 页面侧判据）
+PAGE_REFS = {
+    "site/data/search.html": "site/data/search-index-zh.js",
+    "site/en/search.html": "site/en/search-index-en.js",
 }
 
 _CONST_RE = re.compile(r"const\s+(SITE_SEARCH_INDEX_[A-Z]+)\s*=\s*(\[.*?\]);", re.S)
 
 
 def extract_embedded(html: str):
-    """抽取页面内嵌索引载荷。返回 (常量名, 条目列表) 或 (None, None)（块缺失/不可解析）。"""
+    """抽取索引载荷（W1223 起判据域=外部 JS 数据件·标记对随迁；实参可承载任意含标记对文本）。
+
+    返回 (常量名, 条目列表) 或 (None, None)（标记对缺失/块不可解析）。
+    """
     if BEGIN not in html or END not in html:
         return None, None
     block = html[html.find(BEGIN):html.find(END) + len(END)]
@@ -99,20 +111,26 @@ def diff_entries(expected, actual, limit=3):
     return diffs
 
 
+_PAGE_SRC_RE = re.compile(r"""<script[^>]*\ssrc=["'][^"']*search-index-(zh|en)\.js["']""")
+
+
 def check_pages(expected: dict, pages: dict) -> list[str]:
     """核心判据（纯函数形态：--self-test 复用同一判据）。
 
     expected: {'zh': 条目列表, 'en': 条目列表}
-    pages:    {'site/data/search.html': 页面文本, 'site/en/search.html': 页面文本}
+    pages:    判据域文件文本映射 {仓库相对路径: 文件文本}——W1223 执行批 E 起同时
+              覆盖两个搜索页与两个索引数据件（判据域=文件集·键集由 INDEX_FILES
+              与 PAGE_REFS 定义，调用方按全集传入）。
     返回 FAIL 明细列表（空 = 全过）。
     """
     fails = []
-    for path, const_name in PAGES.items():
-        html = pages.get(path)
-        if html is None:
-            fails.append("C1 页面缺失：%s" % path)
+    # C1-a：索引数据件在位（标记对 + 常量名）并承载 C2/C3 载荷对拍
+    for path, const_name in INDEX_FILES.items():
+        text = pages.get(path)
+        if text is None:
+            fails.append("C1 索引数据件缺失：%s" % path)
             continue
-        name, actual = extract_embedded(html)
+        name, actual = extract_embedded(text)
         if name is None:
             fails.append("C1 索引块缺失或不可解析（%s/%s 标记对不齐）：%s" % (BEGIN, END, path))
             continue
@@ -122,17 +140,26 @@ def check_pages(expected: dict, pages: dict) -> list[str]:
         lang = "zh" if "SITE_SEARCH_INDEX_ZH" == const_name else "en"
         diffs = diff_entries(expected.get(lang) or [], actual)
         if diffs:
-            fails.append("C%d 内嵌索引陈旧（应重跑 python scripts/_gen_search_index.py）：%s"
+            fails.append("C%d 索引数据件陈旧（应重跑 python scripts/_gen_search_index.py）：%s"
                          % (2 if lang == "zh" else 3, path))
             for d in diffs:
                 fails.append("    · %s" % d)
             fails.append("    · 条目数 期望 %d·实得 %d"
                          % (len(expected.get(lang) or []), len(actual)))
+    # C1-b：页面外链引用在位（页面被重写丢引用 ⇒ file:// 离线检索静默退化）
+    for page_rel, js_rel in PAGE_REFS.items():
+        html = pages.get(page_rel)
+        if html is None:
+            fails.append("C1 搜索页缺失：%s" % page_rel)
+            continue
+        js_basename = os.path.basename(js_rel)
+        if not _PAGE_SRC_RE.search(html) or js_basename not in html:
+            fails.append('C1 页面外链引用缺失（应为 <script src="%s">）：%s' % (js_basename, page_rel))
     return fails
 
 
 def _self_test() -> int:
-    """注入式自测：1 正 4 负，合成树用系统临时目录，不触仓库。"""
+    """注入式自测：1 正 5 负，合成树用系统临时目录，不触仓库。"""
     import shutil
     import tempfile
 
@@ -143,10 +170,14 @@ def _self_test() -> int:
                   {"kind": "page", "title": "乙", "category": "c", "snippet": "s2", "url": "u2", "kw": ["b"]}]
         exp_en = list(exp_zh)
 
-        def mk_html(const, items):
+        def mk_js(const, items):
             payload = json.dumps(items, ensure_ascii=False, separators=(',', ':'))
-            return ("<html><body>x</body></html>\n%s\nconst %s = %s;\n%s\n"
-                    % (BEGIN, const, payload, END))
+            return ("%s\nconst %s = %s;\n%s\n" % (BEGIN, const, payload, END))
+
+        def mk_page(js_basename):
+            return ('<html><body><script src="%s"></script>'
+                    '<script>function renderOffline(q){return SITE_SEARCH_INDEX_ZH;}</script></body></html>\n'
+                    % js_basename)
 
         def case(label, expect_codes, pages, expected=None):
             nonlocal ok
@@ -163,28 +194,34 @@ def _self_test() -> int:
                 print("    期望命中 %r·实得 %r" % (expect_codes, got))
 
         good = {
-            "site/data/search.html": mk_html("SITE_SEARCH_INDEX_ZH", exp_zh),
-            "site/en/search.html": mk_html("SITE_SEARCH_INDEX_EN", exp_en),
+            "site/data/search.html": mk_page("search-index-zh.js"),
+            "site/en/search.html": mk_page("search-index-en.js"),
+            "site/data/search-index-zh.js": mk_js("SITE_SEARCH_INDEX_ZH", exp_zh),
+            "site/en/search-index-en.js": mk_js("SITE_SEARCH_INDEX_EN", exp_en),
         }
         # 正样本：完全一致 → 无 FAIL
         case("fresh-must-pass", [], good)
-        # 负样本 1：缺索引块（标记被删）
-        broken = dict(good)
-        broken["site/data/search.html"] = "<html><body>no index</body></html>"
-        case("missing-block-must-fail-C1", ["C1"], broken)
-        # 负样本 2：少一条条目（索引陈旧）
+        # 负样本 1：索引数据件缺失（生成器未跑/被删）
+        no_js = dict(good)
+        del no_js["site/data/search-index-zh.js"]
+        case("missing-index-file-must-fail-C1", ["C1"], no_js)
+        # 负样本 2：页面外链引用被删（页面重写丢引用）
+        no_ref = dict(good)
+        no_ref["site/data/search.html"] = "<html><body>no script ref</body></html>"
+        case("missing-page-ref-must-fail-C1", ["C1"], no_ref)
+        # 负样本 3：少一条条目（索引陈旧）
         stale = dict(good)
-        stale["site/data/search.html"] = mk_html("SITE_SEARCH_INDEX_ZH", exp_zh[:1])
+        stale["site/data/search-index-zh.js"] = mk_js("SITE_SEARCH_INDEX_ZH", exp_zh[:1])
         case("stale-entry-must-fail-C2", ["C2"], stale)
-        # 负样本 3：字段漂移（摘要被改）
+        # 负样本 4：字段漂移（摘要被改）
         drift = dict(good)
         tampered = [dict(e) for e in exp_zh]
         tampered[0]["snippet"] = "改过的摘要"
-        drift["site/data/search.html"] = mk_html("SITE_SEARCH_INDEX_ZH", tampered)
+        drift["site/data/search-index-zh.js"] = mk_js("SITE_SEARCH_INDEX_ZH", tampered)
         case("field-drift-must-fail-C2", ["C2"], drift)
-        # 负样本 4：en 页常量名错位（zh 常量写进 en 页）
+        # 负样本 5：en 件常量名错位（zh 常量写进 en 件）
         wrong = dict(good)
-        wrong["site/en/search.html"] = mk_html("SITE_SEARCH_INDEX_ZH", exp_en)
+        wrong["site/en/search-index-en.js"] = mk_js("SITE_SEARCH_INDEX_ZH", exp_en)
         case("wrong-const-must-fail-C1", ["C1"], wrong)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
@@ -232,14 +269,14 @@ def main() -> int:
 
     expected = {"zh": json.loads(built["zh"][1]), "en": json.loads(built["en"][1])}
     pages = {}
-    for rel in PAGES:
+    for rel in list(INDEX_FILES) + list(PAGE_REFS):
         p = os.path.join(root, rel)
         try:
             with open(p, encoding="utf-8") as f:
                 pages[rel] = f.read()
         except OSError as exc:
             print(MARKER + "1 FAIL")
-            print("  FAIL 页面读取失败：%s（%s）" % (rel, exc))
+            print("  FAIL 文件读取失败：%s（%s）" % (rel, exc))
             return 1
 
     fails = check_pages(expected, pages)

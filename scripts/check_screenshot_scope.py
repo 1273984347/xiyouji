@@ -56,9 +56,11 @@ FULL_EXACT = (
     ".github/workflows/screenshot-review.yml",
 )
 
-# 搜索页：内容级免审白名单行特征
+# 搜索页：内容级免审白名单行特征（W1223 执行批 E 起索引外置——白名单行集 =
+# CSP 哈希行 + 索引外链引用行 + 内联索引行（过渡兼容：页面若仍是内嵌形态仍认））
 CSP_RE = re.compile(r'http-equiv="Content-Security-Policy"')
 INDEX_RE = re.compile(r"^const\s+SITE_SEARCH_INDEX_(ZH|EN)\s*=")
+EXTREF_RE = re.compile(r"""<script[^>]*\ssrc=["'][^"']*search-index-(zh|en)\.js["']""")
 
 
 def _under(path, prefix):
@@ -113,7 +115,7 @@ def content_only_search_change(path, changed_lines):
         return False
     allowed = set()
     for i, ln in enumerate(lines, start=1):
-        if CSP_RE.search(ln) or INDEX_RE.match(ln):
+        if CSP_RE.search(ln) or INDEX_RE.match(ln) or EXTREF_RE.search(ln):
             allowed.add(i)
     if not changed_lines:
         return False
@@ -121,17 +123,20 @@ def content_only_search_change(path, changed_lines):
 
 
 def _csp_index_lines(path):
-    """动态定位搜索页的 CSP 哈希行与内嵌索引行行号（自测/单测夹具专用）。
+    """动态定位搜索页的 CSP 哈希行与索引相关行行号（自测/单测夹具专用）。
 
     W1137 根修：夹具此前硬编码 [5, 1275]/[5, 1291]——任何 head 行数变化都会平移行号
     （favicon 三行注入实证断一次·判据脆弱特征）；改由与判据同源的正则动态定位，
-    夹具语义不变（正例 = 变更行恰为 CSP+索引行）。第三返回值 = 非 CSP/索引的稳定
-    内容行（title 行）·供「未识别行」负样本使用。
+    夹具语义不变（正例 = 变更行恰为 CSP+索引相关行）。第三返回值 = 非 CSP/索引的
+    稳定内容行（title 行）·供「未识别行」负样本使用。
+    W1223 执行批 E：索引外置后页面侧「索引行」= 外链引用行；内联形态（过渡）仍兜底。
     """
     with open(os.path.join(ROOT, path), encoding="utf-8") as f:
         lines = f.read().splitlines()
     csp = next(i for i, ln in enumerate(lines, 1) if CSP_RE.search(ln))
-    idx = next(i for i, ln in enumerate(lines, 1) if INDEX_RE.match(ln))
+    idx = next((i for i, ln in enumerate(lines, 1) if EXTREF_RE.search(ln)), None)
+    if idx is None:
+        idx = next(i for i, ln in enumerate(lines, 1) if INDEX_RE.match(ln))
     other = next(i for i, ln in enumerate(lines, 1)
                  if ln.lstrip().startswith("<title>") and i not in (csp, idx))
     return csp, idx, other

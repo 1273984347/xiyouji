@@ -2,9 +2,12 @@
 # 规则：docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md §E-1
 # 口径：docs/**/*.md 剔除 /_dev/ /_templates/ /archive /superpowers/ 四类路径（771 篇口径）；
 #       site/**/*.html 剔除 _template.html / _shell.html。
-# 输出：以幂等标记对 /* SEARCH_INDEX:BEGIN */ … /* SEARCH_INDEX:END */ 内嵌进
-#       site/data/search.html 与 site/en/search.html（重复运行先删旧段再插新段）。
-# file:// 铁律：索引为内嵌常量，无 fetch。
+# 输出（W1223 执行批 E 起改形·用户批准）：索引载荷外置为本地 JS 数据件
+#       site/data/search-index-zh.js 与 site/en/search-index-en.js（标记对随迁），
+#       两搜索页改以同目录 <script src> 引用——单页 HTML 体积从 ~449/~426 KB 降至
+#       ~113/~70 KB（容量 #1 治理）。file:// 铁律不破：经典脚本相对路径本地加载，
+#       无 fetch、无外域；CSP script-src 'self' 放行（W1222 评估实测）。
+#       消费方不变：常量名保持 SITE_SEARCH_INDEX_ZH/EN，页面 app 逻辑零改动。
 import glob
 import json
 import os
@@ -129,8 +132,11 @@ def build_indexes():
     门禁侧 import 本模块只调用 build_indexes() 取期望载荷；页面写盘只发生在 main()。
     返回：{'zh': (block_zh, payload_zh), 'en': (block_en, payload_en), 'counts': (docs, pages_zh, pages_en)}
     """
-    doc_files = [p for p in glob.glob(os.path.join(DOCS, '**', '*.md'), recursive=True)
-                 if not any(x in p.replace(os.sep, '/') for x in EXCLUDE)]
+    doc_files = []
+    for p in glob.glob(os.path.join(DOCS, '**', '*.md'), recursive=True):
+        rel = p.replace(os.sep, '/')
+        if not any(x in rel for x in EXCLUDE):
+            doc_files.append(p)
     page_files = [p for p in glob.glob(os.path.join(SITE, '**', '*.html'), recursive=True)
                   if os.path.basename(p) not in ('_template.html', '_shell.html')
                   and ('/reader/' not in p.replace(os.sep, '/') or p.replace(os.sep, '/').endswith('reader/themes-hub.html'))]  # W593：reader 页由 docs 条目承载避免双条目；W669 例外=themes-hub（无 docs 对应·导航页入索引）
@@ -148,30 +154,47 @@ def build_indexes():
             'counts': (len(doc_files), len(pages_zh), len(pages_en))}
 
 def main():
-    """把两语索引写进两个搜索页（幂等：先删旧标记段再插新段）。"""
+    """把两语索引写进外部 JS 数据件并把搜索页改为 <script src> 引用（W1223·幂等）。
+
+    页面外科幂等语义：
+    - 首跑（页面仍含内联 BEGIN..END 段）：摘除内联段（保留宿主 script 内的 app 逻辑），
+      并在宿主 <script> 开标签前插入外链 <script src="…"></script>（保证常量先于
+      app 逻辑求值——renderOffline 等函数体直呼该常量）。
+    - 重跑（页面已含外链引用）：只重写 JS 数据件，页面不再动。
+    - 两态皆无（结构未知）：SystemExit 拒绝静默。
+    """
     built = build_indexes()
     targets = [
-        (os.path.join(SITE, 'data', 'search.html'), built['zh'][0]),
-        (os.path.join(SITE, 'en', 'search.html'), built['en'][0]),
+        (os.path.join(SITE, 'data', 'search.html'), built['zh'][0], 'search-index-zh.js'),
+        (os.path.join(SITE, 'en', 'search.html'), built['en'][0], 'search-index-en.js'),
     ]
-    for t, block in targets:
+    for t, block, js_rel in targets:
+        # 1) 外部数据件：整写（幂等）——标记对随迁，第 46 槽判据域同步
+        js_path = os.path.join(os.path.dirname(t), js_rel)
+        with open(js_path, 'w', encoding='utf-8', newline='') as f:
+            f.write(block + '\n')
+        # 2) 页面外科（幂等）
         s = rd(t)
+        src_tag = '<script src="%s"></script>' % js_rel
         if BEGIN in s and END in s:
-            pre = s[:s.find(BEGIN)]
+            pos = s.find(BEGIN)
+            pre = s[:pos]
             post = s[s.find(END) + len(END):]
-            s = pre + block + post
+            s = pre.rstrip('\n') + '\n' + post
+            host = s.rfind('<script', 0, pos)
+            if host == -1:
+                raise SystemExit(f'FAIL 未找到宿主 script 开标签: {t}')
+            s = s[:host] + src_tag + '\n' + s[host:]
+        elif src_tag in s:
+            pass  # 已迁移形态：页面无需再动
         else:
-            anchor = s.find('window.SEARCH_INDEX = [')
-            if anchor == -1:
-                raise SystemExit(f'FAIL 未找到注入锚点: {t}')
-            line_start = s.rfind('\n', 0, anchor) + 1
-            s = s[:line_start] + block + '\n' + s[line_start:]
+            raise SystemExit(f'FAIL 未找到内联索引段或外链引用锚点: {t}')
         with open(t, 'w', encoding='utf-8', newline='') as f:
             f.write(s)
     n_docs, n_zh, n_en = built['counts']
     print(f'docs={n_docs} pages_zh={n_zh} pages_en={n_en} '
           f'bytes zh={len(built["zh"][1].encode("utf-8"))} en={len(built["en"][1].encode("utf-8"))}')
-    print('targets=2 embedded')
+    print('targets=2 external-js (search-index-zh.js / search-index-en.js)')
 
 
 if __name__ == '__main__':
