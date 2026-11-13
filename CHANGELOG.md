@@ -1,3 +1,14 @@
+### W1225（2026-11-14）：截图红警清偿批：scope 判据索引数据件归 skip + 批处理器仅认 HTML
+
+**本批要点**（W1225 截图红警清偿批）：
+
+> - **① 根因**：W1223 执行批 E 外置的 `site/data/search-index-zh.js` / `site/en/search-index-en.js` 被 [check_screenshot_scope.py](scripts/check_screenshot_scope.py) 的 `site/data` 前缀兜底判成 **targeted** ⇒ 截图工作流把它们当页面喂给 [batch_screenshots.js](scripts/batch_screenshots.js) ⇒ `page.goto` 原始 JS 文件 ⇒ `page.screenshot` 超时 30s ×4（两视口 ×两文件）⇒ PR #178 Screenshot Review 两轮红。
+> - **② 根修**：scope 判据增 `SEARCH_INDEX_DATA_FILES` ⇒ **skip**（纯数据载荷零视觉面·不进截图域）；自测增 3 例（ZH/EN skip + 组合免审）。
+> - **③ 兜底**：batch_screenshots.js `parseExtraPages` 仅认 `.html`——非 HTML 入参 `[skip]` 告警跳过不静默（防未来任何非页面件再进截图域）。
+> - **④ 验证**：scope 自测全过（含 3 新例）·node --check 过·单测 26 例过·verify 全量核心绿·pytest 1634 passed/4 skipped。
+> - **文件**：见 file-index。
+
+
 ### W1224（2026-11-14）：容量阈值裁决批：#1 双线制 + #2 双口径 + 测量器越线清单（方案 v2 §8.3 修订落地）
 
 **本批要点**（W1224 容量阈值裁决批·用户批准）：
@@ -680,7 +691,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1224），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1225），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

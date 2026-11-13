@@ -1,3 +1,34 @@
+## W1225 截图红警清偿批：scope 判据索引数据件归 skip + 批处理器仅认 HTML（2026-11-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_screenshot_scope.py | W1225 | SEARCH_INDEX_DATA_FILES ⇒ skip 根修 + 自测增 3 例 |
+| scripts/batch_screenshots.js | W1225 | parseExtraPages 仅认 .html 兜底（非 HTML 告警跳过） |
+| CHANGELOG.md | W1225 | 截图红警清偿批 |
+| HANDOVER.md | W1225 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1225 | 版本脚注滚动（cascade 写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1225 | AGENTS 脚注滚动归档（cascade 写入） |
+| docs/00-导读/W批次编号对账表.md | W1225 | W1225 认领行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1225 | 台账行窗口腾窗迁出最老行（如触发） |
+| scripts/output/file-index.md | W1225 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats.json | W1225 | stats 重跑 |
+| scripts/output/_cascade_files_W1225.txt | W1225 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1225_spec.json | W1225 | 本批 spec |
+| README.md | W1225 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1225 | 版本面推进（version_surface） |
+| CITATION.cff | W1225 | 版本面推进（version_surface） |
+| docs/00-导读/项目说明.md | W1225 | 版本面推进（version_surface） |
+| .github/workflows/README.md | W1225 | 版本面推进（version_surface） |
+| archive/docs/workflows-readme-history.md | W1225 | workflows README 历史归档（version_surface） |
+| scripts/output/INDEX.md | W1225 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1225 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/tools-inventory.md | W1225 | 工具盘点时间戳随动 |
+| scripts/output/_vermilion_solid_cache.json | W1225 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
+| site/data/cross-time-danmaku.html | W1225 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1225 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1225 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1225 | 页脚批次链滚动（cascade 全档） |
+
 ## W1224 容量阈值裁决批：#1 双线制 + #2 双口径 + 测量器越线清单（2026-11-14）
 
 | 文件 | W | 说明 |
