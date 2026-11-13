@@ -38,6 +38,8 @@
 - [ ] **若本批新增/修改了 `docs/**.md`**（顺序不能反，W1022/W1023 连踩两次）：
       `python scripts/_gen_search_index.py` → `python scripts/generate_csp.py`
       ——前者不做第 46 槽报条目数不符；后者不做第 20 槽报 CSP 漂移（索引里含内联脚本，哈希会变）
+- [ ] **同上批新增/删除 docs 文档时**：`python scripts/docs_index.py` 重建根 `docs/INDEX.md`
+      （`gen_folder_docs --refresh` 只刷**目录级**文档，不含根索引——漏跑 = 第 17 槽索引健康红 + `test_docs_index` 红，W1222 实证复燃 T-02 缺陷④）
 - [ ] 新增测试会改 `pytest_collected`：实测 `pytest --collect-only -q` 末行，
       同步 `pytest.ini` 与 `docs/11-方案报告/…/系统架构方案v2…md` 两处 `<!--stats:pytest_collected-->`
 - [ ] `python scripts/stats.py --w W####` 刷新，再 `--check` 求 24 键零差异
@@ -56,6 +58,7 @@
 ## 9. 收官后
 - [ ] 坑表：本次是否踩了**新形态**的坑？**改完必须实算分项**——`grep -c '^- \*\*'` 按主题逐段数，别手算（W1024 实证：六主题 26/6/26/19/11/34 之和是 122，我手算成 121 并写进 AGENTS/HANDOVER，而 AGENTS 的分项行当时还停在 25/25/15/10/28=109 的旧值上、长期无人核）⇒ 同步四处：`pitfalls.md` 各段标题 + AGENTS 总数 + AGENTS 分项行 + HANDOVER 两处就地并入对应主题（禁追加尾部段落），同步四处计数
 - [ ] 若本次产生了「应回写模板」的新检查项 → 回写 `docs/agent/*-template.md` 并更新其校准戳
+- [ ] **事件驱动**：本批若发生审计写入失败/合规降级 → 缺口窗口（起止时间/影响范围/恢复动作/能否补记）**当批登记进 HANDOVER「零、当前阻塞」·不得静默**（施工手册 §6.2·W1222 制度化；月/季/半年周期动作见 [periodic-ops-checklist.md](periodic-ops-checklist.md)）
 - [ ] **临时区（tmpe/）**：每 10 批或 `tmpe/` 超 150MB 时跑一次 `python scripts/tmpe_tidy.py --plan` → 确认后 `--apply --confirm`（**只移动归桶·零删除**，有 `--undo` 可悔）。近期改动在冻结期内不迁，属正常。
       ⚠ `_trash/` 的**清空**单独确认（个人文件安全铁律：列清单 → 主人确认 → 回收站），不在本清单自动范围
 - [ ] 工作区记忆：追加当日日志（只写有跨会话价值的东西，不记临时路径与搜索过程）
