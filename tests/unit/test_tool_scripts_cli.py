@@ -43,6 +43,9 @@ IMPORT_EXEMPT = {
     "pre-commit-validate.py": "hook 入口脚本·import 期读 git 暂存区状态（仅提交钩子语境有意义）",
 }
 
+# W1220：import 期时间预算（秒）——根级脚本正常 import 均 < 1s，5s 留足冷启动余量
+IMPORT_BUDGET_S = 5.0
+
 
 def _root_scripts():
     return sorted(
@@ -73,6 +76,11 @@ def test_root_script_is_importable(name):
     `@dataclass` 等装饰器经 `cls.__module__` 回查 `sys.modules`，不注册会误报
     `AttributeError: 'NoneType' object has no attribute '__dict__'`（W751 实测：
     optimize-html-size.py 即此型假阳性）。用例末尾清理注册项，避免污染同进程其它测试。
+
+    W1220：加 `IMPORT_BUDGET_S` 时间预算——import 期不得跑业务逻辑。实证：
+    containment_block_scan.py 曾在模块顶层执行全站 866 文件扫描（单次 67–93s，
+    pytest 最慢三项全由它贡献、占全量 66%），而「可导入」断言当时是绿的
+    ⇒ 只看「能否导入」不能发现 import 期重活，须带时间判据。
     """
     if name in IMPORT_EXEMPT:
         pytest.skip("import 期豁免（已登记理由）：%s" % IMPORT_EXEMPT[name])
@@ -82,7 +90,15 @@ def test_root_script_is_importable(name):
     module = importlib.util.module_from_spec(spec)
     sys.modules[mod_name] = module
     try:
+        import time
+        _t0 = time.perf_counter()
         spec.loader.exec_module(module)
+        elapsed = time.perf_counter() - _t0
+        assert elapsed < IMPORT_BUDGET_S, (
+            "%s import 期耗时 %.1fs ≥ %.0fs 预算——顶层脚本在 import 时跑了业务逻辑"
+            "（W1220 实证：containment_block_scan.py 顶层全站扫描 67–93s·"
+            "把扫描移入 main() + __main__ 守卫即可）" % (name, elapsed, IMPORT_BUDGET_S)
+        )
     except SystemExit as e:
         pytest.fail("%s import 期 SystemExit(%s)——若属合理设计请登记 IMPORT_EXEMPT 并写理由" % (name, e.code))
     except Exception as e:  # noqa: BLE001

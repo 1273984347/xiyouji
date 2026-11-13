@@ -1,3 +1,37 @@
+## W1220 CI 提速批：pytest 时间黑洞根修 + 三片并行 + 站点作业路由（2026-11-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1220 | ci.yml job 清单更新（12 job·三片并行与范围判定） |
+| .github/workflows/ci-sim.yml | W1220 | 删除重复 pip 安装行 |
+| .github/workflows/ci.yml | W1220 | changes 范围判定 + pytest 三片 + 聚合 + 缓存与路由 |
+| AGENTS.md | W1220 | 版本脚注滚动（cascade 写入） |
+| CHANGELOG.md | W1220 | CI 提速批 |
+| CITATION.cff | W1220 | 版本面推进（version_surface） |
+| HANDOVER.md | W1220 | 里程碑块（cascade 写入） |
+| README.md | W1220 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1220 | 版本面推进（version_surface） |
+| archive/docs/AGENTS-ARCHIVE.md | W1220 | AGENTS 脚注滚动归档（cascade 写入） |
+| archive/docs/workflows-readme-history.md | W1220 | workflows README 历史归档（version_surface） |
+| docs/00-导读/W批次编号对账表.md | W1220 | W1220 认领行 |
+| docs/00-导读/项目说明.md | W1220 | 版本面推进（version_surface） |
+| pitfalls.md | W1220 | 新增 E-231（import 期重活/可导入假绿）+ E-232（required check 名不可变） |
+| scripts/a11y_audit.py | W1220 | a11y 扫描多进程并行（--jobs·ex.map 保序） |
+| scripts/containment_block_scan.py | W1220 | 扫描移入 main() + 只扫 style 块（67.6s→0.8s） |
+| scripts/output/INDEX.md | W1220 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1220 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/_cascade_files_W1220.txt | W1220 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1220_spec.json | W1220 | 本批 spec |
+| scripts/output/file-index.md | W1220 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats.json | W1220 | stats 重跑（计数跟随） |
+| scripts/output/tools-inventory.md | W1220 | 工具盘点时间戳随动（cascade） |
+| site/data/cross-time-danmaku.html | W1220 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1220 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1220 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1220 | 页脚批次链滚动（cascade 全档） |
+| tests/unit/test_ci_wiring.py | W1220 | required check 名与聚合结构锁 |
+| tests/unit/test_tool_scripts_cli.py | W1220 | import 期时间预算判据（IMPORT_BUDGET_S） |
+
 ## W1219 归档维护批：段目录组行补登 + 一级归档分卷 + 临时区归桶（2026-11-13）
 
 | 文件 | W | 说明 |

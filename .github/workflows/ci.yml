@@ -20,11 +20,75 @@ permissions:
   contents: read
 
 jobs:
+  # W1220：改动范围判定（**仅 PR 生效**；push main / workflow_dispatch 恒全量）。
+  # 目的：纯文档/归档 PR 跳过站内浏览器类作业（墙钟与 runner 分钟的大头），
+  #   agent-web / desktop 构建按「本 PR 是否碰过其子树」路由。
+  # 纪律（坑表 E-84 + 方法论 §5）：**两个 required check（verify-delivery / pytest-unit）
+  #   绝不挂 needs/if**——被跳过的 job 不生成同名 check ⇒ 分支保护永远等不到 ⇒ PR 永久卡住。
+  changes:
+    name: Change scope (PR routing)
+    runs-on: ubuntu-latest
+    outputs:
+      site: ${{ steps.scope.outputs.site }}
+      agent_web: ${{ steps.scope.outputs.agent_web }}
+      desktop: ${{ steps.scope.outputs.desktop }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Compute change scope (W1220)
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVENT="${{ github.event_name }}"
+          if [ "$EVENT" != "pull_request" ]; then
+            # 发布路径（push main）/ 手动触发：恒全量，不做范围裁剪
+            echo "site=true" >> "$GITHUB_OUTPUT"
+            echo "agent_web=true" >> "$GITHUB_OUTPUT"
+            echo "desktop=true" >> "$GITHUB_OUTPUT"
+            echo "范围：全量（$EVENT）" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          BASE="${{ github.event.pull_request.base.sha }}"
+          # 浅克隆下 base.sha 不在本地 ⇒ 只补取该提交（不拉全量历史，避免 checkout 变慢）
+          git fetch --no-tags --depth=1 origin "$BASE" 2>/dev/null || true
+          # fail-closed：取数失败或结果为空一律按全量（否则「判定失败」会静默变成「跳过验证」）
+          if ! CHANGED=$(git -c core.quotePath=false diff --name-only "$BASE" "${{ github.sha }}"); then
+            echo "::warning::改动范围取数失败 ⇒ 保守按全量运行"
+            CHANGED="ALL"
+          fi
+          if [ -z "$CHANGED" ]; then
+            echo "::warning::改动范围为空（PR 不应为空）⇒ 保守按全量运行"
+            CHANGED="ALL"
+          fi
+          SITE=false
+          AGENT=false
+          DESKTOP=false
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              ALL) SITE=true; AGENT=true; DESKTOP=true ;;
+              docs/*|archive/*|source/*) continue ;;
+              xiyouji-agent-web/*) AGENT=true ;;
+              xiyouji-desktop/*) DESKTOP=true ;;
+              *.md|CITATION.cff|LICENSE|LICENSE-CONTENT.md) continue ;;
+              *) SITE=true ;;
+            esac
+          done <<< "$CHANGED"
+          # 桌面版内置站点内容 ⇒ site 变动同样需要重建
+          if [ "$SITE" = "true" ]; then DESKTOP=true; fi
+          echo "site=$SITE" >> "$GITHUB_OUTPUT"
+          echo "agent_web=$AGENT" >> "$GITHUB_OUTPUT"
+          echo "desktop=$DESKTOP" >> "$GITHUB_OUTPUT"
+          echo "范围（PR diff $(echo "$CHANGED" | sed '/^$/d' | wc -l) 个文件）：site=$SITE agent_web=$AGENT desktop=$DESKTOP" >> "$GITHUB_STEP_SUMMARY"
+
   pages-smoke:
     # W699 更名：screenshots-regression 名不符实（tools/screenshot-baseline.js 从未
     # 存在，W390 注记）——本 job 实为全站 HTTP 200 存活烟测；真实截图回归在
     # screenshot-review.yml（双视口实拍+暗色门禁）。同批清除 fallback/artifact 残件。
     name: Site Smoke (all pages HTTP 200)
+    needs: changes
+    if: needs.changes.outputs.site == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -47,6 +111,12 @@ jobs:
       # 先回退镜像源（候选链实测验证）；修不好也不阻断（后续步骤自然失败·保持原语义）。
       - name: Repair apt mirror (Azure DNS fallback·W1211)
         run: python scripts/ci_repair_apt_mirror.py
+      # W1220：补浏览器缓存（此前本 job 每次全量下载 chromium·实测约 2 分钟）
+      - name: Cache Playwright browsers (W1220·复用 W421 模式)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
       - name: Install Playwright
         # W1195：改用 `npm ci --prefix scripts`（Scorecard Pinned-Dependencies 认的 pinned 形态）。
         # Scorecard 源码 `checks/raw/shell_download_validate.go` 的 `isNpmUnpinnedDownload`：
@@ -114,6 +184,8 @@ jobs:
 
   lighthouse-performance:
     name: Lighthouse Performance (perf/a11y/bp/seo)
+    needs: changes
+    if: needs.changes.outputs.site == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -198,6 +270,8 @@ jobs:
     # 页面渲染检查，瓶颈在浏览器版本而非 OS/Python；跨平台矩阵对纯前端审计为伪需求。
     # PR checks 从 34 job → 26，等待时长约省 40%（本日 17 批实证每次 PR 全矩阵跑）。
     name: A11y Audit (WCAG 2.2, 19 checks/20 SC)
+    needs: changes
+    if: needs.changes.outputs.site == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -305,8 +379,15 @@ jobs:
         run: mypy scripts/ --ignore-missing-imports 2>&1 | tail -5 || true
 
   pytest-unit:
-    name: Unit Tests (pytest)
+    # W1220 提速：单 job 实测 5.5–8 分钟（CI 最大单点·W1219 PR 实测 8m1s）⇒ 拆 3 分片并行。
+    #   分片按「文件清单序号取模」而非连续切片（方法论 §1.1：耗时分布不均，取模负载自然均衡）。
+    #   ⚠ required check 名必须恒存在 ⇒ 分片 job 改名，由 pytest-aggregate（沿用原名）汇总判定。
+    name: Unit Tests (pytest) shard ${{ matrix.shard }}/3
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
@@ -322,13 +403,34 @@ jobs:
 
       # W1154（基础设施审计 §6 建议）：编排面引用存在性——Makefile/pre-commit/workflow
       # 指向的 scripts/ 路径必须真实存在（W1014 sync_docs 死钩子 + drl-contracts 休眠族防复发）。
+      # W1220：三分片同跑属重复执行 ⇒ 只在 shard 1 跑（方法论 §1.2「先找重复，再找瓶颈」）。
       - name: Orchestration refs existence (W1154)
+        if: matrix.shard == 1
         run: python scripts/check_orchestration_refs.py
 
       # W401 修复：tests/ 全量（pytest.ini testpaths=tests + --ignore=tests/e2e
       # 排除需 playwright browser 的 test_narratology_render.py，由 pages-smoke job 的存活烟测覆盖（W699 更名））
-      - name: Run pytest (unit + root tests)
-        run: python -m pytest tests -q
+      # W1220：显式文件清单分片——两目录（tests/ 根 11 个 + tests/unit 117 个）按序号取模三分，
+      #   避免「按目录切」造成 11 vs 117 的天然失衡。
+      - name: Run pytest shard ${{ matrix.shard }}/3
+        run: |
+          FILES=$(git ls-files 'tests/test_*.py' 'tests/unit/test_*.py' \
+            | sort | awk -v s=${{ matrix.shard }} -v n=3 'NR % n == (s - 1)')
+          echo "分片 ${{ matrix.shard }}/3 · 文件数 $(echo "$FILES" | wc -w)"
+          python -m pytest $FILES -q
+
+  pytest-aggregate:
+    # W1220：required check「Unit Tests (pytest)」的名称载体——与改前完全同名（分支保护按名匹配）。
+    #   分片任一失败即聚合失败（fail-closed；不把 skipped/未执行当通过）。
+    name: Unit Tests (pytest)
+    needs: pytest-unit
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Aggregate shard verdict
+        run: |
+          echo "pytest 分片结论：${{ needs.pytest-unit.result }}"
+          test "${{ needs.pytest-unit.result }}" = "success"
 
   verify-delivery:
     name: Delivery Gate (verify_delivery.py)
@@ -392,6 +494,8 @@ jobs:
 
   e2e-interaction:
     name: E2E Interaction (test_site_quality.js)
+    needs: changes
+    if: needs.changes.outputs.site == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -431,6 +535,8 @@ jobs:
 
   agent-web-build:
     name: Agent Web Build (xiyouji-agent-web)
+    needs: changes
+    if: needs.changes.outputs.agent_web == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -454,6 +560,12 @@ jobs:
       # 先回退镜像源（候选链实测验证）；修不好也不阻断（后续步骤自然失败·保持原语义）。
       - name: Repair apt mirror (Azure DNS fallback·W1211)
         run: python scripts/ci_repair_apt_mirror.py
+      # W1220：补浏览器缓存（此前本 job 每次全量下载 chromium·实测约 2 分钟）
+      - name: Cache Playwright browsers (W1220·复用 W421 模式)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
       - name: Install scripts deps + Playwright chromium (E2E 运行条件·W808)
         run: |
           npm ci --prefix scripts
@@ -499,6 +611,8 @@ jobs:
     # W804：桌面版构建回归（xiyouji-desktop/ 为 Electron 壳 + 内嵌站点内容；
     # 发布流水线见 release.yml，本 job 只验证「安装包能打出来」，不产 Release）
     name: Desktop Build (xiyouji-desktop)
+    needs: changes
+    if: needs.changes.outputs.desktop == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
