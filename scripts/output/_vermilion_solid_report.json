@@ -1190,9 +1190,9 @@
    }
   },
   "data/narrative-experiment.html": {
-   "measured": 12,
+   "measured": 13,
    "exempted": 12,
-   "nonExempt": 0,
+   "nonExempt": 3,
    "fail": false,
    "perCls": {
     "div.kpi-card": {
@@ -1201,14 +1201,9 @@
      "nonExempt": 0
     },
     "div.player-card": {
-     "measured": 1,
+     "measured": 4,
      "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.hc-owner": {
-     "measured": 2,
-     "exempted": 2,
-     "nonExempt": 0
+     "nonExempt": 3
     },
     "span.gh-tag": {
      "measured": 1,
@@ -1228,6 +1223,11 @@
     "div.sc-cat": {
      "measured": 1,
      "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.hc-owner": {
+     "measured": 0,
+     "exempted": 2,
      "nonExempt": 0
     }
    }
@@ -3750,7 +3750,8 @@
  },
  "fails": [],
  "notes": [
-  "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）"
+  "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）",
+  "data/narrative-experiment.html 陈旧豁免（类已不在）：span.hc-owner"
  ],
- "generated_at": "2026-11-08T07:12:41.778Z"
+ "generated_at": "2026-11-14T12:32:17.006Z"
 }

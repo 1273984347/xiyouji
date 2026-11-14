@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-14 16:10
+生成时间：2026-11-15 06:06
 
-共 **220** 件（门禁与校验 103 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 86 · 一次性（下划线前缀） 7）
+共 **216** 件（门禁与校验 103 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
 
 ## 门禁与校验（103）
 
@@ -44,7 +44,7 @@
 | `check_dashboard_kpi.py` | check_dashboard_kpi.py — 第 68 门禁 · 首页 KPI 与统计快照对拍（W1170） |
 | `check_data_badge_coverage.py` | check_data_badge_coverage.py — 第 66 门禁 · 数据徽标覆盖（W1167 · MVP 迁移批③） |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
-| `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
+| `check_data_drift.js` | W1231：单行形态回退——V8 执行式重写产出 compact 单行对象，多行正则（要求 |
 | `check_dataset_manifest.py` | 第 63 门禁：dataset 清单与 schema 对拍（README ↔ 磁盘 / 量纲 / 端点 / 空值 / 废弃标记）。 |
 | `check_dataset_provenance.py` | 人物关系数据溯源校验器（W1138 建·W1141 挂第 61 槽）。 |
 | `check_db_schema.py` | check_db_schema.py — DB schema 门禁（W917 建置·B-DB-05 清偿）。 |
@@ -92,6 +92,7 @@
 | `check_powershell_parse.py` | check_powershell_parse.py — PowerShell 脚本可解析性判据（W1110 新增第 55 槽）。 |
 | `check_public_repo_secrets.py` | check_public_repo_secrets.py — 公开仓敏感内容扫描（可复跑防线） |
 | `check_reader_integrity.py` | 第 62 门禁：site/reader 完整性（C1 占位词 / C2 GitHub 链接 / C3 单 h1 / C4 标题唯一）。 |
+| `check_reader_rss_fresh.py` | check_reader_rss_fresh.py — reader 站与 RSS 产物新鲜度门禁（W1232·审计登记「reader/rss  |
 | `check_registration_surface.py` | check_registration_surface.py — 登记面一致性自检闸（W1116 建） |
 | `check_repo_layout.py` | check_repo_layout.py — 第 52 门禁：仓库布局（W1011 挂槽·用户 2026-10-29「全都做」） |
 | `check_screenshot_gates.js` | check_screenshot_gates.js — 图表/渲染动态门禁（W551 新建，挂 screenshot-review workfl |
@@ -106,7 +107,6 @@
 | `check_template_contract.py` | check_template_contract.py — 第 69 槽 · 模板结构契约 / 检索假阳性判据（W1178）。 |
 | `check_token_coverage.py` | check_token_coverage.py — Phase E E6 转正门禁（M2/M3：页面私有 <style> 令牌覆盖率） |
 | `check_tooltip_spacing.py` | check_tooltip_spacing.py — tooltip 多行间距判据（W1135·遗留② 根治 + 防复发） |
-| `check_untracked.py` | check_untracked.py — 交付物 untracked 文件检测 |
 | `check_vermilion_solid.js` | ---------- 纯逻辑（导出供单测·不触浏览器） ---------- |
 | `check_w_range_literal.py` | check_w_range_literal.py — W 号区间字面量门禁（W628 挂载·第 27 门禁）。 |
 | `detect_unwrapped_tables.py` | Detect tables without horizontal scroll wrapper in site/data HTML files. |
@@ -160,12 +160,11 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（86）
+## 工具（82）
 
 | 脚本 | 用途 |
 |:---|:---|
 | `a11y_audit.py` | a11y_audit.py - 全站可访问性审查脚本 |
-| `accent_audit.py` | accent_audit.py — W864 B2 朱砂落点审计（朱砂文字 + 朱砂实底·一次性件）。 |
 | `acceptance_snapshot.py` | acceptance_snapshot.py — W496 转正工具：验收数字当批现测速览。 |
 | `agent_start.py` | Agent 开局状态摘要 agent_start（W705 建·W707 加 --task）——把「读文档的负担」转移到系统。 |
 | `agg_entities.py` | agg_entities.py — B-5 聚合器先行（W651 启动·读 100 回 chapter-meta 出 entities 两类） |
@@ -198,7 +197,6 @@
 | `external_rule_scope.py` | external_rule_scope.py — W1197：外部规则扫描面的共享识别。 |
 | `extract_datasets.js` | extract_datasets.js — 从 site/data/*.html 提取 EMBEDDED_DATA 为 dataset/*.js |
 | `extract_strings.py` | Dump every chrome text node and every CJK-bearing script literal from a  |
-| `file_protocol_probe.py` | file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊断件·不入  |
 | `fixed_ancestor_probe.py` | fixed_ancestor_probe.py — 运行时包含块退化探针（position:fixed 元素 offsetParent ∈ {n |
 | `font_weight_probe.py` | 暗色字重探针（W1134）——证明「暗色模式字重降档」真实生效。 |
 | `icon_probe.js` | — |
@@ -222,12 +220,11 @@
 | `perf_monitor.py` | W267 E6 性能监控深化·Core Web Vitals 持续监控 + RUM + 警报 + 趋势 + 预算 |
 | `perf_optimize.py` | perf_optimize.py - 全站性能优化脚本 |
 | `plan_template_review.py` | _w857_plan_template_review.py — 计划方案对《任务计划、执行与经验沉淀系统提示词》模板的符合性复核探针 |
-| `plates_verify.py` | _w945_plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 /  |
+| `plates_verify.py` | plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 / 纸色） |
 | `pre-commit-validate.py` | pre-commit-validate.py — E3 收尾文档同步铁律·自动化校验门禁 |
 | `pre_push_gate.py` | pre_push_gate.py —— 推送前一命令真全量（W1215）。 |
 | `pre_release_screenshot.py` | pre_release_screenshot.py — 迭代发布前增强版截图审查集成脚本 |
 | `rebuild_section.py` | rebuild_section.py — 幂等段重建独立入口（W1120·工具层·不接收官链主链）。 |
-| `refresh_icon_paths.py` | W950 · 图标图形刷新器（把打磨后的新图形同步到全仓已内联的 SVG） |
 | `render_check.js` | W701：file:// 下 @font-face 以 origin 'null' 加载站内字体触发 CORS 策略提示， |
 | `reserve_w.py` | reserve_w.py — 批次号预约（防并行会话撞号·W1041 立） |
 | `review_sweep.py` | review_sweep.py — 全变动复审扫荡器（S-25·W699）。 |
@@ -236,7 +233,6 @@
 | `scan_targets.py` | W941 · UI 图标位 emoji 基准扫描器（机检判据·独立于替换逻辑） |
 | `sec002_negative_probe.py` | SEC-002 精确化判据的负样本自证（W1062 立·W1063 收紧修订）。 |
 | `security_scan.py` | W268 E8 安全深化·本地安全扫描工具 |
-| `site_audit.py` | site_audit.py — C 渠（朱砂文字落 --bg）+ 朱砂实底审计器（W876 重建件）。 |
 | `slice_screenshots.py` | Slice full-page screenshots into fixed-height chunks for pixel-level rev |
 | `source_collate.py` | source_collate.py — 原文考据三方对拍器（S-23·W699）。 |
 | `spot_check_nlp.py` | spot-check character_nlp.py 输出数据。 |

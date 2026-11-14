@@ -117,7 +117,13 @@ def _tail_block_start(src_text):
     正确行为：末尾块不属于任何批段 => 必须留在正本，不得随段迁出。
     """
     m = re.search(r"(?m)^# 更新日志\s*$", src_text)
-    return m.start() if m else None
+    if m:
+        return m.start()
+    # W1233 增锚：级联滚动把现役段推顶后，尾部「## [Unreleased] 段」（编号规则行 +
+    # 全站页数口径等文件级块·W1232 实证其被随段迁走 ⇒ 版本面推进器 fail-closed 复现）
+    # 同属「非批段的末尾文件级块」——同规则留守正本。
+    m2 = re.search(r"(?m)^## \[Unreleased\]\s*$", src_text)
+    return m2.start() if m2 else None
 
 
 def split_tail_block(src_text, cut, tail_start):

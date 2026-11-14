@@ -364,7 +364,8 @@ def self_test() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="第 28 门禁 · 可视化可引用性检查")
-    ap.add_argument("--generate-baseline", action="store_true", help="首跑冻结存量基线")
+    ap.add_argument("--generate-baseline", action="store_true", help="首跑冻结存量基线（须搭配 --approve）")
+    ap.add_argument("--approve", action="store_true", help="显式批准基线重写（铁律 16-⑦·豁免重写须用户批准）")
     ap.add_argument("--gate", action="store_true", help="门禁模式：基线外违规=FAIL（verify_delivery 调用）")
     ap.add_argument("--self-test", action="store_true", help="负样本自检")
     ap.add_argument("--json", dest="json_out", help="报告输出路径（默认 scripts/output/citability-report.json）")
@@ -377,6 +378,11 @@ def main() -> int:
         print(f"FAIL 未扫到页面：{SITE_DATA}")
         return 1
     if args.generate_baseline:
+        # W1232（深度审计 #51）：基线重写须显式 --approve（铁律 16-⑦ 机器化·防一键洗绿）
+        if not getattr(args, "approve", False):
+            print("[REFUSE] --generate-baseline 重写基线须显式批准：python scripts/check_citability.py --generate-baseline --approve")
+            print("         （豁免/基线只增不减为默认·重写即一键洗绿·铁律 16-⑦）")
+            return 1
         return generate_baseline(pages, date.today().isoformat())
     if args.gate:
         return gate(pages)

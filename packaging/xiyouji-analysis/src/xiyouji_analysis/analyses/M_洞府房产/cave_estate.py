@@ -38,7 +38,7 @@ CAVES = [
         "location": "花果山正顶",
         "environment": "瀑布遮门，石碣镌'花果山福地，水帘洞洞天'，内有石座石床、石锅石灶",
         "furnishings": "石座、石床、石凳、石盆、石碗，天然生成",
-        "treasures": " mischief石碣、铁板桥、瀑布天帘",
+        "treasures": "石碣、铁板桥、瀑布天帘",
         "minions_count": 47000,
         "subordinates": ["四健将·马流二元帅", "七十二洞妖王"],
         "territory": "花果山全域",
@@ -78,7 +78,7 @@ CAVES = [
         "feature": "灵山脚下得道黄毛貂鼠，与佛门有渊源",
     },
     {
-        "name": "白虎洞",
+        "name": "波月洞",
         "owner": "黄袍怪",
         "owner_rank": "king",
         "chapter": 29,
@@ -197,7 +197,7 @@ CAVES = [
         "region": "积雷山·摩云洞",
         "location": "积雷山顶",
         "environment": "摩云入汉，积雷成峰",
-        "furnishings": "万圣公主遗物珠玉满堂",
+        "furnishings": "万岁狐王遗物珠玉满堂",
         "treasures": "牛王金睛兽",
         "minions_count": 300,
         "subordinates": ["玉面狐狸·群妖"],
@@ -404,7 +404,7 @@ def build_by_owner_rank():
     counter = Counter(c["owner_rank"] for c in CAVES)
     rank_labels = {
         "king": "妖王级",
-        "general": "中将级",
+        "general": "妖将级",
         "minion": "小怪级",
     }
     return [
@@ -434,14 +434,16 @@ def build_summary():
     total = len(CAVES)
     luxury_avg = round(sum(c["luxury"] for c in CAVES) / total, 2)
     minions_total = sum(c["minions_count"] for c in CAVES)
+    minions_max = max(c["minions_count"] for c in CAVES)
+    luxury_max = max(c["luxury"] for c in CAVES)
     return {
         "total_caves": total,
         "luxury_avg": luxury_avg,
         "minions_total": minions_total,
-        "minions_max": max(c["minions_count"] for c in CAVES),
-        "minions_max_cave": next(c["name"] for c in CAVES if c["minions_count"] == max(c["minions_count"] for c in CAVES)),
-        "luxury_max": max(c["luxury"] for c in CAVES),
-        "luxury_max_caves": [c["name"] for c in CAVES if c["luxury"] == max(c["luxury"] for c in CAVES)],
+        "minions_max": minions_max,
+        "minions_max_cave": next(c["name"] for c in CAVES if c["minions_count"] == minions_max),
+        "luxury_max": luxury_max,
+        "luxury_max_caves": [c["name"] for c in CAVES if c["luxury"] == luxury_max],
         "ranked_kings": sum(1 for c in CAVES if c["owner_rank"] == "king"),
         "ranked_generals": sum(1 for c in CAVES if c["owner_rank"] == "general"),
     }

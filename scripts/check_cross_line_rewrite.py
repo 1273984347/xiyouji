@@ -189,63 +189,80 @@ def _replacement_kind(node):
     return _repl_kind_of_literal(_replacement_of(node))
 
 
-def scan():
-    high, mid, low, skipped = [], [], [], []
+def _iter_py_files():
+    """收集待扫 .py 文件（W1233 拆出：os.walk 三层循环独立化·同时消 9 条深层嵌套违规）。"""
     for base in SCAN_DIRS:
         for root, dirs, files in os.walk(base):
             dirs[:] = [d for d in dirs if d not in SKIP_DIR_PARTS]
             for fn in files:
-                if not fn.endswith(".py"):
-                    continue
-                p = os.path.join(root, fn)
-                rel = os.path.relpath(p, ROOT).replace("\\", "/")
-                try:
-                    src = open(p, encoding="utf-8").read()
-                    tree = ast.parse(src)
-                except Exception as e:  # noqa: BLE001
-                    skipped.append((rel, "解析失败：%r" % (e,)))
-                    continue
-                for node in ast.walk(tree):
-                    if not isinstance(node, ast.Call):
-                        continue
-                    fn_name = None
-                    if isinstance(node.func, ast.Attribute):
-                        fn_name = node.func.attr
-                    elif isinstance(node.func, ast.Name):
-                        fn_name = node.func.id
-                    if fn_name not in ("sub", "subn", "search", "findall", "finditer", "match", "fullmatch"):
-                        continue
-                    if not node.args:
-                        continue
-                    pat = _pattern_of(node.args[0])
-                    if pat is None:
-                        continue
-                    if not RE_NEGCLASS_STAR.search(pat):
-                        continue
-                    cross = _can_cross_line(pat)
-                    _rep = _replacement_of(node)
-                    item = {"file": rel, "line": node.lineno,
-                            "func": fn_name, "pattern": pat[:160],
-                            # 键计算用**未截断**的模式与替换串（W1045 对抗审查 P2-2：
-                            # 显示截断参与计算 ⇒ 不同模式撞键 ⇒ 漏拦）
-                            "pattern_full": pat,
-                            "repl_full": _rep if _rep is not None else "<fstring-or-unknown>",
-                            "cross": cross, "anchor": _has_tail_anchor(pat),
-                            "repl": _replacement_kind(node)}
-                    if fn_name in ("sub", "subn"):
-                        if not cross:
-                            continue          # 排除符含 \n ⇒ 不跨行 ⇒ 安全
-                        # W1042 判据升级：尾锚点**不再**作为「非高危」依据
-                        # （尾锚点只约束匹配末端，不约束匹配内部 ⇒ 仍可跨行）；
-                        # 真正的分界是**替换语义**：替换为固定串/空串 ⇒ 跨行即真删。
-                        if item["repl"] == "fixed":
-                            high.append(item)          # 跨行 × 固定串 ⇒ 真删 ⇒ 高危
-                        else:
-                            mid.append(item)           # 回原内容/函数替换 ⇒ 需人工确认
-                    else:
-                        if not cross:
-                            continue          # 只读面且不跨行 ⇒ 无需列
-                        low.append(item)
+                if fn.endswith(".py"):
+                    yield os.path.join(root, fn)
+
+
+def _classify_call(fn_name, node, rel):
+    """单调用点分类（W1233 拆出）。返回 (档位, item) 或 None（不列入）。"""
+    fn_name_check = fn_name
+    if fn_name_check not in ("sub", "subn", "search", "findall", "finditer", "match", "fullmatch"):
+        return None
+    if not node.args:
+        return None
+    pat = _pattern_of(node.args[0])
+    if pat is None:
+        return None
+    if not RE_NEGCLASS_STAR.search(pat):
+        return None
+    cross = _can_cross_line(pat)
+    _rep = _replacement_of(node)
+    item = {"file": rel, "line": node.lineno,
+            "func": fn_name, "pattern": pat[:160],
+            # 键计算用**未截断**的模式与替换串（W1045 对抗审查 P2-2：
+            # 显示截断参与计算 ⇒ 不同模式撞键 ⇒ 漏拦）
+            "pattern_full": pat,
+            "repl_full": _rep if _rep is not None else "<fstring-or-unknown>",
+            "cross": cross, "anchor": _has_tail_anchor(pat),
+            "repl": _replacement_kind(node)}
+    if fn_name in ("sub", "subn"):
+        if not cross:
+            return None          # 排除符含 \n ⇒ 不跨行 ⇒ 安全
+        # W1042 判据升级：尾锚点**不再**作为「非高危」依据
+        # （尾锚点只约束匹配末端，不约束匹配内部 ⇒ 仍可跨行）；
+        # 真正的分界是**替换语义**：替换为固定串/空串 ⇒ 跨行即真删。
+        if item["repl"] == "fixed":
+            return "high", item          # 跨行 × 固定串 ⇒ 真删 ⇒ 高危
+        return "mid", item               # 回原内容/函数替换 ⇒ 需人工确认
+    if not cross:
+        return None          # 只读面且不跨行 ⇒ 无需列
+    return "low", item
+
+
+def scan():
+    high, mid, low, skipped = [], [], [], []
+    for p in _iter_py_files():
+        rel = os.path.relpath(p, ROOT).replace("\\", "/")
+        try:
+            src = open(p, encoding="utf-8").read()
+            tree = ast.parse(src)
+        except Exception as e:  # noqa: BLE001
+            skipped.append((rel, "解析失败：%r" % (e,)))
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            fn_name = None
+            if isinstance(node.func, ast.Attribute):
+                fn_name = node.func.attr
+            elif isinstance(node.func, ast.Name):
+                fn_name = node.func.id
+            r = _classify_call(fn_name, node, rel)
+            if r is None:
+                continue
+            tier, item = r
+            if tier == "high":
+                high.append(item)
+            elif tier == "mid":
+                mid.append(item)
+            else:
+                low.append(item)
     return high, mid, low, skipped
 
 
@@ -259,6 +276,8 @@ def _repl_kind_of_call(src):
             if name in ("sub", "subn"):
                 return _replacement_kind(node)
     return None
+
+
 
 
 def _self_test():
@@ -325,6 +344,8 @@ def _self_test():
         ok = ok and passed
     print("SELF_TEST_%s（%d/%d 例通过）" % ("OK" if ok else "FAIL", sum(1 for _, p, _ in cases if p), len(cases)))
     return 0 if ok else 1
+
+
 
 
 def main() -> int:

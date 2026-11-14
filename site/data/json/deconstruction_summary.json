@@ -2,33 +2,32 @@
   "total_deconstruction_works": 7,
   "total_east_asia_receptions": 9,
   "countries_involved": [
-    "中国",
-    "日本",
-    "澳大利亚",
+    "韩国",
+    "中国香港",
     "美国",
     "越南",
-    "韩国",
-    "中国香港"
+    "中国",
+    "澳大利亚",
+    "日本"
   ],
   "media_types": [
+    "美剧",
+    "成人漫画",
+    "电视剧",
+    "电子游戏",
+    "戏剧·说唱",
+    "漫画·动画",
     "儿童漫画",
     "电影·喜剧",
-    "戏剧·说唱",
-    "电子游戏",
     "网络小说",
-    "漫画·动画",
-    "成人漫画",
     "电影",
-    "美剧",
-    "电视剧",
-    "小说",
-    "动画电影"
+    "动画电影",
+    "小说"
   ],
   "amplified_elements_count": 51,
   "most_amplified": "热血",
   "year_range": [
-    1986,
+    1979,
     2024
-  ],
-  "east_asia_receptions_detail": "明细见同目录 east_asia_receptions.json（9 条，2026-10-09 W678 关联注记）"
+  ]
 }

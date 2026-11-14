@@ -22,7 +22,12 @@ N_ITEMS = 20
 
 def main():
     s = open(os.path.join(ROOT, "CHANGELOG.md"), encoding="utf-8").read()
-    items = re.findall(r"^### (v[\d.]+)（(\d{4}-\d{2}-\d{2})）：(W\d+[^\n]*)$", s, re.M)[:N_ITEMS]
+    # W1232 根修：段标题现役形态 = `### W1231（2026-11-14）：标题`（版本号语义退役后
+    # 无 vX.Y.Z 前缀——旧正则要求 `### v...` 恒解析为空 ⇒ rss 自 10-22 起静默陈旧）。
+    # 现役形态优先，历史 v 形态回退兼容。
+    items = re.findall(r"^### (W\d+)（(\d{4}-\d{2}-\d{2})）：([^\n]*)$", s, re.M)[:N_ITEMS]
+    if not items:
+        items = re.findall(r"^### (v[\d.]+)（(\d{4}-\d{2}-\d{2})）：(W\d+[^\n]*)$", s, re.M)[:N_ITEMS]
     assert items, "CHANGELOG 现役版段解析为空"
 
     rows = []

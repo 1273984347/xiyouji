@@ -21,8 +21,11 @@ import check_script_coverage as cov  # noqa: E402
 
 PROMOTED = ["plan_template_review", "plates_verify", "check_crop"]
 # W1003：W977「硬保留」名单全部转正（C4 配额归零）——按新名逐一钉住可加载性
-PROMOTED_W1003 = ["file_protocol_probe", "j1_name_audit", "visual_regression_probe",
-                  "accent_audit", "site_audit", "scan_targets", "refresh_icon_paths",
+# W1230 裁决：file_protocol_probe / accent_audit / site_audit / refresh_icon_paths 四件
+# 经 2026-11-06 基础设施审计定性为一次性/被取代（第 49 槽 check_vermilion_solid.js 接管
+# 朱砂口径），已归档 archive/scripts/——名单随之摘名，防「已删件仍被 import 钉住」假绿。
+PROMOTED_W1003 = ["j1_name_audit", "visual_regression_probe",
+                  "scan_targets",
                   "subject_band"]  # subject_band：W1004 从归档桶转正的共用纯函数
 PROMOTED_JS = ["icon_probe.js"]
 

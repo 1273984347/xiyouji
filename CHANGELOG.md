@@ -1,3 +1,102 @@
+### W1236（2026-11-15）：CI 首跑红清偿批：浏览器探针自测改挂 e2e job + pytest 侧接线守卫，并回填上一批台账
+
+**本批要点**（W1236 CI 首跑红清偿批·PR #183 首跑抓到·本地绿/CI 红同族）：
+
+> - **① 红的事实**：PR #183 首跑，pytest shard 2/3 两例 FAIL —— `test_self_test_scripts[chart_render_probe.py]` 与 `[visual_regression_probe.py]`。本机同文件全绿、CI 全红：两件探针的自测都要 `pw.chromium.launch()`，而 pytest-unit 按 W401 分工**不装浏览器**（该 job 只装 pip 依赖；浏览器只由 e2e-interaction 的 `npx playwright install --with-deps chromium` 提供）。
+> - **② 根因（不是「CI 环境问题」）**：W1230 把 15 件 `--self-test` 一律按同一形态塞进 pytest，没有区分**是否需要浏览器**这一前置条件。判据（退出码 0）本身没错，错在**证据跑在了没有前置条件的作业里**——坑表 E-84「本地绿 / CI 红」同族。
+> - **③ 修法（换落点·不删用例）**：两件移入 `BROWSER_SELF_TEST_SCRIPTS`，改由 e2e-interaction job 真跑——该 job 已有 chromium 与 `--with-deps` 装好的系统库，python playwright 1.63.0 与 npm 同版、共用 `~/.cache/ms-playwright`。**没有**用 skipif 或删用例换绿：那等于把执行面从覆盖里摘掉（W1234 刚把五处 SKIP 改成 FAIL，不能反着走）。
+> - **④ 防复发（机器守卫）**：新增 `test_browser_self_tests_wired_in_ci`——断言 `.github/workflows/ci.yml` 里**同一行**既有 `scripts/<探针名>` 又有 `--self-test`。判据把「移出 pytest」与「在别处真跑」绑死，杜绝「移出去就没人跑」的静默退化。
+> - **⑤ 判据面不变**：第 42 槽根级脚本覆盖 0 FAIL（两件的 E3 字面 import 仍在文件内，CI 侧新增真跑命令）；`test_w1230_execution_faces.py` 17 例全过；workflow YAML 解析通过、`check_action_refs` PASS。
+> - **⑥ 回填**：W1235 台账 hash/末笔格回填（单笔 b04d6c906）。
+> - **验证**：pytest 该文件 17 例全过 · 第 42 槽 0 FAIL · action refs PASS · 收官链全量见验证栏。
+> - **文件**：见 file-index。
+
+### W1235（2026-11-15）：推送前自查预红清偿批：品牌守卫判定面收窄 + 提交主张判据收窄 + 台账腾窗 + 三处明文中性化，并回填上一批台账
+
+**本批要点**（W1235 推送前自查预红清偿批·三条判据与文档面根因同批清偿）：
+
+> - **① 预红事实（推送前自查）**：W1230-W1234 五批均未推送 ⇒ CI `security.yml` 的品牌守卫自 W1230 改判据后**从未在 CI 跑过一次**；本地实跑 `check_no_brand_refs.py` = **3 处 FAIL**——`CHANGELOG.md`（W1230 段遗留行）·`HANDOVER.md`（W1230 ⑥ 行）·`scripts/output/_w1230_spec.json`（milestone_block 一处 + changelog_body 两处）。三处都是 W1230 自己把**宿主运行态目录的路径明文**写进了文档，而该路径本身含被禁字面量 ⇒ 守卫按「全仓明文 0 命中」判红。按原样推送，Security job 必红。
+> - **② 品牌守卫判定面收窄（修判据·非加豁免）**：W1230 新增的本地目录名告警面对**点号前缀目录**失准——点号前缀是宿主/工具运行态（`.git`/`.pytest_cache`/会话记忆目录），名字由宿主产品决定、永不进入仓库内容面与 Pages 发布面，且删了下次会话即自动重建（多承载项目记忆）⇒ 告警不可执行＝纯噪声，而噪声会稀释真实命中。根修：抽出 `is_local_dir_candidate`（**采集层**判据，与**谓词层** `warn_dir_names` 分离）——点号前缀与构建缓存固定名不进采集；**无点号前缀的真残留照旧告警**（收窄只减噪声，不放宽命中）。
+> - **③ 提交主张判据收窄（第 31 槽 C4·修判据非补数据）**：C4 原判据对近 15 条提交标题里的**每一个** W 形态 token 都要求「有版段或有台账行」，于是测试套件名被当成批次主张——W1234 标题「+ w266 恒真断言修复」当场假红（该号既无版段也永不会有，因为它不是批次）。收窄为「**标题首个 W 号＝批次主张**」严格判红、其余 token 只出 NOTE（可见不阻断）。**明确否决「补一条 W266 台账行」的洗绿路径**——为迎合脆弱判据而造登记行正是最坏的一类补丁。回归锁 T4b/T4c（收窄不放宽：主张未登记仍红·正文已登记号不得顶替主张）。
+> - **④ W1230 遗留项复判（错判纠正）**：W1230 记为「本地面清理＝删目录（用户动作）」——复判为**错判**：该目录是宿主运行态且承载本项目记忆，删除即丢数据、且下次会话自动重建，删了问题不会消失。正确处置是收窄判据（②），文档据此中性化。
+> - **⑤ 三处明文中性化**：`CHANGELOG.md` W1230 段两行 / `HANDOVER.md` W1230 ⑥ 行 / `_w1230_spec.json` 三处，一律改写为「宿主运行态目录（点号前缀）」并补 W1235 复判指针——语义不变、字面量清零。
+> - **⑥ 台账腾窗（第 74 槽首跑即拦本批）**：新增 W1235 认领行使正本 61 段越窗（窗口 60）⇒ `archive_ledger_rows.py --apply` 迁 W1174-W1175 入归档表，正本留 59 行。
+> - **⑦ 分析包同步（W1230 接入的 ci_sim GATE 首次在批收尾真跑·当场抓到 W1231 遗留漂移）**：`package_analysis_sync.py --check` 待同步 6/38——W1231 对齐生成面时改了 narrative_experiment / visual_art / cave_estate / workplace / game_webnovel / ethics_consumption 六个分析件的值，**pip 包副本没跟着同步**（W1230 只接了判据，此后无批复跑同步）⇒ 随批 `--sync` 落地（6 写入 + 清单刷新），待同步 6→0。
+> - **⑧ 判据自证**：品牌守卫 `--self-test` 59→63 例（采集层四例：点号前缀不进 / 构建缓存不进 / 普通目录进 / 无点号前缀的被禁名仍进），全仓实跑 **0 命中 + 零 WARN**；口径体检 `--self-test` 37→39 例，实跑 **0 FAIL**（C4 由 FAIL 转 NOTE）。
+> - **⑨ 回填**：W1234 台账 hash/末笔格回填（单笔·末笔同首笔·铁律 21①）。
+> - **验证**：`check_no_brand_refs.py` 0 命中（5809 已跟踪文件）· 两脚本 self-test 全过 · 第 74 槽 0 FAIL · 分析包待同步 6→0 · 收官链全量见验证栏。
+> - **文件**：见 file-index。
+
+### W1234（2026-11-15）：E2E 接线裁决批：visualization_assertions 入 CI + SKIP→FAIL + w266 恒真断言修复 + test_visual 裁决 manual
+
+**本批要点**（W1234 E2E 接线裁决批·审计登记「E2E 接线决策 9 套件仅 1 进 CI」清偿）：
+
+> - **① 第二套件接入**：test_visualization_assertions.js 进 e2e-interaction job——独立于 check_chart_values（verify 第 43 段）的**第二条真渲染验证路径**（头注自述「两套实现同时错才可能漏报」），6 页 × 12 条具名族断言、纯离线 route-abort、复用同 job 已装 chromium（零增量安装分钟）。本地实跑 6 页 0 FAIL 后接线。
+> - **② SKIP→FAIL（fail-closed）**：test_site_quality 五处「前置元素缺失 console.log 降级」改 check(false) 计 bad——此前页面回归删元素会被静默降级为 SKIP 且退出码 0（审计 #16 实证的危害路径）；现删元素即红。
+> - **③ 恒真断言修复**：test_w266 互链验证 `otherV3Links.length >= 0` 对数组长度恒真（注释要求「至少 1 个」）→ `>= 1`。
+> - **④ test_visual 裁决**：manual 保留——10 页与 screenshot-review 全站截图审查高度重叠、CI 增量分钟收益低；judges 稳定且增量明确时再评估接入。 workflows README 同步登记。
+> - **⑤ 回填**：W1230-W1233 四批台账 hash/末笔格回填（四批均单笔·末笔同首笔·回填并入本在途批·铁律 21①）。
+> - **验证**：node test_visualization_assertions 6 页 0 FAIL；test_ci_wiring 24/24；node --check 两 JS 套件语法过。
+> - **文件**：见 file-index。
+
+### W1233（2026-11-15）：复杂度棘轮批：C901 全清零（W1161 后剩余 7 超阈函数拆 helper 消号）
+
+**本批要点**（W1233 复杂度棘轮批·审计专批「plates_verify+gen_folder_docs 复杂度巨债 17-29>15 触碰即被宽档拦截」清偿·C901 全清零）：
+
+> - **① 七函数拆 helper 消号**（判定逻辑逐字未改·公开签名全保留·api_diff 破坏性=无）：gen_folder_docs main 29（_warn_untracked/_kinds_for/_process_one/_report 四 helper·--refresh 端到端实跑 + 第 45 槽 0 FAIL）/ tmpe_tidy RunLock.acquire 19（_degrade_or_raise 降级形态折叠 + _inspect_lock/_takeover_stale/_create_and_write 三阶段·23/23 专项）/ check_cross_line_rewrite scan 18（_iter_py_files/_classify_call·连带 9 条 PLR1702 同拆消）/ j1_name_audit main 18（_verify_landed_checks/_preflight_checks 双臂）/ character_nlp build_cooccurrence 16（_count_and_pair/_scene_presents）/ check_doc_numbers check_coverage 16（_resolve_targets/_assert_one）/ bump_version main 16（_resolve_versions/_sync_range_and_footers/_sync_aux/_append_file_index·STOP 防线实跑验证）。
+> - **② 两则拆解教训当轮修正**：(a) tmpe_tidy 有 _NullLock 与 RunLock 两个同名 acquire——`find` 第一命中把 5 方法误插进 _NullLock（空锁类）·当轮发现修正（锚须含类名上下文）；(b) scan 切片区间误吞 _self_test 与 _repl_kind_of_call 两个相邻 helper（F821 当轮暴露·从 HEAD 补回）。
+> - **③ 验证**：全仓宽档 `C901 0 条`（W1161 后 7 函数全部消号·43→20 违规）；各专项测试全过；guardrails 五项全过。
+> - **④ 登记去向**：PLR1702 嵌套块 20 条（15 文件·5-6>4 档·xiyouji_rag 4/check_cross_line 2 等）登记**渐进棘轮**——触碰即被宽档拦、触碰即消号（W1230-W1233 四批已按此模式消 15+ 条）。
+> - **文件**：见 file-index。
+
+### W1232（2026-11-14）：门禁挂槽批：三槽挂载（72 emoji 棘轮 / 73 reader-RSS 新鲜度 / 74 体积窗口 P2-4）+ #51 审批标记 + 连带根修
+
+**本批要点**（W1232 门禁挂槽批·审计四登记项清偿·门禁 71→74 槽·用户令开工）：
+
+> - **① 第 72 槽 emoji 残留棘轮**：check_emoji_icons.py 自带 --gate 从未挂 verify（审计 §2.4）——静态残留 623 处存量一刀 FAIL 不可执行（W1155 1702 同族教训），挂载形态裁决为「只降不升」基线棘轮：首跑自动登记 623 为基线，gate 判当前 ≤ 基线（超基线判红·收紧须人工 --record 注明理由）；browser 实测段（图标渲染正确性）不受基线豁免仍全量硬判据。
+> - **② 第 73 槽 reader/RSS 产物新鲜度**：新判据脚本 check_reader_rss_fresh.py（git 视角产物最后提交 ≥ 输入面 docs/01-06 + source + 生成器最后变更·工作树 mtime 兜「已重建待提交」鸡生蛋窗口·浅克隆 exit 2 fail-closed）——**首跑即抓到真欠账**：docs/02 于 11-11 变更后 reader（停在 11-08）与 rss（停在 10-21）双双陈旧未重建，随批重建 630 页 + 20 条。
+> - **③ 第 74 槽治理文档体积窗口（P2-4 升格）**：对抗审查 2026-11-06 登记「挂载=铁律 8 须用户批准」，用户令开工即批——体积阈值/段行密度/C7 概要块硬判据自 preflight WARN 位升格 verify 阻断位。**首跑拦下 AGENTS.md 延迟超窗**（W1231 提交时 49703 > 49152 已越线·彼时无槽不可见）——按「摘要层下放·宪法只留指针」清偿：§4.3 三段详述下放为指针 + 72-74 摘要合并 + 脚注 W1227/W1228 迁归档。
+> - **④ #51 基线自服务重写审批标记**：check_data_copy_chain --record / check_glossary --build-baseline / check_citability --generate-baseline 三个「一键洗绿」旗标须显式搭配 --approve 方可重写（无批准 REFUSE + rc=1·铁律 16-⑦ 机器化）——3 例拒绝回归锁入 pytest。
+> - **⑤ 连带根修（本批触碰即消号）**：(a) gen_rss.py 版段正则要求退役的 `### vX.Y.Z` 形态 ⇒ 现役 `### WNNN` 形态恒解析为空 ⇒ rss 自 10-22 静默陈旧的根因（现役形态优先 + v 形态回退）；(b) build_reader.py 重建以自身模板洗掉 w1167 导航正本注入 ⇒ 第 65 槽 15 页「MARK 0 次」复踩——收尾自动 `nav_inject --apply` 流水线自愈；(c) run_browser/scan_static 拆 5 个私有 helper 消两处宽档钉（run_browser 24>16 / scan_static 16>15·判定逻辑逐字未改·623 计数前后一致自证）。
+> - **⑥ 统计链同步**：verify_delivery 三槽挂载（79 段自洽锁自动跟随）+ gates.md 三槽全量定义与标题 marker 74 + AGENTS gate_count 三处 71→74 + §4.2 三槽摘要——31/41/42 槽联动全清；42 槽摘 emoji 豁免行（W1014 C2 反向查：已挂槽不得仍豁免）。
+> - **⑦ 过程自证**：第 74 槽首跑拦本批延迟超窗、第 73 槽首跑抓双陈旧欠账、42 槽反向查抓豁免行——三槽挂载当轮即各自实证拦截能力（非「挂了没跑过」型纸面防线）；content-consistency 7 条 culture 新页矛盾（docs/04 11-11 新增内容·正则抽取同族伪影）按既往口径基线登记。
+> - **⑧ 终态**：verify --scope full 79 段 0 FAIL；guardrails 五项全过；pytest W1232 回归锁 7 例 + 全量 1667+ 过；CSP 867 页 0 漂移。
+> - **验证**：见上；三槽 marker 形态与 gates.md 登记一致；台账腾窗 2 行（W1171-W1172 迁归档）。
+> - **文件**：见 file-index。
+
+### W1231（2026-11-14）：单侧键 schema 分歧清理批：数据漂移门禁 v4 面板配对 + embed_json 三重根修 + 476 条隐性值漂移修复 + dataset 对齐生成面
+
+**本批要点**（W1231 单侧键 schema 分歧清理批·审计专批 2026-11-06 登记清偿·用户令开工）：
+
+> - **① 实证先行（侦察 subagent 只读取证）**：1702 条单侧键三态分类——零顶层键重叠复合包壳 889（页面 EMBEDDED 是 N 文档收进一对象）/ 数组↔对象 570（生成面裸数组·页面包壳）/ 部分重叠 243（真 schema 分歧）——85.5% 是判据配对形态差而非脏数据；两侧生成链定位：EMBEDDED 为历批手工嵌入快照（embed_json）、scripts/output/data 由 run_all 生成（gitignore 面）、dataset 纯手工无写入器。
+> - **② 门禁 v4 根修（修判据·非加豁免）**：`pairForCompare` 根级配对前置——包壳找键集全等面板、数组↔对象找同形数组成员，唯一命中才降级配对（歧义回落根级不猜）；设计性单侧键族豁免（`_schema`/`link_endpoint_schema`/`*_status`——W1141 起 dataset 溯源注记按设计只加在 JSON 面）；单行形态回退正则（V8 重写的 compact 对象·保护面守恒 60 页/151 对比项实测）。`--self-test` 8 例含负样本入 pytest。
+> - **③ embed_json 三重根修（本批最大根因发现）**：(a) 模式只认 `EMBEDDED` 名——实测 46 页用 `EMBEDDED_DATA`，工具对它们自出生起不可用；(b) 逐字符括号深度计数（含字符串感知中途版）在「洞察文案含引号/括号混排」页面边界失步——第一轮 replace 实测损坏 17 页（全量语法复查抓出·git restore 回滚后 V8 执行式重写修复），根修为行锚定成员定位（embed_json 自家 insert 的既定行格式）；(c) **replace off-by-one**：`find_field_bounds` 返回含闭合括号索引、`replace_key` 却 `html[val_end:]` 再拼一次 ⇒ 每次 replace 产出 `}}`/`]]` ⇒ 页面语法损坏 ⇒ **「JSON 改稿后页面 EMBEDDED 从未重灌」的全仓现象正是此 bug 的累积后果**（旧工具一重灌就坏页 ⇒ 快照永远停在旧版 ⇒ 476 条隐性值漂移）。4 例回归锁入 pytest（含刁钻夹具：字符串内花括号/注释括号/数组值面板/roundtrip）。
+> - **④ 476 条隐性值漂移修复**：24 面板按生成面权威重灌（aesthetics colors/styles、cave-estate caves/top_luxury/by_owner_rank/by_region、game-webnovel、karma、monster-background、music-structure、narrative-experiment、philosophy、power-resources、relationships faction/cooccurrence/timeline、risk、social-media、text-evolution versions、visual-art heart_sutra/scent_map、workplace trip_report/wukong_resume、timeline、jurisprudence sentencing、ethics-consumption monster_ipo）——jurisprudence 文案旧稿与「车池国→车迟国」错别字即此族实锤。
+> - **⑤ dataset 面对齐**：4 文件对齐生成面（cave-estate 四键合成 / timeline 22→36 项 / music-structure 五键合成 / text-evolution versions+variants+authors）——零注记键整体重写，W1149 状态键（subordinates_status/field_status）按 chapter/version 名从 HEAD 回合 8 条（第 63 门禁 C4 实测拦截后根修）；2 文件键改名向站侧对齐（81-hardships `index`→`n` ×81、magic-system `kills`→`combat_record` ×5，W566 先例方向，source_collate 6 消费点联动）；部署副本 47 件 sync 清零；dataset/README 生成器刷新。
+> - **⑥ 过程拦截自证**：第 51 槽（提交范围）在 W1230 已实证；本批第 63 槽 C4 抓住「对齐洗掉状态键」16 FAIL → 状态键回合根修 → 0 FAIL；第 10 槽全站内联语法 859 文件 OK（vm 重写后单行形态也在判据内）；CSP 19 页漂移随 generate_csp 重算归零。
+> - **⑦ 终态**：漂移 0 FAIL / 60 页全保护 / 单侧键 NOTE 1702→168（余量=dataset 手工摘录与页面复合面板的设计性分歧·摘要通道可见不判红·数据面对齐登记后续按需）；pytest W1231 回归锁 5 例全绿；guardrails 五项全过。
+> - **登记去向**：V8 执行式重写工具未入仓（tmpe 应急件·24h TTL）——embed_json replace 根修后日常重灌走 embed_json；单行形态页面（本批 24 面板重灌产物）如需再重灌，embed_json 行锚定对单行形态报「未找到」（fail-closed）——届时按门禁同款提取+V8 执行重建另批转正。
+> - **验证**：node check_data_drift.js rc=0（60 页/151 对比项·0 FAIL）· --self-test 8/8；node check_js_syntax.js --all 859 文件 OK；generate_csp --check 0 漂移；61/63 槽 0 FAIL；ruff/guardrails 全过；pytest 新增 5 例全绿。
+> - **文件**：见 file-index。
+
+### W1230（2026-11-14）：脚本接线/归档裁决批：第 42 槽 47 行 W1155 存量清偿 + packaging 同步接线 + 品牌守卫盲区根修
+
+**本批要点**（W1230 脚本接线/归档裁决批·审计专批 2026-11-06 登记「48 件未接线脚本接线/归档决策」清偿·用户令开工）：
+
+> - **① 实证先行**：先摘除 47 行 W1155 存量豁免再实跑第 42 槽——`无引用无豁免 47`，与登记数完全一致（W1155 登记零虚报·基线棘轮行确实都在拦截真未接线件）；逐件六面 grep（tests / verify / CI / Makefile / preflight / batch_cascade）建 47 件处置表后逐件裁决。
+> - **② 归档 5 件**（零执行面·零专测·git mv 保历史）：site_audit（朱砂口径已被第 49 槽 check_vermilion_solid.js 取代·审计 P3）/ refresh_icon_paths（一次性同步器·审计 P3）/ accent_audit（docstring 自述一次性）/ file_protocol_probe（自述「一次性诊断件·不入 CI」）/ check_untracked（休眠钩子已删 W1154 T13·恒 0）→ `archive/scripts/`；CATEGORY_OF 同步摘 5 条（防 `--save-baseline` 复活陷阱）；hygiene 测试 PROMOTED_W1003 摘 4 名（防已删件仍被 import 钉住）。
+> - **③ 补实质执行面 38 件 ⇒ 第 42 槽 0 FAIL**：新建 `tests/unit/test_w1230_execution_faces.py`（15 件 `--self-test` subprocess 真跑 + 20 件字面导入——E3 证据形态规范化，判据零放松：把既有真实执行面按判据设计的证据形态落入四面 corpus·纯 import 冒烟依然不算覆盖）+ `tests/unit/test_w1230_wire_archive.py`（check_crop / plates_verify / subject_band 三件转正判据首获实质图像测试：judge_og 正反样本 / 连通簇噪点过滤与朱砂排除（W974 教训判据）/ `--negative` 负样本端到端可证伪）。pyproject per-file-ignores 增两文件 E402（裸导入判据形态所需·F401 由 tests/* 全局档覆盖）。
+> - **④ 5 件合规重登记**（保留豁免·逐条换真实类别注记，替代 W1155 一刀切标签）：scan_targets ①emoji 基准再生器（check_emoji_icons 消费方）/ icon_probe.js ④运行时探针（check_emoji_icons 子进程调用·corpus 判据不可见）/ optimize-html-size ①（连字符名不可字面导入）/ pre-commit-validate ①（hook 入口·import 期读暂存区）/ pre_release_screenshot ③发布机专用。
+> - **⑤ packaging 同步缺口清偿（审计 P3 #24）**：`package_analysis_sync.py` 首次真跑补 5 件漂移（4 改 + `A_文本基础/` 新目录含 章节切分.py）·待同步 38/38 归零；`--check` 接入 `ci_sim.py` GATES（14→15 项）+ test_ci_sim 断言同步——pip 包与 scripts/ 的静默漂移自此有机器预演面。
+> - **⑥ 品牌守卫盲区根修（审计 P2 #22 仓内侧·铁律 19 配套）**：`check_no_brand_refs.py` 增 ignored 顶层目录名告警（`untracked_top_dir_names` + `warn_dir_names`·只判名字不读内容·不改退出码·tracked 内容判定面零变化）——本机宿主运行态目录**当场被 WARN 命中**（守卫失明数周后首次可见）；self-test 56→59 例（正例/大小写变形/中性名三组负样本）。本地面处置属用户动作（W1235 复判：该目录承载项目记忆、不删、改按判定面收窄清偿），仓内零改动。
+> - **⑦ plates_verify docstring 旧名订正**：`_w945_plates_verify.py` → `plates_verify.py`（W1154 T4 声明≠落地实锤：该批提交 --stat 无此文件·本批补齐）。
+> - **⑧ guardrails 两处口径对齐（修判据·非加豁免·纠正误判类留痕）**：`check_changed.ps1` 改动集/全仓过滤 `archive/*`（根 pyproject 与宽档配置均已声明排除 archive，调用面未生效=声明≠落地·实证：refresh_icon_paths 归档动作当下被宽档拦 main 23>15）+ 风格档/结构档两处 ruff 加 `--force-exclude`（显式传参绕过 exclude 的 ruff 语义缺口）；顺手根修 4 处存量嵌套推导式（character_network / hardships_81 / cave_estate ×2 的 scripts 原件显式循环化 + 同步面随批 + 新增 warn_dir_names 同形态）——packaging 同步把它们带进改动面后由宽档/嵌套门禁当场拦截，属「触碰即被拦」巨债族的首批消号。
+> - **⑨ 验证**：第 42 槽 `根级脚本 207 · 四面引用 161 · 豁免登记 46 · 无引用无豁免 0`；第 45 槽 0 FAIL（gen_folder_docs --refresh）；guardrails 五项全 OK（api_diff 破坏性=无）；pytest 新增 28 例全绿。
+> - **登记去向（MCP·外部动作待批·审计 P3 #23）**：fastmcp 未装——`py -3 -m pip install fastmcp` + MCP 客户端挂载须用户批准后执行；mcp-server 5 只读工具代码面与 101 例 mock 单测全绿，无仓内欠账。
+> - **遗留**：宿主运行态目录的误告警（W1235 复判为误告警并按判定面收窄清偿——该目录承载项目记忆、删不得且下次会话自动重建）；patch_ratio 保留 M-01 影子度量豁免（观察期设计·有意不接线）。
+> - **验证**：第 42 槽 0 FAIL / 第 45 槽 0 FAIL / guardrails 五项 OK / pytest 新增 28 例全绿；收官链全量复跑见验证栏。
+> - **文件**：见 file-index。
+
 ### W1229（2026-11-14）：登记面欠账清偿批：README 计数订正 + 台账 hash 机填与末笔格批处理
 
 **本批要点**（W1229 登记面欠账清偿批·核实驱动）：
@@ -662,82 +761,6 @@
 > - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
 > - **文件**：见 file-index。
 
-### W1176（2026-11-08）：术语表可视化页（V2 首批·数据管道根修 + 新页落地）
-
-**本批要点**（用户「开工」指令·V2 首批）：
-
-> - **T1 数据管道根修（先修管道再建页）**：`scripts/check_glossary.py` 的 `parse_md` 原实现只取前 1-2 列——`variant` 类取「异名/指代」丢「出处说明」、`term` 类只取术语名丢「含义/书中用法」两列。源表 `docs/00-导读/术语表.md` 是三列结构，**近半信息在生成管道里蒸发**，直接拿 JSON 建页会得到一个只有词名的空壳。改为保留完整列（缺列给空串保持结构稳定），重新生成 `dataset/glossary.json`（6 组 59 条，C1 与源表逐条对拍零差异）。
-> - **T2 新页 `site/data/glossary.html`**：KPI 四卡（6 组 / 59 条 / 10 异名映射 / 49 术语）+ 6 组筛选 tab + 防抖搜索 + 59 张术语卡片（人物称谓组展示「异名 → 正名」的内丹配属关系，其余组保留含义与书中用法）+ 完整对照表（与源表同构）。渲染实测：59 卡 / 59 行 / 7 tab / 计数正确、JS 无报错。
-> - **T3 模板缺陷根修（影响所有未来新页）**：`site/_template.html` 的说明注释里写了 `<script>` 字面量，被 HTML 解析器当成真的脚本块开始标签 ⇒ 注释文字被当脚本执行、报语法错误（`Unexpected identifier 'EMBEDDED_DATA'`）。浏览器容错使其不致命，但第 8 槽内联脚本语法门禁必红。改为「script 标签」文字表述，模板与新页同修；修后全站 859 文件语法通过。
-> - **T4 新增页的全链路要素补齐**：`w1167_badge_inject.py` 注入数据源徽标（snapshot/内嵌快照）、`w1167_nav_inject.py` 注入主导航（MARK 恰一次）、`<div id="dataSource">` 锚点满足第 28 槽 C1/C2/C4（citability 89/89）、`<!-- chart-degrade: n/a -->` 声明（第 30 槽）、`gen_sitemap.py` 补 sitemap、搜索索引重生成、CSP 全站重哈希（860 页 915 哈希零漂移）。
-> - **T5 色盲基线**：新页内联 CSS 继承模板的深色适配映射规则（两处近色 `#d87c6e`/`#e17670` ΔE=0.3），按官方路径 `--generate-baseline` 重冻结：17448 → 18295 行（+847 = 新页配对，其余页零变化，符合「单调不增」语义），基线外违规归零。
-> - **T6 V2 定位说明**：V2 原列的「西游地理 3D / 人物关系动态网络 / 八十一难难度热力图」三项**已全部存在**（2069 / 3156·2422 / 2276 行）。全站 89 个 data 页与 43 个数据集配对后，真正「有数据、无页面」的孤儿只有 `glossary` 一项——本批即把它落地，V2 的可视化侧至此清空。
-> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
-> - **文件**：见 file-index。
-
-### W1175（2026-11-08）：方案 §7 核验订正批（v5 批后清偿逐条复算）
-
-**本批要点**（用户「先订正方案」指令）：
-
-> - **T1 逐条按仓内证据复算 §7 批后清偿登记**：四个悬置条目逐个给出可复算命令与命中位置，不再留「待评估」。
-> - **qa-1（失效）**：`site/data/night-sky.html` 不存在——`find site/ -iname "*night*" -o -iname "*star*" -o -iname "*sky*"` 只命中国标 svg 与一张背景图，无页面。设计链路的假设未落到实现，条目划掉并注明失效原因。
-> - **qa-5（仍有效·真实缺口）**：`STATUS_TEXT["sample"]` 文案已定义于正本 `scripts/w1167_badge_inject.py`（「示例数据 · 仅演示」），但 `DEMO_SET = set()` 为空集、`classify()` 永不返回 `sample` ⇒ **徽标三态里的「演示」态从未在页面上出现过**。这不是失效条目而是功能缺口，已在方案里写明闭合路径（`DEMO_SET` 加一项 + 页内数据标 `sample`）。
-> - **qa-6（形态不符·影响可忽略）**：全站（`site/` + `scripts/`）无任何自定义双击处理器；`d3.zoom` 仅 `journey-geo-semiotics` 中英两版使用，其双击缩放是 **d3 内置行为**；因无 document 级双击监听，`stopPropagation` 缺失无实际副作用。若不要双击缩放，正解是 `.on("dblclick.zoom", null)`。
-> - **T2 核验纪律（本批自身教训）**：首版核验只 grep 了 `site/` 就判定 qa-5「`STATUS_TEXT` 无定义」，实为正本在 `scripts/w1167_badge_inject.py`——**核验范围必须覆盖 `scripts/` 与 `site/` 全域，grep 须排除 `.min.js`；结论写进方案前必须给出可复算命令与命中位置，不写「无任何定义」这类绝对表述除非全仓可验证**。该纪律已写入方案 §7 表下。
-> - **T3 数据源条目结转**：§7 的「旧『数据源：』行话多种口径」标注为 **W1174 已清偿**（四种说法统一、括号内信息原样保留）。
-> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
-> - **文件**：见 file-index。
-
-### W1174（2026-11-08）：移动端全量确认 + 数据源表述统一批（V1 收尾）
-
-**本批要点**（用户「先跑全量，再继续 V1」指令）：
-
-> - **T1 双视口全量普查（reader 不再抽样）**：`--scope all --reader-sample 1` 覆盖 859 页（根页 + data 89 + en 138 + reader 623 全量）。结果：**375px 859 页 FAIL 0 / 溢出 0**、**320px 859 页 FAIL 0 / 溢出 0**（各约 12 分钟）。这是 W1165 以来第一次真正意义上的全站移动端验证——此前 268 页口径中 reader 只抽样了 42 页（7%）。
-> - **T2 数据源表述统一**：`site/data` 的 dataSource 容器里，「数据在页面内嵌」这一概念原有四种说法（页面内嵌 EMBEDDED 数据 53 / 嵌入版本 26 / 嵌入式数据 1 / 嵌入式版本 1）。统一为「页面内嵌 EMBEDDED 数据」共 **30 页 32 处**；**括号内容原样保留**——B 类括号是「如何加载最新数据」的操作指引、A 类括号是「生成脚本 + 快照日期」的溯源信息，两者信息不同，合并会丢信息。最终分布：102 处统一表述 + 38 处「实时加载自」（不同语义，保留）+ 5 处页面专属表述（保留）。
-> - **T3 逐层收敛的实证**：首轮替换后抽查发现 `visual-art` 仍有「嵌入式版本」——映射表只写了「嵌入式数据」，漏了同族的「嵌入式版本」变体（分类时用 `'嵌入式数据' in text` 判断，把两者混为一谈）。补映射后单页重跑，残留归零。
-> - **T4 报告升级**：两份探针报告由抽样版（268 页）替换为全量版（859 页），第 64 槽 B1/B3 采信口径同步受益。
-> - **T5 连带**：改页面文案触发 CSP 3 页重哈希（文案在内联脚本模板里）+ 搜索索引重生成，均零漂移/零差异。
-> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
-> - **文件**：见 file-index。
-
-### W1173（2026-11-08）：移动端覆盖面与视口补齐批（探针扩面 data→all + 320px 采信）
-
-**本批要点**（W1172 期间暴露的双盲区补齐·用户「继续 V1」指令）：
-
-> - **T1 双盲区**：① **覆盖面**——探针原只扫 `site/data`，`site/en`（138 页）与 `site/reader`（623 页）从未被移动端检查；② **视口**——原只测 375px，320px（最窄主流宽度）未覆盖。W1165 起的所有「FAIL 归零」结论仅对 data 目录 + 375px 成立。
-> - **T2 探针扩面**：`list_pages` 加 `scope`（data/en/reader/all）+ `reader_sample` 抽样，且修正递归遗漏——`site/reader` 下有 people/themes/essays/culture 四个子目录，只取直接子文件会漏掉八成页面。扩面后：data 98 → all 268 页（en 148 含根页、reader 抽样 42）。
-> - **T3 button 触摸线**：W1165 那条移动端规则覆盖了 `select/input/label[for]` 却**漏了 button**——`en/relationships` 的「Redraw」实测 73×23px，差 1px 到 WCAG 2.5.8 的 24px 线。补 `button{min-height:24px}`：已够高的按钮（40/44px）原值保留，23px 这类仅 +1px 视觉无感。
-> - **T4 第 64 槽加 B3**：采信 320px 报告（`mobile_viewport_report_320.json`）的 FAIL=0；缺失仅 NOTE（探针约 4 分钟不进 pre-commit）。连同既有 B1（375px）构成双视口判据。
-> - **T5 验证**：双视口三目录普查——**375px 268 页 FAIL 0 / 溢出 0**、**320px 268 页 FAIL 0 / 溢出 0**；第 64 槽契约 7 项实跑 0 违规、自测 7/7。
-> - **T6 说明**：本轮为抽样口径（reader 每 20 页取一），非全量；全量 623 页需约 20 分钟，留作批收尾可选动作。
-> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
-> - **文件**：见 file-index。
-
-### W1172（2026-11-08）：表格窄屏溢出根修批（V4 视口延伸·851 页传播）
-
-**本批要点**（V4 视口延伸·用户「继续 V1」指令期间的实测发现）：
-
-> - **T1 发现（探针覆盖面盲区暴露）**：既有移动端探针只扫 `site/data`（99 页），**从未覆盖 `site/en`（138 页）与 `site/reader`（623 页）**。本次扩展到三目录后实测：`reader/ch006` 在 **375px 下就溢出 274px**、320px 下 329px；`ch004` 94px；`en/monster-sociology` 54px。即 W1165「99 页 FAIL 84→0」的结论只对 data 目录成立，全站视角下 reader/en 的表格从未被检查过。
-> - **T2 根因（统一且单一）**：reader 模板虽定义了 `.table-wrap`（带 `overflow:auto`），但正文表格是**裸 `<table>`**，未用该容器包裹；表格按内容撑开（实测 633px），直接把文档宽度顶破。en/data 多页同类。
-> - **T3 修法（共享层一条规则）**：`system.css` 移动端块加 `table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}` —— 让表格自身成为横向滚动容器。三档实测：**375px 溢出 274→0**（表高 441 不变 ⇒ 内容未被压缩）、**768px/1280px 零变化**（断点 640 不触发）。
-> - **T4 传播**：`inline_css --force` 重同步 851 页（reader 623 + en 138 + data 89 + 根页 3），单一事实源改动一次即全站生效。
-> - **T5 验证**：375px 六页抽查（reader ch006/ch004 + en monster-sociology + data 三页）溢出**全部归零**；320px 下 reader 两页归零。
-> - **T6 遗留（已开 W1173 追踪）**：320px 极窄屏另有 4 类**个别页硬编码宽度**残留（`en/monster-sociology` 表格内部 2599px、`data/character-dynamic-network` 的 `.stage-display`、`data/global-pattern` 的 `.pilgrim-card` 170px×2 列、`data/hardship-heatmap` 的 SVG 760px）——与 table 规则不同类，需逐页诊断，已后台跑 320px 全量拿完整清单。
-> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
-> - **文件**：见 file-index。
-
-### W1171（2026-11-08）：坑表补强批（行尾形态补全 + 元教训 E-211）
-
-**本批要点**（用户「先记坑」指令·W1170 三次提交失败的教训沉淀）：
-
-> - **T1 先去重再入册**：按「入册前先 Grep 去重」纪律核验，W1170 三次失败对应的三条坑**全部已在表内**——目录刷新必须先 `git add` 再 `--refresh`（E-107）、git 中文路径必须取 `-z`（E-37）、写盘行尾漂移（E-11 的近亲）。因此**不新增三条重复条目**（会污染坑表、稀释检索），改为补强与提炼。
-> - **T2 补强 E-11（第三种形态）**：原条目只覆盖「脚本显式把 `\n` 替换成 `\r\n`」；W1170 遇到的是**不显式替换也会污染**——Windows 下 Python `open(p,'w')` 文本模式默认产 CRLF（连续两批实证：W1169 的 CHANGELOG 968 处、W1170 的 23 个文件）。此形态更隐蔽：`git status` 干净、`git diff` 为空（`.gitattributes` 的 `eol=lf` 在入库层转换），但工作树字节与索引不一致，`batch_cascade` 读工作树直接 fail-closed「混合行尾」。补入三条修法：写文本永不省略 `newline='\n'` / 提交前 `git ls-files --eol | grep w/crlf` 自检为 0 / 归一用字节级写回而非文本模式重写。
-> - **T3 新增 E-211（元教训）**：同批三次提交失败**全部命中已入册的坑**，且第 45 槽的 FAIL 消息里就明写着「先 git add 本批新件再重跑 refresh」。这不是知识缺口而是执行纪律缺口，故记为方法论条目：① 开批前按本次触碰面 grep 坑表（文件类型/目录/工具名）；② 门禁 FAIL 消息里的「修法=…」是已沉淀经验，先照做再想根因，不要先怀疑工具；③ 重复踩已入册的坑时补强原条目或记元教训，**不新增重复条目**。
-> - **T4 计数链**：坑表 304→305 条、流程段 171→172，同步 AGENTS / HANDOVER / puti-shouye skill 四处。
-> - **验证**：第 31 门禁 C5e 分项对拍 0 FAIL；坑表编号唯一性 0 FAIL；本批纯 md 治理面，走 `batch_cascade --light` 轻量通道（准入判据=触碰面 ⊆ md）。
-> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
-> - **文件**：见 file-index。
-
 # 更新日志
 
 
@@ -746,7 +769,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1229），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1236），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -754,7 +777,7 @@
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
-> **全站页数口径**（W459 建·W702 实跑刷新·W1149 随批刷新，各门禁分母不同）：HTML 共 861<!--stats:html_total--> 页（site/data 90<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 623<!--stats:site_reader_html-->）；CSP 覆盖 860<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 859<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 859<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 852<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 89<!--stats:visualization_pages-->」= site/data 90 减 `_shell.html`。
+> **全站页数口径**（W459 建·W702 实跑刷新·W1149 随批刷新，各门禁分母不同）：HTML 共 868<!--stats:html_total--> 页（site/data 90<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 630<!--stats:site_reader_html-->）；CSP 覆盖 867<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 866<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 866<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 859<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 89<!--stats:visualization_pages-->」= site/data 90 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 > - **T9 体积门禁脚注切片根修（CI 首红暴露·铁律 15）**：check_doc_size_budget._agents_face 的行切片在「脚注=文件末行且无换行尾」（AGENTS.md 恒为该形态）时 find(nl)=-1 使 t[fs:-1] 吞收尾家具星号 ⇒ 剥家具失败条目恒 +19 字误判（往批短 note 潜伏未触顶·W1137 note=119 首踩本地绿 CI 红）⇒ 末行无换行时取到文件尾 + batch_cascade agents_note 预检与门禁同源计量（口径对齐）· 单测 12 例全过。

@@ -126,20 +126,6 @@
       }
     },
     {
-      "version": "《西游真诠》",
-      "year": "清康熙·1696·陈士斌评",
-      "type": "评本",
-      "chapters": 100,
-      "feature": "陈士斌评点·以金丹解西游·清代最流行评本",
-      "key_role_introduction": [],
-      "missing_elements": [],
-      "archaeological_layer": "层6·清真诠本",
-      "field_status": {
-        "key_role_introduction": "unknown",
-        "missing_elements": "unknown"
-      }
-    },
-    {
       "version": "《新说西游记》",
       "year": "清乾隆·1753·张书绅评",
       "type": "评本",
@@ -148,6 +134,20 @@
       "key_role_introduction": [],
       "missing_elements": [],
       "archaeological_layer": "层6·清新说本",
+      "field_status": {
+        "key_role_introduction": "unknown",
+        "missing_elements": "unknown"
+      }
+    },
+    {
+      "version": "《西游真诠》",
+      "year": "清康熙·1696·陈士斌评",
+      "type": "评本",
+      "chapters": 100,
+      "feature": "陈士斌评点·以金丹解西游·清代最流行评本",
+      "key_role_introduction": [],
+      "missing_elements": [],
+      "archaeological_layer": "层6·清真诠本",
       "field_status": {
         "key_role_introduction": "unknown",
         "missing_elements": "unknown"

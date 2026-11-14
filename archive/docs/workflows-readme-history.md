@@ -74,3 +74,10 @@
 + W1227 Draft Release 处置批：用户令删执行 gh release delete v2.3.0 + Releases 面清零 + 手册 T-1 执行结果补记·无 workflow 结构改动）。
 + W1228 对抗审查回批与登记机制根修：归档名大小写错名修 + 提交括号洞修 + 跳号让号补登 + 销毁留证事务化 + 到期日补齐 + 描述段开头 W 形态识别 + bullet 碑化降级·无 workflow 结构改动）。
 + W1229 登记面欠账清偿批：11-方案报告 README 计数订正 + 台账 8 行首笔 hash 机填与 27 行末笔格批处理订正·无 workflow 结构改动）。
++ W1230 审计专批「48 件未接线脚本接线/归档决策」清偿：第 42 槽摘行/归档/补执行面/重登记 + package_analysis_sync 接 ci_sim + check_no_brand_refs ignored 目录名告警·无 workflow 结构改动）。
++ W1231 审计专批：单侧键 1702 条 schema 分歧清理 + embed_json 三重根修 + 476 条隐性值漂移修复 + dataset 快照对齐生成面·无 workflow 结构改动）。
++ W1232 审计四登记项清偿：emoji 挂槽裁决与基线棘轮形态 + reader/rss 新鲜度门禁首跑抓双陈旧欠账随批重建 + P2-4 density 升格 verify 槽 + 基线重写审批标记机器化·无 workflow 结构改动）。
++ W1233 审计专批复杂度巨债清偿：gen_folder_docs 29 / tmpe_tidy 19 / cross_line_rewrite 18 / j1 18 / 16 档×3 全部拆 helper 消号，判定逻辑逐字未改，各专项测试全过·无 workflow 结构改动）。
++ W1234 审计登记 E2E 接线决策清偿：第二套件接入 e2e-interaction job 纯离线真渲染断言 + 五处前置元素缺失不再静默降级 + w266 互链断言修正 + test_visual 裁决 manual 保留 + 回填四批台账 hash·无 workflow 结构改动）。
++ W1235 品牌守卫判定面收窄与明文中性化，清偿推送前自查发现的 CI Security 预红，并回填上一批台账 hash·无 workflow 结构改动）。
++ W1236 CI 首跑抓到两件浏览器探针自测在无浏览器作业里必红，改挂有 chromium 的 e2e job 并加接线守卫·无 workflow 结构改动）。

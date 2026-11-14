@@ -404,7 +404,7 @@ def build_by_owner_rank():
     counter = Counter(c["owner_rank"] for c in CAVES)
     rank_labels = {
         "king": "妖王级",
-        "general": "中将级",
+        "general": "妖将级",
         "minion": "小怪级",
     }
     return [
@@ -434,14 +434,16 @@ def build_summary():
     total = len(CAVES)
     luxury_avg = round(sum(c["luxury"] for c in CAVES) / total, 2)
     minions_total = sum(c["minions_count"] for c in CAVES)
+    minions_max = max(c["minions_count"] for c in CAVES)
+    luxury_max = max(c["luxury"] for c in CAVES)
     return {
         "total_caves": total,
         "luxury_avg": luxury_avg,
         "minions_total": minions_total,
-        "minions_max": max(c["minions_count"] for c in CAVES),
-        "minions_max_cave": next(c["name"] for c in CAVES if c["minions_count"] == max(c["minions_count"] for c in CAVES)),
-        "luxury_max": max(c["luxury"] for c in CAVES),
-        "luxury_max_caves": [c["name"] for c in CAVES if c["luxury"] == max(c["luxury"] for c in CAVES)],
+        "minions_max": minions_max,
+        "minions_max_cave": next(c["name"] for c in CAVES if c["minions_count"] == minions_max),
+        "luxury_max": luxury_max,
+        "luxury_max_caves": [c["name"] for c in CAVES if c["luxury"] == luxury_max],
         "ranked_kings": sum(1 for c in CAVES if c["owner_rank"] == "king"),
         "ranked_generals": sum(1 for c in CAVES if c["owner_rank"] == "general"),
     }

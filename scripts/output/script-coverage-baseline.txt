@@ -14,7 +14,6 @@ baseline_snapshot.py  # ①取证快照
 build_reader.py  # ①阅读器构建
 bump_footer_version.py  # ①批量页脚版本
 check_dual_source_scan.py  # ③双源扫描（报告型）
-check_untracked.py  # ①取证扫描
 debug_page.js  # ④浏览器调试
 diagnose_overflow.js  # ④溢出诊断
 extract_datasets.js  # ①数据集抽取
@@ -40,7 +39,6 @@ verify_v2_pages.js  # ④V2 页面检查
 worktree_rehearse.py  # ②worktree 预演
 # W956 补登记：W941-W950 图标治理族的两支独立门禁（带 argv 契约·批收尾会话直跑·未挂 verify 槽）
 # 佐证：check_emoji_icons.py 自带正负样本运行形态；check_icon_fields.py 同族；登记类别=②会话直接执行类
-check_emoji_icons.py  # ②批收尾会话直跑门禁（UI 图标位 emoji 残留·W941-W950 族·W956 补登记）
 check_icon_fields.py  # ②批收尾会话直跑门禁（图标资产字段完整性·W949 族·W956 补登记）
 check_parser_anchor_coverage.py  # ②批收尾会话直跑扫描（解析器锚点覆盖面·W964 双虫探针常驻化·W965 建）
 check_gov_doc_claims.py  # ②批收尾会话直跑对账（治理文档数字断言·preflight 提示位接线·W967 建）
@@ -50,50 +48,8 @@ cascade_lock.py  # ②批收尾会话直跑工具（级联运行锁·--acquire/-
 check_audit_trigger.py  # ②批收尾会话直跑触发器（对抗式审查 ≥20 批点名·W1000 建）
 reserve_w.py  # ②开批占号助手（reserve/list/release 三模式·W1041 建）
 patch_ratio.py  # ②影子度量（补丁比报数·M-01 不挂槽·W1046 D-04 裁决观察数批再议·W1053 建）
-accent_audit.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-acceptance_snapshot.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-archive_segments.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-archive_tier2.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-audit_repo.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-batch_closeout.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-batch_spec.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-chart_render_probe.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_archive_health.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_backlog_review.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_cascade_line_anchor.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_crop.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_data_copy_chain.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_db_schema.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_doc_numbers.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_doc_size_budget.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_interaction_binding.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_page_admission.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_registration_surface.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_review_trigger.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-check_segment_gaps.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-color_delta_guard.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-containment_block_scan.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-export_design_tokens.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-file_protocol_probe.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-fixed_ancestor_probe.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-gen_dataset_index.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-gen_sitemap.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-gen_tools_inventory.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-icon_probe.js  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-interaction_components.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-interaction_state_probe.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-j1_name_audit.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-obs_sample.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-optimize-html-size.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-perf_optimize.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-plan_template_review.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-plates_verify.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-pre-commit-validate.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-pre_release_screenshot.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-refresh_icon_paths.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-safe_commit.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-scan_targets.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-site_audit.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-subject_band.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-tmpe_tidy.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
-visual_regression_probe.py  # ②W1155 存量登记（判据收紧为实质调用面后的真未接线清单·接线或归档另批）
+scan_targets.py  # ①emoji 图标位基准再生器（W941·产出基准 JSON 供 check_emoji_icons 消费·人工触发·W1230 裁决留行）
+icon_probe.js  # ④运行时图标探针（被 check_emoji_icons.py 子进程调用·四面 corpus 判据不可见·W1230 裁决留行）
+optimize-html-size.py  # ①HTML 体积优化建议报告（W230·人工触发只读分析·连字符名不可字面导入·W1230 裁决留行）
+pre-commit-validate.py  # ①hook 入口·import 期读 git 暂存区（仅提交钩子语境有意义·test_tool_scripts_cli I2 豁免在案·W1230 裁决留行）
+pre_release_screenshot.py  # ③发布链·发布机专用截图审查集成（import 期检查 Playwright·test_tool_scripts_cli I2 豁免在案·W1230 裁决留行）

@@ -19,7 +19,8 @@ import ci_sim  # noqa: E402
 
 def test_gate_list_covers_key_gates():
     labels = [label for label, _ in ci_sim.GATES]
-    for must in ("stats 对账", "文档口径体检(第31槽)", "索引健康(第17槽)", "目录新鲜度(第45槽)"):
+    for must in ("stats 对账", "文档口径体检(第31槽)", "索引健康(第17槽)", "目录新鲜度(第45槽)",
+                 "分析包同步(W1230接·P3#24)"):
         assert must in labels, "关键门禁未纳入预演清单：%s" % must
     # 每项都要有可执行的命令模板
     for _, tmpl in ci_sim.GATES:

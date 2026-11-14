@@ -660,6 +660,18 @@ def main() -> None:
     _inline_reader_css()
 
     print(f"[OK] 生成 {n_pages} 页（含内容页/板块目录/总目录）→ site/reader/")
+
+    # W1232 根修（第 65 槽复踩）：reader 重建以自身模板覆盖全部页面 ⇒ w1167 导航正本
+    # 注入（NAV-CANONICAL MARK + 主导航结构）被整体洗掉 ⇒ 65 槽 15 页「MARK 0 次」红
+    # （W1225 截图 scope 判据同族：重建流水线缺口）。重建收尾自动补注入，流水线自愈。
+    import subprocess
+    for inject_script in ("w1167_nav_inject.py", "w1167_analytics_inject.py"):
+        inj = subprocess.run([sys.executable, str(ROOT / "scripts" / inject_script), "--apply"],
+                             capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
+        print("[OK] %s 补注入：" % inject_script,
+              (inj.stdout or "").strip().splitlines()[-1] if (inj.stdout or "").strip() else "rc=%d" % inj.returncode)
+        if inj.returncode != 0:
+            print("[FAIL] %s 失败（rc=%d）：%s" % (inject_script, inj.returncode, (inj.stderr or "").strip()[:200]))
     if leftovers_all:
         print(f"[WARN] 未识别的 .md 链接 {len(leftovers_all)} 处：")
         for loc, u in leftovers_all[:10]:

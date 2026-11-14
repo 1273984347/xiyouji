@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（229）
+## 文件（225）
 
 ### Python 脚本
 
@@ -62,7 +62,6 @@
 - `_cite_probe.py`
 - `_gen_search_index.py`
 - `a11y_audit.py`
-- `accent_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
 - `agg_entities.py`
@@ -157,6 +156,7 @@
 - `check_powershell_parse.py`
 - `check_public_repo_secrets.py`
 - `check_reader_integrity.py`
+- `check_reader_rss_fresh.py`
 - `check_registration_surface.py`
 - `check_repo_layout.py`
 - `check_review_trigger.py`
@@ -171,7 +171,6 @@
 - `check_template_contract.py`
 - `check_token_coverage.py`
 - `check_tooltip_spacing.py`
-- `check_untracked.py`
 - `check_w_range_literal.py`
 - `ci_repair_apt_mirror.py`
 - `ci_sim.py`
@@ -189,7 +188,6 @@
 - `external_rule_scope.py`
 - `extract_strings.py`
 - `fetch_gate_stats.py`
-- `file_protocol_probe.py`
 - `fixed_ancestor_probe.py`
 - `font_weight_probe.py`
 - `gen_dataset_index.py`
@@ -230,7 +228,6 @@
 - `pre_release_screenshot.py`
 - `preflight_check.py`
 - `rebuild_section.py`
-- `refresh_icon_paths.py`
 - `release.py`
 - `release_prep.py`
 - `reserve_w.py`
@@ -240,7 +237,6 @@
 - `scan_targets.py`
 - `sec002_negative_probe.py`
 - `security_scan.py`
-- `site_audit.py`
 - `slice_screenshots.py`
 - `source_collate.py`
 - `spot_check_nlp.py`

@@ -469,13 +469,29 @@ def _c4_registered_ws(inp):
     if inp.get("archive_ledger_text"):
         reg |= table_registered_ws(inp["archive_ledger_text"])
     return reg
-def _c4_commit_ws_check(inp, reg, issues):
-    """C4：提交信息里的 W 号须有 CHANGELOG 版段或对账表登记。"""
+def _c4_commit_ws_check(inp, reg, issues, notes=None):
+    """C4：提交信息的**批次主张**须有 CHANGELOG 版段或对账表登记。
+
+    W1235 根修（判据过宽·假红）：原实现把标题内**每一个** W 形态 token 都当批次主张，
+    对未登记者一律判红。于是 `test_w266_…` 这类测试套件名、`_w1230_spec.json` 这类文件名
+    片段、以及「+ w266 恒真断言修复」这类正文引用，都会被要求「有版段或有台账行」——
+    而它们**永不会是批次**（W1234 提交标题当场踩中：w266 既无版段也无台账行 ⇒ 第 31 槽
+    恒红，且无论怎么补都只能靠造一条假台账行「洗绿」，属最坏的那种迎合）。
+    判据收窄到「标题首个 W 号」＝该提交所属批次的主张；其余 token 只记 NOTE（可见不阻断）。
+    """
     for s in inp["subjects"]:
         s2 = re.sub(r"W\d{3,4}\s*[-–—]\s*W\d{3,4}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
-        for w in RE_COMMIT_W.findall(s2):
-            if w not in reg:
-                issues.append("C4: 提交「%s」的 W%s 无 CHANGELOG 版段且未在对账表登记" % (s[:60], w))
+        ws = RE_COMMIT_W.findall(s2)
+        if not ws:
+            continue
+        if ws[0] not in reg:
+            issues.append("C4: 提交「%s」的 W%s 无 CHANGELOG 版段且未在对账表登记" % (s[:60], ws[0]))
+        extra = sorted({w for w in ws[1:] if w not in reg})
+        if extra and notes is not None:
+            notes.append(
+                "C4: 提交「%s」正文提及未登记 W 号 %s（非批次主张·测试套件名/文件名片段常见·不判红）"
+                % (s[:40], "/".join(extra))
+            )
     # C4 认领行强制（W720·W719 流程遗漏根修）：现役段 W 号须有对账表「表格行」登记——
     # 预留豁免 bullet（- **WXXX**：现势下一自由号…）不算认领；此前 C4 只查 W 号在登记集合，
     # 两种形态不可区分，动工未先登记认领行不会被拦（W719 实证被豁免 bullet 救场）
@@ -547,7 +563,7 @@ def _check_c4_commit_ledger(inp, issues, notes):
         notes.append("C4: 浅克隆环境（.git/shallow），提交对账跳过（pre-commit 本地为主执行点）")
         return
     reg = _c4_registered_ws(inp)
-    _c4_commit_ws_check(inp, reg, issues)
+    _c4_commit_ws_check(inp, reg, issues, notes)
     _c4_claim_row_check(inp, issues)
     _c4_cascade_manifest_check(inp, issues, notes)
     _c4_file_list_check(inp, issues, notes)
@@ -1165,6 +1181,17 @@ def run_self_test():
     case(
         "T4 提交带未登记 W 必红",
         lambda d: d.update(subjects=d["subjects"] + ["test(w777): 伪造未登记提交"]),
+        "C4",
+    )
+    case(
+        "T4b 正文提及测试套件号不判红（W1235·主张只取首个 W）",
+        lambda d: d.update(subjects=d["subjects"] + ["feat(w999): 附带 w266 套件断言修复"]),
+        "C4",
+        expect_absent=True,
+    )
+    case(
+        "T4c 主张号未登记必红，正文已登记号不得顶替（W1235·收窄不放宽）",
+        lambda d: d.update(subjects=["feat(w997): 正文引用已登记 w999"]),
         "C4",
     )
     case(

@@ -82,7 +82,14 @@ def check(verbose: bool = True) -> int:
     return 1 if fails else 0
 
 
-def record() -> int:
+def record(_internal: bool = False) -> int:
+    # W1232（深度审计 #51）：基线重写=一键洗绿豁免面 ⇒ 须显式 --approve（铁律 16-⑦
+    # 「豁免/基线新增条目必须用户批准」的机器化）——无批准标记拒绝执行。
+    # _internal=True 仅供 self_test 合成样本使用（不触真实基线·非批准旁路）。
+    if not _internal and "--approve" not in sys.argv:
+        print("[REFUSE] --record 重写基线须显式批准：python scripts/check_data_copy_chain.py --record --approve")
+        print("         （豁免/基线只增不减为默认·重写即一键洗绿·铁律 16-⑦）")
+        return 1
     drift, errs = _drift_set()
     if drift is None:
         print("[ERROR] 源目录不在，无法建基线")
@@ -115,13 +122,13 @@ def self_test() -> int:
             (DST / "b.json").write_text('{"v": 2}', encoding="utf-8")
             BASELINE = Path(td) / "base.json"
             cases.append(("T1 无基线时有漂移必红", check(verbose=False) == 1))
-            record()
+            record(_internal=True)
             cases.append(("T2 漂移入基线后放行", check(verbose=False) == 0))
             (DST / "c.json").write_text('{"v": 9}', encoding="utf-8")
             (SRC / "c.json").write_text('{"v": 1}', encoding="utf-8")
             cases.append(("T3 基线外新漂移必红", check(verbose=False) == 1))
             (DST / "b.json").write_text('{"v": 1}', encoding="utf-8")
-            record()  # T3 的 c 漂移入基线后再测恢复
+            record(_internal=True)  # T3 的 c 漂移入基线后再测恢复
             cases.append(("T4 恢复一致不红（NOTE）", check(verbose=False) == 0))
             SRC = Path(td) / "nothere"
             cases.append(("T5 源缺 CI 态 NOTE 放行", check(verbose=False) == 0))

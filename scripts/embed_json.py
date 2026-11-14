@@ -44,53 +44,144 @@ import sys
 from pathlib import Path
 
 # 匹配 const/let/var/window.EMBEDDED = {
+# W1231：站点页面实际用 `const EMBEDDED_DATA = {`（EMBEDDED_DATA 与 EMBEDDED 两名并存）
+# ——原模式只认 EMBEDDED 名 ⇒ 对 EMBEDDED_DATA 页找不到嵌入点（实测 46 页用 EMBEDDED_DATA / 26 页用 EMBEDDED·W1231 实测）。
 EMBEDDED_PATTERN = re.compile(
-    r'(?:const|let|var)\s+EMBEDDED\s*=\s*\{|window\.EMBEDDED\s*=\s*\{'
+    r'(?:const|let|var)\s+(?:EMBEDDED_DATA|EMBEDDED)\s*=\s*\{|window\.EMBEDDED(?:_DATA)?\s*=\s*\{'
 )
 
 
+def _member_line_re(key: str):
+    """成员行正则：行首缩进 + `<key>:` + 值开头（对象/数组双形态）。"""
+    return re.compile(r'^(\s*)' + re.escape(key) + r'\s*:\s*([\[{])')
+
+
+def _scan_balanced(text: str, start: int, end: int, open_ch: str, close_ch: str):
+    """字符串感知的括号配对扫描（W1231 回退路径·仅空对象/单行形态使用）。
+
+    字符串字面量（' " ` 三种引号·含反斜杠转义）内不计数。巨长文案页在深嵌套下
+    可能失步（W1231 实证 17 页）——那类页面恒由行锚定路径接管，本扫描只是
+    空对象 `const EMBEDDED = {};` / 单行形态的兜底（test_e3/e4/e9 夹具形态）。
+    返回配对闭合字符的索引；未闭合返回 None。
+    """
+    depth = 0
+    quote = None
+    i = start
+    while i <= end:
+        c = text[i]
+        if quote is not None:
+            if c == '\\':
+                i += 2
+                continue
+            if c == quote:
+                quote = None
+            i += 1
+            continue
+        if c in ('\'', '"', '`'):
+            quote = c
+        elif c == open_ch:
+            depth += 1
+        elif c == close_ch:
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return None
+
+
+def _line_anchored_bounds(html: str, key: str):
+    """W1231 根修：行锚定成员定位（取代逐字符括号扫描）。
+
+    为什么改算法：EMBEDDED 块里字符串值/注释可能含 `{}`/`[]`（relationships 页实测：
+    洞察文案含引号+括号混排，逐字符扫描（含字符串感知版）在多页上边界失步 ⇒
+    replace 把值写进错误 span、整页脚本语法损坏 17 页）。而本仓页面成员统一为
+    embed_json insert 的既定行格式——`\\n        key: <值>` 行首对齐、块尾 `\\n    };`
+    ⇒ 成员边界用**行锚定**判定：成员行 = 匹配 `^\\s*key\\s*:\\s*[\\[{]` 的行；
+    值 span = 该行值首字符到「下一成员行或块尾行」之前最后一个闭合括号字符。
+    返回 (val_start, val_end)（含括号）；未找到返回 None。
+    """
+    m = EMBEDDED_PATTERN.search(html)
+    if not m:
+        return None
+    end_block_re = re.compile(r'^\s*\};\s*$', re.M)
+    block_end = end_block_re.search(html, m.end())
+    if not block_end:
+        return None
+    # 成员行集合（声明行到块尾之间·缩进须与首个成员行一致——嵌套行缩进不同·防误切）
+    seg_start = m.end()
+    seg = html[seg_start:block_end.start()]
+    raw_members = []
+    for lm in re.finditer(r'^(\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:\s*([\[{])', seg, re.M):
+        raw_members.append((seg_start + lm.start(), lm.group(2), lm.group(1)))
+    if not raw_members:
+        return None
+    # 缩进归一化：首成员的 ^(\s*) 捕获含前置换行（re.M 在段首匹配）——剥离 CR/LF 后比较
+    def _norm(ind):
+        return ind.replace('\r', '').replace('\n', '')
+    root_indent = _norm(raw_members[0][2])
+    member_positions = [(pos, k) for pos, k, ind in raw_members if _norm(ind) == root_indent]
+    target = None
+    for pos, k in member_positions:
+        if k == key:
+            target = pos
+            break
+    if target is None:
+        return None
+    target_idx = member_positions.index((target, key))
+    next_pos = member_positions[target_idx + 1][0] if target_idx + 1 < len(member_positions) else block_end.start()
+    # 值起点：成员行上 key: 之后的 { 或 [
+    line_re = re.compile(_member_line_re(key).pattern, re.M)
+    lm = line_re.search(html, target, next_pos)
+    if not lm:
+        return None
+    val_start = lm.end() - 1
+    # 值终点：next_pos 之前最后一个闭合括号字符（} 或 ]——成员值的外层闭合）
+    region = html[val_start:next_pos]
+    close_candidates = [i for i, ch in enumerate(region) if ch in '}]']
+    if not close_candidates:
+        return None
+    val_end = val_start + close_candidates[-1]
+    return val_start, val_end
+
+
 def find_embedded_bounds(html: str):
-    """定位 EMBEDDED 对象的 { 与匹配 } 索引（含括号）。
+    """定位 EMBEDDED 对象的 { 与匹配 } 索引（W1231 行锚定优先·字符串感知扫描回退）。
 
     返回 (start_brace_index, end_brace_index)；未找到返回 None。
+    ① 多行形态：块尾 = 声明后第一个行首 `};`（embed_json insert 的既定块格式）；
+    ② 回退（空对象 `const EMBEDDED = {};` / 单行形态·ensure 注入与 V8 重写产物）：
+       行锚定块尾不存在 ⇒ 字符串感知括号扫描（_scan_balanced）——空对象/短字面量
+       上边界精确；巨长文案页才会失步，而它们恒走 ①。
     """
     m = EMBEDDED_PATTERN.search(html)
     if not m:
         return None
     brace_start = m.end() - 1  # 指向 {
-    depth = 0
-    for i in range(brace_start, len(html)):
-        c = html[i]
-        if c == '{':
-            depth += 1
-        elif c == '}':
-            depth -= 1
-            if depth == 0:
-                return brace_start, i
-    return None
+    end_block_re = re.compile(r'^\s*\};\s*$', re.M)
+    block_end = end_block_re.search(html, m.end())
+    if block_end:
+        # 块尾行的 `}` 位置 = 该行首个 `}`
+        brace_end = html.index('}', block_end.start())
+        return brace_start, brace_end
+    brace_end = _scan_balanced(html, brace_start, len(html) - 1, '{', '}')
+    if brace_end is None:
+        return None
+    return brace_start, brace_end
 
 
 def find_field_bounds(html: str, brace_start: int, brace_end: int, key: str):
-    """在 EMBEDDED 对象 [brace_start, brace_end] 内查找 `<key>: { ... }` 字段。
+    """在 EMBEDDED 对象内查找 `<key>: {...}` 或 `<key>: [...]` 字段（W1231 行锚定）。
 
-    返回字段值对象字面量的 { } 索引（含括号）；未找到返回 None。
-    沿用 w102_reembed.py 的简单正则思路：EMBEDDED 顶层 key 名冲突概率极低。
+    返回字段值字面量的起止索引（含括号）；未找到返回 None。
+    历史：W102 系逐字符括号深度计数（含 W1231 中途版的字符串感知变体）在
+    「洞察文案含引号/括号混排」的多页上边界失步 ⇒ 17 页 replace 后语法损坏
+    （relationships/aesthetics/text-evolution 等实测）。行锚定以 embed_json 自己
+    的 insert 行格式为准，成员边界不再依赖括号配对。
     """
-    field_pattern = re.compile(r'\b' + re.escape(key) + r'\s*:\s*\{')
-    m = field_pattern.search(html, brace_start, brace_end)
-    if not m:
+    bounds = _line_anchored_bounds(html, key)
+    if not bounds:
         return None
-    val_start = m.end() - 1  # 指向 {
-    depth = 0
-    for i in range(val_start, brace_end + 1):
-        c = html[i]
-        if c == '{':
-            depth += 1
-        elif c == '}':
-            depth -= 1
-            if depth == 0:
-                return val_start, i
-    return None
+    return bounds
 
 
 def ensure_embedded_exists(html: str) -> str:
@@ -134,7 +225,14 @@ def insert_key(html: str, brace_start: int, brace_end: int, key: str, json_str: 
 
 
 def replace_key(html: str, brace_start: int, brace_end: int, key: str, json_str: str) -> str:
-    """替换 EMBEDDED 对象中已有 `<key>: { ... }` 字段的值。"""
+    """替换 EMBEDDED 对象中已有 `<key>: { ... }` / `<key>: [...]` 字段的值。
+
+    W1231 根修（off-by-one）：find_field_bounds 返回的 val_end 是**含闭合括号**的索引，
+    原实现 `html[val_end:]` 把旧闭合括号再拼一次 ⇒ 每次 replace 都产出 `}}`/`]]`
+    ⇒ 页面脚本语法损坏。这正是「JSON 改稿后页面 EMBEDDED 从未重灌」的结构性根因
+    （旧工具一重灌就坏页 ⇒ 快照永远停在旧版·476 条隐性值漂移即由此累积）。
+    修法 = 值 span 闭区间替换：`html[val_end + 1:]`。
+    """
     field_bounds = find_field_bounds(html, brace_start, brace_end, key)
     if field_bounds is None:
         raise KeyError(
@@ -142,7 +240,7 @@ def replace_key(html: str, brace_start: int, brace_end: int, key: str, json_str:
             f'请改用 --mode insert 新增。'
         )
     val_start, val_end = field_bounds
-    return html[:val_start] + json_str + html[val_end:]
+    return html[:val_start] + json_str + html[val_end + 1:]
 
 
 def _parse_args():

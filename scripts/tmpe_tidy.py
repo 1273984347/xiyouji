@@ -298,10 +298,6 @@ class _NullLock:
     def acquire(self):
         return None
 
-    def release(self):
-        return None
-
-
 class RunLock:
     """运行锁：防两个会话同时归桶。stale 锁（pid 死）自动接管。
 
@@ -324,47 +320,76 @@ class RunLock:
             return json.load(fh)
 
     def acquire(self):
+        # W1233 拆解（复杂度 19>15）：三阶段 helper——锁检视/陈旧接管/原子创建写。
+        # 判定语义逐字未改；降级分支统一走 _degrade_or_raise（allow_degrade 形态折叠）。
         try:
             os.makedirs(os.path.dirname(self.path), exist_ok=True)
         except OSError as e:
-            if self.allow_degrade:
-                print(f"WARN 运行锁目录不可建（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行")
-                return
-            raise
+            self._degrade_or_raise(
+                f"WARN 运行锁目录不可建（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行", e)
+            return
         if os.path.exists(self.path):
-            data = {}
-            try:
-                data = self._read_lock()
-            except SystemExit:
-                raise
-            except (ValueError, OSError):
-                data = {}  # 锁损坏 → 按 stale 接管
-            pid = int(data.get("pid", -1))
-            ts = data.get("ts")
-            age_h = None
-            if ts:
-                try:
-                    age_h = (time.time() - datetime.datetime.fromisoformat(ts).timestamp()) / 3600.0
-                except ValueError:
-                    age_h = None
-            if pid == os.getpid():
-                raise SystemExit(f"FAIL 运行锁 pid 与本进程相同（{pid}·疑似残留自锁）")
-            if _pid_alive(pid) and age_h is not None and age_h <= self.max_age_hours:
-                raise SystemExit(
-                    f"FAIL 运行锁被占用：pid={pid} since={ts}（另会话在跑·锁龄 {age_h:.1f}h ≤ {self.max_age_hours}h）")
-            if _pid_alive(pid) and (age_h is None or age_h > self.max_age_hours):
-                # W1014 R1：pid 存活但锁超龄（或 ts 不可解析）→ 判陈旧接管（原实现只看 pid
-                # 存活、从不看年龄 ⇒ 一台机器上 pid 恰被复用即永久不可用·探针实测 361 天仍拦）
-                print(f"NOTE 锁 pid={pid} 存活但锁龄超阈值（{ts}·>{self.max_age_hours}h）⇒ 判陈旧接管")
-            # pid 已死 / 锁损坏 / 陈旧超龄 → 接管：W1014 R3 需先移除旧锁（否则 O_EXCL 永远失败）
-            try:
-                os.remove(self.path)
-            except OSError as e:
-                if self.allow_degrade:
-                    print(f"WARN 陈旧锁无法移除（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行")
+            info = self._inspect_lock()
+            # "self"/"live" 已在 _inspect_lock 内抛 SystemExit；None=锁损坏按 stale 接管
+            if info in ("stale", None):
+                if not self._takeover_stale():
                     return
-                raise SystemExit(f"FAIL 锁文件存在且无法移除（{e}）——用 --no-lock 跳过（仅只读模式可）") from None
-        # W1014 R3：原子创建（O_CREAT|O_EXCL·他方抢到即 FileExistsError，不互覆写）
+        self._create_and_write()
+        self.acquired = True
+
+    def _degrade_or_raise(self, warn, exc=None, fail=None):
+        """allow_degrade 形态折叠（W1233）：同构 if allow_degrade: print; return / else raise。"""
+        if self.allow_degrade:
+            print(warn)
+            return True
+        if fail is not None:
+            raise SystemExit(fail) from None
+        raise exc
+
+    def _inspect_lock(self):
+        """读现有锁 → "self"（本进程自锁·必拦）/ "stale"（可接管）/ "live"（他人持有·必拦）。
+
+        返回 None 表示锁损坏（按 stale 接管路径处理·返回给调用方分流）。
+        """
+        data = {}
+        try:
+            data = self._read_lock()
+        except SystemExit:
+            raise
+        except (ValueError, OSError):
+            data = {}  # 锁损坏 → 按 stale 接管
+        pid = int(data.get("pid", -1))
+        ts = data.get("ts")
+        age_h = None
+        if ts:
+            try:
+                age_h = (time.time() - datetime.datetime.fromisoformat(ts).timestamp()) / 3600.0
+            except ValueError:
+                age_h = None
+        if pid == os.getpid():
+            raise SystemExit(f"FAIL 运行锁 pid 与本进程相同（{pid}·疑似残留自锁）")
+        if _pid_alive(pid) and age_h is not None and age_h <= self.max_age_hours:
+            raise SystemExit(
+                f"FAIL 运行锁被占用：pid={pid} since={ts}（另会话在跑·锁龄 {age_h:.1f}h ≤ {self.max_age_hours}h）")
+        if _pid_alive(pid) and (age_h is None or age_h > self.max_age_hours):
+            # W1014 R1：pid 存活但锁超龄（或 ts 不可解析）→ 判陈旧接管（原实现只看 pid
+            # 存活、从不看年龄 ⇒ 一台机器上 pid 恰被复用即永久不可用·探针实测 361 天仍拦）
+            print(f"NOTE 锁 pid={pid} 存活但锁龄超阈值（{ts}·>{self.max_age_hours}h）⇒ 判陈旧接管")
+        return "stale"
+
+    def _takeover_stale(self):
+        """陈旧锁接管：移除旧锁（W1014 R3·否则 O_EXCL 永远失败）。返回 False = 已降级。"""
+        try:
+            os.remove(self.path)
+        except OSError as e:
+            if self.allow_degrade:
+                print(f"WARN 陈旧锁无法移除（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行")
+                return False
+            raise SystemExit(f"FAIL 锁文件存在且无法移除（{e}）——用 --no-lock 跳过（仅只读模式可）") from None
+        return True
+
+    def _create_and_write(self):
+        """原子创建 + 写 pid/host/ts（W1014 R3·他方抢到即 FileExistsError 不互覆写）。"""
         try:
             fd = os.open(self.path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
         except FileExistsError:
@@ -373,10 +398,8 @@ class RunLock:
                 return
             raise SystemExit("FAIL 运行锁竞争（他进程刚创建）——请稍后重跑") from None
         except OSError as e:
-            if self.allow_degrade:
-                print(f"WARN 运行锁不可写（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行")
-                return
-            raise
+            self._degrade_or_raise(f"WARN 运行锁不可写（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行", e)
+            return
         try:
             with os.fdopen(fd, "w", encoding="utf-8") as fh:
                 json.dump({"pid": os.getpid(), "host": os.environ.get("COMPUTERNAME", ""),

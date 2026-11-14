@@ -186,7 +186,8 @@ def load_baseline():
 def main():
     ap = argparse.ArgumentParser(description="术语一致性门禁（W502）")
     ap.add_argument("--generate", action="store_true", help="由术语表.md 重建 glossary.json")
-    ap.add_argument("--build-baseline", action="store_true", help="冻结当前违规为基线")
+    ap.add_argument("--build-baseline", action="store_true", help="冻结当前违规为基线（须搭配 --approve）")
+    ap.add_argument("--approve", action="store_true", help="显式批准基线重写（铁律 16-⑦·豁免重写须用户批准）")
     ap.add_argument("--file", help="单文件检查（不走基线）")
     args = ap.parse_args()
 
@@ -203,6 +204,11 @@ def main():
         return 0
 
     if args.build_baseline:
+        # W1232（深度审计 #51）：基线重写须显式 --approve（铁律 16-⑦ 机器化·防一键洗绿）
+        if not getattr(args, "approve", False):
+            print("[REFUSE] --build-baseline 重写基线须显式批准：python scripts/check_glossary.py --build-baseline --approve")
+            print("         （豁免/基线只增不减为默认·重写即一键洗绿·铁律 16-⑦）")
+            return 1
         viol = all_violations(md)
         pairs = sorted("%s\t%s" % (f, c) for f, cs in viol.items() for c in cs)
         with _guarded_write_open(BASELINE, "w", encoding="utf-8", newline="\n") as f:

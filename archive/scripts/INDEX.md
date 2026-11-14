@@ -14,7 +14,7 @@
 - `batches/`
 - `review-pass3/`
 
-## 文件（45）
+## 文件（50）
 
 ### Python 脚本
 
@@ -52,10 +52,15 @@
 - `_scan_sd_anchors.py`
 - `_scan_sd_misplace.py`
 - `_standardize_a5a6.py`
+- `accent_audit.py`
+- `check_untracked.py`
+- `file_protocol_probe.py`
 - `fix_links_w341.py`
 - `fix_links_w341_part2.py`
 - `fix_links_w341_part3.py`
 - `fix_svg_negative_widths.py`
+- `refresh_icon_paths.py`
+- `site_audit.py`
 - `w286_fix_ch69_99.py`
 - `w286_merge_yuanwen_shendu.py`
 - `w286b_fix_format.py`

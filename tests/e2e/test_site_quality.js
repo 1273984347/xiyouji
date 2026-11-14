@@ -75,7 +75,7 @@ function check(ok, label, detail) {
       const popup = document.querySelector('.map-popup');
       return { html: popup ? popup.innerHTML.slice(0, 80) : null, hasHead: popup ? popup.innerHTML.includes('p-head') : false };
     });
-    if (a1.skip) console.log('SKIP A1 popup:', a1.skip);
+    if (a1.skip) { check(false, 'SKIP A1 popup 前置元素缺失（W1234 SKIP→FAIL·不再静默降级）', a1.skip); }
     else check(a1.hasHead && a1.html.length > 0, 'A1 popup 转义拼串', JSON.stringify(a1.html || ''));
     await page.close();
   }
@@ -106,7 +106,7 @@ function check(ok, label, detail) {
       const distinct = [...new Set(dims.map((d) => Math.round(d * 100) / 100))];
       return { distinct, n: labels.length };
     });
-    if (a4.skip) console.log('SKIP A4:', a4.skip);
+    if (a4.skip) { check(false, 'SKIP A4 前置元素缺失（W1234 SKIP→FAIL·不再静默降级）', a4.skip); }
     else check(a4.distinct.length === 2 && a4.distinct.includes(0.15) && a4.distinct.includes(1),
       'A4 邻域标签双值 dim（0.15/1）', JSON.stringify(a4));
     // A5：切阶段清残留
@@ -144,7 +144,7 @@ function check(ok, label, detail) {
       const fills = new Set(rects.map((r) => r.getAttribute('fill')));
       return { hasMax: fills.has(target), fills: [...fills].slice(0, 5) };
     });
-    if (a8.skip) console.log('SKIP A8:', a8.skip);
+    if (a8.skip) { check(false, 'SKIP A8 前置元素缺失（W1234 SKIP→FAIL·不再静默降级）', a8.skip); }
     else check(a8.hasMax, 'A8 色标顶端 = interpolateYlOrRd(1)', JSON.stringify(a8.fills));
     await page.close();
   }
@@ -166,7 +166,7 @@ function check(ok, label, detail) {
       const tr = tip.getBoundingClientRect();
       return { dx: tr.x - cx, dy: tr.y - cy, op: getComputedStyle(tip).opacity };
     });
-    if (a7.skip) console.log('SKIP A7:', a7.skip);
+    if (a7.skip) { check(false, 'SKIP A7 前置元素缺失（W1234 SKIP→FAIL·不再静默降级）', a7.skip); }
     // 方案 A7 验收原文只考定位偏差（≤20px）；op 显隐涉及合成事件下 d3 datum 通道错位（W575 同族已知限制）不作断言
     else check(Math.abs(a7.dx) <= 20 && Math.abs(a7.dy) <= 20,
       'A7 river tooltip 定位偏差 ≤20px', JSON.stringify(a7));
@@ -179,7 +179,7 @@ function check(ok, label, detail) {
       btn.click();
       return { name: getComputedStyle(w).animationName };
     });
-    if (k11.skip) console.log('SKIP K11:', k11.skip);
+    if (k11.skip) { check(false, 'SKIP K11 前置元素缺失（W1234 SKIP→FAIL·不再静默降级）', k11.skip); }
     else check(k11.name === 'wordFloat', 'K11 重演恢复 animation-name', JSON.stringify(k11));
     await page.close();
   }

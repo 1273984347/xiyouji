@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-_w945_plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 / 纸色）
+plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 / 纸色）
 
 判据来源（每条都有判据文件，不得写成"看着还行"）：
   J1  画幅 = 1200×1600（精确 3:4·逐张实测）
@@ -18,8 +18,8 @@ _w945_plates_verify.py — 内页专题题图成套的机器判据（尺寸 / �
 反向验证（判据可证伪）：已知坏样本（浓墨渲染型 16:9/方图）走同一判据必须 FAIL。
 
 用法：
-  py -3 scripts/_w945_plates_verify.py
-  py -3 scripts/_w945_plates_verify.py --negative <坏样本路径>
+  py -3 scripts/plates_verify.py
+  py -3 scripts/plates_verify.py --negative <坏样本路径>
 退出码：0 全过；1 有 FAIL。
 （W983 批从 archive 恢复为现役·跨批通用判据·判据逻辑逐字未改）
 """

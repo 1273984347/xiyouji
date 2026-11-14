@@ -151,13 +151,14 @@ def group_by(items: list, key: str, label_map: dict) -> dict:
     返回 {标签: [{n,name,chapter}, ...], ...}，键顺序由 Counter.most_common() 决定。
     """
     counter = Counter(item[key] for item in items)
-    return {
-        label_map.get(k, k): [
-            {"n": item["n"], "name": item["name"], "chapter": item["chapter"]}
-            for item in items if item[key] == k
-        ]
-        for k, _ in counter.most_common()
-    }
+    grouped = {}
+    for k, _ in counter.most_common():
+        rows = []
+        for item in items:
+            if item[key] == k:
+                rows.append({"n": item["n"], "name": item["name"], "chapter": item["chapter"]})
+        grouped[label_map.get(k, k)] = rows
+    return grouped
 
 
 def _build_cross_cause_ending(hardships: list) -> dict:

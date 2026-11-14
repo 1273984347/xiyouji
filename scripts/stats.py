@@ -362,8 +362,19 @@ def sweep_markers(values, files=None, narrow_pred=None):
         with open(fp, encoding="utf-8", newline="") as fh:
             text = fh.read()
         if os.path.basename(fp) == "CHANGELOG.md":
+            # W1232 域修正：级联滚动把现役段推到文件最顶后，头部口径块被挤进
+            # ## [Unreleased] 段（实证：口径块现居 805 行）⇒ 旧截断「首个 ### W 段之前」
+            # 恒空 ⇒ C5b 六键恒红。新域 = 首个 ### W 段之前 ∪ [Unreleased] 段体。
             cut = text.find("\n### ")
-            text, tail = (text[:cut], text[cut:]) if cut != -1 else (text, "")
+            head = text[:cut] if cut != -1 else text
+            rest = text[cut:] if cut != -1 else ""
+            u_start = rest.find("## [Unreleased]")
+            if u_start != -1:
+                u_end = rest.find("\n### ", u_start + 1)
+                seg_end = u_end if u_end != -1 else len(rest)
+                head = head + "\n" + rest[u_start:seg_end]
+                rest = rest[:u_start] + rest[seg_end:]
+            text, tail = head, rest
         else:
             tail = ""
         narrow = narrow_pred(fp)  # W1215：正本只扫 ### 段头行（壳全扫）

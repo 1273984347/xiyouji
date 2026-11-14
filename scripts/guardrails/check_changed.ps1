@@ -123,6 +123,10 @@ if (-not $Paths) {
     $pyFiles = @($pyFiles | Where-Object { -not ((Split-Path -Leaf $_).StartsWith('_')) })
     # tmpe/ 是 gitignored 的临时脚本区，永远不进门禁（否则历史脚本会刷屏噪声）。
     $pyFiles = @($pyFiles | Where-Object { -not ($_ -like 'tmpe/*') })
+    # archive/ 是历史归档面：根 pyproject 与 ruff-structure.toml 均已声明排除（CI
+    # `ruff check .` 同口径）——改动集/全仓扫描若不排除，归档件一被移动就触发宽档
+    # （W1230 实证：refresh_icon_paths 归档动作当下被拦 main 23>15）。
+    $pyFiles = @($pyFiles | Where-Object { -not ($_ -like 'archive/*') })
 }
 $skipped = @($candidates).Count - $pyFiles.Count
 
@@ -138,14 +142,14 @@ Write-Host "== check_changed（$mode）：$($pyFiles.Count) 个 .py 文件 =="
 #    显式 --config 是为了避开 ruff 对子目录内 ruff.toml 的发现：否则 scripts/guardrails/ 下的文件
 #    会被结构档配置接管，风格档结论就与 CI 不一致。
 $rootCfg = Join-Path $repo 'pyproject.toml'
-$rcStyle = Invoke-Tool -Tool $ruff -ToolArgs @('check', '--config', $rootCfg, '--output-format', 'concise', '--no-cache') -Files $pyFiles
+$rcStyle = Invoke-Tool -Tool $ruff -ToolArgs @('check', '--config', $rootCfg, '--output-format', 'concise', '--no-cache', '--force-exclude') -Files $pyFiles
 Write-Host "[$(if ($rcStyle -eq 0) { 'OK' } else { 'FAIL' })] ruff 风格档（根 pyproject.toml，CI 同源）"
 
 # 2) 结构档（scripts/guardrails/ruff-structure.toml；阻塞）
 #    文件名刻意不用 ruff.toml：ruff 只自动发现 ruff.toml/.ruff.toml/pyproject.toml，
 #    改成 ruff-structure.toml 后它不会介入任何常规 `ruff check .`，只由本脚本显式加载。
 $cfg = Join-Path $repo 'scripts/guardrails/ruff-structure.toml'
-$ruffArgs = @('check', '--config', $cfg, '--output-format', 'concise', '--no-cache')
+$ruffArgs = @('check', '--config', $cfg, '--output-format', 'concise', '--no-cache', '--force-exclude')
 if ($Strict) {
     $ruffArgs += @(
         '--config', 'lint.mccabe.max-complexity=12',

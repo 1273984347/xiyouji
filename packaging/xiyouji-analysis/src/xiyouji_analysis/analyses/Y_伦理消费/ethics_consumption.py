@@ -312,7 +312,7 @@ TANG_MONK_FOOD_VLOG = [
 MONSTER_IPO = [
     {
         "company_name": "狮驼岭集团",
-        "ticker": "STD：LION",
+        "ticker": "STD:LION",
         "ipo_year": "贞观 19 年",
         "ceo": "青毛狮子怪",
         "cto": "黄牙老象",
@@ -357,7 +357,7 @@ MONSTER_IPO = [
     },
     {
         "company_name": "火云洞食品",
-        "ticker": "STD：FIRE",
+        "ticker": "STD:FIRE",
         "ipo_year": "贞观 14 年",
         "ceo": "红孩儿（圣婴大王）",
         "cto": "无",
@@ -400,7 +400,7 @@ MONSTER_IPO = [
     },
     {
         "company_name": "通天河运输",
-        "ticker": "STD：RIVER",
+        "ticker": "STD:RIVER",
         "ipo_year": "贞观 17 年",
         "ceo": "灵感大王（金鱼精）",
         "cto": "无",
@@ -442,7 +442,7 @@ MONSTER_IPO = [
     },
     {
         "company_name": "无底洞地产",
-        "ticker": "STD：MOUSE",
+        "ticker": "STD:MOUSE",
         "ipo_year": "贞观 22 年",
         "ceo": "金鼻白毛老鼠精（半截观音）",
         "cto": "无",
@@ -484,7 +484,7 @@ MONSTER_IPO = [
     },
     {
         "company_name": "火焰山能源",
-        "ticker": "STD：FLAME",
+        "ticker": "STD:FLAME",
         "ipo_year": "贞观 25 年",
         "ceo": "牛魔王（大股东）",
         "cto": "铁扇公主（CTO·芭蕉扇持有者）",

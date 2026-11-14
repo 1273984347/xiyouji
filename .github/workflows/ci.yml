@@ -533,6 +533,31 @@ jobs:
       - name: Run E2E site quality suite
         run: node tests/e2e/test_site_quality.js
 
+      # W1234（审计 #16「test_visualization_assertions 接入 CI 或删除入口」裁决·接入）：
+      # 独立于 check_chart_values 的第二条真渲染验证路径（头注自述「两套实现同时错才
+      # 可能漏报」）——6 页 × 12 条具名族断言·纯离线（route-abort）·复用上一步 chromium。
+      - name: Run E2E visualization assertions suite (W1234)
+        run: node tests/e2e/test_visualization_assertions.js
+
+      # W1236（E-84 同族·本地绿/CI 红）：chart_render_probe / visual_regression_probe 两个
+      # **浏览器探针**的 --self-test 原挂在 pytest-unit（该 job 按 W401 分工不装浏览器）⇒
+      # 本机有 chromium 的绿、CI 必红。二者移入本 job：这里已有 chromium 与 --with-deps 装好
+      # 的系统库（python playwright 1.63.0 与 npm 同版·共用 ~/.cache/ms-playwright）。
+      - name: Set up Python 3.12 (W1236·浏览器探针自测)
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements-hashed.txt
+
+      - name: Install Python deps (W1236·浏览器探针自测)
+        run: pip install --require-hashes -r scripts/requirements-hashed.txt
+
+      - name: Run browser-probe self-tests (W1236)
+        run: |
+          python scripts/chart_render_probe.py --self-test
+          python scripts/visual_regression_probe.py --self-test
+
   agent-web-build:
     name: Agent Web Build (xiyouji-agent-web)
     needs: changes

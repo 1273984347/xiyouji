@@ -9,7 +9,7 @@
    }
   },
   "data/81-hardships.html": {
-   "sha1": "4f796d1d08f58738b3201b7d760da537cbdcc8b4",
+   "sha1": "2d648d4a4a9f1c91c0646fb0271a64ba46f3aa05",
    "counts": {
     "span.tag": 90
    }
@@ -19,7 +19,7 @@
    "counts": {}
   },
   "data/aesthetics.html": {
-   "sha1": "435d499207b42c3059f1345ccafcc0f42bc84741",
+   "sha1": "1c09f4546694028c8170c2335e3d32d1f8cc95bb",
    "counts": {
     "div.kpi-card": 1,
     "div.color-swatch": 1,
@@ -42,7 +42,7 @@
    }
   },
   "data/cave-estate.html": {
-   "sha1": "a12ca1b5c2661e6287f1e00aca2317b14a8759d4",
+   "sha1": "fce9297ffcc839be03f761ae6dcdc399f41784b9",
    "counts": {
     "div.kpi-card": 1,
     "span.tag.king": 19
@@ -150,7 +150,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "c6142a229c8c0dfdc177ed29b4faae1dfa2badcc",
+   "sha1": "3fc18b10d361af3998ca7e96f855446f8ac4cede",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -206,7 +206,7 @@
    }
   },
   "data/ethics-consumption.html": {
-   "sha1": "fcf70f1316e5a692da368652e191be34b094395a",
+   "sha1": "bba431bb888891f7c9d5dcf64f063f182bdf15c4",
    "counts": {
     "div.kpi-card": 1,
     "div.sev-badge.sev-extreme": 1,
@@ -235,7 +235,7 @@
    }
   },
   "data/game-webnovel.html": {
-   "sha1": "6da110e554cbfdb42bfbbfd3738e6b6cc9cdae73",
+   "sha1": "047a06b676161e891eccd8ab9bc2956f515c947b",
    "counts": {
     "div.kpi-card": 1,
     "div.cc-stat-fill": 10,
@@ -328,7 +328,7 @@
    }
   },
   "data/jurisprudence.html": {
-   "sha1": "3c43cefcb7de864720360db7cca47816caa94ef0",
+   "sha1": "c32074db8cc77ea2ea06989d3e906b453a4978b6",
    "counts": {
     "div.kpi-card": 1,
     "span.severity-pill.sev-high": 8,
@@ -336,7 +336,7 @@
    }
   },
   "data/karma-reincarnation.html": {
-   "sha1": "5610553f1098a130cab2ba33ae7a1fe1a3e57496",
+   "sha1": "514d3f81f85231453589deda7522025aab0f6b52",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card.c-chusheng": 1
@@ -401,7 +401,7 @@
    }
   },
   "data/monster-background.html": {
-   "sha1": "9ac660b86080e8bfed557f5a31525441ffefc122",
+   "sha1": "36308628db4dbb1785e66d334d49590f34c13e03",
    "counts": {
     "div.kpi-card": 1
    }
@@ -447,7 +447,7 @@
    }
   },
   "data/music-structure.html": {
-   "sha1": "733ba5b0cf614060cab11679aa5937fc9d8217d5",
+   "sha1": "0f010a8e2db1d6a9067954c9344559a804815918",
    "counts": {
     "div.kpi-card": 1,
     "div.mv-card": 1,
@@ -456,11 +456,10 @@
    }
   },
   "data/narrative-experiment.html": {
-   "sha1": "c85dbc8eb2fb3761bb902fef13dfe111e7e3199f",
+   "sha1": "6f142a4929940503a7ad7fcf25a40a9ea265d6f9",
    "counts": {
     "div.kpi-card": 1,
-    "div.player-card": 1,
-    "span.hc-owner": 2,
+    "div.player-card": 4,
     "span.gh-tag": 1,
     "div.narr-card": 1,
     "span.sc-chip": 5,
@@ -495,7 +494,7 @@
    }
   },
   "data/philosophy.html": {
-   "sha1": "53f0db15806a19805a2303fe9769022e1d86ddbd",
+   "sha1": "5897c7dff4c057d50b4af7856b3c0157b058714e",
    "counts": {
     "div.kpi-card": 1
    }
@@ -523,21 +522,21 @@
    }
   },
   "data/power-resources.html": {
-   "sha1": "7a14ee4dd63cc3a9b1bdb867ee431fdc90d9c1d8",
+   "sha1": "0bc3122ee7b256937dea2cd01f7feebc0c40063f",
    "counts": {
     "div.kpi-card": 1,
     "div.faction-card": 1
    }
   },
   "data/relationships.html": {
-   "sha1": "0d90fe5104f69660d30a9b8370bbbd7ed22dbdf5",
+   "sha1": "931f6e88da11cb5e5ae52e0786ea8a1daa284c12",
    "counts": {
     "div.kpi-card": 1,
     "span.role-tag.primary": 5
    }
   },
   "data/risk-project.html": {
-   "sha1": "3f40a3d909ca4ef7f4b706c375106101e50ca0cb",
+   "sha1": "c181daa5040695bf2b0f457d1a94519ea315a076",
    "counts": {
     "div.kpi-card": 1,
     "div.char-card.c-tang": 1
@@ -556,7 +555,7 @@
    }
   },
   "data/social-media.html": {
-   "sha1": "cba3964c299b185576b0f5c034d0b7d2ff25f713",
+   "sha1": "80112d81611e9168708d67f0a09d099e3a90b705",
    "counts": {
     "div.kpi-card": 1,
     "div.platform-badge": 1
@@ -569,14 +568,14 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "709ab7b5a4c61ba36ead150d2f15c7e44b206254",
+   "sha1": "fe7d94e6fc896bc6232881365c328089f65d5d5c",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
    }
   },
   "data/text-evolution.html": {
-   "sha1": "9e4ff68892e9c58ff5c8e4e9922c05c440ed5687",
+   "sha1": "968a41dd94232db6b4e09a859665f6efc69e9cc1",
    "counts": {
     "div.kpi-card": 1,
     "div.evo-step.first": 6,
@@ -609,7 +608,7 @@
    }
   },
   "data/visual-art.html": {
-   "sha1": "0cea3ca0e3fb00e2cab19d7b1c9bcf1c386a4b29",
+   "sha1": "c37af42c2030dbda73107b414555409a51450ec7",
    "counts": {
     "div.kpi-card": 1,
     "div.chant-card.amp-high": 1,
@@ -620,7 +619,7 @@
    }
   },
   "data/workplace.html": {
-   "sha1": "93b97bda5ceb5a8a01397d0bb1b3ef99b12621d4",
+   "sha1": "bad478007a8e57773d2e381121116155fed06d5c",
    "counts": {
     "div.kpi-card": 1,
     "span.alert-badge": 7,
@@ -657,7 +656,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "dd349e244448e3447f3c9d48bbb5cca4b32bc5d9",
+   "sha1": "5e3717efe7d5f4e032f3a6e7d3976ce982f14544",
    "counts": {
     "button": 1
    }
@@ -669,7 +668,7 @@
    }
   },
   "index.html": {
-   "sha1": "9c04b39d84355e9461c6419d741945818fa20a18",
+   "sha1": "a2f19c5b4924a4ac1db849ff571c5bd51e2c26c2",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1506,5 +1505,5 @@
    }
   }
  },
- "generated_at": "2026-11-14T08:07:48.515Z"
+ "generated_at": "2026-11-14T22:08:33.649Z"
 }

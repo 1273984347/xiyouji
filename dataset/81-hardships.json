@@ -39,7 +39,7 @@
   },
   "hardships": [
     {
-      "index": 1,
+      "n": 1,
       "name": "金蝉遭贬",
       "chapter": "前传",
       "cause": "如来/观音安排",
@@ -47,7 +47,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 2,
+      "n": 2,
       "name": "出胎几杀",
       "chapter": "前传",
       "cause": "如来/观音安排",
@@ -55,7 +55,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 3,
+      "n": 3,
       "name": "满月抛江",
       "chapter": "前传",
       "cause": "如来/观音安排",
@@ -63,7 +63,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 4,
+      "n": 4,
       "name": "寻亲报冤",
       "chapter": "前传",
       "cause": "如来/观音安排",
@@ -71,7 +71,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 5,
+      "n": 5,
       "name": "出城逢虎",
       "chapter": 13,
       "cause": "真正野怪",
@@ -79,7 +79,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 6,
+      "n": 6,
       "name": "落坑折从",
       "chapter": 13,
       "cause": "真正野怪",
@@ -87,7 +87,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 7,
+      "n": 7,
       "name": "双叉岭上",
       "chapter": 13,
       "cause": "真正野怪",
@@ -95,7 +95,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 8,
+      "n": 8,
       "name": "两界山头",
       "chapter": 14,
       "cause": "如来/观音安排",
@@ -103,7 +103,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 9,
+      "n": 9,
       "name": "陡涧换马",
       "chapter": 15,
       "cause": "如来/观音安排",
@@ -111,7 +111,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 10,
+      "n": 10,
       "name": "夜被火烧",
       "chapter": 16,
       "cause": "真正野怪",
@@ -119,7 +119,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 11,
+      "n": 11,
       "name": "失却袈裟",
       "chapter": 16,
       "cause": "真正野怪",
@@ -127,7 +127,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 12,
+      "n": 12,
       "name": "收降八戒",
       "chapter": 19,
       "cause": "如来/观音安排",
@@ -135,7 +135,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 13,
+      "n": 13,
       "name": "黄风怪阻",
       "chapter": 21,
       "cause": "真正野怪",
@@ -143,7 +143,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 14,
+      "n": 14,
       "name": "请求灵吉",
       "chapter": 21,
       "cause": "如来/观音安排",
@@ -151,7 +151,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 15,
+      "n": 15,
       "name": "流沙难渡",
       "chapter": 22,
       "cause": "如来/观音安排",
@@ -159,7 +159,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 16,
+      "n": 16,
       "name": "收得沙僧",
       "chapter": 22,
       "cause": "如来/观音安排",
@@ -167,7 +167,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 17,
+      "n": 17,
       "name": "四圣显化",
       "chapter": 23,
       "cause": "如来/观音安排",
@@ -175,7 +175,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 18,
+      "n": 18,
       "name": "五庄观中",
       "chapter": 24,
       "cause": "人心自生的魔障",
@@ -183,7 +183,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 19,
+      "n": 19,
       "name": "难活人参",
       "chapter": 26,
       "cause": "人心自生的魔障",
@@ -191,7 +191,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 20,
+      "n": 20,
       "name": "贬退心猿",
       "chapter": 27,
       "cause": "人心自生的魔障",
@@ -199,7 +199,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 21,
+      "n": 21,
       "name": "黑松林失散",
       "chapter": 28,
       "cause": "人心自生的魔障",
@@ -207,7 +207,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 22,
+      "n": 22,
       "name": "宝象国捎书",
       "chapter": 29,
       "cause": "人心自生的魔障",
@@ -215,7 +215,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 23,
+      "n": 23,
       "name": "金銮殿变虎",
       "chapter": 30,
       "cause": "人心自生的魔障",
@@ -223,7 +223,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 24,
+      "n": 24,
       "name": "平顶山逢魔",
       "chapter": 32,
       "cause": "天界/西天坐骑下凡",
@@ -231,7 +231,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 25,
+      "n": 25,
       "name": "乌鸡国礼佛",
       "chapter": 36,
       "cause": "天界/西天坐骑下凡",
@@ -239,7 +239,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 26,
+      "n": 26,
       "name": "被魔化身",
       "chapter": 37,
       "cause": "天界/西天坐骑下凡",
@@ -247,7 +247,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 27,
+      "n": 27,
       "name": "号山逢怪",
       "chapter": 40,
       "cause": "真正野怪",
@@ -255,7 +255,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 28,
+      "n": 28,
       "name": "风摄圣僧",
       "chapter": 41,
       "cause": "真正野怪",
@@ -263,7 +263,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 29,
+      "n": 29,
       "name": "心猿遭害",
       "chapter": 41,
       "cause": "真正野怪",
@@ -271,7 +271,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 30,
+      "n": 30,
       "name": "请圣降妖",
       "chapter": 42,
       "cause": "如来/观音安排",
@@ -279,7 +279,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 31,
+      "n": 31,
       "name": "黑河沉没",
       "chapter": 43,
       "cause": "真正野怪",
@@ -287,7 +287,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 32,
+      "n": 32,
       "name": "搬运车迟",
       "chapter": 44,
       "cause": "真正野怪",
@@ -295,7 +295,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 33,
+      "n": 33,
       "name": "大赌输赢",
       "chapter": 45,
       "cause": "真正野怪",
@@ -303,7 +303,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 34,
+      "n": 34,
       "name": "祛道兴僧",
       "chapter": 46,
       "cause": "真正野怪",
@@ -311,7 +311,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 35,
+      "n": 35,
       "name": "路逢大水",
       "chapter": 47,
       "cause": "天界/西天坐骑下凡",
@@ -319,7 +319,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 36,
+      "n": 36,
       "name": "身落天河",
       "chapter": 47,
       "cause": "天界/西天坐骑下凡",
@@ -327,7 +327,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 37,
+      "n": 37,
       "name": "鱼篮现身",
       "chapter": 49,
       "cause": "如来/观音安排",
@@ -335,7 +335,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 38,
+      "n": 38,
       "name": "金兜山遇怪",
       "chapter": 50,
       "cause": "天界/西天坐骑下凡",
@@ -343,7 +343,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 39,
+      "n": 39,
       "name": "普天神难伏",
       "chapter": 52,
       "cause": "天界/西天坐骑下凡",
@@ -351,7 +351,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 40,
+      "n": 40,
       "name": "问佛根源",
       "chapter": 52,
       "cause": "如来/观音安排",
@@ -359,7 +359,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 41,
+      "n": 41,
       "name": "吃水遭毒",
       "chapter": 53,
       "cause": "真正野怪",
@@ -367,7 +367,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 42,
+      "n": 42,
       "name": "西梁国留婚",
       "chapter": 54,
       "cause": "人心自生的魔障",
@@ -375,7 +375,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 43,
+      "n": 43,
       "name": "琵琶洞受苦",
       "chapter": 55,
       "cause": "真正野怪",
@@ -383,7 +383,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 44,
+      "n": 44,
       "name": "再贬心猿",
       "chapter": 57,
       "cause": "人心自生的魔障",
@@ -391,7 +391,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 45,
+      "n": 45,
       "name": "难辨猕猴",
       "chapter": 58,
       "cause": "人心自生的魔障",
@@ -399,7 +399,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 46,
+      "n": 46,
       "name": "路阻火焰山",
       "chapter": 59,
       "cause": "真正野怪",
@@ -407,7 +407,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 47,
+      "n": 47,
       "name": "求取芭蕉扇",
       "chapter": 59,
       "cause": "真正野怪",
@@ -415,7 +415,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 48,
+      "n": 48,
       "name": "收缚魔王",
       "chapter": 61,
       "cause": "真正野怪",
@@ -423,7 +423,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 49,
+      "n": 49,
       "name": "赛城扫塔",
       "chapter": 62,
       "cause": "真正野怪",
@@ -431,7 +431,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 50,
+      "n": 50,
       "name": "宝林遭魔",
       "chapter": 65,
       "cause": "天界/西天坐骑下凡",
@@ -439,7 +439,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 51,
+      "n": 51,
       "name": "捉获圣僧",
       "chapter": 65,
       "cause": "天界/西天坐骑下凡",
@@ -447,7 +447,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 52,
+      "n": 52,
       "name": "七绝山稀柿",
       "chapter": 67,
       "cause": "真正野怪",
@@ -455,7 +455,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 53,
+      "n": 53,
       "name": "朱紫国行医",
       "chapter": 68,
       "cause": "真正野怪",
@@ -463,7 +463,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 54,
+      "n": 54,
       "name": "拯救疲癃",
       "chapter": 71,
       "cause": "天界/西天坐骑下凡",
@@ -471,7 +471,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 55,
+      "n": 55,
       "name": "降妖取后",
       "chapter": 71,
       "cause": "天界/西天坐骑下凡",
@@ -479,7 +479,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 56,
+      "n": 56,
       "name": "八戒忘形",
       "chapter": 72,
       "cause": "真正野怪",
@@ -487,7 +487,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 57,
+      "n": 57,
       "name": "盘丝洞中",
       "chapter": 72,
       "cause": "真正野怪",
@@ -495,7 +495,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 58,
+      "n": 58,
       "name": "濯垢泉八戒",
       "chapter": 72,
       "cause": "真正野怪",
@@ -503,7 +503,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 59,
+      "n": 59,
       "name": "驱逐大圣",
       "chapter": 76,
       "cause": "人心自生的魔障",
@@ -511,7 +511,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 60,
+      "n": 60,
       "name": "路阻狮驼",
       "chapter": 74,
       "cause": "天界/西天坐骑下凡",
@@ -519,7 +519,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 61,
+      "n": 61,
       "name": "城遇暗云",
       "chapter": 75,
       "cause": "天界/西天坐骑下凡",
@@ -527,7 +527,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 62,
+      "n": 62,
       "name": "金鏘凌虚",
       "chapter": 75,
       "cause": "天界/西天坐骑下凡",
@@ -535,7 +535,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 63,
+      "n": 63,
       "name": "比丘救子",
       "chapter": 78,
       "cause": "天界/西天坐骑下凡",
@@ -543,7 +543,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 64,
+      "n": 64,
       "name": "辨认妖邪",
       "chapter": 79,
       "cause": "天界/西天坐骑下凡",
@@ -551,7 +551,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 65,
+      "n": 65,
       "name": "赶捉犀牛",
       "chapter": 91,
       "cause": "真正野怪",
@@ -559,7 +559,7 @@
       "difficulty": "需要搬救兵"
     },
     {
-      "index": 66,
+      "n": 66,
       "name": "天竺遇婚",
       "chapter": 93,
       "cause": "人心自生的魔障",
@@ -567,7 +567,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 67,
+      "n": 67,
       "name": "铜台府监禁",
       "chapter": 97,
       "cause": "人心自生的魔障",
@@ -575,7 +575,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 68,
+      "n": 68,
       "name": "凌云渡脱胎",
       "chapter": 98,
       "cause": "如来/观音安排",
@@ -583,7 +583,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 69,
+      "n": 69,
       "name": "有经未全",
       "chapter": 98,
       "cause": "如来/观音安排",
@@ -591,7 +591,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 70,
+      "n": 70,
       "name": "珍珠悬挂",
       "chapter": 98,
       "cause": "如来/观音安排",
@@ -599,7 +599,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 71,
+      "n": 71,
       "name": "分色成形",
       "chapter": 99,
       "cause": "如来/观音安排",
@@ -607,7 +607,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 72,
+      "n": 72,
       "name": "遇着猛兽",
       "chapter": 99,
       "cause": "真正野怪",
@@ -615,7 +615,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 73,
+      "n": 73,
       "name": "风雪寒冰",
       "chapter": 99,
       "cause": "如来/观音安排",
@@ -623,7 +623,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 74,
+      "n": 74,
       "name": "落水鼋窟",
       "chapter": 99,
       "cause": "如来/观音安排",
@@ -631,7 +631,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 75,
+      "n": 75,
       "name": "阴魔作祟",
       "chapter": 99,
       "cause": "人心自生的魔障",
@@ -639,7 +639,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 76,
+      "n": 76,
       "name": "老鼋落水",
       "chapter": 99,
       "cause": "如来/观音安排",
@@ -647,7 +647,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 77,
+      "n": 77,
       "name": "未齐经全",
       "chapter": 99,
       "cause": "如来/观音安排",
@@ -655,7 +655,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 78,
+      "n": 78,
       "name": "佛国雷音",
       "chapter": 98,
       "cause": "如来/观音安排",
@@ -663,7 +663,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 79,
+      "n": 79,
       "name": "经传天下",
       "chapter": 100,
       "cause": "如来/观音安排",
@@ -671,7 +671,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 80,
+      "n": 80,
       "name": "佛国归途",
       "chapter": 100,
       "cause": "如来/观音安排",
@@ -679,7 +679,7 @@
       "difficulty": "悟空独立解决"
     },
     {
-      "index": 81,
+      "n": 81,
       "name": "五圣成真",
       "chapter": 100,
       "cause": "如来/观音安排",

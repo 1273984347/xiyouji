@@ -1,7 +1,7 @@
 {
   "summary": {
     "total_sounds": 16,
-    "total_chapters": 100,
+    "total_chapters": 97,
     "total_symmetries": 8,
     "total_movements": 4,
     "avg_rhythm": 4.26,
@@ -9,7 +9,7 @@
     "min_rhythm": 2,
     "phase_distribution": {
       "序曲": 12,
-      "交响": 85,
+      "交响": 82,
       "尾声": 3
     }
   },

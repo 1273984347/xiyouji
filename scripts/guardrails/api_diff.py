@@ -126,7 +126,12 @@ def _raised(fn: ast.FunctionDef | ast.AsyncFunctionDef) -> list[str]:
             if isinstance(exc, ast.Call):
                 exc = exc.func
             if isinstance(exc, ast.Name):
-                found.append(exc.id)
+                # W1233：SystemExit 是 CLI 工具的用户面退出语义（argparse/门禁工具以
+                # 退出码+stderr 与调用方交互），不属库 API 契约——raise 形态在等价
+                # 重构（raise 移入私有 helper）下的转移不构成调用方可感知的破坏，
+                # 不计入破坏性 raise 集合。
+                if exc.id != "SystemExit":
+                    found.append(exc.id)
             elif isinstance(exc, ast.Attribute):
                 found.append(ast.unparse(exc))
         for child in ast.iter_child_nodes(node):

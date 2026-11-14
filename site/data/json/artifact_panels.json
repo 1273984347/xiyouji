@@ -95,7 +95,7 @@
       "def": 0,
       "control": 0
     },
-    "effect": "物理伤害×1.5·对女性妖怪伤害-50%",
+    "effect": "物理伤害×1.5",
     "counter": "无",
     "background": "天庭神锤所锻·原为天蓬元帅兵符",
     "battle_impact": "稳定输出·但情感干扰严重",

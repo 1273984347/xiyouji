@@ -92,25 +92,28 @@ def find_characters_in_text(
     # "圣僧" 前有这些字符时判定为预指性叙述而非实际出场
     SHENGSENG_EXCLUDE_PREFIXES = ("出",)
 
+    def _excluded_context(m, text) -> bool:
+        """上下文排除谓词（W1233 拆出·消嵌套）：三藏经名/圣僧预指性叙述不计出场。判定逐字未改。"""
+        alias = m.group()
+        if alias == "三藏":
+            suffix = text[m.end():m.end() + 2]
+            if any(suffix.startswith(s) for s in SANZANG_EXCLUDE_SUFFIXES):
+                return True
+            # 前缀排除：经三藏（"三藏"前有"经"字表经名）
+            if m.start() > 0 and text[m.start() - 1:m.start()] in SANZANG_EXCLUDE_PREFIXES:
+                return True
+        # 上下文排除：出圣僧（"圣僧"前有"出"字表预指性叙述·第 7 回）
+        if alias == "圣僧" and m.start() > 0:
+            if text[m.start() - 1:m.start()] in SHENGSENG_EXCLUDE_PREFIXES:
+                return True
+        return False
+
     occurrences = []
     for canonical, pattern in alias_patterns:
         for m in pattern.finditer(text):
             alias = m.group()
-            # 上下文排除：三藏真经/三藏经/三藏数/三藏记/三藏共计/三藏之经
-            if alias == "三藏":
-                suffix = text[m.end():m.end() + 2]
-                if any(suffix.startswith(s) for s in SANZANG_EXCLUDE_SUFFIXES):
-                    continue
-                # 前缀排除：经三藏（"三藏"前有"经"字表经名）
-                if m.start() > 0:
-                    prefix = text[m.start() - 1:m.start()]
-                    if prefix in SANZANG_EXCLUDE_PREFIXES:
-                        continue
-            # 上下文排除：出圣僧（"圣僧"前有"出"字表预指性叙述·第 7 回）
-            if alias == "圣僧" and m.start() > 0:
-                prefix = text[m.start() - 1:m.start()]
-                if prefix in SHENGSENG_EXCLUDE_PREFIXES:
-                    continue
+            if _excluded_context(m, text):
+                continue
             occurrences.append((canonical, m.start(), m.end(), alias))
     occurrences.sort(key=lambda x: x[1])
     return occurrences
@@ -261,6 +264,42 @@ def find_dialogues_in_text(
 # 3. 共现网络（双维度：分回 + 对话场景）
 # ====================================================================
 
+def _count_and_pair(present, node_counts, edges) -> None:
+    """节点计数 + 有序对配对累加（W1233 从 build_cooccurrence 拆出·逐字同逻辑）。"""
+    for c in present:
+        node_counts[c] += 1
+    present_list = sorted(present)
+    for i in range(len(present_list)):
+        for j in range(i + 1, len(present_list)):
+            pair = tuple(sorted([present_list[i], present_list[j]]))
+            edges[pair] += 1
+
+
+def _scene_presents(text, characters, alias_patterns, scene_gap):
+    """scene 模式：分场景并产出各场景的人物集合（W1233 拆出·逐字同逻辑）。"""
+    dialogues = find_dialogues_in_text(text, alias_patterns, characters)
+    if not dialogues:
+        return
+    # 简单分场景：相邻引语位置间隔 < scene_gap 视为同一场景
+    scenes = [[dialogues[0]]]
+    for d in dialogues[1:]:
+        if d["position"] - scenes[-1][-1]["position"] < scene_gap:
+            scenes[-1].append(d)
+        else:
+            scenes.append([d])
+    for scene in scenes:
+        present = set(d["speaker"] for d in scene)
+        # 加入场景周边文本中提及的人物（场景前后 200 字符）
+        scene_start = max(0, scene[0]["position"] - 200)
+        scene_end = min(len(text), scene[-1]["position"] + 200)
+        scene_text = text[scene_start:scene_end]
+        for canonical, _, _, _ in find_characters_in_text(
+            scene_text, alias_patterns
+        ):
+            present.add(canonical)
+        yield present
+
+
 def build_cooccurrence(
     chapters: list[tuple[int, str, str]],
     characters: dict,
@@ -276,48 +315,16 @@ def build_cooccurrence(
     """
     edges = defaultdict(int)
     node_counts = defaultdict(int)
-
+    # W1233 拆解（16>15）：chapter/scene 两臂各拆 helper·计数与配对逻辑逐字未改。
     for _, _, text in chapters:
         if mode == "chapter":
             present = set()
             for canonical, _, _, _ in find_characters_in_text(text, alias_patterns):
                 present.add(canonical)
-            for c in present:
-                node_counts[c] += 1
-            present_list = sorted(present)
-            for i in range(len(present_list)):
-                for j in range(i + 1, len(present_list)):
-                    pair = tuple(sorted([present_list[i], present_list[j]]))
-                    edges[pair] += 1
+            _count_and_pair(present, node_counts, edges)
         elif mode == "scene":
-            dialogues = find_dialogues_in_text(text, alias_patterns, characters)
-            if not dialogues:
-                continue
-            # 简单分场景：相邻引语位置间隔 < scene_gap 视为同一场景
-            scenes = [[dialogues[0]]]
-            for d in dialogues[1:]:
-                if d["position"] - scenes[-1][-1]["position"] < scene_gap:
-                    scenes[-1].append(d)
-                else:
-                    scenes.append([d])
-
-            for scene in scenes:
-                present = set(d["speaker"] for d in scene)
-                # 加入场景周边文本中提及的人物（场景前后 200 字符）
-                scene_start = max(0, scene[0]["position"] - 200)
-                scene_end = min(len(text), scene[-1]["position"] + 200)
-                scene_text = text[scene_start:scene_end]
-                for canonical, _, _, _ in find_characters_in_text(
-                    scene_text, alias_patterns
-                ):
-                    present.add(canonical)
-                for c in present:
-                    node_counts[c] += 1
-                present_list = sorted(present)
-                for i in range(len(present_list)):
-                    for j in range(i + 1, len(present_list)):
-                        pair = tuple(sorted([present_list[i], present_list[j]]))
-                        edges[pair] += 1
+            for present in _scene_presents(text, characters, alias_patterns, scene_gap):
+                _count_and_pair(present, node_counts, edges)
 
     return {
         "nodes": [

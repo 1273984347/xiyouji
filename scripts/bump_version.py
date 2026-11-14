@@ -115,26 +115,13 @@ def _plan_d_guard():
             sys.exit(0)
 
 
-def main():
-    _plan_d_guard()
-    ap = argparse.ArgumentParser(description="降级六文档同步：辅助 4 份一键补齐")
-    ap.add_argument("--version", help="目标版本号，如 v2.3.18（缺省读页脚）")
-    ap.add_argument("--w", help="目标 W 号，如 W393（缺省读页脚）")
-    ap.add_argument("--note", default="", help="里程碑一句话说明")
-    ap.add_argument("--desc", default="", help="W417 增强：新版本行主描述（如 'W417 文档健康治理'）")
-    args = ap.parse_args()
-
+def _resolve_versions(args):
+    """版本/W 号解析（W1233 拆出）：显式参数优先·缺省读页脚。返回 (new_ver, w, old_ver)。"""
     if args.version and args.w:
         new_ver = args.version.lstrip("v")
         w = args.w if args.w.startswith("W") else "W" + args.w
     else:
         new_ver, w = parse_footer()
-
-    note = args.note or w
-    desc = args.desc or note
-    today = datetime.date.today().isoformat()
-
-    # 从某份辅助文档的「当前版本」行推断旧版本号
     old_ver = None
     for d in AUX_VERSION_DOCS:
         m = re.search(r"当前版本\s+v(\d+\.\d+\.\d+)", _read(os.path.join(ROOT, d)))
@@ -144,11 +131,11 @@ def main():
     if not old_ver:
         print("ERROR 无法推断旧版本号（辅助文档缺少「当前版本 vX.Y.Z」）")
         sys.exit(2)
+    return new_ver, w, old_ver
 
-    old_w = str(int(w[1:]) - 1).zfill(3)
-    changed = []
 
-    # 0) W417 增强：全文件 W001-W### 范围替换 + 页脚 3 个 v/W 替换
+def _sync_range_and_footers(old_ver, new_ver, old_w, w, changed):
+    """0) 全文件 W001-W### 范围替换 + 页脚 3 个 v/W 替换（W417 增强·W1233 拆出）。"""
     for p in SYNC_DOCS:
         c = _read(p)
         if not c:
@@ -166,7 +153,9 @@ def main():
             _write(p, c2)
             changed.append(p)
 
-    # 1) 三份版本文档：更新版本行 + 补 W token + 主描述（--desc）
+
+def _sync_aux_version_docs(old_ver, new_ver, w, note, desc, changed):
+    """1) 三份版本文档：更新版本行 + 补 W token + 主描述（W1233 拆出）。"""
     for d in AUX_VERSION_DOCS:
         p = os.path.join(ROOT, d)
         c = _read(p)
@@ -177,7 +166,9 @@ def main():
             _write(p, new_c)
             changed.append(d)
 
-    # 2) file-index.md：补版本说明 + 追加里程碑段（含 v + W，满足辅助门禁）
+
+def _append_file_index(new_ver, today, w, note, changed):
+    """2) file-index.md：补版本说明 + 追加里程碑段（W1233 拆出）。"""
     fi = _read(FILE_INDEX)
     if ("v" + new_ver) not in fi:
         fi = fi.rstrip() + "\n\n> 当前版本 v%s（%s）\n" % (new_ver, today)
@@ -188,6 +179,27 @@ def main():
         _write(FILE_INDEX, fi)
         if FILE_INDEX not in changed:
             changed.append(FILE_INDEX)
+
+
+def main():
+    _plan_d_guard()
+    ap = argparse.ArgumentParser(description="降级六文档同步：辅助 4 份一键补齐")
+    ap.add_argument("--version", help="目标版本号，如 v2.3.18（缺省读页脚）")
+    ap.add_argument("--w", help="目标 W 号，如 W393（缺省读页脚）")
+    ap.add_argument("--note", default="", help="里程碑一句话说明")
+    ap.add_argument("--desc", default="", help="W417 增强：新版本行主描述（如 'W417 文档健康治理'）")
+    args = ap.parse_args()
+
+    new_ver, w, old_ver = _resolve_versions(args)
+    note = args.note or w
+    desc = args.desc or note
+    today = datetime.date.today().isoformat()
+    old_w = str(int(w[1:]) - 1).zfill(3)
+    changed = []
+
+    _sync_range_and_footers(old_ver, new_ver, old_w, w, changed)
+    _sync_aux_version_docs(old_ver, new_ver, w, note, desc, changed)
+    _append_file_index(new_ver, today, w, note, changed)
 
     print("已同步辅助文档：")
     for f in changed:
