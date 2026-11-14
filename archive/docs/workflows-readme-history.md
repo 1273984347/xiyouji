@@ -76,3 +76,4 @@
 + W1229 登记面欠账清偿批：11-方案报告 README 计数订正 + 台账 8 行首笔 hash 机填与 27 行末笔格批处理订正·无 workflow 结构改动）。
 + W1230 审计专批「48 件未接线脚本接线/归档决策」清偿：第 42 槽摘行/归档/补执行面/重登记 + package_analysis_sync 接 ci_sim + check_no_brand_refs ignored 目录名告警·无 workflow 结构改动）。
 + W1231 审计专批：单侧键 1702 条 schema 分歧清理 + embed_json 三重根修 + 476 条隐性值漂移修复 + dataset 快照对齐生成面·无 workflow 结构改动）。
++ W1232 审计四登记项清偿：emoji 挂槽裁决与基线棘轮形态 + reader/rss 新鲜度门禁首跑抓双陈旧欠账随批重建 + P2-4 density 升格 verify 槽 + 基线重写审批标记机器化·无 workflow 结构改动）。

@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（776）
+## 文件（779）
 
 ### Markdown 文档
 
@@ -226,6 +226,7 @@
 - `_cascade_files_W1229.txt`
 - `_cascade_files_W1230.txt`
 - `_cascade_files_W1231.txt`
+- `_cascade_files_W1232.txt`
 - `_cascade_files_W751.txt`
 - `_cascade_files_W761.txt`
 - `_cascade_files_W816.txt`
@@ -583,6 +584,7 @@
 - `_w1229_spec.json`
 - `_w1230_spec.json`
 - `_w1231_spec.json`
+- `_w1232_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
@@ -757,6 +759,7 @@
 - `data-copy-chain-baseline.json`
 - `data-drift-baseline.txt`
 - `design-tokens.json`
+- `emoji-residue-baseline.txt`
 - `font-charset.txt`
 - `frontmatter-baseline.txt`
 - `glossary-baseline.txt`

@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（224）
+## 文件（225）
 
 ### Python 脚本
 
@@ -156,6 +156,7 @@
 - `check_powershell_parse.py`
 - `check_public_repo_secrets.py`
 - `check_reader_integrity.py`
+- `check_reader_rss_fresh.py`
 - `check_registration_surface.py`
 - `check_repo_layout.py`
 - `check_review_trigger.py`

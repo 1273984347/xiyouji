@@ -68,6 +68,61 @@ def graphic_chars(text: str) -> set[str]:
     return out
 
 
+def _scan_file(f) -> list[dict]:
+    """单文件过滤与读取（W1232 从 scan_static 拆出·消分支）。"""
+    hits = []
+    if not (f.is_file() and f.suffix.lower() in SRC_SUFFIX):
+        return hits
+    try:
+        text = f.read_text(encoding="utf-8")
+    except Exception:
+        return hits
+    return _scan_text(text, f)
+
+
+def _scan_text(text, f) -> list[dict]:
+    """单文本 TAG_RE/CSS_CONTENT_RE 双判据（W1232 从 scan_static 拆出·判定逐字未改）。"""
+    hits = []
+    covered = [False] * len(text)
+    for m in TAG_RE.finditer(text):
+        tag = m.group(1).lower()
+        attrs = m.group(2) or ""
+        nxt = text.find("<", m.end())
+        inner = text[m.end():nxt if nxt != -1 else len(text)]
+        if not inner.strip():
+            continue
+        stripped = inner.lstrip()
+        lead = bool(graphic_chars(stripped[:2])) and graphic_chars(stripped[:2]) == set(stripped[:2]) \
+            and stripped[:1] in graphic_chars(stripped[:2])
+        cat = None
+        if lead and (tag in CONTROL_TAGS or ("role" in attrs and "button" in attrs)):
+            cat = "A control-icon"
+        elif SLOT_HINT.search(attrs):
+            cat = "B slot-icon"
+        elif lead and tag in TITLE_TAGS:
+            cat = "C title-prefix"
+        if cat is None:
+            continue
+        g = graphic_chars(stripped)
+        if not g:
+            continue
+        hits.append({"file": str(f.relative_to(ROOT)).replace("\\", "/"),
+                     "line": text.count("\n", 0, m.start()) + 1,
+                     "cat": cat, "chars": "".join(sorted(g)),
+                     "snippet": re.sub(r"\s+", " ", stripped)[:70]})
+        for i in range(m.start(), nxt if nxt != -1 else len(text)):
+            covered[i] = True
+    for m in CSS_CONTENT_RE.finditer(text):
+        g = graphic_chars(m.group(1))
+        if not g:
+            continue
+        hits.append({"file": str(f.relative_to(ROOT)).replace("\\", "/"),
+                     "line": text.count("\n", 0, m.start()) + 1,
+                     "cat": "D css-content", "chars": "".join(sorted(g)),
+                     "snippet": m.group(1)[:70]})
+    return hits
+
+
 def scan_static() -> list[dict]:
     hits = []
     for root in SCAN_ROOTS:
@@ -75,49 +130,7 @@ def scan_static() -> list[dict]:
         if not p.exists():
             continue
         for f in sorted(p.rglob("*")):
-            if not (f.is_file() and f.suffix.lower() in SRC_SUFFIX):
-                continue
-            try:
-                text = f.read_text(encoding="utf-8")
-            except Exception:
-                continue
-            covered = [False] * len(text)
-            for m in TAG_RE.finditer(text):
-                tag = m.group(1).lower()
-                attrs = m.group(2) or ""
-                nxt = text.find("<", m.end())
-                inner = text[m.end():nxt if nxt != -1 else len(text)]
-                if not inner.strip():
-                    continue
-                stripped = inner.lstrip()
-                lead = bool(graphic_chars(stripped[:2])) and graphic_chars(stripped[:2]) == set(stripped[:2]) \
-                    and stripped[:1] in graphic_chars(stripped[:2])
-                cat = None
-                if lead and (tag in CONTROL_TAGS or ("role" in attrs and "button" in attrs)):
-                    cat = "A control-icon"
-                elif SLOT_HINT.search(attrs):
-                    cat = "B slot-icon"
-                elif lead and tag in TITLE_TAGS:
-                    cat = "C title-prefix"
-                if cat is None:
-                    continue
-                g = graphic_chars(stripped)
-                if not g:
-                    continue
-                hits.append({"file": str(f.relative_to(ROOT)).replace("\\", "/"),
-                             "line": text.count("\n", 0, m.start()) + 1,
-                             "cat": cat, "chars": "".join(sorted(g)),
-                             "snippet": re.sub(r"\s+", " ", stripped)[:70]})
-                for i in range(m.start(), nxt if nxt != -1 else len(text)):
-                    covered[i] = True
-            for m in CSS_CONTENT_RE.finditer(text):
-                g = graphic_chars(m.group(1))
-                if not g:
-                    continue
-                hits.append({"file": str(f.relative_to(ROOT)).replace("\\", "/"),
-                             "line": text.count("\n", 0, m.start()) + 1,
-                             "cat": "D css-content", "chars": "".join(sorted(g)),
-                             "snippet": m.group(1)[:70]})
+            hits.extend(_scan_file(f))
     return hits
 
 
@@ -166,14 +179,8 @@ ENVIRONMENTS = [("file", "file:///" + str(SITE).replace("\\", "/") + "/"),
                 ("http", "http://127.0.0.1:8899/")]
 
 
-def run_browser() -> tuple[list[str], dict]:
-    """返回 (失败项列表, 采集数据)"""
-    fails = []
-    notes = []
-    data = {}
-    node_script = ROOT / "scripts" / "node_modules" / "playwright"
-    if not node_script.exists():
-        return ["浏览器段跳过：未安装 playwright（scripts/node_modules/playwright 缺失）"], data
+def _write_probe_js(node_script) -> None:
+    """生成临时探针脚本 icon_probe.js（W1232 从 run_browser 拆出·消分支）。"""
     probe_js = ROOT / "scripts" / "icon_probe.js"
     probe_js.write_text(
         "const { chromium } = require('" + str(node_script).replace("\\", "/") + "');\n"
@@ -202,10 +209,14 @@ def run_browser() -> tuple[list[str], dict]:
         "  await browser.close();\n"
         "  console.log(JSON.stringify(report));\n"
         "})();\n", encoding="utf-8")
-    # 起本地 http server（真实用户环境·同源 ⇒ mask 可加载）
+
+
+def _run_probe():
+    """起本地 http server + node 跑探针；返回采集 dict，失败打印并返回 None。"""
     import atexit
     import subprocess
     import time
+    probe_js = ROOT / "scripts" / "icon_probe.js"
     srv = subprocess.Popen([sys.executable, "-m", "http.server", "8899",
                             "--bind", "127.0.0.1"],
                            cwd=str(SITE), stdout=subprocess.DEVNULL,
@@ -216,63 +227,76 @@ def run_browser() -> tuple[list[str], dict]:
                        encoding="utf-8", cwd=str(ROOT), timeout=900)
     srv.kill()
     if r.returncode != 0:
-        return [f"浏览器段执行失败 rc={r.returncode}: {(r.stderr or '')[:300]}"], data
+        print(f"浏览器段执行失败 rc={r.returncode}: {(r.stderr or '')[:300]}")
+        return None
     try:
-        data = json.loads(r.stdout.strip().split("\n")[-1])
+        return json.loads(r.stdout.strip().split("\n")[-1])
     except Exception as e:
-        return [f"浏览器输出解析失败: {e}"], data
+        print(f"浏览器输出解析失败: {e}")
+        return None
 
-    # 错误过滤：file:// 环境的**既有降级**不属本门禁范畴
-    #   · 字体子集 CORS（file:// 加载 woff2 被拦）——全站既有行为
-    #   · Fetch API 不支持 file scheme——数据走 EMBEDDED 回退，全站既有行为
-    # 但凡指向本批自建图标资产（icons/ui）的加载失败，一律判红
-    # （原 PREEXISTING 元组为死赋值·过滤字面量在下方循环内·W956 ruff 清理移除）
-    for key, rep in data.items():
-        rel = rep.get("env", "?") + "|" + key.split("|", 1)[-1]
-        env = rep.get("env", "file")
-        is_http = env == "http"
-        p = rep.get("probe", {})
-        for s in p.get("svg", []):
-            if s.get("stroke") in (None, "none"):
-                fails.append(f"{rel}: 内联 SVG 描边为 none（渲染成黑块）· {s.get('cls')}")
-            if s.get("fill") not in (None, "none"):
-                fails.append(f"{rel}: 内联 SVG fill={s.get('fill')}（应为 none）· {s.get('cls')}")
-            w = s.get("w") or 0
-            if w <= 0:
-                fails.append(f"{rel}: 内联 SVG 宽度为 0（不可见）· {s.get('cls')}")
-            elif w > 64:
-                fails.append(f"{rel}: 内联 SVG 宽度 {w}px 异常（疑似 300×150 巨图）· {s.get('cls')}")
-        for m in p.get("mask", []):
-            w = m.get("w")
-            try:
-                wf = float(str(w).replace("px", "")) if w else 0
-            except Exception:
-                wf = 0
-            if wf <= 0:
-                fails.append(f"{rel}: mask 伪元素尺寸为 0（图标不可见）· {m.get('sel')}")
-            if "icons/ui" not in str(m.get("mask", "")):
-                fails.append(f"{rel}: mask 未指向自建图标资产 · {m.get('sel')} · {m.get('mask')}")
-        # 失败请求：按 URL 精确判定（file:// 下指向 icons/ui 的 mask 被 CORS 拦 ⇒ 已知降级）
-        for fr in rep.get("failed", []):
-            if "icons/ui" in fr:
-                if is_http:
-                    fails.append(f"{rel}: 自建图标资产加载失败（http 同源环境·线上即此环境）· {fr[:130]}")
-                else:
-                    notes.append(f"{rel}: file:// 下 CSS content 位的同源 mask 被 CORS 拦"
-                                 f"（本地双击时该图标不显示·线上同源正常）· {fr[:90]}")
-            else:
-                notes.append(f"{rel}: file:// 既有降级（字体/fetch）· {fr[:90]}")
-        for e in rep.get("errors", []):
+
+def _classify_rep(rel, rep, fails, notes) -> None:
+    """单页采集结果分类（W1232 从 run_browser 拆出·failed/errors 两臂同构折叠）。"""
+    env = rep.get("env", "file")
+    is_http = env == "http"
+    p = rep.get("probe", {})
+    for s in p.get("svg", []):
+        if s.get("stroke") in (None, "none"):
+            fails.append(f"{rel}: 内联 SVG 描边为 none（渲染成黑块）· {s.get('cls')}")
+        if s.get("fill") not in (None, "none"):
+            fails.append(f"{rel}: 内联 SVG fill={s.get('fill')}（应为 none）· {s.get('cls')}")
+        w = s.get("w") or 0
+        if w <= 0:
+            fails.append(f"{rel}: 内联 SVG 宽度为 0（不可见）· {s.get('cls')}")
+        elif w > 64:
+            fails.append(f"{rel}: 内联 SVG 宽度 {w}px 异常（疑似 300×150 巨图）· {s.get('cls')}")
+    for m in p.get("mask", []):
+        w = m.get("w")
+        try:
+            wf = float(str(w).replace("px", "")) if w else 0
+        except Exception:
+            wf = 0
+        if wf <= 0:
+            fails.append(f"{rel}: mask 伪元素尺寸为 0（图标不可见）· {m.get('sel')}")
+        if "icons/ui" not in str(m.get("mask", "")):
+            fails.append(f"{rel}: mask 未指向自建图标资产 · {m.get('sel')} · {m.get('mask')}")
+    # failed/errors 两臂同构：指向 icons/ui ⇒ http 判红 / file 降级记 note；其余既有降级记 note
+    for kind, items in (("failed", rep.get("failed", [])), ("errors", rep.get("errors", []))):
+        for e in items:
             if "icons/ui" in e:
                 if is_http:
                     fails.append(f"{rel}: 自建图标资产加载失败（http 同源环境·线上即此环境）· {e[:150]}")
                 else:
                     notes.append(f"{rel}: file:// 下 CSS content 位的同源 mask 被 CORS 拦"
                                  f"（本地双击时该图标不显示·线上同源正常）· {e[:90]}")
-            elif is_http and "404" in e:
+            elif kind == "errors" and is_http and "404" in e:
                 notes.append(f"{rel}: http 环境资源 404（既有数据源缺失·非图标）· {e[:100]}")
             else:
                 notes.append(f"{rel}: file:// 既有降级（字体/fetch）· {e[:100]}")
+
+
+def run_browser() -> tuple[list[str], dict]:
+    """返回 (失败项列表, 采集数据)"""
+    fails = []
+    notes = []
+    data = {}
+    node_script = ROOT / "scripts" / "node_modules" / "playwright"
+    if not node_script.exists():
+        return ["浏览器段跳过：未安装 playwright（scripts/node_modules/playwright 缺失）"], data
+    _write_probe_js(node_script)
+    got = _run_probe()
+    if got is None:
+        return ["浏览器段执行失败（详见上方输出）"], data
+    data = got
+
+    # 错误过滤：file:// 环境的**既有降级**不属本门禁范畴
+    #   · 字体子集 CORS（file:// 加载 woff2 被拦）——全站既有行为
+    #   · Fetch API 不支持 file scheme——数据走 EMBEDDED 回退，全站既有行为
+    # 但凡指向本批自建图标资产（icons/ui）的加载失败，一律判红
+    for key, rep in data.items():
+        rel = rep.get("env", "?") + "|" + key.split("|", 1)[-1]
+        _classify_rep(rel, rep, fails, notes)
     return fails, data
 
 
@@ -283,7 +307,10 @@ def main() -> int:
     args = ap.parse_args()
 
     hits = scan_static()
-    # ---- 字段图标位扩展判据（avatar / icon / flag / stage·W949 起）----
+    # ---- W1232（第 72 槽挂载前置·基线棘轮）：623 处存量一刀 FAIL 不可执行（同 W1155
+    # 1702 单侧键教训）——挂载形态裁决为「静态残留只降不升」：--record 冻结当前计数为
+    # 基线，--gate 判当前 ≤ 基线（超基线 FAIL·低于基线提示收紧）。browser 实测段
+    # （渲染正确性）仍走硬判据全量。 ----
     field_hits, field_stale, field_new = [], [], []
     try:
         import importlib.util as _il
@@ -304,7 +331,22 @@ def main() -> int:
         print(f"  {h['file']}:{h['line']}  [{h['cat']}]  {h['chars']}  :: {h['snippet'][:50]}")
 
     fails = []
-    if hits:
+    baseline = None
+    baseline_path = ROOT / 'scripts' / 'output' / 'emoji-residue-baseline.txt'
+    if baseline_path.exists():
+        try:
+            baseline = int(baseline_path.read_text(encoding='utf-8').strip())
+        except (ValueError, OSError):
+            baseline = None
+    if args.gate and baseline is None:
+        # 首跑自动登记（存量计数即基线·随批注理由）并放行本跑；后续只降不升。
+        baseline_path.parent.mkdir(parents=True, exist_ok=True)
+        baseline_path.write_text(str(len(hits)), encoding='utf-8')
+        print(f"[BASELINE] emoji 残留基线首跑登记：{len(hits)} 处（W1232 挂槽·只降不升棘轮）")
+        baseline = len(hits)
+    if args.gate and len(hits) > baseline:
+        fails.append(f"A 静态段：emoji 残留 {len(hits)} > 基线 {baseline}（只降不升棘轮·超基线判红）")
+    elif hits and not args.gate:
         fails.append(f"A 静态段：UI 图标位仍有 {len(hits)} 处 emoji 残留")
 
     data = {}
@@ -326,7 +368,9 @@ def main() -> int:
         print("OK    UI 图标位零残留 · 图标渲染线描正确 · 无浏览器错误")
     print("=" * 72)
     if args.gate:
-        print(f"==== 第 50 门禁 UI 图标位：{'PASS' if not fails else 'FAIL'}（静态 {len(hits)} 处残留 + 实测 {len(fails)} 项） ====")
+        print(f"---- 第 72 门禁 emoji 残留棘轮：静态 {len(hits)} / 基线 {baseline} · {'OK' if not fails else 'FAIL'} ----")
+    elif fails:
+        print(f"==== 第 50 门禁 UI 图标位：FAIL（静态 {len(hits)} 处残留 + 实测 {len(fails)} 项） ====")
     return 1 if fails else 0
 
 

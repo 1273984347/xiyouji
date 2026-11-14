@@ -129,6 +129,9 @@ EXPECTED_SECTION_NAMES = [
     "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON·毫秒级
     "产物服务地址",  # W1208：第 70 槽·恒跑——扫产物面服务端地址·秒级
     "占位符哈希载体",  # W1210：第 71 槽·恒跑——占位符不得落在 CSP 哈希载体上·秒级
+    "emoji残留棘轮",  # W1232：第 72 槽·恒跑——静态残留基线棘轮（只降不升）·秒级
+    "readerRSS新鲜度",  # W1232：第 73 槽·恒跑——reader/RSS 产物新鲜度（git 视角）·秒级
+    "治理文档体积窗口",  # W1232：第 74 槽·恒跑——P2-4 升格（体积阈值/段行密度硬判据）·秒级
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -227,6 +230,9 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "dashboard KPI",  # W1170：恒跑——读 1 HTML + 1 JSON 逐项对拍·毫秒级
     "产物服务地址",  # W1208：第 70 槽·恒跑——扫产物面服务端地址·秒级
     "占位符哈希载体",  # W1210：第 71 槽·恒跑——占位符不得落在 CSP 哈希载体上·秒级
+    "emoji残留棘轮",  # W1232：第 72 槽·恒跑——静态残留基线棘轮（只降不升）·秒级
+    "readerRSS新鲜度",  # W1232：第 73 槽·恒跑——reader/RSS 产物新鲜度（git 视角）·秒级
+    "治理文档体积窗口",  # W1232：第 74 槽·恒跑——P2-4 升格（体积阈值/段行密度硬判据）·秒级
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -1242,6 +1248,51 @@ _STRICT_GATES = [
         fail_msg="构建期占位符落在 CSP 哈希载体上（内联 <script> 块 / <script src> 属性）·部署期替换即失配⇒脚本被浏览器拒执行（本批新增第 71 槽）",
         marker_msg="占位符哈希载体槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
         ok_msg="占位符哈希载体门禁通过（%s）",
+        ok_line=-1,    ),
+    # W1232：第 72 槽 emoji 残留棘轮（审计登记「emoji/icon 探针挂槽裁决」清偿）——
+    # 623 处存量一刀 FAIL 不可执行，裁决为「静态残留只降不升」基线棘轮
+    # （scripts/output/emoji-residue-baseline.txt·超基线判红·低于不自动收紧）；
+    # browser 实测段（图标渲染正确性）仍全量硬判据。恒跑。
+    _StrictGate(
+        section="emoji残留棘轮",
+        script="check_emoji_icons.py",
+        args=("--gate", "--no-browser"),
+        timeout=300,
+        marker="---- 第 72 门禁 emoji 残留棘轮：",
+        crash_msg="emoji 残留棘轮槽执行异常（第 72 槽·crash 即拦）: %s",
+        fail_msg="emoji 残留超基线或图标渲染判据 FAIL（只降不升棘轮·本批新增第 72 槽）",
+        marker_msg="emoji 残留棘轮槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="emoji 残留棘轮门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1232：第 73 槽 reader/RSS 产物新鲜度（审计登记「reader/rss 新鲜度门禁」清偿）——
+    # git 视角产物提交时间 ≥ 输入（docs/01-06 + source + 生成器）最新变更；
+    # 工作树 mtime 兜「已重建待提交」窗口。首跑实证抓到 reader/rss 双陈旧欠账并随批重建。
+    _StrictGate(
+        section="readerRSS新鲜度",
+        script="check_reader_rss_fresh.py",
+        args=("--gate",),
+        timeout=300,
+        marker="---- reader/RSS 新鲜度：",
+        crash_msg="reader/RSS 新鲜度槽执行异常（第 73 槽·crash 即拦）: %s",
+        fail_msg="reader/RSS 产物落后于输入（重跑 build_reader.py / gen_rss.py·本批新增第 73 槽）",
+        marker_msg="reader/RSS 新鲜度槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="reader/RSS 新鲜度门禁通过（%s）",
+        ok_line=-1,
+    ),
+    # W1232：第 74 槽治理文档体积窗口（P2-4·对抗审查 2026-11-06 登记待批·用户令开工即批）——
+    # check_doc_size_budget 判据本体（体积阈值/段行密度/C7 概要块）此前只在 preflight
+    # 提示位（WARN 不阻断·pre-commit 不可见）；升格 verify 槽后体积超窗/密度超限阻断提交。
+    _StrictGate(
+        section="治理文档体积窗口",
+        script="check_doc_size_budget.py",
+        args=("--gate",),
+        timeout=120,
+        marker="---- 第 74 门禁 治理文档体积窗口：",
+        crash_msg="治理文档体积窗口槽执行异常（第 74 槽·crash 即拦）: %s",
+        fail_msg="治理文档体积超窗或密度超限（腾窗=archive_segments.py·本批新增第 74 槽）",
+        marker_msg="体积窗口槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="治理文档体积窗口门禁通过（%s）",
         ok_line=-1,    ),
 ]
 

@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 71<!--stats:gate_count--> 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 74<!--stats:gate_count--> 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前按 §7 路径按需读节；更细的规则以文末「权威文档」为准。
 >
@@ -102,9 +102,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=71<!--stats:gate_count--> 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=74<!--stats:gate_count--> 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 71<!--stats:gate_count--> 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 74<!--stats:gate_count--> 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -187,6 +187,9 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 69. **模板结构契约**（check_template_contract.py·W1178）——模板与新页必须含四项完整标签串（类名/CSS 命中不算证据，完整定义见 gates.md）。
 70. **产物服务地址**（check_no_hardcoded_endpoint.py·W1208）——静态产物不得内嵌服务端地址（契约 C-8）：合法形态只有三种——构建期占位符 `__XIJ_SERVICE_BASE__` / 部署期已声明地址 / 开发者本机档显式标记；回环·内网地址与未声明裸域名一律判红。恒跑（扫产物面·秒级·完整定义见 gates.md）。
 71. **占位符哈希载体**（check_placeholder_hash_carrier.py·W1210）——构建期占位符不得落在内联 `<script>` 块（= CSP `script-src 'sha256-…'` 的哈希输入）或 `<script src>` 属性上，否则部署期替换即失配、整段脚本被浏览器拒执行（E-225 实证）；CSP 声明面 / 旁挂 meta / 外部 JS 为合法载体（完整定义见 gates.md）。
+72. **emoji 残留棘轮**（W1232）——静态残留只降不升基线棘轮，见 gates.md。
+73. **reader/RSS 产物新鲜度**（W1232）——产物提交 ≥ 输入变更（git 视角），见 gates.md。
+74. **治理文档体积窗口**（W1232·P2-4 升格）——体积/密度超窗阻断提交，见 gates.md。
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
@@ -198,13 +201,13 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
-**提交前就绪链（W1198 立·W1215 收敛为可执行）**：收官 = `python scripts/batch_closeout.py --spec scripts/output/_w###_spec.json`（按序不可跳·步序 `--steps` 自查；**cascade 链首**＝HANDOVER 插块必经——旁路手改＝滚动不触发·W1214 实证；**gate 链尾**＝真全量）；推送判据 = `python scripts/pre_push_gate.py`（guardrails→verify→pytest→ci_sim·根修三绿不同源·部分模式标「非推送判据」）·细节锚 → 各步 docstring 与坑表 E-229/E-228·定位走局部判据单跑·spec 只写一次按最终 git status 生成·一次 push 带齐全部内容（禁中途追加 commit）·外部工具判据先读源码/--help 读全。
+**提交前就绪链（W1198 立·W1215 收敛）**——收官 = `python scripts/batch_closeout.py --spec scripts/output/_w###_spec.json`·推送判据 = `python scripts/pre_push_gate.py`；步序细节锚各步 docstring 与坑表 E-229/E-228（正文 → pitfalls）。
 
-**多副本写入的派生值权威必须一次生成两侧同传（W1204·E-221）**：双写/多副本下，接收方自生成的派生值（时间戳/id/随机数）天然不等 ⇒ 集合级对账必判不等（实证：`sessions.updated_at` 差毫秒 ⇒ 切读永久阻断）⇒ 契约加可选权威值·发起方一次生成两侧同传·单库路径不传则现役语义不变（正文 → pitfalls E-221）。
+**多副本写入的派生值权威必须由发起方一次生成并两侧同传（W1204）**——详述与契约闸门见坑表 E-221（正文 → pitfalls）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**占号共享区纪律（W1110·E-128·W1121 根修）**：预约集曾只写工作树内 tmpe 文件 ⇒ 隔离 clone 互不可见 ⇒ 撞号；W1121 根修＝取号三源并集（本仓表＋兄弟克隆表＋用户级共享表·写前合并不覆盖）＋ session 含仓路径指纹＋跨克隆撞号预警。**纪律**：落段前复核「本批号仍在预约集内」·占号须在与并行会话共享的克隆执行（细节 → pitfalls E-128）。
+**占号共享区纪律（W1110·E-128）**——取号三源并集＋session 仓路径指纹＋跨克隆撞号预警；落段前复核本批号仍在预约集内（正文 → pitfalls E-128）。
 
 **六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（48<!--stats:pitfalls_css-->）·JS / CSP / 运行时（12<!--stats:pitfalls_js-->）·git / 提交 / 并发（32<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（15<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（193<!--stats:pitfalls_flow-->）
 
@@ -341,4 +344,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1226-W1226 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-14（W1227）Draft Release 删除：用户令执行·Releases 面清零·T-1 弧线彻底闭环；2026-11-14（W1228）对抗审查回批：P2 五项同批修 + 描述段 W 形态识别 + bullet 碑化降级；2026-11-14（W1229）登记面清偿：README 计数订正 + 台账 8 行机填 + 27 格批处理 + 触发器重置；2026-11-14（W1230）脚本接线/归档裁决：第 42 槽 0 FAIL + packaging 同步归零 + 品牌守卫盲区根修 + guardrails archive 口径对齐；2026-11-14（W1231）单侧键清理：门禁 v4 + embed_json 根修 + 476 漂移修复 + dataset 对齐 + NOTE 1702→168。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1226-W1226 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-14（W1229）登记面清偿：README 计数订正 + 台账 8 行机填 + 27 格批处理 + 触发器重置；2026-11-14（W1230）脚本接线/归档裁决：第 42 槽 0 FAIL + packaging 同步归零 + 品牌守卫盲区根修 + guardrails archive 口径对齐；2026-11-14（W1231）单侧键清理：门禁 v4 + embed_json 根修 + 476 漂移修复 + dataset 对齐 + NOTE 1702→168；2026-11-14（W1232）门禁挂槽：三槽挂载 + #51 审批标记 + reader/rss 重建 + gen_rss/build_reader 根修。如与上述权威文档冲突，以权威文档为准。*

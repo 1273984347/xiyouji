@@ -1,4 +1,4 @@
-# 交付门禁体系全量定义（71<!--stats:gate_count--> 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽·W768 补第 44 槽·W780 补第 45 槽·W809 补第 46 槽·W849 补第 47 槽·W860 补第 48 槽·W883 补第 49 槽·W961 补第 50 槽·W1045 补第 51/52 槽入标题并订正槽数 50 → 52·W1110 补第 54/55/56 槽并订正槽数 53 → 56·W1165 补第 64 槽并订正槽数·W1167 补第 65/66 槽并订正槽数 64 → 66·W1168 补第 67 槽并订正槽数 66 → 67·W1170 补第 68 槽·W1178 补第 69 槽并订正槽数 68 → 69·W1208 补第 70 槽并订正槽数 69 → 70·W1210 补第 71 槽并订正槽数 70 → 71）
+# 交付门禁体系全量定义（74<!--stats:gate_count--> 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽·W768 补第 44 槽·W780 补第 45 槽·W809 补第 46 槽·W849 补第 47 槽·W860 补第 48 槽·W883 补第 49 槽·W961 补第 50 槽·W1045 补第 51/52 槽入标题并订正槽数 50 → 52·W1110 补第 54/55/56 槽并订正槽数 53 → 56·W1165 补第 64 槽并订正槽数·W1167 补第 65/66 槽并订正槽数 64 → 66·W1168 补第 67 槽并订正槽数 66 → 67·W1170 补第 68 槽·W1178 补第 69 槽并订正槽数 68 → 69·W1208 补第 70 槽并订正槽数 69 → 70·W1210 补第 71 槽并订正槽数 70 → 71·W1232 补第 72/73/74 槽并订正槽数 71 → 74）
 
 > **📖 阅读契约（W709）**：查表型——改 site/、加门禁、动 verify_delivery.py 时按编号查；每条含完整口径与历史实证；编号与 AGENTS §4.2 摘要一一对应。
 > **何时读**：门禁失败要懂原因 / 新增门禁要挂槽 / 复核某条防线范围。**读完你应该能**：说出任一槽位拦什么、豁免与基线在哪。
@@ -31,7 +31,7 @@
 
 6. **docs 全量链接校验**（lint_links 0 broken·W699 扩自 docs/01 至 docs 全量·W700 五改后内建五豁免=fenced+inline code 去噪/git check-ignore 本地产物/archive 冻结档/POSIX 根绝对路径跳过/_w588_ce.html 快照件）
 7. **sitemap 覆盖**、**site/data 回退模式**（两条共占第 7 槽·历史形态不拆以保 C2 三方对账不改）
-8. **CSP 漂移**（generate_csp.py --check，860<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）——**重建操作规程（PRE-26·W742）**：reader/站点产物重建必须四连跑 `build_reader → inline_css → generate_csp → chapter-stats EMBEDDED 重灌`，缺一步即本门禁或第 40 门禁双源红（W737 实证：build_reader 直出无 INLINED·EMBEDDED 漏重灌）
+8. **CSP 漂移**（generate_csp.py --check，867<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）——**重建操作规程（PRE-26·W742）**：reader/站点产物重建必须四连跑 `build_reader → inline_css → generate_csp → chapter-stats EMBEDDED 重灌`，缺一步即本门禁或第 40 门禁双源红（W737 实证：build_reader 直出无 INLINED·EMBEDDED 漏重灌）
 9. **数据漂移**（check_data_drift.js；W563 扩展：site/data/json 部署副本逐字节对账 47 副本基线 + 页面副本引用存在性 + 副本路径形态解析回原件 + EMBEDDED 单源页页名↔同名原件回退——对账面 44→46 页/71→74 项）、**腐蚀/插件**（check_corruption.py）
 10. **内联脚本语法**（check_js_syntax.js，node vm.Script 批量编译，含 EN 站）
 11. **CSS 结构平衡**（check_structure.py，括号/引号/url 闭合）
@@ -55,7 +55,7 @@
 23. **旁文档同步**（W526 挂载：.github/workflows/README.md 头部版本行（vX.Y.Z W###）== CHANGELOG 现役段 + 里程碑行 W450-W### 上限 == 现役 W，任一不符 FAIL——W499/W525 两次实证旁文档滞后漏网，verify 覆盖外盲区封堵）
 24. **图表静态自洽**（W551 挂载：check_chart_data.py——R1 调用 d3.sankey( 必须引用 d3-sankey.min.js 且磁盘存在；R2 可见饼图系措辞（饼图/环形图/圆环图/Pie/Donut）×treemap 实现×无弧形实现 = 错配。源自 W550 截图审查实证的 10 页桑基空渲染与 4 组饼图错配；需真实渲染的遮挡/空带/溢出/桑基运行时由 scripts/check_screenshot_gates.js 动态门禁覆盖（挂 screenshot-review workflow，pageerror/sankey-typeof/溢出/reveal/画布遮挡五类））
 25. **数据内容一致性**（W555 挂载，经用户确认：check_content_consistency.py --gate 第 25 门禁——W550 实证三类同页数字矛盾规则化：同实体对/同主语多值、图注数 vs 数组字面长、桑基去重节点数、案例数 vs 边数；--self-test 负样本 4/4；基线 content-consistency-baseline.txt 冻结 W554 人工裁决 4 条误报·只拦新增；L2 站-dataset 对账与 L3 语义判读为报告型见 W554 审计报告）
-26. **SEO head**（W630 挂载，经用户裁决：check_seo_head.py 第 26 门禁（slot 自 W591 预留·脚本 W591 建置）——og:image/canonical 全页覆盖·JSON-LD 内联有效·hreflang 配对（89 对）·sitemap 集合一致；859<!--stats:seo_scanned--> 页扫描（site 全树减两个模板壳·W702 校真）；SEO head 属静默腐烂面（W628 实证同族：W575 字面量腐烂 52 批无人察觉））
+26. **SEO head**（W630 挂载，经用户裁决：check_seo_head.py 第 26 门禁（slot 自 W591 预留·脚本 W591 建置）——og:image/canonical 全页覆盖·JSON-LD 内联有效·hreflang 配对（89 对）·sitemap 集合一致；866<!--stats:seo_scanned--> 页扫描（site 全树减两个模板壳·W702 校真）；SEO head 属静默腐烂面（W628 实证同族：W575 字面量腐烂 52 批无人察觉））
 
 ### 编号与质量防线类（27-47）
 
@@ -221,3 +221,26 @@
 汇总行恒为 `---- 第 71 门禁 占位符哈希载体：违规 N · OK|FAIL ----`（`_StrictGate` 依此判
 「确实执行过」·防静默跳过）；自测 7 例（内联内必红 / script src 必红 / meta 必绿 /
 外部 JS 必绿 / 扫描面失效必红 / 口径同源 / 合法页整体通过）。
+
+72. **emoji 残留棘轮**（check_emoji_icons.py·W1232）——审计登记「emoji/icon 探针挂槽裁决」清偿：W941
+起的 UI 图标位 emoji 残留 623 处存量一刀 FAIL 不可执行（同 W1155 1702 单侧键教训），挂载形态裁决为
+「静态残留只降不升」基线棘轮——`scripts/output/emoji-residue-baseline.txt` 冻结当前计数，gate 判当前
+计数 ≤ 基线（超基线判红·低于基线不自动收紧·收紧须人工 --record 并注明理由）；browser 实测段（图标
+渲染正确性）不受基线豁免、仍全量硬判据。挂载用 `--gate --no-browser`（browser 段 CI 环境不稳·离线
+探针伪影白名单族）。恒跑；汇总行恒为 `---- 第 72 门禁 emoji 残留棘轮：静态 N / 基线 M · OK|FAIL ----`。
+
+73. **reader/RSS 产物新鲜度**（check_reader_rss_fresh.py·W1232）——审计登记「reader/rss 新鲜度门禁」
+清偿：site/reader（build_reader.py 从 docs 生成 630 页）与 site/rss.xml（gen_rss.py）此前零新鲜度
+判据。判据（git 视角·CI fetch-depth 0 有全历史）：产物最后提交时间 ≥ 输入面（docs/01-06 内容板块 +
+source/ + build_reader.py + gen_rss.py 自身）最后变更时间；产物工作树 mtime 兜「已重建待提交」窗口
+（收官链内重建先于提交·鸡生蛋窗口）。浅克隆无历史 = 判据未执行 exit 2（fail-closed）。首跑实证抓到
+reader/rss 双陈旧欠账（docs/02 11-11 变更后未重建）并随批重建；连带根修 gen_rss.py 版段正则
+（vX.Y.Z 形态退役后恒解析为空·rss 自 10-22 静默陈旧的根因）+ build_reader.py 收尾自动补
+w1167_nav_inject --apply（重建洗掉导航正本的流水线缺口·第 65 槽 15 页复踩根修）。恒跑；汇总行恒为
+`---- reader/RSS 新鲜度：输入最新 …· reader …· rss … ----`。
+
+74. **治理文档体积窗口**（check_doc_size_budget.py·W1232·P2-4 升格）——对抗审查 2026-11-06 登记
+「verify_delivery 不挂 check_doc_size_budget（C7/密度判据 pre-commit 不可见）·挂载=铁律 8 须用户批准」，
+用户令开工即批。判据本体（体积阈值 262144B / 段行密度 200 行 / C7 概要块 / HANDOVER 窗口）此前只在
+preflight 提示位（WARN 不阻断）；升格 verify 槽后体积超窗/密度超限阻断提交。汇总行恒为
+`---- 第 74 门禁 治理文档体积窗口：N FAIL（窗口 …）----`。

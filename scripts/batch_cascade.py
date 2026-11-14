@@ -56,6 +56,17 @@ def drop_block(s, bm_start, nl):
     return s[:bm_start] + s[bm_start + len(nl.join(seg[:j]) + nl):]
 
 
+def _paren_issues(spec):
+    """W1232：desc/head_sentence 全角括号判据（进度标题锚否定字符类遇全角右括号止）。"""
+    out = []
+    for field in ("desc", "head_sentence"):
+        for paren in ("（", "）"):
+            if paren in spec.get(field, ""):
+                out.append("spec.%s 含全角括号 %r（进度标题锚遇全角右括号止·W1231/W1232 实证）"
+                           % (field, paren))
+    return out
+
+
 def precheck(spec):
     """spec 预校验（W667/S-01）：字段级分隔符黑名单 + title 领衔断言——在 dry-run 断言之前拦截
     「能落盘但会破坏下一批锚点正则」的 spec（W664 实证：W663 desc 含「·」致 README/项目说明锚点失配）。
@@ -67,6 +78,10 @@ def precheck(spec):
             if sep in spec.get(field, ""):
                 issues.append("spec.%s 含分隔符 %r（写入版本行/HEAD 句后将使下一批锚点正则失配）"
                               % (field, sep))
+    # W1232 增补（铁律 15·两次实证转判据）：desc/head_sentence 全角括号同样破坏
+    # 「当前进度」标题锚正则的否定字符类（遇全角右括号即止；W1231 desc 内层括号 /
+    # W1232 desc 括号两轮实证·均到 versions 步才炸 = 半程产物需手工修回）。前置拦截。
+    issues.extend(_paren_issues(spec))
     if not str(spec.get("title", "")).startswith(str(spec.get("batch", ""))):
         issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###·合并段场景必须显式领衔）")
     # W1019 硬守卫：段正文必须以空行开场。病根：级联把标题行与 changelog_body 直接拼接，

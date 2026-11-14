@@ -1,3 +1,102 @@
+## W1232 门禁挂槽批：三槽挂载（2026-11-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W1232 | 第 72/73/74 槽挂载（_StrictGate ×3 + EXPECTED 两处清单·79 段自洽） |
+| scripts/check_emoji_icons.py | W1232 | 第 72 槽基线棘轮（--record 自动登记/超基线判红）+ run_browser/scan_static 拆 5 helper（宽档钉消号·判定逐字未改·623 计数自证） |
+| scripts/check_reader_rss_fresh.py | W1232 | 新增：reader/RSS 产物新鲜度判据（git 视角·工作树 mtime 兜重建窗口·浅克隆 fail-closed） |
+| scripts/check_doc_size_budget.py | W1232 | --gate 旗标 + 第 74 槽汇总行形态（判据本体零变化） |
+| scripts/check_data_copy_chain.py | W1232 | #51：--record 须搭配 --approve（无批准拒绝 rc=1） |
+| scripts/check_glossary.py | W1232 | #51：--build-baseline 须搭配 --approve |
+| scripts/check_citability.py | W1232 | #51：--generate-baseline 须搭配 --approve |
+| scripts/gen_rss.py | W1232 | 版段正则根修（现役 W 形态优先·v 形态回退——v 退役后恒解析空 ⇒ rss 自 10-22 静默陈旧根因） |
+| scripts/build_reader.py | W1232 | 收尾自动 nav_inject --apply（重建洗导航正本流水线缺口·第 65 槽 15 页复踩根修） |
+| scripts/output/emoji-residue-baseline.txt | W1232 | 新增：emoji 残留棘轮基线（623·W1232 首跑登记） |
+| scripts/content-consistency-baseline.txt | W1232 | reader culture 7 篇新页同族抽取伪影登记（与已冻结 79 条同规则同形态） |
+| scripts/output/script-coverage-baseline.txt | W1232 | 摘 check_emoji_icons.py 豁免行（W1014 C2 反向查·已挂槽不得仍豁免） |
+| docs/agent/gates.md | W1232 | 第 72/73/74 槽全量定义 + 标题 marker 71→74 |
+| AGENTS.md | W1232 | §4.2 三槽摘要（合并形态·C2 对账）+ gate_count marker 71→74 三处 + §4.3 三段详述下放指针（体积窗 C9 预算） |
+| docs/00-导读/W批次编号对账表.md | W1232 | W1232 认领行 + 腾窗迁出 2 行（W1171-W1172） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1232 | 台账腾窗归档面（W1171-W1172 迁入） |
+| site/reader/ | W1232 | 重建 630 页（docs/02 11-11 变更清偿·首跑新鲜度判据抓到的欠账） |
+| site/rss.xml | W1232 | 重建 20 条（W1231→W1211·gen_rss 根修后） |
+| site/sitemap.xml | W1232 | gen_sitemap 862 URLs（reader 重建 7 新页收录） |
+| site/data/timeline.html | W1232 | vm 灌入撤销回滚（W1231 遗留收尾） |
+| site/reader/ 未跟踪新页 ×7 | W1232 | culture 专题新页（docs/04 11-11 新增重建产物） |
+| scripts/output/stats.json | W1232 | stats 刷新（gate_count 74 等） |
+| scripts/output/stats-changelog.json | W1232 | stats 刷新随动 |
+| scripts/output/stats-index.md | W1232 | stats 刷新随动 |
+| pytest.ini | W1232 | pytest_collected 计数随动 |
+| tests/unit/test_w1232_gates.py | W1232 | 新增：#51 三拒绝 + 棘轮基线 + gen_rss 正则 + 新鲜度语义 + 挂槽登记 7 例回归锁 |
+| scripts/output/search-index-zh.js | W1232 | 搜索索引刷新（reader 重建随动·第 46 槽） |
+| scripts/output/search-index-en.js | W1232 | 搜索索引刷新随动 |
+| site/data/json/ | W1232 | search-index 内嵌副本随动（第 46 槽双源） |
+| CHANGELOG.md | W1232 | W1232 段落落盘（cascade 写入） |
+| HANDOVER.md | W1232 | 里程碑块插入 + 版本行推进 |
+| archive/docs/AGENTS-ARCHIVE.md | W1232 | AGENTS 脚注滚动归档 |
+| archive/docs/workflows-readme-history.md | W1232 | workflows README 历史归档 |
+| docs/00-导读/项目说明.md | W1232 | 版本面推进 |
+| README.md | W1232 | 版本面推进 |
+| STRUCTURE.md | W1232 | 版本面推进 |
+| CITATION.cff | W1232 | 版本面推进 |
+| .github/workflows/README.md | W1232 | 版本面推进 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1232 | stats 计数随动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1232 | stats 计数随动 |
+| scripts/output/file-index.md | W1232 | file-index 段（cascade 写入） |
+| scripts/output/_cascade_files_W1232.txt | W1232 | 级联落盘清单 |
+| scripts/output/_w1232_spec.json | W1232 | 本批 spec |
+| scripts/output/INDEX.md | W1232 | 目录文档刷新 |
+| scripts/output/README.md | W1232 | 目录文档刷新 |
+| scripts/output/tools-inventory.md | W1232 | 工具盘点随动 |
+| scripts/output/_vermilion_solid_cache.json | W1232 | 朱砂缓存随页脚链 |
+| scripts/output/_vermilion_solid_report.json | W1232 | 朱砂报告随动 |
+| site/data/cross-time-danmaku.html | W1232 | 页脚批次链滚动 |
+| site/data/tag-cloud.html | W1232 | 页脚批次链滚动 |
+| site/dukou-engine.html | W1232 | 页脚批次链滚动 |
+| site/index.html | W1232 | 页脚批次链滚动 |
+| site/data/json/search-index-zh.js | W1232 | 搜索索引内嵌副本（46 槽双源） |
+| site/data/json/search-index-en.js | W1232 | 搜索索引内嵌副本随动 |
+| tests/unit/INDEX.md | W1232 | 目录文档刷新（新测试文件） |
+| tests/unit/README.md | W1232 | 目录文档刷新随动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图 | W1232 | 架构图目录（stats 面随动·如触发） |
+| scripts/INDEX.md | W1232 | 目录文档刷新 |
+| scripts/batch_cascade.py | W1232 | precheck 全角括号判据（W1231/W1232 实证转判据·_paren_issues helper） |
+| scripts/output/_w1167_nav_plan.json | W1232 | nav_inject --apply 全站分发计划随动 |
+| site/data/search-index-zh.js | W1232 | 搜索索引刷新（46 槽双源） |
+| site/en/search-index-en.js | W1232 | 搜索索引刷新（46 槽双源） |
+| site/reader/culture/INDEX.md | W1232 | reader culture 新页（docs/04 11-11 新增重建产物） |
+| site/reader/culture/README.md | W1232 | reader culture 新页（docs/04 11-11 新增重建产物） |
+| site/reader/culture/index.html | W1232 | reader culture 新页（docs/04 11-11 新增重建产物） |
+| site/reader/culture/三教合一明代思想史深化专题.html | W1232 | reader culture 新页（docs/04 11-11 新增重建产物） |
+| site/reader/culture/且听下回分解套语专题.html | W1232 | reader culture 新页（docs/04 11-11 新增重建产物） |
+| site/reader/culture/佛道思想.html | W1232 | reader culture 新页 |
+| site/reader/culture/八十一难与正果专题.html | W1232 | reader culture 新页 |
+| site/reader/culture/历史玄奘与小说玄奘专题.html | W1232 | reader culture 新页 |
+| site/reader/culture/四大部洲与三界空间框架专题.html | W1232 | reader culture 新页 |
+| site/reader/culture/天罡地煞与变化之术专题.html | W1232 | reader culture 新页 |
+| site/reader/culture/成书背景.html | W1232 | reader culture 新页 |
+| site/reader/culture/明代驿递交通制度对照专题.html | W1232 | reader culture 新页 |
+| site/reader/culture/法器与兵器器物体系专题.html | W1232 | reader culture 新页 |
+| site/reader/culture/版本演变.html | W1232 | reader culture 新页 |
+| site/reader/culture/西游与道教全真派专题.html | W1232 | reader culture 新页 |
+| site/reader/culture/西游东传与译介专题.html | W1232 | reader culture 新页 |
+| site/reader/culture/西游记大事年表.html | W1232 | reader culture 新页 |
+| site/reader/culture/金公木母与心猿意马称谓专题.html | W1232 | reader culture 新页 |
+| site/reader/index.html | W1232 | reader 重建随动 |
+| site/reader/people/唐僧.html | W1232 | reader 重建随动 |
+| site/reader/people/太上老君.html | W1232 | reader 重建随动 |
+| site/reader/people/孙悟空.html | W1232 | reader 重建随动 |
+| site/reader/people/沙僧.html | W1232 | reader 重建随动 |
+| site/reader/people/猪八戒.html | W1232 | reader 重建随动 |
+| site/reader/people/白龙马.html | W1232 | reader 重建随动 |
+| site/reader/people/菩提祖师-方向二深化.html | W1232 | reader 重建随动 |
+| site/reader/people/菩提祖师.html | W1232 | reader 重建随动 |
+| site/reader/people/观音.html | W1232 | reader 重建随动 |
+| site/reader/people/金角银角-方向二深化.html | W1232 | reader 重建随动 |
+| site/reader/people/铁扇公主.html | W1232 | reader 重建随动 |
+| site/reader/people/高翠兰-方向二深化.html | W1232 | reader 重建随动 |
+| site/reader/people/黑熊精-方向二深化.html | W1232 | reader 重建随动 |
+
 ## W1231 单侧键 schema 分歧清理批：数据漂移门禁 v4 面板配对 + embed_json 三重根修 + 476 条隐性值漂移修复 + dataset 对齐生成面（2026-11-14）
 
 | 文件 | W | 说明 |

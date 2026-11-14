@@ -366,6 +366,7 @@ def gate_lines():
 def main() -> int:
     ap = argparse.ArgumentParser(description="治理文档体积窗口门禁（W960）")
     ap.add_argument("--report", action="store_true", help="只报不判（exit 0）")
+    ap.add_argument("--gate", action="store_true", help="门禁模式（W1232 第 74 槽挂载·缺省即判红·此旗标为显式标记）")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
     if args.self_test:
@@ -378,9 +379,9 @@ def main() -> int:
     if fails:
         for f in fails:
             print("FAIL ", f)
-        print("---- 体积窗口门禁：%d FAIL（修法=按各 FAIL 行内指引跑对应归档工具）----" % len(fails))
+        print("---- 第 74 门禁 治理文档体积窗口：%d FAIL（修法=按各 FAIL 行内指引跑对应归档工具）----" % len(fails))
         return 1
-    print("---- 体积窗口门禁：0 FAIL（窗口 %s）----" % WINDOWS)
+    print("---- 第 74 门禁 治理文档体积窗口：0 FAIL（窗口 %s）----" % WINDOWS)
     return 0
 
 
