@@ -1,0 +1,33 @@
+{
+  "batch": "W1226",
+  "action": "T-1 远端 tag v2.3.0 清理（用户令「开始 T-1」=手册 §6.1 批准门槛通过）",
+  "precheck": {
+    "remote_tags_before": [],
+    "remote_tags_note": "git ls-remote --tags origin 实测为空——远端本就无任何 tag（W1209 历史改写时期已清·手册 W1221 时点登记的「删远端 tag」动作无对象可删·如实记录）",
+    "local_tag": "v2.3.0",
+    "local_tag_commit": "abd03999afa67d903077958ac3ab6c1f37ac496c",
+    "refs_found": {
+      "workflows": [
+        ".github/workflows/README.md:208 示例命令（已随本批改为 vX.Y.Z 占位形态）"
+      ],
+      "docs_history": [
+        "CHANGELOG 历史段/方案 v2/施工手册/评估报告等对 v2.3.0 的记载属历史记录·禁改"
+      ],
+      "github_release": {
+        "name": "详解西游记 · 桌面版 v2.3.0",
+        "isDraft": true,
+        "note": "2026-10-18 未发布草稿·引用 tagName v2.3.0（Draft 不创建远端 ref·不碍 T-1 验收）——删除超出 T-1 批准范围·登记遗留待用户单独裁决"
+      }
+    }
+  },
+  "actions": [
+    "git tag -d v2.3.0（本地）",
+    "远端无需动作（本就无 tag）",
+    ".github/workflows/README.md 示例命令去实名改 vX.Y.Z 占位"
+  ],
+  "postcheck": {
+    "git_tag_empty": true,
+    "remote_tags_after": [],
+    "rollback": "git tag v2.3.0 abd03999afa67d903077958ac3ab6c1f37ac496c && git push origin v2.3.0"
+  }
+}

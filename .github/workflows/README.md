@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1225** — 西游记解读项目（`D:\xiyouji`，W1225）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1226** — 西游记解读项目（`D:\xiyouji`，W1226）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -19,7 +19,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
-> **W450-W1225**：verify 门禁体系扩展（区间号滚动推进自本行；逐批明细自 W1157 起追加 [archive/docs/workflows-readme-history.md](../../archive/docs/workflows-readme-history.md)，原单行累计已拆档）。
+> **W450-W1226**：verify 门禁体系扩展（区间号滚动推进自本行；逐批明细自 W1157 起追加 [archive/docs/workflows-readme-history.md](../../archive/docs/workflows-readme-history.md)，原单行累计已拆档）。
 
 ## 1. 工作流列表
 
@@ -205,7 +205,7 @@ npx lighthouse http://localhost:8000/dashboard.html `
 ### 发布步骤
 
 1. 改 `xiyouji-desktop/package.json` 的 `version`（如 `2.3.0`）并合并到默认分支 `main`（当前仓库工作分支为 `dev`，`main` 受保护走 PR）；
-2. 打 tag 并推送：`git tag v2.3.0 && git push origin v2.3.0`；
+2. 打 tag 并推送：`git tag vX.Y.Z && git push origin vX.Y.Z`（`X.Y.Z` = `package.json` 实际版本号·W1226 起 T-1 已清理 `v2.3.0` 实名 tag·示例不再指名）；
 3. workflow 自动执行 preflight（tag 与 package.json 版本一致性校验 + 从 CHANGELOG 首段提取内容批次 W###）→ 三平台并行构建（electron-builder `--publish never`）→ 汇总产物发布 GitHub Release；
 4. 校验 Release 资产：Win `xiyouji-desktop-win-x64.exe` + `latest.yml` / macOS `xiyouji-desktop-mac-universal.dmg` + `.zip` + `latest-mac.yml` / Linux `xiyouji-desktop-linux-x86_64.AppImage` + `latest-linux.yml`（`*.blockmap` 供增量更新）。
 
