@@ -1,3 +1,22 @@
+### W1228（2026-11-14）：对抗审查回批 + P-43-01 根修批（描述段 W 形态识别 + 五项 P2 同批修）
+
+**本批要点**（W1228 对抗审查回批 + P-43-01 根修批）：
+
+> - **① 对抗审查派发与判定**：触发器 20 批点名 ⇒ 按模板派发无上下文只读 subagent 审查 W1208-W1227 窗口。**判定：仓库整体健康·各批声明逐项实测全部属实·无一虚报·无 P0/P1**；发现 5 项 P2 与 10 项 P3。审查报告原文本地不入库·证据摘本段（模板收尾义务）。
+> - **② P2 五项同批全修**：
+>   - P2-1 [archive_segments.py](scripts/archive_segments.py) 归档文件名大小写错名（`FILE-INDEX-ARCHIVE.md` vs tracked 实名小写——Windows 大小写不敏感掩盖 40+ 批·Linux fresh clone 收官链死）⇒ 常量对齐 tracked 实名 + docstring 修。
+>   - P2-2 [preflight_check.py](scripts/preflight_check.py) `wnum_commit_index` 散文半角括号洞（`_RE_COMMIT_TAG` 取 subject 任意位置首个括号组·审查员实证真实命中 1 例）⇒ 括号组锚定 `type(scope):` 前缀 + 修锚定版捕获组含括号的自伤（`(w955)` 不匹配 `_RE_SCOPE_WNUM`）+ 跳过 `%h` 前缀。
+>   - P2-3 跳号无痕：台账补 **W1213 让号行**（定位工作被 W1214 吸收·当时无留痕）与 **W1200 跳号行**（纯空号·预约集亦无）——W663 先例。
+>   - P2-4 [audit-archive.ts](xiyouji-agent-web/server/compliance/audit-archive.ts) `purgeAuditArchiveBefore` 销毁留证两步无事务（DELETE 成功留证失败即破「销毁必留证」承诺）⇒ BEGIN/COMMIT 事务化 + 失败回滚不吞错；配对测试 fail 0（PG 例按设计 skip）。
+>   - P2-5 [periodic-ops-checklist.md](docs/agent/periodic-ops-checklist.md) 到期日恒空 = 提醒机制空转 ⇒ 三行补「下次到期」（2026-12-14 / 2027-02-14 / 2027-05-14）。
+> - **③ P3 甄别留痕**：残留 worktree 已 prune+remove（W1211 CI 复现件）；预约文件 83 条陈旧 reserved 已批量清偿（仅留在途 W1228）；其余 P3（两门禁 iter_text_files 解码失败静默跳过/70 槽 IPv6 类名失准与 scheme-relative 未判红/71 槽 data-src 边界假阳/TEXT_EXTS 窄/reconcile-core 抽样不对称/W1211-W1212 行 hash 待回填/CRLF 6 件/容量退码优先级/porcelain CJK 计数）——甄别为低危边角·登记不动（改则各需专批·详见审查发现清单）。
+> - **④ P-43-01 根修（HANDOVER 四、待办唯一条·本批清账）**：`wnum_commit_index` 增**描述段开头 W 形态**（`type(scope)?: W#### 主题`——仓内既成惯例·W1209/W1210/W1226/W1227 实测命中）；精确线 = 描述段以 W 开头才算批次标签（散文提及不计·W1211 负样本语义保持）；同笔双形态同号去重。**实证**：全历史 772 批索引·W1209→dfff13ecf / W1210→a7ead9d17 识别成功。**验收口径修正**：原验收「W1209/W1210 两行 hash 由脚本反填」因两行已随 60 行窗迁入归档（归档追加式不改写为设计）⇒ 修正为「工具识别能力实证 + 正本滞后告警归零」——后者实测归零（正本无在途欠账行）。
+> - **⑤ 声明与实况不符项**：无（审查员原话「未发现声明 X·实测 Y 级不符」；两条边界情况——W1227 门禁绿在其收官环境为真·审查初跑见 31 槽 C5d 漂移系本批在途新增 5 测试的污染·HEAD 干净克隆复跑全绿——均如实记录）。
+> - **⑥ 顺带**：现势 bullet 判据对齐 W737 碑化口径（预留豁免 bullet 停在 W862 属历史遗迹·WARN 降 NOTE）；模板校准戳 W1022→W1228 并新增三个检查点（跨平台大小写/跳号让号留痕/周期到期日）。
+> - **⑦ 验证**：verify 全量核心绿；pytest 全量 1643 passed/4 skipped（新增 5 回归锁）；agent-web audit-archive 测试 fail 0；guardrails 过；lint_links 0 broken。
+> - **文件**：见 file-index。
+
+
 ### W1227（2026-11-14）：Draft Release 处置批＝用户令「删」执行（T-1 弧线彻底闭环）
 
 **本批要点**（W1227 Draft Release 处置批·用户令「删」执行）：
@@ -714,7 +733,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1227），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1228），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

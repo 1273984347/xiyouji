@@ -1,6 +1,6 @@
 # 对抗式审查派发模板（W1000 沉淀 · 触发器 scripts/check_audit_trigger.py）
 
-> **上次校准：W1022**（校准含义见文末「模板自身的维护」；超 20 批未校准应触发复核）
+> **上次校准：W1228**（校准含义见文末「模板自身的维护」；超 20 批未校准应触发复核）
 >
 > **何时用**：触发器 ≥20 批点名时，或重大机制落地后主动派发。派发者 = 任意会话，
 > 被派发者 = subagent（general-purpose），**只读不改**——审查者不修复，修复由派发会话
@@ -22,13 +22,20 @@
 <当期批次声明清单：每个批次一行「W###：声称了什么」，不信任这些声明，亲自验证>
 
 ## 必查清单（逐项执行，给命令输出作证据）
-A. 仓库完整性：git status / git log -5 / HEAD 与 origin 关系 / git ls-files --eol 全量行尾普查
+A. 仓库完整性：git status / git log -5 / HEAD 与 origin 关系 / git ls-files --eol 全量行尾普查 /
+   **跨平台文件名大小写核对**（W1228 校准新增：工具常量里的归档/数据文件名 vs `git ls-files`
+   实名逐字符比对——Windows 大小写不敏感会把写错的常量掩盖成「一直正常」，Linux/CI 即死；
+   实证：archive_segments.py 曾把 file-index-ARCHIVE.md 写成大写形态存活 40+ 批）
 B. 守恒对拍：各治理文件正本+归档合看，抽查 5 个迁移样本逐字节比对
 C. 门禁实跑：verify_delivery --scope docs 与 --scope full、check_doc_size_budget、
    check_gov_doc_claims、check_parser_anchor_coverage、check_doc_sync、各触发器 --self-test
 D. 代码审查（读源码找缺陷·重点边界与并发）：<当期新增/改动的工具清单>
 E. 文档三层一致性：AGENTS 铁律与计数 / CLAUDE.md ≤60 行 / pitfalls 分节计数 / 脚注五态
-F. 同族残留：活性文档「只进不出」症状 / 正本指针目标存在性
+F. 同族残留：活性文档「只进不出」症状 / 正本指针目标存在性 /
+   **跳号与让号留痕核对**（W1228 校准新增：CHANGELOG 段号序列 vs 台账认领行 vs
+   预约集三源合看——跳过的号必须有让号/撤销留痕行，无痕 = 占号闭环缺口；
+   实证：W1213 被并入 W1214 执行但无让号行·W1200 纯空号双源皆无痕） /
+   **周期义务到期日非空**（「最近执行/下次到期」列恒空 = 提醒机制空转·W1228 实证）
 G. 多 Agent 并发现场：最近提交交错 / 在途改动 / index.lock
 
 ## 输出要求

@@ -5,9 +5,9 @@
 
 | 频率 | 动作 | 判据 / 命令 | 最近执行 | 下次到期 |
 |:--:|:---|:---|:---|:---|
-| 每月 | PG 恢复演练：恢复到临时实例并断言行数一致 | `bash xiyouji-agent-web/deploy/pg/bin/restore-drill.sh`（git-bash·PG 实例运行中）；逐表行数相等 | —（未执行·W1222 建卡） | — |
-| 每季 | 审计归档回放 + 克隆重建演练 | 归档可读；克隆重建后 `python scripts/verify_delivery.py` 全绿 | —（未执行·W1222 建卡） | — |
-| 每半年 | 等保自查：留存期执行率 + 分级覆盖率 + 审计缺口窗口复核 | 三项均 100% / 缺口窗口 = 0 | —（未执行·W1222 建卡） | — |
+| 每月 | PG 恢复演练：恢复到临时实例并断言行数一致 | `bash xiyouji-agent-web/deploy/pg/bin/restore-drill.sh`（git-bash·PG 实例运行中）；逐表行数相等 | —（未执行·W1222 建卡） | **2026-12-14**（W1228 补·建卡日+30 天） |
+| 每季 | 审计归档回放 + 克隆重建演练 | 归档可读；克隆重建后 `python scripts/verify_delivery.py` 全绿 | —（未执行·W1222 建卡） | **2027-02-14**（W1228 补·建卡日+92 天） |
+| 每半年 | 等保自查：留存期执行率 + 分级覆盖率 + 审计缺口窗口复核 | 三项均 100% / 缺口窗口 = 0 | —（未执行·W1222 建卡） | **2027-05-14**（W1228 补·建卡日+181 天） |
 | 事件驱动 | 审计降级发生时：缺口窗口登记 HANDOVER（起止时间 / 影响范围 / 恢复动作 / 能否补记） | 缺口窗口必须可见·不得静默（收官清单 §9 已有同名事件行） | 制度落点见 W1222 | — |
 | 每批收官 | `python scripts/batch_closeout.py --spec scripts/output/_w####_spec.json` | 收官链全绿（本项日常化·详见 [batch-closeout-checklist.md](batch-closeout-checklist.md)，不在此重复展开） | 随批 | — |
 | 推送前 | `python scripts/pre_push_gate.py` | 四步全绿·无「判据降级」标注 | 随批 | — |

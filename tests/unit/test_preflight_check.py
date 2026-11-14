@@ -337,6 +337,52 @@ def test_wnum_commit_index_still_ignores_prose_mentions():
     assert 940 not in idx and 954 not in idx
 
 
+def test_wnum_commit_index_description_leading_wnum():
+    """P-43-01（W1228 根修）：描述段开头 W 形态（type(scope)?: W#### 主题）必须计入——
+    仓内批次提交既成惯例（W1209/W1210/W1226/W1227 实测形态），原判据只认 scope 段
+    ⇒ ledger_backfill 对这类批次判「无批次标签提交」。用真实 subject 作正样本。"""
+    idx = preflight_check.wnum_commit_index([
+        "dfff13ecf chore(repo): W1209 仓库体积治理——历史改写 + LFS 迁移 + commit hash 回填",
+        "a1212a228 chore(repo): W1226 T-1 远端 tag v2.3.0 清理落地（用户令批准）",
+    ])
+    assert idx[1209] == [1, "dfff13ecf"]
+    assert idx[1226] == [1, "a1212a228"]
+
+
+def test_wnum_commit_index_description_leading_no_scope():
+    """无 scope 形态（type: W#### 主题）同属批次标签惯例（docs: W#### 台账回填）。"""
+    idx = preflight_check.wnum_commit_index([
+        "57fa19136 docs: W1227 台账收官回填（commit hash + 三问结论）",
+    ])
+    assert idx[1227] == [1, "57fa19136"]
+
+
+def test_wnum_commit_index_description_prose_still_ignored():
+    """负样本：描述段不以 W 开头的散文提及仍不计（「按 W### 计划」「承接 W###」）。"""
+    idx = preflight_check.wnum_commit_index([
+        "1234567 docs: 按 W1230 计划执行方案批",
+        "2345678 fix: 承接 W1231 教训的回归锁",
+        "3456789 chore: 提及 W940 教训但不带批次标签",
+    ])
+    assert idx == {}
+
+
+def test_wnum_commit_index_double_form_counts_once():
+    """同笔提交 scope 段与描述段都带同号 ⇒ 该号只计一次（防双形态重复计数）。"""
+    idx = preflight_check.wnum_commit_index([
+        "abcdef99 chore(w1209): W1209 仓库体积治理",
+    ])
+    assert idx[1209] == [1, "abcdef99"]
+
+
+def test_wnum_commit_index_merge_subject_not_counted():
+    """负样本：merge 提交 subject（无 conventional 头冒号形态）不计。"""
+    idx = preflight_check.wnum_commit_index([
+        "420f654d7 Merge pull request #178 from 1273984347/sync/w1223-w1224-main",
+    ])
+    assert idx == {}
+
+
 def test_split_inflight_lagged_basic():
     """git 已有提交的登记面在途行 → lagged（退出拒绝集）；无提交的保留真在途。"""
     rows = [

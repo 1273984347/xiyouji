@@ -7,8 +7,9 @@ W921 的搬段脚本（三道守恒断言）跑完即弃 ⇒ 同样的搬家每�
 
 做什么：把正本**最尾部的**（=最老的）N 个版段整块迁入归档容器——
   - CHANGELOG.md      → archive/docs/CHANGELOG-ARCHIVE.md（插在归档文件首个段之前·归档 newest-at-top 约定）
-  - file-index.md     → archive/docs/FILE-INDEX-ARCHIVE.md（追加在归档文件末尾·按迁移批次记账约定
-                        + 头部「> 归档时间：」链追加本次迁移注记）
+  - file-index.md     → archive/docs/file-index-ARCHIVE.md（追加在归档文件末尾·按迁移批次记账约定
+                        + 头部「> 归档时间：」链追加本次迁移注记；W1228 修：原名误写大写
+                        FILE-INDEX-ARCHIVE.md——Windows 大小写不敏感掩盖，Linux fresh clone 收官链死）
 
 守恒断言（W921 三道 + 两条新增，任何一条不过零落盘）：
   A1 段数守恒：正本段数 = 留存段数 + 迁出段数；归档段数 + 迁出段数 = 迁后归档段数
@@ -49,7 +50,7 @@ TARGETS = {
     },
     "file-index": {
         "src": os.path.join("scripts", "output", "file-index.md"),
-        "arc": os.path.join("archive", "docs", "FILE-INDEX-ARCHIVE.md"),
+        "arc": os.path.join("archive", "docs", "file-index-ARCHIVE.md"),  # W1228 修：与 tracked 实名一致（原大写 FILE-INDEX 在 Linux 下解析为另一文件）
         "re_seg": RE_FI_SEG,
         "arc_mode": "append",
     },

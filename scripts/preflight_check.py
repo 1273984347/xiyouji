@@ -263,32 +263,56 @@ def is_inflight(status):
 # 原正则只认「括号内恰好是 w+数字」⇒ P-43-01 反填对半数批次判不出「无批次标签提交」）
 # ——正文/散文里提及别批号（「承接 W###」「W### 教训」）**不计**，
 # 防止引用性提及误降真在途批次的 touches 防护。
-_RE_COMMIT_TAG = re.compile(r"\(([^)]*)\)", re.IGNORECASE)
+_RE_COMMIT_TAG = re.compile(
+    r"^(?:[0-9a-f]{7,12}\s+)?[a-z0-9._-]+\(([^)]*)\):", re.IGNORECASE)
 _RE_SCOPE_WNUM = re.compile(r"^w\d{3,4}$", re.IGNORECASE)
+# P-43-01（W1228 根修）：描述段开头 W 形态——``type(scope)?: W#### 主题``。仓内批次提交的
+# 既成惯例（W1209 ``chore(repo): W1209 仓库体积治理``·W1210 ``chore(repo): W1210 …``·
+# W1226/W1227 同形），原判据只认 scope 段 ⇒ 反填对这类批次判「无批次标签提交」。
+# 精确线：**描述段以 W 号开头**才算批次标签——散文提及（「承接 W###」「按 W### 计划」
+# 「复盘引用 W###」）描述段不以 W 开头 ⇒ 不计，防误降真在途批次的 touches 防护
+# （``chore: 提及 W940 教训`` 这类 W1211 负样本语义保持）。
+_RE_DESC_WNUM = re.compile(
+    r"^(?:[0-9a-f]{7,12}\s+)?[a-z0-9._-]+(?:\([^)]*\))?:\s*w(\d{3,4})\b", re.IGNORECASE)
 
 
 def wnum_commit_index(subjects):
     """git log ``%h %s`` 行列表 → {W 号(int): [提交数, 首笔短 hash]}。
 
-    批次标签形态（大小写不敏感）——**首个括号组内逗号分隔的每一项都算批次标签**：
-    ``type(w###):`` · ``type(scope,w###):`` · ``type(w###,scope):``。
-    一笔提交含多个批次标签时**各号各计一笔**（跨批提交对每个被标签批次都是事实存在）。
+    批次标签形态（大小写不敏感）——
+    ① **首个括号组内逗号分隔的每一项都算批次标签**：``type(w###):`` ·
+       ``type(scope,w###):`` · ``type(w###,scope):``；
+    ② **描述段开头 W 形态**：``type(scope)?: W#### 主题``（P-43-01·W1228 根修）。
+    一笔提交含多个批次标签时**各号各计一笔**（同号在一笔内只计一次，防双形态重复计数）。
     散文形态（「承接 W###」「引用 W### 报告」「…(见 w### 讨论)」）**不计**——
     防误降真在途批次的 touches 防护。
     """
     idx = {}
     for line in subjects or []:
+        seen = set()
         m = _RE_COMMIT_TAG.search(line)
-        if not m:
-            continue
-        for part in m.group(1).split(","):
-            token = part.strip()
-            if not _RE_SCOPE_WNUM.match(token):
-                continue
-            rec = idx.setdefault(int(token[1:]), [0, ""])
-            rec[0] += 1
-            if not rec[1]:
-                rec[1] = line.split(" ", 1)[0]  # 首列 = %h 短 hash
+        if m:
+            for part in m.group(1).split(","):
+                token = part.strip()
+                if not _RE_SCOPE_WNUM.match(token):
+                    continue
+                w = int(token[1:])
+                if w in seen:
+                    continue
+                seen.add(w)
+                rec = idx.setdefault(w, [0, ""])
+                rec[0] += 1
+                if not rec[1]:
+                    rec[1] = line.split(" ", 1)[0]  # 首列 = %h 短 hash
+        md = _RE_DESC_WNUM.match(line.strip())
+        if md:
+            w = int(md.group(1))
+            if w not in seen:
+                seen.add(w)
+                rec = idx.setdefault(w, [0, ""])
+                rec[0] += 1
+                if not rec[1]:
+                    rec[1] = line.split(" ", 1)[0]
     return idx
 
 
@@ -482,6 +506,12 @@ def _step_ledger_numbering(ledger, problems):
             print(f"OK    现势 bullet 交叉核验：W{b} 与 max+1 一致")
         elif b == ledger["max_w"]:
             print(f"NOTE  现势 bullet（W{b}）指向 max 号——该号已认领/进行中窗口（收官 chore 后轮换）")
+        elif b is not None and b < ledger["max_w"]:
+            # W1228：预留豁免 bullet 系列已碑化（对账表停用块·W737 定「取号唯一依据 = max+1」
+            # ·reserve_w.py 为现役取号工具）——末条 bullet 停在 W862 属历史遗迹而非漂移，
+            # 降为 NOTE（WARN 只保留给 bullet 超前 max 的真异常·见下支）。
+            print(f"NOTE  现势 bullet（W{b}）落后 max=W{ledger['max_w']}——预留豁免 bullet 系列"
+                  f"已碑化（W737 起·取号唯一依据 = max+1 + reserve_w），历史 bullet 不再轮换·非漂移")
         else:
             print(f"WARN  现势 bullet（W{b}）与 max+1（W{next_free}）不衔接——人工核对台账")
         print(f"TIP   建议动工批次号 = W{next_free}（认领后先登记对账表再施工）")

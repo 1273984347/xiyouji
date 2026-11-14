@@ -1,3 +1,38 @@
+## W1228 对抗审查回批 + P-43-01 根修批（2026-11-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W1228 | P-43-01 描述段 W 形态 + 括号洞锚定修 + bullet 碑化降 NOTE |
+| tests/unit/test_preflight_check.py | W1228 | 新增 5 回归锁（描述段形态/无 scope/散文负样本/双形态去重/merge 负样本） |
+| scripts/archive_segments.py | W1228 | 归档名大小写错名修（对齐 tracked 实名·P2-1） |
+| xiyouji-agent-web/server/compliance/audit-archive.ts | W1228 | purge 销毁留证事务化（P2-4） |
+| docs/agent/adversarial-audit-prompt.md | W1228 | 模板校准 W1228 + 新增三个检查点 |
+| docs/agent/periodic-ops-checklist.md | W1228 | 到期日补齐（P2-5） |
+| docs/00-导读/W批次编号对账表.md | W1228 | W1228 认领行（token）+ W1200/W1213 补登 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1228 | 台账行窗口腾窗迁出最老行（如触发） |
+| CHANGELOG.md | W1228 | 对抗审查回批 + P-43-01 根修批 |
+| HANDOVER.md | W1228 | 里程碑块（cascade 写入）+ bullet 对齐 |
+| AGENTS.md | W1228 | 版本脚注滚动（cascade 写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1228 | AGENTS 脚注滚动归档（cascade 写入） |
+| scripts/output/file-index.md | W1228 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats.json | W1228 | stats 重跑（pytest_collected 随动） |
+| scripts/output/_cascade_files_W1228.txt | W1228 | 级联落盘清单（cascade 生成） |
+| scripts/output/_w1228_spec.json | W1228 | 本批 spec |
+| README.md | W1228 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1228 | 版本面推进（version_surface） |
+| CITATION.cff | W1228 | 版本面推进（version_surface） |
+| docs/00-导读/项目说明.md | W1228 | 版本面推进（version_surface） |
+| .github/workflows/README.md | W1228 | 版本面推进（version_surface） |
+| archive/docs/workflows-readme-history.md | W1228 | workflows README 历史归档（version_surface） |
+| scripts/output/INDEX.md | W1228 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1228 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/tools-inventory.md | W1228 | 工具盘点时间戳随动 |
+| scripts/output/_vermilion_solid_cache.json | W1228 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
+| site/data/cross-time-danmaku.html | W1228 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1228 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1228 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1228 | 页脚批次链滚动（cascade 全档） |
+
 ## W1227 Draft Release 处置批＝用户令「删」执行（2026-11-14）
 
 | 文件 | W | 说明 |
