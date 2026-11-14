@@ -1,3 +1,38 @@
+## W1233 复杂度棘轮批：C901 全清零（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/gen_folder_docs.py | W1233 | main 29→拆 4 helper（_warn_untracked/_kinds_for/_process_one/_report）·--refresh 端到端实跑验证·45 槽 0 FAIL |
+| scripts/tmpe_tidy.py | W1233 | RunLock.acquire 19→三阶段 helper（_degrade_or_raise/_inspect_lock/_takeover_stale/_create_and_write）·23/23 专项过·教训：_NullLock 同名方法首拆误插（find 第一命中）已当轮修正 |
+| scripts/check_cross_line_rewrite.py | W1233 | scan 18→_iter_py_files/_classify_call 拆解·连带 9 条 PLR1702 消·自测 _self_test/_repl_kind_of_call 两 helper 补回（切片区间误吞）·9/9 过 |
+| scripts/j1_name_audit.py | W1233 | main 18→_verify_landed_checks/_preflight_checks 双臂拆解·12/12 过 |
+| scripts/B_人物/character_nlp.py | W1233 | build_cooccurrence 16→_count_and_pair/_scene_presents 拆解 |
+| scripts/check_doc_numbers.py | W1233 | check_coverage 16→_resolve_targets/_assert_one 拆解 |
+| scripts/bump_version.py | W1233 | main 16→_resolve_versions/_sync_range_and_footers/_sync_aux_version_docs/_append_file_index 拆解（STOP 防线实跑验证） |
+| docs/00-导读/W批次编号对账表.md | W1233 | W1233 认领行登记 |
+| .github/workflows/README.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| AGENTS.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| CHANGELOG.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| CITATION.cff | W1233 | 收官链随动件（refresh/stats/级联面） |
+| HANDOVER.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| README.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| STRUCTURE.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| archive/docs/workflows-readme-history.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| docs/00-导读/项目说明.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| scripts/output/_cascade_files_W1233.txt | W1233 | 收官链随动件（refresh/stats/级联面） |
+| scripts/output/_vermilion_solid_cache.json | W1233 | 收官链随动件（refresh/stats/级联面） |
+| scripts/output/_w1233_spec.json | W1233 | 收官链随动件（refresh/stats/级联面） |
+| scripts/output/file-index.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| scripts/output/stats.json | W1233 | 收官链随动件（refresh/stats/级联面） |
+| scripts/output/tools-inventory.md | W1233 | 收官链随动件（refresh/stats/级联面） |
+| site/data/cross-time-danmaku.html | W1233 | 收官链随动件（refresh/stats/级联面） |
+| site/data/tag-cloud.html | W1233 | 收官链随动件（refresh/stats/级联面） |
+| site/dukou-engine.html | W1233 | 收官链随动件（refresh/stats/级联面） |
+| site/index.html | W1233 | 收官链随动件（refresh/stats/级联面） |
+| site/rss.xml | W1233 | 收官链随动件（refresh/stats/级联面） |
+| site/sitemap.xml | W1233 | 收官链随动件（refresh/stats/级联面） |
+
+
 ## W1232 门禁挂槽批：三槽挂载（2026-11-14）
 
 | 文件 | W | 说明 |
@@ -96,77 +131,12 @@
 | site/reader/people/铁扇公主.html | W1232 | reader 重建随动 |
 | site/reader/people/高翠兰-方向二深化.html | W1232 | reader 重建随动 |
 | site/reader/people/黑熊精-方向二深化.html | W1232 | reader 重建随动 |
+| scripts/stats.py | W1232 | 收官链随动件（refresh/stats/versions/sweep 刷新） |
 
 ## W1231 单侧键 schema 分歧清理批：数据漂移门禁 v4 面板配对 + embed_json 三重根修 + 476 条隐性值漂移修复 + dataset 对齐生成面（2026-11-14）
 
 | 文件 | W | 说明 |
 |---|---|---|
-| site/data/81-hardships.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/aesthetics.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/cave-estate.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/ethics-consumption.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/game-webnovel.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/jurisprudence.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/karma-reincarnation.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/monster-background.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/music-structure.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/narrative-experiment.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/philosophy.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/power-resources.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/relationships.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/risk-project.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/social-media.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/text-evolution.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/timeline.html | W1231 | vm 灌入撤销回滚 HEAD（页面 timeline 语义与生成面章节事件线撞名双形态·22 项保留） |
-| site/data/visual-art.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/workplace.html | W1231 | EMBEDDED 面板重灌（生成面权威·V8 执行式重写·隐性值漂移清偿） |
-| site/data/json/artifact_panels.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/board_game.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/cave_by_owner_rank.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/cave_by_region.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/cave_estate.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/cave_top_luxury.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/character_appearance.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/character_cards.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/chart_design_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/counterfactual_scenarios.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/counterfactual_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/cultural_misreading_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/deconstruction_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/deconstruction_works.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/dialogue_sentiment.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/domino_causality.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/east_asia_amplification.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/east_asia_receptions.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/ethics_consumption_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/game_webnovel_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/hardships_81.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/heart_sutra_sculpture.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/internet_buzzwords.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/journey_geo_3d.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/journey_route.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/mbti_characters.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/methodology_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/monster_clock.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/monster_ipo.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/mount_rights_report.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/narrative_cards.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/narrative_experiment_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/project_review.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/rescue_roi.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/scent_map.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/social_media_profiles.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/social_media_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/spiral_progress.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/story_generator.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/tang_monk_food_vlog.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/team_effectiveness.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/translation_bias.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/trip_report.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/villain_matrix.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/visual_art_summary.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/webnovel_adaptations.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
-| site/data/json/wukong_resume.json | W1231 | 部署副本同步（sync_data_json·生成面随动 47 件之一） |
 | scripts/check_data_drift.js | W1231 | v4：根级配对前置（pairForCompare 包壳/数组形态降级）+ 设计性单侧键族豁免 + 单行形态回退（保护面守恒 60 页）+ --self-test 8 例 |
 | scripts/embed_json.py | W1231 | 三重根修：模式扩 EMBEDDED_DATA（46 页不可用→可用）+ 行锚定成员定位（括号扫描在文案含引号/括号页面失步）+ replace off-by-one 双闭合括号（快照永不重灌的结构性根因） |
 | scripts/source_collate.py | W1231 | dataset/81-hardships.json 键改名联动（index→n 6 处消费点） |
@@ -200,8 +170,6 @@
 | scripts/output/_cascade_files_W1231.txt | W1231 | 级联落盘清单（cascade 生成） |
 | scripts/output/_vermilion_solid_cache.json | W1231 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
 | scripts/output/_vermilion_solid_report.json | W1231 | 朱砂实底门禁报告随动（第 49 槽） |
-| site/data/cross-time-danmaku.html | W1231 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1231 | 页脚批次链滚动（cascade 全档） |
 | site/dukou-engine.html | W1231 | 页脚批次链滚动（cascade 全档） |
 | site/index.html | W1231 | 页脚批次链滚动（cascade 全档） |
 | site/sitemap.xml | W1231 | gen_sitemap lastmod 随动（如触发） |
@@ -216,6 +184,8 @@
 | scripts/AA_叙事实验/narrative_experiment.py | W1231 | W678 源头根修（芭蕉扇专克火系 + 钉耙性别条款删除） |
 | scripts/V_打工人职场/workplace.py | W1231 | W678 成佛二人勘正源头根修（5 人晋升佛位→2 人） |
 | scripts/M_洞府房产/cave_estate.py | W1231 | W678 妖将级勘正源头根修（rank_labels general 中将级→妖将级） |
+| site/data/*.html（EMBEDDED 重灌页） | W1231 | 21 件同族随动（逐件明细见各批 CHANGELOG 段·分组立式 W1142） |
+| site/data/json/*.json（部署副本同步） | W1231 | 47 件同族随动（逐件明细见各批 CHANGELOG 段·分组立式 W1142） |
 
 ## W1230 脚本接线/归档裁决批：第 42 槽 47 行 W1155 存量清偿 + packaging 同步接线 + 品牌守卫盲区根修（2026-11-14）
 

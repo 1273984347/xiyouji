@@ -298,13 +298,6 @@ def _gitignored_set(abs_dir: str, names: list[str], is_dir: bool = False) -> set
     return {n for n in names if (prefix + n) in ignored_rels}
 
 
-def _kind_exists(abs_dir: str, kind: str) -> bool:
-    """kind 是否已存在（大小写不敏感）——Windows 写 index.md 会覆盖已存在的 INDEX.md
-    （实测 2026-10-18：NTFS 大小写不敏感·直接 open('w') 即整文件覆写），故必须判重，
-    否则 S4-学术投稿 12 份 INDEX.md 与 docs/INDEX.md 会被幂等运行清空。"""
-    return os.path.exists(os.path.join(abs_dir, kind)) or kind in list_files_raw(abs_dir)
-
-
 def list_subdirs(abs_dir: str) -> list[str]:
     """直属子目录名（**索引口径**·W894·排除：EXCLUDE_TOP / 排除片段命中的目录）。
 
@@ -576,101 +569,85 @@ def render(abs_dir: str, kind: str, disk: bool = False) -> str:
     return meta + body  # 无 H1 的异常路径：保持元信息在前
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description="为在管目录补齐 INDEX.md / README.md")
-    ap.add_argument("--dry-run", action="store_true", help="只报告将写哪些文件，不落盘")
-    ap.add_argument("--force", action="store_true", help="已存在的文件也按生成内容重写（含人工维护件·慎用）")
-    ap.add_argument("--refresh", action="store_true",
-                    help="安全刷新：仅重写「生成物所有」的既有文件（按「生成来源」标记判定所有权·人工维护件自动跳过）")
-    args = ap.parse_args()
+def _warn_untracked(args) -> None:
+    """W1022 运行时提示（W1233 拆出）：清单按 Git 索引收集·未跟踪新件不进清单。"""
+    if not ((args.refresh or args.force) and not args.dry_run):
+        return
+    try:
+        _st = subprocess.run(["git", "-C", ROOT, "status", "--porcelain", "-uall"],
+                             capture_output=True, text=True, timeout=120).stdout
+        _untracked = [ln[3:] for ln in _st.splitlines() if ln.startswith("?? ")]
+    except (OSError, subprocess.SubprocessError):
+        _untracked = []
+    if not _untracked:
+        return
+    print("NOTE  工作树有 %d 个未跟踪文件——清单按 Git 索引收集，**不会列出它们**；"
+          "若含本批新件请先 `git add` 再重跑本脚本（W894 口径）" % len(_untracked))
+    for _u in _untracked[:5]:
+        print("        ?? " + _u)
+    if len(_untracked) > 5:
+        print("        … 另 %d 件" % (len(_untracked) - 5))
 
-    global _GITIGNORED_DIRS
-    _GITIGNORED_DIRS = _build_gitignored_dirs()
-    # W1022（用户令「检查生成器是否需优化」）：清单按 **Git 索引**收集（W894 口径），
-    # 未跟踪新件不会进清单——这条注意事项原先只写在 `list_files` docstring 里，运行时看不见，
-    # 实测「先 refresh 后 add」会让第 45 槽报「索引有清单无」却不给原因。
-    # 修法：把注意事项变成运行时提示（不改收集口径——索引口径本身是对的：
-    # 它让并行批的在途件不误红、CI 与本地同口径）。
-    if (args.refresh or args.force) and not args.dry_run:
-        try:
-            _st = subprocess.run(["git", "-C", ROOT, "status", "--porcelain", "-uall"],
-                                 capture_output=True, text=True, timeout=120).stdout
-            _untracked = [ln[3:] for ln in _st.splitlines() if ln.startswith("?? ")]
-        except (OSError, subprocess.SubprocessError):
-            _untracked = []
-        if _untracked:
-            print("NOTE  工作树有 %d 个未跟踪文件——清单按 Git 索引收集，**不会列出它们**；"
-                  "若含本批新件请先 `git add` 再重跑本脚本（W894 口径）" % len(_untracked))
-            for _u in _untracked[:5]:
-                print("        ?? " + _u)
-            if len(_untracked) > 5:
-                print("        … 另 %d 件" % (len(_untracked) - 5))
-    dirs_all = scan_dirs()
-    # 大小写冲突目录全模式跳过（INDEX.md 等变体在盘·NTFS 覆写守卫·见 case_collides）
-    dirs = [d for d in dirs_all if not case_collides(d)]
-    skipped_collision = len(dirs_all) - len(dirs)
-    skipped_semantic = 0
-    written, skipped_exist, skipped_readme, skipped_hand, failed = [], [], [], [], []
-    skipped_showcase = []
 
-    for d in dirs:
-        if not in_scope(d):
-            continue
-        rel_d = rel_of(d)
+def _kinds_for(rel_d):
+    """语义豁免分流（W1233 拆出）：INDEX 归他生成器的目录只管 README。返回 (kinds, 是否豁免)。"""
+    if rel_d in INDEX_OWNED_ELSEWHERE:
+        return ("README.md",), True
+    return ("INDEX.md", "README.md"), False
 
-        if rel_d in INDEX_OWNED_ELSEWHERE:
-            # 该目录的 INDEX.md 归另一生成器所有 ⇒ 只管 README.md，INDEX.md 不碰
-            kinds = ("README.md",)
-            skipped_semantic += 1
+
+def _process_one(d, rel_d, kind, args, buckets) -> None:
+    """单 (目录, kind) 处理（W1233 拆出）：showcase/存在/dry-run/所有权/写盘全序。"""
+    skipped_showcase, skipped_exist, skipped_readme, skipped_hand, failed, written = buckets
+    if showcase_guarded(rel_d, kind):
+        skipped_showcase.append("%s/%s" % (rel_d, kind))
+        return
+    exists_kind = _kind_exists(d, kind)
+    if exists_kind and not (args.force or args.refresh):
+        if kind == "README.md":
+            skipped_readme.append(os.path.relpath(os.path.join(d, kind), ROOT))
         else:
-            kinds = ("INDEX.md", "README.md")
-        for kind in kinds:
-            if showcase_guarded(rel_d, kind):
-                skipped_showcase.append("%s/%s" % (rel_d, kind))
-                continue
-            exists_kind = _kind_exists(d, kind)
-            if exists_kind and not (args.force or args.refresh):
-                if kind == "README.md":
-                    skipped_readme.append(os.path.relpath(os.path.join(d, kind), ROOT))
-                else:
-                    skipped_exist.append(os.path.relpath(os.path.join(d, kind), ROOT))
-                continue
-            target = os.path.join(d, kind)
-            rel_target = os.path.relpath(target, ROOT).replace(os.sep, "/")
-            if args.dry_run:
-                written.append(rel_target)
-                continue
-            # 写前再校验一次（防 dry-run 与实际写之间并发产生 INDEX.md 被覆写）
-            exists_kind = _kind_exists(d, kind)
-            if exists_kind and not (args.force or args.refresh):
-                skipped_exist.append(rel_target)
-                continue
-            if exists_kind and args.refresh and not args.force:
-                # --refresh 所有权判定：带「生成来源：gen_folder_docs.py」元信息标记（或
-                # 内容与当前渲染全等）→ 生成物所有·可安全刷新；否则视为人工维护/手改件
-                # （所有权已转移）跳过——防 --force 式误轰根 README.md 等手工档（W780）
-                try:
-                    with open(target, encoding="utf-8") as f:
-                        content = f.read()
-                except OSError:
-                    content = None
-                owned = content is not None and (
-                    "> 生成来源：`scripts/gen_folder_docs.py`@" in content
-                    or content == render(d, kind))
-                if not owned:
-                    skipped_hand.append(rel_target)
-                    continue
-            try:
-                with open(target, "w", encoding="utf-8", newline="\n") as f:
-                    f.write(render(d, kind))
-            except OSError as e:
-                # 目录被沙盒/占用（.github 等）时不中断整批·如实登记
-                failed.append((rel_target, type(e).__name__))
-                continue
-            written.append(rel_target)
+            skipped_exist.append(os.path.relpath(os.path.join(d, kind), ROOT))
+        return
+    target = os.path.join(d, kind)
+    rel_target = os.path.relpath(target, ROOT).replace(os.sep, "/")
+    if args.dry_run:
+        written.append(rel_target)
+        return
+    # 写前再校验一次（防 dry-run 与实际写之间并发产生 INDEX.md 被覆写）
+    if _kind_exists(d, kind) and not (args.force or args.refresh):
+        skipped_exist.append(rel_target)
+        return
+    if exists_kind and args.refresh and not args.force:
+        # --refresh 所有权判定：带「生成来源：gen_folder_docs.py」元信息标记（或
+        # 内容与当前渲染全等）→ 生成物所有·可安全刷新；否则视为人工维护/手改件
+        # （所有权已转移）跳过——防 --force 式误轰根 README.md 等手工档（W780）
+        try:
+            with open(target, encoding="utf-8") as f:
+                content = f.read()
+        except OSError:
+            content = None
+        owned = content is not None and (
+            "> 生成来源：`scripts/gen_folder_docs.py`@" in content
+            or content == render(d, kind))
+        if not owned:
+            skipped_hand.append(rel_target)
+            return
+    try:
+        with open(target, "w", encoding="utf-8", newline="\n") as f:
+            f.write(render(d, kind))
+    except OSError as e:
+        # 目录被沙盒/占用（.github 等）时不中断整批·如实登记
+        failed.append((rel_target, type(e).__name__))
+        return
+    written.append(rel_target)
 
+
+def _report(buckets, n_dirs, n_skipped_collision, skipped_semantic, args) -> int:
+    """结果报告与工具清单刷新（W1233 拆出）。返回退出码（3 = 有写盘失败）。"""
+    (written, skipped_exist, skipped_readme, skipped_hand, failed, skipped_showcase) = buckets
     print("在管目录数：%d（大小写冲突跳过 %d·语义豁免 %d）"
-          % (len(dirs), skipped_collision, skipped_semantic))
+          % (n_dirs, n_skipped_collision, skipped_semantic))
     print("将写入/已写入文件数：%d（index.md %d · README.md %d）" % (
         len(written),
         sum(1 for w in written if w.lower().endswith("index.md")),
@@ -704,6 +681,38 @@ def main() -> int:
         for w in written:
             print("  DRY  " + w)
     return 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="为在管目录补齐 INDEX.md / README.md")
+    ap.add_argument("--dry-run", action="store_true", help="只报告将写哪些文件，不落盘")
+    ap.add_argument("--force", action="store_true", help="已存在的文件也按生成内容重写（含人工维护件·慎用）")
+    ap.add_argument("--refresh", action="store_true",
+                    help="安全刷新：仅重写「生成物所有」的既有文件（按「生成来源」标记判定所有权·人工维护件自动跳过）")
+    args = ap.parse_args()
+
+    global _GITIGNORED_DIRS
+    _GITIGNORED_DIRS = _build_gitignored_dirs()
+    # W1022（用户令「检查生成器是否需优化」）：清单按 **Git 索引**收集（W894 口径）。
+    _warn_untracked(args)
+    dirs_all = scan_dirs()
+    # 大小写冲突目录全模式跳过（INDEX.md 等变体在盘·NTFS 覆写守卫·见 case_collides）
+    dirs = [d for d in dirs_all if not case_collides(d)]
+    skipped_collision = len(dirs_all) - len(dirs)
+    skipped_semantic = 0
+    buckets = ([], [], [], [], [], [])  # written/skipped_exist/skipped_readme/skipped_hand/failed/skipped_showcase
+
+    for d in dirs:
+        if not in_scope(d):
+            continue
+        rel_d = rel_of(d)
+        kinds, exempt = _kinds_for(rel_d)
+        if exempt:
+            skipped_semantic += 1
+        for kind in kinds:
+            _process_one(d, rel_d, kind, args, buckets)
+
+    return _report(buckets, len(dirs), skipped_collision, skipped_semantic, args)
 
 
 if __name__ == "__main__":

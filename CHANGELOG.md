@@ -1,3 +1,13 @@
+### W1233（2026-11-15）：复杂度棘轮批：C901 全清零（W1161 后剩余 7 超阈函数拆 helper 消号）
+
+**本批要点**（W1233 复杂度棘轮批·审计专批「plates_verify+gen_folder_docs 复杂度巨债 17-29>15 触碰即被宽档拦截」清偿·C901 全清零）：
+
+> - **① 七函数拆 helper 消号**（判定逻辑逐字未改·公开签名全保留·api_diff 破坏性=无）：gen_folder_docs main 29（_warn_untracked/_kinds_for/_process_one/_report 四 helper·--refresh 端到端实跑 + 第 45 槽 0 FAIL）/ tmpe_tidy RunLock.acquire 19（_degrade_or_raise 降级形态折叠 + _inspect_lock/_takeover_stale/_create_and_write 三阶段·23/23 专项）/ check_cross_line_rewrite scan 18（_iter_py_files/_classify_call·连带 9 条 PLR1702 同拆消）/ j1_name_audit main 18（_verify_landed_checks/_preflight_checks 双臂）/ character_nlp build_cooccurrence 16（_count_and_pair/_scene_presents）/ check_doc_numbers check_coverage 16（_resolve_targets/_assert_one）/ bump_version main 16（_resolve_versions/_sync_range_and_footers/_sync_aux/_append_file_index·STOP 防线实跑验证）。
+> - **② 两则拆解教训当轮修正**：(a) tmpe_tidy 有 _NullLock 与 RunLock 两个同名 acquire——`find` 第一命中把 5 方法误插进 _NullLock（空锁类）·当轮发现修正（锚须含类名上下文）；(b) scan 切片区间误吞 _self_test 与 _repl_kind_of_call 两个相邻 helper（F821 当轮暴露·从 HEAD 补回）。
+> - **③ 验证**：全仓宽档 `C901 0 条`（W1161 后 7 函数全部消号·43→20 违规）；各专项测试全过；guardrails 五项全过。
+> - **④ 登记去向**：PLR1702 嵌套块 20 条（15 文件·5-6>4 档·xiyouji_rag 4/check_cross_line 2 等）登记**渐进棘轮**——触碰即被宽档拦、触碰即消号（W1230-W1233 四批已按此模式消 15+ 条）。
+> - **文件**：见 file-index。
+
 ### W1232（2026-11-14）：门禁挂槽批：三槽挂载（72 emoji 棘轮 / 73 reader-RSS 新鲜度 / 74 体积窗口 P2-4）+ #51 审批标记 + 连带根修
 
 **本批要点**（W1232 门禁挂槽批·审计四登记项清偿·门禁 71→74 槽·用户令开工）：
@@ -12,21 +22,6 @@
 > - **⑧ 终态**：verify --scope full 79 段 0 FAIL；guardrails 五项全过；pytest W1232 回归锁 7 例 + 全量 1667+ 过；CSP 867 页 0 漂移。
 > - **验证**：见上；三槽 marker 形态与 gates.md 登记一致；台账腾窗 2 行（W1171-W1172 迁归档）。
 > - **文件**：见 file-index。
-
-## [Unreleased]
-
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1232），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
->
-> **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
->
-> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W1000 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
->
-> **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
->
-> **全站页数口径**（W459 建·W702 实跑刷新·W1149 随批刷新，各门禁分母不同）：HTML 共 868<!--stats:html_total--> 页（site/data 90<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 630<!--stats:site_reader_html-->）；CSP 覆盖 867<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 866<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 866<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 859<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 89<!--stats:visualization_pages-->」= site/data 90 减 `_shell.html`。
->
-> **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
-> - **T9 体积门禁脚注切片根修（CI 首红暴露·铁律 15）**：check_doc_size_budget._agents_face 的行切片在「脚注=文件末行且无换行尾」（AGENTS.md 恒为该形态）时 find(nl)=-1 使 t[fs:-1] 吞收尾家具星号 ⇒ 剥家具失败条目恒 +19 字误判（往批短 note 潜伏未触顶·W1137 note=119 首踩本地绿 CI 红）⇒ 末行无换行时取到文件尾 + batch_cascade agents_note 预检与门禁同源计量（口径对齐）· 单测 12 例全过。
 
 ### W1231（2026-11-14）：单侧键 schema 分歧清理批：数据漂移门禁 v4 面板配对 + embed_json 三重根修 + 476 条隐性值漂移修复 + dataset 对齐生成面
 
@@ -807,3 +802,17 @@
 > **📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
 本项目所有重要变更均记录于此。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/)。
 
+## [Unreleased]
+
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1233），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+>
+> **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
+>
+> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W1000 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
+>
+> **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
+>
+> **全站页数口径**（W459 建·W702 实跑刷新·W1149 随批刷新，各门禁分母不同）：HTML 共 868<!--stats:html_total--> 页（site/data 90<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 630<!--stats:site_reader_html-->）；CSP 覆盖 867<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 866<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 866<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 859<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 89<!--stats:visualization_pages-->」= site/data 90 减 `_shell.html`。
+>
+> **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+> - **T9 体积门禁脚注切片根修（CI 首红暴露·铁律 15）**：check_doc_size_budget._agents_face 的行切片在「脚注=文件末行且无换行尾」（AGENTS.md 恒为该形态）时 find(nl)=-1 使 t[fs:-1] 吞收尾家具星号 ⇒ 剥家具失败条目恒 +19 字误判（往批短 note 潜伏未触顶·W1137 note=119 首踩本地绿 CI 红）⇒ 末行无换行时取到文件尾 + batch_cascade agents_note 预检与门禁同源计量（口径对齐）· 单测 12 例全过。

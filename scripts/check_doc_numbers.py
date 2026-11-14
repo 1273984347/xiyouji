@@ -115,6 +115,48 @@ def _same(a, b):
         return False
 
 
+def _resolve_targets(targets):
+    """目标清单解析（W1233 拆出）：字面文件直收·glob 递归展开·去重排序。"""
+    files = []
+    for t in targets:
+        p = os.path.join(ROOT, t)
+        if os.path.isfile(p):
+            files.append(t)
+            continue
+        hits = glob.glob(os.path.join(ROOT, t), recursive=True)
+        for h in hits:
+            if os.path.isfile(h):
+                files.append(os.path.relpath(h, ROOT).replace("\\", "/"))
+    return sorted(set(files))
+
+
+def _assert_one(label, f, ar, aj, expect):
+    """单目标断言（W1233 拆出）：regex/json 两判据。返回 (False, detail) 或 None。"""
+    txt = _read(f)
+    if txt is None:
+        return False, "%s：目标 %s 不可读" % (label, f)
+    if ar:
+        try:
+            ok = re.search(ar, txt) is not None
+        except re.error:
+            return False, "%s：assert_regex 非合法正则" % label
+        if not ok:
+            return False, "%s：目标 %s 未满足断言 %s" % (label, f, ar)
+    if aj:
+        path, _, key = aj.partition("#")
+        raw = _read(path)
+        if raw is None:
+            return False, "%s：目标 %s 的 JSON 不可读" % (label, f)
+        try:
+            data = json.loads(raw)
+        except ValueError:
+            return False, "%s：目标 %s 的 JSON 不可解析" % (label, f)
+        got = _dig(data, key) if key else data
+        if expect is not None and not _same(got, expect):
+            return False, "%s：目标 %s 的 %s 期望 %s 实得 %s" % (label, f, key or "(整体)", expect, got)
+    return None
+
+
 def check_coverage(item):
     """覆盖面声明类对账：对一组目标逐项断言（对方 W1117 建议·W1116 采纳）。
 
@@ -124,17 +166,7 @@ def check_coverage(item):
     指定键须等于 expect）/ expect_count（目标集合数须恰为该值）。
     """
     label = item.get("label") or ("覆盖面 " + str(item.get("targets")))
-    files = []
-    for t in (item.get("targets") or []):
-        p = os.path.join(ROOT, t)
-        if os.path.isfile(p):
-            files.append(t)
-            continue
-        hits = glob.glob(os.path.join(ROOT, t), recursive=True)
-        for h in hits:
-            if os.path.isfile(h):
-                files.append(os.path.relpath(h, ROOT).replace("\\", "/"))
-    files = sorted(set(files))
+    files = _resolve_targets(item.get("targets") or [])
     expect_count = item.get("expect_count")
     if expect_count is not None and len(files) != int(expect_count):
         return False, "%s：实得 %d 个目标（期望 %s）" % (label, len(files), expect_count)
@@ -144,28 +176,9 @@ def check_coverage(item):
     aj = item.get("assert_json")
     expect = item.get("expect")
     for f in files:
-        txt = _read(f)
-        if txt is None:
-            return False, "%s：目标 %s 不可读" % (label, f)
-        if ar:
-            try:
-                ok = re.search(ar, txt) is not None
-            except re.error:
-                return False, "%s：assert_regex 非合法正则" % label
-            if not ok:
-                return False, "%s：目标 %s 未满足断言 %s" % (label, f, ar)
-        if aj:
-            path, _, key = aj.partition("#")
-            raw = _read(path)
-            if raw is None:
-                return False, "%s：目标 %s 的 JSON 不可读" % (label, f)
-            try:
-                data = json.loads(raw)
-            except ValueError:
-                return False, "%s：目标 %s 的 JSON 不可解析" % (label, f)
-            got = _dig(data, key) if key else data
-            if expect is not None and not _same(got, expect):
-                return False, "%s：目标 %s 的 %s 期望 %s 实得 %s" % (label, f, key or "(整体)", expect, got)
+        bad = _assert_one(label, f, ar, aj, expect)
+        if bad:
+            return bad
     return True, "%s：%d 个目标全满足" % (label, len(files))
 
 

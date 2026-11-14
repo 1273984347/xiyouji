@@ -187,6 +187,99 @@ def _preflight_verdict(existing, consumed):
                 "defer_unproven": defer_unproven}
 
 
+def _verify_landed_checks(tokens_txt):
+    """复验臂（W1233 拆出）：落地完整性 + defer 持有 + 暗色组。返回 (checks, ok)。"""
+    missing = [n for n in LANDING_NAMES if n not in tokens_txt]
+    dark_names = _dark_block_names(tokens_txt)
+    dark_missing = [n for n in DARK_ONLY_DEFS if n not in dark_names]
+    hold_fail = [label for label, pat in DEFER_HOLD_CHECKS
+                 if not re.search(pat, tokens_txt)]
+    dark_sneak = sorted(n for n in DEFER_HOLD_DARK_SNEAK
+                        if n in dark_names)
+    checks = {
+        "landing_complete": {
+            "missing": missing, "dark_block_missing": dark_missing,
+            "definition_sites": len(LANDING_NAMES) + len(DARK_ONLY_DEFS)},
+        "defer_hold": {
+            "value_checks_failed": hold_fail,
+            "dark_block_sneaked_new": dark_sneak}}
+    ok = (not missing and not dark_missing and not hold_fail
+          and not dark_sneak)
+    if ok:
+        print("J1 复验 PASS：%d 个新名 / %d 处定义全部落地（含暗色组 %d 处同名再定义）"
+              % (len(LANDING_NAMES), len(LANDING_NAMES) + len(DARK_ONLY_DEFS),
+                 len(DARK_ONLY_DEFS)))
+        print("   defer 持有：%d 组撞名项原样未动（%s · 暗色组无 %s 新增）"
+              % (len(DEFER_HOLD_CHECKS),
+                 " · ".join(lbl.replace(" 未改值", " 值未改") for lbl, _ in DEFER_HOLD_CHECKS),
+                 "/".join(DEFER_HOLD_DARK_SNEAK)))
+    else:
+        if missing:
+            print("J1 复验 FAIL：落地不完整，缺 %s" % "、".join(missing))
+        if dark_missing:
+            print("J1 复验 FAIL：暗色组缺同名再定义 %s"
+                  % "、".join(dark_missing))
+        if hold_fail:
+            print("J1 复验 FAIL：defer 项被改动（%s）" % "、".join(hold_fail))
+        if dark_sneak:
+            print("J1 复验 FAIL：暗色组偷新增 %s（defer 破裂）"
+                  % "、".join(dark_sneak))
+    return checks, ok
+
+
+def _preflight_checks(art, tokens_names, system_names, page_names, site_files):
+    """预飞臂（W1233 拆出）：交集/var() 消费/defer 复证。返回 (checks, ok)。"""
+    consumed = _var_consumers(LANDING_NAMES, site_files)
+    ok, verdict = _preflight_verdict(
+        tokens_names | system_names | set(page_names), consumed)
+    clash = verdict["clash"]
+    where = {}
+    for n in clash:
+        w = []
+        if n in tokens_names:
+            w.append("tokens.css")
+        if n in system_names:
+            w.append("system.css")
+        if n in page_names:
+            w.append("页面内联 ×%d" % len(page_names[n]))
+        where[n] = w
+    defer_unproven = verdict["defer_unproven"]
+    art["checks"]["intersection"] = {"clash": clash, "where": where}
+    art["checks"]["page_inline_scan"] = {
+        "pages_scanned": len(site_files) - 1,
+        "landing_names_predefined_in_pages": sorted(
+            n for n in LANDING_NAMES if n in page_names)}
+    art["checks"]["consumption"] = {
+        "scope": "全页面内联 + system.css 的 var() 引用（tokens.css 自身引用不计）",
+        "landing_names_referenced": consumed}
+    art["checks"]["deferred_clash_confirmed"] = {
+        "unproven_groups": defer_unproven}
+    ok = not clash and not consumed and not defer_unproven
+    if clash:
+        print("J1 FAIL：%d 个新名撞现役名：" % len(clash))
+        for n in clash:
+            print("   %s ← %s" % (n, "、".join(where[n])))
+    if consumed:
+        print("J1 FAIL：%d 个新名存在 var() 消费（非零消费·落地会改渲染）："
+              % len(consumed))
+        for n, files in sorted(consumed.items()):
+            print("   %s ← %s" % (n, "、".join(files[:5])))
+    if defer_unproven:
+        print("J1 FAIL：defer 组有名字未撞现役（理由不成立·须重裁）：")
+        for label, miss in defer_unproven.items():
+            print("   %s ← 缺 %s" % (label, "、".join(miss)))
+    if ok:
+        print("J1 PASS：%d 个新名 / %d 处定义（浅 %d + 暗色组 %d）与现役"
+              "（tokens.css %d · system.css %d · 页面内联 %d 名）零交集"
+              % (len(LANDING_NAMES), len(LANDING_NAMES) + len(DARK_ONLY_DEFS),
+                 len(LANDING_NAMES), len(DARK_ONLY_DEFS),
+                 len(tokens_names), len(system_names), len(page_names)))
+        print("   页面内联抢先定义：0（无级联覆盖风险）")
+        print("   var() 消费面：0 引用（零消费·纯加法前提成立）")
+        print("   defer 复证：4 组撞名项全部实证命中现役名")
+    return art, ok
+
+
 def main(argv):
     verify_landed, tokens_path = _parse_args(argv)
     with open(tokens_path, encoding="utf-8") as f:
@@ -214,89 +307,11 @@ def main(argv):
     }
 
     if verify_landed:
-        missing = [n for n in LANDING_NAMES if n not in tokens_names]
-        dark_names = _dark_block_names(tokens_txt)
-        dark_missing = [n for n in DARK_ONLY_DEFS if n not in dark_names]
-        hold_fail = [label for label, pat in DEFER_HOLD_CHECKS
-                     if not re.search(pat, tokens_txt)]
-        dark_sneak = sorted(n for n in DEFER_HOLD_DARK_SNEAK
-                            if n in dark_names)
-        art["checks"]["landing_complete"] = {
-            "missing": missing, "dark_block_missing": dark_missing,
-            "definition_sites": len(LANDING_NAMES) + len(DARK_ONLY_DEFS)}
-        art["checks"]["defer_hold"] = {
-            "value_checks_failed": hold_fail,
-            "dark_block_sneaked_new": dark_sneak}
-        ok = (not missing and not dark_missing and not hold_fail
-              and not dark_sneak)
-        if ok:
-            print("J1 复验 PASS：%d 个新名 / %d 处定义全部落地（含暗色组 %d 处同名再定义）"
-                  % (len(LANDING_NAMES), len(LANDING_NAMES) + len(DARK_ONLY_DEFS),
-                     len(DARK_ONLY_DEFS)))
-            print("   defer 持有：%d 组撞名项原样未动（%s · 暗色组无 %s 新增）"
-                  % (len(DEFER_HOLD_CHECKS),
-                     " · ".join(lbl.replace(" 未改值", " 值未改") for lbl, _ in DEFER_HOLD_CHECKS),
-                     "/".join(DEFER_HOLD_DARK_SNEAK)))
-        else:
-            if missing:
-                print("J1 复验 FAIL：落地不完整，缺 %s" % "、".join(missing))
-            if dark_missing:
-                print("J1 复验 FAIL：暗色组缺同名再定义 %s"
-                      % "、".join(dark_missing))
-            if hold_fail:
-                print("J1 复验 FAIL：defer 项被改动（%s）" % "、".join(hold_fail))
-            if dark_sneak:
-                print("J1 复验 FAIL：暗色组偷新增 %s（defer 破裂）"
-                      % "、".join(dark_sneak))
+        checks, ok = _verify_landed_checks(tokens_txt)
+        art["checks"].update(checks)
     else:
-        consumed = _var_consumers(LANDING_NAMES, site_files)
-        ok, verdict = _preflight_verdict(
-            tokens_names | system_names | set(page_names), consumed)
-        clash = verdict["clash"]
-        where = {}
-        for n in clash:
-            w = []
-            if n in tokens_names:
-                w.append("tokens.css")
-            if n in system_names:
-                w.append("system.css")
-            if n in page_names:
-                w.append("页面内联 ×%d" % len(page_names[n]))
-            where[n] = w
-        defer_unproven = verdict["defer_unproven"]
-        art["checks"]["intersection"] = {"clash": clash, "where": where}
-        art["checks"]["page_inline_scan"] = {
-            "pages_scanned": len(site_files) - 1,
-            "landing_names_predefined_in_pages": sorted(
-                n for n in LANDING_NAMES if n in page_names)}
-        art["checks"]["consumption"] = {
-            "scope": "全页面内联 + system.css 的 var() 引用（tokens.css 自身引用不计）",
-            "landing_names_referenced": consumed}
-        art["checks"]["deferred_clash_confirmed"] = {
-            "unproven_groups": defer_unproven}
-        ok = not clash and not consumed and not defer_unproven
-        if clash:
-            print("J1 FAIL：%d 个新名撞现役名：" % len(clash))
-            for n in clash:
-                print("   %s ← %s" % (n, "、".join(where[n])))
-        if consumed:
-            print("J1 FAIL：%d 个新名存在 var() 消费（非零消费·落地会改渲染）："
-                  % len(consumed))
-            for n, files in sorted(consumed.items()):
-                print("   %s ← %s" % (n, "、".join(files[:5])))
-        if defer_unproven:
-            print("J1 FAIL：defer 组有名字未撞现役（理由不成立·须重裁）：")
-            for label, miss in defer_unproven.items():
-                print("   %s ← 缺 %s" % (label, "、".join(miss)))
-        if ok:
-            print("J1 PASS：%d 个新名 / %d 处定义（浅 %d + 暗色组 %d）与现役"
-                  "（tokens.css %d · system.css %d · 页面内联 %d 名）零交集"
-                  % (len(LANDING_NAMES), len(LANDING_NAMES) + len(DARK_ONLY_DEFS),
-                     len(LANDING_NAMES), len(DARK_ONLY_DEFS),
-                     len(tokens_names), len(system_names), len(page_names)))
-            print("   页面内联抢先定义：0（无级联覆盖风险）")
-            print("   var() 消费面：0 引用（零消费·纯加法前提成立）")
-            print("   defer 复证：4 组撞名项全部实证命中现役名")
+        art, ok = _preflight_checks(art, tokens_names, system_names,
+                                    page_names, site_files)
 
     art["ok"] = ok
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
