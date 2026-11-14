@@ -1,3 +1,43 @@
+## W1235 推送前自查预红清偿批：品牌守卫判定面收窄 + 提交主张判据收窄 + 台账腾窗 + 三处明文中性化，并回填上一批台账（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_no_brand_refs.py | W1235 | 判定面收窄：抽 is_local_dir_candidate（采集层与谓词层分离）·点号前缀与构建缓存不进采集·self-test 59→63 例 |
+| scripts/check_doc_sync.py | W1235 | C4 提交主张收窄（首个 W 号＝主张严格判·其余 token 只 NOTE）+ T4b/T4c 回归锁·self-test 37→39 例 |
+| CHANGELOG.md | W1235 | 新段 + W1230 段两处明文中性化（遗留项复判订正） |
+| HANDOVER.md | W1235 | 里程碑块 + W1230 ⑥ 行明文中性化 |
+| scripts/output/_w1230_spec.json | W1235 | 三处明文中性化（milestone_block 一处 + changelog_body 两处） |
+| scripts/output/_w1235_spec.json | W1235 | 本批规格（file_index_rows 即应动全集） |
+| scripts/output/_cascade_files_W1235.txt | W1235 | 级联写后自检的改动面清单（产物·历史同口径入库） |
+| scripts/output/file-index.md | W1235 | 本批段追加 |
+| scripts/output/README.md | W1235 | 第 45 槽：目录说明随清单刷新 |
+| scripts/output/INDEX.md | W1235 | 第 45 槽：目录清单随两新件刷新 |
+| scripts/output/stats.json | W1235 | 级联刷新统计快照 |
+| scripts/output/_vermilion_solid_cache.json | W1235 | 朱砂实底按页 hash 缓存随四页脚变更更新（第 49 槽增量口径） |
+| scripts/output/tools-inventory.md | W1235 | 工具清单日期戳与计数刷新（级联随批） |
+| docs/00-导读/W批次编号对账表.md | W1235 | W1235 认领行 + W1234 台账 hash 回填 + 腾窗迁出 W1174-W1175 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1235 | 台账腾窗迁入 W1174-W1175 两行 |
+| README.md | W1235 | 版本抬头行推进 |
+| STRUCTURE.md | W1235 | 当前批次行推进 |
+| docs/00-导读/项目说明.md | W1235 | 版本抬头行推进 |
+| .github/workflows/README.md | W1235 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1235 | 里程碑历史滚入 |
+| AGENTS.md | W1235 | 脚注条目 + W1230 条目滚动迁档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1235 | W1230 脚注条目迁入 |
+| CITATION.cff | W1235 | 版本与日期同步 |
+| site/index.html | W1235 | 页脚批次链插入 |
+| site/data/cross-time-danmaku.html | W1235 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1235 | 页脚批次链插入 |
+| site/dukou-engine.html | W1235 | 页脚批次链插入 |
+| site/rss.xml | W1235 | 第 73 槽产物新鲜度：随 CHANGELOG 新段重建 W1235 条目 |
+| scripts/output/_sync_analysis_manifest.json | W1235 | 分析包同步清单刷新（38 脚本·本次写入 6） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AA_叙事实验/narrative_experiment.py | W1235 | 分析包同步：narrative_experiment 与源面同值（W1231 遗留漂移清偿） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AB_视觉艺术/visual_art.py | W1235 | 分析包同步：visual_art 与源面同值（W1231 遗留漂移清偿） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/M_洞府房产/cave_estate.py | W1235 | 分析包同步：cave_estate 与源面同值（W1231 遗留漂移清偿） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/V_打工人职场/workplace.py | W1235 | 分析包同步：workplace 与源面同值（W1231 遗留漂移清偿） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/X_游戏网文/game_webnovel.py | W1235 | 分析包同步：game_webnovel 与源面同值（W1231 遗留漂移清偿） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Y_伦理消费/ethics_consumption.py | W1235 | 分析包同步：ethics_consumption 与源面同值（W1231 遗留漂移清偿） |
+
 ## W1234 E2E 接线裁决批：visualization_assertions 入 CI + SKIP→FAIL + w266 恒真断言修复 + test_visual 裁决 manual（2026-11-15）
 
 | 文件 | W | 说明 |

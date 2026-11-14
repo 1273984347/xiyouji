@@ -404,7 +404,7 @@ def build_by_owner_rank():
     counter = Counter(c["owner_rank"] for c in CAVES)
     rank_labels = {
         "king": "妖王级",
-        "general": "中将级",
+        "general": "妖将级",
         "minion": "小怪级",
     }
     return [

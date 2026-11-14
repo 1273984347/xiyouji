@@ -1,3 +1,19 @@
+### W1235（2026-11-15）：推送前自查预红清偿批：品牌守卫判定面收窄 + 提交主张判据收窄 + 台账腾窗 + 三处明文中性化，并回填上一批台账
+
+**本批要点**（W1235 推送前自查预红清偿批·三条判据与文档面根因同批清偿）：
+
+> - **① 预红事实（推送前自查）**：W1230-W1234 五批均未推送 ⇒ CI `security.yml` 的品牌守卫自 W1230 改判据后**从未在 CI 跑过一次**；本地实跑 `check_no_brand_refs.py` = **3 处 FAIL**——`CHANGELOG.md`（W1230 段遗留行）·`HANDOVER.md`（W1230 ⑥ 行）·`scripts/output/_w1230_spec.json`（milestone_block 一处 + changelog_body 两处）。三处都是 W1230 自己把**宿主运行态目录的路径明文**写进了文档，而该路径本身含被禁字面量 ⇒ 守卫按「全仓明文 0 命中」判红。按原样推送，Security job 必红。
+> - **② 品牌守卫判定面收窄（修判据·非加豁免）**：W1230 新增的本地目录名告警面对**点号前缀目录**失准——点号前缀是宿主/工具运行态（`.git`/`.pytest_cache`/会话记忆目录），名字由宿主产品决定、永不进入仓库内容面与 Pages 发布面，且删了下次会话即自动重建（多承载项目记忆）⇒ 告警不可执行＝纯噪声，而噪声会稀释真实命中。根修：抽出 `is_local_dir_candidate`（**采集层**判据，与**谓词层** `warn_dir_names` 分离）——点号前缀与构建缓存固定名不进采集；**无点号前缀的真残留照旧告警**（收窄只减噪声，不放宽命中）。
+> - **③ 提交主张判据收窄（第 31 槽 C4·修判据非补数据）**：C4 原判据对近 15 条提交标题里的**每一个** W 形态 token 都要求「有版段或有台账行」，于是测试套件名被当成批次主张——W1234 标题「+ w266 恒真断言修复」当场假红（该号既无版段也永不会有，因为它不是批次）。收窄为「**标题首个 W 号＝批次主张**」严格判红、其余 token 只出 NOTE（可见不阻断）。**明确否决「补一条 W266 台账行」的洗绿路径**——为迎合脆弱判据而造登记行正是最坏的一类补丁。回归锁 T4b/T4c（收窄不放宽：主张未登记仍红·正文已登记号不得顶替主张）。
+> - **④ W1230 遗留项复判（错判纠正）**：W1230 记为「本地面清理＝删目录（用户动作）」——复判为**错判**：该目录是宿主运行态且承载本项目记忆，删除即丢数据、且下次会话自动重建，删了问题不会消失。正确处置是收窄判据（②），文档据此中性化。
+> - **⑤ 三处明文中性化**：`CHANGELOG.md` W1230 段两行 / `HANDOVER.md` W1230 ⑥ 行 / `_w1230_spec.json` 三处，一律改写为「宿主运行态目录（点号前缀）」并补 W1235 复判指针——语义不变、字面量清零。
+> - **⑥ 台账腾窗（第 74 槽首跑即拦本批）**：新增 W1235 认领行使正本 61 段越窗（窗口 60）⇒ `archive_ledger_rows.py --apply` 迁 W1174-W1175 入归档表，正本留 59 行。
+> - **⑦ 分析包同步（W1230 接入的 ci_sim GATE 首次在批收尾真跑·当场抓到 W1231 遗留漂移）**：`package_analysis_sync.py --check` 待同步 6/38——W1231 对齐生成面时改了 narrative_experiment / visual_art / cave_estate / workplace / game_webnovel / ethics_consumption 六个分析件的值，**pip 包副本没跟着同步**（W1230 只接了判据，此后无批复跑同步）⇒ 随批 `--sync` 落地（6 写入 + 清单刷新），待同步 6→0。
+> - **⑧ 判据自证**：品牌守卫 `--self-test` 59→63 例（采集层四例：点号前缀不进 / 构建缓存不进 / 普通目录进 / 无点号前缀的被禁名仍进），全仓实跑 **0 命中 + 零 WARN**；口径体检 `--self-test` 37→39 例，实跑 **0 FAIL**（C4 由 FAIL 转 NOTE）。
+> - **⑨ 回填**：W1234 台账 hash/末笔格回填（单笔·末笔同首笔·铁律 21①）。
+> - **验证**：`check_no_brand_refs.py` 0 命中（5809 已跟踪文件）· 两脚本 self-test 全过 · 第 74 槽 0 FAIL · 分析包待同步 6→0 · 收官链全量见验证栏。
+> - **文件**：见 file-index。
+
 ### W1234（2026-11-15）：E2E 接线裁决批：visualization_assertions 入 CI + SKIP→FAIL + w266 恒真断言修复 + test_visual 裁决 manual
 
 **本批要点**（W1234 E2E 接线裁决批·审计登记「E2E 接线决策 9 套件仅 1 进 CI」清偿）：
@@ -59,12 +75,12 @@
 > - **③ 补实质执行面 38 件 ⇒ 第 42 槽 0 FAIL**：新建 `tests/unit/test_w1230_execution_faces.py`（15 件 `--self-test` subprocess 真跑 + 20 件字面导入——E3 证据形态规范化，判据零放松：把既有真实执行面按判据设计的证据形态落入四面 corpus·纯 import 冒烟依然不算覆盖）+ `tests/unit/test_w1230_wire_archive.py`（check_crop / plates_verify / subject_band 三件转正判据首获实质图像测试：judge_og 正反样本 / 连通簇噪点过滤与朱砂排除（W974 教训判据）/ `--negative` 负样本端到端可证伪）。pyproject per-file-ignores 增两文件 E402（裸导入判据形态所需·F401 由 tests/* 全局档覆盖）。
 > - **④ 5 件合规重登记**（保留豁免·逐条换真实类别注记，替代 W1155 一刀切标签）：scan_targets ①emoji 基准再生器（check_emoji_icons 消费方）/ icon_probe.js ④运行时探针（check_emoji_icons 子进程调用·corpus 判据不可见）/ optimize-html-size ①（连字符名不可字面导入）/ pre-commit-validate ①（hook 入口·import 期读暂存区）/ pre_release_screenshot ③发布机专用。
 > - **⑤ packaging 同步缺口清偿（审计 P3 #24）**：`package_analysis_sync.py` 首次真跑补 5 件漂移（4 改 + `A_文本基础/` 新目录含 章节切分.py）·待同步 38/38 归零；`--check` 接入 `ci_sim.py` GATES（14→15 项）+ test_ci_sim 断言同步——pip 包与 scripts/ 的静默漂移自此有机器预演面。
-> - **⑥ 品牌守卫盲区根修（审计 P2 #22 仓内侧·铁律 19 配套）**：`check_no_brand_refs.py` 增 ignored 顶层目录名告警（`untracked_top_dir_names` + `warn_dir_names`·只判名字不读内容·不改退出码·tracked 内容判定面零变化）——本机 `.workbuddy/` 残留**当场被 WARN 命中**（守卫失明数周后首次可见）；self-test 56→59 例（正例/大小写变形/中性名三组负样本）。本地面清理（删目录）为用户动作，仓内零改动。
+> - **⑥ 品牌守卫盲区根修（审计 P2 #22 仓内侧·铁律 19 配套）**：`check_no_brand_refs.py` 增 ignored 顶层目录名告警（`untracked_top_dir_names` + `warn_dir_names`·只判名字不读内容·不改退出码·tracked 内容判定面零变化）——本机宿主运行态目录**当场被 WARN 命中**（守卫失明数周后首次可见）；self-test 56→59 例（正例/大小写变形/中性名三组负样本）。本地面处置属用户动作（W1235 复判：该目录承载项目记忆、不删、改按判定面收窄清偿），仓内零改动。
 > - **⑦ plates_verify docstring 旧名订正**：`_w945_plates_verify.py` → `plates_verify.py`（W1154 T4 声明≠落地实锤：该批提交 --stat 无此文件·本批补齐）。
 > - **⑧ guardrails 两处口径对齐（修判据·非加豁免·纠正误判类留痕）**：`check_changed.ps1` 改动集/全仓过滤 `archive/*`（根 pyproject 与宽档配置均已声明排除 archive，调用面未生效=声明≠落地·实证：refresh_icon_paths 归档动作当下被宽档拦 main 23>15）+ 风格档/结构档两处 ruff 加 `--force-exclude`（显式传参绕过 exclude 的 ruff 语义缺口）；顺手根修 4 处存量嵌套推导式（character_network / hardships_81 / cave_estate ×2 的 scripts 原件显式循环化 + 同步面随批 + 新增 warn_dir_names 同形态）——packaging 同步把它们带进改动面后由宽档/嵌套门禁当场拦截，属「触碰即被拦」巨债族的首批消号。
 > - **⑨ 验证**：第 42 槽 `根级脚本 207 · 四面引用 161 · 豁免登记 46 · 无引用无豁免 0`；第 45 槽 0 FAIL（gen_folder_docs --refresh）；guardrails 五项全 OK（api_diff 破坏性=无）；pytest 新增 28 例全绿。
 > - **登记去向（MCP·外部动作待批·审计 P3 #23）**：fastmcp 未装——`py -3 -m pip install fastmcp` + MCP 客户端挂载须用户批准后执行；mcp-server 5 只读工具代码面与 101 例 mock 单测全绿，无仓内欠账。
-> - **遗留**：`.workbuddy/` 本地清理（用户动作·守卫已可告警）；patch_ratio 保留 M-01 影子度量豁免（观察期设计·有意不接线）。
+> - **遗留**：宿主运行态目录的误告警（W1235 复判为误告警并按判定面收窄清偿——该目录承载项目记忆、删不得且下次会话自动重建）；patch_ratio 保留 M-01 影子度量豁免（观察期设计·有意不接线）。
 > - **验证**：第 42 槽 0 FAIL / 第 45 槽 0 FAIL / guardrails 五项 OK / pytest 新增 28 例全绿；收官链全量复跑见验证栏。
 > - **文件**：见 file-index。
 
@@ -816,7 +832,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1234），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1235），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

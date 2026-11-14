@@ -210,7 +210,7 @@ SCENT_MAP = {
             "scent_notes": ["浑浊水汽", "湿沙", "鱼腥", "河泥"],
             "intensity": 3,
             "mood": "荒凉·危险",
-            "key_description": "沙僧盘踞·水深仅 1m 但充满陷阱",
+            "key_description": "沙僧盘踞·弱水三千鹅毛不浮",
             "fragrance_formula": {
                 "top_note": "湿沙·河风",
                 "middle_note": "鱼腥·河泥",
