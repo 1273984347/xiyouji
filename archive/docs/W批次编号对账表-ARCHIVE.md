@@ -971,3 +971,5 @@
 | W1162 | 微批轻量通道实施批（W1069 设计 V1.1·用户批准）＝batch_cascade --light 五面+准入硬守卫（非 md 即拒）+设计文档状态更新 | 98ddcd0c | —（待回填） | 已收官（98ddcd0c·与 W1161 合并提交·铁律 21②） | 本会话（W1162） | scripts/batch_cascade.py,docs/11-方案报告/设计与架构方案/微批轻量通道设计-三档与准入判据-2026-10-31.md,docs/00-导读/W批次编号对账表.md,CHANGELOG.md |
 - 2026-11-14（修剪迁入 1 行·W1163-W1163·号序切分）
 | W1163 | 收尾微批＝safe_commit --expect-spec 多批并集支持（逗号分隔·铁律 21② 两批合一提交形态的判定面·W1162 实证单 spec 误拦）+W1162 台账 hash 回填+残置件并入 | 6fa22eac | —（待回填） | 已收官（6fa22eac） | 本会话（W1163） | scripts/safe_commit.py,docs/00-导读/W批次编号对账表.md,CHANGELOG.md |
+- 2026-11-14（修剪迁入 1 行·W1164-W1164·号序切分）
+| W1164 | 触发器硬拦升格批（用户裁决「做」）＝三触发器 hard 判据（6 天/60 批/160 提交·40 批·50 批）+preflight 三步接线+负样本锁 10 例（接线实跑当场拦下两笔登记面欠账并回填归零） | 6e72e22a | —（待回填） | **已收官**（6e72e22a·git 反填·共 1 笔·P-43-01） | 本会话（W1164） | scripts/check_review_trigger.py,scripts/check_audit_trigger.py,scripts/check_backlog_review.py,scripts/preflight_check.py,docs/00-导读/W批次编号对账表.md,CHANGELOG.md |

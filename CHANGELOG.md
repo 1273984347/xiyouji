@@ -1,3 +1,15 @@
+### W1226（2026-11-14）：远端 tag v2.3.0 清理批＝T-1 落地（用户令批准）
+
+**本批要点**（W1226 T-1 远端 tag v2.3.0 清理批·用户令批准）：
+
+> - **① 定位**：施工手册（W1221）§6.1 T-1「远端 tag v2.3.0 清理」——用户令「开始 T-1」= §6.3 批准门槛通过。至此**手册待执行项全部闭环**（T-2 于 W1223/W1224 落地·T-3 于 W1222 落地·T-1 本批）。
+> - **② 预检三事实**（证据 [scripts/output/_w1226_t1_tag_cleanup.json](scripts/output/_w1226_t1_tag_cleanup.json)）：(a) `git ls-remote --tags origin` **为空**——远端本就无任何 tag（W1209 历史改写时期已清）⇒「删远端 tag」无对象·如实留证不虚报动作；(b) 本地 tag `v2.3.0` 指向 **abd03999a**（hash 留证·回滚路径 = hash 重建）；(c) 引用面检索——workflows README 208 行示例命令实名引用（本批改 `vX.Y.Z` 占位）+ CHANGELOG/方案/手册历史记载（历史记录禁改）+ **未发布 Draft Release「详解西游记 · 桌面版 v2.3.0」**（2026-10-18·isDraft=true·10 资产）。
+> - **③ 动作与验收**：`git tag -d v2.3.0`（本地删除）；验收双过——`git tag` 为空 + `git ls-remote --tags origin` 为空。远端零动作（无对象）。
+> - **④ 遗留登记（待用户单独裁决）**：Draft Release 引 tagName `v2.3.0`——Draft 不创建远端 ref、不碍 T-1 验收；删除 Draft 超出 T-1 批准范围（§6.3 批准门槛表未覆盖）⇒ 如实登记。建议：删（tag 引用已成僵尸·10 资产均可由发布 workflow 重新产出）。
+> - **⑤ 验证**：verify 全量核心绿；pytest 全量绿；lint_links 0 broken。
+> - **文件**：见 file-index。
+
+
 ### W1225（2026-11-14）：截图红警清偿批：scope 判据索引数据件归 skip + 批处理器仅认 HTML
 
 **本批要点**（W1225 截图红警清偿批）：
@@ -691,7 +703,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1225），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1226），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
