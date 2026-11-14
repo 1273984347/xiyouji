@@ -1,3 +1,45 @@
+## W1238 A6 逐回诗词索引第 1 批：第 1-20 回韵文分布表（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/05-诗词歌赋/逐回诗词索引-第001-020回.md | W1238 | 新增：第 1-20 回韵文分布表（673 句/246 段）+ 口径三条规则 + 三处已知偏差 + 四点读数 |
+| scripts/output/stats.json | W1238 | a6_docs 13→14 / a1_a6_docs 623→624（stats --w W1238） |
+| scripts/output/stats-changelog.json | W1238 | stats 变更史追加 W1238 段 |
+| scripts/output/stats-index.md | W1238 | stats 索引面刷新 |
+| AGENTS.md | W1238 | stats 标记跟随（A6 十四篇 / 623→624）+ 脚注条目 |
+| README.md | W1238 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1238 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/统计口径说明.md | W1238 | stats 标记跟随（A6 口径域现算 14） |
+| docs/agent/gates.md | W1238 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1238 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1238 | stats 标记跟随 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-12.md | W1238 | stats 标记跟随 |
+| site/index.html | W1238 | 首页统计数字跟随（A6 十四篇）+ 页脚批次链插入 |
+| CHANGELOG.md | W1238 | 本批段 |
+| HANDOVER.md | W1238 | 里程碑块 |
+| STRUCTURE.md | W1238 | 当前批次行推进 |
+| .github/workflows/README.md | W1238 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1238 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1238 | 滚动迁入条目 |
+| CITATION.cff | W1238 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1238 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1238 | 页脚批次链插入 |
+| site/dukou-engine.html | W1238 | 页脚批次链插入 |
+| site/rss.xml | W1238 | 第 73 槽产物新鲜度：随 CHANGELOG 新段重建条目 |
+| scripts/output/file-index.md | W1238 | 本批段追加 |
+| scripts/output/README.md | W1238 | 第 45 槽：目录说明随清单刷新 |
+| scripts/output/INDEX.md | W1238 | 第 45 槽：目录清单随本批新件刷新 |
+| scripts/output/tools-inventory.md | W1238 | 工具清单日期戳与计数刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1238 | 朱砂实底按页 hash 缓存随页脚变更更新 |
+| scripts/output/_cascade_files_W1238.txt | W1238 | 级联写后自检的改动面清单 |
+| scripts/output/_w1238_spec.json | W1238 | 本批规格（file_index_rows 即应动全集） |
+| docs/00-导读/W批次编号对账表.md | W1238 | W1238 认领行 + W1237 台账 hash 回填 |
+| docs/INDEX.md | W1238 | 文档索引重生成（884 篇·含本批新篇） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1238 | 台账腾窗：新增认领行使正本越窗 ⇒ 最老行迁入归档 |
+| site/dashboard.html | W1238 | 第 68 槽 KPI：A6 卡片 13→14 + 段落「共 623 篇」→624 |
+| site/data/search-index-zh.js | W1238 | 第 46 槽：搜索索引重建（中 1041 条·含本批新篇） |
+| site/en/search-index-en.js | W1238 | 第 46 槽：搜索索引重建（英 1040 条） |
+
 ## W1237 嵌套块棘轮批：PLR1702 十九条全清零（2026-11-15）
 
 | 文件 | W | 说明 |
