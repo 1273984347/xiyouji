@@ -25,11 +25,13 @@ from utils.analyzer_base import run_analyzer  # noqa: I001
 
 def find_characters_in_text(text: str, characters: dict) -> list[str]:
     """找出文本中出现的人物（标准化名称）。"""
-    return [
-        canonical
-        for canonical, aliases in characters.items()
-        if any(alias in text for alias in aliases)
-    ]
+    matched = []
+    for canonical, aliases in characters.items():
+        for alias in aliases:
+            if alias in text:
+                matched.append(canonical)
+                break
+    return matched
 
 
 def _accumulate_chapter(

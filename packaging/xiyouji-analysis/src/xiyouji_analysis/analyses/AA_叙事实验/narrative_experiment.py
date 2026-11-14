@@ -249,6 +249,14 @@ STORY_GENERATOR = {
 
 
 def build_summary():
+    """构建整体统计摘要（四份 JSON 之外的第五份：narrative_experiment_summary.json）。
+
+    字段含义：
+        board_game_*:        桌游侧玩家/卡牌/阶段数量
+        narrative_card_*:    叙事卡牌侧卡组/卡牌总数
+        example_combinations: 示例组合条数
+        story_*:             故事生成器侧组合数/分类数
+    """
     return {
         "board_game_players": len(BOARD_GAME["players"]),
         "board_game_cards": len(BOARD_GAME["hardship_cards"]),
@@ -261,6 +269,49 @@ def build_summary():
     }
 
 
+# -------------------------------------------------------------------
+# 输出与日志
+# -------------------------------------------------------------------
+
+def _write_json(data, path: Path) -> None:
+    """把 dict 写为 UTF-8 缩进 2 空格 JSON。"""
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
+def _write_all_outputs(output_dir: Path) -> dict:
+    """写出 4 份 JSON（board_game / narrative_cards / story_generator / summary）。
+
+    返回：
+        summary 字典（供控制台打印复用，避免二次构建）。
+    """
+    summary = build_summary()
+    _write_json(BOARD_GAME, output_dir / "board_game.json")
+    _write_json(NARRATIVE_CARDS, output_dir / "narrative_cards.json")
+    _write_json(STORY_GENERATOR, output_dir / "story_generator.json")
+    _write_json(summary, output_dir / "narrative_experiment_summary.json")
+    return summary
+
+
+def _print_summary(output_dir: Path, s: dict) -> None:
+    """打印与原始实现逐字一致的三行日志。"""
+    print("[OK] 叙事实验已写入：", output_dir)
+    print(
+        f"[INFO] 桌游玩家 {s['board_game_players']} 人·"
+        f"劫难卡 {s['board_game_cards']} 张·阶段 {s['board_game_phases']} 个"
+    )
+    print(
+        f"[INFO] 叙事卡组 {s['narrative_card_groups']} 组·"
+        f"共 {s['narrative_card_total']} 张"
+    )
+    print(
+        f"[INFO] 故事组合 {s['story_combinations']} 种·"
+        f"分类 {s['story_categories']} 种"
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description="《西游记》叙事实验与卡牌机制生成")
     parser.add_argument("--output", default="output/data/", help="输出目录")
@@ -269,20 +320,8 @@ def main():
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    (output_dir / "board_game.json").write_text(
-        json.dumps(BOARD_GAME, ensure_ascii=False, indent=2), encoding="utf-8")
-    (output_dir / "narrative_cards.json").write_text(
-        json.dumps(NARRATIVE_CARDS, ensure_ascii=False, indent=2), encoding="utf-8")
-    (output_dir / "story_generator.json").write_text(
-        json.dumps(STORY_GENERATOR, ensure_ascii=False, indent=2), encoding="utf-8")
-    (output_dir / "narrative_experiment_summary.json").write_text(
-        json.dumps(build_summary(), ensure_ascii=False, indent=2), encoding="utf-8")
-
-    print("[OK] 叙事实验已写入：", output_dir)
-    s = build_summary()
-    print(f"[INFO] 桌游玩家 {s['board_game_players']} 人·劫难卡 {s['board_game_cards']} 张·阶段 {s['board_game_phases']} 个")
-    print(f"[INFO] 叙事卡组 {s['narrative_card_groups']} 组·共 {s['narrative_card_total']} 张")
-    print(f"[INFO] 故事组合 {s['story_combinations']} 种·分类 {s['story_categories']} 种")
+    summary = _write_all_outputs(output_dir)
+    _print_summary(output_dir, summary)
 
 
 if __name__ == "__main__":

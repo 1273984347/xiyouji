@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（117）
+## 文件（119）
 
 ### Python 脚本
 
@@ -130,6 +130,8 @@
 - `test_w1168_stat_events.py`
 - `test_w1205_batch_scripts.py`
 - `test_w1215_count_markers.py`
+- `test_w1230_execution_faces.py`
+- `test_w1230_wire_archive.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

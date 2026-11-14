@@ -153,6 +153,43 @@ def tracked_files(root=ROOT):
     return files
 
 
+def untracked_top_dir_names(root=ROOT):
+    """顶层目录里**未被 git 跟踪**的名字集合（W1230·品牌守卫 tracked 面盲区）。
+
+    设计纪律 ③（扫描面 = 已跟踪文件）对本地运行态目录天然失明：铁律 19 的本地残留
+    （如被禁品牌的会话运行态目录）不入库 ⇒ tracked 面永远看不见（2026-11-06 基础设施
+    审计 P2 #22 实证）。本函数只取**顶层目录名**（不读内容·不进判定面）供告警：
+    名字命中被禁字面量即提示用户清理本地面。
+    """
+    r = subprocess.run(["git", "-C", root, "-c", "core.quotepath=false", "ls-files"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if r.returncode != 0:
+        raise RuntimeError("git ls-files 失败：%s" % (r.stderr or "").strip()[:200])
+    tracked_top = {ln.split("/")[0] for ln in r.stdout.splitlines() if ln.strip()}
+    out = []
+    try:
+        entries = os.listdir(root)
+    except OSError as exc:
+        raise RuntimeError("顶层目录不可读：%s" % exc) from exc
+    for name in entries:
+        if name in tracked_top or name in _SKIP_DIRS or not os.path.isdir(os.path.join(root, name)):
+            continue
+        out.append(name)
+    return sorted(out)
+
+
+def warn_dir_names(names, patterns):
+    """纯判定：目录名含被禁字面量（小写包含）→ 告警名单。只判名字、不读内容。"""
+    out = []
+    for n in names:
+        low = n.lower()
+        for p in patterns:
+            if p in low:
+                out.append(n)
+                break
+    return out
+
+
 def scan_repo(root=ROOT):
     """全仓扫描 → (命中清单, 扫描文件数)。命中清单元素为 (相对路径, 片段)。
 
@@ -239,6 +276,14 @@ def _self_test():
     check(bool(scan_text(plain_line, patterns)) and not is_declaration_line(plain_line),
           "无标记行仍须命中且不被豁免（行级豁免≠文件级放行）")
 
+    # W1230 组③：ignored 顶层目录名告警——名字命中（含大小写变形）须告警，中性名不告警
+    check(warn_dir_names(["." + _p0, "docs", "scripts"], patterns) == ["." + _p0],
+          "被禁字面量目录名应告警（ignored 顶层目录名面）")
+    check(warn_dir_names([_p0.upper(), "archive"], patterns) == [_p0.upper()],
+          "目录名大小写变形应告警")
+    check(warn_dir_names(["node_modules", ".git", "tmpe"], patterns) == [],
+          "中性目录名不应告警")
+
     print("self-test: %d/%d 通过" % (cases - fails, cases))
     return 1 if fails else 0
 
@@ -266,8 +311,21 @@ def main(argv):
             print("  %s :: %s" % (rel, snippet))
         if len(hits) > 40:
             print("  ……另有 %d 处未列" % (len(hits) - 40))
+        _warn_local_dirs(root)
         return _exit_code_for_hits(len(hits))
     print("OK 品牌字面量零命中（扫描 %d 个已跟踪文件·含 archive/）" % scanned)
+    return _warn_local_dirs(root)
+
+
+def _warn_local_dirs(root):
+    """ignored 顶层目录名告警（W1230·只判名字不读内容·不改退出码）。git 不可读静默略过。"""
+    try:
+        warn = warn_dir_names(untracked_top_dir_names(root), brand_patterns())
+    except RuntimeError as exc:
+        print("WARN 本地目录名面不可用：%s" % exc)
+        return 0
+    for n in warn:
+        print("WARN 未跟踪顶层目录名含被禁字面量（本地面·建议清理，不影响退出码）：%s/" % n)
     return 0
 
 

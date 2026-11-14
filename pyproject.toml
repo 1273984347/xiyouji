@@ -19,6 +19,10 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "scripts/audit/*" = ["F401"]  # 临时脚本允许未使用 import
 "tests/*" = ["F401", "F811"]
+# W1230：第 42 槽 E3 判据要求裸 import 行（^import <stem>$ 逐行匹配·行尾注释即漏检）
+# ⇒ sys.path 置后的字面导入必须免 E402；F401 由 tests/* 全局档覆盖。
+"tests/unit/test_w1230_execution_faces.py" = ["E402"]
+"tests/unit/test_w1230_wire_archive.py" = ["E402"]
 
 [tool.ruff.format]
 quote-style = "double"

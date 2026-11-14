@@ -1,3 +1,76 @@
+## W1230 脚本接线/归档裁决批：第 42 槽 47 行 W1155 存量清偿 + packaging 同步接线 + 品牌守卫盲区根修（2026-11-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/output/script-coverage-baseline.txt | W1230 | 47 行 W1155 存量摘行 + check_untracked 旧行摘除 + 5 行合规重登记（逐条真实类别注记） |
+| archive/scripts/site_audit.py | W1230 | 自 scripts/ 归档（被第 49 槽取代·审计 P3） |
+| archive/scripts/refresh_icon_paths.py | W1230 | 自 scripts/ 归档（一次性同步器·审计 P3） |
+| archive/scripts/accent_audit.py | W1230 | 自 scripts/ 归档（docstring 自述一次性） |
+| archive/scripts/file_protocol_probe.py | W1230 | 自 scripts/ 归档（自述一次性诊断件·不入 CI） |
+| archive/scripts/check_untracked.py | W1230 | 自 scripts/ 归档（休眠钩子已删 W1154 T13·恒 0） |
+| archive/scripts/INDEX.md | W1230 | gen_folder_docs --refresh（5 件归档入列） |
+| archive/scripts/README.md | W1230 | gen_folder_docs --refresh 随批再生成 |
+| scripts/INDEX.md | W1230 | gen_folder_docs --refresh（5 件出列） |
+| scripts/output/tools-inventory.md | W1230 | regen（工具清单随批刷新） |
+| scripts/plates_verify.py | W1230 | docstring 旧名 _w945_plates_verify.py 订正（W1154 T4 声明≠落地遗留） |
+| scripts/ci_sim.py | W1230 | GATES 增分析包同步 --check（14→15 项） |
+| scripts/check_no_brand_refs.py | W1230 | ignored 顶层目录名告警（untracked_top_dir_names/warn_dir_names·self-test 56→59） |
+| scripts/guardrails/check_changed.ps1 | W1230 | 改动集过滤 archive/* + ruff 两处 --force-exclude（配置排除生效对齐·修判据） |
+| scripts/check_script_coverage.py | W1230 | CATEGORY_OF 摘 5 归档条目（防 --save-baseline 复活） |
+| pyproject.toml | W1230 | per-file-ignores E402：两个 W1230 测试文件（裸导入判据形态） |
+| tests/unit/test_script_hygiene.py | W1230 | PROMOTED_W1003 摘 4 归档名（防已删件假绿） |
+| tests/unit/test_ci_sim.py | W1230 | 关键门禁断言 + 分析包同步项 |
+| tests/unit/test_w1230_execution_faces.py | W1230 | 新增：15 件 --self-test 真跑 + 20 件字面导入执行面 |
+| tests/unit/test_w1230_wire_archive.py | W1230 | 新增：check_crop/plates_verify/subject_band 实质图像判据（正反样本可证伪） |
+| scripts/B_人物/character_network.py | W1230 | 嵌套推导式根修（显式循环·guardrails 当场拦截的存量消号） |
+| scripts/C_情节/hardships_81.py | W1230 | 嵌套推导式根修（显式循环） |
+| scripts/M_洞府房产/cave_estate.py | W1230 | 嵌套推导式根修（max 提升变量化） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/B_人物/character_network.py | W1230 | packaging 同步（随 scripts 根修） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/C_情节/hardships_81.py | W1230 | packaging 同步（随 scripts 根修） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/M_洞府房产/cave_estate.py | W1230 | packaging 同步（随 scripts 根修） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/AA_叙事实验/narrative_experiment.py | W1230 | packaging 同步（5 件漂移补齐） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/A_文本基础/章节切分.py | W1230 | packaging 同步新增目录（A_文本基础） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/A_文本基础/INDEX.md | W1230 | gen_folder_docs 生成（新目录文档） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/A_文本基础/README.md | W1230 | gen_folder_docs 生成（新目录文档） |
+| scripts/output/_sync_analysis_manifest.json | W1230 | 同步清单（38/38 归零） |
+| docs/00-导读/W批次编号对账表.md | W1230 | W1230 认领行登记 |
+| scripts/output/_w1230_spec.json | W1230 | 本批 spec |
+| CHANGELOG.md | W1230 | W1230 段落落盘（cascade 写入） |
+| HANDOVER.md | W1230 | 里程碑块插入（cascade 写入） |
+| AGENTS.md | W1230 | 版本脚注滚动（cascade 写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1230 | AGENTS 脚注滚动归档（cascade 写入） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1230 | 台账行窗口腾窗迁出最老行（如触发） |
+| scripts/output/file-index.md | W1230 | 本批 file-index 段（cascade 写入） |
+| scripts/output/stats.json | W1230 | stats 重跑 |
+| scripts/output/stats-changelog.json | W1230 | stats 重跑（CHANGELOG 面计数） |
+| scripts/output/stats-index.md | W1230 | stats 重跑（索引面计数） |
+| scripts/output/_cascade_files_W1230.txt | W1230 | 级联落盘清单（cascade 生成） |
+| README.md | W1230 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1230 | 版本面推进（version_surface） |
+| CITATION.cff | W1230 | 版本面推进（version_surface） |
+| docs/00-导读/项目说明.md | W1230 | 版本面推进（version_surface） |
+| .github/workflows/README.md | W1230 | 版本面推进（version_surface） |
+| archive/docs/workflows-readme-history.md | W1230 | workflows README 历史归档（version_surface） |
+| pytest.ini | W1230 | pytest_collected 计数随动（1643→1666） |
+| docs/11-方案报告/设计与架构方案/系统架构v2方案-目标态与落地路线-2026-10-25.md | W1230 | stats 计数随动（pytest_collected） |
+| site/sitemap.xml | W1230 | gen_sitemap lastmod 随动 |
+| site/data/cross-time-danmaku.html | W1230 | 页脚批次链滚动（cascade 全档） |
+| site/data/tag-cloud.html | W1230 | 页脚批次链滚动（cascade 全档） |
+| site/dukou-engine.html | W1230 | 页脚批次链滚动（cascade 全档） |
+| site/index.html | W1230 | 页脚批次链滚动（cascade 全档） |
+| scripts/output/INDEX.md | W1230 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1230 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/_vermilion_solid_cache.json | W1230 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/INDEX.md | W1230 | 目录文档刷新（gen_folder_docs·新目录触发父级） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/README.md | W1230 | 目录文档刷新（gen_folder_docs·新目录触发父级） |
+| tests/unit/INDEX.md | W1230 | 目录文档刷新（gen_folder_docs·新测试文件触发） |
+| tests/unit/README.md | W1230 | 目录文档刷新（gen_folder_docs·新测试文件触发） |
+| scripts/accent_audit.py | W1230 | git mv 迁出源侧（归档至 archive/scripts/） |
+| scripts/check_untracked.py | W1230 | git mv 迁出源侧（归档至 archive/scripts/） |
+| scripts/file_protocol_probe.py | W1230 | git mv 迁出源侧（归档至 archive/scripts/） |
+| scripts/refresh_icon_paths.py | W1230 | git mv 迁出源侧（归档至 archive/scripts/） |
+| scripts/site_audit.py | W1230 | git mv 迁出源侧（归档至 archive/scripts/） |
+
 ## W1229 登记面欠账清偿批：README 计数订正 + 台账 hash 机填与末笔格批处理（2026-11-14）
 
 | 文件 | W | 说明 |
