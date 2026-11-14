@@ -1,3 +1,47 @@
+## W1234 E2E 接线裁决批：visualization_assertions 入 CI + SKIP→FAIL + w266 恒真断言修复 + test_visual 裁决 manual（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| tests/e2e/test_w266_e2e_extended.js | W1234 | 恒真断言修复：互链验证 >= 0 → >= 1（审计 #16 本体） |
+| tests/e2e/test_site_quality.js | W1234 | 五处前置元素缺失 SKIP console.log → check(false) 计 bad（SKIP→FAIL·fail-closed） |
+| tests/e2e/test_visualization_assertions.js | W1234 | 接入 CI（e2e-interaction 第二套件·本地 6 页 0 FAIL 实跑验证） |
+| .github/workflows/ci.yml | W1234 | e2e-interaction job 增补 viz assertions 步骤（W1234） |
+| .github/workflows/README.md | W1234 | Job 9 流程增补第二套件 + SKIP→FAIL 说明 + test_visual 裁决 manual 保留 |
+| docs/00-导读/W批次编号对账表.md | W1234 | W1234 认领行 + W1230-W1233 四批 hash/末笔格回填（回填并入在途批·铁律 21①） |
+| HANDOVER.md | W1234 | 里程碑块（cascade 写入） |
+| CHANGELOG.md | W1234 | W1234 段（cascade 写入） |
+| AGENTS.md | W1234 | 版本脚注滚动（cascade 写入） |
+| scripts/output/file-index.md | W1234 | file-index 段（cascade 写入） |
+| scripts/output/stats.json | W1234 | stats 刷新 |
+| scripts/output/_w1234_spec.json | W1234 | 本批 spec |
+| scripts/output/_cascade_files_W1234.txt | W1234 | 级联落盘清单 |
+| scripts/output/_vermilion_solid_cache.json | W1234 | 朱砂缓存随页脚链 |
+| site/data/cross-time-danmaku.html | W1234 | 页脚批次链滚动 |
+| site/data/tag-cloud.html | W1234 | 页脚批次链滚动 |
+| site/index.html | W1234 | 页脚批次链滚动 |
+| README.md | W1234 | 版本面推进 |
+| STRUCTURE.md | W1234 | 版本面推进 |
+| CITATION.cff | W1234 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1234 | 版本面推进 |
+| .github/workflows/README.md | W1234 | 版本面推进 |
+| archive/docs/AGENTS-ARCHIVE.md | W1234 | 脚注滚动归档 |
+| archive/docs/workflows-readme-history.md | W1234 | workflows README 历史归档 |
+| pytest.ini | W1234 | pytest_collected 随动 |
+| site/sitemap.xml | W1234 | sitemap 随动 |
+| site/data/json/search-index-zh.js | W1234 | 搜索索引随动 |
+| site/data/json/search-index-en.js | W1234 | 搜索索引随动 |
+| scripts/output/search-index-zh.js | W1234 | 搜索索引随动 |
+| scripts/output/search-index-en.js | W1234 | 搜索索引随动 |
+| scripts/output/INDEX.md | W1234 | 目录文档刷新 |
+| scripts/output/README.md | W1234 | 目录文档刷新 |
+| tests/unit/INDEX.md | W1234 | 目录文档刷新 |
+| tests/unit/README.md | W1234 | 目录文档刷新 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1234 | 台账腾窗归档面（如触发） |
+| scripts/guardrails/api_diff.py | W1234 | SystemExit 退出语义不计破坏性 raise 集合（W1233 拆解重构的 api_diff 语义放宽·随批入库） |
+| scripts/output/tools-inventory.md | W1234 | 工具盘点随动 |
+| site/dukou-engine.html | W1234 | 页脚批次链滚动 |
+| site/rss.xml | W1234 | W1232 gen_rss 重建随动（W1233 链归档触发重刷） |
+
 ## W1233 复杂度棘轮批：C901 全清零（2026-11-15）
 
 | 文件 | W | 说明 |

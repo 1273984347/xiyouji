@@ -62,8 +62,9 @@ test.describe('W266 E2E-1：跨页面导航（4 V3 页面互链）', () => {
           (v) => v.file !== p.file && (h.includes(v.file) || h.includes(v.name))
         )
       );
-      // 至少有 1 个指向其他 V3 页面的链接（互链验证）
-      expect(otherV3Links.length).toBeGreaterThanOrEqual(0);
+      // 至少有 1 个指向其他 V3 页面的链接（互链验证·W1234 修恒真断言：
+      // 原断言 >= 0 对数组长度恒真——审计 #16 指出的「恒真断言」本体）
+      expect(otherV3Links.length).toBeGreaterThanOrEqual(1);
 
       // 无页面错误
       expect(errors).toEqual([]);

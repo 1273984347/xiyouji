@@ -1,3 +1,15 @@
+### W1234（2026-11-15）：E2E 接线裁决批：visualization_assertions 入 CI + SKIP→FAIL + w266 恒真断言修复 + test_visual 裁决 manual
+
+**本批要点**（W1234 E2E 接线裁决批·审计登记「E2E 接线决策 9 套件仅 1 进 CI」清偿）：
+
+> - **① 第二套件接入**：test_visualization_assertions.js 进 e2e-interaction job——独立于 check_chart_values（verify 第 43 段）的**第二条真渲染验证路径**（头注自述「两套实现同时错才可能漏报」），6 页 × 12 条具名族断言、纯离线 route-abort、复用同 job 已装 chromium（零增量安装分钟）。本地实跑 6 页 0 FAIL 后接线。
+> - **② SKIP→FAIL（fail-closed）**：test_site_quality 五处「前置元素缺失 console.log 降级」改 check(false) 计 bad——此前页面回归删元素会被静默降级为 SKIP 且退出码 0（审计 #16 实证的危害路径）；现删元素即红。
+> - **③ 恒真断言修复**：test_w266 互链验证 `otherV3Links.length >= 0` 对数组长度恒真（注释要求「至少 1 个」）→ `>= 1`。
+> - **④ test_visual 裁决**：manual 保留——10 页与 screenshot-review 全站截图审查高度重叠、CI 增量分钟收益低；judges 稳定且增量明确时再评估接入。 workflows README 同步登记。
+> - **⑤ 回填**：W1230-W1233 四批台账 hash/末笔格回填（四批均单笔·末笔同首笔·回填并入本在途批·铁律 21①）。
+> - **验证**：node test_visualization_assertions 6 页 0 FAIL；test_ci_wiring 24/24；node --check 两 JS 套件语法过。
+> - **文件**：见 file-index。
+
 ### W1233（2026-11-15）：复杂度棘轮批：C901 全清零（W1161 后剩余 7 超阈函数拆 helper 消号）
 
 **本批要点**（W1233 复杂度棘轮批·审计专批「plates_verify+gen_folder_docs 复杂度巨债 17-29>15 触碰即被宽档拦截」清偿·C901 全清零）：
@@ -804,7 +816,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1233），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1234），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

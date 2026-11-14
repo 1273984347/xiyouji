@@ -78,3 +78,4 @@
 + W1231 审计专批：单侧键 1702 条 schema 分歧清理 + embed_json 三重根修 + 476 条隐性值漂移修复 + dataset 快照对齐生成面·无 workflow 结构改动）。
 + W1232 审计四登记项清偿：emoji 挂槽裁决与基线棘轮形态 + reader/rss 新鲜度门禁首跑抓双陈旧欠账随批重建 + P2-4 density 升格 verify 槽 + 基线重写审批标记机器化·无 workflow 结构改动）。
 + W1233 审计专批复杂度巨债清偿：gen_folder_docs 29 / tmpe_tidy 19 / cross_line_rewrite 18 / j1 18 / 16 档×3 全部拆 helper 消号，判定逻辑逐字未改，各专项测试全过·无 workflow 结构改动）。
++ W1234 审计登记 E2E 接线决策清偿：第二套件接入 e2e-interaction job 纯离线真渲染断言 + 五处前置元素缺失不再静默降级 + w266 互链断言修正 + test_visual 裁决 manual 保留 + 回填四批台账 hash·无 workflow 结构改动）。
