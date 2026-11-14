@@ -79,7 +79,7 @@ class TestArchiveKeepFloor:
         arc = "> 归档时间：2026-01-01\n\n## W900 old\n\n| a | W | x |\n\n"
         monkeypatch.setattr(
             arcs.bc, "load",
-            lambda rel: ((src, "\n") if "file-index" in rel else (arc, "\n")))
+            lambda rel: ((src, "\n") if rel.endswith("file-index.md") else (arc, "\n")))
         try:
             arcs.move("file-index", None, False, "WTEST", max_bytes=10, chunk=chunk)
             return None
@@ -97,7 +97,7 @@ class TestArchiveKeepFloor:
         cap = int(len(src) * 25 / 30) + 10  # 迁出约 5 段后正本即达标
         monkeypatch.setattr(
             arcs.bc, "load",
-            lambda rel: ((src, "\n") if "file-index" in rel
+            lambda rel: ((src, "\n") if rel.endswith("file-index.md")
                          else ("> 归档时间：2026-01-01\n\n## W900 old\n\n| a | W | x |\n\n", "\n")))
         try:
             arcs.move("file-index", None, False, "WTEST", max_bytes=cap, chunk=5)

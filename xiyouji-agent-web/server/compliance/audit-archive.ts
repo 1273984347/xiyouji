@@ -108,6 +108,9 @@ export interface AuditArchivePurgeResult {
  * 按留存期批量销毁归档（**销毁留证**：销毁动作本身写一条新事件）。
  *
  * 顺序：先删过期行，再写销毁事件 ⇒ 销毁事件本身不在被删区间内（ts = 现在）。
+ * W1228 对抗审查 P2-4 根修：两步包进**同一事务**——DELETE 成功而留证 INSERT 失败
+ * （连接断/约束）原本会打破「销毁动作必留证」承诺且无补偿路径；事务化后失败整体回滚，
+ * 留证与销毁同生共死。
  */
 export async function purgeAuditArchiveBefore(
   cutoff: Date,
@@ -115,39 +118,53 @@ export async function purgeAuditArchiveBefore(
   actor = "system:retention",
 ): Promise<AuditArchivePurgeResult> {
   return withPool(opts, async (pool) => {
-    const res = await pool.query("DELETE FROM audit_archive WHERE ts < $1", [cutoff]);
-    const deleted = res.rowCount ?? 0;
-    const evidence: AuditEvent = {
-      schema_version: 1,
-      ts: new Date().toISOString(),
-      event_id: newEventId(),
-      actor,
-      action: "destroy",
-      target: "audit_archive",
-      decision: "allow",
-      result: "ok",
-      data_class: "L4",
-      trace_id: "",
-      source_ip: "",
-      reason: "留存期到期销毁：移除 " + deleted + " 条，截止 " + cutoff.toISOString(),
-    };
-    await pool.query(
-      "INSERT INTO audit_archive (id, ts, actor, action, target, decision, result, data_class, trace_id, source_ip, payload) " +
-        "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) ON CONFLICT (id) DO NOTHING",
-      [
-        evidence.event_id,
-        evidence.ts,
-        evidence.actor,
-        evidence.action,
-        evidence.target,
-        evidence.decision,
-        evidence.result,
-        evidence.data_class,
-        evidence.trace_id || null,
-        evidence.source_ip || null,
-        JSON.stringify(evidence),
-      ]
-    );
-    return { deleted, evidence };
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      const res = await client.query("DELETE FROM audit_archive WHERE ts < $1", [cutoff]);
+      const deleted = res.rowCount ?? 0;
+      const evidence: AuditEvent = {
+        schema_version: 1,
+        ts: new Date().toISOString(),
+        event_id: newEventId(),
+        actor,
+        action: "destroy",
+        target: "audit_archive",
+        decision: "allow",
+        result: "ok",
+        data_class: "L4",
+        trace_id: "",
+        source_ip: "",
+        reason: "留存期到期销毁：移除 " + deleted + " 条，截止 " + cutoff.toISOString(),
+      };
+      await client.query(
+        "INSERT INTO audit_archive (id, ts, actor, action, target, decision, result, data_class, trace_id, source_ip, payload) " +
+          "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) ON CONFLICT (id) DO NOTHING",
+        [
+          evidence.event_id,
+          evidence.ts,
+          evidence.actor,
+          evidence.action,
+          evidence.target,
+          evidence.decision,
+          evidence.result,
+          evidence.data_class,
+          evidence.trace_id || null,
+          evidence.source_ip || null,
+          JSON.stringify(evidence),
+        ]
+      );
+      await client.query("COMMIT");
+      return { deleted, evidence };
+    } catch (err) {
+      try {
+        await client.query("ROLLBACK");
+      } catch {
+        // 回滚失败只说明连接已断——原始错误向上抛，不吞（E-161：代码缺陷类直接抛出）
+      }
+      throw err;
+    } finally {
+      client.release();
+    }
   });
 }
