@@ -73,3 +73,4 @@
 + W1226 T-1 远端 tag v2.3.0 清理落地：预检实测远端本就无 tag + 本地 tag 删除留证 + workflows README 示例去实名 + 施工手册 T-1 终写·无 workflow 结构改动）。
 + W1227 Draft Release 处置批：用户令删执行 gh release delete v2.3.0 + Releases 面清零 + 手册 T-1 执行结果补记·无 workflow 结构改动）。
 + W1228 对抗审查回批与登记机制根修：归档名大小写错名修 + 提交括号洞修 + 跳号让号补登 + 销毁留证事务化 + 到期日补齐 + 描述段开头 W 形态识别 + bullet 碑化降级·无 workflow 结构改动）。
++ W1229 登记面欠账清偿批：11-方案报告 README 计数订正 + 台账 8 行首笔 hash 机填与 27 行末笔格批处理订正·无 workflow 结构改动）。
