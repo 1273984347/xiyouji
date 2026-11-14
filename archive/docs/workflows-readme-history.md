@@ -71,3 +71,4 @@
 + W1224 容量阈值裁决批：#1 双线制硬 512 KB 软 200 KB 预警 + 页特有内联 CSS 与共享块双口径 + 测量器增报越线页清单 + 方案 v2 §8.3 修订·无 workflow 结构改动）。
 + W1225 截图红警清偿批：scope 判据把搜索索引数据件归 skip 根修 + 批处理器 only-pages 仅认 HTML 兜底·无 workflow 结构改动）。
 + W1226 T-1 远端 tag v2.3.0 清理落地：预检实测远端本就无 tag + 本地 tag 删除留证 + workflows README 示例去实名 + 施工手册 T-1 终写·无 workflow 结构改动）。
++ W1227 Draft Release 处置批：用户令删执行 gh release delete v2.3.0 + Releases 面清零 + 手册 T-1 执行结果补记·无 workflow 结构改动）。
