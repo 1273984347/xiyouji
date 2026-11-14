@@ -66,27 +66,32 @@ EDGES_CSV = os.path.join(ROOT, "scripts", "output", "yuanqi_edges.csv")
 INDEX_CACHE = os.path.join(ROOT, "scripts", "output", "rag_index.json")
 
 
+def _apply_env_file(env_path):
+    """把一个 .env 文件注入 os.environ（已有键不覆盖·W1237 拆 def·语义不变）。"""
+    try:
+        with open(env_path, encoding="utf-8") as _f:
+            lines = _f.read().splitlines()
+    except Exception:
+        return
+    for _ln in lines:
+        _ln = _ln.strip()
+        if not _ln or _ln.startswith("#") or "=" not in _ln:
+            continue
+        _k, _, _v = _ln.partition("=")
+        _k = _k.strip()
+        _v = _v.strip().strip('"').strip("'")
+        if _k and _k not in os.environ:
+            os.environ[_k] = _v
+
+
 def _load_dotenv():
     """极简 .env 加载（零依赖）：读项目根 .env 与 scripts/rag/.env，注入 os.environ。
 
     已有环境变量优先（不覆盖）；仅支持 KEY=VALUE 行，忽略注释与空行。
     """
     for env_path in (os.path.join(ROOT, ".env"), os.path.join(_HERE, ".env")):
-        if not os.path.exists(env_path):
-            continue
-        try:
-            with open(env_path, encoding="utf-8") as _f:
-                for _ln in _f:
-                    _ln = _ln.strip()
-                    if not _ln or _ln.startswith("#") or "=" not in _ln:
-                        continue
-                    _k, _, _v = _ln.partition("=")
-                    _k = _k.strip()
-                    _v = _v.strip().strip('"').strip("'")
-                    if _k and _k not in os.environ:
-                        os.environ[_k] = _v
-        except Exception:
-            pass
+        if os.path.exists(env_path):
+            _apply_env_file(env_path)
 
 
 _load_dotenv()
@@ -210,6 +215,15 @@ def tokenize(text, use_dict=True):
     return toks
 
 
+def _expand_one(token, seen, expanded):
+    """单个别名种子的一层扩展（W1237 拆 def·条件逐字未改）。"""
+    for canon in ALIAS_INDEX.get(token, ()):
+        for al in ALIASES[canon]:
+            if len(al) >= 2 and al not in seen:
+                expanded.append(al)
+                seen.add(al)
+
+
 def expand_query(query):
     """查询别名扩展：返回 [原始分词, ...扩展别名]，用于召回。"""
     qt = tokenize(query, use_dict=True)
@@ -217,11 +231,7 @@ def expand_query(query):
     seen = set(qt)
     for t in qt:
         if t in ALIAS_INDEX:
-            for canon in ALIAS_INDEX[t]:
-                for al in ALIASES[canon]:
-                    if len(al) >= 2 and al not in seen:
-                        expanded.append(al)
-                        seen.add(al)
+            _expand_one(t, seen, expanded)
     return expanded
 
 
@@ -229,22 +239,30 @@ def expand_query(query):
 # 1. 语料层（BM25 向量检索，纯 stdlib）
 # ============================================================
 
+def _read_md(p):
+    """读一个 markdown 文件；读失败 → None（W1237 拆 def·异常口径不变）。"""
+    try:
+        with open(p, encoding="utf-8") as f:
+            return f.read()
+    except Exception:
+        return None
+
+
 def _load_docs():
     docs = []
     for base, _, files in os.walk(DOCS_DIR):
         for fn in files:
-            if fn.lower().endswith(".md"):
-                p = os.path.join(base, fn)
-                try:
-                    with open(p, encoding="utf-8") as f:
-                        text = f.read()
-                except Exception:
-                    continue
-                rel = os.path.relpath(p, ROOT)
-                headings = [re.sub(r'^#{1,6}\s*', '', ln).strip()
-                            for ln in text.splitlines()
-                            if re.match(r'^#{1,6}\s', ln)]
-                docs.append({"path": rel, "text": text, "headings": headings})
+            if not fn.lower().endswith(".md"):
+                continue
+            p = os.path.join(base, fn)
+            text = _read_md(p)
+            if text is None:
+                continue
+            rel = os.path.relpath(p, ROOT)
+            headings = [re.sub(r'^#{1,6}\s*', '', ln).strip()
+                        for ln in text.splitlines()
+                        if re.match(r'^#{1,6}\s', ln)]
+            docs.append({"path": rel, "text": text, "headings": headings})
     return docs
 
 

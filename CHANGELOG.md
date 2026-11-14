@@ -1,3 +1,17 @@
+### W1237（2026-11-15）：嵌套块棘轮批：PLR1702 十九条全清零（十二文件十四处拆 helper·判定逐字未改），并回填上一批台账
+
+**本批要点**（W1237 嵌套块棘轮批·W1233 登记「触碰即消」族的整批清偿）：
+
+> - **① 基线（先复现再动手）**：宽档 `scripts/guardrails/ruff-structure.toml` 的 PLR1702（`max-nested-blocks=4`）实测 **19 条 / 12 文件 / 14 处**——`xiyouji_rag.py` 独占 3 处（74/218/234），其余每文件 1-2 处。W1233 曾把 20 条登记为「渐进棘轮·触碰即消」，本批即整批清偿。
+> - **② 手法统一（判据逐字未改）**：每处都是把**最内层**的循环或条件移到 helper，或改成早退 `continue`、先读后判（把 `with open(...)` 内的 `for` 提到外层，避免 `try/with/for/if` 四层叠加）。公开签名、打印序、计数口径一律不变：`lint_links` 的「每个链接恰好一行 OK/BROKEN/FIXED」契约与 `export_design_tokens` 排除 `meta.generated` 的对账口径都原样保留。
+> - **③ 逐处验证（不是只看 ruff 变绿）**：`check_chapter_stats_sync` / `check_chart_data` / `check_chart_colorblind` / `check_embedded_stale_markers` / `check_parser_anchor_coverage` 五个 `--self-test` 全过；`export_design_tokens --check` 0 差异；`lint_links --dir docs` 5626 链接 0 broken；`review_sweep` 0 命中；`verify --scope full` 79 段 0 FAIL。
+> - **④ 过程自证（当轮踩坑当轮修）**：`export_design_tokens` 首改把 `if readonly:` 整段替换成新函数头 ⇒ 函数体被切断（`for d in diffs:` 悬空成语法错）。**处置=单文件 `git checkout --` 回退后重做**，没有在坏结构上继续打补丁。教训：跨函数体边界的替换**不得以「函数头」为锚**（会连带吞掉上文），锚点必须完整覆盖被替换区。
+> - **⑤ 连带：守卫的「触碰即被拦」又抓到 3 处**：本批改动使 `check_content_consistency` 与 `lint_links` 进入嵌套推导式扫描面 ⇒ 首跑 guardrails 即 FAIL（2 处 + 1 处 generator-comprehension）。处置=拆 `_is_node_array` / `_is_link_array` / `_is_excluded` 三个谓词函数（判定逐字不变），嵌套深度归零。**没有**用豁免或调阈值绕过。
+> - **⑥ 终态**：宽档四规则（复杂度/嵌套/分支/语句）0 条 · 风格档 0 条 · 嵌套推导式 0 处 · 第 42 槽/第 45 槽/第 51 槽等连带面 0 FAIL。
+> - **⑦ 回填**：W1236 台账 hash/末笔格回填（单笔 64a94b3e6·铁律 21①）。
+> - **验证**：见 ③；宽档与风格档双双 All checks passed。
+> - **文件**：见 file-index。
+
 ### W1236（2026-11-15）：CI 首跑红清偿批：浏览器探针自测改挂 e2e job + pytest 侧接线守卫，并回填上一批台账
 
 **本批要点**（W1236 CI 首跑红清偿批·PR #183 首跑抓到·本地绿/CI 红同族）：
@@ -769,7 +783,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1236），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1237），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

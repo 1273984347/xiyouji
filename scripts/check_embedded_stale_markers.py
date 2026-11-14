@@ -45,21 +45,31 @@ MARKERS = [
 ]
 
 
+def _iter_scope_files(root, scopes):
+    """按 scopes 顺序产出 glob 命中的文件（W1237 拆 def·顺序与去重语义留在调用方）。"""
+    for pat in scopes:
+        yield from glob.glob(os.path.join(root, pat), recursive=True)
+
+
+def _mark_lines(f, mark):
+    """该文件内命中标记的行号列表（W1237 拆 def·匹配方式逐字未改）。"""
+    with open(f, encoding="utf-8", errors="replace") as fh:
+        text = fh.read()
+    return [lineno for lineno, ln in enumerate(text.split("\n"), 1) if mark in ln]
+
+
 def scan(root: str) -> list:
     """返回 [(marker, note, file, lineno)]。"""
     hits = []
     for mark, note, scopes in MARKERS:
         seen = set()
-        for pat in scopes:
-            for f in glob.glob(os.path.join(root, pat), recursive=True):
-                rf = os.path.relpath(f, root).replace(os.sep, "/")
-                if rf in seen:
-                    continue
-                seen.add(rf)
-                text = open(f, encoding="utf-8", errors="replace").read()
-                for lineno, ln in enumerate(text.split("\n"), 1):
-                    if mark in ln:
-                        hits.append((mark, note, rf, lineno))
+        for f in _iter_scope_files(root, scopes):
+            rf = os.path.relpath(f, root).replace(os.sep, "/")
+            if rf in seen:
+                continue
+            seen.add(rf)
+            for lineno in _mark_lines(f, mark):
+                hits.append((mark, note, rf, lineno))
     return hits
 
 

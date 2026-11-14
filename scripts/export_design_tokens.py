@@ -197,6 +197,31 @@ def _sources_with_decls(decls):
     return srcs
 
 
+def _diff_one(path, expected):
+    """单个产物的只读对拍 → 差异清单（W1237 拆 def·比对口径逐字未改）。
+
+    W1105 盲审必修：日期戳是**导出时点**而非内容 ⇒ 比对时排除 `meta.generated`
+    （否则隔天跑 --check 必红：内容零变化但日期变了 ⇒ 本批明示交付的「只读对账」
+    特性在次日即不可用）。排除后仍按结构比对 ⇒ 内容真变化照样判红。
+    """
+    rel = path.relative_to(ROOT)
+    if not path.exists():
+        return [str(rel) + " 不存在"]
+    actual = path.read_text(encoding="utf-8")
+    if path != OUT_JSON:
+        return [] if actual == expected else [str(rel) + " 内容与本次导出不一致"]
+    try:
+        a = json.loads(actual)
+        e = json.loads(expected)
+    except ValueError:
+        return [] if actual == expected else [str(rel) + " 内容与本次导出不一致"]
+    a.get("meta", {}).pop("generated", None)
+    e.get("meta", {}).pop("generated", None)
+    if a != e:
+        return [str(rel) + " 内容与本次导出不一致（已排除 meta.generated 日期戳）"]
+    return []
+
+
 def main() -> int:
     check_count = "--check-count" in sys.argv
     # W1105：--check 只读模式——审查/复算时不得写盘（原先只有 main() 一条路径
@@ -238,28 +263,7 @@ def main() -> int:
         exp_json = json.dumps(payload, ensure_ascii=False, indent=1)
         diffs = []
         for path, expected in ((OUT_JSON, exp_json), (OUT_MD, md)):
-            rel = path.relative_to(ROOT)
-            if not path.exists():
-                diffs.append(str(rel) + " 不存在")
-                continue
-            actual = path.read_text(encoding="utf-8")
-            if path == OUT_JSON:
-                # W1105 盲审必修：日期戳是**导出时点**而非内容 ⇒ 比对时排除
-                # `meta.generated`（否则隔天跑 --check 必红：内容零变化但日期变了
-                # ⇒ 本批明示交付的「只读对账」特性在次日即不可用）。
-                # 排除后仍按结构比对 ⇒ 内容真变化照样判红。
-                try:
-                    a = json.loads(actual)
-                    e = json.loads(expected)
-                    a.get("meta", {}).pop("generated", None)
-                    e.get("meta", {}).pop("generated", None)
-                    if a != e:
-                        diffs.append(str(rel) + " 内容与本次导出不一致（已排除 meta.generated 日期戳）")
-                except ValueError:
-                    if actual != expected:
-                        diffs.append(str(rel) + " 内容与本次导出不一致")
-            elif actual != expected:
-                diffs.append(str(rel) + " 内容与本次导出不一致")
+            diffs.extend(_diff_one(path, expected))
         for d in diffs:
             print("FAIL  " + d)
         if diffs:

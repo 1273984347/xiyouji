@@ -242,8 +242,8 @@ def check_page(path: Path) -> list[str]:
     claim_list = claims(text)
 
     arrays = arrays_in_js(js)
-    node_arrays = [a for a in arrays if a and all(("id" in x or "name" in x) for x in a)]
-    link_arrays = [a for a in arrays if a and all(("source" in x and "target" in x) for x in a)]
+    node_arrays = [a for a in arrays if _is_node_array(a)]
+    link_arrays = [a for a in arrays if _is_link_array(a)]
 
     fails: list[str] = []
     fails += _rule_nodes_vs_arrays(text, claim_list, node_arrays, link_arrays)
@@ -311,6 +311,16 @@ def load_baseline() -> set[str]:
     return out
 
 
+def _is_node_array(a):
+    """节点数组判据（每项含 id 或 name）。W1237：拆出以消嵌套推导式·判定不变。"""
+    return bool(a) and all(("id" in x or "name" in x) for x in a)
+
+
+def _is_link_array(a):
+    """边数组判据（每项含 source 与 target）。W1237：拆出以消嵌套推导式·判定不变。"""
+    return bool(a) and all(("source" in x and "target" in x) for x in a)
+
+
 def l1(gate: bool = False) -> int:
     pages = sorted(SITE.rglob("*.html"))
     # _template/_shell 模板壳；dukou-engine 为 Agent 控制台元页面（全文是开发术语，非内容声明页）
@@ -345,6 +355,18 @@ def l1(gate: bool = False) -> int:
 
 # ---------- L2 对账（静态 / 运行时共用比较内核） ----------
 
+def _compare_list_item(key, i, a, b):
+    """单元素对拍 → 问题串（None = 无问题）。W1237 拆 def·判定逐字未改。"""
+    if isinstance(a, dict) and isinstance(b, dict):
+        for k in list(a)[:6]:
+            if k in b and a[k] != b[k]:
+                return f"{key}[{i}].{k}: 页 {a[k]!r} vs dataset {b[k]!r}"
+        return None
+    if a != b:
+        return f"{key}[{i}]: 页 {a!r} vs dataset {b!r}"
+    return None
+
+
 def _compare_embedded_vs_dataset(embedded: dict, source: dict) -> list[str]:
     """同名顶层键对账内核（每页每键最多 8 项）：list 比长度+逐元素字段，dict 比前 6 字段。
 
@@ -363,13 +385,9 @@ def _compare_embedded_vs_dataset(embedded: dict, source: dict) -> list[str]:
                 checked += 1
                 continue
             for i, (a, b) in enumerate(zip(ev, sv, strict=False)):
-                if isinstance(a, dict) and isinstance(b, dict):
-                    for k in list(a)[:6]:
-                        if k in b and a[k] != b[k]:
-                            mism.append(f"{key}[{i}].{k}: 页 {a[k]!r} vs dataset {b[k]!r}")
-                            break
-                elif a != b:
-                    mism.append(f"{key}[{i}]: 页 {a!r} vs dataset {b!r}")
+                issue = _compare_list_item(key, i, a, b)
+                if issue:
+                    mism.append(issue)
                 checked += 1
                 if checked >= 8:
                     break

@@ -94,6 +94,21 @@ def strip_js_comments(js):
     return re.sub(r'(?m)//.*$', ' ', js)
 
 
+def _check_sankey_refs(html, path, incs):
+    """R1 引用面：sankey 脚本引用存在性（W1237 拆 def·判定逐字未改）。"""
+    if not incs:
+        return ['R1 调用 d3.sankey 但未引用 d3-sankey 脚本']
+    in_site = os.path.realpath(path).startswith(os.path.realpath(os.path.join(ROOT, 'site')) + os.sep)
+    if not in_site:
+        return []
+    fails = []
+    for rel in set(incs):
+        fp = os.path.normpath(os.path.join(os.path.dirname(path), rel))
+        if not os.path.exists(fp):
+            fails.append(f'R1 引用的 sankey 脚本不存在: {rel}')
+    return fails
+
+
 def check_page(path, r3_scope=None):
     """返回 fails 列表。path 为绝对路径；r3_scope=None 时按 site/data 辖区自动判定。"""
     fails = []
@@ -104,16 +119,7 @@ def check_page(path, r3_scope=None):
     # R1: sankey 调用 ↔ 脚本引用
     js_all = ' '.join(re.findall(r'<script[\s\S]*?</script>', html))
     if SANKEY_CALL.search(strip_js_comments(js_all)):
-        incs = SANKEY_INC.findall(html)
-        if not incs:
-            fails.append('R1 调用 d3.sankey 但未引用 d3-sankey 脚本')
-        else:
-            in_site = os.path.realpath(path).startswith(os.path.realpath(os.path.join(ROOT, 'site')) + os.sep)
-            if in_site:
-                for rel in set(incs):
-                    fp = os.path.normpath(os.path.join(os.path.dirname(path), rel))
-                    if not os.path.exists(fp):
-                        fails.append(f'R1 引用的 sankey 脚本不存在: {rel}')
+        fails.extend(_check_sankey_refs(html, path, SANKEY_INC.findall(html)))
     # R2: 饼图措辞 × treemap 实现 × 无弧形实现
     if PIE_WORDS.search(visible) and TREEMAP.search(html) and not ARC.search(html) and not PIE_IMPL.search(html):
         words = sorted(set(PIE_WORDS.findall(visible)))

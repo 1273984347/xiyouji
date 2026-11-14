@@ -49,22 +49,30 @@ def page_embedded():
     raise AssertionError("EMBEDDED_DATA 块未闭合")
 
 
+def _compare_value(k, fresh_v, page_v):
+    """单键对拍 → 问题串（None = 无问题）。W1237 拆 def·判定逐字未改。"""
+    if isinstance(fresh_v, list):
+        if len(fresh_v) != len(page_v):
+            return "per_chapter 长度 %d != %d" % (len(fresh_v), len(page_v))
+        for a, b in zip(fresh_v, page_v, strict=False):
+            if a != b:
+                return "%s 条目漂移：%s != %s" % (
+                    k, json.dumps(a, ensure_ascii=False), json.dumps(b, ensure_ascii=False))
+        return None
+    if page_v != fresh_v:
+        return "标量 %s 漂移：%r != %r" % (k, fresh_v, page_v)
+    return None
+
+
 def flat_check(fresh, page):
     issues = []
     for k, v in fresh.items():
         if k not in page:
             issues.append("页面缺键 %s" % k)
             continue
-        if isinstance(v, list):
-            if len(v) != len(page[k]):
-                issues.append("per_chapter 长度 %d != %d" % (len(v), len(page[k])))
-            else:
-                for a, b in zip(v, page[k], strict=False):
-                    if a != b:
-                        issues.append("%s 条目漂移：%s != %s" % (k, json.dumps(a, ensure_ascii=False), json.dumps(b, ensure_ascii=False)))
-                        break
-        elif page[k] != v:
-            issues.append("标量 %s 漂移：%r != %r" % (k, v, page[k]))
+        issue = _compare_value(k, v, page[k])
+        if issue:
+            issues.append(issue)
     for k in page:
         if k not in fresh:
             issues.append("页面多键 %s" % k)

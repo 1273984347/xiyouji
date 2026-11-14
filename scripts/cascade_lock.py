@@ -34,6 +34,24 @@ import time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def _gitdir_from_pointer(path):
+    """从 `.git` 指针文件里解析真实 gitdir；解析不到/非目录 → None（W1237 拆 def·判定不变）。"""
+    try:
+        with open(path, encoding="utf-8") as fh:
+            lines = fh.read().splitlines()
+    except OSError:
+        return None
+    for line in lines:
+        if not line.startswith("gitdir:"):
+            continue
+        gd = line.split(":", 1)[1].strip()
+        if not os.path.isabs(gd):
+            gd = os.path.join(ROOT, gd)
+        if os.path.isdir(gd):
+            return gd
+    return None
+
+
 def _git_dir():
     """真实 git 目录（worktree 兼容·W1105 实证）。
 
@@ -48,18 +66,7 @@ def _git_dir():
     p = os.path.join(ROOT, ".git")
     if os.path.isdir(p):
         return p
-    try:
-        with open(p, encoding="utf-8") as fh:
-            for line in fh:
-                if line.startswith("gitdir:"):
-                    gd = line.split(":", 1)[1].strip()
-                    if not os.path.isabs(gd):
-                        gd = os.path.join(ROOT, gd)
-                    if os.path.isdir(gd):
-                        return gd
-    except OSError:
-        pass
-    return p
+    return _gitdir_from_pointer(p) or p
 
 
 LOCK = os.path.join(_git_dir(), "cascade.lock")

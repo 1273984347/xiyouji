@@ -332,6 +332,35 @@ def token_map_light() -> dict[str, str]:
     return tm
 
 
+def _palette_lab_cache(colors, token_map):
+    """预计算模拟态 Lab（W1237 拆 def·每色每模拟一次·配对复用）。"""
+    lab_cache: dict[tuple[str, str], tuple[float, float, float]] = {}
+    for hx, src in colors:
+        rgb = to_rgb(src, token_map) or _hex_to_rgb(hx)
+        for kind in SIM_MATRICES:
+            lab_cache[(hx, kind)] = _rgb_to_lab(simulate(rgb, kind))
+    return lab_cache
+
+
+def _pair_violations(colors, lab_cache):
+    """两两配对判定（W1237 拆 def·阈值与取最优模拟态逐字未改）。"""
+    violations = []
+    for i in range(len(colors)):
+        for j in range(i + 1, len(colors)):
+            (hx1, src1), (hx2, src2) = colors[i], colors[j]
+            best = (1e9, "")
+            for kind in SIM_MATRICES:
+                de = ciede2000(lab_cache[(hx1, kind)], lab_cache[(hx2, kind)])
+                if de < best[0]:
+                    best = (de, kind)
+            if best[0] < THRESHOLD:
+                violations.append({
+                    "a": hx1, "b": hx2, "delta_e": round(best[0], 1), "sim": best[1],
+                    "src": f"{src1} × {src2}",
+                })
+    return violations
+
+
 def analyze(pages: list[Path], token_map: dict[str, str]) -> dict[str, dict]:
     out = {}
     for p in pages:
@@ -340,25 +369,7 @@ def analyze(pages: list[Path], token_map: dict[str, str]) -> dict[str, dict]:
         violations = []
         if not info["exempt"]:
             colors = sorted(info["palette"].items())
-            # 预计算模拟态 Lab（每色每模拟一次·配对复用——全页 O(n²) 对不重算模拟）
-            lab_cache: dict[tuple[str, str], tuple[float, float, float]] = {}
-            for hx, src in colors:
-                rgb = to_rgb(src, token_map) or _hex_to_rgb(hx)
-                for kind in SIM_MATRICES:
-                    lab_cache[(hx, kind)] = _rgb_to_lab(simulate(rgb, kind))
-            for i in range(len(colors)):
-                for j in range(i + 1, len(colors)):
-                    (hx1, src1), (hx2, src2) = colors[i], colors[j]
-                    best = (1e9, "")
-                    for kind in SIM_MATRICES:
-                        de = ciede2000(lab_cache[(hx1, kind)], lab_cache[(hx2, kind)])
-                        if de < best[0]:
-                            best = (de, kind)
-                    if best[0] < THRESHOLD:
-                        violations.append({
-                            "a": hx1, "b": hx2, "delta_e": round(best[0], 1), "sim": best[1],
-                            "src": f"{src1} × {src2}",
-                        })
+            violations = _pair_violations(colors, _palette_lab_cache(colors, token_map))
         out[str(p.relative_to(ROOT)).replace("\\", "/")] = {
             "exempt": info["exempt"],
             "palette_size": len(info["palette"]),

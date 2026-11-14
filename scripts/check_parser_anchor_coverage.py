@@ -88,6 +88,18 @@ CHECKS = [
 ]
 
 
+def _blind_samples(f, t, raws, ancs):
+    """位置敏感机制的盲区样本（W1237 拆 def·判据逐字未改）。"""
+    anc_starts = {m.start() for m in ancs}
+    samples = []
+    for m in raws:
+        if m.start() in anc_starts:
+            continue
+        ls = t.rfind("\n", 0, m.start()) + 1
+        samples.append("%s :: %s" % (os.path.basename(f), t[ls:ls + 64].replace("\n", "⏎")))
+    return samples
+
+
 def sweep():
     """跑全部机制 → (报告行, 盲区数)。"""
     lines, blind_total = [], 0
@@ -105,11 +117,7 @@ def sweep():
             raw_n += len(raws)
             anc_n += len(ancs)
             if c["pos_sensitive"]:
-                anc_starts = {m.start() for m in ancs}
-                for m in raws:
-                    if m.start() not in anc_starts:
-                        ls = t.rfind("\n", 0, m.start()) + 1
-                        samples.append("%s :: %s" % (os.path.basename(f), t[ls:ls + 64].replace("\n", "⏎")))
+                samples.extend(_blind_samples(f, t, raws, ancs))
         if raw_n == anc_n and not samples:
             lines.append("  %-24s 覆盖完整（%d/%d）" % (c["name"], anc_n, raw_n))
         else:

@@ -81,3 +81,4 @@
 + W1234 审计登记 E2E 接线决策清偿：第二套件接入 e2e-interaction job 纯离线真渲染断言 + 五处前置元素缺失不再静默降级 + w266 互链断言修正 + test_visual 裁决 manual 保留 + 回填四批台账 hash·无 workflow 结构改动）。
 + W1235 品牌守卫判定面收窄与明文中性化，清偿推送前自查发现的 CI Security 预红，并回填上一批台账 hash·无 workflow 结构改动）。
 + W1236 CI 首跑抓到两件浏览器探针自测在无浏览器作业里必红，改挂有 chromium 的 e2e job 并加接线守卫·无 workflow 结构改动）。
++ W1237 宽档 PLR1702 十九条全清零，十二个脚本按拆 helper 与早退降嵌套，判定逐字未改·无 workflow 结构改动）。
