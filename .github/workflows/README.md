@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1235** — 西游记解读项目（`D:\xiyouji`，W1235）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1236** — 西游记解读项目（`D:\xiyouji`，W1236）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -19,7 +19,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
-> **W450-W1235**：verify 门禁体系扩展（区间号滚动推进自本行；逐批明细自 W1157 起追加 [archive/docs/workflows-readme-history.md](../../archive/docs/workflows-readme-history.md)，原单行累计已拆档）。
+> **W450-W1236**：verify 门禁体系扩展（区间号滚动推进自本行；逐批明细自 W1157 起追加 [archive/docs/workflows-readme-history.md](../../archive/docs/workflows-readme-history.md)，原单行累计已拆档）。
 
 ## 1. 工作流列表
 
@@ -103,6 +103,7 @@
 - **依赖**：`npm ci --prefix scripts` + `npx playwright install --with-deps chromium`（缓存 `~/.cache/ms-playwright`·key 绑 scripts/package-lock.json·复用 W421 模式）
 - **流程**：`node tests/e2e/test_site_quality.js`——22 项 file:// 断言（A1-A8 交互 + K9-K11 数据/动效 + W676 三项回归·无 API_PORT 在线依赖·require 已按 paths 解析 scripts/node_modules）+ W1234 增补第二套件 `node tests/e2e/test_visualization_assertions.js`（6 页 × 12 条真渲染具名族断言·纯离线 route-abort·独立于 check_chart_values 的交叉验证路径）
 - **W1234 SKIP→FAIL**：test_site_quality 五处「前置元素缺失 console.log 降级」改为 check(false) 计 bad——页面回归删元素即暴露，不再静默降级（审计 #16 SKIP 改 FAIL 落地）
+- **W1236 浏览器探针自测**：`python scripts/chart_render_probe.py --self-test` + `python scripts/visual_regression_probe.py --self-test`——两件探针的自测要真 chromium，原挂 pytest-unit（该 job 按 W401 分工不装浏览器）⇒ 本机绿/CI 红；改挂本 job 真跑（复用已装 chromium 与系统库），pytest 侧由 `test_browser_self_tests_wired_in_ci` 机器保证「移出去 ≠ 没人跑」
 - **首波范围纪律（D-02）**：只接 1 个套件证「接线可行且 CI 绿」再扩面；`test_graph.js`/`test_newfeatures.js` 需 Express 服务（API_PORT）、`test_w266_e2e_extended.js` 依赖未声明的 `@playwright/test`，按计划 R-03/R-04 排除出首波；视觉回归套件（test_visual.js·W773 已升级像素判据）**裁决 manual 保留**（W1234：10 页与 screenshot-review 全站截图审查高度重叠·CI 增量分钟收益低；判据稳定且增量明确时再评估接入）
 - **机器防线**：`tests/unit/test_ci_wiring.py` W6 断言锚定本 job 的 `run:` 块（删步骤/改 echo 即红·负样本实测）
 

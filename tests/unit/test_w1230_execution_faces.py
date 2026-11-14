@@ -33,10 +33,13 @@ SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-# —— 15 件带 --self-test 的脚本：subprocess 真跑自测（退出码 0 = 自测全过）——
+# —— 13 件带 --self-test 的脚本：subprocess 真跑自测（退出码 0 = 自测全过）——
+# W1236：原 15 件里 chart_render_probe / visual_regression_probe 两件是**浏览器探针**
+# （自测要 pw.chromium.launch()），而本 job 按 W401 分工不装浏览器 ⇒ 本地绿 / CI 红。
+# 二者移入 BROWSER_SELF_TEST_SCRIPTS，改由 e2e-interaction job 真跑（那 job 已有 chromium）；
+# 由 test_browser_self_tests_wired_in_ci 机器保证「移出去 ≠ 没人跑」。
 SELF_TEST_SCRIPTS = [
     "archive_tier2.py",
-    "chart_render_probe.py",
     "check_archive_health.py",
     "check_backlog_review.py",
     "check_data_copy_chain.py",
@@ -49,6 +52,11 @@ SELF_TEST_SCRIPTS = [
     "gen_tools_inventory.py",
     "obs_sample.py",
     "safe_commit.py",
+]
+
+# —— 2 件浏览器探针：自测必须在有 chromium 的 job 跑（W1236·E-84 本地绿/CI 红同族）——
+BROWSER_SELF_TEST_SCRIPTS = [
+    "chart_render_probe.py",
     "visual_regression_probe.py",
 ]
 
@@ -104,6 +112,20 @@ def test_self_test_scripts(name):
 def test_self_test_surface_non_empty():
     """解析面非空（fail-closed）：自测清单至少 10 件——防清单被清空后全绿假象。"""
     assert len(SELF_TEST_SCRIPTS) >= 10
+
+
+def test_browser_self_tests_wired_in_ci():
+    """W1236：浏览器探针自测移出本 job 后，必须在 CI 里有**真跑**的命令面。
+
+    判据：`.github/workflows/ci.yml` 的同一行里既有 `scripts/<探针名>` 又有 `--self-test`。
+    防的是「本地绿/CI 红」的处置退化成「把用例删掉就绿了」——移出 pytest 必须换到
+    有 chromium 的 job 里真跑，否则等于把执行面从覆盖里摘掉（第 42 槽会被蒙骗）。
+    """
+    ci = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    for name in BROWSER_SELF_TEST_SCRIPTS:
+        wired = [ln for ln in ci.splitlines()
+                 if ("scripts/%s" % name) in ln and "--self-test" in ln]
+        assert wired, "ci.yml 无 %s --self-test 的真跑命令（移出 pytest 后必须落到有浏览器的 job）" % name
 
 
 def test_import_faces_are_real_modules():

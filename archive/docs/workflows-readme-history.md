@@ -80,3 +80,4 @@
 + W1233 审计专批复杂度巨债清偿：gen_folder_docs 29 / tmpe_tidy 19 / cross_line_rewrite 18 / j1 18 / 16 档×3 全部拆 helper 消号，判定逻辑逐字未改，各专项测试全过·无 workflow 结构改动）。
 + W1234 审计登记 E2E 接线决策清偿：第二套件接入 e2e-interaction job 纯离线真渲染断言 + 五处前置元素缺失不再静默降级 + w266 互链断言修正 + test_visual 裁决 manual 保留 + 回填四批台账 hash·无 workflow 结构改动）。
 + W1235 品牌守卫判定面收窄与明文中性化，清偿推送前自查发现的 CI Security 预红，并回填上一批台账 hash·无 workflow 结构改动）。
++ W1236 CI 首跑抓到两件浏览器探针自测在无浏览器作业里必红，改挂有 chromium 的 e2e job 并加接线守卫·无 workflow 结构改动）。
