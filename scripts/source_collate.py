@@ -88,8 +88,8 @@ def matrix_rows():
         if not d:
             near = [x["name"] for x in ds if name[:2] == x["name"][:2]]
             tags.append("ds缺名" + ("（近似：%s）" % "、".join(near) if near else ""))
-        if d and ds_by_name and d.get("index") != i:
-            tags.append("ds序=%d" % d["index"])
+        if d and ds_by_name and d.get("n") != i:
+            tags.append("ds序=%d" % d["n"])
         rows.append((i, name, ds_name, ds_ch, "；".join(tags)))
     extra = [d for d in ds if d["name"] not in nanbo.values()]
     return rows, extra
@@ -103,7 +103,7 @@ def fmt_full():
         hui_txt = hui.get(dch, "—") if isinstance(dch, int) else (hui.get(int(dch), "—") if str(dch).isdigit() else "—")
         out.append("| %d | %s | %s | %s | %s | %s |" % (i, name, dsn or "—", dch or "—", hui_txt, tags or "—"))
     for d in extra:
-        out.append("| — | — | %s | %s | — | **ds 多出项**（index=%d） |" % (d["name"], d["chapter"], d["index"]))
+        out.append("| — | — | %s | %s | — | **ds 多出项**（n=%d） |" % (d["name"], d["chapter"], d["n"]))
     return "\n".join(out), rows, extra
 
 
@@ -116,7 +116,7 @@ def fmt_entity(name):
             hits.append("难簿：第 %d 难「%s」" % (i, n))
     if name in ds:
         d = ds[name]
-        hits.append("dataset：%s（index=%s·chapter=%s）" % (d["name"], d["index"], d["chapter"]))
+        hits.append("dataset：%s（n=%s·chapter=%s）" % (d["name"], d["n"], d["chapter"]))
         ch = d["chapter"]
         if str(ch).isdigit():
             hits.append("回目：第 %03d 回 %s" % (int(ch), load_huimu().get(int(ch), "—")))
@@ -129,9 +129,9 @@ def fmt_chap(a, b):
     ds = [d for d in load_dataset() if str(d["chapter"]).isdigit() and a <= int(d["chapter"]) <= b]
     hui = load_huimu()
     out = []
-    for d in sorted(ds, key=lambda x: x["index"]):
+    for d in sorted(ds, key=lambda x: x["n"]):
         ch = int(d["chapter"])
-        out.append("- 难簿相关 index=%s「%s」→ 第 %03d 回 %s" % (d["index"], d["name"], ch, hui.get(ch, "—")))
+        out.append("- 难簿相关 n=%s「%s」→ 第 %03d 回 %s" % (d["n"], d["name"], ch, hui.get(ch, "—")))
     return "\n".join(out) or "区间内无难目"
 
 

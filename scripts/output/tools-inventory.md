@@ -4,7 +4,7 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-14 17:56
+生成时间：2026-11-14 20:38
 
 共 **215** 件（门禁与校验 102 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
 
@@ -44,7 +44,7 @@
 | `check_dashboard_kpi.py` | check_dashboard_kpi.py — 第 68 门禁 · 首页 KPI 与统计快照对拍（W1170） |
 | `check_data_badge_coverage.py` | check_data_badge_coverage.py — 第 66 门禁 · 数据徽标覆盖（W1167 · MVP 迁移批③） |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
-| `check_data_drift.js` | ---------------- JS 字面量 → JSON 规范化 ---------------- |
+| `check_data_drift.js` | W1231：单行形态回退——V8 执行式重写产出 compact 单行对象，多行正则（要求 |
 | `check_dataset_manifest.py` | 第 63 门禁：dataset 清单与 schema 对拍（README ↔ 磁盘 / 量纲 / 端点 / 空值 / 废弃标记）。 |
 | `check_dataset_provenance.py` | 人物关系数据溯源校验器（W1138 建·W1141 挂第 61 槽）。 |
 | `check_db_schema.py` | check_db_schema.py — DB schema 门禁（W917 建置·B-DB-05 清偿）。 |

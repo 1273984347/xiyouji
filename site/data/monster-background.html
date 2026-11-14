@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-KvQYWmNWRx2DEXKKi0E1FY0YPsYkd1gfstHv/QDm6E4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0mos2Q8oJsjoWUbMvxzDsO6uJTXYoMETpAyOMq/yLOw=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪后台论 · 详解西游记</title>
@@ -1995,104 +1995,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 /* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
 var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
 
-    const EMBEDDED = {
-        background: {
-            concept_name: "妖怪后台论",
-            english_name: "Monster Background Theory",
-            definition: "西游记最尖锐的社会讽刺——有后台的妖怪都被救走，没后台的妖怪都被打死。后台强度决定生死，实力只是次要因素。",
-            background_types: [
-                {
-                    id: "celestial",
-                    name: "天庭坐骑/神兽",
-                    english_name: "Celestial Mounts",
-                    count: 16,
-                    survival_rate: 100,
-                    avg_power: 8.5,
-                    background_strength: 9,
-                    color: "#c8463a",
-                    examples: ["青牛精(老君坐骑)", "九灵元圣(太乙天尊坐骑)", "黄袍怪(奎木狼)", "赛太岁(观音坐骑)", "青狮(文殊坐骑)"]
-                },
-                {
-                    id: "disciple",
-                    name: "佛道弟子/童子",
-                    english_name: "Disciples/Attendants",
-                    count: 12,
-                    survival_rate: 100,
-                    avg_power: 8.2,
-                    background_strength: 8,
-                    color: "#3a6b8c",
-                    examples: ["金角银角(老君童子)", "黄眉老怪(弥勒童子)", "红孩儿(妖二代→观音收编)", "灵感大王(观音莲池)"]
-                },
-                {
-                    id: "local",
-                    name: "地方神祇/亲属",
-                    english_name: "Local Deities/Kin",
-                    count: 8,
-                    survival_rate: 87.5,
-                    avg_power: 7.0,
-                    background_strength: 6,
-                    color: "#C9A063",
-                    examples: ["牛魔王(结拜兄弟)", "铁扇公主(罗刹女)", "玉兔精(嫦娥宠物)", "黑熊精(自修→观音收守山)"]
-                },
-                {
-                    id: "wild",
-                    name: "无背景野生",
-                    english_name: "Wild Demons",
-                    count: 33,
-                    survival_rate: 9.1,
-                    avg_power: 6.8,
-                    background_strength: 1,
-                    color: "#6B6455",
-                    examples: ["白骨精", "虎力大仙", "蜘蛛精七姐妹", "蟒蛇精", "六耳猕猴"]
-                }
-            ],
-            type_stats: {
-                total: 69,
-                with_background: 36,
-                without_background: 33,
-                with_background_survival_rate: 97.2,
-                without_background_survival_rate: 9.1,
-                survival_gap: 10.7
-            }
-        },
-        cases: {
-            concept_name: "典型案例对比",
-            case_list: [
-                { name: "青牛精", background: "太上老君坐骑", background_type: "celestial", outcome: "老君亲临收伏", survived: true, chapter: "第50-52回", power: 9, crime: "偷金刚琢·套取诸天法宝·绑架唐僧" },
-                { name: "金角银角", background: "太上老君炼丹童子", background_type: "disciple", outcome: "老君收回", survived: true, chapter: "第32-35回", power: 8, crime: "持紫金红葫芦·玉净瓶·绑架唐僧" },
-                { name: "红孩儿", background: "牛魔王之子→观音收编", background_type: "disciple", outcome: "观音收为善财童子", survived: true, chapter: "第40-42回", power: 8, crime: "三昧真火·差点烧死悟空" },
-                { name: "黄眉老怪", background: "弥勒佛童子", background_type: "disciple", outcome: "弥勒收回", survived: true, chapter: "第65-66回", power: 9, crime: "金铙人种袋·困诸天神将" },
-                { name: "九灵元圣", background: "太乙救苦天尊坐骑", background_type: "celestial", outcome: "天尊收回", survived: true, chapter: "第88-90回", power: 10, crime: "九曲盘桓洞·收六狮孙" },
-                { name: "白骨精", background: "无", background_type: "wild", outcome: "被打死", survived: false, chapter: "第27回", power: 3, crime: "三变骗唐僧·离间师徒" },
-                { name: "虎力大仙", background: "无", background_type: "wild", outcome: "比试败死", survived: false, chapter: "第44-46回", power: 5, crime: "车迟国迫害和尚·斗法" },
-                { name: "蜘蛛精", background: "无", background_type: "wild", outcome: "被打死", survived: false, chapter: "第72-73回", power: 4, crime: "濯垢泉色诱·蜈蚣精同谋" },
-                { name: "六耳猕猴", background: "无（冒充）", background_type: "wild", outcome: "如来识破被杀", survived: false, chapter: "第57-58回", power: 9, crime: "假冒悟空·篡夺取经成果" },
-                { name: "蝎子精", background: "无", background_type: "wild", outcome: "昴日星官杀", survived: false, chapter: "第55回", power: 7, crime: "琵琶洞逼婚·蜇伤悟空八戒" }
-            ]
-        },
-        outcomes: {
-            concept_name: "处置方式分析",
-            outcome_types: [
-                { type: "归还原主", english_name: "Returned to Owner", count: 18, percentage: 26.1, color: "#3a6b8c", typical_cases: ["青牛精→老君", "金角银角→老君", "黄眉→弥勒"], verdict: "象征性教育·无实质惩罚" },
-                { type: "收编/收伏", english_name: "Recruited", count: 8, percentage: 11.6, color: "#6B8E5A", typical_cases: ["红孩儿→善财童子", "黑熊精→守山神", "牛魔王→归降"], verdict: "体制吸收·改换身份" },
-                { type: "降职处分", english_name: "Demoted", count: 3, percentage: 4.3, color: "#C9A063", typical_cases: ["奎木狼→烧火", "白龙马→驮马", "天蓬元帅→猪八戒"], verdict: "轻判·后复职" },
-                { type: "直接击杀", english_name: "Killed", count: 33, percentage: 47.8, color: "#c8463a", typical_cases: ["白骨精", "蜘蛛精", "虎力大仙", "蝎子精"], verdict: "野生妖怪的唯一结局" },
-                { type: "逃脱/失踪", english_name: "Escaped", count: 7, percentage: 10.1, color: "#6B6455", typical_cases: ["九头虫逃北海", "碧波潭驸马党羽"], verdict: "少数侥幸逃脱" }
-            ]
-        },
-        insights: {
-            concept_name: "核心洞察",
-            insight_list: [
-                "妖怪命运的决定因素不是实力而是关系——白骨精实力最弱(3)被打死，九灵元圣实力最强(10)却被收走",
-                "天庭的「临时工」机制——坐骑下凡作恶，原主不担责，坐骑不偿命，受害者无赔偿，是典型的「权力寻租」",
-                "处置方式呈二元结构——有后台的「收走/收编」，无后台的「打死/杀掉」，中间仅 4.3% 降职处分作为过渡（如奎木狼烧火、白龙马驮马）",
-                "金翅大鹏雕是特权司法的极端案例——灭狮驼国一国百姓，因是佛祖亲属反被封护法（注：此案例未纳入 69 名统计样本，作为制度极端例证单独引用）",
-                "六耳猕猴是「冒充后台」的反面教材——无后台却冒充有后台（悟空），最终被如来识破击杀",
-                "观音是「收编大户」——红孩儿/黑熊精/灵感大王，她倾向于「体制吸收」而非「击杀」",
-                "妖怪后台强度与存活率呈强正相关——后台强度 9→存活率 100%，后台强度 1→存活率 9.1%"
-            ]
-        }
-    };
+    const EMBEDDED = {"background":{"concept_name":"妖怪后台论","english_name":"Monster Background Theory","definition":"西游记最尖锐的社会讽刺——有后台的妖怪都被救走，没后台的妖怪都被打死。后台强度决定生死，实力只是次要因素。","background_types":[{"id":"celestial","name":"天庭坐骑/神兽","english_name":"Celestial Mounts","count":16,"survival_rate":100,"avg_power":8.5,"background_strength":9,"color":"#c8463a","examples":["青牛精(老君坐骑)","九灵元圣(太乙天尊坐骑)","黄袍怪(奎木狼)","赛太岁(观音坐骑)","青狮(文殊坐骑)"]},{"id":"disciple","name":"佛道弟子/童子","english_name":"Disciples/Attendants","count":12,"survival_rate":100,"avg_power":8.2,"background_strength":8,"color":"#3a6b8c","examples":["金角银角(老君童子)","黄眉老怪(弥勒童子)","红孩儿(妖二代→观音收编)","灵感大王(观音莲池)"]},{"id":"local","name":"地方神祇/亲属","english_name":"Local Deities/Kin","count":8,"survival_rate":87.5,"avg_power":7,"background_strength":6,"color":"#C9A063","examples":["牛魔王(结拜兄弟)","铁扇公主(罗刹女)","玉兔精(嫦娥宠物)","黑熊精(自修→观音收守山)"]},{"id":"wild","name":"无背景野生","english_name":"Wild Demons","count":33,"survival_rate":9.1,"avg_power":6.8,"background_strength":1,"color":"#6B6455","examples":["白骨精","虎力大仙","蜘蛛精七姐妹","蟒蛇精","六耳猕猴"]}],"type_stats":{"total":69,"with_background":36,"without_background":33,"with_background_survival_rate":97.2,"without_background_survival_rate":9.1,"survival_gap":10.7}},"cases":{"concept_name":"典型案例对比","case_list":[{"name":"青牛精","background":"太上老君坐骑","background_type":"celestial","outcome":"老君亲临收伏","survived":true,"chapter":"第50-52回","power":9,"crime":"偷金刚琢·套取诸天法宝·绑架唐僧"},{"name":"金角银角","background":"太上老君炼丹童子","background_type":"disciple","outcome":"老君收回","survived":true,"chapter":"第32-35回","power":8,"crime":"持紫金红葫芦·玉净瓶·绑架唐僧"},{"name":"红孩儿","background":"牛魔王之子→观音收编","background_type":"disciple","outcome":"观音收为善财童子","survived":true,"chapter":"第40-42回","power":8,"crime":"三昧真火·差点烧死悟空"},{"name":"黄眉老怪","background":"弥勒佛童子","background_type":"disciple","outcome":"弥勒收回","survived":true,"chapter":"第65-66回","power":9,"crime":"金铙人种袋·困诸天神将"},{"name":"九灵元圣","background":"太乙救苦天尊坐骑","background_type":"celestial","outcome":"天尊收回","survived":true,"chapter":"第88-90回","power":10,"crime":"九曲盘桓洞·收六狮孙"},{"name":"白骨精","background":"无","background_type":"wild","outcome":"被打死","survived":false,"chapter":"第27回","power":3,"crime":"三变骗唐僧·离间师徒"},{"name":"虎力大仙","background":"无","background_type":"wild","outcome":"比试败死","survived":false,"chapter":"第44-46回","power":5,"crime":"车迟国迫害和尚·斗法"},{"name":"蜘蛛精","background":"无","background_type":"wild","outcome":"被打死","survived":false,"chapter":"第72-73回","power":4,"crime":"濯垢泉色诱·蜈蚣精同谋"},{"name":"六耳猕猴","background":"无（冒充）","background_type":"wild","outcome":"如来识破被杀","survived":false,"chapter":"第57-58回","power":9,"crime":"假冒悟空·篡夺取经成果"},{"name":"蝎子精","background":"无","background_type":"wild","outcome":"昴日星官杀","survived":false,"chapter":"第55回","power":7,"crime":"琵琶洞逼婚·蜇伤悟空八戒"}]},"outcomes":{"concept_name":"处置方式分析","outcome_types":[{"type":"归还原主","english_name":"Returned to Owner","count":18,"percentage":26.1,"color":"#3a6b8c","typical_cases":["青牛精→老君","金角银角→老君","黄眉→弥勒"],"verdict":"象征性教育·无实质惩罚"},{"type":"收编/收伏","english_name":"Recruited","count":8,"percentage":11.6,"color":"#5a7a3a","typical_cases":["红孩儿→善财童子","黑熊精→守山神","牛魔王→归降"],"verdict":"体制吸收·改换身份"},{"type":"降职处分","english_name":"Demoted","count":3,"percentage":4.3,"color":"#7a5230","typical_cases":["奎木狼→烧火","白龙马→驮马","天蓬元帅→猪八戒"],"verdict":"轻判·后复职"},{"type":"直接击杀","english_name":"Killed","count":33,"percentage":47.8,"color":"#c8463a","typical_cases":["白骨精","蜘蛛精","虎力大仙","蝎子精"],"verdict":"野生妖怪的唯一结局"},{"type":"逃脱/失踪","english_name":"Escaped","count":7,"percentage":10.1,"color":"#6b5e4d","typical_cases":["九头虫逃北海","碧波潭驸马党羽"],"verdict":"少数侥幸逃脱"}]},"insights":{"concept_name":"核心洞察","insight_list":["妖怪命运的决定因素不是实力而是关系——白骨精实力最弱(3)被打死，九灵元圣实力最强(10)却被收走","天庭的「临时工」机制——坐骑下凡作恶，原主不担责，坐骑不偿命，受害者无赔偿，是典型的「权力寻租」","处置方式呈二元结构——有后台的「收走/收编」，无后台的「打死/杀掉」，中间几乎没有过渡","金翅大鹏雕是特权司法的极端案例——灭狮驼国一国百姓，因是佛祖亲属反被封护法（注：此案例未纳入 69 名统计样本，作为制度极端例证单独引用）","六耳猕猴是「冒充后台」的反面教材——无后台却冒充有后台（悟空），最终被如来识破击杀","观音是「收编大户」——红孩儿/黑熊精/灵感大王，她倾向于「体制吸收」而非「击杀」","妖怪后台强度与存活率呈强正相关——后台强度 9→存活率 100%，后台强度 1→存活率 9.1%"]}};
 
     // ===== loadJson: fetch first, fallback to EMBEDDED =====
     async function loadJson(path, fallback) {

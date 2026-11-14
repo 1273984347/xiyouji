@@ -2,7 +2,7 @@
 
 > 来源：`site/data/*.html` 的 `EMBEDDED_DATA` 快照 + 人工整理件；
 > 本索引由 `scripts/gen_dataset_index.py` 从磁盘实读生成（禁手改）。
-> 当前规模：根级 43 个 JSON + `entities/` 2 个 JSON，合计 2692.3 KB。
+> 当前规模：根级 43 个 JSON + `entities/` 2 个 JSON，合计 2700.8 KB。
 
 ## 概览
 
@@ -14,9 +14,9 @@
 
 | 文件 | 条目数 | 大小 | 键数 | 主要键 |
 |------|-------|------|------|--------|
-| 81-hardships.json | 6 | 17.0 KB | 6 | by_cause、by_difficulty、by_ending、cross_cause_ending、hardships、total |
+| 81-hardships.json | 6 | 16.7 KB | 6 | by_cause、by_difficulty、by_ending、cross_cause_ending、hardships、total |
 | ai-dialogue.json | 3 | 20.3 KB | 3 | celebrities、journey_quotes、quick_topics |
-| cave-estate.json | 4 | 16.3 KB | 4 | by_owner_rank、by_region、caves、top_luxury |
+| cave-estate.json | 4 | 19.7 KB | 4 | by_owner_rank、by_region、caves、top_luxury |
 | century-dialogue.json | 2 | 1.8 KB | 2 | roundtable_topics、triangle_dialogue |
 | chapter-structure-graph.json | 5 | 8.1 KB | 5 | cluster、heatmap、kpi、meta、wordCount |
 | chapters-metadata.json | 2 | 47.2 KB | 2 | chapters、meta |
@@ -36,7 +36,7 @@
 | journey-geo-semiotics.json | 2 | 1.9 KB | 2 | links、nodes |
 | journey-map-interactive.json | 3 | 6.3 KB | 3 | kpi、meta、nodes |
 | language-style-radar.json | 5 | 2.8 KB | 5 | characters、dimensions、kpi、meta、pca |
-| magic-system.json | 5 | 16.3 KB | 5 | magic_arrays、magic_energy_sankey、magic_fire、magic_system、magic_treasures |
+| magic-system.json | 5 | 16.4 KB | 5 | magic_arrays、magic_energy_sankey、magic_fire、magic_system、magic_treasures |
 | material-archaeology.json | 4 | 26.6 KB | 4 | artifact_materials、cave_architecture、costume_archaeology、summary |
 | ming-political-thought-comparison.json | 8 | 5.8 KB | 8 | _schema、heatmap、kpi、meta、polar、radar… |
 | monster-capability-radar.json | 7 | 6.0 KB | 7 | bar、kpi、kpi_extreme、meta、radar、sankey… |

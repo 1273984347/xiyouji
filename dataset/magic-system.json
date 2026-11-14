@@ -74,7 +74,7 @@
       "intensity": 10,
       "range": "近中程·烟伤人",
       "weakness": "观音净瓶杨柳水·四海龙王水",
-      "kills": "无直接战绩，逼退孙悟空",
+      "combat_record": "无直接战绩，逼退孙悟空",
       "chapter": 41
     },
     {
@@ -84,7 +84,7 @@
       "intensity": 10,
       "range": "炉内·范围极广",
       "weakness": "无所克制（悟空在巽位逃过）",
-      "kills": "可炼悟空七七四十九日不死",
+      "combat_record": "可炼悟空七七四十九日不死",
       "chapter": 7
     },
     {
@@ -94,7 +94,7 @@
       "intensity": 1,
       "range": "近·限灶膛",
       "weakness": "水即可灭",
-      "kills": "无",
+      "combat_record": "无",
       "chapter": 16
     },
     {
@@ -104,7 +104,7 @@
       "intensity": 8,
       "range": "八百里火焰山",
       "weakness": "芭蕉扇·四十九搧",
-      "kills": "烧损人物",
+      "combat_record": "烧损人物",
       "chapter": 59
     },
     {
@@ -114,7 +114,7 @@
       "intensity": 7,
       "range": "百里·能瞎悟空眼",
       "weakness": "灵吉菩萨定风丹·飞龙杖",
-      "kills": "无直接战绩",
+      "combat_record": "无直接战绩",
       "chapter": 21
     }
   ],

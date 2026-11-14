@@ -1,3 +1,18 @@
+### W1231（2026-11-14）：单侧键 schema 分歧清理批：数据漂移门禁 v4 面板配对 + embed_json 三重根修 + 476 条隐性值漂移修复 + dataset 对齐生成面
+
+**本批要点**（W1231 单侧键 schema 分歧清理批·审计专批 2026-11-06 登记清偿·用户令开工）：
+
+> - **① 实证先行（侦察 subagent 只读取证）**：1702 条单侧键三态分类——零顶层键重叠复合包壳 889（页面 EMBEDDED 是 N 文档收进一对象）/ 数组↔对象 570（生成面裸数组·页面包壳）/ 部分重叠 243（真 schema 分歧）——85.5% 是判据配对形态差而非脏数据；两侧生成链定位：EMBEDDED 为历批手工嵌入快照（embed_json）、scripts/output/data 由 run_all 生成（gitignore 面）、dataset 纯手工无写入器。
+> - **② 门禁 v4 根修（修判据·非加豁免）**：`pairForCompare` 根级配对前置——包壳找键集全等面板、数组↔对象找同形数组成员，唯一命中才降级配对（歧义回落根级不猜）；设计性单侧键族豁免（`_schema`/`link_endpoint_schema`/`*_status`——W1141 起 dataset 溯源注记按设计只加在 JSON 面）；单行形态回退正则（V8 重写的 compact 对象·保护面守恒 60 页/151 对比项实测）。`--self-test` 8 例含负样本入 pytest。
+> - **③ embed_json 三重根修（本批最大根因发现）**：(a) 模式只认 `EMBEDDED` 名——实测 46 页用 `EMBEDDED_DATA`，工具对它们自出生起不可用；(b) 逐字符括号深度计数（含字符串感知中途版）在「洞察文案含引号/括号混排」页面边界失步——第一轮 replace 实测损坏 17 页（全量语法复查抓出·git restore 回滚后 V8 执行式重写修复），根修为行锚定成员定位（embed_json 自家 insert 的既定行格式）；(c) **replace off-by-one**：`find_field_bounds` 返回含闭合括号索引、`replace_key` 却 `html[val_end:]` 再拼一次 ⇒ 每次 replace 产出 `}}`/`]]` ⇒ 页面语法损坏 ⇒ **「JSON 改稿后页面 EMBEDDED 从未重灌」的全仓现象正是此 bug 的累积后果**（旧工具一重灌就坏页 ⇒ 快照永远停在旧版 ⇒ 476 条隐性值漂移）。4 例回归锁入 pytest（含刁钻夹具：字符串内花括号/注释括号/数组值面板/roundtrip）。
+> - **④ 476 条隐性值漂移修复**：24 面板按生成面权威重灌（aesthetics colors/styles、cave-estate caves/top_luxury/by_owner_rank/by_region、game-webnovel、karma、monster-background、music-structure、narrative-experiment、philosophy、power-resources、relationships faction/cooccurrence/timeline、risk、social-media、text-evolution versions、visual-art heart_sutra/scent_map、workplace trip_report/wukong_resume、timeline、jurisprudence sentencing、ethics-consumption monster_ipo）——jurisprudence 文案旧稿与「车池国→车迟国」错别字即此族实锤。
+> - **⑤ dataset 面对齐**：4 文件对齐生成面（cave-estate 四键合成 / timeline 22→36 项 / music-structure 五键合成 / text-evolution versions+variants+authors）——零注记键整体重写，W1149 状态键（subordinates_status/field_status）按 chapter/version 名从 HEAD 回合 8 条（第 63 门禁 C4 实测拦截后根修）；2 文件键改名向站侧对齐（81-hardships `index`→`n` ×81、magic-system `kills`→`combat_record` ×5，W566 先例方向，source_collate 6 消费点联动）；部署副本 47 件 sync 清零；dataset/README 生成器刷新。
+> - **⑥ 过程拦截自证**：第 51 槽（提交范围）在 W1230 已实证；本批第 63 槽 C4 抓住「对齐洗掉状态键」16 FAIL → 状态键回合根修 → 0 FAIL；第 10 槽全站内联语法 859 文件 OK（vm 重写后单行形态也在判据内）；CSP 19 页漂移随 generate_csp 重算归零。
+> - **⑦ 终态**：漂移 0 FAIL / 60 页全保护 / 单侧键 NOTE 1702→168（余量=dataset 手工摘录与页面复合面板的设计性分歧·摘要通道可见不判红·数据面对齐登记后续按需）；pytest W1231 回归锁 5 例全绿；guardrails 五项全过。
+> - **登记去向**：V8 执行式重写工具未入仓（tmpe 应急件·24h TTL）——embed_json replace 根修后日常重灌走 embed_json；单行形态页面（本批 24 面板重灌产物）如需再重灌，embed_json 行锚定对单行形态报「未找到」（fail-closed）——届时按门禁同款提取+V8 执行重建另批转正。
+> - **验证**：node check_data_drift.js rc=0（60 页/151 对比项·0 FAIL）· --self-test 8/8；node check_js_syntax.js --all 859 文件 OK；generate_csp --check 0 漂移；61/63 槽 0 FAIL；ruff/guardrails 全过；pytest 新增 5 例全绿。
+> - **文件**：见 file-index。
+
 ### W1230（2026-11-14）：脚本接线/归档裁决批：第 42 槽 47 行 W1155 存量清偿 + packaging 同步接线 + 品牌守卫盲区根修
 
 **本批要点**（W1230 脚本接线/归档裁决批·审计专批 2026-11-06 登记「48 件未接线脚本接线/归档决策」清偿·用户令开工）：
@@ -764,7 +779,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1230），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1231），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

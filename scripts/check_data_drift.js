@@ -17,8 +17,16 @@
  * （`页面 ⇄ 源 路径`·[N]→[*] 归一）豁免双形态设计项。语义：基线内豁免、基线外任何
  * 新深层漂移即失败（no-new-drift）。
  *
+ * v4（W1231·审计专批「单侧键 1702 条 schema 分歧清理」）：W1155 的单侧键摘要通道把
+ * 三类「配对形态差」误计为分歧（实测三态：零顶层键重叠复合包壳 889 / 数组↔对象 570 /
+ * 部分重叠 243）⇒ ① 根级配对前置（pairForCompare）：零重叠包壳找「键集全等面板」、
+ * 数组↔对象找「元素键集/长度同形数组成员」，唯一命中才降级配对（歧义即回落根级·不猜）；
+ * ② 设计性单侧键族豁免（_schema / link_endpoint_schema / *_status——W1141 起 dataset
+ * 溯源注记按设计只加在 JSON 面）；③ 单侧键摘要通道语义不变（NOTE 可见不判红），
+ * 剩余 NOTE 即真 schema 分歧（数据面对齐另批）。自测：--self-test（8 例·含负样本）。
+ *
  * 用法：node scripts/check_data_drift.js
- * 退出码：0 = 通过（或全部不可比）；1 = 发现漂移
+ * 退出码：0 = 通过（或全部不可比）；1 = 发现漂移；2 = 自测失败（--self-test）
  * 仅依赖 Node 标准库。不可比页面（无内嵌块/无对应 JSON）计为跳过，不阻断。
  */
 'use strict';
@@ -36,6 +44,10 @@ const DRIFT_BASELINE_PATH = path.join(PROJECT_ROOT, 'scripts', 'output', 'data-d
 /** 部署副本数基线（新增 fetch 目标须同步副本后更新此值）。 */
 const EXPECTED_DEPLOYED_COPY_COUNT = 47;
 const EMBEDDED_BLOCK_RE = /const\s+(EMBEDDED_DATA|EMBEDDED)\s*=\s*(\{[\s\S]*?\n\s*\});/;
+// W1231：单行形态回退——V8 执行式重写产出 compact 单行对象，多行正则（要求
+// `\n\s*});`）对其失配 ⇒ 页面被误计「无内嵌块」跳过（保护面 60→43 实测）。
+// 多行优先、失配再试单行（同一行内闭合·不含换行的 lazy 域）。
+const EMBEDDED_BLOCK_RE_SINGLE_LINE = /const\s+(EMBEDDED_DATA|EMBEDDED)\s*=\s*(\{[^\n]*\})\s*;/;
 const JSON_REF_RE = /['"]([A-Za-z0-9_/.-]+\.json)['"]/g;
 const DEPLOYED_COPY_REF_RE = /['"](?:\.\.\/)*(?:\.\/)?(?:data\/)?json\/([A-Za-z0-9_/.-]+\.json)['"]/g;
 const FETCH_LITERAL_RE = /fetch\(\s*['"]([^'"]+\.json)['"]\s*\)/g;
@@ -103,15 +115,20 @@ function jsLiteralToJson(raw) {
 
 /** 提取页面内嵌数据对象。解析失败返回 null。 */
 function extractEmbedded(html) {
-  const m = html.match(EMBEDDED_BLOCK_RE);
-  if (!m) return null;
-  const jsonish = jsLiteralToJson(m[2]);
-  if (jsonish === null) return null;
-  try {
-    return JSON.parse(jsonish);
-  } catch {
-    return null;
+  // W1231：多行形态优先；匹配成功但规范化/解析失败时回退单行形态
+  // （V8 执行式重写的 compact 单行对象——多行正则的 lazy 捕获可能提前截断）。
+  for (const re of [EMBEDDED_BLOCK_RE, EMBEDDED_BLOCK_RE_SINGLE_LINE]) {
+    const m = html.match(re);
+    if (!m) continue;
+    const jsonish = jsLiteralToJson(m[2]);
+    if (jsonish === null) continue;
+    try {
+      return JSON.parse(jsonish);
+    } catch {
+      continue;
+    }
   }
+  return null;
 }
 
 // ---------------- 比对 ----------------
@@ -134,6 +151,71 @@ function compareTopLevelArrayLengths(label, embedded, json) {
  */
 // W1155（深度审计 #11）：单侧键摘要通道（计数可见·不进 FAIL·清理为后续批）
 const singleSideNotes = [];
+
+// W1231：设计性单侧键族——W1141 起 dataset 溯源注记按设计只加在 JSON 面
+// （_schema 量纲声明 / sankey.link_endpoint_schema 端点索引 / *_status 溯源状态）。
+// 这类键的「仅 json」不是分歧，记 NOTE 只会淹没真分歧。
+function isDesignedSingleSideKey(k) {
+  return k === '_schema' || k === 'link_endpoint_schema' || k.endsWith('_status');
+}
+
+function sameKeySet(a, b) {
+  const ka = Object.keys(a).sort();
+  const kb = Object.keys(b).sort();
+  return ka.length === kb.length && ka.every((k, i) => k === kb[i]);
+}
+
+/** 对象数组成员的元素键集指纹（首元素非平面对象时返回 null）。 */
+function elementKeySetFingerprint(arr) {
+  if (!arr.length || !arr[0] || typeof arr[0] !== 'object' || Array.isArray(arr[0])) return null;
+  return Object.keys(arr[0]).sort().join(',');
+}
+
+/**
+ * W1231 根级配对前置：把「页面复合包壳 ⇄ 单文档」与「数组↔对象」两类形态差
+ * 降级到真实同层的层上比（唯一命中才配对·歧义即回落根级·不猜）。
+ * 返回 [{a, b, path}] —— 逐项走 deepDiff。
+ */
+function pairForCompare(embedded, json) {
+  const root = '$';
+  const embIsArr = Array.isArray(embedded);
+  const jsonIsArr = Array.isArray(json);
+  if (embIsArr !== jsonIsArr) {
+    // 数组↔对象：在对象侧找与数组同形的数组成员（元素键集同形优先·长度一致兜底）
+    const obj = embIsArr ? json : embedded;
+    const arr = embIsArr ? embedded : json;
+    let picked = null;
+    const want = elementKeySetFingerprint(arr);
+    if (want) {
+      const byShape = Object.keys(obj).filter(
+        (k) => Array.isArray(obj[k]) && elementKeySetFingerprint(obj[k]) === want
+      );
+      if (byShape.length === 1) picked = byShape[0];
+    }
+    if (picked === null) {
+      const byLen = Object.keys(obj).filter((k) => Array.isArray(obj[k]) && obj[k].length === arr.length);
+      if (byLen.length === 1) picked = byLen[0];
+    }
+    if (picked !== null) {
+      return embIsArr
+        ? [{ a: embedded, b: json[picked], path: root }]
+        : [{ a: embedded[picked], b: json, path: `${root}.${picked}` }];
+    }
+    return [{ a: embedded, b: json, path: root }];
+  }
+  if (!embIsArr) {
+    // 双对象：零顶层键重叠 ⇒ 找 embedded 中键集与 json 根键集全等的包壳面板
+    const overlap = Object.keys(embedded).filter((k) => k in json).length;
+    if (overlap > 0) return [{ a: embedded, b: json, path: root }];
+    const panels = Object.keys(embedded).filter((k) => {
+      const v = embedded[k];
+      return v && typeof v === 'object' && !Array.isArray(v) && sameKeySet(v, json);
+    });
+    if (panels.length === 1) return [{ a: embedded[panels[0]], b: json, path: `${root}.${panels[0]}` }];
+    return [{ a: embedded, b: json, path: root }];
+  }
+  return [{ a: embedded, b: json, path: root }];
+}
 
 function deepDiff(embedded, json, label, acc, depth = 0) {
   if (depth > 8) return;
@@ -162,10 +244,14 @@ function deepDiff(embedded, json, label, acc, depth = 0) {
     for (const k of keys) {
       // W1155（深度审计 #11）：单侧键原实现直接 continue ⇒ 键漂移永不报。改记入
       // **单侧键摘要通道**（计数+样例可见·不进 FAIL）——首轮升 FAIL 实测命中 1702 条
-      // 存量 schema 分歧（n/index 改名、_schema 增补等历史形态），一刀 FAIL 不可执行；
-      // 全量清理登记为后续批（单侧键≠值漂移·共享键的值差异仍走 acc FAIL）。
+      // 存量 schema 分歧，一刀 FAIL 不可执行。
+      // W1231：设计性单侧键族（_schema/link_endpoint_schema/*_status）静默跳过——
+      // W1141 起 dataset 溯源注记按设计只加在 JSON 面·非分歧；配对形态差已在
+      // pairForCompare 降级，剩余 NOTE 即真 schema 分歧（数据面对齐另批）。
       if (!(k in embedded) || !(k in json)) {
-        singleSideNotes.push(label + '.' + k + '（单侧键：' + (k in embedded ? '仅内嵌' : '仅 json') + '）');
+        if (!isDesignedSingleSideKey(k)) {
+          singleSideNotes.push(label + '.' + k + '（单侧键：' + (k in embedded ? '仅内嵌' : '仅 json') + '）');
+        }
         continue;
       }
       deepDiff(embedded[k], json[k], `${label}.${k}`, acc, depth + 1);
@@ -268,20 +354,24 @@ function comparePageAgainstJson(embedded, jsonPath, pageStem, driftBaseline, dee
     return null;
   }
   const label = `${pageStem} ⇄ ${path.basename(jsonPath)}`;
-  topLevelIssues.push(...compareTopLevelArrayLengths(label, embedded, json));
 
-  const acc = [];
-  deepDiff(embedded, json, '$', acc);
-  if (singleSideNotes.length) {
-    console.log(`  · 单侧键（schema 分歧·NOTE 计 ${singleSideNotes.length}·样例：${singleSideNotes.slice(0, 3).join(' | ')}）`);
-    singleSideNotes.length = 0;
-  }
+  // W1231：根级配对前置——包壳/数组形态差降级到真实同层再比（歧义回落根级）
   let baselined = 0;
-  for (const item of acc) {
-    const colon = item.indexOf(': ');
-    const pth = normalizeDriftPath(item.slice(0, colon));
-    if (driftBaseline.has(`${label} ${pth}`)) baselined++;
-    else deepIssues.push(`${label} ${item}`);
+  for (const pr of pairForCompare(embedded, json)) {
+    topLevelIssues.push(...compareTopLevelArrayLengths(`${label}${pr.path === '$' ? '' : pr.path}`, pr.a, pr.b));
+
+    const acc = [];
+    deepDiff(pr.a, pr.b, pr.path, acc);
+    if (singleSideNotes.length) {
+      console.log(`  · 单侧键（schema 分歧·NOTE 计 ${singleSideNotes.length}·样例：${singleSideNotes.slice(0, 3).join(' | ')}）`);
+      singleSideNotes.length = 0;
+    }
+    for (const item of acc) {
+      const colon = item.indexOf(': ');
+      const pth = normalizeDriftPath(item.slice(0, colon));
+      if (driftBaseline.has(`${label} ${pth}`)) baselined++;
+      else deepIssues.push(`${label} ${item}`);
+    }
   }
   return { baselined };
 }
@@ -323,7 +413,74 @@ function checkDeployedCopies(pages) {
 
 // ---------------- 主流程 ----------------
 
+// ---------------- 自测（W1231·8 例含负样本·不读真实仓） ----------------
+
+function selfTest() {
+  const acc = [];
+  const notes = singleSideNotes;
+  let fails = 0;
+  let cases = 0;
+  const check = (cond, note) => {
+    cases++;
+    if (!cond) { fails++; console.log('FAIL  ' + note); } else { console.log('OK    ' + note); }
+  };
+  const notesAfter = (fn) => {
+    const before = notes.length;
+    fn();
+    const n = notes.splice(before).length;
+    const accCopy = acc.slice();
+    acc.length = 0;
+    return { n, acc: accCopy };
+  };
+
+  // ① 零重叠包壳·唯一键集全等面板 → 降级配对·0 NOTE·0 acc
+  const wrapped = { meta: { x: 1 }, panel: { a: 1, b: [1, 2] } };
+  const doc = { a: 1, b: [1, 2] };
+  let r = notesAfter(() => { const pr = pairForCompare(wrapped, doc)[0]; deepDiff(pr.a, pr.b, pr.path, acc); });
+  check(r.n === 0 && r.acc.length === 0, '① 包壳面板配对：0 NOTE / 0 acc（实测 NOTE=' + r.n + ' acc=' + r.acc.length + '）');
+
+  // ② 零重叠包壳·面板与文档有真值差 → 配对后共路标量差异进 acc
+  const doc2 = { a: 1, b: [1, 9] };
+  const pr2 = pairForCompare(wrapped, doc2)[0];
+  r = notesAfter(() => deepDiff(pr2.a, pr2.b, pr2.path, acc));
+  check(r.acc.length === 1 && /b\[1\]/.test(r.acc[0]), '② 包壳配对后真值漂移仍 FAIL 面（acc=' + r.acc.length + '）');
+
+  // ③ 数组↔对象（元素键集唯一命中）→ 降级配对
+  const embArrSide = { rhythm: [{ k: 1, v: 'a' }, { k: 2, v: 'b' }], other: 3 };
+  const jsonArr = [{ k: 1, v: 'a' }, { k: 2, v: 'X' }];
+  const pr3 = pairForCompare(embArrSide, jsonArr)[0];
+  r = notesAfter(() => deepDiff(pr3.a, pr3.b, pr3.path, acc));
+  check(pr3.path === '$.rhythm' && r.acc.length === 1 && r.n === 0, '③ 数组↔对象配对：路径 $.rhythm·真值差进 acc（path=' + pr3.path + '）');
+
+  // ④ 数组↔对象歧义（两个同形数组成员）→ 回落根级·按单侧键记 NOTE
+  const amb = { arr1: [{ k: 1 }], arr2: [{ k: 1 }] };
+  r = notesAfter(() => { const pr4 = pairForCompare(amb, [{ k: 1 }])[0]; deepDiff(pr4.a, pr4.b, pr4.path, acc); });
+  check(r.n >= 2, '④ 歧义回落根级：单侧键 NOTE 记录（NOTE=' + r.n + '）');
+
+  // ⑤ 设计性单侧键族豁免：_schema / link_endpoint_schema / *_status 不记 NOTE
+  r = notesAfter(() => deepDiff({ total: 1 }, { total: 1, _schema: { w: 'max' }, link_endpoint_schema: 'index', quote_status: 'verified' }, '$', acc));
+  check(r.n === 0, '⑤ 设计性单侧键族豁免（_schema/link_endpoint_schema/*_status·NOTE=' + r.n + '）');
+
+  // ⑥ 真实单侧键仍记 NOTE
+  r = notesAfter(() => deepDiff({ onlyEmb: 1, shared: 2 }, { onlyJson: 2, shared: 2 }, '$', acc));
+  check(r.n === 2, '⑥ 真实单侧键仍记 NOTE（NOTE=' + r.n + '）');
+
+  // ⑦ 共路标量漂移仍进 acc（FAIL 面·语义不变）
+  r = notesAfter(() => deepDiff({ v: 1 }, { v: 2 }, '$', acc));
+  check(r.acc.length === 1 && r.n === 0, '⑦ 共路标量漂移进 acc（acc=' + r.acc.length + '）');
+
+  // ⑧ 数组长度漂移进 acc
+  r = notesAfter(() => deepDiff({ list: [1, 2, 3] }, { list: [1, 2] }, '$', acc));
+  check(r.acc.length === 1 && /数组长度/.test(r.acc[0]), '⑧ 数组长度漂移进 acc（acc=' + r.acc.length + '）');
+
+  console.log('self-test: ' + (cases - fails) + '/' + cases + ' 通过');
+  return fails ? 2 : 0;
+}
+
 function main() {
+  if (process.argv.includes('--self-test')) {
+    process.exit(selfTest());
+  }
   const pages = fs.readdirSync(SITE_DATA_DIR).filter((f) => f.endsWith('.html')).sort();
   const driftBaseline = loadDriftBaseline();
 
