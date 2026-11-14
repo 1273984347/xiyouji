@@ -1,3 +1,14 @@
+### W1227（2026-11-14）：Draft Release 处置批＝用户令「删」执行（T-1 弧线彻底闭环）
+
+**本批要点**（W1227 Draft Release 处置批·用户令「删」执行）：
+
+> - **① 定位**：W1226 T-1 批登记的遗留项「未发布 Draft Release『桌面版 v2.3.0』待用户单独裁决」——用户令「删」⇒ 本批执行并落记录。
+> - **② 动作**：`gh release delete v2.3.0 --yes`（未发布草稿·10 资产·引用 tagName 已随 T-1 成僵尸引用）；实测 `gh release list` **空**——GitHub Releases 面清零（下个桌面版发布由 workflow 打新 tag 重新产出全部资产·无不可再生数据）。
+> - **③ 手册同步**：T-1 执行结果行补记（§1.3 速览 + §6.1 执行结果）——**T-1 弧线彻底闭环·施工手册零遗留**。
+> - **④ 验证**：verify 全量核心绿；pytest 全量绿；lint_links 0 broken。
+> - **文件**：见 file-index。
+
+
 ### W1226（2026-11-14）：远端 tag v2.3.0 清理批＝T-1 落地（用户令批准）
 
 **本批要点**（W1226 T-1 远端 tag v2.3.0 清理批·用户令批准）：
@@ -703,7 +714,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1226），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1227），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
