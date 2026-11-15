@@ -178,9 +178,9 @@
 | archive/docs/CHANGELOG-ARCHIVE.md | W1245 | 第 74 槽腾窗：迁 2 段入归档 |
 | archive/docs/file-index-ARCHIVE.md | W1245 | 第 74 槽腾窗：迁 2 段入归档 |
 
-| assets/promo/silk-hero-set/ + 族文档 + promo 目录 + T103 报告 + 对账表 + HANDOVER + CITATION + workflows README + docs/INDEX + file-index + spec | W1244 | 古画绢本 Hero 横幅素材族 12 张成套（母版 5472×3072 jpg ×12 + 站点用 1920×1078 webp ×12·画风古画绢本·朱砂石青·题材 3/3/3/3）·含 T103 报告与登记面 |
 | scripts/output/（stats.json·stats-changelog·stats-index）+ scripts/output/INDEX.md·README.md + docs/INDEX.md + 中英文搜索索引 | W1248 | stats 刷新（变更 1 键·标记面 12 处）·文档索引重建（890 篇）·输出目录清单刷新·中英文站内搜索索引重建 |
 ## W1244 古画绢本 Hero 横幅素材族 12 张成套（2026-11-15）
+| assets/promo/silk-hero-set/ + 族文档 + promo 目录 + T103 报告 + 对账表 + HANDOVER + CITATION + workflows README + docs/INDEX + file-index + spec | W1244 | 古画绢本 Hero 横幅素材族 12 张成套（母版 5472×3072 jpg ×12 + 站点用 1920×1078 webp ×12·画风古画绢本·朱砂石青·题材 3/3/3/3）·含 T103 报告与登记面 |
 
 | 文件 | W | 说明 |
 |---|---|---|
