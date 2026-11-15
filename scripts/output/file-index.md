@@ -2889,3 +2889,17 @@
 | site/index.html | W1181 | 改：级联/目录刷新产物 |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。
+
+| assets/promo/silk-hero-set/ | W1244 | 新增 12 张 16:9 横幅成套（母版 5472×3072 jpg ×12 + 站点用 1920×1078 webp ×12·画风古画绢本·朱砂石青·题材 3/3/3/3） |
+| assets/promo/silk-hero-set/README.md | W1244 | 族说明：规格·留白实测 25%–35%·AIGC 标识·v1→v2 参考图重做记录·遗留瑕疵 6 条 |
+| assets/promo/silk-hero-set/INDEX.md | W1244 | 目录索引（生成器刷新） |
+| assets/promo/README.md | W1244 | 新增「古画绢本 Hero 族」小节（未上线口径·体积·留白实测） |
+| assets/promo/INDEX.md | W1244 | promo 目录索引刷新（新增子目录） |
+| docs/11-方案报告/ | W1244 | 新增 T103 任务计划执行与经验沉淀报告 + §六 登记（件数 119→120） |
+| docs/00-导读/W批次编号对账表.md | W1244 | W1244 认领行（台账腾窗迁 W1184 入归档） |
+| HANDOVER.md | W1244 | 交接头链与「一、当前进度」推进 W1244（概要块滚最老一块） |
+| CITATION.cff | W1244 | version 推进 W1244 |
+| .github/workflows/README.md | W1244 | 头部版本与里程碑推进 W1244 |
+| docs/INDEX.md | W1244 | 文档索引重建（890 篇） |
+| scripts/output/ | W1244 | file-index 本批登记 + 目录索引刷新 + 本批 spec |
+| CHANGELOG.md | W1244 | 本批段 |
