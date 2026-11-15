@@ -33,6 +33,26 @@ FIELD_PATTERNS = [
 ARRAY_PATTERN = re.compile(r"\b([A-Z_]*EMOJI[A-Z_]*)\s*=\s*\[([^\]]*)\]")
 
 
+def _scan_text(text: str, rel: str) -> list[dict]:
+    """单文件扫描（字段形态 + 数组常量形态）→ 命中列表。W1237 拆 def·判定逐字未改。"""
+    hits: list[dict] = []
+    for field, rx in FIELD_PATTERNS:
+        for m in rx.finditer(text):
+            val = m.group(1)
+            if not GRAPHICS.search(val):
+                continue
+            # 保留**原始值**（不逐码位拆解·不排序）：ZWJ 序列与 VS16 必须整体匹配
+            hits.append({"file": rel, "line": text.count("\n", 0, m.start()) + 1,
+                         "field": field, "chars": val})
+    for m in ARRAY_PATTERN.finditer(text):
+        for item in re.findall(r"[\"']([^\"']*)[\"']", m.group(2)):
+            if not GRAPHICS.search(item):
+                continue
+            hits.append({"file": rel, "line": text.count("\n", 0, m.start()) + 1,
+                         "field": "stage", "chars": item})
+    return hits
+
+
 def scan_field_icons() -> list[dict]:
     hits: list[dict] = []
     roots = ["site", "dataset", "xiyouji-agent-web/src", "xiyouji-desktop/src", "assets/promo"]
@@ -49,20 +69,7 @@ def scan_field_icons() -> list[dict]:
                 text = f.read_text(encoding="utf-8")
             except Exception:
                 continue
-            for field, rx in FIELD_PATTERNS:
-                for m in rx.finditer(text):
-                    val = m.group(1)
-                    if not GRAPHICS.search(val):
-                        continue
-                    # 保留**原始值**（不逐码位拆解·不排序）：ZWJ 序列与 VS16 必须整体匹配
-                    hits.append({"file": rel, "line": text.count("\n", 0, m.start()) + 1,
-                                 "field": field, "chars": val})
-            for m in ARRAY_PATTERN.finditer(text):
-                for item in re.findall(r"[\"']([^\"']*)[\"']", m.group(2)):
-                    if not GRAPHICS.search(item):
-                        continue
-                    hits.append({"file": rel, "line": text.count("\n", 0, m.start()) + 1,
-                                 "field": "stage", "chars": item})
+            hits.extend(_scan_text(text, rel))
     # 去重（同 file+field+chars 多次出现只记一次，与白名单口径一致）
     seen = set()
     uniq = []

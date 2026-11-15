@@ -366,6 +366,11 @@ def _resolve_scan_dir(raw_dir):
     return scan_dir
 
 
+def _is_excluded(f, exclude):
+    """该文件是否命中排除令牌（W1237 拆出以消嵌套推导式·判定不变）。"""
+    return any(tok in display_path(f) for tok in exclude)
+
+
 def _collect_scan_files(scan_dir, exclude):
     """收集扫描文件：collect_files → filter_gitignored → exclude 片段过滤（W730 提取自 main）。"""
     files = collect_files(scan_dir)
@@ -374,10 +379,7 @@ def _collect_scan_files(scan_dir, exclude):
         before = len(files)
         # W699 起：排除匹配改为仓库相对路径（扫描 --dir docs 时 "archive/" 不会再
         # 误伤扫描根外同名片段，archive/ 冻结档豁免在全目录口径下均成立）
-        files = [
-            f for f in files
-            if not any(tok in display_path(f) for tok in exclude)
-        ]
+        files = [f for f in files if not _is_excluded(f, exclude)]
         if len(files) != before:
             print(f"[exclude] 已排除 {before - len(files)} 个文件: {exclude}")
     return files
@@ -402,6 +404,33 @@ def _extract_links(f, text):
     return extract_markdown_links(strip_md_code(text))
 
 
+def _emit_external(f, line, url):
+    """外链一趟判定（打印序契约不变·W1237 拆 def）。返回 broken 增量。"""
+    ok, info = check_external(url)
+    if ok:
+        print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {info}")
+        return 0
+    print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {info}")
+    return 1
+
+
+def _emit_internal(f, line, raw, url, do_fix, pending_fixes):
+    """站内一趟判定与修复（打印序契约不变·W1237 拆 def）。返回 (broken 增量, fixed 增量)。"""
+    ok, target, _ = check_internal(f, url)
+    disp = display_path(target) if target else "?"
+    if ok:
+        print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {disp}")
+        return 0, 0
+    if do_fix:
+        new = try_fix(f, url, ROOT)
+        if new:
+            pending_fixes.append((raw, new))
+            print(f"[FIXED]  {display_path(f)}:{line}  {url}  ->  {new}")
+            return 0, 1
+    print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {disp}")
+    return 1, 0
+
+
 def _check_links(f, links, do_internal, do_external, do_fix):
     """逐链接判定并按需收集修复项，返回 (checked, broken, fixed, pending_fixes)。
 
@@ -419,30 +448,14 @@ def _check_links(f, links, do_internal, do_external, do_fix):
         if is_external(url):
             if do_external:
                 checked += 1
-                ok, info = check_external(url)
-                if ok:
-                    print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {info}")
-                else:
-                    broken += 1
-                    print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {info}")
+                broken += _emit_external(f, line, url)
             continue
         # 站内
         if do_internal:
             checked += 1
-            ok, target, _ = check_internal(f, url)
-            disp = display_path(target) if target else "?"
-            if ok:
-                print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {disp}")
-            else:
-                if do_fix:
-                    new = try_fix(f, url, ROOT)
-                    if new:
-                        pending_fixes.append((raw, new))
-                        fixed += 1
-                        print(f"[FIXED]  {display_path(f)}:{line}  {url}  ->  {new}")
-                        continue
-                broken += 1
-                print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {disp}")
+            _b, _fx = _emit_internal(f, line, raw, url, do_fix, pending_fixes)
+            broken += _b
+            fixed += _fx
     return checked, broken, fixed, pending_fixes
 
 

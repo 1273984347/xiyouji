@@ -56,6 +56,18 @@ def iter_files(globs):
                     yield rp, p
 
 
+def _scan_lines(rule, rp, lines):
+    """单文件逐行套规则 → 命中列表（W1237 拆 def·判定逐字未改）。"""
+    out = []
+    for i, line in enumerate(lines, 1):
+        if rule["line_exclude"] and re.search(rule["line_exclude"], line):
+            continue
+        for pat in rule["patterns"]:
+            if re.search(pat, line):
+                out.append((rule["id"], rule["cls"], rp, i, pat, line.strip()[:110]))
+    return out
+
+
 def run_rules():
     hits = []
     for rule in RULES:
@@ -66,12 +78,7 @@ def run_rules():
                 lines = p.read_text(encoding="utf-8", errors="ignore").split("\n")
             except OSError:
                 continue
-            for i, line in enumerate(lines, 1):
-                if rule["line_exclude"] and re.search(rule["line_exclude"], line):
-                    continue
-                for pat in rule["patterns"]:
-                    if re.search(pat, line):
-                        hits.append((rule["id"], rule["cls"], rp, i, pat, line.strip()[:110]))
+            hits.extend(_scan_lines(rule, rp, lines))
     return hits
 
 

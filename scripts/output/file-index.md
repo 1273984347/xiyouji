@@ -1,3 +1,130 @@
+## W1239 A6 逐回诗词索引第 2 批：第 21-40 回韵文分布表（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/05-诗词歌赋/逐回诗词索引-第021-040回.md | W1239 | 新增：第 21-40 回韵文分布表（477 句/203 段）+ 前四十回合看（均值 8.9%→5.9%）+ 词牌七处收窄 |
+| docs/05-诗词歌赋/逐回诗词索引-第001-020回.md | W1239 | 关联面：被第 2 批反向链接（内容零改动） |
+| scripts/output/stats.json | W1239 | a6_docs 14→15 / a1_a6_docs 624→625 |
+| scripts/output/stats-changelog.json | W1239 | stats 变更史追加 W1239 |
+| scripts/output/stats-index.md | W1239 | stats 索引面刷新 |
+| AGENTS.md | W1239 | stats 标记跟随 + 脚注条目 |
+| README.md | W1239 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1239 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/统计口径说明.md | W1239 | stats 标记跟随 |
+| docs/agent/gates.md | W1239 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1239 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1239 | stats 标记跟随 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-12.md | W1239 | stats 标记跟随 |
+| site/index.html | W1239 | 首页统计跟随 + 页脚批次链插入 |
+| site/dashboard.html | W1239 | 第 68 槽 KPI：A6 卡片 14→15 + 段落 624→625 |
+| site/data/search-index-zh.js | W1239 | 第 46 槽：搜索索引重建 |
+| site/en/search-index-en.js | W1239 | 第 46 槽：搜索索引重建 |
+| docs/INDEX.md | W1239 | 文档索引重生成（885 篇） |
+| CHANGELOG.md | W1239 | 本批段 |
+| HANDOVER.md | W1239 | 里程碑块 |
+| STRUCTURE.md | W1239 | 当前批次行推进 |
+| .github/workflows/README.md | W1239 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1239 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1239 | 滚动迁入条目 |
+| CITATION.cff | W1239 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1239 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1239 | 页脚批次链插入 |
+| site/dukou-engine.html | W1239 | 页脚批次链插入 |
+| site/rss.xml | W1239 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1239 | 本批段追加 |
+| scripts/output/README.md | W1239 | 第 45 槽：目录说明刷新 |
+| scripts/output/INDEX.md | W1239 | 第 45 槽：目录清单刷新 |
+| scripts/output/tools-inventory.md | W1239 | 工具清单刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1239 | 朱砂实底按页 hash 缓存更新 |
+| scripts/output/_cascade_files_W1239.txt | W1239 | 级联改动面清单 |
+| scripts/output/_w1239_spec.json | W1239 | 本批规格 |
+| docs/00-导读/W批次编号对账表.md | W1239 | W1239 认领行 + W1238 台账 hash 回填 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1239 | 台账腾窗：新增认领行使正本越窗 ⇒ 最老行迁入归档 |
+
+## W1238 A6 逐回诗词索引第 1 批：第 1-20 回韵文分布表（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/05-诗词歌赋/逐回诗词索引-第001-020回.md | W1238 | 新增：第 1-20 回韵文分布表（673 句/246 段）+ 口径三条规则 + 三处已知偏差 + 四点读数 |
+| scripts/output/stats.json | W1238 | a6_docs 13→14 / a1_a6_docs 623→624（stats --w W1238） |
+| scripts/output/stats-changelog.json | W1238 | stats 变更史追加 W1238 段 |
+| scripts/output/stats-index.md | W1238 | stats 索引面刷新 |
+| AGENTS.md | W1238 | stats 标记跟随（A6 十四篇 / 623→624）+ 脚注条目 |
+| README.md | W1238 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1238 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/统计口径说明.md | W1238 | stats 标记跟随（A6 口径域现算 14） |
+| docs/agent/gates.md | W1238 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1238 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1238 | stats 标记跟随 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-12.md | W1238 | stats 标记跟随 |
+| site/index.html | W1238 | 首页统计数字跟随（A6 十四篇）+ 页脚批次链插入 |
+| CHANGELOG.md | W1238 | 本批段 |
+| HANDOVER.md | W1238 | 里程碑块 |
+| STRUCTURE.md | W1238 | 当前批次行推进 |
+| .github/workflows/README.md | W1238 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1238 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1238 | 滚动迁入条目 |
+| CITATION.cff | W1238 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1238 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1238 | 页脚批次链插入 |
+| site/dukou-engine.html | W1238 | 页脚批次链插入 |
+| site/rss.xml | W1238 | 第 73 槽产物新鲜度：随 CHANGELOG 新段重建条目 |
+| scripts/output/file-index.md | W1238 | 本批段追加 |
+| scripts/output/README.md | W1238 | 第 45 槽：目录说明随清单刷新 |
+| scripts/output/INDEX.md | W1238 | 第 45 槽：目录清单随本批新件刷新 |
+| scripts/output/tools-inventory.md | W1238 | 工具清单日期戳与计数刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1238 | 朱砂实底按页 hash 缓存随页脚变更更新 |
+| scripts/output/_cascade_files_W1238.txt | W1238 | 级联写后自检的改动面清单 |
+| scripts/output/_w1238_spec.json | W1238 | 本批规格（file_index_rows 即应动全集） |
+| docs/00-导读/W批次编号对账表.md | W1238 | W1238 认领行 + W1237 台账 hash 回填 |
+| docs/INDEX.md | W1238 | 文档索引重生成（884 篇·含本批新篇） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1238 | 台账腾窗：新增认领行使正本越窗 ⇒ 最老行迁入归档 |
+| site/dashboard.html | W1238 | 第 68 槽 KPI：A6 卡片 13→14 + 段落「共 623 篇」→624 |
+| site/data/search-index-zh.js | W1238 | 第 46 槽：搜索索引重建（中 1041 条·含本批新篇） |
+| site/en/search-index-en.js | W1238 | 第 46 槽：搜索索引重建（英 1040 条） |
+
+## W1237 嵌套块棘轮批：PLR1702 十九条全清零（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/cascade_lock.py | W1237 | _git_dir 解析拆 _gitdir_from_pointer（先读后判）·级联取锁语义不变 |
+| scripts/check_chapter_stats_sync.py | W1237 | flat_check 单键对拍拆 _compare_value·自测过 |
+| scripts/check_chart_data.py | W1237 | R1 sankey 引用判定拆 _check_sankey_refs·自测过 |
+| scripts/check_chart_colorblind.py | W1237 | analyze 拆 _palette_lab_cache / _pair_violations·自测过 |
+| scripts/check_content_consistency.py | W1237 | 逐元素对拍拆 _compare_list_item（每元素只记一条·上限 8 不变）+ 连带消 2 处嵌套推导式（拆 _is_node_array/_is_link_array） |
+| scripts/check_embedded_stale_markers.py | W1237 | scan 拆 _iter_scope_files（yield from）/ _mark_lines·自测过 |
+| scripts/check_icon_fields.py | W1237 | 单文件扫描拆 _scan_text（字段形态 + 数组形态两段） |
+| scripts/check_parser_anchor_coverage.py | W1237 | 位置敏感盲区样本拆 _blind_samples·自测过 |
+| scripts/export_design_tokens.py | W1237 | 只读对账逐产物拆 _diff_one（meta.generated 排除口径不变）·--check 0 差异 |
+| scripts/lint_links.py | W1237 | 站内/外链判定拆 _emit_internal / _emit_external（打印序契约不变）·连带消 1 处嵌套推导式（拆 _is_excluded）·docs 5626 链接 0 broken |
+| scripts/rag/xiyouji_rag.py | W1237 | 三处：_load_dotenv 拆 _apply_env_file·expand_query 拆 _expand_one·_load_docs 拆 _read_md |
+| scripts/review_sweep.py | W1237 | 逐行套规则拆 _scan_lines·扫荡 0 命中 |
+| CHANGELOG.md | W1237 | 本批段 |
+| HANDOVER.md | W1237 | 里程碑块 |
+| README.md | W1237 | 版本抬头行推进 |
+| STRUCTURE.md | W1237 | 当前批次行推进 |
+| docs/00-导读/项目说明.md | W1237 | 版本抬头行推进 |
+| .github/workflows/README.md | W1237 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1237 | 里程碑历史滚入 |
+| AGENTS.md | W1237 | 脚注条目 + 最老条目滚动迁档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1237 | 滚动迁入条目 |
+| CITATION.cff | W1237 | 版本与日期同步 |
+| site/index.html | W1237 | 页脚批次链插入 |
+| site/data/cross-time-danmaku.html | W1237 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1237 | 页脚批次链插入 |
+| site/dukou-engine.html | W1237 | 页脚批次链插入 |
+| site/rss.xml | W1237 | 第 73 槽产物新鲜度：随 CHANGELOG 新段重建条目 |
+| scripts/output/file-index.md | W1237 | 本批段追加 |
+| scripts/output/README.md | W1237 | 第 45 槽：目录说明随清单刷新 |
+| scripts/output/INDEX.md | W1237 | 第 45 槽：目录清单随本批新件刷新 |
+| scripts/output/stats.json | W1237 | 级联刷新统计快照 |
+| scripts/output/tools-inventory.md | W1237 | 工具清单日期戳与计数刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1237 | 朱砂实底按页 hash 缓存随页脚变更更新 |
+| scripts/output/_cascade_files_W1237.txt | W1237 | 级联写后自检的改动面清单 |
+| scripts/output/_w1237_spec.json | W1237 | 本批规格（file_index_rows 即应动全集） |
+| docs/00-导读/W批次编号对账表.md | W1237 | W1237 认领行 + W1236 台账 hash 回填 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1237 | 台账腾窗：新增认领行使正本越窗 ⇒ 最老行迁入归档 |
+
 ## W1236 CI 首跑红清偿批：浏览器探针自测改挂 e2e job + pytest 侧接线守卫，并回填上一批台账（2026-11-15）
 
 | 文件 | W | 说明 |
