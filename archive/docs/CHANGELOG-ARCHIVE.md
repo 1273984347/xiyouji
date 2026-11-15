@@ -22,6 +22,45 @@
 
 > **2026-11-13（W994 迁出 59 段·W814-W874 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W1179（2026-11-09）：变更类型→必跑清单批（agent_start --task / --checklist）
+
+**本批要点**（用户引用「把变更类型 → 必跑清单写进 agent_start.py」·W1176-W1178 三次同类缺口的收口）：
+
+> - **T1 立项依据**：W1176 新增页返工四轮、W1177 把新增页清单化、W1178 新增槽又漏改 `EXPECTED_SECTION_NAMES`——三者是同一缺口的三种形态：**清单只存在于上一轮的记忆里，且随变更类型改变就失效**。
+> - **T2 四类清单入 `agent_start.py`**：新增页 / 新增门禁槽 / 改共享 CSS / 改口径块。`--task` 按 `git status` 状态码与路径自动分类（`changed_entries()` 保留原 `changed_paths()` 接口）；每类列出可直接粘贴的命令与需人工判断的动作，多类命中时命令去重保序。
+> - **T3 动手前可用**：新增 `--checklist <类型|all>`——工作树干净时也能在开工前查该跑什么；`--checklist-selftest` 断言四类命中、命令无省略号/占位符、批号口径分离。**清单最有用的时刻恰是动手前**，原 `--task` 依赖已有改动，覆盖不到这个时刻。
+> - **T4 命令完整性**：批号取台账最新认领行、页名取改动路径，输出即可粘贴，无 `...` 或待填占位符。初版误把「台账下一自由号」当「本批号」，`stats.py --w` 会指向尚未开工的下一批（实跑抓出 W1180 vs W1179）⇒ 拆出 `current_batch_w()` 与 `next_batch_w()`，并把「清单不得出现下一自由号」写成自测守卫。
+> - **T5 依据锚防漂移**：每条清单带坑表 E-NN / 门禁槽号 / W 批次依据（如新增槽引 E-98 五处接线并注明「恒跑段登记 `_SCOPE_CORE`、读页面非恒跑登记 `SCOPE_SITE_SECTIONS`，二选一」），可用 Grep 检索核对。
+> - **T6 顺带核实与订正**：复核 E-98 第 3 处接线——第 69 槽登记在 `_SCOPE_CORE`（恒跑），与 `SCOPE_SITE_SECTIONS` 互斥，**不构成漏项**；但 `_SCOPE_CORE` 注释里的恒跑段计数仍为 19，已随批同步为 20。
+> - **T7 文档链**：AGENTS §7 第 0 步补「W1179 必跑清单」用法；agent_start docstring 补 `--checklist` / `--checklist-selftest` 说明；`gather()` 与清单共用 `next_batch_w()` / `current_batch_w()` 单一实现，防两套批号口径漂移。
+> - **验证**：自测 6/6（四类命中 + 干净工作树不误报 + 批号口径分离）· ruff 0 error · 三个入口实跑正常 · `--task` 对本批改动的分类命中 new-gate 与 stats-scope。按本批清单自身跑完收尾（第 31/41/42/45/46/51 槽与索引/CSP 重生成）。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
+### W1178（2026-11-08）：检索假阳性判据化批（第 69 槽 · 模板结构契约）
+
+**本批要点**（用户「先把检索假阳性变成机器判据」指令）：
+
+> - **T1 两次同类实证**：W1177 `grep -c cite-block site/_template.html` 返回 7 就判「模板已有引用块」，实际 7 处全是 CSS 选择器、HTML 结构为 0 ⇒ 新页 citability C3 判红；W1175 只 grep `site/` 就断「`STATUS_TEXT` 无定义」，实为正本在 `scripts/w1167_badge_inject.py`，差点把错误结论写进方案。共同点：**检索给了个数就下结论，且结论不可复算**。
+> - **T2 新增第 69 槽 `check_template_contract.py`**：C1 模板（及 `--target` 新页）必须含四项**完整标签串**——`<div class="cite-block">` / `<div id="dataSource">` / `<meta name="description"` / `<!-- chart-degrade:`，**类名 / CSS 选择器命中一律不算证据**；C2 `--evidence KEYWORD [--scope all]` 输出命中行号、行文本与形态（结构 / CSS / 注释 / 其他），命中全是非结构时显式告警。默认只约束模板（历史页有各自合规形态，全量套新契约会误伤存量），新页由 `--post --target` 单验。
+> - **T3 机器化接入三处**：挂 `verify_delivery.py` 第 69 槽（`_StrictGate`·恒跑·毫秒级）；`new_page.py --post` 追加第 8 步「模板契约自检」；`--post` 的 `run_post` 现接收 `name` 以便 `--target`。
+> - **T4 反例自测与实证**：自测 4/4（含「只有 CSS 类无结构」反例）；实测 `--evidence cite-block` 把 727 处命中拆为 637 CSS + 90 结构并给出行号；构造「只有 `.cite-block` CSS 类」的假页 → 判红（违规 4 · 退出码 1）。E-167 自指防护：扫描面不含 `scripts/`，自测样本在内存构造不落盘；另修跨盘符 `--target` 的 `os.path.relpath` 异常回退。
+> - **T5 文档链**：`AGENTS.md` §4.2 第 69 条 + 槽数三处 68→69；`docs/agent/gates.md` 第 69 条（有序列表条目 + 文末详细定义）；`pitfalls.md` 新增 **E-212**（305→306 条·流程段 172→173）并同步 HANDOVER / puti-shouye skill 计数；`stats.py --w 1178` 刷新；第 41 槽三方编号 69/69/69、第 31 槽 0 FAIL。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
+### W1177（2026-11-08）：新增页上线自动化批（--post 一键全链路 + 模板补齐四要素）
+
+**本批要点**（用户「做」指令·W1176 四轮返工的机制化沉淀）：
+
+> - **T1 问题根因**：新增一个页面会牵连十余项门禁（徽标 / 导航 / SEO head / sitemap / 搜索索引 / CSP 哈希 / 统计口径 / 色盲基线 / citability 四字段 / 降级声明），逐个手跑必然漏——W1176 因此返工四轮。根因不是疏忽，是「新增页的连带面没有被清单化」。
+> - **T2 `new_page.py --post`**：生成页面后按依赖序一键跑完七步（`--batch` 给出时追加统计刷新为第八步）：<br>改 HTML：数据源徽标 → 主导航 → SEO head；<br>读 HTML：sitemap → 搜索索引 → CSP 哈希（必须最后，哈希依赖上面全部改动）；<br>读全站：统计刷新（需批号）→ 色盲基线。<br>任一步非 0 即停（fail-fast）——继续跑只会叠加更难定位的错误；每步打印末行摘要便于定位。
+> - **T3 模板补齐四要素**（新页从此天生齐全）：`<meta name="description">`（第 26 槽 R1）、`<!-- chart-degrade: n/a -->`（第 30 槽）、`<div id="dataSource">` 锚点（第 28 槽 C1/C2/C4 的扫描区，内部禁嵌套 div）、`<div class="cite-block">` **HTML 结构**（第 28 槽 C3）——此前模板只有 `.cite-block` 的 CSS 类而无对应结构，`grep -c cite-block` 会返回 7（全是样式选择器），是最容易误判「模板已经有了」的陷阱。
+> - **T4 端到端实证**：生成临时探针页 `w1177-probe` 跑 `--post`，七步全过；随后门禁复核 **citability C1-C4 各 90/90**、SEO head 通过、数据徽标 90 页零违规、降级声明 90 页零违规、导航一致性 861 页零违规。清理探针页后重跑各派生物，sitemap 回 855 URLs、色盲基线回 18292 对、citability 回 89/89，工作树无残留。
+> - **T5 使用方式**：`py -3 scripts/new_page.py --name foo --title "标题" --category "分类" --desc "描述" --post [--batch W1178]`。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1176（2026-11-08）：术语表可视化页（V2 首批·数据管道根修 + 新页落地）
 
 **本批要点**（用户「开工」指令·V2 首批）：
