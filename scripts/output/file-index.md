@@ -28,13 +28,8 @@
 | scripts/output/_w1248_spec.json | W1248 | 本批规格 |
 | docs/00-导读/W批次编号对账表.md | W1248 | W1248 认领行 |
 
-| scripts/output/stats-changelog.json | W1248 | stats 变更史追加 W1248（stats.json 变更 1 键的变更史登记） |
-| scripts/output/stats-index.md | W1248 | stats 索引面刷新 |
-| docs/INDEX.md | W1248 | 文档索引重建（890 篇·含本批级联面） |
-| scripts/output/INDEX.md | W1248 | 输出目录清单刷新（收录 _w1248_spec.json 与级联面清单） |
-| scripts/output/README.md | W1248 | 输出目录说明刷新 |
-| site/data/search-index-zh.js | W1248 | 第 46 槽：中文站内搜索索引重建（条目数对齐生成器实算） |
-| site/en/search-index-en.js | W1248 | 第 46 槽：英文站内搜索索引重建 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1248 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1248 | stats 标记跟随 |
 ## W1247 CI 首跑红清偿：搜索索引剔除未跟踪件重建 + 可视化基线补入新页（2026-11-15）
 
 | 文件 | W | 说明 |
@@ -183,32 +178,12 @@
 | archive/docs/CHANGELOG-ARCHIVE.md | W1245 | 第 74 槽腾窗：迁 2 段入归档 |
 | archive/docs/file-index-ARCHIVE.md | W1245 | 第 74 槽腾窗：迁 2 段入归档 |
 
+| assets/promo/silk-hero-set/ + 族文档 + promo 目录 + T103 报告 + 对账表 + HANDOVER + CITATION + workflows README + docs/INDEX + file-index + spec | W1244 | 古画绢本 Hero 横幅素材族 12 张成套（母版 5472×3072 jpg ×12 + 站点用 1920×1078 webp ×12·画风古画绢本·朱砂石青·题材 3/3/3/3）·含 T103 报告与登记面 |
+| scripts/output/（stats.json·stats-changelog·stats-index）+ scripts/output/INDEX.md·README.md + docs/INDEX.md + 中英文搜索索引 | W1248 | stats 刷新（变更 1 键·标记面 12 处）·文档索引重建（890 篇）·输出目录清单刷新·中英文站内搜索索引重建 |
 ## W1244 古画绢本 Hero 横幅素材族 12 张成套（2026-11-15）
 
 | 文件 | W | 说明 |
 |---|---|---|
-| assets/promo/silk-hero-set/silk-hero-01-yunhai-fosi.jpg | W1244 | 新增：云海孤峰古刹（16:9 母版 5472×3072） |
-| assets/promo/silk-hero-set/silk-hero-02-shiku-fowan.jpg | W1244 | 新增：崖壁石窟佛龛与鎏金坐像 |
-| assets/promo/silk-hero-set/silk-hero-03-ye-talin.jpg | W1244 | 新增：寒山月夜两座古塔 |
-| assets/promo/silk-hero-set/silk-hero-04-baigu-furen.jpg | W1244 | 新增（v2）：深山披帛妖女与石青磷光 |
-| assets/promo/silk-hero-set/silk-hero-05-huoyanshan-yaowang.jpg | W1244 | 新增（v3）：火焰山牛首妖王·石青石绿山体 |
-| assets/promo/silk-hero-set/silk-hero-06-heifengshan.jpg | W1244 | 新增（v2）：黑风山峭壁与狼牙钉清晰 |
-| assets/promo/silk-hero-set/silk-hero-07-dumu-qiao.jpg | W1244 | 新增（v2）：四人过石柱板桥·点景人物 |
-| assets/promo/silk-hero-set/silk-hero-08-shanye-xinglu.jpg | W1244 | 新增（v2）：山野古道行旅·五人 |
-| assets/promo/silk-hero-set/silk-hero-09-wukong-tanyu.jpg | W1244 | 新增（v2）：山巅远望·僧人与白马 |
-| assets/promo/silk-hero-set/silk-hero-10-jingubang.jpg | W1244 | 新增（v2）：如意金箍棒斜置·莲花金箍端头 |
-| assets/promo/silk-hero-set/silk-hero-11-fabao-sanjian.jpg | W1244 | 新增（v2）：葫芦·芭蕉扇·九环锡杖 |
-| assets/promo/silk-hero-set/silk-hero-12-jinghu.jpg | W1244 | 新增：玉净瓶·锦囊·紧箍环 |
-| assets/promo/silk-hero-set/*.webp | W1244 | 12 张站点轻量版（1920×1078·315–555 KB·不含 AIGC 标识） |
-| assets/promo/silk-hero-set/README.md | W1244 | 族说明：规格·留白实测·AIGC 标识·v1→v2 重做记录·遗留瑕疵 |
-| assets/promo/silk-hero-set/INDEX.md | W1244 | 目录索引（生成器刷新） |
-| assets/promo/README.md | W1244 | 新增「古画绢本 Hero 族」小节（未上线口径·体积·留白实测） |
-| assets/promo/INDEX.md | W1244 | promo 目录索引刷新（新增子目录） |
-| docs/11-方案报告/计划方案/T103-任务计划执行与经验沉淀报告-2026-11-15.md | W1244 | 新增：T103 任务计划执行与经验沉淀报告 |
-| docs/11-方案报告/README.md | W1244 | §六 登记 T103·件数 119→120 |
-| docs/00-导读/W批次编号对账表.md | W1244 | W1244 认领行 |
-| HANDOVER.md | W1244 | 交接头链与「一、当前进度」推进 W1244 |
-| scripts/output/_w1244_spec.json | W1244 | 本批规格 |
 
 
 ## W1243 A6 逐条明细第 1 批：密度最高六回 45 条（2026-11-15）
