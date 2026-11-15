@@ -150,7 +150,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "c3a8c5c18376e7785857d7a79e21c803ca3725dc",
+   "sha1": "6b9d6e8b5253a93ac20bd7fc39fc2b757402c018",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -514,6 +514,10 @@
     "div.progress-fill": 1
    }
   },
+  "data/poetry-density.html": {
+   "sha1": "8608d0c5dbf1484c3963b74072f93e6052a1c64d",
+   "counts": {}
+  },
   "data/poetry-rhythm-analysis.html": {
    "sha1": "703d17cbb876c5d91eec320c9a19a6eda18d9d73",
    "counts": {
@@ -568,7 +572,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "bbaf373700cb4a8f03b9fa9beba31de47240d3e8",
+   "sha1": "0f0c02a6d84c201c79e5c2e8456dae373a53d023",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -656,7 +660,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "11d82c87d7dec7689987db12b86ff51e298d8fd1",
+   "sha1": "e7bc409f918ac322164662c1a81822b3f47246b3",
    "counts": {
     "button": 1
    }
@@ -668,7 +672,7 @@
    }
   },
   "index.html": {
-   "sha1": "8094c4f2dd9ec20ea2eb05bad06f6ab121fba2ff",
+   "sha1": "b67c27d422c13c2077406932254b2d61bb179413",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1505,5 +1509,5 @@
    }
   }
  },
- "generated_at": "2026-11-15T11:43:39.999Z"
+ "generated_at": "2026-11-15T13:05:10.590Z"
 }

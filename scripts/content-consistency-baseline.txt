@@ -89,3 +89,5 @@ site/reader/culture/天罡地煞与变化之术专题.html :: 规则3 同主语�
 site/reader/culture/天罡地煞与变化之术专题.html :: 规则3 同主语计数矛盾：「回猪八戒36」出现多个值 [18, 29, 67]
 site/reader/culture/西游东传与译介专题.html :: 规则3 实体对计数矛盾：「海外译本与研」出现多个值 [1, 8]
 site/reader/culture/金公木母与心猿意马称谓专题.html :: 规则3 实体对计数矛盾：「text」出现多个值 [5, 30]
+site/reader/index.html :: 规则3 同主语计数矛盾：「回韵文分布逐回诗词」出现多个值 [20, 40, 60, 80]
+site/reader/poetry/index.html :: 规则3 同主语计数矛盾：「回韵文分布逐回诗词」出现多个值 [20, 40, 60, 80]

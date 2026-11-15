@@ -14,7 +14,7 @@
 
 - **文档（Docs）**：Markdown 写就的逐回解读、人物分析、主题专题、文化背景、诗词赏析、个人随笔。
 - **站点（Site）**：可浏览的纯静态 HTML 站点，`file://` 双击即可打开，部署于 GitHub Pages（https://1273984347.github.io/xiyouji/ ）。
-- **数据可视化**：89<!--stats:visualization_pages--> 个 D3.js / Three.js 可视化页（site/data/ 共 90<!--stats:site_data_html--> 个 HTML，「87」不含模板壳 _shell.html），覆盖 133 个<!--doc-sync:exempt--> 数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34<!--stats:script_classes--> 类主题 A–AH）。
+- **数据可视化**：90<!--stats:visualization_pages--> 个 D3.js / Three.js 可视化页（site/data/ 共 91<!--stats:site_data_html--> 个 HTML，「87」不含模板壳 _shell.html），覆盖 133 个<!--doc-sync:exempt--> 数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34<!--stats:script_classes--> 类主题 A–AH）。
 - **可问询入口**：Web Agent「西游记·渡口问津」（xiyouji-agent-web/）——自研 OpenAI-compatible 引擎（server/engine/·W680·全主流大模型端点适配），可对话、检索 docs/source、跑脚本。
 
 **核心内容规模**：A1–A6 内容板块共 629<!--stats:a1_a6_docs--> 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 35 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→616）；英文站 site/en/ 138<!--stats:site_en_html--> 页已全量英文化。
@@ -63,7 +63,7 @@ xiyouji/
 ├── source/                # 原著原文（分回）+ 引用与网络解读（含学术论文索引）
 ├── site/                  # 可浏览 HTML 站点
 │   ├── index.html dashboard.html dukou-engine.html curated.html 等
-│   ├── data/              # 可视化页（90<!--stats:site_data_html--> 个 HTML，D3/Three；「89 可视化页」口径不含模板壳 _shell.html）
+│   ├── data/              # 可视化页（91<!--stats:site_data_html--> 个 HTML，D3/Three；「90<!--stats:visualization_pages--> 可视化页」口径不含模板壳 _shell.html）
 │   ├── en/                # 英文站（138<!--stats:site_en_html--> 页）
 │   ├── static/js|css|fonts/  # 本地化 D3/Three、tokens.css/system.css、子集化字体
 │   └── sitemap.xml
@@ -344,4 +344,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1238-W1238 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-15（W1239）A6 索引第 2 批：21-40 回分布表 + 前四十回合看；2026-11-15（W1240）A6 索引第 3 批：41-60 回 + 词牌判据收紧；2026-11-15（W1241）A6 索引第 4 批：61-80 回 + 诗会回反常点；2026-11-15（W1242）A6 索引收官：81-100 回 + 全书百回总表；2026-11-15（W1243）A6 逐条明细：六回 45 条 + 密度解释检验。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1239-W1239 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-11-15（W1240）A6 索引第 3 批：41-60 回 + 词牌判据收紧；2026-11-15（W1241）A6 索引第 4 批：61-80 回 + 诗会回反常点；2026-11-15（W1242）A6 索引收官：81-100 回 + 全书百回总表；2026-11-15（W1243）A6 逐条明细：六回 45 条 + 密度解释检验；2026-11-15（W1245）新增可视化页「百回诗词密度」。如与上述权威文档冲突，以权威文档为准。*
