@@ -1,3 +1,46 @@
+## W1240 A6 逐回诗词索引第 3 批：第 41-60 回韵文分布（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/05-诗词歌赋/逐回诗词索引-第041-060回.md | W1240 | 新增：41-60 回分布表（547 句/188 段·均值 6.5%）+ 词牌判据收紧与前三批命中回核 |
+| docs/05-诗词歌赋/逐回诗词索引-第021-040回.md | W1240 | 关联面：补第三批反向链接（正文零改动） |
+| scripts/output/stats.json | W1240 | a6_docs 15→16 / a1_a6_docs 625→626 |
+| scripts/output/stats-changelog.json | W1240 | stats 变更史追加 W1240 |
+| scripts/output/stats-index.md | W1240 | stats 索引面刷新 |
+| AGENTS.md | W1240 | stats 标记跟随 + 脚注条目 |
+| README.md | W1240 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1240 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/统计口径说明.md | W1240 | stats 标记跟随 |
+| docs/agent/gates.md | W1240 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1240 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1240 | stats 标记跟随 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-12.md | W1240 | stats 标记跟随 |
+| site/index.html | W1240 | 首页统计跟随 + 页脚批次链插入 |
+| site/dashboard.html | W1240 | 第 68 槽 KPI：A6 15→16 + 段落 625→626 |
+| site/data/search-index-zh.js | W1240 | 第 46 槽：搜索索引重建 |
+| site/en/search-index-en.js | W1240 | 第 46 槽：搜索索引重建 |
+| docs/INDEX.md | W1240 | 文档索引重生成（886 篇） |
+| CHANGELOG.md | W1240 | 本批段 |
+| HANDOVER.md | W1240 | 里程碑块 |
+| STRUCTURE.md | W1240 | 当前批次行推进 |
+| .github/workflows/README.md | W1240 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1240 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1240 | 滚动迁入条目 |
+| CITATION.cff | W1240 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1240 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1240 | 页脚批次链插入 |
+| site/dukou-engine.html | W1240 | 页脚批次链插入 |
+| site/rss.xml | W1240 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1240 | 本批段追加 |
+| scripts/output/README.md | W1240 | 第 45 槽：目录说明刷新 |
+| scripts/output/INDEX.md | W1240 | 第 45 槽：目录清单刷新 |
+| scripts/output/tools-inventory.md | W1240 | 工具清单刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1240 | 朱砂实底按页 hash 缓存更新 |
+| scripts/output/_cascade_files_W1240.txt | W1240 | 级联改动面清单 |
+| scripts/output/_w1240_spec.json | W1240 | 本批规格 |
+| docs/00-导读/W批次编号对账表.md | W1240 | W1240 认领行 + W1239 台账 hash 回填 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1240 | 台账腾窗：迁 W1180 入归档（正本留 60 行） |
+
 ## W1239 A6 逐回诗词索引第 2 批：第 21-40 回韵文分布表（2026-11-15）
 
 | 文件 | W | 说明 |
