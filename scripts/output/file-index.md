@@ -1,3 +1,67 @@
+## W1246 reader 模板去 UI emoji（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W1246 | reader 模板三处 UI emoji 去除（☆收藏本页 / 👍有帮助 / 👎待改进 → 纯文字） |
+| scripts/output/emoji-residue-baseline.txt | W1246 | 第 72 槽棘轮下调 623→610 |
+| site/reader/poetry/index.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/主题诗词创作.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/原著人物赋诗词赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/原著景物诗分类赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/原著景物诗赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/原著诗词赏析.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/回目对联分析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/开篇诗专题深化.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游与临江仙词牌赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游与水调歌头词牌赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游与满庭芳词牌赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游与西江月词牌赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游诗词意象谱系专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游诗词韵律分析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/诗词条目明细-密度最高六回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第001-020回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第021-040回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第041-060回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第061-080回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第081-100回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| scripts/output/stats.json | W1246 | stats 刷新 |
+| scripts/output/stats-index.md | W1246 | stats 索引面刷新 |
+| site/reader/poetry/INDEX.md | W1246 | 目录清单刷新 |
+| site/reader/poetry/README.md | W1246 | 目录说明刷新 |
+| AGENTS.md | W1246 | 脚注条目 |
+| README.md | W1246 | 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1246 | 版本抬头行推进 |
+| CHANGELOG.md | W1246 | 本批段 |
+| HANDOVER.md | W1246 | 里程碑块 |
+| STRUCTURE.md | W1246 | 当前批次行推进 |
+| .github/workflows/README.md | W1246 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1246 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1246 | 滚动迁入条目 |
+| CITATION.cff | W1246 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1246 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1246 | 页脚批次链插入 |
+| site/dukou-engine.html | W1246 | 页脚批次链插入 |
+| site/rss.xml | W1246 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1246 | 本批段追加 |
+| scripts/output/tools-inventory.md | W1246 | 工具清单刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1246 | 朱砂缓存更新 |
+| scripts/output/_cascade_files_W1246.txt | W1246 | 级联改动面清单 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1246 | 台账腾窗 |
+| site/data/search-index-zh.js | W1246 | 搜索索引重建 |
+| site/en/search-index-en.js | W1246 | 搜索索引重建 |
+| site/index.html | W1246 | 首页统计跟随 |
+| site/sitemap.xml | W1246 | 新页 URL 补入（869） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1246 | 第 74 槽腾窗 |
+| archive/docs/file-index-ARCHIVE.md | W1246 | 第 74 槽腾窗 |
+| docs/agent/gates.md | W1246 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1246 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1246 | stats 标记跟随 |
+| scripts/output/stats-changelog.json | W1246 | stats 变更史追加 W1246 |
+| scripts/output/INDEX.md | W1246 | 目录清单刷新 |
+| scripts/output/README.md | W1246 | 目录说明刷新 |
+| scripts/output/_w1246_spec.json | W1246 | 本批规格 |
+| docs/00-导读/W批次编号对账表.md | W1246 | W1246 认领行 + W1245 台账 hash 回填 |
+
 ## W1245 新增可视化页「百回诗词密度」：D3 密度曲线 + 十回滑动均值 + 词牌标注（2026-11-15）
 
 | 文件 | W | 说明 |
@@ -2845,44 +2909,5 @@
 | site/data/tag-cloud.html | W1184 | 改：级联/目录刷新产物 |
 | site/dukou-engine.html | W1184 | 改：级联/目录刷新产物 |
 | site/index.html | W1184 | 改：级联/目录刷新产物 |
-
-## W1183 A5 系列收口批（2026-11-09）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/04-文化与历史背景/README.md | W1183 | 改：新增「近期专题系列（W1180–W1182）」索引段 |
-| docs/04-文化与历史背景/天罡地煞与变化之术专题.md | W1183 | 改：补「系列关联」段（→ W1181/W1182 + 板块 README） |
-| docs/04-文化与历史背景/西游东传与译介专题.md | W1183 | 改：补「系列关联」段（→ W1180/W1182 + 板块 README） |
-| scripts/new_page.py | W1183 | 改：render_template 增加 "static/→"../static/ 路径重写（图标链接根修） |
-| site/data/glossary.html | W1183 | 改：新增「深度解读」区 + 修正 3 处图标相对路径 |
-| site/data/cultural-misreading.html | W1183 | 改：新增「关联解读」行指向译介专题 |
-| site/data/deconstruction.html | W1183 | 改：新增「关联解读」行指向译介专题 |
-| docs/00-导读/W批次编号对账表.md | W1183 | 改：W1183 认领行 |
-| scripts/output/_w1183_spec.json | W1183 | 新建：本批 spec |
-| scripts/output/_cascade_files_W1183.txt | W1183 | 新建：级联清单 |
-| CHANGELOG.md | W1183 | 改：W1183 段落（级联） |
-| scripts/output/file-index.md | W1183 | 改：W1183 段（级联） |
-| site/data/search.html | W1183 | 改：搜索索引重生成（第 46 槽） |
-| site/en/search.html | W1183 | 改：搜索索引重生成（同上） |
-| docs/INDEX.md | W1183 | 改：docs_index.py 重建 |
-| README.md | W1183 | 改：版本行推进（级联） |
-| STRUCTURE.md | W1183 | 改：版本行推进（级联） |
-| HANDOVER.md | W1183 | 改：最后更新行 + 当前进度（级联） |
-| .github/workflows/README.md | W1183 | 改：区间行推进（版本面） |
-| CITATION.cff | W1183 | 改：version/date 推进（级联） |
-| archive/docs/AGENTS-ARCHIVE.md | W1183 | 改：脚注沿革滚动（级联） |
-| archive/docs/workflows-readme-history.md | W1183 | 改：逐批明细追加（W1183·级联） |
-| docs/00-导读/项目说明.md | W1183 | 改：版本行推进（级联） |
-| scripts/output/stats.json | W1183 | 改：stats 刷新（级联） |
-| scripts/output/INDEX.md | W1183 | 改：再生成/验证缓存（级联） |
-| scripts/output/README.md | W1183 | 改：再生成/验证缓存（级联） |
-| scripts/output/_vermilion_solid_cache.json | W1183 | 改：再生成/验证缓存（级联） |
-| scripts/output/tools-inventory.md | W1183 | 改：再生成/验证缓存（级联） |
-| AGENTS.md | W1183 | 改：级联/目录刷新产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1183 | 改：级联/目录刷新产物 |
-| site/data/cross-time-danmaku.html | W1183 | 改：级联/目录刷新产物 |
-| site/data/tag-cloud.html | W1183 | 改：级联/目录刷新产物 |
-| site/dukou-engine.html | W1183 | 改：级联/目录刷新产物 |
-| site/index.html | W1183 | 改：级联/目录刷新产物 |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

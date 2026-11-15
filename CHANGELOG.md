@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1245），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1246），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -14,9 +14,21 @@
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
-> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 869<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 630<!--stats:site_reader_html-->）；CSP 覆盖 868<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 867<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 867<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 860<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
+> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 866<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W1246（2026-11-15）：reader 模板去 UI emoji（收藏/反馈三处）+ poetry 子树重建，第 72 槽棘轮 623→610
+
+**本批要点**（W1246 reader 模板去 UI emoji）：
+
+> - **① 根因与改法**：`scripts/build_reader.py` 的阅读工具条与反馈区用图形 emoji 作图标位（「☆ 收藏本页」「👍 有帮助」「👎 待改进」），而第 72 槽第 50 门禁按「UI 图标位 emoji 残留」计数。改法=**模板层去掉三处 emoji 改纯文字**（这三处本就不是图标语义，是文字按钮·无需 SVG 或 mask 替代）。
+> - **② 重建范围的取舍（本批最需说明的一处）**：模板一改，全量重建 636 页即可把计数打到 0；但 636 页逐页登记会撑爆 file-index（约 +44KB，超第 74 槽 256KiB 上限）⇒ 本批只重建并登记 **poetry 子树 20 页**，其余 616 页保持现状，待下次全量重建自然收敛（模板已改，重建即生效）。**这是显式的分批交付，不是遗漏**。
+> - **③ 顺带收口**：此前 5 篇逐回索引与 1 篇条目明细的 reader 版一直未落库（构建产物在但未提交）⇒ 本批随 poetry 重建一并入库，reader 侧内容与 docs 对齐。
+> - **④ 棘轮**：623 → **610**（第 72 槽）；`emoji-residue-baseline.txt` 同步下调（只降不升）。
+> - **⑤ 回填**：W1245 台账 hash/末笔格回填（单笔 6ea2d86ab）。
+> - **验证**：见收官链。
+> - **文件**：见 file-index。
 
 ### W1245（2026-11-15）：新增可视化页「百回诗词密度」：D3 密度曲线 + 十回滑动均值 + 词牌标注（挂全链路）
 
@@ -812,23 +824,4 @@
 > - **T6 计数链**：A5 38→39、A1-A6 619→620；`docs/00-导读/统计口径说明.md` 表格、`site/dashboard.html` 三处、`docs_index.py` 重建 INDEX（865 篇）、stats 标记面跟随 11 处一次同步到位。清单连续第四批零返工。
 > - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
 > - **文件**：见 file-index。
-
-### W1183（2026-11-09）：A5 系列收口批（三篇登记板块索引 + 双向链接 + 图标路径根修）
-
-**本批要点**（用户引用「推荐做一次系列收口」·不新增文档、不改篇数）：
-
-> - **T1 板块索引登记**：`docs/04-文化与历史背景/README.md` 新增「近期专题系列（W1180–W1182）」段，按「术语 → 传播 → 器物」递进列表，逐篇标注对应术语表组别 / 主题与站点入口。此前 README 只有命名规范与双索引格式，三篇虽已入库却无板块级入口。
-> - **T2 三篇互链补齐**：核查发现 W1182 已链 W1180/W1181，但 W1180 缺 W1181/W1182、W1181 缺 W1182 ⇒ 两篇各补一段「系列关联」并回指板块 README，三篇双向可达。
-> - **T3 站点反向入口**：`site/data/glossary.html` 在引用格式块前新增「深度解读」区，按术语组别给出三条专题链接 + 板块索引链接；`site/data/cultural-misreading.html` 与 `site/data/deconstruction.html` 在 `</main>` 前各加一行「关联解读」指向译介专题。可视化页原本没有关联文档区，故采用最小侵入的单行补法，不新增结构块。
-> - **T4 顺带发现并根修图标路径缺陷**：站点链接校验报 3 broken，全部为 `glossary.html` 的 `href="static/icons/..."`。根因是模板位于 `site/` 根、写裸 `"static/"`，而 `new_page.py` 固定输出到 `site/data/` 却不做路径重写 ⇒ 每个新页图标链接都会错。修法：`render_template` 增加 `text.replace('"static/', '"../static/')`（只匹配引号后紧跟 static，不误伤已有的 `../` 路径），并修正 glossary 存量三处；函数级验证生成页图标路径全部为 `../static/icons/...`、裸路径 0，站点 23238 链接 0 broken。这是 W1177 补模板四要素之后发现的同类脚手架缺陷。
-> - **T5 两条纪律实证**：① 改既有文件全程按坑表 E-03 用「临时文件 + `os.replace`」原子替换，`git diff --numstat` 核对各文件均为纯插入（N 0）；② 幂等检查曾因用通用前缀 `<section class="sect…` 判「已存在」而误跳过 glossary 插入 ⇒ 改用独特锚点「按术语表组别延伸的 A5 背景专题」——**又一次检索假阳性**，与第 69 槽 / E-212 同族，说明判据必须用独特串而非类名前缀。
-> - **T6 验证**：`lint_links --dir docs` 5445 链接 0 broken、`--dir site` 23238 链接 0 broken；Playwright 实测术语页 59 卡片 / 深度解读区存在 / 4 条 A5 链接 / JS 无报错；ruff 0 error；清单自测 7/7。计数链未变（A5 38 篇、A1-A6 619 篇）。
-> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
-> - **文件**：见 file-index。
-
-# 更新日志
-
-
-> **📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
-本项目所有重要变更均记录于此。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/)。
 

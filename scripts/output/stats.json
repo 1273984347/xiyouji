@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-15T21:33:48",
+  "_generated": "2026-11-15T21:53:11",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -55,8 +55,8 @@
     "domain": "html_total − _template.html（generate_csp TEMPLATE_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1245",
-    "value": 868
+    "last_changed_by": "W1246",
+    "value": 874
   },
   "gate_count": {
     "domain": "scripts/verify_delivery.py「第 N 槽/门禁」max",
@@ -69,8 +69,8 @@
     "domain": "site/**/*.html（递归全站）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1245",
-    "value": 869
+    "last_changed_by": "W1246",
+    "value": 875
   },
   "icon_allowlist_entries": {
     "domain": "scripts/output/_w949_icon_field_allowlist.json 顶层数组长度",
@@ -83,8 +83,8 @@
     "domain": "site 全树含 INLINED 标记页",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1245",
-    "value": 860
+    "last_changed_by": "W1246",
+    "value": 866
   },
   "learn_docs": {
     "domain": "docs/07-学以致用/*.md（排除 README）",
@@ -167,8 +167,8 @@
     "domain": "html_total − _template.html − _shell.html（check_js_syntax/check_structure）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1245",
-    "value": 867
+    "last_changed_by": "W1246",
+    "value": 873
   },
   "script_classes": {
     "domain": "scripts/[A-Z]_* 类目录数",
@@ -181,8 +181,8 @@
     "domain": "html_total − 两模板壳（check_seo_head SEO_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W591",
-    "last_changed_by": "W1245",
-    "value": 867
+    "last_changed_by": "W1246",
+    "value": 873
   },
   "site_data_html": {
     "domain": "site/data/*.html",
@@ -202,8 +202,8 @@
     "domain": "site/reader/**/*.html",
     "generator": "scripts/stats.py",
     "introduced_by": "W593",
-    "last_changed_by": "W1245",
-    "value": 630
+    "last_changed_by": "W1246",
+    "value": 636
   },
   "site_root_html": {
     "domain": "site/*.html",

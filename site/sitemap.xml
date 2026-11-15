@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- W591 SEO 清零·sitemap 由 scripts/gen_sitemap.py 生成·863 页面（EXCLUDE: _template.html, data/81-hardships-view.html, data/_shell.html, data/character-relationship-3d-view.html, rum-viewer.html, visit-viewer.html） -->
+<!-- W591 SEO 清零·sitemap 由 scripts/gen_sitemap.py 生成·869 页面（EXCLUDE: _template.html, data/81-hardships-view.html, data/_shell.html, data/character-relationship-3d-view.html, rum-viewer.html, visit-viewer.html） -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://1273984347.github.io/xiyouji/404.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/about.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -653,6 +653,12 @@
   <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/西游与西江月词牌赏析专题.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/西游诗词意象谱系专题.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/西游诗词韵律分析专题.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/诗词条目明细-密度最高六回.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/逐回诗词索引-第001-020回.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/逐回诗词索引-第021-040回.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/逐回诗词索引-第041-060回.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/逐回诗词索引-第061-080回.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/reader/poetry/逐回诗词索引-第081-100回.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/reader/themes-hub.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/reader/themes/index.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/reader/themes/不可靠叙述专题.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
