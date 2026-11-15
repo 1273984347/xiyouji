@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1246），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1247），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 866<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W1247（2026-11-15）：CI 首跑红清偿：搜索索引剔除未跟踪件重建 + 可视化基线补入新页
+
+**本批要点**（W1247 CI 首跑红清偿·PR #187）：
+
+> - **① 红一（第 46 槽·搜索索引）**：CI 报「期望 1046 / 实得 1047」。根因=本地生成索引时，并行会话的两份**未跟踪**文档（`docs/11-方案报告/README.md`、`T103 计划方案报告`）在工作树里，生成器按磁盘扫描 ⇒ 多出 1 条；干净 checkout 无此文件 ⇒ 差 1。处置=把未跟踪件临时移出后重建索引（zh 1008 / en 1046），`check_search_index_fresh` 0 FAIL。
+> - **② 红二（第 43 槽·可视化基线）**：`test_baseline_has_no_stale_or_missing_pages` 抓出「新增页未入基线：site/data/poetry-density.html」。根因=W1245 新增页面后未重生成 `chart-values-baseline.txt`（生成器 `--post` 链路不含该步）。处置=`node scripts/check_chart_values.js --generate-baseline`（90 页 / 540 行 / 冻结缺口 0）。
+> - **③ 教训（可复用）**：① 生成类产物（搜索索引、基线）必须在**未跟踪件清空后**生成，否则会把他方在途件计入；② `new_page --post` 的九步不含第 43 槽基线，新增可视化页后应补跑 `--generate-baseline`——建议后续并入 `--post`。
+> - **验证**：本地 verify full 79 段 0 FAIL；`test_visualization_data` + `test_check_search_index_fresh` 共 23 例全过。
+> - **文件**：见 file-index。
 
 ### W1246（2026-11-15）：reader 模板去 UI emoji（收藏/反馈三处）+ poetry 子树重建，第 72 槽棘轮 623→610
 
@@ -809,19 +819,6 @@
 > - **T5 引文实提**：`_cite_probe.py` 从第 1 / 2 / 9 / 17 回实提并逐字校验 6 条引文（含第 1 回语料字面「毕竟不之」，逐字保留不代为改写），`check_citations.py --file` 命中率 100%；`lint_links.py --dir docs` 5506 链接 0 broken、`--dir site` 23240 链接 0 broken；元信息块 v2 与术语一致性一次通过。
 > - **T6 索引同步（不让系列断链）**：A5 README 系列段扩为 W1180–W1185 并新增一行；术语速查页「深度解读」区加「四、回目结构」反向入口。**按行插入表格行并实读复核**，规避上一批「字符串替换导致 Markdown 表格断裂」的问题；改既有文件按坑表 E-03 用临时文件 + `os.replace` 原子替换。
 > - **T7 计数链**：A5 39→40、A1-A6 620→621；`docs/00-导读/统计口径说明.md` 表格、`site/dashboard.html` 三处、`docs_index.py` 重建 INDEX（866 篇）、stats 标记面跟随 11 处一次同步到位。清单连续第六批零返工。
-> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
-> - **文件**：见 file-index。
-
-### W1184（2026-11-09）：A5 空间框架专题（四大部洲与三界）
-
-**本批要点**（用户明确「继续在这个项目、不想换线」·按既定模式定题写作）：
-
-> - **T1 选题与分工**：定题《四大部洲与三界：〈西游记〉空间框架的文本内证》。项目已有六张地理可视化页（journey-geo-semiotics / journey-geo-3d / journey-map-interactive / journey-route / journey-spacetime / customs-pass-route），处理的都是**水平路线**；A5 里具体地名散见各篇（女儿国 34 次、通天河 18 次、火焰山 10 次、取经路线 9 次），而「东土大唐」「地理考据」零命中 ⇒ 本专题补**垂直宇宙框架**。术语表「五、地理名词」组为入口，是 W1180–W1182 之后的系列续篇。
-> - **T2 核心主张（文本内证）**：① 第 1 回「世界之间，遂分为四大部洲」把空间划分放在人物与情节之前，**空间框架先于叙事**；② 第 8 回如来评四洲「但那南赡部洲者，贪淫乐祸，多杀多争」把空间**伦理化**——取经的必要性来自洲的道德属性，而非路途远近；③ 前七回孙悟空逐一走遍地表、跨洲、海底龙宫、地下地府、天上天庭，构成一次**空间框架遍历仪式**，第八回才把叙事收回水平路线；④ 「器物管能做什么，空间管能在哪里做」——与 W1182 的器物克制链形成对照；⑤ 第 4 回「三十三座天宫」「七十二重宝殿」延续 W1180 归纳的数目趣味。
-> - **T3 证据边界**：学术论文索引未收佛教宇宙观 / 四大部洲教义溯源专门条目 ⇒ 本文**只作文本内证、不作教义断言**；术语表只登记三洲而原文列四洲（含北俱芦洲），**口径差异如实标注、不代为补写、不臆测省略原因**。第七章明列四条方法论边界。
-> - **T4 引文实提**：`_cite_probe.py` 从第 1 / 3 / 4 / 8 回实提并逐字校验 9 条引文（全部为 `text-search.json` 对应回目子串），`check_citations.py --file` 命中率 100%；`lint_links.py --dir docs` 5481 链接 0 broken、`--dir site` 23239 链接 0 broken；元信息块 v2 与术语一致性一次通过。
-> - **T5 索引同步（不让系列断在续篇）**：A5 README 系列段扩为 W1180–W1184 并增 W1184 行；术语速查页「深度解读」区增另一条反向入口。改既有文件按坑表 E-03 原子替换；**替换后复核发现新表格行落在空行之后导致 Markdown 表格断裂**，按行重排修复（W1184 紧接 W1182 表格行、段前留空行）——又一处「字符串替换后必须实读结果」的实证。
-> - **T6 计数链**：A5 38→39、A1-A6 619→620；`docs/00-导读/统计口径说明.md` 表格、`site/dashboard.html` 三处、`docs_index.py` 重建 INDEX（865 篇）、stats 标记面跟随 11 处一次同步到位。清单连续第四批零返工。
 > - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
 > - **文件**：见 file-index。
 
