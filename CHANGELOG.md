@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1247），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1248），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 866<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W1248（2026-11-15）：CI 二轮红清偿：朱砂审计面补入新页（poetry-density·实测零实底）
+
+**本批要点**（W1248 CI 二轮红清偿）：
+
+> - **① 红的事实**：PR #187 第二轮 CI，pytest shard 3/3 报 `test_vermilion_solid::test_scope_matches_audit_surface` 失败——「仅门禁有 ['data/poetry-density.html']·仅期望有 []」。
+> - **② 根因**：第 49 槽门禁的范围取 `site/` 全量（动态），而 `_w876_site_audit_final.json` 是 W876 的**冻结审计快照**（99 页）；新增页面不自动进入快照 ⇒ 两者集合不一致。
+> - **③ 处置**：先实测该页朱砂实底（`node scripts/check_vermilion_solid.js --pages data/poetry-density.html` ⇒ 0 FAIL），再按实测补入审计面（`{"text_on_bg": [], "fill": []}`——空表如实记录零命中，未伪造数值）。审计面 99→100 页，测试 11 例全过。
+> - **④ 教训**：新增可视化页的收口清单应再加两条——第 43 槽基线（`check_chart_values --generate-baseline`）与第 49 槽审计面（`_w876_site_audit_final.json`）；两者都不在 `new_page --post` 九步内。
+> - **验证**：本地 verify full 79 段 0 FAIL；`test_vermilion_solid` 11 例全过。
+> - **文件**：见 file-index。
 
 ### W1247（2026-11-15）：CI 首跑红清偿：搜索索引剔除未跟踪件重建 + 可视化基线补入新页
 

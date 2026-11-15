@@ -1,4542 +1,4546 @@
 {
-  "data/81-hardships-view.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "span",
-        "cls": "keytab active",
-        "kind": "background",
-        "area": 2872
-      },
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2717
-      },
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2980
-      }
-    ]
-  },
-  "data/81-hardships.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 1651
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2418
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 2006
-      }
-    ]
-  },
-  "data/_shell.html": {
-    "text_on_bg": [
-      {
-        "tag": "p",
-        "cls": "kicker",
-        "txt": "数据概览"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "span",
-        "cls": "seal",
-        "kind": "background",
-        "area": 1600
-      }
-    ]
-  },
-  "data/aesthetics.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "color-swatch",
-        "kind": "background",
-        "area": 16146
-      },
-      {
-        "tag": "div",
-        "cls": "scene-bar",
-        "kind": "background",
-        "area": 26219
-      },
-      {
-        "tag": "div",
-        "cls": "scene-bar",
-        "kind": "background",
-        "area": 26219
-      },
-      {
-        "tag": "div",
-        "cls": "scene-bar",
-        "kind": "background",
-        "area": 26219
-      },
-      {
-        "tag": "div",
-        "cls": "scene-bar",
-        "kind": "background",
-        "area": 26219
-      }
-    ]
-  },
-  "data/ai-dialogue.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "button",
-        "cls": "",
-        "kind": "background",
-        "area": 2759
-      }
-    ]
-  },
-  "data/business-model.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "天庭 vs 灵山组织对比"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "蟠桃垄断"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "\"创业 → 被招安 → 受挫 → 再创业"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "L0·创业者/CEO"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "L1·基层管理·天庭最低级官职（未入流）"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "L2·虚衔顾问·有名无实"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "4 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "L3·项目经理·执行主力"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "L9·佛级高管·合伙人级"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "L10·退休·资深顾问"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "全员阵亡"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "monster-card ",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "div",
-        "cls": "monster-card m-flaming",
-        "kind": "border-top",
-        "area": 1098
-      }
-    ]
-  },
-  "data/cave-estate.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      },
-      {
-        "tag": "span",
-        "cls": "tag king",
-        "kind": "background",
-        "area": 1300
-      }
-    ]
-  },
-  "data/century-dialogue.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "speech-bubble",
-        "kind": "border-top",
-        "area": 750
-      },
-      {
-        "tag": "div",
-        "cls": "speech-bubble",
-        "kind": "border-top",
-        "area": 750
-      },
-      {
-        "tag": "div",
-        "cls": "speech-bubble",
-        "kind": "border-top",
-        "area": 750
-      }
-    ]
-  },
-  "data/chapter-stats.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/chapter-structure-graph.html": {
-    "text_on_bg": [
-      {
-        "tag": "a",
-        "cls": "",
-        "txt": "→ 章节字数与对话统计（统计轨）"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/character-appearance.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/character-dynamic-network.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "阶段一"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "阶段二"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "阶段三"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "阶段四"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "button",
-        "cls": "stage-btn active",
-        "kind": "background",
-        "area": 5517
-      }
-    ]
-  },
-  "data/character-presence-timeline.html": {
-    "text_on_bg": [],
-    "fill": []
-  },
-  "data/character-relationship-3d-view.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "span",
-        "cls": "keytab active",
-        "kind": "background",
-        "area": 2220
-      },
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2717
-      },
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2980
-      }
-    ]
-  },
-  "data/character-relationship-3d.html": {
-    "text_on_bg": [
-      {
-        "tag": "a",
-        "cls": "",
-        "txt": "→ 人物动态网络（2D 轨）"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/character-semantic-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 599
-      }
-    ]
-  },
-  "data/character-sentiment-arc.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/chart-design.html": {
-    "text_on_bg": [
-      {
-        "tag": "div",
-        "cls": "domino-chain-title",
-        "txt": "袈裟事件链·金箍咒的诞生"
-      },
-      {
-        "tag": "div",
-        "cls": "domino-arrow",
-        "txt": "→"
-      },
-      {
-        "tag": "div",
-        "cls": "domino-arrow",
-        "txt": "→"
-      },
-      {
-        "tag": "div",
-        "cls": "domino-arrow",
-        "txt": "→"
-      },
-      {
-        "tag": "div",
-        "cls": "spiral-stage-name",
-        "txt": "S2 · 风暴期·心猿意马"
-      },
-      {
-        "tag": "div",
-        "cls": "ic-num",
-        "txt": "01 · DOMINO"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "图表即是装置·信息流等于物理联动"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "\"因果机器\""
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "domino-card",
-        "kind": "border-top",
-        "area": 737
-      },
-      {
-        "tag": "div",
-        "cls": "domino-hardship",
-        "kind": "background",
-        "area": 2035
-      },
-      {
-        "tag": "div",
-        "cls": "domino-card",
-        "kind": "border-top",
-        "area": 737
-      },
-      {
-        "tag": "div",
-        "cls": "domino-card",
-        "kind": "border-top",
-        "area": 737
-      },
-      {
-        "tag": "div",
-        "cls": "domino-hardship",
-        "kind": "background",
-        "area": 2035
-      },
-      {
-        "tag": "div",
-        "cls": "domino-card",
-        "kind": "border-top",
-        "area": 737
-      },
-      {
-        "tag": "div",
-        "cls": "domino-hardship",
-        "kind": "background",
-        "area": 3884
-      },
-      {
-        "tag": "div",
-        "cls": "sundial-card highlight-stress",
-        "kind": "border-top",
-        "area": 1090
-      }
-    ]
-  },
-  "data/cognitive-psychology.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "可得性启发"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "\"反向的\""
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "3"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5.6"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "4.3"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "3.5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "6.2"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "从外部控制逐步内化为自我控制"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "4 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2 / 10"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "char-card ",
-        "kind": "border-top",
-        "area": 1098
-      }
-    ]
-  },
-  "data/concept-device.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "button",
-        "cls": "era-btn active",
-        "kind": "background",
-        "area": 4744
-      },
-      {
-        "tag": "div",
-        "cls": "cipher-face cipher-back",
-        "kind": "border-top",
-        "area": 600
-      },
-      {
-        "tag": "div",
-        "cls": "cipher-face cipher-back",
-        "kind": "border-top",
-        "area": 600
-      },
-      {
-        "tag": "div",
-        "cls": "cipher-face cipher-back",
-        "kind": "border-top",
-        "area": 600
-      },
-      {
-        "tag": "div",
-        "cls": "cipher-face cipher-back",
-        "kind": "border-top",
-        "area": 600
-      },
-      {
-        "tag": "div",
-        "cls": "cipher-face cipher-back",
-        "kind": "border-top",
-        "area": 600
-      },
-      {
-        "tag": "button",
-        "cls": "danmaku-toggle",
-        "kind": "background",
-        "area": 2788
-      },
-      {
-        "tag": "div",
-        "cls": "hu-card",
-        "kind": "border-top",
-        "area": 487
-      },
-      {
-        "tag": "span",
-        "cls": "idev",
-        "kind": "background",
-        "area": 1062
-      },
-      {
-        "tag": "span",
-        "cls": "idev",
-        "kind": "background",
-        "area": 1546
-      },
-      {
-        "tag": "span",
-        "cls": "idev",
-        "kind": "background",
-        "area": 1546
-      },
-      {
-        "tag": "span",
-        "cls": "idev",
-        "kind": "background",
-        "area": 1062
-      },
-      {
-        "tag": "span",
-        "cls": "idev",
-        "kind": "background",
-        "area": 1304
-      }
-    ]
-  },
-  "data/counterfactual.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "badge validity-high",
-        "kind": "background",
-        "area": 1410
-      },
-      {
-        "tag": "span",
-        "cls": "badge validity-high",
-        "kind": "background",
-        "area": 1410
-      },
-      {
-        "tag": "span",
-        "cls": "badge validity-high",
-        "kind": "background",
-        "area": 1410
-      },
-      {
-        "tag": "span",
-        "cls": "badge validity-high",
-        "kind": "background",
-        "area": 1410
-      },
-      {
-        "tag": "span",
-        "cls": "badge validity-high",
-        "kind": "background",
-        "area": 1410
-      },
-      {
-        "tag": "span",
-        "cls": "badge validity-high",
-        "kind": "background",
-        "area": 1410
-      },
-      {
-        "tag": "span",
-        "cls": "badge validity-high",
-        "kind": "background",
-        "area": 1410
-      }
-    ]
-  },
-  "data/criticism-history.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "赋魅"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "candidate-card main",
-        "kind": "border-top",
-        "area": 1663
-      },
-      {
-        "tag": "div",
-        "cls": "cc-status",
-        "kind": "background",
-        "area": 3030
-      }
-    ]
-  },
-  "data/cross-time-danmaku.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "age-tab active",
-        "kind": "background",
-        "area": 5480
-      },
-      {
-        "tag": "button",
-        "cls": "",
-        "kind": "background",
-        "area": 3080
-      }
-    ]
-  },
-  "data/cultural-misreading.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/customs-pass-route.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/data-explorer.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "span",
-        "cls": "keytab active",
-        "kind": "background",
-        "area": 2872
-      },
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2717
-      },
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2980
-      }
-    ]
-  },
-  "data/deconstruction.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      }
-    ]
-  },
-  "data/dialogue-sentiment.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "stat-card negative",
-        "kind": "border-top",
-        "area": 1094
-      }
-    ]
-  },
-  "data/ecology.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1381
-      },
-      {
-        "tag": "div",
-        "cls": "compare-card invasive",
-        "kind": "border-top",
-        "area": 1669
-      },
-      {
-        "tag": "div",
-        "cls": "kpi-card ",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1381
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1381
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "span",
-        "cls": "damage-pill damage-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "div",
-        "cls": "stage-card during",
-        "kind": "border-top",
-        "area": 1098
-      }
-    ]
-  },
-  "data/emotional-heatmap.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "scholar-card",
-        "kind": "border-top",
-        "area": 809
-      }
-    ]
-  },
-  "data/ethics-consumption.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "sev-badge sev-extreme",
-        "kind": "background",
-        "area": 2389
-      },
-      {
-        "tag": "span",
-        "cls": "veg-badge veg-no",
-        "kind": "background",
-        "area": 865
-      },
-      {
-        "tag": "span",
-        "cls": "zero-tag",
-        "kind": "background",
-        "area": 1615
-      },
-      {
-        "tag": "span",
-        "cls": "veg-badge veg-no",
-        "kind": "background",
-        "area": 865
-      },
-      {
-        "tag": "span",
-        "cls": "zero-tag",
-        "kind": "background",
-        "area": 1615
-      },
-      {
-        "tag": "span",
-        "cls": "veg-badge veg-no",
-        "kind": "background",
-        "area": 865
-      },
-      {
-        "tag": "span",
-        "cls": "zero-tag",
-        "kind": "background",
-        "area": 1615
-      },
-      {
-        "tag": "span",
-        "cls": "veg-badge veg-no",
-        "kind": "background",
-        "area": 865
-      },
-      {
-        "tag": "div",
-        "cls": "ipo-outcome",
-        "kind": "border-top",
-        "area": 2157
-      },
-      {
-        "tag": "div",
-        "cls": "ipo-outcome",
-        "kind": "border-top",
-        "area": 2161
-      },
-      {
-        "tag": "div",
-        "cls": "ipo-outcome",
-        "kind": "border-top",
-        "area": 2161
-      },
-      {
-        "tag": "div",
-        "cls": "ipo-outcome",
-        "kind": "border-top",
-        "area": 2161
-      },
-      {
-        "tag": "div",
-        "cls": "ipo-outcome",
-        "kind": "border-top",
-        "area": 2161
-      }
-    ]
-  },
-  "data/famous-time-travel.html": {
-    "text_on_bg": [],
-    "fill": []
-  },
-  "data/four-dimensional-research-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "badge cinnabar",
-        "kind": "background",
-        "area": 676
-      }
-    ]
-  },
-  "data/four-heavenly-kings-artifacts.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "king-card",
-        "kind": "border-top",
-        "area": 1078
-      },
-      {
-        "tag": "div",
-        "cls": "swatch-bar",
-        "kind": "background",
-        "area": 575
-      }
-    ]
-  },
-  "data/game-webnovel.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 902
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 950
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 807
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 779
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 570
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 427
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 475
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 902
-      },
-      {
-        "tag": "div",
-        "cls": "cc-elem",
-        "kind": "background",
-        "area": 867
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 617
-      },
-      {
-        "tag": "div",
-        "cls": "cc-stat-fill",
-        "kind": "background",
-        "area": 893
-      },
-      {
-        "tag": "span",
-        "cls": "elem-chip",
-        "kind": "background",
-        "area": 665
-      },
-      {
-        "tag": "div",
-        "cls": "nc-genre",
-        "kind": "background",
-        "area": 8569
-      }
-    ]
-  },
-  "data/global-pattern.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "p-country",
-        "kind": "background",
-        "area": 2738
-      }
-    ]
-  },
-  "data/graph-explorer.html": {
-    "text_on_bg": [],
-    "fill": []
-  },
-  "data/guanyin-six-roles-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "role-card",
-        "kind": "border-top",
-        "area": 1459
-      },
-      {
-        "tag": "div",
-        "cls": "swatch-bar",
-        "kind": "background",
-        "area": 794
-      }
-    ]
-  },
-  "data/hardship-difficulty-heatmap.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "button",
-        "cls": "dim-btn active",
-        "kind": "background",
-        "area": 3344
-      },
-      {
-        "tag": "button",
-        "cls": "btn sort-btn active",
-        "kind": "background",
-        "area": 3444
-      }
-    ]
-  },
-  "data/hardship-heatmap.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "button",
-        "cls": "stage-btn active",
-        "kind": "background",
-        "area": 3631
-      }
-    ]
-  },
-  "data/heaven-power-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 528
-      },
-      {
-        "tag": "div",
-        "cls": "role-card r-king",
-        "kind": "border-top",
-        "area": 2225
-      },
-      {
-        "tag": "div",
-        "cls": "kpi-card ",
-        "kind": "border-top",
-        "area": 528
-      }
-    ]
-  },
-  "data/intertextuality-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/journey-geo-3d.html": {
-    "text_on_bg": [
-      {
-        "tag": "a",
-        "cls": "",
-        "txt": "→ 取经路线交互式地图（平面轨）"
-      }
-    ],
-    "fill": []
-  },
-  "data/journey-geo-semiotics.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "article",
-        "cls": "mech-card",
-        "kind": "border-top",
-        "area": 1459
-      }
-    ]
-  },
-  "data/journey-map-interactive.html": {
-    "text_on_bg": [
-      {
-        "tag": "a",
-        "cls": "",
-        "txt": "→ 取经全路程图（静态轨）"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "button",
-        "cls": "btn",
-        "kind": "background",
-        "area": 3869
-      }
-    ]
-  },
-  "data/journey-route.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/journey-spacetime.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "前段"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "中前段"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "中后段"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "终段"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "progress-fill",
-        "kind": "background",
-        "area": 6758
-      }
-    ]
-  },
-  "data/jurisprudence.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "severity-pill sev-high",
-        "kind": "background",
-        "area": 607
-      },
-      {
-        "tag": "span",
-        "cls": "severity-pill sev-high",
-        "kind": "background",
-        "area": 607
-      },
-      {
-        "tag": "div",
-        "cls": "artifact-card c-low",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "span",
-        "cls": "severity-pill sev-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "div",
-        "cls": "artifact-card c-low",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "span",
-        "cls": "severity-pill sev-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "span",
-        "cls": "severity-pill sev-high",
-        "kind": "background",
-        "area": 1188
-      },
-      {
-        "tag": "span",
-        "cls": "severity-pill sev-high",
-        "kind": "background",
-        "area": 2350
-      },
-      {
-        "tag": "span",
-        "cls": "severity-pill sev-high",
-        "kind": "background",
-        "area": 607
-      },
-      {
-        "tag": "span",
-        "cls": "severity-pill sev-high",
-        "kind": "background",
-        "area": 607
-      }
-    ]
-  },
-  "data/karma-reincarnation.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "生死簿篡改"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "泾河龙王"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "87.5%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "4 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "6 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "6 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7 案最终成正果/归正"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "最终全部超越轮回"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "char-card c-chusheng",
-        "kind": "border-top",
-        "area": 1098
-      }
-    ]
-  },
-  "data/language-style-radar.html": {
-    "text_on_bg": [
-      {
-        "tag": "a",
-        "cls": "",
-        "txt": "→ 对话情感分析（情感轨）"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/linguistics.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "梵语音译"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "三教合一"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "25%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "10%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "4"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "5%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "3"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "15%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "40%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "30%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "0%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "0"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "5%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "1"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "inc-card ",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "kind": "background",
-        "area": 1981
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "kind": "background",
-        "area": 594
-      },
-      {
-        "tag": "div",
-        "cls": "kpi-card ",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "mbti-card m-entp",
-        "kind": "border-top",
-        "area": 813
-      },
-      {
-        "tag": "div",
-        "cls": "char-card c-buddhist",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "kind": "background",
-        "area": 495
-      },
-      {
-        "tag": "div",
-        "cls": "char-card c-buddhist",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "kind": "background",
-        "area": 792
-      },
-      {
-        "tag": "div",
-        "cls": "char-card c-buddhist",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "kind": "background",
-        "area": 594
-      },
-      {
-        "tag": "div",
-        "cls": "kpi-card ",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/magic-system.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "intensity-bar",
-        "kind": "background",
-        "area": 768
-      },
-      {
-        "tag": "span",
-        "cls": "rank-badge rank-S+",
-        "kind": "background",
-        "area": 904
-      },
-      {
-        "tag": "span",
-        "cls": "rank-badge rank-S+",
-        "kind": "background",
-        "area": 904
-      },
-      {
-        "tag": "span",
-        "cls": "rank-badge rank-S+",
-        "kind": "background",
-        "area": 904
-      },
-      {
-        "tag": "span",
-        "cls": "rank-badge rank-S+",
-        "kind": "background",
-        "area": 904
-      },
-      {
-        "tag": "span",
-        "cls": "rank-badge rank-S+",
-        "kind": "background",
-        "area": 904
-      }
-    ]
-  },
-  "data/material-archaeology.html": {
-    "text_on_bg": [
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "图表 1.1 · 8 法宝硬度排序（莫氏"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "图表 1.2 · 硬度 × 密度 散点图"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "8 法宝材质档案"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "工艺流程 · Crafting Proc"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "材质分类统计"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "图表 2.1 · 4 角色社会身份演变折"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "4 角色服饰演变"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "19 服饰阶段详表"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "明代服饰对照表"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "图表 3.1 · 5 建筑类型平均豪华度"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "5 建筑类型卡片"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "14 洞府详表"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "8/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "6/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "7/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "4/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "6/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "10/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "8/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "10/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "7/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "3/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "6/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "7/10"
-      },
-      {
-        "tag": "td",
-        "cls": "center",
-        "txt": "9/10"
-      },
-      {
-        "tag": "h3",
-        "cls": "",
-        "txt": "建筑分类统计"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "artifact-card",
-        "kind": "border-top",
-        "area": 1094
-      },
-      {
-        "tag": "div",
-        "cls": "type-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 939
-      },
-      {
-        "tag": "span",
-        "cls": "tag palace",
-        "kind": "background",
-        "area": 1900
-      },
-      {
-        "tag": "span",
-        "cls": "tag palace",
-        "kind": "background",
-        "area": 1900
-      }
-    ]
-  },
-  "data/mbti-evolution.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "button",
-        "cls": "stage-btn active",
-        "kind": "background",
-        "area": 4953
-      }
-    ]
-  },
-  "data/methodology-matrix.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "quadrant-card",
-        "kind": "border-top",
-        "area": 1084
-      },
-      {
-        "tag": "span",
-        "cls": "quad-badge",
-        "kind": "background",
-        "area": 3331
-      },
-      {
-        "tag": "span",
-        "cls": "quad-badge",
-        "kind": "background",
-        "area": 3331
-      },
-      {
-        "tag": "span",
-        "cls": "quad-badge",
-        "kind": "background",
-        "area": 3331
-      },
-      {
-        "tag": "span",
-        "cls": "quad-badge",
-        "kind": "background",
-        "area": 3331
-      },
-      {
-        "tag": "span",
-        "cls": "quad-badge",
-        "kind": "background",
-        "area": 3331
-      },
-      {
-        "tag": "span",
-        "cls": "quad-badge",
-        "kind": "background",
-        "area": 3331
-      },
-      {
-        "tag": "span",
-        "cls": "phase-badge",
-        "kind": "background",
-        "area": 2359
-      },
-      {
-        "tag": "span",
-        "cls": "phase-badge",
-        "kind": "background",
-        "area": 2359
-      },
-      {
-        "tag": "div",
-        "cls": "phase-card",
-        "kind": "border-top",
-        "area": 1465
-      }
-    ]
-  },
-  "data/ming-political-thought-comparison.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "a",
-        "cls": "active",
-        "kind": "background",
-        "area": 2980
-      },
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "a",
-        "cls": "active",
-        "kind": "background",
-        "area": 2980
-      }
-    ]
-  },
-  "data/monster-background.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card ",
-        "kind": "border-top",
-        "area": 809
-      }
-    ]
-  },
-  "data/monster-capability-radar.html": {
-    "text_on_bg": [
-      {
-        "tag": "a",
-        "cls": "",
-        "txt": "monster-hierarchy-ne"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/monster-ecology-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "button",
-        "cls": "tab-btn active",
-        "kind": "background",
-        "area": 3256
-      }
-    ]
-  },
-  "data/monster-female-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/monster-hierarchy-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 528
-      },
-      {
-        "tag": "div",
-        "cls": "kpi-card ",
-        "kind": "border-top",
-        "area": 528
-      }
-    ]
-  },
-  "data/monster-sociology.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "作案模式分类学"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "25 个数据点"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "变化诈骗"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "变化诈骗"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "武力劫掠"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "色诱"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "法术威胁"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "团队围剿"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "主动信号"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "核心发现："
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "核心发现："
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "3 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "3 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2 / 10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "100% 被处死"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "白骨精"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "蜘蛛精七姐妹"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "蝎子精"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "车迟国三妖"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "signal-card s-active",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "div",
-        "cls": "signal-card s-active",
-        "kind": "border-top",
-        "area": 1098
-      },
-      {
-        "tag": "div",
-        "cls": "signal-card s-active",
-        "kind": "border-top",
-        "area": 1098
-      }
-    ]
-  },
-  "data/monster-victims-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "victim-card",
-        "kind": "border-top",
-        "area": 2221
-      },
-      {
-        "tag": "div",
-        "cls": "swatch-bar",
-        "kind": "background",
-        "area": 1251
-      }
-    ]
-  },
-  "data/music-structure.html": {
-    "text_on_bg": [
-      {
-        "tag": "h4",
-        "cls": "",
-        "txt": "第三乐章·八十一难"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "mv-card",
-        "kind": "border-top",
-        "area": 813
-      },
-      {
-        "tag": "span",
-        "cls": "sym-badge",
-        "kind": "background",
-        "area": 1603
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      },
-      {
-        "tag": "span",
-        "cls": "tag",
-        "kind": "background",
-        "area": 981
-      }
-    ]
-  },
-  "data/narrative-experiment.html": {
-    "text_on_bg": [
-      {
-        "tag": "div",
-        "cls": "sc-name",
-        "txt": "劫难收视率"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "这不是复述故事"
-      },
-      {
-        "tag": "div",
-        "cls": "gc-name",
-        "txt": "灾难型"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "player-card",
-        "kind": "border-top",
-        "area": 1078
-      },
-      {
-        "tag": "span",
-        "cls": "hc-owner",
-        "kind": "background",
-        "area": 2293
-      },
-      {
-        "tag": "span",
-        "cls": "hc-owner",
-        "kind": "background",
-        "area": 2293
-      },
-      {
-        "tag": "span",
-        "cls": "gh-tag",
-        "kind": "background",
-        "area": 1531
-      },
-      {
-        "tag": "div",
-        "cls": "narr-card",
-        "kind": "border-top",
-        "area": 818
-      },
-      {
-        "tag": "span",
-        "cls": "sc-chip",
-        "kind": "background",
-        "area": 3015
-      },
-      {
-        "tag": "span",
-        "cls": "sc-chip",
-        "kind": "background",
-        "area": 3015
-      },
-      {
-        "tag": "div",
-        "cls": "sc-cat",
-        "kind": "background",
-        "area": 1262
-      },
-      {
-        "tag": "span",
-        "cls": "sc-chip",
-        "kind": "background",
-        "area": 3015
-      },
-      {
-        "tag": "span",
-        "cls": "sc-chip",
-        "kind": "background",
-        "area": 3015
-      },
-      {
-        "tag": "span",
-        "cls": "sc-chip",
-        "kind": "background",
-        "area": 3015
-      }
-    ]
-  },
-  "data/narrative-rhythm-curve.html": {
-    "text_on_bg": [
-      {
-        "tag": "a",
-        "cls": "",
-        "txt": "→ 时间线（时间轨）"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "button",
-        "cls": "btn",
-        "kind": "background",
-        "area": 2890
-      }
-    ]
-  },
-  "data/narratology-12d-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/narratology-16d-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/perf-canvas-rendering.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 813
-      },
-      {
-        "tag": "button",
-        "cls": "",
-        "kind": "background",
-        "area": 3842
-      },
-      {
-        "tag": "div",
-        "cls": "bar-seg svg-seg",
-        "kind": "background",
-        "area": 19987
-      }
-    ]
-  },
-  "data/philosophy.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "心猿心性曲线"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "微观视角"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "六耳猕猴事件（第 58 回）"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "纵"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "真正的觉悟始于\"降伏二心\""
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "2"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "3"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "0"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "81 难"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "嗔怒"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "三毒"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "嗔怒"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "12"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "15"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "11"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "\"破执\""
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "\"色不异空\""
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "所谓取经·其实是降伏心猿意马的过程"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "\"破执\""
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "表层"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "降伏心猿 = 转化心猿·而非消灭心猿"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "所谓取经·其实是降伏心猿意马的过程"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/pilgrim-team-dynamic-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "button",
-        "cls": "ctrl-btn active",
-        "kind": "background",
-        "area": 2567
-      },
-      {
-        "tag": "div",
-        "cls": "phase-card active",
-        "kind": "background",
-        "area": 16330
-      }
-    ]
-  },
-  "data/pilgrim-team-psychology-arc.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "progress-fill",
-        "kind": "background",
-        "area": 6758
-      }
-    ]
-  },
-  "data/poetry-rhythm-analysis.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "progress-fill",
-        "kind": "background",
-        "area": 6758
-      }
-    ]
-  },
-  "data/power-resources.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "三界权力结构"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "妖界"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "6"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9.0"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "唐僧肉"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "天庭"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "天庭"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "6"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "天庭"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "span",
-        "cls": "",
-        "txt": "天庭"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "faction-card",
-        "kind": "border-top",
-        "area": 1098
-      }
-    ]
-  },
-  "data/relationships.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "势力分布"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "天庭"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "6"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "6"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "金刚琢"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "芭蕉扇（铁扇公主）"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "紫金红葫芦"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "阴阳二气瓶"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "金箍咒三件"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "金箍棒"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "玉净瓶"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "九齿钉耙"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "54%"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "推进者+智多星"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "10"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "唐僧-孙悟空"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "猪八戒-沙僧"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "role-tag primary",
-        "kind": "background",
-        "area": 1031
-      },
-      {
-        "tag": "span",
-        "cls": "role-tag primary",
-        "kind": "background",
-        "area": 1031
-      },
-      {
-        "tag": "span",
-        "cls": "role-tag primary",
-        "kind": "background",
-        "area": 1031
-      },
-      {
-        "tag": "span",
-        "cls": "role-tag primary",
-        "kind": "background",
-        "area": 1031
-      },
-      {
-        "tag": "span",
-        "cls": "role-tag primary",
-        "kind": "background",
-        "area": 776
-      }
-    ]
-  },
-  "data/risk-project.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "PMBOK 风险评估"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "一次失败即项目终止"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "47"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "12"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "5"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "妖怪袭击"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "关键成功因素"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "理想主义愿景"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "8"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "7"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "9"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "6"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "结构性缺位"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "风险减轻机制"
-      },
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "治理风险"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "char-card c-tang",
-        "kind": "border-top",
-        "area": 1098
-      }
-    ]
-  },
-  "data/search.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2220
-      }
-    ]
-  },
-  "data/six-senses-narratology-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/social-media.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "platform-badge",
-        "kind": "background",
-        "area": 1472
-      }
-    ]
-  },
-  "data/story-timeline.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 809
-      }
-    ]
-  },
-  "data/tag-cloud.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "button",
-        "cls": "tab-btn",
-        "kind": "background",
-        "area": 3514
-      },
-      {
-        "tag": "span",
-        "cls": "rc-size",
-        "kind": "background",
-        "area": 1205
-      },
-      {
-        "tag": "span",
-        "cls": "rc-size",
-        "kind": "background",
-        "area": 1063
-      },
-      {
-        "tag": "span",
-        "cls": "rc-size",
-        "kind": "background",
-        "area": 1063
-      },
-      {
-        "tag": "span",
-        "cls": "rc-size",
-        "kind": "background",
-        "area": 1063
-      },
-      {
-        "tag": "span",
-        "cls": "rc-size",
-        "kind": "background",
-        "area": 1063
-      }
-    ]
-  },
-  "data/text-evolution.html": {
-    "text_on_bg": [
-      {
-        "tag": "strong",
-        "cls": "",
-        "txt": "红"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "evo-step first",
-        "kind": "background",
-        "area": 9754
-      },
-      {
-        "tag": "div",
-        "cls": "evo-step first",
-        "kind": "background",
-        "area": 6890
-      },
-      {
-        "tag": "div",
-        "cls": "evo-step first",
-        "kind": "background",
-        "area": 6651
-      },
-      {
-        "tag": "div",
-        "cls": "evo-step first",
-        "kind": "background",
-        "area": 6890
-      },
-      {
-        "tag": "div",
-        "cls": "evo-step first",
-        "kind": "background",
-        "area": 6737
-      },
-      {
-        "tag": "div",
-        "cls": "evo-step first",
-        "kind": "background",
-        "area": 7368
-      },
-      {
-        "tag": "div",
-        "cls": "quote-card",
-        "kind": "border-top",
-        "area": 1094
-      }
-    ]
-  },
-  "data/text-search.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/theological-intervention-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 619
-      }
-    ]
-  },
-  "data/timeline.html": {
-    "text_on_bg": [
-      {
-        "tag": "span",
-        "cls": "ec-axis",
-        "txt": "· 成书史"
-      },
-      {
-        "tag": "span",
-        "cls": "ec-axis",
-        "txt": "· 成书史"
-      },
-      {
-        "tag": "span",
-        "cls": "ec-axis",
-        "txt": "· 成书史"
-      },
-      {
-        "tag": "span",
-        "cls": "ec-axis",
-        "txt": "· 成书史"
-      },
-      {
-        "tag": "span",
-        "cls": "ec-axis",
-        "txt": "· 成书史"
-      },
-      {
-        "tag": "span",
-        "cls": "ec-axis",
-        "txt": "· 成书史"
-      },
-      {
-        "tag": "span",
-        "cls": "ec-axis",
-        "txt": "· 成书史"
-      }
-    ],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      }
-    ]
-  },
-  "data/underworld-power-network.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 528
-      },
-      {
-        "tag": "div",
-        "cls": "role-card r-king",
-        "kind": "border-top",
-        "area": 1465
-      },
-      {
-        "tag": "div",
-        "cls": "kpi-card ",
-        "kind": "border-top",
-        "area": 528
-      }
-    ]
-  },
-  "data/visual-art.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "div",
-        "cls": "chant-card amp-high",
-        "kind": "border-top",
-        "area": 642
-      },
-      {
-        "tag": "span",
-        "cls": "ch-amp-bar",
-        "kind": "background",
-        "area": 801
-      },
-      {
-        "tag": "div",
-        "cls": "sc-cat cat-danger",
-        "kind": "background",
-        "area": 1063
-      },
-      {
-        "tag": "div",
-        "cls": "sc-cat cat-danger",
-        "kind": "background",
-        "area": 1063
-      },
-      {
-        "tag": "div",
-        "cls": "sc-cat cat-danger",
-        "kind": "background",
-        "area": 1063
-      },
-      {
-        "tag": "div",
-        "cls": "sc-cat cat-danger",
-        "kind": "background",
-        "area": 1063
-      },
-      {
-        "tag": "div",
-        "cls": "sc-cat cat-danger",
-        "kind": "background",
-        "area": 1063
-      },
-      {
-        "tag": "div",
-        "cls": "idea-card",
-        "kind": "border-top",
-        "area": 642
-      },
-      {
-        "tag": "div",
-        "cls": "id-form",
-        "kind": "background",
-        "area": 2576
-      }
-    ]
-  },
-  "data/workplace.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "div",
-        "cls": "kpi-card",
-        "kind": "border-top",
-        "area": 3379
-      },
-      {
-        "tag": "span",
-        "cls": "alert-badge",
-        "kind": "background",
-        "area": 880
-      },
-      {
-        "tag": "span",
-        "cls": "alert-badge",
-        "kind": "background",
-        "area": 2581
-      },
-      {
-        "tag": "span",
-        "cls": "alert-badge",
-        "kind": "background",
-        "area": 1901
-      },
-      {
-        "tag": "span",
-        "cls": "alert-badge",
-        "kind": "background",
-        "area": 880
-      },
-      {
-        "tag": "span",
-        "cls": "alert-badge",
-        "kind": "background",
-        "area": 2581
-      },
-      {
-        "tag": "span",
-        "cls": "alert-badge",
-        "kind": "background",
-        "area": 1901
-      },
-      {
-        "tag": "span",
-        "cls": "alert-badge",
-        "kind": "background",
-        "area": 880
-      },
-      {
-        "tag": "div",
-        "cls": "bw-cat",
-        "kind": "background",
-        "area": 1435
-      }
-    ]
-  },
-  "404.html": {
-    "text_on_bg": [],
-    "fill": []
-  },
-  "curated.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "span",
-        "cls": "seal",
-        "kind": "background",
-        "area": 1600
-      },
-      {
-        "tag": "a",
-        "cls": "primary",
-        "kind": "background",
-        "area": 6625
-      }
-    ]
-  },
-  "dashboard.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "span",
-        "cls": "seal",
-        "kind": "background",
-        "area": 1936
-      },
-      {
-        "tag": "section",
-        "cls": "route-strip",
-        "kind": "border-top",
-        "area": 3840
-      },
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2717
-      },
-      {
-        "tag": "button",
-        "cls": "vt-btn",
-        "kind": "background",
-        "area": 2980
-      },
-      {
-        "tag": "button",
-        "cls": "filter-tab active",
-        "kind": "background",
-        "area": 1738
-      },
-      {
-        "tag": "button",
-        "cls": "rag-fab",
-        "kind": "background",
-        "area": 3136
-      }
-    ]
-  },
-  "dukou-engine.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "button",
-        "cls": "",
-        "kind": "background",
-        "area": 4880
-      }
-    ]
-  },
-  "guide.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "span",
-        "cls": "seal",
-        "kind": "background",
-        "area": 1600
-      },
-      {
-        "tag": "a",
-        "cls": "primary",
-        "kind": "background",
-        "area": 6625
-      }
-    ]
-  },
-  "index.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "button",
-        "cls": "rag-fab",
-        "kind": "background",
-        "area": 3136
-      }
-    ]
-  },
-  "rum-viewer.html": {
-    "text_on_bg": [],
-    "fill": []
-  },
-  "visit-viewer.html": {
-    "text_on_bg": [],
-    "fill": []
-  },
-  "about.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "a",
-        "cls": "primary",
-        "kind": "background",
-        "area": 0
-      }
-    ]
-  },
-  "data/wukong-tangseng-benchmark.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "rect",
-        "cls": "weight-bar",
-        "kind": "fill",
-        "area": 0
-      }
-    ]
-  },
-  "data/glossary.html": {
-    "text_on_bg": [],
-    "fill": [
-      {
-        "tag": "button",
-        "cls": "filter-tab active",
-        "kind": "background",
-        "area": 2577
-      }
-    ]
-  }
+ "404.html": {
+  "fill": [],
+  "text_on_bg": []
+ },
+ "about.html": {
+  "fill": [
+   {
+    "area": 0,
+    "cls": "primary",
+    "kind": "background",
+    "tag": "a"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "curated.html": {
+  "fill": [
+   {
+    "area": 1600,
+    "cls": "seal",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 6625,
+    "cls": "primary",
+    "kind": "background",
+    "tag": "a"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "dashboard.html": {
+  "fill": [
+   {
+    "area": 1936,
+    "cls": "seal",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3840,
+    "cls": "route-strip",
+    "kind": "border-top",
+    "tag": "section"
+   },
+   {
+    "area": 2717,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 2980,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 1738,
+    "cls": "filter-tab active",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 3136,
+    "cls": "rag-fab",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/81-hardships-view.html": {
+  "fill": [
+   {
+    "area": 2872,
+    "cls": "keytab active",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2717,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 2980,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/81-hardships.html": {
+  "fill": [
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1651,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2418,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2006,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/_shell.html": {
+  "fill": [
+   {
+    "area": 1600,
+    "cls": "seal",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "kicker",
+    "tag": "p",
+    "txt": "数据概览"
+   }
+  ]
+ },
+ "data/aesthetics.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 16146,
+    "cls": "color-swatch",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 26219,
+    "cls": "scene-bar",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 26219,
+    "cls": "scene-bar",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 26219,
+    "cls": "scene-bar",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 26219,
+    "cls": "scene-bar",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/ai-dialogue.html": {
+  "fill": [
+   {
+    "area": 2759,
+    "cls": "",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/business-model.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "monster-card ",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "monster-card m-flaming",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "天庭 vs 灵山组织对比"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "蟠桃垄断"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "\"创业 → 被招安 → 受挫 → 再创业"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "L0·创业者/CEO"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "L1·基层管理·天庭最低级官职（未入流）"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "L2·虚衔顾问·有名无实"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "4 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "L3·项目经理·执行主力"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "L9·佛级高管·合伙人级"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "L10·退休·资深顾问"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "全员阵亡"
+   }
+  ]
+ },
+ "data/cave-estate.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1300,
+    "cls": "tag king",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/century-dialogue.html": {
+  "fill": [
+   {
+    "area": 750,
+    "cls": "speech-bubble",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 750,
+    "cls": "speech-bubble",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 750,
+    "cls": "speech-bubble",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/chapter-stats.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/chapter-structure-graph.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "a",
+    "txt": "→ 章节字数与对话统计（统计轨）"
+   }
+  ]
+ },
+ "data/character-appearance.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/character-dynamic-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 5517,
+    "cls": "stage-btn active",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "阶段一"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "阶段二"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "阶段三"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "阶段四"
+   }
+  ]
+ },
+ "data/character-presence-timeline.html": {
+  "fill": [],
+  "text_on_bg": []
+ },
+ "data/character-relationship-3d-view.html": {
+  "fill": [
+   {
+    "area": 2220,
+    "cls": "keytab active",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2717,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 2980,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/character-relationship-3d.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "a",
+    "txt": "→ 人物动态网络（2D 轨）"
+   }
+  ]
+ },
+ "data/character-semantic-network.html": {
+  "fill": [
+   {
+    "area": 599,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/character-sentiment-arc.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/chart-design.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 737,
+    "cls": "domino-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2035,
+    "cls": "domino-hardship",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 737,
+    "cls": "domino-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 737,
+    "cls": "domino-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2035,
+    "cls": "domino-hardship",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 737,
+    "cls": "domino-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3884,
+    "cls": "domino-hardship",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 1090,
+    "cls": "sundial-card highlight-stress",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "domino-chain-title",
+    "tag": "div",
+    "txt": "袈裟事件链·金箍咒的诞生"
+   },
+   {
+    "cls": "domino-arrow",
+    "tag": "div",
+    "txt": "→"
+   },
+   {
+    "cls": "domino-arrow",
+    "tag": "div",
+    "txt": "→"
+   },
+   {
+    "cls": "domino-arrow",
+    "tag": "div",
+    "txt": "→"
+   },
+   {
+    "cls": "spiral-stage-name",
+    "tag": "div",
+    "txt": "S2 · 风暴期·心猿意马"
+   },
+   {
+    "cls": "ic-num",
+    "tag": "div",
+    "txt": "01 · DOMINO"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "图表即是装置·信息流等于物理联动"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "\"因果机器\""
+   }
+  ]
+ },
+ "data/cognitive-psychology.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "char-card ",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "可得性启发"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "\"反向的\""
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "3"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5.6"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "4.3"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "3.5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "6.2"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "从外部控制逐步内化为自我控制"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "4 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2 / 10"
+   }
+  ]
+ },
+ "data/concept-device.html": {
+  "fill": [
+   {
+    "area": 4744,
+    "cls": "era-btn active",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 600,
+    "cls": "cipher-face cipher-back",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 600,
+    "cls": "cipher-face cipher-back",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 600,
+    "cls": "cipher-face cipher-back",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 600,
+    "cls": "cipher-face cipher-back",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 600,
+    "cls": "cipher-face cipher-back",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2788,
+    "cls": "danmaku-toggle",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 487,
+    "cls": "hu-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1062,
+    "cls": "idev",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1546,
+    "cls": "idev",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1546,
+    "cls": "idev",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1062,
+    "cls": "idev",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1304,
+    "cls": "idev",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/counterfactual.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1410,
+    "cls": "badge validity-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1410,
+    "cls": "badge validity-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1410,
+    "cls": "badge validity-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1410,
+    "cls": "badge validity-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1410,
+    "cls": "badge validity-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1410,
+    "cls": "badge validity-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1410,
+    "cls": "badge validity-high",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/criticism-history.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1663,
+    "cls": "candidate-card main",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3030,
+    "cls": "cc-status",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "赋魅"
+   }
+  ]
+ },
+ "data/cross-time-danmaku.html": {
+  "fill": [
+   {
+    "area": 5480,
+    "cls": "age-tab active",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 3080,
+    "cls": "",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/cultural-misreading.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/customs-pass-route.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/data-explorer.html": {
+  "fill": [
+   {
+    "area": 2872,
+    "cls": "keytab active",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2717,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 2980,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/deconstruction.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/dialogue-sentiment.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1094,
+    "cls": "stat-card negative",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/ecology.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1188,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1188,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1381,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1669,
+    "cls": "compare-card invasive",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3379,
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1188,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1188,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1381,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1381,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1188,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1188,
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1098,
+    "cls": "stage-card during",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/emotional-heatmap.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 809,
+    "cls": "scholar-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/ethics-consumption.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2389,
+    "cls": "sev-badge sev-extreme",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 865,
+    "cls": "veg-badge veg-no",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1615,
+    "cls": "zero-tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 865,
+    "cls": "veg-badge veg-no",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1615,
+    "cls": "zero-tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 865,
+    "cls": "veg-badge veg-no",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1615,
+    "cls": "zero-tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 865,
+    "cls": "veg-badge veg-no",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2157,
+    "cls": "ipo-outcome",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2161,
+    "cls": "ipo-outcome",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2161,
+    "cls": "ipo-outcome",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2161,
+    "cls": "ipo-outcome",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2161,
+    "cls": "ipo-outcome",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/famous-time-travel.html": {
+  "fill": [],
+  "text_on_bg": []
+ },
+ "data/four-dimensional-research-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 676,
+    "cls": "badge cinnabar",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/four-heavenly-kings-artifacts.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1078,
+    "cls": "king-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 575,
+    "cls": "swatch-bar",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/game-webnovel.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 902,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 950,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 807,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 779,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 570,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 427,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 475,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 902,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 867,
+    "cls": "cc-elem",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 617,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 893,
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 665,
+    "cls": "elem-chip",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 8569,
+    "cls": "nc-genre",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/global-pattern.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2738,
+    "cls": "p-country",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/glossary.html": {
+  "fill": [
+   {
+    "area": 2577,
+    "cls": "filter-tab active",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/graph-explorer.html": {
+  "fill": [],
+  "text_on_bg": []
+ },
+ "data/guanyin-six-roles-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1459,
+    "cls": "role-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 794,
+    "cls": "swatch-bar",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/hardship-difficulty-heatmap.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3344,
+    "cls": "dim-btn active",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 3444,
+    "cls": "btn sort-btn active",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/hardship-heatmap.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3631,
+    "cls": "stage-btn active",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/heaven-power-network.html": {
+  "fill": [
+   {
+    "area": 528,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2225,
+    "cls": "role-card r-king",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 528,
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/intertextuality-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/journey-geo-3d.html": {
+  "fill": [],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "a",
+    "txt": "→ 取经路线交互式地图（平面轨）"
+   }
+  ]
+ },
+ "data/journey-geo-semiotics.html": {
+  "fill": [
+   {
+    "area": 1459,
+    "cls": "mech-card",
+    "kind": "border-top",
+    "tag": "article"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/journey-map-interactive.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3869,
+    "cls": "btn",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "a",
+    "txt": "→ 取经全路程图（静态轨）"
+   }
+  ]
+ },
+ "data/journey-route.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/journey-spacetime.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 6758,
+    "cls": "progress-fill",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "前段"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "中前段"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "中后段"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "终段"
+   }
+  ]
+ },
+ "data/jurisprudence.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 607,
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 607,
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1098,
+    "cls": "artifact-card c-low",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1188,
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1098,
+    "cls": "artifact-card c-low",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1188,
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1188,
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2350,
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 607,
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 607,
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   }
+  ]
+ },
+ "data/karma-reincarnation.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "char-card c-chusheng",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "生死簿篡改"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "泾河龙王"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "87.5%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "4 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "6 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "6 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7 案最终成正果/归正"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "最终全部超越轮回"
+   }
+  ]
+ },
+ "data/language-style-radar.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "a",
+    "txt": "→ 对话情感分析（情感轨）"
+   }
+  ]
+ },
+ "data/linguistics.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "inc-card ",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1981,
+    "cls": "",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 594,
+    "cls": "",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3379,
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 813,
+    "cls": "mbti-card m-entp",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "char-card c-buddhist",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 495,
+    "cls": "",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1098,
+    "cls": "char-card c-buddhist",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 792,
+    "cls": "",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1098,
+    "cls": "char-card c-buddhist",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 594,
+    "cls": "",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3379,
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "梵语音译"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "三教合一"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "25%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "10%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "4"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "5%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "3"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "15%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "40%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "30%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "0%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "0"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "5%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "1"
+   }
+  ]
+ },
+ "data/magic-system.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 768,
+    "cls": "intensity-bar",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 904,
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 904,
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 904,
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 904,
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 904,
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/material-archaeology.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1094,
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3379,
+    "cls": "type-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 939,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1900,
+    "cls": "tag palace",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1900,
+    "cls": "tag palace",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "图表 1.1 · 8 法宝硬度排序（莫氏"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "图表 1.2 · 硬度 × 密度 散点图"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "8 法宝材质档案"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "工艺流程 · Crafting Proc"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "材质分类统计"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "图表 2.1 · 4 角色社会身份演变折"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "4 角色服饰演变"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "19 服饰阶段详表"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "明代服饰对照表"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "图表 3.1 · 5 建筑类型平均豪华度"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "5 建筑类型卡片"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "14 洞府详表"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "8/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "6/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "7/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "4/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "6/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "10/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "8/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "10/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "7/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "3/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "6/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "7/10"
+   },
+   {
+    "cls": "center",
+    "tag": "td",
+    "txt": "9/10"
+   },
+   {
+    "cls": "",
+    "tag": "h3",
+    "txt": "建筑分类统计"
+   }
+  ]
+ },
+ "data/mbti-evolution.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 4953,
+    "cls": "stage-btn active",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/methodology-matrix.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1084,
+    "cls": "quadrant-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3331,
+    "cls": "quad-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3331,
+    "cls": "quad-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3331,
+    "cls": "quad-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3331,
+    "cls": "quad-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3331,
+    "cls": "quad-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3331,
+    "cls": "quad-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2359,
+    "cls": "phase-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2359,
+    "cls": "phase-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1465,
+    "cls": "phase-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/ming-political-thought-comparison.html": {
+  "fill": [
+   {
+    "area": 2980,
+    "cls": "active",
+    "kind": "background",
+    "tag": "a"
+   },
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2980,
+    "cls": "active",
+    "kind": "background",
+    "tag": "a"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/monster-background.html": {
+  "fill": [
+   {
+    "area": 809,
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/monster-capability-radar.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "a",
+    "txt": "monster-hierarchy-ne"
+   }
+  ]
+ },
+ "data/monster-ecology-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3256,
+    "cls": "tab-btn active",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/monster-female-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/monster-hierarchy-network.html": {
+  "fill": [
+   {
+    "area": 528,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 528,
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/monster-sociology.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "signal-card s-active",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "signal-card s-active",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "signal-card s-active",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "作案模式分类学"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "25 个数据点"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "变化诈骗"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "变化诈骗"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "武力劫掠"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "色诱"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "法术威胁"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "团队围剿"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "主动信号"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "核心发现："
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "核心发现："
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "3 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "3 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2 / 10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "100% 被处死"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "白骨精"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "蜘蛛精七姐妹"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "蝎子精"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "车迟国三妖"
+   }
+  ]
+ },
+ "data/monster-victims-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2221,
+    "cls": "victim-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1251,
+    "cls": "swatch-bar",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/music-structure.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 813,
+    "cls": "mv-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1603,
+    "cls": "sym-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 981,
+    "cls": "tag",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "h4",
+    "txt": "第三乐章·八十一难"
+   }
+  ]
+ },
+ "data/narrative-experiment.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1078,
+    "cls": "player-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2293,
+    "cls": "hc-owner",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2293,
+    "cls": "hc-owner",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1531,
+    "cls": "gh-tag",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 818,
+    "cls": "narr-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3015,
+    "cls": "sc-chip",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3015,
+    "cls": "sc-chip",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1262,
+    "cls": "sc-cat",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 3015,
+    "cls": "sc-chip",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3015,
+    "cls": "sc-chip",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 3015,
+    "cls": "sc-chip",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "sc-name",
+    "tag": "div",
+    "txt": "劫难收视率"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "这不是复述故事"
+   },
+   {
+    "cls": "gc-name",
+    "tag": "div",
+    "txt": "灾难型"
+   }
+  ]
+ },
+ "data/narrative-rhythm-curve.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2890,
+    "cls": "btn",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "a",
+    "txt": "→ 时间线（时间轨）"
+   }
+  ]
+ },
+ "data/narratology-12d-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/narratology-16d-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/perf-canvas-rendering.html": {
+  "fill": [
+   {
+    "area": 813,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 3842,
+    "cls": "",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 19987,
+    "cls": "bar-seg svg-seg",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/philosophy.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "心猿心性曲线"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "微观视角"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "六耳猕猴事件（第 58 回）"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "纵"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "真正的觉悟始于\"降伏二心\""
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "2"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "3"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "0"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "81 难"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "嗔怒"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "三毒"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "嗔怒"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "12"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "15"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "11"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "\"破执\""
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "\"色不异空\""
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "所谓取经·其实是降伏心猿意马的过程"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "\"破执\""
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "表层"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "降伏心猿 = 转化心猿·而非消灭心猿"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "所谓取经·其实是降伏心猿意马的过程"
+   }
+  ]
+ },
+ "data/pilgrim-team-dynamic-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2567,
+    "cls": "ctrl-btn active",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 16330,
+    "cls": "phase-card active",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/pilgrim-team-psychology-arc.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 6758,
+    "cls": "progress-fill",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/poetry-density.html": {
+  "fill": [],
+  "text_on_bg": []
+ },
+ "data/poetry-rhythm-analysis.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 6758,
+    "cls": "progress-fill",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/power-resources.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "faction-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "三界权力结构"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "妖界"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "6"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9.0"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "唐僧肉"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "天庭"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "天庭"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "6"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "天庭"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "span",
+    "txt": "天庭"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   }
+  ]
+ },
+ "data/relationships.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1031,
+    "cls": "role-tag primary",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1031,
+    "cls": "role-tag primary",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1031,
+    "cls": "role-tag primary",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1031,
+    "cls": "role-tag primary",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 776,
+    "cls": "role-tag primary",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "势力分布"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "天庭"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "6"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "6"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "金刚琢"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "芭蕉扇（铁扇公主）"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "紫金红葫芦"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "阴阳二气瓶"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "金箍咒三件"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "金箍棒"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "玉净瓶"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "九齿钉耙"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "54%"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "推进者+智多星"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "10"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "唐僧-孙悟空"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "猪八戒-沙僧"
+   }
+  ]
+ },
+ "data/risk-project.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1098,
+    "cls": "char-card c-tang",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "PMBOK 风险评估"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "一次失败即项目终止"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "47"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "12"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "5"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "妖怪袭击"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "关键成功因素"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "理想主义愿景"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "8"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "7"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "9"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "6"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "结构性缺位"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "风险减轻机制"
+   },
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "治理风险"
+   }
+  ]
+ },
+ "data/search.html": {
+  "fill": [
+   {
+    "area": 2220,
+    "cls": "vt-btn",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/six-senses-narratology-network.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/social-media.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1472,
+    "cls": "platform-badge",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/story-timeline.html": {
+  "fill": [
+   {
+    "area": 809,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/tag-cloud.html": {
+  "fill": [
+   {
+    "area": 3514,
+    "cls": "tab-btn",
+    "kind": "background",
+    "tag": "button"
+   },
+   {
+    "area": 1205,
+    "cls": "rc-size",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1063,
+    "cls": "rc-size",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1063,
+    "cls": "rc-size",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1063,
+    "cls": "rc-size",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1063,
+    "cls": "rc-size",
+    "kind": "background",
+    "tag": "span"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/text-evolution.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 9754,
+    "cls": "evo-step first",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 6890,
+    "cls": "evo-step first",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 6651,
+    "cls": "evo-step first",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 6890,
+    "cls": "evo-step first",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 6737,
+    "cls": "evo-step first",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 7368,
+    "cls": "evo-step first",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 1094,
+    "cls": "quote-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "",
+    "tag": "strong",
+    "txt": "红"
+   }
+  ]
+ },
+ "data/text-search.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/theological-intervention-network.html": {
+  "fill": [
+   {
+    "area": 619,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/timeline.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": [
+   {
+    "cls": "ec-axis",
+    "tag": "span",
+    "txt": "· 成书史"
+   },
+   {
+    "cls": "ec-axis",
+    "tag": "span",
+    "txt": "· 成书史"
+   },
+   {
+    "cls": "ec-axis",
+    "tag": "span",
+    "txt": "· 成书史"
+   },
+   {
+    "cls": "ec-axis",
+    "tag": "span",
+    "txt": "· 成书史"
+   },
+   {
+    "cls": "ec-axis",
+    "tag": "span",
+    "txt": "· 成书史"
+   },
+   {
+    "cls": "ec-axis",
+    "tag": "span",
+    "txt": "· 成书史"
+   },
+   {
+    "cls": "ec-axis",
+    "tag": "span",
+    "txt": "· 成书史"
+   }
+  ]
+ },
+ "data/underworld-power-network.html": {
+  "fill": [
+   {
+    "area": 528,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 1465,
+    "cls": "role-card r-king",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 528,
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/visual-art.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 642,
+    "cls": "chant-card amp-high",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 801,
+    "cls": "ch-amp-bar",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1063,
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 1063,
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 1063,
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 1063,
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 1063,
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "tag": "div"
+   },
+   {
+    "area": 642,
+    "cls": "idea-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 2576,
+    "cls": "id-form",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/workplace.html": {
+  "fill": [
+   {
+    "area": 3379,
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "tag": "div"
+   },
+   {
+    "area": 880,
+    "cls": "alert-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2581,
+    "cls": "alert-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1901,
+    "cls": "alert-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 880,
+    "cls": "alert-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 2581,
+    "cls": "alert-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1901,
+    "cls": "alert-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 880,
+    "cls": "alert-badge",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 1435,
+    "cls": "bw-cat",
+    "kind": "background",
+    "tag": "div"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "data/wukong-tangseng-benchmark.html": {
+  "fill": [
+   {
+    "area": 0,
+    "cls": "weight-bar",
+    "kind": "fill",
+    "tag": "rect"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "dukou-engine.html": {
+  "fill": [
+   {
+    "area": 4880,
+    "cls": "",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "guide.html": {
+  "fill": [
+   {
+    "area": 1600,
+    "cls": "seal",
+    "kind": "background",
+    "tag": "span"
+   },
+   {
+    "area": 6625,
+    "cls": "primary",
+    "kind": "background",
+    "tag": "a"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "index.html": {
+  "fill": [
+   {
+    "area": 3136,
+    "cls": "rag-fab",
+    "kind": "background",
+    "tag": "button"
+   }
+  ],
+  "text_on_bg": []
+ },
+ "rum-viewer.html": {
+  "fill": [],
+  "text_on_bg": []
+ },
+ "visit-viewer.html": {
+  "fill": [],
+  "text_on_bg": []
+ }
 }

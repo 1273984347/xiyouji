@@ -1,3 +1,40 @@
+## W1248 CI 二轮红清偿：朱砂审计面补入新页（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/output/_w876_site_audit_final.json | W1248 | 第 43 槽审计面补入 data/poetry-density.html（实测 0 处朱砂实底·空表如实记录） |
+| AGENTS.md | W1248 | 脚注条目 |
+| README.md | W1248 | 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1248 | 版本抬头行推进 |
+| CHANGELOG.md | W1248 | 本批段 |
+| HANDOVER.md | W1248 | 里程碑块 |
+| STRUCTURE.md | W1248 | 当前批次行推进 |
+| .github/workflows/README.md | W1248 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1248 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1248 | 滚动迁入条目 |
+| CITATION.cff | W1248 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1248 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1248 | 页脚批次链插入 |
+| site/dukou-engine.html | W1248 | 页脚批次链插入 |
+| site/rss.xml | W1248 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1248 | 本批段追加 |
+| scripts/output/tools-inventory.md | W1248 | 工具清单刷新 |
+| scripts/output/_cascade_files_W1248.txt | W1248 | 级联改动面清单 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1248 | 台账腾窗 |
+| scripts/output/_vermilion_solid_cache.json | W1248 | 朱砂缓存更新 |
+| scripts/output/_vermilion_solid_report.json | W1248 | 朱砂报告更新 |
+| scripts/output/stats.json | W1248 | stats 刷新 |
+| site/index.html | W1248 | 首页统计跟随 |
+| scripts/output/_w1248_spec.json | W1248 | 本批规格 |
+| docs/00-导读/W批次编号对账表.md | W1248 | W1248 认领行 |
+
+| scripts/output/stats-changelog.json | W1248 | stats 变更史追加 W1248（stats.json 变更 1 键的变更史登记） |
+| scripts/output/stats-index.md | W1248 | stats 索引面刷新 |
+| docs/INDEX.md | W1248 | 文档索引重建（890 篇·含本批级联面） |
+| scripts/output/INDEX.md | W1248 | 输出目录清单刷新（收录 _w1248_spec.json 与级联面清单） |
+| scripts/output/README.md | W1248 | 输出目录说明刷新 |
+| site/data/search-index-zh.js | W1248 | 第 46 槽：中文站内搜索索引重建（条目数对齐生成器实算） |
+| site/en/search-index-en.js | W1248 | 第 46 槽：英文站内搜索索引重建 |
 ## W1247 CI 首跑红清偿：搜索索引剔除未跟踪件重建 + 可视化基线补入新页（2026-11-15）
 
 | 文件 | W | 说明 |
