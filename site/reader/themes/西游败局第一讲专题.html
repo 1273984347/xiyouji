@@ -1552,7 +1552,9 @@ html[data-theme="dark"] .chapter-plate {
     /* W1251 · 古画绢本 Hero 横幅（页内私有样式·不进 system.css 以免全站 861 页内联重写） */
     .silk-hero { margin: 0 0 var(--space-6); }
     .silk-hero img { width: 100%; height: auto; display: block; opacity: .95; border-radius: 2px; }
-    html[data-theme="dark"] .silk-hero { display: none; }
+    .silk-hero .silk-hero-dark { display: none; }
+    html[data-theme="dark"] .silk-hero .silk-hero-light { display: none; }
+    html[data-theme="dark"] .silk-hero .silk-hero-dark { display: block; }
 </style>
 
 <!-- ANALYTICS v2 w1168 -->
@@ -1585,7 +1587,8 @@ html[data-theme="dark"] .chapter-plate {
   <article class="reader-body">
 <h1>西游败局 · 第一讲</h1>
 <figure class="silk-hero">
-  <img src="../../static/images/silk-hero-02-shiku-fowan-1200.webp" alt="崖壁石窟佛龛中半掩的鎏金释迦坐像，龛前清泉自石阶流出" width="1200" height="674" loading="lazy" decoding="async">
+  <img class="silk-hero-light" src="../../static/images/silk-hero-02-shiku-fowan-1200.webp" alt="崖壁石窟佛龛中半掩的鎏金释迦坐像，龛前清泉自石阶流出" width="1200" height="674" loading="lazy" decoding="async">
+  <img class="silk-hero-dark" src="../../static/images/silk-hero-02-shiku-fowan-dark.webp" alt="" width="1200" height="674" loading="lazy" decoding="async">
 </figure>
 <blockquote>
 <p>轨标：个人创作

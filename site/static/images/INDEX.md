@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（446）
+## 文件（458）
 
 ### 样式与资源
 
@@ -439,20 +439,32 @@
 - `post-08-tangseng-chanshi.webp`
 - `post-09-bajiaoshan-zhaoyun.webp`
 - `silk-hero-01-yunhai-fosi-1200.webp`
+- `silk-hero-01-yunhai-fosi-dark.webp`
 - `silk-hero-01-yunhai-fosi.webp`
 - `silk-hero-02-shiku-fowan-1200.webp`
+- `silk-hero-02-shiku-fowan-dark.webp`
 - `silk-hero-03-ye-talin-1200.webp`
+- `silk-hero-03-ye-talin-dark.webp`
 - `silk-hero-04-baigu-furen-1200.webp`
+- `silk-hero-04-baigu-furen-dark.webp`
 - `silk-hero-05-huoyanshan-yaowang-1200.webp`
+- `silk-hero-05-huoyanshan-yaowang-dark.webp`
 - `silk-hero-06-heifengshan-1200.webp`
+- `silk-hero-06-heifengshan-dark.webp`
 - `silk-hero-06-heifengshan.webp`
 - `silk-hero-07-dumu-qiao-1200.webp`
+- `silk-hero-07-dumu-qiao-dark.webp`
 - `silk-hero-08-shanye-xinglu-1200.webp`
+- `silk-hero-08-shanye-xinglu-dark.webp`
 - `silk-hero-09-wukong-tanyu-1200.webp`
+- `silk-hero-09-wukong-tanyu-dark.webp`
 - `silk-hero-10-jingubang-1200.webp`
+- `silk-hero-10-jingubang-dark.webp`
 - `silk-hero-11-fabao-sanjian-1200.webp`
+- `silk-hero-11-fabao-sanjian-dark.webp`
 - `silk-hero-11-fabao-sanjian.webp`
 - `silk-hero-12-jinghu-1200.webp`
+- `silk-hero-12-jinghu-dark.webp`
 - `viz-01-network.webp`
 - `viz-02-heatmap.webp`
 - `viz-03-radar.webp`

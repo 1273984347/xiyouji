@@ -1,3 +1,11 @@
+## W1252 深色变体 12 张 + 209 页亮暗双图接线（Step4）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/silk-hero-*-dark.webp（12 张 1200×674） | W1252 | 深色变体（暗褐绢底夜色·各以自身亮版为参考图生成·构图与留白方向一致） |
+| site/reader/themes/（209 页） | W1252 | 改为亮/暗双图 + 暗色模式由隐藏改为显示深色版 |
+| 登记面（CHANGELOG·台账·file-index·spec·T107·报告索引·HANDOVER·CITATION·workflows README·STRUCTURE·docs/INDEX·stats·搜索索引·目录清单） | W1252 | 登记与级联面同步 |
+
 ## W1251 全量 210 页正文接线（Step3）
 
 | 文件 | W | 说明 |
