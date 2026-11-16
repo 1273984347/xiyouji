@@ -1,3 +1,27 @@
+## W1249 古画绢本 Hero 横幅接入专题页（试点 3 页）（2026-11-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/reader/themes/取经地理学专题.html | W1249 | 接入古画绢本顶栏横幅（silk-hero-01 云海佛刹）+ 页内私有 .silk-hero 样式 |
+| site/reader/themes/妖怪生态学专题.html | W1249 | 接入古画绢本顶栏横幅（silk-hero-06 黑风山狼牙棒）+ 页内私有 .silk-hero 样式 |
+| site/reader/themes/芭蕉扇-终极灭火器的关系.html | W1249 | 接入古画绢本顶栏横幅（silk-hero-11 三件法宝）+ 页内私有 .silk-hero 样式 |
+| site/static/images/silk-hero-01-yunhai-fosi.webp | W1249 | 试点图（1920×1078·webp） |
+| site/static/images/silk-hero-06-heifengshan.webp | W1249 | 试点图（1920×1078·webp） |
+| site/static/images/silk-hero-11-fabao-sanjian.webp | W1249 | 试点图（1920×1078·webp） |
+| site/data/search-index-zh.js | W1249 | 第 46 槽：中文站内搜索索引刷新（专题页插图后重建） |
+| site/en/search-index-en.js | W1249 | 第 46 槽：英文站内搜索索引刷新 |
+| CHANGELOG.md | W1249 | 本批段 + 编号规则段上限推进 W1249 |
+| HANDOVER.md | W1249 | 交接头链·当前 HEAD·一、当前进度推进 W1249（概要块滚最老 2 块） |
+| .github/workflows/README.md | W1249 | 头部版本与里程碑上限推进 W1249 |
+| CITATION.cff | W1249 | version 推进 W1249 |
+| docs/00-导读/W批次编号对账表.md | W1249 | W1249 认领行 + W1244 收官回填 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1249 | 台账腾窗：迁出 W1189 |
+| docs/11-方案报告/计划方案/T104-任务计划执行与经验沉淀报告-2026-11-16.md | W1249 | 新增：T104 任务计划执行与经验沉淀报告 |
+| docs/11-方案报告/README.md | W1249 | §六 登记 T104·件数 120→121 |
+| scripts/output/INDEX.md | W1249 | 输出目录清单刷新（收录 _w1249_spec.json） |
+| scripts/output/README.md | W1249 | 输出目录说明刷新 |
+| scripts/output/file-index.md | W1249 | 本批登记行 |
+| scripts/output/_w1249_spec.json | W1249 | 本批规格 |
 ## W1248 CI 二轮红清偿：朱砂审计面补入新页（2026-11-15）
 
 | 文件 | W | 说明 |

@@ -1548,6 +1548,11 @@ html[data-theme="dark"] .chapter-plate {
   .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
   .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
   html[data-theme="dark"] .chapter-plate { display: none; }
+
+    /* W1249 · 古画绢本 Hero 横幅（试点 3 页·页内私有样式·不进 system.css 以免全站 861 页内联重写） */
+    .silk-hero { margin: 0 0 var(--space-6); }
+    .silk-hero img { width: 100%; height: auto; display: block; opacity: .95; border-radius: 2px; }
+    html[data-theme="dark"] .silk-hero { display: none; }
 </style>
 
 <!-- ANALYTICS v2 w1168 -->
@@ -1579,6 +1584,9 @@ html[data-theme="dark"] .chapter-plate {
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>芭蕉扇：一把终极灭火器如何照见我们与世界的关系</h1>
+<figure class="silk-hero">
+  <img src="../../static/images/silk-hero-11-fabao-sanjian.webp" alt="石台上并列陈列紫金红葫芦、芭蕉扇与九环锡杖，背景为石青石绿远山与淡墨云纹" width="1920" height="1078" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <p>W286（git 创建提交溯源 · W424 回填）
 </p>

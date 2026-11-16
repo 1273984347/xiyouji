@@ -1,3 +1,16 @@
+### W1249（2026-11-15）：古画绢本 Hero 横幅接入专题页（试点 3 页）——顶栏横幅 · 暗色隐藏 · 分支整理
+
+**本批要点**（W1249 古画绢本 Hero 横幅接入专题页·试点 3 页）：
+
+> - **① 交付**：\`site/reader/themes/\` 下 **3 个专题页**各接入 1 张古画绢本横幅（\`site/static/images/silk-hero-01-yunhai-fosi / 06-heifengshan / 11-fabao-sanjian.webp\`·1920×1078），插在 \`<h1>\` 之后的 \`<figure class="silk-hero">\`。
+> - **② 样式策略**：**页内私有样式**（3 页各自既有 style 块内追加 \`.silk-hero\` 三条规则）——**不进 \`site/system.css\`**，避免触发全站 861 页内联 CSS 重写（试点阶段把 diff 面压到 3 页）。
+> - **③ 暗色模式**：\`html[data-theme="dark"] .silk-hero { display: none; }\`——暖米黄绢底在暗色下会成亮斑，沿用题图族 \`.chapter-plate\` 的既有策略。
+> - **④ 图片规格**：\`width="1920" height="1078"\`（防 CLS）· \`loading="lazy"\` · \`decoding="async"\` · alt 逐张按画面实写。
+> - **⑤ 分支整理**：本地 5 个 + 远端 6 个**已合并入 main 的 \`sync/*\` 分支全部删除**（\`git branch --merged main\` 判定），远端仅剩 \`origin/main\`。
+> - **⑥ 边界**：**仅试点 3 页**；未做 og 分享图替换、未做深色变体、未全量 210 页；全量接线待试点效果确认后另开批。
+> - **验证**：verify full 79 段 0 FAIL · pytest 1674 passed / 4 skipped · 干净检出 \`ci_sim --ref HEAD --full\` 复验。
+> - **文件**：见 file-index。
+
 # 更新日志
 
 
@@ -6,7 +19,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1248），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1249），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
