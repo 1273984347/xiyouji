@@ -2,100 +2,50 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-.agent/skills/puti-shouye/SKILL.md
-.github/workflows/README.md
-AGENTS.md
-CHANGELOG.md
-CITATION.cff
-HANDOVER.md
-README.md
-STRUCTURE.md
-archive/docs/AGENTS-ARCHIVE.md
-archive/docs/CHANGELOG-ARCHIVE.md
-archive/docs/W批次编号对账表-ARCHIVE.md
-archive/docs/file-index-ARCHIVE.md
-archive/docs/workflows-readme-history.md
-docs/00-导读/W批次编号对账表.md
-docs/00-导读/项目说明.md
-docs/11-方案报告/README.md
-docs/11-方案报告/审查与评审/全站可视化图表审查报告-2026-11-16.md
-docs/11-方案报告/审查与评审/图表审查截图/appear-en-light.png
-docs/11-方案报告/审查与评审/图表审查截图/appear-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/appear-zh-narrow.png
-docs/11-方案报告/审查与评审/图表审查截图/appearance-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/appearance-light-chart.png
-docs/11-方案报告/审查与评审/图表审查截图/appearance-light.png
-docs/11-方案报告/审查与评审/图表审查截图/bench-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/benchmark-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/benchmark-light-chart.png
-docs/11-方案报告/审查与评审/图表审查截图/benchmark-light.png
-docs/11-方案报告/审查与评审/图表审查截图/chord-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/customs-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/customs-light.png
-docs/11-方案报告/审查与评审/图表审查截图/customs-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/dialogue-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/dialogue-light-chart.png
-docs/11-方案报告/审查与评审/图表审查截图/dialogue-light.png
-docs/11-方案报告/审查与评审/图表审查截图/eco-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/ecology-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/ecology-light-chart.png
-docs/11-方案报告/审查与评审/图表审查截图/ecology-light.png
-docs/11-方案报告/审查与评审/图表审查截图/en-dialogue-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/en-dialogue-light.png
-docs/11-方案报告/审查与评审/图表审查截图/en-workplace-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/en-workplace-light-chart.png
-docs/11-方案报告/审查与评审/图表审查截图/en-workplace-light.png
-docs/11-方案报告/审查与评审/图表审查截图/force-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/heat-en-light.png
-docs/11-方案报告/审查与评审/图表审查截图/heat-en-narrow.png
-docs/11-方案报告/审查与评审/图表审查截图/heat-zh-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/heat-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/heat-zh-narrow.png
-docs/11-方案报告/审查与评审/图表审查截图/line-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/line-zh-narrow.png
-docs/11-方案报告/审查与评审/图表审查截图/map-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/music-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/music-light.png
-docs/11-方案报告/审查与评审/图表审查截图/pie-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/radar-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/radar-zh-narrow.png
-docs/11-方案报告/审查与评审/图表审查截图/route-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/route-light-chart.png
-docs/11-方案报告/审查与评审/图表审查截图/route-light.png
-docs/11-方案报告/审查与评审/图表审查截图/sankey-en-light.png
-docs/11-方案报告/审查与评审/图表审查截图/sankey-zh-dark.png
-docs/11-方案报告/审查与评审/图表审查截图/sankey-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/sankey-zh-narrow.png
-docs/11-方案报告/审查与评审/图表审查截图/scatter-en-light.png
-docs/11-方案报告/审查与评审/图表审查截图/scatter-zh-light.png
-docs/11-方案报告/审查与评审/图表审查截图/three3d-en-light.png
-docs/11-方案报告/审查与评审/图表审查截图/three3d-zh-light.png
-docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md
-docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
-docs/INDEX.md
-docs/agent/pitfalls.md
-pitfalls.md
-scripts/output/INDEX.md
-scripts/output/README.md
-scripts/output/_cascade_files_W1259.txt
-scripts/output/_vermilion_solid_cache.json
-scripts/output/_w1259_spec.json
-scripts/output/chart-values-report.json
-scripts/output/citability-report.json
-scripts/output/file-index.md
-scripts/output/mobile_viewport_report.json
-scripts/output/render-state-audit.jsonl
-scripts/output/stats-changelog.json
-scripts/output/stats-index.md
-scripts/output/stats.json
-scripts/output/tools-inventory.md
-site/data/cross-time-danmaku.html
-site/data/search-index-zh.js
-site/data/tag-cloud.html
-site/dukou-engine.html
-site/en/search-index-en.js
-site/index.html
-site/rss.xml
+| .agent/skills/puti-shouye/SKILL.md | W1259 | 本批收官链产物 |
+| .github/workflows/README.md | W1259 | 本批收官链产物 |
+| AGENTS.md | W1259 | 本批收官链产物 |
+| CHANGELOG.md | W1259 | W1259 版段（机器层全绿 + 数据层根族缺陷实锤） |
+| CITATION.cff | W1259 | 本批收官链产物 |
+| HANDOVER.md | W1259 | 头链与当前进度同步 W1259 |
+| README.md | W1259 | 本批收官链产物 |
+| STRUCTURE.md | W1259 | 本批收官链产物 |
+| archive/docs/AGENTS-ARCHIVE.md | W1259 | 本批收官链产物 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1259 | 本批收官链产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1259 | 本批收官链产物 |
+| archive/docs/file-index-ARCHIVE.md | W1259 | 本批收官链产物 |
+| archive/docs/workflows-readme-history.md | W1259 | 本批收官链产物 |
+| docs/00-导读/W批次编号对账表.md | W1259 | W1259 认领行（只读审查·零页面改动） |
+| docs/00-导读/项目说明.md | W1259 | 本批收官链产物 |
+| docs/11-方案报告/README.md | W1259 | 审查与评审分区登记行（计数 22→23） |
+| docs/11-方案报告/审查与评审/全站可视化图表审查报告-2026-11-16.md | W1259 | 全站网页可视化图表审查报告（15 项发现·含建议修复路线三档四批切分） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1259 | 本批收官链产物 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1259 | 本批收官链产物 |
+| docs/INDEX.md | W1259 | 本批收官链产物 |
+| docs/agent/pitfalls.md | W1259 | 本批收官链产物 |
+| pitfalls.md | W1259 | 本批收官链产物 |
+| scripts/output/INDEX.md | W1259 | 本批收官链产物 |
+| scripts/output/README.md | W1259 | 本批收官链产物 |
+| scripts/output/_cascade_files_W1259.txt | W1259 | 本批收官链产物 |
+| scripts/output/_vermilion_solid_cache.json | W1259 | 本批收官链产物 |
+| scripts/output/_w1259_spec.json | W1259 | 本批 spec（级联与门禁输入） |
+| scripts/output/chart-values-report.json | W1259 | 本批收官链产物 |
+| scripts/output/citability-report.json | W1259 | 本批收官链产物 |
+| scripts/output/file-index.md | W1259 | 本批收官链产物 |
+| scripts/output/mobile_viewport_report.json | W1259 | 本批收官链产物 |
+| scripts/output/render-state-audit.jsonl | W1259 | 本批收官链产物 |
+| scripts/output/stats-changelog.json | W1259 | 本批收官链产物 |
+| scripts/output/stats-index.md | W1259 | 本批收官链产物 |
+| scripts/output/stats.json | W1259 | 本批收官链产物 |
+| scripts/output/tools-inventory.md | W1259 | 本批收官链产物 |
+| site/data/cross-time-danmaku.html | W1259 | 本批收官链产物 |
+| site/data/search-index-zh.js | W1259 | 本批收官链产物 |
+| site/data/tag-cloud.html | W1259 | 本批收官链产物 |
+| site/dukou-engine.html | W1259 | 本批收官链产物 |
+| site/en/search-index-en.js | W1259 | 本批收官链产物 |
+| site/index.html | W1259 | 本批收官链产物 |
+| site/rss.xml | W1259 | 本批收官链产物 |
+| docs/11-方案报告/审查与评审/图表审查截图/（51 件） | W1259 | 目视审查截图证据（全站图型族抽样 + 亮暗双态 + 窄屏） |
 
 
 ## W1258 og 接缝修法迭代（v5 像素延伸·2 张）
