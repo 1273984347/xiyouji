@@ -1,3 +1,23 @@
+## W1258 og 接缝修法迭代（v5 像素延伸·2 张）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/og-silk-hero-03-ye-talin.webp | W1258 | 夜空左缘硬边（x≈292）改为「真实像素向左延伸 55px + 不规则云气边界」·接缝绝对梯度 43.58→0.28·纹理列差保持·329KB |
+| site/static/images/og-silk-hero-12-jinghu.webp | W1258 | 画心左缘硬边（x≈437）改为像素延伸 30px（浅延伸避山影重复）·梯度 4.81→0.99·332KB |
+| docs/11-方案报告/计划方案/T111-任务计划执行与经验沉淀报告-2026-11-16.md | W1258 | 任务执行报告（含 W1257 修法被推翻与 v3/v4 被否留痕） |
+| docs/11-方案报告/计划方案/T110-任务计划执行与经验沉淀报告-2026-11-16.md | W1258 | 加指向 T-111 的修订注记 |
+| docs/11-方案报告/README.md | W1258 | 报告目录 §六 登记行（编号 120） |
+| docs/00-导读/W批次编号对账表.md | W1258 | W1258 认领行 |
+| scripts/output/file-index.md | W1258 | 本批登记行 |
+| CHANGELOG.md | W1258 | 本批段 + 编号规则段推进（W001-W1258） |
+| HANDOVER.md | W1258 | 头链·当前 HEAD·进度推进 |
+| CITATION.cff | W1258 | version 推进 |
+| .github/workflows/README.md | W1258 | 头部版本与里程碑上限推进 |
+| scripts/output/stats.json | W1258 | stats 刷新 |
+| scripts/output/stats-changelog.json | W1258 | stats 变更史 |
+| scripts/output/stats-index.md | W1258 | stats 索引面 |
+| docs/INDEX.md | W1258 | 文档索引重建 |
+
 ## W1257 og 分享图接缝像素级修复（2 张）
 
 | 文件 | W | 说明 |

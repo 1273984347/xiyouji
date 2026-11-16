@@ -1,9 +1,10 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1257** — 西游记解读项目（`D:\xiyouji`，W1257）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1258** — 西游记解读项目（`D:\xiyouji`，W1258）的 GitHub Actions 工作流层。
 > **W1255**：横幅图上题识 209 页（figure 内加小号短题名 + 朱砂落款·页内私有样式·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W1256**：横幅裁白（撤销 W1255 图上题识·209 页裁去左侧约 1/3 素绢留白·CSS 裁切·12 张资产零改动·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W1257**：og 分享图接缝像素级修复（og-03 / og-12 两文件羽化·q=100 重编码·无 workflow 文件改动，CI 全量验证涵盖）。
+> **W1258**：og 接缝修法迭代（v5 像素延伸·2 个 og 文件·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
