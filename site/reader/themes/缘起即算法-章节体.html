@@ -1548,6 +1548,11 @@ html[data-theme="dark"] .chapter-plate {
   .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
   .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
   html[data-theme="dark"] .chapter-plate { display: none; }
+
+    /* W1251 · 古画绢本 Hero 横幅（页内私有样式·不进 system.css 以免全站 861 页内联重写） */
+    .silk-hero { margin: 0 0 var(--space-6); }
+    .silk-hero img { width: 100%; height: auto; display: block; opacity: .95; border-radius: 2px; }
+    html[data-theme="dark"] .silk-hero { display: none; }
 </style>
 
 <!-- ANALYTICS v2 w1168 -->
@@ -1579,6 +1584,9 @@ html[data-theme="dark"] .chapter-plate {
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>缘起即算法 · 章节体</h1>
+<figure class="silk-hero">
+  <img src="../../static/images/silk-hero-03-ye-talin-1200.webp" alt="寒山之巅两座古塔，低悬月轮与长卷星河横贯天际" width="1200" height="674" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <p>W325·A4 方向跨学科开拓·唯识AI篇·章节体专著
 本篇是 W321《缘起即算法专题》总纲的章节体展开，将"唯识八识×Transformer"的映射逐章深化为可独立阅读的六章结构

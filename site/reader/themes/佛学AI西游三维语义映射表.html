@@ -1548,6 +1548,11 @@ html[data-theme="dark"] .chapter-plate {
   .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
   .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
   html[data-theme="dark"] .chapter-plate { display: none; }
+
+    /* W1251 · 古画绢本 Hero 横幅（页内私有样式·不进 system.css 以免全站 861 页内联重写） */
+    .silk-hero { margin: 0 0 var(--space-6); }
+    .silk-hero img { width: 100%; height: auto; display: block; opacity: .95; border-radius: 2px; }
+    html[data-theme="dark"] .silk-hero { display: none; }
 </style>
 
 <!-- ANALYTICS v2 w1168 -->
@@ -1579,6 +1584,9 @@ html[data-theme="dark"] .chapter-plate {
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>佛学—AI—西游 三维语义映射表</h1>
+<figure class="silk-hero">
+  <img src="../../static/images/silk-hero-09-wukong-tanyu-1200.webp" alt="山巅云海旁崖边一人单膝蹲姿远眺，身后立着僧人与白马" width="1200" height="674" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <p>W326·A4 方向跨学科开拓·唯识AI篇·工程化
 本篇将"佛法=AI"框架从比喻层推进到工程层：把佛学概念、AI 机制、西游实体三域的对应关系，落为可直接喂入图数据库（Neo4j）的节点-关系-属性模型

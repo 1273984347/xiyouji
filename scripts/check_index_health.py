@@ -37,6 +37,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 FI = ROOT / "scripts" / "output" / "file-index.md"
+# W1251（用户授权改管控件·「方案①」）：file-index 的登记面并查归档面——
+# 解开「file-index 迁段 ⇒ 索引健康判『缺 CHANGELOG 版段登记』」的死结，
+# 使 archive_segments --target file-index 的正常腾窗可用（此前每批只能手工压行密度）。
+FI_ARCHIVE = ROOT / "archive" / "docs" / "file-index-ARCHIVE.md"
 METHOD_DIR = ROOT / "docs" / "10-方法论沉淀"
 METHOD_README = METHOD_DIR / "README.md"
 CHANGELOG = ROOT / "CHANGELOG.md"
@@ -58,6 +62,16 @@ def file_index_sections(text: str) -> list[tuple[int, int, int]]:
         (w, s, starts[k + 1][1] if k + 1 < len(starts) else len(lines))
         for k, (w, s) in enumerate(starts)
     ]
+
+
+def archived_file_index_w() -> set[int]:
+    """W1251（用户授权改管控件）：归档面（archive/docs/file-index-ARCHIVE.md）的段 W 号同样算
+    「已在 file-index 登记」——使 file-index 的归档腾窗不再被判「缺 CHANGELOG 版段登记」。
+    """
+    if not FI_ARCHIVE.exists():
+        return set()
+    text = FI_ARCHIVE.read_text(encoding="utf-8-sig")
+    return {w for w, _, _ in file_index_sections(text)}
 
 
 def check_file_index(errors: list[str]) -> None:
@@ -107,6 +121,7 @@ def check_file_index(errors: list[str]) -> None:
     cl_w = {int(m.group(1) or m.group(2)) for m in re.finditer(
         r"^### (?:v\d+\.\d+\.\d+（[^）]*?）：W(\d{3,4})|W(\d{3,4})（[^）]*?）：)", cl_text, flags=re.M)}  # W713 双形态（W711 起新段无 v 前缀·与检查 6 同款）
     fi_w = {w for w, _, _ in sections}
+    fi_w |= archived_file_index_w()   # W1251：归档面同样算「已登记」
     missing = sorted(w for w in cl_w if w not in fi_w and w not in EXEMPT_W)
     if missing:
         errors.append(f"file-index 缺 {len(missing)} 个 CHANGELOG 版段登记：{[f'W{w:03d}' for w in missing]}")
