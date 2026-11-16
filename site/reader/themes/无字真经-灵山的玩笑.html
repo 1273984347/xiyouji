@@ -1551,6 +1551,13 @@ html[data-theme="dark"] .chapter-plate {
 
     /* W1251 · 古画绢本 Hero 横幅（页内私有样式·不进 system.css 以免全站 861 页内联重写） */
     .silk-hero { margin: 0 0 var(--space-6); }
+    /* W1255 · 横幅图上题识：左下角小号短题名 + 朱砂落款（标题仍在正文流） */
+    .silk-hero { position: relative; }
+    .silk-inscription { position: absolute; left: 5%; bottom: 7%; z-index: 2; display: flex; align-items: center; gap: 8px; max-width: 29%; font-family: var(--font-serif); font-size: clamp(14px, 1.3vw, 17px); font-weight: 600; letter-spacing: .09em; line-height: 1.4; color: var(--ink); text-shadow: 0 1px 2px rgba(250, 247, 240, .6); }
+    .silk-inscription::before { content: ''; width: 9px; height: 9px; background: var(--accent); border-radius: 1px; flex: none; }
+    .silk-inscription::after { content: attr(data-title); }
+    html[data-theme="dark"] .silk-inscription { color: var(--dark-text); text-shadow: 0 1px 2px rgba(0, 0, 0, .45); }
+    @media (max-width: 768px) { .silk-inscription { display: none; } }
     .silk-hero img { width: 100%; height: auto; max-height: 420px; object-fit: cover; object-position: right center; display: block; opacity: .95; border-radius: 2px; }
     .silk-hero .silk-hero-dark { display: none; }
     html[data-theme="dark"] .silk-hero .silk-hero-light { display: none; }
@@ -1587,6 +1594,7 @@ html[data-theme="dark"] .chapter-plate {
   <article class="reader-body">
 <h1>无字真经：灵山之上，如来开了一个什么玩笑？</h1>
 <figure class="silk-hero">
+  <span class="silk-inscription" aria-hidden="true" data-title="无字真经"></span>
   <img class="silk-hero-light" src="../../static/images/silk-hero-08-shanye-xinglu-1200.webp" alt="山野古道上一行小人物向右行进，前方持杖者侧身回望" width="1200" height="674" loading="lazy" decoding="async">
   <img class="silk-hero-dark" src="../../static/images/silk-hero-08-shanye-xinglu-dark.webp" alt="" width="1200" height="674" loading="lazy" decoding="async">
 </figure>
