@@ -1,0 +1,289 @@
+/* ============================================================
+   方向丙 · Neo-Xuan（新宣纸 · 几何化）— 设计令牌表
+   样板：docs/11-方案报告/设计与架构方案/视觉重设计样板/丙-NeoXuan/
+   契约：tmpe/w1260/DESIGN_CONTRACT.md §0 硬约束 / §1 方向丙 / §2 图标规范
+   ------------------------------------------------------------
+   色彩分工（重要）
+   · 亮色态五色严格采用契约 §1 方向丙给定值
+   · 暗色态是「独立的一套令牌」，对五色做同色相提亮，
+     使暗底上 图形 ≥ 3:1 / 文字 ≥ 4.5:1（实测值见 README）
+   · 全部为纯色平涂，无渐变 / 无阴影 / 无纸纹 / 无光晕
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* —— 纸与面 —— */
+  --nx-paper:      #F5F0E4;   /* 暖宣纸底（契约指定）*/
+  --nx-surface:    #FBF7EC;   /* 卡面：比纸底更亮的纯平面 */
+  --nx-surface-2:  #F1EADC;   /* 次级面：chip / 图例底 */
+
+  /* —— 墨阶（文字）—— */
+  --nx-ink:        #1C1A17;   /* 主字（契约指定墨）*/
+  --nx-ink-2:      #5A544B;   /* 次级字 / 说明（不含轴标签，轴标签另用 --nx-axis-text）*/
+  --nx-ink-3:      #8A8276;   /* 仅图形：轴线与刻度（非文字）*/
+  --nx-axis-text:  #746C60;   /* 图表轴标签文字：纸底 4.55:1 / 墨底 3.45:1 */
+
+  /* —— 线 —— */
+  --nx-rule:       #DCD4C2;   /* 极淡描边（纯装饰）*/
+  --nx-rule-2:     #C8BFAA;   /* 控件描边 */
+
+  /* —— 品牌五色（契约指定）—— */
+  --nx-cinnabar:   #C0392B;   /* 朱砂 */
+  --nx-indigo:     #2C5F7C;   /* 靛 */
+  --nx-moss:       #5E7A4E;   /* 苔 */
+  --nx-ochre:      #A97C3F;   /* 赭 */
+
+  /* —— 数据系列映射 —— */
+  --nx-s-narrative: var(--nx-indigo);
+  --nx-s-dialogue:  var(--nx-cinnabar);
+  --nx-s-line:      var(--nx-cinnabar);
+  --nx-s-ref:       var(--nx-ochre);
+  --nx-s-poem:      var(--nx-ochre);
+  --nx-s-neutral:   var(--nx-indigo);
+  --nx-s-negative:  var(--nx-cinnabar);
+  --nx-s-positive:  var(--nx-moss);
+
+  /* —— 字体 —— */
+  --nx-font-serif: "Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+  --nx-font-sans:  system-ui,-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+
+  /* —— 几何 —— */
+  --nx-radius:     2px;      /* 圆角统一 2px */
+  --nx-hair:       1px;      /* 细线统一 1px */
+  --nx-stroke:     2px;      /* 数据笔画统一 2px */
+  --nx-icon-stroke: 1.5px;   /* 图标笔画 1.5px（契约 §2）*/
+
+  /* —— 尺度 —— */
+  --nx-maxw:       1240px;
+  --nx-pad:        32px;
+}
+
+/* ============================================================
+   暗色态：独立令牌（非 filter 反色）
+   暖宣纸 → 深墨褐；五色同色相提亮
+   ============================================================ */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --nx-paper:      #1A1714;   /* 深墨褐 */
+  --nx-surface:    #221E1A;
+  --nx-surface-2:  #2A251F;
+
+  --nx-ink:        #F0E9DA;
+  --nx-ink-2:      #A79E90;
+  --nx-ink-3:      #7C7466;
+  --nx-axis-text:  #8A8276;   /* 图表轴标签文字：墨底 4.70:1 / 纸底 3.34:1 */
+
+  --nx-rule:       #35302A;
+  --nx-rule-2:     #443D34;
+
+  --nx-cinnabar:   #E0604F;
+  --nx-indigo:     #5FA3C6;
+  --nx-moss:       #9BB87E;
+  --nx-ochre:      #D9A55F;
+}
+
+/* ============================================================
+   基础版式
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--nx-paper);
+  color: var(--nx-ink);
+  font-family: var(--nx-font-sans);
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--nx-font-serif); font-weight: 600; letter-spacing: .02em; }
+
+.nx-shell { max-width: var(--nx-maxw); margin: 0 auto; padding: 0 var(--nx-pad) 96px; }
+
+/* —— 顶栏 —— */
+.nx-topbar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0; border-bottom: 1px solid var(--nx-rule);
+}
+.nx-seal {
+  width: 30px; height: 30px; flex: none;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--nx-cinnabar); border-radius: var(--nx-radius);
+  color: var(--nx-cinnabar);
+  font-family: var(--nx-font-serif); font-size: 17px; line-height: 1;
+}
+.nx-topbar__brand { font-size: 13px; letter-spacing: .06em; color: var(--nx-ink-2); white-space: nowrap; }
+.nx-topbar__spacer { flex: 1 1 auto; }
+.nx-topbar__tools { display: flex; align-items: center; gap: 8px; }
+
+.nx-search {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--nx-rule-2); border-radius: var(--nx-radius);
+  padding: 6px 10px; min-width: 200px;
+}
+.nx-search svg { width: 16px; height: 16px; flex: none; color: var(--nx-ink-2); }
+.nx-search input {
+  border: 0; background: transparent; color: var(--nx-ink);
+  font: inherit; font-size: 13px; outline: none; width: 100%; min-width: 0;
+}
+.nx-search input::placeholder { color: var(--nx-ink-2); opacity: .75; }
+
+.nx-iconbtn {
+  display: grid; place-items: center; width: 34px; height: 34px; flex: none;
+  border: 1px solid var(--nx-rule-2); background: transparent;
+  border-radius: var(--nx-radius); color: var(--nx-ink); cursor: pointer;
+}
+.nx-iconbtn:hover { border-color: var(--nx-ink-2); }
+.nx-iconbtn svg { width: 20px; height: 20px; }
+.nx-iconbtn[aria-pressed="true"] { border-color: var(--nx-cinnabar); color: var(--nx-cinnabar); }
+
+/* —— Hero —— */
+.nx-hero {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  gap: 40px; align-items: end;
+  padding: 68px 0 52px; border-bottom: 1px solid var(--nx-rule);
+}
+.nx-eyebrow {
+  margin: 0 0 20px; font-size: 12px; letter-spacing: .22em;
+  color: var(--nx-ink-2);
+}
+.nx-hero__title { margin: 0; font-size: clamp(34px, 5.2vw, 56px); line-height: 1.24; }
+.nx-hero__lede {
+  margin: 24px 0 0; max-width: 48ch;
+  font-size: 16px; line-height: 1.85; color: var(--nx-ink-2);
+}
+.nx-hero__meta {
+  margin: 26px 0 0; display: flex; align-items: center; gap: 9px;
+  font-size: 12.5px; color: var(--nx-ink-2);
+}
+.nx-hero__meta svg { width: 15px; height: 15px; flex: none; color: var(--nx-moss); }
+
+/* —— 暗色切换（几何拨盘，非图标）—— */
+.nx-switch {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid var(--nx-rule-2); border-radius: var(--nx-radius);
+  padding: 9px 14px; background: transparent; color: var(--nx-ink);
+  font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap;
+}
+.nx-switch:hover { border-color: var(--nx-ink-2); }
+.nx-switch__dial {
+  width: 15px; height: 15px; border-radius: 50%; position: relative;
+  border: 1.5px solid currentColor; overflow: hidden; flex: none;
+}
+.nx-switch__dial::after {
+  content: ''; position: absolute; inset: 0 auto 0 0; width: 50%;
+  background: currentColor;
+}
+[data-theme="dark"] .nx-switch__dial::after {
+  inset: auto; left: 50%; top: 50%; width: 4px; height: 4px;
+  transform: translate(-50%, -50%); border-radius: 50%;
+}
+
+/* —— KPI 行 —— */
+.nx-kpis {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--nx-rule);
+}
+.nx-kpi { padding: 32px 26px 30px 0; }
+.nx-kpi + .nx-kpi { border-left: 1px solid var(--nx-rule); padding-left: 26px; padding-right: 0; }
+.nx-kpi__label { margin: 0 0 14px; font-size: 12px; letter-spacing: .14em; color: var(--nx-ink-2); }
+.nx-kpi__value {
+  margin: 0; font-family: var(--nx-font-sans); font-size: 36px; font-weight: 600;
+  line-height: 1; letter-spacing: -.01em; font-variant-numeric: tabular-nums;
+}
+.nx-kpi__unit { font-size: 13px; font-weight: 400; color: var(--nx-ink-2); margin-left: 7px; }
+.nx-kpi__meta { margin: 14px 0 0; font-size: 12.5px; color: var(--nx-ink-2); }
+
+/* —— 章节区块 —— */
+.nx-section { padding: 54px 0 58px; border-bottom: 1px solid var(--nx-rule); }
+.nx-section__head {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 30px; align-items: start;
+}
+.nx-section__index {
+  font-family: var(--nx-font-serif); font-size: 56px; line-height: .84;
+  font-weight: 600; color: var(--nx-ink);
+  padding-left: 16px; border-left: 1px solid var(--nx-rule);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.nx-section__title { margin: 0; font-size: 25px; line-height: 1.35; }
+.nx-section__desc { margin: 12px 0 0; font-size: 14px; color: var(--nx-ink-2); max-width: 58ch; }
+
+/* —— 图例：顶部内联 chip —— */
+.nx-legend { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.nx-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--nx-rule-2); border-radius: var(--nx-radius);
+  padding: 5px 10px; font-size: 12px; color: var(--nx-ink-2);
+  background: var(--nx-surface-2); white-space: nowrap;
+}
+.nx-chip__swatch { width: 10px; height: 10px; border-radius: var(--nx-radius); flex: none; }
+
+.nx-section__body { margin-top: 28px; }
+.nx-section__body svg { display: block; width: 100%; overflow: hidden; }
+
+/* —— SVG 内部文字与线 —— */
+.nx-axis-text { font-family: var(--nx-font-sans); font-size: 11px; fill: var(--nx-axis-text); }
+.nx-axis-text--chapter { font-size: 10.5px; }
+.nx-data-text { font-family: var(--nx-font-sans); font-size: 11.5px; font-weight: 600; fill: var(--nx-ink); }
+.nx-data-text--sub { font-size: 10.5px; font-weight: 400; fill: var(--nx-axis-text); }
+.nx-axis-line { stroke: var(--nx-ink-3); stroke-width: 1; fill: none; }
+.nx-tick { fill: none; stroke: var(--nx-ink-3); stroke-width: 1; }
+.nx-ref-line { stroke: var(--nx-ochre); stroke-width: 1; stroke-dasharray: 4 3; fill: none; }
+.nx-dot { stroke-width: 1.5; }
+
+/* —— 口径注记 —— */
+.nx-note {
+  display: flex; gap: 12px; align-items: flex-start;
+  margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--nx-rule);
+  font-size: 12.5px; line-height: 1.8; color: var(--nx-ink-2);
+}
+.nx-note svg { width: 16px; height: 16px; flex: none; margin-top: 3px; color: var(--nx-ochre); }
+.nx-note__body { flex: 1 1 auto; }
+.nx-note__close {
+  flex: none; width: 26px; height: 26px; display: grid; place-items: center;
+  border: 1px solid var(--nx-rule-2); border-radius: var(--nx-radius);
+  background: transparent; color: var(--nx-ink-2); cursor: pointer;
+}
+.nx-note__close svg { width: 14px; height: 14px; margin: 0; color: inherit; }
+.nx-note[hidden] { display: none; }
+
+/* —— 页脚 —— */
+.nx-foot {
+  display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center;
+  padding-top: 30px; font-size: 12px; color: var(--nx-ink-2);
+}
+.nx-foot__links { display: flex; gap: 18px; }
+.nx-foot a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--nx-rule-2); }
+.nx-foot a:hover { color: var(--nx-ink); border-color: var(--nx-ink-2); }
+.nx-foot svg { width: 15px; height: 15px; color: var(--nx-ink-2); }
+
+/* —— Tooltip —— */
+.nx-tooltip {
+  position: fixed; z-index: 60; pointer-events: none; opacity: 0;
+  background: var(--nx-surface); border: 1px solid var(--nx-rule-2);
+  border-radius: var(--nx-radius); padding: 10px 12px;
+  font-family: var(--nx-font-sans); font-size: 12.5px; line-height: 1.75;
+  color: var(--nx-ink); max-width: 260px;
+  transition: opacity .12s ease;
+}
+.nx-tooltip[data-show="1"] { opacity: 1; }
+.nx-tooltip__title { font-weight: 600; margin-bottom: 4px; }
+.nx-tooltip__row { display: flex; justify-content: space-between; gap: 18px; }
+.nx-tooltip__row span:last-child { font-variant-numeric: tabular-nums; }
+.nx-tooltip__swatch { display: inline-block; width: 8px; height: 8px; border-radius: var(--nx-radius); margin-right: 6px; }
+
+@media (max-width: 900px) {
+  .nx-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nx-kpi:nth-child(3) { border-left: 0; padding-left: 0; }
+  .nx-kpi:nth-child(2n) { border-left: 1px solid var(--nx-rule); }
+  .nx-hero { grid-template-columns: minmax(0, 1fr); }
+  .nx-section__head { grid-template-columns: auto minmax(0, 1fr); }
+  .nx-legend { grid-column: 1 / -1; justify-content: flex-start; }
+  .nx-search { display: none; }
+}

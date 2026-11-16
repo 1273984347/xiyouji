@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《详解西游记》数据终端 · 方向乙 Terminal Dark</title>
+<meta name="description" content="《详解西游记》全书一百回逐回字数、对话占比、韵文密度与对白情绪分布的真实数据终端。">
+<link rel="icon" href="icons/book.svg">
+<link rel="stylesheet" href="tokens.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#top">
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M12 4.5v15"/><path d="M6.5 9h3M6.5 12.5h3M14.5 9h3M14.5 12.5h3"/></svg>
+    <span>详解西游记</span><span class="brand__sep">/</span><span class="brand__tag">data-terminal</span>
+  </a>
+  <div class="topbar__spacer"></div>
+  <div class="tools">
+    <label class="tools__search">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="12" height="12" rx="1.5"/><path d="M14.6 14.6 20.5 20.5"/></svg>
+      <input type="search" placeholder="grep 回次 / 关键词" aria-label="搜索回次或关键词">
+    </label>
+    <button class="icon-btn" type="button" aria-label="目录">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="shell" id="top">
+
+  <!-- ══ HERO ══════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <p class="hero__eyebrow">XIYOUJI · DATA TERMINAL</p>
+    <h1 class="hero__title">《详解西游记》<span class="accent">全书语料</span>数据终端</h1>
+    <p class="hero__lede">
+      一百回逐回字数、对话占比、韵文密度与对白情绪分布——全部取自项目自有语料统计，
+      不是演示用假数据；暗色为默认界面，亮色可一键切换。
+    </p>
+    <div class="hero__meta">
+      <span>数据源 <code>scripts/output/data/chapter_stats.json</code></span>
+      <span>载入 <code id="load-mode">embedded</code></span>
+      <span class="badge"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 6.5"/></svg>口径已核验</span>
+      <span class="badge badge--warn"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 20.5 19.5h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.2"/></svg>韵文样本稀疏</span>
+      <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">
+        <span class="theme-toggle__dot" aria-hidden="true"></span>
+        <span id="theme-label">theme: dark</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ══ KPI ═══════════════════════════════════════════════════════════ -->
+  <section class="kpi-grid" id="kpi-grid" aria-label="全书指标概览"></section>
+
+  <!-- ══ 图表 01 · 堆叠柱 ═══════════════════════════════════════════════ -->
+  <section class="panel" aria-labelledby="t1">
+    <div class="panel__head">
+      <span class="panel__index">01/</span>
+      <div>
+        <h2 class="panel__title" id="t1">每回叙述与对话字数</h2>
+        <p class="panel__desc">叙述（青）与对话（品红）分段堆叠；柱体低填充、高亮描边，只标最高的一回。</p>
+      </div>
+    </div>
+    <div class="panel__body">
+      <div class="chart" id="chart-stack"></div>
+    </div>
+    <p class="panel__note" id="note-1"></p>
+  </section>
+
+  <!-- ══ 图表 02 · 折线 ═════════════════════════════════════════════════ -->
+  <section class="panel" aria-labelledby="t2">
+    <div class="panel__head">
+      <span class="panel__index">02/</span>
+      <div>
+        <h2 class="panel__title" id="t2">对话字数占比</h2>
+        <p class="panel__desc">每回直引语占该回字数的比例；实线为主序列，虚线为全书均值，极值双标。</p>
+      </div>
+    </div>
+    <div class="panel__body">
+      <div class="chart" id="chart-line"></div>
+    </div>
+    <p class="panel__note" id="note-2"></p>
+  </section>
+
+  <!-- ══ 图表 03 · 柱 ═══════════════════════════════════════════════════ -->
+  <section class="panel" aria-labelledby="t3">
+    <div class="panel__head">
+      <span class="panel__index">03/</span>
+      <div>
+        <h2 class="panel__title" id="t3">韵文密度</h2>
+        <p class="panel__desc">仅列有韵文的回次，柱高为该回韵文首数；并列峰值合并标注。</p>
+      </div>
+    </div>
+    <div class="panel__body">
+      <div class="chart" id="chart-poem"></div>
+    </div>
+    <p class="panel__note" id="note-3"></p>
+  </section>
+
+  <!-- ══ 图表 04 · 环形 ═════════════════════════════════════════════════ -->
+  <section class="panel" aria-labelledby="t4">
+    <div class="panel__head">
+      <span class="panel__index">04/</span>
+      <div>
+        <h2 class="panel__title" id="t4">对白情绪分布</h2>
+        <p class="panel__desc">带引号直引语的词典情绪判别结果；标签置于环外并配引线。</p>
+      </div>
+    </div>
+    <div class="panel__body">
+      <div class="chart" id="chart-donut"></div>
+    </div>
+    <p class="panel__note" id="note-4"></p>
+  </section>
+
+</main>
+
+<footer class="shell footer">
+  <span>方向乙 · Terminal Dark（暗夜数据）</span><span class="sep">|</span>
+  <span>样板页 · file:// 可直接打开</span><span class="sep">|</span>
+  <span>数据：scripts/output/data/</span><span class="sep">|</span>
+  <span>零外域请求</span>
+</footer>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="polite">
+  <button class="tooltip__close" type="button" id="tip-close" aria-label="关闭提示">
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 5.5 18.5 18.5M18.5 5.5 5.5 18.5"/></svg>
+  </button>
+  <div id="tip-body"></div>
+</div>
+
+<script src="../../../../../site/static/js/d3.v7.min.js"></script>
+
+<script type="application/json" id="embedded-data">{"_note":"EMBEDDED copy of scripts/output/data/*.json (real values; subset of fields actually plotted).","stats":{"total_chapters":100,"total_chars":742357,"total_dialogue_chars":351479,"total_poems":19,"avg_chars_per_chapter":7423.6,"avg_dialogue_ratio":0.4735,"longest_chapter":"第031回","shortest_chapter":"第007回","per_chapter":[{"chapter":"第001回","total_chars":7288,"dialogue_chars":2451,"narrative_chars":4837,"dialogue_ratio":0.3363,"poem_count":2},{"chapter":"第002回","total_chars":7397,"dialogue_chars":3760,"narrative_chars":3637,"dialogue_ratio":0.5083,"poem_count":0},{"chapter":"第003回","total_chars":7402,"dialogue_chars":3179,"narrative_chars":4223,"dialogue_ratio":0.4295,"poem_count":0},{"chapter":"第004回","total_chars":7076,"dialogue_chars":2664,"narrative_chars":4412,"dialogue_ratio":0.3765,"poem_count":0},{"chapter":"第005回","total_chars":6669,"dialogue_chars":2367,"narrative_chars":4302,"dialogue_ratio":0.3549,"poem_count":1},{"chapter":"第006回","total_chars":6965,"dialogue_chars":2633,"narrative_chars":4332,"dialogue_ratio":0.378,"poem_count":0},{"chapter":"第007回","total_chars":5521,"dialogue_chars":1798,"narrative_chars":3723,"dialogue_ratio":0.3257,"poem_count":5},{"chapter":"第008回","total_chars":6644,"dialogue_chars":2795,"narrative_chars":3849,"dialogue_ratio":0.4207,"poem_count":5},{"chapter":"第009回","total_chars":6058,"dialogue_chars":3329,"narrative_chars":2729,"dialogue_ratio":0.5495,"poem_count":0},{"chapter":"第010回","total_chars":6759,"dialogue_chars":2500,"narrative_chars":4259,"dialogue_ratio":0.3699,"poem_count":0},{"chapter":"第011回","total_chars":7197,"dialogue_chars":2923,"narrative_chars":4274,"dialogue_ratio":0.4061,"poem_count":0},{"chapter":"第012回","total_chars":6391,"dialogue_chars":2581,"narrative_chars":3810,"dialogue_ratio":0.4038,"poem_count":0},{"chapter":"第013回","total_chars":6597,"dialogue_chars":1970,"narrative_chars":4627,"dialogue_ratio":0.2986,"poem_count":0},{"chapter":"第014回","total_chars":8802,"dialogue_chars":4516,"narrative_chars":4286,"dialogue_ratio":0.5131,"poem_count":0},{"chapter":"第015回","total_chars":7482,"dialogue_chars":3880,"narrative_chars":3602,"dialogue_ratio":0.5186,"poem_count":0},{"chapter":"第016回","total_chars":7934,"dialogue_chars":3405,"narrative_chars":4529,"dialogue_ratio":0.4292,"poem_count":0},{"chapter":"第017回","total_chars":8608,"dialogue_chars":4081,"narrative_chars":4527,"dialogue_ratio":0.4741,"poem_count":0},{"chapter":"第018回","total_chars":6039,"dialogue_chars":3246,"narrative_chars":2793,"dialogue_ratio":0.5375,"poem_count":0},{"chapter":"第019回","total_chars":7022,"dialogue_chars":3830,"narrative_chars":3192,"dialogue_ratio":0.5454,"poem_count":0},{"chapter":"第020回","total_chars":7256,"dialogue_chars":3531,"narrative_chars":3725,"dialogue_ratio":0.4866,"poem_count":0},{"chapter":"第021回","total_chars":7295,"dialogue_chars":3189,"narrative_chars":4106,"dialogue_ratio":0.4371,"poem_count":0},{"chapter":"第022回","total_chars":7009,"dialogue_chars":3711,"narrative_chars":3298,"dialogue_ratio":0.5295,"poem_count":0},{"chapter":"第023回","total_chars":7548,"dialogue_chars":4136,"narrative_chars":3412,"dialogue_ratio":0.548,"poem_count":0},{"chapter":"第024回","total_chars":7644,"dialogue_chars":3635,"narrative_chars":4009,"dialogue_ratio":0.4755,"poem_count":0},{"chapter":"第025回","total_chars":7872,"dialogue_chars":3663,"narrative_chars":4209,"dialogue_ratio":0.4653,"poem_count":0},{"chapter":"第026回","total_chars":7048,"dialogue_chars":3363,"narrative_chars":3685,"dialogue_ratio":0.4772,"poem_count":0},{"chapter":"第027回","total_chars":7366,"dialogue_chars":4008,"narrative_chars":3358,"dialogue_ratio":0.5441,"poem_count":0},{"chapter":"第028回","total_chars":6636,"dialogue_chars":2444,"narrative_chars":4192,"dialogue_ratio":0.3683,"poem_count":0},{"chapter":"第029回","total_chars":6642,"dialogue_chars":3526,"narrative_chars":3116,"dialogue_ratio":0.5309,"poem_count":0},{"chapter":"第030回","total_chars":8385,"dialogue_chars":4087,"narrative_chars":4298,"dialogue_ratio":0.4874,"poem_count":0},{"chapter":"第031回","total_chars":9041,"dialogue_chars":5290,"narrative_chars":3751,"dialogue_ratio":0.5851,"poem_count":0},{"chapter":"第032回","total_chars":8288,"dialogue_chars":4646,"narrative_chars":3642,"dialogue_ratio":0.5606,"poem_count":0},{"chapter":"第033回","total_chars":8210,"dialogue_chars":4674,"narrative_chars":3536,"dialogue_ratio":0.5693,"poem_count":0},{"chapter":"第034回","total_chars":8406,"dialogue_chars":3643,"narrative_chars":4763,"dialogue_ratio":0.4334,"poem_count":0},{"chapter":"第035回","total_chars":7069,"dialogue_chars":2530,"narrative_chars":4539,"dialogue_ratio":0.3579,"poem_count":0},{"chapter":"第036回","total_chars":7393,"dialogue_chars":3878,"narrative_chars":3515,"dialogue_ratio":0.5246,"poem_count":0},{"chapter":"第037回","total_chars":8266,"dialogue_chars":5089,"narrative_chars":3177,"dialogue_ratio":0.6157,"poem_count":0},{"chapter":"第038回","total_chars":7752,"dialogue_chars":4184,"narrative_chars":3568,"dialogue_ratio":0.5397,"poem_count":0},{"chapter":"第039回","total_chars":8098,"dialogue_chars":4391,"narrative_chars":3707,"dialogue_ratio":0.5422,"poem_count":0},{"chapter":"第040回","total_chars":7863,"dialogue_chars":4192,"narrative_chars":3671,"dialogue_ratio":0.5331,"poem_count":0},{"chapter":"第041回","total_chars":8115,"dialogue_chars":3526,"narrative_chars":4589,"dialogue_ratio":0.4345,"poem_count":0},{"chapter":"第042回","total_chars":8485,"dialogue_chars":4517,"narrative_chars":3968,"dialogue_ratio":0.5324,"poem_count":0},{"chapter":"第043回","total_chars":8199,"dialogue_chars":4171,"narrative_chars":4028,"dialogue_ratio":0.5087,"poem_count":0},{"chapter":"第044回","total_chars":8231,"dialogue_chars":4595,"narrative_chars":3636,"dialogue_ratio":0.5583,"poem_count":0},{"chapter":"第045回","total_chars":7415,"dialogue_chars":3326,"narrative_chars":4089,"dialogue_ratio":0.4486,"poem_count":0},{"chapter":"第046回","total_chars":8148,"dialogue_chars":3872,"narrative_chars":4276,"dialogue_ratio":0.4752,"poem_count":0},{"chapter":"第047回","total_chars":8056,"dialogue_chars":4548,"narrative_chars":3508,"dialogue_ratio":0.5645,"poem_count":0},{"chapter":"第048回","total_chars":6749,"dialogue_chars":3127,"narrative_chars":3622,"dialogue_ratio":0.4633,"poem_count":0},{"chapter":"第049回","total_chars":7858,"dialogue_chars":4168,"narrative_chars":3690,"dialogue_ratio":0.5304,"poem_count":0},{"chapter":"第050回","total_chars":6848,"dialogue_chars":3086,"narrative_chars":3762,"dialogue_ratio":0.4506,"poem_count":0},{"chapter":"第051回","total_chars":7216,"dialogue_chars":3093,"narrative_chars":4123,"dialogue_ratio":0.4286,"poem_count":0},{"chapter":"第052回","total_chars":7862,"dialogue_chars":3511,"narrative_chars":4351,"dialogue_ratio":0.4466,"poem_count":0},{"chapter":"第053回","total_chars":8097,"dialogue_chars":3662,"narrative_chars":4435,"dialogue_ratio":0.4523,"poem_count":0},{"chapter":"第054回","total_chars":7331,"dialogue_chars":3527,"narrative_chars":3804,"dialogue_ratio":0.4811,"poem_count":0},{"chapter":"第055回","total_chars":7824,"dialogue_chars":3407,"narrative_chars":4417,"dialogue_ratio":0.4355,"poem_count":1},{"chapter":"第056回","total_chars":7896,"dialogue_chars":3762,"narrative_chars":4134,"dialogue_ratio":0.4764,"poem_count":0},{"chapter":"第057回","total_chars":6958,"dialogue_chars":3640,"narrative_chars":3318,"dialogue_ratio":0.5231,"poem_count":0},{"chapter":"第058回","total_chars":6761,"dialogue_chars":3162,"narrative_chars":3599,"dialogue_ratio":0.4677,"poem_count":0},{"chapter":"第059回","total_chars":7720,"dialogue_chars":3906,"narrative_chars":3814,"dialogue_ratio":0.506,"poem_count":0},{"chapter":"第060回","total_chars":7299,"dialogue_chars":3749,"narrative_chars":3550,"dialogue_ratio":0.5136,"poem_count":0},{"chapter":"第061回","total_chars":7941,"dialogue_chars":3032,"narrative_chars":4909,"dialogue_ratio":0.3818,"poem_count":0},{"chapter":"第062回","total_chars":7044,"dialogue_chars":3409,"narrative_chars":3635,"dialogue_ratio":0.484,"poem_count":0},{"chapter":"第063回","total_chars":7235,"dialogue_chars":3341,"narrative_chars":3894,"dialogue_ratio":0.4618,"poem_count":0},{"chapter":"第064回","total_chars":7214,"dialogue_chars":3862,"narrative_chars":3352,"dialogue_ratio":0.5353,"poem_count":0},{"chapter":"第065回","total_chars":6811,"dialogue_chars":1778,"narrative_chars":5033,"dialogue_ratio":0.261,"poem_count":0},{"chapter":"第066回","total_chars":6763,"dialogue_chars":2928,"narrative_chars":3835,"dialogue_ratio":0.4329,"poem_count":0},{"chapter":"第067回","total_chars":7340,"dialogue_chars":3932,"narrative_chars":3408,"dialogue_ratio":0.5357,"poem_count":0},{"chapter":"第068回","total_chars":7227,"dialogue_chars":3926,"narrative_chars":3301,"dialogue_ratio":0.5432,"poem_count":0},{"chapter":"第069回","total_chars":8513,"dialogue_chars":4028,"narrative_chars":4485,"dialogue_ratio":0.4732,"poem_count":2},{"chapter":"第070回","total_chars":7996,"dialogue_chars":4050,"narrative_chars":3946,"dialogue_ratio":0.5065,"poem_count":0},{"chapter":"第071回","total_chars":7831,"dialogue_chars":3646,"narrative_chars":4185,"dialogue_ratio":0.4656,"poem_count":0},{"chapter":"第072回","total_chars":8083,"dialogue_chars":3162,"narrative_chars":4921,"dialogue_ratio":0.3912,"poem_count":0},{"chapter":"第073回","total_chars":8319,"dialogue_chars":3874,"narrative_chars":4445,"dialogue_ratio":0.4657,"poem_count":0},{"chapter":"第074回","total_chars":8186,"dialogue_chars":4811,"narrative_chars":3375,"dialogue_ratio":0.5877,"poem_count":0},{"chapter":"第075回","total_chars":8009,"dialogue_chars":3833,"narrative_chars":4176,"dialogue_ratio":0.4786,"poem_count":0},{"chapter":"第076回","total_chars":8290,"dialogue_chars":3912,"narrative_chars":4378,"dialogue_ratio":0.4719,"poem_count":0},{"chapter":"第077回","total_chars":8370,"dialogue_chars":3728,"narrative_chars":4642,"dialogue_ratio":0.4454,"poem_count":0},{"chapter":"第078回","total_chars":6782,"dialogue_chars":3469,"narrative_chars":3313,"dialogue_ratio":0.5115,"poem_count":0},{"chapter":"第079回","total_chars":6499,"dialogue_chars":2275,"narrative_chars":4224,"dialogue_ratio":0.3501,"poem_count":0},{"chapter":"第080回","total_chars":7212,"dialogue_chars":4244,"narrative_chars":2968,"dialogue_ratio":0.5885,"poem_count":0},{"chapter":"第081回","total_chars":7501,"dialogue_chars":3986,"narrative_chars":3515,"dialogue_ratio":0.5314,"poem_count":0},{"chapter":"第082回","total_chars":7896,"dialogue_chars":3746,"narrative_chars":4150,"dialogue_ratio":0.4744,"poem_count":0},{"chapter":"第083回","total_chars":7161,"dialogue_chars":3192,"narrative_chars":3969,"dialogue_ratio":0.4457,"poem_count":0},{"chapter":"第084回","total_chars":7620,"dialogue_chars":3478,"narrative_chars":4142,"dialogue_ratio":0.4564,"poem_count":0},{"chapter":"第085回","total_chars":7861,"dialogue_chars":4304,"narrative_chars":3557,"dialogue_ratio":0.5475,"poem_count":0},{"chapter":"第086回","total_chars":7963,"dialogue_chars":3606,"narrative_chars":4357,"dialogue_ratio":0.4528,"poem_count":0},{"chapter":"第087回","total_chars":6906,"dialogue_chars":3348,"narrative_chars":3558,"dialogue_ratio":0.4848,"poem_count":0},{"chapter":"第088回","total_chars":6811,"dialogue_chars":2788,"narrative_chars":4023,"dialogue_ratio":0.4093,"poem_count":0},{"chapter":"第089回","total_chars":6541,"dialogue_chars":3207,"narrative_chars":3334,"dialogue_ratio":0.4903,"poem_count":0},{"chapter":"第090回","total_chars":6979,"dialogue_chars":2250,"narrative_chars":4729,"dialogue_ratio":0.3224,"poem_count":0},{"chapter":"第091回","total_chars":7168,"dialogue_chars":3039,"narrative_chars":4129,"dialogue_ratio":0.424,"poem_count":0},{"chapter":"第092回","total_chars":7486,"dialogue_chars":3395,"narrative_chars":4091,"dialogue_ratio":0.4535,"poem_count":0},{"chapter":"第093回","total_chars":6778,"dialogue_chars":3528,"narrative_chars":3250,"dialogue_ratio":0.5205,"poem_count":0},{"chapter":"第094回","total_chars":5906,"dialogue_chars":2521,"narrative_chars":3385,"dialogue_ratio":0.4269,"poem_count":0},{"chapter":"第095回","total_chars":6676,"dialogue_chars":2843,"narrative_chars":3833,"dialogue_ratio":0.4259,"poem_count":0},{"chapter":"第096回","total_chars":6310,"dialogue_chars":2705,"narrative_chars":3605,"dialogue_ratio":0.4287,"poem_count":0},{"chapter":"第097回","total_chars":8992,"dialogue_chars":4781,"narrative_chars":4211,"dialogue_ratio":0.5317,"poem_count":0},{"chapter":"第098回","total_chars":7749,"dialogue_chars":2945,"narrative_chars":4804,"dialogue_ratio":0.38,"poem_count":1},{"chapter":"第099回","total_chars":5943,"dialogue_chars":3349,"narrative_chars":2594,"dialogue_ratio":0.5635,"poem_count":2},{"chapter":"第100回","total_chars":6439,"dialogue_chars":3155,"narrative_chars":3284,"dialogue_ratio":0.49,"poem_count":0}]},"sentiment":{"total_dialogues":6617,"analyzed_dialogues":6617,"sentiment_distribution":{"positive":831,"neutral":3826,"negative":1960},"data_scope_note":"口径：带引号直引语（X道/曰/言/云+引号，含倒装式）；别名表已含佛祖/世尊/释迦牟尼/如来佛祖（utils/aliases.py 单一数据源）。间接引语与无引号讲经（韵文偈语）不在口径内——各人物条数为该口径全集而非别名缺失（W668 实测如来系原文说话模式≈别名口径上限）；如需引用请标注口径。"}}</script>
+
+<script>
+(function () {
+  'use strict';
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var W = 1160;
+
+  /* ── 迷你 d3 兜底：仅当站点本地 d3 副本未加载时启用 ────────────────────
+     只补齐本页用到的 scale / 极值 API；轴、标签、路径均自绘以保证
+     「零裁切 + 零重叠」可被精确控制。 */
+  function makeShim() {
+    function scaleLinear() {
+      var d0 = [0, 1], r0 = [0, 1];
+      function s(v) {
+        var a = d0[0], b = d0[1], c = r0[0], e = r0[1];
+        if (a === b) return (c + e) / 2;
+        return c + (e - c) * ((v - a) / (b - a));
+      }
+      s.domain = function (v) { if (v) { d0 = v.slice(); } return s; };
+      s.range = function (v) { if (v) { r0 = v.slice(); } return s; };
+      s.nice = function () { return s; };
+      s.ticks = function (count) {
+        var a = d0[0], b = d0[1], span = b - a;
+        if (!(span > 0)) return [a];
+        var raw = span / Math.max(1, count);
+        var mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+        var norm = raw / mag, mult = norm < 1.5 ? 1 : norm < 3 ? 2 : norm < 7 ? 5 : 10;
+        var st = mult * mag, out = [];
+        for (var v = Math.ceil(a / st) * st; v <= b + st * 1e-9; v += st) {
+          out.push(Math.round(v / st) * st);
+        }
+        return out;
+      };
+      return s;
+    }
+    function scaleBand() {
+      var dom = [], r0 = [0, 1], pad = 0, step = 0, bw = 0, start = 0;
+      function calc() {
+        var n = dom.length;
+        if (!n) { step = bw = 0; start = r0[0]; return; }
+        step = (r0[1] - r0[0]) / Math.max(1e-9, n - pad);
+        bw = step * (1 - pad);
+        start = r0[0] + (step - bw) / 2;
+      }
+      function s(v) {
+        var i = dom.indexOf(v);
+        return i < 0 ? undefined : start + i * step;
+      }
+      s.domain = function (v) { if (v) { dom = v.slice(); calc(); } return s; };
+      s.range = function (v) { if (v) { r0 = v.slice(); calc(); } return s; };
+      s.padding = function (p) { if (p != null) { pad = p; calc(); } return s; };
+      s.paddingInner = s.padding;
+      s.bandwidth = function () { return bw; };
+      s.step = function () { return step; };
+      return s;
+    }
+    function extent(arr, acc) {
+      var lo = Infinity, hi = -Infinity;
+      arr.forEach(function (d) {
+        var v = acc ? acc(d) : d;
+        if (v == null || isNaN(v)) return;
+        if (v < lo) lo = v;
+        if (v > hi) hi = v;
+      });
+      return [lo, hi];
+    }
+    function line() {
+      var xf = null, yf = null;
+      function l(data) {
+        var out = [];
+        data.forEach(function (d, i) {
+          out.push((i ? 'L' : 'M') + xf(d, i, data) + ',' + yf(d, i, data));
+        });
+        return out.join('');
+      }
+      l.x = function (f) { xf = f; return l; };
+      l.y = function (f) { yf = f; return l; };
+      return l;
+    }
+    function area() {
+      var xf = null, y0f = null, y1f = null;
+      function a(data) {
+        var top = [], bottom = [];
+        data.forEach(function (d, i) {
+          var x = xf(d, i, data);
+          top.push((i ? 'L' : 'M') + x + ',' + y1f(d, i, data));
+          bottom.push(x + ',' + y0f(d, i, data));
+        });
+        return top.join('') + 'L' + bottom.reverse().join('L') + 'Z';
+      }
+      a.x = function (f) { xf = f; return a; };
+      a.y0 = function (f) { y0f = f; return a; };
+      a.y1 = function (f) { y1f = f; return a; };
+      return a;
+    }
+    function pie() {
+      var vf = function (d) { return d; }, start = 0;
+      function p(data) {
+        var vals = data.map(vf);
+        var sum = vals.reduce(function (a, b) { return a + b; }, 0);
+        var a0 = start;
+        return data.map(function (d, i) {
+          var a1 = a0 + (sum ? (vals[i] / sum) * Math.PI * 2 : 0);
+          var o = { data: d, index: i, value: vals[i], startAngle: a0, endAngle: a1 };
+          a0 = a1;
+          return o;
+        });
+      }
+      p.value = function (f) { vf = f; return p; };
+      p.sort = function () { return p; };      /* 保留输入顺序 */
+      p.startAngle = function (a) { start = a; return p; };
+      return p;
+    }
+    function arc() {
+      var ri = 0, ro = 0;
+      function pt(r, a) { return [Math.sin(a) * r, -Math.cos(a) * r]; }
+      function a(d) {
+        var large = (d.endAngle - d.startAngle) > Math.PI ? 1 : 0;
+        var p0 = pt(ro, d.startAngle), p1 = pt(ro, d.endAngle);
+        var p2 = pt(ri, d.endAngle), p3 = pt(ri, d.startAngle);
+        return 'M' + p0[0] + ',' + p0[1] +
+               'A' + ro + ',' + ro + ' 0 ' + large + ' 1 ' + p1[0] + ',' + p1[1] +
+               'L' + p2[0] + ',' + p2[1] +
+               'A' + ri + ',' + ri + ' 0 ' + large + ' 0 ' + p3[0] + ',' + p3[1] + 'Z';
+      }
+      a.innerRadius = function (r) { ri = r; return a; };
+      a.outerRadius = function (r) { ro = r; return a; };
+      return a;
+    }
+    return {
+      scaleLinear: scaleLinear,
+      scaleBand: scaleBand,
+      max: function (arr, acc) { return extent(arr, acc)[1]; },
+      min: function (arr, acc) { return extent(arr, acc)[0]; },
+      extent: extent,
+      line: line,
+      area: area,
+      pie: pie,
+      arc: arc
+    };
+  }
+
+  var ICON_BODY = {};
+  var ICON_ATTRS = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"';
+  ICON_BODY['book'] = '<rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M12 4.5v15"/><path d="M6.5 9h3M6.5 12.5h3M14.5 9h3M14.5 12.5h3"/>';
+  ICON_BODY['search'] = '<rect x="3.5" y="3.5" width="12" height="12" rx="1.5"/><path d="M14.6 14.6 20.5 20.5"/>';
+  ICON_BODY['menu'] = '<path d="M3.5 7h17M3.5 12h17M3.5 17h17"/>';
+  ICON_BODY['close'] = '<path d="M5.5 5.5 18.5 18.5M18.5 5.5 5.5 18.5"/>';
+  ICON_BODY['check'] = '<path d="M5 12.5 9.5 17 19 6.5"/>';
+  ICON_BODY['warn'] = '<path d="M12 4 20.5 19.5h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.2"/>';
+  ICON_BODY['chart'] = '<path d="M3.5 20.5h17"/><path d="M7 20.5v-6.5M12 20.5v-11M17 20.5v-3.5"/>';
+  ICON_BODY['globe'] = '<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17"/><path d="M3.5 12h17"/>';
+
+  var D3 = window.d3 || makeShim();
+
+  /* ── 工具 ─────────────────────────────────────────────────────────── */
+  function E(name, attrs, parent) {
+    var e = document.createElementNS(NS, name);
+    if (attrs) for (var k in attrs) { if (attrs[k] != null) e.setAttribute(k, attrs[k]); }
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function T(parent, x, y, cls, str, anchor) {
+    var t = E('text', { x: x, y: y, 'class': cls, 'text-anchor': anchor || 'start' }, parent);
+    t.textContent = str;
+    return t;
+  }
+  function num(n) { return Number(n).toLocaleString('en-US'); }
+  function pct(x, d) { return (x * 100).toFixed(d == null ? 1 : d) + '%'; }
+  function chapTag(i) { return (i + 1 < 10 ? '0' : '') + (i + 1) + '/'; }
+  function pickTicks(n, span, minGap) {
+    var maxL = Math.max(1, Math.floor(span / minGap));
+    var step = Math.ceil(n / maxL), out = [];
+    for (var i = 0; i < n; i += step) out.push(i);
+    return out;
+  }
+
+  /* ── 标签防裁切：绘制完成后按屏幕坐标把标签推回视窗内 ──────────────────
+     注：getBBox() 返回的是父级 <g> 的局部坐标，与 SVG 视窗（光标零点）不可直接比较；
+     否则位于 g 左侧的 y 轴刻度会被误判为越界而被推入绘图区，压住均值标签。
+     改用 getBoundingClientRect()（已包含全部祖先变换）与 svg 元素客户端矩形比较。 */
+  function clampLabels(svg, W, H, pad) {
+    pad = pad == null ? 2 : pad;
+    var svgRect = svg.getBoundingClientRect();
+    if (!svgRect.width) return;
+    var k = svgRect.width / W;              /* 每用户单位对应的屏幕像素 */
+    var texts = svg.querySelectorAll('text');
+    for (var i = 0; i < texts.length; i++) {
+      var t = texts[i], b;
+      try { b = t.getBoundingClientRect(); } catch (e) { continue; }
+      if (!b || (!b.width && !b.height)) continue;
+      var dx = 0, dy = 0;
+      var padPx = pad * k;
+      if (b.left < svgRect.left + padPx) dx = (svgRect.left + padPx - b.left) / k;
+      else if (b.right > svgRect.right - padPx) dx = (svgRect.right - padPx - b.right) / k;
+      if (b.top < svgRect.top + padPx) dy = (svgRect.top + padPx - b.top) / k;
+      else if (b.bottom > svgRect.bottom - padPx) dy = (svgRect.bottom - padPx - b.bottom) / k;
+      if (dx || dy) t.setAttribute('transform', 'translate(' + dx.toFixed(2) + ',' + dy.toFixed(2) + ')');
+    }
+  }
+
+  /* ── Tooltip ──────────────────────────────────────────────────────── */
+  var tip = document.getElementById('tooltip');
+  var tipBody = document.getElementById('tip-body');
+  var tipClose = document.getElementById('tip-close');
+  function showTip(html, ev) {
+    tipBody.innerHTML = html;
+    tip.setAttribute('data-open', '1');
+    moveTip(ev);
+  }
+  function moveTip(ev) {
+    if (!ev) return;
+    var r = tip.getBoundingClientRect();
+    var x = ev.clientX + 14, y = ev.clientY + 14;
+    if (x + r.width > window.innerWidth - 8) x = ev.clientX - r.width - 14;
+    if (y + r.height > window.innerHeight - 8) y = ev.clientY - r.height - 14;
+    tip.style.left = Math.max(8, x) + 'px';
+    tip.style.top = Math.max(8, y) + 'px';
+  }
+  function hideTip() { tip.setAttribute('data-open', '0'); }
+  tipClose.addEventListener('click', hideTip);
+
+  /* ── 主题切换 ─────────────────────────────────────────────────────── */
+  var root = document.documentElement;
+  var toggle = document.getElementById('theme-toggle');
+  var themeLabel = document.getElementById('theme-label');
+  function setTheme(t) {
+    root.setAttribute('data-theme', t);
+    themeLabel.textContent = 'theme: ' + t;
+    toggle.setAttribute('aria-pressed', t === 'light' ? 'true' : 'false');
+    try { localStorage.setItem('xyj-theme', t); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('xyj-theme'); } catch (e) {}
+  setTheme(saved === 'light' ? 'light' : 'dark');
+  toggle.addEventListener('click', function () {
+    setTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+  });
+
+  /* ── 数据装载：优先 fetch 本地 JSON，file:// 下回落到 EMBEDDED ───────── */
+  var EMB = JSON.parse(document.getElementById('embedded-data').textContent);
+  var DATA = { stats: EMB.stats, sentiment: EMB.sentiment, mode: 'embedded' };
+
+  function load() {
+    /* file:// 下 fetch 被浏览器拒绝（会在控制台报错）；直接使用 EMBEDDED 副本。 */
+    if (location.protocol === 'file:') return Promise.resolve(DATA);
+    return Promise.all([
+      fetch('../../../../../scripts/output/data/chapter_stats.json').then(function (r) { return r.json(); }),
+      fetch('../../../../../scripts/output/data/dialogue_sentiment.json').then(function (r) { return r.json(); })
+    ]).then(function (res) {
+      if (res[0] && res[0].per_chapter && res[1] && res[1].sentiment_distribution) {
+        DATA.stats = res[0];
+        DATA.sentiment = res[1];
+        DATA.mode = 'live fetch';
+      }
+    }).catch(function () { /* file:// 下 fetch 被拦 → 用 EMBEDDED */ })
+      .then(function () { return DATA; });
+  }
+
+  /* ── 章节短标签（第001回 → 01/）────────────────────────────────────── */
+  function shortChapter(name) {
+    var m = /第(\d+)回/.exec(name);
+    if (!m) return name;
+    var n = parseInt(m[1], 10);
+    return (n < 10 ? '0' : '') + n + '/';
+  }
+
+  /* ══ KPI ══════════════════════════════════════════════════════════════ */
+  function renderKPI(s) {
+    var st = s.stats, se = s.sentiment;
+    var totalDlg = se.sentiment_distribution.positive + se.sentiment_distribution.neutral + se.sentiment_distribution.negative;
+    var cards = [
+      { icon: 'book',   accent: 'var(--c-cyan)',    label: '全书总字数', value: num(st.total_chars), unit: '字',
+        note: '一百回合计，均值 ' + num(st.avg_chars_per_chapter) + ' 字/回' },
+      { icon: 'chart',  accent: 'var(--c-magenta)', label: '直引语字数', value: num(st.total_dialogue_chars), unit: '字',
+        note: '带引号直引语口径，占全书 ' + pct(st.total_dialogue_chars / st.total_chars, 1) },
+      { icon: 'warn',   accent: 'var(--c-amber)',   label: '平均对话占比', value: pct(st.avg_dialogue_ratio, 2), unit: '',
+        note: '字数最长 ' + shortChapter(st.longest_chapter) + ' · 最短 ' + shortChapter(st.shortest_chapter) },
+      { icon: 'globe',  accent: 'var(--c-cyan)',    label: '覆盖回次', value: String(st.total_chapters), unit: '回',
+        note: '情绪判别样本 ' + num(totalDlg) + ' 条直引语' }
+    ];
+    var host = document.getElementById('kpi-grid');
+    host.innerHTML = '';
+    cards.forEach(function (c) {
+      var card = document.createElement('article');
+      card.className = 'kpi';
+      card.style.setProperty('--kpi-accent', c.accent);
+      card.innerHTML =
+        '<div class="kpi__head"><span class="kpi__label"></span>' +
+        '<svg class="kpi__icon" aria-hidden="true" ' + ICON_ATTRS + '>' + ICON_BODY[c.icon] + '</svg></div>' +
+        '<div class="kpi__value"><span class="kpi__num"></span><span class="kpi__unit"></span></div>' +
+        '<div class="kpi__note"></div>';
+      card.querySelector('.kpi__label').textContent = c.label;
+      card.querySelector('.kpi__num').textContent = c.value;
+      card.querySelector('.kpi__unit').textContent = c.unit;
+      card.querySelector('.kpi__note').textContent = c.note;
+      host.appendChild(card);
+    });
+  }
+
+  /* ══ 图 01 · 堆叠柱：每回叙述 / 对话字数 ═════════════════════════════ */
+  function renderStack(s) {
+    var host = document.getElementById('chart-stack');
+    host.innerHTML = '';
+    var H = 380, m = { t: 40, r: 18, b: 46, l: 58 };
+    var iw = W - m.l - m.r, ih = H - m.t - m.b;
+    var rows = s.stats.per_chapter;
+    var svg = E('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': '每回叙述与对话字数堆叠柱状图' }, host);
+    var g = E('g', { transform: 'translate(' + m.l + ',' + m.t + ')' }, svg);
+
+    var x = D3.scaleBand().domain(rows.map(function (d) { return d.chapter; })).range([0, iw]).padding(0.34);
+    var maxT = D3.max(rows, function (d) { return d.total_chars; });
+    var y = D3.scaleLinear().domain([0, maxT * 1.1]).range([ih, 0]);
+
+    var yt = y.ticks(4);
+    yt.forEach(function (t) {
+      E('line', { x1: 0, x2: iw, y1: y(t), y2: y(t), 'class': 'grid-line' }, g);
+    });
+    var ticks = pickTicks(rows.length, iw, 48);
+    ticks.forEach(function (i) {
+      var cx = x(rows[i].chapter) + x.bandwidth() / 2;
+      E('line', { x1: cx, x2: cx, y1: 0, y2: ih, 'class': 'grid-line' }, g);
+    });
+
+    // 柱体
+    rows.forEach(function (d) {
+      var bx = x(d.chapter), bw = x.bandwidth();
+      var hNar = ih - y(d.narrative_chars);
+      var hDlg = ih - y(d.dialogue_chars);
+      E('rect', { x: bx, y: ih - hNar, width: bw, height: hNar, 'class': 'bar-halo bar-fill-1' }, g);
+      E('rect', { x: bx, y: ih - hNar, width: bw, height: hNar, 'class': 'bar-hi bar-fill-1' }, g);
+      E('rect', { x: bx, y: ih - hNar - hDlg, width: bw, height: hDlg, 'class': 'bar-halo-2 bar-fill-2' }, g);
+      E('rect', { x: bx, y: ih - hNar - hDlg, width: bw, height: hDlg, 'class': 'bar-hi-2 bar-fill-2' }, g);
+    });
+
+    // 坐标轴
+    E('line', { x1: 0, x2: iw, y1: ih, y2: ih, 'class': 'axis-line' }, g);
+    E('line', { x1: 0, x2: 0, y1: 0, y2: ih, 'class': 'axis-line' }, g);
+    yt.forEach(function (t) {
+      E('line', { x1: -5, x2: 0, y1: y(t), y2: y(t), 'class': 'tick-mark' }, g);
+      T(g, -9, y(t) + 4, 'axis-text axis-text--y', num(t));
+    });
+    ticks.forEach(function (i) {
+      var cx = x(rows[i].chapter) + x.bandwidth() / 2;
+      E('line', { x1: cx, x2: cx, y1: ih, y2: ih + 5, 'class': 'tick-mark' }, g);
+      T(g, cx, ih + 19, 'axis-text', chapTag(i), 'middle');
+    });
+
+    // 系列直标
+    var key = E('g', { transform: 'translate(0,' + (-14) + ')' }, g);
+    E('rect', { x: 0, y: -8, width: 9, height: 9, 'class': 'bar-hi bar-fill-1' }, key);
+    T(key, 14, 0, 'series-label', '叙述');
+    E('rect', { x: 58, y: -8, width: 9, height: 9, 'class': 'bar-hi-2 bar-fill-2' }, key);
+    T(key, 72, 0, 'series-label', '对话');
+
+    // 极值单标
+    var top = rows.reduce(function (a, b) { return b.total_chars > a.total_chars ? b : a; });
+    var ti = rows.indexOf(top);
+    var tx = x(top.chapter) + x.bandwidth() / 2;
+    var ty = y(top.total_chars) - 10;
+    if (ty < 12) ty = y(top.total_chars) + 16;
+    T(g, tx, ty, 'data-label data-label--hi', '> ' + shortChapter(top.chapter) + '  ' + num(top.total_chars), 'middle');
+
+    // hover 带
+    rows.forEach(function (d) {
+      var cx = x(d.chapter);
+      var band = E('rect', {
+        x: cx - (x.step() - x.bandwidth()) / 2, y: 0,
+        width: x.step(), height: ih, 'class': 'hover-band'
+      }, g);
+      band.addEventListener('mousemove', function (ev) {
+        showTip(
+          '<div class="tooltip__title">' + d.chapter + '</div>' +
+          '<div class="tooltip__row"><span>总字数</span><b>' + num(d.total_chars) + '</b></div>' +
+          '<div class="tooltip__row"><span>叙述</span><b>' + num(d.narrative_chars) + '</b></div>' +
+          '<div class="tooltip__row"><span>对话</span><b>' + num(d.dialogue_chars) + '</b></div>' +
+          '<div class="tooltip__row"><span>对话占比</span><b>' + pct(d.dialogue_ratio, 2) + '</b></div>' +
+          '<div class="tooltip__row"><span>韵文</span><b>' + d.poem_count + ' 首</b></div>',
+          ev);
+      });
+      band.addEventListener('mouseleave', hideTip);
+    });
+
+    clampLabels(svg, W, H, 2);
+
+    var lo = D3.min(rows, function (d) { return d.total_chars; });
+    document.getElementById('note-1').textContent =
+      '单回总字数区间 ' + num(lo) + '–' + num(maxT) + ' 字；' +
+      '最高回 ' + top.chapter + '（' + num(top.total_chars) + ' 字，对话占比 ' + pct(top.dialogue_ratio, 2) + '）。' +
+      '叙述与对话为同一堆叠柱的两段，图例采用直接标注而非图例框。';
+  }
+
+  /* ══ 图 02 · 折线：对话占比 ═══════════════════════════════════════════ */
+  function renderLine(s) {
+    var host = document.getElementById('chart-line');
+    host.innerHTML = '';
+    var H = 340, m = { t: 34, r: 18, b: 46, l: 58 };
+    var iw = W - m.l - m.r, ih = H - m.t - m.b;
+    var rows = s.stats.per_chapter;
+    var svg = E('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': '每回对话字数占比折线图' }, host);
+    var g = E('g', { transform: 'translate(' + m.l + ',' + m.t + ')' }, svg);
+
+    var xs = D3.scaleBand().domain(rows.map(function (d) { return d.chapter; })).range([0, iw]).padding(0);
+    var lo = D3.min(rows, function (d) { return d.dialogue_ratio; });
+    var hi = D3.max(rows, function (d) { return d.dialogue_ratio; });
+    var y = D3.scaleLinear()
+      .domain([Math.floor(lo * 100) / 100 - 0.02, Math.ceil(hi * 100) / 100 + 0.02])
+      .range([ih, 0]);
+
+    var yt = y.ticks(5);
+    yt.forEach(function (t) {
+      E('line', { x1: 0, x2: iw, y1: y(t), y2: y(t), 'class': 'grid-line' }, g);
+    });
+    var ticks = pickTicks(rows.length, iw, 48);
+    ticks.forEach(function (i) {
+      var cx = xs(rows[i].chapter) + xs.bandwidth() / 2;
+      E('line', { x1: cx, x2: cx, y1: 0, y2: ih, 'class': 'grid-line' }, g);
+    });
+
+    // 面积（极淡）与主线：由 d3 生成器产出
+    var xAcc = function (d) { return xs(d.chapter) + xs.bandwidth() / 2; };
+    E('path', {
+      d: D3.area().x(xAcc).y0(ih).y1(function (d) { return y(d.dialogue_ratio); })(rows),
+      'class': 'line-area'
+    }, g);
+    E('path', {
+      d: D3.line().x(xAcc).y(function (d) { return y(d.dialogue_ratio); })(rows),
+      'class': 'line-main'
+    }, g);
+
+    // 均值参考线（琥珀虚线：与青色实线在亮度/线型上分层）
+    var avg = s.stats.avg_dialogue_ratio;
+    E('line', { x1: 0, x2: iw, y1: y(avg), y2: y(avg), 'class': 'line-ref' }, g);
+    T(g, 4, y(avg) - 7, 'data-label data-label--amb', '~ 均值 ' + pct(avg, 2));
+
+    // 坐标轴
+    E('line', { x1: 0, x2: iw, y1: ih, y2: ih, 'class': 'axis-line' }, g);
+    E('line', { x1: 0, x2: 0, y1: 0, y2: ih, 'class': 'axis-line' }, g);
+    yt.forEach(function (t) {
+      E('line', { x1: -5, x2: 0, y1: y(t), y2: y(t), 'class': 'tick-mark' }, g);
+      T(g, -9, y(t) + 4, 'axis-text axis-text--y', pct(t, 0));
+    });
+    ticks.forEach(function (i) {
+      var cx = xs(rows[i].chapter) + xs.bandwidth() / 2;
+      E('line', { x1: cx, x2: cx, y1: ih, y2: ih + 5, 'class': 'tick-mark' }, g);
+      T(g, cx, ih + 19, 'axis-text', chapTag(i), 'middle');
+    });
+
+    // 极值双标
+    var maxR = rows.reduce(function (a, b) { return b.dialogue_ratio > a.dialogue_ratio ? b : a; });
+    var minR = rows.reduce(function (a, b) { return b.dialogue_ratio < a.dialogue_ratio ? b : a; });
+    [[maxR, 'data-label--hi', -12], [minR, 'data-label--mag', 18]].forEach(function (pair) {
+      var d = pair[0];
+      var cx = xs(d.chapter) + xs.bandwidth() / 2;
+      var cy = y(d.dialogue_ratio);
+      E('circle', { cx: cx, cy: cy, r: 3.5, 'class': 'dot-main' }, g);
+      var ty = cy + pair[2];
+      if (ty < 12) ty = cy + 18;
+      T(g, cx, ty, 'data-label ' + pair[1], '> ' + shortChapter(d.chapter) + '  ' + pct(d.dialogue_ratio, 2), 'middle');
+    });
+
+    rows.forEach(function (d) {
+      var cx = xs(d.chapter) + xs.bandwidth() / 2;
+      var band = E('circle', { cx: cx, cy: y(d.dialogue_ratio), r: Math.max(6, iw / rows.length / 2), 'class': 'hover-band' }, g);
+      band.addEventListener('mousemove', function (ev) {
+        showTip(
+          '<div class="tooltip__title">' + d.chapter + '</div>' +
+          '<div class="tooltip__row"><span>对话占比</span><b>' + pct(d.dialogue_ratio, 2) + '</b></div>' +
+          '<div class="tooltip__row"><span>对话字数</span><b>' + num(d.dialogue_chars) + '</b></div>' +
+          '<div class="tooltip__row"><span>叙述字数</span><b>' + num(d.narrative_chars) + '</b></div>' +
+          '<div class="tooltip__row"><span>与均值差</span><b>' + ((d.dialogue_ratio - avg) * 100).toFixed(2) + ' pt</b></div>',
+          ev);
+      });
+      band.addEventListener('mouseleave', hideTip);
+    });
+
+    clampLabels(svg, W, H, 2);
+
+    document.getElementById('note-2').textContent =
+      '口径：带引号直引语字数 ÷ 该回总字数。区间 ' + pct(lo, 2) + '–' + pct(hi, 2) + '；' +
+      '峰值 ' + maxR.chapter + '（' + pct(maxR.dialogue_ratio, 2) + '），谷值 ' + minR.chapter +
+      '（' + pct(minR.dialogue_ratio, 2) + '）。琥珀虚线为全书均值 ' + pct(avg, 2) +
+      '，与青色主序列以线型与亮度分层，不共用同一条线。';
+  }
+
+  /* ══ 图 03 · 柱：韵文密度 ════════════════════════════════════════════ */
+  function renderPoem(s) {
+    var host = document.getElementById('chart-poem');
+    host.innerHTML = '';
+    var H = 300, m = { t: 40, r: 18, b: 46, l: 58 };
+    var iw = W - m.l - m.r, ih = H - m.t - m.b;
+    var rows = s.stats.per_chapter.filter(function (d) { return d.poem_count > 0; });
+    var svg = E('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': '有韵文回次的韵文首数柱状图' }, host);
+    var g = E('g', { transform: 'translate(' + m.l + ',' + m.t + ')' }, svg);
+
+    var x = D3.scaleBand().domain(rows.map(function (d) { return d.chapter; })).range([0, iw]).padding(0.42);
+    var maxP = D3.max(rows, function (d) { return d.poem_count; });
+    var y = D3.scaleLinear().domain([0, maxP * 1.28]).range([ih, 0]);
+
+    var yt = y.ticks(4);
+    yt.forEach(function (t) {
+      E('line', { x1: 0, x2: iw, y1: y(t), y2: y(t), 'class': 'grid-line' }, g);
+    });
+    rows.forEach(function (d) {
+      var cx = x(d.chapter) + x.bandwidth() / 2;
+      E('line', { x1: cx, x2: cx, y1: 0, y2: ih, 'class': 'grid-line' }, g);
+    });
+
+    rows.forEach(function (d) {
+      var bx = x(d.chapter), bw = x.bandwidth(), h = ih - y(d.poem_count);
+      E('rect', { x: bx, y: ih - h, width: bw, height: h, 'class': 'bar-halo-3 bar-fill-3' }, g);
+      E('rect', { x: bx, y: ih - h, width: bw, height: h, 'class': 'bar-hi-3 bar-fill-3' }, g);
+    });
+
+    E('line', { x1: 0, x2: iw, y1: ih, y2: ih, 'class': 'axis-line' }, g);
+    E('line', { x1: 0, x2: 0, y1: 0, y2: ih, 'class': 'axis-line' }, g);
+    yt.forEach(function (t) {
+      E('line', { x1: -5, x2: 0, y1: y(t), y2: y(t), 'class': 'tick-mark' }, g);
+      T(g, -9, y(t) + 4, 'axis-text axis-text--y', String(t));
+    });
+    rows.forEach(function (d) {
+      var cx = x(d.chapter) + x.bandwidth() / 2;
+      E('line', { x1: cx, x2: cx, y1: ih, y2: ih + 5, 'class': 'tick-mark' }, g);
+      T(g, cx, ih + 19, 'axis-text', shortChapter(d.chapter), 'middle');
+    });
+
+    // 并列峰值合并为一个标签，避免相邻标签重叠
+    var peak = maxP;
+    var peakRows = rows.filter(function (d) { return d.poem_count === peak; });
+    var first = peakRows[0], last = peakRows[peakRows.length - 1];
+    var cx = (x(first.chapter) + x.bandwidth() / 2 + x(last.chapter) + x.bandwidth() / 2) / 2;
+    var label = peakRows.length > 1
+      ? '> ' + shortChapter(first.chapter).replace('/', '') + '–' + shortChapter(last.chapter).replace('/', '') + '  ' + peak + ' 首'
+      : '> ' + shortChapter(first.chapter) + '  ' + peak + ' 首';
+    T(g, cx, y(peak) - 11, 'data-label data-label--amb', label, 'middle');
+
+    rows.forEach(function (d) {
+      var bx = x(d.chapter), bw = x.bandwidth();
+      var band = E('rect', { x: bx - (x.step() - bw) / 2, y: 0, width: x.step(), height: ih, 'class': 'hover-band' }, g);
+      band.addEventListener('mousemove', function (ev) {
+        showTip(
+          '<div class="tooltip__title">' + d.chapter + '</div>' +
+          '<div class="tooltip__row"><span>韵文</span><b>' + d.poem_count + ' 首</b></div>' +
+          '<div class="tooltip__row"><span>该回总字数</span><b>' + num(d.total_chars) + '</b></div>' +
+          '<div class="tooltip__note">韵文在全书中分布极稀疏</div>',
+          ev);
+      });
+      band.addEventListener('mouseleave', hideTip);
+    });
+
+    clampLabels(svg, W, H, 2);
+
+    document.getElementById('note-3').textContent =
+      '全书韵文共 ' + s.stats.total_poems + ' 首，分布在 ' + rows.length + ' 个回次内；' +
+      '峰值 ' + peak + ' 首（' + peakRows.map(function (d) { return d.chapter; }).join('、') + '）。' +
+      '其余九十二回韵文数为零，故本图只列有韵文的回次，保留零值回次会得到大量空柱。';
+  }
+
+  /* ══ 图 04 · 环形：情绪分布 ═══════════════════════════════════════════ */
+  function renderDonut(s) {
+    var host = document.getElementById('chart-donut');
+    host.innerHTML = '';
+    var H = 360;
+    var svg = E('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': '对白情绪分布环形图' }, host);
+    var dist = s.sentiment.sentiment_distribution;
+    var items = [
+      { key: 'positive', label: '正面', v: dist.positive, cls: 'arc-1', lab: 'data-label--hi' },
+      { key: 'neutral',  label: '中性', v: dist.neutral,  cls: 'arc-2', lab: 'data-label--mag' },
+      { key: 'negative', label: '负面', v: dist.negative, cls: 'arc-3', lab: 'data-label--amb' }
+    ];
+    var total = items.reduce(function (a, b) { return a + b.v; }, 0);
+
+    var cx = W / 2, cy = H / 2 + 4, rOut = 122, rIn = 76;
+    var pieGen = D3.pie().sort(null).value(function (d) { return d.v; });
+    var arcGen = D3.arc().innerRadius(rIn).outerRadius(rOut);
+    var arcs = pieGen(items).map(function (a) {
+      return {
+        it: a.data,
+        a0: a.startAngle,
+        a1: a.endAngle,
+        mid: (a.startAngle + a.endAngle) / 2,
+        frac: a.value / total
+      };
+    });
+
+    arcs.forEach(function (a) {
+      var path = E('path', { d: arcGen({ startAngle: a.a0, endAngle: a.a1 }), 'class': a.it.cls }, svg);
+      path.addEventListener('mousemove', function (ev) {
+        showTip(
+          '<div class="tooltip__title">' + a.it.label + '情绪</div>' +
+          '<div class="tooltip__row"><span>条数</span><b>' + num(a.it.v) + '</b></div>' +
+          '<div class="tooltip__row"><span>占比</span><b>' + pct(a.frac, 1) + '</b></div>',
+          ev);
+      });
+      path.addEventListener('mouseleave', hideTip);
+    });
+
+    // 中心读数
+    T(svg, cx, cy - 2, 'center-value', num(total));
+    T(svg, cx, cy + 18, 'center-label', '条直引语');
+
+    // 环外标签 + 引线（垂直方向做最小间距推挤）
+    var labels = arcs.map(function (a) {
+      var right = Math.sin(a.mid) >= 0;
+      var lx = cx + (right ? 1 : -1) * (rOut + 26);
+      var ly = cy - Math.cos(a.mid) * (rOut + 12);
+      return { a: a, right: right, lx: lx, ly: ly, anchor: right ? 'start' : 'end' };
+    }).sort(function (p, q) { return p.ly - q.ly; });
+
+    var minGap = 19;
+    for (var i = 1; i < labels.length; i++) {
+      if (labels[i].ly - labels[i - 1].ly < minGap) labels[i].ly = labels[i - 1].ly + minGap;
+    }
+    var over = labels.length ? labels[labels.length - 1].ly - (H - 16) : 0;
+    if (over > 0) labels.forEach(function (l) { l.ly -= over; });
+
+    labels.forEach(function (l) {
+      var a = l.a;
+      var sx = cx + Math.sin(a.mid) * (rOut - 2);
+      var sy = cy - Math.cos(a.mid) * (rOut - 2);
+      var ex = cx + Math.sin(a.mid) * (rOut + 14);
+      var ey = cy - Math.cos(a.mid) * (rOut + 14);
+      E('path', {
+        d: 'M' + sx + ',' + sy + 'L' + ex + ',' + ey + 'L' + (l.right ? l.lx - 4 : l.lx + 4) + ',' + (l.ly - 4),
+        'class': 'label-lead'
+      }, svg);
+      T(svg, l.lx, l.ly, 'data-label ' + a.it.lab,
+        a.it.label + '  ' + num(a.it.v) + '  ' + pct(a.frac, 1), l.anchor);
+    });
+
+    clampLabels(svg, W, H, 2);
+
+    document.getElementById('note-4').textContent =
+      '样本：带引号直引语 ' + num(total) + ' 条（全部已判别，覆盖一百回）。' +
+      '中性 ' + pct(dist.neutral / total, 1) + '、负面 ' + pct(dist.negative / total, 1) +
+      '、正面 ' + pct(dist.positive / total, 1) + '；' +
+      '标签置于环外并配引线，三段之间留 2.5px 面板底色间隙以免相邻色互撞。';
+  }
+
+  /* ══ 启动 ═════════════════════════════════════════════════════════════ */
+  load().then(function (data) {
+    document.getElementById('load-mode').textContent = data.mode;
+    renderKPI(data);
+    renderStack(data);
+    renderLine(data);
+    renderPoem(data);
+    renderDonut(data);
+    document.body.setAttribute('data-ready', '1');
+  });
+})();
+</script>
+</body>
+</html>

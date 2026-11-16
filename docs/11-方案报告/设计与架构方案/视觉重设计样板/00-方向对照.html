@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>视觉重设计 · 三方向对照（待裁决）</title>
+<style>
+  :root { --bg:#FBFBF9; --ink:#16181D; --soft:#5A5F6A; --line:#E3E3DE; --accent:#C8463A; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:40px 24px 64px; background:var(--bg); color:var(--ink); font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .lede { color: var(--soft); font-size: 14px; line-height: 1.7; margin: 0 0 28px; max-width: 74ch; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+  .card { border: 1px solid var(--line); background: #fff; padding: 20px 22px 22px; }
+  .card h2 { font-size: 16px; margin: 0 0 2px; }
+  .card .id { font-size: 12px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; }
+  .card p { font-size: 13px; color: var(--soft); line-height: 1.65; margin: 10px 0 0; }
+  .sw { display: flex; gap: 0; margin: 14px 0 12px; height: 34px; border: 1px solid var(--line); }
+  .sw i { flex: 1; }
+  table { width: 100%; border-collapse: collapse; margin-top: 34px; font-size: 13px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; color: var(--soft); font-weight: 600; }
+  code { background: #F3F3EF; padding: 1px 5px; font-size: 12px; }
+  .note { margin-top: 30px; padding: 14px 16px; border-left: 2px solid var(--accent); background: #fff; font-size: 13px; line-height: 1.7; color: var(--soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>视觉重设计 · 三方向对照</h1>
+  <p class="lede">同一份真实数据（100 回逐回字数 / 对话占比 / 诗词密度 / 情绪分布）、同一套页面结构与图表逻辑，只有视觉语言不同——所以三者的差异全部来自设计本身。点开任一方向可看完整样板页（含明暗两态）。</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="id">甲 · A</div>
+      <h2>Ink Editorial · 墨线当代</h2>
+      <div class="sw"><i style="background:#FBFBF9"></i><i style="background:#16181D"></i><i style="background:#5A5F6A"></i><i style="background:#C8463A"></i><i style="background:#3A6B8C"></i><i style="background:#A97C3F"></i></div>
+      <p>冷白底 + 石墨墨 + 单一朱砂。标题衬线、<b>数据与轴标签换无衬线</b>；实心柱 + 顶部高光描边；用直接标注替代图例框；卡片只留 1px 边、无阴影。像一份高质量学术年鉴。</p>
+      <p><a href="甲-InkEditorial/index.html">打开样板页 →</a> · <a href="甲-InkEditorial/icons/index.html">图标集 →</a></p>
+    </div>
+    <div class="card">
+      <div class="id">乙 · B</div>
+      <h2>Terminal Dark · 暗夜数据</h2>
+      <div class="sw"><i style="background:#0D1117"></i><i style="background:#161B22"></i><i style="background:#2DD4BF"></i><i style="background:#F778BA"></i><i style="background:#E3B341"></i><i style="background:#E6EDF3"></i></div>
+      <p>深墨底 + 青/品红/琥珀终端三色，<b>暗色为默认</b>。数据与标题等宽、正文无衬线；弱发光描边 + 交叉网格；面板化卡片 + 等宽前缀。像一台可翻阅的数据终端。</p>
+      <p><a href="乙-TerminalDark/index.html">打开样板页 →</a> · <a href="乙-TerminalDark/icons/index.html">图标集 →</a></p>
+    </div>
+    <div class="card">
+      <div class="id">丙 · C</div>
+      <h2>Neo-Xuan · 新宣纸（几何化）</h2>
+      <div class="sw"><i style="background:#F5F0E4"></i><i style="background:#1C1A17"></i><i style="background:#C0392B"></i><i style="background:#2C5F7C"></i><i style="background:#5E7A4E"></i><i style="background:#A97C3F"></i></div>
+      <p>保留宣纸暖底，但<b>换掉全部执行方式</b>：去纸纹与光晕 → 几何规整；正文换无衬线；章节大号序号 + 竖向分隔线；图例改顶部内联 chip。</p>
+      <p><a href="丙-NeoXuan/index.html">打开样板页 →</a> · <a href="丙-NeoXuan/icons/index.html">图标集 →</a></p>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>验收项</th><th>甲 Ink Editorial</th><th>乙 Terminal Dark</th><th>丙 Neo-Xuan</th></tr>
+    <tr><td>样本体积</td><td>57.6 KB</td><td>51.2 KB</td><td>49.9 KB</td></tr>
+    <tr><td>图标</td><td>8 枚 · 单枚 ≤0.32KB · 栅格对齐</td><td>8 枚 · ≤0.36KB · 栅格对齐</td><td>8 枚 · ≤0.40KB · 栅格对齐</td></tr>
+    <tr><td>file:// 错误 / 外域请求</td><td>0 / 0</td><td>0 / 0</td><td>0 / 0</td></tr>
+    <tr><td>标签裁切 / 重叠</td><td><b>0 / 0</b></td><td><b>0 / 0</b></td><td><b>0 / 0</b></td></tr>
+    <tr><td>轴标签对比度（亮/暗）</td><td>4.54 / 4.95</td><td>8.89 / 8.89</td><td>4.55 / 4.70</td></tr>
+    <tr><td>正文对比度（亮/暗）</td><td>6.2 / 6.03</td><td>10.17 / 10.17</td><td>6.58 / 6.75</td></tr>
+    <tr><td>跟随系统深浅色</td><td>✓（auto）</td><td>✓（暗为默认）</td><td>✓（首次读系统偏好）</td></tr>
+  </table>
+
+  <h3 style="font-size:15px;margin:34px 0 10px">实拍对照（明暗两态 · 亮态为准）</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+    <figure style="margin:0;border:1px solid var(--line);background:#fff;padding:10px">
+      <img src="00-方向截图/甲-InkEditorial-light.png" alt="甲 Ink Editorial 亮态" style="width:100%;display:block;border:1px solid var(--line)">
+      <figcaption style="font-size:12px;color:var(--soft);margin-top:8px">甲 · Ink Editorial 亮态 —— 学术出版气质</figcaption>
+    </figure>
+    <figure style="margin:0;border:1px solid var(--line);background:#fff;padding:10px">
+      <img src="00-方向截图/乙-TerminalDark-light.png" alt="乙 Terminal Dark 亮态" style="width:100%;display:block;border:1px solid var(--line)">
+      <figcaption style="font-size:12px;color:var(--soft);margin-top:8px">乙 · Terminal Dark 亮态 —— 该方向默认暗色，此处为亮态</figcaption>
+    </figure>
+    <figure style="margin:0;border:1px solid var(--line);background:#fff;padding:10px">
+      <img src="00-方向截图/丙-NeoXuan-light.png" alt="丙 Neo-Xuan 亮态" style="width:100%;display:block;border:1px solid var(--line)">
+      <figcaption style="font-size:12px;color:var(--soft);margin-top:8px">丙 · Neo-Xuan 亮态 —— 东方编辑气质</figcaption>
+    </figure>
+  </div>
+
+  <h3 style="font-size:15px;margin:34px 0 10px">设计取舍</h3>
+  <table>
+    <tr><th>维度</th><th>甲 Ink Editorial</th><th>乙 Terminal Dark</th><th>丙 Neo-Xuan</th></tr>
+    <tr><td>底色</td><td>冷白 #FBFBF9</td><td>深墨 #0D1117（默认暗）</td><td>暖纸 #F5F0E4</td></tr>
+    <tr><td>强调色</td><td>朱砂 #C8463A（唯一彩色）</td><td>青 #2DD4BF + 品红 + 琥珀</td><td>朱砂 #C0392B + 靛苔赭</td></tr>
+    <tr><td>标题字</td><td>衬线</td><td>等宽加字距</td><td>衬线（字重对比更强）</td></tr>
+    <tr><td>正文/数据字</td><td>无衬线</td><td>正文无衬线 / 数据等宽</td><td>无衬线</td></tr>
+    <tr><td>图形</td><td>实心柱+高光边 / 直接标注</td><td>弱发光 / 交叉网格 / 低填充高亮边</td><td>几何规整 2px 圆角 / chip 图例</td></tr>
+    <tr><td>版式</td><td>12 列栅格 / 1px 边 / 大留白</td><td>面板卡片 / 等宽前缀 / 刻度尺</td><td>竖向分隔线 / 大号章节序号 / 纯平面</td></tr>
+    <tr><td>文化辨识度</td><td>中（靠排版气质）</td><td>低（离题材最远）</td><td>高（暖底保留）</td></tr>
+    <tr><td>迁移成本</td><td>低</td><td>高（暗色为默认 ⇒ 需重做亮色态）</td><td>中低</td></tr>
+  </table>
+
+  <div class="note">
+    <b>三个方向的共同底座</b>（与方向无关，已定案）：一套语义化令牌（表面 4 面 / 文本 3 阶 / 边框 2 阶 / 轴线与网格线独立 / 数据序列 8 槽有序 / 字体三分 / 间距 12 槽）· 十族图型的画法定规 · 标签零裁切零重叠的工程判据 · 图标 24×24 栅格规范。<br>
+    <b>本批同步修掉</b> W1259 审查的视觉层缺陷：图表标签裁切（87–108 页）与对比度不足（112 处，最差 1.1:1）。数据层缺陷（EN 生产态整页中文 / 真值源缺 3 回 / mock 回退 / 74 页 fetch 404）与视觉方向无关，可并行另批。
+  </div>
+</div>
+</body>
+</html>

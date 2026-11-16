@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>方向甲 · Ink Editorial — 图标总览（8 枚 · 24/16px 双档）</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ink-bg);color:var(--ink-1);font-family:var(--ink-sans);font-size:14px;line-height:1.7}
+h1,h2,h3{font-family:var(--ink-serif);font-weight:600;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.head{padding:48px 0 8px}
+.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--ink-3);text-transform:uppercase}
+h1{font-size:clamp(26px,3.6vw,38px);line-height:1.2;margin:12px 0 0}
+.rule{width:64px;height:2px;background:var(--ink-accent);margin:22px 0 18px}
+.lede{font-size:15px;color:var(--ink-2);max-width:66ch}
+.specs{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:22px}
+.spec{border:1px solid var(--ink-line);background:var(--ink-surface);padding:6px 11px;font-size:12px;color:var(--ink-3);border-radius:var(--ink-r)}
+.spec b{color:var(--ink-1);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px var(--ink-gap);margin-top:38px}
+.card{border:1px solid var(--ink-line);background:var(--ink-surface);padding:18px 20px 16px}
+.card__head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--ink-line);padding-bottom:10px}
+.card__name{font-family:var(--ink-serif);font-size:17px;font-weight:600}
+.card__file{font-family:var(--ink-mono);font-size:11px;color:var(--ink-4);letter-spacing:.06em}
+.rows{margin-top:14px;display:flex;flex-wrap:wrap;gap:18px 26px;align-items:flex-start}
+.grp{display:flex;align-items:center;gap:14px}
+.grp__lab{font-size:11px;color:var(--ink-4);letter-spacing:.08em;writing-mode:vertical-rl;text-orientation:mixed;height:52px;display:flex;align-items:center}
+.chip{display:flex;align-items:center;justify-content:center;border:1px solid var(--ink-line);border-radius:var(--ink-r)}
+.chip--light{background:#FFFFFF;color:#16181D}
+.chip--dark{background:#12141A;color:#E9EBEF}
+.stack{display:flex;align-items:flex-end;gap:12px}
+.safe{width:118px;height:118px;flex:none}
+.ic{display:block}
+.file-row{display:flex;align-items:center;gap:14px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--ink-line);font-size:11px;color:var(--ink-4)}
+.file-row img{display:block}
+.note{margin-top:40px;border-top:1px solid var(--ink-line);padding:22px 0 48px;font-size:12.5px;color:var(--ink-3);max-width:80ch}
+@media (max-width:760px){.grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <p class="eyebrow">方向甲 · Ink Editorial 墨线当代</p>
+    <h1>图标总览 · 8 枚 UI 图标</h1>
+    <div class="rule"></div>
+    <p class="lede">全部为重绘版本：坐标直接对齐 24×24 栅格，无 <code>transform</code> 缩放凑合；描边 1.5px、圆头圆角、<code>fill="none" stroke="currentColor"</code>。右列为安全区示意——虚线框为距四边 2px 的视觉边距，图标墨迹全部落在框内。</p>
+    <div class="specs">
+      <span class="spec">画布 <b>24 × 24</b></span>
+      <span class="spec">描边 <b>1.5px</b></span>
+      <span class="spec">视觉边距 <b>≥ 2px</b></span>
+      <span class="spec">端点 <b>round / round</b></span>
+      <span class="spec">状态双档 <b>24px · 16px</b></span>
+      <span class="spec">底色双档 <b>亮 · 暗</b></span>
+    </div>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <p class="note" id="note"></p>
+</div>
+
+<script>
+(function(){
+'use strict';
+var ICONS = [
+  {zh:'检索', en:'search', file:'search.svg', size:250, body:'<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/>'},
+  {zh:'目录', en:'menu',   file:'menu.svg',   size:235, body:'<path d="M4.5 7.5h15M4.5 12h15M4.5 16.5h15"/>'},
+  {zh:'图表', en:'chart',  file:'chart.svg',  size:264, body:'<path d="M3.5 18.5h17"/><path d="M7 18.5v-5M12 18.5v-11M17 18.5v-7.5"/>'},
+  {zh:'典籍', en:'book',   file:'book.svg',   size:327, body:'<path d="M12 6.6C10.2 5.1 7.5 4.6 4.6 5v12.4c2.9-.4 5.6.1 7.4 1.6"/><path d="M12 6.6c1.8-1.5 4.5-2 7.4-1v12.4c-2.9-.4-5.6.1-7.4 1.6"/>'},
+  {zh:'关闭', en:'close',  file:'close.svg',  size:232, body:'<path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>'},
+  {zh:'确认', en:'check',  file:'check.svg',  size:224, body:'<path d="M5 12.5l4.8 4.8L19 6.6"/>'},
+  {zh:'警示', en:'warn',   file:'warn.svg',   size:281, body:'<path d="M12 4.2L20.8 19.4H3.2L12 4.2Z"/><path d="M12 10v4.4"/><path d="M12 16.8v1"/>'},
+  {zh:'语种', en:'globe',  file:'globe.svg',  size:297, body:'<circle cx="12" cy="12" r="8.2"/><path d="M3.8 12h16.4"/><ellipse cx="12" cy="12" rx="3.8" ry="8.2"/>'}
+];
+var SW = 'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+function inline(body, px, extra){
+  return '<svg class="ic" width="'+px+'" height="'+px+'" viewBox="0 0 24 24" '+SW+(extra||'')+'>'+body+'</svg>';
+}
+var grid = document.getElementById('grid');
+ICONS.forEach(function(ic){
+  var card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML =
+    '<div class="card__head"><span class="card__name">'+ic.zh+' · '+ic.en+'</span><span class="card__file">'+ic.file+' · '+ic.size+' B</span></div>' +
+    '<div class="rows">' +
+      '<div class="grp"><span class="grp__lab">内联 · 亮</span>' +
+        '<div class="chip chip--light" style="padding:10px">'+inline(ic.body,24)+'</div>' +
+        '<div class="chip chip--light" style="padding:8px">'+inline(ic.body,16)+'</div>' +
+      '</div>' +
+      '<div class="grp"><span class="grp__lab">内联 · 暗</span>' +
+        '<div class="chip chip--dark" style="padding:10px">'+inline(ic.body,24)+'</div>' +
+        '<div class="chip chip--dark" style="padding:8px">'+inline(ic.body,16)+'</div>' +
+      '</div>' +
+      '<div class="grp"><span class="grp__lab">栅格</span>' +
+        '<svg class="safe" viewBox="0 0 24 24" aria-hidden="true">' +
+          '<rect x="0" y="0" width="24" height="24" fill="var(--ink-surface-2)"/>' +
+          '<g stroke="var(--ink-line)" stroke-width="0.25">' +
+            '<path d="M6 0v24M12 0v24M18 0v24M0 6h24M0 12h24M0 18h24"/>' +
+          '</g>' +
+          '<rect x="2" y="2" width="20" height="20" fill="none" stroke="var(--ink-accent)" stroke-width="0.4" stroke-dasharray="1.2 1"/>' +
+          '<g fill="none" stroke="var(--ink-1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">'+ic.body+'</g>' +
+        '</svg>' +
+      '</div>' +
+    '</div>' +
+    '<div class="file-row"><span>出厂文件</span>' +
+      '<span style="background:#FFFFFF;padding:4px;display:inline-flex"><img src="'+ic.file+'" width="24" height="24" alt="'+ic.en+' 24px"></span>' +
+      '<span style="background:#FFFFFF;padding:4px;display:inline-flex"><img src="'+ic.file+'" width="16" height="16" alt="'+ic.en+' 16px"></span>' +
+      '<span>按出厂文件直接渲染（24 / 16）</span>' +
+    '</div>';
+  grid.appendChild(card);
+});
+document.getElementById('note').textContent =
+  '8 枚均为重绘：坐标直接落在 24×24 栅格（如检索镜片圆心 10.5 / 半径 6，手柄末端 20,20），不使用 transform 缩放；' +
+  '视觉边距 ≥ 2px（安全区为距四边 2px 的虚线框，墨迹全部内收）。描边 1.5px 在 16px 显示尺寸下等效 1px，笔画不糊。';
+})();
+</script>
+</body>
+</html>
