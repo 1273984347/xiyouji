@@ -22,6 +22,310 @@
 
 > **2026-11-13（W994 迁出 59 段·W814-W874 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W1207（2026-11-11）：C-8 全量占位符化 + 仓库体积处置 + 就绪探针暴露审计降级批
+
+**本批要点**（W1207 C-8 全量占位符化 + 仓库体积处置 + 就绪探针暴露审计降级）：
+
+> - **A C-8 全量占位符化**：产物面 26 处硬编码服务地址（17 文件）全部改为构建期占位符——14 处部署事实走占位符（外部 JS / `<meta name="xij-service-base">` / 平台层 `_headers`），13 处本地开发说明文案去地址留用法（保留「怎么跑、在哪访问」）；守卫 `check_no_hardcoded_endpoint.py` 判红 **26 → 0**；`generate_csp.py` 的 `RAG_ORIGIN` 改从守卫脚本单一事实源取占位符、`needs_rag` 判定改为看**服务基址载体**（与部署期注入顺序解耦）；全站 CSP **860 页零漂移**（914 个内联脚本哈希）。
+> - **占位符位置判据（实测确立）**：占位符只落**非哈希载体**——落进内联 `<script>` 会在部署期替换时改变脚本文本 ⇒ `script-src 'sha256-…'` 失配 ⇒ **整脚本被浏览器拒执行**（实测站内内联块命中 0）。
+> - **部署期两档注入实证**：默认档（公网地址）rc=0 + 开发者本机档（回环地址）rc=0（6 条可审计豁免）+ 默认档拒绝回环地址 rc=2（fail-closed）+ 注入后逐页「内联脚本哈希集合 ≡ CSP 声明集合」全等。
+> - **实跑抓出并根修 2 个真缺陷**：① 注入脚本标记注释形态恒为 JS 形态 ⇒ 注入 HTML 产物时该串不是注释、被浏览器当正文渲染（守卫豁免只看 `endpoint=` ⇒ 判据照样报绿）⇒ 改为按文件类型分派模板 + 1 例变异自证单测；② `/api/ready` 新字段直接序列化审计降级全量 ⇒ 泄露服务端绝对路径与 fs 错误原文（与 W832 收敛红线冲突）⇒ 改为只投影 `degraded/failures/gapStart` 三字段 + 集成测试回归锁。
+> - **B 台账 W1204 commit hash 回填** `6855fc17`（git log 实证）。
+> - **C 仓库体积处置**（不改历史）：删 `.git/lost-found`（2595 文件）+ `git gc --prune=now` ⇒ `.git` **1844.3 → 1201.0 MB**（回收 643.3 MB）· `git fsck --connectivity-only` rc=0。
+> - **D `/api/ready` 暴露合规降级**：`compliance.audit` **刻意不进 `ok` 聚合**（F10：审计降级时服务继续可用，算进 ok 会 503 致编排摘除服务）；降级标记**启动时回填**（此前只写不读回 ⇒ 重启即报「未降级」，属声明≠落地）。
+> - **独立盲审**：1 条 P1（就绪响应泄露本机绝对路径与错误原文）当批根修；7 条 P2 处置 5 / 登记待批 2（C-8 守卫接入 CI 槽、审计降级跨重启语义余项）。
+> - 沉淀 **E-225**（占位符化改造的验收面不是「替换到位」，而是「替换之后下游机制还成立吗」）+ 计数链 318→319 同步七处。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1206（2026-11-11）：公开仓敏感面清理批：本机绝对路径脱敏 + 可复跑扫描防线
+
+**本批要点**（W1206 公开仓敏感面清理批）：
+
+> - **凭据面全绿复核**：全仓无私钥 / 无 GitHub token / 无厂商 key / 无 Slack token / 无手机号 / 无身份证；`.env`、会话库（chat.db）、备份目录、审计日志**均未入库**（只有 `.env.example` 脱敏模板）；历史提交中曾出现的 `PGPASSWORD=` 经查**全是占位形态**（`<见 %LOCALAPPDATA%\pg16\w934_pg.env>`、`<xiyouji_app 口令>`、环境变量名）⇒ **无凭据泄露**。
+> - **真问题在机器指纹面**：25 个现役文档里 **33 处本机绝对路径**（桌面文件路径 / 用户目录 / 工具链目录）⇒ 暴露个人文件布局且**不触发任何安全告警**。已全部脱敏为 `%USERPROFILE%` 或相对表述（桌面来源路径改为「本地 Prompt.txt（原始路径已脱敏）」），另清 `scripts/drl_contracts.yaml` 2 处与 `scripts/output/_w927_pg_runtime_evidence.txt` 4 处。
+> - **固化成可复跑防线**：新增 `scripts/check_public_repo_secrets.py`（凭据类**全仓判红**·本机路径类**现役面判红、归档面只提示**——归档按「只追加不改」铁律不可回溯改写）+ 5 例可证伪单测（该红必红 / 变量传递与占位值必绿 / 归档只提示 / 全仓实跑判红 0）。
+> - **.gitignore 补强**：`*.env` 变体（此前只匹配以 `.env` 结尾者 ⇒ `w934_pg.env` 这类**真实凭据文件**会漏）、`*.pgpass`、备份目录一律不入库。
+> - **保留决定（不擅自推翻用户裁决）**：产物面 26 处硬编码地址经逐处核验**分两类**——① 14 处属 **W1071 用户裁决形态**（`rag-chat.js` 带 host 守卫「线上不渲染浮钮」+ `dukou-engine` 有模板引擎降级 + CSP connect-src 配套）⇒ 改成占位符会推翻该裁决且使本机调试失效 ⇒ **保留**；② 13 处是「本地开发说明」（`api_server.py` / `py -m http.server 8000` 的用法提示，端口 8787/8000，与 RAG 无关）⇒ **保留**。据此**未改** `generate_csp.py`（管控脚本·改动须用户批准），并登记 v2 §10.6 的 R-01 描述在 W1071 加守卫后已部分过时。
+> - **沉淀**：pitfalls 新增 **E-224**（公开仓的敏感面不止凭据——「本机绝对路径」同样是机器指纹，且比凭据更容易被无声写回）+ 计数链 317→318 同步六处（C5e 五处交叉对账 0 FAIL）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1205（2026-11-11）：档 2 收尾四件：面板归零 + 检索接入与地址注入 + 容量实测 + D-3 合规批
+
+**本批要点**（档 2 收尾四件·A 面板 / B 检索与注入 / C 容量 / D 合规）：
+
+> - **A 面板归零**：Code scanning 剩余 3 条（CodeReviewID / FuzzingID / CIIBestPracticesID）open 3→0。逐条读 Scorecard 判定源码确证：CodeReview 结构性不可达（评审人须≠提交者·单人仓 0/N）、Fuzzing 卡「语言显著性门槛」（TS 605934 B < 门槛 2,049,668 B·被 site/ 的 78.5 MB HTML 撑高）、CII 需外部认证。三条按目标 API **真实枚举**关闭（**Code scanning 的 dismissed_reason 不含 tolerable_risk·那是 Dependabot 的**；断言成立故**不标 false positive**）·**重跑 run 42854082530 后未复活**（SARIF 不写 partialFingerprints⇒GitHub 按 ruleId+location 生成默认指纹·location 恒为无文件关联）·仓内留可复跑脚本与 11 例单测。
+> - **A' Fuzzing 真修路径已落**：.gitattributes 加 site/** linguist-generated=true ⇒ 语言统计门槛从约 2.05 MB 降到约 0.26 MB ⇒ 仓内**现有** fast-check 标记即可被探针识别；GitHub 语言统计异步重算 ⇒ **效果由下次周跑验证**（本批不声称已转绿）。
+> - **B 检索接入与地址注入**：/api/retrieval 路由 + 引用守卫四道判据（真源目录 / 文件存在 / 摘录非空 / **段落级逐字溯源**·不可溯源只计数不下发）+ 降级语义 D1-D4 显式区分同源/异源（异源须 UI 明示「这不是检索结果」）；C-8 地址注入＝构建期占位符 + 部署期替换（默认档拒绝回环/内网·开发者本机档必须显式标记）·守卫自证 6/6 ·pytest 11/11；**存量缺口已量化：产物面 26 处硬编码地址 / 17 个文件（本批未清·留待下批·因涉管控脚本 generate_csp.py 需用户批准）**。
+> - **C 容量实测（W937）**：§8.3 十条阈值逐条实算（工具 scripts/check_capacity_budget.py 可复跑）⇒ **3 条越线**：单页 HTML 445.58 KB(+122.8%)、单联 CSS 73.27 KB(+22.1%)、仓库体积 1.80 GB(+79.7%)；PG 三项真实值（库 8.44 MB / 最大表 142 行 / max_connections 200）⇒ **工具不挂 CI 阻断**（越线是既有现状·挂上去会立即让 CI 红）·旧值已订正。
+> - **D D-3 合规批**：四级分级目录为单一事实源 + 入库强制校验（缺标签拒 6 例 · 非法 2 例）；部署基线 8 项自检 fail-closed 且**默认关闭·不改现役行为**；审计 11 字段只增不改（C-7）+ F10 合规降级（告警 + 降级标记 + 缺口窗口如实记录）+ 180 天硬下限（写成代码常量·不落环境变量）+ 销毁留证；AES-256-GCM 列级加密（AAD 绑列 · 幂等 · 错误密钥 0 泄露）·**加密在双写层只做一次 ⇒ 两侧同密文 ⇒ 对账不被阻断**。
+> - **实跑抓出并修掉的 4 个问题**（均为「静态审查看不见」族）：迁移初版 REVOKE DELETE 与「按留存期批量销毁」自相矛盾；**TRUNCATE 是独立权限·REVOKE 漏了它就仍可用 ⇒ 只追加被绕过**（实测 UPDATE 拒 / TRUNCATE 拒 / DELETE 允许）；迁移文件首行被 SQL 行注释吞掉 ⇒ 第一条 ALTER 不会执行；随机化加密与双写对账天然冲突（与 W1204 时间戳同族）⇒ 加密点提到双写层之上只加密一次。
+> - **0003 合规列迁移**由 scripts/gen_compliance_migration.mjs 从 compliance/schema.ts 事实源生成（带 --check 自证逐字一致·手抄必漂移）·已应用真实 PG（幂等两次 rc=0·三列回填正确·只追加授权逐权限实测成立）。
+> - **沉淀**：pitfalls 新增 E-222（只追加在应用层是口号·授权要逐权限实测）与 E-223（扫描器假绿是守卫头号死法·豁免桶须逐条反向审计）+ AGENTS 铁则指针 + HANDOVER 方法论 + 计数链 315→317 同步六处 + v2 §8.3 四个旧值订正。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1204（2026-11-10）：v2 档 2 D-2 第二子批：双写期集合级三重对账器 + 切读/停写流程
+
+**本批要点**（v2 档 2 · D-2 第二子批：对账器 + 切读/停写流程 + 真实 PG 实跑）：
+
+> - **T1 对账器交付**：新增 `server/storage/reconcile-core.ts`（判定核心·与数据源无关·只有一份实现——防两套判定各自漂移）与 `deploy/pg/bin/reconcile-dualwrite.ts`（两侧读适配 + CLI：SQLite×SQLite 与 SQLite×PG 两种形态；PG 配置走环境变量⇒口令不入命令行）。
+> - **T2 三重对账语义**：行数相等 + **主键集合逐位相等** + 逐行内容摘要相等（时间列先规范化⇒比的是同一时刻而非同一串），另附时间列逐字节相等抽样数。依据 W934 迁移器的 reconcile() 同语义与决策 D-08「对账要比集合，不能只比计数」。
+> - **T3 为什么走数据源而非业务接口**：StorageBackend 接口没有「列出全部 messages / feedback」的读面（feedbackSummary 只给计数）⇒ 集合级对账必须直连两侧数据源（与 W934 迁移器同域）。
+> - **T4 契约测试 6 例**（含假对账被抓住 + 编排层两例）· **已接入 CI 的 test:server**（原不在脚本里⇒测试形同虚设）；编排层改 async（原实现把 Promise 强转数组⇒tsc 报 TS2352·运行期必错）。
+> - **T5 新增 `deploy/pg/bin/dualwrite-drill.ts`**：造写入的演练器（只造数据 + 报读数·**不做一致性判定**——判定只在对账器里·一份实现）；探针行带 `__<tag>_` 前缀⇒可识别可按主键清理。
+> - **T6 真实 PG 16.4 实跑完成（六步）**：历史补齐对账 74/74·142/142·4/4 全等 → 双写期**抓出真缺陷**（时间列逐字节 149/150⇒判内容不等）→ 修根因后 150/150+143/143+5/5 全等 → 切读（起服 `数据库: PostgreSQL 16`·/api/ready 200·读路径正常）→ 停写旧库（对账报「仅在目标侧」·内容层全等）→ 回滚读回旧库但**读不到停写期只进新库的写入**（实证停写是单向门）。探针行已清理·两库回到 74/142/4。
+> - **T7 实跑抓出的真缺陷已根治**：写路径上 `updateSession` / `createMessage` / `insertFeedback` 的时间戳由**后端各自生成** ⇒ 双写期两侧副本差几毫秒 ⇒ 对账必然判不等 ⇒ **切读被永久阻断**；修法＝契约加可选 `WriteTimeOpts.now`·双写层一次生成两侧同传（单库路径现役语义逐字不变）+ 闸门写进契约测试。教训落坑表 **E-221**。
+> - **T8 闸门口径订正**：停写后旧库必然落后 ⇒ 对账必然不等（**预期**而非故障）⇒ 闸门是「停写**前**最后一次对账为 0」；回滚表同步订正（重新开双写**不回灌历史**）。此前「本机无 PG 实例」的错误表述已订正。
+> - **T9 归档工具判定口径根修（`scripts/archive_ledger_rows.py`·同族「两处判定口径分裂」）**：回窗时工具自报「在途行占满窗口·须人工处置」⇒ 根因是**真在途**判定的两处口径不一致——`preflight_check` 已确立「登记滞后（git 已有该 W 提交）不算真在途」，而本工具按「touches 非空即真在途」⇒ 并行会话留下的**预约占位行**（touches 填「—（待其登记）」而非文件清单）被判真在途 ⇒ 永不迁出 ⇒ 而它恰是最老行时**窗口被锁死**（正本 61 行 > keep 60·W1140·2026-11-06 留的占位·从未开工）⇒ 整条收官链卡住。修法＝把「真在途」收敛为**唯一实现**（状态在途 + touches 真实 + 非「已停止/让号留痕」），占位 touches 不算真实 ⇒ 腾窗恢复（迁出 W1140·正本回 60 行）·补自测形态四（占位 touches 的在途行必须可迁出·判据可证伪）·同时回填我方上批 W1203 的台账状态（§11.1 回填纪律·其状态滞后致其永久占着 touches 挡后来者）。
+> - **状态**：已落地（真实 PG 实跑完成）。
+> - **文件**：见 file-index。
+
+### W1203（2026-11-10）：架构方案 v2 档 2 施工第二子批（D-2b 双写对账期→切读→停写旧库）+ W1202 终态收口
+
+**本批要点**（架构方案 v2 档 2 施工第二子批 + W1202 终态收口）：
+
+> - **T1 根因链（承 W1198-W1201 四批）**：Dependabot 41 条 pillow 告警的根因是依赖图里的历史条目pillow@12.3.0（2026-10-22 前写入）永不被清理——内容变更只新增条目、删除 manifest 使路径消失亦不清理、Dependency submission API 为追加语义 ⇒ 面板归零在依赖图侧不可达；仓库自 2026-10-23 起已钉 pillow==13.0.0（= 全部 advisory 的 first_patched_version）⇒ 告警断言不成立 ⇒ 以 dismiss_reason=inaccurate 关闭（API 实跑 ok=41 fail=0·open 41→0）。
+> - **T2 W1202 终态收口**：台账 W1202 行回填合并提交 0f820f37（PR #161）·状态改已收官；报告 T96 §8.3 补记同一 hash ⇒ 报告与台账指向同一合并事件。
+> - **T3 v2 归属批次号订正**：v2 §13.6 原写的归属批次 W935/W936/W937 已被后续批次占用（W935=速赢两处批·W936=首屏图集接入批·W937=首屏版式修正批）⇒ 本批重取 W1203（号取 CHANGELOG max+1）并订正 v2 文档，避免方案指向错批号。
+> - **T4 统计口径与台账窗口**：统计一律取干净 checkout 实算（并行会话在工作树上的在途改动不计入本批）；台账新增认领行使正本达 61 段超窗 ⇒ 按门禁提示 archive_ledger_rows.py --apply 归档最老行腾窗。
+> - **T5 施工面盘点（v2 档 2 D-2 第二子批）**：切读开关已现成（AGENT_WEB_DB_BACKEND=postgres·非法取值 fail-closed）、存储层接口已异步化且时间列统一 ISO-8601 UTC 毫秒、门面 db.ts 16 个导出齐备、D-2a 双后端契约测试在位、迁移与备份编排件在 deploy/pg/ 齐备 ⇒ 在其上推进「双写对账期 → 切读 → 停写旧库」。
+> - **T6 本批已交付：双写后端 + 工厂接入 + 契约测试**：新增 `server/storage/dualwrite.ts`（写两侧·读只走主库·副库写失败 fail-closed·返回值以主库为准·`kind` 沿用主库⇒不扩 BackendKind 枚举·既有调用点零改动），`server/storage/index.ts` 接入 `AGENT_WEB_DB_WRITE_MODE`（primary=现役逐字不变·dual=两侧同写·非法取值启动即失败），新增 `server/storage/dualwrite.test.ts` 四例契约测试（写两侧·读只走主库·副库失败 fail-closed·清库与健康检查）——用两个临时 SQLite 实例互为双写两侧⇒无外部依赖全跑；package.json 的 test:server 已挂入该测试文件。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1202（2026-11-10）：GitHub「Security and quality」面板归零收官批（41 条 pillow 告警人工关闭 + 可复跑脚本入仓 + 终态读数回填）
+
+**本批要点**（GitHub「Security and quality」面板归零·41 条 pillow 告警人工关闭）：
+
+> - **T1 处置动作**：41 条 pillow 告警以 `dismiss_reason=inaccurate` 批量关闭（API 实跑 ok=41 fail=0）⇒ **Dependabot open 41 → 0**（fixed 26 条历史不动）。
+> - **T2 依据链（全部实测·非推断）**：① 仓库自 2026-10-23（W890·c6a3cb41）起钉 `pillow==13.0.0`，而 13.0.0 是全部 41 条 advisory 的 `first_patched_version` ⇒ 告警断言「12.3.0 被依赖」在仓库侧不成立；② 依赖图里的 `pillow@12.3.0` 是 2026-10-22 前的历史条目，**无仓内清除路径**（内容变更只新增 / 删除 manifest 使路径消失亦不清理 / Dependency submission API 为追加语义·W1198–W1201 四批实测）；③ CI 的 pip audit 审计哈希化清单 51 项闭包 ⇒ 漏洞检测不中断。
+> - **T3 可复跑与可回滚**：新建 `scripts/dismiss_pillow_alerts.py`（--dry-run / --apply / --revert）⇒ 关闭动作可复现、可审计、可一键回滚；依据链写在脚本头注释。
+> - **T4 终态读数回填**：报告 T96 新增 §8.3（归零前/终态对照表）+ 台账回填 W1201（39b65372）+ 坑表 E-219 补最终处置。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1201（2026-11-10）：重建态批·恢复仓库完整态 + 落仓路径 A 的否证结论（E-219 订正 + T96 §8.2 补记）
+
+**本批要点**（从删除态恢复完整态·并落仓路径 A 的否证结论）：
+
+> - **T1 背景与结论**：W1199 删除态批合并后（merge commit `6dbf27dc`），Graph Update run `42801150314` 于 7 秒后跑完（completed success），其 manifests 段**只含 /scripts/requirements-hashed.txt** ⇒ **删除态确被正确解析**；但依赖图 pillow 条目仍为 `["13.0.0", "12.3.0"]`、Dependabot open 仍 41、fixed 仍 26 ⇒ **「让路径消失一次」不能清除依赖图历史条目**（依赖图对同一路径纯累积·且不因 manifest 消失而清理）。
+> - **T2 仓内无清除路径（已穷举）**：内容变更只新增条目（10-22 实证）、删除路径不清理（本批实证）、Dependency submission API 是追加语义（官方文档 "in addition to"）⇒ **依赖图里的 pillow@12.3.0 无仓内清除手段** ⇒ 41 条告警在依赖图侧不可归零，唯一剩余手段是人工 dismiss（dismiss_reason=inaccurate·非真实未修）——待用户裁决。
+> - **T3 本批动作（恢复完整态）**：逐字重建 `scripts/requirements.txt`（基准 70d8e51d·diff 0 行）+ 加回监控面 PyYAML 第二段断言 ⇒ 恢复 Dependabot 对 /scripts 的监控与仓内完整态（删除态窗口结束）。
+> - **T4 订正落仓**：坑表 **E-219 原结论作废并改写**（「让路径消失一次是清残留的可靠动作」已被本批证伪⇒ 改为「处置前须先确认是否存在仓内清除路径」）+ 报告 T96 新增 §8.2 补记 + 台账回填 W1199（6dbf27dc）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1199（2026-11-10）：提交前一次性就绪链落仓（E-220 + 规则正文入 AGENTS + 计数链同步 + W1198 终态读数回填）
+
+**本批要点**（提交前就绪链的仓内沉淀·起因是用户对工作方式的直接批评）：
+
+> - **T1 起因与实证**：用户 2026-11-10 直接批评「工作方式工作流程效率太低浪费时间」。本批据 W1198 的实测数据定位四处低效源：① **拿全量 verify_delivery 当调试器**（C5e 计数链 / C5d stats 漂移 / 目录文档新鲜度本可用 check_doc_sync.py、check_plan_template.py 单跑定位，却每次跑全量·每次约 4 分钟）② **中途追加 commit**（报告订正与 W534 契约根修各 push 一次 ⇒ 每次取消旧 run 并全量重跑；一 push = 一轮 CI ≈ 25-31 jobs）③ **索引刷新顺序错**（先生成后 add ⇒ 生成器按 Git 索引收集文件 ⇒ 必漏新件 ⇒ 第 45 门禁判红）④ **外部工具要求靠试错**（级联 PRECHECK 两条、rebuild 的「两面同 W 号下界」硬判据、archive_segments 体积模式只迁超限一侧致下界分叉）。
+> - **T2 规则正文入 AGENTS.md**：最高频铁则段新增「提交前就绪链」一条（定位走局部判据单跑·全量门禁只当验收器；就绪链一次跑完且顺序不可换：git add → gen_folder_docs --refresh → docs_index → _gen_search_index → generate_csp → stats --w → rebuild_section → spec/touches 同步 → 一次全量门禁；一次 push 带齐全部内容·禁中途追加 commit；外部工具判据先读源码/--help 读全；spec 只写一次按最终 git status 生成）。
+> - **T3 坑表 E-220 入表**：条目落在「流程 / 协作 / 取证」节（节计数 180→181），并同步三处总数声明（AGENTS.md 阅读契约、HANDOVER.md 指针、puti-shouye skill）312→314（E-219 已使总数达 313·本批再加 E-220）。
+> - **T4 方法论沉淀入 HANDOVER「三」**：把本条规则写成可查的沉淀条目（依据：用户 2026-11-10 直接批评；证据：W1198 单批 3 轮 CI、4 次全量门禁）。
+> - **T5 纠正「只落私有记忆」的偏差**：上一轮该教训只写入 Agent 私有用户记忆，未同步进项目仓内——与用户既定要求「多 Agent 协作项目的经验沉淀必须同时进项目仓内」相悖，本批补齐落仓（坑表 + AGENTS 规则正文 + HANDOVER 方法论），私有记忆仅作镜像。
+> - **T6 附带修复 HANDOVER「最后更新」行的同批重复**：该行曾同时出现级联写入与手工写入的两条 W1198 摘要——手工改动与级联工具的写入面冲突所致；本批恢复「该行由级联唯一写」的不变量（手工条目改为经 spec 的 head_entry 传入级联生成）。
+> - **T7 订正 W1198 段的表述（合并后实证）**：Graph Update run **只解析 default branch 的 head commit**（历史 10 个 run 的 head_sha 全部是合并提交·无一指向源 commit）⇒ W1198 段所述「两次提交在同一个 PR 内相邻落地⇒ main 上依次出现两个状态」**不成立**（删除态从未被解析·合并后实测 pillow 仍含 12.3.0·open 仍 41）⇒ 修法改为**两个 PR**：W1199 删 manifest 使删除态单独成为 head·W1200 重建。
+> - **T8 删除态批的作用与降级边界**：删除态合并后 head = 删除态 ⇒ Graph Update 解析它 ⇒ 依赖图移除该路径条目⇒ 41 条告警随之关闭；降级影响限于 Dependabot 对 /scripts 的新增告警提示（CI 的 pip audit 仍审计哈希化清单 51 项闭包 ⇒ 漏洞检测不中断）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1198（2026-11-10）：Dependabot 41 条 Pillow 告警归零批（删除后重建依赖清单触发依赖图重算）
+
+**本批要点**（41 条 Pillow 告警的根因在依赖图条目生命周期·读数来自 Graph Update run 日志与 SBOM API 实查）：
+
+> - **T1 根因（与前两批的判断相反）**：W1193 把这 41 条判为「未随清单变更重算的 stale 投影」。本批实证证伪该判断：**依赖图里确实存在 pillow@12.3.0 的活条目**（SBOM API 返回三个 pillow SPDXID：13.0.0×2 与 12.3.0×1，其中 12.3.0 被 main 以 DEPENDS_ON 直接引用）⇒ 告警引擎按依赖图当前状态评估 ⇒ 41 条告警永远 open、updated_at 停在 2026-10-22 与 2026-10-24。
+> - **T2 对拍证据（读它的运行日志，不从告警文案推测）**：抓 GitHub 自身的 Graph Update run 日志（run 42753213397 与 42633604982），其 manifests → resolved 段显示**每次解析结果都只有 pkg:pypi/pillow@13.0.0**，从未出现 12.3.0 ⇒ 12.3.0 不是任何一次解析的产物 ⇒ 只能来自历史 blob 留下的条目（依赖图按 manifest 路径累积·版本变更只新增不清理）。
+> - **T3 前两批修法为何无效**：W1191（纯注释变更）与 W1193（依赖名大小写归一）都只让依赖图**新增**条目、从不删除 ⇒ 两条路都不可能关闭告警；这解释了「清单已钉 13.0.0 而告警仍在」的现象。
+> - **T4 修法（让该路径消失一次）**：删除 scripts/requirements.txt（CI 的安装源本就是哈希化清单，删除不改变 CI 行为）⇒ GitHub 依赖图移除该 manifest 贡献的全部条目（含 12.3.0 残留）⇒ 第二步逐字重建该文件 ⇒ 依赖图写入干净的 pillow@13.0.0、Dependabot 恢复对 /scripts 的监控。两次提交在同一个 PR 内相邻落地（删除在前、重建在后），使 main 上依次出现「该路径不存在」与「该路径重建」两个状态。
+> - **T5 CI 判据同源修正**：cache-dependency-path（4 处）与 pip-audit 扫描源（2 处）改指 scripts/requirements-hashed.txt —— CI 自 W1195 起已用该清单安装，而缓存键与审计源仍指向另一份文件；本批统一到真实安装源，pip-audit 审计覆盖面由 9 项直接依赖扩到 51 项闭包（实测 rc 0 · No known vulnerabilities found）。
+> - **T6 J3 判据漂移修正**：test_ci_wiring.py 的 PyYAML 登记断言自 W813 起绑定 scripts/requirements.txt，而 CI 的真实安装源自 W1195 起已是哈希化清单 ⇒ 判据与安装源脱节；本批改绑真实安装源，并加回「Dependabot 监控面亦须声明 PyYAML」的第二段断言。
+> - **T7 坑表 E-219 入表**：依赖图条目按 manifest 路径累积历史 blob 的规律（改内容不触发清理·改版本不关闭告警·须让路径消失一次·Dependency submission API 是追加语义不能清残留）与计数链同步。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1197（2026-11-10）：守卫扫描面扩到全仓 shell 批（两守卫扩面 + 接入 CI 阻断）
+
+**本批要点**（守卫扫描面扩到全仓 shell·读数来自 Scorecard 源码实读与变异自证）：
+
+> - **T1 根因（上批登记的已知缺口）**：Scorecard 的依赖扫描面是 `Pattern: "*"`（**全仓 shell 脚本**）、`"*Dockerfile*"`、`".github/workflows/*"`；而本仓守卫 `check_install_pins.py` / `check_action_refs.py` 是 workflow-only。上批变异自证已确认该缺口真实。
+> - **T2 识别规则抽共享模块**：新建 `scripts/external_rule_scope.py`，实现 Scorecard `isMatchingShellScriptFile` 的识别规则（扩展名属 shell 家族 或 首行 shebang 匹配 shell 家族）——两个守卫共用同一份实现，避免「口径分裂」。
+> - **T3 check_install_pins.py 扩面（安装命令面）**：扫描面从 workflow 扩到全仓 shell，判据与 Scorecard shell 面同源（pip 需 `--require-hashes`·npm 需 `npm ci`）；自证用例由 14 例升为 **20 例**（新增 shell 面 6 例：包含注释行与 echo 参数位不算命令的反例）。
+> - **T4 check_action_refs.py 扩面（不可变引用面）**：Scorecard 的 uses 面只扫 workflow（从 YAML AST 解析 `uses:` 键），它的 shell 面只判安装命令——但 shell 里同样可能出现「静默替换」的外部下载（归档/tag clone/管道执行），属同类安全面，故一并管理；自证用例新增 N9-N14 六例（三个形态的正样本 + 三个反样本）。
+> - **T5 CI 接入与阻断**：`security.yml` 的 dependency-pin job 新增 `check_action_refs.py` 步骤（该 workflow 无 paths 过滤·PR/push 全触发）；`workflow-lint.yml` 的 paths 扩到 `**/*.sh`（否则 shell 改动不会触发它）。两处均为无 `continue-on-error` 的 `run:` → 失败即阻断。
+> - **T6 变异自证（判据真会红、非恒绿）**：在仓内临时放一个 `.sh` → `check_install_pins.py` rc=1（报出其中的 `npm install`）、`check_action_refs.py` rc=1（报出其中的归档下载）→ 两守卫在 shell 面均真会阻断。
+> - **T7 覆盖缺口已闭合**：`check_external_rule_coverage.py` 的第③ 项由「已知缺口·WARN」变为「PASS 无覆盖缺口」。
+> - **T8 自查口径必须与门禁实际口径一致**：自查时用 `ruff check --select C901,PLR`（ruff 默认阈值 C901=10/branches=12/statements=50）判定「超限」，而门禁实际用的是 `scripts/guardrails/ruff-structure.toml`（宽档 C901=15/branches=16/statements=80）⇒ **误报为阻断项**，差点为不存在的缺陷去改代码。⇒ 判「某门禁会不会拦我」必须跑该门禁的**真实入口**（`pwsh -File scripts/guardrails/check_changed.ps1`），不能拿等价规则名 + 默认阈值代替。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1196（2026-11-10）：外部规则覆盖面审计批（守卫扫描面宽于规则面 + 盲区监控守卫）
+
+**本批要点**（外部规则覆盖面审计·读数来自 Scorecard 源码实读与沙箱变异自证）：
+
+> - **T1 第三类复发面（本批根因）**：W1194→W1195 两批解决了「判定口径错误」与「新依赖树带漏洞」两类问题，但都依赖「人工发现规则要求」——第三类是「规则的覆盖面本身可能超出本仓守卫的扫描面」。
+> - **T2 读 Scorecard 扫描 Pattern（不只读判定函数）**：`checks/raw/pinned_dependencies.go` 的三个扫描面为 `collectShellScriptInsecureDownloads` → `Pattern: "*"`（**全仓所有 shell 脚本**）、`collectDockerfile…` → `"*Dockerfile*"`、`collectGitHubWorkflow…` → `".github/workflows/*"`。即 shell 面不只是 workflow。
+> - **T3 覆盖缺口实测（变异自证）**：本仓守卫为 workflow-only（`check_install_pins.py` / `check_action_refs.py`）。在 `scripts/` 下放一个含 `npm install somepkg@1.0.0` 与 `pip install somepkg==1.0.0` 的 `.sh` → 两个守卫均 **rc=0、无任何输出** ⇒ 确认是覆盖盲区。
+> - **T4 实测暴露面内容**：Scorecard shell 扫描面内本仓共 5 个文件（`scripts/guardrails/check_changed.sh`、`scripts/install_hooks.sh`、`xiyouji-agent-web/deploy/pg/bin/{backup,initdb-bootstrap,restore-drill}.sh`）——实测均无安装类命令（唯一命中是 `echo` 字符串内的提示文本·非真实命令），即目前无真实漏洞；但面窄本身就是未来的盲区。
+> - **T5 新增监控守卫**：`scripts/check_external_rule_coverage.py`（守卫「规则面 × 守卫面」差集：① shell 面内的安装命令、② 各生态清单的非官方 `resolved` 源、③ 守卫覆盖缺口），自证 8/8 通过，变异自证：放 shell 里未钉版安装命令 → rc=1报错；把 lock 的 `resolved` 改回第三方镜像 → rc=1报错；已接入 `security.yml` 的安装命令面守卫 job。覆盖缺口项目前以 **WARN 不阻断**（实测无真实漏洞），修法是扩守卫扫描面（另批）。
+> - **T6 新生态面核对**：全仓依赖清单仅 4 个 npm lock 与 1 个 pip 清单；无 NuGet / Go / Ruby / PHP 生态文件（Scorecard 的 NuGet / Go 面在本仓不适用）；无多阶段 Dockerfile（1 条 FROM·已钉 digest）；无其他 CI 配置文件。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1195（2026-11-09）：Scorecard Pinned-Dependencies 真修批（pip 哈希化清单 + npm ci 化）
+
+**本批要点**（Scorecard Pinned-Dependencies 真修·读数来自 Scorecard 源码与实测）：
+
+> - **T1 前批方向性错误的实证（本批根因）**：W1194 把 Scorecard 的安装命令面判定为「未钉精确版本」并钉了 7 处；合并 PR #151 后重跑 Scorecard（run `42736414215`）实测：**该面 13 条 `PinnedDependenciesID` 告警一条未消**（总数 20 → 16，消的是 Dockerfile digest 与 TokenPermissions 那几条）。读 Scorecard 源码（`checks/raw/shell_download_validate.go`）后确认：**它要的是「钉 hash」而非「钉版本」**——pip 面命令含 `--require-hashes` → pinned（直接 `return false`），含其他参数 → unpinned（其中 `--hash=` 是 flag、被 `isFlag` 跳过 ⇒ 不作用）；npm 面只有命令含 `ci`（走 lockfile·ci 会校验 lock 内的 integrity hash）→ pinned。
+> - **T2 pip 面真修（新建哈希化清单）**：新建 `scripts/requirements-hashed.txt`（51 项闭包：直接依赖 9 + 测试传递 8 + CI 工具包与传递 34），每包列出其「全部发布文件」的 sha256（含各平台 wheel + sdist）。闭包完整性实测：`pip install --require-hashes` 会拒绝未钉 hash 的**任何依赖包括传递依赖**，故用 pip resolver 验证合并后闭包可解（resolved 51 · 额外依赖 0）；传递依赖版本与直接依赖的冲突（packaging 26.0 vs 26.3）已按仓内现行版本取低者。
+> - **T3 npm 面真修（全部改 npm ci）**：3 处 `npm install playwright@1.63.0 @playwright/test@1.63.0` 改为 `npm ci --prefix scripts`（scripts/package-lock.json 已钉 playwright 1.63.0 含 integrity），同时删除 `@playwright/test`（全仓仅 `tests/e2e/test_w266_e2e_extended.js` 引用它，而该文件按 `.github/workflows/README.md` 的 D-02 裁决明确排除出 CI 首波）；lhci 单独建 `scripts/lighthouse/{package.json,package-lock.json}`（348 包·resolved 全为 registry.npmjs.org），`npm ci` 实测 added 347 packages · lhci bin 可用。
+> - **T4 删除 black 遗留安装（W400 起从未被执行）**：ci.yml 的 code-quality job 原本安装 black 仅为「遗留安装」（自 W400 起 `black --check` 步骤已移除，black 从未被执行）——本批删除该安装，同时把 ruff 的安装改为从哈希化清单统一安装（ruff 已在清单里·与 requirements.txt 版本一致）。
+> - **T5 守卫升级为与 Scorecard 源码同源**：`scripts/check_install_pins.py` 的判据从「钉精确版本」改为「按 Scorecard 源码判定」（pip 需 `--require-hashes`·npm 需 `npm ci`），自证用例升级为 14 例（含「钉了版本但无 --require-hashes → 判红」与「钉了版本的 npm install 仍→ 判红」两个反例），自证 14/14 通过。
+> - **T6 实测证据（不假收敛）**：干净 venv 实测 `pip install --require-hashes -r <小包哈希清单>` → rc 0（真实安装成功）；改掉一个 hash 后重跑 → pip 报 `THESE PACKAGES DO NOT MATCH THE HASHES FROM THE REQUIREMENTS FILE` → 伪 hash 被拒（判据真会红、非恒绿）。
+> - **T7 首轮 CI 的 Dependency review 失败的漏洞处置（新建依赖树带来的 high 级漏洞）**：PR #152 首轮 CI 报 `basic-ftp@5.3.1` 漏洞（GHSA-c475-qrg2-pj4r·high·`Client.list()` 二次时间 DoS）——来自 lhci 子项目引入的 `express@4` 依赖链（`get-uri` → `basic-ftp@^5.0.2`）；advisory 的 vulnerable range 为 `<= 6.2.0`、`first_patched_version` 为 `6.2.1` ⇒ 用 npm `overrides` 把 `basic-ftp` 锁到 `6.2.6`（已超过修复版）；重生成 lock 后实测：`basic-ftp -> 6.2.6`、348 包不变、`resolved` 全为 `registry.npmjs.org`、无缺 `integrity`、`npm ci` rc 0（added 347 packages）且 `lhci` bin 可用。
+> - **T8 坑表 E-216（新建依赖树带来新漏洞）**：新建依赖树后必须跑一次依赖审查；新漏洞的 advisory 可能还未入库（OSV 与 GitHub Advisory API 均查不到，仅 CI 审查实测输出报出）。
+> - **T9 二轮·extract-zip 无修复版的漏洞通过升 lhci 解决**：二轮 CI 报出 `小 scripts/lighthouse/package-lock.json » extract-zip@2.0.1` 两条 high 级漏洞（GHSA-7pqw-9j4j-h8q3 与 GHSA-jmr9-qjv8-65gv，均为 `first_patched_version: None` ⇒ **最新版 2.0.1 仍落在漏洞区间**）。来源链：`lighthouse@11.4.0` → `puppeteer-core@21.x` → `@puppeteer/browsers@1.x/2.x` → `extract-zip@2.0.1`；而 `@puppeteer/browsers@3.x`（依赖改为 `modern-tar`）**不再拉 extract-zip**。解法：将 `@lhci/cli` 升到 `0.16.0`（其 `lighthouse 13.6.0` → `puppeteer-core 25.16.0` → `@puppeteer/browsers 3.2.6`），实测：新 lock 356 包、**extract-zip 已不再存在**、`basic-ftp` 仍锁 6.2.6、`resolved` 全为官方源、`npm ci` rc 0（added 337 packages）且 `lhci` bin 可用；配合需求：`@lhci/cli 0.16.0` 的 `engines` 要求 `node >= 22.19.0` ⇒ `perf.yml` 该 job 的 Node 由 20 升到 22（仓内 Node 22 已为主流，6 处）。
+> - **T10 收官（面板复查最终读数）**：PR #152 三轮 CI 全绿 31/31（`mergeStateStatus=CLEAN`）→ 合并 `9a4d01ce` → 重跑 Scorecard（run `42753322885`）：**Code scanning open 16 → 3**（安装命令面 13 条 `PinnedDependenciesID` 全部消解）；**Dependabot open 43 → 41**（2 条 minimatch 真告警自动关闭·fixed 计数 26），剩余 41 条 Pillow 为未随清单变更重算的 stale 投影（告警内 `version_requirement` 仍为 `= 12.3.0`·而现行清单已钉 13.0.0）。剩余 3 条 Code scanning 为无文件关联的整体评级项（CII / CodeReview / Fuzzing）——其判定依据已逐条核实，属平台侧配置与外部登记项（非代码面缺陷）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1194（2026-11-09）：Scorecard 告警真项收口批（安装命令钉版 + 权限最小化 + 镜像 digest 守卫）
+
+**本批要点**（Scorecard 告警真项收口·读数来自 GitHub REST API 实查与本地实跑）：
+
+> - **T1 告警逐条定位（Code scanning 20 条全部为 Scorecard 投影）**：`PinnedDependenciesID` 14 条 + `TokenPermissionsID` 2 条 + `CIIBestPracticesID`/`CodeReviewID`/`FuzzingID`/`VulnerabilitiesID` 各 1 条（后四条无文件关联·属组织级整体评级项）。前批只核了 `uses:` 面（90 个引用全钉 40-hex SHA）就判「陈旧投影」⇒ 核对面窄于 Scorecard 的告据面，漏判两类真实对象。
+> - **T2 告警定位行逐条回读当前内容（行号漂移须人工对账）**：SARIF 行号是告警产生时的快照，多条已漂移至空行；回读后确认真实对象——`xiyouji-agent-web/Dockerfile:6` 的 `FROM node:22-alpine`（未钉 digest）、`screenshot-review.yml` 两处 `npm install playwright @playwright/test`、`ci-sim.yml` 的 `python -m pip install --upgrade pip`、`ci.yml` 两处 `pip install pip-audit` 与 `pip install … black mypy`、`perf.yml` 的 `npm install -g @lhci/cli@0.13.x`。
+> - **T3 七处安装命令钉精确版本**：pip-audit==2.10.1（ci.yml + security.yml）、black==26.10.1 + mypy==2.4.1（ci.yml）、@lhci/cli@0.13.0（perf.yml·registry 实查 0.13.x 区间仅此一版⇒钉版语义等价）、playwright@1.63.0 + @playwright/test@1.63.0（screenshot-review.yml 两处·对齐 scripts/package-lock.json 的 W913 口径）、pip==26.3（ci-sim.yml·CI 全量固定 Python 3.12）。改后三面扫描：`uses:` 91 个 0 未钉、安装命令 13 条全部带版本。
+> - **T4 钉版不改变 CI 判定行为（实查使用面后决策）**：`black` 在 CI 仅安装不执行（自 W400 起移除 `--check`）、`mypy` 为 `|| true` 的 report-only、`pip-audit` 为审计工具、`@lhci/cli` 的 0.13.x 区间唯一解 ⇒ 钉版零行为漂移，故不走上游升级路径。
+> - **T5 两处写权限最小化**：release.yml 顶层 `contents: write` 收窄为顶层 `contents: read` + 仅 `release` job 持 `contents: write`（原先覆盖 preflight 与 build 两个不需要写权限的 job）；stale.yml 的 job 级 `contents: write` 为多余项（`actions/stale` 只需 `issues: write` + `pull-requests: write`）⇒ 直接删除。
+> - **T6 镜像 digest 落成机器判据**：新增 `scripts/check_docker_pin.py`（仓内每条 `FROM` 必须写成 `image@sha256:<64 位十六进制>`，5 例负样本自证通过）；`security.yml` 新增 `docker-pin` job——首步用 `docker buildx imagetools inspect` 打印当前 tag 的期望 digest 供回填，步二跑严格判据。本机对 registry 全域不可达（registry/auth/mirror/index 均连接失败或 503·本机无 docker 可执行程序）⇒ 取值动作交由具出网能力的 CI runner 承担，判据不降级（回填前该 job 判红）。
+> - **T7 Scorecard 四条整体评级项**：CII / CodeReview / Fuzzing / Vulnerabilities 属组织级指标，仓内基础件已具备（SECURITY.md、CODEOWNERS、CONTRIBUTING.md、fuzz.yml、dependency-review 与 codeql 双轨）；外部登记动作（CII 徽章与项目网站登记、OSS-Fuzz 集成、PR review 强制要求）登记在案，不在本仓代码面内。
+
+> - **T8 二轮·digest 取值并回填（PR #151 首轮 CI 后）**：`docker buildx imagetools inspect` 在 PR 首轮 CI（run `42645364116`·job `129257068185`）上 **exit 255**、连 `EXPECTED_DIGEST` 都未打印 ⇒ 取值改走纯 HTTP registry API（curl 读 `Docker-Content-Digest` 响应头 + 三源回退 + 失败只警告不阻断）。最终取值 `sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202`，**双证确认**：`dockerproxy.net` 与 `docker.1panel.live` 两个互相独立的代理各自返回的 manifest 响应体 SHA256 **逐字节一致**且与响应头相同，按该 digest 直取 manifest 200，官方镜像清单仓库 `docker-library/official-images` 确认 `22-alpine` 标签存在。回填 `xiyouji-agent-web/Dockerfile` 后 `check_docker_pin.py` 输出 `0 FAIL / 1 文件 / 1 条 FROM`。
+> - **T9 二轮·npm audit job 500 根因真修（供应链面）**：同 run 的 job `129257068115` 报 `npm error 500 Internal Server Error - GET https://registry.npmmirror.com/omi/-/omi-7.7.13.tgz - [ER_NO_SUCH_TABLE]` ⇒ 表层是第三方镜像站数据库故障（外部故障），根因在本仓依赖解析层——`xiyouji-agent-web/package-lock.json` 里 26 条 `resolved` 指向该镜像站 ⇒ 安装取值被绑到别人站点。归一前逐条核对 26 个包的 lock `integrity` 与 npmjs 官方 `dist.integrity` **26/26 一致、0 mismatch**（同一 tarball·行为零变化），随后 26 条 `resolved` 全部归一为 `registry.npmjs.org`（host 分布 570+26 → 596）；`npm ci --dry-run` 通过、两侧 `npm audit --omit=dev` 均 `found 0 vulnerabilities`。同步把该口径落成机器判据：`scripts/check_install_pins.py` 扩供应链面（lock 的 `resolved` 只允许官方注册表，新增 4 例负样本自证 ⇒ 13/13 通过；沙箱内变异自证：改回镜像站即判红、原件不红）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1193（2026-11-09）：Security and quality 面板残余收口批（minimatch 真修 + Pillow stale 源头 + Scorecard 投影复查）
+
+**本批要点**（Security and quality 面板残余收口·读数来自 GitHub REST API 实查与本地实跑）：
+
+> - **T1 面板基线（PR #150 合并后平台重算）**：Dependabot open 47 → 43（electron 1 条 + fast-uri 4 条 + qs 1 条随合并重算消除）；Code scanning open 20 条全部为 Scorecard 投影（PinnedDependenciesID 14 / TokenPermissionsID 2 / CIIBestPracticesID / CodeReviewID / VulnerabilitiesID / FuzzingID 各 1）——本地逐行核对 90 个 workflow `uses:` 引用**全部钉 40-hex SHA**、0 未钉 ⇒ 属新 SARIF 上传前的陈旧投影。
+> - **T2 minimatch 2 条真告警真修（GHSA-g3hv-75wg-m249·moderate·vulnerable 7.0.0-11.0.0）**：依赖链实查 —— scripts 侧 eslint@10.11.0 → minimatch@10.2.6（eslint 最新 10.14.0 仍声明 `minimatch: ^10.2.6` ⇒ 升级 eslint 不解决）；desktop 侧 electron-builder@26.15.3 → app-builder-lib → minimatch@10.2.6，且 @electron/universal@2.0.3 → minimatch@9.0.9（electron-builder 26.18.0 仍带 @electron/universal@2.x ⇒ 升级 electron-builder 亦不解决）。修法：两处 package.json 各加**精确版本选择器** override `minimatch@>=9.0.0 <11.0.1` → `^11.0.5`——只覆盖落在 vulnerable 范围内的实例，glob@7 的 minimatch@3.1.5 与 filelist 的 5.1.9 保持原版本 ⇒ 不引入 glob 7 与 minimatch 11 的兼容风险。
+> - **T3 实测（判据不降）**：两处 `npm ls minimatch` 显示受影响实例升到 11.0.5 且非受影响实例版本不变；两处 `npm audit` 均 0 vulnerabilities；scripts 侧 eslint 全量跑，override 前后诊断数**逐项相同**（20 problems = 10 errors + 10 warnings，全部为既有 no-undef 浏览器全局存量，CI 不跑 eslint）；desktop 侧 electron-builder 打包链路由 CI `Desktop Build` job 复验。
+> - **T4 Pillow 41 条 stale 告警的源头处置**：告警 vulnerable_version_range 全为「< 13.0.0」及其子集，清单已钉 13.0.0（= advisory 的 first_patched_version），且告警 updated_at 停在 2026-10-24 ⇒ 未重算的 stale 投影。W1191 的纯注释变更未触发重算，本批改用**依赖名大小写归一**（PyPI 名大小写不敏感·安装与导入行为零变化）制造依赖行实质变更以触发重新解析；钉版与依赖面不变。
+> - **T5 平台侧限制（沿用 W1191 登记）**：`secret_scanning_validity_checks` 在 public + 个人账户仓由平台判定为不可用（需 GitHub Advanced Security 订阅）；Scorecard 四项（CII / CodeReview / Vulnerabilities / Fuzzing）需新一轮 SARIF 上传后由平台消。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1192（2026-11-09）：CI 五处红灯清偿批（PR #150 存量缺陷全修）
+
+**本批要点**（PR #150 五个失败 job 的根因全修·全部读数来自本地实跑 + GitHub REST API 实查）：
+
+> - **T1 摸底（五处红灯全部定位到根）**：PR #150 的 required checks 已双绿（`Delivery Gate (verify_delivery.py)` 与 `Unit Tests (pytest)` 均 success），但 CI 仍暴露 5 处红灯：`CI-side simulation`（链接门禁 4 条 broken）、`Agent Web Build`（evals 校验 2 项 FAIL）、`CodeQL`（新增 1 条 high）、`Dark-state gate (merge shards)`（625 项 FAIL）、`E2E Interaction`（A1 失败）。五处均为本地 65 个未推送提交从未跑过 Actions 而暴露的**潜伏存量缺陷**，非平台侧故障。
+> - **T2 暗色门禁 625 项恒红（断言域与采集面错配）**：基线 `scripts/output/render-state-audit-baseline.jsonl` 784 行混装两个采集面——charts 面 160 行（W579 建门禁时采）+ reader 面 621 行（W662 事后并入）+ 3 个已下线页；CI 只采 charts 面（当前磁盘 168 页），而 W1155 深度审计新增的「基线页缺失 / 采集面萎缩」断言遍历**全部**基线行 ⇒ reader 面 621 行与 3 个已下线页被恒判缺失。W662 段原文已定口径「gate compare 只遍历 charts scope 当前输出侧，reader 行不参与比对」，W1155 的新增断言未按该口径限定 ⇒ 属实现偏离设计意图。修法四项：① 新建 `scripts/_render_scope.js`（`listPages` / `chartsPages`）作采集面口径**单点来源**，采集端 `_audit_render_states.js` 与比对端 `check_dark_state_gate.js` 共用；② 缺失/萎缩断言只在「基线 ∩ 当前 charts 面」内成立（分片丢页与 upload 缺 `always()` 仍被拦）；③ **新增**「基线页磁盘已无且未登记 `RETIRED_PAGES` ⇒ FAIL」（防悄悄删页被 scope 限定放过）；④ reader 面遗留 621 行不参与比对但计数输出可见。基线不刷新（`--update-baseline` 会把 784 行砍到 168 行并抹掉 reader 面 ⇒ 属降判据·本批禁用）。本地实证：charts 面 168 页全采、基线同面 160 页 0 缺失、8 个新页 0 缺陷 ⇒ 门禁 OK；自测 9/9（原 5 例 + 新增同面缺页 / 采集面萎缩 / 已下线页未登记 / 已下线页已登记）。
+> - **T3 CodeQL #120 真修（`py/incomplete-url-substring-sanitization`·high）**：`scripts/stat_event_probe.py:286` 的 `"goatcounter.com" in u` 是 URL 子串匹配——既会误判 `https://evil.example/?u=goatcounter.com`，也被 CodeQL 判为不完整 URL 净化。改为解析 URL 取 hostname 后按 DNS 标签**精确**比对（末两段标签等于 goatcounter 与 com），口径与 `scripts/fetch_gate_stats.py:117` 同款（同族单一实现）；`file:` 等非 http(s) 协议由 scheme 判定排除，原「file:// 下零远端上报」断言强度不减。7 例自测（真实域 / 子域 / file: / 查询串含词 / 伪后缀域 / 域后缀攻击）全通过，`--self-test` 输出 `SELF_TEST_OK`。
+> - **T4 CHANGELOG 4 条断链**：W1181 段把正文（位于 `docs/` 下）的相对链接原样抄进仓库根的 CHANGELOG ⇒ `../03-主题与情节专题/…` 与 `../../source/…` 解析到仓库外。4 条改为根相对（`docs/03-主题与情节专题/…`、`source/引用与网络解读/…`）；`lint_links.py --dir .` 实跑 29321 链接 0 broken。
+> - **T5 E2E 与 evals 两处**：① 页面自 W1169（`a981066e`）起监听 `pointerenter`，E2E 仍派发 `mouseenter` ⇒ A1 失败；改测试派发 `PointerEvent`（坐标来源与断言不变；A7 的 mouse 族派发因对应页面仍用 mouse 族而保持原样）；② evals dataset-039/041 指向 `dataset/dashboard.json`，该文件已于 W1157 删除 ⇒ 改指现存等价数据集（`dataset/century-dialogue.json` 顶层恰 2 组、`dataset/yuanqi-graph.json` 含 `meta`），`must_mention` 与真实结构相符、判据强度不减；`validate.mjs` 实跑 50/50 通过。
+> - **T6 连带清偿（本批新增的体积窗红灯 + 归档工具根修）**：本批 CHANGELOG 段落盘后体积达 264907 B > 上限 262144 B（pytest `test_real_tree_within_size_budget` 判红），file-index 面同步超限（263023 B）⇒ 走 `archive_segments.py` 体积模式迁出 W1108-W1116 共 9 段（正本回落 236837 B / 244634 B·上限 262144 B·余量 25307 B / 17510 B）；迁移时暴露工具自身缺陷——`archive_segments.py` 的 `_a3_ok` 末尾块分支写作「正本**不**以末尾块结尾」，而 W1130 引入的 `split_tail_block` 明确把末尾文件级块留在正本末尾 ⇒ 该分支恒假、CHANGELOG 体积迁移必红。已根修为「以末尾块结尾」并补 3 条回归锁（末尾块留在正本末尾 / 前缀被改拦截 / 末尾块被搬走拦截），相关 29 条测试全通过。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+### W1191（2026-11-09）：GitHub「Security and quality」全清批
+
+**本批要点**（用户「把 GitHub 上面的 Security and quality 里面的所有问题一并解决」·全部读数来自 GitHub REST API 实查）：
+
+> - **T1 摸底（三张面板）**：Dependabot 65 条（open 47 / fixed 18）、Code scanning 95 条（open 26 / fixed 17 / dismissed 52）、仓库安全配置 3 项缺口（Dependabot alerts 关、private vulnerability reporting 关、secret scanning validity checks 关）。
+> - **T2 判定（多数告警实为「已修未推送」）**：open 26 条里 15 条 Scorecard `PinnedDependenciesID` + 2 条 `TokenPermissionsID` 在本地早已修复（全部 action 钉 40-hex SHA、release/stale 已加 `permissions`），症结是**本地 main 领先 origin/main 64 个提交、全部未推送** ⇒ 推送即消；Dependabot 37 条 Pillow/pillow 的 vulnerable range 全为 `< 13.0.0` 而清单已钉 13.0.0 ⇒ stale 告警，requirements.txt 留复核痕以触发重算。
+> - **T3 真待办与处置**：① 6 条 `py/bad-tag-filter` 全在 `archive/scripts/batches/` 归档脚本，四条实证判为假阳性（该正则是「选取 `<script>` 块」而非剥标签；输入为本仓自产 HTML 且 861 页大小写敏感扫描 `<SCRIPT` 命中 0；输出非 HTML；归档位已被 ruff 与 CI 排除）⇒ 按仓内既有 28 条同族口径以 `won't fix` 关闭，open 26→20；② 仓库安全配置：Dependabot alerts 开启、private vulnerability reporting 开启（`PATCH` 返 404·改 `PUT` 成功）、secret scanning validity checks 平台侧对本 public + 个人账户仓不可用（记为已知限制）；③ Scorecard 4 项治理（CII / CodeReview / Fuzzing / Vulnerabilities：CODEOWNERS + README 徽章 + SECURITY.md 披露流程 + Jazzer/fast-check 双层 fuzz 与 CI）；④ 依赖版本对齐（electron 44.9.1、fast-uri 3.1.9、qs 6.17.1，npm audit 0 vulnerabilities）。
+> - **T4 连带清偿存量 CI 红灯 7 条**（推 main 前必须全绿，否则 Unit Tests 必红）：AGENTS 正本体积 51273 B > 48KB 预算 ⇒ §4.2 五条槽摘要下放至 gates.md（51273→46702 B）；台账 61 数据行 > 窗口 60 ⇒ 归档 3 行至 58 行；glossary 新页未入可视化基线与朱砂实底面；`scripts/verify_delivery.py:1604` 的跨行高危正则；统计事件 `--check` 断言；三处口径数字漂移（速查 A5 35→42、文档规范 71→75 段、启动 Prompt 616/88/89→623/89/90）。
+> - **T5 附带**：CodeQL action v3 → v4（GitHub 公告 2026-12 弃用·钉 `33d7b85da1a04171e211befe2c739303b9a4c066`·存在性实测通过）。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+
+### W1190（2026-11-09）：CI 周级联网扫描根修批（Workflow Lint 每周 schedule 必红的两层根因）
+
+**本批要点**（用户「检查一下 Workflow Lint 失败」·GitHub run #42605193188 实证·`unrecognized arguments: --ci`·退出码 2）：
+
+> - **T1 失败本体**：schedule 触发的「Workflow YAML parseable」job 里，「Action refs 存在性扫描（联网·周级/手动）」一步失败；其前的 YAML 全量解析与 40-hex 形态判据均通过。**不阻塞 PR**（main 分支 required checks 仅 `Delivery Gate (verify_delivery.py)` 与 `Unit Tests (pytest)`），但周级门禁面每次必红并掩盖真实信号。
+> - **T2 根因一（远端缺参）**：远端 `scripts/check_action_refs.py` 无 `--ci` 参数，而远端 workflow 已传 `--api --ci` ⇒ argparse 直接退出码 2。修复其实早在 W1155（本地 commit `6d66773e`），但**本地 main 领先 origin/main 64 个提交、全部未推送** ⇒ 远端每周一 03:00 UTC 必然复现同一失败。
+> - **T3 根因二（脚本与 workflow 矛盾·此前无人修）**：脚本入口对 `--api` **强制要求 token**，无 token 即退出码 2；而 workflow 注释明写「刻意不带 token：目标仓库均为 public，匿名读即可」⇒ **即便把 64 个提交全部推送，周级扫描仍是红的**（实测 `py -3 scripts/check_action_refs.py --api --ci` → 退出码 2）。这是典型「补丁加补丁」：只补参数缺失、没碰能力矛盾。
+> - **T4 两侧同修**：① 脚本新增 `api_auth_decision()`——无 token 不再立即失败，改走匿名（实测匿名读 public 仓库 commit 返回 HTTP 200）；匿名限流归入「无法判定」，`--ci` 模式降级 WARN 不阻断，不带 `--ci` 仍 fail-closed。② workflow 联网步注入 `GH_TOKEN: ${{ github.token }}`（实测匿名配额 60 次/小时 < 本步最坏 84 次请求 ＝ 14 ref × 2 endpoint × 3 次重试；认证后 5000 次/小时）。
+> - **T5 验证与负样本锁**：脚本自测 8/8 通过（新增 N7「无 token 判为可继续」+ N8「入口不早退」）；**变异自证 2/2**——mutant A「入口早退」被 N8 专属咬红、mutant B「认证判定拒绝」被 N7 专属咬红，证明两把锁都不是假锁；`check_changed.ps1` 四档全绿；全量 workflow YAML 12/12 可解析。
+> - **状态**：已落地。
+> - **文件**：见 file-index。
+
+
+### W1189（2026-11-09）：集成连通：A5 文化背景系列 ↔ 角色/器物文档 双向补链
+
+**本批要点**（用户「继续」· A2 人物深度分析经核查已饱和：216 篇且含女性主义理论子簇 W173/W224/W237/W240/W242，「A3 人物深化」作为新内容方向属假缺口；遂转做真实缺口「集成连通」· 用户的头号优先级）：
+
+> - **T1 缺口定位**：刚收官的 A5 文化背景系列（W1180–W1187 七篇）全站 0 篇链向 216 篇角色文档，仅 3 篇角色文档反向链 A5；系列与角色库断联。
+> - **T2 前向补链（A5→角色/器物）**：金公木母 / 八十一难与正果 / 天罡地煞 / 四大部洲 / 法器与兵器 五篇各加「关联角色 / 关联器物」块，指向实际论述到的角色与器物文档（孙悟空 · 猪八戒 · 沙僧 · 白龙马 · 唐僧 · 观音 · 菩提祖师 · 如来 · 铁扇公主 · 太上老君 · 金箍棒 · 芭蕉扇 · 紧箍）。
+> - **T3 反向补链（角色/器物→A5）**：孙悟空 / 猪八戒 / 沙僧 / 白龙马 / 唐僧 / 观音 / 菩提祖师 / 铁扇公主 / 太上老君 九篇各加「关联文化背景」行，指回相关 A5 系列专题。
+> - **T4 路径与纪律**：相对路径 A5→角色用 `../../02-人物深度分析/`、角色→A5 用 `../04-文化与历史背景/`；全部目标文件实存校验 0 broken；不新增篇数（A5 42 / A1-A6 623 不变），计数链与 dashboard KPI 不动；撞车核查规避 E-212 假缺口。
+> - **状态**：已落地（本地提交·不推送）。
+> - **文件**：见 file-index。
+
+### W1188（2026-11-09）：读者路径验收与导航修复
+
+**本批要点**（用户「继续」·真实读者路径验收·W1181–W1187 七批成果走查）：
+
+> - **T1 验收动线**：按首页 → 看板 → 术语速查 → 深度解读 → 文档 → 返回 走查最近七批成果，发现四类断链。
+> - **T2 断链一（入口缺失）**：术语速查页 `site/data/glossary.html` 全站仅被自身 / data 索引 / 搜索页 / sitemap 引用，首页与看板均不链它；而看板本身链了 52 个 data 页却独漏 glossary。修复：首页工具网格新增「术语速查」卡（与标签云 / 全文检索同簇），看板标签云横幅旁新增「术语速查」横幅。
+> - **T3 断链二（返回路径）**：W1186 金公木母 / W1187 八十一难 两篇缺标准页脚（`> 双索引` / `> 导航`），读者落到这两篇无返回导读 / 首页 / 板块索引入口；其余五篇均有。修复：为两篇补标准页脚，与系列一致。
+> - **T4 断链三（陈旧口径）**：glossary 深度解读区小标题仍写「W1180–W1182 系列」，实际已列七篇。修复：改为「W1180–W1187 系列，共七篇」。
+> - **T5 口径漂移**：首页工具网格注记「两件常用工具」随新增卡失准，改为「常用工具」（去数词，规避硬计数漂移）。
+> - **T6 验证**：新增链接目标均存在（data/glossary.html · site/index.html · docs/00-导读/阅读指南.md · 板块 README）；docs 全量链接校验 0 broken；本批不改篇数（A5 42 / A1-A6 623 不变），故计数链与 dashboard KPI 不动。
+> - **状态**：已落地（本地提交·不推送）。
+> - **文件**：见 file-index。
+
+### W1187（2026-11-09）：A5 佛教术语专题（八十一难与正果）
+
+**本批要点**（用户「继续」·按既定模式推进，术语表六组仅剩佛教术语组）：
+
+> - **T1 选题锚定（避免重复）**：术语表第二组佛教术语 10 条参差（教义/目的论条目 + 袈裟/钵器物 + 心猿意马）。查 docs/04-文化与历史背景/ 无专题覆盖八十一难/正果/劫难（佛道思想.md / 西游与禅宗公案专题.md 仅零星提及 4/8 处，未系统化）；且「三三行满/九九数完」在 A5 零命中。据此取最可清点的**劫难—正果轴**（取经须历难方能成正果），并明确分层：袈裟/钵交 W1182、心猿意马交 W1186、四大部洲宇宙观交 W1184，本文不重做。
+> - **T2 核心证据（难簿与九九归真）**：第 99 回难簿「蒙差揭谛皈依旨，谨记唐僧难数清：金蝉遭贬第一难，出胎几杀第二难，满月抛江第三难……」是**逐条编号、可勾销的灾难清单**；菩萨复核「佛门中九九归真，圣僧受过八十难，还少一难，不得完成此数」→ 补 1 难成 81。回目「九九数完魔刬尽三三行满道归根」同点九九/三三数術。本文取文本自陈的「八十难 + 补一难 = 八一」，不自行重数难簿长串（易错，以文本为准）。
+> - **T3 正果授职（五圣成真）**：第 100 回如来授职，逐字引五封号——唐僧→旃檀功德佛、悟空→斗战胜佛、八戒→净坛使者、沙僧→金身罗汉、白龙马→八部天龙马；授职理由与沿途功过一一对应，使苦难可折算为功绩。
+> - **T4 目的论框架**：劫难是机制（灾难被登记—勾销）、正果是目标（终点钉死且理由挂钩功过）、九九归真是数術外壳（佛圆满套道内炼数字，佛道混用又一例，呼应 W1186 诗赞「般若波罗到彼家」）、因果是底色（金蝉遭贬源于前世轻慢）。因果/轮回/五蕴/涅槃/禅定条目留白，不强行塞进一篇滑向教义概论。
+> - **T5 引文与术语门禁**：8 条引文逐字核验（命中 100%）；其中回目句初稿误加逗号致子串不匹配，修正为无逗号连续串「九九数完魔刬尽三三行满道归根」；第 99 回难簿句初稿误加句号（原文此处为逗号接「寻亲报冤第四难」），去句号后通过。glossary 中「唐僧」为变体、规范词「玄奘」，首段介绍唐僧处自然补「（本名玄奘）」满足 C2；全量新违规 0。lint_links docs 5535 / site 23242 链接均 0 broken。
+> - **T6 索引同步（不让系列断链）**：A5 README 系列段扩为 W1180–W1187（按行插入、实读复核，规避 W1184 表格断裂）；术语速查页深度解读区加「二、佛教术语」反向入口。改既有文件按 E-03 原子替换。
+> - **T7 计数链**：A5 41→42、A1-A6 622→623；统计口径说明表格、dashboard 三处、docs_index 重建 INDEX（868 篇）、stats 标记面跟随 11 处一次同步到位。清单连续第八批零返工。**至此术语表六组全部覆盖**。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
+### W1186（2026-11-09）：A5 人物称谓专题（金公木母与心猿意马）
+
+**本批要点**（用户「继续」·按既定模式推进，撞车核查后锚定术语表第一组）：
+
+> - **T1 选题锚定（避免重复）**：术语表六组已覆盖三/四/五/六（道教术语/回目结构/地理名词/法宝兵器），剩一（人物称谓）、二（佛教术语）。查 docs/04-文化与历史背景/ 发现 明代隐喻.md 已存在，但其讲明代社会政治隐喻（弼马温与御马监、天庭九品、妖怪官僚），grep 金公/木母/黄婆/心猿/意马 全空——它只在「弼马温与御马监」把弼马温当官职讽刺，不碰丹经五行人物编码。故选定术语表第一组「人物称谓」的丹经隐喻层（心猿/意马/金公/木母/黄婆），与明代隐喻.md 同名不同层。
+> - **T2 核心证据（四词同框）**：第 30 回「意马心猿都失散，金公木母尽凋零。黄婆伤损通分别，道义消疏怎得成！」把四个隐喻称谓并置同一诗赞，紧接叙事「却说那猪八戒，从离了沙……」——隐喻层与实写人物同场景互为注脚，证明这是绑定取经团队的稳定隐喻命名系统，非零散比喻。第 23/57 回另有木母+金公+黄婆同框佐证。
+> - **T3 五词归属（文本同场景指代为据）**：心猿/金公→孙悟空（心性之猿 vs 金/铅之象，同一人物两层维度）、木母→猪八戒、黄婆→沙僧、意马→白龙马；以六条逐字引文（第 19/22/23/30/40/57 回）锚定，不使用外部注本的强行指派。
+> - **T4 百回分布（可复算）**：text-search.json 逐回字面 count——心猿 12 回、木母 9 回、黄婆 6 回、金公 3 回、意马 3 回；读出三趋势：心猿最常用（收心主线）、金公意马密集前四十回后期隐退、木母黄婆长尾到六十五回。
+> - **T5 学术衔接（引用存在·不作断言）**：学术论文索引收录 V04 西游证道书 / V05 西游真诠 / C03 刘一明西游原旨 / P04 张伯端悟真篇 / P01 王阳明传习录「心猿」，证明「人物=金公木母黄婆心猿意马」是明清内丹派读法；本文实证对象为百回正文如何用这套称谓，内丹精确对应仅引用其存在、不越界做教义引申。第 23 回诗赞末句「般若波罗到彼家」提示佛道术语混用，反对任一系统绝对化。
+> - **T6 术语门禁新违规修复**：glossary 中「唐僧」为变体、规范词「玄奘」，门禁 C2 要求用变体须同现规范词；本文首段介绍唐僧处自然补「（本名玄奘，法号三藏）」——既是真信息也满足一致性，非堵判据。单文件 PASS、全量新违规 0。
+> - **T7 引文与索引同步**：_cite_probe 实提并逐字校验 6 条（命中 100%）；lint_links docs 5519 / site 23241 链接均 0 broken。A5 README 系列段扩为 W1180–W1186（按行插入、实读复核，规避 W1184 表格断裂）；术语速查页深度解读区加「一、人物称谓」反向入口。
+> - **T8 计数链**：A5 40→41、A1-A6 621→622；统计口径说明表格、dashboard 三处、docs_index 重建 INDEX（867 篇）、stats 标记面跟随 11 处一次同步到位。清单连续第七批零返工。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
+### W1185（2026-11-09）：A5 章回套语专题（且听下回分解）
+
+**本批要点**（用户「继续」·按既定模式推进，但撞车核查推翻了上一轮推荐依据）：
+
+> - **T1 选题收窄（避免重复）**：上一轮推荐写「回目对仗」，本批动笔前核查发现 [明代文学体裁与西游对照专题](docs/04-文化与历史背景/明代文学体裁与西游对照专题.md) 已有 3.3 节「回目对仗（骈文传统 vs 西游回目）」，全库「回目对仗」命中 27 次；3.2 节对照表也已列出「诗曰」「有诗为证」。**只看词形零命中、没看已有章节**是 E-212 的同型问题。据此把题目收窄为《且听下回分解：〈西游记〉章回套语的百回分布与程式》——那篇做体裁理论对照，本文做**可复算的频次与强制性**，层次不重叠。
+> - **T2 数据实算**：以 `dataset/text-search.json` 的百回 `chapters[].text` 逐回做字面 `count`（不含 title / fullTitle），得六个套语分布：话说 59 次 / 44 回（首见第 11 回）、诗曰 82 / 47、有诗为证 55 / 38、且听下回分解 99 / 99、欲知后事如何 0 / 0、毕竟不知 83 / 83（术语表未登记）。
+> - **T3 三个发现**：① 「且听下回分解」99 回各一次、唯一缺席第 100 回，与「毕竟不知…」构成两拍收束 ⇒ **分回首先是收束动作而非内容切分**；② 「话说」仅 44 回、第 1 回以「诗曰」开卷 ⇒ **起是可选项、收是强制项**；③ 术语表登记「欲知后事如何」而语料零命中，实际承担悬念功能的是「毕竟不知」+「且听下回分解」⇒ 继四大部洲专题「原文四洲 / 术语表三洲」之后第二处口径差异，如实标注、不代改写、不臆测来源。
+> - **T4 方法论边界**：明确「话说」59 次里混有非程式对白（如第 11 回「看他有甚话说」），因此 44 回是**字面命中的上界**，不等于回首程式次数；零命中只针对本项目语料；学术索引未收章回套语专门研究 ⇒ 不作说书传统源流断言；与 3.1/3.2/3.3 的理论对照分层。
+> - **T5 引文实提**：`_cite_probe.py` 从第 1 / 2 / 9 / 17 回实提并逐字校验 6 条引文（含第 1 回语料字面「毕竟不之」，逐字保留不代为改写），`check_citations.py --file` 命中率 100%；`lint_links.py --dir docs` 5506 链接 0 broken、`--dir site` 23240 链接 0 broken；元信息块 v2 与术语一致性一次通过。
+> - **T6 索引同步（不让系列断链）**：A5 README 系列段扩为 W1180–W1185 并新增一行；术语速查页「深度解读」区加「四、回目结构」反向入口。**按行插入表格行并实读复核**，规避上一批「字符串替换导致 Markdown 表格断裂」的问题；改既有文件按坑表 E-03 用临时文件 + `os.replace` 原子替换。
+> - **T7 计数链**：A5 39→40、A1-A6 620→621；`docs/00-导读/统计口径说明.md` 表格、`site/dashboard.html` 三处、`docs_index.py` 重建 INDEX（866 篇）、stats 标记面跟随 11 处一次同步到位。清单连续第六批零返工。
+> - **状态**：已落地（本地提交·不推送·Actions 额度归零用户令）。
+> - **文件**：见 file-index。
+
 ### W1184（2026-11-09）：A5 空间框架专题（四大部洲与三界）
 
 **本批要点**（用户明确「继续在这个项目、不想换线」·按既定模式定题写作）：

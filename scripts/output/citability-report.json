@@ -1,7 +1,7 @@
 {
- "scan_date": "2026-11-10",
+ "scan_date": "2026-11-16",
  "scope": "site/data (D1: 不含 EN 镜像)",
- "pages": 89,
+ "pages": 90,
  "items": [
   "C1",
   "C2",
@@ -9,10 +9,10 @@
   "C4"
  ],
  "pass_rate": {
-  "C1": "89/89",
-  "C2": "89/89",
-  "C3": "89/89",
-  "C4": "89/89"
+  "C1": "90/90",
+  "C2": "90/90",
+  "C3": "90/90",
+  "C4": "90/90"
  },
  "detail": {
   "site/data/81-hardships-view.html": {
@@ -1578,6 +1578,28 @@
    "has_anchor": true
   },
   "site/data/pilgrim-team-psychology-arc.html": {
+   "items": {
+    "C1": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": true
+  },
+  "site/data/poetry-density.html": {
    "items": {
     "C1": {
      "status": "ok",
