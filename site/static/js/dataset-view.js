@@ -76,7 +76,8 @@
   function renderObjectView(key, obj, ids) {
     var entries = Object.keys(obj).map(function (k) { return { label: k, value: obj[k] }; });
     var max = Math.max.apply(null, entries.map(function (e) { return +e.value || 0; })) || 1;
-    var colors = ["#c8463a", "#3a6b8c", "#C9A063", "#6B8E5A", "#8c2a2a", "#b07a3a"];
+        // W1261：旧色板 -> 新序列槽（series-1..6·与全站色板一致）
+    var colors = ["#C0392B", "#40619E", "#8E7D62", "#3A473A", "#472A4C", "#6B665E"];
     var svg = '<svg id="chart" viewBox="0 0 520 ' + (entries.length * 34 + 10) + '" width="100%" style="max-width:560px">';
     entries.forEach(function (e, i) {
       var w = Math.round(((+e.value || 0) / max) * 360);

@@ -56,7 +56,7 @@
 | theological-intervention-network.json | 5 | 10.4 KB | 5 | meta、network、radar、sankey、timeline |
 | timeline.json | 1 | 5.5 KB | 1 | timeline |
 | underworld-power-network.json | 6 | 14.0 KB | 6 | hierarchy、network、radar、sankey、summary、timeline |
-| yuanqi-graph.json | 3 | 7.8 KB | 3 | edges、meta、nodes |
+| yuanqi-graph.json | 3 | 8.2 KB | 3 | edges、meta、nodes |
 
 ### entities/
 

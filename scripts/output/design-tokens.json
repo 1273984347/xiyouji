@@ -1,42 +1,42 @@
 {
  "meta": {
   "generator": "scripts/export_design_tokens.py",
-  "generated": "2026-11-07",
+  "generated": "2026-11-17",
   "source": [
    "site/tokens.css"
   ],
   "spec": "W3C Design Tokens 风格（DTCG 简化：$value/$type/$description + group/line 元数据）",
   "counts": {
-   "declarations": 134,
-   "tokens": 134,
+   "declarations": 192,
+   "tokens": 192,
    "themes": {
-    "light": 103,
-    "dark": 31
+    "light": 139,
+    "dark": 53
    },
-   "sections": 5
+   "sections": 7
   },
   "warnings": []
  },
  "tokens": {
   "light/bg": {
-   "$value": "#FAF7F0",
-   "$type": "color",
+   "$value": "var(--surface-canvas)",
+   "$type": "other",
    "$description": "页面整体背景：宣纸暖白",
    "name": "--bg",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 61
   },
   "light/paper": {
-   "$value": "#FFFFFF",
-   "$type": "color",
+   "$value": "var(--surface-raised)",
+   "$type": "other",
    "$description": "卡片 / section 内容区背景",
    "name": "--paper",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 62
   },
   "light/paper-warm": {
-   "$value": "#F1EBDD",
-   "$type": "color",
+   "$value": "var(--surface-sunken)",
+   "$type": "other",
    "$description": "暖调浅底：注条 / 徽band底",
    "name": "--paper-warm",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
@@ -45,7 +45,7 @@
   "light/dark": {
    "$value": "#221D16",
    "$type": "color",
-   "$description": "玄墨深色区块（开篇诗 / 深色节奏段）",
+   "$description": "玄墨深色区块（开篇诗 / 深色节奏段）  对背景 14.71:1",
    "name": "--dark",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 64
@@ -53,38 +53,38 @@
   "light/dark-text": {
    "$value": "#F2EBDC",
    "$type": "color",
-   "$description": "深色区块上的文字",
+   "$description": "深色区块上的文字  亮度比 1.04（非信息色）",
    "name": "--dark-text",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 65
   },
   "light/ink": {
-   "$value": "#23201A",
-   "$type": "color",
+   "$value": "var(--text-primary)",
+   "$type": "other",
    "$description": "主文字：墨",
    "name": "--ink",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 68
   },
   "light/ink-soft": {
-   "$value": "#6B6455",
-   "$type": "color",
+   "$value": "var(--text-secondary)",
+   "$type": "other",
    "$description": "次级文字：浅墨",
    "name": "--ink-soft",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 69
   },
   "light/ink-faint": {
-   "$value": "#9A9280",
-   "$type": "color",
+   "$value": "var(--text-tertiary)",
+   "$type": "other",
    "$description": "三级文字：淡墨（meta / 编号）",
    "name": "--ink-faint",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 70
   },
   "light/accent": {
-   "$value": "#C8463A",
-   "$type": "color",
+   "$value": "var(--accent-primary)",
+   "$type": "other",
    "$description": "主强调色：朱砂红（全站唯一彩色强调）",
    "name": "--accent",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
@@ -93,31 +93,31 @@
   "light/accent-soft": {
    "$value": "#E9B885",
    "$type": "color",
-   "$description": "浅赭金：徽章底 / 渐变高光",
+   "$description": "浅赭金：徽章底 / 渐变高光  对背景 1.58:1",
    "name": "--accent-soft",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 74
   },
   "light/accent-2": {
-   "$value": "#3A6B8C",
+   "$value": "#7FA8C9",
    "$type": "color",
-   "$description": "靛蓝：链接 / 数据 meta / 第二系列",
+   "$description": "W1261：青蓝·仅作边框 / 徽章底（与朱砂 ΔE 43.5·与软金 ΔE 34.9·不与数据序列色混用）",
    "name": "--accent-2",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 75
   },
   "light/accent-3": {
-   "$value": "#8A6D3B",
-   "$type": "color",
-   "$description": "赭石：提示文字 / 第三系列",
+   "$value": "var(--text-secondary)",
+   "$type": "other",
+   "$description": "W1261：次级文本语义（警示色由徽章底色承担·不再与数据序列色混用）",
    "name": "--accent-3",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 76
   },
   "light/accent-4": {
-   "$value": "#6B8E5A",
-   "$type": "color",
-   "$description": "苔绿：正向数据 / 第四系列",
+   "$value": "var(--text-tertiary)",
+   "$type": "other",
+   "$description": "W1261：三级文本语义（正向色由徽章底色承担·与 --ok 同值）",
    "name": "--accent-4",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 77
@@ -125,78 +125,78 @@
   "light/rebel": {
    "$value": "#8C2A2A",
    "$type": "color",
-   "$description": "反派 / 警示色：暗朱红",
+   "$description": "反派 / 警示色：暗朱红  对背景 7.45:1",
    "name": "--rebel",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 78
   },
   "light/chart-1": {
-   "$value": "#C8463A",
-   "$type": "color",
+   "$value": "var(--series-1)",
+   "$type": "other",
    "$description": "朱砂",
    "name": "--chart-1",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 81
   },
   "light/chart-2": {
-   "$value": "#3A6B8C",
-   "$type": "color",
+   "$value": "var(--series-2)",
+   "$type": "other",
    "$description": "靛蓝",
    "name": "--chart-2",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 82
   },
   "light/chart-3": {
-   "$value": "#B38F58",
-   "$type": "color",
+   "$value": "var(--series-3)",
+   "$type": "other",
    "$description": "赭金",
    "name": "--chart-3",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 83
   },
   "light/chart-4": {
-   "$value": "#6B8E5A",
-   "$type": "color",
+   "$value": "var(--series-4)",
+   "$type": "other",
    "$description": "苔绿",
    "name": "--chart-4",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 84
   },
   "light/chart-5": {
-   "$value": "#D8CFBC",
-   "$type": "color",
+   "$value": "var(--series-5)",
+   "$type": "other",
    "$description": "米灰",
    "name": "--chart-5",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 85
   },
   "light/chart-6": {
-   "$value": "#8A6D3B",
-   "$type": "color",
+   "$value": "var(--series-6)",
+   "$type": "other",
    "$description": "赭石（备用第 6 系列）",
    "name": "--chart-6",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 86
   },
   "light/line": {
-   "$value": "#E5DFD0",
-   "$type": "color",
+   "$value": "var(--border-subtle)",
+   "$type": "other",
    "$description": "发丝线：浅米褐",
    "name": "--line",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 89
   },
   "light/shadow": {
-   "$value": "0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05)",
-   "$type": "shadow",
+   "$value": "none",
+   "$type": "other",
    "$description": "",
    "name": "--shadow",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 92
   },
   "light/shadow-lift": {
-   "$value": "0 2px 6px rgba(35, 32, 26, 0.08), 0 8px 24px rgba(35, 32, 26, 0.08)",
-   "$type": "shadow",
+   "$value": "none",
+   "$type": "other",
    "$description": "",
    "name": "--shadow-lift",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
@@ -267,12 +267,20 @@
    "line": 107
   },
   "light/font-mono": {
-   "$value": "'JetBrains Mono', 'Consolas', 'Menlo', monospace",
+   "$value": "'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif",
    "$type": "fontFamily",
    "$description": "",
    "name": "--font-mono",
    "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
    "line": 108
+  },
+  "light/font-code": {
+   "$value": "'JetBrains Mono', 'Consolas', 'Menlo', monospace",
+   "$type": "fontFamily",
+   "$description": "W1261：数据位去等宽（禁科技感·规范 §1.2 字体三分）——数字扫读优先；对齐由各处 font-variant-numeric: tabular-nums 承担（实测 Noto Sans SC 数字等宽 55.5px@100px）",
+   "name": "--font-code",
+   "group": "子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）",
+   "line": 109
   },
   "light/elev-0": {
    "$value": "none",
@@ -280,7 +288,7 @@
    "$description": "",
    "name": "--elev-0",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 115
+   "line": 116
   },
   "light/elev-1": {
    "$value": "var(--shadow)",
@@ -288,7 +296,7 @@
    "$description": "",
    "name": "--elev-1",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 116
+   "line": 117
   },
   "light/elev-2": {
    "$value": "var(--shadow-lift)",
@@ -296,7 +304,7 @@
    "$description": "",
    "name": "--elev-2",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 117
+   "line": 118
   },
   "light/elev-3": {
    "$value": "0 4px 10px rgba(35, 32, 26, 0.10), 0 12px 32px rgba(35, 32, 26, 0.12)",
@@ -304,7 +312,7 @@
    "$description": "",
    "name": "--elev-3",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 118
+   "line": 119
   },
   "light/elev-4": {
    "$value": "0 8px 18px rgba(35, 32, 26, 0.14), 0 24px 56px rgba(35, 32, 26, 0.16)",
@@ -312,31 +320,7 @@
    "$description": "",
    "name": "--elev-4",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 119
-  },
-  "light/radius-sm": {
-   "$value": "2px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--radius-sm",
-   "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 122
-  },
-  "light/radius-md": {
-   "$value": "6px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--radius-md",
-   "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 122
-  },
-  "light/radius-lg": {
-   "$value": "10px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--radius-lg",
-   "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 122
+   "line": 120
   },
   "light/radius-pill": {
    "$value": "999px",
@@ -344,7 +328,7 @@
    "$description": "",
    "name": "--radius-pill",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 122
+   "line": 123
   },
   "light/border-hairline": {
    "$value": "1px solid var(--line)",
@@ -352,7 +336,7 @@
    "$description": "",
    "name": "--border-hairline",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 123
+   "line": 124
   },
   "light/border-accent": {
    "$value": "1px solid var(--accent)",
@@ -360,15 +344,15 @@
    "$description": "",
    "name": "--border-accent",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 124
+   "line": 125
   },
   "light/accent-deep": {
-   "$value": "#AF3F34",
-   "$type": "color",
+   "$value": "var(--accent-muted)",
+   "$type": "other",
    "$description": "700 档：active/按钮渐变终点",
    "name": "--accent-deep",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 127
+   "line": 128
   },
   "light/accent-tint": {
    "$value": "color-mix(in srgb, var(--accent) 10%, var(--paper))",
@@ -376,7 +360,7 @@
    "$description": "100 档选中底",
    "name": "--accent-tint",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 128
+   "line": 129
   },
   "light/accent-wash": {
    "$value": "color-mix(in srgb, var(--accent) 5%, var(--bg))",
@@ -384,7 +368,7 @@
    "$description": "050 档 band 底",
    "name": "--accent-wash",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 129
+   "line": 130
   },
   "light/ink-tint": {
    "$value": "color-mix(in srgb, var(--ink) 5%, var(--bg))",
@@ -392,7 +376,7 @@
    "$description": "极浅墨 band 底",
    "name": "--ink-tint",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 130
+   "line": 131
   },
   "light/ok": {
    "$value": "var(--accent-4)",
@@ -400,7 +384,7 @@
    "$description": "",
    "name": "--ok",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 133
+   "line": 134
   },
   "light/ok-bg": {
    "$value": "color-mix(in srgb, var(--accent-4) 10%, var(--paper))",
@@ -408,7 +392,7 @@
    "$description": "",
    "name": "--ok-bg",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 133
+   "line": 134
   },
   "light/warn": {
    "$value": "var(--accent-3)",
@@ -416,7 +400,7 @@
    "$description": "",
    "name": "--warn",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 134
+   "line": 135
   },
   "light/warn-bg": {
    "$value": "color-mix(in srgb, var(--accent-3) 10%, var(--paper))",
@@ -424,7 +408,7 @@
    "$description": "",
    "name": "--warn-bg",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 134
+   "line": 135
   },
   "light/danger": {
    "$value": "var(--rebel)",
@@ -432,7 +416,7 @@
    "$description": "",
    "name": "--danger",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 135
+   "line": 136
   },
   "light/danger-bg": {
    "$value": "color-mix(in srgb, var(--rebel) 8%, var(--paper))",
@@ -440,7 +424,7 @@
    "$description": "",
    "name": "--danger-bg",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 135
+   "line": 136
   },
   "light/info": {
    "$value": "var(--accent-2)",
@@ -448,7 +432,7 @@
    "$description": "",
    "name": "--info",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 136
+   "line": 137
   },
   "light/info-bg": {
    "$value": "color-mix(in srgb, var(--accent-2) 10%, var(--paper))",
@@ -456,7 +440,7 @@
    "$description": "",
    "name": "--info-bg",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 136
+   "line": 137
   },
   "light/text-step-0": {
    "$value": "1rem",
@@ -464,7 +448,7 @@
    "$description": "",
    "name": "--text-step-0",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 139
+   "line": 140
   },
   "light/text-step-1": {
    "$value": "1.25rem",
@@ -472,7 +456,7 @@
    "$description": "",
    "name": "--text-step-1",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 139
+   "line": 140
   },
   "light/text-step-2": {
    "$value": "1.5625rem",
@@ -480,7 +464,7 @@
    "$description": "",
    "name": "--text-step-2",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 139
+   "line": 140
   },
   "light/text-step-3": {
    "$value": "1.953rem",
@@ -488,7 +472,7 @@
    "$description": "",
    "name": "--text-step-3",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 140
+   "line": 141
   },
   "light/text-step-4": {
    "$value": "2.441rem",
@@ -496,7 +480,7 @@
    "$description": "",
    "name": "--text-step-4",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 140
+   "line": 141
   },
   "light/text-step-5": {
    "$value": "3.052rem",
@@ -504,7 +488,7 @@
    "$description": "",
    "name": "--text-step-5",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 140
+   "line": 141
   },
   "light/text-hero": {
    "$value": "clamp(1.75rem, 1.2rem + 2.5vw, 2.75rem)",
@@ -512,7 +496,7 @@
    "$description": "",
    "name": "--text-hero",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 141
+   "line": 142
   },
   "light/leading-tight": {
    "$value": "1.3",
@@ -520,7 +504,7 @@
    "$description": "",
    "name": "--leading-tight",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 142
+   "line": 143
   },
   "light/leading-heading": {
    "$value": "1.4",
@@ -528,7 +512,7 @@
    "$description": "",
    "name": "--leading-heading",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 142
+   "line": 143
   },
   "light/leading-body": {
    "$value": "1.80",
@@ -536,79 +520,79 @@
    "$description": "",
    "name": "--leading-body",
    "group": "v3 · W476 纸感轻立体令牌层（DESIGN.md §4A）",
-   "line": 142
+   "line": 143
   },
   "dark/bg": {
-   "$value": "#221D16",
-   "$type": "color",
+   "$value": "var(--surface-canvas)",
+   "$type": "other",
    "$description": "",
    "name": "--bg",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 175
+   "line": 176
   },
   "dark/ink": {
-   "$value": "#F2EBDC",
-   "$type": "color",
+   "$value": "var(--text-primary)",
+   "$type": "other",
    "$description": "",
    "name": "--ink",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 176
+   "line": 177
   },
   "dark/ink-soft": {
-   "$value": "#CBBFA9",
-   "$type": "color",
+   "$value": "var(--text-secondary)",
+   "$type": "other",
    "$description": "",
    "name": "--ink-soft",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 177
+   "line": 178
   },
   "dark/ink-faint": {
-   "$value": "#8F8674",
-   "$type": "color",
+   "$value": "var(--text-tertiary)",
+   "$type": "other",
    "$description": "",
    "name": "--ink-faint",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 178
+   "line": 179
   },
   "dark/paper": {
-   "$value": "#2B2419",
-   "$type": "color",
+   "$value": "var(--surface-raised)",
+   "$type": "other",
    "$description": "",
    "name": "--paper",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 179
+   "line": 180
   },
   "dark/paper-warm": {
-   "$value": "#33291B",
-   "$type": "color",
+   "$value": "var(--surface-sunken)",
+   "$type": "other",
    "$description": "",
    "name": "--paper-warm",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 180
+   "line": 181
   },
   "dark/line": {
-   "$value": "rgba(242, 235, 220, 0.14)",
-   "$type": "color",
+   "$value": "var(--border-subtle)",
+   "$type": "other",
    "$description": "",
    "name": "--line",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 181
+   "line": 182
   },
   "dark/accent": {
-   "$value": "#E46250",
-   "$type": "color",
+   "$value": "var(--accent-primary)",
+   "$type": "other",
    "$description": "",
    "name": "--accent",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 182
+   "line": 183
   },
   "dark/accent-deep": {
-   "$value": "#C94F3F",
-   "$type": "color",
+   "$value": "var(--accent-muted)",
+   "$type": "other",
    "$description": "",
    "name": "--accent-deep",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 183
+   "line": 184
   },
   "dark/accent-soft": {
    "$value": "#E8A99F",
@@ -616,7 +600,7 @@
    "$description": "",
    "name": "--accent-soft",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 184
+   "line": 185
   },
   "dark/accent-tint": {
    "$value": "rgba(224, 96, 79, 0.14)",
@@ -624,7 +608,7 @@
    "$description": "",
    "name": "--accent-tint",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 185
+   "line": 186
   },
   "dark/accent-wash": {
    "$value": "rgba(224, 96, 79, 0.08)",
@@ -632,79 +616,79 @@
    "$description": "",
    "name": "--accent-wash",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 186
+   "line": 187
   },
   "dark/accent-2": {
    "$value": "#7FA8C9",
    "$type": "color",
-   "$description": "",
+   "$description": "青蓝·仅作边框/底色（暗底提亮）",
    "name": "--accent-2",
-   "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 187
-  },
-  "dark/accent-3": {
-   "$value": "#C9A96B",
-   "$type": "color",
-   "$description": "",
-   "name": "--accent-3",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
    "line": 188
   },
-  "dark/accent-4": {
-   "$value": "#9DB98A",
-   "$type": "color",
-   "$description": "",
-   "name": "--accent-4",
+  "dark/accent-3": {
+   "$value": "var(--text-secondary)",
+   "$type": "other",
+   "$description": "W1261：暗底次级文本",
+   "name": "--accent-3",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
    "line": 189
   },
-  "dark/chart-1": {
-   "$value": "#E0604F",
-   "$type": "color",
-   "$description": "",
-   "name": "--chart-1",
+  "dark/accent-4": {
+   "$value": "var(--text-tertiary)",
+   "$type": "other",
+   "$description": "W1261：暗底三级文本",
+   "name": "--accent-4",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
    "line": 190
   },
-  "dark/chart-2": {
-   "$value": "#7FA8C9",
-   "$type": "color",
+  "dark/chart-1": {
+   "$value": "var(--series-1)",
+   "$type": "other",
    "$description": "",
-   "name": "--chart-2",
+   "name": "--chart-1",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
    "line": 191
   },
-  "dark/chart-3": {
-   "$value": "#C8A063",
-   "$type": "color",
+  "dark/chart-2": {
+   "$value": "var(--series-2)",
+   "$type": "other",
    "$description": "",
-   "name": "--chart-3",
+   "name": "--chart-2",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
    "line": 192
   },
-  "dark/chart-4": {
-   "$value": "#9DB98A",
-   "$type": "color",
+  "dark/chart-3": {
+   "$value": "var(--series-3)",
+   "$type": "other",
    "$description": "",
-   "name": "--chart-4",
+   "name": "--chart-3",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
    "line": 193
   },
-  "dark/chart-5": {
-   "$value": "#F2E8D3",
-   "$type": "color",
+  "dark/chart-4": {
+   "$value": "var(--series-4)",
+   "$type": "other",
    "$description": "",
-   "name": "--chart-5",
+   "name": "--chart-4",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
    "line": 194
   },
+  "dark/chart-5": {
+   "$value": "var(--series-5)",
+   "$type": "other",
+   "$description": "",
+   "name": "--chart-5",
+   "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
+   "line": 195
+  },
   "dark/chart-6": {
-   "$value": "#C9A96B",
-   "$type": "color",
+   "$value": "var(--series-6)",
+   "$type": "other",
    "$description": "",
    "name": "--chart-6",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 195
+   "line": 196
   },
   "dark/ok": {
    "$value": "#8FBF7F",
@@ -712,7 +696,7 @@
    "$description": "",
    "name": "--ok",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 196
+   "line": 197
   },
   "dark/warn": {
    "$value": "#D0A35C",
@@ -720,7 +704,7 @@
    "$description": "",
    "name": "--warn",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 197
+   "line": 198
   },
   "dark/danger": {
    "$value": "#D96C5C",
@@ -728,7 +712,7 @@
    "$description": "",
    "name": "--danger",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 198
+   "line": 199
   },
   "dark/info": {
    "$value": "#7FA8C9",
@@ -736,7 +720,7 @@
    "$description": "",
    "name": "--info",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 199
+   "line": 200
   },
   "dark/elev-0": {
    "$value": "none",
@@ -744,39 +728,39 @@
    "$description": "",
    "name": "--elev-0",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 200
+   "line": 201
   },
   "dark/elev-1": {
-   "$value": "0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30)",
-   "$type": "shadow",
+   "$value": "none",
+   "$type": "other",
    "$description": "",
    "name": "--elev-1",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 201
+   "line": 202
   },
   "dark/elev-2": {
-   "$value": "0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35)",
-   "$type": "shadow",
+   "$value": "none",
+   "$type": "other",
    "$description": "",
    "name": "--elev-2",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 202
+   "line": 203
   },
   "dark/elev-3": {
-   "$value": "0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45)",
+   "$value": "0 1px 2px rgba(0, 0, 0, 0.40)",
    "$type": "shadow",
    "$description": "",
    "name": "--elev-3",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 203
+   "line": 204
   },
   "dark/elev-4": {
-   "$value": "0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50)",
+   "$value": "0 8px 24px rgba(0, 0, 0, 0.45)",
    "$type": "shadow",
    "$description": "",
    "name": "--elev-4",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 204
+   "line": 205
   },
   "light/z-nav": {
    "$value": "50",
@@ -784,7 +768,7 @@
    "$description": "",
    "name": "--z-nav",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
-   "line": 361
+   "line": 394
   },
   "light/z-mask": {
    "$value": "55",
@@ -792,7 +776,7 @@
    "$description": "",
    "name": "--z-mask",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
-   "line": 362
+   "line": 395
   },
   "light/z-drawer": {
    "$value": "60",
@@ -800,7 +784,7 @@
    "$description": "",
    "name": "--z-drawer",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
-   "line": 363
+   "line": 396
   },
   "light/z-tooltip": {
    "$value": "70",
@@ -808,111 +792,7 @@
    "$description": "",
    "name": "--z-tooltip",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
-   "line": 364
-  },
-  "light/space-0": {
-   "$value": "0px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-0",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 374
-  },
-  "light/space-1": {
-   "$value": "2px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-1",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 374
-  },
-  "light/space-2": {
-   "$value": "4px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-2",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 374
-  },
-  "light/space-3": {
-   "$value": "8px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-3",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 374
-  },
-  "light/space-4": {
-   "$value": "12px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-4",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 375
-  },
-  "light/space-5": {
-   "$value": "20px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-5",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 375
-  },
-  "light/space-6": {
-   "$value": "24px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-6",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 375
-  },
-  "light/space-7": {
-   "$value": "32px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-7",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 375
-  },
-  "light/space-8": {
-   "$value": "40px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-8",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 376
-  },
-  "light/space-9": {
-   "$value": "48px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-9",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 376
-  },
-  "light/space-10": {
-   "$value": "64px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-10",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 376
-  },
-  "light/space-11": {
-   "$value": "80px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-11",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 376
-  },
-  "light/space-12": {
-   "$value": "96px",
-   "$type": "dimension",
-   "$description": "",
-   "name": "--space-12",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 377
+   "line": 397
   },
   "light/gap-tight": {
    "$value": "var(--space-3)",
@@ -920,7 +800,7 @@
    "$description": "",
    "name": "--gap-tight",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 379
+   "line": 408
   },
   "light/gap-base": {
    "$value": "var(--space-5)",
@@ -928,7 +808,7 @@
    "$description": "",
    "name": "--gap-base",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 379
+   "line": 408
   },
   "light/gap-loose": {
    "$value": "var(--space-6)",
@@ -936,7 +816,7 @@
    "$description": "",
    "name": "--gap-loose",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 380
+   "line": 409
   },
   "light/gap-block": {
    "$value": "var(--space-7)",
@@ -944,7 +824,7 @@
    "$description": "",
    "name": "--gap-block",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 380
+   "line": 409
   },
   "light/gap-section": {
    "$value": "var(--space-10)",
@@ -952,7 +832,7 @@
    "$description": "",
    "name": "--gap-section",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 381
+   "line": 410
   },
   "light/gap-hero": {
    "$value": "var(--space-12)",
@@ -960,7 +840,7 @@
    "$description": "",
    "name": "--gap-hero",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 381
+   "line": 410
   },
   "light/container-read": {
    "$value": "760px",
@@ -968,7 +848,7 @@
    "$description": "",
    "name": "--container-read",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 384
+   "line": 413
   },
   "light/container-content": {
    "$value": "1120px",
@@ -976,7 +856,7 @@
    "$description": "",
    "name": "--container-content",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 384
+   "line": 413
   },
   "light/container-wide": {
    "$value": "1320px",
@@ -984,7 +864,7 @@
    "$description": "",
    "name": "--container-wide",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 384
+   "line": 413
   },
   "light/grid-columns": {
    "$value": "12",
@@ -992,7 +872,7 @@
    "$description": "",
    "name": "--grid-columns",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 386
+   "line": 415
   },
   "light/grid-gutter": {
    "$value": "var(--space-6)",
@@ -1000,7 +880,7 @@
    "$description": "",
    "name": "--grid-gutter",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 386
+   "line": 415
   },
   "light/type-display": {
    "$value": "600 clamp(34px, 4.4vw, 56px) / 1.15 var(--font-serif)",
@@ -1008,7 +888,7 @@
    "$description": "",
    "name": "--type-display",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 392
+   "line": 421
   },
   "light/type-title": {
    "$value": "600 24px / 1.30 var(--font-serif)",
@@ -1016,7 +896,7 @@
    "$description": "",
    "name": "--type-title",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 393
+   "line": 422
   },
   "light/type-subtitle": {
    "$value": "500 18px / 1.50 var(--font-serif)",
@@ -1024,7 +904,7 @@
    "$description": "",
    "name": "--type-subtitle",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 394
+   "line": 423
   },
   "light/type-lead": {
    "$value": "400 17px / 1.75 var(--font-sans)",
@@ -1032,7 +912,7 @@
    "$description": "",
    "name": "--type-lead",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 395
+   "line": 424
   },
   "light/type-body": {
    "$value": "400 15px / 1.80 var(--font-sans)",
@@ -1040,7 +920,7 @@
    "$description": "",
    "name": "--type-body",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 396
+   "line": 425
   },
   "light/type-label": {
    "$value": "500 13px / 1.50 var(--font-sans)",
@@ -1048,7 +928,7 @@
    "$description": "",
    "name": "--type-label",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 397
+   "line": 426
   },
   "light/type-caption": {
    "$value": "400 12px / 1.60 var(--font-sans)",
@@ -1056,7 +936,7 @@
    "$description": "",
    "name": "--type-caption",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 398
+   "line": 427
   },
   "light/type-eyebrow": {
    "$value": "500 12px / 1.40 var(--font-mono)",
@@ -1064,7 +944,7 @@
    "$description": "",
    "name": "--type-eyebrow",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 399
+   "line": 428
   },
   "light/type-number": {
    "$value": "500 32px / 1.10 var(--font-mono)",
@@ -1072,23 +952,607 @@
    "$description": "",
    "name": "--type-number",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 400
+   "line": 429
   },
   "light/accent-text": {
-   "$value": "#C7463A",
-   "$type": "color",
-   "$description": "朱砂文字落在 --bg 上（4.50:1）",
+   "$value": "var(--accent-primary)",
+   "$type": "other",
+   "$description": "W1261：朱砂文字色 = accent-primary（同一朱砂·避免第二种难辨红）",
    "name": "--accent-text",
    "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 403
+   "line": 432
   },
-  "dark/accent-text": {
+  "light/surface-canvas": {
+   "$value": "#F5F0E4",
+   "$type": "color",
+   "$description": "页面底·暖宣纸        亮度比 1.0（非信息色）（基准）",
+   "name": "--surface-canvas",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 481
+  },
+  "light/surface-raised": {
+   "$value": "#FCFAF4",
+   "$type": "color",
+   "$description": "卡片面·微亮于底        亮度比 1.09（非信息色）",
+   "name": "--surface-raised",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 482
+  },
+  "light/surface-sunken": {
+   "$value": "#EDE7D6",
+   "$type": "color",
+   "$description": "图表底/槽位·微沉        亮度比 1.09（非信息色）",
+   "name": "--surface-sunken",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 483
+  },
+  "light/surface-inset": {
+   "$value": "#E6DFCC",
+   "$type": "color",
+   "$description": "内嵌代码/次级面        亮度比 1.17（非信息色）",
+   "name": "--surface-inset",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 484
+  },
+  "light/text-primary": {
+   "$value": "#1C1A17",
+   "$type": "color",
+   "$description": "主文本·墨             对背景 15.27:1",
+   "name": "--text-primary",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 487
+  },
+  "light/text-secondary": {
+   "$value": "#4A463F",
+   "$type": "color",
+   "$description": "次级文本              对背景 8.25:1",
+   "name": "--text-secondary",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 488
+  },
+  "light/text-tertiary": {
+   "$value": "#6B665C",
+   "$type": "color",
+   "$description": "三级文本/轴标签        对背景 5.02:1",
+   "name": "--text-tertiary",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 489
+  },
+  "light/text-inverse": {
+   "$value": "#FCFAF4",
+   "$type": "color",
+   "$description": "反白文本  亮度比 1.09（非信息色）",
+   "name": "--text-inverse",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 490
+  },
+  "light/border-subtle": {
+   "$value": "#DCD3BF",
+   "$type": "color",
+   "$description": "卡片边                亮度比 1.31（非信息色）（装饰件·非信息）",
+   "name": "--border-subtle",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 493
+  },
+  "light/border-strong": {
+   "$value": "#B7AC94",
+   "$type": "color",
+   "$description": "输入框/聚焦边          对背景 1.98:1",
+   "name": "--border-strong",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 494
+  },
+  "light/axis-line": {
+   "$value": "#C9BFA8",
+   "$type": "color",
+   "$description": "坐标轴线              对背景 1.61:1",
+   "name": "--axis-line",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 495
+  },
+  "light/edge-visible": {
+   "$value": "#8E7D62",
+   "$type": "color",
+   "$description": "可见描边（图形辅助连线·对背景 3.51:1·达图形门槛 3:1）",
+   "name": "--edge-visible",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 496
+  },
+  "light/grid-line": {
+   "$value": "#E8E1CF",
+   "$type": "color",
+   "$description": "网格线（仅横向·极浅）   亮度比 1.15（非信息色）",
+   "name": "--grid-line",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 497
+  },
+  "light/accent-primary": {
+   "$value": "#C0392B",
+   "$type": "color",
+   "$description": "朱砂·全站唯一彩色强调   对背景 4.78:1",
+   "name": "--accent-primary",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 500
+  },
+  "light/status-neg": {
+   "$value": "#8C2A2A",
+   "$type": "color",
+   "$description": "警示/警示性暗朱红（替代旧 --rebel）  对背景 7.45:1",
+   "name": "--status-neg",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 501
+  },
+  "light/accent-muted": {
+   "$value": "#7E2A1F",
+   "$type": "color",
+   "$description": "强调的悬停/按下态      对背景 8.25:1",
+   "name": "--accent-muted",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 502
+  },
+  "light/series-1": {
+   "$value": "#C0392B",
+   "$type": "color",
+   "$description": "朱砂  对背景 4.78:1",
+   "name": "--series-1",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 505
+  },
+  "light/series-2": {
+   "$value": "#40619E",
+   "$type": "color",
+   "$description": "靛    对背景 5.4:1",
+   "name": "--series-2",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 506
+  },
+  "light/series-3": {
+   "$value": "#8E7D62",
+   "$type": "color",
+   "$description": "赭    对背景 3.51:1",
+   "name": "--series-3",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 507
+  },
+  "light/series-4": {
+   "$value": "#3A473A",
+   "$type": "color",
+   "$description": "苔    对背景 8.62:1",
+   "name": "--series-4",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 508
+  },
+  "light/series-5": {
+   "$value": "#6B665E",
+   "$type": "color",
+   "$description": "淡墨  对背景 5.01:1",
+   "name": "--series-5",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 509
+  },
+  "light/series-6": {
+   "$value": "#472A4C",
+   "$type": "color",
+   "$description": "紫檀  对背景 10.84:1",
+   "name": "--series-6",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 510
+  },
+  "light/series-7": {
+   "$value": "#678A93",
+   "$type": "color",
+   "$description": "青灰  对背景 3.28:1",
+   "name": "--series-7",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 511
+  },
+  "light/series-8": {
+   "$value": "#6D4E65",
+   "$type": "color",
+   "$description": "紫梅  对背景 6.31:1",
+   "name": "--series-8",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 512
+  },
+  "light/font-display": {
+   "$value": "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--font-display",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 515
+  },
+  "light/font-text": {
+   "$value": "'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--font-text",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 516
+  },
+  "light/font-data": {
+   "$value": "'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--font-data",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 517
+  },
+  "light/size-hero": {
+   "$value": "clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem)",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--size-hero",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 520
+  },
+  "light/size-section": {
+   "$value": "clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem)",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--size-section",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 521
+  },
+  "light/size-body": {
+   "$value": "1rem",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--size-body",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 522
+  },
+  "light/size-label": {
+   "$value": "0.8125rem",
+   "$type": "dimension",
+   "$description": "轴标签 13px·对 bg 5.02",
+   "name": "--size-label",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 523
+  },
+  "light/size-micro": {
+   "$value": "0.75rem",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--size-micro",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 524
+  },
+  "light/space-1": {
+   "$value": "2px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-1",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 527
+  },
+  "light/space-2": {
+   "$value": "4px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-2",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 527
+  },
+  "light/space-3": {
+   "$value": "8px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-3",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 527
+  },
+  "light/space-4": {
+   "$value": "12px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-4",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 527
+  },
+  "light/space-5": {
+   "$value": "20px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-5",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 528
+  },
+  "light/space-6": {
+   "$value": "24px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-6",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 528
+  },
+  "light/space-7": {
+   "$value": "32px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-7",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 528
+  },
+  "light/space-8": {
+   "$value": "40px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-8",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 528
+  },
+  "light/space-9": {
+   "$value": "48px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-9",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 529
+  },
+  "light/space-10": {
+   "$value": "64px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-10",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 529
+  },
+  "light/space-11": {
+   "$value": "80px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-11",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 529
+  },
+  "light/space-12": {
+   "$value": "96px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-12",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 529
+  },
+  "light/indent-0": {
+   "$value": "0",
+   "$type": "number",
+   "$description": "",
+   "name": "--indent-0",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 536
+  },
+  "light/indent-1": {
+   "$value": "1rem",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--indent-1",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 536
+  },
+  "light/indent-2": {
+   "$value": "2rem",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--indent-2",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 536
+  },
+  "light/indent-3": {
+   "$value": "3rem",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--indent-3",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 536
+  },
+  "light/radius-sm": {
+   "$value": "2px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--radius-sm",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 539
+  },
+  "light/radius-md": {
+   "$value": "4px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--radius-md",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 539
+  },
+  "light/radius-lg": {
+   "$value": "6px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--radius-lg",
+   "group": "W1260 · 宣纸刻本（Xuan Edition）语义令牌层",
+   "line": 539
+  },
+  "dark/surface-canvas": {
+   "$value": "#1A1714",
+   "$type": "color",
+   "$description": "深墨褐·亮度比 1.0（非信息色）（基准）",
+   "name": "--surface-canvas",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 544
+  },
+  "dark/surface-raised": {
+   "$value": "#23201C",
+   "$type": "color",
+   "$description": "卡片面                亮度比 1.1（非信息色）",
+   "name": "--surface-raised",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 545
+  },
+  "dark/surface-sunken": {
+   "$value": "#16130F",
+   "$type": "color",
+   "$description": "图表底/槽位            亮度比 1.04（非信息色）",
+   "name": "--surface-sunken",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 546
+  },
+  "dark/surface-inset": {
+   "$value": "#2E2A25",
+   "$type": "color",
+   "$description": "内嵌面                亮度比 1.25（非信息色）",
+   "name": "--surface-inset",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 547
+  },
+  "dark/text-primary": {
+   "$value": "#F2EDE2",
+   "$type": "color",
+   "$description": "对背景 15.29:1",
+   "name": "--text-primary",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 549
+  },
+  "dark/text-secondary": {
+   "$value": "#C6BFB0",
+   "$type": "color",
+   "$description": "对背景 9.76:1",
+   "name": "--text-secondary",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 550
+  },
+  "dark/text-tertiary": {
+   "$value": "#9A9384",
+   "$type": "color",
+   "$description": "轴标签·对背景 5.85:1",
+   "name": "--text-tertiary",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 551
+  },
+  "dark/border-subtle": {
+   "$value": "#332E28",
+   "$type": "color",
+   "$description": "卡片边·亮度比 1.33（非信息色）",
+   "name": "--border-subtle",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 553
+  },
+  "dark/border-strong": {
+   "$value": "#4A443B",
+   "$type": "color",
+   "$description": "输入框边·对背景 1.85:1",
+   "name": "--border-strong",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 554
+  },
+  "dark/axis-line": {
+   "$value": "#3A352E",
+   "$type": "color",
+   "$description": "轴线·亮度比 1.47（非信息色）",
+   "name": "--axis-line",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 555
+  },
+  "dark/edge-visible": {
+   "$value": "#6B665E",
+   "$type": "color",
+   "$description": "可见描边（暗底提亮·对背景 3.3:1）",
+   "name": "--edge-visible",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 556
+  },
+  "dark/grid-line": {
+   "$value": "#2E2A25",
+   "$type": "color",
+   "$description": "网格线·亮度比 1.25（非信息色）",
+   "name": "--grid-line",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 557
+  },
+  "dark/accent-primary": {
    "$value": "#E0604F",
    "$type": "color",
-   "$description": "",
-   "name": "--accent-text",
-   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
-   "line": 408
+   "$description": "朱砂提亮·对背景 5.06:1",
+   "name": "--accent-primary",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 559
+  },
+  "dark/status-neg": {
+   "$value": "#D9705F",
+   "$type": "color",
+   "$description": "警示色（暗底提亮）           对背景 5.47:1",
+   "name": "--status-neg",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 560
+  },
+  "dark/accent-muted": {
+   "$value": "#E98070",
+   "$type": "color",
+   "$description": "对背景 6.62:1",
+   "name": "--accent-muted",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 561
+  },
+  "dark/series-1": {
+   "$value": "#E0604F",
+   "$type": "color",
+   "$description": "对背景 5.06:1",
+   "name": "--series-1",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 563
+  },
+  "dark/series-2": {
+   "$value": "#669EAA",
+   "$type": "color",
+   "$description": "对背景 5.98:1",
+   "name": "--series-2",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 564
+  },
+  "dark/series-3": {
+   "$value": "#C1BE8B",
+   "$type": "color",
+   "$description": "对背景 9.35:1",
+   "name": "--series-3",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 565
+  },
+  "dark/series-4": {
+   "$value": "#879B85",
+   "$type": "color",
+   "$description": "对背景 6.0:1",
+   "name": "--series-4",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 566
+  },
+  "dark/series-5": {
+   "$value": "#76749E",
+   "$type": "color",
+   "$description": "对背景 4.05:1",
+   "name": "--series-5",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 567
+  },
+  "dark/series-6": {
+   "$value": "#AF5B5E",
+   "$type": "color",
+   "$description": "对背景 3.81:1",
+   "name": "--series-6",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 568
+  },
+  "dark/series-7": {
+   "$value": "#92B7B0",
+   "$type": "color",
+   "$description": "对背景 8.18:1",
+   "name": "--series-7",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 569
+  },
+  "dark/series-8": {
+   "$value": "#8E7782",
+   "$type": "color",
+   "$description": "对背景 4.34:1",
+   "name": "--series-8",
+   "group": "W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）",
+   "line": 570
   }
  }
 }

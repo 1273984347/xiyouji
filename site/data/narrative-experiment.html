@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-3O+Pt0ThU5Y8TbEpl7klMtHnkXr2owptZGRZ1nxDnRw=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-76B/sHyJ2QFi2cijhwL6YrHEwowIFusuEh+yz5AdHYQ=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事实验 · 桌游与卡牌机制 · 详解西游记</title>
@@ -65,39 +65,39 @@
     color-scheme: light;
 
     
-    --bg: #FAF7F0;            
-    --paper: #FFFFFF;         
-    --paper-warm: #F1EBDD;    
+    --bg: var(--surface-canvas);            
+    --paper: var(--surface-raised);         
+    --paper-warm: var(--surface-sunken);    
     --dark: #221D16;          
     --dark-text: #F2EBDC;     
 
     
-    --ink: #23201A;           
-    --ink-soft: #6B6455;      
-    --ink-faint: #9A9280;     
+    --ink: var(--text-primary);           
+    --ink-soft: var(--text-secondary);      
+    --ink-faint: var(--text-tertiary);     
 
     
-    --accent: #C8463A;        
+    --accent: var(--accent-primary);        
     --accent-soft: #E9B885;   
-    --accent-2: #3A6B8C;      
-    --accent-3: #8A6D3B;      
-    --accent-4: #6B8E5A;      
+    --accent-2: #7FA8C9;   
+    --accent-3: var(--text-secondary);   
+    --accent-4: var(--text-tertiary);   
     --rebel: #8C2A2A;         
 
     
-    --chart-1: #C8463A;       
-    --chart-2: #3A6B8C;       
-    --chart-3: #B38F58;       
-    --chart-4: #6B8E5A;       
-    --chart-5: #D8CFBC;       
-    --chart-6: #8A6D3B;       
+    --chart-1: var(--series-1);       
+    --chart-2: var(--series-2);       
+    --chart-3: var(--series-3);       
+    --chart-4: var(--series-4);       
+    --chart-5: var(--series-5);       
+    --chart-6: var(--series-6);       
 
     
-    --line: #E5DFD0;          
+    --line: var(--border-subtle);          
 
     
-    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
-    --shadow-lift: 0 2px 6px rgba(35, 32, 26, 0.08), 0 8px 24px rgba(35, 32, 26, 0.08);
+    --shadow: none;
+    --shadow-lift: none;
 
     
     
@@ -112,7 +112,8 @@
     
     --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
     --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+    --font-mono: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-code: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;   
 }
 
 :root {
@@ -124,12 +125,12 @@
     --elev-4: 0 8px 18px rgba(35, 32, 26, 0.14), 0 24px 56px rgba(35, 32, 26, 0.16);
 
     
-    --radius-sm: 2px;  --radius-md: 6px;  --radius-lg: 10px;  --radius-pill: 999px;
+    --radius-pill: 999px;
     --border-hairline: 1px solid var(--line);
     --border-accent: 1px solid var(--accent);
 
     
-    --accent-deep: #AF3F34;  
+    --accent-deep: var(--accent-muted);  
     --accent-tint: color-mix(in srgb, var(--accent) 10%, var(--paper));  
     --accent-wash: color-mix(in srgb, var(--accent) 5%, var(--bg));      
     --ink-tint: color-mix(in srgb, var(--ink) 5%, var(--bg));            
@@ -161,7 +162,7 @@ h1, h2, h3, h4, h5,
     background: #221D16;
 }
 .hero::after {
-    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+    background: none;   
 }
 
 ::selection {
@@ -169,36 +170,36 @@ h1, h2, h3, h4, h5,
 }
 
 html[data-theme="dark"] {
-    --bg: #221D16;
-    --ink: #F2EBDC;
-    --ink-soft: #CBBFA9;
-    --ink-faint: #8F8674;
-    --paper: #2B2419;
-    --paper-warm: #33291B;
-    --line: rgba(242, 235, 220, 0.14);
-    --accent: #E46250;
-    --accent-deep: #C94F3F;
+    --bg: var(--surface-canvas);
+    --ink: var(--text-primary);
+    --ink-soft: var(--text-secondary);
+    --ink-faint: var(--text-tertiary);
+    --paper: var(--surface-raised);
+    --paper-warm: var(--surface-sunken);
+    --line: var(--border-subtle);
+    --accent: var(--accent-primary);
+    --accent-deep: var(--accent-muted);
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
     --accent-wash: rgba(224, 96, 79, 0.08);
-    --accent-2: #7FA8C9;
-    --accent-3: #C9A96B;
-    --accent-4: #9DB98A;
-    --chart-1: #E0604F;
-    --chart-2: #7FA8C9;
-    --chart-3: #C8A063;
-    --chart-4: #9DB98A;
-    --chart-5: #F2E8D3;
-    --chart-6: #C9A96B;
+    --accent-2: #7FA8C9;   
+    --accent-3: var(--text-secondary);   
+    --accent-4: var(--text-tertiary);   
+    --chart-1: var(--series-1);
+    --chart-2: var(--series-2);
+    --chart-3: var(--series-3);
+    --chart-4: var(--series-4);
+    --chart-5: var(--series-5);
+    --chart-6: var(--series-6);
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
     --info: #7FA8C9;
     --elev-0: none;
-    --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
-    --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
-    --elev-3: 0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45);
-    --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
+    --elev-1: none;
+    --elev-2: none;
+    --elev-3: 0 1px 2px rgba(0, 0, 0, 0.40);
+    --elev-4: 0 8px 24px rgba(0, 0, 0, 0.45);
     color-scheme: dark;
 }
 
@@ -215,125 +216,157 @@ html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
 
 html[data-theme="dark"] svg path[fill^="#"],
+html[data-theme="dark"] svg path[fill^="rgb("],
+html[data-theme="dark"] svg path[fill^="RGB("],
 html[data-theme="dark"] svg circle[fill^="#"],
-html[data-theme="dark"] svg rect[fill^="#"] { filter: brightness(1.12) saturate(1.05); }
+html[data-theme="dark"] svg circle[fill^="rgb("],
+html[data-theme="dark"] svg circle[fill^="RGB("],
+html[data-theme="dark"] svg rect[fill^="#"],
+html[data-theme="dark"] svg rect[fill^="rgb("],
+html[data-theme="dark"] svg rect[fill^="RGB("],
+html[data-theme="dark"] svg circle[fill^="#"],
+html[data-theme="dark"] svg circle[fill^="rgb("],
+html[data-theme="dark"] svg circle[fill^="RGB("],
+html[data-theme="dark"] svg polygon[fill^="#"],
+html[data-theme="dark"] svg polygon[fill^="rgb("],
+html[data-theme="dark"] svg polygon[fill^="RGB("] {
+    
+    filter: brightness(1.45) saturate(1.05);
+}
 html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
 
 html[data-theme="dark"]:not(:has(#audit-halo)) svg text,
 html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !important; }
 
   
-  html[data-theme="dark"] svg [fill="#3a6b8c" i] { fill: #7d99a9; }  
-  html[data-theme="dark"] svg [fill="#6b3a8c" i] { fill: #a88bb0; }  
-  html[data-theme="dark"] svg [fill="#8c3a6b" i] { fill: #b8879c; }  
-  html[data-theme="dark"] svg [fill="#8c2a2a" i] { fill: #be8880; }  
-  html[data-theme="dark"] svg [fill="#6B6455" i] { fill: #9c9586; }  
-  html[data-theme="dark"] svg [fill="#c8392c" i] { fill: #d87c6e; }  
-  html[data-theme="dark"] svg [fill="#2c5f7c" i] { fill: #7f99a4; }  
-  html[data-theme="dark"] svg [fill="#8b4513" i] { fill: #b78d6a; }  
-  html[data-theme="dark"] svg [fill="#6b4226" i] { fill: #aa907b; }  
-  html[data-theme="dark"] svg [fill="#A0522D" i] { fill: #be8a6c; }  
-  html[data-theme="dark"] svg [fill="#5a4030" i] { fill: #a39383; }  
-  html[data-theme="dark"] svg [fill="#8B4513" i] { fill: #b78d6a; }  
-  html[data-theme="dark"] svg [fill="#a04060" i] { fill: #c18492; }  
-  html[data-theme="dark"] svg [fill="#4a3a6b" i] { fill: #9c91a2; }  
-  html[data-theme="dark"] svg [fill="#2c3e50" i] { fill: #919697; }  
-  html[data-theme="dark"] svg [fill="#5a3828" i] { fill: #a69182; }  
-  html[data-theme="dark"] svg [fill="#d62728" i] { fill: #e17670; }  
-  html[data-theme="dark"] svg [fill="#8c564b" i] { fill: #b28d80; }  
-  html[data-theme="dark"] svg [fill="#a8362e" i] { fill: #c88479; }  
-  html[data-theme="dark"] svg [fill="#7a1f12" i] { fill: #b98b7c; }  
-  html[data-theme="dark"] svg [fill="#6b4a8c" i] { fill: #a48dae; }  
-  html[data-theme="dark"] svg [fill="#2c2416" i] { fill: #9c9486; }  
-  html[data-theme="dark"] svg [fill="#7a3a8c" i] { fill: #af89af; }  
-  html[data-theme="dark"] svg [fill="#23201A" i] { fill: #9a9489; }  
-  html[data-theme="dark"] svg [fill="#7a5230" i] { fill: #bb9070; }  
-  html[data-theme="dark"] svg [fill="#5a4a6b" i] { fill: #9e919d !important; }  
-  html[data-theme="dark"] svg [fill="#8b3a2a" i] { fill: #ba8a7a !important; }  
-  html[data-theme="dark"] svg [fill="#1e3a8a" i] { fill: #8a94b4 !important; }  
-  html[data-theme="dark"] svg [fill="#7a4a2a" i] { fill: #ae9077 !important; }  
-  html[data-theme="dark"] svg [fill="#4a6b8a" i] { fill: #8497a7 !important; }  
-  html[data-theme="dark"] svg [fill="#a83232" i] { fill: #c8837d !important; }  
-  html[data-theme="dark"] svg [fill="#7a4a7a" i] { fill: #ab8ba2 !important; }  
-  html[data-theme="dark"] svg [fill="#9a3a3a" i] { fill: #c08680 !important; }  
-  html[data-theme="dark"] svg [fill="#2a3a5a" i] { fill: #91959d !important; }  
-  html[data-theme="dark"] svg [fill="#3a4a6a" i] { fill: #90969f !important; }  
-  html[data-theme="dark"] svg [fill="#2d6a4f" i] { fill: #7a9d86 !important; }  
-  html[data-theme="dark"] svg [fill="#8B0000" i] { fill: #c5857c !important; }  
-  html[data-theme="dark"] svg [fill="#A52A2A" i] { fill: #c9837c !important; }  
-  html[data-theme="dark"] svg [fill="#B22222" i] { fill: #d08079 !important; }  
-  html[data-theme="dark"] svg [fill="#800080" i] { fill: #bf81b3 !important; }  
-  html[data-theme="dark"] svg [fill="#696969" i] { fill: #97958f !important; }  
-  html[data-theme="dark"] svg [fill="#8c4a6b" i] { fill: #b48a98 !important; }  
-  html[data-theme="dark"] svg [fill="#4a6b8c" i] { fill: #8497a8 !important; }  
-  html[data-theme="dark"] svg [fill="#a8542a" i] { fill: #c18867 !important; }  
-  html[data-theme="dark"] svg [fill="#8a5a8a" i] { fill: #ad8aa5 !important; }  
-  html[data-theme="dark"] svg [fill="#1a1410" i] { fill: #9b958a !important; }  
-  html[data-theme="dark"] svg [fill="#3a2820" i] { fill: #9f9388 !important; }  
-  html[data-theme="dark"] svg [fill="#a85a3a" i] { fill: #c0886e !important; }  
-  html[data-theme="dark"] svg [fill="#a8362f" i] { fill: #c88479 !important; }  
-  html[data-theme="dark"] svg [fill="#9c5a4a" i] { fill: #b98a7b !important; }  
-  html[data-theme="dark"] svg [fill="#8c5e4d" i] { fill: #af8f7e !important; }  
-  html[data-theme="dark"] svg [fill="#7a4a8c" i] { fill: #aa8bac !important; }  
-  html[data-theme="dark"] svg [fill="#9c3a2e" i] { fill: #c18679 !important; }  
-  html[data-theme="dark"] svg [fill="#2c5573" i] { fill: #8498a2 !important; }  
-  html[data-theme="dark"] svg [fill="#6b4030" i] { fill: #aa8f80 !important; }  
-  html[data-theme="dark"] svg [fill="#4a6a2a" i] { fill: #8a9c6e !important; }  
-  html[data-theme="dark"] svg [fill="#8a3a3a" i] { fill: #b98983 !important; }  
-  html[data-theme="dark"] svg [fill="#a8556a" i] { fill: #c0858f !important; }  
-  html[data-theme="dark"] svg [fill="#2a1a10" i] { fill: #9e9387 !important; }  
-  html[data-theme="dark"] svg [fill="#7a2818" i] { fill: #b78c7c !important; }  
-  html[data-theme="dark"] svg [fill="#8b0000" i] { fill: #c5857c !important; }  
-  html[data-theme="dark"] svg [fill="rgb(190, 24, 39)" i] { fill: #d67b7c !important; }  
-  html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }  
-  html[data-theme="dark"] svg [fill="rgb(165, 0, 38)" i] { fill: #ce7e88 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(175, 2, 37)" i] { fill: #d27c85 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(211, 17, 33)" i] { fill: #e17576 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(139, 0, 0)" i] { fill: #c5857c !important; }  
-  html[data-theme="dark"] svg [fill="rgb(170, 35, 29)" i] { fill: #cc8277 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(139, 69, 19)" i] { fill: #b78d6a !important; }  
-  html[data-theme="dark"] svg [fill="rgb(170, 56, 50)" i] { fill: #c8837a !important; }  
-  html[data-theme="dark"] svg [fill="rgb(92, 0, 0)" i] { fill: #b58c83 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(217, 22, 32)" i] { fill: #e47473 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(140, 26, 16)" i] { fill: #c1867a !important; }  
-  html[data-theme="dark"] svg [fill="rgb(180, 3, 37)" i] { fill: #d47c84 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(140, 42, 42)" i] { fill: #be8880 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(0, 104, 55)" i] { fill: #69a17f !important; }  
-  html[data-theme="dark"] svg [fill="rgb(140, 58, 10)" i] { fill: #bb8b6a !important; }  
-  html[data-theme="dark"] svg [fill="rgb(160, 91, 38)" i] { fill: #bb8b63 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(155, 82, 31)" i] { fill: #bc8b66 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(161, 51, 38)" i] { fill: #c58578 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(122, 31, 18)" i] { fill: #b98b7c !important; }  
-  html[data-theme="dark"] svg [fill="rgb(175, 62, 54)" i] { fill: #ca8278 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(157, 87, 35)" i] { fill: #bb8b65 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(200,57,44)" i] { fill: #d87c6e !important; }  
-  html[data-theme="dark"] svg [fill="rgb(44,95,124)" i] { fill: #7f99a4 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(142, 61, 12)" i] { fill: #bb8b69 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(158, 51, 47)" i] { fill: #c4857d !important; }  
-  html[data-theme="dark"] svg [fill="rgb(150, 42, 37)" i] { fill: #c2867d !important; }  
-  html[data-theme="dark"] svg [fill="rgb(147, 40, 36)" i] { fill: #c1877d !important; }  
-  html[data-theme="dark"] svg [fill="rgb(145, 66, 17)" i] { fill: #bb8b68 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(150, 74, 24)" i] { fill: #bb8a67 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(207, 44, 42)" i] { fill: #dd7971 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(65,110,135)" i] { fill: #7e99a5 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(152, 79, 28)" i] { fill: #bb8c66 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(159, 90, 38)" i] { fill: #bb8c64 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(58, 107, 140)" i] { fill: #7d99a9 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(91, 107, 113)" i] { fill: #8e9795 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(122, 26, 26)" i] { fill: #ba8a81 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(168, 52, 45)" i] { fill: #c88479 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(157, 46, 40)" i] { fill: #c4857b !important; }  
-  html[data-theme="dark"] svg [fill="rgb(161, 48, 42)" i] { fill: #c6857a !important; }  
-  html[data-theme="dark"] svg [fill="rgb(165, 50, 44)" i] { fill: #c7837a !important; }  
-  html[data-theme="dark"] svg [fill="rgb(173, 55, 47)" i] { fill: #ca8378 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(200, 36, 40)" i] { fill: #da7975 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(191, 26, 39)" i] { fill: #d77a7b !important; }  
-  html[data-theme="dark"] svg [fill="rgb(182, 16, 39)" i] { fill: #d47c81 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(201, 37, 41)" i] { fill: #da7975 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(195, 31, 40)" i] { fill: #d87b79 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(208, 45, 42)" i] { fill: #dd7871 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(205, 41, 41)" i] { fill: #dc7872 !important; }  
-  html[data-theme="dark"] svg [fill="rgb(199, 35, 40)" i] { fill: #da7976 !important; }  
+  html[data-theme="dark"] svg [fill="#40619E"], html[data-theme="dark"] svg [fill="#40619e"] {  fill: #4770BC ; }   
+  html[data-theme="dark"] svg [fill="#6b3a8c"], html[data-theme="dark"] svg [fill="#6B3A8C"] {  fill: #a88bb0; }   
+  html[data-theme="dark"] svg [fill="#8c3a6b"], html[data-theme="dark"] svg [fill="#8C3A6B"] {  fill: #b8879c; }   
+  html[data-theme="dark"] svg [fill="#8c2a2a"], html[data-theme="dark"] svg [fill="#8C2A2A"] {  fill: #be8880; }   
+  html[data-theme="dark"] svg [fill="#6B6455"], html[data-theme="dark"] svg [fill="#6b6455"] {  fill: #9c9586; }   
+  html[data-theme="dark"] svg [fill="#c8392c"], html[data-theme="dark"] svg [fill="#C8392C"] {  fill: #d87c6e; }   
+  html[data-theme="dark"] svg [fill="#2c5f7c"], html[data-theme="dark"] svg [fill="#2C5F7C"] {  fill: #7f99a4; }   
+  html[data-theme="dark"] svg [fill="#8b4513"], html[data-theme="dark"] svg [fill="#8B4513"] {  fill: #b78d6a; }   
+  html[data-theme="dark"] svg [fill="#6b4226"], html[data-theme="dark"] svg [fill="#6B4226"] {  fill: #aa907b; }   
+  html[data-theme="dark"] svg [fill="#A0522D"], html[data-theme="dark"] svg [fill="#a0522d"] {  fill: #be8a6c; }   
+  html[data-theme="dark"] svg [fill="#5a4030"], html[data-theme="dark"] svg [fill="#5A4030"] {  fill: #a39383; }   
+  html[data-theme="dark"] svg [fill="#8B4513"], html[data-theme="dark"] svg [fill="#8b4513"] {  fill: #b78d6a; }   
+  html[data-theme="dark"] svg [fill="#a04060"], html[data-theme="dark"] svg [fill="#A04060"] {  fill: #c18492; }   
+  html[data-theme="dark"] svg [fill="#4a3a6b"], html[data-theme="dark"] svg [fill="#4A3A6B"] {  fill: #9c91a2; }   
+  html[data-theme="dark"] svg [fill="#2c3e50"], html[data-theme="dark"] svg [fill="#2C3E50"] {  fill: #919697; }   
+  html[data-theme="dark"] svg [fill="#5a3828"], html[data-theme="dark"] svg [fill="#5A3828"] {  fill: #a69182; }   
+  html[data-theme="dark"] svg [fill="#d62728"], html[data-theme="dark"] svg [fill="#D62728"] {  fill: #e17670; }   
+  html[data-theme="dark"] svg [fill="#8c564b"], html[data-theme="dark"] svg [fill="#8C564B"] {  fill: #b28d80; }   
+  html[data-theme="dark"] svg [fill="#a8362e"], html[data-theme="dark"] svg [fill="#A8362E"] {  fill: #c88479; }   
+  html[data-theme="dark"] svg [fill="#7a1f12"], html[data-theme="dark"] svg [fill="#7A1F12"] {  fill: #b98b7c; }   
+  html[data-theme="dark"] svg [fill="#6b4a8c"], html[data-theme="dark"] svg [fill="#6B4A8C"] {  fill: #a48dae; }   
+  html[data-theme="dark"] svg [fill="#2c2416"], html[data-theme="dark"] svg [fill="#2C2416"] {  fill: #9c9486; }   
+  html[data-theme="dark"] svg [fill="#7a3a8c"], html[data-theme="dark"] svg [fill="#7A3A8C"] {  fill: #af89af; }   
+  html[data-theme="dark"] svg [fill="#23201A"], html[data-theme="dark"] svg [fill="#23201a"] {  fill: #9a9489; }   
+  html[data-theme="dark"] svg [fill="#7a5230"], html[data-theme="dark"] svg [fill="#7A5230"] {  fill: #bb9070; }   
+  html[data-theme="dark"] svg [fill="#5a4a6b"], html[data-theme="dark"] svg [fill="#5A4A6B"] {  fill: #9e919d !important; }   
+  html[data-theme="dark"] svg [fill="#8b3a2a"], html[data-theme="dark"] svg [fill="#8B3A2A"] {  fill: #ba8a7a !important; }   
+  html[data-theme="dark"] svg [fill="#1e3a8a"], html[data-theme="dark"] svg [fill="#1E3A8A"] {  fill: #8a94b4 !important; }   
+  html[data-theme="dark"] svg [fill="#7a4a2a"], html[data-theme="dark"] svg [fill="#7A4A2A"] {  fill: #ae9077 !important; }   
+  html[data-theme="dark"] svg [fill="#4a6b8a"], html[data-theme="dark"] svg [fill="#4A6B8A"] {  fill: #8497a7 !important; }   
+  html[data-theme="dark"] svg [fill="#a83232"], html[data-theme="dark"] svg [fill="#A83232"] {  fill: #c8837d !important; }   
+  html[data-theme="dark"] svg [fill="#7a4a7a"], html[data-theme="dark"] svg [fill="#7A4A7A"] {  fill: #ab8ba2 !important; }   
+  html[data-theme="dark"] svg [fill="#9a3a3a"], html[data-theme="dark"] svg [fill="#9A3A3A"] {  fill: #c08680 !important; }   
+  html[data-theme="dark"] svg [fill="#2a3a5a"], html[data-theme="dark"] svg [fill="#2A3A5A"] {  fill: #91959d !important; }   
+  html[data-theme="dark"] svg [fill="#3a4a6a"], html[data-theme="dark"] svg [fill="#3A4A6A"] {  fill: #90969f !important; }   
+  html[data-theme="dark"] svg [fill="#2d6a4f"], html[data-theme="dark"] svg [fill="#2D6A4F"] {  fill: #7a9d86 !important; }   
+  html[data-theme="dark"] svg [fill="#8B0000"], html[data-theme="dark"] svg [fill="#8b0000"] {  fill: #c5857c !important; }   
+  html[data-theme="dark"] svg [fill="#A52A2A"], html[data-theme="dark"] svg [fill="#a52a2a"] {  fill: #c9837c !important; }   
+  html[data-theme="dark"] svg [fill="#B22222"], html[data-theme="dark"] svg [fill="#b22222"] {  fill: #d08079 !important; }   
+  html[data-theme="dark"] svg [fill="#800080"] {  fill: #bf81b3 !important; }   
+  html[data-theme="dark"] svg [fill="#696969"] {  fill: #97958f !important; }   
+  html[data-theme="dark"] svg [fill="#8c4a6b"], html[data-theme="dark"] svg [fill="#8C4A6B"] {  fill: #b48a98 !important; }   
+  html[data-theme="dark"] svg [fill="#4a6b8c"], html[data-theme="dark"] svg [fill="#4A6B8C"] {  fill: #8497a8 !important; }   
+  html[data-theme="dark"] svg [fill="#a8542a"], html[data-theme="dark"] svg [fill="#A8542A"] {  fill: #c18867 !important; }   
+  html[data-theme="dark"] svg [fill="#8a5a8a"], html[data-theme="dark"] svg [fill="#8A5A8A"] {  fill: #ad8aa5 !important; }   
+  html[data-theme="dark"] svg [fill="#1a1410"], html[data-theme="dark"] svg [fill="#1A1410"] {  fill: #9b958a !important; }   
+  html[data-theme="dark"] svg [fill="#3a2820"], html[data-theme="dark"] svg [fill="#3A2820"] {  fill: #9f9388 !important; }   
+  html[data-theme="dark"] svg [fill="#a85a3a"], html[data-theme="dark"] svg [fill="#A85A3A"] {  fill: #c0886e !important; }   
+  html[data-theme="dark"] svg [fill="#a8362f"], html[data-theme="dark"] svg [fill="#A8362F"] {  fill: #c88479 !important; }   
+  html[data-theme="dark"] svg [fill="#9c5a4a"], html[data-theme="dark"] svg [fill="#9C5A4A"] {  fill: #b98a7b !important; }   
+  html[data-theme="dark"] svg [fill="#8c5e4d"], html[data-theme="dark"] svg [fill="#8C5E4D"] {  fill: #af8f7e !important; }   
+  html[data-theme="dark"] svg [fill="#6D4E65"], html[data-theme="dark"] svg [fill="#6d4e65"] {  fill: #AF7495 ; }   
+  
+html[data-theme="dark"] svg [fill="rgb(192,57,43)"] { fill: var(--series-1) !important; }  
+html[data-theme="dark"] svg [fill="rgb(192, 57, 43)"] { fill: var(--series-1) !important; }  
+html[data-theme="dark"] svg [fill="rgb(64,97,158)"] { fill: var(--series-2) !important; }  
+html[data-theme="dark"] svg [fill="rgb(64, 97, 158)"] { fill: var(--series-2) !important; }  
+html[data-theme="dark"] svg [fill="rgb(142,125,98)"] { fill: var(--series-3) !important; }  
+html[data-theme="dark"] svg [fill="rgb(142, 125, 98)"] { fill: var(--series-3) !important; }  
+html[data-theme="dark"] svg [fill="rgb(58,71,58)"] { fill: var(--series-4) !important; }  
+html[data-theme="dark"] svg [fill="rgb(58, 71, 58)"] { fill: var(--series-4) !important; }  
+html[data-theme="dark"] svg [fill="rgb(107,102,94)"] { fill: var(--series-5) !important; }  
+html[data-theme="dark"] svg [fill="rgb(107, 102, 94)"] { fill: var(--series-5) !important; }  
+html[data-theme="dark"] svg [fill="rgb(71,42,76)"] { fill: var(--series-6) !important; }  
+html[data-theme="dark"] svg [fill="rgb(71, 42, 76)"] { fill: var(--series-6) !important; }  
+html[data-theme="dark"] svg [fill="rgb(103,138,147)"] { fill: var(--series-7) !important; }  
+html[data-theme="dark"] svg [fill="rgb(103, 138, 147)"] { fill: var(--series-7) !important; }  
+html[data-theme="dark"] svg [fill="rgb(109,78,101)"] { fill: var(--series-8) !important; }  
+html[data-theme="dark"] svg [fill="rgb(109, 78, 101)"] { fill: var(--series-8) !important; }  
+  html[data-theme="dark"] svg [fill="#9c3a2e"], html[data-theme="dark"] svg [fill="#9C3A2E"] {  fill: #c18679 !important; }   
+  html[data-theme="dark"] svg [fill="#2c5573"], html[data-theme="dark"] svg [fill="#2C5573"] {  fill: #8498a2 !important; }   
+  html[data-theme="dark"] svg [fill="#6b4030"], html[data-theme="dark"] svg [fill="#6B4030"] {  fill: #aa8f80 !important; }   
+  html[data-theme="dark"] svg [fill="#4a6a2a"], html[data-theme="dark"] svg [fill="#4A6A2A"] {  fill: #8a9c6e !important; }   
+  html[data-theme="dark"] svg [fill="#8a3a3a"], html[data-theme="dark"] svg [fill="#8A3A3A"] {  fill: #b98983 !important; }   
+  html[data-theme="dark"] svg [fill="#a8556a"], html[data-theme="dark"] svg [fill="#A8556A"] {  fill: #c0858f !important; }   
+  html[data-theme="dark"] svg [fill="#2a1a10"], html[data-theme="dark"] svg [fill="#2A1A10"] {  fill: #9e9387 !important; }   
+  html[data-theme="dark"] svg [fill="#7a2818"], html[data-theme="dark"] svg [fill="#7A2818"] {  fill: #b78c7c !important; }   
+  html[data-theme="dark"] svg [fill="#8b0000"], html[data-theme="dark"] svg [fill="#8B0000"] {  fill: #c5857c !important; }   
+  html[data-theme="dark"] svg [fill="rgb(190, 24, 39)"], html[data-theme="dark"] svg [fill="RGB(190, 24, 39)"] {  fill: #d67b7c !important; }   
+  html[data-theme="dark"] svg [fill="rgb(128, 0, 38)"], html[data-theme="dark"] svg [fill="RGB(128, 0, 38)"] {  fill: #c1858d !important; }   
+  html[data-theme="dark"] svg [fill="rgb(165, 0, 38)"], html[data-theme="dark"] svg [fill="RGB(165, 0, 38)"] {  fill: #ce7e88 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(175, 2, 37)"], html[data-theme="dark"] svg [fill="RGB(175, 2, 37)"] {  fill: #d27c85 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(211, 17, 33)"], html[data-theme="dark"] svg [fill="RGB(211, 17, 33)"] {  fill: #e17576 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(139, 0, 0)"], html[data-theme="dark"] svg [fill="RGB(139, 0, 0)"] {  fill: #c5857c !important; }   
+  html[data-theme="dark"] svg [fill="rgb(170, 35, 29)"], html[data-theme="dark"] svg [fill="RGB(170, 35, 29)"] {  fill: #cc8277 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(139, 69, 19)"], html[data-theme="dark"] svg [fill="RGB(139, 69, 19)"] {  fill: #b78d6a !important; }   
+  html[data-theme="dark"] svg [fill="rgb(170, 56, 50)"], html[data-theme="dark"] svg [fill="RGB(170, 56, 50)"] {  fill: #c8837a !important; }   
+  html[data-theme="dark"] svg [fill="rgb(92, 0, 0)"], html[data-theme="dark"] svg [fill="RGB(92, 0, 0)"] {  fill: #b58c83 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(217, 22, 32)"], html[data-theme="dark"] svg [fill="RGB(217, 22, 32)"] {  fill: #e47473 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(140, 26, 16)"], html[data-theme="dark"] svg [fill="RGB(140, 26, 16)"] {  fill: #c1867a !important; }   
+  html[data-theme="dark"] svg [fill="rgb(180, 3, 37)"], html[data-theme="dark"] svg [fill="RGB(180, 3, 37)"] {  fill: #d47c84 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(140, 42, 42)"], html[data-theme="dark"] svg [fill="RGB(140, 42, 42)"] {  fill: #be8880 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(0, 104, 55)"], html[data-theme="dark"] svg [fill="RGB(0, 104, 55)"] {  fill: #69a17f !important; }   
+  html[data-theme="dark"] svg [fill="rgb(140, 58, 10)"], html[data-theme="dark"] svg [fill="RGB(140, 58, 10)"] {  fill: #bb8b6a !important; }   
+  html[data-theme="dark"] svg [fill="rgb(160, 91, 38)"], html[data-theme="dark"] svg [fill="RGB(160, 91, 38)"] {  fill: #bb8b63 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(155, 82, 31)"], html[data-theme="dark"] svg [fill="RGB(155, 82, 31)"] {  fill: #bc8b66 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(161, 51, 38)"], html[data-theme="dark"] svg [fill="RGB(161, 51, 38)"] {  fill: #c58578 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(122, 31, 18)"], html[data-theme="dark"] svg [fill="RGB(122, 31, 18)"] {  fill: #b98b7c !important; }   
+  html[data-theme="dark"] svg [fill="rgb(175, 62, 54)"], html[data-theme="dark"] svg [fill="RGB(175, 62, 54)"] {  fill: #ca8278 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(157, 87, 35)"], html[data-theme="dark"] svg [fill="RGB(157, 87, 35)"] {  fill: #bb8b65 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(200,57,44)"], html[data-theme="dark"] svg [fill="RGB(200,57,44)"] {  fill: #d87c6e !important; }   
+  html[data-theme="dark"] svg [fill="rgb(44,95,124)"], html[data-theme="dark"] svg [fill="RGB(44,95,124)"] {  fill: #7f99a4 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(142, 61, 12)"], html[data-theme="dark"] svg [fill="RGB(142, 61, 12)"] {  fill: #bb8b69 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(158, 51, 47)"], html[data-theme="dark"] svg [fill="RGB(158, 51, 47)"] {  fill: #c4857d !important; }   
+  html[data-theme="dark"] svg [fill="rgb(150, 42, 37)"], html[data-theme="dark"] svg [fill="RGB(150, 42, 37)"] {  fill: #c2867d !important; }   
+  html[data-theme="dark"] svg [fill="rgb(147, 40, 36)"], html[data-theme="dark"] svg [fill="RGB(147, 40, 36)"] {  fill: #c1877d !important; }   
+  html[data-theme="dark"] svg [fill="rgb(145, 66, 17)"], html[data-theme="dark"] svg [fill="RGB(145, 66, 17)"] {  fill: #bb8b68 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(150, 74, 24)"], html[data-theme="dark"] svg [fill="RGB(150, 74, 24)"] {  fill: #bb8a67 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(207, 44, 42)"], html[data-theme="dark"] svg [fill="RGB(207, 44, 42)"] {  fill: #dd7971 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(65,110,135)"], html[data-theme="dark"] svg [fill="RGB(65,110,135)"] {  fill: #7e99a5 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(152, 79, 28)"], html[data-theme="dark"] svg [fill="RGB(152, 79, 28)"] {  fill: #bb8c66 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(159, 90, 38)"], html[data-theme="dark"] svg [fill="RGB(159, 90, 38)"] {  fill: #bb8c64 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(58, 107, 140)"], html[data-theme="dark"] svg [fill="RGB(58, 107, 140)"] {  fill: #7d99a9 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(91, 107, 113)"], html[data-theme="dark"] svg [fill="RGB(91, 107, 113)"] {  fill: #8e9795 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(122, 26, 26)"], html[data-theme="dark"] svg [fill="RGB(122, 26, 26)"] {  fill: #ba8a81 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(168, 52, 45)"], html[data-theme="dark"] svg [fill="RGB(168, 52, 45)"] {  fill: #c88479 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(157, 46, 40)"], html[data-theme="dark"] svg [fill="RGB(157, 46, 40)"] {  fill: #c4857b !important; }   
+  html[data-theme="dark"] svg [fill="rgb(161, 48, 42)"], html[data-theme="dark"] svg [fill="RGB(161, 48, 42)"] {  fill: #c6857a !important; }   
+  html[data-theme="dark"] svg [fill="rgb(165, 50, 44)"], html[data-theme="dark"] svg [fill="RGB(165, 50, 44)"] {  fill: #c7837a !important; }   
+  html[data-theme="dark"] svg [fill="rgb(173, 55, 47)"], html[data-theme="dark"] svg [fill="RGB(173, 55, 47)"] {  fill: #ca8378 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(200, 36, 40)"], html[data-theme="dark"] svg [fill="RGB(200, 36, 40)"] {  fill: #da7975 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(191, 26, 39)"], html[data-theme="dark"] svg [fill="RGB(191, 26, 39)"] {  fill: #d77a7b !important; }   
+  html[data-theme="dark"] svg [fill="rgb(182, 16, 39)"], html[data-theme="dark"] svg [fill="RGB(182, 16, 39)"] {  fill: #d47c81 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(201, 37, 41)"], html[data-theme="dark"] svg [fill="RGB(201, 37, 41)"] {  fill: #da7975 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(195, 31, 40)"], html[data-theme="dark"] svg [fill="RGB(195, 31, 40)"] {  fill: #d87b79 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(208, 45, 42)"], html[data-theme="dark"] svg [fill="RGB(208, 45, 42)"] {  fill: #dd7871 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(205, 41, 41)"], html[data-theme="dark"] svg [fill="RGB(205, 41, 41)"] {  fill: #dc7872 !important; }   
+  html[data-theme="dark"] svg [fill="rgb(199, 35, 40)"], html[data-theme="dark"] svg [fill="RGB(199, 35, 40)"] {  fill: #da7976 !important; }   
 
 :root {
   --z-nav: 50;
@@ -344,10 +377,6 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
 
 :root {
     
-    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
-    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
-    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
-    --space-12: 96px;
     
     --gap-tight: var(--space-3);   --gap-base: var(--space-5);
     --gap-loose: var(--space-6);   --gap-block: var(--space-7);
@@ -370,11 +399,130 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
     --type-number:   500 32px / 1.10 var(--font-mono);
 
     
-    --accent-text: #C7463A;          
+    --accent-text: var(--accent-primary);   
+}
+
+html[data-theme="dark"] svg [fill="#C0392B"],
+html[data-theme="dark"] svg [fill="#c0392b"] {
+    fill: var(--series-1) !important;
+}
+html[data-theme="dark"] svg [fill="#40619E"],
+html[data-theme="dark"] svg [fill="#40619e"] {
+    fill: var(--series-2) !important;
+}
+html[data-theme="dark"] svg [fill="#8E7D62"],
+html[data-theme="dark"] svg [fill="#8e7d62"] {
+    fill: var(--series-3) !important;
+}
+html[data-theme="dark"] svg [fill="#3A473A"],
+html[data-theme="dark"] svg [fill="#3a473a"] {
+    fill: var(--series-4) !important;
+}
+html[data-theme="dark"] svg [fill="#6B665E"],
+html[data-theme="dark"] svg [fill="#6b665e"] {
+    fill: var(--series-5) !important;
+}
+html[data-theme="dark"] svg [fill="#472A4C"],
+html[data-theme="dark"] svg [fill="#472a4c"] {
+    fill: var(--series-6) !important;
+}
+html[data-theme="dark"] svg [fill="#678A93"],
+html[data-theme="dark"] svg [fill="#678a93"] {
+    fill: var(--series-7) !important;
+}
+html[data-theme="dark"] svg [fill="#6D4E65"],
+html[data-theme="dark"] svg [fill="#6d4e65"] {
+    fill: var(--series-8) !important;
+}
+
+:root {
+    
+    --surface-canvas: #F5F0E4;   
+    --surface-raised: #FCFAF4;   
+    --surface-sunken: #EDE7D6;   
+    --surface-inset:  #E6DFCC;   
+
+    
+    --text-primary:   #1C1A17;   
+    --text-secondary: #4A463F;   
+    --text-tertiary:  #6B665C;   
+    --text-inverse:   #FCFAF4;   
+
+    
+    --border-subtle:  #DCD3BF;   
+    --border-strong:  #B7AC94;   
+    --axis-line:      #C9BFA8;   
+    --edge-visible:   #8E7D62;   
+    --grid-line:      #E8E1CF;   
+
+    
+    --accent-primary: #C0392B;   
+    --status-neg: #8C2A2A;     
+    --accent-muted:   #7E2A1F;   
+
+    
+    --series-1: #C0392B;   
+    --series-2: #40619E;   
+    --series-3: #8E7D62;   
+    --series-4: #3A473A;   
+    --series-5: #6B665E;   
+    --series-6: #472A4C;   
+    --series-7: #678A93;   
+    --series-8: #6D4E65;   
+
+    
+    --font-display: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-text:    'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-data:    'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+    
+    --size-hero:    clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);
+    --size-section: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+    --size-body:    1rem;
+    --size-label:   0.8125rem;   
+    --size-micro:   0.75rem;
+
+    
+    --space-1: 2px; --space-2: 4px; --space-3: 8px;  --space-4: 12px;
+    --space-5: 20px;   --space-6: 24px;   --space-7: 32px;   --space-8: 40px;
+    --space-9: 48px;   --space-10: 64px;  --space-11: 80px;  --space-12: 96px;
+    
+
+    
+    --indent-0: 0; --indent-1: 1rem; --indent-2: 2rem; --indent-3: 3rem;
+
+    
+    --radius-sm: 2px; --radius-md: 4px; --radius-lg: 6px;
 }
 
 html[data-theme="dark"] {
-    --accent-text: #E0604F;
+    --surface-canvas: #1A1714;   
+    --surface-raised: #23201C;   
+    --surface-sunken: #16130F;   
+    --surface-inset:  #2E2A25;   
+
+    --text-primary:   #F2EDE2;   
+    --text-secondary: #C6BFB0;   
+    --text-tertiary:  #9A9384;   
+
+    --border-subtle:  #332E28;   
+    --border-strong:  #4A443B;   
+    --axis-line:      #3A352E;   
+    --edge-visible:   #6B665E;   
+    --grid-line:      #2E2A25;   
+
+    --accent-primary: #E0604F;   
+    --status-neg: #D9705F;     
+    --accent-muted:   #E98070;   
+
+    --series-1: #E0604F;   
+    --series-2: #669EAA;   
+    --series-3: #C1BE8B;   
+    --series-4: #879B85;   
+    --series-5: #76749E;   
+    --series-6: #AF5B5E;   
+    --series-7: #92B7B0;   
+    --series-8: #8E7782;   
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -606,7 +754,8 @@ html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14);
     background: var(--paper); font-size: 13px;
 }
 .data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
-.data-status-badge .ds-label { font-weight: 600; color: var(--info); }
+
+.data-status-badge .ds-label { font-weight: 600; color: var(--text-secondary); }
 .data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
 .data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
 .data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
@@ -653,9 +802,10 @@ html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14);
 .hero .breadcrumb {
     margin-bottom: 20px;
     font-size: 12px;
-    color: rgba(242, 235, 220, 0.45);
+    
+    color: rgba(242, 235, 220, 0.58);
 }
-.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.75); }
 .hero .breadcrumb a:hover { color: var(--accent-soft); }
 
 .card {
@@ -831,7 +981,7 @@ tr:last-child td { border-bottom: none; }
 tbody tr td { transition: background-color var(--dur-fast) var(--ease-out-quart); }
 tbody tr:hover td { background: color-mix(in srgb, var(--paper-warm) 60%, transparent); }
 tbody tr:hover td:first-child { box-shadow: inset 2px 0 0 0 var(--accent); }
-tbody tr:hover td.num { color: var(--accent-3); }
+tbody tr:hover td.num { color: var(--text-secondary); }
 td.num, th.num {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
@@ -860,8 +1010,8 @@ td.num, th.num {
     border: 1px solid;
 }
 .badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
-.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
-.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-blue { color: var(--accent-primary); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--text-secondary); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
 .badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
 
 .link-ink {
@@ -1067,7 +1217,7 @@ td.num, th.num {
 .index-row .meta {
     font-family: var(--font-mono);
     font-size: 12px;
-    color: var(--accent-2);
+    color: var(--accent-primary);
     text-align: right;
     white-space: nowrap;
 }
@@ -1141,7 +1291,7 @@ td.num, th.num {
 
 .ask-chip {
     font-size: 13px;
-    color: var(--accent-2);
+    color: var(--accent-primary);
     cursor: pointer;
     border: 1px solid var(--line);
     border-radius: var(--radius-pill);
@@ -1181,14 +1331,14 @@ td.num, th.num {
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     padding: 1px 5px;
-    font-family: var(--font-mono);
+    font-family: var(--font-code);
     font-size: 11px;
 }
 .cite-block .cite-details { margin-top: 6px; }
 
 .cite-details summary {
     cursor: pointer;
-    color: var(--accent-2);
+    color: var(--accent-primary);
     font-weight: 500;
     user-select: none;
     display: flex;
@@ -1199,7 +1349,7 @@ td.num, th.num {
 .cite-details summary::before {
     content: "\25B8";
     flex: 0 0 auto;
-    color: var(--accent-2);
+    color: var(--accent-primary);
     transition: transform var(--dur-fast) var(--ease-out-quart);
 }
 .cite-details[open] summary::before { transform: rotate(90deg); }
@@ -1225,7 +1375,7 @@ td.num, th.num {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
+    font-family: var(--font-code);
     font-size: 11px;
     white-space: pre-wrap;
     word-break: break-all;
@@ -1240,7 +1390,7 @@ td.num, th.num {
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     background: var(--paper);
-    color: var(--accent-2);
+    color: var(--accent-primary);
     font-size: 11px;
     cursor: pointer;
     transition: background var(--dur-fast) var(--ease-out-quart), color var(--dur-fast) var(--ease-out-quart);
@@ -1265,7 +1415,7 @@ td.num, th.num {
 .cite-block a[href$=".json"] {
     display: inline-block;
     margin-top: 6px;
-    color: var(--accent-2);
+    color: var(--accent-primary);
 }
 
 .js-reveal .reveal-in {
@@ -1481,6 +1631,375 @@ html[data-theme="dark"] .viz-illustration {
 html[data-theme="dark"] .chapter-plate {
     display: none;
 }
+
+.page-wrap, .container {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(16px, 4vw, 40px);
+    padding-right: clamp(16px, 4vw, 40px);
+}
+
+.section {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+}
+.section-title {
+    font-family: var(--font-display);
+    font-size: var(--size-section);
+    line-height: var(--leading-heading);
+    color: var(--text-primary);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--accent-primary);
+    margin-bottom: var(--space-2);
+}
+.section-sub {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: var(--leading-body);
+    max-width: 72ch;
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+
+.section-title[data-level='2'], .section-head h3 { margin-left: var(--indent-1); }
+.section-title[data-level='3'], .section-head h4 { margin-left: var(--indent-2); }
+.section-sub[data-level='2'] { margin-left: var(--indent-1); }
+.section-sub[data-level='3'] { margin-left: var(--indent-2); }
+
+.kpi-row, .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    margin: 0 0 var(--space-7);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-raised);
+}
+.kpi-row > .kpi, .kpi-grid > .kpi, .kpi-row > .kpi-card, .kpi-grid > .kpi-card {
+    background: transparent;
+    border: 0;
+    border-right: 1px solid var(--border-subtle);
+    border-radius: 0;
+    box-shadow: none;
+    padding: var(--space-5) var(--space-5);
+    transition: background var(--dur-fast) var(--ease-out-quart);
+}
+.kpi-row > :last-child, .kpi-grid > :last-child { border-right: 0; }
+.kpi-row > .kpi:hover, .kpi-grid > .kpi:hover,
+.kpi-row > .kpi-card:hover, .kpi-grid > .kpi-card:hover {
+    background: var(--surface-sunken);
+    transform: none;
+    box-shadow: none;
+}
+.kpi .kpi-value, .kpi-card .kpi-value {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2rem);
+    line-height: 1.2;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.kpi .kpi-label, .kpi-card .label, .kpi-card .kpi-label {
+    font-family: var(--font-text);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-1);
+}
+.kpi .kpi-desc, .kpi-card .kpi-desc {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+}
+
+.card, .chart-block, .section .card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    padding: clamp(18px, 2.4vw, 26px);
+    transition: border-color var(--dur-fast) var(--ease-out-quart);
+}
+.card:hover, .chart-block:hover {
+    border-color: var(--border-strong);
+    transform: none;
+    box-shadow: none;
+}
+
+.chart-block {
+    min-height: 220px;
+    height: auto;
+    overflow: visible;
+}
+.chart-block svg { display: block; max-width: 100%; height: auto; }
+
+@media (max-width: 1024px) {
+    .kpi-row, .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .kpi-row > .kpi:nth-child(2n) { border-right: 0; }
+    .kpi-grid > .kpi:nth-child(2n) { border-right: 0; }
+    .kpi-row > .kpi:nth-child(-n+2) { border-bottom: 1px solid var(--border-subtle); }
+    .kpi-grid > .kpi:nth-child(-n+2) { border-bottom: 1px solid var(--border-subtle); }
+}
+@media (max-width: 768px) {
+    .kpi-row, .kpi-grid { grid-template-columns: 1fr; }
+    .kpi-row > .kpi, .kpi-grid > .kpi { border-right: 0; border-bottom: 1px solid var(--border-subtle); }
+    .kpi-row > :last-child, .kpi-grid > :last-child { border-bottom: 0; }
+    .section { margin-top: var(--space-7); }
+    .section-title { font-size: clamp(1.125rem, 1rem + 1.2vw, 1.375rem); }
+    
+    .chart-block { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .chart-block svg { min-width: 640px; }
+}
+@media (max-width: 480px) {
+    .section-sub { font-size: 0.875rem; }
+    .kpi-row > .kpi, .kpi-grid > .kpi { padding: var(--space-4); }
+}
+
+html { font-size: 100%; }
+body {
+    font-family: var(--font-text);
+    font-size: 1rem;
+    line-height: var(--leading-body);
+    color: var(--text-primary);
+    -webkit-text-size-adjust: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: var(--leading-heading);
+    color: var(--text-primary);
+    overflow-wrap: break-word;
+}
+p, li, td, th, figcaption { line-height: var(--leading-body); }
+
+.hero, .card, .chart-block, .kpi, .kpi-card, .section { height: auto; }
+
+table tr { height: auto; }
+td, th { height: auto; white-space: normal; }
+
+.hero {
+    background: #221D16;
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(44px, 7vw, 72px) clamp(20px, 5vw, 80px);
+}
+.hero::after { background: none; }   
+.hero h1 { color: var(--dark-text); font-size: var(--size-hero); }
+
+svg text {
+    font-family: var(--font-data);
+    fill: var(--text-tertiary);   
+}
+svg .axis-line, svg line.axis { stroke: var(--axis-line); }
+svg .grid-line, svg line.grid { stroke: var(--grid-line); }
+svg .label-strong { fill: var(--text-primary); }
+
+.chart-tooltip {
+    background: var(--surface-raised);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 8px rgba(28, 26, 23, 0.12);
+    color: var(--text-primary);
+    font-family: var(--font-text);
+}
+.chart-tooltip div + div { margin-top: var(--space-2); }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+svg [class$='-label'],
+svg .label {
+    fill: var(--text-primary) !important;
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+}
+
+svg .domain,
+svg .bar-axis .domain,
+svg .curves-axis .domain,
+svg .chart-axis .domain {
+    stroke: var(--axis-line);
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+svg .tick line,
+svg .chart-axis .tick line {
+    stroke: var(--axis-line);
+    stroke-width: 1px;
+}
+
+.chart-block svg .tick text,
+.chart-block svg .bar-axis text,
+.chart-block svg .curves-axis text,
+.chart-block svg .axis text,
+.chart-block svg .chart-axis text,
+.chart-block svg .chart-axis .tick text,
+.chart-block svg .axis text,
+.chart-block svg .tick text {
+    font-family: var(--font-data) !important;
+    font-size: 10px !important;
+    fill: var(--text-tertiary) !important;
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 2.5px;
+    stroke-linejoin: round;
+}
+
+.chart-block svg .chart-grid line,
+.chart-block svg .grid line {
+    stroke: var(--grid-line);
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+.chart-block svg .chart-grid line.y-grid,
+.chart-block svg .grid line.y-grid,
+.chart-block svg line.grid-y {
+    display: none;
+}
+
+svg text {
+    font-family: var(--font-data) !important;
+    font-size: max(9px, 0.625rem) !important;
+}
+
+.chart-block svg path[fill^='#'],
+.chart-block svg circle[fill^='#'],
+.chart-block svg rect[fill^='#'] {
+    filter: none;
+}
+.chart-block .series-shape {
+    stroke: color-mix(in srgb, var(--text-primary) 22%, transparent);
+    stroke-width: 1px;
+    stroke-linejoin: round;
+}
+
+.chart-block svg text.value-label,
+.chart-block svg .data-label,
+svg text.value-label,
+svg .data-label {
+    font-family: var(--font-data) !important;
+    font-size: 11px;
+    fill: var(--text-secondary) !important;
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 2.5px;
+    stroke-linejoin: round;
+}
+.chart-block svg text.value-label.is-strong,
+.chart-block svg .data-label.is-strong {
+    fill: var(--text-primary);
+    font-weight: 600;
+}
+
+.chart-block .legend,
+.chart-block .chart-legend {
+    font-family: var(--font-text);
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+.chart-block .legend-item .swatch,
+.chart-block .chart-legend .swatch {
+    border-radius: 2px;
+    box-shadow: none;
+    border: 1px solid color-mix(in srgb, var(--text-primary) 15%, transparent);
+}
+
+.chart-block svg text.slice-label {
+    font-family: var(--font-data) !important;
+    font-size: 11px;
+    fill: var(--text-primary);
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 3px;
+}
+
+svg .node-label,
+svg .label-node,
+svg .nlabel,
+svg .node text,
+svg .force-label {
+    fill: var(--text-inverse);
+    paint-order: stroke fill;
+    stroke: color-mix(in srgb, var(--text-primary) 55%, transparent);
+    stroke-width: 2.5px;
+    stroke-linejoin: round;
+}
+
+.chart-block svg text.node-label {
+    font-family: var(--font-text) !important;
+    font-size: 11px;
+    fill: var(--text-primary);
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+}
+
+.chart-block svg rect.heat-cell {
+    stroke: var(--surface-canvas);
+    stroke-width: 1px;
+}
+.chart-block svg text.heat-value {
+    font-family: var(--font-data) !important;
+    font-size: 10px;
+    fill: var(--text-primary);
+}
+
+html[data-theme="dark"] svg [fill="#C0392B"],
+html[data-theme="dark"] svg [fill="#c0392b"] {
+    fill: var(--series-1) !important;
+}
+html[data-theme="dark"] svg [fill="#40619E"],
+html[data-theme="dark"] svg [fill="#40619e"] {
+    fill: var(--series-2) !important;
+}
+html[data-theme="dark"] svg [fill="#8E7D62"],
+html[data-theme="dark"] svg [fill="#8e7d62"] {
+    fill: var(--series-3) !important;
+}
+html[data-theme="dark"] svg [fill="#3A473A"],
+html[data-theme="dark"] svg [fill="#3a473a"] {
+    fill: var(--series-4) !important;
+}
+html[data-theme="dark"] svg [fill="#6B665E"],
+html[data-theme="dark"] svg [fill="#6b665e"] {
+    fill: var(--series-5) !important;
+}
+html[data-theme="dark"] svg [fill="#472A4C"],
+html[data-theme="dark"] svg [fill="#472a4c"] {
+    fill: var(--series-6) !important;
+}
+html[data-theme="dark"] svg [fill="#678A93"],
+html[data-theme="dark"] svg [fill="#678a93"] {
+    fill: var(--series-7) !important;
+}
+html[data-theme="dark"] svg [fill="#6D4E65"],
+html[data-theme="dark"] svg [fill="#6d4e65"] {
+    fill: var(--series-8) !important;
+}
+
+html[data-theme="dark"] .chart-block svg path[fill^='#'],
+html[data-theme="dark"] .chart-block svg circle[fill^='#'],
+html[data-theme="dark"] .chart-block svg rect[fill^='#'],
+html[data-theme="dark"] .chart-block svg polygon[fill^='#'],
+html[data-theme="dark"] .chart-block svg ellipse[fill^='#'] {
+    
+    filter: brightness(1.45) saturate(1.05);
+}
+html[data-theme="dark"] .chart-block svg .chart-axis text,
+html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
+    stroke: var(--surface-canvas);
+}
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 8 处 */
@@ -1492,7 +2011,7 @@ html[data-theme="dark"] .chapter-plate {
             border-radius: var(--radius-md);
             padding: 10px 14px;
             font-size: 0.82rem;
-            color: var(--accent-3);
+            color: var(--text-secondary);
             margin-bottom: 16px;
         }
         .notice code {
@@ -1520,7 +2039,7 @@ html[data-theme="dark"] .chapter-plate {
         
         .section-h3 {
             font-size: 1rem;
-            color: var(--accent-2);
+            color: var(--accent-primary);
             margin: 18px 0 10px;
             letter-spacing: 0.05em;
         }
@@ -1639,7 +2158,7 @@ html[data-theme="dark"] .chapter-plate {
             line-height: 1.65;
         }
         .player-card .pc-row .pk {
-            color: var(--accent-3);
+            color: var(--text-secondary);
             font-size: 0.74rem;
             letter-spacing: 0.05em;
             font-weight: 600;
@@ -1708,7 +2227,7 @@ html[data-theme="dark"] .chapter-plate {
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-md);
             background: var(--accent-soft);
-            color: var(--accent-3);
+            color: var(--text-secondary);
             white-space: nowrap;
         }
         .hardship-card .hc-stats {
@@ -1779,7 +2298,7 @@ html[data-theme="dark"] .chapter-plate {
         }
         .egg-item .egg-title {
             font-weight: 600;
-            color: var(--accent-3);
+            color: var(--text-secondary);
             margin-right: 6px;
         }
         /* scoring cards */
@@ -1890,7 +2409,7 @@ html[data-theme="dark"] .chapter-plate {
         }
         .narr-card .nc-desc .lab {
             display: block;
-            color: var(--accent-3);
+            color: var(--text-secondary);
             font-weight: 600;
             font-size: 0.7rem;
             letter-spacing: 0.05em;
@@ -1947,7 +2466,7 @@ html[data-theme="dark"] .chapter-plate {
             line-height: 1.65;
         }
         .story-card .sc-row .lab {
-            color: var(--accent-3);
+            color: var(--text-secondary);
             font-size: 0.74rem;
             letter-spacing: 0.05em;
             font-weight: 600;
@@ -2247,8 +2766,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="desc">因果 12 + 法器 10 + 执念 10</div>
             </div>
             <div class="kpi-card" style="border-top-color: var(--accent-2);">
-                <div class="label" style="color: var(--accent-2);">COMBOS · 故事组合</div>
-                <div class="value" style="color: var(--accent-2);">1200</div>
+                <div class="label" style="color: var(--accent-primary);">COMBOS · 故事组合</div>
+                <div class="value" style="color: var(--accent-primary);">1200</div>
                 <div class="desc">12 × 10 × 10 种开头</div>
             </div>
             <div class="kpi-card" style="border-top-color: var(--accent-4);">
@@ -2270,7 +2789,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <span id="core-mech"></span>
             </div>
             <div class="highlight-block" style="border-left-color: var(--accent-3); background: linear-gradient(135deg, #fff5e8 0%, #f5e9d4 100%);">
-                <span class="lbl" style="color: var(--accent-3);">WIN · 胜利条件</span>
+                <span class="lbl" style="color: var(--text-secondary);">WIN · 胜利条件</span>
                 <span id="victory-cond"></span>
             </div>
 
@@ -2316,7 +2835,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="highlight-block" style="font-size: 1.05rem; text-align: center; font-weight: 600;">
                 <span style="color: var(--accent);">这不是复述故事</span>
                 <span style="color: var(--ink-soft); font-weight: 400;"> · </span>
-                <span style="color: var(--accent-2);">而是故事的生产器</span>
+                <span style="color: var(--accent-primary);">而是故事的生产器</span>
             </div>
 
             <div class="quote-block">
@@ -2343,7 +2862,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <div class="card-group">
                 <div class="group-header">
-                    <span class="gh-tag" style="background: #C9A063;">执念卡</span>
+                    <span class="gh-tag" style="background: #8E7D62;">执念卡</span>
                     <span class="gh-title">OBSESSION · 心境执念</span>
                     <span class="gh-count">10 张 · Z01–Z10</span>
                 </div>
@@ -2389,7 +2908,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="combo-legend">
                 <div class="lg-item"><span class="lg-dot" style="background:var(--chart-1);"></span><span>因果卡 · 12 张</span></div>
                 <div class="lg-item"><span class="lg-dot" style="background:var(--chart-2);"></span><span>法器卡 · 10 张</span></div>
-                <div class="lg-item"><span class="lg-dot" style="background:#C9A063;"></span><span>执念卡 · 10 张</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#8E7D62;"></span><span>执念卡 · 10 张</span></div>
                 <div class="lg-item"><span class="lg-dot" style="background:var(--chart-4);"></span><span>故事输出 · 1200 种</span></div>
             </div>
         </section>
@@ -2428,15 +2947,15 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
 
     // ===== 嵌入式 fallback 数据（fetch 失败时使用） =====
-    const EMBEDDED = {"board_game":{"game_name":"灵山董事会","subtitle":"反取经角色扮演桌游","designer":"西天取经真人秀项目组","player_count":"4 人","play_time":"90-120 分钟","age":"12+","core_mechanism":"玩家扮演如来/观音/老君/玉帝·共同投资'西天取经'真人秀项目·通过投放劫难博取收视率（功德值）·最终在灵山结算投资回报率","victory_condition":"游戏结束时·功德值最高者胜·或项目失败时·损失最少者胜","players":[{"role":"如来佛祖","title":"项目总设计师","starting_capital":"10000 功德","special_ability":"可强行介入一次·将任何劫难替换为'五行山压顶'·成本极低","winning_strategy":"在关键节点投放'内定劫难卡'·如大鹏金翅雕","weakness":"不能直接干预凡间·只能通过菩萨执行"},{"role":"观音菩萨","title":"项目执行人","starting_capital":"8000 功德","special_ability":"可暗中护持团队·每场劫难可消耗 500 功德降低难度","winning_strategy":"在前期保护团队成型·后期获取'紧箍咒'道具","weakness":"功德储备较少·需精打细算"},{"role":"太上老君","title":"道具供应商","starting_capital":"9000 功德","special_ability":"可向妖怪借出法宝（金刚琢·紫金葫芦等）·获得广告位曝光","winning_strategy":"通过法宝出租获取广告费·青牛精是金刚琢展示广告位","weakness":"借出的法宝可能被妖怪滥用·影响天庭声誉"},{"role":"玉皇大帝","title":"天庭 CEO","starting_capital":"7000 功德","special_ability":"可调动天兵天将·但每次调动消耗大量功德","winning_strategy":"维持天庭秩序·在项目失败时损失最少","weakness":"天兵天将战斗力有限·对顶级妖怪无效"}],"game_phases":[{"phase":"筹备期","rounds":"1-3","actions":["分配初始功德","选择投放劫难卡","建立菩萨坐骑档案"],"goal":"完成取经团队组建·建立基础规则"},{"phase":"执行期","rounds":"4-12","actions":["投放劫难卡","暗中护持或破坏","结算每场劫难的收视率","获取广告位曝光"],"goal":"通过劫难获取功德·同时维持项目运转"},{"phase":"结算期","rounds":"13-14","actions":["真经交付","灵山结算","投资回报率计算"],"goal":"功德值最高者胜"}],"hardship_cards":[{"name":"白骨精","type":"野怪","cost":500,"rating_bonus":200,"difficulty":2,"owner":"通用"},{"name":"黄袍怪","type":"天将下凡","cost":1500,"rating_bonus":500,"difficulty":4,"owner":"玉帝"},{"name":"金角银角","type":"童子下凡","cost":2000,"rating_bonus":700,"difficulty":5,"owner":"老君"},{"name":"青牛精","type":"坐骑下凡·广告位","cost":1000,"rating_bonus":800,"difficulty":6,"owner":"老君·广告"},{"name":"红孩儿","type":"妖怪世家","cost":2500,"rating_bonus":900,"difficulty":7,"owner":"通用"},{"name":"六耳猕猴","type":"心魔","cost":3000,"rating_bonus":1200,"difficulty":9,"owner":"如来"},{"name":"大鹏金翅雕","type":"内定劫难卡","cost":500,"rating_bonus":2000,"difficulty":10,"owner":"如来·内定"},{"name":"火焰山","type":"道具展示","cost":1500,"rating_bonus":1000,"difficulty":6,"owner":"通用"},{"name":"狮驼岭","type":"团队战","cost":3500,"rating_bonus":1500,"difficulty":10,"owner":"通用"},{"name":"比丘国","type":"道德考验","cost":800,"rating_bonus":400,"difficulty":3,"owner":"通用"}],"design_eggs":["金翅大鹏雕是如来方的'内定劫难卡'·投放成本极低·回报极高","青牛精是老君的金刚琢展示广告位","观音的紧箍咒是专为克制悟空设计·获取后可大幅降低项目风险","玉帝的天兵天将对顶级妖怪无效·是最大的劣势","如来的'五行山压顶'是终极保险·但只能在关键时刻使用一次"],"scoring":{"项目成功率":"60%·成功则所有玩家获得基础功德","劫难收视率":"每场劫难根据难度获取收视率·难度越高收益越高","广告位曝光":"投放带广告位的劫难卡可获取广告费","投资回报率":"最终功德 / 初始投入·最高者胜"}},"narrative_cards":{"system_name":"西游叙事卡牌 · 因果 法器 执念","innovation":"这不是复述故事 · 而是故事的生产器 · 32 张卡牌组合可生成 1200 种故事开头 · 让《西游记》从「一部经典」变为「无限源泉」。","card_groups":[{"name":"因果卡","name_en":"KARMA","color":"#c8463a","count":12,"cards":[{"id":"K01","name":"被赶出师门","context":"菩提祖师逐悟空出师门 · 不许提师承 · 暗示修仙圈的隐规则"},{"id":"K02","name":"误入魔窟","context":"误入妖王洞府 · 被识破猴王本相 · 卷入一场阴谋"},{"id":"K03","name":"故人重逢","context":"前世旧识以陌生面孔相见 · 一段尘缘重新被勾起"},{"id":"K04","name":"取经人遇难","context":"师父被妖王掠走 · 徒弟必须在限时内救回"},{"id":"K05","name":"天降甘霖","context":"久旱逢雨 · 百姓感恩 · 但雨水来历可疑"},{"id":"K06","name":"误食仙丹","context":"无意吞下仙丹 · 体内药力翻涌 · 引发异变"},{"id":"K07","name":"误入轮回","context":"坠入轮回通道 · 投胎为另一身份 · 短暂失忆"},{"id":"K08","name":"梦中点化","context":"神人入梦指点迷津 · 醒来半信半疑"},{"id":"K09","name":"凡人执剑","context":"凡人持剑挑战取经人 · 自称替天行道"},{"id":"K10","name":"天劫降临","context":"九霄雷劫劈下 · 罪人无处可逃 · 旁观者亦受波及"},{"id":"K11","name":"魂归地府","context":"魂魄误入幽冥 · 见十殿阎君 · 翻看生死簿"},{"id":"K12","name":"真假难辨","context":"出现与主角一模一样的赝品 · 谁真谁假无人能断"}]},{"name":"法器卡","name_en":"ARTIFACT","color":"#3a6b8c","count":10,"cards":[{"id":"F01","name":"紧箍咒","function":"戴于头顶 · 念咒即痛 · 控制执行器（悟空）的核心工具"},{"id":"F02","name":"九齿钉耙","function":"猪八戒兵器 · 重达五千零四十八斤 · 农具化兵器"},{"id":"F03","name":"金箍棒","function":"定海神针 · 一万三千五百斤 · 大小如意"},{"id":"F04","name":"芭蕉扇","function":"太上老君芭蕉扇 · 一扇熄火 · 二扇生风 · 三扇降雨"},{"id":"F05","name":"金刚琢","function":"太上老君法宝 · 套万物不落 · 兵器克星"},{"id":"F06","name":"火眼金睛","function":"八卦炉中炼成 · 识破妖物本相 · 但怕烟熏"},{"id":"F07","name":"降妖宝杖","function":"沙僧兵器 · 出自月宫 · 重五千零四十八斤"},{"id":"F08","name":"紫金葫芦","function":"金角大王法宝 · 呼名即入 · 化为脓血"},{"id":"F09","name":"人种袋","function":"黄眉怪法宝 · 诸神皆入 · 一时无解"},{"id":"F10","name":"锦襕袈裟","function":"唐僧所披 · 价值连城 · 招妖引祸"}]},{"name":"执念卡","name_en":"OBSESSION","color":"#C9A063","count":10,"cards":[{"id":"Z01","name":"傲慢","manifestation":"自视甚高 · 蔑视凡尘 · 拒绝低头"},{"id":"Z02","name":"猜忌","manifestation":"疑神疑鬼 · 不信旁人 · 独行其是"},{"id":"Z03","name":"愚忠","manifestation":"盲目服从 · 不问是非 · 以命相随"},{"id":"Z04","name":"贪欲","manifestation":"见宝起心 · 见色起意 · 永无餍足"},{"id":"Z05","name":"嗔怒","manifestation":"一言不合 · 怒火中烧 · 失去理智"},{"id":"Z06","name":"名相","manifestation":"执着名声 · 在乎虚名 · 忘却本心"},{"id":"Z07","name":"长生执念","manifestation":"渴求不死 · 迷恋肉身 · 拒绝轮回"},{"id":"Z08","name":"痴情","manifestation":"执迷一人 · 不顾众生 · 误了大业"},{"id":"Z09","name":"嫉妒","manifestation":"见人胜己 · 心生怨毒 · 必欲毁之"},{"id":"Z10","name":"逃避","manifestation":"遇事则避 · 不敢承担 · 推诿塞责"}]}],"example_combinations":[{"cards":[{"id":"K02","name":"误入魔窟","color":"#c8463a"},{"id":"F03","name":"金箍棒","color":"#3a6b8c"},{"id":"Z02","name":"猜忌","color":"#C9A063"}],"category":"师徒冲突型","category_color":"#3a6b8c","opening":"悟空误入妖王洞府 · 凭一根金箍棒打杀而出 · 唐僧却在事后听信八戒之言 · 怒斥其滥杀无辜 · 师徒心生猜忌 · 取经团队首次出现裂痕。","continuation":"唐僧以紧箍咒相逼 · 悟空含泪离去 · 临行前留下一句「师父若遇难 · 喊我三声姓名即可」 · 妖王得知后立刻设计离间之计。","conflict":"信任危机 · 信任崩塌后金箍棒再锋利也救不回师徒情","resonance":"最大的妖魔 · 不在洞府 · 而在猜忌之心。"},{"cards":[{"id":"K03","name":"故人重逢","color":"#c8463a"},{"id":"F08","name":"紫金葫芦","color":"#3a6b8c"},{"id":"Z06","name":"名相","color":"#C9A063"}],"category":"悟道型","category_color":"#6B8E5A","opening":"前世的旧友以陌生面孔在路口出现 · 手持紫金葫芦轻唤悟空姓名 · 悟空应声 · 几乎被吸入葫芦之中 · 葫芦中传出一个声音：「你以齐天大圣之名行走江湖 · 却忘了本名是什么？」","continuation":"悟空被困葫芦三日 · 在虚空中听见自己所有名号回响 · 终于意识到「名」是束缚 · 一声大笑震碎葫芦 · 重获自由。","conflict":"名相之争 · 齐天大圣 vs 孙行者 vs 斗战胜佛","resonance":"放下名相 · 方见本来 · 紫金葫芦装的不是脓血 · 是执念。"},{"cards":[{"id":"K07","name":"误入轮回","color":"#c8463a"},{"id":"F06","name":"火眼金睛","color":"#3a6b8c"},{"id":"Z01","name":"傲慢","color":"#C9A063"}],"category":"灾难型","category_color":"#c8463a","opening":"悟空坠入轮回通道 · 投胎为一介书生 · 火眼金睛虽在 · 却被傲慢所蔽 · 见世间不平之事 · 自负才学 · 屡屡折损 · 忘了取经大业。","continuation":"唐僧路过书生书院 · 见其眉间一点金光未灭 · 认出是悟空转世 · 三次劝其归队 · 三次被拒 · 直到书生因傲慢得罪权贵 · 几乎丧命 · 才悔悟前非。","conflict":"身份迷失 · 火眼金睛也照不破傲慢之障","resonance":"傲慢 · 是轮回的开始 · 也是悟道的终点。"},{"cards":[{"id":"K10","name":"天劫降临","color":"#c8463a"},{"id":"F04","name":"芭蕉扇","color":"#3a6b8c"},{"id":"Z07","name":"长生执念","color":"#C9A063"}],"category":"诱惑型","category_color":"#C9A063","opening":"九霄雷劫劈下 · 罪人无处可逃 · 芭蕉扇在混乱中落地 · 一个老者拾起扇子 · 扇出阴风 · 雷劫被引向唐僧方向 · 老者大笑：「长生不老的真经就在你身上 · 给我！」","continuation":"原来老者乃百年前一位高僧 · 因长生执念堕落为妖 · 三次索要真经不得 · 最后以芭蕉扇扇出万里黄沙 · 困住取经人三天三夜。","conflict":"正法 vs 邪修 · 同求长生 · 路径不同 · 结局殊途","resonance":"执念长生者 · 反被长生所执 · 真经不在唐僧身上 · 在放下之心。"},{"cards":[{"id":"K12","name":"真假难辨","color":"#c8463a"},{"id":"F05","name":"金刚琢","color":"#3a6b8c"},{"id":"Z09","name":"嫉妒","color":"#C9A063"}],"category":"师徒冲突型","category_color":"#3a6b8c","opening":"出现一个与悟空一模一样的赝品 · 持金刚琢四处作恶 · 旁人皆以为是真悟空所为 · 唯有八戒暗喜 · 因嫉妒悟空多年 · 终于抓住机会向唐僧进谗。","continuation":"唐僧怒念紧箍咒 · 真悟空痛倒在地 · 赝品却毫发无伤 · 反证「真悟空」是假 · 真悟空百口莫辩 · 被逐出师门 · 紧箍咒从此失效。","conflict":"真假之辨 · 嫉妒是最锋利的金刚琢","resonance":"嫉妒之琢 · 套住的不是兵器 · 是人心 · 一旦戴上 · 无人能解。"}],"design_philosophy":"三组卡牌 · 32 张组合 · 可生成 12 × 10 × 10 = 1200 种故事开头"},"story_generator":{"generator_name":"西游故事生成器","total_combinations":1200,"generating_rules":["从「因果卡」中抽取 1 张 · 作为故事的场景起点（K01–K12）","从「法器卡」中抽取 1 张 · 作为故事的核心道具（F01–F10）","从「执念卡」中抽取 1 张 · 作为故事的心境主题（Z01–Z10）","三张卡的组合 · 决定故事的「开头 / 道具 / 主题」 · 由玩家自行演绎后续","同一组合可被多次演绎 · 不同玩家可生成完全不同的故事 · 这正是「生产器」的本意"],"generator_features":["可重复性 · 1200 种组合可无限演绎 · 每次结果不同","开放性 · 三卡只规定开头 · 后续由玩家自由发挥","主题性 · 每张执念卡自带主题 · 故事自然带「悟道」深度","可扩展性 · 可添加新卡组（人物卡 / 场景卡）无限扩展"],"story_categories":[{"name":"灾难型","color":"#c8463a","card_ids":"K02·误入魔窟 · K04·取经人遇难 · K06·误食仙丹 · K10·天劫降临","desc":"突发的灾难事件 · 主角须在极限条件下求生与抉择"},{"name":"师徒冲突型","color":"#3a6b8c","card_ids":"K01·被赶出师门 · K02·误入魔窟 · K09·凡人执剑 · K12·真假难辨","desc":"取经团队内部的信任危机与理念冲突"},{"name":"悟道型","color":"#6B8E5A","card_ids":"K03·故人重逢 · K05·天降甘霖 · K07·误入轮回 · K08·梦中点化 · K11·魂归地府","desc":"通过奇遇与点化 · 主角领悟某种佛 / 道 / 人生真理"},{"name":"诱惑型","color":"#C9A063","card_ids":"K06·误食仙丹 · K09·凡人执剑 · K12·真假难辨","desc":"色 / 名 / 利 / 长生等外在诱惑的考验"}],"design_innovation":"故事的生产器 · 而非复述"},"narrative_experiment_summary":{"board_game_players":4,"board_game_cards":10,"board_game_phases":3,"narrative_card_groups":3,"narrative_card_total":32,"example_combinations":5,"story_combinations":1200,"story_categories":4}};
+    const EMBEDDED = {"board_game":{"game_name":"灵山董事会","subtitle":"反取经角色扮演桌游","designer":"西天取经真人秀项目组","player_count":"4 人","play_time":"90-120 分钟","age":"12+","core_mechanism":"玩家扮演如来/观音/老君/玉帝·共同投资'西天取经'真人秀项目·通过投放劫难博取收视率（功德值）·最终在灵山结算投资回报率","victory_condition":"游戏结束时·功德值最高者胜·或项目失败时·损失最少者胜","players":[{"role":"如来佛祖","title":"项目总设计师","starting_capital":"10000 功德","special_ability":"可强行介入一次·将任何劫难替换为'五行山压顶'·成本极低","winning_strategy":"在关键节点投放'内定劫难卡'·如大鹏金翅雕","weakness":"不能直接干预凡间·只能通过菩萨执行"},{"role":"观音菩萨","title":"项目执行人","starting_capital":"8000 功德","special_ability":"可暗中护持团队·每场劫难可消耗 500 功德降低难度","winning_strategy":"在前期保护团队成型·后期获取'紧箍咒'道具","weakness":"功德储备较少·需精打细算"},{"role":"太上老君","title":"道具供应商","starting_capital":"9000 功德","special_ability":"可向妖怪借出法宝（金刚琢·紫金葫芦等）·获得广告位曝光","winning_strategy":"通过法宝出租获取广告费·青牛精是金刚琢展示广告位","weakness":"借出的法宝可能被妖怪滥用·影响天庭声誉"},{"role":"玉皇大帝","title":"天庭 CEO","starting_capital":"7000 功德","special_ability":"可调动天兵天将·但每次调动消耗大量功德","winning_strategy":"维持天庭秩序·在项目失败时损失最少","weakness":"天兵天将战斗力有限·对顶级妖怪无效"}],"game_phases":[{"phase":"筹备期","rounds":"1-3","actions":["分配初始功德","选择投放劫难卡","建立菩萨坐骑档案"],"goal":"完成取经团队组建·建立基础规则"},{"phase":"执行期","rounds":"4-12","actions":["投放劫难卡","暗中护持或破坏","结算每场劫难的收视率","获取广告位曝光"],"goal":"通过劫难获取功德·同时维持项目运转"},{"phase":"结算期","rounds":"13-14","actions":["真经交付","灵山结算","投资回报率计算"],"goal":"功德值最高者胜"}],"hardship_cards":[{"name":"白骨精","type":"野怪","cost":500,"rating_bonus":200,"difficulty":2,"owner":"通用"},{"name":"黄袍怪","type":"天将下凡","cost":1500,"rating_bonus":500,"difficulty":4,"owner":"玉帝"},{"name":"金角银角","type":"童子下凡","cost":2000,"rating_bonus":700,"difficulty":5,"owner":"老君"},{"name":"青牛精","type":"坐骑下凡·广告位","cost":1000,"rating_bonus":800,"difficulty":6,"owner":"老君·广告"},{"name":"红孩儿","type":"妖怪世家","cost":2500,"rating_bonus":900,"difficulty":7,"owner":"通用"},{"name":"六耳猕猴","type":"心魔","cost":3000,"rating_bonus":1200,"difficulty":9,"owner":"如来"},{"name":"大鹏金翅雕","type":"内定劫难卡","cost":500,"rating_bonus":2000,"difficulty":10,"owner":"如来·内定"},{"name":"火焰山","type":"道具展示","cost":1500,"rating_bonus":1000,"difficulty":6,"owner":"通用"},{"name":"狮驼岭","type":"团队战","cost":3500,"rating_bonus":1500,"difficulty":10,"owner":"通用"},{"name":"比丘国","type":"道德考验","cost":800,"rating_bonus":400,"difficulty":3,"owner":"通用"}],"design_eggs":["金翅大鹏雕是如来方的'内定劫难卡'·投放成本极低·回报极高","青牛精是老君的金刚琢展示广告位","观音的紧箍咒是专为克制悟空设计·获取后可大幅降低项目风险","玉帝的天兵天将对顶级妖怪无效·是最大的劣势","如来的'五行山压顶'是终极保险·但只能在关键时刻使用一次"],"scoring":{"项目成功率":"60%·成功则所有玩家获得基础功德","劫难收视率":"每场劫难根据难度获取收视率·难度越高收益越高","广告位曝光":"投放带广告位的劫难卡可获取广告费","投资回报率":"最终功德 / 初始投入·最高者胜"}},"narrative_cards":{"system_name":"西游叙事卡牌 · 因果 法器 执念","innovation":"这不是复述故事 · 而是故事的生产器 · 32 张卡牌组合可生成 1200 种故事开头 · 让《西游记》从「一部经典」变为「无限源泉」。","card_groups":[{"name":"因果卡","name_en":"KARMA","color":"#C0392B","count":12,"cards":[{"id":"K01","name":"被赶出师门","context":"菩提祖师逐悟空出师门 · 不许提师承 · 暗示修仙圈的隐规则"},{"id":"K02","name":"误入魔窟","context":"误入妖王洞府 · 被识破猴王本相 · 卷入一场阴谋"},{"id":"K03","name":"故人重逢","context":"前世旧识以陌生面孔相见 · 一段尘缘重新被勾起"},{"id":"K04","name":"取经人遇难","context":"师父被妖王掠走 · 徒弟必须在限时内救回"},{"id":"K05","name":"天降甘霖","context":"久旱逢雨 · 百姓感恩 · 但雨水来历可疑"},{"id":"K06","name":"误食仙丹","context":"无意吞下仙丹 · 体内药力翻涌 · 引发异变"},{"id":"K07","name":"误入轮回","context":"坠入轮回通道 · 投胎为另一身份 · 短暂失忆"},{"id":"K08","name":"梦中点化","context":"神人入梦指点迷津 · 醒来半信半疑"},{"id":"K09","name":"凡人执剑","context":"凡人持剑挑战取经人 · 自称替天行道"},{"id":"K10","name":"天劫降临","context":"九霄雷劫劈下 · 罪人无处可逃 · 旁观者亦受波及"},{"id":"K11","name":"魂归地府","context":"魂魄误入幽冥 · 见十殿阎君 · 翻看生死簿"},{"id":"K12","name":"真假难辨","context":"出现与主角一模一样的赝品 · 谁真谁假无人能断"}]},{"name":"法器卡","name_en":"ARTIFACT","color":"#40619E","count":10,"cards":[{"id":"F01","name":"紧箍咒","function":"戴于头顶 · 念咒即痛 · 控制执行器（悟空）的核心工具"},{"id":"F02","name":"九齿钉耙","function":"猪八戒兵器 · 重达五千零四十八斤 · 农具化兵器"},{"id":"F03","name":"金箍棒","function":"定海神针 · 一万三千五百斤 · 大小如意"},{"id":"F04","name":"芭蕉扇","function":"太上老君芭蕉扇 · 一扇熄火 · 二扇生风 · 三扇降雨"},{"id":"F05","name":"金刚琢","function":"太上老君法宝 · 套万物不落 · 兵器克星"},{"id":"F06","name":"火眼金睛","function":"八卦炉中炼成 · 识破妖物本相 · 但怕烟熏"},{"id":"F07","name":"降妖宝杖","function":"沙僧兵器 · 出自月宫 · 重五千零四十八斤"},{"id":"F08","name":"紫金葫芦","function":"金角大王法宝 · 呼名即入 · 化为脓血"},{"id":"F09","name":"人种袋","function":"黄眉怪法宝 · 诸神皆入 · 一时无解"},{"id":"F10","name":"锦襕袈裟","function":"唐僧所披 · 价值连城 · 招妖引祸"}]},{"name":"执念卡","name_en":"OBSESSION","color":"#8E7D62","count":10,"cards":[{"id":"Z01","name":"傲慢","manifestation":"自视甚高 · 蔑视凡尘 · 拒绝低头"},{"id":"Z02","name":"猜忌","manifestation":"疑神疑鬼 · 不信旁人 · 独行其是"},{"id":"Z03","name":"愚忠","manifestation":"盲目服从 · 不问是非 · 以命相随"},{"id":"Z04","name":"贪欲","manifestation":"见宝起心 · 见色起意 · 永无餍足"},{"id":"Z05","name":"嗔怒","manifestation":"一言不合 · 怒火中烧 · 失去理智"},{"id":"Z06","name":"名相","manifestation":"执着名声 · 在乎虚名 · 忘却本心"},{"id":"Z07","name":"长生执念","manifestation":"渴求不死 · 迷恋肉身 · 拒绝轮回"},{"id":"Z08","name":"痴情","manifestation":"执迷一人 · 不顾众生 · 误了大业"},{"id":"Z09","name":"嫉妒","manifestation":"见人胜己 · 心生怨毒 · 必欲毁之"},{"id":"Z10","name":"逃避","manifestation":"遇事则避 · 不敢承担 · 推诿塞责"}]}],"example_combinations":[{"cards":[{"id":"K02","name":"误入魔窟","color":"#C0392B"},{"id":"F03","name":"金箍棒","color":"#40619E"},{"id":"Z02","name":"猜忌","color":"#8E7D62"}],"category":"师徒冲突型","category_color":"#40619E","opening":"悟空误入妖王洞府 · 凭一根金箍棒打杀而出 · 唐僧却在事后听信八戒之言 · 怒斥其滥杀无辜 · 师徒心生猜忌 · 取经团队首次出现裂痕。","continuation":"唐僧以紧箍咒相逼 · 悟空含泪离去 · 临行前留下一句「师父若遇难 · 喊我三声姓名即可」 · 妖王得知后立刻设计离间之计。","conflict":"信任危机 · 信任崩塌后金箍棒再锋利也救不回师徒情","resonance":"最大的妖魔 · 不在洞府 · 而在猜忌之心。"},{"cards":[{"id":"K03","name":"故人重逢","color":"#C0392B"},{"id":"F08","name":"紫金葫芦","color":"#40619E"},{"id":"Z06","name":"名相","color":"#8E7D62"}],"category":"悟道型","category_color":"#3A473A","opening":"前世的旧友以陌生面孔在路口出现 · 手持紫金葫芦轻唤悟空姓名 · 悟空应声 · 几乎被吸入葫芦之中 · 葫芦中传出一个声音：「你以齐天大圣之名行走江湖 · 却忘了本名是什么？」","continuation":"悟空被困葫芦三日 · 在虚空中听见自己所有名号回响 · 终于意识到「名」是束缚 · 一声大笑震碎葫芦 · 重获自由。","conflict":"名相之争 · 齐天大圣 vs 孙行者 vs 斗战胜佛","resonance":"放下名相 · 方见本来 · 紫金葫芦装的不是脓血 · 是执念。"},{"cards":[{"id":"K07","name":"误入轮回","color":"#C0392B"},{"id":"F06","name":"火眼金睛","color":"#40619E"},{"id":"Z01","name":"傲慢","color":"#8E7D62"}],"category":"灾难型","category_color":"#C0392B","opening":"悟空坠入轮回通道 · 投胎为一介书生 · 火眼金睛虽在 · 却被傲慢所蔽 · 见世间不平之事 · 自负才学 · 屡屡折损 · 忘了取经大业。","continuation":"唐僧路过书生书院 · 见其眉间一点金光未灭 · 认出是悟空转世 · 三次劝其归队 · 三次被拒 · 直到书生因傲慢得罪权贵 · 几乎丧命 · 才悔悟前非。","conflict":"身份迷失 · 火眼金睛也照不破傲慢之障","resonance":"傲慢 · 是轮回的开始 · 也是悟道的终点。"},{"cards":[{"id":"K10","name":"天劫降临","color":"#C0392B"},{"id":"F04","name":"芭蕉扇","color":"#40619E"},{"id":"Z07","name":"长生执念","color":"#8E7D62"}],"category":"诱惑型","category_color":"#8E7D62","opening":"九霄雷劫劈下 · 罪人无处可逃 · 芭蕉扇在混乱中落地 · 一个老者拾起扇子 · 扇出阴风 · 雷劫被引向唐僧方向 · 老者大笑：「长生不老的真经就在你身上 · 给我！」","continuation":"原来老者乃百年前一位高僧 · 因长生执念堕落为妖 · 三次索要真经不得 · 最后以芭蕉扇扇出万里黄沙 · 困住取经人三天三夜。","conflict":"正法 vs 邪修 · 同求长生 · 路径不同 · 结局殊途","resonance":"执念长生者 · 反被长生所执 · 真经不在唐僧身上 · 在放下之心。"},{"cards":[{"id":"K12","name":"真假难辨","color":"#C0392B"},{"id":"F05","name":"金刚琢","color":"#40619E"},{"id":"Z09","name":"嫉妒","color":"#8E7D62"}],"category":"师徒冲突型","category_color":"#40619E","opening":"出现一个与悟空一模一样的赝品 · 持金刚琢四处作恶 · 旁人皆以为是真悟空所为 · 唯有八戒暗喜 · 因嫉妒悟空多年 · 终于抓住机会向唐僧进谗。","continuation":"唐僧怒念紧箍咒 · 真悟空痛倒在地 · 赝品却毫发无伤 · 反证「真悟空」是假 · 真悟空百口莫辩 · 被逐出师门 · 紧箍咒从此失效。","conflict":"真假之辨 · 嫉妒是最锋利的金刚琢","resonance":"嫉妒之琢 · 套住的不是兵器 · 是人心 · 一旦戴上 · 无人能解。"}],"design_philosophy":"三组卡牌 · 32 张组合 · 可生成 12 × 10 × 10 = 1200 种故事开头"},"story_generator":{"generator_name":"西游故事生成器","total_combinations":1200,"generating_rules":["从「因果卡」中抽取 1 张 · 作为故事的场景起点（K01–K12）","从「法器卡」中抽取 1 张 · 作为故事的核心道具（F01–F10）","从「执念卡」中抽取 1 张 · 作为故事的心境主题（Z01–Z10）","三张卡的组合 · 决定故事的「开头 / 道具 / 主题」 · 由玩家自行演绎后续","同一组合可被多次演绎 · 不同玩家可生成完全不同的故事 · 这正是「生产器」的本意"],"generator_features":["可重复性 · 1200 种组合可无限演绎 · 每次结果不同","开放性 · 三卡只规定开头 · 后续由玩家自由发挥","主题性 · 每张执念卡自带主题 · 故事自然带「悟道」深度","可扩展性 · 可添加新卡组（人物卡 / 场景卡）无限扩展"],"story_categories":[{"name":"灾难型","color":"#C0392B","card_ids":"K02·误入魔窟 · K04·取经人遇难 · K06·误食仙丹 · K10·天劫降临","desc":"突发的灾难事件 · 主角须在极限条件下求生与抉择"},{"name":"师徒冲突型","color":"#40619E","card_ids":"K01·被赶出师门 · K02·误入魔窟 · K09·凡人执剑 · K12·真假难辨","desc":"取经团队内部的信任危机与理念冲突"},{"name":"悟道型","color":"#3A473A","card_ids":"K03·故人重逢 · K05·天降甘霖 · K07·误入轮回 · K08·梦中点化 · K11·魂归地府","desc":"通过奇遇与点化 · 主角领悟某种佛 / 道 / 人生真理"},{"name":"诱惑型","color":"#8E7D62","card_ids":"K06·误食仙丹 · K09·凡人执剑 · K12·真假难辨","desc":"色 / 名 / 利 / 长生等外在诱惑的考验"}],"design_innovation":"故事的生产器 · 而非复述"},"narrative_experiment_summary":{"board_game_players":4,"board_game_cards":10,"board_game_phases":3,"narrative_card_groups":3,"narrative_card_total":32,"example_combinations":5,"story_combinations":1200,"story_categories":4}};
 
     // ===== 配色映射 =====
-    const PHASE_COLORS = ["#c9a14a", "#c8463a", "#C9A063"];
+    const PHASE_COLORS = ["#c9a14a", "#C0392B", "#8E7D62"];
     const PLAYER_COLOR_BORDER = {
         "如来佛祖": "#c9a14a",
-        "观音菩萨": "#3a6b8c",
-        "太上老君": "#C9A063",
-        "玉皇大帝": "#c8463a"
+        "观音菩萨": "#40619E",
+        "太上老君": "#8E7D62",
+        "玉皇大帝": "#C0392B"
     };
     const CATEGORY_DEFAULT_COLOR = "#6B6455";
 
@@ -2963,7 +3482,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 const cardList = g.cards.slice(0, 4).map(c => c.id + " " + c.name).join(" · ");
                 tip.style("opacity", 1)
                     .html(`<div style="color:${g.color};font-weight:700;margin-bottom:var(--space-2);">${g.name} · ${g.name_en}</div>` +
-                          `<div style="font-size:0.78rem;color:var(--chart-3);margin-bottom:var(--space-2);">共 ${g.count} 张卡牌</div>` +
+                          `<div style="font-size:0.78rem;color: var(--text-secondary);margin-bottom:var(--space-2);">共 ${g.count} 张卡牌</div>` +
                           `<div style="font-size:0.78rem;">${cardList} ...</div>`);
             })
             .on("mousemove", function(e) {

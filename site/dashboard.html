@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-fTVjufsfnCTidLXbZGJsyHzs1q/5UIasmvAqn2WnW9A=' 'sha256-CRRht6Iz0HfN0U+vsaCT43b/L718jBu32OfkeBQdLrQ=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' __XIJ_SERVICE_BASE__ https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-fTVjufsfnCTidLXbZGJsyHzs1q/5UIasmvAqn2WnW9A=' 'sha256-LFpSVY/XoFlgLoyO0VBhh27ldbtTRCoeUJPWsawtwsM=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' __XIJ_SERVICE_BASE__ https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC
@@ -115,7 +115,7 @@
             border-radius: 2px;
             padding: 10px 16px;
             font-size: 12px;
-            color: var(--accent-3);
+            color: var(--text-secondary);
         }
         .notice code { font-family: var(--font-mono); font-size: 11px; }
 
@@ -160,7 +160,7 @@
         .kpi-card .detail {
             margin-top: 10px;
             font-size: 12px;
-            color: var(--accent-2);
+            color: var(--accent-primary);
             border-top: 1px dashed var(--line);
             padding-top: var(--space-3);
         }
@@ -175,10 +175,12 @@
             vertical-align: middle;
         }
         .badge-a-l { background: var(--badge-a-l-bg); color: var(--accent-4); border: 1px solid var(--badge-a-l-border); }
-        .badge-m-u { background: var(--badge-m-u-bg); color: var(--accent-2); border: 1px solid var(--badge-m-u-border); }
-        .badge-v-ah { background: var(--badge-v-ah-bg); color: var(--accent-3); border: 1px solid var(--badge-v-ah-border); }
+        /* W1261：文字色 --accent-primary → --text-secondary —— 朱砂字压淡靛底实测 4.16–4.43:1
+           （本批改色引入的回落·改前靛蓝字 5.01/4.92:1 达标）；与同族 .badge-v-ah 一致。 */
+        .badge-m-u { background: var(--badge-m-u-bg); color: var(--text-secondary); border: 1px solid var(--badge-m-u-border); }
+        .badge-v-ah { background: var(--badge-v-ah-bg); color: var(--text-secondary); border: 1px solid var(--badge-v-ah-border); }
         .badge-q-plus { background: var(--badge-q-plus-bg); color: var(--accent); border: 1px solid var(--badge-q-plus-border); }
-        .badge-q-plusplus { background: var(--badge-q-plusplus-bg); color: var(--accent-3); border: 1px solid var(--badge-q-plusplus-border); }
+        .badge-q-plusplus { background: var(--badge-q-plusplus-bg); color: var(--text-secondary); border: 1px solid var(--badge-q-plusplus-border); }
         .badge-q-plusplusplus { background: var(--badge-q-plusplusplus-bg); color: var(--rebel); border: 1px solid var(--badge-q-plusplusplus-border); }
         .kpi-card.hidden { display: none; }
         .kpi-card.filter-enter { animation: cardFadeIn 0.25s ease; }
@@ -413,7 +415,7 @@
         .three-layer-card .layer-num { font-size: 12px; color: var(--accent); font-weight: 500; margin-bottom: var(--space-3); letter-spacing: 0.08em; }
         .three-layer-card h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 500; margin: 0 0 var(--space-3); }
         .three-layer-card p { font-size: 13px; color: var(--ink-soft); margin: 0 0 10px; line-height: 1.6; }
-        .three-layer-card .layer-meta { font-size: 12px; color: var(--accent-2); }
+        .three-layer-card .layer-meta { font-size: 12px; color: var(--accent-primary); }
 
         /* ===== 页脚（W334） ===== */
         footer {
@@ -426,7 +428,7 @@
         footer .flinks { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; }
         footer a { color: var(--ink-faint); text-decoration: none; font-family: var(--font-mono); font-size: 12px; display: inline-flex; align-items: center; min-height: 24px; white-space: nowrap; }
         footer a:hover { color: var(--accent); }
-        footer .ver { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--accent-3); }
+        footer .ver { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--text-secondary); }
 
         @media (max-width: 1024px) {
             .topnav, .crumb, .masthead, .notice-wrap, .kpi-row, .section, .route-strip, .topic-grid, .matrix-grid, .banner-wrap, footer { padding-left: var(--space-8); padding-right: var(--space-8); }
@@ -1123,19 +1125,19 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
     // W334 雅集色板（朱砂/靛蓝/赭金/苔绿/米灰，语义分配）
     const CAUSE_COLORS = {
-        "如来/观音安排": "#C8463A",
-        "真正野怪": "#3A6B8C",
-        "天界/西天坐骑下凡": "#C9A063",
-        "人心自生的魔障": "#6B8E5A"
+        "如来/观音安排": "#C0392B",
+        "真正野怪": "#40619E",
+        "天界/西天坐骑下凡": "#8E7D62",
+        "人心自生的魔障": "#3A473A"
     };
     const ENDING_COLORS = {
-        "被接走（有背景）": "#3A6B8C",
-        "被打死（无背景）": "#C8463A",
-        "被收编": "#D8CFBC"
+        "被接走（有背景）": "#40619E",
+        "被打死（无背景）": "#C0392B",
+        "被收编": "#6B665E"
     };
     const DIFFICULTY_COLORS = {
-        "悟空独立解决": "#3A6B8C",
-        "需要搬救兵": "#C8463A"
+        "悟空独立解决": "#40619E",
+        "需要搬救兵": "#C0392B"
     };
 
     // 渲染环图（W334：去除扇区压字，图例外置含占比）

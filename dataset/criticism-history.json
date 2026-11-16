@@ -11,7 +11,7 @@
     {
       "key": "zhengdao",
       "label": "证道流 · Inner Alchemy",
-      "color": "#3a6b8c",
+      "color": "#40619E",
       "desc": "以金丹大道解西游，将全部情节读作内丹修炼次第的隐喻",
       "path": [
         "陈士斌",
@@ -22,7 +22,7 @@
     {
       "key": "literary",
       "label": "文学流 · Literary Critique",
-      "color": "#C9A063",
+      "color": "#8E7D62",
       "desc": "以文学本位与社会批判解读，剥离附会，回归文本",
       "path": [
         "李贽",

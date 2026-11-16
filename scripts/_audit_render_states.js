@@ -172,7 +172,16 @@ const PAGE_ANALYSIS_FN = `(() => {
     const parts = cfill.split(',');
     if (parts.length >= 4 && parseFloat(parts[parts.length - 1]) < 0.1) return;
     const fill = cfill;
-    const l = lum(fill);
+    // W1261: the element's own CSS filter (brightness/saturate) changes what the
+    // user SEES while leaving the computed fill untouched => a shape lifted by a
+    // filter is judged invisible although it is visible. Apply the filter's
+    // brightness multiplier to the fill before the luminance test.
+    let l = lum(fill);
+    const cf = getComputedStyle(el).filter || '';
+    if (l !== null && cf && cf !== 'none') {
+      const bm = cf.match(/brightness\(([0-9.]+)\)/);
+      if (bm) l = l * parseFloat(bm[1]);
+    }
     if (l !== null && isDarkBg && l < 0.16) {
       const r = el.getBoundingClientRect();
       if (r.width > 4 && r.height > 4) {

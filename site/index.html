@@ -34,17 +34,22 @@
         /* e-track-exempt: chart-data-colors 1 处 */
 /* === 仅首页特有样式 === */
         .masthead {
+            /* W1261 回退（自纠）：曾把插画独立成右栏（grid 两栏 + .masthead-art 元素）——
+               **实测证明是错的**：插画原图 2400×1017（2.36:1），限进右栏 458px 宽后
+               contain 高度只剩 194px ⇒ 毛笔主体缩成右上角一小块（用户实拍确认）。
+               原设计「插画铺满整块 hero + 左侧 46% 空白安全区留给文字列」是刻意的
+               （W938 选型依据：8/8 张左侧 46% 墨量 0.0000·与标题区零冲突）
+               ⇒ 恢复 flex + 元素背景图；文字栏宽度上限收到 560px（< 安全区 589px·不侵入主体）。 */
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
             gap: var(--space-9);
             padding: clamp(56px, 9vw, var(--space-12)) clamp(var(--space-6), 6vw, var(--space-12)) clamp(36px, 5vw, 56px);
+        }
+        /* W938：插画为 .masthead 元素背景图（2400×1017·2.36:1）—— contain 保构图完整、
+           主体恒锚右下角；左侧 46% 为空白安全区，文字列压在其上零冲突。 */
+        .masthead {
             background-image: url('static/images/hero-line-01-ruyi-staff.webp');
-            /* W938：改 contain —— 用户要求「适配各种比例大小·每个人看到的都一样」。
-               cover 会按容器比例裁切：2.36:1 的图在 1006×645 容器里被放大 0.63 倍、左右各裁 407 源像素
-               （主体右端被切·实测金箍棒右上端断头）；16:9 的图在 1440×520 里垂直裁 290 px（只剩半身）。
-               contain 在任何视口比例下都完整显示、主体恒锚定容器右下角；容器富余处露 #FAF7F0 宣纸底
-               （与图底色同色·无缝），故各人看到的构图一致。 */
             background-size: contain;
             background-position: right bottom;
             background-repeat: no-repeat;
@@ -69,16 +74,26 @@
    总计 359px > 父内容宽 327px——正是首页 8px 横向溢出的真源头（W1074 实测定位）。 */
         .hero-dots { display: flex; flex-wrap: wrap; gap: var(--gap-tight); margin-top: var(--space-5); }
         .hero-dots[hidden] { display: none; }
+        /* W1261：轮播指示点改「小点 + 26px 命中区」—— 原为 26px 实心描边大圈，
+           视觉上是一排空心大环（实测描边 #DCD3BF 对宣纸底 #F5F0E4 仅 1.13:1 ⇒ 近乎不可见），
+           且 9×26px 在 375 视口挤占 298px（曾致横向溢出 8px·W1074）。
+           ⇒ 视觉点缩到 9px（::after 绘制）、描边改 --text-tertiary（对底 5.02:1 可辨），
+           命中区仍保留 26px（button 本体不变）⇒ 可点性与视觉都保住。 */
         .hero-dots button {
             width: 26px; height: 26px; padding: 0; cursor: pointer;
-            border-radius: 50%;
-            border: 1px solid var(--line);
+            background: transparent; border: none; position: relative;
+            transition: background-color 200ms ease, border-color 200ms ease;
+        }
+        .hero-dots button::after {
+            content: ""; position: absolute; left: 50%; top: 50%;
+            width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
+            border-radius: 50%; border: 1px solid var(--text-tertiary);
             background: transparent;
             transition: background-color 200ms ease, border-color 200ms ease;
         }
-        .hero-dots button:hover { border-color: var(--accent); }
-        .hero-dots button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-        .hero-dots button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+        .hero-dots button:hover::after { border-color: var(--accent-primary); }
+        .hero-dots button:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
+        .hero-dots button[aria-pressed="true"]::after { background: var(--accent-primary); border-color: var(--accent-primary); }
         /* W938：首屏左侧文字重排 —— 原布局七层平铺、字号跳跃、层级无引导；
            改为「眉题 → 标题组（中文 + 英文紧贴）→ 主张句（放大提色）→ 细线 → 数据带 → 标签 → CTA → 插画切换器」结构。 */
         /* W1074（N-08 根修）：min-width:0 —— .masthead 为 flex 容器，本元素作为 flex 项默认
@@ -98,7 +113,7 @@
             font-size: 19px; color: var(--ink); line-height: 1.75;
             margin-bottom: 26px; max-width: 23em;
         }
-        .masthead-copy .meta-line { font-size: 13px; color: var(--accent-3); }
+        .masthead-copy .meta-line { font-size: 13px; color: var(--text-secondary); }
         /* W938：「100 回」数据块并入左侧文字区做横排一行（右侧整块留给插画） */
         .masthead-facts {
             display: flex; flex-wrap: wrap; align-items: flex-start; gap: 18px;
@@ -107,14 +122,16 @@
         .masthead-facts .mega-row { display: flex; align-items: baseline; gap: var(--space-2); flex-shrink: 0; }
         .masthead-facts .mega-num {
             font-family: var(--font-serif); font-weight: 900;
-            font-size: clamp(44px, 5.4vw, 60px); line-height: .92;
+            /* W1261：60px → 50px —— h1 实测 71.68px，mega 数字 60px 与之并列成**双巨号**
+               （违反「重要性排序」：首屏只有一个视觉焦点）。降级后层级为 h1(72) > 数字(50) > 标题(31)。 */
+            font-size: clamp(40px, 4.4vw, 50px); line-height: .92;
             color: var(--ink); letter-spacing: -.02em;
         }
         .masthead-facts .mega-unit { font-family: var(--font-serif); font-weight: 500; font-size: clamp(20px, 2.2vw, 24px); }
         .masthead-facts .mega-label { margin-top: var(--space-1); font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
         .masthead-facts .mega-sub { margin-top: 3px; font-size: 10px; color: var(--ink-faint); letter-spacing: .1em; }
         .masthead-cta { margin-top: var(--space-5); }
-        .masthead-cta > a { font-size: 15px; font-weight: 600; color: var(--accent-2); }
+        .masthead-cta > a { font-size: 15px; font-weight: 600; color: var(--accent-primary); }
         .masthead-cta > a:hover { text-decoration: underline; }
         /* W938：插画切换器归位左侧文字列内（与 CTA 同排会撑破 620px 容器伸进插画区·被金箍棒压住） */
         .hero-dots-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-top: 16px; }
@@ -152,7 +169,7 @@
             .masthead { flex-direction: column; align-items: flex-start; gap: 28px; }
             /* W865 D1：移动端 mega 数字降为紧凑计量（首屏减法·@375 省约 50px）
                W938：全部改作用域形式（全局 .mega-* 规则已移除·孤立选择器门禁） */
-            .masthead-facts .mega-num { font-size: clamp(38px, 11vw, 52px); line-height: 1; }
+            .masthead-facts .mega-num { font-size: clamp(34px, 9vw, 44px); line-height: 1; }
             .masthead-facts .mega-unit { font-size: clamp(18px, 5vw, 22px); }
             .masthead-facts .mega-label { margin-top: var(--space-1); }
             .masthead-cta { flex-wrap: wrap; gap: 14px; }
@@ -229,14 +246,18 @@
             .ask-form button { width: 100%; }
         }
 
-        /* === W488：mega 数字朱砂强调（hero 视觉节奏） === */
-        .mega-num { color: var(--accent-deep); font-variant-numeric: tabular-nums; }
+        /* === W1261：mega 数字改主文本色（明暗两态一致） ===
+           原：亮色 --accent-deep（深朱砂）/ 暗色 --accent（朱砂）⇒ **两主题不同色**，
+           且暗色态下朱砂同时出现在 眉题 + 100 + CTA + FAB 四处 ⇒ 破坏「朱砂单点强调」。
+           实测亮色实际生效值为墨色（被更高特异性规则覆盖）⇒ 明暗实际不一致。
+           修法：两态统一 --text-primary（亮 #1C1A17 / 暗 #F2EDE2·对底 15.29:1）。 */
+        .mega-num { color: var(--text-primary); font-variant-numeric: tabular-nums; }
 
         /* === W488：夜读模式（页面内联 dark 覆盖，不落全局 tokens/system；全站 dark 第二批） === */
         
                 html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
         html[data-theme="dark"] .ask-form button { color: #1A1510; }
-        html[data-theme="dark"] .mega-num { color: var(--accent); }
+        html[data-theme="dark"] .mega-num { color: var(--text-primary); }
 
         /* === W488：夜读切换器 === */
         .theme-toggle {
@@ -514,28 +535,28 @@
                         <p class="card-kicker">001 · 开篇</p>
                         <h3>灵根育孕源流出</h3>
                         <p>石猴出世、拜师菩提，全书世界观在此定型。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 1 回 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">读第 1 回 →</p>
                     </a>
                     <a class="card" href="reader/ch005.html">
                         <p class="card-kicker">005 · 大闹天宫</p>
                         <h3>乱蟠桃大圣偷丹</h3>
                         <p>蟠桃会、偷金丹，反出天宫的前夜。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 5 回 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">读第 5 回 →</p>
                     </a>
                     <a class="card" href="reader/ch027.html">
                         <p class="card-kicker">027 · 三打白骨精</p>
                         <h3>尸魔三戏唐三藏</h3>
                         <p>辨识与信任的第一次崩裂，圣僧恨逐美猴王。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 27 回 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">读第 27 回 →</p>
                     </a>
                     <a class="card" href="reader/ch058.html">
                         <p class="card-kicker">058 · 真假美猴王</p>
                         <h3>二心搅乱大乾坤</h3>
                         <p>二心相争、一体难修，取经队伍的心性关口。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 58 回 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">读第 58 回 →</p>
                     </a>
                 </div>
-                <p class="note" style="margin-top:16px;"><a href="reader/index.html" style="color:var(--accent-2);">查看全部 100 回总目录 →</a></p>
+                <p class="note" style="margin-top:16px;"><a href="reader/index.html" style="color: var(--accent-primary);">查看全部 100 回总目录 →</a></p>
             </section>
         </div>
 
@@ -575,55 +596,55 @@
                         <p class="card-kicker">G · CHAPTER GRAPH</p>
                         <h3>百回结构图谱</h3>
                         <p>100 回篇幅起伏、八十一难分布一眼看全。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/character-dynamic-network.html">
                         <p class="card-kicker">N · CHARACTER NETWORK</p>
                         <h3>人物动态网络</h3>
                         <p>三界人物关系与共现随时间流动。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/journey-spacetime.html">
                         <p class="card-kicker">R · JOURNEY SPACETIME</p>
                         <h3>取经时空</h3>
                         <p>十万八千里路线与十四年时间并置呈现。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/journey-geo-3d.html">
                         <p class="card-kicker">R · JOURNEY GEO 3D</p>
                         <h3>西游地理 3D</h3>
                         <p>取经路线的立体纵深：示意地形上重走十四年西行（与平面时空图互补）。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/narratology-16d-network.html">
                         <p class="card-kicker">N · NARRATOLOGY 16D</p>
                         <h3>叙事学十六维</h3>
                         <p>全书叙事机制的十六维网络。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/criticism-history.html">
                         <p class="card-kicker">H · CRITICISM 500Y</p>
                         <h3>批评史长卷</h3>
                         <p>五百年解读流变、九批评家、三教争辩。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/emotional-heatmap.html">
                         <p class="card-kicker">E · EMOTIONAL HEATMAP</p>
                         <h3>情感热力图</h3>
                         <p>八批评家 × 二十难的情感温度。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/cross-time-danmaku.html">
                         <p class="card-kicker">D · DANMAKU MUSEUM</p>
                         <h3>跨时空弹幕</h3>
                         <p>从明清到当代的名人弹幕博物馆。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/text-search.html">
                         <p class="card-kicker">S · TEXT SEARCH</p>
                         <h3>原著全文检索</h3>
                         <p>七十万字原著，100 回逐字可查。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入 →</p>
                     </a>
                 </div>
                 <h3 class="sub-head">全卷索引</h3>
@@ -743,7 +764,7 @@
                         <h3>数据看板</h3>
                         <p>55 张 KPI 卡片总览项目全貌，87 个 D3.js / Three.js 可视化页面一屏直达，附全站搜索浮层。</p>
                         <p class="card-meta">55 KPI · 90<!--stats:visualization_pages--> PAGES · SITE SEARCH</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入看板 →</p>
+                        <p class="text-sm" style="color: var(--accent-primary);margin-top:var(--space-4);">进入看板 →</p>
                     </a>
                     <div class="tools-side">
                         <a class="card" href="data/tag-cloud.html">
@@ -770,7 +791,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">取经录</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · <span class="footer-changelog">W1260 · W1259 · W1248 · W1247 · W1246 · W1245 · W1243 · W1242 · W1241 · W1240 · W1239 · W1238 · …更早批次详见 CHANGELOG.md</span><a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · <span class="footer-changelog">W1261 · W1260 · W1259 · W1248 · W1247 · W1246 · W1245 · W1243 · W1242 · W1241 · W1240 · W1239 · …更早批次详见 CHANGELOG.md</span><a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>

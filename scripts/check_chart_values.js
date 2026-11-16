@@ -346,10 +346,11 @@ async function waitStable(page) {
     try {
       const r = await page.evaluate(() => {
         const n = document.querySelectorAll('svg,canvas,rect,circle,path,line,polygon,polyline,ellipse,text').length;
-        const texts = [...document.querySelectorAll('[data-value],.kpi-value,.kpi-card .value,.kpi .value,.kpi-card .num,.kpi .num')]
-          .map((e) => (e.getAttribute('data-value') || e.textContent || '').trim())
-          .join('\u0001');
-        return { n, sig: n + '#' + texts.slice(0, 400) };
+        // W1261：签名只用**结构**（元素数）。原先还拼了 KPI 文本内容，
+        // 而本站 KPI 数字带 count-up 动效（W462·900ms·IO 触发），
+        // 动画期间文本持续变化 ⇒ 签名永不稳定 ⇒ 判「dom-unstable」假红。
+        // 文本值本身由 V1–V5 断言覆盖（数据一致性面），不属稳定性判据。
+        return { n, sig: String(n) };
       });
       sig = r.sig;
       elements = r.n;

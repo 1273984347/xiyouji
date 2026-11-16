@@ -99,7 +99,7 @@
       {
         "id": "唐僧",
         "roles": 2,
-        "color": "#c8463a",
+        "color": "#C0392B",
         "belbin": "协调者+完成者",
         "tuckman": "目标澄清",
         "dynamic": "外部合法性"
@@ -115,7 +115,7 @@
       {
         "id": "八戒",
         "roles": 2,
-        "color": "#C9A063",
+        "color": "#8E7D62",
         "belbin": "资源调查员+团队工作者",
         "tuckman": "调节气氛",
         "dynamic": "动机分化"
@@ -123,7 +123,7 @@
       {
         "id": "沙僧",
         "roles": 2,
-        "color": "#6B8E5A",
+        "color": "#3A473A",
         "belbin": "执行者+完成者",
         "tuckman": "稳重执行",
         "dynamic": "沉默缓冲"
@@ -131,7 +131,7 @@
       {
         "id": "白龙马",
         "roles": 1,
-        "color": "#3a6b8c",
+        "color": "#40619E",
         "belbin": "专家",
         "tuckman": "危急出手",
         "dynamic": "角色固化"

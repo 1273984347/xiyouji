@@ -264,7 +264,9 @@ html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14);
     background: var(--paper); font-size: 13px;
 }
 .data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
-.data-status-badge .ds-label { font-weight: 600; color: var(--info); }
+/* W1261：默认态状态徽标文字改中性（--info 为靛蓝族·与「朱砂单点强调」冲突·29 页各 1 处）；
+   具名状态（live=--ok / sample=--warn）保留语义色不变。 */
+.data-status-badge .ds-label { font-weight: 600; color: var(--text-secondary); }
 .data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
 .data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
 .data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
@@ -312,9 +314,11 @@ html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14);
 .hero .breadcrumb {
     margin-bottom: 20px;
     font-size: 12px;
-    color: rgba(242, 235, 220, 0.45);
+    /* W1261：0.45 → 0.58 —— 深色带上的半透明白实测合成后对底 #1A1714 仅 4.1:1
+       （12px 小字未达 AA 4.5:1）；0.58 合成 #979288 ⇒ 5.71:1 达标。 */
+    color: rgba(242, 235, 220, 0.58);
 }
-.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.75); }
 .hero .breadcrumb a:hover { color: var(--accent-soft); }
 
 /* ===== 卡片 ===== */
@@ -501,7 +505,7 @@ tr:last-child td { border-bottom: none; }
 tbody tr td { transition: background-color var(--dur-fast) var(--ease-out-quart); }
 tbody tr:hover td { background: color-mix(in srgb, var(--paper-warm) 60%, transparent); }
 tbody tr:hover td:first-child { box-shadow: inset 2px 0 0 0 var(--accent); }
-tbody tr:hover td.num { color: var(--accent-3); }
+tbody tr:hover td.num { color: var(--text-secondary); }
 td.num, th.num {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
@@ -534,8 +538,8 @@ td.num, th.num {
     border: 1px solid;
 }
 .badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
-.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
-.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-blue { color: var(--accent-primary); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--text-secondary); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
 .badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
 
 /* —— 墨韵动效（W460）：正文链接下划线生长（opt-in 类 .link-ink，禁止 blanket a） —— */
@@ -749,7 +753,7 @@ td.num, th.num {
 .index-row .meta {
     font-family: var(--font-mono);
     font-size: 12px;
-    color: var(--accent-2);
+    color: var(--accent-primary);
     text-align: right;
     white-space: nowrap;
 }
@@ -829,7 +833,7 @@ td.num, th.num {
    .filter-tab / .search-box 收敛同批一次做完（零散传播会造成源-副本失同步）。 */
 .ask-chip {
     font-size: 13px;
-    color: var(--accent-2);
+    color: var(--accent-primary);
     cursor: pointer;
     border: 1px solid var(--line);
     border-radius: var(--radius-pill);
@@ -875,7 +879,7 @@ td.num, th.num {
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     padding: 1px 5px;
-    font-family: var(--font-mono);
+    font-family: var(--font-code);
     font-size: 11px;
 }
 .cite-block .cite-details { margin-top: 6px; }
@@ -883,7 +887,7 @@ td.num, th.num {
    display:flex 会吃掉 list-item 原生三角，故显式绘制箭头；动效仅 transform，时长走 --dur-fast 预算。 */
 .cite-details summary {
     cursor: pointer;
-    color: var(--accent-2);
+    color: var(--accent-primary);
     font-weight: 500;
     user-select: none;
     display: flex;
@@ -894,7 +898,7 @@ td.num, th.num {
 .cite-details summary::before {
     content: "\25B8";
     flex: 0 0 auto;
-    color: var(--accent-2);
+    color: var(--accent-primary);
     transition: transform var(--dur-fast) var(--ease-out-quart);
 }
 .cite-details[open] summary::before { transform: rotate(90deg); }
@@ -920,7 +924,7 @@ td.num, th.num {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
+    font-family: var(--font-code);
     font-size: 11px;
     white-space: pre-wrap;
     word-break: break-all;
@@ -935,7 +939,7 @@ td.num, th.num {
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     background: var(--paper);
-    color: var(--accent-2);
+    color: var(--accent-primary);
     font-size: 11px;
     cursor: pointer;
     transition: background var(--dur-fast) var(--ease-out-quart), color var(--dur-fast) var(--ease-out-quart);
@@ -960,7 +964,7 @@ td.num, th.num {
 .cite-block a[href$=".json"] {
     display: inline-block;
     margin-top: 6px;
-    color: var(--accent-2);
+    color: var(--accent-primary);
 }
 
 /* ===== 微交互工具类（W477 Phase E1 · DESIGN.md §4A.7 · 时长取 §5 契约档） ===== */
@@ -1208,4 +1212,432 @@ html[data-theme="dark"] .viz-illustration {
 
 html[data-theme="dark"] .chapter-plate {
     display: none;
+}
+
+/* ===== W1260 · 宣纸刻本（Xuan Edition）公共壳覆写层 ===== */
+/* 方向：保留宣纸与东方编辑的主题贴合 · 吸收严格栅格与克制纪律 · 禁科技感。 */
+/* 本层以「后置覆写」方式追加，作用于全站 229 页（经 inline_css.py --force 分发）。 */
+/* 落实用户 6 条交互原则：重要性排序 / 对齐与缩进 / 分组 / 渐进式披露 / 响应式 / 动态类型。 */
+
+/* ---------- 原则①：重要性排序 + 阅读顺序（自上而下、由前导侧至尾随侧） ---------- */
+/* 页面主体定宽 + 统一左缘对齐；重要区块（KPI / 首图）置顶，次要区块下移。 */
+.page-wrap, .container {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(16px, 4vw, 40px);
+    padding-right: clamp(16px, 4vw, 40px);
+}
+
+/* ---------- 原则②：对齐与缩进传达层级 ---------- */
+/* 用缩进（--indent-*）+ 左侧朱砂标记线表达层级，取代「只靠字号差」。 */
+.section {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+}
+.section-title {
+    font-family: var(--font-display);
+    font-size: var(--size-section);
+    line-height: var(--leading-heading);
+    color: var(--text-primary);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--accent-primary);
+    margin-bottom: var(--space-2);
+}
+.section-sub {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: var(--leading-body);
+    max-width: 72ch;
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+/* 三级缩进阶梯：小节标题按层级缩进 */
+.section-title[data-level='2'], .section-head h3 { margin-left: var(--indent-1); }
+.section-title[data-level='3'], .section-head h4 { margin-left: var(--indent-2); }
+.section-sub[data-level='2'] { margin-left: var(--indent-1); }
+.section-sub[data-level='3'] { margin-left: var(--indent-2); }
+
+/* ---------- 原则③：分组（留白 / 容器 / 分隔线） ---------- */
+/* KPI 区与图表区明确分属两组：组内靠留白，组间靠一条细分隔线。 */
+.kpi-row, .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    margin: 0 0 var(--space-7);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-raised);
+}
+.kpi-row > .kpi, .kpi-grid > .kpi, .kpi-row > .kpi-card, .kpi-grid > .kpi-card {
+    background: transparent;
+    border: 0;
+    border-right: 1px solid var(--border-subtle);
+    border-radius: 0;
+    box-shadow: none;
+    padding: var(--space-5) var(--space-5);
+    transition: background var(--dur-fast) var(--ease-out-quart);
+}
+.kpi-row > :last-child, .kpi-grid > :last-child { border-right: 0; }
+.kpi-row > .kpi:hover, .kpi-grid > .kpi:hover,
+.kpi-row > .kpi-card:hover, .kpi-grid > .kpi-card:hover {
+    background: var(--surface-sunken);
+    transform: none;
+    box-shadow: none;
+}
+.kpi .kpi-value, .kpi-card .kpi-value {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2rem);
+    line-height: 1.2;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.kpi .kpi-label, .kpi-card .label, .kpi-card .kpi-label {
+    font-family: var(--font-text);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-1);
+}
+.kpi .kpi-desc, .kpi-card .kpi-desc {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+}
+
+/* ---------- 原则④：渐进式披露（初始克制，详情按需） ---------- */
+/* 卡片与图表区默认纯平面无拟物；补充说明弱化；明细交给 tooltip / 可展开。 */
+.card, .chart-block, .section .card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    padding: clamp(18px, 2.4vw, 26px);
+    transition: border-color var(--dur-fast) var(--ease-out-quart);
+}
+.card:hover, .chart-block:hover {
+    border-color: var(--border-strong);
+    transform: none;
+    box-shadow: none;
+}
+/* 图表容器：min-height 不用固定 height（为动态类型留余量） */
+.chart-block {
+    min-height: 220px;
+    height: auto;
+    overflow: visible;
+}
+.chart-block svg { display: block; max-width: 100%; height: auto; }
+
+/* ---------- 原则⑤：响应式适配 ---------- */
+@media (max-width: 1024px) {
+    .kpi-row, .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .kpi-row > .kpi:nth-child(2n) { border-right: 0; }
+    .kpi-grid > .kpi:nth-child(2n) { border-right: 0; }
+    .kpi-row > .kpi:nth-child(-n+2) { border-bottom: 1px solid var(--border-subtle); }
+    .kpi-grid > .kpi:nth-child(-n+2) { border-bottom: 1px solid var(--border-subtle); }
+}
+@media (max-width: 768px) {
+    .kpi-row, .kpi-grid { grid-template-columns: 1fr; }
+    .kpi-row > .kpi, .kpi-grid > .kpi { border-right: 0; border-bottom: 1px solid var(--border-subtle); }
+    .kpi-row > :last-child, .kpi-grid > :last-child { border-bottom: 0; }
+    .section { margin-top: var(--space-7); }
+    .section-title { font-size: clamp(1.125rem, 1rem + 1.2vw, 1.375rem); }
+    /* 图表横向可滚而非压缩（保持可读） */
+    .chart-block { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .chart-block svg { min-width: 640px; }
+}
+@media (max-width: 480px) {
+    .section-sub { font-size: 0.875rem; }
+    .kpi-row > .kpi, .kpi-grid > .kpi { padding: var(--space-4); }
+}
+
+/* ---------- 原则⑥：动态类型准备（系统级放大文本不破版） ---------- */
+/* 全文 rem 基准 · 行高宽松 · 关键容器可增高 · 禁固定高度裁切文字 */
+html { font-size: 100%; }
+body {
+    font-family: var(--font-text);
+    font-size: 1rem;
+    line-height: var(--leading-body);
+    color: var(--text-primary);
+    -webkit-text-size-adjust: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: var(--leading-heading);
+    color: var(--text-primary);
+    overflow-wrap: break-word;
+}
+p, li, td, th, figcaption { line-height: var(--leading-body); }
+/* 禁止用固定高度装文本 */
+.hero, .card, .chart-block, .kpi, .kpi-card, .section { height: auto; }
+/* 表格行随内容增高 */
+table tr { height: auto; }
+td, th { height: auto; white-space: normal; }
+
+/* ---------- Hero：去光晕、去渐变（禁科技感与拟物） ---------- */
+.hero {
+    background: #221D16;
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(44px, 7vw, 72px) clamp(20px, 5vw, 80px);
+}
+.hero::after { background: none; }   /* 去径向光晕 */
+.hero h1 { color: var(--dark-text); font-size: var(--size-hero); }
+
+/* ---------- 图表内文字与辅助线（用新令牌·保证对比度） ---------- */
+svg text {
+    font-family: var(--font-data);
+    fill: var(--text-tertiary);   /* 轴标签 对 bg 5.02（亮）/ 5.85（暗） */
+}
+svg .axis-line, svg line.axis { stroke: var(--axis-line); }
+svg .grid-line, svg line.grid { stroke: var(--grid-line); }
+svg .label-strong { fill: var(--text-primary); }
+
+/* ---------- 图表 tooltip（规范类名·与既有 chart-tooltip 一致） ---------- */
+.chart-tooltip {
+    background: var(--surface-raised);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 8px rgba(28, 26, 23, 0.12);
+    color: var(--text-primary);
+    font-family: var(--font-text);
+}
+.chart-tooltip div + div { margin-top: var(--space-2); }
+
+/* ---------- 动效：保留墨韵体系·禁弹跳 ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+/* ===== 
+/* ===== W1261 · 宣纸刻本 · 图表图形层统一（规范 §1.3 九族画法的公共部分） ===== */
+/* 治理面：d3 标准轴 122 页（ZH 62 + EN 60）。
+   **实测得到的真实类名**（盲审指出旧版规则无匹配对象·此处按 DOM 实况修正）：
+     轴组 = .chart-axis   网格组 = .chart-grid   刻度组 = .tick
+   （旧版写的 .axis / .grid 在仓内 0 命中 ⇒ 规则形同虚设）
+   画法约束：① 轴标签可读（对背景 ≥3:1）② 网格线极浅且仅横向 ③ 轴线独立成层
+   ④ 标签衬底描边 ⑤ 数据形状 1px 实墨描边 · 无发光 */
+
+/* ---------- ⓪ 图表标签类（逐页自造 *-label 类名）——
+   实测：.river-zone-label（淡墨压在 6% 淡色底 ⇒ cr 1.11–1.64）·
+   .tri-vertex-label（反白墨压在中等明度节点 ⇒ cr 2.31）
+   页内私有类规则特异性高于通用规则 ⇒ 须按类名显式治理。
+   修法：**浅墨 + 深墨描边衬底**——描边（而非墨色）承担与底色的分离，
+   于是无论节点/底色是深是浅都读得出（深底上浅墨直接可读，浅底上深墨描边成环）。 */
+svg [class$='-label'],
+svg .label {
+    fill: var(--text-primary) !important;
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+}
+
+/* ---------- ① 坐标轴 ---------- */
+svg .domain,
+svg .bar-axis .domain,
+svg .curves-axis .domain,
+svg .chart-axis .domain {
+    stroke: var(--axis-line);
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+svg .tick line,
+svg .chart-axis .tick line {
+    stroke: var(--axis-line);
+    stroke-width: 1px;
+}
+/* 轴标签：页内私有 .chart-axis text 规则在级联中更靠后 ⇒ 用 !important 压过
+   （与本站既有做法同源：W569 的 svg text fill 用 !important 压 d3 内联样式）。
+   字体走 --font-data（无衬线·数据扫读）· 字号下限 10px · 衬底描边保证与网格交叠时仍可读。 */
+.chart-block svg .tick text,
+.chart-block svg .bar-axis text,
+.chart-block svg .curves-axis text,
+.chart-block svg .axis text,
+.chart-block svg .chart-axis text,
+.chart-block svg .chart-axis .tick text,
+.chart-block svg .axis text,
+.chart-block svg .tick text {
+    font-family: var(--font-data) !important;
+    font-size: 10px !important;
+    fill: var(--text-tertiary) !important;
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 2.5px;
+    stroke-linejoin: round;
+}
+
+/* ---------- ② 网格线：仅横向、极浅 ---------- */
+.chart-block svg .chart-grid line,
+.chart-block svg .grid line {
+    stroke: var(--grid-line);
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+.chart-block svg .chart-grid line.y-grid,
+.chart-block svg .grid line.y-grid,
+.chart-block svg line.grid-y {
+    display: none;
+}
+
+/* ---------- ②b 全图表文字排版统一（字体族 + 字号下限）——
+   页内私有图表规则的类名逐页自造（.bar-axis / .curves-axis / .chart-axis / 裸 .tick），
+   靠枚举类名必然漏 ⇒ 此处用「图表块内所有 svg 文字」统一字体族与字号下限；
+   颜色仍按上下文分（轴=三级 / 数据标签=二级 / 强调=一级），不搞一刀切。 */
+svg text {
+    font-family: var(--font-data) !important;
+    font-size: max(9px, 0.625rem) !important;
+}
+
+/* ---------- ③ 数据形状：1px 实墨描边 · 无发光 ---------- */
+.chart-block svg path[fill^='#'],
+.chart-block svg circle[fill^='#'],
+.chart-block svg rect[fill^='#'] {
+    filter: none;
+}
+.chart-block .series-shape {
+    stroke: color-mix(in srgb, var(--text-primary) 22%, transparent);
+    stroke-width: 1px;
+    stroke-linejoin: round;
+}
+
+/* ---------- ④ 数据标签：直接标注 ---------- */
+.chart-block svg text.value-label,
+.chart-block svg .data-label,
+svg text.value-label,
+svg .data-label {
+    font-family: var(--font-data) !important;
+    font-size: 11px;
+    fill: var(--text-secondary) !important;
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 2.5px;
+    stroke-linejoin: round;
+}
+.chart-block svg text.value-label.is-strong,
+.chart-block svg .data-label.is-strong {
+    fill: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ---------- ⑤ 图例：chip 化 ---------- */
+.chart-block .legend,
+.chart-block .chart-legend {
+    font-family: var(--font-text);
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+.chart-block .legend-item .swatch,
+.chart-block .chart-legend .swatch {
+    border-radius: 2px;
+    box-shadow: none;
+    border: 1px solid color-mix(in srgb, var(--text-primary) 15%, transparent);
+}
+
+/* ---------- ⑥ 扇区标签（外置 + 引线） ---------- */
+.chart-block svg text.slice-label {
+    font-family: var(--font-data) !important;
+    font-size: 11px;
+    fill: var(--text-primary);
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 3px;
+}
+
+/* ---------- ⑦ 网络图节点标签 ——
+   实测：节点标签原用 --text-tertiary（淡墨）直接压在彩色节点圆上
+   （如 rgb(107,102,92) on rgb(58,107,140) ⇒ 对比度 1.01:1 ⇒ 不可读）。
+   修法：标签改用反白墨 + 表面色描边衬底（paint-order），在深/浅节点上都可读。 */
+svg .node-label,
+svg .label-node,
+svg .nlabel,
+svg .node text,
+svg .force-label {
+    fill: var(--text-inverse);
+    paint-order: stroke fill;
+    stroke: color-mix(in srgb, var(--text-primary) 55%, transparent);
+    stroke-width: 2.5px;
+    stroke-linejoin: round;
+}
+
+/* ---------- ⑦ 网络图节点标签：衬底描边 ---------- */
+.chart-block svg text.node-label {
+    font-family: var(--font-text) !important;
+    font-size: 11px;
+    fill: var(--text-primary);
+    paint-order: stroke fill;
+    stroke: var(--surface-canvas);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+}
+
+/* ---------- ⑧ 热力图：单元格描边 + 数值 ---------- */
+.chart-block svg rect.heat-cell {
+    stroke: var(--surface-canvas);
+    stroke-width: 1px;
+}
+.chart-block svg text.heat-value {
+    font-family: var(--font-data) !important;
+    font-size: 10px;
+    fill: var(--text-primary);
+}
+
+/* ---------- 暗色态色值映射（W1261）——
+   实测：图表形状的 fill 是属性（fill=#C0392B），CSS filter 虽能在视觉上提亮，
+   但 computed fill 不受 filter 影响 ⇒ 暗色态门禁仍判「不可见」。
+   正解：暗色下把亮色属性值映射到暗色序列槽 var(--series-N)。 */
+html[data-theme="dark"] svg [fill="#C0392B"],
+html[data-theme="dark"] svg [fill="#c0392b"] {
+    fill: var(--series-1) !important;
+}
+html[data-theme="dark"] svg [fill="#40619E"],
+html[data-theme="dark"] svg [fill="#40619e"] {
+    fill: var(--series-2) !important;
+}
+html[data-theme="dark"] svg [fill="#8E7D62"],
+html[data-theme="dark"] svg [fill="#8e7d62"] {
+    fill: var(--series-3) !important;
+}
+html[data-theme="dark"] svg [fill="#3A473A"],
+html[data-theme="dark"] svg [fill="#3a473a"] {
+    fill: var(--series-4) !important;
+}
+html[data-theme="dark"] svg [fill="#6B665E"],
+html[data-theme="dark"] svg [fill="#6b665e"] {
+    fill: var(--series-5) !important;
+}
+html[data-theme="dark"] svg [fill="#472A4C"],
+html[data-theme="dark"] svg [fill="#472a4c"] {
+    fill: var(--series-6) !important;
+}
+html[data-theme="dark"] svg [fill="#678A93"],
+html[data-theme="dark"] svg [fill="#678a93"] {
+    fill: var(--series-7) !important;
+}
+html[data-theme="dark"] svg [fill="#6D4E65"],
+html[data-theme="dark"] svg [fill="#6d4e65"] {
+    fill: var(--series-8) !important;
+}
+
+/* ---------- ⑨ 暗色态：禁亮度滤波与发光 ---------- */
+html[data-theme="dark"] .chart-block svg path[fill^='#'],
+html[data-theme="dark"] .chart-block svg circle[fill^='#'],
+html[data-theme="dark"] .chart-block svg rect[fill^='#'],
+html[data-theme="dark"] .chart-block svg polygon[fill^='#'],
+html[data-theme="dark"] .chart-block svg ellipse[fill^='#'] {
+    /* W1261：暗色态形状提亮补偿——页面 JS 仍用亮色序列色的字面值，
+       在深墨底上亮度不足 0.16 会被第 56 槽判为「不可见」。
+       提亮到全部序列色越过阈值；文字不参与（文字另有规则）。 */
+    filter: brightness(1.45) saturate(1.05);
+}
+html[data-theme="dark"] .chart-block svg .chart-axis text,
+html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
+    stroke: var(--surface-canvas);
 }

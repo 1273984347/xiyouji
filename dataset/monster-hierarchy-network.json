@@ -12,7 +12,7 @@
       "key": "family",
       "name": "家族型",
       "tag": "FAMILY-CLAN",
-      "color": "#c9a961",
+      "color": "#8E7D62",
       "desc": "以血缘为纽带，跨山头联防，讲究家产继承与子代培养。",
       "examples": "牛魔王家族 · 金角银角兄弟"
     },
@@ -20,7 +20,7 @@
       "key": "alliance",
       "name": "联盟型",
       "tag": "ALLIANCE",
-      "color": "#6b8e6f",
+      "color": "#3A473A",
       "desc": "异姓结盟，按实力排座，共享地盘与情报，但内部脆性高。",
       "examples": "狮驼岭三魔 · 车迟国三妖"
     },

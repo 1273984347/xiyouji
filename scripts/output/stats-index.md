@@ -19,19 +19,19 @@
 | csp_covered | 874 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W1246 |
 | gate_count | 74 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W1232 |
 | html_total | 875 | site/**/*.html（递归全站） | W459 | W1246 |
-| icon_allowlist_entries | 71 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1053 |
+| icon_allowlist_entries | 63 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1261 |
 | inline_css_pages | 866 | site 全树含 INLINED 标记页 | W459 | W1246 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 28 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1157 |
 | pitfalls_cascade | 26 | pitfalls.md 主题「级联 / CHANGELOG」实测条目数 | W1215 | W1215 |
 | pitfalls_css | 48 | pitfalls.md 主题「CSS / 视觉渲染」实测条目数 | W1215 | W1215 |
 | pitfalls_data | 17 | pitfalls.md 主题「数据 / 内容可信度」实测条目数 | W1215 | W1259 |
-| pitfalls_flow | 202 | pitfalls.md 主题「流程 / 协作 / 取证」实测条目数 | W1215 | W1260 |
+| pitfalls_flow | 216 | pitfalls.md 主题「流程 / 协作 / 取证」实测条目数 | W1215 | W1261 |
 | pitfalls_git | 32 | pitfalls.md 主题「git / 提交 / 并发」实测条目数 | W1215 | W1215 |
 | pitfalls_js | 12 | pitfalls.md 主题「JS / CSP / 运行时」实测条目数 | W1215 | W1215 |
-| pitfalls_total | 337 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | W1260 |
+| pitfalls_total | 351 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | W1261 |
 | pytest_collected | 1678 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1236 |
-| report_docs | 197 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1260 |
+| report_docs | 199 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1261 |
 | scan_files | 873 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W1246 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 873 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W1246 |
@@ -44,6 +44,55 @@
 | w864_entries | 259 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1152 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1261（2026-11-17 03:03:56）
+- pitfalls_flow: 214 → 216
+- pitfalls_total: 349 → 351
+
+### 1261（2026-11-17 01:59:09）
+- pitfalls_flow: 213 → 214
+- pitfalls_total: 348 → 349
+
+### W1261（2026-11-17 00:34:42）
+- pitfalls_flow: 212 → 213
+- pitfalls_total: 347 → 348
+
+### W1261（2026-11-17 00:32:36）
+- pitfalls_flow: 211 → 212
+- pitfalls_total: 346 → 347
+
+### W1261（2026-11-17 00:26:27）
+- pitfalls_flow: 210 → 211
+- pitfalls_total: 345 → 346
+
+### W1261（2026-11-17 00:22:21）
+- pitfalls_flow: 209 → 210
+- pitfalls_total: 344 → 345
+
+### W1261（2026-11-16 23:40:24）
+- pitfalls_flow: 208 → 209
+- pitfalls_total: 343 → 344
+- report_docs: 198 → 199
+
+### W1261（2026-11-16 23:11:10）
+- report_docs: 199 → 198
+
+### W1261（2026-11-16 22:44:49）
+- pitfalls_flow: 207 → 208
+- pitfalls_total: 342 → 343
+- report_docs: 198 → 199
+
+### W1261（2026-11-16 21:37:53）
+- pitfalls_flow: 206 → 207
+- pitfalls_total: 341 → 342
+
+### W1261（2026-11-16 21:08:03）
+- report_docs: 197 → 198
+
+### W1261（2026-11-16 20:52:23）
+- icon_allowlist_entries: 71 → 63
+- pitfalls_flow: 202 → 206
+- pitfalls_total: 337 → 341
 
 ### W1260（2026-11-16 19:49:32）
 - pitfalls_flow: 199 → 202

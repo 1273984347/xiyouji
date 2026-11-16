@@ -18,7 +18,7 @@
     <meta name="description" content="404 · 此页不在航线上 — 详解西游记">
 <!--
   W572 D-2 自定义 404 页（GitHub Pages 站点根 404.html 约定）
-  自包含：内联样式（tokens 字面值 --paper-warm #F1EBDD / --ink #23201A / --ink-soft #6B6455 / --accent #C8463A），
+  自包含：内联样式（tokens 字面值 --paper-warm var(--surface-canvas) / --ink #23201A / --ink-soft #6B6455 / --accent #C0392B），
   零外域、零图片；入口四链接（首页/数据看板/标签云/全文检索）+ 返回上一页（W1074 R-08·单段内联脚本随 CSP 哈希管理）。
 -->
 <style>
@@ -30,24 +30,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #F1EBDD;
-    color: #23201A;
-    font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+    background: #F5F0E4;   /* W1261：宣纸刻本页面底（自含页·字面值） */
+    color: #1C1A17;   /* W1261：墨（自含页·字面值） */
+    font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
     padding: var(--space-6);
   }
   .card {
     max-width: 560px;
     width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #E3DBC8;
-    border-radius: 8px;
+    background: #FCFAF4;   /* W1261：卡片面（自含页·字面值） */
+    border: 1px solid #DCD3BF;   /* W1261：卡片边（自含页·字面值） */
+    border-radius: 6px;   /* W1261：圆角 3 档之 --radius-lg（自含页·字面值） */
     padding: var(--space-9) var(--space-8);
     text-align: center;
   }
   .code {
     font-size: 64px;
     font-weight: 700;
-    color: #C8463A;
+    color: var(--accent-primary);
     letter-spacing: 4px;
     line-height: 1.2;
   }
@@ -67,13 +67,13 @@
   .entries a {
     display: inline-block;
     padding: 9px 18px;
-    border: 1px solid #C8463A;
+    border: 1px solid #C0392B;
     border-radius: 999px;
-    color: #C8463A;
+    color: var(--accent-primary);
     text-decoration: none;
     font-size: 14px;
   }
-  .entries a:hover { background: #C8463A; color: #FFFFFF; }
+  .entries a:hover { background: #C0392B; color: #FFFFFF; }
   .foot { margin-top: var(--space-6); font-size: 12px; color: #6B6455; }
 </style>
 <script>

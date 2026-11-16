@@ -29,7 +29,7 @@
       "key": "time",
       "name": "时间叙事",
       "en": "Time-Narrative",
-      "color": "#6B8E5A"
+      "color": "#3A473A"
     }
   ],
   "indicators": [
@@ -75,7 +75,7 @@
     },
     {
       "name": "时间叙事",
-      "color": "#6B8E5A",
+      "color": "#3A473A",
       "values": [
         5,
         4,
@@ -235,7 +235,7 @@
         "type": "dim",
         "dim": "time",
         "size": 32,
-        "color": "#6B8E5A"
+        "color": "#3A473A"
       },
       {
         "id": "王阳明",
@@ -305,21 +305,21 @@
         "type": "theorist",
         "dim": "time",
         "size": 18,
-        "color": "#6B8E5A"
+        "color": "#3A473A"
       },
       {
         "id": "热奈特",
         "type": "theorist",
         "dim": "time",
         "size": 18,
-        "color": "#6B8E5A"
+        "color": "#3A473A"
       },
       {
         "id": "里柯尔",
         "type": "theorist",
         "dim": "time",
         "size": 18,
-        "color": "#6B8E5A"
+        "color": "#3A473A"
       },
       {
         "id": "L1·石猴出世",

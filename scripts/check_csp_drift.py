@@ -60,6 +60,9 @@ META_RE = re.compile(
     re.IGNORECASE,
 )
 FIX_CMD = "python scripts/generate_csp.py"
+# **W1261 新增**：模板页排除集——与 generate_csp.py 的 TEMPLATE_EXCLUDE **同口径**。
+# 模板页从不承载 CSP meta（发布时逐页注入）⇒ 不参与漂移判定（详见 evaluate 内注释）。
+TEMPLATE_EXCLUDE = {"_template.html"}
 
 
 def _git(*args):
@@ -232,6 +235,18 @@ def evaluate(pages, base_html, cur_html):
     """
     issues, notes = [], []
     for rel in pages:
+        # **W1261 修判据侧缺陷（口径与发布事实脱节）**：`_template.html` 是模板页·
+        # **从不承载 CSP meta**——generate_csp.py 以 TEMPLATE_EXCLUDE 显式跳过它，
+        # CSP 由 generate_csp 在**发布时逐页注入**。⇒ 模板的 `declared` 恒为空 ⇒
+        # 旧口径「内联块哈希不在 meta 声明里 ⇒ 漂移」会把模板**恒判为漂移页**；
+        # 本批只要碰过模板（内联 CSS 分发必然改它）⇒ 「本批改动页 ∩ 漂移页」非空
+        # ⇒ 第 56 槽**假红**（实测：site/_template.html 第 1 段 sha256-9KyamoJ55rad）。
+        # ⇒ 此处与 generate_csp **同口径排除模板页**，并在 note 里登记跳过数
+        # （不静默）；**判据强度对发布页不变**。
+        if os.path.basename(rel) in TEMPLATE_EXCLUDE:
+            notes.append("%s：模板页不承载 CSP meta（发布时逐页注入·与 generate_csp 同口径）·跳过"
+                         % rel)
+            continue
         cur = cur_html.get(rel)
         if cur is None:
             notes.append("%s：改后内容不可读（文件已删？）·跳过" % rel)

@@ -42,7 +42,7 @@
   "characters": [
     {
       "name": "唐僧",
-      "color": "#c8463a",
+      "color": "#C0392B",
       "values": [
         7.2,
         7.8,
@@ -54,7 +54,7 @@
     },
     {
       "name": "悟空",
-      "color": "#C9A063",
+      "color": "#8E7D62",
       "values": [
         8.5,
         5.5,
@@ -78,7 +78,7 @@
     },
     {
       "name": "悟净",
-      "color": "#6B8E5A",
+      "color": "#3A473A",
       "values": [
         6.5,
         6,
@@ -90,7 +90,7 @@
     },
     {
       "name": "观音",
-      "color": "#3a6b8c",
+      "color": "#40619E",
       "values": [
         8.8,
         8.2,
@@ -114,7 +114,7 @@
     },
     {
       "name": "玉帝",
-      "color": "#C9A063",
+      "color": "#8E7D62",
       "values": [
         8,
         8.5,
@@ -131,14 +131,14 @@
       "x": -1.8,
       "y": 1.2,
       "cluster": 0,
-      "color": "#c8463a"
+      "color": "#C0392B"
     },
     {
       "name": "悟空",
       "x": -2.5,
       "y": -2.8,
       "cluster": 0,
-      "color": "#C9A063"
+      "color": "#8E7D62"
     },
     {
       "name": "八戒",
@@ -152,14 +152,14 @@
       "x": -0.2,
       "y": -0.5,
       "cluster": 2,
-      "color": "#6B8E5A"
+      "color": "#3A473A"
     },
     {
       "name": "观音",
       "x": 2.5,
       "y": 1.8,
       "cluster": 1,
-      "color": "#3a6b8c"
+      "color": "#40619E"
     },
     {
       "name": "如来",
@@ -173,7 +173,7 @@
       "x": 2.8,
       "y": 2.5,
       "cluster": 1,
-      "color": "#C9A063"
+      "color": "#8E7D62"
     }
   ]
 }

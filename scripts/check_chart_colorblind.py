@@ -78,6 +78,11 @@ RE_FS_ASSIGN = re.compile(
 )
 RE_SCALE_CONT = re.compile(r"scale(?:Linear|Sequential|Sqrt|Log|Pow|Diverging)\s*\(|interpolate\w*\(")
 RE_STOP_BLOCK = re.compile(r"<(?:linear|radial)Gradient[\s\S]*?</(?:linear|radial)Gradient>", re.I)
+# W1261：暗色补偿规则（其 hex 是补偿目标值·非色板成员）
+RE_DARK_COMP = re.compile(
+    'html' + r'\[data-theme=[\"\']dark[\"\']\]'
+    + r'[^\{]*\{[^\}]*(?:fill|stroke)[^\}]*\}',
+    re.I)
 
 
 # ---------------- 色彩数学（纯 stdlib） ----------------
@@ -168,6 +173,14 @@ def ciede2000(lab1: tuple[float, float, float], lab2: tuple[float, float, float]
         (dLp / SL) ** 2 + (dCp / SC) ** 2 + (dHp / SH) ** 2
         - RT * (dCp / SC) * (dHp / SH)
     ) ** 0.5
+
+
+# W1261：图表 chrome 令牌（轴线 / 网格线 / 卡片边 / 表面层 / 文本层）不是数据系列色
+CHROME_TOKENS = (
+    "--axis-line", "--grid-line", "--border-subtle", "--border-strong",
+    "--surface-canvas", "--surface-raised", "--surface-sunken", "--surface-inset",
+    "--text-primary", "--text-secondary", "--text-tertiary", "--text-inverse",
+)
 
 
 def _is_neutral(rgb: tuple[int, int, int]) -> bool:
@@ -276,6 +289,10 @@ def page_palette(html: str, token_map: dict[str, str]) -> dict:
     连续色阶页（scaleLinear 等·W589 数据驱动角色色口径）页级豁免。
     """
     body = strip_embedded(html)
+    # W1261：剔除暗色补偿规则（html[data-theme=dark] svg [fill=#xxx] {...}）。
+    # 那些 hex 是**旧色板的暗色补偿目标值**，不是页面实际绘制的系列色；
+    # 判据同时解析新令牌后，补偿目标 hex 会与新令牌色形成新配对 ⇒ 大量假 FAIL。
+    body = RE_DARK_COMP.sub("", body)
     gradient_n = len(RE_STOP_BLOCK.findall(body))
     body = RE_STOP_BLOCK.sub("", body)
 
@@ -286,6 +303,13 @@ def page_palette(html: str, token_map: dict[str, str]) -> dict:
 
     def put(color: str, src: str) -> None:
         nonlocal neutrals
+        # W1261：图表 chrome 令牌（轴线 / 网格线 / 卡片边 / 表面层 / 文本层）
+        # 不是数据系列色，不该进入色板参与配对（否则轴线×卡片边之类会假 FAIL）。
+        c0 = color.strip()
+        if c0.startswith("var("):
+            nm = c0[4:-1].strip()
+            if nm in CHROME_TOKENS:
+                return
         rgb = to_rgb(color, token_map)
         if rgb is None:
             return

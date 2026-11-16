@@ -123,6 +123,12 @@ def run_gate():
         fails += 1
         lines.append('  FAIL %s：目录不可读（%s·fail-closed）' % (PLAN_REL, e))
     for rel in files:
+        # W1261: 本批移除的路径（删除 / 改名旧名）不在增量判定面内——
+        # 它不可能「引入」不符合项，且磁盘上已不存在 ⇒ 读文件必抛。
+        # 原实现把这类记录当变更文件判读 ⇒ 任何改名都会让本槽假红。
+        if not os.path.isfile(os.path.join(ROOT, rel)):
+            lines.append('  SKIP %s（本批已移除·不在增量判定面内）' % rel)
+            continue
         verdict, d = judge_file(rel)
         if d.get('error'):
             fails += 1

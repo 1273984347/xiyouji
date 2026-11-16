@@ -120,4 +120,7 @@ def test_defer_hold_regexes_against_real_tokens():
     dark = audit._dark_block_names(css)
     # W1106 已兑现 W826 登记的 defer 项「暗色 --chart-3/5 新增」⇒ 断言由「不在暗色块」改为「在暗色块且取补偿等效值」
     assert "--chart-3" in dark and "--chart-5" in dark
-    assert "--chart-3: #C8A063" in css and "--chart-5: #F2E8D3" in css
+    # W1261：--chart-3/5 已重定向到语义层的 --series-3/5（暗色补偿值由序列槽承载）
+    assert "--chart-3: var(--series-3)" in css and "--chart-5: var(--series-5)" in css
+    # W1261 暗色序列色按色盲可辨性重选（亮色 min dE 12.03 / 暗色 11.04·门槛 10）
+    assert "--series-3: #C1BE8B" in css and "--series-5: #8B9BBC" in css

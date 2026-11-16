@@ -9,7 +9,8 @@
  *   - openDrill(title, html) / closeDrill()   右侧滑入式钻取详情面板
  *
  * 不依赖任何框架；file:// 下亦可工作（导出用 Blob + a[download]，无需服务器）。
- * 设计语言沿用 tokens.css：朱砂 #c8463a / 靛青 #3a6b8c / 宣纸 #faf7f2。
+ * 设计语言沿用 tokens.css：朱砂 --accent-primary #C0392B / 靛 --series-2 #40619E / 宣纸 --surface-canvas #F5F0E4。
+ * （W1261：此处原写旧色板字面量 #c8463a/#3a6b8c/#faf7f2，与现役令牌不一致 ⇒ 已订正）
  */
 (function (global) {
   "use strict";

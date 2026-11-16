@@ -30,21 +30,27 @@
   const style = document.createElement('style');
   style.textContent = `
     .rag-fab {
-      position: fixed; bottom: 28px; right: 28px; z-index: 900;
-      width: 56px; height: 56px; border-radius: 50%;
-      background: #C8463A; color: #fff; border: none; cursor: pointer;
-      font-size: 22px; display: grid; place-items: center;
-      box-shadow: 0 4px 16px rgba(200,70,58,0.3);
+      /* W1261：硬编码旧朱砂 #C8463A → 走令牌 --accent-primary（宣纸刻本唯一彩色强调）；
+         56px → 48px + 右下内缩 20px：原 56px 圆球正压住首页「005 · 大闹天宫」卡片右上角
+         （实测 FAB bbox 与卡片 bbox 相交）⇒ 缩小 + 内缩减少压盖面积。 */
+      position: fixed; bottom: 20px; right: 20px; z-index: 900;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--accent-primary, #C0392B); color: var(--surface-canvas, #F5F0E4);
+      border: none; cursor: pointer;
+      font-size: 20px; display: grid; place-items: center;
+      box-shadow: 0 4px 16px rgba(192, 57, 43, 0.28);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .rag-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(200,70,58,0.4); }
+    .rag-fab:hover { transform: scale(1.06); box-shadow: 0 6px 24px rgba(192, 57, 43, 0.36); }
     .rag-fab.hidden { display: none; }
 
     .rag-panel {
-      position: fixed; bottom: 28px; right: 28px; z-index: 901;
+      /* W1261：整块面板由硬编码旧色板改为令牌（随明暗主题自动切换） */
+      position: fixed; bottom: 20px; right: 20px; z-index: 901;
       width: 380px; max-height: 520px; display: none; flex-direction: column;
-      background: #FAF7F0; border: 1px solid #E5DFD0; border-radius: 6px;
-      box-shadow: 0 8px 32px rgba(35,32,26,0.12);
+      background: var(--surface-raised, #FCFAF4);
+      border: 1px solid var(--border-subtle, #DCD3BF); border-radius: 6px;
+      box-shadow: 0 8px 32px rgba(35, 32, 26, 0.12);
       font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
       overflow: hidden;
     }
@@ -52,17 +58,18 @@
 
     .rag-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 18px; background: #221D16; color: #F2EBDC;
+      padding: 14px 18px; background: var(--surface-sunken, #EDE7D6);
+      color: var(--text-primary, #1C1A17);
     }
     .rag-header .rag-title {
       font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 600;
     }
-    .rag-header .rag-status { font-size: 11px; color: #A89B7F; margin-top: 2px; }
+    .rag-header .rag-status { font-size: 11px; color: var(--text-secondary, #4A463F); margin-top: 2px; }
     .rag-header .rag-close {
-      background: none; border: none; color: #A89B7F; font-size: 20px;
+      background: none; border: none; color: var(--text-secondary, #4A463F); font-size: 20px;
       cursor: pointer; padding: 4px; line-height: 1;
     }
-    .rag-header .rag-close:hover { color: #F2EBDC; }
+    .rag-header .rag-close:hover { color: var(--text-primary, #1C1A17); }
 
     .rag-messages {
       flex: 1; overflow-y: auto; padding: 16px; min-height: 200px; max-height: 320px;
@@ -70,42 +77,46 @@
     .rag-msg { margin-bottom: 14px; font-size: 13px; line-height: 1.7; }
     .rag-msg-user { text-align: right; }
     .rag-msg-user .rag-bubble {
-      display: inline-block; background: #C8463A; color: #fff;
+      display: inline-block; background: var(--accent-primary, #C0392B);
+      color: var(--surface-canvas, #F5F0E4);
       padding: 8px 14px; border-radius: 12px 12px 2px 12px; max-width: 85%;
       text-align: left;
     }
     .rag-msg-bot .rag-bubble {
-      display: inline-block; background: #fff; border: 1px solid #E5DFD0;
+      display: inline-block; background: var(--surface-canvas, #F5F0E4);
+      border: 1px solid var(--border-subtle, #DCD3BF);
       padding: 10px 14px; border-radius: 2px 12px 12px 12px; max-width: 92%;
     }
     .rag-msg-bot .rag-source {
-      margin-top: 8px; padding-top: 8px; border-top: 1px dashed #E5DFD0;
-      font-size: 11px; color: #9A9280;
+      margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border-subtle, #DCD3BF);
+      font-size: 11px; color: var(--text-tertiary, #6B665C);
     }
     .rag-msg-bot .rag-graph {
-      margin-top: 8px; font-size: 11px; color: #3A6B8C;
+      margin-top: 8px; font-size: 11px; color: var(--text-secondary, #4A463F);
     }
     .rag-msg-bot .rag-graph span { display: inline-block; margin: 2px 4px 2px 0; }
-    .rag-msg-error .rag-bubble { border-color: #C8463A; color: #8C2A2A; }
-    .rag-msg-hint { color: #9A9280; font-size: 12px; text-align: center; padding: 24px 16px; }
+    .rag-msg-error .rag-bubble { border-color: var(--status-neg, #8C2A2A); color: var(--status-neg, #8C2A2A); }
+    .rag-msg-hint { color: var(--text-tertiary, #6B665C); font-size: 12px; text-align: center; padding: 24px 16px; }
 
     .rag-input-row {
       display: flex; gap: 8px; padding: 12px 14px;
-      border-top: 1px solid #E5DFD0; background: #fff;
+      border-top: 1px solid var(--border-subtle, #DCD3BF);
+      background: var(--surface-raised, #FCFAF4);
     }
     .rag-input-row input {
       flex: 1; font-size: 13px; padding: 9px 14px;
-      border: 1px solid #E5DFD0; border-radius: 4px;
-      background: #FAF7F0; color: #23201A; outline: none;
+      border: 1px solid var(--border-subtle, #DCD3BF); border-radius: 4px;
+      background: var(--surface-canvas, #F5F0E4); color: var(--text-primary, #1C1A17); outline: none;
       font-family: inherit;
     }
-    .rag-input-row input:focus { border-color: #C8463A; }
+    .rag-input-row input:focus { border-color: var(--accent-primary, #C0392B); }
     .rag-input-row button {
-      padding: 9px 16px; background: #C8463A; color: #fff;
+      padding: 9px 16px; background: var(--accent-primary, #C0392B);
+      color: var(--surface-canvas, #F5F0E4);
       border: none; border-radius: 4px; font-size: 13px; font-weight: 500;
       cursor: pointer; white-space: nowrap; font-family: inherit;
     }
-    .rag-input-row button:hover { background: #b33d32; }
+    .rag-input-row button:hover { background: var(--accent-muted, #7E2A1F); }
     .rag-input-row button:disabled { opacity: 0.5; cursor: not-allowed; }
 
     @media (max-width: 480px) {
@@ -139,7 +150,7 @@
         输入任何关于《西游记》的问题。<br>
         例如：「悟空为什么哭？」「紧箍咒和正则化有什么关系？」「狮驼岭有多难？」<br><br>
         <small>需先启动本地 RAG 服务：<code>python scripts/rag/rag_server.py</code></small><br>
-        <small>或离线体验渡口写作引擎：<a href="dukou-engine.html" target="_blank" rel="noopener" style="color:#3A6B8C;text-decoration:none;">西游 · 渡口 →</a></small>
+        <small>或离线体验渡口写作引擎：<a href="dukou-engine.html" target="_blank" rel="noopener" style="color:var(--accent-primary);text-decoration:none;">西游 · 渡口 →</a></small>
       </div>
     </div>
     <div class="rag-input-row">
@@ -296,7 +307,7 @@
     if (!serviceOnline) {
       await checkHealth();
       if (!serviceOnline) {
-        addMessage('error', '⚠️ RAG 服务未启动。<br>请在终端运行：<code>python scripts/rag/rag_server.py</code><br>然后刷新本页面重试。<br>或离线体验渡口写作引擎：<a href="dukou-engine.html" target="_blank" rel="noopener" style="color:#3A6B8C;">西游 · 渡口 →</a>');
+        addMessage('error', '⚠️ RAG 服务未启动。<br>请在终端运行：<code>python scripts/rag/rag_server.py</code><br>然后刷新本页面重试。<br>或离线体验渡口写作引擎：<a href="dukou-engine.html" target="_blank" rel="noopener" style="color:var(--accent-primary);">西游 · 渡口 →</a>');
         sendBtn.disabled = false;
         sendBtn.textContent = '问';
         return;
@@ -357,7 +368,7 @@
         const srcDiv = document.createElement('div');
         srcDiv.className = 'rag-source';
         srcDiv.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.6C10.6 5.1 8.6 4.6 6 4.6H3.6v12.8c2.6 0 4.6.5 6 1.9 1.4-1.4 3.4-1.9 6-1.9V4.6c-2.6 0-4.6.5-6 2zM12 6.6v12.7" transform="translate(0.2209 -2.6626) scale(1.227)"/></svg> 来源：' + sources.map(s => s.href
-          ? `<a href="${escapeAttr(s.href)}" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">${escapeHtml(s.name)} ↗</a>`
+          ? `<a href="${escapeAttr(s.href)}" target="_blank" rel="noopener" style="color:var(--accent-primary);text-decoration:none">${escapeHtml(s.name)} ↗</a>`
           : escapeHtml(s.name)).join(' · ');
         bubble.appendChild(srcDiv);
       }
