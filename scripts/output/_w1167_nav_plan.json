@@ -1,30 +1,8 @@
 {
-  "mode": "--apply",
+  "mode": "--dry-run",
   "stats": {
-    "update": 238,
-    "insert-header": 636
+    "update": 874
   },
-  "changed_sample": [
-    "reader/ch001.html",
-    "reader/ch002.html",
-    "reader/ch003.html",
-    "reader/ch004.html",
-    "reader/ch005.html",
-    "reader/ch006.html",
-    "reader/ch007.html",
-    "reader/ch008.html",
-    "reader/ch009.html",
-    "reader/ch010.html",
-    "reader/ch011.html",
-    "reader/ch012.html",
-    "reader/ch013.html",
-    "reader/ch014.html",
-    "reader/ch015.html",
-    "reader/ch016.html",
-    "reader/ch017.html",
-    "reader/ch018.html",
-    "reader/ch019.html",
-    "reader/ch020.html"
-  ],
-  "changed_total": 636
+  "changed_sample": [],
+  "changed_total": 0
 }

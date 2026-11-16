@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（419）
+## 文件（422）
 
 ### 样式与资源
 
@@ -426,6 +426,9 @@
 - `post-07-gu-shan-yingxue.webp`
 - `post-08-tangseng-chanshi.webp`
 - `post-09-bajiaoshan-zhaoyun.webp`
+- `silk-hero-01-yunhai-fosi.webp`
+- `silk-hero-06-heifengshan.webp`
+- `silk-hero-11-fabao-sanjian.webp`
 - `viz-01-network.webp`
 - `viz-02-heatmap.webp`
 - `viz-03-radar.webp`

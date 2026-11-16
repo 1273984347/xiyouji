@@ -22,6 +22,18 @@
 | scripts/output/README.md | W1249 | 输出目录说明刷新 |
 | scripts/output/file-index.md | W1249 | 本批登记行 |
 | scripts/output/_w1249_spec.json | W1249 | 本批规格 |
+| STRUCTURE.md | W1249 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1249 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1249 | stats 标记跟随 |
+| docs/INDEX.md | W1249 | 文档索引重建（891 篇·含 T104 报告） |
+| scripts/output/_w1167_nav_plan.json | W1249 | 生成物刷新 |
+| scripts/output/stats-changelog.json | W1249 | stats 变更史追加 W1249 |
+| scripts/output/stats-index.md | W1249 | stats 索引面刷新 |
+| scripts/output/stats.json | W1249 | stats 刷新（变更 1 键） |
+| scripts/output/tools-inventory.md | W1249 | 工具清单刷新 |
+| site/rss.xml | W1249 | 第 73 槽：RSS 新鲜度 |
+| site/static/images/INDEX.md | W1249 | 图片目录清单刷新（收录 3 张 silk-hero 图） |
+| site/static/images/README.md | W1249 | 图片目录说明刷新 |
 ## W1248 CI 二轮红清偿：朱砂审计面补入新页（2026-11-15）
 
 | 文件 | W | 说明 |
