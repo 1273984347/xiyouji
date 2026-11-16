@@ -1,3 +1,24 @@
+## W1256 撤销图上题识 + 横幅裁白（形态④·209 页）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/reader/themes/（209 页） | W1256 | 撤销 W1255 图上题识（span + 6 条 CSS 全删）+ 裁去左侧约 1/3 素绢留白（figure overflow hidden + img width 150% / margin-left -50%⇒ 水平可见区=源图右侧 2/3·主体放大 1.5 倍）·12 张图片资产零改动·五种构图实拍主体完整 |
+| docs/11-方案报告/计划方案/T109-任务计划执行与经验沉淀报告-2026-11-16.md | W1256 | 任务执行报告（执行前计划→执行记录→验收→复盘→经验沉淀） |
+| docs/11-方案报告/计划方案/T108-任务计划执行与经验沉淀报告-2026-11-16.md | W1256 | 加状态注记（本批方案已撤销·保留为过程记录） |
+| docs/11-方案报告/README.md | W1256 | 报告目录 §六 登记行（编号 118） |
+| docs/00-导读/W批次编号对账表.md | W1256 | W1256 认领行 |
+| scripts/output/file-index.md | W1256 | 本批登记行 |
+| CHANGELOG.md | W1256 | 本批段 + 编号规则段推进（W001-W1256） |
+| HANDOVER.md | W1256 | 头链·当前 HEAD·进度推进 |
+| CITATION.cff | W1256 | version 推进 |
+| .github/workflows/README.md | W1256 | 头部版本与里程碑上限推进 |
+| scripts/output/stats.json | W1256 | stats 刷新 |
+| scripts/output/stats-changelog.json | W1256 | stats 变更史 |
+| scripts/output/stats-index.md | W1256 | stats 索引面 |
+| docs/INDEX.md | W1256 | 文档索引重建 |
+| site/data/search-index-zh.js | W1256 | 中文站内搜索索引刷新 |
+| site/en/search-index-en.js | W1256 | 英文站内搜索索引刷新 |
+
 ## W1255 横幅图上题识（形态①·209 页）
 
 | 文件 | W | 说明 |
