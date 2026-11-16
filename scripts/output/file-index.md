@@ -1,3 +1,235 @@
+## W1248 CI 二轮红清偿：朱砂审计面补入新页（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/output/_w876_site_audit_final.json | W1248 | 第 43 槽审计面补入 data/poetry-density.html（实测 0 处朱砂实底·空表如实记录） |
+| AGENTS.md | W1248 | 脚注条目 |
+| README.md | W1248 | 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1248 | 版本抬头行推进 |
+| CHANGELOG.md | W1248 | 本批段 |
+| HANDOVER.md | W1248 | 里程碑块 |
+| STRUCTURE.md | W1248 | 当前批次行推进 |
+| .github/workflows/README.md | W1248 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1248 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1248 | 滚动迁入条目 |
+| CITATION.cff | W1248 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1248 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1248 | 页脚批次链插入 |
+| site/dukou-engine.html | W1248 | 页脚批次链插入 |
+| site/rss.xml | W1248 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1248 | 本批段追加 |
+| scripts/output/tools-inventory.md | W1248 | 工具清单刷新 |
+| scripts/output/_cascade_files_W1248.txt | W1248 | 级联改动面清单 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1248 | 台账腾窗 |
+| scripts/output/_vermilion_solid_cache.json | W1248 | 朱砂缓存更新 |
+| scripts/output/_vermilion_solid_report.json | W1248 | 朱砂报告更新 |
+| scripts/output/stats.json | W1248 | stats 刷新 |
+| site/index.html | W1248 | 首页统计跟随 |
+| scripts/output/_w1248_spec.json | W1248 | 本批规格 |
+| docs/00-导读/W批次编号对账表.md | W1248 | W1248 认领行 |
+
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1248 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1248 | stats 标记跟随 |
+## W1247 CI 首跑红清偿：搜索索引剔除未跟踪件重建 + 可视化基线补入新页（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/search-index-zh.js | W1247 | 第 46 槽：剔除未跟踪文档后重建（zh 1008 条） |
+| site/en/search-index-en.js | W1247 | 第 46 槽：重建（en 1046 条） |
+| scripts/output/chart-values-baseline.txt | W1247 | 第 43 槽：新增页 poetry-density 入基线（90 页 540 行·缺口 0） |
+| scripts/output/stats.json | W1247 | stats 刷新 |
+| AGENTS.md | W1247 | 脚注条目 |
+| README.md | W1247 | 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1247 | 版本抬头行推进 |
+| CHANGELOG.md | W1247 | 本批段 |
+| HANDOVER.md | W1247 | 里程碑块 |
+| STRUCTURE.md | W1247 | 当前批次行推进 |
+| .github/workflows/README.md | W1247 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1247 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1247 | 滚动迁入条目 |
+| CITATION.cff | W1247 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1247 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1247 | 页脚批次链插入 |
+| site/dukou-engine.html | W1247 | 页脚批次链插入 |
+| site/rss.xml | W1247 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1247 | 本批段追加 |
+| scripts/output/tools-inventory.md | W1247 | 工具清单刷新 |
+| scripts/output/_cascade_files_W1247.txt | W1247 | 级联改动面清单 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1247 | 台账腾窗 |
+| site/index.html | W1247 | 首页统计跟随 |
+| scripts/output/INDEX.md | W1247 | 目录清单刷新 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1247 | 第 74 槽腾窗 |
+| archive/docs/file-index-ARCHIVE.md | W1247 | 第 74 槽腾窗 |
+| scripts/output/README.md | W1247 | 目录说明刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1247 | 朱砂缓存更新 |
+| scripts/output/_w1247_spec.json | W1247 | 本批规格 |
+| docs/00-导读/W批次编号对账表.md | W1247 | W1247 认领行 |
+
+## W1246 reader 模板去 UI emoji（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W1246 | reader 模板三处 UI emoji 去除（☆收藏本页 / 👍有帮助 / 👎待改进 → 纯文字） |
+| scripts/output/emoji-residue-baseline.txt | W1246 | 第 72 槽棘轮下调 623→610 |
+| site/reader/poetry/index.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/主题诗词创作.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/原著人物赋诗词赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/原著景物诗分类赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/原著景物诗赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/原著诗词赏析.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/回目对联分析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/开篇诗专题深化.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游与临江仙词牌赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游与水调歌头词牌赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游与满庭芳词牌赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游与西江月词牌赏析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游诗词意象谱系专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/西游诗词韵律分析专题.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/诗词条目明细-密度最高六回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第001-020回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第021-040回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第041-060回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第061-080回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| site/reader/poetry/逐回诗词索引-第081-100回.html | W1246 | reader 重建（模板去 emoji 后·poetry 子树） |
+| scripts/output/stats.json | W1246 | stats 刷新 |
+| scripts/output/stats-index.md | W1246 | stats 索引面刷新 |
+| site/reader/poetry/INDEX.md | W1246 | 目录清单刷新 |
+| site/reader/poetry/README.md | W1246 | 目录说明刷新 |
+| AGENTS.md | W1246 | 脚注条目 |
+| README.md | W1246 | 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1246 | 版本抬头行推进 |
+| CHANGELOG.md | W1246 | 本批段 |
+| HANDOVER.md | W1246 | 里程碑块 |
+| STRUCTURE.md | W1246 | 当前批次行推进 |
+| .github/workflows/README.md | W1246 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1246 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1246 | 滚动迁入条目 |
+| CITATION.cff | W1246 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1246 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1246 | 页脚批次链插入 |
+| site/dukou-engine.html | W1246 | 页脚批次链插入 |
+| site/rss.xml | W1246 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1246 | 本批段追加 |
+| scripts/output/tools-inventory.md | W1246 | 工具清单刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1246 | 朱砂缓存更新 |
+| scripts/output/_cascade_files_W1246.txt | W1246 | 级联改动面清单 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1246 | 台账腾窗 |
+| site/data/search-index-zh.js | W1246 | 搜索索引重建 |
+| site/en/search-index-en.js | W1246 | 搜索索引重建 |
+| site/index.html | W1246 | 首页统计跟随 |
+| site/sitemap.xml | W1246 | 新页 URL 补入（869） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1246 | 第 74 槽腾窗 |
+| archive/docs/file-index-ARCHIVE.md | W1246 | 第 74 槽腾窗 |
+| docs/agent/gates.md | W1246 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1246 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1246 | stats 标记跟随 |
+| scripts/output/stats-changelog.json | W1246 | stats 变更史追加 W1246 |
+| scripts/output/INDEX.md | W1246 | 目录清单刷新 |
+| scripts/output/README.md | W1246 | 目录说明刷新 |
+| scripts/output/_w1246_spec.json | W1246 | 本批规格 |
+| docs/00-导读/W批次编号对账表.md | W1246 | W1246 认领行 + W1245 台账 hash 回填 |
+
+## W1245 新增可视化页「百回诗词密度」：D3 密度曲线 + 十回滑动均值 + 词牌标注（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/poetry-density.html | W1245 | 新增：百回韵文密度页（柱 + 滑动均值线 + 词牌标点·EMBEDDED 100 回·守卫动效） |
+| site/index.html | W1245 | 导航 + 数据源徽标 |
+| site/sitemap.xml | W1245 | 新页 URL（863） |
+| site/data/search-index-zh.js | W1245 | 搜索索引重建 |
+| site/en/search-index-en.js | W1245 | 搜索索引重建 |
+| site/data/INDEX.md | W1245 | 目录清单刷新 |
+| site/data/README.md | W1245 | 目录说明刷新 |
+| scripts/output/stats.json | W1245 | visualization_pages 89→90 / site_data_html 90→91 / html_total 868→875 |
+| scripts/output/stats-changelog.json | W1245 | stats 变更史追加 W1245 |
+| scripts/output/stats-index.md | W1245 | stats 索引面刷新 |
+| scripts/output/colorblind-baseline.txt | W1245 | 色盲基线冻结（含新页） |
+| scripts/output/_vermilion_solid_cache.json | W1245 | 朱砂缓存更新 |
+| scripts/output/_vermilion_solid_report.json | W1245 | 朱砂报告更新 |
+| scripts/output/_w1167_nav_plan.json | W1245 | 导航计划随批 |
+| scripts/output/tools-inventory.md | W1245 | 工具清单刷新 |
+| AGENTS.md | W1245 | 口径行挂 stats 标记（90 可视化页）+ 脚注条目 |
+| README.md | W1245 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1245 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/统计口径说明.md | W1245 | stats 标记跟随 |
+| docs/agent/gates.md | W1245 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1245 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1245 | stats 标记跟随 |
+| CHANGELOG.md | W1245 | 本批段 |
+| HANDOVER.md | W1245 | 里程碑块 |
+| STRUCTURE.md | W1245 | 当前批次行推进 |
+| .github/workflows/README.md | W1245 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1245 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1245 | 滚动迁入条目 |
+| CITATION.cff | W1245 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1245 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1245 | 页脚批次链插入 |
+| site/dukou-engine.html | W1245 | 页脚批次链插入 |
+| site/rss.xml | W1245 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1245 | 本批段追加 |
+| docs/INDEX.md | W1245 | 文档索引重生成（889 篇） |
+| scripts/output/INDEX.md | W1245 | 目录清单刷新 |
+| scripts/output/_cascade_files_W1245.txt | W1245 | 级联改动面清单 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1245 | 台账腾窗 |
+| scripts/output/README.md | W1245 | 目录说明刷新 |
+| scripts/content-consistency-baseline.txt | W1245 | 第 25 槽：新增 2 条区间标题误报冻结（reader 索引「第 001-020 回」同型） |
+| scripts/output/_w1245_spec.json | W1245 | 本批规格 |
+| docs/00-导读/W批次编号对账表.md | W1245 | W1245 认领行 + W1243 台账 hash 回填 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1245 | 第 74 槽腾窗：迁 2 段入归档 |
+| archive/docs/file-index-ARCHIVE.md | W1245 | 第 74 槽腾窗：迁 2 段入归档 |
+
+| scripts/output/（stats.json·stats-changelog·stats-index）+ scripts/output/INDEX.md·README.md + docs/INDEX.md + 中英文搜索索引 | W1248 | stats 刷新（变更 1 键·标记面 12 处）·文档索引重建（890 篇）·输出目录清单刷新·中英文站内搜索索引重建 |
+## W1244 古画绢本 Hero 横幅素材族 12 张成套（2026-11-15）
+| assets/promo/silk-hero-set/ + 族文档 + promo 目录 + T103 报告 + 对账表 + HANDOVER + CITATION + workflows README + docs/INDEX + file-index + spec | W1244 | 古画绢本 Hero 横幅素材族 12 张成套（母版 5472×3072 jpg ×12 + 站点用 1920×1078 webp ×12·画风古画绢本·朱砂石青·题材 3/3/3/3）·含 T103 报告与登记面 |
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+## W1243 A6 逐条明细第 1 批：密度最高六回 45 条（2026-11-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/05-诗词歌赋/诗词条目明细-密度最高六回.md | W1243 | 新增：六回 45 条逐条明细（引式/体裁/句数/首句/功能）+ 三类条目对照 + 三条观察 |
+| scripts/output/stats.json | W1243 | a6_docs 18→19 / a1_a6_docs 628→629 |
+| scripts/output/stats-changelog.json | W1243 | stats 变更史追加 W1243 |
+| scripts/output/stats-index.md | W1243 | stats 索引面刷新 |
+| AGENTS.md | W1243 | stats 标记跟随 + 脚注条目 |
+| README.md | W1243 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/项目说明.md | W1243 | stats 标记跟随 + 版本抬头行推进 |
+| docs/00-导读/统计口径说明.md | W1243 | stats 标记跟随 |
+| docs/agent/gates.md | W1243 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1243 | stats 标记跟随 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1243 | stats 标记跟随 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-12.md | W1243 | stats 标记跟随 |
+| site/index.html | W1243 | 首页统计跟随 + 页脚批次链插入 |
+| site/dashboard.html | W1243 | 第 68 槽 KPI：A6 18→19 + 段落 628→629 |
+| site/data/search-index-zh.js | W1243 | 第 46 槽：搜索索引重建 |
+| site/en/search-index-en.js | W1243 | 第 46 槽：搜索索引重建 |
+| docs/INDEX.md | W1243 | 文档索引重生成（889 篇） |
+| CHANGELOG.md | W1243 | 本批段 |
+| HANDOVER.md | W1243 | 里程碑块 |
+| STRUCTURE.md | W1243 | 当前批次行推进 |
+| .github/workflows/README.md | W1243 | 批次里程碑行推进 |
+| archive/docs/workflows-readme-history.md | W1243 | 里程碑历史滚入 |
+| archive/docs/AGENTS-ARCHIVE.md | W1243 | 滚动迁入条目 |
+| CITATION.cff | W1243 | 版本与日期同步 |
+| site/data/cross-time-danmaku.html | W1243 | 页脚批次链插入 |
+| site/data/tag-cloud.html | W1243 | 页脚批次链插入 |
+| site/dukou-engine.html | W1243 | 页脚批次链插入 |
+| site/rss.xml | W1243 | 第 73 槽产物新鲜度 |
+| scripts/output/file-index.md | W1243 | 本批段追加 |
+| scripts/output/README.md | W1243 | 第 45 槽：目录说明刷新 |
+| scripts/output/INDEX.md | W1243 | 第 45 槽：目录清单刷新 |
+| scripts/output/_vermilion_solid_cache.json | W1243 | 朱砂实底按页 hash 缓存更新 |
+| scripts/output/_w1243_spec.json | W1243 | 本批规格 |
+| scripts/output/tools-inventory.md | W1243 | 工具清单刷新 |
+| scripts/output/_cascade_files_W1243.txt | W1243 | 级联改动面清单 |
+| docs/00-导读/W批次编号对账表.md | W1243 | W1243 认领行 + W1242 台账 hash 回填 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1243 | 台账腾窗：迁 W1180 入归档（正本留 60 行） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1243 | 第 74 槽腾窗：迁 W1179 入归档（两面同下界 W1180） |
+| archive/docs/file-index-ARCHIVE.md | W1243 | 第 74 槽腾窗：迁 W1179 入归档 |
+
 ## W1242 A6 逐回诗词索引第 5 批（2026-11-15）
 
 | 文件 | W | 说明 |
@@ -2682,207 +2914,5 @@
 | site/data/tag-cloud.html | W1185 | 改：级联/目录刷新产物 |
 | site/dukou-engine.html | W1185 | 改：级联/目录刷新产物 |
 | site/index.html | W1185 | 改：级联/目录刷新产物 |
-
-## W1184 A5 空间框架专题（2026-11-09）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/04-文化与历史背景/四大部洲与三界空间框架专题.md | W1184 | 新建：A5 系列第 4 篇·12419 字符·9 条逐字核验引文 |
-| docs/04-文化与历史背景/README.md | W1184 | 改：系列段扩为 W1180–W1184 + 新增 W1184 行 |
-| site/data/glossary.html | W1184 | 改：深度解读区增第 4 条反向入口 |
-| docs/00-导读/统计口径说明.md | W1184 | 改：分板块表格 A5 38→39（合计 620） |
-| site/dashboard.html | W1184 | 改：A5 KPI 卡片 38→39 + A1-A6 段落 619→620（第 68 槽） |
-| docs/INDEX.md | W1184 | 改：docs_index.py 重建（865 篇·13 板块） |
-| docs/00-导读/W批次编号对账表.md | W1184 | 改：W1184 认领行 |
-| scripts/output/_w1184_spec.json | W1184 | 新建：本批 spec |
-| scripts/output/_cascade_files_W1184.txt | W1184 | 新建：级联清单 |
-| CHANGELOG.md | W1184 | 改：W1184 段落（级联） |
-| scripts/output/file-index.md | W1184 | 改：W1184 段（级联） |
-| site/data/search.html | W1184 | 改：搜索索引重生成（第 46 槽） |
-| site/en/search.html | W1184 | 改：搜索索引重生成（同上） |
-| README.md | W1184 | 改：A1-A6 计数标记跟随 + 版本行（级联） |
-| STRUCTURE.md | W1184 | 改：版本行推进（级联） |
-| HANDOVER.md | W1184 | 改：最后更新行 + 当前进度（级联） |
-| .github/workflows/README.md | W1184 | 改：区间行推进（版本面） |
-| CITATION.cff | W1184 | 改：version/date 推进（级联） |
-| archive/docs/AGENTS-ARCHIVE.md | W1184 | 改：脚注沿革滚动（级联） |
-| archive/docs/workflows-readme-history.md | W1184 | 改：逐批明细追加（W1184·级联） |
-| docs/00-导读/项目说明.md | W1184 | 改：版本行推进（级联） |
-| scripts/output/stats.json | W1184 | 改：a5_docs 38→39 / a1_a6_docs 619→620 |
-| scripts/output/INDEX.md | W1184 | 改：再生成/验证缓存（级联） |
-| scripts/output/README.md | W1184 | 改：再生成/验证缓存（级联） |
-| scripts/output/_vermilion_solid_cache.json | W1184 | 改：再生成/验证缓存（级联） |
-| scripts/output/tools-inventory.md | W1184 | 改：再生成/验证缓存（级联） |
-| AGENTS.md | W1184 | 改：级联/目录刷新产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1184 | 改：级联/目录刷新产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1184 | 改：级联/目录刷新产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1184 | 改：级联/目录刷新产物 |
-| docs/agent/gates.md | W1184 | 改：级联/目录刷新产物 |
-| scripts/output/stats-changelog.json | W1184 | 改：级联/目录刷新产物 |
-| scripts/output/stats-index.md | W1184 | 改：级联/目录刷新产物 |
-| site/data/cross-time-danmaku.html | W1184 | 改：级联/目录刷新产物 |
-| site/data/tag-cloud.html | W1184 | 改：级联/目录刷新产物 |
-| site/dukou-engine.html | W1184 | 改：级联/目录刷新产物 |
-| site/index.html | W1184 | 改：级联/目录刷新产物 |
-
-## W1183 A5 系列收口批（2026-11-09）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/04-文化与历史背景/README.md | W1183 | 改：新增「近期专题系列（W1180–W1182）」索引段 |
-| docs/04-文化与历史背景/天罡地煞与变化之术专题.md | W1183 | 改：补「系列关联」段（→ W1181/W1182 + 板块 README） |
-| docs/04-文化与历史背景/西游东传与译介专题.md | W1183 | 改：补「系列关联」段（→ W1180/W1182 + 板块 README） |
-| scripts/new_page.py | W1183 | 改：render_template 增加 "static/→"../static/ 路径重写（图标链接根修） |
-| site/data/glossary.html | W1183 | 改：新增「深度解读」区 + 修正 3 处图标相对路径 |
-| site/data/cultural-misreading.html | W1183 | 改：新增「关联解读」行指向译介专题 |
-| site/data/deconstruction.html | W1183 | 改：新增「关联解读」行指向译介专题 |
-| docs/00-导读/W批次编号对账表.md | W1183 | 改：W1183 认领行 |
-| scripts/output/_w1183_spec.json | W1183 | 新建：本批 spec |
-| scripts/output/_cascade_files_W1183.txt | W1183 | 新建：级联清单 |
-| CHANGELOG.md | W1183 | 改：W1183 段落（级联） |
-| scripts/output/file-index.md | W1183 | 改：W1183 段（级联） |
-| site/data/search.html | W1183 | 改：搜索索引重生成（第 46 槽） |
-| site/en/search.html | W1183 | 改：搜索索引重生成（同上） |
-| docs/INDEX.md | W1183 | 改：docs_index.py 重建 |
-| README.md | W1183 | 改：版本行推进（级联） |
-| STRUCTURE.md | W1183 | 改：版本行推进（级联） |
-| HANDOVER.md | W1183 | 改：最后更新行 + 当前进度（级联） |
-| .github/workflows/README.md | W1183 | 改：区间行推进（版本面） |
-| CITATION.cff | W1183 | 改：version/date 推进（级联） |
-| archive/docs/AGENTS-ARCHIVE.md | W1183 | 改：脚注沿革滚动（级联） |
-| archive/docs/workflows-readme-history.md | W1183 | 改：逐批明细追加（W1183·级联） |
-| docs/00-导读/项目说明.md | W1183 | 改：版本行推进（级联） |
-| scripts/output/stats.json | W1183 | 改：stats 刷新（级联） |
-| scripts/output/INDEX.md | W1183 | 改：再生成/验证缓存（级联） |
-| scripts/output/README.md | W1183 | 改：再生成/验证缓存（级联） |
-| scripts/output/_vermilion_solid_cache.json | W1183 | 改：再生成/验证缓存（级联） |
-| scripts/output/tools-inventory.md | W1183 | 改：再生成/验证缓存（级联） |
-| AGENTS.md | W1183 | 改：级联/目录刷新产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1183 | 改：级联/目录刷新产物 |
-| site/data/cross-time-danmaku.html | W1183 | 改：级联/目录刷新产物 |
-| site/data/tag-cloud.html | W1183 | 改：级联/目录刷新产物 |
-| site/dukou-engine.html | W1183 | 改：级联/目录刷新产物 |
-| site/index.html | W1183 | 改：级联/目录刷新产物 |
-
-## W1182 A5 文化专题第二篇（2026-11-09）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/04-文化与历史背景/法器与兵器器物体系专题.md | W1182 | 新建：A5 文化专题第二篇·12990 字符·9 条逐字核验引文 |
-| docs/00-导读/统计口径说明.md | W1182 | 改：分板块表格 A5 37→38（合计 619） |
-| site/dashboard.html | W1182 | 改：A5 KPI 卡片 37→38 + A1-A6 段落 618→619（第 68 槽） |
-| docs/INDEX.md | W1182 | 改：docs_index.py 重建（864 篇·13 板块） |
-| docs/00-导读/W批次编号对账表.md | W1182 | 改：W1182 认领行 |
-| scripts/output/_w1182_spec.json | W1182 | 新建：本批 spec |
-| scripts/output/_cascade_files_W1182.txt | W1182 | 新建：级联清单 |
-| CHANGELOG.md | W1182 | 改：W1182 段落（级联） |
-| scripts/output/file-index.md | W1182 | 改：W1182 段（级联） |
-| site/data/search.html | W1182 | 改：搜索索引重生成（第 46 槽） |
-| site/en/search.html | W1182 | 改：搜索索引重生成（同上） |
-| README.md | W1182 | 改：A1-A6 计数标记跟随 + 版本行（级联） |
-| STRUCTURE.md | W1182 | 改：版本行推进（级联） |
-| HANDOVER.md | W1182 | 改：最后更新行 + 当前进度（级联） |
-| .github/workflows/README.md | W1182 | 改：区间行推进（版本面） |
-| CITATION.cff | W1182 | 改：version/date 推进（级联） |
-| archive/docs/AGENTS-ARCHIVE.md | W1182 | 改：脚注沿革滚动（级联） |
-| archive/docs/workflows-readme-history.md | W1182 | 改：逐批明细追加（W1182·级联） |
-| docs/00-导读/项目说明.md | W1182 | 改：版本行推进（级联） |
-| scripts/output/stats.json | W1182 | 改：a5_docs 37→38 / a1_a6_docs 618→619 |
-| scripts/output/INDEX.md | W1182 | 改：再生成/验证缓存（级联） |
-| scripts/output/README.md | W1182 | 改：再生成/验证缓存（级联） |
-| scripts/output/_vermilion_solid_cache.json | W1182 | 改：再生成/验证缓存（级联） |
-| scripts/output/tools-inventory.md | W1182 | 改：再生成/验证缓存（级联） |
-| AGENTS.md | W1182 | 改：级联/目录刷新产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1182 | 改：级联/目录刷新产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1182 | 改：级联/目录刷新产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1182 | 改：级联/目录刷新产物 |
-| docs/agent/gates.md | W1182 | 改：级联/目录刷新产物 |
-| scripts/output/stats-changelog.json | W1182 | 改：级联/目录刷新产物 |
-| scripts/output/stats-index.md | W1182 | 改：级联/目录刷新产物 |
-| site/data/cross-time-danmaku.html | W1182 | 改：级联/目录刷新产物 |
-| site/data/tag-cloud.html | W1182 | 改：级联/目录刷新产物 |
-| site/dukou-engine.html | W1182 | 改：级联/目录刷新产物 |
-| site/index.html | W1182 | 改：级联/目录刷新产物 |
-
-## W1181 A5 文化专题（2026-11-09）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/04-文化与历史背景/西游东传与译介专题.md | W1181 | 新建：A5 文化专题·14551 字符·4 条逐字核验引文·仅据索引已收录条目立论 |
-| docs/00-导读/统计口径说明.md | W1181 | 改：分板块表格 A5 36→37（合计 618） |
-| site/dashboard.html | W1181 | 改：A5 KPI 卡片 36→37 + A1-A6 段落 617→618（第 68 槽） |
-| docs/INDEX.md | W1181 | 改：docs_index.py 重建（863 篇·13 板块） |
-| docs/00-导读/W批次编号对账表.md | W1181 | 改：W1181 认领行 |
-| scripts/output/_w1181_spec.json | W1181 | 新建：本批 spec |
-| scripts/output/_cascade_files_W1181.txt | W1181 | 新建：级联清单 |
-| CHANGELOG.md | W1181 | 改：W1181 段落（级联） |
-| scripts/output/file-index.md | W1181 | 改：W1181 段（级联） |
-| site/data/search.html | W1181 | 改：搜索索引重生成（第 46 槽） |
-| site/en/search.html | W1181 | 改：搜索索引重生成（同上） |
-| README.md | W1181 | 改：A1-A6 计数标记跟随 + 版本行（级联） |
-| STRUCTURE.md | W1181 | 改：版本行推进（级联） |
-| HANDOVER.md | W1181 | 改：最后更新行 + 当前进度（级联） |
-| .github/workflows/README.md | W1181 | 改：区间行推进（版本面） |
-| CITATION.cff | W1181 | 改：version/date 推进（级联） |
-| archive/docs/AGENTS-ARCHIVE.md | W1181 | 改：脚注沿革滚动（级联） |
-| archive/docs/workflows-readme-history.md | W1181 | 改：逐批明细追加（W1181·级联） |
-| docs/00-导读/项目说明.md | W1181 | 改：版本行推进（级联） |
-| scripts/output/stats.json | W1181 | 改：a5_docs 36→37 / a1_a6_docs 617→618 |
-| scripts/output/INDEX.md | W1181 | 改：再生成/验证缓存（级联） |
-| scripts/output/README.md | W1181 | 改：再生成/验证缓存（级联） |
-| scripts/output/_vermilion_solid_cache.json | W1181 | 改：再生成/验证缓存（级联） |
-| scripts/output/tools-inventory.md | W1181 | 改：再生成/验证缓存（级联） |
-| AGENTS.md | W1181 | 改：级联/目录刷新产物 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1181 | 改：级联/目录刷新产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1181 | 改：级联/目录刷新产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1181 | 改：级联/目录刷新产物 |
-| docs/agent/gates.md | W1181 | 改：级联/目录刷新产物 |
-| scripts/output/stats-changelog.json | W1181 | 改：级联/目录刷新产物 |
-| scripts/output/stats-index.md | W1181 | 改：级联/目录刷新产物 |
-| site/data/cross-time-danmaku.html | W1181 | 改：级联/目录刷新产物 |
-| site/data/tag-cloud.html | W1181 | 改：级联/目录刷新产物 |
-| site/dukou-engine.html | W1181 | 改：级联/目录刷新产物 |
-| site/index.html | W1181 | 改：级联/目录刷新产物 |
-
-## W1180 A5 内容深化首批（2026-11-09）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/04-文化与历史背景/天罡地煞与变化之术专题.md | W1180 | 新建：A5 内容深化首批·14469 字符·8 条逐字核验引文 |
-| docs/00-导读/统计口径说明.md | W1180 | 改：分板块表格 A5 34→36（合计与标题 617 一致） |
-| scripts/agent_start.py | W1180 | 改：清单补第五类 new-doc + git add 顺序硬约束（自测 7/7） |
-| AGENTS.md | W1180 | 改：§7 第 0 步「四类」→「五类」 |
-| docs/00-导读/W批次编号对账表.md | W1180 | 改：W1180 认领行 |
-| scripts/output/_w1180_spec.json | W1180 | 新建：本批 spec |
-| scripts/output/_cascade_files_W1180.txt | W1180 | 新建：级联清单 |
-| CHANGELOG.md | W1180 | 改：W1180 段落（级联） |
-| scripts/output/file-index.md | W1180 | 改：W1180 段（级联） |
-| site/data/search.html | W1180 | 改：搜索索引重生成（第 46 槽） |
-| site/en/search.html | W1180 | 改：搜索索引重生成（同上） |
-| README.md | W1180 | 改：A1-A6 计数标记跟随 + 版本行（级联） |
-| STRUCTURE.md | W1180 | 改：版本行推进（级联） |
-| HANDOVER.md | W1180 | 改：最后更新行 + 当前进度（级联） |
-| .github/workflows/README.md | W1180 | 改：区间行推进（版本面） |
-| CITATION.cff | W1180 | 改：version/date 推进（级联） |
-| archive/docs/AGENTS-ARCHIVE.md | W1180 | 改：脚注沿革滚动（级联） |
-| archive/docs/workflows-readme-history.md | W1180 | 改：逐批明细追加（W1180·级联） |
-| docs/00-导读/项目说明.md | W1180 | 改：版本行推进（级联） |
-| scripts/output/stats.json | W1180 | 改：a5_docs 35→36 / a1_a6_docs 616→617 |
-| scripts/output/INDEX.md | W1180 | 改：再生成/验证缓存（级联） |
-| scripts/output/README.md | W1180 | 改：再生成/验证缓存（级联） |
-| scripts/output/_vermilion_solid_cache.json | W1180 | 改：再生成/验证缓存（级联） |
-| scripts/output/tools-inventory.md | W1180 | 改：再生成/验证缓存（级联） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1180 | 改：级联/目录刷新产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1180 | 改：级联/目录刷新产物 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1180 | 改：级联/目录刷新产物 |
-| docs/agent/gates.md | W1180 | 改：级联/目录刷新产物 |
-| scripts/output/stats-changelog.json | W1180 | 改：级联/目录刷新产物 |
-| scripts/output/stats-index.md | W1180 | 改：级联/目录刷新产物 |
-| site/data/cross-time-danmaku.html | W1180 | 改：级联/目录刷新产物 |
-| site/data/tag-cloud.html | W1180 | 改：级联/目录刷新产物 |
-| site/dukou-engine.html | W1180 | 改：级联/目录刷新产物 |
-| site/index.html | W1180 | 改：级联/目录刷新产物 |
-| docs/INDEX.md | W1180 | 改：第二轮修复产物 |
-| site/dashboard.html | W1180 | 改：第二轮修复产物 |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

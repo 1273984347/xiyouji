@@ -150,7 +150,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "85da5bb870ee6315863effc358d99373eb93d39c",
+   "sha1": "25fd484d88dc7a5567bd5e95ef4eac8fa30579a8",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -514,6 +514,10 @@
     "div.progress-fill": 1
    }
   },
+  "data/poetry-density.html": {
+   "sha1": "8608d0c5dbf1484c3963b74072f93e6052a1c64d",
+   "counts": {}
+  },
   "data/poetry-rhythm-analysis.html": {
    "sha1": "703d17cbb876c5d91eec320c9a19a6eda18d9d73",
    "counts": {
@@ -568,7 +572,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "f59976b9d3a4b9050df4a8efc2ba2f59bcedf5f3",
+   "sha1": "bacbe3a24cc5269b746a46f6a674a9e52c771073",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -647,7 +651,7 @@
    }
   },
   "dashboard.html": {
-   "sha1": "452e526ce36311f2f3299e6d5bbef6448ac7e041",
+   "sha1": "c6c0de1ab7d128cbe645c3fd1eb961a69394a46b",
    "counts": {
     "section.route-strip": 1,
     "button.vt-btn": 2,
@@ -656,7 +660,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "d889bdc104a48ef049b9a19d87b4b9b637f6c8b2",
+   "sha1": "29b761e65046c2f3c2fcd9f9679660378a406ea2",
    "counts": {
     "button": 1
    }
@@ -668,7 +672,7 @@
    }
   },
   "index.html": {
-   "sha1": "51c3cdbbb6ae97d8d53e9a236128d2887df72590",
+   "sha1": "07d521d2b6a4bfdec5fa306980ea9cb6ef8f32fa",
    "counts": {
     "button": 1,
     "button.rag-fab": 1
@@ -1505,5 +1509,5 @@
    }
   }
  },
- "generated_at": "2026-11-15T02:07:56.555Z"
+ "generated_at": "2026-11-15T15:27:40.902Z"
 }

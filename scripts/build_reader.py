@@ -161,7 +161,7 @@ def toolbar_html(rel_in_reader: str) -> str:
     """阅读工具条 + 顶部进度条（W847 AC-23）。data-page 供脚本作 localStorage 键。"""
     return f"""  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/{rel_in_reader}">
     <div class="grp">
-      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <button type="button" data-act="bookmark" aria-pressed="false">收藏本页</button>
       <span data-role="status" aria-live="polite"></span>
     </div>
     <div class="grp">
@@ -184,8 +184,8 @@ def feedback_html(title: str, url: str) -> str:
     return ("  <div class=\"reader-feedback\">\n"
             "    <span>这页有帮助吗？</span>\n"
             "    <div class=\"fb-row\">%s%s</div>\n"
-            "  </div>" % (link("有帮助", "👍 有帮助", "（可留一句你觉得好的地方）"),
-                          link("待改进", "👎 待改进", "（哪里不清楚、哪里写错了？）")))
+            "  </div>" % (link("有帮助", "有帮助", "（可留一句你觉得好的地方）"),
+                          link("待改进", "待改进", "（哪里不清楚、哪里写错了？）")))
 
 
 def _blob_url(rel_path: str) -> str:
