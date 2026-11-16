@@ -1,3 +1,22 @@
+## W1257 og 分享图接缝像素级修复（2 张）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/og-silk-hero-03-ye-talin.webp | W1257 | 夜空色块左缘垂直硬边（x≈292）羽化消除·全高 smoothstep 渐变 + 逐行绢地纹理列基准·q=100 重编码（带外色偏最差通道 15≈6%）·315KB |
+| site/static/images/og-silk-hero-12-jinghu.webp | W1257 | 画心左缘垂直硬边（x≈437）羽化消除·同法·q=100 重编码·319KB |
+| docs/11-方案报告/计划方案/T110-任务计划执行与经验沉淀报告-2026-11-16.md | W1257 | 任务执行报告（执行前计划→执行记录→验收→复盘→经验沉淀） |
+| docs/11-方案报告/README.md | W1257 | 报告目录 §六 登记行（编号 119） |
+| docs/00-导读/W批次编号对账表.md | W1257 | W1257 认领行 |
+| scripts/output/file-index.md | W1257 | 本批登记行 |
+| CHANGELOG.md | W1257 | 本批段 + 编号规则段推进（W001-W1257） |
+| HANDOVER.md | W1257 | 头链·当前 HEAD·进度推进 |
+| CITATION.cff | W1257 | version 推进 |
+| .github/workflows/README.md | W1257 | 头部版本与里程碑上限推进 |
+| scripts/output/stats.json | W1257 | stats 刷新 |
+| scripts/output/stats-changelog.json | W1257 | stats 变更史 |
+| scripts/output/stats-index.md | W1257 | stats 索引面 |
+| docs/INDEX.md | W1257 | 文档索引重建 |
+
 ## W1256 撤销图上题识 + 横幅裁白（形态④·209 页）
 
 | 文件 | W | 说明 |
