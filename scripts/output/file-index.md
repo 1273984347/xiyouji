@@ -1,3 +1,9 @@
+## W1253 横幅限高 420px（首屏占比优化）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/reader/themes/（209 页）+ 族 README | W1253 | 横幅限高 420px（object-fit cover·object-position right center·主体在右·左侧叠字位保留）·实测首屏占比由 630px 降至 420px·正文首段露��� |
+
 ## W1252 深色变体 12 张 + 209 页亮暗双图接线（Step4）
 
 | 文件 | W | 说明 |

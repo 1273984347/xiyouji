@@ -1551,7 +1551,7 @@ html[data-theme="dark"] .chapter-plate {
 
     /* W1249 · 古画绢本 Hero 横幅（试点 3 页·页内私有样式·不进 system.css 以免全站 861 页内联重写） */
     .silk-hero { margin: 0 0 var(--space-6); }
-    .silk-hero img { width: 100%; height: auto; display: block; opacity: .95; border-radius: 2px; }
+    .silk-hero img { width: 100%; height: auto; max-height: 420px; object-fit: cover; object-position: right center; display: block; opacity: .95; border-radius: 2px; }
     .silk-hero .silk-hero-dark { display: none; }
     html[data-theme="dark"] .silk-hero .silk-hero-light { display: none; }
     html[data-theme="dark"] .silk-hero .silk-hero-dark { display: block; }
