@@ -2,38 +2,13 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-| site/reader/themes/取经地理学专题.html | W1249 | 接入古画绢本顶栏横幅（silk-hero-01 云海佛刹）+ 页内私有 .silk-hero 样式 |
-| site/reader/themes/妖怪生态学专题.html | W1249 | 接入古画绢本顶栏横幅（silk-hero-06 黑风山狼牙棒）+ 页内私有 .silk-hero 样式 |
-| site/reader/themes/芭蕉扇-终极灭火器的关系.html | W1249 | 接入古画绢本顶栏横幅（silk-hero-11 三件法宝）+ 页内私有 .silk-hero 样式 |
-| site/static/images/silk-hero-01-yunhai-fosi.webp | W1249 | 试点图（1920×1078·webp） |
-| site/static/images/silk-hero-06-heifengshan.webp | W1249 | 试点图（1920×1078·webp） |
-| site/static/images/silk-hero-11-fabao-sanjian.webp | W1249 | 试点图（1920×1078·webp） |
-| site/data/search-index-zh.js | W1249 | 第 46 槽：中文站内搜索索引刷新（专题页插图后重建） |
-| site/en/search-index-en.js | W1249 | 第 46 槽：英文站内搜索索引刷新 |
-| CHANGELOG.md | W1249 | 本批段 + 编号规则段上限推进 W1249 |
-| HANDOVER.md | W1249 | 交接头链·当前 HEAD·一、当前进度推进 W1249（概要块滚最老 2 块） |
-| .github/workflows/README.md | W1249 | 头部版本与里程碑上限推进 W1249 |
-| CITATION.cff | W1249 | version 推进 W1249 |
-| docs/00-导读/W批次编号对账表.md | W1249 | W1249 认领行 + W1244 收官回填 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1249 | 台账腾窗：迁出 W1189 |
-| docs/11-方案报告/计划方案/T104-任务计划执行与经验沉淀报告-2026-11-16.md | W1249 | 新增：T104 任务计划执行与经验沉淀报告 |
-| docs/11-方案报告/README.md | W1249 | §六 登记 T104·件数 120→121 |
-| scripts/output/INDEX.md | W1249 | 输出目录清单刷新（收录 _w1249_spec.json） |
-| scripts/output/README.md | W1249 | 输出目录说明刷新 |
+| site/reader/themes/（3 页） | W1249 | 试点接入古画绢本顶栏横幅（1920×1078）+ 页内私有 .silk-hero 样式 |
+| site/static/images/（3 张 silk-hero-*.webp + INDEX.md + README.md） | W1249 | 试点图与目录清单刷新 |
+| site/data/search-index-zh.js + site/en/search-index-en.js + site/rss.xml | W1249 | 搜索索引与 RSS 刷新 |
+| docs/（T104 报告 + 报告索引 + docs/INDEX.md + 台账 + 台账归档 + 2 份架构方案 stats 标记） | W1249 | 报告与标记面同步 |
+| scripts/output/（stats·stats-changelog·stats-index·tools-inventory·_w1167_nav_plan·_w1249_spec·INDEX·README） | W1249 | 统计面刷新 |
 | scripts/output/file-index.md | W1249 | 本批登记行 |
-| scripts/output/_w1249_spec.json | W1249 | 本批规格 |
-| STRUCTURE.md | W1249 | stats 标记跟随 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1249 | stats 标记跟随 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1249 | stats 标记跟随 |
-| docs/INDEX.md | W1249 | 文档索引重建（891 篇·含 T104 报告） |
-| scripts/output/_w1167_nav_plan.json | W1249 | 生成物刷新 |
-| scripts/output/stats-changelog.json | W1249 | stats 变更史追加 W1249 |
-| scripts/output/stats-index.md | W1249 | stats 索引面刷新 |
-| scripts/output/stats.json | W1249 | stats 刷新（变更 1 键） |
-| scripts/output/tools-inventory.md | W1249 | 工具清单刷新 |
-| site/rss.xml | W1249 | 第 73 槽：RSS 新鲜度 |
-| site/static/images/INDEX.md | W1249 | 图片目录清单刷新（收录 3 张 silk-hero 图） |
-| site/static/images/README.md | W1249 | 图片目录说明刷新 |
+| CHANGELOG.md + HANDOVER.md + STRUCTURE.md + CITATION.cff + .github/workflows/README.md | W1249 | 现役批次推进面同步 |
 ## W1248 CI 二轮红清偿：朱砂审计面补入新页（2026-11-15）
 
 | 文件 | W | 说明 |

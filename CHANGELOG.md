@@ -1,4 +1,7 @@
-### W1249（2026-11-15）：古画绢本 Hero 横幅接入专题页（试点 3 页）——顶栏横幅 · 暗色隐藏 · 分支整理
+
+> **
+
+### W1249（2026-11-16）：古画绢本 Hero 横幅接入专题页（试点 3 页）——顶栏横幅 · 暗色隐藏 · 分支整理
 
 **本批要点**（W1249 古画绢本 Hero 横幅接入专题页·试点 3 页）：
 
@@ -9,12 +12,10 @@
 > - **⑤ 分支整理**：本地 5 个 + 远端 6 个**已合并入 main 的 \`sync/*\` 分支全部删除**（\`git branch --merged main\` 判定），远端仅剩 \`origin/main\`。
 > - **⑥ 边界**：**仅试点 3 页**；未做 og 分享图替换、未做深色变体、未全量 210 页；全量接线待试点效果确认后另开批。
 > - **验证**：verify full 79 段 0 FAIL · pytest 1674 passed / 4 skipped · 干净检出 \`ci_sim --ref HEAD --full\` 复验。
-> - **文件**：见 file-index。
+> - **文件**：`site/reader/themes/{取经地理学专题,妖怪生态学专题,芭蕉扇-终极灭火器的关系}.html` · `site/static/images/silk-hero-{01,06,11}-*.webp` · `scripts/output/file-index.md`（本批段）· `scripts/output/_w1249_spec.json`。
 
 # 更新日志
-
-
-> **📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
+📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
 本项目所有重要变更均记录于此。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/)。
 
 ## [Unreleased]
