@@ -243,6 +243,7 @@
     "| site/data/search-index-zh.js | W1251 | 中文站内搜索索引刷新 |",
     "| site/en/search-index-en.js | W1251 | 英文站内搜索索引刷新 |",
     "| scripts/check_index_health.py | W1251 | 索引健康门禁并查归档面（用户授权改管控件·方案①·解锁 file-index 正常腾窗） |",
-    "| archive/docs/file-index-ARCHIVE.md | W1251 | file-index 腾窗归档（迁出 W1185-W1205） |"
+    "| archive/docs/file-index-ARCHIVE.md | W1251 | file-index 腾窗归档（迁出 W1185-W1205） |",
+    "| archive/docs/W批次编号对账表-ARCHIVE.md | W1251 | 台账腾窗归档 |"
   ]
 }
