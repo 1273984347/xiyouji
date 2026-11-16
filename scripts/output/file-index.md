@@ -1,13 +1,15 @@
+## W1250 og 分享图替换 + 1200 宽轻量版（2026-11-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/reader/themes/（210 页）+ site/static/img/og-silk-*.jpg（12）+ site/static/images/silk-hero-*-1200.webp（12）+ 登记面 | W1250 | og:image 逐页换对应题材 og（1200×630 jpg·12 张轮转全覆盖）+ 1200 宽轻量版 |
+
 ## W1249 古画绢本 Hero 横幅接入专题页（试点 3 页）（2026-11-16）
 
 | 文件 | W | 说明 |
 |---|---|---|
-| site/reader/themes/（3 页） | W1249 | 试点接入古画绢本顶栏横幅（1920×1078）+ 页内私有 .silk-hero 样式 |
-| site/static/images/（3 张 silk-hero-*.webp + INDEX.md + README.md） | W1249 | 试点图与目录清单刷新 |
-| site/data/search-index-zh.js + site/en/search-index-en.js + site/rss.xml | W1249 | 搜索索引与 RSS 刷新 |
-| docs/（T104 报告 + 报告索引 + docs/INDEX.md + 台账 + 台账归档 + 2 份架构方案 stats 标记） | W1249 | 报告与标记面同步 |
-| scripts/output/（stats·stats-changelog·stats-index·tools-inventory·_w1167_nav_plan·_w1249_spec·INDEX·README） | W1249 | 统计面刷新 |
-| scripts/output/file-index.md | W1249 | 本批登记行 |
+| site/reader/themes/（3 页）+ site/static/images/（3 张 silk-hero-*.webp） | W1249 | 试点接入古画绢本顶栏横幅 + 页内私有 .silk-hero 样式 |
+| 搜索索引/RSS/docs 索引/统计标记面 + scripts/output/ 统计与目录清单 | W1249 | 级联面同步 |
 | CHANGELOG.md + HANDOVER.md + STRUCTURE.md + CITATION.cff + .github/workflows/README.md | W1249 | 现役批次推进面同步 |
 ## W1248 CI 二轮红清偿：朱砂审计面补入新页（2026-11-15）
 

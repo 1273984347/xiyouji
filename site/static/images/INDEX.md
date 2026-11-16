@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（422）
+## 文件（446）
 
 ### 样式与资源
 
@@ -276,6 +276,18 @@
 - `og-scene-card-12-shuyuanxingtantan.webp`
 - `og-scene-card-25-santiebaigujing.webp`
 - `og-scene-card-27-rejiao-fenxi.webp`
+- `og-silk-hero-01-yunhai-fosi.webp`
+- `og-silk-hero-02-shiku-fowan.webp`
+- `og-silk-hero-03-ye-talin.webp`
+- `og-silk-hero-04-baigu-furen.webp`
+- `og-silk-hero-05-huoyanshan-yaowang.webp`
+- `og-silk-hero-06-heifengshan.webp`
+- `og-silk-hero-07-dumu-qiao.webp`
+- `og-silk-hero-08-shanye-xinglu.webp`
+- `og-silk-hero-09-wukong-tanyu.webp`
+- `og-silk-hero-10-jingubang.webp`
+- `og-silk-hero-11-fabao-sanjian.webp`
+- `og-silk-hero-12-jinghu.webp`
 - `plate-donghai-longgong.webp`
 - `plate-jingu-jingangchui.webp`
 - `plate-line-01-bailongma.webp`
@@ -426,9 +438,21 @@
 - `post-07-gu-shan-yingxue.webp`
 - `post-08-tangseng-chanshi.webp`
 - `post-09-bajiaoshan-zhaoyun.webp`
+- `silk-hero-01-yunhai-fosi-1200.webp`
 - `silk-hero-01-yunhai-fosi.webp`
+- `silk-hero-02-shiku-fowan-1200.webp`
+- `silk-hero-03-ye-talin-1200.webp`
+- `silk-hero-04-baigu-furen-1200.webp`
+- `silk-hero-05-huoyanshan-yaowang-1200.webp`
+- `silk-hero-06-heifengshan-1200.webp`
 - `silk-hero-06-heifengshan.webp`
+- `silk-hero-07-dumu-qiao-1200.webp`
+- `silk-hero-08-shanye-xinglu-1200.webp`
+- `silk-hero-09-wukong-tanyu-1200.webp`
+- `silk-hero-10-jingubang-1200.webp`
+- `silk-hero-11-fabao-sanjian-1200.webp`
 - `silk-hero-11-fabao-sanjian.webp`
+- `silk-hero-12-jinghu-1200.webp`
 - `viz-01-network.webp`
 - `viz-02-heatmap.webp`
 - `viz-03-radar.webp`

@@ -1,3 +1,15 @@
+### W1250（2026-11-16）：og 分享图替换 + 1200 宽轻量版（Step1+2）
+
+**本批要点**（W1250 og 分享图替换 + 1200 宽轻量版）：
+
+> - **① og 分享图**：**210 个专题页**的 `og:image` 由千篇一律的 `og-cover-ink-zh.jpg` 换成对应题材的古画绢本 og（`site/static/img/og-silk-*.jpg`·1200×630·**jpg**（社交平台兼容，非 webp）·12 张按题材关键词匹配 + 轮转兜底·12 张全覆盖）。
+> - **② 1200 宽轻量版**：12 张 `silk-hero-*-1200.webp`（1200×674）——原 1920 宽单张 466KB 超第 47 槽软阈 200KB，全量接线前先备轻量版。
+> - **③ 边界**：本批只做 og 与轻量版；**全量 210 页正文接线（Step3）与 12 张深色变体（Step4）另开批**。
+> - **验证**：见收官链。
+> - **文件**：见 file-index。
+
+📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
+本项目所有重要变更均记录于此。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/)。
 
 > **
 
@@ -15,12 +27,10 @@
 > - **文件**：`site/reader/themes/{取经地理学专题,妖怪生态学专题,芭蕉扇-终极灭火器的关系}.html` · `site/static/images/silk-hero-{01,06,11}-*.webp` · `scripts/output/file-index.md`（本批段）· `scripts/output/_w1249_spec.json`。
 
 # 更新日志
-📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
-本项目所有重要变更均记录于此。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/)。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1249），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1250），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
