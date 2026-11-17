@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-17 20:26
+生成时间：2026-11-17 20:56
 
-共 **218** 件（门禁与校验 105 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
+共 **219** 件（门禁与校验 106 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（105）
+## 门禁与校验（106）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -50,6 +50,7 @@
 | `check_db_schema.py` | check_db_schema.py — DB schema 门禁（W917 建置·B-DB-05 清偿）。 |
 | `check_design_asset_manifest.py` | check_design_asset_manifest.py — assets/design 目录清单对拍判据（W1135·遗留③） |
 | `check_design_doc_drift.py` | check_design_doc_drift.py — 设计令牌文档对账门禁（PD-5 · W652） |
+| `check_design_identity.py` | check_design_identity.py — 视觉语言的「身份」判据（W1264 立·E-250 机器化） |
 | `check_doc_numbers.py` | check_doc_numbers.py — 文案数字与证据件键值逐字对表闸（W1116 建） |
 | `check_doc_size_budget.py` | check_doc_size_budget.py — 治理文档体积窗口门禁（W960 建 · 文档规范 §8 机器化）。 |
 | `check_doc_sync.py` | 文档口径体检 doc-sync（第 31 门禁 · W663）——代码/提交是真值源，文档当前态声明是派生物。 |

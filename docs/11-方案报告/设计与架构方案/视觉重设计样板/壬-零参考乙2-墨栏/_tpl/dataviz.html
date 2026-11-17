@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>百回人物出场频次 · 详解西游记</title>
+<meta name="description" content="《西游记》百回人物出场频次演示页：12 位主要角色的出场次数、占比与身份组，含过滤、搜索与八十一难分布副图。">
+<noscript><style>.js-reveal{opacity:1;transform:none}</style></noscript>
+<style>/*__TOKENS__*/
+/*__SYSTEM__*/
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg class="ico" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17"/><path d="M12 3.5v17"/></svg>
+      </span>
+      <span class="wordmark">详解西游记</span>
+      <span class="wordmark-sub">数据可视化</span>
+    </a>
+    <nav class="site-mainnav" aria-label="主导航">
+      <a href="#">首页</a>
+      <a href="#">逐回解读</a>
+      <a href="#">人物谱系</a>
+      <a href="#" aria-current="page">数据可视化</a>
+      <a href="#">英文版</a>
+    </nav>
+    <div class="nav-tools">
+      <form class="search-box" role="search" onsubmit="return false;">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8 20 20"/></svg>
+        <input type="search" id="role-search" placeholder="搜角色名" aria-label="在图表中搜索角色">
+      </form>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换明暗两态">
+        <svg class="ico ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
+        <svg class="ico ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="site-main" id="main">
+  <div class="page-wrap">
+
+    <header class="page-head">
+      <p class="kicker">可视化 · 人物 · 演示样例</p>
+      <h1 class="page-title">百回人物出场频次</h1>
+      <p class="page-sub">按回统计的出现次数，用于观察「谁在场」——请注意它不等于「谁重要」。本页为布局演示，数值取自站内演示集。</p>
+      <div class="meta-row">
+        <span>数据口径：<b>同一回内同一角色多次登场记 1 次</b></span>
+        <span>更新日期：<b>2026-11-05</b></span>
+        <span class="data-status-badge" data-state="ok"><span class="dot" aria-hidden="true"></span><span class="mark" aria-hidden="true">✓</span>已核验</span>
+      </div>
+    </header>
+
+    <section class="section" style="padding-top:0;" aria-label="关键指标">
+      <div class="kpi-grid js-reveal">
+        <div class="kpi-card">
+          <span class="kpi-label">总出场</span>
+          <span class="kpi-value"><span class="kpi-count" data-value="2692" data-final="2,692">2,692</span><span class="unit">次</span></span>
+          <span class="kpi-meta">12 位主要角色合计</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">覆盖</span>
+          <span class="kpi-value"><span class="kpi-count" data-value="100" data-final="100">100</span><span class="unit">回</span></span>
+          <span class="kpi-meta">全书一百回</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">第一主角</span>
+          <span class="kpi-value" style="font-size:1.375rem;">孙悟空</span>
+          <span class="kpi-meta">980 次 · 占 36.4%</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">团队成员</span>
+          <span class="kpi-value"><span class="kpi-count" data-value="4" data-final="4">4</span><span class="unit">人</span></span>
+          <span class="kpi-meta">师徒四人</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:var(--space-7);" aria-label="出场频次图">
+      <div class="controls">
+        <div class="filter-tabs" role="tablist" aria-label="按身份组过滤">
+          <button class="filter-tab" type="button" role="tab" data-group="all" aria-selected="true">全部<span class="count">12</span></button>
+          <button class="filter-tab" type="button" role="tab" data-group="师徒四人" aria-selected="false">师徒四人<span class="count">4</span></button>
+          <button class="filter-tab" type="button" role="tab" data-group="神佛" aria-selected="false">神佛<span class="count">4</span></button>
+          <button class="filter-tab" type="button" role="tab" data-group="妖魔" aria-selected="false">妖魔<span class="count">4</span></button>
+        </div>
+        <div class="controls-right">
+          <span class="data-status-badge" id="result-count"><span class="mark" aria-hidden="true">▤</span>显示 12 / 12</span>
+        </div>
+      </div>
+
+      <div class="card chart-wrap js-reveal" id="chart-wrap">
+        <div class="chart-container chart-block" id="chart-container" role="img" aria-label="横向条形图：十二位角色的百回出场次数"></div>
+        <div class="chart-loading hidden" id="chart-loading"><span class="bar" aria-hidden="true"></span>正在载入出场统计…</div>
+        <div class="chart-legend" id="chart-legend"></div>
+        <div class="chart-tooltip" id="chart-tooltip" role="status" aria-live="polite">
+          <span class="tt-title" id="tt-title">—</span>
+          <span class="tt-row">出场<b id="tt-count">—</b></span>
+          <span class="tt-row">占比<b id="tt-share">—</b></span>
+          <span class="tt-row">身份组<b id="tt-group">—</b></span>
+        </div>
+      </div>
+
+      <div class="chart-sub">
+        <h3 class="sub-title">八十一难按十回段分布</h3>
+        <div class="chart-scroll">
+          <svg class="col-chart chart-block" viewBox="0 0 640 220" role="img" aria-label="柱形图：八十一难按十回段分布，五、九、十一、十、九、八、十、七、六、六">
+            <g class="col-grid">
+              <line x1="40" y1="170" x2="620" y2="170"/><line x1="40" y1="134" x2="620" y2="134"/>
+              <line x1="40" y1="98" x2="620" y2="98"/><line x1="40" y1="62" x2="620" y2="62"/>
+              <line x1="40" y1="30" x2="620" y2="30"/>
+            </g>
+            <g class="col-label" text-anchor="end">
+              <text x="34" y="174">0</text><text x="34" y="138">3</text><text x="34" y="102">6</text>
+              <text x="34" y="66">9</text><text x="34" y="34">11</text>
+            </g>
+            <g fill="var(--chart-1)">
+              <rect x="52" y="106.4" width="34" height="63.6" rx="2"/>
+              <rect x="110" y="55.5" width="34" height="114.5" rx="2"/>
+              <rect x="168" y="30" width="34" height="140" rx="2"/>
+              <rect x="226" y="42.7" width="34" height="127.3" rx="2"/>
+              <rect x="284" y="55.5" width="34" height="114.5" rx="2"/>
+              <rect x="342" y="68.2" width="34" height="101.8" rx="2"/>
+              <rect x="400" y="42.7" width="34" height="127.3" rx="2"/>
+              <rect x="458" y="80.9" width="34" height="89.1" rx="2"/>
+              <rect x="516" y="93.6" width="34" height="76.4" rx="2"/>
+              <rect x="574" y="93.6" width="34" height="76.4" rx="2"/>
+            </g>
+            <g class="col-value" text-anchor="middle">
+              <text x="69" y="100">5</text><text x="127" y="49">9</text><text x="185" y="24">11</text>
+              <text x="243" y="36">10</text><text x="301" y="49">9</text><text x="359" y="62">8</text>
+              <text x="417" y="36">10</text><text x="475" y="74">7</text><text x="533" y="87">6</text>
+              <text x="591" y="87">6</text>
+            </g>
+            <g class="col-label" text-anchor="middle">
+              <text x="69" y="186">1–10</text><text x="127" y="186">11–20</text><text x="185" y="186">21–30</text>
+              <text x="243" y="186">31–40</text><text x="301" y="186">41–50</text><text x="359" y="186">51–60</text>
+              <text x="417" y="186">61–70</text><text x="475" y="186">71–80</text><text x="533" y="186">81–90</text>
+              <text x="591" y="186">91–100</text>
+            </g>
+            <line class="col-axis" x1="40" y1="170" x2="620" y2="170"/>
+            <text class="col-label" x="40" y="206">回数（十回一段）· 合计 81 难</text>
+          </svg>
+        </div>
+        <p class="chart-note">柱高按难次数线性映射，纵轴刻度 0 / 3 / 6 / 9 / 11；十段合计恒为 81。</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;" aria-label="结论">
+      <div class="dark-band insight">
+        <p class="insight-title">洞察</p>
+        <p>把十二位角色摊开看，会得到一个容易误读的结果：师徒四人合计 2,430 次，占 2,692 次的 90.3%；神佛 208 次，妖魔 54 次。这不是原著的分布，而是本页演示口径下的抽样值，可它恰好点出一个通则——出场频次衡量的是「谁在场」，不是「谁重要」。把频次直接当作权重喂给关系网络，得到的会是师徒四人撑起的星形，而不是小说的骨架。要读出结构，得把频次拆回回目、拆回场景、拆回那一回里人物各自在做什么。</p>
+        <p class="insight-meta">口径：同一回内同一角色多次登场记 1 次 · 演示数据集 2026-11-05</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;" aria-label="出场明细">
+      <div class="section-head">
+        <h2 class="section-title">出场明细 · 前六位</h2>
+        <p class="section-sub">按出场次数降序；「首次出场回」以该角色在正文中实际登场为准，叙述中提及不计。</p>
+      </div>
+      <div class="table-wrap table-wrap--sticky">
+        <table class="table-anim" id="role-table">
+          <caption class="hidden">百回人物出场频次前六位明细</caption>
+          <thead>
+            <tr>
+              <th scope="col">角色</th>
+              <th scope="col" class="num">出场次数</th>
+              <th scope="col" class="num">占比</th>
+              <th scope="col">身份组</th>
+              <th scope="col">首次出场回</th>
+            </tr>
+          </thead>
+          <tbody id="role-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="empty-state" id="empty-state" style="margin-top:var(--space-5);">
+        <span class="empty-title">无匹配条目</span>
+        <span class="empty-hint">当前身份组与搜索词没有交集，换一个筛选条件试试。</span>
+        <button class="btn" type="button" id="reset-filter">恢复全部 12 条</button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="page-wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>详解西游记</h3>
+        <p style="font:var(--type-caption);color:var(--text-tertiary);max-width:30em;line-height:1.8;">
+          一部百回本的量化解读站：文本、图谱与统计同源，所有数字都可回到具体的回与段落。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h3>目录</h3>
+        <ul>
+          <li><a href="#">逐回解读</a></li>
+          <li><a href="#">人物谱系</a></li>
+          <li><a href="#">主题专题</a></li>
+          <li><a href="#">数据可视化</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>其他</h3>
+        <ul>
+          <li><a href="#">英文版</a></li>
+          <li><a href="#">离线使用</a></li>
+          <li><a href="#">引用格式</a></li>
+          <li><a href="#">版本与更新</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>许可</h3>
+        <ul>
+          <li><a href="#">代码 MIT</a></li>
+          <li><a href="#">文本 CC BY-NC 4.0</a></li>
+          <li><a href="#">纯静态可离线</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>代码 MIT</span>
+      <span>文本 CC BY-NC 4.0</span>
+      <span>纯静态可离线</span>
+      <span>数据更新于 2026-11-05</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  var saved = read('xyj-theme');
+  root.setAttribute('data-theme', saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  var btn = document.getElementById('theme-toggle');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      store('xyj-theme', next);
+    });
+  }
+
+  var DATA = [
+    { n: '孙悟空', v: 980, g: '师徒四人', f: '第一回' },
+    { n: '猪八戒', v: 620, g: '师徒四人', f: '第八回' },
+    { n: '唐僧', v: 590, g: '师徒四人', f: '第十二回' },
+    { n: '沙僧', v: 240, g: '师徒四人', f: '第八回' },
+    { n: '观音菩萨', v: 95, g: '神佛', f: '第十二回' },
+    { n: '如来佛祖', v: 60, g: '神佛', f: '第七十七回' },
+    { n: '玉皇大帝', v: 45, g: '神佛', f: '第七回' },
+    { n: '牛魔王', v: 18, g: '妖魔', f: '第五十九回' },
+    { n: '红孩儿', v: 14, g: '妖魔', f: '第三十九回' },
+    { n: '白骨精', v: 12, g: '妖魔', f: '第二十七回' },
+    { n: '铁扇公主', v: 10, g: '妖魔', f: '第五十九回' },
+    { n: '二郎神', v: 8, g: '神佛', f: '第六回' }
+  ];
+  var TOTAL = 2692;
+  var GROUP_COLOR = { '师徒四人': 'var(--chart-1)', '神佛': 'var(--chart-4)', '妖魔': 'var(--chart-2)' };
+  var MAX = 980;
+
+  var container = document.getElementById('chart-container');
+  var legend = document.getElementById('chart-legend');
+  var tooltip = document.getElementById('chart-tooltip');
+  var ttTitle = document.getElementById('tt-title');
+  var ttCount = document.getElementById('tt-count');
+  var ttShare = document.getElementById('tt-share');
+  var ttGroup = document.getElementById('tt-group');
+  var tbody = document.getElementById('role-table-body');
+  var empty = document.getElementById('empty-state');
+  var countBadge = document.getElementById('result-count');
+  var search = document.getElementById('role-search');
+  var group = 'all';
+  var query = '';
+
+  function fmt(n) { return n.toLocaleString('zh-CN'); }
+
+  function visibleData() {
+    return DATA.filter(function (d) {
+      var okG = group === 'all' || d.g === group;
+      var okQ = !query || d.n.indexOf(query) !== -1;
+      return okG && okQ;
+    });
+  }
+
+  function renderLegend() {
+    var groups = ['师徒四人', '神佛', '妖魔'];
+    var html = '';
+    for (var i = 0; i < groups.length; i++) {
+      html += '<span class="legend-item"><span class="legend-swatch" style="background:' + GROUP_COLOR[groups[i]] + '"></span>' + groups[i] + '</span>';
+    }
+    html += '<span class="legend-item legend-note">合计 2,692 次（12 位主要角色，演示集）</span>';
+    legend.innerHTML = html;
+  }
+
+  function renderChart(rows) {
+    var html = '';
+    for (var i = 0; i < rows.length; i++) {
+      var d = rows[i];
+      var w = (d.v / MAX * 100).toFixed(2) + '%';
+      html += '<div class="bar-row" data-name="' + d.n + '" data-value="' + d.v + '" data-group="' + d.g + '" tabindex="0" style="--delay:' + (i * 45) + 'ms">' +
+        '<span class="bar-name">' + d.n + '</span>' +
+        '<span class="bar-track"><span class="bar-fill" style="--w:' + w + ';--c:' + GROUP_COLOR[d.g] + '"></span></span>' +
+        '<span class="bar-value">' + fmt(d.v) + '</span>' +
+        '</div>';
+    }
+    container.innerHTML = html;
+    var bars = container.querySelectorAll('.bar-row');
+    for (var j = 0; j < bars.length; j++) bindBar(bars[j]);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        for (var k = 0; k < bars.length; k++) bars[k].classList.add('in');
+      });
+    });
+  }
+
+  function renderTable(rows) {
+    var html = '';
+    for (var i = 0; i < rows.length && i < 6; i++) {
+      var d = rows[i];
+      var share = (d.v / TOTAL * 100).toFixed(1) + '%';
+      html += '<tr style="--delay:' + (i * 40) + 'ms"><td class="name">' + d.n + '</td><td class="num">' + fmt(d.v) + '</td>' +
+        '<td class="num">' + share + '</td><td>' + d.g + '</td><td>' + d.f + '</td></tr>';
+    }
+    tbody.innerHTML = html;
+    var trs = tbody.querySelectorAll('tr');
+    requestAnimationFrame(function () {
+      for (var k = 0; k < trs.length; k++) trs[k].classList.add('in');
+    });
+  }
+
+  function bindBar(bar) {
+    function show() {
+      var name = bar.getAttribute('data-name');
+      var value = parseInt(bar.getAttribute('data-value'), 10);
+      ttTitle.textContent = name;
+      ttCount.textContent = fmt(value) + ' 次';
+      ttShare.textContent = (value / TOTAL * 100).toFixed(1) + '%';
+      ttGroup.textContent = bar.getAttribute('data-group');
+      tooltip.classList.add('visible');
+      move(bar);
+    }
+    function hide() { tooltip.classList.remove('visible'); }
+    bar.addEventListener('mouseenter', show);
+    bar.addEventListener('focus', show);
+    bar.addEventListener('mouseleave', hide);
+    bar.addEventListener('blur', hide);
+  }
+
+  function move(bar) {
+    var wrap = document.getElementById('chart-wrap');
+    var wrapRect = wrap.getBoundingClientRect();
+    var rect = bar.getBoundingClientRect();
+    var tipRect = tooltip.getBoundingClientRect();
+    var x = rect.left - wrapRect.left + rect.width * 0.35;
+    var y = rect.top - wrapRect.top - tipRect.height - 8;
+    var maxX = wrap.clientWidth - tipRect.width - 8;
+    var maxY = wrap.clientHeight - tipRect.height - 8;
+    if (x + tipRect.width > wrapRect.width - 8) x = wrapRect.width - tipRect.width - 8;
+    if (x < 8) x = 8;
+    if (y < 8) y = rect.bottom - wrapRect.top + 8;
+    if (y > maxY) y = Math.max(8, maxY);
+    tooltip.style.transform = 'translate3d(' + Math.round(x) + 'px,' + Math.round(y) + 'px,0)';
+  }
+
+  function update() {
+    var rows = visibleData();
+    if (!rows.length) {
+      container.innerHTML = '';
+      tbody.innerHTML = '';
+      empty.classList.add('on');
+      countBadge.innerHTML = '<span class="mark" aria-hidden="true">▤</span>显示 0 / 12';
+      return;
+    }
+    empty.classList.remove('on');
+    countBadge.innerHTML = '<span class="mark" aria-hidden="true">▤</span>显示 ' + rows.length + ' / 12';
+    renderChart(rows);
+    renderTable(rows);
+  }
+
+  var tabs = document.querySelectorAll('.filter-tab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener('click', function (e) {
+      group = e.currentTarget.getAttribute('data-group');
+      for (var j = 0; j < tabs.length; j++) tabs[j].setAttribute('aria-selected', tabs[j] === e.currentTarget ? 'true' : 'false');
+      update();
+    });
+  }
+  if (search) {
+    search.addEventListener('input', function () { query = search.value.trim(); update(); });
+  }
+  var reset = document.getElementById('reset-filter');
+  if (reset) {
+    reset.addEventListener('click', function () {
+      group = 'all'; query = ''; if (search) search.value = '';
+      for (var j = 0; j < tabs.length; j++) tabs[j].setAttribute('aria-selected', j === 0 ? 'true' : 'false');
+      update();
+    });
+  }
+
+  /* KPI 数字滚动：IntersectionObserver 触发一次，900ms，终值精确还原 */
+  function rollCount(el) {
+    var target = parseFloat(el.getAttribute('data-value'));
+    var final = el.getAttribute('data-final');
+    var dur = RM ? 0 : 900;
+    if (!isFinite(target) || dur === 0) { el.textContent = final; return; }
+    var start = 0;
+    function step(now) {
+      if (!start) start = now;
+      var t = Math.min(1, (now - start) / dur);
+      var e = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmt(Math.round(target * e));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = final;
+    }
+    requestAnimationFrame(step);
+  }
+  var counters = document.querySelectorAll('.kpi-count');
+  if (!('IntersectionObserver' in window)) {
+    for (var c = 0; c < counters.length; c++) rollCount(counters[c]);
+  } else {
+    var cio = new IntersectionObserver(function (entries) {
+      for (var e2 = 0; e2 < entries.length; e2++) {
+        if (entries[e2].isIntersecting) {
+          rollCount(entries[e2].target);
+          cio.unobserve(entries[e2].target);
+        }
+      }
+    }, { threshold: 0.4 });
+    for (var c2 = 0; c2 < counters.length; c2++) cio.observe(counters[c2]);
+  }
+
+  renderLegend();
+  update();
+  window.__RM = RM;
+})();
+</script>
+</body>
+</html>

@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（227）
+## 文件（228）
 
 ### Python 脚本
 
@@ -115,6 +115,7 @@
 - `check_db_schema.py`
 - `check_design_asset_manifest.py`
 - `check_design_doc_drift.py`
+- `check_design_identity.py`
 - `check_doc_numbers.py`
 - `check_doc_size_budget.py`
 - `check_doc_sync.py`

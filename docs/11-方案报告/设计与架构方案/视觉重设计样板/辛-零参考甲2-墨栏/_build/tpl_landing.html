@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>详解西游记 · 数字人文可视化解读《西游记》100 回</title>
+<meta name="description" content="详解西游记：629 篇解读文档、90 个数据可视化、100 回逐回解读、138 页英文版的数字人文站点。">
+<style>
+/*@TOKENS@*/
+/*@SYSTEM@*/
+</style>
+<noscript><style>.js-reveal{opacity:1;transform:none}.table-anim tbody tr{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+<svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9.5l7 7 7-7"/></symbol>
+  <symbol id="i-index" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="4.6" cy="6" r="1"/><circle cx="4.6" cy="12" r="1"/><circle cx="4.6" cy="18" r="1"/><path d="M9 6h11M9 12h11M9 18h11"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4" width="15" height="16" rx="1"/><path d="M8.5 4v16M11 9.5h5M11 13.5h5"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18c4.5 0 3.5-6 8-6s3.5-6 8-6"/><circle cx="4" cy="18" r="1.7"/><circle cx="20" cy="6" r="1.7"/></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="6" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.7 10.7l2.7-3.2M16.3 10.7l-2.7-3.2M7.7 13.3l2.7 3.2M16.3 13.3l-2.7 3.2"/></symbol>
+  <symbol id="i-heat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3.6" y="4.6" width="4.4" height="4.4" rx="0.8"/><rect x="9.8" y="4.6" width="4.4" height="4.4" rx="0.8"/><rect x="16" y="4.6" width="4.4" height="4.4" rx="0.8"/><rect x="3.6" y="9.8" width="4.4" height="4.4" rx="0.8"/><rect x="9.8" y="9.8" width="4.4" height="4.4" rx="0.8"/><rect x="16" y="9.8" width="4.4" height="4.4" rx="0.8"/><rect x="3.6" y="15" width="4.4" height="4.4" rx="0.8"/><rect x="9.8" y="15" width="4.4" height="4.4" rx="0.8"/><rect x="16" y="15" width="4.4" height="4.4" rx="0.8"/></symbol>
+  <symbol id="i-timeline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><circle cx="7" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="17" cy="12" r="1.4"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="1"/><path d="M3.5 10h17M9.5 10v9"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="4.4" y="12" width="3.2" height="8" rx="0.6"/><rect x="10.4" y="6" width="3.2" height="14" rx="0.6"/><rect x="16.4" y="9" width="3.2" height="11" rx="0.6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19.6 14.9A8.2 8.2 0 019.1 4.4a8.2 8.2 0 1010.5 10.5z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.2 6.4C7.6 7.6 6.2 9.8 6.2 12.9h3.4v5.5H5.4v-5.6c0-3.6 1.8-5.9 4.8-6.4zM19 6.4c-2.6 1.2-4 3.4-4 6.5h3.4v5.5h-4.2v-5.6c0-3.6 1.8-5.9 4.8-6.4z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.2"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">跳到主内容</a>
+
+<header class="topnav">
+  <div class="topnav__inner">
+    <a class="brand" href="#top">
+      <span class="wordmark">详解西游记</span>
+      <span class="brand__tag">数字人文 · 100 回</span>
+    </a>
+    <nav class="site-mainnav" aria-label="主导航">
+      <a href="#compose" aria-current="page">总览</a>
+      <a href="#viz">可视化</a>
+      <a href="#read">逐回解读</a>
+      <a href="#how">读法</a>
+    </nav>
+    <div class="topnav__tools">
+      <button class="btn btn--ghost" type="button" id="themeToggle" aria-label="切换明暗主题">
+        <svg class="ico" aria-hidden="true"><use href="#i-sun"></use></svg>
+        <svg class="ico hidden" aria-hidden="true" id="themeIconDark"><use href="#i-moon"></use></svg>
+        <span class="ico-t-label">主题</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="site-main">
+  <section class="hero" id="top">
+    <div class="hero__inner">
+      <div>
+        <p class="kicker">数字人文 · 明代神魔</p>
+        <h1 class="hero__title">详解西游记</h1>
+        <p class="hero__lead">一源多形 · 数字人文可视化解读《西游记》100 回。</p>
+        <div class="hero__actions">
+          <a class="btn btn-primary" href="#viz">
+            <svg class="ico-t" aria-hidden="true"><use href="#i-bars"></use></svg>
+            浏览 90 个可视化
+          </a>
+          <a class="btn" href="#read">
+            <svg class="ico-t" aria-hidden="true"><use href="#i-book"></use></svg>
+            先读第一回
+          </a>
+        </div>
+      </div>
+      <aside class="hero__aside">
+        <blockquote class="cite-block">
+          <p class="cite-block__text">灵根育孕源流出　心性修持大道生</p>
+          <p class="cite-block__source">《西游记》第一回 回目</p>
+        </blockquote>
+        <p class="section-sub">每一页解读都注明原文出处；每一张图都写明统计口径、更新日期与核校状态。</p>
+      </aside>
+    </div>
+  </section>
+
+  <div class="page-wrap">
+    <section class="section" id="compose" style="border-top:0">
+      <div class="section-head">
+        <div>
+          <p class="kicker">构成</p>
+          <h2 class="section-title">875 个页面，六类文档</h2>
+          <p class="section-sub">全站 629 篇解读文档按体裁分作六类；下表列出各类篇数，比例以最大的一类为满格。</p>
+        </div>
+        <p class="section-head__aside">含 138 页英文版</p>
+      </div>
+      <div class="table-wrap js-reveal">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">板块</th>
+              <th scope="col" class="num">篇数</th>
+              <th scope="col">相对篇数（人物谱系 215 篇为满格）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="name">人物谱系</td><td class="num">215</td><td><span class="meter"><span class="meter__fill" style="width:100%"></span></span></td></tr>
+            <tr><td class="name">主题专题</td><td class="num">209</td><td><span class="meter"><span class="meter__fill" style="width:97.2%"></span></span></td></tr>
+            <tr><td class="name">逐回解读</td><td class="num">100</td><td><span class="meter"><span class="meter__fill" style="width:46.5%"></span></span></td></tr>
+            <tr><td class="name">个人随笔</td><td class="num">44</td><td><span class="meter"><span class="meter__fill" style="width:20.5%"></span></span></td></tr>
+            <tr><td class="name">文化背景</td><td class="num">35</td><td><span class="meter"><span class="meter__fill" style="width:16.3%"></span></span></td></tr>
+            <tr><td class="name">诗词歌赋</td><td class="num">13</td><td><span class="meter"><span class="meter__fill" style="width:6.0%"></span></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="page-wrap">
+    <section class="section" id="viz">
+      <div class="section-head">
+        <div>
+          <p class="kicker">精选可视化</p>
+          <h2 class="section-title">用数字提问，用图形回答</h2>
+          <p class="section-sub">90 个交互式可视化，覆盖人物、路线、难次、情感与词频；此处挑出四个入口。</p>
+        </div>
+        <a class="section-head__aside" href="#viz">全部 90 个</a>
+      </div>
+      <div class="card-grid">
+        <article class="card js-reveal">
+          <div class="card__figure">
+            <svg viewBox="0 0 200 84" role="img" aria-label="取经路线示意图">
+              <path d="M14 68C42 68 38 44 66 44s24 22 52 22 30-28 58-28" fill="none" stroke="var(--chart-1)" stroke-width="1.6" stroke-linecap="round"/>
+              <circle cx="14" cy="68" r="4" fill="var(--chart-1)"/>
+              <circle cx="66" cy="44" r="4" fill="var(--chart-1)"/>
+              <circle cx="118" cy="66" r="4" fill="var(--chart-1)"/>
+              <circle cx="176" cy="38" r="5" fill="var(--accent)"/>
+            </svg>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">取经路线地图</h3>
+            <p class="card__desc">把一百回的发生地点连成一条路，可点选每一回的位置与事件。</p>
+            <p class="card__meta">地理 · 路径</p>
+            <a class="card__link" href="#viz">查看数据页 <svg class="ico-t" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+          </div>
+        </article>
+
+        <article class="card js-reveal">
+          <div class="card__figure">
+            <svg viewBox="0 0 200 84" role="img" aria-label="人物关系网络示意图">
+              <g stroke="var(--chart-1)" stroke-width="1.4" fill="none">
+                <path d="M100 42L42 22M100 42L158 22M100 42L42 62M100 42L158 62M42 22L42 62M158 22L158 62"/>
+              </g>
+              <circle cx="100" cy="42" r="6" fill="var(--accent)"/>
+              <circle cx="42" cy="22" r="4.5" fill="var(--chart-1)"/>
+              <circle cx="158" cy="22" r="4.5" fill="var(--chart-1)"/>
+              <circle cx="42" cy="62" r="4.5" fill="var(--chart-1)"/>
+              <circle cx="158" cy="62" r="4.5" fill="var(--chart-1)"/>
+            </svg>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">人物关系网络</h3>
+            <p class="card__desc">以亲缘、师承、敌对三类关系牵起全书人物，节点大小按出场次数。</p>
+            <p class="card__meta">人物 · 力导向网络</p>
+            <a class="card__link" href="#viz">查看数据页 <svg class="ico-t" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+          </div>
+        </article>
+
+        <article class="card js-reveal">
+          <div class="card__figure">
+            <svg viewBox="0 0 200 84" role="img" aria-label="八十一难热力图示意">
+              <g fill="var(--chart-1)">
+                <rect x="14" y="14" width="14" height="14" opacity="0.35"/><rect x="32" y="14" width="14" height="14" opacity="0.8"/><rect x="50" y="14" width="14" height="14" opacity="0.45"/>
+                <rect x="68" y="14" width="14" height="14" opacity="0.25"/><rect x="86" y="14" width="14" height="14" opacity="0.6"/><rect x="104" y="14" width="14" height="14" opacity="0.3"/>
+                <rect x="122" y="14" width="14" height="14" opacity="0.55"/><rect x="140" y="14" width="14" height="14" opacity="0.2"/><rect x="158" y="14" width="14" height="14" opacity="0.7"/>
+                <rect x="14" y="32" width="14" height="14" opacity="0.2"/><rect x="32" y="32" width="14" height="14" opacity="0.35"/><rect x="50" y="32" width="14" height="14" opacity="0.75"/>
+                <rect x="68" y="32" width="14" height="14" opacity="0.4"/><rect x="86" y="32" width="14" height="14" opacity="0.9" fill="var(--accent)"/><rect x="104" y="32" width="14" height="14" opacity="0.3"/>
+                <rect x="122" y="32" width="14" height="14" opacity="0.5"/><rect x="140" y="32" width="14" height="14" opacity="0.25"/><rect x="158" y="32" width="14" height="14" opacity="0.4"/>
+                <rect x="14" y="50" width="14" height="14" opacity="0.55"/><rect x="32" y="50" width="14" height="14" opacity="0.25"/><rect x="50" y="50" width="14" height="14" opacity="0.3"/>
+                <rect x="68" y="50" width="14" height="14" opacity="0.65"/><rect x="86" y="50" width="14" height="14" opacity="0.2"/><rect x="104" y="50" width="14" height="14" opacity="0.45"/>
+                <rect x="122" y="50" width="14" height="14" opacity="0.6"/><rect x="140" y="50" width="14" height="14" opacity="0.3"/><rect x="158" y="50" width="14" height="14" opacity="0.25"/>
+              </g>
+            </svg>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">八十一难热力图</h3>
+            <p class="card__desc">九列九行摊开八十一难，看难次在书中的疏密。</p>
+            <p class="card__meta">情节 · 格网热力</p>
+            <a class="card__link" href="#viz">查看数据页 <svg class="ico-t" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+          </div>
+        </article>
+
+        <article class="card js-reveal">
+          <div class="card__figure">
+            <svg viewBox="0 0 200 84" role="img" aria-label="情感热力图示意">
+              <g>
+                <rect x="14" y="16" width="13" height="13" fill="var(--chart-1)" opacity="0.85"/><rect x="31" y="16" width="13" height="13" fill="var(--chart-1)" opacity="0.45"/>
+                <rect x="48" y="16" width="13" height="13" fill="var(--chart-3)" opacity="0.35"/><rect x="65" y="16" width="13" height="13" fill="var(--chart-1)" opacity="0.6"/>
+                <rect x="82" y="16" width="13" height="13" fill="var(--chart-3)" opacity="0.7"/><rect x="99" y="16" width="13" height="13" fill="var(--chart-1)" opacity="0.3"/>
+                <rect x="116" y="16" width="13" height="13" fill="var(--chart-3)" opacity="0.45"/><rect x="133" y="16" width="13" height="13" fill="var(--chart-1)" opacity="0.75"/>
+                <rect x="150" y="16" width="13" height="13" fill="var(--chart-3)" opacity="0.25"/><rect x="167" y="16" width="13" height="13" fill="var(--chart-1)" opacity="0.5"/>
+                <rect x="14" y="33" width="13" height="13" fill="var(--chart-1)" opacity="0.4"/><rect x="31" y="33" width="13" height="13" fill="var(--chart-3)" opacity="0.6"/>
+                <rect x="48" y="33" width="13" height="13" fill="var(--chart-1)" opacity="0.7"/><rect x="65" y="33" width="13" height="13" fill="var(--chart-3)" opacity="0.3"/>
+                <rect x="82" y="33" width="13" height="13" fill="var(--chart-1)" opacity="0.9"/><rect x="99" y="33" width="13" height="13" fill="var(--chart-1)" opacity="0.25"/>
+                <rect x="116" y="33" width="13" height="13" fill="var(--chart-3)" opacity="0.55"/><rect x="133" y="33" width="13" height="13" fill="var(--chart-1)" opacity="0.65"/>
+                <rect x="150" y="33" width="13" height="13" fill="var(--chart-3)" opacity="0.4"/><rect x="167" y="33" width="13" height="13" fill="var(--chart-1)" opacity="0.35"/>
+                <rect x="14" y="50" width="13" height="13" fill="var(--chart-3)" opacity="0.5"/><rect x="31" y="50" width="13" height="13" fill="var(--chart-1)" opacity="0.55"/>
+                <rect x="48" y="50" width="13" height="13" fill="var(--chart-1)" opacity="0.3"/><rect x="65" y="50" width="13" height="13" fill="var(--chart-3)" opacity="0.65"/>
+                <rect x="82" y="50" width="13" height="13" fill="var(--chart-1)" opacity="0.45"/><rect x="99" y="50" width="13" height="13" fill="var(--chart-3)" opacity="0.35"/>
+                <rect x="116" y="50" width="13" height="13" fill="var(--chart-1)" opacity="0.75"/><rect x="133" y="50" width="13" height="13" fill="var(--chart-3)" opacity="0.3"/>
+                <rect x="150" y="50" width="13" height="13" fill="var(--chart-1)" opacity="0.6"/><rect x="167" y="50" width="13" height="13" fill="var(--chart-3)" opacity="0.45"/>
+              </g>
+            </svg>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">情感热力图</h3>
+            <p class="card__desc">以分回为单位标注正负情感强度，定位情绪转折所在。</p>
+            <p class="card__meta">语气 · 发散色阶</p>
+            <a class="card__link" href="#viz">查看数据页 <svg class="ico-t" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <section class="dark-band" id="how">
+    <div class="page-wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">读法</p>
+          <h2 class="section-title">三种用法，三条路</h2>
+          <p class="section-sub">同一份原文，既能当数据读，也能当文章读。</p>
+        </div>
+      </div>
+      <div class="dark-band__grid">
+        <div class="dark-band__item js-reveal">
+          <h3>先看数</h3>
+          <p>90 个可视化把出场、路线、难次、词频摊成可核对的图形，每个数值都带口径与更新日期。</p>
+        </div>
+        <div class="dark-band__item js-reveal">
+          <h3>再读文</h3>
+          <p>100 回逐回解读配原文全文，长文页给足行距与注释位，读得慢也读得完。</p>
+        </div>
+        <div class="dark-band__item js-reveal">
+          <h3>随时对照</h3>
+          <p>任何一处引用都能回到原文出处；英文版 138 页与中文版同步更新。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="read">
+  <div class="page-wrap">
+    <div class="site-footer__grid">
+      <div>
+        <h2 class="site-footer__title">详解西游记</h2>
+        <p>一源多形 · 数字人文可视化解读《西游记》100 回。</p>
+        <p>875 个页面 · 629 篇解读文档</p>
+        <p>90 个数据可视化 · 138 页英文版</p>
+      </div>
+      <div>
+        <h2 class="site-footer__title">许可与形态</h2>
+        <ul>
+          <li>代码 MIT</li>
+          <li>文本 CC BY-NC 4.0</li>
+          <li>纯静态，可离线打开</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__title">栏目</h2>
+        <ul>
+          <li>逐回解读 · 100</li>
+          <li>人物谱系 · 215</li>
+          <li>主题专题 · 209</li>
+          <li>文化背景 · 35</li>
+          <li>诗词歌赋 · 13</li>
+          <li>个人随笔 · 44</li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>本页为视觉系统样板：版式与配色为设计稿，数据页中的演示数值仅用于呈现图表版式。</span>
+      <span>无追踪 · 无外部请求</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+
+  /* 主题切换：data-theme 覆写系统偏好 */
+  var btn = document.getElementById('themeToggle');
+  var iconDark = document.getElementById('themeIconDark');
+  var iconLight = btn.querySelector('svg');
+  function isDark() {
+    var attr = root.getAttribute('data-theme');
+    if (attr) return attr === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function paint() {
+    var d = isDark();
+    iconDark.classList.toggle('hidden', !d);
+    iconLight.classList.toggle('hidden', d);
+  }
+  paint();
+  btn.addEventListener('click', function () {
+    root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+    try { localStorage.setItem('xyj-theme', root.getAttribute('data-theme')); } catch (e) {}
+    paint();
+  });
+  try {
+    var saved = localStorage.getItem('xyj-theme');
+    if (saved) root.setAttribute('data-theme', saved);
+    paint();
+  } catch (e) {}
+
+  /* 滚动揭示：reduced-motion 直接到位 */
+  var items = document.querySelectorAll('.js-reveal');
+  if (RM || !('IntersectionObserver' in window)) {
+    for (var i = 0; i < items.length; i++) items[i].classList.add('visible');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    for (var j = 0; j < items.length; j++) io.observe(items[j]);
+  }
+})();
+</script>
+</body>
+</html>

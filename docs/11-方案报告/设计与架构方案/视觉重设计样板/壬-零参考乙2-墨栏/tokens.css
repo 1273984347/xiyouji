@@ -1,0 +1,432 @@
+/* ==========================================================================
+   详解西游记 · 设计令牌（冻结接口 · 明暗两套独立取值）
+   设计语言：墨栏 —— 木刻本版的栏线与界为骨架，拓片墨分五色为色阶，纸为底
+   暗态不是亮态反相：同一物料、同一结构，只是把「日光下的纸」换成「灯下的纸」
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* —— 表面：纸与案 —— */
+  --bg: #E2E3DD;
+  --paper: #F3F3EE;
+  --paper-warm: #EFE9DB;
+  --surface-canvas: #F3F3EE;
+  --surface-raised: #FAFAF6;
+  --surface-sunken: #DEDFD7;
+  --surface-inset: #EAEAE3;
+  --surface-nav: rgba(243, 243, 238, 0.88);
+  --dark: #232520;
+  --dark-text: #EDEDE4;
+
+  /* —— 文本：墨分五色（焦 / 浓 / 重 / 淡 / 清）—— */
+  --ink: #1C1D18;
+  --ink-soft: #3A3B33;
+  --ink-faint: #6A6B60;
+  --ink-tint: #A9AAA0;
+  --text-primary: #1C1D18;
+  --text-secondary: #45463D;
+  --text-tertiary: #63645A;
+  --text-hero: #12130F;
+  --text-inverse: #F3F3EE;
+  --text-step-0: 1.0625rem;
+  --text-step-3: 1.375rem;
+
+  /* —— 强调：石青 / 赭石 / 绛紫 / 石绿（传统颜料，非 SaaS 紫蓝）—— */
+  --accent: #1F5A86;
+  --accent-primary: #1F5A86;
+  --accent-deep: #123E5E;
+  --accent-muted: #5B86A6;
+  --accent-soft: #D8E6EF;
+  --accent-text: #14466A;
+  --accent-tint: #BFD8E6;
+  --accent-wash: #E9F1F6;
+  --accent-on: #F7F8FA;
+  --accent-2: #8F6224;
+  --accent-3: #6E3350;
+  --accent-4: #2C6B52;
+
+  /* —— 语义 —— */
+  --ok: #276B4A;
+  --warn: #8A5B0E;
+  --info: #2A6A90;
+  --danger: #A5342A;
+  --status-neg: #4A5A63;
+  --rebel: #7A3550;
+
+  /* —— 数据序列（Okabe-Ito 出发、按矿物颜料重调）—— */
+  --chart-1: #004174;
+  --chart-2: #642D23;
+  --chart-3: #47654C;
+  --chart-4: #A27A41;
+  --chart-5: #9C73A1;
+  --chart-6: #006F6E;
+  --series-1: #004174;
+  --series-2: #642D23;
+  --series-3: #47654C;
+  --series-4: #A27A41;
+  --series-5: #9C73A1;
+  --series-6: #006F6E;
+  --series-7: #765228;
+  --series-8: #424242;
+
+  /* —— 线与边 —— */
+  --line: #C9C9BF;
+  --border-subtle: #DCDCD2;
+  --border-strong: #9B9C90;
+  --border-hairline: #E4E4DA;
+  --border-accent: #1F5A86;
+  --axis-line: #8E8F83;
+  --grid-line: #E6E6DC;
+  --edge-visible: #6E6F64;
+
+  /* —— 阴影 —— */
+  --shadow: 0 1px 2px rgba(28, 29, 24, 0.07);
+  --shadow-lift: 0 14px 34px rgba(28, 29, 24, 0.12);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(28, 29, 24, 0.07);
+  --elev-2: 0 2px 6px rgba(28, 29, 24, 0.09);
+  --elev-3: 0 8px 22px rgba(28, 29, 24, 0.11);
+  --elev-4: 0 18px 46px rgba(28, 29, 24, 0.14);
+
+  /* —— 动效：反馈 ≤150ms / 状态 ≤250ms / 入场 ≤600ms —— */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 250ms;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* —— 字体：正文宋体 / 界面黑体 / 引文楷体 / 数据无衬线 —— */
+  --font-serif: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", "宋体", serif;
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+  --font-code: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --font-display: "Songti SC", "STSong", "Source Han Serif SC", "SimSun", "宋体", serif;
+  --font-text: "Songti SC", "STSong", "Source Han Serif SC", "SimSun", "宋体", serif;
+  --font-quote: "KaiTi", "STKaiti", "楷体", "Songti SC", "SimSun", serif;
+  --font-data: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+
+  /* —— 字阶 —— */
+  --size-body: 1.0625rem;
+  --size-hero: 3rem;
+  --size-label: 0.8125rem;
+  --size-micro: 0.75rem;
+  --size-section: 1.5rem;
+  --type-body: 400 1.0625rem/1.8 var(--font-text);
+  --type-caption: 400 0.8125rem/1.55 var(--font-sans);
+  --type-display: 700 clamp(2rem, 1.35rem + 2.6vw, 3rem)/1.14 var(--font-display);
+  --type-eyebrow: 600 0.75rem/1.2 var(--font-sans);
+  --type-label: 600 0.8125rem/1.35 var(--font-sans);
+  --type-lead: 400 1.1875rem/1.75 var(--font-text);
+  --type-number: 700 2rem/1 var(--font-data);
+  --type-subtitle: 600 1.1875rem/1.6 var(--font-display);
+  --type-title: 700 1.5rem/1.4 var(--font-display);
+  --leading-tight: 1.25;
+
+  /* —— 间距：4px 基数，1→9 —— */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+  --space-9: 72px;
+  --gap-tight: 8px;
+  --gap-loose: 24px;
+  --gap-section: 56px;
+
+  /* —— 布局 —— */
+  --container-read: 40em;
+  --grid-columns: repeat(12, minmax(0, 1fr));
+  --indent-0: 0rem;
+  --indent-2: 2em;
+  --measure-note: 15rem;
+  --gap-note: 2.5rem;
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+  --z-nav: 100;
+  --z-drawer: 300;
+  --z-mask: 200;
+  --z-tooltip: 400;
+}
+
+/* 暗态：同一物料在灯下 —— 纸换成墨室中的纸，墨换成反照白，颜料按各自底色重取明度档 */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #111316;
+  --paper: #1A1D21;
+  --paper-warm: #201E1A;
+  --surface-canvas: #1A1D21;
+  --surface-raised: #23262B;
+  --surface-sunken: #131519;
+  --surface-inset: #171A1E;
+  --surface-nav: rgba(26, 29, 33, 0.86);
+  --dark: #0C0E10;
+  --dark-text: #E6E5DE;
+
+  --ink: #E8E7DF;
+  --ink-soft: #C8C7BE;
+  --ink-faint: #9A9A92;
+  --ink-tint: #5C6169;
+  --text-primary: #E8E7DF;
+  --text-secondary: #C2C1B8;
+  --text-tertiary: #9A9A92;
+  --text-hero: #F4F2EA;
+  --text-inverse: #EDEDE4;
+  --text-step-0: 1.0625rem;
+  --text-step-3: 1.375rem;
+
+  --accent: #6FA8D6;
+  --accent-primary: #6FA8D6;
+  --accent-deep: #3E7BA8;
+  --accent-muted: #4E7A9C;
+  --accent-soft: #1F2A33;
+  --accent-text: #9CC6E8;
+  --accent-tint: #2C4354;
+  --accent-wash: #1A232A;
+  --accent-on: #0E1216;
+  --accent-2: #C9973F;
+  --accent-3: #B078A0;
+  --accent-4: #62B394;
+
+  --ok: #62B394;
+  --warn: #DCA845;
+  --info: #6FA8D6;
+  --danger: #E0715C;
+  --status-neg: #8FA3B0;
+  --rebel: #C98FB4;
+
+  --chart-1: #5178B1;
+  --chart-2: #A36457;
+  --chart-3: #80A085;
+  --chart-4: #E4B67A;
+  --chart-5: #DCB0E0;
+  --chart-6: #55ABAA;
+  --series-1: #5178B1;
+  --series-2: #A36457;
+  --series-3: #80A085;
+  --series-4: #E4B67A;
+  --series-5: #DCB0E0;
+  --series-6: #55ABAA;
+  --series-7: #B58B5E;
+  --series-8: #797979;
+
+  --line: #343941;
+  --border-subtle: #272B31;
+  --border-strong: #4E545C;
+  --border-hairline: #21252A;
+  --border-accent: #6FA8D6;
+  --axis-line: #6E757E;
+  --grid-line: #1E2226;
+  --edge-visible: #8A9199;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.50);
+  --shadow-lift: 0 14px 34px rgba(0, 0, 0, 0.55);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.50);
+  --elev-2: 0 2px 6px rgba(0, 0, 0, 0.52);
+  --elev-3: 0 8px 22px rgba(0, 0, 0, 0.55);
+  --elev-4: 0 18px 46px rgba(0, 0, 0, 0.60);
+
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 250ms;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-serif: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", "宋体", serif;
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+  --font-code: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --font-display: "Songti SC", "STSong", "Source Han Serif SC", "SimSun", "宋体", serif;
+  --font-text: "Songti SC", "STSong", "Source Han Serif SC", "SimSun", "宋体", serif;
+  --font-quote: "KaiTi", "STKaiti", "楷体", "Songti SC", "SimSun", serif;
+  --font-data: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+
+  --size-body: 1.0625rem;
+  --size-hero: 3rem;
+  --size-label: 0.8125rem;
+  --size-micro: 0.75rem;
+  --size-section: 1.5rem;
+  --type-body: 400 1.0625rem/1.8 var(--font-text);
+  --type-caption: 400 0.8125rem/1.55 var(--font-sans);
+  --type-display: 700 clamp(2rem, 1.35rem + 2.6vw, 3rem)/1.14 var(--font-display);
+  --type-eyebrow: 600 0.75rem/1.2 var(--font-sans);
+  --type-label: 600 0.8125rem/1.35 var(--font-sans);
+  --type-lead: 400 1.1875rem/1.75 var(--font-text);
+  --type-number: 700 2rem/1 var(--font-data);
+  --type-subtitle: 600 1.1875rem/1.6 var(--font-display);
+  --type-title: 700 1.5rem/1.4 var(--font-display);
+  --leading-tight: 1.25;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+  --space-9: 72px;
+  --gap-tight: 8px;
+  --gap-loose: 24px;
+  --gap-section: 56px;
+
+  --container-read: 40em;
+  --grid-columns: repeat(12, minmax(0, 1fr));
+  --indent-0: 0rem;
+  --indent-2: 2em;
+  --measure-note: 15rem;
+  --gap-note: 2.5rem;
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+  --z-nav: 100;
+  --z-drawer: 300;
+  --z-mask: 200;
+  --z-tooltip: 400;
+}
+
+/* 无 JS 时的系统偏好回退：取值与 :root[data-theme="dark"] 逐项一致（_audit.py 比对） */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #111316;
+    --paper: #1A1D21;
+    --paper-warm: #201E1A;
+    --surface-canvas: #1A1D21;
+    --surface-raised: #23262B;
+    --surface-sunken: #131519;
+    --surface-inset: #171A1E;
+    --surface-nav: rgba(26, 29, 33, 0.86);
+    --dark: #0C0E10;
+    --dark-text: #E6E5DE;
+
+    --ink: #E8E7DF;
+    --ink-soft: #C8C7BE;
+    --ink-faint: #9A9A92;
+    --ink-tint: #5C6169;
+    --text-primary: #E8E7DF;
+    --text-secondary: #C2C1B8;
+    --text-tertiary: #9A9A92;
+    --text-hero: #F4F2EA;
+    --text-inverse: #EDEDE4;
+    --text-step-0: 1.0625rem;
+    --text-step-3: 1.375rem;
+
+    --accent: #6FA8D6;
+    --accent-primary: #6FA8D6;
+    --accent-deep: #3E7BA8;
+    --accent-muted: #4E7A9C;
+    --accent-soft: #1F2A33;
+    --accent-text: #9CC6E8;
+    --accent-tint: #2C4354;
+    --accent-wash: #1A232A;
+    --accent-on: #0E1216;
+    --accent-2: #C9973F;
+    --accent-3: #B078A0;
+    --accent-4: #62B394;
+
+    --ok: #62B394;
+    --warn: #DCA845;
+    --info: #6FA8D6;
+    --danger: #E0715C;
+    --status-neg: #8FA3B0;
+    --rebel: #C98FB4;
+
+    --chart-1: #5178B1;
+    --chart-2: #A36457;
+    --chart-3: #80A085;
+    --chart-4: #E4B67A;
+    --chart-5: #DCB0E0;
+    --chart-6: #55ABAA;
+    --series-1: #5178B1;
+    --series-2: #A36457;
+    --series-3: #80A085;
+    --series-4: #E4B67A;
+    --series-5: #DCB0E0;
+    --series-6: #55ABAA;
+    --series-7: #B58B5E;
+    --series-8: #797979;
+
+    --line: #343941;
+    --border-subtle: #272B31;
+    --border-strong: #4E545C;
+    --border-hairline: #21252A;
+    --border-accent: #6FA8D6;
+    --axis-line: #6E757E;
+    --grid-line: #1E2226;
+    --edge-visible: #8A9199;
+
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.50);
+    --shadow-lift: 0 14px 34px rgba(0, 0, 0, 0.55);
+    --elev-0: none;
+    --elev-1: 0 1px 2px rgba(0, 0, 0, 0.50);
+    --elev-2: 0 2px 6px rgba(0, 0, 0, 0.52);
+    --elev-3: 0 8px 22px rgba(0, 0, 0, 0.55);
+    --elev-4: 0 18px 46px rgba(0, 0, 0, 0.60);
+
+    --dur-fast: 120ms;
+    --dur-base: 200ms;
+    --dur-slow: 250ms;
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+    --font-serif: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", "宋体", serif;
+    --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-mono: "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+    --font-code: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --font-display: "Songti SC", "STSong", "Source Han Serif SC", "SimSun", "宋体", serif;
+    --font-text: "Songti SC", "STSong", "Source Han Serif SC", "SimSun", "宋体", serif;
+    --font-quote: "KaiTi", "STKaiti", "楷体", "Songti SC", "SimSun", serif;
+    --font-data: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+
+    --size-body: 1.0625rem;
+    --size-hero: 3rem;
+    --size-label: 0.8125rem;
+    --size-micro: 0.75rem;
+    --size-section: 1.5rem;
+    --type-body: 400 1.0625rem/1.8 var(--font-text);
+    --type-caption: 400 0.8125rem/1.55 var(--font-sans);
+    --type-display: 700 clamp(2rem, 1.35rem + 2.6vw, 3rem)/1.14 var(--font-display);
+    --type-eyebrow: 600 0.75rem/1.2 var(--font-sans);
+    --type-label: 600 0.8125rem/1.35 var(--font-sans);
+    --type-lead: 400 1.1875rem/1.75 var(--font-text);
+    --type-number: 700 2rem/1 var(--font-data);
+    --type-subtitle: 600 1.1875rem/1.6 var(--font-display);
+    --type-title: 700 1.5rem/1.4 var(--font-display);
+    --leading-tight: 1.25;
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-7: 32px;
+    --space-8: 48px;
+    --space-9: 72px;
+    --gap-tight: 8px;
+    --gap-loose: 24px;
+    --gap-section: 56px;
+
+    --container-read: 40em;
+    --grid-columns: repeat(12, minmax(0, 1fr));
+    --indent-0: 0rem;
+    --indent-2: 2em;
+    --measure-note: 15rem;
+    --gap-note: 2.5rem;
+    --radius-sm: 2px;
+    --radius-pill: 999px;
+    --z-nav: 100;
+    --z-drawer: 300;
+    --z-mask: 200;
+    --z-tooltip: 400;
+  }
+}

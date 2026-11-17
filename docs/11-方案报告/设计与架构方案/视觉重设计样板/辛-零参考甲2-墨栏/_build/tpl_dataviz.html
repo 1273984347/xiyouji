@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>百回人物出场频次 · 详解西游记 数据可视化</title>
+<meta name="description" content="《西游记》百回人物出场频次：总出场 2,692 次，覆盖 100 回，主角孙悟空 980 次。">
+<style>
+/*@TOKENS@*/
+/*@SYSTEM@*/
+</style>
+<noscript><style>.js-reveal{opacity:1;transform:none}.table-anim tbody tr{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+<svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9.5l7 7 7-7"/></symbol>
+  <symbol id="i-index" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="4.6" cy="6" r="1"/><circle cx="4.6" cy="12" r="1"/><circle cx="4.6" cy="18" r="1"/><path d="M9 6h11M9 12h11M9 18h11"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4" width="15" height="16" rx="1"/><path d="M8.5 4v16M11 9.5h5M11 13.5h5"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18c4.5 0 3.5-6 8-6s3.5-6 8-6"/><circle cx="4" cy="18" r="1.7"/><circle cx="20" cy="6" r="1.7"/></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="6" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.7 10.7l2.7-3.2M16.3 10.7l-2.7-3.2M7.7 13.3l2.7 3.2M16.3 13.3l-2.7 3.2"/></symbol>
+  <symbol id="i-heat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3.6" y="4.6" width="4.4" height="4.4" rx="0.8"/><rect x="9.8" y="4.6" width="4.4" height="4.4" rx="0.8"/><rect x="16" y="4.6" width="4.4" height="4.4" rx="0.8"/><rect x="3.6" y="9.8" width="4.4" height="4.4" rx="0.8"/><rect x="9.8" y="9.8" width="4.4" height="4.4" rx="0.8"/><rect x="16" y="9.8" width="4.4" height="4.4" rx="0.8"/><rect x="3.6" y="15" width="4.4" height="4.4" rx="0.8"/><rect x="9.8" y="15" width="4.4" height="4.4" rx="0.8"/><rect x="16" y="15" width="4.4" height="4.4" rx="0.8"/></symbol>
+  <symbol id="i-timeline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><circle cx="7" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="17" cy="12" r="1.4"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="1"/><path d="M3.5 10h17M9.5 10v9"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="4.4" y="12" width="3.2" height="8" rx="0.6"/><rect x="10.4" y="6" width="3.2" height="14" rx="0.6"/><rect x="16.4" y="9" width="3.2" height="11" rx="0.6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19.6 14.9A8.2 8.2 0 019.1 4.4a8.2 8.2 0 1010.5 10.5z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.2 6.4C7.6 7.6 6.2 9.8 6.2 12.9h3.4v5.5H5.4v-5.6c0-3.6 1.8-5.9 4.8-6.4zM19 6.4c-2.6 1.2-4 3.4-4 6.5h3.4v5.5h-4.2v-5.6c0-3.6 1.8-5.9 4.8-6.4z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.2"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">跳到主内容</a>
+
+<header class="topnav">
+  <div class="topnav__inner">
+    <a class="brand" href="#top">
+      <span class="wordmark">详解西游记</span>
+      <span class="brand__tag">数字人文 · 100 回</span>
+    </a>
+    <nav class="site-mainnav" aria-label="主导航">
+      <a href="#compose">总览</a>
+      <a href="#viz" aria-current="page">可视化</a>
+      <a href="#read">逐回解读</a>
+      <a href="#how">读法</a>
+    </nav>
+    <div class="topnav__tools">
+      <button class="btn btn--ghost" type="button" id="themeToggle" aria-label="切换明暗主题">
+        <svg class="ico" aria-hidden="true"><use href="#i-sun"></use></svg>
+        <svg class="ico hidden" aria-hidden="true" id="themeIconDark"><use href="#i-moon"></use></svg>
+        <span class="ico-t-label">主题</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="site-main">
+  <div class="page-wrap">
+    <div class="page-head" id="top">
+      <p class="kicker">可视化 · 第 031 号 · 人物谱系</p>
+      <h1 class="page-head__title">百回人物出场频次</h1>
+      <p class="page-head__sub">以「回」为单位统计全书人物登场次数，演示样例。同一回内多次登场记 1 次，未署名提及不计。</p>
+      <div class="page-head__row">
+        <span class="meta-row__item"><span class="meta-row__key">数据口径</span><span class="meta-row__val">分回计次 · 每回每人不超过 1 次</span></span>
+        <span class="meta-row__item"><span class="meta-row__key">更新日期</span><span class="meta-row__val">2026-11-12</span></span>
+        <span class="badge data-status-badge" data-state="ok">已核校</span>
+        <span class="badge">演示样例</span>
+      </div>
+    </div>
+
+    <!-- 签名元素：百回拓片条 -->
+    <section class="ink-strip-wrap" aria-label="百回主角出场密度概览">
+      <div class="ink-strip-head">
+        <span class="ink-strip-title">百回拓片 · 主角出场密度</span>
+        <span class="ink-strip-note" id="stripNote">每格一回 · 悬停查看该回数据</span>
+      </div>
+      <div class="ink-strip" id="inkStrip"></div>
+      <div class="ink-strip__axis"><span>卷一</span><span>卷一百</span></div>
+    </section>
+
+    <!-- 指标 -->
+    <div class="kpi-grid" id="kpiGrid" style="margin-top:var(--space-9)">
+      <div class="kpi-card">
+        <span class="kpi-card__label">总出场</span>
+        <span class="kpi-card__value"><span data-count="2692" data-format="comma">2,692</span><span class="kpi-card__unit">次</span></span>
+        <span class="kpi-card__note">全书 100 回累计</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-card__label">覆盖</span>
+        <span class="kpi-card__value"><span data-count="100">100</span><span class="kpi-card__unit">回</span></span>
+        <span class="kpi-card__note">一百回无一遗漏</span>
+      </div>
+      <div class="kpi-card kpi-card--lead">
+        <span class="kpi-card__label">第一主角</span>
+        <span class="kpi-card__value">孙悟空</span>
+        <span class="kpi-card__note">占全书出场 36.4%</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-card__label">团队成员</span>
+        <span class="kpi-card__value"><span data-count="4">4</span><span class="kpi-card__unit">人</span></span>
+        <span class="kpi-card__note">师徒四人合计 2,430 次</span>
+      </div>
+    </div>
+
+    <!-- 筛选 -->
+    <div class="filter-row" style="margin-top:var(--space-9)">
+      <div class="filter-tabs" role="tablist" aria-label="按身份组筛选">
+        <button class="filter-tab" role="tab" type="button" data-group="all" aria-selected="true">全部<span class="filter-tab__count">12</span></button>
+        <button class="filter-tab" role="tab" type="button" data-group="师徒四人" aria-selected="false">师徒四人<span class="filter-tab__count">4</span></button>
+        <button class="filter-tab" role="tab" type="button" data-group="神佛" aria-selected="false">神佛<span class="filter-tab__count">4</span></button>
+        <button class="filter-tab" role="tab" type="button" data-group="妖魔" aria-selected="false">妖魔<span class="filter-tab__count">4</span></button>
+      </div>
+      <label class="search-box">
+        <svg class="ico-t" aria-hidden="true"><use href="#i-search"></use></svg>
+        <input id="search" type="search" placeholder="搜索人物，如「悟空」" aria-label="搜索人物">
+      </label>
+    </div>
+
+    <!-- 主图 -->
+    <section class="section section--tight" id="viz">
+      <div class="section-head">
+        <div>
+          <p class="kicker">主图</p>
+          <h2 class="section-title">人物出场频次</h2>
+          <p class="section-sub">按累计次数降序 · 单位：次 · 悬停条形读出次数与占比。</p>
+        </div>
+        <p class="section-head__aside" id="scaleNote">量程 0–1,000 次</p>
+      </div>
+      <div class="chart-wrap" id="mainWrap">
+        <div class="chart-container" id="mainChart"></div>
+        <div class="chart-legend" id="mainLegend">
+          <span class="legend-item"><span class="legend-item__swatch" style="background:var(--chart-1)"></span>师徒四人</span>
+          <span class="legend-item"><span class="legend-item__swatch" style="background:var(--chart-5)"></span>神佛</span>
+          <span class="legend-item"><span class="legend-item__swatch" style="background:var(--chart-3)"></span>妖魔</span>
+          <span class="legend-item"><span class="legend-item__mark"></span>朱砂标出主角</span>
+        </div>
+        <div class="chart-tooltip" id="tooltip" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- 副图 + 洞察 -->
+    <section class="section section--tight">
+      <div class="grid-side">
+        <div class="chart-wrap">
+          <div class="chart-block" style="margin-top:0">
+            <div class="section-head" style="margin-bottom:var(--space-5)">
+              <div>
+                <p class="kicker">副图</p>
+                <h2 class="section-title" style="font-size:var(--type-subtitle)">八十一难按十回段分布</h2>
+              </div>
+              <p class="section-head__aside">合计 81 难</p>
+            </div>
+            <div class="chart-container" id="colChart"></div>
+            <div class="chart-loading hidden" id="colLoading">
+              <span class="chart-loading__bar"></span>正在计算…
+            </div>
+          </div>
+        </div>
+        <aside class="insight">
+          <p class="insight__label">读数</p>
+          <p class="insight__text">主角一人占去全书出场的 <b>36.4%</b>，师徒四人合计 <b>2,430 次</b>（<b>90.3%</b>）；神佛 208 次、妖魔 54 次。也就是说，这本书被记住的不是被降伏的妖怪，而是取经的秩序——<b>八十一难</b>真正落在十回段上的分布并不均匀，最密的一段占了 <b>11 难</b>。</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 表格 -->
+    <section class="section section--tight">
+      <div class="section-head">
+        <div>
+          <p class="kicker">明细</p>
+          <h2 class="section-title">出场明细 Top 6</h2>
+          <p class="section-sub">占比以全书 2,692 次为分母；相对量以主角 980 次为满格。</p>
+        </div>
+      </div>
+      <div class="table-wrap table-wrap--sticky" id="tableWrap">
+        <table class="table-anim" id="detailTable">
+          <thead>
+            <tr>
+              <th scope="col">排名</th>
+              <th scope="col">人物</th>
+              <th scope="col">身份组</th>
+              <th scope="col" class="num">出场次数</th>
+              <th scope="col" class="num">占全书</th>
+              <th scope="col" class="num">每回均值</th>
+              <th scope="col">相对量</th>
+            </tr>
+          </thead>
+          <tbody id="detailBody"></tbody>
+        </table>
+      </div>
+
+      <!-- 空状态 -->
+      <div class="empty-state hidden" id="emptyState" style="margin-top:var(--space-5)">
+        <svg class="ico" aria-hidden="true" style="color:var(--text-tertiary)"><use href="#i-search"></use></svg>
+        <p class="empty-state__title">无匹配条目</p>
+        <p class="empty-state__hint">当前筛选条件下没有人物记录，换个名字或切换身份组试试。</p>
+        <button class="btn" type="button" id="clearFilters">清除筛选</button>
+      </div>
+    </section>
+
+    <!-- 口径 -->
+    <section class="section section--tight">
+      <blockquote class="cite-block cite-block--compact">
+        <p class="cite-block__text">统计口径：同一人物在同一回内多次登场记 1 次；仅被提及而未登场者不计入本页。</p>
+        <p class="cite-block__source">数据说明 · 本页元信息</p>
+      </blockquote>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer" id="read">
+  <div class="page-wrap">
+    <div class="site-footer__grid">
+      <div>
+        <h2 class="site-footer__title">详解西游记</h2>
+        <p>一源多形 · 数字人文可视化解读《西游记》100 回。</p>
+        <p>875 个页面 · 629 篇解读文档</p>
+        <p>90 个数据可视化 · 138 页英文版</p>
+      </div>
+      <div>
+        <h2 class="site-footer__title">许可与形态</h2>
+        <ul>
+          <li>代码 MIT</li>
+          <li>文本 CC BY-NC 4.0</li>
+          <li>纯静态，可离线打开</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__title">栏目</h2>
+        <ul>
+          <li>逐回解读 · 100</li>
+          <li>人物谱系 · 215</li>
+          <li>主题专题 · 209</li>
+          <li>文化背景 · 35</li>
+          <li>诗词歌赋 · 13</li>
+          <li>个人随笔 · 44</li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>本页为视觉系统样板：人物与难次数值为演示值，用于呈现图表版式与读数纪律。</span>
+      <span>无追踪 · 无外部请求</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  var SVGNS = 'http://www.w3.org/2000/svg';
+
+  /* ---------- 数据 ---------- */
+  var TOTAL = 2692, MAXV = 980;
+  var PEOPLE = [
+    { n: '孙悟空', v: 980, g: '师徒四人', lead: true },
+    { n: '猪八戒', v: 620, g: '师徒四人' },
+    { n: '唐僧',   v: 590, g: '师徒四人' },
+    { n: '沙僧',   v: 240, g: '师徒四人' },
+    { n: '观音菩萨', v: 95, g: '神佛' },
+    { n: '如来佛祖', v: 60, g: '神佛' },
+    { n: '玉皇大帝', v: 45, g: '神佛' },
+    { n: '牛魔王', v: 18, g: '妖魔' },
+    { n: '红孩儿', v: 14, g: '妖魔' },
+    { n: '白骨精', v: 12, g: '妖魔' },
+    { n: '铁扇公主', v: 10, g: '妖魔' },
+    { n: '二郎神', v: 8,  g: '神佛' }
+  ];
+  var GROUPS = {
+    '师徒四人': 'var(--chart-1)',
+    '神佛': 'var(--chart-5)',
+    '妖魔': 'var(--chart-3)'
+  };
+  var TRIALS = [5, 9, 11, 10, 9, 8, 10, 7, 6, 6];
+  var CHAPTERS = [
+    29,29,30,31,32,34,38,40,38,35, 33,35,37,38,36,33,31,31,31,29,
+    26,23,23,25,29,34,35,32,26,20, 17,15,15,15,15,17,19,23,26,28,
+    27,25,22,20,19,20,23,27,29,29, 27,25,25,26,28,30,34,39,42,40,
+    37,33,32,31,31,31,31,30,30,30, 29,29,29,31,32,32,30,27,24,22,
+    21,20,20,22,24,26,26,25,21,18, 16,15,16,17,20,21,20,19,17,17
+  ];
+
+  /* ---------- 工具 ---------- */
+  function el(tag, attrs, text) {
+    var n = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) if (attrs.hasOwnProperty(k)) n.setAttribute(k, attrs[k]);
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  function pct(v) { return (v / TOTAL * 100).toFixed(1) + '%'; }
+  function segName(i) { return '第' + ['一','二','三','四','五','六','七','八','九','十'][i] + '段'; }
+
+  /* ---------- 主题切换 ---------- */
+  var btn = document.getElementById('themeToggle');
+  var iconDark = document.getElementById('themeIconDark');
+  var iconLight = btn.querySelector('svg');
+  function isDark() {
+    var a = root.getAttribute('data-theme');
+    if (a) return a === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function paint() {
+    var d = isDark();
+    iconDark.classList.toggle('hidden', !d);
+    iconLight.classList.toggle('hidden', d);
+  }
+  paint();
+  btn.addEventListener('click', function () {
+    root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+    try { localStorage.setItem('xyj-theme', root.getAttribute('data-theme')); } catch (e) {}
+    paint();
+  });
+
+  /* ---------- 状态 ---------- */
+  var group = 'all', query = '';
+  function current() {
+    return PEOPLE.filter(function (p) {
+      var okG = group === 'all' || p.g === group;
+      var okQ = !query || p.n.indexOf(query) >= 0;
+      return okG && okQ;
+    });
+  }
+
+  /* ---------- 主图：横向条形 ---------- */
+  var tooltip = document.getElementById('tooltip');
+  var mainWrap = document.getElementById('mainWrap');
+  var mainChart = document.getElementById('mainChart');
+  var scaleNote = document.getElementById('scaleNote');
+
+  function showTip(html, x, y) {
+    tooltip.innerHTML = html;
+    tooltip.classList.add('visible');
+    var w = tooltip.offsetWidth, h = tooltip.offsetHeight;
+    var maxX = mainWrap.clientWidth - w / 2 - 6;
+    var left = Math.max(w / 2 + 6, Math.min(x, maxX));
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = Math.max(h + 8, y - 10) + 'px';
+  }
+  function hideTip() { tooltip.classList.remove('visible'); }
+
+  function renderBar() {
+    var rows = current();
+    mainChart.textContent = '';
+    if (!rows.length) return;
+    var W = Math.max(320, mainChart.clientWidth || 720);
+    var rowH = 34, padT = 22, padB = 30;
+    var labelW = Math.max(62, Math.min(92, W * 0.2));
+    var rightPad = 58;
+    var plotW = Math.max(90, W - labelW - rightPad);
+    var maxV = rows[0].v;
+    var scaleMax = Math.max(200, Math.ceil(maxV / 100) * 100);
+    var H = padT + rows.length * rowH + padB;
+    var x = function (v) { return labelW + (v / scaleMax) * plotW; };
+    scaleNote.textContent = '量程 0–' + fmt(scaleMax) + ' 次';
+
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img' });
+    svg.setAttribute('aria-label', '人物出场频次横向条形图');
+
+    /* 网格与刻度 */
+    var step = scaleMax / 5;
+    for (var t = 0; t <= 5; t++) {
+      var gx = x(step * t);
+      svg.appendChild(el('line', { x1: gx, y1: padT - 6, x2: gx, y2: H - padB + 4, stroke: 'var(--grid-line)', 'stroke-width': 1 }));
+      svg.appendChild(el('text', { x: gx, y: H - padB + 18, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--text-tertiary)' }, fmt(step * t)));
+    }
+    /* 零线（墨色轴线） */
+    svg.appendChild(el('line', { x1: labelW, y1: padT - 6, x2: labelW, y2: H - padB + 4, stroke: 'var(--axis-line)', 'stroke-width': 1 }));
+    /* 百次基准线 */
+    if (scaleMax >= 100) {
+      var rx = x(100);
+      svg.appendChild(el('line', { x1: rx, y1: padT - 6, x2: rx, y2: H - padB + 4, stroke: 'var(--axis-line)', 'stroke-width': 1, 'stroke-dasharray': '4 3' }));
+      svg.appendChild(el('text', {
+        x: rx + (rx > W - 80 ? -5 : 5), y: padT - 10,
+        'text-anchor': rx > W - 80 ? 'end' : 'start',
+        'font-size': 10, fill: 'var(--text-tertiary)'
+      }, '百次基准'));
+    }
+
+    rows.forEach(function (p, i) {
+      var cy = padT + i * rowH + rowH / 2;
+      var bh = 16, bw = Math.max(2, x(p.v) - labelW);
+      var g = el('g', { 'data-name': p.n });
+      g.appendChild(el('text', {
+        x: labelW - 10, y: cy + 4, 'text-anchor': 'end', 'font-size': 13,
+        fill: p.lead ? 'var(--accent)' : 'var(--text-primary)',
+        'font-weight': p.lead ? 600 : 400
+      }, p.n));
+      var bar = el('rect', {
+        x: labelW, y: cy - bh / 2, width: bw, height: bh, rx: 1,
+        fill: GROUPS[p.g], 'data-bar': '1'
+      });
+      if (!RM) {
+        bar.style.transformBox = 'fill-box';
+        bar.style.transformOrigin = 'left center';
+        bar.style.transform = 'scaleX(0)';
+      }
+      g.appendChild(bar);
+      g.appendChild(el('text', {
+        x: labelW + bw + 8, y: cy + 4, 'font-size': 12, fill: 'var(--text-primary)',
+        'font-family': 'var(--font-data)'
+      }, fmt(p.v)));
+      /* 命中区 */
+      var hit = el('rect', { x: labelW, y: cy - rowH / 2, width: plotW + rightPad, height: rowH, fill: 'transparent' });
+      hit.style.cursor = 'crosshair';
+      hit.addEventListener('mousemove', function (ev) {
+        var r = mainWrap.getBoundingClientRect();
+        showTip('<strong>' + p.n + '</strong> · ' + fmt(p.v) + ' 次<br><span class="chart-tooltip__meta">占全书 ' + pct(p.v) + ' · ' + p.g + '</span>', ev.clientX - r.left, ev.clientY - r.top);
+      });
+      hit.addEventListener('mouseleave', hideTip);
+      g.appendChild(hit);
+      svg.appendChild(g);
+    });
+
+    mainChart.appendChild(svg);
+
+    /* 条形生长：≤600ms，reduced-motion 直接到位 */
+    if (!RM) {
+      var bars = svg.querySelectorAll('[data-bar]');
+      requestAnimationFrame(function () {
+        for (var i = 0; i < bars.length; i++) {
+          bars[i].style.transition = 'transform 360ms cubic-bezier(0.16, 1, 0.3, 1)';
+          bars[i].style.transitionDelay = (i * 18) + 'ms';
+          bars[i].style.transform = 'scaleX(1)';
+        }
+      });
+    }
+  }
+
+  /* ---------- 副图：八十一难十回段 ---------- */
+  var colChart = document.getElementById('colChart');
+  function renderCol() {
+    colChart.textContent = '';
+    var W = Math.max(300, colChart.clientWidth || 640);
+    var H = 190, padL = 30, padR = 10, padT = 14, padB = 34;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var maxV = 12;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img' });
+    svg.setAttribute('aria-label', '八十一难按十回段分布柱状图');
+    [0, 3, 6, 9, 12].forEach(function (v) {
+      var y = padT + plotH - (v / maxV) * plotH;
+      svg.appendChild(el('line', { x1: padL, y1: y, x2: W - padR, y2: y, stroke: 'var(--grid-line)', 'stroke-width': 1 }));
+      svg.appendChild(el('text', { x: padL - 8, y: y + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--text-tertiary)' }, String(v)));
+    });
+    var slot = plotW / TRIALS.length;
+    var bw = Math.min(30, slot - 10);
+    TRIALS.forEach(function (v, i) {
+      var h = (v / maxV) * plotH;
+      var x = padL + slot * i + (slot - bw) / 2;
+      var y = padT + plotH - h;
+      var density = 42 + (v / 11) * 58;
+      var col = el('rect', {
+        x: x, y: y, width: bw, height: h, rx: 1,
+        style: 'fill: color-mix(in srgb, var(--chart-1) ' + Math.round(density) + '%, var(--surface-raised))'
+      });
+      col.setAttribute('data-seg', i);
+      svg.appendChild(col);
+      svg.appendChild(el('text', {
+        x: x + bw / 2, y: y - 6, 'text-anchor': 'middle', 'font-size': 11,
+        fill: v === 11 ? 'var(--text-primary)' : 'var(--text-tertiary)'
+      }, String(v)));
+      svg.appendChild(el('text', {
+        x: x + bw / 2, y: H - padB + 18, 'text-anchor': 'middle', 'font-size': 10, fill: 'var(--text-tertiary)'
+      }, (i * 10 + 1) + '–' + (i * 10 + 10)));
+      /* 联动基线（墨色） */
+      svg.appendChild(el('rect', { x: x, y: padT + plotH + 2, width: bw, height: 2, fill: 'transparent', 'data-seg-mark': i }));
+    });
+    svg.appendChild(el('line', { x1: padL, y1: padT + plotH, x2: W - padR, y2: padT + plotH, stroke: 'var(--axis-line)', 'stroke-width': 1 }));
+    colChart.appendChild(svg);
+  }
+  function linkSeg(i) {
+    var marks = colChart.querySelectorAll('[data-seg-mark]');
+    for (var k = 0; k < marks.length; k++) {
+      marks[k].setAttribute('fill', String(k) === String(i) ? 'var(--ink)' : 'transparent');
+    }
+    var cols = colChart.querySelectorAll('[data-seg]');
+    for (var j = 0; j < cols.length; j++) {
+      var v = TRIALS[j];
+      var density = 42 + (v / 11) * 58;
+      cols[j].style.fill = 'color-mix(in srgb, var(--chart-1) ' + Math.round(density) + '%, var(--surface-raised))';
+      if (String(j) === String(i)) cols[j].style.fill = 'var(--chart-1)';
+    }
+  }
+
+  /* ---------- 拓片条（签名元素） ---------- */
+  var strip = document.getElementById('inkStrip');
+  var stripNote = document.getElementById('stripNote');
+  var peakIdx = 0;
+  CHAPTERS.forEach(function (v, i) { if (v > CHAPTERS[peakIdx]) peakIdx = i; });
+  var minC = Math.min.apply(null, CHAPTERS), maxC = Math.max.apply(null, CHAPTERS);
+
+  CHAPTERS.forEach(function (v, i) {
+    var cell = document.createElement('span');
+    cell.className = 'ink-strip__cell' + (i === peakIdx ? ' is-peak' : '');
+    var t = (v - minC) / (maxC - minC);
+    cell.style.setProperty('--h', (24 + t * 76) + '%');
+    cell.style.setProperty('--o', (0.3 + t * 0.5).toFixed(2));
+    cell.setAttribute('data-seg', Math.floor(i / 10));
+    cell.addEventListener('mouseenter', function () {
+      var seg = Math.floor(i / 10);
+      linkSeg(seg);
+      var r = mainWrap.getBoundingClientRect();
+      var cr = cell.getBoundingClientRect();
+      showTip('第 ' + (i + 1) + ' 回 · 悟空出场 <strong>' + v + '</strong> 次<br><span class="chart-tooltip__meta">' + segName(seg) + '（第 ' + (seg * 10 + 1) + '–' + (seg * 10 + 10) + ' 回）</span>',
+        cr.left + cr.width / 2 - r.left, cr.top - r.top + 8);
+    });
+    cell.addEventListener('mouseleave', function () { linkSeg(-1); hideTip(); });
+    strip.appendChild(cell);
+  });
+  stripNote.textContent = '每格一回 · 悬停查看该回数据 · 最密：第 ' + (peakIdx + 1) + ' 回 ' + CHAPTERS[peakIdx] + ' 次';
+
+  /* ---------- 表格 ---------- */
+  var detailBody = document.getElementById('detailBody');
+  function renderTable() {
+    var rows = current().slice(0, 6);
+    detailBody.textContent = '';
+    rows.forEach(function (p, i) {
+      var tr = document.createElement('tr');
+      var rank = (PEOPLE.indexOf(p) + 1);
+      tr.innerHTML =
+        '<td class="rank">' + rank + '</td>' +
+        '<td class="name">' + p.n + '</td>' +
+        '<td>' + p.g + '</td>' +
+        '<td class="num">' + fmt(p.v) + '</td>' +
+        '<td class="num">' + pct(p.v) + '</td>' +
+        '<td class="num">' + (p.v / 100).toFixed(2) + '</td>' +
+        '<td><span class="meter"><span class="meter__fill' + (p.lead ? ' meter__fill--lead' : '') + '" style="width:' + (p.v / MAXV * 100).toFixed(1) + '%"></span></span></td>';
+      detailBody.appendChild(tr);
+    });
+    if (!RM) {
+      var trs = detailBody.querySelectorAll('tr');
+      requestAnimationFrame(function () {
+        for (var i = 0; i < trs.length; i++) {
+          trs[i].style.transitionDelay = (i * 40) + 'ms';
+          trs[i].classList.add('is-in');
+        }
+      });
+    }
+  }
+
+  /* ---------- 空状态 ---------- */
+  var emptyState = document.getElementById('emptyState');
+  var tableWrap = document.getElementById('tableWrap');
+  function syncEmpty() {
+    var empty = current().length === 0;
+    emptyState.classList.toggle('hidden', !empty);
+    tableWrap.classList.toggle('hidden', empty);
+    mainWrap.classList.toggle('hidden', empty);
+  }
+
+  /* ---------- 渲染调度 ---------- */
+  var loading = document.getElementById('colLoading');
+  function renderAll() {
+    syncEmpty();
+    renderBar();
+    renderTable();
+  }
+  function refresh() {
+    if (RM) { renderAll(); return; }
+    loading.classList.remove('hidden');
+    window.setTimeout(function () {
+      loading.classList.add('hidden');
+      renderAll();
+    }, 220);
+  }
+
+  /* ---------- 交互 ---------- */
+  var tabs = document.querySelectorAll('.filter-tab');
+  Array.prototype.forEach.call(tabs, function (t) {
+    t.addEventListener('click', function () {
+      Array.prototype.forEach.call(tabs, function (o) { o.setAttribute('aria-selected', o === t ? 'true' : 'false'); });
+      group = t.getAttribute('data-group');
+      refresh();
+    });
+  });
+  var search = document.getElementById('search');
+  search.addEventListener('input', function () { query = search.value.trim(); refresh(); });
+  document.getElementById('clearFilters').addEventListener('click', function () {
+    group = 'all'; query = ''; search.value = '';
+    Array.prototype.forEach.call(tabs, function (o) { o.setAttribute('aria-selected', o.getAttribute('data-group') === 'all' ? 'true' : 'false'); });
+    refresh();
+  });
+
+  /* ---------- KPI 数字滚动 ---------- */
+  function countUp(node) {
+    var target = parseFloat(node.getAttribute('data-count'));
+    var comma = node.getAttribute('data-format') === 'comma';
+    var finalText = comma ? fmt(target) : String(target);
+    if (RM) { node.textContent = finalText; return; }
+    var dur = 900, t0 = null;
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 4);
+      var val = Math.round(target * e);
+      node.textContent = comma ? fmt(val) : String(val);
+      if (p < 1) requestAnimationFrame(step);
+      else node.textContent = finalText;
+    }
+    requestAnimationFrame(step);
+  }
+  var counters = document.querySelectorAll('[data-count]');
+  if (RM || !('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(counters, function (n) { n.textContent = n.getAttribute('data-format') === 'comma' ? fmt(parseFloat(n.getAttribute('data-count'))) : n.getAttribute('data-count'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { countUp(e.target); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.4 });
+    Array.prototype.forEach.call(counters, function (n) { io.observe(n); });
+  }
+
+  /* ---------- 滚动揭示 ---------- */
+  var reveals = document.querySelectorAll('.js-reveal');
+  if (RM || !('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(reveals, function (n) { n.classList.add('visible'); });
+  } else {
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io2.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px' });
+    Array.prototype.forEach.call(reveals, function (n) { io2.observe(n); });
+  }
+
+  /* ---------- 首次渲染 ---------- */
+  renderAll();
+  renderCol();
+  var rt = null;
+  window.addEventListener('resize', function () {
+    window.clearTimeout(rt);
+    rt = window.setTimeout(function () { renderBar(); renderCol(); }, 160);
+  });
+})();
+</script>
+</body>
+</html>
