@@ -7,11 +7,10 @@
 > 本文件逐条列出 `scripts/output/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（3）
+## 子目录（2）
 
 - `data/`
 - `figures/`
-- `theme-delta-shots/`
 
 ## 文件（826）
 

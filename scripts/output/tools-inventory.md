@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-17 18:48
+生成时间：2026-11-17 19:24
 
-共 **217** 件（门禁与校验 104 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
+共 **218** 件（门禁与校验 105 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（104）
+## 门禁与校验（105）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -90,6 +90,7 @@
 | `check_placeholder_hash_carrier.py` | check_placeholder_hash_carrier.py — 构建期占位符不得落在 CSP 哈希载体上（第 71 槽 · W1210） |
 | `check_plan_template.py` | check_plan_template.py — 第 48 门禁：计划方案模板符合性（增量口径·W860） |
 | `check_powershell_parse.py` | check_powershell_parse.py — PowerShell 脚本可解析性判据（W1110 新增第 55 槽）。 |
+| `check_public_layer_coverage.py` | check_public_layer_coverage.py — 公共层样式覆盖率下限与棘轮（W1264 立） |
 | `check_public_repo_secrets.py` | check_public_repo_secrets.py — 公开仓敏感内容扫描（可复跑防线） |
 | `check_reader_integrity.py` | 第 62 门禁：site/reader 完整性（C1 占位词 / C2 GitHub 链接 / C3 单 h1 / C4 标题唯一）。 |
 | `check_reader_rss_fresh.py` | check_reader_rss_fresh.py — reader 站与 RSS 产物新鲜度门禁（W1232·审计登记「reader/rss  |

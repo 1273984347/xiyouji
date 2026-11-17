@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（226）
+## 文件（227）
 
 ### Python 脚本
 
@@ -154,6 +154,7 @@
 - `check_placeholder_hash_carrier.py`
 - `check_plan_template.py`
 - `check_powershell_parse.py`
+- `check_public_layer_coverage.py`
 - `check_public_repo_secrets.py`
 - `check_reader_integrity.py`
 - `check_reader_rss_fresh.py`

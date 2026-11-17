@@ -56,6 +56,8 @@ desktop.ini
 
 
 # 输出文件
+# W1264：第 75 槽探针产物（明暗两态截图·每次跑字节都变·非可复现资产·不入库）
+scripts/output/theme-delta-shots/
 scripts/output/figures/*.png
 scripts/output/figures/*.svg
 scripts/output/figures/v08/
