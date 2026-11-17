@@ -62,6 +62,8 @@
 | site/en/search-index-en.js | W1263 | 搜索索引重建 |
 | scripts/output/_w1263_spec.json | W1263 | 本批 spec（级联与门禁输入） |
 | scripts/output/file-index.md | W1263 | 本批 file-index 段登记（W1263 收官链产物） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/mandala-light.png | W1263 | v3 签名元素「百回坛城」特写（明暗双态） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/mandala-dark.png | W1263 | v3 签名元素「百回坛城」特写（明暗双态） |
 
 ## W1261 全站可视化视觉重设计批（2026-11-16）
 

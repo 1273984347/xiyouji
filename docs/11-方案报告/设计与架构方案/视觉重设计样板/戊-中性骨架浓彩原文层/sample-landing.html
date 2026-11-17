@@ -1331,7 +1331,8 @@ html.theme-anim .filter-tabs, html.theme-anim .search-box, html.theme-anim .char
   transition: transform 600ms var(--ease-out-quart);
 }
 .mandala.mnd-in .mnd-rot { transform: rotate(0deg); }
-.mnd-label { font-family: var(--font-serif); font-size: 11.5px; fill: var(--ink-faint); }
+.mnd-label { font-family: var(--font-serif); font-size: 11.5px; fill: var(--ink-faint);
+  paint-order: stroke fill; stroke: var(--surface-canvas); stroke-width: 3px; stroke-linejoin: round; }
 .mnd-center-main { font-family: var(--font-serif); font-weight: 700; font-size: 30px; fill: var(--ink); }
 .mnd-center-sub { font-family: var(--font-text); font-size: 12px; fill: var(--text-tertiary); }
 @media (prefers-reduced-motion: reduce) {
