@@ -1,3 +1,68 @@
+## W1263 全站前端重新设计 · 需求反思与方案裁决材料 + v3 设计资产落仓（2026-11-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1263 | 坑表计数链同步（351→352） |
+| .github/workflows/README.md | W1263 | 版本号面同步 W1263 |
+| AGENTS.md | W1263 | 坑表计数链同步（351→352） |
+| CHANGELOG.md | W1263 | W1263 版段（需求反思 + v3 资产落仓·site/ 零改动） |
+| CITATION.cff | W1263 | 版本号面同步 W1263 |
+| HANDOVER.md | W1263 | 头链与当前进度同步 W1263 |
+| STRUCTURE.md | W1263 | 坑表计数链同步（351→352） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1263 | 台账行归档（W1203 迁出） |
+| docs/00-导读/W批次编号对账表.md | W1263 | W1263 认领行（site/ 零改动·待用户裁决 D1–D4） |
+| docs/11-方案报告/README.md | W1263 | 设计与架构方案分区登记行（计数 18→22） |
+| docs/11-方案报告/设计与架构方案/全站前端重新设计-需求反思与方案裁决材料-2026-11-17.md | W1263 | v3 规范与决策记录落仓 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1263 | v3 规范与决策记录落仓 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1263 | v3 规范与决策记录落仓 |
+| docs/11-方案报告/设计与架构方案/视觉重设计v3-设计决策记录-2026-11-17.md | W1263 | v3 规范与决策记录落仓 |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/00-现役vs-v3-实测对照.html | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/sample-dataviz.html | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/sample-landing.html | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/sample-reader.html | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/dashboard_dark.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/dashboard_light.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/data_stats_dark.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/data_stats_light.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/en_home_dark.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/en_home_light.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/home_dark.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/home_light.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/reader_dark.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots-current/reader_light.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/compare-page-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/dataviz-dark-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/dataviz-dark-375.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/dataviz-empty-light-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/dataviz-light-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/dataviz-light-375.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/dataviz-tooltip-light-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/landing-dark-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/landing-dark-375.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/landing-light-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/landing-light-375.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/reader-dark-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/reader-dark-375.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/reader-light-1280.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/shots/reader-light-375.png | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/system.css | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/戊-中性骨架浓彩原文层/tokens.css | W1263 | v3 样板资产（自 gitignore 区抢救落仓） |
+| docs/11-方案报告/设计与架构方案/视觉重设计规范v3-中性骨架浓彩原文层-2026-11-17.md | W1263 | v3 规范与决策记录落仓 |
+| docs/INDEX.md | W1263 | 文档索引重建 |
+| docs/agent/pitfalls.md | W1263 | 坑表计数链同步（351→352） |
+| pitfalls.md | W1263 | 坑表新增 E-245 |
+| scripts/output/INDEX.md | W1263 | 本批收官链产物 |
+| scripts/output/README.md | W1263 | 本批收官链产物 |
+| scripts/output/_cascade_files_W1263.txt | W1263 | 本批级联清单 |
+| scripts/output/stats-changelog.json | W1263 | 统计计数链刷新 |
+| scripts/output/stats-index.md | W1263 | 统计计数链刷新 |
+| scripts/output/stats.json | W1263 | 统计计数链刷新（pitfalls_total 352） |
+| scripts/output/tools-inventory.md | W1263 | 工具清单刷新 |
+| site/data/search-index-zh.js | W1263 | 搜索索引重建 |
+| site/en/search-index-en.js | W1263 | 搜索索引重建 |
+| scripts/output/_w1263_spec.json | W1263 | 本批 spec（级联与门禁输入） |
+| scripts/output/file-index.md | W1263 | 本批 file-index 段登记（W1263 收官链产物） |
+
 ## W1261 全站可视化视觉重设计批（2026-11-16）
 
 | 文件 | W | 说明 |

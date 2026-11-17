@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>现役（宣纸刻本 W1261） vs v3（中性骨架 + 浓彩原文层）· 实测对照</title>
+<style>
+:root{
+  --bg:#F2F1EE; --paper:#FBFAF7; --line:#E0DCD4; --line2:#C9C4B9;
+  --ink:#26231D; --ink2:#57534A; --ink3:#6F6A60;
+  --accent:#BF4127; --accent-tint:rgba(191,65,39,.08);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,SimSun,serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 80px}
+header{padding:48px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(28px,4vw,44px);line-height:1.2;margin:12px 0 10px;font-weight:600}
+.lede{color:var(--ink2);max-width:62ch;font-size:16px}
+.meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink3)}
+.meta b{color:var(--ink2);font-weight:600}
+h2{font-family:var(--serif);font-size:22px;margin:52px 0 6px;padding-left:12px;border-left:3px solid var(--accent);font-weight:600}
+.note{color:var(--ink3);font-size:13px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.card .cap{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card .cap b{font-size:14px}
+.card .cap span{font-size:12px;color:var(--ink3)}
+.card .cap .tag{font-size:11px;letter-spacing:.08em;padding:2px 7px;border:1px solid var(--line2);border-radius:2px;color:var(--ink2)}
+.card .cap .tag.new{border-color:var(--accent);color:var(--accent);background:var(--accent-tint)}
+.shot{width:100%;display:block;background:#fff;border-bottom:1px solid var(--line)}
+.shot.darkbg{background:#0d0b0a}
+.rows{margin:0;padding:0;list-style:none;font-size:13.5px;color:var(--ink2)}
+.rows li{padding:9px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
+.rows li:last-child{border-bottom:0}
+.rows li .k{color:var(--ink3);flex:none;width:92px;font-size:12.5px}
+.rows li .v{color:var(--ink)}
+.facts{background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:4px 0;margin-bottom:8px}
+.facts table{width:100%;border-collapse:collapse;font-size:13.5px}
+.facts th,.facts td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.facts th{font-size:12px;letter-spacing:.06em;color:var(--ink3);font-weight:600;background:rgba(0,0,0,.015)}
+.facts tr:last-child td{border-bottom:0}
+.facts td b{color:var(--accent);font-weight:600}
+.facts td .muted{color:var(--ink3)}
+.verdict{margin-top:14px;padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:2px;font-size:14px;color:var(--ink2)}
+.verdict b{color:var(--ink)}
+.links{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.links a{display:inline-block;padding:9px 14px;min-height:44px;line-height:26px;border:1px solid var(--line2);border-radius:2px;color:var(--ink);text-decoration:none;font-size:13px}
+.links a:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-tint);text-decoration:none}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink3);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">W1263 · 需求反思与方案裁决材料 · 实测对照</div>
+  <h1>现役「宣纸刻本」 vs v3「中性骨架 + 浓彩原文层」</h1>
+  <p class="lede">左边是 16 小时前 W1261 刚落地的现役站点，右边是 12 小时前 W1262 产出、今天从 gitignore 区抢救回来的 v3 方向。两边都是本机 Playwright 实拍（file:// 双击形态），不是示意图。</p>
+  <div class="meta">
+    <span><b>站点</b> 875 页 = reader 636 / en 138 / data 91 / root 10</span>
+    <span><b>拍摄</b> 1440×1100 · 明暗双态 · 本会话实拍</span>
+    <span><b>口径</b> file:// 双击（生产形态见 W1259 双协议差异）</span>
+  </div>
+</header>
+
+<h2>一、首页（落地页）</h2>
+<p class="note">现役：宣纸暖底 + 朱砂强调 + 毛笔插画主视觉。v3：中性冷灰素墙 + 唯一朱砂强调 + 百回坛城（签名元素）。</p>
+<div class="grid">
+  <div class="card">
+    <div class="cap"><b>现役 · 宣纸刻本</b><span class="tag">W1261</span></div>
+    <img class="shot" src="shots-current/home_light.png" alt="现役首页亮色">
+    <img class="shot darkbg" src="shots-current/home_dark.png" alt="现役首页暗色">
+  </div>
+  <div class="card">
+    <div class="cap"><b>v3 · 中性骨架 + 浓彩原文层</b><span class="tag new">W1262 抢救</span></div>
+    <img class="shot" src="shots/landing-light-1280.png" alt="v3 首页亮色">
+    <img class="shot darkbg" src="shots/landing-dark-1280.png" alt="v3 首页暗色">
+  </div>
+</div>
+
+<h2>二、长文阅读页（reader 族 = 站点 73%）</h2>
+<p class="note">现役 reader 族在 v3 原设计中<b>完全空白</b>——本页为 W1263 新补的第三族样板。</p>
+<div class="grid">
+  <div class="card">
+    <div class="cap"><b>现役 · reader</b><span class="tag">W1261</span></div>
+    <img class="shot" src="shots-current/reader_light.png" alt="现役 reader 亮色">
+    <img class="shot darkbg" src="shots-current/reader_dark.png" alt="现役 reader 暗色">
+  </div>
+  <div class="card">
+    <div class="cap"><b>v3 · reader（本批新增）</b><span class="tag new">W1263</span></div>
+    <img class="shot" src="shots/reader-light-1280.png" alt="v3 reader 亮色">
+    <img class="shot darkbg" src="shots/reader-dark-1280.png" alt="v3 reader 暗色">
+  </div>
+</div>
+
+<h2>三、数据可视化页（data 族）</h2>
+<p class="note">现役 data 页的 KPI 区已是新语言，但 hero 区仍是旧深色水墨素材带——<b>同页新旧两套设计语言并存</b>，这正是"拼贴感"的来源。</p>
+<div class="grid">
+  <div class="card">
+    <div class="cap"><b>现役 · data</b><span class="tag">W1261</span></div>
+    <img class="shot" src="shots-current/data_stats_light.png" alt="现役 data 亮色">
+    <img class="shot darkbg" src="shots-current/data_stats_dark.png" alt="现役 data 暗色">
+  </div>
+  <div class="card">
+    <div class="cap"><b>v3 · dataviz</b><span class="tag new">W1262 抢救</span></div>
+    <img class="shot" src="shots/dataviz-light-1280.png" alt="v3 dataviz 亮色">
+    <img class="shot darkbg" src="shots/dataviz-dark-1280.png" alt="v3 dataviz 暗色">
+  </div>
+</div>
+
+<h2>四、现役站点的实测基线（本会话实读）</h2>
+<div class="facts">
+<table>
+<tr><th style="width:34%">项</th><th style="width:22%">实测值</th><th>含义</th></tr>
+<tr><td>内联 CSS 总量</td><td><b>61.87 MB</b> / 1,970 块</td><td class="muted">875 页的样式总沉淀</td></tr>
+<tr><td>共享层（tokens+system）占比</td><td><b>92.0%</b>（56.90 MB）</td><td class="muted">样式高度集中 ⇒ <b>换 token 即可全局换肤</b>，不必"舍弃一切"</td></tr>
+<tr><td>页面私有样式占比</td><td>8.0%（4.97 MB）</td><td class="muted">裸 hex 283,556 个中私有块内仅 <b>374 个</b>（0.1%）</td></tr>
+<tr><td>实际使用 class 数</td><td><b>953</b></td><td class="muted">公共 shell 现覆盖 91（<b>9.5%</b>）· v3 覆盖 51（5.4%）</td></tr>
+<tr><td>d3 轴调用</td><td>526 处 / 122 页</td><td class="muted">绘制层未统一 ⇒ 标签裁切/重叠 87–108 页 <b>换皮治不了</b></td></tr>
+<tr><td>图表硬编码 colorMap</td><td>52 处 / 26 页</td><td class="muted">换色板时必须逐页改</td></tr>
+<tr><td>reader 族规模</td><td><b>636 页 / 72.7%</b></td><td class="muted">站点最大族，主战场</td></tr>
+<tr><td>file:// 字体</td><td><b>健康</b></td><td class="muted">webfont 真生效（sans 差 −11.11 / serif 差 45.93），不降级</td></tr>
+</table>
+</div>
+
+<h2>五、结论</h2>
+<div class="verdict">
+<b>样式不是主因，是成本最低、见效最快的那一层。</b> 把"全面推倒重来"当唯一动作，是把手段当目标——它治不了 EN 页在生产形态下渲染中文数据、治不了 87–108 页的标签裁切，也治不了"改完靠用户实拍才发现"的无验收循环。<br><br>
+<b>更值得解决的顺序：</b>① 采纳 v3 方向做设计系统换代（令牌层 + 公共壳，保留 93 个冻结令牌名与 43 个冻结类名接口）→ ② 三族样板先审、按族绞杀式迁移 → ③ 数据层 P0 与绘制层根修并行 → ④ 补视觉回归基线与公共层覆盖率门禁，把"验收"从人眼变成机器。
+</div>
+
+<div class="links">
+  <a href="sample-landing.html">打开 v3 落地页样板</a>
+  <a href="sample-dataviz.html">打开 v3 数据页样板</a>
+  <a href="sample-reader.html">打开 v3 长文页样板（本批新增）</a>
+  <a href="../../全站前端重新设计-需求反思与方案裁决材料-2026-11-17.md">方案裁决材料（Markdown）</a>
+</div>
+
+<footer>
+  本页为 W1263 过程产物 · 截图均为本机 Playwright 实拍（file:// 形态）· v3 资产自 gitignore 区抢救落仓 · 生成日期 2026-11-17
+</footer>
+</div>
+</body>
+</html>

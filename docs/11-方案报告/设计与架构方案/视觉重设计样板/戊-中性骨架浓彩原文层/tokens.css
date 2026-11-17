@@ -1,0 +1,347 @@
+/* ============================================================
+   W1262 · 详解西游记 设计令牌 ·「中性骨架 + 浓彩原文层」（v3 终裁 · C 路线）
+   两层语域：工具语域（默认全站，中性素墙）+ 原文语域（语义触发，矿物颜料浓彩）。
+   明暗分工：亮色 = 素墙画廊（中性冷灰）；暗色 = 入窟（深暖底，浓彩主场）。
+   结构：
+     1. :root                          亮色取值（默认）
+     2. @media (prefers-color-scheme)  暗色取值（系统偏好，:not 排除手动强制亮色）
+     3. [data-theme="dark"]            暗色取值（手动覆写，与 2 完全同值）
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* ---------- 表面（工具语域 · 中性素墙） ---------- */
+  --bg: #F2F1EE;                    /* 页面底：中性暖灰白 */
+  --paper: #FBFAF7;                 /* 卡片/画布面 */
+  --paper-warm: #F1EEE8;            /* 衬面：引文、洞察框、表头 */
+  --surface-canvas: #FBFAF7;        /* 图表画布 */
+  --surface-raised: #FFFEFB;        /* 浮起面：tooltip、抽屉 */
+  --surface-sunken: #EAE7E1;        /* 凹陷面：轨道、分段控件底 */
+  --surface-inset: #E4E1DA;         /* 深凹陷：骨架屏 */
+  --dark: #211E19;                  /* 墨色横带（页脚 dark-band） */
+  --dark-text: #F0EDE6;             /* 墨带上的文字 */
+
+  /* ---------- 原文语域（浓彩件画布与勾线；素墙挂画的"画框内"取值） ---------- */
+  --art-line: var(--ink);           /* 版画劲线：亮色主题用墨线（套色版画的key block） */
+
+  /* ---------- 文本（中性墨阶） ---------- */
+  --ink: #26231D;                   /* 主墨 */
+  --ink-soft: #57534A;              /* 次级墨 */
+  --ink-faint: #6F6A60;             /* 弱墨（标注/轴刻度，≥4.5:1） */
+  --ink-tint: #B03A20;              /* 朱染墨：链接与交互文本 */
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
+  --text-tertiary: var(--ink-faint);
+  --text-hero: var(--ink);
+  --text-inverse: #FFF8F5;          /* 朱砂实底上的文字 */
+  --text-on-accent: #FFF8F5;
+
+  /* ---------- 强调（朱砂，唯一 UI 强调色） ---------- */
+  --accent: #BF4127;                /* 朱砂 */
+  --accent-primary: #BF4127;
+  --accent-deep: #9C321D;           /* 按压/hover 深 */
+  --accent-muted: #A05C48;          /* 弱化朱：辅助标记 */
+  --accent-soft: rgba(191, 65, 39, 0.12);
+  --accent-tint: rgba(191, 65, 39, 0.08);
+  --accent-wash: rgba(191, 65, 39, 0.18);
+  --accent-text: #B03A20;           /* 文本级朱（纸面 ≥5.3:1） */
+  --accent-2: #386D94;              /* 石青（伴生） */
+  --accent-3: #255C49;              /* 石绿（伴生） */
+  --accent-4: #B2872F;              /* 石黄（伴生） */
+
+  /* ---------- 语义状态 ---------- */
+  --ok: #2E7D5B;
+  --warn: #8A5F14;
+  --info: #2E6695;
+  --danger: #A62218;
+  --status-neg: var(--danger);
+  --rebel: #8A5F14;                 /* 妖魔身份组文本色（图形态用 --series-3） */
+  --ok-soft: rgba(46, 125, 91, 0.12);
+  --warn-soft: rgba(138, 95, 20, 0.12);
+  --info-soft: rgba(46, 102, 149, 0.12);
+  --danger-soft: rgba(166, 34, 24, 0.12);
+
+  /* ---------- 数据序列 = 矿物颜料谱（≤8 色相，色盲安全阶梯不变） ---------- */
+  --chart-1: var(--series-1);
+  --chart-2: var(--series-2);
+  --chart-3: var(--series-3);
+  --chart-4: var(--series-4);
+  --chart-5: var(--series-5);
+  --chart-6: var(--series-6);
+  --series-1: #BF4127;              /* 朱砂 · 师徒四人 */
+  --series-2: #386D94;              /* 石青 · 神佛 */
+  --series-3: #B2872F;              /* 石黄 · 妖魔 */
+  --series-4: #255C49;              /* 石绿 */
+  --series-5: #A65B80;              /* 胭脂 */
+  --series-6: #4991B3;              /* 青金 */
+  --series-7: #4C3A27;              /* 赭石 */
+  --series-8: #3F4A56;              /* 墨灰 */
+
+  /* ---------- 线与边 ---------- */
+  --line: #D9D5CC;                  /* 一般界线 */
+  --border-hairline: #E8E5DE;       /* 最弱界栏 */
+  --border-subtle: #E0DCD4;
+  --border-strong: #C9C4B9;
+  --border-accent: var(--accent);
+  --axis-line: #6F6A60;             /* 图表轴线（对纸面 4.8:1） */
+  --grid-line: #DCD8CF;             /* 网格线（弱于轴，值以轴+标注承载） */
+  --edge-visible: rgba(38, 35, 29, 0.30);  /* 关系网络边 */
+
+  /* ---------- 阴影（墨色系，无纯黑） ---------- */
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(38, 35, 29, 0.05);
+  --elev-2: 0 2px 8px rgba(38, 35, 29, 0.07), 0 1px 2px rgba(38, 35, 29, 0.05);
+  --elev-3: 0 10px 28px rgba(38, 35, 29, 0.10), 0 2px 8px rgba(38, 35, 29, 0.06);
+  --elev-4: 0 18px 50px rgba(38, 35, 29, 0.16), 0 4px 12px rgba(38, 35, 29, 0.08);
+  --shadow: var(--elev-1);
+  --shadow-lift: var(--elev-2);
+
+  /* ---------- 动效 ---------- */
+  --dur-fast: 150ms;                /* 反馈档：hover/按压/tooltip */
+  --dur-base: 250ms;                /* 状态档：过滤/tab/主题 */
+  --dur-slow: 600ms;                /* 入场档：reveal/条形生长（hero 白名单同值） */
+  --dur-count: 900ms;               /* 白名单：KPI 数字滚动 */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.45, 0.05, 0.35, 1);
+
+  /* ---------- 字体（零依赖系统栈） ---------- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+               "Source Han Sans SC", "Noto Sans CJK SC", sans-serif;
+  --font-serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong",
+                SimSun, Georgia, serif;
+  --font-kai: "Kaiti SC", "STKaiti", KaiTi, "DFKai-SB", "Noto Serif SC", serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Cascadia Mono",
+               Consolas, Menlo, "Liberation Mono", monospace;
+  --font-code: var(--font-mono);
+  --font-display: var(--font-serif);
+  --font-text: var(--font-sans);
+  --font-data: var(--font-mono);
+
+  /* ---------- 字阶 ---------- */
+  --size-micro: 0.6875rem;          /* 11px */
+  --size-label: 0.75rem;            /* 12px */
+  --size-body: 1.0625rem;           /* 17px */
+  --size-section: 1.75rem;          /* 28px */
+  --size-hero: clamp(2.75rem, 5vw, 3.75rem);   /* 44-60px */
+  --text-step-0: 1rem;
+  --text-step-1: 1.125rem;
+  --text-step-2: 1.25rem;
+  --text-step-3: 1.424rem;
+  --text-step-4: 1.602rem;
+  --type-display: 2.75rem;
+  --type-title: 1.5rem;
+  --type-subtitle: 1.1875rem;
+  --type-lead: 1.25rem;
+  --type-body: 1.0625rem;
+  --type-label: 0.8125rem;
+  --type-caption: 0.75rem;
+  --type-eyebrow: 0.6875rem;
+  --type-number: 2.25rem;
+  --leading-tight: 1.25;
+  --leading-body: 1.92;             /* 中文正文行距 */
+  --leading-ui: 1.5;
+
+  /* ---------- 间距 ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --gap-tight: 8px;
+  --gap-loose: 24px;
+  --gap-section: 96px;
+
+  /* ---------- 布局 ---------- */
+  --container-read: 72rem;          /* 长文单栏：17px 字号下 65-75 字/行 */
+  --container-wide: 76rem;
+  --grid-columns: 12;
+  --indent-0: 0px;
+  --indent-1: 2em;                  /* 中文段落首行缩进 */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+  --z-nav: 100;
+  --z-mask: 200;
+  --z-drawer: 300;
+  --z-tooltip: 500;
+}
+
+/* ---------- 暗色：系统偏好（入窟 · 深暖底，浓彩主场；独立调校非反相） ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #151110;
+    --paper: #1E1813;
+    --paper-warm: #241D16;
+    --surface-canvas: #191410;
+    --surface-raised: #2A2119;
+    --surface-sunken: #0F0B08;
+    --surface-inset: #0B0806;
+    --dark: #0C0906;
+    --dark-text: #F2EBDC;
+
+    /* 原文语域暗色：勾线换赭石（壁画以赭石勾线），颜料换亮值 */
+    --art-line: #846342;
+
+    --ink: #F1E9D8;
+    --ink-soft: #B5AA97;
+    --ink-faint: #968C7A;
+    --ink-tint: #F07150;
+    --text-primary: var(--ink);
+    --text-secondary: var(--ink-soft);
+    --text-tertiary: var(--ink-faint);
+    --text-hero: var(--ink);
+    --text-inverse: #1E0F08;        /* 暗色下朱底配深墨字（4.90:1） */
+    --text-on-accent: #1E0F08;
+
+    --accent: #E8654A;
+    --accent-primary: #E8654A;
+    --accent-deep: #F07E60;
+    --accent-muted: #C57A66;
+    --accent-soft: rgba(232, 101, 74, 0.16);
+    --accent-tint: rgba(232, 101, 74, 0.10);
+    --accent-wash: rgba(232, 101, 74, 0.20);
+    --accent-text: #F07150;
+    --accent-2: #82AFD0;
+    --accent-3: #56B796;
+    --accent-4: #D7B167;
+
+    --ok: #5FB78D;
+    --warn: #D3A54E;
+    --info: #6FA9DB;
+    --danger: #E97067;
+    --status-neg: var(--danger);
+    --rebel: #D8A85A;
+    --ok-soft: rgba(95, 183, 141, 0.14);
+    --warn-soft: rgba(211, 165, 78, 0.14);
+    --info-soft: rgba(111, 169, 219, 0.14);
+    --danger-soft: rgba(233, 112, 103, 0.14);
+
+    --chart-1: var(--series-1);
+    --chart-2: var(--series-2);
+    --chart-3: var(--series-3);
+    --chart-4: var(--series-4);
+    --chart-5: var(--series-5);
+    --chart-6: var(--series-6);
+    --series-1: #E8654A;
+    --series-2: #82AFD0;
+    --series-3: #D7B167;
+    --series-4: #56B796;
+    --series-5: #D5B0C3;
+    --series-6: #CCE0EA;
+    --series-7: #846342;
+    --series-8: #8697A7;
+
+    --line: #372E22;
+    --border-hairline: #2C251C;
+    --border-subtle: #322A1F;
+    --border-strong: #483D2E;
+    --border-accent: var(--accent);
+    --axis-line: #968C7A;
+    --grid-line: #2C241A;
+    --edge-visible: rgba(241, 233, 216, 0.30);
+
+    --elev-0: none;
+    --elev-1: 0 1px 2px rgba(12, 8, 4, 0.40);
+    --elev-2: 0 2px 10px rgba(12, 8, 4, 0.45), 0 1px 3px rgba(12, 8, 4, 0.35);
+    --elev-3: 0 12px 32px rgba(12, 8, 4, 0.50), 0 2px 8px rgba(12, 8, 4, 0.40);
+    --elev-4: 0 20px 56px rgba(12, 8, 4, 0.55), 0 4px 14px rgba(12, 8, 4, 0.45);
+    --shadow: var(--elev-1);
+    --shadow-lift: var(--elev-2);
+  }
+}
+
+/* ---------- 暗色：手动覆写（与系统暗色同值） ---------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #151110;
+  --paper: #1E1813;
+  --paper-warm: #241D16;
+  --surface-canvas: #191410;
+  --surface-raised: #2A2119;
+  --surface-sunken: #0F0B08;
+  --surface-inset: #0B0806;
+  --dark: #0C0906;
+  --dark-text: #F2EBDC;
+
+  --art-line: #846342;
+
+  --ink: #F1E9D8;
+  --ink-soft: #B5AA97;
+  --ink-faint: #968C7A;
+  --ink-tint: #F07150;
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
+  --text-tertiary: var(--ink-faint);
+  --text-hero: var(--ink);
+  --text-inverse: #1E0F08;
+  --text-on-accent: #1E0F08;
+
+  --accent: #E8654A;
+  --accent-primary: #E8654A;
+  --accent-deep: #F07E60;
+  --accent-muted: #C57A66;
+  --accent-soft: rgba(232, 101, 74, 0.16);
+  --accent-tint: rgba(232, 101, 74, 0.10);
+  --accent-wash: rgba(232, 101, 74, 0.20);
+  --accent-text: #F07150;
+  --accent-2: #82AFD0;
+  --accent-3: #56B796;
+  --accent-4: #D7B167;
+
+  --ok: #5FB78D;
+  --warn: #D3A54E;
+  --info: #6FA9DB;
+  --danger: #E97067;
+  --status-neg: var(--danger);
+  --rebel: #D8A85A;
+  --ok-soft: rgba(95, 183, 141, 0.14);
+  --warn-soft: rgba(211, 165, 78, 0.14);
+  --info-soft: rgba(111, 169, 219, 0.14);
+  --danger-soft: rgba(233, 112, 103, 0.14);
+
+  --chart-1: var(--series-1);
+  --chart-2: var(--series-2);
+  --chart-3: var(--series-3);
+  --chart-4: var(--series-4);
+  --chart-5: var(--series-5);
+  --chart-6: var(--series-6);
+  --series-1: #E8654A;
+  --series-2: #82AFD0;
+  --series-3: #D7B167;
+  --series-4: #56B796;
+  --series-5: #D5B0C3;
+  --series-6: #CCE0EA;
+  --series-7: #846342;
+  --series-8: #8697A7;
+
+  --line: #372E22;
+  --border-hairline: #2C251C;
+  --border-subtle: #322A1F;
+  --border-strong: #483D2E;
+  --border-accent: var(--accent);
+  --axis-line: #968C7A;
+  --grid-line: #2C241A;
+  --edge-visible: rgba(241, 233, 216, 0.30);
+
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(12, 8, 4, 0.40);
+  --elev-2: 0 2px 10px rgba(12, 8, 4, 0.45), 0 1px 3px rgba(12, 8, 4, 0.35);
+  --elev-3: 0 12px 32px rgba(12, 8, 4, 0.50), 0 2px 8px rgba(12, 8, 4, 0.40);
+  --elev-4: 0 20px 56px rgba(12, 8, 4, 0.55), 0 4px 14px rgba(12, 8, 4, 0.45);
+  --shadow: var(--elev-1);
+  --shadow-lift: var(--elev-2);
+}
