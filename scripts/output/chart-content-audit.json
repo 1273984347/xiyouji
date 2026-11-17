@@ -1,0 +1,2140 @@
+{
+ "total_pages": 237,
+ "chart_pages": 171,
+ "charts": 716,
+ "rows": [
+  {
+   "page": "404.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 141
+  },
+  {
+   "page": "about.html",
+   "charts": 3,
+   "source_note": 1,
+   "insight": 16,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 2598
+  },
+  {
+   "page": "curated.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 3,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4246
+  },
+  {
+   "page": "dashboard.html",
+   "charts": 7,
+   "source_note": 1,
+   "insight": 29,
+   "tooltip": 0,
+   "legend": 12,
+   "text_len": 4385
+  },
+  {
+   "page": "dukou-engine.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 492
+  },
+  {
+   "page": "guide.html",
+   "charts": 10,
+   "source_note": 0,
+   "insight": 7,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 1615
+  },
+  {
+   "page": "index.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 7,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 2498
+  },
+  {
+   "page": "rum-viewer.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 415
+  },
+  {
+   "page": "visit-viewer.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 180
+  },
+  {
+   "page": "data/81-hardships-view.html",
+   "charts": 1,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 769
+  },
+  {
+   "page": "data/81-hardships.html",
+   "charts": 4,
+   "source_note": 3,
+   "insight": 17,
+   "tooltip": 7,
+   "legend": 9,
+   "text_len": 1250
+  },
+  {
+   "page": "data/aesthetics.html",
+   "charts": 2,
+   "source_note": 3,
+   "insight": 17,
+   "tooltip": 14,
+   "legend": 11,
+   "text_len": 1405
+  },
+  {
+   "page": "data/ai-dialogue.html",
+   "charts": 0,
+   "source_note": 2,
+   "insight": 3,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 1161
+  },
+  {
+   "page": "data/business-model.html",
+   "charts": 6,
+   "source_note": 4,
+   "insight": 53,
+   "tooltip": 19,
+   "legend": 0,
+   "text_len": 4699
+  },
+  {
+   "page": "data/cave-estate.html",
+   "charts": 4,
+   "source_note": 3,
+   "insight": 17,
+   "tooltip": 3,
+   "legend": 16,
+   "text_len": 1401
+  },
+  {
+   "page": "data/century-dialogue.html",
+   "charts": 0,
+   "source_note": 3,
+   "insight": 4,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 872
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "charts": 3,
+   "source_note": 3,
+   "insight": 1,
+   "tooltip": 17,
+   "legend": 0,
+   "text_len": 980
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "charts": 3,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 20,
+   "legend": 6,
+   "text_len": 1046
+  },
+  {
+   "page": "data/character-appearance.html",
+   "charts": 5,
+   "source_note": 4,
+   "insight": 17,
+   "tooltip": 4,
+   "legend": 29,
+   "text_len": 1039
+  },
+  {
+   "page": "data/character-dynamic-network.html",
+   "charts": 1,
+   "source_note": 1,
+   "insight": 14,
+   "tooltip": 2,
+   "legend": 8,
+   "text_len": 2153
+  },
+  {
+   "page": "data/character-presence-timeline.html",
+   "charts": 5,
+   "source_note": 1,
+   "insight": 13,
+   "tooltip": 0,
+   "legend": 14,
+   "text_len": 2102
+  },
+  {
+   "page": "data/character-relationship-3d-view.html",
+   "charts": 1,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 821
+  },
+  {
+   "page": "data/character-relationship-3d.html",
+   "charts": 0,
+   "source_note": 1,
+   "insight": 6,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 1192
+  },
+  {
+   "page": "data/character-semantic-network.html",
+   "charts": 5,
+   "source_note": 4,
+   "insight": 7,
+   "tooltip": 12,
+   "legend": 20,
+   "text_len": 2705
+  },
+  {
+   "page": "data/character-sentiment-arc.html",
+   "charts": 5,
+   "source_note": 1,
+   "insight": 9,
+   "tooltip": 18,
+   "legend": 39,
+   "text_len": 3274
+  },
+  {
+   "page": "data/chart-design.html",
+   "charts": 3,
+   "source_note": 5,
+   "insight": 44,
+   "tooltip": 4,
+   "legend": 4,
+   "text_len": 1219
+  },
+  {
+   "page": "data/cognitive-psychology.html",
+   "charts": 6,
+   "source_note": 4,
+   "insight": 36,
+   "tooltip": 19,
+   "legend": 0,
+   "text_len": 4606
+  },
+  {
+   "page": "data/concept-device.html",
+   "charts": 4,
+   "source_note": 1,
+   "insight": 29,
+   "tooltip": 7,
+   "legend": 0,
+   "text_len": 1508
+  },
+  {
+   "page": "data/counterfactual.html",
+   "charts": 2,
+   "source_note": 3,
+   "insight": 27,
+   "tooltip": 0,
+   "legend": 7,
+   "text_len": 1202
+  },
+  {
+   "page": "data/criticism-history.html",
+   "charts": 4,
+   "source_note": 3,
+   "insight": 38,
+   "tooltip": 8,
+   "legend": 9,
+   "text_len": 2025
+  },
+  {
+   "page": "data/cross-time-danmaku.html",
+   "charts": 6,
+   "source_note": 3,
+   "insight": 6,
+   "tooltip": 11,
+   "legend": 0,
+   "text_len": 1053
+  },
+  {
+   "page": "data/cultural-misreading.html",
+   "charts": 3,
+   "source_note": 3,
+   "insight": 22,
+   "tooltip": 8,
+   "legend": 24,
+   "text_len": 1450
+  },
+  {
+   "page": "data/customs-pass-route.html",
+   "charts": 1,
+   "source_note": 2,
+   "insight": 10,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 1984
+  },
+  {
+   "page": "data/data-explorer.html",
+   "charts": 1,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 706
+  },
+  {
+   "page": "data/deconstruction.html",
+   "charts": 3,
+   "source_note": 3,
+   "insight": 19,
+   "tooltip": 14,
+   "legend": 16,
+   "text_len": 1494
+  },
+  {
+   "page": "data/dialogue-sentiment.html",
+   "charts": 6,
+   "source_note": 3,
+   "insight": 21,
+   "tooltip": 23,
+   "legend": 41,
+   "text_len": 2435
+  },
+  {
+   "page": "data/ecology.html",
+   "charts": 7,
+   "source_note": 2,
+   "insight": 42,
+   "tooltip": 32,
+   "legend": 7,
+   "text_len": 2657
+  },
+  {
+   "page": "data/emotional-heatmap.html",
+   "charts": 2,
+   "source_note": 3,
+   "insight": 20,
+   "tooltip": 14,
+   "legend": 0,
+   "text_len": 1766
+  },
+  {
+   "page": "data/ethics-consumption.html",
+   "charts": 2,
+   "source_note": 4,
+   "insight": 19,
+   "tooltip": 2,
+   "legend": 3,
+   "text_len": 1614
+  },
+  {
+   "page": "data/famous-time-travel.html",
+   "charts": 2,
+   "source_note": 3,
+   "insight": 4,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 1208
+  },
+  {
+   "page": "data/four-dimensional-research-network.html",
+   "charts": 5,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 9,
+   "text_len": 1581
+  },
+  {
+   "page": "data/four-heavenly-kings-artifacts.html",
+   "charts": 3,
+   "source_note": 2,
+   "insight": 9,
+   "tooltip": 50,
+   "legend": 18,
+   "text_len": 2183
+  },
+  {
+   "page": "data/game-webnovel.html",
+   "charts": 5,
+   "source_note": 5,
+   "insight": 19,
+   "tooltip": 3,
+   "legend": 7,
+   "text_len": 1628
+  },
+  {
+   "page": "data/global-pattern.html",
+   "charts": 2,
+   "source_note": 3,
+   "insight": 17,
+   "tooltip": 5,
+   "legend": 5,
+   "text_len": 1309
+  },
+  {
+   "page": "data/glossary.html",
+   "charts": 0,
+   "source_note": 4,
+   "insight": 10,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 2199
+  },
+  {
+   "page": "data/graph-explorer.html",
+   "charts": 4,
+   "source_note": 1,
+   "insight": 2,
+   "tooltip": 0,
+   "legend": 4,
+   "text_len": 752
+  },
+  {
+   "page": "data/guanyin-six-roles-network.html",
+   "charts": 5,
+   "source_note": 2,
+   "insight": 9,
+   "tooltip": 69,
+   "legend": 32,
+   "text_len": 2542
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "charts": 5,
+   "source_note": 1,
+   "insight": 13,
+   "tooltip": 2,
+   "legend": 8,
+   "text_len": 2009
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "charts": 3,
+   "source_note": 2,
+   "insight": 13,
+   "tooltip": 2,
+   "legend": 5,
+   "text_len": 2216
+  },
+  {
+   "page": "data/heaven-power-network.html",
+   "charts": 6,
+   "source_note": 2,
+   "insight": 14,
+   "tooltip": 61,
+   "legend": 33,
+   "text_len": 3431
+  },
+  {
+   "page": "data/intertextuality-network.html",
+   "charts": 5,
+   "source_note": 2,
+   "insight": 6,
+   "tooltip": 80,
+   "legend": 34,
+   "text_len": 2501
+  },
+  {
+   "page": "data/journey-geo-3d.html",
+   "charts": 0,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 987
+  },
+  {
+   "page": "data/journey-geo-semiotics.html",
+   "charts": 1,
+   "source_note": 3,
+   "insight": 1,
+   "tooltip": 3,
+   "legend": 13,
+   "text_len": 1462
+  },
+  {
+   "page": "data/journey-map-interactive.html",
+   "charts": 4,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 17,
+   "legend": 0,
+   "text_len": 1084
+  },
+  {
+   "page": "data/journey-route.html",
+   "charts": 2,
+   "source_note": 3,
+   "insight": 21,
+   "tooltip": 2,
+   "legend": 16,
+   "text_len": 1213
+  },
+  {
+   "page": "data/journey-spacetime.html",
+   "charts": 7,
+   "source_note": 1,
+   "insight": 25,
+   "tooltip": 2,
+   "legend": 9,
+   "text_len": 1946
+  },
+  {
+   "page": "data/jurisprudence.html",
+   "charts": 6,
+   "source_note": 2,
+   "insight": 33,
+   "tooltip": 21,
+   "legend": 29,
+   "text_len": 2831
+  },
+  {
+   "page": "data/karma-reincarnation.html",
+   "charts": 4,
+   "source_note": 4,
+   "insight": 37,
+   "tooltip": 20,
+   "legend": 7,
+   "text_len": 4213
+  },
+  {
+   "page": "data/language-style-radar.html",
+   "charts": 2,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 16,
+   "legend": 6,
+   "text_len": 1016
+  },
+  {
+   "page": "data/linguistics.html",
+   "charts": 6,
+   "source_note": 2,
+   "insight": 36,
+   "tooltip": 19,
+   "legend": 16,
+   "text_len": 3465
+  },
+  {
+   "page": "data/magic-system.html",
+   "charts": 5,
+   "source_note": 3,
+   "insight": 18,
+   "tooltip": 0,
+   "legend": 10,
+   "text_len": 1513
+  },
+  {
+   "page": "data/material-archaeology.html",
+   "charts": 8,
+   "source_note": 4,
+   "insight": 46,
+   "tooltip": 36,
+   "legend": 38,
+   "text_len": 1921
+  },
+  {
+   "page": "data/mbti-evolution.html",
+   "charts": 3,
+   "source_note": 1,
+   "insight": 14,
+   "tooltip": 2,
+   "legend": 30,
+   "text_len": 1353
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "charts": 2,
+   "source_note": 3,
+   "insight": 59,
+   "tooltip": 2,
+   "legend": 12,
+   "text_len": 1619
+  },
+  {
+   "page": "data/ming-political-thought-comparison.html",
+   "charts": 5,
+   "source_note": 1,
+   "insight": 8,
+   "tooltip": 3,
+   "legend": 23,
+   "text_len": 2363
+  },
+  {
+   "page": "data/monster-background.html",
+   "charts": 3,
+   "source_note": 1,
+   "insight": 30,
+   "tooltip": 14,
+   "legend": 12,
+   "text_len": 1624
+  },
+  {
+   "page": "data/monster-capability-radar.html",
+   "charts": 4,
+   "source_note": 1,
+   "insight": 6,
+   "tooltip": 2,
+   "legend": 6,
+   "text_len": 2286
+  },
+  {
+   "page": "data/monster-ecology-network.html",
+   "charts": 4,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 3,
+   "text_len": 2237
+  },
+  {
+   "page": "data/monster-female-network.html",
+   "charts": 4,
+   "source_note": 3,
+   "insight": 6,
+   "tooltip": 59,
+   "legend": 26,
+   "text_len": 2853
+  },
+  {
+   "page": "data/monster-hierarchy-network.html",
+   "charts": 6,
+   "source_note": 2,
+   "insight": 11,
+   "tooltip": 61,
+   "legend": 36,
+   "text_len": 2752
+  },
+  {
+   "page": "data/monster-sociology.html",
+   "charts": 8,
+   "source_note": 7,
+   "insight": 50,
+   "tooltip": 15,
+   "legend": 14,
+   "text_len": 7194
+  },
+  {
+   "page": "data/monster-victims-network.html",
+   "charts": 4,
+   "source_note": 2,
+   "insight": 9,
+   "tooltip": 61,
+   "legend": 26,
+   "text_len": 2723
+  },
+  {
+   "page": "data/music-structure.html",
+   "charts": 3,
+   "source_note": 3,
+   "insight": 18,
+   "tooltip": 12,
+   "legend": 17,
+   "text_len": 1325
+  },
+  {
+   "page": "data/narrative-experiment.html",
+   "charts": 2,
+   "source_note": 5,
+   "insight": 18,
+   "tooltip": 2,
+   "legend": 0,
+   "text_len": 2008
+  },
+  {
+   "page": "data/narrative-rhythm-curve.html",
+   "charts": 4,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 17,
+   "legend": 0,
+   "text_len": 1070
+  },
+  {
+   "page": "data/narratology-12d-network.html",
+   "charts": 4,
+   "source_note": 2,
+   "insight": 7,
+   "tooltip": 65,
+   "legend": 26,
+   "text_len": 2578
+  },
+  {
+   "page": "data/narratology-16d-network.html",
+   "charts": 4,
+   "source_note": 2,
+   "insight": 7,
+   "tooltip": 67,
+   "legend": 26,
+   "text_len": 2694
+  },
+  {
+   "page": "data/perf-canvas-rendering.html",
+   "charts": 2,
+   "source_note": 1,
+   "insight": 17,
+   "tooltip": 17,
+   "legend": 0,
+   "text_len": 3478
+  },
+  {
+   "page": "data/philosophy.html",
+   "charts": 4,
+   "source_note": 3,
+   "insight": 47,
+   "tooltip": 15,
+   "legend": 7,
+   "text_len": 7840
+  },
+  {
+   "page": "data/pilgrim-team-dynamic-network.html",
+   "charts": 2,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 2,
+   "legend": 5,
+   "text_len": 2658
+  },
+  {
+   "page": "data/pilgrim-team-psychology-arc.html",
+   "charts": 11,
+   "source_note": 1,
+   "insight": 14,
+   "tooltip": 2,
+   "legend": 19,
+   "text_len": 2617
+  },
+  {
+   "page": "data/poetry-density.html",
+   "charts": 1,
+   "source_note": 3,
+   "insight": 10,
+   "tooltip": 5,
+   "legend": 0,
+   "text_len": 2024
+  },
+  {
+   "page": "data/poetry-rhythm-analysis.html",
+   "charts": 11,
+   "source_note": 1,
+   "insight": 8,
+   "tooltip": 2,
+   "legend": 18,
+   "text_len": 2658
+  },
+  {
+   "page": "data/power-resources.html",
+   "charts": 4,
+   "source_note": 4,
+   "insight": 52,
+   "tooltip": 15,
+   "legend": 0,
+   "text_len": 5247
+  },
+  {
+   "page": "data/relationships.html",
+   "charts": 8,
+   "source_note": 3,
+   "insight": 83,
+   "tooltip": 24,
+   "legend": 35,
+   "text_len": 7152
+  },
+  {
+   "page": "data/risk-project.html",
+   "charts": 5,
+   "source_note": 3,
+   "insight": 58,
+   "tooltip": 17,
+   "legend": 0,
+   "text_len": 5790
+  },
+  {
+   "page": "data/search.html",
+   "charts": 0,
+   "source_note": 1,
+   "insight": 3,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 599
+  },
+  {
+   "page": "data/six-senses-narratology-network.html",
+   "charts": 4,
+   "source_note": 2,
+   "insight": 5,
+   "tooltip": 64,
+   "legend": 26,
+   "text_len": 2105
+  },
+  {
+   "page": "data/social-media.html",
+   "charts": 2,
+   "source_note": 5,
+   "insight": 20,
+   "tooltip": 2,
+   "legend": 12,
+   "text_len": 1397
+  },
+  {
+   "page": "data/story-timeline.html",
+   "charts": 1,
+   "source_note": 2,
+   "insight": 3,
+   "tooltip": 1,
+   "legend": 0,
+   "text_len": 1323
+  },
+  {
+   "page": "data/tag-cloud.html",
+   "charts": 0,
+   "source_note": 1,
+   "insight": 4,
+   "tooltip": 15,
+   "legend": 0,
+   "text_len": 1013
+  },
+  {
+   "page": "data/text-evolution.html",
+   "charts": 4,
+   "source_note": 3,
+   "insight": 17,
+   "tooltip": 0,
+   "legend": 21,
+   "text_len": 1385
+  },
+  {
+   "page": "data/text-search.html",
+   "charts": 2,
+   "source_note": 2,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 1121
+  },
+  {
+   "page": "data/theological-intervention-network.html",
+   "charts": 5,
+   "source_note": 1,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 1778
+  },
+  {
+   "page": "data/timeline.html",
+   "charts": 17,
+   "source_note": 3,
+   "insight": 1,
+   "tooltip": 17,
+   "legend": 1,
+   "text_len": 997
+  },
+  {
+   "page": "data/underworld-power-network.html",
+   "charts": 6,
+   "source_note": 2,
+   "insight": 16,
+   "tooltip": 61,
+   "legend": 33,
+   "text_len": 3198
+  },
+  {
+   "page": "data/visual-art.html",
+   "charts": 2,
+   "source_note": 5,
+   "insight": 20,
+   "tooltip": 3,
+   "legend": 0,
+   "text_len": 1615
+  },
+  {
+   "page": "data/workplace.html",
+   "charts": 3,
+   "source_note": 4,
+   "insight": 18,
+   "tooltip": 2,
+   "legend": 0,
+   "text_len": 1535
+  },
+  {
+   "page": "data/wukong-tangseng-benchmark.html",
+   "charts": 2,
+   "source_note": 1,
+   "insight": 6,
+   "tooltip": 3,
+   "legend": 0,
+   "text_len": 1408
+  },
+  {
+   "page": "en/81-hardships-view.html",
+   "charts": 1,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 699
+  },
+  {
+   "page": "en/81-hardships.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 15,
+   "tooltip": 6,
+   "legend": 10,
+   "text_len": 2099
+  },
+  {
+   "page": "en/academic-papers.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3172
+  },
+  {
+   "page": "en/aesthetics.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 16,
+   "tooltip": 16,
+   "legend": 13,
+   "text_len": 2698
+  },
+  {
+   "page": "en/ai-dialogue.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 1982
+  },
+  {
+   "page": "en/bestiary.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3393
+  },
+  {
+   "page": "en/business-model.html",
+   "charts": 6,
+   "source_note": 1,
+   "insight": 51,
+   "tooltip": 21,
+   "legend": 1,
+   "text_len": 12178
+  },
+  {
+   "page": "en/cave-estate.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 16,
+   "tooltip": 6,
+   "legend": 20,
+   "text_len": 2095
+  },
+  {
+   "page": "en/century-dialogue.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 890
+  },
+  {
+   "page": "en/chapter-stats.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 17,
+   "legend": 1,
+   "text_len": 1194
+  },
+  {
+   "page": "en/chapter-structure-graph.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 22,
+   "legend": 7,
+   "text_len": 1515
+  },
+  {
+   "page": "en/chapters-map.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 21161
+  },
+  {
+   "page": "en/character-appearance.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 18,
+   "tooltip": 19,
+   "legend": 30,
+   "text_len": 1385
+  },
+  {
+   "page": "en/character-bailongma.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3786
+  },
+  {
+   "page": "en/character-bajie.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3395
+  },
+  {
+   "page": "en/character-dynamic-network.html",
+   "charts": 1,
+   "source_note": 0,
+   "insight": 13,
+   "tooltip": 4,
+   "legend": 11,
+   "text_len": 4929
+  },
+  {
+   "page": "en/character-presence-timeline.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 12,
+   "tooltip": 2,
+   "legend": 15,
+   "text_len": 3826
+  },
+  {
+   "page": "en/character-relationship-3d-view.html",
+   "charts": 1,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 711
+  },
+  {
+   "page": "en/character-relationship-3d.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 1270
+  },
+  {
+   "page": "en/character-semantic-network.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 6,
+   "tooltip": 13,
+   "legend": 21,
+   "text_len": 5875
+  },
+  {
+   "page": "en/character-sentiment-arc.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 8,
+   "tooltip": 20,
+   "legend": 40,
+   "text_len": 7045
+  },
+  {
+   "page": "en/character-shaseng.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3062
+  },
+  {
+   "page": "en/character-tangseng.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 2,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4169
+  },
+  {
+   "page": "en/character-wukong.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 2,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3830
+  },
+  {
+   "page": "en/characters.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4595
+  },
+  {
+   "page": "en/chart-design.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 38,
+   "tooltip": 7,
+   "legend": 6,
+   "text_len": 1826
+  },
+  {
+   "page": "en/cognitive-psychology.html",
+   "charts": 6,
+   "source_note": 2,
+   "insight": 34,
+   "tooltip": 21,
+   "legend": 1,
+   "text_len": 11159
+  },
+  {
+   "page": "en/concept-device.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 20,
+   "tooltip": 9,
+   "legend": 2,
+   "text_len": 2727
+  },
+  {
+   "page": "en/counterfactual.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 19,
+   "tooltip": 2,
+   "legend": 8,
+   "text_len": 1755
+  },
+  {
+   "page": "en/criticism-history.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 21,
+   "tooltip": 10,
+   "legend": 10,
+   "text_len": 4653
+  },
+  {
+   "page": "en/cross-time-danmaku.html",
+   "charts": 6,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 13,
+   "legend": 1,
+   "text_len": 1390
+  },
+  {
+   "page": "en/cultural-misreading.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 16,
+   "tooltip": 10,
+   "legend": 28,
+   "text_len": 2226
+  },
+  {
+   "page": "en/customs-pass-route.html",
+   "charts": 1,
+   "source_note": 0,
+   "insight": 9,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4825
+  },
+  {
+   "page": "en/dashboard.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 8,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3310
+  },
+  {
+   "page": "en/data-explorer.html",
+   "charts": 1,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 598
+  },
+  {
+   "page": "en/deconstruction.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 16,
+   "tooltip": 17,
+   "legend": 21,
+   "text_len": 2349
+  },
+  {
+   "page": "en/dialogue-sentiment.html",
+   "charts": 6,
+   "source_note": 1,
+   "insight": 20,
+   "tooltip": 25,
+   "legend": 42,
+   "text_len": 4475
+  },
+  {
+   "page": "en/dukou-engine.html",
+   "charts": 1,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 1557
+  },
+  {
+   "page": "en/ecology.html",
+   "charts": 7,
+   "source_note": 1,
+   "insight": 41,
+   "tooltip": 35,
+   "legend": 9,
+   "text_len": 5413
+  },
+  {
+   "page": "en/emotional-heatmap.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 18,
+   "tooltip": 17,
+   "legend": 2,
+   "text_len": 2986
+  },
+  {
+   "page": "en/essay-ai-era.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5617
+  },
+  {
+   "page": "en/essay-buddhist-chan.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5296
+  },
+  {
+   "page": "en/essay-chapter-couplets.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 2908
+  },
+  {
+   "page": "en/essay-character-fu.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5492
+  },
+  {
+   "page": "en/essay-cipai-linjiangxian.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5501
+  },
+  {
+   "page": "en/essay-cipai-mantingfang.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5687
+  },
+  {
+   "page": "en/essay-cipai-shuidiaogetou.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5531
+  },
+  {
+   "page": "en/essay-cipai-xijiangyue.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5999
+  },
+  {
+   "page": "en/essay-composition-origins.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6659
+  },
+  {
+   "page": "en/essay-divine-bureaucracy.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3575
+  },
+  {
+   "page": "en/essay-folk-belief.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4620
+  },
+  {
+   "page": "en/essay-historical-xuanzang.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4518
+  },
+  {
+   "page": "en/essay-information-cocoon.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 7369
+  },
+  {
+   "page": "en/essay-ming-economy.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5688
+  },
+  {
+   "page": "en/essay-ming-examination.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5880
+  },
+  {
+   "page": "en/essay-ming-garrison.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4852
+  },
+  {
+   "page": "en/essay-ming-intellectual-history.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6645
+  },
+  {
+   "page": "en/essay-ming-judiciary.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5238
+  },
+  {
+   "page": "en/essay-ming-literary-thought.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6318
+  },
+  {
+   "page": "en/essay-ming-maritime-ban.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4621
+  },
+  {
+   "page": "en/essay-ming-metaphor.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5912
+  },
+  {
+   "page": "en/essay-ming-military.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6749
+  },
+  {
+   "page": "en/essay-ming-politics.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5631
+  },
+  {
+   "page": "en/essay-ming-religion.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 7557
+  },
+  {
+   "page": "en/essay-ming-social-customs.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 7470
+  },
+  {
+   "page": "en/essay-modern-management.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 8023
+  },
+  {
+   "page": "en/essay-original-poetry.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4962
+  },
+  {
+   "page": "en/essay-poetry-imagery.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6372
+  },
+  {
+   "page": "en/essay-poetry-opening.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 7816
+  },
+  {
+   "page": "en/essay-quanzhen-daoism.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5404
+  },
+  {
+   "page": "en/essay-rhythm-analysis.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5020
+  },
+  {
+   "page": "en/essay-scenery-poems.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6635
+  },
+  {
+   "page": "en/essay-thematic-poetry.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4289
+  },
+  {
+   "page": "en/essay-three-teachings.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 5886
+  },
+  {
+   "page": "en/essay-version-evolution.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6930
+  },
+  {
+   "page": "en/essay-zen-koan-vs-neidan.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6516
+  },
+  {
+   "page": "en/ethics-consumption.html",
+   "charts": 2,
+   "source_note": 1,
+   "insight": 17,
+   "tooltip": 4,
+   "legend": 4,
+   "text_len": 2566
+  },
+  {
+   "page": "en/famous-time-travel.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 2102
+  },
+  {
+   "page": "en/four-dimensional-research-network.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 3,
+   "legend": 11,
+   "text_len": 2765
+  },
+  {
+   "page": "en/four-heavenly-kings-artifacts.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 8,
+   "tooltip": 52,
+   "legend": 19,
+   "text_len": 5633
+  },
+  {
+   "page": "en/game-webnovel.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 18,
+   "tooltip": 5,
+   "legend": 8,
+   "text_len": 2596
+  },
+  {
+   "page": "en/global-pattern.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 16,
+   "tooltip": 7,
+   "legend": 6,
+   "text_len": 2209
+  },
+  {
+   "page": "en/graph-explorer.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 5,
+   "text_len": 840
+  },
+  {
+   "page": "en/guanyin-six-roles-network.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 8,
+   "tooltip": 71,
+   "legend": 38,
+   "text_len": 7045
+  },
+  {
+   "page": "en/guide.html",
+   "charts": 7,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4438
+  },
+  {
+   "page": "en/hardship-difficulty-heatmap.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 12,
+   "tooltip": 5,
+   "legend": 11,
+   "text_len": 4439
+  },
+  {
+   "page": "en/hardship-heatmap.html",
+   "charts": 3,
+   "source_note": 1,
+   "insight": 12,
+   "tooltip": 4,
+   "legend": 6,
+   "text_len": 4755
+  },
+  {
+   "page": "en/heaven-power-network.html",
+   "charts": 6,
+   "source_note": 0,
+   "insight": 13,
+   "tooltip": 63,
+   "legend": 38,
+   "text_len": 10365
+  },
+  {
+   "page": "en/index.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 1,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 12630
+  },
+  {
+   "page": "en/intertextuality-network.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 4,
+   "tooltip": 82,
+   "legend": 41,
+   "text_len": 5764
+  },
+  {
+   "page": "en/journey-geo-semiotics.html",
+   "charts": 1,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 5,
+   "legend": 14,
+   "text_len": 2315
+  },
+  {
+   "page": "en/journey-map-interactive.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 19,
+   "legend": 1,
+   "text_len": 1656
+  },
+  {
+   "page": "en/journey-route.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 20,
+   "tooltip": 4,
+   "legend": 17,
+   "text_len": 1737
+  },
+  {
+   "page": "en/journey-spacetime.html",
+   "charts": 7,
+   "source_note": 0,
+   "insight": 19,
+   "tooltip": 4,
+   "legend": 11,
+   "text_len": 4556
+  },
+  {
+   "page": "en/jurisprudence.html",
+   "charts": 6,
+   "source_note": 1,
+   "insight": 32,
+   "tooltip": 23,
+   "legend": 30,
+   "text_len": 5935
+  },
+  {
+   "page": "en/karma-reincarnation.html",
+   "charts": 4,
+   "source_note": 1,
+   "insight": 34,
+   "tooltip": 22,
+   "legend": 8,
+   "text_len": 11636
+  },
+  {
+   "page": "en/language-style-radar.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 19,
+   "legend": 7,
+   "text_len": 1545
+  },
+  {
+   "page": "en/linguistics.html",
+   "charts": 6,
+   "source_note": 0,
+   "insight": 35,
+   "tooltip": 21,
+   "legend": 17,
+   "text_len": 7535
+  },
+  {
+   "page": "en/magic-system.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 17,
+   "tooltip": 2,
+   "legend": 12,
+   "text_len": 2891
+  },
+  {
+   "page": "en/material-archaeology.html",
+   "charts": 8,
+   "source_note": 0,
+   "insight": 42,
+   "tooltip": 39,
+   "legend": 46,
+   "text_len": 3573
+  },
+  {
+   "page": "en/mbti-evolution.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 13,
+   "tooltip": 4,
+   "legend": 31,
+   "text_len": 2027
+  },
+  {
+   "page": "en/methodology-matrix.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 56,
+   "tooltip": 5,
+   "legend": 16,
+   "text_len": 2512
+  },
+  {
+   "page": "en/methodology.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 3883
+  },
+  {
+   "page": "en/ming-political-thought-comparison.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 7,
+   "tooltip": 5,
+   "legend": 28,
+   "text_len": 6125
+  },
+  {
+   "page": "en/monster-background.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 28,
+   "tooltip": 16,
+   "legend": 13,
+   "text_len": 3455
+  },
+  {
+   "page": "en/monster-capability-radar.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 5,
+   "tooltip": 4,
+   "legend": 7,
+   "text_len": 5569
+  },
+  {
+   "page": "en/monster-ecology-network.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 4,
+   "text_len": 4596
+  },
+  {
+   "page": "en/monster-female-network.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 5,
+   "tooltip": 62,
+   "legend": 32,
+   "text_len": 7047
+  },
+  {
+   "page": "en/monster-hierarchy-network.html",
+   "charts": 6,
+   "source_note": 0,
+   "insight": 10,
+   "tooltip": 63,
+   "legend": 37,
+   "text_len": 7012
+  },
+  {
+   "page": "en/monster-sociology.html",
+   "charts": 8,
+   "source_note": 1,
+   "insight": 46,
+   "tooltip": 17,
+   "legend": 15,
+   "text_len": 18501
+  },
+  {
+   "page": "en/monster-victims-network.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 8,
+   "tooltip": 63,
+   "legend": 27,
+   "text_len": 7555
+  },
+  {
+   "page": "en/music-structure.html",
+   "charts": 3,
+   "source_note": 0,
+   "insight": 16,
+   "tooltip": 14,
+   "legend": 18,
+   "text_len": 2218
+  },
+  {
+   "page": "en/narrative-experiment.html",
+   "charts": 2,
+   "source_note": 1,
+   "insight": 17,
+   "tooltip": 4,
+   "legend": 1,
+   "text_len": 3166
+  },
+  {
+   "page": "en/narrative-rhythm-curve.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 19,
+   "legend": 1,
+   "text_len": 1559
+  },
+  {
+   "page": "en/narratology-12d-network.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 4,
+   "tooltip": 67,
+   "legend": 31,
+   "text_len": 6026
+  },
+  {
+   "page": "en/narratology-16d-network.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 4,
+   "tooltip": 69,
+   "legend": 27,
+   "text_len": 6644
+  },
+  {
+   "page": "en/perf-canvas-rendering.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 16,
+   "tooltip": 19,
+   "legend": 1,
+   "text_len": 5164
+  },
+  {
+   "page": "en/philosophy.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 42,
+   "tooltip": 18,
+   "legend": 9,
+   "text_len": 23554
+  },
+  {
+   "page": "en/pilgrim-team-dynamic-network.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 4,
+   "legend": 6,
+   "text_len": 5806
+  },
+  {
+   "page": "en/pilgrim-team-psychology-arc.html",
+   "charts": 11,
+   "source_note": 0,
+   "insight": 13,
+   "tooltip": 4,
+   "legend": 20,
+   "text_len": 6705
+  },
+  {
+   "page": "en/poetry-rhythm-analysis.html",
+   "charts": 11,
+   "source_note": 0,
+   "insight": 6,
+   "tooltip": 4,
+   "legend": 19,
+   "text_len": 6256
+  },
+  {
+   "page": "en/power-resources.html",
+   "charts": 4,
+   "source_note": 1,
+   "insight": 49,
+   "tooltip": 17,
+   "legend": 3,
+   "text_len": 13568
+  },
+  {
+   "page": "en/relationships.html",
+   "charts": 8,
+   "source_note": 1,
+   "insight": 81,
+   "tooltip": 26,
+   "legend": 36,
+   "text_len": 18822
+  },
+  {
+   "page": "en/risk-project.html",
+   "charts": 5,
+   "source_note": 1,
+   "insight": 53,
+   "tooltip": 19,
+   "legend": 1,
+   "text_len": 12749
+  },
+  {
+   "page": "en/search.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 599
+  },
+  {
+   "page": "en/site-map.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 4453
+  },
+  {
+   "page": "en/six-senses-narratology-network.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 4,
+   "tooltip": 66,
+   "legend": 31,
+   "text_len": 4354
+  },
+  {
+   "page": "en/social-media.html",
+   "charts": 2,
+   "source_note": 2,
+   "insight": 19,
+   "tooltip": 4,
+   "legend": 15,
+   "text_len": 2033
+  },
+  {
+   "page": "en/tag-cloud.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 17,
+   "legend": 1,
+   "text_len": 1171
+  },
+  {
+   "page": "en/text-evolution.html",
+   "charts": 4,
+   "source_note": 0,
+   "insight": 16,
+   "tooltip": 3,
+   "legend": 23,
+   "text_len": 2447
+  },
+  {
+   "page": "en/text-search.html",
+   "charts": 2,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 1582
+  },
+  {
+   "page": "en/theological-intervention-network.html",
+   "charts": 5,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 2,
+   "legend": 1,
+   "text_len": 3678
+  },
+  {
+   "page": "en/timeline.html",
+   "charts": 17,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 19,
+   "legend": 5,
+   "text_len": 1332
+  },
+  {
+   "page": "en/tribulations.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 12112
+  },
+  {
+   "page": "en/underworld-power-network.html",
+   "charts": 6,
+   "source_note": 0,
+   "insight": 15,
+   "tooltip": 63,
+   "legend": 38,
+   "text_len": 9056
+  },
+  {
+   "page": "en/visual-art.html",
+   "charts": 2,
+   "source_note": 1,
+   "insight": 18,
+   "tooltip": 5,
+   "legend": 1,
+   "text_len": 2761
+  },
+  {
+   "page": "en/visualizations.html",
+   "charts": 0,
+   "source_note": 0,
+   "insight": 0,
+   "tooltip": 0,
+   "legend": 0,
+   "text_len": 6542
+  },
+  {
+   "page": "en/workplace.html",
+   "charts": 3,
+   "source_note": 1,
+   "insight": 17,
+   "tooltip": 4,
+   "legend": 1,
+   "text_len": 2265
+  }
+ ]
+}

@@ -66,14 +66,30 @@ def scan_pages() -> list[Path]:
     return pages
 
 
+_HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
+
+
 def region_of(html: str) -> tuple[str, bool]:
-    """出处扫描区：dataSource div 内容 ∪ 全文「数据源：」字符串字面量。返回 (区文本, 是否有主锚点)。"""
+    """出处扫描区：dataSource div 内容 ∪ 全文「数据源：」字符串字面量。返回 (区文本, 是否有主锚点)。
+
+    W1266 根修（判据自身缺陷·A/B 实证）：锚点定位**必须先剥除 HTML 注释**——
+    注释里的标签字面量**不是元素**，正则却会把它当锚点抢先命中 ⇒ 非贪婪 `(.*?)</div>`
+    从「假锚点」吃到下一个 `</div>` ⇒ 抓到的区块文本与真正的 dataSource 区块不是同一段
+    ⇒ C2 的生成脚本检测落在错误文本上 ⇒ 页面只要在注释里写一句
+    `<!-- ... <div id="dataSource"> ... scripts/xxx.py ... -->` 就能让 C2 **假通过**。
+    实测：转义该注释字面量（真修复）后假锚点消失 ⇒ 该页的真实状态立刻暴露。
+「数据源：」字面量与锚点**同源**（都在剥注释后的文本上扫）——两半口径必须一致：
+    「区块取值」剥注释而「字面量取值」不剥 ⇒ 同一扫描区里一半严一半松 ⇒ 注释里的
+    `<!-- 数据源：scripts/foo.py -->` 仍能撑起假通过 ⇒ 实现缺陷而非判据意图。
+    注释不是内容 ⇒ 剥注释不改变判据意图，只修实现。
+    """
     parts: list[str] = []
     has_anchor = False
-    for m in RE_ANCHOR_DIV.finditer(html):
+    bare = _HTML_COMMENT_RE.sub(" ", html)
+    for m in RE_ANCHOR_DIV.finditer(bare):
         has_anchor = True
         parts.append(m.group(1))
-    parts.extend(m.group(0) for m in RE_SRC_TEXT.finditer(html))
+    parts.extend(m.group(0) for m in RE_SRC_TEXT.finditer(bare))
     return "\n".join(parts), has_anchor
 
 

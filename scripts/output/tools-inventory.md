@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-18 00:16
+生成时间：2026-11-18 05:21
 
-共 **224** 件（门禁与校验 110 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 83 · 一次性（下划线前缀） 7）
+共 **228** 件（门禁与校验 112 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 85 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（110）
+## 门禁与校验（112）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -21,9 +21,11 @@
 | `check_cascade_line_anchor.py` | check_cascade_line_anchor.py — 级联三文档面「行锚定」不变量自证（跨批复用判据 · W1005 建） |
 | `check_chapter_stats_sync.py` | check_chapter_stats_sync.py — chapter_stats 双源同步校验（S-24 家族化首对·W699）。 |
 | `check_chart_colorblind.py` | check_chart_colorblind.py — 第 29 门禁 · 图表配色色盲安全（PD-1a · W653） |
+| `check_chart_content_completeness.py` | check_chart_content_completeness.py — 第 82 门禁 · 图表内容完备度（W1266 线 A1 · 建尺子 |
 | `check_chart_data.py` | check_chart_data.py — 图表静态自洽门禁（W551 挂载·verify_delivery 第 24 门禁）。 |
 | `check_chart_degrade.py` | check_chart_degrade.py — 第 30 门禁 · 窄屏降级声明（PD-1b · W654） |
 | `check_chart_design_parity.py` | check_chart_design_parity.py — chart-design 中英对拍检查（W1105·design 审查 P3-9） |
+| `check_chart_label_clipping.py` | check_chart_label_clipping.py — 第 83 门禁 · SVG 标签裁切与重叠（W1266 批二 · 线 B1） |
 | `check_chart_values.js` | W1265 批一（判据补盲 1-1）：EN 面独立基线文件——分面冻结·分面拒通过。 |
 | `check_citability.py` | 第 28 门禁 · 可视化可引用性检查（check_citability.py） |
 | `check_citations.py` | 原著引文硬验证（W503 第 20 门禁·W737 扩展三检）：规范引文行 + 归属对白 + 语料保真。 |
@@ -167,7 +169,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（83）
+## 工具（85）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -186,6 +188,7 @@
 | `bump_version.py` | bump_version.py — 降级六文档同步（W393）的辅助同步工具 |
 | `cascade_idempotence.py` | cascade_idempotence.py — 级联**插入型面**的幂等写入原语（W1122）。 |
 | `cascade_lock.py` | cascade_lock.py — 级联运行锁（W991 建·W982 缓建①层的重启设计）。 |
+| `chart_label_clipping_probe.js` | S3 移动视口（375x812）——**不参与基线冻结**（基线态 = S1）：窄屏下图表多为横向滚动 |
 | `chart_render_probe.py` | 逐段渲染探针：定位图表色改动下 DOM 塌缩的真实成因（W1084）。 |
 | `ci_repair_apt_mirror.py` | ci_repair_apt_mirror.py — CI runner apt 源回退修复（W1211） |
 | `ci_sim.py` | ci_sim.py — CI 侧预演工具（W894·用户批准根修的配套工具） |
@@ -233,6 +236,7 @@
 | `pre_release_screenshot.py` | pre_release_screenshot.py — 迭代发布前增强版截图审查集成脚本 |
 | `rebuild_section.py` | rebuild_section.py — 幂等段重建独立入口（W1120·工具层·不接收官链主链）。 |
 | `render_check.js` | W701：file:// 下 @font-face 以 origin 'null' 加载站内字体触发 CORS 策略提示， |
+| `render_classify_probe.js` | 滚动穿透（触发 IntersectionObserver 懒渲染 · 防「图在视口外未渲染」被误判为无图） |
 | `reserve_w.py` | reserve_w.py — 批次号预约（防并行会话撞号·W1041 立） |
 | `review_sweep.py` | review_sweep.py — 全变动复审扫荡器（S-25·W699）。 |
 | `run_all.py` | run_all.py — 批量运行 A-AH 34 类分析脚本 |

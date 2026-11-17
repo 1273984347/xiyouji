@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fn8UO1Cv/mH/45xBuz2/uhGu5eLZqbSRVq4yWxj5lEk=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Qjq0A22hw1H25U+XdWhFvP+Xxwk8wH0laP3PdUZbkWI=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>哲学与心性 · 详解西游记</title>
@@ -2530,7 +2530,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="chart-block">
                 <div class="chart-title">心性维度演变热力图（6 阶段 × 5 维度）</div>
                 <div class="chart-caption">行：6 心性阶段 / 列：5 维度 / 颜色深浅表示数值（深色=高·浅色=低）· hover 查看精确数值</div>
-                <svg id="chart-monkey-heat" class="chart-svg" width="100%" height="340"></svg>
+                <svg id="chart-monkey-heat" class="chart-svg" width="100%" height="360"></svg>
                 <div class="legend-row">
                     <span class="legend-item"><span class="legend-swatch" style="background:#fdfaf4;"></span>0-2 低</span>
                     <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;opacity:0.5;"></span>3-4 中低</span>
@@ -3074,8 +3074,9 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const svg = d3.select('#chart-monkey-heat');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 900;
-        const W = Math.max(containerW, 700), H = 340;
-        const m = {top: 30, right: 30, bottom: 50, left: 130};
+        const W = Math.max(containerW, 700), H = 360;
+        // bottom 70：x 轴标题在 h+58 处 ⇒ 底部预算不足会越出画布 11px（绘图区高度不变）
+        const m = {top: 30, right: 30, bottom: 70, left: 130};
         const w = W - m.left - m.right, h = H - m.top - m.bottom;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
 

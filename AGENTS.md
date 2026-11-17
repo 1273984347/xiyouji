@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 81<!--stats:gate_count--> 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 83 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前按 §7 路径按需读节；更细的规则以文末「权威文档」为准。
 >
@@ -102,9 +102,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=81<!--stats:gate_count--> 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=83 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 81<!--stats:gate_count--> 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 83 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -194,18 +194,22 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 76. **公共层样式覆盖率**（W1264·样式治理棘轮）——公共层须管住 ≥11.8% 的页面样式（现役 113/953），低于则判红；未达目标 40% 仅提示并列出未覆盖高频类，见 gates.md。
 77. **视觉身份判据**（W1264·E-250 机器化）——统计全站通用色的暖承载/冷数据配比（现役暖承载 56.1%），防「正确但无身份」的视觉方向，见 gates.md。
 81. **W1265 新增四槽**（78=EN 数据源语言隔离 / 79=回退块保真度 / 80=SVG 文字对比度 / 81=页面引用闭合性；基线冻结 + `--strict` 零容忍），见 gates.md。
+82. **图表内容完备度**（W1266·内容层四项：来源标注/结论段/tooltip/图例；渲染级复核 + 页面哈希防绕过闸；存量 175 条·渲染级真缺口 129 条），见 gates.md。
+83. **SVG 标签裁切与重叠**（W1266·四向越界 + 同容器重叠·窄宽双口径并列·视窗基准 + 三基准并排），见 gates.md。
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 364<!--stats:pitfalls_total--> 条见 [pitfalls.md](pitfalls.md)；两者是「速查 → 详查」关系，不重复维护。
+> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 378<!--stats:pitfalls_total--> 条见 [pitfalls.md](pitfalls.md)；两者是「速查 → 详查」关系，不重复维护。
 > **🔥 火眼金睛 skill（W1149 建·`huoyan-jinjing`）**：全仓巡检速查 [`.agent/skills/huoyan-jinjing/SKILL.md`](.agent/skills/huoyan-jinjing/SKILL.md)——五维扫描（覆盖/失败语义/CI 形态/数据血缘/同类复发）+ 判据 fail-closed + 数据分级 + manifest 对拍 + 链接/内联 + 修复三原则；完整方法论文档在 [docs/10-方法论沉淀/全仓深度审计SOP-可复用.md](docs/10-方法论沉淀/全仓深度审计SOP-可复用.md)，可执行入口 `scripts/audit_repo.py`。
 
-> **📖 阅读契约（W709）**：索引型——364<!--stats:pitfalls_total--> 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——378<!--stats:pitfalls_total--> 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区/W568 Express close/W674 defer 时序/W656 audit 单模块；git 类=W649 级联清单/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF/W664 desc 分隔符/W663 跳号先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并；数据类=W691 计数钉/W693 残留标记/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉类另含素材出图规格（W974 三条：bbox 顶≠主体顶·器物形状>数量·落位页先验）。
 
 **提交前就绪链（W1198 立·W1215 收敛）**——收官 = `python scripts/batch_closeout.py --spec scripts/output/_w###_spec.json`·推送判据 = `python scripts/pre_push_gate.py`；步序细节锚各步 docstring 与坑表 E-229/E-228（正文 → pitfalls）。
+
+**收官链时间纪律（W1266 立·实测单轮浪费 ≈25–30 分钟六则入仓）**——① 提交期门禁分层：提交只靠 pre-commit 的 `--scope auto` 子集复验，全量 verify 恒属 pre_push_gate 不重复跑（E-265）；② 长任务（探针/全量门禁/收官链 >2 分钟）一律后台运行＋输出落文件，前台只做秒级判据（E-266）；③ 门禁红先跑快判据三件套（第 51/74/31 槽＋目标 pytest）再全量（E-268）；④ 收官链失败先单跑失败步续跑，禁整链从头重跑（E-267）；⑤ 渲染/探针报告按页面内容 hash 判定重跑，页面未变即复用（E-270）；⑥ spec 的 file_index_rows 形态一次定形，>200 行直接逐行（E-269）。全量 L2 → [批次交付流水线 §九](docs/10-方法论沉淀/批次交付流水线.md)。
 
 **多副本写入的派生值权威必须由发起方一次生成并两侧同传（W1204）**——详述与契约闸门见坑表 E-221（正文 → pitfalls）。
 
@@ -213,7 +217,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **占号共享区纪律（W1110·E-128）**——取号三源并集＋session 仓路径指纹＋跨克隆撞号预警；落段前复核本批号仍在预约集内（正文 → pitfalls E-128）。
 
-**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（61<!--stats:pitfalls_css-->）·JS / CSP / 运行时（12<!--stats:pitfalls_js-->）·git / 提交 / 并发（32<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（17<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（216<!--stats:pitfalls_flow-->）
+**六主题目录 → [pitfalls.md](pitfalls.md)**：CSS / 视觉渲染（75<!--stats:pitfalls_css-->）·JS / CSP / 运行时（12<!--stats:pitfalls_js-->）·git / 提交 / 并发（32<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（17<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（216<!--stats:pitfalls_flow-->）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -348,4 +352,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1247 级联自动滚动·脚注留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；近批摘要：W1248 CI 二轮红补新页；W1259 实锤 EN 站 http 态整页中文数据集 + 真值源缺 3 回 + 3 页 mock 回退；W1260 规范草案与三方向样板；W1261 全量落地；W1265 现役前端打磨升级批一（用户裁决定案保留现役宣纸刻本）。如与权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1248-W1248 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-16（W1259）：实锤 EN 站 http 态整页中文数据集、真值源缺 3 回、3 页 mock 回退；2026-11-16（W1260）：规范草案与三方向样板；2026-11-16（W1261）：全量落地；2026-11-17（W1265）：现役前端打磨升级批一（用户裁决定案保留现役宣纸刻本）；2026-11-18（W1266）：七层清单 + 两把新尺子 + EN 站降级与徽标补齐 + 扫描面补盲到 237 页。如与上述权威文档冲突，以权威文档为准。*

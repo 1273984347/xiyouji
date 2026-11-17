@@ -1,0 +1,26 @@
+# 第 82 门禁 · 单系列图图例豁免清单（W1266 建立·入库文件）
+# 生成命令：py -3 scripts/check_chart_content_completeness.py --generate-exemptions
+# 格式：<页面相对路径>|<声明>|<依据>
+# 声明四类：series=1（静态明确单系列）· series=0（静态不可判定）·
+#         render=nochart|legend|single|multi-nolegend（渲染级复核结论·须与档案一致）；
+# 渲染档案：scripts/output/chart-legend-render-audit.json（render=* 声明的一致性依据）
+# 语义：声明与实测/档案**完全一致**才豁免；render=multi-nolegend 不豁免·判 C4；
+#       页面改多系列或改清单都骗不过（双向校验）
+site/data/81-hardships-view.html|render=multi-nolegend|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例 ⇒ 撤豁免·判 C4（渲染级复核确认）
+site/data/81-hardships.html|render=legend|依据：渲染级复核（Playwright file://·只读渲染）：渲染后可见图例 9 项（≥2 ⇒ 多系列且图例齐备）
+site/data/ai-dialogue.html|render=unknown|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）
+site/data/century-dialogue.html|render=unknown|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）
+site/data/character-relationship-3d-view.html|render=unknown|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）
+site/data/data-explorer.html|render=multi-nolegend|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例 ⇒ 撤豁免·判 C4（渲染级复核确认）
+site/data/text-search.html|render=unknown|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）
+site/about.html|render=nochart|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用
+site/curated.html|render=nochart|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用
+site/dashboard.html|render=legend|依据：渲染级复核（Playwright file://·只读渲染）：渲染后可见图例 18 项（≥2 ⇒ 多系列且图例齐备）
+site/dukou-engine.html|render=nochart|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用
+site/guide.html|render=nochart|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用
+site/index.html|render=nochart|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用
+site/en/81-hardships.html|render=legend|依据：渲染级复核（Playwright file://·只读渲染）：渲染后可见图例 9 项（≥2 ⇒ 多系列且图例齐备）
+site/en/ai-dialogue.html|render=unknown|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）
+site/en/century-dialogue.html|render=unknown|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）
+site/en/guide.html|render=nochart|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用
+site/en/text-search.html|render=nochart|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用

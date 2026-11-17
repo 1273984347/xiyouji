@@ -1,3 +1,29 @@
+### W1266（2026-11-18）：图表与可视化内容层与可读层打磨升级 批二
+
+**本批要点**（W1266 · 批二 · 三线并行 · 先造尺子再照尺子修）：
+
+> - **① 立项依据与转向**：开工前现测复核发现《现役前端打磨升级清单》三项视觉项已有两项被历史批次修掉（第 80 槽 SVG 对比度违例 0 · 第 64 槽横向溢出 0）⇒ 唯一剩项是标签裁切与重叠 ⇒ 本批定为「先造尺子再照尺子修」，不以补页面凑数。
+> - **② 补上从未被审过的一层——图表内容层**：七层框架（载体 / 图型 / 标注 / 交互 / 状态 / 无障碍 / 一致性）覆盖全站；新口径普查（237 页 / 171 含图表页 / 716 图）⇒ 无来源标注 70 · 无图例 32 · 无结论段 19 · 无 tooltip 23 · 仅 1 图 15。
+> - **③ 目视抽验（E-244）**：`data/81-hardships-view.html` 底部点阵图几乎全黑、无轴无图例无结论 ⇒「图≠信息」；`en/graph-explorer.html` 节点标签截断且互相重叠、全页无解读 ⇒ 视觉层与内容层同页叠加。
+> - **④ 三条施工线（文件所有权互斥）**：线 A 图表内容完备度（先建第 82 槽判据再补页）· 线 B 标签裁切与重叠（先建判据再实读绘图代码定根修）· 线 C EN 站基建补齐（138 降级声明 + 138 徽标）；管控面（CHANGELOG 段 / 台账行 / spec / HANDOVER / 索引）归主会话独占。
+> - **⑤ 两把新尺子落地**：第 82 槽图表内容完备度（来源标注 / 结论段 / tooltip / 图例·阈值与下限全部写死）＋ 第 83 槽 SVG 标签裁切与重叠（四向越界 + 同容器两两相交·窄宽双口径并列·阈值 1.5px / 4 平方像素 / 比值 0.30 / 视窗宽下限 200px）⇒ 两槽均带存量基线 + 豁免清单 + 单测。
+> - **⑥ 尺子盲区在收官时补上（主会话自查）**：两套工具原扫描面为 site/data + site/en = 228 页，漏掉 site 根 10 页（含用户点名的 dashboard.html 三大环图页）⇒ 已扩到 237 页并重生成基线。
+> - **⑦ EN 站基建补齐（线 C）**：138 页补降级声明与数据来源徽标 ⇒ 第 30 槽与第 66 槽的 EN 面违例归零；同批把第 66 槽扫描面扩到含 site 根页（**ZH 99 + EN 138**）并给 ZH 根页 9 页注入徽标（态全 snapshot·文案与正本 STATUS_TEXT 逐字一致）。**徽标组件形状根修**：`.data-status-badge` 的 `border-radius` 由 999px 药丸改为 20px——多行容器下 999px 等效半径 = h/2 ⇒ 药丸退化为桶形 ⇒ 首/末行文字与左侧圆点被切出浅色填充区（深底内不可读）；实测**横向并未溢出**（spillRight = −15px）⇒ 只量「溢出量」会完全误判，改后几何不变（无版式回归）。
+> - **⑧ 用户点名的图表逐个落族**：出场频次排行榜＝水平条形 · 人物×回目矩阵＝热力矩阵 · 出场时间分布＝气泡 · 起因→结局＝桑基 · 水平时间线＝时间线 · 取经路线地图＝地理地图 · Graph Explorer＝力导向图谱 · 八十一难清单＝可筛选表格（非图表族·列入交互层与状态层）。
+> - **⑨ 归族订正与一致性命中（实测自证）**：同名「按起因分类」在 dashboard 是环图（aria-label 自证）、在 81-hardships 是树图（d3.treemap 自证）⇒ 原归族不准已订正，并登记为一致性层「图型选型一致」的首个命中实例。
+> - **⑩ 口径诚实化**：清单原引用的早期普查口径（179 含可视化页 / 686 图）其脚本随临时区清理失传、不可复算 ⇒ 清单改为两套口径并列声明（可复算口径 A + 已失传口径 B），并把「CSS-only 载体无机器判据」登记为下一批候选槽。
+> - **⑪ 交付物落盘**：七层清单 + 执行计划（含逐图型族专属验收项）+ 施工切分表 + 普查脚本 + 两把尺子 + 基线与豁免清单 + 单测 + 目视证据图。
+> - **⑫ 收官时抓出并根修的阻断缺陷（AGENTS 脚注尾锚点失配）**：写入侧常量 `batch_cascade._AGENTS_TAIL` 与门禁侧 `check_doc_size_budget._FOOTNOTE_TAIL_RE` 均要求尾句「如与**上述**权威文档冲突，以权威文档为准。」，而 AGENTS.md 实际尾句缺「上述」二字 ⇒ 级联写入侧断言「尾锚点异常」卡死 ⇒ **每批收官都会卡在这一步**（W1265 收官压缩脚注时改坏了这个写入侧与门禁侧的共同契约）。本批按「修实例必修根」补回尾句 ⇒ 写入侧、门禁侧、文件三者重新对齐。
+> - **⑬ 同族三处阻断一并根修（AGENTS 脚注区与写入侧契约脱节）**：① 尾句缺「上述」二字 ⇒ 写入侧常量与门禁侧正则同时失配；② 脚注近批摘要被写成自由格式（「W1248 CI 二轮红补新页」无日期形态）⇒ 切分器恒切不开条目；③ 指针注记措辞与区间 token 漂移（「脚注留最近 5 条」+ 单号 token）⇒ 滚动分支找不到插入锚点。三处均在**级联写入侧与门禁侧共用的契约**上 ⇒ **每批收官都会卡死**（W1265 收官压缩脚注时改坏）。本批按「修实例必修根」逐条对齐：尾句补「上述」＋ 条目重排为「日期（W####）：内容」定形形态（5 条·批号升序·每条 ≤120 字）＋ 指针注记改回「脚注保留最近 5 条」并给出区间 token ⇒ 写入侧切分器、门禁侧 `check_footnote_shape`、文件三者重新对齐。
+> - **⑭ 线 B 的页面根修已落地（14 页·按第 83 槽判据逐页实读绘图代码定根修）**：ZH 侧 14 个含图页逐页定位越界/重叠来源并改绘制代码——例 `data/narrative-experiment.html`：首/末阶段说明文字居中排版越出画布左右缘 67.8px / 37.8px ⇒ 边缘阶段改贴边锚点；`data/journey-map-interactive.html` 改动 64 行；另有 mbti-evolution 12 行、narrative-rhythm-curve 9 行、criticism-history 8 行、philosophy 7 行、poetry-density 7 行、jurisprudence 6 行等 ⇒ **非「统一套样式」而是逐页读绘图代码定根修**。EN 侧 139 页本批改动为降级声明 + 数据徽标 + 页脚批次链，**不含标签根修**（不混记）。
+> - **⑮ 收官期工程卫生与暂存集净化**：① 本批新增文件须过 ruff 严格档：`scripts/Z_图表设计/audit_chart_content.py` 修编码声明/多 import/import 排序/builtin open/末尾换行；② `scripts/check_chart_content_completeness.py` 的 `main` 复杂度 17 超结构档宽档阈值 15 ⇒ 拆出 `_write_baseline` / `_read_baseline_or_fail` / `_exemptions_ok` 三函数（判据口径与行为不变）；③ 跨行改写门禁基线新增本批新脚本 1 条候选（人工复核为「剥标签提纯文本」无害后登记）；④ 暂存集被一次外部 add 式操作混入参考件截图 16 张与逐页过程产物 15 件 ⇒ 已剔除（参考件为冻结产物、过程产物不入库），并按最终暂存重生成 spec。
+> - **⑯ 内容层口径定稿（渲染级一手报告·三线收敛）**：静态含图 **176 页** ⇒ 渲染级实证三分类：**真含图 157** · **环境性未加载 11**（file:// + headless 下未渲染·不等于无图·成因含数据未加载 / canvas·WebGL 不可用 / 布局未收敛 / 需交互触发）· **真无图 8** ⇒ **静态口径高估 ≈ 8/176 ≈ 4.5%**；旧「43 页无图」口径作废（把 24 页真·有图页误判为无图）⇒ **不存在「高估 33%」**。渲染级分类判据写进判据本体 `RENDER_RULEBOOK`（逐 svg 分 chart / illustration / small_graph / icon，**不再用 id/class 关键词单判**）并带**防绕过闸**（渲染档案含页面内容哈希 ⇒ 页面一改档案即失效、豁免强制刷新）。四项缺口：静态口径 C1 72 / C2 55 / C3 37 / C4 11 = **存量 175 条**（判据范围不变）｜**渲染级真缺口 = 129 条（仅 has_chart 页）⇒ 下一批按 129 施工**｜env_blocked 26 + no_chart 20 不适用。复算：`py -3 scripts/output/_w1266_render_legend.py [--all]`（18 页复核 / 176 页三分类）· 渲染档案 `scripts/output/_w1266_allrender.json`（门禁输入·带页面哈希）。
+> - **⑰ 新增探针脚本入仓与第 42 槽豁免登记**：新增 \`scripts/render_classify_probe.js\`（渲染级载体分类探针·v3 含「请求失败按类型拆分 + 滚动穿透 + bigAfterScroll」）⇒ 四面（tests / verify_delivery / CI / Makefile）无引用 ⇒ 按第 42 槽分类 **④浏览器/布局（需真实渲染环境）** 登记豁免（理由：取证用探针·按需手动跑·产物 `scripts/output/render_classify_result.json` 与输入清单 `scripts/output/render_classify_pages.json` 均入仓供复算）；**spec 的 file_index_rows 采用逐行形态**（191 行 ≤ 第 74 槽密度上限 200）——目录分组行按子树展开会覆盖被 .gitignore 的目录（docs/S2-外部分享 · scripts/output/data …）⇒ 收官链 add 步整链中止。
+> - **⑱ 收官链时间纪律固化入仓（tmpe/w1266/time_opt.md 实测单轮浪费 ≈25–30 分钟·六则）**：坑表新增 E-265~E-270（提交期门禁分层 / 长任务恒后台 / 失败续跑不整链重跑 / 快判据三件套先行 / spec 形态一次定形 / 探针按页面 hash 复用）＋ AGENTS §4.3 就绪链后新增时间纪律摘要行（六则一句版·判据锚到 E 号）＋ 批次交付流水线新增 §九时间纪律表（六行修法 + 保持项·原关联文档节顺延 §十）；计数链 sweep 自动跟随（坑表 372→378）。tmpe 工作件不入仓（用户令：GitHub 仓库只留必要内容·教训载体三处全在仓内可检索）；.gitignore 补 .qoder/ 与 **/_verify_shots/ 防过程产物误上传。
+> - **状态**：已收官（本批＝立尺子 + 清点 + 线 B 页面根修 + 渲染级口径定稿；页面内容层的其余修复项已逐项量化并登记为待办批次；**下一批按渲染级真缺口 129 条施工**）
+> - **验证**：见收官链。
+> - **文件**：docs/11-方案报告/设计与架构方案/全站可视化内容形态与打磨项清单-2026-11-18.md,docs/11-方案报告/设计与架构方案/W1266-执行计划-图表与可视化内容层升级-2026-11-18.md,docs/11-方案报告/设计与架构方案/W1266-施工切分表-2026-11-18.md,docs/11-方案报告/设计与架构方案/W1266-证据图/81-hardships-view-内容层缺陷.png,docs/11-方案报告/设计与架构方案/W1266-证据图/graph-explorer-标签裁切与无解读.png,scripts/Z_图表设计/audit_chart_content.py,scripts/check_chart_content_completeness.py,scripts/check_chart_label_clipping.py,scripts/chart_label_clipping_probe.js,tests/unit/test_chart_label_clipping.py,scripts/output/chart-content-baseline.txt,scripts/output/chart-label-clipping-baseline.txt,scripts/output/chart-label-clipping-exemptions.txt,scripts/output/chart-legend-exemptions.txt,scripts/output/chart-content-audit.json,scripts/output/chart_label_clipping_report.json,.gitignore,docs/10-方法论沉淀/批次交付流水线.md,scripts/verify_delivery.py,.agent/skills/puti-shouye/SKILL.md,scripts/output/script-coverage-baseline.txt
+
 ### W1265（2026-11-17）：现役前端打磨升级 批一 判据补盲与数据层真缺陷根修
 
 **本批要点**（W1265 · 打磨批一 · 用户裁决定案后的首个开工批）：
@@ -212,7 +238,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1265），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1266），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

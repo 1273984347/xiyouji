@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nuFaMs+av1vzWbJoxeodQ3I8MU8vF+59fs1Eb/GRrFQ=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1EnQnNN1YiDOwtgk8JhY+8iWWIS6EGrH5aESv81qlw4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>互文性关系图谱 · 详解西游记</title>
@@ -2330,7 +2330,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <div class="chart-block">
     <div class="chart-title">前置文本→西游记互文时间线</div>
     <div class="chart-caption">X 轴：年代 · 节点：文本配色 · 大小=互文强度 · hover 显示互文类型</div>
-    <svg id="chart-timeline" class="chart-svg" width="100%" height="500"></svg>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="560"></svg>
     <div class="legend-row" id="timeline-legend"></div>
   </div>
 </section>
@@ -2386,8 +2386,6 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <a href="../en/intertextuality-network.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
             <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
-
-</div>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script src="../static/js/d3-sankey.min.js"></script>
@@ -3114,10 +3112,11 @@ function renderTimeline(timelineData) {
   }
 
   const width = +svg.node().clientWidth || 800;
-  const height = 500;
+  // 底部预算：旋转刻度行(≈32px) + 年代标签行(可分 2 行) + 互文类型行 + 轴标题 ⇒ 150px
+  const height = 560;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  const margin = { top: 50, right: 60, bottom: 90, left: 70 };
+  const margin = { top: 50, right: 60, bottom: 150, left: 70 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
 
@@ -3200,17 +3199,36 @@ function renderTimeline(timelineData) {
     .text(d => d.文本);
 
   // 年代标签（X 轴下方）
-  g.selectAll('.year-label')
+  // —— 标签避让（行分派法·W1266 波三 OVL 族样板）——
+  // 事实：X 轴刻度标签为旋转排版（bbox 向下伸 ≈32px）·年代标签原在 innerH+24 ⇒ 两层相压
+  //       （「公元前5-公元3世纪」× 「公元前500」比值 0.380）；相邻年代（646年/688年）标签水平互压（比值 0.392）。
+  // 做法：① 轴下先留出「旋转刻度」独立行（年代标签首行基线 = innerH+50）；
+  //       ② 年代标签按 x 升序做**行分派**——放进第一条与同排已放标签水平不相交的行（间隙 4px·行高 14px）；
+  //       ③ 互文类型行与轴标题按实际行数下移 ⇒ 三层互不压字。
+  const AXIS_LABEL_ROW = 50, YEAR_ROW_H = 14;
+  const yearSel = g.selectAll('.year-label')
     .data(sorted)
     .enter()
     .append('text')
     .attr('class', 'year-label')
     .attr('x', d => xScale(d.年份))
-    .attr('y', innerH + 24)
+    .attr('y', innerH + AXIS_LABEL_ROW)
     .attr('text-anchor', 'middle')
     .attr('font-size', '10px')
     .attr('fill', '#5a3828')
     .text(d => d.年代);
+
+  const yearRows = [];
+  yearSel.nodes().slice().sort((a, b) => a.getBBox().x - b.getBBox().x).forEach((el) => {
+    const bb = el.getBBox();
+    let r = 0;
+    while (r < yearRows.length && yearRows[r].some((o) => !(bb.x + bb.width + 4 < o.x || o.x + o.width + 4 < bb.x))) r += 1;
+    if (r === yearRows.length) yearRows.push([]);
+    yearRows[r].push({ x: bb.x, width: bb.width });
+    el.setAttribute('data-row', String(r));
+  });
+  const yearRowN = Math.max(1, yearRows.length);
+  yearSel.attr('y', function () { return innerH + AXIS_LABEL_ROW + (+this.getAttribute('data-row')) * YEAR_ROW_H; });
 
   // 互文类型标签（节点下方第二行）
   g.selectAll('.type-label')
@@ -3219,7 +3237,7 @@ function renderTimeline(timelineData) {
     .append('text')
     .attr('class', 'type-label')
     .attr('x', d => xScale(d.年份))
-    .attr('y', innerH + 40)
+    .attr('y', innerH + AXIS_LABEL_ROW + yearRowN * YEAR_ROW_H + 8)
     .attr('text-anchor', 'middle')
     .attr('font-size', '9px')
     .attr('fill', '#8a7a5a')
@@ -3241,7 +3259,7 @@ function renderTimeline(timelineData) {
 
   // 轴标题
   g.append('text')
-    .attr('x', innerW / 2).attr('y', innerH + 70)
+    .attr('x', innerW / 2).attr('y', innerH + AXIS_LABEL_ROW + yearRowN * YEAR_ROW_H + 34)
     .attr('text-anchor', 'middle')
     .attr('font-size', '12px')
     .attr('fill', '#8a7a5a')

@@ -744,13 +744,13 @@ html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14);
 .data-status-badge {
     display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
     margin: 12px 0 6px; padding: 8px 14px;
-    border: 1px solid var(--line); border-radius: var(--radius-pill);
+    border: 1px solid var(--line); border-radius: 20px;
     background: var(--paper); font-size: 13px;
 }
 .data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
 
 .data-status-badge .ds-label { font-weight: 600; color: var(--text-secondary); }
-.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
+.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; min-width: 0; overflow-wrap: break-word; }
 .data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
 .data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
 .data-status-badge[data-status="sample"] .ds-dot { background: var(--warn); }
@@ -2111,6 +2111,7 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
   <script defer src="../js/visit-log.js"></script>
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
+<!-- chart-degrade: n/a -->
 <link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
 <link rel="icon" type="image/svg+xml" href="../static/icons/logo-mark-light.svg">
 <link rel="apple-touch-icon" href="../static/icons/icon-192.png">
@@ -2126,6 +2127,8 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
             <a href="../index.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
          · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div>
         <h1>The Ming in Disguise: Six Layers of Social Satire</h1>
+<!-- DATA-STATUS-BADGE v1 w1167 -->
+<div class="data-status-badge" data-status="snapshot" data-goatcounter-view="badge_view"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">Built-in snapshot</span><span class="ds-note">The figures on this page are a snapshot generated at publish time — it stays readable offline (file://) and the numbers do not update with the API.</span></div>
         <div class="subtitle">ESSAY &middot; E14 &middot; SATIRE</div>
         <div class="tagline">Heaven is the Ming court projected skyward &mdash; and a demon's fate turns on who its master is.</div>
     

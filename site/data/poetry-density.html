@@ -25,7 +25,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-bVBMRfTWSM/By656ADno6mIwtoXp2W0xvNVtyh69fjc='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-BPhExW5qguRTv4DY2UUnf05C0Qyn1cMGwvfmIDlXZQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>百回诗词密度 · 详解西游记</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/poetry-density.html">
@@ -2251,7 +2251,7 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
             <span class="current">百回诗词密度</span>
         </nav>
 
-        <!-- 数据源区：第 28 槽 C1/C2/C4 的扫描锚点（判据按 <div id="dataSource"> 取区域文本，
+        <!-- 数据源区：第 28 槽 C1/C2/C4 的扫描锚点（判据按 &lt;div id="dataSource"&gt; 取区域文本，
              内部不可有嵌套 div——非贪婪匹配会截断）。C1 需 json 路径或 EMBEDDED 声明 + 版本标识；
              C2 需 scripts/xxx.py + 参数口径词；C4 需 EMBEDDED 或下载链接。 -->
         <div class="notice" id="dataSource">
@@ -2370,8 +2370,9 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
                 d.m = Math.round(w.reduce(function(a, x) { return a + x.r; }, 0) / w.length * 10) / 10;
             });
 
-            var W = 960, H = 340;
-            var M = { top: 16, right: 16, bottom: 34, left: 44 };
+            var W = 960, H = 360;
+            // bottom 48：年代刻度行（ih+20）与轴标题行（ih+40）须分层·同层会重叠（比值 0.306）
+            var M = { top: 16, right: 16, bottom: 48, left: 44 };
             var iw = W - M.left - M.right, ih = H - M.top - M.bottom;
             var css = getComputedStyle(document.documentElement);
             var cBar = css.getPropertyValue('--chart-2').trim() || '#40619E';
@@ -2408,7 +2409,7 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
                     .attr('fill', cInk).text(d.lo);
             });
             gGrid.append('text')
-                .attr('x', M.left + iw / 2).attr('y', M.top + ih + 30)
+                .attr('x', M.left + iw / 2).attr('y', M.top + ih + 40)
                 .attr('text-anchor', 'middle').attr('font-size', 11)
                 .attr('fill', cInk).text('回目（每 10 回一个刻度）');
 

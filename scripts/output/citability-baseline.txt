@@ -347,3 +347,4 @@ site/data/workplace.html|C1|ok|2026-10-04
 site/data/workplace.html|C2|ok|2026-10-04
 site/data/workplace.html|C3|ok|2026-10-04
 site/data/workplace.html|C4|ok|2026-10-04
+site/data/poetry-density.html|C2|missing:no-script|2026-11-18

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-MBg5bIisVXA1dClNRRvflaGyJyzm4YFP6IVJzjmhsFg=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tcFQ62llTKNlzQwlXo8JBwz1XdB2oOi4sqDCtU6eZKE=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>源流演变 · 详解西游记</title>
@@ -2107,9 +2107,10 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
         }
 
         /* ===== Chart 1: Evolution Tree ===== */
+        /* 演化树：top 边距 46（「↑ 最早」在 y=-20 处）+ 画布同步加高 16px ⇒ 树内布局 innerH 保持 690 不变 */
         #evolution-tree {
             width: 100%;
-            height: 760px;
+            height: 776px;
             display: block;
         }
         .tree-node circle {
@@ -3064,10 +3065,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         const containerEl = document.getElementById("evolution-tree");
         const width = Math.max(200, containerEl.clientWidth || 1100);
-        const height = 760;
+        const height = 776;   // 与 CSS #evolution-tree 高度一致（top 46 + bottom 40 ⇒ innerH 仍为 690）
         svg.attr("viewBox", `0 0 ${width} ${height}`);
 
-        const margin = { top: 30, right: 40, bottom: 40, left: 180 };
+        const margin = { top: 46, right: 40, bottom: 40, left: 180 };   // top 46：「↑ 最早」在 y=-20 处·需顶部预算
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
 

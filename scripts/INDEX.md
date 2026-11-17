@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（233）
+## 文件（237）
 
 ### Python 脚本
 
@@ -90,9 +90,11 @@
 - `check_cascade_line_anchor.py`
 - `check_chapter_stats_sync.py`
 - `check_chart_colorblind.py`
+- `check_chart_content_completeness.py`
 - `check_chart_data.py`
 - `check_chart_degrade.py`
 - `check_chart_design_parity.py`
+- `check_chart_label_clipping.py`
 - `check_citability.py`
 - `check_citations.py`
 - `check_claude_md.py`
@@ -268,6 +270,7 @@
 - `_audit_render_states.js`
 - `_render_scope.js`
 - `batch_screenshots.js`
+- `chart_label_clipping_probe.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`
 - `check_dark_state_gate.js`
@@ -281,6 +284,7 @@
 - `gen_compliance_migration.mjs`
 - `icon_probe.js`
 - `render_check.js`
+- `render_classify_probe.js`
 - `svg_text_contrast_probe.js`
 - `verify_v2_pages.js`
 

@@ -1,0 +1,164 @@
+# 第 83 门禁 · SVG 标签裁切与重叠基线（W1266 批二 线 B1 建立·存量违例冻结）
+# 生成命令：py -3 scripts/check_chart_label_clipping.py --generate-baseline
+# 前提：node scripts/chart_label_clipping_probe.js（file:// 口径·S1 桌面浅色·双通道置主题）
+# 口径：越界 > 1.5px（left/right/top/bottom 四向）· 重叠 相交面积 >= 4px² 且 交集/较小者 > 0.30
+# 视窗基准：**SVG 视窗（元素内容盒·UA svg:root{overflow:hidden} 的真实裁剪矩形）**·非 border box
+#      同页同方向同文案去重 · 同页同对文案重叠去重 · svg 视窗宽度 < 200px 不参与判据
+# 格式：<页面>|CLIP-<方向>|<文案> 或 <页面>|OVL|<文案A>~<文案B>
+# 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict
+# 豁免：scripts/output/chart-label-clipping-exemptions.txt（有意裁剪·设计意图·显式登记）
+# 违例键 154 条（生成：2026-11-18 04:33:22）
+data/cave-estate.html|OVL|七绝山~毛颖山
+data/cave-estate.html|OVL|乌斯藏国~通天河
+data/cave-estate.html|OVL|乱石山~翠云山
+data/cave-estate.html|OVL|乱石山~金兜山
+data/cave-estate.html|OVL|女儿国~盘丝岭
+data/cave-estate.html|OVL|女儿国~碗子山
+data/cave-estate.html|OVL|平顶山~狮驼岭
+data/cave-estate.html|OVL|平顶山~翠云山
+data/cave-estate.html|OVL|比丘国~通天河
+data/cave-estate.html|OVL|毛颖山~隐雾山
+data/cave-estate.html|OVL|盘丝岭~隐雾山
+data/criticism-history.html|OVL|现代学者 · 文学本位~释·文
+data/cross-time-danmaku.html|OVL|西游·中国~🇯🇵 大江健三郎
+data/deconstruction.html|OVL|美猴王传奇（美国改编）~魔法千字文（韩国漫画）
+data/four-dimensional-research-network.html|OVL|10.0~王阳明
+data/four-dimensional-research-network.html|OVL|权力政治~马基雅维利
+data/graph-explorer.html|OVL|声尘~现行
+data/graph-explorer.html|OVL|转依~阿赖耶识
+data/jurisprudence.html|OVL|1~金翅大鹏雕·吃光狮驼国
+data/karma-reincarnation.html|OVL|归正（恶业由强力转化·非自愿归正）~违令受罚（业力与天命冲突·业力优先）
+data/mbti-evolution.html|OVL|ENTP~孙悟空
+data/mbti-evolution.html|OVL|ESFP~猪八戒
+data/mbti-evolution.html|OVL|INFJ~唐僧
+data/mbti-evolution.html|OVL|ISFJ~沙僧
+data/mbti-evolution.html|OVL|ISTP~白龙马
+data/monster-female-network.html|OVL|第59回~第60回
+data/monster-female-network.html|OVL|第60回~第60回
+data/monster-female-network.html|OVL|第70回~第72回
+data/monster-female-network.html|OVL|第72回~第72回
+data/monster-female-network.html|OVL|第80回~第82回
+data/monster-victims-network.html|OVL|第35回~金角银角案 (32-35回)
+data/six-senses-narratology-network.html|OVL|2000年~公元4世纪-20世纪
+data/timeline.html|OVL|1955~1980
+data/timeline.html|OVL|人文社整理本~数字化版本
+data/visual-art.html|OVL|No.5~取经路径（按章节顺序）→ 灵山
+data/visual-art.html|OVL|No.6~取经路径（按章节顺序）→ 灵山
+en/81-hardships.html|CLIP-right|Heavenly / Western steed
+en/81-hardships.html|CLIP-right|Inner demonic obstacles1
+en/business-model.html|OVL|0~Bottomless Cave
+en/business-model.html|OVL|L0~Stone Monkey King
+en/chapter-stats.html|OVL|0~Ch.1
+en/character-dynamic-network.html|OVL|Black Bear Spirit~Zhu Bajie
+en/counterfactual.html|OVL|Cybernetics Hypothesis~Weapon Experiment
+en/counterfactual.html|OVL|Oversight Hypothesis~Plot Hypothesis
+en/counterfactual.html|OVL|Replacement Hypothesis~Structural Hypothesis
+en/deconstruction.html|OVL|10~Subversive · Serious
+en/deconstruction.html|OVL|Magic Thousan…~The Monkey Ki…
+en/dialogue-sentiment.html|CLIP-bottom|-0.5
+en/dialogue-sentiment.html|CLIP-bottom|-1
+en/dialogue-sentiment.html|CLIP-bottom|0
+en/dialogue-sentiment.html|CLIP-bottom|0.5
+en/dialogue-sentiment.html|CLIP-bottom|1
+en/dialogue-sentiment.html|CLIP-left|Tang Sanzang
+en/four-dimensional-research-network.html|OVL|Foucault~Power-Politics
+en/graph-explorer.html|OVL|Bondage~Manifestation
+en/graph-explorer.html|OVL|Transformation~Ālaya Con…
+en/intertextuality-network.html|OVL|500 BCE~5th c. BCE – 3rd c. CE
+en/intertextuality-network.html|OVL|Plot Rewriting~Structure Inheritance
+en/journey-map-interactive.html|OVL|Black Pine Forest~Flat-Top Mountain
+en/journey-map-interactive.html|OVL|Black Pine Forest~White Tiger Ridge
+en/journey-map-interactive.html|OVL|Double-Fork Ridge~Two-Boundaries Mountain
+en/journey-map-interactive.html|OVL|Eagle-Sorrow Ravine~Guanyin Monastery
+en/journey-map-interactive.html|OVL|Eagle-Sorrow Ravine~Two-Boundaries Mountain
+en/journey-map-interactive.html|OVL|Five-Villages Abbey~Flowing Sands River
+en/journey-map-interactive.html|OVL|Five-Villages Abbey~White Tiger Ridge
+en/journey-map-interactive.html|OVL|Flaming Mountain~Lesser Thunderclap Monas
+en/journey-map-interactive.html|OVL|Flaming Mountain~River of Heaven
+en/journey-map-interactive.html|OVL|Flowing Sands River~Gao Village
+en/journey-map-interactive.html|OVL|Gao Village~Guanyin Monastery
+en/journey-map-interactive.html|OVL|Lesser Thunderclap Monas~Lion-Camel Ridge
+en/jurisprudence.html|OVL|Cases (sorted by dispari~Sha Wujing · shattered t
+en/jurisprudence.html|OVL|Cases (sorted by dispari~Six-Eared Macaque · impe
+en/jurisprudence.html|OVL|Cases (sorted by dispari~Sun Wukong · wreaked hav
+en/jurisprudence.html|OVL|Cases (sorted by dispari~White Bone Demon · wante
+en/jurisprudence.html|OVL|Golden-Winged Great Peng~Green Ox Spirit · descen
+en/jurisprudence.html|OVL|Green Ox Spirit · descen~Kui Wood Wolf · seized a
+en/jurisprudence.html|OVL|Green Ox Spirit · descen~Yellow Robe Monster · de
+en/jurisprudence.html|OVL|Jing River Dragon King ·~Kui Wood Wolf · seized a
+en/jurisprudence.html|OVL|Jing River Dragon King ·~Sha Wujing · shattered t
+en/jurisprudence.html|OVL|Jing River Dragon King ·~White Bone Demon · wante
+en/jurisprudence.html|OVL|Jing River Dragon King ·~Yellow Robe Monster · de
+en/jurisprudence.html|OVL|Kui Wood Wolf · seized a~Yellow Robe Monster · de
+en/jurisprudence.html|OVL|Sha Wujing · shattered t~White Bone Demon · wante
+en/jurisprudence.html|OVL|Six-Eared Macaque · impe~Sun Wukong · wreaked hav
+en/jurisprudence.html|OVL|Six-Eared Macaque · impe~White Bone Demon · wante
+en/jurisprudence.html|OVL|Sun Wukong · wreaked hav~White Bone Demon · wante
+en/jurisprudence.html|OVL|Sun Wukong · wreaked hav~Zhu Bajie · molested Cha
+en/karma-reincarnation.html|CLIP-right|● Pilgrim team: 0
+en/karma-reincarnation.html|OVL|Case 1~Ch. 3
+en/karma-reincarnation.html|OVL|Case 2~Ch. 10-11
+en/karma-reincarnation.html|OVL|Case 3~Ch. 97
+en/karma-reincarnation.html|OVL|Case 4~Ch. 11
+en/karma-reincarnation.html|OVL|Case 5~Ch. 9-10
+en/karma-reincarnation.html|OVL|Case 6~Ch. 37-39
+en/karma-reincarnation.html|OVL|Case 7~Ch. 47-49
+en/karma-reincarnation.html|OVL|Case 8~Ch. 8 / Ch. 22
+en/karma-reincarnation.html|OVL|King of Inspiration (Gol~Zhu Bajie · Sha Wujing (
+en/linguistics.html|CLIP-bottom|Sha Wujing→Sun Wukong +
+en/linguistics.html|CLIP-bottom|Summoning Spell (calling
+en/linguistics.html|CLIP-bottom|Tang Monk's Admonition (
+en/linguistics.html|OVL|0~Tang Sanzang→Sun Wukong
+en/linguistics.html|OVL|Dialogue pairs (speaker~Sun Wukong→Tang Sanzang
+en/linguistics.html|OVL|Incantation name~Summoning Spell (calling
+en/linguistics.html|OVL|Incantation name~Wukong's Taunts (provoki
+en/linguistics.html|OVL|Summoning Spell (calling~Water-Avoiding Spell
+en/linguistics.html|OVL|Tang Monk's Admonition (~Wukong's Taunts (provoki
+en/mbti-evolution.html|OVL|Conflict~Consummation
+en/mbti-evolution.html|OVL|Conflict~Formation
+en/mbti-evolution.html|OVL|Conflict~Harmony
+en/mbti-evolution.html|OVL|Consummation~Formation
+en/mbti-evolution.html|OVL|Consummation~Harmony
+en/mbti-evolution.html|OVL|ENTP~Sun Wukong
+en/mbti-evolution.html|OVL|ESFP~Zhu Bajie
+en/mbti-evolution.html|OVL|Formation~Harmony
+en/mbti-evolution.html|OVL|INFJ~Tang Sanzang
+en/mbti-evolution.html|OVL|ISFJ~Sha Wujing
+en/mbti-evolution.html|OVL|ISTP~White Dragon Horse
+en/monster-background.html|OVL|Buddhist & Daoist Discip~Celestial Mounts & Divin
+en/monster-ecology-network.html|OVL|Golden Monkey King~White-Haired Rat Demon
+en/monster-ecology-network.html|OVL|Nine-H~Yellow
+en/monster-female-network.html|OVL|Ch. 59~Ch. 60
+en/monster-female-network.html|OVL|Ch. 60~Ch. 60
+en/monster-female-network.html|OVL|Ch. 70~Ch. 72
+en/monster-female-network.html|OVL|Ch. 72~Ch. 72
+en/monster-female-network.html|OVL|Ch. 80~Ch. 82
+en/monster-female-network.html|OVL|Returned to therighteous~Zhu BajieJade-Faced Fox
+en/monster-victims-network.html|OVL|Ch. 35~Gold & Silver Horn Kings
+en/monster-victims-network.html|OVL|Ch. 45~Tongtian River case (Ch.
+en/monster-victims-network.html|OVL|Ch. 50~Tongtian River case (Ch.
+en/monster-victims-network.html|OVL|Ch. 70~Zhuzi Kingdom case (Ch.
+en/music-structure.html|CLIP-bottom|10
+en/music-structure.html|CLIP-bottom|2
+en/music-structure.html|CLIP-bottom|4
+en/music-structure.html|CLIP-bottom|6
+en/music-structure.html|CLIP-bottom|8
+en/music-structure.html|CLIP-bottom|Intensity (1–10)
+en/music-structure.html|CLIP-left|chanted by Tang Sanzang,
+en/music-structure.html|CLIP-right|Coda · Ch. 98-100
+en/narrative-experiment.html|OVL|Assign initial merit,Cho~Play hardship cards,Cove
+en/narrative-experiment.html|OVL|Deliver the true scriptu~Play hardship cards,Cove
+en/philosophy.html|OVL|4. Mid-Pilgrimage · Bala~Mind-nature stages (1 →
+en/philosophy.html|OVL|5. Late Pilgrimage · Awa~6. Buddhahood · Victorio
+en/power-resources.html|OVL|1%~Mortal Deification
+en/power-resources.html|OVL|2%~Mount Promotion
+en/relationships.html|OVL|Li Jing~Queen Mother of the West
+en/relationships.html|OVL|Purple-Gold Red Gourd~false names
+en/six-senses-narratology-network.html|OVL|2000 CE~4th–20th century CE
+en/text-evolution.html|CLIP-top|↑ Earliest
+en/theological-intervention-network.html|OVL|Ch. 77 · Subjugation of~Tathāgata
+en/timeline.html|OVL|1955~1980
+en/timeline.html|OVL|Contemporary~Republican Era
+en/timeline.html|OVL|Digita…~New An…
+en/visual-art.html|OVL|No.5~Pilgrimage route (by cha
+en/visual-art.html|OVL|No.6~Pilgrimage route (by cha

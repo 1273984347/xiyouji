@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fXtuaFNfJtLFyyqt9fXg76Ciql01LQLJADFGzqTOb8A=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-MdXFepNSlKNixpLDpczAH4LVujzsSp1nnQzPqFnXKxA=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>关系网络 · 详解西游记</title>
@@ -4048,7 +4048,8 @@ const link = svg.append('g')
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 900;
         const W = Math.max(containerW, 800), H = 420;
-        const m = {top: 20, right: 180, bottom: 50, left: 50};
+        // left 预算须容下旋转 -90° 的 y 轴标题（基线左移 40 + 字高 ≈ 51）⇒ 50 不够（越界 2px）
+        const m = {top: 20, right: 180, bottom: 50, left: 62};
         const w = W - m.left - m.right, h = H - m.top - m.bottom;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
         const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);

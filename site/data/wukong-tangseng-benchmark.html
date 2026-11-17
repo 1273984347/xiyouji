@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-l1wlsq/yrV9DbSRbzFh3sWzz68LIRVF87ABm7HLpY88='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ldDvOzGGUm3YSJ5SLAat2w6EzSDjq/XlNL6pc50KBJI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>一条边的完整档案：唐僧 → 孙悟空 · 详解西游记</title>
@@ -2615,14 +2615,15 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
         const W = 980, H = 270;
         const svg = d3.select('#weightChart').append('svg').attr('viewBox', '0 0 ' + W + ' ' + H)
             .attr('role', 'img').attr('aria-label', '事件权重柱状图');
-        const margin = { top: 24, right: 24, bottom: 46, left: 54 };
+        // top 44：阈值线在 y(1) 处·其标注与数值标签（y-6）曾落在同一基线（比值 1.000）⇒ 顶部留出独立行
+        const margin = { top: 44, right: 24, bottom: 46, left: 54 };
         const x = d3.scaleBand().domain(data.events.map(e => e.id)).range([margin.left, W - margin.right]).padding(0.26);
         const y = d3.scaleLinear().domain([0, 1]).range([H - margin.bottom, margin.top]);
         svg.append('g').attr('class', 'weight-axis').attr('transform', 'translate(0,' + (H - margin.bottom) + ')')
             .call(d3.axisBottom(x).tickFormat(id => { const e = data.events.find(v => v.id === id); return chapterLabel(e).replace('第 ', '').replace(' 回', ''); }));
         svg.append('g').attr('class', 'weight-axis').attr('transform', 'translate(' + margin.left + ',0)').call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.1f')));
         svg.append('line').attr('class', 'threshold-line').attr('x1', margin.left).attr('x2', W - margin.right).attr('y1', y(1)).attr('y2', y(1)).attr('stroke', 'var(--danger)');
-        svg.append('text').attr('class', 'threshold-label').attr('x', W - margin.right).attr('y', y(1) - 6).attr('text-anchor', 'end').text('边权重 max = 1.0');
+        svg.append('text').attr('class', 'threshold-label').attr('x', W - margin.right).attr('y', y(1) - 20).attr('text-anchor', 'end').text('边权重 max = 1.0');
         svg.append('line').attr('class', 'threshold-line').attr('x1', margin.left).attr('x2', W - margin.right).attr('y1', y(0.8)).attr('y2', y(0.8)).attr('stroke', 'var(--accent-4)');
         svg.append('text').attr('class', 'threshold-label').attr('x', W - margin.right).attr('y', y(0.8) - 6).attr('text-anchor', 'end').text('事件平均 = 0.8');
         const bars = svg.append('g').selectAll('rect').data(data.events).join('rect').attr('class', 'weight-bar')

@@ -10,6 +10,12 @@
   B3 ds-label 与正本 STATUS_TEXT[status] 逐字一致（防行话回潮，如 EMBEDDED）
 退出码：0 / 1 / 2（fail-closed）。恒跑（_SCOPE_CORE·毫秒级）。
 用法：py scripts/check_data_badge_coverage.py [--report] [--self-test]
+
+扫描面（W1266 批二线 C 三轮扩面）：site/data + **site 根页** + site/en。
+  原实现只扫 site/data ⇒ EN 138 页零徽标（W1265 批一已补）· ZH 根页 9 页零徽标
+  （本轮补）。根页曾零覆盖 ⇒ 「该页无徽标」是**扫描面盲区**而非合规证据。
+  根页形态与 ZH data 页同款（ds-label 逐字取正本中文文案·防行话回潮）。
+  _template.html（骨架模板）跳过·_shell.html 跳过——模板不是页面。
 """
 import importlib.util
 import io
@@ -27,10 +33,11 @@ if __name__ == "__main__":
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "site/data"
+SITE_ROOT = ROOT / "site"
 EN = ROOT / "site/en"
 BASELINE = ROOT / "scripts" / "output" / "data-badge-baseline.txt"
 MARKER = "---- 第 66 门禁 数据徽标："
-SKIP = {"_shell.html"}
+SKIP = {"_shell.html", "_template.html"}
 
 # 结构判据按「属性集合」识别，不按「属性顺序 + 恰好这两个属性」：正本给徽标加属性
 # （W1168 的 `data-goatcounter-view` 曝光面）不该把 88 页全判成「破损」——同族老坑见第 65 槽
@@ -121,6 +128,27 @@ def self_test(mod):
     return 0 if fails == 0 else 1
 
 
+def scan_zh(mod, scope="all"):
+    """扫 ZH 面（site/data + site 根页）→ (违例键, 扫描页数)。
+
+    W1266 批二线 C 三轮（判据补盲 5）：原实现只扫 site/data ⇒ **ZH 根页 9 页
+    零徽标**（根页曾不在任何扫描面 ⇒ 「该页无徽标」是盲区而非合规证据）。
+    根页判据与 ZH data 页同款（ds-label 逐字取正本中文文案·防行话回潮）。
+    """
+    viol = []
+    files = []
+    if scope in ("zh", "all"):
+        files += [f for f in sorted(DATA.glob("*.html")) if f.name not in SKIP]
+    if scope in ("root", "zh", "all"):
+        files += [f for f in sorted(SITE_ROOT.glob("*.html")) if f.name not in SKIP]
+    for f in files:
+        rel = f.relative_to(ROOT).as_posix()
+        errs = check_page(mod, f.name, f.read_text(encoding="utf-8", errors="replace"))
+        for e in errs:
+            viol.append("%s|Z|%s" % (rel, e))
+    return viol, len(files)
+
+
 def scan_en(mod):
     """扫 EN 面 → (违例键, 违例页数)。"""
     viol = []
@@ -161,7 +189,7 @@ def _parse_args(argv):
     scope = "all"
     if "--scope" in argv:
         i = argv.index("--scope")
-        if i + 1 < len(argv) and argv[i + 1] in ("zh", "en", "all"):
+        if i + 1 < len(argv) and argv[i + 1] in ("zh", "root", "en", "all"):
             scope = argv[i + 1]
     return scope, ("--strict" in argv), ("--report" in argv)
 
@@ -176,14 +204,11 @@ def main():
     scope, strict, report_only = _parse_args(argv)
 
     viol = []
+    zh_viol = []
     zh_pages = 0
-    if scope in ("zh", "all"):
-        files = [f for f in sorted(DATA.glob("*.html")) if f.name not in SKIP]
-        zh_pages = len(files)
-        for f in files:
-            errs = check_page(mod, f.name, f.read_text(encoding="utf-8", errors="replace"))
-            for e in errs:
-                viol.append("site/data/%s|Z|%s" % (f.name, e))
+    if scope in ("zh", "root", "all"):
+        zh_viol, zh_pages = scan_zh(mod, scope)
+        viol.extend(zh_viol)
     en_viol = []
     en_pages = 0
     if scope in ("en", "all"):

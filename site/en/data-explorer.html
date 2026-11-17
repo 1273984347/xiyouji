@@ -747,13 +747,13 @@ html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14);
 .data-status-badge {
     display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
     margin: 12px 0 6px; padding: 8px 14px;
-    border: 1px solid var(--line); border-radius: var(--radius-pill);
+    border: 1px solid var(--line); border-radius: 20px;
     background: var(--paper); font-size: 13px;
 }
 .data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
 
 .data-status-badge .ds-label { font-weight: 600; color: var(--text-secondary); }
-.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
+.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; min-width: 0; overflow-wrap: break-word; }
 .data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
 .data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
 .data-status-badge[data-status="sample"] .ds-dot { background: var(--warn); }
@@ -2007,7 +2007,9 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
   *{box-sizing:border-box}
   body{margin:0;font-family:var(--font-text);color: var(--ink);background: var(--bg);line-height:1.6}
   header.top{padding:22px var(--space-5) 14px;background: linear-gradient(135deg,var(--dark),#3a2820);color: var(--paper-warm)}
-  header.top h1{margin:0;font-size:22px}
+  header.top h1{margin:0;font-size:22px;color:inherit}
+  header.top .site-mainnav .nav-brand,header.top .site-mainnav .nav-item{color:var(--dark-text)}
+  header.top .site-mainnav .nav-item.is-active{color:var(--dark-text);font-weight:600}
   header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
   .banner{margin:var(--space-4) 16px;padding:10px 14px;border-radius: var(--radius-md); font-size:13px;border: 1px solid var(--line);background: var(--paper-warm)}
   .banner.offline{border-color: var(--accent-3);background: var(--paper-warm)}
@@ -2040,6 +2042,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script defer src="../js/visit-log.js"></script>
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
+<!-- chart-degrade: stacked -->
 <link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
 <link rel="icon" type="image/svg+xml" href="../static/icons/logo-mark-light.svg">
 <link rel="apple-touch-icon" href="../static/icons/icon-192.png">
@@ -2051,6 +2054,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <body>
 <header class="top">
   <h1>Annotated Journey to the West · Data Explorer</h1>
+<!-- DATA-STATUS-BADGE v1 w1167 -->
+<div class="data-status-badge" data-status="live" data-goatcounter-view="badge_view"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">Live data</span><span class="ds-note">Data on this page comes from the local Q&A service API; when the service is not running the page falls back to the published snapshot, and the badge reports the change.</span></div>
   <p>W337 Interactive visualization deep-dive demo — filter / drill-down / export (reuses vis-tools.js and the Data API)</p>
 <!-- NAV-CANONICAL v1 w1167 -->
 <nav class="site-mainnav" aria-label="主导航"><a class="nav-brand" href="index.html">JTTW Notes</a><a href="index.html" class="nav-item" data-goatcounter-click="nav-home">Home</a><a href="guide.html" class="nav-item" data-goatcounter-click="nav-en-guide">Guide</a><a href="dashboard.html" class="nav-item" data-goatcounter-click="nav-en-dashboard">Dashboard</a><a href="text-search.html" class="nav-item" data-goatcounter-click="nav-en-search">Search</a><a href="visualizations.html" class="nav-item" data-goatcounter-click="nav-en-visualizations">Visualizations</a><a href="../index.html" class="nav-item" data-goatcounter-click="nav-switch-zh">中文</a></nav>

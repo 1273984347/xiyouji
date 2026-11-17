@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-QnY/67zsxaiF74czpso5Sg8Z+Miy51ybzWSBlPAD/IY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-juV56DG0K428fktE2KbixIAoXHSKkaxDy5owynOAScg=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事节奏曲线 · 详解西游记</title>
@@ -2291,6 +2291,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         const svg = d3.select("#chart-area");
         svg.selectAll("*").remove();
+        // W1266 线 B（根修 · 绘图层）：补 viewBox = 绘图空间（1150x380）。
+        // 本页 svg 只有 width/height 属性、没有 viewBox ⇒ 用户坐标不随元素缩放；
+        // 而共享 CSS「.chart-block svg { max-width:100%; height:auto }」把元素压到
+        // 1046x345.6（内容仍按 1150x380 画）⇒ 底部轴标签（第10回…第100回）与轴标题
+        // 「回目」落到元素下缘之外被裁——实测越界 10.1px（刻度）/ 29.4px（标题）/ 右缘 98.4px。
+        // 补 viewBox 后内容随元素等比缩放 ⇒ 不再越界（与站内其它页「svg.attr('viewBox', …)」同款做法）。
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
         const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
         const x = d3.scaleLinear().domain([1, 100]).range([0, innerW]);

@@ -123,4 +123,7 @@ def test_defer_hold_regexes_against_real_tokens():
     # W1261：--chart-3/5 已重定向到语义层的 --series-3/5（暗色补偿值由序列槽承载）
     assert "--chart-3: var(--series-3)" in css and "--chart-5: var(--series-5)" in css
     # W1261 暗色序列色按色盲可辨性重选（亮色 min dE 12.03 / 暗色 11.04·门槛 10）
-    assert "--series-3: #C1BE8B" in css and "--series-5: #8B9BBC" in css
+    # W1266 订正：W1263 v3 色板调整后，暗色 --series-5 已由 #8B9BBC 改为 #76749E。
+    #   tokens.css 是**现役设计资产**（色板以现役文件为准），测试锚点须跟随现役值，
+    #   不得反向要求现役色板回退到 W1261 当时的取值。
+    assert "--series-3: #C1BE8B" in css and "--series-5: #76749E" in css

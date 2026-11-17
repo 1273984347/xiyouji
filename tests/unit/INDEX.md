@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（121）
+## 文件（123）
 
 ### Python 脚本
 
@@ -24,6 +24,8 @@
 - `test_batch_spec.py`
 - `test_cascade_line_anchor.py`
 - `test_cascade_precheck.py`
+- `test_chart_content_completeness.py`
+- `test_chart_label_clipping.py`
 - `test_chart_render_probe.py`
 - `test_check_chart_design_parity.py`
 - `test_check_data_copy_chain.py`

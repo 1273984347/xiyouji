@@ -12,16 +12,25 @@
 - `data/`
 - `figures/`
 
-## 文件（840）
+## 文件（855）
 
 ### Markdown 文档
 
 - `_w1078_color_inventory.md`
+- `chart-legend-render-audit.md`
 - `file-index.md`
 - `rag_eval_report.md`
 - `stats-index.md`
 - `tools-inventory.md`
 - `观测基线快照.md`
+
+### Python 脚本
+
+- `_w1266_render_legend.py`
+
+### JavaScript / TypeScript
+
+- `_w1266_legend_readout.js`
 
 ### 数据与配置
 
@@ -248,6 +257,7 @@
 - `_cascade_files_W1263.txt`
 - `_cascade_files_W1264.txt`
 - `_cascade_files_W1265.txt`
+- `_cascade_files_W1266.txt`
 - `_cascade_files_W751.txt`
 - `_cascade_files_W761.txt`
 - `_cascade_files_W816.txt`
@@ -634,6 +644,8 @@
 - `_w1263_spec.json`
 - `_w1264_spec.json`
 - `_w1265_spec.json`
+- `_w1266_allrender.json`
+- `_w1266_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
@@ -798,10 +810,17 @@
 - `_w996_spec.json`
 - `_w997_spec.json`
 - `_w999_batch.json`
+- `chart-content-audit.json`
+- `chart-content-baseline.txt`
 - `chart-degrade-baseline.txt`
+- `chart-label-clipping-baseline.txt`
+- `chart-label-clipping-exemptions.txt`
+- `chart-legend-exemptions.txt`
+- `chart-legend-render-audit.json`
 - `chart-values-baseline-en.txt`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
+- `chart_label_clipping_report.json`
 - `citability-baseline.txt`
 - `citability-report.json`
 - `colorblind-baseline.txt`
@@ -834,6 +853,8 @@
 - `render-state-audit-2026-09-13.jsonl`
 - `render-state-audit-baseline.jsonl`
 - `render-state-audit.jsonl`
+- `render_classify_pages.json`
+- `render_classify_result.json`
 - `script-coverage-baseline.txt`
 - `stats-changelog.json`
 - `stats.json`

@@ -1,0 +1,864 @@
+{
+  "rulebook": "渲染级分类口径 v2（修正 v1「按 id/class 关键词单判」的错误——JS 动态创建的图表 svg 无 chart 类名）：· 尺寸门槛：w ≥ 120 且 h ≥ 80 = 可承载图表的画布；小于此 = 图标尺度；· chart（图表）：画布达标 且（可见文本标签 ≥1 或 数据图元 ≥3 或 id/class 命中图表词表）；· illustration（装饰插画）：画布达标 但（无文本 且 图元 ≤2 且未命中图表词表）⇒ 不计图表；· small_graph（迷你图）：画布不达标 但（文本 ≥1 或图元 ≥3）；· icon（图标）：画布不达标 且（图元 ≤2 且无文本）；· 页面级三分类：has_chart（有图表 svg）/ env_blocked（静态有图表语义但渲染后无图表 svg ⇒环境性未加载·file:// fetch 失败等 ⇒ 不计入真无图）/ no_chart（只有图标或插画且静态无图表语义 ⇒ 真无图）",
+  "rows": [
+    {
+      "page": "site/about.html",
+      "sha": "1a444fe456b0",
+      "static": {
+        "svg": true,
+        "cls": false,
+        "lib": false
+      },
+      "pageVerdict": "no_chart",
+      "pageBasis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图",
+      "svgKinds": [
+        {
+          "cls": "icon-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 4,
+      "verdict": "nochart",
+      "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
+    },
+    {
+      "page": "site/curated.html",
+      "sha": "97c2bc6231dd",
+      "static": {
+        "svg": true,
+        "cls": false,
+        "lib": false
+      },
+      "pageVerdict": "no_chart",
+      "pageBasis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图",
+      "svgKinds": [
+        {
+          "cls": "icon-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 4,
+      "verdict": "nochart",
+      "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
+    },
+    {
+      "page": "site/dashboard.html",
+      "sha": "79e9e2171108",
+      "static": {
+        "svg": true,
+        "cls": true,
+        "lib": true
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 3 个（最大者：297x297·图元 4·文本 2·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "icon-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "",
+          "id": "chart-cause",
+          "w": 297,
+          "h": 297,
+          "marks": 4,
+          "texts": 2,
+          "kind": "chart",
+          "basis": "297x297·图元 4·文本 2·命中图表词表"
+        },
+        {
+          "cls": "",
+          "id": "chart-ending",
+          "w": 273,
+          "h": 273,
+          "marks": 3,
+          "texts": 2,
+          "kind": "chart",
+          "basis": "273x273·图元 3·文本 2·命中图表词表"
+        },
+        {
+          "cls": "",
+          "id": "chart-difficulty",
+          "w": 273,
+          "h": 273,
+          "marks": 2,
+          "texts": 2,
+          "kind": "chart",
+          "basis": "273x273·图元 2·文本 2·命中图表词表"
+        },
+        {
+          "cls": "search-icon",
+          "id": "",
+          "w": 14,
+          "h": 14,
+          "marks": 2,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "14x14·图元 2·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 18,
+      "visibleLegend": true,
+      "seriesEvidence": 4,
+      "seriesDesc": "填充色组 4·描边色组 1·同 x 堆叠段 0",
+      "consoleErrors": 7,
+      "verdict": "multi_legend",
+      "basis": "渲染后可见图例 18 项（≥2 ⇒ 多系列且图例齐备）"
+    },
+    {
+      "page": "site/data/81-hardships-view.html",
+      "sha": "ded6f1927f81",
+      "static": {
+        "svg": false,
+        "cls": true,
+        "lib": false
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：640x180·图元 4·文本 8·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "",
+          "id": "chart",
+          "w": 640,
+          "h": 180,
+          "marks": 4,
+          "texts": 8,
+          "kind": "chart",
+          "basis": "640x180·图元 4·文本 8·命中图表词表"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 4,
+      "seriesDesc": "填充色组 4·描边色组 0·同 x 堆叠段 4",
+      "consoleErrors": 4,
+      "verdict": "multi_nolegend",
+      "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
+    },
+    {
+      "page": "site/data/81-hardships.html",
+      "sha": "141734167f84",
+      "static": {
+        "svg": true,
+        "cls": true,
+        "lib": true
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 4 个（最大者：277x277·图元 4·文本 4·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "",
+          "id": "chart-cause",
+          "w": 277,
+          "h": 277,
+          "marks": 4,
+          "texts": 4,
+          "kind": "chart",
+          "basis": "277x277·图元 4·文本 4·命中图表词表"
+        },
+        {
+          "cls": "",
+          "id": "chart-ending",
+          "w": 277,
+          "h": 277,
+          "marks": 3,
+          "texts": 2,
+          "kind": "chart",
+          "basis": "277x277·图元 3·文本 2·命中图表词表"
+        },
+        {
+          "cls": "",
+          "id": "chart-difficulty",
+          "w": 277,
+          "h": 277,
+          "marks": 2,
+          "texts": 2,
+          "kind": "chart",
+          "basis": "277x277·图元 2·文本 2·命中图表词表"
+        },
+        {
+          "cls": "",
+          "id": "sankey",
+          "w": 1042,
+          "h": 420,
+          "marks": 14,
+          "texts": 9,
+          "kind": "chart",
+          "basis": "1042x420·图元 14·文本 9·命中图表词表"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 9,
+      "visibleLegend": true,
+      "seriesEvidence": 5,
+      "seriesDesc": "填充色组 5·描边色组 5·同 x 堆叠段 4",
+      "consoleErrors": 5,
+      "verdict": "multi_legend",
+      "basis": "渲染后可见图例 9 项（≥2 ⇒ 多系列且图例齐备）"
+    },
+    {
+      "page": "site/data/ai-dialogue.html",
+      "sha": "c7138168d942",
+      "static": {
+        "svg": false,
+        "cls": true,
+        "lib": true
+      },
+      "pageVerdict": "env_blocked",
+      "pageBasis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图",
+      "svgKinds": [
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 7,
+      "verdict": "unknown",
+      "basis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）"
+    },
+    {
+      "page": "site/data/century-dialogue.html",
+      "sha": "b8ee09e3acc0",
+      "static": {
+        "svg": false,
+        "cls": true,
+        "lib": true
+      },
+      "pageVerdict": "env_blocked",
+      "pageBasis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图",
+      "svgKinds": [
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 6,
+      "verdict": "unknown",
+      "basis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）"
+    },
+    {
+      "page": "site/data/character-relationship-3d-view.html",
+      "sha": "fd2c72584d04",
+      "static": {
+        "svg": false,
+        "cls": true,
+        "lib": false
+      },
+      "pageVerdict": "env_blocked",
+      "pageBasis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图",
+      "svgKinds": [
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 4,
+      "verdict": "unknown",
+      "basis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）"
+    },
+    {
+      "page": "site/data/data-explorer.html",
+      "sha": "87e52e185ec1",
+      "static": {
+        "svg": false,
+        "cls": true,
+        "lib": false
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：640x180·图元 4·文本 8·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "",
+          "id": "chart",
+          "w": 640,
+          "h": 180,
+          "marks": 4,
+          "texts": 8,
+          "kind": "chart",
+          "basis": "640x180·图元 4·文本 8·命中图表词表"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 4,
+      "seriesDesc": "填充色组 4·描边色组 0·同 x 堆叠段 4",
+      "consoleErrors": 5,
+      "verdict": "multi_nolegend",
+      "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
+    },
+    {
+      "page": "site/data/text-search.html",
+      "sha": "e81ec8a8e4e7",
+      "static": {
+        "svg": true,
+        "cls": true,
+        "lib": false
+      },
+      "pageVerdict": "env_blocked",
+      "pageBasis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图",
+      "svgKinds": [
+        {
+          "cls": "si-icon",
+          "id": "",
+          "w": 16,
+          "h": 16,
+          "marks": 2,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "16x16·图元 2·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 32,
+          "h": 32,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "32x32·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 4,
+      "verdict": "unknown",
+      "basis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）"
+    },
+    {
+      "page": "site/dukou-engine.html",
+      "sha": "cba27810ebf8",
+      "static": {
+        "svg": true,
+        "cls": false,
+        "lib": false
+      },
+      "pageVerdict": "no_chart",
+      "pageBasis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图",
+      "svgKinds": [],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 5,
+      "verdict": "nochart",
+      "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
+    },
+    {
+      "page": "site/en/81-hardships.html",
+      "sha": "bb693ffbbc46",
+      "static": {
+        "svg": true,
+        "cls": true,
+        "lib": true
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 4 个（最大者：277x277·图元 4·文本 4·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "",
+          "id": "chart-cause",
+          "w": 277,
+          "h": 277,
+          "marks": 4,
+          "texts": 4,
+          "kind": "chart",
+          "basis": "277x277·图元 4·文本 4·命中图表词表"
+        },
+        {
+          "cls": "",
+          "id": "chart-ending",
+          "w": 277,
+          "h": 277,
+          "marks": 3,
+          "texts": 2,
+          "kind": "chart",
+          "basis": "277x277·图元 3·文本 2·命中图表词表"
+        },
+        {
+          "cls": "",
+          "id": "chart-difficulty",
+          "w": 277,
+          "h": 277,
+          "marks": 2,
+          "texts": 2,
+          "kind": "chart",
+          "basis": "277x277·图元 2·文本 2·命中图表词表"
+        },
+        {
+          "cls": "",
+          "id": "sankey",
+          "w": 1042,
+          "h": 420,
+          "marks": 14,
+          "texts": 9,
+          "kind": "chart",
+          "basis": "1042x420·图元 14·文本 9·命中图表词表"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 9,
+      "visibleLegend": true,
+      "seriesEvidence": 5,
+      "seriesDesc": "填充色组 5·描边色组 5·同 x 堆叠段 4",
+      "consoleErrors": 4,
+      "verdict": "multi_legend",
+      "basis": "渲染后可见图例 9 项（≥2 ⇒ 多系列且图例齐备）"
+    },
+    {
+      "page": "site/en/ai-dialogue.html",
+      "sha": "0d90c3dd4d40",
+      "static": {
+        "svg": false,
+        "cls": false,
+        "lib": true
+      },
+      "pageVerdict": "env_blocked",
+      "pageBasis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图",
+      "svgKinds": [
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 7,
+      "verdict": "unknown",
+      "basis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）"
+    },
+    {
+      "page": "site/en/century-dialogue.html",
+      "sha": "59c76a6544a3",
+      "static": {
+        "svg": false,
+        "cls": false,
+        "lib": true
+      },
+      "pageVerdict": "env_blocked",
+      "pageBasis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图",
+      "svgKinds": [
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 6,
+      "verdict": "unknown",
+      "basis": "渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）"
+    },
+    {
+      "page": "site/en/guide.html",
+      "sha": "4fef3eaa3e6d",
+      "static": {
+        "svg": true,
+        "cls": false,
+        "lib": false
+      },
+      "pageVerdict": "no_chart",
+      "pageBasis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图",
+      "svgKinds": [
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 4,
+      "verdict": "nochart",
+      "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
+    },
+    {
+      "page": "site/en/text-search.html",
+      "sha": "2df4199621c5",
+      "static": {
+        "svg": true,
+        "cls": false,
+        "lib": false
+      },
+      "pageVerdict": "no_chart",
+      "pageBasis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图",
+      "svgKinds": [
+        {
+          "cls": "si-icon",
+          "id": "",
+          "w": 16,
+          "h": 16,
+          "marks": 2,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "16x16·图元 2·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ico",
+          "id": "",
+          "w": 32,
+          "h": 32,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "32x32·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 4,
+      "verdict": "nochart",
+      "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
+    },
+    {
+      "page": "site/guide.html",
+      "sha": "955074816006",
+      "static": {
+        "svg": true,
+        "cls": false,
+        "lib": false
+      },
+      "pageVerdict": "no_chart",
+      "pageBasis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图",
+      "svgKinds": [
+        {
+          "cls": "icon-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 2,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 2·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 3,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 3·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 2,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 2·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 2,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 2·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 3,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 3·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "",
+          "id": "",
+          "w": 22,
+          "h": 22,
+          "marks": 2,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "22x22·图元 2·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 4,
+      "verdict": "nochart",
+      "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
+    },
+    {
+      "page": "site/index.html",
+      "sha": "b083b4cd73a6",
+      "static": {
+        "svg": true,
+        "cls": false,
+        "lib": false
+      },
+      "pageVerdict": "no_chart",
+      "pageBasis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图",
+      "svgKinds": [
+        {
+          "cls": "icon-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        },
+        {
+          "cls": "ink-mountains",
+          "id": "",
+          "w": 1280,
+          "h": 100,
+          "marks": 2,
+          "texts": 0,
+          "kind": "illustration",
+          "basis": "1280x100·图元 2·无文本且未命中图表词表 ⇒ 装饰插画"
+        }
+      ],
+      "legendItems": 0,
+      "visibleLegend": false,
+      "seriesEvidence": 0,
+      "seriesDesc": "",
+      "consoleErrors": 6,
+      "verdict": "nochart",
+      "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
+    }
+  ]
+}

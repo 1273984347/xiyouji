@@ -260,14 +260,14 @@ html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14);
 .data-status-badge {
     display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
     margin: 12px 0 6px; padding: 8px 14px;
-    border: 1px solid var(--line); border-radius: var(--radius-pill);
+    border: 1px solid var(--line); border-radius: 20px;
     background: var(--paper); font-size: 13px;
 }
 .data-status-badge .ds-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--info); }
 /* W1261：默认态状态徽标文字改中性（--info 为靛蓝族·与「朱砂单点强调」冲突·29 页各 1 处）；
    具名状态（live=--ok / sample=--warn）保留语义色不变。 */
 .data-status-badge .ds-label { font-weight: 600; color: var(--text-secondary); }
-.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; }
+.data-status-badge .ds-note { color: var(--ink-soft); font-size: 12px; min-width: 0; overflow-wrap: break-word; }
 .data-status-badge[data-status="live"] .ds-dot { background: var(--ok); }
 .data-status-badge[data-status="live"] .ds-label { color: var(--ok); }
 .data-status-badge[data-status="sample"] .ds-dot { background: var(--warn); }

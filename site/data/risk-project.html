@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Wlpy/w5W2EHzrfrAIRLjslWB2UuCLDKSTw3yNb1W/AY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-8ymXGPWcT4nhE2uzd4IXJMKjcV1/e7hqrp/HrKBNLc8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>风险评估与项目管理 · 详解西游记</title>
@@ -2947,7 +2947,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 900;
         const W = Math.max(containerW, 700), H = 440;
-        const m = {top: 40, right: 40, bottom: 60, left: 60};
+        // top 52：#rank 标签在 y-r-4 处 ⇒ 最大圆点(r=26)+标签(10px) 需要 ≈52px 顶部预算
+        const m = {top: 52, right: 40, bottom: 60, left: 60};
         const w = W - m.left - m.right, h = H - m.top - m.bottom;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
 

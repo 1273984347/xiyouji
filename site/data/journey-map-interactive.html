@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nQpRJT6emDsKhPoMufw9wMRCcFsPimoHRqwYKCvvZyo=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-i6igd4/cgMPqYwMkhARuLUrBuzKHObRngCyw0I3fDu8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经路线交互式地图 · 详解西游记</title>
@@ -2127,7 +2127,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 class="section-title">取经路线地图</h2>
             <div class="section-sub">基于中国地理坐标的取经路线，17 个关键节点连接成长安到灵山的完整路径。点击节点跳转相关页面（如"流沙河"跳转 journey-route.html），8 处难点可点击展开详情。</div>
             <div class="chart-block">
-                <svg id="chart-map" width="1150" height="640"></svg>
+                <svg id="chart-map" width="1150" height="640" viewBox="0 0 1150 640"></svg>
                 <div class="legend">
                     <div class="legend-item"><span class="legend-swatch" style="background:#8E7D62"></span>普通节点</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#C0392B"></span>八难点（点击展开）</div>
@@ -2146,7 +2146,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 class="section-title">取经时间轴</h2>
             <div class="section-sub">17 个关键节点的耗时分布，柱高反映该段路程耗时（月）。点击柱子定位地图节点。</div>
             <div class="chart-block">
-                <svg id="chart-timeline" width="1150" height="240"></svg>
+                <svg id="chart-timeline" width="1150" height="240" viewBox="0 0 1150 240"></svg>
             </div>
         </section>
 
@@ -2256,7 +2256,27 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .scale(2200)
             .translate([width / 2, height / 2]);
 
-        const g = svg.append("g");
+        // —— 投影节点（先算·供画布自适应拟合用）——
+        const projected = data.nodes.map(n => {
+            const p = projection([n.lon, n.lat]);
+            return { ...n, px: p[0], py: p[1] };
+        });
+
+        // —— 画布自适应拟合（W1266 波三 · 标签裁切根修）——
+        // 17 个节点按经度线性铺开 ⇒ 节点云宽度超出 1150 用户画布（长安/灵山原本**整体落在画布外**·被裁掉）；
+        // 按「节点云 + 标签留白」求仿射（缩放 k + 平移 dx/dy）·**装饰地形与节点同组变换·保持相对对齐**；
+        // 字号与半径按 1/k 反缩放 ⇒ 渲染尺寸不随仿射变化。
+        const MAP_PAD = 24, MAP_LBL_HALF = 26, MAP_LBL_TOP = 26, MAP_LBL_BOT = 36;
+        let bx0 = Infinity, bx1 = -Infinity, by0 = Infinity, by1 = -Infinity;
+        projected.forEach(d => {
+            bx0 = Math.min(bx0, d.px - MAP_LBL_HALF); bx1 = Math.max(bx1, d.px + MAP_LBL_HALF);
+            by0 = Math.min(by0, d.py - MAP_LBL_TOP); by1 = Math.max(by1, d.py + MAP_LBL_BOT);
+        });
+        const fitK = Math.min((width - 2 * MAP_PAD) / Math.max(1, bx1 - bx0),
+                              (height - 2 * MAP_PAD) / Math.max(1, by1 - by0));
+        const fitDx = (width - (bx0 + bx1) * fitK) / 2;
+        const fitDy = (height - (by0 + by1) * fitK) / 2;
+        const FS = 1 / fitK;   // 字号/半径反缩放因子
 
         // 绘制简化的中国西部地理背景（多边形示意，模拟山脉河流）
         // 背景：渐变
@@ -2267,10 +2287,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         bgGrad.append("stop").attr("offset", "0%").attr("stop-color", "#f0e8d8");
         bgGrad.append("stop").attr("offset", "100%").attr("stop-color", "#e8dcc4");
 
-        g.append("rect")
+        // 底色画在内容组**之外**（内容组随后整体仿射·底色须铺满画布）
+        svg.append("rect")
             .attr("x", 0).attr("y", 0)
-            .attr("width",Math.max(0, width)).attr("height", height)
+            .attr("width", Math.max(0, width)).attr("height", height)
             .attr("fill", "url(#bgGrad)");
+
+        const g = svg.append("g");
 
         // 简化中国西部地形示意（手绘多边形）
         const terrainPath = "M 100,120 Q 200,80 350,100 T 600,90 Q 750,70 900,100 L 1050,150 Q 1080,300 1050,450 L 950,540 Q 800,580 650,560 T 400,550 Q 250,570 150,520 L 80,400 Q 60,250 100,120 Z";
@@ -2296,7 +2319,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             g.append("text")
                 .attr("x", m.cx).attr("y", m.cy + m.r + 14)
                 .attr("text-anchor", "middle")
-                .style("font-size", "10px")
+                .style("font-size", `${10 * FS}px`)
                 .style("fill", "var(--ink-soft)")
                 .style("font-style", "italic")
                 .text(m.name);
@@ -2311,14 +2334,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("opacity", 0.5);
         g.append("text")
             .attr("x", 500).attr("y", 340)
-            .style("font-size", "10px").style("fill", "#5a7a9a").style("font-style", "italic")
+            .style("font-size", `${10 * FS}px`).style("fill", "#5a7a9a").style("font-style", "italic")
             .text("大河（长江示意）");
-
-        // 投影节点
-        const projected = data.nodes.map(n => {
-            const p = projection([n.lon, n.lat]);
-            return { ...n, px: p[0], py: p[1] };
-        });
 
         // 路径线
         const lineGen = d3.line()
@@ -2330,7 +2347,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("d", lineGen(projected))
             .attr("fill", "none")
             .style("stroke", "var(--chart-2)")
-            .attr("stroke-width", 2.5)
+            .attr("stroke-width", 2.5 * FS)
             .attr("stroke-dasharray", "6,4")
             .attr("opacity", 0.7);
 
@@ -2355,7 +2372,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("cursor", "pointer");
 
         nodeG.append("circle")
-            .attr("r", d => d.isHardship ? 8 : 6)
+            .attr("r", d => (d.isHardship ? 8 : 6) * FS)
             .attr("fill", d => {
                 if (d.id === 0 || d.id === 16) return "#3A473A";
                 if (d.isHardship) return "#C0392B";
@@ -2364,12 +2381,12 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke", "#fff")
             .attr("stroke-width", 2)
             .on("mouseover", function(event, d) {
-                d3.select(this).attr("r", d.isHardship ? 11 : 9);
+                d3.select(this).attr("r", (d.isHardship ? 11 : 9) * FS);
                 showTooltip(`<strong style="color:var(--accent)">${d.name}</strong><br>${d.desc}<br><span style="color:var(--accent)">耗时：${d.duration} 月 · ${d.chapter}</span><br><span style="color:var(--accent)">点击 ${d.isHardship ? "展开难点详情" : "跳转相关页面"}</span>`, event);
             })
             .on("mousemove", moveTooltip)
             .on("mouseout", function(event, d) {
-                d3.select(this).attr("r", d.isHardship ? 8 : 6);
+                d3.select(this).attr("r", (d.isHardship ? 8 : 6) * FS);
                 hideTooltip();
             })
             .on("click", function(event, d) {
@@ -2384,7 +2401,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         nodeG.append("text")
             .attr("x", 0).attr("y", -14)
             .attr("text-anchor", "middle")
-            .style("font-size", "12px")
+            .style("font-size", `${12 * FS}px`)
             .style("font-weight", "600")
             .style("fill", "#2c3e50")
             .style("font-family", "Noto Serif SC, serif")
@@ -2407,26 +2424,29 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         g.append("text")
             .attr("x", projected[0].px).attr("y", projected[0].py + 30)
             .attr("text-anchor", "middle")
-            .style("font-size", "11px")
+            .style("font-size", `${11 * FS}px`)
             .style("fill", "var(--chart-4)")
             .style("font-weight", "600")
             .text("【起点】");
         g.append("text")
             .attr("x", projected[16].px).attr("y", projected[16].py + 30)
             .attr("text-anchor", "middle")
-            .style("font-size", "11px")
+            .style("font-size", `${11 * FS}px`)
             .style("fill", "var(--chart-4)")
             .style("font-weight", "600")
             .text("【终点】");
 
-        // 标题
-        g.append("text")
+        // 标题（画在内容组之外·不随仿射缩放位移）
+        svg.append("text")
             .attr("x", width / 2).attr("y", 30)
             .attr("text-anchor", "middle")
             .style("font-size", "16px")
             .style("font-weight", "600")
             .style("fill", "#2c3e50")
             .text("西游记取经路线 · 长安 → 灵山");
+
+        // 内容组整体仿射（节点云装进画布·装饰地形同步变换·保持相对对齐）
+        g.attr("transform", `translate(${fitDx},${fitDy}) scale(${fitK})`);
 
         // 保存 projected 用于交互
         EMBEDDED_DATA._projected = projected;

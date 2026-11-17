@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-XmjjxLeOJ/Lbe4n52pFllTSDBdIcai4Q9HMPBGYwj4Y=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-t31iui0QwjKmz1vkgXn8Zubv4QQkxpEEKWZNC8Gol4A=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>法理经济 · 详解西游记</title>
@@ -3423,11 +3423,11 @@ function renderTreemap(opts){
             .attr('font-size', '11px').style('fill', 'var(--ink-soft)')
             .text('审计覆盖率 (3/8)');
 
-        // 标注
-        g.append('text').attr('x', 0).attr('y', H/2 - 10).attr('text-anchor', 'middle')
+        // 标注（**组已按 H/2 居中·此处须用组内相对坐标**；原写 H/2± ⇒ 绝对 y 落到画布外 9px）
+        g.append('text').attr('x', 0).attr('y', H/2 - 26).attr('text-anchor', 'middle')
             .attr('font-size', '11px').style('fill', 'var(--chart-4)').attr('font-weight', 600)
             .text('有审计：3 起 · 37.5%');
-        g.append('text').attr('x', 0).attr('y', H/2 + 6).attr('text-anchor', 'middle')
+        g.append('text').attr('x', 0).attr('y', H/2 - 10).attr('text-anchor', 'middle')
             .attr('font-size', '11px').style('fill', 'var(--chart-1)').attr('font-weight', 600)
             .text('无审计：5 起 · 62.5%');
     }

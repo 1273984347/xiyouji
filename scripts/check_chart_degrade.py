@@ -6,8 +6,13 @@
 四值枚举（与 §4B 表「窄屏降级方案」列一致）。缺声明或值非法 = FAIL。
 实现为静态解析，不启浏览器（PD-1 交付物 3）。
 
-范围：site/data 86 页（_shell/_template 模板壳跳过·与其余门禁 SKIP_STEMS 同口径）。
+范围：site/data 90 + site 根页 9 + site/en 138 = 237 页（_shell/_template 模板壳跳过·与其余门禁 SKIP_STEMS 同口径）。
 声明位置：HTML 注释任意位置（推荐 dataSource 区上方）。
+
+扫描面（W1266 批二线 C 二轮补盲）：site/data → site/en → **site 根页**。
+  根页曾零覆盖 ⇒ 「该页无声明」是**扫描面盲区**而非「该页不需要声明」的证据
+  （据此把 EN 侧含图根页误判 n/a 属假合规）。--scope 取值：zh（含 data+根页）/
+  root（仅根页）/ en / all。根页 404.html 保留扫描并声明 n/a（真实可达错误页）。
 
 用法：
   python scripts/check_chart_degrade.py            # 门禁（verify_delivery 调用）
@@ -26,6 +31,7 @@ from lib import freeze_gate  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_DATA = ROOT / "site" / "data"
+SITE_ROOT = ROOT / "site"
 SITE_EN = ROOT / "site" / "en"
 BASELINE = ROOT / "scripts" / "output" / "chart-degrade-baseline.txt"
 MARKER = "---- 第 30 门禁 降级声明："
@@ -39,10 +45,19 @@ def scan_pages(scope: str = "all") -> list[Path]:
 
     W1265 批一（判据补盲 1-3）：原实现只扫 site/data ⇒ EN 138 页零覆盖
     （审查报告 P2-1：EN 138 页 chart-degrade 声明 0）。本槽扩面到 site/en。
+    W1266 批二线 C 二轮（判据补盲 4）：再扩面到 **site 根页**（9 个真实页）。
+      · 根页 404/about/curated/dashboard/dukou-engine/guide/index/rum-viewer/
+        visit-viewer 曾零覆盖 ⇒ 「根页无声明」是扫描面盲区，不是合规证据。
+      · 404.html **保留扫描**并声明 n/a：真实用户可达的错误页，排除它等于
+        再造一个同类盲区；无图表载体 ⇒ n/a。
+      · _template.html（骨架模板·内含模板默认值 chart-degrade: n/a）与
+        _shell.html 按 SKIP_STEMS 同口径跳过——模板不是页面。
     """
     dirs = []
     if scope in ("zh", "all"):
         dirs.append(SITE_DATA)
+    if scope in ("root", "zh", "all"):
+        dirs.append(SITE_ROOT)
     if scope in ("en", "all"):
         dirs.append(SITE_EN)
     out: list[Path] = []
@@ -120,7 +135,7 @@ def _parse_args(argv):
     scope = "all"
     if "--scope" in argv:
         i = argv.index("--scope")
-        if i + 1 < len(argv) and argv[i + 1] in ("zh", "en", "all"):
+        if i + 1 < len(argv) and argv[i + 1] in ("zh", "root", "en", "all"):
             scope = argv[i + 1]
     baseline_path = BASELINE
     if "--baseline" in argv:

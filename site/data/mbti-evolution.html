@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-HhNma32G6gnytU+GPd7xYdecWWHW9JzAcYaPUTBWDig=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-iNEdHwVLvIJWXng5sU6Ql+dXriV0KTN5a/fLj3dIDQo=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队 MBTI 动态演变图 · 详解西游记</title>
@@ -2561,7 +2561,11 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         const nCols = nStages * nPairs;
         const cellW = Math.max((w - marginLeft - 20) / nCols, 24);
         const cellH = 34;
-        const h = marginTop + EMBEDDED.characters.length * (cellH + cellGap) + 20;
+        // W1266 线 B（根修 · 绘图层）：底部预留「图例 + 图例刻度标签 + 标题」的高度。
+        // 原 +20 不够：图例组置于 h-6、刻度标签再下探 legendH+10 ⇒ 标签落到 viewBox 下缘之外，
+        // 被 svg 视窗（overflow:hidden）裁掉——实测越界 31.5px（刻度 0/2/4/6/8）+ 8.2px（标题）。
+        const gridBottom = marginTop + EMBEDDED.characters.length * (cellH + cellGap);
+        const h = gridBottom + 40;
         svg.attr("viewBox", `0 0 ${w} ${h}`);
         svg.selectAll("*").remove();
 
@@ -2584,7 +2588,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             if (si > 0) {
                 svg.append("line")
                     .attr("x1", xStart - cellGap).attr("x2", xStart - cellGap)
-                    .attr("y1", marginTop - 16).attr("y2", h - 10)
+                    .attr("y1", marginTop - 16).attr("y2", gridBottom)
                     .attr("stroke", "var(--line)").attr("stroke-width", 1.5);
             }
         });
@@ -2668,7 +2672,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
 
         // 颜色图例
         const legendW = 180, legendH = 10;
-        const legendX = marginLeft, legendY = h - 6;
+        const legendX = marginLeft, legendY = gridBottom + 6;
         const legendG = svg.append("g").attr("transform", `translate(${legendX},${legendY})`);
         const legendScale = d3.scaleLinear().domain([0, 10]).range([0, legendW]);
         const ticks = [0, 2, 4, 6, 8];

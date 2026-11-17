@@ -53,3 +53,4 @@ icon_probe.js  # ④运行时图标探针（被 check_emoji_icons.py 子进程�
 optimize-html-size.py  # ①HTML 体积优化建议报告（W230·人工触发只读分析·连字符名不可字面导入·W1230 裁决留行）
 pre-commit-validate.py  # ①hook 入口·import 期读 git 暂存区（仅提交钩子语境有意义·test_tool_scripts_cli I2 豁免在案·W1230 裁决留行）
 pre_release_screenshot.py  # ③发布链·发布机专用截图审查集成（import 期检查 Playwright·test_tool_scripts_cli I2 豁免在案·W1230 裁决留行）
+render_classify_probe.js  # ④浏览器/布局（渲染级载体分类取证探针·需真实渲染环境·四面 corpus 判据不可见·W1266 新增·按需手动跑·产物 scripts/output/render_classify_result.json 入仓供复算）
