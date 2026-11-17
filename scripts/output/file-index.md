@@ -80,6 +80,9 @@
 | scripts/output/theme-delta-shots/index-light.png | W1264 | 第 75 槽探针产物（本次移出版本库·非可复现资产） |
 | scripts/output/theme-delta-shots/reader-dark.png | W1264 | 第 75 槽探针产物（本次移出版本库·非可复现资产） |
 | scripts/output/theme-delta-shots/reader-light.png | W1264 | 第 75 槽探针产物（本次移出版本库·非可复现资产） |
+| docs/11-方案报告/计划方案/T113-任务计划执行与经验沉淀报告-2026-11-17.md | W1264 | T113 任务计划执行与经验沉淀报告（框架全项符合） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/己-零参考甲-读数台/shots/landing-full-dark.png | W1264 | 零参考方向甲整页实拍（明暗双态） |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/己-零参考甲-读数台/shots/landing-full-light.png | W1264 | 零参考方向甲整页实拍（明暗双态） |
 
 ## W1263 全站前端重新设计 · 需求反思与方案裁决材料 + v3 设计资产落仓（2026-11-17）
 
