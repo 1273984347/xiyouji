@@ -6342,7 +6342,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "b083b4cd73a6",
+      "sha": "aabdf3bb26d8",
       "static": {
         "svg": true,
         "cls": false,
@@ -6726,7 +6726,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 835,
+      "consoleErrors": 867,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -10899,17 +10899,17 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1500·文本 0）",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1499·文本 0）",
       "svgKinds": [
         {
           "cls": "",
           "id": "svg-render",
           "w": 511,
           "h": 307,
-          "marks": 1500,
+          "marks": 1499,
           "texts": 0,
           "kind": "chart",
-          "basis": "511x307·图元 1500·文本 0"
+          "basis": "511x307·图元 1499·文本 0"
         },
         {
           "cls": "ic-moon",

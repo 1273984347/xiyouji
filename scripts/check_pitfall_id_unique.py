@@ -7,7 +7,9 @@
 判据（分层，避免存量阻塞新批）：
   ① **新增条目撞既有编号 ⇒ FAIL**（本次改动引入的条目行 vs 全表既有编号集合）
   ② **存量同号 ⇒ NOTE**（列出编号与所属批次·供收敛批使用；不判红，避免存量拖死新批）
-  ③ 条目本体口径：行首「- **」且含「（W#### 实证·E-NN）」 ⇒ 正文里**引用**别的编号不算本体。
+  ③ 条目本体口径：行首「- **」且含「（W#### 实证·E-NN）」或新形态「（W#### 实证·E-NN·域）」
+     （W1271 P1-1 收口：尾部前瞻 [·）]）⇒ 正文里**引用**别的编号不算本体；
+     「E-NN 补充分」不算本体但主号必须存在（悬空即红）；复合号「E-NN/D-NN」不算本体。
 
 用法：python scripts/check_pitfall_id_unique.py [--base HEAD] [--self-test]
 
@@ -28,7 +30,13 @@ PITFALLS = os.path.join(ROOT, "pitfalls.md")  # W1157 正本迁根（docs/agent/
 # 整表会以「+ 行」形态冒充新增条目 ⇒ 111 例自撞假红（本批实测）。加 -M 显式开 rename 检测。
 PITFALLS_PATHS = ["pitfalls.md", "docs/agent/pitfalls.md"]
 
-RX_ENTRY = re.compile(r"^- \*\*.*?（(W\d+) 实证·(E-\d+)）")
+# W1271 对抗审查 P1-1 修：尾部改**前瞻**——「实证·E-NN」后跟 · 或 ） 即本体
+# （旧判据要求紧跟右括号 ⇒ W1266 起新形态「实证·E-265·跨项目通用·域」119 条逃逸，
+#  逃逸面内 E-260 同批双条未被看见）；「E-NN 补充分」（后跟空格）与复合号「E-NN/D-NN」
+#  （后跟 /）仍不算本体——补充分另受「主号必须存在」判据（RX_SUPPLEMENT）。
+RX_ENTRY = re.compile(r"^- \*\*.*?（(W\d+) 实证·(E-\d+)(?=[·）])")
+# 补充分形态：沿用主号·主号必须作为本体存在于同表（悬空 ⇒ FAIL）
+RX_SUPPLEMENT = re.compile(r"^- \*\*.*?（(W\d+) 实证·(E-\d+) 补充分")
 
 
 def _extract_added(diff_stdout):
@@ -185,6 +193,14 @@ def audit(base="HEAD", lines=None, added=None, base_counts=None):
         if now_counts.get(eid, 0) > max(base_counts.get(eid, 0), 1):
             others = list(existing.get(eid, []))
             new_dups.append((eid, w, others))
+    # W1271 P1-1：补充分悬空判据——「E-NN 补充分」的主号必须作为本体存在于同表
+    for line in lines:
+        ms = RX_SUPPLEMENT.match(line)
+        if not ms:
+            continue
+        main_id = ms.group(2)
+        if main_id not in now_counts:
+            new_dups.append(("%s（补充分无主）" % main_id, ms.group(1), []))
     return new_dups, dup_existing, added_ids
 
 
@@ -292,7 +308,19 @@ def _self_test():
                          added=[moved2], base_counts={"E-700": 1})
     assert d6 and d6[0][0] == "E-700", "净增重号（1→2）未被抓"
     print("self-test 7 净增重号（1→2）⇒ 必红（W1112/W1155 锁语义保持）")
-    print("---- 坑表编号唯一性自测：7 例全过 ----")
+    # W1271 P1-1 回归锁：新形态本体 + 补充分语义
+    newform = "- **新形态样例**（W1266 实证·E-265·跨项目通用·流程域）：己"
+    d8, _s8, _a8 = audit("HEAD", [newform], added=[newform])
+    assert _a8 and _a8[0][1] == "E-265", "新形态（实证·E-NN·域）未被识别为本体（P1-1 逃逸复发）"
+    print("self-test 8 新形态条目（实证·E-NN·域）⇒ 计为本体（P1-1 逃逸收口）")
+    supp_main = "- **主条目**（W1266 实证·E-260·取证域）：主"
+    supp_ok = "- **补充分**（W1266 实证·E-260 补充分 · 与主同族）：补充"
+    supp_orphan = "- **悬空补充分**（W9999 实证·E-999 补充分 · 无主）：悬空"
+    d9, _s9, _a9 = audit("HEAD", [supp_main, supp_ok, supp_orphan], added=[supp_ok, supp_orphan])
+    assert not any(e.startswith("E-260") for e, _w, _o in d9), "补充分与主号同批并存被误判重号"
+    assert any("补充分无主" in e for e, _w, _o in d9), "悬空补充分（主号不存在）未被红"
+    print("self-test 9 补充分沿用主号不算重号；悬空补充分 ⇒ 必红")
+    print("---- 坑表编号唯一性自测：9 例全过 ----")
     return 0
 
 

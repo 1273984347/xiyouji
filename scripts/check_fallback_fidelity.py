@@ -194,11 +194,15 @@ def _truth_structures(paths) -> tuple[dict, dict, dict]:
     return arrays, scalars, elem_keys
 
 
+_PARSE_FAILS: list[str] = []   # W1271 P2-2：宽松解析失败的回退块（main 末尾 NOTE 计数·防静默豁免面）
+
+
 def _f2_violations(page_rel: str, name: str, lit: str, truth_arr: dict, truth_sca: dict, truth_keys=None) -> list[str]:
-    """F2：回退块条目数/值 ≠ 真值。"""
+    """F2：回退块条目数/值 ≠ 真值。解析失败不计 F2 但记入 _PARSE_FAILS（可见性）。"""
     viol: list[str] = []
     obj = loose_json(lit)
     if obj is None:
+        _PARSE_FAILS.append("%s|%s" % (page_rel, name))
         return viol
     arr, sca, fb_keys = structure(obj)
     truth_keys = truth_keys or {}
@@ -237,8 +241,12 @@ def _f2_violations(page_rel: str, name: str, lit: str, truth_arr: dict, truth_sc
     return viol
 
 
-def scan_page(page_rel: str, html: str, truth_paths=None) -> list[str]:
-    """扫描一页 → 违例键列表（truth_paths 为 None 时从页面 fetch 目标推导真值）。"""
+def scan_page(page_rel: str, html: str, truth_paths=None, truth=None) -> list[str]:
+    """扫描一页 → 违例键列表。
+
+    truth_paths 为 None 时从页面 fetch 目标推导真值；truth=(arr, sca, keys) 时直接注入
+    内存真值（W1271 对抗审查 P2-3 修：自测此前经手工重拼绕过 scan_page 真实管线，
+    「从 fetch 目标推导真值」路径零自测覆盖——注入形参让自测真跑主管线）。"""
     viol: list[str] = []
     blocks = find_fallback_blocks(html)
     if not blocks:
@@ -246,7 +254,10 @@ def scan_page(page_rel: str, html: str, truth_paths=None) -> list[str]:
     if truth_paths is None:
         targets, _ = json_refs.extract_targets(html)
         truth_paths = truth_candidates(page_rel, targets)
-    truth_arr, truth_sca, truth_keys = _truth_structures(truth_paths)
+    if truth is not None:
+        truth_arr, truth_sca, truth_keys = truth
+    else:
+        truth_arr, truth_sca, truth_keys = _truth_structures(truth_paths)
     for name, lit in blocks:
         if RE_MOCK_NAME.search(name):
             viol.append("%s|F1|回退块 %s 变量名含 MOCK（不得以示例数据充当回退）" % (page_rel, name))
@@ -294,16 +305,9 @@ def self_test() -> int:
     bad = 0
     for name, lit, var, expect in cases:
         html = "<script>const %s = %s;</script>" % (var, lit)
-        viol = scan_page("site/en/_selftest.html", html, truth_paths=[Path("<memory>")])
-        # 自测用内存真值：走 _f2_violations 直连
-        viol = []
-        if RE_MOCK_NAME.search(var):
-            viol.append("F1")
-        m = RE_STRONG.search(lit)
-        if m:
-            viol.append("F1b")
+        # W1271 P2-3 修：内存真值经 truth 注入直通 scan_page 主管线（fetch 推导路径另有用例）
         t_arr, t_sca, t_keys = structure(truth)
-        viol.extend(_f2_violations("site/en/_selftest.html", var, lit, t_arr, t_sca, t_keys))
+        viol = scan_page("site/en/_selftest.html", html, truth=(t_arr, t_sca, t_keys))
         ok = len(viol) == expect
         print("%s %s：期望 %d 条违例·实得 %d 条 %s" % ("OK  " if ok else "FAIL", name, expect, len(viol), viol))
         bad += 0 if ok else 1

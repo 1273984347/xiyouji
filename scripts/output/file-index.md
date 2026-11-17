@@ -1,3 +1,48 @@
+## W1271 双 skill 增补与三哨清偿批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1271 | 第 16 条收官时间纪律（六则浓缩）+ 16 条字面量 |
+| .agent/skills/huoyan-jinjing/SKILL.md | W1271 | 唐僧节 +2（E-262/E-263）+ 重编号至 26 + 互引 16 条 |
+| AGENTS.md | W1271 | 菩提授业行 15→16 + 版本脚注 W1271 条目 |
+| HANDOVER.md | W1271 | Backlog 对账注记 + 进度 bullet + 更新链 |
+| docs/00-导读/W批次编号对账表.md | W1271 | W1266 hash 回填 + W1271 认领行（双 token）+ 腾窗 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1271 | 台账腾窗迁入 W1206-W1207 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-18.md | W1271 | 复盘报告（时间账与三哨清偿主题） |
+| CHANGELOG.md | W1271 | W1271 落段（认领复盘批角色） |
+| scripts/output/file-index.md | W1271 | file-index W1271 段 |
+| README.md | W1271 | 版本面推进 |
+| STRUCTURE.md | W1271 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1271 | 版本面推进 |
+| CITATION.cff | W1271 | 版本面推进 |
+| .github/workflows/README.md | W1271 | 版本面推进 |
+| site/index.html | W1271 | 页脚批次链 W1271 前插 |
+| scripts/output/_w1271_spec.json | W1271 | 本批 spec |
+| scripts/output/_cascade_files_W1271.txt | W1271 | 手工级联清单（跳号批） |
+| scripts/output/stats.json | W1271 | stats 刷新（计数链 sweep） |
+| scripts/output/stats-index.md | W1271 | stats 反向索引 |
+| docs/INDEX.md | W1271 | 文档索引刷新（新复盘报告） |
+| scripts/INDEX.md | W1271 | 脚本索引刷新 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1271 | report_docs 计数标记 sweep 跟随（224→225） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1271 | report_docs 计数标记 sweep 跟随（224→225） |
+| scripts/output/INDEX.md | W1271 | 产物索引刷新（gen_folder_docs） |
+| scripts/output/README.md | W1271 | 产物索引 README 刷新 |
+| scripts/output/stats-changelog.json | W1271 | stats 变更史追加 |
+| scripts/output/tools-inventory.md | W1271 | 工具清单刷新（gen_folder_docs） |
+| site/data/search-index-zh.js | W1271 | 搜索索引重建（新复盘报告） |
+| site/en/search-index-en.js | W1271 | 搜索索引重建（新复盘报告） |
+| scripts/check_pitfall_id_unique.py | W1271 | 第 54 槽 P1-1 修复（RX 前瞻收口 119 逃逸 + 补充分悬空判据 + 自测 9 例） |
+| scripts/check_chart_content_completeness.py | W1271 | 第 82 槽 P1-2 修复（series=* 接渲染档案交叉复核） |
+| scripts/check_en_data_source.py | W1271 | 第 78 槽 P2-1 修复（EN 目录缺失零页 fail-closed） |
+| scripts/check_fallback_fidelity.py | W1271 | 第 79 槽 P2-1/2/3 修复（零页 fail-closed + 解析失败 NOTE + 自测真跑管线） |
+| docs/11-方案报告/README.md | W1271 | 报告登记面补登复盘报告（第 55 篇）+ 计数 20 |
+| scripts/output/_w1266_allrender.json | W1271 | 渲染档案刷新（site/index.html 页脚改动后 sha 跟随·防绕过闸） |
+| scripts/output/render_classify_result.json | W1271 | 渲染分类报告刷新（同上） |
+| scripts/output/_vermilion_solid_cache.json | W1271 | 朱砂槽增量缓存跟随（门禁实跑刷新） |
+| scripts/output/chart-legend-render-audit.json | W1271 | 图例豁免渲染档案刷新（site/index.html sha 跟随·防绕过闸） |
+| scripts/output/chart-legend-render-audit.md | W1271 | 图例豁免渲染档案 MD 副本（同上） |
+
+
 ## W1266 图表与可视化内容层与可读层打磨升级 批二（2026-11-18）
 
 | 文件 | W | 说明 |

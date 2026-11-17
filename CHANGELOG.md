@@ -1,3 +1,16 @@
+### W1271（2026-11-18）：双 skill 增补与三哨清偿批（时间纪律入速查 + 巡检取证两条 + 复盘批）
+
+**本批要点**（W1271 · 治理与速查批·复盘批角色）：
+
+> - **① 双 skill 增补（用户令「按分法执行」）**：puti-shouye 新增第五节「收官时间」+ 第 16 条（收官链时间纪律六则浓缩·锚 E-265~E-270），四处「15 条」字面量同步 16（SKILL ×2 / AGENTS §4.3 菩提授业行 / huoyan-jinjing 互引行）；huoyan-jinjing 二、唐僧·紧箍咒节新增第 7/8 条（E-262 分类判据载体形态全覆盖 / E-263 实测与转述边界=可复跑性），后续条目机械重编号至 26（无外部按号引用·grep 复核）。
+> - **② W1164 双硬拦清偿（三哨同批到期）**：对抗审查按模板派发只读 subagent（审查 W1265-W1266·审查与修复分离）+ 台账 W1271 行状态列双 token；Backlog 对账注记落 HANDOVER §四（实况：唯一未决项 P-43-01 复核仍开放·wnum_commit_index 自 W1211 根修零改动；形态锚复算 83 槽三方一致）；复盘批角色 = 工作复盘与优化分析报告-2026-11-18.md（时间账与三哨清偿主题）。
+> - **③ 时间纪律执行自证（E-265~E-270 新序首跑）**：全量 verify 未在提交前重复跑（顺序反转：提交靠钩子 scope 子集·全量留提交后推送前恰一次·ci_sim 顺带真跑）；长链全部后台 + 输出落文件；首轮级联断言拦下后按报错自带处方单跑 rebuild_section 续链一次过（E-267）。
+> - **④ 台账**：W1266 hash 回填（6a5c23356·末笔同首笔）；腾窗迁 2 行（W1206-W1207 → ARCHIVE·正本留 59 行）；W1271 认领行落登记（跳号留痕：W1267–W1270 = 《现役前端打磨升级清单》六批序列预留位）。
+> - **⑤ 对抗审查回收（审查与修复分离·本批为修复侧）**：**P1-1** 第 54 槽判据形态脱节——RX 尾部改前瞻 「实证·E-NN(?=[·）]）」收口 119 条逃逸（新增条目 0→37·自测 7→9 例·补充分沿用主号不算重号 + 悬空补充分必红 + 复合号 E-NN/D-NN 非本体显式化）；**P1-2** 第 82 槽 series=* 分支接渲染档案交叉复核（档案新鲜且 verdict=multi_nolegend ⇒ 必判 C4·docstring「改清单也骗不过」对本分支成立）；**P2-1** 第 78/79 槽零页 fail-closed（目录缺失不再静默绿）；**P2-2** 第 79 槽宽松解析失败入 NOTE 计数（防静默豁免面）；**P2-3** 第 79 槽自测死代码根修（scan_page 增 truth 注入·自测真跑主管线·9/9）；**P2-4** W1262 占号闭环缺口按 W663/W1228 先例补空号行（正本·成果归属 W1263 段留痕）；P3 五项登记（基线棘轮 / sha fail-open / series_count 精度 / 豁免缺失 fail-open / refresh 不收敛）留待办；另自曝并已清：本批 CHANGELOG 段因 body 内嵌 H3 头致 rebuild 幂等定位失效产生 5 份重复段（回滚 HEAD 后单次重建·段头唯一定形=spec.title 组合形态）。
+> - **状态**：已收官（skill 速查面 16 + 26 条·触发器三哨清零·对抗审查发现按回收清单处置）
+> - **验证**：preflight PASS（三哨 NOTE 未触发）；huoyan-jinjing 26 条 / puti-shouye 16 条 grep 自证；快判据三件套（51/74/31）0 FAIL；坑表 378 条不变（计数链零漂移）；第 54 槽修复后实跑 新增 37 条 / 0 FAIL / 自测 9 例全过；第 82 槽渲染档案刷新后 sha 全一致；受影响单测 54 例全绿；cspcheck 0 漂移。
+> - **文件**：.agent/skills/puti-shouye/SKILL.md,.agent/skills/huoyan-jinjing/SKILL.md,AGENTS.md,HANDOVER.md,docs/00-导读/W批次编号对账表.md,archive/docs/W批次编号对账表-ARCHIVE.md,docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-18.md,CHANGELOG.md,scripts/output/file-index.md,README.md,STRUCTURE.md,docs/00-导读/项目说明.md,CITATION.cff,.github/workflows/README.md,site/index.html,scripts/output/_w1271_spec.json,scripts/output/_cascade_files_W1271.txt,scripts/output/stats.json,scripts/output/stats-index.md,docs/INDEX.md,scripts/INDEX.md,docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/stats-changelog.json,scripts/output/tools-inventory.md,site/data/search-index-zh.js,site/en/search-index-en.js,scripts/check_pitfall_id_unique.py,scripts/check_chart_content_completeness.py,scripts/check_en_data_source.py,scripts/check_fallback_fidelity.py,docs/11-方案报告/README.md,scripts/output/_w1266_allrender.json,scripts/output/render_classify_result.json,scripts/output/_vermilion_solid_cache.json,scripts/output/chart-legend-render-audit.json,scripts/output/chart-legend-render-audit.md
+
 ### W1266（2026-11-18）：图表与可视化内容层与可读层打磨升级 批二
 
 **本批要点**（W1266 · 批二 · 三线并行 · 先造尺子再照尺子修）：
@@ -238,7 +251,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1266），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1271），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -730,6 +730,14 @@ def _resolve_legend_exemption(rel: str, spec: str, series: int, audit: dict, pag
         return ("invalid", "声明 %s·渲染级复核为 %s" % (spec, actual or "缺档"))
     if spec.startswith("series="):
         if _exemption_valid(spec, series):
+            # W1271 对抗审查 P1-2 修：series=* 分支同样接渲染档案——档案新鲜（sha 一致）
+            # 且 verdict=multi_nolegend ⇒ 渲染级实证多系列无图例，声明 series=N 不构成豁免
+            # （docstring「改清单也骗不过」对本分支成立）。
+            row = audit.get(rel) or {}
+            rsha = row.get("sha") or ""
+            verdict = row.get("verdict") or ""
+            if rsha and page_sha and rsha == page_sha and verdict == "multi_nolegend":
+                return ("c4", "渲染级复核：多系列且无可见图例（series=* 声明与档案 verdict 冲突）")
             return ("exempt", "静态实测 series=%d" % series)
         return ("invalid", "声明 %s·静态实测 series=%d" % (spec, series))
     return ("invalid", "声明不可解析：%s" % spec)

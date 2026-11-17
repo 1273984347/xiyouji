@@ -200,7 +200,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：15 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 378<!--stats:pitfalls_total--> 条见 [pitfalls.md](pitfalls.md)；两者是「速查 → 详查」关系，不重复维护。
+> **⚡ 菩提授业 skill（W1034 建 / W1036 定名 `puti-shouye`）**：16 条最高频硬判据已固化为项目级 skill [`.agent/skills/puti-shouye/SKILL.md`](.agent/skills/puti-shouye/SKILL.md)——**动手前扫一眼**即可避开本项目 90% 的返工（批次收官顺序 / 判据脆弱特征 / 历史段不改写 / 命令禁用省略号等）。完整 378<!--stats:pitfalls_total--> 条见 [pitfalls.md](pitfalls.md)；两者是「速查 → 详查」关系，不重复维护。
 > **🔥 火眼金睛 skill（W1149 建·`huoyan-jinjing`）**：全仓巡检速查 [`.agent/skills/huoyan-jinjing/SKILL.md`](.agent/skills/huoyan-jinjing/SKILL.md)——五维扫描（覆盖/失败语义/CI 形态/数据血缘/同类复发）+ 判据 fail-closed + 数据分级 + manifest 对拍 + 链接/内联 + 修复三原则；完整方法论文档在 [docs/10-方法论沉淀/全仓深度审计SOP-可复用.md](docs/10-方法论沉淀/全仓深度审计SOP-可复用.md)，可执行入口 `scripts/audit_repo.py`。
 
 > **📖 阅读契约（W709）**：索引型——378<!--stats:pitfalls_total--> 条坑位按六主题迁 [pitfalls.md](pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
@@ -352,4 +352,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1248-W1248 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-16（W1259）：实锤 EN 站 http 态整页中文数据集、真值源缺 3 回、3 页 mock 回退；2026-11-16（W1260）：规范草案与三方向样板；2026-11-16（W1261）：全量落地；2026-11-17（W1265）：现役前端打磨升级批一（用户裁决定案保留现役宣纸刻本）；2026-11-18（W1266）：七层清单 + 两把新尺子 + EN 站降级与徽标补齐 + 扫描面补盲到 237 页。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1248-W1248 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-16（W1260）：规范草案与三方向样板；2026-11-16（W1261）：全量落地；2026-11-17（W1265）：现役前端打磨升级批一（用户裁决定案保留现役宣纸刻本）；2026-11-18（W1266）：七层清单 + 两把新尺子 + EN 站降级与徽标补齐 + 扫描面补盲到 237 页。；2026-11-18（W1271）：双 skill 增补（时间纪律入速查 + 巡检取证两条）+ 三哨清偿 + 复盘报告落盘如与上述权威文档冲突，以权威文档为准。*

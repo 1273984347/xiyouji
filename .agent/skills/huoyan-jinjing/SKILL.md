@@ -28,36 +28,38 @@ compatibility: any-agent
 ## 二、唐僧 · 紧箍咒：判据必须能念紧（fail-closed）
 
 6. **判据不可执行 ⇒ 判红（退出码 2）**，不许 `except: pass` 后给绿。
-7. **禁止纯子串满足**：`"foreign_keys = ON" in text` 会被注释满足；`"gen" in js` 会命中 `generate`。先剥注释/字符串，再结构化解析。
-8. **禁止只判一种写法**：`<SCRIPT>` 大小写、`--open=` 前缀缩写、协议相对 `//cdn`、无引号 `src=//`，都要进负样本。
-9. **每条新判据必须配负样本**：至少一例「必红」；没有负样本的判据＝未证明可证伪。
+7. **分类判据必须覆盖对象的全部载体形态**：svg / canvas / WebGL / CSS-only 漏一种即整类错（JS 动态创建的图表 svg 通常无 chart 类名 ⇒ 按 id/class 关键词单判必漏）；分类类结论须两套互不依赖的探针交叉印证后才可下量级断言 → E-262。
+8. **实测与转述的边界是「可复跑性」，不是「谁做的」**：引用实测数字前先验产物在仓 + 取数命令可复跑（引用时连命令一起引）；产物未入仓的读数按转述处理；多源交叉印证必须注明各源判据的宽窄 → E-263。
+9. **禁止纯子串满足**：`"foreign_keys = ON" in text` 会被注释满足；`"gen" in js` 会命中 `generate`。先剥注释/字符串，再结构化解析。
+10. **禁止只判一种写法**：`<SCRIPT>` 大小写、`--open=` 前缀缩写、协议相对 `//cdn`、无引号 `src=//`，都要进负样本。
+11. **每条新判据必须配负样本**：至少一例「必红」；没有负样本的判据＝未证明可证伪。
 
 ## 三、八戒 · 九齿钉耙：数据清理先分级
 
-10. **占位词**：出厂页面禁「（待补）/待完善/TODO/FIXME/Lorem」；源头在 docs/模板，补 HTML 会被下次生成覆盖。
-11. **空值**：`[]` 与 `null` 不是同一件事——`none`（确无）与 `unknown`（待补）必须用 `<field>_status` / `field_status` 标注。
-12. **哨兵**：`chapter=0` 不是「无回目」的合法表达；用 `null` + `chapter_scope`，禁止数字哨兵。
-13. **量纲**：权重 0–1 与 4–10 不能混用；每个文件声明 `_schema.weight_scale`，只声明、不擅自重标定。
+12. **占位词**：出厂页面禁「（待补）/待完善/TODO/FIXME/Lorem」；源头在 docs/模板，补 HTML 会被下次生成覆盖。
+13. **空值**：`[]` 与 `null` 不是同一件事——`none`（确无）与 `unknown`（待补）必须用 `<field>_status` / `field_status` 标注。
+14. **哨兵**：`chapter=0` 不是「无回目」的合法表达；用 `null` + `chapter_scope`，禁止数字哨兵。
+15. **量纲**：权重 0–1 与 4–10 不能混用；每个文件声明 `_schema.weight_scale`，只声明、不擅自重标定。
 
 ## 四、沙僧 · 行李担：清单必须与磁盘对拍
 
-14. **README 表格、大小、条目数必须由脚本从磁盘生成**（`python scripts/gen_dataset_index.py`）；手写清单三周必漂。
-15. **manifest 三件套**：`source / derived_from / consumers`；派生目标不存在或 hash 不符 ⇒ 判红。
-16. **三树分工**：`scripts/output/data`（计算权威）→ `site/data/json`（运行时发布）→ `dataset`（对外快照）。不物理合并，用 manifest 连接。
-17. **台账窗口**：正本 ≤ 60 行；归档必须保留在途行（`archive_ledger_rows.py --keep 59 --apply`）。
+16. **README 表格、大小、条目数必须由脚本从磁盘生成**（`python scripts/gen_dataset_index.py`）；手写清单三周必漂。
+17. **manifest 三件套**：`source / derived_from / consumers`；派生目标不存在或 hash 不符 ⇒ 判红。
+18. **三树分工**：`scripts/output/data`（计算权威）→ `site/data/json`（运行时发布）→ `dataset`（对外快照）。不物理合并，用 manifest 连接。
+19. **台账窗口**：正本 ≤ 60 行；归档必须保留在途行（`archive_ledger_rows.py --keep 59 --apply`）。
 
 ## 五、白龙马 · 驮经：链接与发布管线
 
-18. **GitHub 链接必须映射仓内真实文件**：`blob|tree/main/<path>` 逐条解析；`docs/source/` 旧前缀是生成器单点缺陷，不是页面问题。
-19. **相对链接内联**：reader 页生成后必须 `inline_css.py --reader --inline-links`（`build_reader.py` 已内置自动调用），否则 622 页退回外链。
-20. **改 md 的连锁顺序**：改 md → `_gen_search_index.py` → `generate_csp.py` → 跑门禁；顺序反了必红。
-21. **改内联脚本必重算 CSP**：`python scripts/generate_csp.py`，`--check` 必须 0 漂移。
+20. **GitHub 链接必须映射仓内真实文件**：`blob|tree/main/<path>` 逐条解析；`docs/source/` 旧前缀是生成器单点缺陷，不是页面问题。
+21. **相对链接内联**：reader 页生成后必须 `inline_css.py --reader --inline-links`（`build_reader.py` 已内置自动调用），否则 622 页退回外链。
+22. **改 md 的连锁顺序**：改 md → `_gen_search_index.py` → `generate_csp.py` → 跑门禁；顺序反了必红。
+23. **改内联脚本必重算 CSP**：`python scripts/generate_csp.py`，`--check` 必须 0 漂移。
 
 ## 六、观音 · 三根救命毫毛：修复三原则
 
-22. **先修判据/机制，再改数据**；只改数据会把缺陷固化进下一轮快照（铁律 15）。
-23. **同批回归锁**：修哪类，就在同批加「必红」负样本；否则下一形态复发。
-24. **提交前三问**：本批问题全解决或登记去向？防复发判据/坑表落地？其他 Agent 能否从项目文件了解？
+24. **先修判据/机制，再改数据**；只改数据会把缺陷固化进下一轮快照（铁律 15）。
+25. **同批回归锁**：修哪类，就在同批加「必红」负样本；否则下一形态复发。
+26. **提交前三问**：本批问题全解决或登记去向？防复发判据/坑表落地？其他 Agent 能否从项目文件了解？
 
 ## 七、十分钟巡检命令（可直接复制）
 
@@ -78,7 +80,7 @@ python scripts/check_inlined_css.py             # 849 页 INLINED 块完整性�
 
 ## 与项目其他载体的分工
 
-- 避坑速查 → 本目录 `puti-shouye`（菩提授业·15 条）；
+- 避坑速查 → 本目录 `puti-shouye`（菩提授业·16 条）；
 - 全量坑表 → `pitfalls.md`（六主题）；
 - 门禁全量定义 → `docs/agent/gates.md`；
 - 完整审计方法 → `docs/10-方法论沉淀/全仓深度审计SOP-可复用.md`；

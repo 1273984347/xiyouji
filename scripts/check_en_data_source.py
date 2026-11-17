@@ -69,6 +69,8 @@ def scan_site() -> tuple[list[str], list[str], dict[str, list[str]]]:
     unresolved: list[str] = []
     per_page: dict[str, list[str]] = {}
     if not EN_DIR.is_dir():
+        # W1271 对抗审查 P2-1 修：目录缺失原样静默绿 ⇒ 零页 fail-closed
+        viol.append("site/en/|E2|EN 目录缺失（扫描 0 页·fail-closed）")
         return viol, unresolved, per_page
     for f in sorted(EN_DIR.glob("*.html")):
         if f.stem in SKIP_STEMS:
