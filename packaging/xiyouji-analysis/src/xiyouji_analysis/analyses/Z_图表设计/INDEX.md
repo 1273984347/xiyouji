@@ -11,10 +11,11 @@
 
 - （无）
 
-## 文件（1）
+## 文件（2）
 
 ### Python 脚本
 
+- `audit_chart_content.py`
 - `chart_design.py`
 
 ---

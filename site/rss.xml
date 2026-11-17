@@ -6,6 +6,13 @@
     <description>一源多形 · 数字人文可视化解读《西游记》100 回——版本发布批次动态（W### 编号·详见 CHANGELOG）。</description>
     <language>zh-CN</language>
     <item>
+      <title>W1271 双 skill 增补与三哨清偿批（时间纪律入速查 + 巡检取证两条 + 复盘批）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1271</guid>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
       <title>W1266 图表与可视化内容层与可读层打磨升级 批二</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1266</guid>
@@ -135,13 +142,6 @@
       <title>W1246 reader 模板去 UI emoji（收藏/反馈三处）+ poetry 子树重建，第 72 槽棘轮 623→610</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1246</guid>
-      <pubDate>Sun, 15 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1245 新增可视化页「百回诗词密度」：D3 密度曲线 + 十回滑动均值 + 词牌标注（挂全链路）</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1245</guid>
       <pubDate>Sun, 15 Nov 2026 00:00:00 +0000</pubDate>
       <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
     </item>

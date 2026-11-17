@@ -41,6 +41,12 @@
 | scripts/output/_vermilion_solid_cache.json | W1271 | 朱砂槽增量缓存跟随（门禁实跑刷新） |
 | scripts/output/chart-legend-render-audit.json | W1271 | 图例豁免渲染档案刷新（site/index.html sha 跟随·防绕过闸） |
 | scripts/output/chart-legend-render-audit.md | W1271 | 图例豁免渲染档案 MD 副本（同上） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/P_音乐声效/music_structure.py | W1271 | 分析包同步跟随（ci_sim P3#24·副本漂移清偿） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/audit_chart_content.py | W1271 | 分析包同步跟随（W1266 新脚本首收入包） |
+| scripts/output/_sync_analysis_manifest.json | W1271 | 同步清单刷新（39 件） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/INDEX.md | W1271 | 目录文档 refresh（新收 audit_chart_content.py） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/README.md | W1271 | 目录文档 refresh（同上） |
+| site/rss.xml | W1271 | RSS 产物新鲜度跟随（第 55 篇复盘报告） |
 
 
 ## W1266 图表与可视化内容层与可读层打磨升级 批二（2026-11-18）
