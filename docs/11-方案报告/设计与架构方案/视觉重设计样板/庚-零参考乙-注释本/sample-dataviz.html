@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>百回人物出场频次 · 详解西游记</title>
+<meta name="description" content="《西游记》100 回人物出场频次可视化演示页：KPI、筛选、横向条形图、八十一难分布与明细表。">
+<style>/*@@CSS:BEGIN@@*/
+/* tokens.css —— 《详解西游记》视觉令牌（明暗两套独立取值）
+ * 唯一数据源：_gen_tokens.py（改色请改那个文件后重新生成）
+ * 令牌名为冻结接口：只增不改不删，取值与语义分档见 SPEC.md §2
+ */
+
+:root {
+  /* ── 表面 ── */
+  --bg: #E4E8E5;
+  --paper: #F7F8F5;
+  --paper-warm: #F6F2E9;
+  --surface-canvas: #EDF0EC;
+  --surface-raised: #FFFFFF;
+  --surface-sunken: #DDE2DD;
+  --surface-inset: #E9EDE8;
+  --dark: #161A19;
+  --dark-text: #E9EDEA;
+
+  /* ── 文本 ── */
+  --ink: #151A18;
+  --ink-soft: #38423F;
+  --ink-faint: #5E6866;
+  --ink-tint: #7C8683;
+  --text-primary: #151A18;
+  --text-secondary: #38423F;
+  --text-tertiary: #5E6866;
+  --text-hero: #0C110F;
+  --text-inverse: #F2F5F3;
+
+  /* ── 强调 ── */
+  --accent: #0E5A55;
+  --accent-primary: #0E5A55;
+  --accent-deep: #083B37;
+  --accent-muted: #46756F;
+  --accent-soft: #C6DBD7;
+  --accent-text: #FFFFFF;
+  --accent-tint: #E1EDEB;
+  --accent-wash: #EEF4F3;
+  --accent-2: #8C4A2B;
+  --accent-3: #2F5D8A;
+  --accent-4: #4F6B2E;
+
+  /* ── 语义 ── */
+  --ok: #1D6F4E;
+  --warn: #8A5A00;
+  --info: #2F5D8A;
+  --danger: #A93226;
+  --status-neg: #8A2E22;
+  --rebel: #7A3E64;
+
+  /* ── 数据序列 ── */
+  --chart-1: #2E6BA8;
+  --chart-2: #826312;
+  --chart-3: #332288;
+  --chart-4: #174D38;
+  --chart-5: #4A98C0;
+  --chart-6: #CC6677;
+  --series-1: #2E6BA8;
+  --series-2: #826312;
+  --series-3: #332288;
+  --series-4: #174D38;
+  --series-5: #4A98C0;
+  --series-6: #CC6677;
+  --series-7: #6E7A78;
+  --series-8: #3F4348;
+
+  /* ── 线与边 ── */
+  --line: #C9CFCB;
+  --border-subtle: #D3D9D4;
+  --border-strong: #7E8884;
+  --border-hairline: #DFE4E0;
+  --border-accent: #0E5A55;
+  --axis-line: #848E8A;
+  --grid-line: #E6EAE7;
+  --edge-visible: #B4BCB8;
+
+  /* ── 阴影 ── */
+  --shadow: 0 1px 2px rgba(14,24,22,.06), 0 8px 24px rgba(14,24,22,.05);
+  --shadow-lift: 0 2px 6px rgba(14,24,22,.08), 0 18px 44px rgba(14,24,22,.12);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(14,24,22,.07);
+  --elev-2: 0 2px 6px rgba(14,24,22,.09);
+  --elev-3: 0 6px 18px rgba(14,24,22,.11);
+  --elev-4: 0 18px 48px rgba(14,24,22,.18);
+
+  /* ── 动效 ── */
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 480ms;
+  --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-in-out-soft: cubic-bezier(.4, 0, .2, 1);
+
+  /* ── 字体 ── */
+  --font-serif: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-code: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-display: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --font-text: var(--font-sans);
+  --font-data: var(--font-sans);
+
+  /* ── 字号 · 行高 · 间距 ── */
+  --size-body: 1.0625rem;
+  --size-hero: clamp(2.75rem, 2rem + 2.6vw, 4.25rem);
+  --size-label: 0.8125rem;
+  --size-micro: 0.6875rem;
+  --size-section: clamp(1.375rem, 1.2rem + .8vw, 1.75rem);
+  --text-step-0: 1.0625rem;
+  --text-step-3: 1.5rem;
+  --type-body: var(--size-body)/1.95 var(--font-text);
+  --type-caption: var(--size-label)/1.7 var(--font-text);
+  --type-display: var(--size-hero)/1.14 var(--font-display);
+  --type-eyebrow: var(--size-micro)/1.4 var(--font-text);
+  --type-label: var(--size-label)/1.5 var(--font-text);
+  --type-lead: 1.1875rem/1.85 var(--font-text);
+  --type-number: 1.75rem/1.1 var(--font-data);
+  --type-subtitle: 1.3125rem/1.6 var(--font-display);
+  --type-title: var(--size-section)/1.4 var(--font-display);
+  --leading-tight: 1.25;
+  --space-1: 4px;
+  --space-5: 20px;
+  --space-9: 36px;
+  --gap-tight: 8px;
+  --gap-loose: 24px;
+  --gap-section: 64px;
+
+  /* ── 布局 ── */
+  --container-read: 40em;
+  --grid-columns: repeat(12, minmax(0, 1fr));
+  --indent-0: 0;
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+  --z-nav: 100;
+  --z-drawer: 200;
+  --z-mask: 300;
+  --z-tooltip: 400;
+}
+
+/* ── 暗色：独立取值组（深墨纸面 + 亮青强调 + 深色反填文字），非亮色反相 ── */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* ── 表面 ── */
+    --bg: #121516;
+    --paper: #1B2022;
+    --paper-warm: #23211C;
+    --surface-canvas: #171B1D;
+    --surface-raised: #242B2D;
+    --surface-sunken: #0E1112;
+    --surface-inset: #1E2426;
+    --dark: #0A0D0E;
+    --dark-text: #E6EBE9;
+
+    /* ── 文本 ── */
+    --ink: #E8EDEB;
+    --ink-soft: #C3CBC8;
+    --ink-faint: #98A2A0;
+    --ink-tint: #6E7A78;
+    --text-primary: #E8EDEB;
+    --text-secondary: #C3CBC8;
+    --text-tertiary: #98A2A0;
+    --text-hero: #F4F8F6;
+    --text-inverse: #E9EDEA;
+
+    /* ── 强调 ── */
+    --accent: #3FA79E;
+    --accent-primary: #3FA79E;
+    --accent-deep: #2A7A74;
+    --accent-muted: #6FBDB4;
+    --accent-soft: #1E4B47;
+    --accent-text: #08201E;
+    --accent-tint: #173330;
+    --accent-wash: #132624;
+    --accent-2: #D08A5E;
+    --accent-3: #7FA9D8;
+    --accent-4: #9DBB6B;
+
+    /* ── 语义 ── */
+    --ok: #63C79A;
+    --warn: #E0A73A;
+    --info: #7FA9DE;
+    --danger: #E88A7C;
+    --status-neg: #E09A8E;
+    --rebel: #C98CB4;
+
+    /* ── 数据序列 ── */
+    --chart-1: #5A72B8;
+    --chart-2: #9A7510;
+    --chart-3: #EE3377;
+    --chart-4: #44AA99;
+    --chart-5: #9CD6F0;
+    --chart-6: #F0E442;
+    --series-1: #5A72B8;
+    --series-2: #9A7510;
+    --series-3: #EE3377;
+    --series-4: #44AA99;
+    --series-5: #9CD6F0;
+    --series-6: #F0E442;
+    --series-7: #6B7776;
+    --series-8: #A8B2B4;
+
+    /* ── 线与边 ── */
+    --line: #313A3B;
+    --border-subtle: #2A3234;
+    --border-strong: #6C7775;
+    --border-hairline: #22292B;
+    --border-accent: #3FA79E;
+    --axis-line: #697374;
+    --grid-line: #232A2C;
+    --edge-visible: #3B4647;
+
+    /* ── 阴影 ── */
+    --shadow: 0 1px 2px rgba(0,0,0,.50), 0 8px 24px rgba(0,0,0,.45);
+    --shadow-lift: 0 2px 6px rgba(0,0,0,.55), 0 18px 44px rgba(0,0,0,.60);
+    --elev-0: none;
+    --elev-1: 0 1px 2px rgba(0,0,0,.50);
+    --elev-2: 0 2px 6px rgba(0,0,0,.55);
+    --elev-3: 0 6px 18px rgba(0,0,0,.60);
+    --elev-4: 0 18px 48px rgba(0,0,0,.70);
+
+    /* ── 动效 ── */
+    --dur-fast: 120ms;
+    --dur-base: 220ms;
+    --dur-slow: 480ms;
+    --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+    --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+    --ease-in-out-soft: cubic-bezier(.4, 0, .2, 1);
+
+    /* ── 字体 ── */
+    --font-serif: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", "Times New Roman", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    --font-code: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    --font-display: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+    --font-text: var(--font-sans);
+    --font-data: var(--font-sans);
+
+    /* ── 字号 · 行高 · 间距 ── */
+    --size-body: 1.0625rem;
+    --size-hero: clamp(2.75rem, 2rem + 2.6vw, 4.25rem);
+    --size-label: 0.8125rem;
+    --size-micro: 0.6875rem;
+    --size-section: clamp(1.375rem, 1.2rem + .8vw, 1.75rem);
+    --text-step-0: 1.0625rem;
+    --text-step-3: 1.5rem;
+    --type-body: var(--size-body)/1.95 var(--font-text);
+    --type-caption: var(--size-label)/1.7 var(--font-text);
+    --type-display: var(--size-hero)/1.14 var(--font-display);
+    --type-eyebrow: var(--size-micro)/1.4 var(--font-text);
+    --type-label: var(--size-label)/1.5 var(--font-text);
+    --type-lead: 1.1875rem/1.85 var(--font-text);
+    --type-number: 1.75rem/1.1 var(--font-data);
+    --type-subtitle: 1.3125rem/1.6 var(--font-display);
+    --type-title: var(--size-section)/1.4 var(--font-display);
+    --leading-tight: 1.25;
+    --space-1: 4px;
+    --space-5: 20px;
+    --space-9: 36px;
+    --gap-tight: 8px;
+    --gap-loose: 24px;
+    --gap-section: 64px;
+
+    /* ── 布局 ── */
+    --container-read: 40em;
+    --grid-columns: repeat(12, minmax(0, 1fr));
+    --indent-0: 0;
+    --radius-sm: 2px;
+    --radius-pill: 999px;
+    --z-nav: 100;
+    --z-drawer: 200;
+    --z-mask: 300;
+    --z-tooltip: 400;
+  }
+}
+
+:root[data-theme="dark"] {
+  /* ── 表面 ── */
+  --bg: #121516;
+  --paper: #1B2022;
+  --paper-warm: #23211C;
+  --surface-canvas: #171B1D;
+  --surface-raised: #242B2D;
+  --surface-sunken: #0E1112;
+  --surface-inset: #1E2426;
+  --dark: #0A0D0E;
+  --dark-text: #E6EBE9;
+
+  /* ── 文本 ── */
+  --ink: #E8EDEB;
+  --ink-soft: #C3CBC8;
+  --ink-faint: #98A2A0;
+  --ink-tint: #6E7A78;
+  --text-primary: #E8EDEB;
+  --text-secondary: #C3CBC8;
+  --text-tertiary: #98A2A0;
+  --text-hero: #F4F8F6;
+  --text-inverse: #E9EDEA;
+
+  /* ── 强调 ── */
+  --accent: #3FA79E;
+  --accent-primary: #3FA79E;
+  --accent-deep: #2A7A74;
+  --accent-muted: #6FBDB4;
+  --accent-soft: #1E4B47;
+  --accent-text: #08201E;
+  --accent-tint: #173330;
+  --accent-wash: #132624;
+  --accent-2: #D08A5E;
+  --accent-3: #7FA9D8;
+  --accent-4: #9DBB6B;
+
+  /* ── 语义 ── */
+  --ok: #63C79A;
+  --warn: #E0A73A;
+  --info: #7FA9DE;
+  --danger: #E88A7C;
+  --status-neg: #E09A8E;
+  --rebel: #C98CB4;
+
+  /* ── 数据序列 ── */
+  --chart-1: #5A72B8;
+  --chart-2: #9A7510;
+  --chart-3: #EE3377;
+  --chart-4: #44AA99;
+  --chart-5: #9CD6F0;
+  --chart-6: #F0E442;
+  --series-1: #5A72B8;
+  --series-2: #9A7510;
+  --series-3: #EE3377;
+  --series-4: #44AA99;
+  --series-5: #9CD6F0;
+  --series-6: #F0E442;
+  --series-7: #6B7776;
+  --series-8: #A8B2B4;
+
+  /* ── 线与边 ── */
+  --line: #313A3B;
+  --border-subtle: #2A3234;
+  --border-strong: #6C7775;
+  --border-hairline: #22292B;
+  --border-accent: #3FA79E;
+  --axis-line: #697374;
+  --grid-line: #232A2C;
+  --edge-visible: #3B4647;
+
+  /* ── 阴影 ── */
+  --shadow: 0 1px 2px rgba(0,0,0,.50), 0 8px 24px rgba(0,0,0,.45);
+  --shadow-lift: 0 2px 6px rgba(0,0,0,.55), 0 18px 44px rgba(0,0,0,.60);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(0,0,0,.50);
+  --elev-2: 0 2px 6px rgba(0,0,0,.55);
+  --elev-3: 0 6px 18px rgba(0,0,0,.60);
+  --elev-4: 0 18px 48px rgba(0,0,0,.70);
+
+  /* ── 动效 ── */
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 480ms;
+  --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-in-out-soft: cubic-bezier(.4, 0, .2, 1);
+
+  /* ── 字体 ── */
+  --font-serif: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-code: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-display: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --font-text: var(--font-sans);
+  --font-data: var(--font-sans);
+
+  /* ── 字号 · 行高 · 间距 ── */
+  --size-body: 1.0625rem;
+  --size-hero: clamp(2.75rem, 2rem + 2.6vw, 4.25rem);
+  --size-label: 0.8125rem;
+  --size-micro: 0.6875rem;
+  --size-section: clamp(1.375rem, 1.2rem + .8vw, 1.75rem);
+  --text-step-0: 1.0625rem;
+  --text-step-3: 1.5rem;
+  --type-body: var(--size-body)/1.95 var(--font-text);
+  --type-caption: var(--size-label)/1.7 var(--font-text);
+  --type-display: var(--size-hero)/1.14 var(--font-display);
+  --type-eyebrow: var(--size-micro)/1.4 var(--font-text);
+  --type-label: var(--size-label)/1.5 var(--font-text);
+  --type-lead: 1.1875rem/1.85 var(--font-text);
+  --type-number: 1.75rem/1.1 var(--font-data);
+  --type-subtitle: 1.3125rem/1.6 var(--font-display);
+  --type-title: var(--size-section)/1.4 var(--font-display);
+  --leading-tight: 1.25;
+  --space-1: 4px;
+  --space-5: 20px;
+  --space-9: 36px;
+  --gap-tight: 8px;
+  --gap-loose: 24px;
+  --gap-section: 64px;
+
+  /* ── 布局 ── */
+  --container-read: 40em;
+  --grid-columns: repeat(12, minmax(0, 1fr));
+  --indent-0: 0;
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+  --z-nav: 100;
+  --z-drawer: 200;
+  --z-mask: 300;
+  --z-tooltip: 400;
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+/* system.css —— 组件层：冻结类名全量样式 + 新增类
+ * 设计语言：校注体（Marginalia）——发丝线秩序、双栏注释关系、单一强调色。
+ * 动效契约：只动 transform/opacity；时长 ≤600ms；无循环动画；reduced-motion 全局停帧。
+ */
+
+/* ── 0 · 基础 ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: var(--type-body);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5 { margin: 0; font-weight: 600; line-height: var(--leading-tight); }
+p, ul, ol, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; }
+table { border-collapse: collapse; width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border-hairline); margin: 0; }
+
+a { color: var(--accent-3); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+a:hover { color: var(--accent-deep); }
+
+:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; border-radius: 1px; }
+::selection { background: var(--accent-soft); color: var(--ink); }
+
+/* ── 1 · 跳读链接 / 顶栏 ─────────────────────────────────────────────── */
+.skip-link {
+  position: fixed; left: .75rem; top: .75rem; z-index: var(--z-tooltip);
+  padding: .625rem .875rem;
+  background: var(--accent-primary); color: var(--accent-text);
+  font: var(--type-label); text-decoration: none;
+  border-radius: var(--radius-sm);
+  transform: translateY(-220%);
+  transition: transform var(--dur-fast) var(--ease-out-quart);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.topnav {
+  position: sticky; top: 0; z-index: var(--z-nav);
+  background: var(--paper);
+  border-bottom: 1px solid var(--border-hairline);
+}
+.topnav__inner {
+  max-width: 1180px; margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  min-height: 56px;
+  display: flex; align-items: center; gap: var(--gap-loose);
+}
+.topnav__tools { margin-inline-start: auto; display: flex; align-items: center; gap: .625rem; }
+
+.brand { display: inline-flex; align-items: baseline; gap: .5rem; color: var(--ink); text-decoration: none; }
+.wordmark { font-family: var(--font-display); font-weight: 400; font-size: 1.1875rem; letter-spacing: .08em; }
+.brand__tag { font: var(--type-eyebrow); letter-spacing: .16em; color: var(--text-tertiary); }
+
+.site-mainnav { display: flex; gap: .125rem; }
+.site-mainnav a {
+  display: inline-flex; align-items: center; min-height: 44px; padding-inline: .625rem;
+  color: var(--text-secondary); text-decoration: none; font-size: .875rem;
+  border-bottom: 2px solid transparent;
+  transition: color var(--dur-fast) linear, border-color var(--dur-fast) linear;
+}
+.site-mainnav a:hover { color: var(--ink); }
+.site-mainnav a[aria-current="page"] { color: var(--accent-primary); border-bottom-color: var(--accent-primary); }
+
+.search-box {
+  display: inline-flex; align-items: center; gap: .5rem;
+  min-height: 44px; padding-inline: .625rem;
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--dur-fast) linear;
+}
+.search-box:focus-within { border-color: var(--accent-primary); }
+.search-box .ico { color: var(--ink-faint); }
+.search-box input {
+  min-width: 0; width: 100%; border: 0; outline: none; background: transparent;
+  color: var(--ink); font: var(--type-label);
+}
+.search-box input::placeholder { color: var(--ink-tint); }
+.search-box--wide { width: 100%; max-width: 22rem; }
+
+/* ── 2 · 版心 / 区块 ─────────────────────────────────────────────────── */
+.page-wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2.5rem); }
+
+.section { padding-block: clamp(2.5rem, 5vw, 4.25rem); border-top: 1px solid var(--border-hairline); }
+.section:first-of-type { border-top: 0; }
+.section-head { display: grid; gap: .5rem; margin-block-end: 1.75rem; }
+.section-title { font-family: var(--font-display); font-weight: 400; font-size: var(--size-section); line-height: 1.4; color: var(--text-hero); }
+.section-sub { font-size: 1rem; line-height: 1.8; color: var(--text-tertiary); max-width: 46em; }
+.section-head__row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1.5rem; }
+.section-meta { font: var(--type-caption); color: var(--ink-faint); }
+
+.kicker {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font: var(--type-eyebrow); letter-spacing: .16em; color: var(--text-tertiary);
+}
+.kicker::before { content: ""; width: 18px; height: 1px; background: var(--accent-primary); }
+.kicker--plain::before { display: none; }
+
+/* ── 3 · 首屏 ─────────────────────────────────────────────────────────── */
+.hero { padding-block: clamp(2.25rem, 6vw, 4rem) clamp(1.75rem, 4vw, 2.75rem); }
+.hero__title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: var(--size-hero); line-height: 1.14; letter-spacing: .06em;
+  color: var(--text-hero);
+}
+.hero__lead { font: var(--type-lead); color: var(--text-secondary); max-width: 32em; margin-block-start: 1rem; }
+.hero__note { font: var(--type-caption); color: var(--ink-faint); max-width: 40em; margin-block-start: .75rem; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block-start: 1.75rem; }
+
+/* 签名元素 · 百回刻度尺（全书仅此一处） */
+.ruler { margin-block-start: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--border-strong); }
+.ruler__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .375rem 1rem; padding-block: .75rem .5rem; }
+.ruler__label { font: var(--type-eyebrow); letter-spacing: .16em; color: var(--text-tertiary); }
+.ruler__readout { font: var(--type-caption); color: var(--text-secondary); }
+.ruler__readout b { font-weight: 600; color: var(--ink); }
+.ruler__scale {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  height: 34px; padding-block-end: 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+.ruler__tick {
+  width: 2px; height: 13px; padding: 0; border: 0; flex: none;
+  background: var(--border-strong); cursor: pointer;
+  transform-origin: 50% 100%;
+  transition: transform var(--dur-fast) var(--ease-out-quart), background-color var(--dur-fast) linear;
+}
+.ruler__tick[data-major="1"] { height: 25px; background: var(--ink-faint); }
+.ruler__tick[data-arc="1"] { width: 3px; height: 25px; background: var(--accent-primary); }
+.ruler__tick:hover, .ruler__tick:focus-visible { transform: scaleY(1.45); background: var(--accent-primary); }
+.ruler__tick[aria-pressed="true"] { background: var(--accent-primary); transform: scaleY(1.3); }
+.ruler__tick--group { margin-inline-start: 5px; }
+.ruler__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .375rem 1rem; padding-block: .5rem 0; border-top: 1px solid var(--border-hairline); font: var(--type-eyebrow); color: var(--ink-tint); }
+.ruler__arc { color: var(--accent-primary); }
+
+/* ── 4 · KPI 条（被线分隔的数字带，不是卡片） ─────────────────────────── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--border-strong); border-bottom: 1px solid var(--border-hairline); }
+.kpi-card { padding: 1.125rem 1.25rem; border-left: 1px solid var(--border-hairline); }
+.kpi-card:first-child { border-left: 0; }
+.kpi-card__label { font: var(--type-eyebrow); letter-spacing: .14em; color: var(--text-tertiary); }
+.kpi-card__value { font: var(--type-number); color: var(--text-hero); margin-block-start: .3125rem; }
+.kpi-card__unit { font-size: .8125rem; color: var(--text-tertiary); margin-inline-start: .25rem; }
+.kpi-card__note { font: var(--type-caption); color: var(--ink-faint); margin-block-start: .25rem; }
+
+/* ── 5 · 按钮 / 徽标 / 卡片 ───────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 44px; padding-inline: 1rem;
+  background: var(--paper); color: var(--ink);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+  font: var(--type-label); text-decoration: none; cursor: pointer;
+  transition: background-color var(--dur-fast) linear, border-color var(--dur-fast) linear, transform var(--dur-fast) var(--ease-out-quart);
+}
+.btn:hover { background: var(--surface-canvas); border-color: var(--ink-faint); color: var(--ink); }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--accent-primary); border-color: var(--accent-primary); color: var(--accent-text); }
+.btn-primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--accent-text); }
+.btn--ghost { background: transparent; border-color: var(--border-subtle); color: var(--text-secondary); }
+.btn--ghost:hover { background: var(--surface-inset); color: var(--ink); }
+
+.badge {
+  display: inline-flex; align-items: center; gap: .375rem;
+  min-height: 20px; padding-inline: .5rem;
+  background: var(--surface-inset); color: var(--text-secondary);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
+  font: var(--type-eyebrow); letter-spacing: .08em;
+}
+.badge--accent { background: var(--accent-wash); color: var(--accent-primary); border-color: var(--accent-muted); }
+.badge--plain { background: transparent; }
+
+.data-status-badge {
+  display: inline-flex; align-items: center; gap: .4375rem;
+  min-height: 22px; padding-inline: .5rem;
+  background: var(--surface-inset); color: var(--text-secondary);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
+  font: var(--type-eyebrow); letter-spacing: .06em;
+}
+.data-status-badge::before { content: ""; width: 7px; height: 7px; flex: none; background: var(--ink-faint); border-radius: 1px; }
+.data-status-badge[data-status="live"]::before { background: var(--ok); border-radius: 50%; }
+.data-status-badge[data-status="demo"]::before { background: var(--warn); transform: rotate(45deg); }
+.data-status-badge[data-status="stale"]::before { background: var(--danger); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: 1.125rem 1.25rem;
+}
+.card__title { font: var(--type-subtitle); color: var(--text-hero); margin-block-end: .375rem; }
+.card__body { font-size: .9375rem; line-height: 1.8; color: var(--text-secondary); }
+
+/* ── 6 · 筛选 / 检索 ─────────────────────────────────────────────────── */
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.25rem; margin-block-end: 1rem; }
+.filter-tabs { display: flex; flex-wrap: wrap; gap: .125rem; border-bottom: 1px solid var(--border-hairline); }
+.filter-tab {
+  display: inline-flex; align-items: center; gap: .375rem;
+  min-height: 44px; padding-inline: .75rem;
+  background: transparent; border: 0; border-bottom: 2px solid transparent;
+  color: var(--text-secondary); font: var(--type-label); cursor: pointer;
+  transition: color var(--dur-fast) linear, border-color var(--dur-fast) linear;
+}
+.filter-tab:hover { color: var(--ink); }
+.filter-tab[aria-selected="true"] { color: var(--accent-primary); border-bottom-color: var(--accent-primary); }
+.filter-tab__count { font-size: .6875rem; color: var(--ink-tint); }
+.filter-tab[aria-selected="true"] .filter-tab__count { color: var(--accent-muted); }
+
+/* ── 7 · 图表 ─────────────────────────────────────────────────────────── */
+.chart-wrap {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+}
+.chart-block { display: grid; gap: .875rem; }
+.chart-container { position: relative; overflow-x: auto; }
+.chart-container svg { width: 100%; height: auto; min-width: 620px; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: .375rem 1.25rem; }
+.legend-item { display: inline-flex; align-items: center; gap: .5rem; font: var(--type-caption); color: var(--text-secondary); }
+.legend-item__swatch { width: 11px; height: 11px; flex: none; border-radius: 2px; }
+.legend-item__value { color: var(--ink-faint); }
+.chart-loading { display: grid; place-items: center; min-height: 180px; border: 1px dashed var(--border-subtle); border-radius: var(--radius-sm); color: var(--text-tertiary); font: var(--type-caption); }
+.chart-tooltip {
+  position: absolute; z-index: var(--z-tooltip); pointer-events: none; opacity: 0;
+  transform: translate(-50%, -100%);
+  min-width: 132px; max-width: 248px; padding: .5rem .625rem;
+  background: var(--dark); color: var(--dark-text);
+  border-radius: var(--radius-sm); box-shadow: var(--shadow-lift);
+  font: var(--type-caption); line-height: 1.55;
+  transition: opacity 150ms linear;
+}
+.chart-tooltip.visible { opacity: 1; }
+.chart-tooltip__name { display: block; color: var(--dark-text); font-weight: 600; }
+.chart-tooltip__row { display: flex; justify-content: space-between; gap: 1rem; }
+.chart-tooltip__row span:last-child { font-variant-numeric: tabular-nums; }
+
+/* ── 8 · 表格 ─────────────────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; background: var(--paper); border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); }
+.table-wrap--sticky { max-height: 26rem; overflow-y: auto; }
+.table-wrap th, .table-wrap td { padding: .625rem .875rem; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--border-hairline); }
+.table-wrap thead th {
+  position: sticky; top: 0; z-index: 1; background: var(--paper);
+  font: var(--type-eyebrow); letter-spacing: .12em; color: var(--text-tertiary);
+  border-bottom: 1px solid var(--border-strong);
+}
+.table-wrap td { font-size: .9375rem; color: var(--text-secondary); }
+.table-wrap .num { text-align: right; font-variant-numeric: tabular-nums; }
+.table-wrap tbody tr:last-child td { border-bottom: 0; }
+.table-anim tbody tr { transition: background-color var(--dur-fast) linear; }
+.table-anim tbody tr:hover { background: var(--surface-canvas); }
+.table-wrap__caption { caption-side: bottom; padding: .625rem .875rem; font: var(--type-caption); color: var(--ink-faint); text-align: left; }
+
+/* ── 9 · 空态 / 引文 / 暗带 ──────────────────────────────────────────── */
+.empty-state {
+  display: grid; justify-items: center; gap: .5rem; text-align: center;
+  padding: clamp(2rem, 6vw, 3.25rem) 1rem;
+  background: var(--surface-canvas);
+  border: 1px dashed var(--border-subtle); border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+}
+.empty-state .ico { color: var(--ink-tint); }
+.empty-state__title { font: var(--type-subtitle); color: var(--ink); }
+.empty-state__hint { font: var(--type-caption); max-width: 28em; }
+
+.cite-block {
+  border-left: 1px solid var(--border-strong);
+  padding-left: 1.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem; line-height: 1.95; color: var(--ink-soft);
+}
+.cite-block__src { display: block; margin-block-start: .5rem; font-family: var(--font-text); font-size: var(--size-label); color: var(--text-tertiary); letter-spacing: .04em; }
+.quote-set { display: grid; gap: 1.25rem; margin-block-start: 1rem; }
+.cite-block--accent { border-left-color: var(--accent-primary); }
+
+.dark-band {
+  background: var(--dark); color: var(--dark-text);
+  border-radius: var(--radius-sm);
+  padding: clamp(1.75rem, 4vw, 3rem);
+}
+.dark-band .section-title, .dark-band h2, .dark-band h3 { color: var(--dark-text); }
+.dark-band .section-sub { color: var(--dark-text); opacity: .82; }
+.dark-band .kicker { color: var(--dark-text); opacity: .7; }
+.dark-band .kicker::before { background: var(--dark-text); }
+.dark-band a { color: var(--dark-text); }
+.dark-band .btn { background: transparent; color: var(--dark-text); border-color: currentColor; }
+.dark-band .btn-primary { background: var(--dark-text); color: var(--dark); border-color: var(--dark-text); }
+
+/* ── 10 · 长文阅读形态（正文栏 + 旁注栏） ─────────────────────────────── */
+.prose { max-width: var(--container-read); }
+.prose-row { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 2.5rem; }
+@media (min-width: 1024px) {
+  .prose-row { grid-template-columns: minmax(0, var(--container-read)) 15rem; align-items: start; }
+  .prose-row .sidenote { margin-block-start: 1.05rem; }
+}
+.prose p { text-indent: 2em; text-align: justify; }
+.prose p.lead, .prose p.no-indent { text-indent: 0; }
+.prose p.lead { font: var(--type-lead); color: var(--text-secondary); }
+.sidenote {
+  margin-block: .875rem 1.25rem;
+  padding-block-start: .5rem;
+  border-top: 1px solid var(--border-hairline);
+  font: var(--type-caption); color: var(--ink-faint);
+}
+.sidenote b { color: var(--text-secondary); font-weight: 600; }
+.sidenote__title { display: block; font: var(--type-eyebrow); letter-spacing: .12em; color: var(--text-tertiary); margin-block-end: .25rem; }
+
+.reading-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1rem; margin-block-end: 1.25rem; }
+.reading-head__no { font-family: var(--font-display); font-size: 1.25rem; color: var(--accent-primary); }
+.reading-head__title { font-family: var(--font-display); font-size: var(--size-section); line-height: 1.4; color: var(--text-hero); }
+
+/* ── 11 · 其它自建类 ─────────────────────────────────────────────────── */
+.doc-list { display: grid; gap: 0; border-top: 1px solid var(--border-hairline); }
+.doc-row { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content; gap: .25rem 1.25rem; align-items: baseline; padding-block: .875rem; border-bottom: 1px solid var(--border-hairline); }
+.doc-row__name { font-size: 1rem; color: var(--text-hero); white-space: nowrap; }
+.doc-row__meta { font: var(--type-caption); color: var(--ink-faint); text-align: right; }
+.doc-row__count { font-variant-numeric: tabular-nums; color: var(--accent-primary); font-size: 1rem; text-align: right; min-width: 3ch; }
+
+.figure { display: grid; gap: .625rem; }
+.figure__cap { font: var(--type-caption); color: var(--ink-faint); }
+.meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; margin-block-start: 1.25rem; font: var(--type-caption); color: var(--ink-faint); }
+.meta-row__item { display: inline-flex; align-items: center; gap: .4375rem; }
+.meta-row__key { color: var(--text-tertiary); }
+
+.insight { border-top: 1px solid var(--border-strong); padding-block-start: 1rem; }
+.insight__label { font: var(--type-eyebrow); letter-spacing: .16em; color: var(--accent-primary); }
+
+.viz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.viz-card { display: grid; gap: .5rem; padding: 1rem 1.125rem; background: var(--paper); border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); }
+.viz-card__title { order: -1; font: var(--type-subtitle); color: var(--text-hero); }
+.viz-card__meta { font: var(--type-caption); color: var(--ink-faint); }
+.viz-card__thumb { background: var(--surface-canvas); border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); padding: .5rem; }
+.viz-card .figure__cap { margin-block-start: -.125rem; }
+
+.tag { display: inline-flex; align-items: center; min-height: 20px; padding-inline: .4375rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); font: var(--type-eyebrow); color: var(--text-tertiary); }
+
+/* ── 12 · 图标 ────────────────────────────────────────────────────────── */
+.ico {
+  width: 24px; height: 24px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.ico-t {
+  width: 16px; height: 16px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.9;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ── 13 · 页脚 ────────────────────────────────────────────────────────── */
+.site-footer { margin-block-start: var(--gap-section); background: var(--surface-canvas); border-top: 1px solid var(--border-strong); }
+.site-footer__inner { max-width: 1180px; margin-inline: auto; padding: 2.5rem clamp(1rem, 4vw, 2.5rem) 2rem; }
+.site-footer__grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.site-footer__title { font: var(--type-eyebrow); letter-spacing: .14em; color: var(--text-tertiary); margin-block-end: .625rem; }
+.site-footer li { font-size: .875rem; color: var(--text-secondary); margin-block-end: .375rem; }
+.site-footer a { color: var(--text-secondary); text-decoration: none; }
+.site-footer a:hover { color: var(--accent-primary); }
+.site-footer__legal { margin-block-start: 2rem; padding-block-start: 1.25rem; border-top: 1px solid var(--border-hairline); font-size: .8125rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: .375rem 1.5rem; }
+
+/* ── 14 · 状态工具类 ──────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+.visible { opacity: 1; }
+.js-reveal { opacity: 1; transform: none; }
+.js .js-reveal {
+  opacity: 0; transform: translateY(10px);
+  transition: opacity var(--dur-base) var(--ease-out-quart), transform var(--dur-base) var(--ease-out-quart);
+}
+.js .js-reveal.visible { opacity: 1; transform: none; }
+
+/* ── 15 · 响应式 ─────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .site-mainnav { display: none; }
+  .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpi-card:nth-child(3) { border-left: 0; }
+  .kpi-card:nth-child(n+3) { border-top: 1px solid var(--border-hairline); }
+}
+
+@media (max-width: 767px) {
+  .topnav__inner { flex-wrap: wrap; padding-block: .5rem; row-gap: .5rem; }
+  .topnav__tools { width: 100%; margin-inline-start: 0; }
+  .search-box--wide { max-width: none; }
+  .prose p { text-align: left; }
+  .doc-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .doc-row__name { grid-column: 1; grid-row: 1; }
+  .doc-row__count { grid-column: 2; grid-row: 1; }
+  .doc-row__meta { grid-column: 1 / -1; grid-row: 2; text-align: left; }
+  .section-head { margin-block-end: 1.25rem; }
+}
+
+@media (max-width: 479px) {
+  .kpi-grid { grid-template-columns: minmax(0, 1fr); }
+  .kpi-card { border-left: 0; border-top: 1px solid var(--border-hairline); }
+  .kpi-card:first-child { border-top: 0; }
+  .hero__actions .btn { width: 100%; }
+  .ruler__tick[data-major="1"], .ruler__tick[data-arc="1"] { height: 16px; }
+  .ruler__tick { height: 9px; }
+}
+
+/* ── 15b · SVG 图表图元 ───────────────────────────────────────────────── */
+.fill-1 { fill: var(--chart-1); }
+.fill-2 { fill: var(--chart-2); }
+.fill-3 { fill: var(--chart-3); }
+.fill-4 { fill: var(--chart-4); }
+.bar {
+  transform-box: fill-box; transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 360ms var(--ease-out-quart);
+}
+svg.is-in .bar { transform: scaleX(1); }
+.chart-container .bar:hover { stroke: var(--text-primary); stroke-width: 1; }
+
+/* ── 16 · 动效守卫（reduced-motion 双守卫之 CSS 侧） ─────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js .js-reveal { opacity: 1; transform: none; }
+}
+/*@@CSS:END@@*/</style>
+</head>
+<body id="top">
+
+<svg class="hidden" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><line x1="15.8" y1="15.8" x2="21" y2="21"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2.6" x2="12" y2="4.8"/><line x1="12" y1="19.2" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="4.8" y2="12"/><line x1="19.2" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="6.8" y2="6.8"/><line x1="17.2" y1="17.2" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="6.8" y2="17.2"/><line x1="17.2" y1="6.8" x2="18.6" y2="5.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.4 14.7A8.8 8.8 0 0 1 9.3 3.6a8.8 8.8 0 1 0 11.1 11.1Z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><line x1="3.5" y1="20.5" x2="20.5" y2="20.5"/><rect x="5" y="12" width="3.6" height="8.5"/><rect x="10.2" y="8" width="3.6" height="12.5"/><rect x="15.4" y="5" width="3.6" height="15.5"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3.8 5h16.4l-6.4 7.6v6.1L10.2 16.6v-4Z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><line x1="12" y1="11" x2="12" y2="16.6"/><line x1="12" y1="7.5" x2="12" y2="7.6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><polyline points="12,6.8 12,12 15.8,14"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.4 3.6h7.3l4.3 4.3v12.5H6.4Z"/><polyline points="13.5,3.7 13.5,8 17.8,8"/><line x1="9" y1="12.4" x2="15" y2="12.4"/><line x1="9" y1="16" x2="13.4" y2="16"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13,5.5 19.5,12 13,18.5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.6C10.2 5.1 7.6 4.4 4.4 4.4v13.1c3.2 0 5.8.7 7.6 2.2 1.8-1.5 4.4-2.2 7.6-2.2V4.4c-3.2 0-5.8.7-7.6 2.2Z"/><line x1="12" y1="6.6" x2="12" y2="19.7"/></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24"><circle cx="6" cy="7" r="2.4"/><circle cx="18" cy="6.5" r="2.4"/><circle cx="12" cy="17.6" r="2.4"/><line x1="8" y1="8.4" x2="10.6" y2="15.5"/><line x1="15.9" y1="8.3" x2="13.4" y2="15.5"/><line x1="8.4" y1="6.8" x2="15.6" y2="6.4"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="topnav">
+  <div class="topnav__inner">
+    <a class="brand" href="#top">
+      <span class="wordmark">详解西游记</span>
+      <span class="brand__tag">数字人文</span>
+    </a>
+    <nav class="site-mainnav" aria-label="主导航">
+      <a href="#read">逐回解读</a>
+      <a href="#main" aria-current="page">数据可视化</a>
+      <a href="#table">明细表</a>
+      <a href="#insight">洞察</a>
+      <a href="#about">数据口径</a>
+    </nav>
+    <div class="topnav__tools">
+      <label class="search-box">
+        <svg class="ico" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="search" id="nav-search" placeholder="检索站内文档" aria-label="检索站内文档">
+      </label>
+      <button class="btn" type="button" id="theme-toggle" aria-label="切换明暗主题" aria-pressed="false">
+        <svg class="ico-t" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="page-wrap" id="main">
+
+  <!-- ── 首屏 ─────────────────────────────────────────────────────── -->
+  <section class="hero" aria-labelledby="hero-title">
+    <p class="kicker">可视化样例 · 演示数据</p>
+    <h1 class="hero__title" id="hero-title">百回人物出场频次</h1>
+    <p class="hero__lead">以「正面登场 + 对白」为口径，统计《西游记》全书 100 回中主要人物的出场次数，并按身份组着色。</p>
+    <div class="meta-row">
+      <span class="meta-row__item"><span class="meta-row__key">数据口径</span>正面登场与对白各计一次，同回重复登场合并</span>
+      <span class="meta-row__item"><span class="meta-row__key">更新日期</span>2026-11-17</span>
+      <span class="meta-row__item"><span class="data-status-badge" data-status="demo">演示数据</span></span>
+      <span class="meta-row__item"><span class="badge">示意用途</span></span>
+    </div>
+  </section>
+
+  <!-- ── KPI ─────────────────────────────────────────────────────── -->
+  <section class="section" aria-labelledby="kpi-title">
+    <h2 class="hidden" id="kpi-title">关键指标</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <p class="kpi-card__label">总出场</p>
+        <p class="kpi-card__value"><span data-roll="2692">2,692</span><span class="kpi-card__unit">次</span></p>
+        <p class="kpi-card__note">12 位人物 · 100 回累计</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-card__label">覆盖</p>
+        <p class="kpi-card__value"><span data-roll="100">100</span><span class="kpi-card__unit">回</span></p>
+        <p class="kpi-card__note">全书 100 回均有出场记录</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-card__label">第一主角</p>
+        <p class="kpi-card__value" style="font-family:var(--font-display)">孙悟空</p>
+        <p class="kpi-card__note">980 次 · 占 36.4%</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-card__label">团队成员</p>
+        <p class="kpi-card__value"><span data-roll="4">4</span><span class="kpi-card__unit">人</span></p>
+        <p class="kpi-card__note">师徒四人 · 合计 2,430 次</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── §01 主图 ────────────────────────────────────────────────── -->
+  <section class="section js-reveal" id="main-chart" aria-labelledby="s1-title">
+    <div class="section-head">
+      <div class="section-head__row">
+        <p class="kicker">§ 01 · 出场分布</p>
+        <p class="section-meta">单位：次</p>
+      </div>
+      <h2 class="section-title" id="s1-title">十二位主要人物的出场次数</h2>
+      <p class="section-sub">条形按出场次数降序；颜色只承担「身份组」这一层信息，名称与数值同时直标，不靠颜色单独读图。</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="filter-tabs" role="tablist" aria-label="身份组筛选" id="char-filters">
+        <button class="filter-tab" type="button" role="tab" aria-selected="true" data-group="all">全部 <span class="filter-tab__count">12</span></button>
+        <button class="filter-tab" type="button" role="tab" aria-selected="false" data-group="师徒四人">师徒四人 <span class="filter-tab__count">4</span></button>
+        <button class="filter-tab" type="button" role="tab" aria-selected="false" data-group="神佛">神佛 <span class="filter-tab__count">4</span></button>
+        <button class="filter-tab" type="button" role="tab" aria-selected="false" data-group="妖魔">妖魔 <span class="filter-tab__count">4</span></button>
+      </div>
+      <label class="search-box">
+        <svg class="ico" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="search" id="char-search" placeholder="检索人物名" aria-label="检索人物">
+      </label>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="chart-block">
+        <div class="chart-container" id="bar-container">
+          <div class="chart-loading" id="bar-loading">图形装配中……</div>
+          <svg id="bar-chart" role="img" aria-label="人物出场次数横向条形图" viewBox="0 0 760 408"></svg>
+          <div class="chart-tooltip" id="bar-tip" role="status" aria-live="polite"></div>
+        </div>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="legend-item__swatch" style="background:var(--chart-1)"></span>师徒四人</span>
+          <span class="legend-item"><span class="legend-item__swatch" style="background:var(--chart-2)"></span>神佛</span>
+          <span class="legend-item"><span class="legend-item__swatch" style="background:var(--chart-3)"></span>妖魔</span>
+          <span class="legend-item"><span class="legend-item__value">共 2,692 次</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── §02 八十一难 ────────────────────────────────────────────── -->
+  <section class="section js-reveal" id="trials" aria-labelledby="s2-title">
+    <div class="section-head">
+      <div class="section-head__row">
+        <p class="kicker">§ 02 · 八十一难</p>
+        <p class="section-meta">合计 81 难</p>
+      </div>
+      <h2 class="section-title" id="s2-title">八十一难按十回段分布</h2>
+      <p class="section-sub">横轴为十回段：第一至第十回、第十一至第二十回……直至第九十一至第一百回；每段柱高为该段的难数，十段相加恒为八十一难。</p>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="chart-block">
+        <div class="chart-container" id="trial-container">
+          <svg id="trial-chart" role="img" aria-label="八十一难按十回段分布柱状图" viewBox="0 0 760 240"></svg>
+          <div class="chart-tooltip" id="trial-tip" role="status" aria-live="polite"></div>
+        </div>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="legend-item__swatch" style="background:var(--chart-4)"></span>该段难数</span>
+          <span class="legend-item"><span class="legend-item__value">5 · 9 · 11 · 10 · 9 · 8 · 10 · 7 · 6 · 6 ＝ 81</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── §03 洞察 ────────────────────────────────────────────────── -->
+  <section class="section js-reveal" id="insight" aria-labelledby="s3-title">
+    <div class="section-head">
+      <p class="kicker">§ 03 · 洞察</p>
+      <h2 class="section-title" id="s3-title">叙事的主角始终是人</h2>
+    </div>
+    <div class="insight">
+      <p class="insight__label">结论</p>
+      <blockquote class="cite-block cite-block--accent" style="margin-block-start:.75rem">
+        师徒四人合计出场 2,430 次，占十二位统计对象的 90.3%；其中孙悟空一人 980 次，是第二名猪八戒的 1.58 倍。神佛与妖魔合计仅 262 次，却集中在少数关键回目——如来佛祖与玉皇大帝的登场几乎都落在转折处，密度远高于全书平均。小说写了九十回的神魔热闹，真正被反复讲述的仍是取经这四个人如何一步步走完西行。
+        <span class="cite-block__src">口径同本页 · 占比按 2,692 次总计计算</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ── §04 明细表 ──────────────────────────────────────────────── -->
+  <section class="section js-reveal" id="table" aria-labelledby="s4-title">
+    <div class="section-head">
+      <div class="section-head__row">
+        <p class="kicker">§ 04 · 明细</p>
+        <p class="section-meta">Top 6 · 随筛选联动</p>
+      </div>
+      <h2 class="section-title" id="s4-title">出场次数前六位</h2>
+      <p class="section-sub">表格与上方图表共用同一份筛选状态；把身份组切到「妖魔」或输入不存在的名字，即可看到空态。</p>
+    </div>
+
+    <div class="table-wrap table-wrap--sticky">
+      <table class="table-anim" id="char-table">
+        <caption class="table-wrap__caption">占比 = 该人物出场次数 ÷ 2,692 次总计</caption>
+        <thead>
+          <tr>
+            <th scope="col">人物</th>
+            <th scope="col">身份组</th>
+            <th scope="col" class="num">出场次数</th>
+            <th scope="col" class="num">占比</th>
+            <th scope="col">说明</th>
+          </tr>
+        </thead>
+        <tbody id="char-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="empty-state hidden" id="char-empty">
+      <svg class="ico" aria-hidden="true"><use href="#i-search"/></svg>
+      <p class="empty-state__title">无匹配条目</p>
+      <p class="empty-state__hint">当前身份组与关键词没有交集。可把身份组切回「全部」，或换一个关键词。</p>
+      <button class="btn" type="button" id="char-reset">清除筛选</button>
+    </div>
+  </section>
+
+  <!-- ── §05 口径 ────────────────────────────────────────────────── -->
+  <section class="section js-reveal" id="about" aria-labelledby="s5-title">
+    <div class="dark-band">
+      <div class="section-head">
+        <p class="kicker">§ 05 · 口径</p>
+        <h2 class="section-title" id="s5-title">数字的来路写在页面上</h2>
+        <p class="section-sub">每个可视化页都随附三件事：数据口径（怎么数的）、更新日期（数到哪天）、状态徽章（演示 / 现行 / 待更新）。本页为演示样例，故以「演示数据」标注。</p>
+      </div>
+      <div class="hero__actions" style="margin-block-start:0">
+        <a class="btn btn-primary" href="#main-chart">回到图表</a>
+        <a class="btn" href="#trials">查看八十一难分布</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div>
+        <p class="site-footer__title">关于</p>
+        <ul>
+          <li><a href="#main-chart">本页图表</a></li>
+          <li><a href="#trials">八十一难分布</a></li>
+          <li><a href="#table">出场明细</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="site-footer__title">口径</p>
+        <ul>
+          <li>正面登场 + 对白各计一次</li>
+          <li>同回重复登场合并</li>
+          <li>统计截至 2026-11-17</li>
+        </ul>
+      </div>
+      <div>
+        <p class="site-footer__title">同族页面</p>
+        <ul>
+          <li>取经路线地图</li>
+          <li>人物关系网络</li>
+          <li>八十一难热力图</li>
+        </ul>
+      </div>
+      <div>
+        <p class="site-footer__title">许可</p>
+        <ul>
+          <li>代码 MIT</li>
+          <li>文本 CC BY-NC 4.0</li>
+          <li>纯静态，可离线</li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <span>代码 MIT · 文本 CC BY-NC 4.0 · 纯静态可离线</span>
+      <span>共 875 页 HTML · 零外部依赖 · 双击即开</span>
+      <span>演示样例页</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  document.documentElement.classList.add("js");
+  var RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── 主题切换 ─────────────────────────────────────────────────── */
+  var root = document.documentElement;
+  var toggle = document.getElementById("theme-toggle");
+  function systemDark() { return window.matchMedia("(prefers-color-scheme: dark)").matches; }
+  function paintToggle() {
+    var dark = root.getAttribute("data-theme") ? root.getAttribute("data-theme") === "dark" : systemDark();
+    toggle.setAttribute("aria-pressed", dark ? "true" : "false");
+    toggle.querySelector("use").setAttribute("href", dark ? "#i-sun" : "#i-moon");
+  }
+  toggle.addEventListener("click", function () {
+    var dark = root.getAttribute("data-theme") ? root.getAttribute("data-theme") === "dark" : systemDark();
+    root.setAttribute("data-theme", dark ? "light" : "dark");
+    paintToggle();
+  });
+  paintToggle();
+
+  /* ── 数据 ─────────────────────────────────────────────────────── */
+  var TOTAL = 2692;
+  var GROUP_COLOR = { "师徒四人": "var(--chart-1)", "神佛": "var(--chart-2)", "妖魔": "var(--chart-3)" };
+  var DATA = [
+    { name: "孙悟空", count: 980, group: "师徒四人", note: "全书贯穿；封斗战胜佛" },
+    { name: "猪八戒", count: 620, group: "师徒四人", note: "天蓬元帅下界；封净坛使者" },
+    { name: "唐僧", count: 590, group: "师徒四人", note: "金蝉子转世；取经人" },
+    { name: "沙僧", count: 240, group: "师徒四人", note: "卷帘大将；封金身罗汉" },
+    { name: "观音菩萨", count: 95, group: "神佛", note: "取经引路人；居南海" },
+    { name: "如来佛祖", count: 60, group: "神佛", note: "灵山之主；掌教" },
+    { name: "玉皇大帝", count: 45, group: "神佛", note: "天庭之主；敕旨" },
+    { name: "牛魔王", count: 18, group: "妖魔", note: "平天大圣；七绝山" },
+    { name: "红孩儿", count: 14, group: "妖魔", note: "圣婴大王；号三昧真火" },
+    { name: "白骨精", count: 12, group: "妖魔", note: "白骨夫人；三变" },
+    { name: "铁扇公主", count: 10, group: "妖魔", note: "罗刹女；翠云山芭蕉扇" },
+    { name: "二郎神", count: 8, group: "神佛", note: "灌口二郎；与悟空相斗" }
+  ];
+  var TRIALS = [5, 9, 11, 10, 9, 8, 10, 7, 6, 6];
+
+  var group = "all";
+  var query = "";
+
+  /* ── SVG 工具 ─────────────────────────────────────────────────── */
+  var NS = "http://www.w3.org/2000/svg";
+  function s(tag, attrs, text) {
+    var el = document.createElementNS(NS, tag);
+    for (var k in attrs) { if (attrs.hasOwnProperty(k)) { el.setAttribute(k, attrs[k]); } }
+    if (text !== undefined) { el.textContent = text; }
+    return el;
+  }
+  function pct(n) { return (n / TOTAL * 100).toFixed(1) + "%"; }
+
+  /* ── 主图：横向条形 ───────────────────────────────────────────── */
+  var barSvg = document.getElementById("bar-chart");
+  var barLoading = document.getElementById("bar-loading");
+  var M = { top: 16, left: 92, right: 74, bottom: 34 };
+  var ROW = 30, BAR = 14, MAXV = 1000;
+
+  function drawBars() {
+    var rows = DATA.filter(function (d) {
+      return (group === "all" || d.group === group) &&
+        (!query || d.name.indexOf(query) >= 0);
+    });
+    barSvg.textContent = "";
+    barSvg.classList.remove("is-in");
+    var plotW = 760 - M.left - M.right;
+    var h = M.top + rows.length * ROW + M.bottom;
+    barSvg.setAttribute("viewBox", "0 0 760 " + h);
+
+    var g = s("g", {});
+    [0, 200, 400, 600, 800, 1000].forEach(function (v) {
+      var x = M.left + v / MAXV * plotW;
+      g.appendChild(s("line", { x1: x, y1: M.top - 6, x2: x, y2: M.top + rows.length * ROW, stroke: "var(--grid-line)", "stroke-width": 1 }));
+      g.appendChild(s("text", { x: x, y: M.top + rows.length * ROW + 18, "text-anchor": "middle", "font-size": 11, fill: "var(--text-tertiary)", "font-variant-numeric": "tabular-nums" }, String(v)));
+    });
+    g.appendChild(s("line", { x1: M.left, y1: M.top - 6, x2: M.left, y2: M.top + rows.length * ROW, stroke: "var(--axis-line)", "stroke-width": 1 }));
+
+    rows.forEach(function (d, i) {
+      var y = M.top + i * ROW + (ROW - BAR) / 2;
+      var w = Math.max(2, d.count / MAXV * plotW);
+      var cls = d.group === "师徒四人" ? "fill-1" : (d.group === "神佛" ? "fill-2" : "fill-3");
+      var tip = "<span class='chart-tooltip__name'>" + d.name + "</span>" +
+        "<span class='chart-tooltip__row'><span>出场次数</span><span>" + d.count + " 次</span></span>" +
+        "<span class='chart-tooltip__row'><span>占比</span><span>" + pct(d.count) + "</span></span>" +
+        "<span class='chart-tooltip__row'><span>身份组</span><span>" + d.group + "</span></span>";
+      var bar = s("rect", {
+        x: M.left, y: y, width: w, height: BAR, rx: 1,
+        "class": "bar " + cls, "data-tip": tip, "data-name": d.name
+      });
+      bar.style.transitionDelay = (i * 20) + "ms";
+      g.appendChild(bar);
+      g.appendChild(s("text", { x: M.left - 10, y: y + BAR / 2 + 4, "text-anchor": "end", "font-size": 13, fill: "var(--text-secondary)" }, d.name));
+      g.appendChild(s("text", { x: M.left + w + 8, y: y + BAR / 2 + 4, "font-size": 12, fill: "var(--text-primary)", "font-variant-numeric": "tabular-nums" }, String(d.count)));
+    });
+    barSvg.appendChild(g);
+    if (barLoading) { barLoading.classList.add("hidden"); }
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { barSvg.classList.add("is-in"); });
+    });
+  }
+
+  /* ── 副图：八十一难按十回段 ───────────────────────────────────── */
+  var trialSvg = document.getElementById("trial-chart");
+  function drawTrials() {
+    trialSvg.textContent = "";
+    trialSvg.classList.remove("is-in");
+    var T = { top: 26, left: 30, right: 20, bottom: 44 };
+    var plotW = 760 - T.left - T.right;
+    var plotH = 132;
+    var base = T.top + plotH;
+    var maxV = 11;
+    var slot = plotW / TRIALS.length;
+    var bw = slot * 0.56;
+    var g = s("g", {});
+    [0, 5, 11].forEach(function (v) {
+      var y = base - v / maxV * plotH;
+      g.appendChild(s("line", { x1: T.left, y1: y, x2: T.left + plotW, y2: y, stroke: "var(--grid-line)", "stroke-width": 1 }));
+      g.appendChild(s("text", { x: T.left - 8, y: y + 4, "text-anchor": "end", "font-size": 11, fill: "var(--text-tertiary)", "font-variant-numeric": "tabular-nums" }, String(v)));
+    });
+    g.appendChild(s("line", { x1: T.left, y1: base, x2: T.left + plotW, y2: base, stroke: "var(--axis-line)", "stroke-width": 1 }));
+    TRIALS.forEach(function (v, i) {
+      var x = T.left + i * slot + (slot - bw) / 2;
+      var h = v / maxV * plotH;
+      var tip = "<span class='chart-tooltip__name'>第 " + (i * 10 + 1) + "–" + (i * 10 + 10) + " 回</span>" +
+        "<span class='chart-tooltip__row'><span>难数</span><span>" + v + " 难</span></span>" +
+        "<span class='chart-tooltip__row'><span>占八十一难</span><span>" + (v / 81 * 100).toFixed(1) + "%</span></span>";
+      var rect = s("rect", {
+        x: x, y: base - h, width: bw, height: h, rx: 1,
+        "class": "bar fill-4", "data-tip": tip
+      });
+      rect.style.transitionDelay = (i * 20) + "ms";
+      g.appendChild(rect);
+      g.appendChild(s("text", { x: x + bw / 2, y: base - h - 7, "text-anchor": "middle", "font-size": 12, fill: "var(--text-primary)", "font-variant-numeric": "tabular-nums" }, String(v)));
+      g.appendChild(s("text", { x: x + bw / 2, y: base + 20, "text-anchor": "middle", "font-size": 11, fill: "var(--text-tertiary)" }, (i * 10 + 1) + "–" + (i * 10 + 10) + " 回"));
+    });
+    trialSvg.appendChild(g);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { trialSvg.classList.add("is-in"); });
+    });
+  }
+
+  /* ── 表格 + 空态 ──────────────────────────────────────────────── */
+  var tbody = document.getElementById("char-tbody");
+  var empty = document.getElementById("char-empty");
+  var table = document.getElementById("char-table");
+  function drawTable() {
+    var rows = DATA.filter(function (d) {
+      return (group === "all" || d.group === group) && (!query || d.name.indexOf(query) >= 0);
+    }).slice(0, 6);
+    tbody.textContent = "";
+    rows.forEach(function (d) {
+      var tr = document.createElement("tr");
+      var th = document.createElement("th");
+      th.scope = "row"; th.style.fontWeight = "600"; th.style.color = "var(--text-hero)";
+      th.textContent = d.name;
+      var td1 = document.createElement("td"); td1.textContent = d.group;
+      var td2 = document.createElement("td"); td2.className = "num"; td2.textContent = String(d.count);
+      var td3 = document.createElement("td"); td3.className = "num"; td3.textContent = pct(d.count);
+      var td4 = document.createElement("td"); td4.textContent = d.note;
+      tr.appendChild(th); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tr.appendChild(td4);
+      tbody.appendChild(tr);
+    });
+    var none = rows.length === 0;
+    if (empty) { empty.classList.toggle("hidden", !none); }
+    if (table) { table.classList.toggle("hidden", none); }
+  }
+
+  function refresh() { drawBars(); drawTable(); }
+
+  var filters = document.getElementById("char-filters");
+  filters.addEventListener("click", function (ev) {
+    var btn = ev.target.closest(".filter-tab");
+    if (!btn) { return; }
+    group = btn.dataset.group;
+    var all = filters.querySelectorAll(".filter-tab");
+    for (var i = 0; i < all.length; i++) { all[i].setAttribute("aria-selected", all[i] === btn ? "true" : "false"); }
+    refresh();
+  });
+  var search = document.getElementById("char-search");
+  search.addEventListener("input", function () { query = search.value.trim(); refresh(); });
+  var reset = document.getElementById("char-reset");
+  reset.addEventListener("click", function () {
+    query = ""; search.value = ""; group = "all";
+    var all2 = filters.querySelectorAll(".filter-tab");
+    for (var j = 0; j < all2.length; j++) { all2[j].setAttribute("aria-selected", j === 0 ? "true" : "false"); }
+    refresh();
+  });
+
+  /* ── tooltip：跟随指针 + 视口钳制 + .visible 切换 ─────────────── */
+  function bindTip(containerId, tipId) {
+    var box = document.getElementById(containerId);
+    var tip = document.getElementById(tipId);
+    if (!box || !tip) { return; }
+    box.addEventListener("mousemove", function (ev) {
+      var t = ev.target.closest ? ev.target.closest("[data-tip]") : null;
+      if (!t) { tip.classList.remove("visible"); return; }
+      tip.innerHTML = t.getAttribute("data-tip");
+      tip.classList.add("visible");
+      var r = box.getBoundingClientRect();
+      var tw = tip.offsetWidth, th = tip.offsetHeight;
+      var x = ev.clientX - r.left + box.scrollLeft;
+      var y = ev.clientY - r.top + box.scrollTop;
+      var minX = tw / 2 + 4, maxX = box.scrollWidth - tw / 2 - 4;
+      if (maxX < minX) { maxX = minX; }
+      x = Math.max(minX, Math.min(x, maxX));
+      tip.style.left = x + "px";
+      tip.style.top = Math.max(th + 10, y - 10) + "px";
+    });
+    box.addEventListener("mouseleave", function () { tip.classList.remove("visible"); });
+  }
+  bindTip("bar-container", "bar-tip");
+  bindTip("trial-container", "trial-tip");
+
+  /* ── KPI 数字滚动（900ms，终值精确还原，fail-open） ───────────── */
+  function roll(el) {
+    var raw = el.textContent;
+    var final = raw.trim();
+    var m = final.match(/[0-9,]+/);
+    if (!m) { return; }
+    var target = parseFloat(m[0].replace(/,/g, ""));
+    if (RM || !isFinite(target)) { return; }
+    var t0 = performance.now(), DUR = 900;
+    function fmt(n) {
+      var str = String(n), out = "", c = 0, i;
+      for (i = str.length - 1; i >= 0; i--) {
+        out = str[i] + out;
+        c++;
+        if (c % 3 === 0 && i > 0) { out = "," + out; }
+      }
+      return out;
+    }
+    function step(t) {
+      var p = Math.min(1, (t - t0) / DUR);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = final.replace(m[0], fmt(Math.round(target * e)));
+      if (p < 1) { requestAnimationFrame(step); }
+      else { el.textContent = raw; }
+    }
+    requestAnimationFrame(step);
+  }
+  var rolls = document.querySelectorAll("[data-roll]");
+  if (rolls.length) {
+    if (!("IntersectionObserver" in window)) {
+      for (var r = 0; r < rolls.length; r++) { roll(rolls[r]); }
+    } else {
+      var rio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { roll(en.target); rio.unobserve(en.target); }
+        });
+      }, { threshold: 0.4 });
+      for (var r2 = 0; r2 < rolls.length; r2++) { rio.observe(rolls[r2]); }
+    }
+  }
+
+  /* ── 入场显现 ─────────────────────────────────────────────────── */
+  var reveals = document.querySelectorAll(".js-reveal");
+  if (reveals.length) {
+    if (RM || !("IntersectionObserver" in window)) {
+      for (var v = 0; v < reveals.length; v++) { reveals[v].classList.add("visible"); }
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); }
+        });
+      }, { rootMargin: "0px 0px -8% 0px" });
+      for (var v2 = 0; v2 < reveals.length; v2++) { io.observe(reveals[v2]); }
+    }
+  }
+
+  /* ── 首绘 ─────────────────────────────────────────────────────── */
+  drawBars();
+  drawTrials();
+  drawTable();
+})();
+</script>
+</body>
+</html>

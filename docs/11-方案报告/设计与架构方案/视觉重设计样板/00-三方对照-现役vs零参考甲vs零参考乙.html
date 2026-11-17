@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>三方对照 · 现役 W1261 宣纸刻本 vs 零参考甲 读数台 vs 零参考乙 注释本</title>
+<style>
+:root{
+  --bg:#F2F1EE; --paper:#FBFAF7; --line:#E0DCD4; --line2:#C9C4B9;
+  --ink:#26231D; --ink2:#57534A; --ink3:#6F6A60;
+  --accent:#BF4127; --accent-tint:rgba(191,65,39,.08);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,SimSun,serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px 80px}
+header{padding:44px 0 26px;border-bottom:1px solid var(--line)}
+.kicker{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(26px,3.6vw,40px);line-height:1.22;margin:12px 0 10px;font-weight:600}
+.lede{color:var(--ink2);max-width:64ch}
+.meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--ink3)}
+.meta b{color:var(--ink2)}
+h2{font-family:var(--serif);font-size:21px;margin:46px 0 4px;padding-left:11px;border-left:3px solid var(--accent)}
+.note{color:var(--ink3);font-size:13px;margin:0 0 16px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+@media(max-width:960px){.three{grid-template-columns:1fr}}
+.col{background:var(--paper);border:1px solid var(--line);border-radius:2px;overflow:hidden;display:flex;flex-direction:column}
+.col .head{padding:12px 14px;border-bottom:1px solid var(--line)}
+.col .head b{display:block;font-size:14px;font-family:var(--serif)}
+.col .head span{font-size:11.5px;color:var(--ink3);letter-spacing:.06em}
+.col .head .tag{display:inline-block;margin-top:6px;font-size:11px;padding:2px 7px;border:1px solid var(--line2);border-radius:2px;color:var(--ink2)}
+.col .head .tag.new{border-color:var(--accent);color:var(--accent);background:var(--accent-tint)}
+.col .shot{width:100%;display:block;border-bottom:1px solid var(--line);background:#fff}
+.col .shot.dk{background:#0d0b0a}
+.col .desc{padding:12px 14px;font-size:12.5px;color:var(--ink2);flex:1}
+.col .desc b{color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--paper)}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.05em;color:var(--ink3);font-weight:600}
+tr:last-child td{border-bottom:0}
+td b{color:var(--accent)}
+.tblwrap{border:1px solid var(--line);border-radius:2px;overflow:hidden;margin-bottom:8px}
+.verdict{padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:2px;font-size:14px;color:var(--ink2);margin-top:8px}
+.verdict b{color:var(--ink)}
+.links{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.links a{display:inline-block;padding:9px 14px;min-height:44px;line-height:26px;border:1px solid var(--line2);border-radius:2px;color:var(--ink);text-decoration:none;font-size:13px}
+.links a:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-tint);text-decoration:none}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink3);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">W1264 · 零参考重做 · 三方对照</div>
+  <h1>现役「宣纸刻本」 vs 零参考甲「读数台」 vs 零参考乙「注释本」</h1>
+  <p class="lede">三个方向的视觉语言彼此完全不同。甲与乙是本批从零产出（无上下文 subagent · 只继承客观工程契约），与 W1261 宣纸刻本、W1262 v3 均无继承关系。全部为本机 Playwright 实拍（file:// 双击形态）。</p>
+  <div class="meta">
+    <span><b>甲</b> 读数台 · 青釉 #0E6E63 · 优先服务数据判读</span>
+    <span><b>乙</b> 注释本 · 墨青 #0E5A55 · 优先服务长文连读</span>
+    <span><b>独立复验</b> 两方向 109 令牌 + 41 类名全覆盖 · 两暗色块逐项相等 · 0 console error</span>
+  </div>
+</header>
+
+<h2>一、落地页</h2>
+<p class="note">左=现役（宣纸暖底 + 毛笔插画）· 中=甲（冷灰素墙 + 青釉 + 卷首索引表）· 右=乙（纸白 + 墨青 + 百回刻度尺 + 发丝线分节）。</p>
+<div class="three">
+  <div class="col">
+    <div class="head"><b>现役 · 宣纸刻本</b><span>W1261</span><span class="tag">已在库</span></div>
+    <img class="shot" src="戊-中性骨架浓彩原文层/shots-current/home_light.png" alt="现役首页">
+    <div class="desc">暖宣纸底 + 宋体巨题 + 毛笔插画主视觉。<b>问题</b>：文化符号铺满每页，数据页失去仪器感。</div>
+  </div>
+  <div class="col">
+    <div class="head"><b>甲 · 读数台</b><span>零参考</span><span class="tag new">本批新增</span></div>
+    <img class="shot" src="己-零参考甲-读数台/shots/landing-light-1280.png" alt="甲落地页">
+    <div class="desc"><b>刻度承担分组、读数承担结论</b>。卷首索引是一张带刻度的表；「三种读法」三栏平铺无卡片。</div>
+  </div>
+  <div class="col">
+    <div class="head"><b>乙 · 注释本</b><span>零参考</span><span class="tag new">本批新增</span></div>
+    <img class="shot" src="庚-零参考乙-注释本/shots/landing-light-1280.png" alt="乙落地页">
+    <div class="desc"><b>为连读 30 分钟而生</b>。发丝线分节，首屏底部是 100 格「百回刻度尺」（一格=原著一回）。</div>
+  </div>
+</div>
+
+<h2>二、数据可视化页</h2>
+<p class="note">现役 data 页同页并存两套语言（深色水墨 hero + 新 KPI 卡）；甲把数值直标条形末端；乙把 KPI 做成被线隔开的数字带。</p>
+<div class="three">
+  <div class="col">
+    <div class="head"><b>现役 · data</b><span>W1261</span><span class="tag">已在库</span></div>
+    <img class="shot" src="戊-中性骨架浓彩原文层/shots-current/data_stats_light.png" alt="现役数据页">
+    <div class="desc">hero 仍是旧深色水墨素材带 + 白色标题，<b>与下方新 KPI 卡并存</b> ⇒ 拼贴感的直接来源。</div>
+  </div>
+  <div class="col">
+    <div class="head"><b>甲 · dataviz</b><span>零参考</span><span class="tag new">本批新增</span></div>
+    <img class="shot" src="己-零参考甲-读数台/shots/dataviz-dark-1280.png" alt="甲数据页">
+    <div class="desc"><b>暗色入窑</b>。数值直标条形末端；釉色三色池承担身份组；「十回尺」把难数密度压成一把尺。</div>
+  </div>
+  <div class="col">
+    <div class="head"><b>乙 · dataviz</b><span>零参考</span><span class="tag new">本批新增</span></div>
+    <img class="shot" src="庚-零参考乙-注释本/shots/dataviz-light-1280.png" alt="乙数据页">
+    <div class="desc"><b>同一语言换仪器形态</b>。KPI 是数字带不是卡片；图形颜色只承担「身份组」一层信息。</div>
+  </div>
+</div>
+
+<h2>三、三方向并列的机械对照</h2>
+<div class="tblwrap">
+<table>
+<tr><th style="width:17%">维度</th><th style="width:28%">现役 W1261 宣纸刻本</th><th style="width:27%">甲 读数台</th><th style="width:28%">乙 注释本</th></tr>
+<tr><td>主强调色</td><td>朱砂 #C0392B</td><td>青釉 #0E6E63</td><td>墨青 #0E5A55</td></tr>
+<tr><td>底色</td><td>暖宣纸 #F5F0E4</td><td>冷灰素墙 #E8EBE9</td><td>纸白 #F4F5F2 附近</td></tr>
+<tr><td>暗色策略</td><td>深墨褐（同一套色相变暗）</td><td>深窑底（独立取值，釉色发色）</td><td>深墨青底（独立取值）</td></tr>
+<tr><td>签名元素</td><td>朱砂印 + 45 枚线刻图标</td><td><b>十回尺</b>（难数齿 + 读数窗）</td><td><b>百回刻度尺</b>（一格 = 原著一回）</td></tr>
+<tr><td>色彩策略</td><td>唯一彩色强调（朱砂）</td><td>釉色三色池（同图可分，机器搜索得出）</td><td>机器调校序列（Okabe-Ito 派生，三型 ΔE ≥15）</td></tr>
+<tr><td>长文处理</td><td>reader 族保留衬线（既定决策）</td><td><b>未出长文样板</b>（自述弱项）</td><td><b>双栏正文 40em + 旁注 15rem</b>（方向核心）</td></tr>
+<tr><td>数据页主张</td><td>—</td><td>3 秒读懂一张图</td><td>秩序来自线与字号层级</td></tr>
+<tr><td>独立复验</td><td>—</td><td>109 令牌 / 41 类名全覆盖 · 0 错误</td><td>109 令牌 / 41 类名全覆盖 · 0 错误</td></tr>
+<tr><td>本批发现并修掉的缺陷</td><td>—</td><td>（子代理自述 10 处目视修复·本会话复验通过）</td><td><b>reveal 区块全页截图下永不显现</b>（本会话独立复现并根修）</td></tr>
+</table>
+</div>
+<div class="verdict">
+<b>两方向的设计语言彼此独立，且与被禁的 W1261 / W1262 无继承关系</b>：甲用「读数台」解决判读，乙用「注释本」解决连读；两者的强调色（青釉 / 墨青）、底色（冷灰 / 纸白）、签名元素（十回尺 / 百回刻度尺）、字体策略与色彩策略均不同。<br><br>
+<b>共同短板</b>：两者都只交付了落地页 + 数据页两族样板，<b>长文阅读页（636 页·占站点 73%）在甲方向尚无设计</b>；乙方向虽给出了双栏旁注版式，但未出可运行长文样板。落地前必须补齐 reader 族。
+</div>
+
+<div class="links">
+  <a href="己-零参考甲-读数台/sample-landing.html">打开甲 · 落地页</a>
+  <a href="己-零参考甲-读数台/sample-dataviz.html">打开甲 · 数据页</a>
+  <a href="庚-零参考乙-注释本/sample-landing.html">打开乙 · 落地页</a>
+  <a href="庚-零参考乙-注释本/sample-dataviz.html">打开乙 · 数据页</a>
+  <a href="己-零参考甲-读数台/SPEC.md">甲 · 设计规范</a>
+  <a href="庚-零参考乙-注释本/SPEC.md">乙 · 设计规范</a>
+</div>
+
+<footer>
+  W1264 · 零参考重做 · 三个方向全部为本机 Playwright 实拍（file:// 形态）· 甲乙为独立 subagent 从零产出（禁读项目文件·禁联网）· 本会话独立复验：109 令牌 + 41 类名覆盖 / 两暗色块逐项相等 / 明暗字节数不同 / 375px 无横滚 / 0 console error
+</footer>
+</div>
+</body>
+</html>

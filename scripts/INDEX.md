@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（225）
+## 文件（226）
 
 ### Python 脚本
 
@@ -161,6 +161,7 @@
 - `check_repo_layout.py`
 - `check_review_trigger.py`
 - `check_screenshot_scope.py`
+- `check_screenshot_theme_delta.py`
 - `check_script_coverage.py`
 - `check_search_index_fresh.py`
 - `check_segment_gaps.py`

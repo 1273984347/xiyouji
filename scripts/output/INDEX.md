@@ -7,12 +7,13 @@
 > 本文件逐条列出 `scripts/output/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（2）
+## 子目录（3）
 
 - `data/`
 - `figures/`
+- `theme-delta-shots/`
 
-## 文件（824）
+## 文件（826）
 
 ### Markdown 文档
 
@@ -246,6 +247,7 @@
 - `_cascade_files_W1260.txt`
 - `_cascade_files_W1261.txt`
 - `_cascade_files_W1263.txt`
+- `_cascade_files_W1264.txt`
 - `_cascade_files_W751.txt`
 - `_cascade_files_W761.txt`
 - `_cascade_files_W816.txt`
@@ -630,6 +632,7 @@
 - `_w1260_spec.json`
 - `_w1261_spec.json`
 - `_w1263_spec.json`
+- `_w1264_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`

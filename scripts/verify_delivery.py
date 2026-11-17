@@ -132,6 +132,7 @@ EXPECTED_SECTION_NAMES = [
     "emoji残留棘轮",  # W1232：第 72 槽·恒跑——静态残留基线棘轮（只降不升）·秒级
     "readerRSS新鲜度",  # W1232：第 73 槽·恒跑——reader/RSS 产物新鲜度（git 视角）·秒级
     "治理文档体积窗口",  # W1232：第 74 槽·恒跑——P2-4 升格（体积阈值/段行密度硬判据）·秒级
+    "明暗两态截图差异",  # W1264：第 75 槽·恒跑——E-245 机器化（底色读数 + 字节数双校验）·分钟级
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -1294,8 +1295,24 @@ _STRICT_GATES = [
         marker_msg="体积窗口槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
         ok_msg="治理文档体积窗口门禁通过（%s）",
         ok_line=-1,    ),
-]
 
+    # W1264：第 75 槽明暗两态截图差异（E-245 机器化）——
+    # 坑位 E-245：视觉改动的截图「看起来不一样」不等于「真的不一样」（暗色态可能整版复制亮色图，
+    # 而探针全绿）。本槽对抽样页产出明暗两态截图并做**双校验**：底色 computed 读数必须不同且
+    # 暗态更暗 + 两态 PNG 字节数必须不同。fail-closed（探针无有效输出即判红）。
+    _StrictGate(
+        section="明暗两态截图差异",
+        script="check_screenshot_theme_delta.py",
+        args=(),
+        timeout=600,
+        marker="---- 明暗两态截图差异判据：",
+        crash_msg="明暗两态截图差异槽执行异常（第 75 槽·crash 即拦）: %s",
+        fail_msg="明暗两态截图未真不同（暗色态可能未生效或暗色图复制亮色图·E-245·本批新增第 75 槽）",
+        marker_msg="明暗两态截图差异槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="明暗两态截图差异门禁通过（%s）",
+        ok_line=-1,
+    ),
+]
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
 # 派生：section→marker 映射自 _STRICT_GATES 元组（W780 实证对拍逐项相等）——新挂槽只改
 # 门禁元组与 EXPECTED_SECTION_NAMES 两处，漏改由 _assert_registry_consistent() 启动期
@@ -1304,7 +1321,7 @@ _GATE_SUMMARY_MARKERS = {g.section: g.marker for g in _STRICT_GATES if getattr(g
 
 # 仅 full 档生效的门禁段（刻意登记·不在任何 scope 子集）：仓库全域面，docs/site 变更子集
 # 不触碰其判据分母——漏登记此集合的段会在 R-1 断言红（W713 内联段盲区同族的显式化）。
-_FULL_ONLY_SECTIONS = {"脚本覆盖", "目录文档", "design 资产清单"}
+_FULL_ONLY_SECTIONS = {"脚本覆盖", "目录文档", "design 资产清单", "明暗两态截图差异"}
 
 
 def _assert_registry_consistent() -> None:

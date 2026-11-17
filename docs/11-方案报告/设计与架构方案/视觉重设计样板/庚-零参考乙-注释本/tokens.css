@@ -1,0 +1,410 @@
+/* tokens.css —— 《详解西游记》视觉令牌（明暗两套独立取值）
+ * 唯一数据源：_gen_tokens.py（改色请改那个文件后重新生成）
+ * 令牌名为冻结接口：只增不改不删，取值与语义分档见 SPEC.md §2
+ */
+
+:root {
+  /* ── 表面 ── */
+  --bg: #E4E8E5;
+  --paper: #F7F8F5;
+  --paper-warm: #F6F2E9;
+  --surface-canvas: #EDF0EC;
+  --surface-raised: #FFFFFF;
+  --surface-sunken: #DDE2DD;
+  --surface-inset: #E9EDE8;
+  --dark: #161A19;
+  --dark-text: #E9EDEA;
+
+  /* ── 文本 ── */
+  --ink: #151A18;
+  --ink-soft: #38423F;
+  --ink-faint: #5E6866;
+  --ink-tint: #7C8683;
+  --text-primary: #151A18;
+  --text-secondary: #38423F;
+  --text-tertiary: #5E6866;
+  --text-hero: #0C110F;
+  --text-inverse: #F2F5F3;
+
+  /* ── 强调 ── */
+  --accent: #0E5A55;
+  --accent-primary: #0E5A55;
+  --accent-deep: #083B37;
+  --accent-muted: #46756F;
+  --accent-soft: #C6DBD7;
+  --accent-text: #FFFFFF;
+  --accent-tint: #E1EDEB;
+  --accent-wash: #EEF4F3;
+  --accent-2: #8C4A2B;
+  --accent-3: #2F5D8A;
+  --accent-4: #4F6B2E;
+
+  /* ── 语义 ── */
+  --ok: #1D6F4E;
+  --warn: #8A5A00;
+  --info: #2F5D8A;
+  --danger: #A93226;
+  --status-neg: #8A2E22;
+  --rebel: #7A3E64;
+
+  /* ── 数据序列 ── */
+  --chart-1: #2E6BA8;
+  --chart-2: #826312;
+  --chart-3: #332288;
+  --chart-4: #174D38;
+  --chart-5: #4A98C0;
+  --chart-6: #CC6677;
+  --series-1: #2E6BA8;
+  --series-2: #826312;
+  --series-3: #332288;
+  --series-4: #174D38;
+  --series-5: #4A98C0;
+  --series-6: #CC6677;
+  --series-7: #6E7A78;
+  --series-8: #3F4348;
+
+  /* ── 线与边 ── */
+  --line: #C9CFCB;
+  --border-subtle: #D3D9D4;
+  --border-strong: #7E8884;
+  --border-hairline: #DFE4E0;
+  --border-accent: #0E5A55;
+  --axis-line: #848E8A;
+  --grid-line: #E6EAE7;
+  --edge-visible: #B4BCB8;
+
+  /* ── 阴影 ── */
+  --shadow: 0 1px 2px rgba(14,24,22,.06), 0 8px 24px rgba(14,24,22,.05);
+  --shadow-lift: 0 2px 6px rgba(14,24,22,.08), 0 18px 44px rgba(14,24,22,.12);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(14,24,22,.07);
+  --elev-2: 0 2px 6px rgba(14,24,22,.09);
+  --elev-3: 0 6px 18px rgba(14,24,22,.11);
+  --elev-4: 0 18px 48px rgba(14,24,22,.18);
+
+  /* ── 动效 ── */
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 480ms;
+  --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-in-out-soft: cubic-bezier(.4, 0, .2, 1);
+
+  /* ── 字体 ── */
+  --font-serif: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-code: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-display: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --font-text: var(--font-sans);
+  --font-data: var(--font-sans);
+
+  /* ── 字号 · 行高 · 间距 ── */
+  --size-body: 1.0625rem;
+  --size-hero: clamp(2.75rem, 2rem + 2.6vw, 4.25rem);
+  --size-label: 0.8125rem;
+  --size-micro: 0.6875rem;
+  --size-section: clamp(1.375rem, 1.2rem + .8vw, 1.75rem);
+  --text-step-0: 1.0625rem;
+  --text-step-3: 1.5rem;
+  --type-body: var(--size-body)/1.95 var(--font-text);
+  --type-caption: var(--size-label)/1.7 var(--font-text);
+  --type-display: var(--size-hero)/1.14 var(--font-display);
+  --type-eyebrow: var(--size-micro)/1.4 var(--font-text);
+  --type-label: var(--size-label)/1.5 var(--font-text);
+  --type-lead: 1.1875rem/1.85 var(--font-text);
+  --type-number: 1.75rem/1.1 var(--font-data);
+  --type-subtitle: 1.3125rem/1.6 var(--font-display);
+  --type-title: var(--size-section)/1.4 var(--font-display);
+  --leading-tight: 1.25;
+  --space-1: 4px;
+  --space-5: 20px;
+  --space-9: 36px;
+  --gap-tight: 8px;
+  --gap-loose: 24px;
+  --gap-section: 64px;
+
+  /* ── 布局 ── */
+  --container-read: 40em;
+  --grid-columns: repeat(12, minmax(0, 1fr));
+  --indent-0: 0;
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+  --z-nav: 100;
+  --z-drawer: 200;
+  --z-mask: 300;
+  --z-tooltip: 400;
+}
+
+/* ── 暗色：独立取值组（深墨纸面 + 亮青强调 + 深色反填文字），非亮色反相 ── */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* ── 表面 ── */
+    --bg: #121516;
+    --paper: #1B2022;
+    --paper-warm: #23211C;
+    --surface-canvas: #171B1D;
+    --surface-raised: #242B2D;
+    --surface-sunken: #0E1112;
+    --surface-inset: #1E2426;
+    --dark: #0A0D0E;
+    --dark-text: #E6EBE9;
+
+    /* ── 文本 ── */
+    --ink: #E8EDEB;
+    --ink-soft: #C3CBC8;
+    --ink-faint: #98A2A0;
+    --ink-tint: #6E7A78;
+    --text-primary: #E8EDEB;
+    --text-secondary: #C3CBC8;
+    --text-tertiary: #98A2A0;
+    --text-hero: #F4F8F6;
+    --text-inverse: #E9EDEA;
+
+    /* ── 强调 ── */
+    --accent: #3FA79E;
+    --accent-primary: #3FA79E;
+    --accent-deep: #2A7A74;
+    --accent-muted: #6FBDB4;
+    --accent-soft: #1E4B47;
+    --accent-text: #08201E;
+    --accent-tint: #173330;
+    --accent-wash: #132624;
+    --accent-2: #D08A5E;
+    --accent-3: #7FA9D8;
+    --accent-4: #9DBB6B;
+
+    /* ── 语义 ── */
+    --ok: #63C79A;
+    --warn: #E0A73A;
+    --info: #7FA9DE;
+    --danger: #E88A7C;
+    --status-neg: #E09A8E;
+    --rebel: #C98CB4;
+
+    /* ── 数据序列 ── */
+    --chart-1: #5A72B8;
+    --chart-2: #9A7510;
+    --chart-3: #EE3377;
+    --chart-4: #44AA99;
+    --chart-5: #9CD6F0;
+    --chart-6: #F0E442;
+    --series-1: #5A72B8;
+    --series-2: #9A7510;
+    --series-3: #EE3377;
+    --series-4: #44AA99;
+    --series-5: #9CD6F0;
+    --series-6: #F0E442;
+    --series-7: #6B7776;
+    --series-8: #A8B2B4;
+
+    /* ── 线与边 ── */
+    --line: #313A3B;
+    --border-subtle: #2A3234;
+    --border-strong: #6C7775;
+    --border-hairline: #22292B;
+    --border-accent: #3FA79E;
+    --axis-line: #697374;
+    --grid-line: #232A2C;
+    --edge-visible: #3B4647;
+
+    /* ── 阴影 ── */
+    --shadow: 0 1px 2px rgba(0,0,0,.50), 0 8px 24px rgba(0,0,0,.45);
+    --shadow-lift: 0 2px 6px rgba(0,0,0,.55), 0 18px 44px rgba(0,0,0,.60);
+    --elev-0: none;
+    --elev-1: 0 1px 2px rgba(0,0,0,.50);
+    --elev-2: 0 2px 6px rgba(0,0,0,.55);
+    --elev-3: 0 6px 18px rgba(0,0,0,.60);
+    --elev-4: 0 18px 48px rgba(0,0,0,.70);
+
+    /* ── 动效 ── */
+    --dur-fast: 120ms;
+    --dur-base: 220ms;
+    --dur-slow: 480ms;
+    --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+    --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+    --ease-in-out-soft: cubic-bezier(.4, 0, .2, 1);
+
+    /* ── 字体 ── */
+    --font-serif: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", "Times New Roman", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    --font-code: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    --font-display: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+    --font-text: var(--font-sans);
+    --font-data: var(--font-sans);
+
+    /* ── 字号 · 行高 · 间距 ── */
+    --size-body: 1.0625rem;
+    --size-hero: clamp(2.75rem, 2rem + 2.6vw, 4.25rem);
+    --size-label: 0.8125rem;
+    --size-micro: 0.6875rem;
+    --size-section: clamp(1.375rem, 1.2rem + .8vw, 1.75rem);
+    --text-step-0: 1.0625rem;
+    --text-step-3: 1.5rem;
+    --type-body: var(--size-body)/1.95 var(--font-text);
+    --type-caption: var(--size-label)/1.7 var(--font-text);
+    --type-display: var(--size-hero)/1.14 var(--font-display);
+    --type-eyebrow: var(--size-micro)/1.4 var(--font-text);
+    --type-label: var(--size-label)/1.5 var(--font-text);
+    --type-lead: 1.1875rem/1.85 var(--font-text);
+    --type-number: 1.75rem/1.1 var(--font-data);
+    --type-subtitle: 1.3125rem/1.6 var(--font-display);
+    --type-title: var(--size-section)/1.4 var(--font-display);
+    --leading-tight: 1.25;
+    --space-1: 4px;
+    --space-5: 20px;
+    --space-9: 36px;
+    --gap-tight: 8px;
+    --gap-loose: 24px;
+    --gap-section: 64px;
+
+    /* ── 布局 ── */
+    --container-read: 40em;
+    --grid-columns: repeat(12, minmax(0, 1fr));
+    --indent-0: 0;
+    --radius-sm: 2px;
+    --radius-pill: 999px;
+    --z-nav: 100;
+    --z-drawer: 200;
+    --z-mask: 300;
+    --z-tooltip: 400;
+  }
+}
+
+:root[data-theme="dark"] {
+  /* ── 表面 ── */
+  --bg: #121516;
+  --paper: #1B2022;
+  --paper-warm: #23211C;
+  --surface-canvas: #171B1D;
+  --surface-raised: #242B2D;
+  --surface-sunken: #0E1112;
+  --surface-inset: #1E2426;
+  --dark: #0A0D0E;
+  --dark-text: #E6EBE9;
+
+  /* ── 文本 ── */
+  --ink: #E8EDEB;
+  --ink-soft: #C3CBC8;
+  --ink-faint: #98A2A0;
+  --ink-tint: #6E7A78;
+  --text-primary: #E8EDEB;
+  --text-secondary: #C3CBC8;
+  --text-tertiary: #98A2A0;
+  --text-hero: #F4F8F6;
+  --text-inverse: #E9EDEA;
+
+  /* ── 强调 ── */
+  --accent: #3FA79E;
+  --accent-primary: #3FA79E;
+  --accent-deep: #2A7A74;
+  --accent-muted: #6FBDB4;
+  --accent-soft: #1E4B47;
+  --accent-text: #08201E;
+  --accent-tint: #173330;
+  --accent-wash: #132624;
+  --accent-2: #D08A5E;
+  --accent-3: #7FA9D8;
+  --accent-4: #9DBB6B;
+
+  /* ── 语义 ── */
+  --ok: #63C79A;
+  --warn: #E0A73A;
+  --info: #7FA9DE;
+  --danger: #E88A7C;
+  --status-neg: #E09A8E;
+  --rebel: #C98CB4;
+
+  /* ── 数据序列 ── */
+  --chart-1: #5A72B8;
+  --chart-2: #9A7510;
+  --chart-3: #EE3377;
+  --chart-4: #44AA99;
+  --chart-5: #9CD6F0;
+  --chart-6: #F0E442;
+  --series-1: #5A72B8;
+  --series-2: #9A7510;
+  --series-3: #EE3377;
+  --series-4: #44AA99;
+  --series-5: #9CD6F0;
+  --series-6: #F0E442;
+  --series-7: #6B7776;
+  --series-8: #A8B2B4;
+
+  /* ── 线与边 ── */
+  --line: #313A3B;
+  --border-subtle: #2A3234;
+  --border-strong: #6C7775;
+  --border-hairline: #22292B;
+  --border-accent: #3FA79E;
+  --axis-line: #697374;
+  --grid-line: #232A2C;
+  --edge-visible: #3B4647;
+
+  /* ── 阴影 ── */
+  --shadow: 0 1px 2px rgba(0,0,0,.50), 0 8px 24px rgba(0,0,0,.45);
+  --shadow-lift: 0 2px 6px rgba(0,0,0,.55), 0 18px 44px rgba(0,0,0,.60);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(0,0,0,.50);
+  --elev-2: 0 2px 6px rgba(0,0,0,.55);
+  --elev-3: 0 6px 18px rgba(0,0,0,.60);
+  --elev-4: 0 18px 48px rgba(0,0,0,.70);
+
+  /* ── 动效 ── */
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 480ms;
+  --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-in-out-soft: cubic-bezier(.4, 0, .2, 1);
+
+  /* ── 字体 ── */
+  --font-serif: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-code: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-display: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --font-text: var(--font-sans);
+  --font-data: var(--font-sans);
+
+  /* ── 字号 · 行高 · 间距 ── */
+  --size-body: 1.0625rem;
+  --size-hero: clamp(2.75rem, 2rem + 2.6vw, 4.25rem);
+  --size-label: 0.8125rem;
+  --size-micro: 0.6875rem;
+  --size-section: clamp(1.375rem, 1.2rem + .8vw, 1.75rem);
+  --text-step-0: 1.0625rem;
+  --text-step-3: 1.5rem;
+  --type-body: var(--size-body)/1.95 var(--font-text);
+  --type-caption: var(--size-label)/1.7 var(--font-text);
+  --type-display: var(--size-hero)/1.14 var(--font-display);
+  --type-eyebrow: var(--size-micro)/1.4 var(--font-text);
+  --type-label: var(--size-label)/1.5 var(--font-text);
+  --type-lead: 1.1875rem/1.85 var(--font-text);
+  --type-number: 1.75rem/1.1 var(--font-data);
+  --type-subtitle: 1.3125rem/1.6 var(--font-display);
+  --type-title: var(--size-section)/1.4 var(--font-display);
+  --leading-tight: 1.25;
+  --space-1: 4px;
+  --space-5: 20px;
+  --space-9: 36px;
+  --gap-tight: 8px;
+  --gap-loose: 24px;
+  --gap-section: 64px;
+
+  /* ── 布局 ── */
+  --container-read: 40em;
+  --grid-columns: repeat(12, minmax(0, 1fr));
+  --indent-0: 0;
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+  --z-nav: 100;
+  --z-drawer: 200;
+  --z-mask: 300;
+  --z-tooltip: 400;
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }

@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-17 16:56
+生成时间：2026-11-17 18:48
 
-共 **216** 件（门禁与校验 103 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
+共 **217** 件（门禁与校验 104 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（103）
+## 门禁与校验（104）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -97,6 +97,7 @@
 | `check_repo_layout.py` | check_repo_layout.py — 第 52 门禁：仓库布局（W1011 挂槽·用户 2026-10-29「全都做」） |
 | `check_screenshot_gates.js` | check_screenshot_gates.js — 图表/渲染动态门禁（W551 新建，挂 screenshot-review workfl |
 | `check_screenshot_scope.py` | check_screenshot_scope.py — 截图审查 scope 判定（单一事实源·W1126 建） |
+| `check_screenshot_theme_delta.py` | check_screenshot_theme_delta.py — 明暗两态截图必须真的不同（W1264 立·E-245 机器化） |
 | `check_script_coverage.py` | check_script_coverage.py — 根级工具脚本覆盖门禁（第 42 槽 · W751 挂载） |
 | `check_search_index_fresh.py` | check_search_index_fresh.py — 站内搜索索引新鲜度门禁（W809 建立·verify_delivery 第 46 槽 |
 | `check_segment_gaps.py` | check_segment_gaps.py — 历史缺口体检（W1127·T74 遗留 B 的前置） |

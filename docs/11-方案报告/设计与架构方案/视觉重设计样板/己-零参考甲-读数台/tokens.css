@@ -1,0 +1,544 @@
+/* ============================================================
+   详解西游记 · 设计令牌正本 tokens.css
+   设计语言：读数台（Reading Bench）
+   明暗两套为各自独立取值（非反相）：亮态是「白釉」——冷调纸白 + 墨青黑字
+   + 青釉强调；暗态是「夜釉」——深墨青底 + 亮青釉强调。
+   令牌名为冻结接口，一个不改；新增设计判断请在 NOTES.md 记录。
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+  /* 表面 */
+  --bg: #E8EBE9;
+  --paper: #F5F7F5;
+  --paper-warm: #F1EFE9;
+  --surface-canvas: #EFF2F0;
+  --surface-raised: #FFFFFF;
+  --surface-sunken: #E1E5E2;
+  --surface-inset: #F0F3F1;
+  --dark: #141A1C;
+  --dark-text: #E7EDEA;
+
+  /* 文本 */
+  --ink: #14191B;
+  --ink-soft: #3C4644;
+  --ink-faint: #636E6B;
+  --ink-tint: #98A29F;
+  --text-primary: #14191B;
+  --text-secondary: #414C49;
+  --text-tertiary: #636E6B;
+  --text-hero: #0F1618;
+  --text-inverse: #F4F6F4;
+  --text-step-0: 1rem;
+  --text-step-3: 0.8125rem;
+
+  /* 强调 */
+  --accent: #0E6E63;
+  --accent-primary: #0E6E63;
+  --accent-deep: #0A4A42;
+  --accent-muted: #4E8F86;
+  --accent-soft: #A7CEC8;
+  --accent-text: #FFFFFF;
+  --accent-tint: #C9E1DD;
+  --accent-wash: #E6F0EE;
+  --accent-2: #A6521E;
+  --accent-3: #2A5692;
+  --accent-4: #5E7A2E;
+
+  /* 语义 */
+  --ok: #1F7A4D;
+  --warn: #9C5712;
+  --info: #2F5C8F;
+  --danger: #A32A24;
+  --status-neg: #A32A24;
+  --rebel: #8A3B52;
+
+  /* 数据序列 */
+  --chart-1: #0E6E63;
+  --chart-2: #533C28;
+  --chart-3: #2A5692;
+  --chart-4: #5A6470;
+  --chart-5: #5E7A2E;
+  --chart-6: #3C4644;
+  --series-1: #0E6E63;
+  --series-2: #533C28;
+  --series-3: #2A5692;
+  --series-4: #5A6470;
+  --series-5: #5E7A2E;
+  --series-6: #3C4644;
+  --series-7: #0A4A42;
+  --series-8: #1E3E6B;
+
+  /* 线与边 */
+  --line: #C7CEC9;
+  --border-subtle: #D7DCD8;
+  --border-strong: #828C88;
+  --border-hairline: #E4E8E4;
+  --border-accent: #0E6E63;
+  --axis-line: #767F7C;
+  --grid-line: #E0E5E1;
+  --edge-visible: #3C4644;
+
+  /* 阴影 */
+  --shadow: 0 1px 2px rgba(15,24,22,.06), 0 6px 18px rgba(15,24,22,.05);
+  --shadow-lift: 0 2px 6px rgba(15,24,22,.08), 0 18px 40px rgba(15,24,22,.10);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(15,24,22,.06);
+  --elev-2: 0 2px 4px rgba(15,24,22,.07), 0 8px 20px rgba(15,24,22,.05);
+  --elev-3: 0 4px 10px rgba(15,24,22,.09), 0 16px 36px rgba(15,24,22,.07);
+  --elev-4: 0 8px 18px rgba(15,24,22,.11), 0 28px 64px rgba(15,24,22,.10);
+
+  /* 动效 */
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 600ms;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 字体 */
+  --font-serif: "Songti SC","STSong","SimSun","Noto Serif CJK SC","Source Han Serif SC",Georgia,serif;
+  --font-sans: -apple-system,"SF Pro Text","Segoe UI",system-ui,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --font-mono: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --font-code: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --font-display: var(--font-serif);
+  --font-text: var(--font-sans);
+  --font-data: var(--font-sans);
+
+  /* 字号与间距 */
+  --size-body: 1rem;
+  --size-hero: clamp(2.5rem, 6vw, 3.75rem);
+  --size-label: 0.8125rem;
+  --size-micro: 0.6875rem;
+  --size-section: 1.5rem;
+  --type-body: 1rem;
+  --type-caption: 0.8125rem;
+  --type-display: clamp(2.5rem, 6vw, 3.75rem);
+  --type-eyebrow: 0.75rem;
+  --type-label: 0.8125rem;
+  --type-lead: 1.125rem;
+  --type-number: 2.25rem;
+  --type-subtitle: 1.25rem;
+  --type-title: 1.75rem;
+  --leading-tight: 1.2;
+  --space-1: 4px;
+  --space-5: 20px;
+  --space-9: 36px;
+  --gap-tight: 8px;
+  --gap-loose: 32px;
+  --gap-section: 56px;
+
+  /* 布局 */
+  --container-read: 42rem;
+  --grid-columns: repeat(12, 1fr);
+  --indent-0: 0;
+  --radius-sm: 3px;
+  --radius-pill: 999px;
+  --z-nav: 60;
+  --z-drawer: 80;
+  --z-mask: 70;
+  --z-tooltip: 90;
+}
+/* 系统偏好为暗时的独立取值组 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    /* 表面 */
+    --bg: #0B1012;
+    --paper: #131A1C;
+    --paper-warm: #1A2021;
+    --surface-canvas: #101618;
+    --surface-raised: #1A2224;
+    --surface-sunken: #080C0E;
+    --surface-inset: #161D1F;
+    --dark: #060A0B;
+    --dark-text: #E4EBE8;
+
+    /* 文本 */
+    --ink: #E7EDEA;
+    --ink-soft: #BEC8C4;
+    --ink-faint: #8D9995;
+    --ink-tint: #66716D;
+    --text-primary: #E7EDEA;
+    --text-secondary: #B4BFBA;
+    --text-tertiary: #8D9995;
+    --text-hero: #F3F8F5;
+    --text-inverse: #0B1012;
+    --text-step-0: 1rem;
+    --text-step-3: 0.8125rem;
+
+    /* 强调 */
+    --accent: #4FC9B6;
+    --accent-primary: #4FC9B6;
+    --accent-deep: #7FE0CF;
+    --accent-muted: #2E8B7D;
+    --accent-soft: #1F4B45;
+    --accent-text: #04100E;
+    --accent-tint: #14332E;
+    --accent-wash: #0E201D;
+    --accent-2: #E39054;
+    --accent-3: #5D8DD0;
+    --accent-4: #A8C063;
+
+    /* 语义 */
+    --ok: #4CC38A;
+    --warn: #E0A64E;
+    --info: #7FB0E8;
+    --danger: #E8776E;
+    --status-neg: #E8776E;
+    --rebel: #D07AA0;
+
+    /* 数据序列 */
+    --chart-1: #4FC9B6;
+    --chart-2: #BB9472;
+    --chart-3: #5D8DD0;
+    --chart-4: #9AA6B2;
+    --chart-5: #A8C063;
+    --chart-6: #A7AFAA;
+    --series-1: #4FC9B6;
+    --series-2: #BB9472;
+    --series-3: #5D8DD0;
+    --series-4: #9AA6B2;
+    --series-5: #A8C063;
+    --series-6: #A7AFAA;
+    --series-7: #2E8B7D;
+    --series-8: #3D74B8;
+
+    /* 线与边 */
+    --line: #2B3436;
+    --border-subtle: #232B2D;
+    --border-strong: #5A6769;
+    --border-hairline: #1B2224;
+    --border-accent: #4FC9B6;
+    --axis-line: #5E6C6E;
+    --grid-line: #1E2628;
+    --edge-visible: #5E6B6E;
+
+    /* 阴影 */
+    --shadow: 0 1px 2px rgba(0,0,0,.45), 0 6px 18px rgba(0,0,0,.35);
+    --shadow-lift: 0 2px 6px rgba(0,0,0,.55), 0 18px 40px rgba(0,0,0,.45);
+    --elev-0: none;
+    --elev-1: 0 1px 2px rgba(0,0,0,.45);
+    --elev-2: 0 2px 4px rgba(0,0,0,.5), 0 8px 20px rgba(0,0,0,.35);
+    --elev-3: 0 4px 10px rgba(0,0,0,.5), 0 16px 36px rgba(0,0,0,.4);
+    --elev-4: 0 8px 18px rgba(0,0,0,.55), 0 28px 64px rgba(0,0,0,.5);
+
+    /* 动效 */
+    --dur-fast: 150ms;
+    --dur-base: 250ms;
+    --dur-slow: 600ms;
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* 字体 */
+    --font-serif: "Songti SC","STSong","SimSun","Noto Serif CJK SC","Source Han Serif SC",Georgia,serif;
+    --font-sans: -apple-system,"SF Pro Text","Segoe UI",system-ui,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    --font-mono: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --font-code: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --font-display: var(--font-serif);
+    --font-text: var(--font-sans);
+    --font-data: var(--font-sans);
+
+    /* 字号与间距 */
+    --size-body: 1rem;
+    --size-hero: clamp(2.5rem, 6vw, 3.75rem);
+    --size-label: 0.8125rem;
+    --size-micro: 0.6875rem;
+    --size-section: 1.5rem;
+    --type-body: 1rem;
+    --type-caption: 0.8125rem;
+    --type-display: clamp(2.5rem, 6vw, 3.75rem);
+    --type-eyebrow: 0.75rem;
+    --type-label: 0.8125rem;
+    --type-lead: 1.125rem;
+    --type-number: 2.25rem;
+    --type-subtitle: 1.25rem;
+    --type-title: 1.75rem;
+    --leading-tight: 1.2;
+    --space-1: 4px;
+    --space-5: 20px;
+    --space-9: 36px;
+    --gap-tight: 8px;
+    --gap-loose: 32px;
+    --gap-section: 56px;
+
+    /* 布局 */
+    --container-read: 42rem;
+    --grid-columns: repeat(12, 1fr);
+    --indent-0: 0;
+    --radius-sm: 3px;
+    --radius-pill: 999px;
+    --z-nav: 60;
+    --z-drawer: 80;
+    --z-mask: 70;
+    --z-tooltip: 90;
+  }
+}
+/* 手动切换（data-theme）覆写：与系统偏好并存 */
+:root[data-theme="light"] {
+  color-scheme: light;
+  /* 表面 */
+  --bg: #E8EBE9;
+  --paper: #F5F7F5;
+  --paper-warm: #F1EFE9;
+  --surface-canvas: #EFF2F0;
+  --surface-raised: #FFFFFF;
+  --surface-sunken: #E1E5E2;
+  --surface-inset: #F0F3F1;
+  --dark: #141A1C;
+  --dark-text: #E7EDEA;
+
+  /* 文本 */
+  --ink: #14191B;
+  --ink-soft: #3C4644;
+  --ink-faint: #636E6B;
+  --ink-tint: #98A29F;
+  --text-primary: #14191B;
+  --text-secondary: #414C49;
+  --text-tertiary: #636E6B;
+  --text-hero: #0F1618;
+  --text-inverse: #F4F6F4;
+  --text-step-0: 1rem;
+  --text-step-3: 0.8125rem;
+
+  /* 强调 */
+  --accent: #0E6E63;
+  --accent-primary: #0E6E63;
+  --accent-deep: #0A4A42;
+  --accent-muted: #4E8F86;
+  --accent-soft: #A7CEC8;
+  --accent-text: #FFFFFF;
+  --accent-tint: #C9E1DD;
+  --accent-wash: #E6F0EE;
+  --accent-2: #A6521E;
+  --accent-3: #2A5692;
+  --accent-4: #5E7A2E;
+
+  /* 语义 */
+  --ok: #1F7A4D;
+  --warn: #9C5712;
+  --info: #2F5C8F;
+  --danger: #A32A24;
+  --status-neg: #A32A24;
+  --rebel: #8A3B52;
+
+  /* 数据序列 */
+  --chart-1: #0E6E63;
+  --chart-2: #533C28;
+  --chart-3: #2A5692;
+  --chart-4: #5A6470;
+  --chart-5: #5E7A2E;
+  --chart-6: #3C4644;
+  --series-1: #0E6E63;
+  --series-2: #533C28;
+  --series-3: #2A5692;
+  --series-4: #5A6470;
+  --series-5: #5E7A2E;
+  --series-6: #3C4644;
+  --series-7: #0A4A42;
+  --series-8: #1E3E6B;
+
+  /* 线与边 */
+  --line: #C7CEC9;
+  --border-subtle: #D7DCD8;
+  --border-strong: #828C88;
+  --border-hairline: #E4E8E4;
+  --border-accent: #0E6E63;
+  --axis-line: #767F7C;
+  --grid-line: #E0E5E1;
+  --edge-visible: #3C4644;
+
+  /* 阴影 */
+  --shadow: 0 1px 2px rgba(15,24,22,.06), 0 6px 18px rgba(15,24,22,.05);
+  --shadow-lift: 0 2px 6px rgba(15,24,22,.08), 0 18px 40px rgba(15,24,22,.10);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(15,24,22,.06);
+  --elev-2: 0 2px 4px rgba(15,24,22,.07), 0 8px 20px rgba(15,24,22,.05);
+  --elev-3: 0 4px 10px rgba(15,24,22,.09), 0 16px 36px rgba(15,24,22,.07);
+  --elev-4: 0 8px 18px rgba(15,24,22,.11), 0 28px 64px rgba(15,24,22,.10);
+
+  /* 动效 */
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 600ms;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 字体 */
+  --font-serif: "Songti SC","STSong","SimSun","Noto Serif CJK SC","Source Han Serif SC",Georgia,serif;
+  --font-sans: -apple-system,"SF Pro Text","Segoe UI",system-ui,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --font-mono: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --font-code: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --font-display: var(--font-serif);
+  --font-text: var(--font-sans);
+  --font-data: var(--font-sans);
+
+  /* 字号与间距 */
+  --size-body: 1rem;
+  --size-hero: clamp(2.5rem, 6vw, 3.75rem);
+  --size-label: 0.8125rem;
+  --size-micro: 0.6875rem;
+  --size-section: 1.5rem;
+  --type-body: 1rem;
+  --type-caption: 0.8125rem;
+  --type-display: clamp(2.5rem, 6vw, 3.75rem);
+  --type-eyebrow: 0.75rem;
+  --type-label: 0.8125rem;
+  --type-lead: 1.125rem;
+  --type-number: 2.25rem;
+  --type-subtitle: 1.25rem;
+  --type-title: 1.75rem;
+  --leading-tight: 1.2;
+  --space-1: 4px;
+  --space-5: 20px;
+  --space-9: 36px;
+  --gap-tight: 8px;
+  --gap-loose: 32px;
+  --gap-section: 56px;
+
+  /* 布局 */
+  --container-read: 42rem;
+  --grid-columns: repeat(12, 1fr);
+  --indent-0: 0;
+  --radius-sm: 3px;
+  --radius-pill: 999px;
+  --z-nav: 60;
+  --z-drawer: 80;
+  --z-mask: 70;
+  --z-tooltip: 90;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  /* 表面 */
+  --bg: #0B1012;
+  --paper: #131A1C;
+  --paper-warm: #1A2021;
+  --surface-canvas: #101618;
+  --surface-raised: #1A2224;
+  --surface-sunken: #080C0E;
+  --surface-inset: #161D1F;
+  --dark: #060A0B;
+  --dark-text: #E4EBE8;
+
+  /* 文本 */
+  --ink: #E7EDEA;
+  --ink-soft: #BEC8C4;
+  --ink-faint: #8D9995;
+  --ink-tint: #66716D;
+  --text-primary: #E7EDEA;
+  --text-secondary: #B4BFBA;
+  --text-tertiary: #8D9995;
+  --text-hero: #F3F8F5;
+  --text-inverse: #0B1012;
+  --text-step-0: 1rem;
+  --text-step-3: 0.8125rem;
+
+  /* 强调 */
+  --accent: #4FC9B6;
+  --accent-primary: #4FC9B6;
+  --accent-deep: #7FE0CF;
+  --accent-muted: #2E8B7D;
+  --accent-soft: #1F4B45;
+  --accent-text: #04100E;
+  --accent-tint: #14332E;
+  --accent-wash: #0E201D;
+  --accent-2: #E39054;
+  --accent-3: #5D8DD0;
+  --accent-4: #A8C063;
+
+  /* 语义 */
+  --ok: #4CC38A;
+  --warn: #E0A64E;
+  --info: #7FB0E8;
+  --danger: #E8776E;
+  --status-neg: #E8776E;
+  --rebel: #D07AA0;
+
+  /* 数据序列 */
+  --chart-1: #4FC9B6;
+  --chart-2: #BB9472;
+  --chart-3: #5D8DD0;
+  --chart-4: #9AA6B2;
+  --chart-5: #A8C063;
+  --chart-6: #A7AFAA;
+  --series-1: #4FC9B6;
+  --series-2: #BB9472;
+  --series-3: #5D8DD0;
+  --series-4: #9AA6B2;
+  --series-5: #A8C063;
+  --series-6: #A7AFAA;
+  --series-7: #2E8B7D;
+  --series-8: #3D74B8;
+
+  /* 线与边 */
+  --line: #2B3436;
+  --border-subtle: #232B2D;
+  --border-strong: #5A6769;
+  --border-hairline: #1B2224;
+  --border-accent: #4FC9B6;
+  --axis-line: #5E6C6E;
+  --grid-line: #1E2628;
+  --edge-visible: #5E6B6E;
+
+  /* 阴影 */
+  --shadow: 0 1px 2px rgba(0,0,0,.45), 0 6px 18px rgba(0,0,0,.35);
+  --shadow-lift: 0 2px 6px rgba(0,0,0,.55), 0 18px 40px rgba(0,0,0,.45);
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(0,0,0,.45);
+  --elev-2: 0 2px 4px rgba(0,0,0,.5), 0 8px 20px rgba(0,0,0,.35);
+  --elev-3: 0 4px 10px rgba(0,0,0,.5), 0 16px 36px rgba(0,0,0,.4);
+  --elev-4: 0 8px 18px rgba(0,0,0,.55), 0 28px 64px rgba(0,0,0,.5);
+
+  /* 动效 */
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 600ms;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 字体 */
+  --font-serif: "Songti SC","STSong","SimSun","Noto Serif CJK SC","Source Han Serif SC",Georgia,serif;
+  --font-sans: -apple-system,"SF Pro Text","Segoe UI",system-ui,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --font-mono: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --font-code: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --font-display: var(--font-serif);
+  --font-text: var(--font-sans);
+  --font-data: var(--font-sans);
+
+  /* 字号与间距 */
+  --size-body: 1rem;
+  --size-hero: clamp(2.5rem, 6vw, 3.75rem);
+  --size-label: 0.8125rem;
+  --size-micro: 0.6875rem;
+  --size-section: 1.5rem;
+  --type-body: 1rem;
+  --type-caption: 0.8125rem;
+  --type-display: clamp(2.5rem, 6vw, 3.75rem);
+  --type-eyebrow: 0.75rem;
+  --type-label: 0.8125rem;
+  --type-lead: 1.125rem;
+  --type-number: 2.25rem;
+  --type-subtitle: 1.25rem;
+  --type-title: 1.75rem;
+  --leading-tight: 1.2;
+  --space-1: 4px;
+  --space-5: 20px;
+  --space-9: 36px;
+  --gap-tight: 8px;
+  --gap-loose: 32px;
+  --gap-section: 56px;
+
+  /* 布局 */
+  --container-read: 42rem;
+  --grid-columns: repeat(12, 1fr);
+  --indent-0: 0;
+  --radius-sm: 3px;
+  --radius-pill: 999px;
+  --z-nav: 60;
+  --z-drawer: 80;
+  --z-mask: 70;
+  --z-tooltip: 90;
+}
