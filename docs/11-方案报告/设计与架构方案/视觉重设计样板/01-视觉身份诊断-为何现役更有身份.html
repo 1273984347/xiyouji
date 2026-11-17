@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>视觉语言的「身份」诊断 · 现役 vs 零参考甲 vs 零参考乙</title>
+<style>
+:root{
+  --bg:#F2F1EE; --paper:#FBFAF7; --line:#E0DCD4; --line2:#C9C4B9;
+  --ink:#26231D; --ink2:#57534A; --ink3:#6F6A60;
+  --accent:#BF4127; --accent-tint:rgba(191,65,39,.08);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,SimSun,serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px 72px}
+header{padding:44px 0 24px;border-bottom:1px solid var(--line)}
+.kicker{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(25px,3.4vw,38px);line-height:1.24;margin:12px 0 10px;font-weight:600}
+.lede{color:var(--ink2);max-width:64ch}
+.meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--ink3)}
+.meta b{color:var(--ink2)}
+h2{font-family:var(--serif);font-size:21px;margin:44px 0 4px;padding-left:11px;border-left:3px solid var(--accent)}
+.note{color:var(--ink3);font-size:13px;margin:0 0 16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:20px 22px;margin-bottom:14px}
+.bar-row{display:grid;grid-template-columns:150px 1fr 62px;gap:12px;align-items:center;margin-bottom:7px;font-size:13.5px}
+.bar-row .nm{color:var(--ink2)}
+.bar-row .val{text-align:right;color:var(--ink3);font-variant-numeric:tabular-nums}
+.track{height:16px;background:var(--bg);border:1px solid var(--line);display:flex;overflow:hidden}
+.track i{display:block;height:100%}
+.f-warm{background:#C0392B}.f-cool{background:#40619E}.f-violet{background:#6D4E65}.f-neutral{background:#8E7D62}.f-other{background:#B7AC94}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink2);margin:12px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.swatch{width:11px;height:11px;display:inline-block;border-radius:2px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--paper);border:1px solid var(--line)}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.05em;color:var(--ink3);font-weight:600;background:rgba(0,0,0,.015)}
+tr:last-child td{border-bottom:0}
+td b{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{font-family:var(--font-mono,monospace);font-size:11.5px;padding:2px 7px;border:1px solid var(--line2);border-radius:2px;background:var(--bg)}
+.verdict{padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:2px;font-size:14px;color:var(--ink2);margin-top:8px}
+.verdict b{color:var(--ink)}
+ol.steps{margin:0;padding-left:22px}
+ol.steps li{margin-bottom:8px}
+.links{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.links a{display:inline-block;padding:9px 14px;min-height:44px;line-height:26px;border:1px solid var(--line2);border-radius:2px;color:var(--ink);text-decoration:none;font-size:13px}
+.links a:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-tint);text-decoration:none}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink3);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">W1264 · 视觉语言的「身份」诊断</div>
+  <h1>为什么现役比新方向更有身份感</h1>
+  <p class="lede">用户判「还不如现在的版本」是对的。这页把原因量化：<b>身份 = 全站通用色里「暖承载」与「冷数据」的配比</b>。现役是暖承载 + 冷数据（朱砂/宣纸做面、靛/黛绿做数据槽）；两个零参考方向整体倒向冷绿（连承载面都冷了），于是既正确又无身份。</p>
+  <div class="meta">
+    <span><b>口径</b> 覆盖 ≥80% 页面的色值（去重，不被内联副本重复计数放大）</span>
+    <span><b>现役</b> 875 页实测</span>
+    <span><b>甲/乙</b> 各 2 页样板</span>
+  </div>
+</header>
+
+<h2>一、全站通用色的族分布</h2>
+<p class="note">暖红（朱砂/赭/檀）· 绿青（靛/黛/青）· 蓝紫 · 中性灰 · 其他</p>
+
+<div class="card">
+  <div class="bar-row"><span class="nm">现役 宣纸刻本</span><div class="track"><i class="f-warm" style="width:62%"></i><i class="f-cool" style="width:16%"></i><i class="f-violet" style="width:5.5%"></i><i class="f-neutral" style="width:13.5%"></i><i class="f-other" style="width:3%"></i></div><span class="val">暖红 115</span></div>
+  <div class="bar-row"><span class="nm">零参考甲 读数台</span><div class="track"><i class="f-warm" style="width:9%"></i><i class="f-cool" style="width:44%"></i><i class="f-violet" style="width:4.5%"></i><i class="f-neutral" style="width:13.5%"></i><i class="f-other" style="width:29%"></i></div><span class="val">绿青 49</span></div>
+  <div class="bar-row"><span class="nm">零参考乙 注释本</span><div class="track"><i class="f-warm" style="width:12%"></i><i class="f-cool" style="width:39%"></i><i class="f-violet" style="width:3.5%"></i><i class="f-neutral" style="width:22%"></i><i class="f-other" style="width:23.5%"></i></div><span class="val">绿青 44</span></div>
+  <div class="legend">
+    <span><i class="swatch f-warm"></i>暖红（朱砂/赭/檀）</span>
+    <span><i class="swatch f-cool"></i>绿青（靛/黛/青）</span>
+    <span><i class="swatch f-violet"></i>蓝紫（紫檀）</span>
+    <span><i class="swatch f-neutral"></i>中性灰（墨/纸）</span>
+    <span><i class="swatch f-other"></i>其他</span>
+  </div>
+</div>
+
+<div class="verdict">
+<b>读法</b>：现役的<b>暖红语汇是甲的 11.5 倍、乙的 8 倍</b>；而绿青冷色甲乙是现役的 1.6 倍。<br>
+<b>现役 = 暖承载 + 冷数据</b>（朱砂/宣纸做页面底与强调；靛 #40619E、黛绿 #3A473A 做数据序列槽）——两种温度各司其职，所以既统一又不单调。<br>
+<b>甲乙 = 整体倒向冷绿</b>（连承载面都冷了，暖红只剩 10–14 个）——色调一致，却丢掉了「这是一本明代古籍」的第一层信号。
+</div>
+
+<h2>二、现役的语汇骨架（每页都带的那些色）</h2>
+<p class="note">覆盖 867–869 页（全站几乎每一页都出现）——这是「统一感」的物质基础</p>
+<div class="card">
+  <div class="chips">
+    <span class="chip" style="background:#C0392B;color:#fff;border-color:#C0392B">#C0392B 朱砂 · 强调</span>
+    <span class="chip" style="background:#F5F0E4">#F5F0E4 宣纸 · 页面底</span>
+    <span class="chip" style="background:#FCFAF4">#FCFAF4 纸白 · 卡片面</span>
+    <span class="chip" style="background:#1C1A17;color:#F5F0E4;border-color:#1C1A17">#1C1A17 墨 · 主文字</span>
+    <span class="chip" style="background:#221D16;color:#F5F0E4;border-color:#221D16">#221D16 玄墨 · 深色带</span>
+    <span class="chip" style="background:#8E7D62;color:#fff;border-color:#8E7D62">#8E7D62 赭 · 序列 3</span>
+    <span class="chip" style="background:#40619E;color:#fff;border-color:#40619E">#40619E 靛 · 序列 2</span>
+    <span class="chip" style="background:#3A473A;color:#fff;border-color:#3A473A">#3A473A 黛绿 · 序列 4</span>
+    <span class="chip" style="background:#6B665E;color:#fff;border-color:#6B665E">#6B665E 墨灰 · 序列 5</span>
+    <span class="chip" style="background:#DCD3BF">#DCD3BF 发丝线 · 界栏</span>
+  </div>
+  <p style="margin:16px 0 0;font-size:13.5px;color:var(--ink2)">注意最后一行：<b>承载面（宣纸/纸白/墨/玄墨）+ 强调（朱砂）+ 四个冷序列色（靛/黛绿/墨灰/赭）+ 一根发丝线</b>——这不是「全是传统色」，而是<b>暖材料 + 冷数据</b>的分工。</p>
+</div>
+
+<h2>三、我的错误在哪（可复用的教训）</h2>
+<div class="card">
+  <p style="margin:0 0 12px;color:var(--ink2)">我给两个零参考 agent 的简报里埋了两条禁令——<b>它们不是让 agent 做坏了，而是把唯一正解挡在了答案空间外</b>：</p>
+  <table>
+    <tr><th style="width:26%">我写的原文</th><th style="width:34%">agent 的理解</th><th>后果</th></tr>
+    <tr><td>「文化标识来自内容本身，<b>不靠页面装饰去『装』</b>」</td><td>用传统色/宋体 = 装饰性装腔 ⇒ 主动回避</td><td>放弃唯一能与题材同源的材料层</td></tr>
+    <tr><td>「<b>禁</b>默认 Tailwind 靛蓝/<b>紫罗兰</b>做主强调色」</td><td>紫色家族一并回避</td><td>连现役用得最多的紫檀（6070 次）也被排除</td></tr>
+  </table>
+  <div class="verdict">
+  <b>修正后的简报</b>：禁的是<b>「装腔的仿古」</b>（烫金花边/卷轴造型按钮）与<b>「现代 UI 库默认紫」</b>（#6366F1/#8B5CF6），<b>不忌讳</b>纸色 / 宋体 / 朱砂 / 紫檀 / 绛紫等传统颜料；题材描述也从标签（「明代世情」）改成可用指令（「一本有物质感的古籍——纸、墨、朱、印、线装、拓片」）。
+  </div>
+</div>
+
+<h2>四、以后判任何新方向的五个问题</h2>
+<div class="card">
+  <ol class="steps">
+    <li><b>它有没有身份？</b>先问这个，再问「对不对」。色盲安全 / 对比度 / 零依赖只保证它不坏，不保证它属于这个站点。</li>
+    <li><b>暖承载与冷数据配比是多少？</b>（可量化：全站通用色的族分布）若整版倒向单一温度，即便漂亮也没有「这是一本古籍」的第一层信号。</li>
+    <li><b>是「装腔」还是「传统」？</b>判据：去掉装饰后，材料语言（纸/墨/朱/印/线装）是否还在。</li>
+    <li><b>多方向的产出若收敛到同一类解法，先怀疑简报</b>，而不是以为「共识即正确」。</li>
+    <li><b>它与内容的同源点能一句话说清吗？</b>说不清 = 没身份。</li>
+  </ol>
+</div>
+
+<div class="links">
+  <a href="00-三方对照-现役vs零参考甲vs零参考乙.html">三方对照页（12 图实拍）</a>
+  <a href="../W1264-全站前端重设计-零参考重做-方向裁决材料-2026-11-17.md">W1264 方向裁决材料</a>
+</div>
+
+<footer>
+  W1264 · 零参考重做 · 色谱调查为本机实测（现役 875 页 / 甲乙各 2 页样板）· 口径：覆盖 ≥80% 页面的色值（去重）· 生成 2026-11-17
+</footer>
+</div>
+</body>
+</html>
