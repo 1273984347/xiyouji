@@ -10,7 +10,7 @@
    "insight": 1,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 141
+   "text_len": 176
   },
   {
    "page": "about.html",
@@ -19,7 +19,7 @@
    "insight": 16,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 2598
+   "text_len": 2633
   },
   {
    "page": "curated.html",
@@ -28,7 +28,7 @@
    "insight": 3,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 4246
+   "text_len": 4281
   },
   {
    "page": "dashboard.html",
@@ -37,7 +37,7 @@
    "insight": 29,
    "tooltip": 0,
    "legend": 12,
-   "text_len": 4385
+   "text_len": 4420
   },
   {
    "page": "dukou-engine.html",
@@ -46,7 +46,7 @@
    "insight": 0,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 492
+   "text_len": 527
   },
   {
    "page": "guide.html",
@@ -55,7 +55,7 @@
    "insight": 7,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 1615
+   "text_len": 1650
   },
   {
    "page": "index.html",
@@ -64,7 +64,7 @@
    "insight": 7,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 2498
+   "text_len": 2541
   },
   {
    "page": "rum-viewer.html",
@@ -73,7 +73,7 @@
    "insight": 0,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 415
+   "text_len": 450
   },
   {
    "page": "visit-viewer.html",
@@ -82,7 +82,7 @@
    "insight": 0,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 180
+   "text_len": 215
   },
   {
    "page": "data/81-hardships-view.html",
@@ -324,7 +324,7 @@
    "source_note": 3,
    "insight": 21,
    "tooltip": 23,
-   "legend": 41,
+   "legend": 42,
    "text_len": 2435
   },
   {
@@ -739,7 +739,7 @@
    "insight": 10,
    "tooltip": 5,
    "legend": 0,
-   "text_len": 2024
+   "text_len": 1907
   },
   {
    "page": "data/poetry-rhythm-analysis.html",

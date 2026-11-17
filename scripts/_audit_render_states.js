@@ -246,7 +246,11 @@ async function waitForStable(page, maxMs, darkMode = false) {
         for (const s of svgs) {
           const cs = getComputedStyle(s);
           const r = s.getBoundingClientRect();
-          if (cs.fill === 'none' || cs.visibility === 'hidden' || cs.display === 'none'
+          // W1271 CI 回归根修：移除 cs.fill === 'none' —— 描边型图标（fill:none + stroke·如
+          // ic-sun 18×18）对用户完全可见，旧判据把「非填充图形」误计为暗态不可见 ⇒ 本批直推
+          // 后 CI dark-gate 首曝 en/narrative-experiment.html 0→5 假回归。「深底深色填充」
+          // 的真关切由 invisibleShapes（亮度判据）独立承载，本计数只保留真不可见四条件。
+          if (cs.visibility === 'hidden' || cs.display === 'none'
               || parseFloat(cs.opacity) === 0 || (r.width === 0 && r.height === 0)) invisible++;
         }
       }

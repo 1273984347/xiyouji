@@ -47,6 +47,13 @@
 | packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/INDEX.md | W1271 | 目录文档 refresh（新收 audit_chart_content.py） |
 | packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/README.md | W1271 | 目录文档 refresh（同上） |
 | site/rss.xml | W1271 | RSS 产物新鲜度跟随（第 55 篇复盘报告） |
+| site/en/json/character_appearance.json | W1271 | EN 真值随生成器重建（build_en_json translate 模式·12 对齐·翻译缺口 0） |
+| site/en/character-appearance.html | W1271 | EN 页内嵌随真值同步（sync_embedded） |
+| site/en/methodology-matrix.html | W1271 | EN 页内嵌潜在漂移顺带修复（sync_embedded 全量跑） |
+| site/data/json/character_appearance.json | W1271 | ZH 真值同步（sync_data_json） |
+| site/data/character-appearance.html | W1271 | ZH 页内嵌整块灌新真值（太上老君[6] 8→12·玉帝等多处陈旧一并清偿） |
+| scripts/output/chart-content-audit.json | W1271 | run_all 重生成跟随 |
+| scripts/_audit_render_states.js | W1271 | 暗态 invisible 判据根修（移除 fill:none 误计·描边图标可见） |
 
 
 ## W1266 图表与可视化内容层与可读层打磨升级 批二（2026-11-18）

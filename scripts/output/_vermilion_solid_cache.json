@@ -42,7 +42,7 @@
    "counts": {}
   },
   "data/character-appearance.html": {
-   "sha1": "b737f1014e97bb8f66701bb3f34677ce1f3c1090",
+   "sha1": "91432f631068519a4496498e5241e65b33774c06",
    "counts": {}
   },
   "data/character-dynamic-network.html": {
@@ -450,7 +450,7 @@
    "counts": {}
   },
   "en/character-appearance.html": {
-   "sha1": "5599ef1b8a47d3edef3c8cd87d70493724f24f6f",
+   "sha1": "1f5f6efdea2728ccddd972763ba06601ea533e78",
    "counts": {}
   },
   "en/character-bailongma.html": {
@@ -806,7 +806,7 @@
    "counts": {}
   },
   "en/methodology-matrix.html": {
-   "sha1": "3fa6b3769854f5a3029b0c1b9030bc3f0fd05a3e",
+   "sha1": "012f19248d3704589d2a53de87571e8854723068",
    "counts": {}
   },
   "en/methodology.html": {
@@ -954,5 +954,5 @@
    "counts": {}
   }
  },
- "generated_at": "2026-11-17T21:55:52.052Z"
+ "generated_at": "2026-11-17T23:39:17.574Z"
 }
