@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 76<!--stats:gate_count--> 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 77<!--stats:gate_count--> 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前按 §7 路径按需读节；更细的规则以文末「权威文档」为准。
 >
@@ -102,9 +102,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=76<!--stats:gate_count--> 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=77<!--stats:gate_count--> 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 76<!--stats:gate_count--> 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 77<!--stats:gate_count--> 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -192,6 +192,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 74. **治理文档体积窗口**（W1232·P2-4 升格）——体积/密度超窗阻断提交，见 gates.md。
 75. **明暗两态截图差异**（W1264·E-245 机器化）——两态截图须真不同（底色读数 + 字节数双校验），防「暗色图=亮色图」而探针全绿，见 gates.md。
 76. **公共层样式覆盖率**（W1264·样式治理棘轮）——公共层须管住 ≥11.8% 的页面样式（现役 113/953），低于则判红；未达目标 40% 仅提示并列出未覆盖高频类，见 gates.md。
+77. **视觉身份判据**（W1264·E-250 机器化）——统计全站通用色的暖承载/冷数据配比（现役暖承载 56.1%），防「正确但无身份」的视觉方向，见 gates.md。
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
