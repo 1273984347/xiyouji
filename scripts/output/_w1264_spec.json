@@ -79,6 +79,10 @@
     "| pitfalls.md | W1264 | 本批收官链产物 |",
     "| .agent/skills/puti-shouye/SKILL.md | W1264 | 本批收官链产物 |",
     "| STRUCTURE.md | W1264 | 本批收官链产物 |",
-    "| scripts/output/_cascade_files_W1264.txt | W1264 | 本批级联清单 |"
+    "| scripts/output/_cascade_files_W1264.txt | W1264 | 本批级联清单 |",
+    "| README.md | W1264 | 本批收官链产物 |",
+    "| archive/docs/W批次编号对账表-ARCHIVE.md | W1264 | 本批收官链产物 |",
+    "| pytest.ini | W1264 | 本批收官链产物 |",
+    "| scripts/check_public_layer_coverage.py | W1264 | 第 76 槽判据脚本（公共层覆盖率棘轮） |"
   ]
 }

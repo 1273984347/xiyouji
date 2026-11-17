@@ -75,6 +75,10 @@
 | .agent/skills/puti-shouye/SKILL.md | W1264 | 本批收官链产物 |
 | STRUCTURE.md | W1264 | 本批收官链产物 |
 | scripts/output/_cascade_files_W1264.txt | W1264 | 本批级联清单 |
+| README.md | W1264 | 本批收官链产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1264 | 本批收官链产物 |
+| pytest.ini | W1264 | 本批收官链产物 |
+| scripts/check_public_layer_coverage.py | W1264 | 第 76 槽判据脚本（公共层覆盖率棘轮） |
 
 ## W1263 全站前端重新设计 · 需求反思与方案裁决材料 + v3 设计资产落仓（2026-11-17）
 
