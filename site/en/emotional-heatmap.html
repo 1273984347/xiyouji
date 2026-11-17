@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-H1q5sx62QPg8FmZ+tO3lEACnYqPHbk3AjyAl07T6Bgo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-kirOjd1YlnqowCthxoS5YQ7VYaR4I7bc4jUH8IeQOtI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Emotional Heatmap · Annotated Journey to the West</title>
@@ -3151,7 +3151,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     }
 
     async function loadData() {
-        const base = '../data/json/';
+        const base = '../en/json/';
         const [scholars, hardships, reactions] = await Promise.all([
             fetchJson(base + 'emotional_scholars.json', 'scholars'),
             fetchJson(base + 'emotional_hardships.json', 'hardships'),
@@ -3160,7 +3160,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         if (fetchStatus.anyFetched) {
             document.getElementById('dataSource').innerHTML =
-                'Data source: loaded live from <code>../data/json/</code> (running in http server mode). Quotes marked "historical" are real documents; those marked "pastiche" are composed following the intellectual thread.';
+                'Data source: loaded live from <code>../en/json/</code> (running in http server mode). Quotes marked "historical" are real documents; those marked "pastiche" are composed following the intellectual thread.';
         }
 
         return { scholars, hardships, reactions };

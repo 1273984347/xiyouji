@@ -1,0 +1,142 @@
+{
+  "concept_name": "Life-and-Death Register Reincarnation Flow",
+  "english_name": "Life-Death Registry Reincarnation Flow",
+  "definition": "The Underworld's Book of Life and Death is the hub of the reincarnation system, yet it has been repeatedly tampered with or specially handled, exposing a 'loophole' mechanism through which karma can be intervened; every alteration corresponds to a karmic connection",
+  "core_principle": "In the original text the register is by no means immutable; there are three kinds of tamperers: self-deletion (Wukong) / judges' private edits (Judge Cui) / King Yama's special grants (Liu Quan / Kou Hong) — embodying the hidden rule that 'karma outweighs the registers'",
+  "cases": [
+    {
+      "n": 1,
+      "character": "Sun Wukong",
+      "identity": "Handsome Monkey King of Flower-Fruit Mountain, a grassroots figure with no official establishment",
+      "original_fate": "Soul register no. 1350, allotted a lifespan of 342 years, to die a natural death",
+      "actual_fate": "Forcibly deleted his death record, crossing out his own and all monkey-kind names, escaping samsara, and extending his life until he became a Buddha after the pilgrimage",
+      "modifier": "Sun Wukong (self-deletion, forcible erasure of death record)",
+      "cause": "Seeking immortality; dissatisfied with his lifespan after returning from Daoist study, he crossed out his own name and those of the Flower-Fruit Mountain monkeys",
+      "chapter": "Ch. 3",
+      "impact_severity": 10,
+      "data_volume_affected": "47,000 monkey-kind records",
+      "long_term_consequence": "The monkey tribe also left the Underworld's jurisdiction; the register was permanently altered with no remedy"
+    },
+    {
+      "n": 2,
+      "character": "Li Shimin",
+      "identity": "Taizong Emperor of the Great Tang",
+      "original_fate": "His lifespan ended in the 13th year of the Zhenguan era; he was fated to die while touring the Underworld",
+      "actual_fate": "Judge Cui privately changed 'Zhenguan 13' to 'Zhenguan 33,' extending his life by 20 years and returning his soul to the living",
+      "modifier": "Judge Cui (Underworld judge, internal staff, private alteration)",
+      "cause": "Wei Zheng, an old friend of Judge Cui, pleaded via dream; Li Shimin toured the Underworld and saw virtuous souls amassing merit",
+      "chapter": "Ch. 10-11",
+      "impact_severity": 7,
+      "data_volume_affected": "1 record (an emperor's fate)",
+      "long_term_consequence": "Li Shimin returned to life and held the Land-and-Water Assembly, launching the pilgrimage project — the story's master inciting incident"
+    },
+    {
+      "n": 3,
+      "character": "Kou Hong (Squire Kou)",
+      "identity": "Squire Kou of Diling County, Tongtai Prefecture, who fed ten thousand monks",
+      "original_fate": "His lifespan was not yet up; kicked to death by robbers, his soul returned to the Underworld",
+      "actual_fate": "King Yama granted his soul's return, extending his life by 12 years — one extra cycle for the Great Tang",
+      "modifier": "Kṣitigarbha Bodhisattva / King Yama (special grant) + Wukong's intercession in the Underworld",
+      "cause": "Merit from feeding ten thousand monks; mistakenly killed by robbers, his wronged soul filed a complaint",
+      "chapter": "Ch. 97",
+      "impact_severity": 5,
+      "data_volume_affected": "1 record",
+      "long_term_consequence": "Squire Kou's soul returned — showing the Underworld has a special channel for 'good people' and karma can be earned"
+    },
+    {
+      "n": 4,
+      "character": "Liu Quan",
+      "identity": "Liu Quan of Junzhou, who hanged himself after his wife Li Cuilian was suspected over a golden hairpin she gave to a monk",
+      "original_fate": "Entered the Underworld delivering melons on behalf of the dead; fated to die in the melon-delivery task",
+      "actual_fate": "King Yama investigated and found both spouses had immortal lifespans, granting both return to life; Li Cuilian was reborn by borrowing the corpse of Li Shimin's sister Li Yuying",
+      "modifier": "King Yama (special grant, after examining karma)",
+      "cause": "Merit for delivering melons; both deaths were wrongful, so King Yama specially granted a double return",
+      "chapter": "Ch. 11",
+      "impact_severity": 4,
+      "data_volume_affected": "2 records (a couple's double return)",
+      "long_term_consequence": "The couple reunited — showing the Underworld has a 'special soul-return' channel that is not systematized but handled case-by-case by karma"
+    },
+    {
+      "n": 5,
+      "character": "Jing River Dragon King",
+      "identity": "Dragon lord of the Jing River outside Chang'an, of the water-kind",
+      "original_fate": "Should not have died; fated to live out his natural years",
+      "actual_fate": "Defied the edict by altering the timing and amount of rain; executed by Wei Zheng in a dream at the Dragon-Slaying Terrace, his dragon head falling onto a Chang'an street",
+      "modifier": "Wei Zheng (execution supervisor, human-and-divine official)",
+      "cause": "Bet with Yuan Shoucheng and violated the Jade Emperor's edict on rain timing and amount, breaking heavenly law",
+      "chapter": "Ch. 9-10",
+      "impact_severity": 8,
+      "data_volume_affected": "1 record (but triggered the Tang king's later Underworld tour)",
+      "long_term_consequence": "The Dragon King's ghost haunted Li Shimin, causing his Underworld tour — the second major inciting incident of the pilgrimage project"
+    },
+    {
+      "n": 6,
+      "character": "King of Wuji",
+      "identity": "Ruler of Wuji, murdered in a well three years earlier",
+      "original_fate": "Should not have died; pushed into the Eight-Treasure Glass Well and wrongfully dead for three years",
+      "actual_fate": "Suffered three years at the bottom of the well; Wukong fetched a soul-returning elixir and used the well water to revive him, restoring him to the throne",
+      "modifier": "Sun Wukong (fetched the elixir) + Bajie (carried the body from the well) + Manjushri Bodhisattva (tacitly let the green-maned lion act)",
+      "cause": "Three years earlier the King of Wuji had drowned an incarnation of Manjushri for three days, incurring retribution in kind",
+      "chapter": "Ch. 37-39",
+      "impact_severity": 6,
+      "data_volume_affected": "1 record (three years at the well bottom)",
+      "long_term_consequence": "After returning to life he converted to Buddhism — revealing that wrongful retribution must be repaid 'in kind'"
+    },
+    {
+      "n": 7,
+      "character": "King of Inspiration (Goldfish Spirit)",
+      "identity": "A goldfish in Guanyin's lotus pond who surfaced daily to hear sutras and became a spirit",
+      "original_fate": "Originally a bodhisattva's pet, outside the register of life and death and beyond the six realms",
+      "actual_fate": "Descended on his own to the Tongtian River, becoming King of Inspiration, demanding boy-and-girl sacrifices and devouring countless people over 9 years",
+      "modifier": "The Goldfish Spirit descended on its own (without Guanyin's instruction); Guanyin retrieved it back to the lotus pond",
+      "cause": "Enlightened by hearing sutras, became a spirit and descended, using sacrifice as a pretext to seize bodies and eat people",
+      "chapter": "Ch. 47-49",
+      "impact_severity": 7,
+      "data_volume_affected": "18 boys and girls of Chen Village over 9 years; fated to reincarnate by the register, but their bodies were seized and consumed",
+      "long_term_consequence": "Guanyin retrieved it with a basket, outside the reincarnation system — revealing 'immortal-and-Buddha retinues' hold extra-legal power"
+    },
+    {
+      "n": 8,
+      "character": "Zhu Bajie · Sha Wujing (combined case)",
+      "identity": "Marshal Tianpeng · General Curtain-Lifter (martial deities of the Heavenly Court)",
+      "original_fate": "Originally orthodox deities of the Heavenly Court, enjoying heavenly stipends and outside samsara",
+      "actual_fate": "Zhu Bajie, for flirting with Chang'e, was demoted and wrongly cast into a sow's womb; Sha Wujing, for shattering a glass goblet, was demoted and pierced by a flying sword once every seven days",
+      "modifier": "Jade Emperor (demotion decree)",
+      "cause": "Bajie, drunk at the Peach Banquet, flirted with Chang'e; Wujing accidentally shattered a glass goblet at the Peach Banquet",
+      "chapter": "Ch. 8 / Ch. 22",
+      "impact_severity": 6,
+      "data_volume_affected": "2 records (two deities demoted to the mortal world)",
+      "long_term_consequence": "The two became core members of the pilgrimage team — revealing demotion is an 'atonement + training' mechanism, not pure punishment"
+    }
+  ],
+  "registry_stats": {
+    "total_cases": 8,
+    "tampering_types": {
+      "Self-altered (record forcibly erased)": 1,
+      "Secretly altered by the judge": 1,
+      "Special Permission of King Yama": 2,
+      "Executed by the Heavenly Court (execution or demotion)": 2,
+      "Mount descends to the mortal world (possession or usurpation)": 1,
+      "Taken over by an immortal or Buddha": 1
+    },
+    "modifying_party": [
+      "Sun Wukong",
+      "Judge Cui",
+      "King Yama",
+      "Wei Zheng",
+      "Manjushri / green-maned lion",
+      "Goldfish Spirit",
+      "Jade Emperor"
+    ],
+    "common_pattern": "The register is not immutable; every tamperer has a corresponding 'karmic connection' — karma outweighs the registers",
+    "governance_gap": "Only 1 of 8 cases (the Jing River Dragon King) was executed by the book; the other 7 were 'special cases' — an 87.5% Underworld governance gap rate"
+  },
+  "registry_insights": [
+    "In the Underworld the register is a 'reference book,' not an 'absolute book'; karmic connections can take priority over the registers",
+    "Of the 8 cases only the 'Jing River Dragon King' was executed by the book; the rest were 'tampering/special cases' — showing karma ranks above the registers",
+    "Li Shimin's 20 extra years of life is the story's master inciting incident; without it there is no pilgrimage project",
+    "Wukong's forcible deletion of his death record is the first 'tampering,' foreshadowing the havoc in Heaven and marking the start of the Heavenly Court's governance collapse",
+    "The soul-returns of Kou Hong and Liu Quan reveal the Underworld's 'special channel for good people,' not pure by-the-book execution",
+    "The Goldfish Spirit case reveals 'immortal-and-Buddha retinues' hold extra-legal power and can bypass the register"
+  ]
+}

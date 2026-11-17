@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-RpwM6KFG2gaRAWzHI/zH0r2DVbyGVxh0cxXO2m13pZE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-/XgG5WJX5/aggS1a0PaMt92nL0vZareCLYlcv9Ls1/o=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chapter Length & Dialogue Stats · 详解西游记</title>
@@ -2233,29 +2233,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     const COLOR_RATIO     = "#C0392B";  // 对话占比折线（红）
     const COLOR_POEM      = "#3A473A";  // 诗词数（绿）
 
-    // fallback mock 数据（10 回示例）
-    const MOCK_DATA = {
-        total_chapters: 10,
-        total_chars: 62800,
-        total_dialogue_chars: 26150,
-        total_poems: 32,
-        avg_chars_per_chapter: 6280.0,
-        avg_dialogue_ratio: 0.4164,
-        longest_chapter: "Sample Ch.5",
-        shortest_chapter: "Sample Ch.3",
-        per_chapter: [
-            { chapter: "Sample Ch.1",  total_chars: 5800, chinese_chars: 5200, dialogue_chars: 2300, narrative_chars: 3500, dialogue_ratio: 0.3966, poem_count: 3 },
-            { chapter: "Sample Ch.2",  total_chars: 6200, chinese_chars: 5580, dialogue_chars: 2600, narrative_chars: 3600, dialogue_ratio: 0.4194, poem_count: 4 },
-            { chapter: "Sample Ch.3",  total_chars: 4800, chinese_chars: 4320, dialogue_chars: 2050, narrative_chars: 2750, dialogue_ratio: 0.4271, poem_count: 2 },
-            { chapter: "Sample Ch.4",  total_chars: 6500, chinese_chars: 5850, dialogue_chars: 2750, narrative_chars: 3750, dialogue_ratio: 0.4231, poem_count: 3 },
-            { chapter: "Sample Ch.5",  total_chars: 7800, chinese_chars: 7020, dialogue_chars: 3300, narrative_chars: 4500, dialogue_ratio: 0.4231, poem_count: 5 },
-            { chapter: "Sample Ch.6",  total_chars: 6100, chinese_chars: 5490, dialogue_chars: 2500, narrative_chars: 3600, dialogue_ratio: 0.4098, poem_count: 3 },
-            { chapter: "Sample Ch.7",  total_chars: 6700, chinese_chars: 6030, dialogue_chars: 2850, narrative_chars: 3850, dialogue_ratio: 0.4254, poem_count: 4 },
-            { chapter: "Sample Ch.8",  total_chars: 5900, chinese_chars: 5310, dialogue_chars: 2450, narrative_chars: 3450, dialogue_ratio: 0.4153, poem_count: 3 },
-            { chapter: "Sample Ch.9",  total_chars: 6400, chinese_chars: 5760, dialogue_chars: 2700, narrative_chars: 3700, dialogue_ratio: 0.4219, poem_count: 2 },
-            { chapter: "Sample Ch.10", total_chars: 6600, chinese_chars: 5940, dialogue_chars: 2650, narrative_chars: 3950, dialogue_ratio: 0.4015, poem_count: 3 }
-        ]
-    };
+    // （原 mock 回退块已移除·降级路径直接回真值快照）
 
     // 数字格式化（千分位）
     function fmt(n) {
@@ -2610,16 +2588,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // root = site/) and fall back to mock because that JSON was an all-zero stub.
     const EMBEDDED_DATA = {
   "total_chapters": 100,
-  "total_chars": 740093,
-  "total_dialogue_chars": 350447,
+  "total_chars": 742357,
+  "total_dialogue_chars": 351479,
   "total_poems": 19,
-  "avg_chars_per_chapter": 7400.9,
+  "avg_chars_per_chapter": 7423.6,
   "avg_dialogue_ratio": 0.4735,
-  "longest_chapter": "Chapter 31",
-  "shortest_chapter": "Chapter 7",
+  "longest_chapter": "Chapter 031",
+  "shortest_chapter": "Chapter 007",
   "per_chapter": [
     {
-      "chapter": "Chapter 1",
+      "chapter": "Chapter 001",
       "total_chars": 7288,
       "chinese_chars": 5729,
       "dialogue_chars": 2451,
@@ -2628,7 +2606,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 2
     },
     {
-      "chapter": "Chapter 2",
+      "chapter": "Chapter 002",
       "total_chars": 7397,
       "chinese_chars": 5720,
       "dialogue_chars": 3760,
@@ -2637,25 +2615,25 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 3",
-      "total_chars": 7051,
-      "chinese_chars": 5500,
-      "dialogue_chars": 2989,
-      "narrative_chars": 4062,
-      "dialogue_ratio": 0.4239,
+      "chapter": "Chapter 003",
+      "total_chars": 7402,
+      "chinese_chars": 5801,
+      "dialogue_chars": 3179,
+      "narrative_chars": 4223,
+      "dialogue_ratio": 0.4295,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 4",
-      "total_chars": 7087,
-      "chinese_chars": 5613,
-      "dialogue_chars": 2667,
-      "narrative_chars": 4420,
-      "dialogue_ratio": 0.3763,
+      "chapter": "Chapter 004",
+      "total_chars": 7076,
+      "chinese_chars": 5609,
+      "dialogue_chars": 2664,
+      "narrative_chars": 4412,
+      "dialogue_ratio": 0.3765,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 5",
+      "chapter": "Chapter 005",
       "total_chars": 6669,
       "chinese_chars": 5318,
       "dialogue_chars": 2367,
@@ -2664,43 +2642,43 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 1
     },
     {
-      "chapter": "Chapter 6",
-      "total_chars": 6967,
+      "chapter": "Chapter 006",
+      "total_chars": 6965,
       "chinese_chars": 5552,
-      "dialogue_chars": 2632,
-      "narrative_chars": 4335,
-      "dialogue_ratio": 0.3778,
+      "dialogue_chars": 2633,
+      "narrative_chars": 4332,
+      "dialogue_ratio": 0.378,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 7",
-      "total_chars": 5162,
-      "chinese_chars": 4126,
-      "dialogue_chars": 1640,
-      "narrative_chars": 3522,
-      "dialogue_ratio": 0.3177,
+      "chapter": "Chapter 007",
+      "total_chars": 5521,
+      "chinese_chars": 4425,
+      "dialogue_chars": 1798,
+      "narrative_chars": 3723,
+      "dialogue_ratio": 0.3257,
       "poem_count": 5
     },
     {
-      "chapter": "Chapter 8",
-      "total_chars": 6641,
-      "chinese_chars": 5271,
-      "dialogue_chars": 2810,
-      "narrative_chars": 3831,
-      "dialogue_ratio": 0.4231,
+      "chapter": "Chapter 008",
+      "total_chars": 6644,
+      "chinese_chars": 5274,
+      "dialogue_chars": 2795,
+      "narrative_chars": 3849,
+      "dialogue_ratio": 0.4207,
       "poem_count": 5
     },
     {
-      "chapter": "Chapter 9",
-      "total_chars": 6060,
+      "chapter": "Chapter 009",
+      "total_chars": 6058,
       "chinese_chars": 4821,
       "dialogue_chars": 3329,
-      "narrative_chars": 2731,
-      "dialogue_ratio": 0.5493,
+      "narrative_chars": 2729,
+      "dialogue_ratio": 0.5495,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 10",
+      "chapter": "Chapter 010",
       "total_chars": 6759,
       "chinese_chars": 5392,
       "dialogue_chars": 2500,
@@ -2709,7 +2687,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 11",
+      "chapter": "Chapter 011",
       "total_chars": 7197,
       "chinese_chars": 5762,
       "dialogue_chars": 2923,
@@ -2718,7 +2696,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 12",
+      "chapter": "Chapter 012",
       "total_chars": 6391,
       "chinese_chars": 5091,
       "dialogue_chars": 2581,
@@ -2727,7 +2705,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 13",
+      "chapter": "Chapter 013",
       "total_chars": 6597,
       "chinese_chars": 5303,
       "dialogue_chars": 1970,
@@ -2736,7 +2714,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 14",
+      "chapter": "Chapter 014",
       "total_chars": 8802,
       "chinese_chars": 6962,
       "dialogue_chars": 4516,
@@ -2745,7 +2723,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 15",
+      "chapter": "Chapter 015",
       "total_chars": 7482,
       "chinese_chars": 6021,
       "dialogue_chars": 3880,
@@ -2754,7 +2732,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 16",
+      "chapter": "Chapter 016",
       "total_chars": 7934,
       "chinese_chars": 6340,
       "dialogue_chars": 3405,
@@ -2763,7 +2741,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 17",
+      "chapter": "Chapter 017",
       "total_chars": 8608,
       "chinese_chars": 6955,
       "dialogue_chars": 4081,
@@ -2772,7 +2750,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 18",
+      "chapter": "Chapter 018",
       "total_chars": 6039,
       "chinese_chars": 4813,
       "dialogue_chars": 3246,
@@ -2781,16 +2759,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 19",
-      "total_chars": 6969,
-      "chinese_chars": 5592,
+      "chapter": "Chapter 019",
+      "total_chars": 7022,
+      "chinese_chars": 5637,
       "dialogue_chars": 3830,
-      "narrative_chars": 3139,
-      "dialogue_ratio": 0.5496,
+      "narrative_chars": 3192,
+      "dialogue_ratio": 0.5454,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 20",
+      "chapter": "Chapter 020",
       "total_chars": 7256,
       "chinese_chars": 5756,
       "dialogue_chars": 3531,
@@ -2799,7 +2777,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 21",
+      "chapter": "Chapter 021",
       "total_chars": 7295,
       "chinese_chars": 5828,
       "dialogue_chars": 3189,
@@ -2808,7 +2786,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 22",
+      "chapter": "Chapter 022",
       "total_chars": 7009,
       "chinese_chars": 5636,
       "dialogue_chars": 3711,
@@ -2817,7 +2795,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 23",
+      "chapter": "Chapter 023",
       "total_chars": 7548,
       "chinese_chars": 6003,
       "dialogue_chars": 4136,
@@ -2826,16 +2804,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 24",
-      "total_chars": 7398,
-      "chinese_chars": 5886,
-      "dialogue_chars": 3578,
-      "narrative_chars": 3820,
-      "dialogue_ratio": 0.4836,
+      "chapter": "Chapter 024",
+      "total_chars": 7644,
+      "chinese_chars": 6094,
+      "dialogue_chars": 3635,
+      "narrative_chars": 4009,
+      "dialogue_ratio": 0.4755,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 25",
+      "chapter": "Chapter 025",
       "total_chars": 7872,
       "chinese_chars": 6245,
       "dialogue_chars": 3663,
@@ -2844,7 +2822,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 26",
+      "chapter": "Chapter 026",
       "total_chars": 7048,
       "chinese_chars": 5635,
       "dialogue_chars": 3363,
@@ -2853,7 +2831,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 27",
+      "chapter": "Chapter 027",
       "total_chars": 7366,
       "chinese_chars": 5889,
       "dialogue_chars": 4008,
@@ -2862,7 +2840,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 28",
+      "chapter": "Chapter 028",
       "total_chars": 6636,
       "chinese_chars": 5343,
       "dialogue_chars": 2444,
@@ -2871,7 +2849,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 29",
+      "chapter": "Chapter 029",
       "total_chars": 6642,
       "chinese_chars": 5312,
       "dialogue_chars": 3526,
@@ -2880,7 +2858,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 30",
+      "chapter": "Chapter 030",
       "total_chars": 8385,
       "chinese_chars": 6739,
       "dialogue_chars": 4087,
@@ -2889,7 +2867,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 31",
+      "chapter": "Chapter 031",
       "total_chars": 9041,
       "chinese_chars": 7243,
       "dialogue_chars": 5290,
@@ -2898,7 +2876,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 32",
+      "chapter": "Chapter 032",
       "total_chars": 8288,
       "chinese_chars": 6536,
       "dialogue_chars": 4646,
@@ -2907,7 +2885,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 33",
+      "chapter": "Chapter 033",
       "total_chars": 8210,
       "chinese_chars": 6450,
       "dialogue_chars": 4674,
@@ -2916,7 +2894,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 34",
+      "chapter": "Chapter 034",
       "total_chars": 8406,
       "chinese_chars": 6613,
       "dialogue_chars": 3643,
@@ -2925,7 +2903,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 35",
+      "chapter": "Chapter 035",
       "total_chars": 7069,
       "chinese_chars": 5711,
       "dialogue_chars": 2530,
@@ -2934,7 +2912,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 36",
+      "chapter": "Chapter 036",
       "total_chars": 7393,
       "chinese_chars": 5879,
       "dialogue_chars": 3878,
@@ -2943,7 +2921,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 37",
+      "chapter": "Chapter 037",
       "total_chars": 8266,
       "chinese_chars": 6584,
       "dialogue_chars": 5089,
@@ -2952,7 +2930,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 38",
+      "chapter": "Chapter 038",
       "total_chars": 7752,
       "chinese_chars": 6105,
       "dialogue_chars": 4184,
@@ -2961,7 +2939,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 39",
+      "chapter": "Chapter 039",
       "total_chars": 8098,
       "chinese_chars": 6455,
       "dialogue_chars": 4391,
@@ -2970,7 +2948,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 40",
+      "chapter": "Chapter 040",
       "total_chars": 7863,
       "chinese_chars": 6358,
       "dialogue_chars": 4192,
@@ -2979,7 +2957,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 41",
+      "chapter": "Chapter 041",
       "total_chars": 8115,
       "chinese_chars": 6506,
       "dialogue_chars": 3526,
@@ -2988,7 +2966,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 42",
+      "chapter": "Chapter 042",
       "total_chars": 8485,
       "chinese_chars": 6717,
       "dialogue_chars": 4517,
@@ -2997,7 +2975,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 43",
+      "chapter": "Chapter 043",
       "total_chars": 8199,
       "chinese_chars": 6562,
       "dialogue_chars": 4171,
@@ -3006,7 +2984,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 44",
+      "chapter": "Chapter 044",
       "total_chars": 8231,
       "chinese_chars": 6543,
       "dialogue_chars": 4595,
@@ -3015,7 +2993,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 45",
+      "chapter": "Chapter 045",
       "total_chars": 7415,
       "chinese_chars": 5861,
       "dialogue_chars": 3326,
@@ -3024,7 +3002,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 46",
+      "chapter": "Chapter 046",
       "total_chars": 8148,
       "chinese_chars": 6406,
       "dialogue_chars": 3872,
@@ -3033,7 +3011,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 47",
+      "chapter": "Chapter 047",
       "total_chars": 8056,
       "chinese_chars": 6303,
       "dialogue_chars": 4548,
@@ -3042,7 +3020,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 48",
+      "chapter": "Chapter 048",
       "total_chars": 6749,
       "chinese_chars": 5372,
       "dialogue_chars": 3127,
@@ -3051,7 +3029,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 49",
+      "chapter": "Chapter 049",
       "total_chars": 7858,
       "chinese_chars": 6257,
       "dialogue_chars": 4168,
@@ -3060,7 +3038,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 50",
+      "chapter": "Chapter 050",
       "total_chars": 6848,
       "chinese_chars": 5522,
       "dialogue_chars": 3086,
@@ -3069,7 +3047,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 51",
+      "chapter": "Chapter 051",
       "total_chars": 7216,
       "chinese_chars": 5799,
       "dialogue_chars": 3093,
@@ -3078,7 +3056,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 52",
+      "chapter": "Chapter 052",
       "total_chars": 7862,
       "chinese_chars": 6329,
       "dialogue_chars": 3511,
@@ -3087,7 +3065,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 53",
+      "chapter": "Chapter 053",
       "total_chars": 8097,
       "chinese_chars": 6459,
       "dialogue_chars": 3662,
@@ -3096,7 +3074,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 54",
+      "chapter": "Chapter 054",
       "total_chars": 7331,
       "chinese_chars": 5862,
       "dialogue_chars": 3527,
@@ -3105,7 +3083,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 55",
+      "chapter": "Chapter 055",
       "total_chars": 7824,
       "chinese_chars": 6198,
       "dialogue_chars": 3407,
@@ -3114,7 +3092,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 1
     },
     {
-      "chapter": "Chapter 56",
+      "chapter": "Chapter 056",
       "total_chars": 7896,
       "chinese_chars": 6188,
       "dialogue_chars": 3762,
@@ -3123,7 +3101,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 57",
+      "chapter": "Chapter 057",
       "total_chars": 6958,
       "chinese_chars": 5596,
       "dialogue_chars": 3640,
@@ -3132,7 +3110,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 58",
+      "chapter": "Chapter 058",
       "total_chars": 6761,
       "chinese_chars": 5469,
       "dialogue_chars": 3162,
@@ -3141,7 +3119,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 59",
+      "chapter": "Chapter 059",
       "total_chars": 7720,
       "chinese_chars": 6120,
       "dialogue_chars": 3906,
@@ -3150,7 +3128,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 60",
+      "chapter": "Chapter 060",
       "total_chars": 7299,
       "chinese_chars": 5839,
       "dialogue_chars": 3749,
@@ -3159,7 +3137,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 61",
+      "chapter": "Chapter 061",
       "total_chars": 7941,
       "chinese_chars": 6427,
       "dialogue_chars": 3032,
@@ -3168,7 +3146,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 62",
+      "chapter": "Chapter 062",
       "total_chars": 7044,
       "chinese_chars": 5620,
       "dialogue_chars": 3409,
@@ -3177,7 +3155,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 63",
+      "chapter": "Chapter 063",
       "total_chars": 7235,
       "chinese_chars": 5819,
       "dialogue_chars": 3341,
@@ -3186,7 +3164,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 64",
+      "chapter": "Chapter 064",
       "total_chars": 7214,
       "chinese_chars": 5712,
       "dialogue_chars": 3862,
@@ -3195,16 +3173,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 65",
-      "total_chars": 6598,
-      "chinese_chars": 5311,
+      "chapter": "Chapter 065",
+      "total_chars": 6811,
+      "chinese_chars": 5500,
       "dialogue_chars": 1778,
-      "narrative_chars": 4820,
-      "dialogue_ratio": 0.2695,
+      "narrative_chars": 5033,
+      "dialogue_ratio": 0.261,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 66",
+      "chapter": "Chapter 066",
       "total_chars": 6763,
       "chinese_chars": 5447,
       "dialogue_chars": 2928,
@@ -3213,7 +3191,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 67",
+      "chapter": "Chapter 067",
       "total_chars": 7340,
       "chinese_chars": 5799,
       "dialogue_chars": 3932,
@@ -3222,7 +3200,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 68",
+      "chapter": "Chapter 068",
       "total_chars": 7227,
       "chinese_chars": 5720,
       "dialogue_chars": 3926,
@@ -3231,7 +3209,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 69",
+      "chapter": "Chapter 069",
       "total_chars": 8513,
       "chinese_chars": 6704,
       "dialogue_chars": 4028,
@@ -3240,16 +3218,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 2
     },
     {
-      "chapter": "Chapter 70",
-      "total_chars": 7249,
-      "chinese_chars": 5817,
-      "dialogue_chars": 3578,
-      "narrative_chars": 3671,
-      "dialogue_ratio": 0.4936,
+      "chapter": "Chapter 070",
+      "total_chars": 7996,
+      "chinese_chars": 6434,
+      "dialogue_chars": 4050,
+      "narrative_chars": 3946,
+      "dialogue_ratio": 0.5065,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 71",
+      "chapter": "Chapter 071",
       "total_chars": 7831,
       "chinese_chars": 6297,
       "dialogue_chars": 3646,
@@ -3258,7 +3236,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 72",
+      "chapter": "Chapter 072",
       "total_chars": 8083,
       "chinese_chars": 6452,
       "dialogue_chars": 3162,
@@ -3267,7 +3245,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 73",
+      "chapter": "Chapter 073",
       "total_chars": 8319,
       "chinese_chars": 6664,
       "dialogue_chars": 3874,
@@ -3276,7 +3254,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 74",
+      "chapter": "Chapter 074",
       "total_chars": 8186,
       "chinese_chars": 6524,
       "dialogue_chars": 4811,
@@ -3285,7 +3263,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 75",
+      "chapter": "Chapter 075",
       "total_chars": 8009,
       "chinese_chars": 6346,
       "dialogue_chars": 3833,
@@ -3294,7 +3272,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 76",
+      "chapter": "Chapter 076",
       "total_chars": 8290,
       "chinese_chars": 6592,
       "dialogue_chars": 3912,
@@ -3303,7 +3281,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 77",
+      "chapter": "Chapter 077",
       "total_chars": 8370,
       "chinese_chars": 6644,
       "dialogue_chars": 3728,
@@ -3312,16 +3290,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 78",
-      "total_chars": 6475,
-      "chinese_chars": 5155,
-      "dialogue_chars": 3297,
-      "narrative_chars": 3178,
-      "dialogue_ratio": 0.5092,
+      "chapter": "Chapter 078",
+      "total_chars": 6782,
+      "chinese_chars": 5409,
+      "dialogue_chars": 3469,
+      "narrative_chars": 3313,
+      "dialogue_ratio": 0.5115,
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 79",
+      "chapter": "Chapter 079",
       "total_chars": 6499,
       "chinese_chars": 5165,
       "dialogue_chars": 2275,
@@ -3330,7 +3308,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 80",
+      "chapter": "Chapter 080",
       "total_chars": 7212,
       "chinese_chars": 5751,
       "dialogue_chars": 4244,
@@ -3339,7 +3317,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 81",
+      "chapter": "Chapter 081",
       "total_chars": 7501,
       "chinese_chars": 5936,
       "dialogue_chars": 3986,
@@ -3348,7 +3326,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 82",
+      "chapter": "Chapter 082",
       "total_chars": 7896,
       "chinese_chars": 6209,
       "dialogue_chars": 3746,
@@ -3357,7 +3335,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 83",
+      "chapter": "Chapter 083",
       "total_chars": 7161,
       "chinese_chars": 5725,
       "dialogue_chars": 3192,
@@ -3366,7 +3344,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 84",
+      "chapter": "Chapter 084",
       "total_chars": 7620,
       "chinese_chars": 6027,
       "dialogue_chars": 3478,
@@ -3375,7 +3353,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 85",
+      "chapter": "Chapter 085",
       "total_chars": 7861,
       "chinese_chars": 6245,
       "dialogue_chars": 4304,
@@ -3384,7 +3362,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 86",
+      "chapter": "Chapter 086",
       "total_chars": 7963,
       "chinese_chars": 6361,
       "dialogue_chars": 3606,
@@ -3393,7 +3371,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 87",
+      "chapter": "Chapter 087",
       "total_chars": 6906,
       "chinese_chars": 5482,
       "dialogue_chars": 3348,
@@ -3402,7 +3380,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 88",
+      "chapter": "Chapter 088",
       "total_chars": 6811,
       "chinese_chars": 5486,
       "dialogue_chars": 2788,
@@ -3411,7 +3389,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 89",
+      "chapter": "Chapter 089",
       "total_chars": 6541,
       "chinese_chars": 5263,
       "dialogue_chars": 3207,
@@ -3420,7 +3398,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 90",
+      "chapter": "Chapter 090",
       "total_chars": 6979,
       "chinese_chars": 5678,
       "dialogue_chars": 2250,
@@ -3429,7 +3407,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 91",
+      "chapter": "Chapter 091",
       "total_chars": 7168,
       "chinese_chars": 5760,
       "dialogue_chars": 3039,
@@ -3438,7 +3416,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 92",
+      "chapter": "Chapter 092",
       "total_chars": 7486,
       "chinese_chars": 6017,
       "dialogue_chars": 3395,
@@ -3447,7 +3425,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 93",
+      "chapter": "Chapter 093",
       "total_chars": 6778,
       "chinese_chars": 5367,
       "dialogue_chars": 3528,
@@ -3456,7 +3434,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 94",
+      "chapter": "Chapter 094",
       "total_chars": 5906,
       "chinese_chars": 4688,
       "dialogue_chars": 2521,
@@ -3465,7 +3443,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 95",
+      "chapter": "Chapter 095",
       "total_chars": 6676,
       "chinese_chars": 5438,
       "dialogue_chars": 2843,
@@ -3474,7 +3452,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 96",
+      "chapter": "Chapter 096",
       "total_chars": 6310,
       "chinese_chars": 5042,
       "dialogue_chars": 2705,
@@ -3483,7 +3461,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 97",
+      "chapter": "Chapter 097",
       "total_chars": 8992,
       "chinese_chars": 7237,
       "dialogue_chars": 4781,
@@ -3492,7 +3470,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 0
     },
     {
-      "chapter": "Chapter 98",
+      "chapter": "Chapter 098",
       "total_chars": 7749,
       "chinese_chars": 6140,
       "dialogue_chars": 2945,
@@ -3501,7 +3479,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
       "poem_count": 1
     },
     {
-      "chapter": "Chapter 99",
+      "chapter": "Chapter 099",
       "total_chars": 5943,
       "chinese_chars": 4829,
       "dialogue_chars": 3349,
@@ -3523,8 +3501,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     async function loadData() {
         const data = EMBEDDED_DATA;
         if (!data || !data.per_chapter || data.per_chapter.length === 0) {
-            console.log('[INFO] using mock data: EMBEDDED_DATA is empty');
-            return { data: MOCK_DATA, isMock: true };
+            console.log('[INFO] embedded truth snapshot unavailable (empty):', EMBEDDED_DATA);
+            return { data: EMBEDDED_DATA, isMock: true };
         }
         document.getElementById('dataSource').innerHTML =
             'Data source: embedded chapter_stats.json (EMBEDDED single source · W563) · <strong>' + data.total_chapters + '</strong> chapters';
@@ -3538,7 +3516,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         if (isMock) {
             document.getElementById('dataSource').innerHTML =
-                '⚠️ <strong>Currently showing sample data</strong> (10-chapter mock); real data not loaded. Generate it as follows:' +
+                '⚠️ <strong>Embedded truth snapshot unavailable</strong> (no data loaded); generate the dataset as follows:' +
                 '<span class="cmd-block">cd scripts\npy -m http.server 8000   # run from the site/ directory to enable fetch\npy A_Text_Basics/chapter_stats.py --input ../source/original-text/by-chapter/ --output output/data/chapter_stats.json</span>';
         }
 

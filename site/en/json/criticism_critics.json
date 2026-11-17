@@ -1,0 +1,154 @@
+[
+  {
+    "name": "Li Zhi",
+    "alias": "Li Zhuowu",
+    "era": "1527-1602",
+    "year": 1590,
+    "school": "Doctrine of the Childlike Mind",
+    "streams": [
+      "literary",
+      "rebel"
+    ],
+    "position": {
+      "x": 1590,
+      "y": 0.45
+    },
+    "quote": "The finest writing under heaven is that which has never failed to spring from the childlike mind.",
+    "core_argument": "Taking the doctrine of the childlike mind as his standard, he affirmed the literariness of Journey to the West and anticipated the theory of play; he is also the common source of the later literary and rebel readings — the two hidden currents of 500 years of criticism both flow out from him.",
+    "works": "Critique of Journey to the West by Master Li Zhuowu (c. 1590s)"
+  },
+  {
+    "name": "Chen Shibin",
+    "alias": "Wuyizi",
+    "era": "Qing · Kangxi reign",
+    "year": 1696,
+    "school": "Golden Elixir Way",
+    "streams": [
+      "zhengdao"
+    ],
+    "position": {
+      "x": 1696,
+      "y": 0.06
+    },
+    "quote": "This is the Golden Elixir Way. The fire of the heart and the water of the kidneys are clearly distinguished in it.",
+    "core_argument": "Reading Journey to the West through the Golden Elixir Way, he treated every plot point as a metaphor for the stages of inner-alchemy cultivation. The True Meaning of Journey to the West was the most popular Qing commentary and established the orthodoxy of the Inner Alchemy school.",
+    "works": "The True Meaning of Journey to the West (1696)"
+  },
+  {
+    "name": "Liu Yiming",
+    "alias": "Wuyuanzi",
+    "era": "1734-1821",
+    "year": 1753,
+    "school": "Dual Cultivation of Nature and Life",
+    "streams": [
+      "zhengdao"
+    ],
+    "position": {
+      "x": 1753,
+      "y": 0.02
+    },
+    "quote": "The original intent of Journey to the West lies in the dual cultivation of nature and life. When the mind-monkey returns to the right path, the six thieves vanish without a trace.",
+    "core_argument": "A successor of the Daoist Longmen lineage. His 100-chapter chapter-by-chapter commentary, The Original Intent of Journey to the West, is the most systematic and comprehensive alchemical reading, hugely influential and the high point of the Inner Alchemy school.",
+    "works": "The Original Intent of Journey to the West (1753)"
+  },
+  {
+    "name": "Zhang Shushen",
+    "alias": "Master of the New Commentary",
+    "era": "Qing · Qianlong reign",
+    "year": 1753,
+    "school": "Great Learning, Rectifying the Mind",
+    "streams": [],
+    "position": {
+      "x": 1753,
+      "y": 0.34
+    },
+    "quote": "The intent of Journey to the West lies in the Great Learning and the Doctrine of the Mean. The mind-monkey is none other than the human mind.",
+    "core_argument": "Reading Journey to the West through Confucianism, he advocated the 'harmony of the Three Teachings' while returning to Confucianism as the root, taking the rectification of the mind and sincerity of the will from the Great Learning and the Doctrine of the Mean as the book's overall framework. He stood alone, rivaling the Inner Alchemy school.",
+    "works": "New Commentary on Journey to the West (1753)"
+  },
+  {
+    "name": "Lu Xun",
+    "alias": "",
+    "era": "1881-1936",
+    "year": 1923,
+    "school": "Novel of Gods and Demons",
+    "streams": [
+      "literary"
+    ],
+    "position": {
+      "x": 1923,
+      "y": 0.5
+    },
+    "quote": "Gods and demons all have human feelings; spirits too are versed in the ways of the world.",
+    "core_argument": "A Brief History of Chinese Fiction stripped away the alchemical accretions, positioned Journey to the West as a 'novel of gods and demons', and advanced the 'theory of play', pioneering modern literary research. This demystifying surgery shaped a century of scholarship.",
+    "works": "A Brief History of Chinese Fiction (1923)"
+  },
+  {
+    "name": "Hu Shi",
+    "alias": "",
+    "era": "1891-1962",
+    "year": 1923,
+    "school": "Evidential Research",
+    "streams": [
+      "literary"
+    ],
+    "position": {
+      "x": 1923,
+      "y": 0.56
+    },
+    "quote": "Journey to the West is a work of play.",
+    "core_argument": "The Textual Study of Journey to the West used empirical methods to establish Wu Cheng'en as the author, advancing the 'work of play' thesis and, together with Lu Xun, laying the foundation of the modern scholarly paradigm. The 'Wu Cheng'en hypothesis' thus became the century-long consensus.",
+    "works": "Textual Study of Journey to the West (1923)"
+  },
+  {
+    "name": "Nan Huai-Chin",
+    "alias": "",
+    "era": "1918-2012",
+    "year": 1976,
+    "school": "Cultivation Metaphor",
+    "streams": [
+      "zhengdao"
+    ],
+    "position": {
+      "x": 1976,
+      "y": 0.12
+    },
+    "quote": "Journey to the West is an allegory of spiritual cultivation; every ordeal is a gate to pass.",
+    "core_argument": "Blending the Three Teachings, he read Journey to the West as a metaphor of cultivation, letting the Ming-Qing Inner Alchemy reading echo across the generations and linking traditional alchemical Daoism with modern spiritual practice. He is the contemporary continuation of the Inner Alchemy school.",
+    "works": "Teachings on Journey to the West and cultivation (1970s–2000s)"
+  },
+  {
+    "name": "Dai Jinhua",
+    "alias": "",
+    "era": "1959—",
+    "year": 1995,
+    "school": "Cultural Critique",
+    "streams": [
+      "literary"
+    ],
+    "position": {
+      "x": 1995,
+      "y": 0.5
+    },
+    "quote": "To reread the classics is to reread ourselves.",
+    "core_argument": "Rereading Journey to the West through cultural studies and gender critique, she extends the literary approach into ideological criticism. She is the contemporary continuation of Lu Xun's demystification and a contemporary variation of the literary school.",
+    "works": "Contemporary cultural studies · works on rereading the classics"
+  },
+  {
+    "name": "Jin Hezai",
+    "alias": "",
+    "era": "1977—",
+    "year": 2000,
+    "school": "Rebel-Deconstruction",
+    "streams": [
+      "rebel"
+    ],
+    "position": {
+      "x": 2000,
+      "y": 0.95
+    },
+    "quote": "I will not let this sky cover my eyes again; I will not let this earth bury my heart again.",
+    "core_argument": "Wukong Biography rewrites the pilgrimage, responding to the classic in an anti-heroic, authority-deconstructing posture. It is a reaction against Lu Xun's literary approach and an echo across generations of the Ming-Qing Inner Alchemy reading — the rebel school finally converges into a long river.",
+    "works": "Wukong Biography (2000)"
+  }
+]

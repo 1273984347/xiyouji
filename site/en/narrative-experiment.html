@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-g8smZDWJoVDSCO4l/WolFRwPAR6lJHEyN+bH0bzxEwI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-r/DnJYz+w2M9bwxOhXiTOT1qqjbmMPO8tvCeKEhHuiw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Narrative Experiment · Board Game & Card Mechanics · Annotated Journey to the West</title>
@@ -413,7 +413,7 @@ html[data-theme="dark"] svg [fill="#8E7D62"],
 html[data-theme="dark"] svg [fill="#8e7d62"] {
     fill: var(--series-3) !important;
 }
-html[data-theme="dark"] svg [fill="#3A473A"],
+html[data-theme="dark"] svg [fill="#8E7D62"],
 html[data-theme="dark"] svg [fill="#3a473a"] {
     fill: var(--series-4) !important;
 }
@@ -1966,7 +1966,7 @@ html[data-theme="dark"] svg [fill="#8E7D62"],
 html[data-theme="dark"] svg [fill="#8e7d62"] {
     fill: var(--series-3) !important;
 }
-html[data-theme="dark"] svg [fill="#3A473A"],
+html[data-theme="dark"] svg [fill="#8E7D62"],
 html[data-theme="dark"] svg [fill="#3a473a"] {
     fill: var(--series-4) !important;
 }
@@ -2841,7 +2841,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <div class="card-group">
                 <div class="group-header">
-                    <span class="gh-tag" style="background: #8E7D62;">Obsession Cards</span>
+                    <span class="gh-tag" style="background: #3A473A;">Obsession Cards</span>
                     <span class="gh-title">OBSESSION</span>
                     <span class="gh-count">10 cards · Z01–Z10</span>
                 </div>
@@ -2887,7 +2887,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="combo-legend">
                 <div class="lg-item"><span class="lg-dot" style="background:var(--chart-1);"></span><span>Karma Cards · 12</span></div>
                 <div class="lg-item"><span class="lg-dot" style="background:var(--chart-2);"></span><span>Artifact Cards · 10</span></div>
-                <div class="lg-item"><span class="lg-dot" style="background:#8E7D62;"></span><span>Obsession Cards · 10</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#3A473A;"></span><span>Obsession Cards · 10</span></div>
                 <div class="lg-item"><span class="lg-dot" style="background:var(--chart-4);"></span><span>Story Output · 1200</span></div>
             </div>
         </section>
@@ -2921,268 +2921,447 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 <script>
     // ===== 嵌入式 fallback 数据（fetch 失败时使用） =====
     const EMBEDDED = {
-        board_game: {
-            game_name: "Spirit Mountain Board of Directors",
-            subtitle: "Anti-pilgrimage role-playing board game",
-            designer: "Annotated Journey to the West project team",
-            player_count: "4 players",
-            play_time: "90-120 minutes",
-            age: "12+",
-            core_mechanism: "Players role-play Tathāgata / Guanyin / Laojun / the Jade Emperor · jointly investing in the ”Journey to the West” reality-TV project · generating ratings (merit points) by staging hardships",
-            victory_condition: "Highest merit wins · or, if the project fails, the one with the fewest losses wins",
-            players: [
-                {
-                    name: "Tathāgata",
-                    role: "Chief Project Designer",
-                    avatar: "🪷",
-                    merit: 10000,
-                    color: "#c9a14a",
-                    special_ability: "Five Elements Mountain Suppression · a rigged hardship card (each game you may designate 1 hardship card as ”rigged” · cost reduced to zero)",
-                    winning_strategy: "Use the ”Golden-Winged Great Peng” rigged card to earn massive ratings · staying firmly atop the merit leaderboard",
-                    weakness: "Cannot act directly · can only influence the plot indirectly by designing hardships"
-                },
-                {
-                    name: "Guanyin",
-                    role: "Project Executor",
-                    avatar: "🍃",
-                    merit: 8000,
-                    color: "#40619E",
-                    special_ability: "Covert protection · can adjust hardship difficulty (up or down 1 level) · controlling the project’s pace",
-                    winning_strategy: "Use the ”Tight-Fillet Spell” to control the executor (Wukong) · adjusting difficulty at key moments to win acclaim",
-                    weakness: "Lowest merit · must rely on the ”project success rate” bonus to catch up"
-                },
-                {
-                    name: "Taishang Laojun",
-                    role: "Prop Supplier",
-                    avatar: "🔮",
-                    merit: 9000,
-                    color: "#8E7D62",
-                    special_ability: "Artifact rentals · owns the Vajra Ring / Palm-Leaf Fan / Purple-Gold Gourd and more · rents them to demon kings for ”prop fees”",
-                    winning_strategy: "Use the ”Green Bull Demon” to showcase the Vajra Ring’s power · inflating the prop’s valuation · and collect the rent",
-                    weakness: "Once Wukong breaks the prop · the demon king collapses · and the investment is a total loss"
-                },
-                {
-                    name: "Jade Emperor",
-                    role: "Heavenly Court CEO",
-                    avatar: "👑",
-                    merit: 7000,
-                    color: "#C0392B",
-                    special_ability: "Commands heavenly troops and generals · can dispatch a hundred thousand heavenly troops to ”suppress rebellion” (actual combat power 0 · pure ad slot exposure)",
-                    winning_strategy: "Use the ”Heavenly Troops Ineffective” event to gain ad slot exposure · inflating the Heavenly Court’s brand value",
-                    weakness: "Heavenly troops have zero combat power · every deployment is a ”PR show” · easily sidelined by laid-back players"
-                }
-            ],
-            game_phases: [
-                {
-                    phase: "Preparation Phase",
-                    rounds: "1-3 rounds",
-                    actions: "Assign roles · draw hardship cards · negotiate investment shares",
-                    goal: "Establish the project budget · lock in the first batch of hardship scripts"
-                },
-                {
-                    phase: "Execution Phase",
-                    rounds: "4-9 rounds",
-                    actions: "Stage hardships · adjust difficulty · collect ratings · rent out props",
-                    goal: "Accumulate merit · control the project’s pace to avoid early collapse"
-                },
-                {
-                    phase: "Settlement Phase",
-                    rounds: "10-12 rounds",
-                    actions: "Settle the project · score · calculate final merit",
-                    goal: "Confirm the project’s success or failure · determine the final winner"
-                }
-            ],
-            hardship_cards: [
-                { name: "Yellow Wind Demon · Samadhi Divine Wind", type: "Natural Disaster", cost: 200, rating_bonus: 600, difficulty: 3, owner: "Universal", owner_color: "#6B6455" },
-                { name: "White Bone Demon · Thrice Defeated", type: "Psychological Warfare", cost: 300, rating_bonus: 900, difficulty: 4, owner: "Guanyin", owner_color: "#40619E" },
-                { name: "Yellow Robe Demon · Kui Wood Wolf", type: "Heavenly Court Insider", cost: 250, rating_bonus: 700, difficulty: 3, owner: "Jade Emperor", owner_color: "#C0392B" },
-                { name: "Red Boy · Samadhi True Fire", type: "Extreme Disaster", cost: 500, rating_bonus: 1200, difficulty: 5, owner: "Guanyin", owner_color: "#40619E" },
-                { name: "Green Bull Demon · Vajra Ring", type: "Prop Advertisement", cost: 350, rating_bonus: 1100, difficulty: 4, owner: "Laojun", owner_color: "#8E7D62" },
-                { name: "Six-Eared Macaque · True or False", type: "Inner Demon Dungeon", cost: 600, rating_bonus: 1500, difficulty: 5, owner: "Universal", owner_color: "#6B6455" },
-                { name: "Bull Demon King · Palm-Leaf Cave", type: "Family Infighting", cost: 400, rating_bonus: 1000, difficulty: 4, owner: "Universal", owner_color: "#6B6455" },
-                { name: "Golden-Winged Great Peng · Lion-Camel Ridge", type: "Buddhist Rigged", cost: 50, rating_bonus: 1800, difficulty: 5, owner: "Tathāgata", owner_color: "#c9a14a", is_rigged: true },
-                { name: "Yellow-Browed Demon · Little Thunderclap Monastery", type: "Fake Buddha Impersonation", cost: 450, rating_bonus: 1300, difficulty: 5, owner: "Tathāgata", owner_color: "#c9a14a" },
-                { name: "Rat Demon · Bottomless Cave", type: "Heavenly Court Old Case", cost: 200, rating_bonus: 800, difficulty: 3, owner: "Jade Emperor", owner_color: "#C0392B" }
-            ],
-            design_eggs: [
-                { title: "Rigged Hardship Card", text: "The ”Golden-Winged Great Peng” exclusive to Tathāgata · costs only 50 merit · returns 1800 in ratings · a hidden channel for laid-back players to ”win without effort”." },
-                { title: "Ad Slot", text: "Every hardship card can be sold as a ”prop ad slot” · Laojun’s Vajra Ring got epic exposure in the Green Bull Demon battle." },
-                { title: "Tight-Fillet Spell", text: "Guanyin’s Tight-Fillet Spell is not for ”subduing demons” · but for ”managing the executor” · the project manager’s ultimate control tool." },
-                { title: "Heavenly Troops Ineffective", text: "Every time the Jade Emperor dispatches ”a hundred thousand heavenly troops” · their actual combat power is 0 · but they earn ”ad slot exposure” bonus points · pure Heavenly Court brand marketing." },
-                { title: "Five Elements Mountain Insurance", text: "Tathāgata pressed Wukong under Five Elements Mountain 500 years early · actually a ”talent-cryopreservation mechanism for the project reserve” · to be thawed and activated when the pilgrimage project launches." }
-            ],
-            scoring: [
-                { name: "Project Success Rate", icon: "✅", desc: "Whether the pilgrimage project ultimately reaches Spirit Mountain · success +5000 merit / failure -3000 merit", color: "#3A473A" },
-                { name: "Hardship Ratings", icon: "📺", desc: "Accumulated ratings of the hardship cards played · each card’s rating_bonus counts toward the total", color: "#C0392B" },
-                { name: "Ad Slot Exposure", icon: "🎯", desc: "Brand exposure count of props / heavenly troops / spells during hardships · +200 merit per exposure", color: "#8E7D62" },
-                { name: "Return on Investment", icon: "💰", desc: "(ratings - placement cost) / placement cost · measuring capital efficiency", color: "#40619E" }
-            ]
-        },
-        narrative_cards: {
-            system_name: "Journey to the West Narrative Cards · Karma, Artifact, Obsession",
-            innovation: "This is not a retelling of the story · but a story generator · 32 cards combine to produce 1200 story openings · turning Journey to the West from ”a classic” into ”an endless source”.",
-            card_groups: [
-                {
-                    name: "Karma Cards",
-                    name_en: "KARMA",
-                    color: "#C0392B",
-                    count: 12,
-                    cards: [
-                        { id: "K01", name: "Expelled from the Master", context: "Bodhi Patriarch expels Wukong from his school · forbidding him to mention his lineage · hinting at the hidden rules of the cultivation world" },
-                        { id: "K02", name: "Straying into a Demon Lair", context: "Straying into a demon king’s cave · your Monkey King true form exposed · drawn into a conspiracy" },
-                        { id: "K03", name: "Reunion with an Old Acquaintance", context: "A past-life acquaintance appears with an unfamiliar face · an old karmic bond is rekindled" },
-                        { id: "K04", name: "The Pilgrim in Peril", context: "The master is carried off by a demon king · the disciple must rescue him in time" },
-                        { id: "K05", name: "Sweet Rain from Heaven", context: "Rain falls after a long drought · the people are grateful · but the rain’s origin is suspect" },
-                        { id: "K06", name: "Swallowing an Immortal Pill by Mistake", context: "Accidentally swallowing an immortal pill · its power surges through the body · triggering a mutation" },
-                        { id: "K07", name: "Falling into the Wheel of Reincarnation", context: "Plunging into the reincarnation passage · reborn under another identity · with temporary amnesia" },
-                        { id: "K08", name: "Enlightenment in a Dream", context: "A divine being enters a dream to point the way · waking half-convinced" },
-                        { id: "K09", name: "A Mortal with a Sword", context: "A mortal with a sword challenges the pilgrim · claiming to carry out heaven’s will" },
-                        { id: "K10", name: "The Heavenly Tribulation Descends", context: "Thunder tribulations strike from the ninth heaven · the sinner cannot escape · bystanders are caught too" },
-                        { id: "K11", name: "The Soul Returns to the Underworld", context: "The soul strays into the netherworld · meets the Ten Kings of Hell · and leafs through the Book of Life and Death" },
-                        { id: "K12", name: "Indistinguishable from the Real", context: "A counterfeit identical to the protagonist appears · no one can tell which is real" }
-                    ]
-                },
-                {
-                    name: "Artifact Cards",
-                    name_en: "ARTIFACT",
-                    color: "#40619E",
-                    count: 10,
-                    cards: [
-                        { id: "F01", name: "Tight-Fillet Spell", function: "Worn on the head · the chant causes pain · the core tool for controlling the executor (Wukong)" },
-                        { id: "F02", name: "Nine-Toothed Rake", function: "Zhu Bajie’s weapon · weighs 5,048 jin · a farming tool turned weapon" },
-                        { id: "F03", name: "Golden Cudgel", function: "The sea-pacifying divine needle · 13,500 jin · grows or shrinks at will" },
-                        { id: "F04", name: "Palm-Leaf Fan", function: "Taishang Laojun’s Palm-Leaf Fan · one wave quenches fire · two waves raise wind · three waves bring rain" },
-                        { id: "F05", name: "Vajra Ring", function: "Taishang Laojun’s treasure · snares all things without fail · bane of weapons" },
-                        { id: "F06", name: "Fiery Golden Eyes", function: "Forged in the Eight Trigrams Furnace · sees through demons’ true forms · but vulnerable to smoke" },
-                        { id: "F07", name: "Demon-Subduing Staff", function: "Sha Wujing’s weapon · from the Moon Palace · weighs 5,048 jin" },
-                        { id: "F08", name: "Purple-Gold Gourd", function: "Golden Horn King’s treasure · whoever answers their name is drawn in · turned to pus and blood" },
-                        { id: "F09", name: "Human Seed Pouch", function: "Yellow-Browed Demon’s treasure · all gods are drawn in · no escape for a time" },
-                        { id: "F10", name: "Embroidered Cassock", function: "Worn by Tang Sanzang · priceless · attracts demons and calamity" }
-                    ]
-                },
-                {
-                    name: "Obsession Cards",
-                    name_en: "OBSESSION",
-                    color: "#8E7D62",
-                    count: 10,
-                    cards: [
-                        { id: "Z01", name: "Arrogance", manifestation: "Overestimates oneself · scorns the mortal world · refuses to bow" },
-                        { id: "Z02", name: "Suspicion", manifestation: "Paranoid and mistrustful · trusts no one · goes it alone" },
-                        { id: "Z03", name: "Blind Loyalty", manifestation: "Blind obedience · never questions right or wrong · follows to the death" },
-                        { id: "Z04", name: "Greed", manifestation: "Covets treasures · lusts at beauty · never satisfied" },
-                        { id: "Z05", name: "Wrath", manifestation: "A single cross word · rage ignites · reason lost" },
-                        { id: "Z06", name: "Fame and Form", manifestation: "Clinging to reputation · caring about empty titles · forgetting one’s true nature" },
-                        { id: "Z07", name: "Obsession with Immortality", manifestation: "Craves immortality · clings to the flesh · rejects reincarnation" },
-                        { id: "Z08", name: "Infatuation", manifestation: "Obsessed with one person · heedless of all others · ruins a great cause" },
-                        { id: "Z09", name: "Jealousy", manifestation: "Sees others surpass oneself · breeds resentment · must destroy them" },
-                        { id: "Z10", name: "Escape", manifestation: "Avoids trouble · dares not take responsibility · shifts blame" }
-                    ]
-                }
-            ],
-            example_combinations: [
-                {
-                    cards: [
-                        { id: "K02", name: "Straying into a Demon Lair", color: "#C0392B" },
-                        { id: "F03", name: "Golden Cudgel", color: "#40619E" },
-                        { id: "Z02", name: "Suspicion", color: "#8E7D62" }
-                    ],
-                    category: "Master-Disciple Conflict",
-                    category_color: "#40619E",
-                    opening: "Wukong strays into a demon king’s lair · fighting his way out with the Golden Cudgel · but afterward Tang Sanzang, trusting Bajie’s words, rebukes him for killing innocents · suspicion grows between master and disciple · the pilgrimage team shows its first crack.",
-                    continuation: "Tang Sanzang presses him with the Tight-Fillet Spell · Wukong departs in tears · leaving behind one line: ”Master, if you are in danger, just call my name three times.” · Hearing of this, the demon king at once devises a scheme to divide them.",
-                    conflict: "A crisis of trust · once trust collapses, even the sharpest Golden Cudgel cannot save the master-disciple bond",
-                    resonance: "The greatest demon · is not in the lair · but in a suspicious heart."
-                },
-                {
-                    cards: [
-                        { id: "K03", name: "Reunion with an Old Acquaintance", color: "#C0392B" },
-                        { id: "F08", name: "Purple-Gold Gourd", color: "#40619E" },
-                        { id: "Z06", name: "Fame and Form", color: "#8E7D62" }
-                    ],
-                    category: "Enlightenment",
-                    category_color: "#3A473A",
-                    opening: "A past-life friend appears at the crossroads with an unfamiliar face · holding the Purple-Gold Gourd and softly calling Wukong’s name · Wukong answers · nearly drawn into the gourd · a voice emerges from within: ”You travel the world under the name Great Sage Equaling Heaven · but have you forgotten your true name?”",
-                    continuation: "Trapped in the gourd for three days · Wukong hears all his titles echoing in the void · finally realizing ”name” is a fetter · a single great laugh shatters the gourd · and he regains his freedom.",
-                    conflict: "The contest of names · Great Sage Equaling Heaven vs Pilgrim Sun vs Victorious Fighting Buddha",
-                    resonance: "Only by laying down fame and form can you see your true self · the Purple-Gold Gourd holds not pus and blood · but obsession."
-                },
-                {
-                    cards: [
-                        { id: "K07", name: "Falling into the Wheel of Reincarnation", color: "#C0392B" },
-                        { id: "F06", name: "Fiery Golden Eyes", color: "#40619E" },
-                        { id: "Z01", name: "Arrogance", color: "#8E7D62" }
-                    ],
-                    category: "Disaster",
-                    category_color: "#C0392B",
-                    opening: "Wukong plunges into the reincarnation passage · reborn as a humble scholar · his Fiery Golden Eyes remain · but are clouded by arrogance · seeing the world’s injustices · overconfident in his learning · he suffers repeated setbacks · forgetting the great pilgrimage.",
-                    continuation: "Tang Sanzang passes the scholar’s academy · sees a point of golden light still glimmering between his brows · recognizes Wukong reborn · three times urges him to return · three times refused · until the scholar, through arrogance, offends the powerful and nearly dies · only then repenting his past.",
-                    conflict: "Lost identity · even Fiery Golden Eyes cannot pierce the veil of arrogance",
-                    resonance: "Arrogance · is the beginning of reincarnation · and the endpoint of enlightenment."
-                },
-                {
-                    cards: [
-                        { id: "K10", name: "The Heavenly Tribulation Descends", color: "#C0392B" },
-                        { id: "F04", name: "Palm-Leaf Fan", color: "#40619E" },
-                        { id: "Z07", name: "Obsession with Immortality", color: "#8E7D62" }
-                    ],
-                    category: "Temptation",
-                    category_color: "#8E7D62",
-                    opening: "Thunder tribulations strike from the ninth heaven · the sinner has nowhere to flee · the Palm-Leaf Fan falls amid the chaos · an old man picks it up · waves out a chilling wind · diverting the tribulation toward Tang Sanzang · the old man laughs: ”The scripture of eternal life is on you · give it to me!”",
-                    continuation: "The old man turns out to be an eminent monk from a century ago · fallen into demonhood through his obsession with immortality · thrice demanding the scripture in vain · finally fanning up ten thousand li of yellow sand · trapping the pilgrims for three days and nights.",
-                    conflict: "Right Dharma vs heresy · both seek immortality · different paths · different ends",
-                    resonance: "Those obsessed with immortality are in turn possessed by it · the true scripture is not on Tang Sanzang · but in the heart that lets go."
-                },
-                {
-                    cards: [
-                        { id: "K12", name: "Indistinguishable from the Real", color: "#C0392B" },
-                        { id: "F05", name: "Vajra Ring", color: "#40619E" },
-                        { id: "Z09", name: "Jealousy", color: "#8E7D62" }
-                    ],
-                    category: "Master-Disciple Conflict",
-                    category_color: "#40619E",
-                    opening: "A counterfeit identical to Wukong appears · wielding the Vajra Ring to wreak havoc · everyone believes it is the real Wukong · only Bajie secretly rejoices · jealous of Wukong for years · finally seizing the chance to slander him to Tang Sanzang.",
-                    continuation: "Tang Sanzang angrily chants the Tight-Fillet Spell · the real Wukong collapses in pain · but the counterfeit is unharmed · “proving” the ”real Wukong” is fake · the true Wukong cannot clear his name · is expelled from the school · and the Tight-Fillet Spell loses its power.",
-                    conflict: "The discernment of true and false · jealousy is the sharpest Vajra Ring",
-                    resonance: "The ring of jealousy · snares not weapons · but human hearts · once put on · none can remove it."
-                }
-            ],
-            design_philosophy: "Three card groups · 32 cards · generating 12 × 10 × 10 = 1200 story openings"
-        },
-        story_generator: {
-            generator_name: "Journey to the West Story Generator",
-            total_combinations: 1200,
-            generating_rules: [
-                "Draw 1 card from the Karma deck · as the story’s scene starting point (K01–K12)",
-                "Draw 1 card from the Artifact deck · as the story’s core prop (F01–F10)",
-                "Draw 1 card from the Obsession deck · as the story’s psychological theme (Z01–Z10)",
-                "The three-card combination determines the story’s ”opening / prop / theme” · the player improvises what follows",
-                "The same combination can be performed many times · different players generate completely different stories · this is the very meaning of a ”generator”"
-            ],
-            generator_features: [
-                "Repeatability · 1200 combinations can be performed endlessly · each time yielding a different result",
-                "Openness · the three cards set only the opening · the rest is the player’s free play",
-                "Thematic depth · each Obsession card carries its own theme · stories naturally gain ”enlightenment” depth",
-                "Extensibility · new decks (character cards / scene cards) can be added for endless expansion"
-            ],
-            story_categories: [
-                { name: "Disaster", color: "#C0392B", card_ids: "K02·Straying into a Demon Lair · K04·The Pilgrim in Peril · K06·Swallowing an Immortal Pill by Mistake · K10·The Heavenly Tribulation Descends", desc: "Sudden catastrophic events · the protagonist must survive and choose under extreme conditions" },
-                { name: "Master-Disciple Conflict", color: "#40619E", card_ids: "K01·Expelled from the Master · K02·Straying into a Demon Lair · K09·A Mortal with a Sword · K12·Indistinguishable from the Real", desc: "Trust crises and ideological conflicts within the pilgrimage team" },
-                { name: "Enlightenment", color: "#3A473A", card_ids: "K03·Reunion with an Old Acquaintance · K05·Sweet Rain from Heaven · K07·Falling into the Wheel of Reincarnation · K08·Enlightenment in a Dream · K11·The Soul Returns to the Underworld", desc: "Through encounters and enlightenment · the protagonist grasps some Buddhist / Daoist / life truth" },
-                { name: "Temptation", color: "#8E7D62", card_ids: "K06·Swallowing an Immortal Pill by Mistake · K09·A Mortal with a Sword · K12·Indistinguishable from the Real", desc: "Trials of external temptations — lust / fame / gain / immortality" }
-            ],
-            design_innovation: "A story generator · not a retelling"
-        },
-        narrative_experiment_summary: {
-            board_game_players: 4,
-            board_game_cards: 10,
-            board_game_phases: 3,
-            narrative_card_groups: 3,
-            narrative_card_total: 32,
-            example_combinations: 5,
-            story_combinations: 1200,
-            story_categories: 4
-        }
-    };
+  "board_game": {
+    "game_name": "Spirit Mountain Board of Directors",
+    "subtitle": "Anti-pilgrimage role-playing board game",
+    "designer": "Journey to the West reality-TV project team",
+    "player_count": "4 players",
+    "play_time": "90-120 minutes",
+    "age": "12+",
+    "core_mechanism": "Players role-play Tathāgata / Guanyin / Laojun / the Jade Emperor · jointly investing in the 'Journey to the West' reality-TV project · generating ratings (merit points) by staging hardships · settling the return on investment at Spirit Mountain",
+    "victory_condition": "Highest merit wins at the end of the game · or, if the project fails, the one with the fewest losses wins",
+    "players": [
+      {
+        "role": "Tathāgata Buddha",
+        "title": "Chief Project Designer",
+        "starting_capital": "10000 merit",
+        "special_ability": "May intervene forcibly once · replace any hardship with 'Five Elements Mountain Crash' · at very low cost",
+        "winning_strategy": "Play a 'rigged hardship card' at key moments, e.g. the Great Peng Golden-Winged Roc",
+        "weakness": "Cannot intervene directly in the mortal world · must act through a bodhisattva"
+      },
+      {
+        "role": "Guanyin Bodhisattva",
+        "title": "Project Executor",
+        "starting_capital": "8000 merit",
+        "special_ability": "May covertly protect the team · 500 merit may be spent per hardship to lower the difficulty",
+        "winning_strategy": "Protect the team while it forms early on · later obtain the 'Headband Curse' item",
+        "weakness": "Small merit reserve · every spend must be counted"
+      },
+      {
+        "role": "Taishang Laojun",
+        "title": "Prop Supplier",
+        "starting_capital": "9000 merit",
+        "special_ability": "May lend treasures to demons (Diamond Snare, Purple-Gold Gourd and the like) · earning ad-slot exposure",
+        "winning_strategy": "Earn ad fees by renting out treasures · the Green Ox Demon is the showcase ad slot for the Diamond Snare",
+        "weakness": "Lent-out treasures may be misused by demons · harming the Heavenly Court's reputation"
+      },
+      {
+        "role": "Jade Emperor",
+        "title": "Heavenly Court CEO",
+        "starting_capital": "7000 merit",
+        "special_ability": "May deploy heavenly troops and generals · but each deployment costs much merit",
+        "winning_strategy": "Maintain the Heavenly Court's order · lose the least when the project fails",
+        "weakness": "Heavenly troops have limited combat power · useless against top-tier demons"
+      }
+    ],
+    "game_phases": [
+      {
+        "phase": "Preparation Phase",
+        "rounds": "1-3",
+        "actions": [
+          "Assign initial merit",
+          "Choose which hardship cards to play",
+          "Build the bodhisattva mount dossiers"
+        ],
+        "goal": "Complete the formation of the pilgrimage team · establish the basic rules"
+      },
+      {
+        "phase": "Execution Phase",
+        "rounds": "4-12",
+        "actions": [
+          "Play hardship cards",
+          "Covertly protect or sabotage",
+          "Settle the ratings of each hardship",
+          "Gain ad-slot exposure"
+        ],
+        "goal": "Gain merit through hardships while keeping the project running"
+      },
+      {
+        "phase": "Settlement Phase",
+        "rounds": "13-14",
+        "actions": [
+          "Deliver the true scriptures",
+          "Settle at Spirit Mountain",
+          "Compute the return on investment"
+        ],
+        "goal": "Highest merit wins"
+      }
+    ],
+    "hardship_cards": [
+      {
+        "name": "White Bone Spirit",
+        "type": "Wild Monster",
+        "cost": 500,
+        "rating_bonus": 200,
+        "difficulty": 2,
+        "owner": "Universal"
+      },
+      {
+        "name": "Yellow-Robed Demon",
+        "type": "Heavenly General Descended to Earth",
+        "cost": 1500,
+        "rating_bonus": 500,
+        "difficulty": 4,
+        "owner": "Jade Emperor"
+      },
+      {
+        "name": "Golden and Silver Horns",
+        "type": "Page Boy Descended to Earth",
+        "cost": 2000,
+        "rating_bonus": 700,
+        "difficulty": 5,
+        "owner": "Laojun"
+      },
+      {
+        "name": "Azure Ox Spirit",
+        "type": "Mount Descended to Earth · Ad Slot",
+        "cost": 1000,
+        "rating_bonus": 800,
+        "difficulty": 6,
+        "owner": "Laojun · Advertisement"
+      },
+      {
+        "name": "Red Boy",
+        "type": "Demon with a Pedigree",
+        "cost": 2500,
+        "rating_bonus": 900,
+        "difficulty": 7,
+        "owner": "Universal"
+      },
+      {
+        "name": "Six-Eared Macaque",
+        "type": "Inner Demon",
+        "cost": 3000,
+        "rating_bonus": 1200,
+        "difficulty": 9,
+        "owner": "Tathāgata"
+      },
+      {
+        "name": "Great Peng Golden-Winged Roc",
+        "type": "Rigged Hardship Card",
+        "cost": 500,
+        "rating_bonus": 2000,
+        "difficulty": 10,
+        "owner": "Tathāgata · Rigged"
+      },
+      {
+        "name": "Flaming Mountain",
+        "type": "Prop Showcase",
+        "cost": 1500,
+        "rating_bonus": 1000,
+        "difficulty": 6,
+        "owner": "Universal"
+      },
+      {
+        "name": "Lion-Camel Ridge",
+        "type": "Team Battle",
+        "cost": 3500,
+        "rating_bonus": 1500,
+        "difficulty": 10,
+        "owner": "Universal"
+      },
+      {
+        "name": "Kingdom of the Bhikṣus",
+        "type": "Moral Test",
+        "cost": 800,
+        "rating_bonus": 400,
+        "difficulty": 3,
+        "owner": "Universal"
+      }
+    ],
+    "design_eggs": [
+      "The Great Peng Golden-Winged Roc is the Tathāgata side's 'rigged hardship card' · very cheap to play, extremely high return",
+      "The Green Ox Demon is Laojun's showcase ad slot for the Diamond Snare",
+      "Guanyin's Headband Curse is designed specifically to check Wukong · once obtained it greatly lowers the project's risk",
+      "The Jade Emperor's heavenly troops are useless against top-tier demons · the biggest weakness",
+      "The Tathāgata's 'Five Elements Mountain Crash' is the ultimate insurance · usable only once, at a critical moment"
+    ],
+    "scoring": {
+      "Project Success Rate": "60% · on success all players receive base merit",
+      "Hardship Ratings": "Each hardship yields ratings by difficulty · the harder it is, the greater the return",
+      "Ad-Slot Exposure": "Playing hardship cards with ad slots earns advertising fees",
+      "Return on Investment": "Final merit / initial investment · highest wins"
+    }
+  },
+  "narrative_cards": {
+    "system_name": "Journey to the West Narrative Cards · Karma, Artifact, Obsession",
+    "designer": "Story Production Lab",
+    "core_mechanism": "Three card groups · any combination of three cards generates a brand-new story opening that still obeys the logic of the original novel",
+    "innovation": "This is not a retelling of the story · but a story generator · 32 cards combine to produce 1200 story openings · turning Journey to the West from ”a classic” into ”an endless source”.",
+    "card_groups": [
+      {
+        "group_name": "Cause-Effect Cards",
+        "english_name": "Cause-Effect Cards",
+        "card_count": 12,
+        "description": "Draw a scenario · e.g. 'Cast Out of the Monastery' or 'Mistaken Entry into a Demon Lair'",
+        "color": "#C0392B",
+        "cards": [
+          {
+            "id": "K01",
+            "scene": "Cast Out of the Monastery",
+            "context": "Bodhi Patriarch expels Wukong from his school · forbidding him to mention his lineage · hinting at the hidden rules of the cultivation world"
+          },
+          {
+            "id": "K02",
+            "scene": "Mistaken Entry into a Demon Lair",
+            "context": "Straying into a demon king’s cave · your Monkey King true form exposed · drawn into a conspiracy"
+          },
+          {
+            "id": "K03",
+            "scene": "An Old Acquaintance Reappears",
+            "context": "A past-life acquaintance appears with an unfamiliar face · an old karmic bond is rekindled"
+          },
+          {
+            "id": "K04",
+            "scene": "Forbidden Fruit Eaten by Mistake",
+            "context": "The master is carried off by a demon king · the disciple must rescue him in time"
+          },
+          {
+            "id": "K05",
+            "scene": "Falsely Implicated",
+            "context": "Rain falls after a long drought · the people are grateful · but the rain’s origin is suspect"
+          },
+          {
+            "id": "K06",
+            "scene": "A Heaven-Bestowed Task",
+            "context": "Accidentally swallowing an immortal pill · its power surges through the body · triggering a mutation"
+          },
+          {
+            "id": "K07",
+            "scene": "Lost in the Wheel of Rebirth",
+            "context": "Plunging into the reincarnation passage · reborn under another identity · with temporary amnesia"
+          },
+          {
+            "id": "K08",
+            "scene": "Return to a Familiar Place",
+            "context": "A divine being enters a dream to point the way · waking half-convinced"
+          },
+          {
+            "id": "K09",
+            "scene": "Enlightenment in a Dream",
+            "context": "A mortal with a sword challenges the pilgrim · claiming to carry out heaven’s will"
+          },
+          {
+            "id": "K10",
+            "scene": "A Heavenly Tribulation Descends",
+            "context": "Thunder tribulations strike from the ninth heaven · the sinner cannot escape · bystanders are caught too"
+          },
+          {
+            "id": "K11",
+            "scene": "The Contract Turns Back",
+            "context": "The soul strays into the netherworld · meets the Ten Kings of Hell · and leafs through the Book of Life and Death"
+          },
+          {
+            "id": "K12",
+            "scene": "True and False Hard to Tell",
+            "context": "A counterfeit identical to the protagonist appears · no one can tell which is real"
+          }
+        ]
+      },
+      {
+        "group_name": "Artifact Cards",
+        "english_name": "Artifact Cards",
+        "card_count": 10,
+        "description": "Draw a resource · e.g. the 'Headband Curse' or the 'Lifesaving Hair'",
+        "color": "#40619E",
+        "cards": [
+          {
+            "id": "F01",
+            "artifact": "Headband Curse",
+            "function": "Worn on the head · the chant causes pain · the core tool for controlling the executor (Wukong)"
+          },
+          {
+            "id": "F02",
+            "artifact": "Lifesaving Hair",
+            "function": "Zhu Bajie’s weapon · weighs 5,048 jin · a farming tool turned weapon"
+          },
+          {
+            "id": "F03",
+            "artifact": "Golden Cudgel",
+            "function": "The sea-pacifying divine needle · 13,500 jin · grows or shrinks at will"
+          },
+          {
+            "id": "F04",
+            "artifact": "Plantain Fan",
+            "function": "Taishang Laojun’s Palm-Leaf Fan · one wave quenches fire · two waves raise wind · three waves bring rain"
+          },
+          {
+            "id": "F05",
+            "artifact": "Diamond Snare",
+            "function": "Taishang Laojun’s treasure · snares all things without fail · bane of weapons"
+          },
+          {
+            "id": "F06",
+            "artifact": "Golden Fire Eyes",
+            "function": "Forged in the Eight Trigrams Furnace · sees through demons’ true forms · but vulnerable to smoke"
+          },
+          {
+            "id": "F07",
+            "artifact": "Samadhi True Fire",
+            "function": "Sha Wujing’s weapon · from the Moon Palace · weighs 5,048 jin"
+          },
+          {
+            "id": "F08",
+            "artifact": "Purple-Gold Gourd",
+            "function": "Golden Horn King’s treasure · whoever answers their name is drawn in · turned to pus and blood"
+          },
+          {
+            "id": "F09",
+            "artifact": "Somersault Cloud",
+            "function": "Yellow-Browed Demon’s treasure · all gods are drawn in · no escape for a time"
+          },
+          {
+            "id": "F10",
+            "artifact": "Nine-toothed Rake",
+            "function": "Worn by Tang Sanzang · priceless · attracts demons and calamity"
+          }
+        ]
+      },
+      {
+        "group_name": "Obsession Cards",
+        "english_name": "Obsession Cards",
+        "card_count": 10,
+        "description": "Draw an inner obstacle · e.g. 'Pride', 'Suspicion' or 'Blind Loyalty'",
+        "color": "#3A473A",
+        "cards": [
+          {
+            "id": "Z01",
+            "obsession": "Pride",
+            "manifestation": "Overestimates oneself · scorns the mortal world · refuses to bow"
+          },
+          {
+            "id": "Z02",
+            "obsession": "Suspicion",
+            "manifestation": "Paranoid and mistrustful · trusts no one · goes it alone"
+          },
+          {
+            "id": "Z03",
+            "obsession": "Blind Loyalty",
+            "manifestation": "Blind obedience · never questions right or wrong · follows to the death"
+          },
+          {
+            "id": "Z04",
+            "obsession": "Gluttony",
+            "manifestation": "Covets treasures · lusts at beauty · never satisfied"
+          },
+          {
+            "id": "Z05",
+            "obsession": "Lust",
+            "manifestation": "A single cross word · rage ignites · reason lost"
+          },
+          {
+            "id": "Z06",
+            "obsession": "Reputation",
+            "manifestation": "Clinging to reputation · caring about empty titles · forgetting one’s true nature"
+          },
+          {
+            "id": "Z07",
+            "obsession": "Obsession with Longevity",
+            "manifestation": "Craves immortality · clings to the flesh · rejects reincarnation"
+          },
+          {
+            "id": "Z08",
+            "obsession": "Revenge",
+            "manifestation": "Obsessed with one person · heedless of all others · ruins a great cause"
+          },
+          {
+            "id": "Z09",
+            "obsession": "Jealousy",
+            "manifestation": "Sees others surpass oneself · breeds resentment · must destroy them"
+          },
+          {
+            "id": "Z10",
+            "obsession": "Escape",
+            "manifestation": "Avoids trouble · dares not take responsibility · shifts blame"
+          }
+        ]
+      }
+    ],
+    "example_combinations": [
+      {
+        "combination": "K02 Mistaken Entry into a Demon Lair + F03 Golden Cudgel + Z02 Suspicion",
+        "story_opening": "In the dark demon lair Sun Wukong's Golden Cudgel suddenly refuses to obey: Tang Sanzang's suspicion of him has turned into an invisible force corroding the source of his magic.",
+        "story_continuation": "Wukong's attack does the demon no harm at all - the demon uses it and reflects the Golden Cudgel's force back.",
+        "key_conflict": "Suspicion weakens the trust between master and disciples and dims the Golden Cudgel's power.",
+        "thematic_resonance": "Obsession is the greatest enemy; more frightening than demons is the suspicion in one's own heart."
+      },
+      {
+        "combination": "K03 An Old Acquaintance Reappears + F08 Purple-Gold Gourd + Z06 Reputation",
+        "story_opening": "Far from home Wukong meets an old acquaintance who has been reborn as a demon and calls out his name with the Purple-Gold Gourd to take him in.",
+        "story_continuation": "Fixated on the title 'Great Sage Equaling Heaven', Wukong answers to his name and is nearly swallowed by the gourd.",
+        "key_conflict": "Reputation is Wukong's deepest obsession; the title 'Great Sage Equaling Heaven' cost him dearly back then.",
+        "thematic_resonance": "A name is a vain thing; only by letting go of the reputation can one be at ease."
+      },
+      {
+        "combination": "K07 Lost in the Wheel of Rebirth + F06 Golden Fire Eyes + Z01 Pride",
+        "story_opening": "Wukong strays into the six paths of rebirth and is reborn as a mere mortal, yet his Golden Fire Eyes remain and show him demons all around.",
+        "story_continuation": "Too proud to admit that he is a mortal, Wukong insists on fighting the demons and is struck down by a mortal's fists.",
+        "key_conflict": "Pride bars him from accepting his mortal identity and from judging his own strength.",
+        "thematic_resonance": "Obsession is the greatest enemy; more frightening than demons is the pride in one's own heart."
+      },
+      {
+        "combination": "K10 A Heavenly Tribulation Descends + F04 Plantain Fan + Z07 Obsession with Longevity",
+        "story_opening": "A heavenly tribulation descends; a demon, obsessed with longevity, tries to fan it away with the Plantain Fan.",
+        "story_continuation": "But the tribulation is the way of heaven; the Plantain Fan cannot stand against heaven, and the demon is finally reduced to ashes.",
+        "key_conflict": "The obsession with longevity makes the demon unscrupulous, yet it still cannot rival the way of heaven.",
+        "thematic_resonance": "Longevity is a vain thing; only by following the way of heaven can one be at ease."
+      },
+      {
+        "combination": "K12 True and False Hard to Tell + F05 Diamond Snare + Z09 Jealousy",
+        "story_opening": "A man identical to Wukong appears, holding the Diamond Snare and claiming to be the true Wukong.",
+        "story_continuation": "The false Wukong, jealous of the true one, uses the Diamond Snare to take the true Wukong's Golden Cudgel and leave him in a fix.",
+        "key_conflict": "Jealousy is the false Wukong's obsession, driving him to impersonate another.",
+        "thematic_resonance": "Jealousy is the greatest enemy; more frightening than an indistinguishable double is the jealousy in one's own heart."
+      }
+    ],
+    "design_philosophy": "Three card groups · 32 cards · generating 12 × 10 × 10 = 1200 story openings"
+  },
+  "story_generator": {
+    "generator_name": "Journey to the West Story Generator",
+    "based_on": "The 'Cause-Effect · Artifact · Obsession' narrative card system",
+    "total_combinations": 1200,
+    "generating_rules": [
+      "Draw 1 card from the Karma deck · as the story’s scene starting point (K01–K12)",
+      "Draw 1 card from the Artifact deck · as the story’s core prop (F01–F10)",
+      "Draw 1 card from the Obsession deck · as the story’s psychological theme (Z01–Z10)",
+      "The three-card combination determines the story’s ”opening / prop / theme” · the player improvises what follows",
+      "The same combination can be performed many times · different players generate completely different stories · this is the very meaning of a ”generator”"
+    ],
+    "generator_features": [
+      "Repeatability · 1200 combinations can be performed endlessly · each time yielding a different result",
+      "Openness · the three cards set only the opening · the rest is the player’s free play",
+      "Thematic depth · each Obsession card carries its own theme · stories naturally gain ”enlightenment” depth",
+      "Extensibility · new decks (character cards / scene cards) can be added for endless expansion"
+    ],
+    "story_categories": {
+      "Catastrophe": "K02 Mistaken Entry into a Demon Lair + K07 Lost in the Wheel of Rebirth + K10 A Heavenly Tribulation Descends",
+      "Master-Disciple Conflict": "K01 Cast Out of the Monastery + K05 Falsely Implicated + K12 True and False Hard to Tell",
+      "Enlightenment": "K09 Enlightenment in a Dream + K03 An Old Acquaintance Reappears + K08 Return to a Familiar Place",
+      "Temptation": "K04 Forbidden Fruit Eaten by Mistake + K06 A Heaven-Bestowed Task + K11 The Contract Turns Back"
+    },
+    "design_innovation": "A story generator · not a retelling"
+  },
+  "narrative_experiment_summary": {
+    "board_game_players": 4,
+    "board_game_cards": 10,
+    "board_game_phases": 3,
+    "narrative_card_groups": 3,
+    "narrative_card_total": 32,
+    "example_combinations": 5,
+    "story_combinations": 1200,
+    "story_categories": 4
+  }
+};
 
     // ===== 配色映射 =====
     const PHASE_COLORS = ["#c9a14a", "#C0392B", "#8E7D62"];
@@ -3387,6 +3566,86 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             card.append("div").attr("class", "sc-name").style("color", s.color).text(s.name);
             card.append("div").attr("class", "sc-desc").text(s.desc);
         });
+    }
+
+
+    // ============================================================
+    // W1265 真值字段形态适配层（真值源换形态 ⇒ 渲染契约同步）
+    // 真值侧：card_groups 由对象改为数组、卡牌字段 scene（页面旧契约要 name）、
+    // example_combinations 改为 combination/story_opening/story_continuation/
+    // key_conflict/thematic_resonance、story_categories 由数组改为对象
+    // ⇒ 统一在此归一，避免逐处改渲染逻辑；只做改名/形态转换/解析，不编造内容。
+    function normalizeCardGroups(nc) {
+        const src = nc && nc.card_groups;
+        const list = Array.isArray(src) ? src : Object.values(src || {});
+        return list.map((g, i) => {
+            if (!g) return g;
+            const cards = (g.cards || []).map(c => Object.assign({}, c, {
+                name: (c && c.name) || (c && c.scene) || ''
+            }));
+            // W1265: 执念卡原真值色（ZH #7a5230 / EN #8E7D62）与现役 chart-1(#C0392B) 在 protan 下 ΔE=1.9
+            // ⇒ 真值与渲染统一改用现役序列槽苔绿 #3A473A（真值源 + 部署副本 + 本页内嵌三处同步）
+            const safeColor = (i === 2) ? '#3A473A' : (g.color || '#3A473A');
+            return Object.assign({}, g, {
+                color: safeColor,
+                cards: cards,
+                count: (g.count != null) ? g.count : (g.card_count != null ? g.card_count : 0)
+            });
+        });
+    }
+    function buildCardIndex(nc) {
+        const idx = {};
+        const src = nc && nc.card_groups;
+        const list = Array.isArray(src) ? src : Object.values(src || {});
+        list.forEach(g => (g && g.cards || []).forEach(c => {
+            if (c && c.id) idx[c.id] = {
+                id: c.id, name: c.name || c.scene || '',
+                color: g.color || '#3A473A',
+                group: g.group_name || g.english_name || ''
+            };
+        }));
+        return idx;
+    }
+    function normalizeNc(nc) {
+        if (!nc) return nc;
+        return Object.assign({}, nc, { card_groups: normalizeCardGroups(nc) });
+    }
+    function normalizeStories(stories, nc) {
+        const idx = buildCardIndex(nc);
+        return (stories || []).map(s => {
+            const parts = String((s && s.combination) || '').split('+')
+                .map(x => x.trim()).filter(Boolean);
+            const cards = parts.map(p => {
+                const m = p.match(/^([A-Z]\d+)\s*(.*)$/);
+                const id = m ? m[1] : p;
+                const nm = (m && m[2]) ? m[2] : ((idx[id] && idx[id].name) || '');
+                const meta = idx[id] || {};
+                return { id: id, name: nm, color: meta.color || '#3A473A' };
+            });
+            const first = cards[0] || {};
+            return {
+                category_color: first.color || '#3A473A',
+                category: first.group || first.id || '',
+                cards: cards,
+                opening: (s && (s.story_opening || s.opening)) || '',
+                continuation: (s && (s.story_continuation || s.continuation)) || '',
+                conflict: (s && (s.key_conflict || s.conflict)) || '',
+                resonance: (s && (s.thematic_resonance || s.resonance)) || ''
+            };
+        });
+    }
+    function normalizeCategories(gen, nc) {
+        if (!gen) return gen;
+        const src = gen.story_categories;
+        if (Array.isArray(src)) return gen;
+        const idx = buildCardIndex(nc);
+        const arr = Object.keys(src || {}).map(name => {
+            const desc = String(src[name]);
+            const m = desc.match(/[A-Z]\d+/);
+            const meta = (m && idx[m[0]]) || {};
+            return { name: name, desc: desc, card_ids: desc, color: meta.color || '#3A473A' };
+        });
+        return Object.assign({}, gen, { story_categories: arr });
     }
 
     // ===== 渲染：叙事卡牌系统 =====
@@ -3770,10 +4029,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
     async function loadAll() {
         const [bg, nc, sg, sm] = await Promise.all([
-            loadJson("../data/json/board_game.json", EMBEDDED.board_game),
-            loadJson("../data/json/narrative_cards.json", EMBEDDED.narrative_cards),
-            loadJson("../data/json/story_generator.json", EMBEDDED.story_generator),
-            loadJson("../data/json/narrative_experiment_summary.json", EMBEDDED.narrative_experiment_summary)
+            loadJson("../en/json/board_game.json", EMBEDDED.board_game),
+            loadJson("../en/json/narrative_cards.json", EMBEDDED.narrative_cards),
+            loadJson("../en/json/story_generator.json", EMBEDDED.story_generator),
+            loadJson("../en/json/narrative_experiment_summary.json", EMBEDDED.narrative_experiment_summary)
         ]);
         return { board_game: bg, narrative_cards: nc, story_generator: sg, summary: sm };
     }
@@ -3787,7 +4046,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const usingEmbedded = (data.board_game === EMBEDDED.board_game);
         if (!usingEmbedded) {
             document.getElementById("dataSource").innerHTML =
-                "Data source: loaded live from <code>../data/json/</code> (http server mode)";
+                "Data source: loaded live from <code>../en/json/</code> (http server mode)";
         } else {
             document.getElementById("dataSource").innerHTML =
                 "Data source: embedded fallback data (file:// protocol compatible · double-click the HTML file to open directly)";
@@ -3800,10 +4059,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         safe("renderHardship", () => renderHardship(data.board_game.hardship_cards));
         safe("renderEggs", () => renderEggs(data.board_game.design_eggs));
         safe("renderScoring", () => renderScoring(data.board_game.scoring));
-        safe("renderNarrativeCards", () => renderNarrativeCards(data.narrative_cards));
-        safe("renderStories", () => renderStories(data.narrative_cards.example_combinations));
-        safe("renderGenerator", () => renderGenerator(data.story_generator));
-        safe("renderComboViz", () => renderComboViz(data.narrative_cards));
+        safe("renderNarrativeCards", () => renderNarrativeCards(normalizeNc(data.narrative_cards)));
+        safe("renderStories", () => renderStories(normalizeStories(data.narrative_cards.example_combinations, data.narrative_cards)));
+        safe("renderGenerator", () => renderGenerator(normalizeCategories(data.story_generator, data.narrative_cards)));
+        safe("renderComboViz", () => renderComboViz(normalizeNc(data.narrative_cards)));
         renderInsights();
 
         // 生成时间

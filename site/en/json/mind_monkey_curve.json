@@ -1,0 +1,101 @@
+{
+  "concept_name": "Mind-Monkey Nature Curve",
+  "english_name": "Mind Monkey Curve",
+  "definition": "Mind-monkey and thought-horse: a Buddhist term for the restless, agitated mind; the evolution of Wukong's 'mind-monkey' is the core mind-cultivation process of the book",
+  "six_phases": [
+    {
+      "phase": "1. Birth of the Stone Monkey",
+      "chapter": "Ch. 1",
+      "mind_state": "Innocent, without anger or greed",
+      "anger_level": 2,
+      "pride_level": 3,
+      "greed_level": 2,
+      "wisdom_level": 5,
+      "restraint_level": 1,
+      "key_event": "Born and made king, seeks immortals and the Way",
+      "allegory_symbol": "An uncarved jade, the natural true mind"
+    },
+    {
+      "phase": "2. Havoc in Heaven",
+      "chapter": "Ch. 2-7",
+      "mind_state": "Anger blazing, pride at its peak",
+      "anger_level": 9,
+      "pride_level": 10,
+      "greed_level": 7,
+      "wisdom_level": 4,
+      "restraint_level": 1,
+      "key_event": "Steals elixir pills and peaches, wreaks havoc in Heaven, styles himself Great Sage Equal to Heaven",
+      "allegory_symbol": "The mind-monkey runs wild and must be suppressed under Five Elements Mountain"
+    },
+    {
+      "phase": "3. Early Pilgrimage · Submission",
+      "chapter": "Ch. 8-27",
+      "mind_state": "Forced into submission, anger erupts often",
+      "anger_level": 7,
+      "pride_level": 8,
+      "greed_level": 4,
+      "wisdom_level": 6,
+      "restraint_level": 4,
+      "key_event": "Expelled after thrice beating the White Bone Demon, grows resentful",
+      "allegory_symbol": "Tamed by the Tight-Fillet Spell, the mind-monkey constrained by external force"
+    },
+    {
+      "phase": "4. Mid-Pilgrimage · Balance",
+      "chapter": "Ch. 28-58",
+      "mind_state": "Learns restraint, but still erupts",
+      "anger_level": 5,
+      "pride_level": 6,
+      "greed_level": 3,
+      "wisdom_level": 7,
+      "restraint_level": 7,
+      "key_event": "The Six-Eared Macaque incident, the mind-monkey's civil war",
+      "allegory_symbol": "True and False Monkey Kings, subduing the two minds"
+    },
+    {
+      "phase": "5. Late Pilgrimage · Awakening",
+      "chapter": "Ch. 59-99",
+      "mind_state": "Anger recedes, wisdom grows",
+      "anger_level": 3,
+      "pride_level": 4,
+      "greed_level": 2,
+      "wisdom_level": 9,
+      "restraint_level": 9,
+      "key_event": "Teaches disciples in Yuhua Prefecture, awakens to the Way in the Kingdom of Tianzhu",
+      "allegory_symbol": "The mind-monkey unified, turning from external constraint to inner self-awareness"
+    },
+    {
+      "phase": "6. Buddhahood · Victorious Fighting Buddha",
+      "chapter": "Ch. 100",
+      "mind_state": "Mind-monkey fully subdued, buddhahood attained",
+      "anger_level": 0,
+      "pride_level": 1,
+      "greed_level": 0,
+      "wisdom_level": 10,
+      "restraint_level": 10,
+      "key_event": "Titled Victorious Fighting Buddha, the tight fillet falls off by itself",
+      "allegory_symbol": "Mind-monkey thoroughly subdued, mind-cultivation complete"
+    }
+  ],
+  "curve_analysis": {
+    "total_phases": 6,
+    "anger_pattern": "2→9→7→5→3→0: a U-shaped decline; Havoc in Heaven is the anger peak, returning to zero at buddhahood",
+    "pride_pattern": "3→10→8→6→4→1: a steady decline; pride is Wukong's greatest 'ego-attachment'",
+    "wisdom_pattern": "5→4→6→7→9→10: wisdom drops at Havoc in Heaven, then grows steadily along the pilgrimage",
+    "restraint_pattern": "1→1→4→7→9→10: the transformation from external constraint to inner self-awareness",
+    "turning_point": "The Six-Eared Macaque incident (Ch. 58): the true and false Monkey Kings = subduing the two minds, the mind-nature turning point of the whole book",
+    "core_insight": "The mind-monkey curve is a four-stage 'indulgence → suppression → awakening → enlightenment', not simple linearity but a spiral ascent"
+  },
+  "philosophical_insights": [
+    "Mind-monkey (anger) + thought-horse (greed) = the ordinary mind; subduing both = buddhahood",
+    "The Tight-Fillet Spell is external force; true liberation is the fillet falling off by itself (buddhahood)",
+    "The Six-Eared Macaque is Wukong's second mind; killing him = subduing one's own second mind",
+    "Wukong's journey from 'Great Sage Equal to Heaven' to 'Victorious Fighting Buddha' is a mind-cultivation process from 'ego-attachment' to 'no-self'",
+    "What the mind-nature curve descends in is not 'ability' but 'anger' — Wukong's power grows stronger after buddhahood",
+    "Mind-cultivation is not eliminating desire but transforming it: anger→courage, pride→confidence, greed→aspiration"
+  ],
+  "modern_parallel": {
+    "anger_management": "Modern emotion management: training from impulse to restraint",
+    "ego_dissolution": "Chan meditation / mindfulness: awareness training from 'ego-attachment' to 'no-self'",
+    "external_to_internal": "Internalizing discipline: the shift from external rules to inner self-awareness"
+  }
+}

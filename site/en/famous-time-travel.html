@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Mrxt//27QNsN0Qqf37gxCb7nWReztrGw5wJqM1Qxgdg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ikDz69uZNWSs+hPMDG23curA4YhETQBIBdfmtK27BLQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Famous Time Travel · Annotated Journey to the West</title>
@@ -2258,7 +2258,7 @@ async function fetchJson(path, fallbackKey) {
     }
 }
 async function loadData() {
-    const base = '../data/json/';
+    const base = '../en/json/';
     const [travel, scenes] = await Promise.all([
         fetchJson(base + 'v08_travel_identities.json', 'travel_identities'),
         fetchJson(base + 'v08_scene_illustrations.json', 'scene_illustrations')
@@ -2270,7 +2270,7 @@ async function main() {
     window.__lastData = data;
     if (fetchStatus.anyFetched) {
         document.getElementById('dataSource').innerHTML =
-            'Data source: loaded live from <code>../data/json/</code> (running in http server mode)';
+            'Data source: loaded live from <code>../en/json/</code> (running in http server mode)';
     }
     renderTravelGrid(data.travel);
     // scene_illustrations 为纯 SVG 静态 HTML，无需 render 函数

@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Li Zhuowu",
+    "identity": "Ming · Li Zhi · thinker",
+    "lifetime": "1527-1602",
+    "work": "Mr. Li Zhuowu's Criticism of Journey to the West",
+    "year": "c. 1590s",
+    "commentary_count": 800,
+    "commentary_types": {
+      "Praise": 250,
+      "Invective": 80,
+      "Elucidation": 200,
+      "Textual Criticism": 100,
+      "Exegesis": 170
+    },
+    "classic_quotes": [
+      "Wonderful! Wonderful! Wonderful!",
+      "How extraordinary!",
+      "This is the central theme of the whole book.",
+      "Pedantic! Detestable!",
+      "Infuriating!"
+    ],
+    "feature": "The most famous Ming commentary; curses 'pedantic scholars' and points to the 'childlike mind' doctrine",
+    "layer": "Late Ming · earliest commentary edition"
+  },
+  {
+    "name": "Wang Xiangxu",
+    "identity": "Qing · commentator of the Zhengdao Book of the Journey West",
+    "lifetime": "Early Qing · c. 17th century",
+    "work": "Journey to the West: The Book of Realizing the Way (Zhengdao shu)",
+    "year": "1663",
+    "commentary_count": 600,
+    "commentary_types": {
+      "Praise": 100,
+      "Invective": 30,
+      "Elucidation": 350,
+      "Textual Criticism": 100,
+      "Exegesis": 20
+    },
+    "classic_quotes": [
+      "This chapter is the grand theme of realizing the Way.",
+      "Monkey-mind and horse-intent lie in a single thought.",
+      "The great Way is utterly simple; this shows it clearly."
+    ],
+    "feature": "First to interpret the Journey through 'Realization of the Way'; attributes it to Qiu Chuji",
+    "layer": "Early Qing · founder of the Path-of-Realization school"
+  },
+  {
+    "name": "Chen Shibin",
+    "identity": "Qing · commentator of the True Interpretation of the Journey West",
+    "lifetime": "Qing Kangxi · c. late 17th century",
+    "work": "The True Interpretation of the Journey West (Xiyou zhenquan)",
+    "year": "1696",
+    "commentary_count": 1200,
+    "commentary_types": {
+      "Praise": 200,
+      "Invective": 50,
+      "Elucidation": 500,
+      "Textual Criticism": 250,
+      "Exegesis": 200
+    },
+    "classic_quotes": [
+      "This is the great Way of the Golden Elixir.",
+      "Heart-fire and kidney-water: this shows it clearly.",
+      "The stages of cultivation are evidenced in this chapter."
+    ],
+    "feature": "The most popular Qing commentary; interprets the Journey through the Golden Elixir",
+    "layer": "Mid-Qing · representative of the Golden-Elixir school"
+  },
+  {
+    "name": "Liu Yiming",
+    "identity": "Qing · Daoist Longmen lineage · Wuyuanzi",
+    "lifetime": "1734-1821",
+    "work": "The Original Intent of the Journey West (Xiyou yuanzhi)",
+    "year": "1753",
+    "commentary_count": 2000,
+    "commentary_types": {
+      "Praise": 300,
+      "Invective": 100,
+      "Elucidation": 800,
+      "Textual Criticism": 500,
+      "Exegesis": 300
+    },
+    "classic_quotes": [
+      "The original intent of the Journey lies in the dual cultivation of nature and life.",
+      "This chapter speaks plainly of the 'fire phases'.",
+      "The monkey-mind returns to the right; the six thieves vanish."
+    ],
+    "feature": "The most systematic Neidan reading of the Journey; annotated all 100 chapters with far-reaching influence",
+    "layer": "Mid-Qing · culmination of the Neidan school"
+  },
+  {
+    "name": "Zhang Shushen",
+    "identity": "Qing · commentator of the New Commentary on Journey to the West",
+    "lifetime": "Qing Qianlong · c. 18th century",
+    "work": "New Commentary on Journey to the West (Xinshuo)",
+    "year": "1753",
+    "commentary_count": 1500,
+    "commentary_types": {
+      "Praise": 250,
+      "Invective": 80,
+      "Elucidation": 400,
+      "Textual Criticism": 500,
+      "Exegesis": 270
+    },
+    "classic_quotes": [
+      "The intent of the Journey lies in the Great Learning and the Doctrine of the Mean.",
+      "The monkey-mind is the human heart.",
+      "This chapter shows the unity of Confucianism, Buddhism, and Daoism."
+    ],
+    "feature": "Interprets the Journey through Confucianism; advocates the 'unity of the three teachings'; a distinctive perspective",
+    "layer": "Mid-Qing · representative of the Confucian school"
+  }
+]

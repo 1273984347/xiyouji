@@ -1,0 +1,227 @@
+{
+  "concept_name": "Artifact Property Rights Definition",
+  "english_name": "Artifact Property Rights Definition",
+  "definition": "Property rights: the rights to own, use, profit from, and dispose of property. In the Journey to the West world, unclear artifact ownership causes plot conflicts",
+  "core_question": "Is the Diamond Snare Laozi's personal property, or a public asset of the Heavenly Court? Is the Purple Gold Red Gourd Laozi's private property, or a fixed asset of the alchemy system?",
+  "artifact_inventory": [
+    {
+      "artifact_name": "Diamond Snare",
+      "english_name": "Diamond Snare",
+      "claimed_owner": "Laozi",
+      "actual_property_type": "mixed ownership · 'personal invention + official-duty use'",
+      "creation_context": "Privately forged by Laozi · transformed into a weapon while converting the barbarians",
+      "usage_history": [
+        {
+          "event": "Used by Laozi while converting the barbarians",
+          "type": "private use",
+          "owner_present": true
+        },
+        {
+          "event": "Carried by the Green Ox Spirit when descending to earth",
+          "type": "official-duty use (watching over the mount)",
+          "owner_present": false
+        },
+        {
+          "event": "Thrown at Wukong when he wreaked havoc in the Heavenly Palace",
+          "type": "official-duty use (Heavenly Court defense)",
+          "owner_present": true
+        }
+      ],
+      "property_dispute": "Personally forged by Laozi · but requisitioned for Heavenly Court defense · mixed ownership",
+      "property_clarity": 4,
+      "legal_risk": "The Green Ox Spirit used the Diamond Snare after descending to earth · is Laozi liable for the Green Ox Spirit's damage?",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "Purple Gold Red Gourd",
+      "english_name": "Purple Gold Red Gourd",
+      "claimed_owner": "Laozi",
+      "actual_property_type": "private property · but used by the boys after descending to earth",
+      "creation_context": "Used by Laozi to hold pills · an accessory tool of the alchemy room",
+      "usage_history": [
+        {
+          "event": "Stolen by the Gold Horn and Silver Horn when they descended to earth",
+          "type": "theft use",
+          "owner_present": false
+        },
+        {
+          "event": "Used to trap Sun Wukong",
+          "type": "misuse",
+          "owner_present": false
+        }
+      ],
+      "property_dispute": "The Purple Gold Red Gourd is an alchemy-room tool, and Gold Horn and Silver Horn are furnace-watching boys · ownership belongs to Laozi",
+      "property_clarity": 7,
+      "legal_risk": "The boys descended to earth and misappropriated the artifact · is Laozi liable for the boys' damage?",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "Banana Leaf Fan",
+      "english_name": "Banana Leaf Fan",
+      "claimed_owner": "Princess Iron Fan (the Raksasi)",
+      "actual_property_type": "private property · but with a 'public-use' dispute",
+      "creation_context": "Left over from Nuwa mending the sky · inherited by Princess Iron Fan",
+      "usage_history": [
+        {
+          "event": "Used by Princess Iron Fan to quell Flaming Mountain",
+          "type": "public use",
+          "owner_present": true
+        },
+        {
+          "event": "Wukong borrowed the Banana Leaf Fan three times",
+          "type": "transfer of usage rights",
+          "owner_present": false
+        },
+        {
+          "event": "The Bull Demon King stole it and disguised himself as Zhu Bajie to get it back",
+          "type": "theft use",
+          "owner_present": false
+        }
+      ],
+      "property_dispute": "Although the Banana Leaf Fan is Princess Iron Fan's private property, it is used for a 'public purpose' (quelling Flaming Mountain) · ownership and usage rights are separated",
+      "property_clarity": 6,
+      "legal_risk": "Does the Banana Leaf Fan's 'public use' confer usage rights? Can Princess Iron Fan refuse?",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "Golden Cudgel",
+      "english_name": "Golden Cudgel",
+      "claimed_owner": "Sun Wukong",
+      "actual_property_type": "state-owned asset · 'borrowed' by Wukong",
+      "creation_context": "The sea-pacifying needle from Yu the Great's flood control · kept by the dragon king",
+      "usage_history": [
+        {
+          "event": "Used by Yu the Great in flood control",
+          "type": "public use",
+          "owner_present": "Yu the Great"
+        },
+        {
+          "event": "Kept by the East Sea Dragon King",
+          "type": "safekeeping",
+          "owner_present": "dragon king"
+        },
+        {
+          "event": "Wukong 'borrowed' it and never returned it",
+          "type": "theft use",
+          "owner_present": "Wukong"
+        }
+      ],
+      "property_dispute": "The Golden Cudgel was originally a state-owned asset (the sea-pacifying needle) · Wukong 'borrowed' it and never returned it · who owns it now?",
+      "property_clarity": 3,
+      "legal_risk": "Wukong 'borrowed' it and never returned it · does this constitute theft? Why does the dragon king not demand it back?",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "Nine-Tooth Rake",
+      "english_name": "Nine-Tooth Rake",
+      "claimed_owner": "Zhu Bajie",
+      "actual_property_type": "state-owned asset · granted by the Heavenly Court",
+      "creation_context": "Bestowed by the Heavenly Court · granted when Zhu Bajie served as Marshal Tianpeng",
+      "usage_history": [
+        {
+          "event": "The Heavenly Court granted it to Marshal Tianpeng",
+          "type": "grant",
+          "owner_present": "Heavenly Court"
+        },
+        {
+          "event": "Still held by Zhu Bajie after his banishment to the mortal realm",
+          "type": "retained use",
+          "owner_present": "Zhu Bajie"
+        }
+      ],
+      "property_dispute": "The Nine-Tooth Rake was originally a Heavenly Court grant · should Zhu Bajie return it after his demotion?",
+      "property_clarity": 5,
+      "legal_risk": "Should a demoted official return granted items?",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "Golden Hoop Mantra",
+      "english_name": "Golden Hoop Mantra",
+      "claimed_owner": "Tathāgata Buddha",
+      "actual_property_type": "Vulture Peak state-owned asset · delegated to Guanyin to exercise usage rights",
+      "creation_context": "Given by the Tathāgata Buddha to Guanyin · Guanyin passed it to Tang Sanzang",
+      "usage_history": [
+        {
+          "event": "The Tathāgata gave it to Guanyin",
+          "type": "delegation",
+          "owner_present": "Tathāgata"
+        },
+        {
+          "event": "Guanyin passed it to Tang Sanzang",
+          "type": "sub-delegation",
+          "owner_present": "Guanyin"
+        },
+        {
+          "event": "Tang Sanzang used it on Wukong",
+          "type": "exercise of usage rights",
+          "owner_present": "Tang Sanzang"
+        }
+      ],
+      "property_dispute": "The Golden Hoop Mantra's ownership belongs to the Tathāgata · usage rights belong to Tang Sanzang · Wukong has no rights at all",
+      "property_clarity": 8,
+      "legal_risk": "As Tang Sanzang exercises usage rights, can Wukong claim 'personal rights' in opposition?",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "Yin-Yang Bottle",
+      "english_name": "Yin-Yang Bottle",
+      "claimed_owner": "Golden-Winged Great Peng",
+      "actual_property_type": "Vulture Peak state-owned asset · 'carried' down to earth by the Great Peng",
+      "creation_context": "A Vulture Peak artifact · carried by the Great Peng when descending to earth",
+      "usage_history": [
+        {
+          "event": "Carried by the Great Peng when descending to earth",
+          "type": "theft use",
+          "owner_present": "Great Peng"
+        },
+        {
+          "event": "Used to trap Sun Wukong",
+          "type": "misuse",
+          "owner_present": "Great Peng"
+        }
+      ],
+      "property_dispute": "The Yin-Yang Bottle is a Vulture Peak artifact · carried by the Great Peng when descending to earth · does this constitute theft?",
+      "property_clarity": 6,
+      "legal_risk": "A Vulture Peak artifact was misappropriated by a mount descending to earth · is Vulture Peak liable for the Great Peng's damage?",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "Jade Pure Bottle",
+      "english_name": "Jade Pure Bottle",
+      "claimed_owner": "Guanyin Bodhisattva",
+      "actual_property_type": "private property · but with a 'public use'",
+      "creation_context": "Guanyin's private artifact",
+      "usage_history": [
+        {
+          "event": "Used by Guanyin to subdue Red Boy",
+          "type": "official-duty use",
+          "owner_present": "Guanyin"
+        },
+        {
+          "event": "Used to hold the waters of the four seas",
+          "type": "public use",
+          "owner_present": "Guanyin"
+        }
+      ],
+      "property_dispute": "The Jade Pure Bottle is Guanyin's private property · but used for 'official-duty purposes' · ownership and usage rights are mixed",
+      "property_clarity": 7,
+      "legal_risk": "Guanyin's private artifact is used for official duties · how are ownership and usage rights distinguished?",
+      "compensation_paid": 0
+    }
+  ],
+  "property_rights_insights": [
+    "Artifact ownership in the Journey to the West world is broadly unclear · 5 of the 8 major artifacts have ambiguous ownership",
+    "State-owned assets (Golden Cudgel / Nine-Tooth Rake) are 'borrowed and never returned' by individuals · with no recourse mechanism",
+    "Private artifacts (Diamond Snare / Purple Gold Red Gourd) are misappropriated by mounts/boys descending to earth · with the original owners exempted",
+    "The boundary between public use and private property is blurred (Banana Leaf Fan / Jade Pure Bottle) · usage-rights transfer is chaotic",
+    "Artifact ownership in the Journey to the West world is essentially 'use is ownership' · with no formal property system",
+    "8 artifacts · all compensation amounts are 0 · victims of property disputes receive no compensation"
+  ],
+  "property_rights_types": {
+    "private_pure": "Purely private property (Purple Gold Red Gourd / Jade Pure Bottle)",
+    "public_pure": "Purely public asset (Golden Cudgel / Nine-Tooth Rake)",
+    "mixed_ownership": "Mixed ownership (Diamond Snare · personal invention + official-duty use)",
+    "delegated_use": "Delegated use (Golden Hoop Mantra · Tathāgata delegated to Guanyin delegated to Tang Sanzang)",
+    "usucaption": "Use-as-ownership (Golden Cudgel · Wukong borrowed and never returned)"
+  }
+}

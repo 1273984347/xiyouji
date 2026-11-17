@@ -1,0 +1,35 @@
+[
+  {
+    "key": "zhengdao",
+    "label": "Inner Alchemy school",
+    "color": "#40619E",
+    "desc": "Reads Journey to the West through the Golden Elixir Way, treating every plot point as a metaphor for the stages of inner-alchemy cultivation",
+    "path": [
+      "Chen Shibin",
+      "Liu Yiming",
+      "Nan Huai-Chin"
+    ]
+  },
+  {
+    "key": "literary",
+    "label": "Literary school",
+    "color": "#8E7D62",
+    "desc": "Reads from a literary standpoint and social critique, stripping away allegorical accretions and returning to the text",
+    "path": [
+      "Li Zhi",
+      "Lu Xun",
+      "Hu Shi",
+      "Dai Jinhua"
+    ]
+  },
+  {
+    "key": "rebel",
+    "label": "Rebel / Deconstruction school",
+    "color": "#8c2a2a",
+    "desc": "Rewrites Journey to the West in an anti-heroic, authority-deconstructing posture, resisting every canonical reading",
+    "path": [
+      "Li Zhi",
+      "Jin Hezai"
+    ]
+  }
+]

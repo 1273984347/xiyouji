@@ -36,13 +36,21 @@ const path = require('path');
 const { PROJECT_ROOT } = require('./lib/gate_common');
 
 const SITE_DATA_DIR = path.join(PROJECT_ROOT, 'site', 'data');
+// W1265 批一（判据补盲 1-6）：扩面到 site/en（138 页）——原实现只扫 site/data。
+const SITE_EN_DIR = path.join(PROJECT_ROOT, 'site', 'en');
+// W1265（1-6）：单侧键由「只记 NOTE」升级为**判红**（基线冻结形态）。
+const SINGLE_SIDE_BASELINE_PATH = path.join(PROJECT_ROOT, 'scripts', 'output', 'data-drift-singleside-baseline.txt');
+const singleSideViolations = [];
 const DATASET_DIR = path.join(PROJECT_ROOT, 'dataset');
 const OUTPUT_DATA_DIR = path.join(PROJECT_ROOT, 'scripts', 'output', 'data');
 const DEPLOYED_COPY_DIR = path.join(SITE_DATA_DIR, 'json');
 const DRIFT_BASELINE_PATH = path.join(PROJECT_ROOT, 'scripts', 'output', 'data-drift-baseline.txt');
 
-/** 部署副本数基线（新增 fetch 目标须同步副本后更新此值）。 */
-const EXPECTED_DEPLOYED_COPY_COUNT = 47;
+/** 部署副本数基线（新增 fetch 目标须同步副本后更新此值）。
+ *  W1265 批一：47 → 158——并行页面线（W1265 批 C·审查报告 2-7 部署面）已把
+ *  135 件真值原件全量部署到 site/data/json/（158 件）⇒ 本常量随部署面同步更新。
+ */
+const EXPECTED_DEPLOYED_COPY_COUNT = 158;
 const EMBEDDED_BLOCK_RE = /const\s+(EMBEDDED_DATA|EMBEDDED)\s*=\s*(\{[\s\S]*?\n\s*\});/;
 // W1231：单行形态回退——V8 执行式重写产出 compact 单行对象，多行正则（要求
 // `\n\s*});`）对其失配 ⇒ 页面被误计「无内嵌块」跳过（保护面 60→43 实测）。
@@ -363,7 +371,15 @@ function comparePageAgainstJson(embedded, jsonPath, pageStem, driftBaseline, dee
     const acc = [];
     deepDiff(pr.a, pr.b, pr.path, acc);
     if (singleSideNotes.length) {
-      console.log(`  · 单侧键（schema 分歧·NOTE 计 ${singleSideNotes.length}·样例：${singleSideNotes.slice(0, 3).join(' | ')}）`);
+      console.log(`  · 单侧键（schema 分歧·W1265 起升级判红·计 ${singleSideNotes.length}·样例：${singleSideNotes.slice(0, 3).join(' | ')}）`);
+      // W1265（1-6）：单侧键不再「只记 NOTE」——登记为违例（基线内冻结·基线外判红）。
+      for (const n of singleSideNotes) {
+        const p = n.replace(/（单侧键：.*$/, '');
+        singleSideViolations.push({
+          key: `${label} ${normalizeDriftPath(p)}`,
+          detail: `${label} ${n}`,
+        });
+      }
       singleSideNotes.length = 0;
     }
     for (const item of acc) {
@@ -409,6 +425,98 @@ function checkDeployedCopies(pages) {
   }
 
   return issues;
+}
+
+// ---------------- EN 面比对（W1265·1-6） ----------------
+
+/**
+ * EN 页内嵌块 ↔ 真值 JSON 的**翻译容差**结构比对。
+ *
+ * 口径：EN 页内嵌的是英文副本 ⇒ 字符串值天然不同（翻译差异不是漂移）⇒ 只比：
+ *   · 单侧键（键集差）→ 违例（与 ZH 面同判据·W1265 起判红）
+ *   · 数组长度不等 → 违例
+ *   · 数值标量不等 → 违例
+ *   · 类型差（num ↔ str）→ 违例（审查报告 P3-2「单侧键 / 类型差」族）
+ *   · 纯字符串值差异 → **不判**（翻译差异）
+ * 深度上限 6·元素上限 100（防病态页面爆量）。
+ */
+function compareEnStructure(a, b, label, path = '$', out = [], depth = 0) {
+  if (depth > 6) return out;
+  const aObj = a && typeof a === 'object';
+  const bObj = b && typeof b === 'object';
+  if (!aObj && !bObj) {
+    if (typeof a === 'number' && typeof b === 'number') {
+      if (Math.abs(a - b) > 1e-9) out.push(`${label} ${path}: 内嵌=${a} 真值=${b}`);
+    } else if (typeof a === 'number' !== (typeof b === 'number')) {
+      out.push(`${label} ${path}: 类型差 内嵌=${typeof a} 真值=${typeof b}`);
+    }
+    return out;
+  }
+  if (!aObj || !bObj) {
+    out.push(`${label} ${path}: 形态差 内嵌=${Array.isArray(a) ? 'array' : typeof a} 真值=${Array.isArray(b) ? 'array' : typeof b}`);
+    return out;
+  }
+  const aArr = Array.isArray(a);
+  const bArr = Array.isArray(b);
+  if (aArr !== bArr) {
+    out.push(`${label} ${path}: 形态差 内嵌=${aArr ? 'array' : 'object'} 真值=${bArr ? 'array' : 'object'}`);
+    return out;
+  }
+  if (aArr) {
+    if (a.length !== b.length) {
+      out.push(`${label} ${path}: 数组长度 内嵌=${a.length} 真值=${b.length}`);
+      return out;
+    }
+    for (let i = 0; i < Math.min(a.length, 100); i++) compareEnStructure(a[i], b[i], label, `${path}[${i}]`, out, depth + 1);
+    return out;
+  }
+  const ak = Object.keys(a);
+  const bk = Object.keys(b);
+  // W1265 探针口径修正（两轮实测假阳性）：
+  //  ① EN 页内嵌块的**对象键是英译标签**（by_cause 下 "Heavenly / Western steeds incarnate"），
+  //     真值 JSON 同层键是中文标签 ⇒ 逐键比对把**每条翻译**误报成单侧键（81-hardships 一页 300+ 条）。
+  //  ② 只留标识符形态的键仍不够：单字英译（Cave / Mountain / Guanyin）也是标识符形态。
+  // ⇒ 最终口径：EN 面**不比键名**——只比「结构位次 + 数值」：
+  //     键数不等 → 记 1 条「键数差」（不逐键列名）；键序位次一一对位递归；
+  //     数组比长度并按位递归；数值不等 → 违例；字符串差异（翻译）→ 不判。
+  if (ak.length !== bk.length) {
+    out.push(`${label} ${path}: 键数差 内嵌=${ak.length} 真值=${bk.length}`);
+    return out;
+  }
+  for (let i = 0; i < ak.length; i++) {
+    compareEnStructure(a[ak[i]], b[bk[i]], label, `${path}.${ak[i]}`, out, depth + 1);
+  }
+  return out;
+}
+
+/** 扫 EN 面 → 违例列表（每条含 key 与 detail）。 */
+function scanEnPages() {
+  const viol = [];
+  if (!fs.existsSync(SITE_EN_DIR)) return viol;
+  const pages = fs.readdirSync(SITE_EN_DIR).filter((f) => f.endsWith('.html')).sort();
+  for (const pg of pages) {
+    const html = fs.readFileSync(path.join(SITE_EN_DIR, pg), 'utf-8');
+    const embedded = extractEmbedded(html);
+    if (!embedded) continue;
+    const stem = pg.replace(/-view\.html$/, '').replace(/\.html$/, '');
+    const candidates = [...collectCandidateJsonPaths(html, stem)].filter((p) => fs.existsSync(p));
+    for (const jp of candidates) {
+      let json;
+      try {
+        json = JSON.parse(fs.readFileSync(jp, 'utf-8'));
+      } catch {
+        continue;
+      }
+      const label = `site/en/${pg} ⇄ ${path.basename(jp)}`;
+      for (const item of compareEnStructure(embedded, json, label)) {
+        const colon = item.indexOf(': ');
+        const pth = normalizeDriftPath(item.slice(0, colon));
+        viol.push({ key: `${label} ${pth}`, detail: item });
+      }
+      break; // 每页只对第一个可比 JSON（与 ZH 面「可比页」口径一致）
+    }
+  }
+  return viol;
 }
 
 // ---------------- 主流程 ----------------
@@ -525,6 +633,37 @@ function main() {
     }
   }
 
+  // W1265（1-6）：EN 面纳入漂移比对 + 单侧键升级判红（基线冻结形态）
+  const enViol = scanEnPages();
+  const allSingleSide = [...singleSideViolations, ...enViol];
+  const ssBaseline = new Set();
+  if (fs.existsSync(SINGLE_SIDE_BASELINE_PATH)) {
+    for (const line of fs.readFileSync(SINGLE_SIDE_BASELINE_PATH, 'utf-8').split(/\r?\n/)) {
+      const s = line.trim();
+      if (s && !s.startsWith('#')) ssBaseline.add(s);
+    }
+  }
+  const strict = process.argv.includes('--strict');
+  const ssNew = strict ? allSingleSide : allSingleSide.filter((v) => !ssBaseline.has(v.key));
+  const ssFrozen = strict ? [] : allSingleSide.filter((v) => ssBaseline.has(v.key));
+  if (process.argv.includes('--generate-singleside-baseline')) {
+    const lines = [
+      '# 数据漂移门禁 · 单侧键基线（W1265 建立·存量 schema 分歧冻结）',
+      '# 生成命令：node scripts/check_data_drift.js --generate-singleside-baseline',
+      '# 格式：<页面 ⇄ JSON> <归一化路径>',
+      '# 语义：基线内不计 FAIL；基线外新增 = FAIL；零容忍：--strict',
+      ...allSingleSide.map((v) => v.key).sort(),
+    ];
+    fs.mkdirSync(path.dirname(SINGLE_SIDE_BASELINE_PATH), { recursive: true });
+    fs.writeFileSync(SINGLE_SIDE_BASELINE_PATH, lines.join('\n') + '\n', 'utf-8');
+    console.log(`单侧键基线已生成：${path.relative(PROJECT_ROOT, SINGLE_SIDE_BASELINE_PATH)} · ${allSingleSide.length} 条`);
+    return;
+  }
+  console.log(
+    `单侧键/EN 面：违例 ${allSingleSide.length} 条（EN 面 ${enViol.length} 条）· 存量基线 ${ssFrozen.length} 条 · ` +
+      `基线外新增 ${ssNew.length} 条${strict ? '（零容忍模式·基线不参与判定）' : ''}`
+  );
+
   console.log(`数据漂移检查：可比 ${comparable} 页（${pairs} 个 JSON 对比项）/ 跳过 ${skipped} 页`);
   if (skips.length && process.env.DEBUG) {
     skips.forEach((s) => console.log('  -', s));
@@ -537,6 +676,13 @@ function main() {
     process.exit(1);
   }
   console.log(`副本对账 ✓（${EXPECTED_DEPLOYED_COPY_COUNT} 个副本数组长度比对一致 · 页面引用无缺失）`);
+
+  if (ssNew.length) {
+    console.log('发现单侧键/EN 面结构分歧（非基线）：');
+    ssNew.slice(0, 40).forEach((i) => console.log('  ✗', i.detail));
+    if (ssNew.length > 40) console.log(`  …其余 ${ssNew.length - 40} 条略`);
+    process.exit(1);
+  }
 
   if (deepIssues.length) {
     console.log('发现深层漂移（共路标量·非基线）：');

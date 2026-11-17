@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Vajra Ring",
+    "owner": "One-Horned Rhinoceros King (originally Taishang Laojun's)",
+    "category": "Causal-Law Weapon",
+    "power_source": "Cosmic Rule Engine",
+    "principle": "Snares all things · independent of the wielder's mana · with an embedded 'binding rule'",
+    "user_driven": false,
+    "evidence": "The One-Horned Rhinoceros's own mana is not top-tier, yet it can snare Wukong's Golden-Banded Staff, the gods' weapons, Nezha's weapons, even water and fire",
+    "rank": "S+"
+  },
+  {
+    "name": "Purple-Gold Red Gourd",
+    "owner": "Golden Horn King · Silver Horn King (originally Taishang Laojun's)",
+    "category": "Causal-Law Weapon · answering one's name brings death",
+    "power_source": "Cosmic Rule Engine · name-binding",
+    "principle": "Call the name and it answers; whoever answers enters the gourd and dissolves into pus and blood",
+    "user_driven": false,
+    "evidence": "Wukong was once trapped by the false name 'Zhe Xingsun' · dissolved into pus and blood · escaped by means of a false name",
+    "rank": "S+"
+  },
+  {
+    "name": "Human Seed Pouch",
+    "owner": "Yellow-Browed Boy (originally Maitreya Buddha's)",
+    "category": "Causal-Law Weapon · area capture",
+    "power_source": "Cosmic Rule Engine · spatial binding",
+    "principle": "Open the pouch · people enter · none of the gods can escape",
+    "user_driven": false,
+    "evidence": "Took the Twenty-Eight Mansions · the Five-Direction Guardians · Wukong too was nearly captured · saved only by Maitreya's descent",
+    "rank": "S+"
+  },
+  {
+    "name": "Yin-Yang Two-Qi Vase",
+    "owner": "Golden-Winged Great Peng",
+    "category": "Causal-Law Weapon · dissolution",
+    "power_source": "Cosmic Rule Engine · yin-yang dissolution",
+    "principle": "Enter the vase · within a short span one is reduced to pulp",
+    "user_driven": false,
+    "evidence": "Wukong entered the vase · relied on Guanyin's three life-saving hairs · bored through and destroyed it",
+    "rank": "S+"
+  },
+  {
+    "name": "Palm-Leaf Fan",
+    "owner": "Princess Iron Fan · the Rakshasi",
+    "category": "Elemental Weapon · wind-type",
+    "power_source": "A heaven-and-earth spirit-treasure · the innate primal qi",
+    "principle": "One fan-stroke sends wind 84,000 li · quenches the Flaming Mountains",
+    "user_driven": true,
+    "evidence": "The Rakshasi's own mana is middling, yet the fan made her a local hegemon",
+    "rank": "S"
+  },
+  {
+    "name": "Golden-Banded Staff",
+    "owner": "Sun Wukong",
+    "category": "Physical Weapon · heavy weapon",
+    "power_source": "The Sea-Pacifying Needle left by Yu the Great for flood control · an innate spirit-treasure",
+    "principle": "13,500 jin · shrinks or grows at will",
+    "user_driven": true,
+    "evidence": "Driven by Wukong's mana · its upper power limit is set by the wielder",
+    "rank": "S"
+  },
+  {
+    "name": "Nine-Toothed Rake",
+    "owner": "Zhu Bajie",
+    "category": "Physical Weapon · divine weapon",
+    "power_source": "Forged by Taishang Laojun · bestowed by the Jade Emperor",
+    "principle": "Nine teeth · divine radiance · can build mountains",
+    "user_driven": true,
+    "evidence": "Limited by Bajie's mana · the rake's power is never fully realized",
+    "rank": "A+"
+  },
+  {
+    "name": "Tight-Fillet Spell",
+    "owner": "Guanyin → Tang Sanzang",
+    "category": "Causal-Law Weapon · control",
+    "power_source": "Cosmic Rule Engine · mind-binding",
+    "principle": "Recite the spell and it tightens · splitting headache · a control actuator",
+    "user_driven": false,
+    "evidence": "Tang Sanzang, a mere mortal, can recite it · independent of the wielder's mana · acts directly on Wukong",
+    "rank": "S+"
+  }
+]

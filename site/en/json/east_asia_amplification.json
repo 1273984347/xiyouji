@@ -1,0 +1,86 @@
+[
+  {
+    "country": "Japan",
+    "element": "Bishōnen-ization",
+    "intensity": 10,
+    "representative_work": "Saiyuki",
+    "feature": "Turns all four pilgrims into beautiful young men · BL (boys' love) style · modern urban setting"
+  },
+  {
+    "country": "Japan",
+    "element": "Hot-Blooded Combat",
+    "intensity": 10,
+    "representative_work": "Dragon Ball",
+    "feature": "Fully cosmic-scale hot-blooded action · quantified battle power · global influence"
+  },
+  {
+    "country": "Japan",
+    "element": "Dark Deconstruction",
+    "intensity": 7,
+    "representative_work": "Great Ape King",
+    "feature": "Adult-oriented · erotic and violent · Japan's adult-oriented Journey to the West"
+  },
+  {
+    "country": "South Korea",
+    "element": "Romanticization",
+    "intensity": 9,
+    "representative_work": "A Korean Odyssey",
+    "feature": "Modern urban romance · a love line between Wukong and a female Tripitaka"
+  },
+  {
+    "country": "South Korea",
+    "element": "Educationalization",
+    "intensity": 8,
+    "representative_work": "Magic Thousand-Character Classic",
+    "feature": "Children's Chinese-character learning · uses Journey to the West as its framework"
+  },
+  {
+    "country": "Vietnam",
+    "element": "Localized Humor",
+    "intensity": 7,
+    "representative_work": "Vietnamese folk drama",
+    "feature": "Incorporates Vietnamese folklore · humorized · adapted into local opera"
+  },
+  {
+    "country": "China",
+    "element": "Dark Deconstruction",
+    "intensity": 8,
+    "representative_work": "Black Myth: Wukong; Journey to the West: Conquering the Demons",
+    "feature": "The most serious, darkest local deconstruction in recent years"
+  },
+  {
+    "country": "China",
+    "element": "Web-Novel Hot-Blood",
+    "intensity": 9,
+    "representative_work": "Legend of Wukong; Great Ape King",
+    "feature": "Web-novel anti-Journey-to-the-West · hot-blooded fantasy"
+  },
+  {
+    "country": "China",
+    "element": "Faithful to Original",
+    "intensity": 10,
+    "representative_work": "1986 CCTV series",
+    "feature": "Most faithful to the original · shaped the perception of several generations of Chinese audiences"
+  },
+  {
+    "country": "USA",
+    "element": "Simplified Narrative",
+    "intensity": 8,
+    "representative_work": "Netflix's The Monkey King",
+    "feature": "Aimed at mainstream English audiences · American-style animation with simplified narrative"
+  },
+  {
+    "country": "USA",
+    "element": "Western Reinterpretation",
+    "intensity": 7,
+    "representative_work": "AMC's Into the Badlands",
+    "feature": "Post-apocalyptic · borrows the name but not the spirit · Western martial arts"
+  },
+  {
+    "country": "Australia",
+    "element": "Localized Humor",
+    "intensity": 6,
+    "representative_work": "ABC's Monkey",
+    "feature": "In English · humorized · influenced the Australian English-speaking world"
+  }
+]

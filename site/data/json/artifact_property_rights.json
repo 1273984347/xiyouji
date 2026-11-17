@@ -1,0 +1,227 @@
+{
+  "concept_name": "法宝产权界定",
+  "english_name": "Artifact Property Rights Definition",
+  "definition": "产权（property rights）：财产的所有权、使用权、收益权、处置权·西游世界法宝产权不清导致剧情冲突",
+  "core_question": "金刚琢是太上老君的个人财产·还是天庭的公有资产？紫金葫芦是太上老君私产·还是炼丹系统的固定资产？",
+  "artifact_inventory": [
+    {
+      "artifact_name": "金刚琢",
+      "english_name": "Diamond Snare",
+      "claimed_owner": "太上老君",
+      "actual_property_type": "混合产权·'个人发明+公职务用途'",
+      "creation_context": "太上老君私人炼制·化胡为兵器",
+      "usage_history": [
+        {
+          "event": "太上老君化胡时使用",
+          "type": "私人用途",
+          "owner_present": true
+        },
+        {
+          "event": "青牛精下凡时携带",
+          "type": "公职务用途（看坐骑）",
+          "owner_present": false
+        },
+        {
+          "event": "悟空大闹天宫时砸悟空",
+          "type": "公职务用途（天庭防御）",
+          "owner_present": true
+        }
+      ],
+      "property_dispute": "太上老君个人炼制·但天庭防御时调用·产权混合",
+      "property_clarity": 4,
+      "legal_risk": "青牛精下凡使用金刚琢·太上老君是否需对青牛精的破坏负责？",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "紫金红葫芦",
+      "english_name": "Purple Gold Red Gourd",
+      "claimed_owner": "太上老君",
+      "actual_property_type": "私人财产·但被童子下凡使用",
+      "creation_context": "太上老君盛丹用·炼丹房附属工具",
+      "usage_history": [
+        {
+          "event": "金角银角下凡时盗用",
+          "type": "盗窃使用",
+          "owner_present": false
+        },
+        {
+          "event": "用于装孙悟空",
+          "type": "不当使用",
+          "owner_present": false
+        }
+      ],
+      "property_dispute": "紫金葫芦是炼丹房工具·金角银角是看炉童子·产权属于太上老君",
+      "property_clarity": 7,
+      "legal_risk": "童子下凡盗用法宝·太上老君是否需对童子的破坏负责？",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "芭蕉扇",
+      "english_name": "Banana Leaf Fan",
+      "claimed_owner": "铁扇公主（罗刹女）",
+      "actual_property_type": "私人财产·但有'公共用途'争议",
+      "creation_context": "女娲补天遗留·铁扇公主继承",
+      "usage_history": [
+        {
+          "event": "铁扇公主用于熄灭火焰山",
+          "type": "公共用途",
+          "owner_present": true
+        },
+        {
+          "event": "悟空三借芭蕉扇",
+          "type": "使用权流转",
+          "owner_present": false
+        },
+        {
+          "event": "牛魔王偷走变猪八戒骗回",
+          "type": "盗窃使用",
+          "owner_present": false
+        }
+      ],
+      "property_dispute": "芭蕉扇虽是铁扇公主私产·但用于'公共用途'（熄灭火焰山）·产权与使用权分离",
+      "property_clarity": 6,
+      "legal_risk": "芭蕉扇的'公共用途'是否赋予使用权？铁扇公主能否拒绝？",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "金箍棒",
+      "english_name": "Golden Cudgel",
+      "claimed_owner": "孙悟空",
+      "actual_property_type": "国有资产·被悟空'借用'",
+      "creation_context": "大禹治水时定海神针·龙王保管",
+      "usage_history": [
+        {
+          "event": "大禹治水使用",
+          "type": "公共用途",
+          "owner_present": "大禹"
+        },
+        {
+          "event": "东海龙王保管",
+          "type": "保管",
+          "owner_present": "龙王"
+        },
+        {
+          "event": "悟空'借走'不还",
+          "type": "盗窃使用",
+          "owner_present": "悟空"
+        }
+      ],
+      "property_dispute": "金箍棒本是国有资产（定海神针）·被悟空'借走'不还·产权属谁？",
+      "property_clarity": 3,
+      "legal_risk": "悟空'借走'不还·是否构成盗窃？龙王为何不索回？",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "九齿钉耙",
+      "english_name": "Nine-Tooth Rake",
+      "claimed_owner": "猪八戒",
+      "actual_property_type": "国有资产·天庭赐予",
+      "creation_context": "天庭御赐·猪八戒任天蓬元帅时获赐",
+      "usage_history": [
+        {
+          "event": "天庭赐予天蓬元帅",
+          "type": "赏赐",
+          "owner_present": "天庭"
+        },
+        {
+          "event": "猪八戒贬下凡间后仍持有",
+          "type": "保留使用",
+          "owner_present": "猪八戒"
+        }
+      ],
+      "property_dispute": "九齿钉耙本是天庭赏赐·猪八戒被贬后是否应归还？",
+      "property_clarity": 5,
+      "legal_risk": "被贬官员是否应归还赏赐物？",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "紧箍咒",
+      "english_name": "Golden Hoop Mantra",
+      "claimed_owner": "如来佛祖",
+      "actual_property_type": "灵山国有资产·委托观音行使使用权",
+      "creation_context": "如来佛祖赐予观音·观音转交唐僧",
+      "usage_history": [
+        {
+          "event": "如来赐予观音",
+          "type": "委托",
+          "owner_present": "如来"
+        },
+        {
+          "event": "观音转交唐僧",
+          "type": "再委托",
+          "owner_present": "观音"
+        },
+        {
+          "event": "唐僧对悟空使用",
+          "type": "使用权行使",
+          "owner_present": "唐僧"
+        }
+      ],
+      "property_dispute": "紧箍咒所有权属如来·使用权属唐僧·悟空无任何权利",
+      "property_clarity": 8,
+      "legal_risk": "唐僧行使使用权·悟空能否主张'人身权'反对？",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "阴阳二气瓶",
+      "english_name": "Yin-Yang Bottle",
+      "claimed_owner": "金翅大鹏雕",
+      "actual_property_type": "灵山国有资产·被大鹏雕'携带'下凡",
+      "creation_context": "灵山法宝·大鹏雕下凡时携带",
+      "usage_history": [
+        {
+          "event": "大鹏雕下凡时携带",
+          "type": "盗窃使用",
+          "owner_present": "大鹏雕"
+        },
+        {
+          "event": "用于装孙悟空",
+          "type": "不当使用",
+          "owner_present": "大鹏雕"
+        }
+      ],
+      "property_dispute": "阴阳二气瓶是灵山法宝·大鹏雕下凡时携带·是否构成盗窃？",
+      "property_clarity": 6,
+      "legal_risk": "灵山法宝被坐骑下凡盗用·灵山是否需对大鹏雕的破坏负责？",
+      "compensation_paid": 0
+    },
+    {
+      "artifact_name": "玉净瓶",
+      "english_name": "Jade Pure Bottle",
+      "claimed_owner": "观音菩萨",
+      "actual_property_type": "私人财产·但有'公共用途'",
+      "creation_context": "观音私人法宝",
+      "usage_history": [
+        {
+          "event": "观音用于收服红孩儿",
+          "type": "公职务用途",
+          "owner_present": "观音"
+        },
+        {
+          "event": "用于装四海之水",
+          "type": "公共用途",
+          "owner_present": "观音"
+        }
+      ],
+      "property_dispute": "玉净瓶是观音私产·但用于'公职务用途'·产权与使用权混合",
+      "property_clarity": 7,
+      "legal_risk": "观音私人法宝用于公职务·产权与使用权如何区分？",
+      "compensation_paid": 0
+    }
+  ],
+  "property_rights_insights": [
+    "西游世界法宝产权普遍不清·8 件主要法宝中 5 件产权模糊",
+    "国有资产（金箍棒/九齿钉耙）被个人'借走不还'·无追索机制",
+    "私人法宝（金刚琢/紫金葫芦）被坐骑/童子下凡盗用·原主免责",
+    "公共用途与私产边界模糊（芭蕉扇/玉净瓶）·使用权流转混乱",
+    "西游世界的法宝产权本质是'使用即所有'·无正规产权制度",
+    "8 件法宝·赔偿金额全部为 0·产权纠纷受害者得不到补偿"
+  ],
+  "property_rights_types": {
+    "private_pure": "纯私人财产（紫金葫芦/玉净瓶）",
+    "public_pure": "纯公有资产（金箍棒/九齿钉耙）",
+    "mixed_ownership": "混合产权（金刚琢·个人发明+公职务用途）",
+    "delegated_use": "委托使用（紧箍咒·如来委托观音委托唐僧）",
+    "usucaption": "使用即所有（金箍棒·悟空借走不还）"
+  }
+}

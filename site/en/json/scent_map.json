@@ -1,0 +1,238 @@
+{
+  "project_name": "Scent Map of Journey to the West",
+  "english_name": "Scent Map of Journey to the West",
+  "art_form": "Sensory Map · Olfactory Art",
+  "core_concept": "Designing unique scents for key locations along the pilgrimage route · an extraordinarily unique sensory reading experience",
+  "presentation_method": "A long-scroll map with a scratch-and-sniff fragrance card beside each location, or a QR code linking to a custom fragrance formula",
+  "locations": [
+    {
+      "n": 1,
+      "location": "Flower-Fruit Mountain",
+      "chapter": "Ch. 1",
+      "geography": "Pūrvavideha Continent · a famous mountain in the sea",
+      "scent_profile": "Water vapor · the sweetness of peaches · the animal musk of the monkey troop",
+      "scent_notes": [
+        "Salt of the sea",
+        "Sweet ripe peaches",
+        "Ape musk",
+        "Fresh morning dew"
+      ],
+      "intensity": 4,
+      "mood": "Vibrant · primally wild",
+      "key_description": "Newborn Sun Wukong frolics with ten thousand monkeys · the Water Curtain Cave waterfall · peach blossoms across the mountain",
+      "fragrance_formula": {
+        "top_note": "Sea breeze · peach fragrance",
+        "middle_note": "Macaque musk · fresh grass",
+        "base_note": "Damp rock"
+      }
+    },
+    {
+      "n": 2,
+      "location": "Five Elements Mountain",
+      "chapter": "Ch. 14",
+      "geography": "Aparagodānīya Continent · Mount Liangjie",
+      "scent_profile": "Cold hard rock · dust · 500 years of solitude",
+      "scent_notes": [
+        "Icy rock",
+        "Dust",
+        "Rust",
+        "Withered grass"
+      ],
+      "intensity": 3,
+      "mood": "Oppressive · lonely · waiting",
+      "key_description": "Wukong imprisoned for 500 years · only iron pellets and molten copper · sandstorms fill the sky",
+      "fragrance_formula": {
+        "top_note": "Dust · cold wind",
+        "middle_note": "Rock · rust",
+        "base_note": "Withered grass · desolation"
+      }
+    },
+    {
+      "n": 3,
+      "location": "Flowing Sands River",
+      "chapter": "Ch. 22",
+      "geography": "Aparagodānīya Continent · 800 li of flowing sand",
+      "scent_profile": "Turbid river water · sand and soil · dampness",
+      "scent_notes": [
+        "Turbid vapor",
+        "Wet sand",
+        "Fishy smell",
+        "River mud"
+      ],
+      "intensity": 3,
+      "mood": "Desolate · dangerous",
+      "key_description": "Sha Wujing holds sway · the water is only 1m deep but full of traps",
+      "fragrance_formula": {
+        "top_note": "Wet sand · river wind",
+        "middle_note": "Fishy · river mud",
+        "base_note": "Rotten grass"
+      }
+    },
+    {
+      "n": 4,
+      "location": "Five Villages Monastery",
+      "chapter": "Ch. 24-26",
+      "geography": "Longevity Mountain · Five Villages Monastery",
+      "scent_profile": "Immortal herbs · ginseng fruit · Daoist temple sandalwood",
+      "scent_notes": [
+        "Daoist temple sandalwood",
+        "Sweet ginseng fruit",
+        "Immortal herbs",
+        "Fresh dew"
+      ],
+      "intensity": 5,
+      "mood": "Immortal realm · solemn",
+      "key_description": "Zhenyuanzi's Daoist temple · ten-thousand-year-old ginseng fruit tree · brimming with immortal aura",
+      "fragrance_formula": {
+        "top_note": "Ginseng fruit · fresh dew",
+        "middle_note": "Daoist temple sandalwood · immortal herbs",
+        "base_note": "Cloud mist · aloeswood"
+      }
+    },
+    {
+      "n": 5,
+      "location": "White Tiger Ridge",
+      "chapter": "Ch. 27",
+      "geography": "Aparagodānīya Continent · a barren mountain",
+      "scent_profile": "Dry bones · decay · chilling wind",
+      "scent_notes": [
+        "Dry bones",
+        "Rotting flesh",
+        "Chilling wind",
+        "Wild grass"
+      ],
+      "intensity": 5,
+      "mood": "Terrifying · gloomy",
+      "key_description": "The White Bone Demon's territory · bones everywhere · gusts of chilling wind",
+      "fragrance_formula": {
+        "top_note": "Chilling wind · rotten grass",
+        "middle_note": "Dry bones · rotting flesh",
+        "base_note": "The breath of the underworld"
+      }
+    },
+    {
+      "n": 6,
+      "location": "Flaming Mountain",
+      "chapter": "Ch. 59-61",
+      "geography": "Aparagodānīya Continent · 800 li of flames",
+      "scent_profile": "Scorching mineral char · sweat · hot dry waves",
+      "scent_notes": [
+        "Scorched earth",
+        "Sulfur",
+        "Sweat",
+        "Heat waves"
+      ],
+      "intensity": 5,
+      "mood": "Scorching · searing · yearning",
+      "key_description": "800 li of flames · nothing grows · the Pilgrim borrows the palm-leaf fan three times",
+      "fragrance_formula": {
+        "top_note": "Heat waves · scorched earth",
+        "middle_note": "Sulfur · minerals",
+        "base_note": "Sweat · smoke"
+      }
+    },
+    {
+      "n": 7,
+      "location": "Spider Silk Cave",
+      "chapter": "Ch. 72-73",
+      "geography": "Aparagodānīya Continent · Silk-Winding Ridge",
+      "scent_profile": "Damp earthy mustiness · the faint sweetness of insect pheromones · decaying silk",
+      "scent_notes": [
+        "Damp earth",
+        "Insect pheromones",
+        "Rotting silk",
+        "Spider webs"
+      ],
+      "intensity": 4,
+      "mood": "Eerie · alluring · dangerous",
+      "key_description": "The lair of seven spider spirits · webs everywhere · heavy dampness",
+      "fragrance_formula": {
+        "top_note": "Spider webs · dampness",
+        "middle_note": "Insect pheromones · rotting silk",
+        "base_note": "Earthy mustiness"
+      }
+    },
+    {
+      "n": 8,
+      "location": "Lion-Camel Ridge",
+      "chapter": "Ch. 74-77",
+      "geography": "Aparagodānīya Continent · 800-li Lion-Camel Ridge",
+      "scent_profile": "Blood · bones · terror",
+      "scent_notes": [
+        "Blood",
+        "Human bones",
+        "Rotting flesh",
+        "Rusty weapons"
+      ],
+      "intensity": 5,
+      "mood": "Terror · death · despair",
+      "key_description": "Three demons devour humans for 800 li · mountains of human bones · blood reeks to the sky",
+      "fragrance_formula": {
+        "top_note": "Blood · putrid stench",
+        "middle_note": "Human bones · rusty weapons",
+        "base_note": "The aura of death"
+      }
+    },
+    {
+      "n": 9,
+      "location": "Bottomless Cave",
+      "chapter": "Ch. 80-83",
+      "geography": "Aparagodānīya Continent · Hollow Mountain",
+      "scent_profile": "Dampness · floral fragrance · rats · the mustiness of deep underground",
+      "scent_notes": [
+        "Musty smell",
+        "Rat musk",
+        "Floral fragrance (disguise)",
+        "Dampness"
+      ],
+      "intensity": 4,
+      "mood": "Wily · seductive · coercive",
+      "key_description": "The rat spirit's lair · a floral disguise · damp and musty within",
+      "fragrance_formula": {
+        "top_note": "Floral fragrance · cloying sweetness",
+        "middle_note": "Dampness · rat musk",
+        "base_note": "Must and rot"
+      }
+    },
+    {
+      "n": 10,
+      "location": "Thunderclap Monastery at Spirit Mountain",
+      "chapter": "Ch. 98",
+      "geography": "Aparagodānīya Continent · Spirit Mountain",
+      "scent_profile": "Sandalwood · the herbal scent of palm-leaf sutras · a pure, clean scent of “nothingness”",
+      "scent_notes": [
+        "Sandalwood",
+        "Palm-leaf herbs",
+        "Gold powder",
+        "Pure air"
+      ],
+      "intensity": 5,
+      "mood": "Solemn · complete · selfless",
+      "key_description": "A holy land of the Buddha · palm-leaf sutra fragrance · glittering gold powder · air of utmost purity",
+      "fragrance_formula": {
+        "top_note": "Sandalwood · palm-leaf",
+        "middle_note": "Gold powder · pure air",
+        "base_note": "Nothingness · purity"
+      }
+    }
+  ],
+  "scent_categories": {
+    "Immersive": [
+      "Flower-Fruit Mountain",
+      "Wuzhuang Temple",
+      "Spirit Mountain Thunderclap Temple"
+    ],
+    "Dangerous": [
+      "White Tiger Ridge",
+      "Flaming Mountain",
+      "Silk-Web Cave",
+      "Lion-Camel Ridge",
+      "Bottomless Cave"
+    ],
+    "Desolate": [
+      "Five Elements Mountain",
+      "Flowing-Sand River"
+    ]
+  },
+  "presentation_innovation": "Scratch-and-sniff fragrance cards + QR-code formulas · letting readers enter the world of Journey to the West through smell"
+}

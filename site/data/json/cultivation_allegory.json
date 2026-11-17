@@ -1,0 +1,137 @@
+{
+  "concept_name": "修心寓言图",
+  "english_name": "Cultivation Allegory Map",
+  "definition": "八十一难并非单纯劫难·而是心性修炼的 81 种考验·对应《多心经》的修心次第",
+  "allegory_categories": [
+    {
+      "category": "贪欲考验",
+      "english_name": "Greed Test",
+      "count": 12,
+      "representative_hardships": [
+        "四圣试禅心",
+        "五庄观偷果",
+        "金鱼精",
+        "老鼠精"
+      ],
+      "mind_obstacle": "贪（贪欲·贪婪）",
+      "buddhist_counterpart": "贪毒·三毒之首",
+      "cultivation_goal": "戒贪·知足"
+    },
+    {
+      "category": "嗔怒考验",
+      "english_name": "Anger Test",
+      "count": 15,
+      "representative_hardships": [
+        "三打白骨精",
+        "红孩儿",
+        "六耳猕猴",
+        "黄袍怪"
+      ],
+      "mind_obstacle": "嗔（嗔怒·愤怒）",
+      "buddhist_counterpart": "嗔毒·三毒之二",
+      "cultivation_goal": "戒嗔·慈悲"
+    },
+    {
+      "category": "愚痴考验",
+      "english_name": "Ignorance Test",
+      "count": 10,
+      "representative_hardships": [
+        "乌鸡国王",
+        "车迟国斗法",
+        "比丘国",
+        "灭法国"
+      ],
+      "mind_obstacle": "痴（愚痴·无明）",
+      "buddhist_counterpart": "痴毒·三毒之三",
+      "cultivation_goal": "破痴·智慧"
+    },
+    {
+      "category": "傲慢考验",
+      "english_name": "Pride Test",
+      "count": 8,
+      "representative_hardships": [
+        "大闹天宫（前传）",
+        "金兜山青牛精",
+        "狮驼岭",
+        "九灵元圣"
+      ],
+      "mind_obstacle": "慢（傲慢·我执）",
+      "buddhist_counterpart": "慢·五盖之一",
+      "cultivation_goal": "戒慢·谦卑"
+    },
+    {
+      "category": "猜忌考验",
+      "english_name": "Suspicion Test",
+      "count": 9,
+      "representative_hardships": [
+        "三打白骨精后赶走悟空",
+        "黄袍怪回花果山",
+        "六耳猕猴"
+      ],
+      "mind_obstacle": "疑（猜忌·怀疑）",
+      "buddhist_counterpart": "疑·五盖之一",
+      "cultivation_goal": "断疑·正信"
+    },
+    {
+      "category": "情欲考验",
+      "english_name": "Lust Test",
+      "count": 11,
+      "representative_hardships": [
+        "女儿国",
+        "盘丝洞",
+        "无底洞",
+        "玉兔精"
+      ],
+      "mind_obstacle": "色（情欲·色欲）",
+      "buddhist_counterpart": "色欲·五欲之一",
+      "cultivation_goal": "戒色·清净"
+    },
+    {
+      "category": "名利考验",
+      "english_name": "Fame Test",
+      "count": 7,
+      "representative_hardships": [
+        "车迟国求雨",
+        "朱紫国行医",
+        "玉华州授徒"
+      ],
+      "mind_obstacle": "名（名利·名声）",
+      "buddhist_counterpart": "名闻利养",
+      "cultivation_goal": "戒名·淡泊"
+    },
+    {
+      "category": "生死考验",
+      "english_name": "Life-Death Test",
+      "count": 9,
+      "representative_hardships": [
+        "通天河",
+        "火焰山",
+        "狮驼国",
+        "无底洞"
+      ],
+      "mind_obstacle": "死（怕死·畏惧）",
+      "buddhist_counterpart": "生死事大",
+      "cultivation_goal": "了脱生死"
+    }
+  ],
+  "allegory_summary": {
+    "total_categories": 8,
+    "total_hardships_mapped": 81,
+    "most_frequent_test": "嗔怒考验（15 次）·对应悟空的主修心性",
+    "least_frequent_test": "名利考验（7 次）·对应取经团队本已淡泊",
+    "core_findings": [
+      "八十一难的'难数'与《多心经》的'八十一种相'对应",
+      "悟空的主修是嗔怒（15 难）·八戒的主修是情欲（11 难）",
+      "唐僧的主修是愚痴（10 难）·常因不明真相而被骗",
+      "整本书是'降伏心猿意马'的修心寓言·非简单冒险故事"
+    ]
+  },
+  "heart_sutra_connection": {
+    "sutra_name": "般若波罗蜜多心经",
+    "sutra_chapter": "第 19 回·乌巢禅师传授",
+    "sutra_role": "心经是取经团队的'指导思想'·唐僧日诵心经",
+    "allegory_pattern": "心经讲'空性'·八十一难讲'破执'·两者对应",
+    "key_quote": "色不异空·空不异色·色即是空·空即是色",
+    "allegory_meaning": "破除对色（外物）的执着·回归空性（真心）"
+  }
+}

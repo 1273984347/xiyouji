@@ -1,0 +1,98 @@
+{
+  "concept_name": "法宝克制关系网",
+  "english_name": "Artifact Counter Network",
+  "definition": "西游法宝存在相生相克关系·形成武器生态·非单一最强",
+  "counter_chain": [
+    {
+      "artifact": "金刚琢",
+      "owner": "太上老君（青牛精使用）",
+      "can_collect": [
+        "金箍棒",
+        "九齿钉耙",
+        "降妖宝杖",
+        "哪吒兵器"
+      ],
+      "countered_by": "芭蕉扇（老君芭蕉扇·非铁扇公主芭蕉扇）",
+      "counter_mechanism": "金刚琢收一切金属法宝·但被老君芭蕉扇煽散",
+      "chapter": "第 50-52 回"
+    },
+    {
+      "artifact": "芭蕉扇（铁扇公主）",
+      "owner": "铁扇公主",
+      "can_collect": [
+        "火焰山火焰",
+        "三昧真火（部分）"
+      ],
+      "countered_by": "定风丹（灵吉菩萨）",
+      "counter_mechanism": "芭蕉扇能灭火·但被定风丹克制定风",
+      "chapter": "第 59-61 回"
+    },
+    {
+      "artifact": "紫金红葫芦",
+      "owner": "太上老君（金角银角使用）",
+      "can_collect": [
+        "应名者（被叫名答应则吸入）"
+      ],
+      "countered_by": "假名（悟空化名'者行孙''行者孙'）",
+      "counter_mechanism": "葫芦靠应名机制·假名可破解",
+      "chapter": "第 32-35 回"
+    },
+    {
+      "artifact": "阴阳二气瓶",
+      "owner": "大鹏雕（灵山法宝）",
+      "can_collect": [
+        "装入者 3 时辰化为浆"
+      ],
+      "countered_by": "观音赐救命毫毛（钻破瓶底）",
+      "counter_mechanism": "瓶内破坏结构即可逃出·救命毫毛提供工具",
+      "chapter": "第 74-77 回"
+    },
+    {
+      "artifact": "金箍咒三件",
+      "owner": "如来佛祖（观音转交）",
+      "can_collect": [
+        "紧箍咒控制悟空·禁箍咒收黑熊精·金箍咒收红孩儿"
+      ],
+      "countered_by": "成佛后解除（封号斗战胜佛后紧箍自褪）",
+      "counter_mechanism": "金箍咒靠'项目完成度'解除·不可外力破解",
+      "chapter": "第 8/17/42 回"
+    },
+    {
+      "artifact": "金箍棒",
+      "owner": "孙悟空",
+      "can_collect": [
+        "普通妖怪·小妖"
+      ],
+      "countered_by": "金刚琢（被青牛精套走）·阴阳二气瓶（被装入）",
+      "counter_mechanism": "金箍棒对普通妖怪无敌·但被高级法宝克制",
+      "chapter": "第 3 回起"
+    },
+    {
+      "artifact": "玉净瓶",
+      "owner": "观音菩萨",
+      "can_collect": [
+        "红孩儿（三昧真火）·四海之水"
+      ],
+      "countered_by": "无（玉净瓶无敌）",
+      "counter_mechanism": "玉净瓶是天罡刀的对立面·专门克制三昧真火",
+      "chapter": "第 42 回"
+    },
+    {
+      "artifact": "九齿钉耙",
+      "owner": "猪八戒",
+      "can_collect": [
+        "普通妖怪"
+      ],
+      "countered_by": "金刚琢（被青牛精套走）",
+      "counter_mechanism": "九齿钉耙也是金属法宝·被金刚琢克制",
+      "chapter": "第 8 回起"
+    }
+  ],
+  "counter_matrix": {
+    "total_artifacts": 8,
+    "total_counter_relations": 14,
+    "strongest_artifact": "金箍咒三件（不可外力破解）",
+    "weakness_pattern": "所有金属法宝被金刚琢克·金刚琢被芭蕉扇克·形成克制链",
+    "balance_insight": "西游法宝体系是'闭环克制'·没有无敌法宝·只有项目阶段法宝"
+  }
+}

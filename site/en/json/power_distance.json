@@ -1,0 +1,287 @@
+{
+  "concept_name": "Conversational Power Distance",
+  "english_name": "Conversational Power Distance",
+  "definition": "Power distance: the hierarchical distance reflected in dialogue · high power distance uses the imperative · low power distance uses banter",
+  "core_finding": "Tang Sanzang to Wukong is high power distance (imperative) · Wukong to Bajie is low power distance (banter) · quantifying the evolution of master-disciple closeness",
+  "dialogue_pairs": [
+    {
+      "speaker": "Tang Sanzang",
+      "listener": "Sun Wukong",
+      "relationship": "Master-disciple · master to disciple",
+      "power_distance": 8,
+      "politeness_level": 5,
+      "formality": 7,
+      "representative_dialogues": [
+        {
+          "chapter": "Chapter 14",
+          "context": "Wukong kills the six bandits",
+          "tang_monk_speech": "You monkey, how utterly outrageous! So fierce and stubborn — you are no disciple of mine; be off with you!",
+          "linguistic_features": [
+            "Imperative · 'be off with you'",
+            "Derogatory address · 'you monkey'",
+            "Threat to sever ties"
+          ],
+          "power_distance_reflected": 9
+        },
+        {
+          "chapter": "Chapter 27",
+          "context": "Thrice beating the White Bone Demon",
+          "tang_monk_speech": "You monkey, this is plainly murder! I will not keep you as my disciple; be off with you!",
+          "linguistic_features": [
+            "Imperative",
+            "Derogatory address",
+            "Expulsion from the master's tutelage"
+          ],
+          "power_distance_reflected": 10
+        },
+        {
+          "chapter": "Chapter 38",
+          "context": "Rescuing the king of Wuji Kingdom",
+          "tang_monk_speech": "Wukong, be careful and do not take his life.",
+          "linguistic_features": [
+            "Supplicatory · 'do be careful'",
+            "Gentle · 'do not'",
+            "Instruction retained"
+          ],
+          "power_distance_reflected": 6
+        },
+        {
+          "chapter": "Chapter 80",
+          "context": "The rat-spirit incident",
+          "tang_monk_speech": "Wukong, do you say it is a demon?",
+          "linguistic_features": [
+            "Interrogative",
+            "Equal · 'you say'",
+            "Expression of trust"
+          ],
+          "power_distance_reflected": 4
+        }
+      ],
+      "evolution_pattern": "10→9→6→4 · power distance gradually declines · master-disciple relationship grows close"
+    },
+    {
+      "speaker": "Sun Wukong",
+      "listener": "Zhu Bajie",
+      "relationship": "Senior-junior brother · senior to junior",
+      "power_distance": 3,
+      "politeness_level": 2,
+      "formality": 2,
+      "representative_dialogues": [
+        {
+          "chapter": "Chapter 18",
+          "context": "Winning Bajie at Gao Village",
+          "wukong_speech": "Idiot, do you recognize old Sun?",
+          "linguistic_features": [
+            "Banter · 'idiot'",
+            "Self-reference · 'old Sun'",
+            "Affectionate"
+          ],
+          "power_distance_reflected": 3
+        },
+        {
+          "chapter": "Chapter 32",
+          "context": "Scouting Mount Pingding",
+          "wukong_speech": "Bajie, you lazy idiot! Go scout the mountain at once!",
+          "linguistic_features": [
+            "Imperative · 'go at once'",
+            "Banter · 'idiot'",
+            "Elder-brother scolding"
+          ],
+          "power_distance_reflected": 4
+        },
+        {
+          "chapter": "Chapter 41",
+          "context": "The Red Boy incident",
+          "wukong_speech": "Idiot, don't cry! Master has been captured by demons — we must rescue him!",
+          "linguistic_features": [
+            "Consoling · 'don't cry'",
+            "Encouraging · 'we must rescue him'",
+            "Brotherly affection"
+          ],
+          "power_distance_reflected": 2
+        },
+        {
+          "chapter": "Chapter 76",
+          "context": "The great battle at Lion-Camel Ridge",
+          "wukong_speech": "Bajie, you idiot, caught again? Watch old Sun come to your rescue!",
+          "linguistic_features": [
+            "Banter",
+            "Rescue",
+            "Elder-brother protection"
+          ],
+          "power_distance_reflected": 3
+        }
+      ],
+      "evolution_pattern": "3→4→2→3 · low power distance · brotherly banter predominates"
+    },
+    {
+      "speaker": "Sun Wukong",
+      "listener": "Tang Sanzang",
+      "relationship": "Disciple to master · disciple to master",
+      "power_distance": 3,
+      "politeness_level": 8,
+      "formality": 6,
+      "representative_dialogues": [
+        {
+          "chapter": "Chapter 14",
+          "context": "First conflict",
+          "wukong_speech": "Master, I meant well — you should not judge me so harshly!",
+          "linguistic_features": [
+            "Honorific · 'Master'",
+            "Defense · 'I meant well'",
+            "Deference retained"
+          ],
+          "power_distance_reflected": 2
+        },
+        {
+          "chapter": "Chapter 27",
+          "context": "Thrice beating the White Bone Demon · expelled",
+          "wukong_speech": "Master, I will go back then — but do not recite that Golden Hoop Mantra!",
+          "linguistic_features": [
+            "Honorific",
+            "Request · 'do not recite it'",
+            "Hurt"
+          ],
+          "power_distance_reflected": 3
+        },
+        {
+          "chapter": "Chapter 57",
+          "context": "Before the true and false Monkey Kings",
+          "wukong_speech": "Master, I have not taken life — why do you drive me away again?",
+          "linguistic_features": [
+            "Honorific",
+            "Protest · 'why drive me away again'",
+            "Hurt"
+          ],
+          "power_distance_reflected": 2
+        },
+        {
+          "chapter": "Chapter 88",
+          "context": "Taking disciples in Yuhua Prefecture",
+          "wukong_speech": "Master, these two princes have a karmic affinity — you may take them as disciples.",
+          "linguistic_features": [
+            "Honorific",
+            "Suggestion · 'they have affinity'",
+            "Equal consultation"
+          ],
+          "power_distance_reflected": 1
+        }
+      ],
+      "evolution_pattern": "2→3→2→1 · Wukong's power distance to the Tang Monk stays low · deference predominates"
+    },
+    {
+      "speaker": "Zhu Bajie",
+      "listener": "Sun Wukong",
+      "relationship": "Junior to senior · junior to senior",
+      "power_distance": 4,
+      "politeness_level": 4,
+      "formality": 3,
+      "representative_dialogues": [
+        {
+          "chapter": "Chapter 18",
+          "context": "First meeting",
+          "bajie_speech": "You Bimawen, the monkey who once wrecked the Heavenly Palace!",
+          "linguistic_features": [
+            "Derogatory · 'Bimawen'",
+            "Provocation",
+            "Disrespectful"
+          ],
+          "power_distance_reflected": 1
+        },
+        {
+          "chapter": "Chapter 32",
+          "context": "Shirking on mountain patrol",
+          "bajie_speech": "Brother, I'm going, I'm going!",
+          "linguistic_features": [
+            "Honorific · 'brother'",
+            "Obedience",
+            "Wheedling"
+          ],
+          "power_distance_reflected": 6
+        },
+        {
+          "chapter": "Chapter 41",
+          "context": "The Red Boy incident · Wukong is burned",
+          "bajie_speech": "Brother, are you dead?",
+          "linguistic_features": [
+            "Honorific",
+            "Concern",
+            "Blunt"
+          ],
+          "power_distance_reflected": 4
+        },
+        {
+          "chapter": "Chapter 76",
+          "context": "Lion-Camel Ridge · Wukong is swallowed",
+          "bajie_speech": "Brother, you've died in there! Let's disband!",
+          "linguistic_features": [
+            "Honorific",
+            "Disbanding · ESFP behavior",
+            "Despair"
+          ],
+          "power_distance_reflected": 3
+        }
+      ],
+      "evolution_pattern": "1→6→4→3 · from provocation to honorific · power distance rises then falls"
+    },
+    {
+      "speaker": "Sha Wujing",
+      "listener": "Sun Wukong + Zhu Bajie",
+      "relationship": "Junior to seniors · junior to seniors",
+      "power_distance": 5,
+      "politeness_level": 9,
+      "formality": 7,
+      "representative_dialogues": [
+        {
+          "chapter": "Chapter 22",
+          "context": "First meeting",
+          "shaseng_speech": "Brother, I beg you to save me!",
+          "linguistic_features": [
+            "Honorific · 'brother'",
+            "Request · 'I beg'",
+            "Polite"
+          ],
+          "power_distance_reflected": 7
+        },
+        {
+          "chapter": "Chapter 27",
+          "context": "Thrice beating the White Bone Demon",
+          "shaseng_speech": "Elder brother, Master is right — do be patient.",
+          "linguistic_features": [
+            "Honorific · 'elder brother'",
+            "Pacifying",
+            "Neutral"
+          ],
+          "power_distance_reflected": 5
+        },
+        {
+          "chapter": "Chapter 56",
+          "context": "Wukong is expelled",
+          "shaseng_speech": "Elder brother, you go on — I will persuade Master.",
+          "linguistic_features": [
+            "Honorific",
+            "Consoling",
+            "Buffering"
+          ],
+          "power_distance_reflected": 4
+        }
+      ],
+      "evolution_pattern": "7→5→4 · Sha Wujing's power distance to his seniors gradually declines · but deference remains"
+    }
+  ],
+  "power_distance_insights": [
+    "Tang Sanzang to Wukong has the highest power distance (8/10) · imperative predominates",
+    "Wukong to Bajie has low power distance (3/10) · banter predominates",
+    "Wukong to the Tang Monk has the lowest power distance (3/10) · deference predominates · yet equal",
+    "Bajie to Wukong moves from provocation (1) to honorific (6) · power distance rises then falls",
+    "Sha Wujing to his seniors has medium power distance (5/10) · politeness predominates",
+    "Power-distance evolution reflects master-disciple closeness: Tang Sanzang→Wukong gradually warms · Wukong→Bajie stays close",
+    "ISFJ Sha Wujing is most polite · ENTP Wukong is most bantering · INFJ Tang Sanzang is most imperative · ESFP Bajie is most changeable"
+  ],
+  "linguistic_strategy_by_mbti": {
+    "INFJ_Tang Sanzang": "命令式·文言化·说教式（高权力距离）",
+    "ENTP_Wukong": "调侃式·市井口语·灵活切换（低权力距离）",
+    "ESFP_Bajie": "反复式·撒娇式·情绪化（权力距离波动）",
+    "ISFJ_Wujing": "礼貌式·文言·温和（中等权力距离）"
+  }
+}

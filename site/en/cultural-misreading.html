@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-Xh//ogptnW5L9C7u55Te8UmT/DX7GRwSMUTAinrJg/s=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-Uy1Souzm0MbGhEsxUstMTrI1e+xfSyccj+sntCuw4+c=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cultural Misreading Map · Annotated Journey to the West</title>
@@ -2539,139 +2539,300 @@ function renderTreemap(opts){
 
     // ========== Embedded fallback data ==========
         const EMBEDDED_TRANSLATION_BIAS = [
-        {
-            "chinese": "Somersault Cloud", "pinyin": "Jindou Yun",
-            "english_common": "Somersault Cloud",
-            "alt_translations": ["Cloud-Somersault", "Somersault-Cloud", "Cloud Leap"],
-            "chinese_connotation": "A somersault · a flip · a martial-arts move · 'one somersault covers 108,000 li' combines martial skill with romance",
-            "english_reader_image": "A cloud doing somersaults · comical · circus-like",
-            "semantic_loss": "High · the martial aesthetic of 'somersault' and the solemnity of Daoist cloud-riding are both lost",
-            "cultural_gap_level": 8, "chapter_first": 2
-        },
-        {
-            "chinese": "Handsome Monkey King", "pinyin": "Mei Hou Wang",
-            "english_common": "Monkey King / Handsome Monkey King",
-            "alt_translations": ["Beautiful Monkey King", "Handsome Monkey King"],
-            "chinese_connotation": "'Mei' (beautiful) · handsome · beautified · 'mei' in Chinese praises appearance, and also means 'exquisite'",
-            "english_reader_image": "A cartoon monkey in a crown · Disney-like · 'King' somewhat weakens the tension of 'beautiful'",
-            "semantic_loss": "Medium · the tension between 'beautiful' and 'monkey' is reduced in English to an attribute of 'king'",
-            "cultural_gap_level": 6, "chapter_first": 4
-        },
-        {
-            "chinese": "Victorious Fighting Buddha", "pinyin": "Douzhan Sheng Fo",
-            "english_common": "Buddha of Meritorious Service / Victorious Fighting Buddha",
-            "alt_translations": ["Victorious Struggle Buddha", "Buddha Who Wins in Battle"],
-            "chinese_connotation": "Battle · fighting + victory · Buddhahood · Buddhist martial merit · perfected cultivation",
-            "english_reader_image": "A Buddha who fights · unlike the traditional 'compassionate Buddha' image · slightly incongruous",
-            "semantic_loss": "High · 'Douzhan Sheng' means 'martial cultivation perfected' in Chinese; English readers struggle to grasp the unity of 'combat' and 'Buddhahood'",
-            "cultural_gap_level": 9, "chapter_first": 100
-        },
-        {
-            "chinese": "Great Sage Equal to Heaven", "pinyin": "Qi Tian Da Sheng",
-            "english_common": "Great Sage Equal to Heaven",
-            "alt_translations": ["Great Sage, Equal to Heaven", "Sage Equaling Heaven"],
-            "chinese_connotation": "Equal to Heaven · as high as the sky · 'Great Sage' is a Confucian title · a self-proclaimed regal title rebelling against the celestial court",
-            "english_reader_image": "A 'sage on equal footing with Heaven' · rather flat · the sense of rebellion is weakened",
-            "semantic_loss": "Medium · the rebellious tension of 'Equal to Heaven' is diluted by literal translation; English readers cannot feel the pride of the self-proclaimed title",
-            "cultural_gap_level": 7, "chapter_first": 4
-        },
-        {
-            "chinese": "Mind-Monkey and Will-Horse", "pinyin": "Xin Yuan Yi Ma",
-            "english_common": "Mind-Monkey and Will-Horse",
-            "alt_translations": ["Monkey Mind and Horse Will", "Restless Mind"],
-            "chinese_connotation": "A Buddhist-Daoist term · 'mind-ape' = restless heart · 'will-horse' = galloping thoughts · the metaphorical root of Wukong and the White Dragon Horse",
-            "english_reader_image": "An abstract Buddhist term · hard to connect to the novel's characters",
-            "semantic_loss": "Extreme · the cultivation metaphor of 'mind-ape' and 'Wukong' is completely lost",
-            "cultural_gap_level": 10, "chapter_first": 14
-        },
-        {
-            "chinese": "Eighty-One Tribulations", "pinyin": "Jiu Jiu Ba Shi Yi Nan",
-            "english_common": "Eighty-One Tribulations",
-            "alt_translations": ["81 Calamities", "Nine Times Nine Tribulations"],
-            "chinese_connotation": "'Nine nines' · the extreme of yang numbers · Daoist numerology · 81 is the largest yang number · signifies completion",
-            "english_reader_image": "A concrete number · 81 trials · lacking the numerological solemnity of 'nine nines'",
-            "semantic_loss": "Medium · 'nine nines' is a numerological symbol in Chinese; English treats it as merely a number",
-            "cultural_gap_level": 7, "chapter_first": 99
-        },
-        {
-            "chinese": "Tripitaka", "pinyin": "San Zang",
-            "english_common": "Tripitaka",
-            "alt_translations": ["Tripitaka", "Three Baskets"],
-            "chinese_connotation": "Tripitaka · the three 'baskets' of sutras, vinaya, and treatises · Tang Sanzang's dharma name · an honorific for a master",
-            "english_reader_image": "A Sanskrit transliteration · its meaning is hard to grasp",
-            "semantic_loss": "High · 'Tripitaka' is an honor for a master in Chinese; English readers can hardly perceive this",
-            "cultural_gap_level": 8, "chapter_first": 12
-        },
-        {
-            "chinese": "Sun Wukong", "pinyin": "Sun Wukong",
-            "english_common": "Sun Wukong / Monkey",
-            "alt_translations": ["Sun Wukong", "Monkey", "Sun, Aware of Emptiness"],
-            "chinese_connotation": "'Sun' · from 'macaque' with the animal radical removed · 'Wukong' · awakened to 'emptiness' · a Buddhist dharma name · realization of emptiness",
-            "english_reader_image": "An oriental name · 'Aware of Emptiness' is overly philosophical",
-            "semantic_loss": "Extreme · the Buddhist dharma-name meaning of 'Wukong' is completely lost in transliteration; only the sound remains",
-            "cultural_gap_level": 9, "chapter_first": 1
-        },
-        {
-            "chinese": "Zhu Bajie", "pinyin": "Zhu Ba Jie",
-            "english_common": "Pigsy / Zhu Bajie",
-            "alt_translations": ["Pigsy", "Zhu Bajie", "Pig of Eight Precepts"],
-            "chinese_connotation": "'Pig' · the 'eight precepts' (Buddhist) · a satirical name · a glutton who bears the name of the 'eight precepts'",
-            "english_reader_image": "A pig named Pigsy · colloquial · losing the Buddhist irony of the 'eight precepts'",
-            "semantic_loss": "High · the Buddhist irony of 'Bajie' is entirely lost in English; only the cartoonishness of 'pig' remains",
-            "cultural_gap_level": 9, "chapter_first": 18
-        },
-        {
-            "chinese": "Sha Wujing", "pinyin": "Sha Wu Jing",
-            "english_common": "Sandy / Sha Wujing",
-            "alt_translations": ["Sandy", "Sha Wujing", "Sand, Awakened to Purity"],
-            "chinese_connotation": "'Sha' · the Flowing Sands River · 'Wujing' · awakened to 'purity' · a Buddhist dharma name · realization of pure nature",
-            "english_reader_image": "A character named Sandy · colloquial · losing the Buddhist meaning of 'Wujing'",
-            "semantic_loss": "High · as with Wukong · the meaning of 'Wujing' is lost",
-            "cultural_gap_level": 8, "chapter_first": 22
-        },
-        {
-            "chinese": "Golden Cudgel", "pinyin": "Jin Gu Bang",
-            "english_common": "Golden Cudgel / Monkey King's Staff",
-            "alt_translations": ["Golden Cudgel", "Ruyi Jingu Bang", "As-You-Will Gold-Banded Cudgel"],
-            "chinese_connotation": "'Golden band' · a staff ringed with gold · 'Ruyi' (as-you-will) changes size at will · the sea-pacifying pillar of the Eastern Sea",
-            "english_reader_image": "A golden staff · strongly weapon-like · the 'as-you-will' transformability of 'Ruyi' is hard to convey",
-            "semantic_loss": "Medium · the philosophical meaning of 'Ruyi' (as one wishes) is lost in literal translation",
-            "cultural_gap_level": 6, "chapter_first": 3
-        },
-        {
-            "chinese": "True Samadhi Fire", "pinyin": "San Mei Zhen Huo",
-            "english_common": "True Fire of Samadhi",
-            "alt_translations": ["Samadhi True Fire", "True Fire of Three Meditations"],
-            "chinese_connotation": "'Samadhi' · Buddhist meditative absorption · true fire · the innate true fire · the fire uniting essence, qi, and spirit",
-            "english_reader_image": "A fire of 'samadhi' · hard to understand the Buddhist term",
-            "semantic_loss": "Extreme · the Buddhist meaning of 'samadhi' is entirely lost; only the physical sense of 'true fire' remains",
-            "cultural_gap_level": 10, "chapter_first": 41
-        }
-    ];
+  {
+    "chinese": "Somersault Cloud",
+    "pinyin": "Jindou Yun",
+    "english_common": "Somersault Cloud",
+    "alt_translations": [
+      "Cloud-Somersault",
+      "Somersault-Cloud",
+      "Cloud Leap"
+    ],
+    "chinese_connotation": "A somersault · a flip · a martial-arts move · 'one somersault covers 108,000 li' combines martial skill with romance",
+    "english_reader_image": "A cloud doing somersaults · comical · circus-like",
+    "semantic_loss": "High · the martial aesthetic of 'somersault' and the solemnity of Daoist cloud-riding are both lost",
+    "cultural_gap_level": 8,
+    "chapter_first": 2
+  },
+  {
+    "chinese": "Handsome Monkey King",
+    "pinyin": "Mei Hou Wang",
+    "english_common": "Monkey King / Handsome Monkey King",
+    "alt_translations": [
+      "Beautiful Monkey King",
+      "Handsome Monkey King"
+    ],
+    "chinese_connotation": "'Mei' (beautiful) · handsome · beautified · 'mei' in Chinese praises appearance, and also means 'exquisite'",
+    "english_reader_image": "A cartoon monkey in a crown · Disney-like · 'King' somewhat weakens the tension of 'beautiful'",
+    "semantic_loss": "Medium · the tension between 'beautiful' and 'monkey' is reduced in English to an attribute of 'king'",
+    "cultural_gap_level": 6,
+    "chapter_first": 4
+  },
+  {
+    "chinese": "Victorious Fighting Buddha",
+    "pinyin": "Douzhan Sheng Fo",
+    "english_common": "Buddha of Meritorious Service / Victorious Fighting Buddha",
+    "alt_translations": [
+      "Victorious Struggle Buddha",
+      "Buddha Who Wins in Battle"
+    ],
+    "chinese_connotation": "Battle · fighting + victory · Buddhahood · Buddhist martial merit · perfected cultivation",
+    "english_reader_image": "A Buddha who fights · unlike the traditional 'compassionate Buddha' image · slightly incongruous",
+    "semantic_loss": "High · 'Douzhan Sheng' means 'martial cultivation perfected' in Chinese; English readers struggle to grasp the unity of 'combat' and 'Buddhahood'",
+    "cultural_gap_level": 9,
+    "chapter_first": 100
+  },
+  {
+    "chinese": "Great Sage Equal to Heaven",
+    "pinyin": "Qi Tian Da Sheng",
+    "english_common": "Great Sage Equal to Heaven",
+    "alt_translations": [
+      "Great Sage, Equal to Heaven",
+      "Sage Equaling Heaven"
+    ],
+    "chinese_connotation": "Equal to Heaven · as high as the sky · 'Great Sage' is a Confucian title · a self-proclaimed regal title rebelling against the celestial court",
+    "english_reader_image": "A 'sage on equal footing with Heaven' · rather flat · the sense of rebellion is weakened",
+    "semantic_loss": "Medium · the rebellious tension of 'Equal to Heaven' is diluted by literal translation; English readers cannot feel the pride of the self-proclaimed title",
+    "cultural_gap_level": 7,
+    "chapter_first": 4
+  },
+  {
+    "chinese": "Mind-Monkey and Will-Horse",
+    "pinyin": "Xin Yuan Yi Ma",
+    "english_common": "Mind-Monkey and Will-Horse",
+    "alt_translations": [
+      "Monkey Mind and Horse Will",
+      "Restless Mind"
+    ],
+    "chinese_connotation": "A Buddhist-Daoist term · 'mind-ape' = restless heart · 'will-horse' = galloping thoughts · the metaphorical root of Wukong and the White Dragon Horse",
+    "english_reader_image": "An abstract Buddhist term · hard to connect to the novel's characters",
+    "semantic_loss": "Extreme · the cultivation metaphor of 'mind-ape' and 'Wukong' is completely lost",
+    "cultural_gap_level": 10,
+    "chapter_first": 14
+  },
+  {
+    "chinese": "Eighty-One Tribulations",
+    "pinyin": "Jiu Jiu Ba Shi Yi Nan",
+    "english_common": "Eighty-One Tribulations",
+    "alt_translations": [
+      "81 Calamities",
+      "Nine Times Nine Tribulations"
+    ],
+    "chinese_connotation": "'Nine nines' · the extreme of yang numbers · Daoist numerology · 81 is the largest yang number · signifies completion",
+    "english_reader_image": "A concrete number · 81 trials · lacking the numerological solemnity of 'nine nines'",
+    "semantic_loss": "Medium · 'nine nines' is a numerological symbol in Chinese; English treats it as merely a number",
+    "cultural_gap_level": 7,
+    "chapter_first": 99
+  },
+  {
+    "chinese": "Tripitaka",
+    "pinyin": "San Zang",
+    "english_common": "Tripitaka",
+    "alt_translations": [
+      "Tripitaka",
+      "Three Baskets"
+    ],
+    "chinese_connotation": "Tripitaka · the three 'baskets' of sutras, vinaya, and treatises · Tang Sanzang's dharma name · an honorific for a master",
+    "english_reader_image": "A Sanskrit transliteration · its meaning is hard to grasp",
+    "semantic_loss": "High · 'Tripitaka' is an honor for a master in Chinese; English readers can hardly perceive this",
+    "cultural_gap_level": 8,
+    "chapter_first": 12
+  },
+  {
+    "chinese": "Sun Wukong",
+    "pinyin": "Sun Wukong",
+    "english_common": "Sun Wukong / Monkey",
+    "alt_translations": [
+      "Sun Wukong",
+      "Monkey",
+      "Sun, Aware of Emptiness"
+    ],
+    "chinese_connotation": "'Sun' · from 'macaque' with the animal radical removed · 'Wukong' · awakened to 'emptiness' · a Buddhist dharma name · realization of emptiness",
+    "english_reader_image": "An oriental name · 'Aware of Emptiness' is overly philosophical",
+    "semantic_loss": "Extreme · the Buddhist dharma-name meaning of 'Wukong' is completely lost in transliteration; only the sound remains",
+    "cultural_gap_level": 9,
+    "chapter_first": 1
+  },
+  {
+    "chinese": "Zhu Bajie",
+    "pinyin": "Zhu Ba Jie",
+    "english_common": "Pigsy / Zhu Bajie",
+    "alt_translations": [
+      "Pigsy",
+      "Zhu Bajie",
+      "Pig of Eight Precepts"
+    ],
+    "chinese_connotation": "'Pig' · the 'eight precepts' (Buddhist) · a satirical name · a glutton who bears the name of the 'eight precepts'",
+    "english_reader_image": "A pig named Pigsy · colloquial · losing the Buddhist irony of the 'eight precepts'",
+    "semantic_loss": "High · the Buddhist irony of 'Bajie' is entirely lost in English; only the cartoonishness of 'pig' remains",
+    "cultural_gap_level": 9,
+    "chapter_first": 18
+  },
+  {
+    "chinese": "Sha Wujing",
+    "pinyin": "Sha Wu Jing",
+    "english_common": "Sandy / Sha Wujing",
+    "alt_translations": [
+      "Sandy",
+      "Sha Wujing",
+      "Sand, Awakened to Purity"
+    ],
+    "chinese_connotation": "'Sha' · the Flowing Sands River · 'Wujing' · awakened to 'purity' · a Buddhist dharma name · realization of pure nature",
+    "english_reader_image": "A character named Sandy · colloquial · losing the Buddhist meaning of 'Wujing'",
+    "semantic_loss": "High · as with Wukong · the meaning of 'Wujing' is lost",
+    "cultural_gap_level": 8,
+    "chapter_first": 22
+  },
+  {
+    "chinese": "Golden Cudgel",
+    "pinyin": "Jin Gu Bang",
+    "english_common": "Golden Cudgel / Monkey King's Staff",
+    "alt_translations": [
+      "Golden Cudgel",
+      "Ruyi Jingu Bang",
+      "As-You-Will Gold-Banded Cudgel"
+    ],
+    "chinese_connotation": "'Golden band' · a staff ringed with gold · 'Ruyi' (as-you-will) changes size at will · the sea-pacifying pillar of the Eastern Sea",
+    "english_reader_image": "A golden staff · strongly weapon-like · the 'as-you-will' transformability of 'Ruyi' is hard to convey",
+    "semantic_loss": "Medium · the philosophical meaning of 'Ruyi' (as one wishes) is lost in literal translation",
+    "cultural_gap_level": 6,
+    "chapter_first": 3
+  },
+  {
+    "chinese": "True Samadhi Fire",
+    "pinyin": "San Mei Zhen Huo",
+    "english_common": "True Fire of Samadhi",
+    "alt_translations": [
+      "Samadhi True Fire",
+      "True Fire of Three Meditations"
+    ],
+    "chinese_connotation": "'Samadhi' · Buddhist meditative absorption · true fire · the innate true fire · the fire uniting essence, qi, and spirit",
+    "english_reader_image": "A fire of 'samadhi' · hard to understand the Buddhist term",
+    "semantic_loss": "Extreme · the Buddhist meaning of 'samadhi' is entirely lost; only the physical sense of 'true fire' remains",
+    "cultural_gap_level": 10,
+    "chapter_first": 41
+  }
+];
 
         const EMBEDDED_AMPLIFICATION = [
-        {"country": "Japan", "element": "Bishōnen-ization", "intensity": 10, "representative_work": "Saiyuki", "feature": "Turns all four pilgrims into beautiful young men · BL (boys' love) style · modern urban setting"},
-        {"country": "Japan", "element": "Hot-Blooded Combat", "intensity": 10, "representative_work": "Dragon Ball", "feature": "Fully cosmic-scale hot-blooded action · quantified battle power · global influence"},
-        {"country": "Japan", "element": "Dark Deconstruction", "intensity": 7, "representative_work": "Great Ape King", "feature": "Adult-oriented · erotic and violent · Japan's adult-oriented Journey to the West"},
-        {"country": "South Korea", "element": "Romanticization", "intensity": 9, "representative_work": "A Korean Odyssey", "feature": "Modern urban romance · a love line between Wukong and a female Tripitaka"},
-        {"country": "South Korea", "element": "Educationalization", "intensity": 8, "representative_work": "Magic Thousand-Character Classic", "feature": "Children's Chinese-character learning · uses Journey to the West as its framework"},
-        {"country": "Vietnam", "element": "Localized Humor", "intensity": 7, "representative_work": "Vietnamese folk drama", "feature": "Incorporates Vietnamese folklore · humorized · adapted into local opera"},
-        {"country": "China", "element": "Dark Deconstruction", "intensity": 8, "representative_work": "Black Myth: Wukong; Journey to the West: Conquering the Demons", "feature": "The most serious, darkest local deconstruction in recent years"},
-        {"country": "China", "element": "Web-Novel Hot-Blood", "intensity": 9, "representative_work": "Legend of Wukong; Great Ape King", "feature": "Web-novel anti-Journey-to-the-West · hot-blooded fantasy"},
-        {"country": "China", "element": "Faithful to Original", "intensity": 10, "representative_work": "1986 CCTV series", "feature": "Most faithful to the original · shaped the perception of several generations of Chinese audiences"},
-        {"country": "USA", "element": "Simplified Narrative", "intensity": 8, "representative_work": "Netflix's The Monkey King", "feature": "Aimed at mainstream English audiences · American-style animation with simplified narrative"},
-        {"country": "USA", "element": "Western Reinterpretation", "intensity": 7, "representative_work": "AMC's Into the Badlands", "feature": "Post-apocalyptic · borrows the name but not the spirit · Western martial arts"},
-        {"country": "Australia", "element": "Localized Humor", "intensity": 6, "representative_work": "ABC's Monkey", "feature": "In English · humorized · influenced the Australian English-speaking world"}
-    ];
+  {
+    "country": "Japan",
+    "element": "Bishōnen-ization",
+    "intensity": 10,
+    "representative_work": "Saiyuki",
+    "feature": "Turns all four pilgrims into beautiful young men · BL (boys' love) style · modern urban setting"
+  },
+  {
+    "country": "Japan",
+    "element": "Hot-Blooded Combat",
+    "intensity": 10,
+    "representative_work": "Dragon Ball",
+    "feature": "Fully cosmic-scale hot-blooded action · quantified battle power · global influence"
+  },
+  {
+    "country": "Japan",
+    "element": "Dark Deconstruction",
+    "intensity": 7,
+    "representative_work": "Great Ape King",
+    "feature": "Adult-oriented · erotic and violent · Japan's adult-oriented Journey to the West"
+  },
+  {
+    "country": "South Korea",
+    "element": "Romanticization",
+    "intensity": 9,
+    "representative_work": "A Korean Odyssey",
+    "feature": "Modern urban romance · a love line between Wukong and a female Tripitaka"
+  },
+  {
+    "country": "South Korea",
+    "element": "Educationalization",
+    "intensity": 8,
+    "representative_work": "Magic Thousand-Character Classic",
+    "feature": "Children's Chinese-character learning · uses Journey to the West as its framework"
+  },
+  {
+    "country": "Vietnam",
+    "element": "Localized Humor",
+    "intensity": 7,
+    "representative_work": "Vietnamese folk drama",
+    "feature": "Incorporates Vietnamese folklore · humorized · adapted into local opera"
+  },
+  {
+    "country": "China",
+    "element": "Dark Deconstruction",
+    "intensity": 8,
+    "representative_work": "Black Myth: Wukong; Journey to the West: Conquering the Demons",
+    "feature": "The most serious, darkest local deconstruction in recent years"
+  },
+  {
+    "country": "China",
+    "element": "Web-Novel Hot-Blood",
+    "intensity": 9,
+    "representative_work": "Legend of Wukong; Great Ape King",
+    "feature": "Web-novel anti-Journey-to-the-West · hot-blooded fantasy"
+  },
+  {
+    "country": "China",
+    "element": "Faithful to Original",
+    "intensity": 10,
+    "representative_work": "1986 CCTV series",
+    "feature": "Most faithful to the original · shaped the perception of several generations of Chinese audiences"
+  },
+  {
+    "country": "USA",
+    "element": "Simplified Narrative",
+    "intensity": 8,
+    "representative_work": "Netflix's The Monkey King",
+    "feature": "Aimed at mainstream English audiences · American-style animation with simplified narrative"
+  },
+  {
+    "country": "USA",
+    "element": "Western Reinterpretation",
+    "intensity": 7,
+    "representative_work": "AMC's Into the Badlands",
+    "feature": "Post-apocalyptic · borrows the name but not the spirit · Western martial arts"
+  },
+  {
+    "country": "Australia",
+    "element": "Localized Humor",
+    "intensity": 6,
+    "representative_work": "ABC's Monkey",
+    "feature": "In English · humorized · influenced the Australian English-speaking world"
+  }
+];
 
         const EMBEDDED_SUMMARY = {
-        "total_translation_bias": 12,
-        "total_amplifications": 12,
-        "countries": ["Vietnam", "China", "Australia", "South Korea", "Japan", "USA"],
-        "amplification_elements": ["Localized Humor", "Western Reinterpretation", "Romanticization", "Simplified Narrative", "Educationalization", "Faithful to Original", "Hot-Blooded Combat", "Dark Deconstruction", "Bishōnen-ization", "Web-Novel Hot-Blood"],
-        "high_cultural_gap_terms": ["Victorious Fighting Buddha", "Mind-Monkey and Will-Horse", "Sun Wukong", "Zhu Bajie", "True Samadhi Fire"],
-        "core_conclusion": "The greatest cognitive bias in translation lies in Buddhist-Daoist terms such as 'Mind-Monkey and Will-Horse', 'True Samadhi Fire', and 'Victorious Fighting Buddha' — English readers can hardly perceive the cultivation metaphor in the dharma names 'Wukong/Wujing'. East Asian countries amplify different elements: Japan leans toward bishōnen and hot-bloodedness, South Korea toward romance and education, and China's local adaptations stay most faithful to the original, though a dark style has emerged in recent years."
-    };
+  "total_translation_bias": 12,
+  "total_amplifications": 12,
+  "countries": [
+    "Vietnam",
+    "China",
+    "Australia",
+    "South Korea",
+    "Japan",
+    "USA"
+  ],
+  "amplification_elements": [
+    "Localized Humor",
+    "Western Reinterpretation",
+    "Romanticization",
+    "Simplified Narrative",
+    "Educationalization",
+    "Faithful to Original",
+    "Hot-Blooded Combat",
+    "Dark Deconstruction",
+    "Bishōnen-ization",
+    "Web-Novel Hot-Blood"
+  ],
+  "high_cultural_gap_terms": [
+    "Victorious Fighting Buddha",
+    "Mind-Monkey and Will-Horse",
+    "Sun Wukong",
+    "Zhu Bajie",
+    "True Samadhi Fire"
+  ],
+  "core_conclusion": "The greatest cognitive bias in translation lies in Buddhist-Daoist terms such as 'Mind-Monkey and Will-Horse', 'True Samadhi Fire', and 'Victorious Fighting Buddha' — English readers can hardly perceive the cultivation metaphor in the dharma names 'Wukong/Wujing'. East Asian countries amplify different elements: Japan leans toward bishōnen and hot-bloodedness, South Korea toward romance and education, and China's local adaptations stay most faithful to the original, though a dark style has emerged in recent years."
+};
 
     // ========== Color scheme ==========
     // Cultural gap color: light yellow (1) → dark red (10)
@@ -3027,9 +3188,9 @@ function renderTreemap(opts){
 
     async function loadData() {
         const [bias, amp, summary] = await Promise.all([
-            fetchJson('../data/json/translation_bias.json', EMBEDDED_TRANSLATION_BIAS),
-            fetchJson('../data/json/east_asia_amplification.json', EMBEDDED_AMPLIFICATION),
-            fetchJson('../data/json/cultural_misreading_summary.json', EMBEDDED_SUMMARY)
+            fetchJson('../en/json/translation_bias.json', EMBEDDED_TRANSLATION_BIAS),
+            fetchJson('../en/json/east_asia_amplification.json', EMBEDDED_AMPLIFICATION),
+            fetchJson('../en/json/cultural_misreading_summary.json', EMBEDDED_SUMMARY)
         ]);
 
         // Detect whether data was successfully loaded from the server (if any returns an array with a matching length, the server responded)
@@ -3037,7 +3198,7 @@ function renderTreemap(opts){
             && (typeof window !== 'undefined' && window.location.protocol.startsWith('http'));
         if (isLive) {
             document.getElementById('dataSource').innerHTML =
-                'Data source: loaded live from <code>../data/json/</code> (running in http server mode)';
+                'Data source: loaded live from <code>../en/json/</code> (running in http server mode)';
         }
         return { bias, amp, summary };
     }

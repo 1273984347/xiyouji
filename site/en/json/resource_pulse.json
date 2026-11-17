@@ -1,0 +1,161 @@
+{
+  "concept_name": "The Resource Pulse Effect of Tang Sanzang’s Flesh",
+  "english_name": "Tang Monk Flesh as Resource Pulse",
+  "ecological_definition": "Resource pulse: a scarce, high-energy resource appears in abundance at a specific time and place, triggering violent fluctuations in the local ecosystem — analogous to the population booms caused by salmon runs and acorn masts in nature",
+  "core_case": "Tang Sanzang’s flesh, as a scarce resource, drew demon congregations and turf wars wherever he went, violently destabilizing the local ecology",
+  "pulse_cases": [
+    {
+      "location": "White Tiger Ridge",
+      "chapter": "Ch. 27",
+      "monster_count": 1,
+      "monster_names": [
+        "White Bone Demon"
+      ],
+      "pulse_intensity": 7,
+      "ecological_response": "White Bone Demon acted alone · three transformations to trick the pilgrims",
+      "resource_competition": "None (exclusive)",
+      "outcome": "White Bone Demon eliminated",
+      "pulse_duration_days": 1
+    },
+    {
+      "location": "Flat-Top Mountain · Lotus Cave",
+      "chapter": "Ch. 32-35",
+      "monster_count": 2,
+      "monster_names": [
+        "Gold Horn King",
+        "Silver Horn King"
+      ],
+      "pulse_intensity": 8,
+      "ecological_response": "Brothers in partnership · relied on a treasure (the Purple-Gold Gourd)",
+      "resource_competition": "None (shared by brothers)",
+      "outcome": "Reclaimed by Taishang Laojun",
+      "pulse_duration_days": 4
+    },
+    {
+      "location": "Mount Hao · Fire-Cloud Cave",
+      "chapter": "Ch. 40-42",
+      "monster_count": 1,
+      "monster_names": [
+        "Red Boy"
+      ],
+      "pulse_intensity": 9,
+      "ecological_response": "Samadhi true fire + deception (turned into a child)",
+      "resource_competition": "None (exclusive)",
+      "outcome": "Taken in by Guanyin as the Child of Wealth",
+      "pulse_duration_days": 3
+    },
+    {
+      "location": "Heaven-Reaching River · King of Inspiration",
+      "chapter": "Ch. 47-49",
+      "monster_count": 1,
+      "monster_names": [
+        "Goldfish Spirit"
+      ],
+      "pulse_intensity": 6,
+      "ecological_response": "Aquatic interception · one boy and one girl each year",
+      "resource_competition": "None (exclusive)",
+      "outcome": "Reclaimed by Guanyin with a bamboo basket",
+      "pulse_duration_days": 2
+    },
+    {
+      "location": "Golden Helmet Mountain · Golden Helmet Cave",
+      "chapter": "Ch. 50-52",
+      "monster_count": 1,
+      "monster_names": [
+        "Green Ox Spirit"
+      ],
+      "pulse_intensity": 10,
+      "ecological_response": "The Diamond Bracelet collected the gods’ weapons · exclusive",
+      "resource_competition": "None (exclusive)",
+      "outcome": "Reclaimed by Taishang Laojun",
+      "pulse_duration_days": 6
+    },
+    {
+      "location": "Lion-Camel Ridge · Lion-Camel Kingdom",
+      "chapter": "Ch. 74-77",
+      "monster_count": 3,
+      "monster_names": [
+        "Azure Lion",
+        "White Elephant",
+        "Golden-Winged Great Peng"
+      ],
+      "pulse_intensity": 10,
+      "ecological_response": "Three great demon kings in alliance · a ridge of skeletons",
+      "resource_competition": "Three-way contention · the Great Peng most aggressive",
+      "outcome": "Reclaimed in person by the three bodhisattvas / Tathagata",
+      "pulse_duration_days": 12
+    },
+    {
+      "location": "Cobweb Cave · Yellow-Flower Temple",
+      "chapter": "Ch. 72-73",
+      "monster_count": 7,
+      "monster_names": [
+        "Seven Spider Demons",
+        "Hundred-Eyed Demon Lord (Centipede Demon)"
+      ],
+      "pulse_intensity": 7,
+      "ecological_response": "Spider sisters + their centipede cousin",
+      "resource_competition": "Shared by sisters + contested by the cousin",
+      "outcome": "Centipede Demon captured · Spider Demons killed",
+      "pulse_duration_days": 3
+    },
+    {
+      "location": "Bottomless Cave · Sunken Mountain",
+      "chapter": "Ch. 80-83",
+      "monster_count": 1,
+      "monster_names": [
+        "Mouse Demon"
+      ],
+      "pulse_intensity": 8,
+      "ecological_response": "Bottomless cave of the underworld + forcibly wed Tang Sanzang",
+      "resource_competition": "None (exclusive)",
+      "outcome": "Reclaimed by Heavenly King Li (as adopted daughter)",
+      "pulse_duration_days": 5
+    },
+    {
+      "location": "Azure Dragon Mountain · Dark Mystery Cave",
+      "chapter": "Ch. 91-92",
+      "monster_count": 3,
+      "monster_names": [
+        "Cold-Dispelling King",
+        "Heat-Dispelling King",
+        "Dust-Dispelling King"
+      ],
+      "pulse_intensity": 8,
+      "ecological_response": "Three rhinoceros demons in partnership + stole aromatic oil",
+      "resource_competition": "Shared by the three",
+      "outcome": "Subdued by the Four Wood Stars",
+      "pulse_duration_days": 4
+    },
+    {
+      "location": "India · Maoying Mountain",
+      "chapter": "Ch. 93-95",
+      "monster_count": 1,
+      "monster_names": [
+        "Jade Rabbit Demon"
+      ],
+      "pulse_intensity": 5,
+      "ecological_response": "Disguised as a princess + sought Tang Sanzang as husband",
+      "resource_competition": "None (exclusive)",
+      "outcome": "Reclaimed by Taiyin Star Lord",
+      "pulse_duration_days": 2
+    }
+  ],
+  "pulse_analysis": {
+    "total_pulse_events": 10,
+    "avg_monsters_per_pulse": 2.1,
+    "max_monsters_pulse": 7,
+    "avg_pulse_intensity": 7.8,
+    "avg_pulse_duration_days": 4.2,
+    "most_intense_pulse": "Lion-Camel Ridge (10/10 · 3 demon kings + 12 days)",
+    "longest_pulse": "Lion-Camel Ridge (12 days)",
+    "highest_competition": "Lion-Camel Ridge (3 demon kings contending)"
+  },
+  "ecological_insights": [
+    "Tang Sanzang’s flesh is a scarce pulse resource · it drew demon congregations wherever he went",
+    "Monster count correlates positively with pulse intensity · Lion-Camel Ridge’s 3 demons + 12 days = highest intensity",
+    "Grassroots demons act alone (White Bone Demon / Red Boy) · backed demons tend to ally (the three demons of Lion-Camel Ridge)",
+    "When resource competition is fierce, backed demons prevail (the Great Peng dominated Lion-Camel Ridge)",
+    "The ‘scarcity’ of Tang Sanzang’s flesh is the root cause of the pulse effect · if it were ‘mass-produced’ it would lose its value"
+  ]
+}

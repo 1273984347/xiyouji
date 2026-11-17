@@ -1,0 +1,73 @@
+{
+  "concept_name": "Heavenly Court vs Vulture Peak Organization Comparison",
+  "english_name": "Heavenly Court vs Vulture Peak Organization Comparison",
+  "definition": "The Heavenly Court and Vulture Peak are the two ruling organizations of the Journey to the West world: nominally the Court outranks Vulture Peak, yet Vulture Peak actually leads the pilgrimage project; the two differ markedly in governance model, culture, and efficiency",
+  "comparison_dimensions": [
+    "vision",
+    "leadership",
+    "org_structure",
+    "employee_count",
+    "core_business",
+    "kpi",
+    "revenue_model",
+    "culture",
+    "decision_making",
+    "innovation",
+    "employee_benefits",
+    "transparency",
+    "efficiency"
+  ],
+  "organizations": [
+    {
+      "name": "Heavenly Court",
+      "english_name": "Heavenly Court",
+      "vision": "Maintain order across the Three Realms; perpetuate the heavenly dynasty; treat 'peace and no trouble' as the supreme goal",
+      "leadership": "Jade Emperor (CEO · nominal autocrat · in practice constrained by the Three Pure Ones elders)",
+      "org_structure": "Pyramidal hierarchy: Jade Emperor – Queen Mother – Three Pure Ones & Four Sovereigns – Five Directions & Five Elders – Six Ministries – Constellation Deities; strictly tiered",
+      "employee_count": "~10,000 on the official roster (including heavenly troops and generals) · plus ad hoc conscription",
+      "core_business": "Maintaining order across the Three Realms; regulating celestial phenomena; managing the Ledger of Life and Death; refining elixirs; cultivating peaches",
+      "kpi": "No demon rebellions; rain falls on schedule; the Ledger of Life and Death stays orderly; the Peach Banquet is held on time",
+      "revenue_model": "Tribute commission (mortal incense offerings) + peach monopoly (sole source) + exclusive elixir refining; no cash circulation",
+      "culture": "Bureaucratic; seniority-based; proud of 'not rocking the boat', ashamed of 'overstepping'; better to do nothing than to do wrong",
+      "decision_making": "Centralized decision-making: the Jade Emperor decides, but is often influenced by elders (Three Pure Ones) or outsiders (Vulture Peak); long-winded process",
+      "innovation": "Near-zero innovation; the system unchanged for 500 years; all magic treasures handed down from antiquity; no new R&D",
+      "employee_benefits": "Peach allotment (by rank) + elixir allocation + immortality + palace housing; vast rank-based inequality",
+      "transparency": "Extremely low; opaque decision-making; before Wukong stormed Heaven he did not know the Peach Banquet guest list; Bimawen did not know his own rank",
+      "efficiency": "Low; the siege of Flower-Fruit Mountain with 100,000 heavenly troops failed; repeatedly bailed out by outside hires (Erlang / Tathāgata)"
+    },
+    {
+      "name": "Vulture Peak",
+      "english_name": "Vulture Peak",
+      "vision": "Deliver all beings; propagate the Dharma; transmit scriptures to the East; extend Buddhist influence to Jambudvīpa",
+      "leadership": "Tathāgata Buddha (CEO · de facto autocrat · but executes through devolved Bodhisattva authority)",
+      "org_structure": "Flat + matrix: Tathāgata – Bodhisattvas/Arhats – executing monks; Bodhisattvas enjoy high autonomy; extensive cross-team collaboration",
+      "employee_count": "~4,800 (Buddhas, Bodhisattvas, Arhats, Dharma protectors); an elite roster",
+      "core_business": "Propagating the Dharma; running the pilgrimage project; accruing merit; subduing and converting demons; expanding the faithful",
+      "kpi": "Pilgrimage completion; number of the 81 trials; demons converted; growth of the faithful; spread of the Dharma",
+      "revenue_model": "Merit + incense + lay donations; non-profit oriented, but with 'personnel fees' (Ānanda and Kāśyapa demand bribes)",
+      "culture": "Goal-oriented; tolerates trial and error; values long-termism; merit as the core incentive; encourages cross-team collaboration",
+      "decision_making": "Devolved decision-making: Bodhisattvas have discretionary power (Guanyin can independently decide to subdue Red Boy / the Black Bear Spirit); high efficiency",
+      "innovation": "Medium-high; the three golden bands are bespoke products; the pilgrimage project itself is organizational innovation; the 81-trial design",
+      "employee_benefits": "Buddhahood promotion; lotus thrones; merit accumulation; immortality; relatively egalitarian; no rank-based peach allotment",
+      "transparency": "Medium; project goals are transparent (the pilgrimage), but budgets/rosters are not disclosed; Ānanda and Kāśyapa's bribery exposed the dark side",
+      "efficiency": "High; the pilgrimage completed in 14 years; Bodhisattvas respond quickly and repeatedly intervene directly to solve problems"
+    }
+  ],
+  "comparison_matrix": {
+    "more_bureaucratic": "Heavenly Court",
+    "more_efficient": "Vulture Peak",
+    "more_innovative": "Vulture Peak",
+    "more_transparent": "Vulture Peak (relatively)",
+    "larger_scale": "Heavenly Court (2× headcount)",
+    "stronger_leadership": "Vulture Peak (Tathāgata runs it directly)",
+    "better_culture": "Vulture Peak (goal-oriented vs don't-rock-the-boat)"
+  },
+  "key_insights": [
+    "The Heavenly Court is a 'stock-maintenance' organization; Vulture Peak is an 'incremental-expansion' organization",
+    "The Heavenly Court's peach monopoly is the foundation of its stability; losing the peaches would dissolve the Court",
+    "Vulture Peak expands by 'absorbing demons': Red Boy, the Black Bear Spirit, and the Mountain Guardian are all absorption results",
+    "The pilgrimage is a 'joint project' tacitly approved by the Court and led by Vulture Peak: the Court lends resources (Li Jing / Nezha, etc.)",
+    "The Heavenly Court's failure is its 'inability to cultivate talent'; the Wukong–Bimawen affair exposed blocked promotion paths",
+    "Vulture Peak's success hinges on the trinity of 'clear goals + delegated execution + merit incentives'"
+  ]
+}

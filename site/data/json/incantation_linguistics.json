@@ -1,0 +1,269 @@
+{
+  "concept_name": "咒语的语言结构",
+  "english_name": "Incantation Linguistic Structure",
+  "definition": "咒语语言学（incantation linguistics）：咒语的语言来源、词汇构成、音韵特征·反映宗教与文化融合",
+  "core_finding": "紧箍咒'唵吽吒唎'是梵语音译·五雷法是汉地道教术语·悟空骂人'泼怪'是明代市井口语·三种语言来源反映三教合一",
+  "incantations": [
+    {
+      "n": 1,
+      "incantation_name": "紧箍咒",
+      "english_name": "Golden Hoop Mantra",
+      "user": "唐僧",
+      "target": "孙悟空",
+      "raw_text": "唵吽吒唎·唵嘛呢叭咪吽",
+      "language_source": "梵语音译·佛教真言",
+      "language_classification": "梵语借词（Sanskrit loanword）",
+      "phonetic_analysis": {
+        "sanskrit_original": "Oṃ Maṇi Padme Hūṃ",
+        "chinese_transliteration": "唵嘛呢叭咪吽",
+        "meaning": "归依莲华宝·成就一切",
+        "phonetic_features": "鼻音+元音交替·便于连续念诵"
+      },
+      "linguistic_features": [
+        "梵语音译·非汉语词汇",
+        "音节简短·便于快速念诵",
+        "无实义·纯音韵咒语",
+        "重复念诵产生催眠效果"
+      ],
+      "religious_origin": "佛教密宗真言·六字大明咒",
+      "function_mechanism": "音韵刺激+金箍物理收缩·双重作用",
+      "cultural_significance": "梵语在汉地的传播·反映佛教中国化",
+      "language_proportion": {
+        "sanskrit_loanword": 100,
+        "taoist_term": 0,
+        "ming_colloquial": 0,
+        "classical_chinese": 0
+      }
+    },
+    {
+      "n": 2,
+      "incantation_name": "五雷法",
+      "english_name": "Five Thunder Spell",
+      "user": "车迟国三仙/天师道",
+      "target": "召唤雷部",
+      "raw_text": "急急如律令·五雷速至·敕!",
+      "language_source": "汉地道教术语·官方法术语言",
+      "language_classification": "道教术语（Daoist terminology）+ 古汉语命令式",
+      "phonetic_analysis": {
+        "chinese_original": "急急如律令·五雷速至·敕",
+        "meaning": "如律令般迅速执行·五雷速到·命令",
+        "phonetic_features": "命令式·短促有力·'敕'字收尾"
+      },
+      "linguistic_features": [
+        "古汉语命令式·'急急如律令'是汉代公文用语",
+        "道教术语·'五雷'指雷部五方",
+        "'敕'字是帝王命令用语",
+        "结构：执行指令 + 内容 + 命令结尾"
+      ],
+      "religious_origin": "天师道·五斗米道·道教法术",
+      "function_mechanism": "公文式命令+神权召唤·结构化法术",
+      "cultural_significance": "道教继承汉代公文传统·将世俗权力结构引入神界",
+      "language_proportion": {
+        "sanskrit_loanword": 0,
+        "taoist_term": 60,
+        "ming_colloquial": 0,
+        "classical_chinese": 40
+      }
+    },
+    {
+      "n": 3,
+      "incantation_name": "定身咒",
+      "english_name": "Body-Freezing Spell",
+      "user": "孙悟空",
+      "target": "小妖/凡人",
+      "raw_text": "住!·不要动!",
+      "language_source": "明代市井口语·简短命令",
+      "language_classification": "明代市井口语（Ming colloquial）",
+      "phonetic_analysis": {
+        "chinese_original": "住!·不要动!",
+        "meaning": "停下·别动",
+        "phonetic_features": "短促·直接·无修饰"
+      },
+      "linguistic_features": [
+        "市井口语·无文言修饰",
+        "命令式·短促",
+        "无宗教术语·纯民间",
+        "结构：动词 + 否定词 + 动词"
+      ],
+      "religious_origin": "民间巫术·非正规宗教",
+      "function_mechanism": "民间巫术·语言简短·依赖法力",
+      "cultural_significance": "反映明代民间口语的力量·与佛道术语对比",
+      "language_proportion": {
+        "sanskrit_loanword": 0,
+        "taoist_term": 0,
+        "ming_colloquial": 100,
+        "classical_chinese": 0
+      }
+    },
+    {
+      "n": 4,
+      "incantation_name": "避水诀",
+      "english_name": "Water-Avoiding Spell",
+      "user": "孙悟空/猪八戒",
+      "target": "水分开",
+      "raw_text": "闭!·水!",
+      "language_source": "道教简化术语·单字咒",
+      "language_classification": "道教术语简化（Daoist simplified）",
+      "phonetic_analysis": {
+        "chinese_original": "闭·水",
+        "meaning": "关闭·水",
+        "phonetic_features": "单字·最强命令"
+      },
+      "linguistic_features": [
+        "单字咒·极简",
+        "道教术语简化",
+        "无修饰·纯命令",
+        "结构：动词 + 名词"
+      ],
+      "religious_origin": "道教·水解之术",
+      "function_mechanism": "法力注入+单字命令·高效",
+      "cultural_significance": "反映道教术语的民间化·从繁到简",
+      "language_proportion": {
+        "sanskrit_loanword": 0,
+        "taoist_term": 70,
+        "ming_colloquial": 30,
+        "classical_chinese": 0
+      }
+    },
+    {
+      "n": 5,
+      "incantation_name": "召唤咒（搬救兵）",
+      "english_name": "Summoning Spell",
+      "user": "孙悟空",
+      "target": "天庭/灵山诸神",
+      "raw_text": "南无观世音菩萨·南无十方三世诸佛·弟子孙悟空有事相求",
+      "language_source": "佛教术语 + 汉地自谦",
+      "language_classification": "佛教术语（Buddhist terminology）+ 古汉语自谦",
+      "phonetic_analysis": {
+        "chinese_original": "南无观世音菩萨·弟子孙悟空有事相求",
+        "meaning": "归依观世音菩萨·弟子孙悟空有事相求",
+        "phonetic_features": "宗教开头 + 自谦 + 请求"
+      },
+      "linguistic_features": [
+        "佛教术语开头·'南无'是梵语音译",
+        "汉地自谦·'弟子'是佛教称呼",
+        "请求式·非命令",
+        "结构：宗教呼号 + 自谦 + 请求"
+      ],
+      "religious_origin": "佛教·观音信仰",
+      "function_mechanism": "宗教呼号 + 礼貌请求·柔性召唤",
+      "cultural_significance": "反映佛教在明代的传播·观音信仰普及",
+      "language_proportion": {
+        "sanskrit_loanword": 30,
+        "taoist_term": 0,
+        "ming_colloquial": 30,
+        "classical_chinese": 40
+      }
+    },
+    {
+      "n": 6,
+      "incantation_name": "悟空骂人（妖怪挑衅）",
+      "english_name": "Wukong's Verbal Provocation",
+      "user": "孙悟空",
+      "target": "妖怪",
+      "raw_text": "泼怪!·畜生!·休走!·吃俺老孙一棒!",
+      "language_source": "明代市井口语·武人话本风格",
+      "language_classification": "明代市井口语（Ming colloquial）+ 武人话本",
+      "phonetic_analysis": {
+        "chinese_original": "泼怪·畜生·休走·吃俺老孙一棒",
+        "meaning": "无赖妖怪·畜生·别走·吃我一棒",
+        "phonetic_features": "短促·命令式·挑衅"
+      },
+      "linguistic_features": [
+        "市井骂语·'泼怪'是明代市井",
+        "武人话本风格·'休走'是话本常用",
+        "自称'俺老孙'是民间自称",
+        "结构：骂语 + 命令 + 威胁"
+      ],
+      "religious_origin": "无·民间武人风格",
+      "function_mechanism": "心理威慑+挑衅·非实际法术",
+      "cultural_significance": "反映明代话本与市井文化的交融·孙悟空是民间英雄形象",
+      "language_proportion": {
+        "sanskrit_loanword": 0,
+        "taoist_term": 0,
+        "ming_colloquial": 80,
+        "classical_chinese": 20
+      }
+    },
+    {
+      "n": 7,
+      "incantation_name": "唐僧训徒（佛教戒律）",
+      "english_name": "Tang Monk's Admonition",
+      "user": "唐僧",
+      "target": "孙悟空",
+      "raw_text": "悟空·不可伤生害命·我等出家人·慈悲为怀",
+      "language_source": "佛教戒律语言·文言",
+      "language_classification": "佛教术语（Buddhist terminology）+ 文言",
+      "phonetic_analysis": {
+        "chinese_original": "悟空·不可伤生害命·我等出家人·慈悲为怀",
+        "meaning": "悟空·不可伤生害命·我等出家人·慈悲为怀",
+        "phonetic_features": "文言·缓慢·说教式"
+      },
+      "linguistic_features": [
+        "佛教术语·'出家人''慈悲'",
+        "文言·'不可'是文言否定",
+        "说教式·缓慢",
+        "结构：呼名 + 戒律 + 身份 + 原则"
+      ],
+      "religious_origin": "佛教戒律·慈悲思想",
+      "function_mechanism": "道德说教+身份认同·柔性约束",
+      "cultural_significance": "反映佛教戒律语言的文言化·与市井对比",
+      "language_proportion": {
+        "sanskrit_loanword": 10,
+        "taoist_term": 0,
+        "ming_colloquial": 20,
+        "classical_chinese": 70
+      }
+    },
+    {
+      "n": 8,
+      "incantation_name": "如来佛祖说法（佛经语言）",
+      "english_name": "Buddha's Sermon",
+      "user": "如来佛祖",
+      "target": "诸佛菩萨",
+      "raw_text": "色不异空·空不异色·色即是空·空即是色",
+      "language_source": "佛经翻译语言·玄奘译《心经》",
+      "language_classification": "佛经文言（Buddhist Classical Chinese）",
+      "phonetic_analysis": {
+        "chinese_original": "色不异空·空不异色·色即是空·空即是色",
+        "meaning": "色（物质）不异于空·空不异于色",
+        "phonetic_features": "对仗·重复·韵律"
+      },
+      "linguistic_features": [
+        "佛经翻译·玄奘译风",
+        "对仗工整·便于记忆",
+        "韵律强·适合诵读",
+        "结构：色/空 对仗 + 四句循环"
+      ],
+      "religious_origin": "《般若波罗蜜多心经》·玄奘译",
+      "function_mechanism": "经文诵读·法会仪式",
+      "cultural_significance": "反映玄奘翻译风格·佛经汉化的巅峰",
+      "language_proportion": {
+        "sanskrit_loanword": 20,
+        "taoist_term": 0,
+        "ming_colloquial": 0,
+        "classical_chinese": 80
+      }
+    }
+  ],
+  "language_source_stats": {
+    "total_incantations": 8,
+    "sanskrit_dominant": 2,
+    "taoist_dominant": 2,
+    "ming_colloquial_dominant": 2,
+    "classical_chinese_dominant": 2,
+    "avg_sanskrit_proportion": 20,
+    "avg_taoist_proportion": 16.25,
+    "avg_ming_colloquial_proportion": 28.75,
+    "avg_classical_chinese_proportion": 35
+  },
+  "linguistic_insights": [
+    "8 咒语反映三教合一：梵语（佛）+ 道教术语（道）+ 市井口语（民间）",
+    "紧箍咒是唯一纯梵语音译咒语·反映佛教密宗真言传统",
+    "五雷法是道教术语+古汉语公文·反映道教继承汉代公文传统",
+    "悟空骂人是明代市井口语·反映孙悟空的民间英雄形象",
+    "唐僧训徒是佛教戒律语言·文言化·反映僧侣身份",
+    "如来佛祖说法是玄奘译风·佛经汉化的巅峰",
+    "语言来源的多样性反映《西游记》的三教合一思想"
+  ]
+}

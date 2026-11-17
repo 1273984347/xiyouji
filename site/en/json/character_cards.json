@@ -1,0 +1,410 @@
+[
+  {
+    "character": "Sun Wukong",
+    "title": "Great Sage Equal to Heaven · Victorious Fighting Buddha",
+    "rarity": "UR",
+    "element": "Metal",
+    "power": 9800,
+    "hp": 9500,
+    "atk": 9800,
+    "def": 8500,
+    "spd": 9900,
+    "skills": [
+      {
+        "name": "72 Transformations",
+        "cost": 5,
+        "effect": "Transform · dodge +50% · lasts 3 turns",
+        "type": "buff"
+      },
+      {
+        "name": "Somersault Cloud",
+        "cost": 3,
+        "effect": "First strike · ignores terrain · guaranteed hit",
+        "type": "move"
+      },
+      {
+        "name": "Ruyi Jingu Bang · Sea-Calming Needle",
+        "cost": 8,
+        "effect": "Physical damage ×3 · breaks defense",
+        "type": "attack"
+      },
+      {
+        "name": "Fiery Golden Eyes",
+        "cost": 2,
+        "effect": "See through · pierces all disguise and illusion",
+        "type": "skill"
+      }
+    ],
+    "passive": "Havoc in Heaven — immune to first hit · once per battle",
+    "acquisition": "Limited banner · Five Elements Mountain seal-lifting commemoration",
+    "lore": "Born from a magic stone on Flower-Fruit Mountain · Havoc in Heaven · escorted the pilgrimage · finally became the Victorious Fighting Buddha"
+  },
+  {
+    "character": "Tathāgata Buddha",
+    "title": "Western Paradise · Supreme Lord",
+    "rarity": "UR",
+    "element": "Light",
+    "power": 10000,
+    "hp": 9999,
+    "atk": 9500,
+    "def": 9999,
+    "spd": 7000,
+    "skills": [
+      {
+        "name": "Five Elements Mountain Crush",
+        "cost": 10,
+        "effect": "Ignores enemy defense · directly strips 500 years of turns",
+        "type": "attack"
+      },
+      {
+        "name": "Boundless Dharma",
+        "cost": 8,
+        "effect": "Full-field cleanse · removes all buffs/debuffs",
+        "type": "buff"
+      },
+      {
+        "name": "Buddha Land in the Palm",
+        "cost": 6,
+        "effect": "Seals the target in the palm · cannot act",
+        "type": "control"
+      }
+    ],
+    "passive": "Rule-type — all battle outcomes are judged by Tathāgata",
+    "acquisition": "Spirit Mountain supreme ritual · only 1 per server",
+    "lore": "Supreme lord of the Western Paradise · chief architect of the 81 ordeals"
+  },
+  {
+    "character": "Guanyin Bodhisattva",
+    "title": "South Sea Putuo · Great Mercy",
+    "rarity": "SSR",
+    "element": "Water",
+    "power": 8200,
+    "hp": 8500,
+    "atk": 7800,
+    "def": 8800,
+    "spd": 8000,
+    "skills": [
+      {
+        "name": "Pure Vase Nectar",
+        "cost": 5,
+        "effect": "Restores 50% HP to the whole team · removes debuffs",
+        "type": "heal"
+      },
+      {
+        "name": "Golden Hoop Mantra",
+        "cost": 4,
+        "effect": "Forces control on a single ENTP-type character for 3 turns",
+        "type": "control"
+      },
+      {
+        "name": "Three Life-Saving Hairs",
+        "cost": 3,
+        "effect": "Grants teammates a revive item · usable 3 times",
+        "type": "buff"
+      }
+    ],
+    "passive": "Hidden protection — auto-triggers a shield when a teammate’s HP < 30%",
+    "acquisition": "South Sea Putuo limited banner",
+    "lore": "The merciful Guanyin Bodhisattva · secret investor in the pilgrimage project"
+  },
+  {
+    "character": "Erlang Shen Yang Jian",
+    "title": "Manifested Sage Erlang",
+    "rarity": "SSR",
+    "element": "Thunder",
+    "power": 8800,
+    "hp": 8200,
+    "atk": 9000,
+    "def": 8000,
+    "spd": 9200,
+    "skills": [
+      {
+        "name": "Heavenly Eye",
+        "cost": 4,
+        "effect": "Pierces all disguise and transformation · lasts 5 turns",
+        "type": "skill"
+      },
+      {
+        "name": "Eight-Nine Mystic Art",
+        "cost": 6,
+        "effect": "Rival of the 72 Transformations · adds Thunder damage",
+        "type": "attack"
+      },
+      {
+        "name": "Howling Celestial Hound",
+        "cost": 3,
+        "effect": "Summons the Howling Celestial Hound to bite the target · cannot act for 2 turns",
+        "type": "control"
+      }
+    ],
+    "passive": "Heaven’s strongest war god — +30% damage against demon enemies",
+    "acquisition": "Guanjiangkou limited · Heavenly Legion banner",
+    "lore": "Nephew of the Jade Emperor · once fought Wukong to a 300-round draw"
+  },
+  {
+    "character": "Tang Sanzang",
+    "title": "Candana Merit Buddha · reincarnation of the Golden Cicada",
+    "rarity": "SR",
+    "element": "Heart",
+    "power": 1500,
+    "hp": 1500,
+    "atk": 800,
+    "def": 1200,
+    "spd": 3000,
+    "skills": [
+      {
+        "name": "Golden Hoop Mantra Recitation",
+        "cost": 2,
+        "effect": "Forces control on Wukong-type characters · but 0 damage",
+        "type": "control"
+      },
+      {
+        "name": "Chant the Heart Sutra",
+        "cost": 3,
+        "effect": "Purges all debuffs · but requires 1 turn of chanting",
+        "type": "heal"
+      },
+      {
+        "name": "Call for Guanyin",
+        "cost": 5,
+        "effect": "Summons Guanyin to the rescue · 5-turn cooldown",
+        "type": "summon"
+      }
+    ],
+    "passive": "Golden Cicada reincarnation — 100% triggers a plot rescue when defeated by a demon",
+    "acquisition": "Default card · gifted at the start",
+    "lore": "Reincarnation of the Golden Cicada · 14 years of walking to fetch the scriptures · finally became the Candana Merit Buddha"
+  },
+  {
+    "character": "Zhu Bajie",
+    "title": "Marshal Tianpeng · Altar Cleanser",
+    "rarity": "SR",
+    "element": "Earth",
+    "power": 4200,
+    "hp": 6000,
+    "atk": 4500,
+    "def": 5500,
+    "spd": 3000,
+    "skills": [
+      {
+        "name": "36 Transformations",
+        "cost": 3,
+        "effect": "Transform · but 50% failure rate",
+        "type": "buff"
+      },
+      {
+        "name": "Nine-Tooth Rake",
+        "cost": 4,
+        "effect": "Physical damage ×1.5 · -50% damage vs female demons",
+        "type": "attack"
+      },
+      {
+        "name": "Gao Village Braised Pork",
+        "cost": 2,
+        "effect": "Restores 30% HP · but attack -20% · lasts 3 turns",
+        "type": "heal"
+      }
+    ],
+    "passive": "Marshal Tianpeng — 50% chance to defect when facing a female demon",
+    "acquisition": "Gao Village story unlock",
+    "lore": "Former Marshal Tianpeng · banished for flirting with Chang’e · later the team’s comic relief"
+  },
+  {
+    "character": "Sha Wujing",
+    "title": "Curtain-Raising General · Golden-Body Arhat",
+    "rarity": "R",
+    "element": "Water",
+    "power": 3200,
+    "hp": 4500,
+    "atk": 3200,
+    "def": 5000,
+    "spd": 3500,
+    "skills": [
+      {
+        "name": "Demon-Subduing Staff",
+        "cost": 3,
+        "effect": "Steady physical damage ×1.2",
+        "type": "attack"
+      },
+      {
+        "name": "Pole-Carrying Art",
+        "cost": 1,
+        "effect": "Raises the team’s carrying capacity · but no combat effect",
+        "type": "buff"
+      },
+      {
+        "name": "Master’s been captured by demons!",
+        "cost": 2,
+        "effect": "Notifies the whole team · but no actual damage",
+        "type": "skill"
+      }
+    ],
+    "passive": "Silent devotion — steadily restores 5% HP every turn",
+    "acquisition": "Flowing Sands River story unlock",
+    "lore": "Former Curtain-Raising General · banished for shattering a crystal goblet · silently carried the luggage for 14 years"
+  },
+  {
+    "character": "White Dragon Horse",
+    "title": "Third Prince of the West Sea Dragon King · Eight-Part Heavenly Dragon",
+    "rarity": "R",
+    "element": "Water",
+    "power": 3800,
+    "hp": 5000,
+    "atk": 3500,
+    "def": 4500,
+    "spd": 4000,
+    "skills": [
+      {
+        "name": "Transform into a White Horse",
+        "cost": 0,
+        "effect": "Becomes Tang Sanzang’s mount · cannot fight",
+        "type": "passive"
+      },
+      {
+        "name": "A Kick",
+        "cost": 5,
+        "effect": "Clutch rescue · ×3 damage vs the Yellow-Robed Demon",
+        "type": "attack"
+      },
+      {
+        "name": "Dragon Roar",
+        "cost": 3,
+        "effect": "Intimidates low-level demons for 2 turns",
+        "type": "control"
+      }
+    ],
+    "passive": "Clutch rescue — force-activated when the plot triggers",
+    "acquisition": "Eagle Sorrow Stream story unlock",
+    "lore": "Third Prince of the West Sea Dragon King · banished for burning the palace pearl · transformed into a white horse to carry Tang Sanzang"
+  },
+  {
+    "character": "Bull Demon King",
+    "title": "Great Sage Pacifying Heaven · foremost of the Seven Great Sages",
+    "rarity": "SSR",
+    "element": "Earth",
+    "power": 8500,
+    "hp": 9500,
+    "atk": 8800,
+    "def": 8500,
+    "spd": 6000,
+    "skills": [
+      {
+        "name": "72 Transformations (Bull version)",
+        "cost": 5,
+        "effect": "Transform · on par with Wukong",
+        "type": "buff"
+      },
+      {
+        "name": "Iron Cudgel",
+        "cost": 6,
+        "effect": "Physical damage ×2.5 · breaks defense",
+        "type": "attack"
+      },
+      {
+        "name": "Borrowed Banana Fan",
+        "cost": 8,
+        "effect": "Must be borrowed first · otherwise ineffective",
+        "type": "attack"
+      }
+    ],
+    "passive": "Foremost of the Seven Great Sages — +50% damage vs Wukong-type characters",
+    "acquisition": "Flaming Mountain story-limited",
+    "lore": "Wukong’s sworn elder brother · Great Sage Pacifying Heaven · finally subdued by Nezha"
+  },
+  {
+    "character": "Red Boy",
+    "title": "Holy Infant King · Sudhana",
+    "rarity": "SSR",
+    "element": "Fire",
+    "power": 7800,
+    "hp": 6500,
+    "atk": 8500,
+    "def": 6000,
+    "spd": 8800,
+    "skills": [
+      {
+        "name": "Samadhi True Fire",
+        "cost": 6,
+        "effect": "Continuous burn damage for 5 turns · special effect vs Wukong",
+        "type": "attack"
+      },
+      {
+        "name": "Fire-Cloud Spear",
+        "cost": 4,
+        "effect": "Physical + fire damage ×1.8",
+        "type": "attack"
+      },
+      {
+        "name": "Transform into a Handsome Boy",
+        "cost": 3,
+        "effect": "Disguise · tricks the enemy into trusting him",
+        "type": "control"
+      }
+    ],
+    "passive": "Samadhi True Fire — immune to all fire damage · +30% damage vs Wukong-type",
+    "acquisition": "Mount Hao Fire-Cloud Cave limited",
+    "lore": "Son of the Bull Demon King and Princess Iron Fan · unbeatable Samadhi True Fire · finally subdued by Guanyin"
+  },
+  {
+    "character": "Six-Eared Macaque",
+    "title": "False Monkey King · inner demon",
+    "rarity": "SSR",
+    "element": "Dark",
+    "power": 9700,
+    "hp": 9400,
+    "atk": 9700,
+    "def": 8500,
+    "spd": 9900,
+    "skills": [
+      {
+        "name": "72 Transformations (Copy)",
+        "cost": 5,
+        "effect": "Fully copies the target’s skill",
+        "type": "buff"
+      },
+      {
+        "name": "Ruyi Jingu Bang (fake)",
+        "cost": 8,
+        "effect": "Physical damage ×3 · but at 90% power",
+        "type": "attack"
+      },
+      {
+        "name": "Even Diting Cannot Tell",
+        "cost": 4,
+        "effect": "Disguise · -50% detection rate",
+        "type": "control"
+      }
+    ],
+    "passive": "Inner demon — +50% damage vs Wukong-type · and immune to the Golden Hoop Mantra",
+    "acquisition": "True and False Monkey King story-limited",
+    "lore": "Wukong’s inner-demon avatar · identical to Wukong · finally exposed by Tathāgata"
+  },
+  {
+    "character": "White Bone Demon",
+    "title": "Lady White Bone · wild monster",
+    "rarity": "N",
+    "element": "Dark",
+    "power": 800,
+    "hp": 500,
+    "atk": 900,
+    "def": 400,
+    "spd": 1500,
+    "skills": [
+      {
+        "name": "Three Transformations (maiden / old woman / old man)",
+        "cost": 2,
+        "effect": "Disguise · 30% detection rate",
+        "type": "control"
+      },
+      {
+        "name": "Corpse-Shedding Art",
+        "cost": 1,
+        "effect": "Feigns death to escape · no actual damage",
+        "type": "skill"
+      }
+    ],
+    "passive": "Wild monster — one-shotted by Wukong (but Wukong gets driven away)",
+    "acquisition": "White Tiger Ridge story · beginner tutorial",
+    "lore": "White Tiger Ridge wild monster · craved Tang Sanzang’s flesh for immortality · three transformations exposed by Wukong"
+  }
+]

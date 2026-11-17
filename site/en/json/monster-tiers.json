@@ -1,0 +1,34 @@
+[
+  {
+    "key": "lone",
+    "name": "Lone Wolf",
+    "tag": "LONE WOLF",
+    "color": "#8b3a2a",
+    "desc": "Fights alone with no home or reinforcements, surviving on cunning or shape-shifting, and lacking cross-stronghold rescue.",
+    "examples": "White Bone Demon · Spider Demon · Nine-Headed Demon"
+  },
+  {
+    "key": "family",
+    "name": "Family Clan",
+    "tag": "FAMILY-CLAN",
+    "color": "#8E7D62",
+    "desc": "Bound by blood, defends across strongholds, and is concerned with inheritance and raising the next generation.",
+    "examples": "Bull Demon King family · Gold Horn and Silver Horn brothers"
+  },
+  {
+    "key": "alliance",
+    "name": "Alliance",
+    "tag": "ALLIANCE",
+    "color": "#3A473A",
+    "desc": "Sworn allies of different names, ranked by strength, sharing territory and intelligence, yet internally fragile.",
+    "examples": "Three demons of Lion-Camel Ridge · Three demons of Chechi"
+  },
+  {
+    "key": "bureau",
+    "name": "Celestial Bureaucrat",
+    "tag": "CELESTIAL BUREAUCRAT",
+    "color": "#5a4a6b",
+    "desc": "Holds an official Heavenly post; descending to earth is a business trip or desertion of duty, and their fate is a return to office rather than destruction.",
+    "examples": "Yellow Robe Demon (Kui Wood Wolf) · Yellow Wind Demon (Lingji’s mount)"
+  }
+]

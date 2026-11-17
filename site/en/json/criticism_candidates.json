@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Wu Cheng'en",
+    "identity": "Ming · Shanyang County, Huai'an Prefecture · Vice-magistrate of Changxing",
+    "lifetime": "c. 1500–1582",
+    "status": "Mainstream acceptance · a century-long consensus",
+    "type": "main",
+    "evidence_for": [
+      "Tianqi-era Huai'an Prefecture Gazetteer records 'Wu Cheng'en, Journey to the West'",
+      "Hu Shi's 1923 Textual Study infers it · Lu Xun's Brief History endorses it",
+      "Dialect usage partly matches Huai'an speech"
+    ],
+    "evidence_against": [
+      "'Journey to the West' is not marked as fiction · may be a travelogue",
+      "Wu Cheng'en's collected works contain no relevant Daoist terminology",
+      "No second record among his fellow literati corroborates it",
+      "Scholarship in the 21st century has renewed doubts"
+    ],
+    "pushed_by": "Hu Shi · Lu Xun (1923)"
+  },
+  {
+    "name": "Qiu Chuji",
+    "identity": "Yuan · founder of the Longmen lineage of Quanzhen Daoism",
+    "lifetime": "1148—1227",
+    "status": "Largely refuted · an accretion of Qing commentaries",
+    "type": "rejected",
+    "evidence_for": [
+      "Argued by the Qing-era Proof of the Way in Journey to the West",
+      "Quanzhen terminology pervades the whole book",
+      "Qiu Chuji's westward journey to meet Genghis Khan · resembles a pilgrimage"
+    ],
+    "evidence_against": [
+      "Qiu died in 1227; the Shidetang edition was printed in 1592 — over 300 years apart",
+      "The hundred-chapter text's language is Ming, not early Yuan",
+      "The Travels of Qiu Changchun is actually a travelogue, not a novel"
+    ],
+    "pushed_by": "Wang Xiangxu · Chen Shibin · Liu Yiming (the Inner Alchemy school)"
+  },
+  {
+    "name": "Li Chunfang",
+    "identity": "Ming · Senior Grand Secretary · posthumous title Wending",
+    "lifetime": "1511—1585",
+    "status": "A hypothesis gaining traction in recent years · growing support",
+    "type": "candidate",
+    "evidence_for": [
+      "Master of Huayang Grotto-Heaven — Li Chunfang styled himself 'Man of Huayang Grotto-Heaven'",
+      "Huayang Grotto on Mount Mao · Li Chunfang's ties to the Maoshan Daoist lineage",
+      "His Grand Secretary status closely matches the depth of the court descriptions"
+    ],
+    "evidence_against": [
+      "No direct evidence",
+      "A Grand Secretary would hardly sign a popular novel",
+      "The documentary chain is still incomplete"
+    ],
+    "pushed_by": "Recent scholars (21st century)"
+  },
+  {
+    "name": "Master of Huayang Grotto-Heaven",
+    "identity": "The proofreader credited in the Shidetang edition",
+    "lifetime": "c. Ming Jiajing–Wanli reigns",
+    "status": "Possibly a pseudonym of Li Chunfang · or a publishing-house editor",
+    "type": "candidate",
+    "evidence_for": [
+      "The original attribution in the Shidetang edition · the most direct signature",
+      "May be connected to Li Chunfang · or a pseudonym"
+    ],
+    "evidence_against": [
+      "A 'proofreader,' not an 'author'",
+      "Possibly a pseudonym of a bookseller or editor",
+      "The pseudonym cannot be traced to a real person"
+    ],
+    "pushed_by": "Original attribution in the Shidetang edition (1592)"
+  }
+]

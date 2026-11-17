@@ -1,0 +1,70 @@
+{
+  "concept_name": "Disposition Analysis",
+  "outcome_types": [
+    {
+      "type": "Returned to Owner",
+      "english_name": "Returned to Owner",
+      "count": 18,
+      "percentage": 26.1,
+      "color": "#40619E",
+      "typical_cases": [
+        "Green Ox Demon → Laojun",
+        "Gold Horn & Silver Horn → Laojun",
+        "Yellow Brow → Maitreya"
+      ],
+      "verdict": "Symbolic education · no real punishment"
+    },
+    {
+      "type": "Recruited",
+      "english_name": "Recruited",
+      "count": 8,
+      "percentage": 11.6,
+      "color": "#3A473A",
+      "typical_cases": [
+        "Red Boy → Boy of Wealth",
+        "Black Bear Demon → mountain guardian",
+        "Bull Demon King → surrendered"
+      ],
+      "verdict": "Absorbed into the system · changed identity"
+    },
+    {
+      "type": "Demoted",
+      "english_name": "Demoted",
+      "count": 3,
+      "percentage": 4.3,
+      "color": "#8E7D62",
+      "typical_cases": [
+        "Kui Wood Wolf → fire stoker",
+        "White Dragon Horse → pack horse",
+        "Marshal Tianpeng → Zhu Bajie"
+      ],
+      "verdict": "Light sentence · later reinstated"
+    },
+    {
+      "type": "Killed",
+      "english_name": "Killed",
+      "count": 33,
+      "percentage": 47.8,
+      "color": "#C0392B",
+      "typical_cases": [
+        "White Bone Demon",
+        "Spider Demon",
+        "Tiger Power Immortal",
+        "Scorpion Demon"
+      ],
+      "verdict": "The only ending for wild demons"
+    },
+    {
+      "type": "Escaped/Missing",
+      "english_name": "Escaped",
+      "count": 7,
+      "percentage": 10.1,
+      "color": "#6B6455",
+      "typical_cases": [
+        "Nine-Headed Demon fled to the North Sea",
+        "the son-in-law's faction at Bibo Pond"
+      ],
+      "verdict": "A lucky few escaped"
+    }
+  ]
+}

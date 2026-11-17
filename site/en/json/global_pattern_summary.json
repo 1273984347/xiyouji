@@ -1,0 +1,19 @@
+{
+  "total_pilgrims": 8,
+  "total_journey_nodes": 8,
+  "countries": [
+    "Ancient Greece",
+    "China · Tang",
+    "Ireland",
+    "India",
+    "China · Eastern Jin",
+    "China · Ming",
+    "Italy",
+    "UK"
+  ],
+  "year_range": [
+    "8th century BCE (Odyssey)",
+    "1726 (Gulliver)"
+  ],
+  "common_pattern": "Departure → Revelation → Trials → Temptation → Companions → The Ultimate Trial → Return · the 7-stage hero's journey"
+}

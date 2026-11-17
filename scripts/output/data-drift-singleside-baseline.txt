@@ -1,0 +1,328 @@
+# 数据漂移门禁 · 单侧键基线（W1265 建立·存量 schema 分歧冻结）
+# 生成命令：node scripts/check_data_drift.js --generate-singleside-baseline
+# 格式：<页面 ⇄ JSON> <归一化路径>
+# 语义：基线内不计 FAIL；基线外新增 = FAIL；零容忍：--strict
+81-hardships ⇄ 81-hardships.json $.by_cause_detail
+81-hardships ⇄ 81-hardships.json $.by_difficulty_detail
+81-hardships ⇄ 81-hardships.json $.by_ending_detail
+aesthetics ⇄ aesthetics_summary.json $.avg_fashion_level
+aesthetics ⇄ aesthetics_summary.json $.characters
+aesthetics ⇄ aesthetics_summary.json $.color_categories
+aesthetics ⇄ aesthetics_summary.json $.colors
+aesthetics ⇄ aesthetics_summary.json $.scenes
+aesthetics ⇄ aesthetics_summary.json $.styles
+aesthetics ⇄ aesthetics_summary.json $.summary
+aesthetics ⇄ aesthetics_summary.json $.total_characters
+aesthetics ⇄ aesthetics_summary.json $.total_colors
+aesthetics ⇄ aesthetics_summary.json $.total_scenes
+aesthetics ⇄ aesthetics_summary.json $.total_schools
+aesthetics ⇄ aesthetics_summary.json $.total_stages
+ai-dialogue ⇄ v08_ai_quick_topics.json $.0
+ai-dialogue ⇄ v08_ai_quick_topics.json $.1
+ai-dialogue ⇄ v08_ai_quick_topics.json $.2
+ai-dialogue ⇄ v08_ai_quick_topics.json $.3
+ai-dialogue ⇄ v08_ai_quick_topics.json $.4
+ai-dialogue ⇄ v08_ai_quick_topics.json $.5
+ai-dialogue ⇄ v08_ai_quick_topics.json $.celebrities
+ai-dialogue ⇄ v08_ai_quick_topics.json $.journey_quotes
+ai-dialogue ⇄ v08_ai_quick_topics.json $.quick_topics
+cave-estate ⇄ cave_by_region.json $.0
+cave-estate ⇄ cave_by_region.json $.1
+cave-estate ⇄ cave_by_region.json $.10
+cave-estate ⇄ cave_by_region.json $.11
+cave-estate ⇄ cave_by_region.json $.12
+cave-estate ⇄ cave_by_region.json $.13
+cave-estate ⇄ cave_by_region.json $.14
+cave-estate ⇄ cave_by_region.json $.15
+cave-estate ⇄ cave_by_region.json $.16
+cave-estate ⇄ cave_by_region.json $.17
+cave-estate ⇄ cave_by_region.json $.18
+cave-estate ⇄ cave_by_region.json $.19
+cave-estate ⇄ cave_by_region.json $.2
+cave-estate ⇄ cave_by_region.json $.20
+cave-estate ⇄ cave_by_region.json $.21
+cave-estate ⇄ cave_by_region.json $.3
+cave-estate ⇄ cave_by_region.json $.4
+cave-estate ⇄ cave_by_region.json $.5
+cave-estate ⇄ cave_by_region.json $.6
+cave-estate ⇄ cave_by_region.json $.7
+cave-estate ⇄ cave_by_region.json $.8
+cave-estate ⇄ cave_by_region.json $.9
+cave-estate ⇄ cave_by_region.json $.by_owner_rank
+cave-estate ⇄ cave_by_region.json $.by_region
+cave-estate ⇄ cave_by_region.json $.caves
+cave-estate ⇄ cave_by_region.json $.top_luxury
+ecology ⇄ invasive_species.json $.invasive.invasive_species_list[*].prey_count_note
+magic-system ⇄ magic-system.json $.magic_fire[*].combat_record
+magic-system ⇄ magic-system.json $.magic_fire[*].combat_record
+magic-system ⇄ magic-system.json $.magic_fire[*].combat_record
+magic-system ⇄ magic-system.json $.magic_fire[*].combat_record
+magic-system ⇄ magic-system.json $.magic_fire[*].combat_record
+magic-system ⇄ magic-system.json $.magic_fire[*].kills
+magic-system ⇄ magic-system.json $.magic_fire[*].kills
+magic-system ⇄ magic-system.json $.magic_fire[*].kills
+magic-system ⇄ magic-system.json $.magic_fire[*].kills
+magic-system ⇄ magic-system.json $.magic_fire[*].kills
+monster-background ⇄ monster_background.json $.background
+monster-background ⇄ monster_background.json $.background
+monster-background ⇄ monster_background.json $.background_types
+monster-background ⇄ monster_background.json $.background_types
+monster-background ⇄ monster_background.json $.cases
+monster-background ⇄ monster_background.json $.cases
+monster-background ⇄ monster_background.json $.concept_name
+monster-background ⇄ monster_background.json $.concept_name
+monster-background ⇄ monster_background.json $.insights
+monster-background ⇄ monster_background.json $.insights
+monster-background ⇄ monster_background.json $.outcomes
+monster-background ⇄ monster_background.json $.outcomes
+monster-background ⇄ monster_background.json $.type_stats
+monster-background ⇄ monster_background.json $.type_stats
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].harm_severity
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+monster-sociology ⇄ mount_deserters.json $.mount.desertion_cases[*].owner_influence
+power-resources ⇄ immortality_resources.json $.concept_name
+power-resources ⇄ immortality_resources.json $.definition
+power-resources ⇄ immortality_resources.json $.english_name
+power-resources ⇄ immortality_resources.json $.promotion
+power-resources ⇄ immortality_resources.json $.resource_insights
+power-resources ⇄ immortality_resources.json $.resource_stats
+power-resources ⇄ immortality_resources.json $.resources.0
+power-resources ⇄ immortality_resources.json $.resources.1
+power-resources ⇄ immortality_resources.json $.resources.2
+power-resources ⇄ immortality_resources.json $.resources.3
+power-resources ⇄ immortality_resources.json $.resources.4
+power-resources ⇄ immortality_resources.json $.resources.5
+power-resources ⇄ immortality_resources.json $.resources.6
+power-resources ⇄ immortality_resources.json $.resources.7
+power-resources ⇄ immortality_resources.json $.resources.8
+power-resources ⇄ immortality_resources.json $.resources.9
+power-resources ⇄ immortality_resources.json $.resources.concept_name
+power-resources ⇄ immortality_resources.json $.resources.definition
+power-resources ⇄ immortality_resources.json $.resources.english_name
+power-resources ⇄ immortality_resources.json $.resources.resource_insights
+power-resources ⇄ immortality_resources.json $.resources.resource_stats
+power-resources ⇄ immortality_resources.json $.resources.resources
+power-resources ⇄ immortality_resources.json $.resources.scoring_criteria
+power-resources ⇄ immortality_resources.json $.scoring_criteria
+power-resources ⇄ immortality_resources.json $.structure
+power-resources ⇄ immortality_resources.json $.summary
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.by_cause.Heavenly / Western steeds incarnate
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.by_cause.Inner demonic obstacles
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.by_cause.Tathāgata / Guanyin arranged
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.by_cause.True wild demons
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.cross_cause_ending.Inner demonic obstacles.Killed (no backing)
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.cross_cause_ending.Inner demonic obstacles.Rescued (with backing)
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.cross_cause_ending.Tathāgata / Guanyin arranged.Rescued (with backing)
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.cross_cause_ending.True wild demons.Killed (no backing)
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.cross_cause_ending.True wild demons.Rescued (with backing)
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/81-hardships.html ⇄ 81-hardships.json site/en/81-hardships.html ⇄ 81-hardships.json $.hardships[*].chapter
+site/en/aesthetics.html ⇄ aesthetics_summary.json site/en/aesthetics.html ⇄ aesthetics_summary.json $
+site/en/business-model.html ⇄ organization_comparison.json site/en/business-model.html ⇄ organization_comparison.json $
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.by_region[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.caves[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.caves[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.caves[*]
+site/en/cave-estate.html ⇄ cave-estate.json site/en/cave-estate.html ⇄ cave-estate.json $.caves[*]
+site/en/century-dialogue.html ⇄ v08_triangle_dialogue.json site/en/century-dialogue.html ⇄ v08_triangle_dialogue.json $
+site/en/character-relationship-3d.html ⇄ character-relationship-3d.json site/en/character-relationship-3d.html ⇄ character-relationship-3d.json $
+site/en/cognitive-psychology.html ⇄ availability_heuristic.json site/en/cognitive-psychology.html ⇄ availability_heuristic.json $
+site/en/concept-device.html ⇄ concept_device.json site/en/concept-device.html ⇄ concept_device.json $
+site/en/criticism-history.html ⇄ criticism_critics.json site/en/criticism-history.html ⇄ criticism_critics.json $
+site/en/cross-time-danmaku.html ⇄ v08_celebrity_profiles.json site/en/cross-time-danmaku.html ⇄ v08_celebrity_profiles.json $
+site/en/dialogue-sentiment.html ⇄ dialogue_sentiment.json site/en/dialogue-sentiment.html ⇄ dialogue_sentiment.json $
+site/en/ecology.html ⇄ invasive_species.json site/en/ecology.html ⇄ invasive_species.json $
+site/en/emotional-heatmap.html ⇄ emotional_scholars.json site/en/emotional-heatmap.html ⇄ emotional_scholars.json $
+site/en/famous-time-travel.html ⇄ v08_travel_identities.json site/en/famous-time-travel.html ⇄ v08_travel_identities.json $
+site/en/four-heavenly-kings-artifacts.html ⇄ four-kings-artifacts.json site/en/four-heavenly-kings-artifacts.html ⇄ four-kings-artifacts.json $
+site/en/guanyin-six-roles-network.html ⇄ guanyin-six-roles.json site/en/guanyin-six-roles-network.html ⇄ guanyin-six-roles.json $
+site/en/heaven-power-network.html ⇄ heaven-hierarchy.json site/en/heaven-power-network.html ⇄ heaven-hierarchy.json $
+site/en/intertextuality-network.html ⇄ intertextuality-network.json site/en/intertextuality-network.html ⇄ intertextuality-network.json $
+site/en/jurisprudence.html ⇄ sentencing_economics.json site/en/jurisprudence.html ⇄ sentencing_economics.json $
+site/en/karma-reincarnation.html ⇄ karma_life_death_registry.json site/en/karma-reincarnation.html ⇄ karma_life_death_registry.json $
+site/en/linguistics.html ⇄ incantation_linguistics.json site/en/linguistics.html ⇄ incantation_linguistics.json $
+site/en/magic-system.html ⇄ magic_system.json site/en/magic-system.html ⇄ magic_system.json $
+site/en/material-archaeology.html ⇄ artifact_materials.json site/en/material-archaeology.html ⇄ artifact_materials.json $
+site/en/ming-political-thought-comparison.html ⇄ ming-political-thought-comparison.json site/en/ming-political-thought-comparison.html ⇄ ming-political-thought-comparison.json $
+site/en/monster-capability-radar.html ⇄ monster-capability-radar.json site/en/monster-capability-radar.html ⇄ monster-capability-radar.json $.sankey
+site/en/monster-ecology-network.html ⇄ monster-ecology-network.json site/en/monster-ecology-network.html ⇄ monster-ecology-network.json $.sankey
+site/en/monster-female-network.html ⇄ monster-female-network.json site/en/monster-female-network.html ⇄ monster-female-network.json $
+site/en/monster-hierarchy-network.html ⇄ monster-tiers.json site/en/monster-hierarchy-network.html ⇄ monster-tiers.json $
+site/en/monster-sociology.html ⇄ monster_crime_patterns.json site/en/monster-sociology.html ⇄ monster_crime_patterns.json $
+site/en/monster-victims-network.html ⇄ monster-victims.json site/en/monster-victims-network.html ⇄ monster-victims.json $
+site/en/music-structure.html ⇄ music_sounds.json site/en/music-structure.html ⇄ music_sounds.json $
+site/en/narratology-12d-network.html ⇄ narratology-12d-network.json site/en/narratology-12d-network.html ⇄ narratology-12d-network.json $
+site/en/philosophy.html ⇄ mind_monkey_curve.json site/en/philosophy.html ⇄ mind_monkey_curve.json $
+site/en/power-resources.html ⇄ power_structure.json site/en/power-resources.html ⇄ power_structure.json $
+site/en/relationships.html ⇄ faction_distribution.json site/en/relationships.html ⇄ faction_distribution.json $.artifact
+site/en/relationships.html ⇄ faction_distribution.json site/en/relationships.html ⇄ faction_distribution.json $.belbin
+site/en/relationships.html ⇄ faction_distribution.json site/en/relationships.html ⇄ faction_distribution.json $.cooccurrence
+site/en/relationships.html ⇄ faction_distribution.json site/en/relationships.html ⇄ faction_distribution.json $.cooccurrence_timeline
+site/en/relationships.html ⇄ faction_distribution.json site/en/relationships.html ⇄ faction_distribution.json $.faction
+site/en/relationships.html ⇄ faction_distribution.json site/en/relationships.html ⇄ faction_distribution.json $.rescue
+site/en/risk-project.html ⇄ risk_assessment.json site/en/risk-project.html ⇄ risk_assessment.json $
+site/en/six-senses-narratology-network.html ⇄ six-senses-narratology.json site/en/six-senses-narratology-network.html ⇄ six-senses-narratology.json $
+site/en/text-evolution.html ⇄ versions_tree.json site/en/text-evolution.html ⇄ versions_tree.json $
+site/en/theological-intervention-network.html ⇄ theological-intervention-network.json site/en/theological-intervention-network.html ⇄ theological-intervention-network.json $.sankey
+site/en/underworld-power-network.html ⇄ underworld-hierarchy.json site/en/underworld-power-network.html ⇄ underworld-hierarchy.json $
+timeline ⇄ timeline.json $.0
+timeline ⇄ timeline.json $.1
+timeline ⇄ timeline.json $.10
+timeline ⇄ timeline.json $.11
+timeline ⇄ timeline.json $.12
+timeline ⇄ timeline.json $.13
+timeline ⇄ timeline.json $.14
+timeline ⇄ timeline.json $.15
+timeline ⇄ timeline.json $.16
+timeline ⇄ timeline.json $.17
+timeline ⇄ timeline.json $.18
+timeline ⇄ timeline.json $.19
+timeline ⇄ timeline.json $.2
+timeline ⇄ timeline.json $.20
+timeline ⇄ timeline.json $.21
+timeline ⇄ timeline.json $.22
+timeline ⇄ timeline.json $.23
+timeline ⇄ timeline.json $.24
+timeline ⇄ timeline.json $.25
+timeline ⇄ timeline.json $.26
+timeline ⇄ timeline.json $.27
+timeline ⇄ timeline.json $.28
+timeline ⇄ timeline.json $.29
+timeline ⇄ timeline.json $.3
+timeline ⇄ timeline.json $.30
+timeline ⇄ timeline.json $.31
+timeline ⇄ timeline.json $.32
+timeline ⇄ timeline.json $.33
+timeline ⇄ timeline.json $.34
+timeline ⇄ timeline.json $.35
+timeline ⇄ timeline.json $.4
+timeline ⇄ timeline.json $.5
+timeline ⇄ timeline.json $.6
+timeline ⇄ timeline.json $.7
+timeline ⇄ timeline.json $.8
+timeline ⇄ timeline.json $.9
+timeline ⇄ timeline.json $.timeline
+visual-art ⇄ visual_art_summary.json $.deepest_valley
+visual-art ⇄ visual_art_summary.json $.heart_sutra_sculpture
+visual-art ⇄ visual_art_summary.json $.max_wave_amplitude
+visual-art ⇄ visual_art_summary.json $.scent_categories
+visual-art ⇄ visual_art_summary.json $.scent_locations
+visual-art ⇄ visual_art_summary.json $.scent_map
+visual-art ⇄ visual_art_summary.json $.sutra_chantings
+visual-art ⇄ visual_art_summary.json $.visual_art_summary
+wukong-tangseng-benchmark ⇄ edge-wukong-tangseng.json $.events[*].quote_note
+wukong-tangseng-benchmark ⇄ edge-wukong-tangseng.json $.events[*].quote_note
+wukong-tangseng-benchmark ⇄ edge-wukong-tangseng.json $.events[*].quote_note

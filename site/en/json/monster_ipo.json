@@ -1,0 +1,236 @@
+[
+  {
+    "company_name": "Lion Camel Ridge Group",
+    "ticker": "STD:LION",
+    "ipo_year": "Zhenguan Year 19",
+    "ceo": "Azure Lion",
+    "cto": "Yellow-Toothed Elephant",
+    "cmo": "Golden-Winged Great Peng (Tathāgata’s uncle, powerful backing)",
+    "core_business": "Human-body processing and redistribution",
+    "business_model": "Monopolizes an 800-li region around Lion Camel Ridge · collects tolls · processes human bodies · trains demon troops",
+    "market_cap": "about 47,000 lives/year",
+    "revenue_source": [
+      "Tolls (mortal merchants)",
+      "Human-body processing (cannibalism)",
+      "Demon troop mercenaries (supplied to other mountains)",
+      "Weapon forging (melting down mortal weapons)"
+    ],
+    "competitive_advantage": [
+      "Three demons allied · top-tier combat power",
+      "The Golden-Winged Great Peng is Tathāgata’s uncle · strong political backing",
+      "Lion Camel Cave is impregnable · SSS defense rating",
+      "Already monopolizes an 800-li region · a regional oligopoly"
+    ],
+    "risk_factors": [
+      "The pilgrimage party is about to arrive (P0 risk)",
+      "Though the Golden-Winged Great Peng is Tathāgata’s uncle, Tathāgata enforces the law strictly",
+      "The human-body processing business violates Heavenly law and may be shut down",
+      "Demon troop training is costly with a long training cycle"
+    ],
+    "financials": {
+      "year_revenue": "47,000 lives",
+      "year_profit": "30,000 lives (64% net margin)",
+      "cash_reserve": "800-li territory",
+      "debt_ratio": "30%",
+      "employee_count": 48000,
+      "subsidiaries": [
+        "Little Wind Scout Company",
+        "Lion Camel Cave Guard Battalion",
+        "Steamer Processing Workshop"
+      ]
+    },
+    "use_of_proceeds": [
+      "Expand troops and prepare for war · respond to the pilgrimage party",
+      "Expand the steamer processing workshop · increase daily throughput",
+      "Bribe Heavenly officials · seek political asylum",
+      "Develop new magic treasures · counter Wukong"
+    ],
+    "ipo_outcome": "Failed — destroyed by the pilgrimage party; the three demons were taken away by Manjushri, Samantabhadra, and Tathāgata; the group went bankrupt and was liquidated.",
+    "investor_lesson": "Do not invest in demon enterprises that violate Heavenly law, especially those at risk from the pilgrimage party."
+  },
+  {
+    "company_name": "Fire Cloud Cave Foods",
+    "ticker": "STD:FIRE",
+    "ipo_year": "Zhenguan Year 14",
+    "ceo": "Red Boy (the Holy Infant King)",
+    "cto": "None",
+    "cmo": "None",
+    "core_business": "Samadhi Fire processing · fire-attribute food R&D",
+    "business_model": "Uses the Samadhi Fire to refine pills, forge weapons, and process food, radiating over 600 li of Mount Hao.",
+    "market_cap": "about 8,000 lives/year",
+    "revenue_source": [
+      "Samadhi Fire pill refining (immortal pills)",
+      "Fire-attribute weapon forging",
+      "Mountain and land god offerings (forced)",
+      "Kidnapping and extortion of mortal children"
+    ],
+    "competitive_advantage": [
+      "Exclusive patent on the Samadhi Fire · cannot be replicated",
+      "Special advantage against Wukong, who fears smoke",
+      "Parents are the Bull Demon King and Princess Iron Fan · powerful family influence"
+    ],
+    "risk_factors": [
+      "The pilgrimage party is about to arrive (P0)",
+      "Estranged parents · aid may not arrive in time",
+      "Though the Samadhi Fire is powerful, it is countered by Guanyin’s Samadhi Fire",
+      "Single-person management team · CEO Red Boy is young (about 300 years old)"
+    ],
+    "financials": {
+      "year_revenue": "8,000 lives",
+      "year_profit": "6,000 lives",
+      "cash_reserve": "600 li of Mount Hao",
+      "debt_ratio": "20%",
+      "employee_count": 200,
+      "subsidiaries": [
+        "Mount Hao Guard Battalion",
+        "Pill Refining Workshop",
+        "Fire Cloud Spear Factory"
+      ]
+    },
+    "use_of_proceeds": [
+      "Expand the pill refining workshop",
+      "Develop new fire-attribute magic treasures",
+      "Bribe the Bull Demon King · seek family protection"
+    ],
+    "ipo_outcome": "Failed — Red Boy was taken in by Guanyin as the Boy of Sudhana (Shancai); the group’s assets were liquidated.",
+    "investor_lesson": "Demon enterprises with a single, young management team are extremely risky — do not blindly trust family power."
+  },
+  {
+    "company_name": "Tongtian River Transport",
+    "ticker": "STD:RIVER",
+    "ipo_year": "Zhenguan Year 17",
+    "ceo": "Linggan Great King (the Goldfish Demon)",
+    "cto": "None",
+    "cmo": "None",
+    "core_business": "Tongtian River ferry service · boy-and-girl sacrificial trade",
+    "business_model": "Monopolizes Tongtian River ferry service and forces Chen Village to offer up one boy and one girl each year.",
+    "market_cap": "about 200 lives/year",
+    "revenue_source": [
+      "Ferry fees (mortal merchants)",
+      "Boy-and-girl offerings (one pair per year)",
+      "Aquatic clan tribute (fish and shrimp)"
+    ],
+    "competitive_advantage": [
+      "Tongtian River ferry monopoly",
+      "Escaped from Guanyin’s lotus pond · strong backing",
+      "Strong in water combat, weak on land"
+    ],
+    "risk_factors": [
+      "The pilgrimage party is about to arrive (P0)",
+      "Though Guanyin’s backing is strong, Guanyin enforces the law strictly",
+      "The boy-and-girl trade violates Heavenly law",
+      "Business halts during winter ice"
+    ],
+    "financials": {
+      "year_revenue": "200 lives",
+      "year_profit": "150 lives",
+      "cash_reserve": "800 li of the Tongtian River",
+      "debt_ratio": "10%",
+      "employee_count": 50,
+      "subsidiaries": [
+        "Aquatic Clan Scout Company",
+        "Frozen-Period Guard Team"
+      ]
+    },
+    "use_of_proceeds": [
+      "Expand the underwater cave residence",
+      "Develop ice-breaking magic treasures",
+      "Bribe the Heavenly water gods"
+    ],
+    "ipo_outcome": "Failed — the Linggan Great King was taken away by Guanyin; the group went bankrupt.",
+    "investor_lesson": "Demon enterprises dependent on a single trade good (boy-and-girl offerings) are extremely risky — do not invest in highly seasonal demon enterprises."
+  },
+  {
+    "company_name": "Bottomless Cave Real Estate",
+    "ticker": "STD:MOUSE",
+    "ipo_year": "Zhenguan Year 22",
+    "ceo": "Golden-Nosed White-Haired Mouse Demon (the Half-Guanyin)",
+    "cto": "None",
+    "cmo": "None",
+    "core_business": "Bottomless Cave real estate development · forced-marriage service",
+    "business_model": "Monopolizes the Bottomless Cave, abducts Tang Sanzang to force marriage, seeking immortality.",
+    "market_cap": "1 Tang Sanzang (theoretically priceless)",
+    "revenue_source": [
+      "Bottomless Cave real estate rental",
+      "Forced marriage to Tang Sanzang (potential immortality gains)",
+      "Plunder of mortal children"
+    ],
+    "competitive_advantage": [
+      "The Bottomless Cave is unfathomably deep · top-tier defense",
+      "Adopted daughter of the Pagoda-Bearing Heavenly King Li Jing · strong backing",
+      "First-rate abduction ability"
+    ],
+    "risk_factors": [
+      "The pilgrimage party is about to arrive (P0)",
+      "Forcing marriage on Tang Sanzang violates Heavenly law",
+      "Adoptive father Li Jing, the Pagoda-Bearing Heavenly King, enforces the law strictly",
+      "Single business model · over-reliant on Tang Sanzang"
+    ],
+    "financials": {
+      "year_revenue": "100 lives",
+      "year_profit": "80 lives",
+      "cash_reserve": "Bottomless Cave (unfathomably deep)",
+      "debt_ratio": "15%",
+      "employee_count": 30,
+      "subsidiaries": [
+        "Bottomless Cave Guard Battalion",
+        "Forced-Marriage Planning Department"
+      ]
+    },
+    "use_of_proceeds": [
+      "Expand the Bottomless Cave",
+      "Develop abduction magic treasures",
+      "Bribe adoptive father Li the Heavenly King"
+    ],
+    "ipo_outcome": "Failed — taken away by the Pagoda-Bearing Heavenly King Li Jing; the group went bankrupt.",
+    "investor_lesson": "Demon enterprises dependent on a single customer (Tang Sanzang) are extremely risky — even adoptive-father backing is unreliable."
+  },
+  {
+    "company_name": "Flaming Mountains Energy",
+    "ticker": "STD:FLAME",
+    "ipo_year": "Zhenguan Year 25",
+    "ceo": "Bull Demon King (major shareholder)",
+    "cto": "Princess Iron Fan (CTO · holder of the Banana Leaf Fan)",
+    "cmo": "Jade-Faced Fox (CMO · public relations)",
+    "core_business": "Flaming Mountains thermal energy development · Banana Leaf Fan fire-extinguishing service",
+    "business_model": "Monopolizes 800 li of the Flaming Mountains · provides fire-extinguishing service · collects Banana Leaf Fan rental fees.",
+    "market_cap": "800-li thermal energy resources",
+    "revenue_source": [
+      "Flaming Mountains tolls",
+      "Banana Leaf Fan fire-extinguishing rent (once a year)",
+      "Princess Iron Fan’s mansion hospitality",
+      "Bull Demon King’s violent services (contracted enforcers)"
+    ],
+    "competitive_advantage": [
+      "Exclusive possession of the Banana Leaf Fan · cannot be replicated",
+      "The Bull Demon King is first of the Seven Great Sages · top-tier combat power",
+      "The 800-li Flaming Mountains are a natural barrier",
+      "Husband-and-wife management team (CEO + CTO)"
+    ],
+    "risk_factors": [
+      "The pilgrimage party is about to arrive (P0)",
+      "Broken marriage · CEO and CTO infighting",
+      "The Bull Demon King’s concubine Jade-Faced Fox distracts from management",
+      "Risk of the Banana Leaf Fan being stolen (Wukong once swindled it)"
+    ],
+    "financials": {
+      "year_revenue": "5,000 lives + 5,000 taels of gold",
+      "year_profit": "4,000 lives + 4,000 taels of gold",
+      "cash_reserve": "800 li of the Flaming Mountains + the Banana Leaf Fan",
+      "debt_ratio": "40%",
+      "employee_count": 500,
+      "subsidiaries": [
+        "Flaming Mountains Guard Battalion",
+        "Banana Leaf Fan Rental Department",
+        "Green Cloud Mountain Guesthouse"
+      ]
+    },
+    "use_of_proceeds": [
+      "Develop new fire-extinguishing magic treasures",
+      "Resolve the couple’s infighting (acquire the Jade-Faced Fox)",
+      "Expand troops and prepare for war"
+    ],
+    "ipo_outcome": "Failed — the Bull Demon King was subdued by Nezha; the Banana Leaf Fan was lent out to extinguish the fire; the group went bankrupt.",
+    "investor_lesson": "A husband-and-wife management team carries extremely high infighting risk — do not invest in demon enterprises dependent on a single magic treasure."
+  }
+]

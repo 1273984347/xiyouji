@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0r28nOCMyIJwQ2Evqi4fs3OyGxI1z0xux4sCUPPGZHI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-l1wlsq/yrV9DbSRbzFh3sWzz68LIRVF87ABm7HLpY88='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>一条边的完整档案：唐僧 → 孙悟空 · 详解西游记</title>
@@ -2105,7 +2105,7 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
         <!-- chart-degrade: stacked -->
         <div id="dataSource" class="notice">
             <div class="cite-block" id="citeBox">
-                数据源（页面内嵌数据 EMBEDDED_DATA 快照）：<a href="../../dataset/edge-wukong-tangseng.json" download>dataset/edge-wukong-tangseng.json</a>（数据版本 v0.1.0 · 快照 2026-11-06） · 编码规则：<a href="../../dataset/CODING.md">dataset/CODING.md</a> · 引文工具：<code>scripts/_cite_probe.py</code> · 生成/校验：<code>scripts/check_dataset_provenance.py</code>（口径：9 事件、引文回目区间、max 权重）。直接引文只使用探针返回的精确子串；转述用 <code>summary</code>，不冒充原文。 <a href="../../dataset/edge-wukong-tangseng.json" download>下载 JSON</a>
+                数据源（页面内嵌数据 EMBEDDED_DATA 快照）：<a href="../data/json/edge-wukong-tangseng.json" download>data/json/edge-wukong-tangseng.json</a>（数据版本 v0.1.0 · 快照 2026-11-06） · 编码规则：<a href="../../dataset/CODING.md">dataset/CODING.md</a> · 引文工具：<code>scripts/_cite_probe.py</code> · 生成/校验：<code>scripts/check_dataset_provenance.py</code>（口径：9 事件、引文回目区间、max 权重）。直接引文只使用探针返回的精确子串；转述用 <code>summary</code>，不冒充原文。 <a href="../data/json/edge-wukong-tangseng.json" download>下载 JSON</a>
                 <details class="cite-details">
                     <summary>引用格式</summary>
                     <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 一条边的完整档案：唐僧 → 孙悟空. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/wukong-tangseng-benchmark.html</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
@@ -2688,7 +2688,7 @@ html[data-theme="dark"] .chart-block svg .chart-axis .tick text {
 
     async function loadData() {
         try {
-            const response = await fetch('../../dataset/edge-wukong-tangseng.json');
+            const response = await fetch('../data/json/edge-wukong-tangseng.json');
             if (response.ok) return await response.json();
         } catch (error) {
             console.info('[INFO] 使用嵌入数据：', error.message);

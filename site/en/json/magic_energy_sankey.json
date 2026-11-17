@@ -1,0 +1,265 @@
+{
+  "nodes": [
+    {
+      "name": "Sun-Moon Essence",
+      "category": "Source",
+      "value": 100
+    },
+    {
+      "name": "Golden Elixir · Laojun",
+      "category": "Source",
+      "value": 90
+    },
+    {
+      "name": "Peaches of Immortality · Queen Mother",
+      "category": "Source",
+      "value": 95
+    },
+    {
+      "name": "Ginseng Fruit · Zhenyuan",
+      "category": "Source",
+      "value": 98
+    },
+    {
+      "name": "Meditation Merit · Tathagata",
+      "category": "Source",
+      "value": 85
+    },
+    {
+      "name": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+      "category": "Transit"
+    },
+    {
+      "name": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+      "category": "Transit"
+    },
+    {
+      "name": "Demon Immortals (Wukong · Bull King · Peng)",
+      "category": "Transit"
+    },
+    {
+      "name": "Mortal Immortals (the pilgrims)",
+      "category": "Transit"
+    },
+    {
+      "name": "Longevity Extension",
+      "category": "Consumption"
+    },
+    {
+      "name": "Transformations · Seventy-Two Changes",
+      "category": "Consumption"
+    },
+    {
+      "name": "Cloud-Soaring · Somersault Cloud",
+      "category": "Consumption"
+    },
+    {
+      "name": "Treasure Powering",
+      "category": "Consumption"
+    },
+    {
+      "name": "Combat Spells",
+      "category": "Consumption"
+    }
+  ],
+  "links": [
+    {
+      "source": "Sun-Moon Essence",
+      "target": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+      "value": 30
+    },
+    {
+      "source": "Sun-Moon Essence",
+      "target": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+      "value": 25
+    },
+    {
+      "source": "Sun-Moon Essence",
+      "target": "Demon Immortals (Wukong · Bull King · Peng)",
+      "value": 45
+    },
+    {
+      "source": "Golden Elixir · Laojun",
+      "target": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+      "value": 50
+    },
+    {
+      "source": "Golden Elixir · Laojun",
+      "target": "Demon Immortals (Wukong · Bull King · Peng)",
+      "value": 40
+    },
+    {
+      "source": "Peaches of Immortality · Queen Mother",
+      "target": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+      "value": 60
+    },
+    {
+      "source": "Peaches of Immortality · Queen Mother",
+      "target": "Demon Immortals (Wukong · Bull King · Peng)",
+      "value": 35
+    },
+    {
+      "source": "Ginseng Fruit · Zhenyuan",
+      "target": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+      "value": 60
+    },
+    {
+      "source": "Ginseng Fruit · Zhenyuan",
+      "target": "Mortal Immortals (the pilgrims)",
+      "value": 38
+    },
+    {
+      "source": "Meditation Merit · Tathagata",
+      "target": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+      "value": 35
+    },
+    {
+      "source": "Meditation Merit · Tathagata",
+      "target": "Mortal Immortals (the pilgrims)",
+      "value": 50
+    },
+    {
+      "source": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+      "target": "Longevity Extension",
+      "value": 90
+    },
+    {
+      "source": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+      "target": "Treasure Powering",
+      "value": 60
+    },
+    {
+      "source": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+      "target": "Combat Spells",
+      "value": 25
+    },
+    {
+      "source": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+      "target": "Longevity Extension",
+      "value": 70
+    },
+    {
+      "source": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+      "target": "Combat Spells",
+      "value": 15
+    },
+    {
+      "source": "Demon Immortals (Wukong · Bull King · Peng)",
+      "target": "Transformations · Seventy-Two Changes",
+      "value": 80
+    },
+    {
+      "source": "Demon Immortals (Wukong · Bull King · Peng)",
+      "target": "Cloud-Soaring · Somersault Cloud",
+      "value": 40
+    },
+    {
+      "source": "Demon Immortals (Wukong · Bull King · Peng)",
+      "target": "Combat Spells",
+      "value": 50
+    },
+    {
+      "source": "Mortal Immortals (the pilgrims)",
+      "target": "Longevity Extension",
+      "value": 60
+    },
+    {
+      "source": "Mortal Immortals (the pilgrims)",
+      "target": "Combat Spells",
+      "value": 28
+    }
+  ],
+  "energy_law": "First Law of Mana Conservation: energy is never destroyed, only flowing among the three states of 'source-transit-consumption'. Source production is constant; those who over-consume must be replenished from the source, or their mana runs dry.",
+  "tianting_budget": {
+    "title": "Heavenly Court Annual Energy Budget",
+    "revenue": [
+      {
+        "source": "Peach Orchard",
+        "amount": 9000,
+        "unit": "Peach Energy Units",
+        "note": "9,000 peach trees, in three grades — early, middle and late"
+      },
+      {
+        "source": "Golden Elixir of Tushita Palace",
+        "amount": 720,
+        "unit": "Golden Elixir",
+        "note": "One furnace a day; annual output 360 × 2"
+      },
+      {
+        "source": "Ginseng Fruit of Wuzhuang Monastery",
+        "amount": 30,
+        "unit": "Ginseng Fruit",
+        "note": "Ripens once every 30 years, 30 fruits"
+      },
+      {
+        "source": "Incense Offerings of the Mortal World",
+        "amount": 99999,
+        "unit": "Incense Units",
+        "note": "Tribute from the whole realm"
+      }
+    ],
+    "expense": [
+      {
+        "target": "Immortals' Stipends · Longevity Extension",
+        "amount": 5000,
+        "unit": "Peach Units"
+      },
+      {
+        "target": "Heavenly Soldiers' Upkeep",
+        "amount": 1500,
+        "unit": "Peach Units"
+      },
+      {
+        "target": "Treasure Maintenance",
+        "amount": 200,
+        "unit": "Golden Elixir"
+      },
+      {
+        "target": "Heavenly Court Operations",
+        "amount": 80000,
+        "unit": "Incense Units"
+      }
+    ],
+    "surplus": 9249,
+    "surplus_unit": "Peach Units",
+    "note": "Can retain a surplus of 9,249 Peach Energy Units in reserve (about 92.49%) — showing the Heavenly Court is a mana-surplus institution; whoever controls the peach resource controls power."
+  },
+  "top_consumers": [
+    {
+      "consumer": "Sun Wukong",
+      "consumption_per_act": 80,
+      "act": "Seventy-Two Transformations",
+      "note": "The larger the transformed object, the greater the energy cost"
+    },
+    {
+      "consumer": "Sun Wukong",
+      "consumption_per_act": 60,
+      "act": "Somersault Cloud · one somersault",
+      "note": "High-speed displacement of 108,000 li"
+    },
+    {
+      "consumer": "Erlang Shen",
+      "consumption_per_act": 75,
+      "act": "Third Eye Manifestation · transformation tracking",
+      "note": "The third eye drains energy continuously"
+    },
+    {
+      "consumer": "Bull Demon King",
+      "consumption_per_act": 90,
+      "act": "Revealing true form · white bull",
+      "note": "A thousand-zhang white bull · mana surge"
+    },
+    {
+      "consumer": "Peng",
+      "consumption_per_act": 70,
+      "act": "Yin-Yang Two-Qi Vase powering",
+      "note": "A causal-law weapon · enormous energy cost"
+    },
+    {
+      "consumer": "Guanyin",
+      "consumption_per_act": 95,
+      "act": "Vase willow water · quenching Samadhi Fire",
+      "note": "High-order divine power · one decisive strike"
+    }
+  ]
+}

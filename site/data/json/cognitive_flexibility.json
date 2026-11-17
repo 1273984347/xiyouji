@@ -1,0 +1,96 @@
+{
+  "concept_name": "团队认知灵活性雷达图",
+  "english_name": "Team Cognitive Flexibility Radar",
+  "cognitive_definition": "认知灵活性（cognitive flexibility）：同时维持多种假设·并能根据新信息迅速切换的能力",
+  "core_case": "悟空能同时维持'这是妖怪'和'这是凡人'两种假设并迅速切换·而八戒只能锚定在'这是美女'一种假设上",
+  "team_members": [
+    {
+      "character": "孙悟空",
+      "cognitive_profile": "高灵活性·双假设切换",
+      "dimensions": {
+        "假设多样性": 9,
+        "切换速度": 10,
+        "信息整合": 9,
+        "认知抑制": 8,
+        "经验迁移": 10,
+        "抽象思维": 8
+      },
+      "flexibility_score": 9,
+      "key_strength": "火眼金睛 + 七十二变·同时维持多重假设",
+      "key_weakness": "过度自信·偶尔忽略凡人可能",
+      "representative_case": "三打白骨精·同时维持'是妖'与'似人'两个假设"
+    },
+    {
+      "character": "唐僧",
+      "cognitive_profile": "低灵活性·锚定单一假设",
+      "dimensions": {
+        "假设多样性": 3,
+        "切换速度": 4,
+        "信息整合": 5,
+        "认知抑制": 3,
+        "经验迁移": 4,
+        "抽象思维": 7
+      },
+      "flexibility_score": 4.3,
+      "key_strength": "信念坚定·不为表象所动",
+      "key_weakness": "过度锚定'众生皆善'假设·忽略反证",
+      "representative_case": "三打白骨精·死守'是凡人'假设"
+    },
+    {
+      "character": "猪八戒",
+      "cognitive_profile": "低灵活性·锚定本能假设",
+      "dimensions": {
+        "假设多样性": 4,
+        "切换速度": 3,
+        "信息整合": 4,
+        "认知抑制": 2,
+        "经验迁移": 5,
+        "抽象思维": 3
+      },
+      "flexibility_score": 3.5,
+      "key_strength": "本能敏锐·能感知危险",
+      "key_weakness": "锚定'美女/美食'假设·无法切换",
+      "representative_case": "四圣试禅心·死守'美女'假设"
+    },
+    {
+      "character": "沙悟净",
+      "cognitive_profile": "中灵活性·跟随型",
+      "dimensions": {
+        "假设多样性": 5,
+        "切换速度": 5,
+        "信息整合": 5,
+        "认知抑制": 6,
+        "经验迁移": 5,
+        "抽象思维": 4
+      },
+      "flexibility_score": 5,
+      "key_strength": "稳定·跟随主流判断",
+      "key_weakness": "缺乏独立判断·过度依赖悟空",
+      "representative_case": "师父被妖怪抓走了——跟随型报告"
+    },
+    {
+      "character": "白龙马",
+      "cognitive_profile": "关键时刻高灵活性",
+      "dimensions": {
+        "假设多样性": 6,
+        "切换速度": 8,
+        "信息整合": 6,
+        "认知抑制": 7,
+        "经验迁移": 5,
+        "抽象思维": 5
+      },
+      "flexibility_score": 6.2,
+      "key_strength": "关键时刻能切换·果断行动",
+      "key_weakness": "平时不发言·缺乏主动判断",
+      "representative_case": "黄袍怪事件·果断化身为宫女刺杀"
+    }
+  ],
+  "team_avg_flexibility": 5.6,
+  "flexibility_insights": [
+    "悟空灵活性 9.0·是团队的认知核心",
+    "八戒灵活性 3.5·最低·是团队的认知短板",
+    "团队整体灵活性 5.6·依赖悟空维持",
+    "唐僧信念坚定但灵活性低·是认知冲突的根源",
+    "白龙马平时沉默·关键时刻能切换·是隐性认知资源"
+  ]
+}

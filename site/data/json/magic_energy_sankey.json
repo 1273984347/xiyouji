@@ -1,0 +1,265 @@
+{
+  "nodes": [
+    {
+      "name": "日月精华",
+      "category": "源点",
+      "value": 100
+    },
+    {
+      "name": "金丹·老君",
+      "category": "源点",
+      "value": 90
+    },
+    {
+      "name": "蟠桃·王母",
+      "category": "源点",
+      "value": 95
+    },
+    {
+      "name": "人参果·镇元",
+      "category": "源点",
+      "value": 98
+    },
+    {
+      "name": "禅修功德·如来",
+      "category": "源点",
+      "value": 85
+    },
+    {
+      "name": "天仙（玉帝·老君·如来）",
+      "category": "中转"
+    },
+    {
+      "name": "地仙（镇元·五庄观）",
+      "category": "中转"
+    },
+    {
+      "name": "妖仙（悟空·牛王·大鹏）",
+      "category": "中转"
+    },
+    {
+      "name": "凡仙（取经人）",
+      "category": "中转"
+    },
+    {
+      "name": "长生延寿",
+      "category": "消耗"
+    },
+    {
+      "name": "变化·七十二变",
+      "category": "消耗"
+    },
+    {
+      "name": "腾云·筋斗云",
+      "category": "消耗"
+    },
+    {
+      "name": "法宝驱动",
+      "category": "消耗"
+    },
+    {
+      "name": "战斗法术",
+      "category": "消耗"
+    }
+  ],
+  "links": [
+    {
+      "source": "日月精华",
+      "target": "天仙（玉帝·老君·如来）",
+      "value": 30
+    },
+    {
+      "source": "日月精华",
+      "target": "地仙（镇元·五庄观）",
+      "value": 25
+    },
+    {
+      "source": "日月精华",
+      "target": "妖仙（悟空·牛王·大鹏）",
+      "value": 45
+    },
+    {
+      "source": "金丹·老君",
+      "target": "天仙（玉帝·老君·如来）",
+      "value": 50
+    },
+    {
+      "source": "金丹·老君",
+      "target": "妖仙（悟空·牛王·大鹏）",
+      "value": 40
+    },
+    {
+      "source": "蟠桃·王母",
+      "target": "天仙（玉帝·老君·如来）",
+      "value": 60
+    },
+    {
+      "source": "蟠桃·王母",
+      "target": "妖仙（悟空·牛王·大鹏）",
+      "value": 35
+    },
+    {
+      "source": "人参果·镇元",
+      "target": "地仙（镇元·五庄观）",
+      "value": 60
+    },
+    {
+      "source": "人参果·镇元",
+      "target": "凡仙（取经人）",
+      "value": 38
+    },
+    {
+      "source": "禅修功德·如来",
+      "target": "天仙（玉帝·老君·如来）",
+      "value": 35
+    },
+    {
+      "source": "禅修功德·如来",
+      "target": "凡仙（取经人）",
+      "value": 50
+    },
+    {
+      "source": "天仙（玉帝·老君·如来）",
+      "target": "长生延寿",
+      "value": 90
+    },
+    {
+      "source": "天仙（玉帝·老君·如来）",
+      "target": "法宝驱动",
+      "value": 60
+    },
+    {
+      "source": "天仙（玉帝·老君·如来）",
+      "target": "战斗法术",
+      "value": 25
+    },
+    {
+      "source": "地仙（镇元·五庄观）",
+      "target": "长生延寿",
+      "value": 70
+    },
+    {
+      "source": "地仙（镇元·五庄观）",
+      "target": "战斗法术",
+      "value": 15
+    },
+    {
+      "source": "妖仙（悟空·牛王·大鹏）",
+      "target": "变化·七十二变",
+      "value": 80
+    },
+    {
+      "source": "妖仙（悟空·牛王·大鹏）",
+      "target": "腾云·筋斗云",
+      "value": 40
+    },
+    {
+      "source": "妖仙（悟空·牛王·大鹏）",
+      "target": "战斗法术",
+      "value": 50
+    },
+    {
+      "source": "凡仙（取经人）",
+      "target": "长生延寿",
+      "value": 60
+    },
+    {
+      "source": "凡仙（取经人）",
+      "target": "战斗法术",
+      "value": 28
+    }
+  ],
+  "energy_law": "法力守恒第一律：能量不灭，只在'源-中转-耗'三态间流转。源点产能恒定，过度消耗者须自源点补给，否则法力枯竭。",
+  "tianting_budget": {
+    "title": "天庭年度能量预算案",
+    "revenue": [
+      {
+        "source": "蟠桃园",
+        "amount": 9000,
+        "unit": "蟠桃能量单位",
+        "note": "9000株桃树，前中后三等"
+      },
+      {
+        "source": "兜率宫金丹",
+        "amount": 720,
+        "unit": "金丹",
+        "note": "一日一炉，年度产360×2"
+      },
+      {
+        "source": "五庄观人参果",
+        "amount": 30,
+        "unit": "人参果",
+        "note": "30年一熟30枚"
+      },
+      {
+        "source": "人间祭祀香火",
+        "amount": 99999,
+        "unit": "香火单位",
+        "note": "全域贡品"
+      }
+    ],
+    "expense": [
+      {
+        "target": "诸仙俸禄·长生延寿",
+        "amount": 5000,
+        "unit": "蟠桃单位"
+      },
+      {
+        "target": "天兵天将维护",
+        "amount": 1500,
+        "unit": "蟠桃单位"
+      },
+      {
+        "target": "法宝维护",
+        "amount": 200,
+        "unit": "金丹"
+      },
+      {
+        "target": "天庭运行",
+        "amount": 80000,
+        "unit": "香火单位"
+      }
+    ],
+    "surplus": 9249,
+    "surplus_unit": "蟠桃单位",
+    "note": "可结余 9249 单位蟠桃能量储备（约92.49%）—— 可见天庭是法力能量盈余机构，蟠桃资源掌握即掌握权力。"
+  },
+  "top_consumers": [
+    {
+      "consumer": "孙悟空",
+      "consumption_per_act": 80,
+      "act": "七十二变",
+      "note": "变物越大耗能越多"
+    },
+    {
+      "consumer": "孙悟空",
+      "consumption_per_act": 60,
+      "act": "筋斗云·一筋斗",
+      "note": "十万八千里高速位移"
+    },
+    {
+      "consumer": "二郎神",
+      "consumption_per_act": 75,
+      "act": "天眼显形·变化追踪",
+      "note": "天眼持续耗能"
+    },
+    {
+      "consumer": "牛魔王",
+      "consumption_per_act": 90,
+      "act": "现本相·白牛",
+      "note": "千丈白牛·法力激增"
+    },
+    {
+      "consumer": "大鹏",
+      "consumption_per_act": 70,
+      "act": "阴阳二气瓶驱动",
+      "note": "因果律武器·耗能巨"
+    },
+    {
+      "consumer": "观音",
+      "consumption_per_act": 95,
+      "act": "净瓶杨柳水·灭三昧火",
+      "note": "高阶神通·一击定局"
+    }
+  ]
+}

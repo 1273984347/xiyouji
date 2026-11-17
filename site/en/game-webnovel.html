@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-mONch0rrgjnEQ1NTqIxsv45HZDwiW3xMvcvY00drn2E=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-6/ZWYBl+L3DIXcu7O7GWFdhzJ9Prlh5quhnfzJWAgFo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Game &amp; Web Novel · Character Card Power System · Annotated Journey to the West</title>
@@ -2797,362 +2797,741 @@ function renderTreemap(opts){
 
     // ============================================================
     // Embedded fallback data (used when fetch fails)
-    // Data source: ../data/json/{character_cards,artifact_panels,webnovel_adaptations,game_webnovel_summary}.json
+    // Data source: ../en/json/{character_cards,artifact_panels,webnovel_adaptations,game_webnovel_summary}.json
     // ============================================================
     const EMBEDDED = {
-        character_cards: [
-            {
-                character: "Sun Wukong", title: "Great Sage Equal to Heaven · Victorious Fighting Buddha", rarity: "UR", element: "Metal",
-                power: 9800, hp: 9500, atk: 9800, def: 8500, spd: 9900,
-                skills: [
-                    { name: "72 Transformations", cost: 5, effect: "Transform · dodge +50% · lasts 3 turns", type: "buff" },
-                    { name: "Somersault Cloud", cost: 3, effect: "First strike · ignores terrain · guaranteed hit", type: "move" },
-                    { name: "Ruyi Jingu Bang · Sea-Calming Needle", cost: 8, effect: "Physical damage ×3 · breaks defense", type: "attack" },
-                    { name: "Fiery Golden Eyes", cost: 2, effect: "See through · pierces all disguise and illusion", type: "skill" }
-                ],
-                passive: "Havoc in Heaven — immune to first hit · once per battle",
-                acquisition: "Limited banner · Five Elements Mountain seal-lifting commemoration",
-                lore: "Born from a magic stone on Flower-Fruit Mountain · Havoc in Heaven · escorted the pilgrimage · finally became the Victorious Fighting Buddha"
-            },
-            {
-                character: "Tathāgata Buddha", title: "Western Paradise · Supreme Lord", rarity: "UR", element: "Light",
-                power: 10000, hp: 9999, atk: 9500, def: 9999, spd: 7000,
-                skills: [
-                    { name: "Five Elements Mountain Crush", cost: 10, effect: "Ignores enemy defense · directly strips 500 years of turns", type: "attack" },
-                    { name: "Boundless Dharma", cost: 8, effect: "Full-field cleanse · removes all buffs/debuffs", type: "buff" },
-                    { name: "Buddha Land in the Palm", cost: 6, effect: "Seals the target in the palm · cannot act", type: "control" }
-                ],
-                passive: "Rule-type — all battle outcomes are judged by Tathāgata",
-                acquisition: "Spirit Mountain supreme ritual · only 1 per server",
-                lore: "Supreme lord of the Western Paradise · chief architect of the 81 ordeals"
-            },
-            {
-                character: "Guanyin Bodhisattva", title: "South Sea Putuo · Great Mercy", rarity: "SSR", element: "Water",
-                power: 8200, hp: 8500, atk: 7800, def: 8800, spd: 8000,
-                skills: [
-                    { name: "Pure Vase Nectar", cost: 5, effect: "Restores 50% HP to the whole team · removes debuffs", type: "heal" },
-                    { name: "Golden Hoop Mantra", cost: 4, effect: "Forces control on a single ENTP-type character for 3 turns", type: "control" },
-                    { name: "Three Life-Saving Hairs", cost: 3, effect: "Grants teammates a revive item · usable 3 times", type: "buff" }
-                ],
-                passive: "Hidden protection — auto-triggers a shield when a teammate’s HP < 30%",
-                acquisition: "South Sea Putuo limited banner",
-                lore: "The merciful Guanyin Bodhisattva · secret investor in the pilgrimage project"
-            },
-            {
-                character: "Erlang Shen Yang Jian", title: "Manifested Sage Erlang", rarity: "SSR", element: "Thunder",
-                power: 8800, hp: 8200, atk: 9000, def: 8000, spd: 9200,
-                skills: [
-                    { name: "Heavenly Eye", cost: 4, effect: "Pierces all disguise and transformation · lasts 5 turns", type: "skill" },
-                    { name: "Eight-Nine Mystic Art", cost: 6, effect: "Rival of the 72 Transformations · adds Thunder damage", type: "attack" },
-                    { name: "Howling Celestial Hound", cost: 3, effect: "Summons the Howling Celestial Hound to bite the target · cannot act for 2 turns", type: "control" }
-                ],
-                passive: "Heaven’s strongest war god — +30% damage against demon enemies",
-                acquisition: "Guanjiangkou limited · Heavenly Legion banner",
-                lore: "Nephew of the Jade Emperor · once fought Wukong to a 300-round draw"
-            },
-            {
-                character: "Tang Sanzang", title: "Candana Merit Buddha · reincarnation of the Golden Cicada", rarity: "SR", element: "Heart",
-                power: 1500, hp: 1500, atk: 800, def: 1200, spd: 3000,
-                skills: [
-                    { name: "Golden Hoop Mantra Recitation", cost: 2, effect: "Forces control on Wukong-type characters · but 0 damage", type: "control" },
-                    { name: "Chant the Heart Sutra", cost: 3, effect: "Purges all debuffs · but requires 1 turn of chanting", type: "heal" },
-                    { name: "Call for Guanyin", cost: 5, effect: "Summons Guanyin to the rescue · 5-turn cooldown", type: "summon" }
-                ],
-                passive: "Golden Cicada reincarnation — 100% triggers a plot rescue when defeated by a demon",
-                acquisition: "Default card · gifted at the start",
-                lore: "Reincarnation of the Golden Cicada · 14 years of walking to fetch the scriptures · finally became the Candana Merit Buddha"
-            },
-            {
-                character: "Zhu Bajie", title: "Marshal Tianpeng · Altar Cleanser", rarity: "SR", element: "Earth",
-                power: 4200, hp: 6000, atk: 4500, def: 5500, spd: 3000,
-                skills: [
-                    { name: "36 Transformations", cost: 3, effect: "Transform · but 50% failure rate", type: "buff" },
-                    { name: "Nine-Tooth Rake", cost: 4, effect: "Physical damage ×1.5 · -50% damage vs female demons", type: "attack" },
-                    { name: "Gao Village Braised Pork", cost: 2, effect: "Restores 30% HP · but attack -20% · lasts 3 turns", type: "heal" }
-                ],
-                passive: "Marshal Tianpeng — 50% chance to defect when facing a female demon",
-                acquisition: "Gao Village story unlock",
-                lore: "Former Marshal Tianpeng · banished for flirting with Chang’e · later the team’s comic relief"
-            },
-            {
-                character: "Sha Wujing", title: "Curtain-Raising General · Golden-Body Arhat", rarity: "R", element: "Water",
-                power: 3200, hp: 4500, atk: 3200, def: 5000, spd: 3500,
-                skills: [
-                    { name: "Demon-Subduing Staff", cost: 3, effect: "Steady physical damage ×1.2", type: "attack" },
-                    { name: "Pole-Carrying Art", cost: 1, effect: "Raises the team’s carrying capacity · but no combat effect", type: "buff" },
-                    { name: "Master’s been captured by demons!", cost: 2, effect: "Notifies the whole team · but no actual damage", type: "skill" }
-                ],
-                passive: "Silent devotion — steadily restores 5% HP every turn",
-                acquisition: "Flowing Sands River story unlock",
-                lore: "Former Curtain-Raising General · banished for shattering a crystal goblet · silently carried the luggage for 14 years"
-            },
-            {
-                character: "White Dragon Horse", title: "Third Prince of the West Sea Dragon King · Eight-Part Heavenly Dragon", rarity: "R", element: "Water",
-                power: 3800, hp: 5000, atk: 3500, def: 4500, spd: 4000,
-                skills: [
-                    { name: "Transform into a White Horse", cost: 0, effect: "Becomes Tang Sanzang’s mount · cannot fight", type: "passive" },
-                    { name: "A Kick", cost: 5, effect: "Clutch rescue · ×3 damage vs the Yellow-Robed Demon", type: "attack" },
-                    { name: "Dragon Roar", cost: 3, effect: "Intimidates low-level demons for 2 turns", type: "control" }
-                ],
-                passive: "Clutch rescue — force-activated when the plot triggers",
-                acquisition: "Eagle Sorrow Stream story unlock",
-                lore: "Third Prince of the West Sea Dragon King · banished for burning the palace pearl · transformed into a white horse to carry Tang Sanzang"
-            },
-            {
-                character: "Bull Demon King", title: "Great Sage Pacifying Heaven · foremost of the Seven Great Sages", rarity: "SSR", element: "Earth",
-                power: 8500, hp: 9500, atk: 8800, def: 8500, spd: 6000,
-                skills: [
-                    { name: "72 Transformations (Bull version)", cost: 5, effect: "Transform · on par with Wukong", type: "buff" },
-                    { name: "Iron Cudgel", cost: 6, effect: "Physical damage ×2.5 · breaks defense", type: "attack" },
-                    { name: "Borrowed Banana Fan", cost: 8, effect: "Must be borrowed first · otherwise ineffective", type: "attack" }
-                ],
-                passive: "Foremost of the Seven Great Sages — +50% damage vs Wukong-type characters",
-                acquisition: "Flaming Mountain story-limited",
-                lore: "Wukong’s sworn elder brother · Great Sage Pacifying Heaven · finally subdued by Nezha"
-            },
-            {
-                character: "Red Boy", title: "Holy Infant King · Sudhana", rarity: "SSR", element: "Fire",
-                power: 7800, hp: 6500, atk: 8500, def: 6000, spd: 8800,
-                skills: [
-                    { name: "Samadhi True Fire", cost: 6, effect: "Continuous burn damage for 5 turns · special effect vs Wukong", type: "attack" },
-                    { name: "Fire-Cloud Spear", cost: 4, effect: "Physical + fire damage ×1.8", type: "attack" },
-                    { name: "Transform into a Handsome Boy", cost: 3, effect: "Disguise · tricks the enemy into trusting him", type: "control" }
-                ],
-                passive: "Samadhi True Fire — immune to all fire damage · +30% damage vs Wukong-type",
-                acquisition: "Mount Hao Fire-Cloud Cave limited",
-                lore: "Son of the Bull Demon King and Princess Iron Fan · unbeatable Samadhi True Fire · finally subdued by Guanyin"
-            },
-            {
-                character: "Six-Eared Macaque", title: "False Monkey King · inner demon", rarity: "SSR", element: "Dark",
-                power: 9700, hp: 9400, atk: 9700, def: 8500, spd: 9900,
-                skills: [
-                    { name: "72 Transformations (Copy)", cost: 5, effect: "Fully copies the target’s skill", type: "buff" },
-                    { name: "Ruyi Jingu Bang (fake)", cost: 8, effect: "Physical damage ×3 · but at 90% power", type: "attack" },
-                    { name: "Even Diting Cannot Tell", cost: 4, effect: "Disguise · -50% detection rate", type: "control" }
-                ],
-                passive: "Inner demon — +50% damage vs Wukong-type · and immune to the Golden Hoop Mantra",
-                acquisition: "True and False Monkey King story-limited",
-                lore: "Wukong’s inner-demon avatar · identical to Wukong · finally exposed by Tathāgata"
-            },
-            {
-                character: "White Bone Demon", title: "Lady White Bone · wild monster", rarity: "N", element: "Dark",
-                power: 800, hp: 500, atk: 900, def: 400, spd: 1500,
-                skills: [
-                    { name: "Three Transformations (maiden / old woman / old man)", cost: 2, effect: "Disguise · 30% detection rate", type: "control" },
-                    { name: "Corpse-Shedding Art", cost: 1, effect: "Feigns death to escape · no actual damage", type: "skill" }
-                ],
-                passive: "Wild monster — one-shotted by Wukong (but Wukong gets driven away)",
-                acquisition: "White Tiger Ridge story · beginner tutorial",
-                lore: "White Tiger Ridge wild monster · craved Tang Sanzang’s flesh for immortality · three transformations exposed by Wukong"
-            }
-        ],
-        artifact_panels: [
-            {
-                name: "Diamond Bracelet", english_name: "Golden Ring", rarity: "SSR",
-                owner: "Taishang Laojun → Green Ox Demon", element: "Metal",
-                stats: { atk: 0, def: 0, control: 9999 },
-                effect: "Can collect all of the enemy’s offensive artifacts and weapons · but ineffective against the Banana Fan",
-                counter: "Banana Fan (counter)",
-                background: "Forged by Taishang Laojun during his westward journey · refined from kun steel",
-                battle_impact: "Changes Heaven’s combat meta: single-artifact builds are obsolete · group tactics required",
-                popularity: "Once widespread, all demons relying on a single artifact lost their jobs"
-            },
-            {
-                name: "Golden-Hooped Rod", english_name: "Ruyi Jingu Bang", rarity: "UR",
-                owner: "Yu the Great → East Sea Dragon King → Sun Wukong", element: "Metal",
-                stats: { atk: 9800, def: 0, control: 0 },
-                effect: "Physical damage ×3 · can grow or shrink · weighs 13,500 jin",
-                counter: "None (but collected by the Diamond Bracelet)",
-                background: "The sea-calming needle from Yu the Great’s flood control · later kept in the East Sea Dragon Palace",
-                battle_impact: "The strongest single-target melee weapon · unbeatable at close range",
-                popularity: "Wukong-exclusive · cannot be duplicated"
-            },
-            {
-                name: "Banana Fan (Yang)", english_name: "Banana Fan (Yang)", rarity: "SSR",
-                owner: "Princess Iron Fan", element: "Wind",
-                stats: { atk: 0, def: 0, control: 9500 },
-                effect: "One fan blows 84,000 li · nothing can withstand it · special attack vs the Diamond Bracelet",
-                counter: "Wind-Calming Pill (one-time counter)",
-                background: "A wisp of lunar leaf from behind Kunlun Mountain, born at the dawn of chaos",
-                battle_impact: "Core of the group-displacement build · can reshape the battlefield",
-                popularity: "Depends on the wielder’s power · low adoption"
-            },
-            {
-                name: "Purple Gold Gourd", english_name: "Purple Gold Gourd", rarity: "SSR",
-                owner: "Taishang Laojun → Golden Horn & Silver Horn", element: "Dark",
-                stats: { atk: 0, def: 0, control: 9000 },
-                effect: "Answer to your name and turn to pus in a matter of hours",
-                counter: "A false name (e.g. 'Sun the Pilgrim' 'Pilgrim Sun')",
-                background: "Condensed from the golden qi emitted by the gourd during Laojun’s westward journey",
-                battle_impact: "Single-target sure kill · but requires knowing the true name",
-                popularity: "Circulates within Heaven · demons must steal to obtain it"
-            },
-            {
-                name: "Yin-Yang Bottle", english_name: "Yin-Yang Bottle", rarity: "SSR",
-                owner: "Golden-Winged Roc", element: "Light",
-                stats: { atk: 0, def: 0, control: 9300 },
-                effect: "Sealed in the bottle · turns to slurry in hours · Wukong must use Guanyin’s three hairs to break free",
-                counter: "Guanyin’s life-saving hairs (one-time break)",
-                background: "Condensed from the dual qi of yin and yang · exclusive to the Golden-Winged Roc",
-                battle_impact: "Single-target sure kill · but effect halved against top-tier UR cards",
-                popularity: "Demon-exclusive · 0% adoption"
-            },
-            {
-                name: "Nine-Tooth Rake", english_name: "Nine-Tooth Rake", rarity: "SR",
-                owner: "Zhu Bajie", element: "Earth",
-                stats: { atk: 4500, def: 0, control: 0 },
-                effect: "Physical damage ×1.5 · -50% damage vs female demons",
-                counter: "None",
-                background: "Forged by Heaven’s divine hammer · originally Marshal Tianpeng’s tally of command",
-                battle_impact: "Stable output · but heavily affected by emotions",
-                popularity: "Bajie-exclusive · cannot be traded"
-            },
-            {
-                name: "Demon-Subduing Staff", english_name: "Demon-Subduing Staff", rarity: "R",
-                owner: "Sha Wujing", element: "Water",
-                stats: { atk: 3200, def: 0, control: 0 },
-                effect: "Physical damage ×1.2 · stable output, no variation",
-                counter: "None",
-                background: "Made from Wu Gang’s osmanthus tree · crafted by Lu Ban",
-                battle_impact: "Stable · but lacks burst",
-                popularity: "Sha Wujing-exclusive"
-            },
-            {
-                name: "Golden Hoop Mantra", english_name: "Golden Hoop Mantra", rarity: "UR",
-                owner: "Guanyin → Tang Sanzang", element: "Heart",
-                stats: { atk: 0, def: 0, control: 10000 },
-                effect: "100% control over ENTP-type characters (Wukong) · cannot be resisted",
-                counter: "None (unless 100 li away from Tang Sanzang)",
-                background: "Gifted by Guanyin · designed specifically to control Wukong",
-                battle_impact: "Overturns the team’s power structure · Tang Sanzang flips from weak to strong",
-                popularity: "A management artifact · but only 1 in all three realms"
-            },
-            {
-                name: "Fiery Golden Eyes", english_name: "Fiery Golden Eyes", rarity: "SSR",
-                owner: "Sun Wukong", element: "Fire",
-                stats: { atk: 0, def: 0, control: 0, perception: 9500 },
-                effect: "Sees through all illusion and transformation · but sensitive to smoke",
-                counter: "Smoke (e.g. the smoke of Red Boy’s Samadhi True Fire)",
-                background: "Forged for 49 days in the Eight Trigrams Furnace · side effect is fear of smoke",
-                battle_impact: "Core of the intelligence build · changes battlefield information transparency",
-                popularity: "Wukong-exclusive · cannot be duplicated"
-            },
-            {
-                name: "Three Life-Saving Hairs", english_name: "Three Life-Saving Hairs", rarity: "SR",
-                owner: "Guanyin → Sun Wukong", element: "Heart",
-                stats: { atk: 0, def: 0, control: 0, rescue: 3 },
-                effect: "Can transform into any item · 3 uses total",
-                counter: "None",
-                background: "An emergency rescue item gifted by Guanyin",
-                battle_impact: "A life-saving item · but with limited uses",
-                popularity: "Limited · only 3 in all three realms"
-            }
-        ],
-        webnovel_adaptations: [
-            {
-                genre: "Son-in-Law", title: "Journey to the West: Starting as the Son-in-Law of Gao Village", protagonist: "Zhu Bajie",
-                setting: "Gao Village",
-                premise: "A modern programmer transmigrates into Zhu Bajie · immediately recruited as a son-in-law by Old Gao · and must pretend not to know martial arts before the beautiful Cuilan",
-                core_plothook: "Uses modern business knowledge to transform Gao Village · becomes the local tycoon · but must dodge Wukong’s recruitment",
-                selling_point: "Comedy + slice-of-life farming + business warfare in one",
-                target_audience: "Urban-fiction fans · readers who want something light",
-                popularity_estimate: "Medium (7.5/10)",
-                key_quote: "Me, Marshal Tianpeng, the former Supreme Commander of the Navy — now a son-in-law?"
-            },
-            {
-                genre: "Quit-the-Team", title: "Fetch scriptures? I quit — Monkey wants to lie flat", protagonist: "Sun Wukong",
-                setting: "Flower-Fruit Mountain",
-                premise: "Banished back to Flower-Fruit Mountain by Tang Sanzang · this time Wukong truly quits · and starts a K-12 education system for his monkey descendants",
-                core_plothook: "Chaos breaks out across the three realms · the gods beg him to return · but Wukong says 'I’m retired — leave me alone'",
-                selling_point: "Lie-flat power fantasy + education + anti-tradition",
-                target_audience: "996 workers · the anti-rat-race crowd",
-                popularity_estimate: "High (9/10) · resonates with the current mood",
-                key_quote: "Go back just because you say so? I just bought a school-district house on Flower-Fruit Mountain"
-            },
-            {
-                genre: "Inner Voice", title: "Great Tang Pilgrim: The Emperor Can Hear My Inner Voice", protagonist: "Tang Sanzang",
-                setting: "Chang’an → the West",
-                premise: "Li Shimin can hear Tang Sanzang’s inner voice · discovering that this sworn brother grumbles daily about the long road and many demons",
-                core_plothook: "Li Shimin secretly arranges rescues along the way · throwing Guanyin’s script into chaos · and rewriting the pilgrimage project",
-                selling_point: "Power fantasy + script-flipping + roast comedy",
-                target_audience: "Power-fantasy readers · fans of meta jokes",
-                popularity_estimate: "High (8.5/10)",
-                key_quote: "[Inner voice] Where the heck is this place? Why are there more demons than people?"
-            },
-            {
-                genre: "System", title: "Journey to the West: I Have a Tribulation System", protagonist: "Sha Wujing",
-                setting: "Flowing Sands River → the pilgrimage road",
-                premise: "Sha Wujing awakens a tribulation system · leveling up with each ordeal · and climbs from the quietest disciple to the strongest",
-                core_plothook: "System quest rewards let Sha Wujing grow stronger in silence · ultimately surpassing Wukong",
-                selling_point: "Comeback + stat-driven + hidden powerhouse",
-                target_audience: "Stat nerds · comeback-story fans",
-                popularity_estimate: "Medium-high (8/10)",
-                key_quote: "Ding! Host completed the 'Carry the Luggage 10,000 km' achievement · Reward: Constitution +10"
-            },
-            {
-                genre: "Rebirth", title: "Reborn as Tang Sanzang’s Elder Brother", protagonist: "Chen Guangrui (revived)",
-                setting: "Hong River → Chang’an",
-                premise: "Revived, Chen Guangrui is reborn to before the pilgrimage begins · and resolves to protect his younger brother Tang Sanzang first",
-                core_plothook: "With memories of his past life · he remaps the pilgrimage route · turning 81 ordeals into 30",
-                selling_point: "Fate-changing + brotherhood + strategy",
-                target_audience: "Rebirth-fiction fans · readers who enjoy family bonds",
-                popularity_estimate: "Medium (7/10)",
-                key_quote: "Xuanzang, big brother will never let you die at a demon’s hands this time"
-            },
-            {
-                genre: "Villain", title: "Journey to the West: I, the Six-Eared Macaque, Should Have Become a Buddha", protagonist: "Six-Eared Macaque",
-                setting: "Spirit Mountain → Flower-Fruit Mountain",
-                premise: "Retells the true-and-false Monkey King from the Six-Eared Macaque’s view · revealing he was Wukong’s other half · killed with one strike by Tathāgata",
-                core_plothook: "Reborn to before the true-and-false Monkey King incident · this time he’ll be himself, not a stand-in",
-                selling_point: "Villain’s point of view + anti-hero + philosophical",
-                target_audience: "Deep readers · fans of the villain’s perspective",
-                popularity_estimate: "Medium-high (8/10)",
-                key_quote: "Why does he become a Buddha while I get killed? I’m the real Sun Wukong"
-            },
-            {
-                genre: "Harem", title: "Journey to the West: Return of Tianpeng", protagonist: "Zhu Bajie",
-                setting: "Heaven → the mortal world",
-                premise: "Marshal Tianpeng is reborn · this time not flirting with Chang’e · but winning back every goddess through real action",
-                core_plothook: "Wins over Chang’e, Gao Cuilan, the Jade Rabbit Spirit, and the Spider Spirit · building the ultimate harem",
-                selling_point: "Power fantasy + harem + rebirth",
-                target_audience: "Harem-fiction fans · the power-fantasy crowd",
-                popularity_estimate: "Medium (6/10) · crowded lane",
-                key_quote: "Everything I missed in my past life — I’ll have it all in this one"
-            },
-            {
-                genre: "Invincible", title: "Journey to the West: I, Tathāgata, Invincible from the Start", protagonist: "Tathāgata Buddha",
-                setting: "Spirit Mountain → the three realms",
-                premise: "Tells the behind-the-scenes design of the 81 ordeals from Tathāgata’s view · every ordeal arranged by his own hand",
-                core_plothook: "Readers watch the show alongside Tathāgata · enjoying how his own script unfolds",
-                selling_point: "God’s-eye view + invincible power fantasy + behind-the-scenes",
-                target_audience: "Sophisticated readers · who enjoy watching the protagonist control everything",
-                popularity_estimate: "Medium (7/10) · high entry barrier",
-                key_quote: "Wukong, this ordeal is a growth lesson I designed for you"
-            },
-            {
-                genre: "Infinite Flow", title: "Journey to the West Instance: Farming Monsters on Spirit Mountain", protagonist: "Original protagonist",
-                setting: "Infinite space",
-                premise: "The protagonist is pulled into a Journey to the West instance world · and must clear all 81 ordeal instances to return to reality",
-                core_plothook: "Each instance has special rules · the protagonist must crack them to clear it",
-                selling_point: "Infinite flow + puzzle-solving + Journey to the West theme",
-                target_audience: "Infinite-flow fans · puzzle lovers",
-                popularity_estimate: "Medium-high (8/10)",
-                key_quote: "Instance · Flaming Mountain · S-rank difficulty · 5% survival rate"
-            }
-        ],
-        game_webnovel_summary: {
-            total_cards: 12,
-            total_artifacts: 10,
-            total_webnovels: 9,
-            rarity_distribution: { UR: 2, SSR: 5, SR: 2, R: 2, N: 1 },
-            element_distribution: { "Metal": 1, "Light": 1, "Water": 3, "Thunder": 1, "Heart": 1, "Earth": 2, "Fire": 1, "Dark": 2 },
-            avg_power: 6358.3,
-            max_power: 10000,
-            min_power: 800,
-            webnovel_genres: ["Son-in-Law", "Quit-the-Team", "Inner Voice", "System", "Rebirth", "Villain", "Harem", "Invincible", "Infinite Flow"],
-            best_webnovel: "Fetch scriptures? I quit — Monkey wants to lie flat"
+  "character_cards": [
+    {
+      "character": "Sun Wukong",
+      "title": "Great Sage Equal to Heaven · Victorious Fighting Buddha",
+      "rarity": "UR",
+      "element": "Metal",
+      "power": 9800,
+      "hp": 9500,
+      "atk": 9800,
+      "def": 8500,
+      "spd": 9900,
+      "skills": [
+        {
+          "name": "72 Transformations",
+          "cost": 5,
+          "effect": "Transform · dodge +50% · lasts 3 turns",
+          "type": "buff"
+        },
+        {
+          "name": "Somersault Cloud",
+          "cost": 3,
+          "effect": "First strike · ignores terrain · guaranteed hit",
+          "type": "move"
+        },
+        {
+          "name": "Ruyi Jingu Bang · Sea-Calming Needle",
+          "cost": 8,
+          "effect": "Physical damage ×3 · breaks defense",
+          "type": "attack"
+        },
+        {
+          "name": "Fiery Golden Eyes",
+          "cost": 2,
+          "effect": "See through · pierces all disguise and illusion",
+          "type": "skill"
         }
-    };
+      ],
+      "passive": "Havoc in Heaven — immune to first hit · once per battle",
+      "acquisition": "Limited banner · Five Elements Mountain seal-lifting commemoration",
+      "lore": "Born from a magic stone on Flower-Fruit Mountain · Havoc in Heaven · escorted the pilgrimage · finally became the Victorious Fighting Buddha"
+    },
+    {
+      "character": "Tathāgata Buddha",
+      "title": "Western Paradise · Supreme Lord",
+      "rarity": "UR",
+      "element": "Light",
+      "power": 10000,
+      "hp": 9999,
+      "atk": 9500,
+      "def": 9999,
+      "spd": 7000,
+      "skills": [
+        {
+          "name": "Five Elements Mountain Crush",
+          "cost": 10,
+          "effect": "Ignores enemy defense · directly strips 500 years of turns",
+          "type": "attack"
+        },
+        {
+          "name": "Boundless Dharma",
+          "cost": 8,
+          "effect": "Full-field cleanse · removes all buffs/debuffs",
+          "type": "buff"
+        },
+        {
+          "name": "Buddha Land in the Palm",
+          "cost": 6,
+          "effect": "Seals the target in the palm · cannot act",
+          "type": "control"
+        }
+      ],
+      "passive": "Rule-type — all battle outcomes are judged by Tathāgata",
+      "acquisition": "Spirit Mountain supreme ritual · only 1 per server",
+      "lore": "Supreme lord of the Western Paradise · chief architect of the 81 ordeals"
+    },
+    {
+      "character": "Guanyin Bodhisattva",
+      "title": "South Sea Putuo · Great Mercy",
+      "rarity": "SSR",
+      "element": "Water",
+      "power": 8200,
+      "hp": 8500,
+      "atk": 7800,
+      "def": 8800,
+      "spd": 8000,
+      "skills": [
+        {
+          "name": "Pure Vase Nectar",
+          "cost": 5,
+          "effect": "Restores 50% HP to the whole team · removes debuffs",
+          "type": "heal"
+        },
+        {
+          "name": "Golden Hoop Mantra",
+          "cost": 4,
+          "effect": "Forces control on a single ENTP-type character for 3 turns",
+          "type": "control"
+        },
+        {
+          "name": "Three Life-Saving Hairs",
+          "cost": 3,
+          "effect": "Grants teammates a revive item · usable 3 times",
+          "type": "buff"
+        }
+      ],
+      "passive": "Hidden protection — auto-triggers a shield when a teammate’s HP < 30%",
+      "acquisition": "South Sea Putuo limited banner",
+      "lore": "The merciful Guanyin Bodhisattva · secret investor in the pilgrimage project"
+    },
+    {
+      "character": "Erlang Shen Yang Jian",
+      "title": "Manifested Sage Erlang",
+      "rarity": "SSR",
+      "element": "Thunder",
+      "power": 8800,
+      "hp": 8200,
+      "atk": 9000,
+      "def": 8000,
+      "spd": 9200,
+      "skills": [
+        {
+          "name": "Heavenly Eye",
+          "cost": 4,
+          "effect": "Pierces all disguise and transformation · lasts 5 turns",
+          "type": "skill"
+        },
+        {
+          "name": "Eight-Nine Mystic Art",
+          "cost": 6,
+          "effect": "Rival of the 72 Transformations · adds Thunder damage",
+          "type": "attack"
+        },
+        {
+          "name": "Howling Celestial Hound",
+          "cost": 3,
+          "effect": "Summons the Howling Celestial Hound to bite the target · cannot act for 2 turns",
+          "type": "control"
+        }
+      ],
+      "passive": "Heaven’s strongest war god — +30% damage against demon enemies",
+      "acquisition": "Guanjiangkou limited · Heavenly Legion banner",
+      "lore": "Nephew of the Jade Emperor · once fought Wukong to a 300-round draw"
+    },
+    {
+      "character": "Tang Sanzang",
+      "title": "Candana Merit Buddha · reincarnation of the Golden Cicada",
+      "rarity": "SR",
+      "element": "Heart",
+      "power": 1500,
+      "hp": 1500,
+      "atk": 800,
+      "def": 1200,
+      "spd": 3000,
+      "skills": [
+        {
+          "name": "Golden Hoop Mantra Recitation",
+          "cost": 2,
+          "effect": "Forces control on Wukong-type characters · but 0 damage",
+          "type": "control"
+        },
+        {
+          "name": "Chant the Heart Sutra",
+          "cost": 3,
+          "effect": "Purges all debuffs · but requires 1 turn of chanting",
+          "type": "heal"
+        },
+        {
+          "name": "Call for Guanyin",
+          "cost": 5,
+          "effect": "Summons Guanyin to the rescue · 5-turn cooldown",
+          "type": "summon"
+        }
+      ],
+      "passive": "Golden Cicada reincarnation — 100% triggers a plot rescue when defeated by a demon",
+      "acquisition": "Default card · gifted at the start",
+      "lore": "Reincarnation of the Golden Cicada · 14 years of walking to fetch the scriptures · finally became the Candana Merit Buddha"
+    },
+    {
+      "character": "Zhu Bajie",
+      "title": "Marshal Tianpeng · Altar Cleanser",
+      "rarity": "SR",
+      "element": "Earth",
+      "power": 4200,
+      "hp": 6000,
+      "atk": 4500,
+      "def": 5500,
+      "spd": 3000,
+      "skills": [
+        {
+          "name": "36 Transformations",
+          "cost": 3,
+          "effect": "Transform · but 50% failure rate",
+          "type": "buff"
+        },
+        {
+          "name": "Nine-Tooth Rake",
+          "cost": 4,
+          "effect": "Physical damage ×1.5 · -50% damage vs female demons",
+          "type": "attack"
+        },
+        {
+          "name": "Gao Village Braised Pork",
+          "cost": 2,
+          "effect": "Restores 30% HP · but attack -20% · lasts 3 turns",
+          "type": "heal"
+        }
+      ],
+      "passive": "Marshal Tianpeng — 50% chance to defect when facing a female demon",
+      "acquisition": "Gao Village story unlock",
+      "lore": "Former Marshal Tianpeng · banished for flirting with Chang’e · later the team’s comic relief"
+    },
+    {
+      "character": "Sha Wujing",
+      "title": "Curtain-Raising General · Golden-Body Arhat",
+      "rarity": "R",
+      "element": "Water",
+      "power": 3200,
+      "hp": 4500,
+      "atk": 3200,
+      "def": 5000,
+      "spd": 3500,
+      "skills": [
+        {
+          "name": "Demon-Subduing Staff",
+          "cost": 3,
+          "effect": "Steady physical damage ×1.2",
+          "type": "attack"
+        },
+        {
+          "name": "Pole-Carrying Art",
+          "cost": 1,
+          "effect": "Raises the team’s carrying capacity · but no combat effect",
+          "type": "buff"
+        },
+        {
+          "name": "Master’s been captured by demons!",
+          "cost": 2,
+          "effect": "Notifies the whole team · but no actual damage",
+          "type": "skill"
+        }
+      ],
+      "passive": "Silent devotion — steadily restores 5% HP every turn",
+      "acquisition": "Flowing Sands River story unlock",
+      "lore": "Former Curtain-Raising General · banished for shattering a crystal goblet · silently carried the luggage for 14 years"
+    },
+    {
+      "character": "White Dragon Horse",
+      "title": "Third Prince of the West Sea Dragon King · Eight-Part Heavenly Dragon",
+      "rarity": "R",
+      "element": "Water",
+      "power": 3800,
+      "hp": 5000,
+      "atk": 3500,
+      "def": 4500,
+      "spd": 4000,
+      "skills": [
+        {
+          "name": "Transform into a White Horse",
+          "cost": 0,
+          "effect": "Becomes Tang Sanzang’s mount · cannot fight",
+          "type": "passive"
+        },
+        {
+          "name": "A Kick",
+          "cost": 5,
+          "effect": "Clutch rescue · ×3 damage vs the Yellow-Robed Demon",
+          "type": "attack"
+        },
+        {
+          "name": "Dragon Roar",
+          "cost": 3,
+          "effect": "Intimidates low-level demons for 2 turns",
+          "type": "control"
+        }
+      ],
+      "passive": "Clutch rescue — force-activated when the plot triggers",
+      "acquisition": "Eagle Sorrow Stream story unlock",
+      "lore": "Third Prince of the West Sea Dragon King · banished for burning the palace pearl · transformed into a white horse to carry Tang Sanzang"
+    },
+    {
+      "character": "Bull Demon King",
+      "title": "Great Sage Pacifying Heaven · foremost of the Seven Great Sages",
+      "rarity": "SSR",
+      "element": "Earth",
+      "power": 8500,
+      "hp": 9500,
+      "atk": 8800,
+      "def": 8500,
+      "spd": 6000,
+      "skills": [
+        {
+          "name": "72 Transformations (Bull version)",
+          "cost": 5,
+          "effect": "Transform · on par with Wukong",
+          "type": "buff"
+        },
+        {
+          "name": "Iron Cudgel",
+          "cost": 6,
+          "effect": "Physical damage ×2.5 · breaks defense",
+          "type": "attack"
+        },
+        {
+          "name": "Borrowed Banana Fan",
+          "cost": 8,
+          "effect": "Must be borrowed first · otherwise ineffective",
+          "type": "attack"
+        }
+      ],
+      "passive": "Foremost of the Seven Great Sages — +50% damage vs Wukong-type characters",
+      "acquisition": "Flaming Mountain story-limited",
+      "lore": "Wukong’s sworn elder brother · Great Sage Pacifying Heaven · finally subdued by Nezha"
+    },
+    {
+      "character": "Red Boy",
+      "title": "Holy Infant King · Sudhana",
+      "rarity": "SSR",
+      "element": "Fire",
+      "power": 7800,
+      "hp": 6500,
+      "atk": 8500,
+      "def": 6000,
+      "spd": 8800,
+      "skills": [
+        {
+          "name": "Samadhi True Fire",
+          "cost": 6,
+          "effect": "Continuous burn damage for 5 turns · special effect vs Wukong",
+          "type": "attack"
+        },
+        {
+          "name": "Fire-Cloud Spear",
+          "cost": 4,
+          "effect": "Physical + fire damage ×1.8",
+          "type": "attack"
+        },
+        {
+          "name": "Transform into a Handsome Boy",
+          "cost": 3,
+          "effect": "Disguise · tricks the enemy into trusting him",
+          "type": "control"
+        }
+      ],
+      "passive": "Samadhi True Fire — immune to all fire damage · +30% damage vs Wukong-type",
+      "acquisition": "Mount Hao Fire-Cloud Cave limited",
+      "lore": "Son of the Bull Demon King and Princess Iron Fan · unbeatable Samadhi True Fire · finally subdued by Guanyin"
+    },
+    {
+      "character": "Six-Eared Macaque",
+      "title": "False Monkey King · inner demon",
+      "rarity": "SSR",
+      "element": "Dark",
+      "power": 9700,
+      "hp": 9400,
+      "atk": 9700,
+      "def": 8500,
+      "spd": 9900,
+      "skills": [
+        {
+          "name": "72 Transformations (Copy)",
+          "cost": 5,
+          "effect": "Fully copies the target’s skill",
+          "type": "buff"
+        },
+        {
+          "name": "Ruyi Jingu Bang (fake)",
+          "cost": 8,
+          "effect": "Physical damage ×3 · but at 90% power",
+          "type": "attack"
+        },
+        {
+          "name": "Even Diting Cannot Tell",
+          "cost": 4,
+          "effect": "Disguise · -50% detection rate",
+          "type": "control"
+        }
+      ],
+      "passive": "Inner demon — +50% damage vs Wukong-type · and immune to the Golden Hoop Mantra",
+      "acquisition": "True and False Monkey King story-limited",
+      "lore": "Wukong’s inner-demon avatar · identical to Wukong · finally exposed by Tathāgata"
+    },
+    {
+      "character": "White Bone Demon",
+      "title": "Lady White Bone · wild monster",
+      "rarity": "N",
+      "element": "Dark",
+      "power": 800,
+      "hp": 500,
+      "atk": 900,
+      "def": 400,
+      "spd": 1500,
+      "skills": [
+        {
+          "name": "Three Transformations (maiden / old woman / old man)",
+          "cost": 2,
+          "effect": "Disguise · 30% detection rate",
+          "type": "control"
+        },
+        {
+          "name": "Corpse-Shedding Art",
+          "cost": 1,
+          "effect": "Feigns death to escape · no actual damage",
+          "type": "skill"
+        }
+      ],
+      "passive": "Wild monster — one-shotted by Wukong (but Wukong gets driven away)",
+      "acquisition": "White Tiger Ridge story · beginner tutorial",
+      "lore": "White Tiger Ridge wild monster · craved Tang Sanzang’s flesh for immortality · three transformations exposed by Wukong"
+    }
+  ],
+  "artifact_panels": [
+    {
+      "name": "Diamond Bracelet",
+      "english_name": "Golden Ring",
+      "rarity": "SSR",
+      "owner": "Taishang Laojun → Green Ox Demon",
+      "element": "Metal",
+      "stats": {
+        "atk": 0,
+        "def": 0,
+        "control": 9999
+      },
+      "effect": "Can collect all of the enemy’s offensive artifacts and weapons · but ineffective against the Banana Fan",
+      "counter": "Banana Fan (counter)",
+      "background": "Forged by Taishang Laojun during his westward journey · refined from kun steel",
+      "battle_impact": "Changes Heaven’s combat meta: single-artifact builds are obsolete · group tactics required",
+      "popularity": "Once widespread, all demons relying on a single artifact lost their jobs"
+    },
+    {
+      "name": "Golden-Hooped Rod",
+      "english_name": "Ruyi Jingu Bang",
+      "rarity": "UR",
+      "owner": "Yu the Great → East Sea Dragon King → Sun Wukong",
+      "element": "Metal",
+      "stats": {
+        "atk": 9800,
+        "def": 0,
+        "control": 0
+      },
+      "effect": "Physical damage ×3 · can grow or shrink · weighs 13,500 jin",
+      "counter": "None (but collected by the Diamond Bracelet)",
+      "background": "The sea-calming needle from Yu the Great’s flood control · later kept in the East Sea Dragon Palace",
+      "battle_impact": "The strongest single-target melee weapon · unbeatable at close range",
+      "popularity": "Wukong-exclusive · cannot be duplicated"
+    },
+    {
+      "name": "Banana Fan (Yang)",
+      "english_name": "Banana Fan (Yang)",
+      "rarity": "SSR",
+      "owner": "Princess Iron Fan",
+      "element": "Wind",
+      "stats": {
+        "atk": 0,
+        "def": 0,
+        "control": 9500
+      },
+      "effect": "One fan blows 84,000 li · nothing can withstand it · special attack vs the Diamond Bracelet",
+      "counter": "Wind-Calming Pill (one-time counter)",
+      "background": "A wisp of lunar leaf from behind Kunlun Mountain, born at the dawn of chaos",
+      "battle_impact": "Core of the group-displacement build · can reshape the battlefield",
+      "popularity": "Depends on the wielder’s power · low adoption"
+    },
+    {
+      "name": "Purple Gold Gourd",
+      "english_name": "Purple Gold Gourd",
+      "rarity": "SSR",
+      "owner": "Taishang Laojun → Golden Horn & Silver Horn",
+      "element": "Dark",
+      "stats": {
+        "atk": 0,
+        "def": 0,
+        "control": 9000
+      },
+      "effect": "Answer to your name and turn to pus in a matter of hours",
+      "counter": "A false name (e.g. 'Sun the Pilgrim' 'Pilgrim Sun')",
+      "background": "Condensed from the golden qi emitted by the gourd during Laojun’s westward journey",
+      "battle_impact": "Single-target sure kill · but requires knowing the true name",
+      "popularity": "Circulates within Heaven · demons must steal to obtain it"
+    },
+    {
+      "name": "Yin-Yang Bottle",
+      "english_name": "Yin-Yang Bottle",
+      "rarity": "SSR",
+      "owner": "Golden-Winged Roc",
+      "element": "Light",
+      "stats": {
+        "atk": 0,
+        "def": 0,
+        "control": 9300
+      },
+      "effect": "Sealed in the bottle · turns to slurry in hours · Wukong must use Guanyin’s three hairs to break free",
+      "counter": "Guanyin’s life-saving hairs (one-time break)",
+      "background": "Condensed from the dual qi of yin and yang · exclusive to the Golden-Winged Roc",
+      "battle_impact": "Single-target sure kill · but effect halved against top-tier UR cards",
+      "popularity": "Demon-exclusive · 0% adoption"
+    },
+    {
+      "name": "Nine-Tooth Rake",
+      "english_name": "Nine-Tooth Rake",
+      "rarity": "SR",
+      "owner": "Zhu Bajie",
+      "element": "Earth",
+      "stats": {
+        "atk": 4500,
+        "def": 0,
+        "control": 0
+      },
+      "effect": "Physical damage ×1.5 · -50% damage vs female demons",
+      "counter": "None",
+      "background": "Forged by Heaven’s divine hammer · originally Marshal Tianpeng’s tally of command",
+      "battle_impact": "Stable output · but heavily affected by emotions",
+      "popularity": "Bajie-exclusive · cannot be traded"
+    },
+    {
+      "name": "Demon-Subduing Staff",
+      "english_name": "Demon-Subduing Staff",
+      "rarity": "R",
+      "owner": "Sha Wujing",
+      "element": "Water",
+      "stats": {
+        "atk": 3200,
+        "def": 0,
+        "control": 0
+      },
+      "effect": "Physical damage ×1.2 · stable output, no variation",
+      "counter": "None",
+      "background": "Made from Wu Gang’s osmanthus tree · crafted by Lu Ban",
+      "battle_impact": "Stable · but lacks burst",
+      "popularity": "Sha Wujing-exclusive"
+    },
+    {
+      "name": "Golden Hoop Mantra",
+      "english_name": "Golden Hoop Mantra",
+      "rarity": "UR",
+      "owner": "Guanyin → Tang Sanzang",
+      "element": "Heart",
+      "stats": {
+        "atk": 0,
+        "def": 0,
+        "control": 10000
+      },
+      "effect": "100% control over ENTP-type characters (Wukong) · cannot be resisted",
+      "counter": "None (unless 100 li away from Tang Sanzang)",
+      "background": "Gifted by Guanyin · designed specifically to control Wukong",
+      "battle_impact": "Overturns the team’s power structure · Tang Sanzang flips from weak to strong",
+      "popularity": "A management artifact · but only 1 in all three realms"
+    },
+    {
+      "name": "Fiery Golden Eyes",
+      "english_name": "Fiery Golden Eyes",
+      "rarity": "SSR",
+      "owner": "Sun Wukong",
+      "element": "Fire",
+      "stats": {
+        "atk": 0,
+        "def": 0,
+        "control": 0,
+        "perception": 9500
+      },
+      "effect": "Sees through all illusion and transformation · but sensitive to smoke",
+      "counter": "Smoke (e.g. the smoke of Red Boy’s Samadhi True Fire)",
+      "background": "Forged for 49 days in the Eight Trigrams Furnace · side effect is fear of smoke",
+      "battle_impact": "Core of the intelligence build · changes battlefield information transparency",
+      "popularity": "Wukong-exclusive · cannot be duplicated"
+    },
+    {
+      "name": "Three Life-Saving Hairs",
+      "english_name": "Three Life-Saving Hairs",
+      "rarity": "SR",
+      "owner": "Guanyin → Sun Wukong",
+      "element": "Heart",
+      "stats": {
+        "atk": 0,
+        "def": 0,
+        "control": 0,
+        "rescue": 3
+      },
+      "effect": "Can transform into any item · 3 uses total",
+      "counter": "None",
+      "background": "An emergency rescue item gifted by Guanyin",
+      "battle_impact": "A life-saving item · but with limited uses",
+      "popularity": "Limited · only 3 in all three realms"
+    }
+  ],
+  "webnovel_adaptations": [
+    {
+      "genre": "Son-in-Law",
+      "title": "Journey to the West: Starting as the Son-in-Law of Gao Village",
+      "protagonist": "Zhu Bajie",
+      "setting": "Gao Village",
+      "premise": "A modern programmer transmigrates into Zhu Bajie · immediately recruited as a son-in-law by Old Gao · and must pretend not to know martial arts before the beautiful Cuilan",
+      "core_plothook": "Uses modern business knowledge to transform Gao Village · becomes the local tycoon · but must dodge Wukong’s recruitment",
+      "selling_point": "Comedy + slice-of-life farming + business warfare in one",
+      "target_audience": "Urban-fiction fans · readers who want something light",
+      "popularity_estimate": "Medium (7.5/10)",
+      "key_quote": "Me, Marshal Tianpeng, the former Supreme Commander of the Navy — now a son-in-law?"
+    },
+    {
+      "genre": "Quit-the-Team",
+      "title": "Fetch scriptures? I quit — Monkey wants to lie flat",
+      "protagonist": "Sun Wukong",
+      "setting": "Flower-Fruit Mountain",
+      "premise": "Banished back to Flower-Fruit Mountain by Tang Sanzang · this time Wukong truly quits · and starts a K-12 education system for his monkey descendants",
+      "core_plothook": "Chaos breaks out across the three realms · the gods beg him to return · but Wukong says 'I’m retired — leave me alone'",
+      "selling_point": "Lie-flat power fantasy + education + anti-tradition",
+      "target_audience": "996 workers · the anti-rat-race crowd",
+      "popularity_estimate": "High (9/10) · resonates with the current mood",
+      "key_quote": "Go back just because you say so? I just bought a school-district house on Flower-Fruit Mountain"
+    },
+    {
+      "genre": "Inner Voice",
+      "title": "Great Tang Pilgrim: The Emperor Can Hear My Inner Voice",
+      "protagonist": "Tang Sanzang",
+      "setting": "Chang’an → the West",
+      "premise": "Li Shimin can hear Tang Sanzang’s inner voice · discovering that this sworn brother grumbles daily about the long road and many demons",
+      "core_plothook": "Li Shimin secretly arranges rescues along the way · throwing Guanyin’s script into chaos · and rewriting the pilgrimage project",
+      "selling_point": "Power fantasy + script-flipping + roast comedy",
+      "target_audience": "Power-fantasy readers · fans of meta jokes",
+      "popularity_estimate": "High (8.5/10)",
+      "key_quote": "[Inner voice] Where the heck is this place? Why are there more demons than people?"
+    },
+    {
+      "genre": "System",
+      "title": "Journey to the West: I Have a Tribulation System",
+      "protagonist": "Sha Wujing",
+      "setting": "Flowing Sands River → the pilgrimage road",
+      "premise": "Sha Wujing awakens a tribulation system · leveling up with each ordeal · and climbs from the quietest disciple to the strongest",
+      "core_plothook": "System quest rewards let Sha Wujing grow stronger in silence · ultimately surpassing Wukong",
+      "selling_point": "Comeback + stat-driven + hidden powerhouse",
+      "target_audience": "Stat nerds · comeback-story fans",
+      "popularity_estimate": "Medium-high (8/10)",
+      "key_quote": "Ding! Host completed the 'Carry the Luggage 10,000 km' achievement · Reward: Constitution +10"
+    },
+    {
+      "genre": "Rebirth",
+      "title": "Reborn as Tang Sanzang’s Elder Brother",
+      "protagonist": "Chen Guangrui (revived)",
+      "setting": "Hong River → Chang’an",
+      "premise": "Revived, Chen Guangrui is reborn to before the pilgrimage begins · and resolves to protect his younger brother Tang Sanzang first",
+      "core_plothook": "With memories of his past life · he remaps the pilgrimage route · turning 81 ordeals into 30",
+      "selling_point": "Fate-changing + brotherhood + strategy",
+      "target_audience": "Rebirth-fiction fans · readers who enjoy family bonds",
+      "popularity_estimate": "Medium (7/10)",
+      "key_quote": "Xuanzang, big brother will never let you die at a demon’s hands this time"
+    },
+    {
+      "genre": "Villain",
+      "title": "Journey to the West: I, the Six-Eared Macaque, Should Have Become a Buddha",
+      "protagonist": "Six-Eared Macaque",
+      "setting": "Spirit Mountain → Flower-Fruit Mountain",
+      "premise": "Retells the true-and-false Monkey King from the Six-Eared Macaque’s view · revealing he was Wukong’s other half · killed with one strike by Tathāgata",
+      "core_plothook": "Reborn to before the true-and-false Monkey King incident · this time he’ll be himself, not a stand-in",
+      "selling_point": "Villain’s point of view + anti-hero + philosophical",
+      "target_audience": "Deep readers · fans of the villain’s perspective",
+      "popularity_estimate": "Medium-high (8/10)",
+      "key_quote": "Why does he become a Buddha while I get killed? I’m the real Sun Wukong"
+    },
+    {
+      "genre": "Harem",
+      "title": "Journey to the West: Return of Tianpeng",
+      "protagonist": "Zhu Bajie",
+      "setting": "Heaven → the mortal world",
+      "premise": "Marshal Tianpeng is reborn · this time not flirting with Chang’e · but winning back every goddess through real action",
+      "core_plothook": "Wins over Chang’e, Gao Cuilan, the Jade Rabbit Spirit, and the Spider Spirit · building the ultimate harem",
+      "selling_point": "Power fantasy + harem + rebirth",
+      "target_audience": "Harem-fiction fans · the power-fantasy crowd",
+      "popularity_estimate": "Medium (6/10) · crowded lane",
+      "key_quote": "Everything I missed in my past life — I’ll have it all in this one"
+    },
+    {
+      "genre": "Invincible",
+      "title": "Journey to the West: I, Tathāgata, Invincible from the Start",
+      "protagonist": "Tathāgata Buddha",
+      "setting": "Spirit Mountain → the three realms",
+      "premise": "Tells the behind-the-scenes design of the 81 ordeals from Tathāgata’s view · every ordeal arranged by his own hand",
+      "core_plothook": "Readers watch the show alongside Tathāgata · enjoying how his own script unfolds",
+      "selling_point": "God’s-eye view + invincible power fantasy + behind-the-scenes",
+      "target_audience": "Sophisticated readers · who enjoy watching the protagonist control everything",
+      "popularity_estimate": "Medium (7/10) · high entry barrier",
+      "key_quote": "Wukong, this ordeal is a growth lesson I designed for you"
+    },
+    {
+      "genre": "Infinite Flow",
+      "title": "Journey to the West Instance: Farming Monsters on Spirit Mountain",
+      "protagonist": "Original protagonist",
+      "setting": "Infinite space",
+      "premise": "The protagonist is pulled into a Journey to the West instance world · and must clear all 81 ordeal instances to return to reality",
+      "core_plothook": "Each instance has special rules · the protagonist must crack them to clear it",
+      "selling_point": "Infinite flow + puzzle-solving + Journey to the West theme",
+      "target_audience": "Infinite-flow fans · puzzle lovers",
+      "popularity_estimate": "Medium-high (8/10)",
+      "key_quote": "Instance · Flaming Mountain · S-rank difficulty · 5% survival rate"
+    }
+  ],
+  "game_webnovel_summary": {
+    "total_cards": 12,
+    "total_artifacts": 10,
+    "total_webnovels": 9,
+    "rarity_distribution": {
+      "UR": 2,
+      "SSR": 5,
+      "SR": 2,
+      "R": 2,
+      "N": 1
+    },
+    "element_distribution": {
+      "Metal": 1,
+      "Light": 1,
+      "Water": 3,
+      "Thunder": 1,
+      "Heart": 1,
+      "Earth": 2,
+      "Fire": 1,
+      "Dark": 2
+    },
+    "avg_power": 6358.3,
+    "max_power": 10000,
+    "min_power": 800,
+    "webnovel_genres": [
+      "Son-in-Law",
+      "Quit-the-Team",
+      "Inner Voice",
+      "System",
+      "Rebirth",
+      "Villain",
+      "Harem",
+      "Invincible",
+      "Infinite Flow"
+    ],
+    "best_webnovel": "Fetch scriptures? I quit — Monkey wants to lie flat"
+  }
+};
 
     // ============================================================
     // Color mapping
@@ -3204,10 +3583,10 @@ function renderTreemap(opts){
     }
     async function loadAll() {
         const [cards, artifacts, novels, summary] = await Promise.all([
-            loadJson("../data/json/character_cards.json", EMBEDDED.character_cards),
-            loadJson("../data/json/artifact_panels.json", EMBEDDED.artifact_panels),
-            loadJson("../data/json/webnovel_adaptations.json", EMBEDDED.webnovel_adaptations),
-            loadJson("../data/json/game_webnovel_summary.json", EMBEDDED.game_webnovel_summary)
+            loadJson("../en/json/character_cards.json", EMBEDDED.character_cards),
+            loadJson("../en/json/artifact_panels.json", EMBEDDED.artifact_panels),
+            loadJson("../en/json/webnovel_adaptations.json", EMBEDDED.webnovel_adaptations),
+            loadJson("../en/json/game_webnovel_summary.json", EMBEDDED.game_webnovel_summary)
         ]);
         return { cards, artifacts, novels, summary };
     }
@@ -3788,7 +4167,7 @@ function renderTreemap(opts){
             // Embedded data
         } else {
             document.getElementById("dataSource").innerHTML =
-                "Data source: loaded live from <code>../data/json/</code> (running in http server mode)";
+                "Data source: loaded live from <code>../en/json/</code> (running in http server mode)";
         }
 
         renderCards(data.cards);

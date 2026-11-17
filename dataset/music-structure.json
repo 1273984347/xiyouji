@@ -1,15 +1,15 @@
 {
   "summary": {
     "total_sounds": 16,
-    "total_chapters": 97,
+    "total_chapters": 100,
     "total_symmetries": 8,
     "total_movements": 4,
-    "avg_rhythm": 4.26,
+    "avg_rhythm": 4.28,
     "max_rhythm": 5,
     "min_rhythm": 2,
     "phase_distribution": {
       "序曲": 12,
-      "交响": 82,
+      "交响": 85,
       "尾声": 3
     }
   },
@@ -327,6 +327,12 @@
       "feature": "医治人参果树·镇元大仙结拜"
     },
     {
+      "chapter": 26,
+      "phase": "交响",
+      "rhythm": 5,
+      "feature": "三岛求方·甘泉活树"
+    },
+    {
       "chapter": 27,
       "phase": "交响",
       "rhythm": 5,
@@ -349,6 +355,12 @@
       "phase": "交响",
       "rhythm": 5,
       "feature": "唐僧化虎·悟空回救"
+    },
+    {
+      "chapter": 31,
+      "phase": "交响",
+      "rhythm": 5,
+      "feature": "义激猴王·智降妖怪"
     },
     {
       "chapter": 32,
@@ -397,6 +409,12 @@
       "phase": "交响",
       "rhythm": 4,
       "feature": "文殊收青毛狮"
+    },
+    {
+      "chapter": 40,
+      "phase": "交响",
+      "rhythm": 5,
+      "feature": "红孩儿戏化·悟空被擒"
     },
     {
       "chapter": 41,

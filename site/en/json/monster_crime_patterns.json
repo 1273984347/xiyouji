@@ -1,0 +1,138 @@
+{
+  "concept_name": "Monster Crime Pattern Taxonomy",
+  "english_name": "Monster Crime Pattern Taxonomy",
+  "definition": "Across the 81 tribulations, the demons of Xiyouji reveal 5 crime methods — from 'transformation fraud' to 'team siege' — with method tier positively correlated with treasure tier.",
+  "crime_types": [
+    {
+      "type": "Transformation Fraud",
+      "english_name": "Transformation Fraud",
+      "count": 18,
+      "representative_cases": [
+        "White Bone Demon's three transformations (village girl / old woman / old man) to win Tang Sanzang's trust",
+        "Golden Horn and Silver Horn transform into old priests · disguised as monks to infiltrate the monastery",
+        "Yellow Robe Demon transforms into a handsome young man · deceiving the princess of Precious Elephant Kingdom",
+        "Six-eared Macaque transforms into Sun Wukong · usurping the scripture-seeking team",
+        "Silver Horn the Great transforms into an old priest · tricking Wukong into carrying a mountain"
+      ],
+      "target_pattern": "Tang Sanzang's mortal-eyes trust · the cognitive blind spot within the scripture-seeking team",
+      "success_rate": 0.6,
+      "detection_difficulty": 8,
+      "typical_chapters": [
+        "Ch. 27",
+        "Ch. 32-35",
+        "Ch. 57-58"
+      ],
+      "key_insight": "Transformation demons are 'information-gap' criminals · profiting through disguise and information asymmetry"
+    },
+    {
+      "type": "Forceful Plunder",
+      "english_name": "Forceful Plunder",
+      "count": 25,
+      "representative_cases": [
+        "Black Bear Demon steals the cassock · looting amid chaos",
+        "Yellow Wind Demon forcibly abducts Tang Sanzang into his cave",
+        "the Great King of Linggan freezes the Tongtian River to seize people",
+        "Yellow Robe Demon directly seizes a bride · coercion by force",
+        "Nine-headed Insect steals the Buddha relic (śarīra)"
+      ],
+      "target_pattern": "Tang Sanzang's flesh / treasures / wealth · aiming to overpower through force",
+      "success_rate": 0.4,
+      "detection_difficulty": 3,
+      "typical_chapters": [
+        "Ch. 17",
+        "Ch. 21",
+        "Ch. 47-49",
+        "Ch. 62-63"
+      ],
+      "key_insight": "Force-type demons are 'brute-force' criminals · easy to identify but hard to overpower"
+    },
+    {
+      "type": "Seduction",
+      "english_name": "Seduction",
+      "count": 8,
+      "representative_cases": [
+        "Scorpion Demon forces marriage at Pipa Cave · trying to break Tang Sanzang's chastity",
+        "Seven Spider Demon Sisters seduce at the Zhuogou Spring",
+        "Rat Demon forces marriage at the Bottomless Cave",
+        "Jade Rabbit Demon, as a false princess of Tianzhu, solicits a marriage",
+        "Apricot Fairy lures with poetry at Thorn Ridge"
+      ],
+      "target_pattern": "Tang Sanzang's chastity · breaking the pilgrim's virgin body to gain immortality",
+      "success_rate": 0.1,
+      "detection_difficulty": 6,
+      "typical_chapters": [
+        "Ch. 55",
+        "Ch. 72-73",
+        "Ch. 80-83",
+        "Ch. 95"
+      ],
+      "key_insight": "Seduction demons are 'soft-power' criminals · low success rate but Tang Sanzang repeatedly nears breaking his vows"
+    },
+    {
+      "type": "Magic Threat",
+      "english_name": "Magic Threat",
+      "count": 12,
+      "representative_cases": [
+        "Red Boy's Samādhi True Fire · nearly burns Wukong to death",
+        "Green Ox Demon's Diamond Bracelet sucks away all weapons",
+        "Dapeng's Yin-Yang Two-Energy Bottle · traps victims and dissolves them",
+        "Yellow-browed Demon's golden cymbals and Human-seed Pouch",
+        "Hundred-eyed Demon Lord's thousand-eye golden light · traps Wukong"
+      ],
+      "target_pattern": "suppressing the scripture-seeking team with exclusive magic / treasures · forcing them to seek outside help",
+      "success_rate": 0.5,
+      "detection_difficulty": 9,
+      "typical_chapters": [
+        "Ch. 40-42",
+        "Ch. 50-52",
+        "Ch. 73",
+        "Ch. 65-66"
+      ],
+      "key_insight": "Magic demons are 'technical-barrier' criminals · only breakable by finding the original owner or a counter-treasure"
+    },
+    {
+      "type": "Team Siege",
+      "english_name": "Team Siege",
+      "count": 6,
+      "representative_cases": [
+        "Three demons of Lion-Camel Ridge (Green Lion / White Elephant / Dapeng) fight in coordination",
+        "Three demons of Chechi Kingdom (Tiger Strength / Deer Strength / Goat Strength) in magical contests",
+        "Nine-headed Son-in-law of Bibo Pool + the Dragon King family of Wansheng",
+        "Eighteen Lords of Thorn Ridge + Apricot Fairy and other tree spirits",
+        "Seven Spider Demons of Pansi Cave in coordination"
+      ],
+      "target_pattern": "multiple demons cooperating · clear division of labor · measured offense and defense",
+      "success_rate": 0.3,
+      "detection_difficulty": 7,
+      "typical_chapters": [
+        "Ch. 44-46",
+        "Ch. 74-77",
+        "Ch. 62-63",
+        "Ch. 64"
+      ],
+      "key_insight": "Team demons are 'organized' criminals · weak individually but strong in coordination · must be defeated one by one"
+    }
+  ],
+  "pattern_stats": {
+    "total_cases": 69,
+    "by_type": {
+      "Deception by Transformation": 18,
+      "Robbery by Force": 25,
+      "Seduction": 8,
+      "Magical Threat": 12,
+      "Team Encirclement": 6
+    },
+    "avg_success_rate": 0.38,
+    "highest_difficulty": "Magic Threat (9/10)",
+    "most_common": "Forceful Plunder (25 cases · 36%)",
+    "most_dangerous": "Magic Threat (50% success rate + difficulty 9)"
+  },
+  "pattern_insights": [
+    "The 5 crime methods correspond to 5 demon strategies · a gradient from 'technical' to 'physical'",
+    "Transformation Fraud is hard to detect · but is specifically countered by Wukong's Fiery Eyes",
+    "Forceful Plunder is the most common but has the lowest success rate · a 'low-tech, high-volume' crime",
+    "Seduction specifically targets Tang Sanzang's chastity · only 10% success rate · but greatest psychological threat",
+    "Magic Threat has the highest success rate · revealing the essence of Xiyouji's 'technical barrier = survival barrier'",
+    "Team Siege represents demon organization · the three demons of Lion-Camel are the highest form of demon organization"
+  ]
+}

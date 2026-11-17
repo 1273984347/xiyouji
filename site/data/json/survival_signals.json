@@ -1,0 +1,174 @@
+{
+  "concept_name": "遇险信号生存概率",
+  "english_name": "Survival Signal Probability",
+  "definition": "唐僧被擒后通过 10 种方式发出求救信号·信号的有效性决定其能否活到救援到达·这是妖怪社会学的'被害人生存学'",
+  "signal_methods": [
+    {
+      "method": "哭泣",
+      "english_name": "Crying",
+      "survival_probability": 0.05,
+      "response_time_hours": 12,
+      "effectiveness": 1,
+      "cases": [
+        "宝象国被黄袍怪囚禁时整日啼哭",
+        "盘丝洞被吊在梁上哭泣"
+      ],
+      "mechanism": "纯情绪宣泄·无信息传递·对方接收不到信号",
+      "verdict": "无效信号·仅作心理安慰"
+    },
+    {
+      "method": "念经",
+      "english_name": "Chanting Sutras",
+      "survival_probability": 0.1,
+      "response_time_hours": 24,
+      "effectiveness": 2,
+      "cases": [
+        "平顶山被金角银角抓入洞中念心经",
+        "无底洞被老鼠精逼迫时默念观音"
+      ],
+      "mechanism": "通过宗教仪式寻求心理庇护·偶有灵感触动",
+      "verdict": "心理防御机制·实战效果有限"
+    },
+    {
+      "method": "托梦",
+      "english_name": "Dream Visit",
+      "survival_probability": 0.3,
+      "response_time_hours": 8,
+      "effectiveness": 4,
+      "cases": [
+        "乌鸡国王托梦唐僧求救",
+        "被青牛精囚禁时托梦给徒弟"
+      ],
+      "mechanism": "通过梦境传递信息·需接收方有灵性",
+      "verdict": "针对鬼魂/被害者有效·唐僧主动托梦少"
+    },
+    {
+      "method": "求救信物",
+      "english_name": "Rescue Token",
+      "survival_probability": 0.5,
+      "response_time_hours": 12,
+      "effectiveness": 6,
+      "cases": [
+        "宝象国百花羞公主送血书给唐僧",
+        "女儿国国王送通关文牒"
+      ],
+      "mechanism": "通过信物传递求救信息·需有外部人员协助",
+      "verdict": "中等有效·依赖信物能否送达"
+    },
+    {
+      "method": "借助妖怪同情者",
+      "english_name": "Monster Sympathizer",
+      "survival_probability": 0.4,
+      "response_time_hours": 18,
+      "effectiveness": 5,
+      "cases": [
+        "金鱼精事件中陈家庄村民通风报信",
+        "通天河老鼋主动驮渡",
+        "铁扇公主因儿子被收而对悟空有怨但未杀唐僧"
+      ],
+      "mechanism": "妖怪洞府内部或边缘人物因同情而传讯",
+      "verdict": "概率不稳定·依赖妖怪性格"
+    },
+    {
+      "method": "悟空火眼金睛",
+      "english_name": "Wukong's Fiery Eyes",
+      "survival_probability": 0.8,
+      "response_time_hours": 2,
+      "effectiveness": 9,
+      "cases": [
+        "白骨精变化时悟空一眼识破",
+        "六耳猕猴虽难辨但最终被识破",
+        "蜘蛛精变化被悟空识破"
+      ],
+      "mechanism": "火眼金睛能看穿变化·主动识别威胁",
+      "verdict": "最可靠的被动信号·但需悟空在场"
+    },
+    {
+      "method": "八戒找救兵",
+      "english_name": "Bajie Seeks Reinforcements",
+      "survival_probability": 0.7,
+      "response_time_hours": 36,
+      "effectiveness": 8,
+      "cases": [
+        "红孩儿事件中八戒去南海请观音",
+        "青牛精事件中八戒首战被擒·后协调求助",
+        "狮驼岭八戒去南海请观音"
+      ],
+      "mechanism": "八戒虽懒·但求助能力不弱·常作为副救援通道",
+      "verdict": "效率中等·可靠性较高"
+    },
+    {
+      "method": "沙僧等待",
+      "english_name": "Sandy Waits",
+      "survival_probability": 0.3,
+      "response_time_hours": 72,
+      "effectiveness": 3,
+      "cases": [
+        "通天河事件中沙僧守行李",
+        "多次被擒后沙僧被动等待悟空处理"
+      ],
+      "mechanism": "沙僧性格被动·等待救援而非主动求救",
+      "verdict": "信号传递效率最低·但稳定坚守岗位"
+    },
+    {
+      "method": "白龙马传讯",
+      "english_name": "White Dragon Horse Sends Message",
+      "survival_probability": 0.6,
+      "response_time_hours": 12,
+      "effectiveness": 7,
+      "cases": [
+        "宝象国黄袍怪事件中白龙马化身宫女刺杀",
+        "黄袍怪事件中白龙马催促八戒去找悟空"
+      ],
+      "mechanism": "白龙马虽沉默·但关键时刻化身人类传讯或出手",
+      "verdict": "低频但高效·关键节点出手"
+    },
+    {
+      "method": "天庭预警",
+      "english_name": "Heavenly Court Warning",
+      "survival_probability": 0.5,
+      "response_time_hours": 24,
+      "effectiveness": 6,
+      "cases": [
+        "玉帝派太白金星预告前方有难",
+        "如来佛祖提前布局（如金角银角下凡为磨砺）",
+        "观音菩萨多次暗示前方考验"
+      ],
+      "mechanism": "天庭/灵山提前预警·但常以隐语方式·不易解读",
+      "verdict": "信息模糊·需事后才能验证"
+    }
+  ],
+  "signal_stats": {
+    "total_methods": 10,
+    "best_method": "悟空火眼金睛（生存率 80%）",
+    "worst_method": "哭泣（生存率 5%）",
+    "fastest_response": "悟空火眼金睛（2 小时）",
+    "slowest_response": "沙僧等待（72 小时）",
+    "avg_survival_probability": 0.425,
+    "avg_effectiveness": 5.1,
+    "passive_methods": [
+      "哭泣",
+      "念经",
+      "沙僧等待"
+    ],
+    "active_methods": [
+      "悟空火眼金睛",
+      "八戒找救兵",
+      "白龙马传讯"
+    ],
+    "external_methods": [
+      "托梦",
+      "求救信物",
+      "借助妖怪同情者",
+      "天庭预警"
+    ]
+  },
+  "survival_insights": [
+    "唐僧自身求救能力极弱·哭泣+念经生存率仅 5-10%·需依赖外部救援",
+    "悟空火眼金睛是最可靠的'被动信号'·但前提是悟空在场且未被骗",
+    "白龙马虽沉默·但在黄袍怪事件中是关键转折·揭示'低调角色的高价值'",
+    "沙僧'等待模式'效率最低·反映其被动性格特征",
+    "天庭预警虽存在但信息模糊·揭示天庭'有限干预'原则",
+    "10 种信号中主动信号平均生存率 70%·被动信号平均 15%·差距显著"
+  ]
+}

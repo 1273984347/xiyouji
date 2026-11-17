@@ -1,0 +1,130 @@
+{
+  "concept_name": "紧箍咒作为外部执行控制",
+  "english_name": "Golden Hoop Mantra as External Executive Control",
+  "cognitive_definition": "执行控制（executive control）：前额叶皮层抑制边缘系统冲动的能力·当情绪系统（边缘系统）要爆发时·需要外部干预激活前额叶",
+  "core_case": "当悟空的情绪系统（边缘系统）要爆发时·唐僧通过语言刺激（紧箍咒）强行激活他的前额叶皮层·让他抑制冲动·这是最早的'外部认知干预'案例",
+  "neuroscience_mapping": {
+    "prefrontal_cortex": {
+      "function": "理性决策·冲动抑制·目标导向",
+      "wukong_equivalent": "取经目标·保护唐僧·不杀生",
+      "activation_method": "紧箍咒刺激"
+    },
+    "limbic_system": {
+      "function": "情绪反应·战斗或逃跑·本能驱动",
+      "wukong_equivalent": "愤怒·好斗·杀生冲动",
+      "trigger": "妖怪挑衅·唐僧误解·受委屈"
+    },
+    "amygdala": {
+      "function": "恐惧与愤怒处理",
+      "wukong_equivalent": "对妖怪的愤怒",
+      "regulation": "紧箍咒激活前额叶抑制杏仁核"
+    }
+  },
+  "mantra_cases": [
+    {
+      "n": 1,
+      "chapter": "第 14 回",
+      "context": "首次使用·悟空打死六贼",
+      "trigger_event": "悟空杀生·唐僧责骂·悟空欲走",
+      "mantra_intensity": 5,
+      "prefrontal_activation": 8,
+      "limbic_inhibition": 7,
+      "outcome": "悟空痛苦屈服·留下取经",
+      "cognitive_effect": "首次建立'外部执行控制'机制",
+      "wukong_emotion": "愤怒·屈辱"
+    },
+    {
+      "n": 2,
+      "chapter": "第 27 回",
+      "context": "三打白骨精",
+      "trigger_event": "悟空打死白骨精·唐僧不信",
+      "mantra_intensity": 9,
+      "prefrontal_activation": 9,
+      "limbic_inhibition": 8,
+      "outcome": "悟空被赶走·但前额叶已激活",
+      "cognitive_effect": "执行控制过度·导致悟空离开",
+      "wukong_emotion": "愤怒·委屈"
+    },
+    {
+      "n": 3,
+      "chapter": "第 38 回",
+      "context": "乌鸡国救国王",
+      "trigger_event": "悟空欲打妖怪·唐僧提醒",
+      "mantra_intensity": 3,
+      "prefrontal_activation": 6,
+      "limbic_inhibition": 5,
+      "outcome": "悟空克制·改用智取",
+      "cognitive_effect": "轻度刺激·激活前额叶·改用策略",
+      "wukong_emotion": "克制·理性"
+    },
+    {
+      "n": 4,
+      "chapter": "第 41 回",
+      "context": "红孩儿三昧真火",
+      "trigger_event": "悟空被烧·欲强行突破",
+      "mantra_intensity": 4,
+      "prefrontal_activation": 7,
+      "limbic_inhibition": 6,
+      "outcome": "悟空求助观音",
+      "cognitive_effect": "执行控制让悟空学会求助",
+      "wukong_emotion": "冷静·求助"
+    },
+    {
+      "n": 5,
+      "chapter": "第 56 回",
+      "context": "悟空打死强盗",
+      "trigger_event": "悟空杀生·唐僧责骂",
+      "mantra_intensity": 8,
+      "prefrontal_activation": 9,
+      "limbic_inhibition": 8,
+      "outcome": "悟空被赶走·六耳猕猴事件",
+      "cognitive_effect": "执行控制过度·导致心魔爆发",
+      "wukong_emotion": "愤怒·心魔"
+    },
+    {
+      "n": 6,
+      "chapter": "第 71 回",
+      "context": "朱紫国救皇后",
+      "trigger_event": "悟空欲杀妖怪·唐僧提醒",
+      "mantra_intensity": 2,
+      "prefrontal_activation": 5,
+      "limbic_inhibition": 4,
+      "outcome": "悟空克制·改用计谋",
+      "cognitive_effect": "轻度提醒·悟空已内化执行控制",
+      "wukong_emotion": "克制·策略"
+    }
+  ],
+  "mantra_evolution": {
+    "early_phase": {
+      "chapters": "第 14-30 回",
+      "characteristic": "高强度频繁使用·建立机制",
+      "avg_intensity": 7,
+      "success_rate": "60%·3 次成功 2 次失败"
+    },
+    "middle_phase": {
+      "chapters": "第 31-58 回",
+      "characteristic": "中度使用·悟空逐渐适应",
+      "avg_intensity": 4,
+      "success_rate": "75%·3 次成功 1 次失败"
+    },
+    "late_phase": {
+      "chapters": "第 59-100 回",
+      "characteristic": "低度使用·悟空已内化执行控制",
+      "avg_intensity": 2,
+      "success_rate": "100%·基本不再需要"
+    }
+  },
+  "executive_control_insights": [
+    "紧箍咒是最早的'外部认知干预'案例·类似现代认知行为疗法（CBT）",
+    "前期紧箍咒强度高·建立执行控制机制",
+    "中期紧箍咒强度降低·悟空开始内化执行控制",
+    "后期紧箍咒几乎不再使用·悟空已完全内化",
+    "这是认知发展的典型案例：从外部控制到内化控制"
+  ],
+  "modern_parallel": {
+    "cbt": "认知行为疗法·通过语言干预改变行为模式",
+    "neurofeedback": "神经反馈训练·通过外部信号训练大脑自我调节",
+    "meditation": "冥想训练·激活前额叶·抑制杏仁核",
+    "wukong_case": "紧箍咒 = 最早的 CBT + 神经反馈 + 冥想训练的混合体"
+  }
+}

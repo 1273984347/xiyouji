@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（828）
+## 文件（840）
 
 ### Markdown 文档
 
@@ -798,6 +798,8 @@
 - `_w996_spec.json`
 - `_w997_spec.json`
 - `_w999_batch.json`
+- `chart-degrade-baseline.txt`
+- `chart-values-baseline-en.txt`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
@@ -805,10 +807,15 @@
 - `colorblind-baseline.txt`
 - `colorblind-survey.json`
 - `contract-smoke-baseline.jsonl`
+- `data-badge-baseline.txt`
 - `data-copy-chain-baseline.json`
 - `data-drift-baseline.txt`
+- `data-drift-singleside-baseline.txt`
 - `design-tokens.json`
 - `emoji-residue-baseline.txt`
+- `en-data-source-baseline.txt`
+- `fallback-fidelity-baseline.txt`
+- `fetch-closure-baseline.txt`
 - `font-charset.txt`
 - `frontmatter-baseline.txt`
 - `glossary-baseline.txt`
@@ -816,6 +823,8 @@
 - `hreflang-pairs.json`
 - `mobile_viewport_report.json`
 - `mobile_viewport_report_320.json`
+- `mobile_viewport_report_en.json`
+- `mobile_viewport_report_en_baseline.txt`
 - `obs_samples.json`
 - `pd3-capture-manifest.json`
 - `perf-baseline.json`
@@ -828,6 +837,9 @@
 - `script-coverage-baseline.txt`
 - `stats-changelog.json`
 - `stats.json`
+- `svg-text-contrast-baseline.txt`
+- `svg_text_contrast_report.json`
+- `svg_text_contrast_report_backdrop.json`
 - `unwrapped-tables-baseline.txt`
 - `yuanqi_edges.csv`
 - `yuanqi_nodes.csv`

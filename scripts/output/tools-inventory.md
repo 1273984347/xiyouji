@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-17 21:51
+生成时间：2026-11-18 00:16
 
-共 **219** 件（门禁与校验 106 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 82 · 一次性（下划线前缀） 7）
+共 **224** 件（门禁与校验 110 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 83 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（106）
+## 门禁与校验（110）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -24,7 +24,7 @@
 | `check_chart_data.py` | check_chart_data.py — 图表静态自洽门禁（W551 挂载·verify_delivery 第 24 门禁）。 |
 | `check_chart_degrade.py` | check_chart_degrade.py — 第 30 门禁 · 窄屏降级声明（PD-1b · W654） |
 | `check_chart_design_parity.py` | check_chart_design_parity.py — chart-design 中英对拍检查（W1105·design 审查 P3-9） |
-| `check_chart_values.js` | 视图载体意图（静态签名·用于把「本来就没有图表的结构页」判 na 而非假红） |
+| `check_chart_values.js` | W1265 批一（判据补盲 1-1）：EN 面独立基线文件——分面冻结·分面拒通过。 |
 | `check_citability.py` | 第 28 门禁 · 可视化可引用性检查（check_citability.py） |
 | `check_citations.py` | 原著引文硬验证（W503 第 20 门禁·W737 扩展三检）：规范引文行 + 归属对白 + 语料保真。 |
 | `check_claude_md.py` | CLAUDE.md 速查层完整性门禁（第 32 门禁 · W667/S-02）——防速查层断链与数字腐烂。 |
@@ -44,7 +44,7 @@
 | `check_dashboard_kpi.py` | check_dashboard_kpi.py — 第 68 门禁 · 首页 KPI 与统计快照对拍（W1170） |
 | `check_data_badge_coverage.py` | check_data_badge_coverage.py — 第 66 门禁 · 数据徽标覆盖（W1167 · MVP 迁移批③） |
 | `check_data_copy_chain.py` | check_data_copy_chain.py — 数据副本链值级对账门禁（W920 建置·B-W855-04 清偿）。 |
-| `check_data_drift.js` | W1231：单行形态回退——V8 执行式重写产出 compact 单行对象，多行正则（要求 |
+| `check_data_drift.js` | W1265 批一（判据补盲 1-6）：扩面到 site/en（138 页）——原实现只扫 site/data。 |
 | `check_dataset_manifest.py` | 第 63 门禁：dataset 清单与 schema 对拍（README ↔ 磁盘 / 量纲 / 端点 / 空值 / 废弃标记）。 |
 | `check_dataset_provenance.py` | 人物关系数据溯源校验器（W1138 建·W1141 挂第 61 槽）。 |
 | `check_db_schema.py` | check_db_schema.py — DB schema 门禁（W917 建置·B-DB-05 清偿）。 |
@@ -59,7 +59,9 @@
 | `check_dynamic_links.py` | check_dynamic_links.py — JS 动态链接存在性门禁（补 lint_links 静态扫描盲区）。 |
 | `check_embedded_stale_markers.py` | 第 38 门禁：页面内嵌残留标记（W693·W692 报告 A-01 用户裁决挂载）。 |
 | `check_emoji_icons.py` | W949 · 报告型探针：UI 图标位 emoji 残留 + 图标渲染正确性 |
+| `check_en_data_source.py` | check_en_data_source.py — 第 78 门禁 · EN 数据源语言隔离（W1265 批一·判据补盲 1-2）。 |
 | `check_external_rule_coverage.py` | check_external_rule_coverage.py — W1196：外部规则覆盖面审计守卫。 |
+| `check_fallback_fidelity.py` | check_fallback_fidelity.py — 第 79 门禁 · 回退块保真度（W1265 批一·判据补盲 1-8）。 |
 | `check_folder_docs.py` | check_folder_docs.py — 目录文档新鲜度门禁（W780 建立·verify_delivery 第 45 槽）。 |
 | `check_frontmatter.py` | 元信息块 v2 门禁（W501 第 18 门禁）：校验 docs/01-06 新文件含血缘 + 核验状态 4 字段。 |
 | `check_glossary.py` | 术语一致性门禁（W502 第 19 门禁）：术语表.md ↔ dataset/glossary.json 双向同步 + 规范词锚定。 |
@@ -74,6 +76,7 @@
 | `check_interaction_binding.py` | check_interaction_binding.py — 交互绑定门禁（W908 建置·T-18/A-T07-05）。 |
 | `check_js_syntax.js` | W591（经用户批准）：非 JS 数据块（application/ld+json、application/json、importmap 等） |
 | `check_js_syntax.py` | Check inline JS syntax in HTML files using `node --check`. |
+| `check_json_copies.py` | check_json_copies.py — 第 81 门禁 · 页面引用 → 已部署 闭合性（W1265 批一·判据补盲 1-10） |
 | `check_kpi_card_base.py` | kpi-card 基类门禁（第 37 门禁 · W673/WP-2.6）——防全局基类再被批量操作洗掉 / 页面漏分发。 |
 | `check_lfs_text_purity.py` | check_lfs_text_purity.py — 文本文件不得被 LFS 托管（W1214 立·PR #171 CI 红灯根因判据） |
 | `check_mobile_viewport.py` | check_mobile_viewport.py — 第 64 门禁 · 移动视口触摸与裁剪（W1165 · V4 375px 回归） |
@@ -107,6 +110,7 @@
 | `check_stat_events.py` | check_stat_events.py — 第 67 槽 · 统计事件契约对拍（W1168） |
 | `check_story_timeline_sync.py` | check_story_timeline_sync.py — 故事内时间线双源同步校验（W694 六轮外审 P1-4 落地）。 |
 | `check_structure.py` | check_structure.py — 全站内联 <style> CSS 结构平衡静态门禁（W457 沉淀） |
+| `check_svg_text_contrast.py` | check_svg_text_contrast.py — 第 80 门禁 · 图表 SVG 文字对比度 ≥ 3:1（W1265 批一·判据补盲  |
 | `check_template_contract.py` | check_template_contract.py — 第 69 槽 · 模板结构契约 / 检索假阳性判据（W1178）。 |
 | `check_token_coverage.py` | check_token_coverage.py — Phase E E6 转正门禁（M2/M3：页面私有 <style> 令牌覆盖率） |
 | `check_tooltip_spacing.py` | check_tooltip_spacing.py — tooltip 多行间距判据（W1135·遗留② 根治 + 防复发） |
@@ -163,7 +167,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（82）
+## 工具（83）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -241,6 +245,7 @@
 | `spot_check_nlp.py` | spot-check character_nlp.py 输出数据。 |
 | `stat_event_probe.py` | stat_event_probe.py — 统计事件运行面取证探针（W1168·第 67 槽的动态证据链） |
 | `subject_band.py` | subject_band.py — 主体检测与派生裁切（不写盘·纯函数·W988 建·W1004 由归档桶转正） |
+| `svg_text_contrast_probe.js` | W1265：背景口径可切换—— |
 | `sync_data_json.py` | W678 WP-6.1：dataset 生成器输出 → site/data/json 部署副本 单向同步（清单制）。 |
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `version_surface.py` | version_surface.py — 版本面（跨文件字面量）幂等推进器（W1114）。 |
@@ -256,7 +261,7 @@
 |:---|:---|
 | `__init__.py` | 《详解西游记》分析脚本包（W424 S1 打包：regular package）。 |
 | `_audit_render_states.js` | W1066：OUT 改为可由 --out 覆盖（分片时各写自己的产物文件·CI 再合并） |
-| `_check_json_copies.py` | _check_json_copies.py — W563/A-3：site/data/json/ 部署副本 ↔ scripts/output/d |
+| `_check_json_copies.py` | _check_json_copies.py — 兼容入口（W563/A-3 旧名）→ 委托给 scripts/check_json_copies |
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |

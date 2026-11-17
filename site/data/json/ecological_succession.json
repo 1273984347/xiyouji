@@ -1,0 +1,124 @@
+{
+  "concept_name": "花果山 500 年生态演替",
+  "english_name": "Flower Fruit Mountain 500-Year Ecological Succession",
+  "ecological_definition": "生态演替（ecological succession）：生态系统在干扰后·经历一系列阶段逐渐恢复的过程·类似森林火灾后的次生演替",
+  "core_case": "悟空被压五行山 500 年·花果山从'猴群鼎盛'到'被猎户侵扰'再到'恢复'·是一部完整的次生演替史",
+  "succession_stages": [
+    {
+      "stage": 1,
+      "name": "鼎盛期·齐天大圣时代",
+      "year_range": "大闹天宫前 1000+ 年",
+      "monkey_population": 47000,
+      "biodiversity_index": 9.5,
+      "vegetation_cover": 95,
+      "key_species": [
+        "猕猴",
+        "金丝猴",
+        "猿猴",
+        "马猴"
+      ],
+      "ecological_description": "花果山福地·水帘洞洞天·猴群繁盛·无天敌·生物多样性极高",
+      "keystone_species": "孙悟空（齐天大圣）",
+      "human_interference": 0,
+      "stability": 10
+    },
+    {
+      "stage": 2,
+      "name": "干扰期·大闹天宫",
+      "year_range": "大闹天宫当年",
+      "monkey_population": 47000,
+      "biodiversity_index": 9.5,
+      "vegetation_cover": 90,
+      "key_species": [
+        "猕猴",
+        "金丝猴",
+        "猿猴",
+        "马猴"
+      ],
+      "ecological_description": "悟空反抗天庭·花果山被天兵天将焚烧·'七大圣'联盟瓦解·第一次重大干扰",
+      "keystone_species": "孙悟空（被捕）",
+      "human_interference": 10,
+      "stability": 5,
+      "disturbance_event": "天兵火攻·烧毁大半花果山"
+    },
+    {
+      "stage": 3,
+      "name": "崩溃期·五行山 500 年·猎户屠杀",
+      "year_range": "五行山 500 年间",
+      "monkey_population": 1300,
+      "biodiversity_index": 4,
+      "vegetation_cover": 60,
+      "key_species": [
+        "残存猕猴"
+      ],
+      "ecological_description": "悟空被压五行山·群龙无首·猎户常来侵扰·'放火烧山+网捕箭射'·猴群从 47000 锐减到 1300·减幅 97%",
+      "keystone_species": "无（keystone 丢失）",
+      "human_interference": 10,
+      "stability": 2,
+      "disturbance_event": "猎户持续屠杀·火烧山+箭射+网捕",
+      "population_decline_percent": 97.2
+    },
+    {
+      "stage": 4,
+      "name": "残存期·悟空回归·清理猎户",
+      "year_range": "五行山解脱后第 1 年",
+      "monkey_population": 1300,
+      "biodiversity_index": 4.5,
+      "vegetation_cover": 65,
+      "key_species": [
+        "残存猕猴"
+      ],
+      "ecological_description": "悟空回花果山·'千余猴'迎接·清理猎户 1000+ 人·重建水帘洞·恢复秩序",
+      "keystone_species": "孙悟空（回归）",
+      "human_interference": 0,
+      "stability": 5
+    },
+    {
+      "stage": 5,
+      "name": "恢复期·取经途中·悟空偶回",
+      "year_range": "取经 14 年",
+      "monkey_population": 2000,
+      "biodiversity_index": 6,
+      "vegetation_cover": 75,
+      "key_species": [
+        "猕猴",
+        "金丝猴（恢复中）"
+      ],
+      "ecological_description": "悟空偶尔回花果山·猴群恢复中·但悟空不在时仍有骚扰·未能完全恢复",
+      "keystone_species": "孙悟空（偶尔回归）",
+      "human_interference": 2,
+      "stability": 7
+    },
+    {
+      "stage": 6,
+      "name": "成佛期·斗战胜佛归来",
+      "year_range": "取经成功后",
+      "monkey_population": 8000,
+      "biodiversity_index": 8,
+      "vegetation_cover": 90,
+      "key_species": [
+        "猕猴",
+        "金丝猴",
+        "猿猴（恢复中）"
+      ],
+      "ecological_description": "悟空成斗战胜佛·偶回花果山·猴群恢复到鼎盛期 1/6·生态系统稳定",
+      "keystone_species": "孙悟空（斗战胜佛）",
+      "human_interference": 0,
+      "stability": 9
+    }
+  ],
+  "succession_insights": [
+    "花果山经历完整次生演替：鼎盛→干扰→崩溃→残存→恢复→成佛",
+    "keystone species（孙悟空）丢失是崩溃的根本原因·非猎户本身",
+    "500 年间猴群从 47000 锐减到 1300·减幅 97.2%·生态崩溃",
+    "猎户屠杀本质是 keystone 丢失后的连锁反应·非独立干扰",
+    "恢复缓慢：从 1300 到 8000 用了 14+ 年·仍未恢复到鼎盛",
+    "成佛后猴群恢复到 8000·仅鼎盛期 17%·生态恢复是漫长的"
+  ],
+  "modern_parallel": {
+    "yellowstone_wolves": "黄石公园狼群 reintroduction：keystone 丢失导致生态崩溃·reintroduction 后恢复",
+    "forest_fire_succession": "森林火灾后的次生演替：先锋物种→中间物种→顶级群落",
+    "island_ecology": "岛屿生态学：花果山类似孤岛·keystone 丢失影响更大",
+    "wukong_as_keystone": "悟空是花果山的 keystone species·等同黄石公园的狼"
+  }
+}

@@ -1,0 +1,244 @@
+[
+  {
+    "character": "孙悟空",
+    "stages": [
+      {
+        "stage": "石猴出世",
+        "chapter": 1,
+        "look": "赤裸石猴，目运金光，射冲斗府",
+        "color": "石青色·金光",
+        "fashion_level": 1,
+        "style": "原始·野性"
+      },
+      {
+        "stage": "拜师学艺",
+        "chapter": 2,
+        "look": "采柴穿衣，学人礼节",
+        "color": "粗布褐衣",
+        "fashion_level": 2,
+        "style": "凡俗·学童"
+      },
+      {
+        "stage": "齐天大圣",
+        "chapter": 4,
+        "look": "金冠·金甲·步云履·紫金袍",
+        "color": "金黄·赤红",
+        "fashion_level": 9,
+        "style": "豪华·王者"
+      },
+      {
+        "stage": "取经途中",
+        "chapter": 14,
+        "look": "虎皮裙·直裰·铁箍",
+        "color": "虎皮黄·黑色",
+        "fashion_level": 4,
+        "style": "野性·行者"
+      },
+      {
+        "stage": "斗战胜佛",
+        "chapter": 100,
+        "look": "佛家宝相·庄严金身",
+        "color": "佛金·宝相纹",
+        "fashion_level": 10,
+        "style": "庄严·佛相"
+      }
+    ]
+  },
+  {
+    "character": "唐僧",
+    "stages": [
+      {
+        "stage": "水陆大会",
+        "chapter": 12,
+        "look": "锦襕袈裟·九环锡杖",
+        "color": "锦襕金丝·朱红",
+        "fashion_level": 9,
+        "style": "皇赐·庄严"
+      },
+      {
+        "stage": "取经途中",
+        "chapter": 14,
+        "look": "僧帽直裰·袈裟·锡杖",
+        "color": "灰褐·朱红",
+        "fashion_level": 6,
+        "style": "行脚僧·朴素"
+      },
+      {
+        "stage": "旃檀功德佛",
+        "chapter": 100,
+        "look": "佛家宝相·旃檀之香",
+        "color": "佛金·宝相",
+        "fashion_level": 10,
+        "style": "佛相·庄严"
+      }
+    ]
+  },
+  {
+    "character": "猪八戒",
+    "stages": [
+      {
+        "stage": "天蓬元帅",
+        "chapter": "前传",
+        "look": "金甲神将·天宫仪容",
+        "color": "金光·玄色",
+        "fashion_level": 8,
+        "style": "天将·威武"
+      },
+      {
+        "stage": "高老庄",
+        "chapter": 18,
+        "look": "黑脸短毛·长喙大耳·一领直裰",
+        "color": "黑·灰褐",
+        "fashion_level": 3,
+        "style": "妖怪·怪诞"
+      },
+      {
+        "stage": "取经途中",
+        "chapter": 19,
+        "look": "皂色直裰·九齿钉耙",
+        "color": "黑·灰",
+        "fashion_level": 4,
+        "style": "行脚·朴拙"
+      },
+      {
+        "stage": "净坛使者",
+        "chapter": 100,
+        "look": "佛家使者相·净坛庄严",
+        "color": "佛金·朱红",
+        "fashion_level": 8,
+        "style": "佛相·饱满"
+      }
+    ]
+  },
+  {
+    "character": "沙僧",
+    "stages": [
+      {
+        "stage": "卷帘大将",
+        "chapter": "前传",
+        "look": "金甲·锦衣·威仪",
+        "color": "金·蓝",
+        "fashion_level": 7,
+        "style": "天将·庄严"
+      },
+      {
+        "stage": "流沙河",
+        "chapter": 22,
+        "look": "红发蓝脸·颈悬九颗骷髅",
+        "color": "红发·蓝·白骨",
+        "fashion_level": 2,
+        "style": "妖怪·恐怖"
+      },
+      {
+        "stage": "取经途中",
+        "chapter": 22,
+        "look": "皂色直裰·宝杖·挑担",
+        "color": "黑·灰",
+        "fashion_level": 4,
+        "style": "行脚·朴实"
+      },
+      {
+        "stage": "金身罗汉",
+        "chapter": 100,
+        "look": "罗汉金身·庄严宝相",
+        "color": "佛金·朱红",
+        "fashion_level": 9,
+        "style": "罗汉相·庄严"
+      }
+    ]
+  },
+  {
+    "character": "白龙马",
+    "stages": [
+      {
+        "stage": "西海龙王三太子",
+        "chapter": "前传",
+        "look": "龙子·玉鳞·珠光宝气",
+        "color": "银白·珠光",
+        "fashion_level": 9,
+        "style": "龙族·华贵"
+      },
+      {
+        "stage": "取经途中",
+        "chapter": 15,
+        "look": "白马无鞍·驮唐僧",
+        "color": "纯白",
+        "fashion_level": 5,
+        "style": "马匹·朴素"
+      },
+      {
+        "stage": "八部天龙马",
+        "chapter": 100,
+        "look": "天龙·盘绕山门华表",
+        "color": "天龙金",
+        "fashion_level": 10,
+        "style": "天龙·庄严"
+      }
+    ]
+  },
+  {
+    "character": "观音菩萨",
+    "stages": [
+      {
+        "stage": "寻访取经人",
+        "chapter": 8,
+        "look": "素衣净瓶·杨柳枝·赤足",
+        "color": "白·翠绿·金",
+        "fashion_level": 10,
+        "style": "菩萨·悲悯庄严"
+      }
+    ]
+  },
+  {
+    "character": "玉帝",
+    "stages": [
+      {
+        "stage": "天宫朝会",
+        "chapter": 4,
+        "look": "龙袍·冲天冠·七星剑",
+        "color": "金黄·玄黑",
+        "fashion_level": 10,
+        "style": "帝王·至高"
+      }
+    ]
+  },
+  {
+    "character": "如来佛祖",
+    "stages": [
+      {
+        "stage": "灵山说法",
+        "chapter": 7,
+        "look": "金身·袈裟·莲座·佛光",
+        "color": "佛金·宝相",
+        "fashion_level": 10,
+        "style": "佛祖·至高庄严"
+      }
+    ]
+  },
+  {
+    "character": "铁扇公主",
+    "stages": [
+      {
+        "stage": "芭蕉洞",
+        "chapter": 59,
+        "look": "罗刹女妆·凤冠霞帔·红裙",
+        "color": "赤红·金",
+        "fashion_level": 8,
+        "style": "妖后·华丽"
+      }
+    ]
+  },
+  {
+    "character": "玉兔精",
+    "stages": [
+      {
+        "stage": "天竺公主",
+        "chapter": 95,
+        "look": "宫装·珠翠·捣药杵",
+        "color": "粉白·珠光",
+        "fashion_level": 9,
+        "style": "公主·华美"
+      }
+    ]
+  }
+]

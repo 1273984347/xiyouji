@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（228）
+## 文件（233）
 
 ### Python 脚本
 
@@ -124,7 +124,9 @@
 - `check_dynamic_links.py`
 - `check_embedded_stale_markers.py`
 - `check_emoji_icons.py`
+- `check_en_data_source.py`
 - `check_external_rule_coverage.py`
+- `check_fallback_fidelity.py`
 - `check_folder_docs.py`
 - `check_frontmatter.py`
 - `check_glossary.py`
@@ -138,6 +140,7 @@
 - `check_install_pins.py`
 - `check_interaction_binding.py`
 - `check_js_syntax.py`
+- `check_json_copies.py`
 - `check_kpi_card_base.py`
 - `check_lfs_text_purity.py`
 - `check_mobile_viewport.py`
@@ -171,6 +174,7 @@
 - `check_stat_events.py`
 - `check_story_timeline_sync.py`
 - `check_structure.py`
+- `check_svg_text_contrast.py`
 - `check_template_contract.py`
 - `check_token_coverage.py`
 - `check_tooltip_spacing.py`
@@ -277,6 +281,7 @@
 - `gen_compliance_migration.mjs`
 - `icon_probe.js`
 - `render_check.js`
+- `svg_text_contrast_probe.js`
 - `verify_v2_pages.js`
 
 ### 数据与配置

@@ -1,0 +1,12 @@
+{
+  "sentencing_cases": 10,
+  "avg_crime_severity": 7.1,
+  "avg_sentence_severity": 5.8,
+  "max_disparity": "Golden-Winged Great Peng (disparity_score 10)",
+  "artifact_count": 8,
+  "avg_property_clarity": 5.8,
+  "compensation_total": 0,
+  "data_incidents": 8,
+  "unauthorized_incidents": 1,
+  "audit_coverage": "37.5%"
+}

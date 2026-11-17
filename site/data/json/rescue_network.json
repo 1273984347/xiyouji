@@ -1,0 +1,158 @@
+{
+  "concept_name": "搬救兵关系网",
+  "english_name": "Rescue Network",
+  "definition": "悟空从'先打再说'到'秒变跑腿找菩萨'·搬救兵关系网揭示了'求助型'故事的资源调度模式",
+  "rescue_cases": [
+    {
+      "n": 1,
+      "chapter": "第 17 回",
+      "target": "观音菩萨",
+      "case": "黑熊精偷袈裟",
+      "result": "收为守山大神",
+      "efficiency": 9,
+      "cost": 3
+    },
+    {
+      "n": 2,
+      "chapter": "第 22 回",
+      "target": "无（自己解决）",
+      "case": "沙僧收编",
+      "result": "收为师弟",
+      "efficiency": 8,
+      "cost": 0
+    },
+    {
+      "n": 3,
+      "chapter": "第 26 回",
+      "target": "镇元大仙",
+      "case": "推倒人参果树",
+      "result": "观音甘露水救活",
+      "efficiency": 7,
+      "cost": 2
+    },
+    {
+      "n": 4,
+      "chapter": "第 33 回",
+      "target": "无（自己解决）",
+      "case": "金角银角",
+      "result": "智斗取胜",
+      "efficiency": 7,
+      "cost": 0
+    },
+    {
+      "n": 5,
+      "chapter": "第 39 回",
+      "target": "文殊菩萨",
+      "case": "乌鸡国王",
+      "result": "收青毛狮子",
+      "efficiency": 8,
+      "cost": 2
+    },
+    {
+      "n": 6,
+      "chapter": "第 42 回",
+      "target": "观音菩萨",
+      "case": "红孩儿三昧真火",
+      "result": "收为善财童子",
+      "efficiency": 10,
+      "cost": 4
+    },
+    {
+      "n": 7,
+      "chapter": "第 49 回",
+      "target": "观音菩萨",
+      "case": "金鱼精通天河",
+      "result": "收回归莲池",
+      "efficiency": 9,
+      "cost": 2
+    },
+    {
+      "n": 8,
+      "chapter": "第 52 回",
+      "target": "如来佛祖",
+      "case": "青牛精金刚琢",
+      "result": "暗示老君收走",
+      "efficiency": 8,
+      "cost": 5
+    },
+    {
+      "n": 9,
+      "chapter": "第 55 回",
+      "target": "昴日星官",
+      "case": "蝎子精",
+      "result": "公鸡克蝎子",
+      "efficiency": 9,
+      "cost": 2
+    },
+    {
+      "n": 10,
+      "chapter": "第 59-61 回",
+      "target": "灵吉菩萨+托塔天王",
+      "case": "牛魔王",
+      "result": "诸神围剿收服",
+      "efficiency": 9,
+      "cost": 5
+    },
+    {
+      "n": 11,
+      "chapter": "第 66 回",
+      "target": "弥勒佛",
+      "case": "黄眉怪小雷音寺",
+      "result": "原主收走",
+      "efficiency": 9,
+      "cost": 3
+    },
+    {
+      "n": 12,
+      "chapter": "第 71 回",
+      "target": "观音菩萨",
+      "case": "金毛犼赛太岁",
+      "result": "原主收走",
+      "efficiency": 8,
+      "cost": 2
+    },
+    {
+      "n": 13,
+      "chapter": "第 77 回",
+      "target": "如来佛祖",
+      "case": "狮驼三魔大鹏雕",
+      "result": "佛祖亲临收服",
+      "efficiency": 10,
+      "cost": 6
+    },
+    {
+      "n": 14,
+      "chapter": "第 83 回",
+      "target": "托塔天王+哪吒",
+      "case": "老鼠精无底洞",
+      "result": "原主收走",
+      "efficiency": 9,
+      "cost": 3
+    },
+    {
+      "n": 15,
+      "chapter": "第 90 回",
+      "target": "太乙救苦天尊",
+      "case": "九灵元圣九头狮子",
+      "result": "原主收走",
+      "efficiency": 9,
+      "cost": 3
+    }
+  ],
+  "rescue_stats": {
+    "total_rescues": 15,
+    "self_resolved": 2,
+    "external_rescues": 13,
+    "avg_efficiency": 8.7,
+    "avg_cost": 2.9,
+    "most_called_target": "观音菩萨（3 次）",
+    "highest_cost": "如来佛祖（avg cost 5.5）",
+    "best_roi": "沙僧收编（cost 0·efficiency 8）"
+  },
+  "rescue_pattern": [
+    "前期（1-26 回）：自救为主·共 1 次搬救兵·占比 25%",
+    "中期（27-52 回）：开始求助·共 5 次搬救兵·占比 38%",
+    "后期（53-100 回）：精算师模式·共 7 次搬救兵·占比 54%",
+    "演化规律：从'先打再说'到'精确计算最优解'·是一个理想主义者的成熟过程"
+  ]
+}

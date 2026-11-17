@@ -1,0 +1,98 @@
+[
+  {
+    "pair_name": "金角银角葫芦配对",
+    "item_a": "紫金红葫芦",
+    "item_b": "羊脂玉净瓶",
+    "owner_a": "金角大王",
+    "owner_b": "银角大王",
+    "chapter_a": 33,
+    "chapter_b": 33,
+    "principle": "人应人死·名应即入",
+    "symmetry_type": "法器对偶",
+    "feature": "老君二童子下凡·葫芦净瓶成对，皆为因果律武器"
+  },
+  {
+    "pair_name": "金兜洞与小雷音寺法宝对比",
+    "item_a": "金刚琢",
+    "item_b": "金铙·人种袋",
+    "owner_a": "独角兕大王",
+    "owner_b": "黄眉童子",
+    "chapter_a": 50,
+    "chapter_b": 65,
+    "principle": "套尽诸神兵器 vs 收尽诸天神将",
+    "symmetry_type": "法宝呼应",
+    "feature": "均为道祖弥勒家底·皆需主人亲降"
+  },
+  {
+    "pair_name": "车迟国斗法与比丘国斗法",
+    "item_a": "车迟国·虎鹿羊三仙",
+    "item_b": "比丘国·鹿精国丈",
+    "owner_a": "虎力·鹿力·羊力",
+    "owner_b": "南极寿星坐骑·白鹿",
+    "chapter_a": 45,
+    "chapter_b": 78,
+    "principle": "道家术士 vs 佛门正统·皆以鹿为媒介",
+    "symmetry_type": "斗法对偶",
+    "feature": "两次鹿精下凡·皆作道家术士·皆因寿星收伏"
+  },
+  {
+    "pair_name": "真假美猴王与六耳猕猴",
+    "item_a": "孙悟空",
+    "item_b": "六耳猕猴",
+    "owner_a": "齐天大圣",
+    "owner_b": "混世四猴之一",
+    "chapter_a": 57,
+    "chapter_b": 58,
+    "principle": "二心竞斗·如来辨真",
+    "symmetry_type": "镜像对偶",
+    "feature": "二猴同貌同能·观音不能辨·谛听不敢言·唯如来识破"
+  },
+  {
+    "pair_name": "女儿国与玉兔国公主",
+    "item_a": "女儿国·女王",
+    "item_b": "天竺国·真假公主",
+    "owner_a": "西梁女王",
+    "owner_b": "玉兔精·真公主",
+    "chapter_a": 54,
+    "chapter_b": 95,
+    "principle": "女色考验·真假难辨",
+    "symmetry_type": "女色对偶",
+    "feature": "取经末段呼应中段·皆以女色真伪考验"
+  },
+  {
+    "pair_name": "黑熊精与红孩儿",
+    "item_a": "黑风洞·黑熊精",
+    "item_b": "火云洞·红孩儿",
+    "owner_a": "黑熊精",
+    "owner_b": "红孩儿",
+    "chapter_a": 17,
+    "chapter_b": 42,
+    "principle": "皆被观音收伏·皆为善财童子",
+    "symmetry_type": "归宿对偶",
+    "feature": "观音两次收伏幼龄妖王·皆纳入佛门"
+  },
+  {
+    "pair_name": "通天河与流沙河",
+    "item_a": "通天河·灵感大王",
+    "item_b": "流沙河·沙僧",
+    "owner_a": "金鱼精",
+    "owner_b": "卷帘大将",
+    "chapter_a": 47,
+    "chapter_b": 22,
+    "principle": "渡河之难·皆为水族",
+    "symmetry_type": "渡河对偶",
+    "feature": "八百里渡河·一收一杀·水族不同归宿"
+  },
+  {
+    "pair_name": "三借芭蕉扇与三打白骨精",
+    "item_a": "三打白骨精",
+    "item_b": "三借芭蕉扇",
+    "owner_a": "白骨夫人",
+    "owner_b": "铁扇公主·牛魔王",
+    "chapter_a": 27,
+    "chapter_b": 59,
+    "principle": "三次反复·成事艰难",
+    "symmetry_type": "三复对偶",
+    "feature": "古典叙事'三复结构'·两段皆以'三'为节奏"
+  }
+]

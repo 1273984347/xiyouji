@@ -1,0 +1,16 @@
+[
+  {
+    "scene_id": "luxun_underworld",
+    "character": "Lu Xun",
+    "setting": "Underworld Reform Observer",
+    "judgment": "I opened this Book of Life and Death and examined it — on every crooked page were the four words ”destined by Heaven”. I could not sleep, and read carefully into the night until, between the lines, I made out the words — the whole book was filled with two words: ”eat people”!",
+    "svg_description": "Lu Xun stands in the Hall of Yama, glaring coldly at the Book of Life and Death line art"
+  },
+  {
+    "scene_id": "qian_postcard",
+    "character": "Qian Zhongshu",
+    "setting": "Three Realms Verification Inspector",
+    "judgment": "He writes to Wu Cheng'en to correct the Song-dynasty porcelain vase at a demon king's banquet (it did not exist in the Tang dynasty), and to CCTV director Yang Jie to illustrate that a ”Yikouzhong” is a cloak — two humorous ”correction letters” as postcards.",
+    "svg_description": "Two humorous correction postcards"
+  }
+]

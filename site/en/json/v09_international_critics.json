@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Pearl S. Buck",
+    "country": "United States",
+    "flag": "🇺🇸",
+    "role": "Nobel laureate",
+    "work": "The English translation Monkey",
+    "viewpoint": "Sun Wukong is 'a free spirit, a rebel who fights against fate'",
+    "contribution": "Introduced the spirit of Journey to the West to the Western world"
+  },
+  {
+    "name": "Jorge Luis Borges",
+    "country": "Argentina",
+    "flag": "🇦🇷",
+    "role": "Literary master",
+    "work": "A commentary on Journey to the West",
+    "viewpoint": "The charm of this novel lies in 'the infinity of the fantastical' — each ordeal is like opening another door, and this structure itself contains a profound metaphor for life's journey",
+    "contribution": "Reads the book from a structuralist perspective"
+  },
+  {
+    "name": "Kenzaburō Ōe",
+    "country": "Japan",
+    "flag": "🇯🇵",
+    "role": "Nobel laureate",
+    "work": "East Asian literary criticism",
+    "viewpoint": "The influence of Journey to the West on the minds of East Asian youth — 'it is like the starry sky of our childhood, illuminating the future'",
+    "contribution": "Affirms the book as shared East Asian cultural memory"
+  }
+]

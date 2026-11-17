@@ -1,0 +1,230 @@
+{
+  "concept_name": "洞府建筑类型学",
+  "english_name": "Cave Architecture Typology",
+  "definition": "建筑类型学（architectural typology）：按建筑形制、空间结构、功能特征分类·揭示文化与时代背景",
+  "core_case": "妖怪洞府按建筑形制可分为：天然溶洞型、崖墓型、水景别墅型、地下迷宫型·对应明代以前建筑遗存的幻想投射",
+  "architectural_types": [
+    {
+      "type_name": "天然溶洞型",
+      "english_name": "Natural Karst Cave Type",
+      "features": [
+        "石灰岩溶蚀",
+        "钟乳石",
+        "暗河",
+        "天然通风"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "水帘洞",
+          "owner": "孙悟空",
+          "location": "花果山",
+          "chapter": "第 1 回",
+          "spatial_structure": "洞内有瀑布+石房+石床+石凳",
+          "function": "居住+避难",
+          "luxury_level": 8,
+          "ecological_integration": "极高·与山体一体"
+        },
+        {
+          "cave_name": "黑风洞",
+          "owner": "黑熊精",
+          "location": "黑风山",
+          "chapter": "第 16-17 回",
+          "spatial_structure": "洞内有佛衣会·佛事活动",
+          "function": "居住+佛事",
+          "luxury_level": 6,
+          "ecological_integration": "高"
+        },
+        {
+          "cave_name": "波月洞",
+          "owner": "黄袍怪",
+          "location": "碗子山",
+          "chapter": "第 28-31 回",
+          "spatial_structure": "洞内有宫殿·强占公主",
+          "function": "居住+囚禁",
+          "luxury_level": 7,
+          "ecological_integration": "中"
+        }
+      ],
+      "archaeological_parallel": "广西桂林溶洞+贵州织金洞",
+      "architectural_significance": "最古老的居住形态·反映明代对'洞穴崇拜'的传统"
+    },
+    {
+      "type_name": "崖墓型",
+      "english_name": "Cliff Tomb Type",
+      "features": [
+        "悬崖开凿",
+        "石室",
+        "墓室结构",
+        "居高临下"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "盘丝洞",
+          "owner": "蜘蛛精",
+          "location": "盘丝岭",
+          "chapter": "第 72-73 回",
+          "spatial_structure": "洞内深穴+丝网+暗室",
+          "function": "居住+陷阱",
+          "luxury_level": 4,
+          "ecological_integration": "中"
+        },
+        {
+          "cave_name": "莲花洞",
+          "owner": "金角大王+银角大王",
+          "location": "平顶山",
+          "chapter": "第 32-35 回",
+          "spatial_structure": "崖壁开凿+石室+石门",
+          "function": "居住+藏宝",
+          "luxury_level": 6,
+          "ecological_integration": "高"
+        }
+      ],
+      "archaeological_parallel": "四川乐山崖墓+福建土楼",
+      "architectural_significance": "崖墓是汉代特色葬俗·反映对'高处'与'神圣'的联想"
+    },
+    {
+      "type_name": "水景别墅型",
+      "english_name": "Waterside Villa Type",
+      "features": [
+        "依水而建",
+        "亭台楼阁",
+        "水景环绕",
+        "豪华装饰"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "碧波潭",
+          "owner": "万圣龙王",
+          "location": "乱石山",
+          "chapter": "第 62-63 回",
+          "spatial_structure": "龙宫式+水景+亭台",
+          "function": "居住+宴饮",
+          "luxury_level": 10,
+          "ecological_integration": "极高·与水景一体"
+        },
+        {
+          "cave_name": "通天河龙宫",
+          "owner": "金鱼精",
+          "location": "通天河",
+          "chapter": "第 47-49 回",
+          "spatial_structure": "水底龙宫+水晶宫",
+          "function": "居住+祭祀",
+          "luxury_level": 8,
+          "ecological_integration": "极高·水下"
+        },
+        {
+          "cave_name": "水晶宫",
+          "owner": "东海龙王",
+          "location": "东海",
+          "chapter": "第 3 回",
+          "spatial_structure": "海底龙宫+水晶建筑",
+          "function": "居住+政务",
+          "luxury_level": 10,
+          "ecological_integration": "极高·海底"
+        }
+      ],
+      "archaeological_parallel": "苏州园林+江南水乡别墅",
+      "architectural_significance": "水景别墅反映明代江南园林审美·龙王宫殿折射皇家建筑"
+    },
+    {
+      "type_name": "地下迷宫型",
+      "english_name": "Underground Labyrinth Type",
+      "features": [
+        "地下深挖",
+        "多层结构",
+        "迷宫通道",
+        "暗室机关"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "无底洞",
+          "owner": "老鼠精",
+          "location": "陷空山",
+          "chapter": "第 80-83 回",
+          "spatial_structure": "无限深挖+多层+迷宫",
+          "function": "居住+囚禁+藏匿",
+          "luxury_level": 7,
+          "ecological_integration": "低·人造"
+        },
+        {
+          "cave_name": "狮驼洞",
+          "owner": "三大魔王",
+          "location": "狮驼岭",
+          "chapter": "第 74-77 回",
+          "spatial_structure": "巨型地下+人骨装饰+多层",
+          "function": "居住+屠杀+藏尸",
+          "luxury_level": 3,
+          "ecological_integration": "低·恐怖"
+        },
+        {
+          "cave_name": "九曲盘桓洞",
+          "owner": "九灵元圣",
+          "location": "竹节山",
+          "chapter": "第 89-90 回",
+          "spatial_structure": "九曲迷宫+石室+暗道",
+          "function": "居住+防御",
+          "luxury_level": 6,
+          "ecological_integration": "中"
+        }
+      ],
+      "archaeological_parallel": "秦始皇陵地宫+明代地窖",
+      "architectural_significance": "地下迷宫反映对'冥界'的想象·与帝王陵墓对应"
+    },
+    {
+      "type_name": "山中宫殿型",
+      "english_name": "Mountain Palace Type",
+      "features": [
+        "山中开凿",
+        "宫殿式",
+        "雕梁画栋",
+        "豪华装饰"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "火云洞",
+          "owner": "红孩儿",
+          "location": "号山",
+          "chapter": "第 40-42 回",
+          "spatial_structure": "山中宫殿+火池+石室",
+          "function": "居住+修炼",
+          "luxury_level": 7,
+          "ecological_integration": "中·火主题"
+        },
+        {
+          "cave_name": "小西天·小雷音寺",
+          "owner": "黄眉怪",
+          "location": "小西天",
+          "chapter": "第 65-66 回",
+          "spatial_structure": "山中寺庙+伪佛殿+人种袋",
+          "function": "居住+伪佛事",
+          "luxury_level": 9,
+          "ecological_integration": "低·伪神圣"
+        }
+      ],
+      "archaeological_parallel": "武当山金殿+布达拉宫",
+      "architectural_significance": "山中宫殿反映明代山岳崇拜+皇家建筑融合"
+    }
+  ],
+  "architecture_insights": [
+    "5 大洞府类型覆盖明代主要建筑形态",
+    "天然溶洞型最古老·反映明代对洞穴崇拜的传统",
+    "崖墓型来自汉代葬俗·反映对'神圣高处'的联想",
+    "水景别墅型折射江南园林审美·龙王宫殿对应皇家建筑",
+    "地下迷宫型对应帝王陵墓·反映对'冥界'的想象",
+    "山中宫殿型融合山岳崇拜与皇家建筑·最豪华",
+    "洞府豪华度与妖怪背景正相关：草根住溶洞·贵族住宫殿"
+  ],
+  "architectural_classification_stats": {
+    "total_caves": 14,
+    "type_distribution": {
+      "天然溶洞型": 3,
+      "崖墓型": 2,
+      "水景别墅型": 3,
+      "地下迷宫型": 3,
+      "山中宫殿型": 2
+    },
+    "avg_luxury": 6.6,
+    "most_luxurious": "碧波潭 + 水晶宫（10/10）",
+    "least_luxurious": "狮驼洞（3/10）"
+  }
+}

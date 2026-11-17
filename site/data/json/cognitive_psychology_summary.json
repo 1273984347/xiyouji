@@ -1,0 +1,10 @@
+{
+  "availability_phases": 4,
+  "availability_cases": 5,
+  "cognitive_team_members": 5,
+  "team_avg_flexibility": 5.6,
+  "highest_flexibility": "孙悟空",
+  "lowest_flexibility": "猪八戒",
+  "mantra_cases": 6,
+  "mantra_phases": 3
+}

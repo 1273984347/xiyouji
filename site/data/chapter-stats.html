@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-Gf+xh+61DImyVKiL1vX+ZEq2msjLHikEDXalxZSZBJs=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-llrWMwhtS/+rdJ8PsO6jMKc3AJ4nOhiVev5jzmwqj0E=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>章节字数与对话统计 · 详解西游记</title>
@@ -2255,29 +2255,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     const COLOR_RATIO     = "#C0392B";  // 对话占比折线（红）
     const COLOR_POEM      = "#3A473A";  // 诗词数（绿）
 
-    // fallback mock 数据（10 回示例）
-    const MOCK_DATA = {
-        total_chapters: 10,
-        total_chars: 62800,
-        total_dialogue_chars: 26150,
-        total_poems: 32,
-        avg_chars_per_chapter: 6280.0,
-        avg_dialogue_ratio: 0.4164,
-        longest_chapter: "示例第5回",
-        shortest_chapter: "示例第3回",
-        per_chapter: [
-            { chapter: "示例第1回",  total_chars: 5800, chinese_chars: 5200, dialogue_chars: 2300, narrative_chars: 3500, dialogue_ratio: 0.3966, poem_count: 3 },
-            { chapter: "示例第2回",  total_chars: 6200, chinese_chars: 5580, dialogue_chars: 2600, narrative_chars: 3600, dialogue_ratio: 0.4194, poem_count: 4 },
-            { chapter: "示例第3回",  total_chars: 4800, chinese_chars: 4320, dialogue_chars: 2050, narrative_chars: 2750, dialogue_ratio: 0.4271, poem_count: 2 },
-            { chapter: "示例第4回",  total_chars: 6500, chinese_chars: 5850, dialogue_chars: 2750, narrative_chars: 3750, dialogue_ratio: 0.4231, poem_count: 3 },
-            { chapter: "示例第5回",  total_chars: 7800, chinese_chars: 7020, dialogue_chars: 3300, narrative_chars: 4500, dialogue_ratio: 0.4231, poem_count: 5 },
-            { chapter: "示例第6回",  total_chars: 6100, chinese_chars: 5490, dialogue_chars: 2500, narrative_chars: 3600, dialogue_ratio: 0.4098, poem_count: 3 },
-            { chapter: "示例第7回",  total_chars: 6700, chinese_chars: 6030, dialogue_chars: 2850, narrative_chars: 3850, dialogue_ratio: 0.4254, poem_count: 4 },
-            { chapter: "示例第8回",  total_chars: 5900, chinese_chars: 5310, dialogue_chars: 2450, narrative_chars: 3450, dialogue_ratio: 0.4153, poem_count: 3 },
-            { chapter: "示例第9回",  total_chars: 6400, chinese_chars: 5760, dialogue_chars: 2700, narrative_chars: 3700, dialogue_ratio: 0.4219, poem_count: 2 },
-            { chapter: "示例第10回", total_chars: 6600, chinese_chars: 5940, dialogue_chars: 2650, narrative_chars: 3950, dialogue_ratio: 0.4015, poem_count: 3 }
-        ]
-    };
+    // （原 mock 回退块已移除·降级路径直接回真值快照）
 
     // 数字格式化（千分位）
     function fmt(n) {
@@ -3608,8 +3586,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     async function loadData() {
         const data = EMBEDDED_DATA;
         if (!data || !data.per_chapter || data.per_chapter.length === 0) {
-            console.log('[INFO] 使用 mock 数据：EMBEDDED_DATA 为空');
-            return { data: MOCK_DATA, isMock: true };
+            console.log('[INFO] 内嵌真值快照不可用（为空）：', EMBEDDED_DATA);
+            return { data: EMBEDDED_DATA, isMock: true };
         }
         document.getElementById('dataSource').innerHTML =
             '数据源：内嵌 chapter_stats.json（EMBEDDED 单源 · W563） · 共 <strong>' + data.total_chapters + '</strong> 回';
@@ -3625,7 +3603,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         if (isMock) {
             document.getElementById('dataSource').innerHTML =
-                '⚠️ <strong>当前为示例数据</strong>（10 回 mock），未加载到真实数据。请按以下步骤生成：' +
+                '⚠️ <strong>内嵌真值快照不可用</strong>（未加载到数据）。请按以下步骤生成：' +
                 '<span class="cmd-block">cd scripts\npy -m http.server 8000   # 在 site/ 目录运行以启用 fetch\npy A_文本基础/chapter_stats.py --input ../source/原文/分回/ --output output/data/chapter_stats.json</span>';
         }
 

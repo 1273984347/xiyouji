@@ -1,0 +1,233 @@
+{
+  "system_name": "Journey to the West Narrative Cards · Karma, Artifact, Obsession",
+  "designer": "Story Production Lab",
+  "core_mechanism": "Three card groups · any combination of three cards generates a brand-new story opening that still obeys the logic of the original novel",
+  "innovation": "This is not a retelling of the story · but a story generator · 32 cards combine to produce 1200 story openings · turning Journey to the West from ”a classic” into ”an endless source”.",
+  "card_groups": [
+    {
+      "group_name": "Cause-Effect Cards",
+      "english_name": "Cause-Effect Cards",
+      "card_count": 12,
+      "description": "Draw a scenario · e.g. 'Cast Out of the Monastery' or 'Mistaken Entry into a Demon Lair'",
+      "color": "#C0392B",
+      "cards": [
+        {
+          "id": "K01",
+          "scene": "Cast Out of the Monastery",
+          "context": "Bodhi Patriarch expels Wukong from his school · forbidding him to mention his lineage · hinting at the hidden rules of the cultivation world"
+        },
+        {
+          "id": "K02",
+          "scene": "Mistaken Entry into a Demon Lair",
+          "context": "Straying into a demon king’s cave · your Monkey King true form exposed · drawn into a conspiracy"
+        },
+        {
+          "id": "K03",
+          "scene": "An Old Acquaintance Reappears",
+          "context": "A past-life acquaintance appears with an unfamiliar face · an old karmic bond is rekindled"
+        },
+        {
+          "id": "K04",
+          "scene": "Forbidden Fruit Eaten by Mistake",
+          "context": "The master is carried off by a demon king · the disciple must rescue him in time"
+        },
+        {
+          "id": "K05",
+          "scene": "Falsely Implicated",
+          "context": "Rain falls after a long drought · the people are grateful · but the rain’s origin is suspect"
+        },
+        {
+          "id": "K06",
+          "scene": "A Heaven-Bestowed Task",
+          "context": "Accidentally swallowing an immortal pill · its power surges through the body · triggering a mutation"
+        },
+        {
+          "id": "K07",
+          "scene": "Lost in the Wheel of Rebirth",
+          "context": "Plunging into the reincarnation passage · reborn under another identity · with temporary amnesia"
+        },
+        {
+          "id": "K08",
+          "scene": "Return to a Familiar Place",
+          "context": "A divine being enters a dream to point the way · waking half-convinced"
+        },
+        {
+          "id": "K09",
+          "scene": "Enlightenment in a Dream",
+          "context": "A mortal with a sword challenges the pilgrim · claiming to carry out heaven’s will"
+        },
+        {
+          "id": "K10",
+          "scene": "A Heavenly Tribulation Descends",
+          "context": "Thunder tribulations strike from the ninth heaven · the sinner cannot escape · bystanders are caught too"
+        },
+        {
+          "id": "K11",
+          "scene": "The Contract Turns Back",
+          "context": "The soul strays into the netherworld · meets the Ten Kings of Hell · and leafs through the Book of Life and Death"
+        },
+        {
+          "id": "K12",
+          "scene": "True and False Hard to Tell",
+          "context": "A counterfeit identical to the protagonist appears · no one can tell which is real"
+        }
+      ]
+    },
+    {
+      "group_name": "Artifact Cards",
+      "english_name": "Artifact Cards",
+      "card_count": 10,
+      "description": "Draw a resource · e.g. the 'Headband Curse' or the 'Lifesaving Hair'",
+      "color": "#40619E",
+      "cards": [
+        {
+          "id": "F01",
+          "artifact": "Headband Curse",
+          "function": "Worn on the head · the chant causes pain · the core tool for controlling the executor (Wukong)"
+        },
+        {
+          "id": "F02",
+          "artifact": "Lifesaving Hair",
+          "function": "Zhu Bajie’s weapon · weighs 5,048 jin · a farming tool turned weapon"
+        },
+        {
+          "id": "F03",
+          "artifact": "Golden Cudgel",
+          "function": "The sea-pacifying divine needle · 13,500 jin · grows or shrinks at will"
+        },
+        {
+          "id": "F04",
+          "artifact": "Plantain Fan",
+          "function": "Taishang Laojun’s Palm-Leaf Fan · one wave quenches fire · two waves raise wind · three waves bring rain"
+        },
+        {
+          "id": "F05",
+          "artifact": "Diamond Snare",
+          "function": "Taishang Laojun’s treasure · snares all things without fail · bane of weapons"
+        },
+        {
+          "id": "F06",
+          "artifact": "Golden Fire Eyes",
+          "function": "Forged in the Eight Trigrams Furnace · sees through demons’ true forms · but vulnerable to smoke"
+        },
+        {
+          "id": "F07",
+          "artifact": "Samadhi True Fire",
+          "function": "Sha Wujing’s weapon · from the Moon Palace · weighs 5,048 jin"
+        },
+        {
+          "id": "F08",
+          "artifact": "Purple-Gold Gourd",
+          "function": "Golden Horn King’s treasure · whoever answers their name is drawn in · turned to pus and blood"
+        },
+        {
+          "id": "F09",
+          "artifact": "Somersault Cloud",
+          "function": "Yellow-Browed Demon’s treasure · all gods are drawn in · no escape for a time"
+        },
+        {
+          "id": "F10",
+          "artifact": "Nine-toothed Rake",
+          "function": "Worn by Tang Sanzang · priceless · attracts demons and calamity"
+        }
+      ]
+    },
+    {
+      "group_name": "Obsession Cards",
+      "english_name": "Obsession Cards",
+      "card_count": 10,
+      "description": "Draw an inner obstacle · e.g. 'Pride', 'Suspicion' or 'Blind Loyalty'",
+      "color": "#3A473A",
+      "cards": [
+        {
+          "id": "Z01",
+          "obsession": "Pride",
+          "manifestation": "Overestimates oneself · scorns the mortal world · refuses to bow"
+        },
+        {
+          "id": "Z02",
+          "obsession": "Suspicion",
+          "manifestation": "Paranoid and mistrustful · trusts no one · goes it alone"
+        },
+        {
+          "id": "Z03",
+          "obsession": "Blind Loyalty",
+          "manifestation": "Blind obedience · never questions right or wrong · follows to the death"
+        },
+        {
+          "id": "Z04",
+          "obsession": "Gluttony",
+          "manifestation": "Covets treasures · lusts at beauty · never satisfied"
+        },
+        {
+          "id": "Z05",
+          "obsession": "Lust",
+          "manifestation": "A single cross word · rage ignites · reason lost"
+        },
+        {
+          "id": "Z06",
+          "obsession": "Reputation",
+          "manifestation": "Clinging to reputation · caring about empty titles · forgetting one’s true nature"
+        },
+        {
+          "id": "Z07",
+          "obsession": "Obsession with Longevity",
+          "manifestation": "Craves immortality · clings to the flesh · rejects reincarnation"
+        },
+        {
+          "id": "Z08",
+          "obsession": "Revenge",
+          "manifestation": "Obsessed with one person · heedless of all others · ruins a great cause"
+        },
+        {
+          "id": "Z09",
+          "obsession": "Jealousy",
+          "manifestation": "Sees others surpass oneself · breeds resentment · must destroy them"
+        },
+        {
+          "id": "Z10",
+          "obsession": "Escape",
+          "manifestation": "Avoids trouble · dares not take responsibility · shifts blame"
+        }
+      ]
+    }
+  ],
+  "example_combinations": [
+    {
+      "combination": "K02 Mistaken Entry into a Demon Lair + F03 Golden Cudgel + Z02 Suspicion",
+      "story_opening": "In the dark demon lair Sun Wukong's Golden Cudgel suddenly refuses to obey: Tang Sanzang's suspicion of him has turned into an invisible force corroding the source of his magic.",
+      "story_continuation": "Wukong's attack does the demon no harm at all - the demon uses it and reflects the Golden Cudgel's force back.",
+      "key_conflict": "Suspicion weakens the trust between master and disciples and dims the Golden Cudgel's power.",
+      "thematic_resonance": "Obsession is the greatest enemy; more frightening than demons is the suspicion in one's own heart."
+    },
+    {
+      "combination": "K03 An Old Acquaintance Reappears + F08 Purple-Gold Gourd + Z06 Reputation",
+      "story_opening": "Far from home Wukong meets an old acquaintance who has been reborn as a demon and calls out his name with the Purple-Gold Gourd to take him in.",
+      "story_continuation": "Fixated on the title 'Great Sage Equaling Heaven', Wukong answers to his name and is nearly swallowed by the gourd.",
+      "key_conflict": "Reputation is Wukong's deepest obsession; the title 'Great Sage Equaling Heaven' cost him dearly back then.",
+      "thematic_resonance": "A name is a vain thing; only by letting go of the reputation can one be at ease."
+    },
+    {
+      "combination": "K07 Lost in the Wheel of Rebirth + F06 Golden Fire Eyes + Z01 Pride",
+      "story_opening": "Wukong strays into the six paths of rebirth and is reborn as a mere mortal, yet his Golden Fire Eyes remain and show him demons all around.",
+      "story_continuation": "Too proud to admit that he is a mortal, Wukong insists on fighting the demons and is struck down by a mortal's fists.",
+      "key_conflict": "Pride bars him from accepting his mortal identity and from judging his own strength.",
+      "thematic_resonance": "Obsession is the greatest enemy; more frightening than demons is the pride in one's own heart."
+    },
+    {
+      "combination": "K10 A Heavenly Tribulation Descends + F04 Plantain Fan + Z07 Obsession with Longevity",
+      "story_opening": "A heavenly tribulation descends; a demon, obsessed with longevity, tries to fan it away with the Plantain Fan.",
+      "story_continuation": "But the tribulation is the way of heaven; the Plantain Fan cannot stand against heaven, and the demon is finally reduced to ashes.",
+      "key_conflict": "The obsession with longevity makes the demon unscrupulous, yet it still cannot rival the way of heaven.",
+      "thematic_resonance": "Longevity is a vain thing; only by following the way of heaven can one be at ease."
+    },
+    {
+      "combination": "K12 True and False Hard to Tell + F05 Diamond Snare + Z09 Jealousy",
+      "story_opening": "A man identical to Wukong appears, holding the Diamond Snare and claiming to be the true Wukong.",
+      "story_continuation": "The false Wukong, jealous of the true one, uses the Diamond Snare to take the true Wukong's Golden Cudgel and leave him in a fix.",
+      "key_conflict": "Jealousy is the false Wukong's obsession, driving him to impersonate another.",
+      "thematic_resonance": "Jealousy is the greatest enemy; more frightening than an indistinguishable double is the jealousy in one's own heart."
+    }
+  ],
+  "design_philosophy": "Three card groups · 32 cards · generating 12 × 10 × 10 = 1200 story openings"
+}

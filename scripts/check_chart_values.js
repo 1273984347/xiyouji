@@ -63,7 +63,10 @@ const {
 
 const ROOT = PROJECT_ROOT;
 const SITE_DATA = path.join(ROOT, 'site', 'data');
+const SITE_EN = path.join(ROOT, 'site', 'en');
 const BASELINE = path.join(ROOT, 'scripts', 'output', 'chart-values-baseline.txt');
+// W1265 批一（判据补盲 1-1）：EN 面独立基线文件——分面冻结·分面拒通过。
+const BASELINE_EN = path.join(ROOT, 'scripts', 'output', 'chart-values-baseline-en.txt');
 const DEFAULT_REPORT = path.join(ROOT, 'scripts', 'output', 'chart-values-report.json');
 const SKIP_STEMS = new Set(['_shell', '_template']);
 const ITEMS = ['V1', 'V2', 'V3', 'V4', 'V5', 'PROBE'];
@@ -97,10 +100,39 @@ const TH = {
 const nowMs = () => Date.now();
 const readText = (p) => fs.readFileSync(p, 'utf8');
 
-function listPages() {
-  return listHtmlFilesFlat(SITE_DATA)
-    .filter((f) => !SKIP_STEMS.has(path.basename(f, '.html')))
-    .map((f) => 'site/data/' + f);
+function listPages(scope = 'all') {
+  // W1265 批一（1-1）：扫描面扩到 site/en（138 页）——原实现只扫 site/data（90 页）
+  // ⇒ EN 图表页**零渲染断言**（审查报告 P2-2：本批 P0-1/P1-3 两项 EN 缺陷正落此盲区）。
+  const out = [];
+  if (scope === 'zh' || scope === 'all') {
+    out.push(
+      ...listHtmlFilesFlat(SITE_DATA)
+        .filter((f) => !SKIP_STEMS.has(path.basename(f, '.html')))
+        .map((f) => 'site/data/' + f)
+    );
+  }
+  if (scope === 'en' || scope === 'all') {
+    out.push(
+      ...listHtmlFilesFlat(SITE_EN)
+        .filter((f) => !SKIP_STEMS.has(path.basename(f, '.html')))
+        .map((f) => 'site/en/' + f)
+    );
+  }
+  return out;
+}
+
+/** scope → 该面所需的基线文件列表（fail-closed：缺任一文件即拒绝通过）。 */
+function baselineFilesFor(scope, cfg) {
+  if (cfg && cfg.baseline) {
+    return String(cfg.baseline)
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .map((s) => (path.isAbsolute(s) ? s : path.resolve(ROOT, s)));
+  }
+  if (scope === 'zh') return [BASELINE];
+  if (scope === 'en') return [BASELINE_EN];
+  return [BASELINE, BASELINE_EN];
 }
 
 /**
@@ -1335,7 +1367,7 @@ function runSelfTest() {
 function parseArgs(argv) {
   // 缺省 = gate（fail-closed）：verify_delivery 第 43 槽以 `node check_chart_values.js` 直调，
   // 若缺省走 report（恒 exit 0）将成为「wrapper 假绿」——W753 挂载时实测该槽未带 --gate。
-  const cfg = { mode: 'gate', workers: 5, limit: 0, pages: null, json: DEFAULT_REPORT, verbose: false, noCitability: false };
+  const cfg = { mode: 'gate', workers: 5, limit: 0, pages: null, json: DEFAULT_REPORT, verbose: false, noCitability: false, scope: 'all' };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--gate') cfg.mode = 'gate';
@@ -1353,6 +1385,9 @@ function parseArgs(argv) {
       cfg.jsonExplicit = true;
     } else if (a === '--pages') cfg.pages = String(argv[++i] || '').split(',').map((s) => s.trim()).filter(Boolean);
     else if (a === '--baseline') cfg.baseline = argv[++i];
+    else if (a === '--scope' && argv[i + 1] && ['zh', 'en', 'all'].includes(argv[i + 1])) {
+      cfg.scope = argv[++i];
+    }
     else if (a === '--judge-file' || a === '--payload') cfg.payload = argv[++i];
     else if (!a.startsWith('--') && cfg.mode === 'judge') cfg.payload = a;
     else if (a === '--help' || a === '-h') cfg.help = true;
@@ -1361,9 +1396,11 @@ function parseArgs(argv) {
 }
 
 function resolvePages(cfg) {
-  const all = listPages();
+  const all = listPages(cfg.scope);
   if (!cfg.pages) return cfg.limit ? all.slice(0, cfg.limit) : all;
-  const want = new Set(cfg.pages.map((s) => s.replace(/^site\/data\//, '').replace(/\.html$/, '')));
+  const want = new Set(
+    cfg.pages.map((s) => s.replace(/^site\/(data|en)\//, '').replace(/\.html$/, ''))
+  );
   return all.filter((p) => want.has(path.basename(p, '.html')) || cfg.pages.includes(p));
 }
 
@@ -1375,6 +1412,45 @@ function writeJson(p, obj) {
 /** 基线文件位置（--baseline 可覆盖·测试与并行批次用；默认 scripts/output/chart-values-baseline.txt）。 */
 function baselinePath(cfg) {
   return cfg && cfg.baseline ? path.resolve(ROOT, cfg.baseline) : BASELINE;
+}
+
+/**
+ * W1265（1-1）：分面基线前置校验（fail-closed）。
+ * ① 每份基线文件必须存在且可解析；② 扫描面内的每一页都必须在基线里有行
+ *    ——缺行 = 该面**尚未建立基线**（例如 EN 面基线没生成）⇒ 拒绝通过而不是跳过。
+ * @returns {{ok: true, map: object, problems: string[]} | {ok: false, exitCode: number}}
+ */
+function validateGateBaselines(files, pages, cfg) {
+  const map = {};
+  const problems = [];
+  for (const f of files) {
+    if (!fs.existsSync(f)) {
+      console.log(`FAIL 基线缺失：${relativeToRoot(f)} — refuse to pass（先跑 --generate-baseline）`);
+      console.log(gateSummaryLine(GATE_NAME, 1));
+      return { ok: false, exitCode: 1 };
+    }
+    const parsed = parseBaseline(readText(f));
+    if (parsed.problems.length) {
+      for (const s of parsed.problems.slice(0, 10)) console.log('FAIL 基线不可解析：' + s);
+      console.log(gateSummaryLine(GATE_NAME, parsed.problems.length));
+      return { ok: false, exitCode: 1 };
+    }
+    Object.assign(map, parsed.map);
+  }
+  // 覆盖面校验（仅全量扫描时适用：--pages/--limit 的抽样面不在基线里属正常）
+  if (cfg && !cfg.pages && !cfg.limit) {
+    const covered = new Set(Object.keys(map).map((k) => k.split('|')[0]));
+    const missing = pages.filter((p) => !covered.has(p));
+    if (missing.length) {
+      console.log(
+        `FAIL 基线未覆盖 ${missing.length} 页（${missing.slice(0, 5).join(', ')} …）— refuse to pass` +
+          `（该扫描面基线缺失·不得静默跳过）`
+      );
+      console.log(gateSummaryLine(GATE_NAME, 1));
+      return { ok: false, exitCode: 1 };
+    }
+  }
+  return { ok: true, map, problems };
 }
 
 /**
@@ -1421,7 +1497,7 @@ function buildReport(cfg, judged, probes, cal, citInfo, baselineFile, cmp, gaps,
     command:
       'node scripts/check_chart_values.js ' +
       (cfg.mode === 'gate' ? '--gate' : cfg.mode === 'survey' ? '--survey' : '--report'),
-    site_pages_total: listPages().length,
+    site_pages_total: listPages(cfg.scope).length,
     pages_scanned: judged.length,
     workers: cfg.workers,
     elapsed_s: Number(elapsed.toFixed(1)),
@@ -1549,29 +1625,34 @@ async function main() {
 
   const pages = resolvePages(cfg);
   if (!pages.length) {
-    console.log('FAIL 未扫到页面（site/data 下无匹配页·fail-closed）');
+    console.log('FAIL 未扫到页面（site/data 与 site/en 下均无匹配页·fail-closed）');
     console.log(gateSummaryLine(GATE_NAME, 1));
     return 1;
   }
 
-  const baselineFile = baselinePath(cfg);
+  // W1265（1-1）：分面基线——zh 面用 chart-values-baseline.txt·en 面用 chart-values-baseline-en.txt；
+  // scope=all 时两份都必须在场且都必须覆盖本扫描面（缺失 = 拒绝通过·不得静默跳过 EN 面）。
+  const baselineFiles = baselineFilesFor(cfg.scope, cfg);
+  const baselineFile = baselineFiles.join(',');
 
   // 门禁模式：前置验证基线（fail-closed）
   let baseMap = {};
   let baselineProblems = [];
   let baselineMissing = false;
   if (cfg.mode === 'gate') {
-    const check = validateGateBaseline(baselineFile);
+    const check = validateGateBaselines(baselineFiles, pages, cfg);
     if (!check.ok) return check.exitCode;
     baseMap = check.map;
     baselineProblems = check.problems;
   } else if (cfg.mode === 'report' || cfg.mode === 'survey') {
-    if (fs.existsSync(baselineFile)) {
-      const parsed = parseBaseline(readText(baselineFile));
-      baseMap = parsed.map;
-      baselineProblems = parsed.problems;
-    } else {
-      baselineMissing = true;
+    for (const f of baselineFiles) {
+      if (!fs.existsSync(f)) {
+        baselineMissing = true;
+        continue;
+      }
+      const parsed = parseBaseline(readText(f));
+      baseMap = Object.assign(baseMap, parsed.map);
+      baselineProblems = baselineProblems.concat(parsed.problems);
     }
   }
 
@@ -1595,16 +1676,27 @@ async function main() {
   const gaps = coverageGaps(judged);
 
   if (cfg.mode === 'generate-baseline') {
-    const lines = baselineLines(judged, new Date().toISOString().slice(0, 10), census);
-    fs.mkdirSync(path.dirname(baselineFile), { recursive: true });
-    fs.writeFileSync(baselineFile, lines.join('\n') + '\n', 'utf8');
+    // W1265（1-1）：分面写基线——zh 面写 chart-values-baseline.txt·en 面写 chart-values-baseline-en.txt
+    const byScope = { zh: [], en: [] };
+    for (const j of judged) byScope[j.page.startsWith('site/en/') ? 'en' : 'zh'].push(j);
+    const written = [];
+    for (const [face, file] of [
+      ['zh', baselineFilesFor('zh', cfg)[0]],
+      ['en', baselineFilesFor('en', cfg)[0]],
+    ]) {
+      if (!byScope[face].length) continue;
+      const lines = baselineLines(byScope[face], new Date().toISOString().slice(0, 10), census);
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      fs.writeFileSync(file, lines.join('\n') + '\n', 'utf8');
+      written.push(relativeToRoot(file) + '（' + byScope[face].length + ' 页）');
+    }
+    console.log('基线已生成：' + written.join(' + '));
     const frozenN = judged.reduce(
       (a, j) => a + ITEMS.filter((i) => j.verdicts[i].status === 'fail').length,
       0
     );
     console.log(
-      `基线已生成：${relativeToRoot(baselineFile)} · ${judged.length} 页 · ` +
-        `${judged.length * ITEMS.length} 行 · 冻结缺口 ${frozenN} 项 · ${census}`
+      `共 ${judged.length} 页 · ${judged.length * ITEMS.length} 行 · 冻结缺口 ${frozenN} 项 · ${census}`
     );
     console.log('判据缺口（na）：' + JSON.stringify(countBy(gaps, 'item')));
     console.log(gateSummaryLine(GATE_NAME, frozenN));

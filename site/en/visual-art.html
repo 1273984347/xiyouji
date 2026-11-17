@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-gOC4NrKYpk/bO1jwPMa6kdZkN1P5kV65H8VGo7lnZP4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-E9ev4kUHcMwZxOUpAis26avCNXr0l/P5Ot4xuG5dglw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Visual Art · The Material Form of the Heart Sutra & Scent Map · Annotated Journey to the West</title>
@@ -2768,91 +2768,464 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 <script>
     // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
     const EMBEDDED = {
-        heart_sutra_sculpture: {
-            project_name: "The Material Form of the Heart Sutra",
-            english_name: "Material Form of the Heart Sutra",
-            art_form: "Abstract Data Sculpture · Installation Art",
-            core_concept: "Count the times Tang Sanzang chants the “Heart Sutra” throughout Journey to the West, along with their scenes and the emotional fluctuations of the surrounding plot, then present them in wave form on an exhibition wall using an extremely fine gold thread",
-            design_principle: "The crests represent the calm after chanting; the troughs represent the extreme fear encountered around the chanting; the gold thread ultimately winds into a giant “heart”-shaped void projection",
-            deeper_meaning: "This is a physical model of “how faith resists external shocks”",
-            sutra_chanting_records: [
-                { n: 1, chapter: "Ch. 19", location: "Futu Mountain", context: "The Crow's Nest Chan Master transmits the “Heart Sutra” to Tang Sanzang · first contact", pre_emotion: "Anticipation · Curiosity", post_emotion: "Shock · Awakening", wave_amplitude: 0.3, wave_direction: "rise", key_phrase: "Form is not other than emptiness; emptiness is not other than form" },
-                { n: 2, chapter: "Ch. 20", location: "Yellow Wind Ridge", context: "Meets the Yellow Wind Monster · Wukong's eyes are injured · Tang Sanzang chants and prays", pre_emotion: "Fear · Worry", post_emotion: "Slightly calmed · still worried", wave_amplitude: 0.7, wave_direction: "trough", key_phrase: "Mind free of hindrances; because of no hindrances" },
-                { n: 3, chapter: "Ch. 27", location: "White Tiger Ridge", context: "Thrice defeats the White Bone Demon · Wukong is banished · Tang Sanzang chants alone", pre_emotion: "Anger · Sorrow", post_emotion: "Remorse · Loneliness", wave_amplitude: 1.0, wave_direction: "deep trough", key_phrase: "Without terror; far from inverted delusions" },
-                { n: 4, chapter: "Ch. 36", location: "Black Rooster Kingdom", context: "Rescues the Black Rooster king · stays the night at Baolin Monastery · Tang Sanzang chants to soothe", pre_emotion: "Anxiety · Fatigue", post_emotion: "Calm · Resolute", wave_amplitude: 0.4, wave_direction: "rise", key_phrase: "Ultimate nirvana" },
-                { n: 5, chapter: "Ch. 47", location: "Heaven-Reaching River", context: "Blocked at the Heaven-Reaching River · stays the night at Chen Village · Tang Sanzang chants to seek passage", pre_emotion: "Anxiety · Helplessness", post_emotion: "Slightly calmed · Hopeful", wave_amplitude: 0.6, wave_direction: "trough", key_phrase: "Prajñāpāramitā" },
-                { n: 6, chapter: "Ch. 62", location: "Jisai Kingdom", context: "Sweeps the pagoda in Jisai Kingdom · chants at midnight · meets the Nine-Headed Insect", pre_emotion: "Solemn · Calm", post_emotion: "Disturbed · Alert", wave_amplitude: 0.5, wave_direction: "rise then fall", key_phrase: "All Buddhas of the three times, by relying on Prajñāpāramitā" },
-                { n: 7, chapter: "Ch. 78", location: "Bhiksu Kingdom", context: "Saves the children's hearts and livers · Tang Sanzang chants in anger", pre_emotion: "Anger · Compassion", post_emotion: "Resolute · Compassionate", wave_amplitude: 1.2, wave_direction: "deep trough then peak", key_phrase: "No suffering, origin, cessation, or path; no wisdom and no attainment" },
-                { n: 8, chapter: "Ch. 85", location: "Dharma-Destroying Kingdom", context: "The Dharma-Destroying Kingdom kills monks · Tang Sanzang disguises himself · chants the Heart Sutra at night", pre_emotion: "Fear · Disguise", post_emotion: "Calm · Prayer", wave_amplitude: 0.9, wave_direction: "trough", key_phrase: "Mind free of hindrances; because of no hindrances" },
-                { n: 9, chapter: "Ch. 93", location: "India", context: "Near Spirit Mountain · the Indian princess seeks a husband · Tang Sanzang chants to steady his mind", pre_emotion: "Vacillation · Fatigue", post_emotion: "Resolute · Complete", wave_amplitude: 0.3, wave_direction: "rise", key_phrase: "Anuttarā-samyak-saṃbodhi" },
-                { n: 10, chapter: "Ch. 98", location: "Thunderclap Monastery at Spirit Mountain", context: "Arrives at Spirit Mountain · sheds his mortal body at the Lingyun Crossing · Tang Sanzang chants for the last time", pre_emotion: "Complete · Moved", post_emotion: "Buddhahood · Selflessness", wave_amplitude: 0.0, wave_direction: "return to zero", key_phrase: "Gate gate pāragate" }
-            ],
-            wave_statistics: {
-                total_chantings: 10,
-                max_amplitude: 1.2,
-                min_amplitude: 0.0,
-                avg_amplitude: 0.59,
-                deepest_valley: "Bhiksu Kingdom · saving the children's hearts and livers",
-                highest_peak: "Spirit Mountain · Buddhahood, return to zero",
-                trend: "The wave gradually flattens, finally returning to zero, reflecting the maturation of the mind"
-            },
-            sculpture_design: {
-                material: "Extremely fine gold thread (0.5mm diameter)",
-                wall_size: "12m × 4m exhibition wall",
-                wave_length: "Each segment about 1.2m · corresponding to one chanting",
-                color: "Pure gold · 95% luster",
-                lighting: "Top light + side light · giving the gold thread a faint shadow",
-                projection: "The gold thread ultimately winds into a “heart”-shaped void · projected onto the floor",
-                interaction: "As viewers approach, the heart-shaped void flickers like breathing"
-            },
-            artistic_statement: "Faith is not unchanging calm, but a repeated tug-of-war between fear and stability; the gold thread's wave is the materialization of that tug-of-war"
-        },
-        scent_map: {
-            project_name: "Scent Map of Journey to the West",
-            english_name: "Scent Map of Journey to the West",
-            art_form: "Sensory Map · Olfactory Art",
-            core_concept: "Designing unique scents for key locations along the pilgrimage route · an extraordinarily unique sensory reading experience",
-            presentation_method: "A long-scroll map with a scratch-and-sniff fragrance card beside each location, or a QR code linking to a custom fragrance formula",
-            locations: [
-                { n: 1, location: "Flower-Fruit Mountain", chapter: "Ch. 1", geography: "Pūrvavideha Continent · a famous mountain in the sea", scent_profile: "Water vapor · the sweetness of peaches · the animal musk of the monkey troop", scent_notes: ["Salt of the sea", "Sweet ripe peaches", "Ape musk", "Fresh morning dew"], intensity: 4, mood: "Vibrant · primally wild", key_description: "Newborn Sun Wukong frolics with ten thousand monkeys · the Water Curtain Cave waterfall · peach blossoms across the mountain", fragrance_formula: { top_note: "Sea breeze · peach fragrance", middle_note: "Macaque musk · fresh grass", base_note: "Damp rock" } },
-                { n: 2, location: "Five Elements Mountain", chapter: "Ch. 14", geography: "Aparagodānīya Continent · Mount Liangjie", scent_profile: "Cold hard rock · dust · 500 years of solitude", scent_notes: ["Icy rock", "Dust", "Rust", "Withered grass"], intensity: 3, mood: "Oppressive · lonely · waiting", key_description: "Wukong imprisoned for 500 years · only iron pellets and molten copper · sandstorms fill the sky", fragrance_formula: { top_note: "Dust · cold wind", middle_note: "Rock · rust", base_note: "Withered grass · desolation" } },
-                { n: 3, location: "Flowing Sands River", chapter: "Ch. 22", geography: "Aparagodānīya Continent · 800 li of flowing sand", scent_profile: "Turbid river water · sand and soil · dampness", scent_notes: ["Turbid vapor", "Wet sand", "Fishy smell", "River mud"], intensity: 3, mood: "Desolate · dangerous", key_description: "Sha Wujing holds sway · the water is only 1m deep but full of traps", fragrance_formula: { top_note: "Wet sand · river wind", middle_note: "Fishy · river mud", base_note: "Rotten grass" } },
-                { n: 4, location: "Five Villages Monastery", chapter: "Ch. 24-26", geography: "Longevity Mountain · Five Villages Monastery", scent_profile: "Immortal herbs · ginseng fruit · Daoist temple sandalwood", scent_notes: ["Daoist temple sandalwood", "Sweet ginseng fruit", "Immortal herbs", "Fresh dew"], intensity: 5, mood: "Immortal realm · solemn", key_description: "Zhenyuanzi's Daoist temple · ten-thousand-year-old ginseng fruit tree · brimming with immortal aura", fragrance_formula: { top_note: "Ginseng fruit · fresh dew", middle_note: "Daoist temple sandalwood · immortal herbs", base_note: "Cloud mist · aloeswood" } },
-                { n: 5, location: "White Tiger Ridge", chapter: "Ch. 27", geography: "Aparagodānīya Continent · a barren mountain", scent_profile: "Dry bones · decay · chilling wind", scent_notes: ["Dry bones", "Rotting flesh", "Chilling wind", "Wild grass"], intensity: 5, mood: "Terrifying · gloomy", key_description: "The White Bone Demon's territory · bones everywhere · gusts of chilling wind", fragrance_formula: { top_note: "Chilling wind · rotten grass", middle_note: "Dry bones · rotting flesh", base_note: "The breath of the underworld" } },
-                { n: 6, location: "Flaming Mountain", chapter: "Ch. 59-61", geography: "Aparagodānīya Continent · 800 li of flames", scent_profile: "Scorching mineral char · sweat · hot dry waves", scent_notes: ["Scorched earth", "Sulfur", "Sweat", "Heat waves"], intensity: 5, mood: "Scorching · searing · yearning", key_description: "800 li of flames · nothing grows · the Pilgrim borrows the palm-leaf fan three times", fragrance_formula: { top_note: "Heat waves · scorched earth", middle_note: "Sulfur · minerals", base_note: "Sweat · smoke" } },
-                { n: 7, location: "Spider Silk Cave", chapter: "Ch. 72-73", geography: "Aparagodānīya Continent · Silk-Winding Ridge", scent_profile: "Damp earthy mustiness · the faint sweetness of insect pheromones · decaying silk", scent_notes: ["Damp earth", "Insect pheromones", "Rotting silk", "Spider webs"], intensity: 4, mood: "Eerie · alluring · dangerous", key_description: "The lair of seven spider spirits · webs everywhere · heavy dampness", fragrance_formula: { top_note: "Spider webs · dampness", middle_note: "Insect pheromones · rotting silk", base_note: "Earthy mustiness" } },
-                { n: 8, location: "Lion-Camel Ridge", chapter: "Ch. 74-77", geography: "Aparagodānīya Continent · 800-li Lion-Camel Ridge", scent_profile: "Blood · bones · terror", scent_notes: ["Blood", "Human bones", "Rotting flesh", "Rusty weapons"], intensity: 5, mood: "Terror · death · despair", key_description: "Three demons devour humans for 800 li · mountains of human bones · blood reeks to the sky", fragrance_formula: { top_note: "Blood · putrid stench", middle_note: "Human bones · rusty weapons", base_note: "The aura of death" } },
-                { n: 9, location: "Bottomless Cave", chapter: "Ch. 80-83", geography: "Aparagodānīya Continent · Hollow Mountain", scent_profile: "Dampness · floral fragrance · rats · the mustiness of deep underground", scent_notes: ["Musty smell", "Rat musk", "Floral fragrance (disguise)", "Dampness"], intensity: 4, mood: "Wily · seductive · coercive", key_description: "The rat spirit's lair · a floral disguise · damp and musty within", fragrance_formula: { top_note: "Floral fragrance · cloying sweetness", middle_note: "Dampness · rat musk", base_note: "Must and rot" } },
-                { n: 10, location: "Thunderclap Monastery at Spirit Mountain", chapter: "Ch. 98", geography: "Aparagodānīya Continent · Spirit Mountain", scent_profile: "Sandalwood · the herbal scent of palm-leaf sutras · a pure, clean scent of “nothingness”", scent_notes: ["Sandalwood", "Palm-leaf herbs", "Gold powder", "Pure air"], intensity: 5, mood: "Solemn · complete · selfless", key_description: "A holy land of the Buddha · palm-leaf sutra fragrance · glittering gold powder · air of utmost purity", fragrance_formula: { top_note: "Sandalwood · palm-leaf", middle_note: "Gold powder · pure air", base_note: "Nothingness · purity" } }
-            ],
-            scent_categories: {
-                "Immortal": ["Flower-Fruit Mountain", "Five Villages Monastery", "Thunderclap Monastery at Spirit Mountain"],
-                "Danger": ["White Tiger Ridge", "Flaming Mountain", "Spider Silk Cave", "Lion-Camel Ridge", "Bottomless Cave"],
-                "Desolate": ["Five Elements Mountain", "Flowing Sands River"]
-            },
-            presentation_innovation: "Scratch-and-sniff fragrance cards + QR-code formulas · letting readers enter the world of Journey to the West through smell"
-        },
-        visual_art_summary: {
-            sutra_chantings: 10,
-            max_wave_amplitude: 1.2,
-            deepest_valley: "Bhiksu Kingdom · saving the children's hearts and livers",
-            scent_locations: 10,
-            scent_categories: 3,
-            visual_art_ideas: 10
-        },
-        visual_art_ideas: [
-            { n: 1, idea_name: "Eighty-One Ordeals Installation Wall", art_form: "Installation Art · Interactive Wall", concept: "A 12m wall with 81 frames of varying sizes, arranged in the chronological order of the eighty-one ordeals, each frame containing different visual elements (gold thread, ashes, bloodstains, fragments)", innovation: "Express the intensity of each ordeal through visual density, and the nature of each disaster through material" },
-            { n: 2, idea_name: "Wukong's Emotion ECG", art_form: "Data Visualization · Dynamic ECG", concept: "Turn Wukong's emotional fluctuations across 100 chapters into an ECG · red crests for anger, blue troughs for sorrow, green flat lines for calm", innovation: "Visualize abstract emotion through medical symbols" },
-            { n: 3, idea_name: "Three Realms Map Stereoscopic Projection", art_form: "Stereoscopic Projection · Installation", concept: "Stereoscopically project the three layers of Heaven, the human world, and the Underworld · use translucent gauze screens · separate each layer with smoke effects", innovation: "Break the flat limitation of traditional maps · make the three realms visible in three dimensions" },
-            { n: 4, idea_name: "Golden Cudgel Light Column", art_form: "Light Art · Sculpture", concept: "A 10m-tall Golden Cudgel light column · internal LEDs glow according to Wukong's combat power · atomized water sprays from the top", innovation: "Shape the material form of a mythic weapon with light and mist" },
-            { n: 5, idea_name: "Demon Specimen Gallery", art_form: "Specimen Gallery · Installation", concept: "Turn the demons of the 81 ordeals into specimens · each with a detailed “species card” noting habitat, diet, background, and combat power", innovation: "Present the absurdity of demons with museum solemnity · producing a striking contrast" },
-            { n: 6, idea_name: "Pilgrimage Route Sand Painting", art_form: "Sand Painting · Dynamic", concept: "Render the pilgrimage route as a sand painting · sand color varies by region · green grassland, yellow desert, red Flaming Mountain", innovation: "The fluidity of sand painting expresses the twists and turns of the pilgrimage road" },
-            { n: 7, idea_name: "Dialogue of the Three Teachings", art_form: "Three-Screen Installation · Dialogue", concept: "Three screens represent Buddhism, Daoism, and Confucianism · each features its representative (Tathāgata, Laozi, Confucius) · use AI to let them converse", innovation: "Let the three schools' ideas engage in contemporary dialogue · break traditional barriers" },
-            { n: 8, idea_name: "Heart Sutra Calligraphy Scroll", art_form: "Calligraphy · Installation", concept: "Write the full text of the “Heart Sutra” in calligraphy on a 100m scroll · the size of each section is proportional to the emotional intensity of Tang Sanzang's chanting", innovation: "Present inner fluctuation through the visual changes of calligraphy" },
-            { n: 9, idea_name: "Demon Ecosphere Bottle", art_form: "Ecological Installation · Miniature Landscape", concept: "Each demon is made into an ecosphere bottle · containing a miniature demon, its lair, minions, and environment", innovation: "Present the demons' living conditions through miniature landscapes" },
-            { n: 10, idea_name: "Pilgrimage Team Group Photo", art_form: "Photography · Installation", concept: "Photograph the five pilgrimage team members in a “group photo” · each in the same pose at different times and places · composite them into one", innovation: "Break the limits of time · compress 14 years of pilgrimage into a single photo" }
-        ]
-    };
+  "heart_sutra_sculpture": {
+    "project_name": "The Material Form of the Heart Sutra",
+    "english_name": "Material Form of the Heart Sutra",
+    "art_form": "Abstract Data Sculpture · Installation Art",
+    "core_concept": "Count the times Tang Sanzang chants the “Heart Sutra” throughout Journey to the West, along with their scenes and the emotional fluctuations of the surrounding plot, then present them in wave form on an exhibition wall using an extremely fine gold thread",
+    "design_principle": "The crests represent the calm after chanting; the troughs represent the extreme fear encountered around the chanting; the gold thread ultimately winds into a giant “heart”-shaped void projection",
+    "deeper_meaning": "This is a physical model of “how faith resists external shocks”",
+    "sutra_chanting_records": [
+      {
+        "n": 1,
+        "chapter": "Ch. 19",
+        "location": "Futu Mountain",
+        "context": "The Crow's Nest Chan Master transmits the “Heart Sutra” to Tang Sanzang · first contact",
+        "pre_emotion": "Anticipation · Curiosity",
+        "post_emotion": "Shock · Awakening",
+        "wave_amplitude": 0.3,
+        "wave_direction": "rise",
+        "key_phrase": "Form is not other than emptiness; emptiness is not other than form"
+      },
+      {
+        "n": 2,
+        "chapter": "Ch. 20",
+        "location": "Yellow Wind Ridge",
+        "context": "Meets the Yellow Wind Monster · Wukong's eyes are injured · Tang Sanzang chants and prays",
+        "pre_emotion": "Fear · Worry",
+        "post_emotion": "Slightly calmed · still worried",
+        "wave_amplitude": 0.7,
+        "wave_direction": "trough",
+        "key_phrase": "Mind free of hindrances; because of no hindrances"
+      },
+      {
+        "n": 3,
+        "chapter": "Ch. 27",
+        "location": "White Tiger Ridge",
+        "context": "Thrice defeats the White Bone Demon · Wukong is banished · Tang Sanzang chants alone",
+        "pre_emotion": "Anger · Sorrow",
+        "post_emotion": "Remorse · Loneliness",
+        "wave_amplitude": 1,
+        "wave_direction": "deep trough",
+        "key_phrase": "Without terror; far from inverted delusions"
+      },
+      {
+        "n": 4,
+        "chapter": "Ch. 36",
+        "location": "Black Rooster Kingdom",
+        "context": "Rescues the Black Rooster king · stays the night at Baolin Monastery · Tang Sanzang chants to soothe",
+        "pre_emotion": "Anxiety · Fatigue",
+        "post_emotion": "Calm · Resolute",
+        "wave_amplitude": 0.4,
+        "wave_direction": "rise",
+        "key_phrase": "Ultimate nirvana"
+      },
+      {
+        "n": 5,
+        "chapter": "Ch. 47",
+        "location": "Heaven-Reaching River",
+        "context": "Blocked at the Heaven-Reaching River · stays the night at Chen Village · Tang Sanzang chants to seek passage",
+        "pre_emotion": "Anxiety · Helplessness",
+        "post_emotion": "Slightly calmed · Hopeful",
+        "wave_amplitude": 0.6,
+        "wave_direction": "trough",
+        "key_phrase": "Prajñāpāramitā"
+      },
+      {
+        "n": 6,
+        "chapter": "Ch. 62",
+        "location": "Jisai Kingdom",
+        "context": "Sweeps the pagoda in Jisai Kingdom · chants at midnight · meets the Nine-Headed Insect",
+        "pre_emotion": "Solemn · Calm",
+        "post_emotion": "Disturbed · Alert",
+        "wave_amplitude": 0.5,
+        "wave_direction": "rise then fall",
+        "key_phrase": "All Buddhas of the three times, by relying on Prajñāpāramitā"
+      },
+      {
+        "n": 7,
+        "chapter": "Ch. 78",
+        "location": "Bhiksu Kingdom",
+        "context": "Saves the children's hearts and livers · Tang Sanzang chants in anger",
+        "pre_emotion": "Anger · Compassion",
+        "post_emotion": "Resolute · Compassionate",
+        "wave_amplitude": 1.2,
+        "wave_direction": "deep trough then peak",
+        "key_phrase": "No suffering, origin, cessation, or path; no wisdom and no attainment"
+      },
+      {
+        "n": 8,
+        "chapter": "Ch. 85",
+        "location": "Dharma-Destroying Kingdom",
+        "context": "The Dharma-Destroying Kingdom kills monks · Tang Sanzang disguises himself · chants the Heart Sutra at night",
+        "pre_emotion": "Fear · Disguise",
+        "post_emotion": "Calm · Prayer",
+        "wave_amplitude": 0.9,
+        "wave_direction": "trough",
+        "key_phrase": "Mind free of hindrances; because of no hindrances"
+      },
+      {
+        "n": 9,
+        "chapter": "Ch. 93",
+        "location": "India",
+        "context": "Near Spirit Mountain · the Indian princess seeks a husband · Tang Sanzang chants to steady his mind",
+        "pre_emotion": "Vacillation · Fatigue",
+        "post_emotion": "Resolute · Complete",
+        "wave_amplitude": 0.3,
+        "wave_direction": "rise",
+        "key_phrase": "Anuttarā-samyak-saṃbodhi"
+      },
+      {
+        "n": 10,
+        "chapter": "Ch. 98",
+        "location": "Thunderclap Monastery at Spirit Mountain",
+        "context": "Arrives at Spirit Mountain · sheds his mortal body at the Lingyun Crossing · Tang Sanzang chants for the last time",
+        "pre_emotion": "Complete · Moved",
+        "post_emotion": "Buddhahood · Selflessness",
+        "wave_amplitude": 0,
+        "wave_direction": "return to zero",
+        "key_phrase": "Gate gate pāragate"
+      }
+    ],
+    "wave_statistics": {
+      "total_chantings": 10,
+      "max_amplitude": 1.2,
+      "min_amplitude": 0,
+      "avg_amplitude": 0.59,
+      "deepest_valley": "Bhiksu Kingdom · saving the children's hearts and livers",
+      "highest_peak": "Spirit Mountain · Buddhahood, return to zero",
+      "trend": "The wave gradually flattens, finally returning to zero, reflecting the maturation of the mind"
+    },
+    "sculpture_design": {
+      "material": "Extremely fine gold thread (0.5mm diameter)",
+      "wall_size": "12m × 4m exhibition wall",
+      "wave_length": "Each segment about 1.2m · corresponding to one chanting",
+      "color": "Pure gold · 95% luster",
+      "lighting": "Top light + side light · giving the gold thread a faint shadow",
+      "projection": "The gold thread ultimately winds into a “heart”-shaped void · projected onto the floor",
+      "interaction": "As viewers approach, the heart-shaped void flickers like breathing"
+    },
+    "artistic_statement": "Faith is not unchanging calm, but a repeated tug-of-war between fear and stability; the gold thread's wave is the materialization of that tug-of-war"
+  },
+  "scent_map": {
+    "project_name": "Scent Map of Journey to the West",
+    "english_name": "Scent Map of Journey to the West",
+    "art_form": "Sensory Map · Olfactory Art",
+    "core_concept": "Designing unique scents for key locations along the pilgrimage route · an extraordinarily unique sensory reading experience",
+    "presentation_method": "A long-scroll map with a scratch-and-sniff fragrance card beside each location, or a QR code linking to a custom fragrance formula",
+    "locations": [
+      {
+        "n": 1,
+        "location": "Flower-Fruit Mountain",
+        "chapter": "Ch. 1",
+        "geography": "Pūrvavideha Continent · a famous mountain in the sea",
+        "scent_profile": "Water vapor · the sweetness of peaches · the animal musk of the monkey troop",
+        "scent_notes": [
+          "Salt of the sea",
+          "Sweet ripe peaches",
+          "Ape musk",
+          "Fresh morning dew"
+        ],
+        "intensity": 4,
+        "mood": "Vibrant · primally wild",
+        "key_description": "Newborn Sun Wukong frolics with ten thousand monkeys · the Water Curtain Cave waterfall · peach blossoms across the mountain",
+        "fragrance_formula": {
+          "top_note": "Sea breeze · peach fragrance",
+          "middle_note": "Macaque musk · fresh grass",
+          "base_note": "Damp rock"
+        }
+      },
+      {
+        "n": 2,
+        "location": "Five Elements Mountain",
+        "chapter": "Ch. 14",
+        "geography": "Aparagodānīya Continent · Mount Liangjie",
+        "scent_profile": "Cold hard rock · dust · 500 years of solitude",
+        "scent_notes": [
+          "Icy rock",
+          "Dust",
+          "Rust",
+          "Withered grass"
+        ],
+        "intensity": 3,
+        "mood": "Oppressive · lonely · waiting",
+        "key_description": "Wukong imprisoned for 500 years · only iron pellets and molten copper · sandstorms fill the sky",
+        "fragrance_formula": {
+          "top_note": "Dust · cold wind",
+          "middle_note": "Rock · rust",
+          "base_note": "Withered grass · desolation"
+        }
+      },
+      {
+        "n": 3,
+        "location": "Flowing Sands River",
+        "chapter": "Ch. 22",
+        "geography": "Aparagodānīya Continent · 800 li of flowing sand",
+        "scent_profile": "Turbid river water · sand and soil · dampness",
+        "scent_notes": [
+          "Turbid vapor",
+          "Wet sand",
+          "Fishy smell",
+          "River mud"
+        ],
+        "intensity": 3,
+        "mood": "Desolate · dangerous",
+        "key_description": "Sha Wujing holds sway · the water is only 1m deep but full of traps",
+        "fragrance_formula": {
+          "top_note": "Wet sand · river wind",
+          "middle_note": "Fishy · river mud",
+          "base_note": "Rotten grass"
+        }
+      },
+      {
+        "n": 4,
+        "location": "Five Villages Monastery",
+        "chapter": "Ch. 24-26",
+        "geography": "Longevity Mountain · Five Villages Monastery",
+        "scent_profile": "Immortal herbs · ginseng fruit · Daoist temple sandalwood",
+        "scent_notes": [
+          "Daoist temple sandalwood",
+          "Sweet ginseng fruit",
+          "Immortal herbs",
+          "Fresh dew"
+        ],
+        "intensity": 5,
+        "mood": "Immortal realm · solemn",
+        "key_description": "Zhenyuanzi's Daoist temple · ten-thousand-year-old ginseng fruit tree · brimming with immortal aura",
+        "fragrance_formula": {
+          "top_note": "Ginseng fruit · fresh dew",
+          "middle_note": "Daoist temple sandalwood · immortal herbs",
+          "base_note": "Cloud mist · aloeswood"
+        }
+      },
+      {
+        "n": 5,
+        "location": "White Tiger Ridge",
+        "chapter": "Ch. 27",
+        "geography": "Aparagodānīya Continent · a barren mountain",
+        "scent_profile": "Dry bones · decay · chilling wind",
+        "scent_notes": [
+          "Dry bones",
+          "Rotting flesh",
+          "Chilling wind",
+          "Wild grass"
+        ],
+        "intensity": 5,
+        "mood": "Terrifying · gloomy",
+        "key_description": "The White Bone Demon's territory · bones everywhere · gusts of chilling wind",
+        "fragrance_formula": {
+          "top_note": "Chilling wind · rotten grass",
+          "middle_note": "Dry bones · rotting flesh",
+          "base_note": "The breath of the underworld"
+        }
+      },
+      {
+        "n": 6,
+        "location": "Flaming Mountain",
+        "chapter": "Ch. 59-61",
+        "geography": "Aparagodānīya Continent · 800 li of flames",
+        "scent_profile": "Scorching mineral char · sweat · hot dry waves",
+        "scent_notes": [
+          "Scorched earth",
+          "Sulfur",
+          "Sweat",
+          "Heat waves"
+        ],
+        "intensity": 5,
+        "mood": "Scorching · searing · yearning",
+        "key_description": "800 li of flames · nothing grows · the Pilgrim borrows the palm-leaf fan three times",
+        "fragrance_formula": {
+          "top_note": "Heat waves · scorched earth",
+          "middle_note": "Sulfur · minerals",
+          "base_note": "Sweat · smoke"
+        }
+      },
+      {
+        "n": 7,
+        "location": "Spider Silk Cave",
+        "chapter": "Ch. 72-73",
+        "geography": "Aparagodānīya Continent · Silk-Winding Ridge",
+        "scent_profile": "Damp earthy mustiness · the faint sweetness of insect pheromones · decaying silk",
+        "scent_notes": [
+          "Damp earth",
+          "Insect pheromones",
+          "Rotting silk",
+          "Spider webs"
+        ],
+        "intensity": 4,
+        "mood": "Eerie · alluring · dangerous",
+        "key_description": "The lair of seven spider spirits · webs everywhere · heavy dampness",
+        "fragrance_formula": {
+          "top_note": "Spider webs · dampness",
+          "middle_note": "Insect pheromones · rotting silk",
+          "base_note": "Earthy mustiness"
+        }
+      },
+      {
+        "n": 8,
+        "location": "Lion-Camel Ridge",
+        "chapter": "Ch. 74-77",
+        "geography": "Aparagodānīya Continent · 800-li Lion-Camel Ridge",
+        "scent_profile": "Blood · bones · terror",
+        "scent_notes": [
+          "Blood",
+          "Human bones",
+          "Rotting flesh",
+          "Rusty weapons"
+        ],
+        "intensity": 5,
+        "mood": "Terror · death · despair",
+        "key_description": "Three demons devour humans for 800 li · mountains of human bones · blood reeks to the sky",
+        "fragrance_formula": {
+          "top_note": "Blood · putrid stench",
+          "middle_note": "Human bones · rusty weapons",
+          "base_note": "The aura of death"
+        }
+      },
+      {
+        "n": 9,
+        "location": "Bottomless Cave",
+        "chapter": "Ch. 80-83",
+        "geography": "Aparagodānīya Continent · Hollow Mountain",
+        "scent_profile": "Dampness · floral fragrance · rats · the mustiness of deep underground",
+        "scent_notes": [
+          "Musty smell",
+          "Rat musk",
+          "Floral fragrance (disguise)",
+          "Dampness"
+        ],
+        "intensity": 4,
+        "mood": "Wily · seductive · coercive",
+        "key_description": "The rat spirit's lair · a floral disguise · damp and musty within",
+        "fragrance_formula": {
+          "top_note": "Floral fragrance · cloying sweetness",
+          "middle_note": "Dampness · rat musk",
+          "base_note": "Must and rot"
+        }
+      },
+      {
+        "n": 10,
+        "location": "Thunderclap Monastery at Spirit Mountain",
+        "chapter": "Ch. 98",
+        "geography": "Aparagodānīya Continent · Spirit Mountain",
+        "scent_profile": "Sandalwood · the herbal scent of palm-leaf sutras · a pure, clean scent of “nothingness”",
+        "scent_notes": [
+          "Sandalwood",
+          "Palm-leaf herbs",
+          "Gold powder",
+          "Pure air"
+        ],
+        "intensity": 5,
+        "mood": "Solemn · complete · selfless",
+        "key_description": "A holy land of the Buddha · palm-leaf sutra fragrance · glittering gold powder · air of utmost purity",
+        "fragrance_formula": {
+          "top_note": "Sandalwood · palm-leaf",
+          "middle_note": "Gold powder · pure air",
+          "base_note": "Nothingness · purity"
+        }
+      }
+    ],
+    "scent_categories": {
+      "Immersive": [
+        "Flower-Fruit Mountain",
+        "Wuzhuang Temple",
+        "Spirit Mountain Thunderclap Temple"
+      ],
+      "Dangerous": [
+        "White Tiger Ridge",
+        "Flaming Mountain",
+        "Silk-Web Cave",
+        "Lion-Camel Ridge",
+        "Bottomless Cave"
+      ],
+      "Desolate": [
+        "Five Elements Mountain",
+        "Flowing-Sand River"
+      ]
+    },
+    "presentation_innovation": "Scratch-and-sniff fragrance cards + QR-code formulas · letting readers enter the world of Journey to the West through smell"
+  },
+  "visual_art_summary": {
+    "sutra_chantings": 10,
+    "max_wave_amplitude": 1.2,
+    "deepest_valley": "Bhiksu Kingdom · saving the children's hearts and livers",
+    "scent_locations": 10,
+    "scent_categories": 3,
+    "visual_art_ideas": 10
+  },
+  "visual_art_ideas": [
+    {
+      "n": 1,
+      "idea_name": "Eighty-One Ordeals Installation Wall",
+      "art_form": "Installation Art · Interactive Wall",
+      "concept": "A 12m wall with 81 frames of varying sizes, arranged in the chronological order of the eighty-one ordeals, each frame containing different visual elements (gold thread, ashes, bloodstains, fragments)",
+      "innovation": "Express the intensity of each ordeal through visual density, and the nature of each disaster through material"
+    },
+    {
+      "n": 2,
+      "idea_name": "Wukong's Emotion ECG",
+      "art_form": "Data Visualization · Dynamic ECG",
+      "concept": "Turn Wukong's emotional fluctuations across 100 chapters into an ECG · red crests for anger, blue troughs for sorrow, green flat lines for calm",
+      "innovation": "Visualize abstract emotion through medical symbols"
+    },
+    {
+      "n": 3,
+      "idea_name": "Three Realms Map Stereoscopic Projection",
+      "art_form": "Stereoscopic Projection · Installation",
+      "concept": "Stereoscopically project the three layers of Heaven, the human world, and the Underworld · use translucent gauze screens · separate each layer with smoke effects",
+      "innovation": "Break the flat limitation of traditional maps · make the three realms visible in three dimensions"
+    },
+    {
+      "n": 4,
+      "idea_name": "Golden Cudgel Light Column",
+      "art_form": "Light Art · Sculpture",
+      "concept": "A 10m-tall Golden Cudgel light column · internal LEDs glow according to Wukong's combat power · atomized water sprays from the top",
+      "innovation": "Shape the material form of a mythic weapon with light and mist"
+    },
+    {
+      "n": 5,
+      "idea_name": "Demon Specimen Gallery",
+      "art_form": "Specimen Gallery · Installation",
+      "concept": "Turn the demons of the 81 ordeals into specimens · each with a detailed “species card” noting habitat, diet, background, and combat power",
+      "innovation": "Present the absurdity of demons with museum solemnity · producing a striking contrast"
+    },
+    {
+      "n": 6,
+      "idea_name": "Pilgrimage Route Sand Painting",
+      "art_form": "Sand Painting · Dynamic",
+      "concept": "Render the pilgrimage route as a sand painting · sand color varies by region · green grassland, yellow desert, red Flaming Mountain",
+      "innovation": "The fluidity of sand painting expresses the twists and turns of the pilgrimage road"
+    },
+    {
+      "n": 7,
+      "idea_name": "Dialogue of the Three Teachings",
+      "art_form": "Three-Screen Installation · Dialogue",
+      "concept": "Three screens represent Buddhism, Daoism, and Confucianism · each features its representative (Tathāgata, Laozi, Confucius) · use AI to let them converse",
+      "innovation": "Let the three schools' ideas engage in contemporary dialogue · break traditional barriers"
+    },
+    {
+      "n": 8,
+      "idea_name": "Heart Sutra Calligraphy Scroll",
+      "art_form": "Calligraphy · Installation",
+      "concept": "Write the full text of the “Heart Sutra” in calligraphy on a 100m scroll · the size of each section is proportional to the emotional intensity of Tang Sanzang's chanting",
+      "innovation": "Present inner fluctuation through the visual changes of calligraphy"
+    },
+    {
+      "n": 9,
+      "idea_name": "Demon Ecosphere Bottle",
+      "art_form": "Ecological Installation · Miniature Landscape",
+      "concept": "Each demon is made into an ecosphere bottle · containing a miniature demon, its lair, minions, and environment",
+      "innovation": "Present the demons' living conditions through miniature landscapes"
+    },
+    {
+      "n": 10,
+      "idea_name": "Pilgrimage Team Group Photo",
+      "art_form": "Photography · Installation",
+      "concept": "Photograph the five pilgrimage team members in a “group photo” · each in the same pose at different times and places · composite them into one",
+      "innovation": "Break the limits of time · compress 14 years of pilgrimage into a single photo"
+    }
+  ]
+};
 
     // ===== 类别与配色映射 =====
     // scent_category 判定（基于 scent_categories 反查）
@@ -3548,9 +3921,9 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
     async function loadAll() {
         const [hs, sm, vs] = await Promise.all([
-            loadJson("../data/json/heart_sutra_sculpture.json", EMBEDDED.heart_sutra_sculpture),
-            loadJson("../data/json/scent_map.json", EMBEDDED.scent_map),
-            loadJson("../data/json/visual_art_summary.json", EMBEDDED.visual_art_summary)
+            loadJson("../en/json/heart_sutra_sculpture.json", EMBEDDED.heart_sutra_sculpture),
+            loadJson("../en/json/scent_map.json", EMBEDDED.scent_map),
+            loadJson("../en/json/visual_art_summary.json", EMBEDDED.visual_art_summary)
         ]);
         return {
             heart_sutra: hs,
@@ -3569,7 +3942,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const usingEmbedded = (data.heart_sutra === EMBEDDED.heart_sutra_sculpture);
         if (!usingEmbedded) {
             document.getElementById("dataSource").innerHTML =
-                "Data source: loaded live from <code>../data/json/</code> (running in http server mode)";
+                "Data source: loaded live from <code>../en/json/</code> (running in http server mode)";
         } else {
             document.getElementById("dataSource").innerHTML =
                 "Data source: embedded data (file:// protocol · fetch unavailable · reading hardcoded JSON directly)";

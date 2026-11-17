@@ -1,0 +1,140 @@
+{
+  "concept_name": "长生资源链",
+  "english_name": "Immortality Resource Chain",
+  "definition": "西游世界 10 种长生资源·稀缺度/效力/获取难度/拥有者·构成'长生经济'",
+  "scoring_criteria": "scarcity/efficacy/access_level 均 0-10 分：10=最稀缺/最高效/最难获取",
+  "resources": [
+    {
+      "name": "蟠桃（9000 年树）",
+      "english_name": "9-Millennium Peach",
+      "scarcity": 10,
+      "efficacy": 10,
+      "access_level": 10,
+      "owner": "王母娘娘（蟠桃园·天庭）",
+      "rarity_reason": "9000 年一熟·全树仅 9 棵·每棵结果有限·蟠桃会才分发",
+      "effect": "与天地齐寿·日月同庚",
+      "chapter": "第 5 回"
+    },
+    {
+      "name": "人参果",
+      "english_name": "Ginseng Fruit",
+      "scarcity": 9,
+      "efficacy": 9,
+      "access_level": 9,
+      "owner": "镇元大仙（五庄观）",
+      "rarity_reason": "3000 年一熟·全树仅 30 个·闻一闻活 360 岁·吃一个活 47000 年",
+      "effect": "47000 年寿命·但不可多食",
+      "chapter": "第 24-26 回"
+    },
+    {
+      "name": "太上老君仙丹",
+      "english_name": "Laozi Elixir",
+      "scarcity": 9,
+      "efficacy": 10,
+      "access_level": 10,
+      "owner": "太上老君（兜率宫）",
+      "rarity_reason": "老君亲炼·数量有限·分'金丹/还丹/九转金丹'多品级",
+      "effect": "金钢不坏之身/起死回生/即时升仙",
+      "chapter": "第 5/7/39 回"
+    },
+    {
+      "name": "唐僧肉",
+      "english_name": "Tang Monk Flesh",
+      "scarcity": 10,
+      "efficacy": 10,
+      "access_level": 10,
+      "owner": "唐僧（金蝉子转世·十世修行）",
+      "rarity_reason": "十世修行·元阳未泄·阴阳合一·全西游仅此一份",
+      "effect": "长生不老（传说·实际无人验证·妖怪皆失败）",
+      "chapter": "全程主线·第 27 回起"
+    },
+    {
+      "name": "紧箍咒解除",
+      "english_name": "Golden Hoop Release",
+      "scarcity": 10,
+      "efficacy": 8,
+      "access_level": 10,
+      "owner": "如来佛祖（金箍咒三件·观音转交）",
+      "rarity_reason": "成佛后自褪·不可外力破解·是'项目完成度'的奖励",
+      "effect": "解除束缚·获得自由（封斗战胜佛后自褪）",
+      "chapter": "第 8/100 回"
+    },
+    {
+      "name": "天河水",
+      "english_name": "Heavenly River Water",
+      "scarcity": 6,
+      "efficacy": 6,
+      "access_level": 7,
+      "owner": "天蓬元帅（猪八戒）·天河八万水军",
+      "rarity_reason": "天河之水·量较大但需天庭授权·凡间不可见",
+      "effect": "延寿/治病/净化·非顶级长生资源",
+      "chapter": "第 8/47 回"
+    },
+    {
+      "name": "镇元大仙人参果（同人参果·特指赠予）",
+      "english_name": "Zhenyuan Gifted Ginseng Fruit",
+      "scarcity": 10,
+      "efficacy": 9,
+      "access_level": 10,
+      "owner": "镇元大仙（结拜悟空后赠予）",
+      "rarity_reason": "3000 年一熟·30 个中赠予 2 个·需结拜关系才可获得",
+      "effect": "47000 年寿命·且带'人情'属性·不可交易",
+      "chapter": "第 26 回"
+    },
+    {
+      "name": "紫河车",
+      "english_name": "Placenta Elixir",
+      "scarcity": 8,
+      "efficacy": 7,
+      "access_level": 9,
+      "owner": "观音菩萨（紫河车法）·少数高级神仙",
+      "rarity_reason": "需特殊炼制·材料稀有·只有少数神仙掌握配方",
+      "effect": "延寿/补气·非顶级但稀缺",
+      "chapter": "散见道教典籍·西游暗线"
+    },
+    {
+      "name": "九转金丹",
+      "english_name": "Nine-Turn Golden Elixir",
+      "scarcity": 9,
+      "efficacy": 10,
+      "access_level": 10,
+      "owner": "太上老君（兜率宫顶级品）",
+      "rarity_reason": "九转炼制·老君最顶级丹药·数量极少·乌鸡国国王还魂用此",
+      "effect": "起死回生/即身成仙",
+      "chapter": "第 39 回"
+    },
+    {
+      "name": "太乙真人莲藕化身",
+      "english_name": "Taiyi Lotus Avatar",
+      "scarcity": 9,
+      "efficacy": 9,
+      "access_level": 10,
+      "owner": "太乙真人（哪吒师傅）",
+      "rarity_reason": "需太乙真人亲施法术·莲藕为媒·重塑肉身·极少数案例",
+      "effect": "重塑肉身/复活·哪吒死后化为此身",
+      "chapter": "第 83 回（追溯哪吒身世）"
+    }
+  ],
+  "resource_stats": {
+    "total_resources": 10,
+    "avg_scarcity": 9,
+    "avg_efficacy": 8.8,
+    "avg_access_level": 9.5,
+    "rarest_resource": "蟠桃 9000 年树（scarcity 10·全树 9 棵·9000 年一熟）",
+    "most_efficient": "太上老君仙丹/九转金丹（efficacy 10·即时升仙/起死回生）",
+    "hardest_access": "蟠桃/唐僧肉/紧箍咒解除/九转金丹/莲藕化身（access_level 10·极难获取）",
+    "most_overhyped": "唐僧肉（传说长生不老·但实际无妖怪成功·是'虚假资源'）"
+  },
+  "resource_insights": [
+    "蟠桃 9000 年树最稀缺（10 分）·是天庭统治的物质基础·控制蟠桃即控制神仙命脉",
+    "唐僧肉 10 元阴阳合一·稀缺度 10·但实际效力存疑·是'虚假资源'·推动主线剧情",
+    "人参果 3000 年一熟·稀缺度 9·镇元大仙独占·是散仙独立性的物质基础",
+    "太上老君仙丹体系（仙丹+九转金丹）效力最高·是'即时升仙'通道·掌握在道祖手中",
+    "紧箍咒解除是'项目奖励'型资源·不可外力破解·揭示如来对悟空的控制逻辑",
+    "天河水量大但效力一般·是猪八戒的'隐秘资源'·非顶级长生品",
+    "莲藕化身是'复活'型资源·哪吒专属·揭示太乙真人的炼器能力",
+    "紫河车是暗线资源·非主线但稀缺·说明长生资源体系有'灰色地带'",
+    "10 种资源平均稀缺度 9.0·平均效力 8.8·平均获取难度 9.5·说明长生是极奢侈需求",
+    "天庭控制蟠桃+仙丹·灵山控制金箍咒·散仙控制人参果·形成'三足鼎立'的长生资源格局"
+  ]
+}

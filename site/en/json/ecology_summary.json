@@ -1,0 +1,15 @@
+{
+  "invasive_species_count": 7,
+  "invasion_success_rate": "100% (7/7 all reclaimed by their owners)",
+  "avg_invasion_duration_years": 7.4,
+  "total_prey_estimated": 76018,
+  "max_damage_species": "Golden-Winged Great Peng",
+  "resource_pulse_events": 10,
+  "avg_pulse_intensity": 7.8,
+  "avg_pulse_duration_days": 4.2,
+  "succession_stages": 6,
+  "peak_population": 47000,
+  "lowest_population": 1300,
+  "population_decline_percent": 97.2,
+  "trophic_levels": 6
+}

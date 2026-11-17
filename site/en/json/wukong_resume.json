@@ -1,0 +1,77 @@
+{
+  "basic_info": {
+    "name": "Sun Wukong",
+    "alias": "Great Sage Equal to Heaven · Victorious Fighting Buddha",
+    "birthplace": "Flower-Fruit Mountain, East Pūrvavideha Continent",
+    "education": "Three-Star Cave of the Slanting Moon, Mount Lingtai Fangcun (Patriarch Bodhi's Academy)",
+    "major": "Seventy-Two Earthly Transformations · Somersault Cloud",
+    "phone": "Golden-Banded Staff hotline (direct dial, 13,500 jin)"
+  },
+  "work_experience": [
+    {
+      "company": "Heavenly Court Group",
+      "position": "Bimawen (Head of the Imperial Stables)",
+      "duration": "Half a month",
+      "achievements": "Managed a thousand heavenly horses · established standardized feeding procedures",
+      "reason_for_leave": "Role mismatched with ability · seeking greater challenges"
+    },
+    {
+      "company": "Heavenly Court Group · Great Sage Residence",
+      "position": "Great Sage Equal to Heaven (no specific duties · retained on payroll)",
+      "duration": "Several months",
+      "achievements": "Planned and executed a disruptive stress test against a large multinational group (the Heavenly Court), driving a full upgrade of its security systems and organizational structure",
+      "reason_for_leave": "After the stress test · frozen for 500 years by the Five Elements Mountain project"
+    },
+    {
+      "company": "Tang Dynasty Cultural Communications Group · Scripture-Fetching Project",
+      "position": "Tech Lead (Eldest Senior Brother)",
+      "duration": "14 years",
+      "achievements": "Led the resolution of 60+ technical challenges among the Eighty-One Tribulations · summoned reinforcements 30+ times · ensured delivery",
+      "reason_for_leave": "Project closure · promoted to Victorious Fighting Buddha"
+    }
+  ],
+  "skills": [
+    {
+      "skill": "Seventy-Two Earthly Transformations",
+      "level": "Expert",
+      "note": "Avoids the three calamities · myriad transformations"
+    },
+    {
+      "skill": "Somersault Cloud",
+      "level": "Expert",
+      "note": "108,000 li per somersault · cross-continental travel"
+    },
+    {
+      "skill": "Fiery Golden Eyes",
+      "level": "Senior",
+      "note": "Sees through demons' true forms · but vulnerable to smoke"
+    },
+    {
+      "skill": "Summoning Reinforcements",
+      "level": "Master",
+      "note": "Heavenly Court / Lingshan / South Sea · full-domain resource dispatch"
+    },
+    {
+      "skill": "Golden-Banded Staff",
+      "level": "Expert",
+      "note": "13,500 jin · grows and shrinks at will"
+    }
+  ],
+  "stress_interview": [
+    {
+      "question": "You once resigned over a management-philosophy clash with your direct supervisor (Tang Sanzang), returning to Flower-Fruit Mountain after the White-Bone Demon affair. How would you ensure a healthy supervisor-subordinate relationship in your new role?",
+      "wukong_answer": "That resignation was a necessary period of reflection. I later realized there was an execution-boundary issue between my supervisor's 'no-kill' baseline and my 'exterminate evil' executor. After the True and False Monkey King incident, I learned to 'align' goals with my supervisor before acting, to avoid misjudgment. The Tight-Fillet Spell also served as an external execution-control mechanism that helped me curb my impulses.",
+      "emoji_note": "A bitter smile while wearing the Tight-Fillet Spell"
+    },
+    {
+      "question": "Your 'stress test' of the Heavenly Court (Havoc in Heaven) caused serious consequences. How do you explain this 'trial and error'?",
+      "wukong_answer": "That was a misplaced need for personal value and institutional recognition. At the time I did not realize the Heavenly Court's bureaucracy could not accommodate an unestablished 'self-proclaimed Great Sage Equal to Heaven' identity. That trial and error taught me that realizing value within a system requires a compliant path, not violent confrontation.",
+      "emoji_note": "Scratching his head with an awkward smile"
+    },
+    {
+      "question": "You frequently 'summon reinforcements.' How do you assess your ability to solve problems independently?",
+      "wukong_answer": "Summoning reinforcements is a mature expression of resource dispatch. Early on I leaned toward 'fight first, ask later'; later I learned to precisely calculate the ROI of calling for help: problem-solving efficiency × favors consumed ÷ time spent × prestige lost. I handle independently what can be handled independently (such as the White-Bone Demon or the Three Immortals of Chechi); for demons with powerful backing (such as Red Boy or the Gold-Bangle Cave), reinforcements are a must — a rational choice in organizational behavior.",
+      "emoji_note": "Resting his chin on his hand, analyzing seriously"
+    }
+  ]
+}

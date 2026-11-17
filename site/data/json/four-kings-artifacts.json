@@ -1,0 +1,46 @@
+[
+  {
+    "name": "增长天王",
+    "artifact": "青云剑",
+    "symbol": "斩烦恼",
+    "wound": "剑身划痕",
+    "signature": "云纹",
+    "silence": "烦恼断后的空",
+    "color": "#40619E",
+    "position": "南天门",
+    "desc": "剑出鞘斩烦恼丝，剑锋永朝外，不能反斩己身。"
+  },
+  {
+    "name": "广目天王",
+    "artifact": "弹弓",
+    "symbol": "旧身份",
+    "wound": "皮筋断裂",
+    "signature": "弹痕",
+    "silence": "看得见打不中",
+    "color": "#8b7355",
+    "position": "南天门",
+    "desc": "非官方法器，灌江口旧物。一击打中悟空尾巴，从未记入军功。"
+  },
+  {
+    "name": "多闻天王",
+    "artifact": "混元珠伞",
+    "symbol": "凹坑记忆",
+    "wound": "伞面凹坑",
+    "signature": "珠痕",
+    "silence": "听见所有说不出",
+    "color": "#5a4a6b",
+    "position": "南天门",
+    "desc": "遮万物而不遮己疤，伞面凹坑是金箍棒留下的永久印章。"
+  },
+  {
+    "name": "持国天王",
+    "artifact": "花狐貂",
+    "symbol": "灰灰",
+    "wound": "碎牙",
+    "signature": "调音痕",
+    "silence": "调音师失语",
+    "color": "#C0392B",
+    "position": "南天门",
+    "desc": "紫金花狐貂名「灰灰」，唯一会自己动的法器，咬金箍棒碎门牙。"
+  }
+]

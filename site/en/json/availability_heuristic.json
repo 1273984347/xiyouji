@@ -1,0 +1,107 @@
+{
+  "concept_name": "Tang Sanzang's Availability Heuristic",
+  "english_name": "Tang Monk's Availability Heuristic",
+  "cognitive_definition": "Availability heuristic: people judge how frequently or probably an event occurs by how easily they can recall examples of it; events just experienced disproportionately influence later judgments.",
+  "core_case": "Because Tang Sanzang had just been deceived by the White Bone Demon, he thereafter presumed that any beautiful woman or old man was a demon — a textbook case of availability bias.",
+  "tang_monk_evolution": [
+    {
+      "phase": "Early · Innocent Phase",
+      "chapter_range": "Chapters 1–26",
+      "characteristic": "Trusts all beings and is unwilling to take life",
+      "representative_event": "Wukong kills the Six Robbers; Tang Sanzang is furious",
+      "cognitive_bias": "None · over-trusting",
+      "trust_wukong": 8,
+      "suspicion_level": 2,
+      "key_quote": "We are monastics; do not take any life"
+    },
+    {
+      "phase": "Turning Point · the White Bone Demon",
+      "chapter_range": "Chapter 27",
+      "characteristic": "The White Bone Demon's three transformations (maiden / old woman / old man) successfully deceive Tang Sanzang; Wukong is banished",
+      "representative_event": "Thrice Beats the White Bone Demon; Tang Sanzang chants the Golden Hoop Mantra and banishes Wukong",
+      "cognitive_bias": "First establishes the belief that 'a beautiful woman may be a demon'",
+      "trust_wukong": 3,
+      "suspicion_level": 6,
+      "key_quote": "You monkey, you are plainly killing and destroying life"
+    },
+    {
+      "phase": "Middle · Peak of Availability Bias",
+      "chapter_range": "Chapters 28–50",
+      "characteristic": "Presumes any beautiful woman or old man is a demon; over-suspicious",
+      "representative_event": "Red Boy turns into a child; Tang Sanzang believes him",
+      "cognitive_bias": "Availability bias, but reversed: he doubts only Wukong, never others",
+      "trust_wukong": 5,
+      "suspicion_level": 7,
+      "key_quote": "If there is a demon, Wukong, you must strike it down"
+    },
+    {
+      "phase": "Late · Cognitive Correction",
+      "chapter_range": "Chapters 51–100",
+      "characteristic": "After many episodes, begins to trust Wukong's judgment",
+      "representative_event": "After the Red Boy incident, Tang Sanzang gradually trusts Wukong",
+      "cognitive_bias": "Availability bias corrected, but still occasionally flares up",
+      "trust_wukong": 8,
+      "suspicion_level": 4,
+      "key_quote": "Wukong, tell me — is it a demon or not?"
+    }
+  ],
+  "comparative_cases": [
+    {
+      "case": "The White Bone Demon's three transformations",
+      "chapter": "Chapter 27",
+      "tang_monk_judgment": "Believes they are mortals",
+      "actual": "Demons",
+      "judgment_correct": false,
+      "cognitive_error": "No prior; over-trusting",
+      "wukong_judgment": "Demons (Fiery Golden Eyes)",
+      "consequence": "Wukong is banished; Tang Sanzang meets the Yellow Robe Demon"
+    },
+    {
+      "case": "Red Boy turns into a child",
+      "chapter": "Chapter 40",
+      "tang_monk_judgment": "Believes he is a child",
+      "actual": "Demons",
+      "judgment_correct": false,
+      "cognitive_error": "Failed to learn from the White Bone Demon; still over-trusting",
+      "wukong_judgment": "Demons",
+      "consequence": "Tang Sanzang is captured; Wukong seeks Guanyin's help"
+    },
+    {
+      "case": "Gold Horn and Silver Horn transform",
+      "chapter": "Chapters 32–35",
+      "tang_monk_judgment": "Half believing, half doubting",
+      "actual": "Demons",
+      "judgment_correct": false,
+      "cognitive_error": "Availability bias · beginning to doubt",
+      "wukong_judgment": "Demons",
+      "consequence": "Wukong sees through them; danger turns to safety"
+    },
+    {
+      "case": "The ghost of the Black Rooster Kingdom's king",
+      "chapter": "Chapters 37–39",
+      "tang_monk_judgment": "Believes it is a ghost",
+      "actual": "A real ghost",
+      "judgment_correct": true,
+      "cognitive_error": "None",
+      "wukong_judgment": "A real ghost",
+      "consequence": "Wukong revives the king"
+    },
+    {
+      "case": "The Rat Demon transforms",
+      "chapter": "Chapters 80–83",
+      "tang_monk_judgment": "Believes she is a virtuous maiden",
+      "actual": "Demons",
+      "judgment_correct": false,
+      "cognitive_error": "Bias still not fully corrected even late in the journey",
+      "wukong_judgment": "Demons",
+      "consequence": "Tang Sanzang is captured; Wukong seeks Heavenly King Li's help"
+    }
+  ],
+  "cognitive_insights": [
+    "Tang Sanzang's availability bias is 'reversed': he never doubts strangers, only Wukong",
+    "The White Bone Demon episode is the cognitive turning point, but Tang Sanzang's misattribution (blaming Wukong) reinforced the bias",
+    "Availability bias leaves Tang Sanzang's judgment error rate at 60% even late in the journey",
+    "Tang Sanzang's cognitive correction is extremely slow; even by Chapter 80 it is still incomplete",
+    "Wukong's Fiery Golden Eyes are a cognitive tool, but Tang Sanzang distrusts the tool — the root of the cognitive conflict"
+  ]
+}

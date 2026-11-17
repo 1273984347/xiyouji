@@ -1,0 +1,148 @@
+{
+  "concept_name": "六道轮回系统",
+  "english_name": "Six Realms Samsara Wheel",
+  "definition": "佛教六道轮回：天道/人道/阿修罗道/畜生道/饿鬼道/地狱道·众生随业力流转·西游世界以此为基础·但'仙佛眷属'与'取经成正果者'可跳出轮回",
+  "core_principle": "六道中以天道/人道为善道·阿修罗道为半善道·畜生/饿鬼/地狱为三恶道·业力决定去向·修行可超脱",
+  "realms": [
+    {
+      "n": 1,
+      "name": "天道",
+      "english_name": "Deva Realm",
+      "population": "诸天神佛·天人无数",
+      "entry_criteria": "上品十善业·或修行圆满·或正神归位",
+      "exit_criteria": "福报尽时堕落·或天寿终了·随业流转",
+      "duration": "一劫或多劫·极长久",
+      "notable_cases": [
+        "玉帝",
+        "太上老君",
+        "如来佛祖",
+        "天庭仙官",
+        "观音菩萨"
+      ],
+      "characteristics": "天人福报大·但仍在轮回中·非究竟解脱",
+      "in_pilgrim_team": 0
+    },
+    {
+      "n": 2,
+      "name": "人道",
+      "english_name": "Human Realm",
+      "population": "凡界众生·四大部洲人类",
+      "entry_criteria": "中品善业·持五戒·或天人福报尽转生",
+      "exit_criteria": "业力流转·随业受生·或修行超脱",
+      "duration": "一生数十百年·短促",
+      "notable_cases": [
+        "李世民",
+        "唐僧 9 世",
+        "陈光蕊",
+        "殷温娇",
+        "寇员外",
+        "刘全"
+      ],
+      "characteristics": "人道苦乐参半·最易修行·是成佛的必要条件",
+      "in_pilgrim_team": 1
+    },
+    {
+      "n": 3,
+      "name": "阿修罗道",
+      "english_name": "Asura Realm",
+      "population": "阿修罗众·有天福无天德",
+      "entry_criteria": "善业中有嗔心·或修行有成但脾气未化",
+      "exit_criteria": "嗔心转善可升天·嗔心重者堕恶道",
+      "duration": "长寿·但福报有尽",
+      "notable_cases": [
+        "大鹏金翅雕（佛母孔雀菩萨眷属）",
+        "部分妖怪源流"
+      ],
+      "characteristics": "阿修罗好斗·常与天争·是有福无德之界",
+      "in_pilgrim_team": 0
+    },
+    {
+      "n": 4,
+      "name": "畜生道",
+      "english_name": "Animal Realm",
+      "population": "飞禽走兽水族昆虫·各路妖精",
+      "entry_criteria": "下品恶业·愚痴·或色心感色报·或失误受重罚",
+      "exit_criteria": "业报尽可转生·或被收编归正",
+      "duration": "不定·随业力长短",
+      "notable_cases": [
+        "猪八戒错投猪胎",
+        "沙僧流沙河水妖",
+        "白龙马",
+        "各路妖精",
+        "泾河龙王业报流转"
+      ],
+      "characteristics": "畜生道愚痴·常被驱使·是赎罪的好场所",
+      "in_pilgrim_team": 3
+    },
+    {
+      "n": 5,
+      "name": "饿鬼道",
+      "english_name": "Preta Realm",
+      "population": "饿鬼众·腹大咽细·常受饥渴",
+      "entry_criteria": "中品恶业·贪悭不舍·或生前贪欲重",
+      "exit_criteria": "业报尽可转生·或得超度",
+      "duration": "长久·常受饥渴",
+      "notable_cases": [
+        "孟婆汤后忘前生·黄泉路上孤魂野鬼"
+      ],
+      "characteristics": "饿鬼道贪悭·常求不得·是贪欲的果报",
+      "in_pilgrim_team": 0
+    },
+    {
+      "n": 6,
+      "name": "地狱道",
+      "english_name": "Hell Realm",
+      "population": "受苦众生·随罪业轻重受诸苦",
+      "entry_criteria": "上品恶业·五逆十恶·或犯天条重罪",
+      "exit_criteria": "业报尽可出·或地藏王菩萨超度",
+      "duration": "长久·按劫数计·最久",
+      "notable_cases": [
+        "十八层地狱",
+        "铜柱铁床",
+        "刀山火海",
+        "刀锯地狱"
+      ],
+      "characteristics": "地狱道最苦·业报尽方可出·是恶业的终极果报",
+      "in_pilgrim_team": 0
+    }
+  ],
+  "samsara_stats": {
+    "total_realms": 6,
+    "good_realms": [
+      "天道",
+      "人道"
+    ],
+    "neutral_realm": [
+      "阿修罗道"
+    ],
+    "evil_realms": [
+      "畜生道",
+      "饿鬼道",
+      "地狱道"
+    ],
+    "pilgrim_team_distribution": {
+      "天道": 0,
+      "人道": 1,
+      "阿修罗道": 0,
+      "畜生道": 3,
+      "饿鬼道": 0,
+      "地狱道": 0,
+      "超越轮回（成正果）": 5
+    },
+    "escape_paths": [
+      "取经成正果",
+      "菩萨收编眷属",
+      "皈依佛门",
+      "强力归正"
+    ],
+    "common_pattern": "取经团队 5 人中有 4 人原为天道正神贬下凡（畜生道/水妖）·最终全部超越轮回"
+  },
+  "samsara_insights": [
+    "取经团队是'跳出轮回'的特例·5 人最终全部成佛/成正果·超越六道",
+    "畜生道是赎罪的好场所·八戒/沙僧/白龙马皆由畜生道超脱",
+    "人道是修行的最佳场所·唐僧 10 世皆为人道·方成佛",
+    "天道非究竟·天人福报尽仍堕落·需修行超脱",
+    "阿修罗道是'有福无德'之界·对应部分妖怪源流",
+    "饿鬼道/地狱道是恶业终极果报·但业报尽可出·非永罚"
+  ]
+}

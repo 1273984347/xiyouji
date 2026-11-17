@@ -1,0 +1,16 @@
+{
+  "total_versions": 10,
+  "total_variants": 6,
+  "total_authors": 4,
+  "total_commentators": 5,
+  "total_commentary_count": 6100,
+  "commentary_by_type": {
+    "Praise": 1100,
+    "Invective": 340,
+    "Elucidation": 2250,
+    "Textual Criticism": 1450,
+    "Exegesis": 960
+  },
+  "earliest_version": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures",
+  "latest_qing_version": "The Original Intent of the Journey West (Xiyou yuanzhi)"
+}

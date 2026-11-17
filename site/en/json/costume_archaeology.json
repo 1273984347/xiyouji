@@ -1,0 +1,203 @@
+{
+  "concept_name": "Costume Archaeology",
+  "english_name": "Costume Archaeology",
+  "definition": "Costume archaeology: by analyzing the materials, forms, and patterns of clothing, ancient social hierarchy and cultural change are reconstructed.",
+  "core_case": "Wukong's progression from 'tiger-skin skirt' to 'monk's robe' to 'Buddha's robe' reflects not only his inner journey but also the Ming Dynasty dress system.",
+  "character_costumes": [
+    {
+      "character": "Sun Wukong",
+      "costume_evolution": [
+        {
+          "stage": "Stone Monkey period",
+          "costume": "Nude · fur",
+          "material": "native monkey fur",
+          "function": "warmth · camouflage",
+          "social_status": "None · wild beast",
+          "ming_dynasty_parallel": "None · primitive state"
+        },
+        {
+          "stage": "Handsome Monkey King period",
+          "costume": "Tongbi gibbon's gift · yellow short jacket",
+          "material": "coarse cloth",
+          "function": "marking identity",
+          "social_status": "King · Lord of Flower-Fruit Mountain",
+          "ming_dynasty_parallel": "Commoner clothing · yellow was a lowly color"
+        },
+        {
+          "stage": "Great Sage Equal to Heaven period",
+          "costume": "Locked-gold armor + phoenix-wing purple-gold crown + lotus-thread cloud-walking boots",
+          "material": "gold + silk",
+          "function": "deterrence · status symbol",
+          "social_status": "King · Great Sage Equal to Heaven",
+          "ming_dynasty_parallel": "Vassal-king attire · gold armor as ceremonial guard"
+        },
+        {
+          "stage": "Early pilgrimage",
+          "costume": "Tiger-skin skirt + straight robe",
+          "material": "tiger skin + coarse cloth",
+          "function": "modesty · warmth",
+          "social_status": "Disciple · Pilgrim",
+          "ming_dynasty_parallel": "Wandering monk · patched-robe tradition"
+        },
+        {
+          "stage": "Late pilgrimage",
+          "costume": "Monk's robe · brocade kasaya",
+          "material": "silk + gold thread",
+          "function": "Buddhist identity",
+          "social_status": "Eminent monk's disciple",
+          "ming_dynasty_parallel": "Eminent monk's vestment · Ming kasaya"
+        },
+        {
+          "stage": "Buddhahood",
+          "costume": "Buddha's robe · gold-woven",
+          "material": "gold thread + gemstones",
+          "function": "symbol of Buddhahood",
+          "social_status": "Buddha · Victorious Fighting Buddha",
+          "ming_dynasty_parallel": "Imperial dragon robe · gold-woven garment"
+        }
+      ],
+      "evolution_pattern": "U-shaped curve: nude → coarse cloth → gold armor → tiger skin → monk's robe → Buddha's robe · peak → trough → pinnacle",
+      "social_meaning": "From king to disciple to Buddha, the costume mirrors the rise and fall of status."
+    },
+    {
+      "character": "Tang Sanzang",
+      "costume_evolution": [
+        {
+          "stage": "Origin period",
+          "costume": "Infant · adrift",
+          "material": "none",
+          "function": "none",
+          "social_status": "Abandoned infant",
+          "ming_dynasty_parallel": "None"
+        },
+        {
+          "stage": "Ordination period",
+          "costume": "Coarse cloth monk's robe",
+          "material": "coarse cloth",
+          "function": "monastic identity",
+          "social_status": "Monk · novice (śrāmaṇera)",
+          "ming_dynasty_parallel": "Ming Dynasty ordinary monk's clothing"
+        },
+        {
+          "stage": "Pilgrimage period",
+          "costume": "Brocade kasaya + nine-ring staff",
+          "material": "silk + gold thread + tin",
+          "function": "imperial brother identity · Buddhist",
+          "social_status": "Imperial brother · eminent monk",
+          "ming_dynasty_parallel": "Ming Dynasty eminent monk's vestment · imperially bestowed kasaya"
+        },
+        {
+          "stage": "Buddhahood",
+          "costume": "Candana Merit Buddha's robe",
+          "material": "gold thread + gemstones",
+          "function": "symbol of Buddhahood",
+          "social_status": "Buddha · Candana Merit Buddha",
+          "ming_dynasty_parallel": "Imperial dragon robe"
+        }
+      ],
+      "evolution_pattern": "Rising curve: abandoned infant → monk → imperial brother → Buddha · costume ascends",
+      "social_meaning": "From abandoned infant to Buddha, the costume mirrors a rise against the odds."
+    },
+    {
+      "character": "Zhu Bajie",
+      "costume_evolution": [
+        {
+          "stage": "Marshal Tianpeng period",
+          "costume": "Gold armor · marshal's uniform",
+          "material": "gold + silk",
+          "function": "marshal identity",
+          "social_status": "Marshal · heavenly general",
+          "ming_dynasty_parallel": "Ming Dynasty regional commander's uniform"
+        },
+        {
+          "stage": "Demotion period",
+          "costume": "Pig form · nude",
+          "material": "pig bristle",
+          "function": "none",
+          "social_status": "Demon · pig spirit",
+          "ming_dynasty_parallel": "None · beast form"
+        },
+        {
+          "stage": "Gao Village period",
+          "costume": "Coarse cloth short jacket",
+          "material": "coarse cloth",
+          "function": "modesty · labor",
+          "social_status": "Live-in son-in-law · farmer",
+          "ming_dynasty_parallel": "Ming Dynasty peasant clothing"
+        },
+        {
+          "stage": "Pilgrimage period",
+          "costume": "Monk's robe · black cloth",
+          "material": "coarse cloth",
+          "function": "monastic identity",
+          "social_status": "Disciple · Pilgrim",
+          "ming_dynasty_parallel": "Ming Dynasty itinerant monk's clothing"
+        },
+        {
+          "stage": "Buddhahood",
+          "costume": "Altar Cleanser's robe",
+          "material": "gold thread",
+          "function": "envoy identity",
+          "social_status": "Envoy · Altar Cleanser",
+          "ming_dynasty_parallel": "Ming Dynasty eunuch's clothing"
+        }
+      ],
+      "evolution_pattern": "Down-then-up curve: marshal → pig → son-in-law → monk → envoy · great fall and rise",
+      "social_meaning": "From marshal to pig to envoy, the costume mirrors status upheaval."
+    },
+    {
+      "character": "Sha Wujing",
+      "costume_evolution": [
+        {
+          "stage": "Curtain-Raising General period",
+          "costume": "Gold armor · general's uniform",
+          "material": "gold + silk",
+          "function": "general identity",
+          "social_status": "Great General · heavenly warrior",
+          "ming_dynasty_parallel": "Ming Dynasty ceremonial-guard attire"
+        },
+        {
+          "stage": "Flowing-Sand River period",
+          "costume": "Monster garb · disheveled hair",
+          "material": "none · beast form",
+          "function": "none",
+          "social_status": "Demon · Flowing-Sand River monster",
+          "ming_dynasty_parallel": "None · wild man"
+        },
+        {
+          "stage": "Pilgrimage period",
+          "costume": "Monk's robe · gray cloth",
+          "material": "coarse cloth",
+          "function": "monastic identity · load-bearing",
+          "social_status": "Disciple · load-bearer",
+          "ming_dynasty_parallel": "Ming Dynasty porter's clothing"
+        },
+        {
+          "stage": "Buddhahood",
+          "costume": "Golden-Body Arhat's robe",
+          "material": "gold thread",
+          "function": "arhat identity",
+          "social_status": "Arhat · Golden-Body Arhat",
+          "ming_dynasty_parallel": "Ming Dynasty arhat statues"
+        }
+      ],
+      "evolution_pattern": "Down-then-up curve: general → demon → monk → arhat · upheaval",
+      "social_meaning": "From general to demon to arhat, the costume mirrors status upheaval."
+    }
+  ],
+  "costume_insights": [
+    "Wukong's costume evolution is the most complex, with 6 stages, reflecting the protagonist's inner journey.",
+    "All 4 protagonists' costume evolution follows the common pattern 'Heaven → mortal world → Buddhist fruit'.",
+    "Costume material strictly corresponds to status: gold = Buddha/king · coarse cloth = monk/commoner · nude = demon/beast.",
+    "Ming Dynasty dress system refracted: yellow was a lowly color (commoner) · gold-woven was noble (emperor) · kasaya marked monks.",
+    "At Buddhahood all 4 characters' costume materials unify into gold thread, reflecting the Buddhist ideal of 'equality of all beings'.",
+    "Costume evolution reflects Ming Dynasty social mobility: king ↔ disciple ↔ Buddha · status could convert."
+  ],
+  "ming_dynasty_parallel": {
+    "imperial_robess": "Imperial dragon robe: gold-woven + twelve emblem patterns (corresponds to Buddhahood)",
+    "monk_robes": "Eminent monk's vestment: brocade kasaya + nine-ring staff (corresponds to Tang Sanzang's pilgrimage)",
+    "military_uniforms": "General's armor: gold armor + war boots (corresponds to the Great Sage period)",
+    "commoner_clothing": "Commoner clothing: coarse cloth short jacket + patched robe (corresponds to early pilgrimage)",
+    "official_uniforms": "Official court robe: color-coded by rank (corresponds to the Altar Cleanser's robe)"
+  }
+}

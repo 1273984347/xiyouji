@@ -1,0 +1,51 @@
+[
+  {
+    "school": "Freehand · Wild",
+    "description": "Flower-Fruit Mountain · Water Curtain Cave · the Stone Monkey’s birth",
+    "scenes_count": 4,
+    "color": "#3A473A",
+    "feature": "Wild and thriving · naturally formed"
+  },
+  {
+    "school": "Solemn · Supreme",
+    "description": "Heavenly Palace · Spirit Mountain · Jade Emperor · Tathāgata",
+    "scenes_count": 5,
+    "color": "#d4a857",
+    "feature": "Gilded and resplendent · solemn Buddha countenance"
+  },
+  {
+    "school": "Horror · Demonic",
+    "description": "Lion-Camel Ridge · White Tiger Ridge · Flowing Sands River · demon lairs",
+    "scenes_count": 8,
+    "color": "#1a1410",
+    "feature": "Skulls and white bones · dense yin gloom"
+  },
+  {
+    "school": "Mundane · Plain",
+    "description": "Mortal world · itinerant monks · common households",
+    "scenes_count": 12,
+    "color": "#a87838",
+    "feature": "Earthy yellow and plain · worldly bustle"
+  },
+  {
+    "school": "Marketplace · Gorgeous",
+    "description": "Kingdom of Women · Tianzhu · royal palace",
+    "scenes_count": 3,
+    "color": "#C0392B",
+    "feature": "Splendid palace chambers · hues of desire"
+  },
+  {
+    "school": "Daoist · Ascetic",
+    "description": "Tushita Palace · Five Villages Monastery · Subhuti’s cave",
+    "scenes_count": 4,
+    "color": "#40619E",
+    "feature": "Clear, tranquil stillness · the Dao follows nature"
+  },
+  {
+    "school": "Reborn · Transcendent",
+    "description": "Cloud-Crossing Ferry · Cloud Immortal Cave · Spirit Mountain",
+    "scenes_count": 2,
+    "color": "#5a8c8c",
+    "feature": "Transcending the mundane · solemn Buddha countenance"
+  }
+]

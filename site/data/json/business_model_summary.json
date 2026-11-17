@@ -1,0 +1,32 @@
+{
+  "concept_name": "商业模型整体统计",
+  "english_name": "Business Model Summary",
+  "total_concepts": 3,
+  "concept_list": [
+    "组织对比",
+    "悟空职业转型",
+    "妖怪创业公司"
+  ],
+  "total_data_points": 13,
+  "key_findings": [
+    "天庭 vs 灵山：天庭是存量维持型·灵山是增量扩张型·灵山胜在效率与创新",
+    "悟空 6 个职业阶段：从石猴王（L0）到斗战胜佛（L9）再到退休（L10）·满意度呈 U 型",
+    "5 大妖怪集团 100% 被收购·无一独立 IPO·揭示妖怪经济依附性",
+    "弼马温是天庭最低级官职（未入流）·齐天大圣是有官无禄的空名号",
+    "取经项目本质是'股权激励'·用未来期权（成佛）换取当下低薪劳动"
+  ],
+  "cross_concept_insight": "西游商业模型揭示'体制内/外'二元结构：天庭是僵化国企·灵山是高效民企·妖怪是创业公司·悟空是从创业者到合伙人的转型样本",
+  "business_lessons": [
+    "组织效率：扁平+分权 > 金字塔+集权（灵山 vs 天庭）",
+    "职业曲线：单打独斗失败·团队协作成功（悟空职业转型）",
+    "创业陷阱：依附性业务无法独立 IPO（妖怪集团）",
+    "激励机制：股权/期权 > 固定薪酬（取经项目设计）",
+    "合规风险：违法业务模式必然招致监管清场（妖怪吃人）"
+  ],
+  "data_files": {
+    "organization_comparison": "organization_comparison.json",
+    "wukong_career": "wukong_career.json",
+    "monster_business": "monster_business.json",
+    "summary": "business_model_summary.json"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "concept_name": "Monster Sociology Overall Statistics",
+  "total_concepts": 3,
+  "concept_list": [
+    "Monster Crime Pattern Taxonomy",
+    "Distress Signal Survival Probability",
+    "Mount Desertion Archive"
+  ],
+  "total_data_points": 25,
+  "key_findings": [
+    "7 大势力·天庭与灵山并列第一·影响力均 10·天庭名义权高·灵山实权高",
+    "8 条天庭晋升通道·立功受封成功率最高（60%）·凡人封神最低（1%）",
+    "10 种长生资源·平均稀缺度 9.0·平均效力 8.8·平均获取难度 9.5·长生是极奢侈需求",
+    "蟠桃 9000 年树最稀缺（10 分）·唐僧肉 10 元阴阳合一·人参果 3000 年一熟",
+    "妖界实权 7 vs 名义权 2·逆差最大·是体制反抗的根源"
+  ],
+  "cross_concept_insight": "Three findings of monster sociology: 1) crime methods are positively correlated with treasure tier; 2) Tang Sanzang's survival depends heavily on Wukong · his own survival ability is extremely weak; 3) Xiyouji justice is a classic 'background decides the verdict' · mount desertion is the 'judicial immunity pass' of the privileged class",
+  "tier_distribution": {
+    "T0": [
+      "Heavenly Court",
+      "Spirit Mountain"
+    ],
+    "T1": [
+      "地府",
+      "Wandering Immortals"
+    ],
+    "T2": [
+      "人间",
+      "妖界",
+      "水族"
+    ]
+  },
+  "resource_owner_distribution": {
+    "Heavenly Court": [
+      "蟠桃",
+      "太上老君仙丹",
+      "九转金丹",
+      "天河水"
+    ],
+    "Spirit Mountain": [
+      "紧箍咒解除",
+      "紫河车"
+    ],
+    "Wandering Immortals": [
+      "人参果",
+      "镇元大仙人参果（赠予）"
+    ],
+    "Special": [
+      "唐僧肉（唐僧本人）",
+      "太乙真人莲藕化身（太乙真人）"
+    ]
+  }
+}

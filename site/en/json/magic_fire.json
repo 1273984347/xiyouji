@@ -1,0 +1,52 @@
+[
+  {
+    "name": "True Samadhi Fire",
+    "owner": "Red Boy",
+    "origin": "Innate cultivation · unity of essence, breath and spirit",
+    "intensity": 10,
+    "range": "Short-to-mid range · smoke wounds",
+    "weakness": "The willow water of Guanyin's vase · the Four Seas Dragon Kings' water",
+    "kills": "无直接战绩，逼退孙悟空",
+    "chapter": 41
+  },
+  {
+    "name": "Six-Ding Divine Fire",
+    "owner": "Taishang Laojun · Eight Trigrams Furnace",
+    "origin": "Six-Ding Divine Fire · civil and martial flames",
+    "intensity": 10,
+    "range": "Within the furnace · extremely wide range",
+    "weakness": "Nothing can counter it (Wukong escaped at the Xun position)",
+    "kills": "可炼悟空七七四十九日不死",
+    "chapter": 7
+  },
+  {
+    "name": "Mortal Fire",
+    "owner": "The mortal world · hearth fire of humankind",
+    "origin": "Fire from ordinary fuel",
+    "intensity": 1,
+    "range": "Close range · confined to the stove",
+    "weakness": "Doused by plain water",
+    "kills": "无",
+    "chapter": 16
+  },
+  {
+    "name": "Yin Fire",
+    "owner": "Flaming Mountains · underground fire",
+    "origin": "Wukong kicked over the Eight Trigrams Furnace; its fire-bricks fell to earth",
+    "intensity": 8,
+    "range": "The eight-hundred-li Flaming Mountains",
+    "weakness": "The Palm-Leaf Fan · forty-nine fan-strokes",
+    "kills": "烧损人物",
+    "chapter": 59
+  },
+  {
+    "name": "Samadhi Divine Wind",
+    "owner": "Yellow Wind Demon",
+    "origin": "A yellow-furred marten that attained the Way at Spirit Mountain",
+    "intensity": 7,
+    "range": "A hundred li · can blind Wukong's eyes",
+    "weakness": "Bodhisattva Lingji's Wind-Stilling Pill · Flying Dragon Staff",
+    "kills": "无直接战绩",
+    "chapter": 21
+  }
+]

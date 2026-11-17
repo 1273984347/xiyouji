@@ -11,7 +11,12 @@
 
 - （无）
 
-## 文件（3）
+## 文件（5）
+
+### Python 脚本
+
+- `freeze_gate.py`
+- `json_refs.py`
 
 ### JavaScript / TypeScript
 

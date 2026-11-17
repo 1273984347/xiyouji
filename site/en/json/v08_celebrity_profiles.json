@@ -1,0 +1,102 @@
+[
+  {
+    "id": "li_zhuowu",
+    "name": "Li Zhuowu",
+    "era": "Ming-Qing era",
+    "role": "Ming dynasty thinker · the top interpreter",
+    "quote": "He who reads Journey to the West without knowing the author's purpose will surely treat it as mere play.",
+    "modern_translation": "Those who can't see the deeper meaning are only fit to be entertained",
+    "suitable_age": "High School+",
+    "historical_detail": "Ming dynasty thinker Li Zhi (1527–1602), courtesy name Zhuowu. The first critic to raise Journey to the West to philosophical heights, proposing that 'Shi E' (relief from suffering) is the cipher of spiritual cultivation and liberation."
+  },
+  {
+    "id": "jin_shengtan",
+    "name": "Jin Shengtan",
+    "era": "Early Qing",
+    "role": "Qing commentator · a caustic one-star review",
+    "quote": "(He rated Journey to the West below Water Margin)",
+    "modern_translation": "Even the top name in the negative-review section couldn't resist commenting — proof that the book is too famous to ignore",
+    "suitable_age": "Middle School+",
+    "historical_detail": "Jin Shengtan (1608–1661), a Qing literary critic. Famed for his commentary on Water Margin and Romance of the Western Chamber, he rated Journey to the West modestly yet could not ignore it — indirect proof of its influence."
+  },
+  {
+    "id": "lu_xun",
+    "name": "Lu Xun",
+    "era": "Republican era",
+    "role": "Father of the gods-and-demons novel · gods and demons all have human feeling",
+    "quote": "Gods and demons all have human feeling · spirits and monsters too understand the ways of the world",
+    "modern_translation": "Even monsters understand human ways",
+    "suitable_age": "Elementary+",
+    "historical_detail": "Lu Xun's A Brief History of Chinese Fiction classified Journey to the West as a 'gods-and-demons novel,' stripping away the religious accretions of the Golden Elixir path and completing its disenchantment. He put forward the classic thesis that 'gods and demons all have human feeling.'"
+  },
+  {
+    "id": "hu_shi",
+    "name": "Hu Shi",
+    "era": "Republican era",
+    "role": "The high-class fairy-tale school · against over-interpretation",
+    "quote": "At most it is a very entertaining comic novel ... without any subtle meaning",
+    "modern_translation": "It's just a fun story",
+    "suitable_age": "Middle School+",
+    "historical_detail": "Hu Shi's Research on Journey to the West painstakingly examined the authorship and textual genealogy, doubting that Wu Cheng'en was the author and thereby opening the authorship mystery. But he held that the book 'has no subtle meaning' and opposed over-interpretation."
+  },
+  {
+    "id": "chen_yinke",
+    "name": "Chen Yinke",
+    "era": "Republican era",
+    "role": "The philological school · tracing the origins of Wukong's image",
+    "quote": "The Evolution of the Stories of Xuanzang's Disciples",
+    "modern_translation": "How Sun Wukong's image evolved step by step",
+    "suitable_age": "High School+",
+    "historical_detail": "Chen Yinke (1890–1969), a master of Chinese classical studies. He wrote The Evolution of the Stories of Xuanzang's Disciples (1930), endorsed Hu Shi's Hanuman thesis, and traced the stories of Wukong, Bajie and Sha Wujing back to Buddhist scriptures."
+  },
+  {
+    "id": "zheng_zhenduo",
+    "name": "Zheng Zhenduo",
+    "era": "Republican era",
+    "role": "The philological school · untangling the layered evolution of the stories",
+    "quote": "The Evolution of Journey to the West",
+    "modern_translation": "The story of Journey to the West was built up layer by layer",
+    "suitable_age": "High School+",
+    "historical_detail": "Zheng Zhenduo (1898–1958), a literary historian. He wrote The Evolution of Journey to the West, untangling the layered evolution of the story from folklore to the finished novel."
+  },
+  {
+    "id": "mao_zedong",
+    "name": "Mao Zedong",
+    "era": "Modern era",
+    "role": "A level-ten Journey to the West scholar + unofficial spokesperson",
+    "quote": "Tang Sanzang never gives up · Wukong defies authority · Bajie toils hard · the White Dragon Horse bears all grievances",
+    "modern_translation": "The ceiling of project managers + a pioneer of workplace reform + a pragmatic worker + the strongest logistics support",
+    "suitable_age": "High School+",
+    "historical_detail": "Mao Zedong read Journey to the West thoroughly. During the 1945 Chongqing negotiations he chatted for an hour about the book with democratic-party figures, praising Wukong's 'defiance of authority' — ostensibly about the Monkey King but in fact a veiled jab at Chiang Kai-shek's dictatorship: a top-tier example of 'talking politics in cultural code.'"
+  },
+  {
+    "id": "lin_yutang",
+    "name": "Lin Yutang",
+    "era": "Modern era",
+    "role": "Anatomist of human nature",
+    "quote": "Wukong = the rebellious youth · Bajie = the real working person · read through Jungian archetypes",
+    "modern_translation": "Monkey is adolescence · Pig is the working person",
+    "suitable_age": "University+",
+    "historical_detail": "Lin Yutang (1895–1976), writer and scholar. Using Jungian archetypal theory to read the characters of Journey to the West, he saw Wukong as the archetype of the rebellious youth and Bajie as the archetype of the real working person."
+  },
+  {
+    "id": "qian_zhongshu",
+    "name": "Qian Zhongshu",
+    "era": "Modern era",
+    "role": "A detail fanatic + correction master",
+    "quote": "'Yikou zhong' is a sleeveless robe, not a bronze bell",
+    "modern_translation": "Reads carefully — even a TV series can't fool you",
+    "suitable_age": "Elementary+",
+    "historical_detail": "Qian Zhongshu (1910–1998), scholar and writer. In the 1980s he wrote to CCTV director Yang Jie pointing out that 'yikou zhong' should be a sleeveless outer garment (a Ming-Qing colloquialism, like a cloak), not a temple bell; the director specially re-shot the scene after receiving the letter."
+  },
+  {
+    "id": "guo_moruo",
+    "name": "Guo Moruo",
+    "era": "Modern era",
+    "role": "Taxonomist + master of couplets",
+    "quote": "Facing the wind and waves, he heaves a long sigh · slay all the demons and every matter rests",
+    "modern_translation": "Classified the book as a gods-and-demons novel · and even composed a couplet",
+    "suitable_age": "All Ages",
+    "historical_detail": "Guo Moruo (1892–1978), poet and historian. He classified Journey to the West as a 'gods-and-demons novel' and inscribed the couplet 'Facing the wind and waves, he heaves a long sigh; slay all the demons and every matter rests.'"
+  }
+]

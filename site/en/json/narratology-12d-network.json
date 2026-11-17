@@ -1,0 +1,847 @@
+{
+  "dimensions": [
+    {
+      "id": "shi",
+      "code": "W161",
+      "dim": "Time",
+      "topic": "Temporal Narratology",
+      "category": "Spatiotemporal",
+      "theorists": "Genette, Mieke Bal",
+      "termCount": 8,
+      "cases": "Journey time structure, eighty-one trials sequence, flashback narration",
+      "theoryDepth": 92,
+      "textCoverage": 88,
+      "crossTopic": 85,
+      "academicValue": 90,
+      "color": "#8B4513",
+      "date": "2025-03-10",
+      "dateStamp": 20250310
+    },
+    {
+      "id": "kong",
+      "code": "W162",
+      "dim": "Space",
+      "topic": "Spatial Narratology",
+      "category": "Spatiotemporal",
+      "theorists": "Bakhtin, Gabriel Zoran",
+      "termCount": 7,
+      "cases": "Three-realm spatial structure, pilgrimage route, chronotope",
+      "theoryDepth": 90,
+      "textCoverage": 86,
+      "crossTopic": 82,
+      "academicValue": 88,
+      "color": "#A0522D",
+      "date": "2025-03-15",
+      "dateStamp": 20250315
+    },
+    {
+      "id": "ting",
+      "code": "W163",
+      "dim": "Auditory",
+      "topic": "Auditory Narratology",
+      "category": "Sensory",
+      "theorists": "Sean O’Halloran, Melba Cuddy-Keane",
+      "termCount": 6,
+      "cases": "Mantra soundscape, thunder and Sanskrit chants, Sun Wukong’s roar",
+      "theoryDepth": 78,
+      "textCoverage": 72,
+      "crossTopic": 70,
+      "academicValue": 80,
+      "color": "#CD853F",
+      "date": "2025-03-22",
+      "dateStamp": 20250322
+    },
+    {
+      "id": "xiu",
+      "code": "W164",
+      "dim": "Olfactory",
+      "topic": "Olfactory Narratology",
+      "category": "Sensory",
+      "theorists": "Hans Tinker, Kevin Porter",
+      "termCount": 5,
+      "cases": "Demonic aura description, immortal aura recognition, worldly smell markers",
+      "theoryDepth": 72,
+      "textCoverage": 65,
+      "crossTopic": 68,
+      "academicValue": 75,
+      "color": "#D2691E",
+      "date": "2025-03-28",
+      "dateStamp": 20250328
+    },
+    {
+      "id": "chu",
+      "code": "W165",
+      "dim": "Tactile",
+      "topic": "Tactile Narratology",
+      "category": "Sensory",
+      "theorists": "Mark Paterson, Laura Marks",
+      "termCount": 5,
+      "cases": "Golden Cudgel tactility, skin description, touch transformations",
+      "theoryDepth": 70,
+      "textCoverage": 60,
+      "crossTopic": 65,
+      "academicValue": 72,
+      "color": "#BC8F8F",
+      "date": "2025-04-05",
+      "dateStamp": 20250405
+    },
+    {
+      "id": "shijue",
+      "code": "W166",
+      "dim": "Visual",
+      "topic": "Visual Narratology",
+      "category": "Sensory",
+      "theorists": "Alan Marche, Karin Kukkonen",
+      "termCount": 7,
+      "cases": "Visual illusion, Fiery Golden Eyes, transformation-scene focus",
+      "theoryDepth": 82,
+      "textCoverage": 85,
+      "crossTopic": 78,
+      "academicValue": 84,
+      "color": "#DAA520",
+      "date": "2025-04-12",
+      "dateStamp": 20250412
+    },
+    {
+      "id": "wei",
+      "code": "W167",
+      "dim": "Gustatory",
+      "topic": "Gustatory Narratology",
+      "category": "Sensory",
+      "theorists": "Carol Crow, Emily Compton",
+      "termCount": 5,
+      "cases": "Peaches, ginseng fruit, vegetarian meals, celestial wine gustatory metaphors",
+      "theoryDepth": 74,
+      "textCoverage": 68,
+      "crossTopic": 66,
+      "academicValue": 76,
+      "color": "#B8860B",
+      "date": "2025-04-19",
+      "dateStamp": 20250419
+    },
+    {
+      "id": "wen",
+      "code": "W169",
+      "dim": "Intertext",
+      "topic": "Intertextual Narratology",
+      "category": "Theoretical",
+      "theorists": "Kristeva, Genette, Barthes",
+      "termCount": 9,
+      "cases": "Journey shihua intertext, covert Buddhist/Daoist allusions, zaju adaptation",
+      "theoryDepth": 95,
+      "textCoverage": 92,
+      "crossTopic": 90,
+      "academicValue": 94,
+      "color": "#5a3828",
+      "date": "2025-05-03",
+      "dateStamp": 20250503
+    },
+    {
+      "id": "xiuci",
+      "code": "W170",
+      "dim": "Rhetoric",
+      "topic": "Rhetorical Narratology",
+      "category": "Theoretical",
+      "theorists": "Wayne Booth, James Phelan",
+      "termCount": 8,
+      "cases": "Metaphor system, ironic narration, rhetorical ethics",
+      "theoryDepth": 88,
+      "textCoverage": 84,
+      "crossTopic": 82,
+      "academicValue": 86,
+      "color": "#6b4226",
+      "date": "2025-05-10",
+      "dateStamp": 20250510
+    },
+    {
+      "id": "zhi",
+      "code": "W171",
+      "dim": "Cognitive",
+      "topic": "Cognitive Narratology",
+      "category": "Theoretical",
+      "theorists": "David Herman, Martha Nussbaum",
+      "termCount": 7,
+      "cases": "Character minds, reader cognition, storyworld construction",
+      "theoryDepth": 86,
+      "textCoverage": 80,
+      "crossTopic": 85,
+      "academicValue": 88,
+      "color": "#8a7a5a",
+      "date": "2025-05-17",
+      "dateStamp": 20250517
+    },
+    {
+      "id": "xingbie",
+      "code": "W173",
+      "dim": "Gender",
+      "topic": "Feminist Narratology",
+      "category": "Gender",
+      "theorists": "Susan Lanser, Robyn Warhol",
+      "termCount": 6,
+      "cases": "Kingdom of Women, Spider Spirits, Princess Iron Fan, Jade Rabbit spirit",
+      "theoryDepth": 80,
+      "textCoverage": 78,
+      "crossTopic": 75,
+      "academicValue": 82,
+      "color": "#C76838",
+      "date": "2025-05-31",
+      "dateStamp": 20250531
+    },
+    {
+      "id": "houzhimin",
+      "code": "W174",
+      "dim": "Postcolonial",
+      "topic": "Postcolonial Narratology",
+      "category": "Postcolonial",
+      "theorists": "Edward Said, Homi K. Bhabha",
+      "termCount": 6,
+      "cases": "Cross-cultural reading, orientalism, cultural hegemony critique",
+      "theoryDepth": 78,
+      "textCoverage": 72,
+      "crossTopic": 74,
+      "academicValue": 80,
+      "color": "#7a4a2a",
+      "date": "2025-06-07",
+      "dateStamp": 20250607
+    }
+  ],
+  "links": [
+    {
+      "source": "shi",
+      "target": "kong",
+      "type": "Spatiotemporal",
+      "strength": 88
+    },
+    {
+      "source": "shi",
+      "target": "wen",
+      "type": "Theoretical",
+      "strength": 80
+    },
+    {
+      "source": "shi",
+      "target": "zhi",
+      "type": "Theoretical",
+      "strength": 75
+    },
+    {
+      "source": "kong",
+      "target": "shijue",
+      "type": "Sensory",
+      "strength": 78
+    },
+    {
+      "source": "kong",
+      "target": "zhi",
+      "type": "Theoretical",
+      "strength": 72
+    },
+    {
+      "source": "ting",
+      "target": "shijue",
+      "type": "Sensory",
+      "strength": 85
+    },
+    {
+      "source": "ting",
+      "target": "xiuci",
+      "type": "Theoretical",
+      "strength": 70
+    },
+    {
+      "source": "xiu",
+      "target": "wei",
+      "type": "Sensory",
+      "strength": 76
+    },
+    {
+      "source": "xiu",
+      "target": "zhi",
+      "type": "Theoretical",
+      "strength": 68
+    },
+    {
+      "source": "chu",
+      "target": "shijue",
+      "type": "Sensory",
+      "strength": 80
+    },
+    {
+      "source": "shijue",
+      "target": "xiuci",
+      "type": "Theoretical",
+      "strength": 82
+    },
+    {
+      "source": "wen",
+      "target": "xiuci",
+      "type": "Theoretical",
+      "strength": 88
+    },
+    {
+      "source": "wen",
+      "target": "wei",
+      "type": "Theoretical",
+      "strength": 65
+    },
+    {
+      "source": "xiuci",
+      "target": "zhi",
+      "type": "Theoretical",
+      "strength": 78
+    },
+    {
+      "source": "zhi",
+      "target": "ting",
+      "type": "Theoretical",
+      "strength": 70
+    },
+    {
+      "source": "xingbie",
+      "target": "wen",
+      "type": "Theoretical",
+      "strength": 72
+    },
+    {
+      "source": "xingbie",
+      "target": "xiuci",
+      "type": "Theoretical",
+      "strength": 75
+    },
+    {
+      "source": "houzhimin",
+      "target": "wen",
+      "type": "Theoretical",
+      "strength": 78
+    },
+    {
+      "source": "houzhimin",
+      "target": "xingbie",
+      "type": "Theoretical",
+      "strength": 80
+    },
+    {
+      "source": "shijue",
+      "target": "wen",
+      "type": "Theoretical",
+      "strength": 70
+    },
+    {
+      "source": "wei",
+      "target": "wen",
+      "type": "Theoretical",
+      "strength": 68
+    },
+    {
+      "source": "kong",
+      "target": "wen",
+      "type": "Theoretical",
+      "strength": 72
+    }
+  ],
+  "theorists": [
+    {
+      "id": "genette",
+      "name": "Genette",
+      "enName": "Gérard Genette",
+      "country": "France",
+      "theory": "Narrative time / transtextuality",
+      "works": "Narrative Discourse (1972) · Palimpsests (1982)",
+      "years": "1972-2004",
+      "color": "#5a3828",
+      "school": "Structuralist narratology",
+      "relatedDim": "Time · Intertext"
+    },
+    {
+      "id": "bakhtin",
+      "name": "Bakhtin",
+      "enName": "Mikhail Bakhtin",
+      "country": "Soviet Union",
+      "theory": "Chronotope / dialogism",
+      "works": "Rabelais and His World (1965) · Theory of the Novel (1975)",
+      "years": "1929-1975",
+      "color": "#A0522D",
+      "school": "Bakhtin school",
+      "relatedDim": "Space"
+    },
+    {
+      "id": "kristeva",
+      "name": "Kristeva",
+      "enName": "Julia Kristeva",
+      "country": "France–Bulgaria",
+      "theory": "Intertextuality",
+      "works": "Word, Dialogue and Novel (1966) · Séméiotiké (1969)",
+      "years": "1966-",
+      "color": "#5a3828",
+      "school": "Post-structuralism",
+      "relatedDim": "Intertext"
+    },
+    {
+      "id": "barthes",
+      "name": "Barthes",
+      "enName": "Roland Barthes",
+      "country": "France",
+      "theory": "Death of the author / text theory",
+      "works": "The Death of the Author (1968) · The Pleasure of the Text (1973)",
+      "years": "1968-1980",
+      "color": "#6b4226",
+      "school": "Post-structuralism",
+      "relatedDim": "Intertext"
+    },
+    {
+      "id": "booth",
+      "name": "Booth",
+      "enName": "Wayne Booth",
+      "country": "United States",
+      "theory": "Narrative rhetoric / implied author",
+      "works": "The Rhetoric of Fiction (1961)",
+      "years": "1961-2005",
+      "color": "#6b4226",
+      "school": "Chicago school",
+      "relatedDim": "Rhetoric"
+    },
+    {
+      "id": "phelan",
+      "name": "Phelan",
+      "enName": "James Phelan",
+      "country": "United States",
+      "theory": "Rhetorical narrative theory",
+      "works": "Narrative as Rhetoric (1996)",
+      "years": "1981-",
+      "color": "#8a7a5a",
+      "school": "Post-classical narratology",
+      "relatedDim": "Rhetoric"
+    },
+    {
+      "id": "herman",
+      "name": "Herman",
+      "enName": "David Herman",
+      "country": "United States",
+      "theory": "Cognitive narratology / story logic",
+      "works": "Story Logic (2002) · Basic Elements of Narrative (2009)",
+      "years": "1997-",
+      "color": "#8a7a5a",
+      "school": "Post-classical narratology",
+      "relatedDim": "Cognitive"
+    },
+    {
+      "id": "nussbaum",
+      "name": "Nussbaum",
+      "enName": "Martha Nussbaum",
+      "country": "United States",
+      "theory": "Literary cognition / affective narrative",
+      "works": "Poetic Justice (1995)",
+      "years": "1986-",
+      "color": "#8a7a5a",
+      "school": "Cognitive humanism",
+      "relatedDim": "Cognitive"
+    },
+    {
+      "id": "zoran",
+      "name": "Zoran",
+      "enName": "Gabriel Zoran",
+      "country": "Israel",
+      "theory": "Three-layer spatial narrative model",
+      "works": "Towards a Theory of Space in Narrative (1984)",
+      "years": "1984-",
+      "color": "#A0522D",
+      "school": "Spatial narratology",
+      "relatedDim": "Space"
+    },
+    {
+      "id": "ohara",
+      "name": "O’Halloran",
+      "enName": "Sean O’Halloran",
+      "country": "United States",
+      "theory": "Auditory narrative / soundscape",
+      "works": "Auditory Narrative Studies (2014)",
+      "years": "2010-",
+      "color": "#CD853F",
+      "school": "Sensory narratology",
+      "relatedDim": "Auditory"
+    },
+    {
+      "id": "tinker",
+      "name": "Tinker",
+      "enName": "Hans Tinker",
+      "country": "Netherlands",
+      "theory": "Olfactory narrative",
+      "works": "Smell and Literature (2018)",
+      "years": "2015-",
+      "color": "#D2691E",
+      "school": "Sensory narratology",
+      "relatedDim": "Olfactory"
+    },
+    {
+      "id": "patterson",
+      "name": "Paterson",
+      "enName": "Mark Paterson",
+      "country": "United Kingdom",
+      "theory": "Tactile narrative / haptic visuality",
+      "works": "The Senses of Touch (2007)",
+      "years": "2007-",
+      "color": "#BC8F8F",
+      "school": "Sensory narratology",
+      "relatedDim": "Tactile"
+    },
+    {
+      "id": "lanser",
+      "name": "Lanser",
+      "enName": "Susan Lanser",
+      "country": "United States",
+      "theory": "Feminist narratology / narrative authority",
+      "works": "Fictions of Authority (1992)",
+      "years": "1981-",
+      "color": "#C76838",
+      "school": "Feminist narratology",
+      "relatedDim": "Gender"
+    },
+    {
+      "id": "said",
+      "name": "Said",
+      "enName": "Edward Said",
+      "country": "United States–Palestine",
+      "theory": "Orientalism / postcolonial",
+      "works": "Orientalism (1978) · Culture and Imperialism (1993)",
+      "years": "1978-2003",
+      "color": "#7a4a2a",
+      "school": "Postcolonial criticism",
+      "relatedDim": "Postcolonial"
+    }
+  ],
+  "sankey": [
+    {
+      "source": "Time",
+      "target": "Genette",
+      "value": 4
+    },
+    {
+      "source": "Time",
+      "target": "Mieke Bal",
+      "value": 2
+    },
+    {
+      "source": "Space",
+      "target": "Bakhtin",
+      "value": 4
+    },
+    {
+      "source": "Space",
+      "target": "Zoran",
+      "value": 3
+    },
+    {
+      "source": "Auditory",
+      "target": "O’Halloran",
+      "value": 3
+    },
+    {
+      "source": "Olfactory",
+      "target": "Tinker",
+      "value": 3
+    },
+    {
+      "source": "Tactile",
+      "target": "Paterson",
+      "value": 3
+    },
+    {
+      "source": "Visual",
+      "target": "Marche",
+      "value": 3
+    },
+    {
+      "source": "Gustatory",
+      "target": "Crow",
+      "value": 3
+    },
+    {
+      "source": "Intertext",
+      "target": "Kristeva",
+      "value": 4
+    },
+    {
+      "source": "Intertext",
+      "target": "Genette",
+      "value": 3
+    },
+    {
+      "source": "Rhetoric",
+      "target": "Booth",
+      "value": 4
+    },
+    {
+      "source": "Cognitive",
+      "target": "Herman",
+      "value": 4
+    },
+    {
+      "source": "Gender",
+      "target": "Lanser",
+      "value": 4
+    },
+    {
+      "source": "Postcolonial",
+      "target": "Said",
+      "value": 4
+    },
+    {
+      "source": "Genette",
+      "target": "Journey time structure",
+      "value": 3
+    },
+    {
+      "source": "Genette",
+      "target": "Citation reworking analysis",
+      "value": 3
+    },
+    {
+      "source": "Mieke Bal",
+      "target": "Narrative levels analysis",
+      "value": 2
+    },
+    {
+      "source": "Bakhtin",
+      "target": "Three-realm chronotope",
+      "value": 4
+    },
+    {
+      "source": "Zoran",
+      "target": "Pilgrimage geography",
+      "value": 3
+    },
+    {
+      "source": "O’Halloran",
+      "target": "Mantra soundscape",
+      "value": 3
+    },
+    {
+      "source": "Tinker",
+      "target": "Demonic aura olfactory markers",
+      "value": 3
+    },
+    {
+      "source": "Paterson",
+      "target": "Golden Cudgel tactility",
+      "value": 3
+    },
+    {
+      "source": "Marche",
+      "target": "Visual illusion focus",
+      "value": 3
+    },
+    {
+      "source": "Crow",
+      "target": "Peach gustatory metaphor",
+      "value": 3
+    },
+    {
+      "source": "Kristeva",
+      "target": "Intertextual network construction",
+      "value": 4
+    },
+    {
+      "source": "Booth",
+      "target": "Metaphor-rhetoric system",
+      "value": 4
+    },
+    {
+      "source": "Herman",
+      "target": "Character mind modeling",
+      "value": 4
+    },
+    {
+      "source": "Lanser",
+      "target": "Female character voices",
+      "value": 4
+    },
+    {
+      "source": "Said",
+      "target": "Cross-cultural reading",
+      "value": 4
+    }
+  ],
+  "sankeyTheoristColors": {
+    "Genette": "#5a3828",
+    "Mieke Bal": "#8a7a5a",
+    "Bakhtin": "#A0522D",
+    "Zoran": "#BC8F8F",
+    "O’Halloran": "#CD853F",
+    "Tinker": "#D2691E",
+    "Paterson": "#BC8F8F",
+    "Marche": "#DAA520",
+    "Crow": "#B8860B",
+    "Kristeva": "#5a3828",
+    "Booth": "#6b4226",
+    "Herman": "#8a7a5a",
+    "Lanser": "#C76838",
+    "Said": "#7a4a2a"
+  },
+  "timeline": [
+    {
+      "code": "W161",
+      "dim": "Time",
+      "topic": "Temporal Narratology",
+      "type": "Topic",
+      "category": "Spatiotemporal",
+      "academicValue": 90,
+      "date": "2025-03-10",
+      "dateStamp": 20250310,
+      "color": "#8B4513"
+    },
+    {
+      "code": "W162",
+      "dim": "Space",
+      "topic": "Spatial Narratology",
+      "type": "Topic",
+      "category": "Spatiotemporal",
+      "academicValue": 88,
+      "date": "2025-03-15",
+      "dateStamp": 20250315,
+      "color": "#A0522D"
+    },
+    {
+      "code": "W163",
+      "dim": "Auditory",
+      "topic": "Auditory Narratology",
+      "type": "Topic",
+      "category": "Sensory",
+      "academicValue": 80,
+      "date": "2025-03-22",
+      "dateStamp": 20250322,
+      "color": "#CD853F"
+    },
+    {
+      "code": "W164",
+      "dim": "Olfactory",
+      "topic": "Olfactory Narratology",
+      "type": "Topic",
+      "category": "Sensory",
+      "academicValue": 75,
+      "date": "2025-03-28",
+      "dateStamp": 20250328,
+      "color": "#D2691E"
+    },
+    {
+      "code": "W165",
+      "dim": "Tactile",
+      "topic": "Tactile Narratology",
+      "type": "Topic",
+      "category": "Sensory",
+      "academicValue": 72,
+      "date": "2025-04-05",
+      "dateStamp": 20250405,
+      "color": "#BC8F8F"
+    },
+    {
+      "code": "W166",
+      "dim": "Visual",
+      "topic": "Visual Narratology",
+      "type": "Topic",
+      "category": "Sensory",
+      "academicValue": 84,
+      "date": "2025-04-12",
+      "dateStamp": 20250412,
+      "color": "#DAA520"
+    },
+    {
+      "code": "W167",
+      "dim": "Gustatory",
+      "topic": "Gustatory Narratology",
+      "type": "Topic",
+      "category": "Sensory",
+      "academicValue": 76,
+      "date": "2025-04-19",
+      "dateStamp": 20250419,
+      "color": "#B8860B"
+    },
+    {
+      "code": "W168",
+      "dim": "Six Senses",
+      "topic": "Six-Senses Narratology Network",
+      "type": "Visualization",
+      "category": "Sensory",
+      "academicValue": 86,
+      "date": "2025-04-26",
+      "dateStamp": 20250426,
+      "color": "#6b4226"
+    },
+    {
+      "code": "W169",
+      "dim": "Intertext",
+      "topic": "Intertextual Narratology",
+      "type": "Topic",
+      "category": "Theoretical",
+      "academicValue": 94,
+      "date": "2025-05-03",
+      "dateStamp": 20250503,
+      "color": "#5a3828"
+    },
+    {
+      "code": "W170",
+      "dim": "Rhetoric",
+      "topic": "Rhetorical Narratology",
+      "type": "Topic",
+      "category": "Theoretical",
+      "academicValue": 86,
+      "date": "2025-05-10",
+      "dateStamp": 20250510,
+      "color": "#6b4226"
+    },
+    {
+      "code": "W171",
+      "dim": "Cognitive",
+      "topic": "Cognitive Narratology",
+      "type": "Topic",
+      "category": "Theoretical",
+      "academicValue": 88,
+      "date": "2025-05-17",
+      "dateStamp": 20250517,
+      "color": "#8a7a5a"
+    },
+    {
+      "code": "W172",
+      "dim": "Intertext",
+      "topic": "Intertextuality Network",
+      "type": "Visualization",
+      "category": "Theoretical",
+      "academicValue": 90,
+      "date": "2025-05-24",
+      "dateStamp": 20250524,
+      "color": "#5a3828"
+    },
+    {
+      "code": "W173",
+      "dim": "Gender",
+      "topic": "Feminist Narratology",
+      "type": "Topic",
+      "category": "Gender",
+      "academicValue": 82,
+      "date": "2025-05-31",
+      "dateStamp": 20250531,
+      "color": "#C76838"
+    },
+    {
+      "code": "W174",
+      "dim": "Postcolonial",
+      "topic": "Postcolonial Narratology",
+      "type": "Topic",
+      "category": "Postcolonial",
+      "academicValue": 80,
+      "date": "2025-06-07",
+      "dateStamp": 20250607,
+      "color": "#7a4a2a"
+    },
+    {
+      "code": "W175",
+      "dim": "12-Dim",
+      "topic": "Twelve-Dimension Narratology Network",
+      "type": "Visualization",
+      "category": "Integrated",
+      "academicValue": 95,
+      "date": "2025-07-28",
+      "dateStamp": 20250728,
+      "color": "#8b4513"
+    }
+  ]
+}

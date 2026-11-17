@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-xHtz0nZlEfV00Rvw2jfNxj0o1glg6XExZrXSv7NYb2U=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-HuJK8jNsxCG++rCIY4+R0TfpEqqY9pciZZwJNPaSeUQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Century Dialogue · Annotated Journey to the West</title>
@@ -2250,7 +2250,7 @@ async function fetchJson(path, fallbackKey) {
     }
 }
 async function loadData() {
-    const base = '../data/json/';
+    const base = '../en/json/';
     const [triangle, roundtable] = await Promise.all([
         fetchJson(base + 'v08_triangle_dialogue.json', 'triangle_dialogue'),
         fetchJson(base + 'v08_roundtable.json', 'roundtable_topics')
@@ -2262,7 +2262,7 @@ async function main() {
     window.__lastData = data;
     if (fetchStatus.anyFetched) {
         document.getElementById('dataSource').innerHTML =
-            'Data source: loaded live from <code>../data/json/</code> (running in http server mode)';
+            'Data source: loaded live from <code>../en/json/</code> (running in http server mode)';
     }
     renderTriangle(data.triangle);
     renderRoundtable(data.roundtable, 0);

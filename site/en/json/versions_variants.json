@@ -1,0 +1,50 @@
+[
+  {
+    "element": "The Monkey Mind image",
+    "evolution": "Monkey Pilgrim → Sun Wukong",
+    "first_appear": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures · Monkey Pilgrim · White-Robed Scholar",
+    "evolution_path": "Monkey Pilgrim (Song) → Sun the Pilgrim (Yuan zaju) → Great Sage Equal to Heaven, Sun Wukong (Shidetang)",
+    "key_change": "In the Shidetang edition the 'Monkey Mind' image is complete: Patriarch Subhuti transmits the seventy-two transformations, and Havoc in Heaven reaches unprecedented scale",
+    "chapter_first": 1
+  },
+  {
+    "element": "Zhu Bajie · carrying the load",
+    "evolution": "none → Bajie carries → Sha Wujing carries",
+    "first_appear": "Journey to the West Zaju · Zhu Bajie's first appearance",
+    "evolution_path": "Zaju Bajie → early Shidetang chapters Bajie carries → later Shidetang chapters shifts to Sha Wujing",
+    "key_change": "Across the hundred chapters of Shidetang, Bajie carries before Sha Wujing is recruited (ch. 22), after which the duty gradually shifts",
+    "chapter_first": 18
+  },
+  {
+    "element": "Tang Sanzang's origin story",
+    "evolution": "none → separate account → into the main text",
+    "first_appear": "Absent from the Shidetang edition; first added in the Zhu Dingchen edition",
+    "evolution_path": "Shidetang lacks it → Zhu Dingchen adds the 'Deliverance' → the Zhengdao book inserts it into the main text as Chapter 9",
+    "key_change": "The Chen Guangrui · Jiangliu'er story enters the main text only in the Qing; most modern editions follow the Qing editions",
+    "chapter_first": 9
+  },
+  {
+    "element": "Scale of Havoc in Heaven",
+    "evolution": "simple → elaborate",
+    "first_appear": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures · brief",
+    "evolution_path": "No Havoc in Heaven in the shihua → brief in the zaju → 'Great Sage Equal to Heaven' in the pinghua → grand narrative of chs. 1–7 in the Shidetang edition",
+    "key_change": "The Shidetang edition first expands 'Havoc in Heaven' into seven chapters, establishing the opening structure of the book",
+    "chapter_first": 1
+  },
+  {
+    "element": "the Eighty-one Tribulations",
+    "evolution": "none → present",
+    "first_appear": "Shidetang edition · ch. 99, Guanyin's tally",
+    "evolution_path": "No fixed number in earlier stories → the Shidetang edition's ch. 99 lists the 'Eighty-one Tribulations' in full",
+    "key_change": "The Shidetang edition first systematizes the 'Eighty-one Tribulations', establishing the structural completeness of the pilgrimage",
+    "chapter_first": 99
+  },
+  {
+    "element": "Sha Wujing finalized",
+    "evolution": "Deep-Sand Spirit → Sha the Monk",
+    "first_appear": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures · Deep-Sand Spirit",
+    "evolution_path": "Deep-Sand Spirit (Song) → Sha the Monk (Shidetang), with the Curtain-Lifting General backstory fixed",
+    "key_change": "In the Shidetang edition Sha Wujing's identity is complete: the Curtain-Lifting General demoted to earth, with a necklace of nine skulls",
+    "chapter_first": 22
+  }
+]

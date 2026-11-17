@@ -1,0 +1,105 @@
+{
+  "concept_name": "典型案例对比",
+  "case_list": [
+    {
+      "name": "青牛精",
+      "background": "太上老君坐骑",
+      "background_type": "celestial",
+      "outcome": "老君亲临收伏",
+      "survived": true,
+      "chapter": "第50-52回",
+      "power": 9,
+      "crime": "偷金刚琢·套取诸天法宝·绑架唐僧"
+    },
+    {
+      "name": "金角银角",
+      "background": "太上老君炼丹童子",
+      "background_type": "disciple",
+      "outcome": "老君收回",
+      "survived": true,
+      "chapter": "第32-35回",
+      "power": 8,
+      "crime": "持紫金红葫芦·玉净瓶·绑架唐僧"
+    },
+    {
+      "name": "红孩儿",
+      "background": "牛魔王之子→观音收编",
+      "background_type": "disciple",
+      "outcome": "观音收为善财童子",
+      "survived": true,
+      "chapter": "第40-42回",
+      "power": 8,
+      "crime": "三昧真火·差点烧死悟空"
+    },
+    {
+      "name": "黄眉老怪",
+      "background": "弥勒佛童子",
+      "background_type": "disciple",
+      "outcome": "弥勒收回",
+      "survived": true,
+      "chapter": "第65-66回",
+      "power": 9,
+      "crime": "金铙人种袋·困诸天神将"
+    },
+    {
+      "name": "九灵元圣",
+      "background": "太乙救苦天尊坐骑",
+      "background_type": "celestial",
+      "outcome": "天尊收回",
+      "survived": true,
+      "chapter": "第88-90回",
+      "power": 10,
+      "crime": "九曲盘桓洞·收六狮孙"
+    },
+    {
+      "name": "白骨精",
+      "background": "无",
+      "background_type": "wild",
+      "outcome": "被打死",
+      "survived": false,
+      "chapter": "第27回",
+      "power": 3,
+      "crime": "三变骗唐僧·离间师徒"
+    },
+    {
+      "name": "虎力大仙",
+      "background": "无",
+      "background_type": "wild",
+      "outcome": "比试败死",
+      "survived": false,
+      "chapter": "第44-46回",
+      "power": 5,
+      "crime": "车迟国迫害和尚·斗法"
+    },
+    {
+      "name": "蜘蛛精",
+      "background": "无",
+      "background_type": "wild",
+      "outcome": "被打死",
+      "survived": false,
+      "chapter": "第72-73回",
+      "power": 4,
+      "crime": "濯垢泉色诱·蜈蚣精同谋"
+    },
+    {
+      "name": "六耳猕猴",
+      "background": "无（冒充）",
+      "background_type": "wild",
+      "outcome": "如来识破被杀",
+      "survived": false,
+      "chapter": "第57-58回",
+      "power": 9,
+      "crime": "假冒悟空·篡夺取经成果"
+    },
+    {
+      "name": "蝎子精",
+      "background": "无",
+      "background_type": "wild",
+      "outcome": "昴日星官杀",
+      "survived": false,
+      "chapter": "第55回",
+      "power": 7,
+      "crime": "琵琶洞逼婚·蜇伤悟空八戒"
+    }
+  ]
+}

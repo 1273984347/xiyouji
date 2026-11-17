@@ -1,0 +1,788 @@
+{
+  "nodes": [
+    {
+      "id": "sp1",
+      "name": "Eldest Spider Sister",
+      "type": "spider",
+      "color": "#8B0000",
+      "chapter": 72,
+      "dwelling": "Pansi Cave",
+      "fate": "Destroyed by Sun Wukong",
+      "autonomy": 70,
+      "combat": 65,
+      "wisdom": 75,
+      "tragedy": 60,
+      "profile": "Eldest of the seven Spider Sisters, mistress of Pansi Cave, leading her sisters"
+    },
+    {
+      "id": "sp2",
+      "name": "Second Spider Sister",
+      "type": "spider",
+      "color": "#A52A2A",
+      "chapter": 72,
+      "dwelling": "Pansi Cave",
+      "fate": "Destroyed by Sun Wukong",
+      "autonomy": 60,
+      "combat": 60,
+      "wisdom": 65,
+      "tragedy": 65,
+      "profile": "Second Spider Sister, right behind the eldest"
+    },
+    {
+      "id": "sp3",
+      "name": "Third Spider Sister",
+      "type": "spider",
+      "color": "#B22222",
+      "chapter": 72,
+      "dwelling": "Pansi Cave",
+      "fate": "Destroyed by Sun Wukong",
+      "autonomy": 65,
+      "combat": 62,
+      "wisdom": 68,
+      "tragedy": 62,
+      "profile": "Third Spider Sister, the mediator among them"
+    },
+    {
+      "id": "sp4",
+      "name": "Fourth Spider Sister",
+      "type": "spider",
+      "color": "#CD5C5C",
+      "chapter": 72,
+      "dwelling": "Pansi Cave",
+      "fate": "Destroyed by Sun Wukong",
+      "autonomy": 58,
+      "combat": 58,
+      "wisdom": 62,
+      "tragedy": 63,
+      "profile": "Fourth Spider Sister"
+    },
+    {
+      "id": "sp5",
+      "name": "Fifth Spider Sister",
+      "type": "spider",
+      "color": "#DC143C",
+      "chapter": 72,
+      "dwelling": "Pansi Cave",
+      "fate": "Destroyed by Sun Wukong",
+      "autonomy": 55,
+      "combat": 55,
+      "wisdom": 60,
+      "tragedy": 65,
+      "profile": "Fifth Spider Sister"
+    },
+    {
+      "id": "sp6",
+      "name": "Sixth Spider Sister",
+      "type": "spider",
+      "color": "#FF6347",
+      "chapter": 72,
+      "dwelling": "Pansi Cave",
+      "fate": "Destroyed by Sun Wukong",
+      "autonomy": 52,
+      "combat": 52,
+      "wisdom": 58,
+      "tragedy": 68,
+      "profile": "Sixth Spider Sister"
+    },
+    {
+      "id": "sp7",
+      "name": "Seventh Spider Sister",
+      "type": "spider",
+      "color": "#FF7F50",
+      "chapter": 72,
+      "dwelling": "Pansi Cave",
+      "fate": "Destroyed by Sun Wukong",
+      "autonomy": 48,
+      "combat": 48,
+      "wisdom": 55,
+      "tragedy": 70,
+      "profile": "Seventh Spider Sister, the youngest and most tragic"
+    },
+    {
+      "id": "bg",
+      "name": "White Bone Demon",
+      "type": "loner",
+      "color": "#A9A9A9",
+      "chapter": 27,
+      "dwelling": "White Tiger Ridge",
+      "fate": "Destroyed by Sun Wukong",
+      "autonomy": 78,
+      "combat": 60,
+      "wisdom": 82,
+      "tragedy": 50,
+      "profile": "Lady White Bone, defeated in the 'three strikes' episode, disguised as three households"
+    },
+    {
+      "id": "xz",
+      "name": "Scorpion Demon",
+      "type": "loner",
+      "color": "#800080",
+      "chapter": 55,
+      "dwelling": "Pipa Cave, Poison-Foe Mountain",
+      "fate": "Destroyed by the Pleiades Star Lord",
+      "autonomy": 85,
+      "combat": 88,
+      "wisdom": 72,
+      "tragedy": 65,
+      "profile": "Mistress of Pipa Cave, whose venomous sting once wounded the Tathagata Buddha"
+    },
+    {
+      "id": "ts",
+      "name": "Princess Iron Fan",
+      "type": "loner",
+      "color": "#5a3828",
+      "chapter": 59,
+      "dwelling": "Plantain Cave, Emerald Cloud Mountain",
+      "fate": "Returned to the righteous path",
+      "autonomy": 90,
+      "combat": 80,
+      "wisdom": 85,
+      "tragedy": 75,
+      "profile": "Wife of the Bull Demon King, mother of Red Boy, wielder of the Plantain Fan"
+    },
+    {
+      "id": "ym",
+      "name": "Jade-Faced Fox",
+      "type": "loner",
+      "color": "#FFC0CB",
+      "chapter": 60,
+      "dwelling": "Moyun Cave",
+      "fate": "Destroyed by Zhu Bajie",
+      "autonomy": 55,
+      "combat": 50,
+      "wisdom": 60,
+      "tragedy": 75,
+      "profile": "Daughter of the Ten-Thousand-Year Fox King, concubine of the Bull Demon King"
+    },
+    {
+      "id": "xx",
+      "name": "Apricot Fairy",
+      "type": "loner",
+      "color": "#FFB6C1",
+      "chapter": 64,
+      "dwelling": "Wood Immortals' Hermitage, Thorn Ridge",
+      "fate": "Destroyed by Zhu Bajie",
+      "autonomy": 70,
+      "combat": 45,
+      "wisdom": 68,
+      "tragedy": 80,
+      "profile": "An apricot tree turned fairy, refined and amorous, versed in poetry with the spirits of the Wood Immortals' Hermitage"
+    },
+    {
+      "id": "ls",
+      "name": "Rat Demon",
+      "type": "loner",
+      "color": "#696969",
+      "chapter": 82,
+      "dwelling": "Bottomless Cave, Hollow Mountain",
+      "fate": "Recruited by Heaven",
+      "autonomy": 82,
+      "combat": 72,
+      "wisdom": 80,
+      "tragedy": 60,
+      "profile": "The gold-nosed white-haired Rat Demon, sworn daughter of Li the Pagoda-Bearer"
+    },
+    {
+      "id": "yt",
+      "name": "Jade Rabbit Demon",
+      "type": "loner",
+      "color": "#DAA520",
+      "chapter": 95,
+      "dwelling": "Tianzhu (India)",
+      "fate": "Returned to the Moon Palace",
+      "autonomy": 75,
+      "combat": 70,
+      "wisdom": 78,
+      "tragedy": 55,
+      "profile": "The Jade Rabbit of the Moon Palace, descended to earth disguised as a Tianzhu princess seeking a husband"
+    },
+    {
+      "id": "plp",
+      "name": "Bodhisattva Pilanpo",
+      "type": "collector",
+      "color": "#D2691E",
+      "chapter": 73,
+      "dwelling": "Thousand-Flower Cave, Purple Cloud Mountain",
+      "fate": "Collector",
+      "autonomy": 95,
+      "combat": 85,
+      "wisdom": 92,
+      "tragedy": 20,
+      "profile": "Subdued the Hundred-Eye Demon Lord (the Centipede Demon); mother of the Pleiades Star Lord"
+    },
+    {
+      "id": "gy",
+      "name": "Bodhisattva Guanyin",
+      "type": "collector",
+      "color": "#BC8F8F",
+      "chapter": null,
+      "chapter_scope": "deity_no_chapter",
+      "dwelling": "Mount Potalaka, South Sea",
+      "fate": "Collector",
+      "autonomy": 98,
+      "combat": 90,
+      "wisdom": 98,
+      "tragedy": 15,
+      "profile": "Guanyin of the South Sea, protector of the scripture-seeking pilgrims"
+    },
+    {
+      "id": "lsL",
+      "name": "Old Mother of Lishan",
+      "type": "collector",
+      "color": "#A0522D",
+      "chapter": 23,
+      "dwelling": "Mount Li",
+      "fate": "Collector",
+      "autonomy": 96,
+      "combat": 82,
+      "wisdom": 95,
+      "tragedy": 25,
+      "profile": "Old Mother of Lishan, once disguised as mother and daughters to test the pilgrims' Zen hearts"
+    }
+  ],
+  "links": [
+    {
+      "source": "sp1",
+      "target": "sp2",
+      "type": "Sisterly Bond",
+      "strength": 90
+    },
+    {
+      "source": "sp2",
+      "target": "sp3",
+      "type": "Sisterly Bond",
+      "strength": 90
+    },
+    {
+      "source": "sp3",
+      "target": "sp4",
+      "type": "Sisterly Bond",
+      "strength": 90
+    },
+    {
+      "source": "sp4",
+      "target": "sp5",
+      "type": "Sisterly Bond",
+      "strength": 90
+    },
+    {
+      "source": "sp5",
+      "target": "sp6",
+      "type": "Sisterly Bond",
+      "strength": 90
+    },
+    {
+      "source": "sp6",
+      "target": "sp7",
+      "type": "Sisterly Bond",
+      "strength": 90
+    },
+    {
+      "source": "sp1",
+      "target": "sp3",
+      "type": "Leadership",
+      "strength": 75
+    },
+    {
+      "source": "sp1",
+      "target": "sp5",
+      "type": "Leadership",
+      "strength": 70
+    },
+    {
+      "source": "sp1",
+      "target": "sp7",
+      "type": "Leadership",
+      "strength": 65
+    },
+    {
+      "source": "sp3",
+      "target": "sp5",
+      "type": "Sisterly Bond",
+      "strength": 80
+    },
+    {
+      "source": "sp5",
+      "target": "sp7",
+      "type": "Sisterly Bond",
+      "strength": 75
+    },
+    {
+      "source": "ts",
+      "target": "ym",
+      "type": "Rival Co-Wives",
+      "strength": 85
+    },
+    {
+      "source": "sp1",
+      "target": "xz",
+      "type": "Neighboring Kin",
+      "strength": 65
+    },
+    {
+      "source": "ts",
+      "target": "sp1",
+      "type": "Demoness Exemplar",
+      "strength": 60
+    },
+    {
+      "source": "yt",
+      "target": "sp7",
+      "type": "Moon-Spider Silk",
+      "strength": 55
+    },
+    {
+      "source": "ls",
+      "target": "xz",
+      "type": "Cave Neighbors",
+      "strength": 60
+    },
+    {
+      "source": "bg",
+      "target": "xx",
+      "type": "Minor Demons Alike",
+      "strength": 50
+    },
+    {
+      "source": "ts",
+      "target": "xx",
+      "type": "Refined Kin",
+      "strength": 55
+    },
+    {
+      "source": "plp",
+      "target": "xz",
+      "type": "Recruitment Link",
+      "strength": 80
+    },
+    {
+      "source": "plp",
+      "target": "sp1",
+      "type": "Subjugation Link",
+      "strength": 75
+    },
+    {
+      "source": "gy",
+      "target": "ls",
+      "type": "Heavenly Referral",
+      "strength": 85
+    },
+    {
+      "source": "gy",
+      "target": "sp7",
+      "type": "Enlightenment",
+      "strength": 70
+    },
+    {
+      "source": "gy",
+      "target": "yt",
+      "type": "Moon Palace Mediation",
+      "strength": 75
+    },
+    {
+      "source": "lsL",
+      "target": "sp3",
+      "type": "Guidance",
+      "strength": 65
+    },
+    {
+      "source": "lsL",
+      "target": "ts",
+      "type": "Guidance",
+      "strength": 70
+    },
+    {
+      "source": "plp",
+      "target": "gy",
+      "type": "Bodhisattva Companions",
+      "strength": 70
+    },
+    {
+      "source": "gy",
+      "target": "lsL",
+      "type": "Bodhisattva Companions",
+      "strength": 75
+    },
+    {
+      "source": "plp",
+      "target": "lsL",
+      "type": "Bodhisattva Companions",
+      "strength": 65
+    },
+    {
+      "source": "ym",
+      "target": "xz",
+      "type": "Venomous Neighbors",
+      "strength": 55
+    },
+    {
+      "source": "yt",
+      "target": "xx",
+      "type": "Immortal Kin",
+      "strength": 60
+    },
+    {
+      "source": "bg",
+      "target": "yt",
+      "type": "Shape-Shifting Kin",
+      "strength": 50
+    },
+    {
+      "source": "gy",
+      "target": "sp4",
+      "type": "Enlightenment",
+      "strength": 60
+    }
+  ],
+  "sankey": [
+    {
+      "source": "Eldest Spider Sister",
+      "target": "Sun Wukong",
+      "value": 1
+    },
+    {
+      "source": "Second Spider Sister",
+      "target": "Sun Wukong",
+      "value": 1
+    },
+    {
+      "source": "Third Spider Sister",
+      "target": "Sun Wukong",
+      "value": 1
+    },
+    {
+      "source": "Fourth Spider Sister",
+      "target": "Sun Wukong",
+      "value": 1
+    },
+    {
+      "source": "Fifth Spider Sister",
+      "target": "Sun Wukong",
+      "value": 1
+    },
+    {
+      "source": "Sixth Spider Sister",
+      "target": "Sun Wukong",
+      "value": 1
+    },
+    {
+      "source": "Seventh Spider Sister",
+      "target": "Sun Wukong",
+      "value": 1
+    },
+    {
+      "source": "White Bone Demon",
+      "target": "Sun Wukong",
+      "value": 1
+    },
+    {
+      "source": "Scorpion Demon",
+      "target": "Pleiades Star Lord",
+      "value": 1
+    },
+    {
+      "source": "Apricot Fairy",
+      "target": "Zhu Bajie",
+      "value": 1
+    },
+    {
+      "source": "Jade-Faced Fox",
+      "target": "Zhu Bajie",
+      "value": 1
+    },
+    {
+      "source": "Jade Rabbit Demon",
+      "target": "Taiyin Star Lord",
+      "value": 1
+    },
+    {
+      "source": "Rat Demon",
+      "target": "Li the Pagoda-Bearer",
+      "value": 1
+    },
+    {
+      "source": "Princess Iron Fan",
+      "target": "Self-Cultivation",
+      "value": 1
+    },
+    {
+      "source": "Sun Wukong",
+      "target": "Destroyed",
+      "value": 8
+    },
+    {
+      "source": "Zhu Bajie",
+      "target": "Destroyed",
+      "value": 2
+    },
+    {
+      "source": "Pleiades Star Lord",
+      "target": "Destroyed",
+      "value": 1
+    },
+    {
+      "source": "Taiyin Star Lord",
+      "target": "Returned",
+      "value": 1
+    },
+    {
+      "source": "Li the Pagoda-Bearer",
+      "target": "Recruited",
+      "value": 1
+    },
+    {
+      "source": "Self-Cultivation",
+      "target": "Cultivation",
+      "value": 1
+    }
+  ],
+  "radar": [
+    {
+      "name": "Eldest Spider Sister",
+      "autonomy": 70,
+      "combat": 65,
+      "wisdom": 75,
+      "tragedy": 60
+    },
+    {
+      "name": "Second Spider Sister",
+      "autonomy": 60,
+      "combat": 60,
+      "wisdom": 65,
+      "tragedy": 65
+    },
+    {
+      "name": "Third Spider Sister",
+      "autonomy": 65,
+      "combat": 62,
+      "wisdom": 68,
+      "tragedy": 62
+    },
+    {
+      "name": "Fourth Spider Sister",
+      "autonomy": 58,
+      "combat": 58,
+      "wisdom": 62,
+      "tragedy": 63
+    },
+    {
+      "name": "Fifth Spider Sister",
+      "autonomy": 55,
+      "combat": 55,
+      "wisdom": 60,
+      "tragedy": 65
+    },
+    {
+      "name": "Sixth Spider Sister",
+      "autonomy": 52,
+      "combat": 52,
+      "wisdom": 58,
+      "tragedy": 68
+    },
+    {
+      "name": "Seventh Spider Sister",
+      "autonomy": 48,
+      "combat": 48,
+      "wisdom": 55,
+      "tragedy": 70
+    },
+    {
+      "name": "White Bone Demon",
+      "autonomy": 78,
+      "combat": 60,
+      "wisdom": 82,
+      "tragedy": 50
+    },
+    {
+      "name": "Scorpion Demon",
+      "autonomy": 85,
+      "combat": 88,
+      "wisdom": 72,
+      "tragedy": 65
+    },
+    {
+      "name": "Princess Iron Fan",
+      "autonomy": 90,
+      "combat": 80,
+      "wisdom": 85,
+      "tragedy": 75
+    },
+    {
+      "name": "Jade-Faced Fox",
+      "autonomy": 55,
+      "combat": 50,
+      "wisdom": 60,
+      "tragedy": 75
+    },
+    {
+      "name": "Apricot Fairy",
+      "autonomy": 70,
+      "combat": 45,
+      "wisdom": 68,
+      "tragedy": 80
+    },
+    {
+      "name": "Rat Demon",
+      "autonomy": 82,
+      "combat": 72,
+      "wisdom": 80,
+      "tragedy": 60
+    },
+    {
+      "name": "Jade Rabbit Demon",
+      "autonomy": 75,
+      "combat": 70,
+      "wisdom": 78,
+      "tragedy": 55
+    },
+    {
+      "name": "Bodhisattva Pilanpo",
+      "autonomy": 95,
+      "combat": 85,
+      "wisdom": 92,
+      "tragedy": 20
+    },
+    {
+      "name": "Bodhisattva Guanyin",
+      "autonomy": 98,
+      "combat": 90,
+      "wisdom": 98,
+      "tragedy": 15
+    },
+    {
+      "name": "Old Mother of Lishan",
+      "autonomy": 96,
+      "combat": 82,
+      "wisdom": 95,
+      "tragedy": 25
+    }
+  ],
+  "timeline": [
+    {
+      "name": "White Bone Demon",
+      "chapter": 27,
+      "chapterName": "Chapter 27",
+      "fate": "Sun Wukong's three strikes",
+      "groupType": "Loner Demon",
+      "color": "#A9A9A9",
+      "score": 67
+    },
+    {
+      "name": "Scorpion Demon",
+      "chapter": 55,
+      "chapterName": "Chapter 55",
+      "fate": "Destroyed by the Pleiades Star Lord",
+      "groupType": "Loner Demon",
+      "color": "#800080",
+      "score": 78
+    },
+    {
+      "name": "Princess Iron Fan",
+      "chapter": 59,
+      "chapterName": "Chapter 59",
+      "fate": "Returned to the righteous path",
+      "groupType": "Loner Demon",
+      "color": "#5a3828",
+      "score": 82
+    },
+    {
+      "name": "Jade-Faced Fox",
+      "chapter": 60,
+      "chapterName": "Chapter 60",
+      "fate": "Destroyed by Zhu Bajie",
+      "groupType": "Loner Demon",
+      "color": "#FFC0CB",
+      "score": 60
+    },
+    {
+      "name": "Apricot Fairy",
+      "chapter": 64,
+      "chapterName": "Chapter 64",
+      "fate": "Destroyed by Zhu Bajie",
+      "groupType": "Loner Demon",
+      "color": "#FFB6C1",
+      "score": 66
+    },
+    {
+      "name": "Eldest Spider Sister",
+      "chapter": 72,
+      "chapterName": "Chapter 72",
+      "fate": "Destroyed by Sun Wukong",
+      "groupType": "Spider Demon",
+      "color": "#8B0000",
+      "score": 67
+    },
+    {
+      "name": "Second Spider Sister",
+      "chapter": 72,
+      "chapterName": "Chapter 72",
+      "fate": "Destroyed by Sun Wukong",
+      "groupType": "Spider Demon",
+      "color": "#A52A2A",
+      "score": 62
+    },
+    {
+      "name": "Third Spider Sister",
+      "chapter": 72,
+      "chapterName": "Chapter 72",
+      "fate": "Destroyed by Sun Wukong",
+      "groupType": "Spider Demon",
+      "color": "#B22222",
+      "score": 64
+    },
+    {
+      "name": "Fourth Spider Sister",
+      "chapter": 72,
+      "chapterName": "Chapter 72",
+      "fate": "Destroyed by Sun Wukong",
+      "groupType": "Spider Demon",
+      "color": "#CD5C5C",
+      "score": 60
+    },
+    {
+      "name": "Fifth Spider Sister",
+      "chapter": 72,
+      "chapterName": "Chapter 72",
+      "fate": "Destroyed by Sun Wukong",
+      "groupType": "Spider Demon",
+      "color": "#DC143C",
+      "score": 59
+    },
+    {
+      "name": "Sixth Spider Sister",
+      "chapter": 72,
+      "chapterName": "Chapter 72",
+      "fate": "Destroyed by Sun Wukong",
+      "groupType": "Spider Demon",
+      "color": "#FF6347",
+      "score": 57
+    },
+    {
+      "name": "Seventh Spider Sister",
+      "chapter": 72,
+      "chapterName": "Chapter 72",
+      "fate": "Destroyed by Sun Wukong",
+      "groupType": "Spider Demon",
+      "color": "#FF7F50",
+      "score": 55
+    },
+    {
+      "name": "Rat Demon",
+      "chapter": 82,
+      "chapterName": "Chapter 82",
+      "fate": "Recruited by Heaven",
+      "groupType": "Loner Demon",
+      "color": "#696969",
+      "score": 73
+    },
+    {
+      "name": "Jade Rabbit Demon",
+      "chapter": 95,
+      "chapterName": "Chapter 95",
+      "fate": "Returned to the Moon Palace",
+      "groupType": "Loner Demon",
+      "color": "#DAA520",
+      "score": 70
+    }
+  ]
+}

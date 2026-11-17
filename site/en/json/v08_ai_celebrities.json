@@ -1,0 +1,662 @@
+[
+  {
+    "id": "luxun",
+    "name": "Lu Xun",
+    "era": "Republican era",
+    "avatar": "🧑‍🎓",
+    "style": "Cold and incisive",
+    "keywords": [
+      "resistance",
+      "authority",
+      "oppression",
+      "freedom",
+      "revolution"
+    ],
+    "replies": [
+      {
+        "keywords": [
+          "work",
+          "tired",
+          "lie flat",
+          "involution",
+          "996",
+          "pressure"
+        ],
+        "quote": "May Chinese youth cast off their coldness and simply keep moving upward; do not heed the self-defeating. Those who can work, work; those who can speak, speak. Give off whatever heat you have, shed whatever light you can.",
+        "source": "Hot Wind: Random Thoughts No. 41"
+      },
+      {
+        "keywords": [
+          "authority",
+          "leader",
+          "boss",
+          "rules",
+          "system",
+          "parents"
+        ],
+        "quote": "Has it always been so? Then does that make it right?",
+        "source": "A Madman's Diary"
+      },
+      {
+        "keywords": [
+          "AI",
+          "artificial intelligence",
+          "machine",
+          "technology",
+          "algorithm",
+          "replace"
+        ],
+        "quote": "There is no road on the ground to begin with; it only becomes a road because many people have walked it. If a machine learns to walk, that road was still first taught by people — what is feared is that people themselves forget to step forward.",
+        "source": "Pastiche in Lu Xun's style"
+      },
+      {
+        "keywords": [
+          "life",
+          "meaning",
+          "alive",
+          "value",
+          "lost",
+          "direction"
+        ],
+        "quote": "Despair is as much an illusion as hope itself.",
+        "source": "Wild Grass: Hope"
+      },
+      {
+        "keywords": [
+          "social",
+          "media",
+          "persona",
+          "performance",
+          "Moments",
+          "image"
+        ],
+        "quote": "Wear a mask too long and it grows into your face; to take it off again you would have to tear away skin and bone.",
+        "source": "Pastiche in Lu Xun's style"
+      },
+      {
+        "keywords": [
+          "involution",
+          "competition",
+          "rat race",
+          "rivalry",
+          "way out",
+          "homogenization"
+        ],
+        "quote": "If we do not erupt in silence, we shall perish in silence.",
+        "source": "In Memory of Liu Hezhen"
+      },
+      {
+        "keywords": [
+          "freedom",
+          "resistance",
+          "oppression",
+          "revolution",
+          "struggle"
+        ],
+        "quote": "The truly brave man dares to face a bleak life head-on and dares to look squarely at the dripping blood.",
+        "source": "In Memory of Liu Hezhen"
+      },
+      {
+        "keywords": [
+          "Journey to the West",
+          "Sun Wukong",
+          "Havoc in Heaven",
+          "pilgrimage",
+          "golden headband"
+        ],
+        "quote": "The episode of Sun Wukong's Havoc in Heaven best shows the spirit of resistance; his later taming by the golden headband is just like how the young are co-opted by old ritual doctrine.",
+        "source": "Pastiche in Lu Xun's style"
+      }
+    ]
+  },
+  {
+    "id": "hushi",
+    "name": "Hu Shi",
+    "era": "Republican era",
+    "avatar": "🧓",
+    "style": "Pragmatic and rational",
+    "keywords": [
+      "reform",
+      "gradualism",
+      "empiricism",
+      "science",
+      "pragmatism"
+    ],
+    "replies": [
+      {
+        "keywords": [
+          "work",
+          "tired",
+          "lie flat",
+          "involution",
+          "996",
+          "pressure"
+        ],
+        "quote": "Advance one inch and you have one inch of joy; do one thing and you gain one thing of solidity. If lying flat can buy a clear mind, it is not without merit as a method — only do not let it become a habit.",
+        "source": "Pastiche in Hu Shi's style"
+      },
+      {
+        "keywords": [
+          "authority",
+          "leader",
+          "boss",
+          "rules",
+          "system",
+          "parents"
+        ],
+        "quote": "Bold hypotheses, careful verification — so too with authority: do not follow blindly, do not trust lightly, accept only the evidence.",
+        "source": "Pastiche in Hu Shi's style (adapted from \"Methods and Materials of Scholarship\")"
+      },
+      {
+        "keywords": [
+          "AI",
+          "artificial intelligence",
+          "machine",
+          "technology",
+          "algorithm",
+          "replace"
+        ],
+        "quote": "Questions of science and technology must be settled by evidence; do not begin with a heart full of fear. What is to be feared is not that machines grow clever, but that people grow lazy.",
+        "source": "Pastiche in Hu Shi's style"
+      },
+      {
+        "keywords": [
+          "life",
+          "meaning",
+          "alive",
+          "value",
+          "lost",
+          "direction"
+        ],
+        "quote": "Life has no meaning in itself; it has whatever meaning you are able to give it. Rather than brood over what life is for, better to do one concrete thing.",
+        "source": "What Is the Meaning of Life?"
+      },
+      {
+        "keywords": [
+          "social",
+          "media",
+          "persona",
+          "performance",
+          "Moments",
+          "image"
+        ],
+        "quote": "In scholarship, question where there seems to be no doubt; in life, do not doubt where there is doubt. The same goes for persona — the less you put on, the more genuine you are.",
+        "source": "Pastiche in Hu Shi's style"
+      },
+      {
+        "keywords": [
+          "involution",
+          "competition",
+          "rat race",
+          "rivalry",
+          "way out",
+          "homogenization"
+        ],
+        "quote": "Why fear that truth is boundless? Advance one inch and you have one inch of joy. Let others race; walk your own road.",
+        "source": "Pastiche in Hu Shi's style (adapted from \"Hu Shi's Study Abroad Diary\")"
+      },
+      {
+        "keywords": [
+          "freedom",
+          "reform",
+          "gradualism",
+          "empiricism",
+          "tolerance"
+        ],
+        "quote": "Tolerance is more important than freedom itself — without tolerance, there is no freedom.",
+        "source": "Tolerance and Freedom"
+      },
+      {
+        "keywords": [
+          "Journey to the West",
+          "pilgrimage",
+          "Wu Cheng'en",
+          "textual research",
+          "fairy tale"
+        ],
+        "quote": "Journey to the West is a fairy tale of the highest order; one may verify the facts of its composition, but there is no need to hunt for allegory everywhere.",
+        "source": "A Study of Journey to the West"
+      }
+    ]
+  },
+  {
+    "id": "maozedong",
+    "name": "Mao Zedong",
+    "era": "Modern era",
+    "avatar": "🧑‍✈️",
+    "style": "Grand strategy",
+    "keywords": [
+      "struggle",
+      "strategy",
+      "masses",
+      "practice",
+      "revolution"
+    ],
+    "replies": [
+      {
+        "keywords": [
+          "work",
+          "tired",
+          "lie flat",
+          "involution",
+          "996",
+          "pressure"
+        ],
+        "quote": "Hard work is like a load set before us, testing whether we dare take it up. The heavier the load, the more it tempers a person.",
+        "source": "Pastiche in Mao's idiom (adapted from \"On the Chongqing Negotiations\")"
+      },
+      {
+        "keywords": [
+          "authority",
+          "leader",
+          "boss",
+          "rules",
+          "system",
+          "parents"
+        ],
+        "quote": "To rebel is justified — wherever there is oppression, there is resistance.",
+        "source": "Pastiche in Mao's idiom"
+      },
+      {
+        "keywords": [
+          "AI",
+          "artificial intelligence",
+          "machine",
+          "technology",
+          "algorithm",
+          "replace"
+        ],
+        "quote": "Weapons are an important factor in war, but not the decisive factor; the decisive factor is people, not things. However strong an algorithm, it is still only a tool.",
+        "source": "Pastiche in Mao's idiom (adapted from \"On Protracted War\")"
+      },
+      {
+        "keywords": [
+          "life",
+          "meaning",
+          "alive",
+          "value",
+          "lost",
+          "direction"
+        ],
+        "quote": "A person needs a little spirit — to serve the people is the great meaning of life. Cut off from the masses, meaning becomes empty talk.",
+        "source": "Pastiche in Mao's idiom"
+      },
+      {
+        "keywords": [
+          "social",
+          "media",
+          "persona",
+          "performance",
+          "Moments",
+          "image"
+        ],
+        "quote": "Study well and make progress every day — less empty talk, more real work, and your persona stands on its own. Say too much empty talk and you come to believe it yourself, and that is dangerous.",
+        "source": "Pastiche in Mao's idiom"
+      },
+      {
+        "keywords": [
+          "involution",
+          "competition",
+          "rat race",
+          "rivalry",
+          "way out",
+          "struggle"
+        ],
+        "quote": "To struggle against Heaven is boundless joy; to struggle against Earth is boundless joy; to struggle against people is boundless joy.",
+        "source": "Self-Encouragement in Struggle"
+      },
+      {
+        "keywords": [
+          "revolution",
+          "strategy",
+          "masses",
+          "practice",
+          "struggle"
+        ],
+        "quote": "Strategically we should despise the enemy; tactically we should take the enemy seriously.",
+        "source": "Problems of Strategy in China's Revolutionary War"
+      },
+      {
+        "keywords": [
+          "Journey to the West",
+          "Sun Wukong",
+          "Havoc in Heaven",
+          "Jade Emperor",
+          "rebellion"
+        ],
+        "quote": "Sun Wukong's Havoc in Heaven is a revolt against bureaucratic privilege; that whole apparatus of the Jade Emperor is nothing but Chiang Kai-shek up in the sky.",
+        "source": "Pastiche in Mao's reading"
+      }
+    ]
+  },
+  {
+    "id": "linyutang",
+    "name": "Lin Yutang",
+    "era": "Republican era",
+    "avatar": "🧑‍🎨",
+    "style": "Humorous and easy-going",
+    "keywords": [
+      "humor",
+      "leisure",
+      "moderation",
+      "life",
+      "human nature"
+    ],
+    "replies": [
+      {
+        "keywords": [
+          "work",
+          "tired",
+          "lie flat",
+          "involution",
+          "996",
+          "pressure"
+        ],
+        "quote": "In life, sometimes you laugh at others and sometimes others laugh at you — to rest when tired is plain common sense; why force yourself to hold on.",
+        "source": "Pastiche in Lin Yutang's style"
+      },
+      {
+        "keywords": [
+          "authority",
+          "leader",
+          "boss",
+          "rules",
+          "system",
+          "parents"
+        ],
+        "quote": "Humor is a kind of wisdom; before authority it teaches us to be neither servile nor offensive, but simply to dismiss it with a smile.",
+        "source": "Pastiche in Lin Yutang's style"
+      },
+      {
+        "keywords": [
+          "AI",
+          "artificial intelligence",
+          "machine",
+          "technology",
+          "algorithm",
+          "replace"
+        ],
+        "quote": "A machine can calculate everything under the sun, yet the one thing it cannot calculate is humor — what makes us human is precisely that unprofitable laugh.",
+        "source": "Pastiche in Lin Yutang's style"
+      },
+      {
+        "keywords": [
+          "life",
+          "meaning",
+          "alive",
+          "value",
+          "lost",
+          "direction"
+        ],
+        "quote": "Life is merely thus — enjoy it as you go. You are always the protagonist of your own story; do not always play a supporting role in someone else's drama.",
+        "source": "Life Is Merely Thus"
+      },
+      {
+        "keywords": [
+          "social",
+          "media",
+          "persona",
+          "performance",
+          "Moments",
+          "image"
+        ],
+        "quote": "Once you build a persona, you lose your authenticity; better to be an interesting idler, and then you are at ease. Everything in Moments is a play — the performers tire, and so do the audience.",
+        "source": "Pastiche in Lin Yutang's style"
+      },
+      {
+        "keywords": [
+          "involution",
+          "competition",
+          "rat race",
+          "rivalry",
+          "way out",
+          "homogenization"
+        ],
+        "quote": "Leisure is not laziness but an art of living — when you cannot keep racing, why not brew a pot of tea and watch the clouds drift and gather.",
+        "source": "Pastiche in Lin Yutang's style"
+      },
+      {
+        "keywords": [
+          "humor",
+          "moderation",
+          "life",
+          "human nature",
+          "leisure"
+        ],
+        "quote": "The origin of humor is the tragedy of life — only when you can laugh at yourself is it true humor.",
+        "source": "On Humor"
+      },
+      {
+        "keywords": [
+          "Journey to the West",
+          "Zhu Bajie",
+          "pilgrimage",
+          "human nature",
+          "lovable"
+        ],
+        "quote": "Bajie is lovable precisely because he does not pretend; greedy and lustful, he is human nature in its truest form, far more endearing than the sages who are full of high-sounding principle.",
+        "source": "Pastiche in Lin Yutang's style"
+      }
+    ]
+  },
+  {
+    "id": "qianzhongshu",
+    "name": "Qian Zhongshu",
+    "era": "Modern era",
+    "avatar": "🧑‍🏫",
+    "style": "Erudite and witty",
+    "keywords": [
+      "satire",
+      "intellect",
+      "textual research",
+      "metaphor",
+      "literati"
+    ],
+    "replies": [
+      {
+        "keywords": [
+          "work",
+          "tired",
+          "lie flat",
+          "involution",
+          "996",
+          "pressure"
+        ],
+        "quote": "There are only two kinds of people in the world: given a bunch of grapes, some pick the best to eat first, while others save the best for last — the former are optimists, the latter pessimists, yet both must first have grapes to eat.",
+        "source": "Fortress Besieged"
+      },
+      {
+        "keywords": [
+          "authority",
+          "leader",
+          "boss",
+          "rules",
+          "system",
+          "parents"
+        ],
+        "quote": "Authority is authority not because its words are always true, but because someone in its position is flattered. The moment no one flatters it, it is no different from any passer-by.",
+        "source": "Pastiche in Qian Zhongshu's style"
+      },
+      {
+        "keywords": [
+          "AI",
+          "artificial intelligence",
+          "machine",
+          "technology",
+          "algorithm",
+          "replace"
+        ],
+        "quote": "If AI could write poetry, its verse would be like MSG dissolved in water — fresh, to be sure, but without the original flavor of the ingredients.",
+        "source": "Pastiche in Qian Zhongshu's style"
+      },
+      {
+        "keywords": [
+          "life",
+          "meaning",
+          "alive",
+          "value",
+          "lost",
+          "direction"
+        ],
+        "quote": "Those outside the city want to rush in, and those inside want to flee — the meaning of life, for the most part, lies in this coming and going.",
+        "source": "Fortress Besieged"
+      },
+      {
+        "keywords": [
+          "social",
+          "media",
+          "persona",
+          "performance",
+          "Moments",
+          "image"
+        ],
+        "quote": "A persona is like a stage costume: wear it long enough and you forget your true face. Moments is the Scholars of today — everyone is a Fan Jin passing the exams.",
+        "source": "Pastiche in Qian Zhongshu's style"
+      },
+      {
+        "keywords": [
+          "involution",
+          "competition",
+          "rat race",
+          "rivalry",
+          "way out",
+          "homogenization"
+        ],
+        "quote": "Scholars have despised one another since ancient times; what we now call involution is merely old wine in a new bottle — mutual disdain wearing a new face.",
+        "source": "Pastiche in Qian Zhongshu's style"
+      },
+      {
+        "keywords": [
+          "satire",
+          "intellect",
+          "textual research",
+          "metaphor",
+          "literati"
+        ],
+        "quote": "Metaphor is the highest rhetoric of literature and the highest game of intellect — the likeness of two things lies in their distance; bring them too close and it ceases to be metaphor.",
+        "source": "Pastiche in Qian Zhongshu's style (adapted from \"Limited Views\")"
+      },
+      {
+        "keywords": [
+          "Journey to the West",
+          "single bell",
+          "textual research",
+          "Wu Cheng'en",
+          "detail"
+        ],
+        "quote": "The \"single bell\" (yikou zhong) of Chapter 40 in Journey to the West is a sleeveless outer garment, not a temple bell; most readers misread it — and therein lies the joy of textual research.",
+        "source": "Pastiche in Qian Zhongshu's textual research"
+      }
+    ]
+  },
+  {
+    "id": "guomoruo",
+    "name": "Guo Moruo",
+    "era": "Modern era",
+    "avatar": "🧑‍🎤",
+    "style": "Romantic and impassioned",
+    "keywords": [
+      "romantic",
+      "passion",
+      "epic",
+      "turning point",
+      "rebirth"
+    ],
+    "replies": [
+      {
+        "keywords": [
+          "work",
+          "tired",
+          "lie flat",
+          "involution",
+          "996",
+          "pressure"
+        ],
+        "quote": "The phoenix must pass through fierce flames before its nirvana — the weariness of youth is the pain of rebirth, yet after the pain comes the dawn.",
+        "source": "Pastiche in Guo Moruo's style"
+      },
+      {
+        "keywords": [
+          "authority",
+          "leader",
+          "boss",
+          "rules",
+          "system",
+          "parents"
+        ],
+        "quote": "We must overthrow all the old idols and shatter all the old frames — the Jade Emperor above and King Yama below alike belong on the list of those to be struck down.",
+        "source": "Pastiche in Guo Moruo's style"
+      },
+      {
+        "keywords": [
+          "AI",
+          "artificial intelligence",
+          "machine",
+          "technology",
+          "algorithm",
+          "replace"
+        ],
+        "quote": "Technological progress is like the heavenly dog devouring the moon: the old world must be swallowed whole, and the new world must be reborn from the flames.",
+        "source": "Pastiche in Guo Moruo's style"
+      },
+      {
+        "keywords": [
+          "life",
+          "meaning",
+          "alive",
+          "value",
+          "lost",
+          "direction"
+        ],
+        "quote": "Our drifting life is like a lone boat on a vast sea — but with a lighthouse, we dare sail toward the storm.",
+        "source": "Pastiche in Guo Moruo's style (adapted from \"The Goddesses\")"
+      },
+      {
+        "keywords": [
+          "social",
+          "media",
+          "persona",
+          "performance",
+          "Moments",
+          "image"
+        ],
+        "quote": "A persona is like the painted face on a stage — red, white, black, or flowery, they are all masks. Better to tear off the mask and be a naked human being.",
+        "source": "Pastiche in Guo Moruo's style"
+      },
+      {
+        "keywords": [
+          "involution",
+          "competition",
+          "rat race",
+          "rivalry",
+          "way out",
+          "homogenization"
+        ],
+        "quote": "To burn in fierce flame is a trivial thing; only a soul that has been tempered may speak of victory. The rat race is the furnace, and people are the iron.",
+        "source": "Pastiche in Guo Moruo's style"
+      },
+      {
+        "keywords": [
+          "romantic",
+          "passion",
+          "epic",
+          "rebirth",
+          "turning point"
+        ],
+        "quote": "We want rebirth, we want creation, we want to rise from the flames like the phoenix in its nirvana!",
+        "source": "The Goddesses: The Nirvana of the Phoenix"
+      },
+      {
+        "keywords": [
+          "Journey to the West",
+          "Sun Wukong",
+          "Havoc in Heaven",
+          "rebellion",
+          "kindling"
+        ],
+        "quote": "Sun Wukong is China's Prometheus: what he stole is the kindling of the celestial court, and what it lights is the human world.",
+        "source": "Pastiche in Guo Moruo's style"
+      }
+    ]
+  }
+]

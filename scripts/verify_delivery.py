@@ -135,6 +135,10 @@ EXPECTED_SECTION_NAMES = [
     "明暗两态截图差异",  # W1264：第 75 槽·恒跑——E-245 机器化（底色读数 + 字节数双校验）·分钟级
     "公共层样式覆盖率",  # W1264：第 76 槽·恒跑——样式治理棘轮（现役 113/953=11.9% 宽口径）·秒级
     "视觉身份判据",  # W1264：第 77 槽·恒跑——E-250 机器化（暖承载/冷数据配比·现役 56.1%）·秒级
+    "EN数据源隔离",  # W1265：第 78 槽·恒跑——EN 页不得指向中文数据集（存量冻结）·秒级
+    "回退块保真",  # W1265：第 79 槽·恒跑——回退块不得为 mock·条目数须等于真值·秒级
+    "SVG文字对比度",  # W1265：第 80 槽·恒跑——SVG 文字对比度 ≥ 3:1（采信探针报告）·秒级
+    "页面引用闭合",  # W1265：第 81 槽·恒跑——页面引用 → 已部署闭合性（存量冻结）·秒级
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -238,6 +242,10 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "emoji残留棘轮",  # W1232：第 72 槽·恒跑——静态残留基线棘轮（只降不升）·秒级
     "readerRSS新鲜度",  # W1232：第 73 槽·恒跑——reader/RSS 产物新鲜度（git 视角）·秒级
     "治理文档体积窗口",  # W1232：第 74 槽·恒跑——P2-4 升格（体积阈值/段行密度硬判据）·秒级
+    "EN数据源隔离",  # W1265：第 78 槽·恒跑——EN 页 fetch 目标不得指向中文数据集·秒级
+    "回退块保真",  # W1265：第 79 槽·恒跑——回退块不得含 mock/条目数须等于真值·秒级
+    "SVG文字对比度",  # W1265：第 80 槽·恒跑——SVG 文字对比度 ≥ 3:1（采信探针报告）·秒级
+    "页面引用闭合",  # W1265：第 81 槽·恒跑——页面引用 → 已部署闭合性·秒级
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -1152,6 +1160,8 @@ _STRICT_GATES = [
     _StrictGate(
         section="移动视口",
         script="check_mobile_viewport.py",
+        # W1265（1-5）：接入 --scope en ⇒ EN 138 页纳入移动视口断言（A8 静态契约 + B4 EN 档探针报告采信）
+        args=("--scope", "en"),
         timeout=60,
         marker="---- 第 64 门禁 移动视口：",
         crash_msg="移动视口槽执行异常（第 64 槽·crash 即拦）: %s",
@@ -1347,6 +1357,69 @@ _STRICT_GATES = [
         fail_msg="视觉语言身份退化（暖承载占比低于下限·E-250·本批新增第 77 槽）",
         marker_msg="视觉身份判据槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
         ok_msg="视觉身份判据门禁通过（%s）",
+        ok_line=-1,
+    ),
+
+    # W1265 批一（判据补盲）——第 78 槽 EN 数据源语言隔离：
+    # EN 页的 fetch 目标指向 ../data/json/（中文数据集）⇒ http(s) 部署形态下英文站整段渲染中文
+    # （审查报告 P0-1·13 页/38 调用点）。判据：EN 页装载目标不得落在中文数据集目录。
+    _StrictGate(
+        section="EN数据源隔离",
+        script="check_en_data_source.py",
+        args=(),
+        timeout=120,
+        marker="---- 第 78 门禁 EN 数据源语言隔离：",
+        crash_msg="EN 数据源隔离槽执行异常（第 78 槽·crash 即拦）: %s",
+        fail_msg="EN 页 fetch 目标指向中文数据集（英文站渲染中文·本批新增第 78 槽）",
+        marker_msg="EN 数据源隔离槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="EN 数据源隔离门禁通过（%s）",
+        ok_line=-1,
+    ),
+
+    # W1265：第 79 槽回退块保真度——AGENTS L101 铁律「内嵌回退」的实质判据：
+    # 回退块不得是 mock 假数据，且条目数须等于真值（现行 3 页 mock 回退·含 EN 对应页）。
+    _StrictGate(
+        section="回退块保真",
+        script="check_fallback_fidelity.py",
+        args=(),
+        timeout=120,
+        marker="---- 第 79 门禁 回退块保真度：",
+        crash_msg="回退块保真度槽执行异常（第 79 槽·crash 即拦）: %s",
+        fail_msg="回退块含 mock 或条目数不等于真值（离线形态数据残缺·本批新增第 79 槽）",
+        marker_msg="回退块保真度槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="回退块保真度门禁通过（%s）",
+        ok_line=-1,
+    ),
+
+    # W1265：第 80 槽 SVG 文字对比度 ≥ 3:1（审查报告 P1-5：5 页/112 处·最差 cr=1.1）。
+    # 探针本体：scripts/svg_text_contrast_probe.js（file:// 口径·4 态·批收尾手动跑）。
+    # 采信探针报告 scripts/output/svg_text_contrast_report.json（file:// 口径·4 态）；
+    # 报告缺失 = fail-closed（拒绝通过——证据不在即判据未执行）。
+    _StrictGate(
+        section="SVG文字对比度",
+        script="check_svg_text_contrast.py",
+        args=(),
+        timeout=120,
+        marker="---- 第 80 门禁 SVG 文字对比度：",
+        crash_msg="SVG 文字对比度槽执行异常（第 80 槽·crash 即拦）: %s",
+        fail_msg="图表 SVG 文字对比度 < 3:1（不可读文字·本批新增第 80 槽）",
+        marker_msg="SVG 文字对比度槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="SVG 文字对比度门禁通过（%s）",
+        ok_line=-1,
+    ),
+
+    # W1265：第 81 槽页面引用 → 已部署闭合性（审查报告 P2-5：74 页/222 个 fetch 目标 http 下 404
+    # 静默回退内嵌）。扩展 _check_json_copies.py；--closure-only 只判闭合面（副本对账仍为本地自检）。
+    _StrictGate(
+        section="页面引用闭合",
+        script="check_json_copies.py",
+        args=("--closure-only",),
+        timeout=120,
+        marker="---- 第 81 门禁 页面引用闭合性：",
+        crash_msg="页面引用闭合性槽执行异常（第 81 槽·crash 即拦）: %s",
+        fail_msg="页面 fetch 目标未部署（http 下 404 静默回退·本批新增第 81 槽）",
+        marker_msg="页面引用闭合性槽输出缺汇总行（疑似未真正执行·防静默跳过）: %r",
+        ok_msg="页面引用闭合性门禁通过（%s）",
         ok_line=-1,
     ),
 ]

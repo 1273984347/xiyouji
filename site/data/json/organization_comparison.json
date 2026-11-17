@@ -1,0 +1,73 @@
+{
+  "concept_name": "天庭 vs 灵山组织对比",
+  "english_name": "Heavenly Court vs Vulture Peak Organization Comparison",
+  "definition": "天庭与灵山是西游世界两大统治组织·名义上天庭高于灵山·实际灵山主导取经项目·两者在治理模式/文化/效率上差异显著",
+  "comparison_dimensions": [
+    "vision",
+    "leadership",
+    "org_structure",
+    "employee_count",
+    "core_business",
+    "kpi",
+    "revenue_model",
+    "culture",
+    "decision_making",
+    "innovation",
+    "employee_benefits",
+    "transparency",
+    "efficiency"
+  ],
+  "organizations": [
+    {
+      "name": "天庭",
+      "english_name": "Heavenly Court",
+      "vision": "维持三界秩序·永续天朝统治·以'太平无事'为最高目标",
+      "leadership": "玉皇大帝（CEO·名义独裁·实际受三清元老掣肘）",
+      "org_structure": "金字塔科层制：玉帝-王母-三清四御-五方五老-六部-星宿神将·层级森严",
+      "employee_count": "约 10000 名正式编制（含天兵天将）·外加临时征召",
+      "core_business": "三界治安维护·天象调度·生死簿管理·仙丹炼制·蟠桃种植",
+      "kpi": "无妖孽作乱·按时辰降雨·生死簿不乱·蟠桃会按期举办",
+      "revenue_model": "贡品抽成（人间香火）+ 蟠桃垄断（独家产源）+ 仙丹独家炼制·无现金流转",
+      "culture": "官僚主义·论资排辈·以'不惹事'为荣·以'出格'为耻·宁可不做不可做错",
+      "decision_making": "集中决策·玉帝拍板·但常被元老（三清）或外部（灵山）影响·流程冗长",
+      "innovation": "近零创新·500 年体制不变·法宝皆太古传下·无新技术研发",
+      "employee_benefits": "蟠桃分桃（按品级）+ 仙丹分配 + 长生不老 + 天宫住房·等级差异极大",
+      "transparency": "极低·决策黑箱·悟空闹天宫前不知蟠桃会名单·弼马温不知自己官阶",
+      "efficiency": "低·围剿花果山动用十万天兵未果·多次靠外聘（二郎神/如来）救场"
+    },
+    {
+      "name": "灵山",
+      "english_name": "Vulture Peak",
+      "vision": "普度众生·弘扬佛法·东土传经·扩大佛法影响力至南赡部洲",
+      "leadership": "如来佛祖（CEO·实际独裁·但通过菩萨分权执行）",
+      "org_structure": "扁平+矩阵：如来-菩萨/罗汉-执行僧·菩萨有高度自主权·跨部门协作多",
+      "employee_count": "约 4800 名（佛·菩萨·罗汉·护法）·精英化编制",
+      "core_business": "佛法弘扬·取经项目运营·功德积累·收服妖怪转编·信众扩展",
+      "kpi": "取经项目完成度·81 难数量·收编妖怪数·信众增长·佛法传播范围",
+      "revenue_model": "功德+香火+信众布施·非盈利导向·但有'人事费'（阿难迦叶索人事）",
+      "culture": "目标导向·允许试错·重视长期主义·以'功德'为核心激励·鼓励跨部门协作",
+      "decision_making": "分权决策·菩萨有自主裁量权（观音可独立决定收红孩儿/黑熊精）·效率高",
+      "innovation": "中高·金箍咒三件是定制化产品·取经项目本身就是组织创新·81 难设计",
+      "employee_benefits": "佛果位晋升·莲花座·功德积累·长生不老·相对平等·无品级分桃",
+      "transparency": "中·项目目标透明（取经）·但预算/编制不公开·阿难迦叶索贿暴露暗面",
+      "efficiency": "高·取经 14 年完成·菩萨快速响应·多次直接干预解决问题"
+    }
+  ],
+  "comparison_matrix": {
+    "more_bureaucratic": "天庭",
+    "more_efficient": "灵山",
+    "more_innovative": "灵山",
+    "more_transparent": "灵山（相对）",
+    "larger_scale": "天庭（人数多 2 倍）",
+    "stronger_leadership": "灵山（如来直接操盘）",
+    "better_culture": "灵山（目标导向 vs 不惹事导向）"
+  },
+  "key_insights": [
+    "天庭是'存量维持型'组织·灵山是'增量扩张型'组织",
+    "天庭的蟠桃垄断是其组织稳定的根本·失去蟠桃则天庭解体",
+    "灵山通过'收编妖怪'实现组织扩张·红孩儿/黑熊精/守山大神皆是收编成果",
+    "取经项目是天庭默许·灵山主导的'联合项目'·天庭出借资源（李天王/哪吒等）",
+    "天庭的失败是'不能培养人才'·悟空弼马温事件暴露晋升通道堵塞",
+    "灵山成功的关键是'清晰目标+分权执行+功德激励'三位一体"
+  ]
+}

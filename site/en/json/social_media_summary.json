@@ -1,0 +1,25 @@
+{
+  "total_profiles": 7,
+  "total_mbti": 8,
+  "platforms": [
+    "Xiaohongshu",
+    "Douyin",
+    "Weibo",
+    "WeChat Official Account",
+    "Late-night Alt (platform unknown)",
+    "Zhihu",
+    "Bilibili"
+  ],
+  "mbti_types": [
+    "INFJ",
+    "ENTP",
+    "ESFP",
+    "ISFJ",
+    "ISTP",
+    "ENFJ",
+    "INTJ",
+    "ESTJ"
+  ],
+  "avg_workplace_fit": 7.88,
+  "best_fit": "Tathāgata"
+}

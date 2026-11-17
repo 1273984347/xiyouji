@@ -17,11 +17,18 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+
+from lib import freeze_gate  # noqa: E402
+
 if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "site/data"
+EN = ROOT / "site/en"
+BASELINE = ROOT / "scripts" / "output" / "data-badge-baseline.txt"
 MARKER = "---- 第 66 门禁 数据徽标："
 SKIP = {"_shell.html"}
 
@@ -61,6 +68,37 @@ def check_page(mod, name: str, txt: str):
     return errs
 
 
+def check_en_page(mod, zh_name: str, txt: str):
+    """EN 页徽标判据（E1-E3·与 ZH 对应页同态）。
+
+    W1265 批一（判据补盲 1-4）：原实现只扫 site/data ⇒ EN 138 页**零徽标**
+    （审查报告 P2-4 实测：EN 仅 CSS 样式存在·无徽标元素）。
+    判据：① MARK 恰一次 ② 徽标结构存在且 data-status 合法 ③ 态与 ZH 对应页一致
+    （正本 classify 是文件名函数⇒中英同名页同态）④ ds-label 非空且不含行话。
+    ※ ds-label 的**语言**未判（正本 STATUS_TEXT 只有中文文案·无英文正本）——留给页面线。
+    """
+    errs = []
+    n = txt.count(mod.MARK)
+    if n != 1:
+        return [f"徽标 MARK 出现 {n} 次（应恰 1）"]
+    m = BADGE.search(txt)
+    if not m:
+        return ["有 MARK 无徽标结构（破损）"]
+    st = STATUS.search(m.group(0))
+    if not st:
+        return ["徽标结构内无合法 data-status（破损）"]
+    status = st.group(1)
+    want = mod.classify(zh_name)
+    if status != want:
+        errs.append(f"data-status={status} ≠ ZH 对应页正本 classify={want}")
+    lab = LABEL.search(m.group(0))
+    if not lab or not lab.group(1).strip():
+        errs.append("ds-label 缺失/为空")
+    elif re.search(r"(?i)embedded|mock", lab.group(1)):
+        errs.append(f"ds-label 含行话：{lab.group(1)[:40]!r}")
+    return errs
+
+
 def self_test(mod):
     good = mod.build_badge("snapshot")
     cases = [
@@ -83,27 +121,120 @@ def self_test(mod):
     return 0 if fails == 0 else 1
 
 
+def scan_en(mod):
+    """扫 EN 面 → (违例键, 违例页数)。"""
+    viol = []
+    if not EN.is_dir():
+        return viol, 0
+    files = [f for f in sorted(EN.glob("*.html")) if f.name not in SKIP]
+    for f in files:
+        errs = check_en_page(mod, f.name, f.read_text(encoding="utf-8", errors="replace"))
+        for e in errs:
+            viol.append("site/en/%s|E|%s" % (f.name, e))
+    return viol, len(files)
+
+
+def self_test_en(mod):
+    """EN 面负样本自测：无徽标必红·徽标齐平必绿·态不一致必红。"""
+    good = mod.build_badge("snapshot")
+    cases = [
+        ("正样本-EN 徽标齐平", good, "any.html", 0),
+        ("负样本-EN 无徽标", "<p>裸页</p>", "any.html", 1),
+        ("负样本-EN 态与 ZH 不一致", good.replace('data-status="snapshot"', 'data-status="live"'), "any.html", 1),
+        ("负样本-EN ds-label 为空", good.replace("内嵌快照", ""), "any.html", 1),
+    ]
+    fails = 0
+    for name, txt, fn, expect in cases:
+        errs = check_en_page(mod, fn, txt)
+        got = 1 if errs else 0
+        if got != expect:
+            fails += 1
+            print(f"  [WRONG] {name}: got={got} expect={expect} {errs}")
+        else:
+            print(f"  [OK] {name}")
+    print(f"EN 自测 {'PASS' if fails == 0 else 'FAIL'}（{len(cases)} 例）")
+    return fails
+
+
+def _parse_args(argv):
+    """解析命令行参数（抽出以控 main 复杂度）。"""
+    scope = "all"
+    if "--scope" in argv:
+        i = argv.index("--scope")
+        if i + 1 < len(argv) and argv[i + 1] in ("zh", "en", "all"):
+            scope = argv[i + 1]
+    return scope, ("--strict" in argv), ("--report" in argv)
+
+
 def main():
     try:
         mod = _load_truth()
     except Exception as e:
         print(f"{MARKER}基础设施缺失（正本模块不可读）: {e}")
         sys.exit(2)
-    files = [f for f in sorted(DATA.glob("*.html")) if f.name not in SKIP]
+    argv = sys.argv[1:]
+    scope, strict, report_only = _parse_args(argv)
+
     viol = []
-    for f in files:
-        errs = check_page(mod, f.name, f.read_text(encoding="utf-8", errors="replace"))
-        if errs:
-            viol.append((f.name, errs))
-    verdict = "OK" if not viol else "FAIL"
-    print(f"{MARKER}页面 {len(files)} · 违规 {len(viol)} · {verdict}")
-    for name, errs in viol[:15]:
-        for e in errs:
-            print(f"  ✗ {name}: {e}")
-    sys.exit(1 if viol and "--report" not in sys.argv else 0)
+    zh_pages = 0
+    if scope in ("zh", "all"):
+        files = [f for f in sorted(DATA.glob("*.html")) if f.name not in SKIP]
+        zh_pages = len(files)
+        for f in files:
+            errs = check_page(mod, f.name, f.read_text(encoding="utf-8", errors="replace"))
+            for e in errs:
+                viol.append("site/data/%s|Z|%s" % (f.name, e))
+    en_viol = []
+    en_pages = 0
+    if scope in ("en", "all"):
+        en_viol, en_pages = scan_en(mod)
+        viol.extend(en_viol)
+
+    if "--generate-baseline" in argv:
+        n = freeze_gate.write_baseline(
+            BASELINE,
+            viol,
+            [
+                "# 第 66 门禁 · 数据徽标覆盖基线（W1265 建立·存量违例冻结）",
+                "# 生成命令：py -3 scripts/check_data_badge_coverage.py --generate-baseline",
+                "# 格式：<页面>|<Z|E>|<细节>；Z=ZH 面·E=EN 面",
+                "# 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict",
+            ],
+        )
+        print(f"基线已写入 {BASELINE}（{n} 条）")
+        return 0
+
+    baseline, problems = freeze_gate.read_baseline(BASELINE)
+    if problems:
+        if report_only:
+            for p in problems:
+                print("NOTE " + p + "（报告档不判红）")
+            baseline = set()
+        else:
+            for p in problems:
+                print("FAIL " + p)
+            print(f"{MARKER}基线缺失/不可读·fail-closed·拒绝通过 ----")
+            return 1
+
+    res = freeze_gate.evaluate(viol, baseline, strict=strict)
+    for k in res["new_fail"][:15]:
+        print("  ✗ " + k)
+    if len(res["new_fail"]) > 15:
+        print(f"  …其余 {len(res['new_fail']) - 15} 条略")
+    verdict = "FAIL" if res["new_fail"] else "OK"
+    print(
+        f"{MARKER}页面 ZH {zh_pages} + EN {en_pages}（scope={scope}）· 违例 {res['total']} 条 · "
+        f"{freeze_gate.FROZEN_LABEL} {len(res['frozen'])} 条 · 基线外新增 {len(res['new_fail'])} 条 · {verdict} ----"
+    )
+    if report_only:
+        return 0
+    return 1 if res["new_fail"] else 0
 
 
 if __name__ == "__main__":
     if "--self-test" in sys.argv:
-        sys.exit(self_test(_load_truth()))
+        mod = _load_truth()
+        rc = self_test(mod)
+        rc += self_test_en(mod)
+        sys.exit(0 if rc == 0 else 2)
     main()

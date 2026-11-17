@@ -1,0 +1,128 @@
+{
+  "organization_name": "Three Realms Mount Rights Protection Association",
+  "founded_year": "During the Great Tang Zhenguan era",
+  "annual_report_year": "Zhenguan Year 27",
+  "ceo": "Former Director of the Heavenly Imperial Stables",
+  "mission": "Protect the mounts of the Three Realms from demon seizure · advance legislation on mount labor rights",
+  "key_findings": [
+    {
+      "finding_id": "F001",
+      "title": "Class-A war criminals kept as pets",
+      "description": "Demons have long seized Heavenly mounts and kept Class-A war criminals (e.g., the Green Ox Demon and the Nine-Headed Lion) as pets, seriously violating the mounts' autonomy.",
+      "implicated_monsters": [
+        "Green Ox Demon (mount of Taishang Laojun)",
+        "Nine-Headed Lion (mount of Taiyi Jiuku Tianzun)",
+        "Yellow-Toothed Elephant (mount of Samantabhadra)",
+        "Golden-Haired Hou (mount of Guanyin)"
+      ],
+      "severity": "High",
+      "duration_years": "Average 3-50 years"
+    },
+    {
+      "finding_id": "F002",
+      "title": "Forced labor and exploitation",
+      "description": "Mounts were used by demons to patrol mountains, guard gates, and transport plundered goods — with no rest days, no pay, and severely excessive working hours.",
+      "implicated_monsters": [
+        "White Dragon Horse (forced to carry Tang Sanzang at Eagle's Sorrow Gorge)",
+        "Azure Lion (Lion Camel Ridge)"
+      ],
+      "severity": "High",
+      "duration_years": "Entire duration"
+    },
+    {
+      "finding_id": "F003",
+      "title": "Identity theft",
+      "description": "Demons impersonated mounts to infiltrate the mortal world, damaging the mounts' reputation and causing some mounts to be held accountable by Heaven.",
+      "implicated_monsters": [
+        "Yellow-Robed Demon (Kui Mulang of the 28 Mansions descended to earth)",
+        "Goldfish Demon (escaped from Guanyin's lotus pond)"
+      ],
+      "severity": "Medium",
+      "duration_years": "1-3 years"
+    },
+    {
+      "finding_id": "F004",
+      "title": "Loss of wages and benefits",
+      "description": "After descending to earth, Heavenly mounts had their wages suspended and social insurance halted; upon returning to Heaven they could not make back payments, affecting their retirement benefits.",
+      "implicated_monsters": [
+        "All descended mounts"
+      ],
+      "severity": "Medium",
+      "duration_years": "Entire duration"
+    },
+    {
+      "finding_id": "F005",
+      "title": "Psychological harm and trauma",
+      "description": "Some mounts were used by demons for improper purposes (such as abducting children or eating people) and required long-term psychological counseling after returning to Heaven.",
+      "implicated_monsters": [
+        "Azure Lion (man-eater)",
+        "Yellow-Toothed Elephant (man-eater)",
+        "Golden-Winged Great Peng (man-eater)"
+      ],
+      "severity": "Extreme",
+      "duration_years": "Long-term, irreversible"
+    }
+  ],
+  "case_studies": [
+    {
+      "case_id": "C001",
+      "mount": "Green Ox Demon",
+      "original_owner": "Taishang Laojun",
+      "incident": "The Green Ox sneaked down to earth while its boy attendant slept, seized a mountain as king, and used the Vajra Ring to collect every weapon.",
+      "duration": "About 3 years",
+      "victims": "Wukong · the celestial troops and generals · the weapons of many deities",
+      "resolution": "Taishang Laojun came in person and retrieved it with the Banana Leaf Fan",
+      "compensation_claim": "Heaven should bear supervisory responsibility and compensate the harmed mortal commoners.",
+      "outcome": "The Green Ox returned to Heaven and continued as a mount, with no real punishment."
+    },
+    {
+      "case_id": "C002",
+      "mount": "Nine-Headed Lion",
+      "original_owner": "Taiyi Jiuku Tianzun",
+      "incident": "The Nine-Headed Lion descended to earth, subdued six lion grandsons, and came into conflict with Yuhua Prefecture.",
+      "duration": "About 1 year",
+      "victims": "the people of Yuhua Prefecture · Wukong and his master's party",
+      "resolution": "Taiyi Jiuku Tianzun came in person to retrieve it.",
+      "compensation_claim": "The Nine-Headed Lion itself does not eat people, but it tolerated its lion grandsons' misdeeds and should bear joint liability.",
+      "outcome": "The Nine-Headed Lion returned to Heaven; the six lions were beaten to death."
+    },
+    {
+      "case_id": "C003",
+      "mount": "Golden-Haired Hou",
+      "original_owner": "Guanyin (the Bodhisattva)",
+      "incident": "The Golden-Haired Hou descended to earth as a demon, abducted the queen of the Zhuzi Kingdom, and stayed away for three years.",
+      "duration": "3 years",
+      "victims": "the queen of the Zhuzi Kingdom · the people of the Zhuzi Kingdom",
+      "resolution": "Guanyin came in person to retrieve it.",
+      "compensation_claim": "Guanyin should bear responsibility for lax discipline, and the Zhuzi Kingdom should receive state compensation.",
+      "outcome": "The Golden-Haired Hou returned to the South Sea and continued as a mount, with no real punishment."
+    },
+    {
+      "case_id": "C004",
+      "mount": "White Dragon Horse",
+      "original_owner": "Dragon King of the Western Sea (its father)",
+      "incident": "The third prince of the Western Sea Dragon King was demoted for setting fire to the palace's bright pearl and was transformed into a white horse to carry Tang Sanzang for 14 years.",
+      "duration": "14 years",
+      "victims": "None (voluntary atonement)",
+      "resolution": "Ultimately became one of the Eight Classes of Divine Beings and attained a Bodhisattva rank.",
+      "compensation_claim": "The White Dragon Horse is one of the few voluntary mounts, but after 14 years without pay it should receive back wages.",
+      "outcome": "The White Dragon Horse was granted the rank of the Eight Classes of Divine Beings and restored to dragon form."
+    }
+  ],
+  "recommendations": [
+    "Heaven should establish a mount archive system recording each mount's descents and returns.",
+    "Mount descents should be filed in advance, and mounts should wear GPS tracking devices.",
+    "During a mount's descent, wages should continue and social insurance should keep being paid.",
+    "For damages caused by demons impersonating mounts, Heaven should compensate first and then seek recovery from the demons.",
+    "Establish a mount psychological counseling mechanism, with mandatory psychological assessment after returning to Heaven."
+  ],
+  "statistics": {
+    "total_mounts_recorded": 16,
+    "mounts_descended": 16,
+    "mounts_returned": 16,
+    "mounts_punished": 0,
+    "average_descent_duration_years": 5.2,
+    "total_victims_estimate": "about 12,000 people",
+    "compensation_paid": "0 yuan"
+  }
+}

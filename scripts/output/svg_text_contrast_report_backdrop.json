@@ -1,0 +1,18 @@
+{
+ "generated_at": "2026-11-17T14:29:57.175Z",
+ "threshold": 3,
+ "scope": "all",
+ "bg_mode": "backdrop",
+ "states": [
+  "S1-desktop-light",
+  "S2-desktop-dark",
+  "S3-mobile-dark",
+  "S4-mobile-light"
+ ],
+ "pages_scanned": 162,
+ "rows": 648,
+ "fatal_rows": 16,
+ "violations": 0,
+ "pages_with_violations": 0,
+ "by_page": {}
+}

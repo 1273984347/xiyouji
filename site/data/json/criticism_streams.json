@@ -1,0 +1,35 @@
+[
+  {
+    "key": "zhengdao",
+    "label": "证道流 · Inner Alchemy",
+    "color": "#40619E",
+    "desc": "以金丹大道解西游，将全部情节读作内丹修炼次第的隐喻",
+    "path": [
+      "陈士斌",
+      "刘一明",
+      "南怀瑾"
+    ]
+  },
+  {
+    "key": "literary",
+    "label": "文学流 · Literary Critique",
+    "color": "#8E7D62",
+    "desc": "以文学本位与社会批判解读，剥离附会，回归文本",
+    "path": [
+      "李贽",
+      "鲁迅",
+      "胡适",
+      "戴锦华"
+    ]
+  },
+  {
+    "key": "rebel",
+    "label": "反叛流 · Rebel / Deconstruction",
+    "color": "#8c2a2a",
+    "desc": "以反英雄、解构权威的姿态重写西游，反抗一切正解",
+    "path": [
+      "李贽",
+      "今何在"
+    ]
+  }
+]

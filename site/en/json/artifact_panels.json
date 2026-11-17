@@ -1,0 +1,174 @@
+[
+  {
+    "name": "Diamond Bracelet",
+    "english_name": "Golden Ring",
+    "rarity": "SSR",
+    "owner": "Taishang Laojun → Green Ox Demon",
+    "element": "Metal",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 9999
+    },
+    "effect": "Can collect all of the enemy’s offensive artifacts and weapons · but ineffective against the Banana Fan",
+    "counter": "Banana Fan (counter)",
+    "background": "Forged by Taishang Laojun during his westward journey · refined from kun steel",
+    "battle_impact": "Changes Heaven’s combat meta: single-artifact builds are obsolete · group tactics required",
+    "popularity": "Once widespread, all demons relying on a single artifact lost their jobs"
+  },
+  {
+    "name": "Golden-Hooped Rod",
+    "english_name": "Ruyi Jingu Bang",
+    "rarity": "UR",
+    "owner": "Yu the Great → East Sea Dragon King → Sun Wukong",
+    "element": "Metal",
+    "stats": {
+      "atk": 9800,
+      "def": 0,
+      "control": 0
+    },
+    "effect": "Physical damage ×3 · can grow or shrink · weighs 13,500 jin",
+    "counter": "None (but collected by the Diamond Bracelet)",
+    "background": "The sea-calming needle from Yu the Great’s flood control · later kept in the East Sea Dragon Palace",
+    "battle_impact": "The strongest single-target melee weapon · unbeatable at close range",
+    "popularity": "Wukong-exclusive · cannot be duplicated"
+  },
+  {
+    "name": "Banana Fan (Yang)",
+    "english_name": "Banana Fan (Yang)",
+    "rarity": "SSR",
+    "owner": "Princess Iron Fan",
+    "element": "Wind",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 9500
+    },
+    "effect": "One fan blows 84,000 li · nothing can withstand it · special attack vs the Diamond Bracelet",
+    "counter": "Wind-Calming Pill (one-time counter)",
+    "background": "A wisp of lunar leaf from behind Kunlun Mountain, born at the dawn of chaos",
+    "battle_impact": "Core of the group-displacement build · can reshape the battlefield",
+    "popularity": "Depends on the wielder’s power · low adoption"
+  },
+  {
+    "name": "Purple Gold Gourd",
+    "english_name": "Purple Gold Gourd",
+    "rarity": "SSR",
+    "owner": "Taishang Laojun → Golden Horn & Silver Horn",
+    "element": "Dark",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 9000
+    },
+    "effect": "Answer to your name and turn to pus in a matter of hours",
+    "counter": "A false name (e.g. 'Sun the Pilgrim' 'Pilgrim Sun')",
+    "background": "Condensed from the golden qi emitted by the gourd during Laojun’s westward journey",
+    "battle_impact": "Single-target sure kill · but requires knowing the true name",
+    "popularity": "Circulates within Heaven · demons must steal to obtain it"
+  },
+  {
+    "name": "Yin-Yang Bottle",
+    "english_name": "Yin-Yang Bottle",
+    "rarity": "SSR",
+    "owner": "Golden-Winged Roc",
+    "element": "Light",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 9300
+    },
+    "effect": "Sealed in the bottle · turns to slurry in hours · Wukong must use Guanyin’s three hairs to break free",
+    "counter": "Guanyin’s life-saving hairs (one-time break)",
+    "background": "Condensed from the dual qi of yin and yang · exclusive to the Golden-Winged Roc",
+    "battle_impact": "Single-target sure kill · but effect halved against top-tier UR cards",
+    "popularity": "Demon-exclusive · 0% adoption"
+  },
+  {
+    "name": "Nine-Tooth Rake",
+    "english_name": "Nine-Tooth Rake",
+    "rarity": "SR",
+    "owner": "Zhu Bajie",
+    "element": "Earth",
+    "stats": {
+      "atk": 4500,
+      "def": 0,
+      "control": 0
+    },
+    "effect": "Physical damage ×1.5 · -50% damage vs female demons",
+    "counter": "None",
+    "background": "Forged by Heaven’s divine hammer · originally Marshal Tianpeng’s tally of command",
+    "battle_impact": "Stable output · but heavily affected by emotions",
+    "popularity": "Bajie-exclusive · cannot be traded"
+  },
+  {
+    "name": "Demon-Subduing Staff",
+    "english_name": "Demon-Subduing Staff",
+    "rarity": "R",
+    "owner": "Sha Wujing",
+    "element": "Water",
+    "stats": {
+      "atk": 3200,
+      "def": 0,
+      "control": 0
+    },
+    "effect": "Physical damage ×1.2 · stable output, no variation",
+    "counter": "None",
+    "background": "Made from Wu Gang’s osmanthus tree · crafted by Lu Ban",
+    "battle_impact": "Stable · but lacks burst",
+    "popularity": "Sha Wujing-exclusive"
+  },
+  {
+    "name": "Golden Hoop Mantra",
+    "english_name": "Golden Hoop Mantra",
+    "rarity": "UR",
+    "owner": "Guanyin → Tang Sanzang",
+    "element": "Heart",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 10000
+    },
+    "effect": "100% control over ENTP-type characters (Wukong) · cannot be resisted",
+    "counter": "None (unless 100 li away from Tang Sanzang)",
+    "background": "Gifted by Guanyin · designed specifically to control Wukong",
+    "battle_impact": "Overturns the team’s power structure · Tang Sanzang flips from weak to strong",
+    "popularity": "A management artifact · but only 1 in all three realms"
+  },
+  {
+    "name": "Fiery Golden Eyes",
+    "english_name": "Fiery Golden Eyes",
+    "rarity": "SSR",
+    "owner": "Sun Wukong",
+    "element": "Fire",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 0,
+      "perception": 9500
+    },
+    "effect": "Sees through all illusion and transformation · but sensitive to smoke",
+    "counter": "Smoke (e.g. the smoke of Red Boy’s Samadhi True Fire)",
+    "background": "Forged for 49 days in the Eight Trigrams Furnace · side effect is fear of smoke",
+    "battle_impact": "Core of the intelligence build · changes battlefield information transparency",
+    "popularity": "Wukong-exclusive · cannot be duplicated"
+  },
+  {
+    "name": "Three Life-Saving Hairs",
+    "english_name": "Three Life-Saving Hairs",
+    "rarity": "SR",
+    "owner": "Guanyin → Sun Wukong",
+    "element": "Heart",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 0,
+      "rescue": 3
+    },
+    "effect": "Can transform into any item · 3 uses total",
+    "counter": "None",
+    "background": "An emergency rescue item gifted by Guanyin",
+    "battle_impact": "A life-saving item · but with limited uses",
+    "popularity": "Limited · only 3 in all three realms"
+  }
+]

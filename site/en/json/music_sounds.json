@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Golden Cudgel Splitting the Air",
+    "category": "Weapons",
+    "owner": "Sun Wukong",
+    "sound_text": "Whoosh like wind; boom like thunder",
+    "intensity": 10,
+    "frequency": "frequent",
+    "chapter_first": 3,
+    "feature": "the air-splitting sound of the 13,500-jin Sea-Calming Divine Needle"
+  },
+  {
+    "name": "Nine-Toothed Rake Pounding",
+    "category": "Weapons",
+    "owner": "Zhu Bajie",
+    "sound_text": "Thud, thud, like tamping an earthen wall",
+    "intensity": 7,
+    "frequency": "medium frequency",
+    "chapter_first": 19,
+    "feature": "sharp divine weapon, pounding pits in the ground"
+  },
+  {
+    "name": "Demon-Subduing Staff",
+    "category": "Weapons",
+    "owner": "Sha Wujing",
+    "sound_text": "Clang, clang, like a bronze bell",
+    "intensity": 7,
+    "frequency": "medium frequency",
+    "chapter_first": 22,
+    "feature": "Demon-Subduing Staff, ringing like a bronze bell"
+  },
+  {
+    "name": "Nine-Ringed Khakkhara Staff",
+    "category": "Artifacts",
+    "owner": "Tang Sanzang",
+    "sound_text": "Clink, clink, nine rings striking together",
+    "intensity": 4,
+    "frequency": "frequent",
+    "chapter_first": 12,
+    "feature": "nine-ringed staff, a relic of Ksitigarbha"
+  },
+  {
+    "name": "Samadhi True Fire",
+    "category": "Spells",
+    "owner": "Red Boy",
+    "sound_text": "Roaring, as if smelted in a furnace",
+    "intensity": 10,
+    "frequency": "briefly concentrated",
+    "chapter_first": 41,
+    "feature": "Samadhi True Fire, roaring flames, smoke that harms"
+  },
+  {
+    "name": "Samadhi Divine Wind",
+    "category": "Spells",
+    "owner": "Yellow Wind Demon",
+    "sound_text": "Rustling, like a gale from heaven",
+    "intensity": 8,
+    "frequency": "briefly concentrated",
+    "chapter_first": 21,
+    "feature": "Samadhi Divine Wind that blinded Wukong's eyes"
+  },
+  {
+    "name": "Palm-Leaf Fan Wind",
+    "category": "Spells",
+    "owner": "Princess Iron Fan",
+    "sound_text": "Whoosh, one fan blows 84,000 li",
+    "intensity": 10,
+    "frequency": "climax-concentrated",
+    "chapter_first": 59,
+    "feature": "palm-leaf fan wind, quenching the Yin fire, blowing people away"
+  },
+  {
+    "name": "Thunder Gods",
+    "category": "Celestial",
+    "owner": "Deng Hua & Zhang Fan",
+    "sound_text": "Boom, thunder and lightning",
+    "intensity": 9,
+    "frequency": "the Chechi Kingdom contest",
+    "chapter_first": 45,
+    "feature": "five-thunder incantation, rain-summoning gods"
+  },
+  {
+    "name": "Dragon Chant",
+    "category": "Nature",
+    "owner": "the dragons",
+    "sound_text": "Chanting, like striking a jade chime",
+    "intensity": 6,
+    "frequency": "Dragon Palace scenes",
+    "chapter_first": 3,
+    "feature": "dragon chant, the Dragon Kings of the Four Seas"
+  },
+  {
+    "name": "Tiger Roar",
+    "category": "Nature",
+    "owner": "Tiger-Power; the tiger spirit",
+    "sound_text": "Roaring, shaking the valley",
+    "intensity": 7,
+    "frequency": "demon king entrances",
+    "chapter_first": 29,
+    "feature": "Yellow-Robed Demon; Tiger-Power Immortal"
+  },
+  {
+    "name": "Sutra Chanting",
+    "category": "Ritual",
+    "owner": "Tang Sanzang",
+    "sound_text": "Murmuring, “Amitābha”",
+    "intensity": 3,
+    "frequency": "throughout",
+    "chapter_first": 12,
+    "feature": "Tang Sanzang chanting sutras, a daily ritual"
+  },
+  {
+    "name": "Tight-Fillet Spell",
+    "category": "Ritual",
+    "owner": "chanted by Tang Sanzang, suffered by Wukong",
+    "sound_text": "Buzzing, a splitting headache",
+    "intensity": 10,
+    "frequency": "medium frequency",
+    "chapter_first": 14,
+    "feature": "a control signal, negative feedback engaged"
+  },
+  {
+    "name": "Peach Banquet Music",
+    "category": "Ritual",
+    "owner": "Heavenly Palace",
+    "sound_text": "immortal music, the grand music of the heavens",
+    "intensity": 10,
+    "frequency": "Peach Banquet",
+    "chapter_first": 5,
+    "feature": "heavenly banquet music, the grand music of the heavens"
+  },
+  {
+    "name": "Spirit Mountain Buddha Chant",
+    "category": "Ritual",
+    "owner": "Tathāgata and the Buddhas",
+    "sound_text": "“Namo,” “Amitābha”",
+    "intensity": 10,
+    "frequency": "Spirit Mountain sermons",
+    "chapter_first": 7,
+    "feature": "Spirit Mountain Buddha chant, ten thousand Buddhas in one voice"
+  },
+  {
+    "name": "Horse Hoofbeats",
+    "category": "Procession",
+    "owner": "White Dragon Horse",
+    "sound_text": "Clip-clop, pattering hooves",
+    "intensity": 2,
+    "frequency": "throughout",
+    "chapter_first": 15,
+    "feature": "the White Dragon Horse's hooves, on the scripture road"
+  },
+  {
+    "name": "Cloud Chariot",
+    "category": "Procession",
+    "owner": "the gods",
+    "sound_text": "Rumbling, cloud chariot driving",
+    "intensity": 5,
+    "frequency": "celestial generals descending",
+    "chapter_first": 4,
+    "feature": "cloud chariot, heavenly troops descending"
+  }
+]

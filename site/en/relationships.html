@@ -2909,8 +2909,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
     <!-- ===== EMBEDDED FALLBACK DATA ===== -->
     <!--
         本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback.
-        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据.
-        在 http(s):// 协议下打开时，优先 fetch ../data/json/*.json.
+        部署态不重复 fetch：数据以 EMBEDDED 内嵌（与 ../en/json/ 部署副本同源），file:// 与 http:// 渲染一致.
         数据源：scripts/D_network of relationships/ 生成 4 份 JSON + scripts/B_人物/character_nlp.py 生成 cooccurrence.json.
     -->
         <script src="../static/js/d3.v7.min.js"></script>

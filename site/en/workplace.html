@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-nTn8RVT1IOB12FFaT+AsufKZrG3AfxAgtctHSq7AbE0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-5YFj/mqQGG0v1isGAwRlBxc36owQ0xjzMbVpHXExJV0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Workplace Buzzwords · Annotated Journey to the West</title>
@@ -2557,96 +2557,441 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <script>
     // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
     const EMBEDDED = {
-        project_review: {
-            project_name: "Tang Dynasty Cultural Communications Group · Journey to the West Strategic Project",
-            project_code: "TANG-XIYOU-14Y",
-            duration_years: 14,
-            sponsor: "Li Shimin (Emperor Taizong of Tang)",
-            pm: "Tang Sanzang (Project Manager)",
-            tech_lead: "Sun Wukong (Tech Lead)",
-            team_size: 5,
-            deliverables: "5048 Scrolls of the Mahāyāna Sutras",
-            milestones: [
-                { phase: "Initiation", year: "Zhenguan Year 13", event: "Water-Land Assembly · Tang Sanzang Commissioned", kpi: "Project Initiation" },
-                { phase: "Team Assembly", year: "Zhenguan Years 13–14", event: "Recruited Wukong · White Dragon · Bajie · Sha Wujing", kpi: "Team of 5 Complete" },
-                { phase: "Execution", year: "Zhenguan Years 14–26", event: "The Eighty-One Tribulations", kpi: "Difficulty 81/81" },
-                { phase: "Delivery", year: "Zhenguan Year 27", event: "Sutras at Lingshan · Rebirth at Lingyun Ferry", kpi: "5048 Scrolls of Sutras" },
-                { phase: "Closure", year: "Zhenguan Year 27", event: "Return East · Five Saints Attain Buddhahood", kpi: "5 Promoted to Buddhahood" }
-            ],
-            final_review: { rating: "A+", comment: "Delivered in full · 5 promoted · sutras to Chang'an · merit complete" }
-        },
-        team_effectiveness: {
-            phases: [
-                { phase: "Forming · Founding Stage", chapter_range: "12-22", effectiveness: 5, feature: "Team assembled · members joined with baggage · settling in" },
-                { phase: "Storming · Conflict Stage", chapter_range: "23-58", effectiveness: 4, feature: "White-Bone Demon battles · Wukong expelled · True vs. False Monkey King · team trust crisis" },
-                { phase: "Norming · Normalization", chapter_range: "59-90", effectiveness: 8, feature: "Flaming Mountain · Little Thunderclap · Lion-Camel Ridge · collaboration matures" },
-                { phase: "Performing · Peak Performance", chapter_range: "91-100", effectiveness: 10, feature: "Azure Dragon Mountain · Tianzhu · Lingyun Ferry · Five Saints Attain Buddhahood" }
-            ],
-            spike_points: [
-                { chapter: 30, event: "Wukong returns to the rescue · Tang Sanzang turned into a tiger", spike: 2, note: "First return after Storming · trust rebuilt" },
-                { chapter: 58, event: "True and False Monkey King distinguished", spike: 3, note: "Storming ends · entering Norming" },
-                { chapter: 77, event: "Lion-Camel Ridge · Tathāgata descends personally", spike: 5, note: "Performing begins · team synergy peaks" },
-                { chapter: 98, event: "Lingyun Ferry · complete transformation", spike: 10, note: "Performing peak · Five Saints Attain Buddhahood" }
-            ]
-        },
-        trip_report: [
-            { n: 5, hardship: "Encountered a Tiger Outside the City", location: "Shuangcha Ridge", alert_level: "Yellow", weather: "Mountain forest · tiger's roar", remark: "Recommend a mountain-forest allowance", delay_days: 1 },
-            { n: 11, hardship: "Lost the Kasaya", location: "Guanyin Monastery · Black Wind Mountain", alert_level: "Orange", weather: "Night fire · demonic aura", remark: "Equipment (kasaya) lost; recommend purchasing insurance", delay_days: 3 },
-            { n: 17, hardship: "Black Bear Spirit Blocks the Road", location: "Black Wind Cave", alert_level: "Orange", weather: "Black miasma pervades", remark: "Requires Sister Guanyin to mediate in person", delay_days: 2 },
-            { n: 27, hardship: "Three Battles with the White-Bone Demon", location: "White Tiger Ridge", alert_level: "Red", weather: "White-bone yin aura", remark: "Team infighting · the executor was expelled", delay_days: 7 },
-            { n: 41, hardship: "Red Boy · Samādhi Fire", location: "Fire-Cloud Cave, Mount Hao", alert_level: "Red · Extreme Heat", weather: "Extreme-heat red alert", remark: "Recommend a heat allowance", delay_days: 5 },
-            { n: 47, hardship: "Tongtian River · Goldfish Spirit", location: "Tongtian River", alert_level: "Red · Flood", weather: "Walking on ice · then a flood", remark: "Force majeure (flood) encountered; trip delayed", delay_days: 4 },
-            { n: 50, hardship: "Gold-Bangle Cave · Vajra Snare", location: "Mount Jindou", alert_level: "Red", weather: "A myriad golden rays", remark: "The gods' weapons were snared · requires Laojun to descend", delay_days: 6 },
-            { n: 59, hardship: "Borrowing the Plantain Fan Thrice", location: "Flaming Mountain · Plantain Cave", alert_level: "Red · Extreme Heat", weather: "Eight hundred li of Flaming Mountain", remark: "Extreme heat · recommend heat allowance + heat-relief supplies", delay_days: 8 },
-            { n: 65, hardship: "Little Thunderclap Monastery · Yellow-Browed Demon", location: "Little Western Paradise", alert_level: "Red · False Buddha", weather: "False Buddha's halo", remark: "All the gods trapped in the Human-Seed Pouch · requires Maitreya to descend", delay_days: 7 },
-            { n: 74, hardship: "The Three Demon Kings of Lion-Camel Ridge", location: "Lion-Camel Ridge · Lion-Camel Kingdom", alert_level: "SSS · Citywide Emergency", weather: "Skulls piled like a ridge", remark: "Citywide state of emergency · SSS alert level · Tathāgata descends", delay_days: 12 },
-            { n: 82, hardship: "Bottomless Cave · Rat Spirit", location: "Mount Xiankong", alert_level: "Red", weather: "Black miasma over the mountain", remark: "Adopted daughter of Heavenly King Li · requires ancestral tablet mediation", delay_days: 4 },
-            { n: 91, hardship: "Azure Dragon Mountain · Three Rhinoceroses", location: "Azure Dragon Mountain", alert_level: "Orange", weather: "Chilling cold light", remark: "Stole 50,000 jin of aromatic oil · requires the Four Stars to subdue", delay_days: 5 }
-        ],
-        wukong_resume: {
-            basic_info: {
-                name: "Sun Wukong", alias: "Great Sage Equal to Heaven · Victorious Fighting Buddha",
-                birthplace: "Flower-Fruit Mountain, East Pūrvavideha Continent",
-                education: "Three-Star Cave of the Slanting Moon, Mount Lingtai Fangcun (Patriarch Bodhi's Academy)",
-                major: "Seventy-Two Earthly Transformations · Somersault Cloud",
-                phone: "Golden-Banded Staff hotline (direct dial, 13,500 jin)"
-            },
-            work_experience: [
-                { company: "Heavenly Court Group", position: "Bimawen (Head of the Imperial Stables)", duration: "Half a month", achievements: "Managed a thousand heavenly horses · established standardized feeding procedures", reason_for_leave: "Role mismatched with ability · seeking greater challenges" },
-                { company: "Heavenly Court Group · Great Sage Residence", position: "Great Sage Equal to Heaven (no specific duties · retained on payroll)", duration: "Several months", achievements: "Planned and executed a disruptive stress test against a large multinational group (the Heavenly Court), driving a full upgrade of its security systems and organizational structure", reason_for_leave: "After the stress test · frozen for 500 years by the Five Elements Mountain project" },
-                { company: "Tang Dynasty Cultural Communications Group · Scripture-Fetching Project", position: "Tech Lead (Eldest Senior Brother)", duration: "14 years", achievements: "Led the resolution of 60+ technical challenges among the Eighty-One Tribulations · summoned reinforcements 30+ times · ensured delivery", reason_for_leave: "Project closure · promoted to Victorious Fighting Buddha" }
-            ],
-            skills: [
-                { skill: "Seventy-Two Earthly Transformations", level: "Expert", note: "Avoids the three calamities · myriad transformations" },
-                { skill: "Somersault Cloud", level: "Expert", note: "108,000 li per somersault · cross-continental travel" },
-                { skill: "Fiery Golden Eyes", level: "Senior", note: "Sees through demons' true forms · but vulnerable to smoke" },
-                { skill: "Summoning Reinforcements", level: "Master", note: "Heavenly Court / Lingshan / South Sea · full-domain resource dispatch" },
-                { skill: "Golden-Banded Staff", level: "Expert", note: "13,500 jin · grows and shrinks at will" }
-            ],
-            stress_interview: [
-                { question: "You once resigned over a management-philosophy clash with your direct supervisor (Tang Sanzang), returning to Flower-Fruit Mountain after the White-Bone Demon affair. How would you ensure a healthy supervisor-subordinate relationship in your new role?", wukong_answer: "That resignation was a necessary period of reflection. I later realized there was an execution-boundary issue between my supervisor's 'no-kill' baseline and my 'exterminate evil' executor. After the True and False Monkey King incident, I learned to 'align' goals with my supervisor before acting, to avoid misjudgment. The Tight-Fillet Spell also served as an external execution-control mechanism that helped me curb my impulses.", emoji_note: "A bitter smile while wearing the Tight-Fillet Spell" },
-                { question: "Your 'stress test' of the Heavenly Court (Havoc in Heaven) caused serious consequences. How do you explain this 'trial and error'?", wukong_answer: "That was a misplaced need for personal value and institutional recognition. At the time I did not realize the Heavenly Court's bureaucracy could not accommodate an unestablished 'self-proclaimed Great Sage Equal to Heaven' identity. That trial and error taught me that realizing value within a system requires a compliant path, not violent confrontation.", emoji_note: "Scratching his head with an awkward smile" },
-                { question: "You frequently 'summon reinforcements.' How do you assess your ability to solve problems independently?", wukong_answer: "Summoning reinforcements is a mature expression of resource dispatch. Early on I leaned toward 'fight first, ask later'; later I learned to precisely calculate the ROI of calling for help: problem-solving efficiency × favors consumed ÷ time spent × prestige lost. I handle independently what can be handled independently (such as the White-Bone Demon or the Three Immortals of Chechi); for demons with powerful backing (such as Red Boy or the Gold-Bangle Cave), reinforcements are a must — a rational choice in organizational behavior.", emoji_note: "Resting his chin on his hand, analyzing seriously" }
-            ]
-        },
-        internet_buzzwords: [
-            { buzzword: "Alignment", chinese_meaning: "To align · to synchronize", xiyou_usage: "Tang Sanzang calls a team meeting: 'We must align on the mountain today — this mountain has a demonic aura.'", category: "Meeting Jargon" },
-            { buzzword: "Empowerment", chinese_meaning: "To grant capability", xiyou_usage: "Guanyin gives Wukong three life-saving hairs: 'I have come specially to empower you.'", category: "Resource Support" },
-            { buzzword: "Underlying Logic", chinese_meaning: "Fundamental principle", xiyou_usage: "Tathāgata explains to Wukong: 'The underlying logic of your Havoc in Heaven is actually a misplaced need for personal value and institutional recognition.'", category: "Methodology" },
-            { buzzword: "Granularity", chinese_meaning: "Degree of detail", xiyou_usage: "Wukong reports: 'The granularity of the Lion-Camel Ridge demons is too coarse — three fiend kings seized the whole city.'", category: "Reporting Jargon" },
-            { buzzword: "Handle", chinese_meaning: "Point of leverage", xiyou_usage: "Wukong to Bajie: 'Your rake is the handle — don't drop it!'", category: "Execution Jargon" },
-            { buzzword: "Closed Loop", chinese_meaning: "Complete cycle", xiyou_usage: "Tathāgata: 'The scripture-fetching project must form a closed loop — all eighty-one tribulations are indispensable.'", category: "Methodology" },
-            { buzzword: "Approach", chinese_meaning: "Strategy and method", xiyou_usage: "Wukong: 'This demon's approach is transformation plus brute force; if that fails, summon reinforcements.'", category: "Execution Jargon" },
-            { buzzword: "Sedimentation", chinese_meaning: "Accumulation", xiyou_usage: "Tang Sanzang: 'After 14 years of scripture-fetching, we must sediment 5,048 scrolls of true scripture.'", category: "Methodology" },
-            { buzzword: "Mental Model", chinese_meaning: "Cognitive structure", xiyou_usage: "Tathāgata: 'A restless mind and wandering will mean the mental model is not yet corrected — the Tight-Fillet Spell is needed as external intervention.'", category: "Methodology" },
-            { buzzword: "Agile Development", chinese_meaning: "Rapid iteration", xiyou_usage: "Wukong: 'First scout the situation, then summon reinforcements — that is the essence of agile development.'", category: "Execution Jargon" },
-            { buzzword: "MVP", chinese_meaning: "Minimum viable product", xiyou_usage: "Guanyin: 'First recruit one disciple as a trial — this is an MVP; expand the team once it works.'", category: "Project Jargon" },
-            { buzzword: "OKR", chinese_meaning: "Objectives and key results", xiyou_usage: "Tathāgata sets the OKRs: O = successful scripture retrieval; KR1 = the Eighty-One Tribulations; KR2 = completed in 14 years; KR3 = 5 people promoted.", category: "Project Jargon" },
-            { buzzword: "Managing Up", chinese_meaning: "Managing one's superiors", xiyou_usage: "Wukong: 'Master, stop trying to send me away — this is called managing up.'", category: "Workplace Jargon" },
-            { buzzword: "Break Through", chinese_meaning: "Resolve thoroughly", xiyou_usage: "Wukong: 'This time we'll break through Lion-Camel Ridge completely — leave no lingering trouble.'", category: "Execution Jargon" },
-            { buzzword: "Reuse", chinese_meaning: "Repeated use", xiyou_usage: "Wukong: 'The Tight-Fillet Spell has too high a reuse rate — it gets recited every time.'", category: "Methodology" }
+  "project_review": {
+    "project_name": "Tang Dynasty Cultural Communications Group · Journey to the West Strategic Project",
+    "project_code": "TANG-XIYOU-14Y",
+    "duration_years": 14,
+    "sponsor": "Li Shimin (Emperor Taizong of Tang)",
+    "pm": "Tang Sanzang (Project Manager)",
+    "tech_lead": "Sun Wukong (Tech Lead)",
+    "team_size": 5,
+    "deliverables": "5048 Scrolls of the Mahāyāna Sutras",
+    "milestones": [
+      {
+        "phase": "Initiation",
+        "year": "Zhenguan Year 13",
+        "event": "Water-Land Assembly · Tang Sanzang Commissioned",
+        "kpi": "Project Initiation"
+      },
+      {
+        "phase": "Team Assembly",
+        "year": "Zhenguan Years 13–14",
+        "event": "Recruited Wukong · White Dragon · Bajie · Sha Wujing",
+        "kpi": "Team of 5 Complete"
+      },
+      {
+        "phase": "Execution",
+        "year": "Zhenguan Years 14–26",
+        "event": "The Eighty-One Tribulations",
+        "kpi": "Difficulty 81/81"
+      },
+      {
+        "phase": "Delivery",
+        "year": "Zhenguan Year 27",
+        "event": "Sutras at Lingshan · Rebirth at Lingyun Ferry",
+        "kpi": "5048 Scrolls of Sutras"
+      },
+      {
+        "phase": "Closure",
+        "year": "Zhenguan Year 27",
+        "event": "Return East · Five Saints Attain Buddhahood",
+        "kpi": "5 Promoted to Buddhahood"
+      }
+    ],
+    "budget": {
+      "Travel": "14 years on foot · zero transport costs",
+      "Lodging": "Temples and monasteries · wilderness and wild hills",
+      "Meals": "Mostly begging for alms · the occasional wild fruit",
+      "Equipment": "Brocade Kasaya · Nine-Ring Staff · Golden Cudgel · Precious Staff · Nine-toothed Rake",
+      "Insurance": "The Six Spirits and the Five Watchers · the duty-officer gods escorting all the way"
+    },
+    "risk_management": [
+      {
+        "risk": "The project manager gets eaten by a demon",
+        "probability": "High",
+        "mitigation": "The tech lead escorts at all times plus an unseen guard"
+      },
+      {
+        "risk": "Friction inside the team",
+        "probability": "Medium",
+        "mitigation": "The Headband Curse acts as a negative-feedback inhibitor"
+      },
+      {
+        "risk": "Demons with complicated backgrounds",
+        "probability": "High",
+        "mitigation": "A call-for-reinforcement mechanism and an emergency line to the Heavenly Court / Spirit Mountain"
+      }
+    ],
+    "final_review": {
+      "rating": "A+",
+      "comment": "Delivered in full · 5 promoted · sutras to Chang'an · merit complete",
+      "lessons_learned": [
+        "The negative-feedback mechanism between executor and baseline (the Headband Curse) is the key",
+        "The 'necessary accompaniment' of demons with a backstory cannot be cut",
+        "The team's mind can only be upgraded through a 'Three Strikes on the White Bone Demon' kind of crisis"
+      ]
+    }
+  },
+  "team_effectiveness": {
+    "phases": [
+      {
+        "phase": "Forming · Founding Stage",
+        "chapter_range": "12-22",
+        "effectiveness": 5,
+        "feature": "Team assembled · members joined with baggage · settling in",
+        "key_events": [
+          "Wukong recruited (ch. 14)",
+          "White Dragon Horse recruited (ch. 15)",
+          "Bajie recruited (ch. 19)",
+          "Wujing recruited (ch. 22)"
         ]
-    };
+      },
+      {
+        "phase": "Storming · Conflict Stage",
+        "chapter_range": "23-58",
+        "effectiveness": 4,
+        "feature": "White-Bone Demon battles · Wukong expelled · True vs. False Monkey King · team trust crisis",
+        "key_events": [
+          "Three strikes on the White Bone Demon (ch. 27)",
+          "Wukong banished · Yellow-Robed Demon (ch. 29-30)",
+          "The two Monkey Kings (ch. 57-58)"
+        ],
+        "post_crisis_spike": "After the two-fake Monkey King affair the team's trust is rebuilt and cooperation surges +3"
+      },
+      {
+        "phase": "Norming · Normalization",
+        "chapter_range": "59-90",
+        "effectiveness": 8,
+        "feature": "Flaming Mountain · Little Thunderclap · Lion-Camel Ridge · collaboration matures",
+        "key_events": [
+          "Three borrowings of the Plantain Fan (ch. 59-61)",
+          "Minor Thunderclap Temple (ch. 65-66)",
+          "Lion-Camel Ridge (ch. 74-77)",
+          "Kingdom of the Bhikṣus (ch. 78-79)"
+        ],
+        "post_crisis_spike": "After Lion-Camel Ridge the team's coordination reaches its peak, cooperation +5"
+      },
+      {
+        "phase": "Performing · Peak Performance",
+        "chapter_range": "91-100",
+        "effectiveness": 10,
+        "feature": "Azure Dragon Mountain · Tianzhu · Lingyun Ferry · Five Saints Attain Buddhahood",
+        "key_events": [
+          "Three Rhinoceros Demons of Green-Dragon Mountain (ch. 91-92)",
+          "Jade Rabbit of the Heavenly Kingdom (ch. 94-95)",
+          "Rebirth at the Lingyin Crossing (ch. 98)",
+          "Return to the Eastern Land (ch. 100)"
+        ],
+        "post_crisis_spike": "After the Lingyin Crossing rebirth the team's mind is perfected, cooperation +10"
+      }
+    ],
+    "spike_points": [
+      {
+        "chapter": 30,
+        "event": "Wukong returns to the rescue · Tang Sanzang turned into a tiger",
+        "spike": 2,
+        "note": "First return after Storming · trust rebuilt"
+      },
+      {
+        "chapter": 58,
+        "event": "True and False Monkey King distinguished",
+        "spike": 3,
+        "note": "Storming ends · entering Norming"
+      },
+      {
+        "chapter": 77,
+        "event": "Lion-Camel Ridge · Tathāgata descends personally",
+        "spike": 5,
+        "note": "Performing begins · team synergy peaks"
+      },
+      {
+        "chapter": 98,
+        "event": "Lingyun Ferry · complete transformation",
+        "spike": 10,
+        "note": "Performing peak · Five Saints Attain Buddhahood"
+      }
+    ]
+  },
+  "trip_report": [
+    {
+      "n": 5,
+      "hardship": "Encountered a Tiger Outside the City",
+      "location": "Shuangcha Ridge",
+      "alert_level": "Yellow",
+      "weather": "Mountain forest · tiger's roar",
+      "remark": "Recommend a mountain-forest allowance",
+      "delay_days": 1
+    },
+    {
+      "n": 11,
+      "hardship": "Lost the Kasaya",
+      "location": "Guanyin Monastery · Black Wind Mountain",
+      "alert_level": "Orange",
+      "weather": "Night fire · demonic aura",
+      "remark": "Equipment (kasaya) lost; recommend purchasing insurance",
+      "delay_days": 3
+    },
+    {
+      "n": 17,
+      "hardship": "Black Bear Spirit Blocks the Road",
+      "location": "Black Wind Cave",
+      "alert_level": "Orange",
+      "weather": "Black miasma pervades",
+      "remark": "Requires Sister Guanyin to mediate in person",
+      "delay_days": 2
+    },
+    {
+      "n": 27,
+      "hardship": "Three Battles with the White-Bone Demon",
+      "location": "White Tiger Ridge",
+      "alert_level": "Red",
+      "weather": "White-bone yin aura",
+      "remark": "Team infighting · the executor was expelled",
+      "delay_days": 7
+    },
+    {
+      "n": 41,
+      "hardship": "Red Boy · Samādhi Fire",
+      "location": "Fire-Cloud Cave, Mount Hao",
+      "alert_level": "Red · Extreme Heat",
+      "weather": "Extreme-heat red alert",
+      "remark": "Recommend a heat allowance",
+      "delay_days": 5
+    },
+    {
+      "n": 47,
+      "hardship": "Tongtian River · Goldfish Spirit",
+      "location": "Tongtian River",
+      "alert_level": "Red · Flood",
+      "weather": "Walking on ice · then a flood",
+      "remark": "Force majeure (flood) encountered; trip delayed",
+      "delay_days": 4
+    },
+    {
+      "n": 50,
+      "hardship": "Gold-Bangle Cave · Vajra Snare",
+      "location": "Mount Jindou",
+      "alert_level": "Red",
+      "weather": "A myriad golden rays",
+      "remark": "The gods' weapons were snared · requires Laojun to descend",
+      "delay_days": 6
+    },
+    {
+      "n": 59,
+      "hardship": "Borrowing the Plantain Fan Thrice",
+      "location": "Flaming Mountain · Plantain Cave",
+      "alert_level": "Red · Extreme Heat",
+      "weather": "Eight hundred li of Flaming Mountain",
+      "remark": "Extreme heat · recommend heat allowance + heat-relief supplies",
+      "delay_days": 8
+    },
+    {
+      "n": 65,
+      "hardship": "Little Thunderclap Monastery · Yellow-Browed Demon",
+      "location": "Little Western Paradise",
+      "alert_level": "Red · False Buddha",
+      "weather": "False Buddha's halo",
+      "remark": "All the gods trapped in the Human-Seed Pouch · requires Maitreya to descend",
+      "delay_days": 7
+    },
+    {
+      "n": 74,
+      "hardship": "The Three Demon Kings of Lion-Camel Ridge",
+      "location": "Lion-Camel Ridge · Lion-Camel Kingdom",
+      "alert_level": "SSS · Citywide Emergency",
+      "weather": "Skulls piled like a ridge",
+      "remark": "Citywide state of emergency · SSS alert level · Tathāgata descends",
+      "delay_days": 12
+    },
+    {
+      "n": 82,
+      "hardship": "Bottomless Cave · Rat Spirit",
+      "location": "Mount Xiankong",
+      "alert_level": "Red",
+      "weather": "Black miasma over the mountain",
+      "remark": "Adopted daughter of Heavenly King Li · requires ancestral tablet mediation",
+      "delay_days": 4
+    },
+    {
+      "n": 91,
+      "hardship": "Azure Dragon Mountain · Three Rhinoceroses",
+      "location": "Azure Dragon Mountain",
+      "alert_level": "Orange",
+      "weather": "Chilling cold light",
+      "remark": "Stole 50,000 jin of aromatic oil · requires the Four Stars to subdue",
+      "delay_days": 5
+    }
+  ],
+  "wukong_resume": {
+    "basic_info": {
+      "name": "Sun Wukong",
+      "alias": "Great Sage Equal to Heaven · Victorious Fighting Buddha",
+      "birthplace": "Flower-Fruit Mountain, East Pūrvavideha Continent",
+      "education": "Three-Star Cave of the Slanting Moon, Mount Lingtai Fangcun (Patriarch Bodhi's Academy)",
+      "major": "Seventy-Two Earthly Transformations · Somersault Cloud",
+      "phone": "Golden-Banded Staff hotline (direct dial, 13,500 jin)"
+    },
+    "work_experience": [
+      {
+        "company": "Heavenly Court Group",
+        "position": "Bimawen (Head of the Imperial Stables)",
+        "duration": "Half a month",
+        "achievements": "Managed a thousand heavenly horses · established standardized feeding procedures",
+        "reason_for_leave": "Role mismatched with ability · seeking greater challenges"
+      },
+      {
+        "company": "Heavenly Court Group · Great Sage Residence",
+        "position": "Great Sage Equal to Heaven (no specific duties · retained on payroll)",
+        "duration": "Several months",
+        "achievements": "Planned and executed a disruptive stress test against a large multinational group (the Heavenly Court), driving a full upgrade of its security systems and organizational structure",
+        "reason_for_leave": "After the stress test · frozen for 500 years by the Five Elements Mountain project"
+      },
+      {
+        "company": "Tang Dynasty Cultural Communications Group · Scripture-Fetching Project",
+        "position": "Tech Lead (Eldest Senior Brother)",
+        "duration": "14 years",
+        "achievements": "Led the resolution of 60+ technical challenges among the Eighty-One Tribulations · summoned reinforcements 30+ times · ensured delivery",
+        "reason_for_leave": "Project closure · promoted to Victorious Fighting Buddha"
+      }
+    ],
+    "skills": [
+      {
+        "skill": "Seventy-Two Earthly Transformations",
+        "level": "Expert",
+        "note": "Avoids the three calamities · myriad transformations"
+      },
+      {
+        "skill": "Somersault Cloud",
+        "level": "Expert",
+        "note": "108,000 li per somersault · cross-continental travel"
+      },
+      {
+        "skill": "Fiery Golden Eyes",
+        "level": "Senior",
+        "note": "Sees through demons' true forms · but vulnerable to smoke"
+      },
+      {
+        "skill": "Summoning Reinforcements",
+        "level": "Master",
+        "note": "Heavenly Court / Lingshan / South Sea · full-domain resource dispatch"
+      },
+      {
+        "skill": "Golden-Banded Staff",
+        "level": "Expert",
+        "note": "13,500 jin · grows and shrinks at will"
+      }
+    ],
+    "stress_interview": [
+      {
+        "question": "You once resigned over a management-philosophy clash with your direct supervisor (Tang Sanzang), returning to Flower-Fruit Mountain after the White-Bone Demon affair. How would you ensure a healthy supervisor-subordinate relationship in your new role?",
+        "wukong_answer": "That resignation was a necessary period of reflection. I later realized there was an execution-boundary issue between my supervisor's 'no-kill' baseline and my 'exterminate evil' executor. After the True and False Monkey King incident, I learned to 'align' goals with my supervisor before acting, to avoid misjudgment. The Tight-Fillet Spell also served as an external execution-control mechanism that helped me curb my impulses.",
+        "emoji_note": "A bitter smile while wearing the Tight-Fillet Spell"
+      },
+      {
+        "question": "Your 'stress test' of the Heavenly Court (Havoc in Heaven) caused serious consequences. How do you explain this 'trial and error'?",
+        "wukong_answer": "That was a misplaced need for personal value and institutional recognition. At the time I did not realize the Heavenly Court's bureaucracy could not accommodate an unestablished 'self-proclaimed Great Sage Equal to Heaven' identity. That trial and error taught me that realizing value within a system requires a compliant path, not violent confrontation.",
+        "emoji_note": "Scratching his head with an awkward smile"
+      },
+      {
+        "question": "You frequently 'summon reinforcements.' How do you assess your ability to solve problems independently?",
+        "wukong_answer": "Summoning reinforcements is a mature expression of resource dispatch. Early on I leaned toward 'fight first, ask later'; later I learned to precisely calculate the ROI of calling for help: problem-solving efficiency × favors consumed ÷ time spent × prestige lost. I handle independently what can be handled independently (such as the White-Bone Demon or the Three Immortals of Chechi); for demons with powerful backing (such as Red Boy or the Gold-Bangle Cave), reinforcements are a must — a rational choice in organizational behavior.",
+        "emoji_note": "Resting his chin on his hand, analyzing seriously"
+      }
+    ]
+  },
+  "internet_buzzwords": [
+    {
+      "buzzword": "Alignment",
+      "chinese_meaning": "To align · to synchronize",
+      "xiyou_usage": "Tang Sanzang calls a team meeting: 'We must align on the mountain today — this mountain has a demonic aura.'",
+      "category": "Meeting Jargon"
+    },
+    {
+      "buzzword": "Empowerment",
+      "chinese_meaning": "To grant capability",
+      "xiyou_usage": "Guanyin gives Wukong three life-saving hairs: 'I have come specially to empower you.'",
+      "category": "Resource Support"
+    },
+    {
+      "buzzword": "Underlying Logic",
+      "chinese_meaning": "Fundamental principle",
+      "xiyou_usage": "Tathāgata explains to Wukong: 'The underlying logic of your Havoc in Heaven is actually a misplaced need for personal value and institutional recognition.'",
+      "category": "Methodology"
+    },
+    {
+      "buzzword": "Granularity",
+      "chinese_meaning": "Degree of detail",
+      "xiyou_usage": "Wukong reports: 'The granularity of the Lion-Camel Ridge demons is too coarse — three fiend kings seized the whole city.'",
+      "category": "Reporting Jargon"
+    },
+    {
+      "buzzword": "Handle",
+      "chinese_meaning": "Point of leverage",
+      "xiyou_usage": "Wukong to Bajie: 'Your rake is the handle — don't drop it!'",
+      "category": "Execution Jargon"
+    },
+    {
+      "buzzword": "Closed Loop",
+      "chinese_meaning": "Complete cycle",
+      "xiyou_usage": "Tathāgata: 'The scripture-fetching project must form a closed loop — all eighty-one tribulations are indispensable.'",
+      "category": "Methodology"
+    },
+    {
+      "buzzword": "Approach",
+      "chinese_meaning": "Strategy and method",
+      "xiyou_usage": "Wukong: 'This demon's approach is transformation plus brute force; if that fails, summon reinforcements.'",
+      "category": "Execution Jargon"
+    },
+    {
+      "buzzword": "Sedimentation",
+      "chinese_meaning": "Accumulation",
+      "xiyou_usage": "Tang Sanzang: 'After 14 years of scripture-fetching, we must sediment 5,048 scrolls of true scripture.'",
+      "category": "Methodology"
+    },
+    {
+      "buzzword": "Mental Model",
+      "chinese_meaning": "Cognitive structure",
+      "xiyou_usage": "Tathāgata: 'A restless mind and wandering will mean the mental model is not yet corrected — the Tight-Fillet Spell is needed as external intervention.'",
+      "category": "Methodology"
+    },
+    {
+      "buzzword": "Agile Development",
+      "chinese_meaning": "Rapid iteration",
+      "xiyou_usage": "Wukong: 'First scout the situation, then summon reinforcements — that is the essence of agile development.'",
+      "category": "Execution Jargon"
+    },
+    {
+      "buzzword": "MVP",
+      "chinese_meaning": "Minimum viable product",
+      "xiyou_usage": "Guanyin: 'First recruit one disciple as a trial — this is an MVP; expand the team once it works.'",
+      "category": "Project Jargon"
+    },
+    {
+      "buzzword": "OKR",
+      "chinese_meaning": "Objectives and key results",
+      "xiyou_usage": "Tathāgata sets the OKRs: O = successful scripture retrieval; KR1 = the Eighty-One Tribulations; KR2 = completed in 14 years; KR3 = 5 people promoted.",
+      "category": "Project Jargon"
+    },
+    {
+      "buzzword": "Managing Up",
+      "chinese_meaning": "Managing one's superiors",
+      "xiyou_usage": "Wukong: 'Master, stop trying to send me away — this is called managing up.'",
+      "category": "Workplace Jargon"
+    },
+    {
+      "buzzword": "Break Through",
+      "chinese_meaning": "Resolve thoroughly",
+      "xiyou_usage": "Wukong: 'This time we'll break through Lion-Camel Ridge completely — leave no lingering trouble.'",
+      "category": "Execution Jargon"
+    },
+    {
+      "buzzword": "Reuse",
+      "chinese_meaning": "Repeated use",
+      "xiyou_usage": "Wukong: 'The Tight-Fillet Spell has too high a reuse rate — it gets recited every time.'",
+      "category": "Methodology"
+    }
+  ]
+};
 
     // ===== 配色映射 =====
     const ALERT_COLORS = {
@@ -3168,11 +3513,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
     async function loadAll() {
         const [pr, te, tr, wr, ib] = await Promise.all([
-            loadJson("../data/json/project_review.json", EMBEDDED.project_review),
-            loadJson("../data/json/team_effectiveness.json", EMBEDDED.team_effectiveness),
-            loadJson("../data/json/trip_report.json", EMBEDDED.trip_report),
-            loadJson("../data/json/wukong_resume.json", EMBEDDED.wukong_resume),
-            loadJson("../data/json/internet_buzzwords.json", EMBEDDED.internet_buzzwords)
+            loadJson("../en/json/project_review.json", EMBEDDED.project_review),
+            loadJson("../en/json/team_effectiveness.json", EMBEDDED.team_effectiveness),
+            loadJson("../en/json/trip_report.json", EMBEDDED.trip_report),
+            loadJson("../en/json/wukong_resume.json", EMBEDDED.wukong_resume),
+            loadJson("../en/json/internet_buzzwords.json", EMBEDDED.internet_buzzwords)
         ]);
         return { project_review: pr, team_effectiveness: te, trip_report: tr, wukong_resume: wr, internet_buzzwords: ib };
     }
@@ -3187,7 +3532,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             // 仍是嵌入数据
         } else {
             document.getElementById("dataSource").innerHTML =
-                "Data source: loaded live from <code>../data/json/</code> (running in http server mode)";
+                "Data source: loaded live from <code>../en/json/</code> (running in http server mode)";
         }
 
         renderProjectMeta(data.project_review);

@@ -1,0 +1,14 @@
+{
+  "total_sounds": 16,
+  "total_chapters": 100,
+  "total_symmetries": 8,
+  "total_movements": 4,
+  "avg_rhythm": 4.28,
+  "max_rhythm": 5,
+  "min_rhythm": 2,
+  "phase_distribution": {
+    "Overture": 12,
+    "Symphony": 85,
+    "Coda": 3
+  }
+}

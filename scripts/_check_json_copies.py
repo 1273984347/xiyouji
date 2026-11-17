@@ -1,38 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""_check_json_copies.py — W563/A-3：site/data/json/ 部署副本 ↔ scripts/output/data/ 原件对账。
+"""_check_json_copies.py — 兼容入口（W563/A-3 旧名）→ 委托给 scripts/check_json_copies.py。
 
-断言：47 个副本逐一字节相等；副本集合与「原件中应部署的集合」双向一致。
-（第 9 门禁的副本对账子检查只比数组长度＝CI 跨平台安全版；**字节级强对账由本脚本承担**·
-W770 自 archive 恢复——W770 实证：副本曾含 W678/W691 修复而原件未回灌，sync_data_json
-单向同步会把修复反灌回副本；W770 已 20 件回灌对齐 + 本项目本批后副本与原件字节全等。）
-用法：python scripts/_check_json_copies.py（本地自检·CI 无原件时由门禁跳过语义覆盖）
+W1265 批一：第 81 槽（页面引用 → 已部署 闭合性）落地后，门禁挂载点须用 check_*.py
+  命名（第 42/45 槽按 check_[a-z0-9_]+\.(py|js) 扫描挂载脚本·下划线前缀会被正则截断
+  成 check_json_copies.py 而误判「引用不存在的门禁脚本」）。
+  故：实现体在 scripts/check_json_copies.py；本文件保留为**向后兼容入口**
+  （旧脚本清单/文档仍引用本名），行为完全一致。
+用法：py -3 scripts/_check_json_copies.py [--closure-only|--strict|--report|--self-test]
 """
-import filecmp
-import os
+from __future__ import annotations
+
+import runpy
 import sys
+from pathlib import Path
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, "scripts", "output", "data")
-DST = os.path.join(ROOT, "site", "data", "json")
-
-
-def main():
-    copies = sorted(f for f in os.listdir(DST) if f.endswith(".json"))
-    problems = []
-    for f in copies:
-        src = os.path.join(SRC, f)
-        if not os.path.exists(src):
-            problems.append("副本无原件: " + f)
-        elif not filecmp.cmp(os.path.join(DST, f), src, shallow=False):
-            problems.append("内容漂移: " + f)
-    print(f"副本 {len(copies)} 个（预期 47） · 问题 {len(problems)}")
-    if len(copies) != 47:
-        problems.append("副本数 %d != 47——出现新增 fetch 目标但未同步副本，或残留历史副本" % len(copies))
-    for p in problems:
-        print("  FAIL", p)
-    sys.exit(1 if problems else 0)
-
+TARGET = Path(__file__).resolve().parent / "check_json_copies.py"
 
 if __name__ == "__main__":
-    main()
+    sys.argv[0] = str(TARGET)
+    runpy.run_path(str(TARGET), run_name="__main__")

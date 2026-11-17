@@ -1,0 +1,230 @@
+{
+  "concept_name": "Artifact Material Science",
+  "english_name": "Artifact Material Science",
+  "definition": "Material science: by analyzing the chemical composition, physical properties, and inferred craftsmanship of materials, ancient craft techniques are reconstructed, reducing divine artifacts from myth to analyzable engineering materials.",
+  "core_case": "The Diamond Snare is 'refined fine steel' (alloy steel), the Golden-Banded Staff is 'divine iron' (meteorite iron?), and the Palm-Leaf Fan is 'Great Yin leaf' (organic composite?). These materials correspond to real Ming Dynasty craft techniques.",
+  "artifact_material_reports": [
+    {
+      "artifact_name": "Diamond Snare",
+      "english_name": "Diamond Snare",
+      "owner": "Taishang Laojun",
+      "raw_material_description": "Fine steel, forged and refined",
+      "material_classification": "alloy steel · high-carbon steel",
+      "modern_equivalent": "tungsten steel / high-speed steel (high hardness, wear- and corrosion-resistant)",
+      "chemical_composition_guess": "Fe-C-W-Cr (iron-carbon-tungsten-chromium alloy)",
+      "physical_properties": {
+        "hardness": "Mohs 9.5 · near-diamond",
+        "density": "7.85 g/cm³ · higher than ordinary steel",
+        "magnetic": "weakly magnetic",
+        "conductivity": "good electrical and thermal conductor"
+      },
+      "crafting_process": [
+        "Ore selection: collect iron, tungsten, and chromium ore",
+        "Steelmaking: blast-furnace smelting to remove impurities",
+        "Alloying: add tungsten and chromium to raise hardness",
+        "Forging: repeatedly hammer to densify",
+        "Quenching: oil- or water-quench to raise hardness",
+        "Tempering: low-temperature temper to reduce brittleness",
+        "Polishing: achieve a mirror finish"
+      ],
+      "function_principle": "Extremely hard; can collect any metal weapon (on metal impact the Diamond Snare does not deform while the weapon does)",
+      "estimated_value": "priceless · peak of Ming Dynasty craft",
+      "archaeological_parallel": "Han Dynasty hundred-refined steel + Tang Dynasty bintie steel · Ming Dynasty cloisonné technique"
+    },
+    {
+      "artifact_name": "Golden-Banded Staff",
+      "english_name": "Golden Cudgel",
+      "owner": "Sun Wukong (originally kept by the East Sea Dragon King)",
+      "raw_material_description": "Divine iron · the Sea-Calming Needle",
+      "material_classification": "meteorite iron (iron-nickel alloy)",
+      "modern_equivalent": "nickel-iron meteorite (5-30% nickel)",
+      "chemical_composition_guess": "Fe-Ni (iron-nickel alloy, 8% nickel)",
+      "physical_properties": {
+        "hardness": "Mohs 7.5 · harder than ordinary iron",
+        "density": "8.0 g/cm³ · higher than ordinary iron",
+        "magnetic": "strongly magnetic",
+        "conductivity": "good conductor"
+      },
+      "crafting_process": [
+        "Meteorite fall: obtained during Yu the Great's flood control",
+        "Smelting: remove silicate impurities",
+        "Forging: shape into the Sea-Calming Needle",
+        "Inscription: 'As-You-Will Golden-Banded Staff, weighing 13,500 catties'",
+        "Ritual refinement: Daoist consecration to enhance spirituality"
+      ],
+      "function_principle": "Meteorite iron contains nickel and resists corrosion; it can grow or shrink (Daoist consecration grants shape-shifting)",
+      "estimated_value": "Sea-Calming Needle · priceless",
+      "archaeological_parallel": "Shang Dynasty bronze yue with iron blade (made of meteorite iron) · Ming Dynasty iron-smelting"
+    },
+    {
+      "artifact_name": "Palm-Leaf Fan",
+      "english_name": "Banana Leaf Fan",
+      "owner": "Princess Iron Fan",
+      "raw_material_description": "Great Yin leaf · leftover from Nüwa mending the sky",
+      "material_classification": "organic composite · plant fiber + mineral",
+      "modern_equivalent": "carbon-fiber + mineral-coating composite",
+      "chemical_composition_guess": "C-Si-O-K (carbon-silicon-oxygen-potassium composite)",
+      "physical_properties": {
+        "hardness": "variable · soft at rest, hard as steel when activated",
+        "density": "1.5 g/cm³ · lighter than steel",
+        "magnetic": "none",
+        "conductivity": "insulating"
+      },
+      "crafting_process": [
+        "Collection: Great Yin essence (lunar minerals)",
+        "Extraction: plant fiber (palm leaf)",
+        "Compositing: combine fiber and minerals",
+        "Ritual refinement: Daoist consecration granting wind control",
+        "Decoration: carved fan ribs and inscribed fan face"
+      ],
+      "function_principle": "Composite material · flexibility plus mineral activation · can fan up an eight-hundred-li wind",
+      "estimated_value": "rare treasure · wind-control power is priceless",
+      "archaeological_parallel": "Han Dynasty lacquerware (lacquer + hemp composite) · Ming Dynasty folding-fan craft"
+    },
+    {
+      "artifact_name": "Purple Gold Red Gourd",
+      "english_name": "Purple Gold Red Gourd",
+      "owner": "Taishang Laojun",
+      "raw_material_description": "Purple gold · an alchemy-room vessel",
+      "material_classification": "purple-copper alloy · copper-gold alloy",
+      "modern_equivalent": "red copper + gold alloy (similar to cloisonné base)",
+      "chemical_composition_guess": "Cu-Au-Ag (copper-gold-silver alloy, 5% gold)",
+      "physical_properties": {
+        "hardness": "Mohs 3 · fairly soft",
+        "density": "9.0 g/cm³ · heavier than ordinary copper",
+        "magnetic": "none",
+        "conductivity": "good conductor"
+      },
+      "crafting_process": [
+        "Material selection: purple copper + gold",
+        "Smelting: alloying",
+        "Forging: gourd shape",
+        "Inner-wall treatment: anti-corrosion coating",
+        "Ritual refinement: grant the 'sucking people in' ability"
+      ],
+      "function_principle": "Alloy vessel · special inner-wall coating (suction mechanism unclear)",
+      "estimated_value": "rare treasure · alchemy-room exclusive",
+      "archaeological_parallel": "Ming Dynasty cloisonné copper body + Warring States bronze hu"
+    },
+    {
+      "artifact_name": "Nine-Toothed Rake",
+      "english_name": "Nine-Tooth Rake",
+      "owner": "Zhu Bajie",
+      "raw_material_description": "Divine ice iron · bestowed by the Heavenly Court",
+      "material_classification": "meteorite iron + ice-quenching",
+      "modern_equivalent": "nickel-iron meteorite + cryogenically treated steel",
+      "chemical_composition_guess": "Fe-Ni-C (iron-nickel-carbon alloy, ice-quenched)",
+      "physical_properties": {
+        "hardness": "Mohs 8 · harder than ordinary steel",
+        "density": "7.9 g/cm³",
+        "magnetic": "strongly magnetic",
+        "conductivity": "good conductor"
+      },
+      "crafting_process": [
+        "Material selection: divine ice iron (meteorite iron)",
+        "Smelting: remove impurities",
+        "Forging: nine-toothed rake shape",
+        "Ice-quenching: quench in ice water to raise hardness",
+        "Tempering: low-temperature temper",
+        "Decoration: gold-ring ornament"
+      ],
+      "function_principle": "Meteorite iron ice-quenched · extremely hard · nine teeth disperse impact",
+      "estimated_value": "bestowed by the Heavenly Court · priceless",
+      "archaeological_parallel": "Warring States ice-quenched swords + Ming Dynasty farm-tool improvements"
+    },
+    {
+      "artifact_name": "Demon-Suppressing Staff",
+      "english_name": "Demon-Suppressing Staff",
+      "owner": "Sha Wujing",
+      "raw_material_description": "Saluo immortal wood · Moon Palace osmanthus",
+      "material_classification": "hardwood + metal composite",
+      "modern_equivalent": "ebony + steel-core composite",
+      "chemical_composition_guess": "C-H-O (wood) + Fe (metal core)",
+      "physical_properties": {
+        "hardness": "Mohs 5 · hardwood grade",
+        "density": "1.2 g/cm³ · lighter than metal",
+        "magnetic": "none",
+        "conductivity": "insulating"
+      },
+      "crafting_process": [
+        "Material selection: Saluo immortal wood (Moon Palace osmanthus)",
+        "Drying: air-dry naturally",
+        "Carving: staff form",
+        "Metal core: embed a steel core",
+        "Decoration: gold-thread wrapping"
+      ],
+      "function_principle": "Hardwood + metal core · light yet tough",
+      "estimated_value": "rare Moon Palace wood · rare treasure",
+      "archaeological_parallel": "Ming Dynasty monk staffs + Warring States wood-core bronze vessels"
+    },
+    {
+      "artifact_name": "Golden Hoop Mantra",
+      "english_name": "Golden Hoop Mantra",
+      "owner": "Tathāgata Buddha",
+      "raw_material_description": "Gold · set with bright pearls",
+      "material_classification": "gold + gemstone",
+      "modern_equivalent": "24K gold + ruby / agate",
+      "chemical_composition_guess": "Au (gold) + Al2O3 (corundum · ruby)",
+      "physical_properties": {
+        "hardness": "Mohs 2.5 (gold) · 9 (ruby)",
+        "density": "19.3 g/cm³ (gold)",
+        "magnetic": "none",
+        "conductivity": "good conductor"
+      },
+      "crafting_process": [
+        "Material selection: pure gold + ruby",
+        "Casting: hoop form",
+        "Gem-setting: inlay bright pearls",
+        "Inscription: engrave Sanskrit mantra",
+        "Ritual refinement: Buddhist consecration granting mantra power"
+      ],
+      "function_principle": "Gold + mantra · when chanted the hoop contracts, causing physical pain",
+      "estimated_value": "Buddhist artifact · priceless",
+      "archaeological_parallel": "Ming Dynasty gold hoops + Buddhist ritual implements"
+    },
+    {
+      "artifact_name": "Yin-Yang Bottle",
+      "english_name": "Yin-Yang Bottle",
+      "owner": "Golden-Winged Great Peng (in fact a Spirit Mountain artifact)",
+      "raw_material_description": "Yin-Yang dual energy · a Spirit Mountain artifact",
+      "material_classification": "ceramic + mysterious gas",
+      "modern_equivalent": "Jun-kiln ceramic + inert gas",
+      "chemical_composition_guess": "SiO2-Al2O3 (ceramic) + unknown gas",
+      "physical_properties": {
+        "hardness": "Mohs 6 · ceramic grade",
+        "density": "2.5 g/cm³",
+        "magnetic": "none",
+        "conductivity": "insulating"
+      },
+      "crafting_process": [
+        "Material selection: Spirit Mountain clay",
+        "Forming: bottle shape",
+        "Firing: high-temperature kiln firing",
+        "Gas-sealing: seal in Yin-Yang dual energy",
+        "Ritual refinement: grant the 'trapping people' ability"
+      ],
+      "function_principle": "Ceramic bottle + mysterious gas · sealed special gas (speculated to resemble carbon monoxide, causing drowsiness)",
+      "estimated_value": "Spirit Mountain artifact · priceless",
+      "archaeological_parallel": "Song Dynasty Jun kiln + Warring States ceramic bottles"
+    }
+  ],
+  "material_classification_stats": {
+    "total_artifacts": 8,
+    "metallic_artifacts": 5,
+    "composite_artifacts": 3,
+    "avg_hardness": 6.6,
+    "avg_density": 7,
+    "hardest_artifact": "Diamond Snare (9.5)",
+    "softest_artifact": "Golden Hoop Mantra (2.5 · gold)",
+    "densest_artifact": "Golden Hoop Mantra (19.3 · gold)",
+    "lightest_artifact": "Demon-Suppressing Staff (1.2 · wood)"
+  },
+  "material_insights": [
+    "Of the 8 artifacts, 5 are metal and 3 are composite, reflecting Ming Dynasty craft levels.",
+    "Meteorite iron / divine iron is the common 'mythical material,' corresponding to the Shang Dynasty tradition of using meteorite iron.",
+    "The Diamond Snare's 'fine steel' corresponds to Ming Dynasty hundred-refined steel; its hardness approaches diamond.",
+    "The Palm-Leaf Fan's 'Great Yin leaf' is the only plant-based composite, corresponding to Han Dynasty lacquerware.",
+    "The Golden Hoop Mantra is the only precious-metal artifact, reflecting Buddhism's tradition of valuing gold.",
+    "The material diversity reflects the Ming Dynasty's multifaceted craft: steel + ceramics + wood + precious metals + composites."
+  ]
+}

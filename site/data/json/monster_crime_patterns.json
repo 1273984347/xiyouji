@@ -1,0 +1,138 @@
+{
+  "concept_name": "妖怪作案模式分类学",
+  "english_name": "Monster Crime Pattern Taxonomy",
+  "definition": "西游妖怪 81 难中暴露 5 类作案手法·从'变化诈骗'到'团队围剿'·手法等级与法宝等级呈正相关",
+  "crime_types": [
+    {
+      "type": "变化诈骗",
+      "english_name": "Transformation Fraud",
+      "count": 18,
+      "representative_cases": [
+        "白骨精三变（村姑/老妇/老翁）骗取唐僧信任",
+        "金角银角变化老道·假扮僧人混入寺院",
+        "黄袍怪变俊俏郎君·骗宝象国公主",
+        "六耳猕猴变化孙悟空·篡夺取经团队",
+        "银角大王变化老道·骗悟空背山"
+      ],
+      "target_pattern": "唐僧肉眼凡胎的信任·取经团队内部的认知盲区",
+      "success_rate": 0.6,
+      "detection_difficulty": 8,
+      "typical_chapters": [
+        "第 27 回",
+        "第 32-35 回",
+        "第 57-58 回"
+      ],
+      "key_insight": "变化类妖怪是'信息差型'犯罪·靠伪装和信息不对称获利"
+    },
+    {
+      "type": "武力劫掠",
+      "english_name": "Forceful Plunder",
+      "count": 25,
+      "representative_cases": [
+        "黑熊精偷盗袈裟·趁火打劫",
+        "黄风怪强掳唐僧入洞",
+        "灵感大王通天河冻结抓人",
+        "黄袍怪直接抢婚·武力胁迫",
+        "九头虫盗佛宝舍利子"
+      ],
+      "target_pattern": "唐僧肉/法宝/财物·以力量压制为目标",
+      "success_rate": 0.4,
+      "detection_difficulty": 3,
+      "typical_chapters": [
+        "第 17 回",
+        "第 21 回",
+        "第 47-49 回",
+        "第 62-63 回"
+      ],
+      "key_insight": "武力型妖怪是'肌肉型'犯罪·容易识别但难以力敌"
+    },
+    {
+      "type": "色诱",
+      "english_name": "Seduction",
+      "count": 8,
+      "representative_cases": [
+        "蝎子精琵琶洞逼婚·欲破唐僧元阳",
+        "蜘蛛精七姐妹濯垢泉色诱",
+        "老鼠精无底洞逼婚",
+        "玉兔精天竺国假公主招亲",
+        "杏仙荆棘岭诗文相诱"
+      ],
+      "target_pattern": "唐僧元阳·破取经人童子之身以获长生",
+      "success_rate": 0.1,
+      "detection_difficulty": 6,
+      "typical_chapters": [
+        "第 55 回",
+        "第 72-73 回",
+        "第 80-83 回",
+        "第 95 回"
+      ],
+      "key_insight": "色诱型妖怪是'软实力型'犯罪·成功率低但唐僧多次濒临破戒"
+    },
+    {
+      "type": "法术威胁",
+      "english_name": "Magic Threat",
+      "count": 12,
+      "representative_cases": [
+        "红孩儿三昧真火·差点烧死悟空",
+        "青牛精金刚琢收尽兵器",
+        "大鹏雕阴阳二气瓶·装入化浆",
+        "黄眉怪金铙人种袋",
+        "百眼魔君千眼金光·困住悟空"
+      ],
+      "target_pattern": "靠专属法术/法宝压制取经团队·迫使求助外援",
+      "success_rate": 0.5,
+      "detection_difficulty": 9,
+      "typical_chapters": [
+        "第 40-42 回",
+        "第 50-52 回",
+        "第 73 回",
+        "第 65-66 回"
+      ],
+      "key_insight": "法术型妖怪是'技术壁垒型'犯罪·必须找原主或克制法宝才能破解"
+    },
+    {
+      "type": "团队围剿",
+      "english_name": "Team Siege",
+      "count": 6,
+      "representative_cases": [
+        "狮驼岭三魔（青狮/白象/大鹏）协同作战",
+        "车迟国三妖（虎力/鹿力/羊力）斗法",
+        "碧波潭九头驸马+万圣龙王家族",
+        "荆棘岭十八公+杏仙等树精群",
+        "盘丝洞七蜘蛛精协同"
+      ],
+      "target_pattern": "多妖配合·分工明确·攻防有度",
+      "success_rate": 0.3,
+      "detection_difficulty": 7,
+      "typical_chapters": [
+        "第 44-46 回",
+        "第 74-77 回",
+        "第 62-63 回",
+        "第 64 回"
+      ],
+      "key_insight": "团队型妖怪是'组织型'犯罪·单兵弱但协同强·需逐一击破"
+    }
+  ],
+  "pattern_stats": {
+    "total_cases": 69,
+    "by_type": {
+      "变化诈骗": 18,
+      "武力劫掠": 25,
+      "色诱": 8,
+      "法术威胁": 12,
+      "团队围剿": 6
+    },
+    "avg_success_rate": 0.38,
+    "highest_difficulty": "法术威胁（9/10）",
+    "most_common": "武力劫掠（25 起·占 36%）",
+    "most_dangerous": "法术威胁（成功率 50% + 难度 9）"
+  },
+  "pattern_insights": [
+    "5 类作案手法对应 5 种妖怪策略·从'技术型'到'体力型'呈梯度分布",
+    "变化诈骗侦破难度高·但被悟空火眼金睛专克",
+    "武力劫掠最常见但成功率最低·属于'低技术高数量'犯罪",
+    "色诱类专攻唐僧元阳·成功率仅 10%·但心理威胁最大",
+    "法术威胁成功率最高·揭示西游'技术壁垒即生存壁垒'的本质",
+    "团队围剿代表妖怪组织化·狮驼三魔是妖怪组织的最高级形态"
+  ]
+}

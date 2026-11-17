@@ -1,0 +1,112 @@
+[
+  {
+    "scenario": "Peaceful Coexistence Hypothesis",
+    "if": "If all demons with backing (mounts descended to the mortal realm + those tied to Vulture Peak) never descended",
+    "then": "The Eighty-One Tribulations would shrink to about 38",
+    "calculation": "16 mount-descension tribulations + several Vulture Peak-linked tribulations + 27 arranged by Tathāgata ≈ 43 tribulations removed",
+    "impact_on_journey": "The pilgrimage would shorten from 14 years to about 6, and the 'nine nines' of the Eighty-One Tribulations could not hold",
+    "impact_on_doctrine": "Tathāgata's declaration, 'in my Western Continent there is neither greed nor killing,' would waver · Vulture Peak would admit to its own 'family business'",
+    "conclusion": "Tathāgata must 'arrange' obstacles to fulfill the 'nine-nines number' · demons with backing are the pilgrimage's 'necessary accompaniment'",
+    "counterfactual_validity": "high",
+    "category": "Structural Hypothesis"
+  },
+  {
+    "scenario": "Transparent Oversight Hypothesis",
+    "if": "If the covert guardians (the Six Ding and Six Jia, the Five-Direction Guardians, the Day-Value Merit Officer, and the Day- and Night-Traveling Deities) turned their secret protection overt and live-streamed the whole journey",
+    "then": "Demons would not dare attack · the pilgrimage would be nearly effortless",
+    "calculation": "Secret trial vs. public performance · the nature of the trial would be fundamentally different",
+    "impact_on_journey": "All Eighty-One Tribulations would dissolve · no demon would dare challenge Heaven's overt guard",
+    "impact_on_doctrine": "The trials would lose meaning · spiritual cultivation could not hold · the Buddhist 'trial' is essentially 'invisible, covert supervision'",
+    "conclusion": "Secret trials are a necessary condition for spiritual cultivation · making them transparent renders them void",
+    "counterfactual_validity": "medium",
+    "category": "Oversight Hypothesis"
+  },
+  {
+    "scenario": "The Yin-Yang Two-Energy Vase · The Ultimate Experiment",
+    "if": "If the Yin-Yang Two-Energy Vase held a peak-power Sun Wukong plus Erlang Shen",
+    "then": "About one shichen and three quarters to dissolve into pulp (per the original text) · Erlang Shen might dissolve faster",
+    "calculation": "A peak-power Wukong drills through with his three life-saving hairs · without them he would dissolve into pulp in one shichen and three quarters · Erlang Shen has his third eye but no such hairs · about one shichen to dissolve",
+    "impact_on_journey": "If the Great Peng had captured Wukong with the vase at Lion-Camel Ridge, the pilgrimage party would need outside rescue · Tathāgata would have to descend in person",
+    "impact_on_doctrine": "A top-tier treasure can one-shot even top immortals and Buddhas · but it requires a 'causality' trigger condition",
+    "conclusion": "The Yin-Yang Two-Energy Vase is a cosmic-grade rule weapon · it can only be broken when its owner (the Great Peng / Tathāgata) descends in person",
+    "counterfactual_validity": "high",
+    "category": "Weapon Experiment"
+  },
+  {
+    "scenario": "Replacing Wukong Hypothesis",
+    "if": "If Wukong were replaced by Erlang Shen",
+    "then": "The pilgrimage would get easier · but the meaning of spiritual cultivation would change",
+    "calculation": "Erlang Shen's third eye sees through illusions · his martial power equals Wukong's · but he lacks the Seventy-Two Transformations' flexibility, wears no Tight Fillet, and is not bound by Tang Sanzang",
+    "impact_on_journey": "Thrice-Beating the White-Bone Demon would not happen (Erlang Shen would see through and kill her outright · Tang Sanzang could not restrain him) · the True and False Monkey King episode would not happen",
+    "impact_on_doctrine": "The monkey-mind would be uncontrollable · with no Tight-Fillet Spell to bind him · Buddhism lacks control over a 'heavenly general' · a new control mechanism would be needed",
+    "conclusion": "Wukong's 'demon-immortal' identity plus the Tight-Fillet Spell is the key to the cybernetic model · changing the executor means rebuilding the control system",
+    "counterfactual_validity": "high",
+    "category": "Replacement Hypothesis"
+  },
+  {
+    "scenario": "Replacing Wukong · Nezha",
+    "if": "If Wukong were replaced by Nezha",
+    "then": "Nezha is more directly controlled by the Heavenly Court · the pilgrimage's independence would decline",
+    "calculation": "Nezha's lotus incarnation is immune to demonic influence · but his lotus body wears no Tight Fillet and holds no awe for Tang Sanzang",
+    "impact_on_journey": "Demon-subduing efficiency would rise · but Tang Sanzang could not restrain Nezha · conflicts would intensify",
+    "impact_on_doctrine": "Heaven would intervene too deeply · losing the quality of 'the pilgrimage as a folk spiritual practice'",
+    "conclusion": "Nezha is too 'Heavenly-Court-ified' · unfit to serve as the pilgrimage's actuator",
+    "counterfactual_validity": "medium",
+    "category": "Replacement Hypothesis"
+  },
+  {
+    "scenario": "No Tight-Fillet Spell Hypothesis",
+    "if": "If Tang Sanzang stopped chanting the Tight-Fillet Spell · or if the spell failed",
+    "then": "Wukong would be uncontrolled · he might beat Tang Sanzang to death or abandon the party",
+    "calculation": "In the original text Wukong is expelled three times as Tang Sanzang chants the spell · each time through the spell's negative-feedback suppression · without it Wukong would act freely",
+    "impact_on_journey": "The pilgrimage party would lose its actuator · Tang Sanzang would be beaten to death or abandoned · the pilgrimage would fail",
+    "impact_on_doctrine": "The Tight-Fillet Spell is the 'negative-feedback suppression signal' in the cybernetic model · it is indispensable",
+    "conclusion": "The Tight-Fillet Spell is the core stabilizer of the pilgrimage's automatic control system",
+    "counterfactual_validity": "high",
+    "category": "Cybernetics Hypothesis"
+  },
+  {
+    "scenario": "No White-Bone Demon Hypothesis",
+    "if": "If the White-Bone Demon (a wild demon with no backing) never descended",
+    "then": "Thrice-Beating the White-Bone Demon would not happen · Wukong would not be expelled · but later trials would shift",
+    "calculation": "Thrice-Beating the White-Bone Demon is the key 'actuator deviation from setpoint' event · Wukong is expelled for excessive killing intent · this event drives the team's spiritual upgrade",
+    "impact_on_journey": "The pilgrimage party loses one spiritual trial · the later Yellow-Robed Demon and True and False Monkey King episodes might not occur",
+    "impact_on_doctrine": "The key turning point of 'the monkey-mind returning to the right path' would be lost · spiritual cultivation would be incomplete",
+    "conclusion": "The White-Bone Demon episode is the occasion for the 'actuator's self-correction' · it is indispensable",
+    "counterfactual_validity": "high",
+    "category": "Plot Hypothesis"
+  },
+  {
+    "scenario": "Tathāgata Does Not Arrange Hypothesis",
+    "if": "If Tathāgata did not proactively arrange the 27 tribulations (Golden Horn and Silver Horn / Red Boy / the Heaven-Reaching River, etc.)",
+    "then": "The Eighty-One Tribulations would shrink to 54 · the pilgrimage would take half as long",
+    "calculation": "Most of the 27 tribulations Tathāgata arranges involve demons 'with backing' · these are the pilgrimage's 'obligatory waypoints'",
+    "impact_on_journey": "The pilgrimage would become fragmented · without the complete 'nine nines' number · losing the solemnity of the Buddhist system's design",
+    "impact_on_doctrine": "Tathāgata's 'arrangement' is the pilgrimage's core design · without it the pilgrimage cannot be completed",
+    "conclusion": "Tathāgata is the pilgrimage's chief architect · without arrangement there is no pilgrimage",
+    "counterfactual_validity": "high",
+    "category": "Structural Hypothesis"
+  },
+  {
+    "scenario": "Bull Demon King Submits Hypothesis",
+    "if": "If the Bull Demon King willingly submitted to Buddhism (and mended his old friendship with Wukong)",
+    "then": "The three tribulations at Flaming Mountain / Palm-Leaf Cave / Accumulated-Thunder Mountain would dissolve · about 5 tribulations removed",
+    "calculation": "The Bull Demon King's family of three (Princess Iron Fan / Red Boy / the Immortal Ruyi) is the core of the Flaming Mountain arc · if the Bull King submits, the whole family follows",
+    "impact_on_journey": "The Flaming Mountain arc would be simplified · losing the classic narrative of 'Borrowing the Palm-Leaf Fan Three Times'",
+    "impact_on_doctrine": "The Bull Demon King represents 'an old friend among the demon kings' · his submission requires both 'force' and 'moral persuasion' · it cannot be simplified",
+    "conclusion": "The Bull Demon King arc is an 'old-friend trial' · it cannot be omitted",
+    "counterfactual_validity": "medium",
+    "category": "Plot Hypothesis"
+  },
+  {
+    "scenario": "Golden-Winged Great Peng Does Not Descend Hypothesis",
+    "if": "If the Golden-Winged Great Peng (brother of the Buddha-Mother Peacock King) never descended",
+    "then": "The Lion-Camel Ridge arc would be simplified · losing the pilgrimage's greatest trial",
+    "calculation": "Lion-Camel Ridge is the hardest of the Eighty-One Tribulations · the Great Peng is the greatest demon king · if he did not descend, the Green Lion and White Elephant would have no master",
+    "impact_on_journey": "The Lion-Camel Ridge arc might not occur · or its difficulty would fall sharply",
+    "impact_on_doctrine": "The Great Peng is the supreme trial of the 'Buddhist family business' · Tathāgata descends in person to subdue him · it cannot be omitted",
+    "conclusion": "The Great Peng is the pilgrimage's 'ultimate trial' · the key node in Tathāgata's 'house-cleaning of the Buddhist order'",
+    "counterfactual_validity": "high",
+    "category": "Structural Hypothesis"
+  }
+]

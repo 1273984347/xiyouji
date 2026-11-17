@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-yc0wC/Pclw6OS5fshS2eM/NxYuIpmnKVjInSgJRqY3I=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-I68rXWSwaM+tgYMpIXUzgrhE6Sp61XFG3c9DJT/Lo+E=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Material Archaeology · Artifact Materials · Costume Evolution · Cave Architecture | Annotated Journey to the West · Annotated Journey to the West</title>
@@ -2689,127 +2689,684 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <script src="../static/js/d3.v7.min.js"></script>
     <script>
     // ==========================================================================
-    // Embedded fallback data (used when fetch fails; contents from ../data/json/*.json)
+    // Embedded fallback data (used when fetch fails; contents from ../en/json/*.json)
     // ==========================================================================
         const EMBEDDED_DATA = {
-        artifact_materials: {
-            "concept_name": "Artifact Material Science",
-            "english_name": "Artifact Material Science",
-            "definition": "Material science: by analyzing the chemical composition, physical properties, and inferred craftsmanship of materials, ancient craft techniques are reconstructed, reducing divine artifacts from myth to analyzable engineering materials.",
-            "core_case": "The Diamond Snare is 'refined fine steel' (alloy steel), the Golden-Banded Staff is 'divine iron' (meteorite iron?), and the Palm-Leaf Fan is 'Great Yin leaf' (organic composite?). These materials correspond to real Ming Dynasty craft techniques.",
-            "artifact_material_reports": [
-                { "artifact_name": "Diamond Snare", "english_name": "Diamond Snare", "owner": "Taishang Laojun", "raw_material_description": "Fine steel, forged and refined", "material_classification": "alloy steel · high-carbon steel", "modern_equivalent": "tungsten steel / high-speed steel (high hardness, wear- and corrosion-resistant)", "chemical_composition_guess": "Fe-C-W-Cr (iron-carbon-tungsten-chromium alloy)", "physical_properties": { "hardness": "Mohs 9.5 · near-diamond", "density": "7.85 g/cm³ · higher than ordinary steel", "magnetic": "weakly magnetic", "conductivity": "good electrical and thermal conductor" }, "crafting_process": ["Ore selection: collect iron, tungsten, and chromium ore", "Steelmaking: blast-furnace smelting to remove impurities", "Alloying: add tungsten and chromium to raise hardness", "Forging: repeatedly hammer to densify", "Quenching: oil- or water-quench to raise hardness", "Tempering: low-temperature temper to reduce brittleness", "Polishing: achieve a mirror finish"], "function_principle": "Extremely hard; can collect any metal weapon (on metal impact the Diamond Snare does not deform while the weapon does)", "estimated_value": "priceless · peak of Ming Dynasty craft", "archaeological_parallel": "Han Dynasty hundred-refined steel + Tang Dynasty bintie steel · Ming Dynasty cloisonné technique" },
-                { "artifact_name": "Golden-Banded Staff", "english_name": "Golden Cudgel", "owner": "Sun Wukong (originally kept by the East Sea Dragon King)", "raw_material_description": "Divine iron · the Sea-Calming Needle", "material_classification": "meteorite iron (iron-nickel alloy)", "modern_equivalent": "nickel-iron meteorite (5-30% nickel)", "chemical_composition_guess": "Fe-Ni (iron-nickel alloy, 8% nickel)", "physical_properties": { "hardness": "Mohs 7.5 · harder than ordinary iron", "density": "8.0 g/cm³ · higher than ordinary iron", "magnetic": "strongly magnetic", "conductivity": "good conductor" }, "crafting_process": ["Meteorite fall: obtained during Yu the Great's flood control", "Smelting: remove silicate impurities", "Forging: shape into the Sea-Calming Needle", "Inscription: 'As-You-Will Golden-Banded Staff, weighing 13,500 catties'", "Ritual refinement: Daoist consecration to enhance spirituality"], "function_principle": "Meteorite iron contains nickel and resists corrosion; it can grow or shrink (Daoist consecration grants shape-shifting)", "estimated_value": "Sea-Calming Needle · priceless", "archaeological_parallel": "Shang Dynasty bronze yue with iron blade (made of meteorite iron) · Ming Dynasty iron-smelting" },
-                { "artifact_name": "Palm-Leaf Fan", "english_name": "Banana Leaf Fan", "owner": "Princess Iron Fan", "raw_material_description": "Great Yin leaf · leftover from Nüwa mending the sky", "material_classification": "organic composite · plant fiber + mineral", "modern_equivalent": "carbon-fiber + mineral-coating composite", "chemical_composition_guess": "C-Si-O-K (carbon-silicon-oxygen-potassium composite)", "physical_properties": { "hardness": "variable · soft at rest, hard as steel when activated", "density": "1.5 g/cm³ · lighter than steel", "magnetic": "none", "conductivity": "insulating" }, "crafting_process": ["Collection: Great Yin essence (lunar minerals)", "Extraction: plant fiber (palm leaf)", "Compositing: combine fiber and minerals", "Ritual refinement: Daoist consecration granting wind control", "Decoration: carved fan ribs and inscribed fan face"], "function_principle": "Composite material · flexibility plus mineral activation · can fan up an eight-hundred-li wind", "estimated_value": "rare treasure · wind-control power is priceless", "archaeological_parallel": "Han Dynasty lacquerware (lacquer + hemp composite) · Ming Dynasty folding-fan craft" },
-                { "artifact_name": "Purple Gold Red Gourd", "english_name": "Purple Gold Red Gourd", "owner": "Taishang Laojun", "raw_material_description": "Purple gold · an alchemy-room vessel", "material_classification": "purple-copper alloy · copper-gold alloy", "modern_equivalent": "red copper + gold alloy (similar to cloisonné base)", "chemical_composition_guess": "Cu-Au-Ag (copper-gold-silver alloy, 5% gold)", "physical_properties": { "hardness": "Mohs 3 · fairly soft", "density": "9.0 g/cm³ · heavier than ordinary copper", "magnetic": "none", "conductivity": "good conductor" }, "crafting_process": ["Material selection: purple copper + gold", "Smelting: alloying", "Forging: gourd shape", "Inner-wall treatment: anti-corrosion coating", "Ritual refinement: grant the 'sucking people in' ability"], "function_principle": "Alloy vessel · special inner-wall coating (suction mechanism unclear)", "estimated_value": "rare treasure · alchemy-room exclusive", "archaeological_parallel": "Ming Dynasty cloisonné copper body + Warring States bronze hu" },
-                { "artifact_name": "Nine-Toothed Rake", "english_name": "Nine-Tooth Rake", "owner": "Zhu Bajie", "raw_material_description": "Divine ice iron · bestowed by the Heavenly Court", "material_classification": "meteorite iron + ice-quenching", "modern_equivalent": "nickel-iron meteorite + cryogenically treated steel", "chemical_composition_guess": "Fe-Ni-C (iron-nickel-carbon alloy, ice-quenched)", "physical_properties": { "hardness": "Mohs 8 · harder than ordinary steel", "density": "7.9 g/cm³", "magnetic": "strongly magnetic", "conductivity": "good conductor" }, "crafting_process": ["Material selection: divine ice iron (meteorite iron)", "Smelting: remove impurities", "Forging: nine-toothed rake shape", "Ice-quenching: quench in ice water to raise hardness", "Tempering: low-temperature temper", "Decoration: gold-ring ornament"], "function_principle": "Meteorite iron ice-quenched · extremely hard · nine teeth disperse impact", "estimated_value": "bestowed by the Heavenly Court · priceless", "archaeological_parallel": "Warring States ice-quenched swords + Ming Dynasty farm-tool improvements" },
-                { "artifact_name": "Demon-Suppressing Staff", "english_name": "Demon-Suppressing Staff", "owner": "Sha Wujing", "raw_material_description": "Saluo immortal wood · Moon Palace osmanthus", "material_classification": "hardwood + metal composite", "modern_equivalent": "ebony + steel-core composite", "chemical_composition_guess": "C-H-O (wood) + Fe (metal core)", "physical_properties": { "hardness": "Mohs 5 · hardwood grade", "density": "1.2 g/cm³ · lighter than metal", "magnetic": "none", "conductivity": "insulating" }, "crafting_process": ["Material selection: Saluo immortal wood (Moon Palace osmanthus)", "Drying: air-dry naturally", "Carving: staff form", "Metal core: embed a steel core", "Decoration: gold-thread wrapping"], "function_principle": "Hardwood + metal core · light yet tough", "estimated_value": "rare Moon Palace wood · rare treasure", "archaeological_parallel": "Ming Dynasty monk staffs + Warring States wood-core bronze vessels" },
-                { "artifact_name": "Golden Hoop Mantra", "english_name": "Golden Hoop Mantra", "owner": "Tathāgata Buddha", "raw_material_description": "Gold · set with bright pearls", "material_classification": "gold + gemstone", "modern_equivalent": "24K gold + ruby / agate", "chemical_composition_guess": "Au (gold) + Al2O3 (corundum · ruby)", "physical_properties": { "hardness": "Mohs 2.5 (gold) · 9 (ruby)", "density": "19.3 g/cm³ (gold)", "magnetic": "none", "conductivity": "good conductor" }, "crafting_process": ["Material selection: pure gold + ruby", "Casting: hoop form", "Gem-setting: inlay bright pearls", "Inscription: engrave Sanskrit mantra", "Ritual refinement: Buddhist consecration granting mantra power"], "function_principle": "Gold + mantra · when chanted the hoop contracts, causing physical pain", "estimated_value": "Buddhist artifact · priceless", "archaeological_parallel": "Ming Dynasty gold hoops + Buddhist ritual implements" },
-                { "artifact_name": "Yin-Yang Bottle", "english_name": "Yin-Yang Bottle", "owner": "Golden-Winged Great Peng (in fact a Spirit Mountain artifact)", "raw_material_description": "Yin-Yang dual energy · a Spirit Mountain artifact", "material_classification": "ceramic + mysterious gas", "modern_equivalent": "Jun-kiln ceramic + inert gas", "chemical_composition_guess": "SiO2-Al2O3 (ceramic) + unknown gas", "physical_properties": { "hardness": "Mohs 6 · ceramic grade", "density": "2.5 g/cm³", "magnetic": "none", "conductivity": "insulating" }, "crafting_process": ["Material selection: Spirit Mountain clay", "Forming: bottle shape", "Firing: high-temperature kiln firing", "Gas-sealing: seal in Yin-Yang dual energy", "Ritual refinement: grant the 'trapping people' ability"], "function_principle": "Ceramic bottle + mysterious gas · sealed special gas (speculated to resemble carbon monoxide, causing drowsiness)", "estimated_value": "Spirit Mountain artifact · priceless", "archaeological_parallel": "Song Dynasty Jun kiln + Warring States ceramic bottles" }
-            ],
-            "material_classification_stats": { "total_artifacts": 8, "metallic_artifacts": 5, "composite_artifacts": 3, "avg_hardness": 6.6, "avg_density": 7.0, "hardest_artifact": "Diamond Snare (9.5)", "softest_artifact": "Golden Hoop Mantra (2.5 · gold)", "densest_artifact": "Golden Hoop Mantra (19.3 · gold)", "lightest_artifact": "Demon-Suppressing Staff (1.2 · wood)" },
-            "material_insights": [
-                "Of the 8 artifacts, 5 are metal and 3 are composite, reflecting Ming Dynasty craft levels.",
-                "Meteorite iron / divine iron is the common 'mythical material,' corresponding to the Shang Dynasty tradition of using meteorite iron.",
-                "The Diamond Snare's 'fine steel' corresponds to Ming Dynasty hundred-refined steel; its hardness approaches diamond.",
-                "The Palm-Leaf Fan's 'Great Yin leaf' is the only plant-based composite, corresponding to Han Dynasty lacquerware.",
-                "The Golden Hoop Mantra is the only precious-metal artifact, reflecting Buddhism's tradition of valuing gold.",
-                "The material diversity reflects the Ming Dynasty's multifaceted craft: steel + ceramics + wood + precious metals + composites."
-            ]
+  "artifact_materials": {
+    "concept_name": "Artifact Material Science",
+    "english_name": "Artifact Material Science",
+    "definition": "Material science: by analyzing the chemical composition, physical properties, and inferred craftsmanship of materials, ancient craft techniques are reconstructed, reducing divine artifacts from myth to analyzable engineering materials.",
+    "core_case": "The Diamond Snare is 'refined fine steel' (alloy steel), the Golden-Banded Staff is 'divine iron' (meteorite iron?), and the Palm-Leaf Fan is 'Great Yin leaf' (organic composite?). These materials correspond to real Ming Dynasty craft techniques.",
+    "artifact_material_reports": [
+      {
+        "artifact_name": "Diamond Snare",
+        "english_name": "Diamond Snare",
+        "owner": "Taishang Laojun",
+        "raw_material_description": "Fine steel, forged and refined",
+        "material_classification": "alloy steel · high-carbon steel",
+        "modern_equivalent": "tungsten steel / high-speed steel (high hardness, wear- and corrosion-resistant)",
+        "chemical_composition_guess": "Fe-C-W-Cr (iron-carbon-tungsten-chromium alloy)",
+        "physical_properties": {
+          "hardness": "Mohs 9.5 · near-diamond",
+          "density": "7.85 g/cm³ · higher than ordinary steel",
+          "magnetic": "weakly magnetic",
+          "conductivity": "good electrical and thermal conductor"
         },
-        costume_archaeology: {
-            "concept_name": "Costume Archaeology",
-            "english_name": "Costume Archaeology",
-            "definition": "Costume archaeology: by analyzing the materials, forms, and patterns of clothing, ancient social hierarchy and cultural change are reconstructed.",
-            "core_case": "Wukong's progression from 'tiger-skin skirt' to 'monk's robe' to 'Buddha's robe' reflects not only his inner journey but also the Ming Dynasty dress system.",
-            "character_costumes": [
-                { "character": "Sun Wukong", "costume_evolution": [
-                    { "stage": "Stone Monkey period", "costume": "Nude · fur", "material": "native monkey fur", "function": "warmth · camouflage", "social_status": "None · wild beast", "ming_dynasty_parallel": "None · primitive state" },
-                    { "stage": "Handsome Monkey King period", "costume": "Tongbi gibbon's gift · yellow short jacket", "material": "coarse cloth", "function": "marking identity", "social_status": "King · Lord of Flower-Fruit Mountain", "ming_dynasty_parallel": "Commoner clothing · yellow was a lowly color" },
-                    { "stage": "Great Sage Equal to Heaven period", "costume": "Locked-gold armor + phoenix-wing purple-gold crown + lotus-thread cloud-walking boots", "material": "gold + silk", "function": "deterrence · status symbol", "social_status": "King · Great Sage Equal to Heaven", "ming_dynasty_parallel": "Vassal-king attire · gold armor as ceremonial guard" },
-                    { "stage": "Early pilgrimage", "costume": "Tiger-skin skirt + straight robe", "material": "tiger skin + coarse cloth", "function": "modesty · warmth", "social_status": "Disciple · Pilgrim", "ming_dynasty_parallel": "Wandering monk · patched-robe tradition" },
-                    { "stage": "Late pilgrimage", "costume": "Monk's robe · brocade kasaya", "material": "silk + gold thread", "function": "Buddhist identity", "social_status": "Eminent monk's disciple", "ming_dynasty_parallel": "Eminent monk's vestment · Ming kasaya" },
-                    { "stage": "Buddhahood", "costume": "Buddha's robe · gold-woven", "material": "gold thread + gemstones", "function": "symbol of Buddhahood", "social_status": "Buddha · Victorious Fighting Buddha", "ming_dynasty_parallel": "Imperial dragon robe · gold-woven garment" }
-                ], "evolution_pattern": "U-shaped curve: nude → coarse cloth → gold armor → tiger skin → monk's robe → Buddha's robe · peak → trough → pinnacle", "social_meaning": "From king to disciple to Buddha, the costume mirrors the rise and fall of status." },
-                { "character": "Tang Sanzang", "costume_evolution": [
-                    { "stage": "Origin period", "costume": "Infant · adrift", "material": "none", "function": "none", "social_status": "Abandoned infant", "ming_dynasty_parallel": "None" },
-                    { "stage": "Ordination period", "costume": "Coarse cloth monk's robe", "material": "coarse cloth", "function": "monastic identity", "social_status": "Monk · novice (śrāmaṇera)", "ming_dynasty_parallel": "Ming Dynasty ordinary monk's clothing" },
-                    { "stage": "Pilgrimage period", "costume": "Brocade kasaya + nine-ring staff", "material": "silk + gold thread + tin", "function": "imperial brother identity · Buddhist", "social_status": "Imperial brother · eminent monk", "ming_dynasty_parallel": "Ming Dynasty eminent monk's vestment · imperially bestowed kasaya" },
-                    { "stage": "Buddhahood", "costume": "Candana Merit Buddha's robe", "material": "gold thread + gemstones", "function": "symbol of Buddhahood", "social_status": "Buddha · Candana Merit Buddha", "ming_dynasty_parallel": "Imperial dragon robe" }
-                ], "evolution_pattern": "Rising curve: abandoned infant → monk → imperial brother → Buddha · costume ascends", "social_meaning": "From abandoned infant to Buddha, the costume mirrors a rise against the odds." },
-                { "character": "Zhu Bajie", "costume_evolution": [
-                    { "stage": "Marshal Tianpeng period", "costume": "Gold armor · marshal's uniform", "material": "gold + silk", "function": "marshal identity", "social_status": "Marshal · heavenly general", "ming_dynasty_parallel": "Ming Dynasty regional commander's uniform" },
-                    { "stage": "Demotion period", "costume": "Pig form · nude", "material": "pig bristle", "function": "none", "social_status": "Demon · pig spirit", "ming_dynasty_parallel": "None · beast form" },
-                    { "stage": "Gao Village period", "costume": "Coarse cloth short jacket", "material": "coarse cloth", "function": "modesty · labor", "social_status": "Live-in son-in-law · farmer", "ming_dynasty_parallel": "Ming Dynasty peasant clothing" },
-                    { "stage": "Pilgrimage period", "costume": "Monk's robe · black cloth", "material": "coarse cloth", "function": "monastic identity", "social_status": "Disciple · Pilgrim", "ming_dynasty_parallel": "Ming Dynasty itinerant monk's clothing" },
-                    { "stage": "Buddhahood", "costume": "Altar Cleanser's robe", "material": "gold thread", "function": "envoy identity", "social_status": "Envoy · Altar Cleanser", "ming_dynasty_parallel": "Ming Dynasty eunuch's clothing" }
-                ], "evolution_pattern": "Down-then-up curve: marshal → pig → son-in-law → monk → envoy · great fall and rise", "social_meaning": "From marshal to pig to envoy, the costume mirrors status upheaval." },
-                { "character": "Sha Wujing", "costume_evolution": [
-                    { "stage": "Curtain-Raising General period", "costume": "Gold armor · general's uniform", "material": "gold + silk", "function": "general identity", "social_status": "Great General · heavenly warrior", "ming_dynasty_parallel": "Ming Dynasty ceremonial-guard attire" },
-                    { "stage": "Flowing-Sand River period", "costume": "Monster garb · disheveled hair", "material": "none · beast form", "function": "none", "social_status": "Demon · Flowing-Sand River monster", "ming_dynasty_parallel": "None · wild man" },
-                    { "stage": "Pilgrimage period", "costume": "Monk's robe · gray cloth", "material": "coarse cloth", "function": "monastic identity · load-bearing", "social_status": "Disciple · load-bearer", "ming_dynasty_parallel": "Ming Dynasty porter's clothing" },
-                    { "stage": "Buddhahood", "costume": "Golden-Body Arhat's robe", "material": "gold thread", "function": "arhat identity", "social_status": "Arhat · Golden-Body Arhat", "ming_dynasty_parallel": "Ming Dynasty arhat statues" }
-                ], "evolution_pattern": "Down-then-up curve: general → demon → monk → arhat · upheaval", "social_meaning": "From general to demon to arhat, the costume mirrors status upheaval." }
-            ],
-            "costume_insights": [
-                "Wukong's costume evolution is the most complex, with 6 stages, reflecting the protagonist's inner journey.",
-                "All 4 protagonists' costume evolution follows the common pattern 'Heaven → mortal world → Buddhist fruit'.",
-                "Costume material strictly corresponds to status: gold = Buddha/king · coarse cloth = monk/commoner · nude = demon/beast.",
-                "Ming Dynasty dress system refracted: yellow was a lowly color (commoner) · gold-woven was noble (emperor) · kasaya marked monks.",
-                "At Buddhahood all 4 characters' costume materials unify into gold thread, reflecting the Buddhist ideal of 'equality of all beings'.",
-                "Costume evolution reflects Ming Dynasty social mobility: king ↔ disciple ↔ Buddha · status could convert."
-            ],
-            "ming_dynasty_parallel": {
-                "imperial_robess": "Imperial dragon robe: gold-woven + twelve emblem patterns (corresponds to Buddhahood)",
-                "monk_robes": "Eminent monk's vestment: brocade kasaya + nine-ring staff (corresponds to Tang Sanzang's pilgrimage)",
-                "military_uniforms": "General's armor: gold armor + war boots (corresponds to the Great Sage period)",
-                "commoner_clothing": "Commoner clothing: coarse cloth short jacket + patched robe (corresponds to early pilgrimage)",
-                "official_uniforms": "Official court robe: color-coded by rank (corresponds to the Altar Cleanser's robe)"
-            }
+        "crafting_process": [
+          "Ore selection: collect iron, tungsten, and chromium ore",
+          "Steelmaking: blast-furnace smelting to remove impurities",
+          "Alloying: add tungsten and chromium to raise hardness",
+          "Forging: repeatedly hammer to densify",
+          "Quenching: oil- or water-quench to raise hardness",
+          "Tempering: low-temperature temper to reduce brittleness",
+          "Polishing: achieve a mirror finish"
+        ],
+        "function_principle": "Extremely hard; can collect any metal weapon (on metal impact the Diamond Snare does not deform while the weapon does)",
+        "estimated_value": "priceless · peak of Ming Dynasty craft",
+        "archaeological_parallel": "Han Dynasty hundred-refined steel + Tang Dynasty bintie steel · Ming Dynasty cloisonné technique"
+      },
+      {
+        "artifact_name": "Golden-Banded Staff",
+        "english_name": "Golden Cudgel",
+        "owner": "Sun Wukong (originally kept by the East Sea Dragon King)",
+        "raw_material_description": "Divine iron · the Sea-Calming Needle",
+        "material_classification": "meteorite iron (iron-nickel alloy)",
+        "modern_equivalent": "nickel-iron meteorite (5-30% nickel)",
+        "chemical_composition_guess": "Fe-Ni (iron-nickel alloy, 8% nickel)",
+        "physical_properties": {
+          "hardness": "Mohs 7.5 · harder than ordinary iron",
+          "density": "8.0 g/cm³ · higher than ordinary iron",
+          "magnetic": "strongly magnetic",
+          "conductivity": "good conductor"
         },
-        cave_architecture: {
-            "concept_name": "Cave Architecture Typology",
-            "english_name": "Cave Architecture Typology",
-            "definition": "Architectural typology: classified by architectural form, spatial structure, and functional features to reveal cultural and historical context.",
-            "core_case": "Demon caves can be classified by architectural form into natural karst caves, cliff tombs, waterside villas, and underground labyrinths — fantasy projections of pre-Ming architectural remains.",
-            "architectural_types": [
-                { "type_name": "Natural Karst Cave", "english_name": "Natural Karst Cave Type", "features": ["Limestone dissolution", "Stalactites", "Underground river", "Natural ventilation"], "representative_caves": [
-                    { "cave_name": "Water Curtain Cave", "owner": "Sun Wukong", "location": "Flower-Fruit Mountain", "chapter": "Ch. 1", "spatial_structure": "waterfall + stone rooms + stone bed + stone stool inside", "function": "dwelling + refuge", "luxury_level": 8, "ecological_integration": "Extremely high · one with the mountain" },
-                    { "cave_name": "Black Wind Cave", "owner": "Black Bear Demon", "location": "Black Wind Mountain", "chapter": "Ch. 16-17", "spatial_structure": "Buddhist robe assembly · Buddhist rites inside", "function": "dwelling + Buddhist rites", "luxury_level": 6, "ecological_integration": "High" },
-                    { "cave_name": "Wave-Moon Cave", "owner": "Yellow Robe Demon", "location": "Bowl Mountain", "chapter": "Ch. 28-31", "spatial_structure": "palace inside · seized princess", "function": "dwelling + imprisonment", "luxury_level": 7, "ecological_integration": "Medium" }
-                ], "archaeological_parallel": "Guilin karst caves in Guangxi + Zhijin Cave in Guizhou", "architectural_significance": "The oldest dwelling form · reflects the Ming Dynasty 'cave worship' tradition" },
-                { "type_name": "Cliff Tomb", "english_name": "Cliff Tomb Type", "features": ["Cliff-carved", "Stone chamber", "Tomb structure", "Commanding height"], "representative_caves": [
-                    { "cave_name": "Spider Silk Cave", "owner": "Spider Demon", "location": "Spider Silk Ridge", "chapter": "Ch. 72-73", "spatial_structure": "deep pit + silk nets + hidden chambers inside", "function": "dwelling + trap", "luxury_level": 4, "ecological_integration": "Medium" },
-                    { "cave_name": "Lotus Cave", "owner": "Gold Horn King + Silver Horn King", "location": "Flat-Topped Mountain", "chapter": "Ch. 32-35", "spatial_structure": "cliff-carved + stone chamber + stone door", "function": "dwelling + treasure hoard", "luxury_level": 6, "ecological_integration": "High" }
-                ], "archaeological_parallel": "Leshan cliff tombs in Sichuan + Fujian tulou", "architectural_significance": "Cliff tombs are a Han Dynasty burial custom · reflect associations with 'heights' and the 'sacred'" },
-                { "type_name": "Waterside Villa", "english_name": "Waterside Villa Type", "features": ["Built by water", "Pavilions and towers", "Waterscape surroundings", "Lavish decoration"], "representative_caves": [
-                    { "cave_name": "Green Wave Pool", "owner": "Wansheng Dragon King", "location": "Rocky Mountain", "chapter": "Ch. 62-63", "spatial_structure": "dragon-palace style + waterscape + pavilions", "function": "dwelling + banqueting", "luxury_level": 10, "ecological_integration": "Extremely high · one with the waterscape" },
-                    { "cave_name": "Tongtian River Dragon Palace", "owner": "Goldfish Spirit", "location": "Tongtian River", "chapter": "Ch. 47-49", "spatial_structure": "underwater dragon palace + crystal palace", "function": "dwelling + sacrifice", "luxury_level": 8, "ecological_integration": "Extremely high · underwater" },
-                    { "cave_name": "Crystal Palace", "owner": "East Sea Dragon King", "location": "East Sea", "chapter": "Ch. 3", "spatial_structure": "seabed dragon palace + crystal architecture", "function": "dwelling + governance", "luxury_level": 10, "ecological_integration": "Extremely high · seabed" }
-                ], "archaeological_parallel": "Suzhou gardens + Jiangnan waterside villas", "architectural_significance": "Waterside villas reflect Ming Dynasty Jiangnan garden aesthetics · dragon palaces refract royal architecture" },
-                { "type_name": "Underground Labyrinth", "english_name": "Underground Labyrinth Type", "features": ["Deep underground excavation", "Multi-level structure", "Labyrinthine passages", "Hidden chambers and mechanisms"], "representative_caves": [
-                    { "cave_name": "Bottomless Cave", "owner": "Mouse Spirit", "location": "Sinkhole Mountain", "chapter": "Ch. 80-83", "spatial_structure": "endless excavation + multiple levels + labyrinth", "function": "dwelling + imprisonment + concealment", "luxury_level": 7, "ecological_integration": "Low · artificial" },
-                    { "cave_name": "Lion-Camel Cave", "owner": "Three Demon Kings", "location": "Lion-Camel Ridge", "chapter": "Ch. 74-77", "spatial_structure": "vast underground + bone decoration + multiple levels", "function": "dwelling + slaughter + corpse concealment", "luxury_level": 3, "ecological_integration": "Low · dreadful" },
-                    { "cave_name": "Nine-Curve Meandering Cave", "owner": "Nine-Spirited Primordial Sage", "location": "Bamboo-Knot Mountain", "chapter": "Ch. 89-90", "spatial_structure": "nine-curve labyrinth + stone chamber + secret passage", "function": "dwelling + defense", "luxury_level": 6, "ecological_integration": "Medium" }
-                ], "archaeological_parallel": "Qin Shi Huang's underground palace + Ming Dynasty cellars", "architectural_significance": "Underground labyrinths reflect imaginings of the 'underworld' · corresponding to imperial tombs" },
-                { "type_name": "Mountain Palace", "english_name": "Mountain Palace Type", "features": ["Carved into the mountain", "Palatial", "Carved beams and painted rafters", "Lavish decoration"], "representative_caves": [
-                    { "cave_name": "Fire-Cloud Cave", "owner": "Red Boy", "location": "Mount Hao", "chapter": "Ch. 40-42", "spatial_structure": "mountain palace + fire pool + stone chamber", "function": "dwelling + cultivation", "luxury_level": 7, "ecological_integration": "Medium · fire theme" },
-                    { "cave_name": "Little Western Heaven · Little Thunderclap Temple", "owner": "Yellow Brow Demon", "location": "Little Western Heaven", "chapter": "Ch. 65-66", "spatial_structure": "mountain temple + fake Buddha hall + the Human-Seed Bag", "function": "dwelling + fake Buddhist rites", "luxury_level": 9, "ecological_integration": "Low · fake sanctity" }
-                ], "archaeological_parallel": "Golden Hall on Mount Wudang + the Potala Palace", "architectural_significance": "Mountain palaces reflect Ming Dynasty mountain worship + fusion with royal architecture" }
-            ],
-            "architecture_insights": [
-                "The 5 major cave types cover the main Ming Dynasty architectural forms.",
-                "Natural karst caves are the most ancient, reflecting the Ming Dynasty's cave-worship tradition.",
-                "Cliff tombs derive from Han Dynasty burial customs, reflecting associations with the 'sacred heights'.",
-                "Waterside villas refract Jiangnan garden aesthetics; dragon palaces correspond to royal architecture.",
-                "Underground labyrinths correspond to imperial tombs, reflecting imaginings of the 'underworld'.",
-                "Mountain palaces fuse mountain worship with royal architecture and are the most luxurious.",
-                "Cave luxury correlates with demon background: grassroots demons live in karst caves, aristocrats in palaces."
-            ],
-            "architectural_classification_stats": { "total_caves": 14, "type_distribution": { "Natural Karst Cave": 3, "Cliff Tomb": 2, "Waterside Villa": 3, "Underground Labyrinth": 3, "Mountain Palace": 2 }, "avg_luxury": 6.6, "most_luxurious": "Green Wave Pool + Crystal Palace (10/10)", "least_luxurious": "Lion-Camel Cave (3/10)" }
+        "crafting_process": [
+          "Meteorite fall: obtained during Yu the Great's flood control",
+          "Smelting: remove silicate impurities",
+          "Forging: shape into the Sea-Calming Needle",
+          "Inscription: 'As-You-Will Golden-Banded Staff, weighing 13,500 catties'",
+          "Ritual refinement: Daoist consecration to enhance spirituality"
+        ],
+        "function_principle": "Meteorite iron contains nickel and resists corrosion; it can grow or shrink (Daoist consecration grants shape-shifting)",
+        "estimated_value": "Sea-Calming Needle · priceless",
+        "archaeological_parallel": "Shang Dynasty bronze yue with iron blade (made of meteorite iron) · Ming Dynasty iron-smelting"
+      },
+      {
+        "artifact_name": "Palm-Leaf Fan",
+        "english_name": "Banana Leaf Fan",
+        "owner": "Princess Iron Fan",
+        "raw_material_description": "Great Yin leaf · leftover from Nüwa mending the sky",
+        "material_classification": "organic composite · plant fiber + mineral",
+        "modern_equivalent": "carbon-fiber + mineral-coating composite",
+        "chemical_composition_guess": "C-Si-O-K (carbon-silicon-oxygen-potassium composite)",
+        "physical_properties": {
+          "hardness": "variable · soft at rest, hard as steel when activated",
+          "density": "1.5 g/cm³ · lighter than steel",
+          "magnetic": "none",
+          "conductivity": "insulating"
         },
-        summary: { "artifact_reports": 8, "metallic_artifacts": 5, "composite_artifacts": 3, "avg_hardness": 6.6, "character_costumes": 4, "total_costume_stages": 19, "architectural_types": 5, "total_caves_classified": 14, "avg_luxury": 6.6 }
-    };
+        "crafting_process": [
+          "Collection: Great Yin essence (lunar minerals)",
+          "Extraction: plant fiber (palm leaf)",
+          "Compositing: combine fiber and minerals",
+          "Ritual refinement: Daoist consecration granting wind control",
+          "Decoration: carved fan ribs and inscribed fan face"
+        ],
+        "function_principle": "Composite material · flexibility plus mineral activation · can fan up an eight-hundred-li wind",
+        "estimated_value": "rare treasure · wind-control power is priceless",
+        "archaeological_parallel": "Han Dynasty lacquerware (lacquer + hemp composite) · Ming Dynasty folding-fan craft"
+      },
+      {
+        "artifact_name": "Purple Gold Red Gourd",
+        "english_name": "Purple Gold Red Gourd",
+        "owner": "Taishang Laojun",
+        "raw_material_description": "Purple gold · an alchemy-room vessel",
+        "material_classification": "purple-copper alloy · copper-gold alloy",
+        "modern_equivalent": "red copper + gold alloy (similar to cloisonné base)",
+        "chemical_composition_guess": "Cu-Au-Ag (copper-gold-silver alloy, 5% gold)",
+        "physical_properties": {
+          "hardness": "Mohs 3 · fairly soft",
+          "density": "9.0 g/cm³ · heavier than ordinary copper",
+          "magnetic": "none",
+          "conductivity": "good conductor"
+        },
+        "crafting_process": [
+          "Material selection: purple copper + gold",
+          "Smelting: alloying",
+          "Forging: gourd shape",
+          "Inner-wall treatment: anti-corrosion coating",
+          "Ritual refinement: grant the 'sucking people in' ability"
+        ],
+        "function_principle": "Alloy vessel · special inner-wall coating (suction mechanism unclear)",
+        "estimated_value": "rare treasure · alchemy-room exclusive",
+        "archaeological_parallel": "Ming Dynasty cloisonné copper body + Warring States bronze hu"
+      },
+      {
+        "artifact_name": "Nine-Toothed Rake",
+        "english_name": "Nine-Tooth Rake",
+        "owner": "Zhu Bajie",
+        "raw_material_description": "Divine ice iron · bestowed by the Heavenly Court",
+        "material_classification": "meteorite iron + ice-quenching",
+        "modern_equivalent": "nickel-iron meteorite + cryogenically treated steel",
+        "chemical_composition_guess": "Fe-Ni-C (iron-nickel-carbon alloy, ice-quenched)",
+        "physical_properties": {
+          "hardness": "Mohs 8 · harder than ordinary steel",
+          "density": "7.9 g/cm³",
+          "magnetic": "strongly magnetic",
+          "conductivity": "good conductor"
+        },
+        "crafting_process": [
+          "Material selection: divine ice iron (meteorite iron)",
+          "Smelting: remove impurities",
+          "Forging: nine-toothed rake shape",
+          "Ice-quenching: quench in ice water to raise hardness",
+          "Tempering: low-temperature temper",
+          "Decoration: gold-ring ornament"
+        ],
+        "function_principle": "Meteorite iron ice-quenched · extremely hard · nine teeth disperse impact",
+        "estimated_value": "bestowed by the Heavenly Court · priceless",
+        "archaeological_parallel": "Warring States ice-quenched swords + Ming Dynasty farm-tool improvements"
+      },
+      {
+        "artifact_name": "Demon-Suppressing Staff",
+        "english_name": "Demon-Suppressing Staff",
+        "owner": "Sha Wujing",
+        "raw_material_description": "Saluo immortal wood · Moon Palace osmanthus",
+        "material_classification": "hardwood + metal composite",
+        "modern_equivalent": "ebony + steel-core composite",
+        "chemical_composition_guess": "C-H-O (wood) + Fe (metal core)",
+        "physical_properties": {
+          "hardness": "Mohs 5 · hardwood grade",
+          "density": "1.2 g/cm³ · lighter than metal",
+          "magnetic": "none",
+          "conductivity": "insulating"
+        },
+        "crafting_process": [
+          "Material selection: Saluo immortal wood (Moon Palace osmanthus)",
+          "Drying: air-dry naturally",
+          "Carving: staff form",
+          "Metal core: embed a steel core",
+          "Decoration: gold-thread wrapping"
+        ],
+        "function_principle": "Hardwood + metal core · light yet tough",
+        "estimated_value": "rare Moon Palace wood · rare treasure",
+        "archaeological_parallel": "Ming Dynasty monk staffs + Warring States wood-core bronze vessels"
+      },
+      {
+        "artifact_name": "Golden Hoop Mantra",
+        "english_name": "Golden Hoop Mantra",
+        "owner": "Tathāgata Buddha",
+        "raw_material_description": "Gold · set with bright pearls",
+        "material_classification": "gold + gemstone",
+        "modern_equivalent": "24K gold + ruby / agate",
+        "chemical_composition_guess": "Au (gold) + Al2O3 (corundum · ruby)",
+        "physical_properties": {
+          "hardness": "Mohs 2.5 (gold) · 9 (ruby)",
+          "density": "19.3 g/cm³ (gold)",
+          "magnetic": "none",
+          "conductivity": "good conductor"
+        },
+        "crafting_process": [
+          "Material selection: pure gold + ruby",
+          "Casting: hoop form",
+          "Gem-setting: inlay bright pearls",
+          "Inscription: engrave Sanskrit mantra",
+          "Ritual refinement: Buddhist consecration granting mantra power"
+        ],
+        "function_principle": "Gold + mantra · when chanted the hoop contracts, causing physical pain",
+        "estimated_value": "Buddhist artifact · priceless",
+        "archaeological_parallel": "Ming Dynasty gold hoops + Buddhist ritual implements"
+      },
+      {
+        "artifact_name": "Yin-Yang Bottle",
+        "english_name": "Yin-Yang Bottle",
+        "owner": "Golden-Winged Great Peng (in fact a Spirit Mountain artifact)",
+        "raw_material_description": "Yin-Yang dual energy · a Spirit Mountain artifact",
+        "material_classification": "ceramic + mysterious gas",
+        "modern_equivalent": "Jun-kiln ceramic + inert gas",
+        "chemical_composition_guess": "SiO2-Al2O3 (ceramic) + unknown gas",
+        "physical_properties": {
+          "hardness": "Mohs 6 · ceramic grade",
+          "density": "2.5 g/cm³",
+          "magnetic": "none",
+          "conductivity": "insulating"
+        },
+        "crafting_process": [
+          "Material selection: Spirit Mountain clay",
+          "Forming: bottle shape",
+          "Firing: high-temperature kiln firing",
+          "Gas-sealing: seal in Yin-Yang dual energy",
+          "Ritual refinement: grant the 'trapping people' ability"
+        ],
+        "function_principle": "Ceramic bottle + mysterious gas · sealed special gas (speculated to resemble carbon monoxide, causing drowsiness)",
+        "estimated_value": "Spirit Mountain artifact · priceless",
+        "archaeological_parallel": "Song Dynasty Jun kiln + Warring States ceramic bottles"
+      }
+    ],
+    "material_classification_stats": {
+      "total_artifacts": 8,
+      "metallic_artifacts": 5,
+      "composite_artifacts": 3,
+      "avg_hardness": 6.6,
+      "avg_density": 7,
+      "hardest_artifact": "Diamond Snare (9.5)",
+      "softest_artifact": "Golden Hoop Mantra (2.5 · gold)",
+      "densest_artifact": "Golden Hoop Mantra (19.3 · gold)",
+      "lightest_artifact": "Demon-Suppressing Staff (1.2 · wood)"
+    },
+    "material_insights": [
+      "Of the 8 artifacts, 5 are metal and 3 are composite, reflecting Ming Dynasty craft levels.",
+      "Meteorite iron / divine iron is the common 'mythical material,' corresponding to the Shang Dynasty tradition of using meteorite iron.",
+      "The Diamond Snare's 'fine steel' corresponds to Ming Dynasty hundred-refined steel; its hardness approaches diamond.",
+      "The Palm-Leaf Fan's 'Great Yin leaf' is the only plant-based composite, corresponding to Han Dynasty lacquerware.",
+      "The Golden Hoop Mantra is the only precious-metal artifact, reflecting Buddhism's tradition of valuing gold.",
+      "The material diversity reflects the Ming Dynasty's multifaceted craft: steel + ceramics + wood + precious metals + composites."
+    ]
+  },
+  "costume_archaeology": {
+    "concept_name": "Costume Archaeology",
+    "english_name": "Costume Archaeology",
+    "definition": "Costume archaeology: by analyzing the materials, forms, and patterns of clothing, ancient social hierarchy and cultural change are reconstructed.",
+    "core_case": "Wukong's progression from 'tiger-skin skirt' to 'monk's robe' to 'Buddha's robe' reflects not only his inner journey but also the Ming Dynasty dress system.",
+    "character_costumes": [
+      {
+        "character": "Sun Wukong",
+        "costume_evolution": [
+          {
+            "stage": "Stone Monkey period",
+            "costume": "Nude · fur",
+            "material": "native monkey fur",
+            "function": "warmth · camouflage",
+            "social_status": "None · wild beast",
+            "ming_dynasty_parallel": "None · primitive state"
+          },
+          {
+            "stage": "Handsome Monkey King period",
+            "costume": "Tongbi gibbon's gift · yellow short jacket",
+            "material": "coarse cloth",
+            "function": "marking identity",
+            "social_status": "King · Lord of Flower-Fruit Mountain",
+            "ming_dynasty_parallel": "Commoner clothing · yellow was a lowly color"
+          },
+          {
+            "stage": "Great Sage Equal to Heaven period",
+            "costume": "Locked-gold armor + phoenix-wing purple-gold crown + lotus-thread cloud-walking boots",
+            "material": "gold + silk",
+            "function": "deterrence · status symbol",
+            "social_status": "King · Great Sage Equal to Heaven",
+            "ming_dynasty_parallel": "Vassal-king attire · gold armor as ceremonial guard"
+          },
+          {
+            "stage": "Early pilgrimage",
+            "costume": "Tiger-skin skirt + straight robe",
+            "material": "tiger skin + coarse cloth",
+            "function": "modesty · warmth",
+            "social_status": "Disciple · Pilgrim",
+            "ming_dynasty_parallel": "Wandering monk · patched-robe tradition"
+          },
+          {
+            "stage": "Late pilgrimage",
+            "costume": "Monk's robe · brocade kasaya",
+            "material": "silk + gold thread",
+            "function": "Buddhist identity",
+            "social_status": "Eminent monk's disciple",
+            "ming_dynasty_parallel": "Eminent monk's vestment · Ming kasaya"
+          },
+          {
+            "stage": "Buddhahood",
+            "costume": "Buddha's robe · gold-woven",
+            "material": "gold thread + gemstones",
+            "function": "symbol of Buddhahood",
+            "social_status": "Buddha · Victorious Fighting Buddha",
+            "ming_dynasty_parallel": "Imperial dragon robe · gold-woven garment"
+          }
+        ],
+        "evolution_pattern": "U-shaped curve: nude → coarse cloth → gold armor → tiger skin → monk's robe → Buddha's robe · peak → trough → pinnacle",
+        "social_meaning": "From king to disciple to Buddha, the costume mirrors the rise and fall of status."
+      },
+      {
+        "character": "Tang Sanzang",
+        "costume_evolution": [
+          {
+            "stage": "Origin period",
+            "costume": "Infant · adrift",
+            "material": "none",
+            "function": "none",
+            "social_status": "Abandoned infant",
+            "ming_dynasty_parallel": "None"
+          },
+          {
+            "stage": "Ordination period",
+            "costume": "Coarse cloth monk's robe",
+            "material": "coarse cloth",
+            "function": "monastic identity",
+            "social_status": "Monk · novice (śrāmaṇera)",
+            "ming_dynasty_parallel": "Ming Dynasty ordinary monk's clothing"
+          },
+          {
+            "stage": "Pilgrimage period",
+            "costume": "Brocade kasaya + nine-ring staff",
+            "material": "silk + gold thread + tin",
+            "function": "imperial brother identity · Buddhist",
+            "social_status": "Imperial brother · eminent monk",
+            "ming_dynasty_parallel": "Ming Dynasty eminent monk's vestment · imperially bestowed kasaya"
+          },
+          {
+            "stage": "Buddhahood",
+            "costume": "Candana Merit Buddha's robe",
+            "material": "gold thread + gemstones",
+            "function": "symbol of Buddhahood",
+            "social_status": "Buddha · Candana Merit Buddha",
+            "ming_dynasty_parallel": "Imperial dragon robe"
+          }
+        ],
+        "evolution_pattern": "Rising curve: abandoned infant → monk → imperial brother → Buddha · costume ascends",
+        "social_meaning": "From abandoned infant to Buddha, the costume mirrors a rise against the odds."
+      },
+      {
+        "character": "Zhu Bajie",
+        "costume_evolution": [
+          {
+            "stage": "Marshal Tianpeng period",
+            "costume": "Gold armor · marshal's uniform",
+            "material": "gold + silk",
+            "function": "marshal identity",
+            "social_status": "Marshal · heavenly general",
+            "ming_dynasty_parallel": "Ming Dynasty regional commander's uniform"
+          },
+          {
+            "stage": "Demotion period",
+            "costume": "Pig form · nude",
+            "material": "pig bristle",
+            "function": "none",
+            "social_status": "Demon · pig spirit",
+            "ming_dynasty_parallel": "None · beast form"
+          },
+          {
+            "stage": "Gao Village period",
+            "costume": "Coarse cloth short jacket",
+            "material": "coarse cloth",
+            "function": "modesty · labor",
+            "social_status": "Live-in son-in-law · farmer",
+            "ming_dynasty_parallel": "Ming Dynasty peasant clothing"
+          },
+          {
+            "stage": "Pilgrimage period",
+            "costume": "Monk's robe · black cloth",
+            "material": "coarse cloth",
+            "function": "monastic identity",
+            "social_status": "Disciple · Pilgrim",
+            "ming_dynasty_parallel": "Ming Dynasty itinerant monk's clothing"
+          },
+          {
+            "stage": "Buddhahood",
+            "costume": "Altar Cleanser's robe",
+            "material": "gold thread",
+            "function": "envoy identity",
+            "social_status": "Envoy · Altar Cleanser",
+            "ming_dynasty_parallel": "Ming Dynasty eunuch's clothing"
+          }
+        ],
+        "evolution_pattern": "Down-then-up curve: marshal → pig → son-in-law → monk → envoy · great fall and rise",
+        "social_meaning": "From marshal to pig to envoy, the costume mirrors status upheaval."
+      },
+      {
+        "character": "Sha Wujing",
+        "costume_evolution": [
+          {
+            "stage": "Curtain-Raising General period",
+            "costume": "Gold armor · general's uniform",
+            "material": "gold + silk",
+            "function": "general identity",
+            "social_status": "Great General · heavenly warrior",
+            "ming_dynasty_parallel": "Ming Dynasty ceremonial-guard attire"
+          },
+          {
+            "stage": "Flowing-Sand River period",
+            "costume": "Monster garb · disheveled hair",
+            "material": "none · beast form",
+            "function": "none",
+            "social_status": "Demon · Flowing-Sand River monster",
+            "ming_dynasty_parallel": "None · wild man"
+          },
+          {
+            "stage": "Pilgrimage period",
+            "costume": "Monk's robe · gray cloth",
+            "material": "coarse cloth",
+            "function": "monastic identity · load-bearing",
+            "social_status": "Disciple · load-bearer",
+            "ming_dynasty_parallel": "Ming Dynasty porter's clothing"
+          },
+          {
+            "stage": "Buddhahood",
+            "costume": "Golden-Body Arhat's robe",
+            "material": "gold thread",
+            "function": "arhat identity",
+            "social_status": "Arhat · Golden-Body Arhat",
+            "ming_dynasty_parallel": "Ming Dynasty arhat statues"
+          }
+        ],
+        "evolution_pattern": "Down-then-up curve: general → demon → monk → arhat · upheaval",
+        "social_meaning": "From general to demon to arhat, the costume mirrors status upheaval."
+      }
+    ],
+    "costume_insights": [
+      "Wukong's costume evolution is the most complex, with 6 stages, reflecting the protagonist's inner journey.",
+      "All 4 protagonists' costume evolution follows the common pattern 'Heaven → mortal world → Buddhist fruit'.",
+      "Costume material strictly corresponds to status: gold = Buddha/king · coarse cloth = monk/commoner · nude = demon/beast.",
+      "Ming Dynasty dress system refracted: yellow was a lowly color (commoner) · gold-woven was noble (emperor) · kasaya marked monks.",
+      "At Buddhahood all 4 characters' costume materials unify into gold thread, reflecting the Buddhist ideal of 'equality of all beings'.",
+      "Costume evolution reflects Ming Dynasty social mobility: king ↔ disciple ↔ Buddha · status could convert."
+    ],
+    "ming_dynasty_parallel": {
+      "imperial_robess": "Imperial dragon robe: gold-woven + twelve emblem patterns (corresponds to Buddhahood)",
+      "monk_robes": "Eminent monk's vestment: brocade kasaya + nine-ring staff (corresponds to Tang Sanzang's pilgrimage)",
+      "military_uniforms": "General's armor: gold armor + war boots (corresponds to the Great Sage period)",
+      "commoner_clothing": "Commoner clothing: coarse cloth short jacket + patched robe (corresponds to early pilgrimage)",
+      "official_uniforms": "Official court robe: color-coded by rank (corresponds to the Altar Cleanser's robe)"
+    }
+  },
+  "cave_architecture": {
+    "concept_name": "Cave Architecture Typology",
+    "english_name": "Cave Architecture Typology",
+    "definition": "Architectural typology: classified by architectural form, spatial structure, and functional features to reveal cultural and historical context.",
+    "core_case": "Demon caves can be classified by architectural form into natural karst caves, cliff tombs, waterside villas, and underground labyrinths — fantasy projections of pre-Ming architectural remains.",
+    "architectural_types": [
+      {
+        "type_name": "Natural Karst Cave",
+        "english_name": "Natural Karst Cave Type",
+        "features": [
+          "Limestone dissolution",
+          "Stalactites",
+          "Underground river",
+          "Natural ventilation"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "Water Curtain Cave",
+            "owner": "Sun Wukong",
+            "location": "Flower-Fruit Mountain",
+            "chapter": "Ch. 1",
+            "spatial_structure": "waterfall + stone rooms + stone bed + stone stool inside",
+            "function": "dwelling + refuge",
+            "luxury_level": 8,
+            "ecological_integration": "Extremely high · one with the mountain"
+          },
+          {
+            "cave_name": "Black Wind Cave",
+            "owner": "Black Bear Demon",
+            "location": "Black Wind Mountain",
+            "chapter": "Ch. 16-17",
+            "spatial_structure": "Buddhist robe assembly · Buddhist rites inside",
+            "function": "dwelling + Buddhist rites",
+            "luxury_level": 6,
+            "ecological_integration": "High"
+          },
+          {
+            "cave_name": "Wave-Moon Cave",
+            "owner": "Yellow Robe Demon",
+            "location": "Bowl Mountain",
+            "chapter": "Ch. 28-31",
+            "spatial_structure": "palace inside · seized princess",
+            "function": "dwelling + imprisonment",
+            "luxury_level": 7,
+            "ecological_integration": "Medium"
+          }
+        ],
+        "archaeological_parallel": "Guilin karst caves in Guangxi + Zhijin Cave in Guizhou",
+        "architectural_significance": "The oldest dwelling form · reflects the Ming Dynasty 'cave worship' tradition"
+      },
+      {
+        "type_name": "Cliff Tomb",
+        "english_name": "Cliff Tomb Type",
+        "features": [
+          "Cliff-carved",
+          "Stone chamber",
+          "Tomb structure",
+          "Commanding height"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "Spider Silk Cave",
+            "owner": "Spider Demon",
+            "location": "Spider Silk Ridge",
+            "chapter": "Ch. 72-73",
+            "spatial_structure": "deep pit + silk nets + hidden chambers inside",
+            "function": "dwelling + trap",
+            "luxury_level": 4,
+            "ecological_integration": "Medium"
+          },
+          {
+            "cave_name": "Lotus Cave",
+            "owner": "Gold Horn King + Silver Horn King",
+            "location": "Flat-Topped Mountain",
+            "chapter": "Ch. 32-35",
+            "spatial_structure": "cliff-carved + stone chamber + stone door",
+            "function": "dwelling + treasure hoard",
+            "luxury_level": 6,
+            "ecological_integration": "High"
+          }
+        ],
+        "archaeological_parallel": "Leshan cliff tombs in Sichuan + Fujian tulou",
+        "architectural_significance": "Cliff tombs are a Han Dynasty burial custom · reflect associations with 'heights' and the 'sacred'"
+      },
+      {
+        "type_name": "Waterside Villa",
+        "english_name": "Waterside Villa Type",
+        "features": [
+          "Built by water",
+          "Pavilions and towers",
+          "Waterscape surroundings",
+          "Lavish decoration"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "Green Wave Pool",
+            "owner": "Wansheng Dragon King",
+            "location": "Rocky Mountain",
+            "chapter": "Ch. 62-63",
+            "spatial_structure": "dragon-palace style + waterscape + pavilions",
+            "function": "dwelling + banqueting",
+            "luxury_level": 10,
+            "ecological_integration": "Extremely high · one with the waterscape"
+          },
+          {
+            "cave_name": "Tongtian River Dragon Palace",
+            "owner": "Goldfish Spirit",
+            "location": "Tongtian River",
+            "chapter": "Ch. 47-49",
+            "spatial_structure": "underwater dragon palace + crystal palace",
+            "function": "dwelling + sacrifice",
+            "luxury_level": 8,
+            "ecological_integration": "Extremely high · underwater"
+          },
+          {
+            "cave_name": "Crystal Palace",
+            "owner": "East Sea Dragon King",
+            "location": "East Sea",
+            "chapter": "Ch. 3",
+            "spatial_structure": "seabed dragon palace + crystal architecture",
+            "function": "dwelling + governance",
+            "luxury_level": 10,
+            "ecological_integration": "Extremely high · seabed"
+          }
+        ],
+        "archaeological_parallel": "Suzhou gardens + Jiangnan waterside villas",
+        "architectural_significance": "Waterside villas reflect Ming Dynasty Jiangnan garden aesthetics · dragon palaces refract royal architecture"
+      },
+      {
+        "type_name": "Underground Labyrinth",
+        "english_name": "Underground Labyrinth Type",
+        "features": [
+          "Deep underground excavation",
+          "Multi-level structure",
+          "Labyrinthine passages",
+          "Hidden chambers and mechanisms"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "Bottomless Cave",
+            "owner": "Mouse Spirit",
+            "location": "Sinkhole Mountain",
+            "chapter": "Ch. 80-83",
+            "spatial_structure": "endless excavation + multiple levels + labyrinth",
+            "function": "dwelling + imprisonment + concealment",
+            "luxury_level": 7,
+            "ecological_integration": "Low · artificial"
+          },
+          {
+            "cave_name": "Lion-Camel Cave",
+            "owner": "Three Demon Kings",
+            "location": "Lion-Camel Ridge",
+            "chapter": "Ch. 74-77",
+            "spatial_structure": "vast underground + bone decoration + multiple levels",
+            "function": "dwelling + slaughter + corpse concealment",
+            "luxury_level": 3,
+            "ecological_integration": "Low · dreadful"
+          },
+          {
+            "cave_name": "Nine-Curve Meandering Cave",
+            "owner": "Nine-Spirited Primordial Sage",
+            "location": "Bamboo-Knot Mountain",
+            "chapter": "Ch. 89-90",
+            "spatial_structure": "nine-curve labyrinth + stone chamber + secret passage",
+            "function": "dwelling + defense",
+            "luxury_level": 6,
+            "ecological_integration": "Medium"
+          }
+        ],
+        "archaeological_parallel": "Qin Shi Huang's underground palace + Ming Dynasty cellars",
+        "architectural_significance": "Underground labyrinths reflect imaginings of the 'underworld' · corresponding to imperial tombs"
+      },
+      {
+        "type_name": "Mountain Palace",
+        "english_name": "Mountain Palace Type",
+        "features": [
+          "Carved into the mountain",
+          "Palatial",
+          "Carved beams and painted rafters",
+          "Lavish decoration"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "Fire-Cloud Cave",
+            "owner": "Red Boy",
+            "location": "Mount Hao",
+            "chapter": "Ch. 40-42",
+            "spatial_structure": "mountain palace + fire pool + stone chamber",
+            "function": "dwelling + cultivation",
+            "luxury_level": 7,
+            "ecological_integration": "Medium · fire theme"
+          },
+          {
+            "cave_name": "Little Western Heaven · Little Thunderclap Temple",
+            "owner": "Yellow Brow Demon",
+            "location": "Little Western Heaven",
+            "chapter": "Ch. 65-66",
+            "spatial_structure": "mountain temple + fake Buddha hall + the Human-Seed Bag",
+            "function": "dwelling + fake Buddhist rites",
+            "luxury_level": 9,
+            "ecological_integration": "Low · fake sanctity"
+          }
+        ],
+        "archaeological_parallel": "Golden Hall on Mount Wudang + the Potala Palace",
+        "architectural_significance": "Mountain palaces reflect Ming Dynasty mountain worship + fusion with royal architecture"
+      }
+    ],
+    "architecture_insights": [
+      "The 5 major cave types cover the main Ming Dynasty architectural forms.",
+      "Natural karst caves are the most ancient, reflecting the Ming Dynasty's cave-worship tradition.",
+      "Cliff tombs derive from Han Dynasty burial customs, reflecting associations with the 'sacred heights'.",
+      "Waterside villas refract Jiangnan garden aesthetics; dragon palaces correspond to royal architecture.",
+      "Underground labyrinths correspond to imperial tombs, reflecting imaginings of the 'underworld'.",
+      "Mountain palaces fuse mountain worship with royal architecture and are the most luxurious.",
+      "Cave luxury correlates with demon background: grassroots demons live in karst caves, aristocrats in palaces."
+    ],
+    "architectural_classification_stats": {
+      "total_caves": 14,
+      "type_distribution": {
+        "Natural Cavern": 3,
+        "Cliff Tomb": 2,
+        "Waterside Villa": 3,
+        "Underground Labyrinth": 3,
+        "Palace in the Mountains": 2
+      },
+      "avg_luxury": 6.6,
+      "most_luxurious": "Green Wave Pool + Crystal Palace (10/10)",
+      "least_luxurious": "Lion-Camel Cave (3/10)"
+    }
+  },
+  "summary": {
+    "artifact_reports": 8,
+    "metallic_artifacts": 5,
+    "composite_artifacts": 3,
+    "avg_hardness": 6.6,
+    "character_costumes": 4,
+    "total_costume_stages": 19,
+    "architectural_types": 5,
+    "total_caves_classified": 14,
+    "avg_luxury": 6.6
+  }
+};
 
     // ==========================================================================
     // Data loading: return embedded fallback when fetch fails
@@ -2826,7 +3383,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     }
 
     async function loadAllData() {
-        const base = '../data/json/';
+        const base = '../en/json/';
         const [artifact, costume, cave, summary] = await Promise.all([
             loadJson(base + 'artifact_materials.json', EMBEDDED_DATA.artifact_materials),
             loadJson(base + 'costume_archaeology.json', EMBEDDED_DATA.costume_archaeology),
@@ -2838,7 +3395,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             const probe = await fetch(base + 'artifact_materials.json', { method: 'HEAD' });
             if (probe.ok) {
                 document.getElementById('dataSource').innerHTML =
-                    'Data source: live-loaded from <code>../data/json/*.json</code> (http server mode)';
+                    'Data source: live-loaded from <code>../en/json/*.json</code> (http server mode)';
             }
         } catch (e) { /* keep embedded notice */ }
         return { artifact, costume, cave, summary };

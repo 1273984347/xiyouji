@@ -1,0 +1,44 @@
+[
+  {
+    "celebrity_id": "lu_xun",
+    "celebrity_name": "Lu Xun",
+    "original_role": "Founder of the gods-and-demons novel",
+    "travel_role": "Chronicler of Flower-Fruit Mountain",
+    "would_do": "Writes ”An Account of the Demon World” to expose Heaven's dark secrets"
+  },
+  {
+    "celebrity_id": "hu_shi",
+    "celebrity_name": "Hu Shi",
+    "original_role": "High Fairy-Tale School",
+    "travel_role": "Pilgrimage Team Advisor",
+    "would_do": "Stop over-analyzing — just keep moving!"
+  },
+  {
+    "celebrity_id": "mao_zedong",
+    "celebrity_name": "Mao Zedong",
+    "original_role": "Level-10 JTTW Scholar",
+    "travel_role": "Wukong's Political Commissar",
+    "would_do": "We must establish our own base area!"
+  },
+  {
+    "celebrity_id": "qian_zhongshu",
+    "celebrity_name": "Qian Zhongshu",
+    "original_role": "Detail Obsessive",
+    "travel_role": "Chechi Kingdom Referee",
+    "would_do": "Corrects the common-sense error about ”Yikouzhong”"
+  },
+  {
+    "celebrity_id": "lin_yutang",
+    "celebrity_name": "Lin Yutang",
+    "original_role": "Anatomist of Human Nature",
+    "travel_role": "Gao Village Psychologist",
+    "would_do": "Gives Bajie desire-management counseling"
+  },
+  {
+    "celebrity_id": "chen_yinke",
+    "celebrity_name": "Chen Yinke",
+    "original_role": "Textual Criticism School",
+    "travel_role": "Lingshan Archive Clerk",
+    "would_do": "Verifies the Sanskrit originals of the true scriptures"
+  }
+]

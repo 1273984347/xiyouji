@@ -1,0 +1,131 @@
+[
+  {
+    "color": "Buddha Gold",
+    "hex": "#d4a857",
+    "category": "Buddhism",
+    "meaning": "Solemn · the Enlightened · Imperishable",
+    "representatives": [
+      "Tathāgata",
+      "Tang Sanzang attaining Buddhahood",
+      "Guanyin’s pure vase"
+    ]
+  },
+  {
+    "color": "Vermilion",
+    "hex": "#C0392B",
+    "category": "Royal/Relics",
+    "meaning": "Authority · Majesty · Preciousness",
+    "representatives": [
+      "Jade Emperor’s dragon robe",
+      "Brocade kasaya",
+      "Purple-gold red gourd"
+    ]
+  },
+  {
+    "color": "Ink Black",
+    "hex": "#1a1410",
+    "category": "Heaven/Demonic",
+    "meaning": "Profound · Majestic · Mysterious",
+    "representatives": [
+      "Night sky over the Heavenly Palace",
+      "Demon lairs",
+      "Bajie’s black robe"
+    ]
+  },
+  {
+    "color": "Jade Cyan",
+    "hex": "#40619E",
+    "category": "Daoism",
+    "meaning": "Ascetic practice · Daoist arts · Nature",
+    "representatives": [
+      "Daoist priest’s robe",
+      "Patriarch Subhuti",
+      "Guanyin’s willow branch"
+    ]
+  },
+  {
+    "color": "Earth Yellow",
+    "hex": "#a87838",
+    "category": "Mortal World",
+    "meaning": "Mundane · Plain · Worldly",
+    "representatives": [
+      "Earthen roads of the mortal world",
+      "Tang Sanzang’s gray-brown robe",
+      "Common folk"
+    ]
+  },
+  {
+    "color": "Tiger-Skin Yellow",
+    "hex": "#8c6a3a",
+    "category": "The Pilgrim",
+    "meaning": "Wild · Subdued · Identity",
+    "representatives": [
+      "Wukong’s tiger-skin kilt"
+    ]
+  },
+  {
+    "color": "Tiger-Stripe",
+    "hex": "#3a2820",
+    "category": "Demon King",
+    "meaning": "Wild · Domineering · Untamed",
+    "representatives": [
+      "Tiger Strength Immortal",
+      "Yellow-Robe Monster"
+    ]
+  },
+  {
+    "color": "Bone White",
+    "hex": "#d9cdb8",
+    "category": "Horror",
+    "meaning": "Death · Yin energy · Warning",
+    "representatives": [
+      "White Bone Demon",
+      "Sha Wujing’s skulls",
+      "White Tiger Ridge"
+    ]
+  },
+  {
+    "color": "Dark Green",
+    "hex": "#3A473A",
+    "category": "Wilderness",
+    "meaning": "Wild growth · Reclusion · Seclusion",
+    "representatives": [
+      "Flower-Fruit Mountain",
+      "Coiled Silk Ridge",
+      "Five Villages Monastery"
+    ]
+  },
+  {
+    "color": "Buddha-Figure Purple",
+    "hex": "#7a3a5a",
+    "category": "Spirit Mountain",
+    "meaning": "Buddha treasure · Wisdom · Auspiciousness",
+    "representatives": [
+      "Purple-gold alms bowl",
+      "Purple-gold red gourd",
+      "Spirit Mountain Buddha-figure"
+    ]
+  },
+  {
+    "color": "Golden Light",
+    "hex": "#e9b885",
+    "category": "Divine Power",
+    "meaning": "Magic power · Divine light · Transcendence",
+    "representatives": [
+      "Wukong’s fiery eyes",
+      "Gold-banded staff",
+      "Golden-armored divine light"
+    ]
+  },
+  {
+    "color": "Azure Water",
+    "hex": "#5a8c8c",
+    "category": "Water Tribes",
+    "meaning": "Rivers · Flowing · Yin softness",
+    "representatives": [
+      "Dragon Palace",
+      "Heaven-Reaching River",
+      "Azure Wave Pool"
+    ]
+  }
+]

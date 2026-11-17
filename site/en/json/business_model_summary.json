@@ -1,0 +1,32 @@
+{
+  "concept_name": "Business Model Summary Statistics",
+  "english_name": "Business Model Summary",
+  "total_concepts": 3,
+  "concept_list": [
+    "Organization Comparison",
+    "Wukong's Career Transition",
+    "Monster Startup Companies"
+  ],
+  "total_data_points": 13,
+  "key_findings": [
+    "Heavenly Court vs Vulture Peak: the Court is stock-maintaining; Vulture Peak is incremental-expansion, winning on efficiency and innovation",
+    "Wukong's six career stages: from Stone Monkey King (L0) to Victorious Fighting Buddha (L9) to Retirement (L10); satisfaction follows a U-shape",
+    "100% of the five demon groups were acquired; none had an independent IPO, revealing the dependent demon economy",
+    "Bimawen is the lowest Heavenly Court post (unranked); Great Sage Equal to Heaven is an empty title without emolument",
+    "The pilgrimage is essentially an 'equity incentive': future options (Buddhahood) in exchange for present low-wage labor"
+  ],
+  "cross_concept_insight": "The Journey to the West business model reveals an 'inside/outside the system' duality: Heaven is a rigid state enterprise; Vulture Peak an efficient private enterprise; demons are startups; Wukong is a founder-to-partner transition case",
+  "business_lessons": [
+    "Organizational efficiency: flat + delegated > pyramidal + centralized (Vulture Peak vs Heavenly Court)",
+    "Career curve: going it alone fails; teamwork succeeds (Wukong's career transition)",
+    "Startup trap: dependent businesses cannot IPO independently (demon groups)",
+    "Incentive mechanism: equity/options > fixed salary (pilgrimage project design)",
+    "Compliance risk: illegal business models inevitably draw regulatory crackdowns (demons eating people)"
+  ],
+  "data_files": {
+    "organization_comparison": "organization_comparison.json",
+    "wukong_career": "wukong_career.json",
+    "monster_business": "monster_business.json",
+    "summary": "business_model_summary.json"
+  }
+}

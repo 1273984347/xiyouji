@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-oDXr8PwyzE+oI9Q+FuSSyJ95pbzGbZF6ImqTcUt9tkE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-H7PbH5uraPd0DXaFHhBctQt6OnQhEA9davBbE1ZMgh4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Journey Route Map · 详解西游记</title>
@@ -2421,20 +2421,1343 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         return TYPE_COLORS[normalizeType(t)] || "#9a8a7a";
     }
 
-    // ============== 嵌入式 mock 数据（fallback 用） ==============
-    const EMBEDDED_MOCK = {
-        total_places: 5,
-        total_regions: 4,
-        chapter_range: { start: 12, end: 100 },
-        by_type: { "Temple": 2, "Mountain": 2, "Water": 1 },
-        places: [
-            { id: 1, chapter: 12, name: "Chang'an Huasheng Temple", region: "Great Tang", type: "Temple", event: "Ordained at the Water-Land Assembly to journey west" },
-            { id: 2, chapter: 14, name: "Liangjie Mountain", region: "Great Tang Border", type: "Mountain", event: "Subduing Sun Wukong" },
-            { id: 3, chapter: 22, name: "Flowing-Sand River", region: "Xifan Habi Kingdom", type: "Water", event: "Subduing Sha Wujing" },
-            { id: 4, chapter: 27, name: "White Tiger Ridge", region: "Xifan Habi Kingdom", type: "Mountain", event: "Three Strikes on the White Bone Demon" },
-            { id: 5, chapter: 98, name: "Spirit Mountain Thunderclap Temple", region: "Xiniu Hezhou", type: "Temple", event: "Obtaining the true scriptures" }
-        ]
-    };
+    // ============== 内嵌真值快照（fallback 用·与部署副本同源） ==============
+    const EMBEDDED_DATA = {
+  "total_places": 53,
+  "total_regions": 26,
+  "chapter_range": {
+    "start": 12,
+    "end": 100
+  },
+  "places": [
+    {
+      "n": 1,
+      "chapter": 12,
+      "place": "Huasheng Temple of Chang'an",
+      "region": "Great Tang",
+      "type": "temple",
+      "event": "The Water-Land Assembly; ordered to journey west"
+    },
+    {
+      "n": 2,
+      "chapter": 13,
+      "place": "Famen Temple",
+      "region": "Great Tang",
+      "type": "temple",
+      "event": "The monks see him off"
+    },
+    {
+      "n": 3,
+      "chapter": 13,
+      "place": "Twin Fork Ridge",
+      "region": "Great Tang Border",
+      "type": "mountain",
+      "event": "Meets General Yin (the Tiger Demon)"
+    },
+    {
+      "n": 4,
+      "chapter": 13,
+      "place": "Two-Realm Mountain (Five Elements Mountain)",
+      "region": "Great Tang Border",
+      "type": "mountain",
+      "event": "Sun Wukong recruited"
+    },
+    {
+      "n": 5,
+      "chapter": 15,
+      "place": "Eagle-Sorrow Stream on Serpent-Coil Mountain",
+      "region": "Xifan Habi Kingdom",
+      "type": "water",
+      "event": "The White Dragon Horse recruited"
+    },
+    {
+      "n": 6,
+      "chapter": 16,
+      "place": "Guanyin Monastery",
+      "region": "Xifan Habi Kingdom",
+      "type": "temple",
+      "event": "Loses the kasaya"
+    },
+    {
+      "n": 7,
+      "chapter": 17,
+      "place": "Black Wind Cave on Black Wind Mountain",
+      "region": "Xifan Habi Kingdom",
+      "type": "cave",
+      "event": "Great battle with the Black Bear Demon"
+    },
+    {
+      "n": 8,
+      "chapter": 18,
+      "place": "Gao Family Village in the Kingdom of Ussa",
+      "region": "Kingdom of Ussa",
+      "type": "city",
+      "event": "Zhu Bajie recruited"
+    },
+    {
+      "n": 9,
+      "chapter": 20,
+      "place": "Mount Butu",
+      "region": "Kingdom of Ussa",
+      "type": "mountain",
+      "event": "Meets Master Wuchao, who gives him the Heart Sutra"
+    },
+    {
+      "n": 10,
+      "chapter": 20,
+      "place": "Yellow Wind Ridge",
+      "region": "Xifan Habi Kingdom",
+      "type": "mountain",
+      "event": "Yellow Wind Demon"
+    },
+    {
+      "n": 11,
+      "chapter": 22,
+      "place": "Flowing-Sand River",
+      "region": "Xifan Habi Kingdom",
+      "type": "water",
+      "event": "Sha Wujing recruited"
+    },
+    {
+      "n": 12,
+      "chapter": 23,
+      "place": "Mo Family Village",
+      "region": "Xifan Habi Kingdom",
+      "type": "city",
+      "event": "The Four Saints test his resolve"
+    },
+    {
+      "n": 13,
+      "chapter": 24,
+      "place": "Wuzhuang Temple on Mount Wanshou",
+      "region": "Mount Wanshou",
+      "type": "temple",
+      "event": "Zhenyuan Daxian and the Ginseng Fruit"
+    },
+    {
+      "n": 14,
+      "chapter": 27,
+      "place": "White Tiger Ridge",
+      "region": "Xifan Habi Kingdom",
+      "type": "mountain",
+      "event": "Three strikes on the White Bone Demon"
+    },
+    {
+      "n": 15,
+      "chapter": 28,
+      "place": "Black Pine Forest",
+      "region": "Xifan Habi Kingdom",
+      "type": "mountain",
+      "event": "Yellow-Robed Demon"
+    },
+    {
+      "n": 16,
+      "chapter": 29,
+      "place": "Kingdom of Precious Elephants",
+      "region": "Kingdom of Precious Elephants",
+      "type": "country",
+      "event": "Delivers the letter and saves the princess"
+    },
+    {
+      "n": 17,
+      "chapter": 32,
+      "place": "Lotus Cave on Flat-Top Mountain",
+      "region": "Kingdom of Precious Elephants",
+      "type": "cave",
+      "event": "Golden and Silver Horns"
+    },
+    {
+      "n": 18,
+      "chapter": 36,
+      "place": "Wuji Kingdom",
+      "region": "Wuji Kingdom",
+      "type": "country",
+      "event": "Saves the king and tells the true from the false"
+    },
+    {
+      "n": 19,
+      "chapter": 39,
+      "place": "Fire-Cloud Cave of Mount Hao",
+      "region": "Mount Hao",
+      "type": "cave",
+      "event": "Great battle with Red Boy"
+    },
+    {
+      "n": 20,
+      "chapter": 43,
+      "place": "Black Water River",
+      "region": "Xifan Habi Kingdom",
+      "type": "water",
+      "event": "The Crocodile Demon"
+    },
+    {
+      "n": 21,
+      "chapter": 44,
+      "place": "Kingdom of Chariots and Slows",
+      "region": "Kingdom of Chariots and Slows",
+      "type": "country",
+      "event": "Battles the Three Immortals"
+    },
+    {
+      "n": 22,
+      "chapter": 47,
+      "place": "Chen's Village on the Tongtian River",
+      "region": "Kingdom of Chariots and Slows",
+      "type": "water",
+      "event": "Goldfish Spirit"
+    },
+    {
+      "n": 23,
+      "chapter": 50,
+      "place": "Jindou Cave of Mount Jindou",
+      "region": "Mount Jindou",
+      "type": "cave",
+      "event": "Azure Ox Spirit"
+    },
+    {
+      "n": 24,
+      "chapter": 53,
+      "place": "Mother-and-Child River of the Kingdom of Women",
+      "region": "Kingdom of Women in Western Liang",
+      "type": "country",
+      "event": "The queen forces a marriage"
+    },
+    {
+      "n": 25,
+      "chapter": 55,
+      "place": "Pipa Cave on Poison-Enemy Mountain",
+      "region": "Kingdom of Women in Western Liang",
+      "type": "cave",
+      "event": "Scorpion Spirit"
+    },
+    {
+      "n": 26,
+      "chapter": 57,
+      "place": "Flower-Fruit Mountain",
+      "region": "Pūrvavideha Continent",
+      "type": "mountain",
+      "event": "The two Monkey Kings"
+    },
+    {
+      "n": 27,
+      "chapter": 59,
+      "place": "Plantain Cave of Emerald-Cloud Mountain",
+      "region": "Emerald-Cloud Mountain",
+      "type": "cave",
+      "event": "Three borrowings of the Plantain Fan"
+    },
+    {
+      "n": 28,
+      "chapter": 59,
+      "place": "Flaming Mountain",
+      "region": "Xifan Habi Kingdom",
+      "type": "mountain",
+      "event": "Crossing the Flaming Mountain"
+    },
+    {
+      "n": 29,
+      "chapter": 62,
+      "place": "Golden Light Temple of Jisai Kingdom",
+      "region": "Jisai Kingdom",
+      "type": "country",
+      "event": "The Buddhist treasure is stolen"
+    },
+    {
+      "n": 30,
+      "chapter": 63,
+      "place": "Jade Wave Pool",
+      "region": "Jisai Kingdom",
+      "type": "water",
+      "event": "The Nine-Headed Bug steals the treasure"
+    },
+    {
+      "n": 31,
+      "chapter": 65,
+      "place": "Minor Thunderclap Temple",
+      "region": "Xifan Habi Kingdom",
+      "type": "temple",
+      "event": "Yellow-Browed Boy"
+    },
+    {
+      "n": 32,
+      "chapter": 67,
+      "place": "Rotten-Persimmon Lane on Seven-Wonders Mountain",
+      "region": "Tuoluo Village",
+      "type": "mountain",
+      "event": "The Python Demon"
+    },
+    {
+      "n": 33,
+      "chapter": 68,
+      "place": "Vermilion and Purple Kingdom",
+      "region": "Vermilion and Purple Kingdom",
+      "type": "country",
+      "event": "Practises medicine to save the king"
+    },
+    {
+      "n": 34,
+      "chapter": 70,
+      "place": "Xiezhi Cave of Qilin Mountain",
+      "region": "Vermilion and Purple Kingdom",
+      "type": "cave",
+      "event": "Grand Duke Sai (the Golden-haired Hou)"
+    },
+    {
+      "n": 35,
+      "chapter": 72,
+      "place": "Silk-Web Cave of Silk-Web Ridge",
+      "region": "Xifan Habi Kingdom",
+      "type": "cave",
+      "event": "Spider Spirit"
+    },
+    {
+      "n": 36,
+      "chapter": 73,
+      "place": "Yellow Flower Monastery",
+      "region": "Xifan Habi Kingdom",
+      "type": "temple",
+      "event": "The Centipede Demon"
+    },
+    {
+      "n": 37,
+      "chapter": 74,
+      "place": "Lion-Camel Cave of Lion-Camel Ridge",
+      "region": "Lion-Camel Kingdom",
+      "type": "cave",
+      "event": "The Three Demon Kings"
+    },
+    {
+      "n": 38,
+      "chapter": 78,
+      "place": "Kingdom of the Bhikṣus",
+      "region": "Kingdom of the Bhikṣus",
+      "type": "country",
+      "event": "Saves the children"
+    },
+    {
+      "n": 39,
+      "chapter": 79,
+      "place": "Qinghua Immortal Cave",
+      "region": "Kingdom of the Bhikṣus",
+      "type": "cave",
+      "event": "White Deer Spirit"
+    },
+    {
+      "n": 40,
+      "chapter": 80,
+      "place": "Zhenhai Monastery in Black Pine Forest",
+      "region": "Xifan Habi Kingdom",
+      "type": "temple",
+      "event": "The Rat Demon"
+    },
+    {
+      "n": 41,
+      "chapter": 82,
+      "place": "Bottomless Cave of Sunken-Empty Mountain",
+      "region": "Sunken-Empty Mountain",
+      "type": "cave",
+      "event": "The Golden-Nosed White-Haired Mouse Demon"
+    },
+    {
+      "n": 42,
+      "chapter": 84,
+      "place": "Mie-Fa Kingdom",
+      "region": "Mie-Fa Kingdom",
+      "type": "country",
+      "event": "The king vows to kill the monks"
+    },
+    {
+      "n": 43,
+      "chapter": 86,
+      "place": "Linked-Circle Cave of Hidden-Mist Mountain",
+      "region": "Hidden-Mist Mountain",
+      "type": "cave",
+      "event": "the Mugwort-Flower-Skin Leopard Demon"
+    },
+    {
+      "n": 44,
+      "chapter": 87,
+      "place": "Fengxian Commandery",
+      "region": "Outer Commiries of the Heavenly Kingdom",
+      "type": "city",
+      "event": "Praying for rain"
+    },
+    {
+      "n": 45,
+      "chapter": 88,
+      "place": "Yuhua City of Yuhua Prefecture",
+      "region": "Yuhua Prefecture",
+      "type": "city",
+      "event": "Takes disciples and teaches his skills"
+    },
+    {
+      "n": 46,
+      "chapter": 90,
+      "place": "Tiger-Mouth Cave of Leopard-Head Mountain",
+      "region": "Yuhua Prefecture",
+      "type": "cave",
+      "event": "The Yellow Lion Demon"
+    },
+    {
+      "n": 47,
+      "chapter": 91,
+      "place": "Ciyun Temple of Jinping Prefecture",
+      "region": "Jinping Prefecture",
+      "type": "temple",
+      "event": "The Rhinoceros Demons"
+    },
+    {
+      "n": 48,
+      "chapter": 93,
+      "place": "Heavenly Kingdom of India",
+      "region": "Heavenly Kingdom of India",
+      "type": "country",
+      "event": "The true and false princesses"
+    },
+    {
+      "n": 49,
+      "chapter": 95,
+      "place": "Maoying Mountain",
+      "region": "Heavenly Kingdom of India",
+      "type": "mountain",
+      "event": "The Jade Rabbit Demon"
+    },
+    {
+      "n": 50,
+      "chapter": 96,
+      "place": "Diling County of Tongtai Prefecture",
+      "region": "Heavenly Kingdom of India",
+      "type": "city",
+      "event": "The household of Kou the Head of the Household"
+    },
+    {
+      "n": 51,
+      "chapter": 98,
+      "place": "Spirit Mountain Thunderclap Temple",
+      "region": "Aparagodaniya Continent",
+      "type": "temple",
+      "event": "Obtains the true scriptures"
+    },
+    {
+      "n": 52,
+      "chapter": 99,
+      "place": "Tongtian River (return leg)",
+      "region": "Kingdom of Chariots and Slows",
+      "type": "water",
+      "event": "The old turtle falls into the water"
+    },
+    {
+      "n": 53,
+      "chapter": 100,
+      "place": "Chang'an (return)",
+      "region": "Great Tang",
+      "type": "city",
+      "event": "Returns to the Eastern Land; the Five Saints attain their true forms"
+    }
+  ],
+  "segments": [
+    {
+      "from_n": 1,
+      "to_n": 2,
+      "from_place": "Huasheng Temple of Chang'an",
+      "to_place": "Famen Temple",
+      "from_chapter": 12,
+      "to_chapter": 13,
+      "from_region": "Great Tang",
+      "to_region": "Great Tang"
+    },
+    {
+      "from_n": 2,
+      "to_n": 3,
+      "from_place": "Famen Temple",
+      "to_place": "Twin Fork Ridge",
+      "from_chapter": 13,
+      "to_chapter": 13,
+      "from_region": "Great Tang",
+      "to_region": "Great Tang Border"
+    },
+    {
+      "from_n": 3,
+      "to_n": 4,
+      "from_place": "Twin Fork Ridge",
+      "to_place": "Two-Realm Mountain (Five Elements Mountain)",
+      "from_chapter": 13,
+      "to_chapter": 13,
+      "from_region": "Great Tang Border",
+      "to_region": "Great Tang Border"
+    },
+    {
+      "from_n": 4,
+      "to_n": 5,
+      "from_place": "Two-Realm Mountain (Five Elements Mountain)",
+      "to_place": "Eagle-Sorrow Stream on Serpent-Coil Mountain",
+      "from_chapter": 13,
+      "to_chapter": 15,
+      "from_region": "Great Tang Border",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 5,
+      "to_n": 6,
+      "from_place": "Eagle-Sorrow Stream on Serpent-Coil Mountain",
+      "to_place": "Guanyin Monastery",
+      "from_chapter": 15,
+      "to_chapter": 16,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 6,
+      "to_n": 7,
+      "from_place": "Guanyin Monastery",
+      "to_place": "Black Wind Cave on Black Wind Mountain",
+      "from_chapter": 16,
+      "to_chapter": 17,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 7,
+      "to_n": 8,
+      "from_place": "Black Wind Cave on Black Wind Mountain",
+      "to_place": "Gao Family Village in the Kingdom of Ussa",
+      "from_chapter": 17,
+      "to_chapter": 18,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Kingdom of Ussa"
+    },
+    {
+      "from_n": 8,
+      "to_n": 9,
+      "from_place": "Gao Family Village in the Kingdom of Ussa",
+      "to_place": "Mount Butu",
+      "from_chapter": 18,
+      "to_chapter": 20,
+      "from_region": "Kingdom of Ussa",
+      "to_region": "Kingdom of Ussa"
+    },
+    {
+      "from_n": 9,
+      "to_n": 10,
+      "from_place": "Mount Butu",
+      "to_place": "Yellow Wind Ridge",
+      "from_chapter": 20,
+      "to_chapter": 20,
+      "from_region": "Kingdom of Ussa",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 10,
+      "to_n": 11,
+      "from_place": "Yellow Wind Ridge",
+      "to_place": "Flowing-Sand River",
+      "from_chapter": 20,
+      "to_chapter": 22,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 11,
+      "to_n": 12,
+      "from_place": "Flowing-Sand River",
+      "to_place": "Mo Family Village",
+      "from_chapter": 22,
+      "to_chapter": 23,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 12,
+      "to_n": 13,
+      "from_place": "Mo Family Village",
+      "to_place": "Wuzhuang Temple on Mount Wanshou",
+      "from_chapter": 23,
+      "to_chapter": 24,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Mount Wanshou"
+    },
+    {
+      "from_n": 13,
+      "to_n": 14,
+      "from_place": "Wuzhuang Temple on Mount Wanshou",
+      "to_place": "White Tiger Ridge",
+      "from_chapter": 24,
+      "to_chapter": 27,
+      "from_region": "Mount Wanshou",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 14,
+      "to_n": 15,
+      "from_place": "White Tiger Ridge",
+      "to_place": "Black Pine Forest",
+      "from_chapter": 27,
+      "to_chapter": 28,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 15,
+      "to_n": 16,
+      "from_place": "Black Pine Forest",
+      "to_place": "Kingdom of Precious Elephants",
+      "from_chapter": 28,
+      "to_chapter": 29,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Kingdom of Precious Elephants"
+    },
+    {
+      "from_n": 16,
+      "to_n": 17,
+      "from_place": "Kingdom of Precious Elephants",
+      "to_place": "Lotus Cave on Flat-Top Mountain",
+      "from_chapter": 29,
+      "to_chapter": 32,
+      "from_region": "Kingdom of Precious Elephants",
+      "to_region": "Kingdom of Precious Elephants"
+    },
+    {
+      "from_n": 17,
+      "to_n": 18,
+      "from_place": "Lotus Cave on Flat-Top Mountain",
+      "to_place": "Wuji Kingdom",
+      "from_chapter": 32,
+      "to_chapter": 36,
+      "from_region": "Kingdom of Precious Elephants",
+      "to_region": "Wuji Kingdom"
+    },
+    {
+      "from_n": 18,
+      "to_n": 19,
+      "from_place": "Wuji Kingdom",
+      "to_place": "Fire-Cloud Cave of Mount Hao",
+      "from_chapter": 36,
+      "to_chapter": 39,
+      "from_region": "Wuji Kingdom",
+      "to_region": "Mount Hao"
+    },
+    {
+      "from_n": 19,
+      "to_n": 20,
+      "from_place": "Fire-Cloud Cave of Mount Hao",
+      "to_place": "Black Water River",
+      "from_chapter": 39,
+      "to_chapter": 43,
+      "from_region": "Mount Hao",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 20,
+      "to_n": 21,
+      "from_place": "Black Water River",
+      "to_place": "Kingdom of Chariots and Slows",
+      "from_chapter": 43,
+      "to_chapter": 44,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Kingdom of Chariots and Slows"
+    },
+    {
+      "from_n": 21,
+      "to_n": 22,
+      "from_place": "Kingdom of Chariots and Slows",
+      "to_place": "Chen's Village on the Tongtian River",
+      "from_chapter": 44,
+      "to_chapter": 47,
+      "from_region": "Kingdom of Chariots and Slows",
+      "to_region": "Kingdom of Chariots and Slows"
+    },
+    {
+      "from_n": 22,
+      "to_n": 23,
+      "from_place": "Chen's Village on the Tongtian River",
+      "to_place": "Jindou Cave of Mount Jindou",
+      "from_chapter": 47,
+      "to_chapter": 50,
+      "from_region": "Kingdom of Chariots and Slows",
+      "to_region": "Mount Jindou"
+    },
+    {
+      "from_n": 23,
+      "to_n": 24,
+      "from_place": "Jindou Cave of Mount Jindou",
+      "to_place": "Mother-and-Child River of the Kingdom of Women",
+      "from_chapter": 50,
+      "to_chapter": 53,
+      "from_region": "Mount Jindou",
+      "to_region": "Kingdom of Women in Western Liang"
+    },
+    {
+      "from_n": 24,
+      "to_n": 25,
+      "from_place": "Mother-and-Child River of the Kingdom of Women",
+      "to_place": "Pipa Cave on Poison-Enemy Mountain",
+      "from_chapter": 53,
+      "to_chapter": 55,
+      "from_region": "Kingdom of Women in Western Liang",
+      "to_region": "Kingdom of Women in Western Liang"
+    },
+    {
+      "from_n": 25,
+      "to_n": 26,
+      "from_place": "Pipa Cave on Poison-Enemy Mountain",
+      "to_place": "Flower-Fruit Mountain",
+      "from_chapter": 55,
+      "to_chapter": 57,
+      "from_region": "Kingdom of Women in Western Liang",
+      "to_region": "Pūrvavideha Continent"
+    },
+    {
+      "from_n": 26,
+      "to_n": 27,
+      "from_place": "Flower-Fruit Mountain",
+      "to_place": "Plantain Cave of Emerald-Cloud Mountain",
+      "from_chapter": 57,
+      "to_chapter": 59,
+      "from_region": "Pūrvavideha Continent",
+      "to_region": "Emerald-Cloud Mountain"
+    },
+    {
+      "from_n": 27,
+      "to_n": 28,
+      "from_place": "Plantain Cave of Emerald-Cloud Mountain",
+      "to_place": "Flaming Mountain",
+      "from_chapter": 59,
+      "to_chapter": 59,
+      "from_region": "Emerald-Cloud Mountain",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 28,
+      "to_n": 29,
+      "from_place": "Flaming Mountain",
+      "to_place": "Golden Light Temple of Jisai Kingdom",
+      "from_chapter": 59,
+      "to_chapter": 62,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Jisai Kingdom"
+    },
+    {
+      "from_n": 29,
+      "to_n": 30,
+      "from_place": "Golden Light Temple of Jisai Kingdom",
+      "to_place": "Jade Wave Pool",
+      "from_chapter": 62,
+      "to_chapter": 63,
+      "from_region": "Jisai Kingdom",
+      "to_region": "Jisai Kingdom"
+    },
+    {
+      "from_n": 30,
+      "to_n": 31,
+      "from_place": "Jade Wave Pool",
+      "to_place": "Minor Thunderclap Temple",
+      "from_chapter": 63,
+      "to_chapter": 65,
+      "from_region": "Jisai Kingdom",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 31,
+      "to_n": 32,
+      "from_place": "Minor Thunderclap Temple",
+      "to_place": "Rotten-Persimmon Lane on Seven-Wonders Mountain",
+      "from_chapter": 65,
+      "to_chapter": 67,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Tuoluo Village"
+    },
+    {
+      "from_n": 32,
+      "to_n": 33,
+      "from_place": "Rotten-Persimmon Lane on Seven-Wonders Mountain",
+      "to_place": "Vermilion and Purple Kingdom",
+      "from_chapter": 67,
+      "to_chapter": 68,
+      "from_region": "Tuoluo Village",
+      "to_region": "Vermilion and Purple Kingdom"
+    },
+    {
+      "from_n": 33,
+      "to_n": 34,
+      "from_place": "Vermilion and Purple Kingdom",
+      "to_place": "Xiezhi Cave of Qilin Mountain",
+      "from_chapter": 68,
+      "to_chapter": 70,
+      "from_region": "Vermilion and Purple Kingdom",
+      "to_region": "Vermilion and Purple Kingdom"
+    },
+    {
+      "from_n": 34,
+      "to_n": 35,
+      "from_place": "Xiezhi Cave of Qilin Mountain",
+      "to_place": "Silk-Web Cave of Silk-Web Ridge",
+      "from_chapter": 70,
+      "to_chapter": 72,
+      "from_region": "Vermilion and Purple Kingdom",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 35,
+      "to_n": 36,
+      "from_place": "Silk-Web Cave of Silk-Web Ridge",
+      "to_place": "Yellow Flower Monastery",
+      "from_chapter": 72,
+      "to_chapter": 73,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 36,
+      "to_n": 37,
+      "from_place": "Yellow Flower Monastery",
+      "to_place": "Lion-Camel Cave of Lion-Camel Ridge",
+      "from_chapter": 73,
+      "to_chapter": 74,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Lion-Camel Kingdom"
+    },
+    {
+      "from_n": 37,
+      "to_n": 38,
+      "from_place": "Lion-Camel Cave of Lion-Camel Ridge",
+      "to_place": "Kingdom of the Bhikṣus",
+      "from_chapter": 74,
+      "to_chapter": 78,
+      "from_region": "Lion-Camel Kingdom",
+      "to_region": "Kingdom of the Bhikṣus"
+    },
+    {
+      "from_n": 38,
+      "to_n": 39,
+      "from_place": "Kingdom of the Bhikṣus",
+      "to_place": "Qinghua Immortal Cave",
+      "from_chapter": 78,
+      "to_chapter": 79,
+      "from_region": "Kingdom of the Bhikṣus",
+      "to_region": "Kingdom of the Bhikṣus"
+    },
+    {
+      "from_n": 39,
+      "to_n": 40,
+      "from_place": "Qinghua Immortal Cave",
+      "to_place": "Zhenhai Monastery in Black Pine Forest",
+      "from_chapter": 79,
+      "to_chapter": 80,
+      "from_region": "Kingdom of the Bhikṣus",
+      "to_region": "Xifan Habi Kingdom"
+    },
+    {
+      "from_n": 40,
+      "to_n": 41,
+      "from_place": "Zhenhai Monastery in Black Pine Forest",
+      "to_place": "Bottomless Cave of Sunken-Empty Mountain",
+      "from_chapter": 80,
+      "to_chapter": 82,
+      "from_region": "Xifan Habi Kingdom",
+      "to_region": "Sunken-Empty Mountain"
+    },
+    {
+      "from_n": 41,
+      "to_n": 42,
+      "from_place": "Bottomless Cave of Sunken-Empty Mountain",
+      "to_place": "Mie-Fa Kingdom",
+      "from_chapter": 82,
+      "to_chapter": 84,
+      "from_region": "Sunken-Empty Mountain",
+      "to_region": "Mie-Fa Kingdom"
+    },
+    {
+      "from_n": 42,
+      "to_n": 43,
+      "from_place": "Mie-Fa Kingdom",
+      "to_place": "Linked-Circle Cave of Hidden-Mist Mountain",
+      "from_chapter": 84,
+      "to_chapter": 86,
+      "from_region": "Mie-Fa Kingdom",
+      "to_region": "Hidden-Mist Mountain"
+    },
+    {
+      "from_n": 43,
+      "to_n": 44,
+      "from_place": "Linked-Circle Cave of Hidden-Mist Mountain",
+      "to_place": "Fengxian Commandery",
+      "from_chapter": 86,
+      "to_chapter": 87,
+      "from_region": "Hidden-Mist Mountain",
+      "to_region": "Outer Commiries of the Heavenly Kingdom"
+    },
+    {
+      "from_n": 44,
+      "to_n": 45,
+      "from_place": "Fengxian Commandery",
+      "to_place": "Yuhua City of Yuhua Prefecture",
+      "from_chapter": 87,
+      "to_chapter": 88,
+      "from_region": "Outer Commiries of the Heavenly Kingdom",
+      "to_region": "Yuhua Prefecture"
+    },
+    {
+      "from_n": 45,
+      "to_n": 46,
+      "from_place": "Yuhua City of Yuhua Prefecture",
+      "to_place": "Tiger-Mouth Cave of Leopard-Head Mountain",
+      "from_chapter": 88,
+      "to_chapter": 90,
+      "from_region": "Yuhua Prefecture",
+      "to_region": "Yuhua Prefecture"
+    },
+    {
+      "from_n": 46,
+      "to_n": 47,
+      "from_place": "Tiger-Mouth Cave of Leopard-Head Mountain",
+      "to_place": "Ciyun Temple of Jinping Prefecture",
+      "from_chapter": 90,
+      "to_chapter": 91,
+      "from_region": "Yuhua Prefecture",
+      "to_region": "Jinping Prefecture"
+    },
+    {
+      "from_n": 47,
+      "to_n": 48,
+      "from_place": "Ciyun Temple of Jinping Prefecture",
+      "to_place": "Heavenly Kingdom of India",
+      "from_chapter": 91,
+      "to_chapter": 93,
+      "from_region": "Jinping Prefecture",
+      "to_region": "Heavenly Kingdom of India"
+    },
+    {
+      "from_n": 48,
+      "to_n": 49,
+      "from_place": "Heavenly Kingdom of India",
+      "to_place": "Maoying Mountain",
+      "from_chapter": 93,
+      "to_chapter": 95,
+      "from_region": "Heavenly Kingdom of India",
+      "to_region": "Heavenly Kingdom of India"
+    },
+    {
+      "from_n": 49,
+      "to_n": 50,
+      "from_place": "Maoying Mountain",
+      "to_place": "Diling County of Tongtai Prefecture",
+      "from_chapter": 95,
+      "to_chapter": 96,
+      "from_region": "Heavenly Kingdom of India",
+      "to_region": "Heavenly Kingdom of India"
+    },
+    {
+      "from_n": 50,
+      "to_n": 51,
+      "from_place": "Diling County of Tongtai Prefecture",
+      "to_place": "Spirit Mountain Thunderclap Temple",
+      "from_chapter": 96,
+      "to_chapter": 98,
+      "from_region": "Heavenly Kingdom of India",
+      "to_region": "Aparagodaniya Continent"
+    },
+    {
+      "from_n": 51,
+      "to_n": 52,
+      "from_place": "Spirit Mountain Thunderclap Temple",
+      "to_place": "Tongtian River (return leg)",
+      "from_chapter": 98,
+      "to_chapter": 99,
+      "from_region": "Aparagodaniya Continent",
+      "to_region": "Kingdom of Chariots and Slows"
+    },
+    {
+      "from_n": 52,
+      "to_n": 53,
+      "from_place": "Tongtian River (return leg)",
+      "to_place": "Chang'an (return)",
+      "from_chapter": 99,
+      "to_chapter": 100,
+      "from_region": "Kingdom of Chariots and Slows",
+      "to_region": "Great Tang"
+    }
+  ],
+  "by_region": {
+    "Great Tang": [
+      {
+        "n": 1,
+        "chapter": 12,
+        "place": "Huasheng Temple of Chang'an",
+        "event": "The Water-Land Assembly; ordered to journey west"
+      },
+      {
+        "n": 2,
+        "chapter": 13,
+        "place": "Famen Temple",
+        "event": "The monks see him off"
+      },
+      {
+        "n": 53,
+        "chapter": 100,
+        "place": "Chang'an (return)",
+        "event": "Returns to the Eastern Land; the Five Saints attain their true forms"
+      }
+    ],
+    "Great Tang Border": [
+      {
+        "n": 3,
+        "chapter": 13,
+        "place": "Twin Fork Ridge",
+        "event": "Meets General Yin (the Tiger Demon)"
+      },
+      {
+        "n": 4,
+        "chapter": 13,
+        "place": "Two-Realm Mountain (Five Elements Mountain)",
+        "event": "Sun Wukong recruited"
+      }
+    ],
+    "Xifan Habi Kingdom": [
+      {
+        "n": 5,
+        "chapter": 15,
+        "place": "Eagle-Sorrow Stream on Serpent-Coil Mountain",
+        "event": "The White Dragon Horse recruited"
+      },
+      {
+        "n": 6,
+        "chapter": 16,
+        "place": "Guanyin Monastery",
+        "event": "Loses the kasaya"
+      },
+      {
+        "n": 7,
+        "chapter": 17,
+        "place": "Black Wind Cave on Black Wind Mountain",
+        "event": "Great battle with the Black Bear Demon"
+      },
+      {
+        "n": 10,
+        "chapter": 20,
+        "place": "Yellow Wind Ridge",
+        "event": "Yellow Wind Demon"
+      },
+      {
+        "n": 11,
+        "chapter": 22,
+        "place": "Flowing-Sand River",
+        "event": "Sha Wujing recruited"
+      },
+      {
+        "n": 12,
+        "chapter": 23,
+        "place": "Mo Family Village",
+        "event": "The Four Saints test his resolve"
+      },
+      {
+        "n": 14,
+        "chapter": 27,
+        "place": "White Tiger Ridge",
+        "event": "Three strikes on the White Bone Demon"
+      },
+      {
+        "n": 15,
+        "chapter": 28,
+        "place": "Black Pine Forest",
+        "event": "Yellow-Robed Demon"
+      },
+      {
+        "n": 20,
+        "chapter": 43,
+        "place": "Black Water River",
+        "event": "The Crocodile Demon"
+      },
+      {
+        "n": 28,
+        "chapter": 59,
+        "place": "Flaming Mountain",
+        "event": "Crossing the Flaming Mountain"
+      },
+      {
+        "n": 31,
+        "chapter": 65,
+        "place": "Minor Thunderclap Temple",
+        "event": "Yellow-Browed Boy"
+      },
+      {
+        "n": 35,
+        "chapter": 72,
+        "place": "Silk-Web Cave of Silk-Web Ridge",
+        "event": "Spider Spirit"
+      },
+      {
+        "n": 36,
+        "chapter": 73,
+        "place": "Yellow Flower Monastery",
+        "event": "The Centipede Demon"
+      },
+      {
+        "n": 40,
+        "chapter": 80,
+        "place": "Zhenhai Monastery in Black Pine Forest",
+        "event": "The Rat Demon"
+      }
+    ],
+    "Kingdom of Ussa": [
+      {
+        "n": 8,
+        "chapter": 18,
+        "place": "Gao Family Village in the Kingdom of Ussa",
+        "event": "Zhu Bajie recruited"
+      },
+      {
+        "n": 9,
+        "chapter": 20,
+        "place": "Mount Butu",
+        "event": "Meets Master Wuchao, who gives him the Heart Sutra"
+      }
+    ],
+    "Mount Wanshou": [
+      {
+        "n": 13,
+        "chapter": 24,
+        "place": "Wuzhuang Temple on Mount Wanshou",
+        "event": "Zhenyuan Daxian and the Ginseng Fruit"
+      }
+    ],
+    "Kingdom of Precious Elephants": [
+      {
+        "n": 16,
+        "chapter": 29,
+        "place": "Kingdom of Precious Elephants",
+        "event": "Delivers the letter and saves the princess"
+      },
+      {
+        "n": 17,
+        "chapter": 32,
+        "place": "Lotus Cave on Flat-Top Mountain",
+        "event": "Golden and Silver Horns"
+      }
+    ],
+    "Wuji Kingdom": [
+      {
+        "n": 18,
+        "chapter": 36,
+        "place": "Wuji Kingdom",
+        "event": "Saves the king and tells the true from the false"
+      }
+    ],
+    "Mount Hao": [
+      {
+        "n": 19,
+        "chapter": 39,
+        "place": "Fire-Cloud Cave of Mount Hao",
+        "event": "Great battle with Red Boy"
+      }
+    ],
+    "Kingdom of Chariots and Slows": [
+      {
+        "n": 21,
+        "chapter": 44,
+        "place": "Kingdom of Chariots and Slows",
+        "event": "Battles the Three Immortals"
+      },
+      {
+        "n": 22,
+        "chapter": 47,
+        "place": "Chen's Village on the Tongtian River",
+        "event": "Goldfish Spirit"
+      },
+      {
+        "n": 52,
+        "chapter": 99,
+        "place": "Tongtian River (return leg)",
+        "event": "The old turtle falls into the water"
+      }
+    ],
+    "Mount Jindou": [
+      {
+        "n": 23,
+        "chapter": 50,
+        "place": "Jindou Cave of Mount Jindou",
+        "event": "Azure Ox Spirit"
+      }
+    ],
+    "Kingdom of Women in Western Liang": [
+      {
+        "n": 24,
+        "chapter": 53,
+        "place": "Mother-and-Child River of the Kingdom of Women",
+        "event": "The queen forces a marriage"
+      },
+      {
+        "n": 25,
+        "chapter": 55,
+        "place": "Pipa Cave on Poison-Enemy Mountain",
+        "event": "Scorpion Spirit"
+      }
+    ],
+    "Pūrvavideha Continent": [
+      {
+        "n": 26,
+        "chapter": 57,
+        "place": "Flower-Fruit Mountain",
+        "event": "The two Monkey Kings"
+      }
+    ],
+    "Emerald-Cloud Mountain": [
+      {
+        "n": 27,
+        "chapter": 59,
+        "place": "Plantain Cave of Emerald-Cloud Mountain",
+        "event": "Three borrowings of the Plantain Fan"
+      }
+    ],
+    "Jisai Kingdom": [
+      {
+        "n": 29,
+        "chapter": 62,
+        "place": "Golden Light Temple of Jisai Kingdom",
+        "event": "The Buddhist treasure is stolen"
+      },
+      {
+        "n": 30,
+        "chapter": 63,
+        "place": "Jade Wave Pool",
+        "event": "The Nine-Headed Bug steals the treasure"
+      }
+    ],
+    "Tuoluo Village": [
+      {
+        "n": 32,
+        "chapter": 67,
+        "place": "Rotten-Persimmon Lane on Seven-Wonders Mountain",
+        "event": "The Python Demon"
+      }
+    ],
+    "Vermilion and Purple Kingdom": [
+      {
+        "n": 33,
+        "chapter": 68,
+        "place": "Vermilion and Purple Kingdom",
+        "event": "Practises medicine to save the king"
+      },
+      {
+        "n": 34,
+        "chapter": 70,
+        "place": "Xiezhi Cave of Qilin Mountain",
+        "event": "Grand Duke Sai (the Golden-haired Hou)"
+      }
+    ],
+    "Lion-Camel Kingdom": [
+      {
+        "n": 37,
+        "chapter": 74,
+        "place": "Lion-Camel Cave of Lion-Camel Ridge",
+        "event": "The Three Demon Kings"
+      }
+    ],
+    "Kingdom of the Bhikṣus": [
+      {
+        "n": 38,
+        "chapter": 78,
+        "place": "Kingdom of the Bhikṣus",
+        "event": "Saves the children"
+      },
+      {
+        "n": 39,
+        "chapter": 79,
+        "place": "Qinghua Immortal Cave",
+        "event": "White Deer Spirit"
+      }
+    ],
+    "Sunken-Empty Mountain": [
+      {
+        "n": 41,
+        "chapter": 82,
+        "place": "Bottomless Cave of Sunken-Empty Mountain",
+        "event": "The Golden-Nosed White-Haired Mouse Demon"
+      }
+    ],
+    "Mie-Fa Kingdom": [
+      {
+        "n": 42,
+        "chapter": 84,
+        "place": "Mie-Fa Kingdom",
+        "event": "The king vows to kill the monks"
+      }
+    ],
+    "Hidden-Mist Mountain": [
+      {
+        "n": 43,
+        "chapter": 86,
+        "place": "Linked-Circle Cave of Hidden-Mist Mountain",
+        "event": "the Mugwort-Flower-Skin Leopard Demon"
+      }
+    ],
+    "Outer Commiries of the Heavenly Kingdom": [
+      {
+        "n": 44,
+        "chapter": 87,
+        "place": "Fengxian Commandery",
+        "event": "Praying for rain"
+      }
+    ],
+    "Yuhua Prefecture": [
+      {
+        "n": 45,
+        "chapter": 88,
+        "place": "Yuhua City of Yuhua Prefecture",
+        "event": "Takes disciples and teaches his skills"
+      },
+      {
+        "n": 46,
+        "chapter": 90,
+        "place": "Tiger-Mouth Cave of Leopard-Head Mountain",
+        "event": "The Yellow Lion Demon"
+      }
+    ],
+    "Jinping Prefecture": [
+      {
+        "n": 47,
+        "chapter": 91,
+        "place": "Ciyun Temple of Jinping Prefecture",
+        "event": "The Rhinoceros Demons"
+      }
+    ],
+    "Heavenly Kingdom of India": [
+      {
+        "n": 48,
+        "chapter": 93,
+        "place": "Heavenly Kingdom of India",
+        "event": "The true and false princesses"
+      },
+      {
+        "n": 49,
+        "chapter": 95,
+        "place": "Maoying Mountain",
+        "event": "The Jade Rabbit Demon"
+      },
+      {
+        "n": 50,
+        "chapter": 96,
+        "place": "Diling County of Tongtai Prefecture",
+        "event": "The household of Kou the Head of the Household"
+      }
+    ],
+    "Aparagodaniya Continent": [
+      {
+        "n": 51,
+        "chapter": 98,
+        "place": "Spirit Mountain Thunderclap Temple",
+        "event": "Obtains the true scriptures"
+      }
+    ]
+  },
+  "by_type": {
+    "Cave": 13,
+    "Mountain": 10,
+    "Temple/Monastery": 9,
+    "Kingdom": 9,
+    "Water": 6,
+    "City": 6
+  }
+};
 
     let CURRENT_DATA = null;
     let CURRENT_FILTER = "";
@@ -2443,7 +3766,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // ============== 数据加载 ==============
     async function loadData() {
         try {
-            const response = await fetch('../data/json/journey_route.json');
+            const response = await fetch('../en/json/journey_route.json');
             if (!response.ok) throw new Error('fetch failed: ' + response.status);
             const data = await response.json();
             // 兼容字段：如果直接是数组，包装一下
@@ -2452,8 +3775,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             }
             return normalizeData(data);
         } catch (e) {
-            console.log('[INFO] Using embedded mock data:', e.message);
-            return EMBEDDED_MOCK;
+            console.log('[INFO] Using embedded truth snapshot:', e.message);
+            return normalizeData(EMBEDDED_DATA);
         }
     }
 
@@ -2956,14 +4279,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         CURRENT_DATA = data;
         window.__lastData = data;
 
-        // 判断是否使用 mock 数据
-        const isMock = data === EMBEDDED_MOCK;
+        // 判断是否使用内嵌真值快照（file:// 双击时 fetch 不可达）
+        const isMock = data === EMBEDDED_DATA;
         if (isMock) {
             d3.select("#dataSource")
                 .classed("mock-notice", true)
-                .html(`<strong>Currently showing embedded mock data (${data.total_places} sample places).</strong> Run <code>py E_Geography/journey_route.py --output output/data/journey_route.json</code> to generate data; refresh to load all 53 places.`);
+                .html(`<strong>Currently showing the embedded truth snapshot (${data.total_places} places, same source as <code>../en/json/journey_route.json</code>).</strong> In http server mode the page loads that JSON live.`);
         } else {
-            d3.select("#dataSource").html(`Data source: loaded live from <code>../data/json/journey_route.json</code> (http server mode)`);
+            d3.select("#dataSource").html(`Data source: loaded live from <code>../en/json/journey_route.json</code> (http server mode)`);
         }
 
         renderKPI(data);

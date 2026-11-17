@@ -1,0 +1,18 @@
+{
+  "concept_name": "Monster Sociology Overall Statistics",
+  "total_concepts": 3,
+  "concept_list": [
+    "Monster Crime Pattern Taxonomy",
+    "Distress Signal Survival Probability",
+    "Mount Desertion Archive"
+  ],
+  "total_data_points": 25,
+  "key_findings": [
+    "5 demon crime methods across 69 cases · Forceful Plunder most common (25 cases) · Magic Threat most dangerous (50% success rate)",
+    "10 distress signals with average 42.5% survival · Wukong's Fiery Eyes most reliable (80%) · crying least effective (5%)",
+    "10 mount-desertion cases with average sentence severity only 2.8/10 · 0% actual punishment rate · revealing judicial double standards",
+    "60%+ wild-demon mortality vs 0% mount-desertion mortality · background decides life and death"
+  ],
+  "cross_concept_insight": "Three findings of monster sociology: 1) crime methods are positively correlated with treasure tier; 2) Tang Sanzang's survival depends heavily on Wukong · his own survival ability is extremely weak; 3) Xiyouji justice is a classic 'background decides the verdict' · mount desertion is the 'judicial immunity pass' of the privileged class",
+  "methodology_note": "Data based on the original 100 chapters of Journey to the West · case counts and verdicts are qualitative analysis · severity uses a subjective 1–10 score"
+}

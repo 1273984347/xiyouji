@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Recruiter",
+    "chapter": "Ch. 8 / Ch. 12",
+    "target": "Xuanzang / Wukong / Bajie / Sha Wujing / White Dragon Horse",
+    "action": "Selecting the monk in Chang’an · volunteering at the Ullambana assembly",
+    "tag": "An eye for talent, keener than magic",
+    "color": "#C0392B",
+    "key": "recruit"
+  },
+  {
+    "name": "Restrainer",
+    "chapter": "Ch. 14",
+    "target": "Sun Wukong",
+    "action": "Dealing the Tightening Fillet · the Heart-Settling Mantra",
+    "tag": "The band is a gift—only the wrapping hurts",
+    "color": "#40619E",
+    "key": "constraint"
+  },
+  {
+    "name": "Reclaimer",
+    "chapter": "Ch. 17 / Ch. 39 / Ch. 46",
+    "target": "Black Bear Spirit / Red Boy / Goldfish",
+    "action": "Demon roundup and aftercare · gradient control through individualized teaching",
+    "tag": "What she reclaims are the fragments she herself scattered",
+    "color": "#8b7355",
+    "key": "recycle"
+  },
+  {
+    "name": "Mediator",
+    "chapter": "Ch. 26 / Ch. 39 / Ch. 46",
+    "target": "Zhenyuanzi / Red Boy / Tongtian River",
+    "action": "Internal team wounds · crisis PR",
+    "tag": "Skill shows most when she does not act",
+    "color": "#5a4a6b",
+    "key": "mediate"
+  },
+  {
+    "name": "Orchestrator",
+    "chapter": "Ch. 8",
+    "target": "Eighty-one Tribulations · demon deployment",
+    "action": "Project manager · resource allocation · risk control",
+    "tag": "She is not a bodhisattva at heart—she is a project manager",
+    "color": "#6a8b5a",
+    "key": "operate"
+  },
+  {
+    "name": "Exiter",
+    "chapter": "Ch. 56 / Ch. 98",
+    "target": "Mount Ling · Purple Bamboo Grove",
+    "action": "Silent exit · band abolished · retiring to grow bamboo",
+    "tag": "She even skipped the farewell",
+    "color": "#8a7a6a",
+    "key": "exit"
+  }
+]

@@ -1,0 +1,124 @@
+{
+  "concept_name": "Flower Fruit Mountain’s 500-Year Ecological Succession",
+  "english_name": "Flower Fruit Mountain 500-Year Ecological Succession",
+  "ecological_definition": "Ecological succession: the process by which an ecosystem gradually recovers through a series of stages after a disturbance, analogous to secondary succession following a forest fire",
+  "core_case": "Wukong was imprisoned under Five Elements Mountain for 500 years; Flower Fruit Mountain went from ‘monkey-troop peak’ to ‘harassed by hunters’ and back to ‘recovery’ — a complete history of secondary succession",
+  "succession_stages": [
+    {
+      "stage": 1,
+      "name": "Peak · Great Sage Equal to Heaven era",
+      "year_range": "1000+ years before Havoc in Heaven",
+      "monkey_population": 47000,
+      "biodiversity_index": 9.5,
+      "vegetation_cover": 95,
+      "key_species": [
+        "macaque",
+        "golden monkey",
+        "ape",
+        "horse monkey"
+      ],
+      "ecological_description": "Flower Fruit Mountain, a blessed land · Water Curtain Cave, a paradise · monkeys thriving · no natural enemies · extremely high biodiversity",
+      "keystone_species": "Sun Wukong (Great Sage Equal to Heaven)",
+      "human_interference": 0,
+      "stability": 10
+    },
+    {
+      "stage": 2,
+      "name": "Disturbance · Havoc in Heaven",
+      "year_range": "The year of Havoc in Heaven",
+      "monkey_population": 47000,
+      "biodiversity_index": 9.5,
+      "vegetation_cover": 90,
+      "key_species": [
+        "macaque",
+        "golden monkey",
+        "ape",
+        "horse monkey"
+      ],
+      "ecological_description": "Wukong rebelled against the Celestial Court · Flower Fruit Mountain was burned by heavenly troops · the ‘Seven Great Sages’ alliance dissolved · the first major disturbance",
+      "keystone_species": "Sun Wukong (captured)",
+      "human_interference": 10,
+      "stability": 5,
+      "disturbance_event": "Heavenly troops attacked with fire · burned most of Flower Fruit Mountain"
+    },
+    {
+      "stage": 3,
+      "name": "Collapse · 500 years under Five Elements Mountain · hunter slaughter",
+      "year_range": "During the 500 years under Five Elements Mountain",
+      "monkey_population": 1300,
+      "biodiversity_index": 4,
+      "vegetation_cover": 60,
+      "key_species": [
+        "surviving macaques"
+      ],
+      "ecological_description": "Wukong was imprisoned under Five Elements Mountain · the troop lost its leader · hunters frequently raided · ‘setting fires + netting and arrows’ · the monkey troop plunged from 47,000 to 1,300 · a 97% decline",
+      "keystone_species": "None (keystone lost)",
+      "human_interference": 10,
+      "stability": 2,
+      "disturbance_event": "Hunters slaughtered relentlessly · burning + arrows + netting",
+      "population_decline_percent": 97.2
+    },
+    {
+      "stage": 4,
+      "name": "Remnant · Wukong returns · clearing the hunters",
+      "year_range": "1st year after release from Five Elements Mountain",
+      "monkey_population": 1300,
+      "biodiversity_index": 4.5,
+      "vegetation_cover": 65,
+      "key_species": [
+        "surviving macaques"
+      ],
+      "ecological_description": "Wukong returned to Flower Fruit Mountain · greeted by ‘over a thousand monkeys’ · cleared out 1,000+ hunters · rebuilt Water Curtain Cave · restored order",
+      "keystone_species": "Sun Wukong (returned)",
+      "human_interference": 0,
+      "stability": 5
+    },
+    {
+      "stage": 5,
+      "name": "Recovery · on the pilgrimage · Wukong’s occasional returns",
+      "year_range": "14 years of the pilgrimage",
+      "monkey_population": 2000,
+      "biodiversity_index": 6,
+      "vegetation_cover": 75,
+      "key_species": [
+        "macaque",
+        "golden monkey (recovering)"
+      ],
+      "ecological_description": "Wukong occasionally returned to Flower Fruit Mountain · the troop was recovering · but was still harassed in his absence · not yet fully restored",
+      "keystone_species": "Sun Wukong (occasional returns)",
+      "human_interference": 2,
+      "stability": 7
+    },
+    {
+      "stage": 6,
+      "name": "Buddhahood · the Victorious Fighting Buddha returns",
+      "year_range": "After the pilgrimage succeeded",
+      "monkey_population": 8000,
+      "biodiversity_index": 8,
+      "vegetation_cover": 90,
+      "key_species": [
+        "macaque",
+        "golden monkey",
+        "ape (recovering)"
+      ],
+      "ecological_description": "Wukong became the Victorious Fighting Buddha · occasionally returned to Flower Fruit Mountain · the troop recovered to 1/6 of its peak · the ecosystem stabilized",
+      "keystone_species": "Sun Wukong (Victorious Fighting Buddha)",
+      "human_interference": 0,
+      "stability": 9
+    }
+  ],
+  "succession_insights": [
+    "Flower Fruit Mountain underwent a complete secondary succession: peak → disturbance → collapse → remnant → recovery → buddhahood",
+    "The loss of the keystone species (Sun Wukong) was the root cause of the collapse · not the hunters themselves",
+    "Over 500 years the troop plunged from 47,000 to 1,300 · a 97.2% decline · ecological collapse",
+    "The hunter slaughter was essentially a chain reaction after keystone loss · not an independent disturbance",
+    "Slow recovery: 14+ years to go from 1,300 to 8,000 · still not back to the peak",
+    "After buddhahood the troop recovered to 8,000 · only 17% of the peak · ecological recovery is a long road"
+  ],
+  "modern_parallel": {
+    "yellowstone_wolves": "Yellowstone wolf reintroduction: keystone loss caused ecological collapse · recovery after reintroduction",
+    "forest_fire_succession": "Secondary succession after a forest fire: pioneer species → intermediate species → climax community",
+    "island_ecology": "Island ecology: Flower Fruit Mountain resembles an isolated island · keystone loss hits even harder",
+    "wukong_as_keystone": "Wukong is Flower Fruit Mountain’s keystone species · equivalent to Yellowstone’s wolves"
+  }
+}

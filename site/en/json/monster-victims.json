@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Gold & Silver Horn Kings",
+    "type": "Identity Trauma",
+    "chapter": "Ch. 32-35",
+    "perpetrator": "Taishang Laojun (lender)",
+    "bystander": "Guanyin",
+    "rescuer": "—",
+    "fate": "Recycled by Laojun",
+    "color": "var(--chart-1)",
+    "key": "jin",
+    "tag": "Borrowed Suffering · Boys Descend to Earth",
+    "wound": "Examiner props preparing with portrait posters; after turning to water, their souls were reclaimed by Laojun",
+    "desc": "Guanyin borrowed them from Taishang Laojun three times, transforming them into demons to test the pilgrimage team's resolve. Borrowed suffering, borrowed people."
+  },
+  {
+    "name": "Sai Taisui",
+    "type": "Existential Trauma",
+    "chapter": "Ch. 70-71",
+    "perpetrator": "Guanyin (Purple-Gold Bell)",
+    "bystander": "King of Zhuzi",
+    "rescuer": "Wukong",
+    "fate": "Halter returned by Guanyin",
+    "color": "#8b7355",
+    "key": "sai",
+    "tag": "Stole the Purple-Gold Bell · Refusing to Be Ridden · A Quiet Demon",
+    "wound": "Bit through the iron chain · A neck that stopped hurting for three years · Wore the Purple-Gold Bell at his waist as an ID",
+    "desc": "The Golden-Haired Hou bit through the iron chain beneath Guanyin's lotus throne, snatched the Purple-Gold Bell, seized the Lady, and shut himself away for three years. What he stole was not the bell but the right not to be ridden."
+  },
+  {
+    "name": "Golden Sage Lady",
+    "type": "Gender Trauma",
+    "chapter": "Ch. 70-71",
+    "perpetrator": "Sai Taisui",
+    "bystander": "King of Zhuzi",
+    "rescuer": "Immortal Ziyang",
+    "fate": "Returned home wearing the brown robe",
+    "color": "var(--chart-2)",
+    "key": "gong",
+    "tag": "The One in the Brown Robe · Gender Victim",
+    "wound": "Three years in the brown robe · Tactile amnesia · Internalizing a three-zhang distance",
+    "desc": "Immortal Ziyang gifted her the brown robe to protect her chastity, yet it also stripped away her right to consent. For three years she could not touch her own face. The barbs fell away, but the tactile nerves had not yet awakened."
+  },
+  {
+    "name": "Chen Village Boy & Girl",
+    "type": "Sacrifice Trauma",
+    "chapter": "Ch. 47-49",
+    "perpetrator": "King of Spiritual Inspiration",
+    "bystander": "Guanyin",
+    "rescuer": "Wukong",
+    "fate": "Rescued by Wukong",
+    "color": "#5a4a6b",
+    "key": "tong",
+    "tag": "Offerings to the King of Spiritual Inspiration · Tears Crystallized into Salt",
+    "wound": "Nine years of offerings · Eighteen children's lives · All the village's realgar from the same hands",
+    "desc": "The King of Spiritual Inspiration of the Tongtian River (a goldfish from Guanyin's lotus pond) demanded a boy and a girl each year. Nine years of cost crystallized into salt, seeping into the village's foundation."
+  }
+]

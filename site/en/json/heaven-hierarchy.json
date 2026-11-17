@@ -1,0 +1,50 @@
+[
+  {
+    "key": "king",
+    "name": "Jade Emperor (Sovereign)",
+    "tag": "JADE EMPEROR",
+    "color": "#C0392B",
+    "desc": "Sovereign of the Three Realms, dwelling in the Hall of Lingxiao. Holds Heaven's highest decision-making power, issuing decrees, dispatching troops, and granting titles. Nominally sovereign over the Three Realms, he can in reality only 'invite' and not 'command' the Buddhist and Taoist realms.",
+    "examples": "Jade Emperor · Queen Mother of the West"
+  },
+  {
+    "key": "warrior",
+    "name": "Warrior Faction",
+    "tag": "WARRIORS",
+    "color": "#5a8a6a",
+    "desc": "The Pagoda-Bearing Heavenly King Li Jing commands the troops, Nezha serves as vanguard, and Erlang Shen obeys summons but not edicts. Marshal Tianpeng and the Curtain-Lifting General oversee the naval forces and the imperial guard, and the Giant Spirit God guards the gate.",
+    "examples": "Pagoda-Bearing Heavenly King Li Jing · Nezha · Erlang Shen · Marshal Tianpeng · Curtain-Lifting General · Giant Spirit God"
+  },
+  {
+    "key": "judge",
+    "name": "Civil Officials",
+    "tag": "CIVIL OFFICIALS",
+    "color": "#8E7D62",
+    "desc": "Taibai Jinxing serves as chief envoy in charge of amnesty and diplomacy. The Wenqu and Wuqu Stars assist in governance, and Yue Lao presides over marriage. This is Heaven's administrative and diplomatic hub.",
+    "examples": "Taibai Jinxing · Wenqu Star · Wuqu Star · Yue Lao"
+  },
+  {
+    "key": "marginal",
+    "name": "Marginal Star-Lords",
+    "tag": "MARGINAL",
+    "color": "#8a6a4a",
+    "desc": "The Barefoot Immortal is idle and aloof, the four gods of wind, rain, thunder and lightning preside over nature, and the Twenty-Eight Constellations rotate as Dharma-protectors. Power is dispersed but functions are specialized, with a relatively high degree of independence.",
+    "examples": "Barefoot Immortal · Wind God · Rain God · Thunder God · Lightning Goddess · Twenty-Eight Constellations"
+  },
+  {
+    "key": "buddha",
+    "name": "Buddhist Counterbalance",
+    "tag": "BUDDHA",
+    "color": "#8E7D62",
+    "desc": "Although Tathāgata is not Heaven's subject, he exerts religious penetration over Heaven through 'the Jade Emperor inviting the Buddha to subdue demons.' With full scores in both Magic and Independence, he is an important external counterbalance to Heaven's power.",
+    "examples": "Tathāgata"
+  },
+  {
+    "key": "taoist",
+    "name": "Taoist Counterbalance",
+    "tag": "TAOIST",
+    "color": "#40619E",
+    "desc": "Taishang Laojun dwells in the Tushita Palace, refining elixirs and treasures. When the Green Ox Demon descends to earth, Laojun must capture him in person — an important Taoist counterbalance to Heaven's power.",
+    "examples": "Taishang Laojun"
+  }
+]

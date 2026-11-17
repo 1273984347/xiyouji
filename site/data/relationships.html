@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-16SZeWNRkwFnRlSE2EdqCW6RT/V8HaVGrgOTX5gZLIU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fXtuaFNfJtLFyyqt9fXg76Ciql01LQLJADFGzqTOb8A=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>关系网络 · 详解西游记</title>
@@ -3065,12 +3065,12 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     // ===== Main render =====
     async function main() {
         const [faction, artifact, rescue, belbin, cooccurrence, timeline] = await Promise.all([
-            loadJson('faction_distribution.json', EMBEDDED.faction),
-            loadJson('artifact_counter.json', EMBEDDED.artifact),
-            loadJson('rescue_network.json', EMBEDDED.rescue),
-            loadJson('belbin_roles.json', EMBEDDED.belbin),
-            loadJson('cooccurrence.json', EMBEDDED.cooccurrence),
-            loadJson('cooccurrence_timeline.json', EMBEDDED.cooccurrence_timeline)
+            loadJson('json/faction_distribution.json', EMBEDDED.faction),
+            loadJson('json/artifact_counter.json', EMBEDDED.artifact),
+            loadJson('json/rescue_network.json', EMBEDDED.rescue),
+            loadJson('json/belbin_roles.json', EMBEDDED.belbin),
+            loadJson('json/cooccurrence.json', EMBEDDED.cooccurrence),
+            loadJson('json/cooccurrence_timeline.json', EMBEDDED.cooccurrence_timeline)
         ]);
         window.__lastData = { faction, artifact, rescue, belbin, cooccurrence, timeline };
 

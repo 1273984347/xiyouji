@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Virūḍhaka (Growth Heavenly King)",
+    "artifact": "Azure Cloud Sword",
+    "symbol": "Severs afflictions",
+    "wound": "Blade scratches",
+    "signature": "Cloud pattern",
+    "silence": "The void after afflictions are cut",
+    "color": "#40619E",
+    "position": "Southern Heavenly Gate",
+    "desc": "The sword leaves its sheath to sever the threads of affliction; its edge always points outward and can never turn back upon itself."
+  },
+  {
+    "name": "Virūpākṣa (Broad-Eyed Heavenly King)",
+    "artifact": "Slingshot",
+    "symbol": "Old identity",
+    "wound": "Snapped rubber band",
+    "signature": "Slingshot marks",
+    "silence": "Sees but cannot hit",
+    "color": "#8b7355",
+    "position": "Southern Heavenly Gate",
+    "desc": "An unofficial artifact, an old relic from Guanjiangkou. One shot struck Wukong’s tail, yet it was never recorded as a military merit."
+  },
+  {
+    "name": "Vaiśravaṇa (Many-Hearing Heavenly King)",
+    "artifact": "Primal Chaos Pearl Umbrella",
+    "symbol": "Memory of dents",
+    "wound": "Dents on the umbrella canopy",
+    "signature": "Pearl marks",
+    "silence": "Hears everything but cannot speak",
+    "color": "#5a4a6b",
+    "position": "Southern Heavenly Gate",
+    "desc": "It shields all things but not its own scars; the dents on the canopy are the permanent seal left by the Golden-Banded Staff."
+  },
+  {
+    "name": "Dhṛtarāṣṭra (Nation-Holding Heavenly King)",
+    "artifact": "Flower Fox Marten",
+    "symbol": "Huihui",
+    "wound": "Broken tooth",
+    "signature": "Tuning marks",
+    "silence": "The tuner loses speech",
+    "color": "#C0392B",
+    "position": "Southern Heavenly Gate",
+    "desc": "The purple-gold Flower Fox Marten named “Huihui”, the only artifact that moves on its own; it bit the Golden-Banded Staff and shattered a front tooth."
+  }
+]

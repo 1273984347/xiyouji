@@ -1,0 +1,116 @@
+{
+  "concept_name": "取经 KPI 与里程碑",
+  "english_name": "KPIs and Milestones",
+  "definition": "按 PMBOK 项目管理：14 年取经项目的关键绩效指标与里程碑",
+  "project_basics": {
+    "project_name": "西天取经战略项目",
+    "project_sponsor": "如来佛祖（发起方）+ 观音菩萨（执行总监）",
+    "project_manager": "唐僧（项目经理）",
+    "project_team": "悟空（技术负责人）+ 八戒（外围）+ 沙僧（后勤）+ 白龙马（交通）",
+    "project_duration": "14 年",
+    "project_budget": "无现金预算·靠化缘+施主",
+    "project_scope": "从长安到灵山·108000 里·81 难"
+  },
+  "kpis": [
+    {
+      "kpi_name": "完成进度",
+      "target": "100%",
+      "actual": "100%",
+      "status": "✓ 达成",
+      "milestone": "第 100 回·灵山取经·封佛号"
+    },
+    {
+      "kpi_name": "劫难数量",
+      "target": "81 难",
+      "actual": "81 难",
+      "status": "✓ 达成",
+      "milestone": "通天河落水补足第 81 难"
+    },
+    {
+      "kpi_name": "经卷数量",
+      "target": "5048 卷",
+      "actual": "5048 卷",
+      "status": "✓ 达成",
+      "milestone": "灵山藏经阁取经·阿傩迦叶索贿（人事贿赂风险）"
+    },
+    {
+      "kpi_name": "团队存活率",
+      "target": "100%",
+      "actual": "100%",
+      "status": "✓ 达成",
+      "milestone": "5 人全部成佛/封号"
+    },
+    {
+      "kpi_name": "工期",
+      "target": "14 年",
+      "actual": "14 年",
+      "status": "✓ 达成",
+      "milestone": "贞观 13 年出发·贞观 27 年返回"
+    },
+    {
+      "kpi_name": "化缘次数",
+      "target": "未设定",
+      "actual": "约 1200 次",
+      "status": "— 信息",
+      "milestone": "每日 1-2 餐·沿途化缘"
+    },
+    {
+      "kpi_name": "搬救兵次数",
+      "target": "未设定",
+      "actual": "13 次（外部求助）",
+      "status": "△ 中等",
+      "milestone": "主要求助对象：观音菩萨（3 次）"
+    }
+  ],
+  "milestones": [
+    {
+      "year": "1",
+      "milestone": "出发·贞观 13 年",
+      "chapter": "第 12 回"
+    },
+    {
+      "year": "2",
+      "milestone": "收悟空·收白龙马",
+      "chapter": "第 14/15 回"
+    },
+    {
+      "year": "3",
+      "milestone": "收八戒·收沙僧",
+      "chapter": "第 18/22 回"
+    },
+    {
+      "year": "5",
+      "milestone": "三打白骨精·团队首次危机",
+      "chapter": "第 27 回"
+    },
+    {
+      "year": "7",
+      "milestone": "火焰山·项目过半",
+      "chapter": "第 59-61 回"
+    },
+    {
+      "year": "10",
+      "milestone": "狮驼岭·最难关",
+      "chapter": "第 74-77 回"
+    },
+    {
+      "year": "13",
+      "milestone": "抵达灵山·取经",
+      "chapter": "第 98 回"
+    },
+    {
+      "year": "14",
+      "milestone": "返回长安·封佛号·项目完成",
+      "chapter": "第 100 回"
+    }
+  ],
+  "project_summary": {
+    "overall_status": "✓ 成功完成",
+    "on_time": true,
+    "on_budget": true,
+    "on_scope": true,
+    "key_success_factor": "观音菩萨的及时救援（13 次）·紧箍咒对悟空的约束",
+    "key_risk_realized": "三打白骨精赶走悟空（最大风险）·但成功化解",
+    "lessons_learned": "团队建设需前期磨合·核心技术（悟空）不可替代·外部求助是重要资源"
+  }
+}

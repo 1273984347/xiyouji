@@ -1,0 +1,126 @@
+{
+  "concept_name": "Wukong's Career Transition",
+  "english_name": "Wukong Career Transition",
+  "definition": "Sun Wukong went from the Stone Monkey to the Victorious Fighting Buddha through six career stages; each stage's employer, salary, rank, satisfaction, and reason for leaving reflect a career curve from 'wild outsider' to 'inside the system' and finally 'retirement from the arena'",
+  "career_stages": [
+    {
+      "stage": 1,
+      "name": "Stone Monkey King",
+      "english_name": "Stone Monkey King",
+      "title": "Handsome Monkey King of Flower-Fruit Mountain",
+      "employer": "Flower-Fruit Mountain Autonomous Group (startup organization)",
+      "salary": "No salary; 100% of Flower-Fruit Mountain's income retained; use as needed",
+      "career_level": "L0 · Founder / CEO",
+      "satisfaction": 10,
+      "achievements": [
+        "Founded Flower-Fruit Mountain and led 47,000 monkeys",
+        "Studied under Patriarch Subhuti, gaining immortality and the 72 transformations",
+        "Forcefully crossed his name off the Ledger of Life and Death, escaping the Underworld",
+        "Borrowed treasure from the Dragon Palace, obtaining the As-you-will Gold-banded Staff (Ruyi Jingu Bang)"
+      ],
+      "leaving_reason": "Yearned for a Heavenly Court post; lured into the system by Taibai Jinxing's offer of amnesty"
+    },
+    {
+      "stage": 2,
+      "name": "Bimawen",
+      "english_name": "Bimawen (Keeper of Horses)",
+      "title": "Bimawen, Chief of the Imperial Stables",
+      "employer": "Heavenly Court Group (central state enterprise)",
+      "salary": "No defined salary; room and board; an 'unranked' official post",
+      "career_level": "L1 · Grassroots management; the lowest Heavenly Court post (unranked)",
+      "satisfaction": 2,
+      "achievements": [
+        "Raised the heavenly horses' breeding rate; horses grew plump",
+        "Completed the Court's smallest business unit (horse-keeping)"
+      ],
+      "leaving_reason": "Learned that 'Bimawen' was the lowest Heavenly Court post (unranked); wounded pride; rebelled and left Heaven"
+    },
+    {
+      "stage": 3,
+      "name": "Great Sage Equal to Heaven",
+      "english_name": "Great Sage Equal to Heaven",
+      "title": "Great Sage Equal to Heaven (empty title, no real power)",
+      "employer": "Heavenly Court Group (honorary advisor)",
+      "salary": "No salary; no real power; merely 'an office without emolument'; title only",
+      "career_level": "L2 · Honorary advisor; in name only",
+      "satisfaction": 4,
+      "achievements": [
+        "Obtained the empty title 'Great Sage Equal to Heaven'",
+        "Oversaw the Peach Orchard (really guarding the gate + stealing peaches)",
+        "Wrecked the Peach Banquet; stole Laozi's elixirs",
+        "Havoc in Heaven; defeated 100,000 heavenly troops and generals"
+      ],
+      "leaving_reason": "Not being invited to the Peach Banquet exposed the empty title; the Jade Emperor broke his word; pinned under Five Elements Mountain by Tathāgata for 500 years"
+    },
+    {
+      "stage": 4,
+      "name": "Pilgrim Sun",
+      "english_name": "Pilgrim Sun",
+      "title": "Chief disciple of Tang Sanzang; the Pilgrim",
+      "employer": "Vulture Peak Group (outsourced pilgrimage team)",
+      "salary": "No salary; room and board (alms); stock options (the promise of Buddhahood)",
+      "career_level": "L3 · Project manager; chief executor",
+      "satisfaction": 6,
+      "achievements": [
+        "Escorted Tang Sanzang 108,000 li westward to fetch the scriptures",
+        "Subdued demons over 40 times",
+        "Called in reinforcements 15 times, building a network",
+        "Completed the 81 trials and reached Vulture Peak"
+      ],
+      "leaving_reason": "Project complete; pilgrimage succeeded; stock options vested (Buddhahood)"
+    },
+    {
+      "stage": 5,
+      "name": "Victorious Fighting Buddha",
+      "english_name": "Victorious Fighting Buddha",
+      "title": "Victorious Fighting Buddha",
+      "employer": "Vulture Peak Group (Buddha-level partner)",
+      "salary": "Buddhahood; incense offerings; merit accumulation; eternal honor",
+      "career_level": "L9 · Buddha-level executive; partner tier",
+      "satisfaction": 9,
+      "achievements": [
+        "Completed the pilgrimage; titled Victorious Fighting Buddha",
+        "The golden headband loosened on its own; freed from restraint",
+        "Ranked among the Buddhas of Vulture Peak",
+        "Attained the right fruit; transcended samsara"
+      ],
+      "leaving_reason": "No departure; merit complete; formally took his place at Vulture Peak"
+    },
+    {
+      "stage": 6,
+      "name": "Retirement",
+      "english_name": "Retirement",
+      "title": "Retired Buddha (fictional extrapolation)",
+      "employer": "No employer; free agent; roaming the four seas",
+      "salary": "Buddhahood annuity; Flower-Fruit Mountain trust income; self-sufficient",
+      "career_level": "L10 · Retired; senior advisor",
+      "satisfaction": 10,
+      "achievements": [
+        "Returned to Flower-Fruit Mountain and reunited with his monkeys",
+        "Roamed the Three Realms as a free agent",
+        "Buddhahood enjoyed forever; no KPIs",
+        "Discussed the Way with the Buddhas; taught disciples"
+      ],
+      "leaving_reason": "No departure; final homecoming"
+    }
+  ],
+  "career_stats": {
+    "total_stages": 6,
+    "total_years_in_pilgrim": 14,
+    "years_under_mountain": 500,
+    "avg_satisfaction": 6.8,
+    "lowest_satisfaction": "Bimawen (2 points)",
+    "highest_satisfaction": "Stone Monkey King / Retirement (10 points)",
+    "career_peak": "Victorious Fighting Buddha (L9)",
+    "career_trough": "Bimawen (L1 · unranked)"
+  },
+  "career_insights": [
+    "Wukong's career curve is the standard path of 'startup – co-opted – setback – re-startup – acquired – partner – retirement'",
+    "The Bimawen affair is the Journey to the West world's 'mid-career crisis'; blocked grassroots promotion led to backlash",
+    "The Great Sage Equal to Heaven's 'office without emolument' is a trap of the Court system: pacified with a title but given no real power",
+    "The pilgrimage is a classic 'equity incentive': future options (Buddhahood) in exchange for present low-wage labor",
+    "The golden headband is a 'non-compete agreement': prevents job-hopping or rebellion, and loosens once the project ends",
+    "The title of Victorious Fighting Buddha is a 'partner promotion': from executor to shareholder",
+    "Wukong's biggest lesson: going it alone (Havoc in Heaven) failed; teamwork (the pilgrimage) succeeded"
+  ]
+}

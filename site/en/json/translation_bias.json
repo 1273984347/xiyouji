@@ -1,0 +1,175 @@
+[
+  {
+    "chinese": "Somersault Cloud",
+    "pinyin": "Jindou Yun",
+    "english_common": "Somersault Cloud",
+    "alt_translations": [
+      "Cloud-Somersault",
+      "Somersault-Cloud",
+      "Cloud Leap"
+    ],
+    "chinese_connotation": "A somersault · a flip · a martial-arts move · 'one somersault covers 108,000 li' combines martial skill with romance",
+    "english_reader_image": "A cloud doing somersaults · comical · circus-like",
+    "semantic_loss": "High · the martial aesthetic of 'somersault' and the solemnity of Daoist cloud-riding are both lost",
+    "cultural_gap_level": 8,
+    "chapter_first": 2
+  },
+  {
+    "chinese": "Handsome Monkey King",
+    "pinyin": "Mei Hou Wang",
+    "english_common": "Monkey King / Handsome Monkey King",
+    "alt_translations": [
+      "Beautiful Monkey King",
+      "Handsome Monkey King"
+    ],
+    "chinese_connotation": "'Mei' (beautiful) · handsome · beautified · 'mei' in Chinese praises appearance, and also means 'exquisite'",
+    "english_reader_image": "A cartoon monkey in a crown · Disney-like · 'King' somewhat weakens the tension of 'beautiful'",
+    "semantic_loss": "Medium · the tension between 'beautiful' and 'monkey' is reduced in English to an attribute of 'king'",
+    "cultural_gap_level": 6,
+    "chapter_first": 4
+  },
+  {
+    "chinese": "Victorious Fighting Buddha",
+    "pinyin": "Douzhan Sheng Fo",
+    "english_common": "Buddha of Meritorious Service / Victorious Fighting Buddha",
+    "alt_translations": [
+      "Victorious Struggle Buddha",
+      "Buddha Who Wins in Battle"
+    ],
+    "chinese_connotation": "Battle · fighting + victory · Buddhahood · Buddhist martial merit · perfected cultivation",
+    "english_reader_image": "A Buddha who fights · unlike the traditional 'compassionate Buddha' image · slightly incongruous",
+    "semantic_loss": "High · 'Douzhan Sheng' means 'martial cultivation perfected' in Chinese; English readers struggle to grasp the unity of 'combat' and 'Buddhahood'",
+    "cultural_gap_level": 9,
+    "chapter_first": 100
+  },
+  {
+    "chinese": "Great Sage Equal to Heaven",
+    "pinyin": "Qi Tian Da Sheng",
+    "english_common": "Great Sage Equal to Heaven",
+    "alt_translations": [
+      "Great Sage, Equal to Heaven",
+      "Sage Equaling Heaven"
+    ],
+    "chinese_connotation": "Equal to Heaven · as high as the sky · 'Great Sage' is a Confucian title · a self-proclaimed regal title rebelling against the celestial court",
+    "english_reader_image": "A 'sage on equal footing with Heaven' · rather flat · the sense of rebellion is weakened",
+    "semantic_loss": "Medium · the rebellious tension of 'Equal to Heaven' is diluted by literal translation; English readers cannot feel the pride of the self-proclaimed title",
+    "cultural_gap_level": 7,
+    "chapter_first": 4
+  },
+  {
+    "chinese": "Mind-Monkey and Will-Horse",
+    "pinyin": "Xin Yuan Yi Ma",
+    "english_common": "Mind-Monkey and Will-Horse",
+    "alt_translations": [
+      "Monkey Mind and Horse Will",
+      "Restless Mind"
+    ],
+    "chinese_connotation": "A Buddhist-Daoist term · 'mind-ape' = restless heart · 'will-horse' = galloping thoughts · the metaphorical root of Wukong and the White Dragon Horse",
+    "english_reader_image": "An abstract Buddhist term · hard to connect to the novel's characters",
+    "semantic_loss": "Extreme · the cultivation metaphor of 'mind-ape' and 'Wukong' is completely lost",
+    "cultural_gap_level": 10,
+    "chapter_first": 14
+  },
+  {
+    "chinese": "Eighty-One Tribulations",
+    "pinyin": "Jiu Jiu Ba Shi Yi Nan",
+    "english_common": "Eighty-One Tribulations",
+    "alt_translations": [
+      "81 Calamities",
+      "Nine Times Nine Tribulations"
+    ],
+    "chinese_connotation": "'Nine nines' · the extreme of yang numbers · Daoist numerology · 81 is the largest yang number · signifies completion",
+    "english_reader_image": "A concrete number · 81 trials · lacking the numerological solemnity of 'nine nines'",
+    "semantic_loss": "Medium · 'nine nines' is a numerological symbol in Chinese; English treats it as merely a number",
+    "cultural_gap_level": 7,
+    "chapter_first": 99
+  },
+  {
+    "chinese": "Tripitaka",
+    "pinyin": "San Zang",
+    "english_common": "Tripitaka",
+    "alt_translations": [
+      "Tripitaka",
+      "Three Baskets"
+    ],
+    "chinese_connotation": "Tripitaka · the three 'baskets' of sutras, vinaya, and treatises · Tang Sanzang's dharma name · an honorific for a master",
+    "english_reader_image": "A Sanskrit transliteration · its meaning is hard to grasp",
+    "semantic_loss": "High · 'Tripitaka' is an honor for a master in Chinese; English readers can hardly perceive this",
+    "cultural_gap_level": 8,
+    "chapter_first": 12
+  },
+  {
+    "chinese": "Sun Wukong",
+    "pinyin": "Sun Wukong",
+    "english_common": "Sun Wukong / Monkey",
+    "alt_translations": [
+      "Sun Wukong",
+      "Monkey",
+      "Sun, Aware of Emptiness"
+    ],
+    "chinese_connotation": "'Sun' · from 'macaque' with the animal radical removed · 'Wukong' · awakened to 'emptiness' · a Buddhist dharma name · realization of emptiness",
+    "english_reader_image": "An oriental name · 'Aware of Emptiness' is overly philosophical",
+    "semantic_loss": "Extreme · the Buddhist dharma-name meaning of 'Wukong' is completely lost in transliteration; only the sound remains",
+    "cultural_gap_level": 9,
+    "chapter_first": 1
+  },
+  {
+    "chinese": "Zhu Bajie",
+    "pinyin": "Zhu Ba Jie",
+    "english_common": "Pigsy / Zhu Bajie",
+    "alt_translations": [
+      "Pigsy",
+      "Zhu Bajie",
+      "Pig of Eight Precepts"
+    ],
+    "chinese_connotation": "'Pig' · the 'eight precepts' (Buddhist) · a satirical name · a glutton who bears the name of the 'eight precepts'",
+    "english_reader_image": "A pig named Pigsy · colloquial · losing the Buddhist irony of the 'eight precepts'",
+    "semantic_loss": "High · the Buddhist irony of 'Bajie' is entirely lost in English; only the cartoonishness of 'pig' remains",
+    "cultural_gap_level": 9,
+    "chapter_first": 18
+  },
+  {
+    "chinese": "Sha Wujing",
+    "pinyin": "Sha Wu Jing",
+    "english_common": "Sandy / Sha Wujing",
+    "alt_translations": [
+      "Sandy",
+      "Sha Wujing",
+      "Sand, Awakened to Purity"
+    ],
+    "chinese_connotation": "'Sha' · the Flowing Sands River · 'Wujing' · awakened to 'purity' · a Buddhist dharma name · realization of pure nature",
+    "english_reader_image": "A character named Sandy · colloquial · losing the Buddhist meaning of 'Wujing'",
+    "semantic_loss": "High · as with Wukong · the meaning of 'Wujing' is lost",
+    "cultural_gap_level": 8,
+    "chapter_first": 22
+  },
+  {
+    "chinese": "Golden Cudgel",
+    "pinyin": "Jin Gu Bang",
+    "english_common": "Golden Cudgel / Monkey King's Staff",
+    "alt_translations": [
+      "Golden Cudgel",
+      "Ruyi Jingu Bang",
+      "As-You-Will Gold-Banded Cudgel"
+    ],
+    "chinese_connotation": "'Golden band' · a staff ringed with gold · 'Ruyi' (as-you-will) changes size at will · the sea-pacifying pillar of the Eastern Sea",
+    "english_reader_image": "A golden staff · strongly weapon-like · the 'as-you-will' transformability of 'Ruyi' is hard to convey",
+    "semantic_loss": "Medium · the philosophical meaning of 'Ruyi' (as one wishes) is lost in literal translation",
+    "cultural_gap_level": 6,
+    "chapter_first": 3
+  },
+  {
+    "chinese": "True Samadhi Fire",
+    "pinyin": "San Mei Zhen Huo",
+    "english_common": "True Fire of Samadhi",
+    "alt_translations": [
+      "Samadhi True Fire",
+      "True Fire of Three Meditations"
+    ],
+    "chinese_connotation": "'Samadhi' · Buddhist meditative absorption · true fire · the innate true fire · the fire uniting essence, qi, and spirit",
+    "english_reader_image": "A fire of 'samadhi' · hard to understand the Buddhist term",
+    "semantic_loss": "Extreme · the Buddhist meaning of 'samadhi' is entirely lost; only the physical sense of 'true fire' remains",
+    "cultural_gap_level": 10,
+    "chapter_first": 41
+  }
+]

@@ -1,0 +1,131 @@
+[
+  {
+    "version": "《大唐三藏取经诗话》",
+    "year": "南宋·约13世纪",
+    "type": "话本",
+    "chapters": 17,
+    "feature": "现存最早的西游故事·三藏取经雏形·猴行者首次出现·深沙神（沙僧雏形）",
+    "key_role_introduction": [
+      "猴行者",
+      "深沙神"
+    ],
+    "missing_elements": [
+      "八戒",
+      "沙僧定型",
+      "大闹天宫"
+    ],
+    "archaeological_layer": "层1·宋元话本"
+  },
+  {
+    "version": "《西游记杂剧》",
+    "year": "元末明初·杨景贤",
+    "type": "杂剧",
+    "chapters": 24,
+    "feature": "西游故事戏剧化·猪八戒首次成型·红孩儿·铁扇公主·女儿国出现",
+    "key_role_introduction": [
+      "猪八戒",
+      "红孩儿",
+      "铁扇公主"
+    ],
+    "missing_elements": [
+      "沙僧定型",
+      "大闹天宫规模"
+    ],
+    "archaeological_layer": "层2·元末明初杂剧"
+  },
+  {
+    "version": "《西游记平话》",
+    "year": "元末·已佚",
+    "type": "平话",
+    "chapters": null,
+    "feature": "已佚·仅见于《永乐大典》残卷'魏徵斩龙'与韩国'朴通事谚解'引述",
+    "key_role_introduction": [
+      "车迟国斗法"
+    ],
+    "missing_elements": [
+      "完整文本"
+    ],
+    "archaeological_layer": "层2·元末平话"
+  },
+  {
+    "version": "世德堂本《西游记》",
+    "year": "明万历20年·1592",
+    "type": "百回小说",
+    "chapters": 100,
+    "feature": "现存最早的完整百回本·题'华阳洞天主人校'·奠定《西游记》文本基础",
+    "key_role_introduction": [
+      "完整五圣",
+      "九九八十一难"
+    ],
+    "missing_elements": [
+      "唐僧出身故事（9-12回为清本补入）"
+    ],
+    "archaeological_layer": "层3·明万历世本"
+  },
+  {
+    "version": "杨闽斋本《西游记》",
+    "year": "明万历30年·1602",
+    "type": "百回小说",
+    "chapters": 100,
+    "feature": "世本的早期翻刻本·文字略异",
+    "key_role_introduction": [],
+    "missing_elements": [],
+    "archaeological_layer": "层4·明万历杨闽斋本"
+  },
+  {
+    "version": "朱鼎臣本《唐三藏西游释厄传》",
+    "year": "明万历中后期",
+    "type": "简本",
+    "chapters": "10卷",
+    "feature": "删节本·加入唐僧出身故事（陈光蕊·江流儿）",
+    "key_role_introduction": [
+      "陈光蕊故事"
+    ],
+    "missing_elements": [
+      "百回完整"
+    ],
+    "archaeological_layer": "层4·明万历朱鼎臣本"
+  },
+  {
+    "version": "《西游证道书》",
+    "year": "清康熙·1663·汪象旭评",
+    "type": "评本",
+    "chapters": 100,
+    "feature": "首次以'证道'解西游·加入唐僧出身故事为'第9回'·评点为丘处机作",
+    "key_role_introduction": [
+      "唐僧出身入正文"
+    ],
+    "missing_elements": [],
+    "archaeological_layer": "层5·清证道本"
+  },
+  {
+    "version": "《新说西游记》",
+    "year": "清乾隆·1753·张书绅评",
+    "type": "评本",
+    "chapters": 100,
+    "feature": "张书绅评点·以儒解西游·主张'学庸论语'为内学",
+    "key_role_introduction": [],
+    "missing_elements": [],
+    "archaeological_layer": "层6·清新说本"
+  },
+  {
+    "version": "《西游真诠》",
+    "year": "清康熙·1696·陈士斌评",
+    "type": "评本",
+    "chapters": 100,
+    "feature": "陈士斌评点·以金丹解西游·清代最流行评本",
+    "key_role_introduction": [],
+    "missing_elements": [],
+    "archaeological_layer": "层6·清真诠本"
+  },
+  {
+    "version": "《西游原旨》",
+    "year": "清乾隆·1753·刘一明评",
+    "type": "评本",
+    "chapters": 100,
+    "feature": "刘一明评点·道教龙门派·以丹道解西游最系统",
+    "key_role_introduction": [],
+    "missing_elements": [],
+    "archaeological_layer": "层7·清原旨本"
+  }
+]

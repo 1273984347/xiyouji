@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Rain-Praying Altar of Chechi",
+    "chapter": 45,
+    "owner": "Tiger-Strength Immortal · Deer-Strength Immortal · Antelope-Strength Immortal",
+    "type": "Priestly array · Five-Thunder Rite",
+    "structure": "Three-tier altar · command tokens · talisman water · divine-general edicts",
+    "principle": "Commands the gods to bring rain through the Five-Thunder Rite, relying on the Heavenly Court's orthodox talisman-edict system",
+    "weakness": "Wukong impersonated false gods · disrupted the Cloud and Rain Bureaus · edicts never left the altar",
+    "result": "Tiger-Strength's rain prayer failed · the three immortals died",
+    "feature": "A typical orthodox Daoist rain altar, connecting to the Heavenly Court's Cloud and Rain Bureaus through talisman edicts"
+  },
+  {
+    "name": "Cobweb Array of Pansi Cave",
+    "chapter": 72,
+    "owner": "The seven Spider-Spirit sisters",
+    "type": "Natural array · silk-web blockade",
+    "structure": "Sky-filling spider silk · sticking and binding the pilgrims",
+    "principle": "The seven sisters' innate silk web — whatever mortal thing touches it sticks fast",
+    "weakness": "Wukong's Golden-Banded Staff tangled the silk · easily broken",
+    "result": "Array broken · the seven sisters fled to Yellow-Flower Monastery",
+    "feature": "Cultivated jointly by the seven sisters; the silk-web array forms a dome covering the surroundings of Pansi Cave"
+  },
+  {
+    "name": "Myriad-Demon Array of Lion-Camel Ridge",
+    "chapter": 74,
+    "owner": "Green Lion · White Elephant · Great Peng",
+    "type": "Human-wave array · 47,000-48,000 lesser demons",
+    "structure": "Eight-hundred-li Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom",
+    "principle": "Intercepts the pilgrims with massed demon formations · big and small demons each assigned roles",
+    "weakness": "None (backed by the overwhelming strength of the three demon kings)",
+    "result": "Wukong was captured in the Yin-Yang Two-Qi Vase · later broke the vase · ultimately Tathagata descended in person",
+    "feature": "The largest demon array in scale; its demon count rivals the heavenly hosts"
+  },
+  {
+    "name": "Jindou Cave · Vajra Ring Array",
+    "chapter": 50,
+    "owner": "One-Horned Rhinoceros King",
+    "type": "Treasure array · a single device sucks in weapons",
+    "structure": "One ring takes ten thousand weapons",
+    "principle": "The Vajra Ring's causal law · snares all the gods' weapons",
+    "weakness": "Cannot capture Wukong himself · required Taishang Laojun to descend in person",
+    "result": "All the gods' weapons were snared · Wukong left empty-handed · finally Laojun subdued it",
+    "feature": "A causal-law weapon · breaking the principle that 'weapons can win'"
+  },
+  {
+    "name": "Minor Thunderclap Monastery · Golden Cymbals · Human Seed Pouch",
+    "chapter": 65,
+    "owner": "Yellow-Browed Boy",
+    "type": "Composite array · the Golden Cymbals trap people · the Human Seed Pouch gathers the crowd",
+    "structure": "A trap set in a false Buddha hall · the Golden Cymbals and Human Seed Pouch work in tandem",
+    "principle": "The Golden Cymbals trapped Wukong · the Human Seed Pouch took the Twenty-Eight Mansions · all the gods entered the pouch",
+    "weakness": "The Golden Dragon of Kang's horn broke the cymbals · Maitreya descended to reclaim the pouch",
+    "result": "All the heavenly generals were captured · Maitreya subdued them",
+    "feature": "A causal-law weapon · part of Maitreya Buddha's treasury; a single page-boy could trap the gods"
+  },
+  {
+    "name": "Bottomless Cave · Spirit-Tablet House Guard",
+    "chapter": 82,
+    "owner": "Golden-Nosed White-Haired Mouse Demon",
+    "type": "Spirit-tablet array · honoring the Pagoda-Bearing Heavenly King Li and his daughter",
+    "structure": "Spirit tablets for Heavenly King Li and Nezha placed deep in the cave",
+    "principle": "Worships the father-daughter tablets · seeks protection through their bond",
+    "weakness": "Wukong found the tablets · lodged a complaint in Heaven · Heavenly King Li descended in person",
+    "result": "The tablets became evidence against her · Heavenly King Li captured the girl",
+    "feature": "A rare case of self-protection via 'divine status' · exploiting a father-daughter bond to resist the law"
+  }
+]

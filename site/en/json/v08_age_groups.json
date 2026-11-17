@@ -1,0 +1,114 @@
+[
+  {
+    "age_group": "Preschool / Elementary",
+    "title": "A Line from the Famous",
+    "form": "Emoji wall",
+    "content": [
+      {
+        "name": "Lu Xun",
+        "quote": "Gods and demons all have human feeling · spirits and monsters too understand the ways of the world",
+        "modern_translation": "Even monsters understand human ways",
+        "age_tag": "Preschool / Elementary"
+      },
+      {
+        "name": "Hu Shi",
+        "quote": "At most it is a very entertaining comic novel",
+        "modern_translation": "It's just a fun story",
+        "age_tag": "Preschool / Elementary"
+      },
+      {
+        "name": "Mao Zedong",
+        "quote": "Wukong defies authority · Bajie toils hard",
+        "modern_translation": "Monkey dares to rebel · Pig is willing to endure hardship",
+        "age_tag": "Preschool / Elementary"
+      },
+      {
+        "name": "Qian Zhongshu",
+        "quote": "'Yikou zhong' is a sleeveless robe, not a bronze bell",
+        "modern_translation": "Reads carefully — even a TV series can't fool you",
+        "age_tag": "Preschool / Elementary"
+      }
+    ]
+  },
+  {
+    "age_group": "Middle School",
+    "title": "Viewpoint Showdown",
+    "form": "Debate topic",
+    "content": [
+      {
+        "name": "Lu Xun + Li Zhuowu",
+        "quote": "A profound allegory · gods and demons all have human feeling",
+        "modern_translation": "Side A: the book has deep meaning",
+        "age_tag": "Middle School"
+      },
+      {
+        "name": "Hu Shi",
+        "quote": "A comic novel · with no subtle meaning",
+        "modern_translation": "Side B: it's just for fun",
+        "age_tag": "Middle School"
+      },
+      {
+        "name": "Judge (the reader)",
+        "quote": "Which side are you on?",
+        "modern_translation": "Judge for yourself",
+        "age_tag": "Middle School"
+      }
+    ]
+  },
+  {
+    "age_group": "High School",
+    "title": "Political Metaphor Decoder",
+    "form": "Rhetoric drill",
+    "content": [
+      {
+        "name": "Mao Zedong · 1945 Chongqing Negotiations",
+        "quote": "Praised Wukong's defiance of authority — ostensibly about the Monkey King but in fact a jab at Chiang Kai-shek's dictatorship",
+        "modern_translation": "A top-tier example of talking politics in cultural code",
+        "age_tag": "High School"
+      },
+      {
+        "name": "Havoc in Heaven",
+        "quote": "An analogy for anti-imperialism and anti-feudalism",
+        "modern_translation": "Material for rhetoric drills that use the past to satirize the present",
+        "age_tag": "High School"
+      }
+    ]
+  },
+  {
+    "age_group": "University",
+    "title": "Academic Genealogy Map",
+    "form": "Genealogy",
+    "content": [
+      {
+        "name": "Ming dynasty · Li Zhuowu",
+        "quote": "The 'Shi E' cipher",
+        "modern_translation": "The codebook of spiritual cultivation",
+        "age_tag": "University"
+      },
+      {
+        "name": "Qing dynasty · Daoist 'Way Attainment' books",
+        "quote": "A guide to inner-alchemy practice",
+        "modern_translation": "A Daoist cultivation manual",
+        "age_tag": "University"
+      },
+      {
+        "name": "Republican era · Hu Shi + Lu Xun",
+        "quote": "Textual research + establishing the genre",
+        "modern_translation": "The authorship mystery + the 'gods-and-demons novel' classification",
+        "age_tag": "University"
+      },
+      {
+        "name": "Modern era · Mao Zedong / Lin Yutang / Qian Zhongshu",
+        "quote": "Politics / humanism / close reading",
+        "modern_translation": "Three parallel interpretive paths",
+        "age_tag": "University"
+      },
+      {
+        "name": "Contemporary · cross-cultural studies",
+        "quote": "A comparative-literature perspective",
+        "modern_translation": "Toward world literature",
+        "age_tag": "University"
+      }
+    ]
+  }
+]

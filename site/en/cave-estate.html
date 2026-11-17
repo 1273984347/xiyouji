@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-TEOMl5LtaNZ5rSE5U49KgfJ7qR54+cvPBFar8ZaBfeo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-k9IglCs3LeJi2ixk75s59Nw9zxtsZs5CqsRNSVpzqI8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cave Estate Archive · Annotated Journey to the West</title>
@@ -2371,68 +2371,815 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
 </script>
 <script>
-    // ===== Embedded fallback data (used if fetch fails; contents from ../data/json/*.json) =====
+    // ===== Embedded fallback data (used if fetch fails; contents from ../en/json/*.json) =====
     const EMBEDDED_DATA = {
-        caves: [
-            { "name": "Water Curtain Cave", "owner": "Sun Wukong", "owner_rank": "king", "chapter": 1, "region": "Pūrvavideha Continent · Flower-Fruit Mountain", "location": "the very summit of Flower-Fruit Mountain", "environment": "A waterfall veils the entrance; a stone tablet is inscribed “Blessed Land of Flower-Fruit Mountain, Grotto-Heaven of Water Curtain Cave,” and inside are stone seats, stone beds, stone pots and stone stoves.", "furnishings": "Stone seats, stone beds, stone stools, stone basins and stone bowls, all naturally formed.", "treasures": "The stone tablet, the iron-plank bridge, and the waterfall's heavenly curtain.", "minions_count": 47000, "subordinates": ["Four Stalwart Generals · Marshals Ma and Liu", "demon kings of the seventy-two caves"], "territory": "the whole of Flower-Fruit Mountain", "luxury": 7, "feature": "A heaven-born stone cave where the Great Sage Equaling Heaven rose to power." },
-            { "name": "Black Wind Cave", "owner": "Black Bear Demon", "owner_rank": "king", "chapter": 17, "region": "Kingdom of Ussa · Black Wind Mountain", "location": "Black Wind Cave on Black Wind Mountain", "environment": "High mountains and deep ravines, black mist swirling, pines and cypresses in groves.", "furnishings": "Spacious inside, furnished with stone stools and a meditation couch.", "treasures": "The Brocade Kasaya (stolen from Guanyin's monastery).", "minions_count": 200, "subordinates": ["White-Robed Scholar · Snake Demon", "Lingxuzi · Wolf Demon"], "territory": "a hundred li around Black Wind Mountain", "luxury": 6, "feature": "A rare “Chan-practicing” type among demon kings, able to discuss the Way and expound scriptures." },
-            { "name": "Yellow Wind Cave", "owner": "Yellow Wind Demon", "owner_rank": "king", "chapter": 21, "region": "Yellow Wind Ridge · Yellow Wind Cave", "location": "deep in Yellow Wind Ridge", "environment": "Yellow sand blots out the sun; jagged rocks abound.", "furnishings": "A deep cave-mansion with a demon-king's throne.", "treasures": "The Samadhi Divine Wind (a spell, not a treasure).", "minions_count": 500, "subordinates": ["Tiger Vanguard"], "territory": "Yellow Wind Ridge", "luxury": 5, "feature": "A yellow-furred marten that attained the Way at the foot of Spirit Mountain, with ties to the Buddhist order." },
-            { "name": "Wave-Moon Cave", "owner": "Yellow-Robe Demon", "owner_rank": "king", "chapter": 29, "region": "Bowl Mountain · Wave-Moon Cave", "location": "deep in Bowl Mountain", "environment": "The mountain crouches like a tiger; moonlight shimmers on the ripples.", "furnishings": "A lavish cave-mansion with a “Hundred-Flowers Pavilion.”", "treasures": "None (relies on a Heavenly Court background).", "minions_count": 50, "subordinates": ["demon soldiers"], "territory": "Bowl Mountain", "luxury": 5, "feature": "Kui Wood Wolf of the Heavenly Court descended to earth and took the “princess,” the daughter of the King of Precious Elephant Kingdom, as his wife." },
-            { "name": "Lotus Cave on Flat-Top Mountain", "owner": "Golden Horn King · Silver Horn King", "owner_rank": "king", "chapter": 33, "region": "Flat-Top Mountain · Lotus Cave", "location": "the highest peak of Flat-Top Mountain", "environment": "The mountain is shaped like an inverted lotus, often sealed in cloud and mist.", "furnishings": "A vast cave-mansion with “red-lacquered wooden stools” and “gold-lacquered tables.”", "treasures": "the Purple-Gold Red Gourd, the White-Jade Pure Vase, the Seven-Star Sword, the Plantain Fan and the Golden-Lasso Rope.", "minions_count": 800, "subordinates": ["Fine-Spirit Devil · Clever Insect", "Bashan Tiger · Yihai Dragon", "Old Demon Crone"], "territory": "the whole of Flat-Top Mountain", "luxury": 9, "feature": "Lord Lao's pill-refining page boys descended to earth, with the most lavish magical-treasure setup." },
-            { "name": "Fire-Cloud Cave of Mount Hao", "owner": "Red Boy", "owner_rank": "king", "chapter": 41, "region": "Mount Hao · Withered-Pine Gorge · Fire-Cloud Cave", "location": "Withered-Pine Gorge on Mount Hao", "environment": "Pines withered and the gorge dry, with searing heat rising.", "furnishings": "The cave interior is crimson, as if on fire.", "treasures": "True Samadhi Fire (an innate spell).", "minions_count": 100, "subordinates": ["Six Stalwart Generals · Mist-in-Clouds · Cloud-in-Mist"], "territory": "six hundred li of Mount Hao", "luxury": 7, "feature": "Son of the Bull Demon King, a juvenile demon king who can unleash True Samadhi Fire." },
-            { "name": "Turtle Mansion of the Tongtian River", "owner": "King of Inspiration", "owner_rank": "king", "chapter": 47, "region": "Tongtian River · Turtle Mansion", "location": "the bed of the Tongtian River", "environment": "Crystal palace halls, with waves for a roof.", "furnishings": "A crystal throne and coral trees.", "treasures": "The Nine-Petal Bronze Hammer.", "minions_count": 300, "subordinates": ["Mottled Mandarin-Fish Crone"], "territory": "the whole Tongtian River", "luxury": 6, "feature": "A goldfish from Guanyin's lotus pond that demands boys and girls to eat." },
-            { "name": "Jindou Cave", "owner": "One-Horned Rhinoceros King", "owner_rank": "king", "chapter": 50, "region": "Mount Jindou · Jindou Cave", "location": "the sunny side of Mount Jindou", "environment": "Ten thousand golden rays, a thousand streams of auspicious vapor.", "furnishings": "The cave-mansion seems cast of gold.", "treasures": "The Diamond Snare (a treasure of Lord Lao).", "minions_count": 50, "subordinates": [], "territory": "Mount Jindou", "luxury": 8, "feature": "Lord Lao's green ox descended to earth; the Diamond Snare snared away all the gods' weapons." },
-            { "name": "Pipa Cave", "owner": "Scorpion Demon", "owner_rank": "king", "chapter": 54, "region": "Kingdom of Women · Pipa Cave", "location": "on West Liang Mountain outside the capital of the Kingdom of Women", "environment": "Poisonous vapor swirling; the cave is shaped like a pipa.", "furnishings": "Lavish as palace chambers.", "treasures": "Three-Pronged Steel Fork · Horse-Toppling Poison Sting (an innate spell).", "minions_count": 30, "subordinates": ["maidservant captains and handmaids"], "territory": "the outskirts of the Kingdom of Women", "luxury": 5, "feature": "A venomous Scorpion Demon that stung the Buddha and whom even Guanyin dares not approach." },
-            { "name": "Plantain Cave of Emerald-Cloud Mountain", "owner": "Princess Iron Fan · Bull Demon King", "owner_rank": "king", "chapter": 59, "region": "Emerald-Cloud Mountain · Plantain Cave", "location": "the summit of Emerald-Cloud Mountain", "environment": "Emerald green covering the mountain, wreathed in cloud and mist.", "furnishings": "A deep and secluded cave-mansion with “cinnabar lattice” and “gold-lacquered tables and stools.”", "treasures": "The Plantain Fan (one fan sends one flying eighty-four thousand li).", "minions_count": 200, "subordinates": ["maidservant girls"], "territory": "Emerald-Cloud Mountain + eight hundred li of Flaming Mountain", "luxury": 9, "feature": "Owned by the Rākṣasī; her fan quenched the great fire of Flaming Mountain." },
-            { "name": "Cloud-Touching Cave of Thunder-Hoard Mountain", "owner": "Bull Demon King · Princess Jade-Face", "owner_rank": "king", "chapter": 60, "region": "Thunder-Hoard Mountain · Cloud-Touching Cave", "location": "the summit of Thunder-Hoard Mountain", "environment": "Clouds scrape the Milky Way; heaped thunder forms the peak.", "furnishings": "Relics of the Princess of Ten Thousand Saints, halls full of pearls and jade.", "treasures": "The Bull King's Golden-Eyed Beast.", "minions_count": 300, "subordinates": ["Jade-Faced Fox · lesser demons"], "territory": "Thunder-Hoard Mountain", "luxury": 8, "feature": "The Bull Demon King's mistress's residence, the legacy of the “Ten-Thousand-Year Fox King.”" },
-            { "name": "Jade-Wave Pool of Boulder Mountain", "owner": "Nine-Headed Son-in-Law · Dragon King of Ten Thousand Saints", "owner_rank": "king", "chapter": 62, "region": "Boulder Mountain · Jade-Wave Pool", "location": "the pool bed beneath Boulder Mountain", "environment": "A deep pool of jade-green water, with pearls by the ten-thousand measures.", "furnishings": "Crystal palaces with coral railings.", "treasures": "The Buddha's relic (śarīra) · Nine-Leaf Lingzhi Herb.", "minions_count": 500, "subordinates": ["Ben'erba · Babo'erben"], "territory": "the pool bed of Boulder Mountain", "luxury": 9, "feature": "A dragon-palace-style cave-mansion; the Princess of Ten Thousand Saints stole the Buddha's śarīra relic." },
-            { "name": "Minor Thunderclap Monastery", "owner": "Yellow-Browed Boy", "owner_rank": "king", "chapter": 65, "region": "Little Western Heaven · Minor Thunderclap Monastery", "location": "the false-Buddha ground of Little Western Heaven", "environment": "A solemn temple appearance, with false Buddha statues standing in rows.", "furnishings": "The precious hall of the false Thunderclap Monastery.", "treasures": "Golden Cymbals · Seedbag of Humankind · Wolf-Tooth Club.", "minions_count": 5000, "subordinates": ["five thousand lesser demons"], "territory": "a hundred li of Little Western Heaven", "luxury": 10, "feature": "Maitreya Buddha's stone-chime page descended to earth; the false Thunderclap Monastery is the largest in scale." },
-            { "name": "Rotten-Persimmon Lane", "owner": "Python Demon", "owner_rank": "general", "chapter": 67, "region": "Seven-Wonders Mountain · Rotten-Persimmon Lane", "location": "deep within Rotten-Persimmon Lane", "environment": "The stench of persimmons fills the sky; snakes and pythons coil there.", "furnishings": "None (a wild snake's den).", "treasures": "None", "minions_count": 0, "subordinates": [], "territory": "Rotten-Persimmon Lane on Seven-Wonders Mountain", "luxury": 2, "feature": "A great python that has not cultivated a human form; “Rotten-Persimmon Lane” is unbearably foul." },
-            { "name": "Silk-Web Cave", "owner": "Spider Demon · Seven Sisters", "owner_rank": "general", "chapter": 72, "region": "Silk-Web Ridge · Silk-Web Cave", "location": "a shady spot on Silk-Web Ridge", "environment": "Silk webs fill the sky; a gloomy, ghostly air.", "furnishings": "Stone tables and stools, with a bath at “Purgation Spring.”", "treasures": "The silk-thread magic web.", "minions_count": 30, "subordinates": ["seven sons · bee · wasp · horsefly"], "territory": "Yellow-Flower Monastery on Silk-Web Ridge", "luxury": 5, "feature": "Seven sisters live together, fellow disciples of the Hundred-Eyed Demon of Yellow-Flower Monastery." },
-            { "name": "Lion-Camel Cave", "owner": "Azure Lion · White Elephant · Great Roc", "owner_rank": "king", "chapter": 74, "region": "Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom", "location": "eight hundred li of Lion-Camel Ridge", "environment": "“Skulls heaped like a ridge, bones like a forest,” with blood reeking to the sky.", "furnishings": "“Human flesh for food, human bones for fuel.”", "treasures": "The Yin-Yang Two-Qi Vase (the Great Roc's).", "minions_count": 48000, "subordinates": ["forty-seven to forty-eight thousand lesser demons · over a hundred spirits"], "territory": "eight hundred li of Lion-Camel Ridge + Lion-Camel Kingdom", "luxury": 10, "feature": "A three-demon-king conglomerate; a whole kingdom of demon atmosphere on an unprecedented scale." },
-            { "name": "Qinghua Manor", "owner": "Deer Demon · State Preceptor of the Bhikṣu Kingdom", "owner_rank": "king", "chapter": 78, "region": "Bhikṣu Kingdom · Qinghua Manor", "location": "outside the capital of the Bhikṣu Kingdom", "environment": "Willows cast shade; serene and otherworldly as a fairyland.", "furnishings": "Elegant as an immortal's residence.", "treasures": "The Coiled-Dragon Staff.", "minions_count": 50, "subordinates": [], "territory": "the capital of the Bhikṣu Kingdom", "luxury": 6, "feature": "The white deer mount of the Old Man of the South Pole descended to earth, intending to use 1,111 children's hearts and livers." },
-            { "name": "Bottomless Cave of Sunken-Empty Mountain", "owner": "Golden-Nosed White-Haired Mouse Demon", "owner_rank": "king", "chapter": 82, "region": "Sunken-Empty Mountain · Bottomless Cave", "location": "the deep bottom of Sunken-Empty Mountain", "environment": "“Black vapor covers the mountain; the bottom cannot be fathomed.”", "furnishings": "Inside the cave there is another “grotto-heaven,” with spirit tablets for the Pagoda-Bearing Heavenly King Li and his daughter.", "treasures": "None (relies on a Spirit Mountain background).", "minions_count": 200, "subordinates": ["several lesser demons"], "territory": "Sunken-Empty Mountain", "luxury": 7, "feature": "Sworn daughter of the Pagoda-Bearing Heavenly King Li; she stole the crystal lamp oil at Spirit Mountain." },
-            { "name": "Linked-Circle Cave of Hidden-Mist Mountain", "owner": "Flower-Skinned Leopard Demon", "owner_rank": "king", "chapter": 85, "region": "Hidden-Mist Mountain · Linked-Circle Cave", "location": "deep in Hidden-Mist Mountain", "environment": "Mist that never clears all year.", "furnishings": "Six linked gates, layer upon layer of mechanisms.", "treasures": "Fake human heads (a false-surrender ruse).", "minions_count": 200, "subordinates": ["Iron-Backed Grey Wolf · lesser demons"], "territory": "Hidden-Mist Mountain", "luxury": 5, "feature": "A hidden leopard of the Southern Mountains who used the “Plum-Blossom Splitting” scheme to feign defeat against Wukong." },
-            { "name": "Nine-Curve Winding Cave", "owner": "Nine-Spirits Primordial Sage", "owner_rank": "king", "chapter": 89, "region": "Bamboo-Joint Mountain · Nine-Curve Winding Cave", "location": "the summit of Bamboo-Joint Mountain", "environment": "Bamboo shadows swaying; the cave-mansion winds through nine turns.", "furnishings": "Nine winding links, unfathomably deep.", "treasures": "The Nine-Headed Dharma Body.", "minions_count": 6000, "subordinates": ["Yellow Lion · Suan Lion · Suanni · Tuan Elephant · Bai Ze · Fuli · Nao Lion · Snow Lion · Tuan Lion"], "territory": "Bamboo-Joint Mountain · Yuhua Prefecture", "luxury": 8, "feature": "The nine-headed lion mount of the Heavenly Venerable Taiyi, “Nine-Spirits Primordial Sage” commands the demons." },
-            { "name": "Dark-Splendor Cave of Green-Dragon Mountain", "owner": "Cold-Dispeller · Heat-Dispeller · Dust-Dispeller", "owner_rank": "king", "chapter": 91, "region": "Green-Dragon Mountain · Dark-Splendor Cave", "location": "the sunny side of Green-Dragon Mountain", "environment": "Dark mountain rock, gleaming with cold light.", "furnishings": "The cave-mansion is like a rhinoceros-horn palace.", "treasures": "Rhinoceros horns (the source of their perfumed oil).", "minions_count": 500, "subordinates": ["lesser demons"], "territory": "Green-Dragon Mountain · Jinping Prefecture", "luxury": 7, "feature": "Three rhinoceros demons disguised as the Buddha to steal perfumed oil, consuming fifty thousand jin a year." },
-            { "name": "Rabbit Warren of Mount Maoying", "owner": "Jade Rabbit Demon", "owner_rank": "general", "chapter": 95, "region": "Mount Maoying · Three Rabbit Warrens", "location": "five peaks and three warrens of Mount Maoying", "environment": "The mountain is shaped like a rabbit, with five peaks and three warrens.", "furnishings": "None (a natural rabbit warren).", "treasures": "The Medicine-Pounding Pestle.", "minions_count": 0, "subordinates": [], "territory": "Mount Maoying", "luxury": 3, "feature": "The Jade Rabbit of the Moon Palace, who sought to take Tang Sanzang as her mate." }
-        ],
-        by_owner_rank: [
-            { "rank": "king", "label": "Demon-King rank", "count": 19 },
-            { "rank": "general", "label": "General rank", "count": 3 }
-        ],
-        by_region: [
-            { "region": "Pūrvavideha Continent · Flower-Fruit Mountain", "luxury": 7, "name": "Water Curtain Cave" },
-            { "region": "Kingdom of Ussa · Black Wind Mountain", "luxury": 6, "name": "Black Wind Cave" },
-            { "region": "Yellow Wind Ridge · Yellow Wind Cave", "luxury": 5, "name": "Yellow Wind Cave" },
-            { "region": "Bowl Mountain · Wave-Moon Cave", "luxury": 5, "name": "Wave-Moon Cave" },
-            { "region": "Flat-Top Mountain · Lotus Cave", "luxury": 9, "name": "Lotus Cave on Flat-Top Mountain" },
-            { "region": "Mount Hao · Withered-Pine Gorge · Fire-Cloud Cave", "luxury": 7, "name": "Fire-Cloud Cave of Mount Hao" },
-            { "region": "Tongtian River · Turtle Mansion", "luxury": 6, "name": "Turtle Mansion of the Tongtian River" },
-            { "region": "Mount Jindou · Jindou Cave", "luxury": 8, "name": "Jindou Cave" },
-            { "region": "Kingdom of Women · Pipa Cave", "luxury": 5, "name": "Pipa Cave" },
-            { "region": "Emerald-Cloud Mountain · Plantain Cave", "luxury": 9, "name": "Plantain Cave of Emerald-Cloud Mountain" },
-            { "region": "Thunder-Hoard Mountain · Cloud-Touching Cave", "luxury": 8, "name": "Cloud-Touching Cave of Thunder-Hoard Mountain" },
-            { "region": "Boulder Mountain · Jade-Wave Pool", "luxury": 9, "name": "Jade-Wave Pool of Boulder Mountain" },
-            { "region": "Little Western Heaven · Minor Thunderclap Monastery", "luxury": 10, "name": "Minor Thunderclap Monastery" },
-            { "region": "Seven-Wonders Mountain · Rotten-Persimmon Lane", "luxury": 2, "name": "Rotten-Persimmon Lane" },
-            { "region": "Silk-Web Ridge · Silk-Web Cave", "luxury": 5, "name": "Silk-Web Cave" },
-            { "region": "Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom", "luxury": 10, "name": "Lion-Camel Cave" },
-            { "region": "Bhikṣu Kingdom · Qinghua Manor", "luxury": 6, "name": "Qinghua Manor" },
-            { "region": "Sunken-Empty Mountain · Bottomless Cave", "luxury": 7, "name": "Bottomless Cave of Sunken-Empty Mountain" },
-            { "region": "Hidden-Mist Mountain · Linked-Circle Cave", "luxury": 5, "name": "Linked-Circle Cave of Hidden-Mist Mountain" },
-            { "region": "Bamboo-Joint Mountain · Nine-Curve Winding Cave", "luxury": 8, "name": "Nine-Curve Winding Cave" },
-            { "region": "Green-Dragon Mountain · Dark-Splendor Cave", "luxury": 7, "name": "Dark-Splendor Cave of Green-Dragon Mountain" },
-            { "region": "Mount Maoying · Three Rabbit Warrens", "luxury": 3, "name": "Rabbit Warren of Mount Maoying" }
-        ],
-        top_luxury: [
-            { "rank": 1, "name": "Minor Thunderclap Monastery", "owner": "Yellow-Browed Boy", "luxury": 10, "chapter": 65, "feature": "Maitreya Buddha's stone-chime page descended to earth; the false Thunderclap Monastery is the largest in scale." },
-            { "rank": 2, "name": "Lion-Camel Cave", "owner": "Azure Lion · White Elephant · Great Roc", "luxury": 10, "chapter": 74, "feature": "A three-demon-king conglomerate; a whole kingdom of demon atmosphere on an unprecedented scale." },
-            { "rank": 3, "name": "Lotus Cave on Flat-Top Mountain", "owner": "Golden Horn King · Silver Horn King", "luxury": 9, "chapter": 33, "feature": "Lord Lao's pill-refining page boys descended to earth, with the most lavish magical-treasure setup." },
-            { "rank": 4, "name": "Plantain Cave of Emerald-Cloud Mountain", "owner": "Princess Iron Fan · Bull Demon King", "luxury": 9, "chapter": 59, "feature": "Owned by the Rākṣasī; her fan quenched the great fire of Flaming Mountain." },
-            { "rank": 5, "name": "Jade-Wave Pool of Boulder Mountain", "owner": "Nine-Headed Son-in-Law · Dragon King of Ten Thousand Saints", "luxury": 9, "chapter": 62, "feature": "A dragon-palace-style cave-mansion; the Princess of Ten Thousand Saints stole the Buddha's śarīra relic." }
-        ]
-    };
+  "caves": [
+    {
+      "name": "Water Curtain Cave",
+      "owner": "Sun Wukong",
+      "owner_rank": "king",
+      "chapter": 1,
+      "region": "Pūrvavideha Continent · Flower-Fruit Mountain",
+      "location": "the very summit of Flower-Fruit Mountain",
+      "environment": "A waterfall veils the entrance; a stone tablet is inscribed “Blessed Land of Flower-Fruit Mountain, Grotto-Heaven of Water Curtain Cave,” and inside are stone seats, stone beds, stone pots and stone stoves.",
+      "furnishings": "Stone seats, stone beds, stone stools, stone basins and stone bowls, all naturally formed.",
+      "treasures": "The stone tablet, the iron-plank bridge, and the waterfall's heavenly curtain.",
+      "minions_count": 47000,
+      "subordinates": [
+        "Four Stalwart Generals · Marshals Ma and Liu",
+        "demon kings of the seventy-two caves"
+      ],
+      "territory": "the whole of Flower-Fruit Mountain",
+      "luxury": 7,
+      "feature": "A heaven-born stone cave where the Great Sage Equaling Heaven rose to power."
+    },
+    {
+      "name": "Black Wind Cave",
+      "owner": "Black Bear Demon",
+      "owner_rank": "king",
+      "chapter": 17,
+      "region": "Kingdom of Ussa · Black Wind Mountain",
+      "location": "Black Wind Cave on Black Wind Mountain",
+      "environment": "High mountains and deep ravines, black mist swirling, pines and cypresses in groves.",
+      "furnishings": "Spacious inside, furnished with stone stools and a meditation couch.",
+      "treasures": "The Brocade Kasaya (stolen from Guanyin's monastery).",
+      "minions_count": 200,
+      "subordinates": [
+        "White-Robed Scholar · Snake Demon",
+        "Lingxuzi · Wolf Demon"
+      ],
+      "territory": "a hundred li around Black Wind Mountain",
+      "luxury": 6,
+      "feature": "A rare “Chan-practicing” type among demon kings, able to discuss the Way and expound scriptures."
+    },
+    {
+      "name": "Yellow Wind Cave",
+      "owner": "Yellow Wind Demon",
+      "owner_rank": "king",
+      "chapter": 21,
+      "region": "Yellow Wind Ridge · Yellow Wind Cave",
+      "location": "deep in Yellow Wind Ridge",
+      "environment": "Yellow sand blots out the sun; jagged rocks abound.",
+      "furnishings": "A deep cave-mansion with a demon-king's throne.",
+      "treasures": "The Samadhi Divine Wind (a spell, not a treasure).",
+      "minions_count": 500,
+      "subordinates": [
+        "Tiger Vanguard"
+      ],
+      "territory": "Yellow Wind Ridge",
+      "luxury": 5,
+      "feature": "A yellow-furred marten that attained the Way at the foot of Spirit Mountain, with ties to the Buddhist order."
+    },
+    {
+      "name": "Wave-Moon Cave",
+      "owner": "Yellow-Robe Demon",
+      "owner_rank": "king",
+      "chapter": 29,
+      "region": "Bowl Mountain · Wave-Moon Cave",
+      "location": "deep in Bowl Mountain",
+      "environment": "The mountain crouches like a tiger; moonlight shimmers on the ripples.",
+      "furnishings": "A lavish cave-mansion with a “Hundred-Flowers Pavilion.”",
+      "treasures": "None (relies on a Heavenly Court background).",
+      "minions_count": 50,
+      "subordinates": [
+        "demon soldiers"
+      ],
+      "territory": "Bowl Mountain",
+      "luxury": 5,
+      "feature": "Kui Wood Wolf of the Heavenly Court descended to earth and took the “princess,” the daughter of the King of Precious Elephant Kingdom, as his wife."
+    },
+    {
+      "name": "Lotus Cave on Flat-Top Mountain",
+      "owner": "Golden Horn King · Silver Horn King",
+      "owner_rank": "king",
+      "chapter": 33,
+      "region": "Flat-Top Mountain · Lotus Cave",
+      "location": "the highest peak of Flat-Top Mountain",
+      "environment": "The mountain is shaped like an inverted lotus, often sealed in cloud and mist.",
+      "furnishings": "A vast cave-mansion with “red-lacquered wooden stools” and “gold-lacquered tables.”",
+      "treasures": "the Purple-Gold Red Gourd, the White-Jade Pure Vase, the Seven-Star Sword, the Plantain Fan and the Golden-Lasso Rope.",
+      "minions_count": 800,
+      "subordinates": [
+        "Fine-Spirit Devil · Clever Insect",
+        "Bashan Tiger · Yihai Dragon",
+        "Old Demon Crone"
+      ],
+      "territory": "the whole of Flat-Top Mountain",
+      "luxury": 9,
+      "feature": "Lord Lao's pill-refining page boys descended to earth, with the most lavish magical-treasure setup."
+    },
+    {
+      "name": "Fire-Cloud Cave of Mount Hao",
+      "owner": "Red Boy",
+      "owner_rank": "king",
+      "chapter": 41,
+      "region": "Mount Hao · Withered-Pine Gorge · Fire-Cloud Cave",
+      "location": "Withered-Pine Gorge on Mount Hao",
+      "environment": "Pines withered and the gorge dry, with searing heat rising.",
+      "furnishings": "The cave interior is crimson, as if on fire.",
+      "treasures": "True Samadhi Fire (an innate spell).",
+      "minions_count": 100,
+      "subordinates": [
+        "Six Stalwart Generals · Mist-in-Clouds · Cloud-in-Mist"
+      ],
+      "territory": "six hundred li of Mount Hao",
+      "luxury": 7,
+      "feature": "Son of the Bull Demon King, a juvenile demon king who can unleash True Samadhi Fire."
+    },
+    {
+      "name": "Turtle Mansion of the Tongtian River",
+      "owner": "King of Inspiration",
+      "owner_rank": "king",
+      "chapter": 47,
+      "region": "Tongtian River · Turtle Mansion",
+      "location": "the bed of the Tongtian River",
+      "environment": "Crystal palace halls, with waves for a roof.",
+      "furnishings": "A crystal throne and coral trees.",
+      "treasures": "The Nine-Petal Bronze Hammer.",
+      "minions_count": 300,
+      "subordinates": [
+        "Mottled Mandarin-Fish Crone"
+      ],
+      "territory": "the whole Tongtian River",
+      "luxury": 6,
+      "feature": "A goldfish from Guanyin's lotus pond that demands boys and girls to eat."
+    },
+    {
+      "name": "Jindou Cave",
+      "owner": "One-Horned Rhinoceros King",
+      "owner_rank": "king",
+      "chapter": 50,
+      "region": "Mount Jindou · Jindou Cave",
+      "location": "the sunny side of Mount Jindou",
+      "environment": "Ten thousand golden rays, a thousand streams of auspicious vapor.",
+      "furnishings": "The cave-mansion seems cast of gold.",
+      "treasures": "The Diamond Snare (a treasure of Lord Lao).",
+      "minions_count": 50,
+      "subordinates": [],
+      "territory": "Mount Jindou",
+      "luxury": 8,
+      "feature": "Lord Lao's green ox descended to earth; the Diamond Snare snared away all the gods' weapons."
+    },
+    {
+      "name": "Pipa Cave",
+      "owner": "Scorpion Demon",
+      "owner_rank": "king",
+      "chapter": 54,
+      "region": "Kingdom of Women · Pipa Cave",
+      "location": "on West Liang Mountain outside the capital of the Kingdom of Women",
+      "environment": "Poisonous vapor swirling; the cave is shaped like a pipa.",
+      "furnishings": "Lavish as palace chambers.",
+      "treasures": "Three-Pronged Steel Fork · Horse-Toppling Poison Sting (an innate spell).",
+      "minions_count": 30,
+      "subordinates": [
+        "maidservant captains and handmaids"
+      ],
+      "territory": "the outskirts of the Kingdom of Women",
+      "luxury": 5,
+      "feature": "A venomous Scorpion Demon that stung the Buddha and whom even Guanyin dares not approach."
+    },
+    {
+      "name": "Plantain Cave of Emerald-Cloud Mountain",
+      "owner": "Princess Iron Fan · Bull Demon King",
+      "owner_rank": "king",
+      "chapter": 59,
+      "region": "Emerald-Cloud Mountain · Plantain Cave",
+      "location": "the summit of Emerald-Cloud Mountain",
+      "environment": "Emerald green covering the mountain, wreathed in cloud and mist.",
+      "furnishings": "A deep and secluded cave-mansion with “cinnabar lattice” and “gold-lacquered tables and stools.”",
+      "treasures": "The Plantain Fan (one fan sends one flying eighty-four thousand li).",
+      "minions_count": 200,
+      "subordinates": [
+        "maidservant girls"
+      ],
+      "territory": "Emerald-Cloud Mountain + eight hundred li of Flaming Mountain",
+      "luxury": 9,
+      "feature": "Owned by the Rākṣasī; her fan quenched the great fire of Flaming Mountain."
+    },
+    {
+      "name": "Cloud-Touching Cave of Thunder-Hoard Mountain",
+      "owner": "Bull Demon King · Princess Jade-Face",
+      "owner_rank": "king",
+      "chapter": 60,
+      "region": "Thunder-Hoard Mountain · Cloud-Touching Cave",
+      "location": "the summit of Thunder-Hoard Mountain",
+      "environment": "Clouds scrape the Milky Way; heaped thunder forms the peak.",
+      "furnishings": "Relics of the Princess of Ten Thousand Saints, halls full of pearls and jade.",
+      "treasures": "The Bull King's Golden-Eyed Beast.",
+      "minions_count": 300,
+      "subordinates": [
+        "Jade-Faced Fox · lesser demons"
+      ],
+      "territory": "Thunder-Hoard Mountain",
+      "luxury": 8,
+      "feature": "The Bull Demon King's mistress's residence, the legacy of the “Ten-Thousand-Year Fox King.”"
+    },
+    {
+      "name": "Jade-Wave Pool of Boulder Mountain",
+      "owner": "Nine-Headed Son-in-Law · Dragon King of Ten Thousand Saints",
+      "owner_rank": "king",
+      "chapter": 62,
+      "region": "Boulder Mountain · Jade-Wave Pool",
+      "location": "the pool bed beneath Boulder Mountain",
+      "environment": "A deep pool of jade-green water, with pearls by the ten-thousand measures.",
+      "furnishings": "Crystal palaces with coral railings.",
+      "treasures": "The Buddha's relic (śarīra) · Nine-Leaf Lingzhi Herb.",
+      "minions_count": 500,
+      "subordinates": [
+        "Ben'erba · Babo'erben"
+      ],
+      "territory": "the pool bed of Boulder Mountain",
+      "luxury": 9,
+      "feature": "A dragon-palace-style cave-mansion; the Princess of Ten Thousand Saints stole the Buddha's śarīra relic."
+    },
+    {
+      "name": "Minor Thunderclap Monastery",
+      "owner": "Yellow-Browed Boy",
+      "owner_rank": "king",
+      "chapter": 65,
+      "region": "Little Western Heaven · Minor Thunderclap Monastery",
+      "location": "the false-Buddha ground of Little Western Heaven",
+      "environment": "A solemn temple appearance, with false Buddha statues standing in rows.",
+      "furnishings": "The precious hall of the false Thunderclap Monastery.",
+      "treasures": "Golden Cymbals · Seedbag of Humankind · Wolf-Tooth Club.",
+      "minions_count": 5000,
+      "subordinates": [
+        "five thousand lesser demons"
+      ],
+      "territory": "a hundred li of Little Western Heaven",
+      "luxury": 10,
+      "feature": "Maitreya Buddha's stone-chime page descended to earth; the false Thunderclap Monastery is the largest in scale."
+    },
+    {
+      "name": "Rotten-Persimmon Lane",
+      "owner": "Python Demon",
+      "owner_rank": "general",
+      "chapter": 67,
+      "region": "Seven-Wonders Mountain · Rotten-Persimmon Lane",
+      "location": "deep within Rotten-Persimmon Lane",
+      "environment": "The stench of persimmons fills the sky; snakes and pythons coil there.",
+      "furnishings": "None (a wild snake's den).",
+      "treasures": "None",
+      "minions_count": 0,
+      "subordinates": [],
+      "territory": "Rotten-Persimmon Lane on Seven-Wonders Mountain",
+      "luxury": 2,
+      "feature": "A great python that has not cultivated a human form; “Rotten-Persimmon Lane” is unbearably foul."
+    },
+    {
+      "name": "Silk-Web Cave",
+      "owner": "Spider Demon · Seven Sisters",
+      "owner_rank": "general",
+      "chapter": 72,
+      "region": "Silk-Web Ridge · Silk-Web Cave",
+      "location": "a shady spot on Silk-Web Ridge",
+      "environment": "Silk webs fill the sky; a gloomy, ghostly air.",
+      "furnishings": "Stone tables and stools, with a bath at “Purgation Spring.”",
+      "treasures": "The silk-thread magic web.",
+      "minions_count": 30,
+      "subordinates": [
+        "seven sons · bee · wasp · horsefly"
+      ],
+      "territory": "Yellow-Flower Monastery on Silk-Web Ridge",
+      "luxury": 5,
+      "feature": "Seven sisters live together, fellow disciples of the Hundred-Eyed Demon of Yellow-Flower Monastery."
+    },
+    {
+      "name": "Lion-Camel Cave",
+      "owner": "Azure Lion · White Elephant · Great Roc",
+      "owner_rank": "king",
+      "chapter": 74,
+      "region": "Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom",
+      "location": "eight hundred li of Lion-Camel Ridge",
+      "environment": "“Skulls heaped like a ridge, bones like a forest,” with blood reeking to the sky.",
+      "furnishings": "“Human flesh for food, human bones for fuel.”",
+      "treasures": "The Yin-Yang Two-Qi Vase (the Great Roc's).",
+      "minions_count": 48000,
+      "subordinates": [
+        "forty-seven to forty-eight thousand lesser demons · over a hundred spirits"
+      ],
+      "territory": "eight hundred li of Lion-Camel Ridge + Lion-Camel Kingdom",
+      "luxury": 10,
+      "feature": "A three-demon-king conglomerate; a whole kingdom of demon atmosphere on an unprecedented scale."
+    },
+    {
+      "name": "Qinghua Manor",
+      "owner": "Deer Demon · State Preceptor of the Bhikṣu Kingdom",
+      "owner_rank": "king",
+      "chapter": 78,
+      "region": "Bhikṣu Kingdom · Qinghua Manor",
+      "location": "outside the capital of the Bhikṣu Kingdom",
+      "environment": "Willows cast shade; serene and otherworldly as a fairyland.",
+      "furnishings": "Elegant as an immortal's residence.",
+      "treasures": "The Coiled-Dragon Staff.",
+      "minions_count": 50,
+      "subordinates": [],
+      "territory": "the capital of the Bhikṣu Kingdom",
+      "luxury": 6,
+      "feature": "The white deer mount of the Old Man of the South Pole descended to earth, intending to use 1,111 children's hearts and livers."
+    },
+    {
+      "name": "Bottomless Cave of Sunken-Empty Mountain",
+      "owner": "Golden-Nosed White-Haired Mouse Demon",
+      "owner_rank": "king",
+      "chapter": 82,
+      "region": "Sunken-Empty Mountain · Bottomless Cave",
+      "location": "the deep bottom of Sunken-Empty Mountain",
+      "environment": "“Black vapor covers the mountain; the bottom cannot be fathomed.”",
+      "furnishings": "Inside the cave there is another “grotto-heaven,” with spirit tablets for the Pagoda-Bearing Heavenly King Li and his daughter.",
+      "treasures": "None (relies on a Spirit Mountain background).",
+      "minions_count": 200,
+      "subordinates": [
+        "several lesser demons"
+      ],
+      "territory": "Sunken-Empty Mountain",
+      "luxury": 7,
+      "feature": "Sworn daughter of the Pagoda-Bearing Heavenly King Li; she stole the crystal lamp oil at Spirit Mountain."
+    },
+    {
+      "name": "Linked-Circle Cave of Hidden-Mist Mountain",
+      "owner": "Flower-Skinned Leopard Demon",
+      "owner_rank": "king",
+      "chapter": 85,
+      "region": "Hidden-Mist Mountain · Linked-Circle Cave",
+      "location": "deep in Hidden-Mist Mountain",
+      "environment": "Mist that never clears all year.",
+      "furnishings": "Six linked gates, layer upon layer of mechanisms.",
+      "treasures": "Fake human heads (a false-surrender ruse).",
+      "minions_count": 200,
+      "subordinates": [
+        "Iron-Backed Grey Wolf · lesser demons"
+      ],
+      "territory": "Hidden-Mist Mountain",
+      "luxury": 5,
+      "feature": "A hidden leopard of the Southern Mountains who used the “Plum-Blossom Splitting” scheme to feign defeat against Wukong."
+    },
+    {
+      "name": "Nine-Curve Winding Cave",
+      "owner": "Nine-Spirits Primordial Sage",
+      "owner_rank": "king",
+      "chapter": 89,
+      "region": "Bamboo-Joint Mountain · Nine-Curve Winding Cave",
+      "location": "the summit of Bamboo-Joint Mountain",
+      "environment": "Bamboo shadows swaying; the cave-mansion winds through nine turns.",
+      "furnishings": "Nine winding links, unfathomably deep.",
+      "treasures": "The Nine-Headed Dharma Body.",
+      "minions_count": 6000,
+      "subordinates": [
+        "Yellow Lion · Suan Lion · Suanni · Tuan Elephant · Bai Ze · Fuli · Nao Lion · Snow Lion · Tuan Lion"
+      ],
+      "territory": "Bamboo-Joint Mountain · Yuhua Prefecture",
+      "luxury": 8,
+      "feature": "The nine-headed lion mount of the Heavenly Venerable Taiyi, “Nine-Spirits Primordial Sage” commands the demons."
+    },
+    {
+      "name": "Dark-Splendor Cave of Green-Dragon Mountain",
+      "owner": "Cold-Dispeller · Heat-Dispeller · Dust-Dispeller",
+      "owner_rank": "king",
+      "chapter": 91,
+      "region": "Green-Dragon Mountain · Dark-Splendor Cave",
+      "location": "the sunny side of Green-Dragon Mountain",
+      "environment": "Dark mountain rock, gleaming with cold light.",
+      "furnishings": "The cave-mansion is like a rhinoceros-horn palace.",
+      "treasures": "Rhinoceros horns (the source of their perfumed oil).",
+      "minions_count": 500,
+      "subordinates": [
+        "lesser demons"
+      ],
+      "territory": "Green-Dragon Mountain · Jinping Prefecture",
+      "luxury": 7,
+      "feature": "Three rhinoceros demons disguised as the Buddha to steal perfumed oil, consuming fifty thousand jin a year."
+    },
+    {
+      "name": "Rabbit Warren of Mount Maoying",
+      "owner": "Jade Rabbit Demon",
+      "owner_rank": "general",
+      "chapter": 95,
+      "region": "Mount Maoying · Three Rabbit Warrens",
+      "location": "five peaks and three warrens of Mount Maoying",
+      "environment": "The mountain is shaped like a rabbit, with five peaks and three warrens.",
+      "furnishings": "None (a natural rabbit warren).",
+      "treasures": "The Medicine-Pounding Pestle.",
+      "minions_count": 0,
+      "subordinates": [],
+      "territory": "Mount Maoying",
+      "luxury": 3,
+      "feature": "The Jade Rabbit of the Moon Palace, who sought to take Tang Sanzang as her mate."
+    }
+  ],
+  "by_owner_rank": [
+    {
+      "rank": "king",
+      "label": "Demon-King rank",
+      "count": 19
+    },
+    {
+      "rank": "general",
+      "label": "General rank",
+      "count": 3
+    }
+  ],
+  "by_region": [
+    {
+      "region": "Seven-Wonders Mountain · Rotten-Persimmon Lane",
+      "caves": [
+        {
+          "name": "Rotten-Persimmon Lane",
+          "owner": "Python Demon",
+          "luxury": 2
+        }
+      ]
+    },
+    {
+      "region": "Pūrvavideha Continent · Flower-Fruit Mountain",
+      "caves": [
+        {
+          "name": "Water Curtain Cave",
+          "owner": "Sun Wukong",
+          "luxury": 7
+        }
+      ]
+    },
+    {
+      "region": "Kingdom of Ussa · Black Wind Mountain",
+      "caves": [
+        {
+          "name": "Black Wind Cave",
+          "owner": "Black Bear Demon",
+          "luxury": 6
+        }
+      ]
+    },
+    {
+      "region": "Boulder Mountain · Jade-Wave Pool",
+      "caves": [
+        {
+          "name": "Jade-Wave Pool of Boulder Mountain",
+          "owner": "Nine-Headed Son-in-Law · Dragon King of Ten Thousand Saints",
+          "luxury": 9
+        }
+      ]
+    },
+    {
+      "region": "Mount Hao · Withered-Pine Gorge · Fire-Cloud Cave",
+      "caves": [
+        {
+          "name": "Fire-Cloud Cave of Mount Hao",
+          "owner": "Red Boy",
+          "luxury": 7
+        }
+      ]
+    },
+    {
+      "region": "Kingdom of Women · Pipa Cave",
+      "caves": [
+        {
+          "name": "Pipa Cave",
+          "owner": "Scorpion Demon",
+          "luxury": 5
+        }
+      ]
+    },
+    {
+      "region": "Little Western Heaven · Minor Thunderclap Monastery",
+      "caves": [
+        {
+          "name": "Minor Thunderclap Monastery",
+          "owner": "Yellow-Browed Boy",
+          "luxury": 10
+        }
+      ]
+    },
+    {
+      "region": "Flat-Top Mountain · Lotus Cave",
+      "caves": [
+        {
+          "name": "Lotus Cave on Flat-Top Mountain",
+          "owner": "Golden Horn King · Silver Horn King",
+          "luxury": 9
+        }
+      ]
+    },
+    {
+      "region": "Bhikṣu Kingdom · Qinghua Manor",
+      "caves": [
+        {
+          "name": "Qinghua Manor",
+          "owner": "Deer Demon · State Preceptor of the Bhikṣu Kingdom",
+          "luxury": 6
+        }
+      ]
+    },
+    {
+      "region": "Mount Maoying · Three Rabbit Warrens",
+      "caves": [
+        {
+          "name": "Rabbit Warren of Mount Maoying",
+          "owner": "Jade Rabbit Demon",
+          "luxury": 3
+        }
+      ]
+    },
+    {
+      "region": "Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom",
+      "caves": [
+        {
+          "name": "Lion-Camel Cave",
+          "owner": "Azure Lion · White Elephant · Great Roc",
+          "luxury": 10
+        }
+      ]
+    },
+    {
+      "region": "Silk-Web Ridge · Silk-Web Cave",
+      "caves": [
+        {
+          "name": "Silk-Web Cave",
+          "owner": "Spider Demon · Seven Sisters",
+          "luxury": 5
+        }
+      ]
+    },
+    {
+      "region": "Bowl Mountain · Wave-Moon Cave",
+      "caves": [
+        {
+          "name": "Wave-Moon Cave",
+          "owner": "Yellow-Robe Demon",
+          "luxury": 5
+        }
+      ]
+    },
+    {
+      "region": "Thunder-Hoard Mountain · Cloud-Touching Cave",
+      "caves": [
+        {
+          "name": "Cloud-Touching Cave of Thunder-Hoard Mountain",
+          "owner": "Bull Demon King · Princess Jade-Face",
+          "luxury": 8
+        }
+      ]
+    },
+    {
+      "region": "Bamboo-Joint Mountain · Nine-Curve Winding Cave",
+      "caves": [
+        {
+          "name": "Nine-Curve Winding Cave",
+          "owner": "Nine-Spirits Primordial Sage",
+          "luxury": 8
+        }
+      ]
+    },
+    {
+      "region": "Emerald-Cloud Mountain · Plantain Cave",
+      "caves": [
+        {
+          "name": "Plantain Cave of Emerald-Cloud Mountain",
+          "owner": "Princess Iron Fan · Bull Demon King",
+          "luxury": 9
+        }
+      ]
+    },
+    {
+      "region": "Tongtian River · Turtle Mansion",
+      "caves": [
+        {
+          "name": "Turtle Mansion of the Tongtian River",
+          "owner": "King of Inspiration",
+          "luxury": 6
+        }
+      ]
+    },
+    {
+      "region": "Mount Jindou · Jindou Cave",
+      "caves": [
+        {
+          "name": "Jindou Cave",
+          "owner": "One-Horned Rhinoceros King",
+          "luxury": 8
+        }
+      ]
+    },
+    {
+      "region": "Sunken-Empty Mountain · Bottomless Cave",
+      "caves": [
+        {
+          "name": "Bottomless Cave of Sunken-Empty Mountain",
+          "owner": "Golden-Nosed White-Haired Mouse Demon",
+          "luxury": 7
+        }
+      ]
+    },
+    {
+      "region": "Hidden-Mist Mountain · Linked-Circle Cave",
+      "caves": [
+        {
+          "name": "Linked-Circle Cave of Hidden-Mist Mountain",
+          "owner": "Flower-Skinned Leopard Demon",
+          "luxury": 5
+        }
+      ]
+    },
+    {
+      "region": "Green-Dragon Mountain · Dark-Splendor Cave",
+      "caves": [
+        {
+          "name": "Dark-Splendor Cave of Green-Dragon Mountain",
+          "owner": "Cold-Dispeller · Heat-Dispeller · Dust-Dispeller",
+          "luxury": 7
+        }
+      ]
+    },
+    {
+      "region": "Yellow Wind Ridge · Yellow Wind Cave",
+      "caves": [
+        {
+          "name": "Yellow Wind Cave",
+          "owner": "Yellow Wind Demon",
+          "luxury": 5
+        }
+      ]
+    }
+  ],
+  "top_luxury": [
+    {
+      "rank": 1,
+      "name": "Minor Thunderclap Monastery",
+      "owner": "Yellow-Browed Boy",
+      "luxury": 10,
+      "chapter": 65,
+      "feature": "Maitreya Buddha's stone-chime page descended to earth; the false Thunderclap Monastery is the largest in scale."
+    },
+    {
+      "rank": 2,
+      "name": "Lion-Camel Cave",
+      "owner": "Azure Lion · White Elephant · Great Roc",
+      "luxury": 10,
+      "chapter": 74,
+      "feature": "A three-demon-king conglomerate; a whole kingdom of demon atmosphere on an unprecedented scale."
+    },
+    {
+      "rank": 3,
+      "name": "Lotus Cave on Flat-Top Mountain",
+      "owner": "Golden Horn King · Silver Horn King",
+      "luxury": 9,
+      "chapter": 33,
+      "feature": "Lord Lao's pill-refining page boys descended to earth, with the most lavish magical-treasure setup."
+    },
+    {
+      "rank": 4,
+      "name": "Plantain Cave of Emerald-Cloud Mountain",
+      "owner": "Princess Iron Fan · Bull Demon King",
+      "luxury": 9,
+      "chapter": 59,
+      "feature": "Owned by the Rākṣasī; her fan quenched the great fire of Flaming Mountain."
+    },
+    {
+      "rank": 5,
+      "name": "Jade-Wave Pool of Boulder Mountain",
+      "owner": "Nine-Headed Son-in-Law · Dragon King of Ten Thousand Saints",
+      "luxury": 9,
+      "chapter": 62,
+      "feature": "A dragon-palace-style cave-mansion; the Princess of Ten Thousand Saints stole the Buddha's śarīra relic."
+    },
+    {
+      "rank": 6,
+      "name": "Jindou Cave",
+      "owner": "One-Horned Rhinoceros King",
+      "luxury": 8,
+      "chapter": 50,
+      "feature": "Lord Lao's green ox descended to earth; the Diamond Snare snared away all the gods' weapons."
+    },
+    {
+      "rank": 7,
+      "name": "Cloud-Touching Cave of Thunder-Hoard Mountain",
+      "owner": "Bull Demon King · Princess Jade-Face",
+      "luxury": 8,
+      "chapter": 60,
+      "feature": "The Bull Demon King's mistress's residence, the legacy of the “Ten-Thousand-Year Fox King.”"
+    },
+    {
+      "rank": 8,
+      "name": "Nine-Curve Winding Cave",
+      "owner": "Nine-Spirits Primordial Sage",
+      "luxury": 8,
+      "chapter": 89,
+      "feature": "The nine-headed lion mount of the Heavenly Venerable Taiyi, “Nine-Spirits Primordial Sage” commands the demons."
+    },
+    {
+      "rank": 9,
+      "name": "Water Curtain Cave",
+      "owner": "Sun Wukong",
+      "luxury": 7,
+      "chapter": 1,
+      "feature": "A heaven-born stone cave where the Great Sage Equaling Heaven rose to power."
+    },
+    {
+      "rank": 10,
+      "name": "Fire-Cloud Cave of Mount Hao",
+      "owner": "Red Boy",
+      "luxury": 7,
+      "chapter": 41,
+      "feature": "Son of the Bull Demon King, a juvenile demon king who can unleash True Samadhi Fire."
+    },
+    {
+      "rank": 11,
+      "name": "Bottomless Cave of Sunken-Empty Mountain",
+      "owner": "Golden-Nosed White-Haired Mouse Demon",
+      "luxury": 7,
+      "chapter": 82,
+      "feature": "Sworn daughter of the Pagoda-Bearing Heavenly King Li; she stole the crystal lamp oil at Spirit Mountain."
+    },
+    {
+      "rank": 12,
+      "name": "Dark-Splendor Cave of Green-Dragon Mountain",
+      "owner": "Cold-Dispeller · Heat-Dispeller · Dust-Dispeller",
+      "luxury": 7,
+      "chapter": 91,
+      "feature": "Three rhinoceros demons disguised as the Buddha to steal perfumed oil, consuming fifty thousand jin a year."
+    },
+    {
+      "rank": 13,
+      "name": "Black Wind Cave",
+      "owner": "Black Bear Demon",
+      "luxury": 6,
+      "chapter": 17,
+      "feature": "A rare “Chan-practicing” type among demon kings, able to discuss the Way and expound scriptures."
+    },
+    {
+      "rank": 14,
+      "name": "Turtle Mansion of the Tongtian River",
+      "owner": "King of Inspiration",
+      "luxury": 6,
+      "chapter": 47,
+      "feature": "A goldfish from Guanyin's lotus pond that demands boys and girls to eat."
+    },
+    {
+      "rank": 15,
+      "name": "Qinghua Manor",
+      "owner": "Deer Demon · State Preceptor of the Bhikṣu Kingdom",
+      "luxury": 6,
+      "chapter": 78,
+      "feature": "The white deer mount of the Old Man of the South Pole descended to earth, intending to use 1,111 children's hearts and livers."
+    },
+    {
+      "rank": 16,
+      "name": "Yellow Wind Cave",
+      "owner": "Yellow Wind Demon",
+      "luxury": 5,
+      "chapter": 21,
+      "feature": "A yellow-furred marten that attained the Way at the foot of Spirit Mountain, with ties to the Buddhist order."
+    },
+    {
+      "rank": 17,
+      "name": "Wave-Moon Cave",
+      "owner": "Yellow-Robe Demon",
+      "luxury": 5,
+      "chapter": 29,
+      "feature": "Kui Wood Wolf of the Heavenly Court descended to earth and took the “princess,” the daughter of the King of Precious Elephant Kingdom, as his wife."
+    },
+    {
+      "rank": 18,
+      "name": "Pipa Cave",
+      "owner": "Scorpion Demon",
+      "luxury": 5,
+      "chapter": 54,
+      "feature": "A venomous Scorpion Demon that stung the Buddha and whom even Guanyin dares not approach."
+    },
+    {
+      "rank": 19,
+      "name": "Silk-Web Cave",
+      "owner": "Spider Demon · Seven Sisters",
+      "luxury": 5,
+      "chapter": 72,
+      "feature": "Seven sisters live together, fellow disciples of the Hundred-Eyed Demon of Yellow-Flower Monastery."
+    },
+    {
+      "rank": 20,
+      "name": "Linked-Circle Cave of Hidden-Mist Mountain",
+      "owner": "Flower-Skinned Leopard Demon",
+      "luxury": 5,
+      "chapter": 85,
+      "feature": "A hidden leopard of the Southern Mountains who used the “Plum-Blossom Splitting” scheme to feign defeat against Wukong."
+    },
+    {
+      "rank": 21,
+      "name": "Rabbit Warren of Mount Maoying",
+      "owner": "Jade Rabbit Demon",
+      "luxury": 3,
+      "chapter": 95,
+      "feature": "The Jade Rabbit of the Moon Palace, who sought to take Tang Sanzang as her mate."
+    },
+    {
+      "rank": 22,
+      "name": "Rotten-Persimmon Lane",
+      "owner": "Python Demon",
+      "luxury": 2,
+      "chapter": 67,
+      "feature": "A great python that has not cultivated a human form; “Rotten-Persimmon Lane” is unbearably foul."
+    }
+  ]
+};
 
     // ===== Colors =====
     const RANK_COLORS = {
@@ -2947,10 +3694,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     async function loadData() {
         try {
             const [caveRes, regionRes, rankRes, luxuryRes] = await Promise.all([
-                fetch('../data/json/cave_estate.json'),
-                fetch('../data/json/cave_by_region.json'),
-                fetch('../data/json/cave_by_owner_rank.json'),
-                fetch('../data/json/cave_top_luxury.json')
+                fetch('../en/json/cave_estate.json'),
+                fetch('../en/json/cave_by_region.json'),
+                fetch('../en/json/cave_by_owner_rank.json'),
+                fetch('../en/json/cave_top_luxury.json')
             ]);
             if (!caveRes.ok) throw new Error('fetch failed');
             const caves = await caveRes.json();
@@ -2966,7 +3713,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             }));
 
             document.getElementById('dataSource').innerHTML =
-                'Data source: loaded live from <code>../data/json/cave_*.json</code> (http server mode)';
+                'Data source: loaded live from <code>../en/json/cave_*.json</code> (http server mode)';
             return { caves, by_region, by_owner_rank, top_luxury };
         } catch (e) {
             console.warn('[INFO] Using embedded data: ', e.message);

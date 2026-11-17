@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-+xm4HnFtVN0awM+h/k2kFzJS5w8G7ynBH3QSPP8uK2Y=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-+ukWIM2/m5ALOMtoLMI+VhBAhQBI2jBtp3QXJ649h6M=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Twelve-Dimension Narratology Network · Annotated Journey to the West</title>
@@ -2233,6 +2233,9 @@ table.data-table th, table.data-table td { white-space: nowrap; }
 <script defer src="../static/js/stats.js"></script>
 </head>
 <body>
+    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
+  Data source: embedded snapshot in this page (same source as the <code>../en/json/</code> deployment copies); under the http server it is replaced by the live load.
+    </div></div>
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <header class="topnav">
@@ -2513,7 +2516,7 @@ async function fetchJson(path, fallbackKey) {
 }
 
 async function loadData() {
-  const base = '../data/json/';
+  const base = '../en/json/';
   const narratology = await fetchJson(base + 'narratology-12d-network.json', 'narratology');
   const nr = narratology.narratology || narratology;
   return {
@@ -3353,7 +3356,7 @@ async function main() {
 
   if (fetchStatus.anyFetched) {
     document.getElementById('dataSource').innerHTML =
-      'Data source: loaded live from <code>../data/json/</code> (http server mode)';
+      'Data source: loaded live from <code>../en/json/</code> (http server mode)';
   }
 
   renderOverview(data.dimensions);

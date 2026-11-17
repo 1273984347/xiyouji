@@ -1,0 +1,66 @@
+[
+  {
+    "key": "lizhuowu",
+    "name": "Li Zhuowu",
+    "era": "1527-1602",
+    "school": "Childlike Mind",
+    "color": "#8E7D62",
+    "motto": "The finest writing under heaven has never failed to spring from the childlike mind."
+  },
+  {
+    "key": "jinshengtan",
+    "name": "Jin Shengtan",
+    "era": "1608-1661",
+    "school": "Books of Genius",
+    "color": "#40619E",
+    "motto": "The wonder of writing lies wholly in having no fixed method."
+  },
+  {
+    "key": "luxun",
+    "name": "Lu Xun",
+    "era": "1881-1936",
+    "school": "Gods-and-Demons Novel",
+    "color": "#C0392B",
+    "motto": "Gods and demons all have human feeling; spirits and monsters too know the ways of the world."
+  },
+  {
+    "key": "hushi",
+    "name": "Hu Shi",
+    "era": "1891-1962",
+    "school": "Textual Research",
+    "color": "#3A473A",
+    "motto": "Journey to the West is a work of play."
+  },
+  {
+    "key": "maozedong",
+    "name": "Mao Zedong",
+    "era": "1893-1976",
+    "school": "Revolutionary Allegory",
+    "color": "#8c2a2a",
+    "motto": "Today we hail the Great Sage Sun, for the demon mist has come again."
+  },
+  {
+    "key": "linyutang",
+    "name": "Lin Yutang",
+    "era": "1895-1976",
+    "school": "Leisure and Humor",
+    "color": "#b88a3a",
+    "motto": "Wukong is the embodiment of Chinese freedom."
+  },
+  {
+    "key": "qianzhongshu",
+    "name": "Qian Zhongshu",
+    "era": "1910-1998",
+    "school": "Broad Erudition",
+    "color": "#6B6455",
+    "motto": "Journey to the West is a deep repository of what the Master did not speak of."
+  },
+  {
+    "key": "guomoruo",
+    "name": "Guo Moruo",
+    "era": "1892-1978",
+    "school": "Romantic Revolution",
+    "color": "#b85a3a",
+    "motto": "Man and monster reversed, right and wrong confused; merciful to the enemy, harsh to friends."
+  }
+]

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-FGrb5xWCbdndDoNLJiYMdwJQ1mPxz00xT52/suaWnUo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-yYWXuBASysLBpMQlSXKxKoevwJMqncCrCJCXafQpBIM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Magic System · Annotated Journey to the West</title>
@@ -2525,107 +2525,541 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 <script>
     // ========== Embedded fallback data (used when fetch fails) ==========
     const EMBEDDED_DATA = {
-        magic_system: [
-            {"name":"Seventy-Two Earthly Transformations","alias":"Earthly-number · seventy-two transformations","practitioner":"Sun Wukong (taught by Patriarch Subodhi)","origin":"Patriarch Subodhi · Mount Lingtai Fangcun · the Cave of the Slanting Moon and Three Stars","nature":"Transformation art · avoiding the three calamities","count":72,"philosophy":"Earthly in number, of yin nature; governs transformation and concealment — avoiding calamity and hiding one's true form","pros":"Infinite transformations; can avoid the three calamities (thunder / fire / wind)","cons":"Tail feathers hard to hide (turning into a temple leaves the tail exposed); a transformed object cannot exceed its original form","rival":"Thirty-Six Heavenly Transformations","chapter_first":2},
-            {"name":"Thirty-Six Heavenly Transformations","alias":"Heavenly-number · thirty-six transformations","practitioner":"Zhu Bajie (teacher unclear, possibly the Zhenwu Emperor or the Mysterious Maiden)","origin":"Unclear (tied to his rank as Marshal Tianpeng)","nature":"Transformation art · mastery of origin","count":36,"philosophy":"Heavenly in number, of yang nature; governs the true transformation of origin, with deep mana","pros":"Pure transformations; strong power of origin","cons":"Fewer in number; inflexible in the heat of battle","rival":"Seventy-Two Earthly Transformations","chapter_first":19},
-            {"name":"True Samadhi Fire","alias":"True Samadhi Fire · innate fire","practitioner":"Red Boy (cultivated innately)","origin":"Innate fire-qi · self-cultivation","nature":"Spell · innate true fire","count":1,"philosophy":"Samadhi means the unity of essence, breath and spirit; its true fire is beyond compare with ordinary fire","pros":"Water cannot douse it; its smoke can wound; Wukong cannot approach","cons":"Fears the willow water of Guanyin's vase and the East Sea Dragon King's water","rival":"Mortal Fire","chapter_first":41},
-            {"name":"Somersault Cloud","alias":"The art of cloud-soaring","practitioner":"Sun Wukong (taught by Patriarch Subodhi)","origin":"Patriarch Subodhi · Mount Lingtai Fangcun","nature":"Cloud-soaring · movement spell","count":1,"philosophy":"One somersault covers one hundred and eight thousand li","pros":"Extreme speed; can cross continents","cons":"Cannot carry others (except himself) for long","rival":"None (one of a kind)","chapter_first":2},
-            {"name":"Fiery Golden Eyes","alias":"Fiery Golden Eyes · ocular art","practitioner":"Sun Wukong (forged in the Eight Trigrams Furnace)","origin":"Taishang Laojun's Eight Trigrams Furnace · wind and smoke at the Xun position","nature":"Ocular art · seeing through illusions","count":1,"philosophy":"Smoked into being in the Eight Trigrams Furnace; can recognize demons and tell true from false","pros":"Sees through a demon's true form","cons":"Fears smoke (Red Boy's smoke can blind)","rival":"None","chapter_first":7}
-        ],
-        magic_fire: [
-            {"name":"True Samadhi Fire","owner":"Red Boy","origin":"Innate cultivation · unity of essence, breath and spirit","intensity":10,"range":"Short-to-mid range · smoke wounds","weakness":"The willow water of Guanyin's vase · the Four Seas Dragon Kings' water","combat_record":"No direct victories; forced Sun Wukong back","chapter":41},
-            {"name":"Six-Ding Divine Fire","owner":"Taishang Laojun · Eight Trigrams Furnace","origin":"Six-Ding Divine Fire · civil and martial flames","intensity":10,"range":"Within the furnace · extremely wide range","weakness":"Nothing can counter it (Wukong escaped at the Xun position)","combat_record":"Can smelt Wukong for seven-times-seven forty-nine days without killing him","chapter":7},
-            {"name":"Mortal Fire","owner":"The mortal world · hearth fire of humankind","origin":"Fire from ordinary fuel","intensity":1,"range":"Close range · confined to the stove","weakness":"Doused by plain water","combat_record":"None","chapter":16},
-            {"name":"Yin Fire","owner":"Flaming Mountains · underground fire","origin":"Wukong kicked over the Eight Trigrams Furnace; its fire-bricks fell to earth","intensity":8,"range":"The eight-hundred-li Flaming Mountains","weakness":"The Palm-Leaf Fan · forty-nine fan-strokes","combat_record":"Burns and harms people","chapter":59},
-            {"name":"Samadhi Divine Wind","owner":"Yellow Wind Demon","origin":"A yellow-furred marten that attained the Way at Spirit Mountain","intensity":7,"range":"A hundred li · can blind Wukong's eyes","weakness":"Bodhisattva Lingji's Wind-Stilling Pill · Flying Dragon Staff","combat_record":"No direct victories","chapter":21}
-        ],
-        magic_energy_sankey: {
-            "nodes":[
-                {"name":"Sun-Moon Essence","category":"Source","value":100},
-                {"name":"Golden Elixir · Laojun","category":"Source","value":90},
-                {"name":"Peaches of Immortality · Queen Mother","category":"Source","value":95},
-                {"name":"Ginseng Fruit · Zhenyuan","category":"Source","value":98},
-                {"name":"Meditation Merit · Tathagata","category":"Source","value":85},
-                {"name":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","category":"Transit"},
-                {"name":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","category":"Transit"},
-                {"name":"Demon Immortals (Wukong · Bull King · Peng)","category":"Transit"},
-                {"name":"Mortal Immortals (the pilgrims)","category":"Transit"},
-                {"name":"Longevity Extension","category":"Consumption"},
-                {"name":"Transformations · Seventy-Two Changes","category":"Consumption"},
-                {"name":"Cloud-Soaring · Somersault Cloud","category":"Consumption"},
-                {"name":"Treasure Powering","category":"Consumption"},
-                {"name":"Combat Spells","category":"Consumption"}
-            ],
-            "links":[
-                {"source":"Sun-Moon Essence","target":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","value":30},
-                {"source":"Sun-Moon Essence","target":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","value":25},
-                {"source":"Sun-Moon Essence","target":"Demon Immortals (Wukong · Bull King · Peng)","value":45},
-                {"source":"Golden Elixir · Laojun","target":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","value":50},
-                {"source":"Golden Elixir · Laojun","target":"Demon Immortals (Wukong · Bull King · Peng)","value":40},
-                {"source":"Peaches of Immortality · Queen Mother","target":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","value":60},
-                {"source":"Peaches of Immortality · Queen Mother","target":"Demon Immortals (Wukong · Bull King · Peng)","value":35},
-                {"source":"Ginseng Fruit · Zhenyuan","target":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","value":60},
-                {"source":"Ginseng Fruit · Zhenyuan","target":"Mortal Immortals (the pilgrims)","value":38},
-                {"source":"Meditation Merit · Tathagata","target":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","value":35},
-                {"source":"Meditation Merit · Tathagata","target":"Mortal Immortals (the pilgrims)","value":50},
-                {"source":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","target":"Longevity Extension","value":90},
-                {"source":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","target":"Treasure Powering","value":60},
-                {"source":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","target":"Combat Spells","value":25},
-                {"source":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","target":"Longevity Extension","value":70},
-                {"source":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","target":"Combat Spells","value":15},
-                {"source":"Demon Immortals (Wukong · Bull King · Peng)","target":"Transformations · Seventy-Two Changes","value":80},
-                {"source":"Demon Immortals (Wukong · Bull King · Peng)","target":"Cloud-Soaring · Somersault Cloud","value":40},
-                {"source":"Demon Immortals (Wukong · Bull King · Peng)","target":"Combat Spells","value":50},
-                {"source":"Mortal Immortals (the pilgrims)","target":"Longevity Extension","value":60},
-                {"source":"Mortal Immortals (the pilgrims)","target":"Combat Spells","value":28}
-            ],
-            "energy_law":"First Law of Mana Conservation: energy is never destroyed, only flowing among the three states of 'source-transit-consumption'. Source production is constant; those who over-consume must be replenished from the source, or their mana runs dry.",
-            "tianting_budget":{
-                "title":"Heavenly Court Annual Energy Budget",
-                "revenue":[
-                    {"source":"Peach Orchard","amount":9000,"unit":"Peach Energy Units","note":"9,000 peach trees, in three grades — early, middle and late"},
-                    {"source":"Golden Elixir of Tushita Palace","amount":720,"unit":"Golden Elixir","note":"One furnace a day; annual output 360 × 2"},
-                    {"source":"Ginseng Fruit of Wuzhuang Monastery","amount":30,"unit":"Ginseng Fruit","note":"Ripens once every 30 years, 30 fruits"},
-                    {"source":"Incense Offerings of the Mortal World","amount":99999,"unit":"Incense Units","note":"Tribute from the whole realm"}
-                ],
-                "expense":[
-                    {"target":"Immortals' Stipends · Longevity Extension","amount":5000,"unit":"Peach Units"},
-                    {"target":"Heavenly Soldiers' Upkeep","amount":1500,"unit":"Peach Units"},
-                    {"target":"Treasure Maintenance","amount":200,"unit":"Golden Elixir"},
-                    {"target":"Heavenly Court Operations","amount":80000,"unit":"Incense Units"}
-                ],
-                "surplus":9249,
-                "surplus_unit":"Peach Units",
-                "note":"Can retain a surplus of 9,249 Peach Energy Units in reserve (about 92.49%) — showing the Heavenly Court is a mana-surplus institution; whoever controls the peach resource controls power."
-            },
-            "top_consumers":[
-                {"consumer":"Sun Wukong","consumption_per_act":80,"act":"Seventy-Two Transformations","note":"The larger the transformed object, the greater the energy cost"},
-                {"consumer":"Sun Wukong","consumption_per_act":60,"act":"Somersault Cloud · one somersault","note":"High-speed displacement of 108,000 li"},
-                {"consumer":"Erlang Shen","consumption_per_act":75,"act":"Third Eye Manifestation · transformation tracking","note":"The third eye drains energy continuously"},
-                {"consumer":"Bull Demon King","consumption_per_act":90,"act":"Revealing true form · white bull","note":"A thousand-zhang white bull · mana surge"},
-                {"consumer":"Peng","consumption_per_act":70,"act":"Yin-Yang Two-Qi Vase powering","note":"A causal-law weapon · enormous energy cost"},
-                {"consumer":"Guanyin","consumption_per_act":95,"act":"Vase willow water · quenching Samadhi Fire","note":"High-order divine power · one decisive strike"}
-            ]
+  "magic_system": [
+    {
+      "name": "Seventy-Two Earthly Transformations",
+      "alias": "Earthly-number · seventy-two transformations",
+      "practitioner": "Sun Wukong (taught by Patriarch Subodhi)",
+      "origin": "Patriarch Subodhi · Mount Lingtai Fangcun · the Cave of the Slanting Moon and Three Stars",
+      "nature": "Transformation art · avoiding the three calamities",
+      "count": 72,
+      "philosophy": "Earthly in number, of yin nature; governs transformation and concealment — avoiding calamity and hiding one's true form",
+      "pros": "Infinite transformations; can avoid the three calamities (thunder / fire / wind)",
+      "cons": "Tail feathers hard to hide (turning into a temple leaves the tail exposed); a transformed object cannot exceed its original form",
+      "rival": "Thirty-Six Heavenly Transformations",
+      "chapter_first": 2
+    },
+    {
+      "name": "Thirty-Six Heavenly Transformations",
+      "alias": "Heavenly-number · thirty-six transformations",
+      "practitioner": "Zhu Bajie (teacher unclear, possibly the Zhenwu Emperor or the Mysterious Maiden)",
+      "origin": "Unclear (tied to his rank as Marshal Tianpeng)",
+      "nature": "Transformation art · mastery of origin",
+      "count": 36,
+      "philosophy": "Heavenly in number, of yang nature; governs the true transformation of origin, with deep mana",
+      "pros": "Pure transformations; strong power of origin",
+      "cons": "Fewer in number; inflexible in the heat of battle",
+      "rival": "Seventy-Two Earthly Transformations",
+      "chapter_first": 19
+    },
+    {
+      "name": "True Samadhi Fire",
+      "alias": "True Samadhi Fire · innate fire",
+      "practitioner": "Red Boy (cultivated innately)",
+      "origin": "Innate fire-qi · self-cultivation",
+      "nature": "Spell · innate true fire",
+      "count": 1,
+      "philosophy": "Samadhi means the unity of essence, breath and spirit; its true fire is beyond compare with ordinary fire",
+      "pros": "Water cannot douse it; its smoke can wound; Wukong cannot approach",
+      "cons": "Fears the willow water of Guanyin's vase and the East Sea Dragon King's water",
+      "rival": "Mortal Fire",
+      "chapter_first": 41
+    },
+    {
+      "name": "Somersault Cloud",
+      "alias": "The art of cloud-soaring",
+      "practitioner": "Sun Wukong (taught by Patriarch Subodhi)",
+      "origin": "Patriarch Subodhi · Mount Lingtai Fangcun",
+      "nature": "Cloud-soaring · movement spell",
+      "count": 1,
+      "philosophy": "One somersault covers one hundred and eight thousand li",
+      "pros": "Extreme speed; can cross continents",
+      "cons": "Cannot carry others (except himself) for long",
+      "rival": "None (one of a kind)",
+      "chapter_first": 2
+    },
+    {
+      "name": "Fiery Golden Eyes",
+      "alias": "Fiery Golden Eyes · ocular art",
+      "practitioner": "Sun Wukong (forged in the Eight Trigrams Furnace)",
+      "origin": "Taishang Laojun's Eight Trigrams Furnace · wind and smoke at the Xun position",
+      "nature": "Ocular art · seeing through illusions",
+      "count": 1,
+      "philosophy": "Smoked into being in the Eight Trigrams Furnace; can recognize demons and tell true from false",
+      "pros": "Sees through a demon's true form",
+      "cons": "Fears smoke (Red Boy's smoke can blind)",
+      "rival": "None",
+      "chapter_first": 7
+    }
+  ],
+  "magic_fire": [
+    {
+      "name": "True Samadhi Fire",
+      "owner": "Red Boy",
+      "origin": "Innate cultivation · unity of essence, breath and spirit",
+      "intensity": 10,
+      "range": "Short-to-mid range · smoke wounds",
+      "weakness": "The willow water of Guanyin's vase · the Four Seas Dragon Kings' water",
+      "kills": "No direct battle record; forced Sun Wukong to retreat",
+      "chapter": 41
+    },
+    {
+      "name": "Six-Ding Divine Fire",
+      "owner": "Taishang Laojun · Eight Trigrams Furnace",
+      "origin": "Six-Ding Divine Fire · civil and martial flames",
+      "intensity": 10,
+      "range": "Within the furnace · extremely wide range",
+      "weakness": "Nothing can counter it (Wukong escaped at the Xun position)",
+      "kills": "Can refine Sun Wukong; survives seven-seven forty-nine days",
+      "chapter": 7
+    },
+    {
+      "name": "Mortal Fire",
+      "owner": "The mortal world · hearth fire of humankind",
+      "origin": "Fire from ordinary fuel",
+      "intensity": 1,
+      "range": "Close range · confined to the stove",
+      "weakness": "Doused by plain water",
+      "kills": "None",
+      "chapter": 16
+    },
+    {
+      "name": "Yin Fire",
+      "owner": "Flaming Mountains · underground fire",
+      "origin": "Wukong kicked over the Eight Trigrams Furnace; its fire-bricks fell to earth",
+      "intensity": 8,
+      "range": "The eight-hundred-li Flaming Mountains",
+      "weakness": "The Palm-Leaf Fan · forty-nine fan-strokes",
+      "kills": "Characters burned or injured",
+      "chapter": 59
+    },
+    {
+      "name": "Samadhi Divine Wind",
+      "owner": "Yellow Wind Demon",
+      "origin": "A yellow-furred marten that attained the Way at Spirit Mountain",
+      "intensity": 7,
+      "range": "A hundred li · can blind Wukong's eyes",
+      "weakness": "Bodhisattva Lingji's Wind-Stilling Pill · Flying Dragon Staff",
+      "kills": "No direct battle record",
+      "chapter": 21
+    }
+  ],
+  "magic_energy_sankey": {
+    "nodes": [
+      {
+        "name": "Sun-Moon Essence",
+        "category": "Source",
+        "value": 100
+      },
+      {
+        "name": "Golden Elixir · Laojun",
+        "category": "Source",
+        "value": 90
+      },
+      {
+        "name": "Peaches of Immortality · Queen Mother",
+        "category": "Source",
+        "value": 95
+      },
+      {
+        "name": "Ginseng Fruit · Zhenyuan",
+        "category": "Source",
+        "value": 98
+      },
+      {
+        "name": "Meditation Merit · Tathagata",
+        "category": "Source",
+        "value": 85
+      },
+      {
+        "name": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+        "category": "Transit"
+      },
+      {
+        "name": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+        "category": "Transit"
+      },
+      {
+        "name": "Demon Immortals (Wukong · Bull King · Peng)",
+        "category": "Transit"
+      },
+      {
+        "name": "Mortal Immortals (the pilgrims)",
+        "category": "Transit"
+      },
+      {
+        "name": "Longevity Extension",
+        "category": "Consumption"
+      },
+      {
+        "name": "Transformations · Seventy-Two Changes",
+        "category": "Consumption"
+      },
+      {
+        "name": "Cloud-Soaring · Somersault Cloud",
+        "category": "Consumption"
+      },
+      {
+        "name": "Treasure Powering",
+        "category": "Consumption"
+      },
+      {
+        "name": "Combat Spells",
+        "category": "Consumption"
+      }
+    ],
+    "links": [
+      {
+        "source": "Sun-Moon Essence",
+        "target": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+        "value": 30
+      },
+      {
+        "source": "Sun-Moon Essence",
+        "target": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+        "value": 25
+      },
+      {
+        "source": "Sun-Moon Essence",
+        "target": "Demon Immortals (Wukong · Bull King · Peng)",
+        "value": 45
+      },
+      {
+        "source": "Golden Elixir · Laojun",
+        "target": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+        "value": 50
+      },
+      {
+        "source": "Golden Elixir · Laojun",
+        "target": "Demon Immortals (Wukong · Bull King · Peng)",
+        "value": 40
+      },
+      {
+        "source": "Peaches of Immortality · Queen Mother",
+        "target": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+        "value": 60
+      },
+      {
+        "source": "Peaches of Immortality · Queen Mother",
+        "target": "Demon Immortals (Wukong · Bull King · Peng)",
+        "value": 35
+      },
+      {
+        "source": "Ginseng Fruit · Zhenyuan",
+        "target": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+        "value": 60
+      },
+      {
+        "source": "Ginseng Fruit · Zhenyuan",
+        "target": "Mortal Immortals (the pilgrims)",
+        "value": 38
+      },
+      {
+        "source": "Meditation Merit · Tathagata",
+        "target": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+        "value": 35
+      },
+      {
+        "source": "Meditation Merit · Tathagata",
+        "target": "Mortal Immortals (the pilgrims)",
+        "value": 50
+      },
+      {
+        "source": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+        "target": "Longevity Extension",
+        "value": 90
+      },
+      {
+        "source": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+        "target": "Treasure Powering",
+        "value": 60
+      },
+      {
+        "source": "Celestial Immortals (Jade Emperor · Laojun · Tathagata)",
+        "target": "Combat Spells",
+        "value": 25
+      },
+      {
+        "source": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+        "target": "Longevity Extension",
+        "value": 70
+      },
+      {
+        "source": "Earthly Immortals (Zhenyuan · Wuzhuang Monastery)",
+        "target": "Combat Spells",
+        "value": 15
+      },
+      {
+        "source": "Demon Immortals (Wukong · Bull King · Peng)",
+        "target": "Transformations · Seventy-Two Changes",
+        "value": 80
+      },
+      {
+        "source": "Demon Immortals (Wukong · Bull King · Peng)",
+        "target": "Cloud-Soaring · Somersault Cloud",
+        "value": 40
+      },
+      {
+        "source": "Demon Immortals (Wukong · Bull King · Peng)",
+        "target": "Combat Spells",
+        "value": 50
+      },
+      {
+        "source": "Mortal Immortals (the pilgrims)",
+        "target": "Longevity Extension",
+        "value": 60
+      },
+      {
+        "source": "Mortal Immortals (the pilgrims)",
+        "target": "Combat Spells",
+        "value": 28
+      }
+    ],
+    "energy_law": "First Law of Mana Conservation: energy is never destroyed, only flowing among the three states of 'source-transit-consumption'. Source production is constant; those who over-consume must be replenished from the source, or their mana runs dry.",
+    "tianting_budget": {
+      "title": "Heavenly Court Annual Energy Budget",
+      "revenue": [
+        {
+          "source": "Peach Orchard",
+          "amount": 9000,
+          "unit": "Peach Energy Units",
+          "note": "9,000 peach trees, in three grades — early, middle and late"
         },
-        magic_arrays: [
-            {"name":"Rain-Praying Altar of Chechi","chapter":45,"owner":"Tiger-Strength Immortal · Deer-Strength Immortal · Antelope-Strength Immortal","type":"Priestly array · Five-Thunder Rite","structure":"Three-tier altar · command tokens · talisman water · divine-general edicts","principle":"Commands the gods to bring rain through the Five-Thunder Rite, relying on the Heavenly Court's orthodox talisman-edict system","weakness":"Wukong impersonated false gods · disrupted the Cloud and Rain Bureaus · edicts never left the altar","result":"Tiger-Strength's rain prayer failed · the three immortals died","feature":"A typical orthodox Daoist rain altar, connecting to the Heavenly Court's Cloud and Rain Bureaus through talisman edicts"},
-            {"name":"Cobweb Array of Pansi Cave","chapter":72,"owner":"The seven Spider-Spirit sisters","type":"Natural array · silk-web blockade","structure":"Sky-filling spider silk · sticking and binding the pilgrims","principle":"The seven sisters' innate silk web — whatever mortal thing touches it sticks fast","weakness":"Wukong's Golden-Banded Staff tangled the silk · easily broken","result":"Array broken · the seven sisters fled to Yellow-Flower Monastery","feature":"Cultivated jointly by the seven sisters; the silk-web array forms a dome covering the surroundings of Pansi Cave"},
-            {"name":"Myriad-Demon Array of Lion-Camel Ridge","chapter":74,"owner":"Green Lion · White Elephant · Great Peng","type":"Human-wave array · 47,000-48,000 lesser demons","structure":"Eight-hundred-li Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom","principle":"Intercepts the pilgrims with massed demon formations · big and small demons each assigned roles","weakness":"None (backed by the overwhelming strength of the three demon kings)","result":"Wukong was captured in the Yin-Yang Two-Qi Vase · later broke the vase · ultimately Tathagata descended in person","feature":"The largest demon array in scale; its demon count rivals the heavenly hosts"},
-            {"name":"Jindou Cave · Vajra Ring Array","chapter":50,"owner":"One-Horned Rhinoceros King","type":"Treasure array · a single device sucks in weapons","structure":"One ring takes ten thousand weapons","principle":"The Vajra Ring's causal law · snares all the gods' weapons","weakness":"Cannot capture Wukong himself · required Taishang Laojun to descend in person","result":"All the gods' weapons were snared · Wukong left empty-handed · finally Laojun subdued it","feature":"A causal-law weapon · breaking the principle that 'weapons can win'"},
-            {"name":"Minor Thunderclap Monastery · Golden Cymbals · Human Seed Pouch","chapter":65,"owner":"Yellow-Browed Boy","type":"Composite array · the Golden Cymbals trap people · the Human Seed Pouch gathers the crowd","structure":"A trap set in a false Buddha hall · the Golden Cymbals and Human Seed Pouch work in tandem","principle":"The Golden Cymbals trapped Wukong · the Human Seed Pouch took the Twenty-Eight Mansions · all the gods entered the pouch","weakness":"The Golden Dragon of Kang's horn broke the cymbals · Maitreya descended to reclaim the pouch","result":"All the heavenly generals were captured · Maitreya subdued them","feature":"A causal-law weapon · part of Maitreya Buddha's treasury; a single page-boy could trap the gods"},
-            {"name":"Bottomless Cave · Spirit-Tablet House Guard","chapter":82,"owner":"Golden-Nosed White-Haired Mouse Demon","type":"Spirit-tablet array · honoring the Pagoda-Bearing Heavenly King Li and his daughter","structure":"Spirit tablets for Heavenly King Li and Nezha placed deep in the cave","principle":"Worships the father-daughter tablets · seeks protection through their bond","weakness":"Wukong found the tablets · lodged a complaint in Heaven · Heavenly King Li descended in person","result":"The tablets became evidence against her · Heavenly King Li captured the girl","feature":"A rare case of self-protection via 'divine status' · exploiting a father-daughter bond to resist the law"}
-        ],
-        magic_treasures: [
-            {"name":"Vajra Ring","owner":"One-Horned Rhinoceros King (originally Taishang Laojun's)","category":"Causal-Law Weapon","power_source":"Cosmic Rule Engine","principle":"Snares all things · independent of the wielder's mana · with an embedded 'binding rule'","user_driven":false,"evidence":"The One-Horned Rhinoceros's own mana is not top-tier, yet it can snare Wukong's Golden-Banded Staff, the gods' weapons, Nezha's weapons, even water and fire","rank":"S+"},
-            {"name":"Purple-Gold Red Gourd","owner":"Golden Horn King · Silver Horn King (originally Taishang Laojun's)","category":"Causal-Law Weapon · answering one's name brings death","power_source":"Cosmic Rule Engine · name-binding","principle":"Call the name and it answers; whoever answers enters the gourd and dissolves into pus and blood","user_driven":false,"evidence":"Wukong was once trapped by the false name 'Zhe Xingsun' · dissolved into pus and blood · escaped by means of a false name","rank":"S+"},
-            {"name":"Human Seed Pouch","owner":"Yellow-Browed Boy (originally Maitreya Buddha's)","category":"Causal-Law Weapon · area capture","power_source":"Cosmic Rule Engine · spatial binding","principle":"Open the pouch · people enter · none of the gods can escape","user_driven":false,"evidence":"Took the Twenty-Eight Mansions · the Five-Direction Guardians · Wukong too was nearly captured · saved only by Maitreya's descent","rank":"S+"},
-            {"name":"Yin-Yang Two-Qi Vase","owner":"Golden-Winged Great Peng","category":"Causal-Law Weapon · dissolution","power_source":"Cosmic Rule Engine · yin-yang dissolution","principle":"Enter the vase · within a short span one is reduced to pulp","user_driven":false,"evidence":"Wukong entered the vase · relied on Guanyin's three life-saving hairs · bored through and destroyed it","rank":"S+"},
-            {"name":"Palm-Leaf Fan","owner":"Princess Iron Fan · the Rakshasi","category":"Elemental Weapon · wind-type","power_source":"A heaven-and-earth spirit-treasure · the innate primal qi","principle":"One fan-stroke sends wind 84,000 li · quenches the Flaming Mountains","user_driven":true,"evidence":"The Rakshasi's own mana is middling, yet the fan made her a local hegemon","rank":"S"},
-            {"name":"Golden-Banded Staff","owner":"Sun Wukong","category":"Physical Weapon · heavy weapon","power_source":"The Sea-Pacifying Needle left by Yu the Great for flood control · an innate spirit-treasure","principle":"13,500 jin · shrinks or grows at will","user_driven":true,"evidence":"Driven by Wukong's mana · its upper power limit is set by the wielder","rank":"S"},
-            {"name":"Nine-Toothed Rake","owner":"Zhu Bajie","category":"Physical Weapon · divine weapon","power_source":"Forged by Taishang Laojun · bestowed by the Jade Emperor","principle":"Nine teeth · divine radiance · can build mountains","user_driven":true,"evidence":"Limited by Bajie's mana · the rake's power is never fully realized","rank":"A+"},
-            {"name":"Tight-Fillet Spell","owner":"Guanyin → Tang Sanzang","category":"Causal-Law Weapon · control","power_source":"Cosmic Rule Engine · mind-binding","principle":"Recite the spell and it tightens · splitting headache · a control actuator","user_driven":false,"evidence":"Tang Sanzang, a mere mortal, can recite it · independent of the wielder's mana · acts directly on Wukong","rank":"S+"}
-        ]
-    };
+        {
+          "source": "Golden Elixir of Tushita Palace",
+          "amount": 720,
+          "unit": "Golden Elixir",
+          "note": "One furnace a day; annual output 360 × 2"
+        },
+        {
+          "source": "Ginseng Fruit of Wuzhuang Monastery",
+          "amount": 30,
+          "unit": "Ginseng Fruit",
+          "note": "Ripens once every 30 years, 30 fruits"
+        },
+        {
+          "source": "Incense Offerings of the Mortal World",
+          "amount": 99999,
+          "unit": "Incense Units",
+          "note": "Tribute from the whole realm"
+        }
+      ],
+      "expense": [
+        {
+          "target": "Immortals' Stipends · Longevity Extension",
+          "amount": 5000,
+          "unit": "Peach Units"
+        },
+        {
+          "target": "Heavenly Soldiers' Upkeep",
+          "amount": 1500,
+          "unit": "Peach Units"
+        },
+        {
+          "target": "Treasure Maintenance",
+          "amount": 200,
+          "unit": "Golden Elixir"
+        },
+        {
+          "target": "Heavenly Court Operations",
+          "amount": 80000,
+          "unit": "Incense Units"
+        }
+      ],
+      "surplus": 9249,
+      "surplus_unit": "Peach Units",
+      "note": "Can retain a surplus of 9,249 Peach Energy Units in reserve (about 92.49%) — showing the Heavenly Court is a mana-surplus institution; whoever controls the peach resource controls power."
+    },
+    "top_consumers": [
+      {
+        "consumer": "Sun Wukong",
+        "consumption_per_act": 80,
+        "act": "Seventy-Two Transformations",
+        "note": "The larger the transformed object, the greater the energy cost"
+      },
+      {
+        "consumer": "Sun Wukong",
+        "consumption_per_act": 60,
+        "act": "Somersault Cloud · one somersault",
+        "note": "High-speed displacement of 108,000 li"
+      },
+      {
+        "consumer": "Erlang Shen",
+        "consumption_per_act": 75,
+        "act": "Third Eye Manifestation · transformation tracking",
+        "note": "The third eye drains energy continuously"
+      },
+      {
+        "consumer": "Bull Demon King",
+        "consumption_per_act": 90,
+        "act": "Revealing true form · white bull",
+        "note": "A thousand-zhang white bull · mana surge"
+      },
+      {
+        "consumer": "Peng",
+        "consumption_per_act": 70,
+        "act": "Yin-Yang Two-Qi Vase powering",
+        "note": "A causal-law weapon · enormous energy cost"
+      },
+      {
+        "consumer": "Guanyin",
+        "consumption_per_act": 95,
+        "act": "Vase willow water · quenching Samadhi Fire",
+        "note": "High-order divine power · one decisive strike"
+      }
+    ]
+  },
+  "magic_arrays": [
+    {
+      "name": "Rain-Praying Altar of Chechi",
+      "chapter": 45,
+      "owner": "Tiger-Strength Immortal · Deer-Strength Immortal · Antelope-Strength Immortal",
+      "type": "Priestly array · Five-Thunder Rite",
+      "structure": "Three-tier altar · command tokens · talisman water · divine-general edicts",
+      "principle": "Commands the gods to bring rain through the Five-Thunder Rite, relying on the Heavenly Court's orthodox talisman-edict system",
+      "weakness": "Wukong impersonated false gods · disrupted the Cloud and Rain Bureaus · edicts never left the altar",
+      "result": "Tiger-Strength's rain prayer failed · the three immortals died",
+      "feature": "A typical orthodox Daoist rain altar, connecting to the Heavenly Court's Cloud and Rain Bureaus through talisman edicts"
+    },
+    {
+      "name": "Cobweb Array of Pansi Cave",
+      "chapter": 72,
+      "owner": "The seven Spider-Spirit sisters",
+      "type": "Natural array · silk-web blockade",
+      "structure": "Sky-filling spider silk · sticking and binding the pilgrims",
+      "principle": "The seven sisters' innate silk web — whatever mortal thing touches it sticks fast",
+      "weakness": "Wukong's Golden-Banded Staff tangled the silk · easily broken",
+      "result": "Array broken · the seven sisters fled to Yellow-Flower Monastery",
+      "feature": "Cultivated jointly by the seven sisters; the silk-web array forms a dome covering the surroundings of Pansi Cave"
+    },
+    {
+      "name": "Myriad-Demon Array of Lion-Camel Ridge",
+      "chapter": 74,
+      "owner": "Green Lion · White Elephant · Great Peng",
+      "type": "Human-wave array · 47,000-48,000 lesser demons",
+      "structure": "Eight-hundred-li Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom",
+      "principle": "Intercepts the pilgrims with massed demon formations · big and small demons each assigned roles",
+      "weakness": "None (backed by the overwhelming strength of the three demon kings)",
+      "result": "Wukong was captured in the Yin-Yang Two-Qi Vase · later broke the vase · ultimately Tathagata descended in person",
+      "feature": "The largest demon array in scale; its demon count rivals the heavenly hosts"
+    },
+    {
+      "name": "Jindou Cave · Vajra Ring Array",
+      "chapter": 50,
+      "owner": "One-Horned Rhinoceros King",
+      "type": "Treasure array · a single device sucks in weapons",
+      "structure": "One ring takes ten thousand weapons",
+      "principle": "The Vajra Ring's causal law · snares all the gods' weapons",
+      "weakness": "Cannot capture Wukong himself · required Taishang Laojun to descend in person",
+      "result": "All the gods' weapons were snared · Wukong left empty-handed · finally Laojun subdued it",
+      "feature": "A causal-law weapon · breaking the principle that 'weapons can win'"
+    },
+    {
+      "name": "Minor Thunderclap Monastery · Golden Cymbals · Human Seed Pouch",
+      "chapter": 65,
+      "owner": "Yellow-Browed Boy",
+      "type": "Composite array · the Golden Cymbals trap people · the Human Seed Pouch gathers the crowd",
+      "structure": "A trap set in a false Buddha hall · the Golden Cymbals and Human Seed Pouch work in tandem",
+      "principle": "The Golden Cymbals trapped Wukong · the Human Seed Pouch took the Twenty-Eight Mansions · all the gods entered the pouch",
+      "weakness": "The Golden Dragon of Kang's horn broke the cymbals · Maitreya descended to reclaim the pouch",
+      "result": "All the heavenly generals were captured · Maitreya subdued them",
+      "feature": "A causal-law weapon · part of Maitreya Buddha's treasury; a single page-boy could trap the gods"
+    },
+    {
+      "name": "Bottomless Cave · Spirit-Tablet House Guard",
+      "chapter": 82,
+      "owner": "Golden-Nosed White-Haired Mouse Demon",
+      "type": "Spirit-tablet array · honoring the Pagoda-Bearing Heavenly King Li and his daughter",
+      "structure": "Spirit tablets for Heavenly King Li and Nezha placed deep in the cave",
+      "principle": "Worships the father-daughter tablets · seeks protection through their bond",
+      "weakness": "Wukong found the tablets · lodged a complaint in Heaven · Heavenly King Li descended in person",
+      "result": "The tablets became evidence against her · Heavenly King Li captured the girl",
+      "feature": "A rare case of self-protection via 'divine status' · exploiting a father-daughter bond to resist the law"
+    }
+  ],
+  "magic_treasures": [
+    {
+      "name": "Vajra Ring",
+      "owner": "One-Horned Rhinoceros King (originally Taishang Laojun's)",
+      "category": "Causal-Law Weapon",
+      "power_source": "Cosmic Rule Engine",
+      "principle": "Snares all things · independent of the wielder's mana · with an embedded 'binding rule'",
+      "user_driven": false,
+      "evidence": "The One-Horned Rhinoceros's own mana is not top-tier, yet it can snare Wukong's Golden-Banded Staff, the gods' weapons, Nezha's weapons, even water and fire",
+      "rank": "S+"
+    },
+    {
+      "name": "Purple-Gold Red Gourd",
+      "owner": "Golden Horn King · Silver Horn King (originally Taishang Laojun's)",
+      "category": "Causal-Law Weapon · answering one's name brings death",
+      "power_source": "Cosmic Rule Engine · name-binding",
+      "principle": "Call the name and it answers; whoever answers enters the gourd and dissolves into pus and blood",
+      "user_driven": false,
+      "evidence": "Wukong was once trapped by the false name 'Zhe Xingsun' · dissolved into pus and blood · escaped by means of a false name",
+      "rank": "S+"
+    },
+    {
+      "name": "Human Seed Pouch",
+      "owner": "Yellow-Browed Boy (originally Maitreya Buddha's)",
+      "category": "Causal-Law Weapon · area capture",
+      "power_source": "Cosmic Rule Engine · spatial binding",
+      "principle": "Open the pouch · people enter · none of the gods can escape",
+      "user_driven": false,
+      "evidence": "Took the Twenty-Eight Mansions · the Five-Direction Guardians · Wukong too was nearly captured · saved only by Maitreya's descent",
+      "rank": "S+"
+    },
+    {
+      "name": "Yin-Yang Two-Qi Vase",
+      "owner": "Golden-Winged Great Peng",
+      "category": "Causal-Law Weapon · dissolution",
+      "power_source": "Cosmic Rule Engine · yin-yang dissolution",
+      "principle": "Enter the vase · within a short span one is reduced to pulp",
+      "user_driven": false,
+      "evidence": "Wukong entered the vase · relied on Guanyin's three life-saving hairs · bored through and destroyed it",
+      "rank": "S+"
+    },
+    {
+      "name": "Palm-Leaf Fan",
+      "owner": "Princess Iron Fan · the Rakshasi",
+      "category": "Elemental Weapon · wind-type",
+      "power_source": "A heaven-and-earth spirit-treasure · the innate primal qi",
+      "principle": "One fan-stroke sends wind 84,000 li · quenches the Flaming Mountains",
+      "user_driven": true,
+      "evidence": "The Rakshasi's own mana is middling, yet the fan made her a local hegemon",
+      "rank": "S"
+    },
+    {
+      "name": "Golden-Banded Staff",
+      "owner": "Sun Wukong",
+      "category": "Physical Weapon · heavy weapon",
+      "power_source": "The Sea-Pacifying Needle left by Yu the Great for flood control · an innate spirit-treasure",
+      "principle": "13,500 jin · shrinks or grows at will",
+      "user_driven": true,
+      "evidence": "Driven by Wukong's mana · its upper power limit is set by the wielder",
+      "rank": "S"
+    },
+    {
+      "name": "Nine-Toothed Rake",
+      "owner": "Zhu Bajie",
+      "category": "Physical Weapon · divine weapon",
+      "power_source": "Forged by Taishang Laojun · bestowed by the Jade Emperor",
+      "principle": "Nine teeth · divine radiance · can build mountains",
+      "user_driven": true,
+      "evidence": "Limited by Bajie's mana · the rake's power is never fully realized",
+      "rank": "A+"
+    },
+    {
+      "name": "Tight-Fillet Spell",
+      "owner": "Guanyin → Tang Sanzang",
+      "category": "Causal-Law Weapon · control",
+      "power_source": "Cosmic Rule Engine · mind-binding",
+      "principle": "Recite the spell and it tightens · splitting headache · a control actuator",
+      "user_driven": false,
+      "evidence": "Tang Sanzang, a mere mortal, can recite it · independent of the wielder's mana · acts directly on Wukong",
+      "rank": "S+"
+    }
+  ]
+};
 
     // ========== Color palette ==========
     const SANKEY_COLORS = {
@@ -3154,7 +3588,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
     // ========== Data loading (fall back to embedded data if fetch fails) ==========
     async function loadData() {
-        const base = "../data/json/";
+        const base = "../en/json/";
         const files = ["magic_system.json", "magic_fire.json", "magic_energy_sankey.json", "magic_arrays.json", "magic_treasures_power.json"];
         try {
             const results = await Promise.all(files.map(f => fetch(base + f).then(r => {
@@ -3162,7 +3596,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 return r.json();
             })));
             document.getElementById("dataSource").innerHTML =
-                "Data source: loaded live from <code>../data/json/</code> (http server mode)";
+                "Data source: loaded live from <code>../en/json/</code> (http server mode)";
             return {
                 magic_system: results[0],
                 magic_fire: results[1],

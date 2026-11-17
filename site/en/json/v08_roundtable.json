@@ -1,0 +1,24 @@
+[
+  {
+    "topic": "How to Evaluate Zhu Bajie",
+    "participants": [
+      "Lu Xun",
+      "Lin Yutang",
+      "Mao Zedong"
+    ],
+    "views": [
+      {
+        "speaker": "Lu Xun",
+        "view": "Human warmth — Bajie's gluttony and lust are the best footnote to the idea that gods and demons all possess human feeling"
+      },
+      {
+        "speaker": "Lin Yutang",
+        "view": "The archetype of desire — Bajie is the shadow archetype in Jungian psychology, a microcosm of the real working person"
+      },
+      {
+        "speaker": "Mao Zedong",
+        "view": "Hard work and pragmatism — despite his flaws, Bajie completes the journey, a model of the pragmatic worker"
+      }
+    ]
+  }
+]

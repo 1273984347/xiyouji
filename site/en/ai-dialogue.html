@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-MRoT9txgiV4EjpssA/o5B0zZqxop+DQz/0BLPLuvyVY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-WOqHp/KTq3vqWpxoS2EKyKp9mAlvuIE7DjkukBdpzCY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>AI Celebrity Dialogue · Annotated Journey to the West</title>
@@ -2745,7 +2745,7 @@ async function fetchJson(path, fallbackKey) {
 
 async function loadData() {
     // Pure front-end preset Q&A library; fetch will fail, auto-falling back to EMBEDDED_DATA
-    const base = '../data/json/';
+    const base = '../en/json/';
     const [celebrities, journeyQuotes, quickTopics] = await Promise.all([
         fetchJson(base + 'v08_ai_celebrities.json', 'celebrities'),
         fetchJson(base + 'v08_ai_journey_quotes.json', 'journey_quotes'),
@@ -3048,7 +3048,7 @@ async function main() {
     window.__lastData = data;
     if (fetchStatus.anyFetched) {
         document.getElementById('dataSource').innerHTML =
-            'Data source: loaded live from <code>../data/json/</code> (running in http server mode)';
+            'Data source: loaded live from <code>../en/json/</code> (running in http server mode)';
     }
     renderCelebrityList(data.celebrities);
     renderQuickTopics(data.quickTopics);

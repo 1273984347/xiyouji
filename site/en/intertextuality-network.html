@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-fBKfQpEybuI7Mwgg554KtTC8086MiAUPLZfmGfo9Dl8=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-Z0B//sjerG+fzteuaNez6N3kcdmhU9f1BjcUAE1QJGw=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-RgiwyGQCeGZ4Agn/ZrzzUQ6A/U5oQ48JHXNx82bo+QU=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-Z0B//sjerG+fzteuaNez6N3kcdmhU9f1BjcUAE1QJGw=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Intertextuality Network · Annotated Journey to the West</title>
@@ -2229,6 +2229,9 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
 <script defer src="../static/js/stats.js"></script>
 </head>
 <body>
+    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
+  Data source: embedded snapshot in this page (same source as the <code>../en/json/</code> deployment copies); under the http server it is replaced by the live load.
+    </div></div>
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <header class="topnav">
@@ -2515,7 +2518,7 @@ async function fetchJson(path, fallbackKey) {
 }
 
 async function loadData() {
-  const base = '../data/json/';
+  const base = '../en/json/';
   const intertextuality = await fetchJson(base + 'intertextuality-network.json', 'intertextuality');
   const it = intertextuality.intertextuality || intertextuality;
   return {
@@ -3580,7 +3583,7 @@ async function main() {
 
   if (fetchStatus.anyFetched) {
     document.getElementById('dataSource').innerHTML =
-      'Data source: loaded live from <code>../data/json/</code> (http server mode)';
+      'Data source: loaded live from <code>../en/json/</code> (http server mode)';
   }
 
   renderOverview(data.texts);

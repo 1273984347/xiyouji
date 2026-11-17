@@ -1,0 +1,131 @@
+[
+  {
+    "color": "佛金",
+    "hex": "#d4a857",
+    "category": "佛教",
+    "meaning": "庄严·觉者·不灭",
+    "representatives": [
+      "如来",
+      "唐僧成佛",
+      "观音净瓶"
+    ]
+  },
+  {
+    "color": "朱红",
+    "hex": "#C0392B",
+    "category": "皇家/法宝",
+    "meaning": "权威·威严·贵重",
+    "representatives": [
+      "玉帝龙袍",
+      "锦襕袈裟",
+      "紫金红葫芦"
+    ]
+  },
+  {
+    "color": "玄黑",
+    "hex": "#1a1410",
+    "category": "天界/妖邪",
+    "meaning": "深邃·威严·神秘",
+    "representatives": [
+      "天宫夜空",
+      "妖魔洞府",
+      "八戒皂色直裰"
+    ]
+  },
+  {
+    "color": "翠青",
+    "hex": "#40619E",
+    "category": "道教",
+    "meaning": "清修·道法·自然",
+    "representatives": [
+      "道士法袍",
+      "菩提祖师",
+      "观音杨柳"
+    ]
+  },
+  {
+    "color": "土黄",
+    "hex": "#a87838",
+    "category": "人间",
+    "meaning": "凡俗·朴实·尘世",
+    "representatives": [
+      "人间土路",
+      "唐僧灰褐直裰",
+      "百姓"
+    ]
+  },
+  {
+    "color": "虎皮黄",
+    "hex": "#8c6a3a",
+    "category": "行者",
+    "meaning": "野性·归顺·身份",
+    "representatives": [
+      "悟空虎皮裙"
+    ]
+  },
+  {
+    "color": "虎皮斑",
+    "hex": "#3a2820",
+    "category": "妖王",
+    "meaning": "野性·霸道·未驯",
+    "representatives": [
+      "虎力大仙",
+      "黄袍怪"
+    ]
+  },
+  {
+    "color": "白骨",
+    "hex": "#d9cdb8",
+    "category": "恐怖",
+    "meaning": "死亡·阴气·警告",
+    "representatives": [
+      "白骨精",
+      "沙僧骷髅",
+      "白虎岭"
+    ]
+  },
+  {
+    "color": "黛绿",
+    "hex": "#5a7a3a",
+    "category": "山野",
+    "meaning": "草莽·隐逸·幽深",
+    "representatives": [
+      "花果山",
+      "盘丝岭",
+      "五庄观"
+    ]
+  },
+  {
+    "color": "宝相紫",
+    "hex": "#7a3a5a",
+    "category": "灵山",
+    "meaning": "佛宝·智慧·祥瑞",
+    "representatives": [
+      "紫金钵盂",
+      "紫金红葫芦",
+      "灵山宝相"
+    ]
+  },
+  {
+    "color": "金光",
+    "hex": "#e9b885",
+    "category": "神通",
+    "meaning": "法力·神光·出世",
+    "representatives": [
+      "悟空火眼",
+      "金箍棒",
+      "金甲神光"
+    ]
+  },
+  {
+    "color": "碧水",
+    "hex": "#5a8c8c",
+    "category": "水族",
+    "meaning": "江河·流动·阴柔",
+    "representatives": [
+      "龙宫",
+      "通天河",
+      "碧波潭"
+    ]
+  }
+]

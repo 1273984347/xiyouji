@@ -1,0 +1,37 @@
+{
+  "vertices": [
+    {
+      "key": "ru",
+      "label": "Confucian",
+      "sub": "Zhang Shushen · Great Learning, Rectifying the Mind",
+      "pos": "top",
+      "args": [
+        "The intent of Journey to the West lies in the Great Learning and the Doctrine of the Mean",
+        "The mind-monkey is the human mind · rectifying the mind, making the will sincere",
+        "The Three Teachings in harmony · returning to Confucianism"
+      ]
+    },
+    {
+      "key": "dao",
+      "label": "Daoist",
+      "sub": "Chen Shibin · Inner Alchemy, Golden Elixir",
+      "pos": "bl",
+      "args": [
+        "Every plot point = a stage of inner-alchemy cultivation",
+        "The Eight Trigrams Furnace = the elixir field · the Golden-Banded Staff = true intent",
+        "The Golden Elixir Way · dual cultivation of nature and life"
+      ]
+    },
+    {
+      "key": "wen",
+      "label": "Buddhist-Literary",
+      "sub": "Modern scholars · literary approach",
+      "pos": "br",
+      "args": [
+        "A work of play · a novel of gods and demons",
+        "Gods and demons all have human feelings · spirits too know the ways of the world",
+        "Authorship research · close reading"
+      ]
+    }
+  ]
+}

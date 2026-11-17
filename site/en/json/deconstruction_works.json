@@ -1,0 +1,127 @@
+[
+  {
+    "title": "Wukong Biography (Jin Hezai)",
+    "year": 2000,
+    "author": "Jin Hezai",
+    "country": "China",
+    "medium": "Web Novel",
+    "axis_loyalty": 3,
+    "axis_seriousness": 8,
+    "quadrant": "Subversive-Serious",
+    "amplified_elements": [
+      "Rebellion",
+      "Fate",
+      "Tragedy",
+      "Web Literature Language"
+    ],
+    "feature": "Reconstructs Wukong's past and present life · 'I want this sky to no longer cover my eyes' · an anti-Journey-to-the-West web novel representative",
+    "influence": "Influenced a generation of web literature · a symbol of Journey to the West deconstruction"
+  },
+  {
+    "title": "A Chinese Odyssey (Film)",
+    "year": 1995,
+    "author": "Jeffrey Lau · Stephen Chow",
+    "country": "Hong Kong, China",
+    "medium": "Film · Comedy",
+    "axis_loyalty": 4,
+    "axis_seriousness": 5,
+    "quadrant": "Subversive-Moderate",
+    "amplified_elements": [
+      "Romance",
+      "Time Travel",
+      "Mou lei tau",
+      "Tragic Undertone"
+    ],
+    "feature": "Zhi Zunbao · Zixia Fairy · the 'ten thousand years' love line · a postmodern deconstruction classic",
+    "influence": "Reshaped how a generation of Chinese audiences see Journey to the West · a landmark of the deconstruction era"
+  },
+  {
+    "title": "Journey to the West (CCTV 1986)",
+    "year": 1986,
+    "author": "Director Yang Jie",
+    "country": "China",
+    "medium": "TV Series",
+    "axis_loyalty": 9,
+    "axis_seriousness": 7,
+    "quadrant": "Faithful to Original-Serious",
+    "amplified_elements": [
+      "Music",
+      "Canonized Visuals",
+      "Canonical Pilgrim Team Imagery"
+    ],
+    "feature": "Liu Xiao Ling Tong's Sun Wukong · the most iconic screen adaptation · shaped generations of Chinese",
+    "influence": "Standardized Sun Wukong's image · far-reaching musical influence"
+  },
+  {
+    "title": "Journey to the West: Conquering the Demons (Stephen Chow)",
+    "year": 2013,
+    "author": "Stephen Chow",
+    "country": "Hong Kong, China",
+    "medium": "Film",
+    "axis_loyalty": 3,
+    "axis_seriousness": 6,
+    "quadrant": "Subversive-Moderate",
+    "amplified_elements": [
+      "Dark",
+      "Gore",
+      "Xuanzang Reimagined",
+      "Buddha-Demon Duality"
+    ],
+    "feature": "Xuanzang as demon-hunter · Wukong as demon king · a dark deconstruction",
+    "influence": "Stephen Chow's Journey to the West universe · a dark trend"
+  },
+  {
+    "title": "Black Myth: Wukong",
+    "year": 2024,
+    "author": "Game Science · Feng Ji",
+    "country": "China",
+    "medium": "Video Game",
+    "axis_loyalty": 7,
+    "axis_seriousness": 8,
+    "quadrant": "Faithful to Original-Serious",
+    "amplified_elements": [
+      "Visual Impact",
+      "Art Historical Research",
+      "Dark Journey to the West",
+      "Action Game"
+    ],
+    "feature": "Wukong as protagonist · a domestic AAA game · research and re-imagining coexist",
+    "influence": "A domestic AAA milestone · a new vehicle for Journey to the West cultural export"
+  },
+  {
+    "title": "Wukong (A Cheng)",
+    "year": 2005,
+    "author": "A Cheng",
+    "country": "China",
+    "medium": "Novel",
+    "axis_loyalty": 5,
+    "axis_seriousness": 9,
+    "quadrant": "Subversive-Serious",
+    "amplified_elements": [
+      "Literati Styling",
+      "Allegory",
+      "Sexuality",
+      "Parody"
+    ],
+    "feature": "A Cheng's literati-style rewrite · parody and allegory coexist",
+    "influence": "Serious literature re-creating Journey to the West"
+  },
+  {
+    "title": "Great Ape King (Novel)",
+    "year": 2008,
+    "author": "Web Author",
+    "country": "China",
+    "medium": "Web Novel",
+    "axis_loyalty": 2,
+    "axis_seriousness": 3,
+    "quadrant": "Subversive-Entertainment",
+    "amplified_elements": [
+      "Xuanhuan",
+      "Passion",
+      "Power-Leveling",
+      "Otherworld"
+    ],
+    "feature": "Xuanhuan power-leveling · fully entertainment-driven · web novel formula",
+    "influence": "The entertainment-driven representative of web novel Journey to the West variants"
+  }
+]

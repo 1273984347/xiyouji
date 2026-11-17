@@ -1,0 +1,130 @@
+{
+  "concept_name": "Heavenly Promotion Channels",
+  "english_name": "Heavenly Court Promotion Channels",
+  "definition": "Eight promotion paths in Heaven’s bureaucracy · revealing the Xiyouji world’s ‘class mobility’ mechanism · not a single channel",
+  "promotion_paths": [
+    {
+      "path": "Cultivation to Immortality",
+      "english_name": "Self-Cultivation",
+      "requirement": "Perfect one’s own cultivation · complete merit · transcend the mortal body",
+      "duration": "Hundreds to thousands of years",
+      "success_rate": 0.05,
+      "cases": [
+        "Patriarch Bodhi (in seclusion)",
+        "Zhenyuan Daxian",
+        "Chan Master Wuchao",
+        "Erlang Shen (sanctified in the flesh)"
+      ],
+      "tier_target": "T1-Loose Immortal or Celestial Immortal"
+    },
+    {
+      "path": "Meritorious Enfeoffment",
+      "english_name": "Meritorious Service",
+      "requirement": "Perform great deeds · such as subduing demons / campaigning / protecting the Dharma",
+      "duration": "1-10 years",
+      "success_rate": 0.6,
+      "cases": [
+        "Sun Wukong (enfeoffed Great Sage Equal to Heaven · later becomes a Buddha)",
+        "Nezha (enfeoffed Grand Deity of the Three Altars of the Sea)",
+        "Erlang Shen (enfeoffed King of Zhaohui Lingxian)",
+        "Li Tianwang (enfeoffed Grand Marshal of Demon Subjugation)"
+      ],
+      "tier_target": "T0-Official Heavenly Establishment"
+    },
+    {
+      "path": "Heavenly Examination",
+      "english_name": "Heavenly Examination",
+      "requirement": "Pass Heaven’s civil-service examination · civil and martial subjects",
+      "duration": "Years of preparation + one examination",
+      "success_rate": 0.1,
+      "cases": [
+        "Wenqu Star (palace examination graduate)",
+        "Wuqu Star (military examination graduate)",
+        "Kui Star (god of examinations)"
+      ],
+      "tier_target": "T1-Heavenly Civil/Military Post"
+    },
+    {
+      "path": "Recommendation",
+      "english_name": "Recommendation",
+      "requirement": "Recommended by senior immortals · or trained under a famous master",
+      "duration": "Months to years",
+      "success_rate": 0.5,
+      "cases": [
+        "Zhu Bajie (recommended by his master · became Marshal Tianpeng)",
+        "Sha Wujing (recommended by his master · became General of the Curtain-lifting)",
+        "White Dragon Horse (recommended by Guanyin · joined the pilgrimage team)"
+      ],
+      "tier_target": "T0-Senior Heavenly General"
+    },
+    {
+      "path": "Mount Promotion",
+      "english_name": "Mount Promotion",
+      "requirement": "Serve as a senior immortal’s mount · cultivate alongside one’s master · occasionally gain the chance to be promoted",
+      "duration": "Thousands of years",
+      "success_rate": 0.02,
+      "cases": [
+        "Green Ox Spirit (Laojun’s mount · descended to be a demon)",
+        "Golden-Maned Hou (Guanyin’s mount)",
+        "Green-Maned Lion (Mañjuśrī’s mount)",
+        "White Elephant (Samantabhadra’s mount)"
+      ],
+      "tier_target": "T2-Demon Realm (descended) or return to mount status"
+    },
+    {
+      "path": "Mortal Deification",
+      "english_name": "Mortal Deification",
+      "requirement": "Mortals who perform great good or great loyalty · deified after death · or invested by Heaven",
+      "duration": "A lifetime + posthumous enfeoffment",
+      "success_rate": 0.01,
+      "cases": [
+        "Qin Shubao / Yuchi Gong (door gods)",
+        "Wei Zheng (beheads a dragon in a dream · the pinnacle of a minister)",
+        "Guan Yu (romance system · not the Xiyouji mainline)"
+      ],
+      "tier_target": "T2-Grassroots Heavenly Clergy"
+    },
+    {
+      "path": "Peach Longevity",
+      "english_name": "Peach Longevity",
+      "requirement": "Invited to the Peach Banquet · eat peaches to prolong life · keep one’s divine register",
+      "duration": "Annual Peach Banquet",
+      "success_rate": 0.3,
+      "cases": [
+        "Heaven’s elite (regulars at the Peach Banquet)",
+        "Sun Wukong (invited once as Great Sage Equal to Heaven · later loses the privilege)"
+      ],
+      "tier_target": "Maintains current tier · not a promotion · a life-extension mechanism"
+    },
+    {
+      "path": "Elixir Promotion",
+      "english_name": "Elixir Promotion",
+      "requirement": "Receive Taishang Laojun’s elixir · boost cultivation or save one’s life",
+      "duration": "Takes effect immediately",
+      "success_rate": 0.2,
+      "cases": [
+        "Sun Wukong (steals 5 gourds of elixir · attains an indestructible body)",
+        "Jade Emperor (endured 1750 kalpas · each 129,600 years · aided by elixir)"
+      ],
+      "tier_target": "Cross-tier leap or life-saving"
+    }
+  ],
+  "promotion_stats": {
+    "total_paths": 8,
+    "highest_success_rate": "Meritorious Enfeoffment (60%) · the mainstream promotion channel",
+    "lowest_success_rate": "Mortal Deification (1%) · traversable by very few",
+    "mainstream_path": "Meritorious Enfeoffment + Recommendation · covers most registered immortals in Heaven",
+    "alternative_path": "Cultivation to Immortality · the most autonomous but the lowest success rate",
+    "structural_insight": "Heavenly promotion runs on ‘merit + connections + lineage’ three tracks in parallel · not a single standard"
+  },
+  "promotion_insights": [
+    "Meritorious Enfeoffment is the mainstream channel · 60% success rate · Sun Wukong’s enfeoffment as Great Sage Equal to Heaven followed this path",
+    "Recommendation is the hidden rule · 50% success rate · Zhu Bajie / Sha Wujing both entered Heaven’s upper ranks this way",
+    "Peach Longevity is not promotion · it is a life-extension mechanism · keeping one’s divine register from ‘retirement’",
+    "Elixir Promotion is a top resource · held by Taishang Laojun alone · extremely scarce",
+    "Mount Promotion has the lowest rate (2%) · revealing Heaven’s class ossification · mounts are ‘second-class citizens’",
+    "Mortal Deification is a bottom-up channel · but only 1% success · Qin Shubao / Yuchi Gong are rare cases",
+    "The Heavenly Examination exists but has few cases · showing Heaven values merit over examinations",
+    "Cultivation to Immortality is the ‘most orthodox’ but the hardest · Patriarch Bodhi / Zhenyuan Daxian are successes · but most cultivators fail"
+  ]
+}

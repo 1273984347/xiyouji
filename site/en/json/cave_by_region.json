@@ -1,0 +1,222 @@
+[
+  {
+    "region": "Seven-Wonders Mountain · Rotten-Persimmon Lane",
+    "caves": [
+      {
+        "name": "Rotten-Persimmon Lane",
+        "owner": "Python Demon",
+        "luxury": 2
+      }
+    ]
+  },
+  {
+    "region": "Pūrvavideha Continent · Flower-Fruit Mountain",
+    "caves": [
+      {
+        "name": "Water Curtain Cave",
+        "owner": "Sun Wukong",
+        "luxury": 7
+      }
+    ]
+  },
+  {
+    "region": "Kingdom of Ussa · Black Wind Mountain",
+    "caves": [
+      {
+        "name": "Black Wind Cave",
+        "owner": "Black Bear Demon",
+        "luxury": 6
+      }
+    ]
+  },
+  {
+    "region": "Boulder Mountain · Jade-Wave Pool",
+    "caves": [
+      {
+        "name": "Jade-Wave Pool of Boulder Mountain",
+        "owner": "Nine-Headed Son-in-Law · Dragon King of Ten Thousand Saints",
+        "luxury": 9
+      }
+    ]
+  },
+  {
+    "region": "Mount Hao · Withered-Pine Gorge · Fire-Cloud Cave",
+    "caves": [
+      {
+        "name": "Fire-Cloud Cave of Mount Hao",
+        "owner": "Red Boy",
+        "luxury": 7
+      }
+    ]
+  },
+  {
+    "region": "Kingdom of Women · Pipa Cave",
+    "caves": [
+      {
+        "name": "Pipa Cave",
+        "owner": "Scorpion Demon",
+        "luxury": 5
+      }
+    ]
+  },
+  {
+    "region": "Little Western Heaven · Minor Thunderclap Monastery",
+    "caves": [
+      {
+        "name": "Minor Thunderclap Monastery",
+        "owner": "Yellow-Browed Boy",
+        "luxury": 10
+      }
+    ]
+  },
+  {
+    "region": "Flat-Top Mountain · Lotus Cave",
+    "caves": [
+      {
+        "name": "Lotus Cave on Flat-Top Mountain",
+        "owner": "Golden Horn King · Silver Horn King",
+        "luxury": 9
+      }
+    ]
+  },
+  {
+    "region": "Bhikṣu Kingdom · Qinghua Manor",
+    "caves": [
+      {
+        "name": "Qinghua Manor",
+        "owner": "Deer Demon · State Preceptor of the Bhikṣu Kingdom",
+        "luxury": 6
+      }
+    ]
+  },
+  {
+    "region": "Mount Maoying · Three Rabbit Warrens",
+    "caves": [
+      {
+        "name": "Rabbit Warren of Mount Maoying",
+        "owner": "Jade Rabbit Demon",
+        "luxury": 3
+      }
+    ]
+  },
+  {
+    "region": "Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom",
+    "caves": [
+      {
+        "name": "Lion-Camel Cave",
+        "owner": "Azure Lion · White Elephant · Great Roc",
+        "luxury": 10
+      }
+    ]
+  },
+  {
+    "region": "Silk-Web Ridge · Silk-Web Cave",
+    "caves": [
+      {
+        "name": "Silk-Web Cave",
+        "owner": "Spider Demon · Seven Sisters",
+        "luxury": 5
+      }
+    ]
+  },
+  {
+    "region": "Bowl Mountain · Wave-Moon Cave",
+    "caves": [
+      {
+        "name": "Wave-Moon Cave",
+        "owner": "Yellow-Robe Demon",
+        "luxury": 5
+      }
+    ]
+  },
+  {
+    "region": "Thunder-Hoard Mountain · Cloud-Touching Cave",
+    "caves": [
+      {
+        "name": "Cloud-Touching Cave of Thunder-Hoard Mountain",
+        "owner": "Bull Demon King · Princess Jade-Face",
+        "luxury": 8
+      }
+    ]
+  },
+  {
+    "region": "Bamboo-Joint Mountain · Nine-Curve Winding Cave",
+    "caves": [
+      {
+        "name": "Nine-Curve Winding Cave",
+        "owner": "Nine-Spirits Primordial Sage",
+        "luxury": 8
+      }
+    ]
+  },
+  {
+    "region": "Emerald-Cloud Mountain · Plantain Cave",
+    "caves": [
+      {
+        "name": "Plantain Cave of Emerald-Cloud Mountain",
+        "owner": "Princess Iron Fan · Bull Demon King",
+        "luxury": 9
+      }
+    ]
+  },
+  {
+    "region": "Tongtian River · Turtle Mansion",
+    "caves": [
+      {
+        "name": "Turtle Mansion of the Tongtian River",
+        "owner": "King of Inspiration",
+        "luxury": 6
+      }
+    ]
+  },
+  {
+    "region": "Mount Jindou · Jindou Cave",
+    "caves": [
+      {
+        "name": "Jindou Cave",
+        "owner": "One-Horned Rhinoceros King",
+        "luxury": 8
+      }
+    ]
+  },
+  {
+    "region": "Sunken-Empty Mountain · Bottomless Cave",
+    "caves": [
+      {
+        "name": "Bottomless Cave of Sunken-Empty Mountain",
+        "owner": "Golden-Nosed White-Haired Mouse Demon",
+        "luxury": 7
+      }
+    ]
+  },
+  {
+    "region": "Hidden-Mist Mountain · Linked-Circle Cave",
+    "caves": [
+      {
+        "name": "Linked-Circle Cave of Hidden-Mist Mountain",
+        "owner": "Flower-Skinned Leopard Demon",
+        "luxury": 5
+      }
+    ]
+  },
+  {
+    "region": "Green-Dragon Mountain · Dark-Splendor Cave",
+    "caves": [
+      {
+        "name": "Dark-Splendor Cave of Green-Dragon Mountain",
+        "owner": "Cold-Dispeller · Heat-Dispeller · Dust-Dispeller",
+        "luxury": 7
+      }
+    ]
+  },
+  {
+    "region": "Yellow Wind Ridge · Yellow Wind Cave",
+    "caves": [
+      {
+        "name": "Yellow Wind Cave",
+        "owner": "Yellow Wind Demon",
+        "luxury": 5
+      }
+    ]
+  }
+]

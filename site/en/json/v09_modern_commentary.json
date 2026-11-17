@@ -1,0 +1,30 @@
+[
+  {
+    "celebrity": "Lu Xun",
+    "era": "Republican era",
+    "modern_topic": "Big Tech companies",
+    "commentary": "I have never shrunk from speculating with the worst malice about certain companies — yet I never expected, nor could I believe, that they would actually use people as beasts of burden. But Journey to the West said long ago: before demons can eat people, they must first invent a reason of immortality.",
+    "aside": "Even demons need an excuse to eat people"
+  },
+  {
+    "celebrity": "Hu Shi",
+    "era": "Republican era",
+    "modern_topic": "AI anxiety",
+    "commentary": "Why fear that truth is infinite? Every inch of progress brings an inch of joy. No matter how many demons there are, doesn't the monkey just beat them back one staff at a time? A tool is only a tool — why insist on extracting some subtle meaning?",
+    "aside": "Every inch of progress brings an inch of joy"
+  },
+  {
+    "celebrity": "Lin Yutang",
+    "era": "Modern era",
+    "modern_topic": "Social-media personas",
+    "commentary": "Everyone is playing the idealized version of themselves — just like Bajie on the way to the West: his heart clings to Gao Village while his mouth sings 'Amitabha's mercy.' That is precisely the charm of human nature.",
+    "aside": "Gao Village in the heart · 'Buddha's mercy' on the lips"
+  },
+  {
+    "celebrity": "Qian Zhongshu",
+    "era": "Modern era",
+    "modern_topic": "Involution",
+    "commentary": "This 'involution' you all talk about — isn't it just the magic contest at the Kingdom of Chechi? Merely guessing objects behind a screen, and even if you win, so what? I'll say it again: true humor is knowing that this 'yikou zhong' is not a bronze bell.",
+    "aside": "The Chechi contest of magic — so what if you win?"
+  }
+]

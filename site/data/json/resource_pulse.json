@@ -1,0 +1,161 @@
+{
+  "concept_name": "唐僧肉的资源脉冲效应",
+  "english_name": "Tang Monk Flesh as Resource Pulse",
+  "ecological_definition": "资源脉冲（resource pulse）：稀缺高能量资源在特定时间地点大量出现·引发局部生态系统剧烈波动·类似自然界中鲑鱼洄游、橡子丰收引发的种群爆发",
+  "core_case": "唐僧肉作为稀缺资源·每到一处就引发妖怪聚集、地盘争夺·局部生态剧烈波动",
+  "pulse_cases": [
+    {
+      "location": "白虎岭",
+      "chapter": "第 27 回",
+      "monster_count": 1,
+      "monster_names": [
+        "白骨精"
+      ],
+      "pulse_intensity": 7,
+      "ecological_response": "白骨精独自行动·三变取经人",
+      "resource_competition": "无（独占）",
+      "outcome": "白骨精被消灭",
+      "pulse_duration_days": 1
+    },
+    {
+      "location": "平顶山·莲花洞",
+      "chapter": "第 32-35 回",
+      "monster_count": 2,
+      "monster_names": [
+        "金角大王",
+        "银角大王"
+      ],
+      "pulse_intensity": 8,
+      "ecological_response": "兄弟合伙·依赖法宝（紫金葫芦）",
+      "resource_competition": "无（兄弟共享）",
+      "outcome": "太上老君收回",
+      "pulse_duration_days": 4
+    },
+    {
+      "location": "号山·火云洞",
+      "chapter": "第 40-42 回",
+      "monster_count": 1,
+      "monster_names": [
+        "红孩儿"
+      ],
+      "pulse_intensity": 9,
+      "ecological_response": "三昧真火 + 诈骗（变小孩）",
+      "resource_competition": "无（独占）",
+      "outcome": "观音收为善财童子",
+      "pulse_duration_days": 3
+    },
+    {
+      "location": "通天河·灵感大王",
+      "chapter": "第 47-49 回",
+      "monster_count": 1,
+      "monster_names": [
+        "金鱼精"
+      ],
+      "pulse_intensity": 6,
+      "ecological_response": "水生拦截·每年一对童男童女",
+      "resource_competition": "无（独占）",
+      "outcome": "观音竹篮收回",
+      "pulse_duration_days": 2
+    },
+    {
+      "location": "金兜山·金兜洞",
+      "chapter": "第 50-52 回",
+      "monster_count": 1,
+      "monster_names": [
+        "青牛精"
+      ],
+      "pulse_intensity": 10,
+      "ecological_response": "金刚琢收取诸神兵器·独占",
+      "resource_competition": "无（独占）",
+      "outcome": "太上老君收回",
+      "pulse_duration_days": 6
+    },
+    {
+      "location": "狮驼岭·狮驼国",
+      "chapter": "第 74-77 回",
+      "monster_count": 3,
+      "monster_names": [
+        "青毛狮子怪",
+        "黄牙老象",
+        "金翅大鹏雕"
+      ],
+      "pulse_intensity": 10,
+      "ecological_response": "三大魔王结盟·骷髅若岭",
+      "resource_competition": "三人争夺·大鹏雕最积极",
+      "outcome": "三大菩萨/如来亲降收回",
+      "pulse_duration_days": 12
+    },
+    {
+      "location": "盘丝洞·黄花观",
+      "chapter": "第 72-73 回",
+      "monster_count": 7,
+      "monster_names": [
+        "七个蜘蛛精",
+        "百眼魔君（蜈蚣精）"
+      ],
+      "pulse_intensity": 7,
+      "ecological_response": "蜘蛛精姐妹 + 蜈蚣精表兄",
+      "resource_competition": "姐妹共享 + 表兄争夺",
+      "outcome": "蜈蚣精被收·蜘蛛精被打死",
+      "pulse_duration_days": 3
+    },
+    {
+      "location": "无底洞·陷空山",
+      "chapter": "第 80-83 回",
+      "monster_count": 1,
+      "monster_names": [
+        "老鼠精"
+      ],
+      "pulse_intensity": 8,
+      "ecological_response": "地府无底洞 + 强娶唐僧",
+      "resource_competition": "无（独占）",
+      "outcome": "李天王收回（义女）",
+      "pulse_duration_days": 5
+    },
+    {
+      "location": "青龙山·玄英洞",
+      "chapter": "第 91-92 回",
+      "monster_count": 3,
+      "monster_names": [
+        "辟寒大王",
+        "辟暑大王",
+        "辟尘大王"
+      ],
+      "pulse_intensity": 8,
+      "ecological_response": "三犀牛合伙 + 偷香油",
+      "resource_competition": "三人共享",
+      "outcome": "四木禽星收服",
+      "pulse_duration_days": 4
+    },
+    {
+      "location": "天竺国·毛颖山",
+      "chapter": "第 93-95 回",
+      "monster_count": 1,
+      "monster_names": [
+        "玉兔精"
+      ],
+      "pulse_intensity": 5,
+      "ecological_response": "伪装公主 + 想招唐僧为夫",
+      "resource_competition": "无（独占）",
+      "outcome": "太阴星君收回",
+      "pulse_duration_days": 2
+    }
+  ],
+  "pulse_analysis": {
+    "total_pulse_events": 10,
+    "avg_monsters_per_pulse": 2.1,
+    "max_monsters_pulse": 7,
+    "avg_pulse_intensity": 7.8,
+    "avg_pulse_duration_days": 4.2,
+    "most_intense_pulse": "狮驼岭（10/10·3 大魔王 + 12 天）",
+    "longest_pulse": "狮驼岭（12 天）",
+    "highest_competition": "狮驼岭（3 大魔王争夺）"
+  },
+  "ecological_insights": [
+    "唐僧肉是稀缺脉冲资源·每到一处引发妖怪聚集",
+    "妖怪数量与脉冲强度正相关·狮驼岭 3 妖+12 天 = 最高强度",
+    "草根妖怪独自行动（白骨精/红孩儿）·背景妖怪倾向结盟（狮驼岭三妖）",
+    "资源竞争激烈时·背景妖怪胜出（大鹏雕主导狮驼岭）",
+    "唐僧肉的'稀缺性'是脉冲效应的根本原因·若唐僧肉'量产'则失去价值"
+  ]
+}

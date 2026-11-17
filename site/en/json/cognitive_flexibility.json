@@ -1,0 +1,96 @@
+{
+  "concept_name": "Team Cognitive Flexibility Radar",
+  "english_name": "Team Cognitive Flexibility Radar",
+  "cognitive_definition": "Cognitive flexibility: the ability to hold multiple hypotheses simultaneously and switch quickly in response to new information.",
+  "core_case": "Wukong can hold the two hypotheses 'this is a demon' and 'this is a mortal' simultaneously and switch rapidly, whereas Bajie can only anchor on the single hypothesis 'this is a beautiful woman'.",
+  "team_members": [
+    {
+      "character": "Sun Wukong",
+      "cognitive_profile": "High flexibility · dual-hypothesis switching",
+      "dimensions": {
+        "Hypothesis Diversity": 9,
+        "Switching Speed": 10,
+        "Information Integration": 9,
+        "Cognitive Inhibition": 8,
+        "Experience Transfer": 10,
+        "Abstract Reasoning": 8
+      },
+      "flexibility_score": 9,
+      "key_strength": "Fiery Golden Eyes + 72 Transformations · holds multiple hypotheses at once",
+      "key_weakness": "Overconfident · occasionally overlooks the mortal possibility",
+      "representative_case": "Thrice Beats the White Bone Demon · simultaneously holds the two hypotheses 'is a demon' and 'looks human'"
+    },
+    {
+      "character": "Tang Sanzang",
+      "cognitive_profile": "Low flexibility · anchors on a single hypothesis",
+      "dimensions": {
+        "Hypothesis Diversity": 3,
+        "Switching Speed": 4,
+        "Information Integration": 5,
+        "Cognitive Inhibition": 3,
+        "Experience Transfer": 4,
+        "Abstract Reasoning": 7
+      },
+      "flexibility_score": 4.3,
+      "key_strength": "Firm in belief · unmoved by appearances",
+      "key_weakness": "Over-anchored on the 'all beings are good' hypothesis · ignores counter-evidence",
+      "representative_case": "Thrice Beats the White Bone Demon · clings to the 'is a mortal' hypothesis"
+    },
+    {
+      "character": "Zhu Bajie",
+      "cognitive_profile": "Low flexibility · anchors on instinctive hypotheses",
+      "dimensions": {
+        "Hypothesis Diversity": 4,
+        "Switching Speed": 3,
+        "Information Integration": 4,
+        "Cognitive Inhibition": 2,
+        "Experience Transfer": 5,
+        "Abstract Reasoning": 3
+      },
+      "flexibility_score": 3.5,
+      "key_strength": "Sharp instincts · senses danger",
+      "key_weakness": "Anchored on the 'beautiful woman / good food' hypothesis · cannot switch",
+      "representative_case": "The Four Sages' Test of Zen Mind · clings to the 'beautiful woman' hypothesis"
+    },
+    {
+      "character": "Sha Wujing",
+      "cognitive_profile": "Moderate flexibility · follower type",
+      "dimensions": {
+        "Hypothesis Diversity": 5,
+        "Switching Speed": 5,
+        "Information Integration": 5,
+        "Cognitive Inhibition": 6,
+        "Experience Transfer": 5,
+        "Abstract Reasoning": 4
+      },
+      "flexibility_score": 5,
+      "key_strength": "Steady · follows the prevailing judgment",
+      "key_weakness": "Lacks independent judgment · over-relies on Wukong",
+      "representative_case": "'Master has been captured by a demon' — the follower's report"
+    },
+    {
+      "character": "White Dragon Horse",
+      "cognitive_profile": "High flexibility at critical moments",
+      "dimensions": {
+        "Hypothesis Diversity": 6,
+        "Switching Speed": 8,
+        "Information Integration": 6,
+        "Cognitive Inhibition": 7,
+        "Experience Transfer": 5,
+        "Abstract Reasoning": 5
+      },
+      "flexibility_score": 6.2,
+      "key_strength": "Can switch at critical moments · acts decisively",
+      "key_weakness": "Usually silent · lacks proactive judgment",
+      "representative_case": "The Yellow Robe Demon episode · decisively transforms into a palace maid to attempt an assassination"
+    }
+  ],
+  "team_avg_flexibility": 5.6,
+  "flexibility_insights": [
+    "Wukong's flexibility of 9.0 makes him the team's cognitive core",
+    "Bajie's flexibility of 3.5 is the lowest — the team's cognitive weak point",
+    "The team's overall flexibility of 5.6 is sustained by Wukong",
+    "Tang Sanzang is firm in belief but low in flexibility — the root of the team's cognitive conflict",
+    "The White Dragon Horse is usually silent but can switch at critical moments — a latent cognitive resource"
+  ]
+}

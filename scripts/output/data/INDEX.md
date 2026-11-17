@@ -11,9 +11,12 @@
 
 - （无）
 
-## 文件（0）
+## 文件（2）
 
-- （无直属文件·纯容器或占位目录）
+### 数据与配置
+
+- `chapter_rhythm.json`
+- `music_structure_summary.json`
 
 ---
 

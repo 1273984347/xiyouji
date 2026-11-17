@@ -1,0 +1,16 @@
+{
+  "total_versions": 10,
+  "total_variants": 6,
+  "total_authors": 4,
+  "total_commentators": 5,
+  "total_commentary_count": 6100,
+  "commentary_by_type": {
+    "叫好": 1100,
+    "骂人": 340,
+    "点旨": 2250,
+    "考证": 1450,
+    "训诂": 960
+  },
+  "earliest_version": "《大唐三藏取经诗话》",
+  "latest_qing_version": "《西游原旨》"
+}

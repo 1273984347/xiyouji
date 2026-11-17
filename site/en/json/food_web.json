@@ -1,0 +1,131 @@
+{
+  "concept_name": "Western Continent Food Chain and Species Invasion",
+  "english_name": "Western Continent Food Web with Invasive Species",
+  "ecological_definition": "Food web: the network of energy flow and predation relationships in an ecosystem; invasive species alter the structure of the food web",
+  "trophic_levels": [
+    {
+      "level": 1,
+      "name": "Primary producers",
+      "members": [
+        "plants",
+        "crops",
+        "wild fruits"
+      ],
+      "energy_source": "Solar energy",
+      "biomass_share": 100
+    },
+    {
+      "level": 2,
+      "name": "Primary consumers",
+      "members": [
+        "mortals",
+        "livestock",
+        "small animals"
+      ],
+      "energy_source": "Plants",
+      "biomass_share": 10
+    },
+    {
+      "level": 3,
+      "name": "Secondary consumers · local demons",
+      "members": [
+        "White Bone Demon",
+        "Spider Demon",
+        "Yellow Wind Demon",
+        "Three Immortals of Chechi"
+      ],
+      "energy_source": "Mortals + animals",
+      "biomass_share": 1,
+      "characteristics": "No backing · lone operators · easily eliminated"
+    },
+    {
+      "level": 4,
+      "name": "Top predators · invasive demons",
+      "members": [
+        "Green Ox Spirit",
+        "Golden-Winged Great Peng",
+        "Nine-Headed Lion",
+        "Azure Lion"
+      ],
+      "energy_source": "Mortals + animals + local demons",
+      "biomass_share": 0.1,
+      "characteristics": "Mounts descended from the Celestial Court / Spirit Mountain · no natural enemies · must be reclaimed by their owners"
+    },
+    {
+      "level": 5,
+      "name": "Super-top controllers · pilgrimage team",
+      "members": [
+        "Sun Wukong",
+        "Tang Sanzang (protected by Guanyin / Tathagata)"
+      ],
+      "energy_source": "Does not participate in energy flow (external intervention)",
+      "biomass_share": 0.01,
+      "characteristics": "External intervention force · eliminates invasive species"
+    },
+    {
+      "level": 6,
+      "name": "Ultimate regulators · Celestial Court / Spirit Mountain",
+      "members": [
+        "Tathagata",
+        "Guanyin",
+        "Taishang Laojun",
+        "Jade Emperor"
+      ],
+      "energy_source": "Does not participate (institutional regulation)",
+      "biomass_share": 0.001,
+      "characteristics": "Source control · reclaims mounts · institutional ‘invasion’"
+    }
+  ],
+  "energy_flow": [
+    {
+      "from": "Primary producers",
+      "to": "Primary consumers",
+      "efficiency": 10
+    },
+    {
+      "from": "Primary consumers",
+      "to": "local demons",
+      "efficiency": 10
+    },
+    {
+      "from": "local demons",
+      "to": "invasive demons",
+      "efficiency": 5
+    },
+    {
+      "from": "invasive demons",
+      "to": "pilgrimage team",
+      "efficiency": 1
+    },
+    {
+      "from": "pilgrimage team",
+      "to": "Celestial Court / Spirit Mountain",
+      "efficiency": 0.1
+    }
+  ],
+  "invasive_impact": {
+    "before_invasion": {
+      "top_predator": "Local demons (White Bone Demon, etc.)",
+      "ecosystem_balance": "Stable · local demons and mortals in balance",
+      "removal_mechanism": "Killed directly by Wukong"
+    },
+    "during_invasion": {
+      "top_predator": "Invasive demons (Green Ox Spirit, etc.)",
+      "ecosystem_balance": "Imbalanced · invasive demons have no enemies · mortals eaten en masse",
+      "removal_mechanism": "Reclaimed by owners · not exterminated"
+    },
+    "after_invasion": {
+      "top_predator": "After the pilgrimage team passes · no demons remain",
+      "ecosystem_balance": "Mortals recover · but local demons are also cleared",
+      "removal_mechanism": "The pilgrimage team ‘clears the field’ · ecological homogenization"
+    }
+  },
+  "food_web_insights": [
+    "The Western Continent food web has 6 trophic levels · 2 more than a natural ecosystem",
+    "Invasive species occupy level 4 · no local enemies · disrupting energy flow",
+    "The pilgrimage team is an external intervention force · it does not participate in energy flow",
+    "The Celestial Court / Spirit Mountain is the ultimate regulator · it both manufactures and reclaims invasions",
+    "After the pilgrimage team passes · ecological homogenization (mortals dominate · demons cleared)",
+    "It is essentially ‘institutional species invasion’: the Celestial Court / Spirit Mountain creates problems and then solves them"
+  ]
+}

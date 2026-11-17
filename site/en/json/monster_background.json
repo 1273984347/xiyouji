@@ -1,0 +1,79 @@
+{
+  "concept_name": "Monster Background Theory",
+  "background_types": [
+    {
+      "id": "celestial",
+      "name": "Celestial Mounts & Divine Beasts",
+      "english_name": "Celestial Mounts",
+      "count": 16,
+      "survival_rate": 100,
+      "avg_power": 8.5,
+      "background_strength": 9,
+      "color": "#C0392B",
+      "examples": [
+        "Green Ox Demon (Laojun's mount)",
+        "Nine Spirits Primordial Sage (Taiyi Tianzun's mount)",
+        "Yellow Robe Demon (Kui Wood Wolf)",
+        "Sai Tai Sui (Guanyin's mount)",
+        "Green Lion (Manjushri's mount)"
+      ]
+    },
+    {
+      "id": "disciple",
+      "name": "Buddhist & Daoist Disciples/Attendants",
+      "english_name": "Disciples/Attendants",
+      "count": 12,
+      "survival_rate": 100,
+      "avg_power": 8.2,
+      "background_strength": 8,
+      "color": "#40619E",
+      "examples": [
+        "Gold Horn & Silver Horn (Laojun's boys)",
+        "Yellow Brow King (Maitreya's boy)",
+        "Red Boy (demon second-generation → recruited by Guanyin)",
+        "Inspiration King (Guanyin's lotus pond)"
+      ]
+    },
+    {
+      "id": "local",
+      "name": "Local Deities/Kin",
+      "english_name": "Local Deities/Kin",
+      "count": 8,
+      "survival_rate": 87.5,
+      "avg_power": 7,
+      "background_strength": 6,
+      "color": "#8E7D62",
+      "examples": [
+        "Bull Demon King (sworn brother)",
+        "Princess Iron Fan (Rakshasi)",
+        "Jade Rabbit Demon (Chang'e's pet)",
+        "Black Bear Demon (self-cultivated → recruited by Guanyin as mountain guardian)"
+      ]
+    },
+    {
+      "id": "wild",
+      "name": "Wild, No Backing",
+      "english_name": "Wild Demons",
+      "count": 33,
+      "survival_rate": 9.1,
+      "avg_power": 6.8,
+      "background_strength": 1,
+      "color": "#6B6455",
+      "examples": [
+        "White Bone Demon",
+        "Tiger Power Immortal",
+        "Seven Spider Demon Sisters",
+        "Python Demon",
+        "Six-Eared Macaque"
+      ]
+    }
+  ],
+  "type_stats": {
+    "total": 69,
+    "with_background": 36,
+    "without_background": 33,
+    "with_background_survival_rate": 97.2,
+    "without_background_survival_rate": 9.1,
+    "survival_gap": 10.7
+  }
+}

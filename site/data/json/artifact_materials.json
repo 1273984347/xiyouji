@@ -1,0 +1,230 @@
+{
+  "concept_name": "法宝材质学",
+  "english_name": "Artifact Material Science",
+  "definition": "材质学（material science）：通过分析物质的化学成分、物理特性、工艺推测·复原古代工艺技术·将法宝从神话还原为可分析的工程材料",
+  "core_case": "金刚琢是'锟钢抟炼'（合金钢）·金箍棒是'神铁'（陨铁？）·芭蕉扇是'太阴叶'（有机复合材料？）·这些材质对应明代实际工艺",
+  "artifact_material_reports": [
+    {
+      "artifact_name": "金刚琢",
+      "english_name": "Diamond Snare",
+      "owner": "太上老君",
+      "raw_material_description": "锟钢抟炼",
+      "material_classification": "合金钢·高碳钢",
+      "modern_equivalent": "钨钢/高速钢（硬度高·耐磨·耐腐蚀）",
+      "chemical_composition_guess": "Fe-C-W-Cr（铁碳钨铬合金）",
+      "physical_properties": {
+        "hardness": "莫氏 9.5·接近金刚石",
+        "density": "7.85 g/cm³·高于普通钢",
+        "magnetic": "弱磁性",
+        "conductivity": "良导电·导热"
+      },
+      "crafting_process": [
+        "选矿·采集铁矿石+钨矿+铬矿",
+        "炼钢·高炉熔炼·去除杂质",
+        "合金化·加入钨铬提升硬度",
+        "锻造·反复锻打·致密化",
+        "淬火·油淬或水淬·提升硬度",
+        "回火·低温回火·降低脆性",
+        "抛光·达到镜面光泽"
+      ],
+      "function_principle": "硬度极高·可收取任何金属兵器（金属碰撞时金刚琢不变形·兵器变形）",
+      "estimated_value": "无价·明代工艺巅峰",
+      "archaeological_parallel": "汉代百炼钢+唐代镔铁·明代景泰蓝工艺"
+    },
+    {
+      "artifact_name": "金箍棒",
+      "english_name": "Golden Cudgel",
+      "owner": "孙悟空（原东海龙王保管）",
+      "raw_material_description": "神铁·定海神针",
+      "material_classification": "陨铁（铁镍合金）",
+      "modern_equivalent": "镍铁陨石（含镍 5-30%）",
+      "chemical_composition_guess": "Fe-Ni（铁镍合金·含镍 8%）",
+      "physical_properties": {
+        "hardness": "莫氏 7.5·硬度高于普通铁",
+        "density": "8.0 g/cm³·高于普通铁",
+        "magnetic": "强磁性",
+        "conductivity": "良导电"
+      },
+      "crafting_process": [
+        "陨石坠落·大禹治水时获得",
+        "熔炼·去除硅酸盐杂质",
+        "锻造·定海神针形制",
+        "刻字·'如意金箍棒·重一万三千五百斤'",
+        "祭炼·道家祭炼提升灵性"
+      ],
+      "function_principle": "陨铁含镍·耐腐蚀·可大可小（道家祭炼赋予变形能力）",
+      "estimated_value": "定海神针·无价",
+      "archaeological_parallel": "商代铁刃铜钺（用陨铁制成）·明代炼铁技术"
+    },
+    {
+      "artifact_name": "芭蕉扇",
+      "english_name": "Banana Leaf Fan",
+      "owner": "铁扇公主",
+      "raw_material_description": "太阴叶·女娲补天遗留",
+      "material_classification": "有机复合材料·植物纤维+矿物",
+      "modern_equivalent": "碳纤维+矿物涂层复合材料",
+      "chemical_composition_guess": "C-Si-O-K（碳硅氧钾复合材料）",
+      "physical_properties": {
+        "hardness": "可变·平时柔软·激活时硬如钢",
+        "density": "1.5 g/cm³·轻于钢",
+        "magnetic": "无",
+        "conductivity": "绝缘"
+      },
+      "crafting_process": [
+        "采集·太阴之精（月球矿物）",
+        "提取·植物纤维（芭蕉叶）",
+        "复合·纤维与矿物结合",
+        "祭炼·道家祭炼·赋予控风能力",
+        "装饰·扇骨刻花·扇面题字"
+      ],
+      "function_principle": "复合材料·柔性 + 矿物激活·可扇出八百里风",
+      "estimated_value": "稀世·控风能力无价",
+      "archaeological_parallel": "汉代漆器（漆+麻布复合材料）·明代折扇工艺"
+    },
+    {
+      "artifact_name": "紫金红葫芦",
+      "english_name": "Purple Gold Red Gourd",
+      "owner": "太上老君",
+      "raw_material_description": "紫金·炼丹房容器",
+      "material_classification": "紫铜合金·铜金合金",
+      "modern_equivalent": "红铜+金合金（类似景泰蓝底材）",
+      "chemical_composition_guess": "Cu-Au-Ag（铜金银合金·含金 5%）",
+      "physical_properties": {
+        "hardness": "莫氏 3·较软",
+        "density": "9.0 g/cm³·重于普通铜",
+        "magnetic": "无",
+        "conductivity": "良导电"
+      },
+      "crafting_process": [
+        "选材·紫铜+黄金",
+        "熔炼·合金化",
+        "锻造·葫芦形制",
+        "内壁处理·防腐涂层",
+        "祭炼·赋予'吸人'能力"
+      ],
+      "function_principle": "合金容器·内壁特殊涂层（吸力机制不明）",
+      "estimated_value": "稀世·炼丹房专用",
+      "archaeological_parallel": "明代景泰蓝铜胎+战国铜壶"
+    },
+    {
+      "artifact_name": "九齿钉耙",
+      "english_name": "Nine-Tooth Rake",
+      "owner": "猪八戒",
+      "raw_material_description": "神冰铁·天庭御赐",
+      "material_classification": "陨铁+冰淬工艺",
+      "modern_equivalent": "镍铁陨石+冷处理钢",
+      "chemical_composition_guess": "Fe-Ni-C（铁镍碳合金·冰淬）",
+      "physical_properties": {
+        "hardness": "莫氏 8·高于普通钢",
+        "density": "7.9 g/cm³",
+        "magnetic": "强磁性",
+        "conductivity": "良导电"
+      },
+      "crafting_process": [
+        "选材·神冰铁（陨铁）",
+        "熔炼·去除杂质",
+        "锻造·九齿耙形制",
+        "冰淬·用冰水淬火·提升硬度",
+        "回火·低温回火",
+        "装饰·金箍装饰"
+      ],
+      "function_principle": "陨铁冰淬·硬度极高·九齿分散冲击力",
+      "estimated_value": "天庭御赐·无价",
+      "archaeological_parallel": "战国冰淬剑+明代农具改进"
+    },
+    {
+      "artifact_name": "降妖宝杖",
+      "english_name": "Demon-Suppressing Staff",
+      "owner": "沙僧",
+      "raw_material_description": "梭罗仙木·月宫桂树",
+      "material_classification": "硬木+金属复合材料",
+      "modern_equivalent": "乌木+钢芯复合材料",
+      "chemical_composition_guess": "C-H-O（木质）+ Fe（金属芯）",
+      "physical_properties": {
+        "hardness": "莫氏 5·硬木级别",
+        "density": "1.2 g/cm³·轻于金属",
+        "magnetic": "无",
+        "conductivity": "绝缘"
+      },
+      "crafting_process": [
+        "选材·梭罗仙木（月宫桂树）",
+        "干燥·自然阴干",
+        "雕刻·杖身形制",
+        "金属芯·内嵌钢芯",
+        "装饰·金线缠绕"
+      ],
+      "function_principle": "硬木+金属芯·轻便+坚韧",
+      "estimated_value": "月宫稀木·稀世",
+      "archaeological_parallel": "明代禅杖+战国木芯铜器"
+    },
+    {
+      "artifact_name": "紧箍咒",
+      "english_name": "Golden Hoop Mantra",
+      "owner": "如来佛祖",
+      "raw_material_description": "金·嵌明珠",
+      "material_classification": "黄金+宝石",
+      "modern_equivalent": "24K 金+红宝石/玛瑙",
+      "chemical_composition_guess": "Au（黄金）+ Al2O3（刚玉·红宝石）",
+      "physical_properties": {
+        "hardness": "莫氏 2.5（金）·9（红宝石）",
+        "density": "19.3 g/cm³（金）",
+        "magnetic": "无",
+        "conductivity": "良导电"
+      },
+      "crafting_process": [
+        "选材·纯金+红宝石",
+        "熔铸·金圈形制",
+        "嵌石·镶嵌明珠",
+        "咒文·刻梵文咒语",
+        "祭炼·佛家开光·赋予咒语能力"
+      ],
+      "function_principle": "金质+咒文·念咒时金箍收缩·物理疼痛刺激",
+      "estimated_value": "佛家法宝·无价",
+      "archaeological_parallel": "明代金箍+佛教法器"
+    },
+    {
+      "artifact_name": "阴阳二气瓶",
+      "english_name": "Yin-Yang Bottle",
+      "owner": "金翅大鹏雕（实为灵山法宝）",
+      "raw_material_description": "阴阳二气·灵山法宝",
+      "material_classification": "陶瓷+神秘气态",
+      "modern_equivalent": "钧窑陶瓷+惰性气体",
+      "chemical_composition_guess": "SiO2-Al2O3（陶瓷）+ 未知气态",
+      "physical_properties": {
+        "hardness": "莫氏 6·陶瓷级",
+        "density": "2.5 g/cm³",
+        "magnetic": "无",
+        "conductivity": "绝缘"
+      },
+      "crafting_process": [
+        "选材·灵山陶土",
+        "成型·瓶形",
+        "烧制·高温窑烧",
+        "封气·封入阴阳二气",
+        "祭炼·赋予'装人'能力"
+      ],
+      "function_principle": "陶瓷瓶+神秘气态·内封特殊气体（推测类似一氧化碳使人昏睡）",
+      "estimated_value": "灵山法宝·无价",
+      "archaeological_parallel": "宋代钧窑+战国陶瓶"
+    }
+  ],
+  "material_classification_stats": {
+    "total_artifacts": 8,
+    "metallic_artifacts": 5,
+    "composite_artifacts": 3,
+    "avg_hardness": 6.6,
+    "avg_density": 7,
+    "hardest_artifact": "金刚琢（9.5）",
+    "softest_artifact": "紧箍咒（2.5·金质）",
+    "densest_artifact": "紧箍咒（19.3·金）",
+    "lightest_artifact": "降妖宝杖（1.2·木）"
+  },
+  "material_insights": [
+    "8 件法宝中 5 件金属·3 件复合材料·反映明代工艺水平",
+    "陨铁/神铁是常见的'神话材质'·对应商代陨铁使用传统",
+    "金刚琢的'锟钢'对应明代百炼钢工艺·硬度接近金刚石",
+    "芭蕉扇的'太阴叶'是唯一植物基复合材料·对应汉代漆器工艺",
+    "紧箍咒是唯一贵金属法宝·反映佛教重视黄金的传统",
+    "材质多样反映明代多元工艺：钢铁+陶瓷+木材+贵金属+复合材料"
+  ]
+}

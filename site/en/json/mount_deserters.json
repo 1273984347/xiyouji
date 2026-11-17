@@ -1,0 +1,212 @@
+{
+  "concept_name": "Mount Desertion Archive",
+  "english_name": "Mount Desertion Archive",
+  "definition": "The 10 mount / heavenly-being desertion cases of the Xiyouji world reveal 'huge sentencing disparities between demons with backing and without' — a core case of Xiyouji judicial sociology.",
+  "desertion_cases": [
+    {
+      "name": "Green Ox Demon",
+      "english_name": "Green Ox Demon",
+      "original_owner": "Supreme Lord Laozi",
+      "owner_rank": "One of the Three Pure Ones · the Daoist Patriarch",
+      "descent_reason": "A boy tended it carelessly · the Green Ox slipped down to the mortal realm while its pen was unlocked",
+      "time_on_earth_years": 7,
+      "crimes_committed": [
+        "Stealing the Diamond Bracelet",
+        "Snatching the Golden-banded Staff and other treasures",
+        "Kidnapping Tang Sanzang",
+        "Battling the divine generals of Heaven"
+      ],
+      "final_outcome": "The Supreme Lord Laozi personally descended to take it back · returned to the Tushita Palace",
+      "sentence_severity": 2,
+      "chapter": "Ch. 50-52",
+      "legal_analysis": "leniently handled by the owner · continued service after symbolic discipline · no substantive punishment"
+    },
+    {
+      "name": "Goldfish Demon",
+      "english_name": "Goldfish Demon",
+      "original_owner": "Guanyin",
+      "owner_rank": "Foremost of the four great bodhisattvas",
+      "descent_reason": "A goldfish in Guanyin's lotus pond · while Guanyin was away it surfaced to listen to sutras and became a spirit · then descended to wreak havoc",
+      "time_on_earth_years": 6,
+      "crimes_committed": [
+        "Eating a boy and a girl each year at the Tongtian River",
+        "Kidnapping Tang Sanzang",
+        "Freezing the Tongtian River to trap the pilgrims"
+      ],
+      "final_outcome": "Guanyin collected it in a bamboo basket and returned it to the lotus pond",
+      "sentence_severity": 3,
+      "chapter": "Ch. 47-49",
+      "legal_analysis": "taken back by the owner · no punishment · merely returned to its post"
+    },
+    {
+      "name": "Golden-haired Hou",
+      "english_name": "Golden-haired Hou",
+      "original_owner": "Guanyin",
+      "owner_rank": "Foremost of the four great bodhisattvas",
+      "descent_reason": "The herder fell asleep · the Golden-haired Hou bit through its tether and escaped to the mortal realm",
+      "time_on_earth_years": 3,
+      "crimes_committed": [
+        "Abducting the queen of Zhuzi Kingdom",
+        "Kidnapping Tang Sanzang",
+        "Threatening with the Purple-gold Bell magic"
+      ],
+      "final_outcome": "Guanyin personally took it back · returned to the South Sea",
+      "sentence_severity": 3,
+      "chapter": "Ch. 70-71",
+      "legal_analysis": "taken back by the owner · no punishment · the queen of Zhuzi was returned"
+    },
+    {
+      "name": "Green-maned Lion Demon",
+      "english_name": "Green-maned Lion Demon",
+      "original_owner": "Manjushri",
+      "owner_rank": "One of the four great bodhisattvas",
+      "descent_reason": "Manjushri's mount · descended to Wuji Kingdom · punished the king by the Buddha's decree (pushed him into a well and drowned for three days)",
+      "time_on_earth_years": 3,
+      "crimes_committed": [
+        "Usurping the throne of Wuji Kingdom",
+        "Impersonating the king for three years",
+        "Pushing the king into a well to drown (later revived)"
+      ],
+      "final_outcome": "Manjushri took it back · returned to Mount Wutai",
+      "sentence_severity": 2,
+      "chapter": "Ch. 36-39",
+      "legal_analysis": "taken back by the owner · no punishment · nominally 'retribution by Buddha's decree'"
+    },
+    {
+      "name": "Yellow-tusked Elephant",
+      "english_name": "Yellow-tusked Elephant",
+      "original_owner": "Samantabhadra",
+      "owner_rank": "One of the four great bodhisattvas",
+      "descent_reason": "Samantabhadra's mount · descended to Lion-Camel Ridge as the second demon king",
+      "time_on_earth_years": 5,
+      "crimes_committed": [
+        "Devouring countless people at Lion-Camel Ridge",
+        "Kidnapping Tang Sanzang",
+        "Allying with Green Lion and Dapeng to besiege"
+      ],
+      "final_outcome": "Samantabhadra took it back · returned to Mount Emei",
+      "sentence_severity": 2,
+      "chapter": "Ch. 74-77",
+      "legal_analysis": "taken back by the owner · no substantive punishment · despite a long list of crimes"
+    },
+    {
+      "name": "Golden-winged Dapeng",
+      "english_name": "Golden-winged Dapeng",
+      "original_owner": "Tathagata",
+      "owner_rank": "The Buddha himself · brother of the Peacock Mahāmāyūrī Bodhisattva",
+      "descent_reason": "Brother of the Peacock Mahāmāyūrī Bodhisattva · a relative of the Buddha's mother · descended to the kingdom of Lion-Camel as the third demon king",
+      "time_on_earth_years": 6,
+      "crimes_committed": [
+        "Destroying the kingdom of Lion-Camel and eating all its people",
+        "Kidnapping Tang Sanzang",
+        "Resisting Tathāgata in person",
+        "Threatening with the Yin-Yang Two-Energy Bottle"
+      ],
+      "final_outcome": "Tathāgata came in person to subdue it · appointed it a Dharma protector · kept at Spirit Mountain",
+      "sentence_severity": 5,
+      "chapter": "Ch. 74-77",
+      "legal_analysis": "despite heinous crimes, spared due to kinship with the Buddha · even appointed a Dharma protector · a 'get-out-of-punishment pass for the privileged class'"
+    },
+    {
+      "name": "Nine-spirit Sage",
+      "english_name": "Nine-spirit Sage",
+      "original_owner": "Great Emperor Taiyi",
+      "owner_rank": "The Great Emperor of the Eastern Azure Splendor · one of the Four Daoist Sovereigns",
+      "descent_reason": "Mount of the Great Emperor Taiyi · descended to Zhujie Mountain as a nine-headed lion",
+      "time_on_earth_years": 4,
+      "crimes_committed": [
+        "Dominating a region from the Nine-twists Cave",
+        "Subduing the Yellow Lion and six lion descendants",
+        "Kidnapping Tang Sanzang and his disciples"
+      ],
+      "final_outcome": "The Great Emperor Taiyi personally took it back · returned to the Eastern Miraculous Rock Palace",
+      "sentence_severity": 2,
+      "chapter": "Ch. 88-90",
+      "legal_analysis": "taken back by the owner · no punishment · though it didn't eat people, its sphere of influence was large"
+    },
+    {
+      "name": "Yellow Robe Demon",
+      "english_name": "Yellow Robe Demon",
+      "original_owner": "Jade Emperor (Kuimulang of the 28 Mansions)",
+      "owner_rank": "A star officer of the Heavenly Court · not a mount but a control case of a heavenly being descending",
+      "descent_reason": "Kuimulang and the Jade Maiden of Poxiang Hall had a secret affair · agreed to descend and continue their romance",
+      "time_on_earth_years": 13,
+      "crimes_committed": [
+        "Forcibly abducting Princess Baihuaxiu of Precious Elephant Kingdom",
+        "Usurping the son-in-law's position",
+        "Eating palace maids",
+        "Forcing Tang Sanzang to turn into a tiger"
+      ],
+      "final_outcome": "Recalled by the Heavenly Court · demoted to stoke fires at the Tushita Palace · later reinstated",
+      "sentence_severity": 5,
+      "chapter": "Ch. 28-31",
+      "legal_analysis": "a heavenly being's descent drew heavier punishment · demoted to stoke fires · but ultimately reinstated · still lenient compared to the light punishment of mounts"
+    },
+    {
+      "name": "White Elephant",
+      "english_name": "White Elephant",
+      "original_owner": "Samantabhadra",
+      "owner_rank": "One of the four great bodhisattvas",
+      "descent_reason": "Samantabhadra's mount · descended to Lion-Camel Ridge as the second demon king · allied with Green Lion and Dapeng",
+      "time_on_earth_years": 5,
+      "crimes_committed": [
+        "Devouring countless people at Lion-Camel Ridge",
+        "Kidnapping Tang Sanzang",
+        "Wrapping its trunk around Wukong, nearly killing him"
+      ],
+      "final_outcome": "Samantabhadra took it back · returned to Mount Emei",
+      "sentence_severity": 2,
+      "chapter": "Ch. 74-77",
+      "legal_analysis": "same type of incident as the Yellow-tusked Elephant · taken back by the owner · no substantive punishment"
+    },
+    {
+      "name": "Green Lion",
+      "english_name": "Green Lion",
+      "original_owner": "Manjushri",
+      "owner_rank": "One of the four great bodhisattvas",
+      "descent_reason": "Manjushri's mount · descended to Lion-Camel Ridge as the chief demon king · allied with White Elephant and Dapeng",
+      "time_on_earth_years": 5,
+      "crimes_committed": [
+        "Swallowing countless travelers at Lion-Camel Ridge",
+        "Kidnapping Tang Sanzang",
+        "Opening its mouth to swallow Wukong"
+      ],
+      "final_outcome": "Manjushri took it back · returned to Mount Wutai",
+      "sentence_severity": 2,
+      "chapter": "Ch. 74-77",
+      "legal_analysis": "same type of incident as the Green-maned Lion Demon · taken back by the owner · no substantive punishment"
+    }
+  ],
+  "desertion_stats": {
+    "total_cases": 10,
+    "avg_sentence_severity": 2.8,
+    "highest_severity": "Golden-winged Dapeng & Yellow Robe Demon (5)",
+    "lowest_severity": "Green Ox Demon / Goldfish Demon / Golden-haired Hou / Green-maned Lion Demon / Yellow-tusked Elephant / Nine-spirit Sage / White Elephant / Green Lion (all 2–3)",
+    "owners_distribution": {
+      "Guanyin Bodhisattva": 2,
+      "Manjushri Bodhisattva": 2,
+      "Samantabhadra Bodhisattva": 2,
+      "Taishang Laojun": 1,
+      "Tathāgata Buddha": 1,
+      "Taiyi the Merciful Heavenly Lord": 1,
+      "Heavenly Court (Jade Emperor)": 1
+    },
+    "verdict_pattern": "taken back by owner in 8 cases · demoted in 1 · promoted in 1 · 0% actual punishment rate",
+    "legal_bias": "100% of mount-desertion cases were never executed · revealing '100% sentencing immunity for demons with backing'",
+    "comparable_wild_demons": [
+      "White Bone Demon beaten to death",
+      "Spider Demons beaten to death",
+      "Scorpion Demon killed",
+      "Three demons of Chechi Kingdom died miserably"
+    ]
+  },
+  "desertion_insights": [
+    "0 of the 10 mount-desertion cases were executed · versus 60%+ wild-demon mortality · blatant judicial double standards",
+    "Guanyin / Manjushri / Samantabhadra together account for 6 cases · revealing 'bodhisattva mounts are the main force of descents'",
+    "Though the Golden-winged Dapeng committed heinous crimes (wiping out the kingdom of Lion-Camel), it was instead appointed a Dharma protector due to kinship with the Buddha — an extreme case of privileged justice",
+    "The Yellow Robe Demon, as a descending heavenly being, drew relatively heavier punishment (demoted to stoke fires) · showing Heavenly Court justice is slightly stricter than the Buddhist realm",
+    "The three demons of Lion-Camel Ridge (Green Lion / White Elephant / Dapeng) are a classic case of gang-style mount desertion · the three owners cooperatively took them back",
+    "The 'dereliction of duty' in mount desertions should punish the owners · but in Journey to the West no owner bears substantive responsibility · revealing 'the absence of regulatory accountability'",
+    "average sentence severity only 2.8/10 · severely mismatched with the seriousness of the crimes · the core contradiction of Xiyouji judicial sociology"
+  ]
+}

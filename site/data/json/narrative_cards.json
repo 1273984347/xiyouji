@@ -9,7 +9,7 @@
       "english_name": "Cause-Effect Cards",
       "card_count": 12,
       "description": "抽取场景·如'被赶出师门'·'误入魔窟'",
-      "color": "#c8463a",
+      "color": "#C0392B",
       "cards": [
         {
           "id": "K01",
@@ -78,7 +78,7 @@
       "english_name": "Artifact Cards",
       "card_count": 10,
       "description": "抽取资源·如'紧箍咒'·'救命毫毛'",
-      "color": "#3a6b8c",
+      "color": "#40619E",
       "cards": [
         {
           "id": "F01",
@@ -137,7 +137,7 @@
       "english_name": "Obsession Cards",
       "card_count": 10,
       "description": "抽取内心障碍·如'傲慢'·'猜忌'·'愚忠'",
-      "color": "#7a5230",
+      "color": "#3A473A",
       "cards": [
         {
           "id": "Z01",

@@ -1,0 +1,139 @@
+{
+  "project_name": "The Material Form of the Heart Sutra",
+  "english_name": "Material Form of the Heart Sutra",
+  "art_form": "Abstract Data Sculpture · Installation Art",
+  "core_concept": "Count the times Tang Sanzang chants the “Heart Sutra” throughout Journey to the West, along with their scenes and the emotional fluctuations of the surrounding plot, then present them in wave form on an exhibition wall using an extremely fine gold thread",
+  "design_principle": "The crests represent the calm after chanting; the troughs represent the extreme fear encountered around the chanting; the gold thread ultimately winds into a giant “heart”-shaped void projection",
+  "deeper_meaning": "This is a physical model of “how faith resists external shocks”",
+  "sutra_chanting_records": [
+    {
+      "n": 1,
+      "chapter": "Ch. 19",
+      "location": "Futu Mountain",
+      "context": "The Crow's Nest Chan Master transmits the “Heart Sutra” to Tang Sanzang · first contact",
+      "pre_emotion": "Anticipation · Curiosity",
+      "post_emotion": "Shock · Awakening",
+      "wave_amplitude": 0.3,
+      "wave_direction": "rise",
+      "key_phrase": "Form is not other than emptiness; emptiness is not other than form"
+    },
+    {
+      "n": 2,
+      "chapter": "Ch. 20",
+      "location": "Yellow Wind Ridge",
+      "context": "Meets the Yellow Wind Monster · Wukong's eyes are injured · Tang Sanzang chants and prays",
+      "pre_emotion": "Fear · Worry",
+      "post_emotion": "Slightly calmed · still worried",
+      "wave_amplitude": 0.7,
+      "wave_direction": "trough",
+      "key_phrase": "Mind free of hindrances; because of no hindrances"
+    },
+    {
+      "n": 3,
+      "chapter": "Ch. 27",
+      "location": "White Tiger Ridge",
+      "context": "Thrice defeats the White Bone Demon · Wukong is banished · Tang Sanzang chants alone",
+      "pre_emotion": "Anger · Sorrow",
+      "post_emotion": "Remorse · Loneliness",
+      "wave_amplitude": 1,
+      "wave_direction": "deep trough",
+      "key_phrase": "Without terror; far from inverted delusions"
+    },
+    {
+      "n": 4,
+      "chapter": "Ch. 36",
+      "location": "Black Rooster Kingdom",
+      "context": "Rescues the Black Rooster king · stays the night at Baolin Monastery · Tang Sanzang chants to soothe",
+      "pre_emotion": "Anxiety · Fatigue",
+      "post_emotion": "Calm · Resolute",
+      "wave_amplitude": 0.4,
+      "wave_direction": "rise",
+      "key_phrase": "Ultimate nirvana"
+    },
+    {
+      "n": 5,
+      "chapter": "Ch. 47",
+      "location": "Heaven-Reaching River",
+      "context": "Blocked at the Heaven-Reaching River · stays the night at Chen Village · Tang Sanzang chants to seek passage",
+      "pre_emotion": "Anxiety · Helplessness",
+      "post_emotion": "Slightly calmed · Hopeful",
+      "wave_amplitude": 0.6,
+      "wave_direction": "trough",
+      "key_phrase": "Prajñāpāramitā"
+    },
+    {
+      "n": 6,
+      "chapter": "Ch. 62",
+      "location": "Jisai Kingdom",
+      "context": "Sweeps the pagoda in Jisai Kingdom · chants at midnight · meets the Nine-Headed Insect",
+      "pre_emotion": "Solemn · Calm",
+      "post_emotion": "Disturbed · Alert",
+      "wave_amplitude": 0.5,
+      "wave_direction": "rise then fall",
+      "key_phrase": "All Buddhas of the three times, by relying on Prajñāpāramitā"
+    },
+    {
+      "n": 7,
+      "chapter": "Ch. 78",
+      "location": "Bhiksu Kingdom",
+      "context": "Saves the children's hearts and livers · Tang Sanzang chants in anger",
+      "pre_emotion": "Anger · Compassion",
+      "post_emotion": "Resolute · Compassionate",
+      "wave_amplitude": 1.2,
+      "wave_direction": "deep trough then peak",
+      "key_phrase": "No suffering, origin, cessation, or path; no wisdom and no attainment"
+    },
+    {
+      "n": 8,
+      "chapter": "Ch. 85",
+      "location": "Dharma-Destroying Kingdom",
+      "context": "The Dharma-Destroying Kingdom kills monks · Tang Sanzang disguises himself · chants the Heart Sutra at night",
+      "pre_emotion": "Fear · Disguise",
+      "post_emotion": "Calm · Prayer",
+      "wave_amplitude": 0.9,
+      "wave_direction": "trough",
+      "key_phrase": "Mind free of hindrances; because of no hindrances"
+    },
+    {
+      "n": 9,
+      "chapter": "Ch. 93",
+      "location": "India",
+      "context": "Near Spirit Mountain · the Indian princess seeks a husband · Tang Sanzang chants to steady his mind",
+      "pre_emotion": "Vacillation · Fatigue",
+      "post_emotion": "Resolute · Complete",
+      "wave_amplitude": 0.3,
+      "wave_direction": "rise",
+      "key_phrase": "Anuttarā-samyak-saṃbodhi"
+    },
+    {
+      "n": 10,
+      "chapter": "Ch. 98",
+      "location": "Thunderclap Monastery at Spirit Mountain",
+      "context": "Arrives at Spirit Mountain · sheds his mortal body at the Lingyun Crossing · Tang Sanzang chants for the last time",
+      "pre_emotion": "Complete · Moved",
+      "post_emotion": "Buddhahood · Selflessness",
+      "wave_amplitude": 0,
+      "wave_direction": "return to zero",
+      "key_phrase": "Gate gate pāragate"
+    }
+  ],
+  "wave_statistics": {
+    "total_chantings": 10,
+    "max_amplitude": 1.2,
+    "min_amplitude": 0,
+    "avg_amplitude": 0.59,
+    "deepest_valley": "Bhiksu Kingdom · saving the children's hearts and livers",
+    "highest_peak": "Spirit Mountain · Buddhahood, return to zero",
+    "trend": "The wave gradually flattens, finally returning to zero, reflecting the maturation of the mind"
+  },
+  "sculpture_design": {
+    "material": "Extremely fine gold thread (0.5mm diameter)",
+    "wall_size": "12m × 4m exhibition wall",
+    "wave_length": "Each segment about 1.2m · corresponding to one chanting",
+    "color": "Pure gold · 95% luster",
+    "lighting": "Top light + side light · giving the gold thread a faint shadow",
+    "projection": "The gold thread ultimately winds into a “heart”-shaped void · projected onto the floor",
+    "interaction": "As viewers approach, the heart-shaped void flickers like breathing"
+  },
+  "artistic_statement": "Faith is not unchanging calm, but a repeated tug-of-war between fear and stability; the gold thread's wave is the materialization of that tug-of-war"
+}

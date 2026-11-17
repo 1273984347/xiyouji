@@ -1,0 +1,269 @@
+{
+  "concept_name": "The Linguistic Structure of Incantations",
+  "english_name": "Incantation Linguistic Structure",
+  "definition": "Incantation linguistics: the linguistic sources, lexical composition, and phonetic features of incantations, reflecting religious and cultural fusion",
+  "core_finding": "The Golden Hoop Mantra 'Oṃ Maṇi Padme Hūṃ' is a Sanskrit transliteration; the Five Thunder Spell is a Han-Chinese Daoist term; Wukong's cursing 'impudent fiend' is Ming-dynasty colloquial speech — three linguistic sources reflecting Three-Teachings synthesis",
+  "incantations": [
+    {
+      "n": 1,
+      "incantation_name": "Golden Hoop Mantra",
+      "english_name": "Golden Hoop Mantra",
+      "user": "Tang Sanzang",
+      "target": "Sun Wukong",
+      "raw_text": "Oṃ Maṇi Padme Hūṃ",
+      "language_source": "Sanskrit transliteration · Buddhist mantra",
+      "language_classification": "Sanskrit loanword",
+      "phonetic_analysis": {
+        "sanskrit_original": "Oṃ Maṇi Padme Hūṃ",
+        "chinese_transliteration": "Oṃ Maṇi Padme Hūṃ",
+        "meaning": "Taking refuge in the Jewel of the Lotus · accomplishing all",
+        "phonetic_features": "Alternating nasals and vowels · easy for continuous recitation"
+      },
+      "linguistic_features": [
+        "Sanskrit transliteration · non-Chinese vocabulary",
+        "Short syllables · easy for rapid recitation",
+        "No literal meaning · a purely phonetic mantra",
+        "Repeated recitation produces a hypnotic effect"
+      ],
+      "religious_origin": "Esoteric Buddhist mantra · the Six-Syllable Great Bright Mantra",
+      "function_mechanism": "Phonetic stimulus plus the physical tightening of the golden hoop — a dual effect",
+      "cultural_significance": "The spread of Sanskrit in China · reflecting the Sinicization of Buddhism",
+      "language_proportion": {
+        "sanskrit_loanword": 100,
+        "taoist_term": 0,
+        "ming_colloquial": 0,
+        "classical_chinese": 0
+      }
+    },
+    {
+      "n": 2,
+      "incantation_name": "Five Thunder Spell",
+      "english_name": "Five Thunder Spell",
+      "user": "Three Immortals of Chechi Kingdom / Celestial Masters Daoism",
+      "target": "Summons the Thunder Department",
+      "raw_text": "As swift as the law commands · Five Thunders, come at once · Decree!",
+      "language_source": "Han-Chinese Daoist terminology · official ritual language",
+      "language_classification": "Daoist terminology + Classical Chinese imperative",
+      "phonetic_analysis": {
+        "chinese_original": "As swift as the law commands · Five Thunders, come at once · Decree",
+        "meaning": "Execute as swiftly as a decree · let the five thunders arrive · a command",
+        "phonetic_features": "Imperative, short and forceful, closing with the word 'decree'"
+      },
+      "linguistic_features": [
+        "Classical Chinese imperative · 'as swift as the law commands' is Han-dynasty officialese",
+        "Daoist terminology · 'five thunders' refers to the five directions of the Thunder Department",
+        "The character 'decree' is an imperial command word",
+        "Structure: execution directive + content + command ending"
+      ],
+      "religious_origin": "Celestial Masters Daoism · Way of the Five Pecks of Rice · Daoist ritual arts",
+      "function_mechanism": "Official-style command plus divine invocation · a structured spell",
+      "cultural_significance": "Daoism inherits the Han-dynasty officialese tradition, importing secular power structures into the divine realm",
+      "language_proportion": {
+        "sanskrit_loanword": 0,
+        "taoist_term": 60,
+        "ming_colloquial": 0,
+        "classical_chinese": 40
+      }
+    },
+    {
+      "n": 3,
+      "incantation_name": "Body-Freezing Spell",
+      "english_name": "Body-Freezing Spell",
+      "user": "Sun Wukong",
+      "target": "Lesser demons / mortals",
+      "raw_text": "Stop! · Don't move!",
+      "language_source": "Ming-dynasty colloquial speech · brief command",
+      "language_classification": "Ming colloquial",
+      "phonetic_analysis": {
+        "chinese_original": "Stop! · Don't move!",
+        "meaning": "Stop · don't move",
+        "phonetic_features": "Short, direct, unadorned"
+      },
+      "linguistic_features": [
+        "Colloquial speech · no Classical Chinese ornament",
+        "Imperative · terse",
+        "No religious terminology · purely folk",
+        "Structure: verb + negator + verb"
+      ],
+      "religious_origin": "Folk sorcery · informal belief",
+      "function_mechanism": "Folk sorcery · terse language · relies on magical power",
+      "cultural_significance": "Reflects the force of Ming-dynasty folk speech · contrasted with Buddhist and Daoist terminology",
+      "language_proportion": {
+        "sanskrit_loanword": 0,
+        "taoist_term": 0,
+        "ming_colloquial": 100,
+        "classical_chinese": 0
+      }
+    },
+    {
+      "n": 4,
+      "incantation_name": "Water-Avoiding Spell",
+      "english_name": "Water-Avoiding Spell",
+      "user": "Sun Wukong / Zhu Bajie",
+      "target": "Parts the waters",
+      "raw_text": "Close! · Water!",
+      "language_source": "Simplified Daoist terminology · one-character spell",
+      "language_classification": "Simplified Daoist terminology",
+      "phonetic_analysis": {
+        "chinese_original": "Close · water",
+        "meaning": "Close · water",
+        "phonetic_features": "Single characters · the strongest command"
+      },
+      "linguistic_features": [
+        "One-character spell · extremely minimal",
+        "Simplified Daoist terminology",
+        "Unadorned · pure command",
+        "Structure: verb + noun"
+      ],
+      "religious_origin": "Daoist · water-parting art",
+      "function_mechanism": "Magical power injection plus a one-character command · highly efficient",
+      "cultural_significance": "Reflects the popularization of Daoist terminology, from complex to simple",
+      "language_proportion": {
+        "sanskrit_loanword": 0,
+        "taoist_term": 70,
+        "ming_colloquial": 30,
+        "classical_chinese": 0
+      }
+    },
+    {
+      "n": 5,
+      "incantation_name": "Summoning Spell (calling for reinforcements)",
+      "english_name": "Summoning Spell",
+      "user": "Sun Wukong",
+      "target": "Deities of the Heavenly Court / Spirit Mountain",
+      "raw_text": "Namo Guanshiyin Bodhisattva · Namo all Buddhas of the ten directions and three times · your disciple Sun Wukong has a request",
+      "language_source": "Buddhist terminology + Han-Chinese self-deprecation",
+      "language_classification": "Buddhist terminology + Classical Chinese self-deprecation",
+      "phonetic_analysis": {
+        "chinese_original": "Namo Guanshiyin Bodhisattva · your disciple Sun Wukong has a request",
+        "meaning": "Taking refuge in Guanshiyin Bodhisattva · your disciple Sun Wukong has a request",
+        "phonetic_features": "Religious opening + self-deprecation + request"
+      },
+      "linguistic_features": [
+        "Opens with Buddhist terminology · 'namo' is a Sanskrit transliteration",
+        "Han-Chinese self-deprecation · 'disciple' is a Buddhist form of address",
+        "Supplicatory, not imperative",
+        "Structure: religious invocation + self-deprecation + request"
+      ],
+      "religious_origin": "Buddhism · Guanyin devotion",
+      "function_mechanism": "Religious invocation + polite request · a gentle summoning",
+      "cultural_significance": "Reflects the spread of Buddhism in the Ming dynasty · the popularization of Guanyin devotion",
+      "language_proportion": {
+        "sanskrit_loanword": 30,
+        "taoist_term": 0,
+        "ming_colloquial": 30,
+        "classical_chinese": 40
+      }
+    },
+    {
+      "n": 6,
+      "incantation_name": "Wukong's Taunts (provoking demons)",
+      "english_name": "Wukong's Verbal Provocation",
+      "user": "Sun Wukong",
+      "target": "demons",
+      "raw_text": "Impudent fiend! · Beast! · Don't you run! · Take a blow from old Sun!",
+      "language_source": "Ming-dynasty colloquial speech · martial-storyteller style",
+      "language_classification": "Ming colloquial + martial storytelling",
+      "phonetic_analysis": {
+        "chinese_original": "Impudent fiend · beast · don't you run · take a blow from old Sun",
+        "meaning": "Rogue demon · beast · don't leave · take my blow",
+        "phonetic_features": "Terse, imperative, provocative"
+      },
+      "linguistic_features": [
+        "Colloquial insults · 'impudent fiend' is Ming-dynasty street language",
+        "Martial-storyteller style · 'don't you run' is common in storytelling",
+        "The self-reference 'old Sun' is a folk form of address",
+        "Structure: insult + command + threat"
+      ],
+      "religious_origin": "None · folk martial style",
+      "function_mechanism": "Psychological intimidation and provocation · not an actual spell",
+      "cultural_significance": "Reflects the blending of Ming storytelling and street culture · Sun Wukong as a folk hero",
+      "language_proportion": {
+        "sanskrit_loanword": 0,
+        "taoist_term": 0,
+        "ming_colloquial": 80,
+        "classical_chinese": 20
+      }
+    },
+    {
+      "n": 7,
+      "incantation_name": "Tang Monk's Admonition (Buddhist precepts)",
+      "english_name": "Tang Monk's Admonition",
+      "user": "Tang Sanzang",
+      "target": "Sun Wukong",
+      "raw_text": "Wukong, do not take life · we are monks · let compassion guide us",
+      "language_source": "Buddhist precept language · Classical Chinese",
+      "language_classification": "Buddhist terminology + Classical Chinese",
+      "phonetic_analysis": {
+        "chinese_original": "Wukong, do not take life · we are monks · let compassion guide us",
+        "meaning": "Wukong, do not take life · we are monks · let compassion guide us",
+        "phonetic_features": "Classical Chinese · slow · didactic"
+      },
+      "linguistic_features": [
+        "Buddhist terminology · 'monk', 'compassion'",
+        "Classical Chinese · 'must not' is a classical negation",
+        "Didactic · slow",
+        "Structure: address + precept + identity + principle"
+      ],
+      "religious_origin": "Buddhist precepts · compassion",
+      "function_mechanism": "Moral exhortation plus identity reinforcement · gentle restraint",
+      "cultural_significance": "Reflects the Classical-Chinese style of Buddhist precepts · contrasted with street speech",
+      "language_proportion": {
+        "sanskrit_loanword": 10,
+        "taoist_term": 0,
+        "ming_colloquial": 20,
+        "classical_chinese": 70
+      }
+    },
+    {
+      "n": 8,
+      "incantation_name": "Buddha's Sermon (scriptural language)",
+      "english_name": "Buddha's Sermon",
+      "user": "Tathāgata Buddha",
+      "target": "all Buddhas and Bodhisattvas",
+      "raw_text": "Form is not different from emptiness · emptiness is not different from form · form is emptiness · emptiness is form",
+      "language_source": "Buddhist scriptural translation language · Xuanzang's Heart Sutra",
+      "language_classification": "Buddhist Classical Chinese",
+      "phonetic_analysis": {
+        "chinese_original": "Form is not different from emptiness · emptiness is not different from form · form is emptiness · emptiness is form",
+        "meaning": "Form (matter) is not different from emptiness · emptiness is not different from form",
+        "phonetic_features": "Parallelism · repetition · rhythm"
+      },
+      "linguistic_features": [
+        "Scriptural translation · Xuanzang's style",
+        "Neat parallelism · easy to memorize",
+        "Strong rhythm · suited to chanting",
+        "Structure: form/emptiness parallelism + four-line cycle"
+      ],
+      "religious_origin": "Prajñāpāramitā Heart Sutra · translated by Xuanzang",
+      "function_mechanism": "Scriptural recitation · dharma assembly ritual",
+      "cultural_significance": "Reflects Xuanzang's translation style · the pinnacle of Buddhist scriptural Sinicization",
+      "language_proportion": {
+        "sanskrit_loanword": 20,
+        "taoist_term": 0,
+        "ming_colloquial": 0,
+        "classical_chinese": 80
+      }
+    }
+  ],
+  "language_source_stats": {
+    "total_incantations": 8,
+    "sanskrit_dominant": 2,
+    "taoist_dominant": 2,
+    "ming_colloquial_dominant": 2,
+    "classical_chinese_dominant": 2,
+    "avg_sanskrit_proportion": 20,
+    "avg_taoist_proportion": 16.25,
+    "avg_ming_colloquial_proportion": 28.75,
+    "avg_classical_chinese_proportion": 35
+  },
+  "linguistic_insights": [
+    "Eight incantations reflect Three-Teachings synthesis: Sanskrit (Buddhist) + Daoist terminology (Daoist) + colloquial speech (folk)",
+    "The Golden Hoop Mantra is the only purely Sanskrit transliteration, reflecting the esoteric Buddhist mantra tradition",
+    "The Five Thunder Spell combines Daoist terminology with Classical Chinese officialese, reflecting Daoism's inheritance of Han-dynasty bureaucratic prose",
+    "Wukong's taunts are Ming-dynasty street speech, reflecting Sun Wukong's folk-hero image",
+    "The Tang Monk's admonition is Buddhist precept language in Classical Chinese, reflecting his monastic identity",
+    "The Buddha's sermon is in Xuanzang's translation style, the pinnacle of Buddhist scriptural Sinicization",
+    "The diversity of linguistic sources reflects the Three-Teachings synthesis of Journey to the West"
+  ]
+}

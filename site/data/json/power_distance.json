@@ -1,0 +1,287 @@
+{
+  "concept_name": "对话的权力距离",
+  "english_name": "Conversational Power Distance",
+  "definition": "权力距离（power distance）：对话中体现的权力等级·高权力距离用命令式·低权力距离用调侃式",
+  "core_finding": "唐僧对悟空是高权力距离（命令式）·悟空对八戒是低权力距离（调侃式）·量化师徒关系的亲疏演变",
+  "dialogue_pairs": [
+    {
+      "speaker": "唐僧",
+      "listener": "孙悟空",
+      "relationship": "师徒·师对徒",
+      "power_distance": 8,
+      "politeness_level": 5,
+      "formality": 7,
+      "representative_dialogues": [
+        {
+          "chapter": "第 14 回",
+          "context": "悟空打死六贼",
+          "tang_monk_speech": "你这猴子·十分撒泼！这般凶顽·不是我徒弟·你回去罢！",
+          "linguistic_features": [
+            "命令式·'回去罢'",
+            "贬称·'你这猴子'",
+            "断绝关系威胁"
+          ],
+          "power_distance_reflected": 9
+        },
+        {
+          "chapter": "第 27 回",
+          "context": "三打白骨精",
+          "tang_monk_speech": "你这猴子·分明是杀生害命！我不要你做徒弟·你回去罢！",
+          "linguistic_features": [
+            "命令式",
+            "贬称",
+            "逐出师门"
+          ],
+          "power_distance_reflected": 10
+        },
+        {
+          "chapter": "第 38 回",
+          "context": "乌鸡国救国王",
+          "tang_monk_speech": "悟空·你且仔细·莫要伤他性命。",
+          "linguistic_features": [
+            "请求式·'你且仔细'",
+            "温和·'莫要'",
+            "保留指令"
+          ],
+          "power_distance_reflected": 6
+        },
+        {
+          "chapter": "第 80 回",
+          "context": "老鼠精事件",
+          "tang_monk_speech": "悟空·你说是不是妖怪？",
+          "linguistic_features": [
+            "询问式",
+            "平等·'你说'",
+            "信任表现"
+          ],
+          "power_distance_reflected": 4
+        }
+      ],
+      "evolution_pattern": "10→9→6→4·权力距离逐渐降低·师徒关系亲化"
+    },
+    {
+      "speaker": "孙悟空",
+      "listener": "猪八戒",
+      "relationship": "师兄师弟·兄对弟",
+      "power_distance": 3,
+      "politeness_level": 2,
+      "formality": 2,
+      "representative_dialogues": [
+        {
+          "chapter": "第 18 回",
+          "context": "高老庄收八戒",
+          "wukong_speech": "呆子·你可认得俺老孙么？",
+          "linguistic_features": [
+            "调侃·'呆子'",
+            "自称·'俺老孙'",
+            "亲昵"
+          ],
+          "power_distance_reflected": 3
+        },
+        {
+          "chapter": "第 32 回",
+          "context": "平顶山巡山",
+          "wukong_speech": "八戒·你这呆子·又偷懒！快去巡山！",
+          "linguistic_features": [
+            "命令式·'快去'",
+            "调侃·'呆子'",
+            "兄长教训"
+          ],
+          "power_distance_reflected": 4
+        },
+        {
+          "chapter": "第 41 回",
+          "context": "红孩儿事件",
+          "wukong_speech": "呆子·别哭！师父被妖怪抓了·咱们得救！",
+          "linguistic_features": [
+            "劝慰·'别哭'",
+            "鼓励·'咱们得救'",
+            "兄弟情"
+          ],
+          "power_distance_reflected": 2
+        },
+        {
+          "chapter": "第 76 回",
+          "context": "狮驼岭大战",
+          "wukong_speech": "八戒·你这呆子·又被抓了？看俺老孙来救你！",
+          "linguistic_features": [
+            "调侃",
+            "救援",
+            "兄长保护"
+          ],
+          "power_distance_reflected": 3
+        }
+      ],
+      "evolution_pattern": "3→4→2→3·权力距离低·师兄弟调侃为主"
+    },
+    {
+      "speaker": "孙悟空",
+      "listener": "唐僧",
+      "relationship": "徒弟对师·徒对师",
+      "power_distance": 3,
+      "politeness_level": 8,
+      "formality": 6,
+      "representative_dialogues": [
+        {
+          "chapter": "第 14 回",
+          "context": "首次冲突",
+          "wukong_speech": "师父·我是好意·你不该这等量人！",
+          "linguistic_features": [
+            "尊称·'师父'",
+            "辩解·'我是好意'",
+            "保留尊敬"
+          ],
+          "power_distance_reflected": 2
+        },
+        {
+          "chapter": "第 27 回",
+          "context": "三打白骨精·被逐",
+          "wukong_speech": "师父·我回去就是了·但这紧箍咒你莫念了！",
+          "linguistic_features": [
+            "尊称",
+            "请求·'你莫念了'",
+            "委屈"
+          ],
+          "power_distance_reflected": 3
+        },
+        {
+          "chapter": "第 57 回",
+          "context": "真假美猴王前",
+          "wukong_speech": "师父·我又不曾杀生·你怎的又赶我？",
+          "linguistic_features": [
+            "尊称",
+            "质问·'怎的又赶我'",
+            "委屈"
+          ],
+          "power_distance_reflected": 2
+        },
+        {
+          "chapter": "第 88 回",
+          "context": "玉华州收徒",
+          "wukong_speech": "师父·这两个王子倒有缘·可收为徒。",
+          "linguistic_features": [
+            "尊称",
+            "建议·'倒有缘'",
+            "平等商议"
+          ],
+          "power_distance_reflected": 1
+        }
+      ],
+      "evolution_pattern": "2→3→2→1·悟空对唐僧的权力距离一直低·尊敬为主"
+    },
+    {
+      "speaker": "猪八戒",
+      "listener": "孙悟空",
+      "relationship": "师弟对师兄·弟对兄",
+      "power_distance": 4,
+      "politeness_level": 4,
+      "formality": 3,
+      "representative_dialogues": [
+        {
+          "chapter": "第 18 回",
+          "context": "首次见面",
+          "bajie_speech": "你这弼马温·当年大闹天宫的泼猴！",
+          "linguistic_features": [
+            "贬称·'弼马温'",
+            "挑衅",
+            "无礼"
+          ],
+          "power_distance_reflected": 1
+        },
+        {
+          "chapter": "第 32 回",
+          "context": "巡山偷懒",
+          "bajie_speech": "哥啊·我去了·我去了！",
+          "linguistic_features": [
+            "尊称·'哥啊'",
+            "顺从",
+            "撒娇"
+          ],
+          "power_distance_reflected": 6
+        },
+        {
+          "chapter": "第 41 回",
+          "context": "红孩儿事件·悟空被烧",
+          "bajie_speech": "哥啊·你死了吗？",
+          "linguistic_features": [
+            "尊称",
+            "关切",
+            "直白"
+          ],
+          "power_distance_reflected": 4
+        },
+        {
+          "chapter": "第 76 回",
+          "context": "狮驼岭·悟空被吞",
+          "bajie_speech": "哥啊·你死在里面了！我们散伙罢！",
+          "linguistic_features": [
+            "尊称",
+            "散伙·ESFP 行为",
+            "绝望"
+          ],
+          "power_distance_reflected": 3
+        }
+      ],
+      "evolution_pattern": "1→6→4→3·从挑衅到尊称·权力距离先升后降"
+    },
+    {
+      "speaker": "沙僧",
+      "listener": "孙悟空+猪八戒",
+      "relationship": "师弟对师兄·弟对兄",
+      "power_distance": 5,
+      "politeness_level": 9,
+      "formality": 7,
+      "representative_dialogues": [
+        {
+          "chapter": "第 22 回",
+          "context": "首次见面",
+          "shaseng_speech": "哥哥·万望救我一救！",
+          "linguistic_features": [
+            "尊称·'哥哥'",
+            "请求·'万望'",
+            "礼貌"
+          ],
+          "power_distance_reflected": 7
+        },
+        {
+          "chapter": "第 27 回",
+          "context": "三打白骨精",
+          "shaseng_speech": "大师兄·师父说的是·你且忍耐。",
+          "linguistic_features": [
+            "尊称·'大师兄'",
+            "劝解",
+            "中立"
+          ],
+          "power_distance_reflected": 5
+        },
+        {
+          "chapter": "第 56 回",
+          "context": "悟空被逐",
+          "shaseng_speech": "大师兄·你且去·我劝师父。",
+          "linguistic_features": [
+            "尊称",
+            "劝慰",
+            "缓冲"
+          ],
+          "power_distance_reflected": 4
+        }
+      ],
+      "evolution_pattern": "7→5→4·沙僧对师兄的权力距离逐渐降低·但保持尊敬"
+    }
+  ],
+  "power_distance_insights": [
+    "唐僧对悟空权力距离最高（8/10）·命令式为主",
+    "悟空对八戒权力距离低（3/10）·调侃式为主",
+    "悟空对唐僧权力距离最低（3/10）·尊敬为主·但平等",
+    "八戒对悟空从挑衅（1）到尊称（6）·权力距离先升后降",
+    "沙僧对师兄权力距离中等（5/10）·礼貌为主",
+    "权力距离演变反映师徒关系的亲疏：唐僧→悟空逐渐亲化·悟空→八戒一直亲密",
+    "ISFJ 沙僧最礼貌·ENTP 悟空最调侃·INFJ 唐僧最命令式·ESFP 八戒最反复"
+  ],
+  "linguistic_strategy_by_mbti": {
+    "INFJ_唐僧": "命令式·文言化·说教式（高权力距离）",
+    "ENTP_悟空": "调侃式·市井口语·灵活切换（低权力距离）",
+    "ESFP_八戒": "反复式·撒娇式·情绪化（权力距离波动）",
+    "ISFJ_沙僧": "礼貌式·文言·温和（中等权力距离）"
+  }
+}

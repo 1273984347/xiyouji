@@ -1,0 +1,131 @@
+[
+  {
+    "version": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures",
+    "year": "Southern Song · c. 13th century",
+    "type": "huaben (storybook)",
+    "chapters": 17,
+    "feature": "The earliest extant Journey-to-the-West story: the embryonic Tripitaka pilgrimage, the first appearance of the Monkey Pilgrim, and the Deep-Sand Spirit (prototype of Sha Wujing)",
+    "key_role_introduction": [
+      "Monkey Pilgrim",
+      "Deep-Sand Spirit"
+    ],
+    "missing_elements": [
+      "Bajie",
+      "Sha Wujing finalized",
+      "Havoc in Heaven"
+    ],
+    "archaeological_layer": "Layer 1 · Song-Yuan huaben"
+  },
+  {
+    "version": "Journey to the West Zaju (Variety Play)",
+    "year": "Late Yuan–early Ming · Yang Jingxian",
+    "type": "zaju (variety play)",
+    "chapters": 24,
+    "feature": "Dramatization of the Journey story: Zhu Bajie first takes shape; Red Boy, Princess Iron Fan, and the Women's Kingdom appear",
+    "key_role_introduction": [
+      "Zhu Bajie",
+      "Red Boy",
+      "Princess Iron Fan"
+    ],
+    "missing_elements": [
+      "Sha Wujing finalized",
+      "Scale of Havoc in Heaven"
+    ],
+    "archaeological_layer": "Layer 2 · Late Yuan–early Ming zaju"
+  },
+  {
+    "version": "Journey to the West Pinghua (Plain Tale)",
+    "year": "Late Yuan · lost",
+    "type": "pinghua (plain tale)",
+    "chapters": null,
+    "feature": "Lost; known only from the 'Wei Zheng Beheads the Dragon' fragment in the Yongle Encyclopedia and citations in the Korean Pak T'ongsa ŏnhae",
+    "key_role_introduction": [
+      "Chechi Kingdom Contest"
+    ],
+    "missing_elements": [
+      "complete text"
+    ],
+    "archaeological_layer": "Layer 2 · Late Yuan pinghua"
+  },
+  {
+    "version": "Shidetang Edition of Journey to the West",
+    "year": "Ming Wanli 20 · 1592",
+    "type": "100-chapter novel",
+    "chapters": 100,
+    "feature": "The earliest complete hundred-chapter edition; inscribed 'collated by the Master of Huayang Cavern-Heaven'; lays the textual foundation of Journey to the West",
+    "key_role_introduction": [
+      "the complete Five Pilgrims",
+      "the Eighty-one Tribulations"
+    ],
+    "missing_elements": [
+      "Tang Sanzang's origin story (chs. 9–12 added in Qing editions)"
+    ],
+    "archaeological_layer": "Layer 3 · Ming Wanli Shidetang"
+  },
+  {
+    "version": "Yang Minzhai Edition of Journey to the West",
+    "year": "Ming Wanli 30 · 1602",
+    "type": "100-chapter novel",
+    "chapters": 100,
+    "feature": "An early reprint of the Shidetang edition with minor textual differences",
+    "key_role_introduction": [],
+    "missing_elements": [],
+    "archaeological_layer": "Layer 4 · Ming Wanli Yang Minzhai"
+  },
+  {
+    "version": "Zhu Dingchen's Edition of the Tang Tripitaka's Westward Deliverance",
+    "year": "Mid-to-late Wanli, Ming dynasty",
+    "type": "abridged edition",
+    "chapters": "10 juan",
+    "feature": "An abridged edition that adds Tang Sanzang's origin story (Chen Guangrui · Jiangliu'er)",
+    "key_role_introduction": [
+      "the Chen Guangrui story"
+    ],
+    "missing_elements": [
+      "a complete hundred chapters"
+    ],
+    "archaeological_layer": "Layer 4 · Ming Wanli Zhu Dingchen"
+  },
+  {
+    "version": "Journey to the West: The Book of Realizing the Way (Zhengdao shu)",
+    "year": "Qing Kangxi · 1663 · annotated by Wang Xiangxu",
+    "type": "commentary edition",
+    "chapters": 100,
+    "feature": "First to interpret the Journey through 'Realization of the Way'; inserts Tang Sanzang's origin story as Chapter 9; attributes the commentary to Qiu Chuji",
+    "key_role_introduction": [
+      "Tang Sanzang's origin entering the main text"
+    ],
+    "missing_elements": [],
+    "archaeological_layer": "Layer 5 · Qing Zhengdao (Path of Realization)"
+  },
+  {
+    "version": "The True Interpretation of the Journey West (Xiyou zhenquan)",
+    "year": "Qing Kangxi · 1696 · annotated by Chen Shibin",
+    "type": "commentary edition",
+    "chapters": 100,
+    "feature": "Annotated by Chen Shibin; interprets the Journey through the Golden Elixir; the most popular Qing commentary edition",
+    "key_role_introduction": [],
+    "missing_elements": [],
+    "archaeological_layer": "Layer 6 · Qing Zhenquan (True Interpretation)"
+  },
+  {
+    "version": "New Commentary on Journey to the West (Xinshuo)",
+    "year": "Qing Qianlong · 1753 · annotated by Zhang Shushen",
+    "type": "commentary edition",
+    "chapters": 100,
+    "feature": "Annotated by Zhang Shushen; interprets the Journey through Confucianism; argues that the Great Learning, Doctrine of the Mean, and Analects are its inner doctrine",
+    "key_role_introduction": [],
+    "missing_elements": [],
+    "archaeological_layer": "Layer 6 · Qing Xinshuo (New Commentary)"
+  },
+  {
+    "version": "The Original Intent of the Journey West (Xiyou yuanzhi)",
+    "year": "Qing Qianlong · 1753 · annotated by Liu Yiming",
+    "type": "commentary edition",
+    "chapters": 100,
+    "feature": "Annotated by Liu Yiming of the Daoist Longmen lineage; the most systematic Neidan (inner-alchemy) interpretation of the Journey",
+    "key_role_introduction": [],
+    "missing_elements": [],
+    "archaeological_layer": "Layer 7 · Qing Yuanzhi (Original Intent)"
+  }
+]

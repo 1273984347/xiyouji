@@ -43,6 +43,19 @@ REPORT_PATH = os.path.join(ROOT, "scripts", "output", "mobile_viewport_report.js
 # 而 reader 正文裸 table 在 375px 就溢出 274px——覆盖面与视口双盲区，本批一并补齐。
 REPORT_320_PATH = os.path.join(ROOT, "scripts", "output", "mobile_viewport_report_320.json")
 MIN_TAP_PX = 24.0
+# W1265 批一（判据补盲 1-5）：EN 面（第 64 槽此前只覆盖 ZH）。
+EN_DIR = os.path.join(ROOT, "site", "en")
+REPORT_EN_PATH = os.path.join(ROOT, "scripts", "output", "mobile_viewport_report_en.json")
+# W1265（1-5）：EN 档探针报告的存量 FAIL 页冻结清单（逐页名·一行一个）。
+# 现状：EN 148 页实测 FAIL 1 页（rum-viewer.html·触摸目标 <24px ×1）·溢出 0。
+# 语义：清单内页面 = 存量基线（不计 FAIL·可收紧）；清单外新增 FAIL 页 = 判红。
+REPORT_EN_BASELINE = os.path.join(ROOT, "scripts", "output", "mobile_viewport_report_en_baseline.txt")
+# A8：窄屏适配特征三项（与 ZH 同口径·审查报告 P2-1 实测 ZH 91/91 与 EN 138/138 全命中）
+NARROW_FEATURES = (
+    ("media 查询", re.compile(r"@media\s*\([^)]*max-width")),
+    ("overflow-x 声明", re.compile(r"overflow-x\s*:")),
+    ("flex-column 降级", re.compile(r"flex-direction\s*:\s*column|flex-column")),
+)
 
 # A 层契约清单（汇总行计数由此派生——硬编码「6 项」在 W1167 加 A7 后即刻失真，
 # 且加判据时最容易漏改的就是自己的计数，故让数字来自清单本身）
@@ -247,6 +260,73 @@ def check_static(css: str, js: str) -> list[str]:
     return fails
 
 
+def check_en_static() -> list[str]:
+    """A8：EN 页窄屏适配特征（静态·毫秒级）。
+
+    W1265 批一（1-5）：第 64 槽此前只覆盖 ZH 面 ⇒ EN 138 页从未被移动端检查。
+    本判据把 EN 面纳入**静态**契约：每个 EN 页必须具备与 ZH 同口径的三项窄屏适配特征
+    （media 查询 / overflow-x 声明 / flex-column 降级）——审查报告 P2-1 实测 ZH 91/91、
+    EN 138/138 全命中，故本判据当前 0 违例（不需基线冻结）。
+    """
+    fails: list[str] = []
+    if not os.path.isdir(EN_DIR):
+        return ["A8 EN 目录缺失（判据分母不存在·fail-closed）"]
+    for name in sorted(os.listdir(EN_DIR)):
+        if not name.endswith(".html") or name.startswith("_"):
+            continue
+        try:
+            with open(os.path.join(EN_DIR, name), encoding="utf-8", errors="ignore") as fh:
+                txt = fh.read()
+        except OSError as exc:
+            fails.append(f"A8 site/en/{name} 不可读: {exc}")
+            continue
+        miss = [label for label, rx in NARROW_FEATURES if not rx.search(txt)]
+        if miss:
+            fails.append(f"A8 site/en/{name} 缺窄屏适配特征：{'、'.join(miss)}")
+    return fails
+
+
+def check_en_report() -> tuple[list[str], list[str]]:
+    """B4：EN 档探针报告采信（FAIL 必须 0·缺失只 NOTE·探针不进 pre-commit）。"""
+    fails: list[str] = []
+    notes: list[str] = []
+    if not os.path.exists(REPORT_EN_PATH):
+        notes.append(
+            "B4 无 mobile_viewport_report_en.json（EN 档探针未跑）——批收尾建议 "
+            "py -3 scripts/mobile_viewport_probe.py --scope en --out scripts/output/mobile_viewport_report_en.json"
+        )
+        return fails, notes
+    try:
+        with open(REPORT_EN_PATH, encoding="utf-8") as fh:
+            rep = json.load(fh)
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f"B4 EN 探针报告不可读：{type(exc).__name__}"], notes
+    pages = rep.get("pages", [])
+    frozen = set()
+    if not os.path.exists(REPORT_EN_BASELINE):
+        fails.append("B4 EN 档存量基线缺失：%s（fail-closed·拒绝通过）" % REPORT_EN_BASELINE)
+    else:
+        with open(REPORT_EN_BASELINE, encoding="utf-8") as fh:
+            for line in fh:
+                s = line.strip()
+                if s and not s.startswith("#"):
+                    frozen.add(s)
+    bad = [p for p in pages if p.get("grade") in ("FAIL", "ERROR")]
+    new_bad = [p for p in bad if p.get("page") not in frozen]
+    frozen_bad = [p for p in bad if p.get("page") in frozen]
+    if new_bad:
+        names = "、".join(p.get("page", "?") for p in new_bad[:6])
+        fails.append(f"B4 EN 探针报告仍有 {len(new_bad)} 页未达标：{names}")
+    if frozen_bad:
+        notes.append(
+            "B4 EN 存量基线页仍 FAIL（%d 页·不计 FAIL·页面线修复后可删基线行）：%s"
+            % (len(frozen_bad), "、".join(p.get("page", "?") for p in frozen_bad[:6]))
+        )
+    if not pages:
+        fails.append("B4 EN 探针报告 pages 为空（疑似空跑）")
+    return fails, notes
+
+
 def check_report() -> tuple[list[str], list[str]]:
     """B 层判据：返回 (违规, 提示)。报告缺失不判红。"""
     fails, notes = [], []
@@ -370,6 +450,12 @@ def main() -> int:
     if "--self-test" in sys.argv:
         return self_test()
 
+    scope = "zh"
+    if "--scope" in sys.argv:
+        i = sys.argv.index("--scope")
+        if i + 1 < len(sys.argv) and sys.argv[i + 1] in ("zh", "en", "all"):
+            scope = sys.argv[i + 1]
+
     for path, label in ((CSS_PATH, "site/system.css"), (JS_PATH, "site/static/js/cite-box.js")):
         if not os.path.exists(path):
             print(f"FAIL 缺 {label}（判据分母不存在·fail-closed）")
@@ -381,13 +467,24 @@ def main() -> int:
     fails = check_static(css, js)
     rfails, notes = check_report()
     fails += rfails
+    en_pages = 0
+    if scope in ("en", "all"):
+        # W1265（1-5）：EN 面纳入第 64 槽（A8 静态契约 + B4 EN 档探针报告采信）
+        en_fails = check_en_static()
+        en_rfails, en_notes = check_en_report()
+        fails += en_fails + en_rfails
+        notes += en_notes
+        en_pages = len([n for n in os.listdir(EN_DIR) if n.endswith(".html") and not n.startswith("_")])
 
     for f in fails:
         print("FAIL " + f)
     for n in notes:
         print("NOTE " + n)
     state = "FAIL" if fails else "OK"
-    print(f"{MARKER} 契约 {len(CONTRACT_IDS)} 项 · 违规 {len(fails)} · 提示 {len(notes)} · {state} ----")
+    print(
+        f"{MARKER} 契约 {len(CONTRACT_IDS)} 项（scope={scope}·EN 页 {en_pages}）· "
+        f"违规 {len(fails)} · 提示 {len(notes)} · {state} ----"
+    )
     return 1 if fails else 0
 
 

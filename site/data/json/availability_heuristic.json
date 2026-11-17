@@ -1,0 +1,107 @@
+{
+  "concept_name": "唐僧的可得性启发",
+  "english_name": "Tang Monk's Availability Heuristic",
+  "cognitive_definition": "可得性启发（availability heuristic）：人们根据能够回想起的例子的容易程度·来判断事件发生的频率或概率·刚经历的事件会过度影响后续判断",
+  "core_case": "唐僧因为刚被白骨精骗过·之后见到任何美女/老翁都先预设为妖·这是典型的可得性偏见",
+  "tang_monk_evolution": [
+    {
+      "phase": "前期·天真期",
+      "chapter_range": "第 1-26 回",
+      "characteristic": "对一切众生信任·不愿杀生",
+      "representative_event": "悟空打死六贼·唐僧大怒",
+      "cognitive_bias": "无·过度信任",
+      "trust_wukong": 8,
+      "suspicion_level": 2,
+      "key_quote": "我们是出家人·休要伤人性命"
+    },
+    {
+      "phase": "转折点·白骨精事件",
+      "chapter_range": "第 27 回",
+      "characteristic": "白骨精三变（少女/老妇/老翁）·成功骗过唐僧·悟空被赶走",
+      "representative_event": "三打白骨精·唐僧念紧箍咒·赶走悟空",
+      "cognitive_bias": "首次建立'美女可能是妖'的认知",
+      "trust_wukong": 3,
+      "suspicion_level": 6,
+      "key_quote": "你这猴子·分明是杀生害命"
+    },
+    {
+      "phase": "中期·可得性偏见高峰",
+      "chapter_range": "第 28-50 回",
+      "characteristic": "见到任何美女/老翁都先预设为妖·过度怀疑",
+      "representative_event": "红孩儿变小孩·唐僧相信",
+      "cognitive_bias": "可得性偏见·但反向：只怀疑悟空·不怀疑他人",
+      "trust_wukong": 5,
+      "suspicion_level": 7,
+      "key_quote": "若是有妖怪·悟空你定要打杀"
+    },
+    {
+      "phase": "后期·认知修正",
+      "chapter_range": "第 51-100 回",
+      "characteristic": "经历多次后·开始信任悟空的判断",
+      "representative_event": "红孩儿事件后·唐僧逐渐信任悟空",
+      "cognitive_bias": "可得性偏见修正·但仍偶尔发作",
+      "trust_wukong": 8,
+      "suspicion_level": 4,
+      "key_quote": "悟空·你说是不是妖怪"
+    }
+  ],
+  "comparative_cases": [
+    {
+      "case": "白骨精三变",
+      "chapter": "第 27 回",
+      "tang_monk_judgment": "相信是凡人",
+      "actual": "妖怪",
+      "judgment_correct": false,
+      "cognitive_error": "无先验·过度信任",
+      "wukong_judgment": "妖怪（火眼金睛）",
+      "consequence": "悟空被赶走·唐僧遇黄袍怪"
+    },
+    {
+      "case": "红孩儿变小孩",
+      "chapter": "第 40 回",
+      "tang_monk_judgment": "相信是小孩",
+      "actual": "妖怪",
+      "judgment_correct": false,
+      "cognitive_error": "未吸取白骨精教训·仍过度信任",
+      "wukong_judgment": "妖怪",
+      "consequence": "唐僧被擒·悟空求助观音"
+    },
+    {
+      "case": "金角银角变化",
+      "chapter": "第 32-35 回",
+      "tang_monk_judgment": "半信半疑",
+      "actual": "妖怪",
+      "judgment_correct": false,
+      "cognitive_error": "可得性偏见·开始怀疑",
+      "wukong_judgment": "妖怪",
+      "consequence": "悟空识破·化险为夷"
+    },
+    {
+      "case": "乌鸡国王鬼魂",
+      "chapter": "第 37-39 回",
+      "tang_monk_judgment": "相信是鬼魂",
+      "actual": "真鬼魂",
+      "judgment_correct": true,
+      "cognitive_error": "无",
+      "wukong_judgment": "真鬼魂",
+      "consequence": "悟空救活国王"
+    },
+    {
+      "case": "老鼠精变化",
+      "chapter": "第 80-83 回",
+      "tang_monk_judgment": "相信是良女",
+      "actual": "妖怪",
+      "judgment_correct": false,
+      "cognitive_error": "后期仍未完全修正偏见",
+      "wukong_judgment": "妖怪",
+      "consequence": "唐僧被擒·悟空求助李天王"
+    }
+  ],
+  "cognitive_insights": [
+    "唐僧的可得性偏见是'反向的'：不怀疑陌生人·只怀疑悟空",
+    "白骨精事件是认知转折点·但唐僧的错误归因（怪悟空）导致偏见强化",
+    "可得性偏见让唐僧在后期的判断错误率仍达 60%",
+    "唐僧的认知修正极慢·直到第 80 回仍未完全修正",
+    "悟空的火眼金睛是认知工具·但唐僧不信任工具·这是认知冲突的根源"
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "concept_name": "Distress Signal Survival Probability",
+  "english_name": "Survival Signal Probability",
+  "definition": "After being captured, Tang Sanzang sends distress signals through 10 methods — each signal's effectiveness determines whether he survives until rescue arrives; this is the 'victim survival science' of monster sociology.",
+  "signal_methods": [
+    {
+      "method": "Crying",
+      "english_name": "Crying",
+      "survival_probability": 0.05,
+      "response_time_hours": 12,
+      "effectiveness": 1,
+      "cases": [
+        "Weeping all day while imprisoned by Yellow Robe Demon in Precious Elephant Kingdom",
+        "Crying while hung from a beam at Pansi Cave"
+      ],
+      "mechanism": "pure emotional release · no information conveyed · the other party receives no signal",
+      "verdict": "ineffective signal · only psychological comfort"
+    },
+    {
+      "method": "Chanting Sutras",
+      "english_name": "Chanting Sutras",
+      "survival_probability": 0.1,
+      "response_time_hours": 24,
+      "effectiveness": 2,
+      "cases": [
+        "Chanting the Heart Sutra in the cave after being captured by Golden Horn and Silver Horn at Pingding Mountain",
+        "Silently invoking Guanyin while pressured by the Rat Demon at the Bottomless Cave"
+      ],
+      "mechanism": "seeking psychological refuge through religious ritual · occasional flashes of inspiration",
+      "verdict": "a psychological defense mechanism · limited real-world effect"
+    },
+    {
+      "method": "Dream Visit",
+      "english_name": "Dream Visit",
+      "survival_probability": 0.3,
+      "response_time_hours": 8,
+      "effectiveness": 4,
+      "cases": [
+        "The king of Wuji sends a dream to Tang Sanzang seeking help",
+        "Sending a dream to the disciples while imprisoned by the Green Ox Demon"
+      ],
+      "mechanism": "conveying information through dreams · the receiver must have spiritual sensitivity",
+      "verdict": "effective for ghosts / victims · Tang Sanzang rarely initiates dream visits"
+    },
+    {
+      "method": "Rescue Token",
+      "english_name": "Rescue Token",
+      "survival_probability": 0.5,
+      "response_time_hours": 12,
+      "effectiveness": 6,
+      "cases": [
+        "Princess Baihuaxiu of Precious Elephant Kingdom sends a blood-letter to Tang Sanzang",
+        "The Queen of the Womanland sends a travel permit"
+      ],
+      "mechanism": "conveying distress through a token · requires outside assistance",
+      "verdict": "moderately effective · depends on whether the token arrives"
+    },
+    {
+      "method": "Monster Sympathizer",
+      "english_name": "Monster Sympathizer",
+      "survival_probability": 0.4,
+      "response_time_hours": 18,
+      "effectiveness": 5,
+      "cases": [
+        "Villagers of Chen Village tip off in the Goldfish Demon incident",
+        "The old soft-shelled turtle of the Tongtian River voluntarily ferries them across",
+        "Princess Iron Fan resents Wukong for her son's capture but does not kill Tang Sanzang"
+      ],
+      "mechanism": "figures inside or on the margins of a demon's lair pass word out of sympathy",
+      "verdict": "unstable probability · depends on the demon's temperament"
+    },
+    {
+      "method": "Wukong's Fiery Eyes",
+      "english_name": "Wukong's Fiery Eyes",
+      "survival_probability": 0.8,
+      "response_time_hours": 2,
+      "effectiveness": 9,
+      "cases": [
+        "Wukong sees through White Bone Demon's transformation at a glance",
+        "The Six-eared Macaque is hard to distinguish but is ultimately exposed",
+        "Spider Demon's transformation is seen through by Wukong"
+      ],
+      "mechanism": "the Fiery Eyes can see through transformations · proactively identifying threats",
+      "verdict": "the most reliable passive signal · but requires Wukong to be present"
+    },
+    {
+      "method": "Bajie Seeks Reinforcements",
+      "english_name": "Bajie Seeks Reinforcements",
+      "survival_probability": 0.7,
+      "response_time_hours": 36,
+      "effectiveness": 8,
+      "cases": [
+        "In the Red Boy incident, Bajie goes to the South Sea to summon Guanyin",
+        "In the Green Ox Demon incident, Bajie is captured in the first battle · later coordinates help",
+        "At Lion-Camel Ridge, Bajie goes to the South Sea to summon Guanyin"
+      ],
+      "mechanism": "though lazy, Bajie's ability to seek help is not weak · often serving as a secondary rescue channel",
+      "verdict": "medium efficiency · relatively high reliability"
+    },
+    {
+      "method": "Sandy Waits",
+      "english_name": "Sandy Waits",
+      "survival_probability": 0.3,
+      "response_time_hours": 72,
+      "effectiveness": 3,
+      "cases": [
+        "In the Tongtian River incident, Sandy guards the luggage",
+        "After many captures, Sandy passively waits for Wukong to handle it"
+      ],
+      "mechanism": "Sandy's passive personality · waiting for rescue rather than actively seeking help",
+      "verdict": "lowest signal-transmission efficiency · but steadily holds his post"
+    },
+    {
+      "method": "White Dragon Horse Sends Message",
+      "english_name": "White Dragon Horse Sends Message",
+      "survival_probability": 0.6,
+      "response_time_hours": 12,
+      "effectiveness": 7,
+      "cases": [
+        "In the Yellow Robe Demon incident at Precious Elephant Kingdom, the White Dragon Horse transforms into a palace maid to assassinate",
+        "In the Yellow Robe Demon incident, the White Dragon Horse urges Bajie to find Wukong"
+      ],
+      "mechanism": "though silent, the White Dragon Horse transforms into human form at key moments to relay messages or act",
+      "verdict": "low frequency but high efficiency · acts at critical moments"
+    },
+    {
+      "method": "Heavenly Court Warning",
+      "english_name": "Heavenly Court Warning",
+      "survival_probability": 0.5,
+      "response_time_hours": 24,
+      "effectiveness": 6,
+      "cases": [
+        "The Jade Emperor sends Taibai Jinxing to forewarn of trouble ahead",
+        "Tathāgata arranges things in advance (e.g. Golden Horn and Silver Horn descending as a trial)",
+        "Guanyin repeatedly hints at upcoming trials"
+      ],
+      "mechanism": "the Heavenly Court / Spirit Mountain forewarns · but often in cryptic terms that are hard to interpret",
+      "verdict": "vague information · only verifiable after the fact"
+    }
+  ],
+  "signal_stats": {
+    "total_methods": 10,
+    "best_method": "Wukong's Fiery Eyes (80% survival rate)",
+    "worst_method": "Crying (5% survival rate)",
+    "fastest_response": "Wukong's Fiery Eyes (2 hours)",
+    "slowest_response": "Sandy Waits (72 hours)",
+    "avg_survival_probability": 0.425,
+    "avg_effectiveness": 5.1,
+    "passive_methods": [
+      "Crying",
+      "Chanting Sutras",
+      "Sandy Waits"
+    ],
+    "active_methods": [
+      "Wukong's Fiery Eyes",
+      "Bajie Seeks Reinforcements",
+      "White Dragon Horse Sends Message"
+    ],
+    "external_methods": [
+      "Dream Visit",
+      "Rescue Token",
+      "Monster Sympathizer",
+      "Heavenly Court Warning"
+    ]
+  },
+  "survival_insights": [
+    "Tang Sanzang's own ability to call for help is extremely weak · crying + chanting have only 5–10% survival · he must rely on outside rescue",
+    "Wukong's Fiery Eyes are the most reliable 'passive signal' · but only if Wukong is present and not deceived",
+    "though silent, the White Dragon Horse is a key turning point in the Yellow Robe Demon incident · revealing 'the high value of low-key roles'",
+    "Sandy's 'waiting mode' is the least efficient · reflecting his passive personality",
+    "Heavenly Court warnings exist but are vague · revealing the court's 'limited intervention' principle",
+    "among the 10 signals, active signals average 70% survival and passive signals 15% · a striking gap"
+  ]
+}

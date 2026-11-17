@@ -2,43 +2,30 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-| .agent/skills/puti-shouye/SKILL.md | W1265 | 本批收官链产物（skill 计数标记跟随） |
-| .github/workflows/README.md | W1265 | 本批收官链产物 |
+| .agent/skills/puti-shouye/（1 件） | W1265 | 本批收官链产物（skill 计数标记跟随） |
+| dataset/（1 件） | W1265 | 本批收官链产物 |
+| docs/（1 件） | W1265 | 本批收官链产物（计数链同步） |
+| docs/11-方案报告/（1 件） | W1265 | 本批收官链产物 |
+| docs/11-方案报告/设计与架构方案/（3 件） | W1265 | 本批收官链产物 |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/己-零参考甲-读数台/_verify_shots/（8 件） | W1265 | 本批收官链产物 |
+| docs/11-方案报告/设计与架构方案/视觉重设计样板/庚-零参考乙-注释本/_verify_shots/（8 件） | W1265 | 本批收官链产物 |
+| docs/agent/（2 件） | W1265 | 本批收官链产物 |
+| scripts/（14 件） | W1265 | 本批收官链产物（计数链同步） |
+| scripts/P_音乐声效/（1 件） | W1265 | 本批收官链产物 |
+| scripts/lib/（4 件） | W1265 | 本批收官链产物 |
+| scripts/output/（21 件） | W1265 | 本批收官链产物 |
+| scripts/output/data/（4 件） | W1265 | 本批收官链产物 |
+| site/data/（13 件） | W1265 | 本批收官链产物（stats 计数刷新） |
+| site/data/json/（114 件） | W1265 | 本批收官链产物 |
+| site/en/（53 件） | W1265 | 本批收官链产物 |
+| site/en/json/（148 件） | W1265 | 本批收官链产物 |
 | AGENTS.md | W1265 | 本批收官链产物（计数链同步） |
 | CHANGELOG.md | W1265 | W1264 版段补 ⑭ 方向定案（保留现役·转向打磨升级） |
-| CITATION.cff | W1265 | 本批收官链产物 |
 | HANDOVER.md | W1265 | 本批收官链产物（计数链同步） |
 | README.md | W1265 | 本批收官链产物 |
 | STRUCTURE.md | W1265 | 本批收官链产物（计数链同步） |
-| archive/docs/AGENTS-ARCHIVE.md | W1265 | 台账归档：W1179 行迁入 ARCHIVE（腾出窗口位） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1265 | 台账归档：W1179 行迁入 ARCHIVE（腾出窗口位） |
-| archive/docs/workflows-readme-history.md | W1265 | 本批收官链产物 |
-| docs/00-导读/W批次编号对账表.md | W1265 | 台账：11 行状态回填 + 四行列位归一 + W1265 认领行 |
-| docs/00-导读/项目说明.md | W1265 | 本批收官链产物 |
-| docs/11-方案报告/README.md | W1265 | 本批收官链产物 |
-| docs/11-方案报告/设计与架构方案/W1264-全站前端重设计-零参考重做-方向裁决材料-2026-11-17.md | W1265 | W1264 裁决材料 §6 改为已裁决（保留现役·转向打磨升级） |
-| docs/11-方案报告/设计与架构方案/现役前端打磨升级清单-2026-11-17.md | W1265 | 现役前端打磨升级路线清单（12 打磨面 + 六批序列 + 验收口径 + 边界） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1265 | 本批收官链产物（stats 标记面跟随） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1265 | 本批收官链产物（stats 标记面跟随） |
-| docs/INDEX.md | W1265 | 本批收官链产物（计数链同步） |
-| docs/agent/pitfalls.md | W1265 | 本批收官链产物（坑表计数标记跟随） |
 | pitfalls.md | W1265 | 坑表新增 E-253（表格裸竖线致列错位→误判在途→窗口锁死） |
-| scripts/output/INDEX.md | W1265 | 本批收官链产物 |
-| scripts/output/README.md | W1265 | 本批收官链产物 |
-| scripts/output/_cascade_files_W1265.txt | W1265 | 本批收官链产物 |
-| scripts/output/_vermilion_solid_cache.json | W1265 | 本批收官链产物 |
-| scripts/output/_w1265_spec.json | W1265 | 本批 spec（应动全集权威） |
-| scripts/output/file-index.md | W1265 | file-index 登记面：W1265 段 |
-| scripts/output/stats-changelog.json | W1265 | 本批收官链产物（stats 计数刷新） |
-| scripts/output/stats-index.md | W1265 | 本批收官链产物（stats 计数刷新） |
-| scripts/output/stats.json | W1265 | 本批收官链产物（stats 计数刷新） |
-| scripts/output/tools-inventory.md | W1265 | 本批收官链产物（工具清单刷新） |
-| site/data/cross-time-danmaku.html | W1265 | 本批收官链产物 |
-| site/data/search-index-zh.js | W1265 | 本批收官链产物（站内搜索索引刷新） |
-| site/data/tag-cloud.html | W1265 | 本批收官链产物 |
-| site/dukou-engine.html | W1265 | 本批收官链产物 |
-| site/en/search-index-en.js | W1265 | 本批收官链产物（站内搜索索引刷新） |
-| site/index.html | W1265 | 本批收官链产物 |
+| pytest.ini | W1265 | 本批收官链产物（pytest 计数标记） |
 
 ## W1264 全站前端重设计 零参考重做 禁止借鉴 W1261/W1262 与全部在途工作（2026-11-17）
 

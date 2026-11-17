@@ -1,0 +1,116 @@
+{
+  "concept_name": "Pilgrimage KPIs and Milestones",
+  "english_name": "KPIs and Milestones",
+  "definition": "Following PMBOK project management: key performance indicators and milestones of the 14-year pilgrimage project",
+  "project_basics": {
+    "project_name": "Western Pilgrimage Strategic Project",
+    "project_sponsor": "Tathāgata (Sponsor) + Guanyin (Executive Director)",
+    "project_manager": "Tang Sanzang (Project Manager)",
+    "project_team": "Wukong (Technical Lead) + Zhu Bajie (Outreach) + Sha Wujing (Logistics) + White Dragon Horse (Transport)",
+    "project_duration": "14 years",
+    "project_budget": "No cash budget · supported by alms + patrons",
+    "project_scope": "From Chang'an to Vulture Peak · 108,000 li · 81 tribulations"
+  },
+  "kpis": [
+    {
+      "kpi_name": "Completion progress",
+      "target": "100%",
+      "actual": "100%",
+      "status": "✓ Achieved",
+      "milestone": "Chapter 100 · scriptures obtained at Vulture Peak · conferred Buddhist titles"
+    },
+    {
+      "kpi_name": "Tribulation count",
+      "target": "81 tribulations",
+      "actual": "81 tribulations",
+      "status": "✓ Achieved",
+      "milestone": "Fall into Tongtian River completes the 81st tribulation"
+    },
+    {
+      "kpi_name": "Scroll count",
+      "target": "5,048 scrolls",
+      "actual": "5,048 scrolls",
+      "status": "✓ Achieved",
+      "milestone": "Scriptures taken from the Vulture Peak library · Ananda and Kasyapa solicit bribes (HR bribery risk)"
+    },
+    {
+      "kpi_name": "Team survival rate",
+      "target": "100%",
+      "actual": "100%",
+      "status": "✓ Achieved",
+      "milestone": "All five attain Buddhahood / titles"
+    },
+    {
+      "kpi_name": "Schedule",
+      "target": "14 years",
+      "actual": "14 years",
+      "status": "✓ Achieved",
+      "milestone": "Departs in Zhenguan 13 · returns in Zhenguan 27"
+    },
+    {
+      "kpi_name": "Alms-begging stops",
+      "target": "Not set",
+      "actual": "~1,200 times",
+      "status": "— Informational",
+      "milestone": "1-2 meals daily · begging along the way"
+    },
+    {
+      "kpi_name": "Backup calls",
+      "target": "Not set",
+      "actual": "13 times (external help)",
+      "status": "△ Medium",
+      "milestone": "Primary helper: Guanyin (3 times)"
+    }
+  ],
+  "milestones": [
+    {
+      "year": "1",
+      "milestone": "Departure · Zhenguan 13",
+      "chapter": "Chapter 12"
+    },
+    {
+      "year": "2",
+      "milestone": "Recruit Wukong · recruit White Dragon Horse",
+      "chapter": "Chapters 14/15"
+    },
+    {
+      "year": "3",
+      "milestone": "Recruit Zhu Bajie · recruit Sha Wujing",
+      "chapter": "Chapters 18/22"
+    },
+    {
+      "year": "5",
+      "milestone": "White Bone Demon · the team's first crisis",
+      "chapter": "Chapter 27"
+    },
+    {
+      "year": "7",
+      "milestone": "Flaming Mountain · project halfway",
+      "chapter": "Chapters 59-61"
+    },
+    {
+      "year": "10",
+      "milestone": "Lion-Camel Ridge · hardest trial",
+      "chapter": "Chapters 74-77"
+    },
+    {
+      "year": "13",
+      "milestone": "Reach Vulture Peak · obtain scriptures",
+      "chapter": "Chapter 98"
+    },
+    {
+      "year": "14",
+      "milestone": "Return to Chang'an · confer titles · project complete",
+      "chapter": "Chapter 100"
+    }
+  ],
+  "project_summary": {
+    "overall_status": "✓ Successfully completed",
+    "on_time": true,
+    "on_budget": true,
+    "on_scope": true,
+    "key_success_factor": "Guanyin's timely rescue (13 times) · the tightening band restraining Wukong",
+    "key_risk_realized": "Wukong expelled at White Bone Demon (largest risk) · but successfully resolved",
+    "lessons_learned": "Team building requires early integration · core technology (Wukong) is irreplaceable · external help is a vital resource"
+  }
+}

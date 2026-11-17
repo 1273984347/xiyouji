@@ -1,0 +1,203 @@
+{
+  "concept_name": "服饰考古",
+  "english_name": "Costume Archaeology",
+  "definition": "服饰考古（costume archaeology）：通过分析服饰的材质、形制、纹样·复原古代社会等级制度与文化变迁",
+  "core_case": "悟空从'虎皮裙'到'僧衣'再到'佛衣'·不仅是心路历程·也是明代服饰制度的折射",
+  "character_costumes": [
+    {
+      "character": "孙悟空",
+      "costume_evolution": [
+        {
+          "stage": "石猴期",
+          "costume": "裸体·毛",
+          "material": "原生猴毛",
+          "function": "保暖·伪装",
+          "social_status": "无·野兽",
+          "ming_dynasty_parallel": "无·原始状态"
+        },
+        {
+          "stage": "美猴王期",
+          "costume": "通臂猿猴赠·黄色短打",
+          "material": "粗布",
+          "function": "区分身份",
+          "social_status": "王·花果山主",
+          "ming_dynasty_parallel": "庶民服饰·黄色为贱色"
+        },
+        {
+          "stage": "齐天大圣期",
+          "costume": "锁子黄金甲+凤翅紫金冠+藕丝步云履",
+          "material": "黄金+丝绸",
+          "function": "威慑·身份象征",
+          "social_status": "王·齐天大圣",
+          "ming_dynasty_parallel": "藩王服饰·金甲为仪仗"
+        },
+        {
+          "stage": "取经初期",
+          "costume": "虎皮裙+直裰",
+          "material": "虎皮+粗布",
+          "function": "遮羞·御寒",
+          "social_status": "徒弟·行者",
+          "ming_dynasty_parallel": "游方僧人·百衲衣传统"
+        },
+        {
+          "stage": "取经后期",
+          "costume": "僧衣·锦襕袈裟",
+          "material": "丝绸+金线",
+          "function": "佛教徒身份",
+          "social_status": "高僧弟子",
+          "ming_dynasty_parallel": "高僧法服·明代袈裟"
+        },
+        {
+          "stage": "成佛期",
+          "costume": "佛衣·金缕",
+          "material": "金缕+宝石",
+          "function": "佛位象征",
+          "social_status": "佛·斗战胜佛",
+          "ming_dynasty_parallel": "帝王衮服·金缕衣"
+        }
+      ],
+      "evolution_pattern": "U 型曲线：裸→粗布→金甲→虎皮→僧衣→佛衣·鼎盛→低谷→巅峰",
+      "social_meaning": "从王到徒再到佛·服饰折射身份的起落"
+    },
+    {
+      "character": "唐僧",
+      "costume_evolution": [
+        {
+          "stage": "出身期",
+          "costume": "婴儿·漂流",
+          "material": "无",
+          "function": "无",
+          "social_status": "弃婴",
+          "ming_dynasty_parallel": "无"
+        },
+        {
+          "stage": "出家期",
+          "costume": "粗布僧衣",
+          "material": "粗布",
+          "function": "僧人身份",
+          "social_status": "僧·沙弥",
+          "ming_dynasty_parallel": "明代普通僧人服饰"
+        },
+        {
+          "stage": "取经期",
+          "costume": "锦襕袈裟+九环锡杖",
+          "material": "丝绸+金线+锡",
+          "function": "御弟身份·佛教徒",
+          "social_status": "御弟·高僧",
+          "ming_dynasty_parallel": "明代高僧法服·御赐袈裟"
+        },
+        {
+          "stage": "成佛期",
+          "costume": "旃檀功德佛衣",
+          "material": "金缕+宝石",
+          "function": "佛位象征",
+          "social_status": "佛·旃檀功德佛",
+          "ming_dynasty_parallel": "帝王衮服"
+        }
+      ],
+      "evolution_pattern": "上升曲线：弃婴→僧→御弟→佛·服饰上升",
+      "social_meaning": "从弃婴到佛·服饰折射身份的逆袭"
+    },
+    {
+      "character": "猪八戒",
+      "costume_evolution": [
+        {
+          "stage": "天蓬元帅期",
+          "costume": "金甲·元帅服饰",
+          "material": "黄金+丝绸",
+          "function": "元帅身份",
+          "social_status": "元帅·天庭武将",
+          "ming_dynasty_parallel": "明代总兵服饰"
+        },
+        {
+          "stage": "贬凡期",
+          "costume": "猪形·裸体",
+          "material": "猪毛",
+          "function": "无",
+          "social_status": "妖·猪精",
+          "ming_dynasty_parallel": "无·兽形"
+        },
+        {
+          "stage": "高老庄期",
+          "costume": "粗布短打",
+          "material": "粗布",
+          "function": "遮羞·干活",
+          "social_status": "赘婿·农夫",
+          "ming_dynasty_parallel": "明代农民服饰"
+        },
+        {
+          "stage": "取经期",
+          "costume": "僧衣·黑布",
+          "material": "粗布",
+          "function": "僧人身份",
+          "social_status": "徒弟·行者",
+          "ming_dynasty_parallel": "明代游僧服饰"
+        },
+        {
+          "stage": "成佛期",
+          "costume": "净坛使者衣",
+          "material": "金缕",
+          "function": "使者身份",
+          "social_status": "使者·净坛使者",
+          "ming_dynasty_parallel": "明代宦官服饰"
+        }
+      ],
+      "evolution_pattern": "下降-上升曲线：元帅→猪→赘婿→僧→使者·大落大起",
+      "social_meaning": "从元帅到猪再到使者·服饰折射身份的跌宕"
+    },
+    {
+      "character": "沙僧",
+      "costume_evolution": [
+        {
+          "stage": "卷帘大将期",
+          "costume": "金甲·大将服饰",
+          "material": "黄金+丝绸",
+          "function": "大将身份",
+          "social_status": "大将·天庭武将",
+          "ming_dynasty_parallel": "明代仪仗服饰"
+        },
+        {
+          "stage": "流沙河期",
+          "costume": "妖怪装·乱发",
+          "material": "无·兽形",
+          "function": "无",
+          "social_status": "妖·流沙河怪",
+          "ming_dynasty_parallel": "无·野人"
+        },
+        {
+          "stage": "取经期",
+          "costume": "僧衣·灰布",
+          "material": "粗布",
+          "function": "僧人身份·挑担",
+          "social_status": "徒弟·挑担者",
+          "ming_dynasty_parallel": "明代挑夫服饰"
+        },
+        {
+          "stage": "成佛期",
+          "costume": "金身罗汉衣",
+          "material": "金缕",
+          "function": "罗汉身份",
+          "social_status": "罗汉·金身罗汉",
+          "ming_dynasty_parallel": "明代罗汉塑像"
+        }
+      ],
+      "evolution_pattern": "下降-上升曲线：大将→妖→僧→罗汉·跌宕",
+      "social_meaning": "从大将到妖再到罗汉·服饰折射身份的跌宕"
+    }
+  ],
+  "costume_insights": [
+    "悟空服饰演变最复杂·6 阶段·反映主角心路",
+    "4 主角服饰演变均呈现'天庭→凡间→佛果'的共同模式",
+    "服饰材质与身份严格对应：金=佛/王·粗布=僧/民·裸=妖/兽",
+    "明代服饰制度折射：黄色为贱色（庶民）·金缕为贵（帝王）·袈裟为僧",
+    "成佛期 4 人服饰材质统一为金缕·反映'众生平等'的佛教思想",
+    "服饰演变反映明代社会流动性：王↔徒↔佛·身份可转换"
+  ],
+  "ming_dynasty_parallel": {
+    "imperial_robess": "帝王衮服：金缕+十二章纹（成佛期对应）",
+    "monk_robes": "高僧法服：锦襕袈裟+九环锡杖（唐僧取经期对应）",
+    "military_uniforms": "武将甲胄：金甲+战靴（齐天大圣期对应）",
+    "commoner_clothing": "庶民服饰：粗布短打+百衲衣（取经初期对应）",
+    "official_uniforms": "官员朝服：按品级分色（净坛使者衣对应）"
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "concept_name": "取经风险评估表",
+  "english_name": "Pilgrimage Risk Assessment",
+  "definition": "按 PMBOK 风险管理框架：风险识别/概率评估/影响评估/应对策略·将 81 难纳入项目风险",
+  "risk_categories": [
+    {
+      "category": "妖怪袭击风险",
+      "english_name": "Monster Attack Risk",
+      "count": 47,
+      "probability": "高（58% 的难）",
+      "impact": "严重（团队分散/唐僧被擒）",
+      "response_strategy": "减轻：悟空战斗+搬救兵",
+      "representative_cases": [
+        "白骨精",
+        "红孩儿",
+        "黄袍怪",
+        "金角银角"
+      ]
+    },
+    {
+      "category": "自然环境风险",
+      "english_name": "Environmental Risk",
+      "count": 9,
+      "probability": "中（11%）",
+      "impact": "中等（行程延误/资源消耗）",
+      "response_strategy": "接受：直接通过或绕道",
+      "representative_cases": [
+        "火焰山",
+        "通天河",
+        "流沙河",
+        "荆棘岭"
+      ]
+    },
+    {
+      "category": "政治/外交风险",
+      "english_name": "Political Risk",
+      "count": 12,
+      "probability": "中（15%）",
+      "impact": "严重（被国王误解/被诛杀）",
+      "response_strategy": "减轻：文牒通关+变化伪装",
+      "representative_cases": [
+        "车迟国",
+        "比丘国",
+        "灭法国",
+        "玉华州"
+      ]
+    },
+    {
+      "category": "诱惑/道德风险",
+      "english_name": "Temptation Risk",
+      "count": 8,
+      "probability": "中（10%）",
+      "impact": "极严重（破坏取经承诺）",
+      "response_strategy": "规避：直接拒绝或绕道",
+      "representative_cases": [
+        "女儿国",
+        "盘丝洞",
+        "无底洞",
+        "四圣试禅心"
+      ]
+    },
+    {
+      "category": "团队内部风险",
+      "english_name": "Internal Team Risk",
+      "count": 5,
+      "probability": "低（6%）",
+      "impact": "极严重（团队分裂）",
+      "response_strategy": "减轻：观音调停+紧箍咒约束",
+      "representative_cases": [
+        "三打白骨精赶走悟空",
+        "六耳猕猴",
+        "真假唐僧"
+      ]
+    }
+  ],
+  "top_risks": [
+    {
+      "rank": 1,
+      "risk": "三打白骨精赶走悟空",
+      "probability": 8,
+      "impact": 10,
+      "score": 80
+    },
+    {
+      "rank": 2,
+      "risk": "六耳猕猴团队分裂",
+      "probability": 4,
+      "impact": 10,
+      "score": 40
+    },
+    {
+      "rank": 3,
+      "risk": "狮驼岭三魔围剿",
+      "probability": 6,
+      "impact": 9,
+      "score": 54
+    },
+    {
+      "rank": 4,
+      "risk": "女儿国女王逼婚",
+      "probability": 7,
+      "impact": 8,
+      "score": 56
+    },
+    {
+      "rank": 5,
+      "risk": "火焰山无芭蕉扇",
+      "probability": 6,
+      "impact": 8,
+      "score": 48
+    },
+    {
+      "rank": 6,
+      "risk": "红孩儿三昧真火",
+      "probability": 7,
+      "impact": 8,
+      "score": 56
+    },
+    {
+      "rank": 7,
+      "risk": "黄袍怪变化捉唐僧",
+      "probability": 6,
+      "impact": 9,
+      "score": 54
+    },
+    {
+      "rank": 8,
+      "risk": "黄眉怪小雷音寺",
+      "probability": 5,
+      "impact": 9,
+      "score": 45
+    },
+    {
+      "rank": 9,
+      "risk": "金兜山金刚琢套兵器",
+      "probability": 6,
+      "impact": 7,
+      "score": 42
+    },
+    {
+      "rank": 10,
+      "risk": "通天河淹死",
+      "probability": 4,
+      "impact": 9,
+      "score": 36
+    }
+  ],
+  "risk_matrix": {
+    "high_probability_high_impact": [
+      "三打白骨精赶走悟空",
+      "红孩儿三昧真火"
+    ],
+    "high_probability_low_impact": [
+      "通天河淹死",
+      "荆棘岭迷路"
+    ],
+    "low_probability_high_impact": [
+      "六耳猕猴",
+      "女儿国逼婚"
+    ],
+    "low_probability_low_impact": [
+      " minor 小妖怪"
+    ],
+    "overall_risk_score": 7.2,
+    "risk_management_verdict": "中等偏高·但通过搬救兵策略有效化解·项目最终成功"
+  },
+  "risk_insights": [
+    "妖怪袭击是主要风险（58%）·但通过搬救兵可降低至可控",
+    "团队内部风险概率最低但影响最严重（赶走悟空）",
+    "诱惑风险虽少但破坏性强·一次失败即项目终止",
+    "政治风险多源于文化冲突·通过文牒通关解决",
+    "自然环境风险不可控但影响中等·直接通过"
+  ]
+}

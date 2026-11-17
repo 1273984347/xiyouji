@@ -1,0 +1,154 @@
+{
+  "concept_name": "Three Realms Power Structure",
+  "english_name": "Three Realms Power Structure",
+  "definition": "Power stratification of the 7 major factions in the Xiyouji world: nominal power comes from Heaven’s investiture · actual power from resource control · influence from overall strength",
+  "scoring_criteria": "Influence scored 0-10: 10 = top of the Three Realms · 8-9 = regional dominance · 6-7 = mid-tier power · 4-5 = marginal power · 0-3 = weak group",
+  "factions": [
+    {
+      "name": "Heaven",
+      "english_name": "Heavenly Court",
+      "tier": "T0-Highest Nominal",
+      "leader": "Jade Emperor",
+      "actual_power": 9,
+      "nominal_power": 10,
+      "resource_control": [
+        "Peach Orchard (9000-year trees)",
+        "Tushita Palace elixir",
+        "100,000 heavenly soldiers and generals",
+        "Thunder, lightning, rain and dew"
+      ],
+      "influence": 10,
+      "power_gap": "Nominal power 10 > actual power 9 · gap of 1 · because Lingshan is effectively independent — Tathāgata nominally submits but in practice does not pay court",
+      "color": "#C0392B"
+    },
+    {
+      "name": "Lingshan",
+      "english_name": "Vulture Peak",
+      "tier": "T0-Highest Actual",
+      "leader": "Tathāgata Buddha",
+      "actual_power": 10,
+      "nominal_power": 8,
+      "resource_control": [
+        "Tripitaka Buddhist scriptures",
+        "Three golden hoops",
+        "Merit system",
+        "Guanyin’s vase of sweet dew"
+      ],
+      "influence": 10,
+      "power_gap": "Actual power 10 > nominal power 8 · gap of 2 · nominally under Heaven’s jurisdiction · in practice independently runs the pilgrimage project",
+      "color": "#40619E"
+    },
+    {
+      "name": "Underworld",
+      "english_name": "Underworld",
+      "tier": "T1-Executive Agency",
+      "leader": "Ten Kings of Hell (supervised by Ksitigarbha Bodhisattva)",
+      "actual_power": 6,
+      "nominal_power": 7,
+      "resource_control": [
+        "Book of Life and Death",
+        "Eighteen Layers of Hell",
+        "Six Realms of Reincarnation",
+        "Road to the Yellow Springs"
+      ],
+      "influence": 6,
+      "power_gap": "Nominal power 7 > actual power 6 · gap of 1 · Wukong tampering with the Book of Life and Death exposes weak enforcement",
+      "color": "#5a3828"
+    },
+    {
+      "name": "Mortal Realm",
+      "english_name": "Mortal Realm",
+      "tier": "T2-Secular Monarchy",
+      "leader": "Li Shimin (Great Tang)",
+      "actual_power": 5,
+      "nominal_power": 6,
+      "resource_control": [
+        "Army",
+        "Population of hundreds of millions",
+        "Land",
+        "Tribute and taxes"
+      ],
+      "influence": 5,
+      "power_gap": "Nominal power 6 > actual power 5 · gap of 1 · mortal monarchy is invested by Heaven · yet is in practice independent",
+      "color": "#8E7D62"
+    },
+    {
+      "name": "Demon Realm",
+      "english_name": "Demon Realm",
+      "tier": "T2-Dispersed Power",
+      "leader": "No unified leadership (Bull Demon King is the strongest)",
+      "actual_power": 7,
+      "nominal_power": 2,
+      "resource_control": [
+        "Cave mansions",
+        "Stolen magic treasures",
+        "Lesser-demon armies",
+        "Local warlord rule"
+      ],
+      "influence": 7,
+      "power_gap": "Actual power 7 > nominal power 2 · gap of 5 · the largest gap · demons are strong in fact but weak in name · hence often besieged by Heaven",
+      "color": "#3A473A"
+    },
+    {
+      "name": "Aquatic Tribes",
+      "english_name": "Aquatic Tribes",
+      "tier": "T2-Marginal Power",
+      "leader": "Dragon Kings of the Four Seas",
+      "actual_power": 5,
+      "nominal_power": 5,
+      "resource_control": [
+        "Aquatic soldiers",
+        "Pearls and coral",
+        "Rainfall control",
+        "Rivers, lakes and seas"
+      ],
+      "influence": 5,
+      "power_gap": "Actual power = nominal power = 5 · balanced · the execution of the Jing River Dragon King is a warning to establish authority · the aquatic tribes overall obey Heaven",
+      "color": "#3a8c8c"
+    },
+    {
+      "name": "Loose Immortals",
+      "english_name": "Loose Immortals",
+      "tier": "T1-Transcendent Independence",
+      "leader": "None (Zhenyuan Daxian is the strongest)",
+      "actual_power": 7,
+      "nominal_power": 4,
+      "resource_control": [
+        "Ginseng Fruit (ripens every 3000 years)",
+        "Daoist lineage transmission",
+        "Independent grotto-heavens",
+        "Bodhi mind-method"
+      ],
+      "influence": 6,
+      "power_gap": "Actual power 7 > nominal power 4 · gap of 3 · loose immortals are strong but not invested · hence outside the system",
+      "color": "#9c6b3a"
+    }
+  ],
+  "structure_analysis": {
+    "total_factions": 7,
+    "t0_factions": [
+      "Heaven",
+      "Lingshan"
+    ],
+    "t1_factions": [
+      "Underworld",
+      "Loose Immortals"
+    ],
+    "t2_factions": [
+      "Mortal Realm",
+      "Demon Realm",
+      "Aquatic Tribes"
+    ],
+    "balance_pattern": "Heaven and Lingshan are both T0 · Heaven has the highest nominal power · Lingshan the highest actual power · forming a dual-center co-governance",
+    "biggest_power_gap": "Demon Realm (actual 7 vs nominal 2 · gap of 5) · hence the demons are rebels against the system",
+    "smallest_power_gap": "Aquatic Tribes (actual = nominal = 5) · fully submissive to the system"
+  },
+  "structure_insights": [
+    "Heaven and Lingshan tie for first · both influence 10 · but Heaven’s nominal power is high and Lingshan’s actual power is high",
+    "Demon Realm actual power 7 · nominal 2 · the largest gap · the root of rebellion against the system",
+    "Loose immortals are strong (actual 7) but low in nominal power (4) · Patriarch Bodhi lives in seclusion · Zhenyuan Daxian becomes Wukong’s sworn brother",
+    "Underworld nominal 7 · actual 6 · the tampered Book of Life and Death exposes governance gaps",
+    "Mortal Realm nominal 6 · actual 5 · the Great Tang is strong but invested by Heaven",
+    "Aquatic Tribes fully submissive · the Jing River Dragon King was executed as a scapegoat for Heaven to assert authority"
+  ]
+}

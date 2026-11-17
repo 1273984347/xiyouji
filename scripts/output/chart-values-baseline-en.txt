@@ -1,0 +1,838 @@
+# 第 43 门禁 · 可视化数据断言基线（W753 建立·存量缺口冻结）
+# 生成：2026-11-17 · 页数 138 · 每页 6 项 = 828 行
+# 生成命令：node scripts/check_chart_values.js --generate-baseline
+# 格式：page|item|measured|status    status ∈ ok | fail:<reason> | na:<reason>（na = 判据对该页不适用/缺覆盖，计入缺口报告）
+# 语义：违规集合单调不增——本文件内 fail 为冻结存量（WARN 冻结·不算 FAIL）；
+#       基线外新增/回归 = FAIL 阻断；冻结项图元数跌破基线 50% = 恶化 FAIL；
+#       fail→ok 或 fail→na = 可收紧（提示删/改行）；基线文件缺失 = 拒绝通过（fail-closed）。
+# 判据口径：V1 无 pageerror / V2 图表容器非空 / V3 数据量级自洽 / V4 KPI 可复算 / V5 数据源四要素（第 28 门禁口径·缺口）
+# 阈值：v3MinDataN=4 v3Ratio=0.5 chartMin=160x120 worsenFactor=0.5
+# 普查分布：族分布 {"line":15,"dom":51,"sankey":5,"treemap":7,"other":7,"pie":14,"bar":2,"network":21,"scatter":9,"3d":1,"area":3,"chord":1,"heatmap":2} · 有数据页 77/138 · V3 比例分位 p05=2.8 p25=16.071 p50=39.167
+site/en/81-hardships-view.html|V1|n=0|ok
+site/en/81-hardships-view.html|V2|shapes=4 rows=0 domItems=8 painted=0 containers=1 scene=-|ok
+site/en/81-hardships-view.html|V3|N=0 best=- L=0 shapes=8 pathPts=14 domItems=8|na:no-data-source
+site/en/81-hardships-view.html|V4|kpi=0|na:no-kpi
+site/en/81-hardships-view.html|V5|-|na:citability-unavailable
+site/en/81-hardships-view.html|PROBE|ms=947 stable=true samples=3|ok
+site/en/81-hardships.html|V1|n=0|ok
+site/en/81-hardships.html|V2|shapes=24 rows=85 domItems=337 painted=0 containers=4 scene=-|ok
+site/en/81-hardships.html|V3|N=81 best=EMBEDDED_DATA:$.hardships:81 r=4.16 shapes=337 pathPts=14 domItems=337|ok
+site/en/81-hardships.html|V4|kpi=4 matched=EMBEDDED_DATA:$.total=81 ↔ 81|ok
+site/en/81-hardships.html|V5|-|na:citability-unavailable
+site/en/81-hardships.html|PROBE|ms=1220 stable=true samples=3|ok
+site/en/academic-papers.html|V1|n=0|ok
+site/en/academic-papers.html|V2|shapes=0 rows=10 domItems=20 painted=0 containers=0|ok
+site/en/academic-papers.html|V3|N=0 best=- L=0 shapes=20 pathPts=14 domItems=20|na:no-data-source
+site/en/academic-papers.html|V4|kpi=0|na:no-kpi
+site/en/academic-papers.html|V5|-|na:citability-unavailable
+site/en/academic-papers.html|PROBE|ms=1110 stable=true samples=3|ok
+site/en/aesthetics.html|V1|n=0|ok
+site/en/aesthetics.html|V2|shapes=60 rows=0 domItems=31 painted=0 containers=2 scene=-|ok
+site/en/aesthetics.html|V3|N=14 best=EMBEDDED:$.colors[6].representatives:2 r=30.00 shapes=60 pathPts=14 domItems=31|ok
+site/en/aesthetics.html|V4|kpi=4 matched=EMBEDDED:$.summary.total_characters=10 ↔ 10|ok
+site/en/aesthetics.html|V5|-|na:citability-unavailable
+site/en/aesthetics.html|PROBE|ms=1262 stable=true samples=3|ok
+site/en/ai-dialogue.html|V1|n=0|ok
+site/en/ai-dialogue.html|V2|shapes=0 rows=0 domItems=7 painted=0 containers=0 where=DIV>DIV.avatar|ok
+site/en/ai-dialogue.html|V3|N=8 best=EMBEDDED_DATA:$.celebrities[0].keywords:5 r=2.80 shapes=7 pathPts=14 domItems=7|ok
+site/en/ai-dialogue.html|V4|kpi=0|na:no-kpi
+site/en/ai-dialogue.html|V5|-|na:citability-unavailable
+site/en/ai-dialogue.html|PROBE|ms=1288 stable=true samples=3|ok
+site/en/bestiary.html|V1|n=0|ok
+site/en/bestiary.html|V2|shapes=0 rows=13 domItems=13 painted=0 containers=0|ok
+site/en/bestiary.html|V3|N=0 best=- L=0 shapes=13 pathPts=14 domItems=13|na:no-data-source
+site/en/bestiary.html|V4|kpi=5|na:no-data-source
+site/en/bestiary.html|V5|-|na:citability-unavailable
+site/en/bestiary.html|PROBE|ms=820 stable=true samples=3|ok
+site/en/business-model.html|V1|n=0|ok
+site/en/business-model.html|V2|shapes=136 rows=24 domItems=158 painted=0 containers=5 scene=-|ok
+site/en/business-model.html|V3|N=13 best=EMBEDDED:$.organization.organizations:2 r=79.00 shapes=158 pathPts=16 domItems=158|ok
+site/en/business-model.html|V4|kpi=4 matched=EMBEDDED:$.organization.organizations.length=2 ↔ 2|ok
+site/en/business-model.html|V5|-|na:citability-unavailable
+site/en/business-model.html|PROBE|ms=1158 stable=true samples=3|ok
+site/en/cave-estate.html|V1|n=491 Error: <text> attribute y: Expected length, "NaN".|fail:console-error
+site/en/cave-estate.html|V2|shapes=179 rows=22 domItems=161 painted=0 containers=4 scene=-|ok
+site/en/cave-estate.html|V3|N=22 best=EMBEDDED_DATA:$.caves[0].subordinates:2 r=89.50 shapes=179 pathPts=23 domItems=161|ok
+site/en/cave-estate.html|V4|kpi=4 matched=EMBEDDED_DATA:$.caves.length=22 ↔ 22|ok
+site/en/cave-estate.html|V5|-|na:citability-unavailable
+site/en/cave-estate.html|PROBE|ms=1076 stable=true samples=3|ok
+site/en/century-dialogue.html|V1|n=0|ok
+site/en/century-dialogue.html|V2|shapes=0 rows=0 domItems=6 painted=0 containers=0 where=DIV>DIV.speaker|ok
+site/en/century-dialogue.html|V3|N=3 best=EMBEDDED_DATA:$.triangle_dialogue L=3 shapes=6 pathPts=14 domItems=6|na:small-data
+site/en/century-dialogue.html|V4|kpi=0|na:no-kpi
+site/en/century-dialogue.html|V5|-|na:citability-unavailable
+site/en/century-dialogue.html|PROBE|ms=993 stable=true samples=3|ok
+site/en/chapter-stats.html|V1|n=0|ok
+site/en/chapter-stats.html|V2|shapes=511 rows=0 domItems=300 painted=0 containers=3 scene=-|ok
+site/en/chapter-stats.html|V3|N=100 best=EMBEDDED_DATA:$.per_chapter:100 r=5.11 shapes=511 pathPts=298 domItems=300|ok
+site/en/chapter-stats.html|V4|kpi=6 matched=EMBEDDED_DATA:$.total_chapters=100 ↔ 100|ok
+site/en/chapter-stats.html|V5|-|na:citability-unavailable
+site/en/chapter-stats.html|PROBE|ms=1079 stable=true samples=3|ok
+site/en/chapter-structure-graph.html|V1|n=0|ok
+site/en/chapter-structure-graph.html|V2|shapes=235 rows=0 domItems=200 painted=0 containers=3 scene=-|ok
+site/en/chapter-structure-graph.html|V3|N=100 best=EMBEDDED_DATA:$.kpi:6 r=39.17 shapes=235 pathPts=14 domItems=200|ok
+site/en/chapter-structure-graph.html|V4|kpi=6 matched=EMBEDDED_DATA:$.cluster.children.length=8 ↔ 8|ok
+site/en/chapter-structure-graph.html|V5|-|na:citability-unavailable
+site/en/chapter-structure-graph.html|PROBE|ms=979 stable=true samples=3|ok
+site/en/chapters-map.html|V1|n=0|ok
+site/en/chapters-map.html|V2|shapes=0 rows=100 domItems=300 painted=0 containers=0|ok
+site/en/chapters-map.html|V3|N=0 best=- L=0 shapes=300 pathPts=14 domItems=300|na:no-data-source
+site/en/chapters-map.html|V4|kpi=0|na:no-kpi
+site/en/chapters-map.html|V5|-|na:citability-unavailable
+site/en/chapters-map.html|PROBE|ms=950 stable=true samples=3|ok
+site/en/character-appearance.html|V1|n=0|ok
+site/en/character-appearance.html|V2|shapes=1008 rows=0 domItems=475 painted=0 containers=3 scene=-|ok
+site/en/character-appearance.html|V3|N=100 best=EMBEDDED_DATA:$.characters[26].appear_in_chapters:3 r=336.00 shapes=1008 pathPts=14 domItems=475|ok
+site/en/character-appearance.html|V4|kpi=3 matched=EMBEDDED_DATA:$.characters.length=40 ↔ 40|ok
+site/en/character-appearance.html|V5|-|na:citability-unavailable
+site/en/character-appearance.html|PROBE|ms=1195 stable=true samples=3|ok
+site/en/character-bailongma.html|V1|n=0|ok
+site/en/character-bailongma.html|V2|shapes=0 rows=0 domItems=12 painted=0 containers=0 where=P>STRONG.|ok
+site/en/character-bailongma.html|V3|N=0 best=- L=0 shapes=12 pathPts=14 domItems=12|na:no-data-source
+site/en/character-bailongma.html|V4|kpi=0|na:no-kpi
+site/en/character-bailongma.html|V5|-|na:citability-unavailable
+site/en/character-bailongma.html|PROBE|ms=969 stable=true samples=3|ok
+site/en/character-bajie.html|V1|n=0|ok
+site/en/character-bajie.html|V2|shapes=0 rows=0 domItems=12 painted=0 containers=0 where=P>STRONG.|ok
+site/en/character-bajie.html|V3|N=0 best=- L=0 shapes=12 pathPts=14 domItems=12|na:no-data-source
+site/en/character-bajie.html|V4|kpi=0|na:no-kpi
+site/en/character-bajie.html|V5|-|na:citability-unavailable
+site/en/character-bajie.html|PROBE|ms=946 stable=true samples=3|ok
+site/en/character-dynamic-network.html|V1|n=0|ok
+site/en/character-dynamic-network.html|V2|shapes=26 rows=4 domItems=24 painted=1154 containers=2 scene=-|ok
+site/en/character-dynamic-network.html|V3|N=50 best=NODES:$[6].stages:2 r=13.00 shapes=26 pathPts=14 domItems=24|ok
+site/en/character-dynamic-network.html|V4|kpi=3 matched=NODES:$.length=35 ↔ 35|ok
+site/en/character-dynamic-network.html|V5|-|na:citability-unavailable
+site/en/character-dynamic-network.html|PROBE|ms=1113 stable=true samples=3|ok
+site/en/character-presence-timeline.html|V1|n=0|ok
+site/en/character-presence-timeline.html|V2|shapes=1669 rows=0 domItems=1520 painted=0 containers=5 scene=-|ok
+site/en/character-presence-timeline.html|V3|N=23 best=EMBEDDED:$.presence_by_chapter[0].characters:3 r=556.33 shapes=1669 pathPts=100 domItems=1520|ok
+site/en/character-presence-timeline.html|V4|kpi=4 matched=EMBEDDED:$.presence_by_chapter.max(chapter)=100 ↔ 100|ok
+site/en/character-presence-timeline.html|V5|-|na:citability-unavailable
+site/en/character-presence-timeline.html|PROBE|ms=1020 stable=true samples=3|ok
+site/en/character-relationship-3d-view.html|V1|n=0|ok
+site/en/character-relationship-3d-view.html|V2|shapes=0 rows=0 domItems=110 painted=0 containers=0 where=TR>TD.|ok
+site/en/character-relationship-3d-view.html|V3|N=0 best=- L=0 shapes=110 pathPts=14 domItems=110|na:no-data-source
+site/en/character-relationship-3d-view.html|V4|kpi=0|na:no-kpi
+site/en/character-relationship-3d-view.html|V5|-|na:citability-unavailable
+site/en/character-relationship-3d-view.html|PROBE|ms=872 stable=true samples=3|ok
+site/en/character-relationship-3d.html|V1|n=0|ok
+site/en/character-relationship-3d.html|V2|shapes=0 rows=0 domItems=5 painted=0 containers=1 scene=101|ok
+site/en/character-relationship-3d.html|V3|N=32 best=EMBEDDED_DATA:$.kpi:5 r=20.20 shapes=101 pathPts=14 domItems=5|ok
+site/en/character-relationship-3d.html|V4|kpi=3 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
+site/en/character-relationship-3d.html|V5|-|na:citability-unavailable
+site/en/character-relationship-3d.html|PROBE|ms=1740 stable=true samples=3|ok
+site/en/character-semantic-network.html|V1|n=0|ok
+site/en/character-semantic-network.html|V2|shapes=64 rows=0 domItems=54 painted=2729 containers=8 scene=-|ok
+site/en/character-semantic-network.html|V3|N=13 best=EMBEDDED:$.divine_hierarchy.top.nodes:2 r=32.00 shapes=64 pathPts=14 domItems=54|ok
+site/en/character-semantic-network.html|V4|kpi=6 matched=EMBEDDED:$.subnetworks.pilgrimage.nodes.length=5 ↔ 5|ok
+site/en/character-semantic-network.html|V5|-|na:citability-unavailable
+site/en/character-semantic-network.html|PROBE|ms=1052 stable=true samples=3|ok
+site/en/character-sentiment-arc.html|V1|n=0|ok
+site/en/character-sentiment-arc.html|V2|shapes=236 rows=0 domItems=120 painted=0 containers=5 scene=-|ok
+site/en/character-sentiment-arc.html|V3|N=10 best=EMBEDDED:$.characters:5 r=47.20 shapes=236 pathPts=56 domItems=120|ok
+site/en/character-sentiment-arc.html|V4|kpi=5 scalars=38 countScalars=0 sample=3521,1153,1138,318|na:kpi-unmatched
+site/en/character-sentiment-arc.html|V5|-|na:citability-unavailable
+site/en/character-sentiment-arc.html|PROBE|ms=1149 stable=true samples=3|ok
+site/en/character-shaseng.html|V1|n=0|ok
+site/en/character-shaseng.html|V2|shapes=0 rows=0 domItems=11 painted=0 containers=0 where=P>STRONG.|ok
+site/en/character-shaseng.html|V3|N=0 best=- L=0 shapes=11 pathPts=14 domItems=11|na:no-data-source
+site/en/character-shaseng.html|V4|kpi=0|na:no-kpi
+site/en/character-shaseng.html|V5|-|na:citability-unavailable
+site/en/character-shaseng.html|PROBE|ms=1061 stable=true samples=3|ok
+site/en/character-tangseng.html|V1|n=0|ok
+site/en/character-tangseng.html|V2|shapes=0 rows=0 domItems=15 painted=0 containers=0 where=P>STRONG.|ok
+site/en/character-tangseng.html|V3|N=0 best=- L=0 shapes=15 pathPts=14 domItems=15|na:no-data-source
+site/en/character-tangseng.html|V4|kpi=0|na:no-kpi
+site/en/character-tangseng.html|V5|-|na:citability-unavailable
+site/en/character-tangseng.html|PROBE|ms=1171 stable=true samples=3|ok
+site/en/character-wukong.html|V1|n=0|ok
+site/en/character-wukong.html|V2|shapes=0 rows=0 domItems=13 painted=0 containers=0 where=P>STRONG.|ok
+site/en/character-wukong.html|V3|N=0 best=- L=0 shapes=13 pathPts=14 domItems=13|na:no-data-source
+site/en/character-wukong.html|V4|kpi=0|na:no-kpi
+site/en/character-wukong.html|V5|-|na:citability-unavailable
+site/en/character-wukong.html|PROBE|ms=1065 stable=true samples=3|ok
+site/en/characters.html|V1|n=0|ok
+site/en/characters.html|V2|shapes=0 rows=9 domItems=25 painted=0 containers=0|ok
+site/en/characters.html|V3|N=0 best=- L=0 shapes=25 pathPts=14 domItems=25|na:no-data-source
+site/en/characters.html|V4|kpi=0|na:no-kpi
+site/en/characters.html|V5|-|na:citability-unavailable
+site/en/characters.html|PROBE|ms=918 stable=true samples=3|ok
+site/en/chart-design.html|V1|n=0|ok
+site/en/chart-design.html|V2|shapes=141 rows=0 domItems=86 painted=0 containers=8 scene=-|ok
+site/en/chart-design.html|V3|N=12 best=EMBEDDED:$.spiral_progress.spiral_stages[1].key_events:2 r=900.50 shapes=141 pathPts=1801 domItems=86|ok
+site/en/chart-design.html|V4|kpi=6 matched=EMBEDDED:$.domino_causality.domino_chains.length=5 ↔ 5|ok
+site/en/chart-design.html|V5|-|na:citability-unavailable
+site/en/chart-design.html|PROBE|ms=1181 stable=true samples=3|ok
+site/en/cognitive-psychology.html|V1|n=0|ok
+site/en/cognitive-psychology.html|V2|shapes=150 rows=23 domItems=187 painted=0 containers=4 scene=-|ok
+site/en/cognitive-psychology.html|V3|N=6 best=EMBEDDED:$.availability.tang_monk_evolution:4 r=46.75 shapes=187 pathPts=14 domItems=187|ok
+site/en/cognitive-psychology.html|V4|kpi=6 matched=EMBEDDED:$.availability.tang_monk_evolution.length=4 ↔ 4|ok
+site/en/cognitive-psychology.html|V5|-|na:citability-unavailable
+site/en/cognitive-psychology.html|PROBE|ms=1119 stable=true samples=3|ok
+site/en/concept-device.html|V1|n=0|ok
+site/en/concept-device.html|V2|shapes=26 rows=0 domItems=11 painted=0 containers=3 scene=-|ok
+site/en/concept-device.html|V3|N=9 best=EMBEDDED_DATA:$.detective.candidates[0].for_:2 r=13.00 shapes=26 pathPts=19 domItems=11|ok
+site/en/concept-device.html|V4|kpi=0|na:no-kpi
+site/en/concept-device.html|V5|-|na:citability-unavailable
+site/en/concept-device.html|PROBE|ms=1092 stable=true samples=3|ok
+site/en/counterfactual.html|V1|n=0|ok
+site/en/counterfactual.html|V2|shapes=20 rows=0 domItems=60 painted=0 containers=2 scene=-|ok
+site/en/counterfactual.html|V3|N=10 best=EMBEDDED_SUMMARY:$.categories:6 r=10.00 shapes=60 pathPts=23 domItems=60|ok
+site/en/counterfactual.html|V4|kpi=4 matched=EMBEDDED_SCENARIOS:$.length=10 ↔ 10|ok
+site/en/counterfactual.html|V5|-|na:citability-unavailable
+site/en/counterfactual.html|PROBE|ms=991 stable=true samples=3|ok
+site/en/criticism-history.html|V1|n=0|ok
+site/en/criticism-history.html|V2|shapes=62 rows=6 domItems=30 painted=0 containers=4 scene=-|ok
+site/en/criticism-history.html|V3|N=9 best=EMBEDDED_DATA:$.streams[2].path:2 r=31.00 shapes=62 pathPts=14 domItems=30|ok
+site/en/criticism-history.html|V4|kpi=4 matched=EMBEDDED_DATA:$.summary.critics_count=9 ↔ 9|ok
+site/en/criticism-history.html|V5|-|na:citability-unavailable
+site/en/criticism-history.html|PROBE|ms=1146 stable=true samples=3|ok
+site/en/cross-time-danmaku.html|V1|n=0|ok
+site/en/cross-time-danmaku.html|V2|shapes=13 rows=0 domItems=13 painted=0 containers=2 scene=-|ok
+site/en/cross-time-danmaku.html|V3|N=10 best=EMBEDDED_DATA:$.age_groups[2].content:2 r=12.00 shapes=13 pathPts=24 domItems=13|ok
+site/en/cross-time-danmaku.html|V4|kpi=0|na:no-kpi
+site/en/cross-time-danmaku.html|V5|-|na:citability-unavailable
+site/en/cross-time-danmaku.html|PROBE|ms=1186 stable=true samples=3|ok
+site/en/cultural-misreading.html|V1|n=0|ok
+site/en/cultural-misreading.html|V2|shapes=102 rows=12 domItems=118 painted=0 containers=3 scene=-|ok
+site/en/cultural-misreading.html|V3|N=12 best=EMBEDDED_TRANSLATION_BIAS:$[1].alt_translations:2 r=59.00 shapes=118 pathPts=14 domItems=118|ok
+site/en/cultural-misreading.html|V4|kpi=4 matched=EMBEDDED_TRANSLATION_BIAS:$.length=12 ↔ 12|ok
+site/en/cultural-misreading.html|V5|-|na:citability-unavailable
+site/en/cultural-misreading.html|PROBE|ms=1114 stable=true samples=3|ok
+site/en/customs-pass-route.html|V1|n=0|ok
+site/en/customs-pass-route.html|V2|shapes=16 rows=5 domItems=60 painted=0 containers=1 scene=-|ok
+site/en/customs-pass-route.html|V3|N=15 best=static:STATIONS:$:15 r=4.00 shapes=60 pathPts=14 domItems=60|ok
+site/en/customs-pass-route.html|V4|kpi=4 matched=static:STATIONS:$.length=15 ↔ 15|ok
+site/en/customs-pass-route.html|V5|-|na:citability-unavailable
+site/en/customs-pass-route.html|PROBE|ms=1072 stable=true samples=3|ok
+site/en/dashboard.html|V1|n=0|ok
+site/en/dashboard.html|V2|shapes=0 rows=0 domItems=12 painted=0 containers=0 where=DIV>A.kpi-card|ok
+site/en/dashboard.html|V3|N=0 best=- L=0 shapes=12 pathPts=14 domItems=12|na:no-data-source
+site/en/dashboard.html|V4|kpi=17|na:no-data-source
+site/en/dashboard.html|V5|-|na:citability-unavailable
+site/en/dashboard.html|PROBE|ms=944 stable=true samples=3|ok
+site/en/data-explorer.html|V1|n=0|ok
+site/en/data-explorer.html|V2|shapes=4 rows=0 domItems=8 painted=0 containers=1 scene=-|ok
+site/en/data-explorer.html|V3|N=0 best=- L=0 shapes=8 pathPts=14 domItems=8|na:no-data-source
+site/en/data-explorer.html|V4|kpi=0|na:no-kpi
+site/en/data-explorer.html|V5|-|na:citability-unavailable
+site/en/data-explorer.html|PROBE|ms=817 stable=true samples=3|ok
+site/en/deconstruction.html|V1|n=0|ok
+site/en/deconstruction.html|V2|shapes=131 rows=16 domItems=115 painted=0 containers=3 scene=-|ok
+site/en/deconstruction.html|V3|N=12 best=EMBEDDED_SUMMARY:$.year_range:2 r=65.50 shapes=131 pathPts=14 domItems=115|ok
+site/en/deconstruction.html|V4|kpi=4 matched=EMBEDDED_DECONSTRUCTION_WORKS:$.length=7 ↔ 7|ok
+site/en/deconstruction.html|V5|-|na:citability-unavailable
+site/en/deconstruction.html|PROBE|ms=1075 stable=true samples=3|ok
+site/en/dialogue-sentiment.html|V1|n=0|ok
+site/en/dialogue-sentiment.html|V2|shapes=695 rows=0 domItems=531 painted=0 containers=6 scene=-|ok
+site/en/dialogue-sentiment.html|V3|N=100 best=EMBEDDED:$.sentiment.speaker_sentiment[9].top_positive_words:3 r=231.67 shapes=695 pathPts=276 domItems=531|ok
+site/en/dialogue-sentiment.html|V4|kpi=7 matched=EMBEDDED:$.sentiment.chapter_sentiment[3].negative_ratio=0.2105 ↔ 21|ok
+site/en/dialogue-sentiment.html|V5|-|na:citability-unavailable
+site/en/dialogue-sentiment.html|PROBE|ms=1185 stable=true samples=3|ok
+site/en/dukou-engine.html|V1|n=1 The source list for the Content Security Policy directive 'connect-src' contains an invalid source: '__XIJ_SERVICE_BASE__'. It will be ignored.|fail:console-error
+site/en/dukou-engine.html|V2|shapes=0 rows=0 domItems=3 painted=0 containers=0|na:no-view-intent
+site/en/dukou-engine.html|V3|N=0 best=- L=0 shapes=3 pathPts=14 domItems=3|na:no-rendered-view
+site/en/dukou-engine.html|V4|kpi=0|na:no-kpi
+site/en/dukou-engine.html|V5|-|na:citability-unavailable
+site/en/dukou-engine.html|PROBE|ms=843 stable=true samples=3|ok
+site/en/ecology.html|V1|n=0|ok
+site/en/ecology.html|V2|shapes=253 rows=23 domItems=203 painted=0 containers=7 scene=-|ok
+site/en/ecology.html|V3|N=10 best=EMBEDDED:$.pulse.pulse_cases[1].monster_names:2 r=126.50 shapes=253 pathPts=32 domItems=203|ok
+site/en/ecology.html|V4|kpi=9 matched=EMBEDDED:$.invasive.invasive_species_list.length=7 ↔ 7|ok
+site/en/ecology.html|V5|-|na:citability-unavailable
+site/en/ecology.html|PROBE|ms=1178 stable=true samples=3|ok
+site/en/emotional-heatmap.html|V1|n=0|ok
+site/en/emotional-heatmap.html|V2|shapes=511 rows=0 domItems=183 painted=0 containers=2 scene=-|ok
+site/en/emotional-heatmap.html|V3|N=160 best=EMBEDDED_DATA:$.scholars:8 r=63.88 shapes=511 pathPts=14 domItems=183|ok
+site/en/emotional-heatmap.html|V4|kpi=4 matched=EMBEDDED_DATA:$.meta.scholar_count=8 ↔ 8|ok
+site/en/emotional-heatmap.html|V5|-|na:citability-unavailable
+site/en/emotional-heatmap.html|PROBE|ms=1001 stable=true samples=3|ok
+site/en/essay-ai-era.html|V1|n=0|ok
+site/en/essay-ai-era.html|V2|shapes=0 rows=0 domItems=6 painted=0 containers=0 where=P>EM.|ok
+site/en/essay-ai-era.html|V3|N=0 best=- L=0 shapes=6 pathPts=14 domItems=6|na:no-data-source
+site/en/essay-ai-era.html|V4|kpi=0|na:no-kpi
+site/en/essay-ai-era.html|V5|-|na:citability-unavailable
+site/en/essay-ai-era.html|PROBE|ms=726 stable=true samples=3|ok
+site/en/essay-buddhist-chan.html|V1|n=0|ok
+site/en/essay-buddhist-chan.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-buddhist-chan.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-buddhist-chan.html|V4|kpi=0|na:no-kpi
+site/en/essay-buddhist-chan.html|V5|-|na:citability-unavailable
+site/en/essay-buddhist-chan.html|PROBE|ms=916 stable=true samples=3|ok
+site/en/essay-chapter-couplets.html|V1|n=0|ok
+site/en/essay-chapter-couplets.html|V2|shapes=0 rows=4 domItems=8 painted=0 containers=0|ok
+site/en/essay-chapter-couplets.html|V3|N=0 best=- L=0 shapes=8 pathPts=14 domItems=8|na:no-data-source
+site/en/essay-chapter-couplets.html|V4|kpi=0|na:no-kpi
+site/en/essay-chapter-couplets.html|V5|-|na:citability-unavailable
+site/en/essay-chapter-couplets.html|PROBE|ms=881 stable=true samples=3|ok
+site/en/essay-character-fu.html|V1|n=0|ok
+site/en/essay-character-fu.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-character-fu.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-character-fu.html|V4|kpi=0|na:no-kpi
+site/en/essay-character-fu.html|V5|-|na:citability-unavailable
+site/en/essay-character-fu.html|PROBE|ms=891 stable=true samples=3|ok
+site/en/essay-cipai-linjiangxian.html|V1|n=0|ok
+site/en/essay-cipai-linjiangxian.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-cipai-linjiangxian.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-cipai-linjiangxian.html|V4|kpi=0|na:no-kpi
+site/en/essay-cipai-linjiangxian.html|V5|-|na:citability-unavailable
+site/en/essay-cipai-linjiangxian.html|PROBE|ms=853 stable=true samples=3|ok
+site/en/essay-cipai-mantingfang.html|V1|n=0|ok
+site/en/essay-cipai-mantingfang.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-cipai-mantingfang.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-cipai-mantingfang.html|V4|kpi=0|na:no-kpi
+site/en/essay-cipai-mantingfang.html|V5|-|na:citability-unavailable
+site/en/essay-cipai-mantingfang.html|PROBE|ms=970 stable=true samples=3|ok
+site/en/essay-cipai-shuidiaogetou.html|V1|n=0|ok
+site/en/essay-cipai-shuidiaogetou.html|V2|shapes=0 rows=10 domItems=28 painted=0 containers=0|ok
+site/en/essay-cipai-shuidiaogetou.html|V3|N=0 best=- L=0 shapes=28 pathPts=14 domItems=28|na:no-data-source
+site/en/essay-cipai-shuidiaogetou.html|V4|kpi=0|na:no-kpi
+site/en/essay-cipai-shuidiaogetou.html|V5|-|na:citability-unavailable
+site/en/essay-cipai-shuidiaogetou.html|PROBE|ms=922 stable=true samples=3|ok
+site/en/essay-cipai-xijiangyue.html|V1|n=0|ok
+site/en/essay-cipai-xijiangyue.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-cipai-xijiangyue.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-cipai-xijiangyue.html|V4|kpi=0|na:no-kpi
+site/en/essay-cipai-xijiangyue.html|V5|-|na:citability-unavailable
+site/en/essay-cipai-xijiangyue.html|PROBE|ms=894 stable=true samples=3|ok
+site/en/essay-composition-origins.html|V1|n=0|ok
+site/en/essay-composition-origins.html|V2|shapes=0 rows=15 domItems=39 painted=0 containers=0|ok
+site/en/essay-composition-origins.html|V3|N=0 best=- L=0 shapes=39 pathPts=14 domItems=39|na:no-data-source
+site/en/essay-composition-origins.html|V4|kpi=0|na:no-kpi
+site/en/essay-composition-origins.html|V5|-|na:citability-unavailable
+site/en/essay-composition-origins.html|PROBE|ms=879 stable=true samples=3|ok
+site/en/essay-divine-bureaucracy.html|V1|n=0|ok
+site/en/essay-divine-bureaucracy.html|V2|shapes=0 rows=0 domItems=11 painted=0 containers=0 where=UL>LI.|ok
+site/en/essay-divine-bureaucracy.html|V3|N=0 best=- L=0 shapes=11 pathPts=14 domItems=11|na:no-data-source
+site/en/essay-divine-bureaucracy.html|V4|kpi=0|na:no-kpi
+site/en/essay-divine-bureaucracy.html|V5|-|na:citability-unavailable
+site/en/essay-divine-bureaucracy.html|PROBE|ms=820 stable=true samples=3|ok
+site/en/essay-folk-belief.html|V1|n=0|ok
+site/en/essay-folk-belief.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-folk-belief.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-folk-belief.html|V4|kpi=0|na:no-kpi
+site/en/essay-folk-belief.html|V5|-|na:citability-unavailable
+site/en/essay-folk-belief.html|PROBE|ms=814 stable=true samples=3|ok
+site/en/essay-historical-xuanzang.html|V1|n=0|ok
+site/en/essay-historical-xuanzang.html|V2|shapes=0 rows=8 domItems=21 painted=0 containers=0|ok
+site/en/essay-historical-xuanzang.html|V3|N=0 best=- L=0 shapes=21 pathPts=14 domItems=21|na:no-data-source
+site/en/essay-historical-xuanzang.html|V4|kpi=0|na:no-kpi
+site/en/essay-historical-xuanzang.html|V5|-|na:citability-unavailable
+site/en/essay-historical-xuanzang.html|PROBE|ms=934 stable=true samples=3|ok
+site/en/essay-information-cocoon.html|V1|n=0|ok
+site/en/essay-information-cocoon.html|V2|shapes=0 rows=0 domItems=6 painted=0 containers=0 where=ARTICLE>H2.|ok
+site/en/essay-information-cocoon.html|V3|N=0 best=- L=0 shapes=6 pathPts=14 domItems=6|na:no-data-source
+site/en/essay-information-cocoon.html|V4|kpi=0|na:no-kpi
+site/en/essay-information-cocoon.html|V5|-|na:citability-unavailable
+site/en/essay-information-cocoon.html|PROBE|ms=865 stable=true samples=3|ok
+site/en/essay-ming-economy.html|V1|n=0|ok
+site/en/essay-ming-economy.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-ming-economy.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-ming-economy.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-economy.html|V5|-|na:citability-unavailable
+site/en/essay-ming-economy.html|PROBE|ms=884 stable=true samples=3|ok
+site/en/essay-ming-examination.html|V1|n=0|ok
+site/en/essay-ming-examination.html|V2|shapes=0 rows=0 domItems=7 painted=0 containers=0 where=UL>LI.|ok
+site/en/essay-ming-examination.html|V3|N=0 best=- L=0 shapes=7 pathPts=14 domItems=7|na:no-data-source
+site/en/essay-ming-examination.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-examination.html|V5|-|na:citability-unavailable
+site/en/essay-ming-examination.html|PROBE|ms=849 stable=true samples=3|ok
+site/en/essay-ming-garrison.html|V1|n=0|ok
+site/en/essay-ming-garrison.html|V2|shapes=0 rows=0 domItems=8 painted=0 containers=0 where=UL>LI.|ok
+site/en/essay-ming-garrison.html|V3|N=0 best=- L=0 shapes=8 pathPts=14 domItems=8|na:no-data-source
+site/en/essay-ming-garrison.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-garrison.html|V5|-|na:citability-unavailable
+site/en/essay-ming-garrison.html|PROBE|ms=702 stable=true samples=3|ok
+site/en/essay-ming-intellectual-history.html|V1|n=0|ok
+site/en/essay-ming-intellectual-history.html|V2|shapes=0 rows=20 domItems=58 painted=0 containers=0|ok
+site/en/essay-ming-intellectual-history.html|V3|N=0 best=- L=0 shapes=58 pathPts=14 domItems=58|na:no-data-source
+site/en/essay-ming-intellectual-history.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-intellectual-history.html|V5|-|na:citability-unavailable
+site/en/essay-ming-intellectual-history.html|PROBE|ms=921 stable=true samples=3|ok
+site/en/essay-ming-judiciary.html|V1|n=0|ok
+site/en/essay-ming-judiciary.html|V2|shapes=0 rows=0 domItems=6 painted=0 containers=0 where=ARTICLE>H2.|ok
+site/en/essay-ming-judiciary.html|V3|N=0 best=- L=0 shapes=6 pathPts=14 domItems=6|na:no-data-source
+site/en/essay-ming-judiciary.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-judiciary.html|V5|-|na:citability-unavailable
+site/en/essay-ming-judiciary.html|PROBE|ms=1005 stable=true samples=3|ok
+site/en/essay-ming-literary-thought.html|V1|n=0|ok
+site/en/essay-ming-literary-thought.html|V2|shapes=0 rows=11 domItems=40 painted=0 containers=0|ok
+site/en/essay-ming-literary-thought.html|V3|N=0 best=- L=0 shapes=40 pathPts=14 domItems=40|na:no-data-source
+site/en/essay-ming-literary-thought.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-literary-thought.html|V5|-|na:citability-unavailable
+site/en/essay-ming-literary-thought.html|PROBE|ms=940 stable=true samples=3|ok
+site/en/essay-ming-maritime-ban.html|V1|n=0|ok
+site/en/essay-ming-maritime-ban.html|V2|shapes=0 rows=0 domItems=8 painted=0 containers=0 where=UL>LI.|ok
+site/en/essay-ming-maritime-ban.html|V3|N=0 best=- L=0 shapes=8 pathPts=14 domItems=8|na:no-data-source
+site/en/essay-ming-maritime-ban.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-maritime-ban.html|V5|-|na:citability-unavailable
+site/en/essay-ming-maritime-ban.html|PROBE|ms=916 stable=true samples=3|ok
+site/en/essay-ming-metaphor.html|V1|n=0|ok
+site/en/essay-ming-metaphor.html|V2|shapes=0 rows=17 domItems=45 painted=0 containers=0|ok
+site/en/essay-ming-metaphor.html|V3|N=0 best=- L=0 shapes=45 pathPts=14 domItems=45|na:no-data-source
+site/en/essay-ming-metaphor.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-metaphor.html|V5|-|na:citability-unavailable
+site/en/essay-ming-metaphor.html|PROBE|ms=886 stable=true samples=3|ok
+site/en/essay-ming-military.html|V1|n=0|ok
+site/en/essay-ming-military.html|V2|shapes=0 rows=8 domItems=28 painted=0 containers=0|ok
+site/en/essay-ming-military.html|V3|N=0 best=- L=0 shapes=28 pathPts=14 domItems=28|na:no-data-source
+site/en/essay-ming-military.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-military.html|V5|-|na:citability-unavailable
+site/en/essay-ming-military.html|PROBE|ms=899 stable=true samples=3|ok
+site/en/essay-ming-politics.html|V1|n=0|ok
+site/en/essay-ming-politics.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-ming-politics.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-ming-politics.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-politics.html|V5|-|na:citability-unavailable
+site/en/essay-ming-politics.html|PROBE|ms=885 stable=true samples=3|ok
+site/en/essay-ming-religion.html|V1|n=0|ok
+site/en/essay-ming-religion.html|V2|shapes=0 rows=8 domItems=21 painted=0 containers=0|ok
+site/en/essay-ming-religion.html|V3|N=0 best=- L=0 shapes=21 pathPts=14 domItems=21|na:no-data-source
+site/en/essay-ming-religion.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-religion.html|V5|-|na:citability-unavailable
+site/en/essay-ming-religion.html|PROBE|ms=921 stable=true samples=3|ok
+site/en/essay-ming-social-customs.html|V1|n=0|ok
+site/en/essay-ming-social-customs.html|V2|shapes=0 rows=12 domItems=40 painted=0 containers=0|ok
+site/en/essay-ming-social-customs.html|V3|N=0 best=- L=0 shapes=40 pathPts=14 domItems=40|na:no-data-source
+site/en/essay-ming-social-customs.html|V4|kpi=0|na:no-kpi
+site/en/essay-ming-social-customs.html|V5|-|na:citability-unavailable
+site/en/essay-ming-social-customs.html|PROBE|ms=940 stable=true samples=3|ok
+site/en/essay-modern-management.html|V1|n=0|ok
+site/en/essay-modern-management.html|V2|shapes=0 rows=0 domItems=9 painted=0 containers=0 where=P>STRONG.|ok
+site/en/essay-modern-management.html|V3|N=0 best=- L=0 shapes=9 pathPts=14 domItems=9|na:no-data-source
+site/en/essay-modern-management.html|V4|kpi=0|na:no-kpi
+site/en/essay-modern-management.html|V5|-|na:citability-unavailable
+site/en/essay-modern-management.html|PROBE|ms=850 stable=true samples=3|ok
+site/en/essay-original-poetry.html|V1|n=0|ok
+site/en/essay-original-poetry.html|V2|shapes=0 rows=14 domItems=34 painted=0 containers=0|ok
+site/en/essay-original-poetry.html|V3|N=0 best=- L=0 shapes=34 pathPts=14 domItems=34|na:no-data-source
+site/en/essay-original-poetry.html|V4|kpi=0|na:no-kpi
+site/en/essay-original-poetry.html|V5|-|na:citability-unavailable
+site/en/essay-original-poetry.html|PROBE|ms=864 stable=true samples=3|ok
+site/en/essay-poetry-imagery.html|V1|n=0|ok
+site/en/essay-poetry-imagery.html|V2|shapes=0 rows=10 domItems=28 painted=0 containers=0|ok
+site/en/essay-poetry-imagery.html|V3|N=0 best=- L=0 shapes=28 pathPts=14 domItems=28|na:no-data-source
+site/en/essay-poetry-imagery.html|V4|kpi=0|na:no-kpi
+site/en/essay-poetry-imagery.html|V5|-|na:citability-unavailable
+site/en/essay-poetry-imagery.html|PROBE|ms=884 stable=true samples=3|ok
+site/en/essay-poetry-opening.html|V1|n=0|ok
+site/en/essay-poetry-opening.html|V2|shapes=0 rows=13 domItems=30 painted=0 containers=0|ok
+site/en/essay-poetry-opening.html|V3|N=0 best=- L=0 shapes=30 pathPts=14 domItems=30|na:no-data-source
+site/en/essay-poetry-opening.html|V4|kpi=0|na:no-kpi
+site/en/essay-poetry-opening.html|V5|-|na:citability-unavailable
+site/en/essay-poetry-opening.html|PROBE|ms=893 stable=true samples=3|ok
+site/en/essay-quanzhen-daoism.html|V1|n=0|ok
+site/en/essay-quanzhen-daoism.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-quanzhen-daoism.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-quanzhen-daoism.html|V4|kpi=0|na:no-kpi
+site/en/essay-quanzhen-daoism.html|V5|-|na:citability-unavailable
+site/en/essay-quanzhen-daoism.html|PROBE|ms=916 stable=true samples=3|ok
+site/en/essay-rhythm-analysis.html|V1|n=0|ok
+site/en/essay-rhythm-analysis.html|V2|shapes=0 rows=5 domItems=16 painted=0 containers=0|ok
+site/en/essay-rhythm-analysis.html|V3|N=0 best=- L=0 shapes=16 pathPts=14 domItems=16|na:no-data-source
+site/en/essay-rhythm-analysis.html|V4|kpi=0|na:no-kpi
+site/en/essay-rhythm-analysis.html|V5|-|na:citability-unavailable
+site/en/essay-rhythm-analysis.html|PROBE|ms=914 stable=true samples=3|ok
+site/en/essay-scenery-poems.html|V1|n=0|ok
+site/en/essay-scenery-poems.html|V2|shapes=0 rows=0 domItems=11 painted=0 containers=0 where=P>STRONG.|ok
+site/en/essay-scenery-poems.html|V3|N=0 best=- L=0 shapes=11 pathPts=14 domItems=11|na:no-data-source
+site/en/essay-scenery-poems.html|V4|kpi=0|na:no-kpi
+site/en/essay-scenery-poems.html|V5|-|na:citability-unavailable
+site/en/essay-scenery-poems.html|PROBE|ms=899 stable=true samples=3|ok
+site/en/essay-thematic-poetry.html|V1|n=0|ok
+site/en/essay-thematic-poetry.html|V2|shapes=0 rows=0 domItems=23 painted=0 containers=0 where=P>BR.|ok
+site/en/essay-thematic-poetry.html|V3|N=0 best=- L=0 shapes=23 pathPts=14 domItems=23|na:no-data-source
+site/en/essay-thematic-poetry.html|V4|kpi=0|na:no-kpi
+site/en/essay-thematic-poetry.html|V5|-|na:citability-unavailable
+site/en/essay-thematic-poetry.html|PROBE|ms=878 stable=true samples=3|ok
+site/en/essay-three-teachings.html|V1|n=0|ok
+site/en/essay-three-teachings.html|V2|shapes=0 rows=6 domItems=20 painted=0 containers=0|ok
+site/en/essay-three-teachings.html|V3|N=0 best=- L=0 shapes=20 pathPts=14 domItems=20|na:no-data-source
+site/en/essay-three-teachings.html|V4|kpi=0|na:no-kpi
+site/en/essay-three-teachings.html|V5|-|na:citability-unavailable
+site/en/essay-three-teachings.html|PROBE|ms=887 stable=true samples=3|ok
+site/en/essay-version-evolution.html|V1|n=0|ok
+site/en/essay-version-evolution.html|V2|shapes=0 rows=0 domItems=32 painted=0 containers=0 where=P>EM.|ok
+site/en/essay-version-evolution.html|V3|N=0 best=- L=0 shapes=32 pathPts=14 domItems=32|na:no-data-source
+site/en/essay-version-evolution.html|V4|kpi=0|na:no-kpi
+site/en/essay-version-evolution.html|V5|-|na:citability-unavailable
+site/en/essay-version-evolution.html|PROBE|ms=873 stable=true samples=3|ok
+site/en/essay-zen-koan-vs-neidan.html|V1|n=0|ok
+site/en/essay-zen-koan-vs-neidan.html|V2|shapes=0 rows=0 domItems=10 painted=0 containers=0 where=P>STRONG.|ok
+site/en/essay-zen-koan-vs-neidan.html|V3|N=0 best=- L=0 shapes=10 pathPts=14 domItems=10|na:no-data-source
+site/en/essay-zen-koan-vs-neidan.html|V4|kpi=0|na:no-kpi
+site/en/essay-zen-koan-vs-neidan.html|V5|-|na:citability-unavailable
+site/en/essay-zen-koan-vs-neidan.html|PROBE|ms=899 stable=true samples=3|ok
+site/en/ethics-consumption.html|V1|n=0|ok
+site/en/ethics-consumption.html|V2|shapes=71 rows=0 domItems=56 painted=0 containers=2 scene=-|ok
+site/en/ethics-consumption.html|V3|N=12 best=EMBEDDED:$.mount_rights_report.key_findings[1].implicated_monsters:2 r=35.50 shapes=71 pathPts=14 domItems=56|ok
+site/en/ethics-consumption.html|V4|kpi=6 matched=EMBEDDED:$.mount_rights_report.key_findings.length=5 ↔ 5|ok
+site/en/ethics-consumption.html|V5|-|na:citability-unavailable
+site/en/ethics-consumption.html|PROBE|ms=1072 stable=true samples=3|ok
+site/en/famous-time-travel.html|V1|n=0|ok
+site/en/famous-time-travel.html|V2|shapes=14 rows=0 domItems=11 painted=0 containers=2 scene=-|ok
+site/en/famous-time-travel.html|V3|N=6 best=EMBEDDED_DATA:$.scene_illustrations:2 r=7.00 shapes=14 pathPts=14 domItems=11|ok
+site/en/famous-time-travel.html|V4|kpi=0|na:no-kpi
+site/en/famous-time-travel.html|V5|-|na:citability-unavailable
+site/en/famous-time-travel.html|PROBE|ms=936 stable=true samples=3|ok
+site/en/four-dimensional-research-network.html|V1|n=0|ok
+site/en/four-dimensional-research-network.html|V2|shapes=236 rows=0 domItems=112 painted=3882 containers=6 scene=-|ok
+site/en/four-dimensional-research-network.html|V3|N=32 best=EMBEDDED_DATA:$.dimensions:4 r=59.00 shapes=236 pathPts=62 domItems=112|ok
+site/en/four-dimensional-research-network.html|V4|kpi=4 matched=EMBEDDED_DATA:$.dimensions.length=4 ↔ 4|ok
+site/en/four-dimensional-research-network.html|V5|-|na:citability-unavailable
+site/en/four-dimensional-research-network.html|PROBE|ms=1029 stable=true samples=3|ok
+site/en/four-heavenly-kings-artifacts.html|V1|n=0|ok
+site/en/four-heavenly-kings-artifacts.html|V2|shapes=67 rows=4 domItems=29 painted=0 containers=3 scene=-|ok
+site/en/four-heavenly-kings-artifacts.html|V3|N=10 best=EMBEDDED_DATA:$.kings:4 r=16.75 shapes=67 pathPts=14 domItems=29|ok
+site/en/four-heavenly-kings-artifacts.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kings.length=4 ↔ 4|ok
+site/en/four-heavenly-kings-artifacts.html|V5|-|na:citability-unavailable
+site/en/four-heavenly-kings-artifacts.html|PROBE|ms=1032 stable=true samples=3|ok
+site/en/game-webnovel.html|V1|n=0|ok
+site/en/game-webnovel.html|V2|shapes=118 rows=10 domItems=110 painted=0 containers=5 scene=-|ok
+site/en/game-webnovel.html|V3|N=12 best=EMBEDDED:$.character_cards[11].skills:2 r=59.00 shapes=118 pathPts=14 domItems=110|ok
+site/en/game-webnovel.html|V4|kpi=6 matched=EMBEDDED:$.character_cards.length=12 ↔ 12|ok
+site/en/game-webnovel.html|V5|-|na:citability-unavailable
+site/en/game-webnovel.html|PROBE|ms=1269 stable=true samples=3|ok
+site/en/global-pattern.html|V1|n=0|ok
+site/en/global-pattern.html|V2|shapes=31 rows=16 domItems=72 painted=0 containers=2 scene=-|ok
+site/en/global-pattern.html|V3|N=8 best=EMBEDDED_SUMMARY:$.year_range:2 r=36.00 shapes=72 pathPts=14 domItems=72|ok
+site/en/global-pattern.html|V4|kpi=4 matched=EMBEDDED_PILGRIMS:$.length=8 ↔ 8|ok
+site/en/global-pattern.html|V5|-|na:citability-unavailable
+site/en/global-pattern.html|PROBE|ms=1106 stable=true samples=3|ok
+site/en/graph-explorer.html|V1|n=0|ok
+site/en/graph-explorer.html|V2|shapes=41 rows=0 domItems=40 painted=0 containers=1 scene=-|ok
+site/en/graph-explorer.html|V3|N=0 best=- L=0 shapes=41 pathPts=14 domItems=40|na:no-data-source
+site/en/graph-explorer.html|V4|kpi=0|na:no-kpi
+site/en/graph-explorer.html|V5|-|na:citability-unavailable
+site/en/graph-explorer.html|PROBE|ms=863 stable=true samples=3|ok
+site/en/guanyin-six-roles-network.html|V1|n=0|ok
+site/en/guanyin-six-roles-network.html|V2|shapes=246 rows=0 domItems=136 painted=5887 containers=6 scene=-|ok
+site/en/guanyin-six-roles-network.html|V3|N=34 best=EMBEDDED_DATA:$.roles:6 r=41.00 shapes=246 pathPts=56 domItems=136|ok
+site/en/guanyin-six-roles-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.roles.length=6 ↔ 6|ok
+site/en/guanyin-six-roles-network.html|V5|-|na:citability-unavailable
+site/en/guanyin-six-roles-network.html|PROBE|ms=1044 stable=true samples=3|ok
+site/en/guide.html|V1|n=0|ok
+site/en/guide.html|V2|shapes=0 rows=7 domItems=34 painted=0 containers=0|ok
+site/en/guide.html|V3|N=0 best=- L=0 shapes=34 pathPts=21 domItems=34|na:no-data-source
+site/en/guide.html|V4|kpi=0|na:no-kpi
+site/en/guide.html|V5|-|na:citability-unavailable
+site/en/guide.html|PROBE|ms=1026 stable=true samples=3|ok
+site/en/hardship-difficulty-heatmap.html|V1|n=0|ok
+site/en/hardship-difficulty-heatmap.html|V2|shapes=396 rows=4 domItems=339 painted=0 containers=5 scene=-|ok
+site/en/hardship-difficulty-heatmap.html|V3|N=81 best=EMBEDDED_DATA:$:81 r=4.89 shapes=396 pathPts=14 domItems=339|ok
+site/en/hardship-difficulty-heatmap.html|V4|kpi=4 matched=EMBEDDED_DATA:$.length=81 ↔ 81|ok
+site/en/hardship-difficulty-heatmap.html|V5|-|na:citability-unavailable
+site/en/hardship-difficulty-heatmap.html|PROBE|ms=1130 stable=true samples=3|ok
+site/en/hardship-heatmap.html|V1|n=0|ok
+site/en/hardship-heatmap.html|V2|shapes=173 rows=5 domItems=126 painted=0 containers=3 scene=-|ok
+site/en/hardship-heatmap.html|V3|N=81 best=EMBEDDED_DATA:$:81 r=2.14 shapes=173 pathPts=14 domItems=126|ok
+site/en/hardship-heatmap.html|V4|kpi=4 matched=EMBEDDED_DATA:$.length=81 ↔ 81|ok
+site/en/hardship-heatmap.html|V5|-|na:citability-unavailable
+site/en/hardship-heatmap.html|PROBE|ms=1113 stable=true samples=3|ok
+site/en/heaven-power-network.html|V1|n=0|ok
+site/en/heaven-power-network.html|V2|shapes=225 rows=6 domItems=109 painted=2494 containers=7 scene=-|ok
+site/en/heaven-power-network.html|V3|N=27 best=EMBEDDED_DATA:$.summary.byStage:3 r=75.00 shapes=225 pathPts=23 domItems=109|ok
+site/en/heaven-power-network.html|V4|kpi=13 matched=EMBEDDED_DATA:$.hierarchy.uniq(color)=5 ↔ 5|ok
+site/en/heaven-power-network.html|V5|-|na:citability-unavailable
+site/en/heaven-power-network.html|PROBE|ms=1142 stable=true samples=3|ok
+site/en/index.html|V1|n=0|ok
+site/en/index.html|V2|shapes=0 rows=0 domItems=56 painted=0 containers=0 where=DIV>A.card|ok
+site/en/index.html|V3|N=0 best=- L=0 shapes=56 pathPts=14 domItems=56|na:no-data-source
+site/en/index.html|V4|kpi=0|na:no-kpi
+site/en/index.html|V5|-|na:citability-unavailable
+site/en/index.html|PROBE|ms=899 stable=true samples=3|ok
+site/en/intertextuality-network.html|V1|n=0|ok
+site/en/intertextuality-network.html|V2|shapes=192 rows=7 domItems=140 painted=1946 containers=6 scene=-|ok
+site/en/intertextuality-network.html|V3|N=22 best=EMBEDDED_DATA:$.intertextuality.theorists:4 r=48.00 shapes=192 pathPts=14 domItems=140|ok
+site/en/intertextuality-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.intertextuality.texts.max(strength)=100 ↔ 1|ok
+site/en/intertextuality-network.html|V5|-|na:citability-unavailable
+site/en/intertextuality-network.html|PROBE|ms=1127 stable=true samples=3|ok
+site/en/journey-geo-semiotics.html|V1|n=0|ok
+site/en/journey-geo-semiotics.html|V2|shapes=19 rows=0 domItems=10 painted=836 containers=2 scene=-|ok
+site/en/journey-geo-semiotics.html|V3|N=7 best=EMBEDDED_DATA:$.nodes:7 r=2.71 shapes=19 pathPts=14 domItems=10|ok
+site/en/journey-geo-semiotics.html|V4|kpi=0|na:no-kpi
+site/en/journey-geo-semiotics.html|V5|-|na:citability-unavailable
+site/en/journey-geo-semiotics.html|PROBE|ms=971 stable=true samples=3|ok
+site/en/journey-map-interactive.html|V1|n=0|ok
+site/en/journey-map-interactive.html|V2|shapes=73 rows=0 domItems=54 painted=0 containers=2 scene=-|ok
+site/en/journey-map-interactive.html|V3|N=17 best=EMBEDDED_DATA:$.kpi:5 r=14.60 shapes=73 pathPts=49 domItems=54|ok
+site/en/journey-map-interactive.html|V4|kpi=4 matched=EMBEDDED_DATA:$.nodes.mean(id)=8 ↔ 8|ok
+site/en/journey-map-interactive.html|V5|-|na:citability-unavailable
+site/en/journey-map-interactive.html|PROBE|ms=1012 stable=true samples=3|ok
+site/en/journey-route.html|V1|n=0|ok
+site/en/journey-route.html|V2|shapes=133 rows=105 domItems=630 painted=0 containers=2 scene=-|ok
+site/en/journey-route.html|V3|N=53 best=EMBEDDED_DATA:$.by_region.Great Tang Border:2 r=315.00 shapes=630 pathPts=23 domItems=630|ok
+site/en/journey-route.html|V4|kpi=4 matched=EMBEDDED_DATA:$.total_places=53 ↔ 53|ok
+site/en/journey-route.html|V5|-|na:citability-unavailable
+site/en/journey-route.html|PROBE|ms=1091 stable=true samples=3|ok
+site/en/journey-spacetime.html|V1|n=0|ok
+site/en/journey-spacetime.html|V2|shapes=140 rows=4 domItems=69 painted=0 containers=1 scene=-|ok
+site/en/journey-spacetime.html|V3|N=68 best=LOCATIONS:$:24 r=7.67 shapes=140 pathPts=184 domItems=69|ok
+site/en/journey-spacetime.html|V4|kpi=4 matched=LOCATIONS:$.length=24 ↔ 24|ok
+site/en/journey-spacetime.html|V5|-|na:citability-unavailable
+site/en/journey-spacetime.html|PROBE|ms=1036 stable=true samples=3|ok
+site/en/jurisprudence.html|V1|n=0|ok
+site/en/jurisprudence.html|V2|shapes=156 rows=18 domItems=131 painted=0 containers=6 scene=-|ok
+site/en/jurisprudence.html|V3|N=10 best=EMBEDDED:$.artifact.artifact_inventory[1].usage_history:2 r=78.00 shapes=156 pathPts=14 domItems=131|ok
+site/en/jurisprudence.html|V4|kpi=7 matched=EMBEDDED:$.sentencing.sentencing_cases.length=10 ↔ 10|ok
+site/en/jurisprudence.html|V5|-|na:citability-unavailable
+site/en/jurisprudence.html|PROBE|ms=1106 stable=true samples=3|ok
+site/en/karma-reincarnation.html|V1|n=0|ok
+site/en/karma-reincarnation.html|V2|shapes=75 rows=24 domItems=214 painted=0 containers=4 scene=-|ok
+site/en/karma-reincarnation.html|V3|N=10 best=EMBEDDED:$.samsara.realms[2].notable_cases:2 r=107.00 shapes=214 pathPts=44 domItems=214|ok
+site/en/karma-reincarnation.html|V4|kpi=4 matched=EMBEDDED:$.registry.cases.length=8 ↔ 8|ok
+site/en/karma-reincarnation.html|V5|-|na:citability-unavailable
+site/en/karma-reincarnation.html|PROBE|ms=1056 stable=true samples=3|ok
+site/en/language-style-radar.html|V1|n=0|ok
+site/en/language-style-radar.html|V2|shapes=85 rows=0 domItems=42 painted=0 containers=2 scene=-|ok
+site/en/language-style-radar.html|V3|N=7 best=EMBEDDED_DATA:$.kpi:5 r=17.00 shapes=85 pathPts=14 domItems=42|ok
+site/en/language-style-radar.html|V4|kpi=3 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
+site/en/language-style-radar.html|V5|-|na:citability-unavailable
+site/en/language-style-radar.html|PROBE|ms=925 stable=true samples=3|ok
+site/en/linguistics.html|V1|n=0|ok
+site/en/linguistics.html|V2|shapes=223 rows=8 domItems=96 painted=0 containers=6 scene=-|ok
+site/en/linguistics.html|V3|N=8 best=EMBEDDED:$.power_distance.dialogue_pairs[4].representative_dialogues:3 r=74.33 shapes=223 pathPts=14 domItems=96|ok
+site/en/linguistics.html|V4|kpi=14 matched=EMBEDDED:$.incantation.incantations.length=8 ↔ 8|ok
+site/en/linguistics.html|V5|-|na:citability-unavailable
+site/en/linguistics.html|PROBE|ms=1204 stable=true samples=3|ok
+site/en/magic-system.html|V1|n=0|ok
+site/en/magic-system.html|V2|shapes=48 rows=24 domItems=128 painted=0 containers=5 scene=-|ok
+site/en/magic-system.html|V3|N=21 best=EMBEDDED_DATA:$.magic_energy_sankey.tianting_budget.revenue:4 r=32.00 shapes=128 pathPts=23 domItems=128|ok
+site/en/magic-system.html|V4|kpi=4 matched=EMBEDDED_DATA:$.magic_system.length=5 ↔ 5|ok
+site/en/magic-system.html|V5|-|na:citability-unavailable
+site/en/magic-system.html|PROBE|ms=1102 stable=true samples=3|ok
+site/en/material-archaeology.html|V1|n=0|ok
+site/en/material-archaeology.html|V2|shapes=203 rows=45 domItems=324 painted=0 containers=8 scene=-|ok
+site/en/material-archaeology.html|V3|N=8 best=EMBEDDED_DATA:$.cave_architecture.architectural_types[1].representative_caves:2 r=162.00 shapes=324 pathPts=16 domItems=324|ok
+site/en/material-archaeology.html|V4|kpi=18 matched=EMBEDDED_DATA:$.artifact_materials.artifact_material_reports.length=8 ↔ 8|ok
+site/en/material-archaeology.html|V5|-|na:citability-unavailable
+site/en/material-archaeology.html|PROBE|ms=1144 stable=true samples=3|ok
+site/en/mbti-evolution.html|V1|n=0|ok
+site/en/mbti-evolution.html|V2|shapes=296 rows=0 domItems=120 painted=0 containers=7 scene=-|ok
+site/en/mbti-evolution.html|V3|N=8 best=EMBEDDED:$.stages:4 r=74.00 shapes=296 pathPts=25 domItems=120|ok
+site/en/mbti-evolution.html|V4|kpi=4 matched=EMBEDDED:$.stages.length=4 ↔ 4|ok
+site/en/mbti-evolution.html|V5|-|na:citability-unavailable
+site/en/mbti-evolution.html|PROBE|ms=1018 stable=true samples=3|ok
+site/en/methodology-matrix.html|V1|n=0|ok
+site/en/methodology-matrix.html|V2|shapes=102 rows=25 domItems=130 painted=0 containers=2 scene=-|ok
+site/en/methodology-matrix.html|V3|N=15 best=EMBEDDED:$.villain_matrix.axes.x_axis.range:2 r=65.00 shapes=130 pathPts=28 domItems=130|ok
+site/en/methodology-matrix.html|V4|kpi=5 matched=EMBEDDED:$.villain_matrix.quadrants.length=4 ↔ 4|ok
+site/en/methodology-matrix.html|V5|-|na:citability-unavailable
+site/en/methodology-matrix.html|PROBE|ms=1052 stable=true samples=3|ok
+site/en/methodology.html|V1|n=0|ok
+site/en/methodology.html|V2|shapes=0 rows=8 domItems=21 painted=0 containers=0|ok
+site/en/methodology.html|V3|N=0 best=- L=0 shapes=21 pathPts=14 domItems=21|na:no-data-source
+site/en/methodology.html|V4|kpi=0|na:no-kpi
+site/en/methodology.html|V5|-|na:citability-unavailable
+site/en/methodology.html|PROBE|ms=923 stable=true samples=3|ok
+site/en/ming-political-thought-comparison.html|V1|n=0|ok
+site/en/ming-political-thought-comparison.html|V2|shapes=153 rows=0 domItems=70 painted=0 containers=5 scene=-|ok
+site/en/ming-political-thought-comparison.html|V3|N=12 best=EMBEDDED_DATA:$.kpi:6 r=25.50 shapes=153 pathPts=14 domItems=70|ok
+site/en/ming-political-thought-comparison.html|V4|kpi=6 matched=EMBEDDED_DATA:$.kpi.max(value)=9 ↔ 9|ok
+site/en/ming-political-thought-comparison.html|V5|-|na:citability-unavailable
+site/en/ming-political-thought-comparison.html|PROBE|ms=1125 stable=true samples=3|ok
+site/en/monster-background.html|V1|n=0|ok
+site/en/monster-background.html|V2|shapes=91 rows=9 domItems=90 painted=0 containers=3 scene=-|ok
+site/en/monster-background.html|V3|N=10 best=EMBEDDED:$.outcomes.outcome_types[4].typical_cases:2 r=45.50 shapes=91 pathPts=14 domItems=90|ok
+site/en/monster-background.html|V4|kpi=4 matched=EMBEDDED:$.background.background_types.sum(count)=69 ↔ 69|ok
+site/en/monster-background.html|V5|-|na:citability-unavailable
+site/en/monster-background.html|PROBE|ms=1148 stable=true samples=3|ok
+site/en/monster-capability-radar.html|V1|n=0|ok
+site/en/monster-capability-radar.html|V2|shapes=111 rows=0 domItems=81 painted=0 containers=4 scene=-|ok
+site/en/monster-capability-radar.html|V3|N=15 best=EMBEDDED_DATA:$.kpi:4 r=27.75 shapes=111 pathPts=14 domItems=81|ok
+site/en/monster-capability-radar.html|V4|kpi=4 matched=EMBEDDED_DATA:$.kpi.length=4 ↔ 4|ok
+site/en/monster-capability-radar.html|V5|-|na:citability-unavailable
+site/en/monster-capability-radar.html|PROBE|ms=1116 stable=true samples=3|ok
+site/en/monster-ecology-network.html|V1|n=0|ok
+site/en/monster-ecology-network.html|V2|shapes=168 rows=7 domItems=86 painted=4657 containers=5 scene=-|ok
+site/en/monster-ecology-network.html|V3|N=42 best=EMBEDDED_DATA:$.kpi:5 r=33.60 shapes=168 pathPts=14 domItems=86|ok
+site/en/monster-ecology-network.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kpi.max(value)=73 ↔ 73|ok
+site/en/monster-ecology-network.html|V5|-|na:citability-unavailable
+site/en/monster-ecology-network.html|PROBE|ms=1046 stable=true samples=3|ok
+site/en/monster-female-network.html|V1|n=0|ok
+site/en/monster-female-network.html|V2|shapes=225 rows=17 domItems=170 painted=3635 containers=5 scene=-|ok
+site/en/monster-female-network.html|V3|N=32 best=EMBEDDED_DATA:$.monsterFemale.timeline:14 r=16.07 shapes=225 pathPts=14 domItems=170|ok
+site/en/monster-female-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.monsterFemale.nodes.length=17 ↔ 17|ok
+site/en/monster-female-network.html|V5|-|na:citability-unavailable
+site/en/monster-female-network.html|PROBE|ms=1190 stable=true samples=3|ok
+site/en/monster-hierarchy-network.html|V1|n=0|ok
+site/en/monster-hierarchy-network.html|V2|shapes=224 rows=0 domItems=113 painted=1944 containers=7 scene=-|ok
+site/en/monster-hierarchy-network.html|V3|N=23 best=EMBEDDED_DATA:$.tiers:4 r=56.00 shapes=224 pathPts=23 domItems=113|ok
+site/en/monster-hierarchy-network.html|V4|kpi=13 matched=EMBEDDED_DATA:$.tiers.length=4 ↔ 4|ok
+site/en/monster-hierarchy-network.html|V5|-|na:citability-unavailable
+site/en/monster-hierarchy-network.html|PROBE|ms=1201 stable=true samples=3|ok
+site/en/monster-sociology.html|V1|n=0|ok
+site/en/monster-sociology.html|V2|shapes=151 rows=20 domItems=165 painted=0 containers=4 scene=-|ok
+site/en/monster-sociology.html|V3|N=10 best=EMBEDDED:$.signal.signal_methods[0].cases:2 r=82.50 shapes=165 pathPts=14 domItems=165|ok
+site/en/monster-sociology.html|V4|kpi=4 matched=EMBEDDED:$.crime.crime_types.length=5 ↔ 5|ok
+site/en/monster-sociology.html|V5|-|na:citability-unavailable
+site/en/monster-sociology.html|PROBE|ms=1245 stable=true samples=3|ok
+site/en/monster-victims-network.html|V1|n=0|ok
+site/en/monster-victims-network.html|V2|shapes=125 rows=0 domItems=66 painted=2673 containers=5 scene=-|ok
+site/en/monster-victims-network.html|V3|N=16 best=EMBEDDED_DATA:$.victims:4 r=31.25 shapes=125 pathPts=14 domItems=66|ok
+site/en/monster-victims-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.victims.length=4 ↔ 4|ok
+site/en/monster-victims-network.html|V5|-|na:citability-unavailable
+site/en/monster-victims-network.html|PROBE|ms=1182 stable=true samples=3|ok
+site/en/music-structure.html|V1|n=0|ok
+site/en/music-structure.html|V2|shapes=169 rows=46 domItems=100 painted=0 containers=3 scene=-|ok
+site/en/music-structure.html|V3|N=100 best=EMBEDDED_DATA:$.movement:4 r=63.25 shapes=169 pathPts=253 domItems=100|ok
+site/en/music-structure.html|V4|kpi=6 matched=EMBEDDED_DATA:$.summary.total_sounds=16 ↔ 16|ok
+site/en/music-structure.html|V5|-|na:citability-unavailable
+site/en/music-structure.html|PROBE|ms=1126 stable=true samples=3|ok
+site/en/narrative-experiment.html|V1|n=0|ok
+site/en/narrative-experiment.html|V2|shapes=28 rows=0 domItems=38 painted=0 containers=2 scene=-|ok
+site/en/narrative-experiment.html|V3|N=12 best=EMBEDDED:$.board_game.game_phases:3 r=12.67 shapes=38 pathPts=14 domItems=38|ok
+site/en/narrative-experiment.html|V4|kpi=5 matched=EMBEDDED:$.board_game.players.length=4 ↔ 4|ok
+site/en/narrative-experiment.html|V5|-|na:citability-unavailable
+site/en/narrative-experiment.html|PROBE|ms=1338 stable=true samples=3|ok
+site/en/narrative-rhythm-curve.html|V1|n=0|ok
+site/en/narrative-rhythm-curve.html|V2|shapes=168 rows=0 domItems=166 painted=0 containers=2 scene=-|ok
+site/en/narrative-rhythm-curve.html|V3|N=100 best=EMBEDDED_DATA:$.kpi:5 r=119.20 shapes=168 pathPts=596 domItems=166|ok
+site/en/narrative-rhythm-curve.html|V4|kpi=5 matched=EMBEDDED_DATA:$.density[8].chapter=9 ↔ 9|ok
+site/en/narrative-rhythm-curve.html|V5|-|na:citability-unavailable
+site/en/narrative-rhythm-curve.html|PROBE|ms=1076 stable=true samples=3|ok
+site/en/narratology-12d-network.html|V1|n=0|ok
+site/en/narratology-12d-network.html|V2|shapes=210 rows=12 domItems=138 painted=3733 containers=5 scene=-|ok
+site/en/narratology-12d-network.html|V3|N=30 best=EMBEDDED_DATA:$.narratology.dimensions:12 r=17.50 shapes=210 pathPts=14 domItems=138|ok
+site/en/narratology-12d-network.html|V4|kpi=7 matched=EMBEDDED_DATA:$.narratology.dimensions.length=12 ↔ 12|ok
+site/en/narratology-12d-network.html|V5|-|na:citability-unavailable
+site/en/narratology-12d-network.html|PROBE|ms=1083 stable=true samples=3|ok
+site/en/narratology-16d-network.html|V1|n=0|ok
+site/en/narratology-16d-network.html|V2|shapes=270 rows=16 domItems=179 painted=4983 containers=5 scene=-|ok
+site/en/narratology-16d-network.html|V3|N=32 best=EMBEDDED_DATA:$.narratology.dimensions[0].theorists:4 r=67.50 shapes=270 pathPts=14 domItems=179|ok
+site/en/narratology-16d-network.html|V4|kpi=7 matched=EMBEDDED_DATA:$.narratology.dimensions.length=16 ↔ 16|ok
+site/en/narratology-16d-network.html|V5|-|na:citability-unavailable
+site/en/narratology-16d-network.html|PROBE|ms=1205 stable=true samples=3|ok
+site/en/perf-canvas-rendering.html|V1|n=0|ok
+site/en/perf-canvas-rendering.html|V2|shapes=1500 rows=0 domItems=1000 painted=54000 containers=2 scene=-|ok
+site/en/perf-canvas-rendering.html|V3|N=0 best=- L=0 shapes=1500 pathPts=14 domItems=1000|na:no-data-source
+site/en/perf-canvas-rendering.html|V4|kpi=4 scalars=2 countScalars=0 sample=14.5,5.0,2.9,500|na:kpi-unmatched
+site/en/perf-canvas-rendering.html|V5|-|na:citability-unavailable
+site/en/perf-canvas-rendering.html|PROBE|ms=1078 stable=true samples=3|ok
+site/en/philosophy.html|V1|n=0|ok
+site/en/philosophy.html|V2|shapes=151 rows=14 domItems=116 painted=0 containers=4 scene=-|ok
+site/en/philosophy.html|V3|N=8 best=EMBEDDED:$.summary.concept_list:2 r=75.50 shapes=151 pathPts=23 domItems=116|ok
+site/en/philosophy.html|V4|kpi=4 matched=EMBEDDED:$.mind_monkey.six_phases.length=6 ↔ 6|ok
+site/en/philosophy.html|V5|-|na:citability-unavailable
+site/en/philosophy.html|PROBE|ms=1167 stable=true samples=3|ok
+site/en/pilgrim-team-dynamic-network.html|V1|n=0|ok
+site/en/pilgrim-team-dynamic-network.html|V2|shapes=34 rows=5 domItems=19 painted=1889 containers=3 scene=-|ok
+site/en/pilgrim-team-dynamic-network.html|V3|N=10 best=EMBEDDED_DATA:$.phases.storming.key_events:3 r=11.33 shapes=34 pathPts=14 domItems=19|ok
+site/en/pilgrim-team-dynamic-network.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
+site/en/pilgrim-team-dynamic-network.html|V5|-|na:citability-unavailable
+site/en/pilgrim-team-dynamic-network.html|PROBE|ms=1148 stable=true samples=3|ok
+site/en/pilgrim-team-psychology-arc.html|V1|n=0|ok
+site/en/pilgrim-team-psychology-arc.html|V2|shapes=307 rows=0 domItems=136 painted=0 containers=5 scene=-|ok
+site/en/pilgrim-team-psychology-arc.html|V3|N=16 best=EMBEDDED_DATA:$.kpi:5 r=61.40 shapes=307 pathPts=46 domItems=136|ok
+site/en/pilgrim-team-psychology-arc.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
+site/en/pilgrim-team-psychology-arc.html|V5|-|na:citability-unavailable
+site/en/pilgrim-team-psychology-arc.html|PROBE|ms=1112 stable=true samples=3|ok
+site/en/poetry-rhythm-analysis.html|V1|n=0|ok
+site/en/poetry-rhythm-analysis.html|V2|shapes=179 rows=0 domItems=103 painted=0 containers=5 scene=-|ok
+site/en/poetry-rhythm-analysis.html|V3|N=10 best=EMBEDDED_DATA:$.kpi:5 r=35.80 shapes=179 pathPts=14 domItems=103|ok
+site/en/poetry-rhythm-analysis.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
+site/en/poetry-rhythm-analysis.html|V5|-|na:citability-unavailable
+site/en/poetry-rhythm-analysis.html|PROBE|ms=1116 stable=true samples=3|ok
+site/en/power-resources.html|V1|n=0|ok
+site/en/power-resources.html|V2|shapes=113 rows=25 domItems=194 painted=0 containers=4 scene=-|ok
+site/en/power-resources.html|V3|N=10 best=EMBEDDED:$.structure.structure_analysis.t0_factions:2 r=97.00 shapes=194 pathPts=14 domItems=194|ok
+site/en/power-resources.html|V4|kpi=5 matched=EMBEDDED:$.structure.factions.length=7 ↔ 7|ok
+site/en/power-resources.html|V5|-|na:citability-unavailable
+site/en/power-resources.html|PROBE|ms=1159 stable=true samples=3|ok
+site/en/relationships.html|V1|n=0|ok
+site/en/relationships.html|V2|shapes=1207 rows=55 domItems=833 painted=7686 containers=11 scene=-|ok
+site/en/relationships.html|V3|N=329 best=EMBEDDED:$.faction.balance_analysis.dominant_factions:2 r=603.50 shapes=1207 pathPts=199 domItems=833|ok
+site/en/relationships.html|V4|kpi=5 matched=EMBEDDED:$.faction.factions.length=7 ↔ 7|ok
+site/en/relationships.html|V5|-|na:citability-unavailable
+site/en/relationships.html|PROBE|ms=1336 stable=true samples=3|ok
+site/en/risk-project.html|V1|n=0|ok
+site/en/risk-project.html|V2|shapes=201 rows=20 domItems=210 painted=0 containers=5 scene=-|ok
+site/en/risk-project.html|V3|N=10 best=EMBEDDED:$.risk.risk_matrix.high_probability_high_impact:2 r=149.00 shapes=210 pathPts=298 domItems=210|ok
+site/en/risk-project.html|V4|kpi=5 matched=EMBEDDED:$.risk.risk_categories.length=5 ↔ 5|ok
+site/en/risk-project.html|V5|-|na:citability-unavailable
+site/en/risk-project.html|PROBE|ms=1283 stable=true samples=3|ok
+site/en/search.html|V1|n=0|ok
+site/en/search.html|V2|shapes=0 rows=0 domItems=2 painted=0 containers=0|na:interactive-input-page
+site/en/search.html|V3|N=0 best=- L=0 shapes=2 pathPts=14 domItems=2|na:no-rendered-view
+site/en/search.html|V4|kpi=0|na:no-kpi
+site/en/search.html|V5|-|na:citability-unavailable
+site/en/search.html|PROBE|ms=860 stable=true samples=3|ok
+site/en/site-map.html|V1|n=0|ok
+site/en/site-map.html|V2|shapes=0 rows=0 domItems=36 painted=0 containers=0 where=UL>LI.|ok
+site/en/site-map.html|V3|N=0 best=- L=0 shapes=36 pathPts=14 domItems=36|na:no-data-source
+site/en/site-map.html|V4|kpi=0|na:no-kpi
+site/en/site-map.html|V5|-|na:citability-unavailable
+site/en/site-map.html|PROBE|ms=933 stable=true samples=3|ok
+site/en/six-senses-narratology-network.html|V1|n=0|ok
+site/en/six-senses-narratology-network.html|V2|shapes=257 rows=7 domItems=138 painted=1939 containers=5 scene=-|ok
+site/en/six-senses-narratology-network.html|V3|N=56 best=EMBEDDED_DATA:$.sixSenses.senses:7 r=36.71 shapes=257 pathPts=14 domItems=138|ok
+site/en/six-senses-narratology-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.sixSenses.senses.length=7 ↔ 7|ok
+site/en/six-senses-narratology-network.html|V5|-|na:citability-unavailable
+site/en/six-senses-narratology-network.html|PROBE|ms=1034 stable=true samples=3|ok
+site/en/social-media.html|V1|n=0|ok
+site/en/social-media.html|V2|shapes=96 rows=8 domItems=42 painted=0 containers=2 scene=-|ok
+site/en/social-media.html|V3|N=8 best=EMBEDDED:$.mbti_characters[5].weakness:3 r=32.00 shapes=96 pathPts=14 domItems=42|ok
+site/en/social-media.html|V4|kpi=5 matched=EMBEDDED:$.social_media_profiles.length=7 ↔ 7|ok
+site/en/social-media.html|V5|-|na:citability-unavailable
+site/en/social-media.html|PROBE|ms=1134 stable=true samples=3|ok
+site/en/tag-cloud.html|V1|n=0|ok
+site/en/tag-cloud.html|V2|shapes=0 rows=0 domItems=29 painted=0 containers=0 where=DIV>SPAN.tag-item.cat-v-new|ok
+site/en/tag-cloud.html|V3|N=79 best=EMBEDDED_DATA:$[0].tags:4 r=7.25 shapes=29 pathPts=14 domItems=29|ok
+site/en/tag-cloud.html|V4|kpi=0|na:no-kpi
+site/en/tag-cloud.html|V5|-|na:citability-unavailable
+site/en/tag-cloud.html|PROBE|ms=1032 stable=true samples=3|ok
+site/en/text-evolution.html|V1|n=0|ok
+site/en/text-evolution.html|V2|shapes=106 rows=4 domItems=109 painted=0 containers=4 scene=-|ok
+site/en/text-evolution.html|V3|N=10 best=EMBEDDED_DATA:$.versions[0].key_role_introduction:2 r=54.50 shapes=109 pathPts=23 domItems=109|ok
+site/en/text-evolution.html|V4|kpi=5 matched=EMBEDDED_DATA:$.summary.total_versions=10 ↔ 10|ok
+site/en/text-evolution.html|V5|-|na:citability-unavailable
+site/en/text-evolution.html|PROBE|ms=1186 stable=true samples=3|ok
+site/en/text-search.html|V1|n=0|ok
+site/en/text-search.html|V2|shapes=0 rows=0 domItems=89 painted=0 containers=0 where=DIV>BUTTON.quick-tag.tag-char|ok
+site/en/text-search.html|V3|N=0 best=- L=0 shapes=89 pathPts=16 domItems=89|na:no-data-source
+site/en/text-search.html|V4|kpi=4|na:no-data-source
+site/en/text-search.html|V5|-|na:citability-unavailable
+site/en/text-search.html|PROBE|ms=1123 stable=true samples=3|ok
+site/en/theological-intervention-network.html|V1|n=0|ok
+site/en/theological-intervention-network.html|V2|shapes=152 rows=4 domItems=58 painted=2388 containers=6 scene=-|ok
+site/en/theological-intervention-network.html|V3|N=22 best=EMBEDDED_DATA:$.radar:3 r=50.67 shapes=152 pathPts=14 domItems=58|ok
+site/en/theological-intervention-network.html|V4|kpi=5 matched=EMBEDDED_DATA:$.network.nodes.uniq(type)=3 ↔ 3|ok
+site/en/theological-intervention-network.html|V5|-|na:citability-unavailable
+site/en/theological-intervention-network.html|PROBE|ms=1085 stable=true samples=3|ok
+site/en/timeline.html|V1|n=0|ok
+site/en/timeline.html|V2|shapes=42 rows=0 domItems=53 painted=0 containers=1 scene=-|ok
+site/en/timeline.html|V3|N=22 best=EMBEDDED_DATA:$.timeline:22 r=2.41 shapes=53 pathPts=32 domItems=53|ok
+site/en/timeline.html|V4|kpi=4 matched=EMBEDDED_DATA:$.timeline.length=22 ↔ 22|ok
+site/en/timeline.html|V5|-|na:citability-unavailable
+site/en/timeline.html|PROBE|ms=1070 stable=true samples=3|ok
+site/en/tribulations.html|V1|n=0|ok
+site/en/tribulations.html|V2|shapes=0 rows=85 domItems=421 painted=0 containers=0|ok
+site/en/tribulations.html|V3|N=0 best=- L=0 shapes=421 pathPts=14 domItems=421|na:no-data-source
+site/en/tribulations.html|V4|kpi=0|na:no-kpi
+site/en/tribulations.html|V5|-|na:citability-unavailable
+site/en/tribulations.html|PROBE|ms=1029 stable=true samples=3|ok
+site/en/underworld-power-network.html|V1|n=0|ok
+site/en/underworld-power-network.html|V2|shapes=210 rows=0 domItems=106 painted=1861 containers=7 scene=-|ok
+site/en/underworld-power-network.html|V3|N=20 best=EMBEDDED_DATA:$.summary.byStage:3 r=70.00 shapes=210 pathPts=23 domItems=106|ok
+site/en/underworld-power-network.html|V4|kpi=13 matched=EMBEDDED_DATA:$.hierarchy.uniq(color)=5 ↔ 5|ok
+site/en/underworld-power-network.html|V5|-|na:citability-unavailable
+site/en/underworld-power-network.html|PROBE|ms=1141 stable=true samples=3|ok
+site/en/visual-art.html|V1|n=0|ok
+site/en/visual-art.html|V2|shapes=38 rows=0 domItems=54 painted=0 containers=2 scene=-|ok
+site/en/visual-art.html|V3|N=10 best=EMBEDDED:$.scent_map.scent_categories.Desolate:2 r=28.00 shapes=54 pathPts=56 domItems=54|ok
+site/en/visual-art.html|V4|kpi=5 matched=EMBEDDED:$.heart_sutra_sculpture.sutra_chanting_records.length=10 ↔ 10|ok
+site/en/visual-art.html|V5|-|na:citability-unavailable
+site/en/visual-art.html|PROBE|ms=1165 stable=true samples=3|ok
+site/en/visualizations.html|V1|n=0|ok
+site/en/visualizations.html|V2|shapes=0 rows=0 domItems=83 painted=0 containers=0 where=DIV>A.|ok
+site/en/visualizations.html|V3|N=0 best=- L=0 shapes=83 pathPts=14 domItems=83|na:no-data-source
+site/en/visualizations.html|V4|kpi=0|na:no-kpi
+site/en/visualizations.html|V5|-|na:citability-unavailable
+site/en/visualizations.html|PROBE|ms=987 stable=true samples=3|ok
+site/en/workplace.html|V1|n=0|ok
+site/en/workplace.html|V2|shapes=57 rows=12 domItems=75 painted=0 containers=3 scene=-|ok
+site/en/workplace.html|V3|N=15 best=EMBEDDED:$.project_review.risk_management:3 r=25.00 shapes=75 pathPts=14 domItems=75|ok
+site/en/workplace.html|V4|kpi=3 matched=EMBEDDED:$.project_review.duration_years=14 ↔ 14|ok
+site/en/workplace.html|V5|-|na:citability-unavailable
+site/en/workplace.html|PROBE|ms=1024 stable=true samples=3|ok

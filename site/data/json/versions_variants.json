@@ -1,0 +1,50 @@
+[
+  {
+    "element": "心猿形象",
+    "evolution": "猴行者→孙悟空",
+    "first_appear": "《大唐三藏取经诗话》·猴行者·白衣秀士",
+    "evolution_path": "猴行者(宋) → 孙行者(元杂剧) → 齐天大圣孙悟空(世本)",
+    "key_change": "世本中'心猿'形象完整·菩提祖师传授七十二变·大闹天宫规模空前",
+    "chapter_first": 1
+  },
+  {
+    "element": "猪八戒·挑担子",
+    "evolution": "无→八戒挑担→沙僧挑担",
+    "first_appear": "《西游记杂剧》·猪八戒首现",
+    "evolution_path": "杂剧八戒 → 世本前段八戒挑担 → 世本后段转沙僧挑担",
+    "key_change": "世本100回中·八戒在收沙僧前(22回)挑担·收沙僧后任务逐步转移",
+    "chapter_first": 18
+  },
+  {
+    "element": "唐僧出身故事",
+    "evolution": "无→外传→入正文",
+    "first_appear": "世德堂本无·朱鼎臣本首入",
+    "evolution_path": "世本无 → 朱鼎臣本补'释厄传' → 证道书入正文为第9回",
+    "key_change": "陈光蕊·江流儿故事·清代方入正文·今本多从清本",
+    "chapter_first": 9
+  },
+  {
+    "element": "大闹天宫规模",
+    "evolution": "简→繁",
+    "first_appear": "《大唐三藏取经诗话》·简略",
+    "evolution_path": "诗话无大闹天宫 → 杂剧简略 → 平话'齐天大圣' → 世本第1-7回宏大叙事",
+    "key_change": "世本首次将'大闹天宫'扩充为7回·奠定全书开篇结构",
+    "chapter_first": 1
+  },
+  {
+    "element": "九九八十一难",
+    "evolution": "无→有",
+    "first_appear": "世德堂本·第99回观音算账",
+    "evolution_path": "前期故事无定数 → 世本第99回'九九八十一难'完整列出",
+    "key_change": "世本首次系统化'九九八十一难'·奠定取经结构的完整性",
+    "chapter_first": 99
+  },
+  {
+    "element": "沙僧定型",
+    "evolution": "深沙神→沙和尚",
+    "first_appear": "《大唐三藏取经诗话》·深沙神",
+    "evolution_path": "深沙神(宋) → 沙和尚(世本) · 卷帘大将背景定型",
+    "key_change": "世本中沙僧身份完整·卷帘大将贬凡·九颗骷髅项链",
+    "chapter_first": 22
+  }
+]

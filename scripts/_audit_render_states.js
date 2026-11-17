@@ -90,11 +90,23 @@ const CONC = (() => {
   //   CPU 争抢导致边际收益递减；6 为实测折中（8 以上收益低于线性）。
   return i > -1 ? Math.max(1, parseInt(process.argv[i + 1], 10) || 6) : 6;
 })();
-// W588：--proto file|http（缺省 http 兼容旧流程）——file 走 EMBEDDED 主路径且免 SW/服务器
+// W588：--proto file|http
+// W1265 批一（判据补盲 1-7）：**缺省由 http 改为 file**。
+//   原缺省 http 是 W1259 审查报告 P3-3 实证的「假绿产物」根因：本地未起 8000 服务时
+//   3492 行全部 fatal（net::ERR_CONNECTION_REFUSED）而**退出码仍是 0** ⇒ 产物 100% 无效、
+//   且 lowContrastText 判据在默认口径下**从未真正执行过**。
+//   file 协议走 EMBEDDED 主路径·免 SW/服务器（站点设计口径·第 43 槽同款）⇒ 默认即可跑。
 const PROTO = (() => {
   const i = process.argv.indexOf('--proto');
-  return i > -1 && process.argv[i + 1] === 'file' ? 'file' : 'http';
+  return i > -1 && process.argv[i + 1] === 'http' ? 'http' : 'file';
 })();
+
+// W1265：fail-closed 判定（纯函数·便于自测）——探针**全部**失败 ⇒ 产物无效 ⇒ 必须非零退出。
+function fatalDecision(total, fatal) {
+  if (!total) return { fail: true, reason: 'no-rows' };
+  if (fatal === total) return { fail: true, reason: 'all-fatal' };
+  return { fail: false, reason: fatal ? 'partial-fatal' : 'ok' };
+}
 
 // 相对亮度（WCAG）
 function lum(cssColor) {
@@ -345,6 +357,7 @@ async function main() {
   const browser = await chromium.launch();
   const out = fs.createWriteStream(OUT, { encoding: 'utf-8' });
   let n = 0;
+  let fatal = 0;
   for (const state of STATES) {
     const context = await browser.newContext({ viewport: state.viewport });
     try { await context.emulateMedia({ colorScheme: state.colorScheme }); } catch {}
@@ -357,6 +370,7 @@ async function main() {
         const row = await auditState(context, pages[i], state);
         out.write(JSON.stringify(row) + '\n');
         n++;
+        if (row && row.fatal) fatal++;
         if (n % 100 === 0) console.log(`  ${n} 行完成`);
       }
     };
@@ -366,6 +380,35 @@ async function main() {
   out.end();
   await browser.close();
   console.log(`完成：${n} 行 → ${path.relative(ROOT, OUT) || OUT}`);
+  // W1265（1-7）：fail-closed —— 探针全部失败 ⇒ 产物 100% 无效 ⇒ 非零退出 + 明确报错。
+  const decision = fatalDecision(n, fatal);
+  console.log(`fatal 行 ${fatal}/${n} · 判定 ${decision.reason}`);
+  if (decision.fail) {
+    console.error(
+      `FAIL 渲染态普查产物无效（${decision.reason}·fatal ${fatal}/${n}）——` +
+        `请检查协议（--proto file|http·缺省 file）与本地服务后重跑；退出码非零`
+    );
+    process.exit(3);
+  }
+  if (fatal) console.log(`NOTE 部分行失败（${fatal}/${n}）——须人工确认后再采信产物`);
+}
+
+// W1265（1-7）：自测入口——只测 fail-closed 判定（不启浏览器·毫秒级）。
+if (process.argv.includes('--self-test')) {
+  const cases = [
+    ['探针全部失败必红（非零退出）', fatalDecision(10, 10), true],
+    ['零失败放行', fatalDecision(10, 0), false],
+    ['部分失败只告警（不阻断）', fatalDecision(10, 3), false],
+    ['零行（空产物）判红', fatalDecision(0, 0), true],
+  ];
+  let pass = 0;
+  for (const [name, got, want] of cases) {
+    const ok = got.fail === want;
+    if (ok) pass++;
+    console.log((ok ? 'PASS' : 'FAIL') + '  ' + name + '（reason=' + got.reason + '）');
+  }
+  console.log('---- render-states self-test：' + pass + '/' + cases.length + ' 通过 ----');
+  process.exit(pass === cases.length ? 0 : 2);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

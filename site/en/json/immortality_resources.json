@@ -1,0 +1,140 @@
+{
+  "concept_name": "Immortality Resource Chain",
+  "english_name": "Immortality Resource Chain",
+  "definition": "Ten immortality resources in the Xiyouji world · scarcity / efficacy / access difficulty / owners · constituting the ‘immortality economy’",
+  "scoring_criteria": "scarcity/efficacy/access_level all scored 0-10: 10 = most scarce / most effective / hardest to obtain",
+  "resources": [
+    {
+      "name": "Peach (9000-year tree)",
+      "english_name": "9-Millennium Peach",
+      "scarcity": 10,
+      "efficacy": 10,
+      "access_level": 10,
+      "owner": "Queen Mother of the West (Peach Orchard · Heaven)",
+      "rarity_reason": "Ripens every 9000 years · only 9 trees in all · limited fruit per tree · distributed only at the Peach Banquet",
+      "effect": "As long-lived as heaven and earth · coeval with the sun and moon",
+      "chapter": "Chapter 5"
+    },
+    {
+      "name": "Ginseng Fruit",
+      "english_name": "Ginseng Fruit",
+      "scarcity": 9,
+      "efficacy": 9,
+      "access_level": 9,
+      "owner": "Zhenyuan Daxian (Wuzhuang Temple)",
+      "rarity_reason": "Ripens every 3000 years · only 30 per tree · smelling one gives 360 years · eating one gives 47,000 years",
+      "effect": "47,000 years of life · but must not be eaten in excess",
+      "chapter": "Chapters 24-26"
+    },
+    {
+      "name": "Taishang Laojun’s Elixir",
+      "english_name": "Laozi Elixir",
+      "scarcity": 9,
+      "efficacy": 10,
+      "access_level": 10,
+      "owner": "Taishang Laojun (Tushita Palace)",
+      "rarity_reason": "Refined personally by Laojun · limited quantity · divided into ‘Golden Elixir / Restorative Elixir / Nine-Turn Golden Elixir’ grades",
+      "effect": "Indestructible body / resurrection / instant immortality",
+      "chapter": "Chapters 5/7/39"
+    },
+    {
+      "name": "Tang Sanzang’s Flesh",
+      "english_name": "Tang Monk Flesh",
+      "scarcity": 10,
+      "efficacy": 10,
+      "access_level": 10,
+      "owner": "Tang Sanzang (reincarnation of the Golden Cicada · ten lifetimes of cultivation)",
+      "rarity_reason": "Ten lifetimes of cultivation · primal yang unspent · yin and yang united · the only one in all of Xiyouji",
+      "effect": "Immortality (legend · never actually verified · every demon failed)",
+      "chapter": "Main thread throughout · from Chapter 27"
+    },
+    {
+      "name": "Golden Hoop Release",
+      "english_name": "Golden Hoop Release",
+      "scarcity": 10,
+      "efficacy": 8,
+      "access_level": 10,
+      "owner": "Tathāgata Buddha (three golden hoops · handed over by Guanyin)",
+      "rarity_reason": "Falls off by itself after attaining Buddhahood · cannot be removed by external force · a reward for ‘project completion’",
+      "effect": "Release from bondage · gain freedom (falls off after being named Victorious Fighting Buddha)",
+      "chapter": "Chapters 8/100"
+    },
+    {
+      "name": "Heavenly River Water",
+      "english_name": "Heavenly River Water",
+      "scarcity": 6,
+      "efficacy": 6,
+      "access_level": 7,
+      "owner": "Marshal Tianpeng (Zhu Bajie) · 80,000 naval troops of the Heavenly River",
+      "rarity_reason": "Water of the Heavenly River · plentiful but requires Heaven’s authorization · invisible in the mortal world",
+      "effect": "Life extension / healing / purification · not a top-tier immortality resource",
+      "chapter": "Chapters 8/47"
+    },
+    {
+      "name": "Zhenyuan Daxian’s Ginseng Fruit (same as ginseng fruit · specifically gifted)",
+      "english_name": "Zhenyuan Gifted Ginseng Fruit",
+      "scarcity": 10,
+      "efficacy": 9,
+      "access_level": 10,
+      "owner": "Zhenyuan Daxian (gifted after becoming Wukong’s sworn brother)",
+      "rarity_reason": "Ripens every 3000 years · 2 of 30 gifted · requires a sworn-brother bond to obtain",
+      "effect": "47,000 years of life · carries a ‘personal favor’ attribute · cannot be traded",
+      "chapter": "Chapter 26"
+    },
+    {
+      "name": "Purple River Chariot",
+      "english_name": "Placenta Elixir",
+      "scarcity": 8,
+      "efficacy": 7,
+      "access_level": 9,
+      "owner": "Guanyin Bodhisattva (Purple River Chariot method) · a few senior immortals",
+      "rarity_reason": "Requires special refining · rare materials · only a few immortals know the formula",
+      "effect": "Life extension / qi replenishment · not top-tier but scarce",
+      "chapter": "Scattered in Daoist scriptures · an undercurrent in Xiyouji"
+    },
+    {
+      "name": "Nine-Turn Golden Elixir",
+      "english_name": "Nine-Turn Golden Elixir",
+      "scarcity": 9,
+      "efficacy": 10,
+      "access_level": 10,
+      "owner": "Taishang Laojun (top grade of Tushita Palace)",
+      "rarity_reason": "Nine-turn refining · Laojun’s most supreme elixir · extremely scarce · used to revive the King of Wuji",
+      "effect": "Resurrection / instant attainment of immortality",
+      "chapter": "Chapter 39"
+    },
+    {
+      "name": "Taiyi Zhenren’s Lotus Avatar",
+      "english_name": "Taiyi Lotus Avatar",
+      "scarcity": 9,
+      "efficacy": 9,
+      "access_level": 10,
+      "owner": "Taiyi Zhenren (Nezha’s master)",
+      "rarity_reason": "Requires Taiyi Zhenren to personally cast the spell · lotus root as medium · remolds the body · extremely rare",
+      "effect": "Body remolding / resurrection · Nezha took this form after death",
+      "chapter": "Chapter 83 (tracing Nezha’s origins)"
+    }
+  ],
+  "resource_stats": {
+    "total_resources": 10,
+    "avg_scarcity": 9,
+    "avg_efficacy": 8.8,
+    "avg_access_level": 9.5,
+    "rarest_resource": "Peach 9000-year tree (scarcity 10 · 9 trees in all · ripens every 9000 years)",
+    "most_efficient": "Taishang Laojun’s Elixir / Nine-Turn Golden Elixir (efficacy 10 · instant immortality / resurrection)",
+    "hardest_access": "Peach / Tang Sanzang’s Flesh / Golden Hoop Release / Nine-Turn Golden Elixir / Lotus Avatar (access_level 10 · extremely hard to obtain)",
+    "most_overhyped": "Tang Sanzang’s Flesh (legendary immortality · but no demon actually succeeded · a ‘false resource’)"
+  },
+  "resource_insights": [
+    "The 9000-year Peach is the scarcest (10) · the material basis of Heaven’s rule · controlling the peaches means controlling the immortals’ lifeline",
+    "Tang Sanzang’s Flesh — scarcity 10, yin and yang united · but its actual efficacy is doubtful · a ‘false resource’ · drives the main plot",
+    "Ginseng Fruit ripens every 3000 years · scarcity 9 · monopolized by Zhenyuan Daxian · the material basis of the loose immortals’ independence",
+    "Taishang Laojun’s elixir system (Elixir + Nine-Turn Golden Elixir) has the highest efficacy · the ‘instant immortality’ channel · held by the Daoist Patriarch",
+    "Golden Hoop Release is a ‘project reward’ resource · cannot be removed by external force · reveals Tathāgata’s logic of control over Wukong",
+    "Heavenly River Water is plentiful but only moderately effective · Zhu Bajie’s ‘hidden resource’ · not a top-tier immortality good",
+    "The Lotus Avatar is a ‘resurrection’ resource · exclusive to Nezha · reveals Taiyi Zhenren’s artifact-crafting skill",
+    "Purple River Chariot is an undercurrent resource · not the mainline but scarce · showing the immortality-resource system has a ‘gray area’",
+    "The 10 resources average scarcity 9.0 · average efficacy 8.8 · average access difficulty 9.5 · showing immortality is an extreme luxury",
+    "Heaven controls peaches + elixirs · Lingshan controls golden hoops · loose immortals control ginseng fruit · forming a ‘tripod’ immortality-resource pattern"
+  ]
+}

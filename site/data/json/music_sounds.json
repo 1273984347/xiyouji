@@ -1,0 +1,162 @@
+[
+  {
+    "name": "金箍棒破空",
+    "category": "兵器",
+    "owner": "孙悟空",
+    "sound_text": "呼呼作风响·崩崩似雷鸣",
+    "intensity": 10,
+    "frequency": "高频出现",
+    "chapter_first": 3,
+    "feature": "一万三千五百斤定海神针的破空声"
+  },
+  {
+    "name": "九齿钉耙筑",
+    "category": "兵器",
+    "owner": "猪八戒",
+    "sound_text": "咚咚·如筑土墙",
+    "intensity": 7,
+    "frequency": "中频",
+    "chapter_first": 19,
+    "feature": "神兵锋利·连筑成坑"
+  },
+  {
+    "name": "降妖宝杖",
+    "category": "兵器",
+    "owner": "沙僧",
+    "sound_text": "镗镗·似铜钟",
+    "intensity": 7,
+    "frequency": "中频",
+    "chapter_first": 22,
+    "feature": "降妖宝杖·声如铜钟"
+  },
+  {
+    "name": "九环锡杖",
+    "category": "法器",
+    "owner": "唐僧",
+    "sound_text": "哗哗·九环相击",
+    "intensity": 4,
+    "frequency": "高频出现",
+    "chapter_first": 12,
+    "feature": "九环锡杖·地藏遗物"
+  },
+  {
+    "name": "三昧真火",
+    "category": "法术",
+    "owner": "红孩儿",
+    "sound_text": "烘烘·如炉中炼",
+    "intensity": 10,
+    "frequency": "短时集中",
+    "chapter_first": 41,
+    "feature": "三昧真火·烘烘火光·烟伤人"
+  },
+  {
+    "name": "三昧神风",
+    "category": "法术",
+    "owner": "黄风怪",
+    "sound_text": "飒飒·如刮天风",
+    "intensity": 8,
+    "frequency": "短时集中",
+    "chapter_first": 21,
+    "feature": "三昧神风·吹瞎悟空眼"
+  },
+  {
+    "name": "芭蕉扇风",
+    "category": "法术",
+    "owner": "铁扇公主",
+    "sound_text": "呼呼·一扇八万四千里",
+    "intensity": 10,
+    "frequency": "高潮集中",
+    "chapter_first": 59,
+    "feature": "芭蕉扇风·灭阴火·吹飞人"
+  },
+  {
+    "name": "雷部诸神",
+    "category": "天象",
+    "owner": "邓化·张藩",
+    "sound_text": "轰隆·雷鸣电闪",
+    "intensity": 9,
+    "frequency": "车迟国斗法",
+    "chapter_first": 45,
+    "feature": "五雷法指令·降雨诸神"
+  },
+  {
+    "name": "龙吟",
+    "category": "自然",
+    "owner": "诸龙",
+    "sound_text": "吟吟·如击玉磬",
+    "intensity": 6,
+    "frequency": "龙宫场景",
+    "chapter_first": 3,
+    "feature": "龙吟·四海龙王"
+  },
+  {
+    "name": "虎啸",
+    "category": "自然",
+    "owner": "虎力·虎精",
+    "sound_text": "吼吼·震动山谷",
+    "intensity": 7,
+    "frequency": "妖王出场",
+    "chapter_first": 29,
+    "feature": "黄袍怪·虎力大仙"
+  },
+  {
+    "name": "诵经",
+    "category": "仪式",
+    "owner": "唐僧",
+    "sound_text": "喃喃·阿弥陀佛",
+    "intensity": 3,
+    "frequency": "全程",
+    "chapter_first": 12,
+    "feature": "唐僧念经·日常仪式"
+  },
+  {
+    "name": "紧箍咒",
+    "category": "仪式",
+    "owner": "唐僧念·悟空受",
+    "sound_text": "嗡嗡·头痛欲裂",
+    "intensity": 10,
+    "frequency": "中频出现",
+    "chapter_first": 14,
+    "feature": "控制信号·负反馈启动"
+  },
+  {
+    "name": "蟠桃会乐",
+    "category": "仪式",
+    "owner": "天宫",
+    "sound_text": "仙韶·钧天广乐",
+    "intensity": 10,
+    "frequency": "蟠桃宴",
+    "chapter_first": 5,
+    "feature": "天宫宴乐·钧天广乐"
+  },
+  {
+    "name": "灵山佛号",
+    "category": "仪式",
+    "owner": "如来·诸佛",
+    "sound_text": "南无·阿弥陀佛",
+    "intensity": 10,
+    "frequency": "灵山说法",
+    "chapter_first": 7,
+    "feature": "灵山佛号·万佛同声"
+  },
+  {
+    "name": "马蹄声",
+    "category": "行进",
+    "owner": "白龙马",
+    "sound_text": "嗒嗒·蹄声碎",
+    "intensity": 2,
+    "frequency": "全程",
+    "chapter_first": 15,
+    "feature": "白龙马蹄·取经路上"
+  },
+  {
+    "name": "云车驾",
+    "category": "行进",
+    "owner": "诸神",
+    "sound_text": "隆隆·云车驾",
+    "intensity": 5,
+    "frequency": "天将下凡",
+    "chapter_first": 4,
+    "feature": "云车驾·天兵降临"
+  }
+]

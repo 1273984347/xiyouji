@@ -1,0 +1,10 @@
+{
+  "board_game_players": 4,
+  "board_game_cards": 10,
+  "board_game_phases": 3,
+  "narrative_card_groups": 3,
+  "narrative_card_total": 32,
+  "example_combinations": 5,
+  "story_combinations": 1200,
+  "story_categories": 4
+}

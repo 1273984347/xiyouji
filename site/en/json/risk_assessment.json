@@ -1,0 +1,174 @@
+{
+  "concept_name": "Pilgrimage Risk Assessment",
+  "english_name": "Pilgrimage Risk Assessment",
+  "definition": "Following the PMBOK risk-management framework: risk identification / probability assessment / impact assessment / response strategy, framing the 81 tribulations as project risks",
+  "risk_categories": [
+    {
+      "category": "Monster Attack Risk",
+      "english_name": "Monster Attack Risk",
+      "count": 47,
+      "probability": "High (58% of tribulations)",
+      "impact": "Severe (team scattered / Tang Sanzang captured)",
+      "response_strategy": "Mitigate: Wukong fights + backup calls",
+      "representative_cases": [
+        "White Bone Demon",
+        "Red Boy",
+        "Yellow-Robe Demon",
+        "Gold and Silver Horn"
+      ]
+    },
+    {
+      "category": "Environmental Risk",
+      "english_name": "Environmental Risk",
+      "count": 9,
+      "probability": "Medium (11%)",
+      "impact": "Moderate (delays / resource drain)",
+      "response_strategy": "Accept: pass through directly or detour",
+      "representative_cases": [
+        "Flaming Mountain",
+        "Tongtian River",
+        "Flowing Sands River",
+        "Thorn Ridge"
+      ]
+    },
+    {
+      "category": "Political / Diplomatic Risk",
+      "english_name": "Political Risk",
+      "count": 12,
+      "probability": "Medium (15%)",
+      "impact": "Severe (misunderstood by kings / risk of execution)",
+      "response_strategy": "Mitigate: travel permits + disguise",
+      "representative_cases": [
+        "Cheshi Kingdom",
+        "Biqiu Kingdom",
+        "Miefa Kingdom",
+        "Yuhua Prefecture"
+      ]
+    },
+    {
+      "category": "Temptation / Moral Risk",
+      "english_name": "Temptation Risk",
+      "count": 8,
+      "probability": "Medium (10%)",
+      "impact": "Extreme (breaks the pilgrimage vow)",
+      "response_strategy": "Avoid: refuse directly or detour",
+      "representative_cases": [
+        "Womanland",
+        "Spider Cave",
+        "Bottomless Cave",
+        "Four Sages Testing the Mind"
+      ]
+    },
+    {
+      "category": "Internal Team Risk",
+      "english_name": "Internal Team Risk",
+      "count": 5,
+      "probability": "Low (6%)",
+      "impact": "Extreme (team split)",
+      "response_strategy": "Mitigate: Guanyin mediation + the tightening band",
+      "representative_cases": [
+        "Wukong expelled at White Bone Demon",
+        "Six-Eared Macaque",
+        "True vs. False Tang Sanzang"
+      ]
+    }
+  ],
+  "top_risks": [
+    {
+      "rank": 1,
+      "risk": "Wukong expelled at White Bone Demon",
+      "probability": 8,
+      "impact": 10,
+      "score": 80
+    },
+    {
+      "rank": 2,
+      "risk": "Six-Eared Macaque team split",
+      "probability": 4,
+      "impact": 10,
+      "score": 40
+    },
+    {
+      "rank": 3,
+      "risk": "Three demons besiege at Lion-Camel Ridge",
+      "probability": 6,
+      "impact": 9,
+      "score": 54
+    },
+    {
+      "rank": 4,
+      "risk": "Womanland queen's forced marriage",
+      "probability": 7,
+      "impact": 8,
+      "score": 56
+    },
+    {
+      "rank": 5,
+      "risk": "Flaming Mountain without the Palm-Leaf Fan",
+      "probability": 6,
+      "impact": 8,
+      "score": 48
+    },
+    {
+      "rank": 6,
+      "risk": "Red Boy's Samadhi Fire",
+      "probability": 7,
+      "impact": 8,
+      "score": 56
+    },
+    {
+      "rank": 7,
+      "risk": "Yellow-Robe Demon disguises to capture Tang Sanzang",
+      "probability": 6,
+      "impact": 9,
+      "score": 54
+    },
+    {
+      "rank": 8,
+      "risk": "Yellow-Brow Demon at Little Thunderclap Temple",
+      "probability": 5,
+      "impact": 9,
+      "score": 45
+    },
+    {
+      "rank": 9,
+      "risk": "Vajra Ring captures weapons at Jindou Mountain",
+      "probability": 6,
+      "impact": 7,
+      "score": 42
+    },
+    {
+      "rank": 10,
+      "risk": "Drowning in Tongtian River",
+      "probability": 4,
+      "impact": 9,
+      "score": 36
+    }
+  ],
+  "risk_matrix": {
+    "high_probability_high_impact": [
+      "Wukong expelled at White Bone Demon",
+      "Red Boy's Samadhi Fire"
+    ],
+    "high_probability_low_impact": [
+      "Drowning in Tongtian River",
+      "Lost at Thorn Ridge"
+    ],
+    "low_probability_high_impact": [
+      "Six-Eared Macaque",
+      "Womanland forced marriage"
+    ],
+    "low_probability_low_impact": [
+      "minor lesser demons"
+    ],
+    "overall_risk_score": 7.2,
+    "risk_management_verdict": "Medium-high · but effectively neutralized through the backup strategy · the project ultimately succeeds"
+  },
+  "risk_insights": [
+    "Monster attacks are the primary risk (58%) but can be reduced to manageable through backup calls",
+    "Internal team risk has the lowest probability but the most severe impact (expelling Wukong)",
+    "Temptation risk is rare but destructive · one failure ends the project",
+    "Political risk mostly stems from cultural conflict, resolved via travel permits",
+    "Natural-environment risk is uncontrollable but moderate in impact · pass through directly"
+  ]
+}

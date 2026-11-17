@@ -1,0 +1,92 @@
+[
+  {
+    "buzzword": "Alignment",
+    "chinese_meaning": "To align · to synchronize",
+    "xiyou_usage": "Tang Sanzang calls a team meeting: 'We must align on the mountain today — this mountain has a demonic aura.'",
+    "category": "Meeting Jargon"
+  },
+  {
+    "buzzword": "Empowerment",
+    "chinese_meaning": "To grant capability",
+    "xiyou_usage": "Guanyin gives Wukong three life-saving hairs: 'I have come specially to empower you.'",
+    "category": "Resource Support"
+  },
+  {
+    "buzzword": "Underlying Logic",
+    "chinese_meaning": "Fundamental principle",
+    "xiyou_usage": "Tathāgata explains to Wukong: 'The underlying logic of your Havoc in Heaven is actually a misplaced need for personal value and institutional recognition.'",
+    "category": "Methodology"
+  },
+  {
+    "buzzword": "Granularity",
+    "chinese_meaning": "Degree of detail",
+    "xiyou_usage": "Wukong reports: 'The granularity of the Lion-Camel Ridge demons is too coarse — three fiend kings seized the whole city.'",
+    "category": "Reporting Jargon"
+  },
+  {
+    "buzzword": "Handle",
+    "chinese_meaning": "Point of leverage",
+    "xiyou_usage": "Wukong to Bajie: 'Your rake is the handle — don't drop it!'",
+    "category": "Execution Jargon"
+  },
+  {
+    "buzzword": "Closed Loop",
+    "chinese_meaning": "Complete cycle",
+    "xiyou_usage": "Tathāgata: 'The scripture-fetching project must form a closed loop — all eighty-one tribulations are indispensable.'",
+    "category": "Methodology"
+  },
+  {
+    "buzzword": "Approach",
+    "chinese_meaning": "Strategy and method",
+    "xiyou_usage": "Wukong: 'This demon's approach is transformation plus brute force; if that fails, summon reinforcements.'",
+    "category": "Execution Jargon"
+  },
+  {
+    "buzzword": "Sedimentation",
+    "chinese_meaning": "Accumulation",
+    "xiyou_usage": "Tang Sanzang: 'After 14 years of scripture-fetching, we must sediment 5,048 scrolls of true scripture.'",
+    "category": "Methodology"
+  },
+  {
+    "buzzword": "Mental Model",
+    "chinese_meaning": "Cognitive structure",
+    "xiyou_usage": "Tathāgata: 'A restless mind and wandering will mean the mental model is not yet corrected — the Tight-Fillet Spell is needed as external intervention.'",
+    "category": "Methodology"
+  },
+  {
+    "buzzword": "Agile Development",
+    "chinese_meaning": "Rapid iteration",
+    "xiyou_usage": "Wukong: 'First scout the situation, then summon reinforcements — that is the essence of agile development.'",
+    "category": "Execution Jargon"
+  },
+  {
+    "buzzword": "MVP",
+    "chinese_meaning": "Minimum viable product",
+    "xiyou_usage": "Guanyin: 'First recruit one disciple as a trial — this is an MVP; expand the team once it works.'",
+    "category": "Project Jargon"
+  },
+  {
+    "buzzword": "OKR",
+    "chinese_meaning": "Objectives and key results",
+    "xiyou_usage": "Tathāgata sets the OKRs: O = successful scripture retrieval; KR1 = the Eighty-One Tribulations; KR2 = completed in 14 years; KR3 = 5 people promoted.",
+    "category": "Project Jargon"
+  },
+  {
+    "buzzword": "Managing Up",
+    "chinese_meaning": "Managing one's superiors",
+    "xiyou_usage": "Wukong: 'Master, stop trying to send me away — this is called managing up.'",
+    "category": "Workplace Jargon"
+  },
+  {
+    "buzzword": "Break Through",
+    "chinese_meaning": "Resolve thoroughly",
+    "xiyou_usage": "Wukong: 'This time we'll break through Lion-Camel Ridge completely — leave no lingering trouble.'",
+    "category": "Execution Jargon"
+  },
+  {
+    "buzzword": "Reuse",
+    "chinese_meaning": "Repeated use",
+    "xiyou_usage": "Wukong: 'The Tight-Fillet Spell has too high a reuse rate — it gets recited every time.'",
+    "category": "Methodology"
+  }
+]

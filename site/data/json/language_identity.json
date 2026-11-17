@@ -1,0 +1,254 @@
+{
+  "concept_name": "语言身份认同图谱",
+  "english_name": "Language Identity Map",
+  "definition": "语言身份认同（language identity）：通过分析角色的语言特征·量化其文化身份·反映三教合一",
+  "core_finding": "唐僧的语言偏佛教（梵语借词多）·悟空偏道教+市井·八戒偏市井·沙僧偏文言·如来偏佛经·诸神偏道教",
+  "character_language_profiles": [
+    {
+      "character": "唐僧",
+      "language_identity": "佛教僧侣+儒家士人",
+      "sanskrit_loanword_proportion": 25,
+      "taoist_term_proportion": 5,
+      "ming_colloquial_proportion": 20,
+      "classical_chinese_proportion": 50,
+      "buddhist_term_proportion": 30,
+      "representative_vocabulary": [
+        "南无",
+        "慈悲",
+        "出家人",
+        "戒律",
+        "善哉",
+        "阿弥陀佛"
+      ],
+      "language_features": [
+        "佛教术语多·'南无''慈悲'",
+        "文言为主·'我等''不可'",
+        "儒家修养·'不可伤生'",
+        "说教式·缓慢"
+      ],
+      "cultural_identity": "佛教僧侣+儒家士人·文化正统",
+      "identity_score_buddhist": 9,
+      "identity_score_daoist": 1,
+      "identity_score_confucian": 7,
+      "identity_score_folk": 2
+    },
+    {
+      "character": "孙悟空",
+      "language_identity": "道教行者+市井武人",
+      "sanskrit_loanword_proportion": 10,
+      "taoist_term_proportion": 35,
+      "ming_colloquial_proportion": 40,
+      "classical_chinese_proportion": 15,
+      "buddhist_term_proportion": 10,
+      "representative_vocabulary": [
+        "俺老孙",
+        "泼怪",
+        "畜生",
+        "休走",
+        "避水诀",
+        "五雷法"
+      ],
+      "language_features": [
+        "市井口语·'俺老孙''泼怪'",
+        "道教术语·'避水诀''五雷法'",
+        "武人话本·'休走''吃我一棒'",
+        "灵活切换·可佛教可道教"
+      ],
+      "cultural_identity": "道教行者+市井武人·民间英雄",
+      "identity_score_buddhist": 4,
+      "identity_score_daoist": 8,
+      "identity_score_confucian": 2,
+      "identity_score_folk": 9
+    },
+    {
+      "character": "猪八戒",
+      "language_identity": "市井俗人+道家武将",
+      "sanskrit_loanword_proportion": 5,
+      "taoist_term_proportion": 20,
+      "ming_colloquial_proportion": 60,
+      "classical_chinese_proportion": 15,
+      "buddhist_term_proportion": 10,
+      "representative_vocabulary": [
+        "俺老猪",
+        "哥啊",
+        "散伙",
+        "回高老庄",
+        "嫦娥",
+        "斋饭"
+      ],
+      "language_features": [
+        "市井口语为主·'俺老猪''哥啊'",
+        "情绪化·'散伙''回高老庄'",
+        "道教残留·'天蓬元帅'",
+        "无文言修养"
+      ],
+      "cultural_identity": "市井俗人+道家武将·最世俗",
+      "identity_score_buddhist": 3,
+      "identity_score_daoist": 6,
+      "identity_score_confucian": 1,
+      "identity_score_folk": 10
+    },
+    {
+      "character": "沙悟净",
+      "language_identity": "儒家守卫者+佛教徒",
+      "sanskrit_loanword_proportion": 15,
+      "taoist_term_proportion": 10,
+      "ming_colloquial_proportion": 30,
+      "classical_chinese_proportion": 45,
+      "buddhist_term_proportion": 20,
+      "representative_vocabulary": [
+        "大师兄",
+        "师父",
+        "万望",
+        "师兄",
+        "善哉",
+        "阿弥陀佛"
+      ],
+      "language_features": [
+        "文言为主·'万望''师兄'",
+        "佛教术语·'善哉'",
+        "礼貌·尊称",
+        "ISFJ 守卫者风格"
+      ],
+      "cultural_identity": "儒家守卫者+佛教徒·最传统",
+      "identity_score_buddhist": 7,
+      "identity_score_daoist": 2,
+      "identity_score_confucian": 8,
+      "identity_score_folk": 4
+    },
+    {
+      "character": "如来佛祖",
+      "language_identity": "佛教最高+哲学思辨",
+      "sanskrit_loanword_proportion": 40,
+      "taoist_term_proportion": 0,
+      "ming_colloquial_proportion": 0,
+      "classical_chinese_proportion": 60,
+      "buddhist_term_proportion": 70,
+      "representative_vocabulary": [
+        "南无",
+        "色不异空",
+        "空不异色",
+        "般若波罗蜜多",
+        "菩提",
+        "涅槃"
+      ],
+      "language_features": [
+        "佛经文言·'色不异空'",
+        "梵语借词·'般若波罗蜜多'",
+        "哲学思辨·'空''色'",
+        "庄严·缓慢"
+      ],
+      "cultural_identity": "佛教最高+哲学思辨·最神圣",
+      "identity_score_buddhist": 10,
+      "identity_score_daoist": 0,
+      "identity_score_confucian": 3,
+      "identity_score_folk": 0
+    },
+    {
+      "character": "观音菩萨",
+      "language_identity": "佛教慈悲+儒家礼教",
+      "sanskrit_loanword_proportion": 30,
+      "taoist_term_proportion": 5,
+      "ming_colloquial_proportion": 15,
+      "classical_chinese_proportion": 50,
+      "buddhist_term_proportion": 50,
+      "representative_vocabulary": [
+        "南无",
+        "善哉",
+        "慈悲",
+        "普度",
+        "众生",
+        "般若"
+      ],
+      "language_features": [
+        "佛教术语·'普度''众生'",
+        "儒家礼教·'善哉'",
+        "文言·庄严",
+        "慈悲式·劝慰"
+      ],
+      "cultural_identity": "佛教慈悲+儒家礼教·融合",
+      "identity_score_buddhist": 9,
+      "identity_score_daoist": 1,
+      "identity_score_confucian": 6,
+      "identity_score_folk": 2
+    },
+    {
+      "character": "太上老君",
+      "language_identity": "道教最高+道家哲学",
+      "sanskrit_loanword_proportion": 0,
+      "taoist_term_proportion": 70,
+      "ming_colloquial_proportion": 5,
+      "classical_chinese_proportion": 25,
+      "buddhist_term_proportion": 0,
+      "representative_vocabulary": [
+        "道",
+        "无",
+        "气",
+        "炼丹",
+        "金丹",
+        "符箓",
+        "阴阳"
+      ],
+      "language_features": [
+        "道教术语·'道''无''气'",
+        "道家哲学·'阴阳'",
+        "文言·简洁",
+        "炼丹术·'金丹'"
+      ],
+      "cultural_identity": "道教最高+道家哲学·最玄妙",
+      "identity_score_buddhist": 0,
+      "identity_score_daoist": 10,
+      "identity_score_confucian": 4,
+      "identity_score_folk": 1
+    },
+    {
+      "character": "玉帝",
+      "language_identity": "天庭官僚+儒家帝王",
+      "sanskrit_loanword_proportion": 5,
+      "taoist_term_proportion": 20,
+      "ming_colloquial_proportion": 15,
+      "classical_chinese_proportion": 60,
+      "buddhist_term_proportion": 5,
+      "representative_vocabulary": [
+        "准奏",
+        "圣旨",
+        "卿",
+        "赦",
+        "敕",
+        "钦此"
+      ],
+      "language_features": [
+        "公文文言·'准奏''圣旨'",
+        "儒家帝王·'卿''赦'",
+        "命令式·'敕'",
+        "官僚体制语言"
+      ],
+      "cultural_identity": "天庭官僚+儒家帝王·最正统",
+      "identity_score_buddhist": 1,
+      "identity_score_daoist": 4,
+      "identity_score_confucian": 10,
+      "identity_score_folk": 1
+    }
+  ],
+  "language_identity_insights": [
+    "8 角色语言身份图谱清晰反映三教合一",
+    "唐僧/如来/观音偏佛教·语言身份认同高（佛教 7-10 分）",
+    "悟空/老君偏道教·但悟空更市井化（道教 8-10 分·市井 9 分）",
+    "八戒最市井化（市井 10 分）·最世俗",
+    "沙僧/玉帝偏儒家·但沙僧佛教化（儒家 8 分）",
+    "角色语言身份与其 MBTI 相关：INFJ 唐僧偏佛教·ENTP 悟空偏道教+市井·ESFP 八戒偏市井·ISFJ 沙僧偏儒家",
+    "语言身份图谱反映《西游记》的三教合一思想：佛+道+儒+民间·四教融合"
+  ],
+  "language_classification_stats": {
+    "total_characters": 8,
+    "buddhist_dominant": 3,
+    "daoist_dominant": 2,
+    "confucian_dominant": 1,
+    "folk_dominant": 1,
+    "mixed": 1,
+    "avg_sanskrit_proportion": 16.25,
+    "avg_taoist_proportion": 21.25,
+    "avg_ming_colloquial_proportion": 23.75,
+    "avg_classical_chinese_proportion": 38.75
+  }
+}

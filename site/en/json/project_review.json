@@ -1,0 +1,75 @@
+{
+  "project_name": "Tang Dynasty Cultural Communications Group · Journey to the West Strategic Project",
+  "project_code": "TANG-XIYOU-14Y",
+  "duration_years": 14,
+  "sponsor": "Li Shimin (Emperor Taizong of Tang)",
+  "pm": "Tang Sanzang (Project Manager)",
+  "tech_lead": "Sun Wukong (Tech Lead)",
+  "team_size": 5,
+  "deliverables": "5048 Scrolls of the Mahāyāna Sutras",
+  "milestones": [
+    {
+      "phase": "Initiation",
+      "year": "Zhenguan Year 13",
+      "event": "Water-Land Assembly · Tang Sanzang Commissioned",
+      "kpi": "Project Initiation"
+    },
+    {
+      "phase": "Team Assembly",
+      "year": "Zhenguan Years 13–14",
+      "event": "Recruited Wukong · White Dragon · Bajie · Sha Wujing",
+      "kpi": "Team of 5 Complete"
+    },
+    {
+      "phase": "Execution",
+      "year": "Zhenguan Years 14–26",
+      "event": "The Eighty-One Tribulations",
+      "kpi": "Difficulty 81/81"
+    },
+    {
+      "phase": "Delivery",
+      "year": "Zhenguan Year 27",
+      "event": "Sutras at Lingshan · Rebirth at Lingyun Ferry",
+      "kpi": "5048 Scrolls of Sutras"
+    },
+    {
+      "phase": "Closure",
+      "year": "Zhenguan Year 27",
+      "event": "Return East · Five Saints Attain Buddhahood",
+      "kpi": "5 Promoted to Buddhahood"
+    }
+  ],
+  "budget": {
+    "Travel": "14 years on foot · zero transport costs",
+    "Lodging": "Temples and monasteries · wilderness and wild hills",
+    "Meals": "Mostly begging for alms · the occasional wild fruit",
+    "Equipment": "Brocade Kasaya · Nine-Ring Staff · Golden Cudgel · Precious Staff · Nine-toothed Rake",
+    "Insurance": "The Six Spirits and the Five Watchers · the duty-officer gods escorting all the way"
+  },
+  "risk_management": [
+    {
+      "risk": "The project manager gets eaten by a demon",
+      "probability": "High",
+      "mitigation": "The tech lead escorts at all times plus an unseen guard"
+    },
+    {
+      "risk": "Friction inside the team",
+      "probability": "Medium",
+      "mitigation": "The Headband Curse acts as a negative-feedback inhibitor"
+    },
+    {
+      "risk": "Demons with complicated backgrounds",
+      "probability": "High",
+      "mitigation": "A call-for-reinforcement mechanism and an emergency line to the Heavenly Court / Spirit Mountain"
+    }
+  ],
+  "final_review": {
+    "rating": "A+",
+    "comment": "Delivered in full · 5 promoted · sutras to Chang'an · merit complete",
+    "lessons_learned": [
+      "The negative-feedback mechanism between executor and baseline (the Headband Curse) is the key",
+      "The 'necessary accompaniment' of demons with a backstory cannot be cut",
+      "The team's mind can only be upgraded through a 'Three Strikes on the White Bone Demon' kind of crisis"
+    ]
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "concept_name": "悟空职业转型",
+  "english_name": "Wukong Career Transition",
+  "definition": "孙悟空从石猴到斗战胜佛·历经 6 个职业阶段·每阶段的雇主/薪酬/职级/满意度/离职原因反映了从'野路子'到'体制内'再到'退出江湖'的职业曲线",
+  "career_stages": [
+    {
+      "stage": 1,
+      "name": "石猴王",
+      "english_name": "Stone Monkey King",
+      "title": "花果山美猴王",
+      "employer": "花果山自治集团（创业型组织）",
+      "salary": "无薪酬·花果山收益 100% 自留·按需取用",
+      "career_level": "L0·创业者/CEO",
+      "satisfaction": 10,
+      "achievements": [
+        "建国花果山·统领 47000 只猴子",
+        "拜师菩提祖师·获得长生不老术·七十二变",
+        "强销生死簿·脱离地府管辖",
+        "龙宫借宝·获得定海神针（金箍棒）"
+      ],
+      "leaving_reason": "对天庭编制的向往·被太白金星招安诱入体制"
+    },
+    {
+      "stage": 2,
+      "name": "弼马温",
+      "english_name": "Bimawen (Keeper of Horses)",
+      "title": "御马监正堂弼马温",
+      "employer": "天庭集团（中央国企）",
+      "salary": "无明确薪酬·包吃住·有'未入流'官职",
+      "career_level": "L1·基层管理·天庭最低级官职（未入流）",
+      "satisfaction": 2,
+      "achievements": [
+        "天马繁育率提升·马匹肥壮",
+        "完成天庭最小单元业务（养马）"
+      ],
+      "leaving_reason": "得知'弼马温'是天庭最低级官职（未入流）·自尊受挫·反下天庭"
+    },
+    {
+      "stage": 3,
+      "name": "齐天大圣",
+      "english_name": "Great Sage Equal to Heaven",
+      "title": "齐天大圣（空名号无实权）",
+      "employer": "天庭集团（虚衔顾问）",
+      "salary": "无薪酬·无实权·仅'有官无禄'·只给名号",
+      "career_level": "L2·虚衔顾问·有名无实",
+      "satisfaction": 4,
+      "achievements": [
+        "获得'齐天大圣'空名号",
+        "代管蟠桃园（实为看大门+偷蟠桃）",
+        "搅乱蟠桃会·偷太上老君仙丹",
+        "大闹天宫·打败十万天兵天将"
+      ],
+      "leaving_reason": "蟠桃会未邀请暴露虚衔本质·玉帝毁约·被如来压五行山下 500 年"
+    },
+    {
+      "stage": 4,
+      "name": "取行者",
+      "english_name": "Pilgrim Sun",
+      "title": "唐三藏大徒弟·行者",
+      "employer": "灵山集团（取经项目外包团队）",
+      "salary": "无薪酬·包食宿（化缘）·期权（成佛承诺）",
+      "career_level": "L3·项目经理·执行主力",
+      "satisfaction": 6,
+      "achievements": [
+        "护送唐僧西天取经 108000 里",
+        "降妖除魔 40 余次",
+        "搬救兵 15 次构建人脉网络",
+        "完成 81 难·到达灵山"
+      ],
+      "leaving_reason": "项目完成·取经成功·获得期权兑现（成佛）"
+    },
+    {
+      "stage": 5,
+      "name": "斗战胜佛",
+      "english_name": "Victorious Fighting Buddha",
+      "title": "斗战胜佛",
+      "employer": "灵山集团（佛级合伙人）",
+      "salary": "佛果位·香火供奉·功德积累·永享尊荣",
+      "career_level": "L9·佛级高管·合伙人级",
+      "satisfaction": 9,
+      "achievements": [
+        "完成取经项目·封号斗战胜佛",
+        "紧箍咒自褪·解除束缚",
+        "位列灵山诸佛之列",
+        "成就正果·超脱轮回"
+      ],
+      "leaving_reason": "无离职·功德圆满·正式归位灵山"
+    },
+    {
+      "stage": 6,
+      "name": "退休",
+      "english_name": "Retirement",
+      "title": "退休佛（虚构推断）",
+      "employer": "无雇主·自由身·云游四海",
+      "salary": "佛果位年金·花果山信托收益·自给自足",
+      "career_level": "L10·退休·资深顾问",
+      "satisfaction": 10,
+      "achievements": [
+        "回归花果山·与猴孙团聚",
+        "云游三界·自由身",
+        "佛果位永享·无任何 KPI",
+        "与诸佛论道·传道受业"
+      ],
+      "leaving_reason": "无离职·最终归宿"
+    }
+  ],
+  "career_stats": {
+    "total_stages": 6,
+    "total_years_in_pilgrim": 14,
+    "years_under_mountain": 500,
+    "avg_satisfaction": 6.8,
+    "lowest_satisfaction": "弼马温（2 分）",
+    "highest_satisfaction": "石猴王 / 退休（10 分）",
+    "career_peak": "斗战胜佛（L9）",
+    "career_trough": "弼马温（L1·未入流）"
+  },
+  "career_insights": [
+    "悟空职业曲线是'创业-被招安-受挫-再创业-被收购-合伙人-退休'的标准路径",
+    "弼马温事件是西游世界的'35 岁危机'·基层晋升通道堵塞导致反弹",
+    "齐天大圣的'有官无禄'是天庭体制陷阱·用名号安抚但不给实权",
+    "取经项目是'股权激励'的典型·用未来期权（成佛）换取当下低薪劳动",
+    "紧箍咒是'竞业协议'·防止跳槽或反叛·项目完成后自褪",
+    "斗战胜佛封号是'合伙人晋升'·从执行者变股东",
+    "悟空最大教训：单打独斗（闹天宫）失败·团队协作（取经）成功"
+  ]
+}

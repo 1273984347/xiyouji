@@ -1,0 +1,105 @@
+{
+  "concept_name": "Typical Case Comparison",
+  "case_list": [
+    {
+      "name": "Green Ox Demon",
+      "background": "Taishang Laojun's mount",
+      "background_type": "celestial",
+      "outcome": "Laojun personally came to subdue it",
+      "survived": true,
+      "chapter": "Ch. 50–52",
+      "power": 9,
+      "crime": "Stole the Diamond Bracelet · captured the heavenly treasures · kidnapped Tang Sanzang"
+    },
+    {
+      "name": "Gold Horn & Silver Horn",
+      "background": "Taishang Laojun's alchemy boys",
+      "background_type": "disciple",
+      "outcome": "Recalled by Laojun",
+      "survived": true,
+      "chapter": "Ch. 32–35",
+      "power": 8,
+      "crime": "Wielded the Purple Gold Red Gourd and the Jade Vase · kidnapped Tang Sanzang"
+    },
+    {
+      "name": "Red Boy",
+      "background": "Son of the Bull Demon King → recruited by Guanyin",
+      "background_type": "disciple",
+      "outcome": "Taken in by Guanyin as the Boy of Wealth",
+      "survived": true,
+      "chapter": "Ch. 40–42",
+      "power": 8,
+      "crime": "Samadhi Fire · nearly burned Wukong to death"
+    },
+    {
+      "name": "Yellow Brow King",
+      "background": "Maitreya Buddha's boy",
+      "background_type": "disciple",
+      "outcome": "Recalled by Maitreya",
+      "survived": true,
+      "chapter": "Ch. 65–66",
+      "power": 9,
+      "crime": "Golden Cymbals and the Human Sack · trapped the heavenly gods and generals"
+    },
+    {
+      "name": "Nine Spirits Primordial Sage",
+      "background": "Taiyi Jiuku Tianzun's mount",
+      "background_type": "celestial",
+      "outcome": "Recalled by the Heavenly Worthy",
+      "survived": true,
+      "chapter": "Ch. 88–90",
+      "power": 10,
+      "crime": "Nine-Curve Spiral Cave · commanded six lion grandsons"
+    },
+    {
+      "name": "White Bone Demon",
+      "background": "None",
+      "background_type": "wild",
+      "outcome": "Killed",
+      "survived": false,
+      "chapter": "Ch. 27",
+      "power": 3,
+      "crime": "Three transformations to deceive Tang Sanzang · sowed discord between master and disciples"
+    },
+    {
+      "name": "Tiger Power Immortal",
+      "background": "None",
+      "background_type": "wild",
+      "outcome": "Died after losing a contest",
+      "survived": false,
+      "chapter": "Ch. 44–46",
+      "power": 5,
+      "crime": "Persecuted monks in Chechi · magic duel"
+    },
+    {
+      "name": "Spider Demon",
+      "background": "None",
+      "background_type": "wild",
+      "outcome": "Killed",
+      "survived": false,
+      "chapter": "Ch. 72–73",
+      "power": 4,
+      "crime": "Seduced at the Washing Spring · conspired with the Centipede Demon"
+    },
+    {
+      "name": "Six-Eared Macaque",
+      "background": "None (impersonation)",
+      "background_type": "wild",
+      "outcome": "Seen through and killed by the Tathāgata",
+      "survived": false,
+      "chapter": "Ch. 57–58",
+      "power": 9,
+      "crime": "Impersonated Wukong · tried to usurp the scripture-fetching achievement"
+    },
+    {
+      "name": "Scorpion Demon",
+      "background": "None",
+      "background_type": "wild",
+      "outcome": "Killed by the Solar Star Official",
+      "survived": false,
+      "chapter": "Ch. 55",
+      "power": 7,
+      "crime": "Forced marriage at Pipa Cave · stung Wukong and Bajie"
+    }
+  ]
+}

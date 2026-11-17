@@ -1,0 +1,110 @@
+[
+  {
+    "n": 5,
+    "hardship": "Encountered a Tiger Outside the City",
+    "location": "Shuangcha Ridge",
+    "alert_level": "Yellow",
+    "weather": "Mountain forest · tiger's roar",
+    "remark": "Recommend a mountain-forest allowance",
+    "delay_days": 1
+  },
+  {
+    "n": 11,
+    "hardship": "Lost the Kasaya",
+    "location": "Guanyin Monastery · Black Wind Mountain",
+    "alert_level": "Orange",
+    "weather": "Night fire · demonic aura",
+    "remark": "Equipment (kasaya) lost; recommend purchasing insurance",
+    "delay_days": 3
+  },
+  {
+    "n": 17,
+    "hardship": "Black Bear Spirit Blocks the Road",
+    "location": "Black Wind Cave",
+    "alert_level": "Orange",
+    "weather": "Black miasma pervades",
+    "remark": "Requires Sister Guanyin to mediate in person",
+    "delay_days": 2
+  },
+  {
+    "n": 27,
+    "hardship": "Three Battles with the White-Bone Demon",
+    "location": "White Tiger Ridge",
+    "alert_level": "Red",
+    "weather": "White-bone yin aura",
+    "remark": "Team infighting · the executor was expelled",
+    "delay_days": 7
+  },
+  {
+    "n": 41,
+    "hardship": "Red Boy · Samādhi Fire",
+    "location": "Fire-Cloud Cave, Mount Hao",
+    "alert_level": "Red · Extreme Heat",
+    "weather": "Extreme-heat red alert",
+    "remark": "Recommend a heat allowance",
+    "delay_days": 5
+  },
+  {
+    "n": 47,
+    "hardship": "Tongtian River · Goldfish Spirit",
+    "location": "Tongtian River",
+    "alert_level": "Red · Flood",
+    "weather": "Walking on ice · then a flood",
+    "remark": "Force majeure (flood) encountered; trip delayed",
+    "delay_days": 4
+  },
+  {
+    "n": 50,
+    "hardship": "Gold-Bangle Cave · Vajra Snare",
+    "location": "Mount Jindou",
+    "alert_level": "Red",
+    "weather": "A myriad golden rays",
+    "remark": "The gods' weapons were snared · requires Laojun to descend",
+    "delay_days": 6
+  },
+  {
+    "n": 59,
+    "hardship": "Borrowing the Plantain Fan Thrice",
+    "location": "Flaming Mountain · Plantain Cave",
+    "alert_level": "Red · Extreme Heat",
+    "weather": "Eight hundred li of Flaming Mountain",
+    "remark": "Extreme heat · recommend heat allowance + heat-relief supplies",
+    "delay_days": 8
+  },
+  {
+    "n": 65,
+    "hardship": "Little Thunderclap Monastery · Yellow-Browed Demon",
+    "location": "Little Western Paradise",
+    "alert_level": "Red · False Buddha",
+    "weather": "False Buddha's halo",
+    "remark": "All the gods trapped in the Human-Seed Pouch · requires Maitreya to descend",
+    "delay_days": 7
+  },
+  {
+    "n": 74,
+    "hardship": "The Three Demon Kings of Lion-Camel Ridge",
+    "location": "Lion-Camel Ridge · Lion-Camel Kingdom",
+    "alert_level": "SSS · Citywide Emergency",
+    "weather": "Skulls piled like a ridge",
+    "remark": "Citywide state of emergency · SSS alert level · Tathāgata descends",
+    "delay_days": 12
+  },
+  {
+    "n": 82,
+    "hardship": "Bottomless Cave · Rat Spirit",
+    "location": "Mount Xiankong",
+    "alert_level": "Red",
+    "weather": "Black miasma over the mountain",
+    "remark": "Adopted daughter of Heavenly King Li · requires ancestral tablet mediation",
+    "delay_days": 4
+  },
+  {
+    "n": 91,
+    "hardship": "Azure Dragon Mountain · Three Rhinoceroses",
+    "location": "Azure Dragon Mountain",
+    "alert_level": "Orange",
+    "weather": "Chilling cold light",
+    "remark": "Stole 50,000 jin of aromatic oil · requires the Four Stars to subdue",
+    "delay_days": 5
+  }
+]

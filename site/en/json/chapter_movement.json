@@ -1,0 +1,34 @@
+[
+  {
+    "movement": "Movement I · Overture",
+    "chapters": "1-12",
+    "tempo": "Allegro · fast",
+    "duration_chapters": 12,
+    "feature": "Stone monkey born · learns his arts · Havoc in Heaven · Five Elements Mountain · the pilgrim appointed",
+    "musical_parallel": "Beethoven's Ninth · first movement · grand overture"
+  },
+  {
+    "movement": "Movement II · Recruiting Disciples",
+    "chapters": "13-22",
+    "tempo": "Andante · walking pace",
+    "duration_chapters": 10,
+    "feature": "Depart Chang'an · take Wukong, the White Dragon, Bajie, and Sha Wujing · the five assemble",
+    "musical_parallel": "Haydn's Creation · the chorus-forming passage"
+  },
+  {
+    "movement": "Movement III · The Eighty-One Ordeals",
+    "chapters": "23-97",
+    "tempo": "Allegro-Presto · fast-presto alternating",
+    "duration_chapters": 75,
+    "feature": "the eighty-one ordeals, a symphony of climax-calm-climax",
+    "musical_parallel": "Mahler's Fifth · symphonic middle section · interwoven variations"
+  },
+  {
+    "movement": "Movement IV · Coda",
+    "chapters": "98-100",
+    "tempo": "Maestoso · solemn",
+    "duration_chapters": 3,
+    "feature": "shedding the mortal form at Lingyun Ferry · scripture retrieval at Spirit Mountain · the five attain Buddhahood",
+    "musical_parallel": "Beethoven's Ninth · fourth movement · solemn ode"
+  }
+]

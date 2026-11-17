@@ -1,0 +1,170 @@
+[
+  {
+    "scene": "Water Curtain Cave of Flower-Fruit Mountain",
+    "chapter": 1,
+    "style": "Freehand · Wild",
+    "colors": [
+      "Dark Green",
+      "Golden Light",
+      "Ink Black"
+    ],
+    "level": 8,
+    "feature": "Heaven-born and earth-raised · wild and thriving · a blessed grotto-heaven"
+  },
+  {
+    "scene": "Lingxiao Hall of the Heavenly Palace",
+    "chapter": 4,
+    "style": "Solemn · Supreme",
+    "colors": [
+      "Buddha Gold",
+      "Vermilion",
+      "Ink Black"
+    ],
+    "level": 10,
+    "feature": "Gilded and resplendent · imperial majesty · canopies like clouds"
+  },
+  {
+    "scene": "Peach Garden",
+    "chapter": 5,
+    "style": "Immortal Realm · Sacred Garden",
+    "colors": [
+      "Jade Cyan",
+      "Buddha Gold",
+      "Pinkish White"
+    ],
+    "level": 10,
+    "feature": "Peach blossoms aglow · brimming with spiritual energy · orchard of immortality"
+  },
+  {
+    "scene": "Tushita Palace of Lord Lao",
+    "chapter": 5,
+    "style": "Daoist · Alchemy",
+    "colors": [
+      "Ink Black",
+      "Golden Light",
+      "Vermilion"
+    ],
+    "level": 10,
+    "feature": "Eight-Trigram furnace fire · golden elixir aura · the Dao patriarch’s quiet cultivation"
+  },
+  {
+    "scene": "Five Elements Mountain",
+    "chapter": 7,
+    "style": "Horror · Suppression",
+    "colors": [
+      "Earth Yellow",
+      "Ink Black",
+      "Bone White"
+    ],
+    "level": 3,
+    "feature": "Five fingers become a mountain · suppressing the Great Sage · bleak and tragic"
+  },
+  {
+    "scene": "Flowing Sands River",
+    "chapter": 22,
+    "style": "Horror · Perilous",
+    "colors": [
+      "Azure Water",
+      "Bone White",
+      "Ink Black"
+    ],
+    "level": 2,
+    "feature": "Turbid waves a thousand yards deep · skulls adrift · dense demonic aura"
+  },
+  {
+    "scene": "White Tiger Ridge",
+    "chapter": 27,
+    "style": "Horror · Grim",
+    "colors": [
+      "Bone White",
+      "Ink Black",
+      "Dark Green"
+    ],
+    "level": 2,
+    "feature": "Lady White Bone · three strikes and transformations · yin gloom over the mountain"
+  },
+  {
+    "scene": "Flaming Mountain",
+    "chapter": 59,
+    "style": "Blazing · Flame-Red",
+    "colors": [
+      "Vermilion",
+      "Ink Black",
+      "Golden Light"
+    ],
+    "level": 4,
+    "feature": "Eight hundred li of flame · not a blade of grass · quenched only by the plantain fan"
+  },
+  {
+    "scene": "Little Thunderclap Monastery",
+    "chapter": 65,
+    "style": "Solemn · Deceptive",
+    "colors": [
+      "Buddha Gold",
+      "Buddha-Figure Purple",
+      "Ink Black"
+    ],
+    "level": 8,
+    "feature": "A false Thunderclap Monastery · a solemn hall · in truth a demon lair"
+  },
+  {
+    "scene": "Lion-Camel Ridge",
+    "chapter": 74,
+    "style": "Horror · Bloody",
+    "colors": [
+      "Bone White",
+      "Vermilion",
+      "Ink Black"
+    ],
+    "level": 1,
+    "feature": "Skulls piled like ridges · human bones like kindling · the largest demon lair"
+  },
+  {
+    "scene": "Kingdom of Women",
+    "chapter": 54,
+    "style": "Marketplace · Gorgeous",
+    "colors": [
+      "Pinkish White",
+      "Vermilion",
+      "Jade Cyan"
+    ],
+    "level": 7,
+    "feature": "A land without men · a splendid palace · a trial of desire"
+  },
+  {
+    "scene": "Tianzhu Royal Palace",
+    "chapter": 95,
+    "style": "Exotic · Splendid",
+    "colors": [
+      "Buddha Gold",
+      "Buddha-Figure Purple",
+      "Pinkish White"
+    ],
+    "level": 9,
+    "feature": "The Tianzhu princess · the Jade Rabbit in disguise · exotic allure"
+  },
+  {
+    "scene": "Thunderclap Monastery of Spirit Mountain",
+    "chapter": 98,
+    "style": "Solemn · Buddha Land",
+    "colors": [
+      "Buddha Gold",
+      "Buddha-Figure Purple",
+      "Jade Cyan"
+    ],
+    "level": 10,
+    "feature": "The true Thunderclap Monastery · the Buddha preaching · myriad Buddhas paying homage"
+  },
+  {
+    "scene": "Cloud-Crossing Ferry",
+    "chapter": 98,
+    "style": "Reborn · Transcendent",
+    "colors": [
+      "Azure Water",
+      "Buddha Gold",
+      "Bone White"
+    ],
+    "level": 9,
+    "feature": "A single-log bridge · a bottomless boat · casting off the old self"
+  }
+]

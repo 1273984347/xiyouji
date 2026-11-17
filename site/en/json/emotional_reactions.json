@@ -1,0 +1,1282 @@
+[
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 1,
+    "hardship": "The Stone Monkey Is Born",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "A heaven-born stone monkey, pure childlike mind. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 2,
+    "hardship": "Wukong Learns the Arts",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "A heart that seeks the Way — the truth of the childlike mind. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 5,
+    "hardship": "The Great Sage Steals the Elixir",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "Stealing elixir and peach — playfulness to the utmost, childlike mind to the utmost. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 7,
+    "hardship": "The Great Sage Escapes the Eight Trigrams Furnace",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "The furnace forges fiery eyes and golden pupils; the childlike mind is not burned away. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 8,
+    "hardship": "The Buddha Lays a Plan",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Tathagata's single palm stills the mind-ape — a playful stroke of the author. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 12,
+    "hardship": "Xuanzang Appears",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The origin of the scripture quest — passing narrative. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 14,
+    "hardship": "Subduing Wukong",
+    "sentiment": "negative",
+    "intensity": 7,
+    "quote": "The mind-ape returns to the right; the childlike mind is everywhere restrained — lamentable. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 17,
+    "hardship": "The Black Bear Spirit",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The black bear steals the cassock — mere worldly sentiment. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 22,
+    "hardship": "Subduing Sha Wujing",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "All three disciples assembled — formulaic writing. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 24,
+    "hardship": "The Ginseng Fruit of Five Villages Monastery",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Toppling the ginseng-fruit tree — the childlike mind dares. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 27,
+    "hardship": "Thrice Beating the White Bone Demon",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Seeing through the demon — the childlike mind is not deceived. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 32,
+    "hardship": "The Gold and Silver Horns of Lotus Cave",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Winning the treasures by wit — playful brushwork. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 45,
+    "hardship": "The Contest of Magic in Chechi Kingdom",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Winning the magic contest over the demon priests — the childlike mind is fearless. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 53,
+    "hardship": "The Woman's Kingdom",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "Hard to break the pass of love; the childlike mind shows true feeling. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 59,
+    "hardship": "Flaming Mountain",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Borrowing the fan to steer the wind — the delight of play. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 65,
+    "hardship": "The Yellow-Browed Demon",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The ordeal of the Lesser Thunderclap — even the Buddha turns demon. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 74,
+    "hardship": "Lion Camel Ridge",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Three demons joined in force — an allegory of the worldly. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 78,
+    "hardship": "Bhiksu Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Saving the one thousand one hundred and eleven children — the childlike mind's great compassion. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 88,
+    "hardship": "Taking Disciples in Yuhua Prefecture",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Taking disciples and transmitting the Dharma — plain writing. (pastiche)"
+  },
+  {
+    "scholar": "Li Zhuowu",
+    "chapter": 100,
+    "hardship": "The Scripture Quest Fulfilled",
+    "sentiment": "negative",
+    "intensity": 6,
+    "quote": "The mind-ape submits and becomes Buddha — the sorrow of the childlike mind. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 1,
+    "hardship": "The Stone Monkey Is Born",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "A striking opening — the wonder of writing lies wholly in having no fixed rule. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 2,
+    "hardship": "Wukong Learns the Arts",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The apprenticeship passage — rigorously disciplined composition. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 5,
+    "hardship": "The Great Sage Steals the Elixir",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Unrestrained brushwork — the hand of a Book of Genius. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 7,
+    "hardship": "The Great Sage Escapes the Eight Trigrams Furnace",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "The Eight Trigrams Furnace passage — perfectly judged heat. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 8,
+    "hardship": "The Buddha Lays a Plan",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Tathagata lays a plan — a turn in the narrative. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 12,
+    "hardship": "Xuanzang Appears",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The great Land-and-Water assembly — nothing remarkable. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 14,
+    "hardship": "Subduing Wukong",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The mind-ape returns to the right — the narrative gathers itself. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 17,
+    "hardship": "The Black Bear Spirit",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Black Wind Mountain passage — plain and solid writing. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 22,
+    "hardship": "Subduing Sha Wujing",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Taking a disciple at Flowing Sand River — formulaic. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 24,
+    "hardship": "The Ginseng Fruit of Five Villages Monastery",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The ginseng fruit at Five Villages Monastery — a wonderfully fanciful construction. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 27,
+    "hardship": "Thrice Beating the White Bone Demon",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "Thrice Beating the White Bone Demon — the very height of literary art. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 32,
+    "hardship": "The Gold and Silver Horns of Lotus Cave",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "The Gold and Silver Horns — a narrative full of twists. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 45,
+    "hardship": "The Contest of Magic in Chechi Kingdom",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "The magic-contest passage — the author's mind at its most original. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 53,
+    "hardship": "The Woman's Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The Woman's Kingdom passage — gentle, exquisite sentiment. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 59,
+    "hardship": "Flaming Mountain",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Borrowing the palm-leaf fan thrice — narrative momentum like a rising tide. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 65,
+    "hardship": "The Yellow-Browed Demon",
+    "sentiment": "neutral",
+    "intensity": 6,
+    "quote": "The Lesser Thunderclap — the meaning slightly repetitive. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 74,
+    "hardship": "Lion Camel Ridge",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The three demons of Lion Camel Ridge — a grand spectacle of writing. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 78,
+    "hardship": "Bhiksu Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Saving the children of Bhiksu — a compassionate literary mind. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 88,
+    "hardship": "Taking Disciples in Yuhua Prefecture",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Taking disciples in Yuhua Prefecture — the narrative gradually eases. (pastiche)"
+  },
+  {
+    "scholar": "Jin Shengtan",
+    "chapter": 100,
+    "hardship": "The Scripture Quest Fulfilled",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Becoming Buddha and patriarch — a complete ending but short on marvel. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 1,
+    "hardship": "The Stone Monkey Is Born",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The stone monkey is born transformed — gods and demons all have human feeling. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 2,
+    "hardship": "Wukong Learns the Arts",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The apprenticeship passage — one sees the stone of another mountain. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 5,
+    "hardship": "The Great Sage Steals the Elixir",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The author's temperament was again fond of farce, so that even amid matters of transformation and illusion... (historical)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 7,
+    "hardship": "The Great Sage Escapes the Eight Trigrams Furnace",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Gods and demons all have human feeling; spirits and monsters too know the ways of the world. (historical)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 8,
+    "hardship": "The Buddha Lays a Plan",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Tathagata stilling the mind-ape — a structural necessity of the author. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 12,
+    "hardship": "Xuanzang Appears",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The origin of the scripture quest — history and fiction interwoven. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 14,
+    "hardship": "Subduing Wukong",
+    "sentiment": "negative",
+    "intensity": 6,
+    "quote": "The mind-ape returns to the right; from here on it loses its wild nature. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 17,
+    "hardship": "The Black Bear Spirit",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The black-bear-spirit passage — also versed in the ways of the world. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 22,
+    "hardship": "Subduing Sha Wujing",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The three disciples all gathered — a structural inevitability. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 24,
+    "hardship": "The Ginseng Fruit of Five Villages Monastery",
+    "sentiment": "positive",
+    "intensity": 6,
+    "quote": "The Five Villages Monastery passage — often mixed with jesting words. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 27,
+    "hardship": "Thrice Beating the White Bone Demon",
+    "sentiment": "negative",
+    "intensity": 7,
+    "quote": "Tang Sanzang is muddled — a counterexample to the gods-and-demons knowing the ways of the world. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 32,
+    "hardship": "The Gold and Silver Horns of Lotus Cave",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Lotus Cave passage — also a work of play. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 45,
+    "hardship": "The Contest of Magic in Chechi Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The magic contest of Chechi — satirizing the rivalry of Buddhism and Daoism. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 53,
+    "hardship": "The Woman's Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The Woman's Kingdom passage — the utmost in worldly human feeling. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 59,
+    "hardship": "Flaming Mountain",
+    "sentiment": "neutral",
+    "intensity": 6,
+    "quote": "The Flaming Mountain passage — also playful brushwork. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 65,
+    "hardship": "The Yellow-Browed Demon",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Lesser Thunderclap — a stock device of the gods-and-demons novel. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 74,
+    "hardship": "Lion Camel Ridge",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Lion Camel Ridge — both gods-and-demons and worldly wisdom. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 78,
+    "hardship": "Bhiksu Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Saving the children in Bhiksu Kingdom — worldly human feeling. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 88,
+    "hardship": "Taking Disciples in Yuhua Prefecture",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Yuhua Prefecture — the writing grows weary. (pastiche)"
+  },
+  {
+    "scholar": "Lu Xun",
+    "chapter": 100,
+    "hardship": "The Scripture Quest Fulfilled",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Becoming Buddha and patriarch — a playful conclusion. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 1,
+    "hardship": "The Stone Monkey Is Born",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Stone Monkey's birth — rich in mythological color. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 2,
+    "hardship": "Wukong Learns the Arts",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The apprenticeship passage — unremarkable. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 5,
+    "hardship": "The Great Sage Steals the Elixir",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The elixir-stealing passage — a work of play. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 7,
+    "hardship": "The Great Sage Escapes the Eight Trigrams Furnace",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Eight Trigrams Furnace — also playful brushwork. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 8,
+    "hardship": "The Buddha Lays a Plan",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The Buddha's plan — a structural necessity. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 12,
+    "hardship": "Xuanzang Appears",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Xuanzang appears — history and fiction interwoven. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 14,
+    "hardship": "Subduing Wukong",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The subduing of Wukong — a structural necessity of the author. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 17,
+    "hardship": "The Black Bear Spirit",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The black-bear-spirit passage — plain. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 22,
+    "hardship": "Subduing Sha Wujing",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Taking a disciple at Flowing Sand River — formulaic. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 24,
+    "hardship": "The Ginseng Fruit of Five Villages Monastery",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Five Villages Monastery — also a work of play. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 27,
+    "hardship": "Thrice Beating the White Bone Demon",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Thrice Beating the White Bone Demon — a work of play. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 32,
+    "hardship": "The Gold and Silver Horns of Lotus Cave",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Lotus Cave — also play. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 45,
+    "hardship": "The Contest of Magic in Chechi Kingdom",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Chechi Kingdom — satirical writing. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 53,
+    "hardship": "The Woman's Kingdom",
+    "sentiment": "positive",
+    "intensity": 6,
+    "quote": "The Woman's Kingdom — feeling glimpsed within the play. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 59,
+    "hardship": "Flaming Mountain",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Flaming Mountain — playful brushwork. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 65,
+    "hardship": "The Yellow-Browed Demon",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The Yellow-Browed Demon — also a stock formula. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 74,
+    "hardship": "Lion Camel Ridge",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Lion Camel Ridge — tediously long. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 78,
+    "hardship": "Bhiksu Kingdom",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Bhiksu Kingdom — also play. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 88,
+    "hardship": "Taking Disciples in Yuhua Prefecture",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Yuhua Prefecture — plain. (pastiche)"
+  },
+  {
+    "scholar": "Hu Shi",
+    "chapter": 100,
+    "hardship": "The Scripture Quest Fulfilled",
+    "sentiment": "positive",
+    "intensity": 6,
+    "quote": "Journey to the West is a work of play. (historical)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 1,
+    "hardship": "The Stone Monkey Is Born",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "The stone monkey rebels — to rebel is justified. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 2,
+    "hardship": "Wukong Learns the Arts",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Wukong learns the arts — arming the mind. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 5,
+    "hardship": "The Great Sage Steals the Elixir",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "Havoc in Heaven — to rebel is justified. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 7,
+    "hardship": "The Great Sage Escapes the Eight Trigrams Furnace",
+    "sentiment": "positive",
+    "intensity": 10,
+    "quote": "The golden monkey rouses his thousand-catty cudgel; the jade firmament is cleansed of ten thousand li of dust. (historical)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 8,
+    "hardship": "The Buddha Lays a Plan",
+    "sentiment": "negative",
+    "intensity": 6,
+    "quote": "The Buddha's suppression — an allegory of the reactionaries. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 12,
+    "hardship": "Xuanzang Appears",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Xuanzang appears — a passing scene. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 14,
+    "hardship": "Subduing Wukong",
+    "sentiment": "negative",
+    "intensity": 7,
+    "quote": "The mind-ape is tamed — a pity. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 17,
+    "hardship": "The Black Bear Spirit",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The black bear passage — an allegory of struggle. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 22,
+    "hardship": "Subduing Sha Wujing",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The three disciples band together. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 24,
+    "hardship": "The Ginseng Fruit of Five Villages Monastery",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Five Villages Monastery — a passing scene. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 27,
+    "hardship": "Thrice Beating the White Bone Demon",
+    "sentiment": "positive",
+    "intensity": 10,
+    "quote": "Today we hail the Great Sage Sun, for the demon mist has come again. (historical)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 32,
+    "hardship": "The Gold and Silver Horns of Lotus Cave",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The wits duel at Lotus Cave — worth learning from. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 45,
+    "hardship": "The Contest of Magic in Chechi Kingdom",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Shattering superstition, fighting to the end. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 53,
+    "hardship": "The Woman's Kingdom",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The beautiful-woman pass — beware the sugar-coated bullet. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 59,
+    "hardship": "Flaming Mountain",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "Flaming Mountain — an allegory of the people's struggle. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 65,
+    "hardship": "The Yellow-Browed Demon",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The Yellow-Browed Demon — beware false revolution. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 74,
+    "hardship": "Lion Camel Ridge",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Lion Camel Ridge — an allegory of the three great mountains. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 78,
+    "hardship": "Bhiksu Kingdom",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Saving the little ones — save the children. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 88,
+    "hardship": "Taking Disciples in Yuhua Prefecture",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Yuhua Prefecture — a passing scene. (pastiche)"
+  },
+  {
+    "scholar": "Mao Zedong",
+    "chapter": 100,
+    "hardship": "The Scripture Quest Fulfilled",
+    "sentiment": "neutral",
+    "intensity": 6,
+    "quote": "Becoming Buddha and patriarch — the revolution succeeds but compromises. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 1,
+    "hardship": "The Stone Monkey Is Born",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "The Stone Monkey's birth — the embodiment of freedom. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 2,
+    "hardship": "Wukong Learns the Arts",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The apprenticeship passage — the beginning of the quest for freedom. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 5,
+    "hardship": "The Great Sage Steals the Elixir",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Stealing the elixir — humor at its height. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 7,
+    "hardship": "The Great Sage Escapes the Eight Trigrams Furnace",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The Eight Trigrams Furnace — freedom is not burned away. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 8,
+    "hardship": "The Buddha Lays a Plan",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Buddha's plan — the author's structure. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 12,
+    "hardship": "Xuanzang Appears",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Xuanzang's passing scene. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 14,
+    "hardship": "Subduing Wukong",
+    "sentiment": "negative",
+    "intensity": 5,
+    "quote": "The mind-ape is tamed — freedom restrained. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 17,
+    "hardship": "The Black Bear Spirit",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The black bear spirit — an allegory of the worldly. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 22,
+    "hardship": "Subduing Sha Wujing",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The three disciples all assembled. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 24,
+    "hardship": "The Ginseng Fruit of Five Villages Monastery",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Five Villages Monastery — a delightful construction of humor. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 27,
+    "hardship": "Thrice Beating the White Bone Demon",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Thrice Beating the White Bone Demon — keen discernment of character. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 32,
+    "hardship": "The Gold and Silver Horns of Lotus Cave",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Lotus Cave — playful brushwork. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 45,
+    "hardship": "The Contest of Magic in Chechi Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Chechi Kingdom — humorous satire. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 53,
+    "hardship": "The Woman's Kingdom",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "The Woman's Kingdom — human feeling at its finest. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 59,
+    "hardship": "Flaming Mountain",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Flaming Mountain — the delight of quick wit. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 65,
+    "hardship": "The Yellow-Browed Demon",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Yellow-Browed Demon — a passing scene. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 74,
+    "hardship": "Lion Camel Ridge",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Lion Camel Ridge — drawn out. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 78,
+    "hardship": "Bhiksu Kingdom",
+    "sentiment": "positive",
+    "intensity": 6,
+    "quote": "Saving the children — a compassionate brush. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 88,
+    "hardship": "Taking Disciples in Yuhua Prefecture",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Yuhua Prefecture — plain. (pastiche)"
+  },
+  {
+    "scholar": "Lin Yutang",
+    "chapter": 100,
+    "hardship": "The Scripture Quest Fulfilled",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Becoming Buddha — a leisurely conclusion. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 1,
+    "hardship": "The Stone Monkey Is Born",
+    "sentiment": "neutral",
+    "intensity": 6,
+    "quote": "The stone monkey born transformed — one of those the Master did not speak of. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 2,
+    "hardship": "Wukong Learns the Arts",
+    "sentiment": "positive",
+    "intensity": 6,
+    "quote": "Learning the arts — again one sees the stone of another mountain. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 5,
+    "hardship": "The Great Sage Steals the Elixir",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Stealing the elixir — also play. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 7,
+    "hardship": "The Great Sage Escapes the Eight Trigrams Furnace",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The Eight Trigrams Furnace — a deep repository of what the Master did not speak of. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 8,
+    "hardship": "The Buddha Lays a Plan",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Buddha's plan — structure. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 12,
+    "hardship": "Xuanzang Appears",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Xuanzang appears — historical fact blended in. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 14,
+    "hardship": "Subduing Wukong",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Subduing Wukong — a structural necessity. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 17,
+    "hardship": "The Black Bear Spirit",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "The black bear — flat writing. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 22,
+    "hardship": "Subduing Sha Wujing",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Subduing Sha Wujing — formula. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 24,
+    "hardship": "The Ginseng Fruit of Five Villages Monastery",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Five Villages Monastery — the art of learned allusion. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 27,
+    "hardship": "Thrice Beating the White Bone Demon",
+    "sentiment": "neutral",
+    "intensity": 6,
+    "quote": "The thrice-beating — an allegory of worldly wisdom. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 32,
+    "hardship": "The Gold and Silver Horns of Lotus Cave",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Lotus Cave — also uses allusion. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 45,
+    "hardship": "The Contest of Magic in Chechi Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Chechi Kingdom — satirical writing. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 53,
+    "hardship": "The Woman's Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The Woman's Kingdom — an allegory of erudition. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 59,
+    "hardship": "Flaming Mountain",
+    "sentiment": "neutral",
+    "intensity": 6,
+    "quote": "Flaming Mountain — also uses allusion. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 65,
+    "hardship": "The Yellow-Browed Demon",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Yellow-Browed Demon — also a stock formula. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 74,
+    "hardship": "Lion Camel Ridge",
+    "sentiment": "positive",
+    "intensity": 6,
+    "quote": "Lion Camel Ridge — an allegory of the age. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 78,
+    "hardship": "Bhiksu Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Bhiksu Kingdom — satire at its sharpest. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 88,
+    "hardship": "Taking Disciples in Yuhua Prefecture",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Yuhua Prefecture — plain. (pastiche)"
+  },
+  {
+    "scholar": "Qian Zhongshu",
+    "chapter": 100,
+    "hardship": "The Scripture Quest Fulfilled",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Becoming Buddha — a leisurely closing stroke. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 1,
+    "hardship": "The Stone Monkey Is Born",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "The Stone Monkey's birth — the beginning of romance. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 2,
+    "hardship": "Wukong Learns the Arts",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Learning the arts — a romanticist's brush. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 5,
+    "hardship": "The Great Sage Steals the Elixir",
+    "sentiment": "positive",
+    "intensity": 9,
+    "quote": "Stealing the elixir — romantic rebellion. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 7,
+    "hardship": "The Great Sage Escapes the Eight Trigrams Furnace",
+    "sentiment": "positive",
+    "intensity": 10,
+    "quote": "The Eight Trigrams Furnace — romanticism at its peak. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 8,
+    "hardship": "The Buddha Lays a Plan",
+    "sentiment": "negative",
+    "intensity": 6,
+    "quote": "The Buddha's suppression — an allegory of reaction. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 12,
+    "hardship": "Xuanzang Appears",
+    "sentiment": "neutral",
+    "intensity": 4,
+    "quote": "Xuanzang's passing scene. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 14,
+    "hardship": "Subduing Wukong",
+    "sentiment": "negative",
+    "intensity": 7,
+    "quote": "The mind-ape is tamed — the sorrow of romance. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 17,
+    "hardship": "The Black Bear Spirit",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The black bear — a passing scene. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 22,
+    "hardship": "Subduing Sha Wujing",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The three disciples assemble. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 24,
+    "hardship": "The Ginseng Fruit of Five Villages Monastery",
+    "sentiment": "neutral",
+    "intensity": 6,
+    "quote": "Five Villages Monastery — romance slightly dimmed. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 27,
+    "hardship": "Thrice Beating the White Bone Demon",
+    "sentiment": "negative",
+    "intensity": 9,
+    "quote": "Man and monster reversed, right and wrong confused; merciful to the enemy, harsh to friends. (historical)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 32,
+    "hardship": "The Gold and Silver Horns of Lotus Cave",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Lotus Cave — plain. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 45,
+    "hardship": "The Contest of Magic in Chechi Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Chechi Kingdom — romantic struggle. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 53,
+    "hardship": "The Woman's Kingdom",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "The Woman's Kingdom — a romantic brush. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 59,
+    "hardship": "Flaming Mountain",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Flaming Mountain — romance at its height. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 65,
+    "hardship": "The Yellow-Browed Demon",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "The Yellow Brow — a passing scene. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 74,
+    "hardship": "Lion Camel Ridge",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Lion Camel Ridge — an allegory of struggle. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 78,
+    "hardship": "Bhiksu Kingdom",
+    "sentiment": "positive",
+    "intensity": 8,
+    "quote": "Saving the children — romantic compassion. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 88,
+    "hardship": "Taking Disciples in Yuhua Prefecture",
+    "sentiment": "neutral",
+    "intensity": 5,
+    "quote": "Yuhua Prefecture — plain. (pastiche)"
+  },
+  {
+    "scholar": "Guo Moruo",
+    "chapter": 100,
+    "hardship": "The Scripture Quest Fulfilled",
+    "sentiment": "positive",
+    "intensity": 7,
+    "quote": "Becoming Buddha — a romantic conclusion. (pastiche)"
+  }
+]

@@ -1,0 +1,212 @@
+{
+  "concept_name": "坐骑下凡全档案",
+  "english_name": "Mount Desertion Archive",
+  "definition": "西游世界 10 起坐骑/天神下凡案件·揭示'有背景的妖怪与无背景的妖怪判决差异巨大'·是西游司法社会学的核心案例",
+  "desertion_cases": [
+    {
+      "name": "青牛精",
+      "english_name": "Green Ox Demon",
+      "original_owner": "太上老君",
+      "owner_rank": "三清之一·道祖",
+      "descent_reason": "童子看管不严·青牛趁牛栏未锁偷跑下界",
+      "time_on_earth_years": 7,
+      "crimes_committed": [
+        "偷盗金刚琢",
+        "套取金箍棒等法宝",
+        "绑架唐僧",
+        "对抗诸天神将"
+      ],
+      "final_outcome": "太上老君亲自下界收走·带回兜率宫",
+      "sentence_severity": 2,
+      "chapter": "第 50-52 回",
+      "legal_analysis": "原主轻判·象征性教育后继续服役·无实质惩罚"
+    },
+    {
+      "name": "金鱼精",
+      "english_name": "Goldfish Demon",
+      "original_owner": "观音菩萨",
+      "owner_rank": "四大菩萨之首",
+      "descent_reason": "观音莲花池中金鱼·趁观音不在浮头听经成精·后下界作怪",
+      "time_on_earth_years": 6,
+      "crimes_committed": [
+        "通天河每年吃童男童女",
+        "绑架唐僧",
+        "冰冻通天河陷害取经人"
+      ],
+      "final_outcome": "观音用竹篮收回归莲池",
+      "sentence_severity": 3,
+      "chapter": "第 47-49 回",
+      "legal_analysis": "原主带走·无惩罚·仅回归原岗位"
+    },
+    {
+      "name": "金毛犼",
+      "english_name": "Golden-haired Hou",
+      "original_owner": "观音菩萨",
+      "owner_rank": "四大菩萨之首",
+      "descent_reason": "牧童睡着·金毛犼咬断绳索逃下界",
+      "time_on_earth_years": 3,
+      "crimes_committed": [
+        "抢朱紫国皇后",
+        "绑架唐僧",
+        "以紫金铃法术威胁"
+      ],
+      "final_outcome": "观音亲自收回·带回南海",
+      "sentence_severity": 3,
+      "chapter": "第 70-71 回",
+      "legal_analysis": "原主带走·无惩罚·朱紫国王后被归还"
+    },
+    {
+      "name": "青毛狮子怪",
+      "english_name": "Green-maned Lion Demon",
+      "original_owner": "文殊菩萨",
+      "owner_rank": "四大菩萨之一",
+      "descent_reason": "文殊菩萨坐骑·下界至乌鸡国·按佛旨惩罚国王（推井淹死三天）",
+      "time_on_earth_years": 3,
+      "crimes_committed": [
+        "篡位乌鸡国王",
+        "假冒国王三年",
+        "推国王入井淹死（后还魂）"
+      ],
+      "final_outcome": "文殊菩萨收回·带回五台山",
+      "sentence_severity": 2,
+      "chapter": "第 36-39 回",
+      "legal_analysis": "原主带走·无惩罚·名义上是'佛旨报应'"
+    },
+    {
+      "name": "黄牙老象",
+      "english_name": "Yellow-tusked Elephant",
+      "original_owner": "普贤菩萨",
+      "owner_rank": "四大菩萨之一",
+      "descent_reason": "普贤菩萨坐骑·下界至狮驼岭作二魔王",
+      "time_on_earth_years": 5,
+      "crimes_committed": [
+        "狮驼岭吃人无数",
+        "绑架唐僧",
+        "与青狮大鹏结盟围剿"
+      ],
+      "final_outcome": "普贤菩萨收回·带回峨眉山",
+      "sentence_severity": 2,
+      "chapter": "第 74-77 回",
+      "legal_analysis": "原主带走·无实质惩罚·尽管罪行累累"
+    },
+    {
+      "name": "金翅大鹏雕",
+      "english_name": "Golden-winged Dapeng",
+      "original_owner": "如来佛祖",
+      "owner_rank": "佛祖本身·孔雀大明王菩萨之弟",
+      "descent_reason": "孔雀大明王菩萨之弟·佛母亲属·下界至狮驼国作三魔王",
+      "time_on_earth_years": 6,
+      "crimes_committed": [
+        "狮驼国灭国吃尽一国百姓",
+        "绑架唐僧",
+        "对抗如来佛祖亲临",
+        "阴阳二气瓶威胁"
+      ],
+      "final_outcome": "如来佛祖亲临收服·封为护法·留灵山",
+      "sentence_severity": 5,
+      "chapter": "第 74-77 回",
+      "legal_analysis": "虽罪大恶极但因佛祖亲属身份免罚·还封护法·'特权阶层的免罪金牌'"
+    },
+    {
+      "name": "九灵元圣",
+      "english_name": "Nine-spirit Sage",
+      "original_owner": "太乙救苦天尊",
+      "owner_rank": "东极青华大帝·道教四御之一",
+      "descent_reason": "太乙救苦天尊坐骑·下界至竹节山为九头狮子",
+      "time_on_earth_years": 4,
+      "crimes_committed": [
+        "九曲盘桓洞霸占一方",
+        "收服黄狮等六狮孙",
+        "绑架唐僧师徒"
+      ],
+      "final_outcome": "太乙救苦天尊亲自收回·带回东极妙岩宫",
+      "sentence_severity": 2,
+      "chapter": "第 88-90 回",
+      "legal_analysis": "原主带走·无惩罚·虽未吃人但势力范围大"
+    },
+    {
+      "name": "黄袍怪",
+      "english_name": "Yellow Robe Demon",
+      "original_owner": "玉皇大帝（二十八宿奎木狼）",
+      "owner_rank": "天庭星官·非坐骑但为天神下凡对照",
+      "descent_reason": "奎木狼与披香殿玉女私通·相约下界续前缘",
+      "time_on_earth_years": 13,
+      "crimes_committed": [
+        "强抢宝象国百花羞公主",
+        "篡位驸马",
+        "吃宫女",
+        "逼迫唐僧变虎"
+      ],
+      "final_outcome": "天庭召回·贬去兜率宫烧火·后官复原职",
+      "sentence_severity": 5,
+      "chapter": "第 28-31 回",
+      "legal_analysis": "天神下凡受罚较重·贬职烧火·但最终复职·对比坐骑轻微惩罚仍属轻判"
+    },
+    {
+      "name": "白象",
+      "english_name": "White Elephant",
+      "original_owner": "普贤菩萨",
+      "owner_rank": "四大菩萨之一",
+      "descent_reason": "普贤菩萨坐骑·下界至狮驼岭作二魔王·与青狮大鹏结盟",
+      "time_on_earth_years": 5,
+      "crimes_committed": [
+        "狮驼岭吃人无数",
+        "绑架唐僧",
+        "鼻卷悟空险些致命"
+      ],
+      "final_outcome": "普贤菩萨收回·带回峨眉山",
+      "sentence_severity": 2,
+      "chapter": "第 74-77 回",
+      "legal_analysis": "与黄牙老象同类事件·原主带走·无实质惩罚"
+    },
+    {
+      "name": "青狮",
+      "english_name": "Green Lion",
+      "original_owner": "文殊菩萨",
+      "owner_rank": "四大菩萨之一",
+      "descent_reason": "文殊菩萨坐骑·下界至狮驼岭作大魔王·与白象大鹏结盟",
+      "time_on_earth_years": 5,
+      "crimes_committed": [
+        "狮驼岭吞吃无数行人",
+        "绑架唐僧",
+        "张口吞悟空"
+      ],
+      "final_outcome": "文殊菩萨收回·带回五台山",
+      "sentence_severity": 2,
+      "chapter": "第 74-77 回",
+      "legal_analysis": "与青毛狮子怪同类事件·原主带走·无实质惩罚"
+    }
+  ],
+  "desertion_stats": {
+    "total_cases": 10,
+    "avg_sentence_severity": 2.8,
+    "highest_severity": "金翅大鹏雕 & 黄袍怪（5）",
+    "lowest_severity": "青牛精/金鱼精/金毛犼/青毛狮子怪/黄牙老象/九灵元圣/白象/青狮（均为 2-3）",
+    "owners_distribution": {
+      "观音菩萨": 2,
+      "文殊菩萨": 2,
+      "普贤菩萨": 2,
+      "太上老君": 1,
+      "如来佛祖": 1,
+      "太乙救苦天尊": 1,
+      "天庭（玉帝）": 1
+    },
+    "verdict_pattern": "原主收走 8 例·贬职 1 例·封官 1 例·实质惩罚率 0%",
+    "legal_bias": "100% 坐骑下凡案均未被处死·揭示'有背景的妖怪判决豁免率 100%'",
+    "comparable_wild_demons": [
+      "白骨精被打死",
+      "蜘蛛精被打死",
+      "蝎子精被杀",
+      "车迟国三妖惨死"
+    ]
+  },
+  "desertion_insights": [
+    "10 起坐骑下凡案中 0 起被处死·对比野生妖怪 60%+ 死亡率·司法双标明显",
+    "观音/文殊/普贤三大菩萨共占 6 起·揭示'菩萨坐骑是下凡主力'",
+    "金翅大鹏雕虽罪大恶极（灭狮驼国一国）·但因佛祖亲属身份反被封护法·是特权司法的极端案例",
+    "黄袍怪作为天神下凡受罚相对较重（贬职烧火）·说明天庭司法比佛界略严",
+    "狮驼岭三魔（青狮/白象/大鹏）是坐骑团伙化下凡的典型案例·三方原主协同收走",
+    "坐骑下凡的'失职罪'本应惩罚原主·但《西游记》中原主均无实质担责·揭示'监管责任缺失'",
+    "平均判决严厉度仅 2.8/10·与罪行严重度严重不匹配·是西游司法社会学的核心矛盾"
+  ]
+}

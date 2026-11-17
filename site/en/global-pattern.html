@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-xfrSlMYkqRzazskM/022hpxhvJ0QU1Bu6Iq6rA9/Ppo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-00pMhl4rOcuP6bfoyZ0c0/5yF8Gog65baKuAB1Bb1Nk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Global Pilgrim Family · Annotated Journey to the West</title>
@@ -2806,7 +2806,7 @@ function renderTreemap(opts){
 
     // ========== Data loading (embedded data on fetch failure) ==========
     async function loadData() {
-        const base = '../data/json/';
+        const base = '../en/json/';
         const files = ['pilgrims_family.json', 'journey_comparison.json', 'global_pattern_summary.json'];
         try {
             const [pilgrimsRes, journeyRes, summaryRes] = await Promise.all(files.map(f => fetch(base + f)));
@@ -2815,7 +2815,7 @@ function renderTreemap(opts){
             const journey = await journeyRes.json();
             const summary = await summaryRes.json();
             document.getElementById('dataSource').innerHTML =
-                'Data source: loaded live from <code>../data/json/</code> (running in http server mode)';
+                'Data source: loaded live from <code>../en/json/</code> (running in http server mode)';
             return { pilgrims, journey, summary };
         } catch (e) {
             console.warn('[INFO] Using embedded data:', e.message);

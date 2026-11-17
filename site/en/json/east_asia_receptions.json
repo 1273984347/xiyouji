@@ -1,0 +1,149 @@
+[
+  {
+    "country": "Japan",
+    "title": "Saiyuki (Kazuya Minekura)",
+    "year": 1997,
+    "author": "Kazuya Minekura",
+    "medium": "Manga · Anime",
+    "amplified_elements": [
+      "Bishonen-ification",
+      "Modern Setting",
+      "Boys' Love",
+      "Passion"
+    ],
+    "axis_loyalty": 2,
+    "axis_seriousness": 6,
+    "feature": "Turns Wukong, Bajie, Sha Wujing, and Sanzang all into bishonen · modern otherworld setting · BL style",
+    "influence": "Representative of Japanese shojo-manga Journey to the West · influenced Chinese fan circles"
+  },
+  {
+    "country": "Japan",
+    "title": "Dragon Ball (Akira Toriyama)",
+    "year": 1984,
+    "author": "Akira Toriyama",
+    "medium": "Manga · Anime",
+    "amplified_elements": [
+      "Passion",
+      "Numerical Power Levels",
+      "Saiyans",
+      "Cosmic Expansion"
+    ],
+    "axis_loyalty": 2,
+    "axis_seriousness": 5,
+    "feature": "Borrows the Wukong / Somersault Cloud / Ruyi Staff motifs · fully cosmic and action-driven",
+    "influence": "The most globally influential Journey to the West derivative · a Japanese national-level manga"
+  },
+  {
+    "country": "Japan",
+    "title": "Great Ape King (Japanese Adult)",
+    "year": 2001,
+    "author": "Kazumi Yamada",
+    "medium": "Adult Manga",
+    "amplified_elements": [
+      "Erotica",
+      "Violence",
+      "Dark"
+    ],
+    "axis_loyalty": 1,
+    "axis_seriousness": 3,
+    "feature": "A Japanese adult-oriented deconstruction · eroticized and violent",
+    "influence": "An adult-oriented Journey to the West deconstruction"
+  },
+  {
+    "country": "South Korea",
+    "title": "Magic Thousand-Character Classic (Korean Comic)",
+    "year": 2004,
+    "author": "Korean Cartoonist",
+    "medium": "Children's Comic",
+    "amplified_elements": [
+      "Education",
+      "Hanzi Learning",
+      "Child-Oriented"
+    ],
+    "axis_loyalty": 5,
+    "axis_seriousness": 4,
+    "feature": "Uses Journey to the West as a frame · a Korean children's Hanzi-learning comic",
+    "influence": "A localized Korean educational application"
+  },
+  {
+    "country": "South Korea",
+    "title": "A Korean Odyssey (Korean TV Series)",
+    "year": 2017,
+    "author": "Park Hong-kyun",
+    "medium": "TV Series",
+    "amplified_elements": [
+      "Romance",
+      "Modern Urban",
+      "Fantasy",
+      "Love Triangle"
+    ],
+    "axis_loyalty": 2,
+    "axis_seriousness": 5,
+    "feature": "Modern urban romance-fantasy · a romance line with a female-embodied Wukong and Sanzang",
+    "influence": "A representative Korean romance-fantasy drama"
+  },
+  {
+    "country": "Vietnam",
+    "title": "Journey to the West (Vietnamese Adaptation)",
+    "year": "1990s",
+    "author": "Vietnamese Localization",
+    "medium": "Theater · Singing",
+    "amplified_elements": [
+      "Localization",
+      "Humor",
+      "Vietnamese Folklore"
+    ],
+    "axis_loyalty": 7,
+    "axis_seriousness": 4,
+    "feature": "A Vietnamese local opera adaptation · incorporates Vietnamese folklore and humor",
+    "influence": "Southeast Asian reception of Journey to the West culture"
+  },
+  {
+    "country": "United States",
+    "title": "The Monkey King Legend (American Adaptation)",
+    "year": 2023,
+    "author": "Netflix · Produced by Stephen Chow",
+    "medium": "Animated Film",
+    "amplified_elements": [
+      "American Animation",
+      "English Dub",
+      "Simplified Narrative"
+    ],
+    "axis_loyalty": 5,
+    "axis_seriousness": 4,
+    "feature": "Netflix targeting a global audience · American animation with simplified narrative",
+    "influence": "A mainstream Western streaming attempt at Journey to the West"
+  },
+  {
+    "country": "United States",
+    "title": "Into the Badlands (AMC Series)",
+    "year": 2015,
+    "author": "AMC",
+    "medium": "American Series",
+    "amplified_elements": [
+      "Post-Apocalyptic",
+      "Martial Arts",
+      "Western Perspective"
+    ],
+    "axis_loyalty": 3,
+    "axis_seriousness": 6,
+    "feature": "A post-apocalyptic setting · borrows the Journey to the West name · actually an American martial-arts drama",
+    "influence": "A Western re-imagining of Journey to the West as an American series"
+  },
+  {
+    "country": "Australia",
+    "title": "Monkey (ABC Adaptation)",
+    "year": 1979,
+    "author": "ABC",
+    "medium": "TV Series",
+    "amplified_elements": [
+      "English",
+      "Humor",
+      "Localization"
+    ],
+    "axis_loyalty": 4,
+    "axis_seriousness": 3,
+    "feature": "ABC adaptation · in English · comedic · influenced the Australian Anglosphere",
+    "influence": "An early Western reception of Journey to the West"
+  }
+]

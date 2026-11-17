@@ -1,0 +1,37 @@
+{
+  "total_cards": 12,
+  "total_artifacts": 10,
+  "total_webnovels": 9,
+  "rarity_distribution": {
+    "UR": 2,
+    "SSR": 5,
+    "SR": 2,
+    "R": 2,
+    "N": 1
+  },
+  "element_distribution": {
+    "Metal": 1,
+    "Light": 1,
+    "Water": 3,
+    "Thunder": 1,
+    "Heart": 1,
+    "Earth": 2,
+    "Fire": 1,
+    "Dark": 2
+  },
+  "avg_power": 6358.3,
+  "max_power": 10000,
+  "min_power": 800,
+  "webnovel_genres": [
+    "Son-in-Law",
+    "Quit-the-Team",
+    "Inner Voice",
+    "System",
+    "Rebirth",
+    "Villain",
+    "Harem",
+    "Invincible",
+    "Infinite Flow"
+  ],
+  "best_webnovel": "Fetch scriptures? I quit — Monkey wants to lie flat"
+}

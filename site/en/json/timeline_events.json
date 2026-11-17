@@ -1,0 +1,156 @@
+[
+  {
+    "year": 629,
+    "axis": "composition",
+    "title": "Xuanzang’s Westward Journey",
+    "icon": "tl-pilgrim",
+    "desc": "In the third year of the Zhenguan reign, Master Xuanzang set out from Chang’an on a seventeen-year journey west to India to seek the Dharma, covering fifty thousand li and laying the historical foundation for the later scripture-fetching story."
+  },
+  {
+    "year": 645,
+    "axis": "composition",
+    "title": "Great Tang Records on the Western Regions",
+    "icon": "tl-scroll",
+    "desc": "After Xuanzang returned to the Tang, he dictated his travels; the monk Bianji transcribed them into the twelve-volume Great Tang Records on the Western Regions, recording the customs of over a hundred lands and becoming the documentary basis of the scripture-fetching narrative."
+  },
+  {
+    "year": 1208,
+    "axis": "composition",
+    "title": "The Poetic Tale of Fetching Scriptures",
+    "icon": "tl-star-spark",
+    "desc": "The Southern Song publication The Poetic Tale of the Tang Monk’s Scripture Fetching is the earliest surviving literary version of the journey; the Monkey Pilgrim appears for the first time, forming the prototype of the pilgrimage troupe."
+  },
+  {
+    "year": 1340,
+    "axis": "composition",
+    "title": "Zaju Play Journey to the West",
+    "icon": "tl-mask",
+    "desc": "Yang Jingxian’s Yuan zaju play Journey to the West, in six books and twenty-four acts, solidified the image of Sun Wukong and completed the cast of Sha Wujing and Zhu Bajie, bringing the narrative close to completion."
+  },
+  {
+    "year": 1592,
+    "axis": "composition",
+    "title": "Finalized Shidetang Edition",
+    "icon": "tl-codex",
+    "desc": "In the twentieth year of the Wanli reign (1592), the hundred-chapter Shidetang edition of Journey to the West was published in Jinling; credited to the Master of the Huayang Cavern, it marked the final standardization of the hundred-chapter novel form."
+  },
+  {
+    "year": 1663,
+    "axis": "composition",
+    "title": "Zhengdao Commentary (Journey to the West)",
+    "icon": "tl-taiji",
+    "desc": "Wang Xiangxu’s early-Qing commentary Zhengdao Shu interpreted Journey to the West through Daoist inner alchemy, pioneering Qing commentary and placing the novel within the neidan (inner alchemy) exegetical tradition."
+  },
+  {
+    "year": 1955,
+    "axis": "composition",
+    "title": "Modern Collated Edition",
+    "icon": "tl-critical-edition",
+    "desc": "The People’s Literature Publishing House issued Huang Suqiu’s collated and annotated edition, based on the Shidetang text and collated against various Ming and Qing editions, becoming the standard modern text."
+  },
+  {
+    "year": 1592,
+    "axis": "version",
+    "title": "Shidetang Hundred-Chapter Edition",
+    "icon": "tl-codex",
+    "desc": "The Wanli-era Jinling Shidetang imprint in twenty volumes and one hundred chapters is the earliest surviving hundred-chapter edition, the ancestor of all later versions, now held in the Tenri Central Library in Japan."
+  },
+  {
+    "year": 1663,
+    "axis": "version",
+    "title": "Zhengdao Edition",
+    "icon": "tl-taiji",
+    "desc": "Wang Xiangxu’s annotated edition of the second year of Kangxi (1663) abridged the Shidetang text and added inner-alchemy commentary, initiating the line of abridged-and-commented Qing editions."
+  },
+  {
+    "year": 1718,
+    "axis": "version",
+    "title": "True Interpretation of Journey to the West",
+    "icon": "tl-brush-comment",
+    "desc": "Chen Shibin’s one-hundred-chapter True Interpretation of Journey to the West (1718) drew on both Chan Buddhism and inner alchemy for mutual corroboration, becoming one of the most popular Qing commentaries."
+  },
+  {
+    "year": 1920,
+    "axis": "version",
+    "title": "Yadong Typeset Edition",
+    "icon": "tl-punctuation",
+    "desc": "Wang Yuanfang of the Yadong Library punctuated and typeset Journey to the West, pioneering modern punctuation and advancing the modern reading of classical novels."
+  },
+  {
+    "year": 1955,
+    "axis": "version",
+    "title": "People’s Literature Collated Edition",
+    "icon": "tl-critical-edition",
+    "desc": "Huang Suqiu’s collated edition for the People’s Literature Publishing House, based on the Shidetang text and collated against other versions, served as the standard edition for half a century."
+  },
+  {
+    "year": 1980,
+    "axis": "version",
+    "title": "New Annotated Edition",
+    "icon": "tl-pencil",
+    "desc": "Huang Suqiu’s new collated and annotated edition for the People’s Literature Publishing House was revised and reprinted with expanded notes and collation records, becoming more scholarly."
+  },
+  {
+    "year": 2020,
+    "axis": "version",
+    "title": "Digital Edition",
+    "icon": "tl-database",
+    "desc": "A digital full-text search and multi-version collation system for classical texts went online, enabling side-by-side comparison of the Shidetang, Zhengdao, and True Interpretation editions."
+  },
+  {
+    "year": 1600,
+    "axis": "influence",
+    "title": "Ming Dynasty Opera Adaptations",
+    "icon": "tl-mask",
+    "desc": "Ming folk opera dramatized the Journey to the West story; both court and popular troupes staged Mulian and scripture-fetching plays, marking the beginning of the story’s operatic adaptation."
+  },
+  {
+    "year": 1800,
+    "axis": "influence",
+    "title": "Qing Dynasty New Year Prints",
+    "icon": "tl-newyear-print",
+    "desc": "New Year print workshops in Yangliuqing, Wuqiang, and elsewhere mass-produced Journey to the West prints, bringing the Monkey King and scripture-fetching imagery into popular festive visual culture."
+  },
+  {
+    "year": 1927,
+    "axis": "influence",
+    "title": "Popularization of Lianhuanhua Comics",
+    "icon": "tl-comic",
+    "desc": "The Shanghai World Book Company published the picture-book Journey to the West, carrying the story at scale into the reading of children and city dwellers."
+  },
+  {
+    "year": 1941,
+    "axis": "influence",
+    "title": "Princess Iron Fan Animation",
+    "icon": "tl-film",
+    "desc": "The Wan brothers’ Princess Iron Fan, China’s first animated feature film, premiered; a pioneer of Asian animation, it brought the Journey to the West to the screen."
+  },
+  {
+    "year": 1986,
+    "axis": "influence",
+    "title": "CCTV Journey to the West",
+    "icon": "tl-tv",
+    "desc": "The CCTV television series Journey to the West, starring Liu Xiao Ling Tong, was rebroadcast over a thousand times across its twenty-five episodes, becoming a national visual memory of the story."
+  },
+  {
+    "year": 1995,
+    "axis": "influence",
+    "title": "A Chinese Odyssey",
+    "icon": "tl-mask",
+    "desc": "Stephen Chow’s two-part A Chinese Odyssey premiered, deconstructing Journey to the West in a postmodern mode and becoming a subcultural classic of the internet age."
+  },
+  {
+    "year": 2013,
+    "axis": "influence",
+    "title": "Journey to the West: Conquering the Demons",
+    "icon": "tl-film",
+    "desc": "Stephen Chow’s Journey to the West: Conquering the Demons topped the Spring Festival box office, relaunching the Journey to the West blockbuster franchise."
+  },
+  {
+    "year": 2020,
+    "axis": "influence",
+    "title": "Games and Web Fiction",
+    "icon": "tl-gamepad",
+    "desc": "The Black Myth: Wukong trailer went viral worldwide; Journey to the West web fiction and cross-media adaptations continue to be produced, regenerating the franchise."
+  }
+]

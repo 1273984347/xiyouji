@@ -1,0 +1,34 @@
+[
+  {
+    "movement": "第一乐章·序曲",
+    "chapters": "1-12",
+    "tempo": "Allegro·快板",
+    "duration_chapters": 12,
+    "feature": "石猴出世·学艺·大闹天宫·五行山·取经人定",
+    "musical_parallel": "贝多芬第九·第一乐章·宏大序奏"
+  },
+  {
+    "movement": "第二乐章·收徒",
+    "chapters": "13-22",
+    "tempo": "Andante·行板",
+    "duration_chapters": 10,
+    "feature": "出长安·收悟空·白龙·八戒·沙僧·五圣成团",
+    "musical_parallel": "海顿创世·合唱成形段"
+  },
+  {
+    "movement": "第三乐章·八十一难",
+    "chapters": "23-97",
+    "tempo": "Allegro-Presto·快板-急板交替",
+    "duration_chapters": 75,
+    "feature": "九九八十一难·高潮-平缓-高潮的交响乐",
+    "musical_parallel": "马勒第五·交响中段·变奏交错"
+  },
+  {
+    "movement": "第四乐章·尾声",
+    "chapters": "98-100",
+    "tempo": "Maestoso·庄严",
+    "duration_chapters": 3,
+    "feature": "凌云渡脱胎·灵山取经·五圣成真",
+    "musical_parallel": "贝多芬第九·第四乐章·庄严颂歌"
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "concept_name": "处置方式分析",
+  "outcome_types": [
+    {
+      "type": "归还原主",
+      "english_name": "Returned to Owner",
+      "count": 18,
+      "percentage": 26.1,
+      "color": "#40619E",
+      "typical_cases": [
+        "青牛精→老君",
+        "金角银角→老君",
+        "黄眉→弥勒"
+      ],
+      "verdict": "象征性教育·无实质惩罚"
+    },
+    {
+      "type": "收编/收伏",
+      "english_name": "Recruited",
+      "count": 8,
+      "percentage": 11.6,
+      "color": "#5a7a3a",
+      "typical_cases": [
+        "红孩儿→善财童子",
+        "黑熊精→守山神",
+        "牛魔王→归降"
+      ],
+      "verdict": "体制吸收·改换身份"
+    },
+    {
+      "type": "降职处分",
+      "english_name": "Demoted",
+      "count": 3,
+      "percentage": 4.3,
+      "color": "#7a5230",
+      "typical_cases": [
+        "奎木狼→烧火",
+        "白龙马→驮马",
+        "天蓬元帅→猪八戒"
+      ],
+      "verdict": "轻判·后复职"
+    },
+    {
+      "type": "直接击杀",
+      "english_name": "Killed",
+      "count": 33,
+      "percentage": 47.8,
+      "color": "#C0392B",
+      "typical_cases": [
+        "白骨精",
+        "蜘蛛精",
+        "虎力大仙",
+        "蝎子精"
+      ],
+      "verdict": "野生妖怪的唯一结局"
+    },
+    {
+      "type": "逃脱/失踪",
+      "english_name": "Escaped",
+      "count": 7,
+      "percentage": 10.1,
+      "color": "#6b5e4d",
+      "typical_cases": [
+        "九头虫逃北海",
+        "碧波潭驸马党羽"
+      ],
+      "verdict": "少数侥幸逃脱"
+    }
+  ]
+}

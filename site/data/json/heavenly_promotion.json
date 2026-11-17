@@ -1,0 +1,130 @@
+{
+  "concept_name": "天庭晋升通道",
+  "english_name": "Heavenly Court Promotion Channels",
+  "definition": "天庭官僚体系 8 条晋升路径·揭示西游世界的'阶级流动'机制·并非单一通道",
+  "promotion_paths": [
+    {
+      "path": "修炼成仙",
+      "english_name": "Self-Cultivation",
+      "requirement": "自身修行圆满·功德圆满·脱离凡胎",
+      "duration": "数百年至数千年",
+      "success_rate": 0.05,
+      "cases": [
+        "菩提祖师（隐世）",
+        "镇元大仙",
+        "乌巢禅师",
+        "二郎神（肉身成圣）"
+      ],
+      "tier_target": "T1-散仙或天仙"
+    },
+    {
+      "path": "立功受封",
+      "english_name": "Meritorious Service",
+      "requirement": "立下大功·如降妖/征战/护法",
+      "duration": "1-10 年",
+      "success_rate": 0.6,
+      "cases": [
+        "孙悟空（封齐天大圣·后成佛）",
+        "哪吒（封三坛海会大神）",
+        "二郎神（封昭惠灵显王）",
+        "李天王（封降魔大元帅）"
+      ],
+      "tier_target": "T0-天庭正式编制"
+    },
+    {
+      "path": "科举天试",
+      "english_name": "Heavenly Examination",
+      "requirement": "通过天庭科举考试·文武科目",
+      "duration": "数年备考+一次考试",
+      "success_rate": 0.1,
+      "cases": [
+        "文曲星（殿试出身）",
+        "武曲星（武举出身）",
+        "魁星（科举神）"
+      ],
+      "tier_target": "T1-天庭文职/武职"
+    },
+    {
+      "path": "举荐引荐",
+      "english_name": "Recommendation",
+      "requirement": "由高级神仙举荐·或师承名门",
+      "duration": "数月至数年",
+      "success_rate": 0.5,
+      "cases": [
+        "猪八戒（师父荐举·当天蓬元帅）",
+        "沙僧（师父荐举·当卷帘大将）",
+        "白龙马（观音举荐·入取经团队）"
+      ],
+      "tier_target": "T0-天庭高级将领"
+    },
+    {
+      "path": "坐骑转正",
+      "english_name": "Mount Promotion",
+      "requirement": "作为高级神仙坐骑·随主修行·偶得机缘转正",
+      "duration": "数千年",
+      "success_rate": 0.02,
+      "cases": [
+        "青牛精（老君坐骑·下凡为妖）",
+        "金毛犼（观音坐骑）",
+        "青毛狮子（文殊坐骑）",
+        "白象（普贤坐骑）"
+      ],
+      "tier_target": "T2-妖界（下凡）或回归坐骑身份"
+    },
+    {
+      "path": "凡人封神",
+      "english_name": "Mortal Deification",
+      "requirement": "凡人行大善或大忠·死后封神·或受天庭册封",
+      "duration": "一生+死后追封",
+      "success_rate": 0.01,
+      "cases": [
+        "秦叔宝/尉迟恭（门神）",
+        "魏征（梦中斩龙·人臣之极）",
+        "关羽（演义体系·非西游主线）"
+      ],
+      "tier_target": "T2-天庭基层神职"
+    },
+    {
+      "path": "蟠桃延寿",
+      "english_name": "Peach Longevity",
+      "requirement": "获邀参加蟠桃会·食蟠桃延寿·保住神籍",
+      "duration": "每年一次蟠桃会",
+      "success_rate": 0.3,
+      "cases": [
+        "天庭高层（蟠桃会常客）",
+        "孙悟空（齐天大圣时期获邀一次·后失资格）"
+      ],
+      "tier_target": "维持现有 tier·非晋升·是续命机制"
+    },
+    {
+      "path": "仙丹升迁",
+      "english_name": "Elixir Promotion",
+      "requirement": "获太上老君仙丹·提升修为或保命",
+      "duration": "立即生效",
+      "success_rate": 0.2,
+      "cases": [
+        "孙悟空（偷吃 5 壶仙丹·成就金钢不坏）",
+        "玉帝（历经 1750 劫·每劫 129600 年·仙丹辅助）"
+      ],
+      "tier_target": "跨 tier 跃升或保命"
+    }
+  ],
+  "promotion_stats": {
+    "total_paths": 8,
+    "highest_success_rate": "立功受封（60%）·主流晋升通道",
+    "lowest_success_rate": "凡人封神（1%）·极少数人能走通",
+    "mainstream_path": "立功受封+举荐引荐·覆盖天庭大部分在编神仙",
+    "alternative_path": "修炼成仙·自主性最强但成功率最低",
+    "structural_insight": "天庭晋升是'功绩制+人情制+出身制'三轨并行·非单一标准"
+  },
+  "promotion_insights": [
+    "立功受封是主流通道·60% 成功率·孙悟空封齐天大圣就是此路径",
+    "举荐引荐是潜规则·50% 成功率·猪八戒/沙僧均靠此入天庭高层",
+    "蟠桃延寿不是晋升·是续命机制·保住神籍不被'退休'",
+    "仙丹升迁是顶级资源·掌握在太上老君一人手中·稀缺性极高",
+    "坐骑转正率最低（2%）·揭示天庭阶级固化·坐骑是'二等公民'",
+    "凡人封神是底层上升通道·但成功率 1%·秦叔宝/尉迟恭是少数案例",
+    "科举天试存在但案例少·说明天庭更看重功绩而非考试",
+    "修炼成仙是'最正统'但最难·菩提祖师/镇元大仙等是成功者·但多数修者无果"
+  ]
+}

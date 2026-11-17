@@ -1,0 +1,231 @@
+[
+  {
+    "location": "Huasheng Temple, Chang'an",
+    "chapter": "Chapter 12",
+    "restaurant_type": "Royal Vegetarian Banquet",
+    "signature_dish": "Shiitake Tofu in Golden Broth",
+    "rating": 9.5,
+    "tang_monk_review": "A royal banquet with carefully selected ingredients and refined cooking, but somewhat extravagant and contrary to the ascetic spirit.",
+    "price_level": "¥¥¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 1200,
+    "tags": [
+      "Royal",
+      "Banquet",
+      "High-end",
+      "Before departure"
+    ],
+    "photo_count": 12,
+    "vlog_views": "89w"
+  },
+  {
+    "location": "Hunter's Home, Double-Fork Ridge",
+    "chapter": "Chapter 13",
+    "restaurant_type": "Mortal household",
+    "signature_dish": "Wild Mushroom Soup (forced to eat meat)",
+    "rating": 2,
+    "tang_monk_review": "The hunter insisted on meat — folks, this is a fasting-violation scene, zero points.",
+    "price_level": "¥",
+    "vegetarian_friendly": false,
+    "monks_present": 0,
+    "tags": [
+      "Vow broken",
+      "Hunter",
+      "Mortal",
+      "Early"
+    ],
+    "photo_count": 3,
+    "vlog_views": "45w"
+  },
+  {
+    "location": "Wuzhuang Abbey",
+    "chapter": "Chapters 24-26",
+    "restaurant_type": "Daoist immortal's residence",
+    "signature_dish": "Ginseng Fruit (Cao Huan Dan)",
+    "rating": 10,
+    "tang_monk_review": "Zhenyuan the Great Immortal's Ginseng Fruit banquet — ripens once every ten thousand years; a sniff adds 360 years, a bite adds 47,000, but this humble monk dared not eat.",
+    "price_level": "Priceless",
+    "vegetarian_friendly": true,
+    "monks_present": 2,
+    "tags": [
+      "Daoist",
+      "Immortal fruit",
+      "Zhenyuanzi",
+      "High standard"
+    ],
+    "photo_count": 8,
+    "vlog_views": "320w"
+  },
+  {
+    "location": "Royal Palace, Baoxiang Kingdom",
+    "chapter": "Chapters 29-30",
+    "restaurant_type": "Foreign royal palace",
+    "signature_dish": "Western-Region Flatbread (vegetarian version)",
+    "rating": 7.5,
+    "tang_monk_review": "Exotic flavor — flatbread with grapes, distinctive, but lacking Zen spirit.",
+    "price_level": "¥¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "Foreign",
+      "Palace",
+      "Flatbread",
+      "Western Region"
+    ],
+    "photo_count": 5,
+    "vlog_views": "67w"
+  },
+  {
+    "location": "Gao Village",
+    "chapter": "Chapters 18-19",
+    "restaurant_type": "Folk wedding banquet",
+    "signature_dish": "Gao Village Braised Pork Replica (vegetarian)",
+    "rating": 5,
+    "tang_monk_review": "Elder Gao was warm, but the whole village eats braised pork — the vegetarian replica was a bit greasy, 2 stars.",
+    "price_level": "¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "Folk",
+      "Wedding",
+      "Vegetarian replica",
+      "Medium"
+    ],
+    "photo_count": 4,
+    "vlog_views": "120w"
+  },
+  {
+    "location": "Cave of Silken Webs",
+    "chapter": "Chapters 72-73",
+    "restaurant_type": "Monster restaurant",
+    "signature_dish": "Spider Demon's Cordyceps Human-Flesh Buns",
+    "rating": 0,
+    "tang_monk_review": "Folks, this absolutely crossed my red line — this place gets zero points today. Human-flesh buns, made by spider demons, a total violation of the vows. Call the police now.",
+    "price_level": "¥¥¥",
+    "vegetarian_friendly": false,
+    "monks_present": 0,
+    "tags": [
+      "Monster",
+      "Human flesh",
+      "Vow broken",
+      "Zero points",
+      "Call police"
+    ],
+    "photo_count": 0,
+    "vlog_views": "580w"
+  },
+  {
+    "location": "Bhiksu Kingdom",
+    "chapter": "Chapters 78-79",
+    "restaurant_type": "Demon medicinal cuisine",
+    "signature_dish": "Children's hearts and livers as a medicinal guide",
+    "rating": 0,
+    "tang_monk_review": "Folks, this absolutely crossed my red line — this place gets zero points today. Using children's hearts and livers as a medicinal guide is utterly inhuman; it must be shut down.",
+    "price_level": "¥¥¥¥",
+    "vegetarian_friendly": false,
+    "monks_present": 0,
+    "tags": [
+      "Demon",
+      "Medicinal guide",
+      "Children",
+      "Zero points",
+      "Must be banned"
+    ],
+    "photo_count": 0,
+    "vlog_views": "890w"
+  },
+  {
+    "location": "Miefa Kingdom",
+    "chapter": "Chapter 84",
+    "restaurant_type": "Mortal government office",
+    "signature_dish": "Miefa Kingdom Court Vegetarian Banquet",
+    "rating": 7,
+    "tang_monk_review": "After the king repented he held a vegetarian banquet in thanks — well-prepared, but still coerced and lacking sincerity.",
+    "price_level": "¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "Repentance",
+      "Court banquet",
+      "Mortal"
+    ],
+    "photo_count": 4,
+    "vlog_views": "34w"
+  },
+  {
+    "location": "Royal Palace, Tianzhu",
+    "chapter": "Chapters 93-95",
+    "restaurant_type": "Tianzhu royal palace",
+    "signature_dish": "Tianzhu Vegetarian Curry",
+    "rating": 8.5,
+    "tang_monk_review": "Near Vulture Peak, Tianzhu flavor, fragrant vegetarian curry — finally authentic vegetarian food.",
+    "price_level": "¥¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "Tianzhu",
+      "Curry",
+      "Palace",
+      "Near Vulture Peak"
+    ],
+    "photo_count": 7,
+    "vlog_views": "210w"
+  },
+  {
+    "location": "Leiyin Temple, Vulture Peak",
+    "chapter": "Chapter 98",
+    "restaurant_type": "Buddhist land immortal's feast",
+    "signature_dish": "Ullambana offering bestowed by the Buddha",
+    "rating": 10,
+    "tang_monk_review": "Finally at Vulture Peak — the Buddha personally bestowed the Ullambana offering, ending 14 years of asceticism in a perfect finish.",
+    "price_level": "Priceless",
+    "vegetarian_friendly": true,
+    "monks_present": 500,
+    "tags": [
+      "Buddhist land",
+      "Immortal's feast",
+      "Perfection",
+      "Vulture Peak"
+    ],
+    "photo_count": 15,
+    "vlog_views": "1500w"
+  },
+  {
+    "location": "Bottomless Cave",
+    "chapter": "Chapters 80-83",
+    "restaurant_type": "Demon cave residence",
+    "signature_dish": "Mouse Demon's Forced-Marriage Banquet",
+    "rating": 0,
+    "tang_monk_review": "Folks, the Mouse Demon is forcing marriage — this is coercion, not dining. Zero points, and call the police.",
+    "price_level": "¥",
+    "vegetarian_friendly": false,
+    "monks_present": 0,
+    "tags": [
+      "Demon",
+      "Forced marriage",
+      "Zero points",
+      "Call police"
+    ],
+    "photo_count": 0,
+    "vlog_views": "420w"
+  },
+  {
+    "location": "Zhuzi Kingdom",
+    "chapter": "Chapters 68-71",
+    "restaurant_type": "Foreign court",
+    "signature_dish": "Zhuzi King's Post-Illness Nourishing Vegetarian Broth",
+    "rating": 6.5,
+    "tang_monk_review": "After the king recovered he granted a light, stomach-friendly broth, but court vegetarian dishes lack the earthy warmth of common cooking.",
+    "price_level": "¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "Foreign",
+      "Court",
+      "Recovered",
+      "Broth"
+    ],
+    "photo_count": 5,
+    "vlog_views": "56w"
+  }
+]

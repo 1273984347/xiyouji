@@ -1,0 +1,167 @@
+[
+  {
+    "character": "Tang Sanzang",
+    "mbti": "INFJ",
+    "mbti_label": "Advocate",
+    "role": "Project manager · baseline",
+    "trait": "A steadfast idealist who leads the team through conviction",
+    "strength": [
+      "Firm conviction",
+      "Strong moral influence",
+      "Goal-oriented",
+      "Moral exemplar"
+    ],
+    "weakness": [
+      "Prone to self-conflict",
+      "Calamity at every step",
+      "Poor judge of character",
+      "Easily deceived by appearances"
+    ],
+    "workplace_fit": 7,
+    "note": "His flaw is severe self-conflict and calamity at every step — the classic INFJ “over-idealization” trap"
+  },
+  {
+    "character": "Sun Wukong",
+    "mbti": "ENTP",
+    "mbti_label": "Debater",
+    "role": "Tech lead · executor",
+    "trait": "Brilliant, loves challenges, anti-bureaucratic",
+    "strength": [
+      "Exceptional intellect",
+      "Adaptable",
+      "Creative problem-solving",
+      "Resource coordination"
+    ],
+    "weakness": [
+      "Anti-bureaucratic",
+      "Loathes routine",
+      "Argues with leadership",
+      "Impulsive and quick-tempered"
+    ],
+    "workplace_fit": 9,
+    "note": "Often debates the “underlying logic” of the pilgrimage with his leader (Tang Sanzang) — typical ENTP behavior"
+  },
+  {
+    "character": "Zhu Bajie",
+    "mbti": "ESFP",
+    "mbti_label": "Entertainer",
+    "role": "Morale booster · logistics",
+    "trait": "The team’s morale booster, lives in the moment, food and fun first",
+    "strength": [
+      "Lifts the mood",
+      "Smooths relationships",
+      "Lives in the moment",
+      "Stress-resilient (quit and move on)"
+    ],
+    "weakness": [
+      "Lazy",
+      "Gluttonous",
+      "Lustful",
+      "Quits at the first setback"
+    ],
+    "workplace_fit": 5,
+    "note": "Quitting is his ultimate defense of the ESFP “live in the moment” ethos"
+  },
+  {
+    "character": "Sha Wujing",
+    "mbti": "ISFJ",
+    "mbti_label": "Defender",
+    "role": "Logistics director · guardian",
+    "trait": "A loyal, dependable guardian who quietly shoulders all logistics",
+    "strength": [
+      "Loyal and reliable",
+      "Quietly devoted",
+      "Consistent output",
+      "No complaints"
+    ],
+    "weakness": [
+      "Lacks initiative",
+      "Poor communicator",
+      "Low visibility",
+      "Passive follower"
+    ],
+    "workplace_fit": 8,
+    "note": "The classic line “Master has been captured by a monster” is the shortest ISFJ work report ever"
+  },
+  {
+    "character": "White Dragon Horse",
+    "mbti": "ISTP",
+    "mbti_label": "Virtuoso",
+    "role": "Silent executor",
+    "trait": "A silent doer; says little, acts decisively at critical moments",
+    "strength": [
+      "Decisive at critical moments",
+      "Hands-on ability",
+      "Composed",
+      "Pragmatic"
+    ],
+    "weakness": [
+      "Poor communicator",
+      "Nearly invisible",
+      "Emotionally reserved",
+      "Overlooked"
+    ],
+    "workplace_fit": 7,
+    "note": "One kick saves the team — the classic ISTP critical-moment rescue"
+  },
+  {
+    "character": "Guanyin",
+    "mbti": "ENFJ",
+    "mbti_label": "Protagonist",
+    "role": "Project investor · mentor",
+    "trait": "Skilled at guiding, quietly supportive, a persuasive leader",
+    "strength": [
+      "Guidance",
+      "Judges character well",
+      "Resource coordination",
+      "Big-picture thinking"
+    ],
+    "weakness": [
+      "Over-involved",
+      "Acts only at the last moment",
+      "Opaque with information"
+    ],
+    "workplace_fit": 9,
+    "note": "A classic mentor figure who protects from the shadows and acts only when absolutely necessary"
+  },
+  {
+    "character": "Tathāgata",
+    "mbti": "INTJ",
+    "mbti_label": "Architect",
+    "role": "Chief architect",
+    "trait": "Strategist, chief architect, systems thinker",
+    "strength": [
+      "Strategic vision",
+      "Systems design",
+      "Decisiveness",
+      "Authority"
+    ],
+    "weakness": [
+      "Overly aloof",
+      "Detached",
+      "Information monopoly"
+    ],
+    "workplace_fit": 10,
+    "note": "The master architect of the eighty-one trials — a model of INTJ systems thinking"
+  },
+  {
+    "character": "Jade Emperor",
+    "mbti": "ESTJ",
+    "mbti_label": "Executive",
+    "role": "Heavenly Court CEO",
+    "trait": "Order keeper, manager, embodiment of bureaucracy",
+    "strength": [
+      "Order keeping",
+      "Management",
+      "Authority",
+      "Resource allocation"
+    ],
+    "weakness": [
+      "Bureaucratic",
+      "Poor staffing",
+      "Reactive"
+    ],
+    "workplace_fit": 8,
+    "note": "The embodiment of the Heavenly Court’s hierarchy — the archetypal ESTJ manager"
+  }
+]

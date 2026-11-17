@@ -1,0 +1,25 @@
+{
+  "generator_name": "Journey to the West Story Generator",
+  "based_on": "The 'Cause-Effect · Artifact · Obsession' narrative card system",
+  "total_combinations": 1200,
+  "generating_rules": [
+    "Draw 1 card from the Karma deck · as the story’s scene starting point (K01–K12)",
+    "Draw 1 card from the Artifact deck · as the story’s core prop (F01–F10)",
+    "Draw 1 card from the Obsession deck · as the story’s psychological theme (Z01–Z10)",
+    "The three-card combination determines the story’s ”opening / prop / theme” · the player improvises what follows",
+    "The same combination can be performed many times · different players generate completely different stories · this is the very meaning of a ”generator”"
+  ],
+  "generator_features": [
+    "Repeatability · 1200 combinations can be performed endlessly · each time yielding a different result",
+    "Openness · the three cards set only the opening · the rest is the player’s free play",
+    "Thematic depth · each Obsession card carries its own theme · stories naturally gain ”enlightenment” depth",
+    "Extensibility · new decks (character cards / scene cards) can be added for endless expansion"
+  ],
+  "story_categories": {
+    "Catastrophe": "K02 Mistaken Entry into a Demon Lair + K07 Lost in the Wheel of Rebirth + K10 A Heavenly Tribulation Descends",
+    "Master-Disciple Conflict": "K01 Cast Out of the Monastery + K05 Falsely Implicated + K12 True and False Hard to Tell",
+    "Enlightenment": "K09 Enlightenment in a Dream + K03 An Old Acquaintance Reappears + K08 Return to a Familiar Place",
+    "Temptation": "K04 Forbidden Fruit Eaten by Mistake + K06 A Heaven-Bestowed Task + K11 The Contract Turns Back"
+  },
+  "design_innovation": "A story generator · not a retelling"
+}

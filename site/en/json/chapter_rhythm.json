@@ -1,0 +1,602 @@
+[
+  {
+    "chapter": 1,
+    "phase": "Overture",
+    "rhythm": 5,
+    "feature": "Stone monkey born · studies under a master · borrows treasure from the Dragon Palace · prelude to Havoc in Heaven"
+  },
+  {
+    "chapter": 2,
+    "phase": "Overture",
+    "rhythm": 5,
+    "feature": "Studies under Patriarch Bodhi · learns the 72 transformations · cloud-somersault"
+  },
+  {
+    "chapter": 3,
+    "phase": "Overture",
+    "rhythm": 5,
+    "feature": "Borrows treasure from the Dragon Palace · erases names in the underworld"
+  },
+  {
+    "chapter": 4,
+    "phase": "Overture",
+    "rhythm": 5,
+    "feature": "First ascends to Heaven · Protector of the Horses"
+  },
+  {
+    "chapter": 5,
+    "phase": "Overture",
+    "rhythm": 5,
+    "feature": "Wrecks the Peach Banquet · steals the immortality pills"
+  },
+  {
+    "chapter": 6,
+    "phase": "Overture",
+    "rhythm": 4,
+    "feature": "Erlang Shen captures Wukong"
+  },
+  {
+    "chapter": 7,
+    "phase": "Overture",
+    "rhythm": 5,
+    "feature": "Havoc in Heaven · Eight-Trigram Furnace · Five Elements Mountain"
+  },
+  {
+    "chapter": 8,
+    "phase": "Overture",
+    "rhythm": 3,
+    "feature": "Guanyin seeks a scripture pilgrim"
+  },
+  {
+    "chapter": 9,
+    "phase": "Overture",
+    "rhythm": 2,
+    "feature": "Chen Guangrui · River-Float Child"
+  },
+  {
+    "chapter": 10,
+    "phase": "Overture",
+    "rhythm": 2,
+    "feature": "Wei Zheng executes the dragon · Emperor Taizong tours the underworld"
+  },
+  {
+    "chapter": 11,
+    "phase": "Overture",
+    "rhythm": 3,
+    "feature": "Emperor Taizong returns to life · Great Water-and-Land Assembly"
+  },
+  {
+    "chapter": 12,
+    "phase": "Overture",
+    "rhythm": 4,
+    "feature": "Xuanzang is commissioned to journey west"
+  },
+  {
+    "chapter": 13,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Departs Chang'an · Twin-Fork Ridge"
+  },
+  {
+    "chapter": 14,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Takes Sun Wukong as disciple · the Tight-Fillet Spell first appears"
+  },
+  {
+    "chapter": 15,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Takes the White Dragon Horse"
+  },
+  {
+    "chapter": 16,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Guanyin Monastery · the Black Bear Spirit"
+  },
+  {
+    "chapter": 17,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Black Wind Cave · subdues the Black Bear Spirit"
+  },
+  {
+    "chapter": 18,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Takes Zhu Bajie as disciple"
+  },
+  {
+    "chapter": 19,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Futu Mountain · the Heart Sutra"
+  },
+  {
+    "chapter": 20,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Before Yellow Wind Ridge"
+  },
+  {
+    "chapter": 21,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Yellow Wind Demon · Samadhi Divine Wind"
+  },
+  {
+    "chapter": 22,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Takes Sha Wujing as disciple"
+  },
+  {
+    "chapter": 23,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "The Four Sages test the pilgrims' resolve"
+  },
+  {
+    "chapter": 24,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Wuzhuang Monastery · the Ginseng Fruit Tree"
+  },
+  {
+    "chapter": 25,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Heals the Ginseng Fruit Tree · sworn brotherhood with the Great Immortal Zhenyuan"
+  },
+  {
+    "chapter": 26,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Three Isles for a Remedy · Sweet Spring Revives the Tree"
+  },
+  {
+    "chapter": 27,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Thrice Beats the White-Bone Demon"
+  },
+  {
+    "chapter": 28,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Wukong is banished · Black Pine Forest"
+  },
+  {
+    "chapter": 29,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Yellow-Robed Demon · Precious Elephant Kingdom"
+  },
+  {
+    "chapter": 30,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Tang Sanzang turned into a tiger · Wukong returns to save him"
+  },
+  {
+    "chapter": 31,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Bajie Rouses the Monkey King · Wukong Subdues the Monster"
+  },
+  {
+    "chapter": 32,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Flat-Top Mountain · Gold Horn and Silver Horn"
+  },
+  {
+    "chapter": 33,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Lotus Cave · the Purple-Gold Red Gourd"
+  },
+  {
+    "chapter": 34,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Wukong outwits the two demons"
+  },
+  {
+    "chapter": 35,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Laozi retrieves his two attendants"
+  },
+  {
+    "chapter": 36,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Baolin Monastery · a night conversation"
+  },
+  {
+    "chapter": 37,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Crow-Rooster Kingdom · the ghost king pleads his case"
+  },
+  {
+    "chapter": 38,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Truth uncovered at the bottom of the well"
+  },
+  {
+    "chapter": 39,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Manjushri retrieves the Blue-Haired Lion"
+  },
+  {
+    "chapter": 40,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Red Boy as an Infant · Wukong Captured"
+  },
+  {
+    "chapter": 41,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Red Boy · Samadhi True Fire"
+  },
+  {
+    "chapter": 42,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Guanyin subdues Red Boy"
+  },
+  {
+    "chapter": 43,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Black Water River · the Tuo Dragon"
+  },
+  {
+    "chapter": 44,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Chechi Kingdom · prelude"
+  },
+  {
+    "chapter": 45,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Chechi Kingdom · rain-seeking contest"
+  },
+  {
+    "chapter": 46,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Chechi Kingdom · the three immortals perish"
+  },
+  {
+    "chapter": 47,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Heaven-Reaching River · King Spiritual-Sense"
+  },
+  {
+    "chapter": 48,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Walking on ice · the Heaven-Reaching riverbed"
+  },
+  {
+    "chapter": 49,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Guanyin retrieves the goldfish"
+  },
+  {
+    "chapter": 50,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Golden Helmet Cave · the Diamond Bracelet"
+  },
+  {
+    "chapter": 51,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "The gods lose all their weapons"
+  },
+  {
+    "chapter": 52,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Laozi retrieves the Green Ox"
+  },
+  {
+    "chapter": 53,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Kingdom of Women · the Mother-and-Child River"
+  },
+  {
+    "chapter": 54,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Kingdom of Women · the Scorpion Spirit"
+  },
+  {
+    "chapter": 55,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Pipa Cave · the Scorpion Spirit"
+  },
+  {
+    "chapter": 56,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Wukong kills the bandits · is banished"
+  },
+  {
+    "chapter": 57,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "The True and False Monkey King"
+  },
+  {
+    "chapter": 58,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Tathāgata distinguishes true from false"
+  },
+  {
+    "chapter": 59,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Palm-Leaf Cave · first borrowing of the Palm-Leaf Fan"
+  },
+  {
+    "chapter": 60,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Thunder-Accumulating Mountain · the Bull Demon King"
+  },
+  {
+    "chapter": 61,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Third borrowing of the Palm-Leaf Fan · quenches the Flaming Mountain"
+  },
+  {
+    "chapter": 62,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Jisai Kingdom · the Golden-Light Pagoda"
+  },
+  {
+    "chapter": 63,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Nine-Headed Consort · Emerald Wave Pool"
+  },
+  {
+    "chapter": 64,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Bramble Ridge · the Wood Immortals' Hermitage"
+  },
+  {
+    "chapter": 65,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Little Thunderclap Monastery · Yellow-Brow Demon"
+  },
+  {
+    "chapter": 66,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "The gods are all trapped in the Human Sack · Maitreya retrieves his attendant"
+  },
+  {
+    "chapter": 67,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Seven-Never Mountain · the Python Spirit"
+  },
+  {
+    "chapter": 68,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Zhuzi Kingdom · practicing medicine"
+  },
+  {
+    "chapter": 69,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Zhuzi Kingdom · Wukong practices medicine"
+  },
+  {
+    "chapter": 70,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Qilin Mountain · the Xiezhi Cave"
+  },
+  {
+    "chapter": 71,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Guanyin retrieves the Golden-Haired Hou"
+  },
+  {
+    "chapter": 72,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Web-Spinning Cave · the seven spider spirits"
+  },
+  {
+    "chapter": 73,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Yellow-Flower Monastery · the Centipede Spirit"
+  },
+  {
+    "chapter": 74,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Lion-Camel Ridge · the three great demon kings"
+  },
+  {
+    "chapter": 75,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Lion-Camel Kingdom · the Roc"
+  },
+  {
+    "chapter": 76,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Yin-Yang Two-Qi Vase · Wukong is captured"
+  },
+  {
+    "chapter": 77,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Tathāgata descends in person · subdues the Roc"
+  },
+  {
+    "chapter": 78,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Bhiksu Kingdom · children's hearts and livers"
+  },
+  {
+    "chapter": 79,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "The Star of Longevity retrieves the White Deer"
+  },
+  {
+    "chapter": 80,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Bottomless Mountain · the Rat Spirit"
+  },
+  {
+    "chapter": 81,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Bottomless Cave · the Rat Spirit"
+  },
+  {
+    "chapter": 82,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Rat Spirit · Li Tianwang's memorial tablet"
+  },
+  {
+    "chapter": 83,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Li Tianwang retrieves his adopted daughter"
+  },
+  {
+    "chapter": 84,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Dharma-Destroying Kingdom · killing monks"
+  },
+  {
+    "chapter": 85,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Mist-Hidden Mountain · the Leopard Spirit"
+  },
+  {
+    "chapter": 86,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Mist-Hidden Mountain · the Chained Caves"
+  },
+  {
+    "chapter": 87,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Fengxian Commandery · seeking rain"
+  },
+  {
+    "chapter": 88,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Yuhua Prefecture · taking disciples"
+  },
+  {
+    "chapter": 89,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Bamboo-Joint Mountain · the Nine-Spirits Sage"
+  },
+  {
+    "chapter": 90,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "The Heavenly Worthy retrieves the Nine-Spirits Sage"
+  },
+  {
+    "chapter": 91,
+    "phase": "Symphony",
+    "rhythm": 5,
+    "feature": "Green Dragon Mountain · the three rhinoceros spirits"
+  },
+  {
+    "chapter": 92,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "The four stars subdue the three rhinoceroses"
+  },
+  {
+    "chapter": 93,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Kingdom of India · prelude"
+  },
+  {
+    "chapter": 94,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "India · the Jade Rabbit Spirit"
+  },
+  {
+    "chapter": 95,
+    "phase": "Symphony",
+    "rhythm": 4,
+    "feature": "Chang'e retrieves the Jade Rabbit"
+  },
+  {
+    "chapter": 96,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Squire Kou · returns from the underworld"
+  },
+  {
+    "chapter": 97,
+    "phase": "Symphony",
+    "rhythm": 3,
+    "feature": "Squire Kou's household"
+  },
+  {
+    "chapter": 98,
+    "phase": "Coda",
+    "rhythm": 5,
+    "feature": "Lingyun Ferry · scripture retrieval at Spirit Mountain"
+  },
+  {
+    "chapter": 99,
+    "phase": "Coda",
+    "rhythm": 4,
+    "feature": "Heaven-Reaching River · the old turtle drops the scriptures into the water"
+  },
+  {
+    "chapter": 100,
+    "phase": "Coda",
+    "rhythm": 5,
+    "feature": "Returns east by the direct route · the five pilgrims attain Buddhahood"
+  }
+]

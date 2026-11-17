@@ -1,0 +1,142 @@
+{
+  "concept_name": "The Law of Karma and Retribution",
+  "english_name": "Karma Law of Cause and Effect",
+  "definition": "The Journey to the West world follows the karmic law 'good is rewarded with good, evil with evil, and as is the cause so is the fruit.' The types of cause and effect fall into ten categories: punishment for disobedience / retribution in kind / benevolent transformation / atonement / cultivation through reincarnation / retribution for lust / punishment for negligence / predestined marriage / tribulation testing / reform",
+  "core_principle": "Karma outweighs Heaven's decree — the Jade Emperor's edict can be overturned by karma (e.g., the Jing River Dragon King's execution was karma's due); karma outweighs the registers (the register can be changed but karma cannot be escaped)",
+  "cases": [
+    {
+      "n": 1,
+      "case_name": "The Jing River Dragon King Defies and Is Executed",
+      "cause": "Bet with Yuan Shoucheng, violated the Jade Emperor's edict, and altered the rain timing and amount",
+      "effect": "Wei Zheng executed him in a dream at the Dragon-Slaying Terrace; his head fell onto a Chang'an street and his ghost haunted Li Shimin, causing his Underworld tour",
+      "karma_type": "Punishment for disobedience",
+      "rebirth_destination": "Returned to a heavenly constellation",
+      "chapter": "Ch. 9-10",
+      "karma_principle": "Heaven's decree can change, karma cannot be escaped; disobedience brings immediate retribution"
+    },
+    {
+      "n": 2,
+      "case_name": "The King of Wuji's 3 Years in a Well",
+      "cause": "Three years earlier the King of Wuji bound an incarnation of Manjushri (as a monk) and soaked him in the imperial river for three days",
+      "effect": "Manjushri's mount, the green-maned lion, pushed the king into the Eight-Treasure Glass Well, where he wrongfully died for three years",
+      "karma_type": "Retribution in kind",
+      "rebirth_destination": "Returned to the human realm",
+      "chapter": "Ch. 37-39",
+      "karma_principle": "You soaked me three days, I push you three years — wrongful retribution repaid in kind"
+    },
+    {
+      "n": 3,
+      "case_name": "Red Boy's Arson and Capture",
+      "cause": "Burned Wukong with Samadhi true fire, harmed countless lives, and wanted to eat Tang Sanzang",
+      "effect": "Guanyin subdued him with a lotus platform formed from heavenly blades, taking him as the Wealth-Bestowing Boy, never again entering samsara",
+      "karma_type": "Benevolent transformation",
+      "rebirth_destination": "Bodhisattva's retinue",
+      "chapter": "Ch. 41-42",
+      "karma_principle": "Evil karma can be transformed by higher karma; recruitment is 'evil karma turned to good fruit'"
+    },
+    {
+      "n": 4,
+      "case_name": "Wukong's Havoc and 500 Years under a Mountain",
+      "cause": "Wreaked havoc in the Heavenly Palace, stole peaches and elixirs, disrupted the Peach Banquet, and made himself the Heavenly Court's enemy",
+      "effect": "The Tathāgata pressed him under Five Elements Mountain for 500 years, eating iron pellets when hungry and drinking molten copper when thirsty",
+      "karma_type": "Punishment and atonement",
+      "rebirth_destination": "Became a Buddha",
+      "chapter": "Ch. 7 / Ch. 14",
+      "karma_principle": "Great evil requires great atonement; 500 years repaid it, and after atonement he attained the true fruit"
+    },
+    {
+      "n": 5,
+      "case_name": "Tang Sanzang's 9 Lifetimes of Cultivation",
+      "cause": "Golden Cicada slighted the Dharma and was demoted to the mortal world by the Tathāgata",
+      "effect": "His first 9 lives as a monk were all devoured by Sha Wujing at the Flowing Sands River, their skulls hung on Wujing's neck; in the 10th life Xuanzang completed the pilgrimage",
+      "karma_type": "Cultivation through reincarnation",
+      "rebirth_destination": "Became a Buddha",
+      "chapter": "Ch. 8 / Ch. 22 / Ch. 100",
+      "karma_principle": "Past-life karma is repaid in this life; 9 lives of hardship prepared the 10th life's Buddhahood"
+    },
+    {
+      "n": 6,
+      "case_name": "Bajie's Flirtation and Demotion",
+      "cause": "Drunk at the Peach Banquet, flirted with Chang'e; with lust rising, he knocked over the Dipper-and-Ox Palace",
+      "effect": "The Jade Emperor demoted him to the mortal world, where he was wrongly cast into a sow's womb, became ugly, and turned demon at Cloud-Tunnel Cave on Mount Fuling",
+      "karma_type": "Retribution for lust",
+      "rebirth_destination": "Attained the true fruit (Envoy/Arhat)",
+      "chapter": "Ch. 8 / Ch. 19 / Ch. 100",
+      "karma_principle": "Lust breeds retribution for lust; wrongly cast into the animal realm, he attained the true fruit after atonement"
+    },
+    {
+      "n": 7,
+      "case_name": "Sha Wujing's Shattered Goblet and Demotion",
+      "cause": "Accidentally shattered a glass goblet at the Peach Banquet — a breach of ritual",
+      "effect": "The Jade Emperor demoted him to the mortal world, where a flying sword pierced his chest every seven days; he became an ogre at the Flowing Sands River and ate passing travelers",
+      "karma_type": "Punishment for negligence",
+      "rebirth_destination": "Attained the true fruit (Envoy/Arhat)",
+      "chapter": "Ch. 22 / Ch. 100",
+      "karma_principle": "The Heavenly Court's rites are strict; even an accident is heavily punished, yet after atonement he attained the true fruit"
+    },
+    {
+      "n": 8,
+      "case_name": "The Yellow-Robed Demon's 13 Years",
+      "cause": "Kui Mulang eloped with the Jade Maiden of the Incense Hall, and both descended to the world as demons",
+      "effect": "Kui Mulang was demoted to the world as the Yellow-Robed Demon, had a 13-year marriage with Princess Baihuaxiu, and ate people and did evil",
+      "karma_type": "Predestined marriage",
+      "rebirth_destination": "Returned to a heavenly constellation",
+      "chapter": "Ch. 28-31",
+      "karma_principle": "The karma of adultery attracted a 13-year predestined marriage; once the retribution ended, each returned to their proper place"
+    },
+    {
+      "n": 9,
+      "case_name": "The Womanland Marriage That Never Was",
+      "cause": "Tang Sanzang and the Queen of Womanland had unfinished karmic bonds, but a tribulation test lay ahead, so marriage was impossible",
+      "effect": "Tang Sanzang feigned marriage to obtain the passport; a scorpion spirit abducted him, and the Queen of Womanland was left alone in her chamber",
+      "karma_type": "Tribulation testing",
+      "rebirth_destination": "Became a Buddha",
+      "chapter": "Ch. 53-55",
+      "karma_principle": "The pilgrim faces a love trial, but fixed karma takes priority; the tribulation cannot be avoided, only refused"
+    },
+    {
+      "n": 10,
+      "case_name": "The Bull Demon King's Submission",
+      "cause": "Family troubles with Rākṣasī, defeat in magical combat with Wukong, encirclement by the gods, and desperation on all sides",
+      "effect": "The Bull Demon King revealed his true form as a great white bull, was subdued by Nezha, and submitted to the Heavenly Court and Vulture Peak",
+      "karma_type": "Reform",
+      "rebirth_destination": "Submitted as an orthodox deity's retinue",
+      "chapter": "Ch. 60-61",
+      "karma_principle": "Those with deep evil karma are subdued by force and reformed; not voluntary, but ultimately good fruit"
+    }
+  ],
+  "karma_stats": {
+    "total_cases": 10,
+    "karma_type_distribution": {
+      "Punished for Disobeying Orders": 1,
+      "Wrongfully Reported to Peers": 1,
+      "Redeemed by Good Deeds": 1,
+      "Punishment and Atonement": 1,
+      "Cultivation Through Rebirth": 1,
+      "Retribution Through Lust": 1,
+      "Punished for Mistake": 1,
+      "Fated Match": 1,
+      "Hardship Test": 1,
+      "Returns to the Right": 1
+    },
+    "rebirth_destinations": {
+      "Attains Buddhahood": 3,
+      "Attains the Fruit (Envoy or Arhat)": 2,
+      "Bodhisattva Retinue": 1,
+      "Returns to the Heavenly Court as a Star": 2,
+      "Revived into the Human Realm": 1,
+      "Submitted to an Upright God's Retinue": 1
+    },
+    "common_pattern": "7 of the 10 cases ultimately 'attain the true fruit or reform' — showing the Journey to the West view of karma is 'transformable,' not fixed",
+    "karma_balance": "Evil karma can be transformed through 'atonement, recruitment, and forcible reform,' but fixed karma (such as the Womanland love trial) cannot be changed"
+  },
+  "karma_insights": [
+    "The Journey to the West view of karma is 'transformable,' not 'fixed'; 7 of 10 cases ultimately attain the true fruit",
+    "Karma outweighs Heaven's decree; though the Jing River Dragon King defied the Jade Emperor, his execution was karma's due",
+    "Karma outweighs the registers; the register can be changed but karma cannot be escaped — Tang Sanzang still had to repay karma across 9 lives",
+    "Wrongful retribution is repaid in kind; the King of Wuji soaked a monk 3 days and was pushed into a well 3 years — a 1:365 ratio",
+    "Retribution for lust is heaviest; Bajie's flirtation with Chang'e cast him into the animal realm — lust breeding retribution for lust",
+    "Even negligence is heavily punished; Sha Wujing's shattered goblet demoted him — showing the Heavenly Court's rites are strict",
+    "Tribulations cannot be changed but can be avoided; the Womanland marriage was a tribulation test, not fixed karma"
+  ]
+}

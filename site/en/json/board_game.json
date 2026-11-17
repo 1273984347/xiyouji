@@ -1,0 +1,172 @@
+{
+  "game_name": "Spirit Mountain Board of Directors",
+  "subtitle": "Anti-pilgrimage role-playing board game",
+  "designer": "Journey to the West reality-TV project team",
+  "player_count": "4 players",
+  "play_time": "90-120 minutes",
+  "age": "12+",
+  "core_mechanism": "Players role-play Tathāgata / Guanyin / Laojun / the Jade Emperor · jointly investing in the 'Journey to the West' reality-TV project · generating ratings (merit points) by staging hardships · settling the return on investment at Spirit Mountain",
+  "victory_condition": "Highest merit wins at the end of the game · or, if the project fails, the one with the fewest losses wins",
+  "players": [
+    {
+      "role": "Tathāgata Buddha",
+      "title": "Chief Project Designer",
+      "starting_capital": "10000 merit",
+      "special_ability": "May intervene forcibly once · replace any hardship with 'Five Elements Mountain Crash' · at very low cost",
+      "winning_strategy": "Play a 'rigged hardship card' at key moments, e.g. the Great Peng Golden-Winged Roc",
+      "weakness": "Cannot intervene directly in the mortal world · must act through a bodhisattva"
+    },
+    {
+      "role": "Guanyin Bodhisattva",
+      "title": "Project Executor",
+      "starting_capital": "8000 merit",
+      "special_ability": "May covertly protect the team · 500 merit may be spent per hardship to lower the difficulty",
+      "winning_strategy": "Protect the team while it forms early on · later obtain the 'Headband Curse' item",
+      "weakness": "Small merit reserve · every spend must be counted"
+    },
+    {
+      "role": "Taishang Laojun",
+      "title": "Prop Supplier",
+      "starting_capital": "9000 merit",
+      "special_ability": "May lend treasures to demons (Diamond Snare, Purple-Gold Gourd and the like) · earning ad-slot exposure",
+      "winning_strategy": "Earn ad fees by renting out treasures · the Green Ox Demon is the showcase ad slot for the Diamond Snare",
+      "weakness": "Lent-out treasures may be misused by demons · harming the Heavenly Court's reputation"
+    },
+    {
+      "role": "Jade Emperor",
+      "title": "Heavenly Court CEO",
+      "starting_capital": "7000 merit",
+      "special_ability": "May deploy heavenly troops and generals · but each deployment costs much merit",
+      "winning_strategy": "Maintain the Heavenly Court's order · lose the least when the project fails",
+      "weakness": "Heavenly troops have limited combat power · useless against top-tier demons"
+    }
+  ],
+  "game_phases": [
+    {
+      "phase": "Preparation Phase",
+      "rounds": "1-3",
+      "actions": [
+        "Assign initial merit",
+        "Choose which hardship cards to play",
+        "Build the bodhisattva mount dossiers"
+      ],
+      "goal": "Complete the formation of the pilgrimage team · establish the basic rules"
+    },
+    {
+      "phase": "Execution Phase",
+      "rounds": "4-12",
+      "actions": [
+        "Play hardship cards",
+        "Covertly protect or sabotage",
+        "Settle the ratings of each hardship",
+        "Gain ad-slot exposure"
+      ],
+      "goal": "Gain merit through hardships while keeping the project running"
+    },
+    {
+      "phase": "Settlement Phase",
+      "rounds": "13-14",
+      "actions": [
+        "Deliver the true scriptures",
+        "Settle at Spirit Mountain",
+        "Compute the return on investment"
+      ],
+      "goal": "Highest merit wins"
+    }
+  ],
+  "hardship_cards": [
+    {
+      "name": "White Bone Spirit",
+      "type": "Wild Monster",
+      "cost": 500,
+      "rating_bonus": 200,
+      "difficulty": 2,
+      "owner": "Universal"
+    },
+    {
+      "name": "Yellow-Robed Demon",
+      "type": "Heavenly General Descended to Earth",
+      "cost": 1500,
+      "rating_bonus": 500,
+      "difficulty": 4,
+      "owner": "Jade Emperor"
+    },
+    {
+      "name": "Golden and Silver Horns",
+      "type": "Page Boy Descended to Earth",
+      "cost": 2000,
+      "rating_bonus": 700,
+      "difficulty": 5,
+      "owner": "Laojun"
+    },
+    {
+      "name": "Azure Ox Spirit",
+      "type": "Mount Descended to Earth · Ad Slot",
+      "cost": 1000,
+      "rating_bonus": 800,
+      "difficulty": 6,
+      "owner": "Laojun · Advertisement"
+    },
+    {
+      "name": "Red Boy",
+      "type": "Demon with a Pedigree",
+      "cost": 2500,
+      "rating_bonus": 900,
+      "difficulty": 7,
+      "owner": "Universal"
+    },
+    {
+      "name": "Six-Eared Macaque",
+      "type": "Inner Demon",
+      "cost": 3000,
+      "rating_bonus": 1200,
+      "difficulty": 9,
+      "owner": "Tathāgata"
+    },
+    {
+      "name": "Great Peng Golden-Winged Roc",
+      "type": "Rigged Hardship Card",
+      "cost": 500,
+      "rating_bonus": 2000,
+      "difficulty": 10,
+      "owner": "Tathāgata · Rigged"
+    },
+    {
+      "name": "Flaming Mountain",
+      "type": "Prop Showcase",
+      "cost": 1500,
+      "rating_bonus": 1000,
+      "difficulty": 6,
+      "owner": "Universal"
+    },
+    {
+      "name": "Lion-Camel Ridge",
+      "type": "Team Battle",
+      "cost": 3500,
+      "rating_bonus": 1500,
+      "difficulty": 10,
+      "owner": "Universal"
+    },
+    {
+      "name": "Kingdom of the Bhikṣus",
+      "type": "Moral Test",
+      "cost": 800,
+      "rating_bonus": 400,
+      "difficulty": 3,
+      "owner": "Universal"
+    }
+  ],
+  "design_eggs": [
+    "The Great Peng Golden-Winged Roc is the Tathāgata side's 'rigged hardship card' · very cheap to play, extremely high return",
+    "The Green Ox Demon is Laojun's showcase ad slot for the Diamond Snare",
+    "Guanyin's Headband Curse is designed specifically to check Wukong · once obtained it greatly lowers the project's risk",
+    "The Jade Emperor's heavenly troops are useless against top-tier demons · the biggest weakness",
+    "The Tathāgata's 'Five Elements Mountain Crash' is the ultimate insurance · usable only once, at a critical moment"
+  ],
+  "scoring": {
+    "Project Success Rate": "60% · on success all players receive base merit",
+    "Hardship Ratings": "Each hardship yields ratings by difficulty · the harder it is, the greater the return",
+    "Ad-Slot Exposure": "Playing hardship cards with ad slots earns advertising fees",
+    "Return on Investment": "Final merit / initial investment · highest wins"
+  }
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "key": "lone",
+    "name": "独狼型",
+    "tag": "LONE WOLF",
+    "color": "#8b3a2a",
+    "desc": "单兵作战，无家无援，靠智谋或变身术生存，缺乏跨山头救援。",
+    "examples": "白骨精 · 蜘蛛精 · 九头虫"
+  },
+  {
+    "key": "family",
+    "name": "家族型",
+    "tag": "FAMILY-CLAN",
+    "color": "#8E7D62",
+    "desc": "以血缘为纽带，跨山头联防，讲究家产继承与子代培养。",
+    "examples": "牛魔王家族 · 金角银角兄弟"
+  },
+  {
+    "key": "alliance",
+    "name": "联盟型",
+    "tag": "ALLIANCE",
+    "color": "#3A473A",
+    "desc": "异姓结盟，按实力排座，共享地盘与情报，但内部脆性高。",
+    "examples": "狮驼岭三魔 · 车迟国三妖"
+  },
+  {
+    "key": "bureau",
+    "name": "官僚型",
+    "tag": "CELESTIAL BUREAUCRAT",
+    "color": "#5a4a6b",
+    "desc": "本身有天上编制，下凡属出差或擅离职守，归宿是归位而非消灭。",
+    "examples": "黄袍怪（奎木狼）· 黄风怪（灵吉坐骑）"
+  }
+]

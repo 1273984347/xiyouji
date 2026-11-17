@@ -1,0 +1,32 @@
+{
+  "total_translation_bias": 12,
+  "total_amplifications": 12,
+  "countries": [
+    "Vietnam",
+    "China",
+    "Australia",
+    "South Korea",
+    "Japan",
+    "USA"
+  ],
+  "amplification_elements": [
+    "Localized Humor",
+    "Western Reinterpretation",
+    "Romanticization",
+    "Simplified Narrative",
+    "Educationalization",
+    "Faithful to Original",
+    "Hot-Blooded Combat",
+    "Dark Deconstruction",
+    "Bishōnen-ization",
+    "Web-Novel Hot-Blood"
+  ],
+  "high_cultural_gap_terms": [
+    "Victorious Fighting Buddha",
+    "Mind-Monkey and Will-Horse",
+    "Sun Wukong",
+    "Zhu Bajie",
+    "True Samadhi Fire"
+  ],
+  "core_conclusion": "The greatest cognitive bias in translation lies in Buddhist-Daoist terms such as 'Mind-Monkey and Will-Horse', 'True Samadhi Fire', and 'Victorious Fighting Buddha' — English readers can hardly perceive the cultivation metaphor in the dharma names 'Wukong/Wujing'. East Asian countries amplify different elements: Japan leans toward bishōnen and hot-bloodedness, South Korea toward romance and education, and China's local adaptations stay most faithful to the original, though a dark style has emerged in recent years."
+}

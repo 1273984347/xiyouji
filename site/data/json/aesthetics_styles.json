@@ -1,0 +1,51 @@
+[
+  {
+    "school": "写意·野性",
+    "description": "花果山·水帘洞·石猴出世",
+    "scenes_count": 4,
+    "color": "#5a7a3a",
+    "feature": "野性蓬勃·自然天成"
+  },
+  {
+    "school": "庄严·至高",
+    "description": "天宫·灵山·玉帝·如来",
+    "scenes_count": 5,
+    "color": "#d4a857",
+    "feature": "金碧辉煌·宝相庄严"
+  },
+  {
+    "school": "恐怖·妖邪",
+    "description": "狮驼岭·白虎岭·流沙河·妖洞",
+    "scenes_count": 8,
+    "color": "#1a1410",
+    "feature": "骷髅白骨·阴气森森"
+  },
+  {
+    "school": "凡俗·朴实",
+    "description": "人间·行脚僧·百姓家",
+    "scenes_count": 12,
+    "color": "#a87838",
+    "feature": "土黄朴素·尘世烟火"
+  },
+  {
+    "school": "市井·绮丽",
+    "description": "女儿国·天竺·皇宫",
+    "scenes_count": 3,
+    "color": "#C0392B",
+    "feature": "华美宫闱·情欲色彩"
+  },
+  {
+    "school": "道家·清修",
+    "description": "兜率宫·五庄观·菩提洞",
+    "scenes_count": 4,
+    "color": "#40619E",
+    "feature": "清虚宁静·道法自然"
+  },
+  {
+    "school": "脱胎·超凡",
+    "description": "凌云渡·凌云仙洞·灵山",
+    "scenes_count": 2,
+    "color": "#5a8c8c",
+    "feature": "超脱尘俗·佛相庄严"
+  }
+]

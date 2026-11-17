@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-76B/sHyJ2QFi2cijhwL6YrHEwowIFusuEh+yz5AdHYQ=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-aouCv1sGZLXotdJ4tyFe/t7tr41s1ucZifo6UDwpBzk=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事实验 · 桌游与卡牌机制 · 详解西游记</title>
@@ -263,7 +263,7 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   html[data-theme="dark"] svg [fill="#2c2416"], html[data-theme="dark"] svg [fill="#2C2416"] {  fill: #9c9486; }   
   html[data-theme="dark"] svg [fill="#7a3a8c"], html[data-theme="dark"] svg [fill="#7A3A8C"] {  fill: #af89af; }   
   html[data-theme="dark"] svg [fill="#23201A"], html[data-theme="dark"] svg [fill="#23201a"] {  fill: #9a9489; }   
-  html[data-theme="dark"] svg [fill="#7a5230"], html[data-theme="dark"] svg [fill="#7A5230"] {  fill: #bb9070; }   
+  html[data-theme="dark"] svg [fill="#3A473A"], html[data-theme="dark"] svg [fill="#3A473A"] {  fill: #bb9070; }   
   html[data-theme="dark"] svg [fill="#5a4a6b"], html[data-theme="dark"] svg [fill="#5A4A6B"] {  fill: #9e919d !important; }   
   html[data-theme="dark"] svg [fill="#8b3a2a"], html[data-theme="dark"] svg [fill="#8B3A2A"] {  fill: #ba8a7a !important; }   
   html[data-theme="dark"] svg [fill="#1e3a8a"], html[data-theme="dark"] svg [fill="#1E3A8A"] {  fill: #8a94b4 !important; }   
@@ -2947,7 +2947,448 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
 
     // ===== 嵌入式 fallback 数据（fetch 失败时使用） =====
-    const EMBEDDED = {"board_game":{"game_name":"灵山董事会","subtitle":"反取经角色扮演桌游","designer":"西天取经真人秀项目组","player_count":"4 人","play_time":"90-120 分钟","age":"12+","core_mechanism":"玩家扮演如来/观音/老君/玉帝·共同投资'西天取经'真人秀项目·通过投放劫难博取收视率（功德值）·最终在灵山结算投资回报率","victory_condition":"游戏结束时·功德值最高者胜·或项目失败时·损失最少者胜","players":[{"role":"如来佛祖","title":"项目总设计师","starting_capital":"10000 功德","special_ability":"可强行介入一次·将任何劫难替换为'五行山压顶'·成本极低","winning_strategy":"在关键节点投放'内定劫难卡'·如大鹏金翅雕","weakness":"不能直接干预凡间·只能通过菩萨执行"},{"role":"观音菩萨","title":"项目执行人","starting_capital":"8000 功德","special_ability":"可暗中护持团队·每场劫难可消耗 500 功德降低难度","winning_strategy":"在前期保护团队成型·后期获取'紧箍咒'道具","weakness":"功德储备较少·需精打细算"},{"role":"太上老君","title":"道具供应商","starting_capital":"9000 功德","special_ability":"可向妖怪借出法宝（金刚琢·紫金葫芦等）·获得广告位曝光","winning_strategy":"通过法宝出租获取广告费·青牛精是金刚琢展示广告位","weakness":"借出的法宝可能被妖怪滥用·影响天庭声誉"},{"role":"玉皇大帝","title":"天庭 CEO","starting_capital":"7000 功德","special_ability":"可调动天兵天将·但每次调动消耗大量功德","winning_strategy":"维持天庭秩序·在项目失败时损失最少","weakness":"天兵天将战斗力有限·对顶级妖怪无效"}],"game_phases":[{"phase":"筹备期","rounds":"1-3","actions":["分配初始功德","选择投放劫难卡","建立菩萨坐骑档案"],"goal":"完成取经团队组建·建立基础规则"},{"phase":"执行期","rounds":"4-12","actions":["投放劫难卡","暗中护持或破坏","结算每场劫难的收视率","获取广告位曝光"],"goal":"通过劫难获取功德·同时维持项目运转"},{"phase":"结算期","rounds":"13-14","actions":["真经交付","灵山结算","投资回报率计算"],"goal":"功德值最高者胜"}],"hardship_cards":[{"name":"白骨精","type":"野怪","cost":500,"rating_bonus":200,"difficulty":2,"owner":"通用"},{"name":"黄袍怪","type":"天将下凡","cost":1500,"rating_bonus":500,"difficulty":4,"owner":"玉帝"},{"name":"金角银角","type":"童子下凡","cost":2000,"rating_bonus":700,"difficulty":5,"owner":"老君"},{"name":"青牛精","type":"坐骑下凡·广告位","cost":1000,"rating_bonus":800,"difficulty":6,"owner":"老君·广告"},{"name":"红孩儿","type":"妖怪世家","cost":2500,"rating_bonus":900,"difficulty":7,"owner":"通用"},{"name":"六耳猕猴","type":"心魔","cost":3000,"rating_bonus":1200,"difficulty":9,"owner":"如来"},{"name":"大鹏金翅雕","type":"内定劫难卡","cost":500,"rating_bonus":2000,"difficulty":10,"owner":"如来·内定"},{"name":"火焰山","type":"道具展示","cost":1500,"rating_bonus":1000,"difficulty":6,"owner":"通用"},{"name":"狮驼岭","type":"团队战","cost":3500,"rating_bonus":1500,"difficulty":10,"owner":"通用"},{"name":"比丘国","type":"道德考验","cost":800,"rating_bonus":400,"difficulty":3,"owner":"通用"}],"design_eggs":["金翅大鹏雕是如来方的'内定劫难卡'·投放成本极低·回报极高","青牛精是老君的金刚琢展示广告位","观音的紧箍咒是专为克制悟空设计·获取后可大幅降低项目风险","玉帝的天兵天将对顶级妖怪无效·是最大的劣势","如来的'五行山压顶'是终极保险·但只能在关键时刻使用一次"],"scoring":{"项目成功率":"60%·成功则所有玩家获得基础功德","劫难收视率":"每场劫难根据难度获取收视率·难度越高收益越高","广告位曝光":"投放带广告位的劫难卡可获取广告费","投资回报率":"最终功德 / 初始投入·最高者胜"}},"narrative_cards":{"system_name":"西游叙事卡牌 · 因果 法器 执念","innovation":"这不是复述故事 · 而是故事的生产器 · 32 张卡牌组合可生成 1200 种故事开头 · 让《西游记》从「一部经典」变为「无限源泉」。","card_groups":[{"name":"因果卡","name_en":"KARMA","color":"#C0392B","count":12,"cards":[{"id":"K01","name":"被赶出师门","context":"菩提祖师逐悟空出师门 · 不许提师承 · 暗示修仙圈的隐规则"},{"id":"K02","name":"误入魔窟","context":"误入妖王洞府 · 被识破猴王本相 · 卷入一场阴谋"},{"id":"K03","name":"故人重逢","context":"前世旧识以陌生面孔相见 · 一段尘缘重新被勾起"},{"id":"K04","name":"取经人遇难","context":"师父被妖王掠走 · 徒弟必须在限时内救回"},{"id":"K05","name":"天降甘霖","context":"久旱逢雨 · 百姓感恩 · 但雨水来历可疑"},{"id":"K06","name":"误食仙丹","context":"无意吞下仙丹 · 体内药力翻涌 · 引发异变"},{"id":"K07","name":"误入轮回","context":"坠入轮回通道 · 投胎为另一身份 · 短暂失忆"},{"id":"K08","name":"梦中点化","context":"神人入梦指点迷津 · 醒来半信半疑"},{"id":"K09","name":"凡人执剑","context":"凡人持剑挑战取经人 · 自称替天行道"},{"id":"K10","name":"天劫降临","context":"九霄雷劫劈下 · 罪人无处可逃 · 旁观者亦受波及"},{"id":"K11","name":"魂归地府","context":"魂魄误入幽冥 · 见十殿阎君 · 翻看生死簿"},{"id":"K12","name":"真假难辨","context":"出现与主角一模一样的赝品 · 谁真谁假无人能断"}]},{"name":"法器卡","name_en":"ARTIFACT","color":"#40619E","count":10,"cards":[{"id":"F01","name":"紧箍咒","function":"戴于头顶 · 念咒即痛 · 控制执行器（悟空）的核心工具"},{"id":"F02","name":"九齿钉耙","function":"猪八戒兵器 · 重达五千零四十八斤 · 农具化兵器"},{"id":"F03","name":"金箍棒","function":"定海神针 · 一万三千五百斤 · 大小如意"},{"id":"F04","name":"芭蕉扇","function":"太上老君芭蕉扇 · 一扇熄火 · 二扇生风 · 三扇降雨"},{"id":"F05","name":"金刚琢","function":"太上老君法宝 · 套万物不落 · 兵器克星"},{"id":"F06","name":"火眼金睛","function":"八卦炉中炼成 · 识破妖物本相 · 但怕烟熏"},{"id":"F07","name":"降妖宝杖","function":"沙僧兵器 · 出自月宫 · 重五千零四十八斤"},{"id":"F08","name":"紫金葫芦","function":"金角大王法宝 · 呼名即入 · 化为脓血"},{"id":"F09","name":"人种袋","function":"黄眉怪法宝 · 诸神皆入 · 一时无解"},{"id":"F10","name":"锦襕袈裟","function":"唐僧所披 · 价值连城 · 招妖引祸"}]},{"name":"执念卡","name_en":"OBSESSION","color":"#8E7D62","count":10,"cards":[{"id":"Z01","name":"傲慢","manifestation":"自视甚高 · 蔑视凡尘 · 拒绝低头"},{"id":"Z02","name":"猜忌","manifestation":"疑神疑鬼 · 不信旁人 · 独行其是"},{"id":"Z03","name":"愚忠","manifestation":"盲目服从 · 不问是非 · 以命相随"},{"id":"Z04","name":"贪欲","manifestation":"见宝起心 · 见色起意 · 永无餍足"},{"id":"Z05","name":"嗔怒","manifestation":"一言不合 · 怒火中烧 · 失去理智"},{"id":"Z06","name":"名相","manifestation":"执着名声 · 在乎虚名 · 忘却本心"},{"id":"Z07","name":"长生执念","manifestation":"渴求不死 · 迷恋肉身 · 拒绝轮回"},{"id":"Z08","name":"痴情","manifestation":"执迷一人 · 不顾众生 · 误了大业"},{"id":"Z09","name":"嫉妒","manifestation":"见人胜己 · 心生怨毒 · 必欲毁之"},{"id":"Z10","name":"逃避","manifestation":"遇事则避 · 不敢承担 · 推诿塞责"}]}],"example_combinations":[{"cards":[{"id":"K02","name":"误入魔窟","color":"#C0392B"},{"id":"F03","name":"金箍棒","color":"#40619E"},{"id":"Z02","name":"猜忌","color":"#8E7D62"}],"category":"师徒冲突型","category_color":"#40619E","opening":"悟空误入妖王洞府 · 凭一根金箍棒打杀而出 · 唐僧却在事后听信八戒之言 · 怒斥其滥杀无辜 · 师徒心生猜忌 · 取经团队首次出现裂痕。","continuation":"唐僧以紧箍咒相逼 · 悟空含泪离去 · 临行前留下一句「师父若遇难 · 喊我三声姓名即可」 · 妖王得知后立刻设计离间之计。","conflict":"信任危机 · 信任崩塌后金箍棒再锋利也救不回师徒情","resonance":"最大的妖魔 · 不在洞府 · 而在猜忌之心。"},{"cards":[{"id":"K03","name":"故人重逢","color":"#C0392B"},{"id":"F08","name":"紫金葫芦","color":"#40619E"},{"id":"Z06","name":"名相","color":"#8E7D62"}],"category":"悟道型","category_color":"#3A473A","opening":"前世的旧友以陌生面孔在路口出现 · 手持紫金葫芦轻唤悟空姓名 · 悟空应声 · 几乎被吸入葫芦之中 · 葫芦中传出一个声音：「你以齐天大圣之名行走江湖 · 却忘了本名是什么？」","continuation":"悟空被困葫芦三日 · 在虚空中听见自己所有名号回响 · 终于意识到「名」是束缚 · 一声大笑震碎葫芦 · 重获自由。","conflict":"名相之争 · 齐天大圣 vs 孙行者 vs 斗战胜佛","resonance":"放下名相 · 方见本来 · 紫金葫芦装的不是脓血 · 是执念。"},{"cards":[{"id":"K07","name":"误入轮回","color":"#C0392B"},{"id":"F06","name":"火眼金睛","color":"#40619E"},{"id":"Z01","name":"傲慢","color":"#8E7D62"}],"category":"灾难型","category_color":"#C0392B","opening":"悟空坠入轮回通道 · 投胎为一介书生 · 火眼金睛虽在 · 却被傲慢所蔽 · 见世间不平之事 · 自负才学 · 屡屡折损 · 忘了取经大业。","continuation":"唐僧路过书生书院 · 见其眉间一点金光未灭 · 认出是悟空转世 · 三次劝其归队 · 三次被拒 · 直到书生因傲慢得罪权贵 · 几乎丧命 · 才悔悟前非。","conflict":"身份迷失 · 火眼金睛也照不破傲慢之障","resonance":"傲慢 · 是轮回的开始 · 也是悟道的终点。"},{"cards":[{"id":"K10","name":"天劫降临","color":"#C0392B"},{"id":"F04","name":"芭蕉扇","color":"#40619E"},{"id":"Z07","name":"长生执念","color":"#8E7D62"}],"category":"诱惑型","category_color":"#8E7D62","opening":"九霄雷劫劈下 · 罪人无处可逃 · 芭蕉扇在混乱中落地 · 一个老者拾起扇子 · 扇出阴风 · 雷劫被引向唐僧方向 · 老者大笑：「长生不老的真经就在你身上 · 给我！」","continuation":"原来老者乃百年前一位高僧 · 因长生执念堕落为妖 · 三次索要真经不得 · 最后以芭蕉扇扇出万里黄沙 · 困住取经人三天三夜。","conflict":"正法 vs 邪修 · 同求长生 · 路径不同 · 结局殊途","resonance":"执念长生者 · 反被长生所执 · 真经不在唐僧身上 · 在放下之心。"},{"cards":[{"id":"K12","name":"真假难辨","color":"#C0392B"},{"id":"F05","name":"金刚琢","color":"#40619E"},{"id":"Z09","name":"嫉妒","color":"#8E7D62"}],"category":"师徒冲突型","category_color":"#40619E","opening":"出现一个与悟空一模一样的赝品 · 持金刚琢四处作恶 · 旁人皆以为是真悟空所为 · 唯有八戒暗喜 · 因嫉妒悟空多年 · 终于抓住机会向唐僧进谗。","continuation":"唐僧怒念紧箍咒 · 真悟空痛倒在地 · 赝品却毫发无伤 · 反证「真悟空」是假 · 真悟空百口莫辩 · 被逐出师门 · 紧箍咒从此失效。","conflict":"真假之辨 · 嫉妒是最锋利的金刚琢","resonance":"嫉妒之琢 · 套住的不是兵器 · 是人心 · 一旦戴上 · 无人能解。"}],"design_philosophy":"三组卡牌 · 32 张组合 · 可生成 12 × 10 × 10 = 1200 种故事开头"},"story_generator":{"generator_name":"西游故事生成器","total_combinations":1200,"generating_rules":["从「因果卡」中抽取 1 张 · 作为故事的场景起点（K01–K12）","从「法器卡」中抽取 1 张 · 作为故事的核心道具（F01–F10）","从「执念卡」中抽取 1 张 · 作为故事的心境主题（Z01–Z10）","三张卡的组合 · 决定故事的「开头 / 道具 / 主题」 · 由玩家自行演绎后续","同一组合可被多次演绎 · 不同玩家可生成完全不同的故事 · 这正是「生产器」的本意"],"generator_features":["可重复性 · 1200 种组合可无限演绎 · 每次结果不同","开放性 · 三卡只规定开头 · 后续由玩家自由发挥","主题性 · 每张执念卡自带主题 · 故事自然带「悟道」深度","可扩展性 · 可添加新卡组（人物卡 / 场景卡）无限扩展"],"story_categories":[{"name":"灾难型","color":"#C0392B","card_ids":"K02·误入魔窟 · K04·取经人遇难 · K06·误食仙丹 · K10·天劫降临","desc":"突发的灾难事件 · 主角须在极限条件下求生与抉择"},{"name":"师徒冲突型","color":"#40619E","card_ids":"K01·被赶出师门 · K02·误入魔窟 · K09·凡人执剑 · K12·真假难辨","desc":"取经团队内部的信任危机与理念冲突"},{"name":"悟道型","color":"#3A473A","card_ids":"K03·故人重逢 · K05·天降甘霖 · K07·误入轮回 · K08·梦中点化 · K11·魂归地府","desc":"通过奇遇与点化 · 主角领悟某种佛 / 道 / 人生真理"},{"name":"诱惑型","color":"#8E7D62","card_ids":"K06·误食仙丹 · K09·凡人执剑 · K12·真假难辨","desc":"色 / 名 / 利 / 长生等外在诱惑的考验"}],"design_innovation":"故事的生产器 · 而非复述"},"narrative_experiment_summary":{"board_game_players":4,"board_game_cards":10,"board_game_phases":3,"narrative_card_groups":3,"narrative_card_total":32,"example_combinations":5,"story_combinations":1200,"story_categories":4}};
+    const EMBEDDED = {
+  "board_game": {
+    "game_name": "灵山董事会",
+    "subtitle": "反取经角色扮演桌游",
+    "designer": "西天取经真人秀项目组",
+    "player_count": "4 人",
+    "play_time": "90-120 分钟",
+    "age": "12+",
+    "core_mechanism": "玩家扮演如来/观音/老君/玉帝·共同投资'西天取经'真人秀项目·通过投放劫难博取收视率（功德值）·最终在灵山结算投资回报率",
+    "victory_condition": "游戏结束时·功德值最高者胜·或项目失败时·损失最少者胜",
+    "players": [
+      {
+        "role": "如来佛祖",
+        "title": "项目总设计师",
+        "starting_capital": "10000 功德",
+        "special_ability": "可强行介入一次·将任何劫难替换为'五行山压顶'·成本极低",
+        "winning_strategy": "在关键节点投放'内定劫难卡'·如大鹏金翅雕",
+        "weakness": "不能直接干预凡间·只能通过菩萨执行"
+      },
+      {
+        "role": "观音菩萨",
+        "title": "项目执行人",
+        "starting_capital": "8000 功德",
+        "special_ability": "可暗中护持团队·每场劫难可消耗 500 功德降低难度",
+        "winning_strategy": "在前期保护团队成型·后期获取'紧箍咒'道具",
+        "weakness": "功德储备较少·需精打细算"
+      },
+      {
+        "role": "太上老君",
+        "title": "道具供应商",
+        "starting_capital": "9000 功德",
+        "special_ability": "可向妖怪借出法宝（金刚琢·紫金葫芦等）·获得广告位曝光",
+        "winning_strategy": "通过法宝出租获取广告费·青牛精是金刚琢展示广告位",
+        "weakness": "借出的法宝可能被妖怪滥用·影响天庭声誉"
+      },
+      {
+        "role": "玉皇大帝",
+        "title": "天庭 CEO",
+        "starting_capital": "7000 功德",
+        "special_ability": "可调动天兵天将·但每次调动消耗大量功德",
+        "winning_strategy": "维持天庭秩序·在项目失败时损失最少",
+        "weakness": "天兵天将战斗力有限·对顶级妖怪无效"
+      }
+    ],
+    "game_phases": [
+      {
+        "phase": "筹备期",
+        "rounds": "1-3",
+        "actions": [
+          "分配初始功德",
+          "选择投放劫难卡",
+          "建立菩萨坐骑档案"
+        ],
+        "goal": "完成取经团队组建·建立基础规则"
+      },
+      {
+        "phase": "执行期",
+        "rounds": "4-12",
+        "actions": [
+          "投放劫难卡",
+          "暗中护持或破坏",
+          "结算每场劫难的收视率",
+          "获取广告位曝光"
+        ],
+        "goal": "通过劫难获取功德·同时维持项目运转"
+      },
+      {
+        "phase": "结算期",
+        "rounds": "13-14",
+        "actions": [
+          "真经交付",
+          "灵山结算",
+          "投资回报率计算"
+        ],
+        "goal": "功德值最高者胜"
+      }
+    ],
+    "hardship_cards": [
+      {
+        "name": "白骨精",
+        "type": "野怪",
+        "cost": 500,
+        "rating_bonus": 200,
+        "difficulty": 2,
+        "owner": "通用"
+      },
+      {
+        "name": "黄袍怪",
+        "type": "天将下凡",
+        "cost": 1500,
+        "rating_bonus": 500,
+        "difficulty": 4,
+        "owner": "玉帝"
+      },
+      {
+        "name": "金角银角",
+        "type": "童子下凡",
+        "cost": 2000,
+        "rating_bonus": 700,
+        "difficulty": 5,
+        "owner": "老君"
+      },
+      {
+        "name": "青牛精",
+        "type": "坐骑下凡·广告位",
+        "cost": 1000,
+        "rating_bonus": 800,
+        "difficulty": 6,
+        "owner": "老君·广告"
+      },
+      {
+        "name": "红孩儿",
+        "type": "妖怪世家",
+        "cost": 2500,
+        "rating_bonus": 900,
+        "difficulty": 7,
+        "owner": "通用"
+      },
+      {
+        "name": "六耳猕猴",
+        "type": "心魔",
+        "cost": 3000,
+        "rating_bonus": 1200,
+        "difficulty": 9,
+        "owner": "如来"
+      },
+      {
+        "name": "大鹏金翅雕",
+        "type": "内定劫难卡",
+        "cost": 500,
+        "rating_bonus": 2000,
+        "difficulty": 10,
+        "owner": "如来·内定"
+      },
+      {
+        "name": "火焰山",
+        "type": "道具展示",
+        "cost": 1500,
+        "rating_bonus": 1000,
+        "difficulty": 6,
+        "owner": "通用"
+      },
+      {
+        "name": "狮驼岭",
+        "type": "团队战",
+        "cost": 3500,
+        "rating_bonus": 1500,
+        "difficulty": 10,
+        "owner": "通用"
+      },
+      {
+        "name": "比丘国",
+        "type": "道德考验",
+        "cost": 800,
+        "rating_bonus": 400,
+        "difficulty": 3,
+        "owner": "通用"
+      }
+    ],
+    "design_eggs": [
+      "金翅大鹏雕是如来方的'内定劫难卡'·投放成本极低·回报极高",
+      "青牛精是老君的金刚琢展示广告位",
+      "观音的紧箍咒是专为克制悟空设计·获取后可大幅降低项目风险",
+      "玉帝的天兵天将对顶级妖怪无效·是最大的劣势",
+      "如来的'五行山压顶'是终极保险·但只能在关键时刻使用一次"
+    ],
+    "scoring": {
+      "项目成功率": "60%·成功则所有玩家获得基础功德",
+      "劫难收视率": "每场劫难根据难度获取收视率·难度越高收益越高",
+      "广告位曝光": "投放带广告位的劫难卡可获取广告费",
+      "投资回报率": "最终功德 / 初始投入·最高者胜"
+    }
+  },
+  "narrative_cards": {
+    "system_name": "西游叙事卡牌·因果 法器 执念",
+    "designer": "故事生产器实验室",
+    "core_mechanism": "三组卡牌·任意组合三张即可生成一个全新的、符合原著逻辑的'新劫难'故事开头",
+    "innovation": "这不是复述故事·而是故事的生产器",
+    "card_groups": [
+      {
+        "group_name": "因果卡",
+        "english_name": "Cause-Effect Cards",
+        "card_count": 12,
+        "description": "抽取场景·如'被赶出师门'·'误入魔窟'",
+        "color": "#C0392B",
+        "cards": [
+          {
+            "id": "K01",
+            "scene": "被赶出师门",
+            "context": "因与师父理念不合·被逐出师门"
+          },
+          {
+            "id": "K02",
+            "scene": "误入魔窟",
+            "context": "在浓雾中迷失·误入妖魔洞府"
+          },
+          {
+            "id": "K03",
+            "scene": "故人重逢",
+            "context": "在异乡遇到旧识·但身份已变"
+          },
+          {
+            "id": "K04",
+            "scene": "误食禁果",
+            "context": "在饥饿中误食仙果·获得异能"
+          },
+          {
+            "id": "K05",
+            "scene": "被诬陷",
+            "context": "被陷害成凶手·百口莫辩"
+          },
+          {
+            "id": "K06",
+            "scene": "天降大任",
+            "context": "被选中完成一项不可能的任务"
+          },
+          {
+            "id": "K07",
+            "scene": "误入轮回",
+            "context": "因一念之差·误入六道轮回"
+          },
+          {
+            "id": "K08",
+            "scene": "故地重游",
+            "context": "重返旧地·但人非物也非"
+          },
+          {
+            "id": "K09",
+            "scene": "梦中悟道",
+            "context": "在梦中悟得大道·醒来后发现是真的"
+          },
+          {
+            "id": "K10",
+            "scene": "天劫降临",
+            "context": "突遭天劫·道行尽失"
+          },
+          {
+            "id": "K11",
+            "scene": "契约反噬",
+            "context": "昔日定下的契约·如今反噬自身"
+          },
+          {
+            "id": "K12",
+            "scene": "真假难辨",
+            "context": "出现一个与自己一模一样的人"
+          }
+        ]
+      },
+      {
+        "group_name": "法器卡",
+        "english_name": "Artifact Cards",
+        "card_count": 10,
+        "description": "抽取资源·如'紧箍咒'·'救命毫毛'",
+        "color": "#40619E",
+        "cards": [
+          {
+            "id": "F01",
+            "artifact": "紧箍咒",
+            "function": "控制他人·但有反噬风险"
+          },
+          {
+            "id": "F02",
+            "artifact": "救命毫毛",
+            "function": "可变化任意物品·共 3 次"
+          },
+          {
+            "id": "F03",
+            "artifact": "金箍棒",
+            "function": "物理伤害×3·但使用者需有道行"
+          },
+          {
+            "id": "F04",
+            "artifact": "芭蕉扇",
+            "function": "一扇扇出八万四千里·专克火系"
+          },
+          {
+            "id": "F05",
+            "artifact": "金刚琢",
+            "function": "收取一切攻击性法宝·但对芭蕉扇无效"
+          },
+          {
+            "id": "F06",
+            "artifact": "火眼金睛",
+            "function": "识破一切幻术·但畏烟"
+          },
+          {
+            "id": "F07",
+            "artifact": "三昧真火",
+            "function": "持续燃烧伤害·对火系敌人无效"
+          },
+          {
+            "id": "F08",
+            "artifact": "紫金葫芦",
+            "function": "呼名即应·一时三刻化为脓水"
+          },
+          {
+            "id": "F09",
+            "artifact": "筋斗云",
+            "function": "一筋斗十万八千里·先手必中"
+          },
+          {
+            "id": "F10",
+            "artifact": "九齿钉耙",
+            "function": "物理伤害×1.5"
+          }
+        ]
+      },
+      {
+        "group_name": "执念卡",
+        "english_name": "Obsession Cards",
+        "card_count": 10,
+        "description": "抽取内心障碍·如'傲慢'·'猜忌'·'愚忠'",
+        "color": "#3A473A",
+        "cards": [
+          {
+            "id": "Z01",
+            "obsession": "傲慢",
+            "manifestation": "自认天下第一·轻视一切对手"
+          },
+          {
+            "id": "Z02",
+            "obsession": "猜忌",
+            "manifestation": "怀疑所有人·包括至亲"
+          },
+          {
+            "id": "Z03",
+            "obsession": "愚忠",
+            "manifestation": "对师父盲从·明知是错也执行"
+          },
+          {
+            "id": "Z04",
+            "obsession": "贪食",
+            "manifestation": "见美食就走不动·容易上当"
+          },
+          {
+            "id": "Z05",
+            "obsession": "好色",
+            "manifestation": "见美女就失智·丧失判断力"
+          },
+          {
+            "id": "Z06",
+            "obsession": "名相",
+            "manifestation": "执着于名号与身份·难以放下"
+          },
+          {
+            "id": "Z07",
+            "obsession": "长生执念",
+            "manifestation": "为长生不老可以做任何事"
+          },
+          {
+            "id": "Z08",
+            "obsession": "复仇",
+            "manifestation": "为报仇可以不择手段"
+          },
+          {
+            "id": "Z09",
+            "obsession": "嫉妒",
+            "manifestation": "见他人成功就心生怨恨"
+          },
+          {
+            "id": "Z10",
+            "obsession": "逃避",
+            "manifestation": "一遇挫折就想散伙·不愿面对"
+          }
+        ]
+      }
+    ],
+    "example_combinations": [
+      {
+        "combination": "K02 误入魔窟 + F03 金箍棒 + Z02 猜忌",
+        "story_opening": "在阴暗的魔窟中·孙悟空的金箍棒突然不听使唤·因为唐僧对他的猜忌·正化作一股无形的力量·腐蚀着他的法力之源",
+        "story_continuation": "悟空的攻击不仅没有伤害妖怪·反而被妖怪利用·将金箍棒的力量反弹回来",
+        "key_conflict": "猜忌削弱了师徒之间的信任·也让金箍棒的法力大减",
+        "thematic_resonance": "执念是最大的敌人·比妖魔更可怕的是内心的猜忌"
+      },
+      {
+        "combination": "K03 故人重逢 + F08 紫金葫芦 + Z06 名相",
+        "story_opening": "在异乡·悟空遇到了一位旧识·但这位旧识已转世为妖怪·用紫金葫芦呼名欲收悟空",
+        "story_continuation": "悟空因执着于'齐天大圣'的名号·一时不慎应了名·差点被葫芦收走",
+        "key_conflict": "名相是悟空最深的执念·当年'齐天大圣'的名号让他吃了大亏",
+        "thematic_resonance": "名号是虚妄·放下名相方能自在"
+      },
+      {
+        "combination": "K07 误入轮回 + F06 火眼金睛 + Z01 傲慢",
+        "story_opening": "悟空误入六道轮回·转世为一介凡人·但火眼金睛仍在·让他看见周围都是妖魔",
+        "story_continuation": "悟空因傲慢不愿承认自己是凡人·坚持要与妖魔战斗·结果被凡人拳头打伤",
+        "key_conflict": "傲慢让他无法接受凡人身份·也无法正确评估自身实力",
+        "thematic_resonance": "执念是最大的敌人·比妖魔更可怕的是内心的傲慢"
+      },
+      {
+        "combination": "K10 天劫降临 + F04 芭蕉扇 + Z07 长生执念",
+        "story_opening": "天劫降临·一个妖怪因长生执念·用芭蕉扇试图将天劫扇走",
+        "story_continuation": "但天劫是天道·芭蕉扇无法对抗天道·妖怪最终灰飞烟灭",
+        "key_conflict": "长生执念让妖怪不择手段·但终敌不过天道",
+        "thematic_resonance": "长生是虚妄·顺应天道方能自在"
+      },
+      {
+        "combination": "K12 真假难辨 + F05 金刚琢 + Z09 嫉妒",
+        "story_opening": "出现一个与悟空一模一样的人·他手持金刚琢·声称自己才是真正的悟空",
+        "story_continuation": "假悟空因嫉妒真悟空·用金刚琢收取了真悟空的金箍棒·让真悟空陷入困境",
+        "key_conflict": "嫉妒是假悟空的执念·让他不惜冒充他人",
+        "thematic_resonance": "嫉妒是最大的敌人·比真假难辨更可怕的是内心的嫉妒"
+      }
+    ],
+    "design_philosophy": "三组卡牌·32 张组合·可生成 12×10×10 = 1200 种故事开头·每一次抽牌都是一次新的西游冒险"
+  },
+  "story_generator": {
+    "generator_name": "西游故事生成器",
+    "based_on": "《因果 法器 执念》叙事卡牌系统",
+    "total_combinations": 1200,
+    "generating_rules": [
+      "从因果卡中随机抽取 1 张（共 12 张）",
+      "从法器卡中随机抽取 1 张（共 10 张）",
+      "从执念卡中随机抽取 1 张（共 10 张）",
+      "组合三张卡·生成一个故事开头",
+      "故事开头需符合原著逻辑·并体现三张卡的关键元素"
+    ],
+    "generator_features": [
+      "可指定固定卡牌组合·生成特定故事",
+      "可生成完整故事·或仅生成开头",
+      "可导出故事为 markdown 文件",
+      "支持多人协作·每人抽一组卡·共同构建故事"
+    ],
+    "story_categories": {
+      "灾难型": "K02 误入魔窟 + K07 误入轮回 + K10 天劫降临",
+      "师徒冲突型": "K01 被赶出师门 + K05 被诬陷 + K12 真假难辨",
+      "悟道型": "K09 梦中悟道 + K03 故人重逢 + K08 故地重游",
+      "诱惑型": "K04 误食禁果 + K06 天降大任 + K11 契约反噬"
+    },
+    "design_innovation": "故事的生产器·而非复述·让《西游记》成为无限的灵感源泉"
+  },
+  "narrative_experiment_summary": {
+    "board_game_players": 4,
+    "board_game_cards": 10,
+    "board_game_phases": 3,
+    "narrative_card_groups": 3,
+    "narrative_card_total": 32,
+    "example_combinations": 5,
+    "story_combinations": 1200,
+    "story_categories": 4
+  }
+};
 
     // ===== 配色映射 =====
     const PHASE_COLORS = ["#c9a14a", "#C0392B", "#8E7D62"];
@@ -3152,6 +3593,86 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             card.append("div").attr("class", "sc-name").style("color", s.color).text(s.name);
             card.append("div").attr("class", "sc-desc").text(s.desc);
         });
+    }
+
+
+    // ============================================================
+    // W1265 真值字段形态适配层（真值源换形态 ⇒ 渲染契约同步）
+    // 真值侧：card_groups 由对象改为数组、卡牌字段 scene（页面旧契约要 name）、
+    // example_combinations 改为 combination/story_opening/story_continuation/
+    // key_conflict/thematic_resonance、story_categories 由数组改为对象
+    // ⇒ 统一在此归一，避免逐处改渲染逻辑；只做改名/形态转换/解析，不编造内容。
+    function normalizeCardGroups(nc) {
+        const src = nc && nc.card_groups;
+        const list = Array.isArray(src) ? src : Object.values(src || {});
+        return list.map((g, i) => {
+            if (!g) return g;
+            const cards = (g.cards || []).map(c => Object.assign({}, c, {
+                name: (c && c.name) || (c && c.scene) || ''
+            }));
+            // W1265: 执念卡原真值色（ZH #7a5230 / EN #8E7D62）与现役 chart-1(#C0392B) 在 protan 下 ΔE=1.9
+            // ⇒ 真值与渲染统一改用现役序列槽苔绿 #3A473A（真值源 + 部署副本 + 本页内嵌三处同步）
+            const safeColor = (i === 2) ? '#3A473A' : (g.color || '#8E7D62');
+            return Object.assign({}, g, {
+                color: safeColor,
+                cards: cards,
+                count: (g.count != null) ? g.count : (g.card_count != null ? g.card_count : 0)
+            });
+        });
+    }
+    function buildCardIndex(nc) {
+        const idx = {};
+        const src = nc && nc.card_groups;
+        const list = Array.isArray(src) ? src : Object.values(src || {});
+        list.forEach(g => (g && g.cards || []).forEach(c => {
+            if (c && c.id) idx[c.id] = {
+                id: c.id, name: c.name || c.scene || '',
+                color: g.color || '#8E7D62',
+                group: g.group_name || g.english_name || ''
+            };
+        }));
+        return idx;
+    }
+    function normalizeNc(nc) {
+        if (!nc) return nc;
+        return Object.assign({}, nc, { card_groups: normalizeCardGroups(nc) });
+    }
+    function normalizeStories(stories, nc) {
+        const idx = buildCardIndex(nc);
+        return (stories || []).map(s => {
+            const parts = String((s && s.combination) || '').split('+')
+                .map(x => x.trim()).filter(Boolean);
+            const cards = parts.map(p => {
+                const m = p.match(/^([A-Z]\d+)\s*(.*)$/);
+                const id = m ? m[1] : p;
+                const nm = (m && m[2]) ? m[2] : ((idx[id] && idx[id].name) || '');
+                const meta = idx[id] || {};
+                return { id: id, name: nm, color: meta.color || '#8E7D62' };
+            });
+            const first = cards[0] || {};
+            return {
+                category_color: first.color || '#8E7D62',
+                category: first.group || first.id || '',
+                cards: cards,
+                opening: (s && (s.story_opening || s.opening)) || '',
+                continuation: (s && (s.story_continuation || s.continuation)) || '',
+                conflict: (s && (s.key_conflict || s.conflict)) || '',
+                resonance: (s && (s.thematic_resonance || s.resonance)) || ''
+            };
+        });
+    }
+    function normalizeCategories(gen, nc) {
+        if (!gen) return gen;
+        const src = gen.story_categories;
+        if (Array.isArray(src)) return gen;
+        const idx = buildCardIndex(nc);
+        const arr = Object.keys(src || {}).map(name => {
+            const desc = String(src[name]);
+            const m = desc.match(/[A-Z]\d+/);
+            const meta = (m && idx[m[0]]) || {};
+            return { name: name, desc: desc, card_ids: desc, color: meta.color || '#8E7D62' };
+        });
+        return Object.assign({}, gen, { story_categories: arr });
     }
 
     // ===== 渲染：叙事卡牌系统 =====
@@ -3565,10 +4086,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         safe("renderHardship", () => renderHardship(data.board_game.hardship_cards));
         safe("renderEggs", () => renderEggs(data.board_game.design_eggs));
         safe("renderScoring", () => renderScoring(data.board_game.scoring));
-        safe("renderNarrativeCards", () => renderNarrativeCards(data.narrative_cards));
-        safe("renderStories", () => renderStories(data.narrative_cards.example_combinations));
-        safe("renderGenerator", () => renderGenerator(data.story_generator));
-        safe("renderComboViz", () => renderComboViz(data.narrative_cards));
+        safe("renderNarrativeCards", () => renderNarrativeCards(normalizeNc(data.narrative_cards)));
+        safe("renderStories", () => renderStories(normalizeStories(data.narrative_cards.example_combinations, data.narrative_cards)));
+        safe("renderGenerator", () => renderGenerator(normalizeCategories(data.story_generator, data.narrative_cards)));
+        safe("renderComboViz", () => renderComboViz(normalizeNc(data.narrative_cards)));
         renderInsights();
 
         // 生成时间

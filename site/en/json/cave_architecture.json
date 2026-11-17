@@ -1,0 +1,230 @@
+{
+  "concept_name": "Cave Architecture Typology",
+  "english_name": "Cave Architecture Typology",
+  "definition": "Architectural typology: classified by architectural form, spatial structure, and functional features to reveal cultural and historical context.",
+  "core_case": "Demon caves can be classified by architectural form into natural karst caves, cliff tombs, waterside villas, and underground labyrinths — fantasy projections of pre-Ming architectural remains.",
+  "architectural_types": [
+    {
+      "type_name": "Natural Karst Cave",
+      "english_name": "Natural Karst Cave Type",
+      "features": [
+        "Limestone dissolution",
+        "Stalactites",
+        "Underground river",
+        "Natural ventilation"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "Water Curtain Cave",
+          "owner": "Sun Wukong",
+          "location": "Flower-Fruit Mountain",
+          "chapter": "Ch. 1",
+          "spatial_structure": "waterfall + stone rooms + stone bed + stone stool inside",
+          "function": "dwelling + refuge",
+          "luxury_level": 8,
+          "ecological_integration": "Extremely high · one with the mountain"
+        },
+        {
+          "cave_name": "Black Wind Cave",
+          "owner": "Black Bear Demon",
+          "location": "Black Wind Mountain",
+          "chapter": "Ch. 16-17",
+          "spatial_structure": "Buddhist robe assembly · Buddhist rites inside",
+          "function": "dwelling + Buddhist rites",
+          "luxury_level": 6,
+          "ecological_integration": "High"
+        },
+        {
+          "cave_name": "Wave-Moon Cave",
+          "owner": "Yellow Robe Demon",
+          "location": "Bowl Mountain",
+          "chapter": "Ch. 28-31",
+          "spatial_structure": "palace inside · seized princess",
+          "function": "dwelling + imprisonment",
+          "luxury_level": 7,
+          "ecological_integration": "Medium"
+        }
+      ],
+      "archaeological_parallel": "Guilin karst caves in Guangxi + Zhijin Cave in Guizhou",
+      "architectural_significance": "The oldest dwelling form · reflects the Ming Dynasty 'cave worship' tradition"
+    },
+    {
+      "type_name": "Cliff Tomb",
+      "english_name": "Cliff Tomb Type",
+      "features": [
+        "Cliff-carved",
+        "Stone chamber",
+        "Tomb structure",
+        "Commanding height"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "Spider Silk Cave",
+          "owner": "Spider Demon",
+          "location": "Spider Silk Ridge",
+          "chapter": "Ch. 72-73",
+          "spatial_structure": "deep pit + silk nets + hidden chambers inside",
+          "function": "dwelling + trap",
+          "luxury_level": 4,
+          "ecological_integration": "Medium"
+        },
+        {
+          "cave_name": "Lotus Cave",
+          "owner": "Gold Horn King + Silver Horn King",
+          "location": "Flat-Topped Mountain",
+          "chapter": "Ch. 32-35",
+          "spatial_structure": "cliff-carved + stone chamber + stone door",
+          "function": "dwelling + treasure hoard",
+          "luxury_level": 6,
+          "ecological_integration": "High"
+        }
+      ],
+      "archaeological_parallel": "Leshan cliff tombs in Sichuan + Fujian tulou",
+      "architectural_significance": "Cliff tombs are a Han Dynasty burial custom · reflect associations with 'heights' and the 'sacred'"
+    },
+    {
+      "type_name": "Waterside Villa",
+      "english_name": "Waterside Villa Type",
+      "features": [
+        "Built by water",
+        "Pavilions and towers",
+        "Waterscape surroundings",
+        "Lavish decoration"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "Green Wave Pool",
+          "owner": "Wansheng Dragon King",
+          "location": "Rocky Mountain",
+          "chapter": "Ch. 62-63",
+          "spatial_structure": "dragon-palace style + waterscape + pavilions",
+          "function": "dwelling + banqueting",
+          "luxury_level": 10,
+          "ecological_integration": "Extremely high · one with the waterscape"
+        },
+        {
+          "cave_name": "Tongtian River Dragon Palace",
+          "owner": "Goldfish Spirit",
+          "location": "Tongtian River",
+          "chapter": "Ch. 47-49",
+          "spatial_structure": "underwater dragon palace + crystal palace",
+          "function": "dwelling + sacrifice",
+          "luxury_level": 8,
+          "ecological_integration": "Extremely high · underwater"
+        },
+        {
+          "cave_name": "Crystal Palace",
+          "owner": "East Sea Dragon King",
+          "location": "East Sea",
+          "chapter": "Ch. 3",
+          "spatial_structure": "seabed dragon palace + crystal architecture",
+          "function": "dwelling + governance",
+          "luxury_level": 10,
+          "ecological_integration": "Extremely high · seabed"
+        }
+      ],
+      "archaeological_parallel": "Suzhou gardens + Jiangnan waterside villas",
+      "architectural_significance": "Waterside villas reflect Ming Dynasty Jiangnan garden aesthetics · dragon palaces refract royal architecture"
+    },
+    {
+      "type_name": "Underground Labyrinth",
+      "english_name": "Underground Labyrinth Type",
+      "features": [
+        "Deep underground excavation",
+        "Multi-level structure",
+        "Labyrinthine passages",
+        "Hidden chambers and mechanisms"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "Bottomless Cave",
+          "owner": "Mouse Spirit",
+          "location": "Sinkhole Mountain",
+          "chapter": "Ch. 80-83",
+          "spatial_structure": "endless excavation + multiple levels + labyrinth",
+          "function": "dwelling + imprisonment + concealment",
+          "luxury_level": 7,
+          "ecological_integration": "Low · artificial"
+        },
+        {
+          "cave_name": "Lion-Camel Cave",
+          "owner": "Three Demon Kings",
+          "location": "Lion-Camel Ridge",
+          "chapter": "Ch. 74-77",
+          "spatial_structure": "vast underground + bone decoration + multiple levels",
+          "function": "dwelling + slaughter + corpse concealment",
+          "luxury_level": 3,
+          "ecological_integration": "Low · dreadful"
+        },
+        {
+          "cave_name": "Nine-Curve Meandering Cave",
+          "owner": "Nine-Spirited Primordial Sage",
+          "location": "Bamboo-Knot Mountain",
+          "chapter": "Ch. 89-90",
+          "spatial_structure": "nine-curve labyrinth + stone chamber + secret passage",
+          "function": "dwelling + defense",
+          "luxury_level": 6,
+          "ecological_integration": "Medium"
+        }
+      ],
+      "archaeological_parallel": "Qin Shi Huang's underground palace + Ming Dynasty cellars",
+      "architectural_significance": "Underground labyrinths reflect imaginings of the 'underworld' · corresponding to imperial tombs"
+    },
+    {
+      "type_name": "Mountain Palace",
+      "english_name": "Mountain Palace Type",
+      "features": [
+        "Carved into the mountain",
+        "Palatial",
+        "Carved beams and painted rafters",
+        "Lavish decoration"
+      ],
+      "representative_caves": [
+        {
+          "cave_name": "Fire-Cloud Cave",
+          "owner": "Red Boy",
+          "location": "Mount Hao",
+          "chapter": "Ch. 40-42",
+          "spatial_structure": "mountain palace + fire pool + stone chamber",
+          "function": "dwelling + cultivation",
+          "luxury_level": 7,
+          "ecological_integration": "Medium · fire theme"
+        },
+        {
+          "cave_name": "Little Western Heaven · Little Thunderclap Temple",
+          "owner": "Yellow Brow Demon",
+          "location": "Little Western Heaven",
+          "chapter": "Ch. 65-66",
+          "spatial_structure": "mountain temple + fake Buddha hall + the Human-Seed Bag",
+          "function": "dwelling + fake Buddhist rites",
+          "luxury_level": 9,
+          "ecological_integration": "Low · fake sanctity"
+        }
+      ],
+      "archaeological_parallel": "Golden Hall on Mount Wudang + the Potala Palace",
+      "architectural_significance": "Mountain palaces reflect Ming Dynasty mountain worship + fusion with royal architecture"
+    }
+  ],
+  "architecture_insights": [
+    "The 5 major cave types cover the main Ming Dynasty architectural forms.",
+    "Natural karst caves are the most ancient, reflecting the Ming Dynasty's cave-worship tradition.",
+    "Cliff tombs derive from Han Dynasty burial customs, reflecting associations with the 'sacred heights'.",
+    "Waterside villas refract Jiangnan garden aesthetics; dragon palaces correspond to royal architecture.",
+    "Underground labyrinths correspond to imperial tombs, reflecting imaginings of the 'underworld'.",
+    "Mountain palaces fuse mountain worship with royal architecture and are the most luxurious.",
+    "Cave luxury correlates with demon background: grassroots demons live in karst caves, aristocrats in palaces."
+  ],
+  "architectural_classification_stats": {
+    "total_caves": 14,
+    "type_distribution": {
+      "Natural Cavern": 3,
+      "Cliff Tomb": 2,
+      "Waterside Villa": 3,
+      "Underground Labyrinth": 3,
+      "Palace in the Mountains": 2
+    },
+    "avg_luxury": 6.6,
+    "most_luxurious": "Green Wave Pool + Crystal Palace (10/10)",
+    "least_luxurious": "Lion-Camel Cave (3/10)"
+  }
+}

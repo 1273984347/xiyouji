@@ -1,0 +1,254 @@
+{
+  "concept_name": "Language Identity Map",
+  "english_name": "Language Identity Map",
+  "definition": "Language identity: quantifying a character's cultural identity through their linguistic features, reflecting Three-Teachings synthesis",
+  "core_finding": "Tang Sanzang's language leans Buddhist (many Sanskrit loanwords) · Wukong leans Daoist + colloquial · Bajie leans colloquial · Sha Wujing leans classical · the Buddha leans scriptural · the gods lean Daoist",
+  "character_language_profiles": [
+    {
+      "character": "Tang Sanzang",
+      "language_identity": "Buddhist monk + Confucian scholar",
+      "sanskrit_loanword_proportion": 25,
+      "taoist_term_proportion": 5,
+      "ming_colloquial_proportion": 20,
+      "classical_chinese_proportion": 50,
+      "buddhist_term_proportion": 30,
+      "representative_vocabulary": [
+        "Namo",
+        "compassion",
+        "monk",
+        "precepts",
+        "excellent",
+        "Amitābha"
+      ],
+      "language_features": [
+        "Many Buddhist terms · 'namo', 'compassion'",
+        "Predominantly classical · 'we', 'must not'",
+        "Confucian cultivation · 'do not take life'",
+        "Didactic · slow"
+      ],
+      "cultural_identity": "Buddhist monk + Confucian scholar · cultural orthodoxy",
+      "identity_score_buddhist": 9,
+      "identity_score_daoist": 1,
+      "identity_score_confucian": 7,
+      "identity_score_folk": 2
+    },
+    {
+      "character": "Sun Wukong",
+      "language_identity": "Daoist adept + street martial artist",
+      "sanskrit_loanword_proportion": 10,
+      "taoist_term_proportion": 35,
+      "ming_colloquial_proportion": 40,
+      "classical_chinese_proportion": 15,
+      "buddhist_term_proportion": 10,
+      "representative_vocabulary": [
+        "old Sun",
+        "impudent fiend",
+        "beast",
+        "don't you run",
+        "Water-Avoiding Spell",
+        "Five Thunder Spell"
+      ],
+      "language_features": [
+        "Colloquial · 'old Sun', 'impudent fiend'",
+        "Daoist terminology · 'Water-Avoiding Spell', 'Five Thunder Spell'",
+        "Martial storytelling · 'don't you run', 'take my blow'",
+        "Flexibly switching · Buddhist or Daoist as needed"
+      ],
+      "cultural_identity": "Daoist adept + street martial artist · folk hero",
+      "identity_score_buddhist": 4,
+      "identity_score_daoist": 8,
+      "identity_score_confucian": 2,
+      "identity_score_folk": 9
+    },
+    {
+      "character": "Zhu Bajie",
+      "language_identity": "Common man of the marketplace + Daoist warrior",
+      "sanskrit_loanword_proportion": 5,
+      "taoist_term_proportion": 20,
+      "ming_colloquial_proportion": 60,
+      "classical_chinese_proportion": 15,
+      "buddhist_term_proportion": 10,
+      "representative_vocabulary": [
+        "old Pig",
+        "brother",
+        "disband",
+        "back to Gao Village",
+        "Chang'e",
+        "vegetarian meal"
+      ],
+      "language_features": [
+        "Predominantly colloquial · 'old Pig', 'brother'",
+        "Emotional · 'disband', 'back to Gao Village'",
+        "Daoist vestige · 'Marshal Tianpeng'",
+        "No classical cultivation"
+      ],
+      "cultural_identity": "Common man + Daoist warrior · the most worldly",
+      "identity_score_buddhist": 3,
+      "identity_score_daoist": 6,
+      "identity_score_confucian": 1,
+      "identity_score_folk": 10
+    },
+    {
+      "character": "Sha Wujing",
+      "language_identity": "Confucian guardian + Buddhist",
+      "sanskrit_loanword_proportion": 15,
+      "taoist_term_proportion": 10,
+      "ming_colloquial_proportion": 30,
+      "classical_chinese_proportion": 45,
+      "buddhist_term_proportion": 20,
+      "representative_vocabulary": [
+        "elder brother",
+        "Master",
+        "I beg",
+        "senior brother",
+        "excellent",
+        "Amitābha"
+      ],
+      "language_features": [
+        "Predominantly classical · 'I beg', 'senior brother'",
+        "Buddhist terminology · 'excellent'",
+        "Polite · honorific",
+        "ISFJ guardian style"
+      ],
+      "cultural_identity": "Confucian guardian + Buddhist · the most traditional",
+      "identity_score_buddhist": 7,
+      "identity_score_daoist": 2,
+      "identity_score_confucian": 8,
+      "identity_score_folk": 4
+    },
+    {
+      "character": "Tathāgata Buddha",
+      "language_identity": "Supreme Buddhist + philosophical dialectic",
+      "sanskrit_loanword_proportion": 40,
+      "taoist_term_proportion": 0,
+      "ming_colloquial_proportion": 0,
+      "classical_chinese_proportion": 60,
+      "buddhist_term_proportion": 70,
+      "representative_vocabulary": [
+        "Namo",
+        "form is not different from emptiness",
+        "emptiness is not different from form",
+        "Prajñāpāramitā",
+        "Bodhi",
+        "Nirvāṇa"
+      ],
+      "language_features": [
+        "Scriptural classical · 'form is not different from emptiness'",
+        "Sanskrit loanword · 'Prajñāpāramitā'",
+        "Philosophical dialectic · 'emptiness', 'form'",
+        "Solemn · slow"
+      ],
+      "cultural_identity": "Supreme Buddhist + philosophical dialectic · the most sacred",
+      "identity_score_buddhist": 10,
+      "identity_score_daoist": 0,
+      "identity_score_confucian": 3,
+      "identity_score_folk": 0
+    },
+    {
+      "character": "Guanyin Bodhisattva",
+      "language_identity": "Buddhist compassion + Confucian propriety",
+      "sanskrit_loanword_proportion": 30,
+      "taoist_term_proportion": 5,
+      "ming_colloquial_proportion": 15,
+      "classical_chinese_proportion": 50,
+      "buddhist_term_proportion": 50,
+      "representative_vocabulary": [
+        "Namo",
+        "excellent",
+        "compassion",
+        "universal deliverance",
+        "all beings",
+        "Prajñā"
+      ],
+      "language_features": [
+        "Buddhist terminology · 'universal deliverance', 'all beings'",
+        "Confucian propriety · 'excellent'",
+        "Classical · solemn",
+        "Compassionate · consoling"
+      ],
+      "cultural_identity": "Buddhist compassion + Confucian propriety · a fusion",
+      "identity_score_buddhist": 9,
+      "identity_score_daoist": 1,
+      "identity_score_confucian": 6,
+      "identity_score_folk": 2
+    },
+    {
+      "character": "Taishang Laojun",
+      "language_identity": "Supreme Daoist + Daoist philosophy",
+      "sanskrit_loanword_proportion": 0,
+      "taoist_term_proportion": 70,
+      "ming_colloquial_proportion": 5,
+      "classical_chinese_proportion": 25,
+      "buddhist_term_proportion": 0,
+      "representative_vocabulary": [
+        "Dao",
+        "nothingness",
+        "qi",
+        "alchemy",
+        "golden elixir",
+        "talismans",
+        "yin-yang"
+      ],
+      "language_features": [
+        "Daoist terminology · 'Dao', 'nothingness', 'qi'",
+        "Daoist philosophy · 'yin-yang'",
+        "Classical · concise",
+        "Alchemy · 'golden elixir'"
+      ],
+      "cultural_identity": "Supreme Daoist + Daoist philosophy · the most esoteric",
+      "identity_score_buddhist": 0,
+      "identity_score_daoist": 10,
+      "identity_score_confucian": 4,
+      "identity_score_folk": 1
+    },
+    {
+      "character": "Jade Emperor",
+      "language_identity": "Heavenly bureaucrat + Confucian sovereign",
+      "sanskrit_loanword_proportion": 5,
+      "taoist_term_proportion": 20,
+      "ming_colloquial_proportion": 15,
+      "classical_chinese_proportion": 60,
+      "buddhist_term_proportion": 5,
+      "representative_vocabulary": [
+        "approve the memorial",
+        "imperial edict",
+        "minister",
+        "pardon",
+        "decree",
+        "thus decreed"
+      ],
+      "language_features": [
+        "Official classical · 'approve the memorial', 'imperial edict'",
+        "Confucian sovereign · 'minister', 'pardon'",
+        "Imperative · 'decree'",
+        "Bureaucratic institutional language"
+      ],
+      "cultural_identity": "Heavenly bureaucrat + Confucian sovereign · the most orthodox",
+      "identity_score_buddhist": 1,
+      "identity_score_daoist": 4,
+      "identity_score_confucian": 10,
+      "identity_score_folk": 1
+    }
+  ],
+  "language_identity_insights": [
+    "The language-identity map of eight characters clearly reflects Three-Teachings synthesis",
+    "Tang Sanzang / the Buddha / Guanyin lean Buddhist · high language identity (Buddhist 7-10 points)",
+    "Wukong / Laojun lean Daoist · but Wukong is more colloquialized (Daoist 8-10 points · colloquial 9 points)",
+    "Bajie is the most colloquialized (colloquial 10 points) · the most worldly",
+    "Sha Wujing / the Jade Emperor lean Confucian · but Sha Wujing is Buddhist-ized (Confucian 8 points)",
+    "Character language identity correlates with MBTI: INFJ Tang Sanzang leans Buddhist · ENTP Wukong leans Daoist + colloquial · ESFP Bajie leans colloquial · ISFJ Sha Wujing leans Confucian",
+    "The language-identity map reflects the Three-Teachings synthesis of Journey to the West: Buddhist + Daoist + Confucian + folk · a four-way fusion"
+  ],
+  "language_classification_stats": {
+    "total_characters": 8,
+    "buddhist_dominant": 3,
+    "daoist_dominant": 2,
+    "confucian_dominant": 1,
+    "folk_dominant": 1,
+    "mixed": 1,
+    "avg_sanskrit_proportion": 16.25,
+    "avg_taoist_proportion": 21.25,
+    "avg_ming_colloquial_proportion": 23.75,
+    "avg_classical_chinese_proportion": 38.75
+  }
+}

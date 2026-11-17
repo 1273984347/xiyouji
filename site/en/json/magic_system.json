@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Seventy-Two Earthly Transformations",
+    "alias": "Earthly-number · seventy-two transformations",
+    "practitioner": "Sun Wukong (taught by Patriarch Subodhi)",
+    "origin": "Patriarch Subodhi · Mount Lingtai Fangcun · the Cave of the Slanting Moon and Three Stars",
+    "nature": "Transformation art · avoiding the three calamities",
+    "count": 72,
+    "philosophy": "Earthly in number, of yin nature; governs transformation and concealment — avoiding calamity and hiding one's true form",
+    "pros": "Infinite transformations; can avoid the three calamities (thunder / fire / wind)",
+    "cons": "Tail feathers hard to hide (turning into a temple leaves the tail exposed); a transformed object cannot exceed its original form",
+    "rival": "Thirty-Six Heavenly Transformations",
+    "chapter_first": 2
+  },
+  {
+    "name": "Thirty-Six Heavenly Transformations",
+    "alias": "Heavenly-number · thirty-six transformations",
+    "practitioner": "Zhu Bajie (teacher unclear, possibly the Zhenwu Emperor or the Mysterious Maiden)",
+    "origin": "Unclear (tied to his rank as Marshal Tianpeng)",
+    "nature": "Transformation art · mastery of origin",
+    "count": 36,
+    "philosophy": "Heavenly in number, of yang nature; governs the true transformation of origin, with deep mana",
+    "pros": "Pure transformations; strong power of origin",
+    "cons": "Fewer in number; inflexible in the heat of battle",
+    "rival": "Seventy-Two Earthly Transformations",
+    "chapter_first": 19
+  },
+  {
+    "name": "True Samadhi Fire",
+    "alias": "True Samadhi Fire · innate fire",
+    "practitioner": "Red Boy (cultivated innately)",
+    "origin": "Innate fire-qi · self-cultivation",
+    "nature": "Spell · innate true fire",
+    "count": 1,
+    "philosophy": "Samadhi means the unity of essence, breath and spirit; its true fire is beyond compare with ordinary fire",
+    "pros": "Water cannot douse it; its smoke can wound; Wukong cannot approach",
+    "cons": "Fears the willow water of Guanyin's vase and the East Sea Dragon King's water",
+    "rival": "Mortal Fire",
+    "chapter_first": 41
+  },
+  {
+    "name": "Somersault Cloud",
+    "alias": "The art of cloud-soaring",
+    "practitioner": "Sun Wukong (taught by Patriarch Subodhi)",
+    "origin": "Patriarch Subodhi · Mount Lingtai Fangcun",
+    "nature": "Cloud-soaring · movement spell",
+    "count": 1,
+    "philosophy": "One somersault covers one hundred and eight thousand li",
+    "pros": "Extreme speed; can cross continents",
+    "cons": "Cannot carry others (except himself) for long",
+    "rival": "None (one of a kind)",
+    "chapter_first": 2
+  },
+  {
+    "name": "Fiery Golden Eyes",
+    "alias": "Fiery Golden Eyes · ocular art",
+    "practitioner": "Sun Wukong (forged in the Eight Trigrams Furnace)",
+    "origin": "Taishang Laojun's Eight Trigrams Furnace · wind and smoke at the Xun position",
+    "nature": "Ocular art · seeing through illusions",
+    "count": 1,
+    "philosophy": "Smoked into being in the Eight Trigrams Furnace; can recognize demons and tell true from false",
+    "pros": "Sees through a demon's true form",
+    "cons": "Fears smoke (Red Boy's smoke can blind)",
+    "rival": "None",
+    "chapter_first": 7
+  }
+]

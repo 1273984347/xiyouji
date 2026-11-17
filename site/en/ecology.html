@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PTt+L05gcuKBDIDCNZx+Iv9MZRApAZ5gtzU6J61SPhY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-jLLGMzKpp1c5Nl2I5sUFowsHIW3nApX529q+Rnj2OHw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Ecology · Annotated Journey to the West</title>
@@ -2743,7 +2743,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <!--
         本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
         在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
-        在 http(s):// 协议下打开时，优先 fetch ../data/json/*.json。
+        在 http(s):// 协议下打开时，优先 fetch ../en/json/*.json。
         数据源：scripts/AE_生态学/ecology.py 生成的 5 份 JSON。
     -->
         <script src="../static/js/d3.v7.min.js"></script>
@@ -2953,7 +2953,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
     // ===== Main render =====
     async function main() {
-        const baseUrl = '../data/json/';
+        const baseUrl = '../en/json/';
         const [invasive, pulse, succession, foodweb, summary] = await Promise.all([
             loadJson(baseUrl + 'invasive_species.json', EMBEDDED.invasive),
             loadJson(baseUrl + 'resource_pulse.json', EMBEDDED.pulse),

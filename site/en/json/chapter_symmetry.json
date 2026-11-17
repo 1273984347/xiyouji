@@ -1,0 +1,98 @@
+[
+  {
+    "pair_name": "Gold Horn and Silver Horn Gourd Pairing",
+    "item_a": "Purple-Gold Red Gourd",
+    "item_b": "Sheep-Fat Jade Vase",
+    "owner_a": "Great King Gold Horn",
+    "owner_b": "Great King Silver Horn",
+    "chapter_a": 33,
+    "chapter_b": 33,
+    "principle": "answer and die; respond to your name and be drawn in",
+    "symmetry_type": "Artifact Pairing",
+    "feature": "Laozi's two attendants descend to earth; the gourd and vase form a pair, both causal-rule weapons"
+  },
+  {
+    "pair_name": "Golden Helmet Cave vs. Little Thunderclap Monastery Treasures",
+    "item_a": "Diamond Bracelet",
+    "item_b": "Golden Cymbals · the Human Sack",
+    "owner_a": "Single-Horned Rhinoceros King",
+    "owner_b": "Yellow-Brow Attendant",
+    "chapter_a": 50,
+    "chapter_b": 65,
+    "principle": "snares all the gods' weapons vs. captures all the heavenly generals",
+    "symmetry_type": "Treasure Parallel",
+    "feature": "both from the treasuries of the Daoist Patriarch and Maitreya; both require their masters to descend in person"
+  },
+  {
+    "pair_name": "Chechi Kingdom Contest vs. Bhiksu Kingdom Contest",
+    "item_a": "Chechi Kingdom · the Tiger, Deer, and Goat Immortals",
+    "item_b": "Bhiksu Kingdom · the Deer-Spirit Imperial Father-in-law",
+    "owner_a": "Tiger-Power, Deer-Power, Goat-Power",
+    "owner_b": "the White Deer, mount of the South-Pole Star of Longevity",
+    "chapter_a": 45,
+    "chapter_b": 78,
+    "principle": "Daoist sorcerers vs. Buddhist orthodoxy, both mediated through a deer",
+    "symmetry_type": "Contest Pairing",
+    "feature": "two deer spirits descend to earth, both posing as Daoist sorcerers, both subdued by the Star of Longevity"
+  },
+  {
+    "pair_name": "True and False Monkey King and the Six-Eared Macaque",
+    "item_a": "Sun Wukong",
+    "item_b": "Six-Eared Macaque",
+    "owner_a": "Great Sage Equal to Heaven",
+    "owner_b": "one of the four chaos monkeys",
+    "chapter_a": 57,
+    "chapter_b": 58,
+    "principle": "two minds contend; Tathāgata tells them apart",
+    "symmetry_type": "Mirror Pairing",
+    "feature": "the two monkeys are identical in form and power; Guanyin cannot tell them apart, the Truth-Listener dares not speak, only Tathāgata sees through them"
+  },
+  {
+    "pair_name": "Kingdom of Women and the Jade Rabbit Kingdom Princess",
+    "item_a": "Kingdom of Women · the Queen",
+    "item_b": "Kingdom of India · the true and false princess",
+    "owner_a": "Queen of Western Liang",
+    "owner_b": "the Jade Rabbit Spirit · the true princess",
+    "chapter_a": 54,
+    "chapter_b": 95,
+    "principle": "a test of feminine wiles, hard to tell true from false",
+    "symmetry_type": "Feminine Temptation Pairing",
+    "feature": "the journey's final stretch echoes its middle, both testing through feminine wiles and true/false identity"
+  },
+  {
+    "pair_name": "Black Bear Spirit and Red Boy",
+    "item_a": "Black Wind Cave · the Black Bear Spirit",
+    "item_b": "Fire-Cloud Cave · Red Boy",
+    "owner_a": "Black Bear Spirit",
+    "owner_b": "Red Boy",
+    "chapter_a": 17,
+    "chapter_b": 42,
+    "principle": "both subdued by Guanyin, both become attendants of Sudhana",
+    "symmetry_type": "Destiny Pairing",
+    "feature": "Guanyin twice subdues a young demon king, inducting both into the Buddhist order"
+  },
+  {
+    "pair_name": "Heaven-Reaching River and Flowing-Sands River",
+    "item_a": "Heaven-Reaching River · King Spiritual-Sense",
+    "item_b": "Flowing-Sands River · Sha Wujing",
+    "owner_a": "Goldfish Spirit",
+    "owner_b": "Curtain-Raising General",
+    "chapter_a": 47,
+    "chapter_b": 22,
+    "principle": "river-crossing ordeals, both aquatic beings",
+    "symmetry_type": "River-Crossing Pairing",
+    "feature": "an eight-hundred-li crossing; one is retrieved, one is killed — different fates for the aquatic beings"
+  },
+  {
+    "pair_name": "Three Borrowings of the Palm-Leaf Fan and Thrice Beating the White-Bone Demon",
+    "item_a": "Thrice Beats the White-Bone Demon",
+    "item_b": "Three Borrowings of the Palm-Leaf Fan",
+    "owner_a": "Lady White Bone",
+    "owner_b": "Princess Iron Fan · Bull Demon King",
+    "chapter_a": 27,
+    "chapter_b": 59,
+    "principle": "three repetitions, the deed hard-won",
+    "symmetry_type": "Triple Repetition Pairing",
+    "feature": "classical narrative ‘triple-repetition structure’; both passages take ‘three’ as their rhythm"
+  }
+]

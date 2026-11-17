@@ -1,0 +1,130 @@
+{
+  "concept_name": "The Golden Hoop Mantra as External Executive Control",
+  "english_name": "Golden Hoop Mantra as External Executive Control",
+  "cognitive_definition": "Executive control: the prefrontal cortex's ability to inhibit limbic-system impulses; when the emotional system (limbic system) is about to erupt, external intervention is needed to activate the prefrontal cortex.",
+  "core_case": "When Wukong's emotional system (limbic system) is about to erupt, Tang Sanzang forcibly activates his prefrontal cortex through verbal stimulation (the Golden Hoop Mantra), making him suppress his impulses — the earliest case of 'external cognitive intervention'.",
+  "neuroscience_mapping": {
+    "prefrontal_cortex": {
+      "function": "Rational decision-making · impulse inhibition · goal direction",
+      "wukong_equivalent": "The pilgrimage goal · protecting Tang Sanzang · not taking life",
+      "activation_method": "Stimulation by the Golden Hoop Mantra"
+    },
+    "limbic_system": {
+      "function": "Emotional response · fight-or-flight · instinct-driven",
+      "wukong_equivalent": "Anger · combativeness · the impulse to kill",
+      "trigger": "Demon provocations · Tang Sanzang's misunderstandings · feeling wronged"
+    },
+    "amygdala": {
+      "function": "Processing of fear and anger",
+      "wukong_equivalent": "Anger toward demons",
+      "regulation": "The Golden Hoop Mantra activates the prefrontal cortex to inhibit the amygdala"
+    }
+  },
+  "mantra_cases": [
+    {
+      "n": 1,
+      "chapter": "Chapter 14",
+      "context": "First use · Wukong kills the Six Robbers",
+      "trigger_event": "Wukong kills; Tang Sanzang scolds him; Wukong wants to leave",
+      "mantra_intensity": 5,
+      "prefrontal_activation": 8,
+      "limbic_inhibition": 7,
+      "outcome": "Wukong yields in pain and stays for the pilgrimage",
+      "cognitive_effect": "First establishes the 'external executive control' mechanism",
+      "wukong_emotion": "Anger · humiliation"
+    },
+    {
+      "n": 2,
+      "chapter": "Chapter 27",
+      "context": "Thrice Beats the White Bone Demon",
+      "trigger_event": "Wukong kills the White Bone Demon; Tang Sanzang disbelieves him",
+      "mantra_intensity": 9,
+      "prefrontal_activation": 9,
+      "limbic_inhibition": 8,
+      "outcome": "Wukong is banished, but his prefrontal cortex has been activated",
+      "cognitive_effect": "Executive control over-applied · drives Wukong away",
+      "wukong_emotion": "Anger · grievance"
+    },
+    {
+      "n": 3,
+      "chapter": "Chapter 38",
+      "context": "Rescuing the king of the Black Rooster Kingdom",
+      "trigger_event": "Wukong wants to strike the demon; Tang Sanzang cautions him",
+      "mantra_intensity": 3,
+      "prefrontal_activation": 6,
+      "limbic_inhibition": 5,
+      "outcome": "Wukong restrains himself and switches to outwitting the enemy",
+      "cognitive_effect": "Mild stimulation · activates the prefrontal cortex · switches to strategy",
+      "wukong_emotion": "Restraint · rationality"
+    },
+    {
+      "n": 4,
+      "chapter": "Chapter 41",
+      "context": "Red Boy's Samadhi Fire",
+      "trigger_event": "Wukong is burned and wants to force a breakthrough",
+      "mantra_intensity": 4,
+      "prefrontal_activation": 7,
+      "limbic_inhibition": 6,
+      "outcome": "Wukong seeks Guanyin's help",
+      "cognitive_effect": "Executive control teaches Wukong to seek help",
+      "wukong_emotion": "Calm · seeking help"
+    },
+    {
+      "n": 5,
+      "chapter": "Chapter 56",
+      "context": "Wukong kills the bandits",
+      "trigger_event": "Wukong kills; Tang Sanzang scolds him",
+      "mantra_intensity": 8,
+      "prefrontal_activation": 9,
+      "limbic_inhibition": 8,
+      "outcome": "Wukong is banished; the Six-Eared Macaque episode ensues",
+      "cognitive_effect": "Executive control over-applied · triggers an inner-demon eruption",
+      "wukong_emotion": "Anger · inner demon"
+    },
+    {
+      "n": 6,
+      "chapter": "Chapter 71",
+      "context": "Rescuing the queen of the Zhu Zi Kingdom",
+      "trigger_event": "Wukong wants to kill the demon; Tang Sanzang cautions him",
+      "mantra_intensity": 2,
+      "prefrontal_activation": 5,
+      "limbic_inhibition": 4,
+      "outcome": "Wukong restrains himself and switches to a stratagem",
+      "cognitive_effect": "Mild reminder · Wukong has internalized executive control",
+      "wukong_emotion": "Restraint · strategy"
+    }
+  ],
+  "mantra_evolution": {
+    "early_phase": {
+      "chapters": "Chapters 14–30",
+      "characteristic": "High intensity, frequent use · establishes the mechanism",
+      "avg_intensity": 7,
+      "success_rate": "60% · 3 successes, 2 failures"
+    },
+    "middle_phase": {
+      "chapters": "Chapters 31–58",
+      "characteristic": "Moderate use · Wukong gradually adapts",
+      "avg_intensity": 4,
+      "success_rate": "75% · 3 successes, 1 failure"
+    },
+    "late_phase": {
+      "chapters": "Chapters 59–100",
+      "characteristic": "Light use · Wukong has internalized executive control",
+      "avg_intensity": 2,
+      "success_rate": "100% · essentially no longer needed"
+    }
+  },
+  "executive_control_insights": [
+    "The Golden Hoop Mantra is the earliest case of 'external cognitive intervention', akin to modern cognitive behavioral therapy (CBT)",
+    "In the early phase the mantra is intense, establishing the executive-control mechanism",
+    "In the middle phase the mantra's intensity drops; Wukong begins to internalize executive control",
+    "In the late phase the mantra is hardly used; Wukong has fully internalized it",
+    "This is a classic case of cognitive development: from external control to internalized control"
+  ],
+  "modern_parallel": {
+    "cbt": "Cognitive behavioral therapy · changes behavior patterns through verbal intervention",
+    "neurofeedback": "Neurofeedback training · trains the brain to self-regulate through external signals",
+    "meditation": "Meditation training · activates the prefrontal cortex · inhibits the amygdala",
+    "wukong_case": "The Golden Hoop Mantra = the earliest hybrid of CBT + neurofeedback + meditation training"
+  }
+}

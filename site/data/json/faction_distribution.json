@@ -1,0 +1,184 @@
+{
+  "concept_name": "三界势力分布",
+  "english_name": "Three Realms Faction Distribution",
+  "definition": "西游世界可分为 7 大势力：天庭/灵山/地府/人间/妖界/水族/散仙·各自有成员·资源·影响力",
+  "factions": [
+    {
+      "name": "天庭",
+      "english_name": "Heavenly Court",
+      "leader": "玉皇大帝",
+      "members_count": 10000,
+      "core_members": [
+        "玉帝",
+        "王母",
+        "太上老君",
+        "如来(名义)",
+        "李天王",
+        "哪吒",
+        "二郎神",
+        "二十八星宿",
+        "四大天王"
+      ],
+      "influence": 10,
+      "resources": [
+        "蟠桃园",
+        "兜率宫仙丹",
+        "天兵天将",
+        "法宝库"
+      ],
+      "relationship_to_pilgrim": "名义监管·多次派兵围剿·后默许取经",
+      "color": "#C0392B"
+    },
+    {
+      "name": "灵山",
+      "english_name": "Vulture Peak",
+      "leader": "如来佛祖",
+      "members_count": 4800,
+      "core_members": [
+        "如来",
+        "观音",
+        "文殊",
+        "普贤",
+        "十八罗汉",
+        "阿难迦叶",
+        "弥勒"
+      ],
+      "influence": 10,
+      "resources": [
+        "佛经三藏",
+        "金箍咒三件",
+        "菩提场",
+        "功德"
+      ],
+      "relationship_to_pilgrim": "项目发起方·终极目标·多次救援",
+      "color": "#40619E"
+    },
+    {
+      "name": "地府",
+      "english_name": "Underworld",
+      "leader": "十殿阎王",
+      "members_count": 3000,
+      "core_members": [
+        "十殿阎王",
+        "崔判官",
+        "孟婆",
+        "黑白无常",
+        "牛头马面"
+      ],
+      "influence": 6,
+      "resources": [
+        "生死簿",
+        "黄泉路",
+        "十八层地狱",
+        "轮回系统"
+      ],
+      "relationship_to_pilgrim": "曾被悟空大闹·李世民游地府·寇洪还魂",
+      "color": "#5a3828"
+    },
+    {
+      "name": "人间",
+      "english_name": "Mortal Realm",
+      "leader": "李世民（大唐）",
+      "members_count": 100000000,
+      "core_members": [
+        "李世民",
+        "魏征",
+        "秦叔宝",
+        "尉迟恭",
+        "陈光蕊",
+        "殷温娇"
+      ],
+      "influence": 5,
+      "resources": [
+        "军队",
+        "人口",
+        "土地",
+        "贡品"
+      ],
+      "relationship_to_pilgrim": "项目发起国·唐僧出身地",
+      "color": "#7a5230"
+    },
+    {
+      "name": "妖界",
+      "english_name": "Demon Realm",
+      "leader": "无统一领导",
+      "members_count": 500,
+      "core_members": [
+        "牛魔王",
+        "六耳猕猴",
+        "白骨精",
+        "蜘蛛精",
+        "蜈蚣精",
+        "百眼魔君"
+      ],
+      "influence": 7,
+      "resources": [
+        "洞府",
+        "法宝（盗用）",
+        "小妖军队"
+      ],
+      "relationship_to_pilgrim": "项目主要障碍·81 难中 60+ 来自妖界",
+      "color": "#5a7a3a"
+    },
+    {
+      "name": "水族",
+      "english_name": "Aquatic Tribes",
+      "leader": "四海龙王",
+      "members_count": 5000,
+      "core_members": [
+        "东海龙王",
+        "南海龙王",
+        "西海龙王",
+        "北海龙王",
+        "泾河龙王",
+        "万圣龙王"
+      ],
+      "influence": 5,
+      "resources": [
+        "水族兵",
+        "珍珠珊瑚",
+        "雨水控制"
+      ],
+      "relationship_to_pilgrim": "中立·悟空'借'定海神针·泾河龙王被斩",
+      "color": "#3a8c8c"
+    },
+    {
+      "name": "散仙",
+      "english_name": "Loose Immortals",
+      "leader": "无",
+      "members_count": 50,
+      "core_members": [
+        "镇元大仙",
+        "菩提祖师",
+        "乌巢禅师",
+        "黎山老母",
+        "紫云真人"
+      ],
+      "influence": 6,
+      "resources": [
+        "人参果",
+        "道法传承",
+        "独立势力"
+      ],
+      "relationship_to_pilgrim": "中立偏助·菩提是悟空师傅·镇元结拜",
+      "color": "#9c6b3a"
+    }
+  ],
+  "balance_analysis": {
+    "total_factions": 7,
+    "dominant_factions": [
+      "天庭",
+      "灵山"
+    ],
+    "balance_pattern": "天庭名义统治·灵山实际操盘·妖界是阻力的同时是项目的'剧情燃料'",
+    "pilgrim_alignment": "取经团队最终归于灵山体系·但中途接受多方援助"
+  },
+  "faction_insights": [
+    "天庭与灵山是双中心结构·名义上天庭高于灵山·实际灵山主导取经",
+    "地府是中立执行机构·但生死簿被悟空篡改暴露治理漏洞",
+    "人间是大唐为单极·其他国家多为妖魔控制",
+    "妖界是分散的'反项目势力'·但每个妖怪都有上游势力",
+    "水族多为中立·泾河龙王被斩是天庭立威的牺牲品",
+    "散仙超然物外·但菩提祖师是悟空的根·镇元大仙是结拜兄弟"
+  ]
+}

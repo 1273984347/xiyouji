@@ -1,0 +1,23 @@
+[
+  {
+    "country": "Japan",
+    "flag": "🇯🇵",
+    "work": "Dragon Ball",
+    "type": "Anime",
+    "note": "Sun Wukong becomes a Super Saiyan"
+  },
+  {
+    "country": "South Korea",
+    "flag": "🇰🇷",
+    "work": "Korean comic adaptation",
+    "type": "Comic",
+    "note": "A re-creation in East Asian pop culture"
+  },
+  {
+    "country": "United States",
+    "flag": "🇺🇸",
+    "work": "The Forbidden Kingdom",
+    "type": "Film",
+    "note": "Starring Jackie Chan and Jet Li · Journey to the West elements Hollywood-ized"
+  }
+]

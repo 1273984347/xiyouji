@@ -1,0 +1,244 @@
+[
+  {
+    "character": "Sun Wukong",
+    "stages": [
+      {
+        "stage": "Stone Monkey Emerges",
+        "chapter": 1,
+        "look": "Naked stone monkey, golden light blazing from his eyes toward the heavens",
+        "color": "Stone Blue · Golden Light",
+        "fashion_level": 1,
+        "style": "Primal · Wild"
+      },
+      {
+        "stage": "Apprenticeship under the Patriarch",
+        "chapter": 2,
+        "look": "Gathering firewood, dressing himself, learning human etiquette",
+        "color": "Coarse brown cloth",
+        "fashion_level": 2,
+        "style": "Mundane · Student"
+      },
+      {
+        "stage": "Great Sage Equal to Heaven",
+        "chapter": 4,
+        "look": "Golden crown, golden armor, cloud-walking boots, purple-gold robe",
+        "color": "Golden Yellow · Crimson",
+        "fashion_level": 9,
+        "style": "Luxurious · Sovereign"
+      },
+      {
+        "stage": "On the Pilgrimage",
+        "chapter": 14,
+        "look": "Tiger-skin kilt, monk’s robe, iron band",
+        "color": "Tiger-Skin Yellow · Black",
+        "fashion_level": 4,
+        "style": "Wild · Pilgrim"
+      },
+      {
+        "stage": "Victorious Fighting Buddha",
+        "chapter": 100,
+        "look": "Buddhist countenance, solemn golden body",
+        "color": "Buddha Gold · Buddha-figure pattern",
+        "fashion_level": 10,
+        "style": "Solemn · Buddha Countenance"
+      }
+    ]
+  },
+  {
+    "character": "Tang Sanzang",
+    "stages": [
+      {
+        "stage": "Water-Land Assembly",
+        "chapter": 12,
+        "look": "Brocade kasaya, nine-ringed staff",
+        "color": "Brocade gold thread · Vermilion",
+        "fashion_level": 9,
+        "style": "Imperially Bestowed · Solemn"
+      },
+      {
+        "stage": "On the Pilgrimage",
+        "chapter": 14,
+        "look": "Monk’s hat and robe, kasaya, staff",
+        "color": "Gray-Brown · Vermilion",
+        "fashion_level": 6,
+        "style": "Itinerant Monk · Plain"
+      },
+      {
+        "stage": "Sandalwood Merit Buddha",
+        "chapter": 100,
+        "look": "Buddhist countenance, sandalwood fragrance",
+        "color": "Buddha Gold · Buddha Figure",
+        "fashion_level": 10,
+        "style": "Buddha Countenance · Solemn"
+      }
+    ]
+  },
+  {
+    "character": "Zhu Bajie",
+    "stages": [
+      {
+        "stage": "Marshal Tianpeng",
+        "chapter": "Prequel",
+        "look": "Golden-armored divine general, heavenly bearing",
+        "color": "Golden Light · Dark",
+        "fashion_level": 8,
+        "style": "Heavenly General · Majestic"
+      },
+      {
+        "stage": "Old Gao Village",
+        "chapter": 18,
+        "look": "Black face, short bristles, long snout and ears, one plain robe",
+        "color": "Black · Gray-Brown",
+        "fashion_level": 3,
+        "style": "Demon · Grotesque"
+      },
+      {
+        "stage": "On the Pilgrimage",
+        "chapter": 19,
+        "look": "Black robe, nine-toothed rake",
+        "color": "Black · Gray",
+        "fashion_level": 4,
+        "style": "Itinerant · Austere"
+      },
+      {
+        "stage": "Altar Cleanser",
+        "chapter": 100,
+        "look": "Buddhist envoy’s countenance, solemn altar purifier",
+        "color": "Buddha Gold · Vermilion",
+        "fashion_level": 8,
+        "style": "Buddha Countenance · Full"
+      }
+    ]
+  },
+  {
+    "character": "Sha Wujing",
+    "stages": [
+      {
+        "stage": "Curtain-Lifting General",
+        "chapter": "Prequel",
+        "look": "Golden armor, brocade robe, majestic bearing",
+        "color": "Gold · Blue",
+        "fashion_level": 7,
+        "style": "Heavenly General · Solemn"
+      },
+      {
+        "stage": "Flowing Sands River",
+        "chapter": 22,
+        "look": "Red hair, blue face, nine skulls hung about the neck",
+        "color": "Red Hair · Blue · Bone White",
+        "fashion_level": 2,
+        "style": "Demon · Terrifying"
+      },
+      {
+        "stage": "On the Pilgrimage",
+        "chapter": 22,
+        "look": "Black robe, precious staff, bearing the load",
+        "color": "Black · Gray",
+        "fashion_level": 4,
+        "style": "Itinerant · Plain"
+      },
+      {
+        "stage": "Golden Arhat",
+        "chapter": 100,
+        "look": "Arhat’s golden body, solemn countenance",
+        "color": "Buddha Gold · Vermilion",
+        "fashion_level": 9,
+        "style": "Arhat Countenance · Solemn"
+      }
+    ]
+  },
+  {
+    "character": "White Dragon Horse",
+    "stages": [
+      {
+        "stage": "Third Prince of the West Sea Dragon King",
+        "chapter": "Prequel",
+        "look": "Dragon prince, jade scales, glittering with jewels",
+        "color": "Silver White · Pearl Luster",
+        "fashion_level": 9,
+        "style": "Dragon Clan · Splendid"
+      },
+      {
+        "stage": "On the Pilgrimage",
+        "chapter": 15,
+        "look": "White horse without saddle, bearing Tang Sanzang",
+        "color": "Pure White",
+        "fashion_level": 5,
+        "style": "Horse · Plain"
+      },
+      {
+        "stage": "Eightfold Dragon Horse",
+        "chapter": 100,
+        "look": "Celestial dragon coiled about the temple pillar",
+        "color": "Celestial Dragon Gold",
+        "fashion_level": 10,
+        "style": "Celestial Dragon · Solemn"
+      }
+    ]
+  },
+  {
+    "character": "Guanyin",
+    "stages": [
+      {
+        "stage": "Seeking the Scripture Pilgrim",
+        "chapter": 8,
+        "look": "Plain robes, pure vase, willow branch, barefoot",
+        "color": "White · Emerald Green · Gold",
+        "fashion_level": 10,
+        "style": "Bodhisattva · Compassionate Solemnity"
+      }
+    ]
+  },
+  {
+    "character": "Jade Emperor",
+    "stages": [
+      {
+        "stage": "Heavenly Court Assembly",
+        "chapter": 4,
+        "look": "Dragon robe, towering crown, Seven-Star sword",
+        "color": "Golden Yellow · Ink Black",
+        "fashion_level": 10,
+        "style": "Emperor · Supreme"
+      }
+    ]
+  },
+  {
+    "character": "Tathāgata Buddha",
+    "stages": [
+      {
+        "stage": "Preaching at Spirit Mountain",
+        "chapter": 7,
+        "look": "Golden body, kasaya, lotus throne, Buddha’s halo",
+        "color": "Buddha Gold · Buddha Figure",
+        "fashion_level": 10,
+        "style": "Buddha · Supreme Solemnity"
+      }
+    ]
+  },
+  {
+    "character": "Princess Iron Fan",
+    "stages": [
+      {
+        "stage": "Plantain Cave",
+        "chapter": 59,
+        "look": "Rakshasi’s garb, phoenix crown and cape, red skirt",
+        "color": "Crimson · Gold",
+        "fashion_level": 8,
+        "style": "Demon Queen · Gorgeous"
+      }
+    ]
+  },
+  {
+    "character": "Jade Rabbit Spirit",
+    "stages": [
+      {
+        "stage": "Princess of Tianzhu",
+        "chapter": 95,
+        "look": "Palace robes, pearl ornaments, medicine-pounding pestle",
+        "color": "Pinkish White · Pearl Luster",
+        "fashion_level": 9,
+        "style": "Princess · Elegant"
+      }
+    ]
+  }
+]

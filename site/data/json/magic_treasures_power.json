@@ -1,0 +1,82 @@
+[
+  {
+    "name": "金刚琢",
+    "owner": "独角兕大王（原属太上老君）",
+    "category": "因果律武器",
+    "power_source": "宇宙级规则引擎",
+    "principle": "套万物·不依赖持有者法力·内嵌'收束规则'",
+    "user_driven": false,
+    "evidence": "独角兕本身法力非顶级·但能套悟空金箍棒·诸神兵器·哪吒兵器·甚至水火",
+    "rank": "S+"
+  },
+  {
+    "name": "紫金红葫芦",
+    "owner": "金角大王·银角大王（原属太上老君）",
+    "category": "因果律武器·名应人死",
+    "power_source": "宇宙级规则引擎·姓名绑定",
+    "principle": "呼名即应·应者即入葫芦·化脓血",
+    "user_driven": false,
+    "evidence": "悟空一度被假名'者行孙'困住·化脓血·靠'假名'逃出",
+    "rank": "S+"
+  },
+  {
+    "name": "人种袋",
+    "owner": "黄眉童子（原属弥勒佛）",
+    "category": "因果律武器·范围收束",
+    "power_source": "宇宙级规则引擎·空间收束",
+    "principle": "袋开·人入·诸神皆不能逃",
+    "user_driven": false,
+    "evidence": "收二十八宿·五方揭谛·悟空亦险被收·靠弥勒亲降",
+    "rank": "S+"
+  },
+  {
+    "name": "阴阳二气瓶",
+    "owner": "大鹏金翅雕",
+    "category": "因果律武器·消解",
+    "power_source": "宇宙级规则引擎·阴阳消解",
+    "principle": "入瓶·一时三刻化为浆",
+    "user_driven": false,
+    "evidence": "悟空入瓶·靠观音三根救命毫毛·钻破瓶·瓶毁",
+    "rank": "S+"
+  },
+  {
+    "name": "芭蕉扇",
+    "owner": "铁扇公主·罗刹女",
+    "category": "元素武器·风系",
+    "power_source": "天地灵宝·先天一炁",
+    "principle": "扇出八万四千里·灭火焰山",
+    "user_driven": true,
+    "evidence": "罗刹女自身法力中等·但凭扇成一方霸主",
+    "rank": "S"
+  },
+  {
+    "name": "金箍棒",
+    "owner": "孙悟空",
+    "category": "物理武器·重兵器",
+    "power_source": "大禹治水定海神针·先天灵宝",
+    "principle": "一万三千五百斤·大小如意",
+    "user_driven": true,
+    "evidence": "依赖悟空法力驱动·本身威力上限受持有者决定",
+    "rank": "S"
+  },
+  {
+    "name": "九齿钉耙",
+    "owner": "猪八戒",
+    "category": "物理武器·神兵",
+    "power_source": "太上老君锻造·玉帝赐",
+    "principle": "九齿·神光·可筑山",
+    "user_driven": true,
+    "evidence": "八戒法力所限·钉耙威力未充分发挥",
+    "rank": "A+"
+  },
+  {
+    "name": "紧箍咒",
+    "owner": "观音→唐僧",
+    "category": "因果律武器·控制",
+    "power_source": "宇宙级规则引擎·心念绑定",
+    "principle": "念咒即缩·头痛欲裂·控制执行器",
+    "user_driven": false,
+    "evidence": "唐僧凡人即可念·不依赖持有者法力·直接作用于悟空",
+    "rank": "S+"
+  }
+]

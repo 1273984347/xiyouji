@@ -1,0 +1,137 @@
+{
+  "concept_name": "Cultivation Allegory Map",
+  "english_name": "Cultivation Allegory Map",
+  "definition": "The 81 hardships are not mere calamities but 81 kinds of mind-nature trials, corresponding to the mind-cultivation sequence of the Duoxin Jing",
+  "allegory_categories": [
+    {
+      "category": "Greed Test",
+      "english_name": "Greed Test",
+      "count": 12,
+      "representative_hardships": [
+        "Four Sages Test the Mind of Chan",
+        "Stealing the Ginseng Fruit at Wuzhuang",
+        "Goldfish Spirit",
+        "Rat Spirit"
+      ],
+      "mind_obstacle": "greed (avarice, craving)",
+      "buddhist_counterpart": "the poison of greed, foremost of the Three Poisons",
+      "cultivation_goal": "renounce greed, be content"
+    },
+    {
+      "category": "Anger Test",
+      "english_name": "Anger Test",
+      "count": 15,
+      "representative_hardships": [
+        "Thrice Beating the White Bone Demon",
+        "Red Boy",
+        "Six-Eared Macaque",
+        "Yellow-Robed Monster"
+      ],
+      "mind_obstacle": "anger (rage, fury)",
+      "buddhist_counterpart": "the poison of anger, second of the Three Poisons",
+      "cultivation_goal": "renounce anger, be compassionate"
+    },
+    {
+      "category": "Ignorance Test",
+      "english_name": "Ignorance Test",
+      "count": 10,
+      "representative_hardships": [
+        "King of Wuji",
+        "Contest of Magic in Chechi",
+        "Bhikṣu Kingdom",
+        "Miefa Kingdom"
+      ],
+      "mind_obstacle": "ignorance (delusion, unknowing)",
+      "buddhist_counterpart": "the poison of ignorance, third of the Three Poisons",
+      "cultivation_goal": "break ignorance, attain wisdom"
+    },
+    {
+      "category": "Pride Test",
+      "english_name": "Pride Test",
+      "count": 8,
+      "representative_hardships": [
+        "Havoc in Heaven (prequel)",
+        "Green Ox Spirit of Jindou Mountain",
+        "Lion-Camel Ridge",
+        "Nine-Headed Lion Sage"
+      ],
+      "mind_obstacle": "pride (arrogance, ego-attachment)",
+      "buddhist_counterpart": "pride, one of the Five Hindrances",
+      "cultivation_goal": "renounce pride, be humble"
+    },
+    {
+      "category": "Suspicion Test",
+      "english_name": "Suspicion Test",
+      "count": 9,
+      "representative_hardships": [
+        "Wukong expelled after thrice beating the White Bone Demon",
+        "Yellow-Robed Monster returns to Flower-Fruit Mountain",
+        "Six-Eared Macaque"
+      ],
+      "mind_obstacle": "doubt (suspicion, distrust)",
+      "buddhist_counterpart": "doubt, one of the Five Hindrances",
+      "cultivation_goal": "cut off doubt, right faith"
+    },
+    {
+      "category": "Lust Test",
+      "english_name": "Lust Test",
+      "count": 11,
+      "representative_hardships": [
+        "Kingdom of Women",
+        "Spider Cave",
+        "Bottomless Cave",
+        "Jade Rabbit Spirit"
+      ],
+      "mind_obstacle": "lust (desire, sensuality)",
+      "buddhist_counterpart": "sensual desire, one of the Five Desires",
+      "cultivation_goal": "renounce lust, be pure"
+    },
+    {
+      "category": "Fame Test",
+      "english_name": "Fame Test",
+      "count": 7,
+      "representative_hardships": [
+        "Praying for rain in Chechi",
+        "Healing in Zhuzi Kingdom",
+        "Teaching disciples in Yuhua Prefecture"
+      ],
+      "mind_obstacle": "fame (renown, reputation)",
+      "buddhist_counterpart": "fame and material gain",
+      "cultivation_goal": "renounce fame, be detached"
+    },
+    {
+      "category": "Life-Death Test",
+      "english_name": "Life-Death Test",
+      "count": 9,
+      "representative_hardships": [
+        "Tongtian River",
+        "Flaming Mountains",
+        "Lion-Camel Kingdom",
+        "Bottomless Cave"
+      ],
+      "mind_obstacle": "death (fear of death, dread)",
+      "buddhist_counterpart": "birth and death are the great matter",
+      "cultivation_goal": "transcend birth and death"
+    }
+  ],
+  "allegory_summary": {
+    "total_categories": 8,
+    "total_hardships_mapped": 81,
+    "most_frequent_test": "Anger Test (15 times), corresponding to Wukong's primary mind-nature",
+    "least_frequent_test": "Fame Test (7 times), corresponding to the pilgrimage team's already-detached disposition",
+    "core_findings": [
+      "The 'count' of the 81 hardships corresponds to the 'eighty-one aspects' of the Duoxin Jing",
+      "Wukong's primary practice is anger (15 hardships), Bajie's primary practice is lust (11 hardships)",
+      "Tang Sanzang's primary practice is ignorance (10 hardships), often deceived through not seeing the truth",
+      "The whole book is a cultivation allegory of 'taming the mind-monkey and thought-horse', not a simple adventure story"
+    ]
+  },
+  "heart_sutra_connection": {
+    "sutra_name": "Prajñāpāramitā Heart Sutra",
+    "sutra_chapter": "Ch. 19, taught by Wuchao Chan Master",
+    "sutra_role": "The Heart Sutra is the pilgrimage team's 'guiding thought'; Tang Sanzang recites it daily",
+    "allegory_pattern": "The Heart Sutra teaches 'emptiness', the 81 hardships teach 'breaking attachment'; the two correspond",
+    "key_quote": "Form is not different from emptiness, emptiness is not different from form; form is emptiness, emptiness is form",
+    "allegory_meaning": "Breaking attachment to form (external things) and returning to emptiness (the true mind)"
+  }
+}

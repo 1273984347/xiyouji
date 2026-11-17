@@ -1,0 +1,38 @@
+[
+  {
+    "key": "name",
+    "label": "Precursor Text"
+  },
+  {
+    "key": "type",
+    "label": "Text Type"
+  },
+  {
+    "key": "era",
+    "label": "Completion Era"
+  },
+  {
+    "key": "Structure",
+    "label": "Structure Borrowing"
+  },
+  {
+    "key": "Theme",
+    "label": "Theme Inheritance"
+  },
+  {
+    "key": "Character",
+    "label": "Character Transformation"
+  },
+  {
+    "key": "Plot",
+    "label": "Plot Rewriting"
+  },
+  {
+    "key": "Language",
+    "label": "Language Citation"
+  },
+  {
+    "key": "composite",
+    "label": "Composite Intertextuality"
+  }
+]

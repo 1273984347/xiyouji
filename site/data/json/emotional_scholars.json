@@ -1,0 +1,66 @@
+[
+  {
+    "key": "lizhuowu",
+    "name": "李卓吾",
+    "era": "1527-1602",
+    "school": "童心说",
+    "color": "#8E7D62",
+    "motto": "天下之至文，未有不出于童心焉者也。"
+  },
+  {
+    "key": "jinshengtan",
+    "name": "金圣叹",
+    "era": "1608-1661",
+    "school": "才子书",
+    "color": "#40619E",
+    "motto": "文章之妙，全在无定法。"
+  },
+  {
+    "key": "luxun",
+    "name": "鲁迅",
+    "era": "1881-1936",
+    "school": "神魔小说",
+    "color": "#C0392B",
+    "motto": "神魔皆有人情，精魅亦通世故。"
+  },
+  {
+    "key": "hushi",
+    "name": "胡适",
+    "era": "1891-1962",
+    "school": "考证本位",
+    "color": "#3A473A",
+    "motto": "《西游记》乃一部游戏之作。"
+  },
+  {
+    "key": "maozedong",
+    "name": "毛泽东",
+    "era": "1893-1976",
+    "school": "革命寓言",
+    "color": "#8c2a2a",
+    "motto": "今日欢呼孙大圣，只缘妖雾又重来。"
+  },
+  {
+    "key": "linyutang",
+    "name": "林语堂",
+    "era": "1895-1976",
+    "school": "闲适幽默",
+    "color": "#b88a3a",
+    "motto": "悟空是中国式自由的化身。"
+  },
+  {
+    "key": "qianzhongshu",
+    "name": "钱钟书",
+    "era": "1910-1998",
+    "school": "博学旁通",
+    "color": "#6B6455",
+    "motto": "西游一书，子不语之渊府也。"
+  },
+  {
+    "key": "guomoruo",
+    "name": "郭沫若",
+    "era": "1892-1978",
+    "school": "浪漫革命",
+    "color": "#b85a3a",
+    "motto": "人妖颠倒是非淆，对敌慈悲对友刁。"
+  }
+]
