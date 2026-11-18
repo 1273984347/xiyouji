@@ -234,6 +234,12 @@ html[data-theme="dark"] svg polygon[fill^="RGB("] {
 }
 html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
 
+/* W1271 CI 暗色回归根修：combo-svg 数据圆以字面 fill=#3A473A（现役序列槽苔绿）绘制，
+   暗底亮度 0.057×提升 1.45=0.083 仍低于 0.16 可见阈值 ⇒ 暗态 5 形不可见（invisibleShapes）。
+   修法＝同色相提亮 #3A473A → #6B7A6B（亮度 0.181·苔绿身份与色盲安全保持·CSS 属性选择器
+   命中 JS 写入的 fill 属性·优先级高于呈现属性） */
+html[data-theme="dark"] svg [fill="#3A473A"] { fill: #6B7A6B; }
+
 html[data-theme="dark"]:not(:has(#audit-halo)) svg text,
 html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !important; }
 

@@ -54,6 +54,9 @@
 | site/data/character-appearance.html | W1271 | ZH 页内嵌整块灌新真值（太上老君[6] 8→12·玉帝等多处陈旧一并清偿） |
 | scripts/output/chart-content-audit.json | W1271 | run_all 重生成跟随 |
 | scripts/_audit_render_states.js | W1271 | 暗态 invisible 判据根修（移除 fill:none 误计·描边图标可见） |
+| site/en/narrative-experiment.html | W1271 | 暗色提亮规则（combo-svg #3A473A→#6B7A6B·invisibleShapes 5→0） |
+| pitfalls.md | W1271 | E-271 门禁标签→字段→产线取证链（379 条） |
+| docs/agent/pitfalls.md | W1271 | 跳转壳计数标记 sweep 跟随（379） |
 
 
 ## W1266 图表与可视化内容层与可读层打磨升级 批二（2026-11-18）
