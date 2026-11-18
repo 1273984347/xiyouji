@@ -128,19 +128,18 @@ def test_slot_registered_in_verify_delivery():
 
 
 def test_declaration_surfaces_in_sync():
-    """槽号声明面同步：AGENTS 第 71 条 / gates.md 第 71 条 / 文档规范 76 段。"""
+    """槽号声明面同步：gates.md 第 71 条 + H1 槽数散文 / 文档规范 76 段（W1279 地图化重锚：声明面移 gates.md）。"""
     import re
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     gates = (ROOT / "docs" / "agent" / "gates.md").read_text(encoding="utf-8")
     doc_spec = (ROOT / "docs" / "00-导读" / "文档规范.md").read_text(encoding="utf-8")
-    i = agents.find("### 4.2")
-    j = agents.find("### 4.3", i)
-    sec42 = agents[i:j]
-    assert re.search(r"(?m)^71\. \*\*", sec42), "AGENTS §4.2 缺第 71 条"
+    # W1279：AGENTS 侧 = 路由行存在（地图形态不再复制槽位摘要）
+    assert "docs/agent/gates.md" in agents, "AGENTS 路由表缺 gates.md"
+    assert "任何写操作" in agents, "AGENTS 路由表缺 gates.md 触发条件"
     assert re.search(r"(?m)^71\. \*\*", gates), "gates.md 缺第 71 条"
-    # 槽总数由 gates.md 编号条目派生（marker 化后 sweep 自动跟随，钉字面量会在挂新槽时假红）
+    # 槽总数由 gates.md 编号条目派生，且 H1 槽数散文须一致（marker 化后 sweep 自动跟随）
     slots = len(re.findall(r"(?m)^\d+\. \*\*", gates))
-    assert ("内含 %d 槽，五组" % slots) in re.sub(r"<!--stats:[a-z_0-9]+-->", "", sec42), \
-        "AGENTS §4.2 槽数散文未与 gates.md 编号条目数（%d）一致" % slots
+    assert ("%d 槽" % slots) in gates.split("\n")[0], \
+        "gates.md H1 槽数散文未与编号条目数（%d）一致" % slots
     m = re.search(r"verify full 全部执行段（随挂槽演进·现役 (\d+) 段", doc_spec)
     assert m and int(m.group(1)) == 76, "文档规范段数未随挂槽同步为 76"

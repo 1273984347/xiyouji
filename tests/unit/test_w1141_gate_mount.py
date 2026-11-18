@@ -30,14 +30,15 @@ def test_validator_prints_gate_summary_line():
 
 def test_gate_docs_agree_on_slot_61():
     """W1155 订正：原断言钉死「61 槽」字面（W1149 加 62/63 槽后即过期·N3 同族）——
-    改为动态对账：AGENTS §4.2 声明的槽数 == gates.md 编号条目实数。"""
+    W1279 地图化二次重锚：声明面 = gates.md H1「N 槽」== 编号条目实数；AGENTS 侧 = 路由行存在。"""
     import re as _re
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     gates = (ROOT / "docs" / "agent" / "gates.md").read_text(encoding="utf-8")
-    # W1216：槽数散文位接 gate_count marker（sweep 自动跟随）——剥标记后匹配（E-229 同法）
-    m = _re.search(r"内含 (\d+) 槽", _re.sub(r"<!--stats:[a-z_0-9]+-->", "", agents))
-    assert m, "AGENTS §4.2 须声明槽数（内含 N 槽）"
-    n_agents = int(m.group(1))
+    h1 = gates.split("\n")[0]
+    m = _re.search(r"(\d+) 槽", h1)
+    assert m, "gates.md H1 须声明槽数（N 槽）"
+    n_declaration = int(m.group(1))
     n_gates = len(_re.findall(r"^\d+\. \*\*", gates, _re.M))
-    assert n_agents == n_gates, f"AGENTS 声明 {n_agents} 槽 ≠ gates.md 编号条目 {n_gates}"
+    assert n_declaration == n_gates, f"gates.md H1 声明 {n_declaration} 槽 ≠ 编号条目 {n_gates}"
     assert "61. **数据集溯源**" in gates
+    assert "docs/agent/gates.md" in agents, "AGENTS 路由表缺 gates.md"

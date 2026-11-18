@@ -39,6 +39,9 @@
 | docs/agent/README.md | W1279 | 目录 README refresh |
 | scripts/output/INDEX.md | W1279 | 产物索引 refresh |
 | scripts/output/README.md | W1279 | 产物 README refresh |
+| tests/unit/test_check_placeholder_hash_carrier.py | W1279 | 声明面重锚 gates.md（AGENTS §4.2 断言退役） |
+| tests/unit/test_w1141_gate_mount.py | W1279 | 声明面重锚 gates.md H1（同上） |
+| site/rss.xml | W1279 | RSS 产物新鲜度跟随 |
 
 
 ## W1278 pitfalls/AGENTS 瘦身批（2026-11-19）
