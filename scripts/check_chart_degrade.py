@@ -158,7 +158,7 @@ def main() -> int:
         print(f"FAIL 未扫到页面：{SITE_DATA}")
         return 1
     if "--generate-baseline" in argv:
-        n = freeze_gate.write_baseline(
+        n = freeze_gate.write_baseline_ratcheted(
             baseline_path,
             viol,
             [
@@ -167,6 +167,7 @@ def main() -> int:
                 "# 格式：<页面>|<D1>|<细节>；D1=缺 chart-degrade 声明或写法非法",
                 "# 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict",
             ],
+            allow_grow=True,  # W1277 P3-1：CLI 显式动作即人工复核放行
         )
         print(f"基线已写入 {baseline_path}（{n} 条）")
         return 0

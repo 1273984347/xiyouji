@@ -56,6 +56,33 @@ def write_baseline(path: Path, keys, header_lines: list[str]) -> int:
     return len(uniq)
 
 
+def write_baseline_ratcheted(path: Path, keys, header_lines: list[str], allow_grow: bool = False) -> int:
+    """基线棘轮写法（W1277 对抗审查 P3-1·新函数不改 write_baseline 契约）。
+
+    新键数 > 既有键数（冻结面增长=洗白面增长）时默认拒绝，须显式 allow_grow=True
+    （CLI 的 --generate-baseline/--update-baseline 即人工复核后的显式动作·E-99 纪律）。
+    只降不升：修复导致的缩减恒放行。回归锁：tests/unit/test_w1277_p3_fixes.py。
+    """
+    file_exists = path.exists()
+    old_keys = 0
+    if file_exists:
+        try:
+            old_keys = sum(
+                1 for _ln in path.read_text(encoding="utf-8").splitlines()
+                if _ln and not _ln.startswith("#")
+            )
+        except OSError:
+            old_keys = 0
+    uniq = sorted(set(keys))
+    # 首建（文件不存在）恒放行——棘轮只约束「已有基线上的冻结面增长」
+    if file_exists and len(uniq) > old_keys and not allow_grow:
+        raise AssertionError(
+            "基线增长被拒（%d → %d 条·洗白面扩大）——人工复核后以 allow_grow=True 显式放行"
+            % (old_keys, len(uniq))
+        )
+    return write_baseline(path, uniq, header_lines)
+
+
 def evaluate(violations, baseline: set[str], strict: bool) -> dict:
     """把违例与基线对拍 → {frozen, new_fail, fixed, total}。
 

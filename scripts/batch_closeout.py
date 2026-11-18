@@ -171,8 +171,8 @@ def _run_archive(dry=False):
         with open(led, encoding='utf-8') as fh:
             rows = sum(1 for line in fh if archive_ledger_rows.ROW_RE.match(line))
     except OSError as e:
-        print('[archive] 台账行数读取失败（跳过行窗口·非阻断）: %s' % e)
-        return True
+        # W1277 对抗审查 P3-5 修：台账不可读原样跳过行窗口（fail-open）⇒ 直接抛出（铁律 23）
+        raise OSError('[archive] 台账行数读取失败（fail-closed·行窗口不可跳过）: %s' % e) from e
     if rows > LEDGER_WINDOW:
         rc2, out2 = run([sys.executable, os.path.join('scripts', 'archive_ledger_rows.py'),
                          '--keep', str(LEDGER_WINDOW - 1), '--dry-run' if dry else '--apply'])
@@ -247,7 +247,8 @@ def refresh_until_stable(max_rounds=3):
         if cur == prev:
             return True, logs + ['清单已收敛（第 %d 轮无变化）' % i]
         prev = cur
-    return True, logs + ['警告：%d 轮内未收敛，请检查生成器是否产出非确定内容' % max_rounds]
+    # W1277 对抗审查 P3-5 修：非收敛原样 True（铁律 23 违例·缺陷路径与正常路径同成功）⇒ 阻断
+    return False, logs + ['FAIL：%d 轮内未收敛（生成器产出非确定内容）——修复后再收官' % max_rounds]
 
 
 def snapshot_index():
@@ -309,6 +310,9 @@ def collect_paths(spec_path, extra):
             p = row.strip().strip('|').split('|')[0].strip()
             if not p:
                 continue
+            # W1277 对抗审查 P3-5 修：非 ROOT cwd 下相对路径会让 add 静默走空 ⇒ 统一拼 ROOT
+            if not os.path.isabs(p):
+                p = os.path.join(ROOT, p)
             expanded = _expand_group_row(p)
             if expanded is not None:
                 paths.extend(x for x in expanded if x not in paths)

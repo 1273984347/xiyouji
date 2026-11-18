@@ -1,3 +1,15 @@
+### W1277（2026-11-19）：判据修补与验证缓存批（对抗审查 P3 五项根修 + verify 回放缓存）
+
+**本批要点**（W1277 · 判据修补与验证缓存批）：
+
+> - **① 对抗审查 P3 五项根修（P3 五项为上批登记待办·本批清偿）**：**P3-1** 基线棘轮（freeze_gate.write_baseline 增长默认拒绝·须 allow_grow 显式放行·三调用方 CLI 补形参·只降不升）；**P3-2** 82 槽档案行缺 sha 一律判 invalid（旧 fail-open 跳过比对）；**P3-3** S3 系列计数排除轴/网格/标尺形态（_AXIS_HINT_RE·line 元素与命名命中不计·轴色虚高进基线纠偏）；**P3-4** 83 槽豁免清单缺失 fail-closed（FileNotFoundError·基础设施缺失）+ normalize_label 24→64 字（截断合并文案风险收窄·83 基线随批重生成 154 条）；**P3-5** 收官链失败语义对齐（refresh 非收敛改阻断 / 台账不可读改抛出 / collect_paths 统一拼 ROOT）。
+> - **② verify 回放缓存（用户批准改门禁脚本·痛点=E-265 家族实测的「同树重复跑全量」）**：HEAD + git status --porcelain 的 sha256 为内容状态指纹——命中且上次全量绿 ⇒ 回放汇总退出 0（跳过重跑）；任意暂存∪工作树差异即失配 ⇒ 永不掩盖真实改动；仅 --scope full 生效·--no-replay 强制全跑·CI 全新检出必失配；失败路径删旧状态防陈旧绿回放；状态文件入 .gitignore 不入仓。
+> - **③ 台账**：W1271 行 hash/状态核验回填（本会话先行处理·W1276 并行会话已回填一致）；W1277 认领行落登记。
+> - **④ 验证**：三自测 22/22·9/9·7/7 全过；回归锁新增 4 例（P3-1 增长拒/放行/缩减放行 + P3-2 缺 sha invalid + P3-4 缺失 fail-closed）；受影响 pytest 58 全绿；82/83/30 槽 0 FAIL；guardrails 0 阻断；ruff 0 错；回放两遍实测（首跑记录·二跑命中秒回）。
+> - **状态**：已收官（P3 五项清偿·验证缓存上线·83 基线 154 条重生成）
+> - **验证**：见上条与收官链。
+> - **文件**：docs/00-导读/W批次编号对账表.md,scripts/lib/freeze_gate.py,scripts/check_chart_content_completeness.py,scripts/check_chart_degrade.py,scripts/check_chart_label_clipping.py,scripts/batch_closeout.py,scripts/verify_delivery.py,scripts/output/chart-label-clipping-baseline.txt,tests/unit/test_w1277_p3_fixes.py,CHANGELOG.md,scripts/output/file-index.md,README.md,STRUCTURE.md,docs/00-导读/项目说明.md,CITATION.cff,.github/workflows/README.md,site/index.html,scripts/output/_w1277_spec.json,scripts/output/_cascade_files_W1277.txt,scripts/output/stats.json,scripts/output/stats-changelog.json,scripts/output/_vermilion_solid_cache.json,.gitignore,scripts/output/tools-inventory.md,scripts/output/chart-content-audit.json,AGENTS.md,HANDOVER.md,archive/docs/W批次编号对账表-ARCHIVE.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,pytest.ini,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/stats-index.md,scripts/output/tools-inventory.md,scripts/output/chart-content-audit.json,site/data/search-index-zh.js,site/en/search-index-en.js,tests/unit/INDEX.md,tests/unit/README.md
+
 ### W1276（2026-11-18）：A 方案铺开第一批完成 与 两处门禁口径修订
 
 **本批要点**（W1276 · A 方案铺开第一批完成 + 两处口径修订）：
@@ -12,7 +24,7 @@
 > - **文件**： .agent/skills/puti-shouye/SKILL.md,.github/workflows/README.md,AGENTS.md,CHANGELOG.md,CITATION.cff,HANDOVER.md,README.md,STRUCTURE.md,archive/docs/AGENTS-ARCHIVE.md,archive/docs/workflows-readme-history.md,docs/00-导读/W批次编号对账表.md,docs/00-导读/项目说明.md,docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,docs/agent/pitfalls.md,pitfalls.md,pytest.ini,scripts/check_token_coverage.py,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/_cascade_files_W1276.txt,scripts/output/_vermilion_solid_cache.json,scripts/output/_w1266_allrender.json,scripts/output/_w1276_spec.json,scripts/output/chart-legend-render-audit.json,scripts/output/file-index.md,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/stats.json,scripts/output/tools-inventory.md,site/data/cross-time-danmaku.html,site/data/search-index-zh.js,site/data/tag-cloud.html,site/dukou-engine.html,site/en/search-index-en.js,site/index.html,site/rss.xml,tests/unit/INDEX.md,tests/unit/README.md,tests/unit/test_w1276_token_scope.py
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1276），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1277），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

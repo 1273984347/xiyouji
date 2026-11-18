@@ -108,6 +108,7 @@ WIDE_DIRS = DIRECTIONS           # C2 宽口径
 
 
 def normalize_label(text: str) -> str:
+    # W1277 对抗审查 P3-4 修：24 字截断可合并不同文案 ⇒ 放宽至 64（键变长·基线须随本批重生成）
     """标签文案归一（键用·防空白/分隔符歧义）。
 
     **截断后必须再 strip**：基线文件读回时逐行 strip（freeze_gate.read_baseline），
@@ -116,7 +117,7 @@ def normalize_label(text: str) -> str:
     """
     s = re.sub(r"\s+", " ", (text or "").strip())
     s = s.replace("|", "/").replace("~", "-")
-    s = s[:24].strip()
+    s = s[:64].strip()
     return s if s else "(空)"
 
 
@@ -323,6 +324,17 @@ def load_report(path: Path) -> tuple:
     if not rep.get("by_page"):
         return rep, ["探针报告零命中（by_page 为空）——产物无效·fail-closed"]
     return rep, []
+
+
+def ensure_exemptions_file(path: Path) -> None:
+    """豁免清单存在性守卫（W1277 对抗审查 P3-4·fail-closed 新函数不改 read_exemptions 契约）。
+
+    清单缺失 = 基础设施缺失（退出码 2）——豁免面是判据组成部分，静默空集会把
+    「清单丢失」降级成「全量判红」假象，掩盖真正的配置事故。回归锁：
+    tests/unit/test_w1277_p3_fixes.py::test_p3_4_missing_exemption_file_fail_closed。
+    """
+    if not path.exists():
+        raise FileNotFoundError("豁免清单缺失：%s（fail-closed·基础设施缺失）" % path)
 
 
 def read_exemptions(path: Path) -> tuple:
@@ -606,6 +618,7 @@ def main() -> int:
     viol_all, stats = judge_report(report)
     _viol_el, stats_el = judge_report(report, basis="element")
     _viol_vb, stats_vb = judge_report(report, basis="viewbox")
+    ensure_exemptions_file(exempt_path)  # W1277 P3-4：清单缺失 fail-closed（基础设施缺失）
     exempt_keys, _stale = read_exemptions(exempt_path)
     viol = [v for v in viol_all if v not in exempt_keys]
     exempted = [v for v in viol_all if v in exempt_keys]
@@ -620,7 +633,7 @@ def main() -> int:
         return 0
 
     if "--generate-baseline" in argv:
-        n = freeze_gate.write_baseline(
+        n = freeze_gate.write_baseline_ratcheted(
             baseline_path,
             viol,
             [
@@ -634,6 +647,7 @@ def main() -> int:
                 "# 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict",
                 "# 豁免：scripts/output/chart-label-clipping-exemptions.txt（有意裁剪·设计意图·显式登记）",
             ],
+            allow_grow=True,  # W1277 P3-1：CLI 显式动作即人工复核放行
         )
         print("基线已写入 %s（%d 条·豁免 %d 条未计入）" % (baseline_path, n, len(exempted)))
         print(final_line(0))

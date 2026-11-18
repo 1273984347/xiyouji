@@ -7,7 +7,7 @@
 # 格式：<页面>|CLIP-<方向>|<文案> 或 <页面>|OVL|<文案A>~<文案B>
 # 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict
 # 豁免：scripts/output/chart-label-clipping-exemptions.txt（有意裁剪·设计意图·显式登记）
-# 违例键 154 条（生成：2026-11-18 04:33:22）
+# 违例键 154 条（生成：2026-11-19 02:10:19）
 data/cave-estate.html|OVL|七绝山~毛颖山
 data/cave-estate.html|OVL|乌斯藏国~通天河
 data/cave-estate.html|OVL|乱石山~翠云山
@@ -44,8 +44,8 @@ data/timeline.html|OVL|1955~1980
 data/timeline.html|OVL|人文社整理本~数字化版本
 data/visual-art.html|OVL|No.5~取经路径（按章节顺序）→ 灵山
 data/visual-art.html|OVL|No.6~取经路径（按章节顺序）→ 灵山
-en/81-hardships.html|CLIP-right|Heavenly / Western steed
-en/81-hardships.html|CLIP-right|Inner demonic obstacles1
+en/81-hardships.html|CLIP-right|Heavenly / Western steeds incarnate19.8%
+en/81-hardships.html|CLIP-right|Inner demonic obstacles12.3%
 en/business-model.html|OVL|0~Bottomless Cave
 en/business-model.html|OVL|L0~Stone Monkey King
 en/chapter-stats.html|OVL|0~Ch.1
@@ -73,28 +73,28 @@ en/journey-map-interactive.html|OVL|Eagle-Sorrow Ravine~Guanyin Monastery
 en/journey-map-interactive.html|OVL|Eagle-Sorrow Ravine~Two-Boundaries Mountain
 en/journey-map-interactive.html|OVL|Five-Villages Abbey~Flowing Sands River
 en/journey-map-interactive.html|OVL|Five-Villages Abbey~White Tiger Ridge
-en/journey-map-interactive.html|OVL|Flaming Mountain~Lesser Thunderclap Monas
+en/journey-map-interactive.html|OVL|Flaming Mountain~Lesser Thunderclap Monastery
 en/journey-map-interactive.html|OVL|Flaming Mountain~River of Heaven
 en/journey-map-interactive.html|OVL|Flowing Sands River~Gao Village
 en/journey-map-interactive.html|OVL|Gao Village~Guanyin Monastery
-en/journey-map-interactive.html|OVL|Lesser Thunderclap Monas~Lion-Camel Ridge
-en/jurisprudence.html|OVL|Cases (sorted by dispari~Sha Wujing · shattered t
-en/jurisprudence.html|OVL|Cases (sorted by dispari~Six-Eared Macaque · impe
-en/jurisprudence.html|OVL|Cases (sorted by dispari~Sun Wukong · wreaked hav
-en/jurisprudence.html|OVL|Cases (sorted by dispari~White Bone Demon · wante
-en/jurisprudence.html|OVL|Golden-Winged Great Peng~Green Ox Spirit · descen
-en/jurisprudence.html|OVL|Green Ox Spirit · descen~Kui Wood Wolf · seized a
-en/jurisprudence.html|OVL|Green Ox Spirit · descen~Yellow Robe Monster · de
-en/jurisprudence.html|OVL|Jing River Dragon King ·~Kui Wood Wolf · seized a
-en/jurisprudence.html|OVL|Jing River Dragon King ·~Sha Wujing · shattered t
-en/jurisprudence.html|OVL|Jing River Dragon King ·~White Bone Demon · wante
-en/jurisprudence.html|OVL|Jing River Dragon King ·~Yellow Robe Monster · de
-en/jurisprudence.html|OVL|Kui Wood Wolf · seized a~Yellow Robe Monster · de
-en/jurisprudence.html|OVL|Sha Wujing · shattered t~White Bone Demon · wante
-en/jurisprudence.html|OVL|Six-Eared Macaque · impe~Sun Wukong · wreaked hav
-en/jurisprudence.html|OVL|Six-Eared Macaque · impe~White Bone Demon · wante
-en/jurisprudence.html|OVL|Sun Wukong · wreaked hav~White Bone Demon · wante
-en/jurisprudence.html|OVL|Sun Wukong · wreaked hav~Zhu Bajie · molested Cha
+en/journey-map-interactive.html|OVL|Lesser Thunderclap Monastery~Lion-Camel Ridge
+en/jurisprudence.html|OVL|Cases (sorted by disparity_score descending)~Sha Wujing · shattered the glazed cup
+en/jurisprudence.html|OVL|Cases (sorted by disparity_score descending)~Six-Eared Macaque · impersonated Wukong
+en/jurisprudence.html|OVL|Cases (sorted by disparity_score descending)~Sun Wukong · wreaked havoc in the Heavenly Palace
+en/jurisprudence.html|OVL|Cases (sorted by disparity_score descending)~White Bone Demon · wanted to eat Tang Sanzang
+en/jurisprudence.html|OVL|Golden-Winged Great Peng · devoured the Lion Camel Kingdom~Green Ox Spirit · descended to earth and ate people
+en/jurisprudence.html|OVL|Green Ox Spirit · descended to earth and ate people~Kui Wood Wolf · seized a princess + cannibalism
+en/jurisprudence.html|OVL|Green Ox Spirit · descended to earth and ate people~Yellow Robe Monster · descended to earth for 13 years
+en/jurisprudence.html|OVL|Jing River Dragon King · altered the rainfall quota~Kui Wood Wolf · seized a princess + cannibalism
+en/jurisprudence.html|OVL|Jing River Dragon King · altered the rainfall quota~Sha Wujing · shattered the glazed cup
+en/jurisprudence.html|OVL|Jing River Dragon King · altered the rainfall quota~White Bone Demon · wanted to eat Tang Sanzang
+en/jurisprudence.html|OVL|Jing River Dragon King · altered the rainfall quota~Yellow Robe Monster · descended to earth for 13 years
+en/jurisprudence.html|OVL|Kui Wood Wolf · seized a princess + cannibalism~Yellow Robe Monster · descended to earth for 13 years
+en/jurisprudence.html|OVL|Sha Wujing · shattered the glazed cup~White Bone Demon · wanted to eat Tang Sanzang
+en/jurisprudence.html|OVL|Six-Eared Macaque · impersonated Wukong~Sun Wukong · wreaked havoc in the Heavenly Palace
+en/jurisprudence.html|OVL|Six-Eared Macaque · impersonated Wukong~White Bone Demon · wanted to eat Tang Sanzang
+en/jurisprudence.html|OVL|Sun Wukong · wreaked havoc in the Heavenly Palace~White Bone Demon · wanted to eat Tang Sanzang
+en/jurisprudence.html|OVL|Sun Wukong · wreaked havoc in the Heavenly Palace~Zhu Bajie · molested Chang'e
 en/karma-reincarnation.html|CLIP-right|● Pilgrim team: 0
 en/karma-reincarnation.html|OVL|Case 1~Ch. 3
 en/karma-reincarnation.html|OVL|Case 2~Ch. 10-11
@@ -104,16 +104,16 @@ en/karma-reincarnation.html|OVL|Case 5~Ch. 9-10
 en/karma-reincarnation.html|OVL|Case 6~Ch. 37-39
 en/karma-reincarnation.html|OVL|Case 7~Ch. 47-49
 en/karma-reincarnation.html|OVL|Case 8~Ch. 8 / Ch. 22
-en/karma-reincarnation.html|OVL|King of Inspiration (Gol~Zhu Bajie · Sha Wujing (
-en/linguistics.html|CLIP-bottom|Sha Wujing→Sun Wukong +
-en/linguistics.html|CLIP-bottom|Summoning Spell (calling
-en/linguistics.html|CLIP-bottom|Tang Monk's Admonition (
+en/karma-reincarnation.html|OVL|King of Inspiration (Goldfish Spirit)~Zhu Bajie · Sha Wujing (combined case)
+en/linguistics.html|CLIP-bottom|Sha Wujing→Sun Wukong + Zhu Bajie
+en/linguistics.html|CLIP-bottom|Summoning Spell (calling for reinforcements)
+en/linguistics.html|CLIP-bottom|Tang Monk's Admonition (Buddhist precepts)
 en/linguistics.html|OVL|0~Tang Sanzang→Sun Wukong
-en/linguistics.html|OVL|Dialogue pairs (speaker~Sun Wukong→Tang Sanzang
-en/linguistics.html|OVL|Incantation name~Summoning Spell (calling
-en/linguistics.html|OVL|Incantation name~Wukong's Taunts (provoki
-en/linguistics.html|OVL|Summoning Spell (calling~Water-Avoiding Spell
-en/linguistics.html|OVL|Tang Monk's Admonition (~Wukong's Taunts (provoki
+en/linguistics.html|OVL|Dialogue pairs (speaker → listener)~Sun Wukong→Tang Sanzang
+en/linguistics.html|OVL|Incantation name~Summoning Spell (calling for reinforcements)
+en/linguistics.html|OVL|Incantation name~Wukong's Taunts (provoking demons)
+en/linguistics.html|OVL|Summoning Spell (calling for reinforcements)~Water-Avoiding Spell
+en/linguistics.html|OVL|Tang Monk's Admonition (Buddhist precepts)~Wukong's Taunts (provoking demons)
 en/mbti-evolution.html|OVL|Conflict~Consummation
 en/mbti-evolution.html|OVL|Conflict~Formation
 en/mbti-evolution.html|OVL|Conflict~Harmony
@@ -125,7 +125,7 @@ en/mbti-evolution.html|OVL|Formation~Harmony
 en/mbti-evolution.html|OVL|INFJ~Tang Sanzang
 en/mbti-evolution.html|OVL|ISFJ~Sha Wujing
 en/mbti-evolution.html|OVL|ISTP~White Dragon Horse
-en/monster-background.html|OVL|Buddhist & Daoist Discip~Celestial Mounts & Divin
+en/monster-background.html|OVL|Buddhist & Daoist Disciples/Attendants~Celestial Mounts & Divine Beasts
 en/monster-ecology-network.html|OVL|Golden Monkey King~White-Haired Rat Demon
 en/monster-ecology-network.html|OVL|Nine-H~Yellow
 en/monster-female-network.html|OVL|Ch. 59~Ch. 60
@@ -133,32 +133,32 @@ en/monster-female-network.html|OVL|Ch. 60~Ch. 60
 en/monster-female-network.html|OVL|Ch. 70~Ch. 72
 en/monster-female-network.html|OVL|Ch. 72~Ch. 72
 en/monster-female-network.html|OVL|Ch. 80~Ch. 82
-en/monster-female-network.html|OVL|Returned to therighteous~Zhu BajieJade-Faced Fox
-en/monster-victims-network.html|OVL|Ch. 35~Gold & Silver Horn Kings
-en/monster-victims-network.html|OVL|Ch. 45~Tongtian River case (Ch.
-en/monster-victims-network.html|OVL|Ch. 50~Tongtian River case (Ch.
-en/monster-victims-network.html|OVL|Ch. 70~Zhuzi Kingdom case (Ch.
+en/monster-female-network.html|OVL|Returned to therighteous pathPrincess Iron Fan — Returned to~Zhu BajieJade-Faced Fox — Destroyed by Zhu Bajie
+en/monster-victims-network.html|OVL|Ch. 35~Gold & Silver Horn Kings case (Ch. 32-35)
+en/monster-victims-network.html|OVL|Ch. 45~Tongtian River case (Ch. 47-49)
+en/monster-victims-network.html|OVL|Ch. 50~Tongtian River case (Ch. 47-49)
+en/monster-victims-network.html|OVL|Ch. 70~Zhuzi Kingdom case (Ch. 70-71)
 en/music-structure.html|CLIP-bottom|10
 en/music-structure.html|CLIP-bottom|2
 en/music-structure.html|CLIP-bottom|4
 en/music-structure.html|CLIP-bottom|6
 en/music-structure.html|CLIP-bottom|8
 en/music-structure.html|CLIP-bottom|Intensity (1–10)
-en/music-structure.html|CLIP-left|chanted by Tang Sanzang,
+en/music-structure.html|CLIP-left|chanted by Tang Sanzang, suffered by Wukong
 en/music-structure.html|CLIP-right|Coda · Ch. 98-100
-en/narrative-experiment.html|OVL|Assign initial merit,Cho~Play hardship cards,Cove
-en/narrative-experiment.html|OVL|Deliver the true scriptu~Play hardship cards,Cove
-en/philosophy.html|OVL|4. Mid-Pilgrimage · Bala~Mind-nature stages (1 →
-en/philosophy.html|OVL|5. Late Pilgrimage · Awa~6. Buddhahood · Victorio
+en/narrative-experiment.html|OVL|Assign initial merit,Choose which hardship cards to play,Bui~Play hardship cards,Covertly protect or sabotage,Settle the
+en/narrative-experiment.html|OVL|Deliver the true scriptures,Settle at Spirit Mountain,Comput~Play hardship cards,Covertly protect or sabotage,Settle the
+en/philosophy.html|OVL|4. Mid-Pilgrimage · Balance~Mind-nature stages (1 → 6 mind-cultivation progression)
+en/philosophy.html|OVL|5. Late Pilgrimage · Awakening~6. Buddhahood · Victorious Fighting Buddha
 en/power-resources.html|OVL|1%~Mortal Deification
 en/power-resources.html|OVL|2%~Mount Promotion
 en/relationships.html|OVL|Li Jing~Queen Mother of the West
 en/relationships.html|OVL|Purple-Gold Red Gourd~false names
 en/six-senses-narratology-network.html|OVL|2000 CE~4th–20th century CE
 en/text-evolution.html|CLIP-top|↑ Earliest
-en/theological-intervention-network.html|OVL|Ch. 77 · Subjugation of~Tathāgata
+en/theological-intervention-network.html|OVL|Ch. 77 · Subjugation of the Roc~Tathāgata
 en/timeline.html|OVL|1955~1980
 en/timeline.html|OVL|Contemporary~Republican Era
 en/timeline.html|OVL|Digita…~New An…
-en/visual-art.html|OVL|No.5~Pilgrimage route (by cha
-en/visual-art.html|OVL|No.6~Pilgrimage route (by cha
+en/visual-art.html|OVL|No.5~Pilgrimage route (by chapter order) → Spirit Mountain
+en/visual-art.html|OVL|No.6~Pilgrimage route (by chapter order) → Spirit Mountain

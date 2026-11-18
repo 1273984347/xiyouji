@@ -157,6 +157,7 @@ _VOID_TAGS = {
     "link", "meta", "param", "source", "track", "wbr",
 }
 _SKIP_TEXT_TAGS = {"script", "style", "noscript", "template"}
+_AXIS_HINT_RE = re.compile(r"axis|grid|tick|domain|frame|rule", re.I)  # W1277 P3-3
 _MIN_TEXT = 8
 _JS_WINDOW = 400
 
@@ -601,6 +602,11 @@ def legend_evidence(nodes, script: str) -> tuple[int, bool, bool, str]:
     for n in nodes:
         if n.tag in _SKIP_TEXT_TAGS or _in_legend(n):
             continue
+        # W1277 对抗审查 P3-3 修：轴/网格/标尺形态（line 元素·axis/grid/tick 命名）不计入
+        # 系列色——轴色计入曾使 series_count 虚高进基线
+        _ident = " ".join(filter(None, [node_id(n), n.attrs.get("class"), n.attrs.get("id")]))
+        if n.tag == "line" or _AXIS_HINT_RE.search(_ident or ""):
+            continue
         for attr in ("fill", "stroke"):
             val = (n.attrs.get(attr) or "").strip().lower()
             if val and val not in ("none", "currentcolor", "transparent", "inherit"):
@@ -721,8 +727,10 @@ def _resolve_legend_exemption(rel: str, spec: str, series: int, audit: dict, pag
         row = audit.get(rel) or {}
         actual = row.get("verdict")
         recorded_sha = row.get("sha") or ""
-        if recorded_sha and page_sha and recorded_sha != page_sha:
-            return ("invalid", "渲染档案过期（页面已改·sha %s≠%s）·须重跑渲染复核" % (recorded_sha, page_sha))
+        if page_sha and (not recorded_sha or recorded_sha != page_sha):
+            # W1277 对抗审查 P3-2 修：缺 sha 的档案行原样放行豁免（fail-open 弱点）⇒
+            # 一律判 invalid（档案不可信·须重跑渲染复核补 sha）
+            return ("invalid", "渲染档案过期或缺 sha（页 %s≠%s）·须重跑渲染复核" % (recorded_sha or "无", page_sha))
         if actual == RENDER_VERDICTS[spec]:
             if spec == "render=multi-nolegend":
                 return ("c4", "渲染级复核：多系列且无可见图例")
@@ -995,7 +1003,7 @@ def _parse_args(argv: list[str]) -> tuple[str, bool, bool, Path]:
 
 def _write_baseline(res) -> int:
     """--generate-baseline：把当前存量违例冻结成基线文件（口径注释随文件走·换人可复算）。"""
-    n = freeze_gate.write_baseline(
+    n = freeze_gate.write_baseline_ratcheted(
         BASELINE,
         res["viol"],
         [
@@ -1005,6 +1013,7 @@ def _write_baseline(res) -> int:
             "# 格式：<页面>|<判据码>|<细节>；C1=缺来源标注 C2=缺结论段 C3=缺 tooltip C4=多系列无图例 C5=单系列未登记豁免",
             "# 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict",
         ],
+        allow_grow=True,  # W1277 P3-1：CLI 显式动作即人工复核放行
     )
     print("基线已写入 %s（%d 条）" % (BASELINE, n))
     return 0

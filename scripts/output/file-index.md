@@ -1,3 +1,47 @@
+## W1277 判据修补与验证缓存批（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W1277 | W1271 回填核验 + W1277 认领行 |
+| scripts/lib/freeze_gate.py | W1277 | P3-1 基线棘轮（增长须 allow_grow·只降不升） |
+| scripts/check_chart_content_completeness.py | W1277 | P3-2 缺 sha fail-closed + P3-3 轴色计数排除 |
+| scripts/check_chart_degrade.py | W1277 | P3-1 调用方 allow_grow 补形参 |
+| scripts/check_chart_label_clipping.py | W1277 | P3-4 豁免缺失 fail-closed + label 64 字 + P3-1 调用方 |
+| scripts/batch_closeout.py | W1277 | P3-5 失败语义对齐三处（非收敛阻断/台账抛出/ROOT 解析） |
+| scripts/verify_delivery.py | W1277 | verify 回放缓存（内容 hash 命中即回放·仅 full） |
+| scripts/output/chart-label-clipping-baseline.txt | W1277 | 83 基线重生成（label 64 字·154 条） |
+| tests/unit/test_w1277_p3_fixes.py | W1277 | P3 回归锁 4 例（棘轮/缺 sha/缺失 fail-closed） |
+| CHANGELOG.md | W1277 | W1277 落段 |
+| scripts/output/file-index.md | W1277 | file-index W1277 段 |
+| README.md | W1277 | 版本面推进 |
+| STRUCTURE.md | W1277 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1277 | 版本面推进 |
+| CITATION.cff | W1277 | 版本面推进 |
+| .github/workflows/README.md | W1277 | 版本面推进 |
+| site/index.html | W1277 | 页脚批次链 W1277 前插 |
+| scripts/output/_w1277_spec.json | W1277 | 本批 spec |
+| scripts/output/_cascade_files_W1277.txt | W1277 | 手工级联清单 |
+| scripts/output/stats.json | W1277 | stats 刷新 |
+| scripts/output/stats-changelog.json | W1277 | stats 变更史 |
+| scripts/output/_vermilion_solid_cache.json | W1277 | 朱砂槽增量缓存跟随 |
+| .gitignore | W1277 | replay 状态文件入 ignore |
+| scripts/output/tools-inventory.md | W1277 | 工具清单跟随 |
+| scripts/output/chart-content-audit.json | W1277 | 审计报告跟随 |
+| AGENTS.md | W1277 | 菩提授业 16 条 + 脚注 W1277 条目（此前登记遗漏补登） |
+| HANDOVER.md | W1277 | 进度 bullet 移链首 + 更新链 + 里程碑滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1277 | 台账腾窗迁入 W1213-W1214 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1277 | report_docs 计数标记 sweep 跟随 |
+| pytest.ini | W1277 | pytest_collected 计数标记 sweep 跟随（1784→1788·回归锁 4 例） |
+| scripts/output/INDEX.md | W1277 | 产物索引刷新（gen_folder_docs） |
+| scripts/output/README.md | W1277 | 产物索引 README 刷新 |
+| scripts/output/stats-index.md | W1277 | stats 反向索引刷新 |
+| site/data/search-index-zh.js | W1277 | 搜索索引重建 |
+| site/en/search-index-en.js | W1277 | 搜索索引重建 |
+| scripts/output/_sync_analysis_manifest.json | W1277 | 分析包同步清单（若本轮有刷新） |
+| tests/unit/INDEX.md | W1277 | 目录文档 refresh（新增回归锁文件） |
+| tests/unit/README.md | W1277 | 目录文档 refresh（同上） |
+
+
 ## W1276 A 方案铺开第一批完成 与 两处门禁口径修订（2026-11-18）
 
 | 文件 | W | 说明 |

@@ -236,3 +236,6 @@ backups/
 # W1266 收官期卫生（用户令：GitHub 仓库只留必要内容）：AI 工具会话目录与截图过程产物不入仓
 .qoder/
 **/_verify_shots/
+
+# W1277 verify 回放缓存（本机状态文件·不入仓）
+scripts/output/_verify_replay_state.json

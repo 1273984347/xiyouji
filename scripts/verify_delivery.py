@@ -255,6 +255,63 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
 
 
+
+# ---- W1277 verify 回放缓存（对抗审查后立项·用户批准改门禁脚本）----
+# 痛点（E-265 家族实测）：同一内容状态重复跑 --scope full（4 分钟级）——收官链/推送判据/
+# 提交钩子在无变化树上重复全量。判据：HEAD + git status --porcelain 的 sha256（暂存∪工作树
+# 任意差异即失配 ⇒ 永不掩盖真实改动）；命中且上次全量绿 ⇒ 回放汇总（退出码 0）。
+# 仅 --scope full 生效；--no-replay 强制全跑；CI 全新检出 hash 必失配 ⇒ 不受影响。
+_REPLAY_STATE_PATH = os.path.join(ROOT, 'scripts', 'output', '_verify_replay_state.json')
+
+
+def _tree_state_hash():
+    """HEAD + git status --porcelain 的 sha256（内容状态指纹·任意差异即失配）。"""
+    import hashlib
+    import subprocess
+
+    def _g(*a):
+        try:
+            r = subprocess.run(['git'] + list(a), capture_output=True, text=True,
+                               encoding='utf-8', errors='replace', timeout=60)
+            return r.stdout if r.returncode == 0 else ''
+        except (OSError, subprocess.SubprocessError):
+            return ''
+    raw = _g('rev-parse', 'HEAD') + chr(10) + _g('status', '--porcelain')
+    return hashlib.sha256(raw.encode('utf-8', 'replace')).hexdigest()
+
+
+def _replay_full_run():
+    """回放命中 → 返回汇总行文本；未命中/状态异常 → None。"""
+    import json
+    try:
+        with open(_REPLAY_STATE_PATH, encoding='utf-8') as f:
+            state = json.load(f)
+    except (OSError, ValueError):
+        return None
+    if not isinstance(state, dict) or state.get('exit') != 0:
+        return None
+    if state.get('hash') != _tree_state_hash():
+        return None
+    return state.get('summary') or '核心全部通过 ✅（回放）'
+
+
+def _record_replay(fails, warns, summary):
+    """全量绿后记录状态指纹；失败路径删除旧状态（防陈旧绿回放）。"""
+    import json
+    try:
+        if fails:
+            try:
+                os.remove(_REPLAY_STATE_PATH)
+            except OSError:
+                pass
+            return
+        with open(_REPLAY_STATE_PATH, 'w', encoding='utf-8') as f:
+            json.dump({'hash': _tree_state_hash(), 'exit': 0, 'fails': fails,
+                       'warns': warns, 'summary': summary}, f, ensure_ascii=False, indent=1)
+    except OSError:
+        pass  # 状态记录失败不阻断门禁本身（缓存是优化非判据）
+
+
 def _parse_scope(argv):
     """解析 --scope full|auto|docs|site（缺省 full；非法值回退 full）。"""
     for i, a in enumerate(argv):
@@ -2013,6 +2070,12 @@ def _print_summary(rep, profile=False):
 
 def main():
     _assert_registry_consistent()  # W781 R-1：注册表一致性启动期防线
+    if _parse_scope(sys.argv) == 'full' and '--no-replay' not in sys.argv and '--profile' not in sys.argv:
+        _replay = _replay_full_run()
+        if _replay is not None:
+            print('[replay] 内容状态 hash 命中（同状态上次全量绿）——回放汇总·跳过重跑（--no-replay 强制全跑）')
+            print(_replay)
+            return 0
     """交付门禁编排（W728 重构：905 行单体 → 表驱动编排）。
 
     执行序 = 65 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
@@ -2044,7 +2107,10 @@ def main():
     # —— 收尾 ----
     _probe_health(rep)
     _check_section_lock(ctx)
-    return _print_summary(rep, profile=("--profile" in sys.argv))
+    _rc = _print_summary(rep, profile=("--profile" in sys.argv))
+    if _parse_scope(sys.argv) == 'full' and _rc == 0 and '--no-replay' not in sys.argv:
+        _record_replay(rep.fails, rep.warns, '核心全部通过 ✅' + ('（%d 项辅助 WARN，不阻断）' % rep.warns if rep.warns else ''))
+    return _rc
 
 
 if __name__ == "__main__":
