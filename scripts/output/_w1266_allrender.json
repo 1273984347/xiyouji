@@ -543,7 +543,7 @@
     },
     {
       "page": "site/data/character-appearance.html",
-      "sha": "ac0b1fa3ea43",
+      "sha": "a3d5fcb73a7a",
       "static": {
         "svg": true,
         "cls": true,
@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "a99d5e5e9ce0",
+      "sha": "07d81d13d7e9",
       "static": {
         "svg": true,
         "cls": true,
@@ -5363,7 +5363,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "939158f2329a",
+      "sha": "71035dcef9d6",
       "static": {
         "svg": false,
         "cls": true,
@@ -6223,7 +6223,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "cba27810ebf8",
+      "sha": "9e14d3204ecd",
       "static": {
         "svg": true,
         "cls": false,
@@ -6342,7 +6342,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "aabdf3bb26d8",
+      "sha": "572d7045cb93",
       "static": {
         "svg": true,
         "cls": false,
@@ -6726,7 +6726,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 867,
+      "consoleErrors": 851,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -6882,7 +6882,7 @@
     },
     {
       "page": "site/en/character-appearance.html",
-      "sha": "89aeb95eb9ba",
+      "sha": "7724341075bf",
       "static": {
         "svg": true,
         "cls": true,
@@ -9902,7 +9902,7 @@
     },
     {
       "page": "site/en/methodology-matrix.html",
-      "sha": "5b55db1aa723",
+      "sha": "f4f9acf3ffe5",
       "static": {
         "svg": true,
         "cls": true,
@@ -10632,7 +10632,7 @@
     },
     {
       "page": "site/en/narrative-experiment.html",
-      "sha": "430344978855",
+      "sha": "2cfbde3413a7",
       "static": {
         "svg": true,
         "cls": false,
@@ -10899,17 +10899,17 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1499·文本 0）",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1500·文本 0）",
       "svgKinds": [
         {
           "cls": "",
           "id": "svg-render",
           "w": 511,
           "h": 307,
-          "marks": 1499,
+          "marks": 1500,
           "texts": 0,
           "kind": "chart",
-          "basis": "511x307·图元 1499·文本 0"
+          "basis": "511x307·图元 1500·文本 0"
         },
         {
           "cls": "ic-moon",

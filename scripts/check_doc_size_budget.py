@@ -52,6 +52,24 @@ RE_HANDOVER_BLOCK = re.compile(r"^- \*\*(?:v[\d.]+ )?W\d+[^*]*\*+：", re.M)
 # 冲突，以权威文档为准。*"` 逐字对齐）——C4 逐条计量前剥它，使判据口径与写入侧「量 note 本体」
 # 一致；否则末条 = note + 家具被合并计数，任何 97–120 字注记皆「级联绿 / 门禁红」（W1013 首踩）
 _FOOTNOTE_TAIL_RE = re.compile(r"。?如与上述权威文档冲突，以权威文档为准。?\*+\s*$")
+# W1272：形态合规判据（前导句号**必需**·与写入侧 compose_agents_entry 同源）——
+# 剥离仍按可选（不误伤长度计量），但形态漂移**单独判红**：否则句号一丢即静默漂移、
+# 写入侧每批收官卡死（W1266 同族复发·本批实证·两侧口径不一致 = 静默漂移）。
+_FOOTNOTE_TAIL_STRICT_RE = re.compile(r"。如与上述权威文档冲突，以权威文档为准。?\*+\s*$")
+
+
+def footnote_tail_shape_ok(footnote_line):
+    """脚注尾句**形态**合规（前导句号必需·与写入侧同源）→ 违规描述列表（空 = 合规）。
+
+    W1272：原实现只有「剥离用」的正则（前导句号可选）⇒ 句号丢失时长度计量照常、
+    门禁全绿，而写入侧字面断言卡死**每批收官** ⇒ 两侧口径不一致 = 静默漂移。
+    ⇒ 形态检查独立成判据（不改剥离口径·不误伤长度计量）。
+    """
+    if "如与上述权威文档冲突" not in footnote_line:
+        return []
+    if _FOOTNOTE_TAIL_STRICT_RE.search(footnote_line):
+        return []
+    return ["脚注尾句缺前导句号「。」（写入侧 compose_agents_entry 恒带句号·两侧口径须同源）"]
 
 
 def check_footnote_shape(footnote_line, cap=120):
@@ -63,6 +81,7 @@ def check_footnote_shape(footnote_line, cap=120):
     剥离只影响末条的家具部分，条目本体超长照样抓（见 _self_test 负样本）。
     """
     bad = []
+    bad.extend(footnote_tail_shape_ok(footnote_line))
     for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", footnote_line)[1:]:
         if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", e):
             bad.append("条目头非阿拉伯形态：" + e[:24])

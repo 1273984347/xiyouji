@@ -116,6 +116,12 @@ def precheck(spec):
                           "预算 = 120 − 固定尾句家具与尾句号开销）" % _bad[0])
     except ImportError:
         pass  # 判据模块缺失时退回上行 len 守卫（不静默放行超长·上守卫仍在）
+    # W1272 硬守卫：head_entry 会被写入 HANDOVER「最后更新」**链首**⇒ 下游登记面一致性闸
+    # （check_registration_surface）要求链首形如「YYYY-MM-DD（W#### …」⇒ 写入侧必须前置校验：
+    # 否则链首缺日期 ⇒ 写入照过、下游判红（本批实证·收官链在 regsurface 步 FAIL）。
+    _he = str(spec.get("head_entry", ""))
+    if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}", _he):
+        issues.append("spec.head_entry 未以「YYYY-MM-DD（W####」开场（写入 HANDOVER 链首·下游登记面闸要求该形态）")
     # W1016 硬守卫：desc / head_sentence 禁裸聚合数字（`N 项/篇/页/个/类`）。
     # 病根：两字段逐字写入 README/STRUCTURE/项目说明的**版本抬头行**，而第 31 门禁 C5c
     # 对抬头行也查裸聚合数字（`<!--doc-sync:exempt-->` 在行尾、不紧跟命中 ⇒ 后置豁免不命中）
@@ -424,6 +430,13 @@ def _upsert_chain_entry(chain, entry, batch, sep):
     first_num = nums[0] if nums else None
     first_re = re.compile(r"20\d{2}-\d{2}-\d{2}（(?:v[\d.]+ )?W(\d{3,4})[^）]*）")
     mi = re.search(re.escape(entry), chain)
+    # W1272：幂等键从「文本」放宽到「批号」——head_entry 形态变化（如补日期前缀）时，
+    # 原实现判「不存在」⇒ 追加**同号重复条目**（本批实证·cascade 重跑后链首出现两条 W1272）。
+    # ⇒ 同号条目已存在但形态不同 ⇒ **替换**该条目（不追加）·保持一份。
+    if mi is None:
+        _same = re.search(r"（(?:v[\d.]+ )?W%d(?!\d)[^）]*）" % bn, chain)
+        if _same is not None:
+            return chain[:_same.start()] + entry + chain[_same.end():], "replaced"
     if mi is not None:
         if chain[mi.start():mi.end()].strip() != entry.strip():
             return chain[:mi.start()] + entry + chain[mi.end():], "replaced"
@@ -509,14 +522,7 @@ def _face_handover(ctx):
     h0 = s.find("> 最后更新：")
     h1 = s.find(nl, h0)
     head_line = s[h0:h1]
-    entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
-    while len(entries) + 1 > 3:
-        note_idx = head_line.find("·（W")
-        assert note_idx != -1, "未找到历史注记锚点"
-        oldest = head_line.rfind("·20", 0, note_idx)
-        assert oldest != -1
-        head_line = head_line[:oldest] + head_line[note_idx:]
-        entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
+    head_line = trim_head_chain(head_line)  # W1272：与登记面一致性闸同口径裁剪
     s = s[:h0] + head_line + s[h1:]
     s = re.sub(r"；(?:v[\d.]+ W\d+|W\d+) 起生效）", f"；{ctx.batch} 起生效）", s, count=1)  # W713 双形态（该行现不存在=静默无操作·防未来回加时失配）
     # W705 教训：标题锚点与替换串形态必须恒定——旧替换串丢 ver 前缀致下一批锚点静默失配（re.sub 0 替换不报错），
@@ -547,7 +553,17 @@ def _face_handover(ctx):
     # 且里程碑滚动（淘汰最老块）是**有状态**的 ⇒ 重跑会再淘汰一块（信息丢失）。
     # 本版：统一走单一事实源 _upsert_handover_milestone（按批号序·含位置校正）；
     # **仅首次插入**才执行滚动（滚动已在首次执行时完成）。
-    _mbuild = ctx.spec["milestone_block"].replace("\n", nl) + nl
+    # W1272：写入形态必须与定位正则（^- \*\*(?:v[\d.]+ )?(W\d+)\b）一致 ⇒ 否则
+    # 级联写入的纯文本块无法被 _locate_handover_milestone 定位 ⇒ 重跑幂等失效、逐次累积
+    # （本批实证·「一、当前进度」段内同批里程碑块累积 3 份）。
+    _mraw = ctx.spec["milestone_block"].strip()
+    if not _mraw.startswith("- **"):
+        if "：" in _mraw:
+            _mt, _mc = _mraw.split("：", 1)
+            _mraw = "- **%s**：%s" % (_mt.strip(), _mc.strip())
+        else:
+            _mraw = "- **%s**：%s" % (ctx.batch, _mraw)
+    _mbuild = _mraw.replace("\n", nl) + nl
     s, _mst = _upsert_handover_milestone(s, _mbuild, ctx.batch, nl)
     if _mst != "unchanged":
         print("[HANDOVER] 里程碑块：%s" % _mst)
@@ -698,7 +714,10 @@ def _face_footers(ctx):
         ctx.pend.append((p, _foot_upsert(s, ctx.batch, ctx.batch), None))
 
 
-_AGENTS_TAIL = "。如与上述权威文档冲突，以权威文档为准。*"
+_AGENTS_TAIL_BODY = "如与上述权威文档冲突，以权威文档为准。*"
+_AGENTS_TAIL = "。" + _AGENTS_TAIL_BODY  # 逐字形态（向后兼容·precheck 拼装用）
+# W1272：定位用正则——**容忍前导句号有无**（原实现字面 count 断言过脆·见 locate_agents_tail）
+_AGENTS_TAIL_RE = re.compile(r"。?如与上述权威文档冲突，以权威文档为准。\*+")
 
 
 _AGENTS_ENTRY_TOKEN_RE = re.compile(
@@ -736,10 +755,31 @@ def _locate_agents_note(s, batch):
             while end > t.end() and s[end - 1] == "；":
                 end -= 1
         else:
-            _tail_i = s.find(_AGENTS_TAIL)
+            _mt = locate_agents_tail(s)
+            _tail_i = _mt.start() if _mt is not None else -1
             end = (_tail_i + 1) if _tail_i != -1 else len(s)
         spans.append((start, end))
     return spans
+
+
+def trim_head_chain(head_line):
+    """HANDOVER 头链「最后更新」条目裁剪（与登记面一致性闸**同口径**·W1272）。
+
+    原实现按「·YYYY-MM-DD（」计数且**不计链首**（`len(entries) + 1 > 3`），
+    而下游判据（check_registration_surface）按「（W####」计**全部**条目（含链首与尾注）
+    ⇒ 两侧口径不一致 ⇒ cascade 写出的链（链首 + 2 条历史 + 尾注 = 4）必被下游判红
+    （本批实证·收官链 regsurface 步 FAIL「条目 4 条 > 3」）。
+    ⇒ 统一为：链首 + 历史 + 尾注 ≤ 3 条（= 链首 + 1 条历史 + 尾注）。
+    """
+    entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
+    while len(entries) + 2 > 3:
+        note_idx = head_line.find("·（W")
+        assert note_idx != -1, "未找到历史注记锚点"
+        oldest = head_line.rfind("·20", 0, note_idx)
+        assert oldest != -1, "未找到历史条目锚点"
+        head_line = head_line[:oldest] + head_line[note_idx:]
+        entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
+    return head_line
 
 
 def _locate_handover_head_entry(s, entry):
@@ -768,6 +808,29 @@ def _locate_workflows_marker(s, batch_w, desc):
                           % (re.escape(str(batch_w)), re.escape(desc)))
 
 
+def locate_agents_tail(s):
+    """AGENTS 脚注尾句的唯一匹配（**有无前导句号皆认**）→ match 或 None。
+
+    W1272 根修：原写入侧用字面 `s.count(tail) == 1` 断言（要求前导句号逐字存在），
+    而门禁侧剥离正则把前导句号设为**可选** ⇒ 句号一丢，门禁照绿、写入侧 count==0
+    断言卡死**每批收官**（W1266 同族复发·本批实证：AGENTS.md 现役脚注末条与尾句粘连
+    且缺前导句号 ⇒ 收官链在 versions 步 fail-closed）⇒ 两侧口径不一致 = 静默漂移。
+    ⇒ 定位改用正则·写入时**规范化**为「条目 + 。 + 尾句」（见 compose_agents_entry）。
+    """
+    _ms = list(_AGENTS_TAIL_RE.finditer(s))
+    return _ms[0] if len(_ms) == 1 else None
+
+
+def compose_agents_entry(note_text, sep="；"):
+    """写入侧规范化拼装：「<sep><note>。如与上述权威文档冲突，以权威文档为准。*」。
+
+    W1272：旧写法把尾句**整体**替换进正文（尾句的前导句号是否缺失取决于被替换文本），
+    缺失时条目与尾句粘连 ⇒ 形态漂移且写入侧再也定位不到尾锚点 ⇒ 收官链卡死。
+    ⇒ 拼装时**显式补句号**并使用尾句主体常量（形态恒定·不依赖现场文本）。
+    """
+    return sep + note_text.rstrip("。") + "。" + _AGENTS_TAIL_BODY
+
+
 def _agents_entry_wn(part):
     """解析脚注条目批次号（W### 形态）·W721 滚动切分用。"""
     m = re.search(r"（(?:v[\d.]+ )?W(\d{3,4})）", part)
@@ -781,8 +844,11 @@ def _face_agents(ctx):
     p = "AGENTS.md"
     s, nl = load(p)
     tail = _AGENTS_TAIL
-    assert s.count(tail) == 1, "AGENTS 脚注尾锚点异常"
-    _sep = "" if s[: s.index(tail)].rstrip().endswith("；") else "；"
+    # W1272：字面 count 断言过脆（要求前导句号逐字存在）·与门禁侧口径不一致 ⇒ 句号一丢
+    # 即静默漂移且写入侧每批收官卡死（W1266 同族复发·本批实证）⇒ 定位改走正则·写入规范化。
+    _m_tail = locate_agents_tail(s)
+    assert _m_tail is not None, "AGENTS 脚注尾锚点异常（尾句须恰好 1 处）"
+    _sep = "" if s[: _m_tail.start()].rstrip().endswith("；") else "；"
     _note_text = ctx.spec["agents_note"].rstrip("。")  # W972 修：尾句号不剥会拼出「。。」
     # W1122（根修 W1117 R-01）：脚注条目此前**无条件追加** ⇒ 重跑级联静默重复插同号条目。
     # 本版：已存在本批条目 ⇒ 内容一致则零变化·不一致则替换（可重跑级联修正）。
@@ -818,7 +884,8 @@ def _face_agents(ctx):
         if _target is not None:
             s = s[:_target] + _note_text + "；" + s[_target:]
         else:
-            s = s.replace(tail, _sep + _note_text + tail, 1)
+            # W1272：规范化写入——条目与尾句之间必带「。」（旧写法在尾句缺前导句号时粘连）
+            s = s[: _m_tail.start()] + compose_agents_entry(_note_text, _sep) + s[_m_tail.end():]
     # W721 根修（S-29·FAM-14 闭环·W719 R1 制度破约教训）：脚注滚动内建——条目 >5 时最老条迁
     # ARCHIVE 尾块（第 12 面），指针上界同步；制度自此有执行机制，不再依赖手工 trim（W713/W719 两度）。
     _fs = s.find("*本文件由")

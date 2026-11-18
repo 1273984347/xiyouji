@@ -38,10 +38,12 @@ import hashlib
 import inspect
 import os
 import re
-import subprocess
 import tempfile
 
-from preflight_check import wnum_commit_index  # W956/P-43-01：提交识别判据单源（复用 preflight 同一函数）
+from preflight_check import (  # W956/P-43-01：提交识别判据单源（复用 preflight 同一函数）
+    git_log_subjects,
+    wnum_commit_index,
+)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEDGER_REL = "docs/00-导读/W批次编号对账表.md"
@@ -61,13 +63,14 @@ def _git_bin():
 
 def git_commit_index():
     """git log --all（%h %s）→ wnum_commit_index 索引；git 不可用抛 RuntimeError。"""
-    git = _git_bin()
-    r = subprocess.run([git, "log", "--all", "--format=%h %s"],
-                       capture_output=True, text=True, encoding="utf-8",
-                       errors="replace", timeout=120)
-    if r.returncode != 0:
-        raise RuntimeError("git log 失败（rc=%s）：%s" % (r.returncode, (r.stderr or "").strip()[:120]))
-    return wnum_commit_index(r.stdout.splitlines())
+    # W1272：走 preflight_check.git_log_subjects（正序·最早在前）⇒ 取到的「首个命中」
+    # 才是台账 hash 列语义要求的**首笔**（原实现取到的是末笔）⇒ 顺序契约单源。
+    # raise 集合保持不变（api_diff 判据：公开函数的 raise 集合变化判破坏·W1143 同族）。
+    try:
+        _subjects = git_log_subjects(_git_bin())
+    except RuntimeError as _exc:
+        raise RuntimeError(str(_exc)) from _exc
+    return wnum_commit_index(_subjects)
 
 
 def compose_git_status(w, index):
@@ -101,8 +104,8 @@ def locate_cells(cells: list[str]) -> dict[str, int]:
       判据强度不降：锚点找不到 ⇒ fail-closed（列定位失败），**不做位置兜底**。
     """
     n = len(cells)
-    if n < 9:
-        raise ValueError("行格数不足 9（标准 7 格 + 首尾空）·实得 %d" % n)
+    if n < 7:
+        raise ValueError("行格数不足 7（最少 7 格行）·实得 %d" % n)
     status_idx = None
     for i in range(n - 2, 1, -1):
         norm = re.sub(r"[\s*]+", "", cells[i])
@@ -113,11 +116,15 @@ def locate_cells(cells: list[str]) -> dict[str, int]:
         raise ValueError("找不到状态形态格（在途/已收官）·列定位失败")
     if status_idx < 3:
         raise ValueError("状态格位置异常（下标 %d）·列定位失败" % status_idx)
+    # W1272：touches 取**末格**（n-1）——与本函数 docstring 的原述一致（原述「touches =
+    # 末格」但实现写的是 n-2 ⇒ 9 格现行行会指到「本会话」列 ⇒ 回填 touches 写错格；
+    # 7 格旧行的末格本就是 touches 列 ⇒ n-1 对两种形态都成立）。
+    # 与 preflight_check 的实际消费面（末格=本批文件清单）同源 ⇒ 回填即生效。
     return {"status": status_idx,
             "hash": status_idx - 2,
             "cascade": status_idx - 1,
             "session": status_idx + 1,
-            "touches": n - 2}
+            "touches": n - 1}
 
 
 def read_ledger(path: str) -> list[str]:
@@ -272,9 +279,19 @@ def cmd_append_claim(args, path: str) -> int:
     if not args.desc or not args.session:
         print("FAIL  --append-claim 需要 --desc 与 --session")
         return 1
-    row = "| W%03d | %s | %s | %s | 在途（认领·未收官） | %s | %s |" % (
+    # W1272：列位防线——单元格内的裸竖线会把一行切多一格 ⇒ 列解析整体错位
+    # （E-253 同族：曾致 4 个已收官行被误判「真在途」⇒ 窗口锁死）⇒ 写入前 fail-closed。
+    for _label, _val in (("desc", args.desc), ("session", args.session), ("touches", args.touches or "")):
+        if "|" in _val:
+            print("FAIL  --append-claim 的 %s 含裸竖线（会致列错位）·请改用「／」或「·」" % _label)
+            return 1
+    # W1272：产出行改为**现行 9 格形态**（W 号·主题·关联 commit·CHANGELOG 版段·状态·
+    # 认领会话·touches·本会话·文件清单）⇒ 旧 7 格行会被 locate_cells 直接判 fail-closed
+    #（认领行因此无法收官回填 ⇒ 该批永久占着 touches 挡死后来者）。
+    # touches 落在**末格**（= preflight 实际消费面）⇒ 认领即生效于并行交集拒绝。
+    row = "| W%03d | %s | %s | %s | 在途（认领·未收官） | %s | — | 本会话（W%03d） | %s |" % (
         args.w, args.desc.strip(), PLACEHOLDER_HASH, PLACEHOLDER_HASH,
-        args.session.strip(), args.touches.strip() if args.touches else "—")
+        args.session.strip(), args.w, args.touches.strip() if args.touches else "—")
     # 插入到最后一个 W 行之后（表尾），不改任何既有行
     last = -1
     for i, ln in enumerate(lines):

@@ -11,11 +11,12 @@
 
 - （无）
 
-## 文件（123）
+## 文件（125）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
+- `test_agents_tail_anchor.py`
 - `test_archive_health.py`
 - `test_archive_segments.py`
 - `test_audit_trigger.py`
@@ -54,6 +55,7 @@
 - `test_folder_docs_summary.py`
 - `test_four_digit_wnum.py`
 - `test_inline_css_resync.py`
+- `test_ledger_first_hash.py`
 - `test_lfs_text_purity.py`
 - `test_lint_links_refactor.py`
 - `test_milestone_block_regex.py`

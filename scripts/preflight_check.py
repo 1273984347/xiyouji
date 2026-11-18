@@ -279,6 +279,12 @@ _RE_DESC_WNUM = re.compile(
 def wnum_commit_index(subjects):
     """git log ``%h %s`` 行列表 → {W 号(int): [提交数, 首笔短 hash]}。
 
+    **输入顺序契约（W1272 立）**：``subjects`` 必须按**提交时间正序**（最早一笔在前）
+    ——``git log`` 默认倒序输出（最新在前）⇒ 直接喂默认输出会把**末笔**当成首笔
+    （W1272 实证：``git log --all`` 倒序 ⇒ 工具取到的"首笔"实为末笔 9774d167f，
+    而真首笔是 62f280e0e ⇒ 台账 hash 列（语义=首笔）会被写坏）。
+    ⇒ 两个调用方一律加 ``--reverse``；本函数取**首个命中**即首笔。
+
     批次标签形态（大小写不敏感）——
     ① **首个括号组内逗号分隔的每一项都算批次标签**：``type(w###):`` ·
        ``type(scope,w###):`` · ``type(w###,scope):``；
@@ -315,6 +321,24 @@ def wnum_commit_index(subjects):
                     rec[1] = line.split(" ", 1)[0]
     return idx
 
+
+
+def git_log_subjects(git_bin: str, cwd: str = None) -> list:
+    """git log --all --reverse --format=%h %s → 行列表（**正序：最早一笔在前**）。
+
+    W1272：``git log`` 默认倒序输出（最新在前）⇒ 直接喂默认输出会让
+    ``wnum_commit_index`` 把**末笔**当成首笔（台账 hash 列语义=首笔·W1229 段「末笔格
+    批处理」确立）⇒ 顺序契约**单源化**到本函数：两个调用方（preflight_check 的登记
+    滞后判定 / ledger_backfill 的自动反填）一律走这里 ⇒ 禁各自手写 --reverse
+    （两处各写一次 ⇒ 将来必漂移·同族：判据单源原则）。
+    """
+    r = subprocess.run([git_bin, "log", "--all", "--reverse", "--format=%h %s"],
+                       cwd=cwd, capture_output=True, text=True, encoding="utf-8",
+                       errors="replace", timeout=120)
+    if r.returncode != 0:
+        raise RuntimeError("git log 失败（rc=%s）：%s"
+                           % (r.returncode, (r.stderr or "").strip()[:120]))
+    return r.stdout.splitlines()
 
 def split_inflight_lagged(inflight_all, committed, self_num=None):
     """登记面在途行二分为 (真在途, 登记滞后)——P-43-01 纯函数形态（供单测直接断言）。
@@ -551,12 +575,12 @@ def _step_collision_and_selfnum(git, ledger, self_num, problems):
 def _step_touches(git, ledger, args, self_num, problems):
     """3.5) touches 在途盘点 + 交集拒绝（W739）+ git 条件二分（W956·P-43-01）。W1158 自 main 拆出。"""
     inflight_all = [r for r in ledger.get("rows", []) if is_inflight(r["status"]) and r["touches"]]
-    _r_log = run([git, "log", "--all", "--format=%h %s"])
-    if _r_log.returncode == 0 and _r_log.stdout.strip():
-        committed = wnum_commit_index(_r_log.stdout.splitlines())
-    else:
+    # W1272：走 git_log_subjects（正序·最早在前）⇒ 告警里的「首笔」是真首笔。
+    try:
+        committed = wnum_commit_index(git_log_subjects(git))
+    except RuntimeError as exc:
         committed = {}
-        print("WARN  git 提交面读取失败（rc=%s）——登记滞后判定退化：全部按真在途从严保护" % _r_log.returncode)
+        print("WARN  git 提交面读取失败（%s）——登记滞后判定退化：全部按真在途从严保护" % exc)
     inflight, lagged = split_inflight_lagged(inflight_all, committed, self_num)
     for lr in lagged:
         _n, _first = committed[lr["w"]]

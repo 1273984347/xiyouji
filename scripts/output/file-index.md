@@ -1,3 +1,57 @@
+## W1272 台账回填工具三缺陷根修批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W1272 | 脚注尾锚点契约根修（正则定位 + 规范化拼装显式补句号） |
+| scripts/check_doc_size_budget.py | W1272 | 门禁侧新增脚注尾句形态判据（前导句号必需·与写入侧同源） |
+| tests/unit/test_agents_tail_anchor.py | W1272 | 新增回归锁 6 例（定位 / 唯一性 / 规范化 / 形态判据 / 两侧同源） |
+| scripts/preflight_check.py | W1272 | 顺序契约单源化（git_log_subjects 正序）+ 登记滞后告警改走共享函数 |
+| scripts/ledger_backfill.py | W1272 | 首笔反填根修 + locate_cells touches 列位改末格 + append-claim 现行 9 格形态与竖线防线 |
+| tests/unit/test_ledger_first_hash.py | W1272 | 新增回归锁 5 例（端到端 git 对拍 + 列位 + 认领行形态 + 竖线拒绝） |
+| docs/00-导读/文档规范.md | W1272 | 规则三补 hash=首笔与末笔=末笔与 touches=末格口径 + 规则一补认领行形态与竖线禁令 |
+| pitfalls.md | W1272 | E-272 台账回填工具三缺陷入表 |
+| docs/agent/pitfalls.md | W1272 | 坑位计数标记 sweep 跟随 |
+| docs/00-导读/W批次编号对账表.md | W1272 | W1272 认领行 + W1271 行回填（首笔/末笔/状态/touches）+ 腾窗迁 2 行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1272 | 腾窗迁入 W1208-W1209 |
+| HANDOVER.md | W1272 | §四 对账注记与 P-43-01 结清 + §一 进度 + 最后更新链 |
+| CHANGELOG.md | W1272 | W1272 落段 |
+| AGENTS.md | W1272 | 版本脚注推进 |
+| README.md | W1272 | 版本面推进 |
+| STRUCTURE.md | W1272 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1272 | 版本面推进 |
+| CITATION.cff | W1272 | 版本面推进 |
+| .github/workflows/README.md | W1272 | 版本面推进 |
+| site/index.html | W1272 | 页脚批次链推进 |
+| scripts/output/_w1272_spec.json | W1272 | 本批 spec |
+| scripts/output/_cascade_files_W1272.txt | W1272 | 手工级联清单 |
+| scripts/output/_vermilion_solid_cache.json | W1272 | 朱砂槽增量缓存（门禁实跑刷新） |
+| scripts/output/file-index.md | W1272 | file-index W1272 段 |
+| scripts/output/stats.json | W1272 | stats 刷新（坑位计数链 sweep） |
+| scripts/output/stats-index.md | W1272 | stats 反向索引 |
+| scripts/output/stats-changelog.json | W1272 | stats 变更史追加 |
+| scripts/output/INDEX.md | W1272 | 产物索引刷新 |
+| scripts/output/README.md | W1272 | 产物索引 README 刷新 |
+| scripts/output/tools-inventory.md | W1272 | 工具清单刷新 |
+| docs/INDEX.md | W1272 | 文档索引刷新 |
+| scripts/INDEX.md | W1272 | 脚本索引刷新 |
+| tests/unit/INDEX.md | W1272 | 单测目录文档刷新（新增测试文件） |
+| tests/unit/README.md | W1272 | 单测目录文档刷新 |
+| scripts/output/_w1266_allrender.json | W1272 | 渲染档案刷新（页脚推进后页面 sha 跟随·防绕过闸） |
+| scripts/output/chart-legend-render-audit.json | W1272 | 图例豁免渲染档案刷新（同上） |
+| .agent/skills/puti-shouye/SKILL.md | W1272 | 计数链 sweep 跟随（坑位 379→380） |
+| archive/docs/AGENTS-ARCHIVE.md | W1272 | AGENTS 脚注滚动归档 |
+| archive/docs/workflows-readme-history.md | W1272 | workflows README 历史滚动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1272 | report_docs 计数标记 sweep 跟随 |
+| pytest.ini | W1272 | pytest_collected 计数跟随（新增 13 例） |
+| site/data/cross-time-danmaku.html | W1272 | 页脚批次链推进 |
+| site/data/search-index-zh.js | W1272 | 搜索索引重建 |
+| site/data/tag-cloud.html | W1272 | 页脚批次链推进 |
+| site/dukou-engine.html | W1272 | 页脚批次链推进（渲染档案 sha 跟随） |
+| site/en/search-index-en.js | W1272 | 搜索索引重建 |
+| site/rss.xml | W1272 | RSS 产物新鲜度跟随 |
+| site/sitemap.xml | W1272 | sitemap 重建 |
+| scripts/output/data-copy-chain-baseline.json | W1272 | 数据副本链存量漂移基线登记（11 件·页面内嵌与 CSS 令牌仍旧色·视觉级同步留下一批专项） |
+
 ## W1271 双 skill 增补与三哨清偿批（2026-11-18）
 
 | 文件 | W | 说明 |

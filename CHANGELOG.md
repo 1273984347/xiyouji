@@ -1,3 +1,19 @@
+### W1272（2026-11-18）：台账回填工具三缺陷根修批（首笔语义倒置 + 列位错位 + 认领行形态）
+
+**本批要点**（W1272 · 台账登记/回填面根修批 · 承接上一批收官尾段）：
+
+> - **① 中断点定位（实读磁盘·不靠记忆）**：接手时台账 max=W1271 · 工作树仅剩 1 处缓存改动 · CI 五项 success 且已推送 ⇒ 上一批**收官尾段未走完**——台账 W1271 行 hash 与末笔列皆为占位、状态仍「进行中」⇒ preflight 判「登记滞后 W1271·git 已有 4 笔提交」；缓存产物 `scripts/output/_vermilion_solid_cache.json` 未入库。回填卡住的原因不是「工具没能力」，而是**工具产出的 hash 与台账语义相反**（见 ②）。
+> - **② 三处同族缺陷（实测·非推测）**：① **首笔倒置**——台账 hash 列语义=该批**最早一笔**（末笔列批处理确立），而工具把 `git log`（默认倒序·最新在前）的首个命中当首笔 ⇒ 自动反填会把**末笔**写进 hash 列（dry-run 实测：真首笔 62f280e0e·工具将写 9774d167f）；② **列位与 docstring 不一致**——`locate_cells` docstring 写「touches = 末格」而实现写 `n-2` ⇒ 9 格现行行指到「本会话」列 ⇒ 回填 touches 写错格（与 preflight 实际消费面分叉）；③ **认领行形态过期**——`append-claim` 产 7 格行而现行形态是 9 格 ⇒ `locate_cells` 直接 fail-closed ⇒ **认领行永远无法收官回填** ⇒ 该批永久占着 touches 挡死后来者（正是文档规范 §11.0 警告的死锁）。
+> - **③ 影响面先量化再定性**：正本全量审计（24 个多笔批·hash 列恒取 index 2·不依赖列定位器）⇒ **22 个 hash=最早（合规）· 2 个中间笔（W1249/W1250）· 0 个倒置** ⇒ 存量数据**未被污染**，缺陷只会在下一次自动反填首次污染 ⇒ 但仍须根修（不能靠「反正没污染」放过）。
+> - **④ 收官链撞出的第四个根因（AGENTS 脚注尾锚点契约两侧失配·W1266 同族复发）**：级联在 versions 步 fail-closed「AGENTS 脚注尾锚点异常」⇒ 定位到**写入侧用字面 `s.count(tail) == 1` 断言（要求前导句号逐字存在）而门禁侧剥离正则把前导句号设为可选** ⇒ 句号一丢即「门禁照绿 + 写入侧卡死每批收官」= 两侧口径不一致的静默漂移；现役 AGENTS.md 正处此形态（末条与尾句粘连且缺前导句号）。⇒ 治根两处同改：写入侧定位改走**正则**（有无前导句号皆认·唯一性 fail-closed）+ 拼装**显式补句号**（形态恒定不依赖现场文本）；门禁侧**新增形态判据**（前导句号必需·剥离口径仍按可选以免误伤长度计量）⇒ 两面同源互锁（漂移即判红）＋ AGENTS.md 现役句号补回 ＋ 回归锁 6 例（含两侧同源自证）。
+> - **⑤ 根修（治根 + 单源）**：顺序契约显式写进 `wnum_commit_index` docstring 并**单源化**到新函数 `preflight_check.git_log_subjects`（`--reverse`·最早在前）——两个调用方一律走它、禁各自手写 `--reverse`（两处各写一次必漂移）；`locate_cells` 的 touches 改取**末格**（= preflight 实际消费面·9 格与 7 格皆成立）并把格数下限放宽到 7（原先硬编码 9 令旧 7 格行不可解析）；`append-claim` 改产**现行 9 格**（旧 7 格行自断链）并加**裸竖线 fail-closed**（描述/会话/touches 含竖线会致列错位·E-253 同族）。
+> - **⑥ 回归锁 5 例 + 负向证明**：新增 `tests/unit/test_ledger_first_hash.py`（端到端临时 git 仓库 4 笔批 ⇒ 反填 hash 必须=最早一笔且≠末笔 · 顺序契约必要性 · 9 格/7 格列位 · 认领行可解析 · 竖线拒绝）；**负向证明**：临时去掉 `--reverse` ⇒ 端到端用例判红（「首笔应是最最早提交 7827… 实得 a2d8603」）⇒ 判据有区分力；复原后 5 例全绿。
+> - **⑦ 上一批收官尾段闭合（回填并入本批 PR·铁律 21①）**：W1271 行按首笔口径回填（hash=62f280e0e·末笔列=9774d167f·状态=已收官·共 4 笔·touches 终值）+ 提交前指纹复核一致；腾窗迁 2 行（W1208-W1209 → ARCHIVE·正本 59 行 ≤ 窗口 60）；朱砂缓存产物入库。
+> - **⑧ 口径落仓**：文档规范 §11.0 规则三补「hash 列=最早一笔 / 末笔列=最晚一笔 / touches 取末格」+ 规则一补「认领行须由 append-claim 产出现行 9 格形态 + 禁裸竖线」；坑表 **E-272** 入表（计数链 sweep 跟随）；HANDOVER §四 P-43-01 结清（原描述的「描述段 W 号形态不识别」已由 W1228 根修·本批实测评能力达成·原验收口径已被 W1229 修正为「能力实证 + 正本滞后告警归零」⇒ 我方在途行归零；W1240/W1241 两条滞后告警属**他方会话**的行·按规则二不改他方行⇒ 保留告警并登记归属）。
+> - **⑨ 订正上一批「双面漂移 0」的声明（E-261 同改·声明≠落地）**：本批同步数据副本时实测——`site/data/json/` 的 6 件（aesthetics_colors/styles/summary·faction_distribution·global_pattern_summary·power_structure）与生成器产物**值级不等**，而页面**内嵌块与 CSS 令牌仍是旧色**（faction 天庭 #C0392B / 灵山 #40619E）⇒ 上一批只同步了真值源与部分副本，未同步页面内嵌 ⇒ 「双面漂移 0」不成立。**本批处置**：**撤回** 6 件副本同步（不在未验证暗色补偿的前提下改页面内嵌色⇒暗色深底暗形风险·W1271 ⑦ 同族）⇒ 6 件登记为**存量漂移基线**（显式 --approve·铁律 16-⑦）⇒ 判据由「静默漂移」转为「登记态可见」，并把「页面内嵌 + CSS 令牌 + 暗色补偿三面同源」登记为**下一批专项**（需目视验证·E-244）。
+> - **状态**：已收官（登记/回填面三缺陷根修 + 上一批收官尾段闭合 + 口径落仓 + P-43-01 结清）
+> - **验证**：新增回归锁 5 例全绿（含负向证明判红一次）· 相关既有单测 59 例全绿 · ruff 风格档 0 错 · 台账 W1271 指纹复核一致 · preflight 登记滞后告警我方行归零 · 影响面审计 24 个多笔批 0 倒置（存量未污染）。
+> - **文件**：scripts/output/data-copy-chain-baseline.json,site/sitemap.xml,site/rss.xml,site/en/search-index-en.js,site/dukou-engine.html,site/data/tag-cloud.html,site/data/search-index-zh.js,site/data/cross-time-danmaku.html,pytest.ini,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,archive/docs/workflows-readme-history.md,archive/docs/AGENTS-ARCHIVE.md,.agent/skills/puti-shouye/SKILL.md,scripts/output/_w1266_allrender.json,scripts/output/chart-legend-render-audit.json,scripts/preflight_check.py,scripts/ledger_backfill.py,scripts/batch_cascade.py,scripts/check_doc_size_budget.py,tests/unit/test_agents_tail_anchor.py,tests/unit/test_ledger_first_hash.py,docs/00-导读/文档规范.md,pitfalls.md,docs/agent/pitfalls.md,docs/00-导读/W批次编号对账表.md,archive/docs/W批次编号对账表-ARCHIVE.md,HANDOVER.md,CHANGELOG.md,AGENTS.md,README.md,STRUCTURE.md,docs/00-导读/项目说明.md,CITATION.cff,.github/workflows/README.md,site/index.html,scripts/output/_w1272_spec.json,scripts/output/_cascade_files_W1272.txt,scripts/output/_vermilion_solid_cache.json,scripts/output/file-index.md,scripts/output/stats.json,scripts/output/stats-index.md,scripts/output/stats-changelog.json,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/tools-inventory.md,docs/INDEX.md,scripts/INDEX.md,tests/unit/INDEX.md,tests/unit/README.md
 ### W1271（2026-11-18）：双 skill 增补与三哨清偿批（时间纪律入速查 + 巡检取证两条 + 复盘批）
 
 **本批要点**（W1271 · 治理与速查批·复盘批角色）：
@@ -253,7 +269,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1271），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1272），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
