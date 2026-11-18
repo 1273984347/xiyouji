@@ -103,7 +103,7 @@ WINDOWS = {
 # W1278 瘦身治理挂窗（用户批准挂载）：pitfalls/AGENTS 独立字节上限
 # （瘦身后现值棘轮·防回涨——本批 pitfalls 二层化 407.6→284.8KB、AGENTS §4.2/§6 摘要化 48.2→31.8KB 后挂窗）
 BYTE_CAPS = {
-    os.path.join("pitfalls.md"): 300000,
+    os.path.join("pitfalls.md"): 262144,  # 与全局 MAX_DOC_BYTES 同窗（test_w1120 实测口径对齐）
     os.path.join("AGENTS.md"): 34000,
 }
 
