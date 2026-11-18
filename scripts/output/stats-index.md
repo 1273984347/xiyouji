@@ -20,17 +20,17 @@
 | gate_count | 83 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | 1266 |
 | html_total | 875 | site/**/*.html（递归全站） | W459 | W1246 |
 | icon_allowlist_entries | 63 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1261 |
-| inline_css_pages | 865 | site 全树含 INLINED 标记页 | W459 | W1275 |
+| inline_css_pages | 865 | site 全树含 INLINED 标记页 | W459 | W1276 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 28 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1157 |
 | pitfalls_cascade | 26 | pitfalls.md 主题「级联 / CHANGELOG」实测条目数 | W1215 | W1215 |
-| pitfalls_css | 78 | pitfalls.md 主题「CSS / 视觉渲染」实测条目数 | W1215 | 1275 |
+| pitfalls_css | 80 | pitfalls.md 主题「CSS / 视觉渲染」实测条目数 | W1215 | W1276 |
 | pitfalls_data | 17 | pitfalls.md 主题「数据 / 内容可信度」实测条目数 | W1215 | W1259 |
 | pitfalls_flow | 216 | pitfalls.md 主题「流程 / 协作 / 取证」实测条目数 | W1215 | W1261 |
 | pitfalls_git | 39 | pitfalls.md 主题「git / 提交 / 并发」实测条目数 | W1215 | W1273 |
 | pitfalls_js | 12 | pitfalls.md 主题「JS / CSP / 运行时」实测条目数 | W1215 | W1215 |
-| pitfalls_total | 388 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | 1275 |
-| pytest_collected | 1781 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1275 |
+| pitfalls_total | 390 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | W1276 |
+| pytest_collected | 1784 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1276 |
 | report_docs | 228 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1275 |
 | scan_files | 873 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W1246 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
@@ -44,6 +44,19 @@
 | w864_entries | 259 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1152 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1276（2026-11-19 00:49:04）
+- inline_css_pages: 727 → 865
+- pitfalls_css: 79 → 80
+- pitfalls_total: 389 → 390
+
+### 1276（2026-11-19 00:11:24）
+- pitfalls_css: 78 → 79
+- pitfalls_total: 388 → 389
+- pytest_collected: 1781 → 1784
+
+### W1276（2026-11-19 00:08:38）
+- inline_css_pages: 865 → 727
 
 ### W1275（2026-11-18 23:07:22）
 - inline_css_pages: 727 → 865

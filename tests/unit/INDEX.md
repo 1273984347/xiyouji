@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（131）
+## 文件（132）
 
 ### Python 脚本
 
@@ -144,6 +144,7 @@
 - `test_w1231_data_drift.py`
 - `test_w1232_gates.py`
 - `test_w1275_relink_persist.py`
+- `test_w1276_token_scope.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

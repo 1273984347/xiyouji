@@ -1,3 +1,76 @@
+## W1276 A 方案铺开第一批完成 与 两处门禁口径修订（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| .agent/skills/puti-shouye/SKILL.md | W1276 | 本批配套改动 |
+| .github/workflows/README.md | W1276 | 本批配套改动 |
+| AGENTS.md | W1276 | 本批配套改动 |
+| CHANGELOG.md | W1276 | 本批配套改动 |
+| CITATION.cff | W1276 | 本批配套改动 |
+| HANDOVER.md | W1276 | 本批配套改动 |
+| README.md | W1276 | 本批配套改动 |
+| STRUCTURE.md | W1276 | 本批配套改动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1276 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1276 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1276 | W1276 认领行 |
+| docs/00-导读/项目说明.md | W1276 | 本批配套改动 |
+| docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md | W1276 | W1276 续记（口径修订与铺开第一批完成） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1276 | 本批配套改动 |
+| docs/agent/pitfalls.md | W1276 | 坑位入表 E-281（判据统计面随形态修订） |
+| pitfalls.md | W1276 | 坑位入表 E-281（判据统计面随形态修订） |
+| pytest.ini | W1276 | 本批配套改动 |
+| scripts/check_token_coverage.py | W1276 | 统计面随形态修订（剔除公共层管辖规则·与 relink 变体判定同源） |
+| scripts/output/INDEX.md | W1276 | 本批配套改动 |
+| scripts/output/README.md | W1276 | 本批配套改动 |
+| scripts/output/_cascade_files_W1276.txt | W1276 | 本批配套改动 |
+| scripts/output/_vermilion_solid_cache.json | W1276 | 本批配套改动 |
+| scripts/output/_w1266_allrender.json | W1276 | 本批配套改动 |
+| scripts/output/_w1276_spec.json | W1276 | 本批配套改动 |
+| scripts/output/chart-legend-render-audit.json | W1276 | 本批配套改动 |
+| scripts/output/file-index.md | W1276 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1276 | 本批配套改动 |
+| scripts/output/stats-index.md | W1276 | 本批配套改动 |
+| scripts/output/stats.json | W1276 | 本批配套改动 |
+| scripts/output/tools-inventory.md | W1276 | 本批配套改动 |
+| site/data/cross-time-danmaku.html | W1276 | 本批配套改动 |
+| site/data/search-index-zh.js | W1276 | 本批配套改动 |
+| site/data/tag-cloud.html | W1276 | 本批配套改动 |
+| site/dukou-engine.html | W1276 | 本批配套改动 |
+| site/en/search-index-en.js | W1276 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/index.html | W1276 | 本批配套改动 |
+| site/rss.xml | W1276 | 本批配套改动 |
+| tests/unit/INDEX.md | W1276 | 本批配套改动 |
+| tests/unit/README.md | W1276 | 本批配套改动 |
+| tests/unit/test_w1276_token_scope.py | W1276 | W1276 回归锁 3 例（口径修订负向证明） |
+
+
 ## W1275 A 方案铺开第一批（2026-11-18）
 
 | 文件 | W | 说明 |

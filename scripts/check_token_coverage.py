@@ -15,11 +15,19 @@
 用法：python scripts/check_token_coverage.py
 退出码：0 = 通过；1 = FAIL
 """
+import os
 import re
 import sys
 from pathlib import Path
 
-from utils.gate_common import iter_private_style_blocks
+# W1276：与 relink / inline_css 同源（公共层索引口径·禁再抄一份）
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPTS_DIR)
+
+from inline_css import strip_comments  # noqa: E402
+from relink_public_css import _top_rules  # noqa: E402
+from utils.gate_common import iter_private_style_blocks  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -30,17 +38,74 @@ UI_ATTR = re.compile(
 )
 SHADOW = re.compile(r"box-shadow\s*:\s*([^;!}]+)")
 EXEMPT = re.compile(r"e-track-exempt: chart-data-colors (\d+) 处")
+RE_RULE_SPAN = re.compile(r"([^{}]+)\{([^{}]*)\}", re.S)
 
+# W1276：公共层「管辖」口径索引（与 relink 公共层索引同源）
+_PUBLIC_SCOPE = None
+
+
+def _rule_spans(css: str):
+    """规则级切分 → [(选择器文本, 声明体, start, end)]"""
+    out = []
+    for m in RE_RULE_SPAN.finditer(css):
+        out.append((" ".join(m.group(1).split()), m.group(2), m.start(), m.end()))
+    return out
+
+
+def _decl_props(body: str) -> set:
+    """单条规则的声明属性集。"""
+    props = set()
+    for part in body.split(";"):
+        if ":" in part:
+            props.add(part.split(":", 1)[0].strip())
+    return props
+
+
+def _public_scope_props():
+    """公共层「管辖」的 (选择器集合 → 声明属性集) 索引（W1276 口径·与 relink 同源）。"""
+    global _PUBLIC_SCOPE
+    if _PUBLIC_SCOPE is None:
+        scope = {}
+        for name in ("tokens.css", "system.css"):
+            p = Path(ROOT) / "site" / name
+            if not p.exists():
+                continue
+            css = strip_comments(p.read_text(encoding="utf-8"))
+            for sels, body, _st, _en in _top_rules(css):
+                scope.setdefault(sels, set()).update(_decl_props(body))
+        _PUBLIC_SCOPE = scope
+    return _PUBLIC_SCOPE
+
+
+def _is_public_scope(sel_text: str, body: str) -> bool:
+    """该规则是否由公共层「管辖」（同选择器 + 属性交集非空）⇒ 不计入页私有裸色。"""
+    sels = frozenset(s.strip() for s in sel_text.split(",") if s.strip())
+    scope = _public_scope_props()
+    if sels not in scope:
+        return False
+    return bool(_decl_props(body) & scope[sels])
+
+
+def _count_bare(st: str) -> int:
+    """私有块内的 UI 裸色计数（剔除「公共层管辖」规则·W1276 口径）。"""
+    n = 0
+    for _sels, _body, _st, _en in _rule_spans(st):
+        if _is_public_scope(_sels, _body):
+            continue
+        for m in UI_ATTR.finditer(_body):
+            v = m.group(2)
+            if re.match(r"var\(|color-mix", v):
+                continue
+            n += 1
+    return n
 
 def check_page(path: Path):
     s = path.read_text(encoding="utf-8", errors="ignore")
     ui_n, shadow_n = 0, 0
     for st, _ln in iter_private_style_blocks(s):  # 跳过 INLINED 副本（按标记配对判定）
-        for m in UI_ATTR.finditer(st):
-            v = m.group(2)
-            if re.match(r"var\(|color-mix", v):
-                continue
-            ui_n += 1
+        # W1276：规则级解析——「公共层管辖」的规则整条剔除（口径与 relink 变体判定同源），
+        # 其余规则的裸色照旧计入（判定强度不降：真私有裸色仍受豁免上限约束）。
+        ui_n += _count_bare(st)
         for m in SHADOW.finditer(st):
             v = m.group(1).strip().replace("\n", " ")
             if "var(" in v or "color-mix" in v or v == "none" or "inset" in v:
