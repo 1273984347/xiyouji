@@ -26,7 +26,6 @@
 | scripts/output/_vermilion_solid_cache.json | W1277 | 朱砂槽增量缓存跟随 |
 | .gitignore | W1277 | replay 状态文件入 ignore |
 | scripts/output/tools-inventory.md | W1277 | 工具清单跟随 |
-| scripts/output/chart-content-audit.json | W1277 | 审计报告跟随 |
 | AGENTS.md | W1277 | 菩提授业 16 条 + 脚注 W1277 条目（此前登记遗漏补登） |
 | HANDOVER.md | W1277 | 进度 bullet 移链首 + 更新链 + 里程碑滚动 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1277 | 台账腾窗迁入 W1213-W1214 |

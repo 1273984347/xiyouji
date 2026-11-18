@@ -310,9 +310,7 @@ def collect_paths(spec_path, extra):
             p = row.strip().strip('|').split('|')[0].strip()
             if not p:
                 continue
-            # W1277 对抗审查 P3-5 修：非 ROOT cwd 下相对路径会让 add 静默走空 ⇒ 统一拼 ROOT
-            if not os.path.isabs(p):
-                p = os.path.join(ROOT, p)
+
             expanded = _expand_group_row(p)
             if expanded is not None:
                 paths.extend(x for x in expanded if x not in paths)
