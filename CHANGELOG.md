@@ -1,3 +1,17 @@
+### W1274（2026-11-18）：A 方案样板验证批（公共层外链化单页 + 工具化 + 覆盖率新维度）
+
+**本批要点**（W1274 · A 方案样板验证批 · 公共层外链化单页样板 · 用户裁决批三走 A 方案）：
+
+> - **① 取证链八步（先把可行性坐实·禁凭推测改 875 页）**：全站 875 页中**仅 7 页（0.8%）**用 link 加载外部样式表、**868 页自包含**（import 0/875 + 运行时抽样 12/12 仅内联 双重交叉验证）⇒ 公共层改一次不能全站生效 ⇒ 批三须走 A 方案（先转外部共享 CSS）。块0 逐条比对 = tokens.css(350 条) + system.css(163 条) 合并副本（478 条规则·469 条逐字一致）；**且块0 实为「公共层 + 页私有层」合并体**（667 个选择器里 157 个是页私有）⇒ 整块替换会删掉私有层样式 ⇒ 改**规则级剥离**（选择器与声明双逐字相同才剥离）。
+> - **② 改造形态与工具化**：块0 → `<link ../../tokens.css>` + `<link ../../system.css>`（相对路径按页目录计算·顺序与原内联一致 tokens 在前）+ 保留的页私有层（带 W1274 注释）；新增 `scripts/relink_public_css.py`（--dry-run / --apply / --self-test·幂等·MIN_STRIP_RULES=150 的 fail-closed 门槛）+ 单测 4 例。
+> - **③ 四项验证全绿**：**双协议**（file:// 与 http:// × 明暗四组）改造前后 computed style **逐项零差异**（body 底色字色字体、三个关键变量、.silk-hero 与其 img 的 width 1092px / margin-left -364px / object-fit cover、h1 衬线体、字体加载状态）＋**明暗目视亲验一致**（主会话亲自看图·E-244）＋**体积 89,234 → 65,644 B（−23,590 B·−26.4%）**＋门禁全绿。
+> - **④ 一次被目视抓出的实现缺陷（已修·新坑位 E-279）**：第一版替换区间覆盖了**整个 style 块（含开闭标签）**而替换内容未重建 style 包裹 ⇒ **CSS 源码被当正文渲染**（整页显示 @font-face 源码）⇒ 而当时的探针与门禁**全绿**（只查 computed style 查不出「源码泄漏」）⇒ 只有目视能抓到 ⇒ 修法：重建开闭标签 + 给基线探针补 **cssLeak** 检测（正文含 @font-face / color-scheme 即判红）+ 替换类操作先在副本上试改。
+> - **⑤ 指标口径随路线重设（用户裁决项）**：第 76 槽**保留原类归属口径与棘轮不动**（直接改会瞬判红）→ **新增独立维度「公共层实际加载面（外链页占比）」= 8/875 = 0.91%**（下限 0.80%·目标 100%）⇒ 随铺开推进只增不减 ⇒ 新增单测 3 例。
+> - **⑥ 铺开计划就绪**：867 页（按目录分批·每批 ≤190 页以受 file-index 单段 ≤200 行约束·预计 5 批）·预期约 **−20.4 MB**（全站 61.87 → 约 41.5 MB）·每批验收含双协议对照（抽样 3 页·带 cssLeak）+ 明暗目视（抽 2 页）+ 残渣判据 + 覆盖率新维度上升 + 渲染档案刷新（级联后）。
+> - **⑦ 已知未优化项与边界**：每页仍留约 233 条（@font-face 的按目录改写版 + :root 变量块 + 页私有层）⇒ 第二轮可再瘦身；页内变量块仍覆盖外链 tokens.css ⇒ 变量语义未变（实测 accent/paper/ink 一致）；徽标圆角在 867 页仍是页内覆写版 999px（公共层 20px 裁决未覆盖这批页·属存量语义漂移·另批处理）。
+> - **状态**：已收官（A 方案单页样板通过 + 工具化 + 指标新维度 + 铺开计划就绪；867 页铺开留下一批起）
+> - **验证**：样板页双协议 × 明暗 computed style 逐项零差异 · 明暗目视亲验一致 · 体积 −23,590 B · 残渣判据 0 处 · 新增单测 11 例全绿（外链化 4 + 覆盖率维度 3 + 既有关联 4）· ruff 0 · 第 31/51 槽 0 FAIL · 渲染档案刷新后三分类一致。
+> - **文件**： .agent/skills/puti-shouye/SKILL.md,.github/workflows/README.md,AGENTS.md,CHANGELOG.md,CITATION.cff,HANDOVER.md,README.md,STRUCTURE.md,archive/docs/AGENTS-ARCHIVE.md,archive/docs/W批次编号对账表-ARCHIVE.md,archive/docs/workflows-readme-history.md,docs/00-导读/W批次编号对账表.md,docs/00-导读/项目说明.md,docs/11-方案报告/README.md,docs/11-方案报告/设计与架构方案/W1274-A方案样板验证-2026-11-18.md,docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,docs/INDEX.md,docs/agent/pitfalls.md,pitfalls.md,pytest.ini,scripts/INDEX.md,scripts/check_inlined_css.py,scripts/check_public_layer_coverage.py,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/_cascade_files_W1274.txt,scripts/output/_vermilion_solid_cache.json,scripts/output/_w1266_allrender.json,scripts/output/_w1274_spec.json,scripts/output/chart-legend-render-audit.json,scripts/output/file-index.md,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/stats.json,scripts/output/tools-inventory.md,scripts/relink_public_css.py,site/data/cross-time-danmaku.html,site/data/search-index-zh.js,site/data/tag-cloud.html,site/dukou-engine.html,site/en/search-index-en.js,site/index.html,site/reader/themes/八十一难专题.html,site/rss.xml,tests/unit/INDEX.md,tests/unit/README.md,tests/unit/test_inlined_css_source.py,tests/unit/test_public_layer_coverage_ext.py,tests/unit/test_relink_public_css.py 
 ### W1273（2026-11-18）：公共层归并 L1 铺开与内联 CSS 残渣判据批
 
 **本批要点**（W1273 · 批三 L1 归并可行性实测批 · 结论：前提不成立 ⇒ 已回退并留下机器判据 + 举一反三全面审查）：
@@ -282,7 +296,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1273），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1274），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

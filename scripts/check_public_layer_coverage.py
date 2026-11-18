@@ -40,6 +40,14 @@ SYSTEM_CSS = os.path.join(SITE, "system.css")
 # （用 0.119 会因 0.11857 < 0.119 而恒判红——棘轮必须 ≤ 实测值）
 DEFAULT_MIN_RATIO = 0.118
 DEFAULT_TARGET_RATIO = 0.40
+# W1274 新增维度：公共层的**实际加载面**（真正以外链加载公共层的页面占比）。
+# 背景（W1273 实测）：原口径按「类归属」计 ⇒ 11.9% 看似公共层在管全站样式，而实测
+# 全站 875 页里只有 7 页真正加载 system.css（868 页自包含）⇒ 指标高估真实接管面。
+# ⇒ 保留原口径与棘轮不动（改它会让棘轮瞬判红），**新增**本维度独立棘轮（只增不减），
+# 随「公共层外链化」推进而上升。
+DEFAULT_MIN_EXT_RATIO = 0.008
+DEFAULT_TARGET_EXT_RATIO = 1.0
+RE_LINK_CSS = re.compile(r"<link[^>]+href=[^>]*(system|tokens)\.css", re.I)
 
 
 def _collect_used_classes():
@@ -64,6 +72,21 @@ def _classes_in(css_path):
     return set(re.findall(r"(?<![-w]).([A-Za-z][A-Za-z0-9_-]*)", s))
 
 
+def _external_link_pages():
+    """统计真正以外链加载公共层的页面数（实际生效面·非类归属面）。"""
+    linked = 0
+    total = 0
+    for p in glob.glob(os.path.join(SITE, "**", "*.html"), recursive=True):
+        total += 1
+        try:
+            t = open(p, encoding="utf-8").read()
+        except Exception:
+            continue
+        if RE_LINK_CSS.search(t):
+            linked += 1
+    return linked, total
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--min-ratio", type=float, default=DEFAULT_MIN_RATIO,
@@ -71,6 +94,10 @@ def main():
     ap.add_argument("--target-ratio", type=float, default=DEFAULT_TARGET_RATIO,
                     help="目标档（未达成仅 WARN）")
     ap.add_argument("--json", action="store_true", help="输出 JSON")
+    ap.add_argument("--min-ext-ratio", type=float, default=DEFAULT_MIN_EXT_RATIO,
+                    help="实际加载面下限（外链页占比·低于此值判红·棘轮）")
+    ap.add_argument("--target-ext-ratio", type=float, default=DEFAULT_TARGET_EXT_RATIO,
+                    help="实际加载面目标档（未达成仅 WARN）")
     args = ap.parse_args()
 
     if not os.path.exists(SYSTEM_CSS):
@@ -88,8 +115,15 @@ def main():
     missing = sorted(((c, n) for c, n in used.items() if c not in pub),
                      key=lambda x: -x[1])
 
+    ext_linked, ext_total = _external_link_pages()
+    ext_ratio = (ext_linked / ext_total) if ext_total else 0.0
+
     data = {
         "pages": pages,
+        "ext_linked_pages": ext_linked,
+        "ext_ratio": round(ext_ratio, 4),
+        "min_ext_ratio": args.min_ext_ratio,
+        "target_ext_ratio": args.target_ext_ratio,
         "used_classes": len(used),
         "public_classes": len(pub),
         "covered": len(covered),
@@ -99,9 +133,16 @@ def main():
         "top_missing": [{"class": c, "uses": n} for c, n in missing[:15]],
     }
 
+    print("公共层实际加载面（外链页占比）：%d / %d = %.2f%%（下限 %.2f%% · 目标 %.1f%%）"
+          % (ext_linked, ext_total, ext_ratio * 100, args.min_ext_ratio * 100,
+             args.target_ext_ratio * 100))
     if args.json:
         print(json.dumps(data, ensure_ascii=False, indent=2))
-        return 0 if ratio >= args.min_ratio else 1
+        if ratio < args.min_ratio:
+            return 1
+        if ext_ratio < args.min_ext_ratio:
+            return 1
+        return 0
 
     print("公共层样式覆盖率：%d / %d = %.1f%%（下限 %.1f%% · 目标 %.1f%%）· 扫 %d 页"
           % (len(covered), len(used), ratio * 100, args.min_ratio * 100,
@@ -116,6 +157,10 @@ def main():
     if ratio < args.min_ratio:
         print("---- 公共层覆盖率：FAIL（低于下限 %.1f%%·棘轮破·当前 %.1f%%）----"
               % (args.min_ratio * 100, ratio * 100))
+        return 1
+    if ext_ratio < args.min_ext_ratio:
+        print("---- 公共层实际加载面：FAIL（低于下限 %.2f%%·棘轮破·当前 %.2f%%）----"
+              % (args.min_ext_ratio * 100, ext_ratio * 100))
         return 1
     if ratio < args.target_ratio:
         print("---- 公共层覆盖率：0 FAIL · WARN（未达目标 %.1f%%·当前 %.1f%%·归并未完）----"

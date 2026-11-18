@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（127）
+## 文件（130）
 
 ### Python 脚本
 
@@ -56,6 +56,7 @@
 - `test_folder_docs_summary.py`
 - `test_four_digit_wnum.py`
 - `test_inline_css_resync.py`
+- `test_inlined_css_source.py`
 - `test_ledger_first_hash.py`
 - `test_lfs_text_purity.py`
 - `test_lint_links_refactor.py`
@@ -70,10 +71,12 @@
 - `test_pre_push_gate.py`
 - `test_preflight_check.py`
 - `test_preflight_touches.py`
+- `test_public_layer_coverage_ext.py`
 - `test_rag_enhance.py`
 - `test_rag_fusion.py`
 - `test_rag_server_clamp.py`
 - `test_release_prep.py`
+- `test_relink_public_css.py`
 - `test_repo_layout.py`
 - `test_review_trigger.py`
 - `test_safe_commit_expect_spec.py`

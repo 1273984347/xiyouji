@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-18 19:54
+生成时间：2026-11-18 21:21
 
-共 **230** 件（门禁与校验 114 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 85 · 一次性（下划线前缀） 7）
+共 **231** 件（门禁与校验 114 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 86 · 一次性（下划线前缀） 7）
 
 ## 门禁与校验（114）
 
@@ -74,7 +74,7 @@
 | `check_html_head_content.py` | head 内容合法性门禁（第 33 门禁 · W672/WP-1.3）——防注入器把 body 内容写进 <head>。 |
 | `check_icon_fields.py` | W949 · 第 50 门禁扩展：字段图标位判据（avatar / icon / flag / stage） |
 | `check_index_health.py` | 索引健康门禁（W500 转正，verify_delivery 第 17 门禁）。 |
-| `check_inlined_css.py` | check_inlined_css.py — W495 转正门禁：data/EN 页 INLINED CSS 块完整性防回归。 |
+| `check_inlined_css.py` | check_inlined_css.py — 页面样式来源完整性门禁（W495 转正 · W1274 口径修订）。 |
 | `check_install_pins.py` | check_install_pins.py — W1194：workflow 安装命令必须钉到精确版本。 |
 | `check_interaction_binding.py` | check_interaction_binding.py — 交互绑定门禁（W908 建置·T-18/A-T07-05）。 |
 | `check_js_syntax.js` | W591（经用户批准）：非 JS 数据块（application/ld+json、application/json、importmap 等） |
@@ -171,7 +171,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（85）
+## 工具（86）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -237,6 +237,7 @@
 | `pre_push_gate.py` | pre_push_gate.py —— 推送前一命令真全量（W1215）。 |
 | `pre_release_screenshot.py` | pre_release_screenshot.py — 迭代发布前增强版截图审查集成脚本 |
 | `rebuild_section.py` | rebuild_section.py — 幂等段重建独立入口（W1120·工具层·不接收官链主链）。 |
+| `relink_public_css.py` | — |
 | `render_check.js` | W701：file:// 下 @font-face 以 origin 'null' 加载站内字体触发 CORS 策略提示， |
 | `render_classify_probe.js` | 滚动穿透（触发 IntersectionObserver 懒渲染 · 防「图在视口外未渲染」被误判为无图） |
 | `reserve_w.py` | reserve_w.py — 批次号预约（防并行会话撞号·W1041 立） |

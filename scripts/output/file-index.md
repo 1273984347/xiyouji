@@ -1,3 +1,58 @@
+## W1274 A 方案样板验证批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1274 | 本批配套改动 |
+| .github/workflows/README.md | W1274 | 版本面推进 |
+| AGENTS.md | W1274 | 版本脚注推进 |
+| CHANGELOG.md | W1274 | 本批配套改动 |
+| CITATION.cff | W1274 | 版本面推进 |
+| HANDOVER.md | W1274 | 进度与更新链推进 |
+| README.md | W1274 | 版本面推进 |
+| STRUCTURE.md | W1274 | 版本面推进 |
+| archive/docs/AGENTS-ARCHIVE.md | W1274 | 本批配套改动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1274 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1274 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1274 | W1274 认领行 |
+| docs/00-导读/项目说明.md | W1274 | 版本面推进 |
+| docs/11-方案报告/README.md | W1274 | 报告登记面补登第 54 篇 |
+| docs/11-方案报告/设计与架构方案/W1274-A方案样板验证-2026-11-18.md | W1274 | A 方案样板验证报告（取证链 + 改造形态 + 四项验证 + 铺开计划） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1274 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1274 | 本批配套改动 |
+| docs/INDEX.md | W1274 | 本批配套改动 |
+| docs/agent/pitfalls.md | W1274 | 坑位计数标记 sweep 跟随 |
+| pitfalls.md | W1274 | E-279 入表（style 开闭标签被吞 ⇒ CSS 源码当正文渲染·探针门禁全绿） |
+| pytest.ini | W1274 | 本批配套改动 |
+| scripts/INDEX.md | W1274 | 本批配套改动 |
+| scripts/check_inlined_css.py | W1274 | 本批配套改动 |
+| scripts/check_public_layer_coverage.py | W1274 | 第 76 槽新增维度：实际加载面（外链页占比）独立棘轮 |
+| scripts/output/INDEX.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/README.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/_cascade_files_W1274.txt | W1274 | 手工级联清单 |
+| scripts/output/_vermilion_solid_cache.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/_w1266_allrender.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/_w1274_spec.json | W1274 | 本批 spec |
+| scripts/output/chart-legend-render-audit.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/file-index.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/stats-changelog.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/stats-index.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/stats.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/tools-inventory.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/relink_public_css.py | W1274 | 新增：公共层外链化工具（规则级剥离·幂等·fail-closed 门槛） |
+| site/data/cross-time-danmaku.html | W1274 | 本批配套改动 |
+| site/data/search-index-zh.js | W1274 | 本批配套改动 |
+| site/data/tag-cloud.html | W1274 | 本批配套改动 |
+| site/dukou-engine.html | W1274 | 本批配套改动 |
+| site/en/search-index-en.js | W1274 | 本批配套改动 |
+| site/index.html | W1274 | 页脚批次链推进 |
+| site/reader/themes/八十一难专题.html | W1274 | 公共层外链化样板（块0 → tokens.css + system.css 两个 link·页私有层保留） |
+| site/rss.xml | W1274 | 本批配套改动 |
+| tests/unit/INDEX.md | W1274 | 本批配套改动 |
+| tests/unit/README.md | W1274 | 本批配套改动 |
+| tests/unit/test_inlined_css_source.py | W1274 | 本批配套改动 |
+| tests/unit/test_public_layer_coverage_ext.py | W1274 | 覆盖率新维度回归锁 3 例 |
+| tests/unit/test_relink_public_css.py | W1274 | 外链化工具回归锁 4 例 |
+
 ## W1273 公共层归并 L1 铺开与内联 CSS 残渣判据批（2026-11-18）
 
 | 文件 | W | 说明 |

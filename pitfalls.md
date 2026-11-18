@@ -24,7 +24,7 @@
 
 ## 六主题坑位（原文全量·内容零改动）
 
-### CSS / 视觉渲染（76<!--stats:pitfalls_css--> 条）
+### CSS / 视觉渲染（77<!--stats:pitfalls_css--> 条）
 - **修门禁「红点」前先走「标签 → 字段 → 产线」取证链——gate 打印的标签名不等于产线字段名，对着错误产线修判据＝假根修**（W1271 实证·E-271·跨项目通用·取证域，与 E-261「判据锚现象」同族的「证据等级」族）：CI dark-gate 报「[invisible] 0→5」，我先对 **invisible 计数字符串**（svgs|canvas|invisible|scrollHeight 的第三段）做了判据根修（移除 fill:none 误计）⇒ 实际上 gate 取数面是 `invisible: (r.invisibleShapes || []).length`——读的是**亮度判据的 invisibleShapes**（深底暗形），我修的产线 gate 根本不消费 ⇒ 提交后 CI 原样再红。真根因在另一条产线：combo-svg 数据圆以字面 fill=#3A473A（亮度 0.057×暗色提升 1.45=0.083）低于 0.16 阈值 ⇒ 真暗底暗形，修法是页面级同色相提亮规则（#6B7A6B·亮度 0.181）。⇒ **纪律**：① 动判据前先 grep gate 脚本的**字段映射行**（如 `invisible: (r.invisibleShapes||[]).length`）确认标签 ↔ 字段 ↔ 产线三段链路；② 探针/脚本里的**同名概念不同字段**（invisible 计数 vs invisibleShapes 列表）是高发混淆点——名字像≠同源；③ 修复后的验证必须**复跑真 gate**（单页 --states/--prefix 过滤形态），不能只复跑自己改的那个函数；④ 上笔误判要在下笔 CHANGELOG 显式订正（声明与实况不符项·E-261 三处同改）。
 
 - **提交期与推送期的门禁必须分层——提交前手工跑全量 verify 会与 pre-commit 钩子重复一遍，全量的正确位置是推送判据**（W1266 实证·E-265·跨项目通用·流程/时间域）：提交时 `.git/hooks/pre-commit` 自动跑 `verify_delivery.py --scope auto`（按变更路径的子集·更快），真全量（guardrails→verify→pytest→ci_sim）恒属 `pre_push_gate.py`；本批提交前已跑过 pre_push_gate（verify ≈4 分钟 + pytest ≈3 分钟），提交时钩子又把 verify 重复跑了一遍（实测浪费 ≈4 分钟）。⇒ **纪律**：① 提交前**不手工跑全量 verify**——hook 的 scope 子集管提交期复验即足够；② 全量只出现在两处：批收官链末（batch_closeout 的 gate 步）与推送判据（pre_push_gate），且**跑过一次就不重复跑**；③ 估单轮收官成本先看 tmpe 收官日志里各步实测耗时，重复跑全量是最大单源浪费。
@@ -142,6 +142,8 @@
 
 
 
+
+- **批量改 HTML 的 style 块时，替换区间若覆盖了开闭标签 ⇒ CSS 源码被当正文渲染，而探针与门禁全绿**（W1274 实证·E-279·跨项目通用·取证域）：把自包含页的公共层内联副本换成外链时，第一版替换区间取的是「整个 style 块（含 `<style>` 与 `</style>`）」而替换内容**没有重建 `<style>` 包裹** ⇒ 页面把 CSS 源码当正文渲染（整页显示 `@font-face` / `:root` 源码）⇒ **computed style 取样探针与全部门禁当时全绿**（取样点没命中、且「样式是否生效」与「源码是否泄漏」是两件事）⇒ **只有目视亲验抓到**（E-244）。⇒ **纪律**：① 改样式块必须**重建开闭标签**（或在文本层只替换内容、保留标签）；② 探针要**显式检测「源码泄漏」**（正文文本含 `@font-face` / `color-scheme` / `{` 连续特征即判红）——只查 computed style 会漏；③ **目视亲验不可省**：本批它一次抓到探针/门禁全绿的结构性破坏；④ 替换类操作一律先在**副本**上试改 + 看渲染图，再落真页。
 
 ### JS / CSP / 运行时（12<!--stats:pitfalls_js--> 条）
 

@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "2eb721984c8b",
+      "sha": "4da5a7cf5bdb",
       "static": {
         "svg": true,
         "cls": true,
@@ -4570,17 +4570,17 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1500·文本 0）",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1499·文本 0）",
       "svgKinds": [
         {
           "cls": "",
           "id": "svg-render",
           "w": 511,
           "h": 307,
-          "marks": 1500,
+          "marks": 1499,
           "texts": 0,
           "kind": "chart",
-          "basis": "511x307·图元 1500·文本 0"
+          "basis": "511x307·图元 1499·文本 0"
         },
         {
           "cls": "ic-moon",
@@ -5363,7 +5363,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "e7e33946bf56",
+      "sha": "1cbf3b2010b1",
       "static": {
         "svg": false,
         "cls": true,
@@ -5950,7 +5950,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -5958,9 +5958,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",
@@ -6223,7 +6223,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "af25f4c846bd",
+      "sha": "8bd1c11bd7f6",
       "static": {
         "svg": true,
         "cls": false,
@@ -6342,7 +6342,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "10dd975a5149",
+      "sha": "bd11d95a6ae4",
       "static": {
         "svg": true,
         "cls": false,
@@ -6726,7 +6726,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 843,
+      "consoleErrors": 867,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },

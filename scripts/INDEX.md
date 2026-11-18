@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（239）
+## 文件（240）
 
 ### Python 脚本
 
@@ -241,6 +241,7 @@
 - `rebuild_section.py`
 - `release.py`
 - `release_prep.py`
+- `relink_public_css.py`
 - `reserve_w.py`
 - `review_sweep.py`
 - `run_all.py`
