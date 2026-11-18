@@ -3,8 +3,8 @@
 
 BL-24 搬迁后 AGENTS §4.2/§4.3/§4.4 为摘要层，全量定义在 docs/agent/。本门禁四查：
   C1 L2 三件存在且含阅读契约与「何时」引导
-  C2 三方编号对账：AGENTS §4.2 摘要条目 max == gates.md 门禁条目 max == verify_delivery 实况最高槽位
-  C3 AGENTS 行数上限（≤450·L1 瘦身守恒防线）
+  C2 两方编号对账：gates.md 门禁条目 max == verify_delivery 实况最高槽位 ＋ AGENTS 路由表含 gates.md 触发行
+  C3 AGENTS 行数上限（≤200·W1279 地图预算）
   C4 L1 指针目标存在（AGENTS 引用的 docs/agent/ 文件）
 豁免：无（结构防线）。用法：--check（默认）/ --self-test（注入式负样本）。
 """
@@ -19,7 +19,7 @@ L2_FILES = ["docs/agent/gates.md", "pitfalls.md", "docs/agent/agent-web.md"]  # 
 RE_AGENT_ITEM = re.compile(r"^(\d+)\. \*\*", re.M)
 RE_GATE_ITEM = re.compile(r"^(\d+)\. \*\*", re.M)
 RE_VERIFY_SLOT = re.compile(r"第\s*(\d+)\s*(?:槽|门禁)")
-AGENTS_MAX_LINES = 450
+AGENTS_MAX_LINES = 200  # W1279 地图预算
 
 
 def rd(p):
@@ -40,21 +40,24 @@ def evaluate(inp):
             issues.append("C1: %s 缺阅读契约头部" % p)
         if p.endswith(("gates.md", "pitfalls.md")) and "何时" not in txt:
             issues.append("C1: %s 缺「何时读/何时触发」引导" % p)
-    # C2 三方编号对账
-    agents_max = max([int(x) for x in RE_AGENT_ITEM.findall(inp["agents_sec42"])] or [0]) or None
+    # C2 两方编号对账（W1279：AGENTS 地图化后不再复制槽位摘要——对账锚移 gates.md）
+    #   ＋ AGENTS 路由表必须含 gates.md 触发行（地图缺主路由即红）
     gates_items = RE_GATE_ITEM.findall(inp["files"].get("docs/agent/gates.md", ""))
     gates_max = max([int(x) for x in gates_items] or [0]) or None
     verify_max = max([int(x) for x in RE_VERIFY_SLOT.findall(inp["verify_src"])] or [0]) or None
-    if not (agents_max and gates_max and verify_max):
-        issues.append("C2: 解析失败（AGENTS=%s / gates=%s / verify=%s · fail-closed）" % (agents_max, gates_max, verify_max))
-    elif not (agents_max == gates_max == verify_max):
-        issues.append("C2: 三方编号失配 AGENTS=%s / gates.md=%s / verify=%s（摘要与全量与实况必须一致）" % (agents_max, gates_max, verify_max))
+    if not (gates_max and verify_max):
+        issues.append("C2: 解析失败（gates=%s / verify=%s · fail-closed）" % (gates_max, verify_max))
+    elif gates_max != verify_max:
+        issues.append("C2: gates.md=%s ≠ verify=%s（全量定义与实况必须一致）" % (gates_max, verify_max))
+    if "docs/agent/gates.md" not in inp["agents"] or "任何写操作" not in inp["agents"]:
+        issues.append("C2: AGENTS 路由表缺 gates.md 触发行（地图主路由缺失）")
     # C3 行数
     n = inp["agents_lines"]
     if n > AGENTS_MAX_LINES:
         issues.append("C3: AGENTS.md %d 行 > 上限 %d（L1 瘦身守恒）" % (n, AGENTS_MAX_LINES))
     # C4 指针目标
-    for m in re.finditer(r"\((docs/agent/[a-z-]+\.md)\)", inp["agents"]):
+    # W1279：地图形态指针 = 路由表表格行（| docs/agent/x.md |）＋ 括号引用，两形态都核验
+    for m in re.finditer(r"(?:\(|\|\s*)(docs/agent/[a-z-]+\.md)", inp["agents"]):
         if m.group(1) not in inp["files"]:
             issues.append("C4: AGENTS 指针目标不存在：%s" % m.group(1))
     return issues
@@ -96,9 +99,11 @@ def run_self_test():
 
     case("T1 干净态零误报", lambda d: None, None)
     case("T2 gates.md 缺失必红", lambda d: d["files"].pop("docs/agent/gates.md"), "C1")
-    case("T3 编号三方失配必红", lambda d: d.update(agents_sec42=re.sub(r"(?m)^41\. \*\*[^\n]*\n", "", d["agents_sec42"])), "C2")  # W713：40→41 替换在 1-41 全序列下 max 仍 41 不失配（4/5 实证）·改删 41 条注入失配
-    case("T4 AGENTS 超行必红", lambda d: d.update(agents_lines=999), "C3")
-    case("T5 指针悬空必红", lambda d: d.update(agents=d["agents"].replace("(docs/agent/gates.md)", "(docs/agent/nope.md)", 1)), "C4")
+    # W1279：对账锚移 gates.md——verify 侧槽位数变异即失配（旧 AGENTS §4.2 侧变异随摘要退役删除）
+    case("T3 gates/verify 编号失配必红", lambda d: d.update(verify_src=d["verify_src"].replace("第 83 槽", "第 82 槽", 1)), "C2")
+    case("T4 AGENTS 超行必红", lambda d: d.update(agents_lines=201), "C3")
+    case("T5 路由缺 gates 行必红", lambda d: d.update(agents=d["agents"].replace("docs/agent/gates.md | **任何写操作前**", "docs/agent/gates-x.md | **任何写操作前**", 1)), "C2")
+    case("T6 指针悬空必红", lambda d: d.update(agents=d["agents"].replace("(docs/agent/agent-web.md)", "(docs/agent/nope.md)", 1)), "C4")
 
     tally = SelfTestTally("agents-layers")
     for name, mutate, expect in cases:

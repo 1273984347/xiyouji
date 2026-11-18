@@ -1,3 +1,19 @@
+### W1279（2026-11-19）：AGENTS 地图化重建批（五文件分层治理·用户框架落地）
+
+**本批要点**（W1279 · 五文件分层治理批·用户两份框架文档落地）：
+
+> - **① AGENTS 重建为地图（86 行 / 11.4KB·原 ~350 行 / 31.8KB）**：结构按截断安全序 = 1-2 行定位 → 铁律 24 条前移（注意力高地）→ **路由表**（13 文件·每条含触发条件·gates.md 行为指令式「任何写操作或提交前 → 先跑 verify_delivery.py，红时查对应槽条目」）→ 常用命令 → 环境指针 → 维护契约极简 → 脚注；§1 宣传/§2 技术栈/§3 目录树/§4.1 数据流/§4.2 槽位摘要/§4.3 主题视图/§4.4/§5/§7/§8 全部外移或直删（README/STRUCTURE/gates.md 正本承载·零内容丢失核验=路由表逐条覆盖）。
+> - **② 铁律区职责分流（审查校准落地）**：17/18/20-24 七条流程规则各保编号压一句（关键词各自保留·「已被机械化与流程文档承载 → 流水线 §九 + MAINTAINING §六」）；15/16 长实证压一句保要点；rule5 具名例外全文恢复（并行批曾压缩·从会话原版逐字补回）。
+> - **③ MAINTAINING.md 拆出**（docs/agent/·新建）：维护契约全文 = 体积预算表（AGENTS ≤200 行/CLAUDE ≤60/pitfalls 262144/接收方同步挂窗）+ **退役三标准**（会话性移 pitfalls/过时直删/机械化交工具）+ **添加前四问**（vLLM 式）+ 局部化预留形态（按族聚合·作用域声明生成路由·不继承）+ 时间纪律指针 + 环境事实接收（§八）。
+> - **④ CLAUDE.md 导入式（15 行）**：`@AGENTS.md` 确定性导入 + Claude 专属段（3 行）；原 17 条速查退役（内容归宿：铁律区/文档规范 §4.9/§11.1/pitfalls·逐条核验零丢失）。
+> - **⑤ 判据重锚三处**：41 槽 C2 改两方对账（gates.md == verify·AGENTS 侧改路由行判据）+ T3-T6 自测更新；31 槽 C3 声明面重锚 gates.md（agents_gate_list_max 兼容保留 + gates_gate_list_max 新增·gather 补 gates_md 输入）；41 槽 C3 的 450 行僵尸判据退役（74 槽 34000B 已覆盖·改指针）。
+> - **⑥ 32 槽新增 C5 导入有效性**：@AGENTS.md 行首指令必须存在（静态面）——运行时包含性由人工抽验记录（W1279 判据重定义·锚点对拍对镜像形态退役）。
+> - **⑦ pitfalls 三阶段收口并入本笔**（上批 ⑨ 收尾笔被本批巨改打断·合并入库）：221.7KB 过 262144 全局硬窗（test_w1120 实测口径·BYTE_CAPS 对齐）；计数链 379→390（并行批 W1272-76 新增 11 条·分项声明与实测一致）。
+> - **⑧ workflow 治理（上批 ⑧ 合并入库）**：禁用三条死触发 workflow（ci-sim/dependency-review/stale·gh disable 可逆）——本批推送触发面实测 4-6 条 → 收敛。
+> - **状态**：已收官（AGENTS 86 行地图 + MAINTAINING/CLAUDE 分层就位 + 三处判据重锚 + 瘦身收口；W1277-W1278 段内订正笔一并入库）
+> - **验证**：41 槽自测 6/6 + 0 FAIL；32 槽 0 FAIL（C5 新判据）；31 槽 C5e/C5d 绿（390 计数链 sweep 一致）；74 槽 0 FAIL（221.7KB/11.4KB 在窗）；54 槽 0 FAIL；guardrails --strict-api 通过；ruff 0 错；cspcheck 0 漂移；行数 86 ≤ 200 预算。
+> - **文件**：AGENTS.md,docs/agent/MAINTAINING.md,CLAUDE.md,pitfalls.md,archive/docs/pitfalls-detail-ARCHIVE.md,scripts/check_agents_layers.py,scripts/check_claude_md.py,scripts/check_doc_sync.py,scripts/check_doc_size_budget.py,docs/agent/gates.md,docs/00-导读/W批次编号对账表.md,CHANGELOG.md,scripts/output/file-index.md,README.md,STRUCTURE.md,docs/00-导读/项目说明.md,CITATION.cff,.github/workflows/README.md,site/index.html,scripts/output/_w1279_spec.json,scripts/output/_cascade_files_W1279.txt,scripts/output/stats.json,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/tools-inventory.md,scripts/output/_vermilion_solid_cache.json,site/data/search-index-zh.js,site/en/search-index-en.js,docs/INDEX.md,scripts/INDEX.md,docs/agent/INDEX.md,docs/agent/README.md,scripts/output/INDEX.md,scripts/output/README.md
+
 ### W1278（2026-11-19）：pitfalls/AGENTS 瘦身批（二层化 + 摘要化 + 74 槽挂窗）
 
 **本批要点**（W1278 · pitfalls/AGENTS 瘦身批·用户点名「现在做」）：
@@ -6,6 +22,7 @@
 > - **② AGENTS 摘要化**：§4.2 83 槽压成「N. **名**（首两段锚）→ gates.md」（80 条·槽号与 C3/41 槽口径不动）＋ §6 铁律 10 条长文压一句版（细节归 RULES/pitfalls）⇒ **48.2 → 31.8 KB（-34%）**；RULES.md 索引层不动（指针目标 §6-N 编号稳定）。
 > - **③ 74 槽挂窗（用户批准）**：BYTE_CAPS 新增 pitfalls.md ≤300000 字节 / AGENTS.md ≤34000 字节（瘦身后现值+余量·防回涨棘轮语义）；evaluate_sizes 扩 per-file cap（BYTE_CAPS 未测量跳过不与 fail-closed 混判·自测兼容）；gates.md 74 槽定义同步。
 > - **④ 盘点自纠**：workflow 收紧初判「fuzz/lint 无过滤」系 grep 片段误读——两文件自带 paths（W1068/W1197 既判）⇒ 实际只禁用三条死触发（⑧ W1277·ci-sim/dependency-review/stale）。
+> - **⑨ 三阶段收口（CI test_w1120 真信号）**：CI 的 test_w1120 全局硬窗（262144B·_collect_sizes 实测口径）暴露 pitfalls 291600B 超限——本批 BYTE_CAPS 挂窗把它暴露给单测（此前 _collect_sizes 不含 pitfalls ⇒ 测试盲区）。递降拆分至地板（290248·剩纪律块本体）后二/三阶段纪律要点化（127+156 条·全文先归档后压缩·零总丢失）⇒ 221.7KB 过硬窗；BYTE_CAPS pitfalls 对齐 262144（test 实测口径·双门禁一致）。
 > - **状态**：已收官（瘦身上库·挂窗生效·检索锚零丢失）
 > - **验证**：54 槽 0 FAIL；31 槽 C5e/C5d 双绿（条目数 379 不变）；verify --scope docs 核心全绿；74 槽 0 FAIL（新窗生效·21 单测过）；pitfalls/归档 E-NN 双向 grep 实测。
 > - **文件**：pitfalls.md,archive/docs/pitfalls-detail-ARCHIVE.md,AGENTS.md,docs/00-导读/W批次编号对账表.md,scripts/check_doc_size_budget.py,docs/agent/gates.md,CHANGELOG.md,scripts/output/file-index.md,README.md,STRUCTURE.md,docs/00-导读/项目说明.md,CITATION.cff,.github/workflows/README.md,site/index.html,scripts/output/_w1278_spec.json,scripts/output/_cascade_files_W1278.txt,scripts/output/stats.json,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/tools-inventory.md,site/data/search-index-zh.js,site/en/search-index-en.js,docs/INDEX.md,scripts/INDEX.md,HANDOVER.md,site/rss.xml,archive/docs/INDEX.md,archive/docs/README.md,scripts/output/INDEX.md,scripts/output/README.md
@@ -37,7 +54,7 @@
 > - **文件**： .agent/skills/puti-shouye/SKILL.md,.github/workflows/README.md,AGENTS.md,CHANGELOG.md,CITATION.cff,HANDOVER.md,README.md,STRUCTURE.md,archive/docs/AGENTS-ARCHIVE.md,archive/docs/workflows-readme-history.md,docs/00-导读/W批次编号对账表.md,docs/00-导读/项目说明.md,docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,docs/agent/pitfalls.md,pitfalls.md,pytest.ini,scripts/check_token_coverage.py,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/_cascade_files_W1276.txt,scripts/output/_vermilion_solid_cache.json,scripts/output/_w1266_allrender.json,scripts/output/_w1276_spec.json,scripts/output/chart-legend-render-audit.json,scripts/output/file-index.md,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/stats.json,scripts/output/tools-inventory.md,site/data/cross-time-danmaku.html,site/data/search-index-zh.js,site/data/tag-cloud.html,site/dukou-engine.html,site/en/search-index-en.js,site/index.html,site/rss.xml,tests/unit/INDEX.md,tests/unit/README.md,tests/unit/test_w1276_token_scope.py
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1278），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1279），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

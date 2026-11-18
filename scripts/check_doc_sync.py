@@ -236,10 +236,18 @@ def table_registered_ws(text):
 
 
 def agents_gate_list_max(agents_text):
+    """W1279 兼容形态：旧结构（§4.2 摘要）按原解析；地图结构（无 4.2）返回 None——
+    调用方 _check_c3_agents_slots 已改为声明面 = gates.md（W1279 重锚）。"""
     m = re.search(r"### 4\.2[^\n]*\n(.*?)### 4\.3", agents_text, re.S)
     if not m:
         return None
     nums = [int(x) for x in RE_AGENTS_ITEM.findall(m.group(1))]
+    return max(nums) if nums else None
+
+
+def gates_gate_list_max(gates_text):
+    """W1279：声明面 = gates.md 门禁条目 max（RE_AGENTS_ITEM 同 41 槽形态）。"""
+    nums = [int(x) for x in RE_AGENTS_ITEM.findall(gates_text)]
     return max(nums) if nums else None
 
 
@@ -437,13 +445,13 @@ def _check_c2_jiaojie_head(inp, wnum, issues, notes):
 
 
 def _check_c3_agents_slots(inp, issues):
-    """C3：AGENTS §4.2 门禁清单上限 == verify_delivery 实况最高槽位。W730 提取。"""
-    a_max = agents_gate_list_max(inp["agents"])
+    """C3：gates.md 门禁清单上限 == verify_delivery 实况最高槽位（W1279 重锚：声明面移 gates.md）。"""
+    a_max = gates_gate_list_max(inp.get("gates_md") or inp["agents"])
     v_max = verify_slot_max(inp["verify_src"])
     if a_max is None or v_max is None:
-        issues.append("C3: 解析失败（AGENTS §4.2 清单=%s / verify 槽位=%s·fail-closed）" % (a_max, v_max))
+        issues.append("C3: 解析失败（gates.md 清单=%s / verify 槽位=%s·fail-closed）" % (a_max, v_max))
     elif a_max != v_max:
-        issues.append("C3: AGENTS §4.2 门禁清单止于 %d，verify 实况最高槽位 %d（声明落后于代码实况）" % (a_max, v_max))
+        issues.append("C3: gates.md 门禁清单止于 %d，verify 实况最高槽位 %d（声明落后于代码实况）" % (a_max, v_max))
 
 
 def _c4_registered_ws(inp):
@@ -987,6 +995,7 @@ def gather():
         "readme": rd(os.path.join(ROOT, "README.md")),
         "jiaojie": rd(os.path.join(ROOT, "HANDOVER.md")),
         "agents": rd(os.path.join(ROOT, "AGENTS.md")),
+        "gates_md": rd(os.path.join(ROOT, "docs", "agent", "gates.md")),  # W1279 C3 声明面重锚
         # W1136：C5e 读数面改注入（判据与读取源解耦·自测可 hermetic）
         "pitfalls": rd(os.path.join(ROOT, "pitfalls.md")),  # W1157 正本迁根
         "skill": rd(os.path.join(ROOT, ".agent", "skills", "puti-shouye", "SKILL.md")),

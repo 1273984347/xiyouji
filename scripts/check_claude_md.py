@@ -6,6 +6,10 @@
   C2 章节锚点对拍：每条「<file> §N」/「§N-M」——目标文件须有 N 节标题；带 -M 时该节内须有 M. 条目
   C3 行数 ≤ 60（CLAUDE.md 维护契约）
   C4 禁漂移字面量：不得出现现役版本号 vX.Y.Z / W### / W001-Wxxx（速查层零漂移设计·指针化取数）
+  C5 导入有效性（W1279 重定义）：CLAUDE.md 必须以 @AGENTS.md 导入指令开场（行首形态）——
+     导入式形态下旧「章节锚点对拍」（C2 对 AGENTS §N 的镜像锚）退役：AGENTS 地图化后
+     CLAUDE 不再引用 AGENTS §N（仅存文档规范等外部锚·C2 保留只核这些）。「导入后运行时
+     上下文包含 AGENTS 关键段落」由人工抽验一次并记录（静态判据不可见的部分）。
 用法：默认=只读校验（0 FAIL 才过）；--self-test 注入式负样本 5 例。本脚本绝不修改任何文件。
 """
 
@@ -66,6 +70,9 @@ def evaluate(claude, files):
                 issues.append("C2: %s 缺 %s 节标题（指针悬空）" % (path, top))
             elif sub and not subitem_exists(body, top, sub):
                 issues.append("C2: %s §%s 节内缺 %s. 条目（指针悬空）" % (path, top, sub))
+    # C5 导入有效性（W1279 重定义·静态面）：@AGENTS.md 导入指令必须存在（行首）
+    if not re.search(r"(?m)^@AGENTS\.md\s*$", claude):
+        issues.append("C5: 缺 @AGENTS.md 导入指令（导入式形态·W1279 起；运行时包含性由人工抽验记录）")
     return issues, notes
 
 

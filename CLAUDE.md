@@ -1,57 +1,14 @@
-# CLAUDE.md — 《详解西游记》AI 速查层
+# CLAUDE.md — Claude Code 专属层
 
+@AGENTS.md
 
-> **📖 阅读契约（W707）**：通读型——本文件 ≤60 行一屏读完即全部；正文唯一权威在指针目标。
-> **定位**：宿主自动加载的 1 分钟速查层——只放「一行规则 + 权威指针」，正文唯一权威在指针目标，本文件禁展开正文；**禁写会漂移的数字与现役值**（版本/计数/门数一律指针化），因此无逐批维护成本、本文件不带版本号。
-> **维护契约**：新增必守规则先落权威位置（AGENTS.md §6 或 docs/00-导读/文档规范.md），再在此登记一行；每次改动须复核全部指针目标真实存在；行数上限 60。
-> 生成来源：人工撰写（Agent 起草）·生成模型：GLM（本地 Agent 会话 2026-10-05）·生成日期：2026-10-05·核验状态：已核验（指针逐条 grep 实证·W664）
+> **导入说明**：上行 `@AGENTS.md` 为 Claude Code 确定性导入——每会话自动加载 Agent 行为地图
+> （铁律 24 条 / 路由表 / 常用命令 / 治理契约指针）。本文件**不复制其内容**（W1279 退役收敛：
+> 原 17 条速查的角色由地图承载，写作纪律归 docs/00-导读/文档规范.md §4.9、报告落位归 §11.1、
+> 微批节奏归设计档）。
 
-## 必守规则速查（每条一行 · 权威在指针目标）
+## Claude Code 专属
 
-1. **E1 铁律**：每个文件修改后 Grep spot-check 验证落地，声明≠落地=假收敛 → AGENTS.md §6-2
-2. **写作可验证纪律**：禁「适当/尽快/酌情/相关/必要时」类无判定措辞，量化带单位与比较符，验收标准含期望输出，交付文档头五要素自包含 → docs/00-导读/文档规范.md §4.9
-3. **现役口径**：版本号=发布批次编号非 SemVer，「现在什么状态」以 CHANGELOG 顶段为准 → AGENTS.md §1 / CHANGELOG.md 头部
-4. **改内联脚本必跑** `python scripts/generate_csp.py`（哈希失配=整脚本被浏览器拒执行）→ AGENTS.md §6-3
-5. **批量改 CSS/JS 后**必须验证括号/引号平衡（check_structure.py）→ AGENTS.md §6-4
-6. **file:// 铁律**：新页面必须 EMBEDDED 回退 + 零外域依赖 → AGENTS.md §6-5
-7. **引文先探针**：写「> 原文引文」前跑 `scripts/_cite_probe.py`，禁凭记忆编造 → AGENTS.md §4.3
-8. **级联与并发**：batch_cascade 落盘后按 `_cascade_files_<批号>.txt` 逐面 add；并行批次 pathspec 提交互斥；W 编号动工前在 docs/00-导读/W批次编号对账表.md 登记认领 → AGENTS.md §4.3
-9. **commit 规范**：多行信息 Write 临时文件 + `git commit -F`，禁 heredoc；并行会话提交走 `python scripts/safe_commit.py -F <file> <pathspec...>`（ref-lock 竞争自动重试）；`type(scope): 描述` → AGENTS.md §4.3 / docs/00-导读/文档规范.md §6
-10. **禁擅改**：CHANGELOG 历史段、归档、verify_delivery.py、bump_version.py 等管控文件，改动须经用户批准 → docs/00-导读/文档规范.md §11.2
-11. **框架报告必落盘**：按《任务计划、执行与经验沉淀》框架产出的交付物必须落 `docs/11-方案报告/计划方案/` 并在同目录 README §二 登记，禁只在会话里答复 → docs/00-导读/文档规范.md §4.9
-12. **修实例必修根**：同族风险同批或次批根治禁「等排期」；教训权威落坑表（私有记忆仅镜像） → AGENTS.md §6-14 / pitfalls.md 流程组
-13. **禁补丁加补丁**：修复必须从根因，教训须转机器判据；协作环境六则与「开批先占号（reserve_w.py 未占号不动手）」同级用户令 → AGENTS.md §6-15 / AGENTS.md §6-16 / AGENTS.md §6-17
-14. **禁 CodeBuddy/WorkBuddy**：项目一切 AI 功能不使用该品牌工具链（agent-web=OpenAI-compatible 自研）→ AGENTS.md §6-19
-15. **批次节奏**：按主题日批合并同类项（微任务不单独开批）·微批轻量通道三档设计已出档待批 → docs/11-方案报告/设计与架构方案/（微批轻量通道设计）
-16. **提交前三问**：本批问题全解决或登记去向？防复发判据/坑表落地？其他 Agent 能否从项目文件了解？私有记忆须同步落仓 → AGENTS.md §6-18
-17. **Python 改动自检**：改完跑 `pwsh -File scripts/guardrails/check_changed.ps1`（ruff 风格档 + 结构档 + 嵌套推导式，退出码 0 才算过）；单测 `py -3 -m pytest tests -q`；推送前 `python scripts/pre_push_gate.py`（一命令真全量） → docs/agent-guardrails/README.md
-
-## 常用命令（可直接复制）
-
-```
-python scripts/agent_start.py            # 开局实读磁盘输出当前事实摘要（防记忆代读）
-python scripts/verify_delivery.py        # 提交前唯一硬门禁（pre-commit 自动跑）
-python scripts/pre_push_gate.py          # 推送前一命令真全量（guardrails+verify+pytest+ci_sim）
-python scripts/batch_closeout.py --spec scripts/output/_wNNNN_spec.json  # 收官链单入口（cascade→…→gate）
-python scripts/verify_delivery.py --scope auto  # 本地提交轻量档（CI 恒全量）
-python scripts/generate_csp.py --check   # CSP 0 漂移
-python scripts/check_doc_sync.py         # 第 31 门禁文档口径体检（--self-test 自测）
-pwsh -File scripts/guardrails/check_changed.ps1   # Python 改动结构检查（只扫改动文件；Unix/CI 用 .sh）
-py -3 -m pytest tests -q                  # 单测（pytest.ini 自带 -v，-q 只降噪）
-python scripts/lint_links.py --dir .     # 全仓链接校验
-make ci                                  # lint+test+audit+links 本地预跑 CI
-```
-
-## 环境注意（均有仓内出处）
-
-- Windows 多行字符串/heredoc 禁用（Write 临时文件 + `-F` 参数替代）→ AGENTS.md §4.3
-- 批量改 md 一律 Python `open(encoding='utf-8')`，禁 PowerShell Set-Content（默认写 UTF-8 BOM）→ AGENTS.md §4.3
-- 同文件多个 Edit 必须串行（并行 Edit 基于同一原始内容，后写覆盖先写）→ AGENTS.md §4.3
-- 跨 session 动手前先 `git log --oneline -5` + `gh run list` 识别并行增量 → AGENTS.md §4.3
-- 本节与工具表里的 `python …` 是可移植形态（CI/Linux/macOS 通用）；**本机 PowerShell 侧** `python` 是应用执行存根（调用即静默失败）→ 该侧改写 `py -3 …` → AGENTS.md §4.3
-
-- **报告落位**：方案/审查/调研/复盘/计划类交付物唯一落盘位 = `docs/11-方案报告/`（六子目录·分区沿革见 CHANGELOG），入库即在目录 README 对应分区登记 → 文档规范 §11.1
-
-## 接手导航（5 分钟动手）
-
-本文件（1 分钟）→ `python scripts/agent_start.py`（当前事实摘要·实读磁盘防记忆代读）→ AGENTS.md 按需读节（§1-§3/§6 铁律/§7 必读·3 分钟）→ 规则全量查 RULES.md / 流程查 AGENTS.md §7 / 坑位查 pitfalls.md（四文档体系）→ HANDOVER「零、当前阻塞」「一、当前进度」（1 分钟）→ 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
+- 接手导航：本文件（导入自动生效）→ `python scripts/agent_start.py`（事实摘要）→ 按地图路由表行动。
+- 改治理文件前先读 docs/agent/MAINTAINING.md（退役三标准 / 添加前四问 / 体积预算）。
+- 本文件 ≤60 行（32 槽 C3）；禁版本号/计数漂移字面量（32 槽 C4）。

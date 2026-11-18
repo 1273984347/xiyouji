@@ -1,3 +1,46 @@
+## W1279 AGENTS 地图化重建批（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1279 | 地图化重建（86 行·铁律前移·路由表·指令式 gates 行） |
+| docs/agent/MAINTAINING.md | W1279 | 新建：维护契约全文（退役三标准/四问/体积预算/局部化预留/环境事实） |
+| CLAUDE.md | W1279 | 导入式（@AGENTS.md + Claude 专属·15 行·原 17 条速查退役） |
+| pitfalls.md | W1279 | 三阶段收口 221.7KB 过全局硬窗（上批 ⑨ 合并入库） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1279 | 叙事归档跟随（236 条） |
+| scripts/check_agents_layers.py | W1279 | 41 槽重锚（C2 两方+路由行/C3 退役 450 改指针/C4 表格形态/T3-T6 更新） |
+| scripts/check_claude_md.py | W1279 | 32 槽新增 C5 导入有效性（锚点对拍对镜像形态退役） |
+| scripts/check_doc_sync.py | W1279 | 31 槽 C3 声明面重锚 gates.md（兼容保留+gates_gate_list_max 新增） |
+| scripts/check_doc_size_budget.py | W1279 | BYTE_CAPS pitfalls 对齐 262144（test_w1120 口径） |
+| docs/agent/gates.md | W1279 | 74 槽挂窗说明（W1278） |
+| docs/00-导读/W批次编号对账表.md | W1279 | W1277-W1279 认领与回填 |
+| CHANGELOG.md | W1279 | W1278 ⑨ + W1279 落段 |
+| scripts/output/file-index.md | W1279 | file-index W1279 段 |
+| README.md | W1279 | 本批交付物 |
+| STRUCTURE.md | W1279 | 本批交付物 |
+| docs/00-导读/项目说明.md | W1279 | 本批交付物 |
+| CITATION.cff | W1279 | 本批交付物 |
+| .github/workflows/README.md | W1279 | 本批交付物 |
+| site/index.html | W1279 | 页脚批次链 W1279 前插 |
+| scripts/output/_w1279_spec.json | W1279 | 本批交付物 |
+| scripts/output/_cascade_files_W1279.txt | W1279 | 本批交付物 |
+| scripts/output/stats.json | W1279 | 本批交付物 |
+| scripts/output/stats-changelog.json | W1279 | 本批交付物 |
+| scripts/output/stats-index.md | W1279 | 本批交付物 |
+| scripts/output/tools-inventory.md | W1279 | 本批交付物 |
+| scripts/output/_vermilion_solid_cache.json | W1279 | 本批交付物 |
+| site/data/search-index-zh.js | W1279 | 本批交付物 |
+| site/en/search-index-en.js | W1279 | 本批交付物 |
+| docs/INDEX.md | W1279 | 本批交付物 |
+| scripts/INDEX.md | W1279 | 本批交付物 |
+| scripts/output/_w1278_spec.json | W1279 | 上批 ⑨ 收尾笔并入本笔（段内订正·51 槽归属顶段） |
+| HANDOVER.md | W1279 | 进度 bullet 移链首 + 更新链（裁 3）+ 里程碑滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1279 | 台账腾窗迁入 |
+| docs/agent/INDEX.md | W1279 | 目录文档 refresh（新收 MAINTAINING.md） |
+| docs/agent/README.md | W1279 | 目录 README refresh |
+| scripts/output/INDEX.md | W1279 | 产物索引 refresh |
+| scripts/output/README.md | W1279 | 产物 README refresh |
+
+
 ## W1278 pitfalls/AGENTS 瘦身批（2026-11-19）
 
 | 文件 | W | 说明 |
