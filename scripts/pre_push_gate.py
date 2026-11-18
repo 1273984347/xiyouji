@@ -41,8 +41,9 @@ import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STEP_ORDER = ("guardrails", "verify", "pytest", "ci_sim")
+STEP_ORDER = ("regen", "guardrails", "verify", "pytest", "ci_sim")
 STEP_DESC = {
+    "regen": "run_all.py 数据再生（CI Delivery Gate 前置步同轨·W1279 缺口根修）",
     "guardrails": "agent-guardrails（ruff 风格/结构档 + api_diff·铁律 20）",
     "verify": "verify_delivery --scope full（71 槽交付门禁·Delivery Gate 同轨）",
     "pytest": "pytest tests -q（体积窗 C7/HANDOVER 概要块等判据载体）",
@@ -125,6 +126,18 @@ def _changed_py():
     return batch_closeout._changed_py_files()
 
 
+def run_regen():
+    """W1279 结构缺口根修：CI Delivery Gate 有 run_all.py 前置再生步而本地 pre_push_gate
+    没有 ⇒ 「本地全绿」≠「CI 全绿」（实测：提交快照与生成器输出脱节的数据漂移 3 条 +
+    暗色回归，推送后首曝，两轮红修 ≈60 分钟）。补上此步 ⇒ 本地推送判据与 CI 逐字同轨。"""
+    t0 = time.time()
+    rc, out = run([sys.executable, "scripts/run_all.py"])
+    tail = [ln for ln in out.splitlines() if ln.strip()][-8:]
+    print("[regen] " + "\n[regen] ".join(tail) if tail else "[regen] (无输出)")
+    return ("regen", "PASS" if rc == 0 else "FAIL", time.time() - t0,
+            "" if rc == 0 else "exit=%d" % rc)
+
+
 def run_guardrails(py_changed):
     """guardrails 步：有 .py 改动才跑；无则 SKIP（零成本语义·与铁律 20 对齐）。"""
     t0 = time.time()
@@ -184,6 +197,7 @@ def _infra_missing(steps, root=None):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="推送前一命令真全量（W1215）")
+    ap.add_argument("--skip-regen", action="store_true", help="跳过数据再生（迭代期·非推送判据形态）")
     ap.add_argument("--skip-pytest", action="store_true", help="跳过 pytest（迭代期·非推送判据）")
     ap.add_argument("--skip-ci-sim", action="store_true", help="跳过 ci_sim")
     ap.add_argument("--steps", action="store_true", help="只打印步骤序")
@@ -192,7 +206,7 @@ def main(argv=None):
         for s in STEP_ORDER:
             print("%-10s %s" % (s, STEP_DESC[s]))
         return 0
-    skip = {"pytest": a.skip_pytest, "ci_sim": a.skip_ci_sim}
+    skip = {"regen": a.skip_regen, "pytest": a.skip_pytest, "ci_sim": a.skip_ci_sim}
     # 脏度在四步开始前快照：pytest 会重写跟踪态生成物，步骤后再取会误判「提交后推送前」为脏
     tree_dirty = _tree_dirty() if not skip["ci_sim"] else False
     steps, partial, ci_sim_skip = plan_run(skip, tree_dirty)
@@ -203,7 +217,9 @@ def main(argv=None):
     py_changed = _changed_py() if "guardrails" in steps else []
     results = []
     for s in steps:
-        if s == "guardrails":
+        if s == "regen":
+            results.append(run_regen())
+        elif s == "guardrails":
             results.append(run_guardrails(py_changed))
         elif s == "verify":
             results.append(run_verify())

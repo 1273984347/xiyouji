@@ -42,6 +42,8 @@
 | tests/unit/test_check_placeholder_hash_carrier.py | W1279 | 声明面重锚 gates.md（AGENTS §4.2 断言退役） |
 | tests/unit/test_w1141_gate_mount.py | W1279 | 声明面重锚 gates.md H1（同上） |
 | site/rss.xml | W1279 | RSS 产物新鲜度跟随 |
+| scripts/pre_push_gate.py | W1279 | regen 步前插（run_all.py 同轨 CI Delivery Gate 前置再生） |
+| tests/unit/test_pre_push_gate.py | W1279 | STEP_ORDER 三处断言随 regen 步更新 |
 
 
 ## W1278 pitfalls/AGENTS 瘦身批（2026-11-19）

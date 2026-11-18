@@ -17,11 +17,11 @@ import pre_push_gate as ppg  # noqa: E402
 
 
 def test_select_steps_full_order_stable():
-    assert ppg.select_steps({}) == ["guardrails", "verify", "pytest", "ci_sim"]
+    assert ppg.select_steps({}) == ["regen", "guardrails", "verify", "pytest", "ci_sim"]
 
 
 def test_select_steps_skip_keeps_order():
-    assert ppg.select_steps({"pytest": True}) == ["guardrails", "verify", "ci_sim"]
+    assert ppg.select_steps({"pytest": True}) == ["regen", "guardrails", "verify", "ci_sim"]
 
 
 def test_aggregate_all_pass_exit_zero_push_verdict():
@@ -65,7 +65,7 @@ def test_ci_sim_should_run_clean_tree_runs():
 
 def test_plan_run_clean_tree_is_full_without_skip_note():
     steps, partial, note = ppg.plan_run({}, tree_dirty=False)
-    assert steps == ["guardrails", "verify", "pytest", "ci_sim"]
+    assert steps == ["regen", "guardrails", "verify", "pytest", "ci_sim"]
     assert partial is False and note == ""
 
 
