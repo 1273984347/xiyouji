@@ -28,12 +28,22 @@ import os
 import re
 import sys
 
+# W1275：与**传播端同源**——页内副本是 inline_css.strip_comments 的产物（源文件注释在传播时被剥），
+# 公共层索引若拿「带注释的原文」去比对副本 ⇒ 命中面被系统性低估 ⇒ 公共层规则残留页内 ⇒
+# 残留规则落在外链公共层**之后** ⇒ 覆写层级反转（实测 body 16px→15px·W1275 实证）。
+# 口径必须同源（与 inline_css 共用同一个 strip_comments·禁再抄一份·抄一次必漂移）。
+from inline_css import strip_comments  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "site")
 RE_STYLE = re.compile(r"(<style[^>]*>)(.*?)(</style>)", re.S | re.I)
 RE_COMMENT = re.compile(r"/\*.*?\*/", re.S)
 PUBLIC_FILES = ("tokens.css", "system.css")
 MIN_STRIP_RULES = 150
+# W1275：外链形态与「内联副本标记」必须**同源**——外链页若仍带 INLINED 标记，
+# scripts/inline_css.py --force 会按「已内联」重同步，把公共层重新内联（回退 A 方案外链化）。
+MARKER_RE = re.compile(r"[ \t]*<!--\s*INLINED CSS.*?-->[ \t]*\r?\n?", re.S)
+EXT_COMMENT = "<!-- W1275：公共层已外链（tokens.css + system.css）·本页私有层保留 -->"
 
 
 def _norm(css: str) -> str:
@@ -89,6 +99,7 @@ def public_rule_index() -> dict:
             continue
         with open(p, encoding="utf-8") as f:
             css = f.read()
+        css = strip_comments(css)  # W1275：与传播端同源（副本是剥注释后的形态）
         for sels, body, _s, _e in _top_rules(css):
             idx.setdefault(sels, set()).add(body)
     return idx
@@ -141,6 +152,13 @@ def relink_page(path: str, pub_idx: dict, apply: bool = False):
             done = False
             break
     if done:
+        # W1275：已外链页若仍残留 INLINED 标记 ⇒ 同样要清（否则 --force 会把公共层转回内联）
+        if MARKER_RE.search(html):
+            cleaned = MARKER_RE.sub(EXT_COMMENT + "\n", html, count=1)
+            if apply and cleaned != html:
+                with open(path, "w", encoding="utf-8", newline="") as f:
+                    f.write(cleaned)
+            return ("cleaned", before, len(cleaned.encode("utf-8")), "清除残留内联标记")
         return ("already", before, before, "")
     m = RE_STYLE.search(html)
     if not m:
@@ -157,6 +175,8 @@ def relink_page(path: str, pub_idx: dict, apply: bool = False):
     else:
         replacement = build_links(path) + "\n<!-- W1274：公共层已外链（tokens.css + system.css） -->"
     new_html = html[:m.start()] + replacement + html[m.end():]
+    # W1275：同源要求——外链页不再留「内联副本」标记（否则 --force 会把公共层转回内联）
+    new_html = MARKER_RE.sub(EXT_COMMENT + "\n", new_html, count=1)
     after = len(new_html.encode("utf-8"))
     if apply and after != before:
         with open(path, "w", encoding="utf-8", newline="") as f:
@@ -201,7 +221,7 @@ def main(argv=None) -> int:
     if not targets:
         targets = list(iter_pages())
     pub_idx = public_rule_index()
-    changed = already = skipped = 0
+    changed = already = skipped = cleaned = 0
     saved = 0
     for p in targets:
         full = p if os.path.isabs(p) else os.path.join(ROOT, p)
@@ -211,13 +231,16 @@ def main(argv=None) -> int:
             saved += before - after
         elif st == "already":
             already += 1
+        elif st == "cleaned":
+            cleaned += 1
+            saved += before - after
         else:
             skipped += 1
             if st == "error":
                 print("FAIL %s：%s" % (p, note))
                 return 1
-    print("目标 %d 页：改造 %d · 已外链 %d · 跳过 %d · 私有层净减 %d B"
-          % (len(targets), changed, already, skipped, saved))
+    print("目标 %d 页：改造 %d · 已外链 %d · 清除残留标记 %d · 跳过 %d · 私有层净减 %d B"
+          % (len(targets), changed, already, cleaned, skipped, saved))
     return 0
 
 

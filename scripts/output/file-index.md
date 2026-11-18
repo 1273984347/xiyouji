@@ -1,3 +1,71 @@
+## W1275 A 方案铺开第一批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| .agent/skills/puti-shouye/SKILL.md | W1275 | 本批配套改动 |
+| .github/workflows/README.md | W1275 | 本批配套改动 |
+| AGENTS.md | W1275 | 本批配套改动 |
+| CHANGELOG.md | W1275 | 本批配套改动 |
+| CITATION.cff | W1275 | 本批配套改动 |
+| HANDOVER.md | W1275 | 进度与更新链推进 + Backlog 对账注记 |
+| README.md | W1275 | 本批配套改动 |
+| STRUCTURE.md | W1275 | 本批配套改动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1275 | 本批配套改动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1275 | 台账腾窗归档 |
+| archive/docs/workflows-readme-history.md | W1275 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1275 | W1275 认领行 |
+| docs/00-导读/项目说明.md | W1275 | 本批配套改动 |
+| docs/11-方案报告/README.md | W1275 | 报告登记面补登 |
+| docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md | W1275 | 本批交付报告（计划·执行·验收·复盘·沉淀） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1275 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1275 | 本批配套改动 |
+| docs/INDEX.md | W1275 | 本批配套改动 |
+| docs/agent/pitfalls.md | W1275 | 坑位入表 E-280（口径同源与形态同源族） |
+| pitfalls.md | W1275 | 坑位入表 E-280（口径同源与形态同源族） |
+| pytest.ini | W1275 | 本批配套改动 |
+| scripts/check_chart_design_parity.py | W1275 | 本批配套改动 |
+| scripts/inline_css.py | W1275 | 外链形态优先（--force 不把外链页转回内联） |
+| scripts/output/INDEX.md | W1275 | 本批配套改动 |
+| scripts/output/README.md | W1275 | 本批配套改动 |
+| scripts/output/_cascade_files_W1275.txt | W1275 | 本批配套改动 |
+| scripts/output/_vermilion_solid_cache.json | W1275 | 本批配套改动 |
+| scripts/output/_w1266_allrender.json | W1275 | 本批配套改动 |
+| scripts/output/_w1275_spec.json | W1275 | 本批配套改动 |
+| scripts/output/chart-legend-render-audit.json | W1275 | 本批配套改动 |
+| scripts/output/file-index.md | W1275 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1275 | 本批配套改动 |
+| scripts/output/stats-index.md | W1275 | 本批配套改动 |
+| scripts/output/stats.json | W1275 | 本批配套改动 |
+| scripts/output/tools-inventory.md | W1275 | 本批配套改动 |
+| scripts/relink_public_css.py | W1275 | 公共层索引与传播端同源（strip_comments）+ 残留标记清除 |
+| site/data/cross-time-danmaku.html | W1275 | 本批配套改动 |
+| site/data/search-index-zh.js | W1275 | 本批配套改动 |
+| site/data/tag-cloud.html | W1275 | 本批配套改动 |
+| site/dukou-engine.html | W1275 | 本批配套改动 |
+| site/en/search-index-en.js | W1275 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/index.html | W1275 | 本批配套改动 |
+| site/reader/themes/八十一难专题.html | W1275 | 外链页残留内联标记清除（形态同源） |
+| site/rss.xml | W1275 | 本批配套改动 |
+| tests/unit/INDEX.md | W1275 | 本批配套改动 |
+| tests/unit/README.md | W1275 | 本批配套改动 |
+| tests/unit/test_w1275_relink_persist.py | W1275 | 本批回归锁 5 例 |
+
+
 ## W1274 A 方案样板验证批（2026-11-18）
 
 | 文件 | W | 说明 |

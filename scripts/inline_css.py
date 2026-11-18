@@ -87,7 +87,10 @@ def process(path, force, dry, inline_links=False):
     # W1022 修：原判据只在 `force` 分支生效 ⇒ **裸跑无参**（照 docstring「内联所有未处理
     # 页面」）会一次把 526 个外链页全转内联（审查 P2-1 实测 inlined 526）——护栏必须
     # 覆盖默认路径，否则防的是 `--force` 而漏的是更常见的裸命令。
-    if not already and not inline_links:
+    # W1275：外链形态优先——已外链页（公共层 link 在位）即便残留 INLINED 标记，
+    # 也不得被 --force 重新内联（那会把 A 方案的外链化回退成内联副本，且无任何报错）。
+    # 显式 --inline-links 仍可强制转内联（W895 护栏语义不变）。
+    if (has_tokens_link or has_system_link) and not inline_links:
         return "skip-external"
     if already and force:
         # 移除旧内联块（从标记注释到对应 </style>）。

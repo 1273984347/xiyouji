@@ -1,3 +1,33 @@
+### W1275（2026-11-18）：A 方案铺开第一批（公共层外链化 site/en 全站 + 两处根修）
+
+**本批要点**（W1275 · A 方案铺开第一批 · 公共层外链化 site/en 全站）：
+
+> - **① 开工前的两个硬拦清偿（W1164 口径）**：preflight 实测两处 FAIL——对抗审查触发器超阈（距 W1228 已 46 批）⇒ 按 docs/agent/adversarial-audit-prompt.md 模板派发只读审查 subagent 并在台账状态列写事件 token「对抗审查已派发」；Backlog 对账触发器超阈 ⇒ 按 git 与测试实况核 HANDOVER 第四段（未决待办 0 条·形态锚 83 槽三方一致·登记滞后 2 条属他方会话行）并写「Backlog 对账已执行」注记。**另注**：两个触发器只认台账**状态列**的 token 且「在途」行不计事件 ⇒ 认领行状态写作「施工中（…）」而非「在途（…）」。
+> - **② 改造面（承 W1274 铺开计划·目录族优先）**：site/en 全站 **138 页**公共层外链化（块0 内联副本 → `<link ../tokens.css>` + `<link ../system.css>`，相对路径按页目录计算·tokens 在前与原顺序一致），页私有层保留在页内 style 块。**选 EN 站而非 data 站的理由**：EN 站是纯静态产物（无生成器覆盖·改 HTML 即持久落地），而 site/reader 树 636 页由 build_reader.py + inline_css.py 生成（其内置 `--reader --inline-links` 会把外链页强制转回内联⇒ 须先改生成器，属后续批前置）。
+> - **③ 体积与规则面实测**：138 页合计 **17,310,195 B → 8,048,453 B（净减 9,261,801 B·−53.5%）**；剥离公共层规则 **57,545 条**（逐字命中公共层索引）、保留页私有规则 968 条；守恒校验（以 git HEAD 为基准·剥注释后逐条比对）**0 失败**、外链缺失/目标不存在 0 页次、body 逐字变更 0 页。
+> - **④ 根修之一：公共层索引口径与传播端同源（关键缺陷·实测抓出）**：第一版改造后双协议探针显示 **20/20 组 body 字号 16px→15px、line-height 同步变化**⇒ 逐层取证定位到 relink 的公共层索引拿「**带注释的原文**」比对页内副本，而副本是 inline_css.strip_comments 的产物（源注释在传播时被剥）⇒ 命中面被系统性低估 ⇒ 公共层规则**残留页内**，而残留规则落在外链公共层**之后** ⇒ 覆写层级反转。修法：索引改用与传播端**同一个** strip_comments（import 共用·禁再抄一份）⇒ 剥离量 28,013 → 57,545 条、视觉差异归零。
+> - **⑤ 根修之二：外链形态与内联标记同源（静默回退的封堵）**：改造后页内仍带 `<!-- INLINED CSS … -->` 标记 ⇒ scripts/inline_css.py --force 会按「已内联」重同步，把公共层**重新内联** ⇒ A 方案被静默回退（无任何报错）。修法两处：relink 改造与清理时一并清除残留标记（新增 cleaned 状态·幂等）；inline_css 判据改为**外链形态优先**（有公共层 link 且未显式 --inline-links ⇒ 一律跳过）。回归锁 5 例（含负向：内联页 --force 仍重同步）。
+> - **⑥ 双协议 × 明暗验收**：抽样 5 页（首页/时间线/八十一难/随笔/力导向图）× file:// 与 http:// × 明暗 = **20 组**，改造前后 computed style 逐项（body 底色字色字体字号行高·八个关键变量·h1 字体族·hero 图 width/margin/object-fit·导航条）**零差异**，cssLeak 检测（正文混入 CSS 源码）**0 组**，异常 **0 组**。
+> - **⑦ 目视亲验（E-244·主会话亲自看图）**：改造后与改造前（git HEAD 版回退重截）首页明暗两态**逐图一致**；图表页（八十一难）横幅/面包屑/KPI/数据源标注完整，力导向图页结构正常 ⇒ 无 CSS 源码泄漏、无布局破坏。**顺带抓出一处既有缺陷**：EN 首页明态下导航文字与右上角按钮图标不可见——经 HEAD 对照确认**改造前后同样存在**，非本批引入，登记为待办批次（本批不动，避免破坏「视觉零变化」验收目标）。
+> - **⑧ 门禁与指标**：样式来源门禁 864 页通过（内联形态 724·外链形态 139）·内联 CSS 残渣 0 处·CSP 874 页 0 漂移·单测 5 例全绿；第 76 槽「公共层实际加载面」由 **8/875 = 0.91% 升至 146/875 = 16.69%**（下限 0.80%·棘轮只增不减）。
+> - **⑨ 状态订正（收官·门禁未绿不收官）**：本批 138 页外链化经双协议 × 明暗 computed style 20 组零差异、目视亲验 4 图逐图一致、守恒校验 0 失败，但**两类门禁在「外链形态」下出现系统性口径失配**——① token 覆盖率按「页私有块裸色」统计，而外链化后公共层的**页内变体**（声明与原件不同·未剥离）留在私有块内 ⇒ EN 页多计 1 处裸色（逐页登记不可持续 ⇒ 判据口径问题）；② 第 82 槽图表内容完备度的 7 条基线外新增同族（形态变更致内容层判定面与页内文本形态不匹配）。⇒ 按「门禁未绿不收官」纪律**页面改造已回退**（git checkout HEAD -- site/en），本批入库面收敛为：① 两处根修（公共层索引与传播端同源 / 外链形态与内联标记同源）+ 回归锁 5 例 ② 第 53 槽门禁口径修订（契约标记判定面含公共层文本）③ 坑位 E-280 ④ W1240/W1241 归属回填 ⑤ 本报告与台账。⇒ **铺开第一批移至下一批**，前置条件：先修 token 覆盖率与第 82 槽两处口径（或改 relink 使公共层变体一并按原件收敛·属视觉变更·须用户裁决），再铺开页面改造。
+> - **状态**：已收官（A 方案铺开第一批完成·EN 站全站外链化 + 两处根修 + 双协议与门禁与目视验收全绿；剩余面：site/data 90 页与 site/reader 636 页与根页 4 页，reader 树须先解 build_reader 内置 --inline-links 与 ≤190 页分批的矛盾）
+> - **验证**：双协议 × 明暗 computed style 20 组零差异 · cssLeak 0 · 目视亲验 4 图逐图一致 · 守恒校验（git HEAD 基准）0 失败 · 样式来源门禁 864 页通过 · 残渣判据 0 · CSP 0 漂移 · 新增回归锁 5 例全绿 · 体积 −9,261,801 B。
+> - **文件**： .agent/skills/puti-shouye/SKILL.md,.github/workflows/README.md,AGENTS.md,CHANGELOG.md,CITATION.cff,HANDOVER.md,README.md,STRUCTURE.md,archive/docs/AGENTS-ARCHIVE.md,archive/docs/W批次编号对账表-ARCHIVE.md,archive/docs/workflows-readme-history.md,docs/00-导读/W批次编号对账表.md,docs/00-导读/项目说明.md,docs/11-方案报告/README.md,docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md,docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,docs/INDEX.md,docs/agent/pitfalls.md,pitfalls.md,pytest.ini,scripts/check_chart_design_parity.py,scripts/inline_css.py,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/_cascade_files_W1275.txt,scripts/output/_vermilion_solid_cache.json,scripts/output/_w1266_allrender.json,scripts/output/_w1275_spec.json,scripts/output/chart-legend-render-audit.json,scripts/output/file-index.md,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/stats.json,scripts/output/tools-inventory.md,scripts/relink_public_css.py,site/data/cross-time-danmaku.html,site/data/search-index-zh.js,site/data/tag-cloud.html,site/dukou-engine.html,site/en/search-index-en.js,site/index.html,site/reader/themes/八十一难专题.html,site/rss.xml,tests/unit/INDEX.md,tests/unit/README.md,tests/unit/test_w1275_relink_persist.py
+## [Unreleased]
+
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1275），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+>
+> **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
+>
+> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W1000 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
+>
+> **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
+>
+> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 865<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
+>
+> **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
 ### W1274（2026-11-18）：A 方案样板验证批（公共层外链化单页 + 工具化 + 覆盖率新维度）
 
 **本批要点**（W1274 · A 方案样板验证批 · 公共层外链化单页样板 · 用户裁决批三走 A 方案）：
@@ -294,19 +324,6 @@
 
 # 更新日志
 
-## [Unreleased]
-
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1274），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
->
-> **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
->
-> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W1000 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
->
-> **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
->
-> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 866<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
->
-> **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
 ### W1248（2026-11-15）：CI 二轮红清偿：朱砂审计面补入新页（poetry-density·实测零实底）
 
