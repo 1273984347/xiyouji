@@ -1,3 +1,15 @@
+### W1278（2026-11-19）：pitfalls/AGENTS 瘦身批（二层化 + 摘要化 + 74 槽挂窗）
+
+**本批要点**（W1278 · pitfalls/AGENTS 瘦身批·用户点名「现在做」）：
+
+> - **① pitfalls 二层化（保守切法·零内容丢失）**：正本每条保留「标题＋实证锚＋根因首句＋纪律块全量」，叙事/实证/取证细节迁 [archive/docs/pitfalls-detail-ARCHIVE.md](../../archive/docs/pitfalls-detail-ARCHIVE.md)（#### E-NN 锚·只增不改）⇒ **407.6 → 284.8 KB（-30%）**，两遍拆分 221+15 条归档；grep E-NN 双命中（正本得判据·归档得全文）；**计数链/唯一性零变化**（条目行形态保持·379 条与 54 槽全绿）。
+> - **② AGENTS 摘要化**：§4.2 83 槽压成「N. **名**（首两段锚）→ gates.md」（80 条·槽号与 C3/41 槽口径不动）＋ §6 铁律 10 条长文压一句版（细节归 RULES/pitfalls）⇒ **48.2 → 31.8 KB（-34%）**；RULES.md 索引层不动（指针目标 §6-N 编号稳定）。
+> - **③ 74 槽挂窗（用户批准）**：BYTE_CAPS 新增 pitfalls.md ≤300000 字节 / AGENTS.md ≤34000 字节（瘦身后现值+余量·防回涨棘轮语义）；evaluate_sizes 扩 per-file cap（BYTE_CAPS 未测量跳过不与 fail-closed 混判·自测兼容）；gates.md 74 槽定义同步。
+> - **④ 盘点自纠**：workflow 收紧初判「fuzz/lint 无过滤」系 grep 片段误读——两文件自带 paths（W1068/W1197 既判）⇒ 实际只禁用三条死触发（⑧ W1277·ci-sim/dependency-review/stale）。
+> - **状态**：已收官（瘦身上库·挂窗生效·检索锚零丢失）
+> - **验证**：54 槽 0 FAIL；31 槽 C5e/C5d 双绿（条目数 379 不变）；verify --scope docs 核心全绿；74 槽 0 FAIL（新窗生效·21 单测过）；pitfalls/归档 E-NN 双向 grep 实测。
+> - **文件**：pitfalls.md,archive/docs/pitfalls-detail-ARCHIVE.md,AGENTS.md,docs/00-导读/W批次编号对账表.md,scripts/check_doc_size_budget.py,docs/agent/gates.md,CHANGELOG.md,scripts/output/file-index.md,README.md,STRUCTURE.md,docs/00-导读/项目说明.md,CITATION.cff,.github/workflows/README.md,site/index.html,scripts/output/_w1278_spec.json,scripts/output/_cascade_files_W1278.txt,scripts/output/stats.json,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/tools-inventory.md,site/data/search-index-zh.js,site/en/search-index-en.js,docs/INDEX.md,scripts/INDEX.md,HANDOVER.md,site/rss.xml,archive/docs/INDEX.md,archive/docs/README.md,scripts/output/INDEX.md,scripts/output/README.md
+
 ### W1277（2026-11-19）：判据修补与验证缓存批（对抗审查 P3 五项根修 + verify 回放缓存）
 
 **本批要点**（W1277 · 判据修补与验证缓存批）：
@@ -25,7 +37,7 @@
 > - **文件**： .agent/skills/puti-shouye/SKILL.md,.github/workflows/README.md,AGENTS.md,CHANGELOG.md,CITATION.cff,HANDOVER.md,README.md,STRUCTURE.md,archive/docs/AGENTS-ARCHIVE.md,archive/docs/workflows-readme-history.md,docs/00-导读/W批次编号对账表.md,docs/00-导读/项目说明.md,docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,docs/agent/pitfalls.md,pitfalls.md,pytest.ini,scripts/check_token_coverage.py,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/_cascade_files_W1276.txt,scripts/output/_vermilion_solid_cache.json,scripts/output/_w1266_allrender.json,scripts/output/_w1276_spec.json,scripts/output/chart-legend-render-audit.json,scripts/output/file-index.md,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/stats.json,scripts/output/tools-inventory.md,site/data/cross-time-danmaku.html,site/data/search-index-zh.js,site/data/tag-cloud.html,site/dukou-engine.html,site/en/search-index-en.js,site/index.html,site/rss.xml,tests/unit/INDEX.md,tests/unit/README.md,tests/unit/test_w1276_token_scope.py
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1277），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1278），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -1,3 +1,39 @@
+## W1278 pitfalls/AGENTS 瘦身批（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| pitfalls.md | W1278 | 二层化正本（407.6→284.8KB·判据+纪律留正本） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1278 | 叙事/实证细节归档（#### E-NN 锚·221+15 条·新建） |
+| AGENTS.md | W1278 | §4.2/§6 摘要化（48.2→31.8KB）+ 脚注 W1278 条目 |
+| docs/00-导读/W批次编号对账表.md | W1278 | W1278 认领行 |
+| scripts/check_doc_size_budget.py | W1278 | 74 槽 BYTE_CAPS 挂窗（pitfalls/AGENTS）+ evaluate_sizes per-file cap |
+| docs/agent/gates.md | W1278 | 74 槽定义同步挂窗说明 |
+| CHANGELOG.md | W1278 | W1278 落段 |
+| scripts/output/file-index.md | W1278 | file-index W1278 段 |
+| README.md | W1278 | 版本面推进 |
+| STRUCTURE.md | W1278 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1278 | 版本面推进 |
+| CITATION.cff | W1278 | 版本面推进 |
+| .github/workflows/README.md | W1278 | 版本面推进 |
+| site/index.html | W1278 | 页脚批次链 W1278 前插 |
+| scripts/output/_w1278_spec.json | W1278 | 本批 spec |
+| scripts/output/_cascade_files_W1278.txt | W1278 | 手工级联清单 |
+| scripts/output/stats.json | W1278 | stats 刷新 |
+| scripts/output/stats-changelog.json | W1278 | stats 变更史 |
+| scripts/output/stats-index.md | W1278 | stats 反向索引 |
+| scripts/output/tools-inventory.md | W1278 | 工具清单跟随 |
+| site/data/search-index-zh.js | W1278 | 搜索索引重建 |
+| site/en/search-index-en.js | W1278 | 搜索索引重建 |
+| docs/INDEX.md | W1278 | 文档索引刷新 |
+| scripts/INDEX.md | W1278 | 脚本索引刷新 |
+| HANDOVER.md | W1278 | 进度 bullet 移链首 + 更新链（裁 3）+ 里程碑滚动 |
+| site/rss.xml | W1278 | RSS 产物新鲜度跟随 |
+| archive/docs/INDEX.md | W1278 | 归档目录文档 refresh（新收 pitfalls-detail-ARCHIVE） |
+| archive/docs/README.md | W1278 | 归档目录 README refresh |
+| scripts/output/INDEX.md | W1278 | 产物索引 refresh |
+| scripts/output/README.md | W1278 | 产物 README refresh |
+
+
 ## W1277 判据修补与验证缓存批（2026-11-19）
 
 | 文件 | W | 说明 |

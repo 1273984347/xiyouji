@@ -128,7 +128,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 15. **INLINED CSS 完整性**
 
 **数据与一致性类（16-26）**：
-16. **Skills 索引一致性**（W562 退役·编号保留——gates.md 已注明·摘要侧补记 W1154）
+16. **Skills 索引一致性**（W562 退役·编号保留——gates.md 已注明）→ gates.md
 17. **索引健康**
 18. **元信息块 v2**
 19. **术语一致性**
@@ -157,45 +157,45 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 40. **chapter_stats 双源同步**
 41. **AGENTS 分层完整性**
 42. **根级脚本覆盖**
-43. **可视化数据断言**（check_chart_values.js·W753）
-44. **英文站 CJK 校验**（validate_en.py·W768）
-45. **目录文档新鲜度**（check_folder_docs.py·W780）
-46. **搜索索引新鲜度**（check_search_index_fresh.py·W809）
-47. **性能影子槽**（check_perf_shadow.py·W849·影子模式不判红）
-48. **计划方案合规槽**（check_plan_template.py·W860·增量口径·只判本次变更引入的新缺项）
-49. **朱砂实底限额**（check_vermilion_solid.js·W883·v4 规格 §3.2 阶段 5 落地·浏览器计算样式实测·每页非豁免 >3 处 FAIL·豁免读 _w864_accent_exemptions.json·增量缓存按页 hash）
-50. **GSAP 动效写法槽**（check_gsap_motion.py·W961·site/static/js/ 自有 JS 动效判据——时长 ≤600ms/缓动白名单/禁大角度旋转与无限循环/只动 transform+opacity·J2 宪法级禁词不可豁免）
-51. **提交范围槽**（check_commit_scope.py·W1007·代提三次同一处方）——归属批次取索引态 CHANGELOG 顶段（新增段=本批，否则 HEAD 现役段=回填），该批 `scripts/output/_w####_spec.json` 的 `file_index_rows` 即应动全集；索引态路径集多出即 FAIL（＝一份提交夹带他方在途件）。恒跑（_SCOPE_CORE·docs/site 提交也判）；无暂存件 NOTE 放行、spec 缺失 WARN 放行（不伪造红）。
-52. **仓库布局槽**（check_repo_layout.py·W1011·「整理分类」的长期形态）——L1 根目录只放治理与配置（白名单 ROOT_FILES·出现未声明文件即 FAIL 并给去向）；L2 顶层目录必须已在 TOP_DIRS 与 STRUCTURE.md 声明角色；L3 声明了但磁盘不存在 ⇒ FAIL（防白名单陈腐）。判据按 **git 视角**（被 .gitignore 忽略的本地件不计）；毫秒级·登记 `_SCOPE_CORE` 恒跑。
-53. **图表中英对拍槽**（check_chart_design_parity.py·W1105）——chart-design 中英两版（site/data/chart-design.html 与 site/en/chart-design.html）逐键数值对拍：数值必须全等（非数值专名差异属本地化预期·只列不判红·单侧键即 FAIL）+ **强制契约标记中英齐平**（reduced-motion JS 守卫 `MOYUN_RM` / tooltip 统一类名 `chart-tooltip` / CSS 兜底 `prefers-reduced-motion`）——一侧缺标记即 FAIL（实证：EN 版缺 JS 守卫正是本槽抓出）。基础设施缺失（页面或 summary.json 不可读）按 fail-closed 退出码 2·不静默放过。
-54. **坑表编号唯一槽**（check_pitfall_id_unique.py·W1110）——坑表条目的 E-NN 编号是「按编号检索教训」的唯一键，但第 31 门禁只统计**条数**、不校验**编号唯一性** ⇒ 两批各占同一号时计数链五处全绿、CI 全绿，而检索静默取到错的那一条（W1109 收敛 16 组真重号后本槽成为常驻防线）。判据分层：**新增条目撞既有编号 ⇒ FAIL**（本批引入的）· 存量同号 ⇒ NOTE（不判红·避免存量拖死新批）· 条目本体口径（行首「- **」且含「（W#### 实证·E-NN）」⇒ 正文引用不算本体）。恒跑（任何提交都可能改坑表）。
-55. **PowerShell 解析槽**（check_powershell_parse.py·W1110）——仓内 `.ps1` 此前**零机器判据**：语法写坏只在运行时才报错 ⇒ pre-commit 守门链**静默失效**；且含非 ASCII 的 `.ps1` 缺 UTF-8 BOM 时 Windows PowerShell 5.1 的 `-File` 加载器回退 ANSI 代码页 ⇒ CJK 关键字**解析静默死亡**（E-68·而 pwsh 7 默认 UTF-8 ⇒ 本机跑得通 ≠ 5.1 跑得通）。两判据：C1 用官方 AST 解析器（`Parser::ParseFile`·只读不执行）逐文件解析，语法错误即 FAIL·解析器缺失按 fail-closed 退出码 2；C2 含非 ASCII 必须带 UTF-8 BOM（纯 ASCII 无 BOM 安全·不判红）。扫描域=tracked 的 `.ps1`（`archive/` 豁免）。
-56. **CSP 增量漂移槽**（check_csp_drift.py·W1110）——既有第 8 槽 `generate_csp.py --check` 是**全站**校验，不区分「谁改的」且无归因信息 ⇒ 存量漂移掩盖本批真问题、本批漂移被存量噪音淹没。增量口径：**交集判红**（本批改动页 ∩ CSP 漂移页 ≠ ∅ 即 FAIL）+ **merge-base 基点**逐段字节比对（只对本批碰过的内联段判漂移·CI 浅克隆无基点时退化为全段判·不漏判）+ **失败信息三要素**（漂移页 / 命中段标识 / 修复命令 `python scripts/generate_csp.py`）。
-57. **CSS 变量自引用槽**（check_css_var_selfref.py·W1110）——W1108 批把 chart-design 两页 INLINED 副本 `:root` 里的图表令牌定义改成「`--chart-1: var(--chart-1)`」**自引用** ⇒ 浏览器在 computed-value time 判为**无效值** ⇒ `getComputedStyle` 返回**空串** ⇒ 连带动使用它的 `--accent` 一并失效 ⇒ 图表主题色回落为黑/继承色（实测：改前 `--chart-1=#C8463A`·改后空串）。此类缺陷**全链无红灯**（CSP/结构/内联语法等门禁都不看 CSS 变量语义·页面照常渲染只是颜色不对）⇒ 机器判据缺位是根因。判据：扫 `site/**/*.html` 的全部 `<style>` 块 + `site/tokens.css`，任何 `--X: var(--X)` 同名自引用 ⇒ FAIL（带 fallback 的自引用仍判红·fallback 只在变量未定义时生效）。恒跑（毫秒级·与改动范围无关）。
-58. **动效守卫覆盖槽**（check_motion_guard.py·W1135）——站内 reduced-motion 契约（DESIGN.md §5.3）要求用户开启「减少动态效果」时 d3 图表的 `.duration()/.delay()` 必须归零，但既有门禁只清零**裸数字实参**（BARE）⇒ **表达式实参**（EXPR）未套守卫 ⇒ reduced-motion 用户仍会经历动效与延迟（机器判据缺位是根因）。判据：实参取宽口径（括号平衡扫描·窄口径正则会漏掉含嵌套括号的实参）后分档——GUARDED（实参含守卫变量 `MOYUN_RM` 或 `REDUCE_MOTION`·站内两种命名皆可）/ EXPR / BARE，GUARDED 之外一律判红；含调用点的页另须声明守卫变量。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；`--report` 只报不判红。
-59. **design 资产清单对拍槽**（check_design_asset_manifest.py·W1135）——`assets/design/` 目录文档声明过磁盘上不存在的文件，且代码块里的旧目录树整段指向已废弃的一次性工作区 ⇒ 清单失准只能靠人工发现。判据：条目取三来源并集（反引号条目 + 代码块目录树按**缩进栈**还原层级 + 命令形态路径条目）；**硬错**只判「声明存在但磁盘不存在」，外部引用 / 通配占位 / 枚举合并 / 仓库根引用四类降为 NOTE 不判红，「磁盘存在但未声明」只作 NOTE。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（fail-closed）；`--report` 只报不判红。
-60. **tooltip 多行间距槽**（check_tooltip_spacing.py·W1135）——W1105 批把 EN 站私有 `.tooltip{}` 盒样式收敛为规范 `.chart-tooltip`，但遗留 ZH 页的旧类名规则从未命中（死代码）⇒ tooltip 多行内容一直挤在一起。判据（运行层·playwright·file:// 直开·亮/暗双主题）：CSSOM 中命中规范规则 `.chart-tooltip div + div` + 第二行计算样式 `margin-top` == `--space-2` 解析值 + 旧死规则 `.tooltip div + div` 残留为零 + 双主题读数一致。退出码：0 = 通过 / 1 = 判红 / 2 = 基础设施缺失（playwright/浏览器不可用·fail-closed）；`--report` 只报不判红。
-61. **数据集溯源槽**（check_dataset_provenance.py·W1141）——dataset 必填字段 / 引用闭合 / 权重区间 / 引文精确性四类判据 + 两个数据集的专项校验（完整定义见 gates.md）。
-62. **reader 完整性**（check_reader_integrity.py·W1149）——`site/reader` 独立生成、此前无专属判据：C1 可见正文禁「（待补）/待完善/TODO」；C2 GitHub `blob|tree/main/<path>` 必须映射仓内真实文件；C3 内容页恰一个 h1（跳转页豁免）；C4 标题唯一。恒跑（扫全量 reader 页·秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 62 门禁 reader 完整性：N FAIL（扫描 N 页） ----`；自测 6 例；单测 `tests/unit/test_w1149_reader_dataset.py`。
-63. **数据集清单**（check_dataset_manifest.py·W1149）——dataset 快照层防退化：C1 README 行 ↔ 磁盘 ↔ 大小/条目数；C2 `_schema.weight_scale` 量纲与 sankey 端点索引；C3 `chapter/回目` 只允许 1–100 或 `null`+`chapter_scope`（禁 0 哨兵）；C4 空数组/null 必须有状态归类；C5 `deprecated` 必须有 note + 存在的 replacement_page。恒跑（读 46 JSON·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 63 门禁 数据集清单：N FAIL（扫描 N 文件） ----`；自测 6 例；单测同 62。
-64. **移动视口**（check_mobile_viewport.py·W1165）——375px/320px 触摸目标与内容可达性静态契约（A 层契约 7 项<!--doc-sync:exempt 契约数由 CONTRACT_IDS 派生的功能描述·非漂移值（原条目同款豁免随压缩保留）-->）+ 双视口探针报告采信（完整定义见 gates.md）。
-65. **导航一致性**（check_nav_parity.py·W1167）——audit-1 唯一 major（跨页主导航不一致）的判据化：主导航正本 `scripts/w1167_nav_inject.py` 全站分发后，「一致率 100%」不再靠人眼。判据四则（MARK 恰一次 / nav-item 文本序==正本 ZH·EN 六项 / aria-current ≤1 / 有 MARK 无结构=破损红）；判据**同源引用**正本模块不复制清单（W1120 引用不复制纪律）。恒跑（静态扫描·毫秒级·`_SCOPE_CORE`）；汇总行恒为 `---- 第 65 门禁 导航一致性：页面 N · 违规 M · OK|FAIL ----`；自测 5 例（含双高亮与结构剥壳负样本）；退出码 0/1/2（正本不可读=fail-closed）。
-66. **数据徽标**（check_data_badge_coverage.py·W1167）——三态徽标 100% 覆盖 + 读者语言判据化（MARK 恰一次 / data-status 分类 / ds-label 逐字，完整定义见 gates.md）。
-67. **统计事件契约**（check_stat_events.py·W1168）——删调用/改事件名/清单与代码漂移此前全链零红灯。清单正本 `scripts/output/_w1168_stat_events.json`（11 组 21 名）+ 判据六则：C1 slug 唯一 / C2 有清单必有落点（`file`·`files` 同等）/ C3-C4 源面与页面面反向对拍未登记名即红 / C5 metric 反向链（结构性要求·gitignore 件缺失只作 NOTE）/ C6 `runtime_layer` ∈ {bridge, goatcounter} 必填（探针按声明层取数，读错面即恒 0 假红）。恒跑·`_SCOPE_CORE`；汇总行形态同 65/66 槽；自测 10 例；运行面 `scripts/stat_event_probe.py`（P1-P7·手动跑）。
+43. **可视化数据断言**（check_chart_values.js·W753）→ gates.md
+44. **英文站 CJK 校验**（validate_en.py·W768）→ gates.md
+45. **目录文档新鲜度**（check_folder_docs.py·W780）→ gates.md
+46. **搜索索引新鲜度**（check_search_index_fresh.py·W809）→ gates.md
+47. **性能影子槽**（check_perf_shadow.py·W849）→ gates.md
+48. **计划方案合规槽**（check_plan_template.py·W860）→ gates.md
+49. **朱砂实底限额**（check_vermilion_solid.js·W883）→ gates.md
+50. **GSAP 动效写法槽**（check_gsap_motion.py·W961）→ gates.md
+51. **提交范围槽**（check_commit_scope.py·W1007）→ gates.md
+52. **仓库布局槽**（check_repo_layout.py·W1011）→ gates.md
+53. **图表中英对拍槽**（check_chart_design_parity.py·W1105）→ gates.md
+54. **坑表编号唯一槽**（check_pitfall_id_unique.py·W1110）→ gates.md
+55. **PowerShell 解析槽**（check_powershell_parse.py·W1110）→ gates.md
+56. **CSP 增量漂移槽**（check_csp_drift.py·W1110）→ gates.md
+57. **CSS 变量自引用槽**（check_css_var_selfref.py·W1110）→ gates.md
+58. **动效守卫覆盖槽**（check_motion_guard.py·W1135）→ gates.md
+59. **design 资产清单对拍槽**（check_design_asset_manifest.py·W1135）→ gates.md
+60. **tooltip 多行间距槽**（check_tooltip_spacing.py·W1135）→ gates.md
+61. **数据集溯源槽**（check_dataset_provenance.py·W1141）→ gates.md
+62. **reader 完整性**（check_reader_integrity.py·W1149）→ gates.md
+63. **数据集清单**（check_dataset_manifest.py·W1149）→ gates.md
+64. **移动视口**（check_mobile_viewport.py·W1165）→ gates.md
+65. **导航一致性**（check_nav_parity.py·W1167）→ gates.md
+66. **数据徽标**（check_data_badge_coverage.py·W1167）→ gates.md
+67. **统计事件契约**（check_stat_events.py·W1168）→ gates.md
 
-68. **dashboard KPI**（check_dashboard_kpi.py·W1170）——首页 KPI 卡片硬编码数与 stats.json 磁盘实算对拍（完整定义见 gates.md）。
-69. **模板结构契约**（check_template_contract.py·W1178）——模板与新页必须含四项完整标签串（类名/CSS 命中不算证据，完整定义见 gates.md）。
-70. **产物服务地址**（check_no_hardcoded_endpoint.py·W1208）——静态产物不得内嵌服务端地址（契约 C-8）：合法形态只有三种——构建期占位符 `__XIJ_SERVICE_BASE__` / 部署期已声明地址 / 开发者本机档显式标记；回环·内网地址与未声明裸域名一律判红。恒跑（扫产物面·秒级·完整定义见 gates.md）。
-71. **占位符哈希载体**（check_placeholder_hash_carrier.py·W1210）——构建期占位符不得落在内联 `<script>` 块（= CSP `script-src 'sha256-…'` 的哈希输入）或 `<script src>` 属性上，否则部署期替换即失配、整段脚本被浏览器拒执行（E-225 实证）；CSP 声明面 / 旁挂 meta / 外部 JS 为合法载体（完整定义见 gates.md）。
-72. **emoji 残留棘轮**（W1232）——静态残留只降不升基线棘轮，见 gates.md。
-73. **reader/RSS 产物新鲜度**（W1232）——产物提交 ≥ 输入变更（git 视角），见 gates.md。
-74. **治理文档体积窗口**（W1232·P2-4 升格）——体积/密度超窗阻断提交，见 gates.md。
-75. **明暗两态截图差异**（W1264·E-245 机器化）——两态截图须真不同（底色读数 + 字节数双校验），防「暗色图=亮色图」而探针全绿，见 gates.md。
-76. **公共层样式覆盖率**（W1264·样式治理棘轮）——公共层须管住 ≥11.8% 的页面样式（现役 113/953），低于则判红；未达目标 40% 仅提示并列出未覆盖高频类，见 gates.md。
-77. **视觉身份判据**（W1264·E-250 机器化）——统计全站通用色的暖承载/冷数据配比（现役暖承载 56.1%），防「正确但无身份」的视觉方向，见 gates.md。
-81. **W1265 新增四槽**（78=EN 数据源语言隔离 / 79=回退块保真度 / 80=SVG 文字对比度 / 81=页面引用闭合性；基线冻结 + `--strict` 零容忍），见 gates.md。
-82. **图表内容完备度**（W1266·内容层四项：来源标注/结论段/tooltip/图例；渲染级复核 + 页面哈希防绕过闸；存量 175 条·渲染级真缺口 129 条），见 gates.md。
-83. **SVG 标签裁切与重叠**（W1266·四向越界 + 同容器重叠·窄宽双口径并列·视窗基准 + 三基准并排），见 gates.md。
+68. **dashboard KPI**（check_dashboard_kpi.py·W1170）→ gates.md
+69. **模板结构契约**（check_template_contract.py·W1178）→ gates.md
+70. **产物服务地址**（check_no_hardcoded_endpoint.py·W1208）→ gates.md
+71. **占位符哈希载体**（check_placeholder_hash_carrier.py·W1210）→ gates.md
+72. **emoji 残留棘轮**（W1232）→ gates.md
+73. **reader/RSS 产物新鲜度**（W1232）→ gates.md
+74. **治理文档体积窗口**（W1232·P2-4 升格）→ gates.md
+75. **明暗两态截图差异**（W1264·E-245 机器化）→ gates.md
+76. **公共层样式覆盖率**（W1264·样式治理棘轮）→ gates.md
+77. **视觉身份判据**（W1264·E-250 机器化）→ gates.md
+81. **W1265 新增四槽**（78=EN 数据源语言隔离 / 79=回退块保真度 / 80=SVG 文字对比度 / 81=页面引用闭合性；基线冻结 + `--strict` 零容忍）→ gates.md
+82. **图表内容完备度**（W1266·内容层四项：来源标注/结论段/tooltip/图例；渲染级复核 + 页面哈希防绕过闸；存量 175 条）→ gates.md
+83. **SVG 标签裁切与重叠**（W1266·四向越界 + 同容器重叠）→ gates.md
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
@@ -299,28 +299,28 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 2. **E1 铁律（声明 ≠ 落地）**：每个文件修改后 Grep spot-check 验证落地，禁止假收敛。
 3. **改内联脚本 → 重跑 generate_csp.py**（CSP 哈希失配会整脚本被拒）。
 4. **批量改 CSS/JS → 验证括号/引号平衡**（check_structure.py）。
-5. **file:// 铁律**：新页面必须内嵌 EMBEDDED 回退、零外域依赖（D3/Three 本地引用 `site/static/js/`，禁 d3js.org/cdnjs 外域 CDN）。**具名例外**（W1167 G0-1 拍板·W1168 收敛为单轨·铁律 16⑦ 留痕）：唯一放行外域是 GoatCounter 回传域 `connect-src https://1273984347.goatcounter.com`；`script-src` 自 W1168 起再次为空集——GA4 轨退役（账号未建 + 大陆可达性差 + web vitals/自定义事件改由自托管链承载），统计改由自托管 `goatcounter.js` + `site/static/js/stats.js` 桥发起。例外全集唯一定义在 `scripts/generate_csp.py`（`EXTERNAL_SCRIPT_HOSTS`/`ANALYTICS_CONNECT_HOSTS`），与配置端点不一致由第 67 槽 C5 + 第 56 槽增量漂移拦下；例外之外任何外域仍为门禁违规。例外仅在线 http(s) 生效，`file://` 下统计桥短路、页面渲染零依赖统计。
+5. **file:// 铁律**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
 6. **新页落地**：可视化页进 site/data/、索引进 site/ 根 + tag-cloud + sitemap；禁往 site/chapters|characters|themes（空遗留目录）。
 7. **先取证再假设**：诊断前端显示问题，先拿截图 + Console + 复现条件，再下根因结论（见 docs/10-方法论沉淀/前端显示问题诊断SOP.md）。
 8. **禁止擅改**：CHANGELOG 历史段、归档 3 份、.env、SECURITY-AUDIT 档、verify_delivery.py、bump_version.py 等门禁脚本（详见文档规范 §11.2）。
 9. **禁重跑 w286_merge_yuanwen_shendu.py**（A1 深度解读 SD 编号会再次错位）。
 10. **批量重写脚本改完**：`git diff --name-only` 对比改动范围，非必要改动 `git restore` 回退。
 11. **双协议**：代码 MIT + 文本 CC BY-NC 4.0（非商用），拆分 LICENSE / LICENSE-CONTENT.md。
-12. **动效契约（W463 固化）**：新增/修改可视化页动效必须遵守 DESIGN.md §5——时长 ≤600ms（白名单仅 hero 600 / count-up 900）、reduced-motion JS 守卫（D3 transition 不受 CSS media 控制，须 `MOYUN_RM` 调用点级或 prototype 级短路）、tooltip 统一 `.chart-tooltip` + `.classed('visible')`；批量改动后重跑 generate_csp.py + duration≤600 扫描。
+12. **动效契约**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
 13. **内容可信度轨（W505-W508 固化）**：docs/01-06 新内容必须走元信息块 v2（第 18 门禁）+ 术语一致性（第 19 门禁）+ 引文硬验证（第 20 门禁）；引文须经 `_cite_probe.py` 提取候选（§4.3），管线产出须过 `_check_pipeline_consistency.py`；归档/删除脚本须同步查 tests/ 引用（W506 教训，见 day-review skill 步骤 4-6）。
 14. **修实例必修根（W998 固化）**：修复暴露同类风险时，同批或次批根治，禁止「值得排期/等点号」收尾（真需用户决策的仅限外发动作）；检查任务按委托字面范围执行；跨会话教训权威落坑表与本节，私有记忆仅作镜像（W516 载体铁则·治理季三次用户问责实证）。
-15. **禁止补丁加补丁，修复必须从根因（W1039 用户令）**：一个修法若只是「让当前报错消失」，而没消除产生它的结构性原因，就是补丁。四种典型形态——① **为迎合脆弱判据补数据/补标记**（而不是修判据本身）；② 在调用处加特例分支绕过；③ 用豁免/白名单把红灯压下去；④ 修完症状不追问「**为什么会被触发**」。正确顺序：先问「判据/机制为什么会被触发」→ **修判据或机制** → 再改数据；并把教训变成**机器判据**（硬守卫/断言/自测），使下批不可能再犯，而不是写进文档等人记住。**实证（W1019）**：为压体积剥离 CSS 注释后，门禁的「跳过 INLINED 副本」判据靠块内注释串识别而失效；第一版往副本里塞回人工识别行去迎合判据＝补丁；根因修法是把判据改为按 `<!-- INLINED CSS -->` 标记配对识别，两个消费者共用，并补 3 例回归锁。
-16. **协作与环境约束（W1039 六则 + I-01 增补⑦·违反即返工）**：① **不主动创建 automation**——须用户单独一句明确同意，「开始优化/都做」不等于批准。② **GPU 重负载须先获批并分批**——重计算前先征得同意，小批 + 冷却间隔，禁连续挂满。③ **禁用 `~/.minimax/` 任何内容**——判断工具是否安装用项目面证据（import 测试 / 仓内文件 / 会话内工具清单）替代枚举 profile 目录。④ **给用户复制粘贴的命令与路径必须完整**，禁 `...` 缩写——多行命令给整块代码块并标注「整行替换」或「插入到第 N 行之后」。⑤ **涉及「选哪个 / 怎么做」的答复必须显式给推荐**——先给推荐与一句话理由，再给备选与代价，不以「看你定」结尾。⑥ **有复用价值的教训，项目内必须留载体**——只写进 AI 记忆＝未落地；判定＝另一会话/Agent/接手者能在项目内检索到。⑦ **豁免/白名单/基线新增条目必须用户批准**——豁免只增不减为默认，纠正误判类须 CHANGELOG 决策记录留痕；存量对账走 stats.json 两键与触发器 T4。
-17. **开批先预约号（W1041 立·reserve_w.py）**：并行会话共享同一工作树时，台账是「事后登记」——两会话各自从自己看到的台账 max 取号必撞（2026-10-30 实战撞 W1039，后由并行会话续占 W1040、本批顺延 W1041）。开批第一步必须跑 `python scripts/reserve_w.py` 占号，stdout 即本批 W 号；**未占号不动手**。candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1，写入 `tmpe/_w_reservations.json`（24h TTL 防占而不交，收官后 `release <W号>` 释放）。注意：仅同一工作树内有效；不同 clone 不共享该文件，仍靠 git log + 台账兜底。
-18. **提交前三问自检（W1056 立·用户令）**：每笔提交（含回填/扫尾小笔）前必须自答三问并把结论落到收官材料（CHANGELOG 验证栏或台账备注），不通过不得提交——钩子在门禁绿后强制弹出：① 本批过程中遇到的问题是否全部在本批内解决或登记去向（无「顺手跳过」）；② 同类问题是否会再次犯错——防复发机器判据/坑表条目是否已落地（无判据的教训＝未解决）；③ 本项目是多 Agent 协作，其他 Agent 能否从项目内文件（AGENTS/CHANGELOG/pitfalls/台账）了解本批全部决策与遗留——**凡写入私有记忆文件的教训必须同步落仓**（16-⑥ 载体铁则的提交时机强化）。
+15. **禁止补丁加补丁，修复必须从根因**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
+16. **协作与环境约束**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
+17. **开批先预约号**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
+18. **提交前三问自检**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
 19. **禁用 CodeBuddy/WorkBuddy（W1061 入必载层·用户 2026-10-07 两度重申·此前仅存私有记忆=三问 ③ 违规实例）**：项目一切 AI 功能不使用 CodeBuddy/WorkBuddy 及其任何残留；agent-web 的三选一裁决=保留但换引擎（OpenAI-compatible 自研·W680 收官/W681 事实收官）。任何会话不得引入、恢复或仿建该品牌工具链。
 
 20. **Python 改动结构检查（W1077 立·用户令）**：改动 .py 后必须跑 `pwsh -File scripts/guardrails/check_changed.ps1`（ruff 风格档/结构档/嵌套推导式，退出码 0 才过；`api_diff.py` 报破坏性变化须在提交说明写明）；阈值与收紧路线见 docs/agent-guardrails/README.md；新增阈值/豁免须按 16-⑦ 报批。
-21. **CI 推送节奏（当日一 PR 一 push·W1129 修订·取代 W1118「一批一 PR」口径）**：① **回填与订正类改动永不单独开 PR**（台账回填 / 数字订正 / 复盘补记 / 口径修正）⇒ 并入**下一次在途批**的 PR；② **同一会话当日多批合并进同一 PR**（批次号仍各自登记），当日该会话只开一个 PR；③ 跨会话仍各自开 PR（不牺牲并行度），第①条对所有会话生效；④ 收官链产物必须在**提交前**生成完毕，一次 add + 一次 commit + 一次 push，禁「先提交再补产物」。**依据**：用户 2026-11-04 裁定（T78 报告 §3.2）⇒ **PR 数是 job 数的乘数**。**配套**：多批同 PR 时第 51 槽归属取各批 spec 并集，已实现。判据：提交前 git status 不得残留未暂存的生成产物。
-22. **治理文档体积上限与批量归档（W1119）**：CHANGELOG.md 与 file-index.md 正本各 **<= 262144 字节（256KiB）**；台账正本 **<= 60 数据行** 且 **<= 262144 字节**（先到者为准）。**仅超阈值才搬**；每次搬**最老 50 段**（W 段号优先序）；**两面须迁到同一 W 号下界**；正文至少保留最近二十个批次段。超窗处置优先序（W1142 定形）：① **段行压缩**（单一原语 `batch_spec.fi_group_rows`·阈值 200 行·spec 恒全量不受体积窗管）；② **归档搬段**（两面同下界·迁后剩余段 <20 即禁搬）；③ 仍超限方拆批。工具 = scripts/archive_segments.py；收官链已内置腾窗步（**置于 precheck 之前**，W1117 实证）。
-23. **异常分类必须与失败语义对齐（W1121 立·E-161）**：新增的「检查/保护」逻辑若被宽 `except Exception` 包住并 `return True`，则缺陷路径与正常路径**同样成功**⇒ 零红灯且可持续数周（实测：腾窗步漏 `import io` ⇒ NameError 被吞 ⇒ 台账行窗口判定**从未真正触发**）⇒ 依赖缺失走 ImportError、文件不可读走 OSError，**代码缺陷类（NameError/TypeError/AttributeError）直接抛出**，宁可整链中止；且每条新增保护逻辑必须配一条「它真的生效」的正向证据（单测/自检）。
+21. **CI 推送节奏**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
+22. **治理文档体积上限与批量归档**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
+23. **异常分类必须与失败语义对齐**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
 
-24. **并行会话必须工作树隔离（W1124 立·三方共用工作树实证）**：本仓的级联/收官链会**整面重写** HANDOVER / CHANGELOG / AGENTS / SKILL / 坑表 / 台账 ⇒ 多个会话**共用同一工作树**时，一方跑链即覆盖另两方未提交改动；计数类面会按「含他方条目的中间态」算出漂移值（本次实测：坑表流程节标题被算成 138 而真值为 135）；一方整文件 `git add` 即**代提**他方改动 ⇒ 违反禁代提纪律。**纪律**：并行会话各自 `git worktree add <独立路径> -b <独立分支> <基线>`（或独立克隆）⇒ worktree 共享 `.git` 故**分支名不可重名**；迁出后必须**精确回滚**自己在共享树里的残留（按自己条目的唯一前缀匹配，禁整文件覆盖以免反吃他方并发改动）；迁出与回滚须**书面告知其余会话**并给出「正确计数基线」，避免他方按中间态校准。（W1157 去重：原第 25 条与本条完全同文双写，系 W1124 入载事故——删重复尾条不改号。）
+24. **并行会话必须工作树隔离**——规则一句版与判据细节归 RULES.md / pitfalls.md 对应条目（本层只留标题检索锚）
 
 ---
 
@@ -352,4 +352,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1271-W1271 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-18（W1272）：台账回填三缺陷根修（首笔语义倒置 / 列位错位 / 认领行形态）+ 脚注尾锚点契约同源 + 上一批收官尾段闭合；2026-11-18（W1273）：公共层归并铺开 + 内联 CSS 残渣判据 + 批三范围建议；2026-11-18（W1274）：公共层外链化样板 + 外链化工具 + 覆盖率实际加载面新维度 + 铺开计划；2026-11-18（W1275）：公共层外链化 site/en 全站 138 页 + 索引口径同源 + 外链形态优先；2026-11-18（W1276）：公共层外链化铺开第一批 site/en 全站 138 页 + 两处门禁口径修订。；2026-11-19（W1277）：对抗审查 P3 五项根修 + verify 回放缓存（同树免重跑全量）+ 83 基线重生成。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1271-W1271 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-18（W1272）：台账回填三缺陷根修（首笔语义倒置 / 列位错位 / 认领行形态）+ 脚注尾锚点契约同源 + 上一批收官尾段闭合；2026-11-18（W1273）：公共层归并铺开 + 内联 CSS 残渣判据 + 批三范围建议；2026-11-18（W1274）：公共层外链化样板 + 外链化工具 + 覆盖率实际加载面新维度 + 铺开计划；2026-11-18（W1275）：公共层外链化 site/en 全站 138 页 + 索引口径同源 + 外链形态优先；2026-11-18（W1276）：公共层外链化铺开第一批 site/en 全站 138 页 + 两处门禁口径修订。；2026-11-19（W1277）：对抗审查 P3 五项根修 + verify 回放缓存（同树免重跑全量）+ 83 基线重生成。；2026-11-19（W1278）：pitfalls 二层化（407.6→284.8KB·221+15 条归档）+ AGENTS 摘要化（48.2→31.8KB）+ 74 槽挂窗。如与上述权威文档冲突，以权威文档为准。*

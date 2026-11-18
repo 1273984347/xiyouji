@@ -16,7 +16,7 @@
 - `w550-shot-review/`
 - `复盘报告/`
 
-## 文件（16）
+## 文件（17）
 
 ### Markdown 文档
 
@@ -32,6 +32,7 @@
 - `file-index-ARCHIVE-tier2-W335-W979.md`
 - `file-index-ARCHIVE-tier2.md`
 - `file-index-ARCHIVE.md`
+- `pitfalls-detail-ARCHIVE.md`
 - `w-b-critique.md`
 - `workflows-readme-history.md`
 - `可视化测试计划-十七维叙事学图谱.md`

@@ -100,6 +100,14 @@ WINDOWS = {
     os.path.join("docs", "00-导读", "W批次编号对账表.md"): (
         LEDGER_WINDOW if LEDGER_WINDOW is not None else 60),
 }
+# W1278 瘦身治理挂窗（用户批准挂载）：pitfalls/AGENTS 独立字节上限
+# （瘦身后现值棘轮·防回涨——本批 pitfalls 二层化 407.6→284.8KB、AGENTS §4.2/§6 摘要化 48.2→31.8KB 后挂窗）
+BYTE_CAPS = {
+    os.path.join("pitfalls.md"): 300000,
+    os.path.join("AGENTS.md"): 34000,
+}
+
+
 REPORT_FILES = WINDOWS | {
     os.path.join("AGENTS.md"): None,
     os.path.join("HANDOVER.md"): None,
@@ -153,25 +161,38 @@ def evaluate_sizes(sizes):
         return ["体积窗口 C8: 同源常量不可用（batch_closeout 引用失败：%s）"
                 "——体积第二阈值不可执行（fail-closed·须修引用后方可放行）" % _SAME_SOURCE_ERR]
     fails = []
-    for rel in WINDOWS:
+    # W1278 瘦身治理挂窗：pitfalls/AGENTS 独立字节上限（瘦身后现值棘轮·防回涨）
+    #   ——BYTE_CAPS 文件未进 sizes（自测注入形态）⇒ 视为未测量跳过（不与 fail-closed 混判）；
+    #   实盘取数面 _collect_sizes 已同时采集。
+    cap_map = {rel: MAX_DOC_BYTES for rel in WINDOWS}
+    cap_map.update({rel: cap for rel, cap in BYTE_CAPS.items()})
+    for rel, cap in cap_map.items():
         n = sizes.get(rel)
         if n is None:
             n = sizes.get(rel.replace("\\", "/"))
         if n is None:
-            fails.append("体积窗口 C8: %s 体积不可读（fail-closed）" % rel)
-        elif n > MAX_DOC_BYTES:
-            fails.append(
-                "体积窗口 C8: %s 正本 %d 字节 > 体积上限 %d 字节"
-                "——先跑 scripts/archive_segments.py --target both --max-bytes %d --chunk 50 --apply"
-                "归档腾窗（文档规范 §8·W1120 双阈值）"
-                % (rel, n, MAX_DOC_BYTES, MAX_DOC_BYTES))
+            if rel not in BYTE_CAPS:
+                fails.append("体积窗口 C8: %s 体积不可读（fail-closed）" % rel)
+            continue
+        if n > cap:
+            if rel in BYTE_CAPS:
+                fails.append(
+                    "体积窗口 C8: %s 正本 %d 字节 > W1278 挂载上限 %d 字节"
+                    "——pitfalls 二层化 / AGENTS 摘要化的瘦身续批纠偏（W1278 挂载窗棘轮）"
+                    % (rel, n, cap))
+            else:
+                fails.append(
+                    "体积窗口 C8: %s 正本 %d 字节 > 体积上限 %d 字节"
+                    "——先跑 scripts/archive_segments.py --target both --max-bytes %d --chunk 50 --apply"
+                    "归档腾窗（文档规范 §8·W1120 双阈值）"
+                    % (rel, n, MAX_DOC_BYTES, MAX_DOC_BYTES))
     return fails
 
 
 def _collect_sizes():
     """实盘取正本体积字节数 → (sizes, 报告行)。读失败 ⇒ 键缺失 ⇒ 交 evaluate_sizes 判红。"""
     sizes, lines = {}, []
-    for rel in WINDOWS:
+    for rel in list(WINDOWS) + list(BYTE_CAPS):
         try:
             with open(os.path.join(ROOT, rel), "rb") as f:
                 data = f.read()

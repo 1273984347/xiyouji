@@ -244,6 +244,7 @@ w1167_nav_inject --apply（重建洗掉导航正本的流水线缺口·第 65 �
 用户令开工即批。判据本体（体积阈值 262144B / 段行密度 200 行 / C7 概要块 / HANDOVER 窗口）此前只在
 preflight 提示位（WARN 不阻断）；升格 verify 槽后体积超窗/密度超限阻断提交。汇总行恒为
 `---- 第 74 门禁 治理文档体积窗口：N FAIL（窗口 …）----`。
+**W1278 挂窗扩展**：BYTE_CAPS 新增 pitfalls.md ≤300000 字节 / AGENTS.md ≤34000 字节（pitfalls 二层化 407.6→284.8KB / AGENTS 摘要化 48.2→31.8KB 后的现值棘轮·防回涨；per-file cap·BYTE_CAPS 文件未测量跳过不与 fail-closed 混判）。
 75. **明暗两态截图差异**（check_screenshot_theme_delta.py·W1264·E-245 机器化）——坑位 E-245：视觉改动的
 截图「看起来不一样」不等于「真的不一样」（暗色态可能整版复制亮色图，而探针全绿）。实证：某次重渲染用
 localStorage 置主题而样板只认 prefers-color-scheme 媒体查询 ⇒ 「暗色图」与「亮色图」字节数完全相同
