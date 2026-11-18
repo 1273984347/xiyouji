@@ -52,7 +52,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（237）
+## 文件（239）
 
 ### Python 脚本
 
@@ -106,6 +106,7 @@
 - `check_cross_line_rewrite.py`
 - `check_csp_drift.py`
 - `check_css_decl_separators.py`
+- `check_css_inline_residue.py`
 - `check_css_orphan_selectors.py`
 - `check_css_var_refs.py`
 - `check_css_var_selfref.py`
@@ -154,6 +155,7 @@
 - `check_no_hardcoded_endpoint.py`
 - `check_orchestration_refs.py`
 - `check_page_admission.py`
+- `check_page_css_deps.py`
 - `check_parser_anchor_coverage.py`
 - `check_perf_shadow.py`
 - `check_pitfall_id_unique.py`

@@ -1,3 +1,16 @@
+### W1273（2026-11-18）：公共层归并 L1 铺开与内联 CSS 残渣判据批
+
+**本批要点**（W1273 · 批三 L1 归并可行性实测批 · 结论：前提不成立 ⇒ 已回退并留下机器判据 + 举一反三全面审查）：
+
+> - **① 批三的技术前提在全站绝大多数页面上不成立（本批最重要结论）**：为做清单批三「把私有层高频类归并进 site/system.css」，先实测「目标页是否加载公共层」⇒ **全站 875 页中仅 7 页（0.8%）用 link 加载外部样式表**，其余 **868 页（99.2%）自包含**（样式全部内联、**零 css 文件请求**）⇒ 把规则搬进公共层对 99.2% 的页**完全没有效果**。证据三重交叉验证：静态 import 普查 **0/875** + 运行时抽样（Playwright document.styleSheets）**12/12 仅内联** + 目标页实测（3 个 inline sheet · 443/42/5 条规则 · 0 个 css 请求）。⇒ **批三路线须换**（A 转外部共享 CSS / B 归并进内联分发器 / C 页内去重）⇒ 建议 **B**（与 file 协议零外域铁律一致 · 与仓内 W1167 内联分发组件同构）· 需裁决后另立项。
+> - **② 用户浏览器截图直接抓出我引入的视觉回归 ⇒ 当场定位 · 回退 · 复验**：用户就 reader/themes 页古画横幅左侧 1/3 空白未被裁切发问 ⇒ 实测 computed style 发现 figure 的 overflow: visible、img 的 width:728px / max-width:100% / margin-left:0 / object-fit:fill ⇒ **silk-hero img 规则整体未生效** ⇒ 根因＝该族不加载公共层而我已把规则从页内搬走 ⇒ **回退 170 页铺开与公共层新段** ⇒ 回退后复测 overflow:hidden + width:1092px(=1.5 倍) + margin-left:-364px(=-50%) + object-fit:cover ⇒ 裁切恢复；主会话亲验区域截图：左侧 1/3 空白已裁掉 · 主体完整居中 ✓。
+> - **③ 误判根因与两道机器判据入仓**：误判来自 `grep system.css` **被页内注释假命中**（W1251 注释恰好写着「不进 system.css」）⇒ ① 新增 scripts/check_page_css_deps.py（页面样式表依赖普查 · 自包含族与外部族 + 自测 3 正 1 负 + 单测 5 例 · **正例曾因「rel 必在 href 前」的顺序假设失败 ⇒ 修正后才敢下结论**）；② 新增 scripts/check_css_inline_residue.py（内联 CSS 选择器残渣判据 · 括号配对扫描器 + 自测 2 正 2 负 + 单测 5 例 · 全站 875 页 0 处）——后者来自本批另一次翻车：第一版批量改 CSS 的脚本切点算错 ⇒ **声明被删、只留孤立选择器行**，而浏览器容错渲染 ⇒ 截图「看起来正常」、探针全绿 ⇒ 损坏可静默入库。
+> - **④ 举一反三 · 全站同类问题全面审查（用户令）**：把本批三类教训外推成三类做全站普查，**静态结论一律配运行时抽验** ⇒ 普查 8 项：残渣 0 处 ✓ · 括号不平衡 0 处 ✓ · img 引用缺失 0 处 ✓ · script 引用缺失 4 处（全在 _template.html · 模板非部署页 ⇒ 假阳性）· CSS 变量未定义初扫「136 变量 × 873 页」⇒ **运行时抽验 12/12 为假阳性**（静态定义集漏了 style 属性里的定义）⇒ **唯一确认的真缺陷：404.html 的 2 处 color: var(--accent-primary) 失效**（该页为自含小页 · root 只定义间距令牌 · 强调色回落）⇒ **已修**（页内 root 补 --accent-primary 同源值 · 复验 5 元素生效 ✓）。
+> - **⑤ 口径问题登记（不改判据）**：第 76 槽「公共层样式覆盖率」按类归属计（11.9%），而实测只有 0.8% 的页加载公共层 ⇒ 指标高估真实接管面；直接改口径会让棘轮（0.118）瞬判红 ⇒ 登记为下一批立项项（新增「实际加载公共层的页面占比」维度 · 批三覆盖率目标需随路线决策重设）。
+> - **⑥ 口径与方案落仓**：《批三 L1 归并可行性与范围建议-2026-11-18》重写为实测订正版（V2.0）+ §6 全面审查章 ⇒ 给出七步证据链、误判根因、三条备选路线与四条判据纪律；坑表补 **E-273**（写入侧与判据侧口径同源族）/ **E-274**（级联幂等键=批号）/ **E-275**（中文路径批量提交 + git 端点受阻时的 GitHub API 推送通道）/ **E-276**（脚本改 CSS 的残渣翻车）/ **E-277**（归并前置：目标页必须真加载公共层）/ **E-278**（指标要区分归属与生效 + 静态结论必须配运行时抽验）六条。
+> - **状态**：已收官（批三可行性实测 + 举一反三全面审查 + 两道机器判据 + 一处真缺陷修复 + 方案订正；铺开已回退 · 批三路线待裁决）
+> - **验证**：残渣判据全站 0 处 · 样式依赖普查 7/868 两族口径自测全绿 · 新增单测 10 例全绿 · 横幅裁切 computed style 双向复验（归并态失效 / 回退态恢复）+ 主会话亲验区域截图 · 404 令牌修复运行时复验通过 · 覆盖率与体积回到基线态（11.9% / 61.87 MB）· 无残留样式改动。
+> - **文件**： .agent/skills/puti-shouye/SKILL.md,.github/workflows/README.md,AGENTS.md,CHANGELOG.md,CITATION.cff,HANDOVER.md,README.md,STRUCTURE.md,archive/docs/AGENTS-ARCHIVE.md,archive/docs/workflows-readme-history.md,docs/00-导读/W批次编号对账表.md,docs/00-导读/项目说明.md,docs/11-方案报告/README.md,docs/11-方案报告/设计与架构方案/W1273-批三L1归并可行性与范围建议-2026-11-18.md,docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,docs/INDEX.md,docs/agent/pitfalls.md,pitfalls.md,pytest.ini,scripts/INDEX.md,scripts/check_css_inline_residue.py,scripts/check_page_css_deps.py,scripts/output/INDEX.md,scripts/output/README.md,scripts/output/_cascade_files_W1273.txt,scripts/output/_vermilion_solid_cache.json,scripts/output/_w1266_allrender.json,scripts/output/_w1273_spec.json,scripts/output/chart-legend-render-audit.json,scripts/output/file-index.md,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/stats.json,scripts/output/tools-inventory.md,site/404.html,site/data/cross-time-danmaku.html,site/data/search-index-zh.js,site/data/tag-cloud.html,site/dukou-engine.html,site/en/search-index-en.js,site/index.html,site/rss.xml,tests/unit/INDEX.md,tests/unit/README.md,tests/unit/test_css_inline_residue.py,tests/unit/test_page_css_deps.py
 ### W1272（2026-11-18）：台账回填工具三缺陷根修批（首笔语义倒置 + 列位错位 + 认领行形态）
 
 **本批要点**（W1272 · 台账登记/回填面根修批 · 承接上一批收官尾段）：
@@ -269,7 +282,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1272），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1273），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

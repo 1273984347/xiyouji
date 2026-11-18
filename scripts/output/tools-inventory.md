@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-18 17:50
+生成时间：2026-11-18 19:26
 
-共 **228** 件（门禁与校验 112 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 85 · 一次性（下划线前缀） 7）
+共 **230** 件（门禁与校验 114 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 85 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（112）
+## 门禁与校验（114）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -39,6 +39,7 @@
 | `check_cross_line_rewrite.py` | check_cross_line_rewrite.py — 同族扫描：改写面正则的「跨行静默删内容」风险清单 |
 | `check_csp_drift.py` | check_csp_drift.py — 内联脚本 CSP 零漂移**增量**判据（W1110 新增第 56 槽）。 |
 | `check_css_decl_separators.py` | 声明分隔门禁（第 35 门禁 · W673/WP-2.6）——防 CSS 缺分号静默吞声明。 |
+| `check_css_inline_residue.py` | check_css_inline_residue.py — 页面内联 CSS「选择器残渣」判据（W1273 立） |
 | `check_css_orphan_selectors.py` | 孤立选择器门禁（第 36 门禁 · W673/WP-2.6）——防选择器残缀/裸标签残缺行。 |
 | `check_css_var_refs.py` | CSS 变量引用门禁（第 34 门禁 · W672/WP-1.4）——防 style 块引用未定义 CSS 变量。 |
 | `check_css_var_selfref.py` | check_css_var_selfref.py — CSS 变量**自引用**判据（W1110 新增·随第 54/55/56 槽同批建置）。 |
@@ -90,6 +91,7 @@
 | `check_no_hardcoded_endpoint.py` | check_no_hardcoded_endpoint.py — 产物面「服务端地址硬编码」守卫（W1205 · 契约 C-8） |
 | `check_orchestration_refs.py` | check_orchestration_refs.py —— 编排面引用存在性门禁（W1154 新建·基础设施审计 §6 建议）。 |
 | `check_page_admission.py` | check_page_admission.py — 新建页准入门禁（W916 建置·C-W818-01 清偿·静态版）。 |
+| `check_page_css_deps.py` | check_page_css_deps.py — 页面样式表依赖普查（W1273 立·批三归并的硬前置） |
 | `check_parser_anchor_coverage.py` | check_parser_anchor_coverage.py — 解析器锚点覆盖面扫描（W965 沉淀·W964 双虫探针常驻化）。 |
 | `check_perf_shadow.py` | check_perf_shadow.py — 性能影子槽判据件（W849 建立·verify_delivery 第 47 门禁）。 |
 | `check_pitfall_id_unique.py` | check_pitfall_id_unique.py —— 坑表编号唯一性判据（W1106 建）。 |

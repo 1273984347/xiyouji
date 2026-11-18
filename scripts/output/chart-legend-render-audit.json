@@ -423,7 +423,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "9e14d3204ecd",
+      "sha": "af25f4c846bd",
       "static": {
         "svg": true,
         "cls": false,
@@ -822,7 +822,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "572d7045cb93",
+      "sha": "10dd975a5149",
       "static": {
         "svg": true,
         "cls": false,

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（125）
+## 文件（127）
 
 ### Python 脚本
 
@@ -45,6 +45,7 @@
 - `test_ci_wiring.py`
 - `test_commit_scope.py`
 - `test_cross_line_rewrite.py`
+- `test_css_inline_residue.py`
 - `test_d3_data_processors.py`
 - `test_dismiss_pillow_alerts.py`
 - `test_dismiss_scorecard_alerts.py`
@@ -61,6 +62,7 @@
 - `test_milestone_block_regex.py`
 - `test_new_page.py`
 - `test_obs_sample.py`
+- `test_page_css_deps.py`
 - `test_page_router.py`
 - `test_path_guard.py`
 - `test_perf_optimize.py`

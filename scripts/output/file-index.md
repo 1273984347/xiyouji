@@ -1,3 +1,55 @@
+## W1273 公共层归并 L1 铺开与内联 CSS 残渣判据批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1273 | W1273 |
+| .github/workflows/README.md | W1273 | 本批配套改动 |
+| AGENTS.md | W1273 | W1273 |
+| CHANGELOG.md | W1273 | 本批配套改动 |
+| CITATION.cff | W1273 | 本批配套改动 |
+| HANDOVER.md | W1273 | W1273 |
+| README.md | W1273 | 本批配套改动 |
+| STRUCTURE.md | W1273 | W1273 |
+| archive/docs/AGENTS-ARCHIVE.md | W1273 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1273 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1273 | W1273 |
+| docs/00-导读/项目说明.md | W1273 | 治理文档与报告登记面同步 |
+| docs/11-方案报告/README.md | W1273 | 治理文档与报告登记面同步 |
+| docs/11-方案报告/设计与架构方案/W1273-批三L1归并可行性与范围建议-2026-11-18.md | W1273 | W1273 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1273 | 治理文档与报告登记面同步 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1273 | W1273 |
+| docs/INDEX.md | W1273 | 治理文档与报告登记面同步 |
+| docs/agent/pitfalls.md | W1273 | W1273 |
+| pitfalls.md | W1273 | W1273 |
+| pytest.ini | W1273 | W1273 |
+| scripts/INDEX.md | W1273 | 本批配套改动 |
+| scripts/check_css_inline_residue.py | W1273 | W1273 |
+| scripts/check_page_css_deps.py | W1273 | W1273 |
+| scripts/output/INDEX.md | W1273 | 本批配套改动 |
+| scripts/output/README.md | W1273 | 本批配套改动 |
+| scripts/output/_cascade_files_W1273.txt | W1273 | W1273 |
+| scripts/output/_vermilion_solid_cache.json | W1273 | 渲染档案 / 统计产物刷新（页面 sha 与计数链跟随） |
+| scripts/output/_w1266_allrender.json | W1273 | W1273 |
+| scripts/output/_w1273_spec.json | W1273 | W1273 |
+| scripts/output/chart-legend-render-audit.json | W1273 | 渲染档案 / 统计产物刷新（页面 sha 与计数链跟随） |
+| scripts/output/file-index.md | W1273 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1273 | W1273 |
+| scripts/output/stats-index.md | W1273 | W1273 |
+| scripts/output/stats.json | W1273 | W1273 |
+| scripts/output/tools-inventory.md | W1273 | 本批配套改动 |
+| site/404.html | W1273 | W1273 |
+| site/data/cross-time-danmaku.html | W1273 | 页面内联层随归并同步 |
+| site/data/search-index-zh.js | W1273 | 页面内联层随归并同步 |
+| site/data/tag-cloud.html | W1273 | 页面内联层随归并同步 |
+| site/dukou-engine.html | W1273 | 页面内联层随归并同步 |
+| site/en/search-index-en.js | W1273 | 页面内联层随归并同步 |
+| site/index.html | W1273 | 页面内联层随归并同步 |
+| site/rss.xml | W1273 | 页面内联层随归并同步 |
+| tests/unit/INDEX.md | W1273 | 本批配套改动 |
+| tests/unit/README.md | W1273 | 本批配套改动 |
+| tests/unit/test_css_inline_residue.py | W1273 | W1273 |
+| tests/unit/test_page_css_deps.py | W1273 | W1273 |
+
 ## W1272 台账回填工具三缺陷根修批（2026-11-18）
 
 | 文件 | W | 说明 |
