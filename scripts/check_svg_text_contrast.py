@@ -117,6 +117,8 @@ def load_report(path: Path) -> tuple[list[str], dict]:
         "threshold": rep.get("threshold"),
         "bg_mode": rep.get("bg_mode"),
         "fatal_rows": rep.get("fatal_rows"),
+        # W1285：探针记「未稳定行」数（采集未达稳定态 ⇒ 判定面不完整 ⇒ 可能静默漏检）
+        "unstable_rows": rep.get("unstable_rows"),
         "violations": rep.get("violations"),
     }
     return viol, summary
@@ -319,6 +321,7 @@ def _self_test_probe_geometry() -> tuple[int, int]:
             ("dark_block_green", "白字压深色块 ⇒ 判绿"),
             ("adjacent_block_no_false_positive", "文字旁边有色块但不相交 ⇒ 不得误判红"),
             ("path_conservative", "path 保守档 ⇒ bbox 未完全包含不算覆盖"),
+            ("dedup_includes_backdrop", "同名不同底色分别判定（去重键含底色维度）"),
         ):
             ok = bool((by_id.get(cid) or {}).get("ok")) is True
             print("%s 探针几何自测：%s" % ("OK  " if ok else "FAIL", desc))
@@ -388,6 +391,62 @@ def _self_test_dual_mode() -> tuple[int, int]:
     return bad, total
 
 
+def _self_test_unstable_fail_closed() -> tuple[int, int]:
+    """W1285：报告含「未稳定行」⇒ 判定面不完整 ⇒ 门禁须 fail-closed 拒绝通过。→ (bad, total)
+
+    病根：探针的稳定判据把「页面尚未渲染出图表」也当作「已稳定」⇒ 采到空状态 ⇒
+    真违例被静默漏检（实测同页单页跑 2 条、全站跑 0 条）。修法：探针记 unstable_rows，
+    门禁据此拒绝通过（与报告陈旧 fail-closed 同款）。
+    """
+    bad = 0
+    total = 0
+    with tempfile.TemporaryDirectory() as td:
+        td = Path(td)
+        rep = td / "rep.json"
+        base = td / "base.txt"
+        payload = {
+            "threshold": THRESHOLD, "bg_mode": "graphic", "pages_scanned": 1, "rows": 1,
+            "fatal_rows": 0, "unstable_rows": 1,
+            "unstable_detail": [{"page": "data/x.html", "state": "S4-mobile-light",
+                                  "reason": "unstable(text=0)"}],
+            "violations": 0, "pages_with_violations": 0, "page_sha": {}, "by_page": {},
+        }
+        rep.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+        base.write_text("# bg_mode: graphic\n", encoding="utf-8")
+        # W1285：自测内部调用 _judge_mode 会打印 fail-closed 行（行首 "FAIL"）
+        #   ⇒ 会被外层「自测输出不得有行首 FAIL」的断言误判 ⇒ 这里临时抑制其 stdout。
+        import contextlib
+        import io as _io
+        buf = _io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            _, rc = _judge_mode(rep, base, [], False, False, "graphic")
+        ok = rc == 1
+        print("%s 报告含未稳定行 ⇒ fail-closed 拒绝通过" % ("OK  " if ok else "FAIL"))
+        bad += 0 if ok else 1
+        total += 1
+        payload["unstable_rows"] = 0
+        payload["unstable_detail"] = []
+        rep.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+        buf2 = _io.StringIO()
+        with contextlib.redirect_stdout(buf2):
+            _, rc2 = _judge_mode(rep, base, [], False, False, "graphic")
+        ok2 = rc2 is None
+        print("%s 无未稳定行 ⇒ 不因不稳定判红" % ("OK  " if ok2 else "FAIL"))
+        bad += 0 if ok2 else 1
+        total += 1
+        # W1285（F2）：报告**缺** unstable_rows 字段 ⇒ 旧版探针产出 ⇒ 判定面完整性不可证 ⇒ 判红
+        payload.pop("unstable_rows", None)
+        rep.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+        buf3 = _io.StringIO()
+        with contextlib.redirect_stdout(buf3):
+            _, rc3 = _judge_mode(rep, base, [], False, False, "graphic")
+        ok3 = rc3 == 1
+        print("%s 报告缺 unstable_rows 字段 ⇒ fail-closed 拒绝通过（不得 fail-open）" % ("OK  " if ok3 else "FAIL"))
+        bad += 0 if ok3 else 1
+        total += 1
+    return bad, total
+
+
 def self_test() -> int:
     bad = 0
     total = 0
@@ -397,6 +456,7 @@ def self_test() -> int:
         _self_test_graphic_mode(),
         _self_test_probe_geometry(),
         _self_test_dual_mode(),
+        _self_test_unstable_fail_closed(),
     ):
         bad += b
         total += n
@@ -480,6 +540,29 @@ def _judge_mode(report_path: Path, baseline_path: Path, argv: list[str], strict:
                 print('  · …其余 %d 页略' % (len(stale) - 10))
             print('%s 探针报告陈旧·fail-closed·拒绝通过 ----' % MARKER)
             return {'total': 0, 'frozen': [], 'new_fail': [], 'fixed': []}, 1
+    # W1285：报告含「未稳定行」⇒ 该口径的判定面不完整（采集未达稳定态时会把
+    # 「尚未渲染出图表」当作稳定 ⇒ 采到空状态 ⇒ 真违例被静默漏检）⇒ fail-closed 拒绝通过。
+    # 实证：同一页同一代码，单页跑判出 2 条违例、全站跑判 0 条 ⇒ 「0 条」不可信。
+    unstable_raw = summary.get("unstable_rows")
+    if unstable_raw is None:
+        # W1285（F2）：报告**缺** unstable_rows 字段 ⇒ 它由旧版探针产出
+        #   ⇒ 判定面完整性不可证（可能有未稳定行被静默吞掉）⇒ **fail-closed 拒绝通过**
+        #   （此前按 None→0 处理 ⇒ 缺字段即判绿 ⇒ fail-open）。
+        print('FAIL %s 探针报告缺 unstable_rows 字段（报告由旧版探针产出·判定面完整性不可证）——须重跑探针' % label)
+        print('%s 探针报告缺字段·fail-closed·拒绝通过 ----' % MARKER)
+        return {"total": 0, "frozen": [], "new_fail": [], "fixed": []}, 1
+    unstable = int(unstable_raw)
+    if unstable:
+        print('FAIL %s 探针报告含 %d 行未稳定（采集未达稳定态·判定面不完整·可能静默漏检）——须重跑探针：'
+              % (label, unstable))
+        try:
+            raw_unstable = json.loads(report_path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            raw_unstable = {}
+        for u in (raw_unstable.get('unstable_detail') or [])[:10]:
+            print('  · %s %s %s' % (u.get('page'), u.get('state'), u.get('reason', '')))
+        print('%s 探针报告未稳定·fail-closed·拒绝通过 ----' % MARKER)
+        return {"total": 0, "frozen": [], "new_fail": [], "fixed": []}, 1
     if summary.get("why") != "ok":
         print("FAIL %s 探针报告缺失/不可读：%s（fail-closed·拒绝通过·先跑 node scripts/svg_text_contrast_probe.js）"
               % (label, summary.get("why")))

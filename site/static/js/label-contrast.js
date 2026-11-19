@@ -166,7 +166,7 @@
     function coveringShape(svg, textEl, textBox) {
         var shapes = svg.querySelectorAll("rect,circle,ellipse,polygon,path");
         var area = textBox.w * textBox.h;
-        var best = null, bestCov = 0, bestArea = Infinity;
+        var best = null, bestArea = Infinity;
         for (var i = 0; i < shapes.length; i++) {
             var sh = shapes[i];
             if (sh.closest("text")) continue;
@@ -203,11 +203,14 @@
                 if (mx < sb.x || mx > sb.x + sb.w || my < sb.y || my > sb.y + sb.h) continue;
                 if (inter / area < MIN_COVER) continue;
             }
+            // W1285：与第 80 门禁 pickCoveringShape **完全同源**——多层图形覆盖同一文字时取
+            //   **bbox 面积最小者**（最贴近文字那层才是真底色）。
+            //   原实现按「交集覆盖率最大」选 ⇒ 与门禁的「面积最小」不一致 ⇒ 同一文字两侧会选出
+            //   **不同底色** ⇒ 工具判达标而门禁判红（实证 site/data/chart-design.html 的「戌」：
+            //   工具取黑扇形·白描边已提供分离 ⇒ 不修；门禁取橙扇形·白描边分离度仅 2.80 < 3.0 ⇒ 判红）。
+            //   面积相等时取**先出现**者 ⇒ 与门禁 Array.sort 的稳定序一致。
             var shArea = sb.w * sb.h;
-            var cov = inter / area;
-            if (cov > bestCov + 0.01 || (Math.abs(cov - bestCov) <= 0.01 && shArea < bestArea)) {
-                bestCov = cov; bestArea = shArea; best = sh;
-            }
+            if (shArea < bestArea) { bestArea = shArea; best = sh; }
         }
         return best;
     }

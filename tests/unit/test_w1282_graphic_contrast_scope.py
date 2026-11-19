@@ -123,7 +123,7 @@ def test_g7_gate_parses_graphic_report(tmp_path, capsys):
     rep = tmp_path / "graphic_report.json"
     rep.write_text(json.dumps({
         "threshold": 3.0, "bg_mode": "graphic", "pages_scanned": 1, "rows": 1,
-        "fatal_rows": 0, "violations": 1,
+        "fatal_rows": 0, "unstable_rows": 0, "violations": 1,
         "by_page": {"data/x.html": {"page": "data/x.html", "total": 1, "states": {"S1-desktop-light": [
             {"text": "白字压浅色块", "fill": "rgb(255, 255, 255)", "bg": "rgb(233, 184, 133)",
              "cr": 1.8, "bg_source": "graphic"}]}}},
@@ -147,7 +147,7 @@ def test_g8_gate_mode_isolation_is_fail_closed(tmp_path, capsys):
     rep = tmp_path / "graphic_report.json"
     rep.write_text(json.dumps({
         "threshold": 3.0, "bg_mode": "graphic", "pages_scanned": 1, "rows": 1,
-        "fatal_rows": 0, "violations": 0, "by_page": {},
+        "fatal_rows": 0, "unstable_rows": 0, "violations": 0, "by_page": {},
     }, ensure_ascii=False), encoding="utf-8")
     base = tmp_path / "baseline_body.txt"
     base.write_text("# 违例键 0 条\n", encoding="utf-8")

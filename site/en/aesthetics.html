@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-C5i5Lir3lWwQIApiXkA7KmF5S060coYY33Mk2VtsGD0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-mnrcZh5V5nM9ZhjcGJ7SUAY/oTZ27HnfErbtzmToCZw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Aesthetic Fashion Evolution · Annotated Journey to the West</title>
@@ -417,6 +417,12 @@
 /* W675-review: degrade guard parity with ZH (WP-2.5) */
         .chart-block { overflow-x: auto; }
         .chart-block svg { max-width: none; width: auto; }
+        /* W1285：line-chart end labels use a **text-only** color (line/dot/legend colors unchanged).
+           Light gold #d4a857 on the near-white card surface (--paper #FCFAF4) is CR 2.11 => unreadable;
+           light mode uses deep gold (CR 4.7) and dark mode keeps light gold (CR 7.4 vs #23201C).
+           Carried by a CSS variable => theme switch applies instantly, no chart re-render needed. */
+        :root { --chart-endlabel-gold: #8f6a18; }
+        html[data-theme="dark"] { --chart-endlabel-gold: #d4a857; }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -861,6 +867,11 @@ window.addEventListener('load',function(){ try{ tmRefitLabels(); }catch(e){} });
         "Sha Wujing":   "#40619E",
         "White Dragon Horse": "#5a8c8c"
     };
+    // W1285: end labels use a **text-only** color (graphic colors unchanged) - light gold is CR 2.11
+    //   on the light card surface; the color is theme-aware via --chart-endlabel-gold.
+    const CHAR_LABEL_COLORS = Object.assign({}, CHAR_COLORS, {
+        "Tang Sanzang": "var(--chart-endlabel-gold)"
+    });
 
     // ============================================================
     // Data loading: try fetch first, fall back to EMBEDDED
@@ -978,6 +989,9 @@ window.addEventListener('load',function(){ try{ tmRefitLabels(); }catch(e){} });
 
         const tooltip = d3.select("#tooltip");
 
+        // W1285: collect endpoint labels first (drawn after the loop, see de-collision below)
+        const endLabels = [];
+
         series.forEach(s => {
             const color = CHAR_COLORS[s.name];
 
@@ -1022,16 +1036,57 @@ window.addEventListener('load',function(){ try{ tmRefitLabels(); }catch(e){} });
                     tooltip.style("opacity", 0);
                 });
 
-            // Direct label: endpoint
+            // W1285: endpoint labels are **collected first** and drawn after the loop -
+            //   several protagonists share the same stage count AND the same final level
+            //   => their endpoint labels land on **exactly the same** coordinates
+            //   (measured: "Tang Sanzang" and "White Dragon Horse", both stage 3, y=10)
+            //   => the shared de-collision pass (chart-audit / avoidall) hides the smaller
+            //   one with display:none ~1.2s later => the visible label set changes with the
+            //   sampling instant => the gate verdict flips (red/green) between runs.
             const last = s.stages[s.stages.length - 1];
+            endLabels.push({
+                name: s.name,
+                fill: CHAR_LABEL_COLORS[s.name] || color,
+                x: x(s.stages.length - 1) + 8,
+                y: y(last.fashion_level)
+            });
+        });
+
+        // W1285: endpoint label **de-collision** (page-private, shared logic untouched) -
+        //   labels sharing the same anchor x and less than (row height + gap) apart are
+        //   treated as overlapping => spread them vertically around the cluster mean =>
+        //   all stay visible => the shared pass never fires => the collected label set is
+        //   constant => the gate verdict is reproducible.
+        const LABEL_STEP = 20;   // 15px row height + 5px gap
+        const byAnchor = new Map();
+        endLabels.forEach(l => {
+            const k = Math.round(l.x);
+            if (!byAnchor.has(k)) byAnchor.set(k, []);
+            byAnchor.get(k).push(l);
+        });
+        byAnchor.forEach(arr => {
+            arr.sort((a, b) => a.y - b.y);
+            let i = 0;
+            while (i < arr.length) {
+                let j = i;
+                while (j + 1 < arr.length && (arr[j + 1].y - arr[j].y) < LABEL_STEP) j++;
+                if (j > i) {
+                    const cluster = arr.slice(i, j + 1);
+                    const mean = cluster.reduce((s, l) => s + l.y, 0) / cluster.length;
+                    cluster.forEach((l, k) => { l.y = mean + (k - (cluster.length - 1) / 2) * LABEL_STEP; });
+                }
+                i = j + 1;
+            }
+        });
+        endLabels.forEach(l => {
             g.append("text")
-                .attr("x", x(s.stages.length - 1) + 8)
-                .attr("y", y(last.fashion_level))
+                .attr("x", l.x)
+                .attr("y", l.y)
                 .attr("dy", "0.32em")
                 .style("font-size", "0.85rem")
                 .style("font-weight", "600")
-                .style("fill", color)
-                .text(s.name);
+                .style("fill", l.fill)
+                .text(l.name);
         });
 
         // Legend

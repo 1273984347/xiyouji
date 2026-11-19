@@ -3,7 +3,7 @@
   "rows": [
     {
       "page": "site/about.html",
-      "sha": "1a444fe456b0",
+      "sha": "309d118255fa",
       "static": {
         "svg": true,
         "cls": false,
@@ -33,7 +33,7 @@
     },
     {
       "page": "site/curated.html",
-      "sha": "97c2bc6231dd",
+      "sha": "a9fde916ffa4",
       "static": {
         "svg": true,
         "cls": false,
@@ -63,7 +63,7 @@
     },
     {
       "page": "site/dashboard.html",
-      "sha": "79e9e2171108",
+      "sha": "9ee005b9a135",
       "static": {
         "svg": true,
         "cls": true,
@@ -423,7 +423,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "339b73d9a6d4",
+      "sha": "7b48a6f580b0",
       "static": {
         "svg": true,
         "cls": false,
@@ -722,7 +722,7 @@
     },
     {
       "page": "site/guide.html",
-      "sha": "955074816006",
+      "sha": "ad369c459043",
       "static": {
         "svg": true,
         "cls": false,
@@ -822,7 +822,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "de9beb7a648e",
+      "sha": "42a8eb7a8d8b",
       "static": {
         "svg": true,
         "cls": false,

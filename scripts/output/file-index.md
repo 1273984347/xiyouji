@@ -1,3 +1,47 @@
+## W1285 graphic 口径覆盖面补齐 + 探针去重盲区修复 + 判据稳定性根修（2026-11-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1285 | 级联版本面机械联动 |
+| .github/workflows/ci.yml | W1285 | CI 加跑 body 口径探针（stale 检测对 body 生效） |
+| AGENTS.md | W1285 | 级联版本面机械联动 |
+| HANDOVER.md | W1285 | 级联版本面机械联动 |
+| STRUCTURE.md | W1285 | 级联版本面机械联动 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1285 | 坑位正文（E-295~E-299） |
+| docs/00-导读/W批次编号对账表.md | W1285 | 台账 W1285 行 |
+| docs/11-方案报告/README.md | W1285 | 计划方案分区登记 T118 |
+| docs/11-方案报告/计划方案/T118-任务计划执行与经验沉淀报告-2026-11-20.md | W1285 | 级联版本面机械联动 |
+| docs/agent/gates.md | W1285 | 第 80 槽：三处盲区 + 第五处同源化 + 两口径扫描面界定 |
+| docs/agent/pitfalls.md | W1285 | 级联版本面机械联动 |
+| pitfalls.md | W1285 | 坑表 E-295~E-299 + 计数链 |
+| scripts/check_svg_text_contrast.py | W1285 | 第 80 门禁：unstable fail-closed + 双口径判定 |
+| scripts/output/_w1285_spec.json | W1285 | 级联版本面机械联动 |
+| scripts/output/stats-changelog.json | W1285 | 级联版本面机械联动 |
+| scripts/output/stats-index.md | W1285 | 级联版本面机械联动 |
+| scripts/output/stats.json | W1285 | 级联版本面机械联动 |
+| scripts/output/svg-text-contrast-baseline.txt | W1285 | body 口径基线（8 条既有存量·已登记说明） |
+| scripts/output/svg-text-contrast-graphic-baseline.txt | W1285 | graphic 口径基线（0 条·口径隔离声明） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1285 | graphic 口径全站探针报告（168 页·两遍一致·违例 0） |
+| scripts/output/svg_text_contrast_report.json | W1285 | body 口径全站探针报告（162 页·含全量 page_sha） |
+| scripts/svg_text_contrast_probe.js | W1285 | 探针：扫描面纳入根页 + 去重键含底色维度 + 稳定判据排除平凡解（scope 支持逗号组合） |
+| site/about.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/curated.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/dashboard.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/data/aesthetics.html | W1285 | 末端直标错开 20px（根修时隐时现）+ 源级指定高对比色 |
+| site/data/chart-design.html | W1285 | 日晷时辰标签 fill 改 var(--ink)（CR 2.94→5.45） |
+| site/data/game-webnovel.html | W1285 | 散点比例尺留白 38px + 源级指定高对比色与深色描边 |
+| site/data/material-archaeology.html | W1285 | 补接入公共工具（子站路径 ../static/js/...） |
+| site/data/pilgrim-team-psychology-arc.html | W1285 | 事件标签改深一档同色系（#8a6a1c·图形填充色不变） |
+| site/data/power-resources.html | W1285 | 补接入公共工具（子站路径 ../static/js/...） |
+| site/dukou-engine.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/en/aesthetics.html | W1285 | 末端直标错开 20px（根修时隐时现）+ 源级指定高对比色 |
+| site/en/game-webnovel.html | W1285 | 散点比例尺留白 38px + 源级指定高对比色与深色描边 |
+| site/en/pilgrim-team-psychology-arc.html | W1285 | 事件标签改深一档同色系（#8a6a1c·图形填充色不变） |
+| site/en/power-resources.html | W1285 | 补接入公共工具（子站路径 ../static/js/...） |
+| site/guide.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/index.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/static/js/label-contrast.js | W1285 | 公共工具：多层覆盖候选选择改为 bbox 面积最小（与门禁同源） |
+
 ## W1284 图表标签低对比存量清偿 与 graphic 全量基线接入 CI（2026-11-19）
 
 | 文件 | W | 说明 |

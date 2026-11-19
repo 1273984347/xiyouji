@@ -497,6 +497,15 @@ jobs:
         #   graphic 口径是本批**新纳入**的口径 ⇒ 必须在 CI 现跑，否则报告会是陈旧的。
         run: node scripts/svg_text_contrast_probe.js --bg-mode graphic --scope all --out scripts/output/svg_text_contrast_graphic_report.json
 
+      - name: Refresh SVG contrast probe report (W1285·body 口径)
+        # W1285：body 口径的入库报告**新增了全量 page_sha** ⇒ 门禁的「报告陈旧」检测对它生效
+        #   ⇒ 页面一改而报告未刷新 ⇒ 门禁 fail-closed 判红 ⇒ **body 口径也必须在 CI 现跑**
+        #   （此前 body 报告无 page_sha ⇒ stale 检测对它完全失效 ⇒ 该槽长期读一份陈旧报告）。
+        #   扫描面按 **W1265 原定义** 限定 `--scope data,en`：body 粗口径只取「文字 vs 页面底色」
+        #   ⇒ 对「文字压卡片/色块」会产生语义性假红（dashboard 16 条·KPI 大数字白字压卡片）
+        #   ⇒ 根页的标签可读性由 graphic 口径（--scope all·含根页）覆盖（详见 T118 §2.5）。
+        run: node scripts/svg_text_contrast_probe.js --bg-mode body --scope data,en --out scripts/output/svg_text_contrast_report.json
+
       - name: Run verify_delivery.py
         run: python scripts/verify_delivery.py
 

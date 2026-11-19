@@ -54,7 +54,14 @@
  *   光晕与底色几乎同色 ⇒ 光晕零增益）⇒ 豁免失效，按真实 CR 判红。
  *
  * 输出：JSON 报告（scripts/output/svg_text_contrast_report.json）
- * 用法：node scripts/svg_text_contrast_probe.js [--scope data|en|all] [--out F] [--limit N] [--conc N]
+ * 用法：node scripts/svg_text_contrast_probe.js [--scope data|en|root|all|data,en] [--out F] [--limit N] [--conc N]
+ *
+ * --scope 支持逗号组合（W1285）：两个口径的**扫描面有意不同**——
+ *   · graphic 口径（W1282 起·图形底色口径）⇒ 用 `--scope all`（含站点根）；
+ *   · body 口径（W1265 建立·页面底色粗口径）⇒ 用 `--scope data,en`（保持原定义）。
+ *     body 口径对「文字压在色块/卡片上」会产生**语义性假红**（它只取页面底色比对·
+ *     而这些文字实际压在深色块上、由 graphic 口径判定）⇒ 若把根页也纳入 body 判定面，
+ *     会凭空多出 dashboard 的 16 条假红（KPI 大数字白字压卡片）⇒ 故 body 口径不随 root 扩大。
  *       [--bg-mode body|backdrop|graphic] [--self-test [--json]]
  */
 'use strict';
@@ -253,13 +260,16 @@ function judgeRows(data, opts) {
   const out = [];
   const seen = new Set();
   for (const t of data.texts || []) {
-    const key = String(t.text || '').slice(0, 24);
-    if (seen.has(key)) continue;
-    seen.add(key);
+    const rawKey = String(t.text || '').slice(0, 24);
     const fg = t.fill;
     if (!fg) continue;
     // W1265 既有光晕豁免：body / backdrop 口径下整条跳过（既有行为不变）。
     if (mode !== 'graphic' && t.halo) continue;
+    // W1285（F6）：**body 与 graphic 两口径职责分离**——body 口径只判「不压任何图形的文字 vs 页面底色」；
+    //   文字若**压在图形上** ⇒ 交由 graphic 口径判（它取的是**图形底色**·更精确）。
+    //   ⇒ 两口径不重叠 ⇒ body 口径不再产生「文字压色块却被粗口径判红」的语义性假红
+    //   （实测 data/monster-ecology-network.html 的 8 条即此类：文字压在雷达图色块上·实际可读）。
+    if (mode !== 'graphic' && pickCoveringShape(t, shapes)) continue;
     let bg = bodyBg;
     let source = 'body';
     let shapeInfo = null;
@@ -284,6 +294,13 @@ function judgeRows(data, opts) {
     }
     // graphic 口径：光晕是否有效取决于它与「真实底色」的分离度。
     if (mode === 'graphic' && t.halo && haloProvidesSeparation(t, bg)) continue;
+    // W1285：去重键 = 所属 SVG + 文案 + **底色来源 + 底色值**（去重时机在底色确定之后）。
+    //   原键只有文案 ⇒ **同页同名但落在不同底色的**文字只判第一个 ⇒ 其一被漏判
+    //   （实测同页「无底洞·最后大难」出现在两处、底色不同 ⇒ 一处被掩盖）。
+    //   现键含底色维度 ⇒ 同底色的重复仍去重（保留既有语义与基线可对账性），不同底色分别判定。
+    const key = String(t.svgId || '') + '|' + rawKey + '|' + source + '|' + ('rgb(' + bg.r + ',' + bg.g + ',' + bg.b + ')');
+    if (seen.has(key)) continue;
+    seen.add(key);
     const cr = contrast(fg, bg);
     const item = {
       text: String(t.text || '').slice(0, 30),
@@ -477,11 +494,11 @@ function selftest() {
   const mk = (o) => {
     const box = { x: o.x, y: o.y, w: o.w, h: o.h };
     return {
-      svgId: 's',
+      svgId: o.svgId || 's',
       text: o.text || 'T',
       fill: parseColor(o.fill || '#ffffff'),
       halo: o.halo || null,
-      backdrop: null,
+      backdrop: o.backdrop ? parseColor(o.backdrop) : null,
       bbox: box,
     };
   };
@@ -638,6 +655,54 @@ function selftest() {
       detail: 'bright=' + JSON.stringify(bright) + ' plain=' + JSON.stringify(plain),
     });
   }
+  // 11) W1285：去重键含底色维度 ⇒ 同页**同名但底色不同**的文字分别判定；同底色仍去重。
+  {
+    const mkBg = (x, bg) => mk({ x: x, y: 0, w: 10, h: 10, fill: '#9a8c78', text: '同名', backdrop: bg });
+    const items = judgeRows(
+      {
+        bodyBg,
+        texts: [mkBg(0, '#f5f0e4'), mkBg(20, '#fcfaf4'), mkBg(40, '#f5f0e4')],
+        shapes: [],
+      },
+      { mode: 'backdrop' }
+    );
+    const bgs = items.map((i) => i.bg).sort();
+    cases.push({
+      name: '同名不同底色分别判定（去重键含底色维度）·同底色仍去重',
+      id: 'dedup_includes_backdrop',
+      ok: items.length === 2 && bgs[0] === 'rgb(245,240,228)' && bgs[1] === 'rgb(252,250,244)',
+      detail: 'n=' + items.length + ' bgs=' + JSON.stringify(bgs),
+    });
+  }
+  // 12) 稳定判据须排除「平凡解」：指纹相同但**尚未渲染出任何图表元素**时不得判为稳定
+  //     （W1285 实证：同一页单页跑判出 2 条违例、全站跑判 0 条 ⇒ 静默漏检）
+  {
+    const unrendered = isStableState('sig', 'sig', 0, true);
+    const rendered = isStableState('sig', 'sig', 12, true);
+    const changed = isStableState('sig', 'sig2', 12, true);
+    const first = isStableState(null, 'sig', 12, true);
+    const noReq = isStableState('sig', 'sig', 0, false);
+    cases.push({
+      name: '稳定判据排除平凡解（未渲染⇒不算稳定；渲染后⇒稳定；指纹变化⇒不稳定）',
+      id: 'stability_excludes_trivial_solution',
+      ok: unrendered === false && rendered === true && changed === false && first === false && noReq === true,
+      detail: 'unrendered=' + unrendered + ' rendered=' + rendered + ' changed=' + changed + ' first=' + first + ' noReq=' + noReq,
+    });
+  }
+  // 13) body 与 graphic 两口径**职责分离**：压在图形上的文字交由 graphic 口径判
+  //     （body 粗口径只取「文字 vs 页面底色」⇒ 对「文字压色块」会产生语义性假红）
+  {
+    const t = mk({ x: 10, y: 10, w: 80, h: 20, fill: '#ffffff' });
+    const shapes = [rect({ x: 0, y: 0, w: 200, h: 100, fill: '#e9b885' })];
+    const bodyItems = judgeRows({ bodyBg, texts: [t], shapes }, { mode: 'body' });
+    const graphicItems = judgeRows({ bodyBg, texts: [t], shapes }, { mode: 'graphic' });
+    cases.push({
+      name: 'body 口径跳过「压在图形上的文字」（交由 graphic 口径判·两口径职责不重叠）',
+      id: 'body_graphic_separation',
+      ok: bodyItems.length === 0 && graphicItems.length === 1 && graphicItems[0].bg_source === 'graphic',
+      detail: 'body=' + bodyItems.length + ' graphic=' + graphicItems.length + ' src=' + (graphicItems[0] && graphicItems[0].bg_source),
+    });
+  }
   const passed = cases.filter((c) => c.ok).length;
   return { total: cases.length, passed: passed, ok: passed === cases.length, cases: cases };
 }
@@ -650,8 +715,14 @@ function selftest() {
 function listPages() {
   const out = [];
   const dirs = [];
-  if (SCOPE === 'data' || SCOPE === 'all') dirs.push(['data', path.join(SITE, 'data')]);
-  if (SCOPE === 'en' || SCOPE === 'all') dirs.push(['en', path.join(SITE, 'en')]);
+  // W1285：scope 支持逗号组合（如 `data,en`）⇒ 两个口径可各自界定扫描面。
+  const SCOPE_SET = new Set(String(SCOPE).split(',').map((s) => s.trim()).filter(Boolean));
+  if (SCOPE_SET.has('data') || SCOPE_SET.has('all')) dirs.push(['data', path.join(SITE, 'data')]);
+  if (SCOPE_SET.has('en') || SCOPE_SET.has('all')) dirs.push(['en', path.join(SITE, 'en')]);
+  // W1285：**根页纳入扫描面**——此前只扫 site/data + site/en ⇒ 站点根的含图页
+  //   （about / curated / dashboard / dukou-engine / guide / index）从未被测过。
+  //   根页 rel 前缀为空（路径深度与子站不同⇒ 公共工具的引入路径也不同）。
+  if (SCOPE_SET.has('root') || SCOPE_SET.has('all')) dirs.push(['', SITE]);
   for (const [label, dir] of dirs) {
     if (!fs.existsSync(dir)) continue;
     for (const f of fs.readdirSync(dir).sort()) {
@@ -665,15 +736,41 @@ function listPages() {
         continue;
       }
       if (!/<svg[\s>]/i.test(txt)) continue;
-      out.push({ rel: label + '/' + f, abs });
+      // 根页 label 为空 ⇒ rel 不得带前导斜杠（否则路径解析多一层）
+      out.push({ rel: label ? label + '/' + f : f, abs });
     }
   }
   return out.slice(0, LIMIT);
 }
 
-async function waitStable(page, maxMs) {
+/**
+ * W1285：稳定判据的「平凡解」排除（跨项目通用·与 E-292「产物必须校验 fatal」同族的「静默失效」族）。
+ *
+ * 病根：稳定判据原为「指纹连续两次相同」——但**页面尚未渲染出任何图表文字时，
+ * 指纹同样是「两次相同」**（0 个 svg text + 不变化的 scrollHeight）⇒ 会**立即**被判定为
+ * 「已稳定」并返回 ⇒ 采到未渲染状态 ⇒ 该页该态的真违例被**静默漏检**。
+ *
+ * 实测（W1285）：同一页、同一份代码，单页跑判出 2 条违例（S4 移动亮态），
+ * 全站跑判 0 条 ⇒ 「全站 0 条」的收官结论**不可复现**。
+ *
+ * 修法：稳定须同时满足「指纹相同」**且**「已产出文字」（requireText）；
+ * 判定拆为**纯函数**，单测可直接断言（不必起浏览器）。
+ */
+function isStableState(prevSig, curSig, readyCount, requireText) {
+  if (prevSig === null || prevSig !== curSig) return false;
+  if (requireText && !(readyCount > 0)) return false; // 平凡解：脚本尚未渲染出图表
+  return true;
+}
+
+async function waitStable(page, maxMs, opts) {
+  const requireText = !!(opts && opts.requireText);
+  // W1285：要求**连续 3 次**指纹相同（原为 2 次）——抗抖动更强：
+  //   图表常有「颜色渐变/淡入」动画，2 次相同可能在动画的「平台期」误判为稳定。
+  const minSame = (opts && opts.minSame) || 3;
   const deadline = Date.now() + maxMs;
   let prev = null;
+  let sameCount = 0;
+  let lastTextCount = 0;
   while (Date.now() < deadline) {
     // W1284：稳定判据须含**样式指纹**，不能只看数量——
     //   图表常有「颜色渐变/淡入」动画（文字 fill 由数据色渐变到公共层映射色），
@@ -687,14 +784,35 @@ async function waitStable(page, maxMs) {
       let sig = '';
       for (let i = 0; i < texts.length; i += step) {
         const cs = getComputedStyle(texts[i]);
-        sig += cs.fill + ',' + cs.opacity + ',' + cs.strokeWidth + ';';
+        // W1285（F8）：指纹须含**显示态**——否则「标签被脚本延迟隐藏」（共享 avoidall 的
+        //   1200/3000/6000/9000/12000ms display:none）不可见 ⇒ 稳定判据看不见「时隐时现」
+        //   ⇒ 同一页在不同次跑动里可见标签集合不同 ⇒ 采集结果随时刻波动。
+        sig += cs.fill + ',' + cs.opacity + ',' + cs.strokeWidth + ',' + cs.display + ',' + cs.visibility + ';';
       }
-      return svgs.length + '|' + texts.length + '|' + document.body.scrollHeight + '|' + sig;
+      // W1285（F9 修正版）：readyCount = 已渲染产出的元素数（文字 **或** 图形）。
+      //   ⚠ 曾一度严格限定「图表级 svg」（viewBox 宽 ≥150 / 渲染宽 ≥200）⇒ **误伤 48 行**：
+      //   实测 en/graph-explorer 等页的图表**滚出视口即卸载**（懒渲染）⇒ 采集时 texts=0、
+      //   且其 svg 被判为「非图表级」⇒ readyCount=0 ⇒ 永不稳定 ⇒ 退出码 4。
+      //   而这些页在**首屏**是有图表与文字的（单页实测 graph-explorer 首屏 texts=40）⇒
+      //   判定面并非缺失，只是采集时刻被卸载 ⇒ 不该判 unstable。
+      //   ⇒ 回到全局计数（装饰 svg 会让 readyCount 恒 >0·属可接受的保守），
+      //     并把「该页该态 textCount=0」**显式记为 empty_rows**（判定面为空·非不稳定）。
+      const shapes = document.querySelectorAll('svg path, svg rect, svg circle, svg polygon, svg ellipse');
+      const readyCount = texts.length + shapes.length;
+      return { sig: svgs.length + '|' + texts.length + '|' + document.body.scrollHeight + '|' + sig,
+               readyCount: readyCount, textCount: texts.length };
     });
-    if (prev !== null && cur === prev) return;
-    prev = cur;
+    lastTextCount = cur.textCount;
+    if (isStableState(prev, cur.sig, cur.readyCount, requireText)) {
+      sameCount += 1;
+      if (sameCount >= minSame) return { stable: true, textCount: cur.textCount };
+    } else {
+      sameCount = 0;
+    }
+    prev = cur.sig;
     await page.waitForTimeout(120);
   }
+  return { stable: false, textCount: lastTextCount };
 }
 
 async function measureState(context, pageRec, state) {
@@ -706,7 +824,7 @@ async function measureState(context, pageRec, state) {
     await page.emulateMedia({ colorScheme: state.colorScheme });
     await page.setViewportSize(state.viewport);
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
-    await waitStable(page, 3000);
+    let s1 = await waitStable(page, 3000, { requireText: true });
     await page.evaluate(async () => {
       const step = window.innerHeight;
       for (let y = 0; y < document.body.scrollHeight; y += step) {
@@ -715,15 +833,35 @@ async function measureState(context, pageRec, state) {
       }
       window.scrollTo(0, 0);
     });
-    await waitStable(page, 3000);
+    let s2 = await waitStable(page, 3000, { requireText: true });
+    // W1285：慢渲染/长动画页 ⇒ 放宽超时**重试一次**（仍未稳定才记 unstable ⇒ 门禁 fail-closed）
+    if (!(s1.stable && s2.stable)) {
+      await page.waitForTimeout(600);
+      s1 = await waitStable(page, 9000, { requireText: true });
+      s2 = await waitStable(page, 9000, { requireText: true });
+    }
     const data = await page.evaluate(COLLECT);
     const items = judgeRows(data, { mode: BG_MODE });
+    // W1285：两处等待只要有一处未稳定 ⇒ 该行不可信 ⇒ 记 unstable ⇒ 门禁 fail-closed。
+    //   ⚠ 例外：**该页该态 textCount=0**（采集时刻无任何 svg 文字）⇒ 判定面**为空** ⇒
+    //   无可判内容 ⇒ 不产生漏检 ⇒ 不记 unstable，改记 empty（报告里显式可见·供人工抽查）。
+    //   （实测此类页多为「图表滚出视口即卸载」的懒渲染页：en/graph-explorer 等 48 行。）
+    const empty = (s1.textCount === 0 && s2.textCount === 0);
+    const unstable = !(s1.stable && s2.stable) && !empty;
     return {
       page: pageRec.rel,
       state: state.id,
       svgTextCount: items.length,
       items: items,
       errors: errors.slice(0, 2),
+      unstable: unstable,
+      // W1285：empty = 采集时刻该页该态**无任何 svg 文字** ⇒ 判定面为空（无可判内容）
+      //   ⇒ 不记 unstable（不产生漏检），但在报告里显式可见（供人工抽查「是否有漏渲染」）。
+      empty: empty && !(s1.stable && s2.stable),
+      unstableReason: unstable
+        ? ('s1=' + (s1.stable ? 'stable' : 'unstable(text=' + s1.textCount + ')') +
+           ' s2=' + (s2.stable ? 'stable' : 'unstable(text=' + s2.textCount + ')'))
+        : (empty && !(s1.stable && s2.stable) ? 'empty(判定面为空·采集时刻无 svg 文字)' : ''),
       // W1284：页面内容哈希（防漂移锚点·与第 82 槽渲染档案同款机制）——
       // 报告入库后若页面被改而探针未重跑 ⇒ 报告陈旧 ⇒ 门禁须 fail-closed（否则漏检）。
       sha: pageSha(pageRec.abs),
@@ -768,6 +906,10 @@ async function main() {
   await browser.close();
 
   const fatals = rows.filter((r) => r.fatal);
+  // W1285：未稳定行（采集时页面尚未渲染 ⇒ 该行结果不可信 ⇒ 可能静默漏检）
+  const unstableRows = rows.filter((r) => r.unstable);
+  // W1285：empty 行 = 采集时刻判定面为空（无 svg 文字）⇒ 不判红，但报告里显式可见。
+  const emptyRows = rows.filter((r) => r.empty);
   const summary = {};
   let violations = 0;
   const perPage = {};
@@ -794,6 +936,19 @@ async function main() {
     pages_scanned: pages.length,
     rows: rows.length,
     fatal_rows: fatals.length,
+    // W1285：不稳定行数（>0 ⇒ 判定面不完整 ⇒ 门禁须 fail-closed 拒绝通过）
+    unstable_rows: unstableRows.length,
+    unstable_detail: unstableRows.slice(0, 20).map((r) => ({
+      page: r.page, state: r.state, reason: r.unstableReason || '', textCount: r.svgTextCount,
+      // W1285（F1）：未稳定行**也要留下可核查的数据**——此前该行完全不进报告
+      //   ⇒ 门禁读到的是结构性不完整的报告（且这些行恰是最可能漏检的）。
+      sample: (r.items || []).slice(0, 3).map((x) => ({
+        text: x.text, fill: x.fill, bg: x.bg, cr: x.cr, bg_source: x.bg_source,
+      })),
+    })),
+    pages_unstable: Object.keys(unstableRows.reduce((acc, r) => { acc[r.page] = 1; return acc; }, {})).length,
+    empty_rows: emptyRows.length,
+    empty_detail: emptyRows.slice(0, 20).map((r) => ({ page: r.page, state: r.state, reason: r.unstableReason || '' })),
     violations: violations,
     pages_with_violations: Object.keys(summary).length,
     page_sha: pageShaMap,
@@ -803,8 +958,16 @@ async function main() {
   fs.writeFileSync(OUT, JSON.stringify(report, null, 1), 'utf8');
   console.log(
     '完成：页面 ' + pages.length + ' · 行 ' + rows.length + ' · 低对比 ' + violations + ' 处 · 违例页 ' +
-      Object.keys(summary).length + ' · fatal ' + fatals.length + ' → ' + path.relative(ROOT, OUT)
+      Object.keys(summary).length + ' · fatal ' + fatals.length + ' · 不稳定 ' + unstableRows.length + ' → ' + path.relative(ROOT, OUT)
   );
+  // W1285 fail-closed：存在未稳定行 ⇒ 判定面不完整 ⇒ 拒绝产出「看起来干净」的产物
+  if (unstableRows.length) {
+    console.error('FAIL 存在未稳定行（' + unstableRows.length + '/' + rows.length + '）——采集未达稳定态·判定面不完整·非零退出');
+    for (const r of unstableRows.slice(0, 10)) {
+      console.error('  ✗ ' + r.page + ' ' + r.state + ' ' + (r.unstableReason || ''));
+    }
+    process.exit(4);
+  }
   // fail-closed：全部探针失败 ⇒ 非零退出（不得产出 100% 无效产物）
   if (rows.length && fatals.length === rows.length) {
     console.error('FAIL 全部探针失败（' + fatals.length + '/' + rows.length + '）——产物无效·非零退出');
@@ -834,6 +997,7 @@ module.exports = {
   pickCoveringShape: pickCoveringShape,
   haloProvidesSeparation: haloProvidesSeparation,
   judgeRows: judgeRows,
+  isStableState: isStableState,
   selftest: selftest,
 };
 

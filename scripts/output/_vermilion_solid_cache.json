@@ -14,7 +14,7 @@
    "counts": {}
   },
   "data/aesthetics.html": {
-   "sha1": "045ea2ceeed63ba8dbeca01ac0ef1cbb6aa5ccf3",
+   "sha1": "06a4270aea715263a73f7be85b531a82f2f2fb8f",
    "counts": {}
   },
   "data/ai-dialogue.html": {
@@ -70,7 +70,7 @@
    "counts": {}
   },
   "data/chart-design.html": {
-   "sha1": "02ed928799e17547f0bc2a971c0de4f56d1fbcbf",
+   "sha1": "1c2ee697df94c4cacc46f5b58d12f2d549ec703d",
    "counts": {}
   },
   "data/cognitive-psychology.html": {
@@ -90,7 +90,7 @@
    "counts": {}
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "4ec61f21bbe10588bd2510e78d1fed19f9217a0d",
+   "sha1": "acd5b3ffd507a679d873f9261d4bac1bfcc9dd07",
    "counts": {}
   },
   "data/cultural-misreading.html": {
@@ -138,7 +138,7 @@
    "counts": {}
   },
   "data/game-webnovel.html": {
-   "sha1": "5a49ffd49958b06a57a004c9bfd6854839afd149",
+   "sha1": "5d18ba2d27a339bf7f814777129282caf7e47299",
    "counts": {}
   },
   "data/global-pattern.html": {
@@ -214,7 +214,7 @@
    "counts": {}
   },
   "data/material-archaeology.html": {
-   "sha1": "ddd88a0dfed8ca8f5849e7f1a3a976786554d260",
+   "sha1": "69107712d0fe1e0b2f6e139c4c1496a323ec7d52",
    "counts": {}
   },
   "data/mbti-evolution.html": {
@@ -290,7 +290,7 @@
    "counts": {}
   },
   "data/pilgrim-team-psychology-arc.html": {
-   "sha1": "a8328737a189b5b17d4edb519f6ce8d74efe9dcc",
+   "sha1": "af2b309c4f7cd80c9d392b0d649384e42bdddc25",
    "counts": {}
   },
   "data/poetry-density.html": {
@@ -302,7 +302,7 @@
    "counts": {}
   },
   "data/power-resources.html": {
-   "sha1": "44e001ba7144306e81e2d06b771c4d3dc6d6f963",
+   "sha1": "db57d9c395673e13370a1a8f45bb81b7ee494a19",
    "counts": {}
   },
   "data/relationships.html": {
@@ -330,7 +330,7 @@
    "counts": {}
   },
   "data/tag-cloud.html": {
-   "sha1": "ecc22ff19b60792e6765a5fb99c869fd8a931c77",
+   "sha1": "eaf994e0f118cd1c190a66dc0f1b60a91e80d918",
    "counts": {}
   },
   "data/text-evolution.html": {
@@ -370,27 +370,27 @@
    "counts": {}
   },
   "about.html": {
-   "sha1": "e846e846290999fb71f3f40506b1a73ccd150521",
+   "sha1": "ef22d8381d1f6829cd1a91f18e208d6d814659e9",
    "counts": {}
   },
   "curated.html": {
-   "sha1": "283cccad6d7723d54d4835e3eb73a7e7d1b0e3e8",
+   "sha1": "1bb448f1d46b679c4e2aa6a8d017895aab54fc24",
    "counts": {}
   },
   "dashboard.html": {
-   "sha1": "a694fb3339c9b5f7aa7c871516ddfbafd6113952",
+   "sha1": "0c158885140f118be8f0aff7033b415aaf965345",
    "counts": {}
   },
   "dukou-engine.html": {
-   "sha1": "5fce991e01281c878fb24130248b6e363debfe43",
+   "sha1": "77023aa9267a51094fe63ca1d294b1aee146284e",
    "counts": {}
   },
   "guide.html": {
-   "sha1": "df234d5b7aaa041c93b80966262a1ed672f85e80",
+   "sha1": "32246f0d3186bd4c59210d0c775188ee9bb5bcc3",
    "counts": {}
   },
   "index.html": {
-   "sha1": "dbee41a978e1c58c2765e2fed49e648500448748",
+   "sha1": "5f999df608af0ca1751ecec95f28a18dcfd6c690",
    "counts": {}
   },
   "rum-viewer.html": {
@@ -414,7 +414,7 @@
    "counts": {}
   },
   "en/aesthetics.html": {
-   "sha1": "cd98aa896c62a692b263d7b656fed0217b61bff1",
+   "sha1": "0676b1083982301254015afe545b51ad2dca7368",
    "counts": {}
   },
   "en/ai-dialogue.html": {
@@ -722,7 +722,7 @@
    "counts": {}
   },
   "en/game-webnovel.html": {
-   "sha1": "2d840daf0268f7426fe07218a325548764ed12cd",
+   "sha1": "9126cd5c85be7b36196612d016ae9c090f4bf9ca",
    "counts": {}
   },
   "en/global-pattern.html": {
@@ -814,7 +814,7 @@
    "counts": {}
   },
   "en/ming-political-thought-comparison.html": {
-   "sha1": "5feefb0f57fa8277ec8077e4e5797b71d8cab18a",
+   "sha1": "0b03bb2a33bb88ed6fe08e7e846e65d463546a70",
    "counts": {}
   },
   "en/monster-background.html": {
@@ -878,7 +878,7 @@
    "counts": {}
   },
   "en/pilgrim-team-psychology-arc.html": {
-   "sha1": "b38bd150485af5ba4174eae62f77571a5c351058",
+   "sha1": "80752904b34895a09c642b25b8adab0ae8900a12",
    "counts": {}
   },
   "en/poetry-rhythm-analysis.html": {
@@ -886,7 +886,7 @@
    "counts": {}
   },
   "en/power-resources.html": {
-   "sha1": "cc648669a21efca0ec5d482ae5f08194c00a0083",
+   "sha1": "a05e9dc0ed802a639d818532bca9c2eb0229bcbc",
    "counts": {}
   },
   "en/relationships.html": {
@@ -954,5 +954,5 @@
    "counts": {}
   }
  },
- "generated_at": "2026-11-19T18:22:22.268Z"
+ "generated_at": "2026-11-19T22:48:47.371Z"
 }

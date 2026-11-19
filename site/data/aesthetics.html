@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Gej3FUsYS7PFeLKGXpUs7dRjXOW4osVqQweX12VR33M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tI8o+Zr2HOicJqmvOWH0+Nmu5+PjzERk6N/xgAJeuBg=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>美学时尚演变 · 详解西游记</title>
@@ -435,6 +435,12 @@
 /* W673 WP-2.5 降级对齐：chart-degrade scroll-x 契约落地 */
         .chart-block { overflow-x: auto; }
         .chart-block svg { max-width: none; width: auto; }
+        /* W1285：折线图末端直标用「文字专用色」（图形/折线/数据点/图例色一律不变）。
+           浅金 #d4a857 在明态近白卡片底（--paper #FCFAF4）上 CR 仅 2.11 ⇒ 肉眼不可读；
+           明态改深金（对卡片底 CR 4.7）· 暗态沿用浅金（对暗卡片底 #23201C CR 7.4）。
+           用 CSS 变量承载 ⇒ 主题切换即时生效，无需重绘图表。 */
+        :root { --chart-endlabel-gold: #8f6a18; }
+        html[data-theme="dark"] { --chart-endlabel-gold: #d4a857; }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -727,6 +733,11 @@ new MutationObserver(function(){ tmSyncCellLabels(); })
         "沙僧":   "#40619E",
         "白龙马": "#5a8c8c"
     };
+    // W1285：末端直标用**文字专用色**（图形色不变）——浅金在明态卡片底上 CR 2.11 不可读；
+    //   颜色随主题在浅/暗两态各取一档（见 --chart-endlabel-gold），图形色仍取 CHAR_COLORS。
+    const CHAR_LABEL_COLORS = Object.assign({}, CHAR_COLORS, {
+        "唐僧": "var(--chart-endlabel-gold)"
+    });
 
     // ============================================================
     // 数据加载：先尝试 fetch，失败用 EMBEDDED
@@ -844,6 +855,9 @@ new MutationObserver(function(){ tmSyncCellLabels(); })
 
         const tooltip = d3.select("#tooltip");
 
+        // W1285：末端直标先记账（统一在循环外绘制·见下方防重叠处理）
+        const endLabels = [];
+
         series.forEach(s => {
             const color = CHAR_COLORS[s.name];
 
@@ -888,16 +902,54 @@ new MutationObserver(function(){ tmSyncCellLabels(); })
                     tooltip.classed("visible", false);
                 });
 
-            // 直接标签：终点
+            // W1285：末端直标**先记账**、统一在循环外绘制——
+            //   多个主角的「阶段数 + 末段等级」相同 ⇒ 末端直标落在**完全相同**的坐标
+            //   （实测「唐僧」与「白龙马」同在阶段 3、y=10）⇒ 共享避让逻辑
+            //   （chart-audit 的 avoidall）会在 ~1.2s 后把其中较小者 display:none
+            //   ⇒ 标签可见性随采集时刻而变 ⇒ 门禁结论「时隐时现」不可复现。
             const last = s.stages[s.stages.length - 1];
+            endLabels.push({
+                name: s.name,
+                fill: CHAR_LABEL_COLORS[s.name] || color,
+                x: x(s.stages.length - 1) + 8,
+                y: y(last.fashion_level)
+            });
+        });
+
+        // W1285：末端直标**防重叠**（页内私有·不动共享避让逻辑）——
+        //   同一锚点 x 上、纵向间距 < 标签行高 + 间距 的直标视为重叠 ⇒ 以簇内均位为中心
+        //   纵向均摊 ⇒ 全部保持可见 ⇒ 避让逻辑不再触发 ⇒ 采集到的标签集合恒定
+        //   ⇒ 门禁结论可复现。
+        const LABEL_STEP = 20;   // 标签行高 15px + 5px 间距
+        const byAnchor = new Map();
+        endLabels.forEach(l => {
+            const k = Math.round(l.x);
+            if (!byAnchor.has(k)) byAnchor.set(k, []);
+            byAnchor.get(k).push(l);
+        });
+        byAnchor.forEach(arr => {
+            arr.sort((a, b) => a.y - b.y);
+            let i = 0;
+            while (i < arr.length) {
+                let j = i;
+                while (j + 1 < arr.length && (arr[j + 1].y - arr[j].y) < LABEL_STEP) j++;
+                if (j > i) {
+                    const cluster = arr.slice(i, j + 1);
+                    const mean = cluster.reduce((s, l) => s + l.y, 0) / cluster.length;
+                    cluster.forEach((l, k) => { l.y = mean + (k - (cluster.length - 1) / 2) * LABEL_STEP; });
+                }
+                i = j + 1;
+            }
+        });
+        endLabels.forEach(l => {
             g.append("text")
-                .attr("x", x(s.stages.length - 1) + 8)
-                .attr("y", y(last.fashion_level))
+                .attr("x", l.x)
+                .attr("y", l.y)
                 .attr("dy", "0.32em")
                 .style("font-size", "0.85rem")
                 .style("font-weight", "600")
-                .style("fill", color)
-                .text(s.name);
+                .style("fill", l.fill)
+                .text(l.name);
         });
 
         // 图例

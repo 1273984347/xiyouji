@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-aQHTW5lJjl05DU/u/XRN2x+OfDuDyp4NgsxWacSdwGY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-IwhXvbB50jo1rliyfhh2HmFHTr58ZBNF4Sj4fzeVYEA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>图表设计 · 详解西游记</title>
@@ -1501,7 +1501,9 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
                 .style("font-size", "0.7rem")
-                .style("fill", "var(--ink-soft)")
+                // W1285：时辰标签会压在日晷扇形上（graphic 底色口径）⇒ 用深墨 var(--ink)
+                // 而非 var(--ink-soft)：对橙扇形 #d97706 的对比度 2.94 → 5.45（判红线 3.0）
+                .style("fill", "var(--ink)")
                 .style("font-family", "JetBrains Mono, monospace")
                 .text(hourNames[i].replace("时", ""));
         });
