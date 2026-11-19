@@ -60,6 +60,10 @@
   "| tests/unit/INDEX.md | W1282 | 级联版本面机械联动 |",
   "| tests/unit/README.md | W1282 | 级联版本面机械联动 |",
   "| tests/unit/test_w1282_graphic_contrast_scope.py | W1282 | 新增回归锁十三例 |",
-  "| site/rss.xml | W1282 | 级联版本面机械联动 |"
+  "| site/rss.xml | W1282 | 级联版本面机械联动 |",
+  "| pitfalls.md | W1282 | 坑表新增三条（E-284/E-285/E-286） |",
+  "| archive/docs/pitfalls-detail-ARCHIVE.md | W1282 | 坑表正文归档 |",
+  "| .agent/skills/puti-shouye/SKILL.md | W1282 | 坑位计数同步联动 |",
+  "| docs/agent/pitfalls.md | W1282 | 坑表兼容壳同步 |"
  ]
 }
