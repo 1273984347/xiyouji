@@ -1,3 +1,71 @@
+## W1284 图表标签低对比存量清偿 与 graphic 全量基线接入 CI（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1284 | 级联版本面机械联动 |
+| .github/workflows/README.md | W1284 | 级联版本面机械联动 |
+| .github/workflows/ci.yml | W1284 | CI 现跑 graphic 探针刷新报告 |
+| AGENTS.md | W1284 | 级联版本面机械联动 |
+| CHANGELOG.md | W1284 | 本批段 |
+| CITATION.cff | W1284 | 级联版本面机械联动 |
+| HANDOVER.md | W1284 | 本批里程碑与头链 |
+| README.md | W1284 | 级联版本面机械联动 |
+| STRUCTURE.md | W1284 | 级联版本面机械联动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1284 | 级联版本面机械联动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1284 | 台账行归档 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1284 | 坑表正文归档 |
+| archive/docs/workflows-readme-history.md | W1284 | 级联版本面机械联动 |
+| docs/00-导读/W批次编号对账表.md | W1284 | 台账回填 |
+| docs/00-导读/项目说明.md | W1284 | 级联版本面机械联动 |
+| docs/11-方案报告/README.md | W1284 | 本批报告登记 |
+| docs/11-方案报告/计划方案/T117-任务计划执行与经验沉淀报告-2026-11-19.md | W1284 | 本批报告落盘 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1284 | 级联版本面机械联动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1284 | 级联版本面机械联动 |
+| docs/INDEX.md | W1284 | 级联版本面机械联动 |
+| docs/agent/gates.md | W1284 | 第八十槽双口径与 graphic 基线纳入 CI 说明 |
+| docs/agent/pitfalls.md | W1284 | 级联版本面机械联动 |
+| pitfalls.md | W1284 | 坑表新增四条（E-291~E-294） |
+| scripts/check_svg_text_contrast.py | W1284 | 门禁双口径判定 + 报告陈旧 fail-closed + 自测二十四项 |
+| scripts/output/INDEX.md | W1284 | 生成产物 |
+| scripts/output/README.md | W1284 | 生成产物 |
+| scripts/output/_cascade_files_W1284.txt | W1284 | 级联文件清单 |
+| scripts/output/_vermilion_solid_cache.json | W1284 | 生成产物 |
+| scripts/output/_w1266_allrender.json | W1284 | 生成产物 |
+| scripts/output/_w1284_spec.json | W1284 | 本批 spec |
+| scripts/output/chart-legend-render-audit.json | W1284 | 生成产物 |
+| scripts/output/file-index.md | W1284 | 生成产物 |
+| scripts/output/stats-changelog.json | W1284 | 生成产物 |
+| scripts/output/stats-index.md | W1284 | 生成产物 |
+| scripts/output/stats.json | W1284 | 生成产物 |
+| scripts/output/svg-text-contrast-graphic-baseline.txt | W1284 | graphic 口径基线（存量归零） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1284 | graphic 口径全量证据产物（含全量 page_sha） |
+| scripts/output/tools-inventory.md | W1284 | 生成产物 |
+| scripts/svg_text_contrast_probe.js | W1284 | graphic 口径同源化（匿名 SVG 稳定键 · 页面内容哈希 · 稳定判据含样式指纹）+ 自测十项 |
+| site/data/cave-estate.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/counterfactual.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/cross-time-danmaku.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/ethics-consumption.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/heaven-power-network.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/magic-system.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/poetry-rhythm-analysis.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/search-index-zh.js | W1284 | 图表标签可读性逐页清偿 |
+| site/data/social-media.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/tag-cloud.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/visual-art.html | W1284 | 图表标签可读性逐页清偿 |
+| site/dukou-engine.html | W1284 | 级联版本面机械联动 |
+| site/en/cave-estate.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/counterfactual.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/ethics-consumption.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/heaven-power-network.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/risk-project.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/search-index-en.js | W1284 | 图表标签可读性逐页清偿 |
+| site/en/social-media.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/visual-art.html | W1284 | 图表标签可读性逐页清偿 |
+| site/index.html | W1284 | 级联版本面机械联动 |
+| site/static/js/label-contrast.js | W1284 | 通用工具补强（跳过 fill=none 图形 · 底色取不到继续找候选 · 监听 resize） |
+| site/rss.xml | W1284 | 级联版本面机械联动 |
+
+
 ## W1283 图表标签可读性存量清偿（2026-11-19）
 
 | 文件 | W | 说明 |

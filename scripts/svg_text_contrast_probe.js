@@ -174,6 +174,21 @@ function inEllipse(box, px, py) {
   return dx * dx + dy * dy <= 1;
 }
 
+/** 视觉实际填充色 = computed fill x filter 的 brightness 系数（与页面侧修复工具同源·W1283）。 */
+function effectiveFill(scs, raw) {
+  if (!raw) return raw;
+  const fm = String(scs.filter || '').match(/brightness\(([\d.]+)\)/);
+  if (!fm) return raw;
+  const k = parseFloat(fm[1]);
+  if (!k || isNaN(k) || k === 1) return raw;
+  return {
+    r: Math.min(255, raw.r * k),
+    g: Math.min(255, raw.g * k),
+    b: Math.min(255, raw.b * k),
+    a: raw.a,
+  };
+}
+
 /**
  * 图形是否「压住」文字（几何配对核心规则）。
  * 返回规则名（'cover' | 'ellipse' | 'strict'）或 null（不覆盖）。
@@ -289,6 +304,36 @@ function judgeRows(data, opts) {
  * ------------------------------------------------------------------ */
 
 const COLLECT = () => {
+  // COLLECT 是**注入浏览器执行**的独立作用域函数 ⇒ 模块级函数在此不可见
+  // ⇒ 需在函数内部有一份同名副本（与模块级实现逐字同源·W1284）。
+  //
+  // W1284：**匿名 SVG 的稳定标识**——页面里多个 <svg> 没有 id 时，原实现一律取 ''
+  // ⇒ texts 与 shapes 全部归进同一组 ⇒ 一幅 SVG 的文字会被几何配对到**另一幅 SVG**
+  // 的图形上（实测 famous-time-travel：明信片正文被配到另一幅插画的矩形·CR 2.10 假红）。
+  // ⇒ 改为按 DOM 顺序给无 id 的 SVG 分配稳定键（'#anon-N'），同页多 SVG 互不串扰。
+  const __svgKeys = new Map();
+  Array.prototype.forEach.call(document.querySelectorAll('svg'), (sv, i) => {
+    __svgKeys.set(sv, sv.id || ('#anon-' + i));
+  });
+  const __svgKeyOf = (el) => {
+    const sv = el && el.ownerSVGElement;
+    if (!sv) return '';
+    const k = __svgKeys.get(sv);
+    return k !== undefined ? k : (sv.id || '');
+  };
+  const effectiveFill = (scs, raw) => {
+    if (!raw) return raw;
+    const fm = String(scs.filter || '').match(/brightness\(([\d.]+)\)/);
+    if (!fm) return raw;
+    const k = parseFloat(fm[1]);
+    if (!k || isNaN(k) || k === 1) return raw;
+    return {
+      r: Math.min(255, raw.r * k),
+      g: Math.min(255, raw.g * k),
+      b: Math.min(255, raw.b * k),
+      a: raw.a,
+    };
+  };
   function parseColor(str) {
     if (!str) return null;
     const m = String(str).match(/rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+))?\s*\)/i);
@@ -386,7 +431,7 @@ const COLLECT = () => {
         ? { stroke: parseColor(cs.stroke), width: parseFloat(cs.strokeWidth) }
         : null;
     texts.push({
-      svgId: el.ownerSVGElement ? el.ownerSVGElement.id || '' : '',
+      svgId: __svgKeyOf(el),
       text: text,
       fill: fill,
       fillCss: cs.fill, // 原样 computed 串（W1265 既有键格式·违例键靠它对账既有基线）
@@ -395,21 +440,6 @@ const COLLECT = () => {
       bbox: bbox,
     });
   }
-  /** 视觉实际填充色 = computed fill × filter 的 brightness 系数（与页面侧修复工具同源）。 */
-  function effectiveFill(scs, raw) {
-    if (!raw) return raw;
-    const fm = String(scs.filter || '').match(/brightness\(([\d.]+)\)/);
-    if (!fm) return raw;
-    const k = parseFloat(fm[1]);
-    if (!k || isNaN(k) || k === 1) return raw;
-    return {
-      r: Math.min(255, raw.r * k),
-      g: Math.min(255, raw.g * k),
-      b: Math.min(255, raw.b * k),
-      a: raw.a,
-    };
-  }
-
   for (const sh of document.querySelectorAll('rect,circle,ellipse,path,polygon')) {
     if (!sh.ownerSVGElement) continue;
     const scs = getComputedStyle(sh);
@@ -427,7 +457,7 @@ const COLLECT = () => {
     // （工具已乘·判据未乘 ⇒ 工具改完仍被判红）。
     const fill = effectiveFill(scs, rawFill);
     shapes.push({
-      svgId: sh.ownerSVGElement.id || '',
+      svgId: __svgKeyOf(sh),
       tag: sh.tagName.toLowerCase(),
       bbox: bbox,
       fill: fill,
@@ -594,6 +624,20 @@ function selftest() {
       detail: items[0] ? ('src=' + items[0].bg_source + ' bg=' + items[0].bg + ' cr=' + items[0].cr) : 'n/a',
     });
   }
+  // 10) W1283/W1284：图形底色须乘 filter 的 brightness 系数（暗色态公共层提亮图形）
+  {
+    const raw = { r: 142, g: 125, b: 98, a: 1 };
+    const bright = effectiveFill({ filter: 'brightness(1.45) saturate(1.05)' }, raw);
+    const plain = effectiveFill({ filter: 'none' }, raw);
+    const ok1 = Math.abs(bright.r - Math.min(255, 142 * 1.45)) < 0.01 && bright.g > raw.g;
+    const ok2 = plain.r === raw.r && plain.g === raw.g && plain.b === raw.b;
+    cases.push({
+      name: '图形底色乘 brightness 系数（暗色态视觉实际色）',
+      id: 'effective_fill_brightness',
+      ok: ok1 && ok2,
+      detail: 'bright=' + JSON.stringify(bright) + ' plain=' + JSON.stringify(plain),
+    });
+  }
   const passed = cases.filter((c) => c.ok).length;
   return { total: cases.length, passed: passed, ok: passed === cases.length, cases: cases };
 }
@@ -631,10 +675,21 @@ async function waitStable(page, maxMs) {
   const deadline = Date.now() + maxMs;
   let prev = null;
   while (Date.now() < deadline) {
+    // W1284：稳定判据须含**样式指纹**，不能只看数量——
+    //   图表常有「颜色渐变/淡入」动画（文字 fill 由数据色渐变到公共层映射色），
+    //   只看数量会在动画中途提前返回 ⇒ 采到中间态颜色 ⇒ **假阳性**
+    //   （实测 pilgrim-team「无底洞·最后大难」：动画完成是深墨 CR 14，
+    //     动画中途是浅金 CR 2.85 ⇒ 门禁误判）。
     const cur = await page.evaluate(() => {
       const svgs = document.querySelectorAll('svg');
       const texts = document.querySelectorAll('svg text');
-      return svgs.length + '|' + texts.length + '|' + document.body.scrollHeight;
+      const step = Math.max(1, Math.ceil(texts.length / 40));
+      let sig = '';
+      for (let i = 0; i < texts.length; i += step) {
+        const cs = getComputedStyle(texts[i]);
+        sig += cs.fill + ',' + cs.opacity + ',' + cs.strokeWidth + ';';
+      }
+      return svgs.length + '|' + texts.length + '|' + document.body.scrollHeight + '|' + sig;
     });
     if (prev !== null && cur === prev) return;
     prev = cur;
@@ -651,7 +706,7 @@ async function measureState(context, pageRec, state) {
     await page.emulateMedia({ colorScheme: state.colorScheme });
     await page.setViewportSize(state.viewport);
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
-    await waitStable(page, 1200);
+    await waitStable(page, 3000);
     await page.evaluate(async () => {
       const step = window.innerHeight;
       for (let y = 0; y < document.body.scrollHeight; y += step) {
@@ -660,7 +715,7 @@ async function measureState(context, pageRec, state) {
       }
       window.scrollTo(0, 0);
     });
-    await waitStable(page, 1200);
+    await waitStable(page, 3000);
     const data = await page.evaluate(COLLECT);
     const items = judgeRows(data, { mode: BG_MODE });
     return {
@@ -669,11 +724,23 @@ async function measureState(context, pageRec, state) {
       svgTextCount: items.length,
       items: items,
       errors: errors.slice(0, 2),
+      // W1284：页面内容哈希（防漂移锚点·与第 82 槽渲染档案同款机制）——
+      // 报告入库后若页面被改而探针未重跑 ⇒ 报告陈旧 ⇒ 门禁须 fail-closed（否则漏检）。
+      sha: pageSha(pageRec.abs),
     };
   } catch (e) {
     return { page: pageRec.rel, state: state.id, fatal: String(e.message).slice(0, 120) };
   } finally {
     await page.close();
+  }
+}
+
+/** 页面内容哈希前 12 位（防漂移锚点·与第 82 槽 _page_sha 同款）。 */
+function pageSha(absPath) {
+  try {
+    return require('crypto').createHash('sha256').update(require('fs').readFileSync(absPath)).digest('hex').slice(0, 12);
+  } catch (e) {
+    return '';
   }
 }
 
@@ -712,6 +779,12 @@ async function main() {
     summary[r.page].states[r.state] = low;
     summary[r.page].total += low.length;
   }
+  // W1284：全量页面内容哈希（防漂移锚点·与第 82 槽渲染档案同款机制）。
+  // 记录**每一页**（含无违例的页）⇒ 页面一改而探针未重跑 ⇒ 门禁能发现报告陈旧 ⇒ fail-closed。
+  const pageShaMap = {};
+  for (const r of rows) {
+    if (r.sha && !pageShaMap[r.page]) pageShaMap[r.page] = r.sha;
+  }
   const report = {
     generated_at: new Date().toISOString(),
     threshold: THRESHOLD,
@@ -723,6 +796,7 @@ async function main() {
     fatal_rows: fatals.length,
     violations: violations,
     pages_with_violations: Object.keys(summary).length,
+    page_sha: pageShaMap,
     by_page: summary,
   };
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
@@ -746,6 +820,7 @@ module.exports = {
   MIN_COVER_RATIO: MIN_COVER_RATIO,
   MIN_SHAPE_ALPHA: MIN_SHAPE_ALPHA,
   HALO_MIN_SEPARATION: HALO_MIN_SEPARATION,
+  effectiveFill: effectiveFill,
   COLLECT: COLLECT,
   parseColor: parseColor,
   lum: lum,

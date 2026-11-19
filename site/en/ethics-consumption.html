@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-Nn/I6bw8AAR6PhfI/c6lQ5vrSW2adLDLD9JHVyUPemM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-W2c24dTTe4rw7d8bYJWDOanuIcRCRvlueU4xml8w6Ew=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Ethics & Consumption · Mount Rights and Monster IPOs · Annotated Journey to the West</title>
@@ -738,6 +738,11 @@
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+/* W1284：浅金档评分墨色——浅金（#d4af37 / #e9b885）对浅轨/纸底 CR 仅 1.69 / 1.85（不可读）
+   ⇒ 明态改深赭金（#7A5E18·对浅轨 5.84:1）；暗态底色转深 ⇒ 改浅金（#F0D878·对深轨 11.43:1）。 */
+:root { --rating-gold-ink: #7A5E18; }
+html[data-theme="dark"] { --rating-gold-ink: #F0D878; }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -1514,6 +1519,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         if (r >= 4) return "#e9b885";
         return "#C0392B";
     }
+    // W1284：评分数字墨色（与 ratingColor 同档·但取「对底色达标」的那档色）
+    //   浅金档原色 #e9b885 / #d4af37 对浅轨（#faf7f2→白）CR 1.69 / 1.80 ⇒ 换深赭金（明）/ 浅金（暗）；
+    //   其余档沿用图表序列色（--chart-1/2/4）——明暗两态自动随令牌翻转且均 ≥ 4.6:1。
+    function ratingLabelColor(r) {
+        if (r >= 10) return "var(--rating-gold-ink)";
+        if (r >= 8) return "var(--chart-4)";
+        if (r >= 6) return "var(--chart-2)";
+        if (r >= 4) return "var(--rating-gold-ink)";
+        return "var(--chart-1)";
+    }
     function ratingLabel(r) {
         if (r >= 10) return "Full score";
         if (r >= 8) return "Excellent";
@@ -1694,7 +1709,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             g.append("rect")
                 .attr("x", 0).attr("y", y)
                 .attr("width",Math.max(0, innerW)).attr("height", barH)
-                .attr("fill", "#faf7f2")
+                // W1284：轨道底色改用令牌并以内联样式给出（不走 fill 属性）——
+                //   暗态公共层只给「fill 属性以 # / rgb( 开头」的图形加 brightness(1.45) 提亮，
+                //   原 #faf7f2 轨道在暗态被提成纯白（与数值条同白·且浅金数字压白底 CR 1.80）；
+                //   改令牌后暗态轨道为 --paper（#23201C 深槽），明态近似原色，数字墨色两态均达标。
+                .style("fill", "var(--paper)")
                 .attr("stroke", "var(--line)")
                 .attr("rx", 3);
 
@@ -1716,7 +1735,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("y", y + barH / 2 + 4)
                 .style("font-size", "0.82rem")
                 .style("font-weight", "600")
-                .style("fill", color)
+                .style("fill", ratingLabelColor(f.rating))
                 .style("font-family", "JetBrains Mono, monospace")
                 .style("opacity", 0)
                 .text(f.rating.toFixed(1))

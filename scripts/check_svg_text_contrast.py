@@ -49,6 +49,7 @@
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 import subprocess
@@ -63,8 +64,11 @@ from lib import freeze_gate  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 MARKER = "---- 第 80 门禁 SVG 文字对比度："
+MARKER_GRAPHIC = "---- 第 80 门禁 SVG 文字对比度（graphic 口径）："
 REPORT = ROOT / "scripts" / "output" / "svg_text_contrast_report.json"
 BASELINE = ROOT / "scripts" / "output" / "svg-text-contrast-baseline.txt"
+REPORT_GRAPHIC = ROOT / "scripts" / "output" / "svg_text_contrast_graphic_report.json"
+BASELINE_GRAPHIC = ROOT / "scripts" / "output" / "svg-text-contrast-graphic-baseline.txt"
 THRESHOLD = 3.0
 
 
@@ -116,6 +120,32 @@ def load_report(path: Path) -> tuple[list[str], dict]:
         "violations": rep.get("violations"),
     }
     return viol, summary
+
+
+def page_sha(path: Path) -> str:
+    # 页面内容哈希前 12 位（与第 82 槽 _page_sha 同款·防漂移锚点）。
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+    except OSError:
+        return ''
+
+
+def stale_page_sha(report: dict) -> list[str]:
+    # 报告里记录的页面哈希与当前页面文件不一致 ⇒ 报告已陈旧（页面改了但探针未重跑）。
+    # 陈旧报告会漏检（判据输入失真）⇒ fail-closed（同第 82 槽「档案过期即豁免失效」）。
+    sha_map = report.get('page_sha') or {}
+    if not sha_map:
+        return []
+    out = []
+    for rel, recorded in sorted(sha_map.items()):
+        fp = ROOT / 'site' / rel
+        if not fp.exists():
+            out.append('%s（页面不存在）' % rel)
+            continue
+        cur = page_sha(fp)
+        if cur and recorded and cur != recorded:
+            out.append('%s（档案 sha %s ≠ 当前 %s）' % (rel, recorded, cur))
+    return out
 
 
 def baseline_bg_mode(path: Path) -> str | None:
@@ -298,9 +328,67 @@ def _self_test_probe_geometry() -> tuple[int, int]:
     return bad, total
 
 
+
+
+def _self_test_dual_mode() -> tuple[int, int]:
+    # W1284 双口径判定自测：两口径各自对拍自己的基线 + 口径隔离 + 末行合并汇总。
+    bad = 0
+    total = 0
+    with tempfile.TemporaryDirectory() as td:
+        b_rep = Path(td) / 'body_report.json'
+        b_rep.write_text(json.dumps({
+            'threshold': THRESHOLD, 'bg_mode': 'body', 'pages_scanned': 1,
+            'rows': 1, 'fatal_rows': 0, 'violations': 1,
+            'by_page': {'data/b.html': {'page': 'data/b.html', 'total': 1, 'states': {
+                'S1-desktop-light': [{'text': '甲', 'fill': 'rgb(0, 0, 0)', 'bg': 'rgb(255, 255, 255)', 'cr': 21.0}]
+            }}},
+        }, ensure_ascii=False), encoding='utf-8')
+        g_rep = Path(td) / 'g_report.json'
+        g_rep.write_text(json.dumps({
+            'threshold': THRESHOLD, 'bg_mode': 'graphic', 'pages_scanned': 1,
+            'rows': 1, 'fatal_rows': 0, 'violations': 1,
+            'by_page': {'data/g.html': {'page': 'data/g.html', 'total': 1, 'states': {
+                'S1-desktop-light': [{'text': '乙', 'fill': 'rgb(255, 255, 255)', 'bg': 'rgb(233, 184, 133)', 'cr': 1.8, 'bg_source': 'graphic'}]
+            }}},
+        }, ensure_ascii=False), encoding='utf-8')
+        b_base = Path(td) / 'b_base.txt'
+        b_base.write_text('# bg_mode: body\ndata/b.html|S1-desktop-light|甲|fill=rgb(0, 0, 0)|bg=rgb(255, 255, 255)|cr=21.0\n', encoding='utf-8')
+        g_base = Path(td) / 'g_base.txt'
+        g_base.write_text('# bg_mode: graphic\n', encoding='utf-8')
+        vb, sb = load_report(b_rep)
+        vg, sg = load_report(g_rep)
+        ok = len(vb) == 1 and len(vg) == 1 and sg.get('bg_mode') == 'graphic'
+        print('%s 双口径报告各自可解析' % ('OK  ' if ok else 'FAIL'))
+        bad += 0 if ok else 1
+        total += 1
+        bb, pb = freeze_gate.read_baseline(b_base)
+        gb, pg = freeze_gate.read_baseline(g_base)
+        rb = freeze_gate.evaluate(vb, bb, strict=False)
+        rg = freeze_gate.evaluate(vg, gb, strict=False)
+        ok = len(rb['new_fail']) == 0 and len(rb['frozen']) == 1
+        print('%s body 口径：基线内不计 FAIL' % ('OK  ' if ok else 'FAIL'))
+        bad += 0 if ok else 1
+        total += 1
+        ok = len(rg['new_fail']) == 1
+        print('%s graphic 口径：基线外新增计 FAIL（纳入 CI 的关键断言）' % ('OK  ' if ok else 'FAIL'))
+        bad += 0 if ok else 1
+        total += 1
+        ok = mode_mismatch(sg.get('bg_mode'), baseline_bg_mode(b_base) or 'body')
+        print('%s 口径隔离：body 基线不得放行 graphic 报告' % ('OK  ' if ok else 'FAIL'))
+        bad += 0 if ok else 1
+        total += 1
+        # W1284：报告陈旧（页面 sha 与当前文件不一致）⇒ 须被判为 stale
+        stale_ok = stale_page_sha({'page_sha': {'data/不存在页.html': 'deadbeef1234'}})
+        ok = len(stale_ok) == 1 and '不存在' in stale_ok[0]
+        print('%s 报告陈旧检测（页面 sha 不符 ⇒ 判 stale）' % ('OK  ' if ok else 'FAIL'))
+        bad += 0 if ok else 1
+        total += 1
+        bad += 0 if ok else 1
+        total += 1
+    return bad, total
+
+
 def self_test() -> int:
-    """负样本自测：对比度公式正确 + 违例必红 + 基线语义正确 + 报告缺失 fail-closed
-    + W1282 graphic 口径负样本（几何配对·与探针同一套判定实现·探针自测结果直接取用）。"""
     bad = 0
     total = 0
     for b, n in (
@@ -308,12 +396,12 @@ def self_test() -> int:
         _self_test_baseline_semantics(),
         _self_test_graphic_mode(),
         _self_test_probe_geometry(),
+        _self_test_dual_mode(),
     ):
         bad += b
         total += n
-    print("自测 %d/%d 通过" % (total - bad, total))
+    print('自测 %d/%d 通过' % (total - bad, total))
     return 0 if bad == 0 else 2
-
 
 def _arg_path(argv: list[str], flag: str, default: Path) -> Path:
     """取命令行路径参数（相对路径按仓库根解析）；缺参数 ⇒ 用默认值。"""
@@ -374,51 +462,94 @@ def _check_mode_match(report_mode: str, baseline_path: Path, report_only: bool) 
     return 1
 
 
+def _judge_mode(report_path: Path, baseline_path: Path, argv: list[str], strict: bool,
+                report_only: bool, label: str) -> tuple[int, int | None]:
+    """判一个底色口径。→ (基线外新增条数, 退出码或 None)。"""
+    viol, summary = load_report(report_path)
+    if summary.get('why') == 'ok':
+        try:
+            raw = json.loads(report_path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            raw = {}
+        stale = stale_page_sha(raw)
+        if stale:
+            print('FAIL 探针报告已陈旧（页面内容哈希与报告记录不一致·须重跑 node scripts/svg_text_contrast_probe.js）：')
+            for s in stale[:10]:
+                print('  · ' + s)
+            if len(stale) > 10:
+                print('  · …其余 %d 页略' % (len(stale) - 10))
+            print('%s 探针报告陈旧·fail-closed·拒绝通过 ----' % MARKER)
+            return {'total': 0, 'frozen': [], 'new_fail': [], 'fixed': []}, 1
+    if summary.get("why") != "ok":
+        print("FAIL %s 探针报告缺失/不可读：%s（fail-closed·拒绝通过·先跑 node scripts/svg_text_contrast_probe.js）"
+              % (label, summary.get("why")))
+        print("%s 证据文件缺失·拒绝通过 ----" % MARKER)
+        return {"total": 0, "frozen": [], "new_fail": [], "fixed": []}, 1
+    if summary.get("fatal_rows"):
+        print("NOTE %s 探针报告含 %s 行失败——产物部分无效·须人工确认" % (label, summary["fatal_rows"]))
+    report_mode = summary.get("bg_mode") or "body"
+    if "--generate-baseline" in argv:
+        return {"total": len(viol), "frozen": [], "new_fail": [], "fixed": []}, _write_baseline(baseline_path, viol, report_mode)
+    baseline, rc = _load_baseline(baseline_path, report_only)
+    if rc is not None:
+        return {"total": 0, "frozen": [], "new_fail": [], "fixed": []}, rc
+    rc = _check_mode_match(report_mode, baseline_path, report_only)
+    if rc is not None:
+        return {"total": 0, "frozen": [], "new_fail": [], "fixed": []}, rc
+    res = freeze_gate.evaluate(viol, baseline, strict=strict)
+    print(
+        "探针[%s]：页 %s · 行 %s · 背景口径 %s · 阈值 %s · fatal 行 %s"
+        % (label, summary.get("pages_scanned"), summary.get("rows"),
+           summary.get("bg_mode"), summary.get("threshold"), summary.get("fatal_rows"))
+    )
+    freeze_gate.print_eval(res, MARKER if label == "body" else MARKER_GRAPHIC, strict=strict)
+    return res, None
+
+
 def main() -> int:
     argv = sys.argv[1:]
     if "--self-test" in argv:
         return self_test()
     strict = "--strict" in argv
     report_only = "--report" in argv
+    # W1284：**双口径判定**——body（既有·W1265 建立）与 graphic（W1282 起·图形底色口径）
+    # 各自对应自己的基线（基线声明 bg_mode·口径隔离·互不放行）；
+    # 末行合并汇总 ⇒ 两条口径的基线外新增之和 ⇒ graphic 口径由此正式纳入 CI。
+    explicit_report = "--report-file" in argv
+    explicit_baseline = "--baseline" in argv
     report_path = _arg_path(argv, "--report-file", REPORT)
     baseline_path = _arg_path(argv, "--baseline", BASELINE)
-
-    viol, summary = load_report(report_path)
-    if summary.get("why") != "ok":
-        print("FAIL 探针报告缺失/不可读：%s（fail-closed·拒绝通过·先跑 node scripts/svg_text_contrast_probe.js）"
-              % summary.get("why"))
-        print("%s 证据文件缺失·拒绝通过 ----" % MARKER)
-        return 1
-    if summary.get("fatal_rows"):
-        print("NOTE 探针报告含 %s 行失败——产物部分无效·须人工确认" % summary["fatal_rows"])
-
-    report_mode = summary.get("bg_mode") or "body"
-    if "--generate-baseline" in argv:
-        return _write_baseline(baseline_path, viol, report_mode)
-
-    baseline, rc = _load_baseline(baseline_path, report_only)
-    if rc is not None:
-        return rc
-    rc = _check_mode_match(report_mode, baseline_path, report_only)
-    if rc is not None:
-        return rc
-
-    res = freeze_gate.evaluate(viol, baseline, strict=strict)
-    print(
-        "探针：页 %s · 行 %s · 背景口径 %s · 阈值 %s · fatal 行 %s"
-        % (
-            summary.get("pages_scanned"),
-            summary.get("rows"),
-            summary.get("bg_mode"),
-            summary.get("threshold"),
-            summary.get("fatal_rows"),
-        )
-    )
-    freeze_gate.print_eval(res, MARKER, strict=strict)
-    print("%s ----" % MARKER)
+    rc_any = None
+    results = []
+    if explicit_report or explicit_baseline:
+        # 显式指定 ⇒ 只判该口径（保持既有 CLI 语义）
+        res, rc = _judge_mode(report_path, baseline_path, argv, strict, report_only, "指定")
+        results.append(res)
+        rc_any = rc
+    else:
+        res_b, rc = _judge_mode(report_path, baseline_path, argv, strict, report_only, "body")
+        results.append(res_b)
+        rc_any = rc if rc is not None else rc_any
+        res_g, rc2 = _judge_mode(REPORT_GRAPHIC, BASELINE_GRAPHIC, argv, strict, report_only, "graphic")
+        results.append(res_g)
+        rc_any = rc2 if rc2 is not None else rc_any
+    merged = {
+    "total": sum(r["total"] for r in results),
+    "frozen": sorted(x for r in results for x in r["frozen"]),
+    "new_fail": sorted(x for r in results for x in r["new_fail"]),
+    "fixed": sorted(x for r in results for x in r["fixed"]),
+    }
+    if rc_any is not None:
+        # fail-closed（报告/基线缺失·口径不匹配）⇒ 末行不打印合并汇总，
+        # 避免「末行显示 OK 而退出码非 0」的观感不一致；退出码即判据依据。
+        if report_only:
+            return 0
+        return rc_any
+    # 末行 = 合并汇总（verify_delivery 取 ok_line=-1 末行）
+    freeze_gate.print_eval(merged, MARKER, strict=strict)
     if report_only:
         return 0
-    return 1 if res["new_fail"] else 0
+    return 1 if merged["new_fail"] else 0
 
 
 if __name__ == "__main__":

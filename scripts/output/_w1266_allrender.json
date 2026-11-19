@@ -113,7 +113,7 @@
     },
     {
       "page": "site/data/aesthetics.html",
-      "sha": "85fca719d5f1",
+      "sha": "dff36eebac3e",
       "static": {
         "svg": true,
         "cls": true,
@@ -323,7 +323,7 @@
     },
     {
       "page": "site/data/cave-estate.html",
-      "sha": "1fe2f46b3d37",
+      "sha": "03b3ed38da8f",
       "static": {
         "svg": true,
         "cls": true,
@@ -1267,13 +1267,13 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 15,
+      "consoleErrors": 17,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
     {
       "page": "site/data/counterfactual.html",
-      "sha": "2153189e1f9f",
+      "sha": "ea6ee7050e4a",
       "static": {
         "svg": true,
         "cls": true,
@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "3be6753aee2a",
+      "sha": "bbbd4e84fd43",
       "static": {
         "svg": true,
         "cls": true,
@@ -1933,7 +1933,7 @@
     },
     {
       "page": "site/data/ethics-consumption.html",
-      "sha": "c9560e24973e",
+      "sha": "68b70693bec7",
       "static": {
         "svg": true,
         "cls": true,
@@ -1983,7 +1983,7 @@
     },
     {
       "page": "site/data/famous-time-travel.html",
-      "sha": "47ba2a29c6be",
+      "sha": "ecc92f1a2bde",
       "static": {
         "svg": true,
         "cls": true,
@@ -2573,7 +2573,7 @@
     },
     {
       "page": "site/data/heaven-power-network.html",
-      "sha": "3b2549553fde",
+      "sha": "022def07b994",
       "static": {
         "svg": true,
         "cls": true,
@@ -3283,7 +3283,7 @@
     },
     {
       "page": "site/data/magic-system.html",
-      "sha": "9abeb470e29b",
+      "sha": "b204e22b461c",
       "static": {
         "svg": true,
         "cls": true,
@@ -3623,7 +3623,7 @@
     },
     {
       "page": "site/data/ming-political-thought-comparison.html",
-      "sha": "5b94579f5849",
+      "sha": "d7f9cf870d0a",
       "static": {
         "svg": true,
         "cls": true,
@@ -4723,7 +4723,7 @@
     },
     {
       "page": "site/data/pilgrim-team-psychology-arc.html",
-      "sha": "827c73ca3447",
+      "sha": "7868204aeac2",
       "static": {
         "svg": true,
         "cls": true,
@@ -4853,7 +4853,7 @@
     },
     {
       "page": "site/data/poetry-rhythm-analysis.html",
-      "sha": "e18ef61fa696",
+      "sha": "97252d5b4b0a",
       "static": {
         "svg": true,
         "cls": true,
@@ -5273,7 +5273,7 @@
     },
     {
       "page": "site/data/social-media.html",
-      "sha": "d936ce0b2faa",
+      "sha": "3a674f77fad1",
       "static": {
         "svg": true,
         "cls": true,
@@ -5363,7 +5363,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "c5e5eae9b286",
+      "sha": "23c497e8a037",
       "static": {
         "svg": false,
         "cls": true,
@@ -5943,14 +5943,14 @@
     },
     {
       "page": "site/data/visual-art.html",
-      "sha": "c15408f63b80",
+      "sha": "a03c9a68779b",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
       "svgKinds": [
         {
           "cls": "",
@@ -5958,9 +5958,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 30,
+          "texts": 29,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 30"
+          "basis": "1100x480·图元 13·文本 29"
         },
         {
           "cls": "",
@@ -6223,7 +6223,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "0d92b56f6a90",
+      "sha": "339b73d9a6d4",
       "static": {
         "svg": true,
         "cls": false,
@@ -6342,7 +6342,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "2e0e67210a47",
+      "sha": "de9beb7a648e",
       "static": {
         "svg": true,
         "cls": false,
@@ -6662,7 +6662,7 @@
     },
     {
       "page": "site/en/cave-estate.html",
-      "sha": "c6b8e6bfe98c",
+      "sha": "0b4c55c75da9",
       "static": {
         "svg": true,
         "cls": true,
@@ -6726,7 +6726,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 864,
+      "consoleErrors": 847,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -7582,7 +7582,7 @@
     },
     {
       "page": "site/en/counterfactual.html",
-      "sha": "4ed4a43a819d",
+      "sha": "759002a2363f",
       "static": {
         "svg": true,
         "cls": true,
@@ -7902,7 +7902,7 @@
     },
     {
       "page": "site/en/deconstruction.html",
-      "sha": "286b324879ff",
+      "sha": "4e94b2a83950",
       "static": {
         "svg": true,
         "cls": true,
@@ -8202,7 +8202,7 @@
     },
     {
       "page": "site/en/ethics-consumption.html",
-      "sha": "4fd827ea18f9",
+      "sha": "07541cfda47f",
       "static": {
         "svg": true,
         "cls": true,
@@ -8252,7 +8252,7 @@
     },
     {
       "page": "site/en/famous-time-travel.html",
-      "sha": "54f923141dae",
+      "sha": "b8b948aea42f",
       "static": {
         "svg": true,
         "cls": false,
@@ -8932,7 +8932,7 @@
     },
     {
       "page": "site/en/heaven-power-network.html",
-      "sha": "acf51edf5d45",
+      "sha": "d0419e5f4426",
       "static": {
         "svg": true,
         "cls": true,
@@ -11052,7 +11052,7 @@
     },
     {
       "page": "site/en/pilgrim-team-psychology-arc.html",
-      "sha": "afc04ae7c3a1",
+      "sha": "55045d4b2a91",
       "static": {
         "svg": true,
         "cls": true,
@@ -11412,7 +11412,7 @@
     },
     {
       "page": "site/en/risk-project.html",
-      "sha": "04086a349bb5",
+      "sha": "deb8700e4fbb",
       "static": {
         "svg": true,
         "cls": true,
@@ -11562,7 +11562,7 @@
     },
     {
       "page": "site/en/social-media.html",
-      "sha": "7850b44b2be9",
+      "sha": "91ea2fa8da01",
       "static": {
         "svg": true,
         "cls": false,
@@ -12192,14 +12192,14 @@
     },
     {
       "page": "site/en/visual-art.html",
-      "sha": "e901c43d1339",
+      "sha": "aca618b57a91",
       "static": {
         "svg": true,
         "cls": false,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
       "svgKinds": [
         {
           "cls": "",
@@ -12207,9 +12207,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 30,
+          "texts": 29,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 30"
+          "basis": "1100x480·图元 13·文本 29"
         },
         {
           "cls": "",

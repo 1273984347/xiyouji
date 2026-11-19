@@ -245,6 +245,10 @@
             height: 480px;
             display: block;
             background: linear-gradient(180deg, var(--dark) 0%, #2a1f18 100%);
+            /* W1284：实体底色（衬在渐变之下）——SVG 渐变背景的 backgroundColor 为透明，
+               第 80 门禁 graphic 口径便回退到页面纸底（浅米）⇒ 把「深底金字/米白」误判成浅底低对比。
+               补一层与渐变首色同值的实体底色：视觉零变化（渐变不透明·完全覆盖），量测基准回到真实深底。 */
+            background-color: var(--dark);
             border-radius: var(--radius-md);
             margin: 14px 0;
         }

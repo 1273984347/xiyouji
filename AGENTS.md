@@ -35,7 +35,7 @@
 | 文件 | 何时读 | 回答什么 |
 |---|---|---|
 | docs/agent/gates.md | **任何写操作或提交前 → 先跑 verify_delivery.py（退出码非 0 即阻断），红时查对应槽条目** | 门禁触发条件 + 失败处置（薄说明层·判定逻辑在门禁脚本本体） |
-| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 397<!--stats:pitfalls_total--> 条坑位判据（E-NN 检索·正本=仓库根 pitfalls.md；docs/agent/pitfalls.md 为兼容壳勿读）·六主题：CSS / 视觉渲染（85<!--stats:pitfalls_css-->）·JS / CSP / 运行时（12<!--stats:pitfalls_js-->）·git / 提交 / 并发（39<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（17<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（218<!--stats:pitfalls_flow-->）·叙事细节在归档 |
+| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 401<!--stats:pitfalls_total--> 条坑位判据（E-NN 检索·正本=仓库根 pitfalls.md；docs/agent/pitfalls.md 为兼容壳勿读）·六主题：CSS / 视觉渲染（88<!--stats:pitfalls_css-->）·JS / CSP / 运行时（12<!--stats:pitfalls_js-->）·git / 提交 / 并发（39<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（17<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（219<!--stats:pitfalls_flow-->）·叙事细节在归档 |
 | archive/docs/pitfalls-detail-ARCHIVE.md | 需要坑位条目全文时 | 叙事/实证细节（#### E-NN 锚·只增不改） |
 | docs/10-方法论沉淀/批次交付流水线.md | 批次收官 / 推送前 | 全链 7 步 + 失败模式速查 + 收官链时间纪律 |
 | docs/agent/MAINTAINING.md | **改 AGENTS/pitfalls/gates 等治理文件前** | 维护契约全文：退役三标准 / 添加前四问 / 体积预算 / 局部化预留形态 |
@@ -73,4 +73,4 @@ Windows 单机的解释器三语境 / 编码 / heredoc / curl / 路径等环境�
 2. 每批核心 2 同步（CHANGELOG + HANDOVER）·批次经台账认领·提交一律 safe_commit（防代提）。
 3. 有复用价值的教训落 pitfalls（16-⑥ 载体铁则）·同类两犯的纪律**上提本文件铁律区**（上提后在坑条目预防段标注）。
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1278-W1278 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-19（W1279）：AGENTS 地图化重建（86 行·铁律前移·路由表）+ MAINTAINING 拆出 + CLAUDE 导入式 + 41/32/31 槽重锚；2026-11-19（W1280）：公共层外链化铺开第一批 site/en 全站 138 页 + 判定面口径再修订 + 同源模块；2026-11-19（W1281）：公共层外链化铺开第二批 site/data 全站 + 三处判定面口径修订；2026-11-19（W1282）：图表标签可读性修复 treemap 六页 + 第八十门禁 graphic 口径补齐；2026-11-19（W1283）：图表标签可读性存量清偿 通用工具与判据同源化。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1279-W1279 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-19（W1280）：公共层外链化铺开第一批 site/en 全站 138 页 + 判定面口径再修订 + 同源模块；2026-11-19（W1281）：公共层外链化铺开第二批 site/data 全站 + 三处判定面口径修订；2026-11-19（W1282）：图表标签可读性修复 treemap 六页 + 第八十门禁 graphic 口径补齐；2026-11-19（W1283）：图表标签可读性存量清偿 通用工具与判据同源化；2026-11-19（W1284）：图表标签低对比存量清偿 与 graphic 全量基线接入 CI。如与上述权威文档冲突，以权威文档为准。*

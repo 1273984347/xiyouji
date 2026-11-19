@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Ks3gTSRSmoiCIPFa7aWLa870aSrAgt9Tb++hJUT4olw=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rj80a82C3Ez0fldw3SfLbf+yrh/uA3sTMNY+LGzE6C4=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>伦理消费 · 坐骑权益与妖怪 IPO · 详解西游记</title>
@@ -747,6 +747,11 @@
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+/* W1284：浅金档评分墨色——浅金（#d4af37 / #e9b885）对浅轨/纸底 CR 仅 1.69 / 1.85（不可读）
+   ⇒ 明态改深赭金（#7A5E18·对浅轨 5.84:1）；暗态底色转深 ⇒ 改浅金（#F0D878·对深轨 11.43:1）。 */
+:root { --rating-gold-ink: #7A5E18; }
+html[data-theme="dark"] { --rating-gold-ink: #F0D878; }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -936,6 +941,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         if (r >= 4) return "#e9b885";
         return "#C0392B";
     }
+    // W1284：评分数字墨色（与 ratingColor 同档·但取「对底色达标」的那档色）
+    //   浅金档原色 #e9b885 / #d4af37 对浅轨（#faf7f2→白）CR 1.69 / 1.80 ⇒ 换深赭金（明）/ 浅金（暗）；
+    //   其余档沿用图表序列色（--chart-1/2/4）——明暗两态自动随令牌翻转且均 ≥ 4.6:1。
+    function ratingLabelColor(r) {
+        if (r >= 10) return "var(--rating-gold-ink)";
+        if (r >= 8) return "var(--chart-4)";
+        if (r >= 6) return "var(--chart-2)";
+        if (r >= 4) return "var(--rating-gold-ink)";
+        return "var(--chart-1)";
+    }
     function ratingLabel(r) {
         if (r >= 10) return "满分";
         if (r >= 8) return "优秀";
@@ -1116,7 +1131,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             g.append("rect")
                 .attr("x", 0).attr("y", y)
                 .attr("width",Math.max(0, innerW)).attr("height", barH)
-                .attr("fill", "#faf7f2")
+                // W1284：轨道底色改用令牌并以内联样式给出（不走 fill 属性）——
+                //   暗态公共层只给「fill 属性以 # / rgb( 开头」的图形加 brightness(1.45) 提亮，
+                //   原 #faf7f2 轨道在暗态被提成纯白（与数值条同白·且浅金数字压白底 CR 1.80）；
+                //   改令牌后暗态轨道为 --paper（#23201C 深槽），明态近似原色，数字墨色两态均达标。
+                .style("fill", "var(--paper)")
                 .attr("stroke", "var(--line)")
                 .attr("rx", 3);
 
@@ -1138,7 +1157,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("y", y + barH / 2 + 4)
                 .style("font-size", "0.82rem")
                 .style("font-weight", "600")
-                .style("fill", color)
+                .style("fill", ratingLabelColor(f.rating))
                 .style("font-family", "JetBrains Mono, monospace")
                 .style("opacity", 0)
                 .text(f.rating.toFixed(1))

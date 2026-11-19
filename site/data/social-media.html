@@ -496,6 +496,27 @@
             font-family: "JetBrains Mono", monospace;
         }
     
+        /* ===== W1284：图表文字对比度（图形口径 ≥ 3:1·第 80 门禁）=====
+           暗色态公共层给 SVG 图形加 brightness(1.45) saturate(1.05)（tokens.css / system.css），
+           视觉实际底色 = computed fill × brightness ⇒ 文字与底色方向失配：
+           ① 适配度条形图「背景轨道」#faf7f2 被提亮成纯白 rgb(255,255,255)
+              ⇒ 轨道右侧「角色定位」标签（--ink-soft：明态 #4A463F / 暗态 #C6BFB0）压白底 CR 1.83 不可读
+              ⇒ 暗色态轨道改用图表槽位色 var(--surface-sunken)（提亮后 ≈ rgb(32,27.6,21.75)）
+                ⇒ 暗态角色标签 CR 9.3；标签越出轨道右缘的部分落在同族深色卡片底上 ⇒ 仍可读。
+           ② 条内「MBTI + 数值」标签白字压被提亮的彩条
+              （E 系 #E0604F→rgb(255,139,115) CR 2.28 / I 系 #669EAA→rgb(148,229,247) CR 1.42）
+              ⇒ 暗色态统一改深色描边（光晕）：描边合成到底色后 CR 6.1 / 8.2 ≥ 3.0 ⇒ 字形与底色分离。
+           ③ 雷达轴标白字压被提亮的轴圈（暗态各轴圈提亮后均为亮色）⇒ 暗色态一律深墨 #23201A；
+              明态仅金色轴圈 #e9b885（白字 CR 1.80）需深墨。
+           明色态其余取值一律沿用原值 ⇒ 零视觉变化。 */
+        html[data-theme="dark"] #fit-svg rect[fill="#faf7f2"] { fill: var(--surface-sunken); }
+        html[data-theme="dark"] #fit-svg text { stroke: rgba(20, 20, 30, 0.85); }
+        html[data-theme="dark"] #radar-svg circle + text { fill: #23201A !important; }
+        /* 条内「MBTI + 数值」标签：明色态白字。满格条（适配度 10）时条与轨道的 bbox 完全相同，
+           几何配对会落到「背景轨道」（纸底 #faf7f2）⇒ 白字压纸底 CR 1.07；
+           ⇒ 明色态也加深色描边（合成后 CR 5.1 ≥ 3.0）⇒ 由描边提供分离（与暗色态同口径）。 */
+        #fit-svg .fit-bar + text { stroke: rgba(20, 20, 30, 0.65); stroke-width: 2px; }
+        #radar-svg circle[fill="#e9b885"] + text { fill: #23201A !important; }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 

@@ -170,6 +170,14 @@
         for (var i = 0; i < shapes.length; i++) {
             var sh = shapes[i];
             if (sh.closest("text")) continue;
+            // 与第 80 门禁同源：fill=none / 透明 / alpha 过低的图形不算底色，跳过继续找下一个。
+            // 漏了这一条 => 装饰性 path（fill:none 的波纹/网格底板）会被当成覆盖图形，
+            // 底色取不到 => 工具直接放弃 => 真违例永远不修（实测 visual-art）。
+            var shCs = getComputedStyle(sh);
+            var shFill = parseColor(shCs.fill);
+            if (!shFill || shFill[3] < 0.3) continue;
+            var shAlpha = shFill[3] * parseFloat(shCs.fillOpacity || "1") * parseFloat(shCs.opacity || "1");
+            if (shAlpha < 0.3) continue;
             var sb = normBox(sh);
             if (!sb) continue;
             var inter = intersectArea(textBox, sb);
@@ -333,6 +341,13 @@
         try {
             var mo2 = new MutationObserver(schedule);
             mo2.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+        } catch (e) {}
+        // 视口尺寸变化（resize）——**必须监听**：
+        //   窄屏/宽屏切换会改变标签落点（同一文字在宽屏压深色面板、窄屏落到浅色纸底）
+        //   ⇒ 底色变了但 DOM 未必变 ⇒ MutationObserver 不触发 ⇒ 工具不重算 ⇒ 真违例漏修
+        //   （实测 pilgrim-team「无底洞·最后大难」：1280px 压深色面板可读，375px 落到纸底 ⇒ CR 2.85）
+        try {
+            window.addEventListener('resize', schedule, { passive: true });
         } catch (e) {}
         // 系统配色切换（prefers-color-scheme）——**必须监听**：
         // 第 80 门禁探针以 colorScheme 模拟明暗四态，若工具只听 data-theme，

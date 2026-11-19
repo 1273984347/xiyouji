@@ -485,6 +485,18 @@ jobs:
       - name: Regenerate output data (drift gate 前置)
         run: python scripts/run_all.py
 
+      # W1284：graphic 口径（SVG 文字对**图形底色**的对比度）正式纳入 CI ⇒
+      #   门禁默认双口径判定（body + graphic·各自对拍自己的基线·末行合并汇总）。
+      #   本 job 已装 node + Playwright chromium（为第 43 槽）⇒ 此处**现跑**探针刷新报告，
+      #   使判定永远基于当前页面（不依赖入库报告是否被同步刷新）；
+      #   报告内含全量 page_sha ⇒ 万一探针没跑到，页面哈希漂移也会被门禁判「报告陈旧」而 fail-closed。
+      #   探针 file:// 口径·四态·扫描 site/data + site/en 的含图页。
+      - name: Refresh SVG contrast probe reports (W1284·graphic 口径)
+        # 只刷新 **graphic** 口径报告：body 口径的探针报告是「批收尾手动跑」的入库产物，
+        #   CI 从不刷新它（其基线与报告同批入库）⇒ 保持既有行为一字不变，避免擅自放松既有基线。
+        #   graphic 口径是本批**新纳入**的口径 ⇒ 必须在 CI 现跑，否则报告会是陈旧的。
+        run: node scripts/svg_text_contrast_probe.js --bg-mode graphic --scope all --out scripts/output/svg_text_contrast_graphic_report.json
+
       - name: Run verify_delivery.py
         run: python scripts/verify_delivery.py
 

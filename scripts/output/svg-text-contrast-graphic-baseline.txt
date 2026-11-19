@@ -1,0 +1,7 @@
+# 第 80 门禁 · SVG 文字对比度基线（W1265 建立·存量违例冻结）
+# bg_mode: graphic
+# 生成命令：py -3 scripts/check_svg_text_contrast.py --generate-baseline
+# 前提：node scripts/svg_text_contrast_probe.js（file:// 口径·4 态）
+# 格式：<页面>|<状态>|<文案>|fill=…|bg=…|cr=…
+# 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict
+# 违例键 0 条（生成：2026-11-20 02:28:21）
