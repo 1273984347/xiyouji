@@ -1,3 +1,211 @@
+## W1280 A 方案铺开第一批落地 与 判定面口径再修订（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| .github/workflows/README.md | W1280 | 本批配套改动 |
+| AGENTS.md | W1280 | 本批配套改动 |
+| CHANGELOG.md | W1280 | 本批配套改动 |
+| CITATION.cff | W1280 | 本批配套改动 |
+| HANDOVER.md | W1280 | 本批配套改动 |
+| README.md | W1280 | 本批配套改动 |
+| STRUCTURE.md | W1280 | 本批配套改动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1280 | 本批配套改动 |
+| archive/docs/INDEX.md | W1280 | 本批配套改动 |
+| archive/docs/README.md | W1280 | 本批配套改动 |
+| archive/docs/file-index-ARCHIVE-tier2-W1080-W1151.md | W1280 | 本批配套改动 |
+| archive/docs/file-index-ARCHIVE-tier2.md | W1280 | 本批配套改动 |
+| archive/docs/file-index-ARCHIVE.md | W1280 | 本批配套改动 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1280 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1280 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1280 | W1280 认领行 |
+| docs/00-导读/项目说明.md | W1280 | 本批配套改动 |
+| docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md | W1280 | W1280 续记（口径再修订 + 铺开第一批落地） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1280 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1280 | 本批配套改动 |
+| pytest.ini | W1280 | 本批配套改动 |
+| scripts/check_chart_design_parity.py | W1280 | 第 53 槽契约标记判定面改用同源模块 |
+| scripts/check_mobile_viewport.py | W1280 | 第 64 槽 A8 判定面随形态修订（公共层并入判定面） |
+| scripts/output/INDEX.md | W1280 | 本批配套改动 |
+| scripts/output/README.md | W1280 | 本批配套改动 |
+| scripts/output/_cascade_files_W1280.txt | W1280 | 本批配套改动 |
+| scripts/output/_vermilion_solid_cache.json | W1280 | 本批配套改动 |
+| scripts/output/_w1266_allrender.json | W1280 | 本批配套改动 |
+| scripts/output/_w1280_spec.json | W1280 | 本批配套改动 |
+| scripts/output/chart-legend-render-audit.json | W1280 | 本批配套改动 |
+| scripts/output/file-index.md | W1280 | 本批配套改动 |
+| scripts/output/mobile_viewport_report_en.json | W1280 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1280 | 本批配套改动 |
+| scripts/output/stats-index.md | W1280 | 本批配套改动 |
+| scripts/output/stats.json | W1280 | 本批配套改动 |
+| scripts/output/tools-inventory.md | W1280 | 本批配套改动 |
+| scripts/utils/INDEX.md | W1280 | 本批配套改动 |
+| scripts/utils/README.md | W1280 | 本批配套改动 |
+| scripts/utils/css_public_layer.py | W1280 | 新增：公共层文本解析同源模块（判定面补全共用） |
+| site/data/cross-time-danmaku.html | W1280 | 本批配套改动 |
+| site/data/tag-cloud.html | W1280 | 本批配套改动 |
+| site/dukou-engine.html | W1280 | 本批配套改动 |
+| site/en/81-hardships-view.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/81-hardships.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/academic-papers.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/aesthetics.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/ai-dialogue.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/bestiary.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/business-model.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/cave-estate.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/century-dialogue.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/chapter-stats.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/chapter-structure-graph.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/chapters-map.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-appearance.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-bailongma.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-bajie.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-dynamic-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-presence-timeline.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-relationship-3d-view.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-relationship-3d.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-semantic-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-sentiment-arc.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-shaseng.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-tangseng.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-wukong.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/characters.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/chart-design.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/cognitive-psychology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/concept-device.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/counterfactual.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/criticism-history.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/cross-time-danmaku.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/cultural-misreading.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/customs-pass-route.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/dashboard.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/data-explorer.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/deconstruction.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/dialogue-sentiment.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/dukou-engine.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/ecology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/emotional-heatmap.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ai-era.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-buddhist-chan.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-chapter-couplets.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-character-fu.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-cipai-linjiangxian.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-cipai-mantingfang.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-cipai-shuidiaogetou.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-cipai-xijiangyue.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-composition-origins.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-divine-bureaucracy.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-folk-belief.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-historical-xuanzang.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-information-cocoon.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-economy.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-examination.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-garrison.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-intellectual-history.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-judiciary.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-literary-thought.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-maritime-ban.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-metaphor.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-military.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-politics.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-religion.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-social-customs.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-modern-management.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-original-poetry.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-poetry-imagery.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-poetry-opening.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-quanzhen-daoism.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-rhythm-analysis.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-scenery-poems.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-thematic-poetry.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-three-teachings.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-version-evolution.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-zen-koan-vs-neidan.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/ethics-consumption.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/famous-time-travel.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/four-dimensional-research-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/four-heavenly-kings-artifacts.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/game-webnovel.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/global-pattern.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/graph-explorer.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/guanyin-six-roles-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/guide.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/hardship-difficulty-heatmap.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/hardship-heatmap.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/heaven-power-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/index.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/intertextuality-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/journey-geo-semiotics.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/journey-map-interactive.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/journey-route.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/journey-spacetime.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/jurisprudence.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/karma-reincarnation.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/language-style-radar.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/linguistics.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/magic-system.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/material-archaeology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/mbti-evolution.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/methodology-matrix.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/methodology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/ming-political-thought-comparison.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-background.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-capability-radar.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-ecology-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-female-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-hierarchy-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-sociology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-victims-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/music-structure.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/narrative-experiment.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/narrative-rhythm-curve.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/narratology-12d-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/narratology-16d-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/perf-canvas-rendering.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/philosophy.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/pilgrim-team-dynamic-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/pilgrim-team-psychology-arc.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/poetry-rhythm-analysis.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/power-resources.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/relationships.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/risk-project.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/search.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/site-map.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/six-senses-narratology-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/social-media.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/tag-cloud.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/text-evolution.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/text-search.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/theological-intervention-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/timeline.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/tribulations.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/underworld-power-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/visual-art.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/visualizations.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/workplace.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/index.html | W1280 | 本批配套改动 |
+| site/rss.xml | W1280 | 本批配套改动 |
+| tests/unit/INDEX.md | W1280 | 本批配套改动 |
+| tests/unit/README.md | W1280 | 本批配套改动 |
+| tests/unit/test_w1280_static_scope.py | W1280 | 本批回归锁 3 例（含负向） |
+
+
 ## W1279 AGENTS 地图化重建批（2026-11-19）
 
 | 文件 | W | 说明 |
@@ -2046,797 +2254,5 @@
 | site/data/tag-cloud.html | W1224 | 页脚批次链滚动（cascade 全档） |
 | site/dukou-engine.html | W1224 | 页脚批次链滚动（cascade 全档） |
 | site/index.html | W1224 | 页脚批次链滚动（cascade 全档） |
-
-## W1223 容量 #1 执行批：search 索引外置 + 第 46 槽判据域随迁 + #4 口径诚实化（2026-11-14）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_gen_search_index.py | W1223 | main() 外科幂等改形：索引外置 JS 数据件 + 页面外链（docstring 同步） |
-| scripts/check_search_index_fresh.py | W1223 | 第 46 槽判据域随迁：C1 双侧（数据件 + 页面外链）·自测 4→6 例 |
-| scripts/check_capacity_budget.py | W1223 | #4 口径纳入两份索引数据件（诚实口径） |
-| tests/unit/test_check_search_index_fresh.py | W1223 | G2 6/6 + G3 五类漂移同步 |
-| site/data/search.html | W1223 | 内联索引段摘除 + 外链引用（460,148→112,449 B） |
-| site/en/search.html | W1223 | 内联索引段摘除 + 外链引用（436,477→69,910 B） |
-| site/data/search-index-zh.js | W1223 | 新增：ZH 索引数据件（348,805 B·标记对随迁） |
-| site/en/search-index-en.js | W1223 | 新增：EN 索引数据件（367,673 B·标记对随迁） |
-| CHANGELOG.md | W1223 | 容量 #1 执行批 |
-| HANDOVER.md | W1223 | 里程碑块（cascade 写入） |
-| AGENTS.md | W1223 | 版本脚注滚动（cascade 写入） |
-| archive/docs/AGENTS-ARCHIVE.md | W1223 | AGENTS 脚注滚动归档（cascade 写入） |
-| docs/00-导读/W批次编号对账表.md | W1223 | W1223 认领行 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1223 | 台账行窗口腾窗迁出最老行（61>60·archive 写入） |
-| scripts/output/file-index.md | W1223 | 本批 file-index 段（cascade 写入） |
-| scripts/output/stats.json | W1223 | stats 重跑 |
-| scripts/output/stats-changelog.json | W1223 | stats 重跑产物（cascade 刷新） |
-| scripts/output/stats-index.md | W1223 | stats 重跑产物（cascade 刷新） |
-| scripts/output/_cascade_files_W1223.txt | W1223 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1223_spec.json | W1223 | 本批 spec |
-| README.md | W1223 | 版本面推进（version_surface） |
-| STRUCTURE.md | W1223 | 版本面推进（version_surface） |
-| CITATION.cff | W1223 | 版本面推进（version_surface） |
-| docs/00-导读/项目说明.md | W1223 | 版本面推进（version_surface） |
-| .github/workflows/README.md | W1223 | 版本面推进（version_surface） |
-| archive/docs/workflows-readme-history.md | W1223 | workflows README 历史归档（version_surface） |
-| site/sitemap.xml | W1223 | sitemap 重建（search 两页 lastmod） |
-| scripts/output/INDEX.md | W1223 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1223 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/tools-inventory.md | W1223 | 工具盘点时间戳随动（cascade） |
-| scripts/output/_vermilion_solid_cache.json | W1223 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
-| site/data/cross-time-danmaku.html | W1223 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1223 | 页脚批次链滚动（cascade 全档） |
-| site/dukou-engine.html | W1223 | 页脚批次链滚动（cascade 全档） |
-| site/index.html | W1223 | 页脚批次链滚动（cascade 全档） |
-
-## W1222 容量阈值越线处置评估批：T-2 评估定稿 + T-3 运维制度化 + W1191 台账回填（2026-11-14）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/设计与架构方案/容量阈值越线处置评估-2026-11-14.md | W1222 | 新增：容量阈值越线处置评估报告（T-2 评估结论） |
-| docs/11-方案报告/设计与架构方案/系统架构v2迁移施工手册-2026-11-13.md | W1222 | T-2/T-3 状态行与 §6.1/§6.2 订正（评估已交付·T-3 已落地） |
-| docs/11-方案报告/README.md | W1222 | §二登记第 38 行 + 件数 20→21 |
-| docs/agent/batch-closeout-checklist.md | W1222 | §9 增审计缺口窗口事件驱动行（T-3） |
-| docs/agent/periodic-ops-checklist.md | W1222 | 新增：周期运维清单跟踪器（月/季/半年·T-3） |
-| docs/agent/INDEX.md | W1222 | 目录文档刷新（gen_folder_docs·新增 periodic-ops-checklist） |
-| docs/00-导读/W批次编号对账表.md | W1222 | W1191 行依证回填 + W1222 认领行 |
-| CHANGELOG.md | W1222 | 容量阈值越线处置评估批 |
-| HANDOVER.md | W1222 | 里程碑块（cascade 写入）+ HEAD 句 |
-| AGENTS.md | W1222 | 版本脚注滚动（cascade 写入） |
-| archive/docs/AGENTS-ARCHIVE.md | W1222 | AGENTS 脚注滚动归档（cascade 写入） |
-| scripts/output/file-index.md | W1222 | 本批 file-index 段（cascade 写入） |
-| scripts/output/stats.json | W1222 | stats 重跑（报告计数随新报告更新） |
-| scripts/output/stats-changelog.json | W1222 | stats 重跑产物（cascade 刷新） |
-| scripts/output/stats-index.md | W1222 | stats 重跑产物（cascade 刷新） |
-| scripts/output/_cascade_files_W1222.txt | W1222 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1222_spec.json | W1222 | 本批 spec |
-| README.md | W1222 | 版本面推进（version_surface） |
-| STRUCTURE.md | W1222 | 版本面推进（version_surface） |
-| CITATION.cff | W1222 | 版本面推进（version_surface） |
-| docs/00-导读/项目说明.md | W1222 | 版本面推进（version_surface） |
-| .github/workflows/README.md | W1222 | 版本面推进（version_surface） |
-| archive/docs/workflows-readme-history.md | W1222 | workflows README 历史归档（version_surface） |
-| docs/INDEX.md | W1222 | 文档索引重建（docs_index） |
-| site/data/search.html | W1222 | 搜索索引重建（新文档入索引） |
-| site/en/search.html | W1222 | 搜索索引重建（EN 版） |
-| site/sitemap.xml | W1222 | sitemap 重建（lastmod 刷新） |
-| scripts/output/INDEX.md | W1222 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1222 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/tools-inventory.md | W1222 | 工具盘点时间戳随动（cascade） |
-| scripts/output/_vermilion_solid_cache.json | W1222 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
-| site/data/cross-time-danmaku.html | W1222 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1222 | 页脚批次链滚动（cascade 全档） |
-| site/dukou-engine.html | W1222 | 页脚批次链滚动（cascade 全档） |
-| site/index.html | W1222 | 页脚批次链滚动（cascade 全档） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1222 | 报告类文档计数随动（stats sweep·181→182） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1222 | 统计数字标记随动（stats sweep） |
-| scripts/output/_w1205_capacity_audit.json | W1222 | 容量测量器复跑刷新（评估证据·固定输出路径） |
-
-## W1221 架构 v2 迁移施工手册批：执行面重述 + 独立审查整改 + 入库登记（2026-11-13）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/设计与架构方案/系统架构v2迁移施工手册-2026-11-13.md | W1221 | 新增：架构 v2 迁移施工手册（执行面重述 + 独立审查整改） |
-| docs/11-方案报告/README.md | W1221 | §二登记第 37 行 + 件数 19→20 |
-| CHANGELOG.md | W1221 | 迁移施工手册批 |
-| HANDOVER.md | W1221 | 里程碑块（cascade 写入） |
-| AGENTS.md | W1221 | 版本脚注滚动（cascade 写入） |
-| archive/docs/AGENTS-ARCHIVE.md | W1221 | AGENTS 脚注滚动归档（cascade 写入） |
-| docs/00-导读/W批次编号对账表.md | W1221 | W1221 认领行 |
-| scripts/output/file-index.md | W1221 | 本批 file-index 段（cascade 写入） |
-| scripts/output/stats.json | W1221 | stats 重跑 |
-| scripts/output/stats-changelog.json | W1221 | stats 重跑产物（cascade 刷新） |
-| scripts/output/stats-index.md | W1221 | stats 重跑产物（cascade 刷新） |
-| scripts/output/_cascade_files_W1221.txt | W1221 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1221_spec.json | W1221 | 本批 spec |
-| README.md | W1221 | 版本面推进（version_surface） |
-| STRUCTURE.md | W1221 | 版本面推进（version_surface） |
-| CITATION.cff | W1221 | 版本面推进（version_surface） |
-| docs/00-导读/项目说明.md | W1221 | 版本面推进（version_surface） |
-| docs/INDEX.md | W1221 | 文档索引重建（docs_index） |
-| site/data/search.html | W1221 | 搜索索引重建（版本面推进后重建） |
-| site/en/search.html | W1221 | 搜索索引重建（EN 版） |
-| site/sitemap.xml | W1221 | sitemap 重建（lastmod 刷新） |
-| scripts/output/INDEX.md | W1221 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1221 | 目录文档刷新（gen_folder_docs） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1221 | 台账行窗口腾窗迁出最老行（archive 写入） |
-| .github/workflows/README.md | W1221 | 版本面推进（version_surface） |
-| archive/docs/workflows-readme-history.md | W1221 | workflows README 历史归档（version_surface） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1221 | 统计数字标记随动（stats sweep） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1221 | 报告类文档计数随动（stats sweep·180→181） |
-| scripts/output/tools-inventory.md | W1221 | 工具盘点时间戳随动（cascade） |
-| scripts/output/_vermilion_solid_cache.json | W1221 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
-| site/data/cross-time-danmaku.html | W1221 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1221 | 页脚批次链滚动（cascade 全档） |
-| site/dukou-engine.html | W1221 | 页脚批次链滚动（cascade 全档） |
-| site/index.html | W1221 | 页脚批次链滚动（cascade 全档） |
-
-## W1220 CI 提速批：pytest 时间黑洞根修 + 三片并行 + 站点作业路由（2026-11-13）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1220 | ci.yml job 清单更新（12 job·三片并行与范围判定） |
-| .github/workflows/ci-sim.yml | W1220 | 删除重复 pip 安装行 |
-| .github/workflows/ci.yml | W1220 | changes 范围判定 + pytest 三片 + 聚合 + 缓存与路由 |
-| AGENTS.md | W1220 | 版本脚注滚动（cascade 写入） |
-| CHANGELOG.md | W1220 | CI 提速批 |
-| CITATION.cff | W1220 | 版本面推进（version_surface） |
-| HANDOVER.md | W1220 | 里程碑块（cascade 写入） |
-| README.md | W1220 | 版本面推进（version_surface） |
-| STRUCTURE.md | W1220 | 版本面推进（version_surface） |
-| archive/docs/AGENTS-ARCHIVE.md | W1220 | AGENTS 脚注滚动归档（cascade 写入） |
-| archive/docs/workflows-readme-history.md | W1220 | workflows README 历史归档（version_surface） |
-| docs/00-导读/W批次编号对账表.md | W1220 | W1220 认领行 |
-| docs/00-导读/项目说明.md | W1220 | 版本面推进（version_surface） |
-| pitfalls.md | W1220 | 新增 E-231（import 期重活/可导入假绿）+ E-232（required check 名不可变） |
-| scripts/a11y_audit.py | W1220 | a11y 扫描多进程并行（--jobs·ex.map 保序） |
-| scripts/containment_block_scan.py | W1220 | 扫描移入 main() + 只扫 style 块（67.6s→0.8s） |
-| scripts/output/INDEX.md | W1220 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1220 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/_cascade_files_W1220.txt | W1220 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1220_spec.json | W1220 | 本批 spec |
-| scripts/output/file-index.md | W1220 | 本批 file-index 段（cascade 写入） |
-| scripts/output/stats.json | W1220 | stats 重跑（计数跟随） |
-| scripts/output/tools-inventory.md | W1220 | 工具盘点时间戳随动（cascade） |
-| site/data/cross-time-danmaku.html | W1220 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1220 | 页脚批次链滚动（cascade 全档） |
-| site/dukou-engine.html | W1220 | 页脚批次链滚动（cascade 全档） |
-| site/index.html | W1220 | 页脚批次链滚动（cascade 全档） |
-| tests/unit/test_ci_wiring.py | W1220 | required check 名与聚合结构锁 |
-| tests/unit/test_tool_scripts_cli.py | W1220 | import 期时间预算判据（IMPORT_BUDGET_S） |
-
-## W1219 归档维护批：段目录组行补登 + 一级归档分卷 + 临时区归桶（2026-11-13）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1219 | 版本面推进（version_surface） |
-| AGENTS.md | W1219 | 版本脚注滚动（cascade 写入） |
-| CHANGELOG.md | W1219 | 归档维护批 |
-| CITATION.cff | W1219 | 版本面推进（version_surface） |
-| HANDOVER.md | W1219 | 里程碑块（cascade 写入） |
-| README.md | W1219 | 版本面推进（version_surface） |
-| STRUCTURE.md | W1219 | 版本面推进（version_surface） |
-| archive/README.md | W1219 | 段目录组行补登（w1169/w1175/w1176） |
-| archive/docs/AGENTS-ARCHIVE.md | W1219 | AGENTS 脚注滚动归档（cascade 写入） |
-| archive/docs/CHANGELOG-ARCHIVE.md | W1219 | 一级归档分卷（迁出 W814-W874·回落 899KB） |
-| archive/docs/CHANGELOG-ARCHIVE-tier2-W814-W874.md | W1219 | 新建二级归档分卷（59 段·196KB） |
-| archive/docs/file-index-ARCHIVE.md | W1219 | 一级归档分卷（迁出 W980-W1023·回落 899KB） |
-| archive/docs/file-index-ARCHIVE-tier2.md | W1219 | 二级归档追加 48 段（189KB） |
-| archive/docs/INDEX.md | W1219 | 目录文档刷新（gen_folder_docs·新分卷入清单） |
-| archive/docs/README.md | W1219 | 目录文档刷新（gen_folder_docs·新分卷入清单） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1219 | 台账腾窗迁出最老行（archive 写入） |
-| archive/docs/workflows-readme-history.md | W1219 | workflows README 历史归档（version_surface） |
-| docs/00-导读/W批次编号对账表.md | W1219 | W1219 认领行 + 台账腾窗 |
-| docs/00-导读/项目说明.md | W1219 | 版本面推进（version_surface） |
-| scripts/output/stats.json | W1219 | stats 重跑生成时点刷新（值无变更） |
-| scripts/output/INDEX.md | W1219 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1219 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/_cascade_files_W1219.txt | W1219 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1219_spec.json | W1219 | 本批 spec |
-| scripts/output/file-index.md | W1219 | 本批 file-index 段（cascade 写入） |
-| scripts/output/tools-inventory.md | W1219 | 工具盘点时间戳随动（cascade） |
-| site/data/cross-time-danmaku.html | W1219 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1219 | 页脚批次链滚动（cascade 全档） |
-| site/dukou-engine.html | W1219 | 页脚批次链滚动（cascade 全档） |
-| site/index.html | W1219 | 页脚批次链滚动（cascade 全档） |
-
-## W1218 审查整改批：LFS 判据 fail-closed + C5 前置 + 计数跟随（2026-11-13）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1218 | 版本面推进（version_surface） |
-| AGENTS.md | W1218 | 版本脚注滚动（cascade 写入） |
-| CHANGELOG.md | W1218 | 审查整改批 |
-| CITATION.cff | W1218 | 版本面推进（version_surface） |
-| HANDOVER.md | W1218 | 里程碑块（cascade 写入） |
-| README.md | W1218 | 版本面推进（version_surface） |
-| STRUCTURE.md | W1218 | 版本面推进（version_surface） |
-| archive/docs/AGENTS-ARCHIVE.md | W1218 | AGENTS 脚注滚动归档（cascade 写入） |
-| archive/docs/workflows-readme-history.md | W1218 | workflows README 历史归档（version_surface） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1218 | 台账腾窗迁出最老行（archive 写入） |
-| docs/00-导读/W批次编号对账表.md | W1218 | W1218 认领行 + 台账腾窗 |
-| docs/00-导读/项目说明.md | W1218 | 版本面推进（version_surface） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1218 | stats 标记跟随（pytest_collected） |
-| pytest.ini | W1218 | pytest_collected 标记跟随（新增 2 例） |
-| scripts/check_folder_docs.py | W1218 | C5 前移到结构解析之前（抽 _c1_fails/_c5_precheck） |
-| scripts/check_lfs_text_purity.py | W1218 | cat-file 返回码检查（fail-closed exit 2） |
-| scripts/output/INDEX.md | W1218 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1218 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/_cascade_files_W1218.txt | W1218 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1218_spec.json | W1218 | 本批 spec |
-| scripts/output/file-index.md | W1218 | 本批 file-index 段（cascade 写入） |
-| scripts/output/stats-changelog.json | W1218 | stats 变更史（pytest_collected） |
-| scripts/output/stats-index.md | W1218 | stats 反向索引重渲 |
-| scripts/output/stats.json | W1218 | stats 实算刷新（pytest_collected 1635→1637） |
-| scripts/output/tools-inventory.md | W1218 | 工具盘点时间戳随动（cascade/gate） |
-| scripts/output/_vermilion_solid_cache.json | W1218 | 朱砂门禁增量缓存随动（第 49 槽实跑刷新） |
-| site/data/cross-time-danmaku.html | W1218 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1218 | 页脚批次链滚动（cascade 全档） |
-| site/dukou-engine.html | W1218 | 页脚批次链滚动（cascade 全档） |
-| site/index.html | W1218 | 页脚批次链滚动（cascade 全档） |
-| tests/unit/test_folder_docs_gate.py | W1218 | 新增 C5 指针消息 1 例 |
-| tests/unit/test_lfs_text_purity.py | W1218 | 新增 cat-file fail-closed 1 例 |
-
-## W1217 审查整改批：ci_sim 自跳过降级 + dry-run 零写盘 + 登记面校正（2026-11-13）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1217 | 版本面推进（version_surface） |
-| AGENTS.md | W1217 | 版本脚注滚动（cascade 写入） |
-| CHANGELOG.md | W1217 | 审查整改批 |
-| CITATION.cff | W1217 | 版本面推进（version_surface） |
-| HANDOVER.md | W1217 | 里程碑块（cascade 写入） |
-| README.md | W1217 | 版本面推进（version_surface） |
-| STRUCTURE.md | W1217 | 版本面推进（version_surface） |
-| archive/docs/AGENTS-ARCHIVE.md | W1217 | AGENTS 脚注滚动归档（cascade 写入） |
-| archive/docs/workflows-readme-history.md | W1217 | workflows README 历史归档（version_surface） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1217 | 台账腾窗迁出最老行（archive 写入） |
-| docs/00-导读/W批次编号对账表.md | W1217 | W1217 认领行 + 台账腾窗 |
-| docs/00-导读/项目说明.md | W1217 | 版本面推进（version_surface） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1217 | stats 标记跟随（pytest_collected） |
-| pytest.ini | W1217 | pytest_collected 标记跟随（新增 4 例） |
-| scripts/batch_closeout.py | W1217 | dry-run 零写盘：cascade/archive/rebuild 增 dry 参数 |
-| scripts/check_gov_doc_claims.py | W1217 | N3/N4 剥 stats 标记后匹配 + 自测补带标记句 |
-| scripts/pre_push_gate.py | W1217 | 脏度前置快照 + ci_sim 自跳过计入判据降级 |
-| scripts/output/INDEX.md | W1217 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1217 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/_cascade_files_W1217.txt | W1217 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1216_spec.json | W1217 | 删未落地 sitemap 行（登记面校正） |
-| scripts/output/_w1217_spec.json | W1217 | 本批 spec |
-| scripts/output/file-index.md | W1217 | 本批 file-index 段（cascade 写入） |
-| scripts/output/stats-changelog.json | W1217 | stats 变更史（pytest_collected） |
-| scripts/output/stats-index.md | W1217 | stats 反向索引重渲 |
-| scripts/output/stats.json | W1217 | stats 实算刷新（pytest_collected 1631→1635） |
-| scripts/output/tools-inventory.md | W1217 | 工具盘点时间戳随动（cascade/gate） |
-| scripts/output/_vermilion_solid_cache.json | W1217 | 朱砂门禁增量缓存随动（第 49 槽实跑刷新） |
-| site/data/cross-time-danmaku.html | W1217 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1217 | 页脚批次链滚动（cascade 全档） |
-| site/dukou-engine.html | W1217 | 页脚批次链滚动（cascade 全档） |
-| site/index.html | W1217 | 页脚批次链滚动（cascade 全档） |
-| site/sitemap.xml | W1217 | sitemap 重渲（gen_sitemap） |
-| tests/unit/test_check_placeholder_hash_carrier.py | W1217 | 槽总数派生改无界正则 |
-| tests/unit/test_pre_push_gate.py | W1217 | 新增 plan_run 3 例（自跳过降级锁） |
-| tests/unit/test_w1102_batch_closeout.py | W1217 | 新增 dry-run 零写盘 1 例 |
-| tests/unit/test_w1141_gate_mount.py | W1217 | 槽号统计改无界正则 |
-
-## W1216 收尾清偿批：台账 hash 回填 + 「71 槽」marker 化 + 复盘弧线交付（2026-11-12）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1216 | 版本面推进（cascade/versions 写入） |
-| AGENTS.md | W1216 | 71 槽 marker 化 ×3（gate_count） |
-| CHANGELOG.md | W1216 | 收尾清偿批 |
-| CITATION.cff | W1216 | 版本面推进（version_surface） |
-| HANDOVER.md | W1216 | 71 槽 marker 化 ×2 + 里程碑块 |
-| README.md | W1216 | 版本面推进（version_surface） |
-| archive/docs/AGENTS-ARCHIVE.md | W1216 | AGENTS 脚注滚动归档（cascade 写入） |
-| archive/docs/workflows-readme-history.md | W1216 | workflows README 历史归档（version_surface） |
-| docs/00-导读/W批次编号对账表.md | W1216 | W1216 认领行 + W1214/W1215 hash 回填 |
-| docs/11-方案报告/README.md | W1216 | 复盘弧线篇登记（19 件/新行/总览纠偏） |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-12.md | W1216 | 新建：复盘弧线篇（W1212-W1215 弧线·三绿不同源主题） |
-| docs/agent/gates.md | W1216 | 标题 71 槽 marker 化 |
-| scripts/batch_closeout.py | W1216 | index 步内序根修（docs_index 在前·搜索内嵌派生字段陈旧族） |
-| scripts/output/_vermilion_solid_cache.json | W1216 | 朱砂门禁增量缓存随动（惯例入库件） |
-| docs/INDEX.md | W1216 | 文档索引重渲（+1 篇·docs_index） |
-| scripts/output/_cascade_files_W1216.txt | W1216 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1216_spec.json | W1216 | 本批 spec |
-| scripts/output/file-index.md | W1216 | 本批 file-index 段（cascade 写入） |
-| scripts/output/INDEX.md | W1216 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1216 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/stats-changelog.json | W1216 | stats 变更史（report_docs 等） |
-| scripts/output/stats-index.md | W1216 | stats 反向索引重渲 |
-| scripts/output/stats.json | W1216 | stats 实算刷新（report_docs +1） |
-| scripts/output/tools-inventory.md | W1216 | 工具盘点时间戳随动（cascade） |
-| STRUCTURE.md | W1216 | 版本面推进（version_surface） |
-| docs/00-导读/项目说明.md | W1216 | 版本面推进（version_surface） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1216 | sweep 存量面标记跟随（report_docs·自动） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1216 | sweep 存量面标记跟随（report_docs·自动） |
-| site/data/cross-time-danmaku.html | W1216 | 页脚四面批次版本随动（cascade 全档） |
-| site/data/search.html | W1216 | 搜索索引重渲（自动） |
-| site/data/tag-cloud.html | W1216 | 页脚四面批次版本随动（cascade 全档） |
-| site/en/search.html | W1216 | 搜索索引重渲（自动） |
-| site/dukou-engine.html | W1216 | 页脚四面批次版本随动（cascade 全档） |
-| site/index.html | W1216 | 页脚四面批次版本随动 + C5b 标记面 |
-| tests/unit/test_check_placeholder_hash_carrier.py | W1216 | 声明面断言剥标记容错（gate_count marker） |
-| tests/unit/test_w1102_batch_closeout.py | W1216 | 行为锁随 index 内序对调更新（docs_index 在前） |
-| tests/unit/test_w1141_gate_mount.py | W1216 | 槽数断言剥标记容错（gate_count marker） |
-
-## W1215 一命令真全量与计数链生成器化批：pre_push_gate + 收官链接步 + 计数链 markers（2026-11-12）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .agent/skills/puti-shouye/SKILL.md | W1215 | 一命令真全量与计数链生成器化批：坑位计数 markers 化 |
-| AGENTS.md | W1215 | 一命令真全量与计数链生成器化批：就绪链可执行化 + 计数 markers + §5.2 登记 |
-| CHANGELOG.md | W1215 | 一命令真全量与计数链生成器化批 |
-| CLAUDE.md | W1215 | 一命令真全量与计数链生成器化批：pre_push_gate/closeout 命令登记 |
-| HANDOVER.md | W1215 | 一命令真全量与计数链生成器化批：计数 markers + 里程碑块 |
-| STRUCTURE.md | W1215 | 一命令真全量与计数链生成器化批：坑位计数 marker 化 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1215 | 台账腾窗迁出 2 行（W1152-W1153·preflight 超窗前置清偿） |
-| docs/00-导读/W批次编号对账表.md | W1215 | W1215 认领行 + 台账腾窗（61→59 行） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1215 | sweep 存量面标记跟随（C5b 对账面·自动） |
-| docs/agent/pitfalls.md | W1215 | 跳转壳坑位计数 marker 化 |
-| pitfalls.md | W1215 | E-229 入表 + 六主题段头 markers |
-| pytest.ini | W1215 | sweep 收集数标记跟随（新 16 例·自动） |
-| scripts/batch_closeout.py | W1215 | cascade 链首 + gate 链尾接步 + _run_finalize 抽函数 |
-| scripts/check_doc_sync.py | W1215 | pitfall_theme_counts 取数面 + C5e 剥标记补盲 + C5b 面扩展 |
-| scripts/output/_cascade_files_W1215.txt | W1215 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1215_spec.json | W1215 | 本批 spec |
-| scripts/output/file-index.md | W1215 | 本批 file-index 段（cascade 写入） |
-| scripts/output/stats-changelog.json | W1215 | stats 变更史（W1215·7 新键 + 坑位族） |
-| scripts/output/stats-index.md | W1215 | stats 反向索引重渲 |
-| scripts/output/stats.json | W1215 | stats 实算刷新（pitfalls 族 7 新键） |
-| scripts/output/tools-inventory.md | W1215 | 工具盘点重渲（+1 件 pre_push_gate） |
-| scripts/gen_sitemap.py | W1215 | sitemap lastmod UTC 钳（R3 时区窗根修·CI 回检补笔） |
-| scripts/pre_push_gate.py | W1215 | 新建：一命令真全量编排器（guardrails→verify→pytest→ci_sim） |
-| scripts/stats.py | W1215 | pitfalls 族 7 新键 + 窄域 sweep + 既有嵌套随档根修 |
-| site/data/search.html | W1215 | 搜索索引重渲（文档计数随动·自动） |
-| site/en/search.html | W1215 | 搜索索引重渲（文档计数随动·自动） |
-| tests/unit/test_pre_push_gate.py | W1215 | 新建：pre_push_gate 纯逻辑 10 例 |
-| tests/unit/test_w1114_version_surface.py | W1215 | 步序锁随链更新（cascade 链首/gate 链尾） |
-| tests/unit/test_w1215_count_markers.py | W1215 | 新建：计数链生成器化 6 例（含窄域与盲区负样本） |
-| tests/unit/test_w1124_closeout_rebuild.py | W1215 | 步序锁随链更新（cascade 链首/gate 链尾） |
-| .github/workflows/README.md | W1215 | 版本面推进（head_entry·cascade/versions 写入） |
-| CITATION.cff | W1215 | 版本面推进（version_surface） |
-| README.md | W1215 | 版本面推进（version_surface） |
-| archive/docs/AGENTS-ARCHIVE.md | W1215 | AGENTS 脚注滚动归档（cascade 写入） |
-| archive/docs/workflows-readme-history.md | W1215 | workflows README 历史归档（version_surface） |
-| docs/00-导读/项目说明.md | W1215 | 版本面推进（version_surface） |
-| scripts/INDEX.md | W1215 | 目录文档刷新（+pre_push_gate·gen_folder_docs） |
-| scripts/output/INDEX.md | W1215 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1215 | 目录文档刷新（gen_folder_docs） |
-| site/data/cross-time-danmaku.html | W1215 | 页脚四面批次版本随动（cascade 全档） |
-| site/data/tag-cloud.html | W1215 | 页脚四面批次版本随动（cascade 全档） |
-| site/dukou-engine.html | W1215 | 页脚四面批次版本随动（cascade 全档） |
-| site/index.html | W1215 | 页脚四面批次版本随动 + C5b 标记面 |
-| site/sitemap.xml | W1215 | sitemap 重渲（gen_sitemap） |
-| tests/unit/INDEX.md | W1215 | 目录文档刷新（+2 测试文件·gen_folder_docs） |
-| tests/unit/README.md | W1215 | 目录文档刷新（gen_folder_docs） |
-| Makefile | W1215 | gate 目标登记（编排面·第 42 槽 C1 四面引用） |
-| tests/unit/test_w1102_batch_closeout.py | W1215 | 步序锁随链更新（真全量 gate 首跑抓漏） |
-| scripts/output/_vermilion_solid_cache.json | W1215 | 朱砂门禁增量缓存随动（近四批惯例入库件） |
-
-## W1214 LFS 文本文件根修批：文本文件移出 LFS + 第 45 槽 C5 防复发（2026-11-12）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .agent/skills/puti-shouye/SKILL.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| .gitattributes | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| .github/workflows/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| AGENTS.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| CHANGELOG.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| CITATION.cff | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| HANDOVER.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| Makefile | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| STRUCTURE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| archive/docs/AGENTS-ARCHIVE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| archive/docs/workflows-readme-history.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/hero-set/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/hero-set/raw/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/hero-set/raw/round-w1005/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/hero-set/raw/round-w1005/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/output/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/output/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/plate-set/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/xiyouji-flyer-a4-en.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| assets/promo/xiyouji-flyer-a4.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/00-导读/W批次编号对账表.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/00-导读/项目说明.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/11-方案报告/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/11-方案报告/计划方案/T102-任务计划执行与经验沉淀报告-2026-11-12.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/agent/gates.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| docs/agent/pitfalls.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| pitfalls.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| pytest.ini | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/check_folder_docs.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/check_lfs_text_purity.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/ci_sim.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/_cascade_files_W1214.txt | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/_vermilion_solid_cache.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/_w1214_spec.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/file-index.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/stats-changelog.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/stats-index.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/stats.json | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| scripts/output/tools-inventory.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| site/data/cross-time-danmaku.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| site/data/search.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| site/data/tag-cloud.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| site/dukou-engine.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| site/en/search.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| site/index.html | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| tests/unit/INDEX.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| tests/unit/README.md | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-| tests/unit/test_lfs_text_purity.py | W1214 | LFS 文本文件根修批：文本移出 LFS 与第 45 槽 C5 防复发 |
-
-## W1212 第 45 槽失败明细并入汇总行批：排障盲区根修（2026-11-12）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| AGENTS.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| CHANGELOG.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| CITATION.cff | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| HANDOVER.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| STRUCTURE.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| archive/docs/AGENTS-ARCHIVE.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| archive/docs/workflows-readme-history.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| docs/00-导读/W批次编号对账表.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| docs/00-导读/项目说明.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| pytest.ini | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/check_folder_docs.py | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/INDEX.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/_cascade_files_W1212.txt | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/_w1212_spec.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/file-index.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/stats-changelog.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/stats-index.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/stats.json | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| scripts/output/tools-inventory.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| site/data/cross-time-danmaku.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| site/data/tag-cloud.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| site/dukou-engine.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| site/index.html | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| tests/unit/INDEX.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| tests/unit/README.md | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-| tests/unit/test_folder_docs_summary.py | W1212 | 第 45 槽失败明细并入汇总行  排障盲区根修 |
-
-## W1211 CI 修复与机制补强批：apt 源回退 + 第 71 槽接 ci_sim + Backlog 对账清偿（2026-11-12）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .agent/skills/puti-shouye/SKILL.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| .github/workflows/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| .github/workflows/ci-sim.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| .github/workflows/ci.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| .github/workflows/screenshot-review.yml | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| AGENTS.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| CHANGELOG.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| CITATION.cff | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| HANDOVER.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| STRUCTURE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| archive/docs/AGENTS-ARCHIVE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| archive/docs/workflows-readme-history.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| docs/00-导读/W批次编号对账表.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| docs/00-导读/项目说明.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| docs/11-方案报告/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| docs/11-方案报告/计划方案/T101-任务计划执行与经验沉淀报告-2026-11-12.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| docs/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| docs/agent/pitfalls.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| pitfalls.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| pytest.ini | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/ci_repair_apt_mirror.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/ci_sim.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/_cascade_files_W1211.txt | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/_w1211_spec.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/file-index.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/stats-changelog.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/stats-index.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/stats.json | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/output/tools-inventory.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| scripts/preflight_check.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| site/data/cross-time-danmaku.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| site/data/search.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| site/data/tag-cloud.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| site/dukou-engine.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| site/en/search.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| site/index.html | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| tests/unit/INDEX.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| tests/unit/README.md | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| tests/unit/test_ci_repair_apt_mirror.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-| tests/unit/test_preflight_check.py | W1211 | CI 修复与机制补强  apt 源回退 + 第 71 槽接 ci_sim |
-
-## W1210 占位符哈希载体常驻门禁批：第 71 槽挂载 + 存量 N2 解析器假红根修（2026-11-11）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| AGENTS.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| CHANGELOG.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| CITATION.cff | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| HANDOVER.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| STRUCTURE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| archive/docs/AGENTS-ARCHIVE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| archive/docs/workflows-readme-history.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/00-导读/W批次编号对账表.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/00-导读/文档规范.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/00-导读/项目说明.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/11-方案报告/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/11-方案报告/计划方案/T100-任务计划执行与经验沉淀报告-2026-11-11.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| docs/agent/gates.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| pytest.ini | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/check_gov_doc_claims.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/check_placeholder_hash_carrier.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/_cascade_files_W1210.txt | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/_vermilion_solid_cache.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/_w1210_spec.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/file-index.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/stats-changelog.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/stats-index.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/stats.json | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/output/tools-inventory.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| scripts/verify_delivery.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| site/data/cross-time-danmaku.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| site/data/search.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| site/data/tag-cloud.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| site/dukou-engine.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| site/en/search.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| site/index.html | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| tests/unit/INDEX.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| tests/unit/README.md | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-| tests/unit/test_check_placeholder_hash_carrier.py | W1210 | 改：占位符哈希载体门禁挂槽  第 71 槽 |
-
-## W1209 仓库体积治理批：历史改写 + LFS 迁移 + commit hash 回填（2026-11-11）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .agent/skills/puti-shouye/SKILL.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| .gitattributes | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| .github/workflows/README.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| AGENTS.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| CHANGELOG.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| CITATION.cff | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| HANDOVER.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| README.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| STRUCTURE.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| assets/design/process/RECEIPT-W855.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/00-导读/W批次编号对账表.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/00-导读/文档规范.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/00-导读/统计口径说明.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/00-导读/项目说明.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/02-人物深度分析/菩提祖师-方向二深化.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/02-人物深度分析/金角银角-方向二深化.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/02-人物深度分析/高翠兰-方向二深化.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/02-人物深度分析/黑熊精-方向二深化.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/README.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/全仓逐逻辑深度审计报告-2026-11-06.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/全量对抗审查报告-2026-10-16.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/基础设施口径与门禁全量审计报告-2026-11-06.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/对抗审查报告-2026-11-06.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/对抗性审查报告-2026-10-14.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/工具脚本门禁体检与临时归档审计-2026-10-29.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/站点交互流程审查第二轮复核报告-2026-10-31.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/站点交互流程审查第四轮复核报告-2026-11-05.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/计划方案三性审查报告-2026-10-20.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/审查与评审/设计文件审查报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-07-治理与引擎.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-07.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-10-2.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-10-3.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-10.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-11.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-12.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-13.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-14.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-15.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-19.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-30.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-31.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-07.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/治理与核查/W761工具链可维护性重构报告-2026-10-16.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/治理与核查/全仓待办计划方案状态核查报告-2026-10-18.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/治理与核查/多Agent干扰治理评估与实施记录-2026-10-14.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T01-任务计划执行与经验沉淀报告-2026-10-14.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T03-任务计划执行与经验沉淀报告-2026-10-20.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T06-任务计划执行与经验沉淀报告-2026-10-22.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T07-任务计划执行与经验沉淀报告-2026-10-21.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T09-任务计划执行与经验沉淀报告-2026-10-22.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T11-任务计划执行与经验沉淀报告-2026-10-22.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T12-任务计划执行与经验沉淀报告-2026-10-23.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T13-任务计划执行与经验沉淀报告-2026-10-23.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T14-任务计划执行与经验沉淀报告-2026-10-23.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T16-任务计划执行与经验沉淀报告-2026-10-23.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T23-任务计划执行与经验沉淀报告-2026-10-25.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T28-任务计划执行与经验沉淀报告-2026-10-26.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T30-任务计划执行与经验沉淀报告-2026-10-27.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T31-任务计划执行与经验沉淀报告-2026-10-27.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T32-任务计划执行与经验沉淀报告-2026-10-27.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T34-任务计划执行与经验沉淀报告-2026-10-27.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T35-任务计划执行与经验沉淀报告-2026-10-28.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T36-任务计划执行与经验沉淀报告-2026-10-29.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T37-任务计划执行与经验沉淀报告-2026-10-29.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T38-任务计划执行与经验沉淀报告-2026-10-29.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T41-任务计划执行与经验沉淀报告-2026-11-01.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T42-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T43-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T45-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T46-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T47-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T48-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T49-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T50-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T51-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T52-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T53-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T54-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T55-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T56-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T57-任务计划执行与经验沉淀报告-2026-11-02.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T59-任务计划执行与经验沉淀报告-2026-11-03.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T60-任务计划执行与经验沉淀报告-2026-11-03.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T61-任务计划执行与经验沉淀报告-2026-11-03.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T62-任务计划执行与经验沉淀报告-2026-11-03.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T63-任务计划执行与经验沉淀报告-2026-11-03.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T66-任务计划执行与经验沉淀报告-2026-11-03.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T68-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T71-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T72-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T74-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T75-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T79-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T80-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T81-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T84-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T86-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T87-任务计划执行与经验沉淀报告-2026-11-05.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T88-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T89-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T90-任务计划执行与经验沉淀报告-2026-11-04.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T91-任务计划执行与经验沉淀报告-2026-11-09.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T92-任务计划执行与经验沉淀报告-2026-11-09.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T93-任务计划执行与经验沉淀报告-2026-11-09.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T94-任务计划执行与经验沉淀报告-2026-11-09.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T95-任务计划执行与经验沉淀报告-2026-11-09.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T96-任务计划执行与经验沉淀报告-2026-11-10.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T97-任务计划执行与经验沉淀报告-2026-11-11.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/T99-任务计划执行与经验沉淀报告-2026-11-11.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/执行前计划-T01.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/执行前计划-T03-全项目审查第一批修复.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/执行前计划-T30-内页题图成套批第四组.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/计划方案/执行前计划-W1040-任务分级协议入库.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/agent-guardrails/merge-patch.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/agent/gates.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/agent/pitfalls.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/superpowers/plans/2026-10-02-product-design-suite-applicability-plan.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/superpowers/plans/2026-10-11-agents-layered-restructure.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/superpowers/plans/2026-10-11-version-space-inventory.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| pitfalls.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/INDEX.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/INDEX.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/README.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_cascade_files_W1209.txt | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1018_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1030_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1057_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1062_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1090_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1120_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1125_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1127_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1130_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1133_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1135_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1144_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1151_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1158_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1166_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1167_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1190_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1192_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1195_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1199_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1201_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1202_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1203_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1205_capacity_audit.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1205_scorecard_alerts.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w1207_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w761_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w816_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w827_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w830_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w877_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w884_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w893_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w899_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w905_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w912_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w954_review_evidence.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w976_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w985_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w986_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w988_match.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w993_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w995_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/_w996_spec.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/file-index.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/stats-changelog.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/stats-index.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/stats.json | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/output/tools-inventory.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| scripts/rag/README.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| tests/unit/INDEX.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-| tests/unit/README.md | W1209 | 改：仓库体积治理  历史改写+LFS 迁移  hash 回填 |
-
-## W1208 C-8 守卫接入提交门禁批：第 70 槽挂载 + 注册表与槽数声明面同改（2026-11-11）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| AGENTS.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| CHANGELOG.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| CITATION.cff | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| HANDOVER.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| docs/00-导读/W批次编号对账表.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| docs/00-导读/项目说明.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| docs/11-方案报告/README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| docs/11-方案报告/计划方案/T98-任务计划执行与经验沉淀报告-2026-11-11.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| docs/agent/gates.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/INDEX.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/check_no_hardcoded_endpoint.py | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/INDEX.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/_cascade_files_W1208.txt | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/_w1208_spec.json | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/file-index.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/stats-changelog.json | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/stats-index.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/stats.json | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/output/tools-inventory.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| scripts/verify_delivery.py | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| tests/unit/INDEX.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
-| tests/unit/README.md | W1208 | 改：C-8 守卫接入提交门禁  第 70 槽 |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

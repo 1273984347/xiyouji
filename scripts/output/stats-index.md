@@ -20,7 +20,7 @@
 | gate_count | 83 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | 1266 |
 | html_total | 875 | site/**/*.html（递归全站） | W459 | W1246 |
 | icon_allowlist_entries | 63 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1261 |
-| inline_css_pages | 865 | site 全树含 INLINED 标记页 | W459 | W1276 |
+| inline_css_pages | 727 | site 全树含 INLINED 标记页 | W459 | 1280 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 28 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1157 |
 | pitfalls_cascade | 26 | pitfalls.md 主题「级联 / CHANGELOG」实测条目数 | W1215 | W1215 |
@@ -30,7 +30,7 @@
 | pitfalls_git | 39 | pitfalls.md 主题「git / 提交 / 并发」实测条目数 | W1215 | W1273 |
 | pitfalls_js | 12 | pitfalls.md 主题「JS / CSP / 运行时」实测条目数 | W1215 | W1215 |
 | pitfalls_total | 390 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | W1276 |
-| pytest_collected | 1788 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1277 |
+| pytest_collected | 1791 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1280 |
 | report_docs | 228 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1275 |
 | scan_files | 873 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W1246 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
@@ -44,6 +44,10 @@
 | w864_entries | 259 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1152 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### 1280（2026-11-19 17:53:11）
+- inline_css_pages: 865 → 727
+- pytest_collected: 1788 → 1791
 
 ### 1277（2026-11-19 01:49:42）
 - pytest_collected: 1784 → 1788

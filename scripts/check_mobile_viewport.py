@@ -34,6 +34,8 @@ import os
 import re
 import sys
 
+from utils.css_public_layer import public_layer_text  # noqa: E402 — W1280 同源共用
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MARKER = "---- 第 64 门禁 移动视口："
 CSS_PATH = os.path.join(ROOT, "site", "system.css")
@@ -280,7 +282,10 @@ def check_en_static() -> list[str]:
         except OSError as exc:
             fails.append(f"A8 site/en/{name} 不可读: {exc}")
             continue
-        miss = [label for label, rx in NARROW_FEATURES if not rx.search(txt)]
+        # W1280：判定面随加载形态修订——公共层外链形态下，窄屏适配特征由公共层提供
+        # （页内文本不再含这些声明）⇒ 并入公共层文本，否则 138 页会被误判为「契约丢失」。
+        scope_text = txt + public_layer_text(txt, EN_DIR)
+        miss = [label for label, rx in NARROW_FEATURES if not rx.search(scope_text)]
         if miss:
             fails.append(f"A8 site/en/{name} 缺窄屏适配特征：{'、'.join(miss)}")
     return fails

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（133）
+## 文件（134）
 
 ### Python 脚本
 
@@ -146,6 +146,7 @@
 - `test_w1275_relink_persist.py`
 - `test_w1276_token_scope.py`
 - `test_w1277_p3_fixes.py`
+- `test_w1280_static_scope.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

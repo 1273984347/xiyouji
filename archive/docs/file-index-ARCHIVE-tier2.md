@@ -5474,3 +5474,2520 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W1023 | 本批新增/修改 |
 | site/index.html | W1023 | 本批新增/修改 |
 
+> 归档追加：2026-11-19（W994 迁入 W1024-W1079）
+
+## W1024 本次任务教训固化对账（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1024 | 本批新增/修改 |
+| AGENTS.md | W1024 | 本批新增/修改 |
+| CHANGELOG.md | W1024 | 本批新增/修改 |
+| CITATION.cff | W1024 | 本批新增/修改 |
+| HANDOVER.md | W1024 | 本批新增/修改 |
+| README.md | W1024 | 本批新增/修改 |
+| STRUCTURE.md | W1024 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1024 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1024 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1024 | 本批新增/修改 |
+| docs/agent/batch-closeout-checklist.md | W1024 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1024 | 本批新增/修改 |
+| scripts/output/_w1024_spec.json | W1024 | 本批新增/修改 |
+| scripts/output/file-index.md | W1024 | 本批新增/修改 |
+| site/index.html | W1024 | 本批新增/修改 |
+
+## W1025 坑表计数升机器判据（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1025 | 本批新增/修改 |
+| AGENTS.md | W1025 | 本批新增/修改 |
+| CHANGELOG.md | W1025 | 本批新增/修改 |
+| CITATION.cff | W1025 | 本批新增/修改 |
+| HANDOVER.md | W1025 | 本批新增/修改 |
+| README.md | W1025 | 本批新增/修改 |
+| STRUCTURE.md | W1025 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1025 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1025 | 本批新增/修改 |
+| scripts/check_doc_sync.py | W1025 | 本批新增/修改 |
+| scripts/output/_w1025_spec.json | W1025 | 本批新增/修改 |
+| scripts/output/file-index.md | W1025 | 本批新增/修改 |
+| site/index.html | W1025 | 本批新增/修改 |
+
+## W1026 HANDOVER 已完成内容归档 + 归档机制诊断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1026 | 本批新增/修改 |
+| AGENTS.md | W1026 | 本批新增/修改 |
+| CHANGELOG.md | W1026 | 本批新增/修改 |
+| CITATION.cff | W1026 | 本批新增/修改 |
+| HANDOVER.md | W1026 | 本批新增/修改 |
+| README.md | W1026 | 本批新增/修改 |
+| STRUCTURE.md | W1026 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1026 | 本批新增/修改 |
+| archive/docs/HANDOVER-ARCHIVE.md | W1026 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1026 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1026 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1026 | 本批新增/修改 |
+| scripts/output/_w1026_spec.json | W1026 | 本批新增/修改 |
+| scripts/output/file-index.md | W1026 | 本批新增/修改 |
+| site/index.html | W1026 | 本批新增/修改 |
+
+## W1027 治理文档文字审查 A 档（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1027 | 本批新增/修改 |
+| AGENTS.md | W1027 | 本批新增/修改 |
+| CHANGELOG.md | W1027 | 本批新增/修改 |
+| CITATION.cff | W1027 | 本批新增/修改 |
+| HANDOVER.md | W1027 | 本批新增/修改 |
+| README.md | W1027 | 本批新增/修改 |
+| STRUCTURE.md | W1027 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1027 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1027 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1027 | 本批新增/修改 |
+| scripts/output/_w1027_spec.json | W1027 | 本批新增/修改 |
+| scripts/output/file-index.md | W1027 | 本批新增/修改 |
+| site/index.html | W1027 | 本批新增/修改 |
+
+## W1028 归档系统与临时文件系统诊断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1028 | 本批新增/修改 |
+| AGENTS.md | W1028 | 本批新增/修改 |
+| CHANGELOG.md | W1028 | 本批新增/修改 |
+| CITATION.cff | W1028 | 本批新增/修改 |
+| HANDOVER.md | W1028 | 本批新增/修改 |
+| README.md | W1028 | 本批新增/修改 |
+| STRUCTURE.md | W1028 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1028 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1028 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1028 | 本批新增/修改 |
+| docs/agent/batch-closeout-checklist.md | W1028 | 本批新增/修改 |
+| scripts/output/_w1028_spec.json | W1028 | 本批新增/修改 |
+| scripts/output/file-index.md | W1028 | 本批新增/修改 |
+| site/index.html | W1028 | 本批新增/修改 |
+
+## W1029 方案报告归档判断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1029 | 本批新增/修改 |
+| AGENTS.md | W1029 | 本批新增/修改 |
+| CHANGELOG.md | W1029 | 本批新增/修改 |
+| CITATION.cff | W1029 | 本批新增/修改 |
+| HANDOVER.md | W1029 | 本批新增/修改 |
+| README.md | W1029 | 本批新增/修改 |
+| STRUCTURE.md | W1029 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1029 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1029 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1029 | 本批新增/修改 |
+| docs/11-方案报告/README.md | W1029 | 本批新增/修改 |
+| scripts/output/_w1029_spec.json | W1029 | 本批新增/修改 |
+| scripts/output/file-index.md | W1029 | 本批新增/修改 |
+| site/index.html | W1029 | 本批新增/修改 |
+
+## W1030 方案报告抽查 + 归档覆盖口径入规范（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1030 | 本批新增/修改 |
+| AGENTS.md | W1030 | 本批新增/修改 |
+| CHANGELOG.md | W1030 | 本批新增/修改 |
+| CITATION.cff | W1030 | 本批新增/修改 |
+| HANDOVER.md | W1030 | 本批新增/修改 |
+| README.md | W1030 | 本批新增/修改 |
+| STRUCTURE.md | W1030 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1030 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1030 | 本批新增/修改 |
+| docs/00-导读/文档规范.md | W1030 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1030 | 本批新增/修改 |
+| scripts/output/_w1030_spec.json | W1030 | 本批新增/修改 |
+| scripts/output/file-index.md | W1030 | 本批新增/修改 |
+| site/index.html | W1030 | 本批新增/修改 |
+
+## W1031 取经编制表数据重核（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1031 | 本批新增/修改 |
+| AGENTS.md | W1031 | 本批新增/修改 |
+| CHANGELOG.md | W1031 | 本批新增/修改 |
+| CITATION.cff | W1031 | 本批新增/修改 |
+| HANDOVER.md | W1031 | 本批新增/修改 |
+| README.md | W1031 | 本批新增/修改 |
+| STRUCTURE.md | W1031 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1031 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1031 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1031 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1031 | 本批新增/修改 |
+| scripts/output/_w1031_spec.json | W1031 | 本批新增/修改 |
+| scripts/output/file-index.md | W1031 | 本批新增/修改 |
+| site/index.html | W1031 | 本批新增/修改 |
+
+## W1032 编制表环境依赖纠错（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1032 | 本批新增/修改 |
+| AGENTS.md | W1032 | 本批新增/修改 |
+| CHANGELOG.md | W1032 | 本批新增/修改 |
+| CITATION.cff | W1032 | 本批新增/修改 |
+| HANDOVER.md | W1032 | 本批新增/修改 |
+| README.md | W1032 | 本批新增/修改 |
+| STRUCTURE.md | W1032 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1032 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1032 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1032 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1032 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1032 | 本批新增/修改 |
+| scripts/output/_w1032_spec.json | W1032 | 本批新增/修改 |
+| scripts/output/file-index.md | W1032 | 本批新增/修改 |
+| site/index.html | W1032 | 本批新增/修改 |
+
+## W1033 T05 计划状态校正（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1033 | 本批新增/修改 |
+| AGENTS.md | W1033 | 本批新增/修改 |
+| CHANGELOG.md | W1033 | 本批新增/修改 |
+| CITATION.cff | W1033 | 本批新增/修改 |
+| HANDOVER.md | W1033 | 本批新增/修改 |
+| README.md | W1033 | 本批新增/修改 |
+| STRUCTURE.md | W1033 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1033 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1033 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1033 | 本批新增/修改 |
+| docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md | W1033 | 本批新增/修改 |
+| scripts/output/_w1033_spec.json | W1033 | 本批新增/修改 |
+| scripts/output/file-index.md | W1033 | 本批新增/修改 |
+| site/index.html | W1033 | 本批新增/修改 |
+
+## W1034 授业官位补全（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/xiyouji-guard/SKILL.md | W1034 | 本批新增/修改 |
+| .github/workflows/README.md | W1034 | 本批新增/修改 |
+| .gitignore | W1034 | 本批新增/修改 |
+| AGENTS.md | W1034 | 本批新增/修改 |
+| CHANGELOG.md | W1034 | 本批新增/修改 |
+| CITATION.cff | W1034 | 本批新增/修改 |
+| HANDOVER.md | W1034 | 本批新增/修改 |
+| README.md | W1034 | 本批新增/修改 |
+| STRUCTURE.md | W1034 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1034 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1034 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1034 | 本批新增/修改 |
+| scripts/output/_w1034_spec.json | W1034 | 本批新增/修改 |
+| scripts/output/file-index.md | W1034 | 本批新增/修改 |
+| site/index.html | W1034 | 本批新增/修改 |
+
+## W1035 三份职责书（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1035 | 本批新增/修改 |
+| AGENTS.md | W1035 | 本批新增/修改 |
+| CHANGELOG.md | W1035 | 本批新增/修改 |
+| CITATION.cff | W1035 | 本批新增/修改 |
+| HANDOVER.md | W1035 | 本批新增/修改 |
+| README.md | W1035 | 本批新增/修改 |
+| STRUCTURE.md | W1035 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1035 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1035 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1035 | 本批新增/修改 |
+| docs/agent/README.md | W1035 | 本批新增/修改 |
+| docs/agent/closeout-agent-prompt.md | W1035 | 本批新增/修改 |
+| docs/agent/index.md | W1035 | 本批新增/修改 |
+| docs/agent/reconcile-agent-prompt.md | W1035 | 本批新增/修改 |
+| docs/agent/text-audit-agent-prompt.md | W1035 | 本批新增/修改 |
+| scripts/output/_w1035_spec.json | W1035 | 本批新增/修改 |
+| scripts/output/file-index.md | W1035 | 本批新增/修改 |
+| scripts/output/tools-inventory.md | W1035 | 本批新增/修改 |
+| site/index.html | W1035 | 本批新增/修改 |
+
+## W1036 授业官 skill 按编制定名（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1036 | 本批新增/修改 |
+| .agent/skills/xiyouji-guard/SKILL.md | W1036 | 本批新增/修改 |
+| .github/workflows/README.md | W1036 | 本批新增/修改 |
+| AGENTS.md | W1036 | 本批新增/修改 |
+| CHANGELOG.md | W1036 | 本批新增/修改 |
+| CITATION.cff | W1036 | 本批新增/修改 |
+| HANDOVER.md | W1036 | 本批新增/修改 |
+| README.md | W1036 | 本批新增/修改 |
+| STRUCTURE.md | W1036 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1036 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1036 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1036 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1036 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1036 | 本批新增/修改 |
+| scripts/output/_w1036_spec.json | W1036 | 本批新增/修改 |
+| scripts/output/file-index.md | W1036 | 本批新增/修改 |
+| site/index.html | W1036 | 本批新增/修改 |
+
+## W1037 门禁耗时剖析（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1037 | 本批新增/修改 |
+| AGENTS.md | W1037 | 本批新增/修改 |
+| CHANGELOG.md | W1037 | 本批新增/修改 |
+| CITATION.cff | W1037 | 本批新增/修改 |
+| HANDOVER.md | W1037 | 本批新增/修改 |
+| README.md | W1037 | 本批新增/修改 |
+| STRUCTURE.md | W1037 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1037 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1037 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1037 | 本批新增/修改 |
+| scripts/output/_w1037_spec.json | W1037 | 本批新增/修改 |
+| scripts/output/file-index.md | W1037 | 本批新增/修改 |
+| scripts/verify_delivery.py | W1037 | 本批新增/修改 |
+| site/index.html | W1037 | 本批新增/修改 |
+
+## W1038 a11y 性能优化（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1038 | 本批新增/修改 |
+| AGENTS.md | W1038 | 本批新增/修改 |
+| CHANGELOG.md | W1038 | 本批新增/修改 |
+| CITATION.cff | W1038 | 本批新增/修改 |
+| HANDOVER.md | W1038 | 本批新增/修改 |
+| README.md | W1038 | 本批新增/修改 |
+| STRUCTURE.md | W1038 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1038 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1038 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1038 | 本批新增/修改 |
+| scripts/a11y_audit.py | W1038 | 本批新增/修改 |
+| scripts/output/_w1038_spec.json | W1038 | 本批新增/修改 |
+| scripts/output/file-index.md | W1038 | 本批新增/修改 |
+| site/index.html | W1038 | 本批新增/修改 |
+
+## W1039 用户级记忆五则入项目铁律（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1039 | 本批新增/修改 |
+| AGENTS.md | W1039 | 本批新增/修改 |
+| CHANGELOG.md | W1039 | 本批新增/修改 |
+| CITATION.cff | W1039 | 本批新增/修改 |
+| HANDOVER.md | W1039 | 本批新增/修改 |
+| README.md | W1039 | 本批新增/修改 |
+| STRUCTURE.md | W1039 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1039 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1039 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1039 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1039 | 本批新增/修改 |
+| scripts/output/_w1039_spec.json | W1039 | 本批新增/修改 |
+| scripts/output/file-index.md | W1039 | 本批新增/修改 |
+| site/index.html | W1039 | 本批新增/修改 |
+
+## W1040 任务分级协议入库（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/任务分级协议.md | W1040 | 本批新增 |
+| docs/10-方法论沉淀/README.md | W1040 | 索引登记第 27 号 |
+| docs/11-方案报告/README.md | W1040 | §六 登记执行前计划行（T-39） |
+| docs/11-方案报告/计划方案/执行前计划-W1040-任务分级协议入库.md | W1040 | 本批新增（计划归档·W1033 T05 先例·框架号 T-39） |
+| docs/INDEX.md | W1040 | 索引重生成 |
+| docs/00-导读/W批次编号对账表.md | W1040 | 认领登记与收官回填 |
+| scripts/output/_w1040_spec.json | W1040 | 本批新增 |
+| scripts/output/_cascade_files_W1040.txt | W1040 | 级联清单 |
+| CHANGELOG.md | W1040 | 级联·现役段 |
+| README.md | W1040 | 级联 |
+| STRUCTURE.md | W1040 | 级联+stats 标记 sweep |
+| HANDOVER.md | W1040 | 级联 |
+| AGENTS.md | W1040 | 级联（agents_note 脚注轮换） |
+| CITATION.cff | W1040 | 级联（version/date 随批） |
+| docs/00-导读/项目说明.md | W1040 | 级联 |
+| .github/workflows/README.md | W1040 | 级联 |
+| site/index.html | W1040 | 级联 |
+| site/data/cross-time-danmaku.html | W1040 | 级联 |
+| site/data/tag-cloud.html | W1040 | 级联 |
+| site/dukou-engine.html | W1040 | 级联 |
+| site/data/search.html | W1040 | 搜索索引重建 |
+| site/en/search.html | W1040 | 搜索索引重建 |
+| scripts/output/file-index.md | W1040 | 级联 |
+| scripts/output/stats.json | W1040 | methodology_docs 25→26 |
+| archive/docs/AGENTS-ARCHIVE.md | W1040 | 回窗（脚注窗轮换时·未触发删行） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1040 | 回窗（段窗轮换·上轮同窗位已触发） |
+| archive/docs/file-index-ARCHIVE.md | W1040 | 回窗（段窗轮换·上轮同窗位已触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1040 | 回窗（台账行窗轮换·已触发：迁出 W980-W981） |
+| scripts/output/README.md | W1040 | 目录文档 refresh（scripts/output 新件触发时） |
+| scripts/output/index.md | W1040 | 目录文档 refresh（同上） |
+| scripts/output/tools-inventory.md | W1040 | 工具面 refresh（触发时） |
+
+## W1041 批次号预约机制（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1041 | 本批新增/修改 |
+| AGENTS.md | W1041 | 本批新增/修改 |
+| CHANGELOG.md | W1041 | 本批新增/修改 |
+| CITATION.cff | W1041 | 本批新增/修改 |
+| HANDOVER.md | W1041 | 本批新增/修改 |
+| README.md | W1041 | 本批新增/修改 |
+| STRUCTURE.md | W1041 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1041 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1041 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1041 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1041 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1041 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1041 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1041 | 本批新增/修改 |
+| scripts/output/_w1041_spec.json | W1041 | 本批新增/修改 |
+| scripts/output/file-index.md | W1041 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1041 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1041 | 本批新增/修改 |
+| scripts/output/tools-inventory.md | W1041 | 本批新增/修改 |
+| scripts/reserve_w.py | W1041 | 本批新增/修改 |
+| site/index.html | W1041 | 本批新增/修改 |
+
+## W1042 工具面根因修复与判据补覆盖批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1042 | 本批新增/修改 |
+| .github/workflows/README.md | W1042 | 本批新增/修改 |
+| AGENTS.md | W1042 | 计数链同步（坑表条数指针） |
+| CHANGELOG.md | W1042 | 本批新增/修改 |
+| CITATION.cff | W1042 | 本批新增/修改 |
+| HANDOVER.md | W1042 | 计数链同步（坑表条数指针） |
+| Makefile | W1042 | 本地 CI 编排（完成提示归位） |
+| README.md | W1042 | 本批新增/修改 |
+| STRUCTURE.md | W1042 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1042 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1042 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1042 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1042 | 台账（认领行与收官回填） |
+| docs/11-方案报告/审查与评审/跨行改写面逐处复核报告-2026-10-30.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-30.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/计划方案/执行前计划-W1042-工具面根因修复与判据补覆盖.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1042 | 方案报告（执行前计划 + 复盘报告） |
+| docs/INDEX.md | W1042 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1042 | 坑表（+4 条教训） |
+| pytest.ini | W1042 | 本批新增/修改 |
+| scripts/A_文本基础/章节切分.py | W1042 | 本批新增/修改 |
+| scripts/_w1042_make_spec.py | W1042 | 本批工具脚本 |
+| scripts/check_cross_line_rewrite.py | W1042 | 本批新增/修改 |
+| scripts/cross_line_baseline.json | W1042 | 本批新增/修改 |
+| scripts/index.md | W1042 | 本批新增/修改 |
+| scripts/ledger_backfill.py | W1042 | 台账回填工具（显式参数生效根因修复） |
+| scripts/output/README.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1042.txt | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1042_spec.json | W1042 | 本批 spec 与级联清单 |
+| scripts/output/file-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1042 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1042 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1042 | 本批新增/修改 |
+| site/data/search.html | W1042 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1042 | 本批新增/修改 |
+| site/dukou-engine.html | W1042 | 本批新增/修改 |
+| site/en/search.html | W1042 | 本批新增/修改 |
+| site/index.html | W1042 | 本批新增/修改 |
+| tests/unit/test_archive_segments.py | W1042 | 本批单测（判据覆盖） |
+| tests/unit/test_cross_line_rewrite.py | W1042 | 本批单测（判据覆盖） |
+| tests/unit/test_plan_template_read_disk.py | W1042 | 本批单测（判据覆盖） |
+
+## W1043 回次 og:image 全覆盖批·第四轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1043 | 本批新增/修改 |
+| .github/workflows/README.md | W1043 | 本批新增/修改 |
+| AGENTS.md | W1043 | 本批新增/修改 |
+| CHANGELOG.md | W1043 | 本批新增/修改 |
+| CITATION.cff | W1043 | 本批新增/修改 |
+| HANDOVER.md | W1043 | 本批新增/修改 |
+| README.md | W1043 | 本批新增/修改 |
+| STRUCTURE.md | W1043 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/misc/_localize_cdn_libs.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w10xx/README.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1042_make_spec.py | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1043_derive_prepare.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_derive_stage.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_derive_verify.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_download.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_make_spec.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_master.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_pick.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_prepare.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_probe_pages.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_sheet.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_stage.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1043_verify.py | W1043 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/index.md | W1043 | 本批新增/修改 |
+| archive/scripts/batches/w4xx/_w478_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w4xx/_w490_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w4xx/_w491_en_migrate.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| archive/scripts/batches/w9xx/_w974_cascade.py | W1043 | 归档件·跨行删改真缺陷修复（排除符补换行符） |
+| assets/promo/plate-set/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-86-ch033-chuikouxian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-86-ch033-chuikouxian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-87-ch094-taiyinxingjun.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-88-ch073-duomuguai.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-88-ch073-duomuguai.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-89-ch069-ziyangzhenren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-90-ch090-yijiukutianzun.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-91-ch071-jiuling-shiba.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-92-ch086-bihan-bishu.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-93-ch095-yumian.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-93-ch095-yumian.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-95-ch085-diyongfuren.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-95-ch085-diyongfuren.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-96-ch097-xiniu.png | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-96-ch097-xiniu.webp | W1043 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1043 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1043-sheet.png | W1043 | 拼图预览（本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/raw/index.md | W1043 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round17/README.md | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/index.md | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-85-ch053-ruyizhenxian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-86-ch033-chuikouxian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-87-ch094-taiyinxingjun.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-88-ch073-duomuguai.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-89-ch069-ziyangzhenren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-90-ch090-yijiukutianzun.png | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-91-ch071-jiuling-shiba.png | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-92-ch086-bihan-bishu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-93-ch095-yumian.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-94-ch029-bengpo-baboren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-95-ch085-diyongfuren.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| assets/promo/plate-set/raw/round17/plate-line-96-ch097-xiniu.jpg | W1043 | 出图原件（12 份·含 1 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1043 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1043 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1043 | 方案报告（目录索引·W1044 订正说明列） |
+| docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1043 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1043 | 方案报告（架构方案·stats report_docs 标记级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1043 | 方案报告（架构方案·stats report_docs 标记级联） |
+| docs/INDEX.md | W1043 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1043 | 坑表（+1 条·判据脆性） |
+| scripts/_w1042_make_spec.py | W1043 | 本批改名·旧名（已由 archive/scripts/batches/w10xx/_w1042_make_spec.py 取代） |
+| scripts/check_cross_line_rewrite.py | W1043 | 本批新增/修改 |
+| scripts/cross_line_baseline.json | W1043 | 本批新增/修改 |
+| scripts/index.md | W1043 | 本批新增/修改 |
+| scripts/output/README.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1043.txt | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1043_batch.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_a.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_b.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_batch_c.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_a.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_b.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_gen_c.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/_w1043_spec.json | W1043 | 本批出图批次与结果件 |
+| scripts/output/file-index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1043 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1043 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1043 | 本批新增/修改 |
+| site/data/search.html | W1043 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1043 | 本批新增/修改 |
+| site/dukou-engine.html | W1043 | 本批新增/修改 |
+| site/en/search.html | W1043 | 本批新增/修改 |
+| site/index.html | W1043 | 本批新增/修改 |
+| site/reader/ch029.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch033.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch053.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch069.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch071.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch073.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch085.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch086.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch090.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch094.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch095.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch097.html | W1043 | 缺口回目页接入题图 + 换专属 og:image |
+| site/static/images/README.md | W1043 | 本批新增/修改 |
+| site/static/images/index.md | W1043 | 本批新增/修改 |
+| site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-86-ch033-chuikouxian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-88-ch073-duomuguai.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-89-ch069-ziyangzhenren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-92-ch086-bihan-bishu.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-93-ch095-yumian.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-95-ch085-diyongfuren.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-96-ch097-xiniu.webp | W1043 | 专属 og:image（1200×630） |
+| site/static/images/plate-line-85-ch053-ruyizhenxian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-86-ch033-chuikouxian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-87-ch094-taiyinxingjun.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-88-ch073-duomuguai.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-89-ch069-ziyangzhenren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-90-ch090-yijiukutianzun.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-91-ch071-jiuling-shiba.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-92-ch086-bihan-bishu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-93-ch095-yumian.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-94-ch029-bengpo-baboren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-95-ch085-diyongfuren.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-96-ch097-xiniu.webp | W1043 | 站点版（母版裁切·只裁上部留白） |
+
+## W1045 改写面候选逐处复核 + 存量陈旧清理 + og 切头 A+ 修复（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1045 | 本批新增/修改 |
+| .github/workflows/README.md | W1045 | 本批新增/修改 |
+| AGENTS.md | W1045 | 本批新增/修改 |
+| CHANGELOG.md | W1045 | 本批新增/修改 |
+| CITATION.cff | W1045 | 本批新增/修改 |
+| HANDOVER.md | W1045 | 本批新增/修改 |
+| README.md | W1045 | 本批新增/修改 |
+| STRUCTURE.md | W1045 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1042_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1045_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/index.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w6xx/_w661_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w662_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w663_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w666_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w667_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w668_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w669_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w670_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w671_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w676_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w679_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w684_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| archive/scripts/batches/w6xx/_w691_close_cascade.py | W1045 | 归档件·跨行吞并真缺陷修复（两处排除符补换行符） |
+| docs/00-导读/W批次编号对账表.md | W1045 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1045 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/11-方案报告/审查与评审/改写面候选逐处复核与存量陈旧清理报告-W1045.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/11-方案报告/计划方案/执行前计划-W1045-改写面候选逐处复核与存量陈旧清理.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/INDEX.md | W1045 | 本批新增/修改 |
+| docs/agent/gates.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| INDEX.md | W1045 | 本批新增/修改 |
+| scripts/README.md | W1045 | 本批新增/修改 |
+| scripts/batch_cascade.py | W1045 | 级联工具（CITATION.cff 面补行数断言） |
+| scripts/check_crop.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
+| scripts/check_cross_line_rewrite.py | W1045 | 跨行扫描器（基线键升四输入 + 跨行判定补 \s 盲区） |
+| scripts/cross_line_baseline.json | W1045 | 跨行判据基线（四输入键·失效项已清理） |
+| scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1045.txt | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_vermilion_solid_cache.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1043_batch_a.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1045_spec.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/file-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/subject_band.py | W1045 | og 裁切根修与判据加固（配套 A+ 修复·本批核实后入库） |
+| site/data/cross-time-danmaku.html | W1045 | 本批新增/修改 |
+| site/data/search.html | W1045 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1045 | 本批新增/修改 |
+| site/dukou-engine.html | W1045 | 本批新增/修改 |
+| site/en/search.html | W1045 | 本批新增/修改 |
+| site/index.html | W1045 | 本批新增/修改 |
+| site/static/images/og-plate-line-59-ch089-huangshi.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-81-ch074-qingshi.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-88-ch073-duomuguai.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-92-ch086-bihan-bishu.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-93-ch095-yumian.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-95-ch085-diyongfuren.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| site/static/images/og-plate-line-96-ch097-xiniu.webp | W1045 | og 社交卡（A+ 保留：真被切者修复·其余回退） |
+| tests/unit/test_cross_line_rewrite.py | W1045 | 键口径回归锁（4 条） |
+
+## W1047 图表判据剥标签根修（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1045 | 本批新增/修改 |
+| .github/workflows/README.md | W1045 | 本批新增/修改 |
+| AGENTS.md | W1045 | 本批新增/修改 |
+| CHANGELOG.md | W1045 | 本批新增/修改 |
+| CITATION.cff | W1045 | 本批新增/修改 |
+| HANDOVER.md | W1045 | 本批新增/修改 |
+| README.md | W1045 | 本批新增/修改 |
+| STRUCTURE.md | W1045 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1047_make_spec.py | W1045 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/index.md | W1045 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1045 | 台账（认领行与收官回填） |
+| docs/00-导读/项目说明.md | W1045 | 台账（认领行与收官回填） |
+| docs/11-方案报告/计划方案/执行前计划-W1047-图表判据剥标签根修.md | W1045 | 方案报告（执行前计划 + 复核报告 / README 登记归位与件数实算） |
+| docs/INDEX.md | W1045 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1045 | 治理面（槽数口径 / 坑表 +5 条） |
+| INDEX.md | W1045 | 本批新增/修改 |
+| scripts/batch_cascade.py | W1045 | 级联工具（上一批成果·本批未改） |
+| scripts/check_chart_data.py | W1045 | 图表判据（剥标签按语法约束 + 注释优先剥离 + 2 例可证伪锁） |
+| scripts/output/README.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_cascade_files_W1047.txt | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1047_spec.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/file-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1045 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/tools-inventory.md | W1045 | 登记面产物（索引/统计/工具清单） |
+| site/data/cross-time-danmaku.html | W1045 | 本批新增/修改 |
+| site/data/search.html | W1045 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1045 | 本批新增/修改 |
+| site/dukou-engine.html | W1045 | 本批新增/修改 |
+| site/en/search.html | W1045 | 本批新增/修改 |
+| site/index.html | W1045 | 本批新增/修改 |
+
+## W1048 P2 治理与孤儿批收编（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CLAUDE.md | W1048 | 本批新增/修改（P2·补铁律 15/16/17 速查行·49/60 行） |
+| docs/agent/gates.md | W1048 | 本批新增/修改（P2·计数旧值 615→616·四源印证） |
+| scripts/check_doc_sync.py | W1048 | W1044 收编（C5e 坑表六主题分项逐项对拍·fail-closed） |
+| scripts/check_plan_template.py | W1048 | W1044 收编（计划目录卫生判据·拦无 .md 扩展名/0 字节坏件） |
+| pytest.ini | W1048 | W1044 收编（pytest_collected 1085→1087 标记跟随） |
+| scripts/output/_vermilion_solid_cache.json | W1048 | 登记面产物（第 49 槽机器缓存自跟随） |
+| archive/scripts/batches/w10xx/_w1013_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1018_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_make_spec.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_master.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_pick.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_prepare.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_verify.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1044_make_spec.py | W1048 | W1044 收编（本批 spec 生成器归档） |
+| docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1048 | W1043 收官口径订正（slug 111→112·随本批入库） |
+| docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md | W1048 | W1046 收编（方案件入库·只出方案不实施·待用户审批） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1048 | 登记面产物（stats 标记自动跟随·W1047 收官余波随本批入库） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1048 | 登记面产物（stats 标记自动跟随·W1047 收官余波随本批入库） |
+| CHANGELOG.md | W1048 | 收官面（顶段 W1048·含 W1047 段订正注） |
+| HANDOVER.md | W1048 | 收官面（最后更新/一、当前进度/四、待办正式登记） |
+| README.md | W1048 | 级联面（版本行） |
+| STRUCTURE.md | W1048 | 级联面（版本行） |
+| AGENTS.md | W1048 | 级联面（脚注滚动） |
+| CITATION.cff | W1048 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1048 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1048 | 台账（W1044 行补·W1046 行回填·W1048 行新增） |
+| docs/INDEX.md | W1048 | 登记面（docs 索引） |
+| INDEX.md | W1048 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1048 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1048 | 级联归档滚动 |
+| scripts/output/stats.json | W1048 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1048 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1048 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1048 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1048 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1048 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1048 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1048.txt | W1048 | 级联清单（本批产物） |
+| scripts/output/_w1048_spec.json | W1048 | 本批 spec |
+
+## W1049 回次 og:image 全覆盖批·第五轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1049 | 本批新增/修改 |
+| AGENTS.md | W1049 | 本批新增/修改 |
+| CHANGELOG.md | W1049 | 本批新增/修改 |
+| HANDOVER.md | W1049 | 本批新增/修改 |
+| STRUCTURE.md | W1049 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/README.md | W1049 | 本批新增/修改 |
+| archive/scripts/batches/w10xx/_w1049_cascade_manifest.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_prepare.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_stage.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_derive_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_download.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_fix_p2.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_gate_isolation.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_handover.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_isolate_w1050.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_make_spec.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_master.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_fileindex.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_w1050.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_park_w1050_faces.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_pick_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_pitfalls.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_prepare.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_readme_register.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_refresh_folders.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_97.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_fetch.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_reissue_og.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage_faces.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_stage_ledger.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_sync_staged.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/_w1049_verify.py | W1049 | 本批工具脚本（归档批次区） |
+| archive/scripts/batches/w10xx/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-100-ch050-huode-xingjun.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-101-ch055-nvguo-guowang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-102-ch084-miefo-guowang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-103-ch005-sida-tianwang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-104-ch018-gao-taigong.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-104-ch018-gao-taigong.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-106-ch056-shidai-yanjun.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-107-ch067-honglin-damang.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-107-ch067-honglin-damang.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-108-ch058-diting.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-108-ch058-diting.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-98-ch039-wenshu-pusa.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-99-ch046-luli-daxian.png | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-99-ch046-luli-daxian.webp | W1049 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1049 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1049 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/raw/index.md | W1049 | 本批新增/修改 |
+| assets/promo/plate-set/raw/round18/README.md | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/index.md | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-100-ch050-huode-xingjun.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-101-ch055-nvguo-guowang.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-102-ch084-miefo-guowang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-103-ch005-sida-tianwang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-104-ch018-gao-taigong.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-105-ch032-yinjiao-dawang.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-106-ch056-shidai-yanjun.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-107-ch067-honglin-damang.png | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-108-ch058-diting.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-97-ch016-jinchi-zhanglao.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-98-ch039-wenshu-pusa.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| assets/promo/plate-set/raw/round18/plate-line-99-ch046-luli-daxian.jpg | W1049 | 出图原件（12 份·含 3 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1049 | 台账（认领行与收官回填） |
+| docs/11-方案报告/README.md | W1049 | 方案报告（索引/架构方案） |
+| docs/11-方案报告/计划方案/执行前计划-W1049-回次og-image全覆盖第五轮.md | W1049 | 方案报告（执行前计划件） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1049 | 方案报告（索引/架构方案） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1049 | 方案报告（索引/架构方案） |
+| docs/agent/pitfalls.md | W1049 | 坑表（+3 条·出图接口/密排纹理/og 幂等派生） |
+| scripts/output/_cascade_files_W1049.txt | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/_w1049_batch.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_all.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b1.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b2.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b3.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_b4.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_p1.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_p2.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_gen_probe.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_pick.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue_107.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_reissue_97.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/_w1049_spec.json | W1049 | 本批出图批次与结果件 |
+| scripts/output/file-index.md | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-changelog.json | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats-index.md | W1049 | 登记面产物（索引/统计/工具清单） |
+| scripts/output/stats.json | W1049 | 登记面产物（索引/统计/工具清单） |
+| site/reader/ch005.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch016.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch018.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch032.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch039.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch046.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch050.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch055.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch056.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch058.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch067.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/reader/ch084.html | W1049 | 缺口回目页接入题图 + 换专属 og:image |
+| site/static/images/README.md | W1049 | 本批新增/修改 |
+| site/static/images/index.md | W1049 | 本批新增/修改 |
+| site/static/images/og-plate-line-100-ch050-huode-xingjun.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-101-ch055-nvguo-guowang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-102-ch084-miefo-guowang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-103-ch005-sida-tianwang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-104-ch018-gao-taigong.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-106-ch056-shidai-yanjun.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-107-ch067-honglin-damang.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-108-ch058-diting.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-98-ch039-wenshu-pusa.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/og-plate-line-99-ch046-luli-daxian.webp | W1049 | 专属 og:image（1200×630） |
+| site/static/images/plate-line-100-ch050-huode-xingjun.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-101-ch055-nvguo-guowang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-102-ch084-miefo-guowang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-103-ch005-sida-tianwang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-104-ch018-gao-taigong.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-105-ch032-yinjiao-dawang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-106-ch056-shidai-yanjun.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-107-ch067-honglin-damang.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-108-ch058-diting.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-97-ch016-jinchi-zhanglao.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-98-ch039-wenshu-pusa.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-99-ch046-luli-daxian.webp | W1049 | 站点版（母版裁切·只裁上部留白） |
+
+
+## W1050 门禁判据加固（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W1050 | 本批新增/修改（第 3 槽 A1-A6 计数 fallback·用户批准动门禁本体·py_compile+全量跑通） |
+| scripts/check_doc_sync.py | W1050 | 本批新增/修改（c5b_extra_surfaces 加 gates.md·sweep 覆盖面修复） |
+| docs/agent/gates.md | W1050 | 本批新增/修改（L26 判据文本同步 fallback 描述） |
+| CHANGELOG.md | W1050 | 收官面（顶段 W1050） |
+| HANDOVER.md | W1050 | 收官面（最后更新/一、当前进度） |
+| README.md | W1050 | 级联面（版本行） |
+| STRUCTURE.md | W1050 | 级联面（版本行） |
+| AGENTS.md | W1050 | 级联面（脚注滚动） |
+| CITATION.cff | W1050 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1050 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1050 | 台账（W1050 行新增） |
+| docs/INDEX.md | W1050 | 登记面（docs 索引） |
+| INDEX.md | W1050 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1050 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1050 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1050 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1050 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1050 | 级联面（里程碑行同步） |
+| site/index.html | W1050 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1050 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1050 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1050 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1050 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1050 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1050 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1050 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1050 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1050 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1050 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1050.txt | W1050 | 级联清单（本批产物） |
+| scripts/output/_w1050_spec.json | W1050 | 本批 spec |
+
+## W1051 复盘触发器口径根修（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_review_trigger.py | W1051 | 本批新增/修改（上篇复盘识别三信号 + 目录面独立证据源·判定本体根修） |
+| tests/unit/test_review_trigger.py | W1051 | 本批新增/修改（单测 +7 例·契约同步 source 键·三负样本可证伪） |
+| docs/agent/pitfalls.md | W1051 | 本批新增/修改（E-57 识别口径绑死单一字面量 ⇒ 同族登记形态逃逸） |
+| AGENTS.md | W1051 | 级联面（脚注滚动 + 坑表计数链两处） |
+| HANDOVER.md | W1051 | 级联面（最后更新 / 一、当前进度 + 计数链两处） |
+| .agent/skills/puti-shouye/SKILL.md | W1051 | 计数链（坑表总条数两处·15 条硬判据不动） |
+| README.md | W1051 | 级联面（版本行） |
+| STRUCTURE.md | W1051 | 级联面（版本行） |
+| docs/00-导读/项目说明.md | W1051 | 级联面（当前版本行） |
+| CITATION.cff | W1051 | 级联面（版本同步） |
+| CHANGELOG.md | W1051 | 收官面（顶段 W1051 + W1042 段标题补点题标识） |
+| docs/00-导读/W批次编号对账表.md | W1051 | 台账（W1051 认领行新增 + 收官回填） |
+| docs/11-方案报告/计划方案/执行前计划-W1051-复盘触发器口径根修.md | W1051 | 方案报告（执行前计划件·五表 + 自包含检查 12 项） |
+| docs/11-方案报告/README.md | W1051 | 登记面（方案报告索引） |
+| docs/INDEX.md | W1051 | 登记面（docs 索引） |
+| INDEX.md | W1051 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1051 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1051 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1051 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1051 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1051 | 级联面（里程碑行同步） |
+| site/index.html | W1051 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1051 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1051 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1051 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1051 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1051 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1051 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1051 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1051 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1051 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1051 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1051.txt | W1051 | 级联清单（本批产物） |
+| scripts/output/_w1051_spec.json | W1051 | 本批 spec |
+| pytest.ini | W1051 | 连带产物（stats 标记跟随·pytest_collected 1087 → 1094·本批新增 7 例） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1051 | 连带产物（stats 标记跟随·pytest_collected 1087 → 1094） |
+| site/data/search.html | W1051 | 连带产物（站内搜索索引刷新·条目数对齐 948） |
+| site/en/search.html | W1051 | 连带产物（站内搜索索引刷新·条目数对齐 948） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1051 | 连带产物（stats 标记面跟随·pytest_collected 1087 → 1094） |
+
+## W1052 补丁治理实施第一批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1052 | 本批新增/修改（G-01 双写去重 + 分项 55 + 级联脚注） |
+| scripts/check_doc_sync.py | W1052 | 本批新增/修改（C8 同段重复判据 + T30/T31 自测 + 覆盖面先前已收 gates.md） |
+| scripts/reserve_w.py | W1052 | 本批新增/修改（G-07 占号支撑检测 + self_test 三例 + UP009/E702 微修） |
+| docs/agent/pitfalls.md | W1052 | 本批新增/修改（+1 条占号逃避形态·145·流程组 55） |
+| HANDOVER.md | W1052 | 本批新增/修改（坑表计数链 145 + 级联面） |
+| docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md | W1052 | 本批新增/修改（方案钉订正：批准项计数 9→11） |
+| docs/00-导读/W批次编号对账表.md | W1052 | 台账（W992 滞留状态回填 + W1052 行新增） |
+| CHANGELOG.md | W1052 | 收官面（顶段 W1052） |
+| README.md | W1052 | 级联面（版本行） |
+| STRUCTURE.md | W1052 | 级联面（版本行） |
+| CITATION.cff | W1052 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1052 | 级联面（当前版本行） |
+| docs/INDEX.md | W1052 | 登记面（docs 索引） |
+| INDEX.md | W1052 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1052 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1052 | 级联面（里程碑行同步） |
+| site/index.html | W1052 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1052 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1052 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1052 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1052 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1052 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1052 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1052 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1052 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1052 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1052 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1052.txt | W1052 | 级联清单（本批产物） |
+| scripts/output/_w1052_spec.json | W1052 | 本批 spec |
+
+## W1053 W1046 方案实施收尾（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_inlined_css.py | W1053 | 本批新增/修改（G-02 特征断言·self-test 2 例） |
+| scripts/check_chart_values.js | W1053 | 本批新增/修改（G-03 na 影子报数·不进 FAIL） |
+| scripts/check_gsap_motion.py | W1053 | 本批新增/修改（G-04 扫描域扩全+剥注释+J8 glob·self-test 11 例） |
+| scripts/check_frontmatter.py | W1053 | 本批新增/修改（G-05 日期语义+哈希形态·self-test 5 例） |
+| scripts/check_governance_docs.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/check_glossary.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/check_corruption.py | W1053 | 本批新增/修改（G-06 self-test 3 例） |
+| scripts/ledger_close_check.py | W1053 | 本批新增/修改（P-01/P-02 C3 五问+回归锁·3 例自测） |
+| scripts/check_review_trigger.py | W1053 | 本批新增/修改（M-03 T4 触发器·2 例自测） |
+| scripts/stats.py | W1053 | 本批新增/修改（M-02 w864_entries/icon_allowlist_entries 两键） |
+| scripts/patch_ratio.py | W1053 | 本批新增（M-01 补丁比影子脚本·不挂槽） |
+| docs/00-导读/文档规范.md | W1053 | 本批新增/修改（I-01 豁免分级审批条款 + I-03 改动分级列 14 行） |
+| scripts/output/_w864_accent_exemptions.json | W1053 | 本批新增/修改（I-02 owner/review_by 字段化 256 条） |
+| AGENTS.md | W1053 | 本批新增/修改（铁律 16 之⑦ + 级联脚注） |
+| CHANGELOG.md | W1053 | 收官面（顶段 W1053） |
+| HANDOVER.md | W1053 | 收官面（最后更新/进度/级联） |
+| README.md | W1053 | 级联面（版本行） |
+| STRUCTURE.md | W1053 | 级联面（版本行） |
+| CITATION.cff | W1053 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1053 | 级联面（当前版本行） |
+| docs/INDEX.md | W1053 | 登记面（docs 索引） |
+| INDEX.md | W1053 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1053 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1053 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1053 | 级联面（里程碑行同步） |
+| site/index.html | W1053 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1053 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1053 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1053 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1053 | 登记面产物（stats 实体·含 M-02 两新键） |
+| scripts/output/stats-changelog.json | W1053 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1053 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1053 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1053 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1053 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1053 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1053.txt | W1053 | 级联清单（本批产物） |
+| scripts/output/_w1053_spec.json | W1053 | 本批 spec |
+| docs/00-导读/W批次编号对账表.md | W1053 | 台账（W1053 行新增） |
+
+## W1054 G-03 清偿第一轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_chart_values.js | W1054 | 本批新增/修改（G-03 清偿①时序重试②前缀扩展③影子分层） |
+| CHANGELOG.md | W1054 | 收官面（顶段 W1054） |
+| HANDOVER.md | W1054 | 收官面（最后更新/进度/级联） |
+| README.md | W1054 | 级联面（版本行） |
+| STRUCTURE.md | W1054 | 级联面（版本行） |
+| CITATION.cff | W1054 | 级联面（版本同步） |
+| AGENTS.md | W1054 | 级联面（脚注滚动） |
+| docs/00-导读/项目说明.md | W1054 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1054 | 台账（W1054 行新增） |
+| docs/INDEX.md | W1054 | 登记面（docs 索引） |
+| INDEX.md | W1054 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1054 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1054 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1054 | 级联面（里程碑行同步） |
+| site/index.html | W1054 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1054 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1054 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1054 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1054 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1054 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1054 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1054 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1054 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1054 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1054 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1054.txt | W1054 | 级联清单（本批产物） |
+| scripts/output/_w1054_spec.json | W1054 | 本批 spec |
+| scripts/output/_vermilion_solid_cache.json | W1054 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/index.md | W1054 | 登记面（scripts 目录索引） |
+
+## W1055 G-03 清偿第二轮（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_chart_values.js | W1055 | 本批新增/修改（G-03 清偿①时序重试②前缀扩展③影子分层） |
+| CHANGELOG.md | W1055 | 收官面（顶段 W1055） |
+| HANDOVER.md | W1055 | 收官面（最后更新/进度/级联） |
+| README.md | W1055 | 级联面（版本行） |
+| STRUCTURE.md | W1055 | 级联面（版本行） |
+| CITATION.cff | W1055 | 级联面（版本同步） |
+| AGENTS.md | W1055 | 级联面（脚注滚动） |
+| docs/00-导读/项目说明.md | W1055 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1055 | 台账（W1055 行新增） |
+| docs/INDEX.md | W1055 | 登记面（docs 索引） |
+| INDEX.md | W1055 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1055 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1055 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1055 | 级联面（里程碑行同步） |
+| site/index.html | W1055 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1055 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1055 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1055 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1055 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1055 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1055 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1055 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1055 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1055 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1055 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1055.txt | W1055 | 级联清单（本批产物） |
+| scripts/output/_w1055_spec.json | W1055 | 本批 spec |
+| scripts/output/_vermilion_solid_cache.json | W1055 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/index.md | W1055 | 登记面（scripts 目录索引） |
+
+## W1056 提交前三问自检流程契约（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1056 | 本批新增/修改（铁律 18 + 分项 56 + 级联脚注） |
+| CLAUDE.md | W1056 | 本批新增/修改（速查第 14 行·50/60 行） |
+| docs/agent/pitfalls.md | W1056 | 本批新增/修改（+1 spec 漏列形态·146·流程组 56） |
+| HANDOVER.md | W1056 | 本批新增/修改（坑表计数链 146 + 级联面） |
+| docs/00-导读/W批次编号对账表.md | W1056 | 台账（W1056 行新增） |
+| CHANGELOG.md | W1056 | 收官面（顶段 W1056·验证栏含三问结论） |
+| README.md | W1056 | 级联面（版本行） |
+| STRUCTURE.md | W1056 | 级联面（版本行） |
+| CITATION.cff | W1056 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1056 | 级联面（当前版本行） |
+| docs/INDEX.md | W1056 | 登记面（docs 索引） |
+| INDEX.md | W1056 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1056 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1056 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1056 | 级联面（里程碑行同步） |
+| site/index.html | W1056 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1056 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1056 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1056 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1056 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1056 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1056 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1056 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1056 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1056 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1056 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1056.txt | W1056 | 级联清单（本批产物） |
+| scripts/output/_w1056_spec.json | W1056 | 本批 spec |
+
+## W1057 Backlog 对账批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| HANDOVER.md | W1057 | 本批新增/修改（四、待办压缩 12→1 形态锚 + 对账注记 + 级联面） |
+| CHANGELOG.md | W1057 | 收官面（顶段 W1057 对账记录） |
+| README.md | W1057 | 级联面（版本行） |
+| STRUCTURE.md | W1057 | 级联面（版本行） |
+| AGENTS.md | W1057 | 级联面（脚注滚动） |
+| CITATION.cff | W1057 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1057 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1057 | 台账（W1057 行·状态列含对账 token） |
+| docs/INDEX.md | W1057 | 登记面（docs 索引） |
+| INDEX.md | W1057 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1057 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1057 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1057 | 级联面（里程碑行同步） |
+| site/index.html | W1057 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1057 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1057 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1057 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1057 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1057 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1057 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1057 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1057 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1057 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1057 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1057 | 登记面产物（第 43 槽报告·上批余波） |
+| scripts/output/_vermilion_solid_cache.json | W1057 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/output/_cascade_files_W1057.txt | W1057 | 级联清单（本批产物） |
+| scripts/output/_w1057_spec.json | W1057 | 本批 spec |
+
+## W1058 SKILL.md 计数链漂移订正 + C5e 对账面扩 SKILL（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1058 | 级联面（脚注滚动） |
+| .agent/skills/puti-shouye/SKILL.md | W1058 | 本批新增/修改（计数 144→146 两处） |
+| scripts/check_doc_sync.py | W1058 | 本批新增/修改（C5e 对账面扩 SKILL.md 两形态） |
+| CHANGELOG.md | W1058 | 收官面（顶段 W1058） |
+| HANDOVER.md | W1058 | 级联面（最后更新/进度） |
+| README.md | W1058 | 级联面（版本行） |
+| STRUCTURE.md | W1058 | 级联面（版本行） |
+| CITATION.cff | W1058 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1058 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1058 | 台账（W1058 行新增） |
+| docs/INDEX.md | W1058 | 登记面（docs 索引） |
+| INDEX.md | W1058 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1058 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1058 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1058 | 级联面（里程碑行同步） |
+| site/index.html | W1058 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1058 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1058 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1058 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1058 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1058 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1058 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1058 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1058 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1058 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1058 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1058.txt | W1058 | 级联清单（本批产物） |
+| scripts/output/_w1058_spec.json | W1058 | 本批 spec |
+
+## W1059 第 46 篇工作复盘与优化分析报告入库批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-31.md | W1059 | 本批新增（第 46 篇复盘报告） |
+| docs/11-方案报告/README.md | W1059 | 本批新增/修改（分区表 #52 登记） |
+| CHANGELOG.md | W1059 | 收官面（顶段 W1059·标题含「工作复盘」三信号 A） |
+| HANDOVER.md | W1059 | 级联面（最后更新/进度/里程碑） |
+| README.md | W1059 | 级联面（版本行） |
+| STRUCTURE.md | W1059 | 级联面（版本行） |
+| AGENTS.md | W1059 | 级联面（脚注滚动） |
+| CITATION.cff | W1059 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1059 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1059 | 台账（W1059 认领行在案·收官回填另笔） |
+| docs/INDEX.md | W1059 | 登记面（docs 索引） |
+| INDEX.md | W1059 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1059 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1059 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1059 | 级联面（里程碑行同步） |
+| site/index.html | W1059 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1059 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1059 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1059 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1059 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1059 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1059 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1059 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1059 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1059 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1059 | 登记面产物（output 说明） |
+| site/data/search.html | W1059 | 派生面（搜索索引刷新·README 新行） |
+| site/en/search.html | W1059 | 派生面（搜索索引刷新） |
+| scripts/output/_cascade_files_W1059.txt | W1059 | 级联清单（本批产物） |
+| scripts/output/_w1059_spec.json | W1059 | 本批 spec |
+
+## W1060 CI 提效批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W1060 | 本批新增/修改（A11y 矩阵 9→1·artifact 名去 matrix 引用） |
+| .github/workflows/dependency-review.yml | W1060 | 本批新增/修改（补 concurrency） |
+| .github/workflows/workflow-lint.yml | W1060 | 本批新增/修改（补 concurrency） |
+| .github/workflows/scorecard.yml | W1060 | 本批新增/修改（补 concurrency） |
+| CHANGELOG.md | W1060 | 收官面（顶段 W1060） |
+| HANDOVER.md | W1060 | 级联面（最后更新/进度） |
+| README.md | W1060 | 级联面（版本行） |
+| STRUCTURE.md | W1060 | 级联面（版本行） |
+| AGENTS.md | W1060 | 级联面（脚注滚动） |
+| CITATION.cff | W1060 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1060 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1060 | 台账（W1060 行新增） |
+| docs/INDEX.md | W1060 | 登记面（docs 索引） |
+| INDEX.md | W1060 | 登记面（根索引） |
+| .github/workflows/README.md | W1060 | 级联面（里程碑行同步） |
+| archive/docs/AGENTS-ARCHIVE.md | W1060 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1060 | 级联归档滚动（体积窗若触发） |
+| site/index.html | W1060 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1060 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1060 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1060 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1060 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1060 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1060 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1060 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1060 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1060 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1060 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1060.txt | W1060 | 级联清单（本批产物） |
+| scripts/output/_w1060_spec.json | W1060 | 本批 spec |
+
+## W1061 私有记忆同步批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1061 | 本批新增/修改（铁律 19 + §4.3 两条 + 分项 66 + 级联脚注） |
+| CLAUDE.md | W1061 | 本批新增/修改（速查第 14 行禁 CodeBuddy·三问顺延 15·51/60 行） |
+| docs/agent/pitfalls.md | W1061 | 本批新增/修改（+10 条 E-58~E-67·156·流程组 66） |
+| HANDOVER.md | W1061 | 本批新增/修改（坑表计数链 156 + 级联面） |
+| .agent/skills/puti-shouye/SKILL.md | W1061 | 本批新增/修改（计数链 156） |
+| CHANGELOG.md | W1061 | 收官面（顶段 W1061·验证栏含三问结论） |
+| README.md | W1061 | 级联面（版本行） |
+| STRUCTURE.md | W1061 | 级联面（版本行） |
+| CITATION.cff | W1061 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1061 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1061 | 台账（W1061 行新增） |
+| docs/INDEX.md | W1061 | 登记面（docs 索引） |
+| INDEX.md | W1061 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1061 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1061 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1061 | 级联面（里程碑行同步） |
+| site/index.html | W1061 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1061 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1061 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1061 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1061 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1061 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1061 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1061 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1061 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1061 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1061 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1061 | 登记面产物（第 43 槽报告） |
+| scripts/output/_vermilion_solid_cache.json | W1061 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/cross_line_baseline.json | W1061 | 登记面产物（跨行基线·扫描随批） |
+| scripts/output/_cascade_files_W1061.txt | W1061 | 级联清单（本批产物） |
+| scripts/output/_w1061_spec.json | W1061 | 本批 spec |
+
+## W1062 README 换图未生效根修批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/requirements.txt | W1062 | 本批新增/修改（登记 numpy 2.4.4 + playwright 1.63.0·CI pytest 5 failed 清零） |
+| scripts/check_no_brand_refs.py | W1062 | 本批新增/修改（core.quotepath=false 根修 + 声明性豁免 + fail-closed + 自测 56/56） |
+| AGENTS.md | W1062 | 本批新增/修改（坑位计数 156→159 + 流程组分项 66→69 + 六主题目录） |
+| HANDOVER.md | W1062 | 本批新增/修改（头链首 + §一 当前进度 + 坑表计数 156→159） |
+| README.md | W1062 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1062 | 本批新增/修改（W1062 段 + 编号规则 W001-W1062） |
+| CITATION.cff | W1062 | 本批新增/修改（version W1061→W1062） |
+| .github/workflows/README.md | W1062 | 本批新增/修改（头部版本 + 里程碑行 W450-W1062） |
+| docs/agent/pitfalls.md | W1062 | 本批新增/修改（E-68~E-70 三条 + 流程组 66→69） |
+| .agent/skills/puti-shouye/SKILL.md | W1062 | 本批新增/修改（计数链 156→159 两点） |
+| docs/00-导读/W批次编号对账表.md | W1062 | 本批新增/修改（W1062 认领行 + 收官回填） |
+| docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md | W1062 | 本批新增（框架第 40 次执行报告） |
+| docs/11-方案报告/README.md | W1062 | 本批新增/修改（T40 登记行） |
+| docs/11-方案报告/审查与评审/工具脚本门禁体检与临时归档审计-2026-10-29.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| docs/11-方案报告/计划方案/T04-任务计划执行与经验沉淀报告-2026-10-21.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1062 | 本批新增/修改（品牌字面量清零 1 处） |
+| scripts/output/_w1062_spec.json | W1062 | 本批新增（级联 spec） |
+| site/index.html | W1062 | 本批新增/修改（页脚链首） |
+| site/dukou-engine.html | W1062 | 本批新增/修改（页脚链首） |
+| site/data/tag-cloud.html | W1062 | 本批新增/修改（页脚链首） |
+| site/data/cross-time-danmaku.html | W1062 | 本批新增/修改（页脚链首） |
+
+## W1063 并行会话滞后提交收口批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_cross_line_rewrite.py | W1063 | 并行会话在途件收口（ruff 清理·io.open → open） |
+| scripts/ledger_backfill.py | W1063 | 并行会话在途件收口（ruff 清理·死变量与变量名遮蔽） |
+| scripts/security_scan.py | W1063 | SEC-002 过宽前瞻根修（改白名单式收紧·防真密钥漏检） |
+| scripts/sec002_negative_probe.py | W1063 | 本批新增（SEC-002 负样本自证 9/9·含「真密钥混汉字」边界） |
+| .github/workflows/security.yml | W1063 | 本批新增/修改（SEC-002 负样本自证独立 job） |
+| docs/agent/pitfalls.md | W1063 | 本批新增/修改（E-71 误报放行须白名单式收紧 + E-72 收口在途件先三方比对·156→161） |
+| AGENTS.md | W1063 | 本批新增/修改（坑位计数 159→161 + 流程组分项 69→71） |
+| HANDOVER.md | W1063 | 本批新增/修改（头链首 + §一 + 坑表计数 159→161） |
+| README.md | W1063 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1063 | 本批新增/修改（W1063 段 + 编号规则 W001-W1063） |
+| CITATION.cff | W1063 | 本批新增/修改（version W1062→W1063） |
+| .github/workflows/README.md | W1063 | 本批新增/修改（头部版本 + 里程碑行 W450-W1063） |
+| docs/00-导读/W批次编号对账表.md | W1063 | 本批新增/修改（W1063 认领行 + 收官回填） |
+| .agent/skills/puti-shouye/SKILL.md | W1063 | 本批新增/修改（计数链 159→161 两点） |
+| scripts/output/_w1063_spec.json | W1063 | 本批新增（级联 spec） |
+| site/index.html | W1063 | 本批新增/修改（页脚链首） |
+| site/dukou-engine.html | W1063 | 本批新增/修改（页脚链首） |
+| site/data/tag-cloud.html | W1063 | 本批新增/修改（页脚链首） |
+| site/data/cross-time-danmaku.html | W1063 | 本批新增/修改（页脚链首） |
+
+## W1065 《西游记》GitHub 生态全景调研批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md | W1065 | 本批新增（78 KB·四域生态全景·72 项实跑取证·含附录 A–D） |
+| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W1065 | 本批新增/修改（W358 存量调研承接·7 个失效链接修正见报告 §5.13.1） |
+| docs/11-方案报告/README.md | W1065 | 本批新增/修改（W1065 登记行） |
+| CHANGELOG.md | W1065 | 本批新增/修改（W1065 段 + 编号规则上限） |
+| HANDOVER.md | W1065 | 本批新增/修改（抬头更新链 + §一 概要块） |
+| docs/00-导读/W批次编号对账表.md | W1065 | 本批新增/修改（W1065 认领/收官行） |
+| scripts/output/file-index.md | W1065 | 本批新增/修改（本段） |
+
+## W1066 CI 提速批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_audit_render_states.js | W1066 | 本批新增/修改（按需等待 waitForStable/waitForChange + CONC 6 + --shard 分片 + --out 产物路径） |
+| scripts/batch_screenshots.js | W1066 | 本批新增/修改（多 context 并发 CONC 4·capture() 本已每页独立 context） |
+| scripts/check_screenshot_gates.js | W1066 | 本批新增/修改（--only 支持逗号分隔多值·定向时只跑变更页） |
+| scripts/check_dark_state_gate.js | W1066 | 本批新增/修改（--current 指定分片合并后的产物） |
+| scripts/check_chart_data.py | W1066 | 本批新增/修改（<script>/<style> 剥离改大小写不敏感·CodeQL 告警） |
+| scripts/check_chart_values.js | W1066 | 本批新增/修改（name 正则完整转义反斜杠·CodeQL 告警） |
+| .github/workflows/screenshot-review.yml | W1066 | 本批新增/修改（暗色门禁 4 分片并行 + 合并判定 job + chart-gates 定向） |
+| docs/agent/pitfalls.md | W1066 | 本批新增/修改（E-74~E-76 三条·162→165） |
+| AGENTS.md | W1066 | 本批新增/修改（坑位计数 162→165 + 流程组分项 72→75） |
+| HANDOVER.md | W1066 | 本批新增/修改（头链首 + §一 + 计数 162→165） |
+| README.md | W1066 | 本批新增/修改（抬头当前批次行） |
+| CHANGELOG.md | W1066 | 本批新增/修改（W1066 段 + 编号规则 W001-W1066） |
+| CITATION.cff | W1066 | 本批新增/修改（version W1065→W1066） |
+| .github/workflows/README.md | W1066 | 本批新增/修改（头部版本 + 里程碑行 W450-W1066） |
+| docs/00-导读/W批次编号对账表.md | W1066 | 本批新增/修改（W1066 认领行 + 收官回填） |
+| .agent/skills/puti-shouye/SKILL.md | W1066 | 本批新增/修改（计数链 162→165 两点） |
+| docs/11-方案报告/README.md | W1066 | 本批新增/修改（移除已删文件的登记行） |
+| docs/11-方案报告/调研与数据复盘/西游记GitHub生态全景调研报告-2026-10-31.md | W1066 | 本批新增/修改（承接说明去死链·用户有意删除 W358 旧报告） |
+| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W1066 | 本批删除（用户 2026-10-31 有意删除·不再需要） |
+| scripts/output/_w1063_spec.json | W1066 | 本批新增/修改（级联 spec·55 件） |
+
+## W1067 CI action ref 根修批 + 记忆与项目沉淀同步批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_action_refs.py | W1067 | 本批新增（action ref 完整性门禁·形态离线 + 存在性联网双 endpoint 复核·自测 6/6 可证伪） |
+| .github/workflows/screenshot-review.yml | W1067 | 本批修改（merge job 的 action ref 改用仓内已验证 v7 SHA·修 39 位编造 SHA 致 Set up job 阶段失败） |
+| .github/workflows/workflow-lint.yml | W1067 | 本批修改（挂 action ref 形态判据每次 PR 恒生效 + 存在性扫描周级/手动·不带 token） |
+| docs/agent/pitfalls.md | W1067 | 本批修改（新增 E-77~E-82 六条·流程组 75→81·含两条自私有记忆固化入仓） |
+| .agent/skills/puti-shouye/SKILL.md | W1067 | 本批修改（坑表条数计数链同步） |
+| AGENTS.md | W1067 | 本批修改（坑表条数计数链同步 + 级联脚注滚动） |
+| HANDOVER.md | W1067 | 本批修改（坑表条数计数链同步 + 级联同步面） |
+| docs/11-方案报告/计划方案/T40-任务计划执行与经验沉淀报告-2026-10-31.md | W1067 | 本批修改（§4.6 后续批次 W1067 进展段·根因与修法如实记录） |
+| pytest.ini | W1067 | 本批修改（stats 实体标记跟随） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1067 | 本批修改（stats 实体标记跟随） |
+| scripts/index.md | W1067 | 本批修改（目录清单刷新·收录新增判据脚本） |
+| scripts/output/tools-inventory.md | W1067 | 本批修改（工具清单刷新·收录新增判据脚本） |
+| scripts/output/index.md | W1067 | 本批修改（目录清单刷新） |
+| scripts/output/README.md | W1067 | 本批修改（目录清单刷新） |
+## W1068 触发面补漏批 + paths 自我纠正 + 方法论篇 + tmpe 清场批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/CI提速与门禁健壮性方法论.md | W1068 | 本批新增（方法论深度篇·提速四步序 + 判据自证 + action ref 红线 + paths 过滤陷阱 + 收官自查清单） |
+| docs/10-方法论沉淀/README.md | W1068 | 本批修改（方法论索引登记第 28 行） |
+| docs/agent/pitfalls.md | W1068 | 本批修改（新增 E-83 schannel TLS 指纹 / E-84 paths 过滤不得缩小验证面·流程组 81→83·含对 W1066 批登记建议的自我纠正） |
+| .github/workflows/screenshot-review.yml | W1068 | 本批修改（paths 补 check_contract_smoke.js / check_screenshot_gates.js ⇒ 改了门禁脚本也会触发门禁） |
+| .github/workflows/workflow-lint.yml | W1068 | 本批修改（paths 收窄到 .github/workflows/** + 判据脚本·其覆盖面本就是工作流文件自身） |
+| AGENTS.md | W1068 | 本批修改（坑表条数计数链同步 + 级联脚注滚动） |
+| HANDOVER.md | W1068 | 本批修改（坑表条数计数链同步 + 级联同步面） |
+| .agent/skills/puti-shouye/SKILL.md | W1068 | 本批修改（坑表条数计数链同步） |
+| scripts/output/tools-inventory.md | W1068 | 本批修改（工具清单刷新·收录新增方法论篇） |
+| pytest.ini | W1068 | 本批修改（stats 实体标记跟随） |
+| CHANGELOG.md | W1068 | 本批修改（W1068 段·级联写入） |
+| docs/00-导读/W批次编号对账表.md | W1068 | 本批修改（W1068 台账行·手工登记） |
+## W1069 效率与防护打包批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_corruption.py | W1069 | 本批新增/修改（R3 BOM 扫描·tracked 文本面·ps1 例外·self-test 6 例） |
+| scripts/preflight_check.py | W1069 | 本批新增/修改（env-sync：ruff 实际版本 vs requirements 对拍·上线即抓真漂移 0.16.7≠0.16.9） |
+| docs/agent/pitfalls.md | W1069 | 本批新增/修改（+5 条 E-68~E-72·181·流程组 88·数据组对齐 19） |
+| docs/11-方案报告/计划方案/执行前计划-W1069-微批轻量通道设计.md | W1069 | 本批新增（微批轻量通道设计 V1.0·三档+准入判据·待批） |
+| CLAUDE.md | W1069 | 本批新增/修改（批次节奏行 15·52/60 行） |
+| CHANGELOG.md | W1069 | 收官面（顶段 W1069） |
+| HANDOVER.md | W1069 | 级联面（计数链 181/最后更新/进度） |
+| README.md | W1069 | 级联面（版本行） |
+| STRUCTURE.md | W1069 | 级联面（版本行） |
+| AGENTS.md | W1069 | 级联面（计数链 181/脚注滚动） |
+| CITATION.cff | W1069 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1069 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1069 | 台账（W1069 行新增） |
+| docs/INDEX.md | W1069 | 登记面（docs 索引） |
+| INDEX.md | W1069 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1069 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1069 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1069 | 级联面（里程碑行同步） |
+| site/index.html | W1069 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1069 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1069 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1069 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1069 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1069 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1069 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1069 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1069 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1069 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1069 | 登记面产物（output 说明） |
+| scripts/output/chart-values-report.json | W1069 | 登记面产物（第 43 槽报告） |
+| scripts/output/_vermilion_solid_cache.json | W1069 | 登记面产物（第 49 槽机器缓存自跟随） |
+| scripts/output/_cascade_files_W1069.txt | W1069 | 级联清单（本批产物） |
+| scripts/output/_w1069_spec.json | W1069 | 本批 spec |
+
+## W1070 站内交互审查第二轮复核 + 界面优化施工方案落库批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/审查与评审/站点交互流程审查第二轮复核报告-2026-10-31.md | W1070 | 本批新增（生产态第二轮复核·W926 十二条闭环表 + 新增十条 + 判据自纠四条 + 复算命令附录） |
+| docs/11-方案报告/设计与架构方案/界面与交互优化施工方案-2026-10-31.md | W1070 | 本批新增（四维度取证 + 现势基线 + 施工序列八批按收益排序 + 3 项待用户决策） |
+| docs/11-方案报告/README.md | W1070 | 本批修改（§一登记第 51 行 + §二登记第 33 行 + 两个分区计数更新） |
+| docs/00-导读/W批次编号对账表.md | W1070 | 本批修改（追加 W1070 认领行·在途） |
+| CHANGELOG.md | W1070 | 级联生成（本批顶段） |
+| HANDOVER.md | W1070 | 级联生成（现役三元组与进度） |
+| scripts/output | W1070 | 级联生成（搜索索引 / file-index / stats 快照） |
+
+## W1071 交互修复第一批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/search.html | W1071 | 本批修改（SITE_DOC_MAP 612 条内嵌 + renderOffline 行链接化 + Drill 站内化） |
+| site/static/js/rag-chat.js | W1071 | 本批修改（生产环境早退·A 案） |
+| site/index.html | W1071 | 本批修改（616/87 加 stats 标记 + 双入口 ask-note） |
+| site/guide.html | W1071 | 本批修改（data-gsap 属性移入开标签） |
+| site/reader/index.html | W1071 | 本批修改（data-gsap 属性移入开标签） |
+| site/reader/essays/index.html | W1071 | 本批修改（data-gsap 属性移入开标签） |
+| site/reader/themes-hub.html | W1071 | 本批修改（data-gsap 属性移入开标签） |
+| archive/scripts/batches/w1071/_w1071_search_docmap.py | W1071 | 本批新增（映射构建一次性脚本·批内归档） |
+| CHANGELOG.md | W1071 | 级联生成（本批顶段） |
+| HANDOVER.md | W1071 | 级联生成（现役三元组与进度） |
+| docs/00-导读/W批次编号对账表.md | W1071 | 本批修改（追加 W1071 认领行） |
+| scripts/output | W1071 | 级联生成（stats 快照与 file-index） |
+
+## W1072 可复用 Skill 盘点与取经编制表角色优化批（2026-11-01）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/T41-任务计划执行与经验沉淀报告-2026-11-01.md | W1072 | 本批新增（Skill 盘点与编制表角色优化报告） |
+| docs/11-方案报告/README.md | W1072 | 本批修改（§六 计划方案分区登记第 59 行） |
+| docs/00-导读/W批次编号对账表.md | W1072 | 本批修改（W1072 认领行） |
+| HANDOVER.md | W1072 | 本批修改（当前进度 + 最后更新行） |
+| scripts/output/_w1072_spec.json | W1072 | 本批新增（批次 spec） |
+
+## W1073 D-1 首屏插画深色变体批（2026-11-01）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W1073 | 本批修改（D-1 深色机制：首帧 CSS 指向 -dark 变体 + 轮播 darkSrc + data-theme 监听） |
+| site/static/images/hero-line-01-ruyi-staff-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-02-journey-scroll-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-03-classic-scroll-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-04-tight-crown-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-05-lotus-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-06-nine-ring-staff-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-07-banana-fan-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-08-jade-vase-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| site/static/images/hero-line-09-somersault-cloud-dark.webp | W1073 | 本批新增（深色变体插画·2400×1017 webp） |
+| scripts/_w1073_dark_verify.py | W1073 | 本批新增（深色变体机器判据·J1-J9 + K1-K3） |
+| scripts/_w1073_paper_normalize.py | W1073 | 本批新增（纸底精确归一·重建 W938 口径） |
+| scripts/_w1073_derive.py | W1073 | 本批新增（程序化派生·09 专项） |
+| scripts/_w1073_fix_band.py | W1073 | 本批新增（底部亮带清除·09 专项） |
+| scripts/_w1073_probe.py | W1073 | 本批新增（D-1 验收探针·真实 Chromium） |
+| scripts/_w1073_baseline_shot.py | W1073 | 本批新增（浅色基线补拍） |
+| scripts/output/_w1073_spec.json | W1073 | 本批新增（批次 spec） |
+
+## W1074 交互修复第二+三批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w1074_batches23.py | W1074 | 级联生成（六文档同步面） |
+| scripts/index.md | W1074 | 级联生成（六文档同步面） |
+| scripts/output/_vermilion_solid_cache.json | W1074 | 级联生成（stats 快照与索引） |
+| scripts/output/tools-inventory.md | W1074 | 级联生成（stats 快照与索引） |
+| site/404.html | W1074 | 本批修改（R-08 返回上一页·含单段内联脚本） |
+| site/dashboard.html | W1074 | 本批修改（N-02 fetch 移除 + drill 文案） |
+| site/data/chapter-structure-graph.html | W1074 | 本批修改（R-03 两个 vis 页入口） |
+| site/data/cross-time-danmaku.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/graph-explorer.html | W1074 | 本批修改（R-11 aria-label ×2） |
+| site/data/journey-map-interactive.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/narrative-rhythm-curve.html | W1074 | 本批修改（R-11 aria-label） |
+| site/data/search.html | W1074 | 本批修改（N-02 /datasets 在线分支移除 + 文案读者化） |
+| site/index.html | W1074 | 本批修改（N-08 根修 CSS / N-07 16D / N-09 EN 去重 / R-07 双 role / 级联页脚行） |
+| site/reader/ch001.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch002.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch003.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch004.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch005.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch006.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch007.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch008.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch009.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch010.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch011.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch012.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch013.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch014.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch015.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch016.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch017.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch018.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch019.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch020.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch021.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch022.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch023.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch024.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch025.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch026.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch027.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch028.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch029.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch030.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch031.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch032.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch033.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch034.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch035.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch036.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch037.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch038.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch039.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch040.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch041.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch042.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch043.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch044.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch045.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch046.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch047.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch048.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch049.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch050.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch051.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch052.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch053.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch054.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch055.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch056.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch057.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch058.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch059.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch060.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch061.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch062.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch063.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch064.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch065.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch066.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch067.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch068.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch069.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch070.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch071.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch072.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch073.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch074.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch075.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch076.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch077.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch078.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch079.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch080.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch081.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch082.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch083.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch084.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch085.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch086.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch087.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch088.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch089.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch090.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch091.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch092.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch093.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch094.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch095.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch096.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch097.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch098.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch099.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/ch100.html | W1074 | 本批修改（N-04 返回导读站内化 ×100） |
+| site/reader/index.html | W1074 | 本批修改（N-05 壳+h1+R-03 hub 行） |
+| site/reader/themes/index.html | W1074 | 本批修改（R-04 归一跳转 stub + SEO og 块） |
+
+## W1075 合并前红灯修复微批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W1075 | 本批修改（W1075 认领行） |
+| scripts/cross_line_baseline.json | W1075 | 本批修改（跨行基线确认清单 54→55·人工复核无害） |
+| scripts/output/tools-inventory.md | W1075 | 级联生成（stats 快照与索引） |
+| site/reader/themes/index.html | W1075 | 本批修改（跳转页可见链接补 ../） |
+
+## W1076 v4 视觉体系迁移首站：根页与入口八页消费 v4 令牌（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+| .agent/skills/puti-shouye/SKILL.md | W1076 | 治理文档 |
+| .github/workflows/README.md | W1076 | 治理文档 |
+| AGENTS.md | W1076 | 治理文档 |
+| CHANGELOG.md | W1076 | 治理文档 |
+| CITATION.cff | W1076 | 治理文档 |
+| HANDOVER.md | W1076 | 治理文档 |
+| README.md | W1076 | 治理文档 |
+| STRUCTURE.md | W1076 | 治理文档 |
+| archive/docs/AGENTS-ARCHIVE.md | W1076 | 本批工具/产物 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1076 | 本批工具/产物 |
+| archive/scripts/batches/README.md | W1076 | 本批工具/产物 |
+| archive/scripts/batches/index.md | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/README.md | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_cjk_value_marks.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_j2_diff_report.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_j2_splice_dashboard.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_make_spec.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/_w1076_space_tokens.py | W1076 | 本批工具/产物 |
+| archive/scripts/batches/w1076/index.md | W1076 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1076 | 治理文档 |
+| docs/00-导读/项目说明.md | W1076 | 治理文档 |
+| docs/11-方案报告/README.md | W1076 | 治理文档 |
+| docs/11-方案报告/计划方案/T42-任务计划执行与经验沉淀报告-2026-11-02.md | W1076 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1076 | 治理文档 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1076 | 治理文档 |
+| docs/INDEX.md | W1076 | 治理文档 |
+| docs/agent/pitfalls.md | W1076 | 治理文档 |
+| scripts/_w1076_cjk_value_marks.py | W1076 | 本批工具/产物 |
+| scripts/_w1076_make_spec.py | W1076 | 本批工具/产物 |
+| scripts/_w1076_space_tokens.py | W1076 | 本批工具/产物 |
+| scripts/check_repo_layout.py | W1076 | 本批工具/产物 |
+| scripts/output/README.md | W1076 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1076.txt | W1076 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1076 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_report.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_after | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_after_root3.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_before | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_before_root3.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_dashboard_only.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_j2_diff_report.json | W1076 | 本批工具/产物 |
+| scripts/output/_w1076_spec.json | W1076 | 本批工具/产物 |
+| scripts/output/file-index.md | W1076 | 本批工具/产物 |
+| scripts/output/index.md | W1076 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1076 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1076 | 本批工具/产物 |
+| scripts/output/stats.json | W1076 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1076 | 本批工具/产物 |
+| scripts/visual_regression_probe.py | W1076 | 本批工具/产物 |
+| site/404.html | W1076 | 页面（v4 令牌消费） |
+| site/curated.html | W1076 | 页面（v4 令牌消费） |
+| site/dashboard.html | W1076 | 页面（v4 令牌消费） |
+| site/data/cross-time-danmaku.html | W1076 | 页面（v4 令牌消费） |
+| site/data/search.html | W1076 | 页面（v4 令牌消费） |
+| site/data/tag-cloud.html | W1076 | 页面（v4 令牌消费） |
+| site/dukou-engine.html | W1076 | 页面（v4 令牌消费） |
+| site/en/search.html | W1076 | 页面（v4 令牌消费） |
+| site/guide.html | W1076 | 页面（v4 令牌消费） |
+| site/index.html | W1076 | 页面（v4 令牌消费） |
+| site/rum-viewer.html | W1076 | 页面（v4 令牌消费） |
+| site/system.css | W1076 | 页面（v4 令牌消费） |
+
+## W1077 agent-guardrails 迁移：脚本进 scripts/guardrails/·文档进 docs/agent-guardrails/（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+| CHANGELOG.md | W1077 | 治理文档 |
+| CLAUDE.md | W1077 | 治理文档（规则 17 + 常用命令 2 行） |
+| AGENTS.md | W1077 | 治理文档（§6-20） |
+| HANDOVER.md | W1077 | 治理文档 |
+| STRUCTURE.md | W1077 | 治理文档 |
+| docs/index.md | W1077 | 目录索引（生成物） |
+| docs/agent-guardrails/README.md | W1077 | 人工维护文档（迁移） |
+| docs/agent-guardrails/merge-patch.md | W1077 | 人工维护文档（迁移） |
+| docs/agent-guardrails/self-check.md | W1077 | 人工维护文档（迁移） |
+| docs/agent-guardrails/index.md | W1077 | 目录索引（生成物） |
+| scripts/index.md | W1077 | 目录索引（生成物） |
+| scripts/guardrails/index.md | W1077 | 目录索引（生成物） |
+| scripts/guardrails/README.md | W1077 | 目录索引（生成物） |
+| scripts/guardrails/check_changed.ps1 | W1077 | 本批工具（迁移） |
+| scripts/guardrails/check_changed.sh | W1077 | 本批工具（迁移） |
+| scripts/guardrails/once_call.py | W1077 | 本批工具（迁移） |
+| scripts/guardrails/api_diff.py | W1077 | 本批工具（迁移） |
+| scripts/guardrails/check_nested_comprehension.py | W1077 | 本批工具（迁移） |
+| scripts/guardrails/ruff-structure.toml | W1077 | 本批工具（迁移） |
+| scripts/guardrails/precommit_entry.py | W1077 | pre-commit 本地 hook 入口 |
+| scripts/install_hooks.sh | W1077 | 幂等安装脚本 |
+| scripts/install_hooks.ps1 | W1077 | 安装脚本薄封装 |
+| .pre-commit-config.yaml | W1077 | 框架本地 hook（防 install 丢失） |
+| tests/index.md | W1077 | 目录索引（生成物） |
+| tests/fixtures/_sample.py | W1077 | 测试 fixture（迁移） |
+| tests/fixtures/index.md | W1077 | 目录索引（生成物） |
+| tests/fixtures/README.md | W1077 | 目录索引（生成物） |
+| .github/workflows/README.md | W1077 | 旁文档版本面（头部 + 里程碑） |
+| README.md | W1077 | 治理文档（当前批次行） |
+| docs/00-导读/项目说明.md | W1077 | 治理文档（当前批次 + 当前版本两处） |
+| CITATION.cff | W1077 | 外部引用面版本 |
+| docs/agent/pitfalls.md | W1077 | 坑表（E-73） |
+| site/dukou-engine.html | W1077 | 页脚批次链（手工工件） |
+| site/data/search.html | W1077 | 站内搜索索引重建（自动产物） |
+| site/en/search.html | W1077 | 站内搜索索引重建（自动产物） |
+| scripts/output/file-index.md | W1077 | 本文件 |
+| scripts/output/index.md | W1077 | 目录索引（生成物） |
+| scripts/output/_w1077_spec.json | W1077 | 本批规格 |
+| scripts/output/_vermilion_solid_cache.json | W1077 | 第 49 槽增量缓存（自动产物） |
+| docs/00-导读/W批次编号对账表.md | W1077 | 批次台账 |
+
+## W1078 全站硬编码颜色盘点（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1078 | 治理文档 |
+| CHANGELOG.md | W1078 | 治理文档 |
+| HANDOVER.md | W1078 | 治理文档 |
+| README.md | W1078 | 治理文档 |
+| STRUCTURE.md | W1078 | 治理文档 |
+| archive/scripts/batches/w1078/_w1078_color_inventory.py | W1078 | 本批工具/产物 |
+| archive/scripts/batches/w1078/_w1078_make_spec.py | W1078 | 本批工具/产物 |
+| cripts/output/_w851_j1_name_audit.json | W1078 | 治理文档 |
+| docs/00-导读/W批次编号对账表.md | W1078 | 治理文档 |
+| docs/00-导读/项目说明.md | W1078 | 治理文档 |
+| docs/11-方案报告/README.md | W1078 | 治理文档 |
+| docs/11-方案报告/计划方案/T43-任务计划执行与经验沉淀报告-2026-11-02.md | W1078 | 治理文档 |
+| docs/INDEX.md | W1078 | 治理文档 |
+| ocs/11-方案报告/README.md | W1078 | 治理文档 |
+| scripts/_w1078_color_inventory.py | W1078 | 本批工具/产物 |
+| scripts/_w1078_make_spec.py | W1078 | 本批工具/产物 |
+| scripts/output/README.md | W1078 | 本批工具/产物 |
+| scripts/output/_w1078_color_inventory.json | W1078 | 本批工具/产物 |
+| scripts/output/_w1078_color_inventory.md | W1078 | 本批工具/产物 |
+| scripts/output/_w1078_spec.json | W1078 | 本批工具/产物 |
+| scripts/output/file-index.md | W1078 | 本批工具/产物 |
+| scripts/output/index.md | W1078 | 本批工具/产物 |
+| scripts/output/stats.json | W1078 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1078 | 本批工具/产物 |
+
+## W1079 图表色工程批·形态取证与三档方案（2026-11-02）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1079 | 治理文档 |
+| CHANGELOG.md | W1079 | 治理文档 |
+| HANDOVER.md | W1079 | 治理文档 |
+| README.md | W1079 | 治理文档 |
+| STRUCTURE.md | W1079 | 治理文档 |
+| archive/scripts/batches/w1080/_w1079_js_color_shapes.py | W1079 | 本批工具/产物 |
+| archive/scripts/batches/w1080/_w1079_make_spec.py | W1079 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1079 | 治理文档 |
+| docs/00-导读/项目说明.md | W1079 | 治理文档 |
+| docs/11-方案报告/README.md | W1079 | 治理文档 |
+| docs/11-方案报告/计划方案/T44-任务计划执行与经验沉淀报告-2026-11-02.md | W1079 | 治理文档 |
+| docs/INDEX.md | W1079 | 治理文档 |
+| ocs/11-方案报告/README.md | W1079 | 治理文档 |
+| scripts/_w1079_js_color_shapes.py | W1079 | 本批工具/产物 |
+| scripts/_w1079_make_spec.py | W1079 | 本批工具/产物 |
+| scripts/output/README.md | W1079 | 本批工具/产物 |
+| scripts/output/_w1079_spec.json | W1079 | 本批工具/产物 |
+| scripts/output/file-index.md | W1079 | 本批工具/产物 |
+| scripts/output/index.md | W1079 | 本批工具/产物 |
+| scripts/output/stats.json | W1079 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1079 | 本批工具/产物 |
+
+> 归档追加：2026-11-19（W994 迁入 W1152-W1169）
+
+## W1152 v4 body 行高改值批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W1152 | 改：--leading-body 1.75→1.80（与 --type-body /1.80 对齐·孤儿刻度令牌防分叉地雷·页自有消费 0 实测） |
+| site/system.css | W1152 | 改：body 语义消费 --type-body（font shorthand·行高 1.75→1.80 v4 明文改值项·style/variant 重置在 body 本为初始） |
+| DESIGN.md | W1152 | 改：§4C type 行补 body 消费 + grid 行终裁不迁移 + 后续批范围复盘 |
+| docs/00-导读/design.md | W1152 | 改：令牌导出再生成（134 键·0 警告） |
+| scripts/output/design-tokens.json | W1152 | 改：令牌导出再生成（反篡改比对源） |
+| docs/00-导读/W批次编号对账表.md | W1152 | 改：W1152 认领行 + 腾窗迁出 2 行（W1089-W1090） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1152 | 改：台账腾窗接收 W1089-W1090 两行 |
+| tests/unit/test_w1152_body_lh_alignment.py | W1152 | 新增：行高双源对齐 + body 语义消费守卫 2 例 |
+| scripts/output/_w864_accent_exemptions.json | W1152 | 改：data/aesthetics.html 豁免对齐 W886 EN 姊妹页三类（stage-color-bar/color-swatch/kpi-card·纠正误判类·16-⑦ 留痕） |
+| CHANGELOG.md | W1152 | 改：W1152 段落（级联） |
+| HANDOVER.md | W1152 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1152 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1152 | 改：AGENTS 脚注滚动归档（级联） |
+| README.md | W1152 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1152 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1152 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1152 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1152 | 改：版本抬头推进（级联·幂等） |
+| docs/00-导读/统计口径说明.md | W1152 | 改：stats 刷新连带（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1152 | 改：版本抬头推进（级联 versions·幂等） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1152 | 改：版本抬头推进（级联·幂等） |
+| scripts/output/file-index.md | W1152 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1152 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1152 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1152 | 改：stats changelog 面（级联） |
+| docs/INDEX.md | W1152 | 改：docs_index 刷新（级联 index 步） |
+| scripts/INDEX.md | W1152 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1152 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1152 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1152 | 改：工具清单刷新（gen_folder_docs） |
+| scripts/output/_w1152_spec.json | W1152 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1152.txt | W1152 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1152 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1152 | 改：朱砂实底报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1152 | 改：gen_folder_docs 刷新（新增测试件登记） |
+| tests/unit/README.md | W1152 | 改：gen_folder_docs 刷新（新增测试件登记） |
+| pytest.ini | W1152 | 改：collected 头注推进（W830 C5b 对账面·stats 连带） |
+| site/（2 件） | W1152 | inline_css 副本同步（body 消费与 leading 值传播·_template.html + dukou-engine） |
+| site/data/（89 件） | W1152 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1152 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1152 | inline_css 副本同步（同上·W1142 分组登记） |
+
+## W1153 安全批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/engine/tools.ts | W1153 | 改：#27 GIT_DANGER 前缀族拦截 + #28 DENY_WRITE /i 与 realpath 复检 + #29 会话新写 scripts 拒执行/childEnv 大小写不敏感 |
+| xiyouji-agent-web/server/engine/tools.test.ts | W1153 | 改：回归锁 4 例（S1 前缀缩写/S2 大小写/S3 会话新写拒执行/S4 childEnv） |
+| scripts/rag/rag_server.py | W1153 | 改：#30 CORS 白名单（对齐 api P3-2）+ /route 异常不回显 + 每 IP 60 次分限速 |
+| tests/unit/test_w1153_rag_cors.py | W1153 | 新增：回归锁 3 例（白名单三态/限速/route 不回显） |
+| CHANGELOG.md | W1153 | 改：W1153 段落（级联） |
+| HANDOVER.md | W1153 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1153 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1153 | 改：AGENTS 脚注滚动归档（级联） |
+| README.md | W1153 | 改：版本面推进（级联 versions·幂等） |
+| STRUCTURE.md | W1153 | 改：版本面推进（级联·幂等） |
+| CITATION.cff | W1153 | 改：版本面推进（级联·幂等） |
+| docs/00-导读/项目说明.md | W1153 | 改：版本面推进（级联·幂等） |
+| .github/workflows/README.md | W1153 | 改：版本抬头推进（级联·幂等） |
+| docs/00-导读/W批次编号对账表.md | W1153 | 改：W1153 认领行 |
+| scripts/output/file-index.md | W1153 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1153 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1153 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1153 | 改：stats changelog 面（级联） |
+| docs/INDEX.md | W1153 | 改：docs_index 刷新（级联 index 步） |
+| scripts/INDEX.md | W1153 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1153 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1153 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1153 | 改：工具清单刷新 |
+| scripts/output/_w1153_spec.json | W1153 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1153.txt | W1153 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1153 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1153 | 改：朱砂实底报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1153 | 改：gen_folder_docs 刷新（新增测试件登记） |
+| tests/unit/README.md | W1153 | 改：gen_folder_docs 刷新（新增测试件登记） |
+| pytest.ini | W1153 | 改：collected 头注推进（W830 C5b 对账面·stats 连带） |
+
+## W1154 治理快批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/新Agent启动Prompt.md | W1154 | 改：可视化页 87→88/data HTML 88→89（N5） |
+| docs/00-导读/文档规范.md | W1154 | 改：「现役 66 段」→68（N2） |
+| AGENTS.md | W1154 | 改：§4.2 61 槽→63 三处 + 第 16 槽退役标注 + 脚注/版本（级联） |
+| docs/agent/gates.md | W1154 | 改：第 49 槽页数 88→89 + _w857 死指针订正 |
+| .git/hooks/pre-commit | W1154 | 改：origin/dev→动态 @{u} + gitleaks 缺失 WARN |
+| assets/promo/README.md | W1154 | 改：_w892 死指针→已归档说明 |
+| scripts/plates_verify.py | W1154 | 改：docstring 转正名 |
+| scripts/gen_folder_docs.py | W1154 | 改：重复 _kind_exists 去重 |
+| Makefile | W1154 | 改：.PHONY 补 cross-line |
+| scripts/run_all.py | W1154 | 改：discover_scripts 排除 __init__/_ 前缀 + main-guard 优先 |
+| tests/unit/test_w1154_run_all_discovery.py | W1154 | 新增：B 类发现器回归锁 2 例 |
+| scripts/agent_start.py | W1154 | 改：下一自由号=台账 max(W)+1（碑化块依赖移除） |
+| pytest.ini | W1154 | 改：stats 行去重 + 52 段指针化 + collected 头注（级联） |
+| .github/workflows/screenshot-review.yml | W1154 | 改：内联 case 判定改调 check_screenshot_scope.py（接线） |
+| tests/unit/test_ci_wiring.py | W1154 | 改：接线回归锁（断言脚本名+无内联残留） |
+| docs/11-方案报告/README.md | W1154 | 改：9 份报告补登记 |
+| scripts/check_index_health.py | W1154 | 改：新增 check_docs11_registration 双向对账 |
+| docs/agent/batch-closeout-checklist.md | W1154 | 改：段窗/verify 段指针化 + 禁 add -A |
+| .pre-commit-config.yaml | W1154 | 改：删休眠钩子 drl-contracts/check-untracked + 非等价声明 |
+| scripts/check_orchestration_refs.py | W1154 | 新增：编排面引用存在性门禁（双边界判据+self-test） |
+| .github/workflows/ci.yml | W1154 | 改：verify-delivery job 挂 orchestration_refs 步 |
+| scripts/batch_closeout.py | W1154 | 改：index 步接入 gen_sitemap.py |
+| site/sitemap.xml | W1154 | 改：gen_sitemap 重生成（854 URLs·随批） |
+| docs/00-导读/W批次编号对账表.md | W1154 | 改：W1154 认领行 |
+| CHANGELOG.md | W1154 | 改：W1154 段落（级联） |
+| HANDOVER.md | W1154 | 改：最后更新链+里程碑块（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1154 | 改：AGENTS 脚注滚动归档（级联） |
+| README.md | W1154 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1154 | 改：版本面推进（级联） |
+| CITATION.cff | W1154 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1154 | 改：版本面推进（级联） |
+| .github/workflows/README.md | W1154 | 改：版本抬头推进（级联） |
+| scripts/output/file-index.md | W1154 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1154 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1154 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1154 | 改：stats changelog 面（级联） |
+| docs/INDEX.md | W1154 | 改：docs_index 刷新（级联） |
+| scripts/INDEX.md | W1154 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1154 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1154 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1154 | 改：工具清单刷新 |
+| scripts/output/_w1154_spec.json | W1154 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1154.txt | W1154 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1154 | 改：朱砂实底增量缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1154 | 改：朱砂实底报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1154 | 改：gen_folder_docs 刷新 |
+| tests/unit/README.md | W1154 | 改：gen_folder_docs 刷新 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1154 | 改：台账窗口滚动归档（级联） |
+
+## W1155 假绿 P1 批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/ledger_backfill.py | W1155 | 改：#1 self_test 按 fails 判红 |
+| scripts/verify_delivery.py | W1155 | 改：#5 site 档并 docs 段 |
+| scripts/safe_commit.py | W1155 | 改：#6 expect-spec+pathspec 漂移拒绝 |
+| scripts/check_commit_scope.py | W1155 | 改：#13 SpecBrokenError 哨兵+main 捕获 |
+| scripts/check_structure.py | W1155 | 改：#10 三括号平衡+零面守卫 |
+| scripts/check_story_timeline_sync.py | W1155 | 改：#46 双空判红 |
+| scripts/check_folder_docs.py | W1155 | 改：#47 git 失效 fail-closed |
+| scripts/check_citations.py | W1155 | 改：#48 恰 100 回断言 |
+| scripts/check_design_asset_manifest.py | W1155 | 改：#57 零条目红 |
+| scripts/check_dark_state_gate.js | W1155 | 改：#63 基线缺页+数量断言 |
+| scripts/check_screenshot_gates.js | W1155 | 改：#64 --only 零命中 exit 2 |
+| scripts/check_db_schema.py | W1155 | 改：#70 锚定执行形态+剥注释 |
+| scripts/check_archive_health.py | W1155 | 改：#72 -C ROOT+returncode |
+| scripts/check_pitfall_id_unique.py | W1155 | 改：#56 同号同标题豁免移除 |
+| tests/unit/test_w1106_pitfall_id_unique.py | W1155 | 改：测试改真增量形态 |
+| scripts/check_plan_template.py | W1155 | 改：#55 merge-base 回退面 |
+| scripts/check_action_refs.py | W1155 | 改：#54 --ci 参数+透传 |
+| scripts/check_chart_values.js | W1155 | 改：#12 console/stability 入判据+缺口进退出码 |
+| scripts/check_data_drift.js | W1155 | 改：#11 双逗号正则+单侧键摘要通道 |
+| scripts/check_script_coverage.py | W1155 | 改：#9 实质调用面三通道+语料补钩子+分类注入 |
+| scripts/output/script-coverage-baseline.txt | W1155 | 改：48 件存量登记+check_js_syntax 陈旧行删 |
+| scripts/batch_closeout.py | W1155 | 改：#14 docnums 前向 NOTE |
+| scripts/check_dataset_provenance.py | W1155 | 改：#15 汇总句引文状态分布 |
+| tests/unit/test_w1141_gate_mount.py | W1155 | 改：槽数断言改动态对账 |
+| tests/unit/test_w1154_run_all_discovery.py | W1154 | 新增：B 类发现器锁（W1154 随批暂存） |
+| docs/00-导读/W批次编号对账表.md | W1155 | 改：W1155 认领行 |
+| CHANGELOG.md | W1155 | 改：W1155 段落（级联） |
+| HANDOVER.md | W1155 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1155 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1155 | 改：AGENTS 脚注滚动（级联） |
+| README.md | W1155 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1155 | 改：版本面推进（级联） |
+| CITATION.cff | W1155 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1155 | 改：版本面推进（级联） |
+| .github/workflows/README.md | W1155 | 改：版本抬头推进（级联） |
+| scripts/output/file-index.md | W1155 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1155 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1155 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1155 | 改：stats changelog（级联） |
+| docs/INDEX.md | W1155 | 改：docs_index 刷新（级联） |
+| scripts/INDEX.md | W1155 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1155 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1155 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1155 | 改：工具清单刷新 |
+| scripts/output/_w1155_spec.json | W1155 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1155.txt | W1155 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1155 | 改：朱砂缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1155 | 改：朱砂报告刷新（门禁产物） |
+| tests/unit/INDEX.md | W1155 | 改：gen_folder_docs 刷新 |
+| tests/unit/README.md | W1155 | 改：gen_folder_docs 刷新 |
+| pytest.ini | W1155 | 改：collected 头注（级联） |
+| site/sitemap.xml | W1155 | 改：gen_sitemap 随批（级联） |
+| site/data/cross-time-danmaku.html | W1155 | 改：页脚短令牌（级联） |
+| site/data/tag-cloud.html | W1155 | 改：页脚短令牌（级联） |
+| site/dukou-engine.html | W1155 | 改：页脚短令牌（级联） |
+| site/index.html | W1155 | 改：页脚短令牌（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1155 | 改：版本抬头（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1155 | 改：台账窗口滚动（级联） |
+| .github/workflows/ci.yml | W1155 | 改：级联连带 |
+| tests/unit/test_ci_wiring.py | W1155 | 改：级联连带 |
+
+## W1156 运行时数据批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/search.html | W1156 | 改：#32 probe 在线分支移除（W1074 镜像）+文案两处 |
+| site/data/narratology-16d-network.html | W1156 | 改：#33 死 fetch 承诺删除·直读 EMBEDDED |
+| site/data/timeline.html | W1156 | 改：#33 同上 |
+| site/data/chapter-stats.html | W1156 | 改：#34 数据源文案实况订正 |
+| site/en/chart-design.html | W1156 | 改：#35 五处中文字形→EN+目录文案对齐 |
+| site/data/character-appearance.html | W1156 | 改：#36 内嵌 14 条对齐随站 JSON+回退目录文案 |
+| site/data/tag-cloud.html | W1156 | 改：#37 条数 81→82 实测订正+数据源行 |
+| docs/00-导读/W批次编号对账表.md | W1156 | 改：W1156 认领行 |
+| CHANGELOG.md | W1156 | 改：W1156 段落（级联） |
+| HANDOVER.md | W1156 | 改：最后更新链+里程碑块（级联） |
+| AGENTS.md | W1156 | 改：脚注+版本（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1156 | 改：AGENTS 脚注滚动（级联） |
+| README.md | W1156 | 改：版本面推进（级联） |
+| STRUCTURE.md | W1156 | 改：版本面推进（级联） |
+| CITATION.cff | W1156 | 改：版本面推进（级联） |
+| docs/00-导读/项目说明.md | W1156 | 改：版本面推进（级联） |
+| .github/workflows/README.md | W1156 | 改：版本抬头推进（级联） |
+| scripts/output/file-index.md | W1156 | 改：file-index 段（级联） |
+| scripts/output/stats.json | W1156 | 改：stats 刷新（级联） |
+| scripts/output/stats-index.md | W1156 | 改：stats 索引（级联） |
+| scripts/output/stats-changelog.json | W1156 | 改：stats changelog（级联） |
+| docs/INDEX.md | W1156 | 改：docs_index 刷新（级联） |
+| scripts/INDEX.md | W1156 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/INDEX.md | W1156 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/README.md | W1156 | 改：gen_folder_docs 刷新（级联） |
+| scripts/output/tools-inventory.md | W1156 | 改：工具清单刷新 |
+| scripts/output/_w1156_spec.json | W1156 | 新增：本批 spec |
+| scripts/output/_cascade_files_W1156.txt | W1156 | 新增：级联清单（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1156 | 改：朱砂缓存刷新（门禁产物） |
+| scripts/output/_vermilion_solid_report.json | W1156 | 改：朱砂报告刷新（门禁产物） |
+| site/sitemap.xml | W1156 | 改：gen_sitemap 随批（级联） |
+| site/data/cross-time-danmaku.html | W1156 | 改：页脚短令牌（级联） |
+| site/dukou-engine.html | W1156 | 改：页脚短令牌（级联） |
+| site/index.html | W1156 | 改：页脚短令牌（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1156 | 改：版本抬头（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1156 | 改：台账窗口滚动（级联） |
+
+## W1157 全仓文件重构分类整理批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/huoyan-jinjing/（1 件） | W1157 | 改：坑表路径改根 |
+| .agent/skills/puti-shouye/（1 件） | W1157 | 改：坑表路径改根（3 处） |
+| .github/workflows/（1 件） | W1157 | 改：拆分——27KB 历史流水账单行迁 archive（77KB→21KB） |
+| archive/（2 件） | W1157 | 改：再生成 |
+| archive/docs/（7 件） | W1157 | 改/迁：W1157 重构整理批 |
+| archive/hyperframes/（5 件） | W1157 | 迁：hyperframes 顶层目录退役整迁（git mv·TOP_DIRS 摘 |
+| archive/hyperframes/compositions/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| archive/hyperframes/compositions/d3-visualizations/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| archive/hyperframes/output/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/（2 件） | W1157 | 改：再生成（images/maps 摘除） |
+| assets/fonts/（3 件） | W1157 | 改：再生成（+font-subset-guide） |
+| assets/images/（4 件） | W1157 | 删：空壳目录 |
+| assets/maps/（3 件） | W1157 | 删：空壳目录（仅 INDEX+README） |
+| assets/promo/plate-set/（4 件） | W1157 | 改：再生成（raw/zoom 摘除） |
+| assets/promo/plate-set/raw/（3 件） | W1157 | 删：出图原件加工层退役（用户令·git 史承载回溯） |
+| assets/promo/plate-set/raw/round1/（10 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round10/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round11/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round12/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round13/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round14/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round15/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round16/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round17/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round18/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round2/（10 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round3/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round4/（10 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round5/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round6/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round7/（6 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round8/（14 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/raw/round9/（6 件） | W1157 | 改/迁：W1157 重构整理批 |
+| assets/promo/plate-set/zoom-w948/（8 件） | W1157 | 删：加工放大层退役 |
+| assets/promo/plate-set/zoom-w952/（9 件） | W1157 | 删：加工放大层退役 |
+| assets/promo/plate-set/zoom-w953/（4 件） | W1157 | 删：加工放大层退役 |
+| assets/promo/plate-set/zoom-w974/（34 件） | W1157 | 删：加工放大层退役 |
+| dataset/（3 件） | W1157 | 改：再生成 |
+| docs/（1 件） | W1157 | 改：再生成（859 篇） |
+| docs/00-导读/（8 件） | W1157 | 改：再生成（2 件迁出） |
+| docs/10-方法论沉淀/（17 件） | W1157 | 改/迁：W1157 重构整理批 |
+| docs/11-方案报告/（1 件） | W1157 | 改/迁：W1157 重构整理批 |
+| docs/11-方案报告/治理与核查/（2 件） | W1157 | 迁：自 10-方法论沉淀 归位 11-方案报告 |
+| docs/11-方案报告/设计与架构方案/（2 件） | W1157 | 改：stats 级联标记面跟随（report_docs 165） |
+| docs/11-方案报告/调研与数据复盘/（2 件） | W1157 | 迁：自 00-导读 归位 11-方案报告（退役记录类） |
+| docs/agent/（2 件） | W1157 | 改：坑表路径改根 |
+| hyperframes/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| hyperframes/compositions/（4 件） | W1157 | 改/迁：W1157 重构整理批 |
+| hyperframes/compositions/d3-visualizations/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| hyperframes/output/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| scripts/（14 件） | W1157 | 改：font-subset-guide 行摘除 |
+| scripts/output/（14 件） | W1157 | 改：再生成 |
+| site/（2 件） | W1157 | 改/迁：W1157 重构整理批 |
+| site/data/（3 件） | W1157 | 改/迁：W1157 重构整理批 |
+| site/en/（1 件） | W1157 | 改/迁：W1157 重构整理批 |
+| site/static/fonts/（6 件） | W1157 | 改：再生成（4 件摘除） |
+| site/static/img/（4 件） | W1157 | 改：再生成 |
+| tests/unit/（7 件） | W1157 | 改：touches 合成串 pitfalls 路径改根（8 处） |
+| .gitignore | W1157 | 改：e2e baseline 两行死 ignore 移除（W773 决策落地）+archive/hyperframes/.thumbnails 改路径+.zcode/ 忽略 |
+| AGENTS.md | W1157 | 改：§6 第 24/25 重复条去重（删尾条不改号）+§7/§8 四文档指针（AGENT.md 系笔误撤除·流程以 §7 为正本）+目录树 hyperframes 摘行 |
+| CHANGELOG.md | W1157 | 改：W1157 段落（级联） |
+| CITATION.cff | W1157 | 改/迁：W1157 重构整理批 |
+| CLAUDE.md | W1157 | 改：pitfalls 指针改根+接手导航四文档行（55/60 行） |
+| HANDOVER.md | W1157 | 改：pitfalls 路径引用+收官进度 |
+| INDEX.md | W1157 | 改：根索引再生成（gen_folder_docs） |
+| README.en.md | W1157 | 改：目录树 hyperframes 摘行 |
+| README.md | W1157 | 改：目录树 hyperframes 摘行 |
+| RULES.md | W1157 | 新建：必守规则单一入口（7 域分节·一行条目+权威指针·四文档体系） |
+| STRUCTURE.md | W1157 | 改：顶层表补 6 目录声明缺口+4 根文件行+hyperframes 摘行 |
+| pitfalls.md | W1157 | 迁根：坑表正本自 docs/agent/ 迁入（292 条·3 门禁脚本路径同批改） |
+| pytest.ini | W1157 | 改：pytest_collected 1464→1465（stats 级联·本批回归锁 +1） |
+
+## W1158 W1157 遗留收尾批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W1158 | 改：拆 main 根治——复杂度 47>15/branches 48>16/statements 143>80/step_env 嵌套 6>4 → 11 个 _step_*/_load/_ruff_version_drift_line 函数（行为零变化·基线 diff 验证） |
+| docs/00-导读/W批次编号对账表.md | W1158 | 改：W1158 认领行+W1157 行 hash 回填（20921299·ledger_backfill 行指纹） |
+| site/data/search.html | W1157 | 改：内嵌搜索索引再生成（W1157 提交后验证轮再生·本批并入） |
+| site/en/search.html | W1158 | 改：内嵌搜索索引再生成（同上并入） |
+| scripts/output/_vermilion_solid_cache.json | W1158 | 改：朱砂实底增量缓存（验证轮再生产物并入） |
+| CHANGELOG.md | W1158 | 改：W1158 段落（级联） |
+| HANDOVER.md | W1158 | 改：最后更新行+进度（级联） |
+| scripts/output/_w1158_spec.json | W1158 | 新建：本批 spec |
+| scripts/output/file-index.md | W1158 | 改：W1158 段（级联） |
+| scripts/output/_cascade_files_W1158.txt | W1158 | 新建：级联清单 |
+
+## W1159 坑表 E-199 批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| pitfalls.md | W1159 | 改：流程组 +1 条 E-199（161→162·总 293）——大块程序化改写三重防线（E-32 同族扩展到 Edit/行扫描工具面） |
+| AGENTS.md | W1159 | 改：坑表计数 292→293+分项行 161→162（级联+计数链） |
+| HANDOVER.md | W1159 | 改：坑表计数三处 292→293（级联+计数链） |
+| .agent/skills/puti-shouye/SKILL.md | W1159 | 改：坑表计数两处 292→293（计数链） |
+| scripts/guardrails/check_rewrite_integrity.py | W1159 | 新建：E-199 机器判据（C1 py_compile/C2 函数集缩水/C3 双定义·自测 5 例） |
+| scripts/guardrails/check_changed.ps1 | W1159 | 改：第 3.5 步接线改写完整性判据+聚合行 |
+| scripts/guardrails/check_changed.sh | W1159 | 改：第 3.5 步接线（CI/pre-commit strict-api 路径） |
+| docs/00-导读/W批次编号对账表.md | W1159 | 改：W1159 认领行 |
+| CHANGELOG.md | W1159 | 改：W1159 段落（级联） |
+| scripts/output/_w1159_spec.json | W1159 | 新建：本批 spec |
+| scripts/output/file-index.md | W1159 | 改：W1159 段（级联） |
+| scripts/output/_cascade_files_W1159.txt | W1159 | 新建：级联清单 |
+
+## W1160 治理欠账清偿批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W1160 | 改：DONE_PREFIXES 补「已合并/已让号/已撤销」（is_inflight 词表根修·每批 19 条滞后误报归零） |
+| tests/unit/test_preflight_check.py | W1160 | 改：+test_inflight_recognizes_merged_status 回归锁 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-07.md | W1160 | 新建：第 53 篇复盘（W1157-W1160 四批·五条复利经验+五道新判据表） |
+| docs/11-方案报告/README.md | W1160 | 改：复盘登记面 16→17 篇+编号 53 行 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1160 | 改：tier2 腾窗（1384KB→898KB·迁 138 段） |
+| archive/docs/CHANGELOG-ARCHIVE-tier2-W673-W813.md | W1160 | 新建：二级归档（W673-W813） |
+| archive/docs/file-index-ARCHIVE.md | W1160 | 改：tier2 腾窗（1706KB→899KB·迁 579 段） |
+| archive/docs/file-index-ARCHIVE-tier2-W335-W979.md | W1160 | 新建：二级归档（W335-W979） |
+| archive/README.md | W1160 | 改：台账登记（tier2 两件） |
+| archive/INDEX.md | W1160 | 改：再生成 |
+| archive/docs/INDEX.md | W1160 | 改：再生成（tier2 两件+台账迁出） |
+| archive/docs/README.md | W1160 | 改：再生成 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1160 | 改：台账腾窗迁出 3 行（W1097-W1099） |
+| docs/00-导读/W批次编号对账表.md | W1160 | 改：W1160 认领行（含对抗审查 token）+腾窗迁出+19 行反填 |
+| HANDOVER.md | W1160 | 改：坑表计数+Backlog 对账注记+级联 |
+| CHANGELOG.md | W1160 | 改：W1160 段落（级联） |
+| scripts/output/_w1160_spec.json | W1160 | 新建：本批 spec |
+| scripts/output/file-index.md | W1160 | 改：W1160 段（级联） |
+| scripts/output/_cascade_files_W1160.txt | W1160 | 新建：级联清单 |
+| .github/workflows/README.md | W1160 | 改：W450-W1160 区间行推进（版本面） |
+| AGENTS.md | W1160 | 改：版本脚注滚动（级联） |
+| CITATION.cff | W1160 | 改：version/date 推进（级联） |
+| README.md | W1160 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1160 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1160 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1160 | 改：逐批明细追加（W1160） |
+| docs/00-导读/项目说明.md | W1160 | 改：版本行推进（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1160 | 改：级联面 |
+| pytest.ini | W1160 | 改：级联面 |
+| scripts/guardrails/INDEX.md | W1160 | 改：级联面 |
+| scripts/guardrails/README.md | W1160 | 改：级联面 |
+| scripts/output/_vermilion_solid_cache.json | W1160 | 改：级联面 |
+| scripts/output/stats-changelog.json | W1160 | 改：stats 级联 |
+| scripts/output/stats-index.md | W1160 | 改：stats 级联 |
+| scripts/output/stats.json | W1160 | 改：stats 刷新（级联） |
+| site/data/cross-time-danmaku.html | W1160 | 改：页脚链推进（级联） |
+| site/data/tag-cloud.html | W1160 | 改：页脚链推进（级联） |
+| site/dukou-engine.html | W1160 | 改：页脚链推进（级联） |
+| site/index.html | W1160 | 改：页脚链推进（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1160 | 改：stats 标记面跟随（report_docs/report_docs 键刷新） |
+| docs/INDEX.md | W1160 | 改：再生成（复盘新件 860 篇） |
+| scripts/output/INDEX.md | W1160 | 改：再生成 |
+| scripts/output/README.md | W1160 | 改：再生成 |
+| scripts/output/tools-inventory.md | W1160 | 改：再生成 |
+| site/data/search.html | W1160 | 改：内嵌搜索索引再生成（复盘报告入索引） |
+| site/en/search.html | W1160 | 改：内嵌搜索索引再生成（同上） |
+| scripts/check_gov_doc_claims.py | W1160 | 改：P1-1 根修——_pitfalls_count 改读根 pitfalls.md（第四取数面跟随） |
+| scripts/guardrails/check_rewrite_integrity.py | W1160 | 改：P1-2 根修——DEF_RE 支持 async def+T6/T7 负样本（自测 7 例）+P3-1 死代码简化 |
+| scripts/backfill_changelog.py | W1160 | 改：P2-2 docstring 统一为规范化语义（删旧 fail-closed 双文案） |
+| docs/agent/pitfalls.md | W1160 | 改：P2-1 跳转壳计数 292→293（计数链第六处） |
+
+## W1161 存量复杂度棘轮第 1 轮（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_gsap_motion.py | W1161 | 改：check_carrier_text 34→4（9 个 _carrier_* helper·J1-J7 拆解·输出逐字节一致） |
+| scripts/perf_monitor.py | W1161 | 改：_render_optional_sections 16→绿 |
+| scripts/check_perf_shadow.py | W1161 | 改：report 16→绿 |
+| scripts/check_governance_docs.py | W1161 | 改：main 17→绿 |
+| scripts/ledger_close_check.py | W1161 | 改：main 17→绿 |
+| scripts/plates_verify.py | W1161 | 改：main 17→绿 |
+| scripts/scan_targets.py | W1161 | 改：classify_file 17→绿 |
+| scripts/visual_regression_probe.py | W1161 | 改：_diff_snapshots 17→绿 |
+| docs/00-导读/W批次编号对账表.md | W1161 | 改：W1161 认领行 |
+| CHANGELOG.md | W1161 | 改：W1161 段落（级联） |
+| HANDOVER.md | W1161 | 改：最后更新行（级联） |
+| scripts/output/_w1161_spec.json | W1161 | 新建：本批 spec |
+| scripts/output/file-index.md | W1161 | 改：W1161 段（级联） |
+| scripts/output/_cascade_files_W1161.txt | W1161 | 新建：级联清单 |
+
+## W1162 微批轻量通道实施批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W1162 | 改：--light 通道（跳页脚四面/workflows/agents/citation·留五面）+准入硬守卫（非 md 触碰即拒）+ctx.light |
+| docs/11-方案报告/设计与架构方案/微批轻量通道设计-三档与准入判据-2026-10-31.md | W1162 | 改：V1.0 待批 → V1.1 已批准实施（三前提落位说明·微批档暂不开通） |
+| docs/00-导读/W批次编号对账表.md | W1162 | 改：W1162 认领行 |
+| CHANGELOG.md | W1162 | 改：W1162 段落（级联） |
+| scripts/output/_w1162_spec.json | W1162 | 新建：本批 spec |
+| scripts/output/file-index.md | W1162 | 改：W1162 段（级联） |
+| scripts/output/_cascade_files_W1162.txt | W1162 | 新建：级联清单 |
+
+## W1163 收尾微批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/safe_commit.py | W1163 | 改：--expect-spec 逗号分隔多 spec 并集判定（21② 形态·向后兼容单值） |
+| docs/00-导读/W批次编号对账表.md | W1163 | 改：W1163 认领行+W1162 hash 回填 |
+| CHANGELOG.md | W1163 | 改：W1163 段落（级联） |
+| HANDOVER.md | W1163 | 改：最后更新行（级联） |
+| scripts/output/_w1163_spec.json | W1163 | 新建：本批 spec |
+| scripts/output/file-index.md | W1163 | 改：W1163 段（级联） |
+| scripts/output/_cascade_files_W1163.txt | W1163 | 新建：级联清单 |
+
+## W1164 触发器硬拦升格批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_review_trigger.py | W1164 | 改：HARD_MULTIPLIER+hard_triggered+hard_triggered_today+自测五态锁 |
+| scripts/check_audit_trigger.py | W1164 | 改：hard_triggered（40 批）+ledger_text_for_preflight+自测 hard 双态锁 |
+| scripts/check_backlog_review.py | W1164 | 改：hard_triggered（50 批）+ledger_text_for_preflight+自测 hard 双态锁 |
+| scripts/preflight_check.py | W1164 | 改：三 _step_* 接线（签名加 problems+hard 判据 FAIL 进 problems） |
+| docs/00-导读/W批次编号对账表.md | W1164 | 改：W1164 认领行+W1160/1163 收官回填（含双 token 保留） |
+| CHANGELOG.md | W1164 | 改：W1164 段落（级联） |
+| HANDOVER.md | W1164 | 改：最后更新行（级联） |
+| scripts/output/_w1164_spec.json | W1164 | 新建：本批 spec |
+| scripts/output/file-index.md | W1164 | 改：W1164 段（级联） |
+| scripts/output/_cascade_files_W1164.txt | W1164 | 新建：级联清单 |
+
+## W1165 V4 移动端 375px 回归批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/mobile_viewport_probe.py | W1165 | 新建：375px 视口探针（四类判据·file:// 加载·自测 9 例） |
+| scripts/check_mobile_viewport.py | W1165 | 新建：第 64 槽（A 层 5 项静态契约 + B 层报告采信·自测 5 例） |
+| scripts/verify_delivery.py | W1165 | 改：挂第 64 槽 + EXPECTED_SECTION_NAMES 加「移动视口」+ _SCOPE_CORE 登记 |
+| site/system.css | W1165 | 改：cite 组件段新增（样式自 JS 归位）+ 页脚 nav flex-wrap/nowrap + 移动端图例与表单触摸尺寸 |
+| site/static/js/cite-box.js | W1165 | 改：剥离 CSS 注入（样式归位 system.css），仅保留复制交互 |
+| site/dashboard.html | W1165 | 改：私有 .flinks 页脚触摸尺寸（外链 CSS 页不走内联） |
+| site/data/pilgrim-team-dynamic-network.html | W1165 | 改：.phase-timeline 窄屏 5 列→2 列（375px 下卡片溢出被裁剪） |
+| scripts/output/mobile_viewport_report.json | W1165 | 新建：探针全量报告（99 页终值 FAIL 0） |
+| tests/unit/test_w1165_mobile_viewport.py | W1165 | 新建：13 例回归锁（探针分级语义 / 门禁解析器两处缺陷形态 / 仓库契约） |
+| site/（3 件） | W1165 | inline_css 副本同步 + 搜索索引重生成（_template.html / dukou-engine.html / search.html） |
+| site/data/（89 件） | W1165 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1165 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1165 | inline_css 副本同步（同上·W1142 分组登记） |
+| docs/00-导读/W批次编号对账表.md | W1165 | 改：W1165 认领行 + W1102/1103 腾窗迁出 + W1164 收官回填 |
+| pitfalls.md | W1165 | 改：+E-200（组件样式不得寄生脚本·尺寸缺陷须有真实渲染判据）+ 分项计数 163 |
+| docs/agent/gates.md | W1165 | 改：第 64 槽定义（契约与口径） |
+| AGENTS.md | W1165 | 改：§4.2 第 64 槽摘要 + 槽数 63→64（三处） |
+| CHANGELOG.md | W1165 | 改：W1165 段落（级联） |
+| HANDOVER.md | W1165 | 改：最后更新行 + 当前进度（级联） |
+| scripts/output/_w1165_spec.json | W1165 | 新建：本批 spec |
+| scripts/output/file-index.md | W1165 | 改：W1165 段（级联） |
+| scripts/output/_cascade_files_W1165.txt | W1165 | 新建：级联清单 |
+| .github/workflows/README.md | W1165 | 改：区间行推进（版本面） |
+| CITATION.cff | W1165 | 改：version/date 推进（级联） |
+| README.md | W1165 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1165 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1165 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1165 | 改：逐批明细追加（W1165·级联） |
+| docs/00-导读/项目说明.md | W1165 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1165 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1165 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1165 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1165 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1165 | 改：再生成/验证缓存（级联） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1165 | 改：stats 标记 gate_count 63→64（stats.py 标记面跟随） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1165 | 改：stats 标记 gate_count 63→64（同上） |
+| pytest.ini | W1165 | 改：stats 标记 pytest_collected 随本批新增单测更新 |
+| scripts/output/stats-changelog.json | W1165 | 改：stats 生成件跟随（stats.py --w 1165） |
+| scripts/output/stats-index.md | W1165 | 改：stats 生成件跟随（同上） |
+| .agent/skills/puti-shouye/SKILL.md | W1165 | 改：坑表计数 293→294（菩提授业 skill 双处） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1165 | 改：台账腾窗迁入 W1102-W1103（archive_ledger_rows --apply） |
+| scripts/INDEX.md | W1165 | 改：目录清单刷新（gen_folder_docs --refresh·新增两脚本） |
+| tests/unit/INDEX.md | W1165 | 改：目录清单刷新（同上·新增 W1165 单测） |
+| tests/unit/README.md | W1165 | 改：目录清单刷新（同上） |
+
+## W1166 移动端收尾微批（2026-11-07）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css | W1166 | 改：移动端 .site-footer 安全区（80px + body:has(.rag-fab) 104px）+ 纯视觉图例项 min-height 32px |
+| scripts/check_mobile_viewport.py | W1166 | 改：A6 页脚安全区契约（padding-bottom≥54px）+ 自测 5→6 例 |
+| AGENTS.md | W1166 | 改：第 64 槽摘要补 A6 与自测例数 |
+| docs/agent/gates.md | W1166 | 改：第 64 槽 A6 判据与自测 6 例、契约数 5→6 |
+| docs/00-导读/文档规范.md | W1166 | 改：verify full 现役段数 68→69（W1165 挂第 64 槽后实况） |
+| HANDOVER.md | W1166 | 改：里程碑滚动淘汰最老块 + 最后更新行 + 当前进度 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1166 | 改：台账腾窗迁入 W1104（archive_ledger_rows 号序切分） |
+| docs/00-导读/W批次编号对账表.md | W1166 | 改：W1166 认领行 + W1165 收官回填（b64a4435） |
+| scripts/output/_w1166_spec.json | W1166 | 新建：本批 spec |
+| scripts/output/_cascade_files_W1166.txt | W1166 | 新建：级联清单 |
+| scripts/output/_cascade_files_W1165.txt | W1166 | 改：里程碑滚动清单同步 |
+| scripts/output/mobile_viewport_report.json | W1166 | 改：探针复跑（FAIL 0 无回归） |
+| site/（3 件） | W1166 | inline_css 副本同步 + 搜索索引重生成（_template.html / dukou-engine.html / search.html） |
+| site/data/（89 件） | W1166 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/en/（138 件） | W1166 | inline_css 副本同步（同上·W1142 分组登记） |
+| site/reader/（622 件） | W1166 | inline_css 副本同步（同上·W1142 分组登记） |
+| CHANGELOG.md | W1166 | 改：W1166 段落（级联） |
+| scripts/output/file-index.md | W1166 | 改：W1166 段（级联） |
+| .github/workflows/README.md | W1166 | 改：区间行推进（版本面） |
+| CITATION.cff | W1166 | 改：version/date 推进（级联） |
+| README.md | W1166 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1166 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1166 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1166 | 改：逐批明细追加（W1166·级联） |
+| docs/00-导读/项目说明.md | W1166 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1166 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1166 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1166 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1166 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1166 | 改：再生成/验证缓存（级联） |
+
+## W1167 MVP 迁移批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/（1 件） | W1167 | 改：随本批级联刷新 |
+| .github/workflows/（1 件） | W1167 | 改：随本批级联刷新 |
+| archive/docs/（3 件） | W1167 | 改：归档面随级联刷新 |
+| docs/（1 件） | W1167 | 改：stats 计数标记随实算刷新（gate_count 64→66 / pyt |
+| docs/00-导读/（3 件） | W1167 | 改：stats 计数标记随实算刷新（gate_count 64→66 / pyt |
+| docs/11-方案报告/（1 件） | W1167 | 改：stats 计数标记随实算刷新（gate_count 64→66 / pyt |
+| docs/11-方案报告/设计与架构方案/（3 件） | W1167 | 新建：改版方案仓内正本（决策台账 G0-1/2·Ask1/2/4·六项实况·门禁 |
+| docs/agent/（1 件） | W1167 | 改：stats 计数标记随实算刷新（gate_count 64→66 / pyt |
+| scripts/（12 件） | W1167 | 改：随本批级联刷新 |
+| scripts/output/（12 件） | W1167 | 改：门禁/统计生成产物刷新（stats / 缓存 / 计划面） |
+| site/（12 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/data/（89 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/en/（138 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/js/（2 件） | W1167 | 改：上报通道注释「统计链已退役」失真订正 + 与注入轨不重复计数声明 |
+| site/reader/（102 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/culture/（36 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/essays/（45 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/people/（216 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/poetry/（14 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/reader/themes/（210 件） | W1167 | 改：导航正本分发（含 nav_click 埋点属性）+ 三态数据徽标 + 双轨统 |
+| site/static/js/（3 件） | W1167 | 改：随本批级联刷新 |
+| tests/unit/（5 件） | W1167 | 改：随本批级联刷新 |
+| .gitignore | W1167 | 改：spark-output/ 工作目录不入库（改版方案正本已落 docs/11-方案报告，链路产物不作规则载体） |
+| AGENTS.md | W1167 | 改：随本批级联刷新 |
+| CHANGELOG.md | W1167 | 改：随本批级联刷新 |
+| CITATION.cff | W1167 | 改：随本批级联刷新 |
+| HANDOVER.md | W1167 | 改：随本批级联刷新 |
+| README.md | W1167 | 改：随本批级联刷新 |
+| STRUCTURE.md | W1167 | 改：随本批级联刷新 |
+| pitfalls.md | W1167 | 改：随本批级联刷新 |
+| pytest.ini | W1167 | 改：pytest collected 计数标记刷新 |
+
+## W1168 统计单轨收敛批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/（1 件） | W1168 | 改：坑表总数引用同步 304 条 |
+| docs/（1 件） | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+| docs/00-导读/（2 件） | W1168 | 改：stats 计数标记随实算刷新（gate_count 66→67 / pyt |
+| docs/11-方案报告/设计与架构方案/（1 件） | W1168 | 改：W1168 续批留痕（§2 决策台账 G0-1-R·§4.1 第 67 槽五 |
+| docs/agent/（1 件） | W1168 | 改：标题沿革 66→67 槽 + 第 67 槽全量定义（含 C6 运行层） |
+| scripts/（6 件） | W1168 | 改：具名例外域 4→1（EXTERNAL_SCRIPT_HOSTS 归空集 +  |
+| scripts/output/（8 件） | W1168 | 改：ga4_measurement_id 由待填项降为退役说明位（_note 写 |
+| site/（12 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/data/（89 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/en/（138 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/js/（3 件） | W1168 | 改：reader_progress 档位上报（25/50/75/100 每访问每 |
+| site/reader/（102 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/culture/（36 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/essays/（45 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/people/（216 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/poetry/（14 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/reader/themes/（210 件） | W1168 | 改：统计块迁移 ANALYTICS v2 单轨 + stats.js 桥随块分发 |
+| site/static/js/（3 件） | W1168 | 改：copy_citation 上报（只报页标识，不回传引文内容） |
+| tests/unit/（1 件） | W1168 | 新建：第 67 槽 + 桥 + CSP 单域 + 探针分层 23 例（含 N11 |
+| AGENTS.md | W1168 | 改：铁律 5 例外域收缩为单域 + §4.2 计数 66→67 + 条目 67 摘要 + 坑位计数五面 |
+| HANDOVER.md | W1168 | 改：槽数与坑数引用（六十七槽 / 304 条） |
+| pitfalls.md | W1168 | 改：W1168 新形态 7 条（E-204~E-210·仪器单源/读错层/gitignore 硬判据/死轨待填位/夹具落点面/分支未覆盖/node 桩全局） |
+| CHANGELOG.md | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+| README.md | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+| STRUCTURE.md | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+| pytest.ini | W1168 | 改：收官链级联写入（六文档同步 / 台账 / 索引） |
+
+## W1169 图表触摸交互批（2026-11-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/chapter-stats.html | W1169 | 改：3 组 tooltip 事件 mousemove/mouseleave → pointer* |
+| site/data/story-timeline.html | W1169 | 改：mouseover/mouseout → pointerover/pointerout |
+| site/data/tag-cloud.html | W1169 | 改：mousemove/mouseleave/mouseenter → pointer* |
+| site/data/timeline.html | W1169 | 改：2 组 mousemove/mouseleave/mouseenter → pointer* |
+| site/data/cross-time-danmaku.html | W1169 | 改：2 组 mousemove/mouseleave/mouseenter → pointer* |
+| scripts/_w1169_touch_events.py | W1169 | 新建：一次性改造脚本（锚点预检 + 替换断言·三重防线） |
+| docs/00-导读/W批次编号对账表.md | W1169 | 改：W1169 认领行 |
+| CHANGELOG.md | W1169 | 改：W1169 段落（级联） |
+| HANDOVER.md | W1169 | 改：最后更新行 + 当前进度（级联） |
+| scripts/output/_w1169_spec.json | W1169 | 新建：本批 spec |
+| scripts/output/file-index.md | W1169 | 改：W1169 段（级联） |
+| scripts/output/_cascade_files_W1169.txt | W1169 | 新建：级联清单 |
+| .github/workflows/README.md | W1169 | 改：区间行推进（版本面） |
+| CITATION.cff | W1169 | 改：version/date 推进（级联） |
+| README.md | W1169 | 改：版本行推进（级联） |
+| STRUCTURE.md | W1169 | 改：版本行推进（级联） |
+| archive/docs/AGENTS-ARCHIVE.md | W1169 | 改：脚注沿革滚动（级联） |
+| archive/docs/workflows-readme-history.md | W1169 | 改：逐批明细追加（W1169·级联） |
+| docs/00-导读/项目说明.md | W1169 | 改：版本行推进（级联） |
+| scripts/output/stats.json | W1169 | 改：stats 刷新（级联） |
+| scripts/output/INDEX.md | W1169 | 改：再生成/验证缓存（级联） |
+| scripts/output/README.md | W1169 | 改：再生成/验证缓存（级联） |
+| scripts/output/_vermilion_solid_cache.json | W1169 | 改：再生成/验证缓存（级联） |
+| scripts/output/tools-inventory.md | W1169 | 改：再生成/验证缓存（级联） |
+| AGENTS.md | W1169 | 改：脚注沿革滚动（级联） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1169 | 改：台账腾窗迁出（号序切分） |
+| site/dukou-engine.html | W1169 | 改：页脚版本推进（级联） |
+| site/index.html | W1169 | 改：页脚版本推进（级联） |
+| scripts/INDEX.md | W1169 | 改：目录清单刷新（新增改造脚本·gen_folder_docs --refresh） |
+

@@ -21,8 +21,9 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
 import sys
+
+from utils.css_public_layer import public_layer_text  # noqa: E402 — W1280 同源共用
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -85,18 +86,10 @@ def check_numeric_parity(zh_obj, en_obj):
     return num_diff, name_diff, only
 
 
-def _public_layer_text(html: str) -> str:
-    """W1275：公共层**外链形态**下，契约类名由公共层提供（页内文本不再含该标记）
-    ⇒ 判定面须含公共层文本，否则「加载形态变更」会被误判成「契约缺失」。"""
-    if not re.search(r"<link[^>]+href=[\"'][^\"']*(?:tokens|system)\.css", html, re.I):
-        return ""
-    parts = []
-    for name in ("tokens.css", "system.css"):
-        p = os.path.join(ROOT, "site", name)
-        if os.path.exists(p):
-            with open(p, encoding="utf-8", errors="replace") as fh:
-                parts.append(fh.read())
-    return "\n".join(parts)
+def _public_layer_text(html: str, page_dir: str) -> str:
+    # W1280：委托同源模块（公共层文本并入判定面·禁各自再抄一份）。
+    # 外链形态下契约类名由公共层提供 ⇒ 判定面须含公共层文本。
+    return public_layer_text(html, page_dir)
 
 
 def check_contract_marks(zh_text, en_text):
@@ -137,8 +130,9 @@ def main() -> int:
     if only:
         problems.append("summary 键单侧存在：%s" % "、".join(only[:8]))
 
-    marks = check_contract_marks(zh_html + _public_layer_text(zh_html),
-                              en_html + _public_layer_text(en_html))
+    marks = check_contract_marks(
+        zh_html + _public_layer_text(zh_html, os.path.join(ROOT, "site", "data")),
+        en_html + _public_layer_text(en_html, os.path.join(ROOT, "site", "en")))
     for mark, missing, desc in marks:
         problems.append("契约标记 `%s` 缺 %s 侧（%s）" % (mark, missing, desc))
 

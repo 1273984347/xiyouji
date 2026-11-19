@@ -3,7 +3,7 @@
   "width": 375,
   "height": 667
  },
- "generated": "2026-11-17T22:38:39",
+ "generated": "2026-11-19T16:15:51",
  "pages": [
   {
    "page": "404.html",
@@ -772,7 +772,7 @@
    "overflow": 0,
    "offenders": [],
    "clipped": [],
-   "tapTotal": 59,
+   "tapTotal": 50,
    "small44": [
     {
      "tag": "a",
@@ -802,67 +802,58 @@
      "h": 34
     },
     {
-     "tag": "button",
+     "tag": "a",
      "cls": "",
      "id": "",
-     "txt": "",
+     "txt": "首页",
      "right": 50,
      "w": 26,
-     "h": 26
+     "h": 35
     },
     {
-     "tag": "button",
+     "tag": "a",
      "cls": "",
      "id": "",
-     "txt": "",
-     "right": 84,
+     "txt": "导读",
+     "right": 96,
      "w": 26,
-     "h": 26
+     "h": 35
     },
     {
-     "tag": "button",
+     "tag": "a",
      "cls": "",
      "id": "",
-     "txt": "",
-     "right": 118,
-     "w": 26,
-     "h": 26
+     "txt": "数据看板",
+     "right": 168,
+     "w": 52,
+     "h": 35
     },
     {
-     "tag": "button",
+     "tag": "a",
      "cls": "",
      "id": "",
-     "txt": "",
-     "right": 152,
+     "txt": "关于",
+     "right": 214,
      "w": 26,
-     "h": 26
+     "h": 35
     },
     {
-     "tag": "button",
+     "tag": "a",
      "cls": "",
      "id": "",
-     "txt": "",
-     "right": 186,
-     "w": 26,
-     "h": 26
+     "txt": "English",
+     "right": 278,
+     "w": 44,
+     "h": 35
     },
     {
-     "tag": "button",
+     "tag": "a",
      "cls": "",
      "id": "",
-     "txt": "",
-     "right": 220,
-     "w": 26,
-     "h": 26
-    },
-    {
-     "tag": "button",
-     "cls": "",
-     "id": "",
-     "txt": "",
-     "right": 254,
-     "w": 26,
-     "h": 26
+     "txt": "反馈",
+     "right": 332,
+     "w": 34,
+     "h": 35
     }
    ],
    "small24": [],
@@ -889,12 +880,6 @@
     },
     {
      "fs": 11,
-     "txt": "首屏插画",
-     "tag": "span",
-     "cls": "hero-dots-label"
-    },
-    {
-     "fs": 11,
      "txt": "001 · 开篇",
      "tag": "p",
      "cls": "card-kicker"
@@ -916,11 +901,17 @@
      "txt": "058 · 真假美猴王",
      "tag": "p",
      "cls": "card-kicker"
+    },
+    {
+     "fs": 11,
+     "txt": "G · CHAPTER GRAPH",
+     "tag": "p",
+     "cls": "card-kicker"
     }
    ],
    "grade": "WARN",
    "reasons": [
-    "触摸目标 <44px ×10",
+    "触摸目标 <44px ×9",
     "最小字号 10px"
    ]
   },
@@ -943,7 +934,7 @@
      "tag": "tbody",
      "cls": "",
      "id": "rows",
-     "txt": "2026/11/17 22:38:46index",
+     "txt": "2026/11/19 16:15:58index",
      "right": 643,
      "w": 618,
      "scroll": "TABLE"
@@ -1416,7 +1407,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -2734,13 +2725,13 @@
     },
     {
      "fs": 11,
-     "txt": "Total mentions 6,197",
+     "txt": "Total mentions 6,219",
      "tag": "div",
      "cls": "desc"
     },
     {
      "fs": 11,
-     "txt": "Total mentions 2,726",
+     "txt": "Total mentions 2,728",
      "tag": "div",
      "cls": "desc"
     },
@@ -2751,22 +2742,22 @@
      "cls": "desc"
     },
     {
-     "fs": 10,
-     "txt": "0 ch",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
+     "fs": 11,
+     "txt": "Main characters with cou",
+     "tag": "div",
+     "cls": "desc"
     },
     {
-     "fs": 10,
-     "txt": "20 ch",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
+     "fs": 11,
+     "txt": "Total mentions 6,219",
+     "tag": "div",
+     "cls": "desc"
     },
     {
-     "fs": 10,
-     "txt": "40 ch",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
+     "fs": 11,
+     "txt": "Total mentions 2,728",
+     "tag": "div",
+     "cls": "desc"
     }
    ],
    "grade": "WARN",
@@ -2796,7 +2787,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -2824,7 +2815,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -3770,7 +3761,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -3798,7 +3789,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -3826,7 +3817,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -3948,8 +3939,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -4427,8 +4418,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 315,
-     "w": 295,
+     "right": 316,
+     "w": 296,
      "h": 40
     },
     {
@@ -4550,8 +4541,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 315,
-     "w": 295,
+     "right": 316,
+     "w": 296,
      "h": 40
     },
     {
@@ -4842,8 +4833,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -5114,7 +5105,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -5259,8 +5250,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -5419,8 +5410,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -5697,8 +5688,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -5969,7 +5960,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -6053,8 +6044,8 @@
      "cls": "",
      "id": "",
      "txt": "TheoristWorkCore claimJT",
-     "right": 451,
-     "w": 406,
+     "right": 447,
+     "w": 402,
      "scroll": "TABLE"
     }
    ],
@@ -6167,8 +6158,8 @@
      "cls": "",
      "id": "",
      "txt": "TheoristDatesSignature i",
-     "right": 433,
-     "w": 368,
+     "right": 435,
+     "w": 370,
      "scroll": "TABLE"
     },
     {
@@ -6176,8 +6167,8 @@
      "cls": "",
      "id": "",
      "txt": "Su Shi's Shuidiaogetou (",
-     "right": 378,
-     "w": 312,
+     "right": 381,
+     "w": 316,
      "scroll": "TABLE"
     }
    ],
@@ -6290,7 +6281,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -6384,7 +6375,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -6450,7 +6441,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -6478,7 +6469,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -6534,7 +6525,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -6609,7 +6600,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -6788,8 +6779,8 @@
      "cls": "",
      "id": "",
      "txt": "DimensionMingTodayIsomor",
-     "right": 490,
-     "w": 444,
+     "right": 492,
+     "w": 446,
      "scroll": "TABLE"
     }
    ],
@@ -6836,7 +6827,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -6958,8 +6949,8 @@
      "cls": "",
      "id": "",
      "txt": "ThinkerDatesSignature id",
-     "right": 463,
-     "w": 398,
+     "right": 461,
+     "w": 396,
      "scroll": "TABLE"
     }
    ],
@@ -7044,7 +7035,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -7072,7 +7063,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -7138,7 +7129,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -7166,7 +7157,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -7187,8 +7178,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -7602,8 +7593,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -7657,6 +7648,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "Power",
      "tag": "text",
@@ -7695,12 +7692,6 @@
     {
      "fs": 11,
      "txt": "Virūpākṣa (Broad-Eyed He",
-     "tag": "span",
-     "cls": ""
-    },
-    {
-     "fs": 11,
-     "txt": "Vaiśravaṇa (Many-Hearing",
      "tag": "span",
      "cls": ""
     }
@@ -8343,6 +8334,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "Initiation & volunteerin",
      "tag": "text",
@@ -8381,12 +8378,6 @@
     {
      "fs": 10,
      "txt": "Reclaiming the Goldfish",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "Band abolished",
      "tag": "text",
      "cls": "[object SVGAnimatedString]"
     }
@@ -9065,6 +9056,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "Jade Emperor",
      "tag": "text",
@@ -9105,12 +9102,6 @@
      "txt": "Curtain-Lifting General",
      "tag": "text",
      "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "Giant Spirit God",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
     }
    ],
    "grade": "WARN",
@@ -9140,7 +9131,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -9289,6 +9280,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "Journey to the",
      "tag": "tspan",
@@ -9327,12 +9324,6 @@
     {
      "fs": 10,
      "txt": "Records on the",
-     "tag": "tspan",
-     "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "Western Regions",
      "tag": "tspan",
      "cls": "[object SVGAnimatedString]"
     }
@@ -9423,7 +9414,7 @@
      "cls": "[object SVGAnimatedString]",
      "id": "",
      "txt": "Mount Huaguo Water-Curta",
-     "right": 274,
+     "right": 273,
      "w": 52,
      "h": 14
     },
@@ -9432,7 +9423,7 @@
      "cls": "[object SVGAnimatedString]",
      "id": "",
      "txt": "Spirit Mountain",
-     "right": 161,
+     "right": 162,
      "w": 24,
      "h": 14
     },
@@ -9441,9 +9432,9 @@
      "cls": "[object SVGAnimatedString]",
      "id": "",
      "txt": "Chang'an",
-     "right": 213,
+     "right": 212,
      "w": 15,
-     "h": 13
+     "h": 12
     },
     {
      "tag": "g",
@@ -9459,7 +9450,7 @@
      "cls": "[object SVGAnimatedString]",
      "id": "",
      "txt": "Zhuizi Kingdom",
-     "right": 179,
+     "right": 178,
      "w": 24,
      "h": 10
     },
@@ -9468,7 +9459,7 @@
      "cls": "[object SVGAnimatedString]",
      "id": "",
      "txt": "Miefa Kingdom",
-     "right": 190,
+     "right": 192,
      "w": 22,
      "h": 10
     },
@@ -9572,8 +9563,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotes Annotated Jour",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -9709,7 +9700,7 @@
      "tag": "svg",
      "cls": "[object SVGAnimatedString]",
      "id": "chart-type",
-     "txt": "53Total Places13 · 25%10",
+     "txt": "53Total Places9 · 17%10 ",
      "right": 675,
      "w": 640,
      "scroll": "chart-block"
@@ -9719,18 +9710,36 @@
      "cls": "",
      "id": "",
      "txt": "ID Chapter Place Region ",
-     "right": 505,
-     "w": 488,
+     "right": 565,
+     "w": 548,
      "scroll": "data-table"
     },
     {
      "tag": "tbody",
      "cls": "",
      "id": "",
-     "txt": "Ch. 12Great TangtempleTh",
-     "right": 505,
-     "w": 488,
+     "txt": "1Ch. 12Huasheng Temple o",
+     "right": 565,
+     "w": 548,
      "scroll": "data-table"
+    },
+    {
+     "tag": "thead",
+     "cls": "",
+     "id": "",
+     "txt": "Seg # From From Ch. Path",
+     "right": 487,
+     "w": 470,
+     "scroll": "segment-table"
+    },
+    {
+     "tag": "tbody",
+     "cls": "",
+     "id": "",
+     "txt": "1Huasheng Temple of Chan",
+     "right": 487,
+     "w": 470,
+     "scroll": "segment-table"
     }
    ],
    "clipped": [],
@@ -9786,8 +9795,8 @@
      "cls": "",
      "id": "",
      "txt": "Place",
-     "right": 193,
-     "w": 55,
+     "right": 253,
+     "w": 115,
      "h": 39
     },
     {
@@ -9795,7 +9804,7 @@
      "cls": "",
      "id": "",
      "txt": "Region",
-     "right": 312,
+     "right": 372,
      "w": 119,
      "h": 39
     },
@@ -9804,7 +9813,7 @@
      "cls": "",
      "id": "",
      "txt": "Type",
-     "right": 409,
+     "right": 469,
      "w": 97,
      "h": 39
     },
@@ -9813,7 +9822,7 @@
      "cls": "",
      "id": "",
      "txt": "Event",
-     "right": 505,
+     "right": 565,
      "w": 96,
      "h": 39
     },
@@ -10685,8 +10694,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -11077,8 +11086,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -12369,8 +12378,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 315,
-     "w": 295,
+     "right": 316,
+     "w": 296,
      "h": 40
     },
     {
@@ -12460,6 +12469,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "Eldest Spider Sister",
      "tag": "text",
@@ -12498,12 +12513,6 @@
     {
      "fs": 10,
      "txt": "Seventh Spider Sister",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "White Bone Demon",
      "tag": "text",
      "cls": "[object SVGAnimatedString]"
     }
@@ -12574,8 +12583,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -12629,6 +12638,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "White Bone Demon",
      "tag": "text",
@@ -12667,12 +12682,6 @@
     {
      "fs": 10,
      "txt": "Ruyi Immortal",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "Gold Horn King",
      "tag": "text",
      "cls": "[object SVGAnimatedString]"
     }
@@ -12994,6 +13003,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "Gold & Silver Horn Kings",
      "tag": "text",
@@ -13032,12 +13047,6 @@
     {
      "fs": 10,
      "txt": "King of Spiritual Inspir",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "King of Zhuzi",
      "tag": "text",
      "cls": "[object SVGAnimatedString]"
     }
@@ -13560,8 +13569,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -13615,6 +13624,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "Time",
      "tag": "text",
@@ -13653,12 +13668,6 @@
     {
      "fs": 10,
      "txt": "Gustatory",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "Intertext",
      "tag": "text",
      "cls": "[object SVGAnimatedString]"
     }
@@ -13838,6 +13847,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 11.84,
      "txt": "Temporal Narratology",
      "tag": "div",
@@ -13876,12 +13891,6 @@
     {
      "fs": 11.84,
      "txt": "Gustatory Narratology",
-     "tag": "div",
-     "cls": "dim-eng"
-    },
-    {
-     "fs": 11.84,
-     "txt": "Intertextual Narratology",
      "tag": "div",
      "cls": "dim-eng"
     }
@@ -14199,8 +14208,8 @@
      "cls": "",
      "id": "",
      "txt": "Member Surface goal Deep",
-     "right": 393,
-     "w": 376,
+     "right": 391,
+     "w": 374,
      "scroll": "alignment-table"
     },
     {
@@ -14208,8 +14217,8 @@
      "cls": "",
      "id": "",
      "txt": "Tang SanzangPilgrimageFa",
-     "right": 393,
-     "w": 376,
+     "right": 391,
+     "w": 374,
      "scroll": "alignment-table"
     }
    ],
@@ -14219,8 +14228,8 @@
      "cls": "phase-card",
      "id": "",
      "txt": "Performing Chapters 81–9",
-     "right": 417,
-     "w": 108,
+     "right": 409,
+     "w": 105,
      "scroll": null
     },
     {
@@ -14228,8 +14237,8 @@
      "cls": "phase-card",
      "id": "",
      "txt": "Adjourning Chapter 100 ·",
-     "right": 532,
-     "w": 107,
+     "right": 521,
+     "w": 104,
      "scroll": null
     }
    ],
@@ -14240,8 +14249,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -14249,7 +14258,7 @@
      "cls": "ctrl-btn active",
      "id": "mode-all",
      "txt": "All relationships",
-     "right": 256,
+     "right": 254,
      "w": 129,
      "h": 30
     },
@@ -14820,8 +14829,8 @@
      "cls": "brand",
      "id": "",
      "txt": "JTTWNotesAnnotated Journ",
-     "right": 316,
-     "w": 296,
+     "right": 315,
+     "w": 295,
      "h": 40
     },
     {
@@ -15424,7 +15433,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -15564,6 +15573,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "Time",
      "tag": "text",
@@ -15602,12 +15617,6 @@
     {
      "fs": 10,
      "txt": "Taste",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "Augustine",
      "tag": "text",
      "cls": "[object SVGAnimatedString]"
     }
@@ -16522,8 +16531,8 @@
      "cls": "",
      "id": "",
      "txt": "Cause \\ OutcomeReclaimed",
-     "right": 417,
-     "w": 371,
+     "right": 413,
+     "w": 368,
      "scroll": "data-table"
     },
     {
@@ -16531,8 +16540,8 @@
      "cls": "",
      "id": "",
      "txt": "Arranged by Tathāgata/Gu",
-     "right": 417,
-     "w": 371,
+     "right": 413,
+     "w": 368,
      "scroll": "data-table"
     },
     {
@@ -16741,6 +16750,12 @@
    "minFont": 10,
    "fontSamples": [
     {
+     "fs": 11,
+     "txt": "../en/json/",
+     "tag": "code",
+     "cls": ""
+    },
+    {
      "fs": 10,
      "txt": "King Qinguang",
      "tag": "text",
@@ -16779,12 +16794,6 @@
     {
      "fs": 10,
      "txt": "King Taishan",
-     "tag": "text",
-     "cls": "[object SVGAnimatedString]"
-    },
-    {
-     "fs": 10,
-     "txt": "King Dushi",
      "tag": "text",
      "cls": "[object SVGAnimatedString]"
     }
@@ -16939,7 +16948,7 @@
    ],
    "small24": [],
    "svgSmall": [],
-   "minFont": 12.48,
+   "minFont": 12,
    "fontSamples": [],
    "grade": "WARN",
    "reasons": [
@@ -17098,6 +17107,6 @@
    "ERROR": 0
   },
   "overflowPages": 0,
-  "elapsedSec": 118.9
+  "elapsedSec": 109.3
  }
 }
