@@ -173,7 +173,7 @@
     },
     {
       "page": "site/data/81-hardships.html",
-      "sha": "87ed3bec6c46",
+      "sha": "f2024c0ded7a",
       "static": {
         "svg": true,
         "cls": true,
@@ -423,7 +423,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "7a9b90adf292",
+      "sha": "380f3bf1f0d0",
       "static": {
         "svg": true,
         "cls": false,
@@ -442,7 +442,7 @@
     },
     {
       "page": "site/en/81-hardships.html",
-      "sha": "f8030d2234b0",
+      "sha": "22d20402c382",
       "static": {
         "svg": true,
         "cls": true,
@@ -822,7 +822,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "75c4b6189c6a",
+      "sha": "5aca6015ec88",
       "static": {
         "svg": true,
         "cls": false,

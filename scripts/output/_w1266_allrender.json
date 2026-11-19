@@ -43,7 +43,7 @@
     },
     {
       "page": "site/data/81-hardships.html",
-      "sha": "87ed3bec6c46",
+      "sha": "f2024c0ded7a",
       "static": {
         "svg": true,
         "cls": true,
@@ -113,7 +113,7 @@
     },
     {
       "page": "site/data/aesthetics.html",
-      "sha": "0f5cf49e6eb8",
+      "sha": "85fca719d5f1",
       "static": {
         "svg": true,
         "cls": true,
@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "ff16be3081ad",
+      "sha": "c8b7b1f41124",
       "static": {
         "svg": true,
         "cls": true,
@@ -2253,7 +2253,7 @@
     },
     {
       "page": "site/data/global-pattern.html",
-      "sha": "1498b6b5536c",
+      "sha": "11b683621d9a",
       "static": {
         "svg": true,
         "cls": true,
@@ -5363,7 +5363,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "d5e08e55cbc9",
+      "sha": "0cfaa5d21dcc",
       "static": {
         "svg": false,
         "cls": true,
@@ -6223,7 +6223,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "7a9b90adf292",
+      "sha": "380f3bf1f0d0",
       "static": {
         "svg": true,
         "cls": false,
@@ -6342,7 +6342,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "75c4b6189c6a",
+      "sha": "5aca6015ec88",
       "static": {
         "svg": true,
         "cls": false,
@@ -6382,7 +6382,7 @@
     },
     {
       "page": "site/en/81-hardships.html",
-      "sha": "f8030d2234b0",
+      "sha": "22d20402c382",
       "static": {
         "svg": true,
         "cls": true,
@@ -6452,7 +6452,7 @@
     },
     {
       "page": "site/en/aesthetics.html",
-      "sha": "082c7bd7bd45",
+      "sha": "2c98e3333234",
       "static": {
         "svg": true,
         "cls": true,
@@ -6726,7 +6726,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 866,
+      "consoleErrors": 867,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -8522,7 +8522,7 @@
     },
     {
       "page": "site/en/global-pattern.html",
-      "sha": "bd4ddfbf7e85",
+      "sha": "f6a1f6665cec",
       "static": {
         "svg": true,
         "cls": true,
@@ -10899,17 +10899,17 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1500·文本 0）",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1499·文本 0）",
       "svgKinds": [
         {
           "cls": "",
           "id": "svg-render",
           "w": 511,
           "h": 307,
-          "marks": 1500,
+          "marks": 1499,
           "texts": 0,
           "kind": "chart",
-          "basis": "511x307·图元 1500·文本 0"
+          "basis": "511x307·图元 1499·文本 0"
         },
         {
           "cls": "ic-moon",

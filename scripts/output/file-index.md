@@ -1,3 +1,61 @@
+## W1282 图表标签可读性修复（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1282 | 级联版本面机械联动 |
+| AGENTS.md | W1282 | 级联版本面机械联动 |
+| CHANGELOG.md | W1282 | 本批段与上一批段订正 |
+| CITATION.cff | W1282 | 级联版本面机械联动 |
+| HANDOVER.md | W1282 | 级联版本面机械联动 |
+| README.md | W1282 | 级联版本面机械联动 |
+| STRUCTURE.md | W1282 | 级联版本面机械联动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1282 | 级联版本面机械联动 |
+| archive/docs/workflows-readme-history.md | W1282 | 级联版本面机械联动 |
+| docs/00-导读/W批次编号对账表.md | W1282 | 台账回填与上一批行订正 |
+| docs/00-导读/项目说明.md | W1282 | 级联版本面机械联动 |
+| docs/11-方案报告/README.md | W1282 | 本批报告登记 |
+| docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md | W1282 | 订正第十一节错误机制描述 |
+| docs/11-方案报告/计划方案/T115-任务计划执行与经验沉淀报告-2026-11-19.md | W1282 | 本批报告落盘 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1282 | 级联版本面机械联动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1282 | 级联版本面机械联动 |
+| docs/INDEX.md | W1282 | 级联版本面机械联动 |
+| docs/agent/gates.md | W1282 | 第八十槽三口径同步 |
+| pytest.ini | W1282 | 级联版本面机械联动 |
+| scripts/check_svg_text_contrast.py | W1282 | 第八十门禁同步图形底色口径 |
+| scripts/output/INDEX.md | W1282 | 级联版本面机械联动 |
+| scripts/output/README.md | W1282 | 级联版本面机械联动 |
+| scripts/output/_cascade_files_W1282.txt | W1282 | 级联文件清单 |
+| scripts/output/_vermilion_solid_cache.json | W1282 | 级联版本面机械联动 |
+| scripts/output/_w1266_allrender.json | W1282 | 渲染档案刷新 |
+| scripts/output/_w1281_spec.json | W1282 | 订正上一批 spec 内错误机制描述 |
+| scripts/output/_w1282_spec.json | W1282 | 级联版本面机械联动 |
+| scripts/output/chart-legend-render-audit.json | W1282 | 渲染档案刷新 |
+| scripts/output/file-index.md | W1282 | 级联版本面机械联动 |
+| scripts/output/stats-changelog.json | W1282 | 级联版本面机械联动 |
+| scripts/output/stats-index.md | W1282 | 级联版本面机械联动 |
+| scripts/output/stats.json | W1282 | 级联版本面机械联动 |
+| scripts/output/svg_text_contrast_graphic_probe.json | W1282 | 图形底色口径证据产物 |
+| scripts/output/svg_text_contrast_graphic_report.json | W1282 | 图形底色口径证据产物 |
+| scripts/output/tools-inventory.md | W1282 | 级联版本面机械联动 |
+| scripts/svg_text_contrast_probe.js | W1282 | 探针新增图形底色口径 |
+| site/data/81-hardships.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·描边随前景切换） |
+| site/data/aesthetics.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·描边随前景切换） |
+| site/data/cross-time-danmaku.html | W1282 | 级联版本面机械联动 |
+| site/data/global-pattern.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·描边随前景切换） |
+| site/data/search-index-zh.js | W1282 | 级联版本面机械联动 |
+| site/data/tag-cloud.html | W1282 | 级联版本面机械联动 |
+| site/dukou-engine.html | W1282 | 级联版本面机械联动 |
+| site/en/81-hardships.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·英文长标签截断） |
+| site/en/aesthetics.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·英文长标签截断） |
+| site/en/global-pattern.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·英文长标签截断） |
+| site/en/search-index-en.js | W1282 | 级联版本面机械联动 |
+| site/index.html | W1282 | 级联版本面机械联动 |
+| tests/unit/INDEX.md | W1282 | 级联版本面机械联动 |
+| tests/unit/README.md | W1282 | 级联版本面机械联动 |
+| tests/unit/test_w1282_graphic_contrast_scope.py | W1282 | 新增回归锁十三例 |
+| site/rss.xml | W1282 | 级联版本面机械联动 |
+
+
 ## W1281 A 方案铺开第二批（2026-11-19）
 
 | 文件 | W | 说明 |

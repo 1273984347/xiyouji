@@ -1,0 +1,7670 @@
+{
+ "generated_at": "2026-11-19T12:16:34.053Z",
+ "threshold": 3,
+ "scope": "data",
+ "bg_mode": "graphic",
+ "states": [
+  "S1-desktop-light",
+  "S2-desktop-dark",
+  "S3-mobile-dark",
+  "S4-mobile-light"
+ ],
+ "pages_scanned": 80,
+ "rows": 320,
+ "fatal_rows": 0,
+ "violations": 646,
+ "pages_with_violations": 45,
+ "by_page": {
+  "data/chapter-structure-graph.html": {
+   "page": "data/chapter-structure-graph.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "66",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(179,156,127)",
+      "cr": 2.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "67",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(175,153,124)",
+      "cr": 2.74,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(171,149,120)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "62",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(195,170,140)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "66",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(179,156,127)",
+      "cr": 2.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "67",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(175,153,124)",
+      "cr": 2.74,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "100",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(187,139,106)",
+      "cr": 2.99,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(171,149,120)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "62",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(195,170,140)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "66",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(179,156,127)",
+      "cr": 2.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "67",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(175,153,124)",
+      "cr": 2.74,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "100",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(187,139,106)",
+      "cr": 2.99,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(171,149,120)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "62",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(195,170,140)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "66",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(179,156,127)",
+      "cr": 2.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "67",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(175,153,124)",
+      "cr": 2.74,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(171,149,120)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "62",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(195,170,140)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 22
+  },
+  "data/character-appearance.html": {
+   "page": "data/character-appearance.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "478",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,139,129)",
+      "cr": 2.64,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "522",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(214,129,118)",
+      "cr": 2.89,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "478",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,139,129)",
+      "cr": 2.64,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "522",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(214,129,118)",
+      "cr": 2.89,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "478",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,139,129)",
+      "cr": 2.64,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "522",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(214,129,118)",
+      "cr": 2.89,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "478",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,139,129)",
+      "cr": 2.64,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "522",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(214,129,118)",
+      "cr": 2.89,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 8
+  },
+  "data/character-semantic-network.html": {
+   "page": "data/character-semantic-network.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "45",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(253,147,63)",
+      "cr": 2.56,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "神佛体系 12",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(102,158,170)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "95",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(207,198,179)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "88",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(199,195,183)",
+      "cr": 1.73,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "25",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(118,151,163)",
+      "cr": 1.04,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "45",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(144,166,180)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "38",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(135,161,174)",
+      "cr": 1.11,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "神佛体系 12",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(102,158,170)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "95",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(207,198,179)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "88",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(199,195,183)",
+      "cr": 1.73,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "25",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(118,151,163)",
+      "cr": 1.04,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "45",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(144,166,180)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "38",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(135,161,174)",
+      "cr": 1.11,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "45",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(253,147,63)",
+      "cr": 2.56,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 14
+  },
+  "data/chart-design.html": {
+   "page": "data/chart-design.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "黄袍怪",
+      "fill": "rgb(217, 119, 6)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.8,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "戌",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "戌",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "黄袍怪",
+      "fill": "rgb(217, 119, 6)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.8,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 4
+  },
+  "data/cognitive-psychology.html": {
+   "page": "data/cognitive-psychology.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "75%",
+      "fill": "rgb(142, 125, 98)",
+      "bg": "rgb(233,184,133)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "强度 4",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.78,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     },
+     {
+      "text": "75%",
+      "fill": "rgb(193, 190, 139)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.04,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "强度 4",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.78,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     },
+     {
+      "text": "75%",
+      "fill": "rgb(193, 190, 139)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.04,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "75%",
+      "fill": "rgb(142, 125, 98)",
+      "bg": "rgb(233,184,133)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     }
+    ]
+   },
+   "total": 6
+  },
+  "data/criticism-history.html": {
+   "page": "data/criticism-history.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "精魅亦通世故",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "《西游记》",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(255,253,248)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "《西游记》",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(255,253,248)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "精魅亦通世故",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 4
+  },
+  "data/cultural-misreading.html": {
+   "page": "data/cultural-misreading.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "—",
+      "fill": "rgb(201, 190, 168)",
+      "bg": "rgb(243,238,226)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "—",
+      "fill": "rgb(201, 190, 168)",
+      "bg": "rgb(243,238,226)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "日本25.0%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "韩国16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "越南8.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "—",
+      "fill": "rgb(201, 190, 168)",
+      "bg": "rgb(243,238,226)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "日本25.0%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "韩国16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "越南8.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "—",
+      "fill": "rgb(201, 190, 168)",
+      "bg": "rgb(243,238,226)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 10
+  },
+  "data/deconstruction.html": {
+   "page": "data/deconstruction.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "2013",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "日本18.8%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "韩国12.5%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "越南6.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "日本18.8%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "韩国12.5%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "越南6.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "2013",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 8
+  },
+  "data/four-dimensional-research-network.html": {
+   "page": "data/four-dimensional-research-network.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "文化记忆",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(200,155,60)",
+      "cr": 2.23,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "4",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(171,187,188)",
+      "cr": 2.87,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(217,183,111)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "修行心性",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(216,124,110)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "权力政治",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(127,153,164)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "文化记忆",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(200,155,60)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "时间叙事",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "10",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(216,124,110)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "4",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(171,187,188)",
+      "cr": 1.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "5",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(228,202,146)",
+      "cr": 1.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "3",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(196,195,179)",
+      "cr": 1.69,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "2",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(213,217,210)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(222,192,128)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(217,183,111)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "四维",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(156,148,134)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "修行心性",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(216,124,110)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "权力政治",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(127,153,164)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "文化记忆",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(200,155,60)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "时间叙事",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "10",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(216,124,110)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "4",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(171,187,188)",
+      "cr": 1.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "5",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(228,202,146)",
+      "cr": 1.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "3",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(196,195,179)",
+      "cr": 1.69,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "2",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(213,217,210)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(156, 148, 134)",
+      "bg": "rgb(222,192,128)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(217,183,111)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "四维",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(156,148,134)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "文化记忆",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(200,155,60)",
+      "cr": 2.23,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "4",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(171,187,188)",
+      "cr": 2.87,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(217,183,111)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 30
+  },
+  "data/ethics-consumption.html": {
+   "page": "data/ethics-consumption.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "10.0",
+      "fill": "rgb(212, 175, 55)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.85,
+      "bg_source": "body"
+     },
+     {
+      "text": "5.0",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.69,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "5.0",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.69,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "5.0",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.69,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "10.0",
+      "fill": "rgb(212, 175, 55)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.85,
+      "bg_source": "body"
+     },
+     {
+      "text": "5.0",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.69,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 6
+  },
+  "data/game-webnovel.html": {
+   "page": "data/game-webnovel.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "UR 10,000",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "UR 9,800",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "退队流 9.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "心声流 8.5",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "SR16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "R16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "N8.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "UR 10,000",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "UR 9,800",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "SR 4,200",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "R 3,800",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "R 3,200",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "SR 1,500",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "N 800",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "水25.0%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "土16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "光8.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "退队流 9.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "心声流 8.5",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "重生流 7.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "无敌流 7.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "后宫流 6.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "SR16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "R16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "N8.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "UR 10,000",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "UR 9,800",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "SR 4,200",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "R 3,800",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "R 3,200",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "SR 1,500",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "N 800",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "水25.0%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "土16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "光8.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "退队流 9.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "心声流 8.5",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "重生流 7.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "无敌流 7.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "后宫流 6.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "UR 10,000",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "UR 9,800",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "退队流 9.0",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "心声流 8.5",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(212,175,55)",
+      "cr": 2.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 44
+  },
+  "data/intertextuality-network.html": {
+   "page": "data/intertextuality-network.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "1",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(206,177,149)",
+      "cr": 2.81,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "3",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(183,141,106)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "1",
+      "fill": "rgb(155, 149, 138)",
+      "bg": "rgb(206,177,149)",
+      "cr": 1.47,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0",
+      "fill": "rgb(155, 149, 138)",
+      "bg": "rgb(239,231,214)",
+      "cr": 2.42,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "3",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(183,141,106)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "1",
+      "fill": "rgb(155, 149, 138)",
+      "bg": "rgb(206,177,149)",
+      "cr": 1.47,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0",
+      "fill": "rgb(155, 149, 138)",
+      "bg": "rgb(239,231,214)",
+      "cr": 2.42,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "1",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(206,177,149)",
+      "cr": 2.81,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 8
+  },
+  "data/journey-map-interactive.html": {
+   "page": "data/journey-map-interactive.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "大河（长江示意）",
+      "fill": "rgb(90, 122, 154)",
+      "bg": "rgb(212,200,168)",
+      "cr": 2.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "昆仑山",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(212,200,168)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     },
+     {
+      "text": "祁连山",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(212,200,168)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     },
+     {
+      "text": "天山",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(212,200,168)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     },
+     {
+      "text": "阿尔泰",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(212,200,168)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     },
+     {
+      "text": "大河（长江示意）",
+      "fill": "rgb(90, 122, 154)",
+      "bg": "rgb(212,200,168)",
+      "cr": 2.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "昆仑山",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(212,200,168)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     },
+     {
+      "text": "祁连山",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(212,200,168)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     },
+     {
+      "text": "天山",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(212,200,168)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     },
+     {
+      "text": "阿尔泰",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(212,200,168)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     },
+     {
+      "text": "大河（长江示意）",
+      "fill": "rgb(90, 122, 154)",
+      "bg": "rgb(212,200,168)",
+      "cr": 2.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "大河（长江示意）",
+      "fill": "rgb(90, 122, 154)",
+      "bg": "rgb(212,200,168)",
+      "cr": 2.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.5
+      }
+     }
+    ]
+   },
+   "total": 12
+  },
+  "data/karma-reincarnation.html": {
+   "page": "data/karma-reincarnation.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "龙族业报流转·入轮回·化为鬼魂暂留冥府 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "观音善财童子·菩萨眷属·不入六道轮回 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "皈依佛门·随唐僧取经·终封斗战胜佛 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "第 10 世成佛·封旃檀功德佛 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "畜生道（错投猪胎）→取经成净坛使者 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "畜生道（流沙河水妖）→取经成金身罗汉 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "唐僧继续取经·终成佛·女儿国王归人道 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "归顺天庭灵山·不入轮回·为正神眷属 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "● 取经团队 0 人",
+      "fill": "rgb(156, 144, 128)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.75,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "还魂复位·人道·皈依佛法 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第 10 世成佛·封旃檀功德佛 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "奎木狼归天庭星宿·百花羞归人道 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "天道",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "Deva Realm",
+      "fill": "rgba(255, 255, 255, 0.85)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "阿修罗道",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "Asura Realm",
+      "fill": "rgba(255, 255, 255, 0.85)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "地狱道",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,140,124)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "Hell Realm",
+      "fill": "rgba(255, 255, 255, 0.85)",
+      "bg": "rgb(183,140,124)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "还魂复位·人道·皈依佛法 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第 10 世成佛·封旃檀功德佛 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "奎木狼归天庭星宿·百花羞归人道 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "天道",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "Deva Realm",
+      "fill": "rgba(255, 255, 255, 0.85)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "阿修罗道",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "Asura Realm",
+      "fill": "rgba(255, 255, 255, 0.85)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "地狱道",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,140,124)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     },
+     {
+      "text": "Hell Realm",
+      "fill": "rgba(255, 255, 255, 0.85)",
+      "bg": "rgb(183,140,124)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.78
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "龙族业报流转·入轮回·化为鬼魂暂留冥府 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "观音善财童子·菩萨眷属·不入六道轮回 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "皈依佛门·随唐僧取经·终封斗战胜佛 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "第 10 世成佛·封旃檀功德佛 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "畜生道（错投猪胎）→取经成净坛使者 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "畜生道（流沙河水妖）→取经成金身罗汉 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "唐僧继续取经·终成佛·女儿国王归人道 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "归顺天庭灵山·不入轮回·为正神眷属 (1)",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.14,
+      "bg_source": "body"
+     },
+     {
+      "text": "● 取经团队 0 人",
+      "fill": "rgb(156, 144, 128)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.75,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 36
+  },
+  "data/linguistics.html": {
+   "page": "data/linguistics.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "16.25%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "16.25%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "28.75%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "35%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "16.25%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "28.75%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "35%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "16.25%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 8
+  },
+  "data/ming-political-thought-comparison.html": {
+   "page": "data/ming-political-thought-comparison.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "8",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,128,96)",
+      "cr": 2.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,128,96)",
+      "cr": 2.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(142, 125, 98)",
+      "bg": "rgb(233,184,133)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "世德堂本《西游记》刊刻",
+      "fill": "rgb(184, 134, 42)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.85,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "8",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,128,96)",
+      "cr": 2.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,128,96)",
+      "cr": 2.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(142, 125, 98)",
+      "bg": "rgb(233,184,133)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "8",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,128,96)",
+      "cr": 2.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,128,96)",
+      "cr": 2.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(142, 125, 98)",
+      "bg": "rgb(233,184,133)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "8",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,128,96)",
+      "cr": 2.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,128,96)",
+      "cr": 2.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(142, 125, 98)",
+      "bg": "rgb(233,184,133)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "世德堂本《西游记》刊刻",
+      "fill": "rgb(184, 134, 42)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.85,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 14
+  },
+  "data/methodology-matrix.html": {
+   "page": "data/methodology-matrix.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "中期·学习型",
+      "fill": "rgb(217, 119, 6)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.8,
+      "bg_source": "body"
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "中期·学习型",
+      "fill": "rgb(217, 119, 6)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.8,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 2
+  },
+  "data/monster-capability-radar.html": {
+   "page": "data/monster-capability-radar.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "结局",
+      "fill": "rgb(184, 134, 42)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.85,
+      "bg_source": "body"
+     },
+     {
+      "text": "逃走",
+      "fill": "rgb(184, 134, 42)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.85,
+      "bg_source": "body"
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "结局",
+      "fill": "rgb(184, 134, 42)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.85,
+      "bg_source": "body"
+     },
+     {
+      "text": "逃走",
+      "fill": "rgb(184, 134, 42)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.85,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 4
+  },
+  "data/monster-ecology-network.html": {
+   "page": "data/monster-ecology-network.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "凡人精气",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(58,71,58)",
+      "cr": 1.72,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "取经团队",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(64,97,158)",
+      "cr": 1.08,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.85
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "凡人精气",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "取经团队",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(102,158,170)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.85
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "凡人精气",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "取经团队",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(102,158,170)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.85
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "凡人精气",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(58,71,58)",
+      "cr": 1.72,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "取经团队",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(64,97,158)",
+      "cr": 1.08,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.85
+      }
+     }
+    ]
+   },
+   "total": 8
+  },
+  "data/music-structure.html": {
+   "page": "data/music-structure.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "尾声 · 第98-100回",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.13,
+      "bg_source": "body"
+     },
+     {
+      "text": "第四乐章",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.13,
+      "bg_source": "body"
+     },
+     {
+      "text": "孙悟空",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "猪八戒",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "沙僧",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "唐僧",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "红孩儿",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "铁扇公主",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "黄风怪",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "邓化·张藩",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "虎力·虎精",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "诸龙",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "仪式",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,233,212)",
+      "cr": 2.01,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     },
+     {
+      "text": "唐僧念·悟空受",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "天宫",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "如来·诸佛",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "3",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.13,
+      "bg_source": "body"
+     },
+     {
+      "text": "诸神",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "白龙马",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "第一乐章",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.88
+      }
+     },
+     {
+      "text": "1-12 · 12回",
+      "fill": "rgba(255, 255, 255, 0.9)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.88
+      }
+     },
+     {
+      "text": "第二乐章",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.88
+      }
+     },
+     {
+      "text": "13-22 · 10回",
+      "fill": "rgba(255, 255, 255, 0.9)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.88
+      }
+     },
+     {
+      "text": "仪式",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,233,212)",
+      "cr": 2.01,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "仪式",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,233,212)",
+      "cr": 2.01,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "尾声 · 第98-100回",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.13,
+      "bg_source": "body"
+     },
+     {
+      "text": "第四乐章",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.13,
+      "bg_source": "body"
+     },
+     {
+      "text": "孙悟空",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "猪八戒",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "沙僧",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "唐僧",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "红孩儿",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "铁扇公主",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "黄风怪",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "邓化·张藩",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "虎力·虎精",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "诸龙",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "仪式",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,233,212)",
+      "cr": 2.01,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     },
+     {
+      "text": "唐僧念·悟空受",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "天宫",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "如来·诸佛",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "3",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.13,
+      "bg_source": "body"
+     },
+     {
+      "text": "诸神",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     },
+     {
+      "text": "白龙马",
+      "fill": "rgb(154, 140, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.89,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 44
+  },
+  "data/narrative-experiment.html": {
+   "page": "data/narrative-experiment.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "1",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(201,161,74)",
+      "cr": 2.42,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "筹备期",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.13,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "1",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(201,161,74)",
+      "cr": 2.42,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "3",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "STORIES",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "1200",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "故事开头组合数",
+      "fill": "rgba(255, 255, 255, 0.75)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "12 (因果) × 10 (法器) × 10 (执念) = ",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "1",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(201,161,74)",
+      "cr": 2.42,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "3",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "STORIES",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "1200",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "故事开头组合数",
+      "fill": "rgba(255, 255, 255, 0.75)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "1",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(201,161,74)",
+      "cr": 2.42,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "筹备期",
+      "fill": "rgb(201, 161, 74)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.13,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 17
+  },
+  "data/narrative-rhythm-curve.html": {
+   "page": "data/narrative-rhythm-curve.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "0.60",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(176,154,125)",
+      "cr": 2.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.57",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(187,164,134)",
+      "cr": 2.4,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.55",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(192,168,137)",
+      "cr": 2.28,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.56",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(190,166,136)",
+      "cr": 2.33,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.59",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(181,158,128)",
+      "cr": 2.57,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.61",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(172,150,121)",
+      "cr": 2.84,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.58",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "0.60",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(176,154,125)",
+      "cr": 2.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.57",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(187,164,134)",
+      "cr": 2.4,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.55",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(192,168,137)",
+      "cr": 2.28,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.56",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(190,166,136)",
+      "cr": 2.33,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.59",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(181,158,128)",
+      "cr": 2.57,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.61",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(172,150,121)",
+      "cr": 2.84,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.58",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "0.60",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(176,154,125)",
+      "cr": 2.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.57",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(187,164,134)",
+      "cr": 2.4,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.55",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(192,168,137)",
+      "cr": 2.28,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.56",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(190,166,136)",
+      "cr": 2.33,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.59",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(181,158,128)",
+      "cr": 2.57,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.61",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(172,150,121)",
+      "cr": 2.84,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.58",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "0.60",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(176,154,125)",
+      "cr": 2.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.57",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(187,164,134)",
+      "cr": 2.4,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.55",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(192,168,137)",
+      "cr": 2.28,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.56",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(190,166,136)",
+      "cr": 2.33,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.59",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(181,158,128)",
+      "cr": 2.57,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.61",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(172,150,121)",
+      "cr": 2.84,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "0.58",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 28
+  },
+  "data/pilgrim-team-psychology-arc.html": {
+   "page": "data/pilgrim-team-psychology-arc.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "2",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "4",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "8",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "10",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.11,
+      "bg_source": "body"
+     },
+     {
+      "text": "无底洞·最后大难",
+      "fill": "rgb(184, 134, 42)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.85,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "2",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "4",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "8",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "2",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "4",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "8",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "2",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "4",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "8",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(255,253,248)",
+      "cr": 2.36,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "polygon",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "10",
+      "fill": "rgb(184, 165, 132)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.11,
+      "bg_source": "body"
+     },
+     {
+      "text": "无底洞·最后大难",
+      "fill": "rgb(184, 134, 42)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.85,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 20
+  },
+  "data/philosophy.html": {
+   "page": "data/philosophy.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "5",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(225,167,115)",
+      "cr": 2.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(221,123,88)",
+      "cr": 1.92,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "3",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(237,204,163)",
+      "cr": 1.97,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "5",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(225,167,115)",
+      "cr": 1.43,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(221,123,88)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "3",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(237,204,163)",
+      "cr": 1.97,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "5",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(225,167,115)",
+      "cr": 1.43,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(221,123,88)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "5",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(225,167,115)",
+      "cr": 2.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "7",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(221,123,88)",
+      "cr": 1.92,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 10
+  },
+  "data/poetry-rhythm-analysis.html": {
+   "page": "data/poetry-rhythm-analysis.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "回目对联",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "100 · 61%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "60%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,133,118)",
+      "cr": 2.78,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(192, 57, 43)",
+      "bg": "rgb(184,134,42)",
+      "cr": 1.68,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "回目对联",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "100 · 61%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "景物诗",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(190,136,128)",
+      "cr": 2.99,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "40 · 24%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(190,136,128)",
+      "cr": 2.99,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "60%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,133,118)",
+      "cr": 2.78,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "55",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.85,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(184,134,42)",
+      "cr": 1.09,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     },
+     {
+      "text": "72",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(190,136,128)",
+      "cr": 1.18,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "回目对联",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "100 · 61%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "景物诗",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(190,136,128)",
+      "cr": 2.99,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "40 · 24%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(190,136,128)",
+      "cr": 2.99,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "60%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,133,118)",
+      "cr": 2.78,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "55",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.85,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(184,134,42)",
+      "cr": 1.09,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     },
+     {
+      "text": "72",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(190,136,128)",
+      "cr": 1.18,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "回目对联",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "100 · 61%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "60%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,133,118)",
+      "cr": 2.78,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(192, 57, 43)",
+      "bg": "rgb(184,134,42)",
+      "cr": 1.68,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.55
+      }
+     }
+    ]
+   },
+   "total": 26
+  },
+  "data/social-media.html": {
+   "page": "data/social-media.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "N",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "INTJ 10/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "N",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "F",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "I",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "S",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "T",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "INTJ 10/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "技术负责人·执行器",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "项目投资人·导师",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "ISFJ 8/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "后勤总监·守护者",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "天庭CEO",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "INFJ 7/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "N",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "F",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "I",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "S",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "T",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "INTJ 10/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "ISFJ 8/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "INFJ 7/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "ISTP 7/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "气氛组·后勤",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "N",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 0.85
+      }
+     },
+     {
+      "text": "INTJ 10/10",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 26
+  },
+  "data/text-evolution.html": {
+   "page": "data/text-evolution.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "170",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "270",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "总评论数",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "80",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "350",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "170",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "270",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "总评论数",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "350",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 9
+  },
+  "data/theological-intervention-network.html": {
+   "page": "data/theological-intervention-network.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "第8回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第11回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第14回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第98回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第7回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第58回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第42回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第52回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第77回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第100回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "第8回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第11回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第14回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第98回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第7回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第58回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第42回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第52回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第77回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第100回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第7回·试炼",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第8回·显化+点化",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "如来/观音",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(255,248,231)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第11回·显化",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第14回·点化",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第23回·试炼",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第26回·显化",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第42回·收服",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第49回·收服",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第52回·收服",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第58回·试炼",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第77回·收服",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第98回·授记+点化",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第100回·授记",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "第8回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第11回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第14回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第98回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第7回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第58回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第42回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第52回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第77回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第100回",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.07,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第8回·显化+点化",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "如来/观音",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(255,248,231)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第49回·收服",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第98回·授记+点化",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第100回·授记",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(255,248,231)",
+      "cr": 1.1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "第8回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第11回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第14回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第98回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第7回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第58回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第42回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第52回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第77回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "第100回",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(184,134,11)",
+      "cr": 1.75,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 59
+  },
+  "data/visual-art.html": {
+   "page": "data/visual-art.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "19",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "20",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "27",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "36",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "47",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "62",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "浮屠山",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "黄风岭",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "白虎岭",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "乌鸡国",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "通天河",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "诵经次序（按章节回目）→ 心形空洞投影",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "Wave Amplitude 波幅（深谷=恐惧·平缓=心安）",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "0.0",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "0.3",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "0.6",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "0.9",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "1.2",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "心",
+      "fill": "rgb(212, 175, 55)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.85,
+      "bg_source": "body"
+     },
+     {
+      "text": "19",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "20",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "27",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "36",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "47",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "62",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "78",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "85",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "93",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "98",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "浮屠山",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "黄风岭",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "白虎岭",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "乌鸡国",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "通天河",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "祭赛国",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "比丘国",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "灭法国",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "天竺国",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "灵山雷音寺",
+      "fill": "rgb(245, 233, 212)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.06,
+      "bg_source": "body"
+     },
+     {
+      "text": "诵经次序（按章节回目）→ 心形空洞投影",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "Wave Amplitude 波幅（深谷=恐惧·平缓=心安）",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "0.0",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "0.3",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "0.6",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "0.9",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "1.2",
+      "fill": "rgb(233, 184, 133)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.58,
+      "bg_source": "body"
+     },
+     {
+      "text": "归零·成佛",
+      "fill": "rgb(240, 216, 120)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.25,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 47
+  },
+  "data/workplace.html": {
+   "page": "data/workplace.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "立项",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "组建团队",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "执行",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "交付",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "结项",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "高级",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(250,247,242)",
+      "cr": 2.35,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "专家",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "可避三灾·变化万千",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "一筋斗十万八千里·跨洲位移",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "高级",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(250,247,242)",
+      "cr": 2.35,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "识破妖物本相·但怕烟熏",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "天庭/灵山/南海·全域资源调度",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "一万三千五百斤·大小如意",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "可避三灾·变化万千",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(198,191,176)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "一筋斗十万八千里·跨洲位移",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(198,191,176)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "识破妖物本相·但怕烟熏",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "天庭/灵山/南海·全域资源调度",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(250,247,242)",
+      "cr": 1.71,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "一万三千五百斤·大小如意",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(198,191,176)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "立项",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "组建团队",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "执行",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "交付",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     },
+     {
+      "text": "结项",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 23
+  },
+  "data/business-model.html": {
+   "page": "data/business-model.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "1 家",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "IPO 失败率",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "1 家",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "IPO 失败率",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 4
+  },
+  "data/character-sentiment-arc.html": {
+   "page": "data/character-sentiment-arc.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "紧箍自褪",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(229,237,224)",
+      "cr": 1.53,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.6
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "紧箍自褪",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(229,237,224)",
+      "cr": 1.53,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.6
+      }
+     }
+    ]
+   },
+   "total": 2
+  },
+  "data/dialogue-sentiment.html": {
+   "page": "data/dialogue-sentiment.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "12.6%",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "57.8%",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(156,149,134)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "29.6%",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(190,136,128)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "总引语",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(156,149,134)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6617",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.55,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "12.6%",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "57.8%",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(156,149,134)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "29.6%",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(190,136,128)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "总引语",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(156,149,134)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "6617",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(156,149,134)",
+      "cr": 2.55,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 10
+  },
+  "data/famous-time-travel.html": {
+   "page": "data/famous-time-travel.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "生死簿",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(159,147,136)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "西游邮",
+      "fill": "rgb(193, 190, 139)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.06,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "妖王宴上宋代官窑瓷瓶形制",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "在唐朝尚未出现·请更正。",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "致 杨洁导演：",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "「一口钟」应为无袖长外衣",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "（明清俗语·类似斗篷）非庙堂之钟·",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "建议重拍。",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "钱钟书 谨上",
+      "fill": "rgb(193, 190, 139)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1.58,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "生死簿",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(159,147,136)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "西游邮",
+      "fill": "rgb(193, 190, 139)",
+      "bg": "rgb(233,184,133)",
+      "cr": 1.06,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "妖王宴上宋代官窑瓷瓶形制",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "在唐朝尚未出现·请更正。",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "致 杨洁导演：",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "「一口钟」应为无袖长外衣",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "（明清俗语·类似斗篷）非庙堂之钟·",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "建议重拍。",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "钱钟书 谨上",
+      "fill": "rgb(193, 190, 139)",
+      "bg": "rgb(158,147,135)",
+      "cr": 1.58,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 18
+  },
+  "data/four-heavenly-kings-artifacts.html": {
+   "page": "data/four-heavenly-kings-artifacts.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "悟空大闹天宫",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(245,239,228)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "围剿青牛精",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(245,239,228)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "悟空成佛后",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(245,239,228)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "悟空大闹天宫",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(245,239,228)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "围剿青牛精",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(245,239,228)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "悟空成佛后",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(245,239,228)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 6
+  },
+  "data/jurisprudence.html": {
+   "page": "data/jurisprudence.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "纯公有资产37.5%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "混合产权12.5%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "使用即所有12.5%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "37.5%",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "审计覆盖率 (3/8)",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "纯公有资产37.5%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "混合产权12.5%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "使用即所有12.5%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "37.5%",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "审计覆盖率 (3/8)",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 10
+  },
+  "data/mbti-evolution.html": {
+   "page": "data/mbti-evolution.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "+4",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(254,171,75)",
+      "cr": 1.61,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "-4",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(254,171,75)",
+      "cr": 1.61,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "+2",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(254,224,135)",
+      "cr": 1.11,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "-2",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(254,224,135)",
+      "cr": 1.11,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "+4",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(254,171,75)",
+      "cr": 1.61,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "-4",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(254,171,75)",
+      "cr": 1.61,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "+2",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(254,224,135)",
+      "cr": 1.11,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "-2",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(254,224,135)",
+      "cr": 1.11,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 8
+  },
+  "data/monster-background.html": {
+   "page": "data/monster-background.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "36 名",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.8
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "36 名",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.8
+      }
+     }
+    ]
+   },
+   "total": 2
+  },
+  "data/monster-hierarchy-network.html": {
+   "page": "data/monster-hierarchy-network.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "妖怪总数",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(186,138,122)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "妖怪总数",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(186,138,122)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 2
+  },
+  "data/monster-victims-network.html": {
+   "page": "data/monster-victims-network.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "金角银角案 (32-35回)",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(245,239,228)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "通天河案 (47-49回)",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(245,239,228)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 2
+  },
+  "data/monster-sociology.html": {
+   "page": "data/monster-sociology.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "18 起",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.32
+      }
+     },
+     {
+      "text": "12 起",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.36
+      }
+     },
+     {
+      "text": "1",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.6,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "18 起",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.32
+      }
+     },
+     {
+      "text": "12 起",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.7,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.36
+      }
+     },
+     {
+      "text": "1",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.6,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 6
+  },
+  "data/narratology-12d-network.html": {
+   "page": "data/narratology-12d-network.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "W162",
+      "fill": "rgb(190, 138, 108)",
+      "bg": "rgb(183,141,106)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "W171",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(166,145,130)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "W162",
+      "fill": "rgb(190, 138, 108)",
+      "bg": "rgb(183,141,106)",
+      "cr": 1,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "W166",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(170,144,123)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "W171",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(166,145,130)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 5
+  },
+  "data/pilgrim-team-dynamic-network.html": {
+   "page": "data/pilgrim-team-dynamic-network.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "悟空",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(190,136,128)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "八戒",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.6,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "沙僧",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "白龙马",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(102,158,170)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "悟空",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(190,136,128)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "八戒",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.6,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "沙僧",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "白龙马",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(102,158,170)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 8
+  },
+  "data/risk-project.html": {
+   "page": "data/risk-project.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "— 信息 1",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.56,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "— 信息 1",
+      "fill": "rgb(242, 237, 226)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.56,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 2
+  },
+  "data/relationships.html": {
+   "page": "data/relationships.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "9",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(210,124,133)",
+      "cr": 1.01,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "3",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(254,201,101)",
+      "cr": 2,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "9",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(210,124,133)",
+      "cr": 1.01,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "3",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(254,201,101)",
+      "cr": 2,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 4
+  }
+ }
+}

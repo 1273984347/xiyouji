@@ -6,7 +6,7 @@
    "counts": {}
   },
   "data/81-hardships.html": {
-   "sha1": "f562060d592cf1660820a596279002cf254f5a3d",
+   "sha1": "37e95257d2704c11d7fa2ce8512ba9157efd5ce0",
    "counts": {}
   },
   "data/_shell.html": {
@@ -14,7 +14,7 @@
    "counts": {}
   },
   "data/aesthetics.html": {
-   "sha1": "355ca997a1c49de0bbd4f246b809197aeedb5b58",
+   "sha1": "83993f3ff211232bef67289f8bbf07acb320b402",
    "counts": {}
   },
   "data/ai-dialogue.html": {
@@ -90,7 +90,7 @@
    "counts": {}
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "0972afa0755c83debaf236ae4ff7d1a28373e861",
+   "sha1": "d2fc8a499848ceca779aab839db361095e78e021",
    "counts": {}
   },
   "data/cultural-misreading.html": {
@@ -142,7 +142,7 @@
    "counts": {}
   },
   "data/global-pattern.html": {
-   "sha1": "faa4b12cf63d33daf24e6fd8b9726e8bdf540e36",
+   "sha1": "690c032c9c4aa7028c86e9ebb7976ece3e599879",
    "counts": {}
   },
   "data/glossary.html": {
@@ -330,7 +330,7 @@
    "counts": {}
   },
   "data/tag-cloud.html": {
-   "sha1": "747a1f5f8b734b8ce1616dae5315c68798c84770",
+   "sha1": "3bfe65bee48c1f0c7a18bd78e5df2d81099c261a",
    "counts": {}
   },
   "data/text-evolution.html": {
@@ -382,7 +382,7 @@
    "counts": {}
   },
   "dukou-engine.html": {
-   "sha1": "0ef14dd54b8eb5cd9653e59d5068a064f995fa0e",
+   "sha1": "714bc574e3b8c70b9ee9a82cc51b5400b233a5b2",
    "counts": {}
   },
   "guide.html": {
@@ -390,7 +390,7 @@
    "counts": {}
   },
   "index.html": {
-   "sha1": "97eba7177a13cbdf01abbeafeae5c14809132e9b",
+   "sha1": "f02f8f0f78b941fed14e969adaeeadc365181a18",
    "counts": {}
   },
   "rum-viewer.html": {
@@ -406,7 +406,7 @@
    "counts": {}
   },
   "en/81-hardships.html": {
-   "sha1": "df1865995d2fbea937ad34057fd0cbe8643d818f",
+   "sha1": "38047603350fadae5f14c65dcbbb7443a6ad094c",
    "counts": {}
   },
   "en/academic-papers.html": {
@@ -414,7 +414,7 @@
    "counts": {}
   },
   "en/aesthetics.html": {
-   "sha1": "e2c76890e80128edfb04dd5c99cd367d904ab439",
+   "sha1": "0086fb6c27cad5bea13fdd571a2f3b4b1feed23c",
    "counts": {}
   },
   "en/ai-dialogue.html": {
@@ -726,7 +726,7 @@
    "counts": {}
   },
   "en/global-pattern.html": {
-   "sha1": "ccec53cc146475a3384c003be3314f2172b9eb89",
+   "sha1": "6ea29611382a31b85569134cd71a5c5a53e32432",
    "counts": {}
   },
   "en/graph-explorer.html": {
@@ -954,5 +954,5 @@
    "counts": {}
   }
  },
- "generated_at": "2026-11-19T11:39:15.214Z"
+ "generated_at": "2026-11-19T12:46:34.379Z"
 }

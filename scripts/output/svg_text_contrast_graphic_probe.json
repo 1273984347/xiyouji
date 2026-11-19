@@ -1,0 +1,1020 @@
+{
+ "generated_at": "2026-11-19T12:18:24.315Z",
+ "threshold": 3,
+ "scope": "data",
+ "bg_mode": "graphic",
+ "states": [
+  "S1-desktop-light",
+  "S2-desktop-dark",
+  "S3-mobile-dark",
+  "S4-mobile-light"
+ ],
+ "pages_scanned": 20,
+ "rows": 80,
+ "fatal_rows": 0,
+ "violations": 75,
+ "pages_with_violations": 10,
+ "by_page": {
+  "data/aesthetics.html": {
+   "page": "data/aesthetics.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "唐僧",
+      "fill": "rgb(212, 168, 87)",
+      "bg": "rgb(245,240,228)",
+      "cr": 1.94,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 1
+  },
+  "data/chapter-structure-graph.html": {
+   "page": "data/chapter-structure-graph.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "66",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(179,156,127)",
+      "cr": 2.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "67",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(175,153,124)",
+      "cr": 2.74,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(171,149,120)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "62",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(195,170,140)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "66",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(179,156,127)",
+      "cr": 2.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "67",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(175,153,124)",
+      "cr": 2.74,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "100",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(187,139,106)",
+      "cr": 2.99,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(171,149,120)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "62",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(195,170,140)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "66",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(179,156,127)",
+      "cr": 2.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "67",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(175,153,124)",
+      "cr": 2.74,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "100",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(187,139,106)",
+      "cr": 2.99,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(171,149,120)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "62",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(195,170,140)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "66",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(179,156,127)",
+      "cr": 2.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "67",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(175,153,124)",
+      "cr": 2.74,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "68",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(171,149,120)",
+      "cr": 2.88,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "62",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(195,170,140)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "65",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(183,160,130)",
+      "cr": 2.51,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 22
+  },
+  "data/character-appearance.html": {
+   "page": "data/character-appearance.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "478",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,139,129)",
+      "cr": 2.64,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "522",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(214,129,118)",
+      "cr": 2.89,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "478",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,139,129)",
+      "cr": 2.64,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "522",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(214,129,118)",
+      "cr": 2.89,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "478",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,139,129)",
+      "cr": 2.64,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "522",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(214,129,118)",
+      "cr": 2.89,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "478",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(217,139,129)",
+      "cr": 2.64,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "522",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(214,129,118)",
+      "cr": 2.89,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 8
+  },
+  "data/character-semantic-network.html": {
+   "page": "data/character-semantic-network.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "45",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(253,147,63)",
+      "cr": 2.56,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "神佛体系 12",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(102,158,170)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "95",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(207,198,179)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "88",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(199,195,183)",
+      "cr": 1.73,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "25",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(118,151,163)",
+      "cr": 1.04,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "45",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(144,166,180)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "38",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(135,161,174)",
+      "cr": 1.11,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "神佛体系 12",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(102,158,170)",
+      "cr": 1.02,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "95",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(207,198,179)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "88",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(199,195,183)",
+      "cr": 1.73,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "25",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(118,151,163)",
+      "cr": 1.04,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "45",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(144,166,180)",
+      "cr": 1.19,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "38",
+      "fill": "rgb(154, 148, 137)",
+      "bg": "rgb(135,161,174)",
+      "cr": 1.11,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "45",
+      "fill": "rgb(107, 102, 92)",
+      "bg": "rgb(253,147,63)",
+      "cr": 2.56,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 14
+  },
+  "data/chart-design.html": {
+   "page": "data/chart-design.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "黄袍怪",
+      "fill": "rgb(217, 119, 6)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.8,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "戌",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "戌",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "黄袍怪",
+      "fill": "rgb(217, 119, 6)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.8,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 4
+  },
+  "data/cognitive-psychology.html": {
+   "page": "data/cognitive-psychology.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "75%",
+      "fill": "rgb(142, 125, 98)",
+      "bg": "rgb(233,184,133)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "强度 4",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.78,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     },
+     {
+      "text": "75%",
+      "fill": "rgb(193, 190, 139)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.04,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "强度 4",
+      "fill": "rgb(224, 96, 79)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.78,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     },
+     {
+      "text": "75%",
+      "fill": "rgb(193, 190, 139)",
+      "bg": "rgb(232,169,159)",
+      "cr": 1.04,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "75%",
+      "fill": "rgb(142, 125, 98)",
+      "bg": "rgb(233,184,133)",
+      "cr": 2.22,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 0.35
+      }
+     }
+    ]
+   },
+   "total": 6
+  },
+  "data/criticism-history.html": {
+   "page": "data/criticism-history.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "精魅亦通世故",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "《西游记》",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(255,253,248)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "《西游记》",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(255,253,248)",
+      "cr": 1.8,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "circle",
+       "rule": "ellipse",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "精魅亦通世故",
+      "fill": "rgb(127, 168, 201)",
+      "bg": "rgb(245,240,228)",
+      "cr": 2.21,
+      "bg_source": "body"
+     }
+    ]
+   },
+   "total": 4
+  },
+  "data/cultural-misreading.html": {
+   "page": "data/cultural-misreading.html",
+   "states": {
+    "S1-desktop-light": [
+     {
+      "text": "—",
+      "fill": "rgb(201, 190, 168)",
+      "bg": "rgb(243,238,226)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S2-desktop-dark": [
+     {
+      "text": "—",
+      "fill": "rgb(201, 190, 168)",
+      "bg": "rgb(243,238,226)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "日本25.0%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "韩国16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "越南8.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "—",
+      "fill": "rgb(201, 190, 168)",
+      "bg": "rgb(243,238,226)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "日本25.0%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(193,190,139)",
+      "cr": 1.91,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "韩国16.7%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(102,158,170)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "越南8.3%",
+      "fill": "rgb(255, 255, 255)",
+      "bg": "rgb(135,155,133)",
+      "cr": 2.98,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ],
+    "S4-mobile-light": [
+     {
+      "text": "—",
+      "fill": "rgb(201, 190, 168)",
+      "bg": "rgb(243,238,226)",
+      "cr": 1.59,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 10
+  },
+  "data/business-model.html": {
+   "page": "data/business-model.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "1 家",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "IPO 失败率",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "1 家",
+      "fill": "rgb(154, 147, 132)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.03,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     },
+     {
+      "text": "IPO 失败率",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(135,155,133)",
+      "cr": 1.63,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "path",
+       "rule": "strict",
+       "alpha": 1
+      }
+     }
+    ]
+   },
+   "total": 4
+  },
+  "data/character-sentiment-arc.html": {
+   "page": "data/character-sentiment-arc.html",
+   "states": {
+    "S2-desktop-dark": [
+     {
+      "text": "紧箍自褪",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(229,237,224)",
+      "cr": 1.53,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.6
+      }
+     }
+    ],
+    "S3-mobile-dark": [
+     {
+      "text": "紧箍自褪",
+      "fill": "rgb(198, 191, 176)",
+      "bg": "rgb(229,237,224)",
+      "cr": 1.53,
+      "bg_source": "graphic",
+      "shape": {
+       "tag": "rect",
+       "rule": "cover",
+       "alpha": 0.6
+      }
+     }
+    ]
+   },
+   "total": 2
+  }
+ }
+}

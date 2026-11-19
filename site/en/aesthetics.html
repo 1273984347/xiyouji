@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Me7tTsNkCzI5+1R1x7MRDMp+5PkMx47Pg46ws0NiKuU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4EaYjdgrekS6ezFyhh/cbxky16Dy6q278slN1VElxCk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Aesthetic Fashion Evolution · Annotated Journey to the West</title>
@@ -423,6 +423,11 @@
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+/* W1282: treemap 标签字号下限 12px——公共层 svg text 用 !important 压到 10px，
+   页内私有 class 提高特异性并同样 !important 压过（只作用于 treemap 标签·不动公共层）。 */
+svg text.tm-cell-label { font-size: 12px !important; }
+svg text.tm-cell-label.dark-halo { stroke-width: 1.5px; }
+svg text.tm-cell-label.light-halo { stroke: rgba(255,255,255,0.9); stroke-width: 1px; }
 
 /* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
 .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
@@ -586,12 +591,13 @@ function renderTreemap(opts){
     .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
     .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
     .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
-  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+  cell.append('text').attr('x',6).attr('y',16).attr('class','tm-cell-label dark-halo').style('font-size','0.74rem').style('fill',function(d){var c=d3.color(opts.colorOf(d.data.d));var l=0.299*c.r/255+0.587*c.g/255+0.114*c.b/255;return l>0.62?'#23201A':'#fff';}).style('pointer-events','none').style('font-weight','600')
     .each(function(d){
       var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
       if(w>60&&h>32){
         var t=d3.select(this);
         t.text(opts.nameOf(d.data.d));
+        tmFitLabel(t.node(), w-12);
         t.append('tspan').attr('x',6).attr('dy','1.25em').style('font-weight','400').style('opacity',.85).text(pct.toFixed(1)+'%');
       }
     });
@@ -604,7 +610,68 @@ function renderTreemap(opts){
       row.append('span').text(opts.nameOf(d)+'  ·  '+opts.valueOf(d)+'  ·  '+pct+'%');
     });
   }
+  tmSyncCellLabels();
 }
+
+/* W1282: treemap 标签按可用宽度截断并加省略号——EN 站长标签（如 Heavenly / Western steeds
+   incarnate）在 12px 下超出单元格右边界被裁断（存量缺陷·字号放大后更明显·本批收口）。 */
+function tmFitLabel(node, maxW){
+  if(!node||!maxW||maxW<=0) return;
+  var full=node.textContent;
+  if(!full) return;
+  if(node.getComputedTextLength()<=maxW) return;
+  var lo=0, hi=full.length;
+  while(lo<hi){
+    var mid=Math.ceil((lo+hi)/2);
+    node.textContent=full.slice(0,mid)+'…';
+    if(node.getComputedTextLength()<=maxW) lo=mid; else hi=mid-1;
+  }
+  node.textContent=full.slice(0,lo)+'…';
+}
+/* W1282: treemap 标签按单元格「实际底色」自适应文字色——
+   暗色态公共层会把 rect 填充色映射成暗色序列色并对形状加 brightness 提亮，
+   与字面色的亮度方向可能相反（实测 #8E7D62 → rgb(193,190,139) 变浅），
+   故按渲染后的实际色重算：主口径用 computed 底色（与门禁 graphic 口径一致），
+   同时以暗色态提亮后的视觉底色作兜底，所选色两口径均 CR<3 时改用对比更高的一方。
+   百分比行（tspan·既有 opacity .85）合成后 CR<3 时按最小幅度提浓。
+   主题切换后由 MutationObserver 触发重算。 */
+function tmSyncCellLabels(){
+  var lin=function(c){c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);};
+  var lum=function(rgb){return 0.2126*lin(rgb[0])+0.7152*lin(rgb[1])+0.0722*lin(rgb[2]);};
+  var cr=function(a,b){var l1=lum(a),l2=lum(b),hi=Math.max(l1,l2),lo=Math.min(l1,l2);return (hi+0.05)/(lo+0.05);};
+  var DARK=[35,32,26],LIGHT=[255,255,255];
+  d3.selectAll('g.tm').each(function(){
+    var text=d3.select(this).select('text'), rect=d3.select(this).select('rect');
+    if(text.empty()||rect.empty()) return;
+    var cs=getComputedStyle(rect.node());
+    var m=String(cs.fill||'').match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if(!m) return;
+    var bgC=[+m[1],+m[2],+m[3]];
+    var k=1, bm=String(cs.filter||'').match(/brightness\(([\d.]+)\)/);
+    if(bm) k=parseFloat(bm[1]);
+    var bgV=[Math.min(255,bgC[0]*k),Math.min(255,bgC[1]*k),Math.min(255,bgC[2]*k)];
+    var l=(0.299*bgC[0]+0.587*bgC[1]+0.114*bgC[2])/255;
+    var pick=l>0.62?DARK:LIGHT;
+    var score=function(c){return Math.min(cr(c,bgC),cr(c,bgV));};
+    if(score(pick)<3){var other=pick===DARK?LIGHT:DARK; if(score(other)>score(pick)) pick=other;}
+    var isDark=(pick===DARK);
+    text.style('fill', isDark?'#23201A':'#fff').classed('dark-halo', !isDark).classed('light-halo', isDark);
+    var tsp=text.select('tspan');
+    if(!tsp.empty()){
+      var tcs=getComputedStyle(tsp.node());
+      var sf=String(tcs.fill||'').match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      var fg=sf?[+sf[1],+sf[2],+sf[3]]:pick;
+      var a0=parseFloat(tcs.opacity||'1');
+      var comp=function(a){return [a*fg[0]+(1-a)*bgC[0],a*fg[1]+(1-a)*bgC[1],a*fg[2]+(1-a)*bgC[2]];};
+      if(cr(comp(a0),bgC)<3){
+        var cand=[0.9,0.95,1];
+        for(var i=0;i<cand.length;i++){ if(cr(comp(cand[i]),bgC)>=3.2){ tsp.style('opacity',cand[i]); break; } }
+      }
+    }
+  });
+}
+new MutationObserver(function(){ tmSyncCellLabels(); })
+  .observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 
 
     // ============================================================

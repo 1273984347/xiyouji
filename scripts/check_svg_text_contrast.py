@@ -18,25 +18,42 @@
                （W570 同款：加了白晕的浅灰标签双主题可读·不计缺陷）
        · 去重：同一（页,态）内同文案只记一次
        · 背景口径：--bg-mode body（默认·审查报告同款）/ backdrop（更严·按文字实际底色）
+                 / graphic（W1282 新增·按 SVG 图形的 computed fill 量测文字真实底色）
 
   现状：审查当时 112 处 / 5 页；W1261 视觉重设计落地后该 5 页已修复（实测 cr≈5.0）⇒
         当前**实测 0 违例**（基线为空·本槽即刻生效并长期拦截回退）。
 
+  W1282·graphic 口径（补「图形底色盲区」）：
+    既有 body / backdrop 口径只看 **CSS backgroundColor**，而 SVG 图形（rect/circle/path/polygon）
+    的底色是 **fill 属性** ⇒ 「文字压在图形色块上」的真实对比度从未被量测。
+    实测坐实（site/data/81-hardships.html 的 treemap）：白字压在 #e9b885 色块上真实 CR=1.80
+    （远低于 3:1·实质不可读），而 body 口径判绿 ⇒ 漏检。
+    graphic 口径按几何配对（getBBox + getCTM 归一化到同一 viewBox 用户空间）找真正覆盖
+    文字的图形，取其 computed fill 作底色；找不到覆盖图形 ⇒ 回退 body 口径。
+    规则细节与负样本见探针 scripts/svg_text_contrast_probe.js 头部注释与 --self-test。
+
 模式：门禁默认「基线冻结」（基线内记「存量基线」不计 FAIL；基线外新增 = FAIL）；
       零容忍 --strict；--report 只报数；--generate-baseline 生成基线。
       **探针报告缺失 = fail-closed（拒绝通过）**——证据文件不在即判据未执行。
+      **基线口径隔离**（W1282）：基线文件可声明 '# bg_mode: <口径>'；报告口径与基线口径不一致
+      ⇒ fail-closed 拒绝通过（body 基线不得放行 graphic 违例，反之亦然）。
+      既有基线无该声明 ⇒ 按 body 处理（既有门禁行为逐字不变）。
 
 用法：
   py -3 scripts/check_svg_text_contrast.py
   py -3 scripts/check_svg_text_contrast.py --strict
   py -3 scripts/check_svg_text_contrast.py --self-test
-  node scripts/svg_text_contrast_probe.js            # 先跑探针（file:// 口径·不启服务）
+  py -3 scripts/check_svg_text_contrast.py --report-file scripts/output/svg_text_contrast_graphic_report.json
+  node scripts/svg_text_contrast_probe.js --bg-mode graphic            # 先跑探针（file:// 口径·不启服务）
 退出码：0 通过 / 1 违例或报告缺失（fail-closed）/ 2 自测失败
 """
 from __future__ import annotations
 
 import json
+import shutil
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -101,40 +118,260 @@ def load_report(path: Path) -> tuple[list[str], dict]:
     return viol, summary
 
 
-def self_test() -> int:
-    """负样本自测：对比度公式正确 + 违例必红 + 基线语义正确 + 报告缺失 fail-closed。"""
+def baseline_bg_mode(path: Path) -> str | None:
+    """读基线文件里的 '# bg_mode: <口径>' 声明；无声明 ⇒ None（调用方按 body 处理）。"""
+    try:
+        raw = path.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    for line in raw.splitlines():
+        s = line.strip()
+        if not s.startswith("#"):
+            continue
+        if "bg_mode:" in s:
+            tail = s.split("bg_mode:", 1)[1].strip()
+            if tail:
+                return tail.split()[0]
+    return None
+
+
+def mode_mismatch(report_mode, base_mode) -> bool:
+    """报告口径与基线口径是否不一致（不一致 ⇒ fail-closed 拒绝通过·不得用错基线放行）。"""
+    return (report_mode or "body") != (base_mode or "body")
+
+
+def probe_selftest() -> dict | None:
+    """调探针的 --self-test --json（几何负样本·与探针同一套判定实现·无第二份实现）。
+    node 不可用 / 输出不可解析 ⇒ None（调用方跳过·不计 FAIL）。"""
+    node = shutil.which("node")
+    if not node:
+        return None
+    probe = ROOT / "scripts" / "svg_text_contrast_probe.js"
+    if not probe.exists():
+        return None
+    try:
+        r = subprocess.run(
+            [node, str(probe), "--self-test", "--json"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=180,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    try:
+        return json.loads(r.stdout)
+    except ValueError:
+        return None
+
+
+def _self_test_contrast_cases() -> tuple[int, int]:
+    """对比度公式自测（正/负样本·含 W1282 graphic 真实底色形态）。→ (bad, total)"""
     cases = [
         ("正样本-白底黑字高对比", (0, 0, 0), (255, 255, 255), True),
         ("正样本-同色低对比", (245, 240, 228), (245, 240, 228), False),
         ("负样本-浅灰落浅底（审查 cr 2.9 形态）", (154, 146, 128), (241, 235, 221), False),
         ("负样本-白字落浅底（审查 cr 1.1 形态）", (255, 255, 255), (241, 235, 221), False),
+        # W1282 graphic 口径：文字压在 SVG 图形 fill 上的真实对比度
+        ("负样本-白字压浅色图形块 #e9b885（graphic 真实 cr 1.80）", (255, 255, 255), (233, 184, 133), False),
+        ("正样本-白字压深色图形块 #3A473A（graphic cr 9.80）", (255, 255, 255), (58, 71, 58), True),
     ]
     bad = 0
+    total = 0
     for name, fg, bg, expect_pass in cases:
         cr = contrast(fg, bg)
         ok = (cr >= THRESHOLD) == expect_pass
         print("%s %s：cr=%.2f（期望%s）" % ("OK  " if ok else "FAIL", name, cr, "通过" if expect_pass else "判红"))
         bad += 0 if ok else 1
+        total += 1
 
+    return bad, total
+
+
+def _self_test_baseline_semantics() -> tuple[int, int]:
+    """基线冻结语义 + 报告缺失 fail-closed 自测。→ (bad, total)"""
+    bad = 0
+    total = 0
     viol = ["site/data/x.html|S1-desktop-light|第1回|fill=rgb(154, 146, 128)|bg=rgb(241, 235, 221)|cr=2.9"]
     res = freeze_gate.evaluate(viol, set(viol), strict=False)
     ok = not res["new_fail"]
     print("%s 基线内违例不计 FAIL" % ("OK  " if ok else "FAIL"))
     bad += 0 if ok else 1
+    total += 1
     res = freeze_gate.evaluate(viol, set(), strict=False)
     ok = len(res["new_fail"]) == 1
     print("%s 基线外新增违例计 FAIL" % ("OK  " if ok else "FAIL"))
     bad += 0 if ok else 1
+    total += 1
     res = freeze_gate.evaluate(viol, set(viol), strict=True)
     ok = len(res["new_fail"]) == 1
     print("%s 零容忍模式存量全红" % ("OK  " if ok else "FAIL"))
     bad += 0 if ok else 1
+    total += 1
     _, summary = load_report(ROOT / "scripts" / "output" / "_w1265_no_such_report.json")
     ok = summary.get("why") == "missing"
     print("%s 探针报告缺失 fail-closed（拒绝通过）" % ("OK  " if ok else "FAIL"))
     bad += 0 if ok else 1
-    print("自测 %d/%d 通过" % (len(cases) + 4 - bad, len(cases) + 4))
+    total += 1
+
+    return bad, total
+
+
+def _self_test_graphic_mode() -> tuple[int, int]:
+    """W1282 graphic 口径自测：报告解析 + 判红 + 口径隔离 + 基线声明解析。→ (bad, total)"""
+    bad = 0
+    total = 0
+    with tempfile.TemporaryDirectory() as td:
+        fx = {
+            "threshold": THRESHOLD,
+            "bg_mode": "graphic",
+            "pages_scanned": 1,
+            "rows": 1,
+            "fatal_rows": 0,
+            "violations": 1,
+            "by_page": {
+                "data/x.html": {
+                    "page": "data/x.html",
+                    "total": 1,
+                    "states": {
+                        "S1-desktop-light": [
+                            {
+                                "text": "白字压浅色块",
+                                "fill": "rgb(255, 255, 255)",
+                                "bg": "rgb(233, 184, 133)",
+                                "cr": 1.8,
+                                "bg_source": "graphic",
+                                "shape": {"tag": "rect", "rule": "cover", "alpha": 1},
+                            }
+                        ]
+                    },
+                }
+            },
+        }
+        fx_path = Path(td) / "graphic_report.json"
+        fx_path.write_text(json.dumps(fx, ensure_ascii=False), encoding="utf-8")
+        viol_g, sum_g = load_report(fx_path)
+        ok = sum_g.get("bg_mode") == "graphic" and len(viol_g) == 1
+        print("%s graphic 报告可解析（bg_mode + 违例键）" % ("OK  " if ok else "FAIL"))
+        bad += 0 if ok else 1
+        total += 1
+        res = freeze_gate.evaluate(viol_g, set(), strict=False)
+        ok = len(res["new_fail"]) == 1
+        print("%s graphic 口径基线外新增违例计 FAIL" % ("OK  " if ok else "FAIL"))
+        bad += 0 if ok else 1
+        total += 1
+        ok = mode_mismatch("graphic", "body") and not mode_mismatch("body", "body")
+        print("%s 基线口径隔离（graphic 报告不得用 body 基线放行）" % ("OK  " if ok else "FAIL"))
+        bad += 0 if ok else 1
+        total += 1
+        b_path = Path(td) / "baseline.txt"
+        b_path.write_text("# bg_mode: graphic\n", encoding="utf-8")
+        ok = baseline_bg_mode(b_path) == "graphic" and baseline_bg_mode(Path(td) / "none.txt") is None
+        print("%s 基线 bg_mode 声明可解析（缺失⇒按 body）" % ("OK  " if ok else "FAIL"))
+        bad += 0 if ok else 1
+        total += 1
+
+    return bad, total
+
+
+def _self_test_probe_geometry() -> tuple[int, int]:
+    """探针几何自测（node·与探针同一套判定实现·不在门禁里重写一份几何逻辑）。→ (bad, total)"""
+    bad = 0
+    total = 0
+    st = probe_selftest()
+    if st is None:
+        print("NOTE 探针几何自测未运行（node 不可用或输出不可解析）——跳过·不计 FAIL")
+    else:
+        by_id = {c.get("id"): c for c in (st.get("cases") or [])}
+        for cid, desc in (
+            ("light_block_red", "白字压浅色块 #e9b885 ⇒ 判红（CR 1.80）"),
+            ("dark_block_green", "白字压深色块 ⇒ 判绿"),
+            ("adjacent_block_no_false_positive", "文字旁边有色块但不相交 ⇒ 不得误判红"),
+            ("path_conservative", "path 保守档 ⇒ bbox 未完全包含不算覆盖"),
+        ):
+            ok = bool((by_id.get(cid) or {}).get("ok")) is True
+            print("%s 探针几何自测：%s" % ("OK  " if ok else "FAIL", desc))
+            bad += 0 if ok else 1
+            total += 1
+
+    return bad, total
+
+
+def self_test() -> int:
+    """负样本自测：对比度公式正确 + 违例必红 + 基线语义正确 + 报告缺失 fail-closed
+    + W1282 graphic 口径负样本（几何配对·与探针同一套判定实现·探针自测结果直接取用）。"""
+    bad = 0
+    total = 0
+    for b, n in (
+        _self_test_contrast_cases(),
+        _self_test_baseline_semantics(),
+        _self_test_graphic_mode(),
+        _self_test_probe_geometry(),
+    ):
+        bad += b
+        total += n
+    print("自测 %d/%d 通过" % (total - bad, total))
     return 0 if bad == 0 else 2
+
+
+def _arg_path(argv: list[str], flag: str, default: Path) -> Path:
+    """取命令行路径参数（相对路径按仓库根解析）；缺参数 ⇒ 用默认值。"""
+    if flag not in argv:
+        return default
+    i = argv.index(flag)
+    if i + 1 >= len(argv):
+        return default
+    path = Path(argv[i + 1])
+    return path if path.is_absolute() else ROOT / path
+
+
+def _write_baseline(baseline_path: Path, viol: list[str], report_mode: str) -> int:
+    """生成基线文件（写入 '# bg_mode:' 口径声明）。"""
+    n = freeze_gate.write_baseline(
+        baseline_path,
+        viol,
+        [
+            "# 第 80 门禁 · SVG 文字对比度基线（W1265 建立·存量违例冻结）",
+            "# bg_mode: %s" % report_mode,
+            "# 生成命令：py -3 scripts/check_svg_text_contrast.py --generate-baseline",
+            "# 前提：node scripts/svg_text_contrast_probe.js（file:// 口径·4 态）",
+            "# 格式：<页面>|<状态>|<文案>|fill=…|bg=…|cr=…",
+            "# 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict",
+        ],
+    )
+    print("基线已写入 %s（%d 条·口径 %s）" % (baseline_path, n, report_mode))
+    return 0
+
+
+def _load_baseline(baseline_path: Path, report_only: bool) -> tuple[set, int | None]:
+    """读基线（基线冻结三档语义）；基线缺失/不可读 ⇒ fail-closed（报告档例外）。→ (基线集, 退出码)"""
+    baseline, problems = freeze_gate.read_baseline(baseline_path)
+    if not problems:
+        return baseline, None
+    if report_only:
+        for p in problems:
+            print("NOTE " + p + "（报告档不判红）")
+        return set(), None
+    for p in problems:
+        print("FAIL " + p)
+    print("%s 基线缺失/不可读·fail-closed·拒绝通过 ----" % MARKER)
+    return set(), 1
+
+
+def _check_mode_match(report_mode: str, baseline_path: Path, report_only: bool) -> int | None:
+    """W1282 基线口径隔离：基线只对其声明口径有效（既有基线无声明 ⇒ 按 body·既有行为不变）。"""
+    base_mode = baseline_bg_mode(baseline_path) or "body"
+    if not mode_mismatch(report_mode, base_mode):
+        return None
+    msg = "底色口径不匹配：探针报告 %s ≠ 基线 %s（%s）——基线只对其声明口径有效" % (
+        report_mode, base_mode, baseline_path)
+    if report_only:
+        print("NOTE " + msg + "（报告档不判红）")
+        return None
+    print("FAIL " + msg + "（fail-closed·拒绝通过·请用 --baseline 指定对应口径的基线）")
+    print("%s 基线口径不匹配·fail-closed·拒绝通过 ----" % MARKER)
+    return 1
 
 
 def main() -> int:
@@ -143,13 +380,8 @@ def main() -> int:
         return self_test()
     strict = "--strict" in argv
     report_only = "--report" in argv
-    report_path = REPORT
-    if "--report-file" in argv:
-        i = argv.index("--report-file")
-        if i + 1 < len(argv):
-            report_path = Path(argv[i + 1])
-            if not report_path.is_absolute():
-                report_path = ROOT / report_path
+    report_path = _arg_path(argv, "--report-file", REPORT)
+    baseline_path = _arg_path(argv, "--baseline", BASELINE)
 
     viol, summary = load_report(report_path)
     if summary.get("why") != "ok":
@@ -160,32 +392,16 @@ def main() -> int:
     if summary.get("fatal_rows"):
         print("NOTE 探针报告含 %s 行失败——产物部分无效·须人工确认" % summary["fatal_rows"])
 
+    report_mode = summary.get("bg_mode") or "body"
     if "--generate-baseline" in argv:
-        n = freeze_gate.write_baseline(
-            BASELINE,
-            viol,
-            [
-                "# 第 80 门禁 · SVG 文字对比度基线（W1265 建立·存量违例冻结）",
-                "# 生成命令：py -3 scripts/check_svg_text_contrast.py --generate-baseline",
-                "# 前提：node scripts/svg_text_contrast_probe.js（file:// 口径·4 态）",
-                "# 格式：<页面>|<状态>|<文案>|fill=…|bg=…|cr=…",
-                "# 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict",
-            ],
-        )
-        print("基线已写入 %s（%d 条）" % (BASELINE, n))
-        return 0
+        return _write_baseline(baseline_path, viol, report_mode)
 
-    baseline, problems = freeze_gate.read_baseline(BASELINE)
-    if problems:
-        if report_only:
-            for p in problems:
-                print("NOTE " + p + "（报告档不判红）")
-            baseline = set()
-        else:
-            for p in problems:
-                print("FAIL " + p)
-            print("%s 基线缺失/不可读·fail-closed·拒绝通过 ----" % MARKER)
-            return 1
+    baseline, rc = _load_baseline(baseline_path, report_only)
+    if rc is not None:
+        return rc
+    rc = _check_mode_match(report_mode, baseline_path, report_only)
+    if rc is not None:
+        return rc
 
     res = freeze_gate.evaluate(viol, baseline, strict=strict)
     print(
