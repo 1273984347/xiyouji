@@ -20,7 +20,7 @@
 | gate_count | 83 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | 1266 |
 | html_total | 875 | site/**/*.html（递归全站） | W459 | W1246 |
 | icon_allowlist_entries | 63 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1261 |
-| inline_css_pages | 727 | site 全树含 INLINED 标记页 | W459 | 1280 |
+| inline_css_pages | 637 | site 全树含 INLINED 标记页 | W459 | W1281 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
 | methodology_docs | 28 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1157 |
 | pitfalls_cascade | 26 | pitfalls.md 主题「级联 / CHANGELOG」实测条目数 | W1215 | W1215 |
@@ -44,6 +44,9 @@
 | w864_entries | 259 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | W1152 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1281（2026-11-19 19:02:35）
+- inline_css_pages: 727 → 637
 
 ### 1280（2026-11-19 17:53:11）
 - inline_css_pages: 865 → 727

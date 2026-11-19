@@ -1,3 +1,136 @@
+## W1281 A 方案铺开第二批（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+
+
+
+| .github/workflows/README.md | W1281 | 本批配套改动 |
+| AGENTS.md | W1281 | 本批配套改动 |
+| CHANGELOG.md | W1281 | 本批配套改动 |
+| CITATION.cff | W1281 | 本批配套改动 |
+| HANDOVER.md | W1281 | 本批配套改动 |
+| README.md | W1281 | 本批配套改动 |
+| STRUCTURE.md | W1281 | 本批配套改动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1281 | 本批配套改动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1281 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1281 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1281 | 本批配套改动 |
+| docs/00-导读/项目说明.md | W1281 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1281 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1281 | 本批配套改动 |
+| scripts/check_chart_colorblind.py | W1281 | 本批配套改动 |
+| scripts/output/INDEX.md | W1281 | 本批配套改动 |
+| scripts/output/README.md | W1281 | 本批配套改动 |
+| scripts/output/_cascade_files_W1281.txt | W1281 | 本批配套改动 |
+| scripts/output/_vermilion_solid_cache.json | W1281 | 本批配套改动 |
+| scripts/output/_w1266_allrender.json | W1281 | 本批配套改动 |
+| scripts/output/_w1281_spec.json | W1281 | 本批配套改动 |
+| scripts/output/chart-legend-render-audit.json | W1281 | 本批配套改动 |
+| scripts/output/colorblind-baseline.txt | W1281 | 本批配套改动 |
+| scripts/output/file-index.md | W1281 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1281 | 本批配套改动 |
+| scripts/output/stats-index.md | W1281 | 本批配套改动 |
+| scripts/output/stats.json | W1281 | 本批配套改动 |
+| scripts/output/tools-inventory.md | W1281 | 本批配套改动 |
+| scripts/verify_delivery.py | W1281 | 本批配套改动 |
+| site/data/81-hardships-view.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/81-hardships.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/aesthetics.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/ai-dialogue.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/business-model.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/cave-estate.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/century-dialogue.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/chapter-stats.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/chapter-structure-graph.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-appearance.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-dynamic-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-presence-timeline.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-relationship-3d-view.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-relationship-3d.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-semantic-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-sentiment-arc.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/chart-design.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/cognitive-psychology.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/concept-device.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/counterfactual.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/criticism-history.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/cross-time-danmaku.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/cultural-misreading.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/customs-pass-route.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/data-explorer.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/deconstruction.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/dialogue-sentiment.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/ecology.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/emotional-heatmap.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/ethics-consumption.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/famous-time-travel.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/four-dimensional-research-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/four-heavenly-kings-artifacts.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/game-webnovel.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/global-pattern.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/glossary.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/graph-explorer.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/guanyin-six-roles-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/hardship-difficulty-heatmap.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/hardship-heatmap.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/heaven-power-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/intertextuality-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-geo-3d.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-geo-semiotics.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-map-interactive.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-route.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-spacetime.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/jurisprudence.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/karma-reincarnation.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/language-style-radar.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/linguistics.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/magic-system.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/material-archaeology.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/mbti-evolution.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/methodology-matrix.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/ming-political-thought-comparison.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-background.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-capability-radar.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-ecology-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-female-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-hierarchy-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-sociology.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-victims-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/music-structure.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/narrative-experiment.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/narrative-rhythm-curve.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/narratology-12d-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/narratology-16d-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/perf-canvas-rendering.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/philosophy.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/pilgrim-team-dynamic-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/pilgrim-team-psychology-arc.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/poetry-density.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/poetry-rhythm-analysis.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/power-resources.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/relationships.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/risk-project.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/search.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/six-senses-narratology-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/social-media.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/story-timeline.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/tag-cloud.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/text-evolution.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/text-search.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/theological-intervention-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/timeline.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/underworld-power-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/visual-art.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/workplace.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/wukong-tangseng-benchmark.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/dukou-engine.html | W1281 | 本批配套改动 |
+| site/index.html | W1281 | 本批配套改动 |
+| site/rss.xml | W1281 | 本批配套改动 |
+
+
 ## W1280 A 方案铺开第一批落地 与 判定面口径再修订（2026-11-19）
 
 | 文件 | W | 说明 |

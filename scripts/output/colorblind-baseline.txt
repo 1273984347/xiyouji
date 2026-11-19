@@ -150,3 +150,4 @@ site/data/narrative-experiment.html|#c9a14a|#e9b885|deuter|9.1
 site/data/perf-canvas-rendering.html|#d4c5a9|#dcd3bf|deuter|4.4
 site/data/perf-canvas-rendering.html|#d4c5a9|#e9b885|protan|7.9
 site/data/pilgrim-team-dynamic-network.html|#dcd3bf|#e8dfd0|deuter|3.1
+site/data/pilgrim-team-dynamic-network.html|#d9cdb8|#e8dfd0|deuter|3.1

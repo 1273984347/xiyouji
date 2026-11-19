@@ -32,6 +32,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from export_design_tokens import parse_css  # noqa: E402
+from utils.css_public_layer import public_layer_text  # noqa: E402 — W1281 同源共用
 
 SITE_DATA = ROOT / "site" / "data"
 TOKENS_CSS = ROOT / "site" / "tokens.css"
@@ -389,6 +390,9 @@ def analyze(pages: list[Path], token_map: dict[str, str]) -> dict[str, dict]:
     out = {}
     for p in pages:
         html = p.read_text(encoding="utf-8", errors="ignore")
+        # W1281：判定面随加载形态修订——公共层外链形态下，色板声明由公共层提供
+        # （页内 HTML 不再含这些声明）⇒ 并入公共层文本，否则「基线外违规」是口径失配。
+        html = html + public_layer_text(html, str(p.parent))
         info = page_palette(html, token_map)
         violations = []
         if not info["exempt"]:
