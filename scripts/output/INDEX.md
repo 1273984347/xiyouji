@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（881）
+## 文件（883）
 
 ### Markdown 文档
 
@@ -270,6 +270,7 @@
 - `_cascade_files_W1280.txt`
 - `_cascade_files_W1281.txt`
 - `_cascade_files_W1282.txt`
+- `_cascade_files_W1283.txt`
 - `_cascade_files_W751.txt`
 - `_cascade_files_W761.txt`
 - `_cascade_files_W816.txt`
@@ -670,6 +671,7 @@
 - `_w1280_spec.json`
 - `_w1281_spec.json`
 - `_w1282_spec.json`
+- `_w1283_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
@@ -883,8 +885,8 @@
 - `stats-changelog.json`
 - `stats.json`
 - `svg-text-contrast-baseline.txt`
-- `svg_text_contrast_graphic_probe.json`
 - `svg_text_contrast_graphic_report.json`
+- `svg_text_contrast_remaining_W1283.json`
 - `svg_text_contrast_report.json`
 - `svg_text_contrast_report_backdrop.json`
 - `unwrapped-tables-baseline.txt`

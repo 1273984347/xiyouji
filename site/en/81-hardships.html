@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rb2W2UGNv4mZGJkaqLwj3m5FG09lOkb4dcVodCE+px0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0p5StsLEgesPMc22eOBqolBCFfF9NbMFwOO0oQarB6o=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Eighty-One Hardships · In-Depth Statistics — Annotated Journey to the West</title>
@@ -150,7 +150,9 @@ svg { max-width: 100%; height: auto; }
         svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 /* W1282: treemap 标签字号下限 12px——公共层 svg text 用 !important 压到 10px，
-   页内私有 class 提高特异性并同样 !important 压过（只作用于 treemap 标签·不动公共层）。 */
+   页内私有 class 提高特异性并同样 !important 压过（只作用于 treemap 标签·不动公共层）。
+   W1283: 字号改为逐元素内联自适应（10–12px·见 tmRenderCellLabel）——此处的 12px 仅作首帧
+   兜底值，渲染时由内联 !important 逐元素改写（important 同级时样式属性优先于样式表规则）。 */
 svg text.tm-cell-label { font-size: 12px !important; }
 svg text.tm-cell-label.dark-halo { stroke-width: 1.5px; }
 svg text.tm-cell-label.light-halo { stroke: rgba(255,255,255,0.9); stroke-width: 1px; }
@@ -351,6 +353,7 @@ function renderTreemap(opts){
   svg.attr('viewBox','0 0 '+W+' '+H);
   var data=opts.data; if(!data||!data.length) return;
   var total=d3.sum(data,opts.valueOf); if(!(total>0)) return;
+  node.__tmMeta={opts:opts,total:total};   /* W1283: 供字体就绪后重排标签用 */
   var root=d3.hierarchy({children:data.map(function(d){return {d:d};})})
     .sum(function(d){return (d&&d.d)?opts.valueOf(d.d):0;})
     .sort(function(a,b){return b.value-a.value;});
@@ -371,13 +374,7 @@ function renderTreemap(opts){
     .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
   cell.append('text').attr('x',6).attr('y',16).attr('class','tm-cell-label dark-halo').style('font-size','0.74rem').style('fill',function(d){var c=d3.color(opts.colorOf(d.data.d));var l=0.299*c.r/255+0.587*c.g/255+0.114*c.b/255;return l>0.62?'#23201A':'#fff';}).style('pointer-events','none').style('font-weight','600')
     .each(function(d){
-      var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
-      if(w>60&&h>32){
-        var t=d3.select(this);
-        t.text(opts.nameOf(d.data.d));
-        tmFitLabel(t.node(), w-12);
-        t.append('tspan').attr('x',6).attr('dy','1.25em').style('font-weight','400').style('opacity',.85).text(pct.toFixed(1)+'%');
-      }
+      tmRenderCellLabel(d3.select(this), d, opts, total);
     });
   if(opts.legendId){
     var lg=d3.select('#'+opts.legendId); lg.selectAll('*').remove();
@@ -391,13 +388,17 @@ function renderTreemap(opts){
   tmSyncCellLabels();
 }
 
-/* W1282: treemap 标签按可用宽度截断并加省略号——EN 站长标签（如 Heavenly / Western steeds
-   incarnate）在 12px 下超出单元格右边界被裁断（存量缺陷·字号放大后更明显·本批收口）。 */
-function tmFitLabel(node, maxW){
-  if(!node||!maxW||maxW<=0) return;
-  var full=node.textContent;
-  if(!full) return;
-  if(node.getComputedTextLength()<=maxW) return;
+/* W1283: treemap 标签根治截断（W1282 的二分截断把 EN 站长标签压成「Heavenly / We…」，
+   读者看不到完整名称）——三层处置：
+   ① 字号自适应：在 12px→10px 之间按可用宽度实测，单行放得下就用该字号（不截断）；
+   ② 单行仍放不下 → 按空格折行（最多 3 行·且单元格高度须容得下），仍放不下才截断加省略号；
+   ③ 任何情况都挂原生 <title>（完整名称 · 数值 · 百分比）——hover 显示全名·file:// 亦生效。
+   字号下限 10px 不得突破：公共层 svg text 用 !important 压到 10px，此处用「内联 !important」
+   逐元素压过（important 同级时样式属性的优先级高于样式表规则）。 */
+var TM_FONT_MAX=12, TM_FONT_MIN=10, TM_MAX_NAME_LINES=3, TM_LINE_DY='1.25em';
+function tmSetFont(node,px){ node.style.setProperty('font-size', px+'px', 'important'); }
+/* 二分截断到 maxW 内（加省略号） */
+function tmCutToFit(node, full, maxW){
   var lo=0, hi=full.length;
   while(lo<hi){
     var mid=Math.ceil((lo+hi)/2);
@@ -405,6 +406,69 @@ function tmFitLabel(node, maxW){
     if(node.getComputedTextLength()<=maxW) lo=mid; else hi=mid-1;
   }
   node.textContent=full.slice(0,lo)+'…';
+  return node.textContent;
+}
+/* 按空格贪心折行（字号已设好·逐行实测宽度）；单词本身超宽时该词加省略号并标记截断 */
+function tmWrapName(node, full, maxW){
+  var words=String(full).split(' '), lines=[], truncated=false;
+  function width(s){ node.textContent=s; return node.getComputedTextLength(); }
+  var i=0;
+  while(i<words.length){
+    var line=words[i];
+    if(width(line)>maxW){ line=tmCutToFit(node,line,maxW); truncated=true; }
+    i++;
+    while(i<words.length){
+      var cand=line+' '+words[i];
+      if(width(cand)<=maxW){ line=cand; i++; } else break;
+    }
+    lines.push(line);
+  }
+  return {lines:lines, truncated:truncated};
+}
+/* 单元格标签渲染：<title> 全名 + 名称 tspan（自适应字号/折行/必要时截断）+ 百分比 tspan。
+   注意：d3 的 .text() 以 textContent 赋值会清空子元素 ⇒ <title> 必须在 .text() 之后追加。 */
+function tmRenderCellLabel(t, d, opts, total){
+  var w=d.x1-d.x0, h=d.y1-d.y0;
+  var name=String(opts.nameOf(d.data.d));
+  var val=opts.valueOf(d.data.d);
+  var pct=val/total*100;
+  t.text('');
+  if(!(w>60&&h>32)) return;
+  var availW=w-12;
+  /* 原生 <title>：完整名称 · 数值 · 百分比（浏览器原生提示·file:// 亦生效·零 CSS/JS 依赖） */
+  var unitTxt=(typeof opts.valueUnit==='function')?opts.valueUnit(val):(opts.valueUnit||'');
+  t.append('title').text(name+'  ·  '+val+(unitTxt?(' '+unitTxt):'')+'  ·  '+pct.toFixed(1)+'%');
+  var probe=t.append('tspan').attr('class','tm-probe');
+  var pnode=probe.node();
+  var solution=null;
+  for(var px=TM_FONT_MAX; px>=TM_FONT_MIN-1e-9; px-=0.5){
+    tmSetFont(pnode,px);
+    var r=tmWrapName(pnode,name,availW);
+    /* 单行放得下 → 直接用；否则折行（行数 ≤ 上限且单元格高度容得下）也可用 */
+    if(r.lines.length===1 || (r.lines.length<=TM_MAX_NAME_LINES && h>=16+(r.lines.length+1)*1.25*px+6)){
+      solution={size:px, lines:r.lines};
+      break;
+    }
+  }
+  probe.remove();
+  var size=TM_FONT_MIN;
+  if(solution){
+    size=solution.size;
+    solution.lines.forEach(function(line,i){
+      var sp=t.append('tspan').attr('class','tm-name');
+      tmSetFont(sp.node(),size);
+      if(i>0) sp.attr('x',6).attr('dy',TM_LINE_DY);
+      sp.text(line);
+    });
+  }else{
+    var sp=t.append('tspan').attr('class','tm-name');
+    tmSetFont(sp.node(),TM_FONT_MIN);
+    tmCutToFit(sp.node(),name,availW);
+  }
+  var pctSpan=t.append('tspan').attr('class','tm-pct').attr('x',6).attr('dy',TM_LINE_DY)
+    .style('font-weight','400').style('opacity',.85);
+  tmSetFont(pctSpan.node(),size);
+  pctSpan.text(pct.toFixed(1)+'%');
 }
 /* W1282: treemap 标签按单元格「实际底色」自适应文字色——
    暗色态公共层会把 rect 填充色映射成暗色序列色并对形状加 brightness 提亮，
@@ -434,7 +498,7 @@ function tmSyncCellLabels(){
     if(score(pick)<3){var other=pick===DARK?LIGHT:DARK; if(score(other)>score(pick)) pick=other;}
     var isDark=(pick===DARK);
     text.style('fill', isDark?'#23201A':'#fff').classed('dark-halo', !isDark).classed('light-halo', isDark);
-    var tsp=text.select('tspan');
+    var tsp=text.select('tspan.tm-pct');
     if(!tsp.empty()){
       var tcs=getComputedStyle(tsp.node());
       var sf=String(tcs.fill||'').match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
@@ -450,6 +514,21 @@ function tmSyncCellLabels(){
 }
 new MutationObserver(function(){ tmSyncCellLabels(); })
   .observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+/* W1283: 字体就绪后按最终字体度量重排标签——@font-face 用 font-display:optional 时 webfont
+   可能晚于首帧才生效，文字度量随之变化；重排走同一渲染函数，幂等。 */
+function tmRefitLabels(){
+  d3.selectAll('g.tm').each(function(d){
+    var t=d3.select(this).select('text');
+    if(t.empty()) return;
+    var svgEl=t.node().ownerSVGElement;
+    var meta=svgEl&&svgEl.__tmMeta;
+    if(!meta) return;
+    tmRenderCellLabel(t,d,meta.opts,meta.total);
+  });
+  tmSyncCellLabels();
+}
+try{ if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){ document.fonts.ready.then(function(){ tmRefitLabels(); }); } }catch(e){}
+window.addEventListener('load',function(){ try{ tmRefitLabels(); }catch(e){} });
 
 
     // 嵌入式 fallback 数据（fetch 失败时使用）
@@ -585,7 +664,7 @@ new MutationObserver(function(){ tmSyncCellLabels(); })
     const entries = Object.entries(data || {}).filter(kv => kv[1] > 0);
     renderTreemap({
         svgId: svgId, data: entries, legendId: legendId, tipId: 'tm-tooltip',
-        nameOf: d => d[0], valueOf: d => d[1], colorOf: d => (colorMap[d[0]] || '#999'),
+        nameOf: d => d[0], valueOf: d => d[1], colorOf: d => (colorMap[d[0]] || '#999'), valueUnit: function(v){ return v===1?'trial':'trials'; },
         htmlOf: (d, total) => `<strong>${d[0]}</strong><div class="row">Count: <strong style="color: var(--text-primary)">${d[1]}</strong> trials (${((d[1]/total)*100).toFixed(1)}%）</div>`
     });
 }

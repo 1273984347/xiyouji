@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（17）
+## 文件（18）
 
 ### JavaScript / TypeScript
 
@@ -26,6 +26,7 @@
 - `goatcounter.js`
 - `graph-fallback.js`
 - `gsap.min.js`
+- `label-contrast.js`
 - `motion-gsap.js`
 - `rag-chat.js`
 - `stats.js`

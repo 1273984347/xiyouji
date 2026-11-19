@@ -1,0 +1,1822 @@
+[
+ {
+  "page": "data/ethics-consumption.html",
+  "state": "S1-desktop-light",
+  "text": "5.0",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(250,247,242)",
+  "cr": 1.69,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/ethics-consumption.html",
+  "state": "S2-desktop-dark",
+  "text": "5.0",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.8,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S1-desktop-light",
+  "text": "大河（长江示意）",
+  "fill": "rgb(90, 122, 154)",
+  "bg": "rgb(212,200,168)",
+  "cr": 2.7,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S2-desktop-dark",
+  "text": "昆仑山",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,243.6)",
+  "cr": 1.82,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S2-desktop-dark",
+  "text": "祁连山",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,243.6)",
+  "cr": 1.82,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S2-desktop-dark",
+  "text": "天山",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,243.6)",
+  "cr": 1.82,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S2-desktop-dark",
+  "text": "阿尔泰",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,243.6)",
+  "cr": 1.82,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S3-mobile-dark",
+  "text": "昆仑山",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,243.6)",
+  "cr": 1.82,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S3-mobile-dark",
+  "text": "祁连山",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,243.6)",
+  "cr": 1.82,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S3-mobile-dark",
+  "text": "天山",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,243.6)",
+  "cr": 1.82,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S3-mobile-dark",
+  "text": "阿尔泰",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,243.6)",
+  "cr": 1.82,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/journey-map-interactive.html",
+  "state": "S4-mobile-light",
+  "text": "大河（长江示意）",
+  "fill": "rgb(90, 122, 154)",
+  "bg": "rgb(212,200,168)",
+  "cr": 2.7,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S1-desktop-light",
+  "text": "2",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S1-desktop-light",
+  "text": "4",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S1-desktop-light",
+  "text": "6",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S1-desktop-light",
+  "text": "无底洞·最后大难",
+  "fill": "rgb(184, 134, 42)",
+  "bg": "rgb(245,240,228)",
+  "cr": 2.85,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S2-desktop-dark",
+  "text": "2",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,255,255)",
+  "cr": 2.4,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S3-mobile-dark",
+  "text": "2",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,255,255)",
+  "cr": 2.4,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S4-mobile-light",
+  "text": "2",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S4-mobile-light",
+  "text": "4",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/pilgrim-team-psychology-arc.html",
+  "state": "S4-mobile-light",
+  "text": "6",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "20",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "27",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "36",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "47",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "62",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "黄风岭",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "白虎岭",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "乌鸡国",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "通天河",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "祭赛国",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "20",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "27",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "36",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "47",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "62",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "85",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "93",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "黄风岭",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "白虎岭",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "乌鸡国",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "通天河",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "祭赛国",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "比丘国",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "灭法国",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "天竺国",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/ethics-consumption.html",
+  "state": "S1-desktop-light",
+  "text": "5.0",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(250,247,242)",
+  "cr": 1.69,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/ethics-consumption.html",
+  "state": "S2-desktop-dark",
+  "text": "5.0",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.8,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/journey-map-interactive.html",
+  "state": "S1-desktop-light",
+  "text": "Great River (schematic Yangtze",
+  "fill": "rgb(90, 122, 154)",
+  "bg": "rgb(212,200,168)",
+  "cr": 2.7,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/journey-map-interactive.html",
+  "state": "S4-mobile-light",
+  "text": "Great River (schematic Yangtze",
+  "fill": "rgb(90, 122, 154)",
+  "bg": "rgb(212,200,168)",
+  "cr": 2.7,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "state": "S1-desktop-light",
+  "text": "2",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "state": "S1-desktop-light",
+  "text": "4",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "state": "S1-desktop-light",
+  "text": "6",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "state": "S2-desktop-dark",
+  "text": "2",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,255,255)",
+  "cr": 2.4,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "state": "S3-mobile-dark",
+  "text": "2",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,255,255)",
+  "cr": 2.4,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "state": "S4-mobile-light",
+  "text": "2",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "state": "S4-mobile-light",
+  "text": "4",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/pilgrim-team-psychology-arc.html",
+  "state": "S4-mobile-light",
+  "text": "6",
+  "fill": "rgb(184, 165, 132)",
+  "bg": "rgb(255,253,248)",
+  "cr": 2.36,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "20",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "27",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "36",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "47",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "62",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "78",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "Yellow Wind Ridge",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "White Tiger Ridge",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "Black Rooster Kingdom",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "Heaven-Reaching River",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "Jisai Kingdom",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S1-desktop-light",
+  "text": "Bhiksu Kingdom",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "20",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "27",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "36",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "47",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "62",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "85",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "93",
+  "fill": "rgb(233, 184, 133)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.58,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "Heaven-Reaching River",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "Jisai Kingdom",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "Bhiksu Kingdom",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/visual-art.html",
+  "state": "S4-mobile-light",
+  "text": "India",
+  "fill": "rgb(245, 233, 212)",
+  "bg": "rgb(245,240,228)",
+  "cr": 1.06,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/cave-estate.html",
+  "state": "S2-desktop-dark",
+  "text": "22",
+  "fill": "rgb(242, 237, 226)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.95,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/cave-estate.html",
+  "state": "S2-desktop-dark",
+  "text": "洞府总数",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.25,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/cave-estate.html",
+  "state": "S3-mobile-dark",
+  "text": "22",
+  "fill": "rgb(242, 237, 226)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.95,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/cave-estate.html",
+  "state": "S3-mobile-dark",
+  "text": "洞府总数",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.25,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/character-sentiment-arc.html",
+  "state": "S2-desktop-dark",
+  "text": "八戒义激·悟空回归",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(252,250,246)",
+  "cr": 1.75,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/character-sentiment-arc.html",
+  "state": "S2-desktop-dark",
+  "text": "镇海寺心猿知怪",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(252,250,246)",
+  "cr": 1.75,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/character-sentiment-arc.html",
+  "state": "S3-mobile-dark",
+  "text": "八戒义激·悟空回归",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(252,250,246)",
+  "cr": 1.75,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/character-sentiment-arc.html",
+  "state": "S3-mobile-dark",
+  "text": "镇海寺心猿知怪",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(252,250,246)",
+  "cr": 1.75,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "data/counterfactual.html",
+  "state": "S2-desktop-dark",
+  "text": "10",
+  "fill": "rgb(242, 237, 226)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.95,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/counterfactual.html",
+  "state": "S2-desktop-dark",
+  "text": "场景总数",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.25,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/counterfactual.html",
+  "state": "S3-mobile-dark",
+  "text": "10",
+  "fill": "rgb(242, 237, 226)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.95,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/counterfactual.html",
+  "state": "S3-mobile-dark",
+  "text": "场景总数",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.25,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/cognitive-psychology.html",
+  "state": "S2-desktop-dark",
+  "text": "强度 4",
+  "fill": "rgb(224, 96, 79)",
+  "bg": "rgb(232,169,159)",
+  "cr": 1.78,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/cognitive-psychology.html",
+  "state": "S3-mobile-dark",
+  "text": "强度 4",
+  "fill": "rgb(224, 96, 79)",
+  "bg": "rgb(232,169,159)",
+  "cr": 1.78,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "妖王宴上宋代官窑瓷瓶形制",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "在唐朝尚未出现·请更正。",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "致 杨洁导演：",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "「一口钟」应为无袖长外衣",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "（明清俗语·类似斗篷）非庙堂之钟·",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "建议重拍。",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "妖王宴上宋代官窑瓷瓶形制",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "在唐朝尚未出现·请更正。",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "致 杨洁导演：",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "「一口钟」应为无袖长外衣",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "（明清俗语·类似斗篷）非庙堂之钟·",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "建议重拍。",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/heaven-power-network.html",
+  "state": "S2-desktop-dark",
+  "text": "事件总数",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.34,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/heaven-power-network.html",
+  "state": "S3-mobile-dark",
+  "text": "事件总数",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.34,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/magic-system.html",
+  "state": "S2-desktop-dark",
+  "text": "8",
+  "fill": "rgb(242, 237, 226)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.95,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/magic-system.html",
+  "state": "S2-desktop-dark",
+  "text": "件",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.25,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/magic-system.html",
+  "state": "S3-mobile-dark",
+  "text": "8",
+  "fill": "rgb(242, 237, 226)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.95,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/magic-system.html",
+  "state": "S3-mobile-dark",
+  "text": "件",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.25,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "data/narratology-12d-network.html",
+  "state": "S2-desktop-dark",
+  "text": "W162",
+  "fill": "rgb(190, 138, 108)",
+  "bg": "rgb(255,204.45,153.7)",
+  "cr": 2.04,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "data/narratology-12d-network.html",
+  "state": "S2-desktop-dark",
+  "text": "W170",
+  "fill": "rgb(170, 144, 123)",
+  "bg": "rgb(200.1,176.9,130.5)",
+  "cr": 1.44,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "data/narratology-12d-network.html",
+  "state": "S2-desktop-dark",
+  "text": "W171",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(240.7,210.25,188.5)",
+  "cr": 2.14,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "data/narratology-12d-network.html",
+  "state": "S3-mobile-dark",
+  "text": "W162",
+  "fill": "rgb(190, 138, 108)",
+  "bg": "rgb(255,204.45,153.7)",
+  "cr": 2.04,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "data/narratology-12d-network.html",
+  "state": "S3-mobile-dark",
+  "text": "W166",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(246.5,208.79999999999998,178.35)",
+  "cr": 2.13,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "data/narratology-12d-network.html",
+  "state": "S3-mobile-dark",
+  "text": "W170",
+  "fill": "rgb(170, 144, 123)",
+  "bg": "rgb(200.1,176.9,130.5)",
+  "cr": 1.44,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "data/narratology-12d-network.html",
+  "state": "S3-mobile-dark",
+  "text": "W171",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(240.7,210.25,188.5)",
+  "cr": 2.14,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "技术负责人·执行器",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "ENFJ 9/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "项目投资人·导师",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "ISFJ 8/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "后勤总监·守护者",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "ESTJ 8/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "ISFJ 8/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "ESTJ 8/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "INFJ 7/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "ISTP 7/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "ESFP 5/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "data/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "气氛组·后勤",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/cave-estate.html",
+  "state": "S2-desktop-dark",
+  "text": "Total cave-mansions",
+  "fill": "rgb(107, 100, 85)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.57,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/cave-estate.html",
+  "state": "S3-mobile-dark",
+  "text": "Total cave-mansions",
+  "fill": "rgb(107, 100, 85)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.57,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/character-sentiment-arc.html",
+  "state": "S2-desktop-dark",
+  "text": "Bajie provokes his return · Wu",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(252,250,246)",
+  "cr": 1.75,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/character-sentiment-arc.html",
+  "state": "S3-mobile-dark",
+  "text": "Bajie provokes his return · Wu",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(252,250,246)",
+  "cr": 1.75,
+  "bg_source": "backdrop",
+  "rule": null
+ },
+ {
+  "page": "en/counterfactual.html",
+  "state": "S2-desktop-dark",
+  "text": "Total scenarios",
+  "fill": "rgb(107, 100, 85)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.57,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/counterfactual.html",
+  "state": "S3-mobile-dark",
+  "text": "Total scenarios",
+  "fill": "rgb(107, 100, 85)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.57,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/cognitive-psychology.html",
+  "state": "S2-desktop-dark",
+  "text": "Intensity 4",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(232,169,159)",
+  "cr": 1.54,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/cognitive-psychology.html",
+  "state": "S3-mobile-dark",
+  "text": "Intensity 4",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(232,169,159)",
+  "cr": 1.54,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "The shape of the Song-dynasty ",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "did not exist in the Tang dyna",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "Dear Director Yang Jie:",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "A \"Yikouzhong\" should be a sle",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "(a Ming-Qing colloquialism, li",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S2-desktop-dark",
+  "text": "Please reshoot.",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "The shape of the Song-dynasty ",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "did not exist in the Tang dyna",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "Dear Director Yang Jie:",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "A \"Yikouzhong\" should be a sle",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "(a Ming-Qing colloquialism, li",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/famous-time-travel.html",
+  "state": "S3-mobile-dark",
+  "text": "Please reshoot.",
+  "fill": "rgb(154, 148, 137)",
+  "bg": "rgb(229.1,213.15,195.75)",
+  "cr": 2.1,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/game-webnovel.html",
+  "state": "S2-desktop-dark",
+  "text": "N 800",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(226.2,216.04999999999998,194.29999999999998)",
+  "cr": 1.41,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/heaven-power-network.html",
+  "state": "S2-desktop-dark",
+  "text": "Total events",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.34,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/heaven-power-network.html",
+  "state": "S3-mobile-dark",
+  "text": "Total events",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.34,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/narratology-12d-network.html",
+  "state": "S2-desktop-dark",
+  "text": "W162",
+  "fill": "rgb(190, 138, 108)",
+  "bg": "rgb(255,204.45,153.7)",
+  "cr": 2.04,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "en/narratology-12d-network.html",
+  "state": "S2-desktop-dark",
+  "text": "W170",
+  "fill": "rgb(170, 144, 123)",
+  "bg": "rgb(200.1,176.9,130.5)",
+  "cr": 1.44,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "en/narratology-12d-network.html",
+  "state": "S2-desktop-dark",
+  "text": "W171",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(240.7,210.25,188.5)",
+  "cr": 2.14,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "en/narratology-12d-network.html",
+  "state": "S3-mobile-dark",
+  "text": "W162",
+  "fill": "rgb(190, 138, 108)",
+  "bg": "rgb(255,204.45,153.7)",
+  "cr": 2.04,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "en/narratology-12d-network.html",
+  "state": "S3-mobile-dark",
+  "text": "W166",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(246.5,208.79999999999998,178.35)",
+  "cr": 2.13,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "en/narratology-12d-network.html",
+  "state": "S3-mobile-dark",
+  "text": "W170",
+  "fill": "rgb(170, 144, 123)",
+  "bg": "rgb(200.1,176.9,130.5)",
+  "cr": 1.44,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "en/narratology-12d-network.html",
+  "state": "S3-mobile-dark",
+  "text": "W171",
+  "fill": "rgb(154, 147, 132)",
+  "bg": "rgb(240.7,210.25,188.5)",
+  "cr": 2.14,
+  "bg_source": "graphic",
+  "rule": "ellipse"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "Tech lead · executor",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "ENFJ 9/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "ISFJ 8/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "Logistics director · guardian",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "ESTJ 8/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "Heavenly Court CEO",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "INFJ 7/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "Project manager · baseline",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "ISTP 7/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "Silent executor",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "ESFP 5/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S2-desktop-dark",
+  "text": "Morale booster · logistics",
+  "fill": "rgb(198, 191, 176)",
+  "bg": "rgb(255,255,255)",
+  "cr": 1.83,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "ESTJ 8/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "INFJ 7/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "ISTP 7/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(147.9,229.1,246.5)",
+  "cr": 1.42,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/social-media.html",
+  "state": "S3-mobile-dark",
+  "text": "ESFP 5/10",
+  "fill": "rgb(255, 255, 255)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.28,
+  "bg_source": "graphic",
+  "rule": "cover"
+ },
+ {
+  "page": "en/risk-project.html",
+  "state": "S2-desktop-dark",
+  "text": "71.4%",
+  "fill": "rgb(224, 96, 79)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.55,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/risk-project.html",
+  "state": "S2-desktop-dark",
+  "text": "Completion rate · 5/7 KPI",
+  "fill": "rgb(107, 100, 85)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.57,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/risk-project.html",
+  "state": "S3-mobile-dark",
+  "text": "71.4%",
+  "fill": "rgb(224, 96, 79)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 1.55,
+  "bg_source": "graphic",
+  "rule": "strict"
+ },
+ {
+  "page": "en/risk-project.html",
+  "state": "S3-mobile-dark",
+  "text": "Completion rate · 5/7 KPI",
+  "fill": "rgb(107, 100, 85)",
+  "bg": "rgb(255,139.2,114.55)",
+  "cr": 2.57,
+  "bg_source": "graphic",
+  "rule": "strict"
+ }
+]

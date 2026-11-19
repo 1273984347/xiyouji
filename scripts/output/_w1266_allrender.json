@@ -193,7 +193,7 @@
     },
     {
       "page": "site/data/business-model.html",
-      "sha": "eea9b77dec4a",
+      "sha": "5acbac776d8e",
       "static": {
         "svg": true,
         "cls": true,
@@ -483,7 +483,7 @@
     },
     {
       "page": "site/data/chapter-structure-graph.html",
-      "sha": "1bbe61d8aa17",
+      "sha": "64faebea64ca",
       "static": {
         "svg": true,
         "cls": true,
@@ -543,7 +543,7 @@
     },
     {
       "page": "site/data/character-appearance.html",
-      "sha": "2f3f49c60840",
+      "sha": "2f2130c5f536",
       "static": {
         "svg": true,
         "cls": true,
@@ -823,7 +823,7 @@
     },
     {
       "page": "site/data/character-semantic-network.html",
-      "sha": "7eb7ddcd75c1",
+      "sha": "850c28989363",
       "static": {
         "svg": true,
         "cls": true,
@@ -903,7 +903,7 @@
     },
     {
       "page": "site/data/character-sentiment-arc.html",
-      "sha": "84291ea83df7",
+      "sha": "bc54a9ea19cd",
       "static": {
         "svg": true,
         "cls": true,
@@ -983,7 +983,7 @@
     },
     {
       "page": "site/data/chart-design.html",
-      "sha": "ae31036d4ccf",
+      "sha": "49f92cc1d67b",
       "static": {
         "svg": true,
         "cls": true,
@@ -1093,7 +1093,7 @@
     },
     {
       "page": "site/data/cognitive-psychology.html",
-      "sha": "70fc8ff3eb27",
+      "sha": "c180b7ce71f7",
       "static": {
         "svg": true,
         "cls": true,
@@ -1267,7 +1267,7 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 17,
+      "consoleErrors": 15,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
@@ -1323,7 +1323,7 @@
     },
     {
       "page": "site/data/criticism-history.html",
-      "sha": "1b342869a31b",
+      "sha": "c636600e9eba",
       "static": {
         "svg": true,
         "cls": true,
@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "c8b7b1f41124",
+      "sha": "3be6753aee2a",
       "static": {
         "svg": true,
         "cls": true,
@@ -1493,7 +1493,7 @@
     },
     {
       "page": "site/data/cultural-misreading.html",
-      "sha": "4ada84377859",
+      "sha": "710708083bf7",
       "static": {
         "svg": true,
         "cls": true,
@@ -1633,7 +1633,7 @@
     },
     {
       "page": "site/data/deconstruction.html",
-      "sha": "e7c0d9264147",
+      "sha": "323ffd48777b",
       "static": {
         "svg": true,
         "cls": true,
@@ -1693,7 +1693,7 @@
     },
     {
       "page": "site/data/dialogue-sentiment.html",
-      "sha": "020a54121a47",
+      "sha": "4950518e18a1",
       "static": {
         "svg": true,
         "cls": true,
@@ -1933,7 +1933,7 @@
     },
     {
       "page": "site/data/ethics-consumption.html",
-      "sha": "6293ff182e8e",
+      "sha": "c9560e24973e",
       "static": {
         "svg": true,
         "cls": true,
@@ -1983,7 +1983,7 @@
     },
     {
       "page": "site/data/famous-time-travel.html",
-      "sha": "93278d8d8ae3",
+      "sha": "47ba2a29c6be",
       "static": {
         "svg": true,
         "cls": true,
@@ -2033,7 +2033,7 @@
     },
     {
       "page": "site/data/four-dimensional-research-network.html",
-      "sha": "be979c97243d",
+      "sha": "20f512f08970",
       "static": {
         "svg": true,
         "cls": true,
@@ -2113,7 +2113,7 @@
     },
     {
       "page": "site/data/four-heavenly-kings-artifacts.html",
-      "sha": "397102137965",
+      "sha": "2deabff434ac",
       "static": {
         "svg": true,
         "cls": true,
@@ -2173,7 +2173,7 @@
     },
     {
       "page": "site/data/game-webnovel.html",
-      "sha": "5576b6925d45",
+      "sha": "f0f7c3d1aad2",
       "static": {
         "svg": true,
         "cls": true,
@@ -2663,7 +2663,7 @@
     },
     {
       "page": "site/data/intertextuality-network.html",
-      "sha": "e73e635e1219",
+      "sha": "13ed781befa6",
       "static": {
         "svg": true,
         "cls": true,
@@ -2813,7 +2813,7 @@
     },
     {
       "page": "site/data/journey-map-interactive.html",
-      "sha": "ba884e1f3a93",
+      "sha": "5b8f6f96afc2",
       "static": {
         "svg": true,
         "cls": true,
@@ -2983,7 +2983,7 @@
     },
     {
       "page": "site/data/jurisprudence.html",
-      "sha": "5ab75767782f",
+      "sha": "9d4333ec23f8",
       "static": {
         "svg": true,
         "cls": true,
@@ -3073,7 +3073,7 @@
     },
     {
       "page": "site/data/karma-reincarnation.html",
-      "sha": "7431c37fa5bf",
+      "sha": "7a9b525b1085",
       "static": {
         "svg": true,
         "cls": true,
@@ -3193,7 +3193,7 @@
     },
     {
       "page": "site/data/linguistics.html",
-      "sha": "0dd5b1fafd8f",
+      "sha": "b79a8c451c94",
       "static": {
         "svg": true,
         "cls": true,
@@ -3473,7 +3473,7 @@
     },
     {
       "page": "site/data/mbti-evolution.html",
-      "sha": "01b4566fea52",
+      "sha": "c6214ff4636a",
       "static": {
         "svg": true,
         "cls": true,
@@ -3573,7 +3573,7 @@
     },
     {
       "page": "site/data/methodology-matrix.html",
-      "sha": "907f95d6e158",
+      "sha": "ce28f2b3be16",
       "static": {
         "svg": true,
         "cls": true,
@@ -3623,7 +3623,7 @@
     },
     {
       "page": "site/data/ming-political-thought-comparison.html",
-      "sha": "fd8a1db86f7a",
+      "sha": "5b94579f5849",
       "static": {
         "svg": true,
         "cls": true,
@@ -3703,7 +3703,7 @@
     },
     {
       "page": "site/data/monster-background.html",
-      "sha": "2706c0af8495",
+      "sha": "54b775f4a1e0",
       "static": {
         "svg": true,
         "cls": true,
@@ -3763,7 +3763,7 @@
     },
     {
       "page": "site/data/monster-capability-radar.html",
-      "sha": "55e5700da20f",
+      "sha": "e8a24a905f45",
       "static": {
         "svg": true,
         "cls": true,
@@ -3833,7 +3833,7 @@
     },
     {
       "page": "site/data/monster-ecology-network.html",
-      "sha": "980191ea47f8",
+      "sha": "a0543c1ff769",
       "static": {
         "svg": true,
         "cls": true,
@@ -3973,7 +3973,7 @@
     },
     {
       "page": "site/data/monster-hierarchy-network.html",
-      "sha": "82d7f7ba1bfc",
+      "sha": "9c5cf9e28608",
       "static": {
         "svg": true,
         "cls": true,
@@ -4063,7 +4063,7 @@
     },
     {
       "page": "site/data/monster-sociology.html",
-      "sha": "d639e139b5aa",
+      "sha": "cc30be66eb76",
       "static": {
         "svg": true,
         "cls": true,
@@ -4173,7 +4173,7 @@
     },
     {
       "page": "site/data/monster-victims-network.html",
-      "sha": "df252cef734e",
+      "sha": "00dbc2420449",
       "static": {
         "svg": true,
         "cls": true,
@@ -4243,7 +4243,7 @@
     },
     {
       "page": "site/data/music-structure.html",
-      "sha": "ea84407c2acc",
+      "sha": "109a69f9763e",
       "static": {
         "svg": true,
         "cls": true,
@@ -4303,7 +4303,7 @@
     },
     {
       "page": "site/data/narrative-experiment.html",
-      "sha": "e548fbdacf62",
+      "sha": "00b3d8617094",
       "static": {
         "svg": true,
         "cls": true,
@@ -4353,7 +4353,7 @@
     },
     {
       "page": "site/data/narrative-rhythm-curve.html",
-      "sha": "11947408e3b7",
+      "sha": "4cd8f1ab109e",
       "static": {
         "svg": true,
         "cls": true,
@@ -4423,7 +4423,7 @@
     },
     {
       "page": "site/data/narratology-12d-network.html",
-      "sha": "92a0586745ac",
+      "sha": "700ee941adec",
       "static": {
         "svg": true,
         "cls": true,
@@ -4603,7 +4603,7 @@
     },
     {
       "page": "site/data/philosophy.html",
-      "sha": "9ebcf7dc6cad",
+      "sha": "ea7980b7a682",
       "static": {
         "svg": true,
         "cls": true,
@@ -4673,7 +4673,7 @@
     },
     {
       "page": "site/data/pilgrim-team-dynamic-network.html",
-      "sha": "cbd11b29f7c0",
+      "sha": "f79a10c8e680",
       "static": {
         "svg": true,
         "cls": true,
@@ -4723,7 +4723,7 @@
     },
     {
       "page": "site/data/pilgrim-team-psychology-arc.html",
-      "sha": "36debae61ce4",
+      "sha": "827c73ca3447",
       "static": {
         "svg": true,
         "cls": true,
@@ -4853,7 +4853,7 @@
     },
     {
       "page": "site/data/poetry-rhythm-analysis.html",
-      "sha": "c6cb8b861925",
+      "sha": "e18ef61fa696",
       "static": {
         "svg": true,
         "cls": true,
@@ -5013,7 +5013,7 @@
     },
     {
       "page": "site/data/relationships.html",
-      "sha": "75bef479af52",
+      "sha": "5707776ee3bc",
       "static": {
         "svg": true,
         "cls": true,
@@ -5123,7 +5123,7 @@
     },
     {
       "page": "site/data/risk-project.html",
-      "sha": "741659050805",
+      "sha": "85b367aeee31",
       "static": {
         "svg": true,
         "cls": true,
@@ -5273,7 +5273,7 @@
     },
     {
       "page": "site/data/social-media.html",
-      "sha": "f3aef4ff9c1e",
+      "sha": "d936ce0b2faa",
       "static": {
         "svg": true,
         "cls": true,
@@ -5363,7 +5363,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "0cfaa5d21dcc",
+      "sha": "c5e5eae9b286",
       "static": {
         "svg": false,
         "cls": true,
@@ -5393,7 +5393,7 @@
     },
     {
       "page": "site/data/text-evolution.html",
-      "sha": "ee29f2ecfd30",
+      "sha": "1302771ec4ec",
       "static": {
         "svg": true,
         "cls": true,
@@ -5513,7 +5513,7 @@
     },
     {
       "page": "site/data/theological-intervention-network.html",
-      "sha": "9ffc6bc861ac",
+      "sha": "7a499f61b8f8",
       "static": {
         "svg": true,
         "cls": true,
@@ -5943,14 +5943,14 @@
     },
     {
       "page": "site/data/visual-art.html",
-      "sha": "607ee407da2a",
+      "sha": "c15408f63b80",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -5958,9 +5958,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",
@@ -5993,7 +5993,7 @@
     },
     {
       "page": "site/data/workplace.html",
-      "sha": "a3c5a8574c6d",
+      "sha": "ce3ae03c3693",
       "static": {
         "svg": true,
         "cls": true,
@@ -6223,7 +6223,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "380f3bf1f0d0",
+      "sha": "0d92b56f6a90",
       "static": {
         "svg": true,
         "cls": false,
@@ -6342,7 +6342,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "5aca6015ec88",
+      "sha": "2e0e67210a47",
       "static": {
         "svg": true,
         "cls": false,
@@ -6382,7 +6382,7 @@
     },
     {
       "page": "site/en/81-hardships.html",
-      "sha": "22d20402c382",
+      "sha": "e15430a0f3f8",
       "static": {
         "svg": true,
         "cls": true,
@@ -6452,7 +6452,7 @@
     },
     {
       "page": "site/en/aesthetics.html",
-      "sha": "2c98e3333234",
+      "sha": "c391a6acc134",
       "static": {
         "svg": true,
         "cls": true,
@@ -6532,7 +6532,7 @@
     },
     {
       "page": "site/en/business-model.html",
-      "sha": "b8c15d8b9d4c",
+      "sha": "d4cecae0fca1",
       "static": {
         "svg": true,
         "cls": true,
@@ -6726,7 +6726,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 867,
+      "consoleErrors": 864,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -6822,7 +6822,7 @@
     },
     {
       "page": "site/en/chapter-structure-graph.html",
-      "sha": "f15d0af711b6",
+      "sha": "b0b01930fe5e",
       "static": {
         "svg": true,
         "cls": true,
@@ -6882,7 +6882,7 @@
     },
     {
       "page": "site/en/character-appearance.html",
-      "sha": "8167dca51c64",
+      "sha": "840ae08f34fa",
       "static": {
         "svg": true,
         "cls": true,
@@ -7132,7 +7132,7 @@
     },
     {
       "page": "site/en/character-semantic-network.html",
-      "sha": "150572cad467",
+      "sha": "a5664ed04c66",
       "static": {
         "svg": true,
         "cls": true,
@@ -7212,7 +7212,7 @@
     },
     {
       "page": "site/en/character-sentiment-arc.html",
-      "sha": "7cca4a864d4f",
+      "sha": "ff268684d0d9",
       "static": {
         "svg": true,
         "cls": true,
@@ -7292,7 +7292,7 @@
     },
     {
       "page": "site/en/chart-design.html",
-      "sha": "326f1e3ab420",
+      "sha": "91c5ada38c03",
       "static": {
         "svg": true,
         "cls": false,
@@ -7402,7 +7402,7 @@
     },
     {
       "page": "site/en/cognitive-psychology.html",
-      "sha": "b68586124862",
+      "sha": "05c400d6cc00",
       "static": {
         "svg": true,
         "cls": true,
@@ -7632,7 +7632,7 @@
     },
     {
       "page": "site/en/criticism-history.html",
-      "sha": "f3f439aa4ead",
+      "sha": "21f33a60f66d",
       "static": {
         "svg": true,
         "cls": false,
@@ -7802,7 +7802,7 @@
     },
     {
       "page": "site/en/cultural-misreading.html",
-      "sha": "06afb2aed97d",
+      "sha": "002a6eabfddc",
       "static": {
         "svg": true,
         "cls": true,
@@ -7902,7 +7902,7 @@
     },
     {
       "page": "site/en/deconstruction.html",
-      "sha": "71a61f108bf2",
+      "sha": "286b324879ff",
       "static": {
         "svg": true,
         "cls": true,
@@ -7962,7 +7962,7 @@
     },
     {
       "page": "site/en/dialogue-sentiment.html",
-      "sha": "52a49b1906a5",
+      "sha": "90c6229e6e02",
       "static": {
         "svg": true,
         "cls": true,
@@ -8202,7 +8202,7 @@
     },
     {
       "page": "site/en/ethics-consumption.html",
-      "sha": "e2074b049d1b",
+      "sha": "4fd827ea18f9",
       "static": {
         "svg": true,
         "cls": true,
@@ -8252,7 +8252,7 @@
     },
     {
       "page": "site/en/famous-time-travel.html",
-      "sha": "abad2752014c",
+      "sha": "54f923141dae",
       "static": {
         "svg": true,
         "cls": false,
@@ -8302,7 +8302,7 @@
     },
     {
       "page": "site/en/four-dimensional-research-network.html",
-      "sha": "6af858f692cb",
+      "sha": "0bdb47fa3f63",
       "static": {
         "svg": true,
         "cls": true,
@@ -8382,7 +8382,7 @@
     },
     {
       "page": "site/en/four-heavenly-kings-artifacts.html",
-      "sha": "1a63b7beaf28",
+      "sha": "3cbfb4decda7",
       "static": {
         "svg": true,
         "cls": true,
@@ -8442,7 +8442,7 @@
     },
     {
       "page": "site/en/game-webnovel.html",
-      "sha": "943dc776ea33",
+      "sha": "f0bfe7ff7c68",
       "static": {
         "svg": true,
         "cls": true,
@@ -8522,7 +8522,7 @@
     },
     {
       "page": "site/en/global-pattern.html",
-      "sha": "f6a1f6665cec",
+      "sha": "86b025898f66",
       "static": {
         "svg": true,
         "cls": true,
@@ -9022,7 +9022,7 @@
     },
     {
       "page": "site/en/intertextuality-network.html",
-      "sha": "68543174ab77",
+      "sha": "aaaa477046ed",
       "static": {
         "svg": true,
         "cls": true,
@@ -9142,7 +9142,7 @@
     },
     {
       "page": "site/en/journey-map-interactive.html",
-      "sha": "690b578f2c5c",
+      "sha": "12c08d76709c",
       "static": {
         "svg": true,
         "cls": true,
@@ -9312,7 +9312,7 @@
     },
     {
       "page": "site/en/jurisprudence.html",
-      "sha": "59a4fe13d8aa",
+      "sha": "bf0afdd9b4c1",
       "static": {
         "svg": true,
         "cls": true,
@@ -9402,7 +9402,7 @@
     },
     {
       "page": "site/en/karma-reincarnation.html",
-      "sha": "e661357c6e39",
+      "sha": "96453940e26d",
       "static": {
         "svg": true,
         "cls": true,
@@ -9522,7 +9522,7 @@
     },
     {
       "page": "site/en/linguistics.html",
-      "sha": "ab9195eae7ec",
+      "sha": "7037ae11d86a",
       "static": {
         "svg": true,
         "cls": true,
@@ -9612,7 +9612,7 @@
     },
     {
       "page": "site/en/magic-system.html",
-      "sha": "723182ea3328",
+      "sha": "b0af5f15b524",
       "static": {
         "svg": true,
         "cls": true,
@@ -9692,7 +9692,7 @@
     },
     {
       "page": "site/en/material-archaeology.html",
-      "sha": "c1d3f26e050c",
+      "sha": "d6a45f4d4989",
       "static": {
         "svg": true,
         "cls": true,
@@ -9802,7 +9802,7 @@
     },
     {
       "page": "site/en/mbti-evolution.html",
-      "sha": "a3d8520157b6",
+      "sha": "cabb3e7c64b2",
       "static": {
         "svg": true,
         "cls": false,
@@ -9902,7 +9902,7 @@
     },
     {
       "page": "site/en/methodology-matrix.html",
-      "sha": "b45a68432e83",
+      "sha": "fb9383c8c923",
       "static": {
         "svg": true,
         "cls": true,
@@ -9952,7 +9952,7 @@
     },
     {
       "page": "site/en/ming-political-thought-comparison.html",
-      "sha": "bd93e09984c8",
+      "sha": "7b9d500fecbf",
       "static": {
         "svg": true,
         "cls": true,
@@ -10032,7 +10032,7 @@
     },
     {
       "page": "site/en/monster-background.html",
-      "sha": "0089c25c33d6",
+      "sha": "1a30cb0c6830",
       "static": {
         "svg": true,
         "cls": true,
@@ -10092,7 +10092,7 @@
     },
     {
       "page": "site/en/monster-capability-radar.html",
-      "sha": "90a41815d009",
+      "sha": "74872ff81943",
       "static": {
         "svg": true,
         "cls": true,
@@ -10302,7 +10302,7 @@
     },
     {
       "page": "site/en/monster-hierarchy-network.html",
-      "sha": "93572cc33a4b",
+      "sha": "360bea9a3471",
       "static": {
         "svg": true,
         "cls": true,
@@ -10392,7 +10392,7 @@
     },
     {
       "page": "site/en/monster-sociology.html",
-      "sha": "9dd374dee914",
+      "sha": "ab5b3e6d6e46",
       "static": {
         "svg": true,
         "cls": true,
@@ -10572,7 +10572,7 @@
     },
     {
       "page": "site/en/music-structure.html",
-      "sha": "e31f867cf27e",
+      "sha": "dc192fc904b6",
       "static": {
         "svg": true,
         "cls": true,
@@ -10632,7 +10632,7 @@
     },
     {
       "page": "site/en/narrative-experiment.html",
-      "sha": "387a378aeb53",
+      "sha": "c03fb342179d",
       "static": {
         "svg": true,
         "cls": false,
@@ -10682,7 +10682,7 @@
     },
     {
       "page": "site/en/narrative-rhythm-curve.html",
-      "sha": "c99228aeb565",
+      "sha": "0500f8a2366a",
       "static": {
         "svg": true,
         "cls": true,
@@ -10752,7 +10752,7 @@
     },
     {
       "page": "site/en/narratology-12d-network.html",
-      "sha": "1a0b72255c6a",
+      "sha": "2ee7e1e1d263",
       "static": {
         "svg": true,
         "cls": true,
@@ -10899,17 +10899,17 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1499·文本 0）",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1500·文本 0）",
       "svgKinds": [
         {
           "cls": "",
           "id": "svg-render",
           "w": 511,
           "h": 307,
-          "marks": 1499,
+          "marks": 1500,
           "texts": 0,
           "kind": "chart",
-          "basis": "511x307·图元 1499·文本 0"
+          "basis": "511x307·图元 1500·文本 0"
         },
         {
           "cls": "ic-moon",
@@ -10932,7 +10932,7 @@
     },
     {
       "page": "site/en/philosophy.html",
-      "sha": "0fd101e4d632",
+      "sha": "aac11851d564",
       "static": {
         "svg": true,
         "cls": true,
@@ -11002,7 +11002,7 @@
     },
     {
       "page": "site/en/pilgrim-team-dynamic-network.html",
-      "sha": "1c9cbb859729",
+      "sha": "35df2a17ad52",
       "static": {
         "svg": true,
         "cls": true,
@@ -11052,7 +11052,7 @@
     },
     {
       "page": "site/en/pilgrim-team-psychology-arc.html",
-      "sha": "cb888c44b034",
+      "sha": "afc04ae7c3a1",
       "static": {
         "svg": true,
         "cls": true,
@@ -11142,7 +11142,7 @@
     },
     {
       "page": "site/en/poetry-rhythm-analysis.html",
-      "sha": "c07429300592",
+      "sha": "d51c30e5973d",
       "static": {
         "svg": true,
         "cls": true,
@@ -11302,7 +11302,7 @@
     },
     {
       "page": "site/en/relationships.html",
-      "sha": "bb17d273848b",
+      "sha": "30a708342515",
       "static": {
         "svg": true,
         "cls": true,
@@ -11562,7 +11562,7 @@
     },
     {
       "page": "site/en/social-media.html",
-      "sha": "b213c6a2170f",
+      "sha": "7850b44b2be9",
       "static": {
         "svg": true,
         "cls": false,
@@ -11642,7 +11642,7 @@
     },
     {
       "page": "site/en/text-evolution.html",
-      "sha": "d1ccaf415518",
+      "sha": "8d40255bceee",
       "static": {
         "svg": true,
         "cls": true,
@@ -11762,7 +11762,7 @@
     },
     {
       "page": "site/en/theological-intervention-network.html",
-      "sha": "fa427e2c6064",
+      "sha": "fb7bf6f77bba",
       "static": {
         "svg": true,
         "cls": true,
@@ -12192,14 +12192,14 @@
     },
     {
       "page": "site/en/visual-art.html",
-      "sha": "d68aefc59f0a",
+      "sha": "e901c43d1339",
       "static": {
         "svg": true,
         "cls": false,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -12207,9 +12207,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",
@@ -12242,7 +12242,7 @@
     },
     {
       "page": "site/en/workplace.html",
-      "sha": "36ce257e70a0",
+      "sha": "255a53624da8",
       "static": {
         "svg": true,
         "cls": false,

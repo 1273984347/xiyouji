@@ -257,6 +257,14 @@ function judgeRows(data, opts) {
         bg = hit.shape.fill;
         source = 'graphic';
         shapeInfo = { tag: hit.shape.tag, rule: hit.rule, alpha: hit.shape.alpha };
+      } else if (t.backdrop) {
+        // W1283：无覆盖图形 ⇒ 底色回退到「文字实际所处底色」（最近 CSS backgroundColor），
+        // 与页面侧修复工具 site/static/js/label-contrast.js **同源**。
+        // 原先回退 body 底色 ⇒ 文字实际在卡片底上时，工具按卡片底判定达标（不修），
+        // 而门禁按 body 底色判红 ⇒ **工具与判据口径不一致 ⇒ 改完仍被判红**。
+        // （实测 music-structure「孙悟空」：卡片底 CR 3.15 达标 / body 底 CR 2.89 判红）
+        bg = t.backdrop;
+        source = 'backdrop';
       }
     }
     // graphic 口径：光晕是否有效取决于它与「真实底色」的分离度。
@@ -387,6 +395,21 @@ const COLLECT = () => {
       bbox: bbox,
     });
   }
+  /** 视觉实际填充色 = computed fill × filter 的 brightness 系数（与页面侧修复工具同源）。 */
+  function effectiveFill(scs, raw) {
+    if (!raw) return raw;
+    const fm = String(scs.filter || '').match(/brightness\(([\d.]+)\)/);
+    if (!fm) return raw;
+    const k = parseFloat(fm[1]);
+    if (!k || isNaN(k) || k === 1) return raw;
+    return {
+      r: Math.min(255, raw.r * k),
+      g: Math.min(255, raw.g * k),
+      b: Math.min(255, raw.b * k),
+      a: raw.a,
+    };
+  }
+
   for (const sh of document.querySelectorAll('rect,circle,ellipse,path,polygon')) {
     if (!sh.ownerSVGElement) continue;
     const scs = getComputedStyle(sh);
@@ -394,10 +417,15 @@ const COLLECT = () => {
     if (hidden(sh)) continue;
     const bbox = normBBox(sh);
     if (!bbox || (bbox.w === 0 && bbox.h === 0)) continue;
-    const fill = parseColor(scs.fill);
-    const fillAlpha = fill ? fill.a : 0;
+    const rawFill = parseColor(scs.fill);
+    const fillAlpha = rawFill ? rawFill.a : 0;
     const alpha =
       fillAlpha * parseFloat(scs.fillOpacity || '1') * parseFloat(scs.opacity || '1');
+    // W1283：**视觉实际底色** = computed fill × filter 的 brightness 系数。
+    // 公共层在暗色态会给图形加 brightness() 提亮（实测 #8E7D62 → rgb(193,190,139)），
+    // computed fill 仍是原色 ⇒ 不乘系数则暗态底色算错 ⇒ 与页面侧修复工具口径不一致
+    // （工具已乘·判据未乘 ⇒ 工具改完仍被判红）。
+    const fill = effectiveFill(scs, rawFill);
     shapes.push({
       svgId: sh.ownerSVGElement.id || '',
       tag: sh.tagName.toLowerCase(),
@@ -551,6 +579,19 @@ function selftest() {
       id: 'body_mode_unchanged',
       ok: bodyItems.length === 0 && graphicItems.length === 1,
       detail: 'body=' + bodyItems.length + ' graphic=' + graphicItems.length,
+    });
+  }
+  // 9) W1283 新口径：graphic 口径下**无覆盖图形** ⇒ 回退最近 CSS 背景（backdrop），
+  //    而非 body 底色——与页面侧修复工具 site/static/js/label-contrast.js 同源。
+  {
+    const t = mk({ x: 10, y: 10, w: 80, h: 20, fill: '#9a8c78' });
+    t.backdrop = { r: 252, g: 250, b: 244 };
+    const items = judgeRows({ bodyBg, texts: [t], shapes: [] }, { mode: 'graphic' });
+    cases.push({
+      name: 'graphic 无覆盖图形 ⇒ 回退最近 CSS 背景（与页面修复工具同源）',
+      id: 'graphic_backdrop_fallback',
+      ok: !!items[0] && items[0].bg_source === 'backdrop' && items[0].bg === 'rgb(252,250,244)',
+      detail: items[0] ? ('src=' + items[0].bg_source + ' bg=' + items[0].bg + ' cr=' + items[0].cr) : 'n/a',
     });
   }
   const passed = cases.filter((c) => c.ok).length;

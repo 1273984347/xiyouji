@@ -249,7 +249,9 @@ def test_g12_browser_adjacent_block_not_false_positive(tmp_path):
     """G12：真实浏览器里，文字旁边的深色块不得被当成底色（不得误判红）。"""
     items = _browser_fixture_items(tmp_path)
     it = _find(items, "旁边有深块")
-    assert it["bg_source"] == "body", it
+    # W1283：graphic 口径下「无覆盖图形」回退到**最近 CSS 背景**（与页面侧修复工具同源）
+    # ⇒ bg_source 可能是 body（文字直接在 body 上）或 backdrop（文字在卡片/面板底上）
+    assert it["bg_source"] in ("body", "backdrop"), it
     assert it["cr"] >= 3.0, it
 
 
@@ -257,4 +259,6 @@ def test_g13_browser_path_is_conservative(tmp_path):
     """G13：真实浏览器里，文字跨越 path bbox 边界 ⇒ path 不算覆盖（保守档）。"""
     items = _browser_fixture_items(tmp_path)
     it = _find(items, "跨边文字")
-    assert it["bg_source"] == "body", it
+    # W1283：graphic 口径下「无覆盖图形」回退到**最近 CSS 背景**（与页面侧修复工具同源）
+    # ⇒ bg_source 可能是 body（文字直接在 body 上）或 backdrop（文字在卡片/面板底上）
+    assert it["bg_source"] in ("body", "backdrop"), it
