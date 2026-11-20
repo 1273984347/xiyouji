@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-k9CDVQTGbV63xqAB3jM9o/DlYpYRhtpTS8j9r+tfSzE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-mdGzhSrsALeOfPt97VxoXhELqx7HoWJ9PyT6ljNfBNQ=' 'sha256-ThY1aZ/dVICXj+uBO2mkJAx0Pyue0UsKKR6u8nrDyrM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-oVJQzVdr7CaV74UetlthVj7BRis9dElnZ2UriDd9RK0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-mdGzhSrsALeOfPt97VxoXhELqx7HoWJ9PyT6ljNfBNQ=' 'sha256-ThY1aZ/dVICXj+uBO2mkJAx0Pyue0UsKKR6u8nrDyrM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Text Evolution · Annotated Journey to the West</title>
@@ -193,7 +193,7 @@
         /* ===== Chart 1: Evolution Tree ===== */
         #evolution-tree {
             width: 100%;
-            height: 760px;
+            height: 770px;
             display: block;
         }
         .tree-node circle {
@@ -548,7 +548,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            Data source: embedded build. (To load the latest data, from the <code>site/</code> directory run <code>py -m http.server 8000</code>)
+            Data source: <code>../en/json/versions_tree.json</code>, <code>../en/json/versions_variants.json</code>, <code>../en/json/authors_debate.json</code>, <code>../en/json/commentary_danmaku.json</code>, <code>../en/json/commentary_summary.json</code> — embedded build. (To load the latest data, from the <code>site/</code> directory run <code>py -m http.server 8000</code>)
         </div>
 
         <!-- KPI 概要栏 -->
@@ -1133,10 +1133,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         const containerEl = document.getElementById("evolution-tree");
         const width = Math.max(200, containerEl.clientWidth || 1100);
-        const height = 760;
+        const height = 770;
         svg.attr("viewBox", `0 0 ${width} ${height}`);
 
-        const margin = { top: 30, right: 40, bottom: 40, left: 180 };
+        const margin = { top: 40, right: 40, bottom: 40, left: 180 };
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
 

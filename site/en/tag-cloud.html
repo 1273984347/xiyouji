@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-jKTQH/8VqibAcNlKJLIkwn0lPvGt+wEPkT989Op2gyo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-qRo0JaoBc0dByi9DlOogD4JriA1OqBImVsI/4DvGiqw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Site-Wide Tag Cloud · Visualization Navigation Hub · Annotated Journey to the West</title>
@@ -290,6 +290,7 @@
             box-shadow: var(--elev-3);
             line-height: 1.5;
         }
+        #tooltip.visible { opacity: 1; }
         #tooltip .tt-title {
             font-weight: 600;
             color: #f0c878;
@@ -479,6 +480,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         </div>
         <p class="search-hint">Matches page titles, tag words, and description text</p>
 
+        <p class="text-sm text-muted"><strong>Data source:</strong> the in-page <code>EMBEDDED_DATA</code> snapshot of the project’s own visualization pages — 79 entries under <code>site/data/</code> with their title, category, tag words and data-dimension count (the pages themselves are published at <a href="https://github.com/1273984347/xiyouji/tree/main/site/data" rel="noopener">github.com/1273984347/xiyouji/site/data</a>). Tag words and category labels are the project’s editorial curation, not an external dataset.</p>
+
         <!-- 标签云主体 -->
         <section class="cloud-section" aria-label="Tag cloud">
             <h2 class="section-title">Tag Cloud Navigation</h2>
@@ -492,6 +495,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="legend-item"><span class="legend-dot" style="background:#8a5a8c"></span>D NLP</div>
                 <div class="legend-item"><span class="legend-dot" style="background:#c89a3a"></span>V New Dimensions</div>
             </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="section-sub">The cloud indexes 79 visualization pages in six categories, and the distribution is the finding: the V New Dimensions band alone holds 29 of them (37%), ahead of V-AH Interdisciplinary (12) and D NLP (11), while A-L Foundation, M-U Extension and Q Series each hold 9. The size axis runs from 5 to 10 data dimensions and only one page reaches 10 — the dashboard — so the site’s analytical reach is broad but shallow, with most pages carrying a handful of dimensions and the deep ones concentrated in the composite dashboards. Because the six category colours are what the legend encodes, one category filter reshapes the cloud far more than any keyword search does.</div>
         </section>
 
         <!-- 智能推荐 -->
@@ -516,7 +524,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- FILE_INDEX: tag-cloud.html | W313-V3 | 标签云全站导航 -->
     <!-- CHANGELOG: v2.2.65 W313 V3 跨页面导航增强 -->
 
-    <div id="tooltip" role="tooltip" aria-hidden="true"></div>
+    <div class="chart-tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
 
         <script src="../static/js/d3.v7.min.js"></script>
 <script>
@@ -677,16 +685,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const data = filterData();
         const cloud = d3.select("#tag-cloud");
 
-        // Bind data
-        const tags = cloud.selectAll(".tag-item")
+        // Bind data — node = 标签云图元集合（d3 selection of DOM nodes）
+        const node = cloud.selectAll(".tag-item")
             .data(data, d => d.file);
 
-        tags.exit()
+        node.exit()
             .transition().duration(MOYUN_RM?0:200)
             .style("opacity", 0)
             .remove();
 
-        const enter = tags.enter()
+        const enter = node.enter()
             .append("span")
             .attr("class", d => "tag-item " + (CATEGORY_CONFIG[d.category] || {cls:""}).cls)
             .style("font-size", d => fontSizeScale(d.size) + "px")
@@ -696,14 +704,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("tabindex", "0")
             .attr("aria-label", d => d.title + ": " + d.desc)
 
-        enter.merge(tags)
+        enter.merge(node)
             .classed("active", d => d.file === state.selectedFile)
             .transition().duration(MOYUN_RM?0:300)
             .style("opacity", 1)
             .style("font-size", d => fontSizeScale(d.size) + "px");
 
-        // Event binding
-        enter.merge(tags)
+        // Event binding — 图元级 tooltip：悬停显示标题/描述/维度数/标签词
+        enter.merge(node)
             .on("click", (event, d) => {
                 event.preventDefault();
                 handleTagClick(d);
@@ -736,7 +744,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             '<div class="tt-desc">' + escapeHtml(d.desc) + '</div>' +
             '<div class="tt-meta">Category: ' + escapeHtml(cat.label) + ' · Dimensions: ' + d.size + ' · Tags: ' + escapeHtml(d.tags.join(", ")) + '</div>'
         );
-        tooltip.style("opacity", 1).attr("aria-hidden", "false");
+        tooltip.classed("visible", true).attr("aria-hidden", "false");
         positionTooltip(event);
     }
 
@@ -751,7 +759,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     }
 
     function hideTooltip() {
-        tooltip.style("opacity", 0).attr("aria-hidden", "true");
+        tooltip.classed("visible", false).attr("aria-hidden", "true");
     }
 
     // ============================================================

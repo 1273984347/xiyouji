@@ -153,6 +153,30 @@
             fill: var(--ink-soft);
         }
         .chart-axis line, .chart-axis path { stroke: var(--line); }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -240,7 +264,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
+                <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
         <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自雷达图七角色取值与 PCA 降维坐标</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>如来占据一端：</strong>五项语言特征中如来四项居首（词汇丰富度 9.5、句长 9.2、修辞密度 9.0、文言化 9.5），口语化只有 2.0 为全场最低。</div>
+                <div class="insight-item"><strong>八戒占据另一端：</strong>八戒口语化 9.2 最高、文言化 2.0 最低；口语化减文言化的落差，八戒是 +7.2、如来是 -7.5，两人恰好分居语体光谱两端。</div>
+                <div class="insight-item"><strong>PCA 第一主成分即语体对立：</strong>佛道天庭三角色全落在 x 轴正侧（观音 2.5、如来 3.5、玉帝 2.8），取经团三角色全在负侧（唐僧 -1.8、悟空 -2.5、八戒 -3.2）；悟净（-0.2／-0.5）几乎落在原点，是唯一的中间型。</div>
+                <div class="insight-item"><strong>悟净最为均衡：</strong>五维取值 6.5／6.0／5.0／6.5／5.5，口语化与文言化只差 1.0（其余六人差值都在 3.6 到 7.5 之间），它也因此被单独归入第三个风格簇。</div>
+            </div>
+        </section>
+
+<section class="section">
             <h2 class="section-title">相关页面</h2>
             <div class="section-sub">本页与 dialogue-sentiment.html 形成"情感-风格"双轨，可对照阅读。</div>
             <p style="font-size:0.92rem; line-height:2;">

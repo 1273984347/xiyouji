@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L7Gqhc3sfRdKqlvJyP+AAQkUIeYBoIOdl27750mSZM4=' 'sha256-2YM6pkWKV9rmQSpvAfLfozX5RKKpgH9aZoUfoS0qvMQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sQ30ffrRlAj9s5qcc2MqXiwJgZGYsVai9BuikXFRwEg=' 'sha256-2YM6pkWKV9rmQSpvAfLfozX5RKKpgH9aZoUfoS0qvMQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>批评史长卷 · 详解西游记</title>
@@ -1289,7 +1289,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             svg.append("text")
                 .attr("class", "tri-vertex-sub")
                 .attr("x", p.x + off.dx).attr("y", p.y + off.dy)
-                .attr("text-anchor", off.anchor)
+                /* W1286：CSS .tri-vertex-sub 写了 text-anchor:middle ⇒ 覆盖了 attr 表现属性
+                   （副标题被强制居中 → 与顶点标签「释·文」横向相交 ⇒ 第 83 门禁判重叠）。
+                   改用行内 style 覆盖类规则（行内样式优先级高于类选择器）。 */
+                .style("text-anchor", off.anchor)
                 .attr("fill", p.color)
                 .style("font-weight", "600")
                 .style("font-size", "0.9rem")

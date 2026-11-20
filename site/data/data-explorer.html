@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-d2DXW5UeCTzT7/Sft3agOp5tpdh1RUoGDqAYHgIe08E=' 'sha256-Qw7qiLsf9+ZbcqwJIAsxdZgu4iuP9THOFqxez5LGyro=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-d2DXW5UeCTzT7/Sft3agOp5tpdh1RUoGDqAYHgIe08E=' 'sha256-iHCaE4ZVt2UUQb4Xwp2K4kV5roiKtIjdaOFOXkt1H9o=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>详解西游记 · 数据浏览器</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/data-explorer.html">
@@ -128,6 +128,11 @@
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+/* W1286（82 槽 C2）：结论/洞察段样式·照抄 character-presence-timeline.html 既有定义 */
+.insight-list { background: var(--paper); padding: 15px; border-radius: var(--radius-md) }
+.insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; }
+.insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+.insight-item strong { color: var(--accent); }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -184,11 +189,23 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </div>
     </div>
     <div id="tableHost"></div>
+    <section class="section">
+      <h2 class="section-title">关键洞察</h2>
+      <p class="section-sub">口径说明：以下结论取自本页离线内置的「八十一难」聚合示例（离线模式下直接可见；在线模式随数据集切换而变化，数字以所选数据集为准）。</p>
+      <div class="insight-list">
+        <div class="insight-item"><strong>成因为主：</strong>81 难中「真火锻性」28 难最多，「如来/观音安排」27 难次之，「天界/西域佛祖下凡收徒」16 难，「人心自生的障碍」仅 10 难——外部剧本合计 71 难，是难度的首要来源。</div>
+        <div class="insight-item"><strong>结局看后台：</strong>「被收走（有后台）」44 难，「被打死（无后台）」37 难，两者仅差 7 难；有靠山不等于全身而退，37 难仍以身死收场。</div>
+        <div class="insight-item"><strong>难度集中在中档：</strong>高难 22 难、中难 41 难、低难 18 难；中难占全部 81 难约一半（41/81），高难约每四难一见（22/81）。</div>
+        <div class="insight-item"><strong>三维口径互补：</strong>本页把 81 难拆成成因/结局/难度三条聚合线——成因解释「为何难」，结局解释「如何收场」，难度解释「多难」，三维交叉可定位具体难次。</div>
+        <div class="insight-item"><strong>离线可见范围：</strong>无数据 API 时本页内置「八十一难（离线示例）」，按成因/结局/难度三条口径各聚合一次；启动数据 API 后可切换全部数据集浏览、钻取并导出 CSV / JSON。</div>
+      </div>
+    </section>
     <figure class="viz-illustration" aria-hidden="true">
         <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
     </figure>
   </main>
 </div>
+<div class="chart-tooltip" id="chart-tooltip"></div>
 
 <script>
 /* 内联 vis-tools.js（源 site/static/js/vis-tools.js） */
@@ -591,12 +608,41 @@ function renderObjectView(key, obj) {
   svg += "</svg>";
   document.getElementById("chartTitle").textContent = "分布：" + key;
   document.getElementById("chartHost").innerHTML = svg;
+  bindChartTooltips(entries);
   document.getElementById("chartbox").style.display = "block";
   VisTools.makeFilterableTable({
     container: "#tableHost",
     columns: [{ key: "label", label: "项" }, { key: "value", label: "值" }],
     rows: entries,
     onRowClick: function (row) { openRowDrill(key, row); }
+  });
+}
+
+// 墨韵（W460 约定）：图表 tooltip 统一采用 system.css .chart-tooltip 容器 + visible 控显隐
+function bindChartTooltips(entries) {
+  var tip = document.getElementById("chart-tooltip");
+  var host = document.getElementById("chartHost");
+  if (!tip || !host) return;
+  var rects = host.querySelectorAll("svg rect");
+  function place(ev) {
+    var pad = 12;
+    var tw = tip.offsetWidth || 0, th = tip.offsetHeight || 0;
+    var x = ev.pageX + pad, y = ev.pageY - pad - th;
+    if (x + tw > window.pageXOffset + window.innerWidth - 8) x = ev.pageX - pad - tw;
+    if (y < window.pageYOffset + 8) y = ev.pageY + pad;
+    tip.style.left = x + "px";
+    tip.style.top = y + "px";
+  }
+  Array.prototype.forEach.call(rects, function (rect, i) {
+    var e = entries[i];
+    if (!e) return;
+    rect.addEventListener("mouseover", function (ev) {
+      tip.innerHTML = "<div><strong>" + e.label + "</strong></div><div>值：" + e.value + "</div>";
+      tip.classList.add("visible");
+      place(ev);
+    });
+    rect.addEventListener("mousemove", function (ev) { place(ev); });
+    rect.addEventListener("mouseleave", function () { tip.classList.remove("visible"); });
   });
 }
 

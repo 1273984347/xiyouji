@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-DFV/6exTpgBULIRhmflpL12VZyeZ9xjUIeBtU6AMhl4=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-aNF4/NZ1iLk+8PVjaHst0ybQYUUsnoP8ZAtwAZWR+EA=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>全球取经者家族 · 详解西游记</title>
@@ -489,7 +489,7 @@ svg text.tm-cell-label.light-halo { stroke: rgba(255,255,255,0.9); stroke-width:
                 <div class="chart-block">
                     <h3>8 文化圈作品分布</h3>
                     <svg id="chart-country" width="360" height="360"></svg>
-                    <div class="legend" id="legend-country"></div>
+                    <div class="legend" id="legend-country" aria-label="国家/文化圈图例（按作品数着色）"></div>
                 </div>
                 <div class="chart-block">
                     <h3>成书年代时间轴</h3>
@@ -793,6 +793,8 @@ new MutationObserver(function(){ tmSyncCellLabels(); })
     function renderCountryPie(pilgrims){
   var countryCount={}; pilgrims.forEach(p=>{countryCount[p.country]=(countryCount[p.country]||0)+1;});
   var data=Object.entries(countryCount);
+  // 图例容器先清空，再由 renderTreemap 统一填充（保持与其它图表一致的图例渲染路径）
+  d3.select('#legend-country').html('');
   renderTreemap({
     svgId:'chart-country', data:data, legendId:'legend-country', tipId:'tooltip',
     nameOf:d=>d[0], valueOf:d=>d[1], colorOf:d=>COUNTRY_COLORS[d[0]]||'#999',

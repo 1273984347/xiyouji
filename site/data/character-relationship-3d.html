@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ZL55LLjHgwPAHPm5VrTfaZTNoKlOQu1CZvm+Fqxvfqw='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pbwYUKZQ0i6TFEFPgvor47nMLnnFyejrZmqiGOtrbIk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物关系 3D 网络图 · 详解西游记</title>
@@ -126,6 +126,11 @@
         .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: var(--space-4); font-size: 0.82rem; justify-content: center; }
         .legend-item { display: flex; align-items: center; gap: 6px; color: var(--accent-primary); }
         .legend-swatch { width: 14px; height: 14px; border-radius: 50% ; display: inline-block; }
+        /* 关键洞察段（W1286：结论段统一样式·只用令牌色） */
+        .insight-list { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-5); }
+        .insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; }
+        .insight-item::before { content: "◆"; color: var(--accent-primary); position: absolute; left: 0; }
+        .insight-item strong { color: var(--accent-primary); }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -149,7 +154,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </head>
 <body>
     <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
-  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
+  数据来源：dataset/character-relationship-3d.json（页面内嵌 EMBEDDED 快照·由 <code>scripts/run_all.py</code> 批量生成·发布快照 2026-10-04）。
   <br>逐边来源、判定规则、证据级别与权重方法见 <code>dataset/CODING.md</code> 与 <code>dataset/character-relationship-3d.json</code>；本网络为示意性人工整理网络，不做统计推断。逐边档案：<a href="wukong-tangseng-benchmark.html">唐僧 → 孙悟空</a>。
   <details class="cite-details">
   <summary>引用格式</summary>
@@ -215,6 +220,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a"></span>妖界</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#7a5230"></span>龙族</div>
                 </div>
+                <div class="chart-tooltip" id="nodeTooltip"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">口径：dataset/character-relationship-3d.json（22 节点 / 32 条关系边·人工整理网络·不做统计推断）。</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>网络规模与阵营分布：</strong>22 个角色节点 + 32 条关系边，跨 5 个阵营——妖界 6 节点最多，取经团 5、天庭 5、佛门 4、龙族 2。</div>
+                <div class="insight-item"><strong>关系类型以从属与敌对为首：</strong>从属 5 条、敌对 5 条、师徒 4 条、父子 3 条，同僚 2 条、兄弟 2 条；庇护/指派/授经/反叛/索取/结拜/宿敌/夫妻/母子/击杀/交战各 1 条。</div>
+                <div class="insight-item"><strong>中心性悬殊：</strong>孙悟空 12 条关系居首，唐僧 7 条次之，观音菩萨与玉皇大帝各 5 条，哪吒 4 条——主角团与高层神仙构成关系主轴。</div>
+                <div class="insight-item"><strong>阵营性格清晰：</strong>天庭 5 条「从属」居其关系首位；佛门 4 节点间以同僚、庇护为主；妖界 6 节点无一条从属或师徒（敌对 2、宿敌 1、夫妻 1、父子 1、母子 1、结拜 1），是纯粹的对抗与亲缘网络。</div>
+                <div class="insight-item"><strong>证据分级：</strong>32 条边里 28 条标为「文本事实」，另有 4 条归入「解读假设」，解读部分仅占 12.5%。</div>
             </div>
         </section>
 
@@ -1500,9 +1518,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         raycaster = new THREE.Raycaster();
         mouse = new THREE.Vector2();
 
-        // 鼠标事件
-        container.addEventListener("click", onNodeClick);
-        container.addEventListener("mousemove", onNodeHover);
+        // 鼠标事件（点击看详情·悬停看提示）
+        bindNodeEvents(container);
 
         // 窗口调整
         window.addEventListener("resize", onWindowResize);
@@ -1660,6 +1677,33 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(nodeMeshes);
         container.style.cursor = intersects.length > 0 ? "pointer" : "grab";
+        // 返回当前悬停的节点（供 tooltip 显示角色名·阵营·度数）
+        return intersects.length > 0 ? intersects[0].object.userData.node : null;
+    }
+
+    // 节点悬停提示（tooltip）：角色名·阵营·关系度数——3D 空间里辨认节点用
+    var nodeTooltipEl = null;
+    function showNodeTooltip(node, event) {
+        if (!nodeTooltipEl) nodeTooltipEl = document.getElementById("nodeTooltip");
+        if (!nodeTooltipEl || !node) return;
+        var degree = EMBEDDED_DATA.links.filter(function (l) { return l.source === node.id || l.target === node.id; }).length;
+        nodeTooltipEl.innerHTML = "<strong>" + node.name + "</strong><br>阵营：" + GROUP_NAMES[node.group] + "<br>关系度数：" + degree + " 条";
+        nodeTooltipEl.classList.add("visible");
+        nodeTooltipEl.style.left = (event.pageX + 14) + "px";
+        nodeTooltipEl.style.top = (event.pageY + 14) + "px";
+    }
+    function hideNodeTooltip() {
+        if (!nodeTooltipEl) nodeTooltipEl = document.getElementById("nodeTooltip");
+        if (nodeTooltipEl) nodeTooltipEl.classList.remove("visible");
+    }
+    // 绑定节点交互（点击看详情·悬停看提示）
+    function bindNodeEvents(container) {
+        container.addEventListener("click", onNodeClick);
+        container.addEventListener("mousemove", function (event) {
+            var node = onNodeHover(event);
+            if (node) { showNodeTooltip(node, event); } else { hideNodeTooltip(); }
+        });
+        container.addEventListener("mouseleave", hideNodeTooltip);
     }
 
     // 力导向模拟

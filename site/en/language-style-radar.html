@@ -195,6 +195,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="kpi-row" id="kpiRow"></div>
 
+        <p class="text-sm text-muted"><strong>Data source:</strong> the published dataset <code>dataset/language-style-radar.json</code> — 7 characters × 5 language dimensions, their cluster assignment and the PCA projection — embedded in-page as <code>EMBEDDED_DATA</code> so the radar stays readable offline.</p>
+
         <!-- 图1：5 维雷达图 -->
         <section class="section">
             <h2 class="section-title">Five-Dimensional Radar of Character Language Styles</h2>
@@ -217,6 +219,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <div class="legend-item"><span class="legend-swatch" style="background:#3A473A"></span>Intermediate (mixed)</div>
                 </div>
             </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="section-sub">One dimension separates the seven speakers more sharply than the other four put together: colloquialism. Bajie scores 9.2 on colloquialism against 2.0 on literary register, while Tathāgata scores the mirror image — 2.0 colloquial against 9.5 literary, the highest literary score on the page — so the two ends of the book never meet on any of the five axes. Wukong sits on Bajie’s side of that split (8.8 colloquial, 3.2 literary) rather than his master’s (4.2 and 7.8), which is why the PCA scatter drops Bajie (−3.2, −3.5) and Wukong (−2.5, −2.8) into the lower-left while Tang Sanzang (−1.8, 1.2) stays above them, and the three heaven-tier speakers (Guanyin, the Jade Emperor, Tathāgata) cluster in the upper-right. Sha Wujing is the only mixed voice in the figure: with 6.5 on colloquialism and 6.0 on sentence length he sits at the centre (−0.2, −0.5) and is the sole member of the intermediate cluster.</div>
         </section>
 
         <section class="section">

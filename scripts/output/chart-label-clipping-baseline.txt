@@ -7,7 +7,7 @@
 # 格式：<页面>|CLIP-<方向>|<文案> 或 <页面>|OVL|<文案A>~<文案B>
 # 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict
 # 豁免：scripts/output/chart-label-clipping-exemptions.txt（有意裁剪·设计意图·显式登记）
-# 违例键 154 条（生成：2026-11-19 02:10:19）
+# 违例键 152 条（生成：2026-11-21 03:25:51）
 data/cave-estate.html|OVL|七绝山~毛颖山
 data/cave-estate.html|OVL|乌斯藏国~通天河
 data/cave-estate.html|OVL|乱石山~翠云山
@@ -44,8 +44,6 @@ data/timeline.html|OVL|1955~1980
 data/timeline.html|OVL|人文社整理本~数字化版本
 data/visual-art.html|OVL|No.5~取经路径（按章节顺序）→ 灵山
 data/visual-art.html|OVL|No.6~取经路径（按章节顺序）→ 灵山
-en/81-hardships.html|CLIP-right|Heavenly / Western steeds incarnate19.8%
-en/81-hardships.html|CLIP-right|Inner demonic obstacles12.3%
 en/business-model.html|OVL|0~Bottomless Cave
 en/business-model.html|OVL|L0~Stone Monkey King
 en/chapter-stats.html|OVL|0~Ch.1

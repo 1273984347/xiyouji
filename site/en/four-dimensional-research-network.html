@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-V3rhb4/jyPaR4rV8mYFEzOVkGZldu3GI1r0Uu4yC43s=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1IyQkldCIUatXOhbHtOuFMPB83mHpvKjc8adlFQSwUs=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Four-dimensional Research Network · Annotated Journey to the West</title>
@@ -132,6 +132,51 @@
     .chart-box { width: 100%; overflow-x: auto; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: var(--space-3); }
     .chart-box svg { display: block; margin: 0 auto; }
     .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 0.85em; justify-content: center; color: var(--ink-soft); }
+    /* 数据来源说明 */
+    .notice {
+        background: var(--paper-warm);
+        border: 1px solid var(--accent-soft);
+        border-left: 4px solid var(--accent);
+        border-radius: var(--radius-md);
+        padding: 12px 16px;
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin-bottom: var(--space-5);
+        line-height: 1.8;
+    }
+    .notice code {
+        font-family: "JetBrains Mono", monospace;
+        background: var(--paper-warm);
+        padding: 1px 5px;
+        border-radius: var(--radius-sm);
+        font-size: 0.85em;
+    }
+    /* Key Insights */
+    .insight-box {
+        background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
+        border-left: 4px solid var(--accent);
+        padding: var(--space-5) var(--space-6);
+        border-radius: var(--radius-md);
+        margin-top: 16px;
+    }
+    .insight-box h4 { color: var(--accent); font-size: 1rem; margin-bottom: var(--space-3); }
+    .insight-box ul { list-style: none; padding-left: 0; }
+    .insight-box li {
+        padding: var(--space-3) 0;
+        border-bottom: 1px dashed var(--line);
+        font-size: 0.92rem;
+        line-height: 1.7;
+        display: flex;
+        gap: 10px;
+    }
+    .insight-box li:last-child { border-bottom: none; }
+    .insight-box li .marker {
+        color: var(--accent-text);
+        font-weight: 600;
+        flex-shrink: 0;
+        font-family: "JetBrains Mono", monospace;
+    }
+    .insight-box li strong { color: var(--accent-text); font-weight: 600; }
     .legend-item { display: flex; align-items: center; gap: 6px; }
     .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
     
@@ -191,6 +236,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
+    <div class="notice" id="dataSource">
+        Data source: derived from the original 100-chapter text of Journey to the West (Wu Cheng'en) — the 12 theorists' contribution scores (0–10 per dimension) and the 8 key line anchors (Ch. 1 line 1 → Ch. 100 line 9140) are curated readings of that text, embedded here as a snapshot.
+    </div>
+
 <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="index.html">EN Home</a><span class="sep">›</span>
@@ -282,6 +331,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="lead">Cultivation-Mind—Power-Politics—Cultural-Memory—Time-Narrative four-axis spectrum · 12 theorists placed along their home axis, radial distance = cross-dimension resonance</p>
         <div class="chart-box">
             <svg width="100%" height="540" id="spectrum-svg" role="img" aria-label="Four-dimensional research spectrum polar chart"></svg>
+        </div>
+    </section>
+
+    <!-- Key Insights -->
+    <section class="section">
+        <h2>Key Insights</h2>
+        <div class="insight-box">
+            <h4>What the four-dimensional overlay actually shows</h4>
+            <ul>
+                <li><span class="marker">01</span><span><strong>Every theorist scores exactly 10 in its home dimension</strong> — Wang Yangming, Freud and Jung in Cultivation-Mind; Foucault, Weber and Machiavelli in Power-Politics; Assmann, Halbwachs and Jauss in Cultural-Memory; Heidegger, Genette and Ricoeur in Time-Narrative — so the matrix diagonal is a design anchor, not a measurement.</span></li>
+                <li><span class="marker">02</span><span><strong>The strongest off-diagonal reading is Foucault into Cultural-Memory at 7</strong> — ahead of Assmann into Time-Narrative and Heidegger into Cultivation-Mind (both 6): the network's real story is the off-diagonal resonance, not the diagonal.</span></li>
+                <li><span class="marker">03</span><span><strong>On the radar overlay each dimension leads on a different indicator</strong> — Cultivation-Mind tops Theoretical Depth and Pedagogical Value (5/5), Power-Politics tops Modern Relevance, Cultural-Memory tops Cross-dimension Resonance, and Time-Narrative ties Cultivation-Mind on depth and pedagogy: the four readings of one book are complementary, not competing.</span></li>
+                <li><span class="marker">04</span><span><strong>The integration network holds 24 nodes in three kinds</strong> — 4 dimension nodes, 12 theorist nodes and 8 line-number nodes (Ch. 1 line 1 → Ch. 100 line 9140), so the 8 textual anchors are plotted as evidence nodes of the same graph instead of sitting in a footnote.</span></li>
+            </ul>
         </div>
     </section>
 </div>
@@ -486,13 +549,16 @@ const EMBEDDED_DATA = {
             .attr("fill-opacity", 0.15)
             .attr("stroke", m.color)
             .attr("stroke-width", 2);
-        pts.forEach(p => {
+        pts.forEach((p, i) => {
             svg.append("circle")
                 .attr("cx", p[0]).attr("cy", p[1])
                 .attr("r", 4)
                 .attr("fill", m.color)
                 .attr("stroke", "#fff")
-                .attr("stroke-width", 1);
+                .attr("stroke-width", 1)
+                /* W1286：图元原生 title（hover 可查：维度·指标·分值） */
+                .append("title")
+                .text(m.name + " · " + axes[i] + ": " + m.values[i] + "/5");
         });
     });
     // Center label
@@ -583,7 +649,10 @@ const EMBEDDED_DATA = {
                 .attr("height", cellH - 4)
                 .attr("fill", colorFor(d.key, v))
                 .attr("stroke", "#c9b896")
-                .attr("stroke-width", 0.5);
+                .attr("stroke-width", 0.5)
+                /* W1286：图元原生 title（hover 可查：理论家·维度·分值） */
+                .append("title")
+                .text(t.name + " · " + d.name + ": " + v + "/10");
             svg.append("text")
                 .attr("x", x + cellW / 2)
                 .attr("y", y + cellH / 2 + 4)
@@ -851,10 +920,13 @@ const link = svg.append("g").selectAll("line")
             .attr("stroke", "#c9b896")
             .attr("stroke-dasharray", scale === 1.0 ? "0" : "2,3");
     });
-    // Ring labels
+    // Ring labels: placed along the 45° diagonal (the vertical spoke is reserved for the top dimension / its theorists · avoids mutual pressing)
+    const RING_ANG = -Math.PI / 4;
     [0.25, 0.5, 0.75, 1.0].forEach(scale => {
+        const rr = r * scale - 8;
         svg.append("text")
-            .attr("x", cx + 4).attr("y", cy - r * scale + 12)
+            .attr("x", cx + rr * Math.cos(RING_ANG)).attr("y", cy + rr * Math.sin(RING_ANG) + 4)
+            .attr("text-anchor", "middle")
             .attr("font-size", "9px")
             .attr("fill", "#6B6455")
             .attr("font-family", "JetBrains Mono, monospace")
@@ -870,15 +942,17 @@ const link = svg.append("g").selectAll("line")
             .attr("y2", cy + r * Math.sin(a))
             .attr("stroke", d.color)
             .attr("stroke-width", 2.5);
-        // Axis label box
-        const lx = cx + (r + 30) * Math.cos(a);
-        const ly = cy + (r + 30) * Math.sin(a);
+        // Axis label box · pushed outward to r+56 (keeps clear of the outer-ring theorist labels)
+        const lx = cx + (r + 56) * Math.cos(a);
+        const ly = cy + (r + 56) * Math.sin(a);
         svg.append("rect")
             .attr("x", lx - 38).attr("y", ly - 12)
             .attr("width", 76).attr("height", 24)
             .attr("fill", d.color)
             .attr("rx", 4);
         svg.append("text")
+            .attr("class", "spectrum-dim-label")
+            .attr("data-ax", a)
             .attr("x", lx).attr("y", ly + 4)
             .attr("text-anchor", "middle")
             .attr("fill", "#fff")
@@ -914,6 +988,9 @@ const link = svg.append("g").selectAll("line")
         const lx = px + labelOffset * Math.cos(a);
         const ly = py + labelOffset * Math.sin(a);
         svg.append("text")
+            .attr("class", "spectrum-node-label")
+            .attr("data-ax", a)
+            .attr("data-rad", t.r)
             .attr("x", lx).attr("y", ly)
             .attr("text-anchor", "middle")
             .attr("font-size", "11px")
@@ -956,6 +1033,44 @@ const link = svg.append("g").selectAll("line")
             .attr("fill", "#6B6455")
             .text(v);
     });
+
+    /* 标签避让（83 槽 · SVG 标签裁切与重叠）
+       理论家名按实测 bbox 落位：外圈先落位（外圈可用空间最小），
+       与维度名/其它理论家名相压时沿所在轴的垂直方向让开 18 / 30 / 42px。 */
+    (function avoidSpectrumLabels() {
+        const R = el => el.getBoundingClientRect();
+        const moved = (r, dx, dy) => ({ left: r.left + dx, right: r.right + dx, top: r.top + dy, bottom: r.bottom + dy });
+        const hitArea = (a, b) => {
+            const ix = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+            const iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+            return (ix > 0 && iy > 0) ? ix * iy : 0;
+        };
+        const svgEl = svg.node();
+        const nodeEls = Array.prototype.slice.call(svgEl.querySelectorAll("text.spectrum-node-label"));
+        const taken = Array.prototype.slice.call(svgEl.querySelectorAll("text"))
+            .filter(t => !t.classList.contains("spectrum-node-label"))
+            .map(R);
+        const ordered = nodeEls.slice().sort((a, b) =>
+            parseFloat(b.getAttribute("data-rad")) - parseFloat(a.getAttribute("data-rad")));
+        ordered.forEach(t => {
+            const ax = parseFloat(t.getAttribute("data-ax"));
+            const perpX = -Math.sin(ax), perpY = Math.cos(ax);
+            const x0 = parseFloat(t.getAttribute("x"));
+            const y0 = parseFloat(t.getAttribute("y"));
+            const r0 = R(t);
+            let best = null;
+            for (const d of [0, 18, -18, 30, -30, 42, -42]) {
+                const dx = perpX * d, dy = perpY * d;
+                const r = moved(r0, dx, dy);
+                const s = taken.reduce((sum, b) => sum + hitArea(r, b), 0);
+                if (!best || s < best.s) best = { dx, dy, s };
+                if (s === 0) break;
+            }
+            t.setAttribute("x", x0 + best.dx);
+            t.setAttribute("y", y0 + best.dy);
+            taken.push(moved(r0, best.dx, best.dy));
+        });
+    })();
 })();
 </script>
 <script id="audit-labelavoid">

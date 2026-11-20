@@ -336,6 +336,30 @@ header.hero .meta {
   
   .theorist-list { grid-template-columns: 1fr; }
 }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -493,6 +517,18 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <div id="theorist-list" class="theorist-list"></div>
   </div>
 </section>
+
+  <!-- W1286 · conclusion block (gate 82 / C2): conclusion semantics carried by both the block class and its heading -->
+  <section class="section">
+    <h2 class="section-title">VII · Key Insights</h2>
+    <div class="section-sub">KEY INSIGHTS · Read from the actual values in the sixteen-dimension overview, force graph, three-layer Sankey, radar and evolution timeline</div>
+    <div class="insight-list">
+      <div class="insight-item"><strong>How the sixteen dimensions divide:</strong> seven belong to seven-sense narratology, three to textual narratology, two to meta-narratology, and gender, culture, affect, history take one each; the four newest dimensions W182 to W185 were all created between 2026-06-15 and 2026-07-05.</div>
+      <div class="insight-item"><strong>Intertext is still the peak:</strong> W169 Intertextual Narratology keeps the highest theoretical depth at 10, JTTW application at 9 and academic impact at 10, with the most terms at 9, while Olfactory W164 bottoms out at 6 for depth and impact and Tactile W165 falls to 5 for application.</div>
+      <div class="insight-item"><strong>The edge mass moves outward:</strong> of the 28 edges, cross-domain links take 14, theoretical-text links 8 and spatio-temporal-sensory links 6; the three strongest tie at 88 (time↔space, intertext↔rhetoric, metanarrative↔unreliable) and the weakest is gender to subaltern narrative at 65.</div>
+      <div class="insight-item"><strong>Outside topics join the frame:</strong> the network also pulls in six related topic nodes (trauma narrative, subaltern narrative, myth narrative, intellectual history, reception aesthetics, ethics narrative), with affect↔history at 85 and unreliable↔rhetoric at 85 as the two cross-dimensional spines.</div>
+    </div>
+  </section>
     </main>
 
     <footer class="site-footer">

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-Wz7gyvyJt6Zywic7TRkj1BoWk8pMLjR+BxifHSHqHDE=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-7tp9oOZQlDbfSAzEE/dCbrXnZiDu2aYqmSAiqzGVLEc=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Geosemiotics of the Pilgrimage Route · 详解西游记</title>
@@ -312,7 +312,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            Data source: embedded version (to load the latest data, run in the <code>site/</code> directory: <code>py -m http.server 8000</code>)
+            Data source: the published dataset <code>dataset/journey-geo-semiotics.json</code> — 7 place nodes (Ch. 1 / 8 / 13 / 44 / 68 / 84 / 98) and 7 route relations — embedded in-page as <code>EMBEDDED_DATA</code>, so the force-directed graph stays readable offline.
         </div>
 
         <!-- Triple-column cards: the three mechanisms -->
@@ -352,6 +352,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="detail-panel" id="detailPanel" role="region" aria-live="polite">
                 <div class="placeholder">Click any node to view its detailed analysis.</div>
             </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="section-sub">The 7 nodes and 7 relations are not a route map but a three-step mechanism: one place of origin (Mount Huaguo Water-Curtain Cave, Ch. 1), one capital of departure (Chang’an, Ch. 13) and one destination (the Spirit Mountain, Ch. 8 and Ch. 98), with three transit kingdoms in between — Chechi Kingdom (Ch. 44, ideological), Zhuizi Kingdom (Ch. 68, body politics) and Miefa Kingdom (Ch. 84, sovereign violence). The chapter numbers show when the mechanism works: all three transit kingdoms fall at or after Ch. 44, i.e. in the second half of the book, so place only dissolves once the ordeal structure is already in place. The last two edges close the loop rather than open a new one — the Spirit Mountain hands the pilgrim back to the same Chang’an he left — which is why the model calls the last stage re-localization rather than a second journey.</div>
         </section>
     </main>
 
@@ -673,7 +678,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         // W563: EMBEDDED single source — data always comes from in-page EMBEDDED_DATA
         d3.select("#dataSource").html(
-            `<strong>Currently showing embedded data (${data.nodes.length} nodes).</strong> Data source: in-page EMBEDDED_DATA (single-sourced in W563)`
+            `<strong>Currently showing embedded data (${data.nodes.length} nodes).</strong> Data source: the published dataset <code>dataset/journey-geo-semiotics.json</code> (7 place nodes · 7 route relations), embedded in-page as EMBEDDED_DATA (single-sourced in W563)`
         );
 
         renderLegend();

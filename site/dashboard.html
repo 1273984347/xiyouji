@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-fTVjufsfnCTidLXbZGJsyHzs1q/5UIasmvAqn2WnW9A=' 'sha256-LFpSVY/XoFlgLoyO0VBhh27ldbtTRCoeUJPWsawtwsM=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' __XIJ_SERVICE_BASE__ https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-fTVjufsfnCTidLXbZGJsyHzs1q/5UIasmvAqn2WnW9A=' 'sha256-g9BROk2Oq568aS99dTrmwaidfnDyln+aLA6FIajtUUE=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' __XIJ_SERVICE_BASE__ https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC
@@ -521,7 +521,7 @@
     <main class="container" id="main">
         <div class="notice-wrap">
             <div class="notice" id="dataSource">
-                DATA · 数据已内置，离线可直接打开（file://）；最新数据以本地服务模式为准。
+                数据来源：site/data/json/ 与 site/en/json/（本项目 100 回原文数据集）· 数据已内置，离线可直接打开（file://）；最新数据以本地服务模式为准。
             </div>
         </div>
 
@@ -1167,15 +1167,17 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const total = Object.values(data).reduce((a, b) => a + b, 0);
 
         // 切片
-        g.selectAll("path")
+        const slices = g.selectAll("path")
             .data(arcs)
             .enter()
             .append("path")
             .attr("fill", d => colorMap[d.data[0]] || "#999")
             .attr("stroke", "#FAF7F0")
             .attr("stroke-width", 2)
-            .attr("d", arc)
-            .style("opacity", 0)
+            .attr("d", arc);
+        // W1286 C3：扇形图元补原生 <title>（图元可查细节）——挂在 path 内，不参与 opacity transition
+        slices.append("title").text(d => `${d.data[0]} · ${d.data[1]} 难`);
+        slices.style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:600)
             .delay(MOYUN_RM?0:((d, i) => i * 100))

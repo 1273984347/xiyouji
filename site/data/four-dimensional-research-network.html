@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rae+Jmtw0+QtifIOfVPpAEiow/Z0tOLfjeC/Zv1ow5g='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-jm1kcbGadmyxiaFQpo4zVQgPWT+3KjsJ6dg3FSR88jA='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>西游四维研究网络图谱 · 详解西游记</title>
@@ -139,6 +139,11 @@
     .section h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: 10px; }
     .section .lead { color: var(--ink-soft); font-size: 0.92em; margin-bottom: 14px; }
     .chart-box { width: 100%; overflow-x: auto; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: var(--space-3); }
+    /* W1286（82 槽 C2）：结论/洞察段样式·照抄 character-presence-timeline.html 既有定义 */
+    .insight-list { background: var(--paper); padding: 15px; border-radius: var(--radius-md) }
+    .insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; }
+    .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+    .insight-item strong { color: var(--accent); }
     .chart-box svg { display: block; margin: 0 auto; }
     .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 0.85em; justify-content: center; color: var(--ink-soft); }
     .legend-item { display: flex; align-items: center; gap: 6px; }
@@ -307,6 +312,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <svg width="100%" height="540" id="spectrum-svg" role="img" aria-label="四维研究谱系极坐标图"></svg>
         </div>
     </section>
+    <!-- W1286（82 槽 C2）：结论/洞察段·数据取自本页 EMBEDDED_DATA 快照 -->
+    <section class="section">
+      <h2 class="section-title">关键洞察</h2>
+      <p class="section-sub">口径说明：以下结论基于本页内嵌快照（EMBEDDED_DATA·四维 × 12 理论家 × 100 回采样点），数字与上方五张图表同源。</p>
+      <div class="insight-list">
+        <div class="insight-item"><strong>四维强度接近均衡：</strong>4 维度 × 5 指标（理论深度/文本证据/现代相关性/跨维度呼应/教学价值）总分分别为修行心性 23、权力政治 22、文化记忆 22、时间叙事 23，最强与最弱仅差 1 分——四维是同量级的分析视角，不构成强弱排序。</div>
+        <div class="insight-item"><strong>主维度几乎独占：</strong>12 位理论家的主维度贡献度全部 ≥9（合计 115，均值 9.6），而 48 格中跨维度 ≥6 的仅 5 格（福柯×文化记忆 7、阿斯曼×时间叙事 6、荣格×文化记忆 6、海德格尔×修行心性 6、里柯尔×文化记忆 6）。</div>
+        <div class="insight-item"><strong>网络重心在维度—理论家：</strong>24 个节点（4 维度 + 12 理论家 + 8 个 line 号）连成 32 条边，其中维度→理论家 12 条强度一律为 4，而理论家→line 号 13 条为 2–4、维度→line 号 7 条为 2–3——「归属」强于「文本落点」。</div>
+        <div class="insight-item"><strong>line 号覆盖首尾两端：</strong>8 个 line 号节点跨第 1 至第 100 回，最热的是 L9140 斗战胜佛（4 条边），其次 L1 石猴出世、L722 大闹天宫、L9100 凌云渡各 3 条；理论家侧权重最高的边是福柯→L722 大闹天宫与海德格尔→L6800 真假美猴王（各 4），紧箍咒 L1519 则同时连着弗洛伊德与韦伯。</div>
+        <div class="insight-item"><strong>时间线末段四维共振：</strong>11 个采样点堆叠总量第 20 回最低（22）、第 100 回最高（37）；权力政治波动最大（第 1 回 3 → 第 10 回 8 → 第 20 回 6 → 第 100 回 7），文化记忆则从第 10/20 回的 5 单调抬升到第 100 回的 10。</div>
+        <div class="insight-item"><strong>辐射距离 ≠ 呼应度：</strong>极坐标里跨维度呼应度最高为 9（福柯、阿斯曼、海德格尔），最低为 5（弗洛伊德、马基雅维利）；其中马基雅维利辐射半径 0.95（与海德格尔并列最靠外）却呼应度最低 5，佛洛伊德半径 0.65 最靠内——半径由主维度归属决定，与跨维度呼应不同源。</div>
+      </div>
+    </section>
 </div>
     <figure class="viz-illustration" aria-hidden="true">
         <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
@@ -328,6 +346,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
+<div class="chart-tooltip" id="tooltip"></div>
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
 // ============= Embedded Data =============
@@ -463,6 +482,25 @@ const EMBEDDED_DATA = {
     ]
 };
 
+
+// 墨韵（W460 约定）：tooltip 统一采用 system.css .chart-tooltip 容器 + visible 控显隐
+const tipNode = d3.select("#tooltip");
+function tipShow(html, event) {
+    tipNode.html(html).classed("visible", true);
+    tipMove(event);
+}
+function tipMove(event) {
+    const pad = 12, node = tipNode.node();
+    const tw = node.offsetWidth || 0, th = node.offsetHeight || 0;
+    let x = event.pageX + pad, y = event.pageY - pad - th;
+    const maxX = window.pageXOffset + window.innerWidth - tw - 8;
+    const topLim = window.pageYOffset + 8;
+    if (x > maxX) x = event.pageX - pad - tw;
+    if (y < topLim) y = event.pageY + pad;
+    tipNode.style("left", x + "px").style("top", y + "px");
+}
+function tipHide() { tipNode.classed("visible", false); }
+
 // ============= 1. Radar Chart =============
 (function renderRadar() {
     const svg = d3.select("#radar-svg");
@@ -517,13 +555,18 @@ const EMBEDDED_DATA = {
             .attr("fill-opacity", 0.15)
             .attr("stroke", m.color)
             .attr("stroke-width", 2);
-        pts.forEach(p => {
+        pts.forEach((p, pi) => {
             svg.append("circle")
                 .attr("cx", p[0]).attr("cy", p[1])
                 .attr("r", 4)
                 .attr("fill", m.color)
                 .attr("stroke", "#fff")
-                .attr("stroke-width", 1);
+                .attr("stroke-width", 1)
+                .on("mouseover", function (event) {
+                    tipShow("<div><strong>" + m.name + "</strong></div><div>" + axes[pi] + "：" + m.values[pi] + " / 5</div>", event);
+                })
+                .on("mousemove", function (event) { tipMove(event); })
+                .on("mouseleave", function () { tipHide(); });
         });
     });
     // Center label
@@ -614,7 +657,12 @@ const EMBEDDED_DATA = {
                 .attr("height", cellH - 4)
                 .attr("fill", colorFor(d.key, v))
                 .attr("stroke", "#c9b896")
-                .attr("stroke-width", 0.5);
+                .attr("stroke-width", 0.5)
+                .on("mouseover", function (event) {
+                    tipShow("<div><strong>" + t.name + "</strong></div><div>" + d.name + "：" + v + " / 10</div>", event);
+                })
+                .on("mousemove", function (event) { tipMove(event); })
+                .on("mouseleave", function () { tipHide(); });
             svg.append("text")
                 .attr("x", x + cellW / 2)
                 .attr("y", y + cellH / 2 + 4)
@@ -738,6 +786,13 @@ const link = svg.append("g").selectAll("line")
         .attr("fill", d => d.color)
         .attr("stroke", "#2c2416")
         .attr("stroke-width", d => d.type === "dim" ? 2 : 1.2)
+        .on("mouseover", function (event, d) {
+            const kind = d.type === "dim" ? "研究维度" : (d.type === "theorist" ? "理论家" : "line 号节点");
+            const extra = d.type === "line" ? "<div>" + d.chapter + " · line " + d.line + " · " + d.desc + "</div>" : "";
+            tipShow("<div><strong>" + d.id + "</strong></div><div>" + kind + "</div>" + extra, event);
+        })
+        .on("mousemove", function (event) { tipMove(event); })
+        .on("mouseleave", function () { tipHide(); })
         .call(d3.drag()
             .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
             .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
@@ -829,7 +884,22 @@ const link = svg.append("g").selectAll("line")
             .attr("fill-opacity", 0.78)
             .attr("stroke", "#fff")
             .attr("stroke-width", 0.5)
-            .attr("d", area);
+            .attr("d", area)
+            .on("mousemove", function (event) {
+                const mx = d3.pointer(event, this)[0];
+                const ch = Math.max(1, Math.min(100, Math.round(x.invert(mx))));
+                const hit = data.filter(d => Math.abs(d.chapter - ch) < 6);
+                const at = hit.length ? hit.reduce((a, b) => Math.abs(b.chapter - ch) < Math.abs(a.chapter - ch) ? b : a) : data[0];
+                tipShow("<div><strong>" + dim.name + "</strong></div><div>第 " + at.chapter + " 回：" + at[dim.key] + " / 10</div>", event);
+            })
+            .on("mouseover", function (event) {
+                const mx = d3.pointer(event, this)[0];
+                const ch = Math.max(1, Math.min(100, Math.round(x.invert(mx))));
+                const hit = data.filter(d => Math.abs(d.chapter - ch) < 6);
+                const at = hit.length ? hit.reduce((a, b) => Math.abs(b.chapter - ch) < Math.abs(a.chapter - ch) ? b : a) : data[0];
+                tipShow("<div><strong>" + dim.name + "</strong></div><div>第 " + at.chapter + " 回：" + at[dim.key] + " / 10</div>", event);
+            })
+            .on("mouseleave", function () { tipHide(); });
     });
 
     // Legend
@@ -882,10 +952,13 @@ const link = svg.append("g").selectAll("line")
             .attr("stroke", "#c9b896")
             .attr("stroke-dasharray", scale === 1.0 ? "0" : "2,3");
     });
-    // Ring labels
+    // Ring labels: placed along the 45° diagonal (the vertical spoke is reserved for the top dimension / its theorists · avoids mutual pressing)
+    const RING_ANG = -Math.PI / 4;
     [0.25, 0.5, 0.75, 1.0].forEach(scale => {
+        const rr = r * scale - 8;
         svg.append("text")
-            .attr("x", cx + 4).attr("y", cy - r * scale + 12)
+            .attr("x", cx + rr * Math.cos(RING_ANG)).attr("y", cy + rr * Math.sin(RING_ANG) + 4)
+            .attr("text-anchor", "middle")
             .attr("font-size", "9px")
             .style("fill", "var(--ink-soft)")
             .attr("font-family", "JetBrains Mono, monospace")
@@ -901,15 +974,17 @@ const link = svg.append("g").selectAll("line")
             .attr("y2", cy + r * Math.sin(a))
             .attr("stroke", d.color)
             .attr("stroke-width", 2.5);
-        // Axis label box
-        const lx = cx + (r + 30) * Math.cos(a);
-        const ly = cy + (r + 30) * Math.sin(a);
+        // Axis label box · pushed outward to r+56 (keeps clear of the outer-ring theorist labels)
+        const lx = cx + (r + 56) * Math.cos(a);
+        const ly = cy + (r + 56) * Math.sin(a);
         svg.append("rect")
             .attr("x", lx - 38).attr("y", ly - 12)
             .attr("width",76).attr("height", 24)
             .attr("fill", d.color)
             .attr("rx", 4);
         svg.append("text")
+            .attr("class", "spectrum-dim-label")
+            .attr("data-ax", a)
             .attr("x", lx).attr("y", ly + 4)
             .attr("text-anchor", "middle")
             .attr("fill", "#fff")
@@ -939,12 +1014,21 @@ const link = svg.append("g").selectAll("line")
             .attr("r", 5)
             .attr("fill", color)
             .attr("stroke", "#fff")
-            .attr("stroke-width", 1.2);
+            .attr("stroke-width", 1.2)
+            .on("mouseover", function (event) {
+                const dn = dims[dimIdx].name;
+                tipShow("<div><strong>" + t.theorist + "</strong></div><div>" + dn + "</div><div>跨维度呼应度：" + t.cross + " / 10</div><div>辐射半径系数：" + t.r + "</div>", event);
+            })
+            .on("mousemove", function (event) { tipMove(event); })
+            .on("mouseleave", function () { tipHide(); });
         // Label (rotate to read outward)
         const labelOffset = 14;
         const lx = px + labelOffset * Math.cos(a);
         const ly = py + labelOffset * Math.sin(a);
         svg.append("text")
+            .attr("class", "spectrum-node-label")
+            .attr("data-ax", a)
+            .attr("data-rad", t.r)
             .attr("x", lx).attr("y", ly)
             .attr("text-anchor", "middle")
             .attr("font-size", "11px")
@@ -987,6 +1071,44 @@ const link = svg.append("g").selectAll("line")
             .style("fill", "var(--ink-soft)")
             .text(v);
     });
+
+    /* 标签避让（83 槽 · SVG 标签裁切与重叠）
+       理论家名按实测 bbox 落位：外圈先落位（外圈可用空间最小），
+       与维度名/其它理论家名相压时沿所在轴的垂直方向让开 18 / 30 / 42px。 */
+    (function avoidSpectrumLabels() {
+        const R = el => el.getBoundingClientRect();
+        const moved = (r, dx, dy) => ({ left: r.left + dx, right: r.right + dx, top: r.top + dy, bottom: r.bottom + dy });
+        const hitArea = (a, b) => {
+            const ix = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+            const iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+            return (ix > 0 && iy > 0) ? ix * iy : 0;
+        };
+        const svgEl = svg.node();
+        const nodeEls = Array.prototype.slice.call(svgEl.querySelectorAll("text.spectrum-node-label"));
+        const taken = Array.prototype.slice.call(svgEl.querySelectorAll("text"))
+            .filter(t => !t.classList.contains("spectrum-node-label"))
+            .map(R);
+        const ordered = nodeEls.slice().sort((a, b) =>
+            parseFloat(b.getAttribute("data-rad")) - parseFloat(a.getAttribute("data-rad")));
+        ordered.forEach(t => {
+            const ax = parseFloat(t.getAttribute("data-ax"));
+            const perpX = -Math.sin(ax), perpY = Math.cos(ax);
+            const x0 = parseFloat(t.getAttribute("x"));
+            const y0 = parseFloat(t.getAttribute("y"));
+            const r0 = R(t);
+            let best = null;
+            for (const d of [0, 18, -18, 30, -30, 42, -42]) {
+                const dx = perpX * d, dy = perpY * d;
+                const r = moved(r0, dx, dy);
+                const s = taken.reduce((sum, b) => sum + hitArea(r, b), 0);
+                if (!best || s < best.s) best = { dx, dy, s };
+                if (s === 0) break;
+            }
+            t.setAttribute("x", x0 + best.dx);
+            t.setAttribute("y", y0 + best.dy);
+            taken.push(moved(r0, best.dx, best.dy));
+        });
+    })();
 })();
 </script>
 <script id="chart-audit" defer src="../static/js/chart-audit.js" data-families="axisfix,axesvar,avoidall,numfix,netlabels,content"></script>

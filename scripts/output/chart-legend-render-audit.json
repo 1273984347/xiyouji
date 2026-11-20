@@ -63,7 +63,7 @@
     },
     {
       "page": "site/dashboard.html",
-      "sha": "9ee005b9a135",
+      "sha": "b2bb3e0333c3",
       "static": {
         "svg": true,
         "cls": true,
@@ -130,46 +130,6 @@
       "consoleErrors": 7,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 18 项（≥2 ⇒ 多系列且图例齐备）"
-    },
-    {
-      "page": "site/data/81-hardships-view.html",
-      "sha": "2524dff71a95",
-      "static": {
-        "svg": false,
-        "cls": true,
-        "lib": false
-      },
-      "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 1 个（最大者：640x180·图元 4·文本 8·命中图表词表）",
-      "svgKinds": [
-        {
-          "cls": "",
-          "id": "chart",
-          "w": 640,
-          "h": 180,
-          "marks": 4,
-          "texts": 8,
-          "kind": "chart",
-          "basis": "640x180·图元 4·文本 8·命中图表词表"
-        },
-        {
-          "cls": "ic-moon",
-          "id": "",
-          "w": 18,
-          "h": 18,
-          "marks": 1,
-          "texts": 0,
-          "kind": "icon",
-          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
-        }
-      ],
-      "legendItems": 0,
-      "visibleLegend": false,
-      "seriesEvidence": 4,
-      "seriesDesc": "填充色组 4·描边色组 0·同 x 堆叠段 4",
-      "consoleErrors": 4,
-      "verdict": "multi_nolegend",
-      "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
     {
       "page": "site/data/81-hardships.html",
@@ -333,7 +293,7 @@
     },
     {
       "page": "site/data/data-explorer.html",
-      "sha": "1d6be005379d",
+      "sha": "a90e6836ae2f",
       "static": {
         "svg": false,
         "cls": true,
@@ -423,7 +383,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "7b48a6f580b0",
+      "sha": "06f81fc6ff82",
       "static": {
         "svg": true,
         "cls": false,
@@ -442,7 +402,7 @@
     },
     {
       "page": "site/en/81-hardships.html",
-      "sha": "e15430a0f3f8",
+      "sha": "25c2b71f751a",
       "static": {
         "svg": true,
         "cls": true,
@@ -822,7 +782,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "42a8eb7a8d8b",
+      "sha": "0c2375345555",
       "static": {
         "svg": true,
         "cls": false,

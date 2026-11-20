@@ -408,7 +408,7 @@ svg text.tm-cell-label.light-halo { stroke: rgba(255,255,255,0.9); stroke-width:
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            Data source: embedded build. (To load the latest data, from the <code>site/</code> directory run <code>py -m http.server 8000</code>)
+            Data source: <code>site/en/json/pilgrims_family.json</code>, <code>site/en/json/journey_comparison.json</code> and <code>site/en/json/global_pattern_summary.json</code> (embedded copy of this project's cross-cultural pilgrimage dataset; to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
         </div>
 
         <!-- KPI summary bar -->
@@ -471,7 +471,16 @@ svg text.tm-cell-label.light-halo { stroke: rgba(255,255,255,0.9); stroke-width:
                 <div class="chart-block">
                     <h3>Works Across 8 Cultural Spheres</h3>
                     <svg id="chart-country" width="360" height="360"></svg>
-                    <div class="legend" id="legend-country"></div>
+                    <div class="legend" id="legend-country">
+                        <div class="legend-item"><span class="legend-swatch" style="background:#C0392B"></span>China &middot; Tang &middot; 1 &middot; 12.5%</div>
+                        <div class="legend-item"><span class="legend-swatch" style="background:#9c3a2e"></span>China &middot; Eastern Jin &middot; 1 &middot; 12.5%</div>
+                        <div class="legend-item"><span class="legend-swatch" style="background:#e0654a"></span>China &middot; Ming &middot; 1 &middot; 12.5%</div>
+                        <div class="legend-item"><span class="legend-swatch" style="background:#40619E"></span>Ancient Greece &middot; 1 &middot; 12.5%</div>
+                        <div class="legend-item"><span class="legend-swatch" style="background:#8E7D62"></span>India &middot; 1 &middot; 12.5%</div>
+                        <div class="legend-item"><span class="legend-swatch" style="background:#3A473A"></span>Italy &middot; 1 &middot; 12.5%</div>
+                        <div class="legend-item"><span class="legend-swatch" style="background:#b8860b"></span>UK &middot; 1 &middot; 12.5%</div>
+                        <div class="legend-item"><span class="legend-swatch" style="background:#4a7a6a"></span>Ireland &middot; 1 &middot; 12.5%</div>
+                    </div>
                 </div>
                 <div class="chart-block">
                     <h3>Composition Timeline</h3>

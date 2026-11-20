@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5LOAHQg7qAuq33xbpDFXc5W+4WbGDbYVGSpwsWpi2PQ=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5cNVUAK9n1r1Vm4hj9w/AEJgnXiNFduh+aqTDHI7/oI=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>交互式时间线 · 详解西游记</title>
@@ -402,6 +402,30 @@
             
             .device { padding: 18px 14px; }
         }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -499,6 +523,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="device-sub">按时代过滤浏览全部事件，点击卡片可在时间线与详情中定位。</div>
             <div class="event-grid" id="event-grid"></div>
         </section>
+
+        <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自成书史 / 版本演变 / 文化影响三轴的实际取值</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>三轴 22 个事件：</strong>时间线共 22 个事件，分作三轴登记 —— 成书史 7 条、版本演变 7 条、文化影响 8 条，后世影响一条轴的条目数并不比成书过程少。</div>
+                <div class="insight-item"><strong>跨度 1391 年：</strong>最早 629 年玄奘西行，最晚 2020 年游戏与网文，中间隔着从 1208 年取经诗话、1340 年杂剧西游记到 1592 年世德堂本定稿的成书链条；1955 年人文社整理本在成书史、版本演变两轴各出现一次。</div>
+                <div class="insight-item"><strong>明末之前只有五件事：</strong>成书史一轴在 1592 年之前只有 629 年玄奘西行、645 年大唐西域记、1208 年取经诗话、1340 年杂剧西游记、1592 年世德堂本定稿五个节点，其余全部落在清代及以后。</div>
+                <div class="insight-item"><strong>文化影响轴最靠后：</strong>文化影响一轴 8 条里有 6 条落在 1927 年以后（连环画普及到游戏与网文），1927 年连环图画西游记把西游故事带进儿童与市民阅读，此后每逢媒介换代就有新改编。</div>
+            </div>
+        </section>
+
+    <figure class="viz-illustration" aria-hidden="true">        </section>
     <figure class="viz-illustration" aria-hidden="true">
         <img src="../static/images/viz-04-timeline.webp" alt="" loading="lazy" decoding="async">
     </figure>
@@ -721,6 +759,66 @@ var TL_ICO = {
         applySelectionToTimeline(state.selectedIdx);
     }
 
+    /* ==========================================================
+       图表标签防重叠落位（W1286 · 第 83 门禁 · SVG 标签裁切与重叠）
+       ------------------------------------------------------------
+       机制：按标签实测 bbox（getBoundingClientRect）逐个试放候选行；
+             候选行内与「已落位标签 + 静态障碍（时代标签 · 轴刻度 · 泳道名）」
+             互不相交（留 2px 间隙）才落位，否则顺延到下一候选行；
+             全部候选行都放不下 ⇒ 隐藏该标签，并把完整文案留在 <title>（悬停可见）。
+       说明：本页 .tl-svg 为 overflow:visible，隐藏型 audit 补丁的重叠阈值（>0.50）
+             高于门禁阈值（>0.30）⇒ 只能靠页内绘图代码消重叠。
+       ========================================================== */
+    function collectTextRects(svgRef, selector) {
+        const el = svgRef && svgRef.node ? svgRef.node() : svgRef;   // 兼容 d3 selection / 原生元素
+        const out = [];
+        el.querySelectorAll(selector).forEach(t => {
+            const r = t.getBoundingClientRect();
+            if (r.width > 0 && r.height > 0) out.push({ l: r.left, r: r.right, t: r.top, b: r.bottom });
+        });
+        return out;
+    }
+
+    function placeChartLabels(items, rowOffsets, obstacles, gap) {
+        if (!items || !items.length) return [];
+        const gapPx = gap == null ? 2 : gap;
+        const svg = items[0].node.ownerSVGElement;
+        const ctm = svg && svg.getScreenCTM ? svg.getScreenCTM() : null;
+        const scale = ctm && ctm.d ? ctm.d : 1;
+        const placed = [];
+        const sorted = items.slice().sort((a, b) =>
+            a.node.getBoundingClientRect().left - b.node.getBoundingClientRect().left);
+        sorted.forEach(it => {
+            const r = it.node.getBoundingClientRect();
+            let done = false;
+            for (let i = 0; i < rowOffsets.length && !done; i++) {
+                const dy = (rowOffsets[i] - it.baseY) * scale;
+                const box = { l: r.left, r: r.right, t: r.top + dy, b: r.bottom + dy };
+                const blockers = obstacles.concat(placed);   // 静态障碍 + 已落位标签
+                let hit = false;
+                for (let k = 0; k < blockers.length; k++) {
+                    const o = blockers[k];
+                    if (box.l < o.r + gapPx && o.l < box.r + gapPx &&
+                        box.t < o.b + gapPx && o.t < box.b + gapPx) { hit = true; break; }
+                }
+                if (!hit) {
+                    it.node.setAttribute('y', rowOffsets[i]);
+                    placed.push(box);
+                    done = true;
+                }
+            }
+            if (!done) {
+                it.node.style.display = 'none';
+                if (!it.node.querySelector(':scope > title')) {
+                    const ti = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    ti.textContent = it.full || it.node.textContent;
+                    it.node.appendChild(ti);
+                }
+            }
+        });
+        return placed;
+    }
+
     function renderHorizontalTimeline(container, data, width) {
         const margin = { top: 40, right: 50, bottom: 56, left: 120 };
         const height = 460;
@@ -741,6 +839,7 @@ var TL_ICO = {
         svg.append('title').attr('id', 'tl-svg-title').text('三轴时间线：成书史 + 版本演变 + 文化影响三泳道，横轴年份自适应数据范围，hover 圆点查看事件详情');
 
         // 时代背景带
+        const eraLabelItems = [];
         ERAS.forEach(e => {
             const x0 = x(Math.max(e.start, xMin));
             const x1 = x(Math.min(e.end, xMax));
@@ -752,13 +851,14 @@ var TL_ICO = {
                 .attr('height', 340)
                 .attr('fill', e.color)
                 .attr('opacity', 0.06);
-            svg.append('text')
+            const eraText = svg.append('text')
                 .attr('class', 'era-label')
                 .attr('x', (x0 + x1) / 2)
                 .attr('y', 64)
                 .attr('text-anchor', 'middle')
                 .attr('fill', e.color)
                 .text(e.name);
+            eraLabelItems.push({ node: eraText.node(), baseY: 64, full: e.name });
         });
 
         // 三轴基线 + 轴标签
@@ -782,13 +882,15 @@ var TL_ICO = {
         // X 轴
         const axisG = svg.append('g')
             .attr('class', 'axis')
-            .attr('transform', `translate(0, ${height - margin.bottom + 16})`);
+            .attr('transform', `translate(0, ${height - margin.bottom + 24})`);
         axisG.call(d3.axisBottom(x)
             .tickValues([629, 800, 1000, 1200, 1400, 1592, 1800, 1955, 2020])
             .tickFormat(d3.format('d')));
 
         // 事件圆点
         const tooltip = d3.select('#tl-tooltip');
+        const laneTitleItems = { composition: [], version: [], influence: [] };
+        const laneYearItems = { composition: [], version: [], influence: [] };
         data.forEach((d, i) => {
             const y = laneY[d.axis];
             const g = svg.append('g')
@@ -824,15 +926,31 @@ var TL_ICO = {
                     tooltip.style('opacity', 0);
                 });
 
-            g.append('text')
+            const yearText = g.append('text')
                 .attr('class', 'ev-year')
                 .attr('y', 22)
                 .text(d.year);
 
-            g.append('text')
+            const titleText = g.append('text')
                 .attr('class', 'ev-title')
                 .attr('y', -16)
                 .text(truncate(d.title, 6));
+
+            // 完整事件文案随点可查（悬停圆点显示）
+            g.append('title').text(d.year + ' · ' + d.title + ' · ' + AXES[d.axis].label);
+
+            laneTitleItems[d.axis].push({ node: titleText.node(), baseY: -16, full: d.title });
+            laneYearItems[d.axis].push({ node: yearText.node(), baseY: 22, full: String(d.year) });
+        });
+
+        // 标签防重叠落位（第 83 门禁）：时代标签 → 事件标题 → 事件年份
+        const placedAll = placeChartLabels(eraLabelItems, [64, 46, 28], []);
+        const obstacles = placedAll
+            .concat(collectTextRects(svg, '.lane-label'))
+            .concat(collectTextRects(svg, '.axis text'));
+        LANE_ORDER.forEach(k => {
+            placedAll.push.apply(placedAll, placeChartLabels(laneTitleItems[k], [-16, -34, -52, -69], obstacles.concat(placedAll)));
+            placedAll.push.apply(placedAll, placeChartLabels(laneYearItems[k], [22, 39, 56], obstacles.concat(placedAll)));
         });
 
         // 首次渲染后让选中圆点放大

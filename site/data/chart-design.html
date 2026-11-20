@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-IwhXvbB50jo1rliyfhh2HmFHTr58ZBNF4Sj4fzeVYEA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-d/NpItAfC3a7nSjhtAYi0VpLZmt1T1ViMMDzWUEKd0w=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>图表设计 · 详解西游记</title>
@@ -1475,6 +1475,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .enter()
             .append("path")
             .attr("d", arc)
+            // W1286 L-02：d3.arc() 的圆心恒为 (0,0)——本函数的 cx/cy 只是局部常量，
+            // 未接到 d3 的 .cx()/.cy() 访问器 ⇒ 12 个扇形被画在 SVG 左上角（overflow:hidden 下仅见 1/4），
+            // 而时辰标签按画框中心布点 ⇒ 扇形与标签整体错位。修法：给扇形 path 加 translate
+            // 把它移到画框中心（标签坐标本已按 cx/cy 计算正确，故不动）。
+            .attr("transform", `translate(${cx},${cy})`)
             .attr("fill", d => d.data.color)
             .attr("stroke", "#fff")
             .attr("stroke-width", 1)

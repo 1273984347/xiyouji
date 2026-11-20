@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Bf+QJr2ZHdZ/xPZLcO7XjTPCSTYB4Ak/VdVj6Kxif7g=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lS8eWINlDel8ZHtXctyHy1TdjNltYGUOAx085joPfJM=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Ecology Network · Annotated Journey to the West</title>
@@ -260,6 +260,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
+        <p class="text-sm text-muted"><strong>Data source:</strong> the published dataset <code>dataset/monster-ecology-network.json</code> — the 31-node demon network with its 42 relations, the 5-stage Sankey energy flow, the 12-demon ecological radar and the 18-entry population timeline — embedded in-page as <code>EMBEDDED_DATA</code> so the charts stay readable offline.</p>
+
         <section class="section">
             <h2>I. Demon Ecology Network · D3.js Force-Directed Graph <span class="en">Force-directed Network</span></h2>
             <p class="lead">30 demon nodes + 42 relationship edges · colored by habitat (Aquatic / Fire / Mountain / Celestial) · click a node to expand its ecology card</p>
@@ -416,6 +418,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </tbody>
             </table>
             </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="section-sub">The network’s defining trait is absorption rather than elimination: of the 29 demon nodes, 17 end by being recruited — Guanyin takes Red Boy, Manjushri takes the Green Lion Demon, Samantabhadra takes the White Elephant Demon, Tathāgata takes the Golden-Winged Roc and the Pagoda-Bearing Heavenly King takes the Bull Demon King — while only 5 are killed and 7 escape. Habitat is almost entirely mountain (20 of the 31 nodes, against 5 water, 5 sky and 1 fire), and the 42 relations run on symbiosis (20) rather than competition (12) or predation (10), so the “food chain” behaves less like a chain than a lattice of patronage. Of the 5 outright killings, 2 are r-strategies (the White Bone Demon and the Seven Spider Demon Sisters) and 3 are K-strategies (the Scorpion Demon, the Six-Eared Macaque and the Three Rhinoceros Demons); the network as a whole is K-dominated, 22 nodes to 9, which is why absorption rather than extinction is the normal fate of a demon here.</div>
         </section>
     </div>
     </main>
@@ -590,11 +597,29 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // P1 优化试点：按 habitat 生态位社区聚类 + 稳定收敛 + 增大碰撞半径（不改数据语义）
         const habX = {water: width * 0.28, fire: width * 0.5, mountain: width * 0.5, sky: width * 0.72};
         const habY = {water: height * 0.32, fire: height * 0.7, mountain: height * 0.45, sky: height * 0.32};
+        // W1286 · G6：标签防压——只给重要节点常显标签（其余节点信息保留在节点 <title> 与点击卡片里），
+        // 并把被选中节点的标签半宽计入碰撞半径，让布局本身就把标签错开。
+        const LABEL_MAX = 10;
+        const labelHalfW = s => {
+            s = String(s || "");
+            const cjk = /[\u2e80-\u9fff\uac00-\ud7af\uff00-\uffef]/.test(s);
+            return s.length * (cjk ? 6.0 : 3.2);
+        };
+        const degCount = new Map();
+        links.forEach(l => {
+            const s = l.source.id || l.source, t = l.target.id || l.target;
+            degCount.set(s, (degCount.get(s) || 0) + 1);
+            degCount.set(t, (degCount.get(t) || 0) + 1);
+        });
+        const labelKeep = new Set([...nodes]
+            .sort((a, b) => ((degCount.get(b.id) || 0) - (degCount.get(a.id) || 0)) || ((b.size || 0) - (a.size || 0)))
+            .slice(0, LABEL_MAX).map(n => n.id));
+
         const sim = d3.forceSimulation(nodes)
             .force("link", d3.forceLink(links).id(d => d.id).distance(d => 80 + (10 - d.value) * 6).strength(0.3))
             .force("charge", d3.forceManyBody().strength(-180))
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collide", d3.forceCollide().radius(d => d.size + 10))
+            .force("collide", d3.forceCollide().radius(d => d.size + 10 + (labelKeep.has(d.id) ? Math.min(26, labelHalfW(d.name)) : 0)))
             .force("x", d3.forceX(d => habX[d.habitat] || width / 2).strength(0.12))
             .force("y", d3.forceY(d => habY[d.habitat] || height / 2).strength(0.12))
             .alphaDecay(0.08).velocityDecay(0.5);
@@ -673,11 +698,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("stroke", "#fff").attr("stroke-width", 1.5)
                 .style("cursor", "pointer");
 
-            node.selectAll("text").data(d => [d]).join("text")
+            node.selectAll("text").data(d => labelKeep.has(d.id) ? [d] : []).join("text")
                 .text(d => d.name)
                 .attr("font-size", d => d.size > 22 ? "11px" : "9px")
                 .attr("dx", d => d.size / 2 + 4).attr("dy", 3)
                 .attr("fill", "#23201A");
+
+            // W1286 · G6：未常显标签的节点挂原生 <title>（悬停即可读到完整名称与生态位信息）
+            node.each(function (d) {
+                let ti = this.querySelector("title");
+                if (!ti) { ti = document.createElementNS("http://www.w3.org/2000/svg", "title"); this.appendChild(ti); }
+                ti.textContent = d.name + " · " + ({water:'Aquatic',fire:'Fire',mountain:'Mountain',sky:'Celestial'})[d.habitat] + " · " + d.strategy + " · " + d.ending;
+            });
 
             node.on("click", (e, d) => {
                 d3.select("#node-card-container").html(`

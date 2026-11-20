@@ -199,6 +199,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="kpi-row" id="kpiRow"></div>
 
+        <p class="text-sm text-muted"><strong>Data source:</strong> in-page <code>EMBEDDED_DATA</code> (W563 single source) — the project’s own chapter-by-chapter plot-density scoring for the 100 chapters of Journey to the West (Wu Cheng’en), with 9 chapter-level turning points; the density curve is an editorial reading rather than a computed statistic. The published per-chapter rhythm scoring for the same 100-chapter span (phase + rhythm + feature) is <code>site/en/json/chapter_rhythm.json</code>.</p>
+
         <!-- 控制面板 -->
         <section class="section">
             <h2 class="section-title">Timeline Animation Control</h2>
@@ -240,6 +242,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 class="section-title">Nine Narrative Turning Points</h2>
             <div class="section-sub">The 9 pivotal turns of Journey to the West’s narrative structure, which set the book’s rhythmic course.</div>
             <div id="turning-points-list" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px;"></div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="section-sub">The density curve opens low (0.32 at Ch. 1), jumps for the chapter that turns the book outward (Havoc in Heaven, 0.78 at Ch. 7), and then bottoms out at 0.28 in Ch. 9, where Chen Guangrui’s departure ends the prologue before the pilgrimage plot has taken over — after Ch. 9 the curve never falls below 0.48 again. Only 11 of the 100 chapters reach 0.85 and just three pass 0.90 (Ch. 40 at 0.92, Ch. 54 at 0.92 and Ch. 57 at 0.95), which is why the 9 turning points sit on the crests of the area chart rather than along its slopes: this book changes state at peaks, not in the valleys. The heatmap agrees — its Climax row is the only row lifted by a constant offset, and Ch. 57 sits in that row.</div>
         </section>
 
         <section class="section">

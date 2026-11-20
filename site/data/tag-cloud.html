@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GlSmt5Gy+3PVGfzQPMDCtsjmoqS40VtDfMUWF3Nvg0I='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ksvekYJygUWu24yMjGUR0jJgK0vGMGwu4rzdarfsOtQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>全站标签云 · 可视化导航中心 · 详解西游记</title>
@@ -283,6 +283,30 @@
             border-radius: 50%;
             display: inline-block;
         }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
         /* Tooltip */
         #tooltip {
             position: fixed;
@@ -494,6 +518,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <p class="rec-context" id="rec-context">当前显示：<b>热门推荐</b>（数据维度数最大的 5 个页面）</p>
             <div class="rec-grid" id="rec-grid"></div>
         </section>
+
+        <!-- W1286 · 关键洞察（结论区块·第 82 门禁 C2） -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 读法基于本页内嵌 82 条页目元数据（EMBEDDED_DATA）</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>规模与分布：</strong>标签云收录 82 个可视化页面，分属 6 个分类——V 方向新增 30（37%）、D 方向 NLP 12、V-AH 跨学科 12、Q 系列 10、A-L 基础 9、M-U 扩展 9；新增方向已占全站三分之一强。</div>
+                <div class="insight-item"><strong>字号即维度数：</strong>标签字号由 size 字段（数据维度数）驱动：五档对应 12px、最多的一档对应 28px；全站只有「数据仪表盘」达 10 维；「取经路线交互」「九九八十一难」以及两个叙事学网络页（十二维与十六维那两个）同为 9 维，并列第二。</div>
+                <div class="insight-item"><strong>维度集中在中段：</strong>6–7 维的页面 51 个（62%）、8 维及以上 20 个（24%）、5 维 11 个（13%）——多数页面是中型多维分析，不是单点演示。</div>
+                <div class="insight-item"><strong>颜色即分类：</strong>六色对应图例六类（A-L 基础 #C0392B、M-U 扩展 #40619E、V-AH 跨学科 #8E7D62、Q 系列 #3A473A、D 方向 NLP #8a5a8c、V 方向新增 #c89a3a），悬停标签即见同色色点与维度数。</div>
+                <div class="insight-item"><strong>推荐口径：</strong>未点选标签时默认展示维度数最大的 5 个页面（热门推荐）；点选任一标签后切换为同分类推荐，点击标签即跳转对应页面。</div>
+            </div>
+        </section>
     <figure class="viz-illustration" aria-hidden="true">
         <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
     </figure>
@@ -517,7 +554,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W1285 · W1284 · W1283 · W1282 · W1281 · W1280 · W1276 · W1275 · W1274 · W1273 · W1272 · W1266 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W1286 · W1285 · W1284 · W1283 · W1282 · W1281 · W1280 · W1276 · W1275 · W1274 · W1273 · W1272 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -726,13 +763,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 event.preventDefault();
                 handleTagClick(d);
             })
-            .on("pointerenter", (event, d) => {
-                showTooltip(event, d);
+            .on("mouseenter", (event, d) => {
+                const cat = CATEGORY_CONFIG[d.category] || { label: d.category, color: "#999" };
+                showTooltip(event, d, '<span class="legend-dot" style="background:' + cat.color + ';margin-right:6px"></span>');
             })
-            .on("pointermove", (event) => {
+            .on("mousemove", (event) => {
                 positionTooltip(event);
             })
-            .on("pointerleave", () => {
+            .on("mouseleave", () => {
                 hideTooltip();
             })
             .on("keydown", (event, d) => {
@@ -744,10 +782,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
     }
 
-    function showTooltip(event, d) {
+    function showTooltip(event, d, swatchHtml) {
         const cat = CATEGORY_CONFIG[d.category] || {label: d.category};
         tooltip.html(
-            '<div class="tt-title">' + escapeHtml(d.title) + '</div>' +
+            '<div class="tt-title">' + (swatchHtml || '') + escapeHtml(d.title) + '</div>' +
             '<div class="tt-desc">' + escapeHtml(d.desc) + '</div>' +
             '<div class="tt-meta">分类：' + escapeHtml(cat.label) + ' · 维度数：' + d.size + ' · 标签：' + escapeHtml(d.tags.join("、")) + '</div>'
         );

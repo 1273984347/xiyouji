@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-K05nY5JNNaMNSQgDlCnUIDFSwVNdAZhqjkikL+LUwnU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-3vcX+Z39HXECwBcaMRwbcuEcRPKg4IDKRHAMRaBWEz4=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>解构作品与东亚再创作 · 详解西游记</title>
@@ -962,7 +962,7 @@ function renderTreemap(opts){
             });
 
         // 点旁标签
-        g.selectAll(".scatter-label")
+        const scatterLabels = g.selectAll(".scatter-label")
             .data(placed)
             .enter()
             .append("text")
@@ -974,11 +974,62 @@ function renderTreemap(opts){
                 const t = d.title.replace(/[《》]/g, "");
                 return t.length > 14 ? t.slice(0, 13) + "…" : t;
             })
-            .style("opacity", 0)
-            .transition()
+            .style("opacity", 0);
+        scatterLabels.transition()
             .duration(MOYUN_RM?0:500)
             .delay(MOYUN_RM?0:((d, i) => 600 + i * 40))
             .style("opacity", 1);
+
+        /* 标签避让（83 槽 · SVG 标签裁切与重叠）
+           象限角标与作品标签按实测 bbox 重新落位（信息不丢：作品全名仍在 tooltip 里）：
+           · 象限角标在象限内横移，让开纵轴刻度列（否则左上角标与 "10" 刻度相压）；
+           · 作品标签逐个挑一个不与刻度/轴标题/象限名/已落位标签相交的纵向位置。 */
+        (function avoidScatterLabels() {
+            const R = el => el.getBoundingClientRect();
+            const moved = (r, dx, dy) => ({ left: r.left + dx, right: r.right + dx, top: r.top + dy, bottom: r.bottom + dy });
+            const hitArea = (a, b) => {
+                const ix = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+                const iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+                return (ix > 0 && iy > 0) ? ix * iy : 0;
+            };
+            const isMovable = t => t.classList.contains("scatter-label") || t.classList.contains("scatter-quadrant-label");
+            const blockers = [];
+            svg.node().querySelectorAll("text").forEach(t => { if (!isMovable(t)) blockers.push(R(t)); });
+            const taken = [];
+            // 1) 象限角标：左侧象限右移、右侧象限左移，逐档取第一个不相交的位
+            g.selectAll(".scatter-quadrant-label").nodes().forEach(t => {
+                const x0 = parseFloat(t.getAttribute("x"));
+                const r0 = R(t);
+                const dir = x0 < innerW / 2 ? 1 : -1;
+                let best = null;
+                for (let k = 0; k <= 5; k++) {
+                    const dx = dir * 18 * k;
+                    const r = moved(r0, dx, 0);
+                    const s = blockers.concat(taken).reduce((sum, b) => sum + hitArea(r, b), 0);
+                    if (!best || s < best.s) best = { dx, s };
+                    if (s === 0) break;
+                }
+                t.setAttribute("x", x0 + best.dx);
+                taken.push(moved(r0, best.dx, 0));
+            });
+            // 2) 作品标签：纵向候选位（上/下/更上/更下…），按点位自上而下逐个落位
+            const nodes = g.selectAll(".scatter-label").nodes();
+            const order = nodes.map((t, i) => i).sort((a, b) => placed[a]._y - placed[b]._y);
+            order.forEach(i => {
+                const t = nodes[i];
+                const y0 = parseFloat(t.getAttribute("y"));
+                const r0 = R(t);
+                let best = null;
+                for (const dy of [0, 22, -14, 36, -28, 50, -42, 64]) {
+                    const r = moved(r0, 0, dy);
+                    const s = blockers.concat(taken).reduce((sum, b) => sum + hitArea(r, b), 0);
+                    if (!best || s < best.s) best = { dy, s };
+                    if (s === 0) break;
+                }
+                t.setAttribute("y", y0 + best.dy);
+                taken.push(moved(r0, 0, best.dy));
+            });
+        })();
 
         // 图例
         const legend = d3.select("#scatter-legend");

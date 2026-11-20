@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-ceJsVWFa47ptUeczR0NACJE56GHsUZvHVN2id7sMqHo=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-9uEOWlJR0DrbEFCVmaWK39wI4/NGaMM0XlWtaxQclTk=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-SSrv/rElj4YSpAuvjUqBG7Vw/EdYCdZ1t6dPQOuAiQo=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-9uEOWlJR0DrbEFCVmaWK39wI4/NGaMM0XlWtaxQclTk=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Six-Senses Narratology Network · Annotated Journey to the West</title>
@@ -278,6 +278,30 @@ header.hero .meta {
   
   .theorist-list { grid-template-columns: 1fr; }
 }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -426,6 +450,18 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <div id="theorist-list" class="theorist-list"></div>
   </div>
 </section>
+
+  <!-- W1286 · conclusion block (gate 82 / C2): conclusion semantics carried by both the block class and its heading -->
+  <section class="section">
+    <h2 class="section-title">VII · Key Insights</h2>
+    <div class="section-sub">KEY INSIGHTS · Read from the actual values in the seven-sense overview, force graph, dimension radar, Sankey and topic timeline</div>
+    <div class="insight-list">
+      <div class="insight-item"><strong>A clear citation ranking:</strong> the seven senses rank visual 90, space 88, time 85, hearing 82, touch 80, smell 78, taste 75 — a spread of 15 points, with visual and space together at 178 against 153 for taste and smell.</div>
+      <div class="insight-item"><strong>Resources are perfectly even:</strong> every sense binds the same number of theorists (four apiece), carries 28 terms and four Journey-to-the-West cases — only the citation axis separates them, the other three radar axes are perfectly flat.</div>
+      <div class="insight-item"><strong>The structure is a single chain:</strong> of the 34 edges, six link the seven senses into one chain (time → space → hearing → smell → touch → sight → taste) and the remaining 28 attach a theorist to each sense; the network holds 35 nodes in total, the seven senses plus 28 theorists.</div>
+      <div class="insight-item"><strong>The theory spans two millennia:</strong> temporal narratology starts earliest, in the 4th century CE, gustatory narratology ends latest, in 2012, and smell (from 1798) plus touch (from 1945) are senses only named in the modern era.</div>
+    </div>
+  </section>
     </main>
 
     <footer class="site-footer">
@@ -1314,6 +1350,8 @@ function renderTimeline(timelineData) {
     .text(d => d.Sense);
 
   // Era labels (top)
+  // W1286: clamp era labels back inside the plot area (the leftmost one was centred on x=0
+  //       => it reached into the Y-axis gutter and collided with the '2000 CE' tick label)
   g.selectAll('.era-label')
     .data(topics)
     .enter()
@@ -1324,7 +1362,17 @@ function renderTimeline(timelineData) {
     .attr('text-anchor', 'middle')
     .attr('font-size', '9px')
     .attr('fill', '#8a7a5a')
-    .text(d => d.Era);
+    .text(d => d.Era)
+    .each(function(d) {
+      // label overflowing the plot edge is pinned to that edge => never covers Y-axis ticks
+      const el = d3.select(this);
+      const bb = this.getBBox();
+      const half = bb.width / 2;
+      const cx = xScale(d.idx);
+      if (half <= 0) return;
+      if (cx - half < 0) { el.attr('text-anchor', 'start').attr('x', 0); }
+      else if (cx + half > innerW) { el.attr('text-anchor', 'end').attr('x', innerW); }
+    });
 
   // Y axis
   g.append('g')

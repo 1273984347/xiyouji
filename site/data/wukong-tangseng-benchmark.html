@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ldDvOzGGUm3YSJ5SLAat2w6EzSDjq/XlNL6pc50KBJI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-KJlH1Y2Qbr2Dl+rRCc9BM26Hg0TGBk56TX2FyFc5aME='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>一条边的完整档案：唐僧 → 孙悟空 · 详解西游记</title>
@@ -107,6 +107,11 @@
     .legend { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-3) 0 0; font-size: 12px; color: var(--ink-soft); }
     .legend-item { display: inline-flex; align-items: center; gap: 6px; }
     .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+    .insight-list { background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: var(--space-4) var(--space-5); }
+    .insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; line-height: 1.9; }
+    .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+    .insight-item strong { color: var(--accent); font-weight: 600; }
     .timeline-axis text, .weight-axis text { fill: var(--ink-faint); font-size: 11px; }
     .timeline-axis path, .timeline-axis line, .weight-axis path, .weight-axis line { stroke: var(--line); }
     .event-marker { cursor: pointer; outline: none; }
@@ -280,6 +285,21 @@
                 <p class="section-sub">争议不藏在脚注里：三条主要分歧直接列出，方便后续修订或反驳。</p>
             </div>
             <div class="dispute-grid" id="disputeGrid"></div>
+        </section>
+
+        <!-- W1286 · 关键洞察（结论区块·第 82 门禁 C2） -->
+        <section class="section">
+            <div class="section-head">
+                <p class="kicker">小结</p>
+                <h2 class="section-title">关键洞察</h2>
+                <p class="section-sub">KEY INSIGHTS · 读法基于本页内嵌 9 组事件档案（EMBEDDED_DATA）</p>
+            </div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>一条边九个事件：</strong>唐僧—孙悟空这条边由 9 组事件构成，事件权重之和 7.2、均值 0.8；边权重取 max(event_weight) = 1.0。</div>
+                <div class="insight-item"><strong>三档权重各三条：</strong>1.0 档 3 条（第 14 回五行山收徒、第 28–31 回八戒义激猴王与回归救师、第 100 回灵山成佛）；0.8 档 3 条（第 27 回三打白骨精与逐徒、第 56 回诛草寇与再逐、第 57–58 回真假美猴王与和解）；0.6 档 3 条（第 59–61 回火焰山协作、第 65–66 回小雷音寺救师、第 75–77 回狮驼岭救师）。</div>
+                <div class="insight-item"><strong>回目跨度 18 回：</strong>九组事件覆盖第 14、27–31、56–61、65–66、75–77、100 回共 18 个回目；起点是第 14 回收徒，终点是第 100 回灵山成佛。</div>
+                <div class="insight-item"><strong>冲突不隐去：</strong>9 组事件中 3 组标注为争议（第 27 回编码、第 56 回是否并入逐徒链、第 58 回「二心」解读）；页面把三条分歧与三种权重算法（max = 1.0 / mean = 0.8 / count = 9）并列给出，结论可复算也可反驳。</div>
+            </div>
         </section>
     </main>
 
@@ -659,6 +679,9 @@
         tip.style('left', Math.max(pad, x) + 'px').style('top', Math.max(pad, y) + 'px');
     }
     function hideTip() { tip.classed('visible', false); }
+    function weightTipHtml(e) {
+        return '<div class="tt-title">' + escapeHtml(e.title) + '</div><div class="tt-body">' + chapterLabel(e) + ' · 事件权重 ' + e.event_weight + ' · ' + escapeHtml(e.rule) + '</div>';
+    }
 
     function renderKpi(data) {
         const disputed = data.events.filter(e => e.disputed).length;
@@ -683,12 +706,13 @@
         data.events.forEach((event, i) => {
             const cx = x(event.chapter_start);
             const cy = lanes[i % lanes.length];
+            const tipHtml = '<div class="tt-title">' + escapeHtml(event.title) + '</div><div class="tt-body">' + chapterLabel(event) + ' · ' + escapeHtml(event.type) + ' · 事件权重 ' + event.event_weight + '<br>' + escapeHtml(event.summary) + '</div>';
             const g = svg.append('g').attr('class', 'event-marker').attr('tabindex', 0)
                 .attr('role', 'button').attr('aria-label', chapterLabel(event) + ' ' + event.title + '，事件权重 ' + event.event_weight)
-                .on('mouseenter focus', evt => {
-                    const html = '<div class="tt-title">' + escapeHtml(event.title) + '</div><div class="tt-body">' + chapterLabel(event) + ' · ' + escapeHtml(event.type) + ' · 事件权重 ' + event.event_weight + '<br>' + escapeHtml(event.summary) + '</div>';
-                    showTip(html, evt);
-                }).on('mouseleave blur', hideTip)
+                .on('mouseenter', evt => { showTip(tipHtml, evt); })
+                .on('focus', evt => { showTip(tipHtml, evt); })
+                .on('mouseleave', hideTip)
+                .on('blur', hideTip)
                 .on('click', () => document.getElementById('event-' + event.id).scrollIntoView({ behavior: MOYUN_RM ? 'auto' : 'smooth', block: 'center' }));
             g.append('line').attr('class', 'event-stem').attr('x1', cx).attr('x2', cx).attr('y1', H - 34).attr('y2', cy);
             const color = TYPE_COLORS[typeClass(event.type)];
@@ -722,8 +746,10 @@
         const bars = svg.append('g').selectAll('rect').data(data.events).join('rect').attr('class', 'weight-bar')
             .attr('x', e => x(e.id)).attr('width', x.bandwidth()).attr('y', H - margin.bottom).attr('height', 0)
             .attr('fill', e => TYPE_COLORS[typeClass(e.type)])
-            .on('mouseenter focus', (evt, e) => showTip('<div class="tt-title">' + escapeHtml(e.title) + '</div><div class="tt-body">' + chapterLabel(e) + ' · 事件权重 ' + e.event_weight + ' · ' + escapeHtml(e.rule) + '</div>', evt))
-            .on('mouseleave blur', hideTip);
+            .on('mouseenter', (evt, e) => showTip(weightTipHtml(e), evt))
+            .on('focus', (evt, e) => showTip(weightTipHtml(e), evt))
+            .on('mouseleave', hideTip)
+            .on('blur', hideTip);
         bars.transition().duration(MOYUN_RM ? 0 : 400).attr('y', e => y(e.event_weight)).attr('height', e => H - margin.bottom - y(e.event_weight));
         svg.append('g').selectAll('text').data(data.events).join('text').attr('class', 'weight-value')
             .attr('x', e => x(e.id) + x.bandwidth() / 2).attr('y', e => y(e.event_weight) - 6).text(e => e.event_weight.toFixed(1));

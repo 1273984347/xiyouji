@@ -730,6 +730,11 @@
         }
         .insight-box li:last-child { border-bottom: none; }
         .insight-box li strong { color: var(--accent-text); font-weight: 600; }
+
+        /* W1286：图表内容完备度 C4——评分等级图例（色值与脚本 ratingColor() 的五档一一对应） */
+        .chart-legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); margin-top: var(--space-3); font-size: 0.8rem; color: var(--ink-soft); }
+        .legend-item { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+        .legend-swatch { width: 12px; height: 12px; border-radius: var(--radius-sm); border: 1px solid var(--line); flex: none; }
         
         
         
@@ -795,7 +800,7 @@ html[data-theme="dark"] { --rating-gold-ink: #F0D878; }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            数据源：页面内嵌 EMBEDDED 数据（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+            数据来源：site/data/json/ethics_consumption_summary.json、site/data/json/monster_ipo.json、site/data/json/mount_rights_report.json、site/data/json/tang_monk_food_vlog.json（本书 100 回原文数据集 · 坐骑权益与妖怪 IPO 报告，快照 2026-10-04）；离线查看请在 site/ 目录运行 py -m http.server 8000
         <div class="cite-block" id="citeBox">
   数据源：<code>json/ethics_consumption_summary.json</code>、<code>json/monster_ipo.json</code>、<code>json/mount_rights_report.json</code>、<code>json/tang_monk_food_vlog.json</code>（快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
   <div class="cite-type-note"><!-- W668-T3 -->数据性质：<strong>方法论总结展示</strong>（文档型页面·内容为专题章节索引与要点摘要）</div>
@@ -877,6 +882,13 @@ html[data-theme="dark"] { --rating-gold-ink: #F0D878; }
             <div class="chart-wrap" style="position:relative;">
                 <svg id="food-bar-svg"></svg>
                 <div class="chart-tip" id="food-tip"></div>
+            </div>
+            <div class="legend chart-legend" role="list" aria-label="评分等级图例">
+                <span class="legend-item" role="listitem"><span class="legend-swatch" style="background:#d4af37"></span>金色 · 满分 10 分（2 家）</span>
+                <span class="legend-item" role="listitem"><span class="legend-swatch" style="background:#3A473A"></span>墨绿 · 8–10 分（2 家）</span>
+                <span class="legend-item" role="listitem"><span class="legend-swatch" style="background:#40619E"></span>靛蓝 · 6–8 分（3 家）</span>
+                <span class="legend-item" role="listitem"><span class="legend-swatch" style="background:#e9b885"></span>赭橙 · 4–6 分（1 家）</span>
+                <span class="legend-item" role="listitem"><span class="legend-swatch" style="background:#C0392B"></span>朱红 · 0–4 分（4 家）</span>
             </div>
         </section>
 

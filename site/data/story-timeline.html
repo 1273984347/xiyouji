@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-hoVQk9X47iMk/6DM7hBlG3RVFjcdvursEPHd33VwTM8=' 'sha256-CNjtVe6sYjIW2ZSnyWJZH2eRr03OSQw7ftKL6tONTlk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2AP7YYGZJMG4Z5nCfinMvWDkM9OzolcW2CGUmDHx5bI=' 'sha256-CNjtVe6sYjIW2ZSnyWJZH2eRr03OSQw7ftKL6tONTlk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>故事内时间线 · 详解西游记</title>
@@ -129,6 +129,10 @@
         #story-viz .grid-line { stroke: var(--line); stroke-dasharray: 2 4; }
         #story-viz .ev-dot { cursor: pointer; }
         #story-detail { min-height: 88px; }
+        /* 五阶段图例：色块与图中阶段色板 --chart-1..5 一致 */
+        .legend { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); margin-top: var(--space-4); font-size: 0.85em; color: var(--ink-soft); }
+        .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+        .legend-swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
     </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -201,6 +205,13 @@
                 <div class="chart-scroll" id="chart-scroll">
                     <div id="story-viz"></div>
                 </div>
+            </div>
+            <div class="legend" aria-label="五阶段图例">
+                <span class="legend-item"><span class="legend-swatch" style="background:var(--chart-1)"></span>石猴出世与大闹天宫（第 1-7 回）</span>
+                <span class="legend-item"><span class="legend-swatch" style="background:var(--chart-2)"></span>取经缘起（第 8-12 回）</span>
+                <span class="legend-item"><span class="legend-swatch" style="background:var(--chart-3)"></span>西行起程与收徒（第 13-22 回）</span>
+                <span class="legend-item"><span class="legend-swatch" style="background:var(--chart-4)"></span>西行途中劫难（第 23-97 回）</span>
+                <span class="legend-item"><span class="legend-swatch" style="background:var(--chart-5)"></span>归真（第 98-100 回）</span>
             </div>
             <div class="insight-box" id="story-detail">
                 <h4>事件详情</h4>
@@ -363,6 +374,11 @@
             const detail = d3.select('#story-detail');
             const dots = svg.selectAll('g.ev').data(data)
                 .enter().append('g').attr('class', 'ev');
+            // 事件图元：<title> 先挂（浏览器原生悬停提示）·再画 circle
+            dots.append('title')
+                .text(function (d) {
+                    return '第' + d.chapter + '回 · ' + d.event + '（' + d.characters.join('、') + '）';
+                });
             dots.append('circle')
                 .attr('class', 'ev-dot')
                 .attr('cx', function (d) { return x(d.chapter); })
@@ -374,10 +390,6 @@
                 .style('fill', function (d) { return 'var(--chart-' + (phaseIdx[d.phase] + 1) + ')'; })
                 .style('stroke', 'var(--paper)')
                 .style('stroke-width', 1.5);
-            dots.append('title')
-                .text(function (d) {
-                    return '第' + d.chapter + '回 · ' + d.event + '（' + d.characters.join('、') + '）';
-                });
             dots.on('pointerover', function (event, d) {
                     tip.html('<strong>第' + d.chapter + '回</strong> · ' + PHASES[phaseIdx[d.phase]].name +
                         '<br>' + d.event +

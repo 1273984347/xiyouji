@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-NqFMI4C8RMi7H1/QkPTbRyjGsxhHqQU6m8IfyiGgVq4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qUULYoAGnV/YQtai+U6doWGX8lFiJCny2L7r3qT0ta8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>命运与轮回 · 详解西游记</title>
@@ -614,7 +614,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="chart-block">
                 <div class="chart-title">生死簿篡改案例时间线（8 案例·按 chapter 排列·带 modifier 标注）</div>
                 <div class="chart-caption">X 轴：章节顺序 / Y 轴：impact_severity 影响严重度 0-10 / 圆点：篡改案例 / 标签：modifier 改簿者</div>
-                <svg id="chart-registry-timeline" class="chart-svg" width="100%" height="400"></svg>
+                <svg id="chart-registry-timeline" class="chart-svg" width="100%" height="420"></svg>
                 <div class="legend-row">
                     <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>篡改案例（按 impact_severity）</span>
                     <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>影响严重度趋势线</span>
@@ -906,8 +906,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const svg = d3.select('#chart-registry-timeline');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 900;
-        const W = Math.max(containerW, 700), H = 400;
-        const m = {top: 50, right: 60, bottom: 90, left: 60};
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 50, right: 60, bottom: 110, left: 60};
         const w = W - m.left - m.right, h = H - m.top - m.bottom;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
 
@@ -949,7 +949,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         // axis labels
         g.append('text').attr('class', 'axis-label')
-            .attr('x', w / 2).attr('y', h + 70)
+            .attr('x', w / 2).attr('y', h + 98)
             .attr('text-anchor', 'middle')
             .text('篡改案例序号（按章节出现顺序）');
         g.append('text').attr('class', 'axis-label')
@@ -1021,23 +1021,42 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .data(cases).enter().append('text')
             .attr('class', 'lbl-chap')
             .attr('x', d => x('案' + d.n))
-            .attr('y', h + 28)
+            .attr('y', h + 44)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('fill', 'var(--ink-soft)')
             .text(d => d.chapter);
 
-        // 角色名标签
-        g.selectAll('.lbl-char')
+        // 角色名标签（X 轴下方）：实测字宽 → 相邻案例名互压时自动错到第二行（不再横向挤压）
+        const CHAR_ROW_H = 18;    // 行距
+        const CHAR_ROW_GAP = 8;   // 同行最小水平间隙
+        const charY = h + 62;
+        const charSel = g.selectAll('.lbl-char')
             .data(cases).enter().append('text')
             .attr('class', 'lbl-char')
             .attr('x', d => x('案' + d.n))
-            .attr('y', h + 44)
+            .attr('y', charY)
             .attr('text-anchor', 'middle')
             .style('font-size', '10.5px')
             .style('font-weight', '600')
             .style('fill', 'var(--ink)')
             .text(d => d.character);
+
+        function layoutCharRows() {
+            const els = charSel.nodes();
+            const rows = [];   // screen rects of the names already placed in each row
+            els.forEach((el) => {
+                const b = el.getBoundingClientRect();
+                // 同行保持至少 CHAR_ROW_GAP 水平间隙（与行号无关 ⇒ 重跑幂等）
+                const clash = (r) => rows[r].some(p => b.left < p.right + CHAR_ROW_GAP);
+                let row = 0;
+                while (row < rows.length && clash(row)) row++;
+                (rows[row] = rows[row] || []).push(b);
+                el.setAttribute('y', charY + row * CHAR_ROW_H);
+            });
+        }
+        layoutCharRows();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutCharRows);
     }
 
     function renderRegistryTable(data) {
@@ -1126,7 +1145,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             });
 
         // 标签：karma_type + 案例名
-        slices.append('text')
+        const karmaLabels = slices.append('text')
+            .attr('class', 'lbl-karma-type')
             .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
@@ -1134,6 +1154,30 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style('fill', 'var(--ink)')
             .text(d => d.data.karma_type)
             .style('pointer-events', 'none');
+
+        // 横向防重叠：同环标签互压者沿半径外移（按实测字宽判定·webfont 就绪后复测一次）
+        function layoutKarmaLabels() {
+            const placed = [];
+            karmaLabels.each(function (d) {
+                const el = this;
+                const c = arcLabel.centroid(d);
+                const base = Math.hypot(c[0], c[1]) || 1;
+                let rr = base;
+                const put = (v) => d3.select(el).attr('transform', `translate(${c[0] * v / base},${c[1] * v / base})`);
+                put(rr);
+                let b = el.getBoundingClientRect();
+                for (let guard = 0; guard < 12; guard++) {
+                    const hit = placed.some(p => !(b.right + 2 <= p.left || b.left >= p.right + 2 || b.bottom + 2 <= p.top || b.top >= p.bottom + 2));
+                    if (!hit) break;
+                    rr += 10;
+                    put(rr);
+                    b = el.getBoundingClientRect();
+                }
+                placed.push(b);
+            });
+        }
+        layoutKarmaLabels();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutKarmaLabels);
 
         // 中心标签
         g.append('text')
@@ -1365,7 +1409,20 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const layerGap = 12;
         const totalH = orderedRealms.length * layerH + (orderedRealms.length - 1) * layerGap;
         const cx = W / 2;
-        const maxWidth = W * 0.85;
+        // 为右侧「● 取经团队 N 人」标注预留边距 → 最宽层标注留在 svg 视窗内（不再右溢被裁）
+        const badgeTexts = orderedRealms.map(r => '● ' + (r.in_pilgrim_team > 0 ? `取经团队 ${r.in_pilgrim_team} 人` : '取经团队 0 人'));
+        const badgeProbe = g.append('text')
+            .attr('visibility', 'hidden')
+            .style('font-size', '11px')
+            .style('font-weight', '600');
+        let badgeW = 0;
+        badgeTexts.forEach(t => {
+            badgeProbe.text(t);
+            badgeW = Math.max(badgeW, badgeProbe.node().getBoundingClientRect().width);
+        });
+        badgeProbe.remove();
+        const sideReserve = Math.max(badgeW + 24, 120);   // 序号 / 取经团队标注的侧边预留
+        const maxWidth = Math.min(W * 0.85, W - 2 * sideReserve);
         const minWidth = 90;
 
         // 颜色映射：善道（蓝）/ 半善（绿）/ 恶道（红）

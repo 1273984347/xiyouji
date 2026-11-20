@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+t6jAwWFWETMoqQOxzorRMAHrg+wyUWuQ6hosHTQXUE=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+nICi7/Gcv8/uhEe+YgY4FC3I0VVWi2OGERhpAXQMbs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪女性群体关系图 · 详解西游记</title>
@@ -360,7 +360,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <div class="chart-block">
     <div class="chart-title">女妖出场回目与命运时间线</div>
     <div class="chart-caption">X 轴：回目 · 节点大小=综合分 · 颜色=群体类型 · hover 显示命运归途</div>
-    <svg id="chart-timeline" class="chart-svg" data-audit-skip width="100%" height="540"></svg>
+    <svg id="chart-timeline" class="chart-svg" data-audit-skip width="100%" height="580"></svg>
     <div class="legend-row" id="timeline-legend"></div>
   </div>
 </section>
@@ -1772,10 +1772,10 @@ function renderTimeline(timelineData) {
   }
 
   const width = +svg.node().clientWidth || 800;
-  const height = 540;
+  const height = 580;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  const margin = { top: 50, right: 50, bottom: 100, left: 70 };
+  const margin = { top: 50, right: 50, bottom: 140, left: 70 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
 
@@ -1876,23 +1876,52 @@ function renderTimeline(timelineData) {
   }
 
   // 回目标签（X 轴下方）
-  g.selectAll('.chapter-label')
+  // —— 标签避让（行分派法·W1266 波三 OVL 族样板·同 data/intertextuality-network.html）——
+  // 事实：X 轴刻度标签为旋转排版（bbox 向下伸 ≈30px）⇒ 回目标签须另起一行（基线 = innerH+AXIS_LABEL_ROW）；
+  //       同回多节点只留一个标签（其余 display:none·完整信息留在 title）⇒ 不再出现「第72回×7」自重叠；
+  //       相邻回目标签水平互压时按 x 升序分派到下一行（间隙 4px·行高 14px）。
+  const AXIS_LABEL_ROW = 50, LABEL_ROW_H = 14, LABEL_GAP = 4;
+  const chapterSeen = {};
+  const chapterEls = [];
+  const chapterSel = g.selectAll('.chapter-label')
     .data(sorted)
     .enter()
     .append('text')
     .attr('class', 'chapter-label')
     .attr('x', d => xScale(d.回目))
-    .attr('y', innerH + 24)
+    .attr('y', innerH + AXIS_LABEL_ROW)
     .attr('text-anchor', 'middle')
     .attr('font-size', '9px')
     .attr('fill', '#5a3828')
-    .text(d => '第' + d.回目 + '回');
+    .text(d => '第' + d.回目 + '回')
+    .each(function(d) {
+      const el = d3.select(this);
+      el.append('title').text('第' + d.回目 + '回 · ' + d.名字);
+      if (chapterSeen[d.回目]) { el.style('display', 'none'); return; }
+      chapterSeen[d.回目] = true;
+      chapterEls.push(this);
+    });
+  const chapterRows = [];
+  chapterEls.slice().sort((a, b) => a.getBBox().x - b.getBBox().x).forEach((el) => {
+    const bb = el.getBBox();
+    let r = 0;
+    while (r < chapterRows.length && chapterRows[r].some((o) => !(bb.x + bb.width + LABEL_GAP < o.x || o.x + o.width + LABEL_GAP < bb.x))) r += 1;
+    if (r === chapterRows.length) chapterRows.push([]);
+    chapterRows[r].push({ x: bb.x, width: bb.width });
+    el.setAttribute('data-row', String(r));
+  });
+  const chapterRowN = Math.max(1, chapterRows.length);
+  chapterSel.attr('y', function () {
+    const r = this.getAttribute('data-row');
+    return innerH + AXIS_LABEL_ROW + (r === null ? 0 : (+r) * LABEL_ROW_H);
+  });
 
   // 命运标签（节点下方第二行）
-  // W553 A-3：短文案（去结尾「消灭」）+ 同回同命运去重 + 行内水平不足时错行；title 保留完整命运。
+  // W553 A-3：短文案（去结尾「消灭」）+ 同回同命运去重；title 保留完整命运。
+  // W1286：随回目标签行数下移（命运标签与回目标签同 x ⇒ 必须排在回目标签行之下）+ 同样的行分派。
   // 隐藏型 audit 补丁对本 svg 由 data-audit-skip 跳过。
   const fateSeen = {};
-  const fateRows = [{ y: innerH + 40, right: -1e9 }, { y: innerH + 54, right: -1e9 }];
+  const fateBase = innerH + AXIS_LABEL_ROW + chapterRowN * LABEL_ROW_H + 8;
   const fateEls = [];
   g.selectAll('.fate-label')
     .data(sorted)
@@ -1900,7 +1929,7 @@ function renderTimeline(timelineData) {
     .append('text')
     .attr('class', 'fate-label')
     .attr('x', d => xScale(d.回目))
-    .attr('y', innerH + 40)
+    .attr('y', fateBase)
     .attr('text-anchor', 'middle')
     .attr('font-size', '8px')
     .attr('fill', '#8a7a5a')
@@ -1914,16 +1943,20 @@ function renderTimeline(timelineData) {
       el.append('title').text(d.名字 + ' — ' + d.命运);
       fateEls.push(this);
     });
-  fateEls.forEach(function(t) {
-    const bb = t.getBBox(); // 同一父 g 坐标系内可比
-    const cx = bb.x + bb.width / 2;
-    const half = bb.width / 2;
-    let row = fateRows.find(function(r) { return cx - half >= r.right + 8; });
-    if (!row) row = fateRows[0];
-    t.setAttribute('y', row.y);
-    row.right = cx + half;
+  const fateRows = [];
+  fateEls.slice().sort((a, b) => a.getBBox().x - b.getBBox().x).forEach((el) => {
+    const bb = el.getBBox();
+    let r = 0;
+    while (r < fateRows.length && fateRows[r].some((o) => !(bb.x + bb.width + LABEL_GAP < o.x || o.x + o.width + LABEL_GAP < bb.x))) r += 1;
+    if (r === fateRows.length) fateRows.push([]);
+    fateRows[r].push({ x: bb.x, width: bb.width });
+    el.setAttribute('data-row', String(r));
   });
-
+  const fateRowN = Math.max(1, fateRows.length);
+  g.selectAll('.fate-label').attr('y', function () {
+    const r = this.getAttribute('data-row');
+    return fateBase + (r === null ? 0 : (+r) * LABEL_ROW_H);
+  });
   // X 轴
   g.append('g')
     .attr('transform', `translate(0,${innerH})`)
@@ -1937,7 +1970,7 @@ function renderTimeline(timelineData) {
 
   // 轴标题
   g.append('text')
-    .attr('x', innerW / 2).attr('y', innerH + 80)
+    .attr('x', innerW / 2).attr('y', fateBase + (fateRowN - 1) * LABEL_ROW_H + 26)
     .attr('text-anchor', 'middle')
     .attr('font-size', '12px')
     .attr('fill', '#8a7a5a')

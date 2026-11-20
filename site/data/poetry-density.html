@@ -25,7 +25,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-BPhExW5qguRTv4DY2UUnf05C0Qyn1cMGwvfmIDlXZQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Cj6V+0zra1IxiaH2VXiSSQwedsed7yVgZ8tHxnM08cM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>百回诗词密度 · 详解西游记</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/poetry-density.html">
@@ -551,6 +551,12 @@
                 .attr('x', function(d) { return x(d.c) - 4.6; })
                 .attr('width', 9.2).attr('y', M.top).attr('height', ih)
                 .attr('fill', 'transparent')
+                .each(function(d) {
+                    d3.select(this).append('title')
+                        .text('第' + d.c + '回 · ' + d.t + ' · 韵文占正文 ' + d.r +
+                            '%（' + d.s + ' 句 / ' + d.b + ' 段）' +
+                            (d.k && d.k !== '-' ? ' · 词牌：' + d.k : ''));
+                })
                 .on('pointerenter', function(ev, d) {
                     tip.html('<strong>第' + d.c + '回</strong> ' + d.t +
                         '<br>韵文占正文 ' + d.r + '% · ' + d.s + ' 句 / ' + d.b + ' 段' +

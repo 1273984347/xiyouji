@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-FuKSeHThz3aAf4rOGsiA8Tii3iHmyCNSJ1JQiOwtlIw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-TjJ7tIU/sCSkd3MrMkkjNS1YlBAQWodIrUCQNZU1h00=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Music, Sound & Chapter Rhythm · Annotated Journey to the West</title>
@@ -405,7 +405,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>xiyouji/</code> directory)
+            Data source: <code>../en/json/music_sounds.json</code>, <code>../en/json/chapter_rhythm.json</code>, <code>../en/json/chapter_symmetry.json</code>, <code>../en/json/chapter_movement.json</code>, <code>../en/json/music_structure_summary.json</code> — embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>xiyouji/</code> directory)
         </div>
 
         <!-- KPI 概要栏 -->
@@ -1444,7 +1444,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const wrap = document.getElementById("rhythm-chart");
         const W = Math.max(200, wrap.clientWidth || 1100);
         const H = 380;
-        const m = { top: 40, right: 28, bottom: 48, left: 46 };
+        const m = { top: 40, right: 48, bottom: 48, left: 46 };
         const iw = W - m.left - m.right, ih = H - m.top - m.bottom;
 
         const svg = d3.select("#rhythm-svg").attr("viewBox", `0 0 ${W} ${H}`);
@@ -1642,8 +1642,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         });
 
         const innerH = rows.length * rowH;
-        const H = innerH + 24;
-        const m = { top: 16, right: 40, bottom: 8, left: 200 };
+        const H = innerH + 62;
+        const m = { top: 16, right: 40, bottom: 8, left: 240 };
         const iw = W - m.left - m.right;
 
         const svg = d3.select("#sound-svg").attr("viewBox", `0 0 ${W} ${H}`);

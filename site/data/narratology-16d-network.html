@@ -346,6 +346,30 @@ header.hero .meta {
   
   .theorist-list { grid-template-columns: 1fr; }
 }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -514,6 +538,20 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <div id="theorist-list" class="theorist-list"></div>
   </div>
 </section>
+
+        <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
+        <section class="section">
+            <h2 class="section-title">柒 · 关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自十六维框架总览 / 关系图 / 三层桑基 / 雷达 / 演化时间线的实际取值</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>十六维的扩展：</strong>16 个维度里七感叙事学占 7、文本叙事学占 3、元叙事学占 2，性别、文化、情感、历史各 1；新增的 W182 至 W185 四个维度全部落在 2026 年 6 月 15 日至 7 月 5 日之间。</div>
+                <div class="insight-item"><strong>「文」仍是峰值：</strong>W169 互文性叙事学理论深度 10、西游应用 9、学术影响 10、术语数 9，四项都居十六维之首；「嗅」W164 理论深度 6、学术影响 6 垫底，「触」W165 的西游应用只有 5。</div>
+                <div class="insight-item"><strong>关联重心转向跨域：</strong>28 条关联边中扩展跨域占 14、理论文本占 8、时空感官占 6；最强三条并列 88（时↔空、文↔修、元叙事↔不可靠），最弱是性别↔底层叙事 65。</div>
+                <div class="insight-item"><strong>外部专题被接进框架：</strong>16 维网络另引入创伤叙事、底层叙事、神话叙事、思想史、接受美学、伦理叙事六个关联专题节点，其中情感↔历史 85、不可靠↔修 85 是两条跨维度主干。</div>
+            </div>
+        </section>
+
+<figure class="viz-illustration" aria-hidden="true"></section>
 <figure class="viz-illustration" aria-hidden="true">
     <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
 </figure>

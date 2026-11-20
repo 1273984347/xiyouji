@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-rYV5l5PB40IUygKgrYdbgxrcRFXjOz6b5h65LbyQKd8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-iRit+nEg4qIrw9dYgr4LK5Ug0RQQ4FNMYZdHx5+nowQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Philosophy and Mind · Annotated Journey to the West</title>
@@ -391,6 +391,12 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .chart-block { padding: var(--space-4); }
         }
     
+        /* W1286 · 第 83 门禁（SVG 标签重叠）：热力图 x 轴阶段名较长，隐藏型 audit 补丁的 CSS 旋转
+           （rotate -40deg · transform-origin:top center）会把标签右上端翘进格子区·压住格内数值
+           （「3. Early Pilgrimage · Submission」×「4」交集/较小者 > 0.30 ⇒ 判违例）。
+           修法：该图 x 轴不参与隐藏补丁的旋转（!important 覆盖补丁的行内 transform），
+           改由本页折行（≤2 行）+ 水平排布承载——不削弱补丁阈值、不删文案。 */
+        #chart-monkey-heat g.axis-x > g.tick > text { transform: none !important; }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -1220,6 +1226,42 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     }
 
     // ===== Chart 3: Mind-nature dimension heatmap =====
+    /* ============================================================
+       W1286 · 第 83 门禁（SVG 标签裁切与重叠）——x 轴长标签按词界折行
+       隐藏型 audit 补丁把 x 轴刻度标签 CSS 旋转 -38°（transform-origin: top center），
+       斜排后标签横向外扩 ≈ 0.9×字宽 ⇒ 长标签之间互压、也压住轴下说明文字
+       （相交面积/较小标签面积 > 0.30 ⇒ 判违例）。
+       修法：按词界折成 ≤2 行（不删字·不换文案·两行拼回即原文）⇒ 单行宽减半、不再互压。
+       ============================================================ */
+    function w1286WrapTicks(sel, maxChars) {
+        const nodes = (sel && sel.nodes) ? sel.nodes() : (sel || []);
+        Array.prototype.slice.call(nodes).forEach(function (t) {
+            const full = (t.textContent || '').trim();
+            const words = full.split(/\s+/);
+            if (words.length < 2) return;
+            let best = null;
+            for (let i = 1; i < words.length; i++) {
+                const l1 = words.slice(0, i).join(' ');
+                const l2 = words.slice(i).join(' ');
+                if (l1.length > maxChars || l2.length > maxChars) continue;
+                const m = Math.max(l1.length, l2.length);
+                if (!best || m < best.m) best = { a: l1, b: l2, m: m };
+            }
+            if (!best) return;
+            const x0 = t.getAttribute('x');
+            while (t.firstChild) t.removeChild(t.firstChild);
+            const mk = function (s, dy) {
+                const sp = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+                sp.setAttribute('x', x0 === null ? '0' : x0);
+                sp.setAttribute('dy', dy);
+                sp.textContent = s;
+                t.appendChild(sp);
+            };
+            mk(best.a, '0.71em');
+            mk(best.b, '1.2em');
+        });
+    }
+
     function renderMonkeyHeat(data) {
         const svg = d3.select('#chart-monkey-heat');
         svg.selectAll('*').remove();
@@ -1250,13 +1292,17 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .clamp(true);
 
         // X axis
-        g.append('g').attr('class', 'axis')
+        const xAxisSel = g.append('g').attr('class', 'axis axis-x')
             .attr('transform', `translate(0,${h})`)
             .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
             .selectAll('text')
             .style('font-size', '10px')
             .attr('transform', 'rotate(-12)')
-            .style('text-anchor', 'end');
+            /* W1286：标签改为水平居中排布（配合 CSS 覆盖补丁旋转）⇒ 与相邻列标签不再首尾相接 */
+            .style('text-anchor', 'middle');
+        /* W1286：阶段名过长（斜排后横向外扩 ≈ 0.9×字宽）⇒ 相邻阶段名互压、并压住轴下说明文字
+           ⇒ 按词界折成 ≤2 行（原文一字不减）。 */
+        w1286WrapTicks(xAxisSel, 26);
 
         // Y axis
         g.append('g').attr('class', 'axis')

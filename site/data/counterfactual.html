@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cdEafhuBjbdlPYphVVdjC7C2qdLuAuKNPyWvon46LWo=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-bgz8Bkl7axkoKG4Q7d379p4ln4X1i3R+OPabLoZFhmc=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>反事实推断 · 详解西游记</title>
@@ -733,6 +733,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke", "#fff")
             .attr("stroke-width", 2)
             .attr("d", arc)
+            .each(function(d) {
+                d3.select(this).append("title")
+                    .text(`${d.data[0]}：${d.data[1]} 个场景`);
+            })
             .style("opacity", 0)
             .transition()
             .duration(MOYUN_RM?0:600)
@@ -843,7 +847,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("width",Math.max(0, x.bandwidth()))
             .attr("height", 0)
             .attr("fill", d => CATEGORY_COLORS[d.category] || "#999")
-            .attr("rx", 3);
+            .attr("rx", 3)
+            .each(function(d) {
+                d3.select(this).append("title")
+                    .text(`${d.category}：${d.count} 个场景`);
+            });
 
         bars.transition()
             .duration(MOYUN_RM?0:600)

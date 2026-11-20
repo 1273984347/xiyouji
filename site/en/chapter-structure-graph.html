@@ -138,6 +138,63 @@
             width: 14px; height: 14px; border-radius: var(--radius-sm) ; display: inline-block;
         }
         .legend-swatch.line { height: 3px; width: 18px; }
+        /* 数据来源说明 */
+        .notice {
+            background: var(--paper-warm);
+            border: 1px solid var(--accent-soft);
+            border-left: 4px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-5);
+            line-height: 1.8;
+        }
+        .notice strong { color: var(--accent); }
+        .notice code {
+            background: var(--paper-warm);
+            padding: var(--space-1) 6px;
+            border-radius: var(--radius-sm);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        /* Key Insights */
+        .insight-box {
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
+            border-left: 4px solid var(--accent);
+            padding: var(--space-5) var(--space-6);
+            border-radius: var(--radius-md);
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: var(--space-3);
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: var(--space-3) 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li .marker {
+            color: var(--accent-text);
+            font-weight: 600;
+            flex-shrink: 0;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .insight-box li strong {
+            color: var(--accent-text);
+            font-weight: 600;
+        }
         .cluster-node circle { cursor: pointer; }
         .cluster-link {
             fill: none;
@@ -216,6 +273,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
+        <div class="notice" id="dataSource">
+            Data source: derived from this project's 100-chapter corpus of Journey to the West (Wu Cheng'en) — the embedded snapshot on this page carries the 8-cluster tree, the 10&times;10 couplet-regularity matrix and the per-chapter word counts; the same corpus' per-chapter rhythm series is published as <code>site/en/json/chapter_rhythm.json</code>.
+        </div>
+
         <!-- KPI 概要栏：6 卡片 -->
         <div class="kpi-row" id="kpiRow"></div>
 
@@ -262,6 +323,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <a href="../dashboard.html" style="color: var(--accent-primary); text-decoration:none;">← Back to Dashboard</a> ·
                 <a href="../data/timeline.html" lang="zh-CN" style="color: var(--accent-primary); text-decoration:none;">→ Timeline</a>
             </p>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <h4>What the structural skeleton of the hundred chapters looks like</h4>
+                <ul>
+                    <li><span class="marker">01</span><span><strong>The book closes with its heaviest cluster</strong> — "Ascension to Buddhahood" (Ch.78–97) holds 20 chapters, a fifth of the novel, while "Final Scroll, Truth Attained" (Ch.98–100) holds only 3; the three closing clusters (Ch.59–100) together carry 42 of the 100 chapters.</span></li>
+                    <li><span class="marker">02</span><span><strong>Longest and shortest chapters sit in opposite narrative phases</strong> — Ch.41 is the peak at 9,820 words inside "Heavenly Demons" (Ch.27–42), and Ch.9 is the floor at 4,150 words inside "Pilgrimage Begins" (Ch.8–12); the opening phase is the leanest stretch of the book.</span></li>
+                    <li><span class="marker">03</span><span><strong>The couplet matrix is a length-matching rule, not a style rule</strong> — its peak runs along the diagonal (upper and lower couplet of equal character count, score near 100) and falls about 12 points per step of length mismatch down to a floor near 15, so a chapter's couplet neatness is decided by whether the two lines match in length.</span></li>
+                    <li><span class="marker">04</span><span><strong>92 of the 100 chapter titles are couplet-regular</strong> — the 8 exceptions are the structural minority, and they fall where the narrative turns from set-piece episodes to the closing ascent.</span></li>
+                </ul>
+            </div>
         </section>
     </main>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-RC5r3CqVcp3f88t3ouZUpdRlebLtJ7qfRCblSERFlmY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-o5ICXQNYDCwcQk+kaa+SWQq7WgzRQgDBadqTUSFJTNo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Interactive Journey Map · Annotated Journey to the West</title>
@@ -184,6 +184,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="kpi-row" id="kpiRow"></div>
 
+        <p class="text-sm text-muted"><strong>Data source:</strong> the published dataset <code>dataset/journey-map-interactive.json</code> — 17 route nodes with their coordinates, leg durations and ordeal annotations, plus the 5 KPI readings — embedded in-page as <code>EMBEDDED_DATA</code> so the map stays readable offline.</p>
+
         <!-- 控制面板 -->
         <section class="section">
             <h2 class="section-title">Timeline Controls</h2>
@@ -222,6 +224,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="chart-block">
                 <svg id="chart-timeline" width="1150" height="240"></svg>
             </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="section-sub">The route resolves into 17 geolocated nodes between 78°E (the Spirit Mountain) and 108.9°E (Chang’an), spanning 26.5°N–34.3°N, and 8 of them carry an ordeal annotation — 5 of those 8 sit at or after Ch. 40 (Mount Hao, the River of Heaven, Flaming Mountain, the Lesser Thunderclap Monastery and the Lion-Camel Ridge), so the ordeal structure is back-loaded rather than spread evenly along the road. The timeline chart says the same in time: the Lion-Camel Ridge leg (Ch. 74–77) is the longest bar at 4 months, followed by three 3-month legs (Black Pine Forest, Mount Hao, Flaming Mountain), while Chang’an itself carries 0. Read against the KPI row — 108,000 li (≈ 54,000 km) in 14 years, about 5,040 days — the map’s real story is concentration: a handful of nodes carry the distance, the danger and the time.</div>
         </section>
 
         <section class="section">
@@ -577,16 +584,48 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 if (d.isHardship) showHardshipDetail(d);
             });
 
-        // X 轴
-        g.append("g")
+        // X 轴（节点名：横向错行排布 · 相邻标签包围盒不相交）
+        // W1286 G9：原 -30°（隐藏型 audit 补丁再改写为 -38°/-40°）旋转标签包围盒两两相交（12 对违例）
+        //   ⇒ 改横向 + 逐标签实测宽度落行（同行与上一标签横向不重叠优先，否则取重叠更小的一行）
+        const xAxis = g.append("g")
             .attr("transform", `translate(0,${innerH})`)
-            .call(d3.axisBottom(x))
+            .call(d3.axisBottom(x));
+        xAxis.selectAll("text").remove();
+        const nodeLabels = g.append("g")
+            .attr("class", "axis-label")
+            .attr("transform", `translate(0,${innerH})`)
             .selectAll("text")
+            .data(data.nodes)
+            .enter()
+            .append("text")
+            .attr("x", d => x(d.name) + x.bandwidth() / 2)
+            .attr("y", 13)
+            .attr("text-anchor", "middle")
             .style("font-size", "10px")
             .style("font-family", "Noto Serif SC, serif")
-            .attr("dx", "-0.5em")
-            .attr("dy", "0.5em")
-            .attr("transform", "rotate(-30)");
+            .text(d => d.name);
+        function layoutNodeLabels() {
+            const rows = [{ y: 13, last: null }, { y: 29, last: null }, { y: 45, last: null }];
+            nodeLabels.each(function() {
+                const bb = this.getBBox();
+                const cx = bb.x + bb.width / 2;
+                const half = bb.width / 2;
+                let best = rows[0];
+                let bestOv = Infinity;
+                for (const row of rows) {
+                    let ov = 0;
+                    if (row.last) {
+                        ov = Math.max(0, Math.min(cx + half, row.last.cx + row.last.half) - Math.max(cx - half, row.last.cx - row.last.half));
+                    }
+                    if (ov === 0) { best = row; bestOv = 0; break; }
+                    if (ov < bestOv) { bestOv = ov; best = row; }
+                }
+                this.setAttribute("y", best.y);
+                best.last = { cx: cx, half: half };
+            });
+        }
+        layoutNodeLabels();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutNodeLabels);
 
         // Y 轴
         g.append("g")
@@ -594,7 +633,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         // 轴标题
         g.append("text")
-            .attr("x", innerW / 2).attr("y", innerH + 50)
+            .attr("x", innerW / 2).attr("y", innerH + 62)
             .attr("text-anchor", "middle")
             .style("font-size", "12px").style("fill", "#2c3e50")
             .text("Pilgrimage nodes");

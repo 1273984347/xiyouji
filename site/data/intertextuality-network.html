@@ -296,6 +296,30 @@ header.hero .meta {
   
   .theorist-list { grid-template-columns: 1fr; }
 }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">
 /* injected label-halo for overlap readability */
@@ -461,6 +485,20 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <div id="theorist-list" class="theorist-list"></div>
   </div>
 </section>
+
+        <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
+        <section class="section">
+            <h2 class="section-title">柒 · 关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自互文网络 / 五类型矩阵 / 雷达 / 时间线的实际取值</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>强度排序：</strong>七部前置文本的互文强度以《大唐三藏取经诗话》92 分居首，其后依次是《西游记杂剧》88、《佛典》85、《道典》82、《大慈恩寺三藏法师传》80、《大唐西域记》75、《朴通事谚解》65；目标文本《西游记》自身记 100 分（1592 年世德堂本）。</div>
+                <div class="insight-item"><strong>五类关系失衡：</strong>热奈特五类型矩阵合计 60 条关系 —— 引用 15 条最多，改造 14 条次之，暗用 12 条、翻译 10 条、评论 9 条最少；改造、暗用两项合计 26 条，占全部关系的 43%。</div>
+                <div class="insight-item"><strong>诗话领先但不全面：</strong>《大唐三藏取经诗话》在结构借用 85、主题继承 90、人物转化 95、情节改写 88 四项雷达指标上全部居首；而《朴通事谚解》的语言引用高达 95（全书最高），结构借用却只有 30、情节改写 25（全书最低）—— 一部靠结构、一部靠语言，两者的借鉴方式正好倒置。</div>
+                <div class="insight-item"><strong>时间线末位是结果而非来源：</strong>时间线最末的《朴通事谚解》定于约 1670 年，晚于《西游记》1592 年成书，故其互文类型标为海外传播，与它语言引用 95、结构借用 30 的雷达形态互相印证。</div>
+            </div>
+        </section>
+
+<figure class="viz-illustration" aria-hidden="true"></section>
 <figure class="viz-illustration" aria-hidden="true">
     <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
 </figure>

@@ -295,6 +295,30 @@ header.hero .meta {
   
   .theorist-list { grid-template-columns: 1fr; }
 }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -455,6 +479,20 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <div id="theorist-list" class="theorist-list"></div>
   </div>
 </section>
+
+        <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
+        <section class="section">
+            <h2 class="section-title">柒 · 关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自十二维框架总览 / 关系图 / 三层桑基 / 雷达 / 演化时间线的实际取值</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>十二维的构成：</strong>12 个维度里感官类占 5（听／嗅／触／视／味）、理论类占 3（文／修／知）、时空类占 2（时／空），性别、后殖民各 1。</div>
+                <div class="insight-item"><strong>「文」全面领先：</strong>W169 互文性叙事学的四项指标全部居首 —— 理论深度 95、文本覆盖 92、跨专题关联 90、学术价值 94，术语数 9 也是十二维最多；「触」W165 则四项垫底（70／60／65／72）。</div>
+                <div class="insight-item"><strong>关联边的重心在两端：</strong>22 条关联边中最强的是时↔空 88、文↔修 88，感官类内部最强是听↔视 85，最弱为嗅↔知 68。</div>
+                <div class="insight-item"><strong>演化时间线单向前推：</strong>时间线上 15 个专题从 W161 时间叙事学（2025 年 3 月 10 日）排到 W175 十二维叙事学关系图谱（2025 年 7 月 28 日），四个多月里从感官维度一路长到集成可视化。</div>
+            </div>
+        </section>
+
+<figure class="viz-illustration" aria-hidden="true"></section>
 <figure class="viz-illustration" aria-hidden="true">
     <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
 </figure>

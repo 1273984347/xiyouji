@@ -94,6 +94,10 @@ const LIMIT = parseInt(argValue('--limit', '0'), 10) || Infinity;
 const CONC = Math.max(1, parseInt(argValue('--conc', '6'), 10) || 6);
 const OUT = path.resolve(ROOT, argValue('--out', 'scripts/output/svg_text_contrast_report.json'));
 const BG_MODE_RAW = String(argValue('--bg-mode', 'body')).toLowerCase();
+// W1286 L-01：--pages 限定扫描页（逗号分隔 rel 路径）· --no-tool 禁用公共工具 label-contrast.js
+//   ⇒ 用途：复现「公共工具失效时暴露」的**源级**标签低对比（官方口径同源·非临时脚本）
+const ONLY_PAGES = String(argValue('--pages', '')).trim();
+const NO_TOOL = process.argv.indexOf('--no-tool') > -1;
 const BG_MODE = BG_MODE_RAW === 'backdrop' ? 'backdrop' : BG_MODE_RAW === 'graphic' ? 'graphic' : 'body';
 
 const STATES = [
@@ -740,7 +744,10 @@ function listPages() {
       out.push({ rel: label ? label + '/' + f : f, abs });
     }
   }
-  return out.slice(0, LIMIT);
+  const list = out.slice(0, LIMIT);
+  if (!ONLY_PAGES) return list;
+  const want = new Set(ONLY_PAGES.split(',').map((s) => s.trim()).filter(Boolean));
+  return list.filter((p) => want.has(p.rel));
 }
 
 /**
@@ -821,6 +828,8 @@ async function measureState(context, pageRec, state) {
   page.on('pageerror', (e) => errors.push(String(e.message).slice(0, 80)));
   const url = 'file:///' + pageRec.abs.replace(/\\/g, '/');
   try {
+    // W1286 L-01：--no-tool ⇒ 拦掉公共工具 label-contrast.js（模拟「工具失效」场景）
+    if (NO_TOOL) await page.route('**/label-contrast.js', (r) => r.abort());
     await page.emulateMedia({ colorScheme: state.colorScheme });
     await page.setViewportSize(state.viewport);
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
@@ -932,6 +941,8 @@ async function main() {
     threshold: THRESHOLD,
     scope: SCOPE,
     bg_mode: BG_MODE,
+    no_tool: NO_TOOL,
+    only_pages: ONLY_PAGES || null,
     states: STATES.map((s) => s.id),
     pages_scanned: pages.length,
     rows: rows.length,

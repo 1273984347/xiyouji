@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-NdOg5BctAysH38uEXmOqohfge1ax76nmmBrA11n4dW4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-FRghEcypJnZLcFvUfYcvwGfQTEY50PRFExRkkm0uLL4=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-UEFEUy/NaixogY5IOIGqJDTuTfbvDTqDh4WbaKKGS1c=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-FRghEcypJnZLcFvUfYcvwGfQTEY50PRFExRkkm0uLL4=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Power &amp; Resources · Annotated Journey to the West</title>
@@ -437,6 +437,11 @@
             .chart-block { padding: var(--space-4); }
         }
     
+        /* W1286 · 第 83 门禁（SVG 标签重叠）：晋升渠道图的 x 轴标签不参与隐藏补丁的 CSS 旋转
+           （补丁的 rotate -38deg + transform-origin:top center 会把标签右上端翘进绘图区·压住
+             「1%」「2%」等数值标签，补丁还会把被压的小数值标签整段隐藏）
+           ⇒ 改为页内折行（≤2 行）+ 水平排布：数值标签与轴标签彻底分层。 */
+        #chart-promotion-bar g.axis-x > g.tick > text { transform: none !important; }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -1419,6 +1424,97 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         list.selectAll('li').data(data.structure_insights).enter().append('li').text(d => d);
     }
 
+    /* ============================================================
+       W1286 · 第 83 门禁（SVG 标签裁切与重叠）——数值标签让位
+       隐藏型 audit 补丁把 x 轴刻度标签 CSS 旋转 -38°（transform-origin: top center），
+       标签右上端会翘到轴线之上约 0.31×字宽 ⇒ 落在轴线附近的数值标签（L0 / 0 / 1% / 2%）
+       被压住（相交面积/较小标签面积 > 0.30 ⇒ 判违例）。
+       修法（页内绘图代码·不硬编码坐标）：按实测 bbox 把数值标签沿本地 y 上抬，
+       抬到「交集/较小者 ≤ 0.15」为止——随字号与数据自适应，且幂等（重复调用不再位移）。
+       ============================================================ */
+    function w1286LiftValueLabels(svg, sel) {
+        if (!svg) return;
+        const axisTexts = Array.prototype.slice.call(svg.querySelectorAll('g.axis text'));
+        if (!axisTexts.length) return;
+        Array.prototype.slice.call(svg.querySelectorAll(sel)).forEach(function (t) {
+            const vr = t.getBoundingClientRect();
+            if (!vr.width || !vr.height) return;
+            let lift = 0;
+            axisTexts.forEach(function (a) {
+                if (a === t) return;
+                const ar = a.getBoundingClientRect();
+                const ix = Math.min(vr.right, ar.right) - Math.max(vr.left, ar.left);
+                const iy = Math.min(vr.bottom, ar.bottom) - Math.max(vr.top, ar.top);
+                if (ix <= 0 || iy <= 0) return;
+                const small = Math.min(vr.width * vr.height, ar.width * ar.height);
+                if (small <= 0) return;
+                const hMax = 0.15 * small / ix;   /* 目标：交集/较小者 ≤ 0.15 */
+                const need = iy - hMax + 1;       /* 需要的上抬量（屏幕 px） */
+                if (need > lift) lift = need;
+            });
+            if (lift <= 0) return;
+            const ctm = svg.getScreenCTM();
+            const scale = ctm ? Math.sqrt(Math.abs(ctm.a * ctm.d - ctm.b * ctm.c)) : 1;
+            t.setAttribute('y', (+t.getAttribute('y') || 0) - lift / (scale || 1));
+        });
+    }
+    function w1286WatchValueLabels(svgId, sel) {
+        const svg = document.getElementById(svgId);
+        if (!svg) return;
+        const apply = function () { w1286LiftValueLabels(svg, sel); };
+        apply();
+        if (window.MutationObserver) {
+            const mo = new MutationObserver(apply);
+            mo.observe(svg, { attributes: true, childList: true, subtree: true, characterData: true });
+        }
+        [1200, 3000, 6000, 9000, 12000].forEach(function (ms) { setTimeout(apply, ms); });
+    }
+    function w1286StartValueLabelWatch() {
+        w1286WatchValueLabels('chart-promotion-bar', '.val-rate');
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', w1286StartValueLabelWatch);
+    } else {
+        w1286StartValueLabelWatch();
+    }
+
+    /* ============================================================
+       W1286 · 第 83 门禁（SVG 标签裁切与重叠）——x 轴长标签按词界折行
+       隐藏型 audit 补丁把 x 轴刻度标签 CSS 旋转 -38°（transform-origin: top center），
+       标签右上端翘到轴线之上约 0.31×字宽 ⇒ ① 压住轴线附近的数值标签（L0 / 0 / 1% / 2%），
+       ② 补丁还会把被压住的小数值标签整段隐藏；③ 相邻长标签互压（交集/较小者 > 0.30 ⇒ 判违例）。
+       修法：按词界折成 ≤2 行（不删字·不换文案·两行拼回即原文）+ 该轴不参与隐藏补丁的旋转
+       （页内 CSS !important 覆盖补丁的行内 transform）⇒ 数值标签与轴标签彻底分层、互不压。
+       ============================================================ */
+    function w1286WrapTicks(sel, maxChars) {
+        const nodes = (sel && sel.nodes) ? sel.nodes() : (sel || []);
+        Array.prototype.slice.call(nodes).forEach(function (t) {
+            const full = (t.textContent || '').trim();
+            const words = full.split(/\s+/);
+            if (words.length < 2) return;
+            let best = null;
+            for (let i = 1; i < words.length; i++) {
+                const l1 = words.slice(0, i).join(' ');
+                const l2 = words.slice(i).join(' ');
+                if (l1.length > maxChars || l2.length > maxChars) continue;
+                const m = Math.max(l1.length, l2.length);
+                if (!best || m < best.m) best = { a: l1, b: l2, m: m };
+            }
+            if (!best) return;
+            const x0 = t.getAttribute('x');
+            while (t.firstChild) t.removeChild(t.firstChild);
+            const mk = function (s, dy) {
+                const sp = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+                sp.setAttribute('x', x0 === null ? '0' : x0);
+                sp.setAttribute('dy', dy);
+                sp.textContent = s;
+                t.appendChild(sp);
+            };
+            mk(best.a, '0.71em');
+            mk(best.b, '1.2em');
+        });
+    }
+
     // ===== Section 2: 8 晋升Channel success_rate 柱状图（按 success_rate 排序 + duration 标注）=====
     function renderPromotionBar(data) {
         const svg = d3.select('#chart-promotion-bar');
@@ -1445,7 +1541,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
 
         // axes
-        g.append('g').attr('class', 'axis')
+        const promoXAxis = g.append('g').attr('class', 'axis axis-x')
             .attr('transform', `translate(0,${h})`)
             .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
             .selectAll('text')
@@ -1453,6 +1549,9 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style('font-weight', '600')
             .attr('transform', 'rotate(-25)')
             .attr('text-anchor', 'end');
+        /* W1286：晋升渠道名过长 ⇒ 折成 ≤2 行并让该轴不参与隐藏补丁的旋转
+           （数值标签 1% / 2% 不再被压住、也不会被隐藏补丁整段隐藏） */
+        w1286WrapTicks(promoXAxis, 18);
         g.append('g').attr('class', 'axis')
             .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.0%')));
 

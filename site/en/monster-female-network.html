@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-riY9dZd/h3p/vo3yJDt1f1aEUCqzSpAB69ytbj4C8lc=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-ThY1aZ/dVICXj+uBO2mkJAx0Pyue0UsKKR6u8nrDyrM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-Y5ZQPL2xmjofhM2GIPZaFLk3BQyupLsM6YJSzbqfrFw=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-ThY1aZ/dVICXj+uBO2mkJAx0Pyue0UsKKR6u8nrDyrM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Female Network · Annotated Journey to the West</title>
@@ -339,7 +339,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <div class="chart-block">
     <div class="chart-title">Timeline of the Female Demons’ Appearances and Fates</div>
     <div class="chart-caption">X axis: chapter · node size = composite score · color = group type · hover for fate</div>
-    <svg id="chart-timeline" class="chart-svg" data-audit-skip width="100%" height="540"></svg>
+    <svg id="chart-timeline" class="chart-svg" data-audit-skip width="100%" height="590"></svg>
     <div class="legend-row" id="timeline-legend"></div>
   </div>
 </section>
@@ -1094,10 +1094,11 @@ function renderTimeline(timelineData) {
   }
 
   const width = +svg.node().clientWidth || 800;
-  const height = 540;
+  // W1286 F1：轴下标签带加高 40px（540→590·下边距 100→150）——innerH 仍为 390·绘图区与数据坐标不变
+  const height = 590;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  const margin = { top: 50, right: 50, bottom: 100, left: 70 };
+  const margin = { top: 50, right: 50, bottom: 150, left: 70 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
 
@@ -1198,23 +1199,46 @@ function renderTimeline(timelineData) {
   }
 
   // Chapter labels (below X axis)
+  // W1286 F1：同章多节点 ⇒ 同文案自重叠（Ch. 60~Ch. 60）⇒ 同章去重 + 完整章名入 <title>；
+  // 水平防重叠（不足时错到第二行）见下方 chapterRows。
+  const chapterSeen = {};
+  const chapterEls = [];
   g.selectAll('.chapter-label')
     .data(sorted)
     .enter()
     .append('text')
     .attr('class', 'chapter-label')
     .attr('x', d => xScale(d.chapter))
-    .attr('y', innerH + 24)
+    .attr('y', innerH + 40)
     .attr('text-anchor', 'middle')
     .attr('font-size', '9px')
     .attr('fill', '#5a3828')
-    .text(d => 'Ch. ' + d.chapter);
+    .each(function(d) {
+      const el = d3.select(this);
+      if (chapterSeen[d.chapter]) { el.style('display', 'none'); return; }
+      chapterSeen[d.chapter] = true;
+      el.text('Ch. ' + d.chapter);
+      el.append('title').text(d.chapterName || ('Ch. ' + d.chapter));
+      chapterEls.push(this);
+    });
+  // 水平防重叠：行内放不下（cx - half < r.right + 8）⇒ 错到第二行；两行整体落在旋转刻度带之下·不压 fate 行
+  const chapterRows = [{ y: innerH + 40, right: -1e9 }, { y: innerH + 56, right: -1e9 }];
+  chapterEls.forEach(function(t) {
+    const bb = t.getBBox(); // 同一父 g 坐标系内可比
+    const cx = bb.x + bb.width / 2;
+    const half = bb.width / 2;
+    let row = chapterRows.find(function(r) { return cx - half >= r.right + 8; });
+    if (!row) row = chapterRows[0];
+    t.setAttribute('y', row.y);
+    row.right = cx + half;
+  });
 
   // Fate labels (second row below nodes)
   // W553 A-3：短文案（去 "Destroyed by (the )" 前缀）+ 词界折行（≤2 行）+ 同章同结局去重 + 行内水平不足时错行；
   // title 保留完整结局。隐藏型 audit 补丁对本 svg 由 data-audit-skip 跳过。
   const fateSeen = {};
-  const fateRows = [{ y: innerH + 40, right: -1e9 }, { y: innerH + 54, right: -1e9 }];
+  // W1286 F1：行距 14→28（两行标签的 bbox 纵向不相交·相邻行不再互压）·整体下移到章节标签行之下
+  const fateRows = [{ y: innerH + 78, right: -1e9 }, { y: innerH + 106, right: -1e9 }];
   const fateEls = [];
   g.selectAll('.fate-label')
     .data(sorted)
@@ -1222,7 +1246,7 @@ function renderTimeline(timelineData) {
     .append('text')
     .attr('class', 'fate-label')
     .attr('x', d => xScale(d.chapter))
-    .attr('y', innerH + 40)
+    .attr('y', innerH + 78)
     .attr('text-anchor', 'middle')
     .attr('font-size', '8px')
     .attr('fill', '#8a7a5a')
@@ -1278,7 +1302,7 @@ function renderTimeline(timelineData) {
 
   // Axis titles
   g.append('text')
-    .attr('x', innerW / 2).attr('y', innerH + 80)
+    .attr('x', innerW / 2).attr('y', innerH + 128)
     .attr('text-anchor', 'middle')
     .attr('font-size', '12px')
     .attr('fill', '#8a7a5a')

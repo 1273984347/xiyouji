@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-2+Imkzf1hp/H+u9y/WL6sMm+O0tQv/dTZ/bQtsu0/aQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-1B2DPFDBYgBypvz2He5DV9jI0/Wj9l6CQzlm1DFzTTo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Linguistics · Annotated Journey to the West</title>
@@ -749,7 +749,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="chart-block">
                 <div class="chart-title">8 Incantations · 4 Linguistic Source Share Stacked Bar Chart</div>
                 <div class="chart-caption">X-axis: 8 incantations / Y-axis: share 0-100% (red=Sanskrit, yellow=Daoist, blue=Ming, green=Classical) / labels each incantation's dominant source</div>
-                <svg id="chart-incantation-stacked" class="chart-svg" width="100%" height="400"></svg>
+                <svg id="chart-incantation-stacked" class="chart-svg" width="100%" height="420"></svg>
                 <div class="legend-row">
                     <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Sanskrit loanword</span>
                     <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>Daoist terminology</span>
@@ -792,7 +792,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="chart-block">
                 <div class="chart-title">5 Dialogue Pairs · Power Distance Comparison Bar Chart</div>
                 <div class="chart-caption">X-axis: 5 dialogue pairs (speaker→listener) / Y-axis: power_distance (0-10) / color graded by distance (green=low, yellow=mid, red=high)</div>
-                <svg id="chart-pd-bar" class="chart-svg" width="100%" height="360"></svg>
+                <svg id="chart-pd-bar" class="chart-svg" width="100%" height="380"></svg>
                 <div class="legend-row">
                     <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Low distance 0-3 (banter)</span>
                     <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>Mid distance 4-6 (polite)</span>
@@ -1810,8 +1810,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const svg = d3.select('#chart-incantation-stacked');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 900;
-        const W = Math.max(containerW, 700), H = 400;
-        const m = {top: 30, right: 30, bottom: 80, left: 60};
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 30, right: 30, bottom: 100, left: 60};
         const w = W - m.left - m.right, h = H - m.top - m.bottom;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
 
@@ -2046,8 +2046,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const svg = d3.select('#chart-pd-bar');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 900;
-        const W = Math.max(containerW, 700), H = 360;
-        const m = {top: 30, right: 30, bottom: 60, left: 60};
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 30, right: 30, bottom: 80, left: 60};
         const w = W - m.left - m.right, h = H - m.top - m.bottom;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
 

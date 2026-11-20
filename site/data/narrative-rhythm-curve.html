@@ -155,6 +155,30 @@
         .chart-grid path { stroke-width: 0; }
         
         .turning-point circle { cursor: pointer; }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -262,7 +286,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div id="turning-points-list" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px;"></div>
         </section>
 
+                <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
         <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自情节密度曲线 / 节奏热力图 / 九大转折点的实际取值</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>峰值落在第 57 回：</strong>情节密度最高 0.95 出现在第 57 回（真假美猴王），次高的第 40 回、第 54 回并列 0.92；最低的第 9 回仅 0.28（陈光蕊赴任），峰谷相差 3.4 倍。</div>
+                <div class="insight-item"><strong>密度重心压在书中段：</strong>第 40 至 60 回平均密度 0.807，第 1 至 20 回只有 0.549；100 回里密度在 0.80 以上的有 25 回，低于 0.50 的仅 6 回。</div>
+                <div class="insight-item"><strong>转折点间隔越走越长：</strong>9 个转折点的相邻间隔依次是 6、5、2、13、14、16、24、17 回，最大空档是第 57 回到第 81 回的 24 回（真假美猴王到凌云渡）。</div>
+                <div class="insight-item"><strong>十回一段的切面：</strong>节奏热力图十行分段中「高潮」一行整体最亮（行均值 0.622），「妖国」0.500 次之，「成佛」一行最暗（0.328）—— 叙事的重量明显压在高潮一带。</div>
+            </div>
+        </section>
+
+<section class="section">
             <h2 class="section-title">相关页面</h2>
             <div class="section-sub">本页与 timeline.html 形成"时间-节奏"双轨，可对照阅读。</div>
             <p style="font-size:0.92rem; line-height:2;">

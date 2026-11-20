@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-3ZfBFbO/0TB2cx0EMpkKHagfSTzyS7IUrrVrIAMlWq8=' 'sha256-6xrfxa0kETDQKkaYvvry8voGjd0LawPR3ZwPoaJbnFY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-3ZfBFbO/0TB2cx0EMpkKHagfSTzyS7IUrrVrIAMlWq8=' 'sha256-NeJaAp7ZkKNrBXa6Kdx2C/1A7CNrUh7ZfeuQSWM7rGo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Graph Explorer · Annotated Journey to the West</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/en/graph-explorer.html">
@@ -203,6 +203,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <h3>Relation legend</h3>
     <div class="legend" id="relLegend"></div>
     <div class="hint">Edges are colored by <b>relation type</b>, with thickness = semantic weight; hover an edge to see “relation · property · value”. Check “Filter by relation” and “Filter by type” to link them; click a node to view its semantic relation summary and neighbors. Online data comes from <code>/graph</code>, with an offline fallback to the embedded graph set.</div>
+
+    <h3>Data source</h3>
+    <div class="hint">Data source: the offline graph atlas is inlined from <code>scripts/output/yuanqi_*.csv</code> and <code>dataset/character-relationship-3d.json</code>; when the data API is reachable the page loads the same graphs live from <code>/graph</code>.</div>
+
+    <h3>Key Insights</h3>
+    <div class="hint">Two graphs ship with this page, and their shapes differ. The 20-node, 20-edge ternary atlas maps Buddhism = AI = Journey to the West across seven categories — 5 Sense Objects, 5 Seeds, 4 Consciousness, 2 Transformation, 2 Bondage, 1 Manifestation and 1 Liberation — where Manifestation is the busiest relation (5 of the 20 edges) and three relations (Liberation, Ripening, Concealment) appear only once each. The 22-node, 32-edge pilgrimage graph is far more uneven: Sun Wukong alone carries 12 of the 32 relations and Tang Sanzang 7, while 17 of the 22 nodes have three or fewer, so the team’s apparent connectivity is really the connectivity of one node.</div>
   </aside>
   <section class="stage">
     <div id="graphBox"></div>
@@ -344,6 +350,48 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
     if(labelDim && n.aliases && n.aliases[labelDim]) return n.aliases[labelDim];
     return n.label||n.id;
   }
+  // 节点图元 tooltip：原生 <title>（与边同机制）· 内容随 label dimension 切换刷新
+  function nodeTitleText(n){
+    return labelOf(n)+(n.group?(" · "+n.group):"")+(n.desc?(" · "+n.desc):"");
+  }
+  // W1286 · G6：同一 <svg> 内标签矩形防重叠——节点标签优先保留，
+  // 边标签（关系名）与已放置标签冲突即隐藏；关系名完整保留在边的 <title> 里（悬停可读·信息不丢）。
+  function declutterLabels(box){
+    var svgs=box.querySelectorAll("svg");
+    for(var si=0;si<svgs.length;si++){
+      var svgEl=svgs[si];
+      var nodeLabels=[].slice.call(svgEl.querySelectorAll("text.gnode"));
+      var edgeLabels=[].slice.call(svgEl.querySelectorAll("text.edge-label"));
+      var placed=[];
+      function rectOf(el){ try{ var b=el.getBBox(); return {l:b.x,t:b.y,r:b.x+b.width,b:b.y+b.height}; }catch(e){ return null; } }
+      function hits(a,b){
+        var ix=Math.min(a.r,b.r)-Math.max(a.l,b.l), iy=Math.min(a.b,b.b)-Math.max(a.t,b.t);
+        if(ix<=0||iy<=0) return false;
+        var inter=ix*iy, s1=(a.r-a.l)*(a.b-a.t), s2=(b.r-b.l)*(b.b-b.t), small=Math.min(s1,s2);
+        return small>0 && inter>=4 && inter/small>0.30;
+      }
+      nodeLabels.forEach(function(el){ var r=rectOf(el); if(r) placed.push(r); });
+      edgeLabels.forEach(function(el){
+        var r=rectOf(el); if(!r) return;
+        for(var i=0;i<placed.length;i++){
+          if(hits(r,placed[i])){ el.style.display="none"; return; }
+        }
+        placed.push(r);
+      });
+    }
+  }
+  function syncNodeTitles(){
+    var box2=document.getElementById("graphBox");
+    if(!box2||!GRAPH) return;
+    box2.querySelectorAll("circle.gnode").forEach(function(c){
+      var id=c.getAttribute("data-id"), n=null;
+      GRAPH.nodes.forEach(function(x){ if(x.id===id) n=x; });
+      if(!n) return;
+      var ti=c.querySelector("title");
+      if(!ti){ ti=document.createElementNS("http://www.w3.org/2000/svg","title"); c.appendChild(ti); }
+      ti.textContent=nodeTitleText(n);
+    });
+  }
   function visibleSet(){
     var vis=new Set();
     GRAPH.nodes.forEach(function(n){
@@ -370,6 +418,16 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
     });
     var anchor=new Map();
     ids.forEach(function(id){ var p=nodePos.get(id); anchor.set(id,{x:p.x,y:p.y}); });
+    // W1286 · G6：标签感知碰撞——把节点标签（居中于节点上方）的半宽计入分离量，
+    // 让布局本身就不把两个标签压在一起（改布局不改显示·标签信息不丢）。
+    var labHalf=new Map();
+    var _nmapL={}; (GRAPH.nodes||[]).forEach(function(n){ _nmapL[n.id]=n; });
+    ids.forEach(function(id){
+      var n=_nmapL[id], s=n?String(labelOf(n)):"";
+      if(s.length>9)s=s.slice(0,9)+"…";
+      var cjk=/[\u2e80-\u9fff\uac00-\ud7af\uff00-\uffef]/.test(s);
+      labHalf.set(id, s.length*(cjk?6.0:3.3)+4);
+    });
     var heavy=ids.length>200;
     var iters=ids.length>60?(heavy?50:90):200;
     if(dragActive) iters=heavy?4:12;  // 拖拽中只做极轻量收敛，保持流畅（零依赖铁律，不引 force-graph）
@@ -383,6 +441,17 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
         var d=Math.sqrt(d2),rep=6200/d2,ux=dx/d,uy=dy/d;
         fx.set(ids[i],fx.get(ids[i])+rep*ux); fy.set(ids[i],fy.get(ids[i])+rep*uy);
         fx.set(ids[j],fx.get(ids[j])-rep*ux); fy.set(ids[j],fy.get(ids[j])-rep*uy);
+        // W1286 · G6：标签盒分轴排斥——水平按「两侧标签半宽和」错开、垂直按标签行高错开
+        var needX=labHalf.get(ids[i])+labHalf.get(ids[j])+4;
+        if(Math.abs(dx)<needX){
+          var sx=dx>=0?1:-1, fpx=(needX-Math.abs(dx))*0.45*sx;
+          fx.set(ids[i],fx.get(ids[i])+fpx); fx.set(ids[j],fx.get(ids[j])-fpx);
+        }
+        var needY=20;
+        if(Math.abs(dy)<needY){
+          var sy=dy>=0?1:-1, fpy=(needY-Math.abs(dy))*0.45*sy;
+          fy.set(ids[i],fy.get(ids[i])+fpy); fy.set(ids[j],fy.get(ids[j])-fpy);
+        }
       }
       edges.forEach(function(e){
         var a=nodePos.get(e.source),b=nodePos.get(e.target); if(!a||!b)return;
@@ -449,6 +518,10 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
     });
     svg+='</svg>';
     var box=document.getElementById("graphBox"); box.innerHTML=svg;
+    declutterLabels(box);
+    // W1286 · G6：字体加载完成后标签宽度会变化（C5 口径）⇒ 重新做一次避让
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ declutterLabels(box); }); }
+    syncNodeTitles();
     // 拖拽/点击统一由 box 容器承接（box 在重渲染间持续存在，避免 SVG 替换丢失监听）
     if(!box._wired){
       box._wired=true;
@@ -470,6 +543,16 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
         draggingId=null; dragActive=false;
       });
       box.addEventListener("pointerleave",function(){ draggingId=null; dragActive=false; });
+      // 悬停节点图元时按当前 label dimension 刷新 <title>（维度切换后立即生效）
+      box.addEventListener("mouseover",function(ev){
+        var t=ev.target;
+        if(!t||!t.matches||!t.matches("circle.gnode")) return;
+        var ti=t.querySelector("title");
+        if(!ti||!GRAPH) return;
+        var id=t.getAttribute("data-id"), n=null;
+        GRAPH.nodes.forEach(function(x){ if(x.id===id) n=x; });
+        if(n) ti.textContent=nodeTitleText(n);
+      });
     }
   }
   function openDrill(id){

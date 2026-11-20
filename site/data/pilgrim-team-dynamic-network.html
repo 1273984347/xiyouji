@@ -187,6 +187,30 @@
         
         
         /* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -405,6 +429,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </ul>
             <p style="margin-top:10px;">本页与 pilgrim-team-psychology-arc.html 形成"心理弧线-关系网络"双层。心理弧线关注个体心理演化，关系网络（本页）关注成员互动结构。两层交叉观察可见：震荡期（ch22-59）是双层共振的关键枢纽。</p>
         </section>
+
+        <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
+        <section class="section">
+            <h2 class="section-title">⑥ 关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自 Belbin 雷达 / 五成员关系网络 / Tuckman 五阶段 / 目标对齐度的实际取值</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>职能分工零重叠：</strong>唐僧独占协调者 9，悟空包揽塑造者 9／智多星 8／专家 9，八戒拿下资源调查员 8／团队工作者 8，沙僧执行者 9，白龙马专家 8 —— 五名成员各占一段互不争抢的职能带。</div>
+                <div class="insight-item"><strong>缺位的是监督评估者：</strong>九角色里只有监督评估者无人达标 —— 唐僧 2、悟空 3、八戒 3、沙僧 2、白龙马 2，无一人上 4 分，与页面 KPI 的 8/9 覆盖、缺监督评估者一致；震荡期随之拖成 38 回，占第 8 至 99 回的 41%。</div>
+                <div class="insight-item"><strong>冲突集中在权威一线：</strong>10 条关系边冲突合计 26、合作合计 51；唐僧↔悟空冲突 9 为全表最高（标注权威vs能力），悟空↔八戒合作 8 为最高（标注主战vs助力），唐僧↔沙僧则是冲突 1、合作 7 的低摩擦组合（标注领导vs执行）。</div>
+                <div class="insight-item"><strong>阶段长度失衡：</strong>五阶段里震荡期占 38 回为最长（第 22 至 59 回），规范期 23 回、执行期 19 回、形成期 15 回依次缩短，解散期只剩第 100 回的 1 回；白龙马在网络里只挂 1 项职能，与八戒的合作仅 2（标注罕见互动），到执行期已被彻底边缘化。</div>
+            </div>
+        </section>
+
+        <figure class="viz-illustration" aria-hidden="true">        </section>
         <figure class="viz-illustration" aria-hidden="true">
             <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
         </figure>

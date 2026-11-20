@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-io/h4Lg6BjHcXraTfZYfd8p3+jLsYoRNCYcw8rssDLI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-TWrCy9N5QKe028W1KNn/fPajw/icQRisyvdE5JHP91Y='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>跨时空弹幕博物馆 · 详解西游记</title>
@@ -336,6 +336,18 @@
         .map-popup .p-head { font-weight: 600; color: var(--accent-4); margin-bottom: 6px; }
         .map-popup .p-view { font-style: italic; color: var(--ink); }
 
+        /* 图例（W1286：与世界地图编码一一对应） */
+        .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 var(--space-5); font-size: 0.82rem; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+        .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm); display: inline-block; }
+        .legend-swatch.line { height: 3px; width: 18px; }
+
+        /* 关键洞察段（W1286：结论段统一样式·只用令牌色） */
+        .insight-list { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-5); }
+        .insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; }
+        .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+        .insight-item strong { color: var(--accent); }
+
         /* P2-2 + P2-3: 320px 边界网格溢出修复 */
         @media (max-width: 480px) {
             .danmaku-grid { grid-template-columns: 1fr; }
@@ -443,6 +455,11 @@ main { overflow-x: clip; }
         <h2 class="device-title">国际名人弹幕组</h2>
         <p style="font-size:0.85rem;color:var(--ink-soft);margin-bottom:16px;">《西游记》走向世界·跨文化共鸣</p>
         <div class="world-map" id="world-map" aria-label="国际名人世界地图"></div>
+        <div class="legend" id="mapLegend">
+            <div class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>西游·中国（发源地 · 连线起点）</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:var(--accent-4)"></span>国际评论家落点（阿根廷 / 美国 / 日本）</div>
+            <div class="legend-item"><span class="legend-swatch line" style="background:var(--accent-4)"></span>传播路径连线</div>
+        </div>
         <div id="intl-grid" class="intl-grid"></div>
         <h3 style="font-size:1rem;color:var(--ink);margin:var(--space-5) 0 10px;">全球改编作品</h3>
         <div id="adaptations" class="adaptations"></div>
@@ -461,6 +478,19 @@ main { overflow-x: clip; }
             </div>
         </div>
     </section>
+
+    <!-- 关键洞察（W1286） -->
+    <section class="section">
+        <h2 class="section-title">关键洞察</h2>
+        <div class="section-sub">口径：site/data/json/v08_celebrity_profiles.json、v08_age_groups.json、v08_mouthpiece.json 与 v09_modern_commentary.json、v09_international_critics.json、v09_global_adaptations.json。</div>
+        <div class="insight-list">
+            <div class="insight-item"><strong>星图十位评点者：</strong>hero 名人星图收录 10 位中外评点者——李卓吾、金圣叹、鲁迅、胡适、陈寅恪、郑振铎、毛泽东、林语堂、钱钟书、郭沫若；悬停可读其评点与「当代翻译」。</div>
+            <div class="insight-item"><strong>弹幕墙按年龄递减又回升：</strong>四层共 14 条——幼儿/小学（表情包墙）4 条、初中（观点PK赛·辩题）3 条、高中（政治隐喻解码器·修辞训练）2 条、大学（学术谱系图·谱系）5 条，最低在高中、最高在大学。</div>
+            <div class="insight-item"><strong>当代接口共 6 条：</strong>「当代打工人嘴替」2 条金句（如金圣叹·反内卷先锋）与「名人看当下」4 条当代解读，构成从评点史到今天生活的翻译层。</div>
+            <div class="insight-item"><strong>世界地图只有 3 个落点：</strong>赛珍珠（美国）、博尔赫斯（阿根廷）、大江健三郎（日本）三位国际评论家，对应地图上由「西游·中国」出发的 3 条连线。</div>
+            <div class="insight-item"><strong>改编重心在漫画与影视：</strong>全球改编 3 部——日本《龙珠》、韩国漫画改编、美国《功夫之王》，跨文化传播走的是大众娱乐路线而非学术评点路线。</div>
+        </div>
+    </section>
     <figure class="viz-illustration" aria-hidden="true">
         <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
     </figure>
@@ -469,7 +499,7 @@ main { overflow-x: clip; }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W1285 · W1284 · W1283 · W1282 · W1281 · W1280 · W1276 · W1275 · W1274 · W1273 · W1272 · W1266 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W1286 · W1285 · W1284 · W1283 · W1282 · W1281 · W1280 · W1276 · W1275 · W1274 · W1273 · W1272 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -775,7 +805,7 @@ function renderHeroStarMap(profilesData) {
         const left = (x + tw > width - 16) ? Math.max(8, x - tw - 28) : x;
         tooltip.style("left", left + "px").style("top", y + "px");
     }
-    node.on("pointerenter", function(event, d) {
+    node.on("mouseenter", function(event, d) {
         tooltip.classed("visible", true).attr("aria-hidden", "false");
         tooltip.html(
             `<div class="t-name">${escapeHtml(d.name)} · ${escapeHtml(d.role)}</div>` +
@@ -784,8 +814,8 @@ function renderHeroStarMap(profilesData) {
         );
         positionTooltip(event);
     })
-    .on("pointermove", positionTooltip)
-    .on("pointerleave", function() {
+    .on("mousemove", positionTooltip)
+    .on("mouseleave", function() {
         tooltip.classed("visible", false).attr("aria-hidden", "true");
     });
 
@@ -904,8 +934,12 @@ function renderWorldMap(criticsData) {
     svg.append("circle").attr("class", "map-dot")
         .attr("cx", origin[0]).attr("cy", origin[1]).attr("r", 5)
         .style("fill", "var(--accent)").style("pointer-events", "none");
+    /* W1286：原产地标签原为居中（text-anchor:middle），与日本落点标签「🇯🇵 大江健三郎」
+       横向相交（交集/较小者 > 0.30 ⇒ 第 83 门禁判重叠）⇒ 改置于原点左侧（行内 text-anchor:end，
+       行内样式优先级高于 .map-label 的类规则）。 */
     svg.append("text").attr("class", "map-label")
-        .attr("x", origin[0]).attr("y", origin[1] - 10)
+        .attr("x", origin[0] - 8).attr("y", origin[1] - 10)
+        .style("text-anchor", "end")
         .style("pointer-events", "none").text("西游·中国");
 
     const dotG = svg.selectAll(".map-dot-g").data(dots).enter()
@@ -924,7 +958,7 @@ function renderWorldMap(criticsData) {
         popup.style("left", Math.min(x, rect.width - 280) + "px")
              .style("top", Math.min(y, rect.height - 100) + "px");
     }
-    dotG.on("pointerenter", function(event, d) {
+    dotG.on("mouseenter", function(event, d) {
         popup.classed("visible", true).html(
             `<div class="p-head">${escapeHtml(d.flag)} ${escapeHtml(d.name)} · ${escapeHtml(d.country)}</div>` +
             `<div class="p-view">「${escapeHtml(d.viewpoint)}」</div>` +
@@ -932,8 +966,8 @@ function renderWorldMap(criticsData) {
         );
         positionPopup(event);
     })
-    .on("pointermove", positionPopup)
-    .on("pointerleave", function() { popup.classed("visible", false); });
+    .on("mousemove", positionPopup)
+    .on("mouseleave", function() { popup.classed("visible", false); });
 }
 
 const fetchStatus = { anyFetched: false };

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-J+B39PcaRKTiwRr619UNlaVDM4IPHMT5OLBLcUwHSIY='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-j9XeaL4nWI0TpoFswJcamjtiKNKkyMbxQBucpljnurg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>三教神学干预网络图谱 · 详解西游记</title>
@@ -126,6 +126,12 @@ svg { display: block; }
 .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 0.82em; color: var(--ink-soft); }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
+
+/* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+.insight-list { background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: var(--space-4) var(--space-5); }
+.insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; line-height: 1.9; }
+.insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+.insight-item strong { color: var(--accent); font-weight: 600; }
 
 .theory-matrix { width: 100%; border-collapse: collapse; font-size: 0.88em; }
 .theory-matrix th, .theory-matrix td { padding: var(--space-3) 10px; border: 1px solid var(--line); text-align: left; }
@@ -339,6 +345,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="lead">佛性论（显化本有）— 道性论（复归本分）— 心性论（三教归心）·三轴神学逻辑谱系</p>
         <div class="chart-area">
             <svg width="100%" height="280" id="spectrum-svg" role="img" aria-label="三轴神学谱系图"></svg>
+        </div>
+    </section>
+
+    <!-- W1286 · 关键洞察（结论区块·第 82 门禁 C2） -->
+    <section>
+        <h2>七、关键洞察 <span class="en">Key Insights</span></h2>
+        <p class="lead">读法基于本页内嵌 EMBEDDED 数据：网络 18 节点 / 22 条边 · 雷达三轴 · 时间线 13 处干预标记</p>
+        <div class="insight-list">
+            <div class="insight-item"><strong>网络骨架：</strong>18 个节点 = 3 位三教神祇（观音/如来/太上老君）+ 5 型干预（显化/点化/试炼/收服/授记）+ 10 个关键回目，22 条边把「神祇 → 干预型 → 回目」串成三层。</div>
+            <div class="insight-item"><strong>覆盖广度：</strong>如来是唯一接通全部 5 型干预的神祇（显化 3 / 点化 2 / 试炼 2 / 收服 2 / 授记 4）；观音接通 4 型（不含授记，点化 4 为其最强边）；太上老君只涉试炼与收服 2 型。</div>
+            <div class="insight-item"><strong>最强边：</strong>全网最大关联强度为 4，共两条——观音→点化 4 与 如来→授记 4；干预型通往回目的 11 条边强度全为 2–3。</div>
+            <div class="insight-item"><strong>三轴分野：</strong>雷达五型合计佛性论 23（5/5/3/5/5）> 心性论 21（4/5/4/3/5）> 道性论 13（2/1/5/4/1）；试炼型最高分归道性论（5），授记型最高分归佛性论与心性论（各 5），道性论在授记仅 1。</div>
+            <div class="insight-item"><strong>时序分布：</strong>13 处干预标记自第 7 回（太上老君·试炼·八卦炉炼度四十九日）铺到第 100 回（如来·授记·五众成佛）；按纯型计收服 4 处最多，试炼与显化各 3 处；观音经 7 处、如来 5 处、太上老君 2 处。</div>
         </div>
     </section>
 </div>
@@ -574,6 +593,10 @@ const link = svg.append("g").selectAll("line")
         .attr("stroke-width", d => Math.sqrt(d.value))
         .attr("opacity", 0.6); link.style('display','none'); linkSels.push(link);
 
+    function nodeTypeLabel(t) {
+        return t === "deity" ? "神祇" : t === "intervention" ? "干预型" : "关键回目";
+    }
+
     const node = svg.append("g").selectAll("circle")
         .data(data.nodes).enter().append("circle")
         .attr("r", d => d.size / 2)
@@ -585,6 +608,9 @@ const link = svg.append("g").selectAll("line")
             .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
             .on("end", (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
         );
+
+    // 节点原生悬停提示（浏览器 tooltip）：名称 · 类型 · 干预强度
+    node.append("title").text(d => d.id + " · " + nodeTypeLabel(d.type) + " · 强度 " + d.size);
 
     const label = svg.append("g").selectAll("text")
         .data(data.nodes).enter().append("text")

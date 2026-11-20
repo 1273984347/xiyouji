@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-r/DnJYz+w2M9bwxOhXiTOT1qqjbmMPO8tvCeKEhHuiw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-ymNNndTAKxTZC3E9ZADRUc7QwnhKlUyFHHEZBdVYWVI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Narrative Experiment · Board Game & Card Mechanics · Annotated Journey to the West</title>
@@ -827,7 +827,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            Data source: embedded fallback data (file:// protocol compatible). To load the latest JSON, run <code>py -m http.server 8000</code> in the <code>site/</code> directory.
+            Data source: <code>../en/json/board_game.json</code>, <code>../en/json/narrative_cards.json</code>, <code>../en/json/story_generator.json</code>, <code>../en/json/narrative_experiment_summary.json</code> — embedded fallback data (file:// protocol compatible). To load the latest JSON, run <code>py -m http.server 8000</code> in the <code>site/</code> directory.
         </div>
 
         <!-- KPI 概要栏 -->
@@ -1532,6 +1532,34 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const svg = d3.select("#phase-svg");
         svg.selectAll("*").remove();
         const el = document.getElementById("phase-svg");
+        /* W1286 · 第 83 门禁（SVG 标签重叠）：阶段流程文案过长（单行 ≈ 440px），
+           相邻两阶段横向相交（交集/较小者 > 0.30 ⇒ 判违例）
+           ⇒ 按词均衡折成 ≤2 行（原文一字不减·仅断行），单行宽减半 ⇒ 不再互压。 */
+        function w1286WrapLines(text, maxLines, maxChars) {
+            const words = String(text == null ? '' : text).split(/\s+/).filter(Boolean);
+            if (!words.length) return [];
+            const lines = [];
+            let cur = '';
+            words.forEach(function (w) {
+                if (!cur) { cur = w; return; }
+                if ((cur + ' ' + w).length <= maxChars) { cur += ' ' + w; }
+                else { lines.push(cur); cur = w; }
+            });
+            if (cur) lines.push(cur);
+            while (lines.length > maxLines) {
+                let bi = 0, bj = 1, bl = Infinity;
+                for (let i = 0; i < lines.length; i++) {
+                    for (let j = i + 1; j < lines.length; j++) {
+                        const L = lines[i].length + lines[j].length;
+                        if (L < bl) { bl = L; bi = i; bj = j; }
+                    }
+                }
+                lines[bi] = lines[bi] + ' ' + lines[bj];
+                lines.splice(bj, 1);
+            }
+            return lines;
+        }
+
         const w = Math.max(200, el.clientWidth || 1100);
         const h = 220;
         svg.attr("viewBox", `0 0 ${w} ${h}`);
@@ -1588,15 +1616,26 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-family", "JetBrains Mono, monospace")
                 .text(p.rounds);
 
-            // 行动 + 目标（更下方）
-            const lines = [p.actions, p.goal];
-            lines.forEach((ln, j) => {
+            // 行动 + 目标（更下方）—— W1286：行动文案折成 ≤2 行（原文不减），目标行顺延
+            const actionLines = w1286WrapLines(p.actions, 2, 58);
+            actionLines.forEach((ln, j) => {
                 g.append("text")
-                    .attr("y", 56 + j * 14)
+                    .attr("y", 56 + j * 13)
                     .attr("text-anchor", "middle")
                     .style("font-size", "0.74rem")
-                    .style("fill", j === 0 ? "var(--ink-soft)" : "var(--accent)")
-                    .style("font-weight", j === 1 ? 600 : 400)
+                    .style("fill", "var(--ink-soft)")
+                    .style("font-weight", 400)
+                    .text(ln);
+            });
+            /* W1286：目标文案同样按词折行（≤2 行）——相邻阶段的目标行不再首尾相接 */
+            const goalLines = w1286WrapLines(p.goal, 2, 58);
+            goalLines.forEach((ln, j) => {
+                g.append("text")
+                    .attr("y", 56 + actionLines.length * 13 + 4 + j * 13)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "0.74rem")
+                    .style("fill", "var(--accent)")
+                    .style("font-weight", 600)
                     .text(ln);
             });
 

@@ -3,178 +3,35 @@
 # 豁免清单：scripts/output/chart-legend-exemptions.txt（单系列图图例豁免·入库文件）
 # 格式：<页面>|<判据码>|<细节>；C1=缺来源标注 C2=缺结论段 C3=缺 tooltip C4=多系列无图例 C5=单系列未登记豁免
 # 语义：基线内违例记「存量基线」不计 FAIL；基线外新增 = FAIL；零容忍：--strict
-# 违例键 175 条（生成：2026-11-18 02:58:34）
+# 违例键 32 条（生成：2026-11-21 03:24:45）
 site/about.html|C3|图表元素无 tooltip 可查细节
 site/curated.html|C1|缺可读数据来源标注
 site/curated.html|C2|缺结论/洞察段
 site/curated.html|C3|图表元素无 tooltip 可查细节
-site/dashboard.html|C1|缺可读数据来源标注
-site/dashboard.html|C3|图表元素无 tooltip 可查细节
-site/data/81-hardships-view.html|C2|缺结论/洞察段
-site/data/81-hardships-view.html|C3|图表元素无 tooltip 可查细节
-site/data/81-hardships-view.html|C4|多系列图无图例（渲染级复核：多系列且无可见图例）
 site/data/ai-dialogue.html|C2|缺结论/洞察段
 site/data/ai-dialogue.html|C3|图表元素无 tooltip 可查细节
 site/data/century-dialogue.html|C2|缺结论/洞察段
 site/data/century-dialogue.html|C3|图表元素无 tooltip 可查细节
-site/data/chapter-stats.html|C2|缺结论/洞察段
-site/data/chapter-stats.html|C3|图表元素无 tooltip 可查细节
-site/data/chapter-structure-graph.html|C2|缺结论/洞察段
 site/data/character-relationship-3d-view.html|C2|缺结论/洞察段
 site/data/character-relationship-3d-view.html|C3|图表元素无 tooltip 可查细节
-site/data/character-relationship-3d.html|C1|缺可读数据来源标注
-site/data/character-relationship-3d.html|C2|缺结论/洞察段
-site/data/character-relationship-3d.html|C3|图表元素无 tooltip 可查细节
-site/data/counterfactual.html|C3|图表元素无 tooltip 可查细节
-site/data/cross-time-danmaku.html|C2|缺结论/洞察段
-site/data/cross-time-danmaku.html|C3|图表元素无 tooltip 可查细节
-site/data/cross-time-danmaku.html|C4|多系列图（series=19）无图例
-site/data/customs-pass-route.html|C3|图表元素无 tooltip 可查细节
-site/data/data-explorer.html|C2|缺结论/洞察段
-site/data/data-explorer.html|C3|图表元素无 tooltip 可查细节
 site/data/data-explorer.html|C4|多系列图无图例（渲染级复核：多系列且无可见图例）
-site/data/ethics-consumption.html|C1|缺可读数据来源标注
-site/data/ethics-consumption.html|C4|多系列图（series=2）无图例
-site/data/famous-time-travel.html|C2|缺结论/洞察段
-site/data/famous-time-travel.html|C3|图表元素无 tooltip 可查细节
-site/data/famous-time-travel.html|C4|多系列图（series=13）无图例
-site/data/four-dimensional-research-network.html|C2|缺结论/洞察段
-site/data/four-dimensional-research-network.html|C3|图表元素无 tooltip 可查细节
-site/data/game-webnovel.html|C1|缺可读数据来源标注
-site/data/global-pattern.html|C4|多系列图（series=2）无图例
-site/data/graph-explorer.html|C2|缺结论/洞察段
-site/data/graph-explorer.html|C3|图表元素无 tooltip 可查细节
-site/data/intertextuality-network.html|C2|缺结论/洞察段
-site/data/journey-geo-3d.html|C2|缺结论/洞察段
-site/data/journey-geo-semiotics.html|C2|缺结论/洞察段
-site/data/journey-map-interactive.html|C2|缺结论/洞察段
-site/data/language-style-radar.html|C2|缺结论/洞察段
-site/data/monster-ecology-network.html|C2|缺结论/洞察段
-site/data/narrative-experiment.html|C1|缺可读数据来源标注
-site/data/narrative-rhythm-curve.html|C2|缺结论/洞察段
-site/data/narratology-12d-network.html|C2|缺结论/洞察段
-site/data/narratology-16d-network.html|C2|缺结论/洞察段
-site/data/pilgrim-team-dynamic-network.html|C2|缺结论/洞察段
-site/data/poetry-density.html|C3|图表元素无 tooltip 可查细节
-site/data/six-senses-narratology-network.html|C2|缺结论/洞察段
-site/data/story-timeline.html|C3|图表元素无 tooltip 可查细节
-site/data/story-timeline.html|C4|多系列图（series=2）无图例
-site/data/tag-cloud.html|C2|缺结论/洞察段
-site/data/tag-cloud.html|C3|图表元素无 tooltip 可查细节
 site/data/text-search.html|C2|缺结论/洞察段
 site/data/text-search.html|C3|图表元素无 tooltip 可查细节
-site/data/theological-intervention-network.html|C2|缺结论/洞察段
-site/data/theological-intervention-network.html|C3|图表元素无 tooltip 可查细节
-site/data/timeline.html|C2|缺结论/洞察段
-site/data/workplace.html|C1|缺可读数据来源标注
-site/data/wukong-tangseng-benchmark.html|C2|缺结论/洞察段
-site/data/wukong-tangseng-benchmark.html|C3|图表元素无 tooltip 可查细节
 site/dukou-engine.html|C1|缺可读数据来源标注
 site/dukou-engine.html|C2|缺结论/洞察段
 site/dukou-engine.html|C3|图表元素无 tooltip 可查细节
-site/en/81-hardships.html|C1|缺可读数据来源标注
-site/en/aesthetics.html|C1|缺可读数据来源标注
 site/en/ai-dialogue.html|C1|缺可读数据来源标注
 site/en/ai-dialogue.html|C2|缺结论/洞察段
 site/en/ai-dialogue.html|C3|图表元素无 tooltip 可查细节
-site/en/cave-estate.html|C1|缺可读数据来源标注
 site/en/century-dialogue.html|C1|缺可读数据来源标注
 site/en/century-dialogue.html|C2|缺结论/洞察段
 site/en/century-dialogue.html|C3|图表元素无 tooltip 可查细节
-site/en/chapter-stats.html|C1|缺可读数据来源标注
-site/en/chapter-stats.html|C2|缺结论/洞察段
-site/en/chapter-structure-graph.html|C1|缺可读数据来源标注
-site/en/chapter-structure-graph.html|C2|缺结论/洞察段
-site/en/character-appearance.html|C1|缺可读数据来源标注
-site/en/character-dynamic-network.html|C1|缺可读数据来源标注
-site/en/character-presence-timeline.html|C1|缺可读数据来源标注
-site/en/character-relationship-3d.html|C1|缺可读数据来源标注
-site/en/character-relationship-3d.html|C2|缺结论/洞察段
-site/en/character-relationship-3d.html|C3|图表元素无 tooltip 可查细节
-site/en/character-semantic-network.html|C1|缺可读数据来源标注
-site/en/character-sentiment-arc.html|C1|缺可读数据来源标注
-site/en/chart-design.html|C1|缺可读数据来源标注
-site/en/concept-device.html|C1|缺可读数据来源标注
-site/en/counterfactual.html|C1|缺可读数据来源标注
-site/en/counterfactual.html|C3|图表元素无 tooltip 可查细节
-site/en/criticism-history.html|C1|缺可读数据来源标注
-site/en/cross-time-danmaku.html|C1|缺可读数据来源标注
-site/en/cross-time-danmaku.html|C2|缺结论/洞察段
-site/en/cross-time-danmaku.html|C4|多系列图（series=20）无图例
-site/en/cultural-misreading.html|C1|缺可读数据来源标注
-site/en/customs-pass-route.html|C1|缺可读数据来源标注
-site/en/customs-pass-route.html|C3|图表元素无 tooltip 可查细节
-site/en/deconstruction.html|C1|缺可读数据来源标注
-site/en/dialogue-sentiment.html|C1|缺可读数据来源标注
-site/en/ecology.html|C1|缺可读数据来源标注
-site/en/emotional-heatmap.html|C1|缺可读数据来源标注
-site/en/ethics-consumption.html|C1|缺可读数据来源标注
-site/en/ethics-consumption.html|C4|多系列图（series=2）无图例
-site/en/famous-time-travel.html|C1|缺可读数据来源标注
-site/en/famous-time-travel.html|C2|缺结论/洞察段
-site/en/famous-time-travel.html|C3|图表元素无 tooltip 可查细节
-site/en/famous-time-travel.html|C4|多系列图（series=13）无图例
-site/en/four-dimensional-research-network.html|C1|缺可读数据来源标注
-site/en/four-dimensional-research-network.html|C2|缺结论/洞察段
-site/en/four-dimensional-research-network.html|C3|图表元素无 tooltip 可查细节
-site/en/game-webnovel.html|C1|缺可读数据来源标注
-site/en/global-pattern.html|C1|缺可读数据来源标注
-site/en/global-pattern.html|C4|多系列图（series=2）无图例
-site/en/graph-explorer.html|C1|缺可读数据来源标注
-site/en/graph-explorer.html|C2|缺结论/洞察段
-site/en/graph-explorer.html|C3|图表元素无 tooltip 可查细节
 site/en/guide.html|C1|缺可读数据来源标注
 site/en/guide.html|C2|缺结论/洞察段
 site/en/guide.html|C3|图表元素无 tooltip 可查细节
-site/en/hardship-difficulty-heatmap.html|C1|缺可读数据来源标注
-site/en/hardship-heatmap.html|C1|缺可读数据来源标注
-site/en/intertextuality-network.html|C2|缺结论/洞察段
-site/en/journey-geo-semiotics.html|C1|缺可读数据来源标注
-site/en/journey-geo-semiotics.html|C2|缺结论/洞察段
-site/en/journey-map-interactive.html|C1|缺可读数据来源标注
-site/en/journey-map-interactive.html|C2|缺结论/洞察段
-site/en/journey-route.html|C1|缺可读数据来源标注
-site/en/journey-spacetime.html|C1|缺可读数据来源标注
-site/en/jurisprudence.html|C1|缺可读数据来源标注
-site/en/language-style-radar.html|C1|缺可读数据来源标注
-site/en/language-style-radar.html|C2|缺结论/洞察段
-site/en/magic-system.html|C1|缺可读数据来源标注
-site/en/material-archaeology.html|C1|缺可读数据来源标注
-site/en/mbti-evolution.html|C1|缺可读数据来源标注
-site/en/methodology-matrix.html|C1|缺可读数据来源标注
-site/en/ming-political-thought-comparison.html|C1|缺可读数据来源标注
-site/en/monster-background.html|C1|缺可读数据来源标注
-site/en/monster-capability-radar.html|C1|缺可读数据来源标注
-site/en/monster-ecology-network.html|C1|缺可读数据来源标注
-site/en/monster-ecology-network.html|C2|缺结论/洞察段
-site/en/music-structure.html|C1|缺可读数据来源标注
-site/en/narrative-experiment.html|C1|缺可读数据来源标注
-site/en/narrative-rhythm-curve.html|C1|缺可读数据来源标注
-site/en/narrative-rhythm-curve.html|C2|缺结论/洞察段
-site/en/narratology-12d-network.html|C2|缺结论/洞察段
-site/en/narratology-16d-network.html|C2|缺结论/洞察段
-site/en/perf-canvas-rendering.html|C1|缺可读数据来源标注
-site/en/pilgrim-team-dynamic-network.html|C1|缺可读数据来源标注
-site/en/pilgrim-team-dynamic-network.html|C2|缺结论/洞察段
-site/en/pilgrim-team-psychology-arc.html|C1|缺可读数据来源标注
-site/en/poetry-rhythm-analysis.html|C1|缺可读数据来源标注
-site/en/risk-project.html|C1|缺可读数据来源标注
-site/en/six-senses-narratology-network.html|C2|缺结论/洞察段
-site/en/social-media.html|C1|缺可读数据来源标注
-site/en/tag-cloud.html|C1|缺可读数据来源标注
-site/en/tag-cloud.html|C2|缺结论/洞察段
-site/en/tag-cloud.html|C3|图表元素无 tooltip 可查细节
-site/en/text-evolution.html|C1|缺可读数据来源标注
 site/en/text-search.html|C1|缺可读数据来源标注
 site/en/text-search.html|C2|缺结论/洞察段
 site/en/text-search.html|C3|图表元素无 tooltip 可查细节
-site/en/theological-intervention-network.html|C1|缺可读数据来源标注
-site/en/theological-intervention-network.html|C2|缺结论/洞察段
-site/en/theological-intervention-network.html|C3|图表元素无 tooltip 可查细节
-site/en/timeline.html|C1|缺可读数据来源标注
-site/en/timeline.html|C2|缺结论/洞察段
-site/en/visual-art.html|C1|缺可读数据来源标注
-site/en/workplace.html|C1|缺可读数据来源标注
 site/guide.html|C3|图表元素无 tooltip 可查细节
 site/index.html|C1|缺可读数据来源标注
 site/index.html|C2|缺结论/洞察段

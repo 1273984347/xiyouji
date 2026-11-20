@@ -6,7 +6,6 @@
 # 渲染档案：scripts/output/chart-legend-render-audit.json（render=* 声明的一致性依据）
 # 语义：声明与实测/档案**完全一致**才豁免；render=multi-nolegend 不豁免·判 C4；
 #       页面改多系列或改清单都骗不过（双向校验）
-site/data/81-hardships-view.html|render=multi-nolegend|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例 ⇒ 撤豁免·判 C4（渲染级复核确认）
 site/data/81-hardships.html|render=legend|依据：渲染级复核（Playwright file://·只读渲染）：渲染后可见图例 9 项（≥2 ⇒ 多系列且图例齐备）
 site/data/ai-dialogue.html|render=unknown|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）
 site/data/century-dialogue.html|render=unknown|依据：渲染级复核（Playwright file://·只读渲染）：渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载）

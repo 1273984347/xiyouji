@@ -161,6 +161,16 @@
         .scene-svg { width: 100%; height: auto; border-radius: var(--radius-md) ; margin-bottom: var(--space-4); }
         .scene-judgment { font-size: 0.88rem; color: var(--ink); line-height: 1.7; font-style: italic;
                           background: var(--paper-warm); padding: var(--space-4); border-radius: var(--radius-md) ; border-left: 3px solid var(--accent); }
+        /* W1286 · C2 结论区块（沿用仓内既有 .insight-list 约定·见 character-presence-timeline.html） */
+        .insight-list { background: var(--paper); padding: 15px; border-radius: var(--radius-md) }
+        .insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; }
+        .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+        /* W1286 · C4 图例（场景插画配色语言） */
+        .scene-legend { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-4);
+                        padding: var(--space-3) var(--space-4); background: var(--paper-warm);
+                        border-radius: var(--radius-md); border-left: 3px solid var(--accent); }
+        .scene-legend .legend-item { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--ink-soft); }
+        .scene-legend .legend-swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
     
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -245,9 +255,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <h3>鲁迅·地府改革观察员</h3>
                 <svg viewBox="0 0 400 300" class="scene-svg" role="img" aria-label="鲁迅站在阎罗殿中横眉冷对生死簿">
                     <rect width="400" height="300" fill="#1a1410"/>
-                    <rect x="40" y="60" width="320" height="200" fill="#2a1a10" stroke="#5a3828" stroke-width="2"/>
+                    <rect x="40" y="60" width="320" height="200" fill="#2a1a10" stroke="#5a3828" stroke-width="2">
+                        <title>阎罗殿场景 · 生死簿所在之案台</title>
+                    </rect>
                     <g stroke="#e9b885" stroke-width="2" fill="none">
-                        <circle cx="200" cy="120" r="18"/>
+                        <circle cx="200" cy="120" r="18"><title>鲁迅 · 站姿线稿剪影</title></circle>
                         <line x1="190" y1="128" x2="210" y2="128"/>
                         <line x1="188" y1="126" x2="195" y2="130"/>
                         <line x1="212" y1="126" x2="205" y2="130"/>
@@ -256,9 +268,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         <line x1="200" y1="200" x2="185" y2="250"/>
                         <line x1="200" y1="200" x2="215" y2="250"/>
                     </g>
-                    <rect x="240" y="180" width="80" height="60" fill="#3a2820" stroke="#e9b885" stroke-width="1"/>
-                    <text x="280" y="215" fill="#e9b885" font-size="10" text-anchor="middle">生死簿</text>
-                    <text x="60" y="40" fill="#C0392B" font-size="11" font-style="italic">「满本都写着两个字是&apos;吃人&apos;！」</text>
+                    <rect x="240" y="180" width="80" height="60" fill="#3a2820" stroke="#e9b885" stroke-width="1"><title>生死簿 · 账册</title></rect>
+                    <text x="280" y="215" fill="#e9b885" font-size="10" text-anchor="middle">生死簿<title>生死簿 · 题签</title></text>
+                    <text x="60" y="40" fill="#C0392B" font-size="11" font-style="italic">「满本都写着两个字是&apos;吃人&apos;！」<title>原文引文 · 满本都写着两个字是「吃人」</title></text>
                 </svg>
                 <p class="scene-judgment">我翻开这生死簿一查·歪歪斜斜的每页上都写着「天命注定」四个字·我横竖睡不着·仔细看了半夜·才从字缝里看出字来·满本都写着两个字是「吃人」！</p>
             </div>
@@ -280,6 +292,28 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </svg>
                 <p class="scene-judgment">写信给吴承恩纠正妖王宴上宋代官窑瓷瓶形制在唐朝尚未出现·又给央视杨洁导演写信画图示意「一口钟」——两张幽默「纠错信」明信片。</p>
             </div>
+        </div>
+
+        <!-- W1286 · C4 图例（场景插画配色语言 · 与 EN 页 Illustration color key 同口径） -->
+        <h3 class="scene-key-title">插画配色键</h3>
+        <div class="scene-legend" aria-label="场景插画配色键">
+            <div class="legend-item"><span class="legend-swatch" style="background:#e9b885"></span>墨金 · 鲁迅线稿、生死簿账册与题签、邮票底</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:#C0392B"></span>朱红 · 地府场景的引文原句</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:#23201A"></span>墨黑 · 纠错信明信片正文</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:#8E7D62"></span>赭色 · 邮票边框、落款与邮戳文字</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:#d9cdb8"></span>纸边 · 明信片纸张边框</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:#1a1410"></span>暗棕 · 阎罗殿背景</div>
+        </div>
+    </section>
+
+    <!-- W1286 · C2 结论区块（沿用仓内既有 .insight-list 约定 · 见 character-presence-timeline.html） -->
+    <section class="scene-section">
+        <h2 class="device-title">关键洞察</h2>
+        <div class="insight-list">
+            <div class="insight-item"><strong>每个名人被派上的正是他原本就在做的批评工作</strong>——鲁迅成花果山史官去写《妖界见闻录》、钱钟书成车迟国裁判去纠正「一口钟」的常识错误、陈寅恪成灵山档案馆员去考证书真经的梵文原典。</div>
+            <div class="insight-item"><strong>六个身份里有三个把文学争议直接转成了管理决策</strong>——胡适做取经团队顾问（别解读了·先赶路）、毛泽东做悟空的政委（要建立自己的根据地）、林语堂做高老庄心理师（给八戒做欲望管理）。</div>
+            <div class="insight-item"><strong>六人中只有两人被画成场景插画</strong>——地府里的鲁迅与寄纠错信的明信片；其余四张仍是纯文字卡片，所以图像层只承载了那两种偏视觉、而非偏建议的批评方式。</div>
+            <div class="insight-item"><strong>这些纠错全是「时代错置」式纠错</strong>——唐人妖王宴上摆宋代官窑瓷瓶、明清俗语被当成庙堂之钟；穿越设定被用来检验批评家自己的知识是否真的经得起离开本世纪之后的检验。</div>
         </div>
     </section>
     <figure class="viz-illustration" aria-hidden="true">

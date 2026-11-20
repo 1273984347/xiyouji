@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Cs7de9zNBYZyMJHSWO52HxEk0SzxYhIk0pwk6LqBk1M=' 'sha256-ToYvb4E6D080P0f0IYAcenl8fbN1qp5nflDPeSt0qDg=' 'sha256-piDdr4nQnOh3xIEjw4kvMS/PCGsFzVklfQJn40o0r5E=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Cs7de9zNBYZyMJHSWO52HxEk0SzxYhIk0pwk6LqBk1M=' 'sha256-E7v0KvO/nqXMhjSOom4srNxtKaAFDj1HPbMki7fzm7Q=' 'sha256-piDdr4nQnOh3xIEjw4kvMS/PCGsFzVklfQJn40o0r5E=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>详解西游记 · 八十一难可交互视图</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/81-hardships-view.html">
@@ -110,6 +110,13 @@
   .chartbox{margin:var(--space-3) 0 14px;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper);padding:10px;display:none}
   .chartbox h3{margin:var(--space-2) 6px var(--space-3);font-size:14px;color: var(--accent-primary)}
   .hint{color: var(--ink-soft);font-size:12px;margin-top:var(--space-3)}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:var(--space-3);font-size:12px;justify-content:center}
+  .legend-item{display:flex;align-items:center;gap:6px;color:var(--ink-soft)}
+  .legend-swatch{width:12px;height:12px;border-radius:var(--radius-sm);display:inline-block}
+  .insight-list{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--space-5)}
+  .insight-item{margin:var(--space-3) 0;padding-left:var(--space-5);position:relative}
+  .insight-item::before{content:"◆";color:var(--accent);position:absolute;left:0}
+  .insight-item strong{color:var(--accent)}
   @media(max-width: 768px){header.top h1{font-size:18px}}
 </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -134,7 +141,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </head>
 <body>
 <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
-  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
+  数据来源：dataset/81-hardships.json（本书 100 回原文八十一难数据集，由 scripts/run_all.py 批量生成，发布快照 2026-10-04；口径与参数见该 JSON 与生成脚本源）。页面内嵌 EMBEDDED 离线示例数据（file:// 双击可用；http(s) 下经 /dataset/ 数据 API 取完整统计）。
   <details class="cite-details">
   <summary>引用格式</summary>
   <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 详解西游记 · 八十一难可交互视图. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/81-hardships-view.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
@@ -163,9 +170,22 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <h3 id="chartTitle"></h3>
     <div id="chartHost"><div class="chart-loading">数据加载中…</div>
 </div>
+    <div class="legend" id="chartLegend"></div>
+    <div class="chart-tooltip" id="chartTooltip"></div>
   </div>
   <div id="tableHost"></div>
   <p class="hint">点击表格任意行可钻取详情；表头可排序；顶部搜索框可筛选；工具栏可导出 CSV / JSON。</p>
+  <section class="section">
+    <h2 class="section-title">关键洞察</h2>
+    <div class="section-sub">口径：dataset/81-hardships.json（发布快照 2026-10-04）。页面离线回退示例 window.HD_FB 为早期人工分类，「难因」计数与本节最多相差 3 处。</div>
+    <div class="insight-list">
+      <div class="insight-item"><strong>难因两极并列：</strong>81 难中「如来/观音安排」26 难与「真正野怪」26 难并列最多，各占 32.1%；「天界/西天坐骑下凡」16 难、「人心自生的魔障」13 难居后。</div>
+      <div class="insight-item"><strong>结局高度集中：</strong>49 难（60.5%）的妖怪「被接走（有背景）」——有靠山者几乎全身而退；被打死（无背景）25 难（30.9%）；被收编 7 难（8.6%）。</div>
+      <div class="insight-item"><strong>难度几乎对半：</strong>悟空独立解决 42 难（51.9%）、需要搬救兵 39 难（48.1%），全书难度并未倾向任何一端。</div>
+      <div class="insight-item"><strong>有靠山者几乎不死：</strong>「如来/观音安排」的 26 难里 22 难被接走、0 难被打死；「天界/西天坐骑下凡」16 难全部被接走（16/0/0）。</div>
+      <div class="insight-item"><strong>真野怪与魔障最惨：</strong>「真正野怪」26 难中 18 难被打死，「人心自生的魔障」13 难中 7 难被打死；两类「被收编」合计仅 3 难（3 + 0）。</div>
+    </div>
+  </section>
     <figure class="viz-illustration" aria-hidden="true">
         <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
     </figure>
@@ -514,6 +534,37 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     document.getElementById(ids.chartTitleId).textContent = "分布：" + key;
     document.getElementById(ids.chartHostId).innerHTML = svg;
     document.getElementById(ids.chartHostId).parentNode.style.display = "block";
+    // 图例：色块与条形同色、同序（一一对应左侧标签）
+    var legendHtml = "";
+    entries.forEach(function (e, i) {
+      var v = Number(e.value);
+      if (!isFinite(v)) return;
+      legendHtml += '<span class="legend-item"><span class="legend-swatch" style="background:' + colors[i % colors.length] + '"></span>' + e.label + " " + v + "</span>";
+    });
+    var legendBox = document.getElementById("chartLegend");
+    if (legendBox) legendBox.innerHTML = legendHtml;
+    // 悬停提示：柱体可查细节（条目·数量·占比）
+    var tip = document.getElementById("chartTooltip");
+    var host = document.getElementById(ids.chartHostId);
+    var total = entries.reduce(function (s, e) { return s + (isFinite(Number(e.value)) ? Number(e.value) : 0); }, 0);
+    function moveTip(ev) {
+      tip.style.left = (ev.pageX + 14) + "px";
+      tip.style.top = (ev.pageY + 14) + "px";
+    }
+    if (tip) {
+      Array.prototype.forEach.call(host.querySelectorAll("rect"), function (rect, i) {
+        var e = entries[i];
+        var v = Number(e && e.value);
+        if (!e || !isFinite(v)) return;
+        rect.addEventListener("mouseover", function (ev) {
+          tip.innerHTML = "<strong>" + e.label + "</strong><br>数量：" + v + "<br>占比：" + (total ? (v / total * 100).toFixed(1) : "0.0") + "%";
+          tip.classList.add("visible");
+          moveTip(ev);
+        });
+        rect.addEventListener("mousemove", moveTip);
+        rect.addEventListener("mouseleave", function () { tip.classList.remove("visible"); });
+      });
+    }
     global.VisTools.makeFilterableTable({
       container: "#" + ids.tableHostId,
       columns: [{ key: "label", label: "项" }, { key: "value", label: "值" }],

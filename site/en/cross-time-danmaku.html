@@ -303,6 +303,59 @@
         .world-map svg { width: 100%; height: 100%; display: block; }
         .map-continent { fill: rgba(122, 82, 48, 0.1); stroke: rgba(122, 82, 48, 0.22); stroke-width: 0.8; }
         .map-dot { fill: var(--accent-4); cursor: pointer; transition: r var(--dur-base), fill var(--dur-base); }
+        /* 图例 */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            justify-content: center;
+            color: var(--ink-soft);
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+        }
+        .legend-swatch.dash {
+            height: 0;
+            width: 20px;
+            border-top: 2px dashed var(--accent-4);
+            border-radius: 0;
+        }
+        /* Key Insights */
+        .insight-box {
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
+            border-left: 4px solid var(--accent);
+            padding: var(--space-5) var(--space-6);
+            border-radius: var(--radius-md);
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: var(--space-3);
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: var(--space-3) 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li .marker {
+            color: var(--accent-text);
+            font-weight: 600;
+            flex-shrink: 0;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .insight-box li strong { color: var(--accent-text); font-weight: 600; }
         .map-dot:hover { fill: var(--accent); }
         .map-label { font-size: 11px; fill: var(--ink-soft); font-family: "Noto Serif SC", serif; text-anchor: middle; }
         .map-line { stroke: var(--accent-4); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.35; fill: none; }
@@ -388,7 +441,7 @@ main { overflow-x: clip; }
 
     <!-- dataSource 提示（main() 中根据 fetchStatus 更新内容） -->
     <div class="notice" id="dataSource">
-        Data source: embedded build. (To load the latest data, from the <code>site/</code> directory run <code>py -m http.server 8000</code>)
+        Data source: <code>site/en/json/v08_celebrity_profiles.json</code>, <code>site/en/json/v08_age_groups.json</code>, <code>site/en/json/v08_mouthpiece.json</code>, <code>site/en/json/v09_modern_commentary.json</code>, <code>site/en/json/v09_international_critics.json</code> and <code>site/en/json/v09_global_adaptations.json</code> (embedded copy of this project's cross-time commentary dataset; to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
     </div>
 
     <section class="device">
@@ -417,6 +470,11 @@ main { overflow-x: clip; }
         <h2 class="device-title">International Celebrity Danmaku Group</h2>
         <p style="font-size:0.85rem;color:var(--ink-soft);margin-bottom:16px;">Journey to the West goes global · cross-cultural resonance</p>
         <div class="world-map" id="world-map" aria-label="World map of international celebrities"></div>
+        <div class="legend" aria-label="World map legend">
+            <div class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>Journey to the West &middot; China (source point)</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:var(--accent-4)"></span>International reception point (critic)</div>
+            <div class="legend-item"><span class="legend-swatch dash"></span>Translation route out of the source country</div>
+        </div>
         <div id="intl-grid" class="intl-grid"></div>
         <h3 style="font-size:1rem;color:var(--ink);margin:var(--space-5) 0 10px;">Global Adaptations</h3>
         <div id="adaptations" class="adaptations"></div>
@@ -433,6 +491,20 @@ main { overflow-x: clip; }
                 <div class="track-label">LIVE Danmaku</div>
                 <div class="track-hint">Celebrity quotes and reader messages drift by together</div>
             </div>
+        </div>
+    </section>
+
+    <!-- Key Insights -->
+    <section class="device">
+        <h2 class="device-title">Key Insights</h2>
+        <div class="insight-box">
+            <h4>What five centuries of commentary actually show</h4>
+            <ul>
+                <li><span class="marker">01</span><span><strong>The star map holds 10 critics across 5 dynasties, and every one of them argues from a different seat</strong> — Li Zhuowu (Ming interpreter), Jin Shengtan (Qing commentator), Lu Xun, Hu Shi, Chen Yinke, Zheng Zhenduo, Mao Zedong, Lin Yutang, Qian Zhongshu and Guo Moruo (modern) — from "gods and demons all have human feeling" to "at most it is a very entertaining comic novel".</span></li>
+                <li><span class="marker">02</span><span><strong>The same quotes are re-cut for four age tiers</strong> — the 4-tier wall (Preschool / Elementary &middot; Middle School &middot; High School &middot; University) turns Lu Xun's line into an emoji wall for the youngest tier and into a structured debate topic for the middle-school tier.</span></li>
+                <li><span class="marker">03</span><span><strong>Only 3 critics reached the world map, and each through a different channel</strong> — Pearl S. Buck (United States, The English translation Monkey), Jorge Luis Borges (Argentina) and Kenzaburō Ōe (Japan): the English-language translation is the vector that carried the book abroad.</span></li>
+                <li><span class="marker">04</span><span><strong>The 3 recorded global adaptations split by medium, not by theme</strong> — Japan took the anime route (Dragon Ball), South Korea the comic route and the United States the film route (The Forbidden Kingdom); the 4 modern-commentary entries meanwhile hang the book on Big Tech, AI anxiety, social-media personas and involution.</span></li>
+            </ul>
         </div>
     </section>
 </main>

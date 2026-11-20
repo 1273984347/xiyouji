@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-T6HZFhMlW/zRi7rxiV/PnrhkrZLses4Leh2bf93lB1k='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-RaEQvArxHWAwNIpt9UWb1wR9zKLVA3qNrSjXA8oWvfE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Passport · Pilgrimage Courier-Route Map · Annotated Journey to the West</title>
@@ -156,7 +156,7 @@
             <span>Passport · Pilgrimage Courier-Route Map</span>
         </nav>
         <div class="notice" role="note">
-            <strong>Data Notes</strong>:
+            <strong>Data source &amp; notes</strong>:
             <span class="mono">The passport</span> is the "imperial document" threaded through the whole book along the scripture-seeking road (bestowed by Emperor Taizong in Chapter 12)—
             at every kingdom it is exchanged, stamped, and inspected, folding a Buddhist pilgrimage into the secular sovereignty of each realm passed through.
             This page marks, in chapter order, the 15 city-states/prefectures involving the pass, colored by four states: verified / unverified / altered / scripture-granted.
@@ -202,6 +202,7 @@
                 <title id="pt-title">Passport Pilgrimage Courier-Route Timeline</title>
                 <desc id="pt-desc">Chapter-order timeline of the 15 pass-involved locations from Chang'an to Lingshan, colored by four states: verified / unverified / setback / scripture-granted.</desc>
             </svg>
+            <div class="chart-tooltip" id="pass-tooltip"></div>
         </section>
 
         <!-- Block 3: Ming courier-system comparison table -->
@@ -286,6 +287,25 @@ const MING = [
   { sys:"Inspection of the pass", fn:"Prefectures/counties inspect the pass · released to cross the border", xy:"The ritual of exchanging the pass in each kingdom", cite:"Ch.54 line 13 Womanland" }
 ];
 
+/* W1286：站点 tooltip（circle 图元可查细节：回目/状态/原文出处） */
+function showPassTip(d, event){
+  var tip = d3.select("#pass-tooltip");
+  tip.style("position","fixed")
+     .style("left",(event.clientX + 14) + "px")
+     .style("top",(event.clientY - 10) + "px")
+     .html("<strong>Ch." + d.ch + " &middot; " + d.name + "</strong><br>" +
+           d.pill + "<br>" + d.note + "<br>" + d.cite)
+     .classed("visible", true);
+}
+function movePassTip(event){
+  d3.select("#pass-tooltip")
+     .style("left",(event.clientX + 14) + "px")
+     .style("top",(event.clientY - 10) + "px");
+}
+function hidePassTip(){
+  d3.select("#pass-tooltip").classed("visible", false);
+}
+
 function renderTimeline(){
   const svg = d3.select("#pass-svg");
   const W = svg.node().clientWidth || 900;
@@ -302,7 +322,11 @@ function renderTimeline(){
     const y = pad + i * rowH + 18;
     // node
     g.append("circle").attr("cx", xNode).attr("cy", y).attr("r", 9).attr("fill", COLOR[d.status])
-      .attr("stroke", "#fff").attr("stroke-width", 2);
+      .attr("stroke", "#fff").attr("stroke-width", 2)
+      .style("cursor","pointer")
+      .on("mouseenter", function(event){ showPassTip(d, event); })
+      .on("mousemove", movePassTip)
+      .on("mouseleave", hidePassTip);
     // text
     g.append("text").attr("x", xText).attr("y", y).attr("class", "t-title")
       .attr("fill", "var(--ink)").text("Ch." + d.ch + " · " + d.name);

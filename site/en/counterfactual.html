@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-2AfMcXMwcXByIdgKB8vDGwgliFM8mlVP9g2iVMMWIoQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-K2rW02gsAlgsNoTcws66w8v7StGDwAVd7uTyUVoemCU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Counterfactual Inference · Annotated Journey to the West</title>
@@ -384,7 +384,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+            Data source: <code>site/en/json/counterfactual_scenarios.json</code> and <code>site/en/json/counterfactual_summary.json</code> (embedded copy of this project's counterfactual dataset; to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
         </div>
 
         <!-- KPI 概要栏 -->
@@ -433,6 +433,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <svg id="chart-category"></svg>
                 </div>
             </div>
+            <div class="chart-tooltip" id="tooltip"></div>
         </section>
 
         <!-- 图表 4：Core Conclusion -->
@@ -701,8 +702,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .outerRadius(radius * 0.82);
 
         const arcs = pie(Object.entries(data));
+        const arcTotal = Object.values(data).reduce((a, b) => a + b, 0);
 
-        g.selectAll("path")
+        /* W1286：图元 tooltip（path 扇区可查细节） */
+        const arcSel = g.selectAll("path")
             .data(arcs)
             .enter()
             .append("path")
@@ -711,7 +714,15 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke-width", 2)
             .attr("d", arc)
             .style("opacity", 0)
-            .transition()
+            .style("cursor", "pointer")
+            .on("mouseenter", function (event, d) {
+                showChartTip("<strong>" + d.data[0] + "</strong> · " + d.data[1] + " scenarios · " +
+                             (d.data[1] / arcTotal * 100).toFixed(0) + "% of the counterfactual set", event);
+            })
+            .on("mousemove", moveChartTip)
+            .on("mouseleave", hideChartTip);
+
+        arcSel.transition()
             .duration(MOYUN_RM?0:600)
             .delay(MOYUN_RM?0:((d, i) => i * 120))
             .style("opacity", 1);
@@ -767,6 +778,42 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const data = Array.from(counts, ([category, count]) => ({ category, count }))
             .sort((a, b) => b.count - a.count);
 
+        /* ============================================================
+           W1286 · 第 83 门禁（SVG 标签裁切与重叠）——x 轴长标签按词界折行
+           隐藏型 audit 补丁把 x 轴刻度标签 CSS 旋转 -38°（transform-origin: top center），
+           斜排后标签横向外扩 ≈ 0.9×字宽 ⇒ 长标签之间互压、也压住轴下说明文字
+           （相交面积/较小标签面积 > 0.30 ⇒ 判违例）。
+           修法：按词界折成 ≤2 行（不删字·不换文案·两行拼回即原文）⇒ 单行宽减半、不再互压。
+           ============================================================ */
+        function w1286WrapTicks(sel, maxChars) {
+            const nodes = (sel && sel.nodes) ? sel.nodes() : (sel || []);
+            Array.prototype.slice.call(nodes).forEach(function (t) {
+                const full = (t.textContent || '').trim();
+                const words = full.split(/\s+/);
+                if (words.length < 2) return;
+                let best = null;
+                for (let i = 1; i < words.length; i++) {
+                    const l1 = words.slice(0, i).join(' ');
+                    const l2 = words.slice(i).join(' ');
+                    if (l1.length > maxChars || l2.length > maxChars) continue;
+                    const m = Math.max(l1.length, l2.length);
+                    if (!best || m < best.m) best = { a: l1, b: l2, m: m };
+                }
+                if (!best) return;
+                const x0 = t.getAttribute('x');
+                while (t.firstChild) t.removeChild(t.firstChild);
+                const mk = function (s, dy) {
+                    const sp = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+                    sp.setAttribute('x', x0 === null ? '0' : x0);
+                    sp.setAttribute('dy', dy);
+                    sp.textContent = s;
+                    t.appendChild(sp);
+                };
+                mk(best.a, '0.71em');
+                mk(best.b, '1.2em');
+            });
+        }
+
         const svg = d3.select("#chart-category");
         svg.selectAll("*").remove();
 
@@ -792,7 +839,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .range([innerH, 0]);
 
         // 坐标轴
-        g.append("g")
+        const xAxisSel = g.append("g")
             .attr("transform", `translate(0, ${innerH})`)
             .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
             .selectAll("text")
@@ -800,6 +847,9 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("fill", "#23201A")
             .attr("transform", "rotate(-18)")
             .style("text-anchor", "end");
+        /* W1286：6 个假设类目名过长（窄容器内斜排后相邻类目名互压 ⇒ 第 83 门禁判重叠）
+           ⇒ 按词界折成 ≤2 行（原文不减）。 */
+        w1286WrapTicks(xAxisSel, 14);
 
         g.append("g")
             .call(d3.axisLeft(y).ticks(Math.min(yMax + 1, 6)).tickSize(-innerW).tickPadding(6))
@@ -828,6 +878,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("y", d => y(d.count))
             .attr("height", d => innerH - y(d.count));
 
+        /* W1286：图元 tooltip（rect 柱可查细节） */
+        bars.style("cursor", "pointer")
+            .on("mouseenter", function (event, d) {
+                showChartTip("<strong>" + d.category + "</strong> · " + d.count + " scenarios", event);
+            })
+            .on("mousemove", moveChartTip)
+            .on("mouseleave", hideChartTip);
+
         // 数值标签
         g.selectAll(".bar-label")
             .data(data)
@@ -851,6 +909,26 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("fill", "#6B6455")
             .style("letter-spacing", "0.08em")
             .text(`Total ${data.length} categories · ${d3.sum(data, d => d.count)} scenarios`);
+    }
+
+    /* ============================================================
+       W1286：图表 tooltip 工具（.chart-tooltip 容器 + .classed('visible') 控显隐）
+       ============================================================ */
+    function showChartTip(html, event) {
+        d3.select("#tooltip")
+            .style("position", "fixed")
+            .style("left", (event.clientX + 14) + "px")
+            .style("top", (event.clientY - 10) + "px")
+            .html(html)
+            .classed("visible", true);
+    }
+    function moveChartTip(event) {
+        d3.select("#tooltip")
+            .style("left", (event.clientX + 14) + "px")
+            .style("top", (event.clientY - 10) + "px");
+    }
+    function hideChartTip() {
+        d3.select("#tooltip").classed("visible", false);
     }
 
     /* ============================================================

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sHxnnpsY9ndHYUBCaRZ+pROpQdBR8fYW9YURRjqxYBg=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-QIMAH4vEub24o9ouLEMLQIURtrvIpekg28Nou3i3S+E=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>洞府房产档案 · 详解西游记</title>
@@ -766,17 +766,33 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("font-family", "JetBrains Mono, monospace")
             .text(d => d.luxury);
 
-        // X 轴标签（旋转）
-        g.append("g")
-            .attr("transform", `translate(0, ${innerH})`)
-            .call(d3.axisBottom(x).tickSize(0))
-            .call(gn => gn.select(".domain").remove())
-            .selectAll("text")
+        // X 轴标签（竖排中文 · 相邻地区标签包围盒不相交）
+        // W1286 G9：原 -55° 旋转标签的包围盒两两相交（11 对违例）⇒ 改竖排单字
+        //   （单字宽 ≈ 11px ≪ 类目间距 20.5px ⇒ 横向永不相交；地区全名保留在 <title>）
+        const regionLabelG = g.append("g")
+            .attr("class", "axis-label")
+            .attr("transform", `translate(0, ${innerH})`);
+        regionLabelG.selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("y", 10)
+            .attr("text-anchor", "middle")
             .style("font-size", "0.66rem")
             .style("fill", "var(--ink-soft)")
-            .attr("transform", "rotate(-55)")
-            .style("text-anchor", "end")
-            .text(d => { const p = String(d).split("·")[0]; return p.length > 4 ? p.slice(0, 4) + "…" : p; });
+            .each(function(d) {
+                const p = String(d.region).split("·")[0];
+                const short = p.length > 4 ? p.slice(0, 4) : p;
+                const cx = x(d.region) + x.bandwidth() / 2;
+                const t = d3.select(this);
+                t.append("title").text(d.region);
+                short.split("").forEach((ch, i) => {
+                    t.append("tspan")
+                        .attr("x", cx)
+                        .attr("dy", i === 0 ? 0 : "1em")
+                        .text(ch);
+                });
+            });
 
         // tooltip
         g.selectAll(".tip")

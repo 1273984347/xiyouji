@@ -140,6 +140,30 @@
         }
         .hardship-detail.visible { display: block; }
         .hardship-detail h4 { color: var(--text-secondary); margin-bottom: 6px; }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -244,7 +268,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
+                <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
         <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自交互地图的 17 站路线、8 处难点标注与坐标</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>近半站点是难点：</strong>17 个路线节点里有 8 处被标为重大难点（流沙河、白虎岭、平顶山、号山、通天河、火焰山、小雷音寺、狮驼岭），几乎每隔两站就是一难。</div>
+                <div class="insight-item"><strong>难点全部后置：</strong>8 处难点的到达回目全部落在第 22 至 77 回之间；长安（第 12 回）到观音院（第 16 至 17 回）这几站是组队期，真正的难从收沙僧的流沙河（第 22 回）才开始。</div>
+                <div class="insight-item"><strong>狮驼岭是最长单站：</strong>停留跨度记 4 为全程之最（第 74 至 77 回），火焰山（第 59 至 61 回）、号山（第 40 至 42 回）、黑松林（第 28 至 31 回）三处并列 3 —— 越到西行末段，单站停留越久。</div>
+                <div class="insight-item"><strong>坐标一路向西：</strong>长安（经度 108.9／纬度 34.3）到灵山（经度 78.0／纬度 26.5），经度横跨 30.9 度、纬度只落差 7.8 度，与页面 KPI 的总里程 10.8 万里、耗时 14 年首尾相扣。</div>
+            </div>
+        </section>
+
+<section class="section">
             <h2 class="section-title">相关页面</h2>
             <div class="section-sub">本页与 journey-route.html 形成"静态-交互"双轨，可对照阅读。</div>
             <p style="font-size:0.92rem; line-height:2;">

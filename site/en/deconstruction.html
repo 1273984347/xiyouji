@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-f98bs3miUBBUqax5ajxoQ77d4PWHnIVsHb6zXtwQji0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-3+vhhcCHGYCvJqfTR5JFo32GwXlMP+eujPhdK7MA0Pk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Deconstruction and East Asian Re-creations · Annotated Journey to the West</title>
@@ -426,6 +426,17 @@
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+/* W1286 L-01 · 源级标签保障（不依赖运行时公共工具 label-contrast.js）：
+   暗色态公共层给 SVG 图形加 brightness(1.45) 提亮（tokens.css），而本页标签前景色是
+   静态决定的（白字压色块 / 金字压纸底）⇒ 公共工具失效时前景与底色同色碰撞。
+   修法：给这两类标签加静态深色描边——描边与底色的分离度 ≥3.0 即提供字形分离，
+   不依赖任何运行时脚本即可读（与判据侧光晕分离度豁免同款机制）。
+   · #pie-country .tm text ＝ treemap 色块上的白字（色块被暗态提亮后白字不可读）
+   · #timeline-svg .timeline-item text ＝ 时间轴国家色字（浅色字压纸底 cr 1.58） */
+#pie-country .tm text { stroke: rgba(20,20,30,0.85); }
+/* 时间轴年份字（.tl-year）：各国色字 ⇒ 浅色态压纸底需深描边、暗色态压深底需浅描边 */
+#timeline-svg .tl-year { stroke: rgba(20,20,30,0.85); }
+html[data-theme="dark"] #timeline-svg .tl-year { stroke: rgba(255,255,255,0.88); }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -470,7 +481,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+            Data source: <code>site/en/json/deconstruction_works.json</code> and <code>site/en/json/deconstruction_summary.json</code> (embedded copy of this project's 100-chapter dataset; to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
         </div>
 
         <!-- KPI overview -->
@@ -1210,7 +1221,7 @@ function renderTreemap(opts){
             });
 
         // 点旁标签
-        g.selectAll(".scatter-label")
+        const scatterLabels = g.selectAll(".scatter-label")
             .data(placed)
             .enter()
             .append("text")
@@ -1222,11 +1233,62 @@ function renderTreemap(opts){
                 const t = d.title.replace(/[《》]/g, "");
                 return t.length > 14 ? t.slice(0, 13) + "…" : t;
             })
-            .style("opacity", 0)
-            .transition()
+            .style("opacity", 0);
+        scatterLabels.transition()
             .duration(MOYUN_RM?0:500)
             .delay(MOYUN_RM?0:((d, i) => 600 + i * 40))
             .style("opacity", 1);
+
+        /* 标签避让（83 槽 · SVG 标签裁切与重叠）
+           象限角标与作品标签按实测 bbox 重新落位（信息不丢：作品全名仍在 tooltip 里）：
+           · 象限角标在象限内横移，让开纵轴刻度列（否则左上角标与 "10" 刻度相压）；
+           · 作品标签逐个挑一个不与刻度/轴标题/象限名/已落位标签相交的纵向位置。 */
+        (function avoidScatterLabels() {
+            const R = el => el.getBoundingClientRect();
+            const moved = (r, dx, dy) => ({ left: r.left + dx, right: r.right + dx, top: r.top + dy, bottom: r.bottom + dy });
+            const hitArea = (a, b) => {
+                const ix = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+                const iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+                return (ix > 0 && iy > 0) ? ix * iy : 0;
+            };
+            const isMovable = t => t.classList.contains("scatter-label") || t.classList.contains("scatter-quadrant-label");
+            const blockers = [];
+            svg.node().querySelectorAll("text").forEach(t => { if (!isMovable(t)) blockers.push(R(t)); });
+            const taken = [];
+            // 1) 象限角标：左侧象限右移、右侧象限左移，逐档取第一个不相交的位
+            g.selectAll(".scatter-quadrant-label").nodes().forEach(t => {
+                const x0 = parseFloat(t.getAttribute("x"));
+                const r0 = R(t);
+                const dir = x0 < innerW / 2 ? 1 : -1;
+                let best = null;
+                for (let k = 0; k <= 5; k++) {
+                    const dx = dir * 18 * k;
+                    const r = moved(r0, dx, 0);
+                    const s = blockers.concat(taken).reduce((sum, b) => sum + hitArea(r, b), 0);
+                    if (!best || s < best.s) best = { dx, s };
+                    if (s === 0) break;
+                }
+                t.setAttribute("x", x0 + best.dx);
+                taken.push(moved(r0, best.dx, 0));
+            });
+            // 2) 作品标签：纵向候选位（上/下/更上/更下…），按点位自上而下逐个落位
+            const nodes = g.selectAll(".scatter-label").nodes();
+            const order = nodes.map((t, i) => i).sort((a, b) => placed[a]._y - placed[b]._y);
+            order.forEach(i => {
+                const t = nodes[i];
+                const y0 = parseFloat(t.getAttribute("y"));
+                const r0 = R(t);
+                let best = null;
+                for (const dy of [0, 22, -14, 36, -28, 50, -42, 64]) {
+                    const r = moved(r0, 0, dy);
+                    const s = blockers.concat(taken).reduce((sum, b) => sum + hitArea(r, b), 0);
+                    if (!best || s < best.s) best = { dy, s };
+                    if (s === 0) break;
+                }
+                t.setAttribute("y", y0 + best.dy);
+                taken.push(moved(r0, 0, best.dy));
+            });
+        })();
 
         // 图例
         const legend = d3.select("#scatter-legend");
@@ -1375,6 +1437,7 @@ function renderTreemap(opts){
 
         // 文本（年份 + 简称）
         items.append("text")
+            .attr("class", "tl-year")
             .attr("x", d => d._x)
             .attr("y", d => d._above ? innerH / 2 - 38 - d._slot * 22 : innerH / 2 + 50 + d._slot * 22)
             .attr("text-anchor", "middle")

@@ -492,6 +492,31 @@
             z-index: 10;
         }
         .chart-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: var(--space-2); }
+        /* 图例 */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin-top: 14px;
+            font-size: 0.85rem;
+            justify-content: center;
+            color: var(--ink-soft);
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .legend-swatch.lg-lg {
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-sizing: border-box;
+        }
         /* IPO 招股书 */
         .ipo-card {
             background: var(--paper);
@@ -787,7 +812,7 @@ html[data-theme="dark"] { --rating-gold-ink: #F0D878; }
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
-            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+            Data source: <code>site/en/json/mount_rights_report.json</code>, <code>site/en/json/tang_monk_food_vlog.json</code>, <code>site/en/json/monster_ipo.json</code> and <code>site/en/json/ethics_consumption_summary.json</code> (embedded copy of this project's modern-ethics dataset; to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
         </div>
 
         <!-- KPI 概要栏 -->
@@ -867,9 +892,13 @@ html[data-theme="dark"] { --rating-gold-ink: #F0D878; }
         <section class="section">
             <h2 class="section-title">Monster IPO Failure Rate vs. Employee Count · Scatter Plot</h2>
             <div class="section-sub">x = employees (log scale) · y = annual revenue (lives) · all 5 failed · all marked in red.</div>
-            <div class="chart-wrap" style="position:relative;">
+            <div class="chart-wrap" style="position:relative; padding-bottom:56px;">
                 <svg id="ipo-scatter-svg"></svg>
                 <div class="chart-tip" id="ipo-tip"></div>
+            </div>
+            <div class="legend" aria-label="Monster IPO scatter legend">
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>One marker = one monster-company IPO (5 listed, 5 failed) &middot; both axes are log scale</div>
+                <div class="legend-item"><span class="legend-swatch lg-lg" style="background:var(--accent)"></span>Large marker = Lion Camel Ridge Group (48,000 employees &middot; largest workforce)</div>
             </div>
         </section>
 

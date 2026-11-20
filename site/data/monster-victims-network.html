@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qzI1eR3kxmyEWAZKscdZkuebxOkxJtaNogsNwEWgCOc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Y9YXpNvV8jszz+gTLRedTtttzYXUpkzB3NSZ17qy/WE=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪受害者关系图谱 · 详解西游记</title>
@@ -373,7 +373,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <div class="chart-block">
     <div class="chart-title">四受害者命运时间线</div>
     <div class="chart-caption">X 轴：回目时序 · Y 轴：四受害者分轨 · 颜色：阶段（创伤/复原）· hover 显示详情</div>
-    <svg id="chart-timeline" class="chart-svg" width="100%" height="440"></svg>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="460"></svg>
     <div class="legend-row" id="timeline-legend"></div>
   </div>
 </section>
@@ -1107,14 +1107,14 @@ function renderTimeline(timelineData, victims) {
   }
 
   const width = +svg.node().clientWidth || 800;
-  const height = 440;
+  const height = 460;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
   const victimNames = victims.map(v => v.name);
   const victimColors = {};
   victims.forEach(v => { victimColors[v.name] = v.color; });
 
-  const margin = { top: 30, right: 40, bottom: 70, left: 110 };
+  const margin = { top: 30, right: 40, bottom: 90, left: 110 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
 
@@ -1155,6 +1155,9 @@ function renderTimeline(timelineData, victims) {
   });
 
   // X 轴节点段（按回目聚类）
+  // W1286：段落标签下移到旋转刻度行之下（X 轴刻度标签为旋转排版·bbox 向下伸 ≈28px
+  //       ⇒ 原 innerH+22 与「第35回」刻度标签相压）
+  const AXIS_LABEL_ROW = 50;
   const timeNodes = [
     { label: '金角银角案 (32-35回)', range: [32, 35] },
     { label: '通天河案 (47-49回)', range: [47, 49] },
@@ -1174,7 +1177,7 @@ function renderTimeline(timelineData, victims) {
       .attr('rx', 3);
     g.append('text')
       .attr('x', (x1 + x2) / 2)
-      .attr('y', innerH + 22)
+      .attr('y', innerH + AXIS_LABEL_ROW)
       .attr('text-anchor', 'middle')
       .attr('font-size', '11px')
       .attr('font-weight', '600')
@@ -1269,7 +1272,7 @@ function renderTimeline(timelineData, victims) {
 
   // 轴标题
   g.append('text')
-    .attr('x', innerW / 2).attr('y', innerH + 50)
+    .attr('x', innerW / 2).attr('y', innerH + AXIS_LABEL_ROW + 26)
     .attr('text-anchor', 'middle')
     .attr('font-size', '12px')
     .attr('fill', '#8a7a6a')

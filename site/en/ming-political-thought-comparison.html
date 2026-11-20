@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-DYNHQiNQ7tCt5Aw0x2sQf/V7qNIf5t+8WejbAKb8fpU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-UPWUxIDOnoSSj2gqO2m8hf8J9OeqCENk6W+o3+UJLJQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Ming Political Thought Comparison · Annotated Journey to the West</title>
@@ -161,6 +161,17 @@
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+/* W1286 L-01 · source-level label safeguard (no dependency on the runtime label-contrast.js tool):
+   the dark-mode public layer applies brightness(1.45) to SVG shapes (tokens.css) while this page's
+   label foregrounds are static (white text over color cells / gold text over the paper backdrop)
+   => when the tool is unavailable, foreground and backdrop collide on the same tone.
+   Fix: give these two label groups a static dark stroke — a stroke/baseline separation of >= 3.0
+   already provides glyph separation, so the labels stay readable with no runtime script at all
+   (same mechanism as the gate's halo-separation exemption).
+   · .heat-cell = the score inside a heatmap cell (white text becomes unreadable once the cell is brightened)
+   · .tl-event  = a timeline event name (gold text over the paper backdrop, cr 2.85) */
+#heatmap-svg .heat-cell,
+#timeline-svg .tl-event { stroke: rgba(20,20,30,0.85); }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -204,6 +215,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
+        <div class="notice" id="dataSource">
+            Data source: embedded dataset compiled in this project from the 100-chapter text corpus "Journey to the West" (Wu Cheng'en); the series are embedded in this page — no external fetch is required.
+        </div>
+
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="index.html">EN Home</a>
             <span class="sep">›</span>
@@ -656,6 +671,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("opacity", 1);
 
             g.append("text")
+                .attr("class", "heat-cell")
                 .attr("x", x(d.dimension) + x.bandwidth() / 2)
                 .attr("y", y(d.group) + y.bandwidth() / 2)
                 .attr("text-anchor", "middle")
@@ -762,6 +778,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("r", 6);
 
             g.append("text")
+                .attr("class", "tl-event")
                 .attr("x", x(d.year))
                 .attr("y", yPos + (offset > 0 ? 14 : -8))
                 .attr("text-anchor", "middle")

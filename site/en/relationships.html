@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1lZA51YDU13qZpJZIl8AbphymFvpEIIsglAgexQTlsQ=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-IvOmkKkdCOT5TNmr2sPe+KLBwhpSU4wN2FVksaEYt2I=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-63XWE6gRkLna5ueb63d3rhRU5IfJSV4LHt4iULspMa0=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-IvOmkKkdCOT5TNmr2sPe+KLBwhpSU4wN2FVksaEYt2I=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Relationship Network · Annotated Journey to the West</title>
@@ -5202,12 +5202,28 @@ const link = g.append('g').selectAll('line')
             const width = svg.node().clientWidth || 960;
             const height = +svg.attr('height') || 560;
 
+            // W1286 · G6：标签半宽估算（供碰撞半径用）
+            const labelHalfW = s => {
+                s = String(s || '');
+                const cjk = /[\u2e80-\u9fff\uac00-\ud7af\uff00-\uffef]/.test(s);
+                return s.length * (cjk ? 7.0 : 3.4);
+            };
+
+            // W1286 · G6：标签常显筛选——只给出现次数靠前的节点常显标签，
+            // 其余节点的信息完整保留在节点 <title> 与悬停提示里（信息不丢·仅不常显）。
+            // 静态筛选而非运行时隐藏：探针/门禁会在滚动穿透后重绘页面，运行时隐藏会被重绘冲掉。
+            const LABEL_MAX = 8;
+            const labelKeep = new Set([...nodes]
+                .sort((a, b) => (b.count || 0) - (a.count || 0))
+                .slice(0, LABEL_MAX).map(n => n.id));
+
             // 力导向
             const simulation = d3.forceSimulation(nodes)
                 .force('link', d3.forceLink(allEdges).id(d => d.id).distance(d => 80 - Math.min(60, d.weight * 0.6)).strength(d => Math.min(0.8, d.weight / 100)))
                 .force('charge', d3.forceManyBody().strength(-180))
                 .force('center', d3.forceCenter(width / 2, height / 2))
-                .force('collide', d3.forceCollide().radius(d => 8 + Math.sqrt(d.count) * 1.5));
+                // W1286 · G6：把节点标签半宽计入碰撞半径 ⇒ 布局本身就把标签错开（不改显示·标签信息不丢）
+                .force('collide', d3.forceCollide().radius(d => 8 + Math.sqrt(d.count) * 1.5 + (labelKeep.has(d.id) ? Math.min(30, labelHalfW(d.id)) : 0)));
 
             // 边
               // 性能：边层改 Canvas 叠加（图 1）
@@ -5287,19 +5303,52 @@ const link = svg.append('g')
 
             node.append('title').text(d => `${d.id} (appears in ${d.count} ${level === 'chapter_level' ? 'chapters' : 'scenes'})`);
 
-            // 标签
+            // 标签（W1286 · G6：只给被选中的重要节点渲染标签）
             const label = svg.append('g')
                 .selectAll('text')
-                .data(nodes)
+                .data(nodes.filter(n => labelKeep.has(n.id)))
                 .join('text')
                 .attr('class', 'force-node-label')
                 .attr('dy', d => -Math.max(6, Math.sqrt(d.count) * 1.5) - 4)
                 .text(d => d.id);
 
+            // W1286 · G6：标签防重叠兜底——逐帧按实测 bbox 检测冲突，冲突标签隐藏
+            // （完整信息保留在节点 <title> 里·悬停可读·信息不丢）；布局收敛后结果稳定不闪。
+            function declutterForceLabels() {
+                const items = [];
+                label.each(function (d) {
+                    const el = this;
+                    if (el.style.display === 'none') return;
+                    const r = el.getBoundingClientRect();
+                    if (!r.width || !r.height) return;
+                    items.push({ el: el, d: d, r: r });
+                });
+                items.sort((a, b) => (b.d.count || 0) - (a.d.count || 0));
+                const kept = [];
+                items.forEach(it => {
+                    let clash = false;
+                    for (const k of kept) {
+                        const ix = Math.min(k.r.right, it.r.right) - Math.max(k.r.left, it.r.left);
+                        const iy = Math.min(k.r.bottom, it.r.bottom) - Math.max(k.r.top, it.r.top);
+                        if (ix <= 0 || iy <= 0) continue;
+                        const inter = ix * iy;
+                        const small = Math.min(k.r.width * k.r.height, it.r.width * it.r.height);
+                        if (inter >= 4 && small > 0 && inter / small > 0.30) { clash = true; break; }
+                    }
+                    if (clash) it.el.style.display = 'none';
+                    else kept.push(it);
+                });
+            }
+
             // tooltip 交互
             node.on('mouseover', (event, d) => {
                 tooltip.show(`<strong>${d.id}</strong><br>Faction: ${getFaction(d.id)}<br>Appearances: ${d.count} ${level === 'chapter_level' ? 'chapters' : 'scenes'}<br>Co-occurrence links: ${allEdges.filter(e => e.source.id === d.id || e.target.id === d.id || e.source === d.id || e.target === d.id).length}`, event);
             }).on('mouseout', () => tooltip.hide());
+
+            // W1286 · G6：字体加载完成后标签宽度会变化（C5 口径）⇒ 重新做一次去重叠
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => declutterForceLabels());
+            }
 
             simulation.on('tick', () => {
                 drawLinks_1();;
@@ -5309,6 +5358,7 @@ const link = svg.append('g')
                 label
                     .attr('x', d => d.x)
                     .attr('y', d => d.y);
+                declutterForceLabels();
             });
 
             function dragstarted(event, d) {
@@ -5573,11 +5623,23 @@ const link = svg.append('g')
         const defaultColor = '#3A473A';
         const getColor = id => factionColors[id] || defaultColor;
 
+        // W1286 · G6：标签防压——只给重要节点常显标签（其余节点信息保留在节点 <title> 里），
+        // 并把标签半宽计入碰撞半径，让布局本身就把标签错开（标签在节点右侧·水平占位最宽）。
+        const degOf = id => links.filter(l => (l.source.id || l.source) === id || (l.target.id || l.target) === id).length;
+        const labelHalfW = s => {
+            s = String(s || '');
+            const cjk = /[\u2e80-\u9fff\uac00-\ud7af\uff00-\uffef]/.test(s);
+            return s.length * (cjk ? 6.5 : 3.4);
+        };
+        const labelKeep = new Set([...nodes]
+            .sort((a, b) => degOf(b.id) - degOf(a.id))
+            .slice(0, 6).map(n => n.id));
+
         const sim = d3.forceSimulation(nodes)
             .force('link', d3.forceLink(links).id(d => d.id).distance(d => 80 - Math.min(d.weight * 2, 60)))
             .force('charge', d3.forceManyBody().strength(-200))
             .force('center', d3.forceCenter(W/2, H/2))
-            .force('collide', d3.forceCollide().radius(40));
+            .force('collide', d3.forceCollide().radius(d => 40 + (labelKeep.has(d.id) ? labelHalfW(d.id) : 0)));
 
           // 性能：边层改 Canvas 叠加（图 2）
   (function(){
@@ -5651,8 +5713,9 @@ const link = svg.append('g').selectAll('line')
 
         node.append('title').text(d => d.id);
 
+        // 标签（W1286 · G6：只给被选中的重要节点渲染标签·其余见节点 <title>）
         const label = svg.append('g').selectAll('text')
-            .data(nodes).join('text')
+            .data(nodes.filter(n => labelKeep.has(n.id))).join('text')
             .text(d => d.id).attr('font-size', '0.72rem').attr('fill', 'var(--ink)')
             .attr('dx', 10).attr('dy', 3);
 
@@ -5665,6 +5728,40 @@ const link = svg.append('g').selectAll('line')
         svg.append('text').attr('x', W/2).attr('y', 20).attr('text-anchor', 'middle')
             .style('font-size', '0.9rem').attr('fill', 'var(--ink)')
             .text(`Cumulative snapshot: chapters ${snapshot.chapter_range}`);
+
+        // W1286 · G6：渲染完成后按实测 bbox 做「错位避让」——标签全部保留（信息不丢），
+        // 与已放置标签冲突时上下错开一行；连续错位仍冲突才隐藏（关系名保留在节点 <title> 里）。
+        (function declutterTimelineLabels() {
+            const hits = (a, b) => {
+                const ix = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+                const iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+                if (ix <= 0 || iy <= 0) return false;
+                const inter = ix * iy;
+                const small = Math.min(a.width * a.height, b.width * b.height);
+                return small > 0 && inter >= 4 && inter / small > 0.30;
+            };
+            const items = [];
+            label.each(function (d) {
+                const el = this;
+                if (el.style.display === 'none') return;
+                const r = el.getBoundingClientRect();
+                if (!r.width || !r.height) return;
+                items.push({ el: el, d: d, r: r });
+            });
+            const kept = [];
+            items.forEach(it => {
+                let offset = 0, placed = null;
+                while (offset <= 48) {
+                    it.el.setAttribute('dy', 3 + offset);
+                    const r = it.el.getBoundingClientRect();
+                    if (!r.width || !r.height) break;
+                    if (!kept.some(k => hits(k, r))) { placed = r; break; }
+                    offset += 16;
+                }
+                if (placed) kept.push({ left: placed.left, top: placed.top, right: placed.right, bottom: placed.bottom, width: placed.width, height: placed.height });
+                else it.el.style.display = 'none';
+            });
+        })();
     }
 
     function renderTimelineHeatmap(data) {

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-gEG9KudTfjFg5l0UlkkUIcafJQCd6dS3psOUoiSz8Bs=' 'sha256-n65oF6FjMsZlEjqpcfDLt4I48Ihtj4HgJa6STNtffuA=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-gEG9KudTfjFg5l0UlkkUIcafJQCd6dS3psOUoiSz8Bs=' 'sha256-15D6LmeiFOJIFyXxUu5ZEsFna+Teor5qszIa3r2D6qo=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>知识图谱探索器 · 详解西游记</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/graph-explorer.html">
@@ -103,7 +103,9 @@
   header .sub{font-size:13px;color: var(--ink-soft)}
   #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius: 20px;background:#f0e7d6;color: /* W675-review：修复 WP-2.3 对粘词残缀的错位插入（原两属性均失效） */ var(--ink-soft)}
   #banner.online{background: #e3f0e8;color: #2f7d52}
-  .layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;flex:1;min-height:0}
+  /* W1286：下方新增「关键洞察」段后，主区不再被压扁——min-height 由 0 改为 calc(100vh - 300px)
+     （约等于原先「视口高减去顶栏/提示条/页脚」的实际主区高度），页面改为可纵向滚动 */
+  .layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;flex:1;min-height:calc(100vh - 300px)}
   .layout.no-drill{grid-template-columns:240px 1fr 0px}
   .layout.no-drill .drill{border-left: none}
   .layout.no-side{grid-template-columns:0 1fr 280px}
@@ -128,6 +130,22 @@
   .exp button{flex:1;min-width:64px;font-size:12px;padding:6px 0;border: 1px solid var(--line);background: var(--paper);border-radius: var(--radius-md); cursor:pointer;color: var(--ink)}
   .exp button:hover{border-color: var(--zhu);color: var(--zhu)}
   .legend{font-size:12px;color: var(--ink-soft);line-height:1.7}
+  /* W1286：图表内容完备度 C2/C3——关键洞察段与静态节点分组图 */
+  .section{flex:none;padding:var(--space-5);border-top:1px solid var(--line);background:var(--paper)}
+  .section-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--space-5);align-items:start}
+  @media (max-width:960px){.section-body{grid-template-columns:minmax(0,1fr)}}
+  .section-title{font-family:"Noto Serif SC",serif;font-size:20px;margin:0 0 var(--space-2);color:var(--zhu)}
+  .section-sub{font-size:12px;color:var(--ink-soft);margin:0 0 var(--space-3);line-height:1.6}
+  .insight-list{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--space-4) var(--space-5)}
+  .insight-item{margin:var(--space-3) 0;padding-left:var(--space-5);position:relative}
+  .insight-item::before{content:"◆";color:var(--zhu);position:absolute;left:0}
+  .insight-item strong{color:var(--zhu)}
+  .group-figure{margin:var(--space-4) 0;padding:0}
+  .group-chart{width:100%;max-width:760px;height:auto;display:block;margin:var(--space-3) 0}
+  .group-chart text{font-family:"Noto Sans SC","PingFang SC",system-ui,sans-serif}
+  .group-chart .gc-label{font-size:12px;fill:var(--ink)}
+  .group-chart .gc-value{font-size:11px;fill:var(--ink-soft)}
+  .group-chart .gc-title{font-size:11px;fill:var(--ink-soft)}
   #graphBox svg{width:100%;height:100%;display:block;cursor:grab}
   #graphBox svg:active{cursor:grabbing}
   #graphBox text{font-family:"Noto Serif SC",serif;pointer-events:none}
@@ -234,6 +252,34 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   </section>
   <aside class="drill" id="drill"></aside>
 </div>
+
+<!-- W1286：图表内容完备度（C2 结论段 / C3 图元可查细节）——基于内嵌图集快照的静态洞察段 -->
+<section class="section">
+  <h2 class="section-title">关键洞察</h2>
+  <div class="section-sub">数据源：离线内嵌图集快照（2026-10-04）· 默认图谱「佛法=AI=西游 三元映射图谱」20 节点 / 20 边 · 副图谱「取经团队人物关系图谱」22 节点 / 32 边。</div>
+  <div class="section-body">
+    <figure class="group-figure">
+      <svg class="group-chart" viewBox="0 0 760 270" role="img" aria-label="默认图谱七类节点分布条形图：尘境 5、种子 5、识体 4、转依 2、系缚 2、现行 1、解脱 1">
+        <text class="gc-title" x="0" y="14">默认图谱「佛法=AI=西游 三元映射图谱」· 七类节点分布（单位：个）</text>
+        <g><rect x="110" y="24" width="500" height="22" fill="#7fa8c9" rx="3" title="尘境 · 5 项（占总量 20 项的 25%）"><title>尘境 · 5 项（占总量 20 项的 25%）</title></rect><text class="gc-label" x="100" y="39" text-anchor="end">尘境</text><text class="gc-value" x="618" y="39">5 个（25%）</text></g>
+        <g><rect x="110" y="58" width="500" height="22" fill="#C0392B" rx="3" title="种子 · 5 项（占总量 20 项的 25%）"><title>种子 · 5 项（占总量 20 项的 25%）</title></rect><text class="gc-label" x="100" y="73" text-anchor="end">种子</text><text class="gc-value" x="618" y="73">5 个（25%）</text></g>
+        <g><rect x="110" y="92" width="400" height="22" fill="#40619E" rx="3" title="识体 · 4 项（占总量 20 项的 20%）"><title>识体 · 4 项（占总量 20 项的 20%）</title></rect><text class="gc-label" x="100" y="107" text-anchor="end">识体</text><text class="gc-value" x="518" y="107">4 个（20%）</text></g>
+        <g><rect x="110" y="126" width="200" height="22" fill="#4f9d8a" rx="3" title="转依 · 2 项（占总量 20 项的 10%）"><title>转依 · 2 项（占总量 20 项的 10%）</title></rect><text class="gc-label" x="100" y="141" text-anchor="end">转依</text><text class="gc-value" x="318" y="141">2 个（10%）</text></g>
+        <g><rect x="110" y="160" width="200" height="22" fill="#8a6db0" rx="3" title="系缚 · 2 项（占总量 20 项的 10%）"><title>系缚 · 2 项（占总量 20 项的 10%）</title></rect><text class="gc-label" x="100" y="175" text-anchor="end">系缚</text><text class="gc-value" x="318" y="175">2 个（10%）</text></g>
+        <g><rect x="110" y="194" width="100" height="22" fill="#d98a3d" rx="3" title="现行 · 1 项（占总量 20 项的 5%）"><title>现行 · 1 项（占总量 20 项的 5%）</title></rect><text class="gc-label" x="100" y="209" text-anchor="end">现行</text><text class="gc-value" x="218" y="209">1 个（5%）</text></g>
+        <g><rect x="110" y="228" width="100" height="22" fill="#d4a017" rx="3" title="解脱 · 1 项（占总量 20 项的 5%）"><title>解脱 · 1 项（占总量 20 项的 5%）</title></rect><text class="gc-label" x="100" y="243" text-anchor="end">解脱</text><text class="gc-value" x="218" y="243">1 个（5%）</text></g>
+      </svg>
+      <figcaption>图 · 默认图谱七类节点分布（合计 20 节点 · 2026-10-04 内嵌快照·色值与左侧图例一致）</figcaption>
+    </figure>
+    <div class="insight-list">
+      <div class="insight-item"><strong>七类节点·三类主导：</strong>默认图谱共 20 项节点，按识体 4 · 尘境 5 · 种子 5 · 现行 1 · 转依 2 · 系缚 2 · 解脱 1 分七类着色，尘境与种子合计 10 个（50%）——输入端与参数端最密。</div>
+      <div class="insight-item"><strong>边数=节点数·平均度 2.0：</strong>20 条关系对应 20 个节点，关系类型共 8 种（现行 5 · 转依 4 · 系缚 4 · 执取 2 · 熏习 2 · 异熟 1 · 遮蔽 1 · 解脱 1），属稀疏的强映射结构而非网状。</div>
+      <div class="insight-item"><strong>每条边都带 AI 语义参数：</strong>20 条边全部写明「关系·属性·取值」三元组，如熏习·学习率 lr/动量 β、系缚·惩罚系数 λ、遮蔽·失活概率 p、现行·激活函数 ReLU；悬停边即可读出具体取值。</div>
+      <div class="insight-item"><strong>三元命名维度：</strong>默认图谱每个节点都带佛学 / AI / 西游三套实体名（如「阿赖耶识 / 预训练权重 / 灵山藏经阁」），侧栏「标签维度」可切换以更换节点显示名。</div>
+      <div class="insight-item"><strong>副图谱换成人物关系：</strong>「取经团队人物关系图谱」22 节点 / 32 边，按阵营分 5 组（妖魔 6 · 取经团队 5 · 天庭 5 · 神佛 4 · 龙王 2），17 种关系以师徒 4 · 从属 5 · 敌对 5 为主，且不含属性取值列。</div>
+    </div>
+  </div>
+</section>
 
 <script>
 /* 离线图集内联：源 scripts/output/yuanqi_*.csv + dataset/character-relationship-3d.json（与 static/js/graph-fallback.js 同源，避免 file:// 或预览服务器下 ../ 相对路径 404 导致空白） */
@@ -365,6 +411,32 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     });
   }
 
+  // W1286 · G6：同一 <svg> 内标签矩形防重叠——节点标签优先保留，
+  // 边标签（关系名）与已放置标签冲突即隐藏；关系名完整保留在边的 <title> 里（悬停可读·信息不丢）。
+  function declutterLabels(box){
+    var svgs=box.querySelectorAll("svg");
+    for(var si=0;si<svgs.length;si++){
+      var svgEl=svgs[si];
+      var nodeLabels=[].slice.call(svgEl.querySelectorAll("text.gnode"));
+      var edgeLabels=[].slice.call(svgEl.querySelectorAll("text.edge-label"));
+      var placed=[];
+      function rectOf(el){ try{ var b=el.getBBox(); return {l:b.x,t:b.y,r:b.x+b.width,b:b.y+b.height}; }catch(e){ return null; } }
+      function hits(a,b){
+        var ix=Math.min(a.r,b.r)-Math.max(a.l,b.l), iy=Math.min(a.b,b.b)-Math.max(a.t,b.t);
+        if(ix<=0||iy<=0) return false;
+        var inter=ix*iy, s1=(a.r-a.l)*(a.b-a.t), s2=(b.r-b.l)*(b.b-b.t), small=Math.min(s1,s2);
+        return small>0 && inter>=4 && inter/small>0.30;
+      }
+      nodeLabels.forEach(function(el){ var r=rectOf(el); if(r) placed.push(r); });
+      edgeLabels.forEach(function(el){
+        var r=rectOf(el); if(!r) return;
+        for(var i=0;i<placed.length;i++){
+          if(hits(r,placed[i])){ el.style.display="none"; return; }
+        }
+        placed.push(r);
+      });
+    }
+  }
   function labelOf(n){
     if(labelDim && n.aliases && n.aliases[labelDim]) return n.aliases[labelDim];
     return n.label||n.id;
@@ -396,6 +468,16 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     });
     var anchor=new Map();
     ids.forEach(function(id){ var p=nodePos.get(id); anchor.set(id,{x:p.x,y:p.y}); });
+    // W1286 · G6：标签感知碰撞——把节点标签（居中于节点上方）的半宽计入分离量，
+    // 让布局本身就不把两个标签压在一起（改布局不改显示·标签信息不丢）。
+    var labHalf=new Map();
+    var _nmapL={}; (GRAPH.nodes||[]).forEach(function(n){ _nmapL[n.id]=n; });
+    ids.forEach(function(id){
+      var n=_nmapL[id], s=n?String(labelOf(n)):"";
+      if(s.length>9)s=s.slice(0,9)+"…";
+      var cjk=/[\u2e80-\u9fff\uac00-\ud7af\uff00-\uffef]/.test(s);
+      labHalf.set(id, s.length*(cjk?6.0:3.3)+4);
+    });
     var heavy=ids.length>200;
     var iters=ids.length>60?(heavy?50:90):200;
     if(dragActive) iters=heavy?4:12;  // 拖拽中只做极轻量收敛，保持流畅（零依赖铁律，不引 force-graph）
@@ -409,6 +491,17 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
         var d=Math.sqrt(d2),rep=6200/d2,ux=dx/d,uy=dy/d;
         fx.set(ids[i],fx.get(ids[i])+rep*ux); fy.set(ids[i],fy.get(ids[i])+rep*uy);
         fx.set(ids[j],fx.get(ids[j])-rep*ux); fy.set(ids[j],fy.get(ids[j])-rep*uy);
+        // W1286 · G6：标签盒分轴排斥——水平按「两侧标签半宽和」错开、垂直按标签行高错开
+        var needX=labHalf.get(ids[i])+labHalf.get(ids[j])+4;
+        if(Math.abs(dx)<needX){
+          var sx=dx>=0?1:-1, fpx=(needX-Math.abs(dx))*0.45*sx;
+          fx.set(ids[i],fx.get(ids[i])+fpx); fx.set(ids[j],fx.get(ids[j])-fpx);
+        }
+        var needY=20;
+        if(Math.abs(dy)<needY){
+          var sy=dy>=0?1:-1, fpy=(needY-Math.abs(dy))*0.45*sy;
+          fy.set(ids[i],fy.get(ids[i])+fpy); fy.set(ids[j],fy.get(ids[j])-fpy);
+        }
       }
       edges.forEach(function(e){
         var a=nodePos.get(e.source),b=nodePos.get(e.target); if(!a||!b)return;
@@ -475,6 +568,9 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     });
     svg+='</svg>';
     var box=document.getElementById("graphBox"); box.innerHTML=svg;
+    declutterLabels(box);
+    // W1286 · G6：字体加载完成后标签宽度会变化（C5 口径）⇒ 重新做一次避让
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ declutterLabels(box); }); }
     // 拖拽/点击统一由 box 容器承接（box 在重渲染间持续存在，避免 SVG 替换丢失监听）
     if(!box._wired){
       box._wired=true;

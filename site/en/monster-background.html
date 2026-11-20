@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-tHznhL1+zfLo99G+OAjqYCVZlElL1ZBXUO14QB+aPfM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-qBlvMkLW7oqkOFSsnCjkXi4AKjwcMvitJnsFW/IK91c=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Background Theory · Annotated Journey to the West</title>
@@ -447,6 +447,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             This page is a focused deep-dive into "Monster Sociology", zeroing in on the book's sharpest satire — whether a demon lives or dies depends not on its strength but on its backing. The data draws on the 100 chapters of the original Journey to the West, covering 69 demons in total. A note on methodology: "background-type survival rate" aggregates by each demon's backing type, while "disposition count" aggregates by final outcome; the two measures have a cross error of ±2 (stemming from differing judgments about which backing category escaped demons belong to), which does not affect the core conclusion.
         </div>
 
+        <div class="notice" id="dataSource">
+            Data source: <code>../en/json/monster_background.json</code>, <code>../en/json/monster_background_cases.json</code>, <code>../en/json/monster_background_outcomes.json</code>, <code>../en/json/monster_background_insights.json</code> — this project's own annotation of the 100 chapters of the original novel (Wu Cheng'en, 16th c.), embedded here for <code>file://</code> opening.
+        </div>
+
         <div class="kpi-row" id="kpi-row" role="region" aria-label="Key Metrics"></div>
 
             <section class="section" aria-labelledby="sec-types">
@@ -836,6 +840,32 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('font-size', '0.82rem')
             .attr('font-weight', 600)
             .text(d => d.name);
+
+        /* W1286 · 第 83 门禁（SVG 标签重叠）：顶部两枚大气泡的标签同高且横向相交
+           （「Celestial Mounts & Divine Beasts」×「Buddhist & Daoist Disciples/Attendants」，
+             交集/较小者 > 0.30 ⇒ 判违例）⇒ 后者改置于自身气泡下方（不删字·不改数据）。 */
+        const bubbleLabels = g.selectAll('.bubble-label').nodes();
+        bubbleLabels.forEach(function (t, i) {
+            const bd = t.__data__;
+            for (let guard = 0; guard < 3; guard++) {
+                const tr = t.getBoundingClientRect();
+                if (!tr.width) return;
+                let hit = false;
+                for (let j = 0; j < i; j++) {
+                    const pr = bubbleLabels[j].getBoundingClientRect();
+                    const ix = Math.min(tr.right, pr.right) - Math.max(tr.left, pr.left);
+                    const iy = Math.min(tr.bottom, pr.bottom) - Math.max(tr.top, pr.top);
+                    if (ix <= 0 || iy <= 0) continue;
+                    const small = Math.min(tr.width * tr.height, pr.width * pr.height);
+                    if (small > 0 && (ix * iy) / small > 0.30) { hit = true; break; }
+                }
+                if (!hit) return;
+                const cur = +t.getAttribute('y') || 0;
+                t.setAttribute('y', guard === 0
+                    ? y(bd.survival_rate) + r(bd.count) + 14
+                    : cur + 18);
+            }
+        });
 
         // 图例
         const legend = d3.select('#legend-types');

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-t31iui0QwjKmz1vkgXn8Zubv4QQkxpEEKWZNC8Gol4A=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-yiPBKKlQko2XNXUvrcw3Od7NJpSIC0vvWtPOybUFDjw=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>法理经济 · 详解西游记</title>
@@ -646,7 +646,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <div class="chart-block">
                 <div class="chart-title">图 1.2 · 10 案例双轴条形对比（按 disparity_score 排序）</div>
-                <div class="chart-caption">左轴=crime_severity · 右轴=sentence_severity · 失衡分数标注于条形右侧</div>
+                <div class="chart-caption">左轴=crime_severity · 右轴=sentence_severity · 失衡分数标注于条形右侧 · x 轴=案例序号（#）· 案例按 disparity_score 降序排列 · 悬停刻度可见完整案件名</div>
                 <svg id="chart-sentencing-bar" class="chart-svg" width="100%" height="480"></svg>
             </div>
 
@@ -1125,24 +1125,23 @@ function renderTreemap(opts){
         const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
 
         const cases = data.sentencing_cases.slice().sort((a, b) => b.disparity_score - a.disparity_score);
-        const x0 = d3.scaleBand().domain(cases.map(c => c.case_name)).range([0, w]).padding(0.25);
+        const caseName = new Map(cases.map(c => [c.n, c.case_name]));
+        const x0 = d3.scaleBand().domain(cases.map(c => c.n)).range([0, w]).padding(0.25);
         const x1 = d3.scaleBand().domain(['crime', 'sentence']).range([0, x0.bandwidth()]).padding(0.05);
         const y = d3.scaleLinear().domain([0, 11]).range([h, 0]);
 
-        g.append('g').attr('class', 'axis')
+        const xAxis = g.append('g').attr('class', 'axis')
             .attr('transform', `translate(0,${h})`)
-            .call(d3.axisBottom(x0))
-            .selectAll('text')
+            .call(d3.axisBottom(x0).tickFormat(d => String(d)));
+        // 刻度只显示案件序号（#）·完整案件名挂 <title>（悬停可见）——长案件名会把相邻刻度互相压爆并顶出画布
+        xAxis.selectAll('g.tick').insert('title', ':first-child').text(d => caseName.get(d) || '');
+        xAxis.selectAll('text')
             .attr('transform', 'rotate(-30)')
             .style('text-anchor', 'end')
-            .attr('font-size', '9px');
+            .attr('font-size', '9px')
+            .insert('title', ':first-child').text(d => caseName.get(d) || '');
         g.append('g').attr('class', 'axis')
             .call(d3.axisLeft(y).ticks(10));
-
-        g.append('text').attr('class', 'axis-label')
-            .attr('x', w/2).attr('y', h + 75)
-            .attr('text-anchor', 'middle')
-            .text('案例（按 disparity_score 降序）');
         g.append('text').attr('class', 'axis-label')
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
@@ -1150,7 +1149,7 @@ function renderTreemap(opts){
             .text('严重度 (1-10)');
 
         const groups = g.selectAll('.case-group').data(cases).enter()
-            .append('g').attr('transform', d => `translate(${x0(d.case_name)},0)`);
+            .append('g').attr('transform', d => `translate(${x0(d.n)},0)`);
 
         groups.append('rect')
             .attr('x', x1('crime')).attr('y', d => y(d.crime_severity))

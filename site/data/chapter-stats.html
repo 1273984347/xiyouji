@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-llrWMwhtS/+rdJ8PsO6jMKc3AJ4nOhiVev5jzmwqj0E=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-8PpDD0tuCLELSG7Y3/XpSW3gDO0KoyDXSZZIOoW/cuc=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>章节字数与对话统计 · 详解西游记</title>
@@ -208,6 +208,27 @@
 /* W673 WP-2.5 降级对齐：chart-degrade scroll-x 契约落地 */
         .chart-block { overflow-x: auto; }
         .chart-block svg { max-width: none; width: auto; }
+        /* 关键洞察段（W1286：结论段统一样式·只用令牌色） */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+        }
     </style>
 <style id="audit-halo">
 /* injected label-halo for overlap readability */
@@ -312,6 +333,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="legend">
                     <div class="legend-item"><span class="legend-swatch" style="background:#3A473A"></span>诗词数量</div>
                 </div>
+            </div>
+        </section>
+        <!-- 关键洞察（W1286） -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">口径：scripts/output/data/chapter_stats.json（全 100 回统计快照，与本页 EMBEDDED 数据同源）。</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>对话是全书主体：</strong>100 回合计 742,357 字，其中对话 351,479 字，占 47.35%——接近一半的篇幅由人物台词承担。</div>
+                <div class="insight-item"><strong>篇幅并不均衡：</strong>最长第 031 回 9,041 字，最短第 007 回 5,521 字，极差 3,520 字；回均 7,424 字（7,423.6）。</div>
+                <div class="insight-item"><strong>对话密度两极分化：</strong>占比最高第 037 回 61.57%，最低第 065 回 26.10%，相差 35.47 个百分点；38 个回目过半，15 个回目不足四成。</div>
+                <div class="insight-item"><strong>诗词高度集中：</strong>全书仅 19 首诗词，且只落在 8 个回目——第 007、008 回各 5 首（并列最多），第 001、069、099 回各 2 首。</div>
+                <div class="insight-item"><strong>叙述铺陈与人物交锋交替：</strong>对话占比在回目层面高度不均（38 回 ≥50%、15 回 &lt;40%），说明「推进叙事」与「人物交锋」以回合为单位此消彼长。</div>
             </div>
         </section>
         <figure class="viz-illustration" aria-hidden="true">
@@ -512,8 +545,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("height", d => y(d.narrative) - y(d.total));
         }
 
-        // 交互
-        bars.on("pointermove", function(event, d) {
+        // 交互：鼠标移入柱体（rect）显示该回详情
+        bars.selectAll("rect").on("mousemove", function(event, d) {
             showTooltip(
                 `<strong style="color:var(--accent)">${d.chapter}</strong><br>` +
                 `总字数：${fmt(d.total)}<br>` +
@@ -522,7 +555,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 `对话占比：${(d.dialogue / d.total * 100).toFixed(1)}%`,
                 event
             );
-        }).on("pointerleave", hideTooltip);
+        }).on("mouseleave", hideTooltip);
     }
 
     // 图2：每回对话占比折线图
@@ -654,7 +687,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("r", 3);
 
         // 交互
-        g.selectAll(".dot").on("pointermove", function(event, d) {
+        g.selectAll(".dot").on("mousemove", function(event, d) {
             d3.select(this).attr("r", 5);
             showTooltip(
                 `<strong style="color:var(--accent)">${d.chapter}</strong><br>` +
@@ -663,7 +696,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 `总字数：${fmt(d.total)}`,
                 event
             );
-        }).on("pointerleave", function() {
+        }).on("mouseleave", function() {
             d3.select(this).attr("r", 3);
             hideTooltip();
         });
@@ -752,13 +785,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         }
 
         // 交互
-        g.selectAll(".poem-bar").on("pointermove", function(event, d) {
+        g.selectAll(".poem-bar").on("mousemove", function(event, d) {
             showTooltip(
                 `<strong style="color:var(--accent)">${d.chapter}</strong><br>` +
                 `诗词数量：${d.poems} 首`,
                 event
             );
-        }).on("pointerleave", hideTooltip);
+        }).on("mouseleave", hideTooltip);
     }
 
     // W563：EMBEDDED 单源。chapter_stats 生成器经 text_loader 章回文件扩展名匹配修复后

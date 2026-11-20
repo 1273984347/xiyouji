@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PnBCtw5IhOVPiMdhxJvcU8EElJlsn1ce5hW7/xJBVPU=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-Q6JZeNRdnrwlNTRnVaVYZH8QD3DKNlSbFH01WoxYNQ8=' 'sha256-0eDx8au4Df3F0d1xeLLym08ziyWg+N83rYRmR8hV13g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-rl9NGGKPfAa56Cdaj7AnTbf49Va6OFgNxEkg+YRh/z0=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-W7NoAitXlNFak2z6xUuZyy85Hwo917RXggsryX+YcsU=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-Q6JZeNRdnrwlNTRnVaVYZH8QD3DKNlSbFH01WoxYNQ8=' 'sha256-0eDx8au4Df3F0d1xeLLym08ziyWg+N83rYRmR8hV13g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-rl9NGGKPfAa56Cdaj7AnTbf49Va6OFgNxEkg+YRh/z0=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Relationship Dynamic Network · Annotated Journey to the West</title>
@@ -235,6 +235,10 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <span class="sep">›</span>
             <span>Character Relationship Dynamic Network</span>
         </nav>
+        <div class="notice" id="dataSource">
+            Data source: this project's character-relationship dataset, compiled from the original text (Wu Cheng'en) — the 35 nodes and 50 edges shown here are a build-time snapshot embedded in this page, so it stays readable offline without a server.
+        </div>
+
         <div class="notice" role="note">
             <strong>How to read the dynamic network</strong>:
             <span class="mono">Nodes</span> (35): 5 pilgrims + 8 Heaven + 5 Buddhist + 12 demons + 5 mortals ·
@@ -509,6 +513,18 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             .domain([1, 10])
             .range([1, 5]);
 
+        // W1286 · G6：标签防压——只给重要节点常显标签（其余节点信息保留在悬停提示面板里），
+        // 并把被选中节点的标签半宽计入碰撞半径，让布局本身就把标签错开。
+        const LABEL_MAX = 10;
+        const labelHalfW = s => {
+            s = String(s || "");
+            const cjk = /[\u2e80-\u9fff\uac00-\ud7af\uff00-\uffef]/.test(s);
+            return s.length * (cjk ? 7.0 : 3.6);
+        };
+        const labelKeep = new Set([...activeNodes]
+            .sort((a, b) => (b.freq || 0) - (a.freq || 0))
+            .slice(0, LABEL_MAX).map(n => n.id));
+
         // Force simulation
         simulation = d3.forceSimulation(activeNodes).alphaDecay(0.08).velocityDecay(0.5)
             .force("link", d3.forceLink(activeEdges).id(d => d.id)
@@ -516,7 +532,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
                 .strength(d => 0.05 + d.weight * 0.02))
             .force("charge", d3.forceManyBody().strength(-280))
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collide", d3.forceCollide(d => rScale(d.freq) + 4))
+            .force("collide", d3.forceCollide(d => rScale(d.freq) + 4 + (labelKeep.has(d.id) ? Math.min(30, labelHalfW(d.id)) : 0)))
             .force("x", d3.forceX(width / 2).strength(0.04))
             .force("y", d3.forceY(height / 2).strength(0.04));
 
@@ -634,7 +650,7 @@ const link = svg.append("g")
         // Node labels
         const label = svg.append("g")
             .selectAll("text")
-            .data(activeNodes)
+            .data(activeNodes.filter(n => labelKeep.has(n.id)))
             .enter()
             .append("text")
             .attr("class", "node-label")

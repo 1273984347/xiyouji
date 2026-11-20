@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-18I2wSS+3D/wj6FPKqZJ45J2RnkqNp+E1kIfiT0GuOg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GLoXgaYHF4l6jRzjPfGJ+IC6TpduBZhEVAVQR2VKHA4='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>通关文牒·取经驿路图 · 详解西游记</title>
@@ -336,7 +336,8 @@ function renderTimeline(){
     const y = pad + i * rowH + 18;
     // 节点
     g.append("circle").attr("cx", xNode).attr("cy", y).attr("r", 9).attr("fill", COLOR[d.status])
-      .attr("stroke", "#fff").attr("stroke-width", 2);
+      .attr("stroke", "#fff").attr("stroke-width", 2)
+      .append("title").text(`第${d.ch}回 · ${d.name} · ${d.pill}（${d.note}）`);
     // 文本
     g.append("text").attr("x", xText).attr("y", y).attr("class", "t-title")
       .attr("fill", "var(--ink)").text(d.ch + "回 · " + d.name);

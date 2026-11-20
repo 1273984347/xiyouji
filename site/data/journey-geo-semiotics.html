@@ -281,6 +281,30 @@
             .legend { flex-direction: column; align-items: stretch; }
             .legend-group { padding: 6px 10px; }
         }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -384,6 +408,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="placeholder">点击任一节点查看详细解析。</div>
             </div>
         </section>
+
+        <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自力导向图中七个节点、七条符号学机制边</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>一条完整的七点链：</strong>花果山（第 1 回）→ 灵山（第 8 回）→ 长安（第 13 回）→ 车迟国（第 44 回）→ 朱紫国（第 68 回）→ 灭法国（第 84 回）→ 灵山归途（第 98 回），七个节点首尾相接，链路没有断点。</div>
+                <div class="insight-item"><strong>三种机制各司其职：</strong>链上的边分作去地方化（花果山→长安，虚线）、途经（长安→车迟国→朱紫国→灭法国，三条实线）、抵达（灭法国→灵山，加粗），再由重地方化、回归两条边收束成环。</div>
+                <div class="insight-item"><strong>三个途经国三种议题：</strong>车迟国（第 44 回）标注意识形态型、朱紫国（第 68 回）身体政治型、灭法国（第 84 回）主权暴力型 —— 途经国不是同一种路过，而是三种不同性质的中转。</div>
+                <div class="insight-item"><strong>回目间距越走越密：</strong>相邻两点的回目间隔依次是 7、5、31、24、16、14 回，最长空档出现在长安（第 13 回）到车迟国（第 44 回）之间；三个途经国正落在这段被压缩的时间里。</div>
+            </div>
+        </section>
+
+        <figure class="viz-illustration" aria-hidden="true">        </section>
         <figure class="viz-illustration" aria-hidden="true">
             <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
         </figure>

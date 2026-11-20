@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-91KQSx92l7BVAOhPIT/ZPryPXvwS/4DDbEwl2IL0BIU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-BRrGLsyi0Uz3N4LGiqHG1BMsaQ7o816+WeumihIUJMM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Fate & Reincarnation · Annotated Journey to the West</title>
@@ -590,7 +590,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="chart-block">
                 <div class="chart-title">Timeline of Life-and-Death Register Tampering Cases (8 cases, ordered by chapter, with modifier labels)</div>
                 <div class="chart-caption">X axis: chapter order / Y axis: impact_severity severity 0-10 / dots: tampering cases / labels: modifier (tamperer)</div>
-                <svg id="chart-registry-timeline" class="chart-svg" width="100%" height="400"></svg>
+                <svg id="chart-registry-timeline" class="chart-svg" width="100%" height="420"></svg>
                 <div class="legend-row">
                     <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Tampering cases (by impact_severity)</span>
                     <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>Severity trend line</span>
@@ -1011,8 +1011,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const svg = d3.select('#chart-registry-timeline');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 900;
-        const W = Math.max(containerW, 700), H = 400;
-        const m = {top: 50, right: 60, bottom: 90, left: 60};
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 50, right: 60, bottom: 110, left: 60};
         const w = W - m.left - m.right, h = H - m.top - m.bottom;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
 
@@ -1054,7 +1054,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         // axis labels
         g.append('text').attr('class', 'axis-label')
-            .attr('x', w / 2).attr('y', h + 70)
+            .attr('x', w / 2).attr('y', h + 98)
             .attr('text-anchor', 'middle')
             .text('Tampering case number (by chapter order)');
         g.append('text').attr('class', 'axis-label')
@@ -1126,23 +1126,42 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .data(cases).enter().append('text')
             .attr('class', 'lbl-chap')
             .attr('x', d => x('Case ' + d.n))
-            .attr('y', h + 28)
+            .attr('y', h + 44)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('fill', '#6B6455')
             .text(d => d.chapter);
 
-        // Character name labels
-        g.selectAll('.lbl-char')
+        // Character name labels (below the X axis): measure actual glyph widths → shift to a second row on collision (adjacent names no longer press into each other)
+        const CHAR_ROW_H = 18;    // row spacing
+        const CHAR_ROW_GAP = 8;   // minimum horizontal clearance within a row
+        const charY = h + 62;
+        const charSel = g.selectAll('.lbl-char')
             .data(cases).enter().append('text')
             .attr('class', 'lbl-char')
             .attr('x', d => x('Case ' + d.n))
-            .attr('y', h + 44)
+            .attr('y', charY)
             .attr('text-anchor', 'middle')
             .style('font-size', '10.5px')
             .style('font-weight', '600')
             .style('fill', '#23201A')
             .text(d => d.character);
+
+        function layoutCharRows() {
+            const els = charSel.nodes();
+            const rows = [];   // screen rects of the names already placed in each row
+            els.forEach((el) => {
+                const b = el.getBoundingClientRect();
+                // Keep at least CHAR_ROW_GAP horizontal clearance inside a row (row-independent ⇒ idempotent on re-runs)
+                const clash = (r) => rows[r].some(p => b.left < p.right + CHAR_ROW_GAP);
+                let row = 0;
+                while (row < rows.length && clash(row)) row++;
+                (rows[row] = rows[row] || []).push(b);
+                el.setAttribute('y', charY + row * CHAR_ROW_H);
+            });
+        }
+        layoutCharRows();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutCharRows);
     }
 
     function renderRegistryTable(data) {
@@ -1231,7 +1250,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             });
 
         // Labels: karma_type + case name
-        slices.append('text')
+        const karmaLabels = slices.append('text')
+            .attr('class', 'lbl-karma-type')
             .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
@@ -1239,6 +1259,31 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style('fill', '#23201A')
             .text(d => d.data.karma_type)
             .style('pointer-events', 'none');
+
+        // Horizontal anti-overlap: labels on the same ring that press into each other are pushed outward along the radius
+        // (measured by actual glyph widths · re-measured once webfonts are ready)
+        function layoutKarmaLabels() {
+            const placed = [];
+            karmaLabels.each(function (d) {
+                const el = this;
+                const c = arcLabel.centroid(d);
+                const base = Math.hypot(c[0], c[1]) || 1;
+                let rr = base;
+                const put = (v) => d3.select(el).attr('transform', `translate(${c[0] * v / base},${c[1] * v / base})`);
+                put(rr);
+                let b = el.getBoundingClientRect();
+                for (let guard = 0; guard < 12; guard++) {
+                    const hit = placed.some(p => !(b.right + 2 <= p.left || b.left >= p.right + 2 || b.bottom + 2 <= p.top || b.top >= p.bottom + 2));
+                    if (!hit) break;
+                    rr += 10;
+                    put(rr);
+                    b = el.getBoundingClientRect();
+                }
+                placed.push(b);
+            });
+        }
+        layoutKarmaLabels();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutKarmaLabels);
 
         // Center label
         g.append('text')
@@ -1473,7 +1518,20 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const layerGap = 12;
         const totalH = orderedRealms.length * layerH + (orderedRealms.length - 1) * layerGap;
         const cx = W / 2;
-        const maxWidth = W * 0.85;
+        // Reserve the side margin for the "● Pilgrim team: N" annotation → the widest layer's annotation stays inside the svg viewport (no right clipping)
+        const badgeTexts = orderedRealms.map(r => '● ' + (r.in_pilgrim_team > 0 ? `Pilgrim team: ${r.in_pilgrim_team}` : 'Pilgrim team: 0'));
+        const badgeProbe = g.append('text')
+            .attr('visibility', 'hidden')
+            .style('font-size', '11px')
+            .style('font-weight', '600');
+        let badgeW = 0;
+        badgeTexts.forEach(t => {
+            badgeProbe.text(t);
+            badgeW = Math.max(badgeW, badgeProbe.node().getBoundingClientRect().width);
+        });
+        badgeProbe.remove();
+        const sideReserve = Math.max(badgeW + 24, 120);   // side reserve for the Lv / pilgrim-team annotations
+        const maxWidth = Math.min(W * 0.85, W - 2 * sideReserve);
         const minWidth = 90;
 
         // Color mapping: good realms (blue) / half-good (green) / evil (red)

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-RgiwyGQCeGZ4Agn/ZrzzUQ6A/U5oQ48JHXNx82bo+QU=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-Z0B//sjerG+fzteuaNez6N3kcdmhU9f1BjcUAE1QJGw=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-rrmUGv7/885kvPc9EmKvIcGgmYzbIW8sfbnchhHZ/fY=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-Z0B//sjerG+fzteuaNez6N3kcdmhU9f1BjcUAE1QJGw=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Intertextuality Network · Annotated Journey to the West</title>
@@ -285,6 +285,30 @@ header.hero .meta {
   
   .theorist-list { grid-template-columns: 1fr; }
 }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -404,7 +428,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <div class="chart-block">
     <div class="chart-title">Precursor Text → Journey to the West Intertextual Timeline</div>
     <div class="chart-caption">X axis: era · nodes: text colors · size = intertextual strength · hover to see intertextual type</div>
-    <svg id="chart-timeline" class="chart-svg" width="100%" height="500"></svg>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="560"></svg>
     <div class="legend-row" id="timeline-legend"></div>
   </div>
 </section>
@@ -441,6 +465,18 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <div id="theorist-list" class="theorist-list"></div>
   </div>
 </section>
+
+  <!-- W1286 · conclusion block (gate 82 / C2): conclusion semantics carried by both the block class and its heading -->
+  <section class="section">
+    <h2 class="section-title">VII · Key Insights</h2>
+    <div class="section-sub">KEY INSIGHTS · Read from the actual values in the intertextuality network, five-type matrix, radar and timeline</div>
+    <div class="insight-list">
+      <div class="insight-item"><strong>Strength ranking:</strong> among the seven precursor texts the Great Tang Scripture-Fetching Tale leads with 92, followed by the Journey to the West Zaju at 88, the Buddhist Canon at 85, the Daoist Canon at 82, the Biography of the Tripitaka Master of Great Ci'en Temple at 80, the Great Tang Records on the Western Regions at 75 and Paktongsa Ŏnhae at 65; the target text Journey to the West itself scores 100 (1592, Shidetang edition).</div>
+      <div class="insight-item"><strong>Unbalanced across the five Genette types:</strong> the matrix totals 60 relations — quotation 15 is the most frequent, adaptation 14 next, then allusion 12, translation 10 and commentary 9, the rarest; adaptation and allusion together make up 26 of them, 43 percent of the whole.</div>
+      <div class="insight-item"><strong>The tale leads but not across the board:</strong> the Great Tang Scripture-Fetching Tale tops four of the five radar axes (structure borrowing 85, theme inheritance 90, character transformation 95, plot rewriting 88), while Paktongsa Ŏnhae reaches the highest language citation of all at 95 yet sits last on structure borrowing at 30 and plot rewriting at 25 — one text borrows in structure, the other in language, so the two invert each other.</div>
+      <div class="insight-item"><strong>The last node on the timeline is a consequence, not a source:</strong> Paktongsa Ŏnhae is dated to around 1670, later than the 1592 completion of Journey to the West, so its intertextual type is marked as overseas transmission — consistent with its radar shape of 95 language citation against 30 structure borrowing.</div>
+    </div>
+  </section>
     </main>
 
     <footer class="site-footer">
@@ -1235,10 +1271,10 @@ function renderTimeline(timelineData) {
   }
 
   const width = +svg.node().clientWidth || 800;
-  const height = 500;
+  const height = 560;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  const margin = { top: 50, right: 60, bottom: 90, left: 70 };
+  const margin = { top: 50, right: 60, bottom: 150, left: 70 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
 
@@ -1321,30 +1357,63 @@ function renderTimeline(timelineData) {
     .text(d => d.text);
 
   // era labels (below the X axis)
-  g.selectAll('.year-label')
+  // —— label avoidance (row dispatch method · W1266 wave 3 OVL family sample · same as data/intertextuality-network.html) ——
+  // Fact: the X-axis tick labels are rotated typesetting (their bbox reaches ≈30px below the axis)
+  //       => era labels must start on their own row (baseline = innerH + AXIS_LABEL_ROW);
+  //       era labels that press horizontally against each other are dispatched to the next row
+  //       in ascending x order (gap 4px · row height 14px);
+  //       the intertextual-type row and the axis title shift down by the actual row count.
+  const AXIS_LABEL_ROW = 50, LABEL_ROW_H = 14, LABEL_GAP = 4;
+  const yearSel = g.selectAll('.year-label')
     .data(sorted)
     .enter()
     .append('text')
     .attr('class', 'year-label')
     .attr('x', d => xScale(d.year))
-    .attr('y', innerH + 24)
+    .attr('y', innerH + AXIS_LABEL_ROW)
     .attr('text-anchor', 'middle')
     .attr('font-size', '10px')
     .attr('fill', '#5a3828')
     .text(d => d.era);
 
+  const yearRows = [];
+  yearSel.nodes().slice().sort((a, b) => a.getBBox().x - b.getBBox().x).forEach((el) => {
+    const bb = el.getBBox();
+    let r = 0;
+    while (r < yearRows.length && yearRows[r].some((o) => !(bb.x + bb.width + LABEL_GAP < o.x || o.x + o.width + LABEL_GAP < bb.x))) r += 1;
+    if (r === yearRows.length) yearRows.push([]);
+    yearRows[r].push({ x: bb.x, width: bb.width });
+    el.setAttribute('data-row', String(r));
+  });
+  const yearRowN = Math.max(1, yearRows.length);
+  yearSel.attr('y', function () { return innerH + AXIS_LABEL_ROW + (+this.getAttribute('data-row')) * LABEL_ROW_H; });
   // intertextual-type labels (second row below nodes)
-  g.selectAll('.type-label')
+  // W1286: same row dispatch (the English type labels are longer => 'Plot Rewriting' and
+  //       'Structure Inheritance' press against each other inside a single row)
+  const typeBase = innerH + AXIS_LABEL_ROW + yearRowN * LABEL_ROW_H + 8;
+  const typeSel = g.selectAll('.type-label')
     .data(sorted)
     .enter()
     .append('text')
     .attr('class', 'type-label')
     .attr('x', d => xScale(d.year))
-    .attr('y', innerH + 40)
+    .attr('y', typeBase)
     .attr('text-anchor', 'middle')
     .attr('font-size', '9px')
     .attr('fill', '#8a7a5a')
     .text(d => d.interType);
+
+  const typeRows = [];
+  typeSel.nodes().slice().sort((a, b) => a.getBBox().x - b.getBBox().x).forEach((el) => {
+    const bb = el.getBBox();
+    let r = 0;
+    while (r < typeRows.length && typeRows[r].some((o) => !(bb.x + bb.width + LABEL_GAP < o.x || o.x + o.width + LABEL_GAP < bb.x))) r += 1;
+    if (r === typeRows.length) typeRows.push([]);
+    typeRows[r].push({ x: bb.x, width: bb.width });
+    el.setAttribute('data-row', String(r));
+  });
+  const typeRowN = Math.max(1, typeRows.length);
+  typeSel.attr('y', function () { return typeBase + (+this.getAttribute('data-row')) * LABEL_ROW_H; });
 
   // X axis
   g.append('g')
@@ -1362,7 +1431,7 @@ function renderTimeline(timelineData) {
 
   // axis titles
   g.append('text')
-    .attr('x', innerW / 2).attr('y', innerH + 70)
+    .attr('x', innerW / 2).attr('y', typeBase + (typeRowN - 1) * LABEL_ROW_H + 26)
     .attr('text-anchor', 'middle')
     .attr('font-size', '12px')
     .attr('fill', '#8a7a5a')

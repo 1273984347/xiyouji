@@ -4,7 +4,7 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-20 07:00
+生成时间：2026-11-21 04:56
 
 共 **231** 件（门禁与校验 114 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 86 · 一次性（下划线前缀） 7）
 
@@ -252,7 +252,7 @@
 | `spot_check_nlp.py` | spot-check character_nlp.py 输出数据。 |
 | `stat_event_probe.py` | stat_event_probe.py — 统计事件运行面取证探针（W1168·第 67 槽的动态证据链） |
 | `subject_band.py` | subject_band.py — 主体检测与派生裁切（不写盘·纯函数·W988 建·W1004 由归档桶转正） |
-| `svg_text_contrast_probe.js` | 保守档：path/polygon 的 bbox 只是几何近似（凹形/曲线内可能有空白）⇒ 仅完全包含时采信。 |
+| `svg_text_contrast_probe.js` | W1286 L-01：--pages 限定扫描页（逗号分隔 rel 路径）· --no-tool 禁用公共工具 label-contrast.j |
 | `sync_data_json.py` | W678 WP-6.1：dataset 生成器输出 → site/data/json 部署副本 单向同步（清单制）。 |
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `version_surface.py` | version_surface.py — 版本面（跨文件字面量）幂等推进器（W1114）。 |

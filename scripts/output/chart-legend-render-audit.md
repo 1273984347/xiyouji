@@ -12,7 +12,6 @@
 | site/about.html | no_chart | 0 | 0 | 0 | 无 | nochart | 渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用 |
 | site/curated.html | no_chart | 0 | 0 | 0 | 无 | nochart | 渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用 |
 | site/dashboard.html | has_chart | 3 | 18 | 4 | 有 | multi_legend | 渲染后可见图例 18 项（≥2 ⇒ 多系列且图例齐备） |
-| site/data/81-hardships-view.html | has_chart | 1 | 0 | 4 | 无 | multi_nolegend | 渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例 |
 | site/data/81-hardships.html | has_chart | 4 | 9 | 5 | 有 | multi_legend | 渲染后可见图例 9 项（≥2 ⇒ 多系列且图例齐备） |
 | site/data/ai-dialogue.html | env_blocked | 0 | 0 | 0 | 无 | unknown | 渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载） |
 | site/data/century-dialogue.html | env_blocked | 0 | 0 | 0 | 无 | unknown | 渲染后无图表 svg·但静态有图表语义容器/图表库调用 ⇒ 环境性未加载（file:// fetch 失败等）⇒ 不计入真无图 ⇒ 渲染级不可判定（环境性未加载） |
@@ -28,4 +27,4 @@
 | site/guide.html | no_chart | 0 | 0 | 0 | 无 | nochart | 渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用 |
 | site/index.html | no_chart | 0 | 0 | 0 | 无 | nochart | 渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用 |
 
-判定分布：multi_legend=3、multi_nolegend=2、nochart=7、unknown=6
+判定分布：multi_legend=3、multi_nolegend=1、nochart=7、unknown=6

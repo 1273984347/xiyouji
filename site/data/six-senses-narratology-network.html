@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/mHr4QTgpYHYphUNxEQSNiCUIwZYGebtN1RMbezAyq8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-hihwlM8kfgBlaDqSCt0nBhVqFfUCF1BMSZroG5CRabs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>六感叙事学关系图谱 · 详解西游记</title>
@@ -288,6 +288,30 @@ header.hero .meta {
   
   .theorist-list { grid-template-columns: 1fr; }
 }
+        /* W1286 · 结论区块（第 82 门禁 C2）：宣纸刻本 · 沿用页面既有 CSS 变量 */
+        .insight-list {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: var(--space-4) var(--space-5);
+        }
+        .insight-item {
+            margin: var(--space-3) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            line-height: 1.9;
+        }
+        .insight-item::before {
+            content: "◆";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .insight-item strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -447,6 +471,20 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <div id="theorist-list" class="theorist-list"></div>
   </div>
 </section>
+
+        <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
+        <section class="section">
+            <h2 class="section-title">柒 · 关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS · 取自七感官概览 / 力导向图 / 维度雷达 / 四层桑基 / 专题时间线的实际取值</div>
+            <div class="insight-list">
+                <div class="insight-item"><strong>引用度谱系分明：</strong>七个维度的引用度依次为视觉 90、空间 88、时间 85、听觉 82、触觉 80、嗅觉 78、味觉 75，极差 15；视觉、空间两项合计 178，味觉、嗅觉两项合计 153。</div>
+                <div class="insight-item"><strong>资源完全均衡：</strong>七个感官各自绑定同样数量的理论家（每个 4 位）、术语数一律 28、西游案例一律 4 条 —— 雷达图四条轴里只有引用度一条拉开差距，其余三条完全齐平。</div>
+                <div class="insight-item"><strong>结构链是单向串联：</strong>34 条边里有 6 条把七个感官串成一条链（时间→空间→听觉→嗅觉→触觉→视觉→味觉），其余 28 条是各感官挂理论家；网络共 35 个节点，等于七个感官加上各 4 位理论家。</div>
+                <div class="insight-item"><strong>理论年代横跨两千年：</strong>时间叙事学的理论年代起点最早（公元 4 世纪），味觉叙事学的终点最晚（2012 年），两者之间横跨约两千年；嗅觉（1798 年起）与触觉（1945 年起）则是近现代才被正名的维度。</div>
+            </div>
+        </section>
+
+<figure class="viz-illustration" aria-hidden="true"></section>
 <figure class="viz-illustration" aria-hidden="true">
     <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
 </figure>
@@ -1338,6 +1376,7 @@ function renderTimeline(timelineData) {
     .text(d => d.感官);
 
   // 理论年代标注（顶部）
+  // W1286：年代标注横向夹回绘图区内（最左一列原居中于 x=0 ⇒ 探进 Y 轴刻度栏·与「2000年」相压）
   g.selectAll('.era-label')
     .data(topics)
     .enter()
@@ -1348,7 +1387,17 @@ function renderTimeline(timelineData) {
     .attr('text-anchor', 'middle')
     .attr('font-size', '9px')
     .attr('fill', '#8a7a5a')
-    .text(d => d.理论年代);
+    .text(d => d.理论年代)
+    .each(function(d) {
+      // 越出绘图区左/右缘时改为贴边对齐 ⇒ 标签不再压住 Y 轴刻度标签
+      const el = d3.select(this);
+      const bb = this.getBBox();
+      const half = bb.width / 2;
+      const cx = xScale(d.idx);
+      if (half <= 0) return;
+      if (cx - half < 0) { el.attr('text-anchor', 'start').attr('x', 0); }
+      else if (cx + half > innerW) { el.attr('text-anchor', 'end').attr('x', innerW); }
+    });
 
   // Y 轴
   g.append('g')

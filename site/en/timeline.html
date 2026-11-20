@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/eo3unWn6ED1nbMylp1+TTmW7SNN2n3WqsOt+eAVVT4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-1Zbbfk049W/0m6Z1PfzIF9+KPg9MmweJpAOB7OmtRFg=' 'sha256-G2pAcJ/K+oJWIDIPf7H8N0CMlh2MbC6HuTacmBC8aCU=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-WQ6n4ch395XlgEtb0MUOn024WTS5d7f8pn3eWIv+ZeU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-1Zbbfk049W/0m6Z1PfzIF9+KPg9MmweJpAOB7OmtRFg=' 'sha256-G2pAcJ/K+oJWIDIPf7H8N0CMlh2MbC6HuTacmBC8aCU=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Interactive Timeline · Annotated Journey to the West</title>
@@ -447,7 +447,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <nav class="breadcrumb"><a href="dashboard.html">Dashboard</a> → Interactive Timeline</nav>
 
         <div class="notice" id="dataSource">
-            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+            Data source: <code>site/en/json/timeline_events.json</code> — the 22 published events (7 composition · 7 version · 8 influence, years 629–2020) — embedded in-page as <code>EMBEDDED_DATA</code>; over http the page loads the same file live from <code>../en/json/</code>.
         </div>
 
         <!-- KPI 概要栏 -->
@@ -479,6 +479,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="device-title">Event Card Grid</div>
             <div class="device-sub">Filter by era to browse all events; click a card to locate it in the timeline and details.</div>
             <div class="event-grid" id="event-grid"></div>
+        </section>
+
+        <section class="device chart-insight" id="insight-section">
+            <div class="device-title">Key Insights</div>
+            <div class="device-sub">The 22 events divide almost evenly across the three lanes — 7 on Composition History, 7 on Version Evolution, 8 on Cultural Influence — which is itself the finding: the story of Journey to the West is not one line but three that keep re-synchronising. The lanes open far apart (composition starts in 629 with Xuanzang’s westward journey, version only in 1592 with the Shidetang hundred-chapter edition, influence in 1600 with the Ming opera adaptations) and then crowd together: 1955 is the only year where a composition and a version event land together (the Modern Collated Edition and the People’s Literature Collated Edition), and 6 of the 22 events fall between 1980 and 2020. Eleven of the 22 events — half the timeline — date from 1900 or later, 6 of them on the influence lane: by now the novel’s afterlife, not its composition, carries most of the timeline’s density.</div>
         </section>
     </main>
 
@@ -612,7 +617,7 @@ var TL_ICO = {
         const timeline = await fetchJson(base + 'timeline_events.json', 'timeline');
         if (fetchStatus.anyFetched) {
             document.getElementById('dataSource').innerHTML =
-                'Data source: live-loaded from <code>../en/json/</code> (running in http server mode)';
+                'Data source: live-loaded from <code>../en/json/timeline_events.json</code> (22 events · 7 composition / 7 version / 8 influence · years 629–2020) — running in http server mode';
         }
         return Array.isArray(timeline) ? timeline : (timeline.timeline || EMBEDDED_DATA.timeline);
     }
@@ -696,6 +701,66 @@ var TL_ICO = {
         applySelectionToTimeline(state.selectedIdx);
     }
 
+    /* ==========================================================
+       图表标签防重叠落位（W1286 · 第 83 门禁 · SVG 标签裁切与重叠）
+       ------------------------------------------------------------
+       机制：按标签实测 bbox（getBoundingClientRect）逐个试放候选行；
+             候选行内与「已落位标签 + 静态障碍（时代标签 · 轴刻度 · 泳道名）」
+             互不相交（留 2px 间隙）才落位，否则顺延到下一候选行；
+             全部候选行都放不下 ⇒ 隐藏该标签，并把完整文案留在 <title>（悬停可见）。
+       说明：本页 .tl-svg 为 overflow:visible，隐藏型 audit 补丁的重叠阈值（>0.50）
+             高于门禁阈值（>0.30）⇒ 只能靠页内绘图代码消重叠。
+       ========================================================== */
+    function collectTextRects(svgRef, selector) {
+        const el = svgRef && svgRef.node ? svgRef.node() : svgRef;   // 兼容 d3 selection / 原生元素
+        const out = [];
+        el.querySelectorAll(selector).forEach(t => {
+            const r = t.getBoundingClientRect();
+            if (r.width > 0 && r.height > 0) out.push({ l: r.left, r: r.right, t: r.top, b: r.bottom });
+        });
+        return out;
+    }
+
+    function placeChartLabels(items, rowOffsets, obstacles, gap) {
+        if (!items || !items.length) return [];
+        const gapPx = gap == null ? 2 : gap;
+        const svg = items[0].node.ownerSVGElement;
+        const ctm = svg && svg.getScreenCTM ? svg.getScreenCTM() : null;
+        const scale = ctm && ctm.d ? ctm.d : 1;
+        const placed = [];
+        const sorted = items.slice().sort((a, b) =>
+            a.node.getBoundingClientRect().left - b.node.getBoundingClientRect().left);
+        sorted.forEach(it => {
+            const r = it.node.getBoundingClientRect();
+            let done = false;
+            for (let i = 0; i < rowOffsets.length && !done; i++) {
+                const dy = (rowOffsets[i] - it.baseY) * scale;
+                const box = { l: r.left, r: r.right, t: r.top + dy, b: r.bottom + dy };
+                const blockers = obstacles.concat(placed);   // 静态障碍 + 已落位标签
+                let hit = false;
+                for (let k = 0; k < blockers.length; k++) {
+                    const o = blockers[k];
+                    if (box.l < o.r + gapPx && o.l < box.r + gapPx &&
+                        box.t < o.b + gapPx && o.t < box.b + gapPx) { hit = true; break; }
+                }
+                if (!hit) {
+                    it.node.setAttribute('y', rowOffsets[i]);
+                    placed.push(box);
+                    done = true;
+                }
+            }
+            if (!done) {
+                it.node.style.display = 'none';
+                if (!it.node.querySelector(':scope > title')) {
+                    const ti = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    ti.textContent = it.full || it.node.textContent;
+                    it.node.appendChild(ti);
+                }
+            }
+        });
+        return placed;
+    }
+
     function renderHorizontalTimeline(container, data, width) {
         const margin = { top: 40, right: 50, bottom: 56, left: 120 };
         const height = 460;
@@ -715,6 +780,7 @@ var TL_ICO = {
         svg.append('title').attr('id', 'tl-svg-title').text('Three-axis timeline: Composition History + Version Evolution + Cultural Influence in three lanes; horizontal axis 600–2040 CE; hover a circle for event details');
 
         // era background bands
+        const eraLabelItems = [];
         ERAS.forEach(e => {
             const x0 = x(Math.max(e.start, xMin));
             const x1 = x(Math.min(e.end, xMax));
@@ -726,13 +792,14 @@ var TL_ICO = {
                 .attr('height', 340)
                 .attr('fill', e.color)
                 .attr('opacity', 0.06);
-            svg.append('text')
+            const eraText = svg.append('text')
                 .attr('class', 'era-label')
                 .attr('x', (x0 + x1) / 2)
                 .attr('y', 64)
                 .attr('text-anchor', 'middle')
                 .attr('fill', e.color)
                 .text(e.name);
+            eraLabelItems.push({ node: eraText.node(), baseY: 64, full: e.name });
         });
 
         // three-axis baselines + axis labels
@@ -756,13 +823,15 @@ var TL_ICO = {
         // X axis
         const axisG = svg.append('g')
             .attr('class', 'axis')
-            .attr('transform', `translate(0, ${height - margin.bottom + 16})`);
+            .attr('transform', `translate(0, ${height - margin.bottom + 24})`);
         axisG.call(d3.axisBottom(x)
             .tickValues([629, 800, 1000, 1200, 1400, 1592, 1800, 1955, 2020])
             .tickFormat(d3.format('d')));
 
         // event circles
         const tooltip = d3.select('#tl-tooltip');
+        const laneTitleItems = { composition: [], version: [], influence: [] };
+        const laneYearItems = { composition: [], version: [], influence: [] };
         data.forEach((d, i) => {
             const y = laneY[d.axis];
             const g = svg.append('g')
@@ -798,15 +867,31 @@ var TL_ICO = {
                     tooltip.style('opacity', 0);
                 });
 
-            g.append('text')
+            const yearText = g.append('text')
                 .attr('class', 'ev-year')
                 .attr('y', 22)
                 .text(d.year);
 
-            g.append('text')
+            const titleText = g.append('text')
                 .attr('class', 'ev-title')
                 .attr('y', -16)
                 .text(truncate(d.title, 6));
+
+            // 完整事件文案随点可查（悬停圆点显示）
+            g.append('title').text(d.year + ' · ' + d.title + ' · ' + AXES[d.axis].label);
+
+            laneTitleItems[d.axis].push({ node: titleText.node(), baseY: -16, full: d.title });
+            laneYearItems[d.axis].push({ node: yearText.node(), baseY: 22, full: String(d.year) });
+        });
+
+        // 标签防重叠落位（第 83 门禁）：时代标签 → 事件标题 → 事件年份
+        const placedAll = placeChartLabels(eraLabelItems, [64, 46, 28], []);
+        const obstacles = placedAll
+            .concat(collectTextRects(svg, '.lane-label'))
+            .concat(collectTextRects(svg, '.axis text'));
+        LANE_ORDER.forEach(k => {
+            placedAll.push.apply(placedAll, placeChartLabels(laneTitleItems[k], [-16, -34, -52, -69], obstacles.concat(placedAll)));
+            placedAll.push.apply(placedAll, placeChartLabels(laneYearItems[k], [22, 39, 56], obstacles.concat(placedAll)));
         });
 
         // enlarge selected circle after first render
