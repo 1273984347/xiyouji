@@ -126,8 +126,12 @@ def load_report(path: Path) -> tuple[list[str], dict]:
 
 def page_sha(path: Path) -> str:
     # 页面内容哈希前 12 位（与第 82 槽 _page_sha 同款·防漂移锚点）。
+    # W1286：按仓内规范（LF）归一后计算——`.gitattributes` 声明 `* text=auto eol=lf`
+    #   ⇒ blob 恒为 LF，Windows 工作树因 core.autocrlf=true 为 CRLF
+    #   ⇒ 不归一则本地档案 sha 与 CI 上 blob sha 永不相等 ⇒ CI 恒判「报告陈旧」。
     try:
-        return hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+        raw = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        return hashlib.sha256(raw).hexdigest()[:12]
     except OSError:
         return ''
 

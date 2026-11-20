@@ -252,6 +252,21 @@ html[data-theme="dark"] svg polygon[fill^="RGB("] {
     filter: brightness(1.45) saturate(1.05);
 }
 html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
+/* W1286：条形图**装饰性槽位**（背景轨道）的两态底色令牌。
+   槽位不是数据图形（数据是数值条 + 数字）⇒ 暗态用 fill:none + 保留 stroke 描边表达轮廓：
+   ① 避免暗态下深槽（--paper #23201C 亮度 0.015 / --surface-sunken #16130F 亮度 0.007）
+      被暗态审计判为「隐形图形」（阈值 0.16）⇒ 每页最多 10 条·正好触顶 ⇒ 门禁报「新增 10」；
+   ② 同时保住 W1284 的设计意图（暗态槽位不被 brightness(1.45) 提成纯白·数字不被浅金压白底）。 */
+:root { --track-fill: #faf7f2; }
+html[data-theme="dark"] { --track-fill: none; }
+/* W1286：HTML 图例色块的暗态提亮补偿（与上方 SVG 图形同款机制）。
+   SVG 图形能被上面那条规则提亮（brightness 1.45）⇒ 越过「不可见」阈值 0.16；
+   而 HTML 色块（.legend-swatch 等）拿不到该补偿 ⇒ 暗底上深色数据色（#3A473A / #40619E /
+   #C0392B …）被判为「隐形色块」⇒ 暗态门禁报新增 invisible。
+   修法：给语义化的图例色块加同款提亮（色相不变·仅亮度补偿）⇒ 色块与图形仍一一对应。 */
+html[data-theme="dark"] .legend-swatch,
+html[data-theme="dark"] .lg-swatch,
+html[data-theme="dark"] .chart-legend .legend-item span[style*="background"] { filter: brightness(1.45) saturate(1.05); }
 /* W569：图表暗色适配 v2——数据页图表按宣纸浅色调色板生成，深色下 svg 文字保持墨色填充不可读
    （全站审计 232 页实证：暗色低对比文字 1298 处）。文字/tspan 反白；形状明度由上方亮度滤波提升。
    !important 用于压过 d3 .attr('fill')（表现属性）与 .style('fill')（内联）；全站无 fill="none" 文本（实证）。 */

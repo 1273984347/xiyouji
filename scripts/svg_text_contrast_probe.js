@@ -882,10 +882,15 @@ async function measureState(context, pageRec, state) {
   }
 }
 
-/** 页面内容哈希前 12 位（防漂移锚点·与第 82 槽 _page_sha 同款）。 */
+/** 页面内容哈希前 12 位（防漂移锚点·与第 82 槽 _page_sha 同款）。
+ *  W1286：按仓内规范（LF）归一后计算——`.gitattributes` 声明 `* text=auto eol=lf`
+ *    ⇒ blob 恒为 LF，Windows 工作树因 core.autocrlf=true 为 CRLF
+ *    ⇒ 不归一则本地报告的 sha 与 CI 上 blob 的 sha 永不相等 ⇒ CI 恒判「报告陈旧」。 */
 function pageSha(absPath) {
   try {
-    return require('crypto').createHash('sha256').update(require('fs').readFileSync(absPath)).digest('hex').slice(0, 12);
+    const raw = require('fs').readFileSync(absPath).toString('binary').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    const buf = Buffer.from(raw, 'binary');
+    return require('crypto').createHash('sha256').update(buf).digest('hex').slice(0, 12);
   } catch (e) {
     return '';
   }

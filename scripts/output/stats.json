@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-21T04:08:07",
+  "_generated": "2026-11-21T06:16:19",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -104,14 +104,14 @@
     "domain": "pitfalls.md 主题「级联 / CHANGELOG」实测条目数",
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
-    "last_changed_by": "W1215",
+    "last_changed_by": "W1286",
     "value": 26
   },
   "pitfalls_css": {
     "domain": "pitfalls.md 主题「CSS / 视觉渲染」实测条目数",
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
-    "last_changed_by": "W1285",
+    "last_changed_by": "W1286",
     "value": 90
   },
   "pitfalls_data": {
@@ -119,7 +119,7 @@
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
     "last_changed_by": "W1286",
-    "value": 21
+    "value": 23
   },
   "pitfalls_flow": {
     "domain": "pitfalls.md 主题「流程 / 协作 / 取证」实测条目数",
@@ -132,7 +132,7 @@
     "domain": "pitfalls.md 主题「git / 提交 / 并发」实测条目数",
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
-    "last_changed_by": "W1273",
+    "last_changed_by": "W1286",
     "value": 39
   },
   "pitfalls_js": {
@@ -147,7 +147,7 @@
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
     "last_changed_by": "W1286",
-    "value": 409
+    "value": 411
   },
   "pytest_collected": {
     "domain": "pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议）",

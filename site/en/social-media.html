@@ -500,7 +500,8 @@
            ③ 雷达轴标白字压被提亮的轴圈（暗态各轴圈提亮后均为亮色）⇒ 暗色态一律深墨 #23201A；
               明态仅金色轴圈 #e9b885（白字 CR 1.80）需深墨。
            明色态其余取值一律沿用原值 ⇒ 零视觉变化。 */
-        html[data-theme="dark"] #fit-svg rect[fill="#faf7f2"] { fill: var(--surface-sunken); }
+        /* W1286：装饰性槽位改用令牌——暗态 fill:none + 保留 stroke（深槽被暗态审计判为隐形图形·W1286 修） */
+html[data-theme="dark"] #fit-svg rect[fill="#faf7f2"] { fill: var(--track-fill); }
         html[data-theme="dark"] #fit-svg text { stroke: rgba(20, 20, 30, 0.85); }
         html[data-theme="dark"] #radar-svg circle + text { fill: #23201A !important; }
         /* 条内「MBTI + 数值」标签：明色态白字。满格条（适配度 10）时条与轨道的 bbox 完全相同，

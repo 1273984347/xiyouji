@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rj80a82C3Ez0fldw3SfLbf+yrh/uA3sTMNY+LGzE6C4=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-XOV0Eaoo+xLuJSt/LMWjdMD0lnPTprMd4Wty6AJfPoE=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>伦理消费 · 坐骑权益与妖怪 IPO · 详解西游记</title>
@@ -1147,7 +1147,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 //   暗态公共层只给「fill 属性以 # / rgb( 开头」的图形加 brightness(1.45) 提亮，
                 //   原 #faf7f2 轨道在暗态被提成纯白（与数值条同白·且浅金数字压白底 CR 1.80）；
                 //   改令牌后暗态轨道为 --paper（#23201C 深槽），明态近似原色，数字墨色两态均达标。
-                .style("fill", "var(--paper)")
+                // W1286：暗态下 --paper 深槽亮度 0.015 < 判据「不可见」阈值 0.16 ⇒ 暗态审计把
+                //   这条**装饰性槽位**计入 invisibleShapes（每页最多 10 条·正好触顶）⇒ 暗态门禁
+                //   报「新增 10」。槽位不是数据图形（真正的数据是数值条与数字）⇒ 暗态改用
+                //   fill:none + 保留 stroke 描边表达槽位轮廓：视觉仍见槽位，判据不再误计。
+                .style("fill", "var(--track-fill)")
                 .attr("stroke", "var(--line)")
                 .attr("rx", 3);
 

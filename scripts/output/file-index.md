@@ -3,18 +3,38 @@
 | 文件 | W | 说明 |
 |---|---|---|
 | .agent/skills/puti-shouye/SKILL.md | W1286 | 级联版本面机械联动 |
+| .github/workflows/README.md | W1286 | 级联产物（本批收官链写入） |
 | AGENTS.md | W1286 | 级联版本面机械联动 |
 | CHANGELOG.md | W1286 | 本批版段 |
+| CITATION.cff | W1286 | 级联产物（本批收官链写入） |
 | HANDOVER.md | W1286 | 级联版本面机械联动 |
+| README.md | W1286 | 级联产物（本批收官链写入） |
 | STRUCTURE.md | W1286 | 级联版本面机械联动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1286 | AGENTS 历史段归档（级联迁出） |
 | archive/docs/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250-ARCHIVE.md | W1286 | 级联版本面机械联动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1286 | 台账腾窗归档（W1222-W1223 迁出） |
 | archive/docs/pitfalls-detail-ARCHIVE.md | W1286 | 坑表新增 E-300~E-302 |
+| archive/docs/workflows-readme-history.md | W1286 | 工作流 README 历史段归档（级联迁出） |
 | docs/00-\345\257\274\350\257\273/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250.md | W1286 | 级联版本面机械联动 |
+| docs/00-导读/W批次编号对账表.md | W1286 | 台账 W1286 行回填 + 腾窗归档 |
+| docs/00-导读/项目说明.md | W1286 | 版本面联动（级联） |
 | docs/11-\346\226\271\346\241\210\346\212\245\345\221\212/README.md | W1286 | 级联版本面机械联动 |
 | docs/11-\346\226\271\346\241\210\346\212\245\345\221\212/\350\256\241\345\210\222\346\226\271\346\241\210/T119-\344\273\273\345\212\241\350\256\241\345\210\222\346\211\247\350\241\214\344\270\216\347\273\217\351\252\214\346\262\211\346\267\200\346\212\245\345\221\212-2026-11-21.md | W1286 | T119 报告落盘 |
+| docs/11-方案报告/README.md | W1286 | 报告索引登记 T119（§六 135 → 136 件） |
+| docs/11-方案报告/计划方案/T119-任务计划执行与经验沉淀报告-2026-11-21.md | W1286 | T119 报告落盘（任务计划执行与经验沉淀框架） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1286 | 版本面联动（级联产物） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1286 | 版本面联动（级联产物） |
+| docs/INDEX.md | W1286 | 文档索引刷新 |
 | docs/agent/gates.md | W1286 | 第82槽口径同步本批实测数字 |
 | docs/agent/pitfalls.md | W1286 | 级联版本面机械联动 |
 | pitfalls.md | W1286 | 坑表新增 E-300~E-302 |
+| scripts/check_chart_content_completeness.py | W1286 | 级联产物（本批收官链写入） |
+| scripts/check_svg_text_contrast.py | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/INDEX.md | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/README.md | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/_cascade_files_W1286.txt | W1286 | 级联文件清单（级联产物） |
+| scripts/output/_vermilion_solid_cache.json | W1286 | 朱砂实底缓存（门禁副产物） |
+| scripts/output/_w1266_render_legend.py | W1286 | 级联产物（本批收官链写入） |
 | scripts/output/_w1286_spec.json | W1286 | 本批 spec |
 | scripts/output/chart-content-baseline.txt | W1286 | 第82/83槽基线与豁免清单收紧 |
 | scripts/output/chart-label-clipping-baseline.txt | W1286 | 第82/83槽基线与豁免清单收紧 |
@@ -22,6 +42,8 @@
 | scripts/output/chart-legend-render-audit.json | W1286 | 第82/83槽基线与豁免清单收紧 |
 | scripts/output/chart-legend-render-audit.md | W1286 | 第82/83槽基线与豁免清单收紧 |
 | scripts/output/chart_label_clipping_report.json | W1286 | 级联版本面机械联动 |
+| scripts/output/file-index.md | W1286 | file-index 新增 W1286 段（级联产物） |
+| scripts/output/render-state-audit.jsonl | W1286 | 级联产物（本批收官链写入） |
 | scripts/output/stats-changelog.json | W1286 | 级联版本面机械联动 |
 | scripts/output/stats-index.md | W1286 | 级联版本面机械联动 |
 | scripts/output/stats.json | W1286 | 级联版本面机械联动 |
@@ -65,7 +87,9 @@
 | site/data/narratology-16d-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/data/pilgrim-team-dynamic-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/data/poetry-density.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/search-index-zh.js | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/data/six-senses-narratology-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/social-media.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/data/story-timeline.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/data/tag-cloud.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/data/theological-intervention-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
@@ -73,6 +97,7 @@
 | site/data/visual-art.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/data/workplace.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/data/wukong-tangseng-benchmark.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/dukou-engine.html | W1286 | 版本脚注联动（级联产物） |
 | site/en/81-hardships.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/aesthetics.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/business-model.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
@@ -136,6 +161,7 @@
 | site/en/power-resources.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/relationships.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/risk-project.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/search-index-en.js | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/six-senses-narratology-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/social-media.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/tag-cloud.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
@@ -144,6 +170,9 @@
 | site/en/timeline.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/visual-art.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
 | site/en/workplace.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/index.html | W1286 | 版本脚注联动（级联产物） |
+| site/rss.xml | W1286 | 级联产物（本批收官链写入） |
+| site/tokens.css | W1286 | 级联产物（本批收官链写入） |
 
 ## W1285 graphic 口径覆盖面补齐 + 探针去重盲区修复 + 判据稳定性根修（2026-11-20）
 
@@ -2816,44 +2845,5 @@
 | site/data/tag-cloud.html | W1225 | 页脚批次链滚动（cascade 全档） |
 | site/dukou-engine.html | W1225 | 页脚批次链滚动（cascade 全档） |
 | site/index.html | W1225 | 页脚批次链滚动（cascade 全档） |
-
-## W1224 容量阈值裁决批：#1 双线制 + #2 双口径 + 测量器越线清单（2026-11-14）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_capacity_budget.py | W1224 | #1 双线制 + #2 页特有/共享块双口径 + 越线页清单与计数（§8.3 修订实现） |
-| scripts/output/_w1205_capacity_audit.json | W1224 | 容量证据刷新（修订后首跑读数·新 extra 形态） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1224 | §8.3 两行修订 + 修订落地记录（含 stats sweep 随动） |
-| docs/11-方案报告/设计与架构方案/系统架构v2迁移施工手册-2026-11-13.md | W1224 | T-2 状态行终写（E+R 全落地·T-2 闭环） |
-| CHANGELOG.md | W1224 | 容量阈值裁决批 |
-| HANDOVER.md | W1224 | 里程碑块（cascade 写入） |
-| AGENTS.md | W1224 | 版本脚注滚动（cascade 写入） |
-| archive/docs/AGENTS-ARCHIVE.md | W1224 | AGENTS 脚注滚动归档（cascade 写入） |
-| docs/00-导读/W批次编号对账表.md | W1224 | W1224 认领行 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1224 | 台账行窗口腾窗迁出最老行（archive 写入） |
-| scripts/output/file-index.md | W1224 | 本批 file-index 段（cascade 写入） |
-| scripts/output/stats.json | W1224 | stats 重跑 |
-| scripts/output/stats-changelog.json | W1224 | stats 重跑产物 |
-| scripts/output/stats-index.md | W1224 | stats 重跑产物 |
-| scripts/output/_cascade_files_W1224.txt | W1224 | 级联落盘清单（cascade 生成） |
-| scripts/output/_w1224_spec.json | W1224 | 本批 spec |
-| README.md | W1224 | 版本面推进（version_surface） |
-| STRUCTURE.md | W1224 | 版本面推进（version_surface） |
-| CITATION.cff | W1224 | 版本面推进（version_surface） |
-| docs/00-导读/项目说明.md | W1224 | 版本面推进（version_surface） |
-| .github/workflows/README.md | W1224 | 版本面推进（version_surface） |
-| archive/docs/workflows-readme-history.md | W1224 | workflows README 历史归档（version_surface） |
-| site/data/search.html | W1224 | 搜索索引重建（方案/手册文档条目随动） |
-| site/en/search.html | W1224 | 搜索索引重建（EN 版） |
-| site/data/search-index-zh.js | W1224 | 索引数据件重写（生成器外置形态） |
-| site/en/search-index-en.js | W1224 | 索引数据件重写（生成器外置形态） |
-| scripts/output/INDEX.md | W1224 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/README.md | W1224 | 目录文档刷新（gen_folder_docs） |
-| scripts/output/tools-inventory.md | W1224 | 工具盘点时间戳随动 |
-| scripts/output/_vermilion_solid_cache.json | W1224 | 朱砂实底门禁增量缓存随页脚批次链更新（第 49 槽） |
-| site/data/cross-time-danmaku.html | W1224 | 页脚批次链滚动（cascade 全档） |
-| site/data/tag-cloud.html | W1224 | 页脚批次链滚动（cascade 全档） |
-| site/dukou-engine.html | W1224 | 页脚批次链滚动（cascade 全档） |
-| site/index.html | W1224 | 页脚批次链滚动（cascade 全档） |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

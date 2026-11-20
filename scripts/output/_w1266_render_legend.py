@@ -68,7 +68,11 @@ def main():
             page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
             path = ROOT / rel
             url = "file:///" + path.as_posix().replace("\\", "/")
-            rec = {"page": rel, "sha": hashlib.sha256(path.read_bytes()).hexdigest()[:12]}
+            # W1286：按仓内规范（LF）归一后计算 sha——`.gitattributes` 声明 `* text=auto eol=lf`
+            #   ⇒ blob 恒为 LF，而 Windows 工作树因 core.autocrlf=true 为 CRLF
+            #   ⇒ 不归一则「本地档案 sha」与「CI 上 blob sha」永不相等 ⇒ CI 恒判档案过期。
+            _raw = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+            rec = {"page": rel, "sha": hashlib.sha256(_raw).hexdigest()[:12]}
             html_text = path.read_text(encoding="utf-8", errors="ignore")
             nodes = list(cc.iter_nodes(cc.parse_html(html_text)))
             _, static_cls, static_lib = cc.chart_evidence(nodes, html_text)

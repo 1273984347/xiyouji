@@ -711,8 +711,16 @@ def read_render_audit(path: Path) -> tuple[dict, list[str]]:
 
 
 def _page_sha(path: Path) -> str:
-    """页面内容哈希前 12 位（渲染档案的防漂移锚点）。"""
-    return hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+    """页面内容哈希前 12 位（渲染档案的防漂移锚点）。
+
+    W1286：**按仓内规范（LF）归一后计算**——`.gitattributes` 声明 `* text=auto eol=lf`
+    ⇒ 仓内 blob 恒为 LF，而 Windows 工作树因 `core.autocrlf=true` 检出为 CRLF
+    ⇒ 直接 `read_bytes()` 会让「本地算的 sha」与「CI 上 blob 的 sha」永不相等
+    ⇒ 渲染档案在 CI 上恒被判「过期」（实证 about.html：本地 309d118255fa / CI f917041c34ea）。
+    ⇒ 归一后两侧同口径 ⇒ 跨平台可复现。
+    """
+    raw = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(raw).hexdigest()[:12]
 
 
 def _resolve_legend_exemption(rel: str, spec: str, series: int, audit: dict, page_sha: str = "") -> tuple[str, str]:
