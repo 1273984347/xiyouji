@@ -156,6 +156,39 @@ const PAGE_ANALYSIS_FN = `(() => {
     hOverflow: Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth)
   };
   const seenText = new Set();
+  // W1286：**文字压在图形上 ⇒ 交第 80 槽 graphic 口径判**（与该槽 body/graph 双口径分工同源）。
+  //   原口径一律拿 body 底色比 ⇒ 暗态下「深墨字压浅色色块」（视觉可读）被误判为不可读
+  //   （实证 dashboard 中心数字「81」/「总计」压提亮后的浅色扇形·正文底对比 1.1 但视觉可读）。
+  //   这里只判「该文字是否被某个实心图形压住」——压住的不在本判据计，交 graphic 口径按图形底色判。
+  const MIN_COVER_RATIO = 0.6;   // 与第 80 槽一致：文字大部分落入图形才算被压住
+  function coveredByShape(t) {
+    const tr = t.getBoundingClientRect();
+    if (tr.width < 1 || tr.height < 1) return false;
+    const area = tr.width * tr.height;
+    const cx = tr.left + tr.width / 2, cy = tr.top + tr.height / 2;
+    const svg = t.ownerSVGElement;
+    if (!svg) return false;
+    const shapes = svg.querySelectorAll('rect,circle,ellipse,path,polygon');
+    for (const sh of shapes) {
+      const scs = getComputedStyle(sh);
+      const f = scs.fill;
+      if (!f || f === 'none' || f === 'transparent') continue;
+      const fm = String(f).match(/rgba?\(([^)]+)\)/);
+      if (!fm) continue;
+      const parts = fm[1].split(',').map(v => parseFloat(v));
+      if (parts.length >= 4 && parts[3] < 0.3) continue;   // alpha 过低 ⇒ 不算底色
+      const sr = sh.getBoundingClientRect();
+      if (sr.width < 1 || sr.height < 1) continue;
+      const ix = Math.max(0, Math.min(tr.right, sr.right) - Math.max(tr.left, sr.left));
+      const iy = Math.max(0, Math.min(tr.bottom, sr.bottom) - Math.max(tr.top, sr.top));
+      const inter = ix * iy;
+      if (inter / area < MIN_COVER_RATIO) continue;
+      // 中心点须落在图形内（避免 bbox 边缘误配）
+      if (cx < sr.left || cx > sr.right || cy < sr.top || cy > sr.bottom) continue;
+      return true;
+    }
+    return false;
+  }
   document.querySelectorAll('svg text').forEach(t => {
     const txt = (t.textContent || '').trim();
     if (!txt) return;
@@ -163,6 +196,8 @@ const PAGE_ANALYSIS_FN = `(() => {
     // W570：光晕感知——paint-order:stroke + 可见描边（白晕）时，深浅填充均双主题可读，不计缺陷
     const halo = (cs.paintOrder || '').includes('stroke') && parseFloat(cs.strokeWidth) >= 1 && cs.stroke !== 'none';
     if (halo) return;
+    // W1286：压在图形上的文字交 graphic 口径判（避免暗态底色口径误报）
+    if (coveredByShape(t)) return;
     const fillL = lum(cs.fill);
     const cr = contrast(fillL, bgL);
     if (cr !== null && cr < 3 && out.lowContrastText.length < 12) {

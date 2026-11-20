@@ -11,8 +11,10 @@
 | README.md | W1286 | 级联产物（本批收官链写入） |
 | STRUCTURE.md | W1286 | 级联版本面机械联动 |
 | archive/docs/AGENTS-ARCHIVE.md | W1286 | AGENTS 历史段归档（级联迁出） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1286 | 级联产物（本批收官链写入） |
 | archive/docs/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250-ARCHIVE.md | W1286 | 级联版本面机械联动 |
 | archive/docs/W批次编号对账表-ARCHIVE.md | W1286 | 台账腾窗归档（W1222-W1223 迁出） |
+| archive/docs/file-index-ARCHIVE.md | W1286 | 级联产物（本批收官链写入） |
 | archive/docs/pitfalls-detail-ARCHIVE.md | W1286 | 坑表新增 E-300~E-302 |
 | archive/docs/workflows-readme-history.md | W1286 | 工作流 README 历史段归档（级联迁出） |
 | docs/00-\345\257\274\350\257\273/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250.md | W1286 | 级联版本面机械联动 |
@@ -28,6 +30,7 @@
 | docs/agent/gates.md | W1286 | 第82槽口径同步本批实测数字 |
 | docs/agent/pitfalls.md | W1286 | 级联版本面机械联动 |
 | pitfalls.md | W1286 | 坑表新增 E-300~E-302 |
+| scripts/_audit_render_states.js | W1286 | 级联产物（本批收官链写入） |
 | scripts/check_chart_content_completeness.py | W1286 | 级联产物（本批收官链写入） |
 | scripts/check_svg_text_contrast.py | W1286 | 级联产物（本批收官链写入） |
 | scripts/output/INDEX.md | W1286 | 级联产物（本批收官链写入） |
