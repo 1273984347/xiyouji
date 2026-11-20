@@ -68,7 +68,15 @@
 
 const fs = require('fs');
 const path = require('path');
-const { chromium } = require('playwright');
+// W1286：**惰性加载 playwright**——自测（--self-test）是纯数据判定·不启浏览器；
+//   而顶部直接 require('playwright') 会让「未装 playwright 的环境」（CI 的 pytest job
+//   按设计不装浏览器）连自测都跑不起来 ⇒ 模块缺失即判红（实证 W1282 引入的用例）。
+//   真跑（main）时才 require ⇒ 自测零依赖。
+let chromium = null;
+function _chromium() {
+  if (!chromium) ({ chromium } = require('playwright'));
+  return chromium;
+}
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = path.join(ROOT, 'site');
@@ -898,7 +906,7 @@ function pageSha(absPath) {
 
 async function main() {
   const pages = listPages();
-  const browser = await chromium.launch();
+  const browser = await _chromium().launch();
   const rows = [];
   console.log('页面 ' + pages.length + ' · 状态 ' + STATES.length + ' · conc=' + CONC + ' · 底色口径=' + BG_MODE);
   for (const state of STATES) {
