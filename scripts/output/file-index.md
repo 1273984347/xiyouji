@@ -4,6 +4,7 @@
 |---|---|---|
 | .agent/skills/puti-shouye/SKILL.md | W1286 | 级联版本面机械联动 |
 | .github/workflows/README.md | W1286 | 级联产物（本批收官链写入） |
+| .github/workflows/ci.yml | W1286 | 级联产物（本批收官链写入） |
 | AGENTS.md | W1286 | 级联版本面机械联动 |
 | CHANGELOG.md | W1286 | 本批版段 |
 | CITATION.cff | W1286 | 级联产物（本批收官链写入） |

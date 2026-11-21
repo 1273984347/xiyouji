@@ -506,6 +506,15 @@ jobs:
         #   ⇒ 根页的标签可读性由 graphic 口径（--scope all·含根页）覆盖（详见 T118 §2.5）。
         run: node scripts/svg_text_contrast_probe.js --bg-mode body --scope data,en --out scripts/output/svg_text_contrast_report.json
 
+      # W1286：CI 现跑探针会**重写入库报告文件** ⇒ 工作树出现「未提交残留」⇒ 第 31 槽
+      #   C4-f（文件清单漏 add 防线）把 CI 自己的临时产物判成红 ⇒ 本地 0 FAIL / CI 2 FAIL 的
+      #   典型失配（实证：两份探针报告各报一条 C4-f）。修法：现跑后**还原工作树**。
+      #   检测能力不降级：入库报告带全量 page_sha ⇒ 第 80 槽「报告陈旧」的 fail-closed
+      #   检测仍由**入库产物**承担（页面一改而报告未刷新 ⇒ 门禁照红）；CI 现跑继续承担
+      #   「页面在 CI 环境能渲染出图元」的自证职责。
+      - name: Restore probe report artifacts (W1286·避免 CI 自身产物触发 C4-f)
+        run: git checkout -- scripts/output/svg_text_contrast_graphic_report.json scripts/output/svg_text_contrast_report.json
+
       - name: Run verify_delivery.py
         run: python scripts/verify_delivery.py
 
