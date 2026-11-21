@@ -338,23 +338,35 @@ def sweep_markers(values, files=None, narrow_pred=None):
     W1215 增补：pitfalls.md **正本**以**窄域**入面——只扫 `### ` 主题段头行（正文含历史示例
     标记，E-195 引用「615<!--stats:a1_a6_docs-->」实证叙述，整文件 sub 必误改历史叙述）；
     段头声明数字与实值的对齐另由 C5e 声明↔实测对拍兜底（双网各司其职）。窄域按 **ROOT 相对
-    路径恰为 pitfalls.md** 判定（W1215 实证：basename 判定会把 docs/agent/pitfalls.md 跳转壳
-    误伤成窄域 ⇒ 壳的计数标记漏 sweep ⇒ C5b 假红）；narrow_pred 可注入供单测。
+    路径恰为 pitfalls.md 或落在 docs/agent/pitfalls-topics/ 下** 判定（W1215 实证：basename
+    判定会把 docs/agent/pitfalls.md 跳转壳误伤成窄域 ⇒ 壳的计数标记漏 sweep ⇒ C5b 假红；
+    W1291：六主题正本迁入后窄域判定一并迁，否则段头声明永久滞后 ⇒ C2/C3 判红）；
+    narrow_pred 可注入供单测。
     """
     import check_doc_sync as _cds  # 同目录·取权威面定义（面漂移=门禁与跟随同源漂移）
 
     if narrow_pred is None:
         def narrow_pred(fp):
             try:
-                return os.path.relpath(fp, ROOT).replace("\\", "/") == "pitfalls.md"
+                rel = os.path.relpath(fp, ROOT).replace("\\", "/")
             except ValueError:  # 跨盘（pytest tmp 在别盘）——非正本 ⇒ 全扫
                 return False
+            # W1291：六主题正本迁入后，**窄域判定须一并迁**——此前只认「路径恰为 pitfalls.md」
+            # ⇒ 六主题正本段头标记永不入 sweep 面 ⇒ 段头声明永久滞后 ⇒ C2/C3 判红
+            # （W1290 拆分遗留：当时声明==实算，缺口隐形；本批加 E-315 即暴露）。
+            if rel == "pitfalls.md":
+                return True
+            return rel.startswith("docs/agent/pitfalls-topics/") and rel.endswith(".md")
 
     if files is None:
         files = [os.path.join(ROOT, rel) for rel in C5_MAIN_FILES]
         files.append(os.path.join(ROOT, "CHANGELOG.md"))
         files += _cds.c5b_extra_surfaces()
         files.append(os.path.join(ROOT, "pitfalls.md"))  # W1215：段头主题计数窄域 sweep
+        # W1291：六主题正本入面（正本迁到 docs/agent/pitfalls-topics/ 后，段头声明与契约段
+        # 「同族」行的 stats 标记若不入 sweep 面 ⇒ 永久滞后 ⇒ C2/C3 判红）——文件清单引用
+        # check_doc_sync.PITFALL_TOPIC_FILES 单一事实源（禁复制清单）。
+        files += [os.path.join(ROOT, _rel) for _rel in _cds.PITFALL_TOPIC_FILES.values()]
     updated, details = 0, []
     for fp in files:
         if not os.path.isfile(fp):
@@ -389,8 +401,12 @@ def sweep_markers(values, files=None, narrow_pred=None):
             return "%s%s" % (want, m.group("mark"))
 
         if narrow:
+            # 窄域行集合（W1291 定稿）：**行内含 `<!--stats:pitfalls_*` 标记的行**——
+            # 即全部**声明面**（根壳「计数」行 + 六主题正本表表格行 + 各主题正本段头条数行
+            # + 契约段「同族」分项行）；正文含历史示例标记（a1_a6_docs 等**其他键**），
+            # 整文件扫必误改历史叙述 ⇒ 禁宽域。行内判定 ⇒ 新增声明面自动入域，无需再改本处。
             new_text = "\n".join(
-                RE_STAT_MARK.sub(_sub, ln) if ln.startswith("### ") else ln
+                RE_STAT_MARK.sub(_sub, ln) if "<!--stats:pitfalls_" in ln else ln
                 for ln in text.split("\n")
             ) + tail
         else:

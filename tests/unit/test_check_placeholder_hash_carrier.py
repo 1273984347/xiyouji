@@ -142,4 +142,9 @@ def test_declaration_surfaces_in_sync():
     assert ("%d 槽" % slots) in gates.split("\n")[0], \
         "gates.md H1 槽数散文未与编号条目数（%d）一致" % slots
     m = re.search(r"verify full 全部执行段（随挂槽演进·现役 (\d+) 段", doc_spec)
-    assert m and int(m.group(1)) == 76, "文档规范段数未随挂槽同步为 76"
+    # W1291：段数随挂槽演进 ⇒ 期望值改为**动态对拍 verify 实数**（硬编码 76 已在挂槽演进后陈旧）
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    from check_gov_doc_claims import _verify_sections as _vs
+    _real_n = len(_vs())
+    assert m and int(m.group(1)) == _real_n, f"文档规范段数未随挂槽同步为 {_real_n}"

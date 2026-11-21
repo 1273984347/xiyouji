@@ -1,0 +1,2165 @@
+{
+  "batch": "W1291",
+  "criterion": "按第 49 槽实测报告 perCls[cls].measured 收缩",
+  "measured_pages": 238,
+  "before_total": 259,
+  "after_total": 0,
+  "before_batches": {
+    "W864": 7,
+    "W866": 4,
+    "W867": 8,
+    "W868": 8,
+    "W869": 8,
+    "W870": 8,
+    "W871": 12,
+    "W872": 13,
+    "W873": 6,
+    "W883": 22,
+    "W886": 25,
+    "W887": 135,
+    "W1152": 3
+  },
+  "after_batches": {
+    "W864": 1,
+    "W866": 2,
+    "W867": 0,
+    "W868": 0,
+    "W869": 0,
+    "W870": 1,
+    "W871": 0,
+    "W872": 1,
+    "W873": 2,
+    "W883": 0,
+    "W886": 0,
+    "W887": 0,
+    "W1152": 0
+  },
+  "actions": [
+    {
+      "page": "dashboard.html",
+      "cls": "button.filter-tab.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "dashboard.html",
+      "cls": "button.rag-fab",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "dashboard.html",
+      "cls": "button.vt-btn",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "dashboard.html",
+      "cls": "section.route-strip",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/81-hardships-view.html",
+      "cls": "button.vt-btn",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/81-hardships.html",
+      "cls": "span.tag",
+      "sum_before": 90,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/aesthetics.html",
+      "cls": "div.color-swatch",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/aesthetics.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/aesthetics.html",
+      "cls": "div.stage-color-bar",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/business-model.html",
+      "cls": "div.monster-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/cave-estate.html",
+      "cls": "span.tag.king",
+      "sum_before": 19,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "cls": "button.stage-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/chart-design.html",
+      "cls": "div.domino-card",
+      "sum_before": 4,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/chart-design.html",
+      "cls": "div.domino-hardship",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/cognitive-psychology.html",
+      "cls": "div.char-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/concept-device.html",
+      "cls": "div.cipher-face.cipher-back",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/concept-device.html",
+      "cls": "span.idev",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/counterfactual.html",
+      "cls": "span.badge.validity-high",
+      "sum_before": 7,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/criticism-history.html",
+      "cls": "div.candidate-card.main",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "cls": "button",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "cls": "div.age-tab.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/deconstruction.html",
+      "cls": "span.tag",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "cls": "div.stat-card.negative",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/ecology.html",
+      "cls": "div.compare-card.invasive",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/ecology.html",
+      "cls": "span.damage-pill.damage-high",
+      "sum_before": 9,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "cls": "div.scholar-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/ethics-consumption.html",
+      "cls": "div.ipo-outcome",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/ethics-consumption.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/ethics-consumption.html",
+      "cls": "div.sev-badge.sev-extreme",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/ethics-consumption.html",
+      "cls": "span.veg-badge.veg-no",
+      "sum_before": 4,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/ethics-consumption.html",
+      "cls": "span.zero-tag",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "cls": "span.badge.cinnabar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "cls": "div.king-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/game-webnovel.html",
+      "cls": "div.cc-elem",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/game-webnovel.html",
+      "cls": "div.cc-stat-fill",
+      "sum_before": 10,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/game-webnovel.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/game-webnovel.html",
+      "cls": "div.nc-genre",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/game-webnovel.html",
+      "cls": "span.elem-chip",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/global-pattern.html",
+      "cls": "span.p-country",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "cls": "div.role-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "cls": "div.swatch-bar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/hardship-heatmap.html",
+      "cls": "button.stage-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "cls": "div.role-card.r-king",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "cls": "button.btn",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "cls": "div.progress-fill",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/jurisprudence.html",
+      "cls": "div.artifact-card.c-low",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/jurisprudence.html",
+      "cls": "span.severity-pill.sev-high",
+      "sum_before": 8,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/karma-reincarnation.html",
+      "cls": "div.char-card.c-chusheng",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/linguistics.html",
+      "cls": "div.char-card.c-buddhist",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/linguistics.html",
+      "cls": "div.inc-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/linguistics.html",
+      "cls": "div.kpi-card",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/linguistics.html",
+      "cls": "div.mbti-card.m-entp",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/magic-system.html",
+      "cls": "span.rank-badge.rank-S+",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/mbti-evolution.html",
+      "cls": "button.stage-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/methodology-matrix.html",
+      "cls": "span.phase-badge",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/methodology-matrix.html",
+      "cls": "span.quad-badge",
+      "sum_before": 6,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/ming-political-thought-comparison.html",
+      "cls": "a.active",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "cls": "button.tab-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "cls": "div.signal-card.s-active",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "cls": "div.swatch-bar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "cls": "div.victim-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/music-structure.html",
+      "cls": "span.tag",
+      "sum_before": 35,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/narrative-experiment.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/narrative-experiment.html",
+      "cls": "div.narr-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/narrative-experiment.html",
+      "cls": "div.player-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/narrative-experiment.html",
+      "cls": "div.sc-cat",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/narrative-experiment.html",
+      "cls": "span.gh-tag",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/narrative-experiment.html",
+      "cls": "span.hc-owner",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/narrative-experiment.html",
+      "cls": "span.sc-chip",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/narrative-rhythm-curve.html",
+      "cls": "button.btn",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "cls": "button",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "cls": "button.ctrl-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "cls": "div.phase-card.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "cls": "div.progress-fill",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/poetry-rhythm-analysis.html",
+      "cls": "div.progress-fill",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/power-resources.html",
+      "cls": "div.faction-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/relationships.html",
+      "cls": "span.role-tag.primary",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/risk-project.html",
+      "cls": "div.char-card.c-tang",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/search.html",
+      "cls": "button.vt-btn",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/social-media.html",
+      "cls": "div.platform-badge",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "cls": "button.tab-btn",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "cls": "span.rc-size",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/text-evolution.html",
+      "cls": "div.evo-step.first",
+      "sum_before": 6,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "cls": "div.role-card.r-king",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/visual-art.html",
+      "cls": "div.chant-card.amp-high",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/visual-art.html",
+      "cls": "div.id-form",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/visual-art.html",
+      "cls": "div.idea-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/visual-art.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/visual-art.html",
+      "cls": "div.sc-cat.cat-danger",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/visual-art.html",
+      "cls": "span.ch-amp-bar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "data/workplace.html",
+      "cls": "span.alert-badge",
+      "sum_before": 7,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/81-hardships.html",
+      "cls": "span.tag",
+      "sum_before": 91,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/aesthetics.html",
+      "cls": "div.color-swatch",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/aesthetics.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/aesthetics.html",
+      "cls": "div.scene-bar",
+      "sum_before": 4,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/aesthetics.html",
+      "cls": "div.stage-color-bar",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ai-dialogue.html",
+      "cls": "button",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ai-dialogue.html",
+      "cls": "span.step-num",
+      "sum_before": 4,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/cave-estate.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/cave-estate.html",
+      "cls": "span.tag.king",
+      "sum_before": 19,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/character-appearance.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/character-dynamic-network.html",
+      "cls": "button.stage-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/character-dynamic-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/character-relationship-3d-view.html",
+      "cls": "button.vt-btn",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/character-relationship-3d-view.html",
+      "cls": "span.keytab.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/character-relationship-3d.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/character-semantic-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/character-sentiment-arc.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/chart-design.html",
+      "cls": "div.domino-card",
+      "sum_before": 4,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/chart-design.html",
+      "cls": "div.domino-hardship",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/chart-design.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/chart-design.html",
+      "cls": "div.sundial-card.highlight-stress",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/concept-device.html",
+      "cls": "button.danmaku-toggle",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/concept-device.html",
+      "cls": "button.era-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/concept-device.html",
+      "cls": "div.cipher-face.cipher-back",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/concept-device.html",
+      "cls": "span.idev",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/counterfactual.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/counterfactual.html",
+      "cls": "span.badge.validity-high",
+      "sum_before": 7,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/deconstruction.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/deconstruction.html",
+      "cls": "span.tag",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ecology.html",
+      "cls": "div.compare-card.invasive",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ecology.html",
+      "cls": "div.kpi-card",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ecology.html",
+      "cls": "div.stage-card.during",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ecology.html",
+      "cls": "span.damage-pill.damage-high",
+      "sum_before": 9,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ethics-consumption.html",
+      "cls": "div.ipo-outcome",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ethics-consumption.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ethics-consumption.html",
+      "cls": "span.veg-badge.veg-no",
+      "sum_before": 4,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ethics-consumption.html",
+      "cls": "span.zero-tag",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/four-dimensional-research-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/four-dimensional-research-network.html",
+      "cls": "span.badge.cinnabar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/four-heavenly-kings-artifacts.html",
+      "cls": "div.king-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/four-heavenly-kings-artifacts.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/four-heavenly-kings-artifacts.html",
+      "cls": "div.swatch-bar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/game-webnovel.html",
+      "cls": "div.cc-elem",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/game-webnovel.html",
+      "cls": "div.cc-stat-fill",
+      "sum_before": 10,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/game-webnovel.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/game-webnovel.html",
+      "cls": "div.nc-genre",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/game-webnovel.html",
+      "cls": "span.elem-chip",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/global-pattern.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/global-pattern.html",
+      "cls": "span.p-country",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/guanyin-six-roles-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/guanyin-six-roles-network.html",
+      "cls": "div.role-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/guanyin-six-roles-network.html",
+      "cls": "div.swatch-bar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/guide.html",
+      "cls": "a.primary",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/hardship-difficulty-heatmap.html",
+      "cls": "button.dim-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/hardship-difficulty-heatmap.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/hardship-heatmap.html",
+      "cls": "button.stage-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/hardship-heatmap.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/heaven-power-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/heaven-power-network.html",
+      "cls": "div.role-card.r-king",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/intertextuality-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/journey-geo-semiotics.html",
+      "cls": "article.mech-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/journey-map-interactive.html",
+      "cls": "button.btn",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/journey-map-interactive.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/journey-route.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/journey-spacetime.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/journey-spacetime.html",
+      "cls": "div.progress-fill",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/jurisprudence.html",
+      "cls": "div.artifact-card.c-low",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/jurisprudence.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/jurisprudence.html",
+      "cls": "span.severity-pill.sev-high",
+      "sum_before": 8,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/karma-reincarnation.html",
+      "cls": "div.char-card.c-chusheng",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/karma-reincarnation.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/language-style-radar.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/linguistics.html",
+      "cls": "div.char-card.c-buddhist",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/linguistics.html",
+      "cls": "div.inc-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/linguistics.html",
+      "cls": "div.kpi-card",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/linguistics.html",
+      "cls": "div.mbti-card.m-entp",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/linguistics.html",
+      "cls": "span",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/magic-system.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/magic-system.html",
+      "cls": "span.intensity-bar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/magic-system.html",
+      "cls": "span.rank-badge.rank-S+",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/material-archaeology.html",
+      "cls": "div.artifact-card",
+      "sum_before": 8,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/material-archaeology.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/material-archaeology.html",
+      "cls": "div.type-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/material-archaeology.html",
+      "cls": "span.tag",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/material-archaeology.html",
+      "cls": "span.tag.palace",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/mbti-evolution.html",
+      "cls": "button.stage-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/mbti-evolution.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/methodology-matrix.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/methodology-matrix.html",
+      "cls": "div.phase-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/methodology-matrix.html",
+      "cls": "div.quadrant-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/methodology-matrix.html",
+      "cls": "span.phase-badge",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/methodology-matrix.html",
+      "cls": "span.quad-badge",
+      "sum_before": 6,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ming-political-thought-comparison.html",
+      "cls": "a.active",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/ming-political-thought-comparison.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-background.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-capability-radar.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-ecology-network.html",
+      "cls": "button.tab-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-ecology-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-female-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-hierarchy-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-sociology.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-sociology.html",
+      "cls": "div.signal-card.s-active",
+      "sum_before": 3,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-victims-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-victims-network.html",
+      "cls": "div.swatch-bar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/monster-victims-network.html",
+      "cls": "div.victim-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/music-structure.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/music-structure.html",
+      "cls": "div.mv-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/music-structure.html",
+      "cls": "span.sym-badge",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/music-structure.html",
+      "cls": "span.tag",
+      "sum_before": 35,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-experiment.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-experiment.html",
+      "cls": "div.narr-card",
+      "sum_before": 12,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-experiment.html",
+      "cls": "div.player-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-experiment.html",
+      "cls": "div.sc-cat",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-experiment.html",
+      "cls": "span.gh-tag",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-experiment.html",
+      "cls": "span.hc-owner",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-experiment.html",
+      "cls": "span.sc-chip",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-rhythm-curve.html",
+      "cls": "button.btn",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narrative-rhythm-curve.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narratology-12d-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/narratology-16d-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/perf-canvas-rendering.html",
+      "cls": "button",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/perf-canvas-rendering.html",
+      "cls": "div.bar-seg.svg-seg",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/perf-canvas-rendering.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/philosophy.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/pilgrim-team-dynamic-network.html",
+      "cls": "button.ctrl-btn.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/pilgrim-team-dynamic-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/pilgrim-team-dynamic-network.html",
+      "cls": "div.phase-card.active",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/pilgrim-team-psychology-arc.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/pilgrim-team-psychology-arc.html",
+      "cls": "div.progress-fill",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/poetry-rhythm-analysis.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/poetry-rhythm-analysis.html",
+      "cls": "div.progress-fill",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/power-resources.html",
+      "cls": "div.faction-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/power-resources.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/relationships.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/relationships.html",
+      "cls": "span.role-tag.primary",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/risk-project.html",
+      "cls": "div.char-card.c-tang",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/risk-project.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/search.html",
+      "cls": "button.vt-btn",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/six-senses-narratology-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/social-media.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/social-media.html",
+      "cls": "div.platform-badge",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/tag-cloud.html",
+      "cls": "button.tab-btn",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/tag-cloud.html",
+      "cls": "span.rc-size",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/text-evolution.html",
+      "cls": "div.evo-step.first",
+      "sum_before": 6,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/text-evolution.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/text-evolution.html",
+      "cls": "div.quote-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/text-search.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/theological-intervention-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/timeline.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/underworld-power-network.html",
+      "cls": "div.kpi-card",
+      "sum_before": 2,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/underworld-power-network.html",
+      "cls": "div.role-card.r-king",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/visual-art.html",
+      "cls": "div.chant-card.amp-high",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/visual-art.html",
+      "cls": "div.id-form",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/visual-art.html",
+      "cls": "div.idea-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/visual-art.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/visual-art.html",
+      "cls": "div.sc-cat.cat-danger",
+      "sum_before": 5,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/visual-art.html",
+      "cls": "span.ch-amp-bar",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/workplace.html",
+      "cls": "div.bw-cat",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/workplace.html",
+      "cls": "div.kpi-card",
+      "sum_before": 1,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    },
+    {
+      "page": "en/workplace.html",
+      "cls": "span.alert-badge",
+      "sum_before": 7,
+      "measured": 0,
+      "action": "delete_all",
+      "reason": "实测朱砂数为 0（类已不在）"
+    }
+  ],
+  "needs_review": [
+    {
+      "page": "data/aesthetics.html",
+      "cls": "div.scene-bar（热力图行内）",
+      "why": "登记键与实测类键不匹配（含批注键或类已改名）·保守保留"
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "cls": "button（主行动）",
+      "why": "登记键与实测类键不匹配（含批注键或类已改名）·保守保留"
+    },
+    {
+      "page": "data/character-relationship-3d-view.html",
+      "cls": "button.vt-btn / span.keytab.active",
+      "why": "登记键与实测类键不匹配（含批注键或类已改名）·保守保留"
+    },
+    {
+      "page": "data/data-explorer.html",
+      "cls": "button.vt-btn / span.keytab.active",
+      "why": "登记键与实测类键不匹配（含批注键或类已改名）·保守保留"
+    },
+    {
+      "page": "data/hardship-difficulty-heatmap.html",
+      "cls": "button.dim-btn.active / button.sort-btn.active",
+      "why": "登记键与实测类键不匹配（含批注键或类已改名）·保守保留"
+    },
+    {
+      "page": "data/linguistics.html",
+      "cls": "span（无类名色片）",
+      "why": "登记键与实测类键不匹配（含批注键或类已改名）·保守保留"
+    },
+    {
+      "page": "data/material-archaeology.html",
+      "cls": "span.tag / span.tag.palace",
+      "why": "登记键与实测类键不匹配（含批注键或类已改名）·保守保留"
+    }
+  ],
+  "updated_at": "2026-11-21",
+  "v2_actions": [
+    {
+      "page": "data/aesthetics.html",
+      "cls": "div.scene-bar",
+      "sum_before": 4,
+      "family_measured": 0,
+      "action": "downscale_to_family_measured",
+      "reason": "族合计 > 族实测（实测侧判陈旧豁免）"
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "cls": "button",
+      "sum_before": 1,
+      "family_measured": 0,
+      "action": "downscale_to_family_measured",
+      "reason": "族合计 > 族实测（实测侧判陈旧豁免）"
+    },
+    {
+      "page": "data/linguistics.html",
+      "cls": "span",
+      "sum_before": 5,
+      "family_measured": 0,
+      "action": "downscale_to_family_measured",
+      "reason": "族合计 > 族实测（实测侧判陈旧豁免）"
+    }
+  ],
+  "v2_needs_review": [
+    {
+      "page": "data/character-relationship-3d-view.html",
+      "cls": "button.vt-btn / span.keytab.active",
+      "why": "归一后类键仍不在实测面：button.vt-btn,span.keytab.active·保守保留"
+    },
+    {
+      "page": "data/data-explorer.html",
+      "cls": "button.vt-btn / span.keytab.active",
+      "why": "归一后类键仍不在实测面：button.vt-btn,span.keytab.active·保守保留"
+    },
+    {
+      "page": "data/hardship-difficulty-heatmap.html",
+      "cls": "button.dim-btn.active / button.sort-btn.active",
+      "why": "归一后类键仍不在实测面：button.dim-btn.active,button.sort-btn.active·保守保留"
+    },
+    {
+      "page": "data/material-archaeology.html",
+      "cls": "span.tag / span.tag.palace",
+      "why": "归一后类键仍不在实测面：span.tag,span.tag.palace·保守保留"
+    }
+  ],
+  "v2_note": "v1 按原始键匹配（漏掉带中文批注/复合键的登记）→ v2 按实测同源归一口径（剥中文批注+复合键分段）重算",
+  "v3_removed_empty_page": [
+    {
+      "batch": "W864",
+      "page": "data/hardship-difficulty-heatmap.html",
+      "cls": "button.dim-btn.active / button.sort-btn.active",
+      "count": 2,
+      "why": "该页实测 perCls 为空（无朱砂实底）⇒ 登记豁免全多余"
+    },
+    {
+      "batch": "W866",
+      "page": "data/character-relationship-3d-view.html",
+      "cls": "button.vt-btn / span.keytab.active",
+      "count": 3,
+      "why": "该页实测 perCls 为空（无朱砂实底）⇒ 登记豁免全多余"
+    },
+    {
+      "batch": "W873",
+      "page": "data/data-explorer.html",
+      "cls": "button.vt-btn / span.keytab.active",
+      "count": 3,
+      "why": "该页实测 perCls 为空（无朱砂实底）⇒ 登记豁免全多余"
+    },
+    {
+      "batch": "W873",
+      "page": "data/material-archaeology.html",
+      "cls": "span.tag / span.tag.palace",
+      "count": 3,
+      "why": "该页实测 perCls 为空（无朱砂实底）⇒ 登记豁免全多余"
+    }
+  ],
+  "backup_before_v3": "scripts/output/_w1291_exempt_backup_before_v3.json"
+}

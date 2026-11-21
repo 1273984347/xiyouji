@@ -4,7 +4,7 @@
 > **何时读**：门禁红 / 同类缺陷第二次出现 / 批量改动前 / 排查静默失效。读完你应该能避开全部已知坑族。
 > **正本位置**：六主题判据层正本在 `docs/agent/pitfalls-topics/`；叙事全文在 `archive/docs/pitfalls-detail-ARCHIVE.md`（`#### E-NN` 锚·**只追加不修改**）。
 > **检索**：`grep -rn "E-123" docs/agent/pitfalls-topics/ archive/docs/pitfalls-detail-ARCHIVE.md`
-> **计数**：总 419<!--stats:pitfalls_total--> 条（六主题分项见下表）——分项标记随 `stats.py` 自动跟随实算。
+> **计数**：总 420<!--stats:pitfalls_total--> 条（六主题分项见下表）——分项标记随 `stats.py` 自动跟随实算。
 
 ## 六主题正本（判据层）
 
@@ -15,7 +15,7 @@
 | git / 提交 / 并发 | `docs/agent/pitfalls-topics/git-concurrency.md` | 39<!--stats:pitfalls_git--> | 涉及提交 / 暂存 / 推送 / 并行会话工作树时（代提、冲突、行尾翻动、提交节奏） |
 | 级联 / CHANGELOG | `docs/agent/pitfalls-topics/cascade-changelog.md` | 26<!--stats:pitfalls_cascade--> | 跑级联（batch_cascade）或写 CHANGELOG 版段时（锚点失配、段倒序、版段格式） |
 | 数据 / 内容可信度 | `docs/agent/pitfalls-topics/data-trust.md` | 28<!--stats:pitfalls_data--> | 处理数据生成 / 内容可信度 / 引文 / 计数对拍面时（计数钉、旧值标记、探针口径、单源真相） |
-| 流程 / 协作 / 取证 | `docs/agent/pitfalls-topics/flow-collab.md` | 223<!--stats:pitfalls_flow--> | 取批次号 / 写计划与报告 / 多 Agent 协作 / 取证定性与复盘时（收官链、登记面、纪律落地） |
+| 流程 / 协作 / 取证 | `docs/agent/pitfalls-topics/flow-collab.md` | 224<!--stats:pitfalls_flow--> | 取批次号 / 写计划与报告 / 多 Agent 协作 / 取证定性与复盘时（收官链、登记面、纪律落地） |
 
 ## E-NN → 主题 反查表（供按编号找主题文件）
 
@@ -57,7 +57,7 @@
 
 `E-308` `E-309`
 
-**流程 / 协作 / 取证**（168 条）
+**流程 / 协作 / 取证**（169 条）
 
 `E-186` `E-187` `E-188` `E-189` `E-159` `E-141` `E-142` `E-143` `E-144` `E-152`
 
@@ -91,5 +91,5 @@
 
 `E-233` `E-234` `E-235` `E-236` `E-237` `E-238` `E-239` `E-240` `E-241` `E-242`
 
-`E-243` `E-286` `E-290` `E-293` `E-301` `E-310` `E-311` `E-312`
+`E-243` `E-286` `E-290` `E-293` `E-301` `E-310` `E-311` `E-312` `E-315`
 

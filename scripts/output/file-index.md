@@ -1,3 +1,48 @@
+## W1291 治理面追平 + 复盘/豁免清偿批（2026-11-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1291 | 计数标记面跟随（pitfalls_total 419→420） |
+| AGENTS.md | W1291 | 定位段补 a1_a6_docs/visualization_pages stats 断言面（恢复 verify A1-A6 计数段实跑对拍） |
+| CHANGELOG.md | W1291 | 本批版段（收官链写入） |
+| CITATION.cff | W1291 | 版本面级联（收官链写入） |
+| HANDOVER.md | W1291 | A5 篇数 34→42 + 本批概要与遗留登记 |
+| README.md | W1291 | 版本面级联（收官链写入） |
+| STRUCTURE.md | W1291 | 版本面级联（收官链写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1291 | AGENTS 历史段归档（级联迁出） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1291 | 台账腾窗迁出 W1227–W1228（归档只追加） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1291 | 追加 #### E-315 叙事全文（归档只追加·旧段逐字不动） |
+| docs/00-导读/W批次编号对账表.md | W1291 | W1291 认领行 + 腾窗（迁出 W1227–W1228·正本 59 行）+ 收官回填 |
+| docs/00-导读/协议边界速查.md | W1291 | N1：A6 诗词 13 篇 → 19 篇（磁盘实算） |
+| docs/00-导读/文档规范.md | W1291 | N2：verify full 76 段 → 88 段 + §11.4「615==615」→「629==629」 |
+| docs/00-导读/新Agent启动Prompt.md | W1291 | N5：三键 623/89/90 → 629/90/91 + 第 5 步「616 篇」→ 629 篇（覆盖面补齐判据新增第 4 对） |
+| docs/00-导读/统计口径说明.md | W1291 | 同族清扫：A6 13→19 · N=615→629 · 88→91 / 87→90 · 校验行 87→90 |
+| docs/00-导读/项目说明.md | W1291 | 版本面级联（收官链写入） |
+| docs/11-方案报告/README.md | W1291 | 报告索引登记（§五 20→21 件 · §六 139→140 件） |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-21.md | W1291 | T1 复盘报告落盘（目录面） |
+| docs/11-方案报告/计划方案/T123-任务计划执行与经验沉淀报告-2026-11-21.md | W1291 | W1290 CI 终态回填（并入本批） |
+| docs/11-方案报告/计划方案/T124-任务计划执行与经验沉淀报告-2026-11-21.md | W1291 | T124 报告落盘 |
+| docs/agent/pitfalls-topics/cascade-changelog.md | W1291 | 契约段「同族」分项数改 stats 标记形态（计数链跟随面根治） |
+| docs/agent/pitfalls-topics/css-visual.md | W1291 | 契约段「同族」分项数改 stats 标记形态（计数链跟随面根治） |
+| docs/agent/pitfalls-topics/data-trust.md | W1291 | 契约段「同族」分项数改 stats 标记形态（计数链跟随面根治） |
+| docs/agent/pitfalls-topics/flow-collab.md | W1291 | 新增 E-315 正本条目（判据层）+ 契约段「同族」分项数改 stats 标记形态 |
+| docs/agent/pitfalls-topics/git-concurrency.md | W1291 | 契约段「同族」分项数改 stats 标记形态（计数链跟随面根治） |
+| docs/agent/pitfalls-topics/js-csp-runtime.md | W1291 | 契约段「同族」分项数改 stats 标记形态（计数链跟随面根治） |
+| pitfalls.md | W1291 | 索引壳：E-NN 反查表补 E-315 + 分组计数 168→169 + 计数行/表格行纳入 sweep 窄域 |
+| scripts/check_gov_doc_claims.py | W1291 | 判据侧追平：N3 对账锚移 gates.md 标题自声明 / N4 改 stats 同源对拍 / N5 覆盖面 +1 对 / 自测扩 4 类负样本 |
+| scripts/output/_vermilion_solid_report.json | W1291 | 第 49 槽实测报告刷新（238 页·陈旧豁免清零） |
+| scripts/output/_w1291_exemption_audit.json | W1291 | 豁免收缩审计留痕（v1/v2/v3 逐条动作 + needs_review + 前后条数） |
+| scripts/output/_w864_accent_exemptions.json | W1291 | T4 豁免清偿：259 → 0 条（实测三阶段收缩）+ updated_at 刷新 |
+| scripts/output/file-index.md | W1291 | file-index 新增 W1291 段 |
+| scripts/output/stats-changelog.json | W1291 | 统计变更史追加 W1291 |
+| scripts/output/stats-index.md | W1291 | 统计索引刷新 |
+| scripts/output/stats.json | W1291 | 计数链刷新（pitfalls_total 420 / pitfalls_flow 224） |
+| scripts/stats.py | W1291 | 计数链跟随面迁移三处：sweep files 面 + narrow_pred 判定 + 窄域行集合（行内含 <!--stats:pitfalls_*>） |
+| site/data/cross-time-danmaku.html | W1291 | 版本脚注联动（级联产物） |
+| site/data/tag-cloud.html | W1291 | 版本脚注联动（级联产物） |
+| site/dukou-engine.html | W1291 | 版本脚注联动（级联产物） |
+| site/index.html | W1291 | 版本脚注联动（级联产物） |
+
 ## W1290 坑表正本六主题拆分 + 根级索引壳 + 脚本口径跨文件聚合 + 重号清偿（2026-11-21）
 
 | 文件 | W | 说明 |

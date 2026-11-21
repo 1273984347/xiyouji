@@ -3,7 +3,7 @@
 > **📖 阅读契约**：查表型——JS / CSP / 运行时类踩坑排查时按本表查；每条含根因、判据与可执行纪律（纪律块留本层，叙事全文在归档层）。
 > **何时读**：改页内联脚本 / CSP 哈希 / 前端运行时行为时（脚本被拒执行、事件族降级、动画与动效契约）
 > **叙事全文**：`archive/docs/pitfalls-detail-ARCHIVE.md` 的 `#### E-NN` 段（只追加不修改）。
-> **同族**：总 419<!--stats:pitfalls_total--> 条 · CSS 90 / JS 13 / git 39 / 级联 26 / 数据 28 / 流程 223
+> **同族**：总 420<!--stats:pitfalls_total--> 条 · CSS 90<!--stats:pitfalls_css--> / JS 13<!--stats:pitfalls_js--> / git 39<!--stats:pitfalls_git--> / 级联 26<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 224<!--stats:pitfalls_flow-->
 
 ### JS / CSP / 运行时（13<!--stats:pitfalls_js--> 条）
 

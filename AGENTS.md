@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》Agent 行为地图
 
-> **定位**：《详解西游记》＝「一源多形·数字人文可视化解读《西游记》100 回」——docs/ 解读文档 + 纯静态站（file:// 直开）+ 90 个 D3/Three 可视化页 + 渡口问津 Web Agent。
+> **定位**：《详解西游记》＝「一源多形·数字人文可视化解读《西游记》100 回」——docs/ 解读文档 629<!--stats:a1_a6_docs--> 篇 + 纯静态站（file:// 直开）+ 90<!--stats:visualization_pages--> 个 D3/Three 可视化页 + 渡口问津 Web Agent。
 > **本文件是 AI 行为地图，不是手册**：铁律＋路由＋命令。规模/目录/架构看 README 与 STRUCTURE（§ 路由表）；治理文件自身的改法看 docs/agent/MAINTAINING.md；现役规模与状态以 `python scripts/agent_start.py` 实读为准（防记忆代读）。
 
 ## 一、硬约束（铁律 24 条·每会话为真·违反即返工）
@@ -35,7 +35,7 @@
 | 文件 | 何时读 | 回答什么 |
 |---|---|---|
 | docs/agent/gates.md | **任何写操作或提交前 → 先跑 verify_delivery.py（退出码非 0 即阻断），红时查对应槽条目** | 门禁触发条件 + 失败处置（薄说明层·判定逻辑在门禁脚本本体） |
-| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 419<!--stats:pitfalls_total--> 条坑位判据（**索引壳=仓库根 pitfalls.md**·E-NN 反查表；**六主题正本在 docs/agent/pitfalls-topics/**；docs/agent/pitfalls.md 为二级跳转壳勿读）·六主题：CSS / 视觉渲染（90<!--stats:pitfalls_css-->）·JS / CSP / 运行时（13<!--stats:pitfalls_js-->）·git / 提交 / 并发（39<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（28<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（223<!--stats:pitfalls_flow-->）·叙事细节在归档 |
+| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 420<!--stats:pitfalls_total--> 条坑位判据（**索引壳=仓库根 pitfalls.md**·E-NN 反查表；**六主题正本在 docs/agent/pitfalls-topics/**；docs/agent/pitfalls.md 为二级跳转壳勿读）·六主题：CSS / 视觉渲染（90<!--stats:pitfalls_css-->）·JS / CSP / 运行时（13<!--stats:pitfalls_js-->）·git / 提交 / 并发（39<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（28<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（224<!--stats:pitfalls_flow-->）·叙事细节在归档 |
 | archive/docs/pitfalls-detail-ARCHIVE.md | 需要坑位条目全文时 | 叙事/实证细节（#### E-NN 锚·只增不改） |
 | docs/10-方法论沉淀/批次交付流水线.md | 批次收官 / 推送前 | 全链 7 步 + 失败模式速查 + 收官链时间纪律 |
 | docs/agent/MAINTAINING.md | **改 AGENTS/pitfalls/gates 等治理文件前** | 维护契约全文：退役三标准 / 添加前四问 / 体积预算 / 局部化预留形态 |
@@ -74,4 +74,4 @@ Windows 单机的解释器三语境 / 编码 / heredoc / curl / 路径等环境�
 2. 每批核心 2 同步（CHANGELOG + HANDOVER）·批次经台账认领·提交一律 safe_commit（防代提）。
 3. 有复用价值的教训落 pitfalls（16-⑥ 载体铁则）·同类两犯的纪律**上提本文件铁律区**（上提后在坑条目预防段标注）。
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1285-W1285 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-21（W1286）：图表内容层存量清偿（第82槽 + 第83槽 + L-01/L-02）；2026-11-21（W1287）：CI 侧教训机器化（CI 内建断言 + ci_sim --ci-steps + 坑表 E-309）；2026-11-21（W1288）：收官回填与遗留落仓（台账四批登记滞后清偿 + 坑表腾窗与 E-310/E-311/E-312 + hook 启用指引三处落位） + pytest 一千八百零四 passed；2026-11-21（W1289）：登记滞后判据补全（hash 空缺告警 + 台账十行 hash 归位 + 坑表 E-301 扩写与 E-302 压缩）；2026-11-21（W1290）：坑表正本六主题拆分（写窗按主题独立·根级索引壳 + E-NN 反查表）+ 脚本口径跨文件聚合 + 重号清偿 E-313/E-314。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1286-W1286 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-21（W1287）：CI 侧教训机器化（CI 内建断言 + ci_sim --ci-steps + 坑表 E-309）；2026-11-21（W1288）：收官回填与遗留落仓（台账四批登记滞后清偿 + 坑表腾窗与 E-310/E-311/E-312 + hook 启用指引三处落位） + pytest 一千八百零四 passed；2026-11-21（W1289）：登记滞后判据补全（hash 空缺告警 + 台账十行 hash 归位 + 坑表 E-301 扩写与 E-302 压缩）；2026-11-21（W1290）：坑表正本六主题拆分（写窗按主题独立·根级索引壳 + E-NN 反查表）+ 脚本口径跨文件聚合 + 重号清偿 E-313/E-314；2026-11-21（W1291）：治理数字断言追平 + N3/N4 判据侧追平 + verify A1-A6 计数段恢复 + 坑表 E-315 与计数链跟随面根治 + 豁免簿清偿。如与上述权威文档冲突，以权威文档为准。*

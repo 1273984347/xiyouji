@@ -6,29 +6,17 @@
  "pages": {
   "data/81-hardships-view.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.vt-btn": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/81-hardships.html": {
    "measured": 0,
-   "exempted": 90,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.tag": {
-     "measured": 0,
-     "exempted": 90,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/_shell.html": {
    "measured": 0,
@@ -39,70 +27,31 @@
   },
   "data/aesthetics.html": {
    "measured": 0,
-   "exempted": 8,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.scene-bar": {
-     "measured": 0,
-     "exempted": 4,
-     "nonExempt": 0
-    },
-    "div.stage-color-bar": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "div.color-swatch": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/ai-dialogue.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/business-model.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.monster-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/cave-estate.html": {
    "measured": 0,
-   "exempted": 19,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.tag.king": {
-     "measured": 0,
-     "exempted": 19,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/century-dialogue.html": {
    "measured": 0,
@@ -134,16 +83,10 @@
   },
   "data/character-dynamic-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.stage-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/character-presence-timeline.html": {
    "measured": 0,
@@ -154,7 +97,7 @@
   },
   "data/character-relationship-3d-view.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
    "perCls": {}
@@ -182,96 +125,45 @@
   },
   "data/chart-design.html": {
    "measured": 0,
-   "exempted": 7,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.domino-card": {
-     "measured": 0,
-     "exempted": 4,
-     "nonExempt": 0
-    },
-    "div.domino-hardship": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/cognitive-psychology.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.char-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/concept-device.html": {
    "measured": 0,
-   "exempted": 10,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.cipher-face.cipher-back": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "span.idev": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/counterfactual.html": {
    "measured": 0,
-   "exempted": 7,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.badge.validity-high": {
-     "measured": 0,
-     "exempted": 7,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/criticism-history.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.candidate-card.main": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/cross-time-danmaku.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.age-tab.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/cultural-misreading.html": {
    "measured": 0,
@@ -289,100 +181,45 @@
   },
   "data/data-explorer.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
    "perCls": {}
   },
   "data/deconstruction.html": {
    "measured": 0,
-   "exempted": 5,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.tag": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/dialogue-sentiment.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.stat-card.negative": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/ecology.html": {
    "measured": 0,
-   "exempted": 10,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.damage-pill.damage-high": {
-     "measured": 0,
-     "exempted": 9,
-     "nonExempt": 0
-    },
-    "div.compare-card.invasive": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/emotional-heatmap.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.scholar-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/ethics-consumption.html": {
    "measured": 0,
-   "exempted": 14,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.ipo-outcome": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "span.veg-badge.veg-no": {
-     "measured": 0,
-     "exempted": 4,
-     "nonExempt": 0
-    },
-    "span.zero-tag": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    },
-    "div.sev-badge.sev-extreme": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/famous-time-travel.html": {
    "measured": 0,
@@ -393,75 +230,31 @@
   },
   "data/four-dimensional-research-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.badge.cinnabar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/four-heavenly-kings-artifacts.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.king-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/game-webnovel.html": {
    "measured": 0,
-   "exempted": 14,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.cc-stat-fill": {
-     "measured": 0,
-     "exempted": 10,
-     "nonExempt": 0
-    },
-    "div.cc-elem": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.elem-chip": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.nc-genre": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/global-pattern.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.p-country": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/glossary.html": {
    "measured": 0,
@@ -479,54 +272,31 @@
   },
   "data/guanyin-six-roles-network.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.role-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.swatch-bar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/hardship-difficulty-heatmap.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
    "perCls": {}
   },
   "data/hardship-heatmap.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.stage-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/heaven-power-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.role-card.r-king": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/intertextuality-network.html": {
    "measured": 0,
@@ -551,16 +321,10 @@
   },
   "data/journey-map-interactive.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.btn": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/journey-route.html": {
    "measured": 0,
@@ -571,47 +335,24 @@
   },
   "data/journey-spacetime.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.progress-fill": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/jurisprudence.html": {
    "measured": 0,
-   "exempted": 10,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.severity-pill.sev-high": {
-     "measured": 0,
-     "exempted": 8,
-     "nonExempt": 0
-    },
-    "div.artifact-card.c-low": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/karma-reincarnation.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.char-card.c-chusheng": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/language-style-radar.html": {
    "measured": 0,
@@ -622,100 +363,45 @@
   },
   "data/linguistics.html": {
    "measured": 0,
-   "exempted": 13,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "div.mbti-card.m-entp": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.char-card.c-buddhist": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    },
-    "div.inc-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/magic-system.html": {
    "measured": 0,
-   "exempted": 5,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.rank-badge.rank-S+": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/material-archaeology.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
    "perCls": {}
   },
   "data/mbti-evolution.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.stage-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/methodology-matrix.html": {
    "measured": 0,
-   "exempted": 8,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.quad-badge": {
-     "measured": 0,
-     "exempted": 6,
-     "nonExempt": 0
-    },
-    "span.phase-badge": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/ming-political-thought-comparison.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.active": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/monster-background.html": {
    "measured": 0,
@@ -733,16 +419,10 @@
   },
   "data/monster-ecology-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.tab-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/monster-female-network.html": {
    "measured": 0,
@@ -760,103 +440,38 @@
   },
   "data/monster-sociology.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.signal-card.s-active": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/monster-victims-network.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.victim-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.swatch-bar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/music-structure.html": {
    "measured": 0,
-   "exempted": 35,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.tag": {
-     "measured": 0,
-     "exempted": 35,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/narrative-experiment.html": {
    "measured": 0,
-   "exempted": 12,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.sc-chip": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "div.sc-cat": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.gh-tag": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.hc-owner": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "div.player-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.narr-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/narrative-rhythm-curve.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.btn": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/narratology-12d-network.html": {
    "measured": 0,
@@ -874,16 +489,10 @@
   },
   "data/perf-canvas-rendering.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/philosophy.html": {
    "measured": 0,
@@ -894,34 +503,17 @@
   },
   "data/pilgrim-team-dynamic-network.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.ctrl-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.phase-card.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/pilgrim-team-psychology-arc.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.progress-fill": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/poetry-density.html": {
    "measured": 0,
@@ -932,68 +524,38 @@
   },
   "data/poetry-rhythm-analysis.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.progress-fill": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/power-resources.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.faction-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/relationships.html": {
    "measured": 0,
-   "exempted": 5,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.role-tag.primary": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/risk-project.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.char-card.c-tang": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/search.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.vt-btn": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/six-senses-narratology-network.html": {
    "measured": 0,
@@ -1004,16 +566,10 @@
   },
   "data/social-media.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.platform-badge": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/story-timeline.html": {
    "measured": 0,
@@ -1024,34 +580,17 @@
   },
   "data/tag-cloud.html": {
    "measured": 0,
-   "exempted": 6,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.rc-size": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "button.tab-btn": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/text-evolution.html": {
    "measured": 0,
-   "exempted": 6,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.evo-step.first": {
-     "measured": 0,
-     "exempted": 6,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/text-search.html": {
    "measured": 0,
@@ -1076,67 +615,24 @@
   },
   "data/underworld-power-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.role-card.r-king": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/visual-art.html": {
    "measured": 0,
-   "exempted": 10,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.sc-cat.cat-danger": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "div.chant-card.amp-high": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.ch-amp-bar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.idea-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.id-form": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/workplace.html": {
    "measured": 0,
-   "exempted": 7,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.alert-badge": {
-     "measured": 0,
-     "exempted": 7,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "data/wukong-tangseng-benchmark.html": {
    "measured": 0,
@@ -1168,31 +664,10 @@
   },
   "dashboard.html": {
    "measured": 0,
-   "exempted": 5,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.vt-btn": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "button.filter-tab.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.rag-fab": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "section.route-strip": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "dukou-engine.html": {
    "measured": 0,
@@ -1238,16 +713,10 @@
   },
   "en/81-hardships.html": {
    "measured": 0,
-   "exempted": 91,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.tag": {
-     "measured": 0,
-     "exempted": 91,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/academic-papers.html": {
    "measured": 0,
@@ -1258,49 +727,17 @@
   },
   "en/aesthetics.html": {
    "measured": 0,
-   "exempted": 8,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.scene-bar": {
-     "measured": 0,
-     "exempted": 4,
-     "nonExempt": 0
-    },
-    "div.stage-color-bar": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "div.color-swatch": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/ai-dialogue.html": {
    "measured": 0,
-   "exempted": 5,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.step-num": {
-     "measured": 0,
-     "exempted": 4,
-     "nonExempt": 0
-    },
-    "button": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/bestiary.html": {
    "measured": 0,
@@ -1318,21 +755,10 @@
   },
   "en/cave-estate.html": {
    "measured": 0,
-   "exempted": 20,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.tag.king": {
-     "measured": 0,
-     "exempted": 19,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/century-dialogue.html": {
    "measured": 0,
@@ -1364,16 +790,10 @@
   },
   "en/character-appearance.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-bailongma.html": {
    "measured": 0,
@@ -1391,21 +811,10 @@
   },
   "en/character-dynamic-network.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.stage-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-presence-timeline.html": {
    "measured": 0,
@@ -1416,60 +825,31 @@
   },
   "en/character-relationship-3d-view.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.keytab.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.vt-btn": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-relationship-3d.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-semantic-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-sentiment-arc.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-shaseng.html": {
    "measured": 0,
@@ -1501,31 +881,10 @@
   },
   "en/chart-design.html": {
    "measured": 0,
-   "exempted": 9,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.domino-card": {
-     "measured": 0,
-     "exempted": 4,
-     "nonExempt": 0
-    },
-    "div.domino-hardship": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    },
-    "div.sundial-card.highlight-stress": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/cognitive-psychology.html": {
    "measured": 0,
@@ -1536,49 +895,17 @@
   },
   "en/concept-device.html": {
    "measured": 0,
-   "exempted": 12,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.cipher-face.cipher-back": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "span.idev": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "button.era-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.danmaku-toggle": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/counterfactual.html": {
    "measured": 0,
-   "exempted": 8,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.badge.validity-high": {
-     "measured": 0,
-     "exempted": 7,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/criticism-history.html": {
    "measured": 0,
@@ -1624,21 +951,10 @@
   },
   "en/deconstruction.html": {
    "measured": 0,
-   "exempted": 6,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.tag": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/dialogue-sentiment.html": {
    "measured": 0,
@@ -1656,31 +972,10 @@
   },
   "en/ecology.html": {
    "measured": 0,
-   "exempted": 13,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "span.damage-pill.damage-high": {
-     "measured": 0,
-     "exempted": 9,
-     "nonExempt": 0
-    },
-    "div.compare-card.invasive": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.stage-card.during": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/emotional-heatmap.html": {
    "measured": 0,
@@ -1943,31 +1238,10 @@
   },
   "en/ethics-consumption.html": {
    "measured": 0,
-   "exempted": 13,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.ipo-outcome": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "span.veg-badge.veg-no": {
-     "measured": 0,
-     "exempted": 4,
-     "nonExempt": 0
-    },
-    "span.zero-tag": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/famous-time-travel.html": {
    "measured": 0,
@@ -1978,95 +1252,31 @@
   },
   "en/four-dimensional-research-network.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.badge.cinnabar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/four-heavenly-kings-artifacts.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.king-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.swatch-bar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/game-webnovel.html": {
    "measured": 0,
-   "exempted": 14,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.cc-stat-fill": {
-     "measured": 0,
-     "exempted": 10,
-     "nonExempt": 0
-    },
-    "div.cc-elem": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.elem-chip": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.nc-genre": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/global-pattern.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.p-country": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/graph-explorer.html": {
    "measured": 0,
@@ -2077,93 +1287,38 @@
   },
   "en/guanyin-six-roles-network.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.role-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.swatch-bar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/guide.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.primary": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/hardship-difficulty-heatmap.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.dim-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/hardship-heatmap.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.stage-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/heaven-power-network.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "div.role-card.r-king": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/index.html": {
    "measured": 0,
@@ -2174,272 +1329,94 @@
   },
   "en/intertextuality-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/journey-geo-semiotics.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "article.mech-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/journey-map-interactive.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.btn": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/journey-route.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/journey-spacetime.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.progress-fill": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/jurisprudence.html": {
    "measured": 0,
-   "exempted": 11,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.severity-pill.sev-high": {
-     "measured": 0,
-     "exempted": 8,
-     "nonExempt": 0
-    },
-    "div.artifact-card.c-low": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/karma-reincarnation.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.char-card.c-chusheng": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/language-style-radar.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/linguistics.html": {
    "measured": 0,
-   "exempted": 13,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    },
-    "div.inc-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "div.mbti-card.m-entp": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.char-card.c-buddhist": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/magic-system.html": {
    "measured": 0,
-   "exempted": 7,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.intensity-bar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.rank-badge.rank-S+": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/material-archaeology.html": {
    "measured": 0,
-   "exempted": 13,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.artifact-card": {
-     "measured": 0,
-     "exempted": 8,
-     "nonExempt": 0
-    },
-    "div.type-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.tag": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.tag.palace": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/mbti-evolution.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.stage-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/methodology-matrix.html": {
    "measured": 0,
-   "exempted": 11,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.quadrant-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.quad-badge": {
-     "measured": 0,
-     "exempted": 6,
-     "nonExempt": 0
-    },
-    "span.phase-badge": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "div.phase-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/methodology.html": {
    "measured": 0,
@@ -2450,409 +1427,157 @@
   },
   "en/ming-political-thought-comparison.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.active": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/monster-background.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/monster-capability-radar.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/monster-ecology-network.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.tab-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/monster-female-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/monster-hierarchy-network.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/monster-sociology.html": {
    "measured": 0,
-   "exempted": 4,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.signal-card.s-active": {
-     "measured": 0,
-     "exempted": 3,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/monster-victims-network.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.victim-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.swatch-bar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/music-structure.html": {
    "measured": 0,
-   "exempted": 38,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.mv-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.sym-badge": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.tag": {
-     "measured": 0,
-     "exempted": 35,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/narrative-experiment.html": {
    "measured": 0,
-   "exempted": 23,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.player-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.hc-owner": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "span.gh-tag": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.narr-card": {
-     "measured": 0,
-     "exempted": 12,
-     "nonExempt": 0
-    },
-    "span.sc-chip": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "div.sc-cat": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/narrative-rhythm-curve.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.btn": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/narratology-12d-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/narratology-16d-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/perf-canvas-rendering.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.bar-seg.svg-seg": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/philosophy.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/pilgrim-team-dynamic-network.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "button.ctrl-btn.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.phase-card.active": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/pilgrim-team-psychology-arc.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.progress-fill": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/poetry-rhythm-analysis.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.progress-fill": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/power-resources.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.faction-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/relationships.html": {
    "measured": 0,
-   "exempted": 6,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.role-tag.primary": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/risk-project.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.char-card.c-tang": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/search.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.vt-btn": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/site-map.html": {
    "measured": 0,
@@ -2863,114 +1588,52 @@
   },
   "en/six-senses-narratology-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/social-media.html": {
    "measured": 0,
-   "exempted": 2,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.platform-badge": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/tag-cloud.html": {
    "measured": 0,
-   "exempted": 6,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "button.tab-btn": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.rc-size": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/text-evolution.html": {
    "measured": 0,
-   "exempted": 8,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.evo-step.first": {
-     "measured": 0,
-     "exempted": 6,
-     "nonExempt": 0
-    },
-    "div.quote-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/text-search.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/theological-intervention-network.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/timeline.html": {
    "measured": 0,
-   "exempted": 1,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/tribulations.html": {
    "measured": 0,
@@ -2981,59 +1644,17 @@
   },
   "en/underworld-power-network.html": {
    "measured": 0,
-   "exempted": 3,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 2,
-     "nonExempt": 0
-    },
-    "div.role-card.r-king": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/visual-art.html": {
    "measured": 0,
-   "exempted": 10,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.chant-card.amp-high": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.ch-amp-bar": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.sc-cat.cat-danger": {
-     "measured": 0,
-     "exempted": 5,
-     "nonExempt": 0
-    },
-    "div.idea-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "div.id-form": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/visualizations.html": {
    "measured": 0,
@@ -3044,159 +1665,13 @@
   },
   "en/workplace.html": {
    "measured": 0,
-   "exempted": 9,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "div.kpi-card": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    },
-    "span.alert-badge": {
-     "measured": 0,
-     "exempted": 7,
-     "nonExempt": 0
-    },
-    "div.bw-cat": {
-     "measured": 0,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   }
  },
  "fails": [],
- "notes": [
-  "data/81-hardships-view.html 陈旧豁免（类已不在）：button.vt-btn",
-  "data/81-hardships.html 陈旧豁免（类已不在）：span.tag",
-  "data/aesthetics.html 陈旧豁免（类已不在）：div.scene-bar、div.stage-color-bar、div.color-swatch、div.kpi-card",
-  "data/ai-dialogue.html 陈旧豁免（类已不在）：button",
-  "data/business-model.html 陈旧豁免（类已不在）：div.monster-card",
-  "data/cave-estate.html 陈旧豁免（类已不在）：span.tag.king",
-  "data/character-dynamic-network.html 陈旧豁免（类已不在）：button.stage-btn.active",
-  "data/character-relationship-3d-view.html 陈旧豁免（类已不在）：button.vt-btn / span.keytab.active（族合计 3·实测不足 3）",
-  "data/chart-design.html 陈旧豁免（类已不在）：div.domino-card、div.domino-hardship",
-  "data/cognitive-psychology.html 陈旧豁免（类已不在）：div.char-card",
-  "data/concept-device.html 陈旧豁免（类已不在）：div.cipher-face.cipher-back、span.idev",
-  "data/counterfactual.html 陈旧豁免（类已不在）：span.badge.validity-high",
-  "data/criticism-history.html 陈旧豁免（类已不在）：div.candidate-card.main",
-  "data/cross-time-danmaku.html 陈旧豁免（类已不在）：div.age-tab.active、button",
-  "data/data-explorer.html 陈旧豁免（类已不在）：button.vt-btn / span.keytab.active（族合计 3·实测不足 3）",
-  "data/deconstruction.html 陈旧豁免（类已不在）：span.tag",
-  "data/dialogue-sentiment.html 陈旧豁免（类已不在）：div.stat-card.negative",
-  "data/ecology.html 陈旧豁免（类已不在）：span.damage-pill.damage-high、div.compare-card.invasive",
-  "data/emotional-heatmap.html 陈旧豁免（类已不在）：div.scholar-card",
-  "data/ethics-consumption.html 陈旧豁免（类已不在）：div.ipo-outcome、span.veg-badge.veg-no、span.zero-tag、div.sev-badge.sev-extreme、div.kpi-card",
-  "data/four-dimensional-research-network.html 陈旧豁免（类已不在）：span.badge.cinnabar",
-  "data/four-heavenly-kings-artifacts.html 陈旧豁免（类已不在）：div.king-card",
-  "data/game-webnovel.html 陈旧豁免（类已不在）：div.cc-stat-fill、div.cc-elem、span.elem-chip、div.nc-genre、div.kpi-card",
-  "data/global-pattern.html 陈旧豁免（类已不在）：span.p-country",
-  "data/guanyin-six-roles-network.html 陈旧豁免（类已不在）：div.role-card、div.swatch-bar",
-  "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 2）",
-  "data/hardship-heatmap.html 陈旧豁免（类已不在）：button.stage-btn.active",
-  "data/heaven-power-network.html 陈旧豁免（类已不在）：div.role-card.r-king",
-  "data/journey-map-interactive.html 陈旧豁免（类已不在）：button.btn",
-  "data/journey-spacetime.html 陈旧豁免（类已不在）：div.progress-fill",
-  "data/jurisprudence.html 陈旧豁免（类已不在）：span.severity-pill.sev-high、div.artifact-card.c-low",
-  "data/karma-reincarnation.html 陈旧豁免（类已不在）：div.char-card.c-chusheng",
-  "data/linguistics.html 陈旧豁免（类已不在）：span、div.mbti-card.m-entp、div.char-card.c-buddhist、div.inc-card、div.kpi-card",
-  "data/magic-system.html 陈旧豁免（类已不在）：span.rank-badge.rank-S+",
-  "data/material-archaeology.html 陈旧豁免（类已不在）：span.tag / span.tag.palace（族合计 3·实测不足 3）",
-  "data/mbti-evolution.html 陈旧豁免（类已不在）：button.stage-btn.active",
-  "data/methodology-matrix.html 陈旧豁免（类已不在）：span.quad-badge、span.phase-badge",
-  "data/ming-political-thought-comparison.html 陈旧豁免（类已不在）：a.active",
-  "data/monster-ecology-network.html 陈旧豁免（类已不在）：button.tab-btn.active",
-  "data/monster-sociology.html 陈旧豁免（类已不在）：div.signal-card.s-active",
-  "data/monster-victims-network.html 陈旧豁免（类已不在）：div.victim-card、div.swatch-bar",
-  "data/music-structure.html 陈旧豁免（类已不在）：span.tag",
-  "data/narrative-experiment.html 陈旧豁免（类已不在）：span.sc-chip、div.sc-cat、span.gh-tag、span.hc-owner、div.player-card、div.narr-card、div.kpi-card",
-  "data/narrative-rhythm-curve.html 陈旧豁免（类已不在）：button.btn",
-  "data/perf-canvas-rendering.html 陈旧豁免（类已不在）：button",
-  "data/pilgrim-team-dynamic-network.html 陈旧豁免（类已不在）：button.ctrl-btn.active、div.phase-card.active",
-  "data/pilgrim-team-psychology-arc.html 陈旧豁免（类已不在）：div.progress-fill",
-  "data/poetry-rhythm-analysis.html 陈旧豁免（类已不在）：div.progress-fill",
-  "data/power-resources.html 陈旧豁免（类已不在）：div.faction-card",
-  "data/relationships.html 陈旧豁免（类已不在）：span.role-tag.primary",
-  "data/risk-project.html 陈旧豁免（类已不在）：div.char-card.c-tang",
-  "data/search.html 陈旧豁免（类已不在）：button.vt-btn",
-  "data/social-media.html 陈旧豁免（类已不在）：div.platform-badge",
-  "data/tag-cloud.html 陈旧豁免（类已不在）：span.rc-size、button.tab-btn",
-  "data/text-evolution.html 陈旧豁免（类已不在）：div.evo-step.first",
-  "data/underworld-power-network.html 陈旧豁免（类已不在）：div.role-card.r-king",
-  "data/visual-art.html 陈旧豁免（类已不在）：div.sc-cat.cat-danger、div.chant-card.amp-high、span.ch-amp-bar、div.idea-card、div.id-form、div.kpi-card",
-  "data/workplace.html 陈旧豁免（类已不在）：span.alert-badge",
-  "dashboard.html 陈旧豁免（类已不在）：button.vt-btn、button.filter-tab.active、button.rag-fab、section.route-strip",
-  "en/81-hardships.html 陈旧豁免（类已不在）：span.tag",
-  "en/aesthetics.html 陈旧豁免（类已不在）：div.scene-bar、div.stage-color-bar、div.color-swatch、div.kpi-card",
-  "en/ai-dialogue.html 陈旧豁免（类已不在）：span.step-num、button",
-  "en/cave-estate.html 陈旧豁免（类已不在）：span.tag.king、div.kpi-card",
-  "en/character-appearance.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/character-dynamic-network.html 陈旧豁免（类已不在）：div.kpi-card、button.stage-btn.active",
-  "en/character-relationship-3d-view.html 陈旧豁免（类已不在）：span.keytab.active、button.vt-btn",
-  "en/character-relationship-3d.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/character-semantic-network.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/character-sentiment-arc.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/chart-design.html 陈旧豁免（类已不在）：div.domino-card、div.domino-hardship、div.sundial-card.highlight-stress、div.kpi-card",
-  "en/concept-device.html 陈旧豁免（类已不在）：div.cipher-face.cipher-back、span.idev、button.era-btn.active、button.danmaku-toggle",
-  "en/counterfactual.html 陈旧豁免（类已不在）：span.badge.validity-high、div.kpi-card",
-  "en/deconstruction.html 陈旧豁免（类已不在）：span.tag、div.kpi-card",
-  "en/ecology.html 陈旧豁免（类已不在）：div.kpi-card、span.damage-pill.damage-high、div.compare-card.invasive、div.stage-card.during",
-  "en/ethics-consumption.html 陈旧豁免（类已不在）：div.ipo-outcome、span.veg-badge.veg-no、span.zero-tag、div.kpi-card",
-  "en/four-dimensional-research-network.html 陈旧豁免（类已不在）：div.kpi-card、span.badge.cinnabar",
-  "en/four-heavenly-kings-artifacts.html 陈旧豁免（类已不在）：div.kpi-card、div.king-card、div.swatch-bar",
-  "en/game-webnovel.html 陈旧豁免（类已不在）：div.kpi-card、div.cc-stat-fill、div.cc-elem、span.elem-chip、div.nc-genre",
-  "en/global-pattern.html 陈旧豁免（类已不在）：div.kpi-card、span.p-country",
-  "en/guanyin-six-roles-network.html 陈旧豁免（类已不在）：div.kpi-card、div.role-card、div.swatch-bar",
-  "en/guide.html 陈旧豁免（类已不在）：a.primary",
-  "en/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：div.kpi-card、button.dim-btn.active",
-  "en/hardship-heatmap.html 陈旧豁免（类已不在）：div.kpi-card、button.stage-btn.active",
-  "en/heaven-power-network.html 陈旧豁免（类已不在）：div.kpi-card、div.role-card.r-king",
-  "en/intertextuality-network.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/journey-geo-semiotics.html 陈旧豁免（类已不在）：article.mech-card",
-  "en/journey-map-interactive.html 陈旧豁免（类已不在）：div.kpi-card、button.btn",
-  "en/journey-route.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/journey-spacetime.html 陈旧豁免（类已不在）：div.kpi-card、div.progress-fill",
-  "en/jurisprudence.html 陈旧豁免（类已不在）：div.kpi-card、span.severity-pill.sev-high、div.artifact-card.c-low",
-  "en/karma-reincarnation.html 陈旧豁免（类已不在）：div.kpi-card、div.char-card.c-chusheng",
-  "en/language-style-radar.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/linguistics.html 陈旧豁免（类已不在）：div.kpi-card、div.inc-card、span、div.mbti-card.m-entp、div.char-card.c-buddhist",
-  "en/magic-system.html 陈旧豁免（类已不在）：div.kpi-card、span.intensity-bar、span.rank-badge.rank-S+",
-  "en/material-archaeology.html 陈旧豁免（类已不在）：div.kpi-card、div.artifact-card、div.type-card、span.tag、span.tag.palace",
-  "en/mbti-evolution.html 陈旧豁免（类已不在）：div.kpi-card、button.stage-btn.active",
-  "en/methodology-matrix.html 陈旧豁免（类已不在）：div.kpi-card、div.quadrant-card、span.quad-badge、span.phase-badge、div.phase-card",
-  "en/ming-political-thought-comparison.html 陈旧豁免（类已不在）：a.active、div.kpi-card",
-  "en/monster-background.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/monster-capability-radar.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/monster-ecology-network.html 陈旧豁免（类已不在）：div.kpi-card、button.tab-btn.active",
-  "en/monster-female-network.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/monster-hierarchy-network.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/monster-sociology.html 陈旧豁免（类已不在）：div.kpi-card、div.signal-card.s-active",
-  "en/monster-victims-network.html 陈旧豁免（类已不在）：div.kpi-card、div.victim-card、div.swatch-bar",
-  "en/music-structure.html 陈旧豁免（类已不在）：div.kpi-card、div.mv-card、span.sym-badge、span.tag",
-  "en/narrative-experiment.html 陈旧豁免（类已不在）：div.kpi-card、div.player-card、span.hc-owner、span.gh-tag、div.narr-card、span.sc-chip、div.sc-cat",
-  "en/narrative-rhythm-curve.html 陈旧豁免（类已不在）：div.kpi-card、button.btn",
-  "en/narratology-12d-network.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/narratology-16d-network.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/perf-canvas-rendering.html 陈旧豁免（类已不在）：div.kpi-card、button、div.bar-seg.svg-seg",
-  "en/philosophy.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/pilgrim-team-dynamic-network.html 陈旧豁免（类已不在）：div.kpi-card、button.ctrl-btn.active、div.phase-card.active",
-  "en/pilgrim-team-psychology-arc.html 陈旧豁免（类已不在）：div.kpi-card、div.progress-fill",
-  "en/poetry-rhythm-analysis.html 陈旧豁免（类已不在）：div.kpi-card、div.progress-fill",
-  "en/power-resources.html 陈旧豁免（类已不在）：div.kpi-card、div.faction-card",
-  "en/relationships.html 陈旧豁免（类已不在）：div.kpi-card、span.role-tag.primary",
-  "en/risk-project.html 陈旧豁免（类已不在）：div.kpi-card、div.char-card.c-tang",
-  "en/search.html 陈旧豁免（类已不在）：button.vt-btn",
-  "en/six-senses-narratology-network.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/social-media.html 陈旧豁免（类已不在）：div.kpi-card、div.platform-badge",
-  "en/tag-cloud.html 陈旧豁免（类已不在）：button.tab-btn、span.rc-size",
-  "en/text-evolution.html 陈旧豁免（类已不在）：div.kpi-card、div.evo-step.first、div.quote-card",
-  "en/text-search.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/theological-intervention-network.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/timeline.html 陈旧豁免（类已不在）：div.kpi-card",
-  "en/underworld-power-network.html 陈旧豁免（类已不在）：div.kpi-card、div.role-card.r-king",
-  "en/visual-art.html 陈旧豁免（类已不在）：div.kpi-card、div.chant-card.amp-high、span.ch-amp-bar、div.sc-cat.cat-danger、div.idea-card、div.id-form",
-  "en/workplace.html 陈旧豁免（类已不在）：div.kpi-card、span.alert-badge、div.bw-cat"
- ],
- "generated_at": "2026-11-16T18:35:07.256Z"
+ "notes": [],
+ "generated_at": "2026-11-21T15:55:17.121Z"
 }

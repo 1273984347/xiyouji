@@ -108,13 +108,22 @@ def test_exemptions_registry_parses_and_all_entries_have_reason():
             assert e.get("reason"), f"{batch} 存在无据豁免：{e}"
             assert e.get("page") and e.get("cls") and isinstance(e.get("count"), int), e
             n += 1
-    assert n >= 50, f"豁免条目过少（{n}）——B 渠收敛成果是否残缺？"
+    # W1291 判据升级：B 渠迁移成果已落地（朱砂实底实测全部收敛 ≤3 ⇒ 实测不再需要任何豁免）
+    # ⇒「条目数 ≥ 50」这一**存量下限**哨兵已过时（它守的是收敛**前**的存量形态）。
+    # 换成守**收敛态**的哨兵：豁免簿不得存在**陈旧豁免**（实测数已不足而登记仍在 ⇒ 簿与实况脱钩）。
+    _rep = json.loads((ROOT / "scripts" / "output" / "_vermilion_solid_report.json").read_text(encoding="utf-8"))
+    _stale = [x for x in _rep.get("notes", []) if "陈旧豁免" in str(x)]
+    assert not _stale, f"豁免簿存在陈旧豁免（实测已不需要·应收缩）：{_stale[:5]}"
+    assert "updated_at" in data, "豁免簿缺 updated_at（收缩批次必须刷新时间戳）"
 
 
 @needs_node
 def test_gate_loads_real_registry_without_error():
     out = node_eval(f"g.loadExemptions({str(EXEMPTIONS)!r}).size")
-    assert int(out) >= 50, out
+    # W1291：存量下限哨兵随收敛态撤销 ⇒ 改为守「门禁加载的条目数 == 簿内条目数」（加载口径一致）
+    _data = json.loads(EXEMPTIONS.read_text(encoding="utf-8"))
+    _n = sum(len(rec.get("exemptions", [])) for rec in _data["batches"].values())
+    assert int(out) == _n, out
 
 
 # ---------- 4. CI 接线（第 49 槽在 verify 里真实在位·防假修复） ----------
