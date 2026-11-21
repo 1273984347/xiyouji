@@ -77,20 +77,21 @@ def _gates_slot_count():
 
 
 def _pitfalls_count():
-    # W1160（P1-1 对抗审查实证）：W1157 正本迁根时第四个取数面漏改——本函数仍读
-    # docs/agent/pitfalls.md 跳转壳（0 条目）⇒ N4 坑位数对拍整体失效且方向指鹿为马。
-    # 改读根正本，与 check_pitfall_id_unique/check_doc_sync/check_agents_layers 同口径。
-    t = _read("pitfalls.md")
-    sec = None
-    counts = {}
-    for ln in t.split("\n"):
-        m = re.match(r"^### (?:CSS|JS|git|级联|数据|流程)", ln)
-        if m:
-            sec = m.group(0)
-            counts[sec] = 0
-        elif sec and re.match(r"^- \*\*", ln):
-            counts[sec] += 1
-    return sum(counts.values())
+    """坑表条目实数（N4 对拍取数面）。
+
+    W1160（P1-1）：W1157 正本迁根时本函数仍读 docs/agent/pitfalls.md 跳转壳（0 条目）⇒ 对拍失效。
+    W1290：正本按六主题拆分为 docs/agent/pitfalls-topics/*.md，根 pitfalls.md 降级为**索引壳**
+    （不含 `- **` 条目行）⇒ 读它会得 0 ⇒ 改为**聚合六主题正本**的 `- **` 行数，
+    与 check_doc_sync / check_pitfall_id_unique 同口径（单一事实源：六主题正本）。
+    """
+    n = 0
+    for rel in (
+        "css-visual.md", "js-csp-runtime.md", "git-concurrency.md",
+        "cascade-changelog.md", "data-trust.md", "flow-collab.md",
+    ):
+        t = _read(os.path.join("docs", "agent", "pitfalls-topics", rel))
+        n += len([ln for ln in t.split("\n") if ln.startswith("- **")])
+    return n
 
 
 def _stats():

@@ -103,7 +103,17 @@ WINDOWS = {
 # W1278 瘦身治理挂窗（用户批准挂载）：pitfalls/AGENTS 独立字节上限
 # （瘦身后现值棘轮·防回涨——本批 pitfalls 二层化 407.6→284.8KB、AGENTS §4.2/§6 摘要化 48.2→31.8KB 后挂窗）
 BYTE_CAPS = {
-    os.path.join("pitfalls.md"): 262144,  # 与全局 MAX_DOC_BYTES 同窗（test_w1120 实测口径对齐）
+    os.path.join("pitfalls.md"): 262144,  # 索引壳（W1290：正本拆出后此处为索引·仍与全局同窗）
+    # W1290（用户 2026-11-21 明确裁决「坑表按主题拆分为多文件 + 写窗按主题独立·彻底解除单文件天花板」）：
+    # 六个主题正本文件**各自**与全局 MAX_DOC_BYTES 同窗；**总量不设闸**——某主题涨满即该主题再拆细。
+    # 这是**用户批准的窗口口径变更**（非自行放宽判据）：原口径为「单文件 262144」，
+    # 现口径为「每主题文件各 262144·总量不设闸」⇒ 写窗天花板由 1×262144 变为 6×262144。
+    os.path.join("docs", "agent", "pitfalls-topics", "css-visual.md"): 262144,
+    os.path.join("docs", "agent", "pitfalls-topics", "js-csp-runtime.md"): 262144,
+    os.path.join("docs", "agent", "pitfalls-topics", "git-concurrency.md"): 262144,
+    os.path.join("docs", "agent", "pitfalls-topics", "cascade-changelog.md"): 262144,
+    os.path.join("docs", "agent", "pitfalls-topics", "data-trust.md"): 262144,
+    os.path.join("docs", "agent", "pitfalls-topics", "flow-collab.md"): 262144,
     os.path.join("AGENTS.md"): 34000,
 }
 

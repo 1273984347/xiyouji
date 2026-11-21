@@ -1,3 +1,72 @@
+## W1290 坑表正本六主题拆分 + 根级索引壳 + 脚本口径跨文件聚合 + 重号清偿（2026-11-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/huoyan-jinjing/SKILL.md | W1290 | 本批改动面 |
+| .agent/skills/puti-shouye/SKILL.md | W1290 | 本批改动面 |
+| .github/workflows/README.md | W1290 | 级联产物（本批收官链写入） |
+| AGENTS.md | W1290 | 本批改动面 |
+| CHANGELOG.md | W1290 | 本批版段 |
+| CITATION.cff | W1290 | 级联产物（本批收官链写入） |
+| HANDOVER.md | W1290 | §四 遗留登记块（W1290：坑表写窗枯竭 + 探针固定成本 + 复核纪律） |
+| README.md | W1290 | 级联产物（本批收官链写入） |
+| STRUCTURE.md | W1290 | 级联产物（本批收官链写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1290 | AGENTS 历史段归档（级联迁出） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1290 | E-301/E-302 段恢复叙事全文 + 段内追加正本判据层 |
+| archive/docs/workflows-readme-history.md | W1290 | 级联产物（本批收官链写入） |
+| docs/00-导读/W批次编号对账表.md | W1290 | 台账 10 行 hash 回填 + W1290 认领行 + 段数腾窗后正本 |
+| docs/00-导读/项目说明.md | W1290 | 级联产物（本批收官链写入） |
+| docs/11-方案报告/README.md | W1290 | 报告索引登记 T122（§六 137→138 件） |
+| docs/11-方案报告/计划方案/T122-任务计划执行与经验沉淀报告-2026-11-21.md | W1290 | T122 报告落盘 |
+| docs/11-方案报告/计划方案/T123-任务计划执行与经验沉淀报告-2026-11-21.md | W1290 | 本批改动面 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1290 | 级联产物（本批收官链写入） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1290 | 级联产物（本批收官链写入） |
+| docs/INDEX.md | W1290 | 本批改动面 |
+| docs/agent/INDEX.md | W1290 | 本批改动面 |
+| docs/agent/MAINTAINING.md | W1290 | 本批改动面 |
+| docs/agent/README.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls-topics/INDEX.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls-topics/README.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls-topics/cascade-changelog.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls-topics/css-visual.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls-topics/data-trust.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls-topics/flow-collab.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls-topics/git-concurrency.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls-topics/js-csp-runtime.md | W1290 | 本批改动面 |
+| docs/agent/pitfalls.md | W1290 | 本批改动面 |
+| pitfalls.md | W1290 | E-301 扩写（并入豁免登记 sha 失效面）+ E-302 压缩回判据层腾窗 |
+| pytest.ini | W1290 | 本批改动面 |
+| scripts/INDEX.md | W1290 | 本批改动面 |
+| scripts/agent_start.py | W1290 | 本批改动面 |
+| scripts/check_doc_size_budget.py | W1290 | 本批改动面 |
+| scripts/check_doc_sync.py | W1290 | 本批改动面 |
+| scripts/check_gov_doc_claims.py | W1290 | 本批改动面 |
+| scripts/check_pitfall_id_unique.py | W1290 | 本批改动面 |
+| scripts/check_pitfalls_split.py | W1290 | 本批改动面 |
+| scripts/output/INDEX.md | W1290 | 本批改动面 |
+| scripts/output/README.md | W1290 | 本批改动面 |
+| scripts/output/_cascade_files_W1290.txt | W1290 | 本批改动面 |
+| scripts/output/_vermilion_solid_cache.json | W1290 | 本批改动面 |
+| scripts/output/_w1266_allrender.json | W1290 | 本批改动面 |
+| scripts/output/_w1290_spec.json | W1290 | 本批 spec |
+| scripts/output/chart-legend-render-audit.json | W1290 | 本批改动面 |
+| scripts/output/file-index.md | W1290 | file-index 新增 W1290 段 |
+| scripts/output/stats-changelog.json | W1290 | 统计变更史追加 |
+| scripts/output/stats-index.md | W1290 | 统计索引刷新 |
+| scripts/output/stats.json | W1290 | 统计计数链刷新 |
+| scripts/output/svg_text_contrast_graphic_report.json | W1290 | 本批改动面 |
+| scripts/output/svg_text_contrast_report.json | W1290 | 本批改动面 |
+| scripts/output/tools-inventory.md | W1290 | 工具清单刷新 |
+| site/data/cross-time-danmaku.html | W1290 | 版本脚注联动（级联产物） |
+| site/data/search-index-zh.js | W1290 | 本批改动面 |
+| site/data/tag-cloud.html | W1290 | 版本脚注联动（级联产物） |
+| site/dukou-engine.html | W1290 | 版本脚注联动（级联产物） |
+| site/en/search-index-en.js | W1290 | 本批改动面 |
+| site/index.html | W1290 | 版本脚注联动（级联产物） |
+| tests/unit/INDEX.md | W1290 | 本批改动面 |
+| tests/unit/README.md | W1290 | 本批改动面 |
+| tests/unit/test_pitfalls_split.py | W1290 | 本批改动面 |
+
 ## W1289 登记滞后判据补全 + 台账 hash 全量回填 + 坑表 E-301 扩写与 E-302 压缩（2026-11-21）
 
 | 文件 | W | 说明 |

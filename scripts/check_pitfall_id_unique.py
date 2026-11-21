@@ -25,10 +25,29 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PITFALLS = os.path.join(ROOT, "pitfalls.md")  # W1157 正本迁根（docs/agent/ 留跳转壳）
+# W1290：正本按六主题拆分为多文件（用户批准的结构性方案）⇒ 唯一性扫描与 diff 取数面一并六文件化。
+# 根 pitfalls.md 现为**索引壳**（不含 `- **` 条目行）⇒ 扫它会得 0 条（静默失效）。
+PITFALL_FILES = [
+    os.path.join(ROOT, "docs", "agent", "pitfalls-topics", "css-visual.md"),
+    os.path.join(ROOT, "docs", "agent", "pitfalls-topics", "js-csp-runtime.md"),
+    os.path.join(ROOT, "docs", "agent", "pitfalls-topics", "git-concurrency.md"),
+    os.path.join(ROOT, "docs", "agent", "pitfalls-topics", "cascade-changelog.md"),
+    os.path.join(ROOT, "docs", "agent", "pitfalls-topics", "data-trust.md"),
+    os.path.join(ROOT, "docs", "agent", "pitfalls-topics", "flow-collab.md"),
+]
+PITFALLS = os.path.join(ROOT, "pitfalls.md")  # 兼容保留：索引壳（旧路径回退用）
 # W1157 迁根过渡：diff pathspec 必须同时含新旧两路径——只含新路径时 rename 无法配对，
 # 整表会以「+ 行」形态冒充新增条目 ⇒ 111 例自撞假红（本批实测）。加 -M 显式开 rename 检测。
-PITFALLS_PATHS = ["pitfalls.md", "docs/agent/pitfalls.md"]
+# W1290：diff 取数面六文件化（拆分后新条目在主题文件里 ⇒ 只扫旧路径会漏检新条目重号）
+PITFALLS_PATHS = [
+    "docs/agent/pitfalls-topics/css-visual.md",
+    "docs/agent/pitfalls-topics/js-csp-runtime.md",
+    "docs/agent/pitfalls-topics/git-concurrency.md",
+    "docs/agent/pitfalls-topics/cascade-changelog.md",
+    "docs/agent/pitfalls-topics/data-trust.md",
+    "docs/agent/pitfalls-topics/flow-collab.md",
+    "pitfalls.md",  # 索引壳（只含索引与反查表·无条目行·纳入 pathspec 以便 rename 配对可见）
+]
 
 # W1271 对抗审查 P1-1 修：尾部改**前瞻**——「实证·E-NN」后跟 · 或 ） 即本体
 # （旧判据要求紧跟右括号 ⇒ W1266 起新形态「实证·E-265·跨项目通用·域」119 条逃逸，
@@ -138,12 +157,25 @@ def _base_entry_counts(base):
                            errors="replace", timeout=60)
         return r.stdout if r.returncode == 0 else None
 
-    txt = _show("pitfalls.md") or _show(os.path.join("docs", "agent", "pitfalls.md"))
-    if not txt:
+    # W1290：基线取数面**多路径回退**——优先读基线 commit 里的六主题正本；拆分前的老基线
+    # （pitfalls.md 是全量正本）由后两条兜底 ⇒ 首次拆分批与后续批的基线计数都准确。
+    texts = []
+    for _rel in [os.path.join("docs", "agent", "pitfalls-topics", f) for f in (
+        "css-visual.md", "js-csp-runtime.md", "git-concurrency.md",
+        "cascade-changelog.md", "data-trust.md", "flow-collab.md")]:
+        _t = _show(_rel)
+        if _t:
+            texts.append(_t)
+    if not texts:
+        _t = _show("pitfalls.md") or _show(os.path.join("docs", "agent", "pitfalls.md"))
+        if _t:
+            texts.append(_t)
+    if not texts:
         return {}
     counts = {}
-    for _ln, _w, eid, _title in _entries(txt.splitlines()):
-        counts[eid] = counts.get(eid, 0) + 1
+    for _txt in texts:
+        for _ln, _w, eid, _title in _entries(_txt.splitlines()):
+            counts[eid] = counts.get(eid, 0) + 1
     return counts
 
 
@@ -160,8 +192,11 @@ def audit(base="HEAD", lines=None, added=None, base_counts=None):
     仍必判红（W1112/W1155 锁语义保持）。合成 added ∉ lines 的测试形态按「净增」补计。
     """
     if lines is None:
-        with open(PITFALLS, encoding="utf-8") as f:
-            lines = f.read().splitlines()
+        # W1290：读六主题正本（根索引壳不含条目行·扫它会静默失效）
+        lines = []
+        for _p in PITFALL_FILES:
+            with open(_p, encoding="utf-8") as f:
+                lines.extend(f.read().splitlines())
     existing = {}
     now_counts = {}
     for _ln, w, eid, title in _entries(lines):

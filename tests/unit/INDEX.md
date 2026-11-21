@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（135）
+## 文件（136）
 
 ### Python 脚本
 
@@ -67,6 +67,7 @@
 - `test_page_router.py`
 - `test_path_guard.py`
 - `test_perf_optimize.py`
+- `test_pitfalls_split.py`
 - `test_plan_template_read_disk.py`
 - `test_pre_push_gate.py`
 - `test_preflight_check.py`

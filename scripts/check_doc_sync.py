@@ -681,6 +681,27 @@ PITFALL_THEME_KEYS = {
     "数据 / 内容可信度": "pitfalls_data",
     "流程 / 协作 / 取证": "pitfalls_flow",
 }
+# W1290：坑表正本按六主题**拆分为多文件**（用户批准的结构性方案·写窗按主题独立）。
+# 正本文件在 docs/agent/pitfalls-topics/；仓库根 pitfalls.md 降级为**索引壳**（不含 `- **` 条目行）。
+# 取数面收敛为**合并读取**：六文件各自带一段 `### <主题>（N 条）` 段头 ⇒ 合并后按 `^### ` 切分
+# 仍切得出六段 ⇒ **既有解析逻辑零改动**（只换文本来源·语义等价）。
+PITFALL_TOPIC_FILES = {
+    "CSS / 视觉渲染": os.path.join("docs", "agent", "pitfalls-topics", "css-visual.md"),
+    "JS / CSP / 运行时": os.path.join("docs", "agent", "pitfalls-topics", "js-csp-runtime.md"),
+    "git / 提交 / 并发": os.path.join("docs", "agent", "pitfalls-topics", "git-concurrency.md"),
+    "级联 / CHANGELOG": os.path.join("docs", "agent", "pitfalls-topics", "cascade-changelog.md"),
+    "数据 / 内容可信度": os.path.join("docs", "agent", "pitfalls-topics", "data-trust.md"),
+    "流程 / 协作 / 取证": os.path.join("docs", "agent", "pitfalls-topics", "flow-collab.md"),
+}
+
+
+def pitfall_topic_merged_text():
+    """六主题正本合并文本（按主题顺序·段间空行分隔）——各读取面的唯一取数源。"""
+    parts = []
+    for _rel in PITFALL_TOPIC_FILES.values():
+        with open(os.path.join(ROOT, _rel), encoding="utf-8") as _f:
+            parts.append(_f.read())
+    return "\n".join(parts)
 # W1215：C5e 句式对账在**剥 stats 标记文本**上进行 ⇒ 既有句式与旧形态逐字兼容，
 # 标记数字与实值的对齐由 sweep 自动跟随 + C5b 对账面负责（两网各司其职不重复）
 RE_STAT_MARK_ANY = re.compile(r"<!--stats:[a-z_0-9]+-->")
@@ -703,7 +724,12 @@ def pitfall_theme_counts(inp=None):
         with open(os.path.join(ROOT, rel), encoding="utf-8") as _f:
             return _f.read()
 
-    _t = strip_stat_marks(_text("pitfalls", "pitfalls.md"))  # W1157 正本迁根（docs/agent/ 留跳转壳）
+    # W1290：正本拆六主题文件 ⇒ 取数面改为「六主题合并文本」（注入路径仍优先用 inp 提供的文本，
+    # 自测合成输入与旧单文件六段形态**同构**⇒ 既有解析逻辑与自测均不改）。
+    if inp is not None and inp.get("pitfalls") is not None:
+        _t = strip_stat_marks(inp["pitfalls"])
+    else:
+        _t = strip_stat_marks(pitfall_topic_merged_text())
     _declared, _actual = {}, {}
     for _seg in re.split(r"(?m)^### ", _t)[1:]:
         _head, _, _rest = _seg.partition("\n")
@@ -997,7 +1023,8 @@ def gather():
         "agents": rd(os.path.join(ROOT, "AGENTS.md")),
         "gates_md": rd(os.path.join(ROOT, "docs", "agent", "gates.md")),  # W1279 C3 声明面重锚
         # W1136：C5e 读数面改注入（判据与读取源解耦·自测可 hermetic）
-        "pitfalls": rd(os.path.join(ROOT, "pitfalls.md")),  # W1157 正本迁根
+        # W1290：坑表正本拆六主题 ⇒ 注入面改「六主题合并文本」（与旧单文件六段形态同构）
+        "pitfalls": pitfall_topic_merged_text(),
         "skill": rd(os.path.join(ROOT, ".agent", "skills", "puti-shouye", "SKILL.md")),
         "structure": rd(os.path.join(ROOT, "STRUCTURE.md")),
         "xiangmu": rd(os.path.join(ROOT, "docs", "00-导读", "项目说明.md")),
