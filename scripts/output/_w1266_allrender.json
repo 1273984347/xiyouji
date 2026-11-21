@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "9c9c1dd8cf11",
+      "sha": "f8e18e318915",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "fc7809cdfc28",
+      "sha": "b3b6edd04d9d",
       "static": {
         "svg": false,
         "cls": true,
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "1f2c90248d6b",
+      "sha": "c266596f8e78",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "bc15eb40a717",
+      "sha": "04a5e54ec43b",
       "static": {
         "svg": true,
         "cls": false,
@@ -6736,7 +6736,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 848,
+      "consoleErrors": 864,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },

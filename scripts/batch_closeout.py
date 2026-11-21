@@ -592,6 +592,69 @@ def _run_cspcheck():
     return True
 
 
+def _run_refresh_artifacts(dry=False):
+    """刷新入库产物（两口径探针 + 渲染复核两态）并纳入暂存（W1297·L-01 治本）。
+
+    病根（git 历史实证）：版本面推进**每批改 4 个页面页脚各 1 行** ⇒ 页面 sha 必变 ⇒
+    入库的探针报告 / 渲染档案**每批必过期** ⇒ 第 80/82 槽的 fail-closed 新鲜度检测必然判红
+    （W1292→W1296 连续五批实证·此前每批靠人记得重跑）⇒ 固化进收官链 = 治本。
+
+    位置：versions 之后（页脚定稿后）、index 之前；自带 add（产物须入暂存）。
+    dry-run 时跳过（不跑浏览器·保持链的 dry 语义）。
+
+    代价（诚实登记）：本步需跑两个浏览器探针 + 渲染复核（本地约 20 分钟）⇒
+    收官链时长增加，但换掉「每批一次陈旧红灯 + 一轮返工 CI」（约 20 分钟）。
+    """
+    if dry:
+        print("[refresh-artifacts] dry-run ⇒ 跳过（不跑浏览器）")
+        return True
+    import subprocess
+    import sys
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    node = "node"
+    py = sys.executable
+    steps = [
+        ("graphic 口径探针",
+         [node, "scripts/svg_text_contrast_probe.js", "--bg-mode", "graphic", "--scope", "all",
+          "--out", "scripts/output/svg_text_contrast_graphic_report.json"]),
+        ("body 口径探针",
+         [node, "scripts/svg_text_contrast_probe.js", "--bg-mode", "body", "--scope", "data,en",
+          "--out", "scripts/output/svg_text_contrast_report.json"]),
+        ("渲染复核（豁免页模式）", [py, "scripts/output/_w1266_render_legend.py"]),
+        ("渲染复核（--all 全量）", [py, "scripts/output/_w1266_render_legend.py", "--all"]),
+    ]
+    for name, cmd in steps:
+        print("[refresh-artifacts] %s ..." % name)
+        try:
+            r = subprocess.run(cmd, cwd=root)
+        except Exception as exc:  # noqa: BLE001 — 采集异常须显式留痕
+            print("[refresh-artifacts] FAIL %s（%r）" % (name, exc))
+            return False
+        if r.returncode != 0:
+            print("[refresh-artifacts] FAIL %s（rc=%s）" % (name, r.returncode))
+            return False
+    artifacts = [
+        "scripts/output/svg_text_contrast_graphic_report.json",
+        "scripts/output/svg_text_contrast_report.json",
+        "scripts/output/chart-legend-render-audit.json",
+        "scripts/output/chart-legend-render-audit.md",
+        "scripts/output/_w1266_allrender.json",
+    ]
+    r = subprocess.run(["git", "add", "--"] + artifacts, cwd=root)
+    if r.returncode != 0:
+        print("[refresh-artifacts] FAIL 产物入暂存（rc=%s）" % r.returncode)
+        return False
+    for chk in ("scripts/check_svg_text_contrast.py", "scripts/check_chart_content_completeness.py"):
+        r = subprocess.run([py, chk], cwd=root, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace")
+        if r.returncode != 0:
+            print("[refresh-artifacts] FAIL 新鲜度校验 %s（rc=%s）" % (chk, r.returncode))
+            print((r.stdout or "")[-600:])
+            return False
+    print("[refresh-artifacts] PASS 产物已刷新并入暂存 + 新鲜度校验绿")
+    return True
+
+
 def _run_content_stage(a, batch):
     """内容生成段：refresh -> stats -> versions -> index（W1117 抽函数·降 main 复杂度）。
 
@@ -607,6 +670,11 @@ def _run_content_stage(a, batch):
     if not _run_stats(batch):
         return False
     if not _run_versions(a.spec, batch):
+        return False
+    # W1297（L-01 治本）：版本面推进每批改 4 个页面页脚各 1 行 ⇒ 入库的探针报告 + 渲染档案
+    #   **每批必过期** ⇒ 第 80/82 槽的 fail-closed 新鲜度检测必然判红（W1292→W1296 连续五批实证·
+    #   此前每批靠人记得重跑）⇒ 此处固化刷新步（自带 add）⇒ 收官后入库产物必然新鲜。
+    if not _run_refresh_artifacts(dry=getattr(a, "dry_run", False)):
         return False
     return _run_index()
 

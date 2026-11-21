@@ -1,3 +1,48 @@
+## W1297 L-01 治本: 刷新步固化进收官链 + 页面变更来源根因定位（2026-11-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_closeout.py | W1297 | L-01 治本：新增 _run_refresh_artifacts（两口径探针 + 渲染复核两态 + git add + 新鲜度校验）+ 插入点 versions 之后 |
+| docs/00-导读/遗留总账.md | W1297 | L-01 条目据实更正（根因已定位：版本面推进改页脚·git 历史实证）+ 两个已证伪假设留证 |
+| docs/00-导读/W批次编号对账表.md | W1297 | W1297 认领行 + 收官回填 |
+| docs/11-方案报告/计划方案/T130-任务计划执行与经验沉淀报告-2026-11-22.md | W1297 | T130 报告落盘 |
+| docs/11-方案报告/README.md | W1297 | 报告索引登记（§六 145→146 件） |
+| CHANGELOG.md | W1297 | 本批版段（收官链写入） |
+| HANDOVER.md | W1297 | 本批概要与遗留登记 |
+| README.md | W1297 | 版本面级联（收官链写入） |
+| STRUCTURE.md | W1297 | 版本面级联（收官链写入） |
+| CITATION.cff | W1297 | 版本面级联（收官链写入） |
+| docs/00-导读/项目说明.md | W1297 | 版本面级联（收官链写入） |
+| .github/workflows/README.md | W1297 | 版本面级联（收官链写入） |
+| site/index.html | W1297 | 版本脚注联动（级联产物） |
+| site/dukou-engine.html | W1297 | 版本脚注联动（级联产物） |
+| site/data/tag-cloud.html | W1297 | 版本脚注联动（级联产物） |
+| site/data/cross-time-danmaku.html | W1297 | 版本脚注联动（级联产物） |
+| scripts/output/stats.json | W1297 | 统计计数链刷新 |
+| scripts/output/stats-index.md | W1297 | 统计索引刷新 |
+| scripts/output/stats-changelog.json | W1297 | 统计变更史追加 |
+| docs/INDEX.md | W1297 | 目录件重建（收官链 refresh/index） |
+| scripts/output/INDEX.md | W1297 | 目录件重建（收官链 refresh） |
+| scripts/output/README.md | W1297 | 目录件重建（收官链 refresh） |
+| scripts/output/tools-inventory.md | W1297 | 工具清单刷新（收官链 refresh） |
+| site/data/search-index-zh.js | W1297 | 搜索索引重建（收官链 index） |
+| site/en/search-index-en.js | W1297 | 搜索索引重建（收官链 index） |
+| site/sitemap.xml | W1297 | sitemap 重建（收官链 index） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1297 | graphic 口径探针报告刷新（收官链刷新步） |
+| scripts/output/svg_text_contrast_report.json | W1297 | body 口径探针报告刷新（收官链刷新步） |
+| scripts/output/chart-legend-render-audit.json | W1297 | 渲染档案刷新（豁免页模式） |
+| scripts/output/chart-legend-render-audit.md | W1297 | 渲染档案刷新（豁免页模式） |
+| scripts/output/_w1266_allrender.json | W1297 | 渲染档案刷新（--all 全量） |
+| scripts/output/_w1297_spec.json | W1297 | 本批 spec |
+| scripts/output/_cascade_files_W1297.txt | W1297 | 级联件清单（收官链 cascade） |
+| AGENTS.md | W1293 | 本批改动面（级联产物/门禁产物） |
+| archive/docs/AGENTS-ARCHIVE.md | W1293 | 本批改动面（级联产物/门禁产物） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1293 | 本批改动面（级联产物/门禁产物） |
+| archive/docs/workflows-readme-history.md | W1293 | 本批改动面（级联产物/门禁产物） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1293 | 本批改动面（级联产物/门禁产物） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1293 | 本批改动面（级联产物/门禁产物） |
+| scripts/output/file-index.md | W1293 | 本批改动面（级联产物/门禁产物） |
+
 ## W1296 建立遗留总账 + 欠账根因三分类 + 清零批立项（2026-11-22）
 
 | 文件 | W | 说明 |
