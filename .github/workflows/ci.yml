@@ -491,20 +491,18 @@ jobs:
       #   使判定永远基于当前页面（不依赖入库报告是否被同步刷新）；
       #   报告内含全量 page_sha ⇒ 万一探针没跑到，页面哈希漂移也会被门禁判「报告陈旧」而 fail-closed。
       #   探针 file:// 口径·四态·扫描 site/data + site/en 的含图页。
-      - name: Refresh SVG contrast probe reports (W1284·graphic 口径)
-        # 只刷新 **graphic** 口径报告：body 口径的探针报告是「批收尾手动跑」的入库产物，
-        #   CI 从不刷新它（其基线与报告同批入库）⇒ 保持既有行为一字不变，避免擅自放松既有基线。
-        #   graphic 口径是本批**新纳入**的口径 ⇒ 必须在 CI 现跑，否则报告会是陈旧的。
-        run: node scripts/svg_text_contrast_probe.js --bg-mode graphic --scope all --out scripts/output/svg_text_contrast_graphic_report.json
-
-      - name: Refresh SVG contrast probe report (W1285·body 口径)
-        # W1285：body 口径的入库报告**新增了全量 page_sha** ⇒ 门禁的「报告陈旧」检测对它生效
-        #   ⇒ 页面一改而报告未刷新 ⇒ 门禁 fail-closed 判红 ⇒ **body 口径也必须在 CI 现跑**
-        #   （此前 body 报告无 page_sha ⇒ stale 检测对它完全失效 ⇒ 该槽长期读一份陈旧报告）。
-        #   扫描面按 **W1265 原定义** 限定 `--scope data,en`：body 粗口径只取「文字 vs 页面底色」
-        #   ⇒ 对「文字压卡片/色块」会产生语义性假红（dashboard 16 条·KPI 大数字白字压卡片）
-        #   ⇒ 根页的标签可读性由 graphic 口径（--scope all·含根页）覆盖（详见 T118 §2.5）。
-        run: node scripts/svg_text_contrast_probe.js --bg-mode body --scope data,en --out scripts/output/svg_text_contrast_report.json
+      - name: Refresh SVG contrast probe reports (W1295·graphic+body 两口径并行)
+        # W1295：两口径**互不依赖**（graphic 扫全站含根页 / body 按 W1265 定义限定 data,en）
+        #   且**写不同报告文件** ⇒ 原先两个 step 串行（实测 graphic 343s + body 339s = 682s·
+        #   占全 CI 39%）⇒ 改为**单 step 内 bash 并行**（`&` + `wait`）⇒ 墙钟 ≈ max(343,339)
+        #   ⇒ **省 ≈5m43s**。判据强度不变：两个报告的 page_sha 覆盖与口径判定一字未动，
+        #   第 80 槽的「报告陈旧」fail-closed 检测仍由**入库产物**承担。
+        # graphic 口径（W1284 纳入）：--scope all（含根页）·body 口径（W1285 纳入 page_sha）：
+        #   --scope data,en（body 粗口径对「文字压卡片/色块」会语义性假红·根页由 graphic 覆盖·详见 T118 §2.5）。
+        run: |
+          node scripts/svg_text_contrast_probe.js --bg-mode graphic --scope all --out scripts/output/svg_text_contrast_graphic_report.json &
+          node scripts/svg_text_contrast_probe.js --bg-mode body --scope data,en --out scripts/output/svg_text_contrast_report.json &
+          wait
 
       # W1286：CI 现跑探针会**重写入库报告文件** ⇒ 工作树出现「未提交残留」⇒ 第 31 槽
       #   C4-f（文件清单漏 add 防线）把 CI 自己的临时产物判成红 ⇒ 本地 0 FAIL / CI 2 FAIL 的

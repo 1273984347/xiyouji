@@ -1,3 +1,11 @@
+### W1295（2026-11-22）：探针两口径在 CI 内并行化
+
+> - **来源**：用户 2026-11-22 引用 W1294 遗留清单并指示「**现在做**」⇒ 立项 W1295（CI 提速批）。
+> - **执行**：① **先测量再优化**——取 W1290 run 的 step 级耗时（gh api 取 jobs）：Delivery Gate **1109s（占 63%）**、其中 graphic 探针 **343s** + body 探针 **339s** = **682s（占全 CI 39%）**，而**依赖安装合计仅 55s（3%）**、单测已分 3 shard、6 个 workflow 已有 paths 过滤 ⇒ 通用优化清单（缓存/并行/路径过滤）**本仓早已到位·照抄会完全错过真大头**；② **两口径并行化**——graphic（--scope all）与 body（--scope data,en）**互不依赖**（扫不同页集）且**写不同报告文件** ⇒ 原先两个 step 串行 ⇒ 合并为**单 step 内 bash `&` + `wait`** ⇒ 墙钟从和变 max ⇒ **省 ≈5m43s**；**判据强度一字未动**（page_sha 覆盖与口径判定未动·第 80 槽 fail-closed 仍由入库产物承担）；③ **ci_sim 仿真序列同步**——CI_STEPS 两条探针项加注「串行等价·真实 CI 为并行」（Windows 本地无 POSIX `&`/`wait` ⇒ 仿真验证的是「产物 + page_sha 覆盖」这条**正确性链**·加速形态属 CI 墙钟面）；④ **顺带核实遗留③已完备**——快档已含第 80 槽（探针新鲜度）与第 82 槽（渲染档案 sha）⇒ **实证：W1294 的 push 正被快档第 82 槽当场拦下** ⇒ 快档对「陈旧类红灯」确有实效 ⇒ 无需再补；⑤ 报告 T128 落盘 + README §六 登记（143→144 件）。
+> - **验证**：ci.yml **YAML 解析 OK**（12 jobs）· 并行段含两条 node 探针 & + wait · ci_sim CI_STEPS 已同步并注释差异 · 探针参数（--scope/--out/--bg-mode）与判据文本未动 ⇒ 判据强度不变 · 两面下界仍 **W1253 ✓** · 收官链零跳过完成 + 全量门禁 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
+> - **状态**：CI 的最大单项（探针 682s·39%）由**串行改并行**，预期省 ≈5m43s；通用清单里本仓已到位的三项（缓存/并行/路径过滤）**不动**（避免无效改动）；遗留③经核实**早已完备**（快档两个新鲜度档齐备且当场拦下过真实陈旧）。
+> - **文件**： .github/workflows/README.md, .github/workflows/ci.yml, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T128-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/ci_sim.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1295.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1295_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml
+
 ### W1294（2026-11-22）：CI 提速补盲与门禁自检加固 + 归档二级分片
 
 > - **来源**：用户 2026-11-22 引用 W1293 遗留清单并指示「**现在做**」⇒ 立项 W1294（CI 提速补盲与门禁自检加固批）。
@@ -489,7 +497,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1294），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1295），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -63,7 +63,10 @@ GATES = [
 # CI 前置步骤序列（W1287·复现 CI workflow 的真实动作顺序）
 CI_STEPS = [
     ("CI: 重生成输出数据", "{py} scripts/run_all.py"),
-    ("CI: graphic 口径探针现跑", "{nodepath} node scripts/svg_text_contrast_probe.js --bg-mode graphic --scope all --out scripts/output/svg_text_contrast_graphic_report.json"),
+    # W1295：真实 CI 已把两口径合并为**单 step 内 bash 并行**（`&` + `wait`）⇒ 墙钟省 ≈5m43s；
+    # 本仿真保留**串行等价**（Windows 本地无 POSIX `&`/`wait`）⇒ 仿真验证的是「两口径产物
+    # 与 page_sha 覆盖」这条**正确性链**（第 80 槽 fail-closed 依赖它）·加速形态属 CI 墙钟面·不入仿真。
+    ("CI: graphic 口径探针现跑（串行等价·真实 CI 为并行）", "{nodepath} node scripts/svg_text_contrast_probe.js --bg-mode graphic --scope all --out scripts/output/svg_text_contrast_graphic_report.json"),
     ("CI: body 口径探针现跑", "{nodepath} node scripts/svg_text_contrast_probe.js --bg-mode body --scope data,en --out scripts/output/svg_text_contrast_report.json"),
     ("CI: 还原探针产物", "git checkout -- scripts/output/svg_text_contrast_graphic_report.json scripts/output/svg_text_contrast_report.json"),
 ]

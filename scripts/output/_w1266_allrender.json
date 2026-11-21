@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "2e258d93d6b2",
+      "sha": "c5aef6e25099",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "2ff04b64a58a",
+      "sha": "6616dc9f92a4",
       "static": {
         "svg": false,
         "cls": true,
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "6fce4e4cd796",
+      "sha": "da7d4381d724",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "775beef5aad6",
+      "sha": "5ec4ee3532c5",
       "static": {
         "svg": true,
         "cls": false,
@@ -6736,7 +6736,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 837,
+      "consoleErrors": 866,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -7565,11 +7565,11 @@
           "cls": "string-svg",
           "id": "stringSvg",
           "w": 1022,
-          "h": 1272,
+          "h": 1290,
           "marks": 9,
           "texts": 0,
           "kind": "chart",
-          "basis": "1022x1272·图元 9·文本 0"
+          "basis": "1022x1290·图元 9·文本 0"
         },
         {
           "cls": "ic-moon",
@@ -7586,7 +7586,7 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 17,
+      "consoleErrors": 15,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
@@ -8347,9 +8347,9 @@
           "w": 1002,
           "h": 620,
           "marks": 24,
-          "texts": 22,
+          "texts": 21,
           "kind": "chart",
-          "basis": "1002x620·图元 24·文本 22·命中图表词表"
+          "basis": "1002x620·图元 24·文本 21·命中图表词表"
         },
         {
           "cls": "",
