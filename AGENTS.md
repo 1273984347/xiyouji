@@ -35,7 +35,7 @@
 | 文件 | 何时读 | 回答什么 |
 |---|---|---|
 | docs/agent/gates.md | **任何写操作或提交前 → 先跑 verify_delivery.py（退出码非 0 即阻断），红时查对应槽条目** | 门禁触发条件 + 失败处置（薄说明层·判定逻辑在门禁脚本本体） |
-| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 416<!--stats:pitfalls_total--> 条坑位判据（E-NN 检索·正本=仓库根 pitfalls.md；docs/agent/pitfalls.md 为兼容壳勿读）·六主题：CSS / 视觉渲染（90<!--stats:pitfalls_css-->）·JS / CSP / 运行时（13<!--stats:pitfalls_js-->）·git / 提交 / 并发（39<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（28<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（220<!--stats:pitfalls_flow-->）·叙事细节在归档 |
+| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 419<!--stats:pitfalls_total--> 条坑位判据（E-NN 检索·正本=仓库根 pitfalls.md；docs/agent/pitfalls.md 为兼容壳勿读）·六主题：CSS / 视觉渲染（90<!--stats:pitfalls_css-->）·JS / CSP / 运行时（13<!--stats:pitfalls_js-->）·git / 提交 / 并发（39<!--stats:pitfalls_git-->）·级联 / CHANGELOG（26<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（28<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（223<!--stats:pitfalls_flow-->）·叙事细节在归档 |
 | archive/docs/pitfalls-detail-ARCHIVE.md | 需要坑位条目全文时 | 叙事/实证细节（#### E-NN 锚·只增不改） |
 | docs/10-方法论沉淀/批次交付流水线.md | 批次收官 / 推送前 | 全链 7 步 + 失败模式速查 + 收官链时间纪律 |
 | docs/agent/MAINTAINING.md | **改 AGENTS/pitfalls/gates 等治理文件前** | 维护契约全文：退役三标准 / 添加前四问 / 体积预算 / 局部化预留形态 |
@@ -57,6 +57,7 @@ python scripts/verify_delivery.py --scope docs                 # 文档改动快
 python scripts/verify_delivery.py --scope full                 # 全量门禁（同树二次跑命中回放缓存）
 python scripts/batch_closeout.py --spec scripts/output/_w####_spec.json   # 收官链单入口
 python scripts/pre_push_gate.py                                # 推送判据（guardrails→verify→pytest→ci_sim）
+git config core.hooksPath .githooks                            # 克隆后一次性·启用仓内 pre-push 闸门（W1288·E-312）
 python scripts/safe_commit.py -m "..." --expect-spec scripts/output/_w####_spec.json  # 提交（防代提）
 python scripts/generate_csp.py                                 # 改内联脚本后必跑（铁律 3）
 py -3 -m pytest tests/unit -q                                  # 单测面
@@ -73,4 +74,4 @@ Windows 单机的解释器三语境 / 编码 / heredoc / curl / 路径等环境�
 2. 每批核心 2 同步（CHANGELOG + HANDOVER）·批次经台账认领·提交一律 safe_commit（防代提）。
 3. 有复用价值的教训落 pitfalls（16-⑥ 载体铁则）·同类两犯的纪律**上提本文件铁律区**（上提后在坑条目预防段标注）。
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1282-W1282 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-19（W1283）：图表标签可读性存量清偿 通用工具与判据同源化；2026-11-19（W1284）：图表标签低对比存量清偿 与 graphic 全量基线接入 CI；2026-11-20（W1285）：graphic 口径覆盖面补齐 与 探针去重盲区修复 与 判据稳定性根修；2026-11-21（W1286）：图表内容层存量清偿（第82槽 + 第83槽 + L-01/L-02）；2026-11-21（W1287）：CI 侧教训机器化（CI 内建断言 + ci_sim --ci-steps + 坑表 E-309）。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1283-W1283 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-19（W1284）：图表标签低对比存量清偿 与 graphic 全量基线接入 CI；2026-11-20（W1285）：graphic 口径覆盖面补齐 与 探针去重盲区修复 与 判据稳定性根修；2026-11-21（W1286）：图表内容层存量清偿（第82槽 + 第83槽 + L-01/L-02）；2026-11-21（W1287）：CI 侧教训机器化（CI 内建断言 + ci_sim --ci-steps + 坑表 E-309）；2026-11-21（W1288）：收官回填与遗留落仓（台账四批登记滞后清偿 + 坑表腾窗与 E-310/E-311/E-312 + hook 启用指引三处落位） + pytest 一千八百零四 passed。如与上述权威文档冲突，以权威文档为准。*
