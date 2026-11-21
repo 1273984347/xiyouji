@@ -3,6 +3,7 @@
 | 文件 | W | 说明 |
 |---|---|---|
 | .agent/skills/puti-shouye/SKILL.md | W1286 | 级联版本面机械联动 |
+| .githooks/pre-push | W1286 | 仓内 pre-push 闸门（版本化·一次性 git config core.hooksPath 启用） |
 | .github/workflows/README.md | W1286 | 级联产物（本批收官链写入） |
 | .github/workflows/ci.yml | W1286 | 级联产物（本批收官链写入） |
 | AGENTS.md | W1286 | 级联版本面机械联动 |

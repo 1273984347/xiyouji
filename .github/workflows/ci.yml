@@ -523,6 +523,7 @@ jobs:
           # 内容级判定（git diff 已按 .gitattributes 做 EOL 归一）⇒ 行尾差异不误伤，
           # 而「入库文件内容真被改动且未还原」当场红（E-308 类）。
           dirty="$(git diff --name-only)"
+          dirty="$dirty$(git ls-files --others --exclude-standard)"
           if [ -n "$dirty" ]; then
             echo "::error::入库文件内容被改动且未还原（git diff --name-only 非空）："
             echo "$dirty"

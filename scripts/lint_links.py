@@ -228,15 +228,14 @@ def _fallback_to_repo_root(decoded: str):
     ③ 回落后仍不存在 ⇒ 维持判红（真断链不放过）。
     """
     parts = Path(decoded).parts
-    ups = 0
-    for part in parts:
-        if part == "..":
-            ups += 1
-        else:
-            break
-    if ups == 0 or len(parts) <= ups:
+    if not any(part == ".." for part in parts):
         return None
-    cand = (ROOT / Path(*parts[ups:])).resolve(strict=False)
+    # 去掉全部上跳层级后的**纯相对路径**须在仓内存在 ⇒ 区分
+    # 「撰写时语境错位（多写了上跳）」与「真指向仓外的相对路径」
+    rel = Path(*[part for part in parts if part != ".."])
+    if not rel.parts:
+        return None
+    cand = (ROOT / rel).resolve(strict=False)
     return cand if cand.exists() else None
 
 
@@ -256,7 +255,8 @@ def check_internal(base_file, raw_url):
     if not ok and not _under_root(target):
         alt = _fallback_to_repo_root(decoded)
         if alt is not None:
-            return (True, alt, str(alt))
+            # 前缀 ≈ 标记「经仓库根回落解析命中」⇒ 输出层打 NOTE（可见性·不静默放过）
+            return (True, alt, "~" + str(alt))
     return (ok, target, str(target))
 
 
@@ -452,10 +452,12 @@ def _emit_external(f, line, url):
 
 def _emit_internal(f, line, raw, url, do_fix, pending_fixes):
     """站内一趟判定与修复（打印序契约不变·W1237 拆 def）。返回 (broken 增量, fixed 增量)。"""
-    ok, target, _ = check_internal(f, url)
+    ok, target, disp_raw = check_internal(f, url)
     disp = display_path(target) if target else "?"
     if ok:
         print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {disp}")
+        if disp_raw.startswith("~"):
+            print(f"[NOTE]   {display_path(f)}:{line}  仓库根回落解析命中（原相对路径越出仓库根·撰写时语境错位）")
         return 0, 0
     if do_fix:
         new = try_fix(f, url, ROOT)

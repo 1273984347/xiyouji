@@ -77,6 +77,22 @@ def _node_path() -> str:
     return "NODE_PATH=%s" % nm
 
 
+# 推前闸门项（W1287·把「一批 = 一轮 CI」从纪律变机器约束）
+PUSH_GATE_ITEMS = [
+    ("闸门: 未推送提交数<=1", "__UNPUSHED__"),
+    ("闸门: 本批已推笔数告警", "__BATCHCOUNT__"),
+    ("闸门: 主工作树干净(含未跟踪)", "__CLEAN_MAIN__"),
+]
+
+# 快档关键槽位（推前约 2 分钟；完整档再加 CI 步骤序列 + 全量门禁）
+FAST_GATES = [
+    ("文档口径体检(第31槽)", "{py} scripts/check_doc_sync.py --check"),
+    ("图表内容完备度(第82槽)", "{py} scripts/check_chart_content_completeness.py"),
+    ("SVG 标签裁切(第83槽)", "{py} scripts/check_chart_label_clipping.py"),
+    ("CSP 零漂移", "{py} scripts/generate_csp.py --check"),
+]
+
+
 def _py() -> str:
     """解释器前缀：Windows 用 py -3（仓内约定），其余用 python3。"""
     if os.name == "nt":
@@ -88,12 +104,35 @@ def _assert_clean_worktree(wt: str) -> tuple[int, str]:
     """CI 侧产物面断言：worktree 内有未提交/未还原的差异即红（W1287·E-308 机器化）。"""
     # 内容级判定（git diff 已按 .gitattributes 做 EOL 归一）⇒ 行尾差异不误伤，
     # 而「入库文件内容真被改动且未还原」判红（W1287·E-308 机器化）。
-    p = subprocess.run(["git", "-C", wt, "diff", "--name-only"],
+    # 内容级判定（git diff 已按 .gitattributes 做 EOL 归一）⇒ 行尾差异不误伤；
+    # 并上未跟踪文件（git diff 不覆盖 untracked ⇒ 否则 CI 步骤新建的产物会漏检）。
+    d = subprocess.run(["git", "-C", wt, "diff", "--name-only"],
                        capture_output=True, text=True, encoding="utf-8", errors="replace")
-    dirty = [ln for ln in (p.stdout or "").splitlines() if ln.strip()]
+    u = subprocess.run(["git", "-C", wt, "ls-files", "--others", "--exclude-standard"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    dirty = [ln for ln in ((d.stdout or "") + chr(10) + (u.stdout or "")).splitlines() if ln.strip()]
     if not dirty:
-        return 0, "入库文件内容无改动"
-    return 1, "入库文件内容被改动且未还原：%s" % " | ".join(dirty[:6])
+        return 0, "入库文件与未跟踪文件均无改动"
+    return 1, "入库/未跟踪文件被改动且未还原：%s" % " | ".join(dirty[:6])
+
+
+def _unpushed_commits() -> tuple[int, str]:
+    """未推送提交数（origin/main..HEAD）——推前闸门的核心：一次推送只应带 1 笔。"""
+    p = subprocess.run(["git", "-C", ROOT, "rev-list", "--count", "origin/main..HEAD"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    try:
+        n = int((p.stdout or "0").strip())
+    except Exception:
+        n = -1
+    return n, ("未推送提交数=%d" % n)
+
+
+def _batch_pushed_count(batch: str) -> tuple[int, str]:
+    """本批已推送的提交数（按 subject 里的 W 号计数）——用于告警「轮数已被放大」。"""
+    p = subprocess.run(["git", "-C", ROOT, "log", "--format=%s", "-n", "40"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    n = sum(1 for ln in (p.stdout or "").splitlines() if batch and batch in ln)
+    return n, ("本批已推送提交数=%d" % n)
 
 
 def _run(cmd: str, cwd: str) -> tuple[int, str]:
@@ -112,6 +151,10 @@ def main() -> int:
     ap.add_argument("--keep", action="store_true", help="保留临时 worktree（调试用）")
     ap.add_argument("--ci-steps", action="store_true",
                     help="先复现 CI 的前置步骤序列（重生成产物 → 探针现跑 → 还原 → 干净断言）再跑门禁（W1287）")
+    ap.add_argument("--push-gate", action="store_true",
+                    help="推前闸门：一次推送只应带 1 笔（未推送提交数<=1）·工作树干净（含未跟踪）·关键槽位绿（W1287）")
+    ap.add_argument("--fast", action="store_true", help="闸门快档（仅工作树/提交数/关键槽位·约 2 分钟）")
+    ap.add_argument("--batch", default="", help="批次号（W###）·用于统计本批已推送笔数并告警")
     args = ap.parse_args()
 
     tmp = tempfile.mkdtemp(prefix="ci_sim_")
@@ -129,13 +172,31 @@ def main() -> int:
     results = []
     try:
         gates = list(GATES)
-        if args.ci_steps:
+        if args.push_gate:
+            # 快档 = 闸门项 + 关键槽位（约 2 分钟）；完整档 = + CI 步骤序列 + 全量门禁
+            base = FAST_GATES if args.fast else gates
+            gates = PUSH_GATE_ITEMS + base
+            if args.ci_steps or not args.fast:
+                gates = CI_STEPS + [("CI: 工作树干净断言", "__CLEAN__")] + gates
+        elif args.ci_steps:
             gates = CI_STEPS + [("CI: 工作树干净断言", "__CLEAN__")] + gates
         if args.full:
             gates.append(("全量交付门禁", "{py} scripts/verify_delivery.py --scope full"))
         for label, tmpl in gates:
             if tmpl == "__CLEAN__":
                 rc, out = _assert_clean_worktree(wt)
+            elif tmpl == "__CLEAN_MAIN__":
+                rc, out = _assert_clean_worktree(ROOT)
+            elif tmpl == "__UNPUSHED__":
+                n, msg = _unpushed_commits()
+                rc = 0 if (0 <= n <= 1) else 1
+                out = msg + ("　⇒ 一次推送只应带 1 笔（>1 说明同批多笔待推 ⇒ 先 squash 成 1 笔）"
+                             if rc else "　⇒ 满足「一批 = 一轮 CI」")
+            elif tmpl == "__BATCHCOUNT__":
+                n, msg = _batch_pushed_count(args.batch)
+                out = msg + ("　⇒ 告警：本批已推多笔 ⇒ CI 轮数被放大，后续批次须合并推送"
+                             if n >= 2 else "")
+                rc = 0
             else:
                 cmd = tmpl.format(py=_py(), root=wt, nodepath=_node_path())
                 rc, out = _run(cmd, wt)

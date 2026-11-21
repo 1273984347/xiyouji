@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# W1287 pre-push 闸门：把「推前必跑本地等价验证」从纪律变成**物理约束**。
+# 启用（一次性）：git config core.hooksPath .githooks
+# 闸门红 ⇒ push 被拒（--no-verify 可绕过，代价是本批没有本地兜底 ⇒ CI 必红）。
+set -uo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+BATCH="$(git log -1 --format=%s | grep -oE 'W[0-9]{4}' | head -1)"
+echo "[pre-push] W1287 推前闸门（本地等价验证·快档）batch=$BATCH"
+if py -3 -c "import sys" >/dev/null 2>&1; then
+  py -3 scripts/ci_sim.py --push-gate --fast --batch "$BATCH"
+elif python3 -c "import sys" >/dev/null 2>&1; then
+  python3 scripts/ci_sim.py --push-gate --fast --batch "$BATCH"
+elif python -c "import sys" >/dev/null 2>&1; then
+  python scripts/ci_sim.py --push-gate --fast --batch "$BATCH"
+else
+  echo "[pre-push] 找不到可用的 Python 解释器 ⇒ 闸门无法执行 ⇒ 拒绝推送" >&2
+  exit 1
+fi
