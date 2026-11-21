@@ -41,6 +41,8 @@
 | docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1293 | 本批改动面（级联产物/门禁产物） |
 | scripts/output/_w1266_allrender.json | W1293 | 本批改动面（级联产物/门禁产物） |
 | scripts/output/chart-legend-render-audit.json | W1293 | 本批改动面（级联产物/门禁产物） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1293 | 本批改动面（级联产物/门禁产物） |
+| scripts/output/svg_text_contrast_report.json | W1293 | 本批改动面（级联产物/门禁产物） |
 
 ## W1292 遗留清偿批：归档工具段表口径根修 + 台账 hash 回填 + 两面下界待裁决（2026-11-22）
 
