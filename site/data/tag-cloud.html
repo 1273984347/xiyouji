@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ksvekYJygUWu24yMjGUR0jJgK0vGMGwu4rzdarfsOtQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-KLLvC+nxY6V2LlhIA01CMNPRS0k0eG+jvHGTsvOcqwk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>全站标签云 · 可视化导航中心 · 详解西游记</title>
@@ -763,14 +763,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 event.preventDefault();
                 handleTagClick(d);
             })
-            .on("mouseenter", (event, d) => {
+            .on("pointerenter", (event, d) => {
                 const cat = CATEGORY_CONFIG[d.category] || { label: d.category, color: "#999" };
                 showTooltip(event, d, '<span class="legend-dot" style="background:' + cat.color + ';margin-right:6px"></span>');
             })
-            .on("mousemove", (event) => {
+            .on("pointermove", (event) => {
                 positionTooltip(event);
             })
-            .on("mouseleave", () => {
+            .on("pointerleave", () => {
                 hideTooltip();
             })
             .on("keydown", (event, d) => {

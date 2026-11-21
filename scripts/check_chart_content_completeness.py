@@ -55,7 +55,8 @@ SVG 文字对比度），**没有任何一道门禁问过「这张图有没有�
        B. <svg> 内的图形元素带非空 title 属性（浏览器原生悬停提示）；
        C. <script> 内存在**绑定到图元**的 tooltip 语句：在命中处**前后各 400 字符**的窗口内
           同时命中「tooltip 写入/事件模式」（.append('title') · .title( · on('mouseover'|
-          'mousemove'|'mouseenter')）与「图元选择器」（svg|rect|circle|ellipse|path|polyline|
+          'mousemove'|'mouseenter')·**pointer 族同义**（pointerover|pointermove|
+          pointerenter|pointerleave））与「图元选择器」（svg|rect|circle|ellipse|path|polyline|
           polygon|bar|arc|node|point|series|slice|wedge|dot）。
      下限：通路 A/B 的文本/属性值长度 ≥ 1（空 title 不算可查细节）。
      触发时机：页面级。
@@ -294,7 +295,7 @@ LEGEND_ITEM_CLASS_RE = re.compile(
 )
 TOOLTIP_WRITE_RE = re.compile(
     r"\.append\(\s*['\"]title['\"]\s*\)|\.title\(\s*['\"\`]|"
-    r"(?:on|addEventListener)\(\s*['\"](?:mouseover|mousemove|mouseenter|mouseover|mouseleave)['\"]",
+    r"(?:on|addEventListener)\(\s*['\"](?:mouse|pointer)(?:over|move|enter|leave)['\"]",
     re.I,
 )
 CHART_SELECTOR_RE = re.compile(

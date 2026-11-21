@@ -1319,3 +1319,22 @@
 #### E-305（原文全量·W1286 新增）
 
 E-305
+
+#### E-306（原文全量·W1286 新增）
+
+- **批量改动页面前必须核对「事件族」未被降级——`pointerenter` 被改回 `mouseenter` 会同时毁掉触摸交互与 CI 的 E2E 断言**（W1286 实证·E-306·跨项目通用·与 E-299「worker 产出须先核对官方口径」同族的「静默降级」族）：本批 worker 为补 C3 tooltip 给多页加 `<title>` 时，**顺带把 W1169 专门改过的 Pointer Events 事件族改回了 mouse 族**（`pointerenter→mouseenter` / `pointermove→mousemove` / `pointerleave→mouseleave`·3 页 14 处）⇒ ① 移动端触摸交互退化（`pointerenter` 在触屏上不触发）；② CI 的 `tests/e2e/test_site_quality.js` 派发 `PointerEvent('pointerenter')` ⇒ popup 恒为空 ⇒ **E2E job 判红**（本地跑同一测试即可复现·A1 断言 `hasHead` 失败）。**症状极具误导性**：E2E 报错像是「页面渲染坏了」，实则是**事件族被降级**。⇒ **纪律**：① 批量改页面前先 `git diff` 逐文件核对**事件绑定族**（pointer/mouse/touch）是否被动过，**这类既有决策不得在无关批次的顺手改动中被回退**；② 回归判据要能区分「页面挂了」与「事件族降级」——**跑一次既有 E2E 断言**即可定位（断言用 pointer 族而页面改回 mouse 族 ⇒ 事件不触发 ⇒ popup 空）；③ 回退此类降级时**按 git diff 的精确行对回退**（本批用脚本按 old/new 行对自动配对回退 14 处·不手改避免漏项）；④ 回退改动了内联脚本 ⇒ **必须重算 CSP 哈希**，否则页面脚本被拒执行、表现为「图表全不渲染·nodes:0」（又一次同款假象）。⇒ 要点与纪律详见归档 E-306
+#### E-307（原文全量·W1286 新增）
+
+- **判据里的「技术形态枚举」必须与站点既有技术决策同步——页面迁到 Pointer Events 后判据正则仍只认 mouse 族 ⇒ 页面合规反被判「图元无 tooltip」**（W1286 实证·E-307·跨项目通用·与 E-287「工具与门禁须同源」同族的「口径滞后」族·与 E-306「事件族被降级」互补）
+
+  **症状**：本批清偿 E-306（本批 worker 把 W1169 改过的 Pointer Events 事件族改回 mouse 族）时，按 git diff 精确行对把 3 页 14 处回退回 `pointerenter`/`pointermove`/`pointerleave` ⇒ 事件族正确了，但第 82 槽门禁立刻报 **2 条基线外新增**：`site/data/cross-time-danmaku.html|C3|图表元素无 tooltip 可查细节` 与 `site/data/tag-cloud.html|C3|图表元素无 tooltip 可查细节`。
+
+  **根因（判据缺陷·非页面缺陷）**：第 82 槽 C3 的通路 C（脚本内「绑定到图元」的 tooltip 语句）靠 `TOOLTIP_WRITE_RE` 正则命中事件模式，清单写死 `mouseover|mousemove|mouseenter|mouseleave` ⇒ 页面按 W1169 迁到 pointer 族后，**同一份合规代码不再命中任何模式** ⇒ 窗口内虽仍存在图元选择器与 tooltip 写入语句，却因「事件模式」这一半失配而整体判红。两页的实际代码是合规的：`node.on("pointerenter", function(event, d) { tooltip.classed("visible", true)…tooltip.html(…) })` —— 图元绑定了 tooltip、内容可查，只因事件名清单没跟上而判红。
+
+  **为什么长期没人发现**：① 存量基线会掩盖缺陷 —— 缺陷页被登记进基线后长期判绿，末行 FAIL=0 给人「全绿」错觉；② 该缺陷只在页面**迁到 pointer 族之后**才成立，而 W1169 迁族时只改了页面没同步判据枚举；③ 本批之前这些页恰好在 worker 的 mouse 族改动下「偶然命中」旧清单 ⇒ 判据缺陷被 worker 的错误改动遮住了。
+
+  **修法**：判据侧同源更新 —— `TOOLTIP_WRITE_RE` 的事件模式改为 `(?:mouse|pointer)(?:over|move|enter|leave)`（mouse 与 pointer 语义等价，pointer 覆盖 mouse+touch+pen），并同步 docstring 口径说明。**不选**「给页面补 `<title>` 子元素迎合判据」：那是为了让判据过而加的 DOM，用户拿不到额外信息，且每页都要接线、后续口径变更仍要改两处。
+
+  **验收**：① 判据自测 **22/22 通过**（含两条负样本：「只有 tooltip CSS 无绑定」「tooltip 绑定在非图元上」仍判红 ⇒ 口径未过宽）；② 全量 237 页：违例 **34 → 32 条**（基线外新增 2 → **0**），「无 tooltip」由 15 页降到 **13 页**，末行 **0 FAIL**；③ 存量基线 32 条**无需收紧**（本批只解除误判、未新增合规页）。
+
+  **纪律**：① 判据中凡出现「技术形态枚举」（事件名 / API 名 / 属性名 / 类名清单）都属**易滞后面** —— 站点做过同族技术迁移（mouse→pointer / jQuery→原生 / SVG→canvas）时**必须同批扫描并更新判据枚举**；② **存量基线会掩盖判据缺陷** ⇒ 口径变更后须用「基线外新增数」验证口径，而非只看末行 FAIL=0；③ 放宽口径前必须确认负样本仍判红；④ 优先修判据，不要为迎合判据给页面加无谓 DOM。
