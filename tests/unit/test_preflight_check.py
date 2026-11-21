@@ -400,3 +400,83 @@ def test_split_inflight_lagged_self_never_lagged():
     rows = [{"w": 956, "status": "在途（认领·未收官）", "touches": {"a.py"}}]
     truly, lagged = preflight_check.split_inflight_lagged(rows, {}, self_num=956)
     assert truly == rows and lagged == []
+
+
+# ---------------------------------------------------------------------------
+# W1289：台账 hash 列空缺告警（已收官 + hash 空/占位 + git 已有该 W 提交）
+# ---------------------------------------------------------------------------
+# 病根（实证）：台账状态列写「已收官」而 hash 列仍是空/占位的批次**静默累积**——
+# 「登记滞后」判据只覆盖「状态在途 + git 已有提交」这一族 ⇒ 本族完全不告警
+# ⇒ hash 列长期空缺 ⇒「W#↔commit 对照」失效（实测已累积 8 行）。
+# 判据为 **WARN 级**：告警不拒绝·不改退出码·不参与 touches 交集拒绝。
+
+
+def test_parse_ledger_extracts_hash_column():
+    """W1289：hash 列（关联 commit）须被解析出来——按状态格锚点反推·不按固定下标。
+
+    形态：标准 9 格行（主题 | hash | CHANGELOG 版段 | 状态 | 认领会话 | …）
+    与「主题含裸竖线致行右移」形态（W825）两种都要定位正确。
+    """
+    row = preflight_check.parse_ledger(
+        "| W1275 | 铺开批 | —（待回填） | —（待回填） | 已收官（对抗审查已派发） "
+        "| 主会话 | — | 本会话（W1275） | site/en/ |")["rows"][0]
+    assert row["hash"] == "—（待回填）", "hash 列读错：%r" % row["hash"]
+    # 主题含裸竖线（W825 形态）→ 行右移一格 → hash 仍须定位正确
+    row2 = preflight_check.parse_ledger(
+        "| W900 | 修复 a|b 形态的批 | abc1234 | W900 | **已收官**（abc1234） "
+        "| 主会话 | AGENTS.md |")["rows"][0]
+    assert row2["hash"] == "abc1234", "hash 列读错：%r" % row2["hash"]
+
+
+def test_hash_is_unfilled_placeholder_forms():
+    """hash 空缺形态覆盖：空串 / 破折号开头 / 含「待回填」；合法 hash 不算空缺。"""
+    for ph in ("", "   ", "—", "—（待回填）", "-（待回填）", "待回填", "—（末笔同首笔）"):
+        assert preflight_check.hash_is_unfilled(ph), "占位形态须判未回填：%r" % ph
+    for ok in ("df7f295cf", "`18eebbaca`", "fba21241b（本批首笔）", "653a366e9"):
+        assert not preflight_check.hash_is_unfilled(ok), "合法 hash 不得判未回填：%r" % ok
+
+
+def test_find_hash_unfilled_backfilled_hash_not_hit():
+    """① 已回填 hash（合法形态）+ 状态已收官 + git 有提交 ⇒ **不命中**。"""
+    rows = [{"w": 1263, "status": "**已收官**（commit 067adef8d）",
+             "hash": "067adef8d", "touches": set()}]
+    committed = {1263: [1, "067adef8d"]}
+    assert preflight_check.find_hash_unfilled(rows, committed) == []
+
+
+def test_find_hash_unfilled_hit_when_placeholder_and_committed():
+    """② hash 列为空/占位 + 状态已收官 + git 有该 W 提交 ⇒ **命中**（W1289 判据本体）。"""
+    rows = [{"w": 1275, "status": "已收官（对抗审查已派发·hash 待下批回填）",
+             "hash": "—（待回填）", "touches": set()}]
+    committed = {1275: [3, "aaa11111"]}
+    hits = preflight_check.find_hash_unfilled(rows, committed)
+    assert [r["w"] for r in hits] == [1275], "命中集应含 W1275：%r" % hits
+
+
+def test_find_hash_unfilled_no_commit_not_hit():
+    """③ hash 列空/占位 + 状态已收官 + git **无**该 W 提交 ⇒ **不命中**（防误报）。
+
+    只读批次无提交是正常态（无从回填 ⇒ 不该喊）。
+    """
+    rows = [{"w": 1262, "status": "已收官（成果已并入 W1263 收官）",
+             "hash": "—", "touches": set()}]
+    assert preflight_check.find_hash_unfilled(rows, {}) == []
+    assert preflight_check.find_hash_unfilled(rows, {1300: [1, "bbb22222"]}) == []
+
+
+def test_find_hash_unfilled_self_row_excluded():
+    """④ 自指行排除：传入 self_num 等于该行 W 号 ⇒ **不命中**（同 split_inflight_lagged 语义）。"""
+    rows = [{"w": 1289, "status": "已收官（hash 待回填）",
+             "hash": "—（待回填）", "touches": set()}]
+    committed = {1289: [1, "ccc33333"]}
+    assert preflight_check.find_hash_unfilled(rows, committed, self_num=1289) == []
+    # 不传 self_num 时命中（对照组：排除逻辑真在起作用）
+    assert [r["w"] for r in preflight_check.find_hash_unfilled(rows, committed)] == [1289]
+
+
+def test_find_hash_unfilled_inflight_row_not_hit():
+    """在途行（状态未收官）不命中——本判据只管「已收官却没回填 hash」这一族。"""
+    rows = [{"w": 1290, "status": "在途（认领·未收官）",
+             "hash": "—（待回填）", "touches": set()}]
+    committed = {1290: [1, "ddd44444"]}
+    assert preflight_check.find_hash_unfilled(rows, committed) == []

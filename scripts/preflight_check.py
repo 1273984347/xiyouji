@@ -12,6 +12,8 @@
      告警不拒绝（并发保护不再被自身历史欠账卡死——W954 开工 8 条 FAIL 实证）
   5. 工作树态 —— staged / 未暂存 / 未跟踪 简表
   6. 环境 —— 仓库根校验 + python/pytest/ruff 可用性
+  7. 台账 hash 空缺 —— 状态列已收官但 hash 列空/占位、且 git 已有该 W 提交
+     ⇒ WARN（W1289·告警不拒绝·不改退出码·不参与 touches 交集拒绝）
 
 用法：
     python scripts/preflight_check.py [--no-fetch] [--touches <逗号分隔的共享文件清单>] [--self W###]
@@ -51,7 +53,9 @@ def parse_ledger(text):
     权威取号规则=表头「下一自由号 = 本表 max(W#)+1」（W663 规则）；
     bullet_w=最末一条「现势下一自由号」豁免 bullet（轮换制·供交叉核验；
     表顶部 L8 的「现势」块系上一代机制遗留（末次维护 W720），不参与解析）。
-    rows=[{w, status, touches}]——touches 列自 W739 起（历史行空·空集不参与交集判定）；
+    rows=[{w, status, hash, touches}]——touches 列自 W739 起（历史行空·空集不参与交集判定）；
+    hash 列（关联 commit·语义=该批**首笔**提交 hash）自 W1289 起解析（W1289：收官行 hash
+    空缺告警判据需要它；列位由状态格内容锚点反推·不按固定下标）；
     兼容缺列旧格式（无第 7 列时 touches=空集）与历史不齐行（W687/W688 补空列后同为 7 列）。
     """
     rows_table = [int(x) for x in re.findall(r"^\|\s*W(\d{3,4})\s*\|", text, re.M)]
@@ -62,9 +66,16 @@ def parse_ledger(text):
         if not m:
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        status = _locate_status(cells)
+        s_idx = _locate_status_idx(cells)
+        status = cells[s_idx] if s_idx >= 0 else ""
+        # W1289：hash 列（关联 commit）定位——**状态格内容锚点**·hash = status 前两格
+        # （列序：主题 | hash | CHANGELOG 版段 | 状态）。与仓内列定位 doctrine 同源：
+        # 状态格是唯一锚点 ⇒ 主题列含裸竖线致行右移时 hash 仍定位正确（禁按固定下标）。
+        h_idx = s_idx - 2
+        hash_cell = cells[h_idx] if 0 <= h_idx < len(cells) else ""
         touches = _locate_touches(cells)
-        rows.append({"w": int(m.group(1)), "status": status, "touches": touches})
+        rows.append({"w": int(m.group(1)), "status": status,
+                     "hash": hash_cell, "touches": touches})
     return {"max_w": max(rows_table) if rows_table else None,
             "bullet_w": int(bullets[-1]) if bullets else None,
             "rows": rows}
@@ -94,17 +105,28 @@ _TOUCHES_PLACEHOLDERS = {"—", "-", "－", "无", "n/a", "N/A", "(空)", "（�
 _STATUS_CELL_RE = re.compile(r"^(?:已收官|已闭环)")
 
 
+def _locate_status_idx(cells):
+    """状态格**下标**：右起首个「已收官/已闭环」前缀格；无则回退固定下标 4（cells 不足则 -1）。
+
+    W1289：抽出下标形态（值形态 _locate_status 由此派生·单一来源）——
+    hash 列定位需要**相对状态格**的偏移（hash = status - 2），
+    主题列含裸竖线致整行右移时相对偏移仍成立（禁按固定下标）。
+    """
+    for i in range(len(cells) - 1, -1, -1):
+        norm = re.sub(r"[\s*]+", "", cells[i])
+        if _STATUS_CELL_RE.match(norm):
+            return i
+    return 4 if len(cells) > 4 else -1
+
+
 def _locate_status(cells):
     """状态列定位：右起首个「已收官/已闭环」前缀格；无则回退固定下标 cells[4]。
 
     右起扫描的原因：状态列在主题列之右·若主题里偶然出现「已收官」三字·
     右起扫描会优先命中真正的状态格。W908 起前缀匹配（允许证据长尾与嵌套括号）。
     """
-    for c in reversed(cells):
-        norm = re.sub(r"[\s*]+", "", c)
-        if _STATUS_CELL_RE.match(norm):
-            return c
-    return cells[4] if len(cells) > 4 else ""
+    idx = _locate_status_idx(cells)
+    return cells[idx] if idx >= 0 else ""
 
 
 def _split_touches(text):
@@ -353,6 +375,64 @@ def split_inflight_lagged(inflight_all, committed, self_num=None):
         else:
             truly.append(r)
     return truly, lagged
+
+
+# W1289：台账「关联 commit」列（hash 列·语义=该批**首笔**提交 hash）的空缺形态判定。
+#
+# 病根（实证·W1289 批开工前实测）：台账状态列写「已收官」而 hash 列仍是空/占位
+# （「—」「—（待回填）」）的批次**静默累积**——现有「登记滞后」判据只管
+# 「状态列在途 + git 已有该 W 提交」这一族，对本族（**已收官 + hash 空缺**）
+# **完全不告警** ⇒ hash 列长期空缺 ⇒ 台账「W#↔commit 对照」失效。
+# 实测已累积 8 行（W1260/W1275/W1276/W1280-W1284）。
+#
+# 本函数只判「hash 单元格是否处于空/占位形态」（**不复制** ledger_backfill.py 的回填逻辑·
+# 也不改它）——归一化口径：剥空白/星号/反引号后为空串·或以破折号类占位符开头·
+# 或含「待回填」占位词。
+_HASH_PLACEHOLDER_PREFIXES = ("—", "–", "-", "－", "无", "(空)", "（空）")
+_HASH_PLACEHOLDER_WORDS = ("待回填",)
+
+
+def hash_is_unfilled(hash_cell):
+    """hash 列是否处于「空/占位」形态（=未回填）。纯函数。
+
+    归一化：剥空白 + 星号 + 反引号（台账 hash 形态含反引号包裹·如 18eebbaca 被反引号包住）
+    ⇒ 空串 / 以破折号类占位符开头 / 含「待回填」⇒ 判未回填。
+    """
+    t = re.sub(r"[\s*`]+", "", hash_cell or "")
+    if not t:
+        return True
+    if any(w in t for w in _HASH_PLACEHOLDER_WORDS):
+        return True
+    return t.startswith(_HASH_PLACEHOLDER_PREFIXES)
+
+
+def find_hash_unfilled(rows, committed, self_num=None):
+    """纯函数：命中「台账已收官但 hash 列空缺，且 git 已有该 W 批次标签提交」的行。
+
+    W1289（告警不拒绝·与「登记滞后」同为 WARN 级·不改退出码·不参与 touches 交集拒绝）。
+    判定三要素**同时**成立才命中：
+      ① 状态列已收官——口径**复用** is_inflight（非在途即已收官·含已收官/已闭环/已合并/
+         已让号/已撤销）；不另写一套状态词表（单一来源）。
+      ② hash 列为空/占位形态（hash_is_unfilled）。
+      ③ 该 W 号在 committed（wnum_commit_index 产物）里——**防误报**：
+         只读批次无提交是正常态（无提交 ⇒ 无从回填 ⇒ 不该喊）。
+    self 行排除：本批自身的行永不入命中集（与 split_inflight_lagged 的 self 语义一致——
+    自己的行由本批自己按收官流程回填·preflight 不对自己喊）。
+    """
+    committed = committed or {}
+    out = []
+    for r in rows or []:
+        w = r.get("w")
+        if w == self_num:
+            continue
+        if is_inflight(r.get("status", "")):
+            continue
+        if not hash_is_unfilled(r.get("hash", "")):
+            continue
+        if w not in committed:
+            continue
+        out.append(r)
+    return out
 
 
 def touches_conflict(inflight_touches, mine):
@@ -621,6 +701,26 @@ def _step_touches(git, ledger, args, self_num, problems):
             print(interference_log_hint("preflight 交集拒绝"))
         if not bad:
             print(f"OK    touches 交集检查：本批声明 {len(mine)} 项·与在途批次（{len(inflight_others)} 个声明方）无交集")
+    return committed
+
+
+def _step_hash_unfilled(ledger, committed, self_num):
+    """3.55) 台账 hash 列空缺告警（W1289）——**告警不拒绝**·不改退出码。
+
+    病根（实证）：台账状态列已写「已收官」而 hash 列仍是空/占位（「—」「—（待回填）」）
+    的批次**静默累积**——「登记滞后」判据只覆盖「状态在途 + git 已有提交」这一族，
+    对本族完全不告警 ⇒ hash 列长期空缺 ⇒「W#↔commit 对照」失效（实测已累积 8 行）。
+
+    口径：命中 = 状态已收官（复用 is_inflight·单一来源）AND hash 列为空/占位
+    AND git 已有该 W 批次标签提交（防误报：只读批次无提交是正常态）。
+    本批自身行排除（self 语义同 split_inflight_lagged）。
+    """
+    hits = find_hash_unfilled(ledger.get("rows", []), committed, self_num)
+    for hr in hits:
+        _hn, _hfirst = committed.get(hr["w"], [0, ""])
+        print(f"WARN  hash 空缺 W{hr['w']}：台账已收官但 hash 列空缺 · git 已有该 W 提交"
+              f"（{_hn} 笔·首笔 {_hfirst}）⇒ 请按收官流程回填"
+              "（ledger_backfill.py --from-git 可脚本反填·告警不拒绝·不计入退出码）")
 
 
 def _step_cascade_lock():
@@ -780,7 +880,10 @@ def main():
     _step_collision_and_selfnum(git, ledger, self_num, problems)
 
     # 3.5) touches 在途盘点 + 交集拒绝（W739）+ git 条件二分（W956·P-43-01）
-    _step_touches(git, ledger, args, self_num, problems)
+    _committed = _step_touches(git, ledger, args, self_num, problems)
+
+    # 3.55) 台账 hash 列空缺告警（W1289）——告警不拒绝·不改退出码·不参与 touches 交集拒绝
+    _step_hash_unfilled(ledger, _committed, self_num)
 
     # 3.6) 级联运行锁状态（W991·①层重启）
     _step_cascade_lock()

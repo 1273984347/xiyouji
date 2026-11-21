@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "019983b9ed28",
+      "sha": "ffd5e6a78818",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "389bf8021b27",
+      "sha": "cb64f39b3d3f",
       "static": {
         "svg": false,
         "cls": true,
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "095b8d1fe74c",
+      "sha": "42d7db3feaf1",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "0cefbf1f3310",
+      "sha": "7f4696a9f70a",
       "static": {
         "svg": true,
         "cls": false,
@@ -6736,7 +6736,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 869,
+      "consoleErrors": 867,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -8347,9 +8347,9 @@
           "w": 1002,
           "h": 620,
           "marks": 24,
-          "texts": 21,
+          "texts": 22,
           "kind": "chart",
-          "basis": "1002x620·图元 24·文本 21·命中图表词表"
+          "basis": "1002x620·图元 24·文本 22·命中图表词表"
         },
         {
           "cls": "",
@@ -12209,7 +12209,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -12217,9 +12217,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",

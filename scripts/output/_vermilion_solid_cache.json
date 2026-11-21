@@ -90,7 +90,7 @@
    "counts": {}
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "e58b579307dc0e70cae271057720e246bbb1baa5",
+   "sha1": "6e1efb61b823ca9830dd046c15145bb386f227c2",
    "counts": {}
   },
   "data/cultural-misreading.html": {
@@ -330,7 +330,7 @@
    "counts": {}
   },
   "data/tag-cloud.html": {
-   "sha1": "64854623fe7d38dc2b39646d62df9fef7b1a8fc8",
+   "sha1": "e5b74e3df34c7ff93004d59e88f9f513bfa19df2",
    "counts": {}
   },
   "data/text-evolution.html": {
@@ -382,7 +382,7 @@
    "counts": {}
   },
   "dukou-engine.html": {
-   "sha1": "06564432d648bc1b9a3ae4d5adab42ad2cd7ff33",
+   "sha1": "f72756227b85e9101712e9f31a141629040ad41f",
    "counts": {}
   },
   "guide.html": {
@@ -390,7 +390,7 @@
    "counts": {}
   },
   "index.html": {
-   "sha1": "61e6e16ba05bb01f680ff50d6c8f749ace43d9f6",
+   "sha1": "4d563298f15eb096c1bfedb83402f1ea6002b9a8",
    "counts": {}
   },
   "rum-viewer.html": {
@@ -954,5 +954,5 @@
    "counts": {}
   }
  },
- "generated_at": "2026-11-21T12:01:50.302Z"
+ "generated_at": "2026-11-21T13:49:05.054Z"
 }

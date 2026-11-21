@@ -1,3 +1,51 @@
+## W1289 登记滞后判据补全 + 台账 hash 全量回填 + 坑表 E-301 扩写与 E-302 压缩（2026-11-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1289 | 级联产物（本批收官链写入） |
+| AGENTS.md | W1289 | 本批改动面 |
+| CHANGELOG.md | W1289 | 本批版段 |
+| CITATION.cff | W1289 | 级联产物（本批收官链写入） |
+| HANDOVER.md | W1289 | §四 遗留登记块（W1289：坑表写窗枯竭 + 探针固定成本 + 复核纪律） |
+| README.md | W1289 | 级联产物（本批收官链写入） |
+| STRUCTURE.md | W1289 | 级联产物（本批收官链写入） |
+| archive/docs/AGENTS-ARCHIVE.md | W1289 | AGENTS 历史段归档（级联迁出） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1289 | 台账腾窗归档（迁出 W1225-W1226） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1289 | E-301/E-302 段恢复叙事全文 + 段内追加正本判据层 |
+| archive/docs/workflows-readme-history.md | W1289 | 级联产物（本批收官链写入） |
+| docs/00-导读/W批次编号对账表.md | W1289 | 台账 10 行 hash 回填 + W1289 认领行 + 段数腾窗后正本 |
+| docs/00-导读/项目说明.md | W1289 | 级联产物（本批收官链写入） |
+| docs/11-方案报告/README.md | W1289 | 报告索引登记 T122（§六 137→138 件） |
+| docs/11-方案报告/计划方案/T122-任务计划执行与经验沉淀报告-2026-11-21.md | W1289 | T122 报告落盘 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1289 | 级联产物（本批收官链写入） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1289 | 级联产物（本批收官链写入） |
+| docs/INDEX.md | W1289 | 本批改动面 |
+| pitfalls.md | W1289 | E-301 扩写（并入豁免登记 sha 失效面）+ E-302 压缩回判据层腾窗 |
+| pytest.ini | W1289 | 本批改动面 |
+| scripts/output/INDEX.md | W1289 | 本批改动面 |
+| scripts/output/README.md | W1289 | 本批改动面 |
+| scripts/output/_cascade_files_W1289.txt | W1289 | 本批改动面 |
+| scripts/output/_vermilion_solid_cache.json | W1289 | 本批改动面 |
+| scripts/output/_w1266_allrender.json | W1289 | 本批改动面 |
+| scripts/output/_w1289_spec.json | W1289 | 本批 spec |
+| scripts/output/chart-legend-render-audit.json | W1289 | 本批改动面 |
+| scripts/output/file-index.md | W1289 | file-index 新增 W1289 段 |
+| scripts/output/stats-changelog.json | W1289 | 统计变更史追加 |
+| scripts/output/stats-index.md | W1289 | 统计索引刷新 |
+| scripts/output/stats.json | W1289 | 统计计数链刷新 |
+| scripts/output/svg_text_contrast_graphic_report.json | W1289 | 本批改动面 |
+| scripts/output/svg_text_contrast_report.json | W1289 | 本批改动面 |
+| scripts/output/tools-inventory.md | W1289 | 工具清单刷新 |
+| scripts/preflight_check.py | W1289 | preflight 新增「hash 未回填」告警判据（状态锚点定位 hash 列·WARN 级·不进拒绝集） |
+| site/data/cross-time-danmaku.html | W1289 | 版本脚注联动（级联产物） |
+| site/data/search-index-zh.js | W1289 | 本批改动面 |
+| site/data/tag-cloud.html | W1289 | 版本脚注联动（级联产物） |
+| site/dukou-engine.html | W1289 | 版本脚注联动（级联产物） |
+| site/en/search-index-en.js | W1289 | 本批改动面 |
+| site/index.html | W1289 | 版本脚注联动（级联产物） |
+| site/rss.xml | W1289 | 本批改动面 |
+| tests/unit/test_preflight_check.py | W1289 | 新判据回归锁 6 例（含无提交不命中·self 行排除两条负样本） |
+
 ## W1288 收官回填与遗留落仓 - 台账四批登记滞后清偿 + 坑表腾窗与三条新坑 + hook 启用指引三处落位（2026-11-21）
 
 | 文件 | W | 说明 |
