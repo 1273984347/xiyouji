@@ -1,3 +1,12 @@
+### W1293（2026-11-22）：CHANGELOG 结构治本 + 两面归档下界对齐到 W1253 + 收官链零跳过
+
+> - **来源**：用户 2026-11-22 引用 W1292 遗留清单并**采纳建议②**（治本：修 CHANGELOG 结构·不放宽任何门禁判据）⇒ 立项 W1293。
+> - **执行**：① **结构病灶行级取证**——CHANGELOG.md（567 行）三个结构锚点散落三处：`## [Unreleased]` 契约块在**行 151**（把段区切成两半）· `# 更新日志` H1 在**行 531**（其下还挂 W1248/W1247/W1246 三段）· H1 两行说明孤悬**行 513**；⇒ 归档工具 `_tail_block_start()`（找 `^# 更新日志$`）把 H1 之后的一切当「末尾文件级块」⇒ **那三段永远迁不出** ⇒ CHANGELOG 有效正本最老段被锁死在 W1249；② **稳定性取证**——`batch_cascade._face_changelog` 只**插入**新段（锚点=现役段标题行首）·**不搬动**末尾块 ⇒ ⇒ 坏形态是**历史遗留**而非级联每次造成 ⇒ ⇒ 结构修复**不会被后续级联退化**；
+> - **施工**：① **程序化剪切归位**（三部分从原位剪出·按「H1 → 说明两行 → [Unreleased] 契约块」拼到文件末尾）⇒ 段区恢复连续（W1292…W1246 单一连续段区）⇒ 末尾块之后无段 ⇒ 归档迁出恢复正常；守恒＝**字节逐字相等**（175443→175443·行 567→567）；② **两面腾窗对齐**（目标下界 = 最老共同号 W1253）⇒ `archive_segments --target both --keep 34 --apply` ⇒ CHANGELOG 迁出 **7 段（W1246-W1252）**、file-index 迁出 **4 段（W1253-W1257）** ⇒ 两面正本各 **34 段·最老段同为 W1253**；③ **收官链零跳过**——`batch_closeout` **不再 monkey-patch 跳过 rebuild 自检**（W1291/W1292 两批的「跳过既存自检」到此终结）⇒ 归档对齐由**机器判据自己确认通过**而非人工放行；④ 报告 T126 落盘 + README §六 登记（141→142 件）。
+> - **验证**：结构修复**字节逐字守恒**（175443→175443）+ 段区连续（段数 41·末尾块之后无段 ✓）+ 归档迁出演练无断言（CHANGELOG 迁 7 段 / file-index 迁 4 段）+ **两面最老段同为 W1253** + `rebuild_section` 自检「**两面同下界 W1253 ✓**」⇒ rebuild 不再阻断 + 收官链 17 步**零跳过**完成 + 第 31/45/48/51/74 槽 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
+> - **状态**：一个只能靠「跳过既存自检」维持的欠账，现由**机器判据自己确认通过**——CHANGELOG 结构归位（逐字守恒）⇒ 段区连续 ⇒ 归档迁出恢复 ⇒ 两面下界同为 W1253 ⇒ rebuild 自检 ✓ ⇒ **收官链首次零跳过收官**；本批**未放宽任何门禁判据**（用户采纳的治本路线）。
+> - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/CHANGELOG-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/file-index-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T126-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/archive_segments.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1293.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1293_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml, tests/unit/test_archive_segments_plan_scope.py
+
 ### W1292（2026-11-22）：遗留清偿批：归档工具段表口径根修 + 台账 hash 回填 + 两面下界待裁决
 
 > - **来源**：用户 2026-11-22 指示「**现在做**」（承接 W1291 收官后其遗留清单三项）⇒ 立项 W1292（遗留清偿批）。
@@ -148,20 +157,6 @@
 > - **状态**：已收官（铺开第一批落地 + 判定面口径再修订 + 同源模块 + 回归锁 3 例 + 两条坑位）
 > - **遗留**：reader 树 636 页（须先解 build_reader 内置 --reader --inline-links）·site/data 90 页（下一批）·公共层变体面（body 58 条）·EN 首页明态 hero 文字（既有缺陷）。
 > - **文件**： CHANGELOG.md,archive/docs/W批次编号对账表-ARCHIVE.md,docs/00-导读/W批次编号对账表.md,docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,scripts/check_chart_colorblind.py,scripts/output/_vermilion_solid_cache.json,scripts/output/_w1266_allrender.json,scripts/output/_w1281_spec.json,scripts/output/chart-legend-render-audit.json,scripts/output/colorblind-baseline.txt,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/stats.json,scripts/output/tools-inventory.md,scripts/verify_delivery.py,site/data/81-hardships-view.html,site/data/81-hardships.html,site/data/aesthetics.html,site/data/ai-dialogue.html,site/data/business-model.html,site/data/cave-estate.html,site/data/century-dialogue.html,site/data/chapter-stats.html,site/data/chapter-structure-graph.html,site/data/character-appearance.html,site/data/character-dynamic-network.html,site/data/character-presence-timeline.html,site/data/character-relationship-3d-view.html,site/data/character-relationship-3d.html,site/data/character-semantic-network.html,site/data/character-sentiment-arc.html,site/data/chart-design.html,site/data/cognitive-psychology.html,site/data/concept-device.html,site/data/counterfactual.html,site/data/criticism-history.html,site/data/cross-time-danmaku.html,site/data/cultural-misreading.html,site/data/customs-pass-route.html,site/data/data-explorer.html,site/data/deconstruction.html,site/data/dialogue-sentiment.html,site/data/ecology.html,site/data/emotional-heatmap.html,site/data/ethics-consumption.html,site/data/famous-time-travel.html,site/data/four-dimensional-research-network.html,site/data/four-heavenly-kings-artifacts.html,site/data/game-webnovel.html,site/data/global-pattern.html,site/data/glossary.html,site/data/graph-explorer.html,site/data/guanyin-six-roles-network.html,site/data/hardship-difficulty-heatmap.html,site/data/hardship-heatmap.html,site/data/heaven-power-network.html,site/data/intertextuality-network.html,site/data/journey-geo-3d.html,site/data/journey-geo-semiotics.html,site/data/journey-map-interactive.html,site/data/journey-route.html,site/data/journey-spacetime.html,site/data/jurisprudence.html,site/data/karma-reincarnation.html,site/data/language-style-radar.html,site/data/linguistics.html,site/data/magic-system.html,site/data/material-archaeology.html,site/data/mbti-evolution.html,site/data/methodology-matrix.html,site/data/ming-political-thought-comparison.html,site/data/monster-background.html,site/data/monster-capability-radar.html,site/data/monster-ecology-network.html,site/data/monster-female-network.html,site/data/monster-hierarchy-network.html,site/data/monster-sociology.html,site/data/monster-victims-network.html,site/data/music-structure.html,site/data/narrative-experiment.html,site/data/narrative-rhythm-curve.html,site/data/narratology-12d-network.html,site/data/narratology-16d-network.html,site/data/perf-canvas-rendering.html,site/data/philosophy.html,site/data/pilgrim-team-dynamic-network.html,site/data/pilgrim-team-psychology-arc.html,site/data/poetry-density.html,site/data/poetry-rhythm-analysis.html,site/data/power-resources.html,site/data/relationships.html,site/data/risk-project.html,site/data/search.html,site/data/six-senses-narratology-network.html,site/data/social-media.html,site/data/story-timeline.html,site/data/tag-cloud.html,site/data/text-evolution.html,site/data/text-search.html,site/data/theological-intervention-network.html,site/data/timeline.html,site/data/underworld-power-network.html,site/data/visual-art.html,site/data/workplace.html,site/data/wukong-tangseng-benchmark.html
-## [Unreleased]
-
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1292），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
->
-> **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
->
-> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W1000 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
->
-> **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
->
-> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 637<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
->
-> **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
-
 ### W1279（2026-11-19）：AGENTS 地图化重建批（五文件分层治理·用户框架落地）
 
 **本批要点**（W1279 · 五文件分层治理批·用户两份框架文档落地）：
@@ -479,88 +474,21 @@
 > - **验证**：见收官链。
 > - **文件**：见 file-index。
 
-### W1252（2026-11-16）：深色变体 12 张 + 209 页亮暗双图接线（Step4）
-
-**本批要点**（W1252 深色变体 + 亮暗双图接线）：
-
-> - **① 深色变体**：12 张古画绢本**暗色夜色版**（暗褐绢底 + 墨色云海 + 微弱星月辉光），**各以自身亮版作 reference_images 生成** ⇒ 构图、主体、留白方向与亮版严格一致；统一裁为 1200×674 webp（70–114 KB）。
-> - **② 接线**：209 个专题页改为**亮/暗双图**（`.silk-hero-light` / `.silk-hero-dark`），暗色模式由「隐藏该族」改为「显示深色版」——此前该族在暗色模式是整体不显示。
-> - **③ 边界**：深色版 alt 置空（装饰性替代图·避免屏幕阅读器重复朗读）。
-> - **验证**：见收官链。
-> - **文件**：见 file-index。
-
-### W1251（2026-11-16）：全量 210 页正文接线（Step3）——古画绢本顶栏横幅
-
-**本批要点**（W1251 全量 210 页正文接线）：
-
-> - **① 交付**：**210 个专题页**全部接入古画绢本顶栏横幅（206 页新接 + 3 页试点 = 209 页），用 1200 宽轻量版（`silk-hero-*-1200.webp`·1200×674）。
-> - **② 样式**：**页内私有** `.silk-hero` 三规则（不进 `site/system.css`·避免全站 861 页内联重写·diff 面仅 209 页 × 8 行）；暗色模式 `display:none`（暖米黄绢底会成亮斑·沿用题图族 chapter-plate 策略）。
-> - **③ 叠字位按图面定**：新族**主体在右、留白在左** ⇒ 文字位取**左侧留白**（方向与首页线描族相同，但留白占比不同，**不照搬其尺寸参数**）。
-> - **④ 边界**：12 张深色变体另开批（Step4）。
-> - **验证**：见收官链。
-> - **文件**：见 file-index。
-
-### W1250（2026-11-16）：og 分享图替换 + 1200 宽轻量版（Step1+2）
-
-**本批要点**（W1250 og 分享图替换 + 1200 宽轻量版）：
-
-> - **① og 分享图**：**210 个专题页**的 `og:image` 由千篇一律的 `og-cover-ink-zh.jpg` 换成对应题材的古画绢本 og（`site/static/img/og-silk-*.jpg`·1200×630·**jpg**（社交平台兼容，非 webp）·12 张按题材关键词匹配 + 轮转兜底·12 张全覆盖）。
-> - **② 1200 宽轻量版**：12 张 `silk-hero-*-1200.webp`（1200×674）——原 1920 宽单张 466KB 超第 47 槽软阈 200KB，全量接线前先备轻量版。
-> - **③ 边界**：本批只做 og 与轻量版；**全量 210 页正文接线（Step3）与 12 张深色变体（Step4）另开批**。
-> - **验证**：见收官链。
-> - **文件**：见 file-index。
+# 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
 本项目所有重要变更均记录于此。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/)。
 
-> **
+## [Unreleased]
 
-### W1249（2026-11-16）：古画绢本 Hero 横幅接入专题页（试点 3 页）——顶栏横幅 · 暗色隐藏 · 分支整理
-
-**本批要点**（W1249 古画绢本 Hero 横幅接入专题页·试点 3 页）：
-
-> - **① 交付**：\`site/reader/themes/\` 下 **3 个专题页**各接入 1 张古画绢本横幅（\`site/static/images/silk-hero-01-yunhai-fosi / 06-heifengshan / 11-fabao-sanjian.webp\`·1920×1078），插在 \`<h1>\` 之后的 \`<figure class="silk-hero">\`。
-> - **② 样式策略**：**页内私有样式**（3 页各自既有 style 块内追加 \`.silk-hero\` 三条规则）——**不进 \`site/system.css\`**，避免触发全站 861 页内联 CSS 重写（试点阶段把 diff 面压到 3 页）。
-> - **③ 暗色模式**：\`html[data-theme="dark"] .silk-hero { display: none; }\`——暖米黄绢底在暗色下会成亮斑，沿用题图族 \`.chapter-plate\` 的既有策略。
-> - **④ 图片规格**：\`width="1920" height="1078"\`（防 CLS）· \`loading="lazy"\` · \`decoding="async"\` · alt 逐张按画面实写。
-> - **⑤ 分支整理**：本地 5 个 + 远端 6 个**已合并入 main 的 \`sync/*\` 分支全部删除**（\`git branch --merged main\` 判定），远端仅剩 \`origin/main\`。
-> - **⑥ 边界**：**仅试点 3 页**；未做 og 分享图替换、未做深色变体、未全量 210 页；全量接线待试点效果确认后另开批。
-> - **验证**：verify full 79 段 0 FAIL · pytest 1674 passed / 4 skipped · 干净检出 \`ci_sim --ref HEAD --full\` 复验。
-> - **文件**：`site/reader/themes/{取经地理学专题,妖怪生态学专题,芭蕉扇-终极灭火器的关系}.html` · `site/static/images/silk-hero-{01,06,11}-*.webp` · `scripts/output/file-index.md`（本批段）· `scripts/output/_w1249_spec.json`。
-
-# 更新日志
-
-
-### W1248（2026-11-15）：CI 二轮红清偿：朱砂审计面补入新页（poetry-density·实测零实底）
-
-**本批要点**（W1248 CI 二轮红清偿）：
-
-> - **① 红的事实**：PR #187 第二轮 CI，pytest shard 3/3 报 `test_vermilion_solid::test_scope_matches_audit_surface` 失败——「仅门禁有 ['data/poetry-density.html']·仅期望有 []」。
-> - **② 根因**：第 49 槽门禁的范围取 `site/` 全量（动态），而 `_w876_site_audit_final.json` 是 W876 的**冻结审计快照**（99 页）；新增页面不自动进入快照 ⇒ 两者集合不一致。
-> - **③ 处置**：先实测该页朱砂实底（`node scripts/check_vermilion_solid.js --pages data/poetry-density.html` ⇒ 0 FAIL），再按实测补入审计面（`{"text_on_bg": [], "fill": []}`——空表如实记录零命中，未伪造数值）。审计面 99→100 页，测试 11 例全过。
-> - **④ 教训**：新增可视化页的收口清单应再加两条——第 43 槽基线（`check_chart_values --generate-baseline`）与第 49 槽审计面（`_w876_site_audit_final.json`）；两者都不在 `new_page --post` 九步内。
-> - **验证**：本地 verify full 79 段 0 FAIL；`test_vermilion_solid` 11 例全过。
-> - **文件**：见 file-index。
-
-### W1247（2026-11-15）：CI 首跑红清偿：搜索索引剔除未跟踪件重建 + 可视化基线补入新页
-
-**本批要点**（W1247 CI 首跑红清偿·PR #187）：
-
-> - **① 红一（第 46 槽·搜索索引）**：CI 报「期望 1046 / 实得 1047」。根因=本地生成索引时，并行会话的两份**未跟踪**文档（`docs/11-方案报告/README.md`、`T103 计划方案报告`）在工作树里，生成器按磁盘扫描 ⇒ 多出 1 条；干净 checkout 无此文件 ⇒ 差 1。处置=把未跟踪件临时移出后重建索引（zh 1008 / en 1046），`check_search_index_fresh` 0 FAIL。
-> - **② 红二（第 43 槽·可视化基线）**：`test_baseline_has_no_stale_or_missing_pages` 抓出「新增页未入基线：site/data/poetry-density.html」。根因=W1245 新增页面后未重生成 `chart-values-baseline.txt`（生成器 `--post` 链路不含该步）。处置=`node scripts/check_chart_values.js --generate-baseline`（90 页 / 540 行 / 冻结缺口 0）。
-> - **③ 教训（可复用）**：① 生成类产物（搜索索引、基线）必须在**未跟踪件清空后**生成，否则会把他方在途件计入；② `new_page --post` 的九步不含第 43 槽基线，新增可视化页后应补跑 `--generate-baseline`——建议后续并入 `--post`。
-> - **验证**：本地 verify full 79 段 0 FAIL；`test_visualization_data` + `test_check_search_index_fresh` 共 23 例全过。
-> - **文件**：见 file-index。
-
-### W1246（2026-11-15）：reader 模板去 UI emoji（收藏/反馈三处）+ poetry 子树重建，第 72 槽棘轮 623→610
-
-**本批要点**（W1246 reader 模板去 UI emoji）：
-
-> - **① 根因与改法**：`scripts/build_reader.py` 的阅读工具条与反馈区用图形 emoji 作图标位（「☆ 收藏本页」「👍 有帮助」「👎 待改进」），而第 72 槽第 50 门禁按「UI 图标位 emoji 残留」计数。改法=**模板层去掉三处 emoji 改纯文字**（这三处本就不是图标语义，是文字按钮·无需 SVG 或 mask 替代）。
-> - **② 重建范围的取舍（本批最需说明的一处）**：模板一改，全量重建 636 页即可把计数打到 0；但 636 页逐页登记会撑爆 file-index（约 +44KB，超第 74 槽 256KiB 上限）⇒ 本批只重建并登记 **poetry 子树 20 页**，其余 616 页保持现状，待下次全量重建自然收敛（模板已改，重建即生效）。**这是显式的分批交付，不是遗漏**。
-> - **③ 顺带收口**：此前 5 篇逐回索引与 1 篇条目明细的 reader 版一直未落库（构建产物在但未提交）⇒ 本批随 poetry 重建一并入库，reader 侧内容与 docs 对齐。
-> - **④ 棘轮**：623 → **610**（第 72 槽）；`emoji-residue-baseline.txt` 同步下调（只降不升）。
-> - **⑤ 回填**：W1245 台账 hash/末笔格回填（单笔 6ea2d86ab）。
-> - **验证**：见收官链。
-> - **文件**：见 file-index。
-
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1293），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+>
+> **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
+>
+> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W1000 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
+>
+> **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
+>
+> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 637<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
+>
+> **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
