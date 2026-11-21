@@ -339,7 +339,7 @@ async function auditState(context, pageRel, state) {
   try {
     await page.emulateMedia({ colorScheme: state.colorScheme });
     await page.setViewportSize(state.viewport);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
     // W1066 提速：初始等待由「死等 1200ms」改为「轮询至 DOM 稳定·上限 1200ms」
     //   ——绝大多数图表页在 300–600ms 内已渲染完毕 ⇒ 平均可省 600–900ms/页
     //   （782 页 × 0.7s ≈ 9 分钟）。轮询判据 = svg/canvas 数量与关键样式稳定

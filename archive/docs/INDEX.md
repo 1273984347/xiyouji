@@ -16,7 +16,7 @@
 - `w550-shot-review/`
 - `复盘报告/`
 
-## 文件（18）
+## 文件（19）
 
 ### Markdown 文档
 
@@ -24,6 +24,7 @@
 - `CHANGELOG-ARCHIVE-tier2-W400-W559.md`
 - `CHANGELOG-ARCHIVE-tier2-W673-W813.md`
 - `CHANGELOG-ARCHIVE-tier2-W814-W874.md`
+- `CHANGELOG-ARCHIVE-tier2-W875-W950.md`
 - `CHANGELOG-ARCHIVE-tier2.md`
 - `CHANGELOG-ARCHIVE.md`
 - `HANDOVER-ARCHIVE.md`

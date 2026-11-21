@@ -89,6 +89,7 @@ FAST_GATES = [
     ("文档口径体检(第31槽)", "{py} scripts/check_doc_sync.py --check"),
     ("图表内容完备度(第82槽)", "{py} scripts/check_chart_content_completeness.py"),
     ("SVG 标签裁切(第83槽)", "{py} scripts/check_chart_label_clipping.py"),
+    ("SVG 文字对比度(第80槽·探针新鲜度)", "{py} scripts/check_svg_text_contrast.py"),
     ("CSP 零漂移", "{py} scripts/generate_csp.py --check"),
 ]
 

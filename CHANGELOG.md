@@ -1,3 +1,11 @@
+### W1294（2026-11-22）：CI 提速补盲与门禁自检加固 + 归档二级分片
+
+> - **来源**：用户 2026-11-22 引用 W1293 遗留清单并指示「**现在做**」⇒ 立项 W1294（CI 提速补盲与门禁自检加固批）。
+> - **执行**：① **快档补第 80 槽（探针新鲜度）**——取证 `ci_sim.py` 的 `FAST_GATES` 仅 4 项（第 31/82/83 槽 + CSP 零漂移）⇒ **无「入库探针报告 page_sha 是否与当前页一致」这一档** ⇒ 与 W1292/W1293 连续两批「本地快档 7/7 PASS 而线上第 80 槽红」**完全吻合**（本地对 CI 红灯结构性失明）⇒ FAST_GATES 增项 ⇒ **探针报告陈旧在推前即被拦**；② **采集超时加固**——全仓 grep `timeout: 20000` 定位 W1289 假红真身 `_audit_render_states.js:342`（暗色审计）＋ 同型 `chart_label_clipping_probe.js:351` / `svg_text_contrast_probe.js:843` ⇒ 三处 20000→**60000**（**只给页面更多加载时间·判据强度不变**）；③ **归档二级分片**——`archive_tier2.py --file changelog --apply` 迁出 **68 段（W875-W950·209 KB）** 至 `CHANGELOG-ARCHIVE-tier2-W875-W950.md` ⇒ 一级 CHANGELOG-ARCHIVE **1051KB → 896KB**（破 1MB 线解除）；④ 报告 T127 落盘 + README §六 登记（142→143 件）。
+> - **验证**：快档实跑出现「SVG 文字对比度(第80槽·探针新鲜度)」且 **PASS**（违例 0 条）⇒ 快档与线上全量**逐档对齐**了这一档；三处超时替换各 1 处；一级归档件 **896KB < 1MB**；两面下界仍 **W1253 ✓**；收官链零跳过完成 + 全量门禁 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
+> - **状态**：把「本地全绿 ≠ CI 会绿」从一条教训变成**闸门能力**——快档新增第 80 槽 ⇒ 探针报告陈旧在推前即被拦；W1289 假红的采集侧根因（20s 超时）消除；归档层 1MB 破线告警一次清偿。
+> - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/CHANGELOG-ARCHIVE-tier2-W875-W950.md, archive/docs/CHANGELOG-ARCHIVE.md, archive/docs/INDEX.md, archive/docs/README.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T127-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/_audit_render_states.js, scripts/chart_label_clipping_probe.js, scripts/ci_sim.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1294.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1294_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, scripts/svg_text_contrast_probe.js, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml
+
 ### W1293（2026-11-22）：CHANGELOG 结构治本 + 两面归档下界对齐到 W1253 + 收官链零跳过
 
 > - **来源**：用户 2026-11-22 引用 W1292 遗留清单并**采纳建议②**（治本：修 CHANGELOG 结构·不放宽任何门禁判据）⇒ 立项 W1293。
@@ -481,7 +489,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1293），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1294），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

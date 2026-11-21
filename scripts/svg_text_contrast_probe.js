@@ -840,7 +840,7 @@ async function measureState(context, pageRec, state) {
     if (NO_TOOL) await page.route('**/label-contrast.js', (r) => r.abort());
     await page.emulateMedia({ colorScheme: state.colorScheme });
     await page.setViewportSize(state.viewport);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
     let s1 = await waitStable(page, 3000, { requireText: true });
     await page.evaluate(async () => {
       const step = window.innerHeight;

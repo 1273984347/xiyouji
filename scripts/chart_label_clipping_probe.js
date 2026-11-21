@@ -348,7 +348,7 @@ async function measureState(context, pageRec, state) {
   try {
     await page.emulateMedia({ colorScheme: state.colorScheme });
     await page.setViewportSize(state.viewport);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
     // 等 load 事件（现役页把图表几何修正挂在 load + setTimeout 上）
     try {
       await page.waitForLoadState('load', { timeout: 10000 });
