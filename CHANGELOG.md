@@ -1,3 +1,11 @@
+### W1287（2026-11-21）：CI 侧教训机器化 - 工作树干净断言 + 本地仿真复现 CI 步骤序列
+
+> - **来源**：用户 2026-11-21 17:46 直接质疑「你自己看看 CI 跑了多少次，项目内有多少关于 CI 的为什么还是有问题？」⇒ 立项 W1287（流程层追问·非单点缺陷）。
+> - **执行**：① **CI 内建断言**——ci.yml 的 Delivery Gate 前加「工作树干净断言」（git status --porcelain 非空即红）⇒ 任何 CI 步骤改动了入库文件而未还原**当场红**，不再以「漏 add」形态延后到门禁阶段（症状离根因远·排查成本高）；② **仿真器覆盖 CI 步骤**——scripts/ci_sim.py 增 --ci-steps（复现 CI 前置序列：重生成输出数据 → graphic/body 探针现跑 → 还原产物 → 干净断言）且 worktree 检出改 **LF**（core.autocrlf=false）对齐 CI blob ⇒ 本地可提前暴露 CI 侧缺陷；③ 台账登记 W1287 认领行（touches 预检 PASS·无冲突）；④ 坑表新增 **E-309**（CI/门禁类教训须分「文本层」与「机器层」·可机器化者一律升级为断言）+ 腾窗压缩 E-306/E-307。
+> - **验证**：断言**正负样本自测**——干净 worktree ⇒ rc=0「工作树干净」；人为弄脏 ⇒ rc=1「工作树非干净： M pitfalls.md」⇒ 断言真能拦（非摆设）；ci.yml YAML 解析通过且断言步骤在位；ci_sim.py --help 出现 --ci-steps；端到端 ci_sim --ci-steps 跑通。
+> - **状态**：本批把「CI 侧教训」从文本层升级为机器层——CI 侧缺陷可在本地被仿真、被当场拦截，不再依赖人工排查 40 分钟；并把提交节奏钉回「一批 = 一轮 CI」（本批一次推送带齐·不再多笔追加）。
+> - **文件**： .github/workflows/ci.yml,scripts/ci_sim.py,scripts/output/_w1287_spec.json,docs/00-导读/W批次编号对账表.md,docs/agent/gates.md,pitfalls.md,archive/docs/pitfalls-detail-ARCHIVE.md,docs/11-方案报告/计划方案/T120-任务计划执行与经验沉淀报告-2026-11-21.md,docs/11-方案报告/README.md
+
 ### W1286（2026-11-21）：图表内容层存量清偿 - 第82槽内容完备度 + 第83槽标签裁切重叠 + W1285遗留L-01/L-02
 
 **本批要点**（W1286 · 图表内容层存量清偿）：
@@ -102,7 +110,7 @@
 > - **文件**： CHANGELOG.md,archive/docs/W批次编号对账表-ARCHIVE.md,docs/00-导读/W批次编号对账表.md,docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md,docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md,scripts/check_chart_colorblind.py,scripts/output/_vermilion_solid_cache.json,scripts/output/_w1266_allrender.json,scripts/output/_w1281_spec.json,scripts/output/chart-legend-render-audit.json,scripts/output/colorblind-baseline.txt,scripts/output/stats-changelog.json,scripts/output/stats-index.md,scripts/output/stats.json,scripts/output/tools-inventory.md,scripts/verify_delivery.py,site/data/81-hardships-view.html,site/data/81-hardships.html,site/data/aesthetics.html,site/data/ai-dialogue.html,site/data/business-model.html,site/data/cave-estate.html,site/data/century-dialogue.html,site/data/chapter-stats.html,site/data/chapter-structure-graph.html,site/data/character-appearance.html,site/data/character-dynamic-network.html,site/data/character-presence-timeline.html,site/data/character-relationship-3d-view.html,site/data/character-relationship-3d.html,site/data/character-semantic-network.html,site/data/character-sentiment-arc.html,site/data/chart-design.html,site/data/cognitive-psychology.html,site/data/concept-device.html,site/data/counterfactual.html,site/data/criticism-history.html,site/data/cross-time-danmaku.html,site/data/cultural-misreading.html,site/data/customs-pass-route.html,site/data/data-explorer.html,site/data/deconstruction.html,site/data/dialogue-sentiment.html,site/data/ecology.html,site/data/emotional-heatmap.html,site/data/ethics-consumption.html,site/data/famous-time-travel.html,site/data/four-dimensional-research-network.html,site/data/four-heavenly-kings-artifacts.html,site/data/game-webnovel.html,site/data/global-pattern.html,site/data/glossary.html,site/data/graph-explorer.html,site/data/guanyin-six-roles-network.html,site/data/hardship-difficulty-heatmap.html,site/data/hardship-heatmap.html,site/data/heaven-power-network.html,site/data/intertextuality-network.html,site/data/journey-geo-3d.html,site/data/journey-geo-semiotics.html,site/data/journey-map-interactive.html,site/data/journey-route.html,site/data/journey-spacetime.html,site/data/jurisprudence.html,site/data/karma-reincarnation.html,site/data/language-style-radar.html,site/data/linguistics.html,site/data/magic-system.html,site/data/material-archaeology.html,site/data/mbti-evolution.html,site/data/methodology-matrix.html,site/data/ming-political-thought-comparison.html,site/data/monster-background.html,site/data/monster-capability-radar.html,site/data/monster-ecology-network.html,site/data/monster-female-network.html,site/data/monster-hierarchy-network.html,site/data/monster-sociology.html,site/data/monster-victims-network.html,site/data/music-structure.html,site/data/narrative-experiment.html,site/data/narrative-rhythm-curve.html,site/data/narratology-12d-network.html,site/data/narratology-16d-network.html,site/data/perf-canvas-rendering.html,site/data/philosophy.html,site/data/pilgrim-team-dynamic-network.html,site/data/pilgrim-team-psychology-arc.html,site/data/poetry-density.html,site/data/poetry-rhythm-analysis.html,site/data/power-resources.html,site/data/relationships.html,site/data/risk-project.html,site/data/search.html,site/data/six-senses-narratology-network.html,site/data/social-media.html,site/data/story-timeline.html,site/data/tag-cloud.html,site/data/text-evolution.html,site/data/text-search.html,site/data/theological-intervention-network.html,site/data/timeline.html,site/data/underworld-power-network.html,site/data/visual-art.html,site/data/workplace.html,site/data/wukong-tangseng-benchmark.html
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1286），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1287），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -751,59 +759,6 @@
 > - **④ 末笔格批处理 27 行**：首笔在位而末笔格遗留「—（待回填）」标记的行（W1169-W1227 区间）逐行锚定订正——多笔批填真实末笔 hash、单笔批标「末笔同首笔」·全部由 git 实算。
 > - **⑤ W1228 token 回补**：W1228 行回填时状态格 token「对抗审查已派发」被覆写冲掉（W1022 同形）⇒ 补回，对抗审查触发器重置（距 W1228）。教训：**回填在途行时必须把状态格 token 迁入已收官文本**（回写收官清单候选）。
 > - **⑥ 验证**：check_doc_sync 0 FAIL；preflight 对抗审查哨重置、无滞后告警；verify 全量核心绿；pytest 全量绿；lint_links 0 broken。
-> - **文件**：见 file-index。
-
-
-### W1228（2026-11-14）：对抗审查回批 + P-43-01 根修批（描述段 W 形态识别 + 五项 P2 同批修）
-
-**本批要点**（W1228 对抗审查回批 + P-43-01 根修批）：
-
-> - **① 对抗审查派发与判定**：触发器 20 批点名 ⇒ 按模板派发无上下文只读 subagent 审查 W1208-W1227 窗口。**判定：仓库整体健康·各批声明逐项实测全部属实·无一虚报·无 P0/P1**；发现 5 项 P2 与 10 项 P3。审查报告原文本地不入库·证据摘本段（模板收尾义务）。
-> - **② P2 五项同批全修**：
->   - P2-1 [archive_segments.py](scripts/archive_segments.py) 归档文件名大小写错名（`FILE-INDEX-ARCHIVE.md` vs tracked 实名小写——Windows 大小写不敏感掩盖 40+ 批·Linux fresh clone 收官链死）⇒ 常量对齐 tracked 实名 + docstring 修。
->   - P2-2 [preflight_check.py](scripts/preflight_check.py) `wnum_commit_index` 散文半角括号洞（`_RE_COMMIT_TAG` 取 subject 任意位置首个括号组·审查员实证真实命中 1 例）⇒ 括号组锚定 `type(scope):` 前缀 + 修锚定版捕获组含括号的自伤（`(w955)` 不匹配 `_RE_SCOPE_WNUM`）+ 跳过 `%h` 前缀。
->   - P2-3 跳号无痕：台账补 **W1213 让号行**（定位工作被 W1214 吸收·当时无留痕）与 **W1200 跳号行**（纯空号·预约集亦无）——W663 先例。
->   - P2-4 [audit-archive.ts](xiyouji-agent-web/server/compliance/audit-archive.ts) `purgeAuditArchiveBefore` 销毁留证两步无事务（DELETE 成功留证失败即破「销毁必留证」承诺）⇒ BEGIN/COMMIT 事务化 + 失败回滚不吞错；配对测试 fail 0（PG 例按设计 skip）。
->   - P2-5 [periodic-ops-checklist.md](docs/agent/periodic-ops-checklist.md) 到期日恒空 = 提醒机制空转 ⇒ 三行补「下次到期」（2026-12-14 / 2027-02-14 / 2027-05-14）。
-> - **③ P3 甄别留痕**：残留 worktree 已 prune+remove（W1211 CI 复现件）；预约文件 83 条陈旧 reserved 已批量清偿（仅留在途 W1228）；其余 P3（两门禁 iter_text_files 解码失败静默跳过/70 槽 IPv6 类名失准与 scheme-relative 未判红/71 槽 data-src 边界假阳/TEXT_EXTS 窄/reconcile-core 抽样不对称/W1211-W1212 行 hash 待回填/CRLF 6 件/容量退码优先级/porcelain CJK 计数）——甄别为低危边角·登记不动（改则各需专批·详见审查发现清单）。
-> - **④ P-43-01 根修（HANDOVER 四、待办唯一条·本批清账）**：`wnum_commit_index` 增**描述段开头 W 形态**（`type(scope)?: W#### 主题`——仓内既成惯例·W1209/W1210/W1226/W1227 实测命中）；精确线 = 描述段以 W 开头才算批次标签（散文提及不计·W1211 负样本语义保持）；同笔双形态同号去重。**实证**：全历史 772 批索引·W1209→dfff13ecf / W1210→a7ead9d17 识别成功。**验收口径修正**：原验收「W1209/W1210 两行 hash 由脚本反填」因两行已随 60 行窗迁入归档（归档追加式不改写为设计）⇒ 修正为「工具识别能力实证 + 正本滞后告警归零」——后者实测归零（正本无在途欠账行）。
-> - **⑤ 声明与实况不符项**：无（审查员原话「未发现声明 X·实测 Y 级不符」；两条边界情况——W1227 门禁绿在其收官环境为真·审查初跑见 31 槽 C5d 漂移系本批在途新增 5 测试的污染·HEAD 干净克隆复跑全绿——均如实记录）。
-> - **⑥ 顺带**：现势 bullet 判据对齐 W737 碑化口径（预留豁免 bullet 停在 W862 属历史遗迹·WARN 降 NOTE）；模板校准戳 W1022→W1228 并新增三个检查点（跨平台大小写/跳号让号留痕/周期到期日）。
-> - **⑦ 验证**：verify 全量核心绿；pytest 全量 1643 passed/4 skipped（新增 5 回归锁）；agent-web audit-archive 测试 fail 0；guardrails 过；lint_links 0 broken。
-> - **文件**：见 file-index。
-
-
-### W1227（2026-11-14）：Draft Release 处置批＝用户令「删」执行（T-1 弧线彻底闭环）
-
-**本批要点**（W1227 Draft Release 处置批·用户令「删」执行）：
-
-> - **① 定位**：W1226 T-1 批登记的遗留项「未发布 Draft Release『桌面版 v2.3.0』待用户单独裁决」——用户令「删」⇒ 本批执行并落记录。
-> - **② 动作**：`gh release delete v2.3.0 --yes`（未发布草稿·10 资产·引用 tagName 已随 T-1 成僵尸引用）；实测 `gh release list` **空**——GitHub Releases 面清零（下个桌面版发布由 workflow 打新 tag 重新产出全部资产·无不可再生数据）。
-> - **③ 手册同步**：T-1 执行结果行补记（§1.3 速览 + §6.1 执行结果）——**T-1 弧线彻底闭环·施工手册零遗留**。
-> - **④ 验证**：verify 全量核心绿；pytest 全量绿；lint_links 0 broken。
-> - **文件**：见 file-index。
-
-
-### W1226（2026-11-14）：远端 tag v2.3.0 清理批＝T-1 落地（用户令批准）
-
-**本批要点**（W1226 T-1 远端 tag v2.3.0 清理批·用户令批准）：
-
-> - **① 定位**：施工手册（W1221）§6.1 T-1「远端 tag v2.3.0 清理」——用户令「开始 T-1」= §6.3 批准门槛通过。至此**手册待执行项全部闭环**（T-2 于 W1223/W1224 落地·T-3 于 W1222 落地·T-1 本批）。
-> - **② 预检三事实**（证据 [scripts/output/_w1226_t1_tag_cleanup.json](scripts/output/_w1226_t1_tag_cleanup.json)）：(a) `git ls-remote --tags origin` **为空**——远端本就无任何 tag（W1209 历史改写时期已清）⇒「删远端 tag」无对象·如实留证不虚报动作；(b) 本地 tag `v2.3.0` 指向 **abd03999a**（hash 留证·回滚路径 = hash 重建）；(c) 引用面检索——workflows README 208 行示例命令实名引用（本批改 `vX.Y.Z` 占位）+ CHANGELOG/方案/手册历史记载（历史记录禁改）+ **未发布 Draft Release「详解西游记 · 桌面版 v2.3.0」**（2026-10-18·isDraft=true·10 资产）。
-> - **③ 动作与验收**：`git tag -d v2.3.0`（本地删除）；验收双过——`git tag` 为空 + `git ls-remote --tags origin` 为空。远端零动作（无对象）。
-> - **④ 遗留登记（待用户单独裁决）**：Draft Release 引 tagName `v2.3.0`——Draft 不创建远端 ref、不碍 T-1 验收；删除 Draft 超出 T-1 批准范围（§6.3 批准门槛表未覆盖）⇒ 如实登记。建议：删（tag 引用已成僵尸·10 资产均可由发布 workflow 重新产出）。
-> - **⑤ 验证**：verify 全量核心绿；pytest 全量绿；lint_links 0 broken。
-> - **文件**：见 file-index。
-
-
-### W1225（2026-11-14）：截图红警清偿批：scope 判据索引数据件归 skip + 批处理器仅认 HTML
-
-**本批要点**（W1225 截图红警清偿批）：
-
-> - **① 根因**：W1223 执行批 E 外置的 `site/data/search-index-zh.js` / `site/en/search-index-en.js` 被 [check_screenshot_scope.py](scripts/check_screenshot_scope.py) 的 `site/data` 前缀兜底判成 **targeted** ⇒ 截图工作流把它们当页面喂给 [batch_screenshots.js](scripts/batch_screenshots.js) ⇒ `page.goto` 原始 JS 文件 ⇒ `page.screenshot` 超时 30s ×4（两视口 ×两文件）⇒ PR #178 Screenshot Review 两轮红。
-> - **② 根修**：scope 判据增 `SEARCH_INDEX_DATA_FILES` ⇒ **skip**（纯数据载荷零视觉面·不进截图域）；自测增 3 例（ZH/EN skip + 组合免审）。
-> - **③ 兜底**：batch_screenshots.js `parseExtraPages` 仅认 `.html`——非 HTML 入参 `[skip]` 告警跳过不静默（防未来任何非页面件再进截图域）。
-> - **④ 验证**：scope 自测全过（含 3 新例）·node --check 过·单测 26 例过·verify 全量核心绿·pytest 1634 passed/4 skipped。
 > - **文件**：见 file-index。
 
 

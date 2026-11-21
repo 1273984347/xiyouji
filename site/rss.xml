@@ -6,6 +6,13 @@
     <description>一源多形 · 数字人文可视化解读《西游记》100 回——版本发布批次动态（W### 编号·详见 CHANGELOG）。</description>
     <language>zh-CN</language>
     <item>
+      <title>W1287 CI 侧教训机器化 - 工作树干净断言 + 本地仿真复现 CI 步骤序列</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1287</guid>
+      <pubDate>Sat, 21 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
       <title>W1286 图表内容层存量清偿 - 第82槽内容完备度 + 第83槽标签裁切重叠 + W1285遗留L-01/L-02</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1286</guid>
@@ -135,13 +142,6 @@
       <title>W1264 全站前端重设计 · 零参考重做（禁止借鉴 W1261/W1262 与全部在途工作）</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1264</guid>
-      <pubDate>Tue, 17 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1263 全站前端重新设计 · 需求反思与方案裁决材料 + v3 设计资产落仓（样板三族齐备·site/ 页面零改动）</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1263</guid>
       <pubDate>Tue, 17 Nov 2026 00:00:00 +0000</pubDate>
       <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
     </item>

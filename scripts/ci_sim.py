@@ -19,6 +19,7 @@ py -3 scripts/ci_sim.py                 # 对 HEAD 做关键门禁预演（默�
 py -3 scripts/ci_sim.py --ref <commit>  # 预演指定提交
 py -3 scripts/ci_sim.py --full          # 追加全量 verify_delivery --scope full（慢）
 py -3 scripts/ci_sim.py --keep          # 保留临时 worktree（调试用·需手动清理）
+py -3 scripts/ci_sim.py --ci-steps      # 先复现 CI 前置步骤序列（重生成 → 探针现跑 → 还原 → 干净断言）再跑门禁（W1287）
 ```
 
 ## 只读保证
@@ -59,12 +60,40 @@ GATES = [
     ("分析包同步(W1230接·P3#24)", "{py} scripts/package_analysis_sync.py --check"),
 ]
 
+# CI 前置步骤序列（W1287·复现 CI workflow 的真实动作顺序）
+CI_STEPS = [
+    ("CI: 重生成输出数据", "{py} scripts/run_all.py"),
+    ("CI: graphic 口径探针现跑", "{nodepath} node scripts/svg_text_contrast_probe.js --bg-mode graphic --scope all --out scripts/output/svg_text_contrast_graphic_report.json"),
+    ("CI: body 口径探针现跑", "{nodepath} node scripts/svg_text_contrast_probe.js --bg-mode body --scope data,en --out scripts/output/svg_text_contrast_report.json"),
+    ("CI: 还原探针产物", "git checkout -- scripts/output/svg_text_contrast_graphic_report.json scripts/output/svg_text_contrast_report.json"),
+]
+
+
+def _node_path() -> str:
+    """worktree 里没有 node_modules ⇒ 探针需借主仓的 playwright（NODE_PATH）。"""
+    nm = os.path.join(ROOT, "scripts", "node_modules")
+    if os.name == "nt":
+        return 'set "NODE_PATH=%s" &&' % nm
+    return "NODE_PATH=%s" % nm
+
 
 def _py() -> str:
     """解释器前缀：Windows 用 py -3（仓内约定），其余用 python3。"""
     if os.name == "nt":
         return "py -3"
     return "python3"
+
+
+def _assert_clean_worktree(wt: str) -> tuple[int, str]:
+    """CI 侧产物面断言：worktree 内有未提交/未还原的差异即红（W1287·E-308 机器化）。"""
+    # 内容级判定（git diff 已按 .gitattributes 做 EOL 归一）⇒ 行尾差异不误伤，
+    # 而「入库文件内容真被改动且未还原」判红（W1287·E-308 机器化）。
+    p = subprocess.run(["git", "-C", wt, "diff", "--name-only"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    dirty = [ln for ln in (p.stdout or "").splitlines() if ln.strip()]
+    if not dirty:
+        return 0, "入库文件内容无改动"
+    return 1, "入库文件内容被改动且未还原：%s" % " | ".join(dirty[:6])
 
 
 def _run(cmd: str, cwd: str) -> tuple[int, str]:
@@ -81,6 +110,8 @@ def main() -> int:
     ap.add_argument("--ref", default="HEAD", help="预演目标（默认 HEAD）")
     ap.add_argument("--full", action="store_true", help="追加全量 verify_delivery --scope full")
     ap.add_argument("--keep", action="store_true", help="保留临时 worktree（调试用）")
+    ap.add_argument("--ci-steps", action="store_true",
+                    help="先复现 CI 的前置步骤序列（重生成产物 → 探针现跑 → 还原 → 干净断言）再跑门禁（W1287）")
     args = ap.parse_args()
 
     tmp = tempfile.mkdtemp(prefix="ci_sim_")
@@ -88,7 +119,7 @@ def main() -> int:
     print("== CI 侧预演 ==")
     print("目标：%s    worktree：%s" % (args.ref, wt))
 
-    add = subprocess.run(["git", "-C", ROOT, "worktree", "add", "--detach", wt, args.ref],
+    add = subprocess.run(["git", "-c", "core.autocrlf=false", "-C", ROOT, "worktree", "add", "--detach", wt, args.ref],
                          capture_output=True, text=True, encoding="utf-8", errors="replace")
     if add.returncode != 0:
         print("建 worktree 失败：%s" % (add.stderr or add.stdout).strip())
@@ -98,11 +129,16 @@ def main() -> int:
     results = []
     try:
         gates = list(GATES)
+        if args.ci_steps:
+            gates = CI_STEPS + [("CI: 工作树干净断言", "__CLEAN__")] + gates
         if args.full:
             gates.append(("全量交付门禁", "{py} scripts/verify_delivery.py --scope full"))
         for label, tmpl in gates:
-            cmd = tmpl.format(py=_py(), root=wt)
-            rc, out = _run(cmd, wt)
+            if tmpl == "__CLEAN__":
+                rc, out = _assert_clean_worktree(wt)
+            else:
+                cmd = tmpl.format(py=_py(), root=wt, nodepath=_node_path())
+                rc, out = _run(cmd, wt)
             tail = ""
             for ln in reversed(out.strip().split("\n")):
                 if ln.strip():

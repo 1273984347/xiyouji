@@ -515,6 +515,22 @@ jobs:
       - name: Restore probe report artifacts (W1286·避免 CI 自身产物触发 C4-f)
         run: git checkout -- scripts/output/svg_text_contrast_graphic_report.json scripts/output/svg_text_contrast_report.json
 
+      # W1287：把「CI 自己改动了入库文件」变成**机器断言**（E-308 机器化·E-309）——
+      #   任何 CI 步骤（探针现跑 / 生成器 / 注入器）改动了入库文件而未还原 ⇒ 此处**当场红**；
+      #   不再等到门禁阶段以「漏 add」形态报出（症状离根因远·排查成本高）。
+      - name: Assert clean worktree before delivery gate (W1287·E-308 机器化)
+        run: |
+          # 内容级判定（git diff 已按 .gitattributes 做 EOL 归一）⇒ 行尾差异不误伤，
+          # 而「入库文件内容真被改动且未还原」当场红（E-308 类）。
+          dirty="$(git diff --name-only)"
+          if [ -n "$dirty" ]; then
+            echo "::error::入库文件内容被改动且未还原（git diff --name-only 非空）："
+            echo "$dirty"
+            echo "::error::处置：CI 现跑产物须 git checkout -- 还原；确定性产物（如 run_all 输出）若与入库不一致 ⇒ 入库产物已陈旧，须重生成并提交"
+            exit 1
+          fi
+          echo "入库文件内容无改动 OK"
+
       - name: Run verify_delivery.py
         run: python scripts/verify_delivery.py
 

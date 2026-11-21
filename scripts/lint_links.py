@@ -208,6 +208,38 @@ def split_local_url(raw_url):
     return path_part, urllib.parse.unquote(path_part), rest
 
 
+def _under_root(path: Path) -> bool:
+    """path 是否位于仓库根之下。"""
+    try:
+        return os.path.commonpath([str(path), str(ROOT)]) == str(ROOT)
+    except Exception:
+        return False
+
+
+def _fallback_to_repo_root(decoded: str):
+    """相对路径越出仓库根时，按仓库根回落解析（W1287·E-309 同族的「判据口径覆盖真实写法」）。
+
+    根因：撰写时从**子目录语境**复制的相对路径（如 CHANGELOG 历史段里的
+    ../../archive/docs/xxx.md）落到根级文件后，上跳层级多了一截 ⇒ 按当前文件
+    目录解析会落到**仓库之外** ⇒ 被判断链，而链接意图明明是仓库内文件。
+
+    口径：① 仅当解析结果**越出仓库根**时才尝试回落（正常相对路径不受影响）；
+    ② 回落 = 去掉多余的上跳层级后按仓库根解析，**命中才判有效**；
+    ③ 回落后仍不存在 ⇒ 维持判红（真断链不放过）。
+    """
+    parts = Path(decoded).parts
+    ups = 0
+    for part in parts:
+        if part == "..":
+            ups += 1
+        else:
+            break
+    if ups == 0 or len(parts) <= ups:
+        return None
+    cand = (ROOT / Path(*parts[ups:])).resolve(strict=False)
+    return cand if cand.exists() else None
+
+
 def check_internal(base_file, raw_url):
     """校验站内链接。返回 (ok, resolved_path, display)。"""
     url = raw_url.strip()
@@ -221,6 +253,10 @@ def check_internal(base_file, raw_url):
     except Exception:
         pass
     ok = target.exists()
+    if not ok and not _under_root(target):
+        alt = _fallback_to_repo_root(decoded)
+        if alt is not None:
+            return (True, alt, str(alt))
     return (ok, target, str(target))
 
 

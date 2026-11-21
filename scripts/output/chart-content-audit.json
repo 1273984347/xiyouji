@@ -1,7 +1,7 @@
 {
  "total_pages": 237,
  "chart_pages": 171,
- "charts": 716,
+ "charts": 721,
  "rows": [
   {
    "page": "404.html",
@@ -33,11 +33,11 @@
   {
    "page": "dashboard.html",
    "charts": 7,
-   "source_note": 1,
+   "source_note": 2,
    "insight": 29,
    "tooltip": 0,
    "legend": 12,
-   "text_len": 4420
+   "text_len": 4467
   },
   {
    "page": "dukou-engine.html",
@@ -64,7 +64,7 @@
    "insight": 7,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 2541
+   "text_len": 2533
   },
   {
    "page": "rum-viewer.html",
@@ -88,10 +88,10 @@
    "page": "data/81-hardships-view.html",
    "charts": 1,
    "source_note": 1,
-   "insight": 1,
-   "tooltip": 0,
-   "legend": 0,
-   "text_len": 769
+   "insight": 12,
+   "tooltip": 1,
+   "legend": 9,
+   "text_len": 1300
   },
   {
    "page": "data/81-hardships.html",
@@ -106,7 +106,7 @@
    "page": "data/aesthetics.html",
    "charts": 2,
    "source_note": 3,
-   "insight": 17,
+   "insight": 19,
    "tooltip": 14,
    "legend": 11,
    "text_len": 1405
@@ -151,19 +151,19 @@
    "page": "data/chapter-stats.html",
    "charts": 3,
    "source_note": 3,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 17,
    "legend": 0,
-   "text_len": 980
+   "text_len": 1438
   },
   {
    "page": "data/chapter-structure-graph.html",
    "charts": 3,
    "source_note": 1,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 20,
    "legend": 6,
-   "text_len": 1046
+   "text_len": 1519
   },
   {
    "page": "data/character-appearance.html",
@@ -205,10 +205,10 @@
    "page": "data/character-relationship-3d.html",
    "charts": 0,
    "source_note": 1,
-   "insight": 6,
-   "tooltip": 0,
+   "insight": 21,
+   "tooltip": 21,
    "legend": 0,
-   "text_len": 1192
+   "text_len": 1646
   },
   {
    "page": "data/character-semantic-network.html",
@@ -277,10 +277,10 @@
    "page": "data/cross-time-danmaku.html",
    "charts": 6,
    "source_note": 3,
-   "insight": 6,
+   "insight": 21,
    "tooltip": 11,
    "legend": 0,
-   "text_len": 1053
+   "text_len": 1682
   },
   {
    "page": "data/cultural-misreading.html",
@@ -304,17 +304,17 @@
    "page": "data/data-explorer.html",
    "charts": 1,
    "source_note": 1,
-   "insight": 1,
-   "tooltip": 0,
+   "insight": 15,
+   "tooltip": 5,
    "legend": 0,
-   "text_len": 706
+   "text_len": 1182
   },
   {
    "page": "data/deconstruction.html",
    "charts": 3,
    "source_note": 3,
    "insight": 19,
-   "tooltip": 14,
+   "tooltip": 15,
    "legend": 16,
    "text_len": 1494
   },
@@ -352,25 +352,25 @@
    "insight": 19,
    "tooltip": 2,
    "legend": 3,
-   "text_len": 1614
+   "text_len": 1879
   },
   {
    "page": "data/famous-time-travel.html",
    "charts": 2,
    "source_note": 3,
-   "insight": 4,
+   "insight": 18,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 1208
+   "text_len": 1710
   },
   {
    "page": "data/four-dimensional-research-network.html",
    "charts": 5,
    "source_note": 1,
-   "insight": 1,
-   "tooltip": 0,
+   "insight": 18,
+   "tooltip": 3,
    "legend": 9,
-   "text_len": 1581
+   "text_len": 2470
   },
   {
    "page": "data/four-heavenly-kings-artifacts.html",
@@ -384,7 +384,7 @@
   {
    "page": "data/game-webnovel.html",
    "charts": 5,
-   "source_note": 5,
+   "source_note": 8,
    "insight": 19,
    "tooltip": 3,
    "legend": 7,
@@ -396,7 +396,7 @@
    "source_note": 3,
    "insight": 17,
    "tooltip": 5,
-   "legend": 5,
+   "legend": 6,
    "text_len": 1309
   },
   {
@@ -410,12 +410,12 @@
   },
   {
    "page": "data/graph-explorer.html",
-   "charts": 4,
-   "source_note": 1,
-   "insight": 2,
+   "charts": 7,
+   "source_note": 2,
+   "insight": 17,
    "tooltip": 0,
    "legend": 4,
-   "text_len": 752
+   "text_len": 1707
   },
   {
    "page": "data/guanyin-six-roles-network.html",
@@ -457,37 +457,37 @@
    "page": "data/intertextuality-network.html",
    "charts": 5,
    "source_note": 2,
-   "insight": 6,
+   "insight": 20,
    "tooltip": 80,
    "legend": 34,
-   "text_len": 2501
+   "text_len": 3025
   },
   {
    "page": "data/journey-geo-3d.html",
    "charts": 0,
    "source_note": 1,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 987
+   "text_len": 1404
   },
   {
    "page": "data/journey-geo-semiotics.html",
    "charts": 1,
    "source_note": 3,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 3,
    "legend": 13,
-   "text_len": 1462
+   "text_len": 1888
   },
   {
    "page": "data/journey-map-interactive.html",
    "charts": 4,
    "source_note": 1,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 17,
    "legend": 0,
-   "text_len": 1084
+   "text_len": 1520
   },
   {
    "page": "data/journey-route.html",
@@ -514,7 +514,7 @@
    "insight": 33,
    "tooltip": 21,
    "legend": 29,
-   "text_len": 2831
+   "text_len": 2885
   },
   {
    "page": "data/karma-reincarnation.html",
@@ -529,10 +529,10 @@
    "page": "data/language-style-radar.html",
    "charts": 2,
    "source_note": 1,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 16,
    "legend": 6,
-   "text_len": 1016
+   "text_len": 1414
   },
   {
    "page": "data/linguistics.html",
@@ -610,10 +610,10 @@
    "page": "data/monster-ecology-network.html",
    "charts": 4,
    "source_note": 1,
-   "insight": 1,
+   "insight": 16,
    "tooltip": 0,
    "legend": 3,
-   "text_len": 2237
+   "text_len": 2718
   },
   {
    "page": "data/monster-female-network.html",
@@ -663,7 +663,7 @@
   {
    "page": "data/narrative-experiment.html",
    "charts": 2,
-   "source_note": 5,
+   "source_note": 9,
    "insight": 18,
    "tooltip": 2,
    "legend": 0,
@@ -673,28 +673,28 @@
    "page": "data/narrative-rhythm-curve.html",
    "charts": 4,
    "source_note": 1,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 17,
    "legend": 0,
-   "text_len": 1070
+   "text_len": 1485
   },
   {
    "page": "data/narratology-12d-network.html",
    "charts": 4,
    "source_note": 2,
-   "insight": 7,
+   "insight": 21,
    "tooltip": 65,
    "legend": 26,
-   "text_len": 2578
+   "text_len": 2992
   },
   {
    "page": "data/narratology-16d-network.html",
    "charts": 4,
    "source_note": 2,
-   "insight": 7,
+   "insight": 21,
    "tooltip": 67,
    "legend": 26,
-   "text_len": 2694
+   "text_len": 3143
   },
   {
    "page": "data/perf-canvas-rendering.html",
@@ -718,10 +718,10 @@
    "page": "data/pilgrim-team-dynamic-network.html",
    "charts": 2,
    "source_note": 1,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 2,
    "legend": 5,
-   "text_len": 2658
+   "text_len": 3202
   },
   {
    "page": "data/pilgrim-team-psychology-arc.html",
@@ -790,10 +790,10 @@
    "page": "data/six-senses-narratology-network.html",
    "charts": 4,
    "source_note": 2,
-   "insight": 5,
+   "insight": 19,
    "tooltip": 64,
    "legend": 26,
-   "text_len": 2105
+   "text_len": 2554
   },
   {
    "page": "data/social-media.html",
@@ -811,16 +811,16 @@
    "insight": 3,
    "tooltip": 1,
    "legend": 0,
-   "text_len": 1323
+   "text_len": 1409
   },
   {
    "page": "data/tag-cloud.html",
    "charts": 0,
    "source_note": 1,
-   "insight": 4,
+   "insight": 19,
    "tooltip": 15,
-   "legend": 0,
-   "text_len": 1013
+   "legend": 1,
+   "text_len": 1572
   },
   {
    "page": "data/text-evolution.html",
@@ -844,19 +844,19 @@
    "page": "data/theological-intervention-network.html",
    "charts": 5,
    "source_note": 1,
-   "insight": 1,
-   "tooltip": 0,
+   "insight": 16,
+   "tooltip": 1,
    "legend": 0,
-   "text_len": 1778
+   "text_len": 2342
   },
   {
    "page": "data/timeline.html",
    "charts": 17,
    "source_note": 3,
-   "insight": 1,
+   "insight": 15,
    "tooltip": 17,
    "legend": 1,
-   "text_len": 997
+   "text_len": 1438
   },
   {
    "page": "data/underworld-power-network.html",
@@ -879,7 +879,7 @@
   {
    "page": "data/workplace.html",
    "charts": 3,
-   "source_note": 4,
+   "source_note": 7,
    "insight": 18,
    "tooltip": 2,
    "legend": 0,
@@ -889,10 +889,10 @@
    "page": "data/wukong-tangseng-benchmark.html",
    "charts": 2,
    "source_note": 1,
-   "insight": 6,
+   "insight": 22,
    "tooltip": 3,
    "legend": 0,
-   "text_len": 1408
+   "text_len": 1933
   },
   {
    "page": "en/81-hardships-view.html",
@@ -910,7 +910,7 @@
    "insight": 15,
    "tooltip": 6,
    "legend": 10,
-   "text_len": 2099
+   "text_len": 2266
   },
   {
    "page": "en/academic-papers.html",
@@ -928,7 +928,7 @@
    "insight": 16,
    "tooltip": 16,
    "legend": 13,
-   "text_len": 2698
+   "text_len": 2858
   },
   {
    "page": "en/ai-dialogue.html",
@@ -964,7 +964,7 @@
    "insight": 16,
    "tooltip": 6,
    "legend": 20,
-   "text_len": 2095
+   "text_len": 2216
   },
   {
    "page": "en/century-dialogue.html",
@@ -979,19 +979,19 @@
    "page": "en/chapter-stats.html",
    "charts": 3,
    "source_note": 0,
-   "insight": 0,
+   "insight": 11,
    "tooltip": 17,
    "legend": 1,
-   "text_len": 1194
+   "text_len": 2518
   },
   {
    "page": "en/chapter-structure-graph.html",
    "charts": 3,
-   "source_note": 0,
-   "insight": 0,
+   "source_note": 1,
+   "insight": 11,
    "tooltip": 22,
    "legend": 7,
-   "text_len": 1515
+   "text_len": 2975
   },
   {
    "page": "en/chapters-map.html",
@@ -1009,7 +1009,7 @@
    "insight": 18,
    "tooltip": 19,
    "legend": 30,
-   "text_len": 1385
+   "text_len": 1542
   },
   {
    "page": "en/character-bailongma.html",
@@ -1036,7 +1036,7 @@
    "insight": 13,
    "tooltip": 4,
    "legend": 11,
-   "text_len": 4929
+   "text_len": 5170
   },
   {
    "page": "en/character-presence-timeline.html",
@@ -1045,7 +1045,7 @@
    "insight": 12,
    "tooltip": 2,
    "legend": 15,
-   "text_len": 3826
+   "text_len": 4120
   },
   {
    "page": "en/character-relationship-3d-view.html",
@@ -1059,11 +1059,11 @@
   {
    "page": "en/character-relationship-3d.html",
    "charts": 0,
-   "source_note": 0,
-   "insight": 0,
-   "tooltip": 2,
+   "source_note": 1,
+   "insight": 11,
+   "tooltip": 11,
    "legend": 1,
-   "text_len": 1270
+   "text_len": 2733
   },
   {
    "page": "en/character-semantic-network.html",
@@ -1072,7 +1072,7 @@
    "insight": 6,
    "tooltip": 13,
    "legend": 21,
-   "text_len": 5875
+   "text_len": 6155
   },
   {
    "page": "en/character-sentiment-arc.html",
@@ -1081,7 +1081,7 @@
    "insight": 8,
    "tooltip": 20,
    "legend": 40,
-   "text_len": 7045
+   "text_len": 7162
   },
   {
    "page": "en/character-shaseng.html",
@@ -1126,7 +1126,7 @@
    "insight": 38,
    "tooltip": 7,
    "legend": 6,
-   "text_len": 1826
+   "text_len": 1957
   },
   {
    "page": "en/cognitive-psychology.html",
@@ -1144,16 +1144,16 @@
    "insight": 20,
    "tooltip": 9,
    "legend": 2,
-   "text_len": 2727
+   "text_len": 2932
   },
   {
    "page": "en/counterfactual.html",
    "charts": 2,
    "source_note": 0,
    "insight": 19,
-   "tooltip": 2,
+   "tooltip": 9,
    "legend": 8,
-   "text_len": 1755
+   "text_len": 1882
   },
   {
    "page": "en/criticism-history.html",
@@ -1162,16 +1162,16 @@
    "insight": 21,
    "tooltip": 10,
    "legend": 10,
-   "text_len": 4653
+   "text_len": 4847
   },
   {
    "page": "en/cross-time-danmaku.html",
    "charts": 6,
    "source_note": 0,
-   "insight": 1,
+   "insight": 12,
    "tooltip": 13,
    "legend": 1,
-   "text_len": 1390
+   "text_len": 3121
   },
   {
    "page": "en/cultural-misreading.html",
@@ -1180,16 +1180,16 @@
    "insight": 16,
    "tooltip": 10,
    "legend": 28,
-   "text_len": 2226
+   "text_len": 2356
   },
   {
    "page": "en/customs-pass-route.html",
    "charts": 1,
    "source_note": 0,
    "insight": 9,
-   "tooltip": 0,
+   "tooltip": 4,
    "legend": 0,
-   "text_len": 4825
+   "text_len": 4838
   },
   {
    "page": "en/dashboard.html",
@@ -1214,9 +1214,9 @@
    "charts": 3,
    "source_note": 0,
    "insight": 16,
-   "tooltip": 17,
+   "tooltip": 18,
    "legend": 21,
-   "text_len": 2349
+   "text_len": 2469
   },
   {
    "page": "en/dialogue-sentiment.html",
@@ -1225,7 +1225,7 @@
    "insight": 20,
    "tooltip": 25,
    "legend": 42,
-   "text_len": 4475
+   "text_len": 4634
   },
   {
    "page": "en/dukou-engine.html",
@@ -1243,7 +1243,7 @@
    "insight": 41,
    "tooltip": 35,
    "legend": 9,
-   "text_len": 5413
+   "text_len": 5575
   },
   {
    "page": "en/emotional-heatmap.html",
@@ -1252,7 +1252,7 @@
    "insight": 18,
    "tooltip": 17,
    "legend": 2,
-   "text_len": 2986
+   "text_len": 3104
   },
   {
    "page": "en/essay-ai-era.html",
@@ -1585,25 +1585,25 @@
    "insight": 17,
    "tooltip": 4,
    "legend": 4,
-   "text_len": 2566
+   "text_len": 2938
   },
   {
    "page": "en/famous-time-travel.html",
    "charts": 2,
    "source_note": 0,
-   "insight": 1,
+   "insight": 12,
    "tooltip": 2,
    "legend": 1,
-   "text_len": 2102
+   "text_len": 4087
   },
   {
    "page": "en/four-dimensional-research-network.html",
    "charts": 5,
-   "source_note": 0,
-   "insight": 0,
+   "source_note": 1,
+   "insight": 11,
    "tooltip": 3,
    "legend": 11,
-   "text_len": 2765
+   "text_len": 4284
   },
   {
    "page": "en/four-heavenly-kings-artifacts.html",
@@ -1621,7 +1621,7 @@
    "insight": 18,
    "tooltip": 5,
    "legend": 8,
-   "text_len": 2596
+   "text_len": 2732
   },
   {
    "page": "en/global-pattern.html",
@@ -1630,16 +1630,16 @@
    "insight": 16,
    "tooltip": 7,
    "legend": 6,
-   "text_len": 2209
+   "text_len": 2688
   },
   {
    "page": "en/graph-explorer.html",
-   "charts": 4,
+   "charts": 6,
    "source_note": 0,
-   "insight": 0,
-   "tooltip": 2,
+   "insight": 1,
+   "tooltip": 3,
    "legend": 5,
-   "text_len": 840
+   "text_len": 1729
   },
   {
    "page": "en/guanyin-six-roles-network.html",
@@ -1666,7 +1666,7 @@
    "insight": 12,
    "tooltip": 5,
    "legend": 11,
-   "text_len": 4439
+   "text_len": 4718
   },
   {
    "page": "en/hardship-heatmap.html",
@@ -1675,7 +1675,7 @@
    "insight": 12,
    "tooltip": 4,
    "legend": 6,
-   "text_len": 4755
+   "text_len": 5034
   },
   {
    "page": "en/heaven-power-network.html",
@@ -1699,28 +1699,28 @@
    "page": "en/intertextuality-network.html",
    "charts": 5,
    "source_note": 0,
-   "insight": 4,
+   "insight": 16,
    "tooltip": 82,
    "legend": 41,
-   "text_len": 5764
+   "text_len": 7339
   },
   {
    "page": "en/journey-geo-semiotics.html",
    "charts": 1,
    "source_note": 0,
-   "insight": 0,
+   "insight": 1,
    "tooltip": 5,
    "legend": 14,
-   "text_len": 2315
+   "text_len": 3301
   },
   {
    "page": "en/journey-map-interactive.html",
    "charts": 4,
    "source_note": 0,
-   "insight": 0,
+   "insight": 1,
    "tooltip": 19,
    "legend": 1,
-   "text_len": 1656
+   "text_len": 2725
   },
   {
    "page": "en/journey-route.html",
@@ -1729,7 +1729,7 @@
    "insight": 20,
    "tooltip": 4,
    "legend": 17,
-   "text_len": 1737
+   "text_len": 1769
   },
   {
    "page": "en/journey-spacetime.html",
@@ -1738,7 +1738,7 @@
    "insight": 19,
    "tooltip": 4,
    "legend": 11,
-   "text_len": 4556
+   "text_len": 4880
   },
   {
    "page": "en/jurisprudence.html",
@@ -1747,7 +1747,7 @@
    "insight": 32,
    "tooltip": 23,
    "legend": 30,
-   "text_len": 5935
+   "text_len": 6253
   },
   {
    "page": "en/karma-reincarnation.html",
@@ -1762,10 +1762,10 @@
    "page": "en/language-style-radar.html",
    "charts": 2,
    "source_note": 0,
-   "insight": 0,
+   "insight": 1,
    "tooltip": 19,
    "legend": 7,
-   "text_len": 1545
+   "text_len": 2697
   },
   {
    "page": "en/linguistics.html",
@@ -1783,7 +1783,7 @@
    "insight": 17,
    "tooltip": 2,
    "legend": 12,
-   "text_len": 2891
+   "text_len": 3060
   },
   {
    "page": "en/material-archaeology.html",
@@ -1792,7 +1792,7 @@
    "insight": 42,
    "tooltip": 39,
    "legend": 46,
-   "text_len": 3573
+   "text_len": 3731
   },
   {
    "page": "en/mbti-evolution.html",
@@ -1801,7 +1801,7 @@
    "insight": 13,
    "tooltip": 4,
    "legend": 31,
-   "text_len": 2027
+   "text_len": 2306
   },
   {
    "page": "en/methodology-matrix.html",
@@ -1810,7 +1810,7 @@
    "insight": 56,
    "tooltip": 5,
    "legend": 16,
-   "text_len": 2512
+   "text_len": 2612
   },
   {
    "page": "en/methodology.html",
@@ -1828,16 +1828,16 @@
    "insight": 7,
    "tooltip": 5,
    "legend": 28,
-   "text_len": 6125
+   "text_len": 6320
   },
   {
    "page": "en/monster-background.html",
    "charts": 3,
    "source_note": 0,
-   "insight": 28,
+   "insight": 29,
    "tooltip": 16,
    "legend": 13,
-   "text_len": 3455
+   "text_len": 3771
   },
   {
    "page": "en/monster-capability-radar.html",
@@ -1846,16 +1846,16 @@
    "insight": 5,
    "tooltip": 4,
    "legend": 7,
-   "text_len": 5569
+   "text_len": 5975
   },
   {
    "page": "en/monster-ecology-network.html",
    "charts": 4,
    "source_note": 0,
-   "insight": 0,
+   "insight": 1,
    "tooltip": 2,
    "legend": 4,
-   "text_len": 4596
+   "text_len": 5872
   },
   {
    "page": "en/monster-female-network.html",
@@ -1900,7 +1900,7 @@
    "insight": 16,
    "tooltip": 14,
    "legend": 18,
-   "text_len": 2218
+   "text_len": 2394
   },
   {
    "page": "en/narrative-experiment.html",
@@ -1909,34 +1909,34 @@
    "insight": 17,
    "tooltip": 4,
    "legend": 1,
-   "text_len": 3166
+   "text_len": 3310
   },
   {
    "page": "en/narrative-rhythm-curve.html",
    "charts": 4,
    "source_note": 0,
-   "insight": 0,
+   "insight": 1,
    "tooltip": 19,
    "legend": 1,
-   "text_len": 1559
+   "text_len": 2691
   },
   {
    "page": "en/narratology-12d-network.html",
    "charts": 4,
    "source_note": 0,
-   "insight": 4,
+   "insight": 16,
    "tooltip": 67,
    "legend": 31,
-   "text_len": 6026
+   "text_len": 7151
   },
   {
    "page": "en/narratology-16d-network.html",
    "charts": 4,
    "source_note": 0,
-   "insight": 4,
+   "insight": 16,
    "tooltip": 69,
    "legend": 27,
-   "text_len": 6644
+   "text_len": 7933
   },
   {
    "page": "en/perf-canvas-rendering.html",
@@ -1945,7 +1945,7 @@
    "insight": 16,
    "tooltip": 19,
    "legend": 1,
-   "text_len": 5164
+   "text_len": 5499
   },
   {
    "page": "en/philosophy.html",
@@ -1960,10 +1960,10 @@
    "page": "en/pilgrim-team-dynamic-network.html",
    "charts": 2,
    "source_note": 0,
-   "insight": 0,
+   "insight": 1,
    "tooltip": 4,
    "legend": 6,
-   "text_len": 5806
+   "text_len": 7092
   },
   {
    "page": "en/pilgrim-team-psychology-arc.html",
@@ -1972,7 +1972,7 @@
    "insight": 13,
    "tooltip": 4,
    "legend": 20,
-   "text_len": 6705
+   "text_len": 7090
   },
   {
    "page": "en/poetry-rhythm-analysis.html",
@@ -1981,7 +1981,7 @@
    "insight": 6,
    "tooltip": 4,
    "legend": 19,
-   "text_len": 6256
+   "text_len": 6629
   },
   {
    "page": "en/power-resources.html",
@@ -2008,7 +2008,7 @@
    "insight": 53,
    "tooltip": 19,
    "legend": 1,
-   "text_len": 12749
+   "text_len": 12891
   },
   {
    "page": "en/search.html",
@@ -2032,10 +2032,10 @@
    "page": "en/six-senses-narratology-network.html",
    "charts": 4,
    "source_note": 0,
-   "insight": 4,
+   "insight": 16,
    "tooltip": 66,
    "legend": 31,
-   "text_len": 4354
+   "text_len": 5446
   },
   {
    "page": "en/social-media.html",
@@ -2044,16 +2044,16 @@
    "insight": 19,
    "tooltip": 4,
    "legend": 15,
-   "text_len": 2033
+   "text_len": 2146
   },
   {
    "page": "en/tag-cloud.html",
    "charts": 0,
    "source_note": 0,
-   "insight": 0,
-   "tooltip": 17,
+   "insight": 1,
+   "tooltip": 18,
    "legend": 1,
-   "text_len": 1171
+   "text_len": 2206
   },
   {
    "page": "en/text-evolution.html",
@@ -2062,7 +2062,7 @@
    "insight": 16,
    "tooltip": 3,
    "legend": 23,
-   "text_len": 2447
+   "text_len": 2622
   },
   {
    "page": "en/text-search.html",
@@ -2077,19 +2077,19 @@
    "page": "en/theological-intervention-network.html",
    "charts": 5,
    "source_note": 0,
-   "insight": 0,
-   "tooltip": 2,
+   "insight": 1,
+   "tooltip": 3,
    "legend": 1,
-   "text_len": 3678
+   "text_len": 5180
   },
   {
    "page": "en/timeline.html",
    "charts": 17,
    "source_note": 0,
-   "insight": 0,
+   "insight": 3,
    "tooltip": 19,
    "legend": 5,
-   "text_len": 1332
+   "text_len": 2347
   },
   {
    "page": "en/tribulations.html",
@@ -2116,7 +2116,7 @@
    "insight": 18,
    "tooltip": 5,
    "legend": 1,
-   "text_len": 2761
+   "text_len": 2866
   },
   {
    "page": "en/visualizations.html",
@@ -2134,7 +2134,7 @@
    "insight": 17,
    "tooltip": 4,
    "legend": 1,
-   "text_len": 2265
+   "text_len": 2434
   }
  ]
 }
