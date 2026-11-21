@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（136）
+## 文件（137）
 
 ### Python 脚本
 
@@ -19,6 +19,7 @@
 - `test_agents_tail_anchor.py`
 - `test_archive_health.py`
 - `test_archive_segments.py`
+- `test_archive_segments_plan_scope.py`
 - `test_audit_trigger.py`
 - `test_backlog_review.py`
 - `test_batch_cascade_status_wnum.py`

@@ -84,6 +84,18 @@ def plan(src_text, re_seg, keep):
         return None, []  # 未超窗 → 无段可迁（非失败）
     cut = hits[keep][1]
     moved_ws = [w for w, _ in hits[keep:]]
+    # W1292 根修：moved_ws 必须与**实际迁出块**同源（口径不一致 ⇒ 断言恒触发）。
+    # 病根（实测）：CHANGELOG 的「末尾文件级块」（`# 更新日志` H1 + 阅读契约 + Unreleased +
+    # 编号规则行）会**沉在段区中间**（实测 H1 在行 522，其下仍挂 W1248/W1247/W1246 三段·
+    # 起点 96878/97683/98560 均 > tail_start 96869）⇒ 迁出块止于 tail_start
+    # （split_tail_block）⇒ 实际迁出段 = 落在 [cut, tail_start) 的段（实测 4 段）；
+    # 而旧实现按 hits[keep:] 计 ⇒ **段表多算**（实测 7 vs 4）
+    # ⇒ `assert len(moved_in_block) == len(moved_ws)` 在该边界必然触发
+    # （分段迁 17 段成功、第二步 7 段仍失败 ⇒ 不是规模问题，是口径不一致）。
+    # 修法：moved_ws 只计**实际落在迁出区间内**的段 ⇒ 与 moved_in_block 同源 ⇒ 恒等。
+    _tail = _tail_block_start(src_text)
+    if _tail is not None and _tail > cut:
+        moved_ws = [w for w, s0 in hits[keep:] if s0 < _tail]
     return cut, moved_ws
 
 

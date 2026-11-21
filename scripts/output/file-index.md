@@ -1,3 +1,38 @@
+## W1292 遗留清偿批：归档工具段表口径根修 + 台账 hash 回填 + 两面下界待裁决（2026-11-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/archive_segments.py | W1292 | plan() 段表口径根修（moved_ws 与实际迁出块同源） |
+| tests/unit/test_archive_segments_plan_scope.py | W1292 | 新增回归锁 3 例（末尾块沉底 / 段表同源 / 常规形态不回归） |
+| docs/11-方案报告/计划方案/T125-任务计划执行与经验沉淀报告-2026-11-22.md | W1292 | T125 报告落盘 |
+| docs/11-方案报告/README.md | W1292 | 报告索引登记（§六 140→141 件） |
+| docs/00-导读/W批次编号对账表.md | W1292 | W1291 hash 回填（df8bab1c9）+ W1292 认领行 + 收官回填 |
+| CHANGELOG.md | W1292 | 本批版段（收官链写入） |
+| HANDOVER.md | W1292 | 本批概要与遗留登记 |
+| README.md | W1292 | 版本面级联（收官链写入） |
+| STRUCTURE.md | W1292 | 版本面级联（收官链写入） |
+| CITATION.cff | W1292 | 版本面级联（收官链写入） |
+| site/index.html | W1292 | 版本脚注联动（级联产物） |
+| site/dukou-engine.html | W1292 | 版本脚注联动（级联产物） |
+| site/data/tag-cloud.html | W1292 | 版本脚注联动（级联产物） |
+| site/data/cross-time-danmaku.html | W1292 | 版本脚注联动（级联产物） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1292 | 归档层只追加（腾窗迁出段） |
+| archive/docs/AGENTS-ARCHIVE.md | W1292 | AGENTS 历史段归档（级联迁出） |
+| scripts/output/file-index.md | W1292 | file-index 新增 W1292 段 |
+| scripts/output/stats.json | W1292 | 统计计数链刷新 |
+| scripts/output/stats-index.md | W1292 | 统计索引刷新 |
+| scripts/output/stats-changelog.json | W1292 | 统计变更史追加 |
+| docs/INDEX.md | W1292 | 目录件重建（收官链 refresh/index） |
+| scripts/output/INDEX.md | W1292 | 目录件重建（收官链 refresh） |
+| scripts/output/README.md | W1292 | 目录件重建（收官链 refresh） |
+| scripts/output/tools-inventory.md | W1292 | 工具清单刷新（收官链 refresh） |
+| site/data/search-index-zh.js | W1292 | 搜索索引重建（收官链 index） |
+| site/en/search-index-en.js | W1292 | 搜索索引重建（收官链 index） |
+| site/sitemap.xml | W1292 | sitemap 重建（收官链 index） |
+| .github/workflows/README.md | W1292 | 版本面级联（收官链写入） |
+| scripts/output/_w1292_spec.json | W1292 | 本批 spec |
+| scripts/output/_cascade_files_W1292.txt | W1292 | 级联件清单（收官链 cascade） |
+
 ## W1291 治理面追平 + 复盘/豁免清偿批（2026-11-21）
 
 | 文件 | W | 说明 |
