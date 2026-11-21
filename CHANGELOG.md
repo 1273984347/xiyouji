@@ -1,3 +1,11 @@
+### W1296（2026-11-22）：建立遗留总账 + 欠账根因三分类 + 清零批立项
+
+> - **来源**：用户 2026-11-22 追问「**继续做，为什么每次都要遗留？**」⇒ 立项 W1296（遗留总账建立 + 清零批立项批）。
+> - **执行**：① **欠账取证与根因三分类**——遗留散在四个面（治理数字 / 工具 / CI / 坑表）且每批只吃 1-2 个面 ⇒ **队列滚动**且全局剩余不可见；逐项判定「是否每批重新产生」⇒ **① 流水线自产**（收官链版本面推进每批改页脚 ⇒ 探针报告 + 渲染档案每批必过期 ⇒ 每批被第 80/82 槽红拦一次·W1292→W1295 连续四批实证 ⇒ **不改造收官链就永远有**）**② 物理约束**（提交内容含自身 hash ⇒ 同笔内写不对自己的 hash ⇒ 台账 hash 每批必然欠一笔回填·E-311 ⇒ **不可消除·只能自动化**）**③ 一次性欠账**（N1–N5 / 归档工具段表口径 / CHANGELOG 结构散落 / 快档缺档 / 归档体积 ⇒ W1291–W1295 已分别清偿）；② **建立遗留总账**（新建 `docs/00-导读/遗留总账.md`）——全仓未清偿项**唯一可见账本**（未清偿含归因与计划批次 / 已清偿含机器证据 / 清零承诺口径 / 维护纪律四条）；③ **L-01 治本落点定稿**（读 `scripts/batch_closeout.py` 的 `STEPS` L27–44 实证）——刷新步插在 **versions 之后**（页脚定稿后）、**最后一次 add 之后**（产物入暂存）·该步自带 add ⇒ 之后入库产物必然新鲜 ⇒ **陈旧类红灯从根上消失**；④ **L-03 自动化落点定稿**——台账 hash 回填由「下批第一动作的人工纪律」改为**收官链自动回填上批 hash**（自指不可知 ⇒ 仍需下一笔·但由机器执行）；⑤ 报告 T129 落盘 + README §六 登记（144→145 件）。
+> - **验证**：欠账取证逐项判定（是否每批重新产生）+ `batch_closeout.STEPS` 行级实证落点；总账文件落盘（含未清偿 6 项 / 已清偿 10 项含机器证据 / 清零承诺 / 维护纪律）；台账 W1296 认领行已加；两面下界仍 **W1253 ✓**；收官链零跳过完成 + 全量门禁 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
+> - **状态**：**把「为什么每批都有遗留」从模糊感受变成可核对的三类归因 + 一个仓内总账 + 一个清零承诺**——真正需要「一直修」的只有一类**流水线自产**（收官链固化刷新）与一类**物理必然**（hash 自指·只能自动化）；其余一次性欠账已在 W1291–W1295 清偿完毕；**下一批（W1297·清零批）按总账一次做完 L-01~L-06** ⇒ 清零后常态只剩 L-03 一条机器动作。
+> - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/INDEX.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T129-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1296.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1296_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml
+
 ### W1295（2026-11-22）：探针两口径在 CI 内并行化
 
 > - **来源**：用户 2026-11-22 引用 W1294 遗留清单并指示「**现在做**」⇒ 立项 W1295（CI 提速批）。
@@ -497,7 +505,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1295），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1296），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
