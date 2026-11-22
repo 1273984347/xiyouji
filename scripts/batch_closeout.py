@@ -655,7 +655,110 @@ def _run_refresh_artifacts(dry=False):
     return True
 
 
+
+def _run_backfill_prev_hash(dry=False):
+    """自动回填台账「已收官但 hash 列空缺」的行（W1298·L-03）。
+
+    背景（物理约束·不可消除）：提交内容含自身 hash ⇒ 同笔内写不对自己的 hash
+    ⇒ 台账 hash 列**每批必然欠一笔回填**（E-311 纪律：hash 由下一批的第一动作回填）⇒
+    此前靠**人工**记着做 ⇒ 常态化漏 ⇒ 本步把它**机器化**：收官链开头自动回填。
+
+    取值口径：hash 列语义 = **该批最早一笔**（首笔）⇒ 用 `git log --reverse` 取首个批次标签提交。
+    状态列**不动**（只用 --hash，不传 --status）⇒ 详细终态结论不丢（W1289 教训）。
+    """
+    import re as _re
+    import subprocess as _sp
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    ledger = os.path.join(root, "docs", "00-导读", "W批次编号对账表.md")
+    if not os.path.exists(ledger):
+        print("[backfill-prev-hash] 台账不存在 ⇒ 跳过")
+        return True
+    with open(ledger, encoding="utf-8", newline="") as fh:
+        lines = fh.read().split("\n")
+    try:
+        gl = _sp.run(["git", "-C", root, "log", "--all", "--reverse", "--format=%h %s"],
+                     capture_output=True, text=True, encoding="utf-8", errors="replace")
+        subjects = gl.stdout.splitlines()
+    except Exception as exc:  # noqa: BLE001
+        print("[backfill-prev-hash] git 读取失败 ⇒ 跳过（%r）" % exc)
+        return True
+    _pat = _re.compile(r"^(?:[0-9a-f]{7,12}\s+)?[a-z0-9._-]+\(([^)]*)\):", _re.I)
+    _pat2 = _re.compile(r"^(?:[0-9a-f]{7,12}\s+)?[a-z0-9._-]+(?:\([^)]*\))?:\s*w(\d{3,4})\b", _re.I)
+    by_w = {}
+    for line in subjects:
+        w = None
+        m = _pat.match(line)
+        if m:
+            for part in m.group(1).split(","):
+                tok = part.strip()
+                if _re.match(r"^w\d{3,4}$", tok, _re.I):
+                    w = int(tok[1:])
+                    break
+        if w is None:
+            m2 = _pat2.match(line)
+            if m2:
+                w = int(m2.group(1))
+        if w is not None and w not in by_w:
+            by_w[w] = line.split(" ", 1)[0]
+    todo = []
+    for line in lines:
+        m = _re.match(r"^\|\s*W(\d{3,4})\s*\|", line)
+        if not m:
+            continue
+        w = int(m.group(1))
+        if w not in by_w:
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        idx = None
+        closed = False
+        for i, c in enumerate(cells):
+            if _re.match(r"^(?:\*\*)?(?:已收官|已闭环|已合并)", c):
+                idx = i
+                closed = True
+                break
+            if _re.match(r"^在途", c):
+                # W1298：状态列滞后（该批已推提交但状态列未翻「已收官」）⇒ 同样纳入回填面
+                #   （hash 是机械事实）⇒ 但**不自动翻状态列**（避免把真未完成的批次标成已收官）
+                #   ⇒ 仅打印 WARN 提示人工翻状态。
+                idx = i
+                closed = False
+                break
+        if idx is None:
+            continue
+        h_idx = idx - 2
+        if h_idx < 0 or h_idx >= len(cells):
+            continue
+        h = cells[h_idx]
+        if h and not (h.startswith("—") or h.startswith("-") or "待回填" in h or h in ("—", "")):
+            continue
+        # 内容锚点复核：hash 列应是短 hex / 占位形态 ⇒ 否则列定位可能错位（同表多形态·防误写列）
+        if not (_re.match(r"^[0-9a-f]{7,12}$", h) or h.startswith("—") or h.startswith("-")
+                or "待回填" in h or h == ""):
+            print("[backfill-prev-hash] WARN W%d 的 hash 列形态异常（%r）⇒ 跳过（防列错位）" % (w, h))
+            continue
+        todo.append((w, by_w[w], closed))
+    if not todo:
+        print("[backfill-prev-hash] 无需回填（无「已收官 + hash 空缺」行）")
+        return True
+    for w, sha, closed in todo:
+        if dry:
+            print("[backfill-prev-hash] dry-run ⇒ 跳过 W%d（%s）" % (w, sha))
+            continue
+        if not closed:
+            print("[backfill-prev-hash] WARN W%d 状态列仍非「已收官」⇒ 已回填 hash（%s）但状态列须人工翻"
+                  % (w, sha))
+        print("[backfill-prev-hash] 回填 W%d ⇒ %s" % (w, sha))
+        _sp.run([sys.executable, os.path.join(root, "scripts", "ledger_backfill.py"),
+                 "--w", str(w), "--hash", sha], cwd=root)
+    return True
+
+
 def _run_content_stage(a, batch):
+    # W1298（L-03）：自动回填台账「已收官但 hash 空缺」的行——提交含自身 hash ⇒ 同笔内写不对
+    #   自己的 hash ⇒ **每批必然欠一笔回填**（E-311 纪律）⇒ 此前靠人工记着做 ⇒ 常态化漏
+    #   ⇒ 此处机器化（只用 --hash·不动状态列 ⇒ 终态结论不丢·W1289 教训）。
+    if not _run_backfill_prev_hash(dry=getattr(a, "dry_run", False)):
+        return False
     """内容生成段：refresh -> stats -> versions -> index（W1117 抽函数·降 main 复杂度）。
 
     顺序要点（W1117 实测修）：**index 必须在 versions 之后**——版本面推进会改

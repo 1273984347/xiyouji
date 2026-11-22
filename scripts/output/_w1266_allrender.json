@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "f8e18e318915",
+      "sha": "834e446c3dc5",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "b3b6edd04d9d",
+      "sha": "5b9565c1e095",
       "static": {
         "svg": false,
         "cls": true,
@@ -5960,7 +5960,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
       "svgKinds": [
         {
           "cls": "",
@@ -5968,9 +5968,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 30,
+          "texts": 29,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 30"
+          "basis": "1100x480·图元 13·文本 29"
         },
         {
           "cls": "",
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "c266596f8e78",
+      "sha": "1f3704d5ee8f",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "04a5e54ec43b",
+      "sha": "47b75ec6a65e",
       "static": {
         "svg": true,
         "cls": false,
@@ -6736,7 +6736,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 864,
+      "consoleErrors": 870,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -7565,11 +7565,11 @@
           "cls": "string-svg",
           "id": "stringSvg",
           "w": 1022,
-          "h": 1272,
+          "h": 1290,
           "marks": 9,
           "texts": 0,
           "kind": "chart",
-          "basis": "1022x1272·图元 9·文本 0"
+          "basis": "1022x1290·图元 9·文本 0"
         },
         {
           "cls": "ic-moon",
@@ -7586,7 +7586,7 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 17,
+      "consoleErrors": 15,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
@@ -8347,9 +8347,9 @@
           "w": 1002,
           "h": 620,
           "marks": 24,
-          "texts": 22,
+          "texts": 21,
           "kind": "chart",
-          "basis": "1002x620·图元 24·文本 22·命中图表词表"
+          "basis": "1002x620·图元 24·文本 21·命中图表词表"
         },
         {
           "cls": "",

@@ -1,6 +1,7 @@
 import io
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -96,13 +97,53 @@ def test_collect_paths_uses_spec_rows_and_extras(tmp_path):
     assert bc.collect_paths(str(spec), ['c.py']) == ['a.py', 'b.py', 'c.py']
 
 
+def _code_string_text(src):
+    """返回源码中**非 docstring** 的字符串字面量文本（AST 口径）。
+
+    W1298：判「禁全量暂存」时必须排除**说明性文本**（docstring 里常引用反例
+    如「禁 git add -A」）⇒ 否则判据会误伤自己的说明 ⇒ 口径收为「只看真实代码里的字符串」。
+    """
+    import ast
+    tree = ast.parse(src)
+    docs = set()
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.Module, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            body = getattr(node, 'body', None)
+            if body and isinstance(body[0], ast.Expr) and isinstance(body[0].value, ast.Constant) \
+                    and isinstance(body[0].value.value, str):
+                docs.add(id(body[0].value))
+    return "\n".join(n.value for n in ast.walk(tree)
+                     if isinstance(n, ast.Constant) and isinstance(n.value, str) and id(n) not in docs)
+
+
 def test_source_has_no_git_add_all():
-    """防代提承诺的行为锁：脚本内不得出现全量暂存参数（'-A' / '--all' 字符串字面量）。"""
+    """防代提承诺的行为锁：脚本内不得出现**全量暂存**（git add -A / git add --all）。
+
+    W1298 订正（原口径过宽·两处误伤面）：
+      ① 旧版用**裸字面量**代理「无全量暂存」⇒ 把与 git 无关的同名参数
+         （_w1266_render_legend.py --all·W1297 刷新步引入）也判红；
+      ② 改形态锚定后仍误伤 **docstring 里的反例引用**（collect_paths 的说明文字
+         「禁 git add -A」）⇒ 口径再收一层：**AST 排除 docstring**，只看真实代码里的字符串。
+
+    判据强度未降：真实代码里出现 git add --all / git add -A（命令文本形态或参数数组形态）
+    仍一律判红 ⇒ 防代提承诺守住。
+    """
     src = open(bc.__file__, encoding='utf-8').read()
     assert "'-A'" not in src
     assert '"-A"' not in src
-    assert "'--all'" not in src
-    assert '"--all"' not in src
+    code = _code_string_text(src)
+    # 形态 1：命令文本形态（run("git add --all")）
+    assert not re.search(r'git\s+add\b[^\n]*?(-A|--all)\b', code), '源码出现全量暂存命令'
+    # 形态 2：参数数组形态（["git", "add", "--all"]）
+    assert not re.search(r'["\']add["\']\s*,\s*["\'](-A|--all)["\']', code), '源码出现全量暂存参数数组'
+
+
+def test_no_git_add_all_guard_has_negative_sample():
+    """判据自证：构造含全量暂存的假源码 ⇒ 判据必须命中（防「永不判红」的假绿）。"""
+    fake_arr = 'cmd = ["git", "add", "--all"]\n'
+    assert re.search(r'["\']add["\']\s*,\s*["\'](-A|--all)["\']', fake_arr)
+    fake_txt = 'run("git add --all")\n'
+    assert re.search(r'git\s+add\b[^\n]*?(-A|--all)\b', fake_txt)
 
 
 def test_main_executes_steps_in_declared_order(monkeypatch):
@@ -128,6 +169,10 @@ def test_main_executes_steps_in_declared_order(monkeypatch):
     monkeypatch.setattr(bc, 'snapshot_index', lambda: ['x'])
     monkeypatch.setattr(bc, 'precheck_ledger', lambda *a, **k: (True, []))
     monkeypatch.setattr(bc, 'selfref_precheck', lambda: (True, ['通过']))
+    # W1298：刷新步（L-01 治本·W1297 引入）会真调 node+playwright 采集器 ⇒ 单测环境
+    #   （CI 单测 job 未装 playwright ⇒ 报 "Cannot find module 'playwright'"）必然 rc=1。
+    #   单测验的是**步骤顺序**不验采集 ⇒ 此处 mock 掉刷新步（生产链仍 fail-closed）。
+    monkeypatch.setattr(bc, '_run_refresh_artifacts', lambda **k: True)
 
     rc = bc.main(['--batch', 'W9999', '--paths', 'README.md'])
     assert rc == 0
@@ -182,6 +227,8 @@ def test_pycompile_step_runs_after_add(monkeypatch):
     monkeypatch.setattr(bc, 'precheck_ledger', lambda *a, **k: (True, []))
     monkeypatch.setattr(bc, 'selfref_precheck', lambda: (True, ['通过']))
     monkeypatch.setattr(bc, '_run_pycompile', lambda: calls.append('pycompile') or True)
+    # W1298：同 test_main_executes_steps_in_declared_order ⇒ mock 掉刷新步（采集器·单测环境无 playwright）
+    monkeypatch.setattr(bc, '_run_refresh_artifacts', lambda **k: True)
 
     rc = bc.main(['--batch', 'W9999', '--paths', 'README.md'])
     assert rc == 0

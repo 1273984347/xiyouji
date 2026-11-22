@@ -1,3 +1,55 @@
+## W1298 清零批续: L-03 台账hash自动回填 + L-04② E-185正文补齐 + L-05 verify断言源普查（2026-11-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1298 | W1298 |
+| AGENTS.md | W1298 | W1298 |
+| CHANGELOG.md | W1298 | W1298 |
+| CITATION.cff | W1298 | W1298 |
+| HANDOVER.md | W1298 | W1298 |
+| README.md | W1298 | W1298 |
+| STRUCTURE.md | W1298 | W1298 |
+| archive/docs/AGENTS-ARCHIVE.md | W1298 | W1298 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1298 | W1298 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1298 | W1298 |
+| archive/docs/workflows-readme-history.md | W1298 | W1298 |
+| docs/00-导读/W批次编号对账表.md | W1298 | W1298 |
+| docs/00-导读/遗留总账.md | W1298 | W1298 |
+| docs/00-导读/项目说明.md | W1298 | W1298 |
+| docs/11-方案报告/README.md | W1298 | W1298 |
+| docs/11-方案报告/计划方案/T131-任务计划执行与经验沉淀报告-2026-11-22.md | W1298 | W1298 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1298 | W1298 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1298 | W1298 |
+| docs/INDEX.md | W1298 | W1298 |
+| docs/agent/pitfalls-topics/flow-collab.md | W1298 | W1298 |
+| pytest.ini | W1298 | W1298 |
+| scripts/batch_closeout.py | W1298 | W1298 |
+| scripts/output/INDEX.md | W1298 | W1298 |
+| scripts/output/README.md | W1298 | W1298 |
+| scripts/output/_cascade_files_W1298.txt | W1298 | W1298 |
+| scripts/output/_vermilion_solid_cache.json | W1298 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/_w1266_allrender.json | W1298 | W1298 |
+| scripts/output/_w1298_spec.json | W1298 | W1298 |
+| scripts/output/chart-legend-render-audit.json | W1298 | W1298 |
+| scripts/output/chart-legend-render-audit.md | W1298 | W1298 |
+| scripts/output/file-index.md | W1298 | W1298 |
+| scripts/output/stats-changelog.json | W1298 | W1298 |
+| scripts/output/stats-index.md | W1298 | W1298 |
+| scripts/output/stats.json | W1298 | W1298 |
+| scripts/output/svg_text_contrast_graphic_report.json | W1298 | W1298 |
+| scripts/output/svg_text_contrast_report.json | W1298 | W1298 |
+| scripts/output/tools-inventory.md | W1298 | W1298 |
+| site/data/cross-time-danmaku.html | W1298 | W1298 |
+| site/data/search-index-zh.js | W1298 | W1298 |
+| site/data/tag-cloud.html | W1298 | W1298 |
+| site/dukou-engine.html | W1298 | W1298 |
+| site/en/search-index-en.js | W1298 | W1298 |
+| site/index.html | W1298 | W1298 |
+| site/rss.xml | W1298 | W1298 |
+| site/sitemap.xml | W1298 | W1298 |
+| tests/unit/test_w1102_batch_closeout.py | W1298 | W1298 |
+| tests/unit/test_w1114_version_surface.py | W1298 | W1298 |
+
 ## W1297 L-01 治本: 刷新步固化进收官链 + 页面变更来源根因定位（2026-11-22）
 
 | 文件 | W | 说明 |

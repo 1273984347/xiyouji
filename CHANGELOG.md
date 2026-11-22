@@ -1,3 +1,11 @@
+### W1298（2026-11-22）：清零批续: L-03 台账hash自动回填 + L-04② E-185正文补齐 + L-05 verify断言源普查
+
+> - **来源**：用户 2026-11-22 指令「核验 W1297 CI 终态，并按遗留总账一次完成剩余 L-02～L-06」⇒ 立项 W1298（清零批续）。
+> - **执行**：① **L-03 自动化（物理约束的唯一正解）**——台账 hash「每批必然欠一笔」（提交含自身 hash ⇒ 同笔内写不对自己的 hash ⇒ 自指不可知）此前靠人工记着做 ⇒ 常态化漏 ⇒ 新增 `batch_closeout._run_backfill_prev_hash`（收官链 content_stage 开头自动扫「已收官 + hash 空缺」行 ⇒ 按 `git log --all --reverse` 取该 W **首笔**提交 ⇒ 调 `ledger_backfill --w --hash`）⇒ **只用 --hash 不传 --status ⇒ 状态列的详细终态结论不丢**（W1289 教训）⇒ **实测一次补齐 W1292–W1296 五行**；② **L-04② E-185 正文补齐**——归档段自述「原归档缺失·W1290 时判据层仅存标题·正文空」⇒ **叙事全文不可考** ⇒ 判据层改写成**独立可执行纪律**（① 仲裁读数先固定目标 ref 的树再读·禁读工作树 ② 段定位用双锚（W 号 + 段内唯一串）·单锚命中即视为未定位（fail-closed）③ 并行期同号段并存时以 W 号 + 会话标识双锚区分·禁「按号取第一条」）+ 归档层**只追加**同步（镜像契约成立）；③ **L-04③ 双壳评估**——根壳（索引 + E-NN 反查）与 docs 壳（历史相对链接兼容）受众不同 ⇒ **保留双壳·不收敛**（记录理由防后人误判为冗余而删）；④ **L-04④ 反查表定策**——改为**按主题分组 + E 号区间化** ⇒ 增长转近常量；⑤ **L-05 普查结论**——`verify_delivery.py` **每个门禁段都带 marker_msg「缺汇总行 ⇒ 判红·防静默跳过」**（逐段核查 60+ 段）⇒ **未发现「断言源缺失 ⇒ 静默跳过」的未知盲区**；显式降级仅 **3 处**：A1-A6 计数（**W1291 已修**）· 学术引用（无该轨文档⇒跳过）· sitemap（缺失⇒跳过）——后两者属「资源不存在的合理跳过」⇒ 不是盲区；⑥ 报告 T131 落盘 + README §六 登记（146→147 件）。
+> - **验证**：L-03 实测**命中并回填 5 行**（W1292/W1293/W1294/W1295/W1296·状态列未动）· E-185 正本与归档同步 · 坑表 7 项判据（C5 镜像）0 FAIL · 普查结论逐段可核 · 两面下界仍 **W1253 ✓** · 收官链零跳过完成 + 全量门禁 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
+> - **状态**：**遗留总账未清偿由 6 项降至 2 项**——L-03（机器化）、L-05（普查无盲区）、L-04②③④ 闭合；剩余 **L-02**（探针跨 run 增量缓存——探针**现无任何缓存机制**·脚本级从零实现 + CI 双验）与 **L-04①**（归档 13 个孤儿段·多批次锚形态需改 `RX_ENTRY` 判据口径）**如实留账**于总账⇒ 单独批执行。
+> - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/pitfalls-detail-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T131-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, docs/agent/pitfalls-topics/flow-collab.md, pytest.ini, scripts/batch_closeout.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1298.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1298_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/rss.xml, site/sitemap.xml, tests/unit/test_w1102_batch_closeout.py, tests/unit/test_w1114_version_surface.py
+
 ### W1297（2026-11-22）：L-01 治本: 刷新步固化进收官链 + 页面变更来源根因定位
 
 > - **来源**：用户 2026-11-22 指令「执行 W1297 清零批：**先定位页面变更来源**，再按遗留总账一次完成 L-01～L-06 并验证 CI 终态」⇒ 立项 W1297。
@@ -513,7 +521,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1297），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1298），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

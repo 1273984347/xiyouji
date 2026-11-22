@@ -160,6 +160,8 @@ def test_closeout_main_runs_versions_step(monkeypatch):
     monkeypatch.setattr(vs, 'advance_all',
                         lambda batch, date, desc, head_sentence, check=False:
                         [('README.md', True)])
+    # W1298：mock 掉刷新步（L-01 治本·W1297 引入·采集器需 playwright·单测环境无）
+    monkeypatch.setattr(bc, '_run_refresh_artifacts', lambda **k: True)
     rc = bc.main(['--batch', 'W9999', '--paths', 'a.py'])
     assert rc == 0
     i_stats = next(i for i, c in enumerate(calls) if 'stats.py' in c)
