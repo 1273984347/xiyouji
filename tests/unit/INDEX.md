@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（137）
+## 文件（138）
 
 ### Python 脚本
 
@@ -51,6 +51,7 @@
 - `test_dismiss_pillow_alerts.py`
 - `test_dismiss_scorecard_alerts.py`
 - `test_doc_size_budget.py`
+- `test_doc_sync_ledger_hash.py`
 - `test_docs_index.py`
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`

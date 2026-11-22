@@ -1,3 +1,23 @@
+### W1306（2026-11-23）：遗留收敛落机器判据 (C4-g 台账 hash 历史链有效性 + C4-h 审查 P2 编号化登记 + 收尾两分类声明)
+
+> **来源**：用户 2026-11-23 追问「为什么每次结束都有遗留的任务要下一批去做？」⇒ 立项 W1306（遗留收敛落机器判据批）。
+>
+> - **问题归因（四类·见报告 §四）**：A 自指不可知（数学必然）· B 链外改动打破链内闭合（**本会话自造**）· C 压缩推送挤出历史链（并发共享面）· D 审查后置发现（P2 必留）。
+>
+> - **判据 3（治 C）**：第 31 门禁新增 **C4-g「台账 hash 历史链有效性」**——判定口径**必须**用 `git rev-list HEAD` 前缀匹配（`git rev-parse --verify` 只查对象库存在性 ⇒ 对被压缩掉的 commit **假阳性**）；**存量豁免基线**登记在遗留总账（5 行悬空 ⇒ 基线内 NOTE、基线外 FAIL ⇒ 判据上线不即红）。
+>
+> - **判据 4（治 D）**：第 31 门禁新增 **C4-h「审查 P2 编号化登记」**——现役段含 P2 而遗留总账「未清偿项」区无 L-xx 登记 ⇒ FAIL（**P2 不得只留在报告/聊天里**）；对抗审查模板同步补该义务；审查 P2 三项已登记为 **L-08/L-09/L-10**。
+>
+> - **判据 5（治自己造成的遗留）**：收官模板新增「**遗留两分类声明**」必填条款——① 我能单方面闭合的**必须为 0**（否则本批不得收官）② 需他人/用户裁决的列明编号与对象。
+>
+> - **文件**：CHANGELOG.md, HANDOVER.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/agent/adversarial-audit-prompt.md, docs/agent/closeout-agent-prompt.md, scripts/check_doc_sync.py, tests/unit/test_doc_sync_ledger_hash.py, scripts/output/_w1306_spec.json, scripts/output/_cascade_files_W1306.txt, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/tools-inventory.md, scripts/output/INDEX.md, scripts/output/README.md, tests/unit/INDEX.md, tests/unit/README.md, docs/INDEX.md
+>
+> - **验证**：`python scripts/check_doc_sync.py` **0 FAIL**（C4-g 5 行降为存量豁免 NOTE）· 新增单测 `tests/unit/test_doc_sync_ledger_hash.py` **5 passed**（台账 hash 定位·祖先前缀匹配·豁免基线两态·短 hash 前缀）· 台账写窗顶破按判据归档已收官 W1242 腾移（正本 59 行 + 本批认领行 = 60 行·窗口内）· **判据与阈值零放宽**（只加严不加松）。
+>
+> - **状态**：**3/5 条已落成机器判据**（判据 3/4/5）；**判据 1（自指不可知 ⇒ 自动回填扩到「错值」修指）与判据 2（收官链链末自检：链跑完后工作树必须干净）**涉及收官链核心路径，本批未动（风险高）⇒ 已登记为遗留总账 L-11/L-12 候补项，下一批单独治本。
+>
+> - **声明与实况不符项**：① 本批初判「豁免基线解析失败 ⇒ 判据有 bug」——实为**两处自身实现缺陷**（正则缺 `re.M` + 捕获组是纯数字而正本解析出 `W####`）⇒ 已修（并各有单测覆盖）；② 上一轮普查曾误报「悬空 hash 0 行」⇒ 实为**取错列**（hash 在第 4 段不是第 3 段）⇒ 已复核为 5 行。
+
 ### W1305（2026-11-22）：对抗审查 P0/P1 同批治本 (spec 大小写归一 + 台账 hash 合并口径 + 黏行无损还原 + T135 声明不符项更正)
 
 > **来源**：W1305 对抗审查（独立只读 subagent·实跑像素级比对与历史链核验）报出 P0/P1 ⇒ 同批治本。
@@ -615,7 +635,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1305），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1306），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

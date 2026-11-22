@@ -287,6 +287,123 @@ def line_has_exempt(text, match):
     return EXEMPT_MARK in text[line_start:line_end]
 
 
+# W1306 C4-g：台账 hash 历史链有效性（治「压缩推送把原 commit 挤出历史链 ⇒ 台账 hash 悬空」复发）
+# 判定口径：**必须**用 `git rev-list HEAD`（历史链上的全量 sha）做前缀匹配，**不得**用
+# `git rev-parse --verify`（那只查对象库存在性 ⇒ 被压缩掉的 commit 仍在库里 ⇒ **假阳性**）。
+# 存量豁免：已知悬空行登记在 `docs/00-导读/遗留总账.md`「存量豁免基线」节 ⇒ 基线内 NOTE、
+# 基线外 FAIL（与第 80/82 槽同款「存量基线 + 基线外新增」口径 ⇒ 判据上线即红是设计失败）。
+LEDGER_MAIN = os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")
+LEDGER_DEBT = os.path.join(ROOT, "docs", "00-导读", "遗留总账.md")
+RE_LEDGER_HASH_REF = re.compile(r"^\| W(\d{3,4}) \| ([0-9a-f]{7,40}) \|", re.M)
+RE_LEDGER_ROW = re.compile(r"^\| W\d{3,4} \|")
+RE_DEBT_ITEM = re.compile(r"^\| \*\*L-\d+\*\*", re.M)
+
+
+def _read_text(path):
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return fh.read()
+    except Exception:
+        return ""
+
+
+def parse_ledger_hash_refs(text):
+    """从台账文本提取 (W号, hash) 对。
+
+    hash 列定位：**相对状态格**（hash = 状态格 - 2），与 preflight_check 同款 doctrine
+    （主题列含裸竖线致行右移时仍能定位正确）；状态格取**从左往右第一个**含收官/在途词的格。
+    """
+    out = []
+    for line in text.splitlines():
+        if not RE_LEDGER_ROW.match(line):
+            continue
+        cells = line.split("|")
+        s_idx = -1
+        for i in range(1, len(cells)):
+            if re.search(r"(已收官|已闭环|在途|进行中)", cells[i]):
+                s_idx = i
+                break
+        if s_idx < 3:
+            continue
+        h = cells[s_idx - 2].strip()
+        if not re.fullmatch(r"[0-9a-f]{7,40}", h):
+            continue
+        out.append((cells[1].strip(), h))
+    return out
+
+
+def eval_ledger_hash_refs(refs, ancestors, baseline):
+    """refs=[(w, hash)]·ancestors=set(全量 sha)·baseline=set(W号·存量豁免)⇒ (issues, notes)"""
+    issues, notes = [], []
+    cache = {}
+
+    def prefixes(length):
+        if length not in cache:
+            cache[length] = {a[:length] for a in ancestors}
+        return cache[length]
+
+    for w, h in refs:
+        if h.lower() in prefixes(len(h)):
+            continue
+        if w in baseline:
+            notes.append("C4-g: 台账 %s 的 hash %s 不在历史链上（存量豁免·遗留总账基线登记）" % (w, h))
+        else:
+            issues.append(
+                "C4-g: 台账 %s 的 hash %s 不在 main 历史链上（压缩/改写后失效·"
+                "须改指承载 commit；确属存量则登记遗留总账「存量豁免基线」）" % (w, h)
+            )
+    return issues, notes
+
+
+def _git_ancestors():
+    try:
+        out = subprocess.run(
+            ["git", "rev-list", "HEAD"], cwd=ROOT, capture_output=True, text=True, timeout=180
+        )
+        if out.returncode != 0:
+            return None
+        return set(out.stdout.split())
+    except Exception:
+        return None
+
+
+def _check_c4g_ledger_hash_refs(inp, issues, notes):
+    """C4-g：台账 hash 须真在 main 历史链上（--is-ancestor 口径·存量豁免见遗留总账）。"""
+    text = _read_text(LEDGER_MAIN)
+    if not text:
+        return
+    ancestors = _git_ancestors()
+    if ancestors is None:
+        issues.append("C4-g: 无法取得 git rev-list HEAD（git 调用失败）⇒ 本支 fail-closed 拒绝通过")
+        return
+    baseline = {"W" + w for w, _h in RE_LEDGER_HASH_REF.findall(_read_text(LEDGER_DEBT))}
+    refs = parse_ledger_hash_refs(text)
+    i, n = eval_ledger_hash_refs(refs, ancestors, baseline)
+    issues.extend(i)
+    notes.extend(n)
+
+
+def _check_c4h_audit_p2_registered(inp, issues, notes):
+    """C4-h：对抗审查的 P2 级发现必须**编号化登记**进遗留总账（防「只在报告/聊天里说」的滚动队列复发）。"""
+    changelog = inp.get("changelog") or ""
+    m = re.search(r"^### W\d{3,4}（.*?(?=^### |\Z)", changelog, re.M | re.S)
+    if not m:
+        return
+    seg = m.group(0)
+    if "P2" not in seg:
+        return
+    debt = _read_text(LEDGER_DEBT)
+    if not debt:
+        issues.append("C4-h: 现役段含 P2 级审查发现，但读不到遗留总账 ⇒ 本支 fail-closed 拒绝通过")
+        return
+    head = debt.split("## 二、")[0] if "## 二、" in debt else debt
+    if not RE_DEBT_ITEM.search(head):
+        issues.append(
+            "C4-h: 现役段含 P2 级审查发现，但遗留总账「未清偿项」区无编号化登记（L-xx）"
+            "——P2 不得只留在报告/聊天里（须入账可批量清零）"
+        )
+
+
 def _check_c6_version_desc_seps(inp, issues, notes):
     """C6：三处版本行的 desc 段禁含分隔符（W841）。
 
@@ -373,6 +490,8 @@ def evaluate(inp):
     _check_c9_conflict_marks(inp, issues)
     _check_c10_stats_independent(inp, issues)
     _check_c6_version_desc_seps(inp, issues, notes)
+    _check_c4g_ledger_hash_refs(inp, issues, notes)
+    _check_c4h_audit_p2_registered(inp, issues, notes)
     _check_c7_homepage_showcase(inp, issues, notes)
     _check_c8_dup_long_lines(inp, issues, notes)
     return issues, notes

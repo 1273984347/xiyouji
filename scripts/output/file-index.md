@@ -1,3 +1,48 @@
+## W1306 遗留收敛落机器判据 (C4-g 台账 hash 历史链有效性 + C4-h 审查 P2 编号化登记 + 收尾两分类声明)（2026-11-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| HANDOVER.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| docs/00-导读/W批次编号对账表.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| docs/00-导读/遗留总账.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| docs/agent/adversarial-audit-prompt.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| docs/agent/closeout-agent-prompt.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/check_doc_sync.py | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| tests/unit/test_doc_sync_ledger_hash.py | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/_w1306_spec.json | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/_cascade_files_W1306.txt | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/file-index.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/stats-changelog.json | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/stats-index.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/stats.json | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/tools-inventory.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/INDEX.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/README.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| tests/unit/INDEX.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| tests/unit/README.md | W1306 | 本批改动（遗留收敛判据/模板/单测） |
+| scripts/output/_w1266_allrender.json | W1306 | 渲染/探针档案刷新（收官链 refresh 步） |
+| scripts/output/chart-legend-render-audit.json | W1306 | 渲染/探针档案刷新（收官链 refresh 步） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1306 | 渲染/探针档案刷新（收官链 refresh 步） |
+| scripts/output/svg_text_contrast_report.json | W1306 | 渲染/探针档案刷新（收官链 refresh 步） |
+| .github/workflows/README.md | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| AGENTS.md | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| CITATION.cff | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| README.md | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| STRUCTURE.md | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| archive/docs/AGENTS-ARCHIVE.md | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| archive/docs/workflows-readme-history.md | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| docs/00-导读/项目说明.md | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1306 | 版本面/页脚链推进（收官链 versions 步） |
+| pytest.ini | W1306 | 判据产物刷新（收官链 refresh 步·已跟踪件） |
+| scripts/output/_vermilion_solid_cache.json | W1306 | 判据产物刷新（收官链 refresh 步·已跟踪件） |
+| site/data/cross-time-danmaku.html | W1306 | 判据产物刷新（收官链 refresh 步·已跟踪件） |
+| site/data/tag-cloud.html | W1306 | 判据产物刷新（收官链 refresh 步·已跟踪件） |
+| site/dukou-engine.html | W1306 | 判据产物刷新（收官链 refresh 步·已跟踪件） |
+| site/index.html | W1306 | 判据产物刷新（收官链 refresh 步·已跟踪件） |
+| site/rss.xml | W1306 | 判据产物刷新（收官链 refresh 步·已跟踪件） |
+
 ## W1305 对抗审查 P0/P1 同批治本 (spec 大小写归一 + 台账 hash 合并口径 + 黏行无损还原 + T135 声明不符项更正)（2026-11-22）
 
 | 文件 | W | 说明 |
