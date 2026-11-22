@@ -1,3 +1,39 @@
+## W1305 对抗审查 P0/P1 同批治本 (spec 大小写归一 + 台账 hash 合并口径 + 黏行无损还原 + T135 声明不符项更正)（2026-11-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| HANDOVER.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| docs/00-导读/W批次编号对账表.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| docs/11-方案报告/计划方案/T135-任务计划执行与经验沉淀报告-2026-11-22.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| scripts/output/_w1305_spec.json | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| scripts/output/_cascade_files_W1305.txt | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| scripts/output/file-index.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| scripts/output/INDEX.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| scripts/output/README.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| scripts/output/stats.json | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| scripts/output/tools-inventory.md | W1305 | 本批改动（对抗审查 P0/P1 治本/收官链级联产物） |
+| scripts/output/_w1266_allrender.json | W1305 | 渲染档案全量刷新（收官链 refresh 步） |
+| scripts/output/chart-legend-render-audit.json | W1305 | 渲染档案刷新（豁免页模式） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1305 | graphic 口径探针报告刷新 |
+| scripts/output/svg_text_contrast_report.json | W1305 | body 口径探针报告刷新 |
+| .github/workflows/README.md | W1305 | 版本面跟随（收官链 versions 步） |
+| AGENTS.md | W1305 | 版本面跟随（收官链 versions 步） |
+| CITATION.cff | W1305 | 版本面跟随（收官链 versions 步） |
+| README.md | W1305 | 版本面跟随（收官链 versions 步） |
+| STRUCTURE.md | W1305 | 版本面跟随（收官链 versions 步） |
+| archive/docs/AGENTS-ARCHIVE.md | W1305 | 版本面跟随（收官链 versions 步） |
+| archive/docs/workflows-readme-history.md | W1305 | 版本面跟随（收官链 versions 步） |
+| docs/00-导读/项目说明.md | W1305 | 版本面跟随（收官链 versions 步） |
+| site/data/cross-time-danmaku.html | W1305 | 页脚版本链推进（收官链 versions 步） |
+| site/data/tag-cloud.html | W1305 | 页脚版本链推进（收官链 versions 步） |
+| site/dukou-engine.html | W1305 | 页脚版本链推进（收官链 versions 步） |
+| site/index.html | W1305 | 页脚版本链推进（收官链 versions 步） |
+| site/rss.xml | W1305 | 版本面跟随（收官链 versions 步） |
+| scripts/output/_vermilion_solid_cache.json | W1305 | 判据缓存刷新（收官链 refresh 步·已跟踪件） |
+| scripts/output/_w1205_capacity_audit.json | W1305 | 判据自产残留（容量审计·已跟踪件） |
+
 ## W1304 修 W1301 遗留根因 (actions/cache restore+save 钉 40-hex full SHA·Workflow Lint 红灯治本)（2026-11-22）
 
 | 文件 | W | 说明 |
@@ -102,7 +138,7 @@
 | scripts/output/INDEX.md | W1302 | 目录件重建（收官链 refresh 步） |
 | scripts/output/README.md | W1302 | 目录件重建（收官链 refresh 步） |
 | scripts/output/_cascade_files_W1302.txt | W1302 | 级联件清单（收官链 cascade） |
-| scripts/output/_W1302_spec.json | W1302 | 本批 spec |
+| scripts/output/_w1302_spec.json | W1302 | 本批 spec |
 | scripts/output/file-index.md | W1302 | 文件索引台面（收官链 index 步） |
 | scripts/output/stats-changelog.json | W1302 | 统计变更史追加 |
 | scripts/output/stats-index.md | W1302 | 统计索引刷新 |

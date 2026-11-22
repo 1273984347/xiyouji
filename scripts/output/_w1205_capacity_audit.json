@@ -3,7 +3,7 @@
   "tool_version": "w1205-capacity-audit-v1",
   "batch": "W1205",
   "task": "v2 §8.3 容量阈值（10 条）实算",
-  "generated_at": "2026-11-14T01:27:39+08:00",
+  "generated_at": "2026-11-22T23:30:15+08:00",
   "threshold_source": "docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md §8.3（10 条）",
   "unit_convention": "KB/MB/GB 均为二进制（1 KB = 1024 B · 1 MB = 1024^2 B · 1 GB = 1024^3 B）",
   "gate_seconds_note": "第 5 条不跑全量 verify_delivery.py（控制器收官统一跑）；取值须由调用方用 --gate-seconds / CAPACITY_GATE_SECONDS 传入",
@@ -15,55 +15,55 @@
       "threshold": 524288,
       "threshold_unit": "bytes",
       "action_if_triggered": "拆包评审（不得直接引入框架运行时）·软线 200 KB 预警清单随附",
-      "measured": 426293,
-      "measured_display": "416.30 KB",
-      "headroom_abs": 97995,
-      "headroom_pct": 18.69,
+      "measured": 448093,
+      "measured_display": "437.59 KB",
+      "headroom_abs": 76195,
+      "headroom_pct": 14.53,
       "triggered": false,
       "pending": false,
-      "source": "site/**/*.html 逐个 os.path.getsize() 取最大值（861 个文件）",
+      "source": "site/**/*.html 逐个 os.path.getsize() 取最大值（875 个文件）",
       "note": "最大页：site/reader/people/紧箍儿的内侧-器物传记.html｜硬线越线 0 页·软线越线 9 页（清单见 extra/结论区）",
       "extra": {
         "file": "site/reader/people/紧箍儿的内侧-器物传记.html",
-        "file_count": 861,
-        "site_html_total_bytes": 77850272,
+        "file_count": 875,
+        "site_html_total_bytes": 83307434,
         "hard_over_pages": [],
         "soft_over_pages": [
           {
             "file": "site/reader/people/紧箍儿的内侧-器物传记.html",
-            "bytes": 426293
-          },
-          {
-            "file": "site/en/relationships.html",
-            "bytes": 405345
-          },
-          {
-            "file": "site/data/relationships.html",
-            "bytes": 375387
+            "bytes": 448093
           },
           {
             "file": "site/reader/themes/西游渡第二讲专题.html",
-            "bytes": 364007
+            "bytes": 386847
+          },
+          {
+            "file": "site/en/relationships.html",
+            "bytes": 366410
           },
           {
             "file": "site/reader/themes/倒果为因专题.html",
-            "bytes": 305710
+            "bytes": 328559
           },
           {
             "file": "site/reader/people/如来佛祖-方向二深化B.html",
-            "bytes": 285551
+            "bytes": 307351
           },
           {
-            "file": "site/data/dialogue-sentiment.html",
-            "bytes": 207502
+            "file": "site/data/relationships.html",
+            "bytes": 232985
           },
           {
             "file": "site/reader/themes/混世四猴专题.html",
-            "bytes": 206021
+            "bytes": 228870
           },
           {
-            "file": "site/en/dialogue-sentiment.html",
-            "bytes": 204995
+            "file": "site/reader/themes/兵器的自我修养专题.html",
+            "bytes": 209696
+          },
+          {
+            "file": "site/reader/ch055.html",
+            "bytes": 205513
           }
         ],
         "soft_over_count": 9
@@ -75,19 +75,19 @@
       "threshold": 61440,
       "threshold_unit": "bytes",
       "action_if_triggered": "页特有样式瘦身评审（须保证 file:// 仍可开）·共享块走 2b 机制线",
-      "measured": 27949,
-      "measured_display": "27.29 KB",
-      "headroom_abs": 33491,
-      "headroom_pct": 54.51,
+      "measured": 50720,
+      "measured_display": "49.53 KB",
+      "headroom_abs": 10720,
+      "headroom_pct": 17.45,
       "triggered": false,
       "pending": false,
-      "source": "site/**/*.html 逐页拆 (页特有, 共享块) 并取页特有最大值（861 个文件·W1224 口径）",
-      "note": "页特有最多页：site/en/concept-device.html｜共享基线块最大 46.00 KB（site/reader/culture/index.html）",
+      "source": "site/**/*.html 逐页拆 (页特有, 共享块) 并取页特有最大值（875 个文件·W1224 口径）",
+      "note": "页特有最多页：site/reader/themes/八十一难专题.html｜共享基线块最大 67.29 KB（site/reader/culture/index.html）",
       "extra": {
-        "file": "site/en/concept-device.html",
-        "shared_block_max_bytes": 47102,
+        "file": "site/reader/themes/八十一难专题.html",
+        "shared_block_max_bytes": 68902,
         "shared_block_max_file": "site/reader/culture/index.html",
-        "shared_block_triggered": false,
+        "shared_block_triggered": true,
         "over_threshold_pages": [],
         "over_threshold_count": 0
       }
@@ -98,16 +98,16 @@
       "threshold": 125829120,
       "threshold_unit": "bytes",
       "action_if_triggered": "资源分片评审",
-      "measured": 77850272,
-      "measured_display": "74.24 MB",
-      "headroom_abs": 47978848,
-      "headroom_pct": 38.13,
+      "measured": 83307434,
+      "measured_display": "79.45 MB",
+      "headroom_abs": 42521686,
+      "headroom_pct": 33.79,
       "triggered": false,
       "pending": false,
       "source": "site/**/*.html 字节和（沿用 v2 §3.1 资产表 / B-03 取数命令同路径）",
-      "note": "861 个 HTML 页",
+      "note": "875 个 HTML 页",
       "extra": {
-        "file_count": 861,
+        "file_count": 875,
         "source_doc": "docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md §3.1 + B-03"
       }
     },
@@ -117,14 +117,14 @@
       "threshold": 3145728,
       "threshold_unit": "bytes",
       "action_if_triggered": "索引分片或改为按页加载",
-      "measured": 2890229,
-      "measured_display": "2.76 MB",
-      "headroom_abs": 255499,
-      "headroom_pct": 8.12,
+      "measured": 2971592,
+      "measured_display": "2.83 MB",
+      "headroom_abs": 174136,
+      "headroom_pct": 5.54,
       "triggered": false,
       "pending": false,
       "source": "站内搜索自有脚本字节（排除第三方 .min.js）",
-      "note": "site/static/js/text-search-app.js = 2.07 MB；site/data/search-index-zh.js = 340.63 KB；site/en/search-index-en.js = 359.06 KB",
+      "note": "site/static/js/text-search-app.js = 2.07 MB；site/data/search-index-zh.js = 380.48 KB；site/en/search-index-en.js = 398.67 KB",
       "extra": {
         "files": [
           {
@@ -133,11 +133,11 @@
           },
           {
             "file": "site/data/search-index-zh.js",
-            "bytes": 348805
+            "bytes": 389608
           },
           {
             "file": "site/en/search-index-en.js",
-            "bytes": 367673
+            "bytes": 408233
           }
         ]
       }
@@ -164,18 +164,18 @@
       "threshold": 1073741824,
       "threshold_unit": "bytes",
       "action_if_triggered": "git gc + 归档复核",
-      "measured": 635928655,
-      "measured_display": "606.47 MB",
-      "headroom_abs": 437813169,
-      "headroom_pct": 40.77,
-      "triggered": false,
+      "measured": 1401319772,
+      "measured_display": "1.31 GB",
+      "headroom_abs": -327577948,
+      "headroom_pct": -30.51,
+      "triggered": true,
       "pending": false,
       "source": ".git 目录 os.walk 实算全部文件字节和（含 pack/loose/lost-found）",
-      "note": "pack 子目录 187.69 MB（占 30.9%）",
+      "note": "pack 子目录 187.69 MB（占 14.0%）",
       "extra": {
-        "file_count": 1423,
+        "file_count": 23839,
         "pack_bytes": 196805000,
-        "pack_ratio_pct": 30.95
+        "pack_ratio_pct": 14.04
       }
     },
     {
@@ -184,33 +184,58 @@
       "threshold": 500,
       "threshold_unit": "files",
       "action_if_triggered": "拆分批次",
-      "measured": 7,
-      "measured_display": "7 files",
-      "headroom_abs": 493,
-      "headroom_pct": 98.6,
+      "measured": 32,
+      "measured_display": "32 files",
+      "headroom_abs": 468,
+      "headroom_pct": 93.6,
       "triggered": false,
       "pending": false,
       "source": "git diff --name-only HEAD~1..HEAD ∪ git status --porcelain（去重）",
-      "note": "已提交 2 + 工作树未提交 5 = 7；历史最大单提交 918 个（9cc71e5aaa77）；历史最大批次 spec 登记文件数 943（W1139）",
+      "note": "已提交 30 + 工作树未提交 2 = 32；历史最大单提交 998 个（46fe0ef2be00）；历史最大批次 spec 登记文件数 1016（W1261）",
       "extra": {
         "batch_base": "HEAD~1",
-        "committed_count": 2,
-        "worktree_count": 5,
+        "committed_count": 30,
+        "worktree_count": 2,
         "files": [
+          "\"archive/docs/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250-ARCHIVE.md\"",
           "\"docs/00-\\345\\257\\274\\350\\257\\273/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250.md\"",
+          "\"docs/00-\\345\\257\\274\\350\\257\\273/\\351\\241\\271\\347\\233\\256\\350\\257\\264\\346\\230\\216.md\"",
+          ".github/workflows/README.md",
+          ".github/workflows/ci.yml",
+          "AGENTS.md",
+          "CHANGELOG.md",
+          "CITATION.cff",
+          "HANDOVER.md",
+          "README.md",
+          "STRUCTURE.md",
+          "archive/docs/AGENTS-ARCHIVE.md",
+          "archive/docs/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250-ARCHIVE.md",
+          "archive/docs/workflows-readme-history.md",
           "docs/00-\\345\\257\\274\\350\\257\\273/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250.md",
-          "docs/11-\\346\\226\\271\\346\\241\\210\\346\\212\\245\\345\\221\\212/\\350\\256\\276\\350\\256\\241\\344\\270\\216\\346\\236\\266\\346\\236\\204\\346\\226\\271\\346\\241\\210/\\347\\263\\273\\347\\273\\237\\346\\236\\266\\346\\236\\204\\346\\226\\271\\346\\241\\210v2-\\347\\233\\256\\346\\240\\207\\346\\200\\201\\344\\270\\216\\350\\220\\275\\345\\234\\260\\350\\267\\257\\347\\272\\277-2026-10-25.md",
-          "docs/11-\\346\\226\\271\\346\\241\\210\\346\\212\\245\\345\\221\\212/\\350\\256\\276\\350\\256\\241\\344\\270\\216\\346\\236\\266\\346\\236\\204\\346\\226\\271\\346\\241\\210/\\347\\263\\273\\347\\273\\237\\346\\236\\266\\346\\236\\204v2\\350\\277\\201\\347\\247\\273\\346\\226\\275\\345\\267\\245\\346\\211\\213\\345\\206\\214-2026-11-13.md",
-          "scripts/check_capacity_budget.py",
+          "scripts/output/INDEX.md",
+          "scripts/output/README.md",
+          "scripts/output/_cascade_files_W1304.txt",
           "scripts/output/_vermilion_solid_cache.json",
-          "scripts/output/_w1224_spec.json"
+          "scripts/output/_w1266_allrender.json",
+          "scripts/output/_w1304_spec.json",
+          "scripts/output/chart-legend-render-audit.json",
+          "scripts/output/file-index.md",
+          "scripts/output/stats.json",
+          "scripts/output/svg_text_contrast_graphic_report.json",
+          "scripts/output/svg_text_contrast_report.json",
+          "scripts/output/tools-inventory.md",
+          "site/data/cross-time-danmaku.html",
+          "site/data/tag-cloud.html",
+          "site/dukou-engine.html",
+          "site/index.html",
+          "site/rss.xml"
         ],
-        "history_max_single_commit_files": 918,
-        "history_max_commit": "9cc71e5aaa775447b44e936f8aa508118a6b5db2",
-        "history_max_subject": "feat(w1167): MVP 迁移批——设计链路 13 Skill 落生产·六项交付·六道防线根修",
-        "history_max_batch_spec_files": 943,
-        "history_max_batch_spec": "_w1139_spec.json",
-        "history_max_batch_id": "W1139",
+        "history_max_single_commit_files": 998,
+        "history_max_commit": "46fe0ef2be00519974f8119b876b079073408920",
+        "history_max_subject": "feat(design): W1261 全站可视化视觉重设计全量落地（宣纸刻本 Xuan Edition）",
+        "history_max_batch_spec_files": 1016,
+        "history_max_batch_spec": "_w1261_spec.json",
+        "history_max_batch_id": "W1261",
         "worktree_note": "工作树在途件可能含同批其他子任务/并行会话产物；本批精确文件数以控制器收官时的 spec/touches 为准"
       }
     },
@@ -265,7 +290,9 @@
   ],
   "summary": {
     "total": 10,
-    "triggered": [],
+    "triggered": [
+      6
+    ],
     "pending": [
       5,
       8,

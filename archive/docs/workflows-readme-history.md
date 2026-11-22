@@ -127,3 +127,4 @@
 + W1302 hero-batch 绢本源件入站 8 张 webp 1920×1078 落 site/static/images/silk-src 哈希命中证伪成品缺失 目视确认拼版非资产 台账写窗腾移 60 段判红按判据归档·无 workflow 结构改动）。
 + W1303 新增取经三试与十八款小游戏合集，含音效、移动端、战绩、深链、修罗与无尽、十八难长途、途中事件、五阵与行者选择·无 workflow 结构改动）。
 + W1304 修 W1301 遗留 actions/cache 未钉 full SHA Workflow Lint 红灯治本 台账归档腾窗 60 行 判据零改动·无 workflow 结构改动）。
++ W1305 对抗审查 P0/P1 治本 W1302 spec 大小写归一假绿 台账 hash 5 行悬空 黏行逐字还原 T135 六处声明更正 判据零放宽·无 workflow 结构改动）。

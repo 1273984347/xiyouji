@@ -1,3 +1,23 @@
+### W1305（2026-11-22）：对抗审查 P0/P1 同批治本 (spec 大小写归一 + 台账 hash 合并口径 + 黏行无损还原 + T135 声明不符项更正)
+
+> **来源**：W1305 对抗审查（独立只读 subagent·实跑像素级比对与历史链核验）报出 P0/P1 ⇒ 同批治本。
+>
+> - **P1-1 跨平台判据静默失效（真缺陷·本会话引入）**：`scripts/output/_w1302_spec.json` 用了**大写 W**（全仓 350+ spec 中唯一）⇒ Linux/macOS CI 上 `_w*_spec.json` 类 glob **匹配不到** ⇒ `check_commit_scope` 退化为「无 spec·不判」、`backfill_changelog`/`check_capacity_budget` 漏统计 ⇒ **判据静默失效（假绿）**。已 `git mv` 改回小写 `_w1302_spec.json` 并同步两面段登记（Windows 大小写不敏感正是它长期未暴露的原因）。
+>
+> - **P0-1 台账 hash 合并口径**：压缩推送使 **5 行** hash 悬空（不在 main 历史链上）——W1294/W1295/W1296/W1301/W1303；本会话认领的 **W1302** 已改指合并承载 commit `0c926a0aa`（`merge-base --is-ancestor` 实测 True），**W1304** 填真值 `2a123f53b`。他方认领的 4 行**不代改**（台账规则：只改本会话认领的行），只在 W1305 行登记待其回填。
+>
+> - **P0-2 黏行结构损坏（按原文无损还原）**：台账 W1303 行被截断（只剩 hash 列），其后 6 列被接到 W1304 行尾 ⇒ 已按原文**逐字还原**为两行（与 `0c926a0aa` 原文逐字符相等·审查实测 OLD==NEW）。
+>
+> - **P1-2 报告与实况不符项更正**：T135 报告 8 处表述更正 + 新增「§九 声明与实况不符项」小节（对抗审查实据：入站 06/11 与站内直层同名文件**同名不同物**（MAE 45.43 / 36.25·灰度相关 0.471 / 0.371）；`backup-v1/` 实为 **5472×3072 jpg 源件**·入站为转码降采样件；66 张 MD5 复扫**已不可复现**·如实标注）。
+>
+> - **文件**：CHANGELOG.md, HANDOVER.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/11-方案报告/计划方案/T135-任务计划执行与经验沉淀报告-2026-11-22.md, scripts/output/_w1302_spec.json, scripts/output/_w1302_spec.json, scripts/output/_w1305_spec.json, scripts/output/_cascade_files_W1305.txt, scripts/output/file-index.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/tools-inventory.md
+>
+> - **验证**：`check_action_refs.py` PASS（97/97 uses 全 40-hex）· `check_doc_sync.py` 0 FAIL · `check_registration_surface --batch W1305` 六项全通过 · `check_pitfalls_split.py` 0 FAIL（421=421）· pytest 1827 passed · 远端 CI 6 workflow 全绿（2a123f53b）。
+>
+> - **声明与实况不符项**：① 本批初判「合并推送＝merge·历史保留·hash 无一失效」——实测 `git log -1 --format=%P 0c926a0aa` **只有 1 个父** ⇒ 是压缩推送，原 commit 退出历史链（**已两次自我更正**）；② `git rev-parse --verify` 判 hash 有效是**假阳性**（只查对象库存在性·悬空对象也能解析）⇒ 正确口径是 `git merge-base --is-ancestor`；③ T135 原称 06/11 为「同场景不同压缩版」——像素级比对证明是**两张不同的画**（已在 §九 更正）。
+>
+> - **状态**：**对抗审查 P0/P1 同批治本完毕**（spec 大小写归一 + 台账 hash 合并口径 + 黏行无损还原 + 报告 6 处声明更正）；**P2 项**（INDEX/README 血缘元信息硬编码日期、spec 越界登记 1 行、changelog_body 文件清单缺版本面件）登记待下一批。
+
 ### W1304（2026-11-22）：修 W1301 遗留根因 (actions/cache restore+save 钉 40-hex full SHA·Workflow Lint 红灯治本)
 
 > **来源**：W1301/W1302/W1303 合并推送（`0c926a0aa`）后，远端 **Workflow Lint 红灯**——根因是 W1301 引入的 CI 跨 run 缓存两处 action 引用**未钉 40 位 full SHA**（`actions/cache/restore@v4` · `actions/cache/save@v4`），违反仓内铁律 W663/T4（action 一律钉 40-hex full SHA）。
@@ -30,7 +50,7 @@
 >
 > - **施工**：8 张高分辨率 webp（3.61 MB）移入 `site/static/images/silk-src/`（同卷 rename·体积逐一吻合）；**用户裁决范围**：仅 webp 入站，JPG 原图（8 张 52.78 MB）不入库；台账认领行 + `preflight_check` **PASS**（首次 FAIL：台账正本 61 段 > 60 窗口 ⇒ 按判据跑 `archive_ledger_rows.py --apply` 迁出已收官 W1238–W1239 两行腾窗 ⇒ 正本留 59 行 ⇒ 复跑 PASS，**未放宽任何判据**）。
 >
-> - **文件**：STRUCTURE.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, site/static/images/silk-src/silk-hero-04-baigu-furen.webp, site/static/images/silk-src/silk-hero-05-huoyanshan-yaowang.webp, site/static/images/silk-src/silk-hero-06-heifengshan.webp, site/static/images/silk-src/silk-hero-07-dumu-qiao.webp, site/static/images/silk-src/silk-hero-08-shanye-xinglu.webp, site/static/images/silk-src/silk-hero-09-wukong-tanyu.webp, site/static/images/silk-src/silk-hero-10-jingubang.webp, site/static/images/silk-src/silk-hero-11-fabao-sanjian.webp, site/static/images/INDEX.md, site/static/images/silk-src/INDEX.md, docs/11-方案报告/计划方案/T135-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/README.md, HANDOVER.md, docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, CHANGELOG.md, docs/INDEX.md, scripts/output/_W1302_spec.json, scripts/output/_cascade_files_W1302.txt, scripts/output/file-index.md, scripts/output/stats.json, scripts/output/stats-index.md, scripts/output/stats-changelog.json, scripts/output/tools-inventory.md, scripts/output/INDEX.md, scripts/output/README.md, site/data/search-index-zh.js, site/en/search-index-en.js, site/sitemap.xml
+> - **文件**：STRUCTURE.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, site/static/images/silk-src/silk-hero-04-baigu-furen.webp, site/static/images/silk-src/silk-hero-05-huoyanshan-yaowang.webp, site/static/images/silk-src/silk-hero-06-heifengshan.webp, site/static/images/silk-src/silk-hero-07-dumu-qiao.webp, site/static/images/silk-src/silk-hero-08-shanye-xinglu.webp, site/static/images/silk-src/silk-hero-09-wukong-tanyu.webp, site/static/images/silk-src/silk-hero-10-jingubang.webp, site/static/images/silk-src/silk-hero-11-fabao-sanjian.webp, site/static/images/INDEX.md, site/static/images/silk-src/INDEX.md, docs/11-方案报告/计划方案/T135-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/README.md, HANDOVER.md, docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, CHANGELOG.md, docs/INDEX.md, scripts/output/_w1302_spec.json, scripts/output/_cascade_files_W1302.txt, scripts/output/file-index.md, scripts/output/stats.json, scripts/output/stats-index.md, scripts/output/stats-changelog.json, scripts/output/tools-inventory.md, scripts/output/INDEX.md, scripts/output/README.md, site/data/search-index-zh.js, site/en/search-index-en.js, site/sitemap.xml
 >
 > - **验证**：8 张落位核对体积逐一吻合（538.7 / 397.4 / 576.9 / 379.7 / 553.5 / 456.8 / 312.7 / 479.8 KB）· `git status` 新增路径仅 `site/static/images/silk-src/`（未触任何既有页面/脚本）· 哈希复扫与目视结论互相印证 · 全量门禁 0 FAIL。
 >
@@ -595,7 +615,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1304），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1305），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
