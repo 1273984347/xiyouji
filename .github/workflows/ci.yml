@@ -492,7 +492,7 @@ jobs:
       #   报告内含全量 page_sha ⇒ 万一探针没跑到，页面哈希漂移也会被门禁判「报告陈旧」而 fail-closed。
       #   探针 file:// 口径·四态·扫描 site/data + site/en 的含图页。
       - name: Restore SVG probe incremental cache (W1301·跨 run 增量·L-02)
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: |
             scripts/output/_svg_probe_cache_graphic.json
@@ -520,7 +520,7 @@ jobs:
       - name: Restore probe report artifacts (W1286·避免 CI 自身产物触发 C4-f)
         run: git checkout -- scripts/output/svg_text_contrast_graphic_report.json scripts/output/svg_text_contrast_report.json
       - name: Save SVG probe incremental cache (W1301·命中不更新故须显式 save)
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: |
             scripts/output/_svg_probe_cache_graphic.json

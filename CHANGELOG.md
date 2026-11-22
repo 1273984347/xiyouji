@@ -1,3 +1,15 @@
+### W1304（2026-11-22）：修 W1301 遗留根因 (actions/cache restore+save 钉 40-hex full SHA·Workflow Lint 红灯治本)
+
+> **来源**：W1301/W1302/W1303 合并推送（`0c926a0aa`）后，远端 **Workflow Lint 红灯**——根因是 W1301 引入的 CI 跨 run 缓存两处 action 引用**未钉 40 位 full SHA**（`actions/cache/restore@v4` · `actions/cache/save@v4`），违反仓内铁律 W663/T4（action 一律钉 40-hex full SHA）。
+>
+> - **执行**：两处 `uses:` 改为 `actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830` 与 `actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830`（`actions/cache` v4 tag 指向的 commit SHA·经 GitHub API 实查）；**判据与强度一字未改**，仅把 tag 引用钉成不可变 SHA（与仓内其余 95 条 uses 同口径）。
+>
+> - **文件**：.github/workflows/README.md, .github/workflows/ci.yml, CHANGELOG.md, HANDOVER.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_w1304_spec.json, scripts/output/_cascade_files_W1304.txt, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/tools-inventory.md
+>
+> - **验证**：本地 `python scripts/check_action_refs.py` **PASS**（97 条 uses 全为 40 位 full SHA · 去重 16 个 repo/ref · shell 面「不可变引用」形态 PASS）；`ci.yml` **YAML 解析 OK**（12 jobs）；远端 Workflow Lint 由 failure 转绿由本轮 CI 实证。
+>
+> - **状态**：**根因治本**（非豁免压红）——两处未钉 SHA 是 W1301 的实引入缺陷，本批按「修实例必修根」同批治本；台账写窗顶破（正本 60 行）按判据归档已收官 W1240 腾移，正本留 59 行 + 本批认领行 = 60 行（窗口内），**未放宽任何阈值**。
+
 ### W1303（2026-11-22）：西游小游戏三合一与十八款合集入口
 
 **本批要点**（W1303 西游小游戏三合一与十八款合集入口）：
@@ -583,7 +595,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1303），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1304），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

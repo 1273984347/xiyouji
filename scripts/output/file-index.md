@@ -1,3 +1,39 @@
+## W1304 修 W1301 遗留根因 (actions/cache restore+save 钉 40-hex full SHA·Workflow Lint 红灯治本)（2026-11-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| .github/workflows/ci.yml | W1304 | 本批改动（收官链级联/规范面产物） |
+| CHANGELOG.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| HANDOVER.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| docs/00-导读/W批次编号对账表.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/INDEX.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/README.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/_w1304_spec.json | W1304 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/_cascade_files_W1304.txt | W1304 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/file-index.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/stats.json | W1304 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/tools-inventory.md | W1304 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/_w1266_allrender.json | W1304 | 渲染档案全量刷新（收官链刷新步） |
+| scripts/output/chart-legend-render-audit.json | W1304 | 渲染档案刷新（豁免页模式） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1304 | graphic 口径探针报告刷新 |
+| scripts/output/svg_text_contrast_report.json | W1304 | body 口径探针报告刷新 |
+| site/data/tag-cloud.html | W1304 | 页脚版本链推进（收官链 versions 步） |
+| scripts/output/chart-legend-render-audit.md | W1304 | 渲染档案可读副本刷新（豁免页模式·合并推送后按最终页面重跑） |
+| CITATION.cff | W1304 | 版本面跟随（收官链 versions 步） |
+| site/index.html | W1304 | 页脚版本链推进（收官链 versions 步） |
+| AGENTS.md | W1304 | 版本面跟随（收官链 versions 步·本批 W1304 上抬） |
+| site/data/cross-time-danmaku.html | W1304 | 页脚版本链推进（收官链 versions 步） |
+| archive/docs/AGENTS-ARCHIVE.md | W1304 | 版本面跟随（收官链 versions 步） |
+| docs/00-导读/项目说明.md | W1304 | 版本面跟随（收官链 versions 步） |
+| archive/docs/workflows-readme-history.md | W1304 | 版本面跟随（收官链 versions 步） |
+| STRUCTURE.md | W1304 | 版本面跟随（收官链 versions 步） |
+| site/rss.xml | W1304 | 版本面跟随（收官链 versions 步） |
+| site/dukou-engine.html | W1304 | 页脚版本链推进（收官链 versions 步） |
+| scripts/output/_vermilion_solid_cache.json | W1304 | 判据缓存刷新（收官链 refresh 步·已跟踪件） |
+| README.md | W1304 | 版本面跟随（收官链 versions 步） |
+
 ## W1303 西游小游戏三合一与十八款合集入口（2026-11-22）
 
 | 文件 | W | 说明 |
