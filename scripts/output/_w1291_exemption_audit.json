@@ -2161,5 +2161,89 @@
       "why": "该页实测 perCls 为空（无朱砂实底）⇒ 登记豁免全多余"
     }
   ],
-  "backup_before_v3": "scripts/output/_w1291_exempt_backup_before_v3.json"
+  "backup_before_v3": "scripts/output/_w1291_exempt_backup_before_v3.json",
+  "before": {
+    "batches": {
+      "W864": 0,
+      "W866": 0,
+      "W867": 0,
+      "W868": 0,
+      "W869": 0,
+      "W870": 0,
+      "W871": 0,
+      "W872": 0,
+      "W873": 0,
+      "W883": 0,
+      "W886": 0,
+      "W887": 0,
+      "W1152": 0
+    },
+    "total_entries": 0,
+    "updated_at": "2026-11-21",
+    "note": "本块开工时仓内既有状态：W1291 提交 df8bab1c9（main 祖先）已按第 49 槽实测把登记簿由 259 条清偿至 0 条并把 updated_at 刷至 2026-11-21·本块基线即此状态"
+  },
+  "after": {
+    "batches": {
+      "W864": 0,
+      "W866": 0,
+      "W867": 0,
+      "W868": 0,
+      "W869": 0,
+      "W870": 0,
+      "W871": 0,
+      "W872": 0,
+      "W873": 0,
+      "W883": 0,
+      "W886": 0,
+      "W887": 0,
+      "W1152": 0
+    },
+    "total_entries": 0,
+    "updated_at": "2026-11-21",
+    "note": "独立复跑后判定：无需收缩——基线陈旧豁免 0 条（登记簿已空）⇒ 不删任何条目；updated_at 已为 2026-11-21 ⇒ 登记簿文件本块零改动"
+  },
+  "stale_before": [],
+  "stale_after_count": 0,
+  "gate_result": {
+    "command": "node scripts/check_vermilion_solid.js --full",
+    "scope_pages": 238,
+    "fail": 0,
+    "stale_exempt_pages": 0,
+    "stale_exempt_notes": 0,
+    "probe_error_pages": 0,
+    "measured_solid_total": 0,
+    "exit_code": 0,
+    "marker": "---- 第 49 门禁 朱砂实底： 0 FAIL ----",
+    "note": "本块独立复跑（--full 全量重扫 238 页·缓存命中 0）·stdout 无 FAIL/NOTE 行·门禁写入的 report 与仓内已提交版本内容逐字一致（writeJsonStable 内容未变则不落盘）·门禁写入的 cache 记录 238 页 counts 全空 + 0 探针异常"
+  },
+  "commands": [
+    "node scripts/check_vermilion_solid.js --full  # 基线与复跑同一命令（--full 强制全量·忽略增量缓存）·238 页重扫·0 FAIL·exit 0",
+    "node -e \"JSON.parse→JSON.stringify(obj,null,2) 往返比对\"  # 审计文件往返序列化逐字一致（改前自证·保证 diff 最小）",
+    "git show df8bab1c9^:scripts/output/_vermilion_solid_report.json  # 取清偿前报告（129 页报陈旧豁免·全站实测 0）",
+    "git log --oneline -- scripts/output/_w864_accent_exemptions.json  # 取登记簿变更史（清偿落地于 df8bab1c9）",
+    "node scripts/check_vermilion_solid.js --self-test  # 门禁纯逻辑自检（未改动门禁本体·仅作旁证）"
+  ],
+  "v4_verification": {
+    "role": "T4 豁免簿清偿·独立复核（主会话派工·非原始清偿执行者）",
+    "finding": "清偿工作已由 W1291 提交 df8bab1c9 落地并合入 main（豁免簿 259→0 条·updated_at→2026-11-21）；本块复跑证实该结果成立",
+    "independent_evidence": "238 页全量实测朱砂实底总数 = 0·探针异常 0 页·第 49 槽 0 FAIL·陈旧豁免 0 条 ⇒ 登记簿已无任何可扣减项（T4「豁免只增不减」防线清偿到零基线）",
+    "registry_change_this_block": "无（登记簿已是 0 条且 updated_at 已为 2026-11-21·符合「0 陈旧豁免则只更新 updated_at 且不删条目」口径）",
+    "needs_review": [
+      {
+        "item": "backup_before_v3 指向文件缺失",
+        "detail": "本文件 backup_before_v3 字段指向 scripts/output/_w1291_exempt_backup_before_v3.json，该文件仓内不存在（未提交或已删）⇒ v3 前 4 条豁免原值无仓内备份可查",
+        "level": "低·仅留痕完整性·不影响第 49 槽判定"
+      },
+      {
+        "item": "v1/v2 needs_review 的 11 条登记键",
+        "detail": "v1 7 条 + v2 4 条（登记键与实测类键不匹配·当时保守保留）已由 v3「空页兜底」删除（对应页实测 perCls 全空）⇒ 本块复核：这些页现无朱砂实底·删除正确·无需再复核",
+        "level": "已消解"
+      },
+      {
+        "item": "门禁 cache 有工作树改动",
+        "detail": "本块复跑令 scripts/output/_vermilion_solid_cache.json 变更（并行会话改了 site/data/cross-time-danmaku.html·tag-cloud.html·dukou-engine.html·index.html 等页⇒sha1 更新）⇒ 该文件是门禁自身产物·是否随主会话提交由主会话定",
+        "level": "提示·非本块所改业务文件"
+      }
+    ]
+  }
 }

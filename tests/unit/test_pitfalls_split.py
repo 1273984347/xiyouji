@@ -256,18 +256,22 @@ def test_cli_exit_code_one_on_broken_repo(tmp_path):
 
 
 def test_rx_entry_multi_recognizes_parallel_batch_anchor():
-    """B 类回归锁（W1299）：并列多批次锚须被镜像侧扩展口径识别。
+    """B 类回归锁（W1299 立·W1300 治本）：并列多批次锚须被**公共本体口径**识别。
 
-    条目锚形态「（W1284/W1285 实证·E-NN·…」（实测 E-291）⇒ 公共口径 RX_ENTRY 只认单批次
-    ⇒ 漏判 ⇒ 归档有段却被判「孤儿段」。⇒ 镜像侧扩展口径 RX_ENTRY_MULTI 须识别，
-    且取**首个**批次号（与本体口径同序）。
+    W1299：公共口径只认单批次 ⇒ 镜像侧另立扩展正则 RX_ENTRY_MULTI（口径双份）
+    ⇒ 本体 E 号集合少 1（275 vs 条目行实测 276）⇒ 两套「坑位身份」口径不一致。
+    W1300（L-07 治本）：公共 RX_ENTRY 已扩为支持并列锚（取**首个**批次号·与归档段头同序）
+    ⇒ 镜像侧私有扩展正则**退役**（单一事实源·防两份正则各自漂移）⇒ 本例改断言「公共口径认该形态」。
+
+    **函数名沿用旧名**：guardrails 的 api_diff 判据把 tests/ 下的 test 函数也当「公开 API」
+    ⇒ 改名即被判「破坏性删除」而阻断提交（仓内实测）。名实不符之处以本 docstring 说明。
     """
     line = "- **某条目**（W1284/W1285 实证·E-291·跨项目通用）：正文"
-    assert cps.RX_ENTRY.match(line) is None, "公共口径若已认并列锚·本例失去回归意义"
-    m = cps.RX_ENTRY_MULTI.match(line)
-    assert m is not None, "镜像侧扩展口径须识别并列多批次锚"
+    m = cps.RX_ENTRY.match(line)
+    assert m is not None, "公共本体口径须识别并列多批次锚"
     assert m.group(1) == "W1284", m.group(1)
     assert m.group(2) == "E-291", m.group(2)
+    assert not hasattr(cps, "RX_ENTRY_MULTI"), "镜像侧私有扩展正则应退役（口径单一事实源）"
 
 
 def test_c5_non_pointer_entry_segment_is_not_orphan():
