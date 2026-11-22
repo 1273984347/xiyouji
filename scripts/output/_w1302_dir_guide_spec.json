@@ -1,0 +1,15 @@
+{
+  "batch": "W1302",
+  "date": "2026-11-22",
+  "title": "W1302 补：silk-src 目录导读入库",
+  "desc": "silk-src 目录导读 README 入库",
+  "head_entry": "2026-11-22（W1302 补：silk-src 目录导读入库）",
+  "head_sentence": "W1302 补：silk-src 目录导读入库",
+  "agents_note": "2026-11-22（W1302 补）：silk-src 目录导读入库",
+  "milestone_block": "- **W1302 补**：silk-src 目录导读 README 入库。\n",
+  "changelog_body": "\n\n> - **文件**：site/static/images/silk-src/README.md, scripts/output/_w1302_dir_guide_spec.json。\n",
+  "file_index_rows": [
+    "| site/static/images/silk-src/README.md | W1302 | silk-src 目录导读（gen_folder_docs） |",
+    "| scripts/output/_w1302_dir_guide_spec.json | W1302 | 本补充 spec |"
+  ]
+}

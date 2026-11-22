@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F5F0E4">
+    <title>西游小游戏 · 十八款合集</title>
+    <meta name="description" content="十八款西游主题小游戏合集：动作、策略、卡牌、解谜、休闲五类。全部本地、零外域依赖，file:// 直开。">
+    <link rel="stylesheet" href="../../site/tokens.css">
+    <link rel="stylesheet" href="../../site/system.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <header class="hub-top">
+        <a class="hub-brand" href="../../site/index.html">详解西游记</a>
+        <span class="hub-tag">小游戏合集 · 18 款</span>
+    </header>
+
+    <section class="hub-hero">
+        <div class="hub-hero-inner">
+            <p class="kicker">INTERACTIVE · 18 GAMES</p>
+            <h1>西游小游戏 · 十八款</h1>
+            <p class="hub-lead">十五款既有作品，加本次三合一的「取经三试」。动作、策略、卡牌、解谜、休闲五类，全部纯本地实现，双击文件即可开玩。</p>
+            <div class="hub-stats">
+                <span><b>18</b> 款游戏</span>
+                <span><b>5</b> 类玩法</span>
+                <span><b>3</b> 款新作</span>
+                <span><b>0</b> 外域依赖</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main" class="hub-main">
+        <div class="hub-toolbar">
+            <div class="hub-filters" id="hub-filters" role="group" aria-label="按类型筛选"></div>
+            <div class="hub-tools">
+                <label class="hub-search">
+                    <span class="hub-search-label">搜索</span>
+                    <input id="hub-search" type="search" placeholder="游戏名 / 类型 / 标签" autocomplete="off">
+                </label>
+                <label class="hub-sort">
+                    <span class="hub-search-label">排序</span>
+                    <select id="hub-sort">
+                        <option value="default">默认（新作在前）</option>
+                        <option value="diff">难度 高→低</option>
+                        <option value="rating">评测 高→低</option>
+                        <option value="name">名称</option>
+                    </select>
+                </label>
+                <button type="button" class="hub-random" id="hub-random">随机一款</button>
+            </div>
+        </div>
+
+        <p class="hub-count" id="hub-count" aria-live="polite">显示 18 / 18 款</p>
+        <div class="hub-recent" id="hub-recent" hidden>
+            <span class="hub-recent-label">最近玩过</span>
+            <a class="hub-recent-link" id="hub-recent-link" href="#"></a>
+        </div>
+        <div class="hub-grid" id="hub-grid"></div>
+        <div class="hub-empty" id="hub-empty" hidden>
+            <p>没有匹配的游戏。换个关键词，或切回「全部」。</p>
+        </div>
+    </main>
+
+    <footer class="hub-foot">
+        <span>《详解西游记》· 小游戏合集 · 本地离线可玩</span>
+        <span><a href="../../site/index.html">返回站点首页</a> · <a href="journey-trials.html">取经三试</a></span>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

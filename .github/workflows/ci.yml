@@ -491,6 +491,13 @@ jobs:
       #   使判定永远基于当前页面（不依赖入库报告是否被同步刷新）；
       #   报告内含全量 page_sha ⇒ 万一探针没跑到，页面哈希漂移也会被门禁判「报告陈旧」而 fail-closed。
       #   探针 file:// 口径·四态·扫描 site/data + site/en 的含图页。
+      - name: Restore SVG probe incremental cache (W1301·跨 run 增量·L-02)
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            scripts/output/_svg_probe_cache_graphic.json
+            scripts/output/_svg_probe_cache_body.json
+          key: svg-probe-v1-${{ hashFiles('scripts/svg_text_contrast_probe.js') }}
       - name: Refresh SVG contrast probe reports (W1295·graphic+body 两口径并行)
         # W1295：两口径**互不依赖**（graphic 扫全站含根页 / body 按 W1265 定义限定 data,en）
         #   且**写不同报告文件** ⇒ 原先两个 step 串行（实测 graphic 343s + body 339s = 682s·
@@ -512,6 +519,13 @@ jobs:
       #   「页面在 CI 环境能渲染出图元」的自证职责。
       - name: Restore probe report artifacts (W1286·避免 CI 自身产物触发 C4-f)
         run: git checkout -- scripts/output/svg_text_contrast_graphic_report.json scripts/output/svg_text_contrast_report.json
+      - name: Save SVG probe incremental cache (W1301·命中不更新故须显式 save)
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            scripts/output/_svg_probe_cache_graphic.json
+            scripts/output/_svg_probe_cache_body.json
+          key: svg-probe-v1-${{ hashFiles('scripts/svg_text_contrast_probe.js') }}
 
       # W1287：把「CI 自己改动了入库文件」变成**机器断言**（E-308 机器化·E-309）——
       #   任何 CI 步骤（探针现跑 / 生成器 / 注入器）改动了入库文件而未还原 ⇒ 此处**当场红**；

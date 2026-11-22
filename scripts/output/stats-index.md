@@ -16,9 +16,9 @@
 | a5_docs | 42 | docs/04-文化与历史背景/*.md（排除 README） | W904 | W1187 |
 | a6_docs | 19 | docs/05-诗词歌赋/*.md（排除 README） | W904 | W1243 |
 | cognition_docs | 3 | docs/08-提升认知/*.md（排除 README） | W904 | W1096 |
-| csp_covered | 874 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W1246 |
+| csp_covered | 874 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W1302 |
 | gate_count | 83 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | 1266 |
-| html_total | 875 | site/**/*.html（递归全站） | W459 | W1246 |
+| html_total | 875 | site/**/*.html（递归全站） | W459 | W1302 |
 | icon_allowlist_entries | 63 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1261 |
 | inline_css_pages | 637 | site 全树含 INLINED 标记页 | W459 | W1281 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
@@ -31,19 +31,47 @@
 | pitfalls_js | 13 | pitfalls.md 主题「JS / CSP / 运行时」实测条目数 | W1215 | W1286 |
 | pitfalls_total | 421 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | W1299 |
 | pytest_collected | 1831 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 1299 |
-| report_docs | 248 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1300 |
-| scan_files | 873 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W1246 |
+| report_docs | 250 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1301 |
+| scan_files | 873 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W1302 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
-| seo_scanned | 873 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W1246 |
-| site_data_html | 91 | site/data/*.html | W459 | W1244 |
+| seo_scanned | 873 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W1302 |
+| site_data_html | 91 | site/data/*.html | W459 | W1302 |
 | site_en_html | 138 | site/en/*.html | W528 | W528 |
 | site_reader_html | 636 | site/reader/**/*.html | W593 | W1246 |
 | site_root_html | 10 | site/*.html | W459 | W1141 |
 | spirit_docs | 4 | docs/09-精神塑造/*.md（排除 README） | W904 | W1096 |
-| visualization_pages | 90 | site/data_html − _shell.html | W459 | W1244 |
+| visualization_pages | 90 | site/data_html − _shell.html | W459 | W1302 |
 | w864_entries | 0 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | 1291 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1301（2026-11-22 21:30:11）
+- report_docs: 249 → 250
+
+### W1302（2026-11-22 20:07:07）
+- report_docs: 250 → 249
+
+### W1302（2026-11-22 19:27:59）
+- csp_covered: 875 → 874
+- html_total: 876 → 875
+- scan_files: 874 → 873
+- seo_scanned: 874 → 873
+- site_data_html: 92 → 91
+- visualization_pages: 91 → 90
+
+### W1302（2026-11-22 19:22:18）
+- report_docs: 249 → 250
+
+### W1302（2026-11-22 19:20:26）
+- csp_covered: 874 → 875
+- html_total: 875 → 876
+- scan_files: 873 → 874
+- seo_scanned: 873 → 874
+- site_data_html: 91 → 92
+- visualization_pages: 90 → 91
+
+### W1301（2026-11-22 19:04:20）
+- report_docs: 248 → 249
 
 ### W1300（2026-11-22 18:16:59）
 - report_docs: 247 → 248

@@ -1,3 +1,123 @@
+## W1303 西游小游戏三合一与十八款合集入口（2026-11-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/game/journey-trials.html | W1303 | 三合一游戏页（护师西行/八十一难/卡牌斗法） |
+| assets/game/journey-trials.css | W1303 | 三合一游戏样式与移动端/全屏适配 |
+| assets/game/js/core.js | W1303 | 共享核心、数据加载、音效合成 |
+| assets/game/js/main.js | W1303 | 模式切换、hash 深链、音效开关、引用复制 |
+| assets/game/js/action.js | W1303 | 护师西行 Canvas 动作、修罗与无尽 |
+| assets/game/js/roguelike.js | W1303 | 八十一难、行者/长途/事件/法宝 |
+| assets/game/js/cards.js | W1303 | 卡牌五阵、随机顺序、天眼通、技能说明 |
+| assets/game/index.html | W1303 | 十八款小游戏合集入口 |
+| assets/game/index.css | W1303 | 合集页样式 |
+| assets/game/index.js | W1303 | 合集数据、筛选/搜索/排序/战绩/最近玩过 |
+| assets/game/INDEX.md | W1303 | 目录文件清单刷新（gen_folder_docs） |
+| assets/game/README.md | W1303 | 目录导读刷新（gen_folder_docs） |
+| assets/INDEX.md | W1303 | assets 子目录清单刷新（含 game/） |
+| assets/README.md | W1303 | assets 目录导读刷新 |
+| scripts/output/_w1303_spec.json | W1303 | 本批 spec |
+| CHANGELOG.md | W1303 | 本批段（待 W1302 收官后落段） |
+| HANDOVER.md | W1303 | 里程碑块（待 W1302 收官后落段） |
+| docs/00-导读/W批次编号对账表.md | W1303 | W1303 认领行（待落段） |
+| scripts/output/file-index.md | W1303 | 本批 file-index 段（待 cascade） |
+| scripts/output/stats.json | W1303 | stats 重跑（待收官） |
+| scripts/output/stats-index.md | W1303 | stats 刷新 |
+| scripts/output/stats-changelog.json | W1303 | stats 刷新 |
+| scripts/output/INDEX.md | W1303 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/README.md | W1303 | 目录文档刷新（gen_folder_docs） |
+| scripts/output/tools-inventory.md | W1303 | 工具盘点刷新 |
+| scripts/output/_cascade_files_W1303.txt | W1303 | 级联落盘清单（cascade 生成） |
+| README.md | W1303 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1303 | 版本面推进（version_surface） |
+| CITATION.cff | W1303 | 版本面推进（version_surface） |
+| docs/00-导读/项目说明.md | W1303 | 版本面推进（version_surface） |
+| .github/workflows/README.md | W1303 | 版本面推进（version_surface） |
+| archive/docs/workflows-readme-history.md | W1303 | workflows README 历史归档（version_surface） |
+| archive/docs/AGENTS-ARCHIVE.md | W1303 | AGENTS 脚注滚动归档（cascade 写入） |
+| AGENTS.md | W1303 | 版本脚注滚动（cascade 写入） |
+| site/index.html | W1303 | 页脚批次链滚动（version_surface） |
+| site/data/cross-time-danmaku.html | W1303 | 页脚批次链滚动（version_surface） |
+| site/data/tag-cloud.html | W1303 | 页脚批次链滚动（version_surface） |
+| site/dukou-engine.html | W1303 | 页脚批次链滚动（version_surface） |
+| site/rss.xml | W1303 | RSS 批次链刷新 |
+| docs/INDEX.md | W1303 | docs 索引刷新 |
+| assets/INDEX.md | W1303 | assets 目录索引刷新（含 game/） |
+| assets/README.md | W1303 | assets 目录导读刷新 |
+| site/static/images/INDEX.md | W1303 | 图片目录索引刷新（如触发） |
+| site/static/images/README.md | W1303 | 图片目录导读刷新（如触发） |
+| scripts/output/_vermilion_solid_cache.json | W1303 | 朱砂实底门禁缓存随页脚批次链更新 |
+| scripts/output/_vermilion_solid_report.json | W1303 | 朱砂实底报告刷新 |
+| assets/game/js/INDEX.md | W1303 | js 目录索引刷新（gen_folder_docs） |
+| assets/game/js/README.md | W1303 | js 目录导读刷新（gen_folder_docs） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1303 | 台账行窗口归档（如触发） |
+
+## W1302 hero-batch 绢本源件入站 (8 张 webp 1920×1078 → site/static/images/silk-src/ · 哈希+目视双证甄别)（2026-11-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W1302 | 本批改动（收官链级联/规范面产物） |
+| HANDOVER.md | W1302 | 本批改动（收官链级联/规范面产物） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1302 | 台账历史行迁出（写窗腾移·W1238-W1239） |
+| docs/00-导读/W批次编号对账表.md | W1302 | 本批改动（收官链级联/规范面产物） |
+| docs/11-方案报告/README.md | W1302 | 本批改动（收官链级联/规范面产物） |
+| docs/11-方案报告/计划方案/T135-任务计划执行与经验沉淀报告-2026-11-22.md | W1302 | 本批改动（收官链级联/规范面产物） |
+| docs/INDEX.md | W1302 | 目录件重建（收官链 index 步） |
+| scripts/output/INDEX.md | W1302 | 目录件重建（收官链 refresh 步） |
+| scripts/output/README.md | W1302 | 目录件重建（收官链 refresh 步） |
+| scripts/output/_cascade_files_W1302.txt | W1302 | 级联件清单（收官链 cascade） |
+| scripts/output/_W1302_spec.json | W1302 | 本批 spec |
+| scripts/output/file-index.md | W1302 | 文件索引台面（收官链 index 步） |
+| scripts/output/stats-changelog.json | W1302 | 统计变更史追加 |
+| scripts/output/stats-index.md | W1302 | 统计索引刷新 |
+| scripts/output/stats.json | W1302 | 统计计数链刷新 |
+| scripts/output/tools-inventory.md | W1302 | 工具清单刷新（收官链 refresh 步） |
+| site/data/search-index-zh.js | W1302 | 搜索索引重建（收官链 index 步） |
+| site/en/search-index-en.js | W1302 | 搜索索引重建（收官链 index 步） |
+| site/static/images/INDEX.md | W1302 | 目录件重建（收官链 refresh 步） |
+| site/static/images/silk-src/INDEX.md | W1302 | 目录件重建（收官链 refresh 步） |
+| site/static/images/silk-src/silk-hero-04-baigu-furen.webp | W1302 | 丝路绢本源件入站（1920×1078·站内缺失组） |
+| site/static/images/silk-src/silk-hero-05-huoyanshan-yaowang.webp | W1302 | 丝路绢本源件入站（1920×1078·站内缺失组） |
+| site/static/images/silk-src/silk-hero-06-heifengshan.webp | W1302 | 丝路绢本源件入站（1920×1078·站内缺失组） |
+| site/static/images/silk-src/silk-hero-07-dumu-qiao.webp | W1302 | 丝路绢本源件入站（1920×1078·站内缺失组） |
+| site/static/images/silk-src/silk-hero-08-shanye-xinglu.webp | W1302 | 丝路绢本源件入站（1920×1078·站内缺失组） |
+| site/static/images/silk-src/silk-hero-09-wukong-tanyu.webp | W1302 | 丝路绢本源件入站（1920×1078·站内缺失组） |
+| site/static/images/silk-src/silk-hero-10-jingubang.webp | W1302 | 丝路绢本源件入站（1920×1078·站内缺失组） |
+| site/static/images/silk-src/silk-hero-11-fabao-sanjian.webp | W1302 | 丝路绢本源件入站（1920×1078·站内缺失组） |
+| STRUCTURE.md | W1302 | 报告数标记面跟随（248→249·本批报告入库） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1302 | 报告数标记面跟随（248→249·本批报告入库） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1302 | 报告数标记面跟随（248→249·本批报告入库） |
+
+## W1301 L-02 探针跨run增量缓存（2026-11-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W1301 | 本批改动（收官链级联/规范面产物） |
+| .gitignore | W1301 | 本批改动（收官链级联/规范面产物） |
+| docs/00-导读/W批次编号对账表.md | W1301 | 本批改动（收官链级联/规范面产物） |
+| docs/00-导读/遗留总账.md | W1301 | 本批改动（收官链级联/规范面产物） |
+| docs/11-方案报告/README.md | W1301 | 本批改动（收官链级联/规范面产物） |
+| docs/11-方案报告/计划方案/T134-任务计划执行与经验沉淀报告-2026-11-22.md | W1301 | 本批改动（收官链级联/规范面产物） |
+| docs/INDEX.md | W1301 | 目录件重建（收官链 index 步） |
+| scripts/output/INDEX.md | W1301 | 目录件重建（收官链 refresh 步） |
+| scripts/output/README.md | W1301 | 目录件重建（收官链 refresh 步） |
+| scripts/output/_cascade_files_W1301.txt | W1301 | 级联件清单（收官链 cascade） |
+| scripts/output/_w1266_allrender.json | W1301 | 渲染档案全量刷新（收官链刷新步） |
+| scripts/output/_w1301_spec.json | W1301 | 本批 spec |
+| scripts/output/chart-legend-render-audit.json | W1301 | 渲染档案刷新（豁免页模式） |
+| scripts/output/chart-legend-render-audit.md | W1301 | 渲染档案可读副本刷新 |
+| scripts/output/file-index.md | W1301 | 文件索引台面（收官链 index 步） |
+| scripts/output/stats-changelog.json | W1301 | 统计变更史追加 |
+| scripts/output/stats-index.md | W1301 | 统计索引刷新 |
+| scripts/output/stats.json | W1301 | 统计计数链刷新 |
+| scripts/output/svg_text_contrast_graphic_report.json | W1301 | graphic 口径探针报告刷新 |
+| scripts/output/svg_text_contrast_report.json | W1301 | body 口径探针报告刷新 |
+| scripts/output/tools-inventory.md | W1301 | 工具清单刷新（收官链 refresh 步） |
+| scripts/svg_text_contrast_probe.js | W1301 | 本批改动（收官链级联/规范面产物） |
+| site/data/search-index-zh.js | W1301 | 搜索索引重建（收官链 index 步） |
+| site/en/search-index-en.js | W1301 | 搜索索引重建（收官链 index 步） |
+| site/sitemap.xml | W1301 | sitemap 重建（收官链 index 步） |
+
 ## W1300 L-07 公共口径多批次锚漏计治本（2026-11-22）
 
 | 文件 | W | 说明 |

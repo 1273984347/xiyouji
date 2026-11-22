@@ -107,6 +107,10 @@ const BG_MODE_RAW = String(argValue('--bg-mode', 'body')).toLowerCase();
 const ONLY_PAGES = String(argValue('--pages', '')).trim();
 const NO_TOOL = process.argv.indexOf('--no-tool') > -1;
 const BG_MODE = BG_MODE_RAW === 'backdrop' ? 'backdrop' : BG_MODE_RAW === 'graphic' ? 'graphic' : 'body';
+// W1301（L-02）：跨 run 增量缓存文件（**不入库**·由 CI actions/cache 跨 run 携带·本地被 .gitignore 排除）。
+//   键 = 页内容 sha + 探针脚本 sha + 口径元数据（阈值/底色口径/扫描面/状态集/工具开关）
+//   ⇒ 页面未变 ⇒ 复用该页采集结果；口径或探针逻辑一变 ⇒ 全部失效重采（fail-closed）。
+const CACHE = path.resolve(ROOT, argValue('--cache', 'scripts/output/_svg_probe_cache_' + BG_MODE + '.json'));
 
 const STATES = [
   { id: 'S1-desktop-light', colorScheme: 'light', viewport: { width: 1440, height: 900 } },
@@ -894,6 +898,16 @@ async function measureState(context, pageRec, state) {
  *  W1286：按仓内规范（LF）归一后计算——`.gitattributes` 声明 `* text=auto eol=lf`
  *    ⇒ blob 恒为 LF，Windows 工作树因 core.autocrlf=true 为 CRLF
  *    ⇒ 不归一则本地报告的 sha 与 CI 上 blob 的 sha 永不相等 ⇒ CI 恒判「报告陈旧」。 */
+function probeSha() {
+  // 探针脚本自身 sha（口径版本）⇒ 探针逻辑一变 ⇒ 缓存全部失效（fail-closed·防复用旧口径结果）
+  try {
+    const raw = require('fs').readFileSync(__filename).toString('binary').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    return require('crypto').createHash('sha256').update(Buffer.from(raw, 'binary')).digest('hex').slice(0, 12);
+  } catch (e) {
+    return '';
+  }
+}
+
 function pageSha(absPath) {
   try {
     const raw = require('fs').readFileSync(absPath).toString('binary').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
@@ -906,26 +920,69 @@ function pageSha(absPath) {
 
 async function main() {
   const pages = listPages();
-  const browser = await _chromium().launch();
-  const rows = [];
-  console.log('页面 ' + pages.length + ' · 状态 ' + STATES.length + ' · conc=' + CONC + ' · 底色口径=' + BG_MODE);
-  for (const state of STATES) {
-    const context = await browser.newContext({ viewport: state.viewport });
-    let idx = 0;
-    const worker = async () => {
-      for (;;) {
-        const i = idx++;
-        if (i >= pages.length) break;
-        const row = await measureState(context, pages[i], state);
-        rows.push(row);
-        const low = (row.items || []).filter((x) => x.cr < THRESHOLD).length;
-        if (low) console.log('  ' + row.page + ' ' + state.id + ' 低对比 ' + low + ' 处');
-      }
-    };
-    await Promise.all(Array.from({ length: Math.min(CONC, pages.length) }, worker));
-    await context.close();
+  // ---- W1301（L-02）：跨 run 增量缓存（口径级 + 页级双闸）----
+  const cacheMeta = {
+    version: 1,
+    probe_sha: probeSha(),
+    params: {
+      threshold: THRESHOLD, bg_mode: BG_MODE, scope: SCOPE,
+      states: STATES.map((s) => s.id), no_tool: NO_TOOL,
+    },
+  };
+  let cacheRows = [];
+  try {
+    const c = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
+    if (c && c.version === cacheMeta.version && c.probe_sha === cacheMeta.probe_sha
+        && JSON.stringify(c.params) === JSON.stringify(cacheMeta.params)) {
+      cacheRows = c.rows || [];
+    } else {
+      console.log('[cache] 口径/探针版本不匹配 ⇒ 全量重采');
+    }
+  } catch (e) {
+    console.log('[cache] 无可用缓存 ⇒ 全量采集');
   }
-  await browser.close();
+  const cacheMap = new Map();
+  for (const r of cacheRows) cacheMap.set(r.page + '|' + r.state, r);
+  const shaOf = new Map();
+  for (const p of pages) shaOf.set(p.rel, pageSha(p.abs));
+  const cached = [];
+  const todo = [];
+  for (const state of STATES) {
+    for (const p of pages) {
+      const hit = cacheMap.get(p.rel + '|' + state.id);
+      const curSha = shaOf.get(p.rel);
+      if (hit && hit.sha && hit.sha === curSha && !hit.fatal && !hit.unstable) {
+        cached.push(hit);
+      } else {
+        todo.push({ p: p, state: state });
+      }
+    }
+  }
+  const rows = cached.slice();
+  console.log('页面 ' + pages.length + ' · 状态 ' + STATES.length + ' · conc=' + CONC
+    + ' · 底色口径=' + BG_MODE + ' · 缓存命中 ' + cached.length + ' 行 · 待采 ' + todo.length + ' 行');
+  if (todo.length) {
+    const browser = await _chromium().launch();
+    for (const state of STATES) {
+      const list = todo.filter((t) => t.state.id === state.id);
+      if (!list.length) continue;
+      const context = await browser.newContext({ viewport: state.viewport });
+      let idx = 0;
+      const worker = async () => {
+        for (;;) {
+          const i = idx++;
+          if (i >= list.length) break;
+          const row = await measureState(context, list[i].p, list[i].state);
+          rows.push(row);
+          const low = (row.items || []).filter((x) => x.cr < THRESHOLD).length;
+          if (low) console.log('  ' + row.page + ' ' + state.id + ' 低对比 ' + low + ' 处');
+        }
+      };
+      await Promise.all(Array.from({ length: Math.min(CONC, list.length) }, worker));
+      await context.close();
+    }
+    await browser.close();
+  }
 
   const fatals = rows.filter((r) => r.fatal);
   // W1285：未稳定行（采集时页面尚未渲染 ⇒ 该行结果不可信 ⇒ 可能静默漏检）
@@ -980,6 +1037,18 @@ async function main() {
   };
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(report, null, 1), 'utf8');
+  // W1301（L-02）：写增量缓存（**只写稳定行**·避免把 fatal/unstable 的坏状态固化进缓存）。
+  try {
+    const stable = rows.filter((r) => !r.fatal && !r.unstable);
+    fs.mkdirSync(path.dirname(CACHE), { recursive: true });
+    fs.writeFileSync(CACHE, JSON.stringify({
+      version: cacheMeta.version, probe_sha: cacheMeta.probe_sha,
+      params: cacheMeta.params, rows: stable,
+    }), 'utf8');
+    console.log('[cache] 已写缓存 ' + stable.length + ' 行 → ' + path.relative(ROOT, CACHE));
+  } catch (e) {
+    console.log('[cache] 写缓存失败（不影响本次报告）·' + (e && e.message ? e.message : e));
+  }
   console.log(
     '完成：页面 ' + pages.length + ' · 行 ' + rows.length + ' · 低对比 ' + violations + ' 处 · 违例页 ' +
       Object.keys(summary).length + ' · fatal ' + fatals.length + ' · 不稳定 ' + unstableRows.length + ' → ' + path.relative(ROOT, OUT)

@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0B1512">
+<meta name="color-scheme" content="light">
+<title>西游 · 甘露引 —— 接水管（单文件原型）</title>
+<meta name="description" content="《西游 · 甘露引》是一款零依赖、file:// 直开的接水管益智小游戏：转动管路，把净瓶甘露引到人参果树根。">
+<style>
+:root{
+  --paper:#FAF7F0;--ink:#221D16;--ink-soft:#6B665E;--line:rgba(34,29,22,.16);
+  --accent:#C0392B;--gold:#E0B84A;--jade:#3A473A;--indigo:#40619E;
+  --stage-bg:#0B1512;--hud-text:#F2EBDC;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{
+  margin:0;min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  padding:clamp(10px,2.2vw,26px);
+  background:radial-gradient(120% 90% at 50% 0%, #FBF7EE 0%, #EFE7D8 55%, #E2D6C1 100%);
+  color:var(--ink);font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(34,29,22,.026) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(34,29,22,.018) 0 1px, transparent 1px 4px);
+  z-index:0;
+}
+.topbar{
+  position:relative;z-index:1;width:min(1120px,100%);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand h1{margin:0;font-size:clamp(16px,2.1vw,22px);font-weight:600;letter-spacing:.18em}
+.brand .sub{font-size:12px;color:var(--ink-soft);letter-spacing:.16em}
+.brand .seal{
+  display:inline-grid;place-items:center;width:26px;height:26px;
+  border:1px solid var(--accent);color:var(--accent);border-radius:4px;
+  font-size:12px;letter-spacing:0;transform:translateY(2px);
+}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;cursor:pointer;border-radius:999px;letter-spacing:.12em;
+  transition:background 160ms ease,border-color 160ms ease,transform 160ms ease,color 160ms ease;
+}
+.btn:focus-visible,.cell:focus-visible,.side-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.btn.small{font-size:12px;padding:7px 14px;border:1px solid var(--line);background:rgba(250,247,240,.7);color:var(--ink-soft)}
+.btn.small:hover{background:#fff;color:var(--ink);border-color:rgba(34,29,22,.3)}
+.stage{
+  position:relative;z-index:1;width:100%;
+  max-width:min(1120px, calc((100dvh - 176px) * 16 / 9));
+  aspect-ratio:16/9;margin-inline:auto;background:var(--stage-bg);border-radius:10px;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 26px 60px -34px rgba(34,29,22,.7),0 2px 10px rgba(34,29,22,.14);
+  user-select:none;-webkit-user-select:none;touch-action:none;
+}
+.stage:fullscreen{max-width:none;width:100vw;height:100dvh;aspect-ratio:auto;border-radius:0}
+canvas#game{display:block;width:100%;height:100%;touch-action:none;background:#0B1512}
+.hud{
+  position:absolute;inset:10px 12px auto;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;
+  pointer-events:none;color:var(--hud-text);font-size:12px;letter-spacing:.05em;z-index:8;
+  transition:opacity 220ms ease;
+}
+.stage[data-state="menu"] .hud,
+.stage[data-state="menu"] .board,
+.stage[data-state="menu"] .side{opacity:0;pointer-events:none}
+.hud-left,.hud-right{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.stat{
+  padding:5px 9px;border-radius:7px;background:rgba(9,21,18,.6);
+  border:1px solid rgba(242,235,220,.16);color:rgba(242,235,220,.82);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.stat b{color:#fff;font-weight:600}
+.stat.gold b{color:#F4DFA6}
+.board{
+  position:absolute;top:16%;z-index:5;display:grid;gap:3px;padding:8px;border-radius:12px;
+  background:rgba(8,20,17,.6);border:1px solid rgba(242,235,220,.16);
+  backdrop-filter:blur(4px);box-shadow:0 18px 40px -24px rgba(0,0,0,.9);
+  transition:opacity 220ms ease;
+}
+.cell{
+  position:relative;border:0;border-radius:6px;padding:0;background:rgba(250,247,240,.035);
+  display:grid;place-items:center;cursor:pointer;min-width:0;min-height:0;
+  box-shadow:0 0 0 1px rgba(242,235,220,.04) inset;transition:background 120ms ease;
+}
+.cell:hover{background:rgba(250,247,240,.09)}
+.cell.fixed{cursor:default}
+.cell.hint{box-shadow:0 0 0 2px #7FD3C9,0 0 14px rgba(127,211,201,.45) inset}
+.cell.turned .pipe{animation:pipeTurn 260ms ease}
+@keyframes pipeTurn{
+  0%{transform:scale(1)}
+  45%{transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+.pipe{
+  position:absolute;inset:10%;border-radius:50%;
+  transition:filter 140ms ease;
+}
+.arm{
+  position:absolute;background:linear-gradient(180deg,#9B8968,#5F523A);
+  border-radius:4px;box-shadow:0 0 0 1px rgba(20,14,8,.35);
+}
+.arm.n{left:50%;top:0;width:18%;height:48%;transform:translateX(-50%)}
+.arm.e{right:0;top:50%;height:18%;width:48%;transform:translateY(-50%)}
+.arm.s{left:50%;bottom:0;width:18%;height:48%;transform:translateX(-50%)}
+.arm.w{left:0;top:50%;height:18%;width:48%;transform:translateY(-50%)}
+.hub{
+  position:absolute;left:50%;top:50%;width:36%;height:36%;transform:translate(-50%,-50%);
+  border-radius:50%;background:radial-gradient(circle at 36% 30%,#C9B688,#6E5C40);
+  border:1px solid rgba(244,223,166,.35);box-shadow:0 1px 3px rgba(0,0,0,.4);
+  display:grid;place-items:center;font-size:clamp(8px,1.2vw,13px);color:#2B2108;font-weight:600;
+}
+.pipe.source .arm{background:linear-gradient(180deg,#BFE6E4,#4E9A96);box-shadow:0 0 8px rgba(127,211,201,.5)}
+.pipe.source .hub{background:radial-gradient(circle at 36% 30%,#E8FBFA,#7FD3C9 60%,#2F6E6A);border-color:#DFF6F4;color:#0E2A27;box-shadow:0 0 12px rgba(127,211,201,.7)}
+.pipe.target .arm{background:linear-gradient(180deg,#B7D9A0,#4E7A4A);box-shadow:0 0 8px rgba(78,122,74,.45)}
+.pipe.target .hub{background:radial-gradient(circle at 36% 30%,#E6F4DC,#79A965 60%,#3F6E4C);border-color:#E6F4DC;color:#15321A;box-shadow:0 0 12px rgba(121,169,101,.65)}
+.pipe.flow .arm{background:linear-gradient(180deg,#DFF6F4,#59B7C9);box-shadow:0 0 8px rgba(89,183,201,.6)}
+.pipe.flow .hub{background:radial-gradient(circle at 36% 30%,#F2FFFE,#7FD3C9 55%,#2F6E6A);border-color:#DFF6F4;box-shadow:0 0 12px rgba(127,211,201,.8)}
+.side{
+  position:absolute;right:4%;top:16%;width:30%;z-index:5;color:var(--hud-text);
+  padding:12px 14px;border-radius:12px;background:rgba(8,20,17,.62);
+  border:1px solid rgba(242,235,220,.16);backdrop-filter:blur(4px);
+  transition:opacity 220ms ease;
+}
+.side-kicker{margin:0;font-size:10px;letter-spacing:.28em;color:rgba(242,235,220,.5)}
+.side h2{margin:4px 0 10px;font-size:clamp(14px,1.8vw,20px);font-weight:600;letter-spacing:.14em;color:#F6EFE1}
+.side p{margin:0 0 8px;font-size:12px;line-height:1.7;color:rgba(242,235,220,.72);letter-spacing:.04em}
+.side .count{color:#F4DFA6;font-variant-numeric:tabular-nums}
+.side-stats{font-size:11.5px;color:rgba(242,235,220,.68);letter-spacing:.05em;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.side-stats b{color:#F6EFE1}
+.side-actions{display:flex;gap:8px;flex-wrap:wrap}
+.side-btn{
+  flex:1;padding:7px 8px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:11.5px;
+  letter-spacing:.08em;border:1px solid rgba(242,235,220,.24);background:rgba(242,235,220,.06);color:var(--hud-text);
+  transition:background 160ms ease;
+}
+.side-btn:hover{background:rgba(242,235,220,.16)}
+.side-btn:disabled{opacity:.4;cursor:default}
+.toast{
+  position:absolute;top:30%;left:50%;transform:translate(-50%,-8px);
+  padding:9px 22px;border:1px solid rgba(242,235,220,.28);
+  background:rgba(9,21,18,.8);color:#F6EFE1;
+  letter-spacing:.2em;font-size:clamp(13px,1.9vw,18px);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity 240ms ease,transform 240ms ease;z-index:8;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.screen{
+  position:absolute;inset:0;z-index:9;display:grid;place-items:center;
+  padding:clamp(14px,3.5vw,34px);
+  background:radial-gradient(80% 80% at 50% 38%, rgba(11,21,18,.66), rgba(11,21,18,.94));
+}
+.panel{width:min(600px,100%);max-height:100%;overflow:auto;text-align:center;color:var(--hud-text);scrollbar-width:thin}
+.kicker{margin:0 0 4px;font-size:11px;letter-spacing:.3em;color:rgba(242,235,220,.55)}
+.panel h2{margin:.16em 0 .1em;font-size:clamp(24px,4.3vw,40px);font-weight:600;letter-spacing:.18em}
+.panel h2 .accent{color:var(--gold)}
+.lead{margin:0 auto;max-width:520px;font-size:clamp(12.5px,1.5vw,14.5px);line-height:1.95;letter-spacing:.06em;color:rgba(242,235,220,.78)}
+.lead em{font-style:normal;color:var(--gold);white-space:nowrap}
+.keys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;margin:14px 0 16px;text-align:left;font-size:12.5px;color:rgba(242,235,220,.84)}
+.keys div{display:flex;justify-content:space-between;gap:8px;padding-bottom:5px;border-bottom:1px dashed rgba(242,235,220,.14)}
+kbd{
+  display:inline-block;padding:1px 6px;border-radius:4px;border:1px solid rgba(242,235,220,.26);
+  background:rgba(242,235,220,.1);font-family:"JetBrains Mono","Consolas",monospace;font-size:11px;white-space:nowrap;
+}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.btn.primary{
+  font-family:inherit;font-size:15px;letter-spacing:.2em;padding:11px 28px;border-radius:999px;
+  border:1px solid #D9564A;background:var(--accent);color:#FFF7EC;cursor:pointer;
+  box-shadow:0 10px 24px -14px rgba(192,57,43,.9);transition:background 160ms ease,transform 160ms ease;
+}
+.btn.primary:hover{background:#D0473A;transform:translateY(-1px)}
+.btn.ghost{
+  font-family:inherit;font-size:13px;letter-spacing:.14em;padding:9px 18px;border-radius:999px;
+  border:1px solid rgba(242,235,220,.34);background:transparent;color:rgba(242,235,220,.9);cursor:pointer;
+  transition:background 160ms ease,border-color 160ms ease;
+}
+.btn.ghost:hover{background:rgba(242,235,220,.1);border-color:rgba(242,235,220,.6)}
+.result{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 6px}
+.result div{padding:9px 8px;border:1px solid rgba(242,235,220,.14);border-radius:8px;background:rgba(242,235,220,.04)}
+.result span{display:block;font-size:11px;letter-spacing:.18em;color:rgba(242,235,220,.5);margin-bottom:4px}
+.result b{font-size:clamp(16px,2.2vw,22px);font-variant-numeric:tabular-nums;color:#F6EFE1;font-weight:500}
+.stars{color:#F4DFA6;letter-spacing:.18em;font-size:clamp(18px,2.6vw,26px)}
+.bestline{margin:8px 0 16px;font-size:12px;letter-spacing:.12em;color:rgba(242,235,220,.6);font-variant-numeric:tabular-nums}
+.legend{
+  position:relative;z-index:1;width:min(1120px,100%);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-soft);letter-spacing:.06em;
+}
+.legend .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);vertical-align:middle;margin:0 7px 2px}
+.legend b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:760px){
+  .brand .sub{display:none}
+  .stage{max-width:min(1120px, calc((100dvh - 156px) * 16 / 9))}
+  .legend{justify-content:center;text-align:center}
+  .hud{inset:6px 8px auto;gap:4px}
+  .stat{padding:4px 7px;font-size:10.5px}
+  .board{top:18%;padding:5px;gap:2px}
+  .side{right:2%;top:12%;width:34%;padding:8px 9px}
+  .side h2{font-size:12px;margin:2px 0 6px}
+  .side-kicker,.side p{display:none}
+  .side-stats{font-size:10px;margin-bottom:6px}
+  .side-btn{padding:5px 4px;font-size:9.5px}
+  .keys{grid-template-columns:1fr}
+  .toast{top:24%}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>西游 · 甘露引</h1>
+    <span class="sub">接水管 / 单文件原型</span>
+    <span class="seal" aria-hidden="true">引</span>
+  </div>
+  <div class="top-actions">
+    <button class="btn small" id="btnSound" type="button" aria-pressed="true">音效 开</button>
+    <button class="btn small" id="btnRestart" type="button">重来</button>
+    <button class="btn small" id="btnFull" type="button">全屏</button>
+  </div>
+</header>
+
+<main class="stage" id="stage" data-state="menu">
+  <canvas id="game" width="960" height="540" aria-label="甘露引画面：净瓶泉眼与人身果树根之间的管路棋盘"></canvas>
+
+  <div class="hud">
+    <div class="hud-left">
+      <span class="stat">第 <b id="levelNum">1</b>/5 关</span>
+      <span class="stat">步数 <b id="moveNum">0</b></span>
+    </div>
+    <div class="hud-right">
+      <span class="stat gold">提示 <b id="hintNum">3</b></span>
+    </div>
+  </div>
+
+  <div class="board" id="board" aria-label="甘露引管路棋盘"></div>
+
+  <aside class="side">
+    <p class="side-kicker">五庄观 · 甘露</p>
+    <h2 id="levelName">一、初引甘露</h2>
+    <p>点击管路旋转管件，把 <b>泉眼</b> 的甘露一路接到 <b>树根</b>。接通即通关，管件怎么转都行。</p>
+    <p class="count">状态 <b id="flowText">未接通</b></p>
+    <p class="side-stats">步数 <b id="moveNum2">0</b> · 本关最佳 <b id="bestMoves">—</b></p>
+    <div class="side-actions">
+      <button class="side-btn" id="btnHint" type="button">提示 H</button>
+      <button class="side-btn" id="btnUndo" type="button">撤回 U</button>
+      <button class="side-btn" id="btnReset" type="button">重来 R</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" aria-hidden="true"></div>
+
+  <section class="screen" id="startScreen">
+    <div class="panel">
+      <p class="kicker">单文件 · 零外域依赖 · file:// 直开</p>
+      <h2>甘露<span class="accent">引</span></h2>
+      <p class="lead">人参果树枯了，五庄观一片愁云。转动这些散乱的管件，<em>把净瓶甘露从泉眼引到树根。</em></p>
+      <div class="keys" aria-label="玩法">
+        <div><span>转管</span><span>点击任意管件</span></div>
+        <div><span>接通</span><span>泉眼到树根管路相连</span></div>
+        <div><span>提示 / 撤回</span><span><kbd>H</kbd> / <kbd>U</kbd></span></div>
+        <div><span>重来</span><span><kbd>R</kbd></span></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnStart" type="button">引水救树</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="clearScreen" hidden>
+    <div class="panel">
+      <p class="kicker">甘露已至</p>
+      <h2 id="clearTitle">一、初引甘露</h2>
+      <div class="result">
+        <div><span>步数</span><b id="clearMoves">0</b></div>
+        <div><span>本关最佳</span><b id="clearBest">—</b></div>
+        <div><span>评价</span><b class="stars" id="clearStars">★★★</b></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnNextLevel" type="button">下一关</button>
+        <button class="btn ghost" id="btnReplayLevel" type="button">再引一遍</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="victoryScreen" hidden>
+    <div class="panel">
+      <p class="kicker">五关尽通 · 树根回春</p>
+      <h2>人参果<span class="accent">树已活</span></h2>
+      <p class="lead">甘露入根，枯枝回绿。五庄观的风里又有了果香，镇元子拂尘一摆，算是揭过了这一页。</p>
+      <div class="result">
+        <div><span>总步数</span><b id="victoryMoves">0</b></div>
+        <div><span>破关</span><b>5/5</b></div>
+        <div><span>最佳总步</span><b id="victoryBest">—</b></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnAgain" type="button">再引一遭</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="legend">
+  <span>单文件 Canvas2D + DOM 棋盘 · 无外域资源 · 点击 / 键盘 · 建议横屏</span>
+  <span><span class="dot"></span>最佳 <b id="bestNum">—</b></span>
+</footer>
+<p class="sr-only" id="live" aria-live="polite"></p>
+
+<script>
+(() => {
+  'use strict';
+
+  const VIEW = { w: 960, h: 540 };
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const BEST_KEY = 'xyj_ganluyin_best_v1';
+  const MUTE_KEY = 'xyj_ganluyin_mute_v1';
+
+  const LEVELS = [
+    {
+      name: '一、初引甘露', size: 4, source: [0, 0], target: [3, 3],
+      path: [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [2, 3], [3, 3]]
+    },
+    {
+      name: '二、回廊引水', size: 5, source: [0, 0], target: [4, 4],
+      path: [[0, 0], [0, 1], [0, 2], [1, 2], [1, 3], [2, 3], [2, 4], [3, 4], [4, 4]]
+    },
+    {
+      name: '三、五庄观渠', size: 5, source: [2, 0], target: [2, 4],
+      path: [[2, 0], [2, 1], [1, 1], [0, 1], [0, 2], [0, 3], [1, 3], [2, 3], [2, 4]]
+    },
+    {
+      name: '四、盘根错节', size: 6, source: [0, 0], target: [5, 5],
+      path: [[0, 0], [0, 1], [0, 2], [0, 3], [1, 3], [1, 4], [1, 5], [2, 5], [3, 5], [3, 4], [4, 4], [4, 5], [5, 5]]
+    },
+    {
+      name: '五、甘露归根', size: 6, source: [0, 5], target: [5, 0],
+      path: [[0, 5], [0, 4], [1, 4], [1, 3], [2, 3], [3, 3], [3, 2], [4, 2], [4, 1], [5, 1], [5, 0]]
+    }
+  ];
+
+  const $ = (id) => document.getElementById(id);
+  const canvas = $('game');
+  const ctx = canvas.getContext('2d');
+  const stage = $('stage');
+  const boardEl = $('board');
+  const levelNum = $('levelNum');
+  const moveNum = $('moveNum');
+  const moveNum2 = $('moveNum2');
+  const levelName = $('levelName');
+  const hintNum = $('hintNum');
+  const flowText = $('flowText');
+  const bestMovesEl = $('bestMoves');
+  const btnHint = $('btnHint');
+  const btnUndo = $('btnUndo');
+  const btnReset = $('btnReset');
+  const toastEl = $('toast');
+  const liveEl = $('live');
+  const bestNum = $('bestNum');
+  const btnSound = $('btnSound');
+  const btnRestart = $('btnRestart');
+  const btnFull = $('btnFull');
+  const btnStart = $('btnStart');
+  const btnNextLevel = $('btnNextLevel');
+  const btnReplayLevel = $('btnReplayLevel');
+  const btnAgain = $('btnAgain');
+
+  const screens = {
+    start: $('startScreen'),
+    clear: $('clearScreen'),
+    victory: $('victoryScreen')
+  };
+
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const shuffleArr = (arr) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    return arr;
+  };
+
+  function readBests() {
+    try { return JSON.parse(localStorage.getItem(BEST_KEY)) || {}; } catch (err) { return {}; }
+  }
+  function writeBests(b) {
+    try { localStorage.setItem(BEST_KEY, JSON.stringify(b)); } catch (err) {}
+  }
+  function totalBest() {
+    const b = readBests();
+    const vals = Object.values(b);
+    if (!vals.length) return null;
+    return vals.reduce((a, v) => a + v, 0);
+  }
+  function updateBestLabels() {
+    const t = totalBest();
+    bestNum.textContent = t === null ? '—' : String(t);
+    $('victoryBest').textContent = t === null ? '—' : String(t);
+  }
+  function announce(msg) { liveEl.textContent = msg; }
+
+  // ===== 音频 =====
+  const AudioKit = (() => {
+    let ac = null;
+    let muted = false;
+    try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch (err) {}
+    function ensure() {
+      if (!ac) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) ac = new AC();
+      }
+      if (ac && ac.state === 'suspended') ac.resume();
+      return ac;
+    }
+    function tone(freq, dur, type, vol, slideTo) {
+      if (muted) return;
+      const a = ensure();
+      if (!a) return;
+      const t0 = a.currentTime;
+      const osc = a.createOscillator();
+      const gain = a.createGain();
+      osc.type = type || 'square';
+      osc.frequency.setValueAtTime(freq, t0);
+      if (slideTo) osc.frequency.exponentialRampToValueAtTime(Math.max(30, slideTo), t0 + dur);
+      gain.gain.setValueAtTime(vol, t0);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      osc.connect(gain).connect(a.destination);
+      osc.start(t0);
+      osc.stop(t0 + dur + 0.03);
+    }
+    return {
+      ensure,
+      isMuted: () => muted,
+      toggle() {
+        muted = !muted;
+        try { localStorage.setItem(MUTE_KEY, muted ? '1' : '0'); } catch (err) {}
+        if (!muted) this.click();
+        return muted;
+      },
+      click() { tone(480, 0.05, 'triangle', 0.03, 600); },
+      turn() { tone(360, 0.06, 'sine', 0.03, 430); },
+      flow() { tone(660, 0.12, 'sine', 0.05, 900); setTimeout(() => tone(880, 0.16, 'sine', 0.04, 1100), 80); },
+      bad() { tone(170, 0.1, 'sawtooth', 0.04, 120); },
+      win() { tone(392, 0.16, 'triangle', 0.06); setTimeout(() => tone(523, 0.18, 'triangle', 0.06), 150); setTimeout(() => tone(659, 0.3, 'triangle', 0.07), 320); }
+    };
+  })();
+
+  function syncSoundBtn() {
+    const muted = AudioKit.isMuted();
+    btnSound.textContent = muted ? '音效 关' : '音效 开';
+    btnSound.setAttribute('aria-pressed', String(!muted));
+  }
+
+  function resize() {
+    const rect = stage.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.round(rect.width * dpr));
+    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);
+  window.addEventListener('resize', resize);
+  window.addEventListener('orientationchange', resize);
+  resize();
+
+  // ===== 状态 =====
+  const game = {
+    phase: 'menu',
+    levelIndex: 0,
+    size: 4,
+    pieces: [],
+    source: 0,
+    target: 0,
+    path: [],
+    interior: [],
+    optimal: 0,
+    flow: new Set(),
+    hintIndex: -1,
+    moves: 0,
+    hints: 3,
+    levelMoves: [],
+    history: [],
+    initialPieces: null
+  };
+
+  const DIRS = [
+    { bit: 1, dx: 0, dy: -1, cls: 'n' },
+    { bit: 2, dx: 1, dy: 0, cls: 'e' },
+    { bit: 4, dx: 0, dy: 1, cls: 's' },
+    { bit: 8, dx: -1, dy: 0, cls: 'w' }
+  ];
+
+  function bitTo(dx, dy) {
+    if (dx === 0 && dy === -1) return 1;
+    if (dx === 1 && dy === 0) return 2;
+    if (dx === 0 && dy === 1) return 4;
+    if (dx === -1 && dy === 0) return 8;
+    return 0;
+  }
+
+  function rotateMask(mask, r) {
+    let m = mask;
+    for (let i = 0; i < (r % 4 + 4) % 4; i++) {
+      m = ((m << 1) & 15) | ((m & 8) >> 3);
+    }
+    return m;
+  }
+
+  function pieceMask(i) {
+    return rotateMask(game.pieces[i].mask, game.pieces[i].rot);
+  }
+
+  function idx(x, y) {
+    return y * game.size + x;
+  }
+
+  function connectedCells() {
+    const visited = new Set([game.source]);
+    const queue = [game.source];
+    while (queue.length) {
+      const cur = queue.shift();
+      const cx = cur % game.size;
+      const cy = Math.floor(cur / game.size);
+      const cm = pieceMask(cur);
+      for (const d of DIRS) {
+        if (!(cm & d.bit)) continue;
+        const nx = cx + d.dx;
+        const ny = cy + d.dy;
+        if (nx < 0 || ny < 0 || nx >= game.size || ny >= game.size) continue;
+        const ni = idx(nx, ny);
+        if (visited.has(ni)) continue;
+        if (!(pieceMask(ni) & bitTo(-d.dx, -d.dy))) continue;
+        visited.add(ni);
+        queue.push(ni);
+      }
+    }
+    return visited;
+  }
+
+  function isConnected() {
+    return connectedCells().has(game.target);
+  }
+
+  function alignClicks(piece) {
+    for (let k = 1; k < 4; k++) {
+      if (rotateMask(piece.mask, (piece.rot + k) % 4) === piece.mask) return k;
+    }
+    return 0;
+  }
+
+  // ===== 生成 =====
+  function buildLevel(index) {
+    const cfg = LEVELS[index];
+    const size = cfg.size;
+    game.size = size;
+    const n = size * size;
+    game.source = idx(cfg.source[0], cfg.source[1]);
+    game.target = idx(cfg.target[0], cfg.target[1]);
+    game.path = cfg.path.map((p) => idx(p[0], p[1]));
+    game.interior = game.path.slice(1, -1);
+    game.moves = 0;
+    game.history = [];
+    game.hints = 3;
+    game.hintIndex = -1;
+
+    const fillerMasks = [3, 5, 6, 9, 10, 12, 7, 11, 13, 14];
+    let guard = 0;
+    do {
+      game.pieces = [];
+      for (let i = 0; i < n; i++) {
+        game.pieces.push({
+          mask: fillerMasks[Math.floor(Math.random() * fillerMasks.length)],
+          rot: Math.floor(Math.random() * 4),
+          fixed: false
+        });
+      }
+      game.pieces[game.source] = { mask: 15, rot: 0, fixed: true };
+      game.pieces[game.target] = { mask: 15, rot: 0, fixed: true };
+      for (let k = 1; k < game.path.length - 1; k++) {
+        const cur = game.path[k];
+        const prev = game.path[k - 1];
+        const next = game.path[k + 1];
+        const cx = cur % size;
+        const cy = Math.floor(cur / size);
+        const px = prev % size;
+        const py = Math.floor(prev / size);
+        const nx = next % size;
+        const ny = Math.floor(next / size);
+        const mask = bitTo(px - cx, py - cy) | bitTo(nx - cx, ny - cy);
+        game.pieces[cur] = { mask, rot: 1 + Math.floor(Math.random() * 3), fixed: false };
+      }
+      guard++;
+    } while (isConnected() && guard < 80);
+
+    game.optimal = game.interior.reduce((sum, i) => sum + alignClicks(game.pieces[i]), 0);
+    game.flow = connectedCells();
+  }
+
+  function loadLevel(index) {
+    game.levelIndex = index;
+    buildLevel(index);
+    game.initialPieces = game.pieces.map((q) => ({ mask: q.mask, rot: q.rot, fixed: q.fixed }));
+    game.phase = 'playing';
+    stage.dataset.state = 'playing';
+    showScreen(null);
+    renderAll();
+    announce(LEVELS[index].name + '。');
+  }
+
+  function startRun() {
+    AudioKit.ensure();
+    game.levelMoves = [];
+    game.phase = 'playing';
+    loadLevel(0);
+  }
+
+  function showScreen(name) {
+    for (const key in screens) screens[key].hidden = key !== name;
+  }
+
+  function showToast(text, dur) {
+    toastEl.textContent = text;
+    toastEl.classList.add('show');
+    toastEl.setAttribute('aria-hidden', 'false');
+    announce(text);
+    clearTimeout(game.toastTimer);
+    game.toastTimer = setTimeout(() => {
+      toastEl.classList.remove('show');
+      toastEl.setAttribute('aria-hidden', 'true');
+    }, dur || 1000);
+  }
+
+  // ===== 操作 =====
+  function rotatePiece(i) {
+    if (game.phase !== 'playing') return;
+    const p = game.pieces[i];
+    if (!p || p.fixed) {
+      showToast(i === game.source ? '泉眼不可转' : '树根不可转', 800);
+      AudioKit.bad();
+      return;
+    }
+    game.history.push({
+      pieces: game.pieces.map((q) => ({ mask: q.mask, rot: q.rot, fixed: q.fixed })),
+      moves: game.moves,
+      flow: new Set(game.flow),
+      optimal: game.optimal
+    });
+    p.rot = (p.rot + 1) % 4;
+    game.moves += 1;
+    game.flow = connectedCells();
+    game.hintIndex = -1;
+    AudioKit.turn();
+    renderAll();
+    const cell = boardEl.querySelector('.cell[data-i="' + i + '"]');
+    if (cell && !RM) {
+      cell.classList.add('turned');
+      setTimeout(() => cell.classList.remove('turned'), 280);
+    }
+    if (game.flow.has(game.target)) {
+      AudioKit.flow();
+      game.phase = 'clear';
+      setTimeout(levelClear, 320);
+    }
+  }
+
+  function undo() {
+    if (game.phase !== 'playing' || !game.history.length) return;
+    const prev = game.history.pop();
+    game.pieces = prev.pieces;
+    game.moves = prev.moves;
+    game.flow = prev.flow;
+    game.optimal = prev.optimal;
+    game.hintIndex = -1;
+    AudioKit.click();
+    renderAll();
+  }
+
+  function resetLevel() {
+    if (game.phase !== 'playing') return;
+    if (game.initialPieces) {
+      game.pieces = game.initialPieces.map((q) => ({ mask: q.mask, rot: q.rot, fixed: q.fixed }));
+      game.moves = 0;
+      game.history = [];
+      game.hintIndex = -1;
+      game.flow = connectedCells();
+    }
+    AudioKit.click();
+    renderAll();
+    showToast('本关重来', 700);
+  }
+
+  function hint() {
+    if (game.phase !== 'playing' || game.hints <= 0) return;
+    let target = -1;
+    for (const i of game.interior) {
+      if (pieceMask(i) !== game.pieces[i].mask) {
+        target = i;
+        break;
+      }
+    }
+    if (target < 0) {
+      showToast('管路已通', 800);
+      return;
+    }
+    game.hints -= 1;
+    game.hintIndex = target;
+    AudioKit.click();
+    renderAll();
+    setTimeout(() => {
+      if (game.phase === 'playing') {
+        game.hintIndex = -1;
+        renderBoard();
+      }
+    }, 1600);
+  }
+
+  function starsFor(moves, optimal) {
+    if (moves <= Math.max(1, optimal)) return 3;
+    if (moves <= Math.max(1, optimal) + 3) return 2;
+    return 1;
+  }
+
+  function levelClear() {
+    if (game.phase !== 'playing' && game.phase !== 'clear') return;
+    game.phase = 'clear';
+    stage.dataset.state = 'clear';
+    game.levelMoves[game.levelIndex] = game.moves;
+    const bests = readBests();
+    const prev = bests[game.levelIndex];
+    const isNew = prev === undefined || game.moves < prev;
+    if (isNew) {
+      bests[game.levelIndex] = game.moves;
+      writeBests(bests);
+    }
+    const stars = starsFor(game.moves, game.optimal);
+    $('clearTitle').textContent = LEVELS[game.levelIndex].name;
+    $('clearMoves').textContent = String(game.moves);
+    $('clearBest').textContent = String(isNew ? game.moves : prev);
+    $('clearStars').textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars);
+    showScreen('clear');
+    updateBestLabels();
+    renderSide();
+    AudioKit.win();
+    announce('甘露已至树根。');
+  }
+
+  function nextLevel() {
+    if (game.levelIndex + 1 >= LEVELS.length) {
+      victory();
+      return;
+    }
+    AudioKit.click();
+    loadLevel(game.levelIndex + 1);
+  }
+
+  function victory() {
+    game.phase = 'victory';
+    stage.dataset.state = 'victory';
+    game.levelMoves[game.levelIndex] = game.moves;
+    const total = game.levelMoves.reduce((a, v) => a + (v || 0), 0);
+    $('victoryMoves').textContent = String(total);
+    showScreen('victory');
+    updateBestLabels();
+    AudioKit.win();
+    announce('五关尽通，甘露归根。');
+  }
+
+  // ===== 渲染 =====
+  function renderAll() {
+    renderBoard();
+    renderSide();
+    updateHud();
+  }
+
+  function armHtml(mask) {
+    let html = '';
+    for (const d of DIRS) if (mask & d.bit) html += '<i class="arm ' + d.cls + '"></i>';
+    return html;
+  }
+
+  function renderBoard() {
+    const size = game.size;
+    const width = 46 * size / 6;
+    boardEl.style.width = width + '%';
+    boardEl.style.left = (6 + (46 - width) / 2) + '%';
+    boardEl.style.gridTemplateColumns = 'repeat(' + size + ', 1fr)';
+    boardEl.style.gridTemplateRows = 'repeat(' + size + ', 1fr)';
+    boardEl.style.aspectRatio = '1 / 1';
+    let html = '';
+    for (let i = 0; i < size * size; i++) {
+      const p = game.pieces[i];
+      const mask = pieceMask(i);
+      const isSource = i === game.source;
+      const isTarget = i === game.target;
+      const flow = game.flow.has(i);
+      let cls = 'cell';
+      if (p.fixed) cls += ' fixed';
+      if (flow) cls += ' flowing';
+      if (i === game.hintIndex) cls += ' hint';
+      let pipeCls = 'pipe';
+      if (isSource) pipeCls += ' source';
+      if (isTarget) pipeCls += ' target';
+      if (flow) pipeCls += ' flow';
+      const hub = isSource ? '泉' : isTarget ? '根' : '';
+      html += '<button type="button" class="' + cls + '" data-i="' + i + '" aria-label="第' + (Math.floor(i / size) + 1) + '行第' + (i % size + 1) + '列管件">' +
+        '<span class="' + pipeCls + '">' + armHtml(mask) + '<span class="hub">' + hub + '</span></span></button>';
+    }
+    boardEl.innerHTML = html;
+  }
+
+  function renderSide() {
+    levelName.textContent = LEVELS[game.levelIndex].name;
+    flowText.textContent = game.flow.has(game.target) ? '已接通 · 甘露至根' : '未接通';
+    const bests = readBests();
+    const b = bests[game.levelIndex];
+    bestMovesEl.textContent = b === undefined ? '—' : String(b);
+    hintNum.textContent = String(game.hints);
+    btnHint.disabled = game.hints <= 0 || game.phase !== 'playing';
+    btnUndo.disabled = game.history.length === 0;
+  }
+
+  function updateHud() {
+    levelNum.textContent = String(game.levelIndex + 1);
+    moveNum.textContent = String(game.moves);
+    moveNum2.textContent = String(game.moves);
+  }
+
+  // ===== 绘制 =====
+  const motes = [];
+  for (let i = 0; i < 34; i++) motes.push({ x: Math.random() * VIEW.w, y: Math.random() * VIEW.h, r: 0.8 + Math.random() * 1.6, vy: -4 - Math.random() * 10, a: 0.12 + Math.random() * 0.35 });
+
+  function drawBackground() {
+    const g = ctx.createLinearGradient(0, 0, 0, VIEW.h);
+    g.addColorStop(0, '#091411');
+    g.addColorStop(0.55, '#0E211B');
+    g.addColorStop(1, '#07100D');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, VIEW.w, VIEW.h);
+
+    // 月
+    const cx = 830;
+    const cy = 88;
+    const rg = ctx.createRadialGradient(cx, cy, 4, cx, cy, 80);
+    rg.addColorStop(0, 'rgba(226,242,230,0.32)');
+    rg.addColorStop(0.4, 'rgba(180,220,200,0.1)');
+    rg.addColorStop(1, 'rgba(180,220,200,0)');
+    ctx.fillStyle = rg;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 80, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(226,242,230,0.7)';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 28, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 人参果树剪影
+    ctx.strokeStyle = 'rgba(78,122,74,0.4)';
+    ctx.lineWidth = 9;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(880, 540);
+    ctx.quadraticCurveTo(860, 400, 890, 290);
+    ctx.stroke();
+    ctx.lineWidth = 4;
+    for (let i = 0; i < 6; i++) {
+      const y = 340 + i * 26;
+      ctx.beginPath();
+      ctx.moveTo(882, y);
+      ctx.quadraticCurveTo(840 - i * 6, y - 30, 810 - i * 8, y - 50);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(886, y + 8);
+      ctx.quadraticCurveTo(925 + i * 4, y - 18, 950, y - 36);
+      ctx.stroke();
+    }
+    ctx.fillStyle = 'rgba(121,169,101,0.22)';
+    ctx.beginPath();
+    ctx.ellipse(878, 280, 100, 52, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 地面
+    ctx.fillStyle = 'rgba(4,8,6,0.7)';
+    ctx.fillRect(0, 490, VIEW.w, VIEW.h - 490);
+    ctx.strokeStyle = 'rgba(127,211,201,0.12)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(0, 490);
+    ctx.lineTo(VIEW.w, 490);
+    ctx.stroke();
+
+    for (const m of motes) {
+      m.y += m.vy * 0.016;
+      if (m.y < 50) {
+        m.y = VIEW.h + 8;
+        m.x = Math.random() * VIEW.w;
+      }
+      ctx.fillStyle = 'rgba(180,230,210,' + m.a + ')';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function render() {
+    const sx = canvas.width / VIEW.w;
+    const sy = canvas.height / VIEW.h;
+    ctx.setTransform(sx, 0, 0, sy, 0, 0);
+    ctx.clearRect(0, 0, VIEW.w, VIEW.h);
+    drawBackground();
+  }
+
+  // ===== 输入 =====
+  boardEl.addEventListener('click', (e) => {
+    const cell = e.target.closest('.cell');
+    if (!cell) return;
+    rotatePiece(Number(cell.dataset.i));
+  });
+
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (game.phase !== 'playing') return;
+    if (k === 'h') hint();
+    if (k === 'u' || k === 'z') undo();
+    if (k === 'r') resetLevel();
+  });
+
+  btnHint.addEventListener('click', hint);
+  btnUndo.addEventListener('click', undo);
+  btnReset.addEventListener('click', resetLevel);
+  btnStart.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnNextLevel.addEventListener('click', nextLevel);
+  btnReplayLevel.addEventListener('click', () => {
+    AudioKit.click();
+    game.phase = 'playing';
+    loadLevel(game.levelIndex);
+  });
+  btnAgain.addEventListener('click', () => {
+    AudioKit.click();
+    game.phase = 'playing';
+    loadLevel(0);
+  });
+  btnRestart.addEventListener('click', () => {
+    AudioKit.click();
+    game.phase = 'playing';
+    loadLevel(0);
+  });
+  btnSound.addEventListener('click', () => {
+    AudioKit.toggle();
+    syncSoundBtn();
+  });
+  btnFull.addEventListener('click', () => {
+    AudioKit.click();
+    if (!document.fullscreenElement) {
+      if (stage.requestFullscreen) stage.requestFullscreen().catch(() => {});
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
+  });
+  document.addEventListener('fullscreenchange', () => {
+    btnFull.textContent = document.fullscreenElement ? '退出全屏' : '全屏';
+    resize();
+  });
+
+  // ===== 启动 =====
+  buildLevel(0);
+  game.phase = 'menu';
+  stage.dataset.state = 'menu';
+  renderAll();
+  showScreen('start');
+  updateBestLabels();
+  syncSoundBtn();
+
+  requestAnimationFrame(function frame() {
+    render();
+    requestAnimationFrame(frame);
+  });
+})();
+</script>
+<style id="qaMobileFix">
+:root{
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-right:env(safe-area-inset-right,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-left:env(safe-area-inset-left,0px);
+}
+body{
+  padding-top:calc(clamp(10px,2.2vw,26px) + var(--safe-top));
+  padding-bottom:calc(clamp(10px,2.2vw,26px) + var(--safe-bottom));
+}
+#qaZoomBtn{
+  display:none;position:fixed;right:calc(8px + var(--safe-right));top:50%;
+  transform:translateY(-50%);z-index:9996;width:48px;height:48px;padding:0;
+  align-items:center;justify-content:center;border-radius:50%;
+  border:1px solid rgba(224,184,74,.5);background:rgba(22,19,16,.74);
+  color:#F4DFA6;font-family:inherit;font-size:12px;line-height:1.1;letter-spacing:.04em;
+  text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;
+  opacity:.55;transition:opacity .15s ease,background .15s ease
+}
+#qaZoomBtn:hover,#qaZoomBtn:focus-visible,#qaZoomBtn:active{opacity:1}
+#qaZoombar{
+  display:none;position:fixed;left:50%;bottom:calc(12px + var(--safe-bottom));
+  transform:translateX(-50%);z-index:10002;gap:6px;align-items:center;justify-content:center;
+  flex-wrap:wrap;padding:6px 8px;border-radius:999px;
+  max-width:calc(100vw - var(--safe-left) - var(--safe-right) - 16px);
+  background:rgba(18,16,13,.92);border:1px solid rgba(242,235,220,.25);
+  color:#F2EBDC;font-family:inherit
+}
+#qaZoombar button{
+  font-family:inherit;font-size:11.5px;letter-spacing:.05em;color:#F2EBDC;
+  background:rgba(242,235,220,.1);border:1px solid rgba(242,235,220,.25);
+  border-radius:999px;padding:7px 10px;min-height:44px;cursor:pointer;white-space:nowrap;line-height:1.2
+}
+#qaZoombar button:hover{background:rgba(242,235,220,.2)}
+body.qa-zoom{overflow:hidden;background:#080b0b!important}
+body.qa-zoom::before{display:none!important}
+body.qa-zoom .topbar,
+body.qa-zoom .legend,
+body.qa-zoom .hud,
+body.qa-zoom .side,
+body.qa-zoom .touch{visibility:hidden!important;opacity:0!important}
+body.qa-zoom .stage{background:#080b0b!important}
+body.qa-zoom canvas{opacity:.12!important}
+body.qa-zoom .board{
+  position:fixed!important;left:50%!important;top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  width:min(98vw,calc(92vh * var(--qa-ratio,1)))!important;
+  height:auto!important;aspect-ratio:var(--qa-ratio,1)!important;
+  background-color:rgba(10,18,18,.97)!important;
+  background-image:none!important;
+  z-index:10000!important;box-shadow:0 24px 70px rgba(0,0,0,.55)
+}
+body.qa-zoom[data-qa-kind="border"] .board{
+  grid-template-columns:0.15fr repeat(var(--qa-inner-cols,8),1fr) 0.15fr!important;
+  grid-template-rows:0.15fr repeat(var(--qa-inner-rows,6),1fr) 0.15fr!important
+}
+body.qa-zoom .path-svg{position:fixed!important;z-index:10001!important}
+body.qa-zoom #qaZoomBtn{display:none!important}
+body.qa-zoom #qaZoombar{display:flex}
+body.qa-zoom .screen:not([hidden]){z-index:10005!important}
+body.qa-zoom .toast{z-index:10006!important}
+#qaOrientTip{
+  position:fixed;top:calc(6px + var(--safe-top));left:50%;transform:translateX(-50%);z-index:9995;
+  padding:7px 14px;border-radius:999px;background:rgba(22,19,16,.78);
+  border:1px solid rgba(224,184,74,.45);color:#F4DFA6;font-family:inherit;
+  font-size:12px;letter-spacing:.08em;pointer-events:none;
+  opacity:1;transition:opacity .4s ease
+}
+#qaOrientTip.hide{opacity:0}
+.qa-rotate-ui #btnFull{display:none!important}
+#qaTouchSettings{
+  position:fixed;left:50%;bottom:calc(8px + var(--safe-bottom));transform:translateX(-50%);
+  z-index:10003;display:none;gap:6px;align-items:center;justify-content:center;
+  padding:4px 6px;border-radius:999px;background:rgba(18,16,13,.92);
+  border:1px solid rgba(242,235,220,.25);flex-wrap:wrap;
+  max-width:calc(100vw - var(--safe-left) - var(--safe-right) - 16px)
+}
+#qaTouchSettings.show{display:flex}
+#qaTouchSettings button{
+  min-height:40px;padding:6px 12px;border-radius:999px;border:1px solid rgba(242,235,220,.28);
+  background:rgba(242,235,220,.1);color:#F2EBDC;font-family:inherit;font-size:12px;
+  letter-spacing:.06em;cursor:pointer;touch-action:manipulation
+}
+#qaTouchSettings button:hover{background:rgba(242,235,220,.2)}
+.tbtn{opacity:var(--qa-btn-opacity,1);width:var(--qa-tbtn,56px);height:var(--qa-tbtn,56px)}
+.tbtn.wide{width:var(--qa-tbtn-wide,64px)}
+body[data-qa-btn-size="s"]{--qa-tbtn:var(--qa-btn-s,48px);--qa-tbtn-wide:var(--qa-btn-wide-s,56px)}
+body[data-qa-btn-size="m"]{--qa-tbtn:var(--qa-btn-m,56px);--qa-tbtn-wide:var(--qa-btn-wide-m,64px)}
+body[data-qa-btn-size="l"]{--qa-tbtn:var(--qa-btn-l,64px);--qa-tbtn-wide:var(--qa-btn-wide-l,72px)}
+.touch{flex-wrap:wrap}
+.touch-group{flex-wrap:wrap;max-width:100%}
+#qaFitTip{
+  position:fixed;left:50%;bottom:calc(64px + var(--safe-bottom));transform:translateX(-50%);
+  z-index:10004;padding:6px 12px;border-radius:999px;background:rgba(22,19,16,.88);
+  border:1px solid rgba(224,184,74,.45);color:#F4DFA6;font-family:inherit;
+  font-size:12px;letter-spacing:.06em;pointer-events:none;
+  opacity:0;transition:opacity .2s ease
+}
+#qaFitTip.show{opacity:1}
+@media (pointer: coarse) and (max-width: 560px){
+  .touch-hint{display:none!important}
+}
+@media (pointer: coarse) and (orientation: portrait){
+  body[data-qa-deck-wrap="1"] .stage{
+    max-width:min(1120px,calc((100dvh - var(--qa-stage-chrome,196px) - var(--qa-deck-extra,0px)) * 16 / 9))!important;
+  }
+  body[data-qa-deck-wrap="1"] .touch{
+    max-width:min(1120px,calc((100dvh - var(--qa-stage-chrome,196px) - var(--qa-deck-extra,0px)) * 16 / 9))!important;
+  }
+}
+@media (pointer: coarse){
+  .btn.small{min-height:40px}
+  .btn.ghost{min-height:40px}
+  .hud-btn,.icon-btn{min-height:40px;min-width:40px}
+  .box-btn{min-height:40px}
+  .btn.primary,.endturn{min-height:44px}
+  .plot .action{position:relative}
+  .plot .action::after{content:"";position:absolute;left:0;right:0;top:-6px;bottom:-6px}
+  button,.cell,.plot,.upg,.box-btn{touch-action:manipulation}
+  button{-webkit-tap-highlight-color:transparent}
+}
+@media (orientation:landscape) and (max-height:540px){
+  body{
+    padding:calc(4px + var(--safe-top)) calc(4px + var(--safe-right)) calc(4px + var(--safe-bottom)) calc(4px + var(--safe-left))!important;
+    gap:4px!important;justify-content:flex-start!important
+  }
+  .stage{
+    max-width:min(calc(100vw - 8px - var(--safe-left) - var(--safe-right)),calc((100dvh - 116px) * 16 / 9))!important;
+    width:100%!important;margin:0 auto!important
+  }
+  .legend{display:none!important}
+}
+@media (orientation:landscape) and (max-height:540px) and (min-width:820px){
+  .touch{
+    position:fixed!important;right:calc(8px + var(--safe-right))!important;top:50%!important;
+    transform:translateY(-50%)!important;width:auto!important;max-width:150px!important;
+    padding:0!important;margin:0!important;z-index:40!important;
+    background:transparent!important;border:0!important;
+    flex-direction:column!important;align-items:flex-end!important;gap:6px!important
+  }
+  .touch-hint{display:none!important}
+  .touch-group{
+    display:flex!important;flex-wrap:wrap!important;justify-content:flex-end!important;
+    gap:8px!important;max-width:140px
+  }
+}
+@media (orientation:landscape) and (max-height:540px) and (max-width:819px){
+  .stage{max-width:min(calc(100vw - 8px - var(--safe-left) - var(--safe-right)),calc((100dvh - 160px) * 16 / 9))!important}
+}
+</style>
+<script id="qaMobileFixScript">
+(function(){
+  'use strict';
+  var mobile = window.matchMedia('(max-width:760px)');
+  var portrait = window.matchMedia('(orientation:portrait)');
+  if (mobile.matches && portrait.matches && document.body.dataset.qaPortraitActive !== '1') {
+    var tip = document.createElement('div');
+    tip.id = 'qaOrientTip';
+    tip.textContent = '建议横屏游玩 · 视野更大';
+    document.body.appendChild(tip);
+    setTimeout(function(){ tip.classList.add('hide'); }, 4200);
+    setTimeout(function(){ if (tip.parentNode) tip.parentNode.removeChild(tip); }, 5000);
+  }
+  var touchUI = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 820;
+  var topActions = document.querySelector('.top-actions') || document.querySelector('.topbar');
+  var rotateBtn = null;
+  if (touchUI && topActions) {
+    rotateBtn = document.createElement('button');
+    rotateBtn.id = 'qaRotateBtn';
+    rotateBtn.type = 'button';
+    rotateBtn.className = 'btn small';
+    rotateBtn.textContent = '横屏';
+    rotateBtn.setAttribute('aria-label', '尝试横屏全屏');
+    rotateBtn.addEventListener('click', async function(){
+      try {
+        if (document.fullscreenElement) {
+          if (document.exitFullscreen) await document.exitFullscreen();
+          return;
+        }
+        if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+      } catch (err) {}
+      try {
+        if (screen.orientation && screen.orientation.lock) await screen.orientation.lock('landscape');
+      } catch (err) {}
+    });
+    topActions.insertBefore(rotateBtn, topActions.firstChild);
+    document.body.classList.add('qa-rotate-ui');
+    document.addEventListener('fullscreenchange', function(){
+      syncRotateBtn();
+    });
+  }
+  function syncRotateBtn() {
+    if (!rotateBtn) return;
+    rotateBtn.style.display = 'inline-flex';
+    rotateBtn.textContent = document.fullscreenElement ? '退出' : (window.innerWidth > window.innerHeight ? '全屏' : '横屏');
+  }
+  syncRotateBtn();
+  window.addEventListener('resize', syncRotateBtn);
+
+  var hasTouchDeck = !!document.querySelector('.tbtn');
+  if (touchUI && hasTouchDeck) {
+    var settingsBar = document.createElement('div');
+    settingsBar.id = 'qaTouchSettings';
+    document.body.appendChild(settingsBar);
+    var opKey = 'xyj_touch_opacity_v1';
+    var op = 100;
+    try { op = Number(localStorage.getItem(opKey)) || 100; } catch (err) {}
+    if ([70, 85, 100].indexOf(op) < 0) op = 100;
+    var opBtn = document.createElement('button');
+    opBtn.id = 'qaOpacityBtn';
+    opBtn.type = 'button';
+    opBtn.setAttribute('aria-label', '切换触控按钮透明度');
+    settingsBar.appendChild(opBtn);
+    function applyOpacity() {
+      document.documentElement.style.setProperty('--qa-btn-opacity', (op / 100).toFixed(2));
+      opBtn.textContent = '按钮 ' + op + '%';
+    }
+    opBtn.addEventListener('click', function(){
+      op = op === 100 ? 85 : op === 85 ? 70 : 100;
+      try { localStorage.setItem(opKey, String(op)); } catch (err) {}
+      applyOpacity();
+    });
+    applyOpacity();
+
+    var deckEl = document.querySelector('.touch');
+    var sizeKey = 'xyj_touch_size_v1';
+    var sizePref = 'm';
+    try {
+      var storedSize = localStorage.getItem(sizeKey);
+      if (['s', 'm', 'l'].indexOf(storedSize) >= 0) sizePref = storedSize;
+    } catch (err) {}
+    var sizeBtn = document.createElement('button');
+    sizeBtn.id = 'qaSizeBtn';
+    sizeBtn.type = 'button';
+    sizeBtn.setAttribute('aria-label', '切换触控按钮大小');
+    settingsBar.appendChild(sizeBtn);
+
+    function sizeLabel(v) { return v === 's' ? '小' : v === 'l' ? '大' : '中'; }
+    function syncSizeLabel() {
+      var v = document.body.dataset.qaBtnSize || sizePref;
+      sizeBtn.textContent = '按钮 ' + sizeLabel(v);
+    }
+    function measureDeck() {
+      if (!deckEl) return;
+      var base = parseFloat(getComputedStyle(document.body).getPropertyValue('--qa-deck-base')) || 70;
+      var extra = Math.max(0, deckEl.offsetHeight - base);
+      document.body.dataset.qaDeckWrap = extra > 1 ? '1' : '0';
+      document.body.style.setProperty('--qa-deck-extra', extra > 0 ? extra.toFixed(1) + 'px' : '0px');
+    }
+    var fitTip = null;
+    function showFitTip(text) {
+      if (!fitTip) {
+        fitTip = document.createElement('div');
+        fitTip.id = 'qaFitTip';
+        document.body.appendChild(fitTip);
+      }
+      fitTip.textContent = text;
+      fitTip.classList.add('show');
+      clearTimeout(fitTip._hideTimer);
+      fitTip._hideTimer = setTimeout(function(){ fitTip.classList.remove('show'); }, 1800);
+    }
+    function fitSize() {
+      if (!deckEl || deckEl.offsetParent === null) return;
+      var target = sizePref;
+      if (deckEl.scrollWidth > deckEl.clientWidth + 1) {
+        if (target === 'l') target = 'm';
+        document.body.dataset.qaBtnSize = target;
+        measureDeck();
+        if (deckEl.scrollWidth > deckEl.clientWidth + 1) target = 's';
+      }
+      document.body.dataset.qaBtnSize = target;
+      measureDeck();
+      if (target !== sizePref) {
+        showFitTip('屏幕较窄，已临时使用' + sizeLabel(target) + '号按钮');
+      }
+      syncSizeLabel();
+    }
+    function applySize(next, save) {
+      if (next) sizePref = next;
+      document.body.dataset.qaBtnSize = sizePref;
+      if (save) { try { localStorage.setItem(sizeKey, sizePref); } catch (err) {} }
+      syncSizeLabel();
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    }
+    sizeBtn.addEventListener('click', function(){
+      sizePref = sizePref === 's' ? 'm' : sizePref === 'm' ? 'l' : 's';
+      applySize(null, true);
+    });
+    applySize(null, false);
+    window.addEventListener('resize', function(){
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    });
+    window.addEventListener('orientationchange', function(){
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    });
+    if (window.MutationObserver && deckEl) {
+      new MutationObserver(function(){
+        requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+      }).observe(deckEl, { attributes: true, attributeFilter: ['class'] });
+    }
+    var screens = document.querySelectorAll('.screen');
+    function syncSettingsBar() {
+      var open = false;
+      for (var i = 0; i < screens.length; i++) {
+        if (screens[i].hidden) continue;
+        if (getComputedStyle(screens[i]).display !== 'none') open = true;
+      }
+      settingsBar.classList.toggle('show', open);
+    }
+    if (window.MutationObserver) {
+      for (var si = 0; si < screens.length; si++) {
+        new MutationObserver(syncSettingsBar).observe(screens[si], {
+          attributes: true, attributeFilter: ['hidden', 'class', 'style']
+        });
+      }
+    }
+    syncSettingsBar();
+  }
+
+  var board = document.getElementById('board');
+  if (!board) return;
+  var stage = document.querySelector('.stage');
+  var btn = document.createElement('button');
+  btn.id = 'qaZoomBtn';
+  btn.type = 'button';
+  btn.textContent = '放大';
+  btn.setAttribute('aria-label', '放大棋盘');
+  document.body.appendChild(btn);
+  var bar = document.createElement('div');
+  bar.id = 'qaZoombar';
+  var undo = document.getElementById('btnUndo');
+  var reset = document.getElementById('btnReset');
+  bar.innerHTML = '<button type="button" data-qa="exit">退出放大</button>' +
+    (undo ? '<button type="button" data-qa="undo">撤回</button>' : '') +
+    (reset ? '<button type="button" data-qa="reset">重来</button>' : '');
+  document.body.appendChild(bar);
+
+  function syncBtn(){
+    var state = stage ? stage.dataset.state : '';
+    var active = mobile.matches && ['playing','idle','paused'].indexOf(state) >= 0;
+    btn.style.display = active ? 'inline-flex' : 'none';
+  }
+  function openZoom(){
+    var r = board.getBoundingClientRect();
+    var ratio = r.height ? r.width / r.height : 1;
+    document.body.style.setProperty('--qa-ratio', String(ratio));
+    var cs = getComputedStyle(board);
+    var cols = cs.gridTemplateColumns ? cs.gridTemplateColumns.split(' ').length : 0;
+    var rows = cs.gridTemplateRows ? cs.gridTemplateRows.split(' ').length : 0;
+    if ((cols === 11 && rows === 9) || (cols === 10 && rows >= 6 && rows <= 8)) {
+      document.body.dataset.qaKind = 'border';
+      document.body.style.setProperty('--qa-inner-cols', String(cols - 2));
+      document.body.style.setProperty('--qa-inner-rows', String(rows - 2));
+    } else {
+      delete document.body.dataset.qaKind;
+    }
+    document.body.classList.add('qa-zoom');
+  }
+  function closeZoom(){
+    document.body.classList.remove('qa-zoom');
+    syncBtn();
+  }
+  btn.addEventListener('click', function(){
+    if (document.body.classList.contains('qa-zoom')) closeZoom();
+    else openZoom();
+  });
+  bar.addEventListener('click', function(e){
+    var act = e.target.getAttribute('data-qa');
+    if (!act) return;
+    if (act === 'exit') closeZoom();
+    if (act === 'undo' && undo) undo.click();
+    if (act === 'reset' && reset) reset.click();
+  });
+  if (window.MutationObserver && stage) {
+    new MutationObserver(syncBtn).observe(stage, { attributes: true, attributeFilter: ['data-state'] });
+  }
+  window.addEventListener('resize', function(){
+    if (document.body.classList.contains('qa-zoom') && !mobile.matches) closeZoom();
+    syncBtn();
+  });
+  syncBtn();
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

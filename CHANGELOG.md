@@ -1,3 +1,41 @@
+### W1303（2026-11-22）：西游小游戏三合一与十八款合集入口
+
+**本批要点**（W1303 西游小游戏三合一与十八款合集入口）：
+
+> - **三合一游戏页**：`assets/game/journey-trials.html` + `journey-trials.css` + `js/*.js`（core/main/action/roguelike/cards）。护师西行 Canvas 2D 横版动作，三试三 Boss，另含修罗挑战与无尽循环；八十一难轻 Roguelike，行者选择（悟空/八戒/沙僧）、十二/十八难、途中事件与法宝；卡牌斗法五阵，前四阵随机、二郎神压轴并带天眼通。
+> - **十八款合集入口**：`assets/game/index.html` + `index.css` + `index.js`，收录既有 15 款与本次 3 个独立入口；分类筛选、搜索、排序、随机一款、战绩与最近玩过；支持 `journey-trials.html#action|#rogue|#cards` 深链。
+> - **体验层**：WebAudio 合成音效与静音开关；移动端横屏提示、全屏入口；战绩写入 localStorage；技能效果清单与角色卡技能摘要；所有数据内嵌，file:// 离线可玩，零外域依赖。
+> - **文件**：assets/game/journey-trials.html, assets/game/journey-trials.css, assets/game/js/core.js, assets/game/js/main.js, assets/game/js/action.js, assets/game/js/roguelike.js, assets/game/js/cards.js, assets/game/index.html, assets/game/index.css, assets/game/index.js, scripts/output/_w1303_spec.json。
+> - **验证**：全部 JS `node --check` 通过；Playwright `file://` 桌面与 430×844 移动端实测三模式与合集，控制台 0 错误、无横向溢出；无尽轮次切换、十八难事件触发、五阵随机顺序与行者增益均实测通过。
+> - **落位说明**：按既有 15 款小游戏惯例落在 `assets/game/`，不进 `site/data/` 与站点导航；`assets/game/` 受 `.git/info/exclude` 本地忽略，本批文件以 `git add -f` 入库。
+
+
+### W1302（2026-11-22）：hero-batch 绢本源件入站 (8 张 webp 1920×1078 → site/static/images/silk-src/ · 哈希+目视双证甄别)
+
+> **来源**：用户 2026-11-22 指令「先把 hero-batch 素材入仓」⇒ 立项 W1302（hero-batch 绢本源件入站批）。
+>
+> - **取证**：hero-batch = W1253–W1258「丝路 hero / OG 接缝修法」工作区（CHANGELOG 段与文件 mtime 11-16 吻合）；**66 张图逐张 MD5 复扫 = 2 HIT / 64 MISS**，2 处 HIT 即 `og-03-v5E` == 站内 `og-silk-hero-03-ye-talin.webp`、`og-12-v5G` == 站内 `og-silk-hero-12-jinghu.webp` ⇒ **成品已在校验命中**；**目视核验**：`asset-dark/light-*.png` 实为 **2000×1174 的「4 场景 2×2 整批拼版」**（非单张资产）、`review/trim-review-*.png` 为 2400×1356 全批总览 ⇒ 38 张属评审对照证据；`backup-v1/` 8 组 1920×1078 绢本场景（白骨精 / 山阳行路等）经目视与站内 `og-silk-hero-04/08/10`（另一组山水构图）**内容不同** ⇒ 站内缺失组。
+>
+> - **施工**：8 张高分辨率 webp（3.61 MB）移入 `site/static/images/silk-src/`（同卷 rename·体积逐一吻合）；**用户裁决范围**：仅 webp 入站，JPG 原图（8 张 52.78 MB）不入库；台账认领行 + `preflight_check` **PASS**（首次 FAIL：台账正本 61 段 > 60 窗口 ⇒ 按判据跑 `archive_ledger_rows.py --apply` 迁出已收官 W1238–W1239 两行腾窗 ⇒ 正本留 59 行 ⇒ 复跑 PASS，**未放宽任何判据**）。
+>
+> - **文件**：STRUCTURE.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, site/static/images/silk-src/silk-hero-04-baigu-furen.webp, site/static/images/silk-src/silk-hero-05-huoyanshan-yaowang.webp, site/static/images/silk-src/silk-hero-06-heifengshan.webp, site/static/images/silk-src/silk-hero-07-dumu-qiao.webp, site/static/images/silk-src/silk-hero-08-shanye-xinglu.webp, site/static/images/silk-src/silk-hero-09-wukong-tanyu.webp, site/static/images/silk-src/silk-hero-10-jingubang.webp, site/static/images/silk-src/silk-hero-11-fabao-sanjian.webp, site/static/images/INDEX.md, site/static/images/silk-src/INDEX.md, docs/11-方案报告/计划方案/T135-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/README.md, HANDOVER.md, docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, CHANGELOG.md, docs/INDEX.md, scripts/output/_W1302_spec.json, scripts/output/_cascade_files_W1302.txt, scripts/output/file-index.md, scripts/output/stats.json, scripts/output/stats-index.md, scripts/output/stats-changelog.json, scripts/output/tools-inventory.md, scripts/output/INDEX.md, scripts/output/README.md, site/data/search-index-zh.js, site/en/search-index-en.js, site/sitemap.xml
+>
+> - **验证**：8 张落位核对体积逐一吻合（538.7 / 397.4 / 576.9 / 379.7 / 553.5 / 456.8 / 312.7 / 479.8 KB）· `git status` 新增路径仅 `site/static/images/silk-src/`（未触任何既有页面/脚本）· 哈希复扫与目视结论互相印证 · 全量门禁 0 FAIL。
+>
+> - **状态**：**素材唯一副本已保住并入公开仓**；本批同时**纠正了上一轮评估的过宽表述**——「hero-batch 含未入仓唯一成品」实为「成品已在校验命中，缺的是源件组」；其余 38 张评审拼版 + 18 张迭代版 + 8 张 JPG 原图按用户裁决不入库（留 tmpe 待清理）。
+
+### W1301（2026-11-22）：L-02 探针跨run增量缓存（332s→0s·三重键·判据零改动·CI跨run携带）
+
+> **来源**：用户 2026-11-22 指令「先开工 L-07 之后再开工 L-02」⇒ 立项 W1301（L-02 治本批）。
+>
+> - **执行**：探针新增**页级增量缓存**，键为**三重闸**（页内容 sha + 探针脚本自身 sha + 口径元数据：阈值/底色口径/扫描面/状态集/工具开关）⇒ 页面未变即复用该页采集结果；**口径或探针逻辑一变即全量失效重采**（fail-closed·防假绿）；**报告结构一字未改 ⇒ 第 80 槽判据零改动**；缓存**只收稳定行**（fatal/unstable 不入缓存·不固化坏状态）；CI 用 actions/cache restore + **显式 save**（命中不更新·须强制写回）跨 run 携带；缓存件**不入库**（.gitignore 排除·本地与 CI 互不污染·且天然规避跨环境渲染差异被跨环境复用）。
+>
+> - **文件**：.github/workflows/ci.yml, .gitignore, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T134-任务计划执行与经验沉淀报告-2026-11-22.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1301.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1301_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, scripts/svg_text_contrast_probe.js, site/data/search-index-zh.js, site/en/search-index-en.js, site/sitemap.xml
+>
+> - **验证**：本地 graphic 口径全站 **332s → 0s**（第二次命中 672 行·浏览器未启动）· 第 80 槽 **0 FAIL** · 探针自测 **13/13** · 工作树干净（缓存件已排除）。
+>
+> - **状态**：**L-02 ✅ 闭合** ⇒ **遗留总账未清偿归零**（L-01～L-07 全闭合·自 W1296 建立以来首次归零）；本轮 CI 因探针脚本变更仍走全量·增量收益自下一轮 CI 起显现。
+
 ### W1300（2026-11-22）：L-07 公共口径多批次锚漏计治本（本体275→276·反查表补E-291·私有正则退役）
 
 > **来源**：用户 2026-11-22 指令「先开工 L-07 之后再开工 L-02」⇒ 立项 W1300（L-07 治本批）。
@@ -545,7 +583,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1300），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1303），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

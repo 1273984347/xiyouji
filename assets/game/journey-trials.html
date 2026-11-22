@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F5F0E4">
+    <title>取经三试 · 西游小游戏</title>
+    <meta name="description" content="护师西行横版动作、八十一难轻 Roguelike、十二角色卡牌斗法三合一。Canvas 与 DOM 纯本地实现，file:// 直开，零外域依赖。">
+    <link rel="stylesheet" href="../../site/tokens.css">
+    <link rel="stylesheet" href="../../site/system.css">
+    <link rel="stylesheet" href="journey-trials.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="jt-top">
+        <a class="jt-brand" href="../../site/index.html">详解西游记</a>
+        <div class="jt-actions">
+            <span class="jt-tag"><a href="index.html">小游戏合集</a> · 取经三试</span>
+            <button type="button" class="jt-sound" id="jt-sound" aria-pressed="true">音效 开</button>
+        </div>
+    </header>
+
+    
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../../site/index.html">首页</a> / <a href="../../site/dashboard.html">数据看板</a> / 取经三试</p>
+        <p class="kicker">互动 · 小游戏</p>
+        <h1>取经三试</h1>
+<!-- DATA-STATUS-BADGE v1 w1167 -->
+<div class="data-status-badge" data-status="snapshot" data-goatcounter-view="badge_view"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">内嵌快照</span><span class="ds-note">本页数字为发布时生成的快照，离线双击也能看，不随接口更新。</span></div>
+        <p class="subtitle">护师西行 · 八十一难 · 卡牌斗法</p>
+        <p class="tagline">三局短游戏，一条取经路：动手、做选择、打牌。</p>
+    </section>
+
+    <main id="main" class="page-wrap">
+        <div class="section">
+            <div class="section-head">
+                <p class="kicker">玩法</p>
+                <h2>三试合一</h2>
+                <p class="note tr-intro">每一试都可以单独开局，互不影响。进度只保存在本浏览器的 localStorage，不上传、不联网。</p>
+            </div>
+
+            <!-- chart-degrade: n/a -->
+            <div class="tr-shell">
+                <div class="tr-tabs" role="tablist" aria-label="选择小游戏">
+                    <button type="button" class="tr-tab" id="tab-action" role="tab" aria-selected="true" aria-controls="panel-action" data-mode="action">护师西行<small>横版动作</small></button>
+                    <button type="button" class="tr-tab" id="tab-rogue" role="tab" aria-selected="false" aria-controls="panel-rogue" data-mode="rogue" tabindex="-1">八十一难<small>轻 Roguelike</small></button>
+                    <button type="button" class="tr-tab" id="tab-cards" role="tab" aria-selected="false" aria-controls="panel-cards" data-mode="cards" tabindex="-1">卡牌斗法<small>回合制</small></button>
+                </div>
+
+                <section class="tr-panel" id="panel-action" role="tabpanel" aria-labelledby="tab-action">
+                    <div class="tr-panel-head">
+                        <h3>护师西行</h3>
+                        <p>唐僧一路西行，你只负责一件事：别让妖怪碰到他。三难三 boss，约 4–6 分钟。</p>
+                    </div>
+                    <div class="tr-stage">
+                        <canvas id="act-canvas" width="960" height="540" aria-label="护师西行游戏画面。使用方向键移动与跳跃，J 键挥棒，K 键闪身。"></canvas>
+                        <div class="tr-hud" aria-hidden="true">
+                            <div class="tr-hud-box">
+                                <div class="lbl"><span>悟空</span><b id="act-hp-num">100</b></div>
+                                <div class="tr-meter"><i id="act-hp"></i></div>
+                            </div>
+                            <div class="tr-hud-box">
+                                <div class="lbl"><span>心灯</span><b id="act-monk-num">100</b></div>
+                                <div class="tr-meter is-mind"><i id="act-monk"></i></div>
+                            </div>
+                            <div class="tr-hud-box">
+                                <div class="lbl"><span>连击</span><b id="act-combo">0</b></div>
+                                <div class="tr-meter"><i id="act-progress"></i></div>
+                            </div>
+                            <div class="tr-hud-box tr-hud-right">
+                                <div class="score" id="act-score">0</div>
+                                <div class="meta"><span id="act-stage">第一试 · 白虎岭</span><span class="tr-hud-best"> · 最高 <span id="act-best">0</span></span></div>
+                            </div>
+                        </div>
+                        <div class="tr-rotate" id="act-rotate" aria-hidden="true">建议横屏游玩 · 视野更大</div>
+                        <div class="tr-overlay" id="act-overlay">
+                            <div class="eyebrow">第一试 · 白虎岭</div>
+                            <h4>护师西行</h4>
+                            <p>方向键移动，<span class="tr-kbd">Space</span> 跳跃（可二段），<span class="tr-kbd">J</span> 挥棒，<span class="tr-kbd">K</span> 闪身。妖怪碰到唐僧会损心灯，心灯灭则本试失败。修罗挑战：妖怪更硬、伤害更高，得分 ×1.5；无尽模式：三试循环，妖怪逐轮增强。</p>
+                            <div class="tr-btn-row">
+                                <button type="button" class="tr-btn tr-btn-primary" id="act-start">开始第一试</button>
+                                <button type="button" class="tr-btn" id="act-start-hard">修罗挑战</button>
+                                <button type="button" class="tr-btn" id="act-start-endless">无尽模式</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tr-touch" id="act-touch" aria-label="触摸控制">
+                        <div class="tr-touch-group">
+                            <button type="button" data-touch="left" aria-label="向左">←</button>
+                            <button type="button" data-touch="right" aria-label="向右">→</button>
+                        </div>
+                        <div class="tr-touch-group">
+                            <button type="button" data-touch="jump" aria-label="跳跃">跳</button>
+                            <button type="button" data-touch="atk" aria-label="挥棒">棒</button>
+                            <button type="button" data-touch="dash" aria-label="闪身">闪</button>
+                        </div>
+                    </div>
+                    <div class="tr-stage-foot">
+                        <div class="tr-hint">键盘：← → 移动 · ↑ / Space 跳跃 · J 挥棒 · K 闪身 · Esc 暂停</div>
+                        <div class="tr-btn-row">
+                            <button type="button" class="tr-btn" id="act-pause">暂停</button>
+                            <button type="button" class="tr-btn" id="act-restart">重开本试</button>
+                            <button type="button" class="tr-btn" id="act-full">全屏</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tr-panel" id="panel-rogue" role="tabpanel" aria-labelledby="tab-rogue" hidden>
+                    <div class="tr-panel-head">
+                        <h3>八十一难</h3>
+                        <p>先选行者，再从八十一难里抽十二难或十八难，靠体力、心性、救兵三样东西走到灵山。每一步都只有三种走法；每过四难，还会遇到一次途中事件。</p>
+                    </div>
+                    <div class="rg-heroes" id="rg-heroes" role="group" aria-label="选择行者"></div>
+                    <div class="rg-res">
+                        <div class="rg-res-item">
+                            <div class="lbl"><span>体力</span><b id="rg-hp-num">100</b></div>
+                            <div class="bar"><i id="rg-hp"></i></div>
+                        </div>
+                        <div class="rg-res-item mind">
+                            <div class="lbl"><span>心性</span><b id="rg-mind-num">100</b></div>
+                            <div class="bar"><i id="rg-mind"></i></div>
+                        </div>
+                        <div class="rg-res-item rescue">
+                            <div class="lbl"><span>救兵</span><b id="rg-rescue-num">3</b></div>
+                            <div class="bar"><i id="rg-rescue"></i></div>
+                        </div>
+                        <div class="rg-res-item">
+                            <div class="lbl"><span>得分</span><b id="rg-score">0</b></div>
+                            <div class="bar"><i id="rg-score-bar"></i></div>
+                        </div>
+                    </div>
+                    <div class="rg-board">
+                        <div class="rg-scroll" aria-live="polite">
+                            <div class="rg-chapter" id="rg-chapter">第 1 / 12 难</div>
+                            <h4 id="rg-title">按下开始，抽第一难</h4>
+                            <p id="rg-desc">每一难都标注了出处、成因与结局。你的选择会改变体力、心性与救兵，也会改变最后的得分。</p>
+                            <div class="rg-tags" id="rg-tags"></div>
+                            <div class="rg-progress" id="rg-progress" aria-hidden="true"></div>
+                        </div>
+                        <div>
+                            <div class="rg-options" id="rg-options"></div>
+                            <div class="rg-items" id="rg-items"></div>
+                        </div>
+                    </div>
+                    <div class="rg-log" id="rg-log" aria-live="polite"></div>
+                    <div class="rg-end" id="rg-end" hidden></div>
+                    <div class="tr-stage-foot">
+                        <div class="tr-hint">键盘：1 / 2 / 3 选择走法 · 进度仅存本机</div>
+                        <div class="tr-btn-row">
+                            <button type="button" class="tr-btn tr-btn-primary" id="rg-start">开始西行</button>
+                            <button type="button" class="tr-btn" id="rg-start-long">十八难 · 长途</button>
+                            <button type="button" class="tr-btn" id="rg-restart">重开</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tr-panel" id="panel-cards" role="tabpanel" aria-labelledby="tab-cards" hidden>
+                    <div class="tr-panel-head">
+                        <h3>卡牌斗法</h3>
+                        <p>从十二张角色卡里选一位，连打五场。能量、技能、属性克制都要算，选卡本身就决定了难度。</p>
+                    </div>
+                    <div id="cf-select">
+                        <div class="cf-grid" id="cf-grid"></div>
+                    </div>
+                    <div class="cf-battle" id="cf-battle" hidden>
+                        <div class="cf-row">
+                            <div class="cf-fighter" id="cf-player">
+                                <div class="who"><strong>—</strong><span></span></div>
+                                <div class="cf-hp"><i></i></div>
+                                <div class="cf-num"><span>HP</span><span>—</span></div>
+                            </div>
+                            <div class="cf-vs" aria-hidden="true">斗</div>
+                            <div class="cf-fighter enemy" id="cf-enemy">
+                                <div class="who"><strong>—</strong><span></span></div>
+                                <div class="cf-hp"><i></i></div>
+                                <div class="cf-num"><span>HP</span><span>—</span></div>
+                            </div>
+                        </div>
+                        <div class="cf-actions" id="cf-actions"></div>
+                        <div class="cf-skill-list" id="cf-skill-list"></div>
+                        <div class="cf-log" id="cf-log" aria-live="polite"></div>
+                    </div>
+                    <div class="cf-end" id="cf-end" hidden></div>
+                    <div class="tr-stage-foot">
+                        <div class="tr-hint">键盘：1–6 选择行动 · R 重开（战斗中点选按钮即可）</div>
+                        <div class="tr-btn-row">
+                            <button type="button" class="tr-btn" id="cf-restart" hidden>重开斗法</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <p class="kicker">规则</p>
+                <h2>三试怎么玩</h2>
+            </div>
+            <div class="tr-rules">
+                <div class="tr-rule">
+                    <h3>护师西行</h3>
+                    <p>唐僧自动西行，妖怪从前方来袭。悟空贴身挥棒、二段跳与闪身无敌帧是全部手段；心灯归零或悟空倒地即本试失败。三试连过即通关；修罗难度更强，无尽模式三试循环、逐轮加码。</p>
+                    <div class="keys">← → 移动 · ↑ / Space 跳跃 · J 挥棒 · K 闪身</div>
+                </div>
+                <div class="tr-rule">
+                    <h3>八十一难</h3>
+                    <p>十二难或十八难按回目顺序抽取。硬闯耗体力，智取耗心性，请救兵最稳但用一次少一次；人心自生的魔障用智取最省，需要搬救兵的老怪则适合请救兵。每过四难会遇到一次途中事件，可能补给、得法宝，也可能用资源换分。长途模式资源更紧、得分更高。</p>
+                    <div class="keys">1 硬闯 · 2 智取 · 3 请救兵</div>
+                </div>
+                <div class="tr-rule">
+                    <h3>卡牌斗法</h3>
+                    <p>角色卡的 HP / 攻击 / 防御 / 速度来自站内卡牌数据，按同一量纲归一。每回合 3 点能量，技能消耗由卡面费用折算；金木水火土按相克循环加成。连打五阵，前四阵对手顺序每局随机，二郎神固定压轴；终阵二郎神会用天眼通破除增益。</p>
+                    <div class="keys">1 普攻 · 2–4 技能 · 防御 / 调息</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <p class="kicker">来源</p>
+                <h2>数据与实现</h2>
+            </div>
+            <div id="dataSource">
+                数据源：<code>site/data/json/hardships_81.json</code>（八十一难 81 条，含出处/成因/结局/难度）与 <code>site/data/json/character_cards.json</code>（角色卡 12 张，含稀有度/元素/战力/技能）。两文件由 scripts 侧既有数据管线生成，快照 2026-11-22；本页以页面内嵌 EMBEDDED 数据随发布生成，file:// 离线可玩，不发起任何网络请求。
+            </div>
+            <p class="tr-hint" style="margin-top:10px;">实现：Canvas 2D 自绘与原生 DOM，无第三方游戏引擎；全部脚本为本站本地文件，零外域依赖。</p>
+
+            <div class="cite-block">
+                <details class="cite-details">
+                    <summary>引用格式</summary>
+                    <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 取经三试. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/journey-trials.html（访问日期 2026-11-22）</pre><button type="button" class="cite-copy">复制</button></div>
+                    <div class="cite-item"><span>GB/T</span><pre class="cite-text">《详解西游记》项目. 取经三试[EB/OL]. (2026)[2026-11-22]. https://1273984347.github.io/xiyouji/data/journey-trials.html.</pre><button type="button" class="cite-copy">复制</button></div>
+                    <div class="cite-item"><span>MLA</span><pre class="cite-text">"取经三试." 详解西游记可视化站点, 2026, 1273984347.github.io/xiyouji/data/journey-trials.html. Accessed 22 Nov. 2026.</pre><button type="button" class="cite-copy">复制</button></div>
+                </details>
+            </div>
+        </div>
+    </main>
+    <footer class="jt-foot">
+        <span>《详解西游记》· 取经三试 · 纯本地多文件实现</span>
+        <a href="../../site/index.html">返回站点首页</a>
+    </footer>
+
+    
+
+    <script type="application/json" id="EMBEDDED_DATA">{"hardships":[{"n":1,"name":"金蝉遭贬","chapter":"前传","cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":2,"name":"出胎几杀","chapter":"前传","cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":3,"name":"满月抛江","chapter":"前传","cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":4,"name":"寻亲报冤","chapter":"前传","cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":5,"name":"出城逢虎","chapter":13,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":6,"name":"落坑折从","chapter":13,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":7,"name":"双叉岭上","chapter":13,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":8,"name":"两界山头","chapter":14,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":9,"name":"陡涧换马","chapter":15,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":10,"name":"夜被火烧","chapter":16,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":11,"name":"失却袈裟","chapter":16,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"需要搬救兵"},{"n":12,"name":"收降八戒","chapter":19,"cause":"如来/观音安排","ending":"被收编","difficulty":"悟空独立解决"},{"n":13,"name":"黄风怪阻","chapter":21,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"需要搬救兵"},{"n":14,"name":"请求灵吉","chapter":21,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":15,"name":"流沙难渡","chapter":22,"cause":"如来/观音安排","ending":"被收编","difficulty":"悟空独立解决"},{"n":16,"name":"收得沙僧","chapter":22,"cause":"如来/观音安排","ending":"被收编","difficulty":"悟空独立解决"},{"n":17,"name":"四圣显化","chapter":23,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":18,"name":"五庄观中","chapter":24,"cause":"人心自生的魔障","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":19,"name":"难活人参","chapter":26,"cause":"人心自生的魔障","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":20,"name":"贬退心猿","chapter":27,"cause":"人心自生的魔障","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":21,"name":"黑松林失散","chapter":28,"cause":"人心自生的魔障","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":22,"name":"宝象国捎书","chapter":29,"cause":"人心自生的魔障","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":23,"name":"金銮殿变虎","chapter":30,"cause":"人心自生的魔障","ending":"被打死（无背景）","difficulty":"需要搬救兵"},{"n":24,"name":"平顶山逢魔","chapter":32,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":25,"name":"乌鸡国礼佛","chapter":36,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":26,"name":"被魔化身","chapter":37,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":27,"name":"号山逢怪","chapter":40,"cause":"真正野怪","ending":"被收编","difficulty":"需要搬救兵"},{"n":28,"name":"风摄圣僧","chapter":41,"cause":"真正野怪","ending":"被收编","difficulty":"需要搬救兵"},{"n":29,"name":"心猿遭害","chapter":41,"cause":"真正野怪","ending":"被收编","difficulty":"需要搬救兵"},{"n":30,"name":"请圣降妖","chapter":42,"cause":"如来/观音安排","ending":"被收编","difficulty":"需要搬救兵"},{"n":31,"name":"黑河沉没","chapter":43,"cause":"真正野怪","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":32,"name":"搬运车迟","chapter":44,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":33,"name":"大赌输赢","chapter":45,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":34,"name":"祛道兴僧","chapter":46,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":35,"name":"路逢大水","chapter":47,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":36,"name":"身落天河","chapter":47,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":37,"name":"鱼篮现身","chapter":49,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":38,"name":"金兜山遇怪","chapter":50,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":39,"name":"普天神难伏","chapter":52,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":40,"name":"问佛根源","chapter":52,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":41,"name":"吃水遭毒","chapter":53,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"需要搬救兵"},{"n":42,"name":"西梁国留婚","chapter":54,"cause":"人心自生的魔障","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":43,"name":"琵琶洞受苦","chapter":55,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"需要搬救兵"},{"n":44,"name":"再贬心猿","chapter":57,"cause":"人心自生的魔障","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":45,"name":"难辨猕猴","chapter":58,"cause":"人心自生的魔障","ending":"被打死（无背景）","difficulty":"需要搬救兵"},{"n":46,"name":"路阻火焰山","chapter":59,"cause":"真正野怪","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":47,"name":"求取芭蕉扇","chapter":59,"cause":"真正野怪","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":48,"name":"收缚魔王","chapter":61,"cause":"真正野怪","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":49,"name":"赛城扫塔","chapter":62,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":50,"name":"宝林遭魔","chapter":65,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":51,"name":"捉获圣僧","chapter":65,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":52,"name":"七绝山稀柿","chapter":67,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":53,"name":"朱紫国行医","chapter":68,"cause":"真正野怪","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":54,"name":"拯救疲癃","chapter":71,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":55,"name":"降妖取后","chapter":71,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":56,"name":"八戒忘形","chapter":72,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":57,"name":"盘丝洞中","chapter":72,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"需要搬救兵"},{"n":58,"name":"濯垢泉八戒","chapter":72,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":59,"name":"驱逐大圣","chapter":76,"cause":"人心自生的魔障","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":60,"name":"路阻狮驼","chapter":74,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":61,"name":"城遇暗云","chapter":75,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":62,"name":"金鏘凌虚","chapter":75,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":63,"name":"比丘救子","chapter":78,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":64,"name":"辨认妖邪","chapter":79,"cause":"天界/西天坐骑下凡","ending":"被接走（有背景）","difficulty":"需要搬救兵"},{"n":65,"name":"赶捉犀牛","chapter":91,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"需要搬救兵"},{"n":66,"name":"天竺遇婚","chapter":93,"cause":"人心自生的魔障","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":67,"name":"铜台府监禁","chapter":97,"cause":"人心自生的魔障","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":68,"name":"凌云渡脱胎","chapter":98,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":69,"name":"有经未全","chapter":98,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":70,"name":"珍珠悬挂","chapter":98,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":71,"name":"分色成形","chapter":99,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":72,"name":"遇着猛兽","chapter":99,"cause":"真正野怪","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":73,"name":"风雪寒冰","chapter":99,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":74,"name":"落水鼋窟","chapter":99,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":75,"name":"阴魔作祟","chapter":99,"cause":"人心自生的魔障","ending":"被打死（无背景）","difficulty":"悟空独立解决"},{"n":76,"name":"老鼋落水","chapter":99,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":77,"name":"未齐经全","chapter":99,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":78,"name":"佛国雷音","chapter":98,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":79,"name":"经传天下","chapter":100,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":80,"name":"佛国归途","chapter":100,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"},{"n":81,"name":"五圣成真","chapter":100,"cause":"如来/观音安排","ending":"被接走（有背景）","difficulty":"悟空独立解决"}],"cards":[{"character":"孙悟空","title":"齐天大圣·斗战胜佛","rarity":"UR","element":"金","power":9800,"hp":9500,"atk":9800,"def":8500,"spd":9900,"skills":[{"name":"七十二变","cost":5,"effect":"变形·回避率+50%·持续 3 回合","type":"buff"},{"name":"筋斗云","cost":3,"effect":"先手·无视地形·必中","type":"move"},{"name":"如意金箍棒·定海神针","cost":8,"effect":"物理伤害×3·破防","type":"attack"},{"name":"火眼金睛","cost":2,"effect":"识破·看穿一切伪装与幻术","type":"skill"}],"passive":"大闹天宫——首次受击免疫·每场战斗 1 次","acquisition":"限定卡池·五行山封印解除纪念","lore":"花果山灵石育孕·大闹天宫·护送取经·终成斗战胜佛"},{"character":"如来佛祖","title":"西天极乐世界·最高主宰","rarity":"UR","element":"光","power":10000,"hp":9999,"atk":9500,"def":9999,"spd":7000,"skills":[{"name":"五行山压顶","cost":10,"effect":"无视对方防御·直接剥夺回合数 500 年","type":"attack"},{"name":"佛法无边","cost":8,"effect":"全场净化·解除一切 buff/debuff","type":"buff"},{"name":"掌中佛国","cost":6,"effect":"将目标封入掌中·无法行动","type":"control"}],"passive":"规则系——所有战斗结果由如来判定","acquisition":"灵山最高祭祀·全服仅 1 张","lore":"西天极乐世界最高主宰·九九八十一难总设计师"},{"character":"观音菩萨","title":"南海普陀·大慈大悲","rarity":"SSR","element":"水","power":8200,"hp":8500,"atk":7800,"def":8800,"spd":8000,"skills":[{"name":"净瓶甘露","cost":5,"effect":"群体回复 50% HP·解除负面","type":"heal"},{"name":"紧箍咒","cost":4,"effect":"对单体的 ENTP 类角色强制控制 3 回合","type":"control"},{"name":"三根救命毫毛","cost":3,"effect":"赋予队友复活道具·可使用 3 次","type":"buff"}],"passive":"暗中护持——队友 HP < 30% 时自动触发护盾","acquisition":"南海普陀限定卡池","lore":"大慈大悲观世音菩萨·取经项目暗中投资人"},{"character":"二郎神杨戬","title":"显圣二郎真君","rarity":"SSR","element":"雷","power":8800,"hp":8200,"atk":9000,"def":8000,"spd":9200,"skills":[{"name":"天眼通","cost":4,"effect":"看穿一切伪装与变化·持续 5 回合","type":"skill"},{"name":"八九玄功","cost":6,"effect":"七十二变之敌·附带雷属性伤害","type":"attack"},{"name":"哮天犬","cost":3,"effect":"召唤哮天犬咬住目标·无法行动 2 回合","type":"control"}],"passive":"天庭最强战神——对妖怪类敌人伤害+30%","acquisition":"灌江口限定·天庭军团卡池","lore":"玉帝外甥·曾与悟空大战三百回合不分胜负"},{"character":"唐三藏","title":"旃檀功德佛·金蝉子转世","rarity":"SR","element":"心","power":1500,"hp":1500,"atk":800,"def":1200,"spd":3000,"skills":[{"name":"紧箍咒念诵","cost":2,"effect":"对悟空类角色强制控制·但伤害为 0","type":"control"},{"name":"诵读多心经","cost":3,"effect":"净化全场负面·但需吟唱 1 回合","type":"heal"},{"name":"求助观音","cost":5,"effect":"召唤观音救场·冷却 5 回合","type":"summon"}],"passive":"金蝉子转世——被妖怪击败时 100% 触发剧情救援","acquisition":"默认卡·开局赠送","lore":"金蝉子转世·14 年徒步取经·终成旃檀功德佛"},{"character":"猪八戒","title":"天蓬元帅·净坛使者","rarity":"SR","element":"土","power":4200,"hp":6000,"atk":4500,"def":5500,"spd":3000,"skills":[{"name":"三十六变","cost":3,"effect":"变形·但失败率 50%","type":"buff"},{"name":"九齿钉耙","cost":4,"effect":"物理伤害×1.5","type":"attack"},{"name":"高老庄红烧肉","cost":2,"effect":"回复 30% HP·但攻击力-20%·持续 3 回合","type":"heal"}],"passive":"天蓬元帅——遇到女性妖怪时 50% 概率叛变","acquisition":"高老庄剧情解锁","lore":"前天蓬元帅·调戏嫦娥被贬·后成取经团队气氛组"},{"character":"沙悟净","title":"卷帘大将·金身罗汉","rarity":"R","element":"水","power":3200,"hp":4500,"atk":3200,"def":5000,"spd":3500,"skills":[{"name":"降妖宝杖","cost":3,"effect":"稳定物理伤害×1.2","type":"attack"},{"name":"挑担术","cost":1,"effect":"提升团队负重上限·但无战斗效果","type":"buff"},{"name":"'师父被妖怪抓走了'","cost":2,"effect":"通知全队·但无实际伤害","type":"skill"}],"passive":"默默奉献——每回合稳定回复 5% HP","acquisition":"流沙河剧情解锁","lore":"前卷帘大将·打破琉璃盏被贬·默默挑担 14 年"},{"character":"白龙马","title":"西海龙王三太子·八部天龙","rarity":"R","element":"水","power":3800,"hp":5000,"atk":3500,"def":4500,"spd":4000,"skills":[{"name":"化身白马","cost":0,"effect":"成为唐僧坐骑·无法战斗","type":"passive"},{"name":"踹一脚","cost":5,"effect":"关键时刻救场·对黄袍怪伤害×3","type":"attack"},{"name":"龙吟","cost":3,"effect":"威吓低级妖怪 2 回合","type":"control"}],"passive":"关键时刻救场——剧情触发时强制激活","acquisition":"鹰愁涧剧情解锁","lore":"西海龙王三太子·因纵火烧殿上明珠被贬·化为白马驮唐僧"},{"character":"牛魔王","title":"平天大圣·七大圣之首","rarity":"SSR","element":"土","power":8500,"hp":9500,"atk":8800,"def":8500,"spd":6000,"skills":[{"name":"七十二变（牛版）","cost":5,"effect":"变形·与悟空同级","type":"buff"},{"name":"混铁棍","cost":6,"effect":"物理伤害×2.5·破防","type":"attack"},{"name":"芭蕉扇·借","cost":8,"effect":"需先借到·否则无效","type":"attack"}],"passive":"七大圣之首——对悟空类角色伤害+50%","acquisition":"火焰山剧情限定","lore":"悟空结拜大哥·平天大圣·最终被哪吒收服"},{"character":"红孩儿","title":"圣婴大王·善财童子","rarity":"SSR","element":"火","power":7800,"hp":6500,"atk":8500,"def":6000,"spd":8800,"skills":[{"name":"三昧真火","cost":6,"effect":"持续燃烧伤害 5 回合·对悟空特效","type":"attack"},{"name":"火云枪","cost":4,"effect":"物理+火属性伤害×1.8","type":"attack"},{"name":"变身小郎君","cost":3,"effect":"伪装·骗取敌方信任","type":"control"}],"passive":"三昧真火——免疫一切火系伤害·对悟空类伤害+30%","acquisition":"号山火云洞限定","lore":"牛魔王与铁扇公主之子·三昧真火无人能敌·终被观音收服"},{"character":"六耳猕猴","title":"假美猴王·心魔","rarity":"SSR","element":"暗","power":9700,"hp":9400,"atk":9700,"def":8500,"spd":9900,"skills":[{"name":"七十二变（复制）","cost":5,"effect":"完全复制目标技能","type":"buff"},{"name":"如意金箍棒（伪）","cost":8,"effect":"物理伤害×3·但伤害 90%","type":"attack"},{"name":"谛听难辨","cost":4,"effect":"伪装·识破率-50%","type":"control"}],"passive":"心魔——对悟空类角色伤害+50%·且免疫紧箍咒","acquisition":"真假美猴王剧情限定","lore":"悟空心魔化身·与悟空一模一样·终被如来识破"},{"character":"白骨精","title":"白骨夫人·野怪","rarity":"N","element":"暗","power":800,"hp":500,"atk":900,"def":400,"spd":1500,"skills":[{"name":"三变（少女/老妇/老翁）","cost":2,"effect":"伪装·识破率 30%","type":"control"},{"name":"解尸法","cost":1,"effect":"假死逃脱·实际无伤害","type":"skill"}],"passive":"野怪——被悟空一击秒杀（但悟空会被赶走）","acquisition":"白虎岭剧情·新手教程","lore":"白虎岭野怪·想吃唐僧肉长生不老·三次变化被悟空识破"}]}</script>
+    
+    
+    
+    
+    
+
+    <script src="js/core.js"></script>
+    <script src="js/action.js"></script>
+    <script src="js/roguelike.js"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>

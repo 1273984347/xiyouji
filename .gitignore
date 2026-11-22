@@ -239,3 +239,6 @@ backups/
 
 # W1277 verify 回放缓存（本机状态文件·不入仓）
 scripts/output/_verify_replay_state.json
+
+# W1301（L-02）跨 run 增量缓存（探针中间产物·不入库·由 CI actions/cache 跨 run 携带）
+scripts/output/_svg_probe_cache_*.json

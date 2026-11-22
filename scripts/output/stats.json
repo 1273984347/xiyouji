@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-22T18:16:59",
+  "_generated": "2026-11-22T21:30:11",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -55,7 +55,7 @@
     "domain": "html_total − _template.html（generate_csp TEMPLATE_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1246",
+    "last_changed_by": "W1302",
     "value": 874
   },
   "gate_count": {
@@ -69,7 +69,7 @@
     "domain": "site/**/*.html（递归全站）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1246",
+    "last_changed_by": "W1302",
     "value": 875
   },
   "icon_allowlist_entries": {
@@ -160,14 +160,14 @@
     "domain": "docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化）",
     "generator": "scripts/stats.py",
     "introduced_by": "W737",
-    "last_changed_by": "W1300",
-    "value": 248
+    "last_changed_by": "W1301",
+    "value": 250
   },
   "scan_files": {
     "domain": "html_total − _template.html − _shell.html（check_js_syntax/check_structure）",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1246",
+    "last_changed_by": "W1302",
     "value": 873
   },
   "script_classes": {
@@ -181,14 +181,14 @@
     "domain": "html_total − 两模板壳（check_seo_head SEO_EXCLUDE）",
     "generator": "scripts/stats.py",
     "introduced_by": "W591",
-    "last_changed_by": "W1246",
+    "last_changed_by": "W1302",
     "value": 873
   },
   "site_data_html": {
     "domain": "site/data/*.html",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1244",
+    "last_changed_by": "W1302",
     "value": 91
   },
   "site_en_html": {
@@ -223,7 +223,7 @@
     "domain": "site/data_html − _shell.html",
     "generator": "scripts/stats.py",
     "introduced_by": "W459",
-    "last_changed_by": "W1244",
+    "last_changed_by": "W1302",
     "value": 90
   },
   "w864_entries": {

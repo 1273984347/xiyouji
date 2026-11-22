@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0E1A1E">
+<meta name="color-scheme" content="light">
+<title>西游 · 法宝连消 —— 连连看（单文件原型）</title>
+<meta name="description" content="《西游 · 法宝连消》是一款零依赖、file:// 直开的连连看益智小游戏：同种法宝两折之内连线消除，限时清盘。">
+<style>
+:root{
+  --paper:#FAF7F0;--ink:#221D16;--ink-soft:#6B665E;--line:rgba(34,29,22,.16);
+  --accent:#C0392B;--gold:#E0B84A;--jade:#3A473A;--indigo:#40619E;
+  --stage-bg:#0E1A1E;--hud-text:#F2EBDC;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{
+  margin:0;min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  padding:clamp(10px,2.2vw,26px);
+  background:radial-gradient(120% 90% at 50% 0%, #FBF7EE 0%, #EFE7D8 55%, #E2D6C1 100%);
+  color:var(--ink);font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(34,29,22,.026) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(34,29,22,.018) 0 1px, transparent 1px 4px);
+  z-index:0;
+}
+.topbar{
+  position:relative;z-index:1;width:min(1120px,100%);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand h1{margin:0;font-size:clamp(16px,2.1vw,22px);font-weight:600;letter-spacing:.18em}
+.brand .sub{font-size:12px;color:var(--ink-soft);letter-spacing:.16em}
+.brand .seal{
+  display:inline-grid;place-items:center;width:26px;height:26px;
+  border:1px solid var(--accent);color:var(--accent);border-radius:4px;
+  font-size:12px;letter-spacing:0;transform:translateY(2px);
+}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;cursor:pointer;border-radius:999px;letter-spacing:.12em;
+  transition:background 160ms ease,border-color 160ms ease,transform 160ms ease,color 160ms ease;
+}
+.btn:focus-visible,.cell:focus-visible,.side-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.btn.small{font-size:12px;padding:7px 14px;border:1px solid var(--line);background:rgba(250,247,240,.7);color:var(--ink-soft)}
+.btn.small:hover{background:#fff;color:var(--ink);border-color:rgba(34,29,22,.3)}
+.stage{
+  position:relative;z-index:1;width:100%;
+  max-width:min(1120px, calc((100dvh - 176px) * 16 / 9));
+  aspect-ratio:16/9;margin-inline:auto;background:var(--stage-bg);border-radius:10px;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 26px 60px -34px rgba(34,29,22,.7),0 2px 10px rgba(34,29,22,.14);
+  user-select:none;-webkit-user-select:none;touch-action:none;
+}
+.stage:fullscreen{max-width:none;width:100vw;height:100dvh;aspect-ratio:auto;border-radius:0}
+canvas#game{display:block;width:100%;height:100%;touch-action:none;background:#0E1A1E}
+.hud{
+  position:absolute;inset:10px 12px auto;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;
+  pointer-events:none;color:var(--hud-text);font-size:12px;letter-spacing:.05em;z-index:8;
+  transition:opacity 220ms ease;
+}
+.stage[data-state="menu"] .hud,
+.stage[data-state="menu"] .board,
+.stage[data-state="menu"] .side{opacity:0;pointer-events:none}
+.hud-left,.hud-right{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.stat{
+  padding:5px 9px;border-radius:7px;background:rgba(12,24,26,.6);
+  border:1px solid rgba(242,235,220,.16);color:rgba(242,235,220,.82);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.stat b{color:#fff;font-weight:600}
+.stat.gold b{color:#F4DFA6}
+.timer{
+  display:flex;align-items:center;gap:7px;padding:5px 9px;border-radius:7px;
+  background:rgba(12,24,26,.6);border:1px solid rgba(242,235,220,.16);
+}
+.timer .track{width:clamp(70px,9vw,120px);height:6px;border-radius:999px;background:rgba(242,235,220,.16);overflow:hidden;border:1px solid rgba(242,235,220,.1)}
+.timer .track i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#E0B84A,#C0392B);border-radius:999px}
+.timer.low .track i{background:#C0392B}
+.board{
+  position:absolute;left:4%;top:16%;width:52%;z-index:5;
+  display:grid;gap:3px;padding:8px;border-radius:12px;
+  background:rgba(10,24,26,.62);border:1px solid rgba(242,235,220,.16);
+  backdrop-filter:blur(4px);box-shadow:0 18px 40px -24px rgba(0,0,0,.9);
+  transition:opacity 220ms ease;
+}
+.board.shake{animation:boardshake 200ms ease}
+@keyframes boardshake{
+  0%,100%{transform:translateX(0)}
+  30%{transform:translateX(-4px)}
+  70%{transform:translateX(4px)}
+}
+.cell{
+  position:relative;border:0;border-radius:5px;padding:0;background:transparent;
+  display:grid;place-items:center;cursor:default;min-width:0;min-height:0;
+}
+.cell.has{cursor:pointer;background:rgba(250,247,240,.05);box-shadow:0 0 0 1px rgba(242,235,220,.04) inset}
+.cell.has:hover{background:rgba(250,247,240,.12)}
+.cell.sel{box-shadow:0 0 0 2px #F4DFA6,0 0 12px rgba(224,184,74,.55) inset}
+.cell.hint{box-shadow:0 0 0 2px #7FD3C9,0 0 14px rgba(127,211,201,.5) inset}
+.tile{
+  width:84%;height:84%;border-radius:7px;display:grid;place-items:center;
+  font-size:clamp(10px,1.7vw,19px);font-weight:600;color:#FFF7EC;
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 3px 8px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.3) inset;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
+.t0{background:linear-gradient(150deg,#E8C466,#B8862A)}
+.t1{background:linear-gradient(150deg,#E08070,#A9332A)}
+.t2{background:linear-gradient(150deg,#8FC49A,#3F6E4C)}
+.t3{background:linear-gradient(150deg,#82A9D8,#33557F)}
+.t4{background:linear-gradient(150deg,#B69AD4,#5B3F7E)}
+.t5{background:linear-gradient(150deg,#7FD3C9,#2F6E6A)}
+.t6{background:linear-gradient(150deg,#E2A06A,#9A5426)}
+.t7{background:linear-gradient(150deg,#D99AB8,#7E3F5E)}
+.path-svg{
+  position:absolute;z-index:6;pointer-events:none;opacity:0;
+  transition:opacity 120ms ease;overflow:visible;
+}
+.path-svg.show{opacity:1}
+.path-svg polyline{
+  fill:none;stroke:#F4DFA6;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 0 4px rgba(224,184,74,.8));
+}
+.side{
+  position:absolute;right:4%;top:16%;width:32%;z-index:5;color:var(--hud-text);
+  padding:12px 14px;border-radius:12px;background:rgba(10,24,26,.62);
+  border:1px solid rgba(242,235,220,.16);backdrop-filter:blur(4px);
+  transition:opacity 220ms ease;
+}
+.side-kicker{margin:0;font-size:10px;letter-spacing:.28em;color:rgba(242,235,220,.5)}
+.side h2{margin:4px 0 10px;font-size:clamp(14px,1.8vw,20px);font-weight:600;letter-spacing:.14em;color:#F6EFE1}
+.side p{margin:0 0 8px;font-size:12px;line-height:1.7;color:rgba(242,235,220,.72);letter-spacing:.04em}
+.side .count{color:#F4DFA6;font-variant-numeric:tabular-nums}
+.side-stats{font-size:11.5px;color:rgba(242,235,220,.68);letter-spacing:.05em;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.side-stats b{color:#F6EFE1}
+.side-actions{display:flex;gap:8px}
+.side-btn{
+  flex:1;padding:7px 8px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:11.5px;
+  letter-spacing:.08em;border:1px solid rgba(242,235,220,.24);background:rgba(242,235,220,.06);color:var(--hud-text);
+  transition:background 160ms ease;
+}
+.side-btn:hover{background:rgba(242,235,220,.16)}
+.side-btn:disabled{opacity:.4;cursor:default}
+.toast{
+  position:absolute;top:30%;left:50%;transform:translate(-50%,-8px);
+  padding:9px 22px;border:1px solid rgba(242,235,220,.28);
+  background:rgba(12,24,26,.8);color:#F6EFE1;
+  letter-spacing:.2em;font-size:clamp(13px,1.9vw,18px);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity 240ms ease,transform 240ms ease;z-index:8;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.screen{
+  position:absolute;inset:0;z-index:9;display:grid;place-items:center;
+  padding:clamp(14px,3.5vw,34px);
+  background:radial-gradient(80% 80% at 50% 38%, rgba(14,26,30,.66), rgba(14,26,30,.94));
+}
+.panel{width:min(600px,100%);max-height:100%;overflow:auto;text-align:center;color:var(--hud-text);scrollbar-width:thin}
+.kicker{margin:0 0 4px;font-size:11px;letter-spacing:.3em;color:rgba(242,235,220,.55)}
+.panel h2{margin:.16em 0 .1em;font-size:clamp(24px,4.3vw,40px);font-weight:600;letter-spacing:.18em}
+.panel h2 .accent{color:var(--gold)}
+.lead{margin:0 auto;max-width:520px;font-size:clamp(12.5px,1.5vw,14.5px);line-height:1.95;letter-spacing:.06em;color:rgba(242,235,220,.78)}
+.lead em{font-style:normal;color:var(--gold);white-space:nowrap}
+.keys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;margin:14px 0 16px;text-align:left;font-size:12.5px;color:rgba(242,235,220,.84)}
+.keys div{display:flex;justify-content:space-between;gap:8px;padding-bottom:5px;border-bottom:1px dashed rgba(242,235,220,.14)}
+kbd{
+  display:inline-block;padding:1px 6px;border-radius:4px;border:1px solid rgba(242,235,220,.26);
+  background:rgba(242,235,220,.1);font-family:"JetBrains Mono","Consolas",monospace;font-size:11px;white-space:nowrap;
+}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.btn.primary{
+  font-family:inherit;font-size:15px;letter-spacing:.2em;padding:11px 28px;border-radius:999px;
+  border:1px solid #D9564A;background:var(--accent);color:#FFF7EC;cursor:pointer;
+  box-shadow:0 10px 24px -14px rgba(192,57,43,.9);transition:background 160ms ease,transform 160ms ease;
+}
+.btn.primary:hover{background:#D0473A;transform:translateY(-1px)}
+.btn.ghost{
+  font-family:inherit;font-size:13px;letter-spacing:.14em;padding:9px 18px;border-radius:999px;
+  border:1px solid rgba(242,235,220,.34);background:transparent;color:rgba(242,235,220,.9);cursor:pointer;
+  transition:background 160ms ease,border-color 160ms ease;
+}
+.btn.ghost:hover{background:rgba(242,235,220,.1);border-color:rgba(242,235,220,.6)}
+.result{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 6px}
+.result div{padding:9px 8px;border:1px solid rgba(242,235,220,.14);border-radius:8px;background:rgba(242,235,220,.04)}
+.result span{display:block;font-size:11px;letter-spacing:.18em;color:rgba(242,235,220,.5);margin-bottom:4px}
+.result b{font-size:clamp(16px,2.2vw,22px);font-variant-numeric:tabular-nums;color:#F6EFE1;font-weight:500}
+.bestline{margin:8px 0 16px;font-size:12px;letter-spacing:.12em;color:rgba(242,235,220,.6);font-variant-numeric:tabular-nums}
+.legend{
+  position:relative;z-index:1;width:min(1120px,100%);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-soft);letter-spacing:.06em;
+}
+.legend .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);vertical-align:middle;margin:0 7px 2px}
+.legend b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:760px){
+  .brand .sub{display:none}
+  .stage{max-width:min(1120px, calc((100dvh - 156px) * 16 / 9))}
+  .legend{justify-content:center;text-align:center}
+  .hud{inset:6px 8px auto;gap:4px}
+  .stat,.timer{padding:4px 7px;font-size:10.5px}
+  .timer .track{width:54px}
+  .board{left:2%;top:17%;width:56%;gap:2px;padding:5px}
+  .side{right:2%;top:12%;width:36%;padding:8px 9px}
+  .side h2{font-size:12px;margin:2px 0 6px}
+  .side-kicker,.side p{display:none}
+  .side-stats{font-size:10px;margin-bottom:6px}
+  .side-btn{padding:5px 4px;font-size:9.5px}
+  .tile{font-size:clamp(9px,2.2vw,14px)}
+  .keys{grid-template-columns:1fr}
+  .toast{top:24%}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>西游 · 法宝连消</h1>
+    <span class="sub">连连看 / 单文件原型</span>
+    <span class="seal" aria-hidden="true">连</span>
+  </div>
+  <div class="top-actions">
+    <button class="btn small" id="btnSound" type="button" aria-pressed="true">音效 开</button>
+    <button class="btn small" id="btnRestart" type="button">重来</button>
+    <button class="btn small" id="btnFull" type="button">全屏</button>
+  </div>
+</header>
+
+<main class="stage" id="stage" data-state="menu">
+  <canvas id="game" width="960" height="540" aria-label="法宝连消画面：天宫宝库中的法宝棋盘"></canvas>
+
+  <div class="hud">
+    <div class="hud-left">
+      <span class="stat">第 <b id="levelNum">1</b>/3 关</span>
+      <span class="timer" id="timerBox"><span class="track"><i id="timeFill"></i></span><b id="timeNum">2:00</b></span>
+    </div>
+    <div class="hud-right">
+      <span class="stat">得分 <b id="scoreNum">0</b></span>
+      <span class="stat gold">剩余 <b id="pairNum">16</b> 对</span>
+    </div>
+  </div>
+
+  <div class="board" id="board" aria-label="法宝连连看棋盘"></div>
+  <svg class="path-svg" id="pathSvg" aria-hidden="true"></svg>
+
+  <aside class="side">
+    <p class="side-kicker">天宫宝库</p>
+    <h2 id="levelName">一、宝库初开</h2>
+    <p>点选两枚<b>同种法宝</b>，若能用不超过两次转弯的空路相连，即可消除。</p>
+    <p class="count">剩余 <b id="pairNum2">16</b> 对 · 得分 <b id="scoreNum2">0</b></p>
+    <p class="side-stats">提示 <b id="hintNum">3</b> · 重排 <b id="shuffleNum">2</b></p>
+    <div class="side-actions">
+      <button class="side-btn" id="btnHint" type="button">提示 H</button>
+      <button class="side-btn" id="btnShuffle" type="button">重排 S</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" aria-hidden="true"></div>
+
+  <section class="screen" id="startScreen">
+    <div class="panel">
+      <p class="kicker">单文件 · 零外域依赖 · file:// 直开</p>
+      <h2>法宝<span class="accent">连消</span></h2>
+      <p class="lead">天宫宝库里的法宝散落一地。两枚同种法宝，只要空路转角不超过两次，<em>便能一线路牵走。</em></p>
+      <div class="keys" aria-label="玩法">
+        <div><span>选牌</span><span>点击两枚同种法宝</span></div>
+        <div><span>连线</span><span>最多两次转弯</span></div>
+        <div><span>提示 / 重排</span><span><kbd>H</kbd> / <kbd>S</kbd></span></div>
+        <div><span>目标</span><span>限时清空三关</span></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnStart" type="button">打开宝库</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="clearScreen" hidden>
+    <div class="panel">
+      <p class="kicker">一库已清</p>
+      <h2 id="clearTitle">一、宝库初开</h2>
+      <div class="result">
+        <div><span>时间奖励</span><b id="clearScore">0</b></div>
+        <div><span>剩余时间</span><b id="clearTime">0:00</b></div>
+        <div><span>累计得分</span><b id="clearTotal">0</b></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnNextLevel" type="button">下一库</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="defeatScreen" hidden>
+    <div class="panel">
+      <p class="kicker">宝库 · 时辰已尽</p>
+      <h2>未能清盘</h2>
+      <div class="result">
+        <div><span>到达关卡</span><b id="defeatLevel">1</b></div>
+        <div><span>得分</span><b id="defeatScore">0</b></div>
+        <div><span>最佳</span><b id="defeatBest">0</b></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnRetry" type="button">重新开库</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="victoryScreen" hidden>
+    <div class="panel">
+      <p class="kicker">三库尽清 · 法宝归位</p>
+      <h2>宝库<span class="accent">已空</span></h2>
+      <p class="lead">法宝各归其位，宝库重归寂静。你拍了拍手，转身出门。</p>
+      <div class="result">
+        <div><span>总得分</span><b id="victoryScore">0</b></div>
+        <div><span>破关</span><b>3/3</b></div>
+        <div><span>最佳</span><b id="victoryBest">0</b></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnAgain" type="button">再开宝库</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="legend">
+  <span>单文件 Canvas2D + DOM 棋盘 · 无外域资源 · 点击 / 键盘 · 建议横屏</span>
+  <span><span class="dot"></span>最佳 <b id="bestNum">0</b></span>
+</footer>
+<p class="sr-only" id="live" aria-live="polite"></p>
+
+<script>
+(() => {
+  'use strict';
+
+  const VIEW = { w: 960, h: 540 };
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const BEST_KEY = 'xyj_fabaolianxiao_best_v1';
+  const MUTE_KEY = 'xyj_fabaolianxiao_mute_v1';
+
+  const TREASURES = [
+    { char: '棒', name: '金箍棒' },
+    { char: '扇', name: '芭蕉扇' },
+    { char: '葫', name: '紫金葫芦' },
+    { char: '瓶', name: '净瓶' },
+    { char: '裟', name: '锦襕袈裟' },
+    { char: '耙', name: '九齿钉耙' },
+    { char: '铲', name: '月牙铲' },
+    { char: '镜', name: '照妖镜' }
+  ];
+
+  const LEVELS = [
+    { name: '一、宝库初开', w: 8, h: 4, types: 6, time: 120 },
+    { name: '二、宝光交错', w: 8, h: 5, types: 7, time: 150 },
+    { name: '三、宝库深处', w: 8, h: 6, types: 8, time: 180 }
+  ];
+
+  const $ = (id) => document.getElementById(id);
+  const canvas = $('game');
+  const ctx = canvas.getContext('2d');
+  const stage = $('stage');
+  const boardEl = $('board');
+  const pathSvg = $('pathSvg');
+  const levelNum = $('levelNum');
+  const timeNum = $('timeNum');
+  const timeFill = $('timeFill');
+  const timerBox = $('timerBox');
+  const scoreNum = $('scoreNum');
+  const scoreNum2 = $('scoreNum2');
+  const pairNum = $('pairNum');
+  const pairNum2 = $('pairNum2');
+  const levelName = $('levelName');
+  const hintNum = $('hintNum');
+  const shuffleNum = $('shuffleNum');
+  const btnHint = $('btnHint');
+  const btnShuffle = $('btnShuffle');
+  const toastEl = $('toast');
+  const liveEl = $('live');
+  const bestNum = $('bestNum');
+  const btnSound = $('btnSound');
+  const btnRestart = $('btnRestart');
+  const btnFull = $('btnFull');
+  const btnStart = $('btnStart');
+  const btnNextLevel = $('btnNextLevel');
+  const btnRetry = $('btnRetry');
+  const btnAgain = $('btnAgain');
+
+  const screens = {
+    start: $('startScreen'),
+    clear: $('clearScreen'),
+    defeat: $('defeatScreen'),
+    victory: $('victoryScreen')
+  };
+
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const shuffleArr = (arr) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    return arr;
+  };
+
+  function readBest() {
+    try { return Number(localStorage.getItem(BEST_KEY)) || 0; } catch (err) { return 0; }
+  }
+  function writeBest(v) {
+    try { if (v > readBest()) localStorage.setItem(BEST_KEY, String(v)); } catch (err) {}
+  }
+  function updateBestLabels() {
+    const b = readBest();
+    bestNum.textContent = String(b);
+    $('defeatBest').textContent = String(b);
+    $('victoryBest').textContent = String(b);
+  }
+  function announce(msg) { liveEl.textContent = msg; }
+  function fmtTime(sec) {
+    const s = Math.max(0, Math.ceil(sec));
+    return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  }
+
+  // ===== 音频 =====
+  const AudioKit = (() => {
+    let ac = null;
+    let muted = false;
+    try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch (err) {}
+    function ensure() {
+      if (!ac) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) ac = new AC();
+      }
+      if (ac && ac.state === 'suspended') ac.resume();
+      return ac;
+    }
+    function tone(freq, dur, type, vol, slideTo) {
+      if (muted) return;
+      const a = ensure();
+      if (!a) return;
+      const t0 = a.currentTime;
+      const osc = a.createOscillator();
+      const gain = a.createGain();
+      osc.type = type || 'square';
+      osc.frequency.setValueAtTime(freq, t0);
+      if (slideTo) osc.frequency.exponentialRampToValueAtTime(Math.max(30, slideTo), t0 + dur);
+      gain.gain.setValueAtTime(vol, t0);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      osc.connect(gain).connect(a.destination);
+      osc.start(t0);
+      osc.stop(t0 + dur + 0.03);
+    }
+    return {
+      ensure,
+      isMuted: () => muted,
+      toggle() {
+        muted = !muted;
+        try { localStorage.setItem(MUTE_KEY, muted ? '1' : '0'); } catch (err) {}
+        if (!muted) this.click();
+        return muted;
+      },
+      click() { tone(480, 0.06, 'triangle', 0.03, 620); },
+      pick() { tone(620, 0.06, 'sine', 0.03, 760); },
+      clear() { tone(760, 0.1, 'triangle', 0.05, 1040); setTimeout(() => tone(980, 0.12, 'sine', 0.04, 1200), 70); },
+      bad() { tone(170, 0.12, 'sawtooth', 0.05, 110); },
+      hint() { tone(880, 0.1, 'sine', 0.04, 1120); },
+      win() { tone(392, 0.16, 'triangle', 0.06); setTimeout(() => tone(523, 0.18, 'triangle', 0.06), 150); setTimeout(() => tone(659, 0.3, 'triangle', 0.07), 320); }
+    };
+  })();
+
+  function syncSoundBtn() {
+    const muted = AudioKit.isMuted();
+    btnSound.textContent = muted ? '音效 关' : '音效 开';
+    btnSound.setAttribute('aria-pressed', String(!muted));
+  }
+
+  function resize() {
+    const rect = stage.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.round(rect.width * dpr));
+    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);
+  window.addEventListener('resize', resize);
+  window.addEventListener('orientationchange', resize);
+  resize();
+
+  // ===== 状态 =====
+  const game = {
+    phase: 'menu',
+    levelIndex: 0,
+    w: 8,
+    h: 4,
+    cols: 10,
+    rows: 6,
+    tiles: [],
+    score: 0,
+    time: 120,
+    hints: 3,
+    shuffles: 2,
+    selected: null,
+    hintCells: null,
+    hintUntil: 0,
+    total: 0,
+    busy: false
+  };
+
+  function tileAt(x, y) {
+    if (y < 0 || y >= game.rows || x < 0 || x >= game.cols) return -1;
+    return game.tiles[y][x];
+  }
+
+  function remaining() {
+    let n = 0;
+    for (let y = 0; y < game.rows; y++) for (let x = 0; x < game.cols; x++) if (game.tiles[y][x] >= 0) n++;
+    return n;
+  }
+
+  // ===== 寻路 =====
+  function findPath(a, b) {
+    const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+    const queue = [];
+    const best = new Map();
+    for (let d = 0; d < 4; d++) {
+      queue.push({ x: a.x, y: a.y, dir: d, turns: 0, path: [[a.x, a.y]] });
+    }
+    while (queue.length) {
+      const s = queue.shift();
+      const nx = s.x + dirs[s.dir][0];
+      const ny = s.y + dirs[s.dir][1];
+      if (nx < 0 || ny < 0 || nx >= game.cols || ny >= game.rows) continue;
+      const isB = nx === b.x && ny === b.y;
+      if (!isB && tileAt(nx, ny) >= 0) continue;
+      const key = nx + ',' + ny + ',' + s.dir;
+      const prev = best.get(key);
+      if (prev !== undefined && prev <= s.turns) continue;
+      best.set(key, s.turns);
+      const path = s.path.concat([[nx, ny]]);
+      if (isB) return path;
+      for (let nd = 0; nd < 4; nd++) {
+        let nt = s.turns;
+        if (nd !== s.dir) nt += 1;
+        if (nt > 2) continue;
+        queue.push({ x: nx, y: ny, dir: nd, turns: nt, path });
+      }
+    }
+    return null;
+  }
+
+  function findAnyPair() {
+    const list = [];
+    for (let y = 1; y <= game.h; y++) {
+      for (let x = 1; x <= game.w; x++) {
+        if (tileAt(x, y) >= 0) list.push({ x, y, type: tileAt(x, y) });
+      }
+    }
+    for (let i = 0; i < list.length; i++) {
+      for (let j = i + 1; j < list.length; j++) {
+        if (list[i].type !== list[j].type) continue;
+        const path = findPath(list[i], list[j]);
+        if (path) return { a: list[i], b: list[j], path };
+      }
+    }
+    return null;
+  }
+
+  // ===== 生成 / 重排 =====
+  function buildTiles() {
+    const level = LEVELS[game.levelIndex];
+    game.w = level.w;
+    game.h = level.h;
+    game.cols = game.w + 2;
+    game.rows = game.h + 2;
+    const pairCount = (game.w * game.h) / 2;
+    const pool = [];
+    for (let i = 0; i < pairCount; i++) {
+      const t = i % level.types;
+      pool.push(t, t);
+    }
+    let guard = 0;
+    do {
+      shuffleArr(pool);
+      game.tiles = Array.from({ length: game.rows }, () => Array(game.cols).fill(-1));
+      let k = 0;
+      for (let y = 1; y <= game.h; y++) {
+        for (let x = 1; x <= game.w; x++) {
+          game.tiles[y][x] = pool[k++];
+        }
+      }
+      guard++;
+    } while (!findAnyPair() && guard < 60);
+  }
+
+  function loadLevel(index) {
+    game.levelIndex = index;
+    const level = LEVELS[index];
+    game.time = level.time;
+    game.hints = 3;
+    game.shuffles = 2;
+    game.selected = null;
+    game.hintCells = null;
+    game.busy = false;
+    buildTiles();
+    game.phase = 'playing';
+    stage.dataset.state = 'playing';
+    showScreen(null);
+    hidePath();
+    renderAll();
+    announce(level.name + '。');
+  }
+
+  function startRun() {
+    AudioKit.ensure();
+    game.score = 0;
+    game.total = 0;
+    game.phase = 'playing';
+    loadLevel(0);
+  }
+
+  function shuffleTiles(free) {
+    if (game.phase !== 'playing' || game.busy) return;
+    if (!free) {
+      if (game.shuffles <= 0) return;
+      game.shuffles -= 1;
+    }
+    const values = [];
+    const spots = [];
+    for (let y = 1; y <= game.h; y++) {
+      for (let x = 1; x <= game.w; x++) {
+        if (game.tiles[y][x] >= 0) {
+          values.push(game.tiles[y][x]);
+          spots.push({ x, y });
+        }
+      }
+    }
+    let guard = 0;
+    do {
+      shuffleArr(values);
+      for (let i = 0; i < spots.length; i++) {
+        game.tiles[spots[i].y][spots[i].x] = values[i];
+      }
+      guard++;
+    } while (!findAnyPair() && guard < 60);
+    game.selected = null;
+    game.hintCells = null;
+    if (!free) {
+      AudioKit.hint();
+      showToast('法宝重排', 800);
+    }
+    renderAll();
+  }
+
+  // ===== 操作 =====
+  function clickTile(x, y) {
+    if (game.phase !== 'playing' || game.busy) return;
+    const type = tileAt(x, y);
+    if (type < 0) return;
+    if (!game.selected) {
+      game.selected = { x, y };
+      AudioKit.pick();
+      renderBoard();
+      return;
+    }
+    if (game.selected.x === x && game.selected.y === y) {
+      game.selected = null;
+      renderBoard();
+      return;
+    }
+    if (tileAt(game.selected.x, game.selected.y) !== type) {
+      game.selected = { x, y };
+      AudioKit.pick();
+      renderBoard();
+      return;
+    }
+    const a = game.selected;
+    const b = { x, y };
+    const path = findPath(a, b);
+    if (!path) {
+      AudioKit.bad();
+      showToast('连线超过两折', 900);
+      boardEl.classList.remove('shake');
+      void boardEl.offsetWidth;
+      boardEl.classList.add('shake');
+      setTimeout(() => boardEl.classList.remove('shake'), 220);
+      game.selected = null;
+      renderBoard();
+      return;
+    }
+    removePair(a, b, path);
+  }
+
+  function removePair(a, b, path) {
+    const points = path.map((p) => cellCenter(p[0], p[1]));
+    game.tiles[a.y][a.x] = -1;
+    game.tiles[b.y][b.x] = -1;
+    game.selected = null;
+    game.busy = true;
+    game.score += 100;
+    game.hintCells = null;
+    AudioKit.clear();
+    drawPath(points);
+    renderAll();
+    if (remaining() === 0) {
+      setTimeout(() => {
+        game.busy = false;
+        levelClear();
+      }, 420);
+      return;
+    }
+    if (!findAnyPair()) {
+      game.busy = false;
+      shuffleTiles(true);
+      showToast('无解 · 自动重排', 900);
+    }
+    setTimeout(() => { game.busy = false; }, 220);
+  }
+
+  function cellCenter(x, y) {
+    const cell = boardEl.querySelector('.cell[data-x="' + x + '"][data-y="' + y + '"]');
+    if (!cell) return { x: 0, y: 0 };
+    const br = boardEl.getBoundingClientRect();
+    const r = cell.getBoundingClientRect();
+    return { x: r.left - br.left + r.width / 2, y: r.top - br.top + r.height / 2 };
+  }
+
+  function drawPath(points) {
+    if (!points.length) return;
+    const br = boardEl.getBoundingClientRect();
+    const sr = stage.getBoundingClientRect();
+    const zoomed = document.body.classList.contains('qa-zoom');
+    pathSvg.style.position = zoomed ? 'fixed' : 'absolute';
+    pathSvg.style.left = (zoomed ? br.left : br.left - sr.left) + 'px';
+    pathSvg.style.top = (zoomed ? br.top : br.top - sr.top) + 'px';
+    pathSvg.style.width = br.width + 'px';
+    pathSvg.style.height = br.height + 'px';
+    pathSvg.setAttribute('viewBox', '0 0 ' + br.width + ' ' + br.height);
+    const pts = points.map((p) => p.x + ',' + p.y).join(' ');
+    pathSvg.innerHTML = '<polyline points="' + pts + '"></polyline>';
+    pathSvg.classList.add('show');
+    clearTimeout(game.pathTimer);
+    game.pathTimer = setTimeout(() => pathSvg.classList.remove('show'), 460);
+  }
+
+  function hidePath() {
+    pathSvg.classList.remove('show');
+    pathSvg.innerHTML = '';
+  }
+
+  function hint() {
+    if (game.phase !== 'playing' || game.busy || game.hints <= 0) return;
+    const pair = findAnyPair();
+    if (!pair) {
+      shuffleTiles(true);
+      return;
+    }
+    game.hints -= 1;
+    game.hintCells = [pair.a, pair.b];
+    game.hintUntil = performance.now() + 1600;
+    AudioKit.hint();
+    renderAll();
+    setTimeout(() => {
+      game.hintCells = null;
+      if (game.phase === 'playing') renderBoard();
+    }, 1600);
+  }
+
+  function levelClear() {
+    if (game.phase !== 'playing') return;
+    game.phase = 'clear';
+    stage.dataset.state = 'clear';
+    const bonus = Math.round(game.time) * 5;
+    game.score += bonus;
+    game.total = game.score;
+    $('clearTitle').textContent = LEVELS[game.levelIndex].name;
+    $('clearScore').textContent = String(bonus);
+    $('clearTime').textContent = fmtTime(game.time);
+    $('clearTotal').textContent = String(game.score);
+    showScreen('clear');
+    AudioKit.win();
+    announce('本库已清。');
+  }
+
+  function nextLevel() {
+    if (game.levelIndex + 1 >= LEVELS.length) {
+      victory();
+      return;
+    }
+    AudioKit.click();
+    loadLevel(game.levelIndex + 1);
+  }
+
+  function victory() {
+    game.phase = 'victory';
+    stage.dataset.state = 'victory';
+    game.total = game.score;
+    writeBest(game.score);
+    $('victoryScore').textContent = String(game.score);
+    showScreen('victory');
+    updateBestLabels();
+    AudioKit.win();
+    announce('三库尽清，得分 ' + game.score + '。');
+  }
+
+  function defeat() {
+    if (game.phase !== 'playing') return;
+    game.phase = 'defeat';
+    stage.dataset.state = 'defeat';
+    $('defeatLevel').textContent = String(game.levelIndex + 1);
+    $('defeatScore').textContent = String(game.score);
+    showScreen('defeat');
+    updateBestLabels();
+    AudioKit.bad();
+    announce('时辰已尽。');
+  }
+
+  function showScreen(name) {
+    for (const key in screens) screens[key].hidden = key !== name;
+  }
+
+  function showToast(text, dur) {
+    toastEl.textContent = text;
+    toastEl.classList.add('show');
+    toastEl.setAttribute('aria-hidden', 'false');
+    announce(text);
+    clearTimeout(game.toastTimer);
+    game.toastTimer = setTimeout(() => {
+      toastEl.classList.remove('show');
+      toastEl.setAttribute('aria-hidden', 'true');
+    }, dur || 1100);
+  }
+
+  // ===== 渲染 =====
+  function renderAll() {
+    renderBoard();
+    updateHud();
+  }
+
+  function renderBoard() {
+    boardEl.style.gridTemplateColumns = 'repeat(' + game.cols + ', 1fr)';
+    boardEl.style.gridTemplateRows = 'repeat(' + game.rows + ', 1fr)';
+    boardEl.style.aspectRatio = game.cols + ' / ' + game.rows;
+    let html = '';
+    for (let y = 0; y < game.rows; y++) {
+      for (let x = 0; x < game.cols; x++) {
+        const t = game.tiles[y][x];
+        let cls = 'cell';
+        if (t >= 0) cls += ' has';
+        const sel = game.selected && game.selected.x === x && game.selected.y === y;
+        if (sel) cls += ' sel';
+        if (game.hintCells && game.hintCells.some((c) => c.x === x && c.y === y)) cls += ' hint';
+        html += '<button type="button" class="' + cls + '" data-x="' + x + '" data-y="' + y + '" aria-label="第' + y + '行第' + x + '列"></button>';
+        if (t >= 0) {
+          html = html.slice(0, html.lastIndexOf('</button>')) + '<span class="tile t' + t + '">' + TREASURES[t].char + '</span></button>';
+        }
+      }
+    }
+    boardEl.innerHTML = html;
+  }
+
+  function updateHud() {
+    levelNum.textContent = String(game.levelIndex + 1);
+    levelName.textContent = LEVELS[game.levelIndex].name;
+    scoreNum.textContent = String(game.score);
+    scoreNum2.textContent = String(game.score);
+    const pairs = remaining() / 2;
+    pairNum.textContent = String(pairs);
+    pairNum2.textContent = String(pairs);
+    timeNum.textContent = fmtTime(game.time);
+    timeFill.style.width = (game.time / LEVELS[game.levelIndex].time * 100).toFixed(1) + '%';
+    timerBox.classList.toggle('low', game.time <= 20);
+    hintNum.textContent = String(game.hints);
+    shuffleNum.textContent = String(game.shuffles);
+    btnHint.disabled = game.hints <= 0 || game.phase !== 'playing';
+    btnShuffle.disabled = game.shuffles <= 0 || game.phase !== 'playing';
+  }
+
+  // ===== 绘制 =====
+  const motes = [];
+  for (let i = 0; i < 36; i++) motes.push({ x: Math.random() * VIEW.w, y: Math.random() * VIEW.h, r: 0.8 + Math.random() * 1.8, vy: -6 - Math.random() * 14, a: 0.15 + Math.random() * 0.4 });
+
+  function drawBackground() {
+    const g = ctx.createLinearGradient(0, 0, 0, VIEW.h);
+    g.addColorStop(0, '#0B171C');
+    g.addColorStop(0.55, '#10262A');
+    g.addColorStop(1, '#081216');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, VIEW.w, VIEW.h);
+
+    const cx = 790;
+    const cy = 92;
+    const rg = ctx.createRadialGradient(cx, cy, 4, cx, cy, 90);
+    rg.addColorStop(0, 'rgba(244,223,166,0.38)');
+    rg.addColorStop(0.4, 'rgba(224,184,74,0.12)');
+    rg.addColorStop(1, 'rgba(224,184,74,0)');
+    ctx.fillStyle = rg;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 90, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(244,223,166,0.75)';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 34, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(150,205,205,0.04)';
+    for (let i = 0; i < 5; i++) {
+      ctx.beginPath();
+      ctx.ellipse(120 + i * 170, 380 + (i % 2) * 40, 130, 26, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    for (const m of motes) {
+      m.y += m.vy * 0.016;
+      if (m.y < 30) {
+        m.y = VIEW.h + 8;
+        m.x = Math.random() * VIEW.w;
+      }
+      ctx.fillStyle = 'rgba(244,223,166,' + m.a + ')';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function render() {
+    const sx = canvas.width / VIEW.w;
+    const sy = canvas.height / VIEW.h;
+    ctx.setTransform(sx, 0, 0, sy, 0, 0);
+    ctx.clearRect(0, 0, VIEW.w, VIEW.h);
+    drawBackground();
+  }
+
+  // ===== 输入 =====
+  boardEl.addEventListener('click', (e) => {
+    const cell = e.target.closest('.cell');
+    if (!cell) return;
+    clickTile(Number(cell.dataset.x), Number(cell.dataset.y));
+  });
+
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (game.phase !== 'playing') return;
+    if (k === 'h') hint();
+    if (k === 's') shuffleTiles(false);
+  });
+
+  btnHint.addEventListener('click', hint);
+  btnShuffle.addEventListener('click', () => shuffleTiles(false));
+  btnStart.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnNextLevel.addEventListener('click', nextLevel);
+  btnRetry.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnAgain.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnRestart.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnSound.addEventListener('click', () => {
+    AudioKit.toggle();
+    syncSoundBtn();
+  });
+  btnFull.addEventListener('click', () => {
+    AudioKit.click();
+    if (!document.fullscreenElement) {
+      if (stage.requestFullscreen) stage.requestFullscreen().catch(() => {});
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
+  });
+  document.addEventListener('fullscreenchange', () => {
+    btnFull.textContent = document.fullscreenElement ? '退出全屏' : '全屏';
+    resize();
+  });
+
+  // ===== 主循环 =====
+  let lastFrame = performance.now();
+  function frame(now) {
+    const dt = Math.min(0.05, (now - lastFrame) / 1000);
+    lastFrame = now;
+    if (game.phase === 'playing') {
+      game.time -= dt;
+      if (game.time <= 0) {
+        game.time = 0;
+        updateHud();
+        defeat();
+      } else {
+        updateHud();
+      }
+    }
+    render();
+    requestAnimationFrame(frame);
+  }
+
+  // ===== 启动 =====
+  game.phase = 'menu';
+  stage.dataset.state = 'menu';
+  buildTiles();
+  renderAll();
+  showScreen('start');
+  updateBestLabels();
+  syncSoundBtn();
+
+  requestAnimationFrame(frame);
+})();
+</script>
+<style id="qaMobileFix">
+:root{
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-right:env(safe-area-inset-right,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-left:env(safe-area-inset-left,0px);
+}
+body{
+  padding-top:calc(clamp(10px,2.2vw,26px) + var(--safe-top));
+  padding-bottom:calc(clamp(10px,2.2vw,26px) + var(--safe-bottom));
+}
+#qaZoomBtn{
+  display:none;position:fixed;right:calc(8px + var(--safe-right));top:50%;
+  transform:translateY(-50%);z-index:9996;width:48px;height:48px;padding:0;
+  align-items:center;justify-content:center;border-radius:50%;
+  border:1px solid rgba(224,184,74,.5);background:rgba(22,19,16,.74);
+  color:#F4DFA6;font-family:inherit;font-size:12px;line-height:1.1;letter-spacing:.04em;
+  text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;
+  opacity:.55;transition:opacity .15s ease,background .15s ease
+}
+#qaZoomBtn:hover,#qaZoomBtn:focus-visible,#qaZoomBtn:active{opacity:1}
+#qaZoombar{
+  display:none;position:fixed;left:50%;bottom:calc(12px + var(--safe-bottom));
+  transform:translateX(-50%);z-index:10002;gap:6px;align-items:center;justify-content:center;
+  flex-wrap:wrap;padding:6px 8px;border-radius:999px;
+  max-width:calc(100vw - var(--safe-left) - var(--safe-right) - 16px);
+  background:rgba(18,16,13,.92);border:1px solid rgba(242,235,220,.25);
+  color:#F2EBDC;font-family:inherit
+}
+#qaZoombar button{
+  font-family:inherit;font-size:11.5px;letter-spacing:.05em;color:#F2EBDC;
+  background:rgba(242,235,220,.1);border:1px solid rgba(242,235,220,.25);
+  border-radius:999px;padding:7px 10px;min-height:44px;cursor:pointer;white-space:nowrap;line-height:1.2
+}
+#qaZoombar button:hover{background:rgba(242,235,220,.2)}
+body.qa-zoom{overflow:hidden;background:#080b0b!important}
+body.qa-zoom::before{display:none!important}
+body.qa-zoom .topbar,
+body.qa-zoom .legend,
+body.qa-zoom .hud,
+body.qa-zoom .side,
+body.qa-zoom .touch{visibility:hidden!important;opacity:0!important}
+body.qa-zoom .stage{background:#080b0b!important}
+body.qa-zoom canvas{opacity:.12!important}
+body.qa-zoom .board{
+  position:fixed!important;left:50%!important;top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  width:min(98vw,calc(92vh * var(--qa-ratio,1)))!important;
+  height:auto!important;aspect-ratio:var(--qa-ratio,1)!important;
+  background-color:rgba(10,18,18,.97)!important;
+  background-image:none!important;
+  z-index:10000!important;box-shadow:0 24px 70px rgba(0,0,0,.55)
+}
+body.qa-zoom[data-qa-kind="border"] .board{
+  grid-template-columns:0.15fr repeat(var(--qa-inner-cols,8),1fr) 0.15fr!important;
+  grid-template-rows:0.15fr repeat(var(--qa-inner-rows,6),1fr) 0.15fr!important
+}
+body.qa-zoom .path-svg{position:fixed!important;z-index:10001!important}
+body.qa-zoom #qaZoomBtn{display:none!important}
+body.qa-zoom #qaZoombar{display:flex}
+body.qa-zoom .screen:not([hidden]){z-index:10005!important}
+body.qa-zoom .toast{z-index:10006!important}
+#qaOrientTip{
+  position:fixed;top:calc(6px + var(--safe-top));left:50%;transform:translateX(-50%);z-index:9995;
+  padding:7px 14px;border-radius:999px;background:rgba(22,19,16,.78);
+  border:1px solid rgba(224,184,74,.45);color:#F4DFA6;font-family:inherit;
+  font-size:12px;letter-spacing:.08em;pointer-events:none;
+  opacity:1;transition:opacity .4s ease
+}
+#qaOrientTip.hide{opacity:0}
+.qa-rotate-ui #btnFull{display:none!important}
+#qaTouchSettings{
+  position:fixed;left:50%;bottom:calc(8px + var(--safe-bottom));transform:translateX(-50%);
+  z-index:10003;display:none;gap:6px;align-items:center;justify-content:center;
+  padding:4px 6px;border-radius:999px;background:rgba(18,16,13,.92);
+  border:1px solid rgba(242,235,220,.25);flex-wrap:wrap;
+  max-width:calc(100vw - var(--safe-left) - var(--safe-right) - 16px)
+}
+#qaTouchSettings.show{display:flex}
+#qaTouchSettings button{
+  min-height:40px;padding:6px 12px;border-radius:999px;border:1px solid rgba(242,235,220,.28);
+  background:rgba(242,235,220,.1);color:#F2EBDC;font-family:inherit;font-size:12px;
+  letter-spacing:.06em;cursor:pointer;touch-action:manipulation
+}
+#qaTouchSettings button:hover{background:rgba(242,235,220,.2)}
+.tbtn{opacity:var(--qa-btn-opacity,1);width:var(--qa-tbtn,56px);height:var(--qa-tbtn,56px)}
+.tbtn.wide{width:var(--qa-tbtn-wide,64px)}
+body[data-qa-btn-size="s"]{--qa-tbtn:var(--qa-btn-s,48px);--qa-tbtn-wide:var(--qa-btn-wide-s,56px)}
+body[data-qa-btn-size="m"]{--qa-tbtn:var(--qa-btn-m,56px);--qa-tbtn-wide:var(--qa-btn-wide-m,64px)}
+body[data-qa-btn-size="l"]{--qa-tbtn:var(--qa-btn-l,64px);--qa-tbtn-wide:var(--qa-btn-wide-l,72px)}
+.touch{flex-wrap:wrap}
+.touch-group{flex-wrap:wrap;max-width:100%}
+#qaFitTip{
+  position:fixed;left:50%;bottom:calc(64px + var(--safe-bottom));transform:translateX(-50%);
+  z-index:10004;padding:6px 12px;border-radius:999px;background:rgba(22,19,16,.88);
+  border:1px solid rgba(224,184,74,.45);color:#F4DFA6;font-family:inherit;
+  font-size:12px;letter-spacing:.06em;pointer-events:none;
+  opacity:0;transition:opacity .2s ease
+}
+#qaFitTip.show{opacity:1}
+@media (pointer: coarse) and (max-width: 560px){
+  .touch-hint{display:none!important}
+}
+@media (pointer: coarse) and (orientation: portrait){
+  body[data-qa-deck-wrap="1"] .stage{
+    max-width:min(1120px,calc((100dvh - var(--qa-stage-chrome,196px) - var(--qa-deck-extra,0px)) * 16 / 9))!important;
+  }
+  body[data-qa-deck-wrap="1"] .touch{
+    max-width:min(1120px,calc((100dvh - var(--qa-stage-chrome,196px) - var(--qa-deck-extra,0px)) * 16 / 9))!important;
+  }
+}
+@media (pointer: coarse){
+  .btn.small{min-height:40px}
+  .btn.ghost{min-height:40px}
+  .hud-btn,.icon-btn{min-height:40px;min-width:40px}
+  .box-btn{min-height:40px}
+  .btn.primary,.endturn{min-height:44px}
+  .plot .action{position:relative}
+  .plot .action::after{content:"";position:absolute;left:0;right:0;top:-6px;bottom:-6px}
+  button,.cell,.plot,.upg,.box-btn{touch-action:manipulation}
+  button{-webkit-tap-highlight-color:transparent}
+}
+@media (orientation:landscape) and (max-height:540px){
+  body{
+    padding:calc(4px + var(--safe-top)) calc(4px + var(--safe-right)) calc(4px + var(--safe-bottom)) calc(4px + var(--safe-left))!important;
+    gap:4px!important;justify-content:flex-start!important
+  }
+  .stage{
+    max-width:min(calc(100vw - 8px - var(--safe-left) - var(--safe-right)),calc((100dvh - 116px) * 16 / 9))!important;
+    width:100%!important;margin:0 auto!important
+  }
+  .legend{display:none!important}
+}
+@media (orientation:landscape) and (max-height:540px) and (min-width:820px){
+  .touch{
+    position:fixed!important;right:calc(8px + var(--safe-right))!important;top:50%!important;
+    transform:translateY(-50%)!important;width:auto!important;max-width:150px!important;
+    padding:0!important;margin:0!important;z-index:40!important;
+    background:transparent!important;border:0!important;
+    flex-direction:column!important;align-items:flex-end!important;gap:6px!important
+  }
+  .touch-hint{display:none!important}
+  .touch-group{
+    display:flex!important;flex-wrap:wrap!important;justify-content:flex-end!important;
+    gap:8px!important;max-width:140px
+  }
+}
+@media (orientation:landscape) and (max-height:540px) and (max-width:819px){
+  .stage{max-width:min(calc(100vw - 8px - var(--safe-left) - var(--safe-right)),calc((100dvh - 160px) * 16 / 9))!important}
+}
+</style>
+<script id="qaMobileFixScript">
+(function(){
+  'use strict';
+  var mobile = window.matchMedia('(max-width:760px)');
+  var portrait = window.matchMedia('(orientation:portrait)');
+  if (mobile.matches && portrait.matches && document.body.dataset.qaPortraitActive !== '1') {
+    var tip = document.createElement('div');
+    tip.id = 'qaOrientTip';
+    tip.textContent = '建议横屏游玩 · 视野更大';
+    document.body.appendChild(tip);
+    setTimeout(function(){ tip.classList.add('hide'); }, 4200);
+    setTimeout(function(){ if (tip.parentNode) tip.parentNode.removeChild(tip); }, 5000);
+  }
+  var touchUI = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 820;
+  var topActions = document.querySelector('.top-actions') || document.querySelector('.topbar');
+  var rotateBtn = null;
+  if (touchUI && topActions) {
+    rotateBtn = document.createElement('button');
+    rotateBtn.id = 'qaRotateBtn';
+    rotateBtn.type = 'button';
+    rotateBtn.className = 'btn small';
+    rotateBtn.textContent = '横屏';
+    rotateBtn.setAttribute('aria-label', '尝试横屏全屏');
+    rotateBtn.addEventListener('click', async function(){
+      try {
+        if (document.fullscreenElement) {
+          if (document.exitFullscreen) await document.exitFullscreen();
+          return;
+        }
+        if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+      } catch (err) {}
+      try {
+        if (screen.orientation && screen.orientation.lock) await screen.orientation.lock('landscape');
+      } catch (err) {}
+    });
+    topActions.insertBefore(rotateBtn, topActions.firstChild);
+    document.body.classList.add('qa-rotate-ui');
+    document.addEventListener('fullscreenchange', function(){
+      syncRotateBtn();
+    });
+  }
+  function syncRotateBtn() {
+    if (!rotateBtn) return;
+    rotateBtn.style.display = 'inline-flex';
+    rotateBtn.textContent = document.fullscreenElement ? '退出' : (window.innerWidth > window.innerHeight ? '全屏' : '横屏');
+  }
+  syncRotateBtn();
+  window.addEventListener('resize', syncRotateBtn);
+
+  var hasTouchDeck = !!document.querySelector('.tbtn');
+  if (touchUI && hasTouchDeck) {
+    var settingsBar = document.createElement('div');
+    settingsBar.id = 'qaTouchSettings';
+    document.body.appendChild(settingsBar);
+    var opKey = 'xyj_touch_opacity_v1';
+    var op = 100;
+    try { op = Number(localStorage.getItem(opKey)) || 100; } catch (err) {}
+    if ([70, 85, 100].indexOf(op) < 0) op = 100;
+    var opBtn = document.createElement('button');
+    opBtn.id = 'qaOpacityBtn';
+    opBtn.type = 'button';
+    opBtn.setAttribute('aria-label', '切换触控按钮透明度');
+    settingsBar.appendChild(opBtn);
+    function applyOpacity() {
+      document.documentElement.style.setProperty('--qa-btn-opacity', (op / 100).toFixed(2));
+      opBtn.textContent = '按钮 ' + op + '%';
+    }
+    opBtn.addEventListener('click', function(){
+      op = op === 100 ? 85 : op === 85 ? 70 : 100;
+      try { localStorage.setItem(opKey, String(op)); } catch (err) {}
+      applyOpacity();
+    });
+    applyOpacity();
+
+    var deckEl = document.querySelector('.touch');
+    var sizeKey = 'xyj_touch_size_v1';
+    var sizePref = 'm';
+    try {
+      var storedSize = localStorage.getItem(sizeKey);
+      if (['s', 'm', 'l'].indexOf(storedSize) >= 0) sizePref = storedSize;
+    } catch (err) {}
+    var sizeBtn = document.createElement('button');
+    sizeBtn.id = 'qaSizeBtn';
+    sizeBtn.type = 'button';
+    sizeBtn.setAttribute('aria-label', '切换触控按钮大小');
+    settingsBar.appendChild(sizeBtn);
+
+    function sizeLabel(v) { return v === 's' ? '小' : v === 'l' ? '大' : '中'; }
+    function syncSizeLabel() {
+      var v = document.body.dataset.qaBtnSize || sizePref;
+      sizeBtn.textContent = '按钮 ' + sizeLabel(v);
+    }
+    function measureDeck() {
+      if (!deckEl) return;
+      var base = parseFloat(getComputedStyle(document.body).getPropertyValue('--qa-deck-base')) || 70;
+      var extra = Math.max(0, deckEl.offsetHeight - base);
+      document.body.dataset.qaDeckWrap = extra > 1 ? '1' : '0';
+      document.body.style.setProperty('--qa-deck-extra', extra > 0 ? extra.toFixed(1) + 'px' : '0px');
+    }
+    var fitTip = null;
+    function showFitTip(text) {
+      if (!fitTip) {
+        fitTip = document.createElement('div');
+        fitTip.id = 'qaFitTip';
+        document.body.appendChild(fitTip);
+      }
+      fitTip.textContent = text;
+      fitTip.classList.add('show');
+      clearTimeout(fitTip._hideTimer);
+      fitTip._hideTimer = setTimeout(function(){ fitTip.classList.remove('show'); }, 1800);
+    }
+    function fitSize() {
+      if (!deckEl || deckEl.offsetParent === null) return;
+      var target = sizePref;
+      if (deckEl.scrollWidth > deckEl.clientWidth + 1) {
+        if (target === 'l') target = 'm';
+        document.body.dataset.qaBtnSize = target;
+        measureDeck();
+        if (deckEl.scrollWidth > deckEl.clientWidth + 1) target = 's';
+      }
+      document.body.dataset.qaBtnSize = target;
+      measureDeck();
+      if (target !== sizePref) {
+        showFitTip('屏幕较窄，已临时使用' + sizeLabel(target) + '号按钮');
+      }
+      syncSizeLabel();
+    }
+    function applySize(next, save) {
+      if (next) sizePref = next;
+      document.body.dataset.qaBtnSize = sizePref;
+      if (save) { try { localStorage.setItem(sizeKey, sizePref); } catch (err) {} }
+      syncSizeLabel();
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    }
+    sizeBtn.addEventListener('click', function(){
+      sizePref = sizePref === 's' ? 'm' : sizePref === 'm' ? 'l' : 's';
+      applySize(null, true);
+    });
+    applySize(null, false);
+    window.addEventListener('resize', function(){
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    });
+    window.addEventListener('orientationchange', function(){
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    });
+    if (window.MutationObserver && deckEl) {
+      new MutationObserver(function(){
+        requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+      }).observe(deckEl, { attributes: true, attributeFilter: ['class'] });
+    }
+    var screens = document.querySelectorAll('.screen');
+    function syncSettingsBar() {
+      var open = false;
+      for (var i = 0; i < screens.length; i++) {
+        if (screens[i].hidden) continue;
+        if (getComputedStyle(screens[i]).display !== 'none') open = true;
+      }
+      settingsBar.classList.toggle('show', open);
+    }
+    if (window.MutationObserver) {
+      for (var si = 0; si < screens.length; si++) {
+        new MutationObserver(syncSettingsBar).observe(screens[si], {
+          attributes: true, attributeFilter: ['hidden', 'class', 'style']
+        });
+      }
+    }
+    syncSettingsBar();
+  }
+
+  var board = document.getElementById('board');
+  if (!board) return;
+  var stage = document.querySelector('.stage');
+  var btn = document.createElement('button');
+  btn.id = 'qaZoomBtn';
+  btn.type = 'button';
+  btn.textContent = '放大';
+  btn.setAttribute('aria-label', '放大棋盘');
+  document.body.appendChild(btn);
+  var bar = document.createElement('div');
+  bar.id = 'qaZoombar';
+  var undo = document.getElementById('btnUndo');
+  var reset = document.getElementById('btnReset');
+  bar.innerHTML = '<button type="button" data-qa="exit">退出放大</button>' +
+    (undo ? '<button type="button" data-qa="undo">撤回</button>' : '') +
+    (reset ? '<button type="button" data-qa="reset">重来</button>' : '');
+  document.body.appendChild(bar);
+
+  function syncBtn(){
+    var state = stage ? stage.dataset.state : '';
+    var active = mobile.matches && ['playing','idle','paused'].indexOf(state) >= 0;
+    btn.style.display = active ? 'inline-flex' : 'none';
+  }
+  function openZoom(){
+    var r = board.getBoundingClientRect();
+    var ratio = r.height ? r.width / r.height : 1;
+    document.body.style.setProperty('--qa-ratio', String(ratio));
+    var cs = getComputedStyle(board);
+    var cols = cs.gridTemplateColumns ? cs.gridTemplateColumns.split(' ').length : 0;
+    var rows = cs.gridTemplateRows ? cs.gridTemplateRows.split(' ').length : 0;
+    if ((cols === 11 && rows === 9) || (cols === 10 && rows >= 6 && rows <= 8)) {
+      document.body.dataset.qaKind = 'border';
+      document.body.style.setProperty('--qa-inner-cols', String(cols - 2));
+      document.body.style.setProperty('--qa-inner-rows', String(rows - 2));
+    } else {
+      delete document.body.dataset.qaKind;
+    }
+    document.body.classList.add('qa-zoom');
+  }
+  function closeZoom(){
+    document.body.classList.remove('qa-zoom');
+    syncBtn();
+  }
+  btn.addEventListener('click', function(){
+    if (document.body.classList.contains('qa-zoom')) closeZoom();
+    else openZoom();
+  });
+  bar.addEventListener('click', function(e){
+    var act = e.target.getAttribute('data-qa');
+    if (!act) return;
+    if (act === 'exit') closeZoom();
+    if (act === 'undo' && undo) undo.click();
+    if (act === 'reset' && reset) reset.click();
+  });
+  if (window.MutationObserver && stage) {
+    new MutationObserver(syncBtn).observe(stage, { attributes: true, attributeFilter: ['data-state'] });
+  }
+  window.addEventListener('resize', function(){
+    if (document.body.classList.contains('qa-zoom') && !mobile.matches) closeZoom();
+    syncBtn();
+  });
+  syncBtn();
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

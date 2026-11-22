@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F0">
+<meta name="color-scheme" content="light">
+<title>西游 · 取经牌途 —— 卡牌构筑（单文件原型）</title>
+<meta name="description" content="《西游 · 取经牌途》是一款零依赖、file:// 直开的卡牌构筑小游戏：用棍法、护体与法术打穿三关妖将，在山神庙歇脚，再战黄风怪。">
+<style>
+:root{
+  --paper:#FAF7F0;--paper-warm:#F2EBDC;--ink:#221D16;--ink-soft:#6B665E;
+  --line:rgba(34,29,22,.16);--accent:#C0392B;--gold:#E0B84A;--jade:#3A473A;
+  --indigo:#40619E;--stage-bg:#17140F;--hud-text:#F2EBDC;
+  --cw:clamp(66px, 10.2vw, 104px);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{
+  margin:0;min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  padding:clamp(10px,2.2vw,26px);
+  background:radial-gradient(120% 90% at 50% 0%, #FBF7EE 0%, #EFE7D8 55%, #E2D6C1 100%);
+  color:var(--ink);font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(34,29,22,.026) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(34,29,22,.018) 0 1px, transparent 1px 4px);
+  z-index:0;
+}
+.topbar{
+  position:relative;z-index:1;width:min(1120px,100%);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand h1{margin:0;font-size:clamp(16px,2.1vw,22px);font-weight:600;letter-spacing:.18em}
+.brand .sub{font-size:12px;color:var(--ink-soft);letter-spacing:.16em}
+.brand .seal{
+  display:inline-grid;place-items:center;width:26px;height:26px;
+  border:1px solid var(--accent);color:var(--accent);border-radius:4px;
+  font-size:12px;letter-spacing:0;transform:translateY(2px);
+}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;cursor:pointer;border-radius:999px;letter-spacing:.12em;
+  transition:background 160ms ease,border-color 160ms ease,transform 160ms ease,color 160ms ease;
+}
+.btn:focus-visible,.card:focus-visible,.hud-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.btn.small{font-size:12px;padding:7px 14px;border:1px solid var(--line);background:rgba(250,247,240,.7);color:var(--ink-soft)}
+.btn.small:hover{background:#fff;color:var(--ink);border-color:rgba(34,29,22,.3)}
+.stage{
+  position:relative;z-index:1;width:100%;
+  max-width:min(1120px, calc((100dvh - 168px) * 16 / 9));
+  aspect-ratio:16/9;margin-inline:auto;background:var(--stage-bg);border-radius:10px;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 26px 60px -34px rgba(34,29,22,.7),0 2px 10px rgba(34,29,22,.14);
+  user-select:none;-webkit-user-select:none;touch-action:none;
+}
+.stage:fullscreen{max-width:none;width:100vw;height:100dvh;aspect-ratio:auto;border-radius:0}
+canvas#game{display:block;width:100%;height:100%;touch-action:none;background:#1B1712}
+.hud{
+  position:absolute;inset:10px 12px auto;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+  pointer-events:none;color:var(--hud-text);font-size:12px;letter-spacing:.05em;z-index:4;
+  transition:opacity 220ms ease;
+}
+.stage[data-state="menu"] .hud,
+.stage[data-state="menu"] .enemy-panel,
+.stage[data-state="menu"] .hand,
+.stage[data-state="menu"] .endturn,
+.stage[data-state="menu"] .pile,
+.stage[data-state="menu"] .battle-log{opacity:0;pointer-events:none}
+.player-panel{
+  width:min(300px,40vw);padding:7px 10px;border-radius:8px;
+  background:rgba(22,19,16,.58);border:1px solid rgba(242,235,220,.16);backdrop-filter:blur(4px);
+}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.row + .row{margin-top:4px}
+.who{letter-spacing:.18em;color:#F6EFE1}
+.bar{height:7px;border-radius:999px;background:rgba(242,235,220,.16);overflow:hidden;margin:4px 0}
+.bar i{display:block;height:100%;width:100%;border-radius:999px;transition:width 200ms ease-out}
+.bar.hp i{background:linear-gradient(90deg,#8C2A2A,#C0392B 60%,#E0B84A)}
+.energy{display:inline-flex;gap:4px;align-items:center}
+.energy i{width:9px;height:9px;border-radius:50%;border:1px solid rgba(224,184,74,.55);display:inline-block}
+.energy i.on{background:#E0B84A;box-shadow:0 0 7px rgba(224,184,74,.8)}
+.chip{
+  padding:2px 7px;border-radius:999px;border:1px solid rgba(242,235,220,.2);
+  background:rgba(242,235,220,.06);font-size:10.5px;letter-spacing:.04em;color:rgba(242,235,220,.85);
+}
+.chip.ready{border-color:rgba(224,184,74,.5);color:#F4DFA6}
+.stage-track{display:flex;gap:6px;align-items:center;padding:6px 10px;background:rgba(22,19,16,.38);border-radius:999px;border:1px solid rgba(242,235,220,.12)}
+.stage-track span{width:8px;height:8px;border-radius:50%;background:rgba(242,235,220,.2);display:block}
+.stage-track span.done{background:#E0B84A}
+.stage-track span.current{background:#C0392B;box-shadow:0 0 8px rgba(192,57,43,.9)}
+.hud-right{display:flex;gap:6px;pointer-events:auto}
+.hud-btn{
+  font-family:inherit;font-size:11px;padding:5px 9px;border-radius:6px;cursor:pointer;
+  border:1px solid rgba(242,235,220,.24);background:rgba(22,19,16,.55);color:var(--hud-text);
+  letter-spacing:.04em;transition:background 160ms ease;
+}
+.hud-btn:hover{background:rgba(192,57,43,.72)}
+.enemy-panel{
+  position:absolute;top:14px;right:14px;width:min(280px,38vw);z-index:4;
+  padding:7px 10px;border-radius:8px;background:rgba(22,19,16,.58);
+  border:1px solid rgba(242,235,220,.16);backdrop-filter:blur(4px);
+  color:var(--hud-text);font-size:11.5px;transition:opacity 220ms ease;
+}
+.enemy-name{font-size:13px;letter-spacing:.16em;color:#F6EFE1}
+.enemy-panel .bar{height:8px;background:rgba(242,235,220,.16)}
+.enemy-panel .bar i{background:linear-gradient(90deg,#6E1F1F,#C0392B 65%,#E0B84A)}
+.intent{color:#F4DFA6;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.statuses{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px;min-height:16px}
+.pile{
+  position:absolute;left:14px;bottom:14px;z-index:4;font-size:11px;letter-spacing:.06em;
+  color:rgba(242,235,220,.72);background:rgba(22,19,16,.5);border:1px solid rgba(242,235,220,.14);
+  padding:5px 9px;border-radius:7px;transition:opacity 220ms ease;
+}
+.pile b{color:#F6EFE1;font-weight:600}
+.hand{
+  position:absolute;left:50%;bottom:10px;transform:translateX(-50%);
+  display:flex;gap:7px;align-items:flex-end;justify-content:center;
+  max-width:calc(100% - 210px);z-index:5;transition:opacity 220ms ease;
+}
+.card{
+  --cw:clamp(66px, 10.2vw, 104px);
+  position:relative;flex:0 0 auto;width:var(--cw);height:calc(var(--cw) * 1.42);
+  display:flex;flex-direction:column;gap:2px;padding:calc(var(--cw) * .1) calc(var(--cw) * .085);
+  border-radius:calc(var(--cw) * .08);border:1px solid rgba(34,29,22,.4);
+  background:linear-gradient(158deg,#FCF7EB,#F0E4CE 70%,#E8D9BF);
+  color:#24201A;text-align:left;font-family:inherit;cursor:pointer;
+  box-shadow:0 10px 20px -14px rgba(0,0,0,.85),0 1px 0 rgba(255,255,255,.7) inset;
+  transition:transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+  overflow:hidden;
+}
+.card::after{
+  content:"";position:absolute;inset:3px;border:1px solid rgba(140,42,42,.18);border-radius:calc(var(--cw) * .06);pointer-events:none;
+}
+.card:hover{transform:translateY(calc(var(--cw) * -.09));box-shadow:0 18px 26px -16px rgba(0,0,0,.9)}
+.card:disabled{opacity:.42;cursor:default;transform:none}
+.card .cost{
+  position:absolute;top:calc(var(--cw) * .04);left:calc(var(--cw) * .05);
+  width:calc(var(--cw) * .24);height:calc(var(--cw) * .24);border-radius:50%;
+  display:grid;place-items:center;background:#8C2A2A;color:#FFF4E2;
+  font-size:calc(var(--cw) * .13);font-variant-numeric:tabular-nums;
+  box-shadow:0 0 0 1px rgba(255,244,226,.4) inset;
+}
+.card .ctype{font-size:calc(var(--cw) * .085);letter-spacing:.14em;color:#8C6A45;margin-left:calc(var(--cw) * .28)}
+.card .cname{font-size:calc(var(--cw) * .125);font-weight:600;letter-spacing:.08em;color:#2A241C;margin-top:calc(var(--cw) * .03)}
+.card .cdesc{font-size:calc(var(--cw) * .09);line-height:1.5;color:#5A5145;letter-spacing:.02em;margin-top:auto}
+.endturn{
+  position:absolute;right:14px;bottom:14px;z-index:6;
+  font-family:inherit;font-size:13px;letter-spacing:.14em;padding:11px 16px;
+  border-radius:999px;border:1px solid #D9564A;background:#C0392B;color:#FFF7EC;cursor:pointer;
+  box-shadow:0 10px 24px -14px rgba(192,57,43,.9);transition:background 160ms ease,opacity 160ms ease;
+}
+.endturn:hover{background:#D0473A}
+.endturn:disabled{opacity:.45;cursor:default}
+.battle-log{
+  position:absolute;left:50%;bottom:calc(10px + var(--cw) * 1.42 + 14px);transform:translateX(-50%);
+  z-index:4;font-size:11px;letter-spacing:.08em;color:rgba(242,235,220,.72);
+  background:rgba(22,19,16,.42);padding:3px 12px;border-radius:999px;
+  white-space:nowrap;max-width:70%;overflow:hidden;text-overflow:ellipsis;
+  transition:opacity 220ms ease;
+}
+.toast{
+  position:absolute;top:32%;left:50%;transform:translate(-50%,-8px);
+  padding:8px 20px;border:1px solid rgba(242,235,220,.28);
+  background:rgba(22,19,16,.72);color:#F6EFE1;
+  letter-spacing:.2em;font-size:clamp(12px,1.7vw,17px);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity 220ms ease,transform 220ms ease;z-index:8;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.screen{
+  position:absolute;inset:0;z-index:9;display:grid;place-items:center;
+  padding:clamp(14px,3.5vw,34px);
+  background:radial-gradient(80% 80% at 50% 38%, rgba(22,19,16,.6), rgba(22,19,16,.92));
+}
+.panel{width:min(620px,100%);max-height:100%;overflow:auto;text-align:center;color:var(--hud-text);scrollbar-width:thin}
+.kicker{margin:0 0 4px;font-size:11px;letter-spacing:.3em;color:rgba(242,235,220,.55)}
+.panel h2{margin:.16em 0 .1em;font-size:clamp(24px,4.3vw,40px);font-weight:600;letter-spacing:.18em}
+.panel h2 .accent{color:var(--gold)}
+.lead{margin:0 auto;max-width:520px;font-size:clamp(12.5px,1.5vw,14.5px);line-height:1.95;letter-spacing:.06em;color:rgba(242,235,220,.78)}
+.lead em{font-style:normal;color:var(--gold);white-space:nowrap}
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 16px;margin:15px 0 16px;text-align:left;font-size:12px;color:rgba(242,235,220,.84)}
+.rules div{display:flex;justify-content:space-between;gap:8px;padding-bottom:5px;border-bottom:1px dashed rgba(242,235,220,.14)}
+kbd{
+  display:inline-block;padding:1px 6px;border-radius:4px;border:1px solid rgba(242,235,220,.26);
+  background:rgba(242,235,220,.1);font-family:"JetBrains Mono","Consolas",monospace;font-size:11px;white-space:nowrap;
+}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.btn.primary{
+  font-family:inherit;font-size:15px;letter-spacing:.2em;padding:11px 28px;border-radius:999px;
+  border:1px solid #D9564A;background:var(--accent);color:#FFF7EC;cursor:pointer;
+  box-shadow:0 10px 24px -14px rgba(192,57,43,.9);transition:background 160ms ease,transform 160ms ease;
+}
+.btn.primary:hover{background:#D0473A;transform:translateY(-1px)}
+.btn.ghost{
+  font-family:inherit;font-size:13px;letter-spacing:.14em;padding:9px 18px;border-radius:999px;
+  border:1px solid rgba(242,235,220,.34);background:transparent;color:rgba(242,235,220,.9);cursor:pointer;
+  transition:background 160ms ease,border-color 160ms ease;
+}
+.btn.ghost:hover{background:rgba(242,235,220,.1);border-color:rgba(242,235,220,.6)}
+.result{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 6px}
+.result div{padding:9px 8px;border:1px solid rgba(242,235,220,.14);border-radius:8px;background:rgba(242,235,220,.04)}
+.result span{display:block;font-size:11px;letter-spacing:.18em;color:rgba(242,235,220,.5);margin-bottom:4px}
+.result b{font-size:clamp(16px,2.2vw,22px);font-variant-numeric:tabular-nums;color:#F6EFE1;font-weight:500}
+.bestline{margin:8px 0 16px;font-size:12px;letter-spacing:.12em;color:rgba(242,235,220,.6);font-variant-numeric:tabular-nums}
+.reward-cards{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0 6px}
+.reward-cards .card{--cw:120px}
+.reward-cards .card:hover{transform:translateY(-8px)}
+.legend{
+  position:relative;z-index:1;width:min(1120px,100%);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-soft);letter-spacing:.06em;
+}
+.legend .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);vertical-align:middle;margin:0 7px 2px}
+.legend b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:760px){
+  .brand .sub{display:none}
+  .stage{max-width:min(1120px, calc((100dvh - 150px) * 16 / 9))}
+  .legend{justify-content:center;text-align:center}
+  .player-panel{width:min(230px,45vw);padding:5px 8px;font-size:11px}
+  .enemy-panel{width:min(220px,43vw);padding:5px 8px;font-size:10.5px;top:8px;right:8px}
+  .hud{inset:6px 8px auto;gap:6px}
+  .hud-right{gap:4px}
+  .hud-btn{padding:4px 7px;font-size:10px}
+  .stage-track{display:none}
+  .hand{left:8px;transform:none;max-width:calc(100% - 96px);gap:4px;bottom:6px;justify-content:flex-start;overflow-x:auto;padding-bottom:2px}
+  .card{--cw:clamp(52px, 13vw, 76px)}
+  .endturn{right:8px;bottom:8px;padding:8px 12px;font-size:11px;letter-spacing:.06em}
+  .pile{display:none}
+  .battle-log{bottom:calc(6px + var(--cw) * 1.42 + 8px);font-size:10px;max-width:90%}
+  .rules{grid-template-columns:1fr}
+  .reward-cards .card{--cw:92px}
+}
+@media (orientation:portrait) and (pointer:coarse){
+  body[data-qa-portrait-active="1"] .stage{
+    aspect-ratio:9/16!important;
+    max-width:min(100%,calc((100dvh - 160px) * 9 / 16))!important;
+  }
+  body[data-qa-portrait-active="1"] .hud{inset:6px 6px auto;gap:4px}
+  body[data-qa-portrait-active="1"] .player-panel{width:calc(54% - 14px);padding:4px 7px;font-size:10.5px}
+  body[data-qa-portrait-active="1"] .enemy-panel{width:calc(46% - 16px);padding:4px 7px;font-size:10px;top:6px;right:6px}
+  body[data-qa-portrait-active="1"] .hand{left:8px;right:8px;transform:none;max-width:none;justify-content:center;overflow-x:auto;gap:4px;bottom:6px}
+  body[data-qa-portrait-active="1"] .card{--cw:clamp(50px, 14.5vw, 66px)}
+  body[data-qa-portrait-active="1"] .endturn{right:8px;bottom:calc(6px + 14.5vw * 1.42 + 12px);padding:7px 10px;font-size:10.5px;letter-spacing:.06em}
+  body[data-qa-portrait-active="1"] .battle-log{bottom:calc(6px + 14.5vw * 1.42 + 52px);font-size:10px;max-width:92%}
+}
+@media (orientation:landscape) and (max-height:620px){
+  .stage-track{display:none}
+  .player-panel{width:min(230px,45vw);padding:5px 8px;font-size:11px}
+  .enemy-panel{width:min(220px,43vw);padding:5px 8px;font-size:10.5px;top:8px;right:8px}
+  .hud{inset:6px 8px auto;gap:6px}
+  .hand{left:8px;right:auto;transform:none;max-width:calc(100% - 96px);gap:4px;bottom:6px;justify-content:flex-start;overflow-x:auto;padding-bottom:2px}
+  .card{--cw:64px}
+  .endturn{right:8px;bottom:8px;padding:8px 12px;font-size:11px;letter-spacing:.06em}
+  .pile{display:none}
+  .battle-log{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body data-qa-portrait="1">
+<header class="topbar">
+  <div class="brand">
+    <h1>西游 · 取经牌途</h1>
+    <span class="sub">卡牌构筑 / 单文件原型</span>
+    <span class="seal" aria-hidden="true">牌</span>
+  </div>
+  <div class="top-actions">
+    <button class="btn small" id="btnSound" type="button" aria-pressed="true">音效 开</button>
+    <button class="btn small" id="btnRestart" type="button">重来</button>
+    <button class="btn small" id="btnFull" type="button">全屏</button>
+  </div>
+</header>
+
+<main class="stage" id="stage" data-state="menu">
+  <canvas id="game" width="960" height="540" aria-label="卡牌战斗画面：孙悟空在左，妖将在右，下方为手牌"></canvas>
+
+  <div class="hud">
+    <div class="player-panel">
+      <div class="row"><span class="who">悟空</span><span id="hpText">60/60</span></div>
+      <div class="bar hp" role="progressbar" aria-label="生命值" aria-valuemin="0" aria-valuemax="60" aria-valuenow="60" id="hpTrack"><i id="hpFill"></i></div>
+      <div class="row">
+        <span class="energy" id="energyOrbs" aria-label="能量"></span>
+        <span class="chip" id="blockChip">护体 0</span>
+        <span class="chip" id="playerStatus" hidden></span>
+      </div>
+    </div>
+    <div class="stage-track" id="stageTrack" aria-label="关卡进度"></div>
+  </div>
+
+  <div class="enemy-panel" id="enemyPanel">
+    <div class="row"><span class="enemy-name" id="enemyName">狼妖</span><span id="enemyHpText">30/30</span></div>
+    <div class="bar" role="progressbar" aria-label="妖将生命值" aria-valuemin="0" aria-valuemax="30" aria-valuenow="30" id="enemyHpTrack"><i id="enemyHpFill"></i></div>
+    <div class="row"><span class="intent" id="enemyIntent">攻击 7</span><span class="chip" id="enemyBlockChip" hidden>护体 0</span></div>
+    <div class="statuses" id="enemyStatuses"></div>
+  </div>
+
+  <div class="pile">牌库 <b id="drawCount">0</b> · 弃牌 <b id="discardCount">0</b></div>
+  <div class="battle-log" id="battleLog">你的回合 · 抽 5 张牌</div>
+  <div class="hand" id="hand" aria-label="手牌"></div>
+  <button class="endturn" id="btnEndTurn" type="button">结束回合</button>
+
+  <div class="toast" id="toast" aria-hidden="true"></div>
+
+  <section class="screen" id="startScreen">
+    <div class="panel">
+      <p class="kicker">单文件 · 零外域依赖 · file:// 直开</p>
+      <h2>取经<span class="accent">牌途</span></h2>
+      <p class="lead">三关妖将挡路，山神庙里歇一口气。<em>用金箍棒与七十二变，打完这副牌。</em></p>
+      <div class="rules" aria-label="规则">
+        <div><span>每回合</span><span>3 能量 · 抽 5 张</span></div>
+        <div><span>出牌</span><span>点击手牌</span></div>
+        <div><span>易伤</span><span>受到伤害 +50%</span></div>
+        <div><span>虚弱</span><span>造成伤害 -25%</span></div>
+        <div><span>结束回合</span><span><kbd>空格</kbd> / <kbd>E</kbd></span></div>
+        <div><span>快捷键</span><span><kbd>1</kbd>–<kbd>9</kbd> 出牌</span></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnStart" type="button">踏上牌途</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="rewardScreen" hidden>
+    <div class="panel">
+      <p class="kicker">战罢 · 择一法门</p>
+      <h2>添一张牌</h2>
+      <div class="reward-cards" id="rewardCards"></div>
+      <div class="actions">
+        <button class="btn ghost" id="btnSkipReward" type="button">不吃牌 · 回复 8 生命</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="restScreen" hidden>
+    <div class="panel">
+      <p class="kicker">山神庙 · 暂歇</p>
+      <h2>打坐调息</h2>
+      <p class="lead" id="restText"></p>
+      <div class="actions">
+        <button class="btn primary" id="btnRest" type="button">起身赶路</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="defeatScreen" hidden>
+    <div class="panel">
+      <p class="kicker">牌途 · 力竭</p>
+      <h2>再整旗鼓</h2>
+      <div class="result">
+        <div><span>到达关卡</span><b id="defeatStage">1</b></div>
+        <div><span>牌库张数</span><b id="defeatDeck">10</b></div>
+        <div><span>最佳得分</span><b id="defeatBest">0</b></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnRetry" type="button">重新起牌</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="victoryScreen" hidden>
+    <div class="panel">
+      <p class="kicker">三关尽破 · 黄风散尽</p>
+      <h2>牌途<span class="accent">功成</span></h2>
+      <p class="lead">黄风怪败走，唐僧合掌西行。你手里的牌，已经打出了取经人的胆气。</p>
+      <div class="result">
+        <div><span>得分</span><b id="victoryScore">0</b></div>
+        <div><span>剩余生命</span><b id="victoryHp">0</b></div>
+        <div><span>牌库张数</span><b id="victoryDeck">0</b></div>
+      </div>
+      <p class="bestline">最佳 <span id="victoryBest">0</span></p>
+      <div class="actions">
+        <button class="btn primary" id="btnAgain" type="button">再走一遭</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="legend">
+  <span>单文件 Canvas2D + DOM 手牌 · 无外域资源 · 点击出牌 · 竖屏 / 横屏</span>
+  <span><span class="dot"></span>最佳 <b id="bestNum">0</b></span>
+</footer>
+<p class="sr-only" id="live" aria-live="polite"></p>
+
+<script>
+(() => {
+  'use strict';
+
+  const VIEW = { w: 960, h: 540 };
+  function shortLandscape() { return window.innerWidth > window.innerHeight; }
+  function sceneY() { return shortLandscape() ? 0.78 : 1; }
+  const PX = (x) => x * VIEW.w / 960;
+  const PY = (y) => y * VIEW.h / 540 * sceneY();
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const BEST_KEY = 'xyj_qujingpai_best_v1';
+  const MUTE_KEY = 'xyj_qujingpai_mute_v1';
+
+  // ===== 卡牌 =====
+  const CARD_LIB = {
+    strike:  { name: '棍击', cost: 1, type: '攻击', desc: '造成 6 点伤害', dmg: 6 },
+    defend:  { name: '铜皮', cost: 1, type: '护体', desc: '获得 6 点护体', block: 6 },
+    combo:   { name: '连环棍', cost: 1, type: '攻击', desc: '造成 3 点伤害 2 次', hits: 2, dmg: 3 },
+    eye:     { name: '火眼金睛', cost: 1, type: '法术', desc: '施加 2 层易伤', vuln: 2 },
+    freeze:  { name: '定身术', cost: 1, type: '法术', desc: '施加 2 层虚弱', weak: 2 },
+    cloud:   { name: '筋斗云', cost: 0, type: '身法', desc: '抽 2 张牌，消耗', draw: 2, exhaust: true },
+    focus:   { name: '凝神', cost: 0, type: '身法', desc: '抽 1 张，获得 1 能量，消耗', draw: 1, energy: 1, exhaust: true },
+    heavy:   { name: '金箍棒·重', cost: 2, type: '攻击', desc: '造成 16 点伤害', dmg: 16 },
+    iron:    { name: '铁布衫', cost: 2, type: '护体', desc: '获得 13 点护体', block: 13 },
+    clone:   { name: '毫毛分身', cost: 2, type: '攻击', desc: '造成 4 点伤害 3 次', hits: 3, dmg: 4 },
+    peach:   { name: '蟠桃', cost: 1, type: '丹药', desc: '回复 7 点生命，消耗', heal: 7, exhaust: true },
+    fire:    { name: '三昧真火', cost: 2, type: '法术', desc: '造成 9 点伤害，施加 1 层易伤', dmg: 9, vuln: 1 },
+    staff:   { name: '定海神针', cost: 3, type: '攻击', desc: '造成 26 点伤害', dmg: 26 },
+    guard:   { name: '护法金刚', cost: 2, type: '护体', desc: '获得 10 点护体，2 点力量', block: 10, strength: 2 }
+  };
+
+  const STARTER = ['strike', 'strike', 'strike', 'strike', 'defend', 'defend', 'defend', 'combo', 'eye', 'freeze'];
+  const REWARD_POOL = ['heavy', 'iron', 'clone', 'peach', 'fire', 'staff', 'guard', 'cloud', 'focus', 'eye', 'freeze', 'combo'];
+  const STAGES = [
+    { type: 'battle', enemy: 'wolf', label: '狼妖' },
+    { type: 'battle', enemy: 'bat', label: '蝠妖' },
+    { type: 'battle', enemy: 'tiger', label: '虎先锋' },
+    { type: 'rest', label: '山神庙' },
+    { type: 'battle', enemy: 'boss', label: '黄风怪' }
+  ];
+
+  const ENEMIES = {
+    wolf: {
+      name: '狼妖', hp: 30,
+      pattern: [
+        { kind: 'attack', dmg: 7, label: '扑咬' },
+        { kind: 'attack', dmg: 5, block: 5, label: '抓击' },
+        { kind: 'attack', dmg: 9, label: '撕咬' }
+      ]
+    },
+    bat: {
+      name: '蝠妖', hp: 36,
+      pattern: [
+        { kind: 'attack', hits: 2, dmg: 4, label: '爪击' },
+        { kind: 'debuff', weak: 2, label: '妖音' },
+        { kind: 'attack', dmg: 8, label: '俯冲' }
+      ]
+    },
+    tiger: {
+      name: '虎先锋', hp: 60,
+      pattern: [
+        { kind: 'attack', dmg: 10, label: '大刀' },
+        { kind: 'buff', strength: 2, block: 4, label: '蓄势' },
+        { kind: 'attack', dmg: 13, label: '横扫' }
+      ]
+    },
+    boss: {
+      name: '黄风怪', hp: 110,
+      pattern: [
+        { kind: 'attack', dmg: 12, label: '风刃' },
+        { kind: 'buff', strength: 2, block: 8, label: '聚风' },
+        { kind: 'attack', hits: 2, dmg: 6, label: '乱风' },
+        { kind: 'debuff', weak: 2, vuln: 1, label: '三昧神风' },
+        { kind: 'attack', dmg: 17, label: '黄风压顶' }
+      ]
+    }
+  };
+
+  // ===== DOM =====
+  const $ = (id) => document.getElementById(id);
+  const canvas = $('game');
+  const ctx = canvas.getContext('2d');
+  const stage = $('stage');
+  const hpFill = $('hpFill');
+  const hpText = $('hpText');
+  const hpTrack = $('hpTrack');
+  const energyOrbs = $('energyOrbs');
+  const blockChip = $('blockChip');
+  const playerStatus = $('playerStatus');
+  const stageTrack = $('stageTrack');
+  const enemyName = $('enemyName');
+  const enemyHpText = $('enemyHpText');
+  const enemyHpFill = $('enemyHpFill');
+  const enemyHpTrack = $('enemyHpTrack');
+  const enemyIntent = $('enemyIntent');
+  const enemyBlockChip = $('enemyBlockChip');
+  const enemyStatuses = $('enemyStatuses');
+  const drawCount = $('drawCount');
+  const discardCount = $('discardCount');
+  const handEl = $('hand');
+  const battleLog = $('battleLog');
+  const btnEndTurn = $('btnEndTurn');
+  const toastEl = $('toast');
+  const liveEl = $('live');
+  const bestNum = $('bestNum');
+  const btnSound = $('btnSound');
+  const btnRestart = $('btnRestart');
+  const btnFull = $('btnFull');
+  const btnStart = $('btnStart');
+  const btnRetry = $('btnRetry');
+  const btnAgain = $('btnAgain');
+  const btnRest = $('btnRest');
+  const btnSkipReward = $('btnSkipReward');
+  const rewardCards = $('rewardCards');
+  const restText = $('restText');
+
+  const screens = {
+    start: $('startScreen'),
+    reward: $('rewardScreen'),
+    rest: $('restScreen'),
+    defeat: $('defeatScreen'),
+    victory: $('victoryScreen')
+  };
+
+  // ===== 工具 =====
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    return arr;
+  }
+
+  function readBest() {
+    try { return Number(localStorage.getItem(BEST_KEY)) || 0; } catch (err) { return 0; }
+  }
+  function writeBest(v) {
+    try { if (v > readBest()) localStorage.setItem(BEST_KEY, String(v)); } catch (err) {}
+  }
+  function updateBestLabels() {
+    bestNum.textContent = String(readBest());
+    $('defeatBest').textContent = String(readBest());
+    $('victoryBest').textContent = String(readBest());
+  }
+  function announce(msg) {
+    liveEl.textContent = msg;
+  }
+
+  // ===== 音频 =====
+  const AudioKit = (() => {
+    let ac = null;
+    let muted = false;
+    try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch (err) {}
+
+    function ensure() {
+      if (!ac) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) ac = new AC();
+      }
+      if (ac && ac.state === 'suspended') ac.resume();
+      return ac;
+    }
+
+    function tone(freq, dur, type, vol, slideTo) {
+      if (muted) return;
+      const a = ensure();
+      if (!a) return;
+      const t0 = a.currentTime;
+      const osc = a.createOscillator();
+      const gain = a.createGain();
+      osc.type = type || 'square';
+      osc.frequency.setValueAtTime(freq, t0);
+      if (slideTo) osc.frequency.exponentialRampToValueAtTime(Math.max(30, slideTo), t0 + dur);
+      gain.gain.setValueAtTime(vol, t0);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      osc.connect(gain).connect(a.destination);
+      osc.start(t0);
+      osc.stop(t0 + dur + 0.03);
+    }
+
+    function noise(dur, vol, freq) {
+      if (muted) return;
+      const a = ensure();
+      if (!a) return;
+      const len = Math.max(1, Math.floor(a.sampleRate * dur));
+      const buffer = a.createBuffer(1, len, a.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / len);
+      const src = a.createBufferSource();
+      src.buffer = buffer;
+      const filter = a.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.value = freq;
+      const gain = a.createGain();
+      gain.gain.setValueAtTime(vol, a.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, a.currentTime + dur);
+      src.connect(filter).connect(gain).connect(a.destination);
+      src.start();
+    }
+
+    return {
+      ensure,
+      isMuted: () => muted,
+      toggle() {
+        muted = !muted;
+        try { localStorage.setItem(MUTE_KEY, muted ? '1' : '0'); } catch (err) {}
+        if (!muted) this.click();
+        return muted;
+      },
+      click() { tone(520, 0.06, 'triangle', 0.05, 700); },
+      card() { noise(0.08, 0.04, 1400); tone(420, 0.08, 'triangle', 0.03, 620); },
+      hit() { tone(130, 0.08, 'square', 0.07, 70); noise(0.05, 0.04, 900); },
+      heavy() { tone(90, 0.16, 'sawtooth', 0.08, 50); noise(0.1, 0.05, 600); },
+      block() { tone(260, 0.12, 'triangle', 0.05, 420); },
+      hurt() { tone(190, 0.2, 'sawtooth', 0.09, 70); },
+      heal() { tone(600, 0.12, 'triangle', 0.05, 900); },
+      error() { tone(150, 0.12, 'sawtooth', 0.05, 100); },
+      reward() { tone(520, 0.1, 'triangle', 0.05); setTimeout(() => tone(700, 0.16, 'triangle', 0.05), 100); },
+      win() { tone(392, 0.16, 'triangle', 0.06); setTimeout(() => tone(523, 0.18, 'triangle', 0.06), 150); setTimeout(() => tone(659, 0.3, 'triangle', 0.07), 320); }
+    };
+  })();
+
+  function syncSoundBtn() {
+    const muted = AudioKit.isMuted();
+    btnSound.textContent = muted ? '音效 关' : '音效 开';
+    btnSound.setAttribute('aria-pressed', String(!muted));
+  }
+
+  // ===== 尺寸 =====
+  function resize() {
+    const rect = stage.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.round(rect.width * dpr));
+    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);
+  window.addEventListener('resize', resize);
+  window.addEventListener('orientationchange', resize);
+  resize();
+
+  // ===== 状态 =====
+  const run = {
+    stage: 0,
+    hp: 60,
+    maxHp: 60,
+    maxEnergy: 3,
+    deck: []
+  };
+
+  const battle = {
+    active: false,
+    enemyKey: '',
+    enemyHp: 0,
+    enemyMax: 0,
+    enemyBlock: 0,
+    intentIndex: 0,
+    block: 0,
+    energy: 3,
+    strength: 0,
+    weak: 0,
+    vuln: 0,
+    enemyStrength: 0,
+    enemyWeak: 0,
+    enemyVuln: 0,
+    hand: [],
+    drawPile: [],
+    discardPile: [],
+    turn: 'player',
+    busy: false,
+    round: 0
+  };
+
+  const game = { phase: 'menu' };
+  const fx = { playerAttack: 0, enemyAttack: 0, enemyHurt: 0, playerHurt: 0, shake: 0, flash: 0 };
+  let uidSeq = 0;
+  let runSeq = 0;
+  let effects = [];
+  let floaters = [];
+  let toastTimer = 0;
+  let viewPortrait = false;
+
+  function isPortraitMode() {
+    if (document.body.dataset.qaPortrait !== '1') return false;
+    if (!window.matchMedia('(orientation: portrait)').matches) return false;
+    if (!(window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 820)) return false;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const pw = Math.min(vw - 20, (vh - 160) * 9 / 16);
+    const ph = pw * 16 / 9;
+    const lw = Math.min(vw - 20, (vh - 116) * 16 / 9);
+    const lh = lw * 9 / 16;
+    return pw > 0 && ph > 0 && pw * ph >= 2 * lw * lh;
+  }
+
+  function syncView() {
+    const next = isPortraitMode();
+    document.body.dataset.qaPortraitActive = next ? '1' : '0';
+    if (next === viewPortrait) return;
+    const oldW = VIEW.w;
+    const oldH = VIEW.h;
+    viewPortrait = next;
+    VIEW.w = next ? 540 : 960;
+    VIEW.h = next ? 960 : 540;
+    const kx = VIEW.w / oldW;
+    const ky = VIEW.h / oldH;
+    for (const e of effects) {
+      if (e.x !== undefined) e.x *= kx;
+      if (e.y !== undefined) e.y *= ky;
+    }
+    for (const f of floaters) { f.x *= kx; f.y *= ky; }
+    resize();
+  }
+
+  // ===== 流程 =====
+  function showScreen(name) {
+    for (const key in screens) screens[key].hidden = key !== name;
+  }
+
+  function startRun() {
+    AudioKit.ensure();
+    runSeq += 1;
+    run.stage = 0;
+    run.hp = 60;
+    run.deck = STARTER.slice();
+    game.phase = 'playing';
+    stage.dataset.state = 'battle';
+    showScreen(null);
+    startBattle();
+    announce('牌途开始。');
+  }
+
+  function startBattle() {
+    const stageData = STAGES[run.stage];
+    if (!stageData || stageData.type !== 'battle') return;
+    const data = ENEMIES[stageData.enemy];
+    battle.active = true;
+    battle.enemyKey = stageData.enemy;
+    battle.enemyHp = data.hp;
+    battle.enemyMax = data.hp;
+    battle.enemyBlock = 0;
+    battle.intentIndex = 0;
+    battle.block = 0;
+    battle.energy = run.maxEnergy;
+    battle.strength = 0;
+    battle.weak = 0;
+    battle.vuln = 0;
+    battle.enemyStrength = 0;
+    battle.enemyWeak = 0;
+    battle.enemyVuln = 0;
+    battle.hand = [];
+    battle.discardPile = [];
+    battle.drawPile = shuffle(run.deck.map((id) => ({ id, uid: ++uidSeq })));
+    battle.turn = 'player';
+    battle.busy = false;
+    battle.round = 1;
+    game.phase = 'playing';
+    stage.dataset.state = 'battle';
+    showScreen(null);
+    drawCards(5);
+    updateHud();
+    renderHand();
+    setLog('你的回合 · 抽 5 张牌');
+    announce(data.name + '现身。');
+  }
+
+  function drawCards(n) {
+    for (let i = 0; i < n; i++) {
+      if (battle.hand.length >= 10) break;
+      if (!battle.drawPile.length) {
+        if (!battle.discardPile.length) break;
+        battle.drawPile = shuffle(battle.discardPile.slice());
+        battle.discardPile = [];
+      }
+      const card = battle.drawPile.pop();
+      if (card) battle.hand.push(card);
+    }
+  }
+
+  function setLog(text) {
+    battleLog.textContent = text;
+  }
+
+  function flashToast(text, dur) {
+    toastEl.textContent = text;
+    toastEl.classList.add('show');
+    toastEl.setAttribute('aria-hidden', 'false');
+    announce(text);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toastEl.classList.remove('show');
+      toastEl.setAttribute('aria-hidden', 'true');
+    }, dur || 1100);
+  }
+
+  // ===== 数值 =====
+  function playerDamage(base) {
+    let d = base + battle.strength;
+    if (battle.weak > 0) d = Math.floor(d * 0.75);
+    if (battle.enemyVuln > 0) d = Math.floor(d * 1.5);
+    return Math.max(0, d);
+  }
+
+  function incomingDamage(base) {
+    let d = base + battle.enemyStrength;
+    if (battle.enemyWeak > 0) d = Math.floor(d * 0.75);
+    if (battle.vuln > 0) d = Math.floor(d * 1.5);
+    return Math.max(0, d);
+  }
+
+  function damageEnemy(base) {
+    if (!battle.active) return;
+    const d = playerDamage(base);
+    const absorbed = Math.min(battle.enemyBlock, d);
+    battle.enemyBlock -= absorbed;
+    const loss = d - absorbed;
+    battle.enemyHp = Math.max(0, battle.enemyHp - loss);
+    fx.enemyHurt = 0.22;
+    fx.shake = RM ? 0 : 3;
+    if (loss > 0) {
+      floaters.push({ x: PX(690 + rand(-30, 30)), y: PY(268), text: '-' + loss, color: '#F6EFE1', t: 0, dur: 0.8, vy: -46 });
+      spawnSpark(690, 292, '#E0B84A');
+      AudioKit.hit();
+    }
+    if (absorbed > 0) {
+      floaters.push({ x: PX(706 + rand(-16, 16)), y: PY(300), text: '格挡 ' + absorbed, color: '#CFE3F5', t: 0, dur: 0.75, vy: -38 });
+      AudioKit.block();
+    }
+    updateHud();
+    if (battle.enemyHp <= 0) winBattle();
+  }
+
+  function damagePlayer(base) {
+    if (!battle.active) return;
+    const d = incomingDamage(base);
+    const absorbed = Math.min(battle.block, d);
+    battle.block -= absorbed;
+    const loss = d - absorbed;
+    run.hp = Math.max(0, run.hp - loss);
+    fx.playerHurt = 0.3;
+    fx.shake = RM ? 0 : 7;
+    fx.flash = 0.4;
+    if (loss > 0) {
+      floaters.push({ x: PX(260 + rand(-20, 20)), y: PY(286), text: '-' + loss, color: '#F2C9C0', t: 0, dur: 0.85, vy: -46 });
+      spawnSpark(260, 306, '#C0392B');
+      AudioKit.hurt();
+    }
+    if (absorbed > 0) {
+      floaters.push({ x: PX(278 + rand(-14, 14)), y: PY(312), text: '格挡 ' + absorbed, color: '#CFE3F5', t: 0, dur: 0.75, vy: -36 });
+      AudioKit.block();
+    }
+    updateHud();
+    if (run.hp <= 0) defeat();
+  }
+
+  function spawnSpark(x, y, color) {
+    for (let i = 0; i < (RM ? 2 : 7); i++) {
+      effects.push({
+        kind: 'spark', x, y,
+        vx: rand(-190, 190), vy: rand(-190, 30),
+        t: 0, dur: rand(0.2, 0.42), color: color || '224,184,74'
+      });
+    }
+  }
+
+  // ===== 出牌 =====
+  function playCard(uid) {
+    if (!battle.active || battle.busy || battle.turn !== 'player' || game.phase !== 'playing') return;
+    const idx = battle.hand.findIndex((c) => c.uid === uid);
+    if (idx < 0) return;
+    const inst = battle.hand[idx];
+    const card = CARD_LIB[inst.id];
+    if (!card) return;
+    if (card.cost > battle.energy) {
+      flashToast('能量不足', 800);
+      AudioKit.error();
+      return;
+    }
+    battle.energy -= card.cost;
+    battle.hand.splice(idx, 1);
+    fx.playerAttack = 0.3;
+    effects.push({ kind: 'slash', x: PX(300), y: PY(300), r: 72, t: 0, dur: 0.28, color: '242,235,220' });
+    AudioKit.card();
+
+    if (card.dmg) {
+      const hits = card.hits || 1;
+      for (let i = 0; i < hits; i++) {
+        if (!battle.active) break;
+        damageEnemy(card.dmg);
+      }
+    }
+    if (card.block) {
+      battle.block += card.block;
+      effects.push({ kind: 'ring', x: PX(250), y: PY(330), r0: 12, r1: 54, t: 0, dur: 0.4, color: '207,227,245' });
+      AudioKit.block();
+    }
+    if (card.heal) {
+      const before = run.hp;
+      run.hp = Math.min(run.maxHp, run.hp + card.heal);
+      floaters.push({ x: PX(260), y: PY(258), text: '+' + (run.hp - before), color: '#B7E4B7', t: 0, dur: 0.8, vy: -42 });
+      AudioKit.heal();
+    }
+    if (card.strength) battle.strength += card.strength;
+    if (card.vuln) battle.enemyVuln += card.vuln;
+    if (card.weak) battle.enemyWeak += card.weak;
+    if (card.energy) battle.energy += card.energy;
+    if (card.draw) {
+      drawCards(card.draw);
+      updateHud();
+      renderHand();
+    }
+
+    if (card.exhaust) {
+      // 消耗：不进弃牌堆
+    } else {
+      battle.discardPile.push(inst);
+    }
+
+    setLog('你使用「' + card.name + '」' + (card.dmg ? ' · 造成 ' + playerDamage(card.dmg) + ' 伤害' : ''));
+    if (card.vuln) setLog('你使用「' + card.name + '」 · 易伤 ' + battle.enemyVuln);
+    if (card.weak) setLog('你使用「' + card.name + '」 · 虚弱 ' + battle.enemyWeak);
+    updateHud();
+    renderHand();
+    if (battle.enemyHp > 0) checkHandAffordable();
+  }
+
+  function checkHandAffordable() {
+    if (battle.hand.every((c) => CARD_LIB[c.id].cost > battle.energy)) {
+      flashToast('能量不足 · 结束回合', 900);
+    }
+  }
+
+  function endTurn() {
+    if (!battle.active || battle.busy || battle.turn !== 'player' || game.phase !== 'playing') return;
+    battle.discardPile.push(...battle.hand);
+    battle.hand = [];
+    battle.turn = 'enemy';
+    battle.busy = true;
+    renderHand();
+    updateHud();
+    setLog(ENEMIES[battle.enemyKey].name + ' 的回合');
+    AudioKit.click();
+    const seq = runSeq;
+    setTimeout(() => {
+      if (seq !== runSeq) return;
+      if (!battle.active || game.phase !== 'playing') return;
+      enemyAct();
+    }, 420);
+  }
+
+  function enemyAct() {
+    if (!battle.active) return;
+    const data = ENEMIES[battle.enemyKey];
+    const intent = data.pattern[battle.intentIndex % data.pattern.length];
+    battle.enemyBlock = 0;
+    fx.enemyAttack = 0.4;
+    AudioKit.card();
+
+    if (intent.kind === 'attack') {
+      const hits = intent.hits || 1;
+      for (let i = 0; i < hits; i++) {
+        if (!battle.active) return;
+        damagePlayer(intent.dmg);
+      }
+      if (intent.block) battle.enemyBlock += intent.block;
+      setLog(data.name + ' 使用「' + intent.label + '」 · 攻击 ' + incomingDamage(intent.dmg) + (hits > 1 ? ' ×' + hits : ''));
+    } else if (intent.kind === 'buff') {
+      if (intent.strength) battle.enemyStrength += intent.strength;
+      if (intent.block) battle.enemyBlock += intent.block;
+      setLog(data.name + ' 使用「' + intent.label + '」 · 力量 +' + (intent.strength || 0) + ' · 护体 +' + (intent.block || 0));
+      effects.push({ kind: 'ring', x: PX(690), y: PY(330), r0: 10, r1: 60, t: 0, dur: 0.45, color: '192,57,43' });
+    } else if (intent.kind === 'debuff') {
+      if (intent.weak) battle.weak += intent.weak;
+      if (intent.vuln) battle.vuln += intent.vuln;
+      setLog(data.name + ' 使用「' + intent.label + '」 · 虚弱 +' + (intent.weak || 0) + ' · 易伤 +' + (intent.vuln || 0));
+      effects.push({ kind: 'ring', x: PX(260), y: PY(316), r0: 8, r1: 48, t: 0, dur: 0.4, color: '107,74,114' });
+    }
+
+    battle.intentIndex += 1;
+    updateHud();
+
+    const seq = runSeq;
+    setTimeout(() => {
+      if (seq !== runSeq) return;
+      if (!battle.active || game.phase !== 'playing') return;
+      tickStatuses();
+      if (run.hp <= 0) return;
+      startPlayerTurn();
+    }, 560);
+  }
+
+  function tickStatuses() {
+    if (battle.vuln > 0) battle.vuln -= 1;
+    if (battle.weak > 0) battle.weak -= 1;
+    if (battle.enemyVuln > 0) battle.enemyVuln -= 1;
+    if (battle.enemyWeak > 0) battle.enemyWeak -= 1;
+  }
+
+  function startPlayerTurn() {
+    battle.turn = 'player';
+    battle.busy = false;
+    battle.block = 0;
+    battle.energy = run.maxEnergy;
+    battle.round += 1;
+    drawCards(5);
+    updateHud();
+    renderHand();
+    setLog('你的回合 · 抽 5 张牌');
+    announce('你的回合。');
+  }
+
+  // ===== 胜负 =====
+  function winBattle() {
+    if (!battle.active) return;
+    battle.active = false;
+    battle.busy = true;
+    updateHud();
+    renderHand();
+    setLog('妖将已破');
+    AudioKit.heavy();
+    const seq = runSeq;
+    setTimeout(() => {
+      if (seq !== runSeq) return;
+      if (game.phase !== 'playing') return;
+      run.stage += 1;
+      if (run.stage >= STAGES.length) {
+        victory();
+      } else {
+        showReward();
+      }
+    }, 700);
+  }
+
+  function showReward() {
+    game.phase = 'reward';
+    stage.dataset.state = 'reward';
+    const pool = shuffle(REWARD_POOL.slice()).slice(0, 3);
+    rewardCards.innerHTML = '';
+    for (const id of pool) {
+      rewardCards.appendChild(makeCardElement(id, true));
+    }
+    rewardCards.querySelectorAll('[data-card]').forEach((el) => {
+      el.addEventListener('click', () => chooseReward(el.dataset.card));
+    });
+    showScreen('reward');
+    AudioKit.reward();
+    announce('战斗胜利，选择一张牌加入牌库。');
+  }
+
+  function chooseReward(id) {
+    if (game.phase !== 'reward') return;
+    run.deck.push(id);
+    AudioKit.click();
+    afterReward();
+  }
+
+  function afterReward() {
+    game.phase = 'playing';
+    if (STAGES[run.stage].type === 'rest') {
+      showRest();
+    } else {
+      startBattle();
+    }
+  }
+
+  function showRest() {
+    game.phase = 'rest';
+    stage.dataset.state = 'rest';
+    const heal = Math.round(run.maxHp * 0.3);
+    const before = run.hp;
+    run.hp = Math.min(run.maxHp, run.hp + heal);
+    restText.textContent = '山风渐定，你在庙里舀了一瓢泉水。生命回复 ' + (run.hp - before) + ' 点，当前 ' + run.hp + '/' + run.maxHp + '。';
+    updateHud();
+    showScreen('rest');
+    AudioKit.heal();
+    announce('山神庙歇脚，回复生命。');
+  }
+
+  function restContinue() {
+    if (game.phase !== 'rest') return;
+    run.stage += 1;
+    game.phase = 'playing';
+    if (run.stage >= STAGES.length) victory();
+    else startBattle();
+  }
+
+  function defeat() {
+    if (game.phase !== 'playing') return;
+    battle.active = false;
+    game.phase = 'defeat';
+    stage.dataset.state = 'defeat';
+    const score = run.hp * 10 + run.deck.length * 5;
+    writeBest(Math.max(0, score));
+    $('defeatStage').textContent = String(Math.min(STAGES.length, run.stage + 1));
+    $('defeatDeck').textContent = String(run.deck.length);
+    showScreen('defeat');
+    updateBestLabels();
+    renderHand();
+    AudioKit.error();
+    announce('力竭。牌途暂止。');
+  }
+
+  function victory() {
+    game.phase = 'victory';
+    stage.dataset.state = 'victory';
+    const score = run.hp * 10 + run.deck.length * 5 + 300;
+    writeBest(score);
+    $('victoryScore').textContent = String(score);
+    $('victoryHp').textContent = String(run.hp);
+    $('victoryDeck').textContent = String(run.deck.length);
+    showScreen('victory');
+    updateBestLabels();
+    renderHand();
+    AudioKit.win();
+    announce('取经牌途功成。');
+  }
+
+  // ===== 手牌与 HUD =====
+  function makeCardElement(id, reward) {
+    const card = CARD_LIB[id];
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'card';
+    btn.dataset.card = id;
+    if (!reward) btn.dataset.uid = '';
+    btn.innerHTML =
+      '<span class="cost">' + card.cost + '</span>' +
+      '<span class="ctype">' + card.type + '</span>' +
+      '<span class="cname">' + card.name + '</span>' +
+      '<span class="cdesc">' + card.desc + '</span>';
+    if (reward) {
+      btn.setAttribute('aria-label', card.name + '：' + card.desc + '，点击加入牌库');
+    }
+    return btn;
+  }
+
+  function renderHand() {
+    handEl.innerHTML = '';
+    for (const inst of battle.hand) {
+      const card = CARD_LIB[inst.id];
+      const btn = makeCardElement(inst.id, false);
+      btn.dataset.uid = String(inst.uid);
+      btn.disabled = !battle.active || battle.busy || battle.turn !== 'player' || card.cost > battle.energy;
+      btn.addEventListener('click', () => playCard(inst.uid));
+      handEl.appendChild(btn);
+    }
+    btnEndTurn.disabled = !battle.active || battle.busy || battle.turn !== 'player';
+  }
+
+  function updateHud() {
+    const hpPct = clamp(run.hp / run.maxHp, 0, 1) * 100;
+    hpFill.style.width = hpPct.toFixed(1) + '%';
+    hpText.textContent = run.hp + '/' + run.maxHp;
+    hpTrack.setAttribute('aria-valuenow', String(run.hp));
+
+    let orbs = '';
+    for (let i = 0; i < run.maxEnergy; i++) orbs += '<i class="' + (i < battle.energy ? 'on' : '') + '"></i>';
+    energyOrbs.innerHTML = orbs;
+    blockChip.textContent = '护体 ' + battle.block;
+
+    const ps = [];
+    if (battle.strength > 0) ps.push('力量 +' + battle.strength);
+    if (battle.weak > 0) ps.push('虚弱 ' + battle.weak);
+    if (battle.vuln > 0) ps.push('易伤 ' + battle.vuln);
+    playerStatus.hidden = ps.length === 0;
+    playerStatus.textContent = ps.join(' · ');
+
+    const data = ENEMIES[battle.enemyKey];
+    if (data) {
+      enemyName.textContent = data.name;
+      enemyHpText.textContent = battle.enemyHp + '/' + battle.enemyMax;
+      enemyHpFill.style.width = (clamp(battle.enemyHp / battle.enemyMax, 0, 1) * 100).toFixed(1) + '%';
+      enemyHpTrack.setAttribute('aria-valuemax', String(battle.enemyMax));
+      enemyHpTrack.setAttribute('aria-valuenow', String(battle.enemyHp));
+      const intent = data.pattern[battle.intentIndex % data.pattern.length];
+      enemyIntent.textContent = intentText(intent);
+      enemyBlockChip.hidden = battle.enemyBlock <= 0;
+      enemyBlockChip.textContent = '护体 ' + battle.enemyBlock;
+      const es = [];
+      if (battle.enemyStrength > 0) es.push('力量 +' + battle.enemyStrength);
+      if (battle.enemyWeak > 0) es.push('虚弱 ' + battle.enemyWeak);
+      if (battle.enemyVuln > 0) es.push('易伤 ' + battle.enemyVuln);
+      enemyStatuses.innerHTML = es.map((s) => '<span class="chip">' + s + '</span>').join('');
+    }
+
+    drawCount.textContent = String(battle.drawPile.length);
+    discardCount.textContent = String(battle.discardPile.length);
+
+    let dots = '';
+    for (let i = 0; i < STAGES.length; i++) {
+      const cls = i < run.stage ? 'done' : i === run.stage ? 'current' : '';
+      dots += '<span class="' + cls + '"></span>';
+    }
+    stageTrack.innerHTML = dots;
+  }
+
+  function intentText(intent) {
+    if (!intent) return '';
+    if (intent.kind === 'attack') {
+      const dmg = incomingDamage(intent.dmg);
+      return '攻击 ' + dmg + (intent.hits ? ' ×' + intent.hits : '');
+    }
+    if (intent.kind === 'buff') {
+      return '蓄势 · 力量 +' + (intent.strength || 0) + ' · 护体 +' + (intent.block || 0);
+    }
+    if (intent.kind === 'debuff') {
+      const p = [];
+      if (intent.weak) p.push('虚弱 ' + intent.weak);
+      if (intent.vuln) p.push('易伤 ' + intent.vuln);
+      return '妖法 · ' + p.join(' · ');
+    }
+    return '';
+  }
+
+  // ===== 绘制 =====
+  function drawSky() {
+    const g = ctx.createLinearGradient(0, 0, 0, VIEW.h);
+    g.addColorStop(0, '#F7F0E2');
+    g.addColorStop(0.55, '#EFE1C9');
+    g.addColorStop(1, '#E3D1B4');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, VIEW.w, VIEW.h);
+
+    const ux = VIEW.w / 960;
+    const cx = PX(760);
+    const cy = PY(104);
+    const sg = ctx.createRadialGradient(cx, cy, 5 * ux, cx, cy, 92 * ux);
+    sg.addColorStop(0, 'rgba(192,57,43,0.26)');
+    sg.addColorStop(0.5, 'rgba(192,57,43,0.1)');
+    sg.addColorStop(1, 'rgba(192,57,43,0)');
+    ctx.fillStyle = sg;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 92 * ux, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(192,57,43,0.18)';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 34 * ux, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function ridge(yBase, amp, freq, seed, color) {
+    const uy = VIEW.h / 540 * sceneY();
+    const ux = 960 / VIEW.w;
+    ctx.beginPath();
+    ctx.moveTo(-12, VIEW.h);
+    for (let x = -12; x <= VIEW.w + 12; x += 10) {
+      const h =
+        Math.sin(x * freq * ux + seed) * amp * uy +
+        Math.sin(x * freq * ux * 2.6 + seed * 1.8) * amp * uy * 0.34 +
+        Math.sin(x * freq * ux * 0.55 + seed * 0.7) * amp * uy * 0.5;
+      ctx.lineTo(x, yBase * uy - h);
+    }
+    ctx.lineTo(VIEW.w + 12, VIEW.h);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+
+  function drawBackground() {
+    drawSky();
+    ridge(320, 58, 0.006, 1.2, 'rgba(107,102,94,0.16)');
+    ridge(360, 72, 0.008, 2.6, 'rgba(58,71,58,0.2)');
+    ridge(406, 46, 0.0118, 4.2, 'rgba(34,29,22,0.28)');
+
+    // 山神庙剪影
+    const ux = VIEW.w / 960;
+    const uy = VIEW.h / 540 * sceneY();
+    ctx.fillStyle = 'rgba(34,29,22,0.5)';
+    ctx.fillRect(756 * ux, 330 * uy, 12 * ux, 90 * uy);
+    ctx.fillRect(892 * ux, 330 * uy, 12 * ux, 90 * uy);
+    ctx.beginPath();
+    ctx.moveTo(736 * ux, 336 * uy);
+    ctx.lineTo(924 * ux, 336 * uy);
+    ctx.lineTo(900 * ux, 306 * uy);
+    ctx.lineTo(760 * ux, 306 * uy);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(746 * ux, 306 * uy);
+    ctx.lineTo(914 * ux, 306 * uy);
+    ctx.lineTo(884 * ux, 282 * uy);
+    ctx.lineTo(776 * ux, 282 * uy);
+    ctx.closePath();
+    ctx.fill();
+
+    // 地面
+    const groundY = 430 * uy;
+    ctx.fillStyle = '#2A251E';
+    ctx.fillRect(0, groundY, VIEW.w, VIEW.h - groundY);
+    ctx.strokeStyle = 'rgba(242,235,220,0.16)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0, groundY);
+    ctx.lineTo(VIEW.w, groundY);
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(242,235,220,0.05)';
+    ctx.lineWidth = 1;
+    for (let x = 20 * ux; x < VIEW.w; x += 70 * ux) {
+      ctx.beginPath();
+      ctx.moveTo(x, 446 * uy + ((x * 7) % 18));
+      ctx.lineTo(x + 42 * ux, 449 * uy + ((x * 5) % 18));
+      ctx.stroke();
+    }
+  }
+
+  function drawPlayer() {
+    const bob = Math.sin(performance.now() / 620) * 2;
+    const lunge = fx.playerAttack > 0 ? easeOutCubic(1 - fx.playerAttack / 0.3) * 34 : 0;
+    const hurt = fx.playerHurt > 0;
+
+    ctx.save();
+    ctx.translate(PX(260) + lunge * (VIEW.w / 960), PY(430) - bob);
+    if (hurt) ctx.globalAlpha = 0.72;
+
+    // 影子
+    ctx.fillStyle = 'rgba(22,19,16,0.3)';
+    ctx.beginPath();
+    ctx.ellipse(0, 2, 30, 8, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 尾巴
+    ctx.strokeStyle = '#B8894B';
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(-8, -58);
+    ctx.quadraticCurveTo(-46, -76, -38, -104);
+    ctx.stroke();
+
+    // 腿
+    ctx.strokeStyle = '#8C6A33';
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.moveTo(-4, -48);
+    ctx.lineTo(-8, -2);
+    ctx.moveTo(5, -48);
+    ctx.lineTo(11, -2);
+    ctx.stroke();
+    ctx.fillStyle = '#3A2F22';
+    ctx.beginPath();
+    ctx.ellipse(-8, -2, 9, 4, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(11, -2, 9, 4, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 战裙
+    ctx.fillStyle = '#8C2A2A';
+    ctx.beginPath();
+    ctx.moveTo(-20, -56);
+    ctx.lineTo(20, -56);
+    ctx.lineTo(24, -26);
+    ctx.lineTo(-24, -26);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#E0B84A';
+    ctx.fillRect(-20, -58, 40, 6);
+
+    // 身体
+    ctx.fillStyle = '#B8894B';
+    ctx.beginPath();
+    ctx.ellipse(0, -72, 18, 26, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#E8CFA5';
+    ctx.beginPath();
+    ctx.ellipse(4, -78, 8, 14, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 披带
+    ctx.strokeStyle = 'rgba(224,184,74,0.85)';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(-12, -78);
+    ctx.quadraticCurveTo(-48, -90, -62, -68);
+    ctx.stroke();
+
+    // 金箍棒
+    ctx.save();
+    ctx.translate(20, -78);
+    ctx.rotate(fx.playerAttack > 0 ? -1.5 + (1 - fx.playerAttack / 0.3) * 2.4 : -0.9);
+    ctx.fillStyle = '#B33A2B';
+    ctx.fillRect(-4, -66, 8, 132);
+    ctx.fillStyle = '#E0B84A';
+    ctx.fillRect(-6, -72, 12, 10);
+    ctx.fillRect(-6, 62, 12, 10);
+    ctx.restore();
+
+    // 头
+    const hx = 4;
+    const hy = -110;
+    ctx.fillStyle = '#C9A05A';
+    ctx.beginPath();
+    ctx.arc(hx, hy, 16, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(hx - 15, hy - 1, 6.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(hx + 15, hy - 1, 6.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#EBD3AC';
+    ctx.beginPath();
+    ctx.ellipse(hx + 3, hy + 3, 10.5, 11, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#241E17';
+    ctx.beginPath();
+    ctx.arc(hx + 1, hy - 2, 1.8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(hx + 8, hy - 2, 1.8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(192,57,43,0.75)';
+    ctx.beginPath();
+    ctx.moveTo(hx + 11, hy + 4);
+    ctx.lineTo(hx + 17, hy + 7);
+    ctx.lineTo(hx + 11, hy + 10);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = '#E0B84A';
+    ctx.lineWidth = 3.4;
+    ctx.beginPath();
+    ctx.arc(hx, hy - 2, 15.2, Math.PI * 0.92, Math.PI * 2.08);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function drawEnemy() {
+    const data = ENEMIES[battle.enemyKey];
+    if (!data) return;
+    const bob = Math.sin(performance.now() / 540) * 2.5;
+    const lunge = fx.enemyAttack > 0 ? easeOutCubic(1 - fx.enemyAttack / 0.4) * -30 : 0;
+    const hurt = fx.enemyHurt > 0;
+    ctx.save();
+    ctx.translate(PX(690) + lunge * (VIEW.w / 960), PY(430) - bob);
+    if (hurt) ctx.globalAlpha = 0.75;
+
+    ctx.fillStyle = 'rgba(22,19,16,0.3)';
+    ctx.beginPath();
+    ctx.ellipse(0, 2, 40, 10, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (battle.enemyKey === 'wolf') drawWolfEnemy(hurt);
+    else if (battle.enemyKey === 'bat') drawBatEnemy(hurt);
+    else if (battle.enemyKey === 'tiger') drawTigerEnemy(hurt);
+    else drawBossEnemy(hurt);
+
+    ctx.restore();
+  }
+
+  function drawWolfEnemy(hurt) {
+    const body = hurt ? '#F6EFE1' : '#6B665E';
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.ellipse(0, -34, 42, 20, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = body;
+    ctx.lineWidth = 8;
+    ctx.lineCap = 'round';
+    for (let i = 0; i < 4; i++) {
+      const lx = -28 + i * 18;
+      ctx.beginPath();
+      ctx.moveTo(lx, -20);
+      ctx.lineTo(lx - 2, 0);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.ellipse(38, -52, 18, 15, 0.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(28, -64);
+    ctx.lineTo(24, -84);
+    ctx.lineTo(38, -66);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(46, -64);
+    ctx.lineTo(52, -84);
+    ctx.lineTo(56, -62);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = body;
+    ctx.lineWidth = 9;
+    ctx.beginPath();
+    ctx.moveTo(-40, -44);
+    ctx.quadraticCurveTo(-66, -56, -60, -80);
+    ctx.stroke();
+    ctx.fillStyle = '#C0392B';
+    ctx.beginPath();
+    ctx.arc(42, -54, 2.6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawBatEnemy(hurt) {
+    const flap = Math.sin(performance.now() / 130);
+    const body = hurt ? '#F6EFE1' : '#6B4A72';
+    ctx.translate(0, -50);
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 18, 22, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(-14, -8);
+    ctx.quadraticCurveTo(-68, -44 - flap * 22, -82, 2);
+    ctx.quadraticCurveTo(-48, -4, -16, 12);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(14, -8);
+    ctx.quadraticCurveTo(68, -44 - flap * 22, 82, 2);
+    ctx.quadraticCurveTo(48, -4, 16, 12);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#C0392B';
+    ctx.beginPath();
+    ctx.arc(-5, -6, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(5, -6, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.moveTo(-16, -18);
+    ctx.lineTo(-22, -38);
+    ctx.lineTo(-6, -24);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(16, -18);
+    ctx.lineTo(22, -38);
+    ctx.lineTo(6, -24);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function drawTigerEnemy(hurt) {
+    const body = hurt ? '#F6EFE1' : '#B4672E';
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.ellipse(0, -50, 50, 28, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = body;
+    ctx.lineWidth = 10;
+    ctx.lineCap = 'round';
+    for (let i = 0; i < 4; i++) {
+      const lx = -34 + i * 23;
+      ctx.beginPath();
+      ctx.moveTo(lx, -30);
+      ctx.lineTo(lx, 0);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.ellipse(46, -76, 24, 19, 0.15, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(32, -90);
+    ctx.lineTo(28, -114);
+    ctx.lineTo(44, -94);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(52, -90);
+    ctx.lineTo(60, -114);
+    ctx.lineTo(66, -88);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = body;
+    ctx.lineWidth = 11;
+    ctx.beginPath();
+    ctx.moveTo(-48, -64);
+    ctx.quadraticCurveTo(-78, -78, -72, -104);
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(34,29,22,0.55)';
+    ctx.lineWidth = 4;
+    for (let i = -1; i <= 1; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * 18 - 4, -70);
+      ctx.lineTo(i * 18 + 4, -32);
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#E0B84A';
+    ctx.beginPath();
+    ctx.arc(48, -78, 3.4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawBossEnemy(hurt) {
+    const body = hurt ? '#FFF9EC' : '#C9A227';
+    const bob = Math.sin(performance.now() / 500) * 3;
+    ctx.translate(0, bob);
+
+    // 风圈
+    ctx.strokeStyle = 'rgba(224,184,74,0.4)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 66, 16, 0, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // 披风
+    ctx.fillStyle = 'rgba(140,42,42,0.9)';
+    ctx.beginPath();
+    ctx.moveTo(-14, -116);
+    ctx.quadraticCurveTo(-72, -74, -58, 0);
+    ctx.lineTo(16, 0);
+    ctx.closePath();
+    ctx.fill();
+
+    // 身体
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.moveTo(-34, 0);
+    ctx.quadraticCurveTo(-34, -82, -14, -120);
+    ctx.quadraticCurveTo(0, -140, 14, -120);
+    ctx.quadraticCurveTo(34, -82, 34, 0);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(34,29,22,0.4)';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+    ctx.fillStyle = '#8C2A2A';
+    ctx.fillRect(-28, -82, 56, 8);
+
+    // 头
+    const hy = -152;
+    ctx.fillStyle = '#E8C15A';
+    ctx.beginPath();
+    ctx.ellipse(2, hy, 22, 26, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(34,29,22,0.92)';
+    ctx.beginPath();
+    ctx.ellipse(4, hy + 3, 14, 18, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#C0392B';
+    ctx.beginPath();
+    ctx.arc(0, hy - 3, 3.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(10, hy - 3, 3.2, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#EDE7DA';
+    ctx.beginPath();
+    ctx.moveTo(-18, hy - 18);
+    ctx.lineTo(-38, hy - 52);
+    ctx.lineTo(-4, hy - 28);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(18, hy - 18);
+    ctx.lineTo(38, hy - 52);
+    ctx.lineTo(4, hy - 28);
+    ctx.closePath();
+    ctx.fill();
+
+    // 风杖
+    ctx.save();
+    ctx.translate(42, -70);
+    ctx.rotate(-0.24);
+    ctx.strokeStyle = '#8C2A2A';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(0, 44);
+    ctx.lineTo(0, -64);
+    ctx.stroke();
+    ctx.fillStyle = '#E0B84A';
+    ctx.beginPath();
+    ctx.arc(0, -74, 14, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(250,247,240,0.8)';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.arc(0, -74, 20, -1.2, 0.9);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawEffects(dt) {
+    for (const f of effects) {
+      f.t += dt;
+      const p = clamp(f.t / f.dur, 0, 1);
+      const alpha = 1 - p;
+      if (f.kind === 'spark') {
+        f.x += f.vx * dt;
+        f.y += f.vy * dt;
+        f.vy += 420 * dt;
+        ctx.fillStyle = 'rgba(' + f.color + ',' + (alpha * 0.9).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, 1.6 + (1 - p) * 2.4, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (f.kind === 'ring') {
+        const r = lerp(f.r0, f.r1, easeOutCubic(p));
+        ctx.strokeStyle = 'rgba(' + f.color + ',' + (alpha * 0.8).toFixed(3) + ')';
+        ctx.lineWidth = 2 + (1 - p) * 3;
+        ctx.beginPath();
+        ctx.ellipse(f.x, f.y, r, r * 0.6, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      } else if (f.kind === 'slash') {
+        ctx.save();
+        ctx.translate(f.x, f.y);
+        ctx.rotate(-1 + p * 2);
+        ctx.strokeStyle = 'rgba(' + f.color + ',' + (alpha * 0.85).toFixed(3) + ')';
+        ctx.lineWidth = 1 + (1 - p) * 5;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.arc(0, 0, f.r, -0.9, 0.9);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+    effects = effects.filter((f) => f.t < f.dur);
+
+    for (const f of floaters) {
+      f.t += dt;
+      f.y += f.vy * dt;
+      f.vy *= 0.94;
+      const p = clamp(f.t / f.dur, 0, 1);
+      ctx.globalAlpha = Math.max(0, 1 - p * p);
+      ctx.fillStyle = f.color;
+      ctx.font = '600 18px "Noto Serif SC", "Songti SC", serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(f.text, f.x, f.y);
+      ctx.globalAlpha = 1;
+    }
+    floaters = floaters.filter((f) => f.t < f.dur);
+  }
+
+  function render(dt) {
+    const s = Math.min(canvas.width / VIEW.w, canvas.height / VIEW.h);
+    const ox = (canvas.width - VIEW.w * s) / 2;
+    const oy = (canvas.height - VIEW.h * s) / 2;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.setTransform(s, 0, 0, s, ox, oy);
+    ctx.clearRect(0, 0, VIEW.w, VIEW.h);
+
+    drawBackground();
+
+    ctx.save();
+    const shx = fx.shake ? Math.sin(performance.now() / 24) * fx.shake : 0;
+    const shy = fx.shake ? Math.cos(performance.now() / 32) * fx.shake * 0.6 : 0;
+    ctx.translate(shx, shy);
+    drawEnemy();
+    drawPlayer();
+    drawEffects(dt);
+    ctx.restore();
+
+    if (fx.flash > 0.01) {
+      ctx.fillStyle = 'rgba(192,57,43,' + (fx.flash * 0.4).toFixed(3) + ')';
+      ctx.fillRect(0, 0, VIEW.w, VIEW.h);
+    }
+  }
+
+  // ===== 主循环 =====
+  let lastFrame = performance.now();
+  function tickFx(dt) {
+    fx.playerAttack = Math.max(0, fx.playerAttack - dt);
+    fx.enemyAttack = Math.max(0, fx.enemyAttack - dt);
+    fx.enemyHurt = Math.max(0, fx.enemyHurt - dt);
+    fx.playerHurt = Math.max(0, fx.playerHurt - dt);
+    fx.flash = Math.max(0, fx.flash - dt * 1.8);
+    fx.shake *= Math.max(0, 1 - 10 * dt);
+    if (fx.shake < 0.15) fx.shake = 0;
+  }
+
+  function frame(now) {
+    const dt = Math.min(0.05, (now - lastFrame) / 1000);
+    lastFrame = now;
+    tickFx(dt);
+    render(dt);
+    requestAnimationFrame(frame);
+  }
+
+  // ===== 输入 =====
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if ([' ', 'e', 'escape'].includes(k) && game.phase === 'playing') e.preventDefault();
+    if (e.repeat) return;
+    if (game.phase === 'playing') {
+      if (k === ' ' || k === 'e') endTurn();
+      if (/^[1-9]$/.test(k)) {
+        const idx = Number(k) - 1;
+        if (battle.hand[idx]) playCard(battle.hand[idx].uid);
+      }
+    }
+  });
+
+  // ===== 按钮 =====
+  btnStart.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnRetry.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnAgain.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnRestart.addEventListener('click', () => { AudioKit.click(); startRun(); });
+  btnEndTurn.addEventListener('click', () => { AudioKit.click(); endTurn(); });
+  btnRest.addEventListener('click', () => { AudioKit.click(); restContinue(); });
+  btnSkipReward.addEventListener('click', () => {
+    if (game.phase !== 'reward') return;
+    AudioKit.click();
+    run.hp = Math.min(run.maxHp, run.hp + 8);
+    afterReward();
+  });
+  btnSound.addEventListener('click', () => {
+    AudioKit.toggle();
+    syncSoundBtn();
+  });
+  btnFull.addEventListener('click', () => {
+    AudioKit.click();
+    if (!document.fullscreenElement) {
+      if (stage.requestFullscreen) stage.requestFullscreen().catch(() => {});
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
+  });
+  document.addEventListener('fullscreenchange', () => {
+    btnFull.textContent = document.fullscreenElement ? '退出全屏' : '全屏';
+    resize();
+  });
+
+  // ===== 启动 =====
+  syncView();
+  run.deck = STARTER.slice();
+  battle.drawPile = [];
+  battle.enemyKey = 'wolf';
+  updateHud();
+  updateBestLabels();
+  syncSoundBtn();
+  showScreen('start');
+  stage.dataset.state = 'menu';
+  window.addEventListener('resize', syncView);
+  window.addEventListener('orientationchange', syncView);
+
+  requestAnimationFrame(frame);
+})();
+</script>
+<style id="qaMobileFix">
+:root{
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-right:env(safe-area-inset-right,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-left:env(safe-area-inset-left,0px);
+}
+body{
+  padding-top:calc(clamp(10px,2.2vw,26px) + var(--safe-top));
+  padding-bottom:calc(clamp(10px,2.2vw,26px) + var(--safe-bottom));
+}
+#qaZoomBtn{
+  display:none;position:fixed;right:calc(8px + var(--safe-right));top:50%;
+  transform:translateY(-50%);z-index:9996;width:48px;height:48px;padding:0;
+  align-items:center;justify-content:center;border-radius:50%;
+  border:1px solid rgba(224,184,74,.5);background:rgba(22,19,16,.74);
+  color:#F4DFA6;font-family:inherit;font-size:12px;line-height:1.1;letter-spacing:.04em;
+  text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;
+  opacity:.55;transition:opacity .15s ease,background .15s ease
+}
+#qaZoomBtn:hover,#qaZoomBtn:focus-visible,#qaZoomBtn:active{opacity:1}
+#qaZoombar{
+  display:none;position:fixed;left:50%;bottom:calc(12px + var(--safe-bottom));
+  transform:translateX(-50%);z-index:10002;gap:6px;align-items:center;justify-content:center;
+  flex-wrap:wrap;padding:6px 8px;border-radius:999px;
+  max-width:calc(100vw - var(--safe-left) - var(--safe-right) - 16px);
+  background:rgba(18,16,13,.92);border:1px solid rgba(242,235,220,.25);
+  color:#F2EBDC;font-family:inherit
+}
+#qaZoombar button{
+  font-family:inherit;font-size:11.5px;letter-spacing:.05em;color:#F2EBDC;
+  background:rgba(242,235,220,.1);border:1px solid rgba(242,235,220,.25);
+  border-radius:999px;padding:7px 10px;min-height:44px;cursor:pointer;white-space:nowrap;line-height:1.2
+}
+#qaZoombar button:hover{background:rgba(242,235,220,.2)}
+body.qa-zoom{overflow:hidden;background:#080b0b!important}
+body.qa-zoom::before{display:none!important}
+body.qa-zoom .topbar,
+body.qa-zoom .legend,
+body.qa-zoom .hud,
+body.qa-zoom .side,
+body.qa-zoom .touch{visibility:hidden!important;opacity:0!important}
+body.qa-zoom .stage{background:#080b0b!important}
+body.qa-zoom canvas{opacity:.12!important}
+body.qa-zoom .board{
+  position:fixed!important;left:50%!important;top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  width:min(98vw,calc(92vh * var(--qa-ratio,1)))!important;
+  height:auto!important;aspect-ratio:var(--qa-ratio,1)!important;
+  background-color:rgba(10,18,18,.97)!important;
+  background-image:none!important;
+  z-index:10000!important;box-shadow:0 24px 70px rgba(0,0,0,.55)
+}
+body.qa-zoom[data-qa-kind="border"] .board{
+  grid-template-columns:0.15fr repeat(var(--qa-inner-cols,8),1fr) 0.15fr!important;
+  grid-template-rows:0.15fr repeat(var(--qa-inner-rows,6),1fr) 0.15fr!important
+}
+body.qa-zoom .path-svg{position:fixed!important;z-index:10001!important}
+body.qa-zoom #qaZoomBtn{display:none!important}
+body.qa-zoom #qaZoombar{display:flex}
+body.qa-zoom .screen:not([hidden]){z-index:10005!important}
+body.qa-zoom .toast{z-index:10006!important}
+#qaOrientTip{
+  position:fixed;top:calc(6px + var(--safe-top));left:50%;transform:translateX(-50%);z-index:9995;
+  padding:7px 14px;border-radius:999px;background:rgba(22,19,16,.78);
+  border:1px solid rgba(224,184,74,.45);color:#F4DFA6;font-family:inherit;
+  font-size:12px;letter-spacing:.08em;pointer-events:none;
+  opacity:1;transition:opacity .4s ease
+}
+#qaOrientTip.hide{opacity:0}
+.qa-rotate-ui #btnFull{display:none!important}
+#qaTouchSettings{
+  position:fixed;left:50%;bottom:calc(8px + var(--safe-bottom));transform:translateX(-50%);
+  z-index:10003;display:none;gap:6px;align-items:center;justify-content:center;
+  padding:4px 6px;border-radius:999px;background:rgba(18,16,13,.92);
+  border:1px solid rgba(242,235,220,.25);flex-wrap:wrap;
+  max-width:calc(100vw - var(--safe-left) - var(--safe-right) - 16px)
+}
+#qaTouchSettings.show{display:flex}
+#qaTouchSettings button{
+  min-height:40px;padding:6px 12px;border-radius:999px;border:1px solid rgba(242,235,220,.28);
+  background:rgba(242,235,220,.1);color:#F2EBDC;font-family:inherit;font-size:12px;
+  letter-spacing:.06em;cursor:pointer;touch-action:manipulation
+}
+#qaTouchSettings button:hover{background:rgba(242,235,220,.2)}
+.tbtn{opacity:var(--qa-btn-opacity,1);width:var(--qa-tbtn,56px);height:var(--qa-tbtn,56px)}
+.tbtn.wide{width:var(--qa-tbtn-wide,64px)}
+body[data-qa-btn-size="s"]{--qa-tbtn:var(--qa-btn-s,48px);--qa-tbtn-wide:var(--qa-btn-wide-s,56px)}
+body[data-qa-btn-size="m"]{--qa-tbtn:var(--qa-btn-m,56px);--qa-tbtn-wide:var(--qa-btn-wide-m,64px)}
+body[data-qa-btn-size="l"]{--qa-tbtn:var(--qa-btn-l,64px);--qa-tbtn-wide:var(--qa-btn-wide-l,72px)}
+.touch{flex-wrap:wrap}
+.touch-group{flex-wrap:wrap;max-width:100%}
+#qaFitTip{
+  position:fixed;left:50%;bottom:calc(64px + var(--safe-bottom));transform:translateX(-50%);
+  z-index:10004;padding:6px 12px;border-radius:999px;background:rgba(22,19,16,.88);
+  border:1px solid rgba(224,184,74,.45);color:#F4DFA6;font-family:inherit;
+  font-size:12px;letter-spacing:.06em;pointer-events:none;
+  opacity:0;transition:opacity .2s ease
+}
+#qaFitTip.show{opacity:1}
+@media (pointer: coarse) and (max-width: 560px){
+  .touch-hint{display:none!important}
+}
+@media (pointer: coarse) and (orientation: portrait){
+  body[data-qa-deck-wrap="1"] .stage{
+    max-width:min(1120px,calc((100dvh - var(--qa-stage-chrome,196px) - var(--qa-deck-extra,0px)) * 16 / 9))!important;
+  }
+  body[data-qa-deck-wrap="1"] .touch{
+    max-width:min(1120px,calc((100dvh - var(--qa-stage-chrome,196px) - var(--qa-deck-extra,0px)) * 16 / 9))!important;
+  }
+}
+@media (pointer: coarse){
+  .btn.small{min-height:40px}
+  .btn.ghost{min-height:40px}
+  .hud-btn,.icon-btn{min-height:40px;min-width:40px}
+  .box-btn{min-height:40px}
+  .btn.primary,.endturn{min-height:44px}
+  .plot .action{position:relative}
+  .plot .action::after{content:"";position:absolute;left:0;right:0;top:-6px;bottom:-6px}
+  button,.cell,.plot,.upg,.box-btn{touch-action:manipulation}
+  button{-webkit-tap-highlight-color:transparent}
+}
+@media (orientation:landscape) and (max-height:540px){
+  body{
+    padding:calc(4px + var(--safe-top)) calc(4px + var(--safe-right)) calc(4px + var(--safe-bottom)) calc(4px + var(--safe-left))!important;
+    gap:4px!important;justify-content:flex-start!important
+  }
+  .stage{
+    max-width:min(calc(100vw - 8px - var(--safe-left) - var(--safe-right)),calc((100dvh - 116px) * 16 / 9))!important;
+    width:100%!important;margin:0 auto!important
+  }
+  .legend{display:none!important}
+}
+@media (orientation:landscape) and (max-height:540px) and (min-width:820px){
+  .touch{
+    position:fixed!important;right:calc(8px + var(--safe-right))!important;top:50%!important;
+    transform:translateY(-50%)!important;width:auto!important;max-width:150px!important;
+    padding:0!important;margin:0!important;z-index:40!important;
+    background:transparent!important;border:0!important;
+    flex-direction:column!important;align-items:flex-end!important;gap:6px!important
+  }
+  .touch-hint{display:none!important}
+  .touch-group{
+    display:flex!important;flex-wrap:wrap!important;justify-content:flex-end!important;
+    gap:8px!important;max-width:140px
+  }
+}
+@media (orientation:landscape) and (max-height:540px) and (max-width:819px){
+  .stage{max-width:min(calc(100vw - 8px - var(--safe-left) - var(--safe-right)),calc((100dvh - 160px) * 16 / 9))!important}
+}
+</style>
+<script id="qaMobileFixScript">
+(function(){
+  'use strict';
+  var mobile = window.matchMedia('(max-width:760px)');
+  var portrait = window.matchMedia('(orientation:portrait)');
+  if (mobile.matches && portrait.matches && document.body.dataset.qaPortraitActive !== '1') {
+    var tip = document.createElement('div');
+    tip.id = 'qaOrientTip';
+    tip.textContent = '建议横屏游玩 · 视野更大';
+    document.body.appendChild(tip);
+    setTimeout(function(){ tip.classList.add('hide'); }, 4200);
+    setTimeout(function(){ if (tip.parentNode) tip.parentNode.removeChild(tip); }, 5000);
+  }
+  var touchUI = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 820;
+  var topActions = document.querySelector('.top-actions') || document.querySelector('.topbar');
+  var rotateBtn = null;
+  if (touchUI && topActions) {
+    rotateBtn = document.createElement('button');
+    rotateBtn.id = 'qaRotateBtn';
+    rotateBtn.type = 'button';
+    rotateBtn.className = 'btn small';
+    rotateBtn.textContent = '横屏';
+    rotateBtn.setAttribute('aria-label', '尝试横屏全屏');
+    rotateBtn.addEventListener('click', async function(){
+      try {
+        if (document.fullscreenElement) {
+          if (document.exitFullscreen) await document.exitFullscreen();
+          return;
+        }
+        if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+      } catch (err) {}
+      try {
+        if (screen.orientation && screen.orientation.lock) await screen.orientation.lock('landscape');
+      } catch (err) {}
+    });
+    topActions.insertBefore(rotateBtn, topActions.firstChild);
+    document.body.classList.add('qa-rotate-ui');
+    document.addEventListener('fullscreenchange', function(){
+      syncRotateBtn();
+    });
+  }
+  function syncRotateBtn() {
+    if (!rotateBtn) return;
+    rotateBtn.style.display = 'inline-flex';
+    rotateBtn.textContent = document.fullscreenElement ? '退出' : (window.innerWidth > window.innerHeight ? '全屏' : '横屏');
+  }
+  syncRotateBtn();
+  window.addEventListener('resize', syncRotateBtn);
+
+  var hasTouchDeck = !!document.querySelector('.tbtn');
+  if (touchUI && hasTouchDeck) {
+    var settingsBar = document.createElement('div');
+    settingsBar.id = 'qaTouchSettings';
+    document.body.appendChild(settingsBar);
+    var opKey = 'xyj_touch_opacity_v1';
+    var op = 100;
+    try { op = Number(localStorage.getItem(opKey)) || 100; } catch (err) {}
+    if ([70, 85, 100].indexOf(op) < 0) op = 100;
+    var opBtn = document.createElement('button');
+    opBtn.id = 'qaOpacityBtn';
+    opBtn.type = 'button';
+    opBtn.setAttribute('aria-label', '切换触控按钮透明度');
+    settingsBar.appendChild(opBtn);
+    function applyOpacity() {
+      document.documentElement.style.setProperty('--qa-btn-opacity', (op / 100).toFixed(2));
+      opBtn.textContent = '按钮 ' + op + '%';
+    }
+    opBtn.addEventListener('click', function(){
+      op = op === 100 ? 85 : op === 85 ? 70 : 100;
+      try { localStorage.setItem(opKey, String(op)); } catch (err) {}
+      applyOpacity();
+    });
+    applyOpacity();
+
+    var deckEl = document.querySelector('.touch');
+    var sizeKey = 'xyj_touch_size_v1';
+    var sizePref = 'm';
+    try {
+      var storedSize = localStorage.getItem(sizeKey);
+      if (['s', 'm', 'l'].indexOf(storedSize) >= 0) sizePref = storedSize;
+    } catch (err) {}
+    var sizeBtn = document.createElement('button');
+    sizeBtn.id = 'qaSizeBtn';
+    sizeBtn.type = 'button';
+    sizeBtn.setAttribute('aria-label', '切换触控按钮大小');
+    settingsBar.appendChild(sizeBtn);
+
+    function sizeLabel(v) { return v === 's' ? '小' : v === 'l' ? '大' : '中'; }
+    function syncSizeLabel() {
+      var v = document.body.dataset.qaBtnSize || sizePref;
+      sizeBtn.textContent = '按钮 ' + sizeLabel(v);
+    }
+    function measureDeck() {
+      if (!deckEl) return;
+      var base = parseFloat(getComputedStyle(document.body).getPropertyValue('--qa-deck-base')) || 70;
+      var extra = Math.max(0, deckEl.offsetHeight - base);
+      document.body.dataset.qaDeckWrap = extra > 1 ? '1' : '0';
+      document.body.style.setProperty('--qa-deck-extra', extra > 0 ? extra.toFixed(1) + 'px' : '0px');
+    }
+    var fitTip = null;
+    function showFitTip(text) {
+      if (!fitTip) {
+        fitTip = document.createElement('div');
+        fitTip.id = 'qaFitTip';
+        document.body.appendChild(fitTip);
+      }
+      fitTip.textContent = text;
+      fitTip.classList.add('show');
+      clearTimeout(fitTip._hideTimer);
+      fitTip._hideTimer = setTimeout(function(){ fitTip.classList.remove('show'); }, 1800);
+    }
+    function fitSize() {
+      if (!deckEl || deckEl.offsetParent === null) return;
+      var target = sizePref;
+      if (deckEl.scrollWidth > deckEl.clientWidth + 1) {
+        if (target === 'l') target = 'm';
+        document.body.dataset.qaBtnSize = target;
+        measureDeck();
+        if (deckEl.scrollWidth > deckEl.clientWidth + 1) target = 's';
+      }
+      document.body.dataset.qaBtnSize = target;
+      measureDeck();
+      if (target !== sizePref) {
+        showFitTip('屏幕较窄，已临时使用' + sizeLabel(target) + '号按钮');
+      }
+      syncSizeLabel();
+    }
+    function applySize(next, save) {
+      if (next) sizePref = next;
+      document.body.dataset.qaBtnSize = sizePref;
+      if (save) { try { localStorage.setItem(sizeKey, sizePref); } catch (err) {} }
+      syncSizeLabel();
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    }
+    sizeBtn.addEventListener('click', function(){
+      sizePref = sizePref === 's' ? 'm' : sizePref === 'm' ? 'l' : 's';
+      applySize(null, true);
+    });
+    applySize(null, false);
+    window.addEventListener('resize', function(){
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    });
+    window.addEventListener('orientationchange', function(){
+      requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+    });
+    if (window.MutationObserver && deckEl) {
+      new MutationObserver(function(){
+        requestAnimationFrame(function(){ measureDeck(); fitSize(); });
+      }).observe(deckEl, { attributes: true, attributeFilter: ['class'] });
+    }
+    var screens = document.querySelectorAll('.screen');
+    function syncSettingsBar() {
+      var open = false;
+      for (var i = 0; i < screens.length; i++) {
+        if (screens[i].hidden) continue;
+        if (getComputedStyle(screens[i]).display !== 'none') open = true;
+      }
+      settingsBar.classList.toggle('show', open);
+    }
+    if (window.MutationObserver) {
+      for (var si = 0; si < screens.length; si++) {
+        new MutationObserver(syncSettingsBar).observe(screens[si], {
+          attributes: true, attributeFilter: ['hidden', 'class', 'style']
+        });
+      }
+    }
+    syncSettingsBar();
+  }
+
+  var board = document.getElementById('board');
+  if (!board) return;
+  var stage = document.querySelector('.stage');
+  var btn = document.createElement('button');
+  btn.id = 'qaZoomBtn';
+  btn.type = 'button';
+  btn.textContent = '放大';
+  btn.setAttribute('aria-label', '放大棋盘');
+  document.body.appendChild(btn);
+  var bar = document.createElement('div');
+  bar.id = 'qaZoombar';
+  var undo = document.getElementById('btnUndo');
+  var reset = document.getElementById('btnReset');
+  bar.innerHTML = '<button type="button" data-qa="exit">退出放大</button>' +
+    (undo ? '<button type="button" data-qa="undo">撤回</button>' : '') +
+    (reset ? '<button type="button" data-qa="reset">重来</button>' : '');
+  document.body.appendChild(bar);
+
+  function syncBtn(){
+    var state = stage ? stage.dataset.state : '';
+    var active = mobile.matches && ['playing','idle','paused'].indexOf(state) >= 0;
+    btn.style.display = active ? 'inline-flex' : 'none';
+  }
+  function openZoom(){
+    var r = board.getBoundingClientRect();
+    var ratio = r.height ? r.width / r.height : 1;
+    document.body.style.setProperty('--qa-ratio', String(ratio));
+    var cs = getComputedStyle(board);
+    var cols = cs.gridTemplateColumns ? cs.gridTemplateColumns.split(' ').length : 0;
+    var rows = cs.gridTemplateRows ? cs.gridTemplateRows.split(' ').length : 0;
+    if ((cols === 11 && rows === 9) || (cols === 10 && rows >= 6 && rows <= 8)) {
+      document.body.dataset.qaKind = 'border';
+      document.body.style.setProperty('--qa-inner-cols', String(cols - 2));
+      document.body.style.setProperty('--qa-inner-rows', String(rows - 2));
+    } else {
+      delete document.body.dataset.qaKind;
+    }
+    document.body.classList.add('qa-zoom');
+  }
+  function closeZoom(){
+    document.body.classList.remove('qa-zoom');
+    syncBtn();
+  }
+  btn.addEventListener('click', function(){
+    if (document.body.classList.contains('qa-zoom')) closeZoom();
+    else openZoom();
+  });
+  bar.addEventListener('click', function(e){
+    var act = e.target.getAttribute('data-qa');
+    if (!act) return;
+    if (act === 'exit') closeZoom();
+    if (act === 'undo' && undo) undo.click();
+    if (act === 'reset' && reset) reset.click();
+  });
+  if (window.MutationObserver && stage) {
+    new MutationObserver(syncBtn).observe(stage, { attributes: true, attributeFilter: ['data-state'] });
+  }
+  window.addEventListener('resize', function(){
+    if (document.body.classList.contains('qa-zoom') && !mobile.matches) closeZoom();
+    syncBtn();
+  });
+  syncBtn();
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
