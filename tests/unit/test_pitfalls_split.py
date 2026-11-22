@@ -50,8 +50,25 @@ def materialize(tmp_path, inputs):
     return str(repo)
 
 
-def bump_declared(text, old, new):
-    """把段头声明数从 old 改成 new（兼容 `<!--stats:xxx-->` 标记形态）。"""
+def declared_count(text):
+    """取主题文件段头声明数（**当前值**·不硬编码）。"""
+    m = re.search(r"（(\d+)(?:<!--stats:[a-z_0-9]+-->)? 条）", text)
+    assert m, "段头声明未命中：无法解析当前声明数"
+    return int(m.group(1))
+
+
+def bump_declared(text, old=None, new=None):
+    """把段头声明数改成新值（兼容 `<!--stats:xxx-->` 标记形态）。
+
+    W1299 根治：原实现要求调用方**硬编码**当前声明数（如 90）⇒ 数据一变
+    （E-283 进正本⇒90→91）既有负例单测即整体失效（5 例红）⇒ 改为**自动取当前值**：
+    old 缺省 ⇒ 从段头解析当前声明数；new 缺省 ⇒ old + 1。
+    参数名与个数不变（old/new 增默认值）⇒ 不构成破坏性签名变更。
+    """
+    if old is None:
+        old = declared_count(text)
+    if new is None:
+        new = old + 1
     pat = re.compile(r"（%d(?:<!--stats:[a-z_0-9]+-->)? 条）" % old)
     out, cnt = pat.subn("（%d 条）" % new, text, count=1)
     assert cnt == 1, "段头声明未命中：%s" % old
@@ -97,10 +114,11 @@ def test_c2_declared_count_mismatch_is_red():
     """负例：主题文件段头声明数与实算不符 ⇒ 判红。"""
     inputs = real_inputs()
     item = inputs["topics"]["CSS / 视觉渲染"]
-    item["text"] = bump_declared(item["text"], 90, 91)
+    cur = declared_count(item["text"])
+    item["text"] = bump_declared(item["text"])
     result = cps.evaluate(inputs)
     assert "C2" in checks_of(result)
-    assert any("声明 91 条" in m for m in messages_of(result, "C2"))
+    assert any("声明 %d 条" % (cur + 1) in m for m in messages_of(result, "C2"))
 
 
 def test_c3_shell_carrying_entry_line_is_red():
@@ -115,8 +133,11 @@ def test_c3_shell_carrying_entry_line_is_red():
 def test_c3_shell_declared_count_mismatch_is_red():
     """负例：索引壳表内声明条数 ≠ 六文件聚合实算 ⇒ 判红。"""
     inputs = real_inputs()
-    inputs["shell"]["text"] = inputs["shell"]["text"].replace(
-        "| 90<!--stats:pitfalls_css--> |", "| 91<!--stats:pitfalls_css--> |", 1)
+    shell_txt = inputs["shell"]["text"]
+    m = re.search(r"\| (\d+)<!--stats:pitfalls_css--> \|", shell_txt)
+    assert m, "壳内 CSS 声明应带 stats 标记"
+    inputs["shell"]["text"] = shell_txt.replace(
+        m.group(0), "| %d<!--stats:pitfalls_css--> |" % (int(m.group(1)) + 1), 1)
     result = cps.evaluate(inputs)
     assert "C3" in checks_of(result)
     assert any("聚合实算" in m for m in messages_of(result, "C3"))
@@ -126,13 +147,16 @@ def test_c4_reverse_table_missing_eid_is_red():
     """负例：反查表漏掉一个本体 E 号 ⇒ 判红。"""
     inputs = real_inputs()
     shell = inputs["shell"]["text"]
-    victim = None
-    for line in shell.splitlines():
-        if line.startswith("`E-") and "`" in line:
-            victim = line
-            break
-    assert victim, "反查表应含反引号 E 号行"
-    inputs["shell"]["text"] = shell.replace(victim, "", 1)
+    # W1299：反查表按「每行 10 个 E 号」排布 ⇒ 删整行会连带删多个号；须挑一个
+    #   **只出现一次**的本体 E 号（否则其余号在别的主题小节仍有 ⇒ 仍被覆盖 ⇒ 不判遗漏）。
+    counts = {}
+    for mm in re.finditer(r"E-\d+", shell):
+        counts[mm.group(0)] = counts.get(mm.group(0), 0) + 1
+    victim_eid = next((e for e, c in sorted(counts.items()) if c == 1), None)
+    assert victim_eid, "应能找到只出现一次的本体 E 号"
+    victim = next((ln for ln in shell.splitlines() if victim_eid in ln), None)
+    assert victim, "反查表应含该 E 号所在行"
+    inputs["shell"]["text"] = shell.replace(victim + "\n", "", 1)
     result = cps.evaluate(inputs)
     assert "C4" in checks_of(result)
     assert any("漏掉本体 E 号" in m for m in messages_of(result, "C4"))
@@ -179,7 +203,7 @@ def test_c6_duplicate_eid_is_red():
             break
     assert dup, "应能找到一条可复制的条目"
     item["text"] = item["text"].replace(dup, dup + "\n" + dup, 1)
-    item["text"] = bump_declared(item["text"], 90, 91)
+    item["text"] = bump_declared(item["text"])
     result = cps.evaluate(inputs)
     assert "C6" in checks_of(result)
     assert any("本体 E 号重复" in m for m in messages_of(result, "C6"))
@@ -223,9 +247,54 @@ def test_cli_exit_code_one_on_broken_repo(tmp_path):
     with open(topic, encoding="utf-8") as f:
         text = f.read()
     with open(topic, "w", encoding="utf-8", newline="\n") as f:
-        f.write(bump_declared(text, 90, 77))
+        f.write(bump_declared(text, None, 77))
     proc = subprocess.run(
         [sys.executable, SCRIPT_REL, "--root", repo],
         cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
     assert proc.returncode == 1, proc.stdout + proc.stderr
     assert "FAIL" in proc.stdout
+
+
+def test_rx_entry_multi_recognizes_parallel_batch_anchor():
+    """B 类回归锁（W1299）：并列多批次锚须被镜像侧扩展口径识别。
+
+    条目锚形态「（W1284/W1285 实证·E-NN·…」（实测 E-291）⇒ 公共口径 RX_ENTRY 只认单批次
+    ⇒ 漏判 ⇒ 归档有段却被判「孤儿段」。⇒ 镜像侧扩展口径 RX_ENTRY_MULTI 须识别，
+    且取**首个**批次号（与本体口径同序）。
+    """
+    line = "- **某条目**（W1284/W1285 实证·E-291·跨项目通用）：正文"
+    assert cps.RX_ENTRY.match(line) is None, "公共口径若已认并列锚·本例失去回归意义"
+    m = cps.RX_ENTRY_MULTI.match(line)
+    assert m is not None, "镜像侧扩展口径须识别并列多批次锚"
+    assert m.group(1) == "W1284", m.group(1)
+    assert m.group(2) == "E-291", m.group(2)
+
+
+def test_c5_non_pointer_entry_segment_is_not_orphan():
+    """A 类回归锁（W1299）：正本自带完整叙事（非指针型）的条目 ⇒ 其归档段不得被判「孤儿段」。
+
+    原口径只在**指针型**条目分支把 E 号计入 referenced ⇒ 正本完整叙事型条目的归档段
+    被误判成「无人指向的孤儿段」（实测 11 段误报）。⇒ 孤儿语义应为「正本完全无对应条目」。
+    """
+    inputs = real_inputs()
+    item = inputs["topics"]["CSS / 视觉渲染"]
+    eid = "E-9001"
+    line = "- **合成条目：判据层自带完整叙事**（W9999 实证·%s·跨项目通用）：正文" % eid
+    item["text"] = item["text"] + "\n" + line
+    seg = "\n#### %s（合成）\n\n%s\n" % (eid, line)
+    inputs["archive"]["text"] = (inputs["archive"]["text"] or "") + seg
+    result = cps.evaluate(inputs)
+    assert eid not in result["facts"]["C5"]["orphan_segments"], (
+        "正本存在该 E 号条目却被判孤儿段：%s" % (result["facts"]["C5"]["orphan_segments"],))
+
+
+def test_e283_canonical_entry_exists():
+    """C 类回归锁（W1299）：E-283 判据层条目须存在（归档有段·正本不得缺）。"""
+    inputs = real_inputs()
+    eids = set()
+    for _name, item in inputs["topics"].items():
+        for line in (item["text"] or "").splitlines():
+            m = cps.RX_ENTRY.match(line)
+            if m:
+                eids.add(cps.norm_eid(m.group(2)))
+    assert "E-283" in eids, "E-283 判据层条目缺失（归档有段·正本须补齐）"

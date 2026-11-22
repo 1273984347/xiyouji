@@ -1,3 +1,15 @@
+### W1299（2026-11-22）：L-04① 归档孤儿段清偿（13→0·三类根因分别治本·回归锁+3·负例去硬编码）
+
+> **来源**：用户 2026-11-22 指令「然后呢」⇒ 在 W1298 收官后按《遗留总账》继续推进剩余项。
+>
+> - **执行**：把「归档层 13 个孤儿段」按**三类根因**分别治本——**A 口径误报 11 段**（正本自带完整叙事但非指针型 ⇒ C5 的 referenced 只记指针型 ⇒ 判成「无人指向的孤儿段」）⇒ referenced 口径改为「正本存在该 E 号条目即算」；**B 多批次锚 1 段**（E-291 锚为「W1284/W1285」）⇒ 镜像侧新增扩展正则 RX_ENTRY_MULTI（取首个批次号·**公共 RX_ENTRY 不动**·连锁面隔离）；**C 真孤儿 1 段**（E-283 正本确实无条目·仅被 E-288 反向引用）⇒ 从归档段**逐字**迁入正本 css-visual.md；⇒ 孤儿段 **13 → 0**；连带同步正本段头声明 / 索引壳声明 / 反查表（每行 10 个）/ stats 计数链；新增 3 条回归锁；既有 5 处负例硬编码「当前条数」去化（bump_declared 自动取当前值）。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md, .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T132-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, docs/agent/pitfalls-topics/cascade-changelog.md, docs/agent/pitfalls-topics/css-visual.md, docs/agent/pitfalls-topics/data-trust.md, docs/agent/pitfalls-topics/flow-collab.md, docs/agent/pitfalls-topics/git-concurrency.md, docs/agent/pitfalls-topics/js-csp-runtime.md, docs/agent/pitfalls.md, pitfalls.md, pytest.ini, scripts/check_pitfalls_split.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1299.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1299_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/rss.xml, site/sitemap.xml, tests/unit/test_pitfalls_split.py
+>
+> - **验证**：坑表六主题判据 0 FAIL（C2/C3 421/421·C4 遗漏 0 多余 0·C5 孤儿 0·C6 275/275 重号 0）· test_pitfalls_split.py 15 passed（原 12 + 新 3）· 两面下界仍 W1253 ✓。
+>
+> - **状态**：**L-04① 全闭合**（4/4）；**L-07 新登记**（公共 RX_ENTRY 对多批次锚漏计 ⇒ 坑位总数少算·改公共口径连带反查表/stats/AGENTS 计数链·单独批）⇒ 未清偿仍 2 项（L-02 / L-07）。
+
 ### W1298（2026-11-22）：清零批续: L-03 台账hash自动回填 + L-04② E-185正文补齐 + L-05 verify断言源普查
 
 > - **来源**：用户 2026-11-22 指令「核验 W1297 CI 终态，并按遗留总账一次完成剩余 L-02～L-06」⇒ 立项 W1298（清零批续）。
@@ -521,7 +533,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1298），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1299），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

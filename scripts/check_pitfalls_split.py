@@ -40,6 +40,13 @@ if os.path.join(ROOT, "scripts") not in sys.path:
 # ---- 口径引用（单一事实源·引用不复制）-------------------------------------
 from check_pitfall_id_unique import RX_ENTRY  # noqa: E402  本体 E 号形态
 
+# W1299（L-04①·B 类·多批次锚）：本体口径 `RX_ENTRY` 只认**单批次**锚（`（W#### 实证·E-NN`），
+#   而条目存在**并列多批次锚**形态（`（W1284/W1285 实证·E-291·…`·实测 E-291）⇒ 该形态漏判
+#   ⇒ 归档有段却被判「孤儿段」。⇒ 镜像配对侧用扩展正则（取**首个**批次号·与本体口径同序）。
+#   **不动公共 RX_ENTRY**：本体口径变更会连带影响坑表 E 号计数 / 反查表对账 / stats 坑位数
+#   （连锁面大·本批只治镜像侧的孤儿判定）⇒ 同族缺陷（本体口径对多批次锚漏计）留账于遗留总账。
+RX_ENTRY_MULTI = re.compile(r"^- \*\*.*?（(W\d+)(?:[/／]W\d+)* 实证·(E-\d+)(?=[·）])")
+
 try:
     from check_doc_sync import PITFALL_THEME_KEYS  # noqa: E402  主题名 → stats 键
 except Exception as _e:  # pragma: no cover - fail-closed
@@ -353,16 +360,20 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
         if text is None:
             continue
         for line in entry_lines(strip_stat_marks(text)):
-            m = RX_ENTRY.match(line)
+            m = RX_ENTRY_MULTI.match(line)
             if not m:
                 continue
             eid = norm_eid(m.group(2))
             title = entry_title(line)
             if line in archive:
                 c5["verbatim_hits"] += 1
+            # W1299（L-04①·A 类口径修正）：`referenced` 口径改为「正本存在该 E 号条目即算」——
+            #   原口径只在**指针型**条目分支里 add ⇒ 正本自带完整叙事的条目被判成「归档段无人指向」
+            #   ⇒ 实测 11 段误报（E-185 / E-288~E-290 / E-292~E-297 / E-299）。
+            #   孤儿段的正确语义＝「归档有段而**正本完全无对应条目**」⇒ 无条件记入。
+            referenced.add(eid)
             if RE_POINTER.search(line):
                 c5["pointer"] += 1
-                referenced.add(eid)
                 seg = segs.get(eid)
                 if not seg:
                     if eid not in exempt:

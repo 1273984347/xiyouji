@@ -4,13 +4,13 @@
 > **何时读**：门禁红 / 同类缺陷第二次出现 / 批量改动前 / 排查静默失效。读完你应该能避开全部已知坑族。
 > **正本位置**：六主题判据层正本在 `docs/agent/pitfalls-topics/`；叙事全文在 `archive/docs/pitfalls-detail-ARCHIVE.md`（`#### E-NN` 锚·**只追加不修改**）。
 > **检索**：`grep -rn "E-123" docs/agent/pitfalls-topics/ archive/docs/pitfalls-detail-ARCHIVE.md`
-> **计数**：总 420<!--stats:pitfalls_total--> 条（六主题分项见下表）——分项标记随 `stats.py` 自动跟随实算。
+> **计数**：总 421<!--stats:pitfalls_total--> 条（六主题分项见下表）——分项标记随 `stats.py` 自动跟随实算。
 
 ## 六主题正本（判据层）
 
 | 主题 | 正本文件 | 条数 | 何时读 |
 |---|---|---|---|
-| CSS / 视觉渲染 | `docs/agent/pitfalls-topics/css-visual.md` | 90<!--stats:pitfalls_css--> | 改 CSS / 视觉 / 图表标签与配色时（颜色对比度、标签可读性、深浅两态、图形覆盖底色） |
+| CSS / 视觉渲染 | `docs/agent/pitfalls-topics/css-visual.md` | 91<!--stats:pitfalls_css--> | 改 CSS / 视觉 / 图表标签与配色时（颜色对比度、标签可读性、深浅两态、图形覆盖底色） |
 | JS / CSP / 运行时 | `docs/agent/pitfalls-topics/js-csp-runtime.md` | 13<!--stats:pitfalls_js--> | 改页内联脚本 / CSP 哈希 / 前端运行时行为时（脚本被拒执行、事件族降级、动画与动效契约） |
 | git / 提交 / 并发 | `docs/agent/pitfalls-topics/git-concurrency.md` | 39<!--stats:pitfalls_git--> | 涉及提交 / 暂存 / 推送 / 并行会话工作树时（代提、冲突、行尾翻动、提交节奏） |
 | 级联 / CHANGELOG | `docs/agent/pitfalls-topics/cascade-changelog.md` | 26<!--stats:pitfalls_cascade--> | 跑级联（batch_cascade）或写 CHANGELOG 版段时（锚点失配、段倒序、版段格式） |
@@ -22,6 +22,12 @@
 > 每行 10 个 E 号；主题归属见其上方分组标题。
 
 **CSS / 视觉渲染**（58 条）
+`E-271` `E-265` `E-266` `E-267` `E-268` `E-269` `E-270` `E-246` `E-250` `E-251`
+`E-252` `E-253` `E-257` `E-254` `E-255` `E-256` `E-258` `E-259` `E-260` `E-261`
+`E-262` `E-263` `E-264` `E-249` `E-248` `E-247` `E-245` `E-105` `E-96` `E-08`
+`E-01` `E-111` `E-113` `E-110` `E-112` `E-115` `E-117` `E-118` `E-10` `E-12`
+`E-13` `E-15` `E-18` `E-55` `E-85` `E-279` `E-280` `E-281` `E-282` `E-283`
+`E-284` `E-285` `E-287` `E-288` `E-289` `E-292` `E-294` `E-295` `E-296`
 
 `E-271` `E-265` `E-266` `E-267` `E-268` `E-269` `E-270` `E-246` `E-250` `E-251`
 
