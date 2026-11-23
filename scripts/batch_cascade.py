@@ -214,15 +214,25 @@ def _handover_milestone_blocks(s):
     h, end = bounds
     seg = s[h:end]
     heads = list(re.finditer(r"^- \*\*(?:v[\d.]+ )?(W\d+)\b", seg, re.M))
+    # W1308 根修：同一批号的**连续多行**块（spec.milestone_block 多行形态）此前被当成
+    # 多个独立块 ⇒ upsert 替换只覆盖首行 ⇒ 其余行逐次累积 ⇒ 第 31 门禁 C8「同段重复」判红
+    # （实测同一批的 2 行里程碑累积成 6 行）。
+    # ⇒ 分界时跳过与前一块**同批号**的 head（视为同一块的续行）⇒ 整块替换/整块淘汰。
+    block_heads = []
+    for m in heads:
+        wnum = int(m.group(1)[1:])
+        if block_heads and block_heads[-1][1] == wnum:
+            continue
+        block_heads.append((m, wnum))
     blocks = []
-    for i, m in enumerate(heads):
+    for i, (m, wnum) in enumerate(block_heads):
         st = h + m.start()
-        if i + 1 < len(heads):
-            en = h + heads[i + 1].start()
+        if i + 1 < len(block_heads):
+            en = h + block_heads[i + 1][0].start()
         else:
             pm = re.search(r"^> 历史概要（W\d+ 及更早）的详细记录见", seg[m.end():], re.M)
             en = h + m.end() + pm.start() if pm else end
-        blocks.append((int(m.group(1)[1:]), st, en))
+        blocks.append((wnum, st, en))
     return blocks
 
 
@@ -414,6 +424,19 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     return s
 
 
+def _entry_start(chain, pos):
+    """条目起始下标（含其「YYYY-MM-DD」日期前缀·若有）——W1308 根修。
+
+    病根（W1308 实测）：同号条目**文本变更**时走「按批号替换」分支，而该分支只替换
+    「（W#### …）」括号区间 ⇒ 条目左侧的旧日期前缀残留 ⇒ 产出
+    「最后更新：2026-11-232026-11-23（W1308 …）」双日期 ⇒ 下游登记面一致性闸的正则
+    「最后更新：<日期>（W####」匹配不上 ⇒ 判红「HANDOVER 无「最后更新」行」。
+    ⇒ 替换区间须自「日期前缀」起算（本函数为单一事实源·头部链与尾部链共用）。
+    """
+    m = re.search(r"20\d{2}-\d{2}-\d{2}$", chain[:pos])
+    return m.start() if m else pos
+
+
 def _upsert_chain_entry(chain, entry, batch, sep):
     """「最后更新」链**内容**（不含锚点）的幂等 upsert（最新在前·按批号序）。
 
@@ -434,12 +457,13 @@ def _upsert_chain_entry(chain, entry, batch, sep):
     # 原实现判「不存在」⇒ 追加**同号重复条目**（本批实证·cascade 重跑后链首出现两条 W1272）。
     # ⇒ 同号条目已存在但形态不同 ⇒ **替换**该条目（不追加）·保持一份。
     if mi is None:
-        _same = re.search(r"（(?:v[\d.]+ )?W%d(?!\d)[^）]*）" % bn, chain)
+        _same = re.search(r"(?:20\d{2}-\d{2}-\d{2}（)?(?:v[\d.]+ )?W%d(?!\d)[^）]*）" % bn, chain)
         if _same is not None:
             return chain[:_same.start()] + entry + chain[_same.end():], "replaced"
     if mi is not None:
-        if chain[mi.start():mi.end()].strip() != entry.strip():
-            return chain[:mi.start()] + entry + chain[mi.end():], "replaced"
+        _st = _entry_start(chain, mi.start())
+        if chain[_st:mi.end()].strip() != entry.strip() or _st != mi.start():
+            return chain[:_st] + entry + chain[mi.end():], "replaced"
         fe = first_re.search(chain)
         # 位置校正：本批 entry 占链首、而链上存在**更高号批次** ⇒ 移到按序位
         _higher = [x for x in nums if x > bn]
@@ -500,6 +524,33 @@ def _upsert_handover_milestone(s, build, batch, nl):
             pos = blocks2[-1][2] if blocks2 else mspan[0]
         return rest[:pos] + cur + rest[pos:], "moved"
     return s, "unchanged"
+
+
+def _handover_window_block_count(s, h1pos):
+    """「一、当前进度」段内的里程碑块数（与 _handover_rotate_oldest 守卫同口径正则）。"""
+    return len([b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：", s)
+                if h1pos < b.start() < s.find("## 二、", h1pos)])
+
+
+def _rotate_until_window(s, ctx, nl, h1pos):
+    """循环滚动淘汰最老里程碑块，直至「一、当前进度」段内概要块 ≤ 6（门禁 C7 窗口）。
+
+    W1308 根修（两处·此前补滚形同虚设）：
+      ① **触发面**：原滚动只在「本批块 **inserted**」路径触发 ⇒ 「replaced」路径
+         （spec 里程碑内容变更·同批号替换）永不动 ⇒ 概要块只增不减（实测 11 块 ⇒
+         C7 体积窗持续判红「HANDOVER 概要块 11 > 6」）；
+      ② **滚动量**：原每次只淘汰 1 块 ⇒ 窗口已超限时滚完仍超限 ⇒ 单次补滚不解超限。
+    ⇒ 本函数把两种情形统一：inserted / replaced 都滚动，且滚到窗口达标为止
+    （_handover_rotate_oldest 内部守卫：窗口 ≤6 时零变化 ⇒ 循环自然收敛）。
+    """
+    for _ in range(16):
+        if _handover_window_block_count(s, h1pos) < 2:
+            break        # 无盈可滚（W913 契约：窗口不足 2 块不滚动）
+        out = _handover_rotate_oldest(s, ctx, nl, h1pos)
+        if out == s:
+            break
+        s = out
+    return s
 
 
 def _face_handover(ctx):
@@ -567,8 +618,8 @@ def _face_handover(ctx):
     s, _mst = _upsert_handover_milestone(s, _mbuild, ctx.batch, nl)
     if _mst != "unchanged":
         print("[HANDOVER] 里程碑块：%s" % _mst)
-    if _mst == "inserted":
-        s = _handover_rotate_oldest(s, ctx, nl, h1pos)
+    if _mst in ("inserted", "replaced"):
+        s = _rotate_until_window(s, ctx, nl, h1pos)
     hs = re.search(r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^）]*；详见 CHANGELOG）", s)
     assert hs, "未找到当前 HEAD 句"
     if _is_current:  # W1122：低号批不改现役 HEAD 句（现役面只指最高号批）
@@ -1081,7 +1132,7 @@ def _rotate_only(ctx, apply):
     ctx.cl_src = open(os.path.join(ROOT, "CHANGELOG.md"), encoding="utf-8").read()
     h1pos = s.find("## 一、当前进度")
     assert h1pos != -1, "未找到交接文档「一、当前进度」段"
-    out = _handover_rotate_oldest(s, ctx, nl, h1pos)
+    out = _rotate_until_window(s, ctx, nl, h1pos)
     if out == s:
         print("[ROTATE] 本批块已在链上 ⇒ 视为本批已滚动过 ⇒ 零变化（幂等）")
         return 0

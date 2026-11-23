@@ -112,10 +112,15 @@ def _rule_seg_index(hits, src_text):
     W1119 实证：编号规则段上限是版本面字面量（version_surface.advance_changelog_rule 要改写它）
     ⇒ 若被腾窗迁进 archive，版本面推进器即 fail-closed「未找到锚点」⇒ 整条收官链停摆。
     """
+    tail = _tail_block_start(src_text)
     for i, (_w, start) in enumerate(hits):
         end = hits[i + 1][1] if i + 1 < len(hits) else len(src_text)
-        if re.search(r"（W001-W\d+）", src_text[start:end]):
-            return i
+        m = re.search(r"（W001-W\d+）", src_text[start:end])
+        if not m:
+            continue
+        if tail is not None and (start + m.start()) >= tail:
+            continue
+        return i
     return None
 
 
@@ -178,15 +183,33 @@ def plan_by_size(src_text, re_seg, max_bytes, chunk):
     if len(src_text.encode('utf-8')) <= max_bytes:
         return None, []
     guard = _rule_seg_index(hits, src_text)   # 编号规则段不可迁出
-    limit = guard if guard is not None else n
-    k = 0
-    while k < limit - 1:
-        k += min(chunk, limit - 1 - k)
-        cut = hits[n - k][1]
-        if len(src_text[:cut].encode('utf-8')) <= max_bytes:
-            break
-    if guard is not None and k >= limit - 1:
-        k = limit - 1
+    # W1308 根修：迁出量改由「体积刚好达标」决定。
+    # 病根（实测）：原实现以 chunk（50）为**固定步长**迁出 ⇒ 迁出量由 chunk 决定而非由
+    # 体积决定 ⇒ 在「正本段数 < chunk + 保留底线」时被迫迁到击穿铁律 22 底线
+    # （实测 file-index 正本 50 段·体积 262964 B·仅超窗 820 B ⇒ 原实现迁出 44 段
+    #  ⇒ 正本仅剩 6 段 ⇒ move() 的 `kept_segs >= 20` 断言 FAIL ⇒ 收官链 archive 步死锁）。
+    # 上界**收紧**（判据只加严不放宽）：迁出块不得含编号规则段（原上界 limit-1 会把
+    # 编号规则段一并迁走 ⇒ 版本面推进器 fail-closed「未找到锚点」⇒ 整条收官链停摆）。
+    if guard is not None:
+        max_k = n - guard - 1
+        if max_k < 1:
+            raise AssertionError(
+                "体积超窗但编号规则段位于最老段（不可迁出）⇒ 无法靠归档腾窗达标——"
+                "应压缩段行密度（batch_spec.fi_group_rows 立式）而非归档搬段")
+    else:
+        max_k = n - 1                          # 至少留 1 段
+    # 二分：正本体积随 k 增大单调不增 ⇒ 求**最小达标** k（迁出更少 ⇒ 底线风险更低）
+    lo, hi, best = 1, max_k, None
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if len(src_text[:hits[n - mid][1]].encode('utf-8')) <= max_bytes:
+            best = mid
+            hi = mid - 1
+        else:
+            lo = mid + 1
+    if best is None:
+        best = max_k       # 迁到上限仍超窗 ⇒ 由 move() 的 20 段底线断言 fail-closed
+    k = best
     cut = hits[n - k][1]
     moved_ws = [w for w, _ in hits[n - k:]]
     return cut, moved_ws
@@ -200,13 +223,55 @@ def plan_to_boundary(src_text, re_seg, boundary):
     assert ws == sorted(ws, reverse=True), "正本段序非严格降序（先修复再归档）"
     guard = _rule_seg_index(hits, src_text)   # 编号规则段不可迁出
     idx = [i for i, w in enumerate(ws) if w <= boundary]
-    if guard is not None:
-        idx = [i for i in idx if i < guard]
     if not idx:
         return None, []
-    cut = hits[idx[0]][1]
-    moved_ws = [w for w, _ in hits[idx[0]:]]
+    k0 = idx[0]
+    if guard is not None and k0 <= guard:
+        raise AssertionError(
+            "边界迁出块会含编号规则段（guard 下标 %d ≤ 迁出起点 %d）⇒ 不可迁——"
+            "应压缩段行密度而非归档搬段" % (guard, k0))
+    cut = hits[k0][1]
+    moved_ws = [w for w, _ in hits[k0:]]
     return cut, moved_ws
+
+
+def plan_align_below(src_text, re_seg, min_w):
+    """对齐迁出规划（W1308）：迁出所有 W 号 **< min_w** 的段。
+
+    用途：一面体积超窗而另一面未超窗时，未超窗面须迁到同一下界 ⇒ 两面正本最小 W 号
+    一致（rebuild_section.boundary_check 是硬断言·不对齐即返红）。
+    与 plan_to_boundary 的区别：后者迁出 W <= boundary；本函数迁出 W < min_w
+    （min_w 本身留在正本 ⇒ 迁出后正本下界 = min_w）。
+    """
+    hits = [(_wnum(m), m.start()) for m in re_seg.finditer(src_text)]
+    assert hits, "正本未找到任何段（结构异常）"
+    ws = [w for w, _ in hits]
+    assert ws == sorted(ws, reverse=True), "正本段序非严格降序（先修复再归档）"
+    guard = _rule_seg_index(hits, src_text)   # 编号规则段不可迁出
+    idx = [i for i, w in enumerate(ws) if w < min_w]
+    if not idx:
+        return None, []
+    k0 = idx[0]
+    if guard is not None and k0 <= guard:
+        raise AssertionError(
+            "对齐迁出块会含编号规则段（guard 下标 %d ≤ 迁出起点 %d）⇒ 不可迁——"
+            "应压缩段行密度而非归档搬段" % (guard, k0))
+    cut = hits[k0][1]
+    moved_ws = [w for w, _ in hits[k0:]]
+    return cut, moved_ws
+
+
+def _face_ws(target):
+    """某面正本的段号清单（新→旧）——纯读取。"""
+    cfg = TARGETS[target]
+    s, _nl = bc.load(cfg["src"])
+    return [_wnum(m) for m in cfg["re_seg"].finditer(s)]
+
+
+def _min_after(ws, moved):
+    """迁出 moved 后正本的最小 W 号（moved 为空 ⇒ 原最小 W 号）。"""
+    rem = [w for w in ws if w not in set(moved)]
+    return min(rem) if rem else None
 
 
 def _split_for_move(src_text, cut):
@@ -242,7 +307,22 @@ def _a3_ok(new_src, src_text, cut, tail):
     return True
 
 
-def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None):
+def _plan_for_face(s, re_seg, keep, max_bytes, chunk, boundary, align_min):
+    """单面迁出计划的**唯一分流点**（优先级：对齐 > 边界 > 体积 > 段数）。
+
+    W1308：move() 原内联四路 if/elif ⇒ 分支数 17 > 16（ruff 结构档）⇒ 抽出本函数
+    （分流单一事实源·move() 只负责落盘与守恒断言）。
+    """
+    if align_min is not None:
+        return plan_align_below(s, re_seg, align_min)
+    if boundary is not None:
+        return plan_to_boundary(s, re_seg, boundary)
+    if max_bytes is not None:
+        return plan_by_size(s, re_seg, max_bytes, chunk)
+    return plan(s, re_seg, keep)
+
+
+def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None, align_min=None):
     """执行单面迁移。返回 (迁出段号清单, 描述行清单)。dry-run 时零落盘。"""
     cfg = TARGETS[target]
     src_rel, arc_rel, re_seg, arc_mode = cfg["src"], cfg["arc"], cfg["re_seg"], cfg["arc_mode"]
@@ -252,12 +332,7 @@ def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None
     s, nl = bc.load(src_rel)
     a, anl = bc.load(arc_rel)
 
-    if boundary is not None:
-        cut, moved_ws = plan_to_boundary(s, re_seg, boundary)
-    elif max_bytes is not None:
-        cut, moved_ws = plan_by_size(s, re_seg, max_bytes, chunk)
-    else:
-        cut, moved_ws = plan(s, re_seg, keep)
+    cut, moved_ws = _plan_for_face(s, re_seg, keep, max_bytes, chunk, boundary, align_min)
     if cut is None:
         # W1014：未超窗 → 无段可迁（正常状态·非失败）——原实现断言失败致级联回窗误报 FAIL
         n_seg = len(re_seg.findall(s))
@@ -272,10 +347,10 @@ def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None
     # W1142 立式（铁律 22 保留条款的机器化）：体积模式迁出后正本剩余段数不得 < 20——
     # W1139 实测 29 段曾被 chunk=50 全迁剩 1 段（合法工具调用 → 违规终态）；不足属
     # 「需压缩而非归档」场景，fail-closed 指引改用段行压缩（batch_spec.fi_group_rows 立式）。
-    if max_bytes is not None:
+    if max_bytes is not None or boundary is not None or align_min is not None:
         kept_segs = len(re_seg.findall(kept_text))
         assert kept_segs >= 20, (
-            "体积迁移后正本仅剩 %d 段 < 保留底线 20（AGENTS 铁律 22）——此体量矛盾应压缩段行密度"
+            "迁移后正本仅剩 %d 段 < 保留底线 20（AGENTS 铁律 22）——此体量矛盾应压缩段行密度"
             "（batch_spec.fi_group_rows 立式）而非归档搬段" % kept_segs)
 
     # ---- A4 迁出块内部降序（块内段号）----
@@ -374,22 +449,30 @@ def main() -> int:
     moved_all = {}
     if args.max_bytes is not None:
         moved_all = {}
-        boundary = None
-        if args.target in ("changelog", "both"):
-            moved_all["changelog"] = move("changelog", None, args.apply, args.batch_tag,
-                                          max_bytes=args.max_bytes, chunk=args.chunk)
-            # W1119：边界取迁出块的**最大 W 号** ⇒ 两面正本都从同一下界起（按最小号会只迁 1 段⇒下界不同）
-            boundary = max(moved_all["changelog"]) if moved_all["changelog"] else None
-        if args.target in ("file-index", "both"):
-            moved_all["file-index"] = move("file-index", None, args.apply, args.batch_tag,
-                                          max_bytes=args.max_bytes, chunk=args.chunk,
-                                          boundary=boundary)
-        if boundary is not None and moved_all.get("file-index"):
-            assert max(moved_all["file-index"]) == boundary, (
-                "两面未迁到同一 W 号下界：changelog=%s file-index=%s" % (boundary, max(moved_all["file-index"])))
-            print("[ALIGN] 两面同下界 W%d（正本均保留 W 号 >= %d）" % (boundary, boundary + 1))
-        elif boundary is not None:
-            print("[ALIGN] file-index 无 <= W%d 的段可迁（该面号集合与 CHANGELOG 不同·需人工核）" % boundary)
+        faces = [t for t in ("changelog", "file-index") if args.target in (t, "both")]
+        ws_all = {t: _face_ws(t) for t in faces}
+        vol_plans = {}
+        for t in faces:
+            s, _nl = bc.load(TARGETS[t]["src"])
+            vol_plans[t] = plan_by_size(s, TARGETS[t]["re_seg"], args.max_bytes, args.chunk)
+        after = {}
+        for t in faces:
+            mv = vol_plans[t][1]
+            after[t] = _min_after(ws_all[t], mv) if mv else min(ws_all[t])
+        target = max(after.values())
+        for t in faces:
+            moved_all[t] = move(t, None, args.apply, args.batch_tag, align_min=target)
+        final = {t: _min_after(ws_all[t], moved_all[t] or []) for t in faces}
+        assert len(set(final.values())) == 1, (
+            "两面未迁到同一 W 号下界：%s" % " ".join("%s=W%s" % (t, final[t]) for t in faces))
+        for t in faces:
+            s, _nl = bc.load(TARGETS[t]["src"])
+            cut, _mv = plan_align_below(s, TARGETS[t]["re_seg"], target)
+            size = len(s[:cut].encode('utf-8')) if cut is not None else len(s.encode('utf-8'))
+            assert size <= args.max_bytes, (
+                "%s 按 target=W%d 迁出后体积 %d 仍超窗 %d——须提高对齐下界或压缩登记面"
+                % (t, target, size, args.max_bytes))
+        print("[ALIGN] 两面同下界 W%d（正本均保留 W 号 >= %d）" % (final[faces[0]], final[faces[0]]))
     else:
         for t in targets:
             moved_all[t] = move(t, args.keep, args.apply, args.batch_tag)

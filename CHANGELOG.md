@@ -1,3 +1,25 @@
+### W1308（2026-11-23）：收官链 L-11 治本 (hash 回填 v2 链上口径 + 排除本批 + 错值修指) + 代改 5 行悬空 hash 清零豁免基线 + L-12 确认既有闸门覆盖 + 归档腾窗治本 (迁出量最小化 + 两面同下界)
+
+> **来源**：用户 2026-11-23 裁决「继续，给我选项我来决策」→ 四项裁决：L-08 分 8 小批 · L-11+L-12 都做 · 5 行悬空 hash 我代改 · tmpe 冻结区等窗后清且 JPG 保留本地 ⇒ 立项 W1308（收官链 L-11 治本 + 悬空 hash 代改清零 + 归档腾窗治本）。
+>
+> - **L-11 治本**：收官链新增 `_run_backfill_prev_hash_v2`（最小侵入：新增函数 + 只切调用点·v1 保留可回退）—— 四处口径变更：① 候选来源 `git log --reverse HEAD`（**只在当前历史链上取**·v1 用 `--all` 会把已失效 commit 再次写回台账⇒悬空复发）② subject 含**多个 W 号**时全部登记（合并推送形态）③ **排除本批**（自指不可知⇒本批 hash 必留空待下一批⇒amend 不再制造悬空）④ hash 非空但**不在链上** ⇒ 改指该批链上首笔（错值修指）。纯函数 `_parse_subject_w_ids` / `_prefix_sets` / `_hash_action` + 单测 **8 例全绿**。
+>
+> - **代改 5 行悬空 hash（用户授权）**：按「该批在 main 历史链上的最早承载 commit」逐行算 ⇒ W1294→`694fae2e5b` · W1295→`2d33f5f11a` · W1296→`c51794db9b` · W1301/W1303→`0c926a0aac`（合并推送那笔）⇒ 用仓内**独占回填工具** `ledger_backfill.py --w N --hash <sha>`（锁旧指纹→改→出新指纹）执行 ⇒ **`merge-base --is-ancestor` 5/5 True** ⇒ **豁免基线清零** ⇒ **C4-g 今后对任何新增悬空行一律判红**（机制保留、无存量）。
+>
+> - **L-12 结论**：**无需新判据**——链尾 `gate` 步调 `pre_push_gate.py`（单一事实源），其中已有「主工作树干净(含未跟踪)」一项 ⇒ 链外再改在链尾即被拦 ⇒ 已在总账转闭合（避免重复实现与口径漂移）。
+>
+> - **归档腾窗治本（W1308 收官链 archive 步死锁的根修）**：收官链 archive 步在本批首次失败——`archive_segments.plan_by_size` 以 `chunk=50` 为**固定步长**迁出（迁出量由 chunk 决定而非由体积决定）⇒ file-index 正本 50 段·体积 262,964 B **仅超窗 820 B**，却被迫迁出 44 段 ⇒ 正本仅剩 6 段 ⇒ 铁律 22「正本留 ≥ 20 段」断言 FAIL ⇒ 收官链死锁。**三处根修（判据只加严不放宽）**：① `plan_by_size` 改「二分求**最小达标** k」（实测迁 2 段·留存 48 段）；② 迁出上界收紧为「迁出块不得含编号规则段」（原上界会把编号规则段一并迁走⇒版本面推进器 fail-closed）；③ `_rule_seg_index` 假阳性修正——CHANGELOG 的编号规则串实际落在**末尾文件级块**（`## [Unreleased]`）内（该块不随段迁出）⇒ 原实现把最后一个批段误判为「不可迁出段」⇒ CHANGELOG 面永远无法腾窗。**新增对齐能力** `plan_align_below` + `main()` 改「各面按最小达标规划 → 取目标下界 → 两面统一迁出」⇒ 迁出后两面同下界 W1256（`rebuild_section.boundary_check` 硬断言）· 并加「迁出后体积达标」纯计算断言。判据单测 **5 例**（最小达标最小性 / 编号规则段保护 / 末尾块假阳性 / 对齐迁出语义 / 仓内两面同下界且各留 ≥ 20 段）。
+>
+> - **cascade 链首日期前缀残留治本（连带）**：本批 regsurface 步首次报红「HANDOVER 无「最后更新」行」⇒ 根因是 `batch_cascade._upsert_chain_entry` 的「按批号替换」分支只替换「（W#### …）」括号区间 ⇒ 同号条目**文本变更**时条目左侧的旧日期前缀残留 ⇒ 产出「最后更新：2026-11-232026-11-23（W1308 …）」双日期 ⇒ 登记面一致性闸的正则「最后更新：<日期>（W####」匹配不上。治本：新增 `_entry_start`（替换区间自日期前缀起算·头链尾链共用·单一事实源）+ `_same` 匹配纳入可选日期前缀 + 内容一致但有残留时亦清理（幂等自愈）⇒ 判据单测 **3 例**。
+>
+> - **文件**：.github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, pytest.ini, archive/docs/AGENTS-ARCHIVE.md, archive/docs/CHANGELOG-ARCHIVE.md, archive/docs/file-index-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/INDEX.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/11-方案报告/计划方案/T137-任务计划执行与经验沉淀报告-2026-11-23.md, scripts/archive_segments.py, scripts/batch_cascade.py, scripts/batch_closeout.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1308.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1308_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/en/search-index-en.js, site/dukou-engine.html, site/index.html, site/rss.xml, tests/unit/INDEX.md, tests/unit/README.md, tests/unit/test_archive_segments_migration_plan.py, tests/unit/test_batch_closeout_hash_repair.py, tests/unit/test_cascade_chain_entry_date_prefix.py, tests/unit/test_cascade_handover_rotate.py
+>
+> - **验证**：判据单测 **8 passed**（L-11）· 归档腾窗单测 **5 passed** · cascade 链首单测 **3 passed** · W1144 补滚单测 **3 passed** · 分组展开单测 **3 passed** · 5 行代改后 `is-ancestor` 全 True · 豁免基线剩余 **0 行** · 第 31 门禁 C4-g 判红 0 · 归档 dry-run 实测「两面各迁 2 段（W1253-W1255）·留存 48 段·同下界 W1256」· **门禁段数与阈值零放宽**（只加严不加松）。
+>
+> - **声明与实况不符项**：① 初判「L-12 需新增链末自检判据」⇒ 实测既有闸门已等效覆盖 ⇒ 改为不新增；② 初判「立式分组可承载 400+ 行登记面」⇒ 实测 `fi_group_rows` **只对同目录连续文件压缩**（跨目录 0%）⇒ 已据此修正 L-08 的可行路径；③ 初判「archive 失败是段数窗与体积窗不可兼得」⇒ 实测根因是**迁出量由 chunk 决定**而非两窗互斥 ⇒ 改为最小达标二分 + 两面同下界对齐迁出。
+>
+> - **状态**：**L-11 闭合 · 豁免基线清零 · L-12 转闭合（既有闸门覆盖）· 归档腾窗已使能**；**L-08 维持未清偿**（按用户裁决分 8 小批·W1309–W1315·归档腾窗前置条件已达成）；tmpe 冻结区等 48h 窗后清、8 张 JPG 原图保留本地。
+
 ### W1307（2026-11-23）：遗留清偿批 (L-08 目录件伪血缘治本 409 件一次清且此后幂等 + L-09/L-10 W1304 spec 对齐 + W1306 行 hash 回填)
 
 > **来源**：用户 2026-11-23 指令「继续」（承接 W1306 遗留收敛判据批）⇒ 立项 W1307（遗留清偿批）。
@@ -605,47 +627,6 @@
 > - **验证**：见收官链。
 > - **文件**：见 file-index。
 
-### W1257（2026-11-16）：og 分享图接缝像素级修复（2 张）
-
-**本批要点**（W1257 og 接缝像素级修复）：
-
-> - **① 发现**：素材级全幅审查（36 张 = 12 亮 + 12 暗 + 12 og）发现 og-03 夜空色块左缘（x≈292）与 og-12 画心左缘（x≈437）两处垂直硬边（W1244 生成阶段色块贴片式拼接遗留）——横幅裁白后不可见，但 og 未裁白、社交平台分享会露出。
-> - **② 修法**：两文件全高羽化（接缝带 smoothstep 渐变 + 逐行取同 y 绢地纹理列作混合基准，保留做旧质感），仅改这 2 个 og。
-> - **③ 格式约束**：webp 有损下「只动接缝、其余零变化」不可达——标定 q=75→100 往返差异 77.6%→12.5%（最差通道 15≈6%），lossless 往返 0% 但体积 ×4.4（203KB→893KB）⇒ 取 q=100（色偏肉眼不可辨·体积 315/319KB 与族内同量级）。
-> - **④ 验收**：带外色偏 12.5–13.0%（最差通道 12–15）·带内 82–89% 为有意改动·其余 10 张 og 与 12 张横幅字节不变。
-> - **验证**：见收官链。
-> - **文件**：见 file-index。
-
-### W1256（2026-11-16）：撤销图上题识 + 横幅裁白（形态④·209 页）
-
-**本批要点**（W1256 撤销题识 + 横幅裁白）：
-
-> - **① 撤销题识**：用户判定 W1255 的「图上题识」不满意并指令「不要左下角的东西」⇒ 209 页题识元素（span）与 6 条 .silk-inscription CSS 全删（grep 残留 0）。
-> - **② 裁去留白**：横幅改为裁掉左侧约 1/3 素绢留白——CSS 裁切（.silk-hero overflow hidden + .silk-hero img width 150% / max-width none / margin-left -50%）⇒ 水平可见区=源图右侧 2/3、主体放大 1.5 倍居中。
-> - **③ 资产零改动**：12 张图片未进入改动面（物理裁图会改比例并放大切头风险·CSS 裁切视觉等价且可逆·回退=一条 git restore）。
-> - **④ 实测**：五种构图（01 云海古刹 / 02 石窟佛龛 / 05 火焰山妖王 / 09 悟空探路 / 12 镜湖）实拍主体均完整、无切头切脚；**复核轮**按裁切公式对 12 张亮版 + 12 张暗版共 24 张逐张审查（可见区 = 源右侧 2/3 × 垂直中段 46.5%）⇒ 主体完整 24/24·0 例切头切脚；390px 窄屏实拍同样完整。
-> - **验证**：见收官链。
-> - **文件**：见 file-index。
-
-### W1255（2026-11-16）：横幅图上题识（形态①·209 页）
-
-**本批要点**（W1255 横幅图上题识）：
-
-> - **① 形态**：承接 W1254 被否的「完整 h1 压图」形态（该批已整批撤销·台账留空号行），本批按用户从三形态对比中选定的**形态① 图上题识**落地——横幅左下角加小号短题名 + 朱砂落款，**正文标题原位保留**。
-> - **② 覆盖**：209 个专题页全部加题识层（改写 209/209·失败 0）；题识 aria-hidden（装饰性重复不二次朗读）+ ≤768px 隐藏（窄屏留白不足）。
-> - **③ 短题名自动提取**：h1 按**最早出现的分隔符**切首段（首段 <4 字回退文件名），全站题识长度 4–17 字·中位 8–9 字·≤11 字 204 页（97.6%）。
-> - **验证**：见收官链。
-> - **文件**：见 file-index。
-
-### W1253（2026-11-16）：横幅限高 420px（首屏占比优化）
-
-**本批要点**（W1253 横幅限高 420px）：
-
-> - **① 限高**：209 页 .silk-hero img 加 max-height 420px + object-fit cover + object-position right center——**纵向裁切、横向不裁**⇒主体仍在右、**左侧叠字位完整保留**。
-> - **② 实测**：首屏由「只剩横幅」变为「标题 + 横幅 + 正文首段同屏」（浏览器实测 865px 视口）。
-> - **验证**：见收官链。
-> - **文件**：见 file-index。
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -653,7 +634,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1307），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1308），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

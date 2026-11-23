@@ -1,3 +1,27 @@
+## W1308 收官链 L-11 治本 (hash 回填 v2 链上口径 + 排除本批 + 错值修指) + 代改 5 行悬空 hash 清零豁免基线 + L-12 确认既有闸门覆盖 + 归档腾窗治本 (迁出量最小化 + 两面同下界)（2026-11-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/（1 件） | W1308 | 版本面跟随（收官链 versions 步） |
+| AGENTS.md | W1308 | 版本面跟随（收官链 versions 步） |
+| CHANGELOG.md | W1308 | 本批段（收官链 cascade/rebuild 步） |
+| CITATION.cff | W1308 | 版本面跟随（收官链 versions 步） |
+| HANDOVER.md | W1308 | 链首/里程碑/滚动（cascade 步·W1144 补滚治本） |
+| README.md | W1308 | 版本面跟随（收官链 versions 步） |
+| STRUCTURE.md | W1308 | 版本面跟随（收官链 versions 步） |
+| pytest.ini | W1308 | 目录件刷新（测试配置同步） |
+| archive/docs/（5 件） | W1308 | 归档迁入（腾窗·CHANGELOG/file-index 面各迁 2 段）+ 版本面跟随 |
+| docs/（1 件） | W1308 | 目录件刷新（生成器 · W1307 L-08 治本） |
+| docs/00-导读/（3 件） | W1308 | 台账（5 行悬空 hash 代改 + 认领 + 腾窗）+ 遗留总账 + 版本面跟随 |
+| docs/11-方案报告/设计与架构方案/（2 件） | W1308 | 版本面跟随（收官链 versions 步） |
+| docs/11-方案报告/计划方案/（1 件） | W1308 | 本批报告（L-11/L-12 + 归档腾窗 + cascade 治本） |
+| scripts/（3 件） | W1308 | 治本三件（归档腾窗 + cascade 链首/W1144 补滚 + 收官链 L-11） |
+| scripts/output/（14 件） | W1308 | 本批 spec + 级联/统计/索引产物 |
+| site/（3 件） | W1308 | 级联/索引产物 |
+| site/data/（3 件） | W1308 | 级联/索引产物 |
+| site/en/（1 件） | W1308 | 索引产物 |
+| tests/unit/（7 件） | W1308 | 判据单测 5 份 + 目录件刷新 |
+
 ## W1307 遗留清偿批 (L-08 目录件伪血缘治本 409 件一次清且此后幂等 + L-09/L-10 W1304 spec 对齐 + W1306 行 hash 回填)（2026-11-23）
 
 | 文件 | W | 说明 |
@@ -2830,71 +2854,5 @@
 | scripts/output/stats-changelog.json | W1258 | stats 变更史 |
 | scripts/output/stats-index.md | W1258 | stats 索引面 |
 | docs/INDEX.md | W1258 | 文档索引重建 |
-
-## W1257 og 分享图接缝像素级修复（2 张）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/og-silk-hero-03-ye-talin.webp | W1257 | 夜空色块左缘垂直硬边（x≈292）羽化消除·全高 smoothstep 渐变 + 逐行绢地纹理列基准·q=100 重编码（带外色偏最差通道 15≈6%）·315KB |
-| site/static/images/og-silk-hero-12-jinghu.webp | W1257 | 画心左缘垂直硬边（x≈437）羽化消除·同法·q=100 重编码·319KB |
-| docs/11-方案报告/计划方案/T110-任务计划执行与经验沉淀报告-2026-11-16.md | W1257 | 任务执行报告（执行前计划→执行记录→验收→复盘→经验沉淀） |
-| docs/11-方案报告/README.md | W1257 | 报告目录 §六 登记行（编号 119） |
-| docs/00-导读/W批次编号对账表.md | W1257 | W1257 认领行 |
-| scripts/output/file-index.md | W1257 | 本批登记行 |
-| CHANGELOG.md | W1257 | 本批段 + 编号规则段推进（W001-W1257） |
-| HANDOVER.md | W1257 | 头链·当前 HEAD·进度推进 |
-| CITATION.cff | W1257 | version 推进 |
-| .github/workflows/README.md | W1257 | 头部版本与里程碑上限推进 |
-| scripts/output/stats.json | W1257 | stats 刷新 |
-| scripts/output/stats-changelog.json | W1257 | stats 变更史 |
-| scripts/output/stats-index.md | W1257 | stats 索引面 |
-| docs/INDEX.md | W1257 | 文档索引重建 |
-
-## W1256 撤销图上题识 + 横幅裁白（形态④·209 页）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/reader/themes/（209 页） | W1256 | 撤销 W1255 图上题识（span + 6 条 CSS 全删）+ 裁去左侧约 1/3 素绢留白（figure overflow hidden + img width 150% / margin-left -50%⇒ 水平可见区=源图右侧 2/3·主体放大 1.5 倍）·12 张图片资产零改动·五种构图实拍主体完整 |
-| docs/11-方案报告/计划方案/T109-任务计划执行与经验沉淀报告-2026-11-16.md | W1256 | 任务执行报告（执行前计划→执行记录→验收→复盘→经验沉淀） |
-| docs/11-方案报告/计划方案/T108-任务计划执行与经验沉淀报告-2026-11-16.md | W1256 | 加状态注记（本批方案已撤销·保留为过程记录） |
-| docs/11-方案报告/README.md | W1256 | 报告目录 §六 登记行（编号 118） |
-| docs/00-导读/W批次编号对账表.md | W1256 | W1256 认领行 |
-| scripts/output/file-index.md | W1256 | 本批登记行 |
-| CHANGELOG.md | W1256 | 本批段 + 编号规则段推进（W001-W1256） |
-| HANDOVER.md | W1256 | 头链·当前 HEAD·进度推进 |
-| CITATION.cff | W1256 | version 推进 |
-| .github/workflows/README.md | W1256 | 头部版本与里程碑上限推进 |
-| scripts/output/stats.json | W1256 | stats 刷新 |
-| scripts/output/stats-changelog.json | W1256 | stats 变更史 |
-| scripts/output/stats-index.md | W1256 | stats 索引面 |
-| docs/INDEX.md | W1256 | 文档索引重建 |
-| site/data/search-index-zh.js | W1256 | 中文站内搜索索引刷新 |
-| site/en/search-index-en.js | W1256 | 英文站内搜索索引刷新 |
-
-## W1255 横幅图上题识（形态①·209 页）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/reader/themes/（209 页） | W1255 | 横幅左下角加小号短题名 + 朱砂落款（.silk-inscription·页内私有样式·正文标题原位保留·h1 结构零改动）·短题名由 h1 按最早分隔符自动提取（首段 <4 字回退文件名）·题识 aria-hidden + ≤768px 隐藏 |
-| docs/11-方案报告/计划方案/T108-任务计划执行与经验沉淀报告-2026-11-16.md | W1255 | 任务执行报告（执行前计划→执行记录→验收→复盘→经验沉淀） |
-| docs/11-方案报告/README.md | W1255 | 报告目录 §六 登记行（编号 117） |
-| docs/00-导读/W批次编号对账表.md | W1255 | W1254 空号留痕行 + W1255 认领行 |
-| scripts/output/file-index.md | W1255 | 本批登记行 |
-| CHANGELOG.md | W1255 | 本批段 + 编号规则段推进（W001-W1255） |
-| HANDOVER.md | W1255 | 头链·当前 HEAD·进度推进 |
-| CITATION.cff | W1255 | version 推进 |
-| .github/workflows/README.md | W1255 | 头部版本与里程碑上限推进 |
-| scripts/output/stats.json | W1255 | stats 刷新（report_docs 187→188） |
-| scripts/output/stats-changelog.json | W1255 | stats 变更史 |
-| scripts/output/stats-index.md | W1255 | stats 索引面 |
-| docs/INDEX.md | W1255 | 文档索引重建 |
-| site/data/search-index-zh.js | W1255 | 中文站内搜索索引刷新 |
-| site/en/search-index-en.js | W1255 | 英文站内搜索索引刷新 |
-
-## W1253 横幅限高 420px（首屏占比优化）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/reader/themes/（209 页）+ 族 README | W1253 | 横幅限高 420px（object-fit cover·object-position right center·主体在右·左侧叠字位保留）·实测首屏占比由 630px 降至 420px·正文首段露��� |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

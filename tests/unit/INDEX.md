@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（138）
+## 文件（143）
 
 ### Python 脚本
 
@@ -19,11 +19,16 @@
 - `test_agents_tail_anchor.py`
 - `test_archive_health.py`
 - `test_archive_segments.py`
+- `test_archive_segments_migration_plan.py`
 - `test_archive_segments_plan_scope.py`
 - `test_audit_trigger.py`
 - `test_backlog_review.py`
 - `test_batch_cascade_status_wnum.py`
+- `test_batch_closeout_group_expand.py`
+- `test_batch_closeout_hash_repair.py`
 - `test_batch_spec.py`
+- `test_cascade_chain_entry_date_prefix.py`
+- `test_cascade_handover_rotate.py`
 - `test_cascade_line_anchor.py`
 - `test_cascade_precheck.py`
 - `test_chart_content_completeness.py`

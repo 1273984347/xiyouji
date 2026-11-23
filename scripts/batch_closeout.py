@@ -280,17 +280,30 @@ def selfref_precheck():
 
 
 def _expand_group_row(p):
-    """分组行 → 目录下磁盘现有文件（递归·W1142 立式）。非分组行返回 None。"""
+    """分组行 → 该目录下**可入库**文件（git 口径）。非分组行返回 None。
+
+    W1142 立式：分组行（「<目录>/（<N 件>）」）展开为该目录的文件集合。
+    W1308 根修：原实现用 os.walk 递归**磁盘** ⇒ 会把 .gitignore 忽略的目录
+    （实测 docs/S2-外部分享、视觉重设计样板/*/_verify_shots）也纳入 ⇒ git add 报
+    「paths are ignored by one of your .gitignore files」⇒ 收官链 add 步整链中止
+    （分组行本为省登记面体积·反成阻塞）。
+    ⇒ 改用 git 口径：已跟踪文件（ls-files）+ 未跟踪且**未被忽略**文件
+    （ls-files --others --exclude-standard）⇒ 忽略面永不进 add 集合。
+    """
     import batch_spec as _bs
     m = _bs._DIR_GROUP_RE.match(p)  # W1142（P2-3）：正则单一实现（batch_spec 唯一定义）
     if not m:
         return None
     d = m.group(1).replace('\\', '/')
     out = []
-    for root, _dirs, files in os.walk(os.path.join(ROOT, d)):
-        for f in files:
-            rel = os.path.relpath(os.path.join(root, f), ROOT).replace('\\', '/')
-            if rel not in out:
+    for extra in ([], ["--others", "--exclude-standard"]):
+        rc, so = run(["git", "-C", ROOT, "-c", "core.quotepath=false",
+                       "ls-files"] + extra + ["--", d])
+        if rc != 0:
+            continue
+        for line in so.splitlines():
+            rel = line.strip()
+            if rel and rel not in out:
                 out.append(rel)
     return out
 
@@ -656,32 +669,55 @@ def _run_refresh_artifacts(dry=False):
 
 
 
-def _run_backfill_prev_hash(dry=False):
-    """自动回填台账「已收官但 hash 列空缺」的行（W1298·L-03）。
+# ===== 台账 hash 回填：共享纯函数（v1/v2 共用·W1308 结构档拆分） =====
 
-    背景（物理约束·不可消除）：提交内容含自身 hash ⇒ 同笔内写不对自己的 hash
-    ⇒ 台账 hash 列**每批必然欠一笔回填**（E-311 纪律：hash 由下一批的第一动作回填）⇒
-    此前靠**人工**记着做 ⇒ 常态化漏 ⇒ 本步把它**机器化**：收官链开头自动回填。
 
-    取值口径：hash 列语义 = **该批最早一笔**（首笔）⇒ 用 `git log --reverse` 取首个批次标签提交。
-    状态列**不动**（只用 --hash，不传 --status）⇒ 详细终态结论不丢（W1289 教训）。
+def _ledger_rows(lines):
+    """台账正文数据行 → [(W 号, 单元格列表)]（非数据行跳过）。纯函数。"""
+    import re as _re
+    out = []
+    for line in lines:
+        m = _re.match(r"^\|\s*W(\d{3,4})\s*\|", line)
+        if not m:
+            continue
+        out.append((int(m.group(1)),
+                    [c.strip() for c in line.strip().strip("|").split("|")]))
+    return out
+
+
+def _status_cell(cells):
+    """定位状态列 → (下标, 是否已收官)；未找到 ⇒ (None, False)。纯函数。
+
+    W1298：状态列滞后（已推提交但状态列未翻「已收官」）也纳入回填面（hash 是机械事实）
+    ⇒ 但**不自动翻状态列**（避免把真未完成的批次标成已收官）⇒ 仅打印 WARN 提示人工翻。
+    """
+    import re as _re
+    for i, c in enumerate(cells):
+        if _re.match(r"^(?:\*\*)?(?:已收官|已闭环|已合并)", c):
+            return i, True
+        if _re.match(r"^在途", c):
+            return i, False
+    return None, False
+
+
+def _hash_col_index(cells, status_idx):
+    """hash 列下标 = 状态列 -2（台账列序约定）；越界 ⇒ None。纯函数。"""
+    h_idx = status_idx - 2
+    if h_idx < 0 or h_idx >= len(cells):
+        return None
+    return h_idx
+
+
+def _git_w_map_v1(root):
+    """v1 口径：git log --all --reverse --format=%h %s → {W 号: 短 hash}。
+
+    注意：--all **含不在 main 历史链上的提交** ⇒ v2 改用 HEAD 口径（见 _git_w_map_v2）。
     """
     import re as _re
     import subprocess as _sp
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    ledger = os.path.join(root, "docs", "00-导读", "W批次编号对账表.md")
-    if not os.path.exists(ledger):
-        print("[backfill-prev-hash] 台账不存在 ⇒ 跳过")
-        return True
-    with open(ledger, encoding="utf-8", newline="") as fh:
-        lines = fh.read().split("\n")
-    try:
-        gl = _sp.run(["git", "-C", root, "log", "--all", "--reverse", "--format=%h %s"],
-                     capture_output=True, text=True, encoding="utf-8", errors="replace")
-        subjects = gl.stdout.splitlines()
-    except Exception as exc:  # noqa: BLE001
-        print("[backfill-prev-hash] git 读取失败 ⇒ 跳过（%r）" % exc)
-        return True
+    gl = _sp.run(["git", "-C", root, "log", "--all", "--reverse", "--format=%h %s"],
+                 capture_output=True, text=True, encoding="utf-8", errors="replace")
+    subjects = gl.stdout.splitlines()
     _pat = _re.compile(r"^(?:[0-9a-f]{7,12}\s+)?[a-z0-9._-]+\(([^)]*)\):", _re.I)
     _pat2 = _re.compile(r"^(?:[0-9a-f]{7,12}\s+)?[a-z0-9._-]+(?:\([^)]*\))?:\s*w(\d{3,4})\b", _re.I)
     by_w = {}
@@ -700,33 +736,82 @@ def _run_backfill_prev_hash(dry=False):
                 w = int(m2.group(1))
         if w is not None and w not in by_w:
             by_w[w] = line.split(" ", 1)[0]
-    todo = []
-    for line in lines:
-        m = _re.match(r"^\|\s*W(\d{3,4})\s*\|", line)
-        if not m:
+    return by_w
+
+
+def _git_w_map_v2(root):
+    """v2 口径：只取 HEAD 历史链 → ({W 号: 全 sha}, 祖先 sha 集合)。
+
+    L-11 根修：候选源必须是**当前历史链**（--all 会把已失效 commit 再次写回台账）。
+    """
+    import subprocess as _sp
+    gl = _sp.run(["git", "-C", root, "log", "--reverse", "--format=%H %s", "HEAD"],
+                 capture_output=True, text=True, encoding="utf-8", errors="replace")
+    subjects = gl.stdout.splitlines()
+    rl = _sp.run(["git", "-C", root, "rev-list", "HEAD"],
+                 capture_output=True, text=True, encoding="utf-8", errors="replace")
+    ancestors = set(rl.stdout.split())
+    by_w = {}
+    for line in subjects:
+        parts = line.split(" ", 1)
+        sha = parts[0]
+        subject = parts[1] if len(parts) > 1 else ""
+        for w in _parse_subject_w_ids(subject):
+            if w not in by_w:
+                by_w[w] = sha
+    return by_w, ancestors
+
+
+def _apply_backfill(root, todo, dry):
+    """执行回填（todo 元素 = (w, sha, closed[, kind])）——v1/v2 共用。"""
+    import subprocess as _sp
+    for item in todo:
+        w, sha, closed = item[0], item[1], item[2]
+        kind = item[3] if len(item) > 3 else "回填"
+        if dry:
+            print("[backfill-prev-hash] dry-run ⇒ 跳过 W%d（%s·%s）" % (w, sha, kind))
             continue
-        w = int(m.group(1))
+        if not closed:
+            print("[backfill-prev-hash] WARN W%d 状态列仍非「已收官」⇒ 已%s hash（%s）但状态列须人工翻"
+                  % (w, kind, sha))
+        print("[backfill-prev-hash] %s W%d ⇒ %s" % (kind, w, sha))
+        _sp.run([sys.executable, os.path.join(root, "scripts", "ledger_backfill.py"),
+                 "--w", str(w), "--hash", sha], cwd=root)
+
+
+def _run_backfill_prev_hash(dry=False):
+    """自动回填台账「已收官但 hash 列空缺」的行（W1298·L-03·v1 保留可回退）。
+
+    背景（物理约束·不可消除）：提交内容含自身 hash ⇒ 同笔内写不对自己的 hash
+    ⇒ 台账 hash 列**每批必然欠一笔回填**（E-311 纪律：hash 由下一批的第一动作回填）⇒
+    此前靠**人工**记着做 ⇒ 常态化漏 ⇒ 本步把它**机器化**：收官链开头自动回填。
+
+    取值口径：hash 列语义 = **该批最早一笔**（首笔）⇒ 用 git log --reverse 取首个批次标签提交。
+    状态列**不动**（只用 --hash，不传 --status）⇒ 详细终态结论不丢（W1289 教训）。
+    W1308：函数体拆分（共享纯函数 helpers）⇒ ruff 结构档复杂度/分支数回落（原 24/23 超限）。
+    """
+    import re as _re
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    ledger = os.path.join(root, "docs", "00-导读", "W批次编号对账表.md")
+    if not os.path.exists(ledger):
+        print("[backfill-prev-hash] 台账不存在 ⇒ 跳过")
+        return True
+    with open(ledger, encoding="utf-8", newline="") as fh:
+        lines = fh.read().split("\n")
+    try:
+        by_w = _git_w_map_v1(root)
+    except Exception as exc:  # noqa: BLE001
+        print("[backfill-prev-hash] git 读取失败 ⇒ 跳过（%r）" % exc)
+        return True
+    todo = []
+    for w, cells in _ledger_rows(lines):
         if w not in by_w:
             continue
-        cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        idx = None
-        closed = False
-        for i, c in enumerate(cells):
-            if _re.match(r"^(?:\*\*)?(?:已收官|已闭环|已合并)", c):
-                idx = i
-                closed = True
-                break
-            if _re.match(r"^在途", c):
-                # W1298：状态列滞后（该批已推提交但状态列未翻「已收官」）⇒ 同样纳入回填面
-                #   （hash 是机械事实）⇒ 但**不自动翻状态列**（避免把真未完成的批次标成已收官）
-                #   ⇒ 仅打印 WARN 提示人工翻状态。
-                idx = i
-                closed = False
-                break
+        idx, closed = _status_cell(cells)
         if idx is None:
             continue
-        h_idx = idx - 2
-        if h_idx < 0 or h_idx >= len(cells):
+        h_idx = _hash_col_index(cells, idx)
+        if h_idx is None:
             continue
         h = cells[h_idx]
         if h and not (h.startswith("—") or h.startswith("-") or "待回填" in h or h in ("—", "")):
@@ -740,16 +825,7 @@ def _run_backfill_prev_hash(dry=False):
     if not todo:
         print("[backfill-prev-hash] 无需回填（无「已收官 + hash 空缺」行）")
         return True
-    for w, sha, closed in todo:
-        if dry:
-            print("[backfill-prev-hash] dry-run ⇒ 跳过 W%d（%s）" % (w, sha))
-            continue
-        if not closed:
-            print("[backfill-prev-hash] WARN W%d 状态列仍非「已收官」⇒ 已回填 hash（%s）但状态列须人工翻"
-                  % (w, sha))
-        print("[backfill-prev-hash] 回填 W%d ⇒ %s" % (w, sha))
-        _sp.run([sys.executable, os.path.join(root, "scripts", "ledger_backfill.py"),
-                 "--w", str(w), "--hash", sha], cwd=root)
+    _apply_backfill(root, todo, dry)
     return True
 
 
@@ -757,7 +833,7 @@ def _run_content_stage(a, batch):
     # W1298（L-03）：自动回填台账「已收官但 hash 空缺」的行——提交含自身 hash ⇒ 同笔内写不对
     #   自己的 hash ⇒ **每批必然欠一笔回填**（E-311 纪律）⇒ 此前靠人工记着做 ⇒ 常态化漏
     #   ⇒ 此处机器化（只用 --hash·不动状态列 ⇒ 终态结论不丢·W1289 教训）。
-    if not _run_backfill_prev_hash(dry=getattr(a, "dry_run", False)):
+    if not _run_backfill_prev_hash_v2(dry=getattr(a, "dry_run", False), batch=batch):
         return False
     """内容生成段：refresh -> stats -> versions -> index（W1117 抽函数·降 main 复杂度）。
 
@@ -835,6 +911,124 @@ def main(argv=None):
         return 1
     print('---- 收官链完成：顺序 ' + ' -> '.join(step_order()) + ' ----')
     return 0
+
+
+# ===== W1308 · L-11：台账 hash 回填扩到「错值修指」（在链上口径 + 排除本批 + 悬空改指） =====
+
+
+def _parse_subject_w_ids(line):
+    """从一行 git log 输出解析其涉及的批次号（合并推送的 subject 含多个 W 号 ⇒ **全取**）。
+
+    纯函数·W1308 可单测。口径：
+      · scope 段（type(scope): …）内的 W 号优先（W1234/W1235 形态）；
+      · 其次 subject 中出现的 W 号字样（W1303 W1302 W1301 合并推送形态）。
+    """
+    import re as _re
+    ids = set()
+    m = _re.match(r"^(?:[0-9a-f]{7,12}\s+)?[a-z0-9._-]+\(([^)]*)\):", line, _re.I)
+    if m:
+        for part in m.group(1).split(","):
+            tok = part.strip()
+            if _re.match(r"^w\d{3,4}$", tok, _re.I):
+                ids.add(int(tok[1:]))
+    if not ids:
+        for mm in _re.finditer(r"\bW(\d{3,4})\b", line, _re.I):
+            ids.add(int(mm.group(1)))
+    return ids
+
+
+def _prefix_sets(ancestors):
+    """由全量 sha 集合构造「短 hash 前缀 → 是否可达」的查表器（一次遍历·O(1) 判定）。"""
+    cache = {}
+
+    def probe(short):
+        length = len(short)
+        if length not in cache:
+            cache[length] = {a[:length] for a in ancestors}
+        return short.lower() in cache[length]
+
+    return probe
+
+
+def _hash_action(cell, first_sha, probe, current_batch, w):
+    """决定台账某行 hash 格的动作。
+
+    纯函数·W1308 可单测。返回：
+      ('skip',  None)      —— 该格不是可判定的 hash（占位/形态异常/列错位）
+      ('keep',  None)      —— hash 有效且**在链上**（不动）
+      ('fill',  first_sha) —— hash 空缺 ⇒ 回填该批链上首笔
+      ('repair', first_sha)—— hash 非空但**不在链上**（被压缩/改写）⇒ 改指链上首笔
+    """
+    import re as _re
+    h = (cell or "").strip()
+    placeholder = (not h) or h.startswith("—") or h.startswith("-") or "待回填" in h
+    if placeholder:
+        if first_sha:
+            return ("fill", first_sha)
+        return ("skip", None)
+    if not _re.match(r"^[0-9a-f]{7,12}$", h):
+        return ("skip", None)
+    if probe(h):
+        return ("keep", None)
+    if first_sha:
+        return ("repair", first_sha)
+    return ("skip", None)
+
+
+def _run_backfill_prev_hash_v2(dry=False, batch=None):
+    """台账 hash 回填 v2（W1308·L-11）：空缺回填 + **错值修指** + **排除本批**。
+
+    L-11 病根（W1306 实测）：v1 的候选来源是 git log --all ⇒ **含不在 main 历史链上的提交**
+    ⇒ 压缩推送后会把「已失效的 hash」再次写回台账 ⇒ 悬空引用复发。
+    v2 三处口径变更：
+      ① 候选来源改 HEAD（**只在当前历史链上取**）⇒ 承载 commit 必可达；
+      ② subject 含**多个 W 号**时全部登记（合并推送形态）⇒ 逐批可得承载 commit；
+      ③ **排除本批**（自指不可知 ⇒ 本批 hash 必留空待下一批）⇒ 避免「回填本批 → 随后 amend ⇒ 立即悬空」。
+    另加：hash 非空但**不在链上** ⇒ 改指该批链上首笔（错值修指）。
+    状态列**不动**（只用 --hash·不动终态结论·W1289 教训）。
+    W1308：函数体拆分（共享纯函数 helpers）⇒ ruff 结构档复杂度/分支数回落（原 23/22 超限）。
+    """
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    ledger = os.path.join(root, "docs", "00-导读", "W批次编号对账表.md")
+    if not os.path.exists(ledger):
+        print("[backfill-prev-hash] 台账不存在 ⇒ 跳过")
+        return True
+    with open(ledger, encoding="utf-8", newline="") as fh:
+        lines = fh.read().split("\n")
+    try:
+        by_w, ancestors = _git_w_map_v2(root)
+    except Exception as exc:  # noqa: BLE001
+        print("[backfill-prev-hash] git 读取失败 ⇒ 跳过（%r）" % exc)
+        return True
+    probe = _prefix_sets(ancestors)
+    cur = None
+    if batch:
+        try:
+            cur = int(str(batch).lstrip("Ww"))
+        except ValueError:
+            cur = None
+    todo = []
+    for w, cells in _ledger_rows(lines):
+        if cur is not None and w == cur:
+            continue                      # ③ 排除本批（自指不可知）
+        if w not in by_w:
+            continue
+        idx, closed = _status_cell(cells)
+        if idx is None:
+            continue
+        h_idx = _hash_col_index(cells, idx)
+        if h_idx is None:
+            continue
+        action, sha = _hash_action(cells[h_idx], by_w[w], probe, cur, w)
+        if action == "fill":
+            todo.append((w, sha, closed, "回填"))
+        elif action == "repair":
+            todo.append((w, sha, closed, "错值修指"))
+    if not todo:
+        print("[backfill-prev-hash] 无需回填/修指（无空缺或悬空行）")
+        return True
+    _apply_backfill(root, todo, dry)
+    return True
 
 
 if __name__ == '__main__':
