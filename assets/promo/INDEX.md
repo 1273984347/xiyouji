@@ -6,12 +6,13 @@
 > 本文件逐条列出 `assets/promo/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（4）
+## 子目录（5）
 
 - `hero-set/`
 - `output/`
 - `plate-set/`
 - `silk-hero-set/`
+- `silk-hero-src/`
 
 ## 文件（3）
 

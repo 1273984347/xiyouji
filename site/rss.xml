@@ -6,6 +6,13 @@
     <description>一源多形 · 数字人文可视化解读《西游记》100 回——版本发布批次动态（W### 编号·详见 CHANGELOG）。</description>
     <language>zh-CN</language>
     <item>
+      <title>W1310 绢本系列 8 张源件入仓（5472×3072 JPEG·补缺·新目录避免覆盖·像素级判别证画面不同）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1310</guid>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
       <title>W1309 L-08 闭合（目录件伪血缘一次全清 406 件·残留 0 + 生成器去硬编码日期与 buckets 契约治本 + W1308 五处治本补记坑表 E-316~E-320 + 计数链 421→426）</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1309</guid>
@@ -135,13 +142,6 @@
       <title>W1291 治理面追平 + 复盘/豁免清偿批</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1291</guid>
-      <pubDate>Sat, 21 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1290 坑表正本六主题拆分 + 根级索引壳 + 脚本口径跨文件聚合 + 重号清偿</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1290</guid>
       <pubDate>Sat, 21 Nov 2026 00:00:00 +0000</pubDate>
       <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
     </item>
