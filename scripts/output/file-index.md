@@ -1,3 +1,48 @@
+## W1307 遗留清偿批 (L-08 目录件伪血缘治本 409 件一次清且此后幂等 + L-09/L-10 W1304 spec 对齐 + W1306 行 hash 回填)（2026-11-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1307 | 目录件刷新（生成器去伪日期·W1307 L-08 治本） |
+| AGENTS.md | W1307 | 版本面跟随（收官链 versions 步） |
+| CHANGELOG.md | W1307 | 版本面跟随（收官链 versions 步） |
+| CITATION.cff | W1307 | 版本面跟随（收官链 versions 步） |
+| HANDOVER.md | W1307 | 版本面跟随（收官链 versions 步） |
+| STRUCTURE.md | W1307 | 版本面跟随（收官链 versions 步） |
+| archive/docs/AGENTS-ARCHIVE.md | W1307 | 版本面跟随（收官链 versions 步） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1307 | 台账认领/回填/腾窗 |
+| archive/docs/workflows-readme-history.md | W1307 | 版本面跟随（收官链 versions 步） |
+| docs/00-导读/W批次编号对账表.md | W1307 | 台账认领/回填/腾窗 |
+| docs/00-导读/遗留总账.md | W1307 | 遗留总账状态更新（L-08/L-09/L-10 闭合） |
+| docs/00-导读/项目说明.md | W1307 | 版本面跟随（收官链 versions 步） |
+| docs/11-方案报告/README.md | W1307 | 目录件刷新（生成器去伪日期·W1307 L-08 治本） |
+| docs/11-方案报告/计划方案/T136-任务计划执行与经验沉淀报告-2026-11-23.md | W1307 | 本批报告 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1307 | 版本面跟随（收官链 versions 步） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1307 | 版本面跟随（收官链 versions 步） |
+| docs/INDEX.md | W1307 | 目录件刷新（生成器去伪日期·W1307 L-08 治本） |
+| scripts/output/INDEX.md | W1307 | 目录件刷新（生成器去伪日期·W1307 L-08 治本） |
+| scripts/output/README.md | W1307 | 目录件刷新（生成器去伪日期·W1307 L-08 治本） |
+| scripts/output/_cascade_files_W1307.txt | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/_vermilion_solid_cache.json | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/_w1266_allrender.json | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/_w1304_spec.json | W1307 | 历史批 spec 清单对齐（L-09/L-10 治本） |
+| scripts/output/_w1307_spec.json | W1307 | 本批 spec |
+| scripts/output/chart-legend-render-audit.json | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/stats-changelog.json | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/stats.json | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/svg_text_contrast_report.json | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/tools-inventory.md | W1307 | 版本面跟随（收官链 versions 步） |
+| site/data/cross-time-danmaku.html | W1307 | 本批改动（收官链级联/规范面产物） |
+| site/data/search-index-zh.js | W1307 | 本批改动（收官链级联/规范面产物） |
+| site/data/tag-cloud.html | W1307 | 本批改动（收官链级联/规范面产物） |
+| site/dukou-engine.html | W1307 | 本批改动（收官链级联/规范面产物） |
+| site/en/search-index-en.js | W1307 | 本批改动（收官链级联/规范面产物） |
+| site/index.html | W1307 | 本批改动（收官链级联/规范面产物） |
+| site/rss.xml | W1307 | 本批改动（收官链级联/规范面产物） |
+| site/sitemap.xml | W1307 | 本批改动（收官链级联/规范面产物） |
+| scripts/output/file-index.md | W1307 | 文件索引台面（收官链 index 步） |
+
+
 ## W1306 遗留收敛落机器判据 (C4-g 台账 hash 历史链有效性 + C4-h 审查 P2 编号化登记 + 收尾两分类声明)（2026-11-23）
 
 | 文件 | W | 说明 |

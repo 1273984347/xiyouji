@@ -1,3 +1,21 @@
+### W1307（2026-11-23）：遗留清偿批 (L-08 目录件伪血缘治本 409 件一次清且此后幂等 + L-09/L-10 W1304 spec 对齐 + W1306 行 hash 回填)
+
+> **来源**：用户 2026-11-23 指令「继续」（承接 W1306 遗留收敛判据批）⇒ 立项 W1307（遗留清偿批）。
+>
+> - **L-08 治本**：`scripts/gen_folder_docs.py` 两处**硬编码日期**（生成时点 2026-10-18 / 生成日期 2026-10-18）改为**不再写死日期**（指向本文件 git 提交时间）⇒ 全仓 **409 件目录件一次性刷新**（631 增 / 632 删·仅日期行）⇒ **伪血缘消除**且**此后 refresh 幂等**（此前每次 refresh 必改日期 ⇒ 「门禁自产残留」噪声源之一）。
+>
+> - **L-09/L-10 治本**：`_w1304_spec.json` 的 file_index_rows 剔除**越界行** `scripts/output/chart-legend-render-audit.md`（不在 W1304 提交树内）⇒ 31→30 行与提交实算**逐条相等**；同一 spec 的 changelog_body「文件」行按 `git show --name-only -z` 实算重写（16 项→30 项）⇒ 报告型文档与实况脱节修正；两面段经 `rebuild_section --batch W1304 --apply` 同步。
+>
+> - **W1306 行 hash 回填**：用仓内**独占回填工具** `ledger_backfill.py --w 1306 --hash a62b3cc54 --status …`（锁旧指纹→改→出新指纹 `02350f9286b3`）⇒ **C4-g 判据实测通过**（该 hash 在 main 历史链上）。
+>
+> - **文件**：.github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T136-任务计划执行与经验沉淀报告-2026-11-23.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1307.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1304_spec.json, scripts/output/_w1307_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/stats-changelog.json, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/rss.xml, site/sitemap.xml
+>
+> - **验证**：第 31 门禁 **0 FAIL**（C4-g 5 行存量悬空在豁免基线内 ⇒ NOTE）· 第 48 门禁计划方案模板 **PASS（全项符合）**· refresh 二次运行**零 diff**（幂等自证）· 台账正本 60 行（窗口内·登记前先归档已收官 W1243）· **判据与阈值零放宽**。
+>
+> - **声明与实况不符项**：① 初判 `ledger_backfill --w W1306` 报错为工具缺陷 ⇒ 实为**参数格式**（要整数）⇒ 已改正；② 本批属「订正」而非擅改历史段：W1304 spec 与其两面段按提交实算对齐，已在 T136 §九 声明。
+>
+> - **状态**：**遗留总账 L-08/L-09/L-10 三项治本闭合**（未清偿 5 → 2）· **L-11/L-12 维持未清偿**（涉收官链核心路径 `_run_backfill_prev_hash` 与链尾结构 ⇒ 独立批次治本）· 豁免基线 5 行他方悬空 hash 不代改。
+
 ### W1306（2026-11-23）：遗留收敛落机器判据 (C4-g 台账 hash 历史链有效性 + C4-h 审查 P2 编号化登记 + 收尾两分类声明)
 
 > **来源**：用户 2026-11-23 追问「为什么每次结束都有遗留的任务要下一批去做？」⇒ 立项 W1306（遗留收敛落机器判据批）。
@@ -44,7 +62,7 @@
 >
 > - **执行**：两处 `uses:` 改为 `actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830` 与 `actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830`（`actions/cache` v4 tag 指向的 commit SHA·经 GitHub API 实查）；**判据与强度一字未改**，仅把 tag 引用钉成不可变 SHA（与仓内其余 95 条 uses 同口径）。
 >
-> - **文件**：.github/workflows/README.md, .github/workflows/ci.yml, CHANGELOG.md, HANDOVER.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_w1304_spec.json, scripts/output/_cascade_files_W1304.txt, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/tools-inventory.md
+> - **文件**：.github/workflows/README.md, .github/workflows/ci.yml, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1304.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1304_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/tag-cloud.html, site/dukou-engine.html, site/index.html, site/rss.xml
 >
 > - **验证**：本地 `python scripts/check_action_refs.py` **PASS**（97 条 uses 全为 40 位 full SHA · 去重 16 个 repo/ref · shell 面「不可变引用」形态 PASS）；`ci.yml` **YAML 解析 OK**（12 jobs）；远端 Workflow Lint 由 failure 转绿由本轮 CI 实证。
 >
@@ -635,7 +653,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1306），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1307），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
