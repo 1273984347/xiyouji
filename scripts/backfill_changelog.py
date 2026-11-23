@@ -100,7 +100,9 @@ def file_index_block(spec):
     """
     import batch_spec as _bs
     tb = re.sub(r"^W\d+\s+", "", spec["title"].split(" — ")[0].split("（")[0]).strip()
-    grouped = _bs.fi_group_rows(spec["file_index_rows"], spec.get("batch", ""))
+    # W1309：登记面（展示面）与逐件对账清单**解耦**——spec 保持逐件（第 51 门禁/C4-f/add 步
+    # 逐件对账）· 本段（file-index 登记面）按**二级目录聚合**（体积可控·file-index 体积窗）。
+    grouped = _bs.fi_group_rows_by_level(spec["file_index_rows"], spec.get("batch", ""), level=2)
     rows = ["## %s %s（%s）" % (spec["batch"], tb, spec["date"]),
             "", "| 文件 | W | 说明 |", "|---|---|---|"] + grouped + ["", ""]
     return "\n".join(rows)

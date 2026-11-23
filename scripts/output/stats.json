@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-11-23T21:33:32",
+  "_generated": "2026-11-24T00:18:26",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -104,8 +104,8 @@
     "domain": "pitfalls.md 主题「级联 / CHANGELOG」实测条目数",
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
-    "last_changed_by": "W1286",
-    "value": 26
+    "last_changed_by": "1309",
+    "value": 30
   },
   "pitfalls_css": {
     "domain": "pitfalls.md 主题「CSS / 视觉渲染」实测条目数",
@@ -132,8 +132,8 @@
     "domain": "pitfalls.md 主题「git / 提交 / 并发」实测条目数",
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
-    "last_changed_by": "W1286",
-    "value": 39
+    "last_changed_by": "1309",
+    "value": 40
   },
   "pitfalls_js": {
     "domain": "pitfalls.md 主题「JS / CSP / 运行时」实测条目数",
@@ -146,22 +146,22 @@
     "domain": "pitfalls.md 六主题实测条目之和（E-NN 本体口径）",
     "generator": "scripts/stats.py",
     "introduced_by": "W1215",
-    "last_changed_by": "W1299",
-    "value": 421
+    "last_changed_by": "1309",
+    "value": 426
   },
   "pytest_collected": {
     "domain": "pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议）",
     "generator": "scripts/stats.py",
     "introduced_by": "W830",
-    "last_changed_by": "1308",
-    "value": 1858
+    "last_changed_by": "1309",
+    "value": 1859
   },
   "report_docs": {
     "domain": "docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化）",
     "generator": "scripts/stats.py",
     "introduced_by": "W737",
-    "last_changed_by": "1308",
-    "value": 252
+    "last_changed_by": "W1309",
+    "value": 253
   },
   "scan_files": {
     "domain": "html_total − _template.html − _shell.html（check_js_syntax/check_structure）",

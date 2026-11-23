@@ -3,9 +3,9 @@
 > **📖 阅读契约**：查表型——git / 提交 / 并发类踩坑排查时按本表查；每条含根因、判据与可执行纪律（纪律块留本层，叙事全文在归档层）。
 > **何时读**：涉及提交 / 暂存 / 推送 / 并行会话工作树时（代提、冲突、行尾翻动、提交节奏）
 > **叙事全文**：`archive/docs/pitfalls-detail-ARCHIVE.md` 的 `#### E-NN` 段（只追加不修改）。
-> **同族**：总 421<!--stats:pitfalls_total--> 条 · CSS 91<!--stats:pitfalls_css--> / JS 13<!--stats:pitfalls_js--> / git 39<!--stats:pitfalls_git--> / 级联 26<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 224<!--stats:pitfalls_flow-->
+> **同族**：总 426<!--stats:pitfalls_total--> 条 · CSS 91<!--stats:pitfalls_css--> / JS 13<!--stats:pitfalls_js--> / git 40<!--stats:pitfalls_git--> / 级联 30<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 224<!--stats:pitfalls_flow-->
 
-### git / 提交 / 并发（39<!--stats:pitfalls_git--> 条）
+### git / 提交 / 并发（40<!--stats:pitfalls_git--> 条）
 
 - **批量暂存：git add 带不存在的路径会整批放弃（包装层不查退出码 ⇒ 末位产物漏进提交且无任何红灯）**（W1118 实证·E-145·跨项目通用）：只要 pathspec 里有任一不存在的路径，git add 报「pathspec did not match any files」并**整批不做部分暂存**（rc≠0）。；【全文详见归档 E-145】
 - **已推分支遇到新 main 用 merge 而非 rebase（保已推历史）；且「我方未合并 PR」不阻塞对方合并 ⇒ 冲突成本归后落地者**（W1118 实证·E-146·跨项目通用）：跨会话并行下 main 持续前进（对方 PR 先合），我方分支已推过若干笔。⇒ 要点与纪律详见归档 E-146
@@ -55,3 +55,5 @@
 - **「把私有层规则归并进公共层」的前置是目标页**真**加载公共层——用 grep 文本判断会被注释假命中（W1251 批注释里恰写着「不进 system.css」）⇒ 对自包含页归并完全无效**（W1273 实证·E-277·跨项目通用·取证域）：本批按清单批三把 `.silk-hero` 三条规则归并进 `site/system.css` 并铺开 170 页。⇒ 要点与纪律详见归档 E-277
 
 - **指标口径必须区分「归属」与「生效」——静态判据的假阳性会淹没真缺陷**（W1273 实证·E-278·跨项目通用·判据域）：本批做「私有层归并进公共层」时先做全站普查，得出三个看似骇人的数字——① 「873 页引用了 136 个未定义 CSS 变量」② 「875 页里只有 7 页加载公共层」③ 「4 处 script 引用缺失」；**运行时抽验后**：① 12/12 页变量其实都有值。⇒ 要点与纪律详见归档 E-278
+
+- **用 git ls-files 展开目录清单时必须加 core.quotepath=false 且必须用 --exclude-standard 排除 .gitignore 面——否则要么漏 add·要么整链中止**（W1308 实证·E-320·跨项目通用）：收官链 add 步把登记面里的「目录分组行」展开为待 add 路径 ⇒ 两个坑同时命中：① git ls-files 默认对非 ASCII 路径**转义**（八进制）⇒ 展开出的路径在磁盘上不存在 ⇒ 被判「尚不存在」跳过 ⇒ 中文路径文件**静默漏 add**；② 若用 os.walk 递归磁盘来展开 ⇒ 把 .gitignore 忽略目录（实测 docs/S2-外部分享、视觉重设计样板/*/_verify_shots）也纳入 ⇒ git add 报「paths are ignored by one of your .gitignore files」⇒ **add 步整链中止**。⇒ 纪律：展开一律走 git 口径（ls-files 加 ls-files --others --exclude-standard）并加 -c core.quotepath=false；分组登记行的展开面必须与「本批实际变更面」对账（展开会把同目录的未改动件也纳入·幂等但需知情）。

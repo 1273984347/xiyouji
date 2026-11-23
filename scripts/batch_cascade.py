@@ -1025,10 +1025,11 @@ def _face_file_index(ctx):
     batch_w = int(str(ctx.batch).lstrip("Ww"))
     head = "## {} {}（{}）".format(
         ctx.batch, re.sub(r"^W\d+\s+", "", ctx.spec["title"].split(" — ")[0].split("（")[0]).strip(), ctx.date)
-    # W1142 立式：行数超阈值自动分组（与 backfill_changelog.file_index_block 同口径·
-    # 单一原语 batch_spec.fi_group_rows——spec 恒全量·登记面压缩）
+    # W1142 立式：登记面自动分组（与 backfill_changelog.file_index_block **同口径**·
+    # 单一原语 batch_spec.fi_group_rows_by_level——spec 恒全量·登记面压缩）
+    # W1309：登记面按**二级目录**聚合（与逐件对账清单解耦·末级目录分组对 406 件分散目录几乎不压缩）
     import batch_spec as _bs
-    seg_lines = [head, "", "| 文件 | W | 说明 |", "|---|---|---|"] + _bs.fi_group_rows(ctx.spec["file_index_rows"], ctx.batch) + ["", ""]
+    seg_lines = [head, "", "| 文件 | W | 说明 |", "|---|---|---|"] + _bs.fi_group_rows_by_level(ctx.spec["file_index_rows"], ctx.batch, level=2) + ["", ""]
     rows = nl.join(seg_lines)          # 原生行尾（落盘用）
     rows_lf = "\n".join(seg_lines)      # 归一形态（与 load() 读出的内存形态一致·供内容判等）
     # W1120 幂等判定：本批号是否已立段

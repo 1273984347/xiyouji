@@ -1,7 +1,6 @@
 # D_关系
 
 > 生成来源：`scripts/gen_folder_docs.py`@W779
-> 生成日期：2026-10-18
 > 文件角色：目录导读（人读·与 INDEX.md 分工：本文件讲用途约定、INDEX.md 列清单）
 
 > 本文件说明 `packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/D_关系/` 的用途、内容构成与维护约定。

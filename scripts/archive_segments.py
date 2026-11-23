@@ -120,6 +120,14 @@ def _rule_seg_index(hits, src_text):
             continue
         if tail is not None and (start + m.start()) >= tail:
             continue
+        # W1309 修（过严约束治本）：真锚点只在**治理声明行**（以「>」开头的引用行）——
+        # file-index 表格登记行里的「本批段 + 编号规则段推进（W001-W1258）」只是**登记描述**
+        # ·不是锚点本体（真锚点在 CHANGELOG 的末尾文件级块内·不随段迁出）⇒ 原判据把
+        # file-index 的最老段误判为「不可迁出段」⇒ max_k=0 ⇒ **体积窗永远无法腾窗**（死锁）。
+        _ls = src_text.rfind("\n", start, start + m.start())
+        _line_start = start if _ls == -1 else _ls + 1
+        if not src_text[_line_start:start + m.start()].lstrip().startswith(">"):
+            continue
         return i
     return None
 

@@ -1,7 +1,6 @@
 # output
 
 > 生成来源：`scripts/gen_folder_docs.py`@W779
-> 生成日期：2026-10-18
 > 文件角色：目录导读（人读·与 INDEX.md 分工：本文件讲用途约定、INDEX.md 列清单）
 
 > 本文件说明 `scripts/output/` 的用途、内容构成与维护约定。
@@ -9,7 +8,7 @@
 
 ## 这个目录装什么
 
-生成时点含 936 个直属文件（JavaScript / TypeScript、Markdown 文档、Python 脚本、其他、数据与配置、样式与资源）；下辖 2 个子目录。详见同目录 `INDEX.md` 的逐文件清单。
+生成时点含 941 个直属文件（JavaScript / TypeScript、Markdown 文档、Python 脚本、其他、数据与配置、样式与资源）；下辖 2 个子目录。详见同目录 `INDEX.md` 的逐文件清单。
 
 ## 子目录
 

@@ -46,15 +46,28 @@ def test_plan_by_size_migrates_minimal_segments():
 
 
 def test_plan_by_size_respects_rule_segment_guard():
-    """编号规则段不得被迁出：真禁令（file-index 形态·串在登记行里）⇒ 迁出 fail-closed。"""
+    """编号规则段不得被迁出：真禁令（治理声明行形态·以「>」开头的引用行）⇒ fail-closed。"""
     re_seg = A.RE_FI_SEG
     parts = ["## W%d 标题\n\n| a | W%d | 说明 |\n\n" % (w, w) for w in range(1300, 1290, -1)]
-    parts.append("## W1289 标题\n\n| CHANGELOG.md | W1289 | 编号规则段推进（W001-W1289） |\n\n")
+    parts.append("## W1289 标题\n\n> **编号规则**：每个版本段标注唯一 W 号（W001-W1289）。\n\n")
     text = "".join(parts)
     hits = _hits(text, re_seg)
     assert A._rule_seg_index(hits, text) == len(hits) - 1
     with pytest.raises(AssertionError):
         A.plan_align_below(text, re_seg, 1290)
+
+
+def test_registry_row_marker_is_not_a_guard():
+    """W1309：表格**登记行**里的「编号规则段推进（W001-W####）」不是锚点 ⇒ 不设迁出禁令。
+
+    病根：原判据把 file-index 最老段误判为「不可迁出段」⇒ max_k=0 ⇒ 体积窗永远无法腾窗。
+    """
+    re_seg = A.RE_FI_SEG
+    parts = ["## W%d 标题\n\n| a | W%d | 说明 |\n\n" % (w, w) for w in range(1300, 1291, -1)]
+    parts.append("## W1290 标题\n\n| CHANGELOG.md | W1290 | 本批段 + 编号规则段推进（W001-W1290） |\n\n")
+    text = "".join(parts)
+    hits = _hits(text, re_seg)
+    assert A._rule_seg_index(hits, text) is None
 
 
 def test_rule_string_in_tail_block_is_not_a_guard():

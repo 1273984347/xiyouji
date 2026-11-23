@@ -1,7 +1,6 @@
 # 文件索引 · output
 
 > 生成来源：`scripts/gen_folder_docs.py`@W779
-> 生成日期：2026-10-18
 > 文件角色：逐文件索引（机器可读·与 README.md 分工：本文件列清单、README 讲用途约定）
 
 > 本文件逐条列出 `scripts/output/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
@@ -12,7 +11,7 @@
 - `data/`
 - `figures/`
 
-## 文件（936）
+## 文件（941）
 
 ### Markdown 文档
 
@@ -27,6 +26,8 @@
 ### Python 脚本
 
 - `_w1266_render_legend.py`
+- `_w1309_fix_legacy_dates.py`
+- `_w1309_pitfalls_patch.py`
 
 ### JavaScript / TypeScript
 
@@ -296,6 +297,7 @@
 - `_cascade_files_W1306.txt`
 - `_cascade_files_W1307.txt`
 - `_cascade_files_W1308.txt`
+- `_cascade_files_W1309.txt`
 - `_cascade_files_W751.txt`
 - `_cascade_files_W761.txt`
 - `_cascade_files_W816.txt`
@@ -724,6 +726,8 @@
 - `_w1306_spec.json`
 - `_w1307_spec.json`
 - `_w1308_spec.json`
+- `_w1309_batch1.txt`
+- `_w1309_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
@@ -970,4 +974,4 @@
 
 ---
 
-> 生成时点：2026-10-18 · 由 `python scripts/gen_folder_docs.py` 重跑刷新（文件数随磁盘变动·不作文档间同步口径）。
+> 生成来源：`scripts/gen_folder_docs.py`@W779 · 由 `python scripts/gen_folder_docs.py --refresh` 重跑刷新（文件数随磁盘变动·不作文档间同步口径）。

@@ -477,7 +477,7 @@ def build_index(abs_dir: str, disk: bool = False) -> str:
 
     lines.append("---")
     lines.append("")
-    lines.append("> 生成时点：2026-10-18 · 由 `python scripts/gen_folder_docs.py` 重跑刷新（文件数随磁盘变动·不作文档间同步口径）。")
+    lines.append("> 生成来源：`scripts/gen_folder_docs.py`@W779 · 由 `python scripts/gen_folder_docs.py --refresh` 重跑刷新（文件数随磁盘变动·不作文档间同步口径）。")
     lines.append("")
     return "\n".join(lines)
 
@@ -554,7 +554,6 @@ def render(abs_dir: str, kind: str, disk: bool = False) -> str:
             "目录导读（人读·与 INDEX.md 分工：本文件讲用途约定、INDEX.md 列清单）")
     meta = (
         "> 生成来源：`scripts/gen_folder_docs.py`@W779\n"
-        "> 生成日期：2026-10-18\n"
         "> 文件角色：%s\n" % role
     )
     lines = body.split("\n")
@@ -596,9 +595,25 @@ def _kinds_for(rel_d):
     return ("INDEX.md", "README.md"), False
 
 
+# 生成物所有权标记（W1309·L-08 治本：目录件不再写死「生成日期/生成时点」⇒ 伪血缘消除且
+# refresh 幂等）。第二条是**存量** INDEX.md 的旧标记（伪「生成时点：2026-10-18」）⇒ 存量
+# 可被 --refresh 刷新一次；刷新后新件带「生成来源」标记 ⇒ 该条仅作存量过渡。
+_GEN_OWNERSHIP_MARKERS = (
+    "> 生成来源：`scripts/gen_folder_docs.py`@",
+    "> 生成时点：2026-10-18",
+)
+
+
 def _process_one(d, rel_d, kind, args, buckets) -> None:
     """单 (目录, kind) 处理（W1233 拆出）：showcase/存在/dry-run/所有权/写盘全序。"""
-    skipped_showcase, skipped_exist, skipped_readme, skipped_hand, failed, written = buckets
+    # W1309 根修（对抗审查 P1-3·既有契约错位）：本行原与 _report 的解包顺序**互为镜像**
+    # （此处 buckets[0]=skipped_showcase / buckets[5]=written；_report 反之）⇒ 写盘本身正常
+    # （append 落 buckets[5]）但**统计输出全反**：报告的「将写入/已写入文件数」实为 showcase
+    # 跳过数、「展示位保护跳过 N 个」实为**将被重写的 N 件** ⇒ 据此推导的根因（「405 件属
+    # showcase 保护目录·refresh 永不覆写」）完全颠倒（实测 refresh 一次可重写 440 件）。
+    # ⇒ 统一为 buckets 创建处注释声明的顺序（written/skipped_exist/skipped_readme/
+    # skipped_hand/failed/skipped_showcase）⇒ 统计与写盘一致。
+    written, skipped_exist, skipped_readme, skipped_hand, failed, skipped_showcase = buckets
     if showcase_guarded(rel_d, kind):
         skipped_showcase.append("%s/%s" % (rel_d, kind))
         return
@@ -628,7 +643,7 @@ def _process_one(d, rel_d, kind, args, buckets) -> None:
         except OSError:
             content = None
         owned = content is not None and (
-            "> 生成来源：`scripts/gen_folder_docs.py`@" in content
+            any(mark in content for mark in _GEN_OWNERSHIP_MARKERS)
             or content == render(d, kind))
         if not owned:
             skipped_hand.append(rel_target)
@@ -689,6 +704,9 @@ def main() -> int:
     ap.add_argument("--force", action="store_true", help="已存在的文件也按生成内容重写（含人工维护件·慎用）")
     ap.add_argument("--refresh", action="store_true",
                     help="安全刷新：仅重写「生成物所有」的既有文件（按「生成来源」标记判定所有权·人工维护件自动跳过）")
+    ap.add_argument("--manifest", default=None,
+                    help="只处理清单内的目录（每行一个仓库相对目录路径·# 开头为注释·"
+                         "W1309 L-08 分小批刷新用·保证批次边界确定且可重放幂等）")
     args = ap.parse_args()
 
     global _GITIGNORED_DIRS
@@ -699,6 +717,28 @@ def main() -> int:
     # 大小写冲突目录全模式跳过（INDEX.md 等变体在盘·NTFS 覆写守卫·见 case_collides）
     dirs = [d for d in dirs_all if not case_collides(d)]
     skipped_collision = len(dirs_all) - len(dirs)
+    if args.manifest:
+        with open(args.manifest, encoding="utf-8") as fh:
+            want = {ln.strip().replace("\\", "/") for ln in fh
+                    if ln.strip() and not ln.lstrip().startswith("#")}
+        # 行型二义（W1309·对抗审查 P1-4）：清单既可写**目录**行（docs/11-方案报告），
+        # 也可写**文件**行（archive/scripts/batches/w1076/INDEX.md）⇒ 文件行反推其所在目录。
+        want_dirs = set()
+        for _w in want:
+            if os.path.basename(_w).lower() in ("index.md", "readme.md"):
+                want_dirs.add(os.path.dirname(_w))
+            else:
+                want_dirs.add(_w)
+        _hit = {rel_of(d) for d in dirs}
+        _miss = sorted(want_dirs - _hit)
+        dirs = [d for d in dirs if rel_of(d) in want_dirs]
+        if not dirs:
+            print("FAIL  清单未命中任何在管目录（清单 %d 行）——检查行型（目录行 或 INDEX.md/README.md 文件行）"
+                  % len(want_dirs))
+            return 3
+        if _miss:
+            print("WARN  清单 %d 行未命中在管目录：%s"
+                  % (len(_miss), ", ".join(_miss[:10]) + (" …" if len(_miss) > 10 else "")))
     skipped_semantic = 0
     buckets = ([], [], [], [], [], [])  # written/skipped_exist/skipped_readme/skipped_hand/failed/skipped_showcase
 

@@ -158,3 +158,36 @@ def fi_group_rows(rows, batch):
     grouped = ["| %s/（%d 件） | %s | %s |" % (d, c, batch, note[d])
                for d, c in sorted(dirs.items())]
     return grouped + exact_no_slash
+
+
+def fi_group_rows_by_level(rows, batch, level=2):
+    """登记面聚合（按**前 level 段**目录）——与「逐件对账清单」**解耦**（W1309）。
+
+    背景（W1309 实测）：spec.file_index_rows 须**逐件**——
+      · 第 51 门禁（check_commit_scope）按它的第 1 列逐件对账「索引 ⊆ 应动全集」；
+      · C4-f 按现役段 CHANGELOG 的「文件」行核对入库与工作树残留；
+      · add 步（collect_paths）也据它收集待暂存路径。
+    但同一份清单写进 **file-index 登记面**会顶破体积窗：463 行按**末级目录**分组几乎不压缩
+    （实测 406 件目录件分散在 220 个目录 ⇒ 220 组）⇒ 两个面的**粒度要求相反**。
+    ⇒ 正解：**spec 保持逐件**（对账面）· **登记面按二级目录聚合**（展示面·体积可控）。
+    根级无斜杠文件保留精确行（W1142：伪装成目录的行会让 collect_paths 静默丢弃）。
+    """
+    rows = list(rows or [])
+    assert_clean_rows(rows)
+    from collections import Counter
+    dirs = Counter()
+    note = {}
+    exact = []
+    for r in rows:
+        cells = [c.strip() for c in str(r).strip().strip("|").split("|")]
+        path = cells[0] if cells else ""
+        if "/" not in path:
+            exact.append(str(r).strip())
+            continue
+        parts = path.split("/")
+        d = "/".join(parts[:level]) if len(parts) > level else "/".join(parts[:-1])
+        dirs[d] += 1
+        note.setdefault(d, (cells[2] if len(cells) > 2 else "")[:40])
+    grouped = ["| %s/（%d 件） | %s | %s |" % (d, c, batch, note[d])
+               for d, c in sorted(dirs.items())]
+    return grouped + exact
