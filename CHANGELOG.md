@@ -1,3 +1,19 @@
+### W1311（2026-11-24）：历史行状态列订正（六行登记滞后清零）+ 复盘批 T140（近三批治理面 + tmpe 清理纪律）
+
+> **来源**：preflight 复盘触发（距上篇复盘 3 天 ≥ 3 天）+ 用户 2026-11-24 指令「现在做」。
+>
+> - **登记滞后一次性清零**：台账 W1299 / W1300 / W1305 / W1307 / W1309 / W1310 六行的状态列仍是「在途（认领·未收官）」而 git 已有其提交 ⇒ preflight 连续多批告警（P-43-01 口径：告警不拒绝·但长期留存会让「在途」盘点失真）⇒ 本批按 git 事实翻「已收官」并把 W1310 行 hash 回填 41294e71c（链上承载 commit·CI 6/6）⇒ C4-g 可复核。
+>
+> - **复盘批（T140）**：复盘 W1308–W1310 三批的治理面处置（收官链 archive 死锁治本 / L-08 伪血缘全清 406 件 / 绢本源件补缺入仓）+ tmpe 清理与归桶纪律（2.59→0.29 GiB·MD5 + 像素双证据证无丢失）。
+>
+> - **两处口径更正**：① 上一轮把「批号目录平铺落 w###/」判为工具缺陷 ⇒ 实查 batch_bucket_dest 的 docstring 明写「无下划线前缀的批号目录保持平铺」⇒ **契约使然** ⇒ 撤下该工具改动项·改记为已知设计边界；② 计划「台账 touches 补 406 件逐件」⇒ 实测 preflight 支持**目录前缀匹配**⇒ 并发保护已有效 ⇒ 改判**不补逐件**（避免台账行膨胀约 5 倍而无判定增益）。
+>
+> - **文件**：.github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T140-任务计划执行与经验沉淀报告-2026-11-24.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1311.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1311_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/rss.xml
+>
+> - **验证**：六行状态列与 git 事实一致 · W1310 行 hash 指向链上承载 commit ⇒ 第 31 门禁 C4-g 绿 · 第 48 门禁（计划方案合规）绿 · 全量门禁真全量 · 判据与阈值**零放宽**。
+>
+> - **状态**：**登记滞后清零 + 复盘落档**；46 件冻结窗件待 48h 窗开（已挂定时复查）· 4 个活跃工作树禁碰。
+
 ### W1310（2026-11-24）：绢本系列 8 张源件入仓（5472×3072 JPEG·补缺·新目录避免覆盖·像素级判别证画面不同）
 
 > **来源**：用户 2026-11-24 指令「请将核对后剩余的 8 张 silk/hero 原图去重后入仓并完成验证」。
@@ -561,7 +577,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1310），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1311），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
