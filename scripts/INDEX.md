@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（241）
+## 文件（242）
 
 ### Python 脚本
 
@@ -256,6 +256,7 @@
 - `stats.py`
 - `subject_band.py`
 - `sync_data_json.py`
+- `sync_search_corpus.py`
 - `tmpe_tidy.py`
 - `tracked_files.py`
 - `validate_en.py`

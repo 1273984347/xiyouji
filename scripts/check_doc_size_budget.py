@@ -9,9 +9,9 @@ verify 54 段零体积判据、CI 零检查、级联每批只插不问，结果 
 判据（W960 立窗·W921「正本 110 段」先例沉淀为正式口径·W1120 补体积第二阈值）：
   C1 CHANGELOG 正本段数 ≤ 110（超窗 FAIL）
   C2 file-index 正本段数 ≤ 110（超窗 FAIL）
-  C8 正本体积字节 ≤ MAX_DOC_BYTES（262144·单一事实源在 batch_closeout 顶层·W1119 立）
+  C8 正本体积字节 ≤ MAX_DOC_BYTES（262144·单一事实源在 utils/gate_common·W1315 下沉）
      —— **双阈值「先到者为准」**：段数窗与字节窗任一超即红（W1120 立）
-     —— 字节阈值常量**只引用**既有持有方（batch_closeout）·不复制·不新建中立模块
+     —— 字节阈值常量自 W1315 起由共享层持有（原寄居 batch_closeout 顶层 ⇒ 入口互引成环）
   报告值（不判红）：四文件行数 / HANDOVER 里程碑概要块数 / AGENTS 脚注体积
   （旧 50KB 线按 W921 后实态废止·由本门禁的窗口制替代，见文档规范 §8；
     KB 自 W1120 起由报告值升为判据·口径同步见文档规范 §8 的 W1120 双阈值条目）。
@@ -34,71 +34,27 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# W1120：体积第二阈值的**单一事实源**在 batch_closeout.py 顶层（W1119 立）⇒ 本门禁侧
-# 只**引用**、不复制、不新建中立模块（让消费方引用既有持有方 ⇒ 持有方零改动·省一组 CI）。
-# 引用失败 ⇒ 体积判据不可执行 ⇒ fail-closed 判红（evaluate_sizes 内）·不静默放行。
-try:
-    from batch_closeout import LEDGER_WINDOW, MAX_DOC_BYTES  # noqa: E402
-    _SAME_SOURCE_ERR = None
-except Exception as exc:  # noqa: BLE001 — 引用失败不抛栈打断全仓·改由判据 fail-closed
-    MAX_DOC_BYTES = None
-    LEDGER_WINDOW = None
-    _SAME_SOURCE_ERR = "%s: %s" % (type(exc).__name__, exc)
+# W1315：体积阈值与台账行窗的**单一事实源**在 utils/gate_common（原寄居 batch_closeout 顶层·
+# W1119 立；入口模块兼职共享库导致 8 模块强连通）。共享层导入失败 ⇒ 模块加载即抛错
+# （比原「引用失败静默降级为 None」更早暴露且无法被吞掉）。
+from utils import gate_common as _gc  # noqa: E402
+
+# W1315：下列绑定 = 显式再导出面（单测按本模块取用）；实现本体只在 gate_common 一份。
+MAX_DOC_BYTES = _gc.MAX_DOC_BYTES
+LEDGER_WINDOW = _gc.LEDGER_WINDOW
+check_footnote_shape = _gc.check_footnote_shape
+footnote_tail_shape_ok = _gc.footnote_tail_shape_ok
 
 RE_CL_SEG = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", re.M)
 RE_FI_SEG = re.compile(r"^## (W\d+) ", re.M)
 RE_HANDOVER_BLOCK = re.compile(r"^- \*\*(?:v[\d.]+ )?W\d+[^*]*\*+：", re.M)
-# W1014：AGENTS 脚注固定尾句家具（写入侧 batch_cascade.py:396 `tail = "。如与上述权威文档
-# 冲突，以权威文档为准。*"` 逐字对齐）——C4 逐条计量前剥它，使判据口径与写入侧「量 note 本体」
-# 一致；否则末条 = note + 家具被合并计数，任何 97–120 字注记皆「级联绿 / 门禁红」（W1013 首踩）
-_FOOTNOTE_TAIL_RE = re.compile(r"。?如与上述权威文档冲突，以权威文档为准。?\*+\s*$")
-# W1272：形态合规判据（前导句号**必需**·与写入侧 compose_agents_entry 同源）——
-# 剥离仍按可选（不误伤长度计量），但形态漂移**单独判红**：否则句号一丢即静默漂移、
-# 写入侧每批收官卡死（W1266 同族复发·本批实证·两侧口径不一致 = 静默漂移）。
-_FOOTNOTE_TAIL_STRICT_RE = re.compile(r"。如与上述权威文档冲突，以权威文档为准。?\*+\s*$")
-
-
-def footnote_tail_shape_ok(footnote_line):
-    """脚注尾句**形态**合规（前导句号必需·与写入侧同源）→ 违规描述列表（空 = 合规）。
-
-    W1272：原实现只有「剥离用」的正则（前导句号可选）⇒ 句号丢失时长度计量照常、
-    门禁全绿，而写入侧字面断言卡死**每批收官** ⇒ 两侧口径不一致 = 静默漂移。
-    ⇒ 形态检查独立成判据（不改剥离口径·不误伤长度计量）。
-    """
-    if "如与上述权威文档冲突" not in footnote_line:
-        return []
-    if _FOOTNOTE_TAIL_STRICT_RE.search(footnote_line):
-        return []
-    return ["脚注尾句缺前导句号「。」（写入侧 compose_agents_entry 恒带句号·两侧口径须同源）"]
-
-
-def check_footnote_shape(footnote_line, cap=120):
-    r"""AGENTS 版本脚注逐条定形判据（W965 C4·W1014 口径对齐）→ 违规描述列表（空 = 合规）。
-
-    计量对象 = **剥去固定尾句家具后的条目本体**，与写入侧 batch_cascade 的
-    `spec.agents_note 长 > 120` 守卫同一口径。家具是文档级免责句（非任何一批的注记），
-    原实现把它并进末条计数 ⇒ 97–120 字注记「级联绿 / 门禁红」（W1013 首踩：117 字被算 141）。
-    剥离只影响末条的家具部分，条目本体超长照样抓（见 _self_test 负样本）。
-    """
-    bad = []
-    bad.extend(footnote_tail_shape_ok(footnote_line))
-    for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", footnote_line)[1:]:
-        if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", e):
-            bad.append("条目头非阿拉伯形态：" + e[:24])
-            continue
-        body = _FOOTNOTE_TAIL_RE.sub("", e)
-        if len(body) > cap:
-            bad.append("条目 %d 字 > %d：%s…" % (len(body), cap, body[:24]))
-    return bad
 
 # 正本窗口（文档规范 §8·W960 立窗）
-# 台账行窗口同源于 batch_closeout.LEDGER_WINDOW（W1119 立·W1120 引用）
-# ⇒ 引用失败时回退 60（W960 原值）·此时体积判据 fail-closed 判红（见 evaluate_sizes）
+# 台账行窗口单一事实源 = utils/gate_common.LEDGER_WINDOW（W1315 下沉）
 WINDOWS = {
     os.path.join("CHANGELOG.md"): 110,
     os.path.join("scripts", "output", "file-index.md"): 110,
-    os.path.join("docs", "00-导读", "W批次编号对账表.md"): (
-        LEDGER_WINDOW if LEDGER_WINDOW is not None else 60),
+    os.path.join("docs", "00-导读", "W批次编号对账表.md"): LEDGER_WINDOW,
 }
 # W1278 瘦身治理挂窗（用户批准挂载）：pitfalls/AGENTS 独立字节上限
 # （瘦身后现值棘轮·防回涨——本批 pitfalls 二层化 407.6→284.8KB、AGENTS §4.2/§6 摘要化 48.2→31.8KB 后挂窗）
@@ -165,11 +121,7 @@ def evaluate_sizes(sizes):
     （段数在窗内·体积已超 256KiB 约 1.5 倍）⇒ 补字节第二阈值，**双阈值先到者为准**。
 
     sizes: {相对路径: 字节数}；键归一与 evaluate 同口径（两种分隔形态都查）。
-    同源常量不可用 ⇒ fail-closed 判红（体积判据不可执行不得静默放行）。
     """
-    if _SAME_SOURCE_ERR:
-        return ["体积窗口 C8: 同源常量不可用（batch_closeout 引用失败：%s）"
-                "——体积第二阈值不可执行（fail-closed·须修引用后方可放行）" % _SAME_SOURCE_ERR]
     fails = []
     # W1278 瘦身治理挂窗：pitfalls/AGENTS 独立字节上限（瘦身后现值棘轮·防回涨）
     #   ——BYTE_CAPS 文件未进 sizes（自测注入形态）⇒ 视为未测量跳过（不与 fail-closed 混判）；
@@ -212,7 +164,7 @@ def _collect_sizes():
         sizes[rel] = len(data)
         lines.append("体积阈值  %-38s %8d 字节 / 上限 %s 字节  %s"
                      % (rel, len(data), MAX_DOC_BYTES,
-                        "超限!" if MAX_DOC_BYTES and len(data) > MAX_DOC_BYTES else "ok"))
+                        "超限!" if len(data) > MAX_DOC_BYTES else "ok"))
     return sizes, lines
 
 
@@ -463,7 +415,7 @@ def _self_test() -> int:
         fails.append("台账超窗必须恰好 1 条 FAIL 且指引 archive_ledger_rows")
 
     # ---- W1120 体积第二阈值（字节）·判据须可证伪 ----
-    cap = MAX_DOC_BYTES if MAX_DOC_BYTES else 262144
+    cap = MAX_DOC_BYTES
     at = {rel: cap for rel in WINDOWS}
     if evaluate_sizes(at) != []:
         fails.append("负样本：恰好等于字节上限必须 0 FAIL")

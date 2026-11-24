@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-23T23:26:29.524Z",
+ "generated_at": "2026-11-24T17:07:20.188Z",
  "threshold": 3,
  "scope": "all",
  "bg_mode": "graphic",
@@ -40,6 +40,7 @@
   "data/concept-device.html": "d840b607083e",
   "data/counterfactual.html": "79fce6a1ac54",
   "data/criticism-history.html": "ead0f23d2700",
+  "data/cross-time-danmaku.html": "b3bd3097f7c0",
   "data/cultural-misreading.html": "21f908efc352",
   "data/customs-pass-route.html": "427e8f0ddbaa",
   "data/data-explorer.html": "a90e6836ae2f",
@@ -95,7 +96,6 @@
   "data/six-senses-narratology-network.html": "e130ecbd2aec",
   "data/social-media.html": "0a7ffbf6c141",
   "data/text-evolution.html": "36ef7c97c1ce",
-  "data/text-search.html": "9838d50112a5",
   "data/theological-intervention-network.html": "26e9f3695cc1",
   "data/timeline.html": "fd460ca3ea52",
   "data/underworld-power-network.html": "9e022dbb99a1",
@@ -186,10 +186,10 @@
   "about.html": "f917041c34ea",
   "curated.html": "317e50128e64",
   "dashboard.html": "455c2f86abb7",
-  "guide.html": "9324bb32ec2b",
   "dukou-engine.html": "1fd2b076ed7a",
+  "guide.html": "9324bb32ec2b",
   "index.html": "1f2ac51fd80b",
-  "data/cross-time-danmaku.html": "b3bd3097f7c0"
+  "data/text-search.html": "399d198505da"
  },
  "by_page": {}
 }

@@ -23,6 +23,7 @@ ignore = [
 # ⇒ sys.path 置后的字面导入必须免 E402；F401 由 tests/* 全局档覆盖。
 "tests/unit/test_w1230_execution_faces.py" = ["E402"]
 "tests/unit/test_w1230_wire_archive.py" = ["E402"]
+"tests/unit/test_sync_search_corpus.py" = ["E402"]
 
 [tool.ruff.format]
 quote-style = "double"

@@ -1,3 +1,41 @@
+### W1316（2026-11-25）：站内搜索语料单源化（第三份副本清零 + 生成器落地）
+
+> **来源**：用户 2026-11-25 指令「先回填台账 hash 再开批二」＋批二方向裁决「以权威 JSON 重建（推荐）」——对象为批一 triage 的 R2（2.1MB 单文件内嵌语料）与取证新发现的三副本不一致。
+>
+> - **取证（先证据后结论）**：text-search-app.js 内嵌 chapters 是**第三份语料**——与 source/原文/分回（剥 H1 与尾部识字表、去空白归一）**0/100 回一致**；与 dataset/text-search.json（已由 check_citations.py 与分回逐回全等机器对账）仅 **8/100 回一致**；共少 **789 字**（92 回不一致，7 回差 ≥20 字，多为漏标点/僻字，与 W737「恢复丢段与僻字」方向相反）。原定「从分回 md 生成且逐字节一致」前提不成立。
+>
+> - **修法（以权威 JSON 为唯一事实源）**：新增 `scripts/sync_search_corpus.py`（JSON → chapters 块渲染·幂等·`--check` 干跑 exit 1）；内嵌块头注释去数字字面量（字符数由页面 KPI 运行时计算·防静态漂移）；text-search.html 说明同步。首次重建即修正 92 回共 789 字；内嵌块 2.1MB → 2.06MB（行内换行归一）。容量 #4 实测 2.83MB / 3MB（未触发·余量 5.7%）。
+>
+> - **防漂移**：生成器登记 ci_sim GATES（`--check`）+ 第 42 槽脚本覆盖登记 + 单测 5 例（幂等/边界/危险序列 fail-closed/正文含方括号/真实仓树零漂移）。pytest.ini collected 标记 1887→1893。
+>
+> - **验证**：`sync_search_corpus.py --check` 重建前后各跑（1→0）；`node --check` 通过；全量单测 1638 passed / 4 skipped（199.0s）+ 根级 251 passed；ruff 全过；渲染复核档案 text-search.html sha 已随页面更新。
+>
+> - **文件**：.github/workflows/README.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, pyproject.toml, pytest.ini, scripts/check_script_coverage.py, scripts/ci_sim.py, scripts/INDEX.md, scripts/output/_w1205_capacity_audit.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, scripts/output/_vermilion_solid_cache.json, scripts/sync_search_corpus.py, site/data/text-search.html, site/rss.xml, site/static/js/text-search-app.js, tests/unit/INDEX.md, tests/unit/README.md, tests/unit/test_sync_search_corpus.py
+>
+> - **状态**：站内搜索语料三副本归一到权威 JSON · 生成器幂等可复核 · 判据零放宽（内容修正按权威源·容量/门禁阈值未动）。
+
+### W1315（2026-11-24）：门禁链共享知识下沉（8 模块依赖环清零 + 体积窗兜底字面量清除）
+
+> **来源**：用户 2026-11-24 指令「先跑批一，把 R5 双下沉和 R3 兜底字面量清理掉」＋同日续令「继续处理 R1 和 T5」——对象为 brooks-lint 健康检查（综合 94/100）确认的四条发现（R5 依赖环 / R3 常量副本 / R1 巨函数 / T5 空体测试）。
+>
+> - **根因（入口模块兼职共享库）**：同一决策分散住在三个 CLI 入口——常量链 `MAX_DOC_BYTES` / `LEDGER_WINDOW` 在 batch_closeout 顶层、`check_footnote_shape` 在 check_doc_size_budget、账本链 `ROOT` / `LEDGER` / `ARCHIVE_LEDGER` / `parse_ledger` 在 preflight_check ⇒ 消费方只能反向 import 入口，形成 `batch_cascade → check_doc_size_budget → batch_closeout → backfill_changelog → batch_cascade` 与 `preflight_check ↔ check_audit_trigger / check_backlog_review` 的 8 模块强连通分量。
+>
+> - **修法（双下沉·位置迁移非语义改写）**：`scripts/utils/gate_common.py` 新增治理文档共享段——`MAX_DOC_BYTES`(262144) / `LEDGER_WINDOW`(60) / `LEDGER_REL` / `ARCHIVE_LEDGER_REL` / `parse_ledger`（含 `_locate_status_idx` / `_locate_status` / `_split_touches` / `_locate_touches`）/ `check_footnote_shape`（含 `footnote_tail_shape_ok` 与两条尾句正则）。batch_closeout、check_doc_size_budget、check_audit_trigger、check_backlog_review、check_pitfalls_split、batch_cascade 改为向下引用；preflight_check 保留同名再导出面（测试与旧消费方零改动）。
+>
+> - **R3 兜底字面量清除**：check_pitfalls_split 的 `except → MAX_DOC_BYTES = 262144` 删除（导入失败即抛错）；check_doc_size_budget 的 `_SAME_SOURCE_ERR` fail-closed 分支与 `MAX_DOC_BYTES if MAX_DOC_BYTES else 262144` 三元同步删除——共享层导入失败在模块加载即抛，fail-fast 强于原静默降级。
+>
+> - **R1 认知负担治理**：`check_doc_sync.run_self_test` 361 行 → 21 行（39 个用例迁为模块级 `_SELFTEST_CASES` 数据表 + `_selftest_case` 条目工厂，用例文案/顺序/断言前缀逐字保留）；`check_pitfalls_split.evaluate` 233 行 → 33 行编排器，C1-C7 各拆独立判据函数（最长 44 行；C5 指针分支再抽 `_c5_check_pointer`），判据文案与输出数字逐项不变。
+>
+> - **T5 空体测试改真断言**：`test_kpi_17_dimensions_documented` 原只有 docstring、恒绿 ⇒ 改为断言 `dimensions` 16 条且 `W191` 不在数组内（17 = 16 数据维度 + W191 专题口径）；W191 若入数组即红，杜绝 KPI 口径静默漂移。
+>
+> - **验证**：scripts 依赖图 SCC 8 → 0（全仓脚本级 Tarjan 复算）；定向单测 135 passed（preflight_check / preflight_touches / four_digit_wnum / doc_size_budget / agents_tail_anchor / w1120 / pitfalls_split / audit_trigger / w1102）；三个门禁 `--self-test` 全过（doc-sync 39/39）；全量单测 1632 passed / 4 skipped（212.3s）+ 根级测试 251 passed；pitfalls 门禁 C1-C7 实盘输出逐项与改前一致（C4 281/281 · C5 263/12/278/0/16/0/0）；ruff 全过。
+>
+> - **连带发现（不在本批修·留待裁决）**：`tests/unit/test_w1102_batch_closeout.py::test_main_executes_steps_in_declared_order` 调 `bc.main()` 时只 mock 了 `bc.run`，而 `_run_backfill_prev_hash` 走 `_sp.run` 直连子进程 ⇒ 单测会真实回填本仓台账 hash（本批工作树中 W1312/W1314 的 hash 即由此产生）。属测试隔离缺陷，与本批改动无关。
+>
+> - **文件**：.github/workflows/README.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, scripts/batch_cascade.py, scripts/batch_closeout.py, scripts/check_audit_trigger.py, scripts/check_backlog_review.py, scripts/check_doc_size_budget.py, scripts/check_doc_sync.py, scripts/check_pitfalls_split.py, scripts/preflight_check.py, scripts/output/file-index.md, scripts/utils/gate_common.py, site/rss.xml, tests/test_narratology_data.py
+>
+> - **状态**：8 模块环清零 · 巨函数降至 ≤44 行 · 空体测试转真断言 · 判据零放宽（位置迁移/结构拆分/测试补断言；常量值、门禁文案与退出码逐字不变）。
+
 ### W1314（2026-11-24）：交接文档结构断言判据校正（尾链取行 + 四段骨架·两条存量假阳性清零）
 
 > **来源**：用户 2026-11-24 指令「先不推送，帮我裁决那两个遗留的假阳性问题」——对象为 W1312/W1313 收官链连续报出的两条 SELF-CHECK 告警。
@@ -629,7 +667,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1314），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1316），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -104,11 +104,11 @@ def precheck(spec):
         issues.append("spec.agents_note 长 %d 字 > 120 上限（W964 定形·W989 收紧·脚注是索引不是摘要·"
                       "细节归 CHANGELOG）" % len(_note))
     # W1137 口径对齐根修（铁律 15）：写入侧 AGENTS 条目 = note + 「。」+ 固定尾句家具，而体积门禁
-    # check_doc_size_budget.check_footnote_shape 量的是**剥家具后含尾句「。」拼装**的条目本体
+    # check_doc_size_budget 门禁侧同源判据（W1315 起实现下沉 utils/gate_common.check_footnote_shape）
     # ——W1137 实证 note=119 过本守卫、拼装后 139 过不了门禁（本地绿 CI 红）。预检改与门禁
     # 同源计量（单一事实源·只引用不复制），note 预算随拼装开销自动收紧。
     try:
-        from check_doc_size_budget import check_footnote_shape
+        from utils.gate_common import check_footnote_shape
         _probe = _note.rstrip("。") + "。" + _AGENTS_TAIL.lstrip("。")
         _bad = check_footnote_shape("；2026-11-05（W0000）占位；" + _probe)
         if _bad:

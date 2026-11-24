@@ -18,11 +18,13 @@ import os
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# W1315：体积窗/行窗下沉共享层（入口不再兼职常量持有方）
+from utils.gate_common import LEDGER_WINDOW, MAX_DOC_BYTES  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MAX_DOC_BYTES = 262144   # W1119：治理文档正本体积上限（256KiB）
 ARCHIVE_CHUNK = 50       # W1119：体积模式每批迁出的段数（最后一批可不足）
-LEDGER_WINDOW = 60       # W1119：台账正本数据行窗口
 
 STEPS = [
     ('cascade',    '级联落段（batch_cascade --apply --spec：段幂等 W1122 + 滚动超限补滚 W1144 ⇒ HANDOVER 旁路插块自动 catch-up·W1215）'),

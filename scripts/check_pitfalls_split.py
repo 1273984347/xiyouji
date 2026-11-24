@@ -23,7 +23,7 @@
   · 本体 E 号形态 → `scripts/check_pitfall_id_unique.py` 的 `RX_ENTRY`
     （「（W#### 实证·E-NN」且后跟 `·` 或 `）`；E 号位数不固定，如 `E-9`）
   · 主题名 → stats 键 → `scripts/check_doc_sync.py` 的 `PITFALL_THEME_KEYS`
-  · 字节窗 → `scripts/batch_closeout.py` 的 `MAX_DOC_BYTES`（同源，禁复制常量）
+  · 字节窗 → `scripts/utils/gate_common.py` 的 `MAX_DOC_BYTES`（W1315 下沉共享层·禁复制常量）
 
 用法：python scripts/check_pitfalls_split.py [--root 目录]
 本脚本**只读**：不修改任何文件、不做 git 写操作。
@@ -51,10 +51,7 @@ except Exception as _e:  # pragma: no cover - fail-closed
     sys.stderr.write("FAIL  无法导入 check_doc_sync.PITFALL_THEME_KEYS（fail-closed）：%r\n" % (_e,))
     sys.exit(1)
 
-try:
-    from batch_closeout import MAX_DOC_BYTES  # noqa: E402  全局字节窗
-except Exception:  # pragma: no cover - 同源不可得时用同值兜底（禁改写为新窗口）
-    MAX_DOC_BYTES = 262144
+from utils.gate_common import MAX_DOC_BYTES  # noqa: E402  全局字节窗（W1315 下沉；导入失败即抛错·禁兜底字面量）
 
 # ---- 模块级常量表 --------------------------------------------------------
 SHELL_REL = "pitfalls.md"
@@ -213,28 +210,8 @@ def shell_reverse_table(shell_text):
 
 
 # ---- 判据主体（可注入纯函数）---------------------------------------------
-def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
-    """跑全部 7 项判据，返回 {"problems": [...], "facts": {...}}。
-
-    inputs（可注入·单测据此造坏输入而不必改仓库真实文件）：
-      {"shell":   {"path": str, "text": str},
-       "topics":  {主题名: {"path": str, "text": str|None, "bytes": int}},
-       "archive": {"path": str, "text": str}}
-    """
-    problems = []
-    facts = {}
-    exempt = _normalize_exempt()
-
-    def bad(check, message):
-        problems.append({"check": check, "message": message})
-
-    shell = (inputs.get("shell") or {}).get("text") or ""
-    topics = inputs.get("topics") or {}
-    archive = (inputs.get("archive") or {}).get("text") or ""
-
-    theme_names = list(PITFALL_THEME_KEYS.keys())
-
-    # ---- C1 六主题文件存在且含契约段 ---------------------------------
+def _check_c1(topics, theme_names, bad, facts):
+    """C1 六主题文件存在且含契约段。"""
     c1 = {}
     for name in theme_names:
         item = topics.get(name)
@@ -252,7 +229,9 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
                    "present": sum(1 for v in c1.values() if v == "OK"),
                    "total": len(theme_names)}
 
-    # ---- C2 段头声明数 == 实算数 --------------------------------------
+
+def _check_c2(topics, theme_names, bad, facts):
+    """C2 段头声明数 == 实算数；返回各主题实算条数（C3 聚合用）。"""
     c2 = {}
     declared_total = {}
     actual_total = {}
@@ -282,8 +261,11 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
     facts["C2"] = {"per_theme": c2,
                    "declared_sum": sum(declared_total.values()),
                    "actual_sum": sum(actual_total.values())}
+    return actual_total
 
-    # ---- C3 索引壳表内声明 == 聚合实算·壳内零条目 ----------------------
+
+def _check_c3(shell, theme_names, actual_total, bad, facts):
+    """C3 索引壳表内声明 == 聚合实算·壳内零条目。"""
     table = shell_theme_table(shell)
     c3 = {}
     agg_actual = sum(actual_total.values())
@@ -314,7 +296,9 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
                    "aggregate_actual": agg_actual,
                    "shell_entry_lines": shell_entry_count}
 
-    # ---- C4 反查表覆盖全部本体 E 号 ------------------------------------
+
+def _check_c4(topics, theme_names, shell, bad, facts):
+    """C4 反查表覆盖全部本体 E 号；返回本体 E 号集合（C6 唯一性用）。"""
     theme_ids = []
     theme_id_files = {}
     for name in theme_names:
@@ -346,8 +330,43 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
     facts["C4"] = {"theme_eids": len(theme_ids), "theme_unique": len(theme_id_set),
                    "reverse_entries": len(rev_ids), "reverse_unique": len(rev_set),
                    "missing": missing, "extra": extra, "multiplicity_diff": multi}
+    return theme_ids, theme_id_files, theme_id_set
 
-    # ---- C5 双层镜像 ----------------------------------------------------
+
+def _c5_check_pointer(eid, line, title, seg, exempt, bad, note_only, c5):
+    """C5 指针型条目镜像硬判据；返回 False = 本条目提前结束（原 `continue` 语义）。"""
+    c5["pointer"] += 1
+    if not seg:
+        if eid not in exempt:
+            bad("C5", "镜像缺失：判据层条目 %s 指向归档段但归档无 `#### %s` 段"
+                % (eid, eid))
+        else:
+            c5["exempt_used"].append(eid)
+        c5["seg_missing"].append(eid)
+        return False
+    body_lines = [ln for ln in seg if RE_ENTRY_LINE.match(ln)]
+    if not body_lines:
+        if eid not in exempt:
+            bad("C5", "镜像缺失：归档段 `#### %s` 内无条目正文行" % eid)
+        else:
+            c5["exempt_used"].append(eid)
+        c5["seg_missing"].append(eid)
+        return False
+    if title and any(title in ln for ln in body_lines):
+        c5["title_hits"] += 1
+    key = norm_mirror(mirror_key(line))
+    if key and not any(key in norm_mirror(ln) for ln in body_lines):
+        if eid not in exempt:
+            note_only("C5", "形态差异（不判红）：判据层条目 %s 的正文与归档段 `#### %s` 全文非逐字同源"
+                % (eid, eid))
+        else:
+            c5["exempt_used"].append(eid)
+        c5["prefix_miss"].append(eid)
+    return True
+
+
+def _check_c5(topics, theme_names, archive, exempt, bad, note_only, facts):
+    """C5 双层镜像（判据层 → 叙事层）；硬判据 = 段存在 + 段内有正文行。"""
     segs = parse_archive_segments(archive)
     c5 = {"pointer": 0, "seg_missing": [], "prefix_miss": [], "verbatim_hits": 0,
           "title_hits": 0, "empty_body": [], "orphan_segments": [], "w_drift": [],
@@ -371,34 +390,8 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
             #   孤儿段的正确语义＝「归档有段而**正本完全无对应条目**」⇒ 无条件记入。
             referenced.add(eid)
             if RE_POINTER.search(line):
-                c5["pointer"] += 1
-                seg = segs.get(eid)
-                if not seg:
-                    if eid not in exempt:
-                        bad("C5", "镜像缺失：判据层条目 %s 指向归档段但归档无 `#### %s` 段"
-                            % (eid, eid))
-                    else:
-                        c5["exempt_used"].append(eid)
-                    c5["seg_missing"].append(eid)
+                if not _c5_check_pointer(eid, line, title, segs.get(eid), exempt, bad, note_only, c5):
                     continue
-                body_lines = [ln for ln in seg if RE_ENTRY_LINE.match(ln)]
-                if not body_lines:
-                    if eid not in exempt:
-                        bad("C5", "镜像缺失：归档段 `#### %s` 内无条目正文行" % eid)
-                    else:
-                        c5["exempt_used"].append(eid)
-                    c5["seg_missing"].append(eid)
-                    continue
-                if title and any(title in ln for ln in body_lines):
-                    c5["title_hits"] += 1
-                key = norm_mirror(mirror_key(line))
-                if key and not any(key in norm_mirror(ln) for ln in body_lines):
-                    if eid not in exempt:
-                        note_only("C5", "形态差异（不判红）：判据层条目 %s 的正文与归档段 `#### %s` 全文非逐字同源"
-                            % (eid, eid))
-                    else:
-                        c5["exempt_used"].append(eid)
-                    c5["prefix_miss"].append(eid)
             else:
                 if title and title in archive:
                     c5["title_hits"] += 1
@@ -417,7 +410,9 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
             c5["exempt_stale"].append(eid)
     facts["C5"] = c5
 
-    # ---- C6 本体 E 号唯一 ------------------------------------------------
+
+def _check_c6(theme_ids, theme_id_files, theme_id_set, bad, facts):
+    """C6 本体 E 号唯一。"""
     dups = {}
     for eid in theme_ids:
         dups[eid] = dups.get(eid, 0) + 1
@@ -429,7 +424,9 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
     facts["C6"] = {"total": len(theme_ids), "unique": len(theme_id_set),
                    "duplicates": dup_list}
 
-    # ---- C7 写窗 ---------------------------------------------------------
+
+def _check_c7(topics, theme_names, max_bytes, bad, facts):
+    """C7 主题文件写窗。"""
     c7 = {}
     total_bytes = 0
     for name in theme_names:
@@ -443,6 +440,39 @@ def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
         if size > max_bytes:
             bad("C7", "主题文件超写窗：%s %d 字节 > %d" % (name, size, max_bytes))
     facts["C7"] = {"per_theme": c7, "total_bytes": total_bytes, "max_bytes": max_bytes}
+
+
+def evaluate(inputs, max_bytes=MAX_DOC_BYTES):
+    """跑全部 7 项判据，返回 {"problems": [...], "facts": {...}}。
+
+    inputs（可注入·单测据此造坏输入而不必改仓库真实文件）：
+      {"shell":   {"path": str, "text": str},
+       "topics":  {主题名: {"path": str, "text": str|None, "bytes": int}},
+       "archive": {"path": str, "text": str}}
+
+    W1315：主体按 C1-C7 拆为独立判据函数（原单函数 232 行 ⇒ 认知负担）；
+    本函数只做输入归一与顺序编排，判据文案与判定行为逐字不变。
+    """
+    problems = []
+    facts = {}
+    exempt = _normalize_exempt()
+
+    def bad(check, message):
+        problems.append({"check": check, "message": message})
+
+    shell = (inputs.get("shell") or {}).get("text") or ""
+    topics = inputs.get("topics") or {}
+    archive = (inputs.get("archive") or {}).get("text") or ""
+
+    theme_names = list(PITFALL_THEME_KEYS.keys())
+
+    _check_c1(topics, theme_names, bad, facts)
+    actual_total = _check_c2(topics, theme_names, bad, facts)
+    _check_c3(shell, theme_names, actual_total, bad, facts)
+    theme_ids, theme_id_files, theme_id_set = _check_c4(topics, theme_names, shell, bad, facts)
+    _check_c5(topics, theme_names, archive, exempt, bad, note_only, facts)
+    _check_c6(theme_ids, theme_id_files, theme_id_set, bad, facts)
+    _check_c7(topics, theme_names, max_bytes, bad, facts)
 
     return {"problems": problems, "facts": facts}
 

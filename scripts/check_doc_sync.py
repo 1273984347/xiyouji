@@ -1261,101 +1261,102 @@ def run_check():
     return (1 if issues else 0), issues, notes
 
 
-def run_self_test():
-    """35 例注入式负样本/正样本（纯合成输入·含 C5e 读数面·不改真实文件）。"""
-    base = {
-        "changelog": "### W999（2026-10-05）：自测顶段\n\n### v9.9.8（2026-10-04）：W998 旧段\n",
-        "readme": "> **当前批次 W999（2026-10-05）**：自测抬头行\n",
-        "jiaojie": "- **W999 自测链首**：\n\n自测合成（6 条·六主题）\n",
-        "agents": (
-            "### 4.2 交付门禁\n\n30. **甲门**\n31. **乙门**\n\n### 4.3 其他\n\n"
-            "自测合成 6 条坑位\n"
-            "CSS / 视觉渲染（1）·JS / CSP / 运行时（1）·git / 提交 / 并发（1）"
-            "·级联 / CHANGELOG（1）·数据 / 内容可信度（1）·流程 / 协作 / 取证（1）\n"
-        ),
-        "verify_src": "# ---- 第 30 槽 ----\n# ---- 第 31 槽 ----\n",
-        "archive_changelogs_text": [],  # W1014：自测注入空归档文本（hermetic·不读磁盘）
-        "archive_ledger_text": "",  # W1150：自测注入空台账归档文本（hermetic·不读磁盘）
-        # W1136：C5e 亦注入（合成坑表声明数=实算数 ⇒ 干净输入零误报·不读磁盘）
-        "pitfalls": (
-            "### CSS / 视觉渲染（1 条）\n\n- **a**：自测注入\n\n"
-            "### JS / CSP / 运行时（1 条）\n\n- **b**：自测注入\n\n"
-            "### git / 提交 / 并发（1 条）\n\n- **c**：自测注入\n\n"
-            "### 级联 / CHANGELOG（1 条）\n\n- **d**：自测注入\n\n"
-            "### 数据 / 内容可信度（1 条）\n\n- **e**：自测注入\n\n"
-            "### 流程 / 协作 / 取证（1 条）\n\n- **f**：自测注入\n"
-        ),
-        "skill": "自测合成 6 条·六主题\n自测合成 6 条完整教训\n",  # W1136：自测注入（C5e 不读磁盘）
-        "subjects": ["feat(w999): 自测提交"],
-        "table": "| W999 | x | y | z | s | c |\n- **W659 / W660**：递延登记\n",
-        "structure": "",
-        "xiangmu": "",
-        "contributing": "",
-        "koujing": "",
-        "reports_extra": {},
-        "stats_check_ok": True,
-        "stats_check_tail": "",
-        "staged": [],
-        "head_tree": [],
-        "cascade_manifest": None,
-        "stats": {
-            k: {"value": v}
-            for k, v in {
-                "gate_count": 31,
-                "html_total": 100,
-                "a1_a6_docs": 50,
-                "methodology_docs": 6,
-                "visualization_pages": 10,
-                "csp_covered": 100,
-                "scan_files": 100,
-                "seo_scanned": 100,
-                "inline_css_pages": 10,
-                "json_count": 9,
-                "script_classes": 34,
-                "site_data_html": 10,
-                "site_en_html": 10,
-                "site_root_html": 10,
-                "site_reader_html": 70,
-            }.items()
-        },
-        "shallow": False,
-        "showcase": {"root_readme": True, "github_readme": False, "docs_readme": False},
-    }
-    cases = []
+_SELFTEST_BASE = {
+    "changelog": "### W999（2026-10-05）：自测顶段\n\n### v9.9.8（2026-10-04）：W998 旧段\n",
+    "readme": "> **当前批次 W999（2026-10-05）**：自测抬头行\n",
+    "jiaojie": "- **W999 自测链首**：\n\n自测合成（6 条·六主题）\n",
+    "agents": (
+        "### 4.2 交付门禁\n\n30. **甲门**\n31. **乙门**\n\n### 4.3 其他\n\n"
+        "自测合成 6 条坑位\n"
+        "CSS / 视觉渲染（1）·JS / CSP / 运行时（1）·git / 提交 / 并发（1）"
+        "·级联 / CHANGELOG（1）·数据 / 内容可信度（1）·流程 / 协作 / 取证（1）\n"
+    ),
+    "verify_src": "# ---- 第 30 槽 ----\n# ---- 第 31 槽 ----\n",
+    "archive_changelogs_text": [],  # W1014：自测注入空归档文本（hermetic·不读磁盘）
+    "archive_ledger_text": "",  # W1150：自测注入空台账归档文本（hermetic·不读磁盘）
+    # W1136：C5e 亦注入（合成坑表声明数=实算数 ⇒ 干净输入零误报·不读磁盘）
+    "pitfalls": (
+        "### CSS / 视觉渲染（1 条）\n\n- **a**：自测注入\n\n"
+        "### JS / CSP / 运行时（1 条）\n\n- **b**：自测注入\n\n"
+        "### git / 提交 / 并发（1 条）\n\n- **c**：自测注入\n\n"
+        "### 级联 / CHANGELOG（1 条）\n\n- **d**：自测注入\n\n"
+        "### 数据 / 内容可信度（1 条）\n\n- **e**：自测注入\n\n"
+        "### 流程 / 协作 / 取证（1 条）\n\n- **f**：自测注入\n"
+    ),
+    "skill": "自测合成 6 条·六主题\n自测合成 6 条完整教训\n",  # W1136：自测注入（C5e 不读磁盘）
+    "subjects": ["feat(w999): 自测提交"],
+    "table": "| W999 | x | y | z | s | c |\n- **W659 / W660**：递延登记\n",
+    "structure": "",
+    "xiangmu": "",
+    "contributing": "",
+    "koujing": "",
+    "reports_extra": {},
+    "stats_check_ok": True,
+    "stats_check_tail": "",
+    "staged": [],
+    "head_tree": [],
+    "cascade_manifest": None,
+    "stats": {
+        k: {"value": v}
+        for k, v in {
+            "gate_count": 31,
+            "html_total": 100,
+            "a1_a6_docs": 50,
+            "methodology_docs": 6,
+            "visualization_pages": 10,
+            "csp_covered": 100,
+            "scan_files": 100,
+            "seo_scanned": 100,
+            "inline_css_pages": 10,
+            "json_count": 9,
+            "script_classes": 34,
+            "site_data_html": 10,
+            "site_en_html": 10,
+            "site_root_html": 10,
+            "site_reader_html": 70,
+        }.items()
+    },
+    "shallow": False,
+    "showcase": {"root_readme": True, "github_readme": False, "docs_readme": False},
+}
 
-    def case(name, mutate, expect_prefix=None, expect_absent=False):
-        cases.append((name, mutate, expect_prefix, expect_absent))
 
-    case("T1 README 抬头改值必红", lambda d: d.update(readme=d["readme"].replace("W999", "W998")), "C1")
-    case("T2 交接头链改值必红", lambda d: d.update(jiaojie=d["jiaojie"].replace("W999", "W997")), "C2")
-    case(
+def _selftest_case(name, mutate, expect_prefix=None, expect_absent=False):
+    """自测用例表条目（W1315：自 run_self_test 抽出·用例逐字保留）。"""
+    return (name, mutate, expect_prefix, expect_absent)
+
+
+_SELFTEST_CASES = [
+    _selftest_case("T1 README 抬头改值必红", lambda d: d.update(readme=d["readme"].replace("W999", "W998")), "C1"),
+    _selftest_case("T2 交接头链改值必红", lambda d: d.update(jiaojie=d["jiaojie"].replace("W999", "W997")), "C2"),
+    _selftest_case(
         "T3 门禁清单上限失配必红",
         lambda d: d.update(agents=d["agents"].replace("31. **乙门**", "")),
         "C3",
-    )
-    case(
+    ),
+    _selftest_case(
         "T4 提交带未登记 W 必红",
         lambda d: d.update(subjects=d["subjects"] + ["test(w777): 伪造未登记提交"]),
         "C4",
-    )
-    case(
+    ),
+    _selftest_case(
         "T4b 正文提及测试套件号不判红（W1235·主张只取首个 W）",
         lambda d: d.update(subjects=d["subjects"] + ["feat(w999): 附带 w266 套件断言修复"]),
         "C4",
         expect_absent=True,
-    )
-    case(
+    ),
+    _selftest_case(
         "T4c 主张号未登记必红，正文已登记号不得顶替（W1235·收窄不放宽）",
         lambda d: d.update(subjects=["feat(w997): 正文引用已登记 w999"]),
         "C4",
-    )
-    case(
+    ),
+    _selftest_case(
         "T5 对账表登记即豁免（D2）",
         lambda d: d.update(subjects=["chore(w659): 递延批提交"]),
         "C4",
         expect_absent=True,
-    )
-    case(
+    ),
+    _selftest_case(
         "T5b 台账归档行号引用即豁免（W1150·archive_ledger_text 注入生效）",
         lambda d: d.update(
             subjects=["fix(w776): 引用已腾窗归档行号的提交"],
@@ -1363,66 +1364,66 @@ def run_self_test():
         ),
         "C4",
         expect_absent=True,
-    )
-    case(
+    ),
+    _selftest_case(
         "T5c 归档注入空文本仍拦未登记号（W1150·hermetic 不读磁盘）",
         lambda d: d.update(
             subjects=["fix(w775): 未登记且不在归档的提交"],
             archive_ledger_text="",
         ),
         "C4",
-    )
-    case(
+    ),
+    _selftest_case(
         "T6 行级豁免标记生效",
         lambda d: d.update(
             readme="> **当前批次 W996（2026-10-05）**：自测抬头行 <!--doc-sync:exempt 历史时点事实-->\n"
         ),
         "C1",
         expect_absent=True,
-    )
-    case("T7 干净输入零误报", lambda d: None)
-    case(
+    ),
+    _selftest_case("T7 干净输入零误报", lambda d: None),
+    _selftest_case(
         "T8 聚合数字失配必红（C5）",
         lambda d: d.update(readme=d["readme"] + "每次提交需通过 99 项自动化门禁\n"),
         "C5:",
-    )
-    case(
+    ),
+    _selftest_case(
         "T9 聚合数字行级豁免放行（C5）",
         lambda d: d.update(readme=d["readme"] + "每次提交需通过 99 项自动化门禁 <!--doc-sync:exempt 自测豁免-->\n"),
         "C5:",
         expect_absent=True,
-    )
-    case(
+    ),
+    _selftest_case(
         "T10 stats.json 缺失 fail-closed（C5）",
         lambda d: d.update(stats=None),
         "C5:",
-    )
-    case(
+    ),
+    _selftest_case(
         "T11 实体标记失配必红（C5b）",
         lambda d: d.update(readme=d["readme"] + "HTML 共 200<!--stats:html_total--> 页\n"),
         "C5b",
-    )
-    case(
+    ),
+    _selftest_case(
         "T12 实体标记未登记键必红（C5b）",
         lambda d: d.update(readme=d["readme"] + "共 9<!--stats:unknown_key--> 个\n"),
         "C5b",
-    )
-    case(
+    ),
+    _selftest_case(
         "T13 stats 实算漂移必红（C5d）",
         lambda d: d.update(stats_check_ok=False, stats_check_tail="DRIFT methodology_docs: stats.json=33 磁盘实算=34"),
         "C5d",
-    )
-    case(
+    ),
+    _selftest_case(
         "T14 现役段无对账表认领行必红（C4·W720）",
         lambda d: d.update(table="- **W999**：现势下一自由号（递延豁免 bullet·非认领行）\n"),
         "C4",
-    )
-    case(
+    ),
+    _selftest_case(
         "T15 级联面漏 add 必红（C4-e·W722）",
         lambda d: d.update(staged=["CHANGELOG.md"], cascade_manifest=["CHANGELOG.md", "README.md", "AGENTS.md"]),
         "C4-e",
-    )
-    case(
+    ),
+    _selftest_case(
         "T16 amend 补件场景不误报（C4-e 语义修正·W722 实证）",
         lambda d: d.update(
             staged=["scripts/output/_cascade_files_W999.txt"],
@@ -1431,8 +1432,8 @@ def run_self_test():
         ),
         "C4-e",
         expect_absent=True,
-    )
-    case(
+    ),
+    _selftest_case(
         "T17 文件清单漏 add 必红（C4-f·W723）",
         lambda d: d.update(
             changelog=d["changelog"].replace(
@@ -1443,8 +1444,8 @@ def run_self_test():
             dirty=[],
         ),
         "C4-f",
-    )
-    case(
+    ),
+    _selftest_case(
         "T18 文件清单工作树残留必红（C4-f·W723）",
         lambda d: d.update(
             changelog=d["changelog"].replace(
@@ -1454,11 +1455,11 @@ def run_self_test():
             dirty=["docs/a.md"],
         ),
         "C4-f",
-    )
+    ),
     # W813：.ts/.tsx 扩面用例——原 RE_FILE_TOKEN 静默滤除 .ts/.tsx，
     # 于是「前端件漏 add」只出 NOTE 放行（实测：同一形态 .py 判红、.ts 放行）。
     # T19 钉住「.ts 漏 add 必红」，T20 钉住「多扩展名均被识别为路径 token」。
-    case(
+    _selftest_case(
         "T19 .ts 文件清单漏 add 必红（C4-f·W813 扩面）",
         lambda d: d.update(
             changelog=d["changelog"].replace(
@@ -1469,8 +1470,8 @@ def run_self_test():
             dirty=[],
         ),
         "C4-f",
-    )
-    case(
+    ),
+    _selftest_case(
         "T20 .ts/.tsx/.jsonl/.yaml 等扩展名均被识别为路径 token（W813 覆盖面回归锁）",
         lambda d: d.update(
             changelog=d["changelog"].replace(
@@ -1481,52 +1482,52 @@ def run_self_test():
             dirty=[],
         ),
         "C4-f",
-    )
+    ),
     # W830：C5b 扩展面（11-方案报告根层 + pytest.ini·只跑标记对账）双向锁——
     # 失配必红（现役报告过期标记无门禁兜底的根修）+ 一致放行（不误伤时点快照外的新叙述面）
-    case(
+    _selftest_case(
         "T21 报告扩展面标记失配必红（C5b·W830）",
         lambda d: d.update(reports_extra={"docs/11-方案报告/x.md": "全站 HTML 共 200<!--stats:html_total--> 页\n"}),
         "C5b",
-    )
-    case(
+    ),
+    _selftest_case(
         "T22 报告扩展面标记一致放行（C5b·W830）",
         lambda d: d.update(reports_extra={"docs/11-方案报告/x.md": "全站 HTML 共 100<!--stats:html_total--> 页\n"}),
         "C5b",
         expect_absent=True,
-    )
+    ),
     # W904：C5c 转 FAIL 双向锁 + 后置精确豁免两向（豁免命中不红 / 同行既有标记对账不被豁免拆掉）
-    case(
+    _selftest_case(
         "T27 裸聚合数字必红（C5c·W904 转判红）",
         lambda d: d.update(readme=d["readme"] + "另有 9 篇文档\n"),
         "C5c",
-    )
-    case(
+    ),
+    _selftest_case(
         "T28 命中后置豁免放行（C5c·W904）",
         lambda d: d.update(readme=d["readme"] + "另有 9 篇<!--doc-sync:exempt--> 常量文档\n"),
         "C5c",
         expect_absent=True,
-    )
-    case(
+    ),
+    _selftest_case(
         "T29 后置豁免不拆同行标记对账（C5b 照跑·W904）",
         lambda d: d.update(readme=d["readme"] + "共 100<!--stats:html_total--> 页 + 9 篇<!--doc-sync:exempt--> 常量\n"),
         "C5c",
         expect_absent=True,
-    )
-    case(
+    ),
+    _selftest_case(
         "T30 后置豁免行内标记失配仍红（C5b 不受豁免影响·W904）",
         lambda d: d.update(readme=d["readme"] + "共 200<!--stats:html_total--> 页 + 9 篇<!--doc-sync:exempt--> 常量\n"),
         "C5b",
-    )
-    case(
+    ),
+    _selftest_case(
         "T31 编号假阳性不计（C5c·W904 词边界——S1 项目/A2 个人随笔类）",
         lambda d: d.update(readme=d["readme"] + "S1 项目方法论 + A2 个人随笔板块\n"),
         "C5c",
         expect_absent=True,
-    )
+    ),
     # W906：C4-f 三态双向锁——他方登记行纯追加残留放行（W904 被并行 W905 认领行
     # 拦停的实录）/ 非追加形态（foreign 集不含）照旧必红
-    case(
+    _selftest_case(
         "T32 他方登记行纯追加残留放行（C4-f·W906 三态）",
         lambda d: d.update(
             changelog=d["changelog"].replace(
@@ -1539,8 +1540,8 @@ def run_self_test():
         ),
         "C4-f",
         expect_absent=True,
-    )
-    case(
+    ),
+    _selftest_case(
         "T33 残留非纯追加形态仍红（C4-f·W906 防误放——foreign 集不含即回退原语义）",
         lambda d: d.update(
             changelog=d["changelog"].replace(
@@ -1551,16 +1552,16 @@ def run_self_test():
             foreign_append_only=set(),
         ),
         "C4-f",
-    )
+    ),
 
     # W841：C6 版本行 desc 分隔符体检双向锁——含分隔符必红（手工写段绕过 batch_cascade.precheck 的兜底）
     # + 「、」分隔放行（防误伤正常 desc）
-    case(
+    _selftest_case(
         "T23 版本行 desc 含分隔符必红（C6·W841）",
         lambda d: d.update(readme=d["readme"].replace("自测抬头行", "自测·抬头行")),
         "C6",
-    )
-    case(
+    ),
+    _selftest_case(
         "T24 版本行 desc 用「、」分隔放行（C6·W841 防误伤）",
         lambda d: d.update(
             readme="> **当前批次 W999（2026-10-05）**：甲、乙、丙·A1-A6 共 50 篇\n",
@@ -1569,21 +1570,21 @@ def run_self_test():
         ),
         "C6",
         expect_absent=True,
-    )
+    ),
     # W889：C7 主页展示位——`.github/README.md` 存在即抢占 GitHub 仓库主页
-    case(
+    _selftest_case(
         "T25 主页展示位被抢必红（C7·W889）",
         lambda d: d.update(showcase={"root_readme": True, "github_readme": True, "docs_readme": False}),
         "C7",
-    )
-    case(
+    ),
+    _selftest_case(
         "T26 主页展示位已改名则放行（C7·W889 防误伤）",
         lambda d: d.update(showcase={"root_readme": True, "github_readme": False, "docs_readme": True}),
         "C7",
         expect_absent=True,
-    )
+    ),
     # W1052：C8 治理文档同段重复——铁律 14/15 双写事故形态（W1048 诊断实证）的防复发锁
-    case(
+    _selftest_case(
         "T30 治理文档长行整行双写必红（C8·W1052）",
         lambda d: d.update(
             c8_texts={
@@ -1592,8 +1593,8 @@ def run_self_test():
             }
         ),
         "C8",
-    )
-    case(
+    ),
+    _selftest_case(
         "T31 表格行/短行/代码围栏内重复放行（C8·W1052 防误伤）",
         lambda d: d.update(
             c8_texts={
@@ -1602,11 +1603,15 @@ def run_self_test():
         ),
         "C8",
         expect_absent=True,
-    )
+    ),
+]
 
+
+def run_self_test():
+    """注入式负样本/正样本（用例表见 _SELFTEST_CASES·纯合成输入·不改真实文件）。"""
     fails = 0
-    for name, mutate, expect_prefix, expect_absent in cases:
-        data = dict(base)
+    for name, mutate, expect_prefix, expect_absent in _SELFTEST_CASES:
+        data = dict(_SELFTEST_BASE)
         mutate(data)
         issues, _notes = evaluate(data)
         if expect_prefix is None:
@@ -1620,7 +1625,8 @@ def run_self_test():
             fails += 1
             for i in issues:
                 print("      -> " + i)
-    print("---- doc-sync self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
+    print("---- doc-sync self-test：%d/%d 通过 ----"
+          % (len(_SELFTEST_CASES) - fails, len(_SELFTEST_CASES)))
     return 1 if fails else 0
 
 

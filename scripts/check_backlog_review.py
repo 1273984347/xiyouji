@@ -38,10 +38,15 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import preflight_check as pf  # noqa: E402 — 复用台账路径与行解析
+# W1315：台账路径与解析下沉共享层（入口只向下引用·消 preflight ↔ 本器互引成环）
+from utils.gate_common import (  # noqa: E402
+    ARCHIVE_LEDGER_REL,
+    LEDGER_REL,
+    ROOT,
+    parse_ledger,
+)
 
 THRESHOLD = 25
-ARCHIVE_LEDGER = os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")
 TOKEN = "Backlog 对账已执行"   # 事件 token（对账批在状态列登记）
 LEGACY_WORD = "Backlog 对账"   # 泛词——只用于「疑似未打标」提示，不计为事件
 # 否定词窗口：状态里同时出现这些词时，token 视为**反义用法**（如「已执行（未完成）」），不计事件
@@ -55,7 +60,7 @@ def scan_rows(ledger_text):
     把描述批判成一次对账（静默重置计数 ⇒ 漏警）。
     """
     token_ws, legacy_ws = [], []
-    for row in pf.parse_ledger(ledger_text)["rows"]:
+    for row in parse_ledger(ledger_text)["rows"]:
         status = row.get("status") or ""
         # W1022 修（审查 P1-3 同族）：**在途行不计事件**——否则写一行「在途（…已执行）」
         # 就能把计数清零，任务中断后再不报警。
@@ -79,7 +84,7 @@ def last_review_batch(ledger_text):
 
 def evaluate(ledger_text, archive_text=""):
     """→ (触发?, 提示行)。纯逻辑入口供单测。archive_text = 归档台账（行窗滚动迁出的旧行）。"""
-    max_w = pf.parse_ledger(ledger_text)["max_w"]
+    max_w = parse_ledger(ledger_text)["max_w"]
     merged = ledger_text + "\n" + (archive_text or "")
     token_ws, legacy_ws = scan_rows(merged)
     last = max(token_ws) if token_ws else None
@@ -109,7 +114,7 @@ def hard_triggered(ledger_text, archive_text=""):
     """W1164 用户裁决：超阈 1 倍（50 批）⇒ preflight FAIL 硬拦（WARN 债单失灵实证：
     Backlog 对账 100 批才清偿）。不可判定/从未对账不硬拦（该态走 WARN fail-closed）。"""
     merged = ledger_text + chr(10) + (archive_text or "")
-    max_w = pf.parse_ledger(merged)["max_w"]
+    max_w = parse_ledger(merged)["max_w"]
     token_ws, _legacy = scan_rows(merged)
     if max_w is None or not token_ws:
         return False
@@ -118,9 +123,9 @@ def hard_triggered(ledger_text, archive_text=""):
 
 def ledger_text_for_preflight():
     """W1164：hard_triggered 的取数面（正本+归档·与 notice_lines 同源）。归档缺失不阻断。"""
-    text = open(os.path.join(pf.ROOT, pf.LEDGER), encoding="utf-8", newline="").read()
+    text = open(os.path.join(ROOT, LEDGER_REL), encoding="utf-8", newline="").read()
     try:
-        archived = open(os.path.join(pf.ROOT, ARCHIVE_LEDGER), encoding="utf-8", newline="").read()
+        archived = open(os.path.join(ROOT, ARCHIVE_LEDGER_REL), encoding="utf-8", newline="").read()
     except OSError:
         archived = ""
     return text, archived
@@ -129,11 +134,11 @@ def ledger_text_for_preflight():
 def notice_lines():
     """preflight 提示位入口。"""
     try:
-        text = open(os.path.join(pf.ROOT, pf.LEDGER), encoding="utf-8", newline="").read()
+        text = open(os.path.join(ROOT, LEDGER_REL), encoding="utf-8", newline="").read()
     except OSError as e:
         return ["⚠ Backlog 对账触发器不可读台账（%s）——fail-closed 按已触发处理" % e]
     try:
-        archived = open(os.path.join(pf.ROOT, ARCHIVE_LEDGER), encoding="utf-8", newline="").read()
+        archived = open(os.path.join(ROOT, ARCHIVE_LEDGER_REL), encoding="utf-8", newline="").read()
     except OSError:
         archived = ""   # 归档缺失不阻断：正本判据仍成立，只是少了历史行
     _, lines = evaluate(text, archived)

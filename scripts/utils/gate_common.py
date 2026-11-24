@@ -31,6 +31,10 @@
     run_case_batch(...)              注入式自测跑批（统一逐例格式 + 收尾行 + 退出码）
     SelfTestTally                    逐例格式自定族复用的计数/收尾/退出码
     cli_main(check, selftest)        统一 CLI 分发（--self-test 走自测，否则只读校验）
+    MAX_DOC_BYTES / LEDGER_WINDOW    治理文档体积窗 / 台账行窗（W1315 下沉）
+    LEDGER_REL / ARCHIVE_LEDGER_REL  台账正本 / 滚动归档相对路径（W1315 下沉）
+    parse_ledger(text)               台账取号与行解析（status/hash/touches·W1315 下沉）
+    check_footnote_shape(line)       AGENTS 版本脚注定形判据（W1315 下沉）
 
 ## 使用形态
 
@@ -68,6 +72,207 @@ STYLE_BLOCK_RE = re.compile(r"<style[^>]*>(.*?)</style>", re.S | re.I)
 INLINED_STYLE_RE = re.compile(
     r"<!--\s*INLINED CSS.*?-->\s*<style[^>]*>(.*?)</style>", re.S | re.I
 )
+
+
+# ---------------------------------------------------------------------------
+# 治理文档共享常量与判据（W1315 下沉）
+# ---------------------------------------------------------------------------
+# 成因（W1315 取证）：这些「同一决策」原先分别住在 batch_closeout.py（体积窗/行窗）、
+# check_doc_size_budget.py（脚注定形）、preflight_check.py（台账解析）三个 **CLI 入口**里，
+# 消费方只能反向 import 入口模块 ⇒ 8 个入口脚本构成一个强连通分量（batch_cascade →
+# check_doc_size_budget → batch_closeout → backfill_changelog → batch_cascade，
+# 以及 preflight_check ↔ check_audit_trigger / check_backlog_review）。
+# 下沉后入口模块重新成为依赖叶子：入口只向下引用本模块，本模块零 scripts 内部依赖。
+# W1120 曾以「省一组 CI」为由拒绝新建中立模块——本次落在**既有** gate_common 内，
+# 不新增模块、不新增 CI 组，该权衡不再成立。
+
+#: 治理文档正本体积上限（默认 256KiB·W1119 立·W1315 自 batch_closeout 下沉）
+MAX_DOC_BYTES = 262144
+#: 台账正本数据行窗口（W1119 立·W1315 自 batch_closeout 下沉）
+LEDGER_WINDOW = 60
+#: 台账正本相对路径（W1315 自 preflight_check 下沉）
+LEDGER_REL = os.path.join("docs", "00-导读", "W批次编号对账表.md")
+#: 台账滚动归档相对路径（窗口迁出行的容器·W968 建·W1315 下沉）
+ARCHIVE_LEDGER_REL = os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")
+
+# touches 占位符（历史「作废」行以「—」占位·原实现被当成一个路径条目 ⇒ 该行永久出现在
+# 在途列表·W825 修）
+_TOUCHES_PLACEHOLDERS = {"—", "-", "－", "无", "n/a", "N/A", "(空)", "（空）"}
+# W908 放宽：剥星去空后**前缀**匹配（允许嵌套括号证据长尾·如「已收官（hash·自测 33/33
+# （T32/T33 双向锁）·…）」）——原单层括号紧匹配把长尾收官格拒识别 → 回退固定下标 cells[4]
+# → 被含竖线碎行击穿（W908 认领拦截实测）；主题误认由「右起扫描」防。
+_STATUS_CELL_RE = re.compile(r"^(?:已收官|已闭环)")
+
+
+def _locate_status_idx(cells):
+    """状态格**下标**：右起首个「已收官/已闭环」前缀格；无则回退固定下标 4（cells 不足则 -1）。
+
+    W1289：抽出下标形态（值形态 _locate_status 由此派生·单一来源）——
+    hash 列定位需要**相对状态格**的偏移（hash = status - 2），
+    主题列含裸竖线致整行右移时相对偏移仍成立（禁按固定下标）。
+    """
+    for i in range(len(cells) - 1, -1, -1):
+        norm = re.sub(r"[\s*]+", "", cells[i])
+        if _STATUS_CELL_RE.match(norm):
+            return i
+    return 4 if len(cells) > 4 else -1
+
+
+def _locate_status(cells):
+    """状态列定位：右起首个「已收官/已闭环」前缀格；无则回退固定下标 cells[4]。
+
+    右起扫描的原因：状态列在主题列之右·若主题里偶然出现「已收官」三字·
+    右起扫描会优先命中真正的状态格。W908 起前缀匹配（允许证据长尾与嵌套括号）。
+    """
+    idx = _locate_status_idx(cells)
+    return cells[idx] if idx >= 0 else ""
+
+
+def _split_touches(text):
+    """touches 串切分（多分隔符兼容·W897 修）+ 尾注归一（W903 修）+ 反引号包裹解析（W934 修）。
+
+    病根（实测 W896）：本函数与命令行解析**都只按逗号切分**，而台账的 touches 列
+    自 W739 起实际用「**·**」（中点）分隔 ⇒ 整串被当成**一个** touches ⇒
+    **交集检查恒空假绿**⇒「PREFLIGHT PASS·无交集」是无效结论，撞面防护形同虚设。
+
+    尾注归一（W903·机制审查报告 F1）：台账元素常带说明性尾注（如
+    ``docs/11-方案报告/**（22 文件移动）``、``scripts/x.py（管控件·已批）``）——
+    **全角括号内不切分且整段丢弃**（注记内常含中点·先切后剥必碎·W903 实现首版
+    即踩此坑由负样本测试暴露）。安全性前提：仓内路径零全角括号（W903
+    `git ls-files` 实证）；新文件名引入全角括号即破坏此前提。
+
+    反引号包裹解析（W934·架构会话实测报出）：台账 touches 列的路径**常被反引号包裹**
+    （`` `docs/00-导读/W批次编号对账表.md` ``），且反引号内可能用「/」并列多个文件
+    （`` `a.py` / `b.py` ``）⇒ 旧实现把整段当成**一个** token（还带着反引号）⇒
+    与命令行传入的**无反引号**路径字面不等 ⇒ `touches_conflict` 恒返空 ⇒
+    「PREFLIGHT PASS·无交集」在**真实撞面时假绿**。
+    本版：**反引号内内容整体取一个 token**（内部分隔符不切），反引号外按分隔符切。
+    """
+    out: set[str] = set()
+    buf: list[str] = []
+    depth = 0        # 全角括号注记深度
+    in_code = False  # 是否在反引号内
+
+    def flush() -> None:
+        tok = "".join(buf).strip()
+        buf.clear()
+        if not tok:
+            return
+        # 反引号段之间的连接残渣（如 " / "）不是路径 ⇒ 丢弃
+        if not tok.strip("/ "):
+            return
+        out.add(tok)
+
+    for ch in text or "":
+        if ch == "（":
+            depth += 1
+            continue
+        if ch == "）":
+            depth = max(0, depth - 1)
+            continue
+        if depth > 0:
+            continue  # 注记内容整体丢弃
+        if ch == "`":
+            flush()              # 反引号段切换前先收尾外层内容
+            in_code = not in_code
+            continue
+        if in_code:
+            buf.append(ch)       # 反引号内：分隔符一律不切
+            continue
+        if ch in ",，、·•":
+            flush()
+            continue
+        buf.append(ch)
+    flush()
+    return out
+
+
+def _locate_touches(cells):
+    """touches 列定位：末格（列序固定·末列恒为 touches）；占位符归一为空集。"""
+    if len(cells) < 7:
+        return set()
+    last = cells[-1].strip()
+    if last in _TOUCHES_PLACEHOLDERS:
+        return set()
+    return _split_touches(last)
+
+
+def parse_ledger(text):
+    """解析对账表：返回 {max_w, bullet_w, rows}。
+
+    权威取号规则=表头「下一自由号 = 本表 max(W#)+1」（W663 规则）；
+    bullet_w=最末一条「现势下一自由号」豁免 bullet（轮换制·供交叉核验；
+    表顶部 L8 的「现势」块系上一代机制遗留（末次维护 W720），不参与解析）。
+    rows=[{w, status, hash, touches}]——touches 列自 W739 起（历史行空·空集不参与交集判定）；
+    hash 列（关联 commit·语义=该批**首笔**提交 hash）自 W1289 起解析（W1289：收官行 hash
+    空缺告警判据需要它；列位由状态格内容锚点反推·不按固定下标）；
+    兼容缺列旧格式（无第 7 列时 touches=空集）与历史不齐行（W687/W688 补空列后同为 7 列）。
+    """
+    rows_table = [int(x) for x in re.findall(r"^\|\s*W(\d{3,4})\s*\|", text, re.M)]
+    bullets = re.findall(r"\*\*W(\d{3,4})\*\*：现势下一自由号", text)
+    rows = []
+    for line in text.splitlines():
+        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", line)
+        if not m:
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        s_idx = _locate_status_idx(cells)
+        status = cells[s_idx] if s_idx >= 0 else ""
+        # W1289：hash 列（关联 commit）定位——**状态格内容锚点**·hash = status 前两格
+        # （列序：主题 | hash | CHANGELOG 版段 | 状态）。与仓内列定位 doctrine 同源：
+        # 状态格是唯一锚点 ⇒ 主题列含裸竖线致行右移时 hash 仍定位正确（禁按固定下标）。
+        h_idx = s_idx - 2
+        hash_cell = cells[h_idx] if 0 <= h_idx < len(cells) else ""
+        touches = _locate_touches(cells)
+        rows.append({"w": int(m.group(1)), "status": status,
+                     "hash": hash_cell, "touches": touches})
+    return {"max_w": max(rows_table) if rows_table else None,
+            "bullet_w": int(bullets[-1]) if bullets else None,
+            "rows": rows}
+
+
+# W1014：AGENTS 脚注固定尾句家具（写入侧 batch_cascade.py 的 tail 逐字对齐）——C4 逐条
+# 计量前剥它，使判据口径与写入侧「量 note 本体」一致；否则末条 = note + 家具被合并计数，
+# 任何 97–120 字注记皆「级联绿 / 门禁红」（W1013 首踩）
+_FOOTNOTE_TAIL_RE = re.compile(r"。?如与上述权威文档冲突，以权威文档为准。?\*+\s*$")
+# W1272：形态合规判据（前导句号**必需**·与写入侧 compose_agents_entry 同源）——
+# 剥离仍按可选（不误伤长度计量），但形态漂移**单独判红**：否则句号一丢即静默漂移、
+# 写入侧每批收官卡死（W1266 同族复发·W1272 实证·两侧口径不一致 = 静默漂移）。
+_FOOTNOTE_TAIL_STRICT_RE = re.compile(r"。如与上述权威文档冲突，以权威文档为准。?\*+\s*$")
+
+
+def footnote_tail_shape_ok(footnote_line):
+    """脚注尾句**形态**合规（前导句号必需·与写入侧同源）→ 违规描述列表（空 = 合规）。
+
+    W1272：原实现只有「剥离用」的正则（前导句号可选）⇒ 句号丢失时长度计量照常、
+    门禁全绿，而写入侧字面断言卡死**每批收官** ⇒ 两侧口径不一致 = 静默漂移。
+    ⇒ 形态检查独立成判据（不改剥离口径·不误伤长度计量）。
+    """
+    if "如与上述权威文档冲突" not in footnote_line:
+        return []
+    if _FOOTNOTE_TAIL_STRICT_RE.search(footnote_line):
+        return []
+    return ["脚注尾句缺前导句号「。」（写入侧 compose_agents_entry 恒带句号·两侧口径须同源）"]
+
+
+def check_footnote_shape(footnote_line, cap=120):
+    r"""AGENTS 版本脚注逐条定形判据（W965 C4·W1014 口径对齐）→ 违规描述列表（空 = 合规）。
+
+    计量对象 = **剥去固定尾句家具后的条目本体**，与写入侧 batch_cascade 的
+    `spec.agents_note 长 > 120` 守卫同一口径。家具是文档级免责句（非任何一批的注记），
+    原实现把它并进末条计数 ⇒ 97–120 字注记「级联绿 / 门禁红」（W1013 首踩：117 字被算 141）。
+    剥离只影响末条的家具部分，条目本体超长照样抓（见 _self_test 负样本）。
+    """
+    bad = []
+    bad.extend(footnote_tail_shape_ok(footnote_line))
+    for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", footnote_line)[1:]:
+        if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", e):
+            bad.append("条目头非阿拉伯形态：" + e[:24])
+            continue
+        body = _FOOTNOTE_TAIL_RE.sub("", e)
+        if len(body) > cap:
+            bad.append("条目 %d 字 > %d：%s…" % (len(body), cap, body[:24]))
+    return bad
 
 
 # ---------------------------------------------------------------------------
@@ -256,15 +461,22 @@ def cli_main(run_check: Callable[[], int], run_self_test: Callable[[], int]) -> 
 
 
 __all__ = [
+    "ARCHIVE_LEDGER_REL",
+    "INLINED_STYLE_RE",
+    "LEDGER_REL",
+    "LEDGER_WINDOW",
+    "MAX_DOC_BYTES",
     "ROOT",
     "SCRIPTS_DIR",
-    "INLINED_STYLE_RE",
     "STYLE_BLOCK_RE",
     "UTILS_DIR",
     "SelfTestTally",
+    "check_footnote_shape",
     "cli_main",
+    "footnote_tail_shape_ok",
     "iter_private_style_blocks",
     "iter_style_blocks",
+    "parse_ledger",
     "read_text",
     "read_text_strict",
     "relpath",

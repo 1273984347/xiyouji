@@ -545,6 +545,7 @@ CATEGORY_OF = {
     "inject_goatcounter.py": "③发布链·计数注入",
     "inject_seo_head.py": "③发布链·SEO 注入",
     "sync_data_json.py": "③发布链·数据同步",
+    "sync_search_corpus.py": "②搜索语料同步（生成器·W1316 建）",
     "check_dual_source_scan.py": "③双源扫描（报告型）",
     # ④ 浏览器/布局类（需真实渲染环境）
     "debug_page.js": "④浏览器调试",

@@ -3,7 +3,7 @@
   "tool_version": "w1205-capacity-audit-v1",
   "batch": "W1205",
   "task": "v2 §8.3 容量阈值（10 条）实算",
-  "generated_at": "2026-11-22T23:30:15+08:00",
+  "generated_at": "2026-11-25T00:49:21+08:00",
   "threshold_source": "docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md §8.3（10 条）",
   "unit_convention": "KB/MB/GB 均为二进制（1 KB = 1024 B · 1 MB = 1024^2 B · 1 GB = 1024^3 B）",
   "gate_seconds_note": "第 5 条不跑全量 verify_delivery.py（控制器收官统一跑）；取值须由调用方用 --gate-seconds / CAPACITY_GATE_SECONDS 传入",
@@ -26,7 +26,7 @@
       "extra": {
         "file": "site/reader/people/紧箍儿的内侧-器物传记.html",
         "file_count": 875,
-        "site_html_total_bytes": 83307434,
+        "site_html_total_bytes": 83302412,
         "hard_over_pages": [],
         "soft_over_pages": [
           {
@@ -98,10 +98,10 @@
       "threshold": 125829120,
       "threshold_unit": "bytes",
       "action_if_triggered": "资源分片评审",
-      "measured": 83307434,
-      "measured_display": "79.45 MB",
-      "headroom_abs": 42521686,
-      "headroom_pct": 33.79,
+      "measured": 83302412,
+      "measured_display": "79.44 MB",
+      "headroom_abs": 42526708,
+      "headroom_pct": 33.8,
       "triggered": false,
       "pending": false,
       "source": "site/**/*.html 字节和（沿用 v2 §3.1 资产表 / B-03 取数命令同路径）",
@@ -117,27 +117,27 @@
       "threshold": 3145728,
       "threshold_unit": "bytes",
       "action_if_triggered": "索引分片或改为按页加载",
-      "measured": 2971592,
+      "measured": 2965520,
       "measured_display": "2.83 MB",
-      "headroom_abs": 174136,
-      "headroom_pct": 5.54,
+      "headroom_abs": 180208,
+      "headroom_pct": 5.73,
       "triggered": false,
       "pending": false,
       "source": "站内搜索自有脚本字节（排除第三方 .min.js）",
-      "note": "site/static/js/text-search-app.js = 2.07 MB；site/data/search-index-zh.js = 380.48 KB；site/en/search-index-en.js = 398.67 KB",
+      "note": "site/static/js/text-search-app.js = 2.06 MB；site/data/search-index-zh.js = 384.21 KB；site/en/search-index-en.js = 402.40 KB",
       "extra": {
         "files": [
           {
             "file": "site/static/js/text-search-app.js",
-            "bytes": 2173751
+            "bytes": 2160029
           },
           {
             "file": "site/data/search-index-zh.js",
-            "bytes": 389608
+            "bytes": 393433
           },
           {
             "file": "site/en/search-index-en.js",
-            "bytes": 408233
+            "bytes": 412058
           }
         ]
       }
@@ -164,18 +164,18 @@
       "threshold": 1073741824,
       "threshold_unit": "bytes",
       "action_if_triggered": "git gc + 归档复核",
-      "measured": 1401319772,
-      "measured_display": "1.31 GB",
-      "headroom_abs": -327577948,
-      "headroom_pct": -30.51,
-      "triggered": true,
+      "measured": 835487573,
+      "measured_display": "796.78 MB",
+      "headroom_abs": 238254251,
+      "headroom_pct": 22.19,
+      "triggered": false,
       "pending": false,
       "source": ".git 目录 os.walk 实算全部文件字节和（含 pack/loose/lost-found）",
-      "note": "pack 子目录 187.69 MB（占 14.0%）",
+      "note": "pack 子目录 243.56 MB（占 30.6%）",
       "extra": {
-        "file_count": 23839,
-        "pack_bytes": 196805000,
-        "pack_ratio_pct": 14.04
+        "file_count": 2406,
+        "pack_bytes": 255389681,
+        "pack_ratio_pct": 30.57
       }
     },
     {
@@ -184,51 +184,44 @@
       "threshold": 500,
       "threshold_unit": "files",
       "action_if_triggered": "拆分批次",
-      "measured": 32,
-      "measured_display": "32 files",
-      "headroom_abs": 468,
-      "headroom_pct": 93.6,
+      "measured": 25,
+      "measured_display": "25 files",
+      "headroom_abs": 475,
+      "headroom_pct": 95.0,
       "triggered": false,
       "pending": false,
       "source": "git diff --name-only HEAD~1..HEAD ∪ git status --porcelain（去重）",
-      "note": "已提交 30 + 工作树未提交 2 = 32；历史最大单提交 998 个（46fe0ef2be00）；历史最大批次 spec 登记文件数 1016（W1261）",
+      "note": "已提交 21 + 工作树未提交 4 = 25；历史最大单提交 998 个（46fe0ef2be00）；历史最大批次 spec 登记文件数 1016（W1261）",
       "extra": {
         "batch_base": "HEAD~1",
-        "committed_count": 30,
-        "worktree_count": 2,
+        "committed_count": 21,
+        "worktree_count": 4,
         "files": [
           "\"archive/docs/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250-ARCHIVE.md\"",
           "\"docs/00-\\345\\257\\274\\350\\257\\273/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250.md\"",
           "\"docs/00-\\345\\257\\274\\350\\257\\273/\\351\\241\\271\\347\\233\\256\\350\\257\\264\\346\\230\\216.md\"",
           ".github/workflows/README.md",
-          ".github/workflows/ci.yml",
-          "AGENTS.md",
           "CHANGELOG.md",
           "CITATION.cff",
           "HANDOVER.md",
           "README.md",
           "STRUCTURE.md",
-          "archive/docs/AGENTS-ARCHIVE.md",
-          "archive/docs/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250-ARCHIVE.md",
-          "archive/docs/workflows-readme-history.md",
           "docs/00-\\345\\257\\274\\350\\257\\273/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250.md",
-          "scripts/output/INDEX.md",
-          "scripts/output/README.md",
-          "scripts/output/_cascade_files_W1304.txt",
-          "scripts/output/_vermilion_solid_cache.json",
-          "scripts/output/_w1266_allrender.json",
-          "scripts/output/_w1304_spec.json",
-          "scripts/output/chart-legend-render-audit.json",
+          "scripts/batch_cascade.py",
+          "scripts/batch_closeout.py",
+          "scripts/check_audit_trigger.py",
+          "scripts/check_backlog_review.py",
+          "scripts/check_doc_size_budget.py",
+          "scripts/check_doc_sync.py",
+          "scripts/check_pitfalls_split.py",
+          "scripts/output/_w1205_capacity_audit.json",
           "scripts/output/file-index.md",
-          "scripts/output/stats.json",
-          "scripts/output/svg_text_contrast_graphic_report.json",
-          "scripts/output/svg_text_contrast_report.json",
-          "scripts/output/tools-inventory.md",
-          "site/data/cross-time-danmaku.html",
-          "site/data/tag-cloud.html",
-          "site/dukou-engine.html",
-          "site/index.html",
-          "site/rss.xml"
+          "scripts/preflight_check.py",
+          "scripts/sync_search_corpus.py",
+          "scripts/utils/gate_common.py",
+          "site/rss.xml",
+          "site/static/js/text-search-app.js",
+          "tests/test_narratology_data.py"
         ],
         "history_max_single_commit_files": 998,
         "history_max_commit": "46fe0ef2be00519974f8119b876b079073408920",
@@ -290,9 +283,7 @@
   ],
   "summary": {
     "total": 10,
-    "triggered": [
-      6
-    ],
+    "triggered": [],
     "pending": [
       5,
       8,

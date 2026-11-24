@@ -34,10 +34,15 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import preflight_check as pf  # noqa: E402 — 复用台账路径与行解析
+# W1315：台账路径与解析下沉共享层（入口只向下引用·消 preflight ↔ 本器互引成环）
+from utils.gate_common import (  # noqa: E402
+    ARCHIVE_LEDGER_REL,
+    LEDGER_REL,
+    ROOT,
+    parse_ledger,
+)
 
 THRESHOLD = 20
-ARCHIVE_LEDGER = os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")
 TOKEN = "对抗审查已派发"     # 事件 token（派发会话登记时写入认领行任意格）
 LEGACY_WORD = "对抗式审查"   # 泛词——只用于「疑似未打标」提示，不计为事件
 
@@ -50,7 +55,7 @@ def scan_rows(ledger_text):
     状态列是「这批最后怎么样了」的唯一权威格，描述性文字只会出现在主题/摘要列 ⇒ 位置判定。
     """
     token_ws, legacy_ws = [], []
-    for row in pf.parse_ledger(ledger_text)["rows"]:
+    for row in parse_ledger(ledger_text)["rows"]:
         status = row.get("status") or ""
         # W1022 修（审查 P1-3·fail-open）：**在途行不计事件**。原实现只认 token 字样，
         # 而认领行在派发时就写「在途（对抗审查已派发·审查中）」⇒ 写一行在途登记即可把
@@ -81,7 +86,7 @@ def evaluate(ledger_text, archive_text=""):
     archive_text：归档台账（行窗滚动迁出的旧行）——与正本合并后取 token max，
     否则「审查行被归档」会退化成「从未审查」假警（W1008 I2）。
     """
-    max_w = pf.parse_ledger(ledger_text)["max_w"]
+    max_w = parse_ledger(ledger_text)["max_w"]
     merged = ledger_text + "\n" + (archive_text or "")
     token_ws, legacy_ws = scan_rows(merged)
     last = max(token_ws) if token_ws else None
@@ -110,7 +115,7 @@ def hard_triggered(ledger_text, archive_text=""):
     """W1164 用户裁决：超阈 1 倍（40 批）⇒ preflight FAIL 硬拦（WARN 债单失灵实证：
     对抗审查 85 批才清偿）。不可判定/从未审查不硬拦（该态走 WARN fail-closed·首装期不卡死）。"""
     merged = ledger_text + chr(10) + (archive_text or "")
-    max_w = pf.parse_ledger(merged)["max_w"]
+    max_w = parse_ledger(merged)["max_w"]
     token_ws, _legacy = scan_rows(merged)
     if max_w is None or not token_ws:
         return False
@@ -119,9 +124,9 @@ def hard_triggered(ledger_text, archive_text=""):
 
 def ledger_text_for_preflight():
     """W1164：hard_triggered 的取数面（正本+归档·与 notice_lines 同源）。归档缺失不阻断。"""
-    text = open(os.path.join(pf.ROOT, pf.LEDGER), encoding="utf-8", newline="").read()
+    text = open(os.path.join(ROOT, LEDGER_REL), encoding="utf-8", newline="").read()
     try:
-        archived = open(os.path.join(pf.ROOT, ARCHIVE_LEDGER), encoding="utf-8", newline="").read()
+        archived = open(os.path.join(ROOT, ARCHIVE_LEDGER_REL), encoding="utf-8", newline="").read()
     except OSError:
         archived = ""
     return text, archived
@@ -130,11 +135,11 @@ def ledger_text_for_preflight():
 def notice_lines():
     """preflight 提示位入口。"""
     try:
-        text = open(os.path.join(pf.ROOT, pf.LEDGER), encoding="utf-8", newline="").read()
+        text = open(os.path.join(ROOT, LEDGER_REL), encoding="utf-8", newline="").read()
     except OSError as e:
         return ["⚠ 对抗审查触发器不可读台账（%s）——fail-closed 按已触发处理" % e]
     try:
-        archived = open(os.path.join(pf.ROOT, ARCHIVE_LEDGER), encoding="utf-8", newline="").read()
+        archived = open(os.path.join(ROOT, ARCHIVE_LEDGER_REL), encoding="utf-8", newline="").read()
     except OSError:
         archived = ""   # 归档缺失不阻断：正本判据仍成立，只是少了历史行
     _, lines = evaluate(text, archived)

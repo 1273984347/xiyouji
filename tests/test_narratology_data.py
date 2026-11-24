@@ -344,12 +344,13 @@ def test_kpi_new_dims_consistency(narratology):
     assert len(new) == 4
 
 
-def test_kpi_17_dimensions_documented():
+def test_kpi_17_dimensions_documented(narratology):
     """KPI '17 叙事学维度' 为概念口径（16 数据维度 + W191 网络叙事学专题）。
 
     编辑决策文档化：W191 在 docs/03-主题与情节专题/取经网络叙事学专题.md 中独立展开，
-    未加入 EMBEDDED_DATA.dimensions 数组。此测试不实际断言 17，仅文档化差异。
-    若未来将 W191 纳入 dimensions 数组，需更新此测试与 dimensions_count 期望值。
+    未加入 EMBEDDED_DATA.dimensions 数组（17 = 16 + 1 专题）。
+    若未来将 W191 纳入 dimensions 数组，本断言与 dimensions_count 期望值须同步重算。
     """
-    # 此测试为文档化目的，不做实际断言
-    # 详见 docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md "已知问题" 段
+    ids = [d["id"] for d in narratology["dimensions"]]
+    assert len(ids) == 16, "dimensions 数组应为 16 条（KPI 17 = 16 数据维度 + W191 专题口径）"
+    assert "W191" not in ids, "W191 已入 dimensions 数组 ⇒ KPI 口径与 dimensions_count 须同步重算"

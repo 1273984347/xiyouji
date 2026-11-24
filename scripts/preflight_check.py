@@ -31,8 +31,19 @@ import subprocess
 import sys
 import urllib.request
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LEDGER = os.path.join("docs", "00-导读", "W批次编号对账表.md")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from utils import gate_common as _gc  # noqa: E402
+
+# W1315：共享知识下沉 utils/gate_common（入口只向下引用·消入口互引成环）。
+# 下列绑定 = 显式再导出面（测试与旧消费方按 preflight_check.<name> 取用）；
+# 实现本体只在 gate_common 一份，禁止在本文件复制。
+ROOT = _gc.ROOT
+LEDGER = _gc.LEDGER_REL
+parse_ledger = _gc.parse_ledger
+_split_touches = _gc._split_touches
+_locate_status = _gc._locate_status
+_locate_touches = _gc._locate_touches
+
 REPO_SLUG = "1273984347/xiyouji"  # GitHub API 降级通道用（W732 实证）
 SYSTEM_GIT = r"C:\Program Files\Git\bin\git.exe"
 
@@ -47,145 +58,13 @@ def run(args, timeout=60):
                           errors="replace", timeout=timeout)
 
 
-def parse_ledger(text):
-    """解析对账表：返回 {max_w, bullet_w, rows}。
-
-    权威取号规则=表头「下一自由号 = 本表 max(W#)+1」（W663 规则）；
-    bullet_w=最末一条「现势下一自由号」豁免 bullet（轮换制·供交叉核验；
-    表顶部 L8 的「现势」块系上一代机制遗留（末次维护 W720），不参与解析）。
-    rows=[{w, status, hash, touches}]——touches 列自 W739 起（历史行空·空集不参与交集判定）；
-    hash 列（关联 commit·语义=该批**首笔**提交 hash）自 W1289 起解析（W1289：收官行 hash
-    空缺告警判据需要它；列位由状态格内容锚点反推·不按固定下标）；
-    兼容缺列旧格式（无第 7 列时 touches=空集）与历史不齐行（W687/W688 补空列后同为 7 列）。
-    """
-    rows_table = [int(x) for x in re.findall(r"^\|\s*W(\d{3,4})\s*\|", text, re.M)]
-    bullets = re.findall(r"\*\*W(\d{3,4})\*\*：现势下一自由号", text)
-    rows = []
-    for line in text.splitlines():
-        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", line)
-        if not m:
-            continue
-        cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        s_idx = _locate_status_idx(cells)
-        status = cells[s_idx] if s_idx >= 0 else ""
-        # W1289：hash 列（关联 commit）定位——**状态格内容锚点**·hash = status 前两格
-        # （列序：主题 | hash | CHANGELOG 版段 | 状态）。与仓内列定位 doctrine 同源：
-        # 状态格是唯一锚点 ⇒ 主题列含裸竖线致行右移时 hash 仍定位正确（禁按固定下标）。
-        h_idx = s_idx - 2
-        hash_cell = cells[h_idx] if 0 <= h_idx < len(cells) else ""
-        touches = _locate_touches(cells)
-        rows.append({"w": int(m.group(1)), "status": status,
-                     "hash": hash_cell, "touches": touches})
-    return {"max_w": max(rows_table) if rows_table else None,
-            "bullet_w": int(bullets[-1]) if bullets else None,
-            "rows": rows}
-
-
 # W1160 根修：补「已合并」——兄弟会话以 PR 合并收官的登记形态（W1137/W1147 实证：状态列
 # 已写「**已合并（PR #142·8f724d1f）**」而 is_inflight 不识别 ⇒ preflight 每批误报「登记滞后」WARN）。
 DONE_PREFIXES = ("已收官", "已闭环", "已合并", "已让号", "已撤销")
 
-# W825：状态列与 touches 列的**内容定位**（禁按固定下标 cells[4]/cells[6]）。
-#
-# 成因（实测 W764 行·8 格）：认领行的「主题/摘要」里若含裸竖线，Markdown 按竖线分列
-# → 该行被切成 8/9 格（标准 7 格）→ 固定下标随即读错：
-#   ① 状态读到别列（cells[4] 落在摘要残段上·把「W764」当状态）→ **已收官批次被永久
-#      判为在途批次**（在途列表出现永不平息的幻影·误导后续批次判断）；
-#   ② touches 读到认领会话列（cells[6] = 「DSH 2026-10-16」）→ 非路径垃圾串。
-# 修法（三条，均不改变语义·只改定位方式）：
-#   ① 状态 = 右起首个**紧匹配**「已收官/已闭环」形态的格（无则回退 cells[4]）——
-#      紧匹配（整格即状态·可带 hash 括注）避免主题里偶然出现「已收官」三字被误认；
-#   ② touches = **末格**（touches 是固定末列·摘要里的裸竖线只让前列右移·末格不动）；
-#   ③ touches 占位符（—/-/无）归一为空集（历史「作废」行以「—」占位·原实现被当成
-#      一个路径条目·使该行永久出现在在途列表）。
-_TOUCHES_PLACEHOLDERS = {"—", "-", "－", "无", "n/a", "N/A", "(空)", "（空）"}
-# W908 放宽：剥星去空后**前缀**匹配（允许嵌套括号证据长尾·如「已收官（hash·自测 33/33（T32/T33 双向锁）·…）」）——
-# 原单层括号紧匹配把长尾收官格拒识别→回退固定下标 cells[4]→被含竖线碎行击穿（W908 认领拦截实测）；
-# 主题误认由「右起扫描」防（状态列在主题列之右·右起首个命中即真状态格）。
-_STATUS_CELL_RE = re.compile(r"^(?:已收官|已闭环)")
-
-
-def _locate_status_idx(cells):
-    """状态格**下标**：右起首个「已收官/已闭环」前缀格；无则回退固定下标 4（cells 不足则 -1）。
-
-    W1289：抽出下标形态（值形态 _locate_status 由此派生·单一来源）——
-    hash 列定位需要**相对状态格**的偏移（hash = status - 2），
-    主题列含裸竖线致整行右移时相对偏移仍成立（禁按固定下标）。
-    """
-    for i in range(len(cells) - 1, -1, -1):
-        norm = re.sub(r"[\s*]+", "", cells[i])
-        if _STATUS_CELL_RE.match(norm):
-            return i
-    return 4 if len(cells) > 4 else -1
-
-
-def _locate_status(cells):
-    """状态列定位：右起首个「已收官/已闭环」前缀格；无则回退固定下标 cells[4]。
-
-    右起扫描的原因：状态列在主题列之右·若主题里偶然出现「已收官」三字·
-    右起扫描会优先命中真正的状态格。W908 起前缀匹配（允许证据长尾与嵌套括号）。
-    """
-    idx = _locate_status_idx(cells)
-    return cells[idx] if idx >= 0 else ""
-
-
-def _split_touches(text):
-    """touches 串切分（多分隔符兼容·W897 修）+ 尾注归一（W903 修）+ 反引号包裹解析（W934 修）。
-
-    病根（实测 W896）：本函数与命令行解析**都只按逗号切分**，而台账的 touches 列
-    自 W739 起实际用「**·**」（中点）分隔 ⇒ 整串被当成**一个** touches ⇒
-    **交集检查恒空假绿**⇒「PREFLIGHT PASS·无交集」是无效结论，撞面防护形同虚设。
-
-    尾注归一（W903·机制审查报告 F1）：台账元素常带说明性尾注（如
-    ``docs/11-方案报告/**（22 文件移动）``、``scripts/x.py（管控件·已批）``）——
-    **全角括号内不切分且整段丢弃**（注记内常含中点·先切后剥必碎·W903 实现首版
-    即踩此坑由负样本测试暴露）。安全性前提：仓内路径零全角括号（W903
-    `git ls-files` 实证）；新文件名引入全角括号即破坏此前提。
-
-    反引号包裹解析（W934·架构会话实测报出）：台账 touches 列的路径**常被反引号包裹**
-    （`` `docs/00-导读/W批次编号对账表.md` ``），且反引号内可能用「/」并列多个文件
-    （`` `a.py` / `b.py` ``）⇒ 旧实现把整段当成**一个** token（还带着反引号）⇒
-    与命令行传入的**无反引号**路径字面不等 ⇒ `touches_conflict` 恒返空 ⇒
-    「PREFLIGHT PASS·无交集」在**真实撞面时假绿**。
-    本版：**反引号内内容整体取一个 token**（内部分隔符不切），反引号外按分隔符切。
-    """
-    out: set[str] = set()
-    buf: list[str] = []
-    depth = 0        # 全角括号注记深度
-    in_code = False  # 是否在反引号内
-
-    def flush() -> None:
-        tok = "".join(buf).strip()
-        buf.clear()
-        if not tok:
-            return
-        # 反引号段之间的连接残渣（如 " / "）不是路径 ⇒ 丢弃
-        if not tok.strip("/ "):
-            return
-        out.add(tok)
-
-    for ch in text or "":
-        if ch == "（":
-            depth += 1
-            continue
-        if ch == "）":
-            depth = max(0, depth - 1)
-            continue
-        if depth > 0:
-            continue  # 注记内容整体丢弃
-        if ch == "`":
-            flush()              # 反引号段切换前先收尾外层内容
-            in_code = not in_code
-            continue
-        if in_code:
-            buf.append(ch)       # 反引号内：分隔符一律不切
-            continue
-        if ch in ",，、·•":
-            flush()
-            continue
-        buf.append(ch)
-    flush()
-    return out
+# W1315：状态列 / touches 列的内容定位与台账解析已下沉 `utils/gate_common.py`
+# （`_locate_status_idx` / `_locate_status` / `_locate_touches` / `_split_touches` /
+# `parse_ledger`）——本文件只 import，不复制实现（禁按固定下标的取义见 gate_common 注释）。
 
 
 def _dir_base(tok):
@@ -227,15 +106,6 @@ def duplicate_wnums(rows: list[dict]) -> list[int]:
             seen[w] = seen.get(w, 0) + 1
     return sorted(w for w, n in seen.items() if n > 1)
 
-
-def _locate_touches(cells):
-    """touches 列定位：末格（列序固定·末列恒为 touches）；占位符归一为空集。"""
-    if len(cells) < 7:
-        return set()
-    last = cells[-1].strip()
-    if last in _TOUCHES_PLACEHOLDERS:
-        return set()
-    return _split_touches(last)
 
 # W821：§8 干扰日志的机器触发点提示（真触发才输出·用户裁决 2026-10-20）。
 # 背景：W741 立的两周干扰日志（路线图 §8）自 2026-10-16 起断档 4 天 128 提交零登记，
